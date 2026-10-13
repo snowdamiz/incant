@@ -1,0 +1,1537 @@
+{
+  "schema": 1,
+  "base": "646aeb4f66dc36b4ae8749e0741b88ce90d2bac0",
+  "source_head": "7f4ead27913aa6225d945a8807c67435d4ea57e5",
+  "source_file": "crates/incant_source/src/tests.rs",
+  "source_sha256": "9b79a8ac38eae436d8d91eb473e1436167808b2349903181e66efebed30912fe",
+  "input_count": 4136,
+  "freeze": {
+    "path": "docs/spikes/evidence/source-lock-main250/freeze.json",
+    "sha256": "725e3368ea23df47dc5e4cd63fd1b9f03cf714684bfe8963d242089a7f590bee",
+    "bytes": 1020577
+  },
+  "archive": {
+    "path": "docs/spikes/evidence/source-lock-main250/records.json.gz",
+    "sha256": "70713d0c5bd4df233cb5fcc967bc64c9d494e5ce266567f7ae722c5f31e59c89",
+    "bytes": 649740,
+    "records": 151,
+    "payloads": 79
+  },
+  "patch": {
+    "path": "docs/spikes/evidence/source-lock-main250/repair.patch.gz",
+    "sha256": "37c0aff70e57b62f7f546077900c6cfeba37aa41b85b4dd8f3d1c454abdfbe51",
+    "bytes": 860,
+    "raw_sha256": "86b0f477ca60ecde56a7de559e1912ab846df609abeb79b1fffcaece4e49ded5"
+  },
+  "checks": [
+    {
+      "name": "source-tests",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_source",
+        "--all-targets",
+        "--message-format=json",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 87089,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 1.8951413330069045,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/source-tests.stdout",
+        "sha256": "7efd560ccb9017e40f593736682b6da06a28fc10f0c97489fc14c46c0de57825"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/source-tests.stderr",
+        "sha256": "5c4e8610f27cfd71847ba6700f957e292eb61e57800dc78ba30f86a924a2f400"
+      }
+    },
+    {
+      "name": "source-clippy",
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_source",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 87126,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 1.0872735000011744,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/source-clippy.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/source-clippy.stderr",
+        "sha256": "89800f91a0bba6b308b362f59be99bb0558ce5467b2e20c5e7377b02a478a9ee"
+      }
+    },
+    {
+      "name": "fmt",
+      "argv": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 87150,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 1.5149804999964545,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/fmt.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/fmt.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "conventions",
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 87184,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.03963083401322365,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/conventions.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/conventions.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "diff",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 87187,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.026967291996697895,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diff.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diff.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "concurrent-0",
+      "argv": [
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/source-test-binary",
+        "--test-threads=10",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 87191,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.6616487499995856,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/concurrent-0.stdout",
+        "sha256": "3fbc0c06c8e47d720a0a0985709d6879618c5df72219b4f7e5c2ea85a52279c3"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/concurrent-0.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "concurrent-1",
+      "argv": [
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/source-test-binary",
+        "--test-threads=10",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 87209,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.985071417002473,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/concurrent-1.stdout",
+        "sha256": "0637a2c985debf7152ecb2d14b7968a1f5593733887acd3cb41310221b9f4199"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/concurrent-1.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "concurrent-2",
+      "argv": [
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/source-test-binary",
+        "--test-threads=10",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 87237,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.9837163339980179,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/concurrent-2.stdout",
+        "sha256": "8c0bc685e2cd77f79f210c5d9c1997e244d78628eb85de187a3245955cf12e6a"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/concurrent-2.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "concurrent-3",
+      "argv": [
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/source-test-binary",
+        "--test-threads=10",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 87249,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.990443916991353,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/concurrent-3.stdout",
+        "sha256": "8c0bc685e2cd77f79f210c5d9c1997e244d78628eb85de187a3245955cf12e6a"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/concurrent-3.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "concurrent-4",
+      "argv": [
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/source-test-binary",
+        "--test-threads=10",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 87258,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 1.021726666003815,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/concurrent-4.stdout",
+        "sha256": "f5dd9e3a5d393fa8f5fc536ad105e8b8afebe361555aabec302c5d0c23577fb1"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/concurrent-4.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "concurrent-5",
+      "argv": [
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/source-test-binary",
+        "--test-threads=10",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 87272,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.9871317079960136,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/concurrent-5.stdout",
+        "sha256": "ec2536ee376be1341b3397ef04ad79cf2ece6c1956e1b508b2b5fe0942f6198c"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/concurrent-5.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "concurrent-6",
+      "argv": [
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/source-test-binary",
+        "--test-threads=10",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 87286,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.9861658330046339,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/concurrent-6.stdout",
+        "sha256": "7b0b2ccc57d76ee8fe340165f5ab420a0a85aa27aef207dfa579118a89c33137"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/concurrent-6.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "concurrent-7",
+      "argv": [
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/source-test-binary",
+        "--test-threads=10",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 87295,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.9776661659998354,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/concurrent-7.stdout",
+        "sha256": "b557d4d4fa1113d6fcbe3e56c3e968e16dfcc9ec08f5d28290abce8fa9803b4c"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/concurrent-7.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "concurrent-8",
+      "argv": [
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/source-test-binary",
+        "--test-threads=10",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 87304,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 1.0767394579888787,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/concurrent-8.stdout",
+        "sha256": "a69a1796f74db7457a94526e029d9dcfabb6b1f2d927f6a0b971ce5e89e6e52f"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/concurrent-8.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "concurrent-9",
+      "argv": [
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/source-test-binary",
+        "--test-threads=10",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 87316,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.9760912080091657,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/concurrent-9.stdout",
+        "sha256": "f5dd9e3a5d393fa8f5fc536ad105e8b8afebe361555aabec302c5d0c23577fb1"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/concurrent-9.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "binaries": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/source-test-binary",
+      "original": "/Users/andreyyurlov/.codex/incant-physics-restore-target/ci/deps/incant_source-fea2e213260c7a18",
+      "sha256": "c32f0d912112e10e56cf56396505aed83dc777b50c6bd6f720033740786a5bf0",
+      "bytes": 1332144
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-binary",
+      "sha256": "cdc0c8dbc444c7a09a2b002951907b560b9f390a83aad9e9c221234f8317f3d4",
+      "bytes": 1315168
+    }
+  ],
+  "diagnostic": {
+    "result": {
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_source",
+        "--lib",
+        "--message-format=json",
+        "--",
+        "--test-threads=1",
+        "--nocapture"
+      ],
+      "pid": 85758,
+      "reaped": true,
+      "exit": 0,
+      "seconds": 4.7336702500033425,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic.stdout",
+        "sha256": "dfe410e0296972487a9c5e53d5f2713d317414d087bccd724986ac825ef7e894"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic.stderr",
+        "sha256": "aed454461d18366b4974048ba2a53e61f17a0f4cee4bbf87c8d9b44f8278ed2e"
+      },
+      "binary": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-binary",
+        "sha256": "cdc0c8dbc444c7a09a2b002951907b560b9f390a83aad9e9c221234f8317f3d4"
+      }
+    },
+    "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-tests.rs",
+    "natural_repeats": [
+      {
+        "index": 0,
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-binary",
+          "--skip",
+          "controlled_inherited_source_descriptor",
+          "--test-threads=10",
+          "--nocapture"
+        ],
+        "pid": 86192,
+        "exit": 0,
+        "reaped": true,
+        "seconds": 0.8238873329974012,
+        "stdout": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-00.stdout",
+          "sha256": "26e71375d2da1ff0f2f0089c0fb0bdeb4d6007f699983d29847a121d57dbd537"
+        },
+        "stderr": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-00.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "index": 1,
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-binary",
+          "--skip",
+          "controlled_inherited_source_descriptor",
+          "--test-threads=10",
+          "--nocapture"
+        ],
+        "pid": 86201,
+        "exit": 0,
+        "reaped": true,
+        "seconds": 1.0225272079987917,
+        "stdout": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-01.stdout",
+          "sha256": "5204a14714790372cdb0d1db6e803485339ccf610a5d8c2ce9245e1d177d5a0f"
+        },
+        "stderr": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-01.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "index": 2,
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-binary",
+          "--skip",
+          "controlled_inherited_source_descriptor",
+          "--test-threads=10",
+          "--nocapture"
+        ],
+        "pid": 86219,
+        "exit": 0,
+        "reaped": true,
+        "seconds": 0.97688216700044,
+        "stdout": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-02.stdout",
+          "sha256": "20836e1187c2efd6d79d9bf7fdb1b8e086292f9c7506571530f208444b8cfb27"
+        },
+        "stderr": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-02.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "index": 3,
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-binary",
+          "--skip",
+          "controlled_inherited_source_descriptor",
+          "--test-threads=10",
+          "--nocapture"
+        ],
+        "pid": 86229,
+        "exit": 0,
+        "reaped": true,
+        "seconds": 1.033550499996636,
+        "stdout": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-03.stdout",
+          "sha256": "2354abc006e5a6e17a2b3b70c9391ab70860ae03e51d3f8e6bdc91a3ad683a0a"
+        },
+        "stderr": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-03.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "index": 4,
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-binary",
+          "--skip",
+          "controlled_inherited_source_descriptor",
+          "--test-threads=10",
+          "--nocapture"
+        ],
+        "pid": 86237,
+        "exit": 0,
+        "reaped": true,
+        "seconds": 1.0345555420062738,
+        "stdout": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-04.stdout",
+          "sha256": "83b96c60cd8bfbe3867228c9792fa7c7aa449ccb4651340476e058c447ac9f49"
+        },
+        "stderr": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-04.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "index": 5,
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-binary",
+          "--skip",
+          "controlled_inherited_source_descriptor",
+          "--test-threads=10",
+          "--nocapture"
+        ],
+        "pid": 86245,
+        "exit": 0,
+        "reaped": true,
+        "seconds": 0.99376862499048,
+        "stdout": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-05.stdout",
+          "sha256": "511bb4dbe06dca882692cd4cfe7a1c4b5f9ff33a7facd9b728a6ce134d299f19"
+        },
+        "stderr": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-05.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "index": 6,
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-binary",
+          "--skip",
+          "controlled_inherited_source_descriptor",
+          "--test-threads=10",
+          "--nocapture"
+        ],
+        "pid": 86255,
+        "exit": 0,
+        "reaped": true,
+        "seconds": 0.9876834999886341,
+        "stdout": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-06.stdout",
+          "sha256": "24de74fc0c7f06725f9a75670eb60124e0680675e10c99674e06c7653f15782f"
+        },
+        "stderr": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-06.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "index": 7,
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-binary",
+          "--skip",
+          "controlled_inherited_source_descriptor",
+          "--test-threads=10",
+          "--nocapture"
+        ],
+        "pid": 86272,
+        "exit": 0,
+        "reaped": true,
+        "seconds": 1.097846374992514,
+        "stdout": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-07.stdout",
+          "sha256": "74bbed4d76ecefa02a73a6dccf49dda429bb46524cdbc6886a11b363dd89b42d"
+        },
+        "stderr": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-07.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "index": 8,
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-binary",
+          "--skip",
+          "controlled_inherited_source_descriptor",
+          "--test-threads=10",
+          "--nocapture"
+        ],
+        "pid": 86280,
+        "exit": 0,
+        "reaped": true,
+        "seconds": 1.1072209999983897,
+        "stdout": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-08.stdout",
+          "sha256": "74bbed4d76ecefa02a73a6dccf49dda429bb46524cdbc6886a11b363dd89b42d"
+        },
+        "stderr": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-08.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "index": 9,
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-binary",
+          "--skip",
+          "controlled_inherited_source_descriptor",
+          "--test-threads=10",
+          "--nocapture"
+        ],
+        "pid": 86297,
+        "exit": 0,
+        "reaped": true,
+        "seconds": 0.9930585410038475,
+        "stdout": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-09.stdout",
+          "sha256": "f7d6f5d8fcfc374f8ace6a41c6c4c1e861e8466393c70417f9b56f10bcfa0db3"
+        },
+        "stderr": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-09.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "index": 10,
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-binary",
+          "--skip",
+          "controlled_inherited_source_descriptor",
+          "--test-threads=10",
+          "--nocapture"
+        ],
+        "pid": 86305,
+        "exit": 0,
+        "reaped": true,
+        "seconds": 0.9232019170012791,
+        "stdout": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-10.stdout",
+          "sha256": "e91e458545c90255dae0dacf6f32d94e940652cd3ffdf2a8f265b8a1faf93ec6"
+        },
+        "stderr": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-10.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "index": 11,
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-binary",
+          "--skip",
+          "controlled_inherited_source_descriptor",
+          "--test-threads=10",
+          "--nocapture"
+        ],
+        "pid": 86313,
+        "exit": 0,
+        "reaped": true,
+        "seconds": 0.9268465000059223,
+        "stdout": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-11.stdout",
+          "sha256": "b985564c8bc753f5f924b377ab2a5bd5cf4bd9a75bdda716fe0fa50dc7ee42c1"
+        },
+        "stderr": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-11.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "index": 12,
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-binary",
+          "--skip",
+          "controlled_inherited_source_descriptor",
+          "--test-threads=10",
+          "--nocapture"
+        ],
+        "pid": 86323,
+        "exit": 0,
+        "reaped": true,
+        "seconds": 0.9260140410042368,
+        "stdout": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-12.stdout",
+          "sha256": "eb2ffb9123074f7e231e8b7542dffd4dcfb1c2c26a9f0d9f007539e2bc2f8338"
+        },
+        "stderr": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-12.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "index": 13,
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-binary",
+          "--skip",
+          "controlled_inherited_source_descriptor",
+          "--test-threads=10",
+          "--nocapture"
+        ],
+        "pid": 86345,
+        "exit": 0,
+        "reaped": true,
+        "seconds": 0.9246410409978125,
+        "stdout": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-13.stdout",
+          "sha256": "eb2ffb9123074f7e231e8b7542dffd4dcfb1c2c26a9f0d9f007539e2bc2f8338"
+        },
+        "stderr": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-13.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "index": 14,
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-binary",
+          "--skip",
+          "controlled_inherited_source_descriptor",
+          "--test-threads=10",
+          "--nocapture"
+        ],
+        "pid": 86353,
+        "exit": 0,
+        "reaped": true,
+        "seconds": 0.9246563750057248,
+        "stdout": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-14.stdout",
+          "sha256": "fc183e300e59fd35df538ba78d2e7020b35f11b5f8cd9cf4cbc1d53e103a6113"
+        },
+        "stderr": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-14.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "index": 15,
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-binary",
+          "--skip",
+          "controlled_inherited_source_descriptor",
+          "--test-threads=10",
+          "--nocapture"
+        ],
+        "pid": 86361,
+        "exit": 0,
+        "reaped": true,
+        "seconds": 0.9267610410024645,
+        "stdout": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-15.stdout",
+          "sha256": "6fee1387713804302779c71de307357e2edc5176e6fa95fd41a64327a0847362"
+        },
+        "stderr": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-15.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "index": 16,
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-binary",
+          "--skip",
+          "controlled_inherited_source_descriptor",
+          "--test-threads=10",
+          "--nocapture"
+        ],
+        "pid": 86371,
+        "exit": 0,
+        "reaped": true,
+        "seconds": 0.8704605000093579,
+        "stdout": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-16.stdout",
+          "sha256": "3dc049fc6437732384544d40b053387e7fdce9b4a075ef80f24f5873be15c94e"
+        },
+        "stderr": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-16.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "index": 17,
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-binary",
+          "--skip",
+          "controlled_inherited_source_descriptor",
+          "--test-threads=10",
+          "--nocapture"
+        ],
+        "pid": 86379,
+        "exit": 0,
+        "reaped": true,
+        "seconds": 0.924905415988178,
+        "stdout": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-17.stdout",
+          "sha256": "5c916a9f8c29af9372a038be75bb2075ceb1383031dd43186921b9f45defcf12"
+        },
+        "stderr": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-17.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "index": 18,
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-binary",
+          "--skip",
+          "controlled_inherited_source_descriptor",
+          "--test-threads=10",
+          "--nocapture"
+        ],
+        "pid": 86400,
+        "exit": 0,
+        "reaped": true,
+        "seconds": 0.9307441249984549,
+        "stdout": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-18.stdout",
+          "sha256": "3608d697bd1a7800105f4187c4e8890d59b80f6b4f5dd1faa5457400149cb6c7"
+        },
+        "stderr": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-18.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "index": 19,
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-binary",
+          "--skip",
+          "controlled_inherited_source_descriptor",
+          "--test-threads=10",
+          "--nocapture"
+        ],
+        "pid": 86410,
+        "exit": 0,
+        "reaped": true,
+        "seconds": 1.2812921669974457,
+        "stdout": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-19.stdout",
+          "sha256": "ef0f91dbb64a6d0bed4b48a53ffd1971b586ef7a657d6a330a6b0449970fc08f"
+        },
+        "stderr": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-19.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "index": 20,
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-binary",
+          "--skip",
+          "controlled_inherited_source_descriptor",
+          "--test-threads=10",
+          "--nocapture"
+        ],
+        "pid": 86418,
+        "exit": 0,
+        "reaped": true,
+        "seconds": 1.357060583002749,
+        "stdout": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-20.stdout",
+          "sha256": "d7139985ce19835b6677e260a1f893c75a8bd892d3136417dbde3e46845b539b"
+        },
+        "stderr": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-20.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "index": 21,
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-binary",
+          "--skip",
+          "controlled_inherited_source_descriptor",
+          "--test-threads=10",
+          "--nocapture"
+        ],
+        "pid": 86437,
+        "exit": 0,
+        "reaped": true,
+        "seconds": 0.9721352499909699,
+        "stdout": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-21.stdout",
+          "sha256": "58006d524f9e40c25482d7a12897d4dc541fda5eeb33a0b0d0f240f7ac3af2f6"
+        },
+        "stderr": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-21.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "index": 22,
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-binary",
+          "--skip",
+          "controlled_inherited_source_descriptor",
+          "--test-threads=10",
+          "--nocapture"
+        ],
+        "pid": 86447,
+        "exit": 0,
+        "reaped": true,
+        "seconds": 0.9931465409899829,
+        "stdout": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-22.stdout",
+          "sha256": "02a55938bbf6cf55aecbe457e9139db9b5e35d79f36981079ef2eb149539b5d9"
+        },
+        "stderr": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-22.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "index": 23,
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-binary",
+          "--skip",
+          "controlled_inherited_source_descriptor",
+          "--test-threads=10",
+          "--nocapture"
+        ],
+        "pid": 86455,
+        "exit": 0,
+        "reaped": true,
+        "seconds": 1.037752125004772,
+        "stdout": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-23.stdout",
+          "sha256": "46eb370da0cadc6eb2d51143b1608a2a55d411e7b31337369c2a6f9f335d86fc"
+        },
+        "stderr": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-23.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "index": 24,
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-binary",
+          "--skip",
+          "controlled_inherited_source_descriptor",
+          "--test-threads=10",
+          "--nocapture"
+        ],
+        "pid": 86463,
+        "exit": 0,
+        "reaped": true,
+        "seconds": 1.1654210410051746,
+        "stdout": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-24.stdout",
+          "sha256": "10938e6518c3ccb0b60909a94a1005da397b1cab385515edf8df5d5c6413d28b"
+        },
+        "stderr": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-24.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "index": 25,
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-binary",
+          "--skip",
+          "controlled_inherited_source_descriptor",
+          "--test-threads=10",
+          "--nocapture"
+        ],
+        "pid": 86471,
+        "exit": 0,
+        "reaped": true,
+        "seconds": 0.8748594999924535,
+        "stdout": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-25.stdout",
+          "sha256": "a1a353dfae35400f91cbe869dd8409335f78951649858242a6a88cf2b376fa48"
+        },
+        "stderr": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-25.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "index": 26,
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-binary",
+          "--skip",
+          "controlled_inherited_source_descriptor",
+          "--test-threads=10",
+          "--nocapture"
+        ],
+        "pid": 86494,
+        "exit": 0,
+        "reaped": true,
+        "seconds": 0.9847377499972936,
+        "stdout": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-26.stdout",
+          "sha256": "8b1124696cc9b3833b3c39fd1585f59f56f9594e55e372cda48af127047370bc"
+        },
+        "stderr": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-26.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "index": 27,
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-binary",
+          "--skip",
+          "controlled_inherited_source_descriptor",
+          "--test-threads=10",
+          "--nocapture"
+        ],
+        "pid": 86506,
+        "exit": 0,
+        "reaped": true,
+        "seconds": 0.9882102500123437,
+        "stdout": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-27.stdout",
+          "sha256": "8b1124696cc9b3833b3c39fd1585f59f56f9594e55e372cda48af127047370bc"
+        },
+        "stderr": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-27.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "index": 28,
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-binary",
+          "--skip",
+          "controlled_inherited_source_descriptor",
+          "--test-threads=10",
+          "--nocapture"
+        ],
+        "pid": 86528,
+        "exit": 0,
+        "reaped": true,
+        "seconds": 0.8830499589967076,
+        "stdout": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-28.stdout",
+          "sha256": "009ff6a13a577417dcfc6cdf535ee9b7cde165504f2704892a59539d754ac891"
+        },
+        "stderr": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-28.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "index": 29,
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-binary",
+          "--skip",
+          "controlled_inherited_source_descriptor",
+          "--test-threads=10",
+          "--nocapture"
+        ],
+        "pid": 86540,
+        "exit": 0,
+        "reaped": true,
+        "seconds": 0.9405093749955995,
+        "stdout": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-29.stdout",
+          "sha256": "96de63b1f59b2ac4f3b2846eee871e622f9834966c3c49dfeaadb176872b960b"
+        },
+        "stderr": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-29.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "index": 30,
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-binary",
+          "--skip",
+          "controlled_inherited_source_descriptor",
+          "--test-threads=10",
+          "--nocapture"
+        ],
+        "pid": 86561,
+        "exit": 0,
+        "reaped": true,
+        "seconds": 0.9765379170130473,
+        "stdout": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-30.stdout",
+          "sha256": "14b596914c7a6ddc50bd592849cf54fbb54fc22b87f989e04e12060688bf5a99"
+        },
+        "stderr": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-30.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "index": 31,
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-binary",
+          "--skip",
+          "controlled_inherited_source_descriptor",
+          "--test-threads=10",
+          "--nocapture"
+        ],
+        "pid": 86571,
+        "exit": 0,
+        "reaped": true,
+        "seconds": 0.9865378340036841,
+        "stdout": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-31.stdout",
+          "sha256": "c62bdde0bc8b2c2a1a60733b4a2e452083af7fb80f472ecf3ad306ba38ccda78"
+        },
+        "stderr": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-31.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "index": 32,
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-binary",
+          "--skip",
+          "controlled_inherited_source_descriptor",
+          "--test-threads=10",
+          "--nocapture"
+        ],
+        "pid": 86584,
+        "exit": 0,
+        "reaped": true,
+        "seconds": 1.0335614159994293,
+        "stdout": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-32.stdout",
+          "sha256": "120517d3ae1967ad4d2bfeba70ab20f676f27adbedfc4bc0c952db8a283ecf71"
+        },
+        "stderr": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-32.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "index": 33,
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-binary",
+          "--skip",
+          "controlled_inherited_source_descriptor",
+          "--test-threads=10",
+          "--nocapture"
+        ],
+        "pid": 86594,
+        "exit": 0,
+        "reaped": true,
+        "seconds": 0.9360805000032997,
+        "stdout": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-33.stdout",
+          "sha256": "0cf5d641366e19a1febb389da74786667f5d16d95dca77e758000116eb547dfa"
+        },
+        "stderr": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-33.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "index": 34,
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-binary",
+          "--skip",
+          "controlled_inherited_source_descriptor",
+          "--test-threads=10",
+          "--nocapture"
+        ],
+        "pid": 86603,
+        "exit": 0,
+        "reaped": true,
+        "seconds": 1.2024357079935726,
+        "stdout": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-34.stdout",
+          "sha256": "b14ceafeb2f5c5363672c722bd76568c04ad4cd67e9cb9c530be054d32f54735"
+        },
+        "stderr": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-34.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "index": 35,
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-binary",
+          "--skip",
+          "controlled_inherited_source_descriptor",
+          "--test-threads=10",
+          "--nocapture"
+        ],
+        "pid": 86611,
+        "exit": 0,
+        "reaped": true,
+        "seconds": 1.7467064170050435,
+        "stdout": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-35.stdout",
+          "sha256": "966acfadc5d96e5e2c06adda0e36ea21afa536ab611dd48c1c8dda1646041520"
+        },
+        "stderr": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-35.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "index": 36,
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-binary",
+          "--skip",
+          "controlled_inherited_source_descriptor",
+          "--test-threads=10",
+          "--nocapture"
+        ],
+        "pid": 86649,
+        "exit": 0,
+        "reaped": true,
+        "seconds": 4.564209042000584,
+        "stdout": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-36.stdout",
+          "sha256": "80bb21fecaf698f6aaed344bf1cb3ac26c2039867160b47e8a6a08656bfb3bdf"
+        },
+        "stderr": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-36.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "index": 37,
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-binary",
+          "--skip",
+          "controlled_inherited_source_descriptor",
+          "--test-threads=10",
+          "--nocapture"
+        ],
+        "pid": 86661,
+        "exit": 0,
+        "reaped": true,
+        "seconds": 1.6330429590016138,
+        "stdout": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-37.stdout",
+          "sha256": "84c2aa5d9ece4b9de51e09933acad2460ff83887c8ceb1497e00af0fd64eeb5a"
+        },
+        "stderr": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-37.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "index": 38,
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-binary",
+          "--skip",
+          "controlled_inherited_source_descriptor",
+          "--test-threads=10",
+          "--nocapture"
+        ],
+        "pid": 86721,
+        "exit": 0,
+        "reaped": true,
+        "seconds": 1.0925448750058422,
+        "stdout": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-38.stdout",
+          "sha256": "cb5452c8fd764a47acf9cb8c842e8c397a5e63c728b22c6bd9cda55fb7d8d6d5"
+        },
+        "stderr": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-38.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "index": 39,
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-binary",
+          "--skip",
+          "controlled_inherited_source_descriptor",
+          "--test-threads=10",
+          "--nocapture"
+        ],
+        "pid": 86730,
+        "exit": 0,
+        "reaped": true,
+        "seconds": 1.3521593750047032,
+        "stdout": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-39.stdout",
+          "sha256": "e43bf426c0be36a12428b8fe22a9a15af63aaa5fde9e40edc746bb5827da8707"
+        },
+        "stderr": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-39.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "index": 40,
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-binary",
+          "--skip",
+          "controlled_inherited_source_descriptor",
+          "--test-threads=10",
+          "--nocapture"
+        ],
+        "pid": 86738,
+        "exit": 0,
+        "reaped": true,
+        "seconds": 1.2398344999965047,
+        "stdout": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-40.stdout",
+          "sha256": "abeb0227f9c42ffdc8e66222d2de428b8c2a9b7d6a59b8eab8fb8a1b947e31dc"
+        },
+        "stderr": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-40.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "index": 41,
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-binary",
+          "--skip",
+          "controlled_inherited_source_descriptor",
+          "--test-threads=10",
+          "--nocapture"
+        ],
+        "pid": 86749,
+        "exit": 0,
+        "reaped": true,
+        "seconds": 1.08385312500468,
+        "stdout": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-41.stdout",
+          "sha256": "74bbed4d76ecefa02a73a6dccf49dda429bb46524cdbc6886a11b363dd89b42d"
+        },
+        "stderr": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-41.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "index": 42,
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-binary",
+          "--skip",
+          "controlled_inherited_source_descriptor",
+          "--test-threads=10",
+          "--nocapture"
+        ],
+        "pid": 86763,
+        "exit": 0,
+        "reaped": true,
+        "seconds": 1.0443897920049494,
+        "stdout": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-42.stdout",
+          "sha256": "eaa07d6239f8be62e23e00acdfbec2b4f51c086a2e7095f66711a2489772c959"
+        },
+        "stderr": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-42.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "index": 43,
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-binary",
+          "--skip",
+          "controlled_inherited_source_descriptor",
+          "--test-threads=10",
+          "--nocapture"
+        ],
+        "pid": 86774,
+        "exit": 0,
+        "reaped": true,
+        "seconds": 1.0455960000108462,
+        "stdout": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-43.stdout",
+          "sha256": "6094018e4cdbb5caa635b903a50b9922eb2af9ff23e1a47900e5de45f0ae844b"
+        },
+        "stderr": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-43.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "index": 44,
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-binary",
+          "--skip",
+          "controlled_inherited_source_descriptor",
+          "--test-threads=10",
+          "--nocapture"
+        ],
+        "pid": 86785,
+        "exit": 0,
+        "reaped": true,
+        "seconds": 1.5282093750138301,
+        "stdout": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-44.stdout",
+          "sha256": "3f33eddf11895802686550bb4dea3a60b51b3251de10d59b6b52f671068fa7c6"
+        },
+        "stderr": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-44.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "index": 45,
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-binary",
+          "--skip",
+          "controlled_inherited_source_descriptor",
+          "--test-threads=10",
+          "--nocapture"
+        ],
+        "pid": 86798,
+        "exit": 0,
+        "reaped": true,
+        "seconds": 1.246895542004495,
+        "stdout": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-45.stdout",
+          "sha256": "f2ba62026006af1ceec93581cb67881e1ae9d51f157fd34e2d009b20601d7678"
+        },
+        "stderr": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-45.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "index": 46,
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-binary",
+          "--skip",
+          "controlled_inherited_source_descriptor",
+          "--test-threads=10",
+          "--nocapture"
+        ],
+        "pid": 86808,
+        "exit": 0,
+        "reaped": true,
+        "seconds": 4.5460720420087455,
+        "stdout": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-46.stdout",
+          "sha256": "8f15b96e3bb307a4f5b23982dbcb8343829e8024df9d3b92779b17bda4f5c008"
+        },
+        "stderr": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-46.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "index": 47,
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-binary",
+          "--skip",
+          "controlled_inherited_source_descriptor",
+          "--test-threads=10",
+          "--nocapture"
+        ],
+        "pid": 86842,
+        "exit": 0,
+        "reaped": true,
+        "seconds": 2.6666377919900697,
+        "stdout": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-47.stdout",
+          "sha256": "1239300e5604c3e66a1a5bca88ccdeb676b16f3f511b55cebf22c7069088405f"
+        },
+        "stderr": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-47.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "index": 48,
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-binary",
+          "--skip",
+          "controlled_inherited_source_descriptor",
+          "--test-threads=10",
+          "--nocapture"
+        ],
+        "pid": 86850,
+        "exit": 0,
+        "reaped": true,
+        "seconds": 1.4211644169990905,
+        "stdout": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-48.stdout",
+          "sha256": "12d04675b6d02be445fa751f00f09b4fc6bda077128a0bbde1954ecec43331ea"
+        },
+        "stderr": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-48.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "index": 49,
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/diagnostic-binary",
+          "--skip",
+          "controlled_inherited_source_descriptor",
+          "--test-threads=10",
+          "--nocapture"
+        ],
+        "pid": 86872,
+        "exit": 0,
+        "reaped": true,
+        "seconds": 1.3628513750009006,
+        "stdout": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-49.stdout",
+          "sha256": "1ffb94ac6c8cdb205d4a111de2f6e4d1649f1a2c6f72cb86f25ea6cfa343ab67"
+        },
+        "stderr": {
+          "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/natural-49.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    ]
+  },
+  "hosted_failure": {
+    "raw_log": "/Users/andreyyurlov/.codex/incant-integration-evidence/checkpoint29/failures/115543193346-linux-desktop.log",
+    "sha256": "8dde9547b08d3d73b0b5f2373de33517352c00efc54073cb070570fe68bd3cb7",
+    "job": "/Users/andreyyurlov/.codex/incant-integration-evidence/source-lock-main250-001/hosted-job.json",
+    "cause": "inferred; original hosted error not printed"
+  },
+  "limits": [
+    "Current local CPU proof only; successor Linux/Windows/macOS execution pending.",
+    "Controlled fork diagnostic is private evidence only; no production behavior changed."
+  ],
+  "source_review": {
+    "path": "docs/spikes/evidence/source-lock-main250/source-review.json",
+    "sha256": "d27b0f5d7a1cf25b5875ff1a7ce4680e18289efe7b586ff81ea612b3e8bc3fd7",
+    "bytes": 708
+  },
+  "final_review": {
+    "path": "docs/spikes/evidence/source-lock-main250/final-review.json",
+    "sha256": "a8a8cf53c7ca31022b81cdc0b21dcdc884eabc59570373a9386f0a2664731da5",
+    "bytes": 861
+  }
+}
