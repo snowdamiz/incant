@@ -28,6 +28,8 @@ compiler-recovery qualification. Current simulator archives were both fresh
 normal exports. No physical-device, minimum-OS, performance, rendering, signing
 or phase approval is implied.
 
-Final current-main independent review is pending. The [manifest](evidence/authored-ios-wasm-main185.json)
+Final independent review is accepted. Actual main186 ancestry differs only in
+the separately reviewed Windows workflow; its frozen and current Git bytes are
+bound by the retained qualification. Publication awaits its fast check. The [manifest](evidence/authored-ios-wasm-main185.json)
 binds current raw streams, source inventories, retained assertions, actual output
 and external binary hashes. Lossless archives use bounded 16 MiB parts.

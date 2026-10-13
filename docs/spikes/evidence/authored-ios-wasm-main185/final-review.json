@@ -1,0 +1,100 @@
+{
+  "at": "2026-10-13T02:05:50.250189+00:00",
+  "accepted": true,
+  "tested_head": "4b277d577c6627e98e407b2c25daf274a99fd406",
+  "current_qualification": {
+    "at": "2026-10-13T02:04:32.985500+00:00",
+    "tested": "4b277d577c6627e98e407b2c25daf274a99fd406",
+    "current": "43ed989bae5ec6607a78db00b51fb6ed5c8213a6",
+    "main": "1c5658cf5d7eee8390b272394f38b8d9b49e1628",
+    "original_collector_sha256": "000715207264593d59be547f5f3f2dbf40096d2070abe0e8da5cc3352648ba47",
+    "original_manifest_sha256": "45967a33290fc4d7bbf14d2a5d12a94b3fabf861a936d0da851ce9967f7084a0",
+    "frozen_inputs": 2001,
+    "exact_except": [
+      {
+        "path": ".github/workflows/development-wasm.yml",
+        "tested_sha256": "4fd16ed414730d81b4a59884be881d0859aaebb084660a1773587d612b3714b9",
+        "current_sha256": "9fdf6e92d4ce7c891ffb221bd3bf949cde16302973e3dc1a41de58fdfef1021b",
+        "current_source": "1c5658cf5d7eee8390b272394f38b8d9b49e1628"
+      }
+    ],
+    "runtime_and_build_inputs_equal": true,
+    "collector_replay_exit": 0,
+    "scope": "Only accepted main186 CI workflow differs; original frozen workflow verified from exact Git blob. Original collector and execution receipts unchanged."
+  },
+  "qualification_sha256": "b57c7f786cf5b47dc53e46a4610124184cf4bc9ccf5943670c0a7a41eb758a6f",
+  "manifest_sha256": "45967a33290fc4d7bbf14d2a5d12a94b3fabf861a936d0da851ce9967f7084a0",
+  "archive_records": 717,
+  "archive_payloads": 218,
+  "external_artifacts": 14,
+  "replayed_assertions": {
+    "passed": true,
+    "current_simulator_execution": [
+      {
+        "mode": "deterministic",
+        "platform": "simulator",
+        "target": "aarch64-apple-ios-sim",
+        "export_receipt_sha256": "e1ec1ad5667f4492a7d52601d63e27fea7fe3c706bd2e89f3880408a2df69cf8",
+        "caller_receipt_sha256": "fafa99d1428248181f838591660a13de3ae366da5c31db8cf73643d0e457790e",
+        "positive_processes": 6,
+        "exact_refusals": 26,
+        "raw_command_streams_rehashed": 132,
+        "archive_bytes": 15426648,
+        "caller_bytes": {
+          "c": 11694120,
+          "swift": 11707408
+        },
+        "object_platform": {
+          "architecture": "aarch64",
+          "platform": "iossimulator",
+          "object_minimum_versions": [
+            "14.0",
+            "27.0"
+          ],
+          "headers_sha256": "19c2e5a74ac189566743626d564b665642d69f688a77840ed907b8e3782d5748"
+        },
+        "runtime_files": 10
+      },
+      {
+        "mode": "fast",
+        "platform": "simulator",
+        "target": "aarch64-apple-ios-sim",
+        "export_receipt_sha256": "450470f33e2c55641a0f786651225b8627f9878f98ffe0147ba66dd1ddf2a899",
+        "caller_receipt_sha256": "7a9dde99a3a758e30055c148a6d9b932eb4d6400c4a28f47c000756a2d7555b5",
+        "positive_processes": 6,
+        "exact_refusals": 26,
+        "raw_command_streams_rehashed": 132,
+        "archive_bytes": 15422360,
+        "caller_bytes": {
+          "c": 11692856,
+          "swift": 11706112
+        },
+        "object_platform": {
+          "architecture": "aarch64",
+          "platform": "iossimulator",
+          "object_minimum_versions": [
+            "14.0",
+            "27.0"
+          ],
+          "headers_sha256": "1a98334b9cec6b360e39f10b24542109b6e9cbea7c66098dc1aca449de8d910b"
+        },
+        "runtime_files": 10
+      }
+    ],
+    "frozen_inputs": 2001,
+    "producer_sources": 13,
+    "successful_commands": 21,
+    "historical_no_tests_pattern_failure": 1,
+    "cook_cases": 62,
+    "producer_records": 1202,
+    "producer_external_binaries": 24
+  },
+  "limits": [
+    "Current macOS arm64 host and local iOS27 simulator CPU only; both fixed physics modes.",
+    "Current archives are fresh normal exports. The original a765 device unsigned links and first-archive compiler-recovery qualification remain original producer evidence, not current device execution.",
+    "Initial tools-wasm2c discovery pattern matched no tests and exited5; retained. Corrected actual test names passed without source changes or repeated completed checks.",
+    "Android TypeScript admission preserved; static Wasm admission explicitly iOS-only.",
+    "No physical-device, minimum-OS, performance, rendering, signing or phase approval."
+  ],
+  "integration_source_review": "Previously read exact main185 integration seam preserving Android TypeScript and iOS-only captured Wasm admission. Current main186 adds only independently accepted Windows workflow among frozen inputs."
+}

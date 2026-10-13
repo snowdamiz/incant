@@ -859,12 +859,20 @@
     "records": 1202,
     "external_binaries": 24
   },
-  "review_state": "Final current-main independent review pending",
+  "review_state": "Final independent current-main review accepted; publication awaits fast check",
   "limits": [
     "Current macOS arm64 host and local iOS27 simulator CPU only; both fixed physics modes.",
     "Current archives are fresh normal exports. The original a765 device unsigned links and first-archive compiler-recovery qualification remain original producer evidence, not current device execution.",
     "Initial tools-wasm2c discovery pattern matched no tests and exited5; retained. Corrected actual test names passed without source changes or repeated completed checks.",
     "Android TypeScript admission preserved; static Wasm admission explicitly iOS-only.",
     "No physical-device, minimum-OS, performance, rendering, signing or phase approval."
-  ]
+  ],
+  "final_review": {
+    "path": "docs/spikes/evidence/authored-ios-wasm-main185/final-review.json",
+    "sha256": "676eddd6e10bd7e95888b5cbf462313f7a79af03c2597e1c1ee3b17e906980a9"
+  },
+  "post_test_main_ancestry": {
+    "path": "docs/spikes/evidence/authored-ios-wasm-main185/main186-qualification.json",
+    "sha256": "b57c7f786cf5b47dc53e46a4610124184cf4bc9ccf5943670c0a7a41eb758a6f"
+  }
 }

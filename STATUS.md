@@ -1986,7 +1986,7 @@ Main185 composition retains Android TypeScript and explicitly refuses Android
 static modules. The frozen current source passes 62 cooker tests and scoped
 checks, two fresh simulator shipping archives, twelve actual C/Swift positives
 and fifty-two exact refusals with full native-oracle/log/PCM parity. Final
-independent integration review is pending. Original device links remain
+independent integration review is accepted; publication awaits its fast check. Original device links remain
 producer-scoped; no phone, rendering or phase gate is claimed.
 [Current evidence](docs/spikes/authored-ios-wasm-main185.md).
 
