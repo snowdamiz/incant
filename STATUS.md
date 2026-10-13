@@ -1,6 +1,6 @@
 # Implementation status
 
-Private broad-phase manager construction on main236 passed both composed numerical modes: 225 snapshot and 36 native cases per mode, 220 paired broad steps per dimension/mode, and all 28 checks. Source review is accepted; final current-main evidence review is pending. Fast8 fixture reuse is explicitly hash-bound. Other live owners remain trusted clones, and whole-world restore/public physics saves stay unsupported. [Evidence](docs/spikes/physics-native-broad-main236.md).
+Private broad-phase manager construction on main236 passed both composed numerical modes: 225 snapshot and 36 native cases per mode, 220 paired broad steps per dimension/mode, and all 28 checks. Source and final current-main evidence reviews are accepted; required fast check/publication remain. Fast8 fixture reuse is explicitly hash-bound. Other live owners remain trusted clones, and whole-world restore/public physics saves stay unsupported. [Evidence](docs/spikes/physics-native-broad-main236.md).
 
 Private typed Parry BVH construction and shared allocation on main234 passed both composed numerical modes: 225 snapshot + 26 native cases per mode, 226 paired BVH steps per dimension/mode, all23 checks successful. Final current-main packet and main235 join reviews are accepted; PR236 merged after its required exact-head fast check. The feature stays default-off and complete-world physics saves remain unsupported. [Evidence](docs/spikes/physics-parry-main234.md).
 

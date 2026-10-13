@@ -11961,5 +11961,10 @@
     "Deterministic uses checked-in fixture bytes. Fast8 reuses the exact eight prior accepted fast8 captures with explicit hash bindings; no fresh capture claim. Only broad state is newly reconstructed.",
     "No decoded complete-world install, runtime physics saves, phone or performance claim.",
     "Composed source actually rebuilt in two parallel numerical modes; focused and broad tests overlap."
-  ]
+  ],
+  "final_review": {
+    "path": "docs/spikes/evidence/physics-native-broad-main236/final-root.json",
+    "sha256": "096bdd9efa58f050eb004b4c25a0eb80f18711a556cabd1325fe9944fa656a70",
+    "decision": "accepted current-main scope"
+  }
 }

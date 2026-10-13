@@ -36,7 +36,7 @@ lossless records and 508 distinct payloads, the original 3,051-record producer
 archive, source review, fixture substitutions, raw execution logs and binaries.
 The collector independently rehashes those originals and all input identities;
 `verify.py --verify-only` is retained in the archive. Final current-main review
-is pending. [Producer scope](physics-native-broad-construction.md) and its initial
+is accepted (`096bdd9e`); publication follows the required exact-head fast check. [Producer scope](physics-native-broad-construction.md) and its initial
 failed controls remain preserved.
 
 Only the private broad manager is reconstructed. The enclosing owner must still
