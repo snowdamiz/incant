@@ -172,3 +172,28 @@ fn persisted_spatial_owner_generation_framing_and_shared_budget_refuse() {
     );
     assert_eq!(save(&mut source), bytes);
 }
+
+#[test]
+fn persisted_spatial_pending_velocity_keeps_native_motion_boundary() {
+    let mut source = fixture();
+    let mut state = source.state(&id(1), &id(11)).unwrap().clone();
+    state.velocity = [0.25, 0., 0.];
+    source.sync_motion(&id(1), &id(11), &state).unwrap();
+    for step in 0..72 {
+        source.step(1. / 64.).unwrap();
+        let checkpoint = source.checkpoint(&mut budget(), &mut work()).unwrap();
+        if let Err(error) = checkpoint.persisted_bytes(&mut budget(), &mut work()) {
+            eprintln!("NATIVE_PERSISTED_BOUNDARY step={step} error={error:?}");
+            for scene in &checkpoint.scenes {
+                let hex: String = scene
+                    .native
+                    .encoded()
+                    .iter()
+                    .map(|b| format!("{b:02x}"))
+                    .collect();
+                eprintln!("NATIVE_PERSISTED_FRAME scene={:?} hex={hex}", scene.id);
+            }
+            panic!("actual motion continuation file admission refused");
+        }
+    }
+}
