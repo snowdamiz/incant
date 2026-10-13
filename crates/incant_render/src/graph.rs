@@ -26,6 +26,7 @@ pub(crate) struct PreparedFrame {
     pub diagnostics: DiagnosticDraw,
     pub models: Option<ModelDraw>,
     pub motion: Option<crate::motion::MotionDraw>,
+    pub temporal: Option<crate::temporal::TemporalDraw>,
     pub sprites: Option<crate::sprites::SpriteDraw>,
     pub text: Option<crate::text::TextDraw>,
     pub output: OutputDraw,
@@ -218,15 +219,96 @@ fn assign_lights(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
         });
     }
 }
+// One logical Models interval includes motion, both resolve passes and every
+// model subpass actually encoded. Interior passes omit descriptors entirely.
+#[derive(Debug)]
+struct ModelsPlan {
+    motion: bool,
+    opaque: bool,
+    temporal: bool,
+    overlay_depth: bool,
+    transparent: bool,
+    all: bool,
+}
+impl ModelsPlan {
+    fn new(motion: bool, temporal: bool, models: bool, opaque: bool, transparent: bool) -> Self {
+        Self {
+            motion,
+            opaque: temporal && opaque,
+            temporal,
+            overlay_depth: false,
+            transparent: temporal && transparent,
+            all: !temporal && models,
+        }
+    }
+    fn with_overlay_depth(mut self, active: bool) -> Self {
+        self.overlay_depth = self.temporal && self.motion && active;
+        self
+    }
+    fn count(&self) -> usize {
+        usize::from(self.motion)
+            + usize::from(self.opaque)
+            + 2 * usize::from(self.temporal)
+            + usize::from(self.overlay_depth)
+            + usize::from(self.transparent)
+            + usize::from(self.all)
+    }
+}
 fn models(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
-    // Retained motion is deliberately uninstrumented; Models covers only the
-    // following model pass. GpuFrameTiming documents this coverage boundary.
-    if let Some(pass) = &frame.motion {
-        pass.encode(&mut encoder.0);
+    let plan = ModelsPlan::new(
+        frame.motion.is_some(),
+        frame.temporal.is_some(),
+        frame.models.is_some(),
+        frame.models.as_ref().is_some_and(|m| m.has_opaque()),
+        frame.models.as_ref().is_some_and(|m| m.has_transparent()),
+    )
+    .with_overlay_depth(frame.motion.as_ref().is_some_and(|m| m.has_overlay_depth()));
+    if plan.count() == 0 {
+        return;
     }
-    if let Some(pass) = &frame.models {
-        encoder.timed(crate::timing::GpuPass::Models, |e, q| pass.encode(e, q));
-    }
+    encoder.timed(crate::timing::GpuPass::Models, |encoder, queries| {
+        let mut index = 0;
+        let mut timestamp = || {
+            let result = queries.and_then(|q| q.render_range(index, plan.count()));
+            index += 1;
+            result
+        };
+        if plan.motion {
+            frame.motion.as_ref().unwrap().encode(encoder, timestamp());
+        }
+        if plan.opaque {
+            frame
+                .models
+                .as_ref()
+                .unwrap()
+                .encode_opaque(encoder, timestamp());
+        }
+        if plan.temporal {
+            frame
+                .temporal
+                .as_ref()
+                .unwrap()
+                .encode(encoder, timestamp(), timestamp());
+        }
+        if plan.overlay_depth {
+            frame
+                .motion
+                .as_ref()
+                .unwrap()
+                .encode_overlay_depth(encoder, timestamp());
+        }
+        if plan.transparent {
+            frame
+                .models
+                .as_ref()
+                .unwrap()
+                .encode_transparent(encoder, timestamp());
+        }
+        if plan.all {
+            frame.models.as_ref().unwrap().encode(encoder, timestamp());
+        }
+        debug_assert_eq!(index, plan.count());
+    });
 }
 fn display(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
     encoder.timed(crate::timing::GpuPass::Display, |e, q| {
@@ -260,3 +342,63 @@ fn text(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
 #[cfg(test)]
 #[path = "../tests/graph_ownership/mod.rs"]
 mod ownership_tests;
+
+#[cfg(test)]
+#[test]
+fn temporal_models_interval_counts_motion_and_each_real_resolve_overlay_pass() {
+    assert_eq!(
+        ModelsPlan::new(false, false, false, false, false).count(),
+        0
+    );
+    assert_eq!(ModelsPlan::new(false, false, true, true, true).count(), 1);
+    assert_eq!(ModelsPlan::new(true, false, true, true, true).count(), 2);
+    assert_eq!(ModelsPlan::new(true, true, true, true, true).count(), 5);
+    assert_eq!(ModelsPlan::new(true, true, true, false, true).count(), 4);
+    assert_eq!(ModelsPlan::new(true, true, true, true, false).count(), 4);
+    assert_eq!(ModelsPlan::new(true, true, false, false, false).count(), 3);
+    // Overlay depth is a real render pass even when the only overlay is a sprite
+    // or text batch, so it owns the interval's end if no transparent model follows.
+    assert_eq!(
+        ModelsPlan::new(true, true, true, true, false)
+            .with_overlay_depth(true)
+            .count(),
+        5
+    );
+    assert_eq!(
+        ModelsPlan::new(true, true, true, true, true)
+            .with_overlay_depth(true)
+            .count(),
+        6
+    );
+    assert_eq!(
+        ModelsPlan::new(true, false, true, true, true)
+            .with_overlay_depth(true)
+            .count(),
+        2
+    );
+    for motion in [false, true] {
+        for temporal in [false, true] {
+            for opaque in [false, true] {
+                for transparent in [false, true] {
+                    let p = ModelsPlan::new(
+                        motion,
+                        temporal,
+                        opaque || transparent,
+                        opaque,
+                        transparent,
+                    );
+                    let operations = [
+                        p.motion,
+                        p.opaque,
+                        p.temporal,
+                        p.temporal,
+                        p.transparent,
+                        p.all,
+                    ];
+                    assert_eq!(operations.into_iter().filter(|b| *b).count(), p.count());
+                    assert!(!p.all || (!p.opaque && !p.transparent && !p.temporal));
+                }
+            }
+        }
+    }
+}

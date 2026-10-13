@@ -10,15 +10,51 @@ const _: () = {
     assert!(super::scene::MAX_LOCAL == 4096);
     assert!(super::DEPTH_SLICES == 24);
 };
-fn select(backend: wgpu::Backend) -> std::result::Result<&'static Artifact, &'static str> {
-    if MANIFEST_CONTRACT != CONTRACT
-        || SOURCE_HASH == [0; 32]
-        || PRODUCER_HASH == [0; 32]
-        || ARTIFACTS.len() != 3
-    {
+#[cfg(feature = "cooked-temporal")]
+mod temporal {
+    use super::*;
+    include!(concat!(
+        env!("OUT_DIR"),
+        "/temporal-cluster-shaders/manifest.rs"
+    ));
+    pub(super) fn manifest() -> (&'static str, [u8; 32], [u8; 32], &'static [Artifact]) {
+        (MANIFEST_CONTRACT, SOURCE_HASH, PRODUCER_HASH, &ARTIFACTS)
+    }
+}
+fn select_variant(
+    backend: wgpu::Backend,
+    temporal: bool,
+) -> std::result::Result<&'static Artifact, &'static str> {
+    let (contract, source, producer, artifacts) = if temporal {
+        #[cfg(feature = "cooked-temporal")]
+        {
+            temporal::manifest()
+        }
+        #[cfg(not(feature = "cooked-temporal"))]
+        {
+            return Err("temporal cluster variant unavailable");
+        }
+    } else {
+        (
+            MANIFEST_CONTRACT,
+            SOURCE_HASH,
+            PRODUCER_HASH,
+            &ARTIFACTS[..],
+        )
+    };
+    if contract != CONTRACT || source == [0; 32] || producer == [0; 32] || artifacts.len() != 3 {
         return Err("cluster manifest identity");
     }
-    let mut found = ARTIFACTS
+    #[cfg(feature = "cooked-temporal")]
+    if temporal {
+        use sha2::{Digest, Sha256};
+        let expected =
+            super::temporal_grid_source().map_err(|_| "temporal cluster guarded source")?;
+        if source != <[u8; 32]>::from(Sha256::digest(expected)) {
+            return Err("temporal cluster source identity");
+        }
+    }
+    let mut found = artifacts
         .iter()
         .filter(|a| a.backend == backend && a.stage == Stage::Compute);
     let a = found.next().ok_or("missing cluster backend")?;
@@ -71,10 +107,24 @@ pub(super) fn shader(
     device: &wgpu::Device,
     backend: wgpu::Backend,
 ) -> Result<(wgpu::ShaderModule, &'static str)> {
+    shader_variant(device, backend, false)
+}
+#[cfg(feature = "cooked-temporal")]
+pub(super) fn temporal_shader(
+    device: &wgpu::Device,
+    backend: wgpu::Backend,
+) -> Result<(wgpu::ShaderModule, &'static str)> {
+    shader_variant(device, backend, true)
+}
+fn shader_variant(
+    device: &wgpu::Device,
+    backend: wgpu::Backend,
+    temporal: bool,
+) -> Result<(wgpu::ShaderModule, &'static str)> {
     validate_host().map_err(ResourceError::CookedCluster)?;
     validate_limits(&device.limits()).map_err(ResourceError::CookedCluster)?;
     native::features(backend, device.features()).map_err(ResourceError::CookedCluster)?;
-    let a = select(backend).map_err(ResourceError::CookedCluster)?;
+    let a = select_variant(backend, temporal).map_err(ResourceError::CookedCluster)?;
     let descriptor = native::descriptor(a).map_err(ResourceError::CookedCluster)?;
     // SAFETY: private embedded source has exact validated IR/host layout, bounded
     // storage accesses and loops, fixed64x1x1 and 516B static workgroup storage.
@@ -87,6 +137,28 @@ pub(super) fn shader(
 mod tests {
     use super::*;
     use sha2::{Digest, Sha256};
+    #[cfg(feature = "cooked-temporal")]
+    #[test]
+    fn guarded_temporal_variant_is_distinct_and_has_identical_native_compute_abi() {
+        let (_, hash, _, _) = temporal::manifest();
+        assert_eq!(
+            hash,
+            <[u8; 32]>::from(Sha256::digest(
+                super::super::temporal_grid_source().unwrap()
+            ))
+        );
+        assert_ne!(hash, SOURCE_HASH);
+        for b in [
+            wgpu::Backend::Metal,
+            wgpu::Backend::Vulkan,
+            wgpu::Backend::Dx12,
+        ] {
+            let a = select_variant(b, true).unwrap();
+            let original = select_variant(b, false).unwrap();
+            assert_ne!(a.hash, original.hash);
+            assert_eq!(native::descriptor(a).unwrap().num_workgroups, (64, 1, 1));
+        }
+    }
     #[test]
     fn exact_compute_descriptors_match_the_fixed_host_and_workgroup() {
         validate_host().unwrap();
@@ -100,7 +172,7 @@ mod tests {
             wgpu::Backend::Vulkan,
             wgpu::Backend::Dx12,
         ] {
-            let a = select(b).unwrap();
+            let a = select_variant(b, false).unwrap();
             let d = native::descriptor(a).unwrap();
             assert_eq!(d.num_workgroups, (64, 1, 1));
             assert_eq!(d.msl.is_some(), b == wgpu::Backend::Metal);
@@ -110,7 +182,7 @@ mod tests {
             bad.hash[0] ^= 1;
             assert!(native::descriptor(&bad).is_err());
         }
-        assert!(select(wgpu::Backend::Gl).is_err());
+        assert!(select_variant(wgpu::Backend::Gl, false).is_err());
         let l = wgpu::Limits {
             max_compute_workgroup_storage_size: 515,
             ..Default::default()

@@ -1,0 +1,105 @@
+{
+  "base": "1da6cab9778913999a745803445f209d4da0f90d",
+  "main": "29c41ad955602c499db29586ab1330488e43559f",
+  "joined_head": "b30dba3da3a447dfd1cb524e26a7116234ef3aad",
+  "paths": [
+    {
+      "path": "crates/incant_physics_snapshot/src/attachment.rs",
+      "before": "e8e9e37bb17011d68d3809dca29e400df2fd8949b8d4b890087453d296fb35fd",
+      "after": "e6ea7a9be4a06ceba90974403c9b569f8052e0d969adffff0b9e509d9cb0fb9b",
+      "scope": "inert snapshot only, absent renderer graph"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/coarena.rs",
+      "before": "86f392b07915f51413dfd448b8c56927b2284c1a6413a43d79f35890b78d3435",
+      "after": "b9ca8908016a0f7762c57b9e0e2b363610d193f8fcabb351c720431ec4e9bfc4",
+      "scope": "inert snapshot only, absent renderer graph"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/contact_manifolds/mod.rs",
+      "before": "82b1a8627586eee7b06488f8d528905b11dec0b6c7a920f0fe4ca640add3125c",
+      "after": "66abaf52fb7f4c5f29aa656e582b8fa95a9ff0d50321dfb85a4d4aa9b780a998",
+      "scope": "inert snapshot only, absent renderer graph"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/lib.rs",
+      "before": "d358739c0b33257f7d1f34b544cf08948e96f5f7be66a25c231ca29b651c2c78",
+      "after": "6d8d8c760d6d87b5ccd2a87b520530c0090f126edc6311f50c14f4eb83217f8e",
+      "scope": "inert snapshot only, absent renderer graph"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/narrow_owner/codec.rs",
+      "before": null,
+      "after": "c8a65bce9ff731f8bc6f2ef5cdeb44e4f06e81184f0960845d4d10aa1095e4ec",
+      "scope": "inert snapshot only, absent renderer graph"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/narrow_owner/mod.rs",
+      "before": null,
+      "after": "9c34dba5270b73850ec90390aa969c4cc6512635dfd1eaab6a789f70807da254",
+      "scope": "inert snapshot only, absent renderer graph"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/narrow_owner/validate.rs",
+      "before": null,
+      "after": "706a445c47472c03ee25e0df5b8b6d84ee2d77f19ba8a03bf299798f71caef23",
+      "scope": "inert snapshot only, absent renderer graph"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/rigid_owner/mod.rs",
+      "before": "3d14bd31931e96737410224ae060329fb425bc66417dd93e70953e1b2b875b0c",
+      "after": "da31083b67873ab0a0bcca060ec11432799e3c6a3ba797a533bf04a3913996ab",
+      "scope": "inert snapshot only, absent renderer graph"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/support/island_cases.rs",
+      "before": "2b834e0342711e837c75f401396ce9fcf4e1f428051cd12e911cc8874f722677",
+      "after": "bffd679b5ffff4f4dc990d3bfd1fd157771bd668496aa030a1f83151a9eb76e4",
+      "scope": "inert snapshot only, absent renderer graph"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/support/narrow_cases.rs",
+      "before": null,
+      "after": "fb78289e4cc8159b58fc74f6c3d95f65e640135d937a9d2794af44d0f45954ca",
+      "scope": "inert snapshot only, absent renderer graph"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/support/narrow_checks.rs",
+      "before": null,
+      "after": "8a8a3270ede58f59fb3920f69cf0b907fde6a37a85a34098ef762bf36a5f2ad8",
+      "scope": "inert snapshot only, absent renderer graph"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/trusted_manifolds.rs",
+      "before": "e224fb4680a080fdb4b6635a3d4bfd77b7a7c557a7dcd6aebeeef4b74337108e",
+      "after": "3a4687ff61b0999628f61a4e2bb600d3d26f774d8c48cc1ff2a6bf30884cab36",
+      "scope": "inert snapshot only, absent renderer graph"
+    },
+    {
+      "path": "crates/incant_render/tests/timestamp_backend_probe.rs",
+      "before": "971225d1f13bb7f3901be021800aca4ad1a03f79ba1296942b0b5000e7543665",
+      "after": "b1c41b384830e4495e06c119f47f4a86241c20984ca8bb78621e604dbde87141",
+      "scope": "separate integration test binary; own main219 CPU/Clippy acceptance"
+    }
+  ],
+  "graph": {
+    "path": "docs/spikes/evidence/fixed-temporal-main217/main219-selected-graph.txt",
+    "sha256": "757f05b3fb8eb736a65476fabfdcd550d1f6c6c75d23bccd6551b5393097d87b",
+    "command": [
+      "./tools/cargo",
+      "tree",
+      "--locked",
+      "--offline",
+      "-p",
+      "incant_render",
+      "--features",
+      "cooked-temporal,persistent-pipeline-cache",
+      "--edges",
+      "normal,build,dev",
+      "--prefix",
+      "none"
+    ],
+    "exit": 0
+  },
+  "qualification": "No new Rust build or GPU run after this ancestry join. Thirteen changed crate/test paths are exactly reviewed main218 inert owner plus main219 separate diagnostic; selected renderer normal/build/dev graph excludes inert snapshot. All Cargo manifests, lock/build scripts and remaining compiled source bytes are unchanged. Existing current-composition checks remain frozen main217 source plus the reviewed test-only joined fixture."
+}

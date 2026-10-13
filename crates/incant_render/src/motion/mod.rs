@@ -4,7 +4,7 @@ mod draw;
 mod owner;
 mod plan;
 mod retained;
-mod system;
+pub(crate) mod system;
 mod targets;
 #[cfg(test)]
 mod tests;
@@ -12,13 +12,13 @@ mod tests;
 pub(crate) use draw::MotionDraw;
 pub use owner::MotionFrame;
 pub use plan::{MAX_MOTION_INSTANCE_BYTES, MAX_MOTION_PIXELS, MAX_MOTION_TARGET_BYTES};
-pub(crate) use retained::MotionState;
+pub(crate) use retained::{MotionState, MotionView, TemporalInput};
 pub(crate) use system::MotionSystem;
 
 #[derive(Debug, thiserror::Error, PartialEq, Eq)]
 pub enum MotionError {
     #[error(
-        "motion history requires its uncooked portable pipeline; native cooked features are unsupported"
+        "motion history requires the complete cooked-temporal feature when native cooking is enabled"
     )]
     Cooked,
     #[error("motion pipelines were not enabled at renderer startup")]
@@ -39,6 +39,7 @@ pub enum MotionError {
 pub(crate) fn admission() -> Result<(), MotionError> {
     if cfg!(all(
         not(target_arch = "wasm32"),
+        not(feature = "cooked-temporal"),
         any(
             feature = "cooked-output",
             feature = "cooked-geometry",
