@@ -105,35 +105,53 @@ impl NativeWorld {
         spatial_work: &mut SpatialWork,
         allocations: &mut AllocationBudget,
     ) -> Result<(), WorldCheckpointError> {
-        if self.physics_failed {
-            return Err(WorldCheckpointError::Owner("failed world"));
-        }
-        let mut candidate =
-            checkpoint.reconstruct(payload, planar_work, spatial_work, allocations)?;
-        candidate.check_save_binding(
-            Some(self.source_scene_fingerprint),
-            self.scene_id(),
-            self.tick_rate,
-            &self.localization,
-            &self.font_assets,
-        )?;
-        candidate.validate_ik_catalog(&self.ik_catalog)?;
-        candidate.validate_root_catalog(&self.root_catalog)?;
-        candidate.ik_catalog = Arc::clone(&self.ik_catalog);
-        candidate.root_catalog = Arc::clone(&self.root_catalog);
-        // Rewinding does not erase host obligations or capability history.
-        candidate.physics_save_required |=
-            self.physics_save_required || self.physics_used || self.physics_2d_used;
-        candidate.spatial_used |= self.spatial_used;
-        candidate.navigation_used |= self.navigation_used;
-        candidate.ui_used |= self.ui_used;
-        candidate.audio_used |= self.audio_used;
+        let candidate =
+            checkpoint.reconstruct_for(self, payload, planar_work, spatial_work, allocations)?;
         self.publish_restored_components(candidate)?;
         Ok(())
     }
 }
 
 impl WorldCheckpoint {
+    /// Stage a compatible fresh world without changing `current`. This allows a
+    /// session host to bind a fresh VM and validate its other owners before one
+    /// atomic session replacement. Host identity is deliberately fresh here;
+    /// only NativeWorld::restore_checkpoint retains its destination identity.
+    /// Historical host/save obligations survive without changing native stepping
+    /// history. This does not restore any script, input, audio or UI host itself.
+    pub fn reconstruct_for(
+        &self,
+        current: &NativeWorld,
+        payload: &mut Budget,
+        planar_work: &mut PlanarWork,
+        spatial_work: &mut SpatialWork,
+        allocations: &mut AllocationBudget,
+    ) -> Result<NativeWorld, WorldCheckpointError> {
+        if current.physics_failed {
+            return Err(WorldCheckpointError::Owner("failed world"));
+        }
+        let mut candidate = self.reconstruct(payload, planar_work, spatial_work, allocations)?;
+        candidate.check_save_binding(
+            Some(current.source_scene_fingerprint),
+            current.scene_id(),
+            current.tick_rate,
+            &current.localization,
+            &current.font_assets,
+        )?;
+        candidate.validate_ik_catalog(&current.ik_catalog)?;
+        candidate.validate_root_catalog(&current.root_catalog)?;
+        candidate.ik_catalog = Arc::clone(&current.ik_catalog);
+        candidate.root_catalog = Arc::clone(&current.root_catalog);
+        // Rewinding does not erase host obligations or capability history.
+        candidate.physics_save_required |=
+            current.physics_save_required || current.physics_used || current.physics_2d_used;
+        candidate.spatial_used |= current.spatial_used;
+        candidate.navigation_used |= current.navigation_used;
+        candidate.ui_used |= current.ui_used;
+        candidate.audio_used |= current.audio_used;
+        Ok(candidate)
+    }
+
     /// Reconstruct a fresh, separately identified world. Any failed stage drops
     /// the private candidate; the checkpoint and original world stay unchanged.
     pub fn reconstruct(

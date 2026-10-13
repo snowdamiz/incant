@@ -220,6 +220,44 @@ fn checkpoint_restores_atomically_and_changes_incarnations() {
 }
 
 #[test]
+fn compatible_staging_keeps_live_world_unchanged_and_new_identity_fresh() {
+    let mut current = warm();
+    let checkpoint = capture(&mut current);
+    current.step().unwrap();
+    let before = current.snapshot();
+    let incarnation = current.incarnation();
+    let identity = current.identity.clone();
+    let candidate = checkpoint
+        .reconstruct_for(
+            &current,
+            &mut crate::CheckpointPayloadBudget::new(MAX_ALLOCATION).unwrap(),
+            &mut crate::PlanarCheckpointWorkBudget::new(100_000_000),
+            &mut crate::SpatialCheckpointWorkBudget::new(100_000_000),
+            &mut crate::CheckpointAllocationBudget::new(MAX_ALLOCATION, 100_000),
+        )
+        .unwrap();
+    assert_eq!(current.snapshot(), before);
+    assert_eq!(current.incarnation(), incarnation);
+    assert_eq!(current.identity, identity);
+    assert_ne!(candidate.identity, current.identity);
+    assert_ne!(candidate.incarnation(), incarnation);
+    assert_eq!(candidate.tick(), 64);
+    current.source_scene_fingerprint[0] ^= 1;
+    assert!(matches!(
+        checkpoint.reconstruct_for(
+            &current,
+            &mut payload(),
+            &mut planar_work(),
+            &mut spatial_work(),
+            &mut allocations()
+        ),
+        Err(WorldCheckpointError::Components(SaveError::WorldMismatch))
+    ));
+    assert_eq!(current.snapshot(), before);
+    assert_eq!(current.incarnation(), incarnation);
+}
+
+#[test]
 fn checkpoint_late_cache_and_generation_failures_do_not_publish() {
     let mut world = warm();
     let mut checkpoint = capture(&mut world);
