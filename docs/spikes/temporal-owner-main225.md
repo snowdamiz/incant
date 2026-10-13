@@ -30,7 +30,7 @@ build after this disjoint join. All other 3,144 frozen inputs match exactly.
 The producer's 56 retained artifact records, 54 payloads and eight copied
 executable identities are rehashed in addition to current integration evidence.
 The original root acceptance remains byte-identical. Current-main final review
-is pending in the [integration manifest](evidence/temporal-owner-main225.json).
+is independently accepted in the [integration manifest](evidence/temporal-owner-main225.json).
 
 This establishes stable accepted placement/change metadata only. Current float
 shaders do not transport integer ownership. Per-pixel provenance, contributor

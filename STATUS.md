@@ -25,7 +25,7 @@ Its source and producer CPU evidence are independently accepted. The isolated
 eight-file Rust delta passes 143 default and 172 cooked CPU cases and twelve
 current-main checks without importing private upscaling or MetalFX ancestry.
 The disjoint main225 journal-test join preserves renderer source. Final current-main
-review is pending. Shader bytes, defaults and memory ceilings are unchanged;
+review is independently accepted; the required fast publication check remains. Shader bytes, defaults and memory ceilings are unchanged;
 integer shader transport and per-pixel provenance remain open.
 [Current composition](docs/spikes/temporal-owner-main225.md).
 No new GPU, appearance, performance or device result is claimed.

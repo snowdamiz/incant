@@ -616,12 +616,16 @@
     "path": "docs/spikes/evidence/temporal-owner-provenance.json",
     "sha256": "ba95b3a89224ef20c1e3a614865e22294d4a0bb6003f973d6542a891d0daba49"
   },
-  "review_state": "Current-main independent final review pending",
+  "review_state": "Independent root final review accepted; required fast check pending",
   "limits": [
     "CPU foundation only; GPU tests remain ignored and no new GPU/appearance/device/performance result.",
     "Eight isolated Rust deltas applied to actual main; private upscaling/MetalFX ancestry is absent.",
     "Current main225 differs from tested source only in the independently accepted journal test within executable scope; no renderer build is claimed on the ancestry child.",
     "Initial build reused stale incant_text/render_data artifacts lacking current halo APIs. Scoped cleanup of incant_text/render_data/ui recovered unchanged source. Original failure, hashes and logs retained.",
     "No shader or default/resource-budget changes. Integer shader transport, per-pixel ownership and temporal quality repair remain open."
-  ]
+  ],
+  "final_review": {
+    "path": "docs/spikes/evidence/temporal-owner-main225/final-review.json",
+    "sha256": "3727a64199d4d6b3972694cd875bd075a359604d668357b36b7c411bbdee9882"
+  }
 }
