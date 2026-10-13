@@ -1,5 +1,13 @@
 # Implementation status
 
+The private retained mobile Rust host now passes seven focused lifecycle controls
+and all 28 player library tests, three strict Clippy configurations, the runtime
+dependency/manifest guards and iOS library compilation. It reuses one cooked native
+game/render-input/mixer owner across callbacks and retires stale deliveries. This
+is CPU and compilation evidence; real mobile surface, input/IME and device-audio
+adapters remain unfinished. Producer final independent review and integration
+are pending. [Scope](docs/spikes/mobile-retained-host.md).
+
 Compound and tile opaque checkpoints have accepted source reviews and passing CPU qualification: 538 snapshot/physics/ECS cases per numerical mode, followed by 238 script/game cases per mode on the actual-main250 composition. Native Parry and Rapier suites pass separately. Eighteen current checks pass; independent final union review is accepted. Current-main251 composition preserves 3,155 inputs except the reviewed authoring test, matches three graphs and passes eight read-only checks; independent final composition review is accepted and publication awaits the required fast check. Public persisted physics stays closed. [Scope](docs/spikes/native-compound-checkpoints.md).
 
 Private Rapier regression qualification after lower compound integration and work precharge passed all 159 planar and 177 spatial unit tests in each of deterministic and SIMD8 modes, with no filtered or ignored cases. Both strict native-library Clippy checks passed; four immediately copied executables and the full source/graph/fixture ledger are retained. Independent final packet review is accepted. This CPU evidence does not qualify the outer game union or persisted physics saves. [Evidence](docs/spikes/rapier-compound-regressions.md).
