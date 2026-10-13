@@ -1,0 +1,30 @@
+{
+  "dependencies": [
+    {
+      "path": "/opt/homebrew/Cellar/spirv-tools/1.4.363.0/bin/spirv-val",
+      "sha256": "eddf6e3fb5db58e1d52bdf956967fb4532325a800b644cf90a597ad924886e8e"
+    },
+    {
+      "path": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga-29.0.4/src/front/atomic_upgrade.rs",
+      "sha256": "86ce9f9628d92a1a09802cb534bb4310236b83f2799c921b81c687f009c589be"
+    },
+    {
+      "path": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga-29.0.4/src/back/spv/writer.rs",
+      "sha256": "140521f6707e65ec9d43eaf3c621c61dffc5096e4941b58e0fdb316f9cb56405"
+    },
+    {
+      "path": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wgpu-hal-29.0.4/src/metal/device.rs",
+      "sha256": "c34d2bd9fe2a547f5cb28106c07ed22c99aa5891c0ad6a75f08ec6d70a1f6864"
+    },
+    {
+      "path": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wgpu-hal-29.0.4/src/dx12/device.rs",
+      "sha256": "77db671eb1302646d1ff9f257413858bc23038578ecc36e0fe3c3a26b0e696dc"
+    }
+  ],
+  "diagnostic_limits": [
+    "001 first Metal command used -x after input and did not compile; ignored as compile evidence. Corrected command produced grid-valid.air.",
+    "002 test failed because first differing SPIR-V word is after an equal OpDecorate prefix, fixed test to inspect instruction boundaries.",
+    "003 HLSL test incorrectly expected GetDimensions; corrected to actual robust loads/stores."
+  ],
+  "primary_reference": "https://docs.vulkan.org/spec/latest/appendices/spirvenv.html#VUID-StandaloneSpirv-None-10684"
+}

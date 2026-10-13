@@ -34,6 +34,7 @@ pub fn begin(phase: Phase, source: Option<usize>) -> Option<Span> {
         Phase::AudioRender => span_location!("game.audio_render"),
         Phase::HostSync => span_location!("game.host_sync"),
         Phase::Restart => span_location!("player.restart"),
+        Phase::Presentation => span_location!("player.presentation"),
     };
     let span = client.span(location, 0);
     if let Some(source) = source {

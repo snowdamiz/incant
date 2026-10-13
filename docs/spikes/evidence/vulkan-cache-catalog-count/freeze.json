@@ -1,0 +1,10 @@
+{
+  "crates/incant_render/tests/persistent_cache.rs": "0db107912bcc9c76782f03d456ad3abc84606b138a6d78b3cc234a505547036f",
+  "crates/incant_render/src/ui/mod.rs": "ab526e29a987070f2d1318d301693bf4cc1ce2ec0d199b92d1d0cb089842de53",
+  "crates/incant_render/src/materials.rs": "8e69ac99131647c51dc6a3e4ec6df7e40b132d2c9197c5943571ebcbcc152cec",
+  "crates/incant_render/src/shadows/mod.rs": "73a154126addadc6129e05daef262956cb78281a1388b780ca57c0725980229a",
+  "crates/incant_render/src/output.rs": "ce5332bd5b1f4b5c251d55842cb21353c16aa8fb70d1e21605268de62d906f19",
+  "crates/incant_render/src/lib.rs": "5bc26f6dd4c07094c5db741c97d6232a0cafeb01c4e2d1a2461e248b1fc75d27",
+  "Cargo.lock": "176512af279587109f7ae30b51433a79cec6c771bb5adb8c226af1717c02dedf",
+  "crates/incant_render/Cargo.toml": "385058531b411a0af483b7c7226d09160e748bb79f939957a5a4582ecf6fc9b2"
+}

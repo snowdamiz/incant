@@ -1,0 +1,90 @@
+{
+ "packet": "0067-dynamic-resolution",
+ "holder": "claude (Opus 5.5, Max thinking) for handoff 0067",
+ "target_dir": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+ "assigned_by": "Astra via review-ready.json (0066 released it)",
+ "grant_sha256": "c7e00ed284956f48589b841084905a0a7ae9ea6964eb8945a7cd92757cf02df3",
+ "grant": {
+  "packet": "0067-dynamic-resolution",
+  "granted_at": "2026-10-13T03:06:45.868287+00:00",
+  "owner": "Claude Opus5.5 Max via ACP",
+  "source_commit": "bdd1b205aa34f3494da2fa49241b99efc502ec3e",
+  "target": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+  "prior_packet": "0066-cooked-cluster-shaders",
+  "prior_release_path": "/Users/andreyyurlov/.codex/incant-evidence/0066/gpu-released.json",
+  "prior_release_sha256": "b5d56b5aba998138350477a33a2b6e960ce0a5b9e376c52f32c8cc5f844e1545",
+  "prior_lease_path": "/Users/andreyyurlov/.codex/incant-evidence/0066/target-lease.json",
+  "prior_lease_sha256": "c5953f6d3106b135c7efe5353626b0fb1632f63918328753f7780dca21f41a95",
+  "prior_ledger_path": "/Users/andreyyurlov/.codex/incant-evidence/0066/gpu-ledger.jsonl",
+  "prior_ledger_sha256": "5946821dea263c8a2915f18eb88050b3cdaf8eebaa6aa56cf779d9c8c5ab5646",
+  "owned_prior_processes": [],
+  "restrictions": "Exclusive serial offscreen GPU; 48 new numerical submissions and24 appearance renders,includingcontrols, max960x540; existingregressionsseparate. Boundedchildren. No nativewindow/desktopcapture/audio/accounts. Allowlisted nonsecret receipt environment only."
+ },
+ "prior_receipts": {
+  "release": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0066/gpu-released.json",
+   "sha256": "b5d56b5aba998138350477a33a2b6e960ce0a5b9e376c52f32c8cc5f844e1545",
+   "expected": "b5d56b5aba998138350477a33a2b6e960ce0a5b9e376c52f32c8cc5f844e1545"
+  },
+  "lease": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0066/target-lease.json",
+   "sha256": "c5953f6d3106b135c7efe5353626b0fb1632f63918328753f7780dca21f41a95",
+   "expected": "c5953f6d3106b135c7efe5353626b0fb1632f63918328753f7780dca21f41a95"
+  },
+  "ledger": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0066/gpu-ledger.jsonl",
+   "sha256": "5946821dea263c8a2915f18eb88050b3cdaf8eebaa6aa56cf779d9c8c5ab5646",
+   "expected": "5946821dea263c8a2915f18eb88050b3cdaf8eebaa6aa56cf779d9c8c5ab5646"
+  },
+  "release_body": {
+   "packet": "0066-cooked-cluster-shaders",
+   "released_at": "2026-10-13T02:52:50.414379+00:00",
+   "children": 23,
+   "refusals": 0,
+   "frames_written": 13,
+   "frames_reserved": 13,
+   "first_start": "2026-10-13T02:47:03.164712+00:00",
+   "last_end": "2026-10-13T02:52:36.279935+00:00",
+   "ledger_sha256": "5946821dea263c8a2915f18eb88050b3cdaf8eebaa6aa56cf779d9c8c5ab5646",
+   "grant_sha256_at_release": "43eaf4ea83b44fd2dbeb296dd8446339b1318ff376fe7393888d8456e3a94d0e",
+   "owned_processes": [],
+   "ledger_pids_alive": [],
+   "note": "Release by 0066 for Astra; review-ready.json left untouched (only Astra writes it)."
+  },
+  "lease_release": {
+   "packet": "0066-cooked-cluster-shaders",
+   "target_dir": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+   "released_at": "2026-10-13T02:53:20.679032+00:00",
+   "processes_on_target_at_release": [],
+   "release_note": "No 0066 cargo/rustc process remains on the target. Contents left in place as warm cache; nothing deleted. Frozen binaries live under /Users/andreyyurlov/.codex/incant-evidence/0066/bin"
+  },
+  "prior_ledger_pids": 23,
+  "prior_ledger_pids_alive_now": []
+ },
+ "source": {
+  "head": "bdd1b205aa34f3494da2fa49241b99efc502ec3e",
+  "manifest_inputs": 14,
+  "manifest_inputs_digest": "0eca93ffbbc61a3958d512f9b25339b18c3bb734e6d13a7750b0f5dfebef6d8b"
+ },
+ "brief_sha256": "2669005d1aed5805f6c646c82bb4189a5fd7798b18bfd78777b9deff3181223c",
+ "worktree": "/Users/andreyyurlov/.codex/worktrees/persistent-pipeline-cache/incant/.worktrees/0067-dynamic-resolution",
+ "acquired_at": "2026-10-13T03:53:58.742772+00:00",
+ "processes_on_target_at_acquire": [],
+ "rules": [
+  "./tools/cargo only",
+  "--locked",
+  "--offline",
+  "--profile ci",
+  "at most -j2",
+  "explicit minimal child environment; receipts record only allowlisted settings",
+  "serial offscreen GPU children under an exclusive lock",
+  "no native window, desktop/browser capture, audio device or accounts",
+  "<= 48 new numerical frame attempts and <= 24 appearance renders, each <= 960x540",
+  "GPU suites <= 300 s, cases/captures <= 120 s, listings <= 60 s",
+  "binaries/evidence only under /Users/andreyyurlov/.codex/incant-evidence/0067",
+  "no other agent's target or packet files"
+ ],
+ "released_at": "2026-10-13T04:13:42.690900+00:00",
+ "processes_on_target_at_release": [],
+ "release_note": "No 0067 cargo/rustc process remains on the target. Contents left in place as warm cache; nothing deleted. Frozen binaries live under /Users/andreyyurlov/.codex/incant-evidence/0067/bin"
+}

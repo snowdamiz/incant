@@ -1,0 +1,300 @@
+{
+  "at": "2026-10-13T01:29:24.708004+00:00",
+  "reviewer": "astra root",
+  "accepted": true,
+  "scope": "CPU/compiler/source only; Claude GPU/rendered acceptance pending",
+  "freeze_sha256": "218e121daadf71af968d5604b2e364a369feed79ba42dfc0093bd72484990839",
+  "inputs": 19,
+  "checks": [
+    {
+      "name": "cook",
+      "argv": [
+        "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/tools/cargo",
+        "test",
+        "--locked",
+        "-p",
+        "incant_shader_cook"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 2.7504000663757324,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-005/cook.log",
+      "sha256": "5a48369e2869a0e66a6b0157f3d71693c3c1fc77464a160dd362faa1eed61992"
+    },
+    {
+      "name": "cluster-alone",
+      "argv": [
+        "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/tools/cargo",
+        "test",
+        "--locked",
+        "-p",
+        "incant_render",
+        "--features",
+        "cooked-clusters"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 5.530588865280151,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-005/cluster-alone.log",
+      "sha256": "6a282dc730342326975e0ae78b60317a01b36157d4c931de5c9c9836933f73f7"
+    },
+    {
+      "name": "all-cooked",
+      "argv": [
+        "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/tools/cargo",
+        "test",
+        "--locked",
+        "-p",
+        "incant_render",
+        "--features",
+        "cooked-geometry,cooked-sprites,cooked-ui,cooked-text,cooked-materials,cooked-clusters"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 4.452500104904175,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-005/all-cooked.log",
+      "sha256": "02a0822f5a81665c4ec9449733df2d7960c9b57b8762f8c6c12df5770d242788"
+    },
+    {
+      "name": "clippy",
+      "argv": [
+        "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/tools/cargo",
+        "clippy",
+        "--locked",
+        "-p",
+        "incant_shader_cook",
+        "-p",
+        "incant_render",
+        "--all-targets",
+        "--features",
+        "cooked-geometry,cooked-sprites,cooked-ui,cooked-text,cooked-materials,cooked-clusters",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 2.4879260063171387,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-005/clippy.log",
+      "sha256": "190b18c81794925e87e236f93711208270108768403064e27769045918abebb3"
+    },
+    {
+      "name": "default",
+      "argv": [
+        "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/tools/cargo",
+        "test",
+        "--locked",
+        "-p",
+        "incant_render",
+        "--lib"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 5.441481828689575,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-005/default.log",
+      "sha256": "9afad210a42e83c6ef673594ca78efdc458a605b5f0dfbc04d0dbe96e9106d98"
+    },
+    {
+      "name": "web",
+      "argv": [
+        "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/tools/cargo",
+        "check",
+        "--locked",
+        "-p",
+        "incant_render",
+        "--lib",
+        "--target",
+        "wasm32-unknown-unknown",
+        "--features",
+        "cooked-geometry,cooked-sprites,cooked-ui,cooked-text,cooked-materials,cooked-clusters"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 33.97276329994202,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-005/web.log",
+      "sha256": "91becea0d753205691019e537e7910fbc9ce8dee0e514937f351f13ff51c0c20"
+    },
+    {
+      "name": "web-alone",
+      "argv": [
+        "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/tools/cargo",
+        "check",
+        "--locked",
+        "-p",
+        "incant_render",
+        "--lib",
+        "--target",
+        "wasm32-unknown-unknown",
+        "--features",
+        "cooked-clusters"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 0.97928786277771,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-005/web-alone.log",
+      "sha256": "228b734e816ab8fc9262b2892cb312e4e5f6007c4a13e587b1b3d0a872f78a4b"
+    },
+    {
+      "name": "graph",
+      "argv": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_render",
+        "--features",
+        "incant_render/cooked-geometry,incant_render/cooked-sprites,incant_render/cooked-ui,incant_render/cooked-text,incant_render/cooked-materials,incant_render/cooked-clusters"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 0.49308276176452637,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-005/graph.log",
+      "sha256": "df9e61c9c6f432f69eff5210415b87f043a85a50a8a43b09e377365f746a32d3"
+    },
+    {
+      "name": "fmt",
+      "argv": [
+        "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 1.3256821632385254,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-005/fmt.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "conventions",
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 0.03357696533203125,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-005/conventions.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "diff",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 0.017880916595458984,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-005/diff.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "offline": {
+    "commands": [
+      {
+        "argv": [
+          "/opt/homebrew/bin/spirv-val",
+          "--target-env",
+          "vulkan1.0",
+          "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-005/artifacts/Vulkan-Compute.shader"
+        ],
+        "exit": 0,
+        "output": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-005/offline-0.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "argv": [
+          "/opt/homebrew/bin/spirv-val",
+          "--target-env",
+          "spv1.0",
+          "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-005/artifacts/Vulkan-Compute.shader"
+        ],
+        "exit": 0,
+        "output": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-005/offline-1.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "argv": [
+          "xcrun",
+          "--sdk",
+          "macosx",
+          "metal",
+          "-std=macos-metal2.4",
+          "-x",
+          "metal",
+          "-c",
+          "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-005/artifacts/Metal-Compute.shader",
+          "-o",
+          "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-005/grid.air"
+        ],
+        "exit": 0,
+        "output": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-005/offline-2.log",
+        "sha256": "3abb3f8759b46d75992cb270852cb777f05d65d5f39feeb2ba4324e7b37a8d4b"
+      },
+      {
+        "argv": [
+          "xcrun",
+          "--sdk",
+          "macosx",
+          "metallib",
+          "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-005/grid.air",
+          "-o",
+          "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-005/grid.metallib"
+        ],
+        "exit": 0,
+        "output": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-005/offline-3.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "artifact_bytes_identical_to_source004": true,
+    "artifacts": [
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-005/artifacts/Metal-Compute.shader",
+        "bytes": 7848,
+        "sha256": "1d501c9dabac36b7530eec4103e488da1a18e89649ffd4f05a74771e1be3b12d"
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-005/artifacts/Vulkan-Compute.shader",
+        "bytes": 10412,
+        "sha256": "9cd2cf8769aad9600726f01a4b742f9d7e392e913210756bfcd753d5d4e116ad"
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-005/artifacts/Dx12-Compute.shader",
+        "bytes": 6998,
+        "sha256": "e7e4401e67edf5064c54cb843767dc2cdff8452c38ecc87dabc57fe6665598b3"
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-005/grid.air",
+        "bytes": 9168,
+        "sha256": "f58a1e48b0191a55b15e566f56956e0acbb6aa2f6949ca09fddce3680adf8946"
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-005/grid.metallib",
+        "bytes": 8619,
+        "sha256": "cb95215c57003a0082b0fbedc88bbebbfb230a3153c6c6064e7324a90bbbce03"
+      }
+    ]
+  },
+  "independent_vulkan_validation": {
+    "argv": [
+      "/opt/homebrew/bin/spirv-val",
+      "--target-env",
+      "vulkan1.0",
+      "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-005/artifacts/Vulkan-Compute.shader"
+    ],
+    "exit": 0,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "findings": [],
+  "reviewed": [
+    "Exact resource layouts and shader body preserved; compute-only length binding removed before fragment bindings",
+    "Fixed64x1x1 and516B workgroup limits validated",
+    "MSL lowering strictly matches complete generated header and moves only declarations",
+    "SPIR-V removes exactlyone ArrayStride4 decoration from exclusive fixed128 Workgroup array, retains allremainingwords",
+    "Naga aggregate atomic reader failure stays precise and independently validated Vulkan artifact does not depend on reader IR"
+  ],
+  "remaining": [
+    "ActualGPU/appearance review",
+    "Vulkan and DX12 runtime backend execution",
+    "Default enablement and pipeline/performance gates"
+  ],
+  "retained_evidence": {
+    "manifest_sha256": "6141d8f4200ea6ebc1c8bf453c69ebb7308b87975ca0d573bbb9bd5a4ce02dda",
+    "raw_retained_pairs": 93,
+    "independent_hash_audit": true,
+    "assertion_only_collector_exit": 0,
+    "one_stride_row_only": true
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "at": "2026-10-13T06:21:28.312010+00:00",
+  "decision": "accept scoped current-main integration for fast-check PR and merge",
+  "head": "8d296f08f0d08f5a510b1a256086ac6c11a3e248",
+  "manifest_sha256": "758d88863e74e2886c519c8730aa574e60edf8c7574d57031c2dd96345cc40e6",
+  "independent_checks": [
+    "Read collector and actual manifest; reran verify-only successfully",
+    "Independently decoded retained archive and rehashed every payload and record size",
+    "Five production files match previously independently accepted producer94a97; sole source dependency difference is preexisting main Cargo.lock",
+    "Ten current integration checks actual exit0; 20/69/1/4 counts overlap",
+    "Tested composition and actual main204 ancestry trees equal"
+  ],
+  "archive_records": 24,
+  "archive_payloads": 16,
+  "limits": [
+    "No native window launch or Tracy client capture",
+    "No GPU, phone, performance or phase approval"
+  ]
+}

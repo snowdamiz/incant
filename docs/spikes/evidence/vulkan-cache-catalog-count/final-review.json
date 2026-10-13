@@ -1,0 +1,18 @@
+{
+  "at": "2026-10-13T05:33:53.520451+00:00",
+  "decision": "accepted narrow test correction for publication",
+  "head": "a5a92ccff3a5b2d5f9a41f0fa6135f8920555171",
+  "manifest_sha256": "fd6595b2fa480faa00a69bb88d103e91d90fec66921bf317993ef1cf7f9e7da8",
+  "collector_read_and_verify_only_exit": 0,
+  "independent_rehash": {
+    "archived_records": 19,
+    "unique_payloads": 12,
+    "checks": 5
+  },
+  "source_review_sha256": "ccf6495fea05e957d641f746c6de98af17eccb8741a35313be3d8148558e2410",
+  "limits": [
+    "Test-only correction. All persistence lifecycle assertions, exact counts, backend assertion, checksum corruption and resource stability checks remain.",
+    "Full harness compiled with cooked features and Clippy on macOS. No Vulkan/Metal/window execution by publisher.",
+    "Original Linux failure remains immutable; four fresh Vulkan subprocess stages must pass in a successor checkpoint."
+  ]
+}

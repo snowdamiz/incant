@@ -1,0 +1,30 @@
+{
+  "at": "2026-10-13T05:43:51.870494+00:00",
+  "decision": "accepted",
+  "scope": "Two actual frozen retained-motion numeric tests; source81471793, no appearance/performance/device benchmark",
+  "binary_sha256": "73b32363318cfcd028cccef5513994488a6d4bbbf277bee181523b7b68bc05f5",
+  "grant_sha256": "2aa3c60bfd8579ada03e99527cd1c08af0b8ebe345b83117990fd0166874dc33",
+  "ledger_sha256": "99890e34638c818a8347179359dd1da783539221f35b56949a88e89fc01ff5f9",
+  "release_sha256": "7c036f733bb617de4b82d91e487eda92c14d50c9397bca45000fa7137c26b330",
+  "cases": [
+    {
+      "name": "accepted_pose_buffers_and_history_swap_only_after_submission",
+      "exit": 0,
+      "seconds": 0.560972707993642
+    },
+    {
+      "name": "skinned_and_ik_history_uses_exact_live_deformed_buffer_and_rejects_rebound_asset",
+      "exit": 0,
+      "seconds": 0.3894014170000446
+    }
+  ],
+  "children": 2,
+  "reaped": true,
+  "frames_upper_bound": 9,
+  "initial_preflight": "Correctly refused wrong exact module filter before execution; superseded grant and result preserved",
+  "limits": [
+    "Existing tests do not print adapter identity or scalar values; assertions are observed, raw values are not retained.",
+    "No screenshots, image decode or rendered appearance review.",
+    "Temporal accumulation and performance gates remain pending."
+  ]
+}

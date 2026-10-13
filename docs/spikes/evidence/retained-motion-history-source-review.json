@@ -1,0 +1,204 @@
+{
+  "reviewer": "astra independent integration reviewer",
+  "at": "2026-10-13T05:08:43.906336+00:00",
+  "status": "accepted_source_scope",
+  "findings": [],
+  "source_freeze": "/Users/andreyyurlov/.codex/incant-evidence/motion-history-source-001/freeze.json",
+  "source_freeze_sha256": "3470c12458cfbef61bc2b339a2d00efde7086d5babddff77d37408f2c825b8db",
+  "base": "9b1df9db27ead20253d9f7b24c6cdc41d459f086",
+  "inputs": [
+    {
+      "path": "Cargo.lock",
+      "sha256": "ef1e27905fe6dec295bd7bb1b821abbcc6742392c90b6cc1c225cbc5de6d3e4e",
+      "section": "sources"
+    },
+    {
+      "path": "crates/incant_render/Cargo.toml",
+      "sha256": "7d3628b6a59dba4f3613b0aa8af6bbe274c692aa721bac4f7c77cc37bf202c7b",
+      "section": "sources"
+    },
+    {
+      "path": "crates/incant_render/src/animation_tests.rs",
+      "sha256": "adb1f784a25f1bd9d120db03f5f83b56cc2cc58f5cdb2bbc9c0d7bad71c1c94e",
+      "section": "sources"
+    },
+    {
+      "path": "crates/incant_render/src/graph.rs",
+      "sha256": "03caea350f4fb1f114d692ea8d24ebb2db4ee4a406d409524162498fcaef7ed9",
+      "section": "sources"
+    },
+    {
+      "path": "crates/incant_render/src/lib.rs",
+      "sha256": "2cb09bacb2692066cf71d1f3fa0c21763c153d4163bdc51c40e4210e8b2609ee",
+      "section": "sources"
+    },
+    {
+      "path": "crates/incant_render/src/models.rs",
+      "sha256": "1160c54dd0f4443c57dd7f251c871d3270d761a349b67593e10f82fd9237ec9c",
+      "section": "sources"
+    },
+    {
+      "path": "crates/incant_render/src/models/animation.rs",
+      "sha256": "4dc2282e07414fe07010d3246b4c3a2ed2ef4a7930bd4ef307c67bd21c191b7d",
+      "section": "sources"
+    },
+    {
+      "path": "crates/incant_render/src/motion/draw.rs",
+      "sha256": "24efb7ed784d37d4384745847c2abfc068008fc5c6e4b3e5298a9f47020035e2",
+      "section": "sources"
+    },
+    {
+      "path": "crates/incant_render/src/motion/mod.rs",
+      "sha256": "e5be9680a2a122e91bc45d86bcbc18f7622bf5efcaf9928f51463f42973198f9",
+      "section": "sources"
+    },
+    {
+      "path": "crates/incant_render/src/motion/owner.rs",
+      "sha256": "255844bb0da3697f59ad7194202c4654e9e03efe84ca48265a323f87a6fd2bf0",
+      "section": "sources"
+    },
+    {
+      "path": "crates/incant_render/src/motion/plan.rs",
+      "sha256": "8af0181ea6defab33bb4b5bfb1e09c83308e77b88552deee7eb0fe9fd36c9dd3",
+      "section": "sources"
+    },
+    {
+      "path": "crates/incant_render/src/motion/retained.rs",
+      "sha256": "5f27eb0f4147db5481b1adebdf8f889ed1619589fdb0e7436f7b3e16dbfd425c",
+      "section": "sources"
+    },
+    {
+      "path": "crates/incant_render/src/motion/shader.wgsl",
+      "sha256": "7f8aed4a2cb30401eaae3d3d0e54d72d37cb4e3875b555f33434d5e8123663b9",
+      "section": "sources"
+    },
+    {
+      "path": "crates/incant_render/src/motion/system.rs",
+      "sha256": "226389e54591715071e7694f10e55459c4e83f9659af503968cab560c79d3e2e",
+      "section": "sources"
+    },
+    {
+      "path": "crates/incant_render/src/motion/targets.rs",
+      "sha256": "52ffd46e3cf55682d4f94a793edde7c332e2706e1668c6ebfec50cc0108011b5",
+      "section": "sources"
+    },
+    {
+      "path": "crates/incant_render/src/motion/tests.rs",
+      "sha256": "64ac227b7ee3a4bf3e53b8e24b8e9665cb9f7474c740bc04c77520f83f225914",
+      "section": "sources"
+    },
+    {
+      "path": "crates/incant_render/src/motion_device_tests.rs",
+      "sha256": "0961212382a58f7a4c4cdadea0a2c7faa6fd6b47ed8cd527e23ebeff905dbaa8",
+      "section": "sources"
+    },
+    {
+      "path": "crates/incant_render/src/retained.rs",
+      "sha256": "ebb10364da2411fb3eded96d71b808d29501d2ee1723d565b3cc7ffeb7aee622",
+      "section": "sources"
+    },
+    {
+      "path": "crates/incant_render_gpu_host/src/lib.rs",
+      "sha256": "14c69faf3eaacd9ad5280f3d0e0079a7fd043717e8bb1b921be3505da7e7f4bb",
+      "section": "sources"
+    },
+    {
+      "path": "crates/incant_render_gpu_host/src/motion.rs",
+      "sha256": "161c9190df4dab03224c1b8989d4ed721892d4e6c15170135ac99136feaef687",
+      "section": "sources"
+    },
+    {
+      "path": "crates/incant_render_gpu_host/src/resolution.rs",
+      "sha256": "7eef9c532cad6c836e93ea0d721a3439d77d50340e337b74eb511bcbaf87bb70",
+      "section": "sources"
+    },
+    {
+      "path": "docs/spikes/retained-motion-history.md",
+      "sha256": "665c5a02af98f32c5f168695a47a645e9d1b30fe9b12f78f8f51728903beb012",
+      "section": "sources"
+    },
+    {
+      "path": "crates/incant_render/src/model_material.wgsl",
+      "sha256": "45018e9c6029af03553aa933438277589835edac1fb75fddcba2833568c51c2b",
+      "section": "unchanged_baselines"
+    },
+    {
+      "path": "crates/incant_render/src/model_draw.rs",
+      "sha256": "bae8055bac5246e608357bf76d3c4a4ccc5d626ca6ac233063c100ea9242be86",
+      "section": "unchanged_baselines"
+    },
+    {
+      "path": "crates/incant_render/src/frame.rs",
+      "sha256": "1db2c09f12ea6e60ca3d0e8aaba17314e6d0d9e4f76e11cc3e0a7bd524323e7e",
+      "section": "unchanged_baselines"
+    },
+    {
+      "path": "crates/incant_render/src/camera.rs",
+      "sha256": "9c912d4791322ccdb76608014f34358e2bb8aad00337317f5f3d5b50fdd52729",
+      "section": "unchanged_baselines"
+    },
+    {
+      "path": "crates/incant_render/src/material_pipeline.rs",
+      "sha256": "edc49c5e19f24230bb20aef6518de545d45b42d58855cce21d5a8a288ce11f12",
+      "section": "unchanged_baselines"
+    },
+    {
+      "path": "crates/incant_render/src/output.rs",
+      "sha256": "ce5332bd5b1f4b5c251d55842cb21353c16aa8fb70d1e21605268de62d906f19",
+      "section": "unchanged_baselines"
+    },
+    {
+      "path": "crates/incant_render/src/output.wgsl",
+      "sha256": "6ceefe2e706624f4fff93fab83fffc8e2938af514e3b2ce4e92a1389f11f6a8a",
+      "section": "unchanged_baselines"
+    },
+    {
+      "path": "crates/incant_render/src/resolution/plan.rs",
+      "sha256": "88b15839889c79bcb52a28b7cec6330d503df5e7c9a7ca7a03b3312ee71c0f6f",
+      "section": "unchanged_baselines"
+    },
+    {
+      "path": "crates/incant_render/src/resolution/owner.rs",
+      "sha256": "a7c7d5d52554626aaa91ce6205f19811ed83b2223af2e48d13311930fdc2bb82",
+      "section": "unchanged_baselines"
+    },
+    {
+      "path": "crates/incant_render/src/resolution/controller.rs",
+      "sha256": "2dfb73c3b74de5026ebff6a9736dabe37f6219f1d0e9793b139e1a43e647d5e9",
+      "section": "unchanged_baselines"
+    },
+    {
+      "path": "crates/incant_render/src/scene.rs",
+      "sha256": "bb7c13689a7145763feac1dd3623874a1b47557848421b9d33d312b11e126fff",
+      "section": "unchanged_baselines"
+    },
+    {
+      "path": "crates/incant_render_gpu_host/src/resolution_mailbox.rs",
+      "sha256": "8c70921bc14c1791c7ceeb7b93c53cfffccb4afa2e3a8427ca6fe4036f1227e1",
+      "section": "unchanged_baselines"
+    },
+    {
+      "path": "crates/incant_assets/tests/skeletal/fixture.rs",
+      "sha256": "2197fec00fe41cffd023b9865702adc42dfd1d38cf93b14c5f6d37daee05995c",
+      "section": "unchanged_baselines"
+    }
+  ],
+  "reviewed_contracts": [
+    "Opaque per-owner frame identity, monotonic checked sequence/epoch, explicit camera cuts and reset on exact projection/viewport/extent changes; pixel-mode retained binding changes require a replacement owner.",
+    "Retained stage and encode happen before queue writes; live/staging and history advance immediately after queue.submit only. Retryable admission errors retain accepted scene/history. Device loss remains terminal.",
+    "Current deformed staging vertices are paired with accepted live previous vertices and previous entity/model-node transforms. Static rows use stable placement identity across mirror repartition; topology/asset changes require replacement.",
+    "Motion shader uses current raster position relative to the shared internal FramePlan viewport; interpolated previous homogeneous position is divided in fragment, matching top-left normalized geometric displacement. MASK sampling/cutoff and opaque depth/culling match canonical material behavior.",
+    "Checked logical target/row/transition budgets precede allocations; targets and instance-row caps are explicit logical payload ceilings, not GPU completion/RSS guarantees.",
+    "Native cooked shader combinations refuse this uncompiled motion variant; default-off path and browser ownership remain explicit. Host reset tokens are monotonic and replacement ownership is fresh.",
+    "Dev-only pinned Naga edge and shared test fixture relocation do not add shipping runtime dependencies."
+  ],
+  "validation_performed": [
+    "Read all22 frozen source/doc changes and relevant13 unchanged baseline inputs; independently rehashed all35 files and verified baseline Git bytes.",
+    "Read CPU controls and two ignored real-GPU regressions; no duplicate build or test execution during owner validation."
+  ],
+  "limits": [
+    "Source review only; owner CPU execution and later Claude numerical GPU/appearance evidence still required.",
+    "No temporal accumulation, jitter, reconstruction, disocclusion, final color history, transparent/sprite/text/UI velocity, cooked motion, device, performance or phase claim.",
+    "No image viewing, GPU execution, source edits or target use by this reviewer."
+  ]
+}

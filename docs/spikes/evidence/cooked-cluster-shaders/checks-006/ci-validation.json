@@ -1,0 +1,43 @@
+{
+  "profile": "ci",
+  "commands": [
+    {
+      "argv": [
+        "/opt/homebrew/bin/spirv-val",
+        "--target-env",
+        "vulkan1.0",
+        "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-006/artifacts/Vulkan-Compute.shader"
+      ],
+      "exit": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-006/ci-vulkan.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-006/artifacts/Metal-Compute.shader",
+      "sha256": "1d501c9dabac36b7530eec4103e488da1a18e89649ffd4f05a74771e1be3b12d",
+      "bytes": 7848
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-006/artifacts/Vulkan-Compute.shader",
+      "sha256": "b5b5e4eba86ec224ca04ecf97adb9ba2cfc62f3fe61ffaca5f5643dbe4ce0120",
+      "bytes": 9760
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-006/artifacts/Dx12-Compute.shader",
+      "sha256": "e7e4401e67edf5064c54cb843767dc2cdff8452c38ecc87dabc57fe6665598b3",
+      "bytes": 6998
+    }
+  ],
+  "same_as_dev": {
+    "Metal": true,
+    "Vulkan": false,
+    "Dx12": true
+  },
+  "source_freeze": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-source-006/freeze.json",
+    "sha256": "05ac44c7514b6be0267760973078ec13f486f39ec0a37f627b7709b11d141db9",
+    "bytes": 6065
+  }
+}

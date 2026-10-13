@@ -1,0 +1,317 @@
+{
+  "at": "2026-10-13T05:16:22.590703+00:00",
+  "reviewer": "astra independent integration owner",
+  "status": "accepted_source_scope",
+  "findings": [],
+  "producer": "d369a7d40651ecdc042396074e8c59e5d5b2895e",
+  "manifest_sha256": "bd0fb9190bc509dea76b497fc283e206bf69099582e1e1e103dfd7d20ea152ee",
+  "source_rows": [
+    {
+      "path": "Cargo.lock",
+      "sha256": "b55f306395cb71605bc871bf10379f814573ac54bc49255d78f39c32bab4ef5f",
+      "bytes": 252215,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-contact-points-001/source-002/Cargo.lock",
+      "current_sha256": "176512af279587109f7ae30b51433a79cec6c771bb5adb8c226af1717c02dedf"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/Cargo.toml",
+      "sha256": "1bb0188ed40150cceb53b372f54ad16f1c87a9a9226c9efe10ae38cf2023e92e",
+      "bytes": 541,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-contact-points-001/source-002/crates/incant_physics_snapshot/Cargo.toml",
+      "current_sha256": "1bb0188ed40150cceb53b372f54ad16f1c87a9a9226c9efe10ae38cf2023e92e"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/arena.rs",
+      "sha256": "1ede8f086decca2413009ae0b8036b39a26db054f724881e1e45bc0f48e6749e",
+      "bytes": 3513,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-contact-points-001/source-002/crates/incant_physics_snapshot/src/arena.rs",
+      "current_sha256": "1ede8f086decca2413009ae0b8036b39a26db054f724881e1e45bc0f48e6749e"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/arena_codec.rs",
+      "sha256": "7ba68f662fdd237dd7132bfa027508f6d17f4d078f1a21a997393865cd0f4473",
+      "bytes": 3897,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-contact-points-001/source-002/crates/incant_physics_snapshot/src/arena_codec.rs",
+      "current_sha256": "7ba68f662fdd237dd7132bfa027508f6d17f4d078f1a21a997393865cd0f4473"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/attachment.rs",
+      "sha256": "f488ca1ce32586d3ae8970c646a37281642eb1bf80932e1c80ed6bb57d2b0977",
+      "bytes": 6092,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-contact-points-001/source-002/crates/incant_physics_snapshot/src/attachment.rs",
+      "current_sha256": "f488ca1ce32586d3ae8970c646a37281642eb1bf80932e1c80ed6bb57d2b0977"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/attachment_codec.rs",
+      "sha256": "a361a534c02a54123982925dc471ba59bf968d8b2d2830e7ff79bc414d57ad12",
+      "bytes": 4618,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-contact-points-001/source-002/crates/incant_physics_snapshot/src/attachment_codec.rs",
+      "current_sha256": "a361a534c02a54123982925dc471ba59bf968d8b2d2830e7ff79bc414d57ad12"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/coarena.rs",
+      "sha256": "86f392b07915f51413dfd448b8c56927b2284c1a6413a43d79f35890b78d3435",
+      "bytes": 3489,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-contact-points-001/source-002/crates/incant_physics_snapshot/src/coarena.rs",
+      "current_sha256": "86f392b07915f51413dfd448b8c56927b2284c1a6413a43d79f35890b78d3435"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/coarena_codec.rs",
+      "sha256": "91336755b52a827ae7530f1f3a9ec402dd2aba94aa3288fc5dd57b5e7cb1ef4d",
+      "bytes": 1992,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-contact-points-001/source-002/crates/incant_physics_snapshot/src/coarena_codec.rs",
+      "current_sha256": "91336755b52a827ae7530f1f3a9ec402dd2aba94aa3288fc5dd57b5e7cb1ef4d"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/codec.rs",
+      "sha256": "d3ecff00012bad8364533c3fe15d39f8050a9c88c9bb80bfeb545d8f3a2f8aec",
+      "bytes": 5991,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-contact-points-001/source-002/crates/incant_physics_snapshot/src/codec.rs",
+      "current_sha256": "d3ecff00012bad8364533c3fe15d39f8050a9c88c9bb80bfeb545d8f3a2f8aec"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/contact_points.rs",
+      "sha256": "3133ec696750a65feae7fbd42600d6f6732c016e851e321888fa43fdcdfe6a36",
+      "bytes": 6229,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-contact-points-001/source-002/crates/incant_physics_snapshot/src/contact_points.rs",
+      "current_sha256": "3133ec696750a65feae7fbd42600d6f6732c016e851e321888fa43fdcdfe6a36"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/contact_points_codec.rs",
+      "sha256": "8baab422faf018f945e057befd088a680491206888071cf07e5b60b9645136d2",
+      "bytes": 4117,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-contact-points-001/source-002/crates/incant_physics_snapshot/src/contact_points_codec.rs",
+      "current_sha256": "8baab422faf018f945e057befd088a680491206888071cf07e5b60b9645136d2"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/geometry.rs",
+      "sha256": "a00e970f9cc27506f70e5b37418a9efd1446b36f1f5d21c2a78347044192c22a",
+      "bytes": 4037,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-contact-points-001/source-002/crates/incant_physics_snapshot/src/geometry.rs",
+      "current_sha256": "a00e970f9cc27506f70e5b37418a9efd1446b36f1f5d21c2a78347044192c22a"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/geometry_codec.rs",
+      "sha256": "f3408cccf5c1634a74294331e65181c98c25199a3f2a6ca7da39773d984f79c3",
+      "bytes": 3933,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-contact-points-001/source-002/crates/incant_physics_snapshot/src/geometry_codec.rs",
+      "current_sha256": "f3408cccf5c1634a74294331e65181c98c25199a3f2a6ca7da39773d984f79c3"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/graph.rs",
+      "sha256": "4100587acdd2a963df04420dfaca6ebeadb562422a4d8108f95b2cf07e67bf80",
+      "bytes": 4914,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-contact-points-001/source-002/crates/incant_physics_snapshot/src/graph.rs",
+      "current_sha256": "4100587acdd2a963df04420dfaca6ebeadb562422a4d8108f95b2cf07e67bf80"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/graph_codec.rs",
+      "sha256": "c428afce5e491a10b57e8806617549e7fa06109409f4ece7ec218ae9e02a8cf1",
+      "bytes": 3196,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-contact-points-001/source-002/crates/incant_physics_snapshot/src/graph_codec.rs",
+      "current_sha256": "c428afce5e491a10b57e8806617549e7fa06109409f4ece7ec218ae9e02a8cf1"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/lib.rs",
+      "sha256": "dcfd826ea48d9e61bc41c06ea92d1407b527fe3b8b3360bc98c8b580cb8d1b36",
+      "bytes": 1768,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-contact-points-001/source-002/crates/incant_physics_snapshot/src/lib.rs",
+      "current_sha256": "dcfd826ea48d9e61bc41c06ea92d1407b527fe3b8b3360bc98c8b580cb8d1b36"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/records.rs",
+      "sha256": "a9bc555d7db42927d8d0736e6a16468073dc57cced6f859bd40b919e4d7794df",
+      "bytes": 3267,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-contact-points-001/source-002/crates/incant_physics_snapshot/src/records.rs",
+      "current_sha256": "a9bc555d7db42927d8d0736e6a16468073dc57cced6f859bd40b919e4d7794df"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/validate.rs",
+      "sha256": "231827126cb8a3d0662da5b354bd5d2f8995cfd4eed6a97f55d1d28bf451c0e9",
+      "bytes": 5556,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-contact-points-001/source-002/crates/incant_physics_snapshot/src/validate.rs",
+      "current_sha256": "231827126cb8a3d0662da5b354bd5d2f8995cfd4eed6a97f55d1d28bf451c0e9"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/adversarial.rs",
+      "sha256": "27f416210bacb2bf31a1c0d63f90cd6cbda767da94adb442629690a852cb259a",
+      "bytes": 11111,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-contact-points-001/source-002/crates/incant_physics_snapshot/tests/adversarial.rs",
+      "current_sha256": "27f416210bacb2bf31a1c0d63f90cd6cbda767da94adb442629690a852cb259a"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/arenas.rs",
+      "sha256": "c560030509b222a8f0f68eca52ee9a138c2bf85294dc00a08472f06f27afdd80",
+      "bytes": 14209,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-contact-points-001/source-002/crates/incant_physics_snapshot/tests/arenas.rs",
+      "current_sha256": "c560030509b222a8f0f68eca52ee9a138c2bf85294dc00a08472f06f27afdd80"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/attachments.rs",
+      "sha256": "ae066af82cbdc844f8e1e693e8c7d69ce8428832d2ee6e475578f86f2cc88eeb",
+      "bytes": 13794,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-contact-points-001/source-002/crates/incant_physics_snapshot/tests/attachments.rs",
+      "current_sha256": "ae066af82cbdc844f8e1e693e8c7d69ce8428832d2ee6e475578f86f2cc88eeb"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/contact_points.rs",
+      "sha256": "79f3d110556d1dfe681b8a9c6e8600f20f975ad397bc4e82f2b6daa9f8e75fd2",
+      "bytes": 11858,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-contact-points-001/source-002/crates/incant_physics_snapshot/tests/contact_points.rs",
+      "current_sha256": "79f3d110556d1dfe681b8a9c6e8600f20f975ad397bc4e82f2b6daa9f8e75fd2"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/geometry.rs",
+      "sha256": "51964551ddebe1cc6b68fa9b0ae3f67bc968be946c783a5517cb0f8f6604bd12",
+      "bytes": 6582,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-contact-points-001/source-002/crates/incant_physics_snapshot/tests/geometry.rs",
+      "current_sha256": "51964551ddebe1cc6b68fa9b0ae3f67bc968be946c783a5517cb0f8f6604bd12"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/graphs.rs",
+      "sha256": "163150c7bb652b180991f56c8b3ff5f82d6539f369b95cf3205c5a43626ac2ad",
+      "bytes": 9274,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-contact-points-001/source-002/crates/incant_physics_snapshot/tests/graphs.rs",
+      "current_sha256": "163150c7bb652b180991f56c8b3ff5f82d6539f369b95cf3205c5a43626ac2ad"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/trusted_arenas.rs",
+      "sha256": "3c7945d0edea08357a1790cb90407bc75f3d0b5e249f6f91b33f0e48f24823d1",
+      "bytes": 8159,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-contact-points-001/source-002/crates/incant_physics_snapshot/tests/trusted_arenas.rs",
+      "current_sha256": "3c7945d0edea08357a1790cb90407bc75f3d0b5e249f6f91b33f0e48f24823d1"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/trusted_attachments.rs",
+      "sha256": "509af5944e887fb2c69ef898ed64103c6d4feb2801e289d07f8f5d3716999fd8",
+      "bytes": 12783,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-contact-points-001/source-002/crates/incant_physics_snapshot/tests/trusted_attachments.rs",
+      "current_sha256": "509af5944e887fb2c69ef898ed64103c6d4feb2801e289d07f8f5d3716999fd8"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/trusted_contact_points.rs",
+      "sha256": "6ab2a3b4cc0fbce35af440f4f2ddc779d8d0629a99b795fe5981dbdcf813a11b",
+      "bytes": 10821,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-contact-points-001/source-002/crates/incant_physics_snapshot/tests/trusted_contact_points.rs",
+      "current_sha256": "6ab2a3b4cc0fbce35af440f4f2ddc779d8d0629a99b795fe5981dbdcf813a11b"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/trusted_graphs.rs",
+      "sha256": "5a17e8f6d7ac53d8f68caf51dca0a931b77f4fd4191caadf0826c737e06db1f2",
+      "bytes": 5690,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-contact-points-001/source-002/crates/incant_physics_snapshot/tests/trusted_graphs.rs",
+      "current_sha256": "5a17e8f6d7ac53d8f68caf51dca0a931b77f4fd4191caadf0826c737e06db1f2"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/trusted_parry.rs",
+      "sha256": "4f6ad61eeb9c69f4d451f7c0a42b3a2b82bba02f29f8d9445af5b9c61be20a89",
+      "bytes": 4727,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-contact-points-001/source-002/crates/incant_physics_snapshot/tests/trusted_parry.rs",
+      "current_sha256": "4f6ad61eeb9c69f4d451f7c0a42b3a2b82bba02f29f8d9445af5b9c61be20a89"
+    }
+  ],
+  "pinned_references": [
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier2d-0.36.0/src/geometry/contact_pair.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-contact-points-001/pinned-sources/rapier2d/geometry/contact_pair.rs",
+      "sha256": "647dbd51dbacfa201b9854cd4bad68e8e78ee7cc74dae59df7bf20113f194528",
+      "bytes": 44365
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier2d-0.36.0/src/geometry/narrow_phase/pair_update.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-contact-points-001/pinned-sources/rapier2d/geometry/narrow_phase/pair_update.rs",
+      "sha256": "3610cb4653cd87cb25e3509a1c2c60063d02a2ca573392ec72fff1f6116b5016",
+      "bytes": 37038
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier2d-0.36.0/src/geometry/contact_clustering.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-contact-points-001/pinned-sources/rapier2d/geometry/contact_clustering.rs",
+      "sha256": "9bb123df4444adb390b826b7265d45a283d7dd9db25f92b245edeb63ac6d3442",
+      "bytes": 6725
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier2d-0.36.0/src/dynamics/integration_parameters.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-contact-points-001/pinned-sources/rapier2d/dynamics/integration_parameters.rs",
+      "sha256": "85780cd4252c2d6f7b780cb1e7a5646492f09a5b2e2827736d027a8b3fee4c2c",
+      "bytes": 20972
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier2d-0.36.0/src/pipeline/physics_world.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-contact-points-001/pinned-sources/rapier2d/pipeline/physics_world.rs",
+      "sha256": "6cf5f8ba115e355ebbf615b20e392a0a8220ed6af38dfc5a2ddfc878c5d431de",
+      "bytes": 39162
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/third_party/parry2d/src/query/contact_manifolds/contact_manifold.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-contact-points-001/pinned-sources/parry2d/query/contact_manifolds/contact_manifold.rs",
+      "sha256": "ea49175e6e511c93684e556c6aa08e00738afd108991aec298d73e2500e82c0a",
+      "bytes": 33698
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/third_party/parry2d/src/shape/feature_id.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-contact-points-001/pinned-sources/parry2d/shape/feature_id.rs",
+      "sha256": "088295ca8e3080642aff170c039c675a6c22bfe744215341359063b2b7ab65ea",
+      "bytes": 24626
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier3d-0.36.0/src/geometry/contact_pair.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-contact-points-001/pinned-sources/rapier3d/geometry/contact_pair.rs",
+      "sha256": "647dbd51dbacfa201b9854cd4bad68e8e78ee7cc74dae59df7bf20113f194528",
+      "bytes": 44365
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier3d-0.36.0/src/geometry/narrow_phase/pair_update.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-contact-points-001/pinned-sources/rapier3d/geometry/narrow_phase/pair_update.rs",
+      "sha256": "3610cb4653cd87cb25e3509a1c2c60063d02a2ca573392ec72fff1f6116b5016",
+      "bytes": 37038
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier3d-0.36.0/src/geometry/contact_clustering.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-contact-points-001/pinned-sources/rapier3d/geometry/contact_clustering.rs",
+      "sha256": "9bb123df4444adb390b826b7265d45a283d7dd9db25f92b245edeb63ac6d3442",
+      "bytes": 6725
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier3d-0.36.0/src/dynamics/integration_parameters.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-contact-points-001/pinned-sources/rapier3d/dynamics/integration_parameters.rs",
+      "sha256": "85780cd4252c2d6f7b780cb1e7a5646492f09a5b2e2827736d027a8b3fee4c2c",
+      "bytes": 20972
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier3d-0.36.0/src/pipeline/physics_world.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-contact-points-001/pinned-sources/rapier3d/pipeline/physics_world.rs",
+      "sha256": "6cf5f8ba115e355ebbf615b20e392a0a8220ed6af38dfc5a2ddfc878c5d431de",
+      "bytes": 39162
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/third_party/parry3d/src/query/contact_manifolds/contact_manifold.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-contact-points-001/pinned-sources/parry3d/query/contact_manifolds/contact_manifold.rs",
+      "sha256": "ea49175e6e511c93684e556c6aa08e00738afd108991aec298d73e2500e82c0a",
+      "bytes": 33698
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/third_party/parry3d/src/shape/feature_id.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-contact-points-001/pinned-sources/parry3d/shape/feature_id.rs",
+      "sha256": "088295ca8e3080642aff170c039c675a6c22bfe744215341359063b2b7ab65ea",
+      "bytes": 24626
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier3d-0.36.0/src/dynamics/solver/contact_constraint/contact_with_twist_friction.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-contact-points-001/pinned-sources/rapier3d/dynamics/solver/contact_constraint/contact_with_twist_friction.rs",
+      "sha256": "1ae23e76b0e5d67e30eb96bafc679abdfc209dea9746f1be8cab2af96d7cb219",
+      "bytes": 44565
+    }
+  ],
+  "contracts_reviewed": [
+    "All ContactData f32 fields,3D canonical retained tangent world vector and frozen lever arms preserve exact active bits; inactive planar dimensions and private SIMD padding explicitly refuse nonzero bits.",
+    "Packed feature tags preserve native constructor domain and documented stricter Unknown admission; point indices retain NEW_CONTACT_BIT, permit repeated ordered selections, and stay within the immutable point table.",
+    "56-byte identity header and exact100/48-byte record lengths, aggregate32MiB and dimensional/count bounds checked before allocation; shared requested-payload budget charged before both Vec allocations.",
+    "Immutable validated wrapper prevents later mutation; encode/decode loops have reciprocal field order. Zero-length/unselected contacts and integer overflows handled explicitly.",
+    "Hostile per-word/byte mutations, truncations, trailing data, limits/budgets and actual2D/3D warmstart/sleep/wake observations reviewed against pinned native definitions."
+  ],
+  "qualifications": [
+    "Initial source-comparison assumption that producerCargo.lock equals currentmain failed; inspected diff is already-merged profiler package/edges.28 crate inputs remain exact; composedCargo.lock is unchanged frommain199.",
+    "No live constructor/runtime consumer/save admission; leaf does not prove physical consistency, owning-shape membership or complete restoration.",
+    "Current-main65CPU8checks completed separately; parent final producer evidence audit remains independent. No GPU/shipping/device claim."
+  ]
+}
