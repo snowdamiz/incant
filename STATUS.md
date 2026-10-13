@@ -1,6 +1,8 @@
 # Implementation status
 
-Private broad-phase manager construction on main236 passed both composed numerical modes: 225 snapshot and 36 native cases per mode, 220 paired broad steps per dimension/mode, and all 28 checks. Source and final current-main evidence reviews are accepted; required fast check/publication remain. Fast8 fixture reuse is explicitly hash-bound. Other live owners remain trusted clones, and whole-world restore/public physics saves stay unsupported. [Evidence](docs/spikes/physics-native-broad-main236.md).
+Private primitive narrow-phase producer333e is independently accepted. Its current-main237 composition is frozen for source review and separate mode qualification. Native world installation and public physics-save admission remain closed.
+
+Private broad-phase manager construction on main236 passed both composed numerical modes: 225 snapshot and 36 native cases per mode, 220 paired broad steps per dimension/mode, and all 28 checks. Source and final current-main evidence reviews are accepted; PR237 merged after its required exact-head fast check. Fast8 fixture reuse is explicitly hash-bound. Other live owners remain trusted clones, and whole-world restore/public physics saves stay unsupported. [Evidence](docs/spikes/physics-native-broad-main236.md).
 
 Private typed Parry BVH construction and shared allocation on main234 passed both composed numerical modes: 225 snapshot + 26 native cases per mode, 226 paired BVH steps per dimension/mode, all23 checks successful. Final current-main packet and main235 join reviews are accepted; PR236 merged after its required exact-head fast check. The feature stays default-off and complete-world physics saves remain unsupported. [Evidence](docs/spikes/physics-parry-main234.md).
 
@@ -235,9 +237,9 @@ unification also affects other cc build consumers in the selected host graph.
 Windows candidate execution and timing remain pending; no Windows speedup or
 performance gate is claimed. [Scope and evidence](docs/spikes/wasm-c-parallel.md).
 
-## Current overview — main236, 2026-10-13
+## Current overview — main237, 2026-10-13
 
-Development main236 includes the reviewed opt-in cooked renderer families and
+Development main237 includes the reviewed opt-in cooked renderer families and
 Vulkan cache lifecycle, dynamic resolution, numerical retained motion, CPU/GPU
 profiling scopes and joined inert physics owner boundaries. Each lane retains its own
 execution and acceptance limits below; the complete engine and game remain open.

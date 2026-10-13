@@ -1,0 +1,24 @@
+{
+  "at": "2026-10-13T17:26:46.178707+00:00",
+  "reviewer": "astra root",
+  "decision": "accepted scoped private narrow constructor producer for current-main composition",
+  "head": "333e7f46cf01c32eac5d10b54371d1960a72bf9d",
+  "manifest_sha256": "858a94c7932b3cb0fc007bb37f8bf7b350298b1267eb52ce19543dd0a65eb00b",
+  "collector_sha256": "1db3a2694363461da3ba03ca001cc596a3b06f71f44229707e307f95974256e7",
+  "basis": [
+    "Read complete collector, qualification runner and commands; independently replayed --verify-only exit0. All20 qualification commands pass; complete ledger retains45successes and6failed historical controls.",
+    "227snapshot+45native cases in each numerical mode.312decoded paired continuation steps per dimension/mode plus32trusted compound scratch steps;8native allocation observations per dimension/mode match exact request bytes/calls.",
+    "Full collision/force identity multiset controls retain25collision+102force records per dimension/mode. Scalar/SIMD subshape Box allocations differ and are charged exactly.",
+    "Verified97finalinputs,6858archivedrecords/620payloads,4executables and explicit16fast8fixture substitutions; source001 production unchanged."
+  ],
+  "limits": [
+    "Only the narrow owner is constructed; other native owners remain trusted clones. No whole-world installer or save admission.",
+    "312 decoded paired steps per dimension/mode plus32 trusted compound scratch steps in3D; inherited owner controls overlap prior evidence.",
+    "Primitive-only numeric witness; non-None dispatcher workspace refused. Custom dispatcher provenance remains enclosing-owner policy.",
+    "Collision and force events preserve full bit records as multisets, not parallel callback scheduling order.",
+    "Logical allocation requests measured on arm64 macOS; not allocator overhead/RSS. Stable Box/Arc OOM behavior remains.",
+    "Deterministic event captures are checked in; fast8 fresh event and prior accepted island captures substituted only in private test copies with exact bindings.",
+    "Six historical compile/fixture failures retained; source001 production unchanged through qualification.",
+    "Scoped native library Clippy, not blanket all-target vendored lint. No GPU/device/performance claim."
+  ]
+}

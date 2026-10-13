@@ -63,7 +63,7 @@ native emitter on the same saved impulses. This is an event-identity distinction
 not a claim of changed trajectories. Historical compile and fixture-oracle
 failures remain retained with their original source copies.
 
-Independent source review accepted source001 (receipt4953bdcc), and scoped CPU qualification passed. Final independent evidence review remains pending. The remaining
+Independent source review accepted source001 (receipt4953bdcc), and scoped CPU qualification passed. Final independent producer review is accepted (`1c702483`), retained in [the current intake](evidence/physics-native-narrow-main237/producer-final-root.json). Current-main qualification remains separate. The remaining
 whole-world constructor, completed-step runtime authentication, shared stable IDs
 and event queues, full allocation/work composition and public save entry are
 separate requirements; this private owner does not complete exact restoration.
