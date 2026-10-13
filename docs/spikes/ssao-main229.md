@@ -48,8 +48,17 @@ pass their failures or claim a new appearance judgment.
 Current source review is independently accepted (`97d2f158`). Thirteen CPU and
 compile checks passed at `c01bed48`: 168 default and 200 overlapping cooked
 observer cases, strict Clippy, native-window/browser consumers, dependency rules
-and exact identity of all 33 previous native shader payloads. The user paused
-work before ACP or GPU launch. The copied binaries and raw logs are retained;
-composed numeric GPU execution, final packet audit and publication remain pending.
-See [pause inventory](evidence/ssao-main229/pause.json). No default enablement, non-Metal appearance, phone, performance,
+and exact identity of all 33 previous native shader payloads. The earlier user
+pause and exact checkout recovery are retained. After resume, Claude Opus 5.5
+with ACP-verified Max executed the frozen runner once on Apple M5 Pro Metal: two
+listings and two tests, eight 65x33 frames total, all children successful and
+reaped. The default route admitted SSAO and completed four positive instrumented
+frames; the cooked route explicitly refused SSAO and completed four ordinary
+fixed-temporal frames. No images were captured or reviewed for this composition.
+All 33 prior native shader payloads remain byte-exact. Final independent
+integration review and publication are pending.
+
+[Current manifest](evidence/ssao-main229.json), [original pause](evidence/ssao-main229/pause.json)
+and [original001/002 retention](evidence/ssao-main229/producer-retention.json)
+preserve historical and current identities separately. No default enablement, non-Metal appearance, phone, performance,
 whole-frame GPU cost or phase-completion claim is made.

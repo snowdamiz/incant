@@ -22,7 +22,11 @@ The complete diffuse SSAO/R3/C2 producer has independent numerical and Claude
 Metal appearance acceptance (`22ac4dc7`). Current integration preserves its
 sampling/filter shaders, bounds and default-off behavior, and explicitly joins
 jittered reconstruction, split model drawing and all four Models timing passes.
-Current source review is accepted; CPU and composed device checks are pending.
+Current source review and thirteen checks pass (168 default and 200 overlapping
+cooked CPU cases). The exact current composition completed eight bounded Metal
+frames under Claude: default SSAO admission and expected cooked refusal both
+passed, with all children reaped. Final integration review is pending; original
+appearance acceptance remains producer-scoped.
 Authored N6 remains failed at seven codes; revised N6T/N8 margins are 0.79/0.97
 codes. Cooked SSAO, non-Metal appearance, phone and performance gaps remain open.
 [Current composition](docs/spikes/ssao-main229.md).
