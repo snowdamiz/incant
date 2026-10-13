@@ -1,0 +1,133 @@
+{
+  "main": "7f0e61f245ad1c4a49e6f2dec908f6274f8f02dc",
+  "source": {
+    "path": "crates/incant_render/tests/persistent_cache.rs",
+    "sha256": "0db107912bcc9c76782f03d456ad3abc84606b138a6d78b3cc234a505547036f"
+  },
+  "summary": {
+    "checks": 5,
+    "source_changes": 1,
+    "changed_lines": 3,
+    "production_constructor_inputs_exact_main": 7,
+    "candidate_catalog_sources_exact": 6,
+    "candidate_constructor_seam": "existing cooked-cluster backend/cache call only",
+    "expected_render_pipelines": 31,
+    "expected_compute_pipelines": 1,
+    "hosted_red": {
+      "candidate": "2fab0688fce68f4933ba4f14a7af074a088bfeb6",
+      "run": 38348941128,
+      "job": 115136684605,
+      "exit": 101,
+      "actual": 31,
+      "expected": 30
+    },
+    "gpu_execution": false,
+    "actual_linux_rerun": "pending next frozen checkpoint"
+  },
+  "checks": [
+    {
+      "name": "compile",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--test",
+        "persistent_cache",
+        "--features",
+        "cooked-output,cooked-geometry,cooked-sprites,cooked-ui,cooked-text,cooked-materials,cooked-clusters,persistent-pipeline-cache",
+        "--no-run"
+      ],
+      "exit": 0,
+      "seconds": 41.988373500003945,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "06fc94221f2fa53d5afe2f2c14f2b72f96d03ea9da73b3d8c42ecdd60e664c09"
+    },
+    {
+      "name": "clippy",
+      "command": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--test",
+        "persistent_cache",
+        "--features",
+        "cooked-output,cooked-geometry,cooked-sprites,cooked-ui,cooked-text,cooked-materials,cooked-clusters,persistent-pipeline-cache",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "seconds": 5.614010667006369,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "87c953f892beb75ef3fae4dbc2f8d4b2ef1457ab34b9ac4b4922fa278c86c758"
+    },
+    {
+      "name": "fmt",
+      "command": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 1.1327234160053195,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "conventions",
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.027215707996219862,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "diff",
+      "command": [
+        "git",
+        "diff",
+        "--check",
+        "origin/main"
+      ],
+      "exit": 0,
+      "seconds": 0.02248920899728546,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "archive": {
+    "path": "docs/spikes/evidence/vulkan-cache-catalog-count/artifacts.json.gz",
+    "sha256": "62ca2fbd0f8e74516947ffb838f2fa449af1e417b1fd641d04f4f4c745f72219",
+    "bytes": 250985,
+    "records": 19,
+    "payloads": 12
+  },
+  "source_review": {
+    "path": "docs/spikes/evidence/vulkan-cache-catalog-count/source-review.json",
+    "sha256": "ccf6495fea05e957d641f746c6de98af17eccb8741a35313be3d8148558e2410"
+  },
+  "patch_sha256": "a1b5f2dfcce99faceb8682d553351abce74a6c809649dbd6605a8f49f270e972",
+  "limits": [
+    "Test-only correction. All persistence lifecycle assertions, exact counts, backend assertion, checksum corruption and resource stability checks remain.",
+    "Full harness compiled with cooked features and Clippy on macOS. No Vulkan/Metal/window execution by publisher.",
+    "Original Linux failure remains immutable; four fresh Vulkan subprocess stages must pass in a successor checkpoint."
+  ]
+}

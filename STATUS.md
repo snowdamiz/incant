@@ -16,7 +16,7 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Current overview — main199, 2026-10-13
+## Current overview — main200, 2026-10-13
 
 Development main199 includes the restart quota-test repair (PR188) and the reviewed,
 opt-in cooked sprite/UI/text/material paths with private Vulkan pipeline persistence
@@ -35,7 +35,7 @@ No release or phase approval follows from a main merge.
 Checkpoint18 Linux, Windows and macOS checks fail compiling the editor test
 that reuses a renderer helper without its root type alias. The [test-only repair](docs/spikes/editor-renderer-import.md)
 is merged in PR193 after local compile/CPU/Clippy, independent review and fast checks;
-production and backend assertions are unchanged. Checkpoint18 is terminal with 20 required successes and three same-cause failures. Checkpoint19 is frozen at exact main197; all 23 requirements are running on that single snapshot.
+production and backend assertions are unchanged. Checkpoint18 is terminal with 20 required successes and three same-cause failures. Checkpoint19 is frozen at exact main197. Its Linux desktop persistence test failed a stale expected pipeline count (30 versus actual31); remaining jobs continue. The [test-only correction](docs/spikes/vulkan-cache-catalog-count.md) passes local compile and Clippy; actual Vulkan rerun and all23 release successes remain required.
 
 Android static-Wasm integration is merged in PR190 after independent source-relevance
 review and the fast check. Current CPU/public preflights and both-mode target compile/
@@ -62,7 +62,7 @@ data and ordered solver-contact rows, with exact float/feature/index bits and
 bounded hostile decoding. Sixty-five CPU tests, Clippy, wasm32 and dependency
 checks pass. Actual 2D/3D stepped contacts include nonzero warm starts/friction,
 retained recycle references, unchanged sleeping rows and wake changes.
-Independent source and final producer evidence review are accepted; [main199 integration](docs/spikes/physics-contact-main199.md) passes eight checks and 65 CPU cases. Final integration review is accepted; publication awaits the required fast check. Shape/owner/manifold
+Independent source and final producer evidence review are accepted; [main199 integration](docs/spikes/physics-contact-main199.md) passes eight checks and 65 CPU cases. Final integration review is accepted; PR200 is merged after its exact-head fast check. Shape/owner/manifold
 composition and full exact continuation remain required; live construction and
 physics-save admission stay refused.
 [Contact leaf contract](docs/spikes/physics-inert-contact-points.md).

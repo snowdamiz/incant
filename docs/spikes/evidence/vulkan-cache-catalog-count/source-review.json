@@ -1,0 +1,10 @@
+{
+  "at": "2026-10-13T05:28:29.721987+00:00",
+  "decision": "accepted narrow test source correction",
+  "patch_sha256": "a1b5f2dfcce99faceb8682d553351abce74a6c809649dbd6605a8f49f270e972",
+  "scope": "Three test-only lines update stale30 to31. Independently read full Vulkan cache harness and four explicit UI formats. Exact pipeline count, one compute, stability afterpoll and four fresh-process cache transitions remain unchanged.",
+  "limits": [
+    "No local Vulkan execution; actual Linux checkpoint rerun pending",
+    "Publisher local compile and Clippy evidence pending"
+  ]
+}
