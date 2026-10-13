@@ -77,7 +77,23 @@ pub struct ValidatedManifolds<'a> {
     record: ManifoldTable,
     context: ManifoldContext<'a>,
 }
-impl ValidatedManifolds<'_> {
+impl<'a> ValidatedManifolds<'a> {
+    pub(crate) fn attachments(&self) -> &'a ValidatedAttachments<'a> {
+        self.context.attachments
+    }
+    pub fn edge_touching(&self, edge: u32) -> Option<bool> {
+        let p = self.edge_pair(edge)?;
+        let s = if p.clusters.count != 0 {
+            p.clusters
+        } else {
+            p.plain
+        };
+        Some(
+            self.record.manifolds[s.start as usize..(s.start + s.count) as usize]
+                .iter()
+                .any(|m| m.solver.count != 0),
+        )
+    }
     pub(crate) fn pair_shapes(&self, row: usize) -> Option<[&ValidatedGeometry; 2]> {
         let p = self.record.pairs.get(row)?;
         let a = self.context.attachments.collider_row(p.colliders[0])? as usize;

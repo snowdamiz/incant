@@ -117,7 +117,10 @@ pub struct ValidatedBodyState<'a> {
     record: BodyStateTable,
     context: BodyContext<'a>,
 }
-impl ValidatedBodyState<'_> {
+impl<'a> ValidatedBodyState<'a> {
+    pub(crate) fn attachments(&self) -> &'a ValidatedAttachments<'a> {
+        self.context.attachments
+    }
     pub fn record(&self) -> &BodyStateTable {
         &self.record
     }
