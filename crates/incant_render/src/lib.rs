@@ -334,7 +334,7 @@ impl Renderer {
         scene: &RenderScene,
         target: RetainedTarget<'_>,
         scale: resolution::ResolutionScale,
-        motion: Option<motion::MotionDraw>,
+        mut motion: Option<motion::MotionDraw>,
         temporal: Option<&temporal::Pending>,
         upscaling: Option<&upscaling::Pending>,
         #[cfg(feature = "native-metalfx")] native: Option<(
@@ -404,6 +404,17 @@ impl Renderer {
                 rect: scene_rect,
             },
         )?;
+        let overlays = models.as_ref().is_some_and(|m| m.has_transparent())
+            || sprites.as_ref().is_some_and(|s| s.has_passes())
+            || text.as_ref().is_some_and(|t| t.has_passes());
+        let accumulating = temporal.is_some_and(|p| p.active())
+            || upscaling.is_some_and(|p| p.overlay().is_some());
+        if accumulating && overlays {
+            motion
+                .as_mut()
+                .expect("temporal motion draw")
+                .set_overlay_depth(attachments.depth.clone());
+        }
         let temporal = temporal.and_then(|pending| {
             self.temporal.as_ref().and_then(|system| {
                 system.prepare(&self.device, pending, &attachments.color, scene.camera)

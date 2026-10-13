@@ -3,7 +3,7 @@ use crate::{Renderer, Result};
 
 pub(crate) struct MotionSystem {
     pub(super) globals: wgpu::BindGroupLayout,
-    pipelines: [wgpu::RenderPipeline; 4],
+    pipelines: [wgpu::RenderPipeline; 8],
 }
 const CURRENT: [wgpu::VertexAttribute; 2] = [
     wgpu::VertexAttribute {
@@ -79,8 +79,14 @@ impl MotionSystem {
             renderer.adapter.get_info().backend,
             crate::temporal_shader::Kind::Motion,
         )?;
+        let depth_shader = crate::temporal_shader::stages(
+            device,
+            renderer.adapter.get_info().backend,
+            crate::temporal_shader::Kind::Depth,
+        )?;
         let buffers = buffers();
         let pipelines = std::array::from_fn(|i| {
+            let shader = if i < 4 { &shader } else { &depth_shader };
             device.create_render_pipeline(&wgpu::RenderPipelineDescriptor {
                 label: Some("Motion opaque surface"),
                 layout: Some(&layout),
@@ -115,11 +121,15 @@ impl MotionSystem {
                     module: &shader.fragment,
                     entry_point: Some(shader.fragment_entry),
                     compilation_options: Default::default(),
-                    targets: &[Some(wgpu::ColorTargetState {
-                        format: wgpu::TextureFormat::Rgba32Float,
-                        blend: None,
-                        write_mask: wgpu::ColorWrites::ALL,
-                    })],
+                    targets: if i >= 4 {
+                        &[]
+                    } else {
+                        &[Some(wgpu::ColorTargetState {
+                            format: wgpu::TextureFormat::Rgba32Float,
+                            blend: None,
+                            write_mask: wgpu::ColorWrites::ALL,
+                        })]
+                    },
                 }),
                 multiview_mask: None,
                 cache: None,
@@ -127,12 +137,19 @@ impl MotionSystem {
         });
         Ok(Self { globals, pipelines })
     }
-    pub(super) fn pipeline(&self, double_sided: bool, mirrored: bool) -> wgpu::RenderPipeline {
-        self.pipelines[usize::from(mirrored) + 2 * usize::from(double_sided)].clone()
+    pub(super) fn pipeline(
+        &self,
+        double_sided: bool,
+        mirrored: bool,
+        depth_only: bool,
+    ) -> wgpu::RenderPipeline {
+        self.pipelines
+            [usize::from(mirrored) + 2 * usize::from(double_sided) + 4 * usize::from(depth_only)]
+        .clone()
     }
 }
 impl Renderer {
-    /// Startup-only opt-in. Creates four fixed pipelines; ordinary draw_scene
+    /// Startup-only opt-in. Creates four motion and four overlay-depth pipelines; ordinary draw_scene
     /// remains stateless. Enable history separately on a retained owner/host.
     pub async fn enable_motion_vectors(&mut self) -> Result<()> {
         super::admission()?;

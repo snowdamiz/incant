@@ -49,3 +49,27 @@ pub(super) fn blend(
             .clamp(0., if i == 3 { 1. } else { 65504. })
     })
 }
+
+/// Scalar independent history gather. Invalid or zero-weight support is omitted;
+/// no finite positive accepted support means disocclusion/current-only.
+pub(super) fn gather(taps: [([f64; 4], f64, f64, bool); 4], expected: f64) -> Option<[f64; 4]> {
+    if !expected.is_finite() || expected <= 0. {
+        return None;
+    }
+    let valid: Vec<_> = taps
+        .into_iter()
+        .filter(|(c, z, w, inside)| {
+            *inside
+                && w.is_finite()
+                && *w > 0.
+                && *w <= 1.
+                && z.is_finite()
+                && *z > 0.
+                && (*z - expected).abs() <= 0.001
+                && c.iter().all(|x| x.is_finite() && *x >= 0. && *x <= 65504.)
+                && c[3] == 1.
+        })
+        .collect();
+    let mass: f64 = valid.iter().map(|t| t.2).sum();
+    (mass > 0.).then(|| std::array::from_fn(|i| valid.iter().map(|t| t.0[i] * t.2 / mass).sum()))
+}

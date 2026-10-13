@@ -143,6 +143,12 @@ impl CameraView {
         result.matrix(1.)?;
         Ok(result)
     }
+    /// Current-only overlays and their opaque depth use the same stable grid.
+    pub fn unjittered(mut self) -> Self {
+        self.jitter = [0.; 2];
+        self.jitter_guard = [0.; 2];
+        self
+    }
     pub fn matrix(self, aspect: f32) -> Result<Mat4, SceneError> {
         if !aspect.is_finite() || aspect <= 0. {
             return Err(SceneError::CameraProjection);

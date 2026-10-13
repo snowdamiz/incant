@@ -106,3 +106,9 @@ impl TemporalState {
         self.targets.as_ref().map(|t| t.color[self.slot].clone())
     }
 }
+
+impl Pending {
+    pub(crate) fn active(&self) -> bool {
+        self.targets.is_some()
+    }
+}

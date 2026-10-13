@@ -64,7 +64,9 @@ impl FrameGraph {
             .upscaling
             .as_ref()
             .ok_or(crate::metalfx::MetalFxError::Interop)?;
-        let count = usize::from(frame.motion.is_some())
+        let overlay_depth = frame.motion.as_ref().is_some_and(|m| m.has_overlay_depth());
+        let count = usize::from(overlay_depth)
+            + usize::from(frame.motion.is_some())
             + usize::from(frame.models.as_ref().is_some_and(|m| m.has_opaque()))
             + 5
             + usize::from(frame.models.as_ref().is_some_and(|m| m.has_transparent()));
@@ -98,6 +100,13 @@ impl FrameGraph {
         let mut post = Encoder(make(), capture);
         native.normalize(&mut post.0, timestamp());
         up.clear_overlay(&mut post.0, timestamp());
+        if overlay_depth {
+            frame
+                .motion
+                .as_ref()
+                .unwrap()
+                .encode_overlay_depth(&mut post.0, timestamp());
+        }
         if let Some(m) = &frame.models
             && m.has_transparent()
         {

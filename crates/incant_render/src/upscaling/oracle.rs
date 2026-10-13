@@ -38,16 +38,15 @@ pub(super) fn taps(p: [f64; 2], rect: [f64; 4]) -> Option<[([i32; 2], f64); 4]> 
             (if x == 0 { 1. - f[0] } else { f[0] }) * (if y == 0 { 1. - f[1] } else { f[1] }),
         )
     });
-    result
-        .iter()
-        .all(|(p, w)| {
-            *w == 0.
-                || (0..2).all(|i| {
-                    f64::from(p[i]) + 0.5 >= rect[i]
-                        && f64::from(p[i]) + 0.5 < rect[i] + rect[i + 2]
-                })
-        })
-        .then_some(result)
+    if !(0..2).all(|i| p[i] >= rect[i] && p[i] < rect[i] + rect[i + 2]) {
+        return None;
+    }
+    Some(result.map(|(p, w)| {
+        let inside = (0..2).all(|i| {
+            f64::from(p[i]) + 0.5 >= rect[i] && f64::from(p[i]) + 0.5 < rect[i] + rect[i + 2]
+        });
+        (p, if inside { w } else { 0. })
+    }))
 }
 pub(super) fn color(v: [f64; 4]) -> [f64; 4] {
     if !v.iter().all(|v| v.is_finite()) || v[3] <= 0. {

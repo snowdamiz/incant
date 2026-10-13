@@ -189,7 +189,7 @@ impl MotionState {
         // Before allocating even the temporary node list, charge its worst case
         // capacity and every previous entity transform (duplicates only reduce it).
         plan::charge(&mut bytes, slots, size_of::<usize>() + size_of::<DMat4>())?;
-        plan::charge(&mut bytes, 1, size_of::<Frame>() * 2)?;
+        plan::charge(&mut bytes, 1, size_of::<Frame>() * 4)?;
         plan::overlap(
             old.map_or(0, |o| o.bytes),
             bytes,
@@ -350,23 +350,38 @@ impl MotionState {
             previous: history.previous.to_cols_array_2d(),
             rect: plan.rect,
         };
-        let buffer = renderer
-            .device
-            .create_buffer_init(&wgpu::util::BufferInitDescriptor {
-                label: Some("Motion frame"),
-                contents: bytemuck::bytes_of(&uniform),
-                usage: wgpu::BufferUsages::UNIFORM,
-            });
-        let frame = renderer
-            .device
-            .create_bind_group(&wgpu::BindGroupDescriptor {
-                label: Some("Motion frame"),
-                layout: &system.globals,
-                entries: &[wgpu::BindGroupEntry {
-                    binding: 0,
-                    resource: buffer.as_entire_binding(),
-                }],
-            });
+        let group = |uniform: Frame| {
+            let buffer = renderer
+                .device
+                .create_buffer_init(&wgpu::util::BufferInitDescriptor {
+                    label: Some("Motion frame"),
+                    contents: bytemuck::bytes_of(&uniform),
+                    usage: wgpu::BufferUsages::UNIFORM,
+                });
+            renderer
+                .device
+                .create_bind_group(&wgpu::BindGroupDescriptor {
+                    label: Some("Motion frame"),
+                    layout: &system.globals,
+                    entries: &[wgpu::BindGroupEntry {
+                        binding: 0,
+                        resource: buffer.as_entire_binding(),
+                    }],
+                })
+        };
+        let frame = group(uniform);
+        let overlay_frame = if temporal {
+            Some(group(Frame {
+                current: current
+                    .camera
+                    .unjittered()
+                    .matrix(plan.rect[2] / plan.rect[3])?
+                    .to_cols_array_2d(),
+                ..uniform
+            }))
+        } else {
+            None
+        };
         let mut draws = Vec::with_capacity(current.batches.len());
         for ((batch, old), rows) in current.batches.iter().zip(&live.batches).zip(&self.rows) {
             let primitive = &batch.model.primitives[batch.primitive];
@@ -378,7 +393,8 @@ impl MotionState {
                 batch: Arc::clone(batch),
                 previous_vertices: old.vertices.as_ref().unwrap_or(&primitive.vertices).clone(),
                 previous_instances: rows.buffer.clone(),
-                pipeline: system.pipeline(material.double_sided, batch.mirrored),
+                pipeline: system.pipeline(material.double_sided, batch.mirrored, false),
+                depth_pipeline: system.pipeline(material.double_sided, batch.mirrored, true),
             });
         }
         Ok((
@@ -387,6 +403,8 @@ impl MotionState {
                 slot,
                 rect: plan.rect,
                 frame,
+                overlay_frame,
+                overlay_depth: None,
                 draws,
             }),
             Prepared {
