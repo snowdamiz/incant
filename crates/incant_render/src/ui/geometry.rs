@@ -4,14 +4,14 @@
 use super::theme;
 use crate::SceneError;
 use incant_render_data::{UiInput, UiRect, UiRole, UiWidget};
-use incant_text::{GlyphAtlas, ShapedText};
+use incant_text::{GlyphAtlas, GlyphKey, ShapedText};
 use std::ops::Range;
 
 /// The native UI owner's own limits; the renderer refuses larger input.
 pub const MAX_UI_WIDGETS: usize = 1024;
 pub const MAX_UI_GLYPHS: usize = 65_536;
 const MAX_FIELD_BYTES: usize = incant_text::MAX_TEXT_BYTES;
-/// Every glyph plus a label shadow, at most one selection and one composition
+/// Every glyph plus its label halo, at most one selection and one composition
 /// span per byte of one focused field, and six surface/caret/ring quads per widget.
 pub const MAX_UI_QUADS: usize = 2 * MAX_UI_GLYPHS + 2 * MAX_FIELD_BYTES + 6 * MAX_UI_WIDGETS;
 const MAX_EXTENT: f32 = 65_536.;
@@ -24,7 +24,8 @@ pub(crate) const KIND_STROKE: u32 = 1;
 pub(crate) const KIND_GLYPH: u32 = 2;
 
 /// One instance. Fill/stroke `rect` is logical `[l, t, r, b]`; glyph `rect` is
-/// the padded coverage rectangle in atlas texels relative to the pen.
+/// the padded coverage rectangle in atlas texels relative to the pen. A label
+/// halo is a glyph quad of its own prepared atlas entry.
 #[repr(C)]
 #[derive(Clone, Copy, Debug, PartialEq, bytemuck::Pod, bytemuck::Zeroable)]
 pub(crate) struct UiQuad {
@@ -114,6 +115,13 @@ pub(crate) fn plan(input: &UiInput) -> Result<UiPlan, SceneError> {
             (Some(_), _) => return Err(SceneError::Input("UI edit state on a non-input widget")),
         }
     }
+    // Labels carry one prepared halo handle per glyph; no other role has any.
+    for widget in &input.widgets {
+        let halos = widget.halos.as_ref().map(|h| h.len());
+        if halos != (widget.role == UiRole::Label).then_some(widget.glyphs.len()) {
+            return Err(SceneError::Input("UI label halo handles disagree"));
+        }
+    }
     let mut out = UiPlan {
         quads: Vec::with_capacity(placements + 4 * input.widgets.len()),
         extent: [0; 2],
@@ -150,9 +158,9 @@ fn translate(rect: [f32; 4], origin: [f32; 2]) -> UiRect {
 }
 
 /// Canonical per-widget layering: surface, selection, glyphs (a label's
-/// shadow first), composition underline, caret, focus ring. Decorations clip
-/// to the visible border box; glyphs clip to the effective content clip,
-/// using their actual bounds.
+/// prepared halos first), composition underline, caret, focus ring.
+/// Decorations clip to the visible border box; glyphs clip to the effective
+/// content clip, using their actual bounds; halos clip as `halo_clip` says.
 fn build(
     atlas: &GlyphAtlas,
     widget: &UiWidget,
@@ -228,14 +236,14 @@ fn build(
         }
     }
     if widget.role == UiRole::Label {
-        let shadow = if disabled {
-            theme::alpha(theme::LABEL_SHADOW, dim)
+        let halo = if disabled {
+            theme::alpha(theme::LABEL_HALO, dim)
         } else {
-            theme::LABEL_SHADOW
+            theme::LABEL_HALO
         };
-        glyphs(atlas, widget, shadow, theme::LABEL_SHADOW_OFFSET, out)?;
+        halos(atlas, widget, halo, out)?;
     }
-    let (drawn, missing) = glyphs(atlas, widget, text_color, [0.; 2], out)?;
+    let (drawn, missing) = glyphs(atlas, widget, text_color, out)?;
     out.glyphs += drawn;
     out.missing += missing;
     if let Some(edit) = edit {
@@ -311,19 +319,114 @@ pub fn ui_caret(widget: &UiWidget) -> Option<UiCaret> {
     })
 }
 
-/// One quad per glyph with coverage, at `offset` logical pixels from its pen.
-/// Returns drawn glyphs and `.notdef` placements; refuses foreign handles.
+/// The clip of a label halo that may reach `grow` logical pixels past its
+/// glyphs: the text clip (ancestor clips ∩ own content box) grown by `grow`,
+/// but never past the visible border box (ancestor clips ∩ own border box), and
+/// empty wherever the text clip is empty. A label with that much padding
+/// therefore keeps its whole halo, while a parked or fully clipped label draws
+/// none.
+pub(crate) fn halo_clip(widget: &UiWidget, grow: f32) -> UiRect {
+    let [left, top, right, bottom] = widget.clip;
+    if right <= left || bottom <= top {
+        return [left, top, left, top];
+    }
+    let visible = widget.visible;
+    [
+        (left - grow).max(visible[0]),
+        (top - grow).max(visible[1]),
+        (right + grow).min(visible[2]),
+        (bottom + grow).min(visible[3]),
+    ]
+}
+
+/// One quad per inked label glyph from its prepared halo entry
+/// (`UiWidget::halos`), sampled exactly as a glyph is, in `color`. The entry
+/// must be its glyph's halo at the theme radius for the glyph's size: the same
+/// raster key plus that radius, `ceil(radius)` texels larger on every side.
+/// Drawn, it reaches at most that margin plus one texel past the glyph's
+/// coverage rectangle, so it clips with `halo_clip(margin + 1)`.
+fn halos(
+    atlas: &GlyphAtlas,
+    widget: &UiWidget,
+    color: [u8; 4],
+    out: &mut UiPlan,
+) -> Result<(), SceneError> {
+    let refused = || SceneError::Input("UI label halo entry disagrees with its glyph");
+    let halos = widget
+        .halos
+        .as_deref()
+        .ok_or(SceneError::Input("UI label halo handles disagree"))?;
+    let [width, height] = atlas.size();
+    let entries = widget.layout.glyphs().iter().zip(widget.glyphs.iter());
+    for ((glyph, handle), halo) in entries.zip(halos) {
+        let entry = atlas.get(handle).ok_or(SceneError::UiGlyph(widget.id))?;
+        let halo = atlas.get(halo).ok_or(SceneError::UiGlyph(widget.id))?;
+        let radius = theme::LABEL_HALO_RULE
+            .radius(f32::from_bits(entry.key.font_size_bits))
+            .map_err(|_| refused())?;
+        let margin = radius.ceil() as i32;
+        if entry.key.halo_radius_bits != 0
+            || halo.key
+                != (GlyphKey {
+                    halo_radius_bits: radius.to_bits(),
+                    ..entry.key
+                })
+            || halo.origin != [entry.origin[0] - margin, entry.origin[1] - margin]
+        {
+            return Err(refused());
+        }
+        let rect = match (entry.rect, halo.rect) {
+            (None, None) => continue,
+            (Some(inner), Some(rect))
+                if rect[2] == inner[2] + 2 * margin as u32
+                    && rect[3] == inner[3] + 2 * margin as u32 =>
+            {
+                rect
+            }
+            _ => return Err(refused()),
+        };
+        if !glyph.position.iter().all(|v| v.is_finite()) {
+            return Err(SceneError::Input("UI glyph position"));
+        }
+        // The atlas surrounds each inner rectangle with one zero texel.
+        if rect[0] == 0 || rect[1] == 0 || rect[0] + rect[2] >= width || rect[1] + rect[3] >= height
+        {
+            return Err(SceneError::Input("UI atlas entry bounds"));
+        }
+        let [x, y, w, h] = rect.map(|v| v as f32);
+        let [ox, oy] = halo.origin.map(|v| v as f32);
+        out.quads.push(UiQuad {
+            rect: [ox - 1., oy - 1., ox + w + 1., oy + h + 1.],
+            clip: halo_clip(widget, margin as f32 + 1.),
+            extra: [x - 1., y - 1., x + w + 1., y + h + 1.],
+            pen: [
+                widget.origin[0] + glyph.position[0],
+                widget.origin[1] + glyph.position[1],
+            ],
+            color,
+            kind: KIND_GLYPH,
+        });
+        out.extent[0] = out.extent[0].max(rect[0] + rect[2] + 1);
+        out.extent[1] = out.extent[1].max(rect[1] + rect[3] + 1);
+    }
+    Ok(())
+}
+
+/// One quad per glyph with coverage, at its pen. Returns drawn glyphs and
+/// `.notdef` placements; refuses foreign handles and halo entries.
 fn glyphs(
     atlas: &GlyphAtlas,
     widget: &UiWidget,
     color: [u8; 4],
-    offset: [f32; 2],
     out: &mut UiPlan,
 ) -> Result<(usize, usize), SceneError> {
     let (mut drawn, mut missing) = (0, 0);
     let [width, height] = atlas.size();
     for (glyph, handle) in widget.layout.glyphs().iter().zip(widget.glyphs.iter()) {
         let entry = atlas.get(handle).ok_or(SceneError::UiGlyph(widget.id))?;
+        if entry.key.halo_radius_bits != 0 {
+            return Err(SceneError::Input("UI glyph handle is a halo"));
+        }
         missing += usize::from(entry.missing);
         let Some(rect) = entry.rect else {
             continue;
@@ -343,8 +446,8 @@ fn glyphs(
             clip: widget.clip,
             extra: [x - 1., y - 1., x + w + 1., y + h + 1.],
             pen: [
-                widget.origin[0] + glyph.position[0] + offset[0],
-                widget.origin[1] + glyph.position[1] + offset[1],
+                widget.origin[0] + glyph.position[0],
+                widget.origin[1] + glyph.position[1],
             ],
             color,
             kind: KIND_GLYPH,

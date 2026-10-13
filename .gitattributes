@@ -49,3 +49,6 @@ docs/spikes/evidence/native-cpu-profiler-main194/source-relevance.patch -text wh
 # Preserve exact pinned Rapier upstream comment whitespace.
 third_party/rapier2d/src/dynamics/rigid_body.rs whitespace=-blank-at-eol
 third_party/rapier3d/src/dynamics/rigid_body.rs whitespace=-blank-at-eol
+
+# Preserve exact reviewed 0069 oracle diff context, including blank context lines.
+docs/spikes/evidence/core0069-ui-oracle-correction/source.patch -text whitespace=-blank-at-eol

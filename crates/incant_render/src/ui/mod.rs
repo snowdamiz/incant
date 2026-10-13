@@ -14,26 +14,35 @@
 //! * Clipping. Each quad is intersected with its own clip in the vertex stage.
 //!   Glyphs use `UiWidget::clip` (ancestor clips ∩ own content box) applied to
 //!   their actual padded bounds, so an overflowing Word token or an RTL glyph at
-//!   negative x is cut at the box edge. Surfaces, selection, caret and focus
-//!   ring use `visible` (ancestor clips ∩ border box).
+//!   negative x is cut at the box edge. A label halo with an m-texel margin
+//!   (m = ceil(radius)) may extend m + 1 logical pixels past that clip but never
+//!   past `visible`, and is empty where the clip is empty; a label keeps its
+//!   whole halo with that much padding, and a glyph the clip cuts keeps that
+//!   much of its hidden part's halo. Surfaces, selection, caret and focus ring
+//!   use `visible` (ancestor clips ∩ border box).
 //! * Order. One instanced draw in canonical layout preorder. Within a widget:
-//!   surface, selection, glyphs (a label's shadow pass first), composition
+//!   surface, selection, glyphs (a label's halo pass first), composition
 //!   underline, caret, focus ring.
 //! * Colour. Theme colours are display-referred sRGB with straight alpha and
 //!   are never tone mapped. sRGB targets decode them and blend premultiplied in
 //!   linear light; UNORM targets blend the encoded values. Glyph texels are
 //!   linear area coverage; minification averages an N×N (N ≤ 4) tap grid
-//!   clamped to the glyph's padded texels, as the world text pass does.
-//!   Filtering precision is the backend's (8-bit fixed point on some), and so
-//!   is blending precision: a UNORM target may blend at its own 8-bit
-//!   precision, as llvmpipe and WARP do. A fragment with zero coverage is
-//!   discarded, so pixels a quad does not cover keep their stored value on
-//!   every backend.
+//!   clamped to the glyph's padded texels, as the world text pass does. A label
+//!   halo is a separate atlas entry the UI owner prepared once per paint (the
+//!   glyph's coverage dilated on the CPU, `incant_text::HaloRule`), drawn with
+//!   exactly the glyph path: no per-frame or per-pixel dilation. Filtering
+//!   precision is the backend's (8-bit fixed point on some), and so is blending
+//!   precision: a UNORM target may blend at its own 8-bit precision, as
+//!   llvmpipe and WARP do. A fragment with zero coverage is discarded, so
+//!   pixels a quad does not cover keep their stored value on every backend.
 //! * States. Surfaces are opaque. Disabled uses a flatter surface and muted
 //!   text; focus adds an inset accent ring; a captured pointer press darkens a
-//!   button. Labels sit on the scene and get a hard one-pixel shadow. The caret
-//!   and selection draw only in a focused, enabled field, from `UiEdit` byte
-//!   ranges mapped through the shaped clusters; nothing is inferred from text.
+//!   button. Labels sit on the scene, so each label glyph first draws its
+//!   prepared dark halo (`theme::LABEL_HALO_RULE`: 1/16 em, 1-2.5 px); a label
+//!   without one, a halo of another glyph or radius, another role with one, or
+//!   a halo entry passed as a glyph is refused. The caret and selection draw
+//!   only in a focused, enabled field, from `UiEdit` byte ranges mapped through
+//!   the shaped clusters; nothing is inferred from text.
 //!
 //! Retention. A stage reuses the accepted resources when the `Arc<UiInput>` is
 //! identical, and the uploaded atlas prefix when only the atlas Arc is shared.

@@ -126,6 +126,11 @@ class Bindings(unittest.TestCase):
 
     def test_optional_authored_node_contract_and_present_reset(self):
         spec = copy.deepcopy(hud.DOCUMENT)
+        # The shipped sample may already author the optional prompt. Exercise
+        # absence and presence independently of that presentation choice.
+        spec['widgets'] = [w for w in spec['widgets'] if w.get('binding') != 'prompt']
+        with patch.object(hud, 'DOCUMENT', spec):
+            self.assertIsNone(hud.prompt())
         prompt = copy.deepcopy(spec['widgets'][7])
         prompt.update(index=13, name='Prompt fixture', binding='prompt', parent=10, text={'key': 'hud.prompt'})
         spec['widgets'].append(prompt)

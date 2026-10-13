@@ -1,0 +1,13 @@
+{
+  "finished": "2026-10-13T09:11:25.196551+00:00",
+  "groups": [
+    23932,
+    24022
+  ],
+  "remaining": {
+    "23932": [],
+    "24022": []
+  },
+  "target": "/tmp/incant-agent-font-target",
+  "gpu_executed": false
+}

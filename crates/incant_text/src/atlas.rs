@@ -1,6 +1,12 @@
 //! Retained, append-only CPU alpha atlas. No eviction/repacking behind a live
 //! handle; reset explicitly invalidates every handle. Renderer upload is future.
-use crate::{ShapedText, TextEngine, TextError, raster::Raster};
+//! An entry is a glyph's own coverage, or its halo: that coverage dilated by a
+//! radius (`halo::dilate`) and stored as a separate, larger entry.
+use crate::{
+    ShapedText, TextEngine, TextError,
+    halo::{self, MAX_HALO_RADIUS},
+    raster::Raster,
+};
 use std::{collections::BTreeMap, sync::Arc};
 use ulid::Ulid;
 pub const MAX_ATLAS_BYTES: usize = 4 * 1024 * 1024;
@@ -31,22 +37,27 @@ impl AtlasConfig {
         Ok(bytes)
     }
 }
-/// Exact raster identity: packaged asset + content hash, glyph, and unquantized
-/// positive size bits. Integer-origin coverage only; placement stays with layout.
+/// Exact raster identity: packaged asset + content hash, glyph, unquantized
+/// positive size bits, and the halo radius bits (zero for the glyph's own
+/// coverage). Integer-origin coverage only; placement stays with layout.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord)]
 pub struct GlyphKey {
     pub font: Ulid,
     pub content_sha256: [u8; 32],
     pub glyph: u16,
     pub font_size_bits: u32,
+    pub halo_radius_bits: u32,
 }
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub struct AtlasEntry {
     pub key: GlyphKey,
     /// Inner coverage rectangle [x,y,width,height], excluding 1px zero padding.
-    /// Empty outlines (including spaces) consume a key, but no texels.
+    /// Empty outlines (including spaces) consume a key, but no texels. A halo's
+    /// rectangle is its glyph's grown by `ceil(radius)` texels on every side.
     pub rect: Option<[u32; 4]>,
-    /// Signed top-left bearing relative to the logical baseline, Y down.
+    /// Signed top-left bearing relative to the logical baseline, Y down. A
+    /// halo's is its glyph's moved up and left by the same margin, also for an
+    /// empty outline.
     pub origin: [i32; 2],
     /// Glyph zero is retained as explicit .notdef rather than hidden fallback.
     pub missing: bool,
@@ -73,6 +84,8 @@ pub struct GlyphAtlas {
     revision: u64,
     shelf: Shelf,
     raster: Raster,
+    /// Reused halo scratch, bounded by the largest glyph plus its margin.
+    halo: Vec<u8>,
 }
 impl GlyphAtlas {
     pub fn new(config: AtlasConfig) -> Result<Self, TextError> {
@@ -87,6 +100,7 @@ impl GlyphAtlas {
             revision: 0,
             shelf: Shelf::default(),
             raster: Raster::default(),
+            halo: Vec::new(),
         })
     }
     pub fn size(&self) -> [u32; 2] {
@@ -143,6 +157,10 @@ impl GlyphAtlas {
         if self.entries.len() == self.config.max_glyphs {
             return Err(TextError::Limit("atlas glyph count"));
         }
+        let radius = f32::from_bits(key.halo_radius_bits);
+        if key.halo_radius_bits != 0 && !(radius > 0. && radius <= MAX_HALO_RADIUS) {
+            return Err(TextError::Invalid("halo radius"));
+        }
         let revision = self
             .revision
             .checked_add(1)
@@ -150,32 +168,59 @@ impl GlyphAtlas {
         let image = self
             .raster
             .image(bytes, key.glyph, f32::from_bits(key.font_size_bits))?;
+        // A halo is the coverage dilated by its radius, `margin` texels larger
+        // on every side, with its origin moved up and left by that margin. An
+        // empty outline keeps an empty halo at the moved origin.
+        let (pixels, width, height, origin) = if key.halo_radius_bits == 0 {
+            (image.pixels, image.width, image.height, image.origin)
+        } else {
+            let margin = halo::margin(radius);
+            let origin = image.origin.map(|v| v - margin as i32);
+            if image.width == 0 || image.height == 0 {
+                (image.pixels, 0, 0, origin)
+            } else {
+                halo::dilate(
+                    image.pixels,
+                    image.width,
+                    image.height,
+                    radius,
+                    &mut self.halo,
+                );
+                let grow = 2 * margin;
+                (
+                    self.halo.as_slice(),
+                    image.width + grow,
+                    image.height + grow,
+                    origin,
+                )
+            }
+        };
         let mut shelf = self.shelf;
-        let rect = if image.width == 0 || image.height == 0 {
+        let rect = if width == 0 || height == 0 {
             None
         } else {
-            let (width, height) = (image.width + 2, image.height + 2);
-            if width > self.config.width || height > self.config.height {
+            let (padded_width, padded_height) = (width + 2, height + 2);
+            if padded_width > self.config.width || padded_height > self.config.height {
                 return Err(TextError::Limit("atlas glyph dimensions"));
             }
-            if shelf.x + width > self.config.width {
+            if shelf.x + padded_width > self.config.width {
                 shelf.x = 0;
                 shelf.y += shelf.height;
                 shelf.height = 0;
             }
-            if shelf.y + height > self.config.height {
+            if shelf.y + padded_height > self.config.height {
                 return Err(TextError::Limit("atlas full"));
             }
-            let rect = [shelf.x + 1, shelf.y + 1, image.width, image.height];
-            shelf.x += width;
-            shelf.height = shelf.height.max(height);
+            let rect = [shelf.x + 1, shelf.y + 1, width, height];
+            shelf.x += padded_width;
+            shelf.height = shelf.height.max(padded_height);
             Some(rect)
         };
         // No fallible validation below: only private memory, no external callback.
         let entry = AtlasEntry {
             key,
             rect,
-            origin: image.origin,
+            origin,
             missing: key.glyph == 0,
         };
         let slot = self.entries.len();
@@ -186,7 +231,7 @@ impl GlyphAtlas {
                 let dst = (y as usize + row) * self.config.width as usize + x as usize;
                 let src = row * width as usize;
                 self.pixels[dst..dst + width as usize]
-                    .copy_from_slice(&image.pixels[src..src + width as usize]);
+                    .copy_from_slice(&pixels[src..src + width as usize]);
             }
         }
         self.shelf = shelf;
@@ -204,6 +249,32 @@ impl TextEngine {
         text: &ShapedText,
         index: usize,
         atlas: &mut GlyphAtlas,
+    ) -> Result<GlyphHandle, TextError> {
+        self.cache(text, index, atlas, 0)
+    }
+    /// The halo of one already-shaped glyph: its coverage dilated by `radius`
+    /// texels (`halo::dilate`), prepared once here and cached under the glyph's
+    /// key plus the radius, so drawing it costs one glyph's coverage taps. The
+    /// glyph's own coverage entry is unaffected. Refuses a radius outside
+    /// `(0, MAX_HALO_RADIUS]`.
+    pub fn cache_halo(
+        &self,
+        text: &ShapedText,
+        index: usize,
+        atlas: &mut GlyphAtlas,
+        radius: f32,
+    ) -> Result<GlyphHandle, TextError> {
+        if !(radius > 0. && radius <= MAX_HALO_RADIUS) {
+            return Err(TextError::Invalid("halo radius"));
+        }
+        self.cache(text, index, atlas, radius.to_bits())
+    }
+    fn cache(
+        &self,
+        text: &ShapedText,
+        index: usize,
+        atlas: &mut GlyphAtlas,
+        halo_radius_bits: u32,
     ) -> Result<GlyphHandle, TextError> {
         if !Arc::ptr_eq(&text.font_identity, &self.fonts.identity) {
             return Err(TextError::Invalid(
@@ -228,6 +299,7 @@ impl TextEngine {
                 content_sha256: font.digest,
                 glyph: glyph.id,
                 font_size_bits: glyph.font_size.to_bits(),
+                halo_radius_bits,
             },
             &font.bytes,
         )

@@ -16,6 +16,19 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Core result HUD — current-main qualification
+
+The accepted 0069 label halos, localized result/restart presentation and approved
+font subset have accepted main212 CPU/shipping evidence and a disjoint actual
+main215 tool/test-only ancestry qualification. All selected UI/text/sample
+sources equal Claude's accepted producer; 221 affected Rust CPU tests, 20 Python
+tests, four public locale builds, 14 native positive processes and ten fresh
+source-deleted shipping runs pass, including four exact whole-session PCM
+continuations. Original g5/g6 GPU acceptance remains attached to those binaries;
+no new GPU/device/performance claim is made. Final archive review is accepted;
+current-main qualification is independently accepted, with publication awaiting
+the required fast check. [Scope and evidence](docs/spikes/core0069-main212.md).
+
 ## Static Wasm C builds — bounded local scheduling verified
 
 The trusted bundle feature now enables pinned cc's Cargo-jobserver scheduler.
@@ -26,9 +39,9 @@ unification also affects other cc build consumers in the selected host graph.
 Windows candidate execution and timing remain pending; no Windows speedup or
 performance gate is claimed. [Scope and evidence](docs/spikes/wasm-c-parallel.md).
 
-## Current overview — main214, 2026-10-13
+## Current overview — main215, 2026-10-13
 
-Development main214 includes the reviewed opt-in cooked renderer families and
+Development main215 includes the reviewed opt-in cooked renderer families and
 Vulkan cache lifecycle, dynamic resolution, numerical retained motion, CPU/GPU
 profiling scopes and inert physics island validation. Each lane retains its own
 execution and acceptance limits below; the complete engine and game remain open.
@@ -40,15 +53,15 @@ unconditionally requiring an optional capability on Apple Paravirtual Metal.
 The [test correction](docs/spikes/timestamp-capability.md) checks the exact typed
 refusal and an ordinary completed frame when absent, preserving positive timing
 assertions when supported. Its CPU/compile checks and independent final review
-pass; publication and successor hosted execution remain pending. Both original
-failures are retained.
+pass and PR215 merged after the required fast check. Successor hosted execution
+remains pending; both original failures are retained.
 
 Release now contains selected main205. [Checkpoint20](docs/spikes/release-checkpoint-20.md)
 promoted through PR174 after all 23 required contexts and eight exact-head workflows
 succeeded and independent review verified the exact tested tree. Release `065aac69`
 exactly matches selected main205 `7bfeecfd`. Hosted default/cooked Metal, Vulkan and
 Dx12 suites passed, including the repaired four-process Vulkan cache lifecycle.
-Later main206–214 changes remain outside that tested baseline. No device, performance or
+Later main206–215 changes remain outside that tested baseline. No device, performance or
 phase gate follows from this promotion.
 
 Failed checkpoints15–19 remain historical and unpromoted. In particular, checkpoint17
