@@ -49,7 +49,8 @@ plus the prior 728. Independent source and root final evidence review accepted
 151 CPU tests and seven scoped checks. Missing deferred trees still refuse;
 `PhysicsUnsupported`, hostile live restore and full pipeline-phase admission stay
 closed. The actual main221 composition passes 172 CPU cases in each of default
-and fast8 modes plus all eleven scoped checks; final integration review is accepted.
+and fast8 modes plus all eleven scoped checks; final integration review is accepted
+and PR223 merged after the required fast check.
 No additional vendor changes or performance gate.
 [Current composition](docs/spikes/physics-broad-main221.md).
 [Scope and evidence](docs/spikes/physics-broad-owner.md).
@@ -109,6 +110,23 @@ appearance acceptance remains source-specific; no new appearance claim is made.
 Native cooked output refuses bloom explicitly. Independent final integration
 review and exact main221 source relevance are independently accepted; PR222 merged after the required fast check. [Scope and evidence](docs/spikes/bloom-main219.md).
 
+## Physics pipeline boundary — composed source and CPU evidence
+
+The [pipeline capture slice](docs/spikes/physics-pipeline-boundary.md) preserves
+exact gravity and the historical `None`/false/true staged CCD verdict with checked
+integration/CCD witness association. Actual 2D/3D continuation shows reused versus
+fresh pipelines can differ in CCD cache and substep counters after the last body
+is removed, while serialized owners remain equal; no trajectory difference is
+claimed. Deferred work, quarantine, nonpositive or unverified phases refuse.
+Independent source review, both 176-case CPU modes, 20 parallel controls and all
+ten producer qualification commands pass. The actual broad/narrow/CCD composition
+passes 192 default and 192 fast8 CPU cases plus explicitly pinned two-worker
+controls; fifteen commands pass. Final current composition review is accepted;
+the actual main223 ancestry join preserves all tested executable inputs.
+[Current composition](docs/spikes/physics-pipeline-main222.md).
+Whole-owner provenance, derived geometry/work
+checks, live construction and exact physics save admission remain open.
+
 ## Static Wasm C builds — bounded local scheduling verified
 
 The trusted bundle feature now enables pinned cc's Cargo-jobserver scheduler.
@@ -119,15 +137,17 @@ unification also affects other cc build consumers in the selected host graph.
 Windows candidate execution and timing remain pending; no Windows speedup or
 performance gate is claimed. [Scope and evidence](docs/spikes/wasm-c-parallel.md).
 
-## Current overview — main222, 2026-10-13
+## Current overview — main223, 2026-10-13
 
-Development main222 includes the reviewed opt-in cooked renderer families and
+Development main223 includes the reviewed opt-in cooked renderer families and
 Vulkan cache lifecycle, dynamic resolution, numerical retained motion, CPU/GPU
 profiling scopes and inert physics island validation. Each lane retains its own
 execution and acceptance limits below; the complete engine and game remain open.
 
 Checkpoint23 is frozen at exact main220 through PR213, candidate `3381ccef`,
-with all 23 required contexts and eight workflows preserved. Checkpoint22 is
+with all 23 required contexts and eight workflows preserved. Its macOS journal
+authorization replay test failed; the exact original log is retained and diagnosis
+is underway while the remaining workflows finish. Checkpoint22 is
 terminal and unpromoted: 22 contexts succeeded; its optional timestamp diagnostic
 failure is retained and repaired in main219. The corrected test keeps forced backend
 selection mandatory and runs only supported timing paths, retaining actual compute
@@ -139,14 +159,14 @@ promoted through PR174 after all 23 required contexts and eight exact-head workf
 succeeded and independent review verified the exact tested tree. Release `065aac69`
 exactly matches selected main205 `7bfeecfd`. Hosted default/cooked Metal, Vulkan and
 Dx12 suites passed, including the repaired four-process Vulkan cache lifecycle.
-Later main206–222 changes remain outside that tested baseline. No device, performance or
+Later main206–223 changes remain outside that tested baseline. No device, performance or
 phase gate follows from this promotion.
 
 Failed checkpoints15–19 remain historical and unpromoted. In particular, checkpoint17
 exposed the quota/probe issues repaired in PR188/191; checkpoint18 exposed the editor
 test import repaired in PR193; checkpoint19 exposed the cache count and vendored
 Parry compiler-identity issues repaired in PR201/203. Their original failures remain
-retained. The active checkpoint22 preserves
+retained. The subsequent frozen checkpoint23 preserves
 ADR0014's exact selected tree and all 23 requirements.
 
 Android static-Wasm integration is merged in PR190 after independent source-relevance
