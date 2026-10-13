@@ -1,0 +1,74 @@
+{
+  "at": "2026-10-13T01:11:07.374843+00:00",
+  "reviewer": "astra/root",
+  "decision": "accepted_current_main_ios_fixed_physics_scope",
+  "head": "c1d4d21af334140a6f5bfddd2f3cc364d64b2a25",
+  "tested_head": "6b1724690f80b5fdd979dfc166b9dda0194958cc",
+  "manifest_sha256": "170dfb13f2797bc23642f263e313704859b9e0d3e7bdf77187451523d8ba8150",
+  "frozen_inputs_rehashed": 1963,
+  "current_records_rehashed": 506,
+  "current_payloads": 168,
+  "current_external_binaries": 8,
+  "producer_records_rehashed": 713,
+  "producer_external_binaries": 18,
+  "execution": [
+    {
+      "mode": "deterministic",
+      "platform": "simulator",
+      "target": "aarch64-apple-ios-sim",
+      "export_receipt_sha256": "9b8e75855b2523c11e9f8a4131ecaecb8ebb8f23e8b7b578ef6bb1a19444bc8b",
+      "caller_receipt_sha256": "816f396ce14545c68d09af027bebbd27657e45d244a7eb95058ee8625a828dd7",
+      "positive_processes": 6,
+      "exact_refusals": 16,
+      "raw_command_streams_rehashed": 100,
+      "archive_bytes": 14581768,
+      "caller_bytes": {
+        "c": 11028840,
+        "swift": 11058592
+      },
+      "object_platform": {
+        "architecture": "aarch64",
+        "platform": "iossimulator",
+        "object_minimum_versions": [
+          "14.0",
+          "27.0"
+        ],
+        "headers_sha256": "d04bef5cf01094d44fb32148582b8fcffd77e0308bc764fbe49ce599d31aba03"
+      },
+      "runtime_files": 9
+    },
+    {
+      "mode": "fast",
+      "platform": "simulator",
+      "target": "aarch64-apple-ios-sim",
+      "export_receipt_sha256": "763ae700f9799034cc655d1da7319244e71ec0dc3c96637556551f7f2bbbf1d8",
+      "caller_receipt_sha256": "1f1edc35dd347d4c0a86ec151b44dcef2a83a83329e1e73270544cc1a2396c40",
+      "positive_processes": 6,
+      "exact_refusals": 16,
+      "raw_command_streams_rehashed": 100,
+      "archive_bytes": 14577704,
+      "caller_bytes": {
+        "c": 11027688,
+        "swift": 11057456
+      },
+      "object_platform": {
+        "architecture": "aarch64",
+        "platform": "iossimulator",
+        "object_minimum_versions": [
+          "14.0",
+          "27.0"
+        ],
+        "headers_sha256": "9307e6f2e76f7d939a99da3a3402fb2601050dd0a963969d404f82a3565b6fc5"
+      },
+      "runtime_files": 9
+    }
+  ],
+  "checks": 9,
+  "review_basis": "Read source-relevance, collector and actual source-free simulator assertion logic. Independently rehashed all current/original retained records, external archive/caller bytes and frozen inputs; unchanged engine and accepted exporter sources. Distinguishes current device compile from original unsigned shipping links.",
+  "limits": [
+    "Current local arm64 iOS27.0 simulator CPU only; both fixed physics modes",
+    "Current device compilation only; unsigned shipping device links are original749 producer evidence",
+    "No physical-device/minimum-OS/performance/rendering/signing gate",
+    "Static Wasm iOS follow-on remains separate; Android static modules still refused"
+  ]
+}

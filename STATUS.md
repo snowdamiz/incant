@@ -51,6 +51,24 @@ source and final execution reviews and the exact-head fast check passed; restart
 Native-window/device/appearance acceptance, Wasm/headless restart ownership and
 physics save continuation remain open. [Contract and evidence](docs/spikes/native-session-restart.md).
 
+## Authored iOS fixed physics — current integration execution passed
+
+Ordinary iOS export now selects the project's deterministic or fast kernel and
+audits the selected normal graph, all five actual target solver artifacts and
+shipping codegen. Four fresh archives pass; twelve source/cache/build/map-deleted
+C/Swift simulator processes reproduce 864 checks, 432 complete log records and
+exact nonzero PCM. Thirty-two precise refusals include checksum-valid opposite-mode
+packages in both directions. Both-mode device archives and unsigned C/Swift links
+pass without device execution. The accepted source/probe is unchanged, and the
+complete producer execution packet has independent final acceptance. The composed
+main181 runtime now passes nine checks, two fresh simulator archives, twelve actual
+C/Swift positives and thirty-two precise refusals. Both current device target
+compilations pass; original unsigned device links remain producer-scoped. Final
+integration review is accepted; publication requires the exact-head fast check.
+[Current integration evidence](docs/spikes/authored-ios-physics-main181.md).
+No phone, performance, rendered-output, signing or phase gate is claimed.
+[Scope and retained evidence](docs/spikes/authored-ios-physics-modes.md).
+
 ## Authored iOS project archives — merged in main178
 
 The separate trusted-source iOS exporter cooks public-authored TypeScript imports,
@@ -62,8 +80,8 @@ observations, 216 log records and exact nonzero PCM after private source, cache,
 build and maps are removed; fourteen precise refusal controls pass. Device
 archives and unsigned caller links pass, without device execution. Independent
 producer, integration-source and final execution reviews are accepted; the
-exact-head fast check passed and PR178 is merged. Fast iOS projects, desktop cross-target
-export, Android and mobile static Wasm remain denied in this slice. No signing,
+exact-head fast check passed and PR178 is merged. This historical proof was deterministic-only; the separate producer above adds fast iOS projects. Desktop cross-target
+export and mobile static Wasm remain denied in this slice. No signing,
 mobile window/audio host, phone performance or phase gate is claimed.
 [Current source and evidence](docs/spikes/authored-ios-main177.md).
 
@@ -896,7 +914,7 @@ original missing-bundle compile attempt and unchanged-source correction.
 
 ## Current milestone
 
-Main #180 includes compound native animation and Wasm snapshots, authored two-bone
+Main #182 includes compound native animation and Wasm snapshots, authored two-bone
 IK, native/TypeScript/Wasm root motion, audio transport and HUD, offline audio/UI
 checkpoints, public physics queries, and the Core/Planar gameplay foundations.
 Pearl Cove's authored art/HUD and runtime hooks are merged with their scoped
@@ -910,7 +928,10 @@ CPU worker and managed owner are merged through main179;
 whole-session restart is merged in main180 and bounded PCM in main181. Both authored
 Android variants pass preserved pre-PCM archive/emulator proofs; the final composed
 deterministic archive and both-mode mobile/target checks pass, with independent
-integration review accepted and the exact-head fast check pending. Phase 1 and the finished game
+integration review and the exact-head fast check passed; Android is merged in main182.
+The composed iOS fixed-mode simulator proof and final integration review are
+complete; its required fast check remains ahead. Core authored HUD/audio/restart bindings are independently accepted locally
+and queued; their new live presentation acceptance remains separate. Phase 1 and the finished game
 remain incomplete.
 
 Checkpoint14 promoted selected main160 `d1ef35ee` after all 23 exact-candidate
