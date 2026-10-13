@@ -163,3 +163,31 @@ pub(super) fn restore_captured(
         admit::AssemblyError::Construction(e) => E::Construction(e),
     })
 }
+
+pub(super) fn validate_persisted(
+    bytes: &[u8],
+    expected: incant_physics_snapshot::Identity,
+    decode: &mut incant_physics_snapshot::Budget,
+    work: &mut super::WorkBudget,
+) -> Result<(), super::persisted::PersistedError> {
+    let a = AssemblyFrame::decode(bytes).map_err(super::persisted::PersistedError::Construction)?;
+    admit::with_persisted(&a, expected, decode, work, |_| Ok(()))
+}
+pub(super) fn restore_persisted(
+    bytes: &[u8],
+    expected: incant_physics_snapshot::Identity,
+    decode: &mut incant_physics_snapshot::Budget,
+    work: &mut super::WorkBudget,
+    allocations: &mut AllocationBudget,
+) -> Result<PhysicsWorld, super::persisted::PersistedError> {
+    let a = AssemblyFrame::decode(bytes).map_err(super::persisted::PersistedError::Construction)?;
+    // No submitted pointer selects execution context. The receiving library's
+    // default/global pool and built-in dispatcher are used for imports.
+    let context = CaptureContext {
+        #[cfg(all(feature = "parallel", not(feature = "unsync-callbacks")))]
+        pool: None,
+    };
+    admit::with_persisted(&a, expected, decode, work, |admitted| {
+        construct(admitted, &context, allocations)
+    })
+}

@@ -7,8 +7,9 @@ adds no byte importer and does not relax public physics-save refusal.
 collider removal slice and peak body/collider insertion counts. It checks actual
 live handles, attached-collider deletion and overlap, exact global arena
 removal-generation headroom, native doubling capacity and the sum of persistent
-island removal counters. A zero-capacity restored arena refuses insertion: the
-native slow path would otherwise reserve zero. Joint/soft history remains refused.
+island removal counters. A manually supplied zero-capacity native arena refuses insertion: the
+native slow path would otherwise reserve zero. The inert decoder already
+requires nonzero slot storage; this is an additional operation-time defense. Joint/soft history remains refused.
 
 The returned non-Clone `StructuralPlan` borrows only the operation slice, retaining
 an Arc to this owner's original dispatcher and its checked mutation revision. It

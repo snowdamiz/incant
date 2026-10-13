@@ -11,8 +11,13 @@ pub struct NativeFrame {
     pub(super) identity: Identity,
     pub(super) bytes: Vec<u8>,
     pub(super) context: world::CaptureContext,
+    pub(super) origin: super::FrameOrigin,
 }
 impl NativeFrame {
+    #[cfg(test)]
+    pub(crate) fn origin(&self) -> super::FrameOrigin {
+        self.origin
+    }
     /// Actual compiled identity of the exclusive source owner.
     pub fn identity(&self) -> Identity {
         self.identity
@@ -20,6 +25,22 @@ impl NativeFrame {
     /// Immutable captured envelope. No corresponding public from-bytes exists.
     pub fn encoded(&self) -> &[u8] {
         &self.bytes
+    }
+    /// Validate the stricter editable-data domain before copying exact bytes.
+    /// Decode scratch and output share one cumulative logical payload budget.
+    pub fn persisted_bytes(
+        &self,
+        payload: &mut Budget,
+        work: &mut WorkBudget,
+    ) -> Result<Vec<u8>, super::super::persisted::PersistedError> {
+        let actual = compiled_identity()?;
+        if actual != self.identity {
+            return Err(CaptureError::Build.into());
+        }
+        super::super::persisted::validate(&self.bytes, actual, payload, work)?;
+        let mut out = payload.vector(self.bytes.len())?;
+        out.extend_from_slice(&self.bytes);
+        Ok(out)
     }
     /// Stage a complete candidate under cumulative decode, work and allocation
     /// budgets. This never replaces a caller's live owner or outer runtime.
@@ -41,6 +62,6 @@ impl NativeFrame {
             work,
             allocations,
         )?;
-        Ok(CheckpointOwner::restored(candidate, actual))
+        Ok(CheckpointOwner::restored(candidate, actual, self.origin))
     }
 }
