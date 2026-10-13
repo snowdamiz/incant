@@ -341,5 +341,9 @@
     "No vendor source, lock or manifest changes from main221. Normal snapshot dependency graph remains std-only.",
     "No hostile decoder/live construction, full-owner restore, world save, device or performance admission."
   ],
-  "final_review": "pending"
+  "final_review": {
+    "decision": "accepted",
+    "path": "docs/spikes/evidence/physics-broad-main221/final-root-review.json",
+    "sha256": "b6708d3820d114ec7209d6bf99d1b271192227d0a0b925c7d037656c7697d5ff"
+  }
 }

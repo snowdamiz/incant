@@ -49,7 +49,7 @@ plus the prior 728. Independent source and root final evidence review accepted
 151 CPU tests and seven scoped checks. Missing deferred trees still refuse;
 `PhysicsUnsupported`, hostile live restore and full pipeline-phase admission stay
 closed. The actual main221 composition passes 172 CPU cases in each of default
-and fast8 modes plus all eleven scoped checks; final integration review is pending.
+and fast8 modes plus all eleven scoped checks; final integration review is accepted.
 No additional vendor changes or performance gate.
 [Current composition](docs/spikes/physics-broad-main221.md).
 [Scope and evidence](docs/spikes/physics-broad-owner.md).

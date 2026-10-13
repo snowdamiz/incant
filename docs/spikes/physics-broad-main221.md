@@ -27,7 +27,8 @@ owner identity and cumulative decode/validation budgets retain producer semantic
 [read-only verifier](evidence/physics-broad-main221/verify.py) retain 27 current
 records, 16 payloads, the input freeze and exact source mapping, plus the original
 124-record producer packet and its independent final acceptance. Final integrated
-source/execution review is pending before publication.
+source/execution review is accepted. A later main ancestry join receives separate
+source relevance verification before publication.
 
 This remains checked inert representation and trusted native observation.
 There is no live construction, aggregate owner authentication, pipeline boundary
