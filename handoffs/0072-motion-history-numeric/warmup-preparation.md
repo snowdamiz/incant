@@ -19,6 +19,8 @@
   - all 17 guarded commands refuse with no grant, and none creates the
     namespace.
 - **Not claimed:** no phase, gate, appearance or performance claim.
+- **Visual tree to grant:** `648e32e9d9b1a7b85f2c2e6db2b03e7be1998e25`, from
+  preparation commit `c10d01f5`. Later doc-only commits leave it unchanged.
 
 - **Model:** Claude Opus 5.5 (`claude-opus-5-5`).
 - **Thinking effort:** max, as reported by this session's environment. I cannot
