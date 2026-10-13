@@ -41,7 +41,8 @@ explicitly qualified to that earlier source; its algorithm/default feature bytes
 are unchanged. Final003 repeats the affected snapshot/Clippy/build-identity/tooling
 checks. No redundant runtime execution is claimed.
 
-Source001 was independently accepted; final003 delta and complete execution
-packet await final independent review. PhysicsUnsupported remains closed. No live
+Source001 and the final003 delta and complete execution packet are independently
+accepted. The [main211 qualification](evidence/physics-world-continuation-main211/qualification.json)
+retains all651 exact inputs and qualifies the sole disjoint Wasm build-feature change. PhysicsUnsupported remains closed. No live
 restore, complete owner authentication, game shipping, GPU, phone, performance or
 phase acceptance is claimed.

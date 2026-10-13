@@ -77,8 +77,8 @@ handle reuse; omitted scan state has a failing near-wrap control. Final default
 Clippy, runtime/wasm/compiler identity and tooling checks. The default-off pinned
 Rapier adapter stays absent from ordinary runtime compiler features.
 
-[The execution packet](docs/spikes/physics-world-continuation-results.md) is ready
-for final independent review. No hostile live constructor or engine save admission
+[The execution packet](docs/spikes/physics-world-continuation-results.md) has independent source and final evidence acceptance; current-main
+qualification is retained. No hostile live constructor or engine save admission
 is enabled; complete collider/manager/joint/phase composition remains pending.
 
 ## GPU timestamps — device review passed; concurrent interval corrected

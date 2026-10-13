@@ -772,5 +772,10 @@
     "Near-wrap counter placement is synthetic. Other pinned split-cooldown wrap paths are not established.",
     "No shipping game, device, performance, renderer or phase gate claim."
   ],
-  "review_state": "Source001 accepted; final003 license/manifest addendum and final execution packet awaiting independent review"
+  "review_state": "Producer source001 and final003 delta/execution independently accepted; main211 ancestry qualification retained separately",
+  "final_review": {
+    "path": "docs/spikes/evidence/physics-world-continuation-main211/producer-final-review.json",
+    "sha256": "dd4b9380714988c7c4b6f1ef449f01eed4222492fb7e7dc7ebf93ed3e59ae1a1",
+    "reviewed_manifest_sha256": "42a59ea03dc36b74de6accdf21db9224219efef6088a6096421e7b1dba2b4902"
+  }
 }
