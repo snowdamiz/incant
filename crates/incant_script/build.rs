@@ -112,6 +112,7 @@ fn main() {
     let mut runtime = Sha256::new();
     for name in [
         "incant_runtime",
+        "incant_profile",
         "incant_physics_runtime",
         "incant_physics_2d_runtime",
         "incant_input",
