@@ -2,12 +2,14 @@
 
 **Status: production shader source written. Not compiled, not run.**
 - The production source is `crates/incant_render/src/upscaling/resolve_owner.wgsl`
-  (`1744fdff7a3a5433790958c25baaadb50537bfab6753b2c1411d2cfcd51d5d9d`, 179 lines,
+  (`df600750ab5cad117ae0cfa1e76fa635e07c96be4a76d8aa9e8470d9954c64ae`, 179 lines,
   ASCII).
-- The shader is alone in two isolated commits, to be selected in order:
+- The shader is alone in three isolated commits, to be selected in order:
   - `f437deaa706e33285bae552a2ca8ea7b71269952` added it (`45a39859…`);
   - `9f3e6afbf9b96e5d0349593e7307d914218506cc` is the fallback-coordinate
-    correction below.
+    correction below (`1744fdff…`);
+  - `df1136f29197906728930fb97069476a31d07b27` makes the support indices u32
+    (`df600750…`; see the addendum).
 
   The checks and this document follow in separate commits.
 - No Cargo, Rust, build, target, GPU, image, screenshot or visual tuning was
@@ -50,6 +52,48 @@ Today's `resolve.wgsl` uses the actual old position in all of these.
 **Qualification of earlier agreement.** The d90 reference `resolve()` and the
 `45a39859` transcription made the same snap, and the earlier replay and fuzz held
 no nonzero sub-1/256 displacement. So their agreement never covered this case.
+
+## Addendum after `297e2724`: u32 support indices
+
+**Root's result.**
+- The composed host compiled, and its 152 CPU tests ran.
+- The Naga 29.0.4 SPIR-V round trip rejected `UpscaleOwner` with
+  `BuiltinArgumentsInvalid("Min")` at function 21, expression 374, span
+  19672..19700.
+- Root traced this to `write_restricted_index`, where a cached signed index feeds
+  `UMin` with a u32 bound.
+
+**Fix (`df1136f2`).** Only the index type changed, at three sites on two lines:
+- line 95, the store `support[y*2+x]`, became `support[u32(y*2+x)]`;
+- line 115, both `support[i]` reads became `support[u32(i)]`.
+
+**Why the values cannot change.**
+- **Line 95:** it sits in the line 85 loop `for(var y=0;y<2;y++) {for(var
+  x=0;x<2;x++)`, whose body never reassigns x or y. The index is therefore in
+  {0,1,2,3}.
+- **Line 115:** the loop is `for(var i=0;i<4;i++)`, so `i` is in {0,1,2,3}.
+- WGSL `u32()` of an i32 is the value mod 2^32, which is the same value for these
+  non-negative indices.
+- Every index is below 4, the vector length, so Naga's restrict clamp `min(.,3)`
+  never fires.
+- The only other dynamic index, `changes.words[n>>7u][(n>>5u)&3u]`, was already
+  u32.
+- Nothing else changed: coordinates, thresholds, provenance, branches, bindings,
+  `common.wgsl` and `resolve.wgsl` are all untouched.
+
+**Check.** A CPU assertion run on the edited file passed. It:
+- matches the exact loop headers and the three converted sites;
+- finds no reassignment of x or y;
+- confirms that every non-comment dynamic index is u32-typed;
+- enumerates `y*2+x` = [0,1,2,3] and `i` = [0,1,2,3].
+
+**Not re-run.** `shader_v5_check.py` stays pinned to `1744fdff`, so it now refuses
+the new file by design, and its results remain those of `1744fdff`. This change
+alters only index types, and the Python transcription has no integer signedness.
+
+**Still root's.** No build, compile or GPU work was done here. The Naga and
+cooker validation belong to root. A clean compile would not prove rendered
+behaviour.
 
 ## Base
 
