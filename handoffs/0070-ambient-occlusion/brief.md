@@ -1,3 +1,67 @@
+# Root review revision2 — preparation corrections only
+
+No GPU or Cargo target grant yet. Opus5.5 explicitly Max. Preserve previous result
+as preparation-result-v1.md; fix these focused runner defects, rerun CPU controls,
+and return final identities. No new broad source survey.
+
+1. `Ledger.locked()` only holds packet runner.lock. Add the shared
+~/.codex/incant-evidence/native-gpu.lock, acquired nonblocking BEFORE packet lock
+and held through preflight/reservation/launch/kill+wait/completion/release. Never
+allow separate packets to render concurrently. Add a two-packet control proving
+one refuses before reservation while the other owns the shared lock.
+2. A failed completion currently leaves no unresolved reservation, so gpu_checks
+allows unrelated next GPU children. Latch production/test/validation failures and
+refuse further device work except a separately root-authorized precise retry.
+Do not classify missing tests/verdict/invalid frame receipt as success.
+3. Reconcile must not SIGKILL an arbitrary recycled PGID just because every member
+started AFTER the old reservation. Require retained exact process identity for
+signaling; if ownership cannot be proven, refuse and report for root handling.
+A positive timestamp comparison alone does not establish ownership. Ensure failed
+reconciliation/group survivors cannot unblock subsequent children.
+4. Root expands EXISTING regression budget to8192 frames (combined8320), preserving
+new128/PNGs32/serial16children/45minutes. This admits the actually counted6264-frame
+wide test plus1828 others, so include all94 compiled cases exactly once and remove
+the artificial deferral. Derive totals again; do not shrink the test. No new GPU
+or target permission follows from this budget correction.
+
+Root accepts half-resolution as canonical SSAO treatment; full-res quality can be
+separate later. Oversize refusal can remain CPU-covered. Cargo config key/hash
+inspection is appropriate. Existing prior128 new-frame cap and stop-on-production-
+failure remain. Root reviews the numerical Rust helper separately before grant.
+
+---
+
+# Priority continuation — 2026-10-13
+
+The first preparation session was interrupted only to apply the director's
+already-authorized bypassPermissions mode. Its five owned processes are gone;
+no build/target/GPU grant was issued and no capture was made. Resume source-only
+preparation in this same checkout. Explicit Opus5.5 Max remains mandatory.
+Do not restart the source survey from scratch: continue the combined fixture and
+bounded runner/case plan you were preparing. No Cargo, GPU, target or capture yet.
+No memory or outside notes. Model/effort verification is performed before this prompt.
+
+For context, the exact engine source now has completed union CPU evidence on the
+parent at94f604fa (docs-only after your b21f91c1). All11checks passed:25shadercook,
+98default renderer/host,125cooked with overlap,94GPUignored per variant,Clippy,
+web/native compilation and dependency checks. You may read the parent's
+`docs/spikes/render-effects-composition.md` and its evidence manifest read-only.
+Engine hashes are unchanged from reviewed b633f92d.
+
+Known runner mistakes found in another packet must not recur: use git porcelain
+-z without stripping leading status columns; freeze every relevant actual dirty
+source and helper byte plus the compiler binary inputs; put frame reservation
+under the same lock as launches; always finally kill/wait the owned process group
+on interruption/error/timeout before releasing the lock. If reusing previous
+frames, bind exact source/binary/variant/route/viewport/state and actual files;
+simpler fresh bounded captures are preferable. Construct an explicit nonsecret
+environment and record only approved overrides.
+
+Return the prepared helpers promptly once ready for source review. Do not wait
+for a grant and do not repeat extensive evidence reads already completed.
+
+---
+
 # 0070 — opt-in diffuse SSAO: backend and appearance acceptance
 
 Preparation only. **No GPU/native process/target lease is granted by this packet.**
