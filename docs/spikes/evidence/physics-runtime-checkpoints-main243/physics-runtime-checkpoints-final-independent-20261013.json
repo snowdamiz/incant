@@ -1,0 +1,117 @@
+{
+  "schema": 1,
+  "at": "2026-10-13T19:40:57.976274+00:00",
+  "reviewer": "astra /root/native_wasm_export",
+  "status": "accepted",
+  "findings": [],
+  "scope": "Independent read-only final execution/composition audit of the outer primitive in-memory 2D/3D runtime checkpoint producer; native capture source was reviewed independently by /root/integrate_runtime_prs and is not self-reviewed here.",
+  "head": "aadaa1a4be456e5e1d0b51490f5b70b9e94d5ac2",
+  "source": "3e95ecc3ffb9d104585f7a9db8020557ef852fdc",
+  "manifest": {
+    "path": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/docs/spikes/evidence/physics-runtime-checkpoints/manifest.json",
+    "sha256": "a89568c546282af587d24fd23f625b6a1bd91bcbefb551b7e07bb2b0cc630c1b"
+  },
+  "archive": {
+    "path": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/docs/spikes/evidence/physics-runtime-checkpoints/records.json.gz",
+    "sha256": "74f61527c078b84d30b7812d41dbf37bfe8044f3466a0b5af62ff3d666522143"
+  },
+  "integrity": {
+    "verifier": "/Users/andreyyurlov/.codex/incant-reviews/verify-physics-runtime-checkpoints-final-20261013.py",
+    "verifier_sha256": "dee46643835f1c194d1a3c5e1a1dbb396660fee898cc6eec9194eaa5143d099a",
+    "result": "/Users/andreyyurlov/.codex/incant-reviews/physics-runtime-checkpoints-final-integrity-20261013.json",
+    "result_sha256": "b0f7e3197ef5c70e6c13a5e0976a6a8b5a5083d7597608a5906ef29968673cdc",
+    "exit_code": 0,
+    "retained_records": 58,
+    "outer_source_records": 27,
+    "prepared_frozen_sources": 20172,
+    "executable_copies": 68,
+    "all_copies_executable": true,
+    "native_sources_compared_per_generation": 81,
+    "locked_package_identities": 968
+  },
+  "reviews": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/physics-outer-checkpoint-early-source-independent-20261013.json",
+      "sha256": "49d614f61590391c44e811a8cd70f085016bef9a7925aed350c8fce2a9530828"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/physics-outer-checkpoint-pair-budget-source-20261013.json",
+      "sha256": "e6e9d6953e0369186b3dfa860f149770a10e85a95519d5591c566e328d519cf2"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/physics-outer-checkpoint-failed-guard-source004-independent-20261013.json",
+      "sha256": "8c71dcd5b4466c24d1ced042ed3a7ed894d2d2e4177755acb47a77e6e414bbfc"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/physics-native-capture-source009-independent-20261013.json",
+      "sha256": "f43b5b74444ac96c269a6c973497f26129befb91a28f553ca867ba2479831737"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/physics-native-capture-source010-delta-independent-20261013.json",
+      "sha256": "f676ed991caf704ac60ec7e5bd1e24e7e263b501ab0f0568aafd064e981530e8"
+    }
+  ],
+  "tests": {
+    "checkpoint-all-004": {
+      "passed": 38,
+      "groups": 7,
+      "nonempty": 7
+    },
+    "tests-fast8-004": {
+      "passed": 38,
+      "groups": 7,
+      "nonempty": 7
+    },
+    "clippy-default-004": {
+      "passed": 0,
+      "groups": 0,
+      "nonempty": 0
+    },
+    "clippy-fast8-004": {
+      "passed": 0,
+      "groups": 0,
+      "nonempty": 0
+    },
+    "wasm-check-004": {
+      "passed": 0,
+      "groups": 0,
+      "nonempty": 0
+    },
+    "fmt-004": {
+      "passed": 0,
+      "groups": 0,
+      "nonempty": 0
+    },
+    "tests-consumers-default-004": {
+      "passed": 263,
+      "groups": 38,
+      "nonempty": 37
+    },
+    "checkpoint-all-005": {
+      "passed": 38,
+      "groups": 7,
+      "nonempty": 7
+    },
+    "tests-fast8-005": {
+      "passed": 38,
+      "groups": 7,
+      "nonempty": 7
+    }
+  },
+  "observations": [
+    "All 58 repository records match their originals and hashes. All 27 outer source rows also match immutable source commit and both 004/005 prepared freezes. The final 20,172-row prepared tree rehashes exactly.",
+    "Both compositions bind the corresponding 81 native code/config source rows. The only 004-to-005 changes are two conditional argument renames and their two vendor pins, exactly matching d6ca9867. Outer source is unchanged. Native source009/010 semantics acceptance is delegated to the named independent publisher receipts.",
+    "Nine reported commands have zero exits and exact raw-log hashes. Both source009 compositions pass 38 tests in seven groups per mode; source010 repeats those 38 per mode. The 263 default consumer tests have 38 summary groups including one empty group. Repeated mode/generation counts are not distinct tests.",
+    "All 68 frozen executable copies including historical002, both-mode004/005 and default consumers match their retained hashes and log Running paths, and retain executable permission. The runners copy immediately after each successful test command. No overwritten target path was substituted for an earlier frozen copy.",
+    "Test bodies and passing case names establish 96 paired continuation steps per dimension per mode, exact native encoded frames, stable-ID states, queries and full trigger observations through removal/reuse and motion edits. Source native owner algorithms are not independently re-reviewed by this author.",
+    "Late second-scene invalid outer state is refused after candidate native reconstruction and before live replacement; zero payload/work/allocation budget controls preserve source frames. Pair budget tests distinguish one false native candidate from zero published overlaps. Actual terminal simulation errors refuse capture before accessing native state or consuming payload/work budgets.",
+    "Queries and unchanged motion echoes preserve capture authority, real mutations revoke it until successful stepping, and exits for removed entities/scenes remain representable. The prior pair-visit and failed-owner findings are closed in exact reviewed source and actual passing controls.",
+    "The two initial compile failures remain retained with exit101 and exact raw logs (CaptureError thiserror conversion, spatial fixture type mismatch), separately from the 14 successful local command receipts. No failed attempt is counted as passing."
+  ],
+  "limitations": [
+    "No reviewer build, test execution, GPU, image inspection or source mutation. The read-only repository verifier and independent hash/assertion audit were run.",
+    "Acceptance is local CPU producer scope, not integrated-current-main execution. Final source was composed in the retained prepared tree; original outer worktree by itself does not contain all native capture changes.",
+    "Opaque in-memory primitive checkpoints only; no public byte importer, persisted physics save, complete ECS/script/session restoration, arbitrary shapes/character caches or device/performance/phase gate.",
+    "Logical payload/work accounting does not claim allocator-overhead, RSS or elapsed-time limits; native allocation qualifications remain inherited."
+  ]
+}

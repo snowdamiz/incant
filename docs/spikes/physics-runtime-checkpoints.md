@@ -66,7 +66,14 @@ contains source identities, raw logs and command receipts; its read-only verifie
 checks the retained packet. Full local evidence, including executable copies,
 is under `~/.codex/incant-evidence/physics-runtime-checkpoints-001/`.
 Independent source review closed both observed work-budget/failed-owner issues.
-Final evidence review and integrated publication remain separate requirements.
+Final producer evidence review is independently accepted under receipt
+`bcca0ca82ca0c65dff60c0ffd3d1e6e210481a8a7cf6e47463ba804914e91774`.
+Current-main243 source composition is preserved separately in
+[`evidence/physics-runtime-checkpoints-main243/source-composition.json`](evidence/physics-runtime-checkpoints-main243/source-composition.json):
+all 3,647 listed implementation, build and tool inputs are byte-identical to
+the executed source005 prepared tree, including the native capture dependency
+and combined lock. This source comparison is not a new build or execution.
+Integrated review and publication remain pending.
 
 ## Remaining limits
 
