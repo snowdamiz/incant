@@ -10,4 +10,5 @@ Current integration final review is accepted (`c21d16ea`). Main231 constructor
 ancestry is joined with explicit old/new frozen hashes. The imported private
 Rapier modules and observer alias are guarded by features absent from both
 actual renderer builds. Renderer source, manifests and lock remain unchanged;
-this is a source-relevance qualification, with review pending. See [manifest](evidence/shadow-main230.json) and [original report](../../handoffs/0076-shadow-guard-review/result.md). No phone, performance or phase gate is approved.
+this source-relevance qualification is independently accepted (`ec653030`).
+Publication follows the required fast check. See [manifest](evidence/shadow-main230.json) and [original report](../../handoffs/0076-shadow-guard-review/result.md). No phone, performance or phase gate is approved.

@@ -1234,6 +1234,10 @@
     "sha256": "7e1ea99455a7bdacc41bffbda8f561ac0ad18c7df8e8a8bf9fa8d959585bfb2c",
     "raw_sha256": "e1ffe9552fe1664bcfdea6f02a4d6bc737be7fedd4f1d1873f9a1f6c11845b94",
     "scope": "reviewed constructor feature-gated source; manifests and renderer unchanged; no new build claim",
-    "review": "pending"
+    "review": {
+      "path": "docs/spikes/evidence/shadow-main230/main231-root.json",
+      "sha256": "ec653030e6585b1cade5d71a6734c1c7a16dae483187189184c398c93c8ca147",
+      "decision": "accepted"
+    }
   }
 }

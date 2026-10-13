@@ -16,6 +16,19 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Consistent shadow receiver fitting — current-main qualification
+
+Shadow cascade fitting now uses the actual render viewport and the same local
+half-pixel guard with temporal rendering off or on. The scene camera, lighting
+clusters, filtering and shaders are unchanged; default unjittered shadow fitting
+intentionally changes. Current composition passes171 default/203 overlapping
+cooked CPU cases and13 checks, with33 native payloads exact. Independent source,
+final evidence and main231 relevance reviews are accepted; publication awaits
+its fast check. Original Metal/Claude visual evidence remains producer-scoped:
+the initial strict comparison is still failed, same-binary one-frame variation
+is unresolved, and thin MASK/temporal quality limits remain. No current GPU or
+phone/performance claim. [Evidence](docs/spikes/shadow-main230.md).
+
 ## Default-off SSAO — curated current-main qualification
 
 The complete diffuse SSAO/R3/C2 producer has independent numerical and Claude
