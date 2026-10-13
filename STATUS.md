@@ -48,7 +48,10 @@ is unchanged. Eight new actual 2D/3D cases include 96 trusted continuation steps
 plus the prior 728. Independent source and root final evidence review accepted
 151 CPU tests and seven scoped checks. Missing deferred trees still refuse;
 `PhysicsUnsupported`, hostile live restore and full pipeline-phase admission stay
-closed. No vendor changes or performance gate. Publisher integration is pending.
+closed. The actual main221 composition passes 172 CPU cases in each of default
+and fast8 modes plus all eleven scoped checks; final integration review is pending.
+No additional vendor changes or performance gate.
+[Current composition](docs/spikes/physics-broad-main221.md).
 [Scope and evidence](docs/spikes/physics-broad-owner.md).
 
 ## Inert narrow-phase owner — source and CPU evidence accepted
