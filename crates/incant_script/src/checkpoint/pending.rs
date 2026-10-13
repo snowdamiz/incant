@@ -1,4 +1,6 @@
 use super::*;
+#[cfg(feature = "native-checkpoints")]
+mod native;
 use incant_input::{InputRuntime, ValidatedActions};
 
 /// Decoded ordinary-load candidate, before any guest initialization. Native hosts
@@ -13,6 +15,8 @@ pub struct PendingSessionCheckpoint {
     store: Store,
     schedule: Schedule,
     bindings: ValidatedActions,
+    #[cfg(feature = "native-checkpoints")]
+    restart_requests: bool,
     #[cfg(feature = "ui")]
     ui: Option<incant_ui::PendingUiCheckpoint>,
     #[cfg(feature = "audio")]
@@ -35,6 +39,8 @@ impl PendingSessionCheckpoint {
             store: state.store,
             schedule: state.schedule,
             bindings,
+            #[cfg(feature = "native-checkpoints")]
+            restart_requests: false,
             #[cfg(feature = "ui")]
             ui: None,
             #[cfg(feature = "audio")]
@@ -159,6 +165,8 @@ impl PendingSessionCheckpoint {
             store,
             schedule,
             bindings,
+            #[cfg(feature = "native-checkpoints")]
+            restart_requests: false,
             #[cfg(feature = "ui")]
             ui,
             #[cfg(feature = "audio")]
@@ -236,6 +244,10 @@ impl PendingSessionCheckpoint {
             &self.schedule,
             &self.world,
         )?;
+        #[cfg(feature = "native-checkpoints")]
+        if self.restart_requests {
+            host.enable_restart_requests()?;
+        }
         *host.persistent.borrow_mut() = self.store;
         host.schedule = self.schedule;
         let mut input = InputRuntime::default();
