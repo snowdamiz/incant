@@ -75,6 +75,17 @@ their recorded producer binary; no current composed GPU or appearance claim is m
 Final integration review and the exact-head fast check passed; PR204 is merged. Default rendering is unchanged; temporal color,
 upscaling and cooked motion remain separate.
 
+## Exact physics saves — inert pair persistence producer accepted
+
+The std-only inert format checks pair event/color/recycle fields and closed
+composite workspace maps against existing manifold/geometry ownership. Native
+tuple keys, detector order/timestamps and manifold bijections are retained;
+unknown workspace kinds refuse explicitly. Producer88 CPU cases, Clippy/wasm32
+and dependency checks have independent acceptance. Current-main integration
+checks are pending. Previous-cluster scratch reconstruction, complete
+body/island/solver ownership and live/save admission remain open.
+[Pair-state contract](docs/spikes/physics-inert-pair-state.md).
+
 ## Exact physics saves — inert manifold ownership verified locally
 
 The std-only inert format now joins contact edges to exact collider generations,
