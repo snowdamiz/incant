@@ -2465,3 +2465,16 @@ checkpoint. [Evidence](docs/spikes/windows-conformance-split.md).
   cases remain ignored. Actual callback/render execution, Claude visual acceptance,
   temporal reconstruction/MetalFX and reference-device budgets remain open. See
   [contract and evidence](docs/spikes/dynamic-resolution.md).
+
+### Inert integration/CCD configuration (producer, final audit pending)
+
+The std-only snapshot crate now retains pinned rigid integration settings and the
+completed-step CCD fixed-target cache, including exact historical prediction bits,
+ordered handles/AABBs and all three cache states. A separate default-off vendor
+getter only borrows the previously serde-skipped cache. Independent source review
+accepted the scoped implementation; full source003 suites pass156 each in both
+numerical modes. Final source004 changes only two test constructor expressions;
+focused21 each, strictClippy/wasm/lean/fmt/conventions pass. Historical failures are
+retained. No live constructor/cache installer or save admission is added. See
+`docs/spikes/physics-integration-config.md`; cache/shape coherence, complete-owner
+work/phase validation, root final audit and integration remain pending.
