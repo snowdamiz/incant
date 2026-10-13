@@ -1,0 +1,490 @@
+{
+ "execution": {
+  "adapter": {
+   "backend": "Metal",
+   "device": 0,
+   "device_type": "IntegratedGpu",
+   "driver": "",
+   "driver_info": "",
+   "max_texture_dimension_2d": 8192,
+   "name": "Apple M5 Pro",
+   "vendor": 0
+  },
+  "budget_consumed": {
+   "pngs": 15,
+   "queue_submissions": 778,
+   "readback_maps": 380,
+   "readback_submissions": 380,
+   "rendered_frames": 380,
+   "scene_submissions": 380,
+   "ui_submissions": 18
+  },
+  "budget_planned": {
+   "builds": 0,
+   "maximum_extent": [
+    960,
+    540
+   ],
+   "pngs": 15,
+   "processes": 5,
+   "queue_submissions": 778,
+   "readback_maps": 380,
+   "readback_submissions": 380,
+   "rendered_frames": 380,
+   "retries": 0,
+   "scene_submissions": 380,
+   "timeout_seconds_each": 90,
+   "ui_submissions": 18
+  },
+  "children": [
+   {
+    "accepted": true,
+    "budget": {
+     "pngs": 6,
+     "queue_submissions": 118,
+     "readback_maps": 50,
+     "readback_submissions": 50,
+     "rendered_frames": 50,
+     "scene_submissions": 50,
+     "ui_submissions": 18
+    },
+    "checks": {
+     "binary_unchanged": true,
+     "no_panic": true,
+     "no_survivors": true,
+     "one_test": true,
+     "successful_process": true
+    },
+    "contract_checks": {
+     "adapter_backend_metal": true,
+     "attachment_only_on_own": true,
+     "budget_exactly_consumed": true,
+     "drs_control_internal_480x270_without_upscaling": true,
+     "frames_nonblank": true,
+     "full_control_has_no_upscale_or_resolution_owner": true,
+     "own_one_owner_phases_history_and_sizes": true,
+     "ui_button_interior_identical_on_all_eighteen_ui_frames": true,
+     "up_one_owner_phases_history_and_sizes": true
+    },
+    "events_sha256": "a21ea7ea832eaa9d1fd0e873516d491bb597913c0e2eecd6930428081685eece",
+    "exit": 0,
+    "group": "stationary",
+    "report_sha256": "c89bff04253932f1c5d8cd160ba09f060d015cda7078eea72e0a54571912dd2d",
+    "seconds": 1.27,
+    "timed_out": false
+   },
+   {
+    "accepted": true,
+    "budget": {
+     "pngs": 4,
+     "queue_submissions": 88,
+     "readback_maps": 44,
+     "readback_submissions": 44,
+     "rendered_frames": 44,
+     "scene_submissions": 44,
+     "ui_submissions": 0
+    },
+    "checks": {
+     "binary_unchanged": true,
+     "no_panic": true,
+     "no_survivors": true,
+     "one_test": true,
+     "successful_process": true
+    },
+    "contract_checks": {
+     "adapter_backend_metal": true,
+     "attachment_only_on_own": true,
+     "budget_exactly_consumed": true,
+     "controls_plain_and_drs_480x270": true,
+     "frames_nonblank": true,
+     "own_history_survives_object_and_camera_motion": true,
+     "up_history_survives_object_and_camera_motion": true
+    },
+    "events_sha256": "bd6db062ec80929cd6ac8324681f168cc732e911c62257a71a5be9ec83473e7b",
+    "exit": 0,
+    "group": "motion",
+    "report_sha256": "49d7f61f1e592cbd2199f424d5e8feb560b4d2e46e9ad8bde149736da17068a5",
+    "seconds": 1.134,
+    "timed_out": false
+   },
+   {
+    "accepted": true,
+    "budget": {
+     "pngs": 2,
+     "queue_submissions": 212,
+     "readback_maps": 106,
+     "readback_submissions": 106,
+     "rendered_frames": 106,
+     "scene_submissions": 106,
+     "ui_submissions": 0
+    },
+    "checks": {
+     "binary_unchanged": true,
+     "no_panic": true,
+     "no_survivors": true,
+     "one_test": true,
+     "successful_process": true
+    },
+    "contract_checks": {
+     "adapter_backend_metal": true,
+     "attachment_only_on_own": true,
+     "budget_exactly_consumed": true,
+     "chrome_outside_viewport_identical": true,
+     "controls_plain_and_drs_480x270": true,
+     "fixed16_up_and_own_one_owner": true,
+     "frames_nonblank": true,
+     "own_scale_changes_keep_owner_and_history_then_cut_resets": true,
+     "up_scale_changes_keep_owner_and_history_then_cut_resets": true
+    },
+    "events_sha256": "8878d27886f5f523cef15b59c5540fe9161407402389b443fd6564473b130500",
+    "exit": 0,
+    "group": "transitions",
+    "report_sha256": "89e1a39a290f38173ef27c8c5e70bb3d6e7c2e27657b9006c5a03d9f052d4dd6",
+    "seconds": 2.032,
+    "timed_out": false
+   },
+   {
+    "accepted": true,
+    "budget": {
+     "pngs": 2,
+     "queue_submissions": 164,
+     "readback_maps": 82,
+     "readback_submissions": 82,
+     "rendered_frames": 82,
+     "scene_submissions": 82,
+     "ui_submissions": 0
+    },
+    "checks": {
+     "binary_unchanged": true,
+     "no_panic": true,
+     "no_survivors": true,
+     "one_test": true,
+     "successful_process": true
+    },
+    "contract_checks": {
+     "adapter_backend_metal": true,
+     "attachment_only_on_own": true,
+     "budget_exactly_consumed": true,
+     "frames_nonblank": true,
+     "full_controls_plain": true,
+     "own_moving_one_owner_phases_history": true,
+     "own_reference_one_owner_phases_history": true,
+     "trailing_region_measurable": true,
+     "up_moving_one_owner_phases_history": true,
+     "up_reference_one_owner_phases_history": true
+    },
+    "events_sha256": "c4ae83dbe7f9083380aca41af4c486f9f2b3094d850f49d48b613999811b59a5",
+    "exit": 0,
+    "group": "c7_disocclusion",
+    "report_sha256": "408d56be5b364d8f30eacb40c6fd8865f1537cf713d485ab06ae115e12c81817",
+    "seconds": 1.594,
+    "timed_out": false
+   },
+   {
+    "accepted": true,
+    "budget": {
+     "pngs": 1,
+     "queue_submissions": 196,
+     "readback_maps": 98,
+     "readback_submissions": 98,
+     "rendered_frames": 98,
+     "scene_submissions": 98,
+     "ui_submissions": 0
+    },
+    "checks": {
+     "binary_unchanged": true,
+     "no_panic": true,
+     "no_survivors": true,
+     "one_test": true,
+     "successful_process": true
+    },
+    "contract_checks": {
+     "adapter_backend_metal": true,
+     "attachment_only_on_own": true,
+     "budget_exactly_consumed": true,
+     "frames_nonblank": true,
+     "full_controls_plain": true,
+     "own_bar_one_owner_phases_history": true,
+     "own_reference_one_owner_phases_history": true,
+     "panel_region_measurable": true,
+     "up_bar_one_owner_phases_history": true,
+     "up_reference_one_owner_phases_history": true
+    },
+    "events_sha256": "55ea7543f3127fd39dcfa4a4f68745057546702ce7629c4c59e5a23130a1d14e",
+    "exit": 0,
+    "group": "p1_crossing",
+    "report_sha256": "29903b3c46b8e9a20a1f4b8d73dab9d7bf47bb12a2610a6982141a0316cd4c79",
+    "seconds": 1.81,
+    "timed_out": false
+   }
+  ],
+  "command": "python3 .../owner_output_quality/execution/runner.py run .../owner_output_quality/execution/plan.json",
+  "exception": null,
+  "image_inventory_matches": true,
+  "owned_processes_after": [],
+  "process_groups_alive_after": [],
+  "retries": 0,
+  "runs": 1
+ },
+ "historical_failures_preserved": [
+  "ebc7e690 failed baseline",
+  "9843a6c3 rejected repair comparison",
+  "a5ae3179 visual FAIL",
+  "GPU001 owner-history case-3",
+  "C7 linear CPU model 0.0918 vs 0.06",
+  "C9 linear CPU model 0.683/0.869 and 0.741/0.943",
+  "P1 unresolved"
+ ],
+ "identities": {
+  "binary": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/owner-output-quality-build-002/upscaling_owner_review",
+   "sha256": "30f0d929af5dcc8e1ef8b3ef0d7dec98ceb81980c865c802a71ff67b032f3210"
+  },
+  "cpu_source_accepted": "05b75a32",
+  "debits_sha256": "3b5c6b52830f8dd3035599d66dc5bc012edc6cc2ead351a2aa80a94b98b76062",
+  "execution_preparation_commit": "c58256c4262c1426960a73fb8a7065fffdf033ca",
+  "grant": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-output-quality-gpu-001/grant.json",
+   "sha256": "f90ed59d70088d4b4e4c6e67752e9a1298efa324fcd8c497e288f21baa40a3c6"
+  },
+  "guarded_blend_original": "497a35d4cd71f3b90fbf359cdef50074536d2f6a",
+  "ledger_sha256": "bf70acbf788266d1a07555c2ad6c3fab1b2f6a9bc224d2c132c43ba13b2fd275",
+  "lifecycle_sha256": "b9e12895389a046e1c0a0bd4c43f01a215505c793be4106b31fafc18aa2aff34",
+  "plan_sha256": "46189ae9e4fdd5f9bdd4949ba43745b24dd52e16d7227c5f6e02c064ae18e854",
+  "predecessor_release": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/release.json",
+   "sha256": "645cd2f1cba857da1eca5f73729ffe5f8313d0b797c383a8dee29de635f33c78"
+  },
+  "production_source": "76be9608e99bf089fcb1e0908827330f70c28ac1",
+  "release": {
+   "accepted": true,
+   "at": "2026-10-13T22:48:23.084675+00:00",
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-output-quality-gpu-001/release.json",
+   "released": true,
+   "sha256": "0073a788791329ed4ebcd88ed58127fb5082a4ff6a127c1d2c808ac510c01be8"
+  },
+  "root_review_sha256": "af6f10b8916b21e10692183a885e0fccea3d5c874638f45e4c1f7718c9d0a802",
+  "runner_sha256": "5bd9fa2f0b6da826193f9225517b02a2ec92f4482554d6636cff762ca1406d9c"
+ },
+ "model": "Claude Opus 5.5 (claude-opus-5-5)",
+ "packet": "0073 owner_output_quality single granted execution and appearance review",
+ "pngs": [
+  {
+   "byte_identical_to_gpu002": true,
+   "bytes": 84389,
+   "height": 540,
+   "image_read_by_claude": true,
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-output-quality-gpu-001/stationary/artifacts/stationary-full.png",
+   "sha256": "992c5543b4f9bbdf6fd703eb764e143f7649836452df28aaac6f1dfc2debceb9",
+   "sha256_reverified": true,
+   "width": 960
+  },
+  {
+   "byte_identical_to_gpu002": true,
+   "bytes": 40131,
+   "height": 540,
+   "image_read_by_claude": true,
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-output-quality-gpu-001/stationary/artifacts/stationary-drs50.png",
+   "sha256": "724fa644d3561ff00aa2301fd40ab6b49c4111b0376df5469028ef6265cb40e0",
+   "sha256_reverified": true,
+   "width": 960
+  },
+  {
+   "byte_identical_to_gpu002": false,
+   "bytes": 77307,
+   "height": 540,
+   "image_read_by_claude": true,
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-output-quality-gpu-001/stationary/artifacts/stationary-up50.png",
+   "sha256": "4277848602bda036aecab829e8f3b5c524fe4b76ce1087fb50e8bff64e76e045",
+   "sha256_reverified": true,
+   "width": 960
+  },
+  {
+   "byte_identical_to_gpu002": false,
+   "bytes": 77600,
+   "height": 540,
+   "image_read_by_claude": true,
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-output-quality-gpu-001/stationary/artifacts/stationary-own50.png",
+   "sha256": "0be3c83c78bcf7ba0087f97f46eea456f070aa4f5880ee67c10548b63f77e2dd",
+   "sha256_reverified": true,
+   "width": 960
+  },
+  {
+   "byte_identical_to_gpu002": true,
+   "bytes": 11679,
+   "height": 540,
+   "image_read_by_claude": true,
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-output-quality-gpu-001/stationary/artifacts/stationary-phases.png",
+   "sha256": "5850713d0ccaa211eb6f6e43855109469aee427440bc68f71343fb9c4c83ec7b",
+   "sha256_reverified": true,
+   "width": 960
+  },
+  {
+   "byte_identical_to_gpu002": false,
+   "bytes": 37700,
+   "height": 540,
+   "image_read_by_claude": true,
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-output-quality-gpu-001/stationary/artifacts/stationary-detail.png",
+   "sha256": "b79df69b1afb8ce7ab38a518d169249b821627531f3974882c77ba97d89db735",
+   "sha256_reverified": true,
+   "width": 960
+  },
+  {
+   "byte_identical_to_gpu002": true,
+   "bytes": 77464,
+   "height": 540,
+   "image_read_by_claude": true,
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-output-quality-gpu-001/motion/artifacts/motion-full.png",
+   "sha256": "9eeb1222becd6f4d2cec7afa88343ccb528ea9f6e27246cb3410a42bade35b52",
+   "sha256_reverified": true,
+   "width": 960
+  },
+  {
+   "byte_identical_to_gpu002": false,
+   "bytes": 66068,
+   "height": 540,
+   "image_read_by_claude": true,
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-output-quality-gpu-001/motion/artifacts/motion-up50.png",
+   "sha256": "3f56a7b5dfb6a457215268e1bded4e8da8dd01e649ffc20a4b07256077fd4d94",
+   "sha256_reverified": true,
+   "width": 960
+  },
+  {
+   "byte_identical_to_gpu002": false,
+   "bytes": 65659,
+   "height": 540,
+   "image_read_by_claude": true,
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-output-quality-gpu-001/motion/artifacts/motion-own50.png",
+   "sha256": "490331def81d7b8230edb3f9a22b1da5425939342c6b83838630cf05663cd8ee",
+   "sha256_reverified": true,
+   "width": 960
+  },
+  {
+   "byte_identical_to_gpu002": true,
+   "bytes": 103758,
+   "height": 540,
+   "image_read_by_claude": true,
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-output-quality-gpu-001/motion/artifacts/motion-detail.png",
+   "sha256": "ca01cedc4fa740292763152596371fed168442031f28de8055a2c53fec0dffd8",
+   "sha256_reverified": true,
+   "width": 960
+  },
+  {
+   "byte_identical_to_gpu002": true,
+   "bytes": 72999,
+   "height": 540,
+   "image_read_by_claude": true,
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-output-quality-gpu-001/transitions/artifacts/transitions-full.png",
+   "sha256": "1be9b9308bb1d404291ec976f0ff1b0c6b3853d3effa0bb2a36fe15270e0f88e",
+   "sha256_reverified": true,
+   "width": 960
+  },
+  {
+   "byte_identical_to_gpu002": true,
+   "bytes": 107615,
+   "height": 540,
+   "image_read_by_claude": true,
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-output-quality-gpu-001/transitions/artifacts/transitions-strip.png",
+   "sha256": "3231d90e3ec242ae4627e3469b6bef1544ab126f66b7cfdf6078bfa32c04527b",
+   "sha256_reverified": true,
+   "width": 960
+  },
+  {
+   "byte_identical_to_gpu002": true,
+   "bytes": 68218,
+   "height": 540,
+   "image_read_by_claude": true,
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-output-quality-gpu-001/c7_disocclusion/artifacts/c7-detail.png",
+   "sha256": "667842d540f486ea3728f9ac2042306b20413bafcb4c189188c70951a5164f0d",
+   "sha256_reverified": true,
+   "width": 960
+  },
+  {
+   "byte_identical_to_gpu002": true,
+   "bytes": 337545,
+   "height": 540,
+   "image_read_by_claude": true,
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-output-quality-gpu-001/c7_disocclusion/artifacts/c7-own-moving.png",
+   "sha256": "8a27a72c7b3a3a60f258a2018c4972d4f311287f76b49e42f1e1495755871364",
+   "sha256_reverified": true,
+   "width": 960
+  },
+  {
+   "byte_identical_to_gpu002": true,
+   "bytes": 197976,
+   "height": 540,
+   "image_read_by_claude": true,
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-output-quality-gpu-001/p1_crossing/artifacts/p1-detail.png",
+   "sha256": "9c0223081ca5fff3fcc898a4bbc32c1d8ce28c17f1a3e48035daabf597c0e416",
+   "sha256_reverified": true,
+   "width": 960
+  }
+ ],
+ "prior_gpu002_pngs_reread_for_comparison": [
+  "stationary/artifacts/stationary-up50.png",
+  "stationary/artifacts/stationary-detail.png",
+  "motion/artifacts/motion-own50.png"
+ ],
+ "rendered_output_observations_vs_gpu002_codes": {
+  "c7_and_p1_reports": "identical to gpu-002 (0 differing observations)",
+  "card_edge_region_vs_full": {
+   "own50": [
+    1.0947222222222222,
+    0.7883333333333333
+   ],
+   "up50": [
+    1.0944444444444446,
+    0.7880555555555555
+   ]
+  },
+  "note": "tone-mapped sRGB-code observations; boundary and whole-frame reductions come from overlays no longer resampling with the internal scale, not from reconstruction; not closure of the historical C7/C9/P1 linear-model gates",
+  "sprite_region_vs_full": {
+   "own50": [
+    8.365,
+    0.0
+   ],
+   "up50": [
+    8.365,
+    0.0
+   ]
+  },
+  "text_region_vs_full": {
+   "own50": [
+    2.6172222222222223,
+    0.18638888888888888
+   ],
+   "up50": [
+    2.605,
+    0.17416666666666666
+   ]
+  },
+  "transitions_whole_frame_boundary_edge_mean_abs_up": {
+   "12to4": [
+    18.8,
+    14.18
+   ],
+   "16to8": [
+    18.02,
+    13.07
+   ],
+   "4to16": [
+    24.4,
+    17.93
+   ],
+   "8to12": [
+    10.68,
+    7.18
+   ],
+   "cut": [
+    11.76,
+    11.76
+   ]
+  }
+ },
+ "scratch": "/tmp/0073-output-runner.log captured runner stdout/stderr only (not evidence)",
+ "thinking_effort": "max (root verified through ACP per packet)",
+ "verdict": {
+  "overall_upscaling_quality": "reject: opaque reconstruction unchanged (thin wires, texture detail, silhouettes, DRS wipe, C7/C9/P1 failures)",
+  "overlay_route": "accept: sprites, mixed-script world text and the BLEND card render at output resolution, match FULL closely, keep order and opaque occlusion, physical UI unchanged"
+ }
+}
