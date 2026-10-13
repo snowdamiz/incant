@@ -1,0 +1,20 @@
+{
+  "at": "2026-10-13T00:26:40.991676+00:00",
+  "reviewer": "astra/root",
+  "decision": "accepted scoped source and CPU proof",
+  "manifest_sha256": "45e34cd9038b2aa2e67f7777e37db63916aa785510fe11f82f3ed34fd5e09fb5",
+  "source_freeze": "e47e12cd8405fbe109b917c439518cdcaa4b7060d255ef615c47e0303e89fde3",
+  "checks": [
+    "Read3file correction and requested minimal environment plus actual exists checks; both implemented in frozen002.",
+    "Rehashed31lossless artifacts plus3source and7protected files. Actual3successful processes/181locked observations, every30tickdistance below1m, incomplete actual inventory and no terminal events.",
+    "Win/lose reports and PCM remain exactly historical. Seven meaningful oracle regressions pass per retained logs."
+  ],
+  "max_exit_distance": 0.05074947837235513,
+  "limits": [
+    "No images inspected; Claude owns appearance.",
+    "Original seven verify.py numerical fixtures unchanged; these three runs use the authored f5 mesa level.",
+    "Retained CI player keeps old PCM cap; accepted49e18 streaming proof addresses full48kroute separately, pending integration.",
+    "Current Core HUD/audio/restart bindings are separate integration work.",
+    "Original0060 offscreen helper provenance remains separately unresolved; no visual acceptance from this review."
+  ]
+}

@@ -1,0 +1,561 @@
+{
+  "scope": "Nonvisual locked-exit evidence correction on exact retained 0060 CI player; no engine, controller, authored scene or art changes. Independent root correctness/execution review accepted; publication pending.",
+  "base": "bc3c1be2ad7e6b71aa7f31d3d3e82c32fe545579",
+  "sources": [
+    {
+      "path": "samples/core/playtest.py",
+      "sha256": "85eacb004af3f42fcd2a12274639b77f25b98d07a54cfdcb85996ca86c8ebd22",
+      "bytes": 13264
+    },
+    {
+      "path": "samples/core/routes/locked-input.json",
+      "sha256": "b0bfc0ad8b76032941f9ae77b67060be8c5b8ba8fe4bb4f170681f55379ea30d",
+      "bytes": 8894
+    },
+    {
+      "path": "samples/core/test_playtest.py",
+      "sha256": "f0c54327512c6d331fe358798b84078ec63e71e5f2aa64a0875df2ba0f459b40",
+      "bytes": 4769
+    }
+  ],
+  "proof": {
+    "source_freeze_sha256": "e47e12cd8405fbe109b917c439518cdcaa4b7060d255ef615c47e0303e89fde3",
+    "patch_sha256": "ab6419c13b53ee1d91b8d57c1261b687a8bf75d2c233efcff8062cbd53617c60",
+    "protected": {
+      "samples/core/gameplay.ts": "58d7007de2cb942de4bf4c254b4d514deb07df15a88cb1b057cac30fbca393a5",
+      "samples/core/verify.py": "a2351e2ce97667b59449ec2e28b1633562c006559e1305b2c4d1305fe3a04788",
+      "samples/core/tsconfig.json": "869922e94ccde7a4c5d023dcc15dc661034031b34d42cbfaa41a4a354abc625b",
+      "samples/core/routes/win-input.json": "5c23f6f64bf59a8c40634f8e34f4469ab0a17f40750f02bcbee630f721729a63",
+      "samples/core/scene.py": "185f5168ccd76648550e4f0a843e77cae91ca5f305a3083f904f46c23b7b0093",
+      "samples/core/art/level.py": "779cccc629ea5da9738f9ddcae8d85332e2eb0d8aaa330db68b17c80eca2635f",
+      "samples/core/ui/hud.json": "2ae3136757a767b3c21d8d8b8aabf5cf720ccf4e2eb32ab68c87a5036a954dae"
+    },
+    "historical": {
+      "report": "/Users/andreyyurlov/.codex/incant-evidence/0060/playtest-f5/locked.json",
+      "sha256": "435834b38927090d3c4f3061dd71be19679af50fbe244d7ee174136872529ead",
+      "distance_to_exit": 3.5108854943337566,
+      "strict_oracle": {
+        "passed": false,
+        "checks": {
+          "complete_observations": true,
+          "complete_gameplay_logs": true,
+          "incomplete_inventory": false,
+          "live_player": false,
+          "no_victory": true,
+          "inside_exit_for_entire_dwell": false,
+          "thirty_stopped_ticks": false
+        },
+        "health": 0,
+        "exit_distances": {},
+        "pickup_ids": []
+      }
+    },
+    "current": {
+      "passed": true,
+      "checks": {
+        "win_collects_all": true,
+        "win_reaches_lift": true,
+        "lose_by_contact": true,
+        "locked_exit_refuses": true,
+        "observations_passed": true,
+        "every_chaser_routes": true,
+        "authoring_unchanged": true
+      },
+      "results": {
+        "win": {
+          "pickups": 4,
+          "pickup_order": [
+            "01CSEN00000000000000000030",
+            "01CSEN00000000000000000031",
+            "01CSEN00000000000000000032",
+            "01CSEN00000000000000000033"
+          ],
+          "damage": [
+            [
+              664,
+              "core.damage health=2"
+            ]
+          ],
+          "routes": [
+            "core.route 01CSEN00000000000000000020 corners=5",
+            "core.route 01CSEN00000000000000000021 corners=32",
+            "core.route 01CSEN00000000000000000022 corners=24"
+          ],
+          "won_tick": 2066,
+          "lost_tick": null,
+          "player_final": [
+            0.521,
+            2.21,
+            -16.444
+          ],
+          "enemies_final": {
+            "01CSEN00000000000000000020": [
+              -2.722,
+              0.61,
+              -6.749
+            ],
+            "01CSEN00000000000000000021": [
+              -2.17,
+              0.666,
+              -7.141
+            ],
+            "01CSEN00000000000000000022": [
+              -1.539,
+              0.634,
+              -7.038
+            ]
+          },
+          "ticks": 2156,
+          "observations_passed": true,
+          "pcm_sha256": "8cc56869bb81f9094215b96c91e449b7df42a59e68c4ef8fd91d2a52ade340a1"
+        },
+        "lose": {
+          "pickups": 0,
+          "pickup_order": [],
+          "damage": [
+            [
+              527,
+              "core.damage health=2"
+            ],
+            [
+              572,
+              "core.damage health=1"
+            ],
+            [
+              617,
+              "core.damage health=0"
+            ]
+          ],
+          "routes": [
+            "core.route 01CSEN00000000000000000020 corners=5",
+            "core.route 01CSEN00000000000000000021 corners=32",
+            "core.route 01CSEN00000000000000000022 corners=24"
+          ],
+          "won_tick": null,
+          "lost_tick": 617,
+          "player_final": [
+            0.004,
+            0.61,
+            10.944
+          ],
+          "enemies_final": {
+            "01CSEN00000000000000000020": [
+              -0.334,
+              0.61,
+              10.349
+            ],
+            "01CSEN00000000000000000021": [
+              0.285,
+              0.61,
+              3.11
+            ],
+            "01CSEN00000000000000000022": [
+              6.275,
+              0.61,
+              3.99
+            ]
+          },
+          "ticks": 1500,
+          "observations_passed": true,
+          "pcm_sha256": "229cb9bc0cf4da45c8642f4997d980a752dc2227a5330ad05a32ac8ce4a1429a"
+        },
+        "locked": {
+          "pickups": 3,
+          "pickup_order": [
+            "01CSEN00000000000000000030",
+            "01CSEN00000000000000000031",
+            "01CSEN00000000000000000032"
+          ],
+          "damage": [
+            [
+              664,
+              "core.damage health=2"
+            ]
+          ],
+          "routes": [
+            "core.route 01CSEN00000000000000000020 corners=5",
+            "core.route 01CSEN00000000000000000021 corners=32",
+            "core.route 01CSEN00000000000000000022 corners=24"
+          ],
+          "won_tick": null,
+          "lost_tick": null,
+          "player_final": [
+            0.483,
+            2.21,
+            -17.353
+          ],
+          "enemies_final": {
+            "01CSEN00000000000000000020": [
+              7.05,
+              0.848,
+              1.804
+            ],
+            "01CSEN00000000000000000021": [
+              7.05,
+              0.613,
+              2.538
+            ],
+            "01CSEN00000000000000000022": [
+              7.051,
+              1.059,
+              1.144
+            ]
+          },
+          "ticks": 1588,
+          "observations_passed": true,
+          "pcm_sha256": "0eac66b977dbe6f4d94b5a3ac7db58f5d27fc964db436b8d73c12e5ccf6e75f1",
+          "exit_proof": {
+            "passed": true,
+            "checks": {
+              "complete_observations": true,
+              "complete_gameplay_logs": true,
+              "incomplete_inventory": true,
+              "live_player": true,
+              "no_victory": true,
+              "inside_exit_for_entire_dwell": true,
+              "thirty_stopped_ticks": true
+            },
+            "health": 2,
+            "exit_distances": {
+              "1559": 0.05072664078716441,
+              "1560": 0.05074947837235513,
+              "1561": 0.05072980768918887,
+              "1562": 0.05074947837235513,
+              "1563": 0.05072980768918887,
+              "1564": 0.05074947837235513,
+              "1565": 0.05072980768918887,
+              "1566": 0.05074947837235513,
+              "1567": 0.05072980768918887,
+              "1568": 0.05074947837235513,
+              "1569": 0.05072980768918887,
+              "1570": 0.05074947837235513,
+              "1571": 0.05072980768918887,
+              "1572": 0.05074947837235513,
+              "1573": 0.05072980768918887,
+              "1574": 0.05074947837235513,
+              "1575": 0.05072980768918887,
+              "1576": 0.05074947837235513,
+              "1577": 0.05072980768918887,
+              "1578": 0.05074947837235513,
+              "1579": 0.05072980768918887,
+              "1580": 0.05074947837235513,
+              "1581": 0.05072980768918887,
+              "1582": 0.05074947837235513,
+              "1583": 0.05072980768918887,
+              "1584": 0.05074947837235513,
+              "1585": 0.05072980768918887,
+              "1586": 0.05074947837235513,
+              "1587": 0.05072980768918887,
+              "1588": 0.05074947837235513
+            },
+            "pickup_ids": [
+              "01CSEN00000000000000000030",
+              "01CSEN00000000000000000031",
+              "01CSEN00000000000000000032"
+            ]
+          }
+        }
+      },
+      "player_sha256": "565f1592aaeafcf05c32bf2d094334124de52c90bdd6fe3ca75eb56a6cc5fd28",
+      "project_sha256": "443f32437090cb510278f11f4ae5da142d3028f074ad2ec91ce30b5c719fcb01",
+      "package_sha256": "9bedb214da3948da45ad055d689ed9f112ef3f5085f925e9a296395b4a598dde",
+      "gameplay_sha256": "58d7007de2cb942de4bf4c254b4d514deb07df15a88cb1b057cac30fbca393a5",
+      "probe_sha256": "85eacb004af3f42fcd2a12274639b77f25b98d07a54cfdcb85996ca86c8ebd22",
+      "recordings": {
+        "win": "789bf847b1b47d6b94d449fe99ab27e0b008caccc0075ded2528b0165bd13334",
+        "lose": "65297980e4b99347d304fea21504d639778291f9178ca02ce7aa4f33f43a12ba",
+        "locked": "807520aff8843235665728661f539ca7b4f68fe5c8078a4896d7a28e67291a89"
+      },
+      "route": "ordinary packaged player, CPU render-input with 640x480 UI, cooked bytecode"
+    },
+    "parity": {
+      "win": {
+        "report_exact": true,
+        "pcm_exact": true,
+        "pcm_sha256": "8cc56869bb81f9094215b96c91e449b7df42a59e68c4ef8fd91d2a52ade340a1"
+      },
+      "lose": {
+        "report_exact": true,
+        "pcm_exact": true,
+        "pcm_sha256": "229cb9bc0cf4da45c8642f4997d980a752dc2227a5330ad05a32ac8ce4a1429a"
+      }
+    },
+    "environment": {
+      "PATH": "exact package player directory",
+      "TMPDIR": "owned result directory",
+      "other_variables": "absent; HOME is not repurposed"
+    }
+  },
+  "checks": {
+    "oracle_unit_tests": 7,
+    "real_player_processes": 3,
+    "observations_locked": 181,
+    "builds": 0,
+    "gpu_runs": 0
+  },
+  "artifacts": [
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/core-locked-exit-correction-001/correction-result-002.json",
+      "raw_sha256": "5787ff97c3b33d58ab65b62f278ba85d46d145df77d67dd978903925ac486639",
+      "raw_bytes": 8655,
+      "retained": "docs/spikes/evidence/core-locked-exit/00-correction-result-002.json.gz",
+      "retained_sha256": "e824b715dd825628ec6e23477e228b8e45be8992efd1315cd1221dc6e83827f2",
+      "retained_bytes": 2297
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/core-locked-exit-correction-001/unit-002.log",
+      "raw_sha256": "d0f3d5aef3e87a8cc9733ff18dff7fe5cbf3715a5286b7208470db36c0c6dbaa",
+      "raw_bytes": 1269,
+      "retained": "docs/spikes/evidence/core-locked-exit/01-unit-002.log.gz",
+      "retained_sha256": "c2f48cf29fdde03da8461040517faa775244d46eda35af3a1305d8b82acc649a",
+      "retained_bytes": 361
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/core-locked-exit-correction-001/proof-003.log",
+      "raw_sha256": "8d79248bbf0ead6c81752fa4eb2d1214800be94b9c80f69e84cf9fe4ec4848d6",
+      "raw_bytes": 5321,
+      "retained": "docs/spikes/evidence/core-locked-exit/02-proof-003.log.gz",
+      "retained_sha256": "649fe217079390b6052e902248b853a77231e1f3d85bc89d3fadef92f66662ea",
+      "retained_bytes": 1467
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/core-locked-exit-correction-001/proof-002.log",
+      "raw_sha256": "2bd78d83fe629abbc01482911a65ba094e01a73cb9c3644772c20632223c0dbf",
+      "raw_bytes": 5321,
+      "retained": "docs/spikes/evidence/core-locked-exit/03-proof-002.log.gz",
+      "retained_sha256": "d970289a29047e4cc18aacead9f5923ed65788b6db9c2f1369ad4388defc2da5",
+      "retained_bytes": 1463
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/core-locked-exit-correction-001/source-freeze-002/inventory.json",
+      "raw_sha256": "e47e12cd8405fbe109b917c439518cdcaa4b7060d255ef615c47e0303e89fde3",
+      "raw_bytes": 572,
+      "retained": "docs/spikes/evidence/core-locked-exit/04-inventory.json.gz",
+      "retained_sha256": "d3ff2b64cad2b8369b64ec34f06d9f5182d77d7bfab22069ceda8214043aad6f",
+      "retained_bytes": 316
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/core-locked-exit-correction-001/source-freeze-002/patch.diff",
+      "raw_sha256": "ab6419c13b53ee1d91b8d57c1261b687a8bf75d2c233efcff8062cbd53617c60",
+      "raw_bytes": 26390,
+      "retained": "docs/spikes/evidence/core-locked-exit/05-patch.diff.gz",
+      "retained_sha256": "90bb51029e3d615ad7f18a5cd7ca5dec92748c62a2eaffac411a00cbf386b902",
+      "retained_bytes": 6283
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/0060/playtest-f5/locked.json",
+      "raw_sha256": "435834b38927090d3c4f3061dd71be19679af50fbe244d7ee174136872529ead",
+      "raw_bytes": 6849,
+      "retained": "docs/spikes/evidence/core-locked-exit/06-locked.json.gz",
+      "retained_sha256": "16d7da3099fd4d791c9fdfcbe08279cd84ec58966ecba6ea65f745ec874d82b9",
+      "retained_bytes": 1172
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/0060/playtest-f5/locked-input.json",
+      "raw_sha256": "1da638cd4d4edad5c177668ddc310d738933bf45349d26c7007eab29e1eede28",
+      "raw_bytes": 1923,
+      "retained": "docs/spikes/evidence/core-locked-exit/07-locked-input.json.gz",
+      "retained_sha256": "ea4dbb6d6090ff4dbaf567c210aa3e57b2f282565d9ad218bbba9a9f8736f7d2",
+      "retained_bytes": 294
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/0060/playtest-f5/playtest.json",
+      "raw_sha256": "ecb88127c925cf4de4f5bd0f54c07bff947e7927a127da86f771c0a679702b40",
+      "raw_bytes": 2927,
+      "retained": "docs/spikes/evidence/core-locked-exit/08-playtest.json.gz",
+      "retained_sha256": "5f7b4221f9360bbd740ccb0d826a0aaa287ae379f6305fff66ffcbf5aadd1ab3",
+      "retained_bytes": 764
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/core-locked-exit-correction-001/proof-003/locked-command.json",
+      "raw_sha256": "08459c1d322ed9844e8a33e3e1ea6dfc760118f93bf3cf6ebaec29b541c9c731",
+      "raw_bytes": 1549,
+      "retained": "docs/spikes/evidence/core-locked-exit/09-locked-command.json.gz",
+      "retained_sha256": "dea550bff6c9b45bf683d95aaa7fd0fdf529ea25ed21a4785f5af8510a60dc66",
+      "retained_bytes": 431
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/core-locked-exit-correction-001/proof-003/locked-input.json",
+      "raw_sha256": "807520aff8843235665728661f539ca7b4f68fe5c8078a4896d7a28e67291a89",
+      "raw_bytes": 14245,
+      "retained": "docs/spikes/evidence/core-locked-exit/10-locked-input.json.gz",
+      "retained_sha256": "31990457baaf2d6bc0388c34ae2c021b4663f586d811680d845ae6b9faa02b80",
+      "retained_bytes": 832
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/core-locked-exit-correction-001/proof-003/locked-observe.json",
+      "raw_sha256": "c122e6cb08db951fa2d92f837fd9e1a860655b3c7fe9712d0dbe755f9f867406",
+      "raw_bytes": 28164,
+      "retained": "docs/spikes/evidence/core-locked-exit/11-locked-observe.json.gz",
+      "retained_sha256": "15dfd180c7fb403b2ce9044d89ed7b3f526a69134964b1d662af3d003c8b9343",
+      "retained_bytes": 1133
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/core-locked-exit-correction-001/proof-003/locked.json",
+      "raw_sha256": "16a93ab96c6702dc63adfdb2596501503472d90ec286bbf4a6f28f3ff24a93b0",
+      "raw_bytes": 56138,
+      "retained": "docs/spikes/evidence/core-locked-exit/12-locked.json.gz",
+      "retained_sha256": "d8721281a23bed32a9fcfd00480837c04459ae3bf0aebb6190a68c5dd09f5b26",
+      "retained_bytes": 2600
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/core-locked-exit-correction-001/proof-003/locked.pcm",
+      "raw_sha256": "0eac66b977dbe6f4d94b5a3ac7db58f5d27fc964db436b8d73c12e5ccf6e75f1",
+      "raw_bytes": 3387728,
+      "retained": "docs/spikes/evidence/core-locked-exit/13-locked.pcm.gz",
+      "retained_sha256": "6fc0327669514159cbe8929cd8b13ffe125b1b5b8b2ac14cd6d8c0b280876dc0",
+      "retained_bytes": 2635706
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/core-locked-exit-correction-001/proof-003/locked.stderr",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "retained": "docs/spikes/evidence/core-locked-exit/14-locked.stderr.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "retained_bytes": 20
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/core-locked-exit-correction-001/proof-003/locked.stdout",
+      "raw_sha256": "a9f6dadbc66788af92f589e39c8435122a346cf0a081e1bb76324886c5ef95df",
+      "raw_bytes": 37237,
+      "retained": "docs/spikes/evidence/core-locked-exit/15-locked.stdout.gz",
+      "retained_sha256": "07faaf166e08aa420c6d32df1eb956b6b9d2a2e87ede27ddd99ba50e57e92eaf",
+      "retained_bytes": 2299
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/core-locked-exit-correction-001/proof-003/lose-command.json",
+      "raw_sha256": "a75737ba4acd3550b52d746dfa32a5a5f432bd6270cd95210d1fd1dc45170c9c",
+      "raw_bytes": 1543,
+      "retained": "docs/spikes/evidence/core-locked-exit/16-lose-command.json.gz",
+      "retained_sha256": "b56e61d40d68a577f46032807f59f0b10411708f0448b786b2a364a48c9d2532",
+      "retained_bytes": 433
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/core-locked-exit-correction-001/proof-003/lose-input.json",
+      "raw_sha256": "65297980e4b99347d304fea21504d639778291f9178ca02ce7aa4f33f43a12ba",
+      "raw_bytes": 683,
+      "retained": "docs/spikes/evidence/core-locked-exit/17-lose-input.json.gz",
+      "retained_sha256": "cc378e83bce3cc519f5260586c782b590983a25cc84c7f65cb356a296980132f",
+      "retained_bytes": 213
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/core-locked-exit-correction-001/proof-003/lose-observe.json",
+      "raw_sha256": "d248081b3dd53c5612b907b124fd6eb1a71fc11a78dc19b12cfdd302a8438c3d",
+      "raw_bytes": 324,
+      "retained": "docs/spikes/evidence/core-locked-exit/18-lose-observe.json.gz",
+      "retained_sha256": "55125a31ceaa2a036eb195f7b2880d8c243aa61a0db7b40e31de43b2c8fcd949",
+      "retained_bytes": 179
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/core-locked-exit-correction-001/proof-003/lose.json",
+      "raw_sha256": "1ae3ee4bb827e0b355e111da5634511e274ae05f7d4d1d32142b176c568c38cd",
+      "raw_bytes": 6857,
+      "retained": "docs/spikes/evidence/core-locked-exit/19-lose.json.gz",
+      "retained_sha256": "2612c89cec11afbf2a8e8fa682de0e43b3ac4888e68dca9ccd84269a67780809",
+      "retained_bytes": 1173
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/core-locked-exit-correction-001/proof-003/lose.pcm",
+      "raw_sha256": "229cb9bc0cf4da45c8642f4997d980a752dc2227a5330ad05a32ac8ce4a1429a",
+      "raw_bytes": 3200000,
+      "retained": "docs/spikes/evidence/core-locked-exit/20-lose.pcm.gz",
+      "retained_sha256": "121da85cf0ad00148a27628a2be6a1746e692641e8742ba51a1100fe6e0babbf",
+      "retained_bytes": 2489464
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/core-locked-exit-correction-001/proof-003/lose.stderr",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "retained": "docs/spikes/evidence/core-locked-exit/21-lose.stderr.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "retained_bytes": 20
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/core-locked-exit-correction-001/proof-003/lose.stdout",
+      "raw_sha256": "e87af1c9e5222ad5756a15b073e3851efef61dd803ed708050dbd4b669fa44ca",
+      "raw_bytes": 3900,
+      "retained": "docs/spikes/evidence/core-locked-exit/22-lose.stdout.gz",
+      "retained_sha256": "05d3c1f1b58470e8d1473d62613c638c0c2ce6d20af123efb501e725348f3eea",
+      "retained_bytes": 1028
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/core-locked-exit-correction-001/proof-003/playtest.json",
+      "raw_sha256": "8d79248bbf0ead6c81752fa4eb2d1214800be94b9c80f69e84cf9fe4ec4848d6",
+      "raw_bytes": 5321,
+      "retained": "docs/spikes/evidence/core-locked-exit/23-playtest.json.gz",
+      "retained_sha256": "649fe217079390b6052e902248b853a77231e1f3d85bc89d3fadef92f66662ea",
+      "retained_bytes": 1467
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/core-locked-exit-correction-001/proof-003/win-command.json",
+      "raw_sha256": "c83ad97386208737d94774222666d067fe49e768f63c030666725c94aa3e4816",
+      "raw_bytes": 1540,
+      "retained": "docs/spikes/evidence/core-locked-exit/24-win-command.json.gz",
+      "retained_sha256": "f1c3c884560c6796058e1f645cd252b96339c842a2164fa733388af9b322da5f",
+      "retained_bytes": 431
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/core-locked-exit-correction-001/proof-003/win-input.json",
+      "raw_sha256": "789bf847b1b47d6b94d449fe99ab27e0b008caccc0075ded2528b0165bd13334",
+      "raw_bytes": 21712,
+      "retained": "docs/spikes/evidence/core-locked-exit/25-win-input.json.gz",
+      "retained_sha256": "659c3c66dfcc277fa997b9b0abaee65e1bc793350f6036dfda8b51371050043d",
+      "retained_bytes": 1110
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/core-locked-exit-correction-001/proof-003/win-observe.json",
+      "raw_sha256": "6c1229a793d11b93417e4ee45c03fea4976ac92d4930a88fc9a6735652920be6",
+      "raw_bytes": 324,
+      "retained": "docs/spikes/evidence/core-locked-exit/26-win-observe.json.gz",
+      "retained_sha256": "8064a746b2a56834628e7a33add523dc419dbe7ece694d5efeb1057a8866156a",
+      "retained_bytes": 179
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/core-locked-exit-correction-001/proof-003/win.json",
+      "raw_sha256": "2482255ac915ba49250f6c4ac95bea4e449b0e3c7a1f3cea892f7ebb7ff6f4bb",
+      "raw_bytes": 7130,
+      "retained": "docs/spikes/evidence/core-locked-exit/27-win.json.gz",
+      "retained_sha256": "aab6c836f3e3a35f18064fdb889f62ad946aca9cb7916a1fa445610aa1576cd6",
+      "retained_bytes": 1216
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/core-locked-exit-correction-001/proof-003/win.pcm",
+      "raw_sha256": "8cc56869bb81f9094215b96c91e449b7df42a59e68c4ef8fd91d2a52ade340a1",
+      "raw_bytes": 4599464,
+      "retained": "docs/spikes/evidence/core-locked-exit/28-win.pcm.gz",
+      "retained_sha256": "5629332648ae394865af27f6d7eaf9fc0c58caa8921f0e6d07c3287d3d426003",
+      "retained_bytes": 3568730
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/core-locked-exit-correction-001/proof-003/win.stderr",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "retained": "docs/spikes/evidence/core-locked-exit/29-win.stderr.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "retained_bytes": 20
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/core-locked-exit-correction-001/proof-003/win.stdout",
+      "raw_sha256": "529a427ea104ec9d3ff8b0f8e023440bb4ad2641584649abb54f5cce1eb82ee4",
+      "raw_bytes": 4121,
+      "retained": "docs/spikes/evidence/core-locked-exit/30-win.stdout.gz",
+      "retained_sha256": "d974685c7c802a57f9716f87c92715f69c61f43984c70dbb00a3f42528500c34",
+      "retained_bytes": 1070
+    }
+  ],
+  "history": [
+    "Original 0060 locked assertion passed with dead player3.510885m from exit; retained as false-positive evidence.",
+    "proof-001 corrected route passed native observations but helper assumed request order; helper red retained externally.",
+    "proof-002 passed; final proof-003 uses minimal PATH/TMPDIR environment and verifies actual exists values."
+  ],
+  "limits": [
+    "No images inspected; Claude owns appearance.",
+    "Original seven verify.py numerical fixtures unchanged; these three runs use the authored f5 mesa level.",
+    "Retained CI player keeps old PCM cap; accepted49e18 streaming proof addresses full48kroute separately, pending integration.",
+    "Current Core HUD/audio/restart bindings are separate integration work."
+  ],
+  "review": {
+    "path": "docs/spikes/evidence/core-locked-exit-review.json",
+    "sha256": "4899cddc33e5e88410b99ab6eeab4796d8fe63adb504b57c3b409ed18eedc829"
+  }
+}

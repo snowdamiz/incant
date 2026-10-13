@@ -16,6 +16,16 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Core authored-level locked-exit proof — locally accepted
+
+The retained 0060 locked run died before reaching the exit; its old assertion was
+a false positive. A replacement public-input recording reaches the exit alive
+with 3/4 pickups and observes actual positions/inventory for 30 consecutive ticks.
+Three real CPU runs, seven focused oracle tests and independent root review pass;
+original win/loss reports and PCM are unchanged. Controller, art and authoring
+stay untouched. Integration is pending. No visual, device or performance gate
+is claimed. [Correction/evidence](docs/spikes/core-locked-exit.md).
+
 ## Native window error preservation — locally verified
 
 After an error or explicit exit, the window host stops delivering game callbacks.
