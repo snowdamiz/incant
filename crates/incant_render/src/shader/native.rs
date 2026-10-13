@@ -6,6 +6,8 @@ use std::borrow::Cow;
 pub(crate) enum Stage {
     Vertex,
     Fragment,
+    #[cfg(feature = "cooked-clusters")]
+    Compute,
 }
 #[derive(Clone, Copy)]
 pub(crate) struct Artifact {
@@ -108,6 +110,12 @@ pub(crate) fn descriptor(
         label: Some("Cooked builtin shader"),
         ..Default::default()
     };
+    #[cfg(feature = "cooked-clusters")]
+    if a.stage == Stage::Compute {
+        // hal29 calls this field num_workgroups but consumes it as the kernel's
+        // threads-per-workgroup, not the runtime dispatch grid dimensions.
+        desc.num_workgroups = (64, 1, 1);
+    }
     match a.backend {
         wgpu::Backend::Metal | wgpu::Backend::Dx12 => {
             let text = std::str::from_utf8(a.bytes).map_err(|_| "invalid shader text")?;

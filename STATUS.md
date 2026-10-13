@@ -125,6 +125,17 @@ rendering is unchanged. Metal/DX12 storage, per-level recording, asynchronous
 fallback and reference-phone gates remain open.
 [Contract and evidence](docs/spikes/persistent-pipeline-cache.md).
 
+## Fixed cluster assignment shaders — CPU/compiler checks passed
+
+The opt-in compute cooker preserves the cluster WGSL/algorithm while emitting
+fixed MSL, SPIR-V and HLSL. Explicit allocation lengths and static workgroup
+locals cover Metal passthrough's missing reflection; a checked workgroup-only
+SPIR-V decoration correction passes independent Vulkan validation. CPU checks,
+clusters-only/combined/default/browser configurations, Clippy and the runtime
+graph pass. Independent CPU/compiler source review is accepted. Native GPU, Claude appearance,
+Vulkan/DX12 execution and phone performance gates remain open.
+[Contract and evidence](docs/spikes/cooked-cluster-shaders.md).
+
 ## Fixed material shaders — CPU/compiler checks passed
 
 The opt-in material path cooks the unchanged imported-material, light and shadow

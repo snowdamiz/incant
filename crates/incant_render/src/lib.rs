@@ -129,7 +129,7 @@ impl Renderer {
         let cache_session = pipeline_cache::Session::new(&device, &adapter);
         let cache = cache_session.cache.as_ref();
         let environments = environment::EnvironmentSystem::new(&device, &queue);
-        let lighting = lighting::LightingSystem::new(&device, cache);
+        let lighting = lighting::LightingSystem::new(&device, adapter.get_info().backend, cache)?;
         let materials = materials::MaterialSystem::new(
             &device,
             &queue,
