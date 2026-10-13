@@ -1,0 +1,52 @@
+{
+  "status": "scoped CPU/source accepted; no GPU or appearance execution",
+  "claude_source": "497a35d4cd71f3b90fbf359cdef50074536d2f6a",
+  "compiled_source": "d9dd8f4ea739c1badbeeaf6b663460220b615520",
+  "formatted_source": "76be9608e99bf089fcb1e0908827330f70c28ac1",
+  "frozen_inputs": 2736,
+  "cpu_passed": 15,
+  "gpu_ignored": 2,
+  "compiled_modes": [
+    "default",
+    "cooked-temporal",
+    "cooked-temporal,native-metalfx"
+  ],
+  "records": 75,
+  "payloads": 53,
+  "archive_sha256": "46580119565c04d18ea175b9a611b76434b3bb2da93208b79970cc9347d54a1b",
+  "binaries": [
+    {
+      "mode": "upscaling",
+      "original": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/incant_render-bf4961fb357f91a4",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/owner-output-blend-cpu-002/binaries/upscaling",
+      "sha256": "f2f551dbbece93976f0b7009461b431c13bcbb734600d971ab1b76d8f3fbe9a5",
+      "bytes": 32357296,
+      "mode_octal": "0o755"
+    },
+    {
+      "mode": "cooked-compile",
+      "original": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/incant_render-60ce7b3bd9dc6bac",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/owner-output-blend-cpu-002/binaries/cooked-compile",
+      "sha256": "a683aaf2ad73adcd8c40a13996862da7e250713f343d9f792885ee4569973f6c",
+      "bytes": 33158000,
+      "mode_octal": "0o755"
+    },
+    {
+      "mode": "native-compile",
+      "original": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/incant_render-288759d68012f619",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/owner-output-blend-cpu-002/binaries/native-compile",
+      "sha256": "ea9aa885672ca448ef06ab3a8c644274f560b8a11bbdc1e06b5a1e0f8375c60b",
+      "bytes": 33885456,
+      "mode_octal": "0o755"
+    }
+  ],
+  "release_sha256": "1f91040b8d4c1b57f660faaa4fc625a95a4109a9272ed579ca1420d1d1f34272",
+  "source_review_sha256": "05167b18c9773f79238879dc596c385916ac90023811c9bdb9e302c36ec513ad",
+  "limitations": [
+    "Compiled source predates rustfmt-only follow-up; exact delta and final fmt are retained.",
+    "CPU001 private-test signature compile failure, CPU002 fmt failure and manual PATH mistake retained.",
+    "No full renderer suite, strict Clippy, GPU, pixels or device performance claim in this bounded slice.",
+    "Current-only output grid compute is not individually timed; resource limits are logical and exclude queued driver/vendor memory.",
+    "Source/output composite coordinate model does not establish raster equivalence at all HDR values."
+  ]
+}
