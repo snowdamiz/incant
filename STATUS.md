@@ -16,6 +16,17 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Extended cluster counts/masks observer — CPU checks passed, GPU pending
+
+A test-only observer now reads the actual submitted cached cluster buffers,
+including retained movement and resize, without creating replacement buffers.
+The ignored extension covers 75 camera/viewport/light-count combinations, eight
+retained frame steps and a directional-only control with raw count/mask hashes.
+Two CPU invariant tests and all-target Clippy pass in default and cooked-cluster
+configurations; no production renderer code changed. Independent source review
+and coordinated baseline/cooked GPU execution remain pending.
+[Scope and evidence](docs/spikes/cluster-grid-readback.md).
+
 ## Fixed cluster assignment shaders — CPU/compiler checks passed
 
 The opt-in compute cooker preserves the cluster WGSL/algorithm while emitting
