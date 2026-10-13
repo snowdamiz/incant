@@ -1,0 +1,175 @@
+{
+ "world-text-100-75-50": {
+  "frames": [
+   "b1-full-ui-100",
+   "b2-full-ui-75",
+   "b3-full-ui-50"
+  ],
+  "crop": [
+   584,
+   92,
+   300,
+   84
+  ],
+  "zoom": 2,
+  "layout": "column",
+  "inputs_png_sha256": {
+   "b1-full-ui-100": "1ff1f1261dd9914a3ffcf7a825c1d5ef2c0d848cfe3778d5360c538e56997d3d",
+   "b2-full-ui-75": "819a3808161c72b5b8a7adfc27b72f0fe0721263b9a5c6d6a815c398b7861c45",
+   "b3-full-ui-50": "0bef1718b168e7be4c4ad1f9f0797cd5b3c6d7255f646aa22a09e16638fdc21c"
+  },
+  "size": [
+   600,
+   520
+  ],
+  "sha256": "deb301eeedd3e88e809230da18533abcb4df0999814a90f01f5924fd4efe9231"
+ },
+ "crate-floor-100-75-50": {
+  "frames": [
+   "b1-full-ui-100",
+   "b2-full-ui-75",
+   "b3-full-ui-50"
+  ],
+  "crop": [
+   612,
+   252,
+   168,
+   150
+  ],
+  "zoom": 2,
+  "layout": "row",
+  "inputs_png_sha256": {
+   "b1-full-ui-100": "1ff1f1261dd9914a3ffcf7a825c1d5ef2c0d848cfe3778d5360c538e56997d3d",
+   "b2-full-ui-75": "819a3808161c72b5b8a7adfc27b72f0fe0721263b9a5c6d6a815c398b7861c45",
+   "b3-full-ui-50": "0bef1718b168e7be4c4ad1f9f0797cd5b3c6d7255f646aa22a09e16638fdc21c"
+  },
+  "size": [
+   1024,
+   300
+  ],
+  "sha256": "e6d0c93ca214a250ed47354d2a8aabf8f2df94a15d57ee80c95d8d1c1280ec5f"
+ },
+ "floor-edge-left-100-75-50": {
+  "frames": [
+   "b1-full-ui-100",
+   "b2-full-ui-75",
+   "b3-full-ui-50"
+  ],
+  "crop": [
+   0,
+   262,
+   192,
+   44
+  ],
+  "zoom": 3,
+  "layout": "column",
+  "inputs_png_sha256": {
+   "b1-full-ui-100": "1ff1f1261dd9914a3ffcf7a825c1d5ef2c0d848cfe3778d5360c538e56997d3d",
+   "b2-full-ui-75": "819a3808161c72b5b8a7adfc27b72f0fe0721263b9a5c6d6a815c398b7861c45",
+   "b3-full-ui-50": "0bef1718b168e7be4c4ad1f9f0797cd5b3c6d7255f646aa22a09e16638fdc21c"
+  },
+  "size": [
+   576,
+   412
+  ],
+  "sha256": "7f47fd349d7be5a124ab125924e95c38e9f5ef5e0a1a2b19a2365a1ae8fa19da"
+ },
+ "ui-over-pillar-100-75-50": {
+  "frames": [
+   "b1-full-ui-100",
+   "b2-full-ui-75",
+   "b3-full-ui-50"
+  ],
+  "crop": [
+   240,
+   112,
+   160,
+   220
+  ],
+  "zoom": 2,
+  "layout": "row",
+  "inputs_png_sha256": {
+   "b1-full-ui-100": "1ff1f1261dd9914a3ffcf7a825c1d5ef2c0d848cfe3778d5360c538e56997d3d",
+   "b2-full-ui-75": "819a3808161c72b5b8a7adfc27b72f0fe0721263b9a5c6d6a815c398b7861c45",
+   "b3-full-ui-50": "0bef1718b168e7be4c4ad1f9f0797cd5b3c6d7255f646aa22a09e16638fdc21c"
+  },
+  "size": [
+   976,
+   440
+  ],
+  "sha256": "63cecb88a1dfbc1be230c067cc50bb9e097d2b4663dffb6bcc0ea28d0ce857db"
+ },
+ "chrome-corner-disabled-75-50": {
+  "frames": [
+   "a1-offset-ui-disabled",
+   "a3-offset-ui-75",
+   "a4-offset-ui-50"
+  ],
+  "crop": [
+   24,
+   8,
+   96,
+   72
+  ],
+  "zoom": 4,
+  "layout": "row",
+  "inputs_png_sha256": {
+   "a1-offset-ui-disabled": "b7e779f2b0840705d6ee5b408aa066eeb5ed3d7d027ec9c625ca07f0ff9fee84",
+   "a3-offset-ui-75": "9528e6c2a6d68153ad93e880c49f5d8ec252c0ed30c65e953938ff98bbed48b2",
+   "a4-offset-ui-50": "0eb6657a0539e819d6ca5916d4722f8c1bd93e1cf148c3c8c41d34200f3d199c"
+  },
+  "size": [
+   1168,
+   288
+  ],
+  "sha256": "a76d114b3e0b09eb7ef1df2086643883d22c5aea68bbc65bd632e0b91e799ce2"
+ },
+ "ortho-crate-text-100-75-50": {
+  "frames": [
+   "c1-ortho-ui-100",
+   "c2-ortho-ui-75",
+   "c3-ortho-ui-50"
+  ],
+  "crop": [
+   584,
+   92,
+   300,
+   290
+  ],
+  "zoom": 1,
+  "layout": "row",
+  "inputs_png_sha256": {
+   "c1-ortho-ui-100": "04f59c1b976f11ae80e711eb848831df06f82073bd9dd5d7f99d29c524a180d3",
+   "c2-ortho-ui-75": "20b626d5886ca90f28a9c277c75adb5fbc5e6eba09f230963acdfb81554267a6",
+   "c3-ortho-ui-50": "d9d60ab253d0cb96afe86767ff9761b8e289354f1380b10cd48d63a0c2ae5821"
+  },
+  "size": [
+   916,
+   290
+  ],
+  "sha256": "3e6afb558a2091e78778d0d7e3969e5966601715408d92427d06665e7380af48"
+ },
+ "pixel-bypass-disabled-50": {
+  "frames": [
+   "d1-pixel-offset-disabled",
+   "d2-pixel-offset-fixed-50"
+  ],
+  "crop": [
+   588,
+   84,
+   252,
+   84
+  ],
+  "zoom": 2,
+  "layout": "column",
+  "inputs_png_sha256": {
+   "d1-pixel-offset-disabled": "087e4054a02b198d440696813fb9ace70c5ca942457f8840b9328ed04e12fc72",
+   "d2-pixel-offset-fixed-50": "087e4054a02b198d440696813fb9ace70c5ca942457f8840b9328ed04e12fc72"
+  },
+  "size": [
+   504,
+   344
+  ],
+  "sha256": "bb5c17df330b0f5e2ab68f06c1fe0fb1716c05b9ac26d698fc57dbc0e9fb2010"
+ }
+}

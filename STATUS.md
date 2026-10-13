@@ -16,9 +16,9 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Current overview — main196, 2026-10-13
+## Current overview — main197, 2026-10-13
 
-Development main196 includes the restart quota-test repair (PR188) and the reviewed,
+Development main197 includes the restart quota-test repair (PR188) and the reviewed,
 opt-in cooked sprite/UI/text/material paths with private Vulkan pipeline persistence
 (PR189). Default renderer checks remain; the next frozen checkpoint also exercises
 cooked features and asserts the actual native backend. Producer Metal appearance
@@ -44,8 +44,9 @@ admission checks pass; six actual Android callers remain producer-scoped.
 Core authored bindings and the corrected locked-exit proof are merged in PR185
 ([current-main evidence](docs/spikes/core-main182.md)).
 
-Dynamic resolution now has accepted producer Metal evidence; current-main integration
-is queued with cooked clusters. GPU timestamp execution remains pending. CPU profiling has accepted producer
+Dynamic resolution and cooked clusters have accepted producer Metal evidence; their
+[current-main197 integration](docs/spikes/clusters-drs-main197.md) passes 14 CPU/compile/tooling checks with independent final packet acceptance; the required fast check precedes publication.
+Current composed GPU execution remains pending. GPU timestamp execution remains pending. CPU profiling has accepted producer
 package evidence and passing [current-main194 CPU/source-relevance checks](docs/spikes/native-cpu-profiler-main194.md);
 independent integration review and the exact-head fast check passed, and PR195 is merged. These independent lanes do not satisfy
 phone, performance, complete-renderer or phase gates. Older milestone narratives
@@ -62,17 +63,19 @@ The next std-only inert component preserves exact ordered body/collider
 attachments and native local-pose bits against two checked arena layouts.
 Fifty-two CPU tests, Clippy, wasm32 and dependency checks pass, including actual
 2D/3D public attach/detach/reparent/remove/reuse observations and hostile decoding.
-Independent producer source/evidence review is accepted; [current-main197 integration](docs/spikes/physics-attachments-main197.md) passes all eight checks with 52 CPU cases; final integration review is pending. Enclosing-owner authentication,
+Independent producer source/evidence review is accepted; [current-main197 integration](docs/spikes/physics-attachments-main197.md) passes all eight checks with 52 CPU cases; independent final integration review is accepted; actual-main ancestry qualification is pending. Enclosing-owner authentication,
 complete body/collider/contact state and exact continuation remain required;
 no live construction or physics-save admission is enabled.
 [Attachment contract](docs/spikes/physics-inert-attachments.md).
 
-## Exact physics saves — inert graph adjacency validation underway
+## Exact physics saves — inert components merged; live restoration remains closed
+
+PR197 merges the independently reviewed snapshot, arena and graph validators with 40 passing CPU cases. The normal dependency graph is std-only. No live constructor or runtime consumer is enabled, and `PhysicsUnsupported` is unchanged. See [current integration evidence](docs/spikes/physics-inert-main196.md).
 
 The next inert format preserves node/edge order and validates both linked
 adjacency sides, reciprocal links, complete coverage and dense payload mappings.
 Forty CPU cases, Clippy, wasm32 and dependency checks pass, including actual
-2D/3D native swap-removal order observations. Independent producer review is accepted; the [combined main196 checks](docs/spikes/physics-inert-main196.md) pass with independent final integration acceptance. Publication awaits the required fast check. Contact/payload/solver ownership
+2D/3D native swap-removal order observations. Independent producer review is accepted; the [combined main196 checks](docs/spikes/physics-inert-main196.md) pass with independent final integration acceptance. PR197 is merged after its exact-head fast check. Contact/payload/solver ownership
 and full native composition remain required; no live restore or physics-save
 admission is enabled. [Graph contract](docs/spikes/physics-inert-graphs.md).
 
@@ -135,6 +138,28 @@ Linux driver execution and measured cache benefit remain pending. Default
 rendering is unchanged. Metal/DX12 storage, per-level recording, asynchronous
 fallback and reference-phone gates remain open.
 [Contract and evidence](docs/spikes/persistent-pipeline-cache.md).
+
+## Extended cluster counts/masks observer — Metal numerical parity passed
+
+The corrected test now resolves real cooked model geometry before retained-frame
+submission. Both frozen default/cooked-cluster GPU binaries pass on Apple M5 Pro
+Metal: all 84 named raw count/mask records match exactly across cameras, viewport
+sizes/origins, light-count boundaries, motion, clearing and resize. Three CPU
+cases per configuration and both all-target Clippy checks also pass. The change
+is test-only; GPU processes are reaped and the exclusive lease released. This
+adds numerical producer evidence, not appearance, other-backend, phone or
+performance acceptance. [Scope and evidence](docs/spikes/cluster-grid-readback.md).
+
+## Fixed cluster assignment shaders — CPU/compiler checks passed
+
+The opt-in compute cooker preserves the cluster WGSL/algorithm while emitting
+fixed MSL, SPIR-V and HLSL. Explicit allocation lengths and static workgroup
+locals cover Metal passthrough's missing reflection; a checked workgroup-only
+SPIR-V decoration correction passes independent Vulkan validation. CPU checks,
+clusters-only/combined/default/browser configurations, Clippy and the runtime
+graph pass. Independent CPU/compiler source review is accepted. Native GPU, Claude appearance,
+Vulkan/DX12 execution and phone performance gates remain open.
+[Contract and evidence](docs/spikes/cooked-cluster-shaders.md).
 
 ## Fixed material shaders — CPU/compiler checks passed
 
@@ -231,6 +256,16 @@ processes are reaped. Rust requested bytes, QuickJS heap and RSS are distinct.
 Independent source and final evidence review are accepted; integration is pending.
 Native-window/device capture, allocation stacks and the full profiler/performance
 gates remain open. [Contract/evidence](docs/spikes/native-cpu-profiling.md).
+
+## Dynamic-resolution producer — Metal review complete
+
+Claude 0067 and root accepted the bounded producer scope: 89 existing GPU cases,
+48 numeric attempts and 12 appearance frames, with original helper failures
+retained and corrected within budget. Physical UI and viewport mapping pass;
+nearest expansion remains visibly degraded and opt-in. Exact host feedback uses
+recorded witness bounds. Full temporal upscaling, MetalFX, motion review, composed
+cooked integration and reference-phone gates remain open.
+[Evidence](docs/spikes/dynamic-resolution.md).
 
 ## Authored Core runtime bindings — CPU proof accepted
 
@@ -2222,3 +2257,19 @@ shipping. The reviewed repair separates four unchanged proof commands behind the
 existing success-only required context; all 23 release requirements remain.
 Local policy/tooling checks pass; hosted execution is pending the next frozen
 checkpoint. [Evidence](docs/spikes/windows-conformance-split.md).
+
+### Opt-in retained dynamic resolution (CPU slice)
+
+- Bounded frame-duration control now selects retained scene attachment dimensions
+  without changing output/UI size or authored pixel-camera grids. Default behavior
+  is unchanged; nearest-texel presentation reuses existing WGSL.
+- Native composed hosts can opt into one-slot, nonblocking queue-completion latency
+  feedback. This is not isolated GPU timing or whole-game frame time; the automatic
+  native clock explicitly refuses browser targets, whose controller can still use
+  explicit host measurements.
+- Independent source/evidence review accepts this CPU slice; publisher integration
+  and Claude0067 actual callback/render acceptance remain pending.
+- 73 CPU tests, Clippy, renderer wasm32 and runtime graph checks pass. All 89 GPU
+  cases remain ignored. Actual callback/render execution, Claude visual acceptance,
+  temporal reconstruction/MetalFX and reference-device budgets remain open. See
+  [contract and evidence](docs/spikes/dynamic-resolution.md).

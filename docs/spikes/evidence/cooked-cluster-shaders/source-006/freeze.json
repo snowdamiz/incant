@@ -1,0 +1,122 @@
+{
+  "version": 1,
+  "scope": "fixed compute + narrow workgroup ArrayStride metadata correction; no GPU",
+  "worktree": "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant",
+  "head": "e0fbd05642275b3f201cb04cdcd9990f8077aa76",
+  "files": [
+    {
+      "path": "Cargo.lock",
+      "sha256": "7eec85df8c7e53e760cb088e23f94e99502dc72792e8ac1c935cf432825ae383",
+      "bytes": 251963,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-source-006/source/Cargo.lock"
+    },
+    {
+      "path": "Cargo.toml",
+      "sha256": "c01e56676d729e7b6da4a0b80cee83056ab091ca695e3b3817e76f7419b742a4",
+      "bytes": 3374,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-source-006/source/Cargo.toml"
+    },
+    {
+      "path": "crates/incant_render/Cargo.toml",
+      "sha256": "18c642972d6ecadfb3c473e9e91c8af7815dbf0fd102e380008323e04fb53f72",
+      "bytes": 2272,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-source-006/source/crates/incant_render/Cargo.toml"
+    },
+    {
+      "path": "crates/incant_render/build.rs",
+      "sha256": "e43a3198ce1a5f03ed54291a7d30e13c77f676941e6b41394a55906530cd8663",
+      "bytes": 5555,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-source-006/source/crates/incant_render/build.rs"
+    },
+    {
+      "path": "crates/incant_render/src/lib.rs",
+      "sha256": "f4d08bfbb7e92357940a4a066fc462ef9a9606f18bfbe694407c0c34fd79c89d",
+      "bytes": 17051,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-source-006/source/crates/incant_render/src/lib.rs"
+    },
+    {
+      "path": "crates/incant_render/src/lighting/cooked.rs",
+      "sha256": "f2ef1e6dfbfc2098f471e891a7165f6dd5ce305989fda5efd7d18f9e4758d16d",
+      "bytes": 4844,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-source-006/source/crates/incant_render/src/lighting/cooked.rs"
+    },
+    {
+      "path": "crates/incant_render/src/lighting/grid.wgsl",
+      "sha256": "461606edf6d9cb4c89581ef30ccf3ae5570a1e1bc0142ffe4953e91dfc2c0439",
+      "bytes": 2843,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-source-006/source/crates/incant_render/src/lighting/grid.wgsl"
+    },
+    {
+      "path": "crates/incant_render/src/lighting/mod.rs",
+      "sha256": "a3eda1e9ceef699f1508324403b9717028e0d11f02193e0367989feae1a2c5ef",
+      "bytes": 17687,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-source-006/source/crates/incant_render/src/lighting/mod.rs"
+    },
+    {
+      "path": "crates/incant_render/src/lighting/scene.rs",
+      "sha256": "93a9798faf1b44a67a5ed87bae826478f346d0eadeb48fbfc0f80c0c11da6a15",
+      "bytes": 11038,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-source-006/source/crates/incant_render/src/lighting/scene.rs"
+    },
+    {
+      "path": "crates/incant_render/src/resource_error.rs",
+      "sha256": "9ebd1280ef9d3fdb7991f359298fa212dd8c128473946815dbddffdffd3d4f9e",
+      "bytes": 2661,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-source-006/source/crates/incant_render/src/resource_error.rs"
+    },
+    {
+      "path": "crates/incant_render/src/shader/native.rs",
+      "sha256": "17a8f454d1c58292331d668905ec84a40ca83a2809dd01f30b2dfeb7292897ec",
+      "bytes": 5148,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-source-006/source/crates/incant_render/src/shader/native.rs"
+    },
+    {
+      "path": "crates/incant_shader_cook/Cargo.toml",
+      "sha256": "e12b8b89f3b2d344cfa0dc7def97c2262d23d76b0ffd4688aa75f5d5ed656270",
+      "bytes": 371,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-source-006/source/crates/incant_shader_cook/Cargo.toml"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/compute/contract.rs",
+      "sha256": "54284da43034cdb37fdafafdd1665f6653de43c30094e1449d6a5aca8721e305",
+      "bytes": 5083,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-source-006/source/crates/incant_shader_cook/src/compute/contract.rs"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/compute/emit.rs",
+      "sha256": "a776d81aa63cae81c1a0445a3ef17488062b96547a8e90bff36ca245c55bf06d",
+      "bytes": 7452,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-source-006/source/crates/incant_shader_cook/src/compute/emit.rs"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/compute/mod.rs",
+      "sha256": "ca1a3358b3b30af9057b26498307bce31903b0297270cc14940a03dc892313aa",
+      "bytes": 3003,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-source-006/source/crates/incant_shader_cook/src/compute/mod.rs"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/compute/spirv_workgroup.rs",
+      "sha256": "24e5e8cc68230e6109020c7c857ebd877ce570920819058d70bbb6d9b9bdba71",
+      "bytes": 5801,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-source-006/source/crates/incant_shader_cook/src/compute/spirv_workgroup.rs"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/compute/static_workgroup.rs",
+      "sha256": "3ee6871d6e96e715caab123ddfc67235ed33d411ff5b94569d32126256e7508b",
+      "bytes": 2842,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-source-006/source/crates/incant_shader_cook/src/compute/static_workgroup.rs"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/lib.rs",
+      "sha256": "96118f312f33f829d5c7a703a7bf03de6db06f89d9fb05e5d6bcd7bbaf3f54e4",
+      "bytes": 3363,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-source-006/source/crates/incant_shader_cook/src/lib.rs"
+    },
+    {
+      "path": "crates/incant_shader_cook/tests/compute.rs",
+      "sha256": "6404b3abd52283e61ce604fda02deea95908449e1e6b0980d52337e2ca958580",
+      "bytes": 7165,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-source-006/source/crates/incant_shader_cook/tests/compute.rs"
+    }
+  ]
+}

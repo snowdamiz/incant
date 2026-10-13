@@ -1,0 +1,82 @@
+[package]
+name = "incant_0067_drs"
+version = "0.0.1"
+edition = "2024"
+rust-version = "1.99"
+publish = false
+
+# Packet-local GPU tests and appearance helper for handoff 0067. It is its own
+# workspace so the repository manifests stay untouched. Cargo.lock is derived
+# from the repository lock and checked entry by entry (tools/build.py).
+# Dependencies mirror the normal and dev-dependency declarations of
+# incant_render and incant_render_gpu_host, so the renderer resolves with the
+# same default feature set as `cargo test -p incant_render -p
+# incant_render_gpu_host` (no cooked-* shader features).
+[workspace]
+
+[lib]
+path = "src/lib.rs"
+
+[[bin]]
+name = "drs_appearance"
+path = "src/bin/drs_appearance.rs"
+
+[[test]]
+name = "drs_gpu"
+path = "tests/drs_gpu.rs"
+
+[features]
+default = ["physics-deterministic"]
+physics-deterministic = [
+    "incant_assets/physics-deterministic",
+    "incant_audio_runtime/physics-deterministic",
+    "incant_cook/physics-deterministic",
+    "incant_game_runtime/physics-deterministic",
+    "incant_render/physics-deterministic",
+    "incant_render_authoring/physics-deterministic",
+    "incant_render_game/physics-deterministic",
+    "incant_render_gpu_host/physics-deterministic",
+    "incant_render_native/physics-deterministic",
+    "incant_runtime/physics-deterministic",
+    "incant_script/physics-deterministic",
+    "incant_ui/physics-deterministic",
+]
+
+[dependencies]
+incant_render = { path = "../../../../crates/incant_render" }
+incant_render_gpu_host = { path = "../../../../crates/incant_render_gpu_host" }
+incant_render_game = { path = "../../../../crates/incant_render_game", default-features = false }
+incant_render_native = { path = "../../../../crates/incant_render_native", default-features = false }
+incant_render_data = { path = "../../../../crates/incant_render_data" }
+incant_render_authoring = { path = "../../../../crates/incant_render_authoring", default-features = false }
+incant_cook = { path = "../../../../crates/incant_cook", default-features = false, features = ["scene"] }
+incant_game_runtime = { path = "../../../../crates/incant_game_runtime", default-features = false }
+incant_runtime = { path = "../../../../crates/incant_runtime", default-features = false }
+incant_types = { path = "../../../../crates/incant_types" }
+incant_script = { path = "../../../../crates/incant_script", default-features = false, features = ["compiler"] }
+incant_input = { path = "../../../../crates/incant_input" }
+incant_ui = { path = "../../../../crates/incant_ui", default-features = false }
+incant_assets = { path = "../../../../crates/incant_assets", default-features = false }
+incant_assets_runtime = { path = "../../../../crates/incant_assets_runtime", features = ["visual"] }
+incant_audio_runtime = { path = "../../../../crates/incant_audio_runtime", default-features = false, features = ["scene"] }
+incant_doc = { path = "../../../../crates/incant_doc", default-features = false }
+serde_json = { version = "1.0", features = ["float_roundtrip"] }
+sha2 = "0.10"
+tempfile = "3.27"
+png = "0.18"
+pollster = "0.4"
+thiserror = "2.0"
+
+[patch.crates-io]
+kira = { path = "../../../../third_party/kira" }
+rerecast = { path = "../../../../third_party/rerecast" }
+cosmic-text = { path = "../../../../third_party/cosmic-text" }
+tao = { path = "../../../../third_party/tao" }
+
+[profile.release]
+strip = false
+
+# Same as the repository's functional CI profile; not a shipping configuration.
+[profile.ci]
+inherits = "release"
+opt-level = 1

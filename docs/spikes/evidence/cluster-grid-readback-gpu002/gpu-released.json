@@ -1,0 +1,14 @@
+{
+  "packet": "cluster-grid-readback-002",
+  "at": "2026-10-13T04:12:24.408993+00:00",
+  "children": 2,
+  "owned_processes": [],
+  "ledger_pids_alive": [],
+  "ledger_sha256": "9aee405cf61ea8269b54a0696114a3e00b6396b360d24b236f41f329ece43629",
+  "system": {
+    "system": "Darwin",
+    "release": "27.0.0",
+    "machine": "arm64",
+    "mac_ver": "27.0.1"
+  }
+}

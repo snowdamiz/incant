@@ -1,0 +1,12 @@
+rendered a1-offset-ui-disabled
+rendered a2-offset-ui-100
+rendered a3-offset-ui-75
+rendered a4-offset-ui-50
+rendered b1-full-ui-100
+rendered b2-full-ui-75
+rendered b3-full-ui-50
+rendered c1-ortho-ui-100
+rendered c2-ortho-ui-75
+rendered c3-ortho-ui-50
+rendered d1-pixel-offset-disabled
+rendered d2-pixel-offset-fixed-50

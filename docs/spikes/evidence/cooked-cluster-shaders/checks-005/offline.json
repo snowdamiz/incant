@@ -1,0 +1,86 @@
+{
+  "commands": [
+    {
+      "argv": [
+        "/opt/homebrew/bin/spirv-val",
+        "--target-env",
+        "vulkan1.0",
+        "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-005/artifacts/Vulkan-Compute.shader"
+      ],
+      "exit": 0,
+      "output": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-005/offline-0.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "/opt/homebrew/bin/spirv-val",
+        "--target-env",
+        "spv1.0",
+        "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-005/artifacts/Vulkan-Compute.shader"
+      ],
+      "exit": 0,
+      "output": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-005/offline-1.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "xcrun",
+        "--sdk",
+        "macosx",
+        "metal",
+        "-std=macos-metal2.4",
+        "-x",
+        "metal",
+        "-c",
+        "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-005/artifacts/Metal-Compute.shader",
+        "-o",
+        "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-005/grid.air"
+      ],
+      "exit": 0,
+      "output": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-005/offline-2.log",
+      "sha256": "3abb3f8759b46d75992cb270852cb777f05d65d5f39feeb2ba4324e7b37a8d4b"
+    },
+    {
+      "argv": [
+        "xcrun",
+        "--sdk",
+        "macosx",
+        "metallib",
+        "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-005/grid.air",
+        "-o",
+        "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-005/grid.metallib"
+      ],
+      "exit": 0,
+      "output": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-005/offline-3.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "artifact_bytes_identical_to_source004": true,
+  "artifacts": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-005/artifacts/Metal-Compute.shader",
+      "bytes": 7848,
+      "sha256": "1d501c9dabac36b7530eec4103e488da1a18e89649ffd4f05a74771e1be3b12d"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-005/artifacts/Vulkan-Compute.shader",
+      "bytes": 10412,
+      "sha256": "9cd2cf8769aad9600726f01a4b742f9d7e392e913210756bfcd753d5d4e116ad"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-005/artifacts/Dx12-Compute.shader",
+      "bytes": 6998,
+      "sha256": "e7e4401e67edf5064c54cb843767dc2cdff8452c38ecc87dabc57fe6665598b3"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-005/grid.air",
+      "bytes": 9168,
+      "sha256": "f58a1e48b0191a55b15e566f56956e0acbb6aa2f6949ca09fddce3680adf8946"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-005/grid.metallib",
+      "bytes": 8619,
+      "sha256": "cb95215c57003a0082b0fbedc88bbebbfb230a3153c6c6064e7324a90bbbce03"
+    }
+  ]
+}
