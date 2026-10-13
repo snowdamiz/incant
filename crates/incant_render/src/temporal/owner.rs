@@ -5,6 +5,9 @@ use std::sync::Arc;
 #[derive(Clone, Debug)]
 pub struct TemporalFrame {
     motion: MotionFrame,
+    // Number of accepted color samples since the latest owner reset. Saturates
+    // once every allowed policy (<= 0.99) has reached its steady-state weight.
+    samples: u8,
 }
 impl TemporalFrame {
     pub fn motion(&self) -> &MotionFrame {
@@ -15,6 +18,10 @@ impl TemporalFrame {
     }
     pub fn bypassed(&self) -> bool {
         self.motion.bypassed()
+    }
+    #[cfg(test)]
+    pub(crate) fn accepted_samples(&self) -> u8 {
+        self.samples
     }
 }
 pub(crate) struct TemporalState {
@@ -28,6 +35,25 @@ pub(crate) struct Pending {
     pub(super) input: TemporalInput,
     pub(super) config: TemporalConfig,
     pub(super) jitter_delta_code: f32,
+    samples: u8,
+}
+
+fn next_samples(previous: u8, has_previous: bool, bypassed: bool) -> u8 {
+    if bypassed {
+        0
+    } else if !has_previous {
+        1
+    } else {
+        previous.saturating_add(1).min(100)
+    }
+}
+
+fn history_weight(samples: u8, maximum: f32) -> f32 {
+    if samples <= 1 {
+        0.
+    } else {
+        maximum.min(f32::from(samples - 1) / f32::from(samples))
+    }
 }
 impl TemporalState {
     pub fn new(config: TemporalConfig) -> Result<Self, TemporalError> {
@@ -94,17 +120,24 @@ impl TemporalState {
         } else {
             super::jitter::delta_code(None, None)
         };
+        let samples = next_samples(
+            self.last.as_ref().map_or(0, |last| last.samples),
+            input.frame.has_previous(),
+            input.frame.bypassed(),
+        );
         Ok(Pending {
             targets,
             input,
             config: self.config,
             jitter_delta_code,
+            samples,
         })
     }
     pub fn accept(&mut self, pending: Pending) {
         self.slot = pending.input.surfaces.as_ref().map_or(1, |s| s.slot);
         self.last = Some(TemporalFrame {
             motion: pending.input.frame,
+            samples: pending.samples,
         });
         self.targets = pending.targets;
     }
@@ -118,7 +151,57 @@ impl TemporalState {
 }
 
 impl Pending {
+    pub(super) fn history_weight(&self) -> f32 {
+        history_weight(self.samples, self.config.history_weight)
+    }
     pub(crate) fn active(&self) -> bool {
         self.targets.is_some()
+    }
+}
+
+#[cfg(test)]
+mod warmup_tests {
+    use super::*;
+
+    #[test]
+    fn reset_edge_bias_decays_as_sample_mean_before_steady_state() {
+        // A pixel-aligned edge's first registered sample carries 3/8 of the
+        // neighboring pixel. Later samples are exact. Independent arithmetic
+        // mean predicts its residual; a constant 0.9 keeps > 0.2 after six.
+        let mut samples = next_samples(0, false, false);
+        let mut residual = 0.375_f32;
+        for frame in 2..=10 {
+            samples = next_samples(samples, true, false);
+            residual *= history_weight(samples, 0.9);
+            assert!((residual - 0.375 / frame as f32).abs() < 1e-7);
+            if frame == 6 {
+                assert!(residual < 0.1);
+                assert!(0.375 * 0.9_f32.powi(5) > 0.2);
+            }
+        }
+        assert_eq!(history_weight(next_samples(samples, true, false), 0.9), 0.9);
+    }
+
+    #[test]
+    fn reset_and_bypass_restart_the_ramp() {
+        for prior in [0, 1, 5, 99, 100, u8::MAX] {
+            assert_eq!(next_samples(prior, false, false), 1);
+            assert_eq!(next_samples(prior, true, true), 0);
+        }
+        assert_eq!(history_weight(1, 0.9), 0.);
+        assert_eq!(history_weight(0, 0.9), 0.);
+    }
+
+    #[test]
+    fn policy_maximum_and_bounded_age_hold_over_long_sessions() {
+        for maximum in [0., 0.25, 0.5, 0.8, 0.9, 0.99] {
+            let mut samples = next_samples(0, false, false);
+            for _ in 0..1000 {
+                samples = next_samples(samples, true, false);
+                assert!(history_weight(samples, maximum) <= maximum);
+            }
+            assert_eq!(samples, 100);
+            assert_eq!(history_weight(samples, maximum), maximum);
+        }
     }
 }

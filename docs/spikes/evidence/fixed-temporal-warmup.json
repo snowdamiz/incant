@@ -1,0 +1,120 @@
+{
+  "source": {
+    "head": "a143b5c0f537bd35111e40e99626f40318a385ac",
+    "files": {
+      "crates/incant_render/src/temporal/owner.rs": "f9fb45b3e29a8001c949010d3323eff177e1de44954098fee277aeadcdfcf201",
+      "crates/incant_render/src/temporal/system.rs": "96742ca9e43522a0166460a41b4d46f53f7daf8cf9ed26df33720f6115db5ae2",
+      "crates/incant_render/src/temporal_retained_tests.rs": "eed7c13c7b36ea79ed6b03eceab8645299f87446d55e731ebefa49f7b4544394",
+      "Cargo.lock": "68c187dbeb8d0e45d79c83f5503950070bd13090dbe456ad4970f5444c4417a6"
+    }
+  },
+  "checks": [
+    {
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--lib"
+      ],
+      "start": "2026-10-13T12:50:29.249385+00:00",
+      "end": "2026-10-13T12:50:38.645534+00:00",
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/fixed-temporal-warmup-001/check-1.log",
+      "sha256": "52eb4391a6702a5a9aac2d6f7ee88e2a376e0443d4d8db8642a18f25e9c459ce"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--lib",
+        "--features",
+        "cooked-materials"
+      ],
+      "start": "2026-10-13T12:50:38.645850+00:00",
+      "end": "2026-10-13T12:50:47.618243+00:00",
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/fixed-temporal-warmup-001/check-2.log",
+      "sha256": "19927ad1323cfdc5e689d742089e3b812efe253788c7f758ea1b48c107a4638b"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--all-targets",
+        "--features",
+        "cooked-materials",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "start": "2026-10-13T12:50:47.618580+00:00",
+      "end": "2026-10-13T12:50:49.841313+00:00",
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/fixed-temporal-warmup-001/check-3.log",
+      "sha256": "09a29e8aef8d6dd7364b0581cfa46ec9cb1bcd1260d9714144bb041b5ba7307d"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--check"
+      ],
+      "start": "2026-10-13T12:50:49.841650+00:00",
+      "end": "2026-10-13T12:50:51.092116+00:00",
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/fixed-temporal-warmup-001/check-4.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "start": "2026-10-13T12:50:51.092499+00:00",
+      "end": "2026-10-13T12:50:51.124712+00:00",
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/fixed-temporal-warmup-001/check-5.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "start": "2026-10-13T12:50:51.125040+00:00",
+      "end": "2026-10-13T12:50:51.144547+00:00",
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/fixed-temporal-warmup-001/check-6.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "archive": {
+    "path": "docs/spikes/evidence/fixed-temporal-warmup-records.json.gz",
+    "sha256": "035c5f71fdc896973228b8337c05b8eb18903d61267f650e2e0d9858c7a933c0",
+    "records": 8
+  },
+  "scope": "CPU qualification only. GPU regression assertions added but unexecuted. Prior rejected sharpness quality remains open."
+}

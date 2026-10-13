@@ -84,6 +84,7 @@ fn temporal_color_motion_and_geometry_publish_once_and_failures_consume_no_phase
     retained.submit(&r, &input, target(65)).unwrap();
     let first = retained.temporal_frame().unwrap();
     assert_eq!(first.jitter_phase(), Some(0));
+    assert_eq!(first.accepted_samples(), 1);
     assert!(first.motion().same_owner(&retained.motion_frame().unwrap()));
     let color = retained
         .temporal
@@ -109,6 +110,7 @@ fn temporal_color_motion_and_geometry_publish_once_and_failures_consume_no_phase
             .is_err()
     );
     assert_eq!(retained.temporal_frame().unwrap().motion().sequence(), 1);
+    assert_eq!(retained.temporal_frame().unwrap().accepted_samples(), 1);
     assert_eq!(retained.live.batches[0].instances, live);
     assert_eq!(
         retained
@@ -121,6 +123,7 @@ fn temporal_color_motion_and_geometry_publish_once_and_failures_consume_no_phase
     );
     retained.submit(&r, &input, target(65)).unwrap();
     assert_eq!(retained.temporal_frame().unwrap().jitter_phase(), Some(1));
+    assert_eq!(retained.temporal_frame().unwrap().accepted_samples(), 2);
     assert_eq!(retained.staging.batches[0].instances, live);
     assert_ne!(
         retained
@@ -135,10 +138,12 @@ fn temporal_color_motion_and_geometry_publish_once_and_failures_consume_no_phase
     input.nodes[0].world = DMat4::ZERO;
     assert!(retained.submit(&r, &input, target(65)).is_err());
     assert_eq!(retained.temporal_frame().unwrap().jitter_phase(), Some(1));
+    assert_eq!(retained.temporal_frame().unwrap().accepted_samples(), 2);
     input.nodes[0].world = DMat4::IDENTITY;
     retained.submit(&r, &input, target(65)).unwrap();
     let reset = retained.temporal_frame().unwrap();
     assert_eq!(reset.jitter_phase(), Some(0));
+    assert_eq!(reset.accepted_samples(), 1);
     assert!(!reset.motion().has_previous());
     assert!(reset.motion().epoch() > first.motion().epoch());
     let mut replacement = r.prepare_retained(&input, "camera").unwrap();
@@ -153,6 +158,7 @@ fn temporal_color_motion_and_geometry_publish_once_and_failures_consume_no_phase
         replacement.temporal_frame().unwrap().jitter_phase(),
         Some(0)
     );
+    assert_eq!(replacement.temporal_frame().unwrap().accepted_samples(), 1);
     // Same physical output: changed internal scale resets both histories together.
     let scale = crate::resolution::ResolutionScale::new(8).unwrap();
     let resolution = crate::resolution::ResolutionConfig {
@@ -170,6 +176,7 @@ fn temporal_color_motion_and_geometry_publish_once_and_failures_consume_no_phase
     retained.submit(&r, &input, target(65)).unwrap();
     let frame = retained.temporal_frame().unwrap();
     assert_eq!(frame.jitter_phase(), Some(0));
+    assert_eq!(frame.accepted_samples(), 1);
     assert!(!frame.motion().has_previous());
     assert_eq!(frame.motion().internal_size(), [33, 17]);
     assert_ne!(

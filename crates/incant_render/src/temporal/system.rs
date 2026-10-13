@@ -160,7 +160,7 @@ impl TemporalSystem {
                 f32::from(u8::from(pending.input.frame.has_previous())),
             ],
             options: [
-                c.history_weight,
+                pending.history_weight(),
                 c.relative_depth,
                 c.absolute_depth,
                 c.reactive_threshold,
