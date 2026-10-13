@@ -104,6 +104,8 @@ pub use physics::CookedPhysics;
 pub use physics_2d::CookedPhysics2D;
 pub use physics_queries::{NativeQueries, QueryError};
 pub use save::{MAX_SAVE_BYTES, SaveError};
+#[cfg(feature = "native-checkpoints")]
+pub use save::{WorldCheckpoint, WorldCheckpointError};
 pub use scene::{CookedEntity, CookedScene, SceneError, StableId};
 mod physics_variant;
 pub use physics_variant::{PHYSICS_VARIANT, PhysicsMode, PhysicsVariant, require_physics_mode};

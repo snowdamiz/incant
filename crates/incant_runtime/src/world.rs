@@ -27,6 +27,10 @@ pub(crate) struct Hierarchy {
     pub nodes: Vec<(Entity, Option<usize>)>,
     pub globals: Vec<DMat4>,
 }
+pub(crate) type NativePhysicsOwners = (
+    incant_physics_runtime::PhysicsRuntime<StableId>,
+    incant_physics_2d_runtime::PhysicsWorld2D,
+);
 
 #[derive(Debug, Clone, PartialEq)]
 pub struct EntitySnapshot {
@@ -88,6 +92,9 @@ pub struct NativeWorld {
     pub(crate) physics_2d_used: bool,
     pub(crate) physics_failed: bool,
     pub(crate) physics_used: bool,
+    // A rewind may restore a never-stepped world without erasing the host's
+    // obligation to use a physics-capable save. This flag never drives ticks.
+    pub(crate) physics_save_required: bool,
     pub(crate) spatial_used: bool,
     pub(crate) spatial_ids: BTreeSet<StableId>,
     pub(crate) tilemap_collision_ids: BTreeSet<StableId>,
@@ -109,6 +116,17 @@ impl NativeWorld {
     }
 
     pub fn new(scene: CookedScene) -> Self {
+        Self::with_physics_owners(scene, None)
+    }
+
+    // Checked checkpoint owners already contain their complete native state.
+    // Rehydrating ECS must not construct, install or step a second pair of solvers.
+    pub(crate) fn with_physics_owners(
+        scene: CookedScene,
+        owners: Option<NativePhysicsOwners>,
+    ) -> Self {
+        let supplied = owners.is_some();
+        let (mut solver, planar_owner) = owners.unwrap_or_default();
         // Startup pairing only. No document, scene serialization or hashing is
         // performed during simulation or native structural operations.
         let source_scene_fingerprint = Sha256::digest(scene.to_bytes()).into();
@@ -128,9 +146,8 @@ impl NativeWorld {
             .collect();
         let spatial = scene.spatial;
         let visual_assets = scene.visual_assets;
-        let mut solver = incant_physics_runtime::PhysicsRuntime::default();
         let by_id: BTreeMap<_, _> = scene.entities.iter().map(|e| (e.id, e)).collect();
-        for declaration in &physics {
+        for declaration in physics.iter().filter(|_| !supplied) {
             solver.install(
                 scene.id,
                 declaration.entity,
@@ -139,6 +156,7 @@ impl NativeWorld {
         }
         let mut planar_changes: Vec<_> = physics_2d
             .iter()
+            .filter(|_| !supplied)
             .map(|p| (p.entity, Some(p.prepare(by_id[&p.entity]))))
             .collect();
         let mut world = World::new();
@@ -194,10 +212,11 @@ impl NativeWorld {
             source_scene_fingerprint,
             world,
             physics: solver,
-            physics_2d: Default::default(),
+            physics_2d: planar_owner,
             physics_2d_used: false,
             physics_failed: false,
             physics_used: !physics.is_empty(),
+            physics_save_required: false,
             spatial_used: !spatial.is_empty() || !visual_assets.is_empty(),
             spatial_ids: BTreeSet::new(),
             tilemap_collision_ids: BTreeSet::new(),
@@ -243,19 +262,23 @@ impl NativeWorld {
                 None,
                 None,
             );
-            planar_changes.push((
-                id,
-                Some(
-                    incant_physics_2d_runtime::PreparedBody::tilemap(&map.0, state)
-                        .expect("validated map"),
-                ),
-            ));
+            if !supplied {
+                planar_changes.push((
+                    id,
+                    Some(
+                        incant_physics_2d_runtime::PreparedBody::tilemap(&map.0, state)
+                            .expect("validated map"),
+                    ),
+                ));
+            }
             result.install_physics_2d(id, None, true);
         }
-        result
-            .physics_2d
-            .apply(planar_changes)
-            .expect("validated planar scene");
+        if !supplied {
+            result
+                .physics_2d
+                .apply(planar_changes)
+                .expect("validated planar scene");
+        }
         result.prepare_root_query_storage();
         result
     }
