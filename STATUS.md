@@ -62,7 +62,7 @@ The next std-only inert component preserves exact ordered body/collider
 attachments and native local-pose bits against two checked arena layouts.
 Fifty-two CPU tests, Clippy, wasm32 and dependency checks pass, including actual
 2D/3D public attach/detach/reparent/remove/reuse observations and hostile decoding.
-Independent producer source/evidence review is accepted; current-main integration checks are pending. Enclosing-owner authentication,
+Independent producer source/evidence review is accepted; [current-main197 integration](docs/spikes/physics-attachments-main197.md) passes all eight checks with 52 CPU cases; final integration review is pending. Enclosing-owner authentication,
 complete body/collider/contact state and exact continuation remain required;
 no live construction or physics-save admission is enabled.
 [Attachment contract](docs/spikes/physics-inert-attachments.md).
