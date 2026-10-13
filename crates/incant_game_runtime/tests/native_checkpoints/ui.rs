@@ -135,6 +135,15 @@ fn hosted_tick(game: &mut HostedOfflineGameSession<Host>) -> Vec<f32> {
 
 #[test]
 fn ui_audio_and_both_physics_owners_resume_as_one_fresh_game() {
+    roundtrip(false);
+}
+
+#[test]
+fn persisted_ui_audio_and_physics_bind_to_the_fresh_world_before_startup() {
+    roundtrip(true);
+}
+
+fn roundtrip(persisted: bool) {
     let temp = tempfile::tempdir().unwrap();
     let bindings = clips(temp.path());
     let mut live = HostedOfflineGameSession::<Host>::new(
@@ -154,9 +163,28 @@ fn ui_audio_and_both_physics_owners_resume_as_one_fresh_game() {
     let checkpoint = live
         .checkpoint(&mut payload(), &mut planar(), &mut spatial())
         .unwrap();
+    let bytes = persisted.then(|| {
+        checkpoint
+            .persisted_bytes(&mut payload(), &mut planar(), &mut spatial())
+            .unwrap()
+    });
+    let prepare_checkpoint = || match &bytes {
+        None => prepare(&checkpoint),
+        Some(bytes) => PendingGameCheckpoint::from_persisted_bytes(
+            bytes,
+            &initial(),
+            code(),
+            Default::default(),
+            &mut payload(),
+            &mut planar(),
+            &mut spatial(),
+            &mut CheckpointAllocationBudget::new(64 * 1024 * 1024, 100_000),
+        )
+        .unwrap(),
+    };
     assert!(
         HostedOfflineGameSession::<Host>::from_checkpoint(
-            prepare(&checkpoint),
+            prepare_checkpoint(),
             bindings.clone(),
             true
         )
@@ -165,7 +193,7 @@ fn ui_audio_and_both_physics_owners_resume_as_one_fresh_game() {
     // An incapable host must refuse the retained UI section, rather than reset it.
     assert!(
         HostedOfflineGameSession::<super::native_checkpoint_cases::Host>::from_checkpoint(
-            prepare(&checkpoint),
+            prepare_checkpoint(),
             bindings.clone(),
             (
                 Arc::new(std::sync::atomic::AtomicUsize::new(0)),
@@ -175,7 +203,7 @@ fn ui_audio_and_both_physics_owners_resume_as_one_fresh_game() {
         .is_err()
     );
     let mut restored =
-        HostedOfflineGameSession::<Host>::from_checkpoint(prepare(&checkpoint), bindings, false)
+        HostedOfflineGameSession::<Host>::from_checkpoint(prepare_checkpoint(), bindings, false)
             .unwrap();
     assert_ne!(original_token, restored.host().unwrap().0.focus().unwrap());
     assert_eq!(

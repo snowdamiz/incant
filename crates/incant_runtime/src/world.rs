@@ -147,12 +147,20 @@ impl NativeWorld {
         let spatial = scene.spatial;
         let visual_assets = scene.visual_assets;
         let by_id: BTreeMap<_, _> = scene.entities.iter().map(|e| (e.id, e)).collect();
-        for declaration in physics.iter().filter(|_| !supplied) {
-            solver.install(
+        if !supplied {
+            solver = incant_physics_runtime::PhysicsRuntime::from_prepared_bodies(
                 scene.id,
-                declaration.entity,
-                declaration.prepare(by_id[&declaration.entity]),
-            );
+                physics
+                    .iter()
+                    .map(|declaration| {
+                        (
+                            declaration.entity,
+                            declaration.prepare(by_id[&declaration.entity]),
+                        )
+                    })
+                    .collect(),
+            )
+            .expect("cooked scene declaration identities and capacity");
         }
         let mut planar_changes: Vec<_> = physics_2d
             .iter()

@@ -47,7 +47,9 @@ fn warm() -> PhysicsRuntime<StableId> {
             )
         })
         .collect();
-    runtime.sync(PreparedPhysics::new(declarations).unwrap());
+    runtime
+        .sync(PreparedPhysics::new(declarations).unwrap())
+        .unwrap();
     for _ in 0..64 {
         runtime.step(1. / 64.).unwrap();
     }
@@ -110,14 +112,16 @@ fn spatial_checkpoint_preserves_all_scenes_ids_queries_and_continuation() {
     for tick in 0..96 {
         for runtime in [&mut source, &mut restored] {
             if tick == 8 {
-                runtime.remove(&id(1), &id(12));
+                runtime.remove(&id(1), &id(12)).unwrap();
             }
             if tick == 16 {
-                runtime.install(
-                    id(1),
-                    id(13),
-                    PreparedBody::new(spec(false, true, 0.6)).unwrap(),
-                );
+                runtime
+                    .install(
+                        id(1),
+                        id(13),
+                        PreparedBody::new(spec(false, true, 0.6)).unwrap(),
+                    )
+                    .unwrap();
             }
             if tick == 40 {
                 let mut motion = runtime.state(&id(2), &id(11)).unwrap().clone();
@@ -183,9 +187,11 @@ fn spatial_checkpoint_preserves_exits_after_entity_and_scene_removal() {
                 .iter()
                 .map(|(&id, entry)| (id, entry.config.clone()))
                 .collect();
-            runtime.sync(PreparedPhysics::new(BTreeMap::from([(id(2), retained)])).unwrap());
+            runtime
+                .sync(PreparedPhysics::new(BTreeMap::from([(id(2), retained)])).unwrap())
+                .unwrap();
         } else {
-            runtime.remove(&id(1), &id(12));
+            runtime.remove(&id(1), &id(12)).unwrap();
         }
         runtime.step(1. / 64.).unwrap();
         assert!(
@@ -222,7 +228,9 @@ fn spatial_outer_join_charges_false_native_intersection_candidates() {
         let mut body = spec(false, true, 0.);
         body.collider.shape = ColliderShape::Sphere { radius: 0.5 };
         body.state.translation = translation;
-        runtime.install(id(1), entity, PreparedBody::new(body).unwrap());
+        runtime
+            .install(id(1), entity, PreparedBody::new(body).unwrap())
+            .unwrap();
     }
     runtime.step(1. / 64.).unwrap();
     assert!(runtime.overlaps.is_empty());

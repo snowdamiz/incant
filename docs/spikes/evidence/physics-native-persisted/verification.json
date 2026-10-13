@@ -1,0 +1,18 @@
+{
+  "verified": true,
+  "records": 13330,
+  "payloads": 1396,
+  "sources": 1810,
+  "source_generations": 14,
+  "binaries": 20,
+  "commands": 51,
+  "historical_failures": {
+    "focused-persisted-001.json": 101,
+    "focused-persisted-003.json": 101,
+    "focused-ccd-001.json": 101,
+    "focused-ccd-002.json": 101
+  },
+  "tests_per_mode": 382,
+  "local_binaries": true,
+  "originals": true
+}

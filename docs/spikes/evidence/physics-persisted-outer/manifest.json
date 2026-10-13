@@ -1,0 +1,295 @@
+{
+  "scope": "private typed outer physics/world-v12 producer; independent final evidence review and current-main/session composition pending",
+  "source_head": "7f368565e3b31781ac86b971786626c82a50ad5e",
+  "outer_implementation": "91a2899c663f2f5972632f3ec5097546ef13f7b5",
+  "outer_followup": "5c7f8e5491175b1598eb738a51c2f2efaa01cc2d",
+  "native_followup": "b78ff58d",
+  "build_inputs": 3734,
+  "chain_checks": 12,
+  "counts": {
+    "deterministic": {
+      "harnesses": 39,
+      "regular_passed": 320,
+      "regular_ignored": 1,
+      "explicit_capacity_passed": 1,
+      "total_executed": 321,
+      "failed": 0
+    },
+    "fast-simd8": {
+      "harnesses": 39,
+      "regular_passed": 320,
+      "regular_ignored": 1,
+      "explicit_capacity_passed": 1,
+      "total_executed": 321,
+      "failed": 0
+    }
+  },
+  "focused_passed_overlap": 14,
+  "binary_copies": [
+    {
+      "mode": "deterministic",
+      "crate": "incant_runtime",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-persisted-outer-qualification-001/binaries/deterministic/incant_runtime-00419d719285ee81",
+      "sha256": "5a3fc20fadcf00159c074b779e2f081f714e6f7499befd938e0d01a7dfe83e62",
+      "bytes": 16142272,
+      "compiler_artifact": {
+        "reason": "compiler-artifact",
+        "package_id": "path+file:///Users/andreyyurlov/.codex/worktrees/outer-compound-checkpoints/incant/crates/incant_runtime#0.0.1",
+        "manifest_path": "/Users/andreyyurlov/.codex/worktrees/outer-compound-checkpoints/incant/crates/incant_runtime/Cargo.toml",
+        "target": {
+          "kind": [
+            "lib"
+          ],
+          "crate_types": [
+            "lib"
+          ],
+          "name": "incant_runtime",
+          "src_path": "/Users/andreyyurlov/.codex/worktrees/outer-compound-checkpoints/incant/crates/incant_runtime/src/lib.rs",
+          "edition": "2024",
+          "doc": true,
+          "doctest": true,
+          "test": true
+        },
+        "profile": {
+          "opt_level": "1",
+          "debuginfo": 0,
+          "debug_assertions": false,
+          "overflow_checks": false,
+          "test": true
+        },
+        "features": [
+          "native-checkpoints",
+          "physics-deterministic"
+        ],
+        "filenames": [
+          "/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/incant_runtime-00419d719285ee81"
+        ],
+        "executable": "/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/incant_runtime-00419d719285ee81",
+        "fresh": false
+      }
+    },
+    {
+      "mode": "deterministic",
+      "crate": "incant_physics_2d_runtime",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-persisted-outer-qualification-001/binaries/deterministic/incant_physics_2d_runtime-698a04f5961eb1f1",
+      "sha256": "5ea5f1aa48a92fdc2419d17049add2b2d3900edb5cc23d06c0254394508bdf88",
+      "bytes": 6267048,
+      "compiler_artifact": {
+        "reason": "compiler-artifact",
+        "package_id": "path+file:///Users/andreyyurlov/.codex/worktrees/outer-compound-checkpoints/incant/crates/incant_physics_2d_runtime#0.0.1",
+        "manifest_path": "/Users/andreyyurlov/.codex/worktrees/outer-compound-checkpoints/incant/crates/incant_physics_2d_runtime/Cargo.toml",
+        "target": {
+          "kind": [
+            "lib"
+          ],
+          "crate_types": [
+            "lib"
+          ],
+          "name": "incant_physics_2d_runtime",
+          "src_path": "/Users/andreyyurlov/.codex/worktrees/outer-compound-checkpoints/incant/crates/incant_physics_2d_runtime/src/lib.rs",
+          "edition": "2024",
+          "doc": true,
+          "doctest": true,
+          "test": true
+        },
+        "profile": {
+          "opt_level": "1",
+          "debuginfo": 0,
+          "debug_assertions": false,
+          "overflow_checks": false,
+          "test": true
+        },
+        "features": [
+          "deterministic",
+          "native-checkpoints"
+        ],
+        "filenames": [
+          "/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/incant_physics_2d_runtime-698a04f5961eb1f1"
+        ],
+        "executable": "/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/incant_physics_2d_runtime-698a04f5961eb1f1",
+        "fresh": false
+      }
+    },
+    {
+      "mode": "deterministic",
+      "crate": "incant_physics_runtime",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-persisted-outer-qualification-001/binaries/deterministic/incant_physics_runtime-14de23cf7e326617",
+      "sha256": "874e140f25984ed4cbe79f25fafc9ee206ae7ee1c55e1a4e511016169ad16849",
+      "bytes": 7249144,
+      "compiler_artifact": {
+        "reason": "compiler-artifact",
+        "package_id": "path+file:///Users/andreyyurlov/.codex/worktrees/outer-compound-checkpoints/incant/crates/incant_physics_runtime#0.0.1",
+        "manifest_path": "/Users/andreyyurlov/.codex/worktrees/outer-compound-checkpoints/incant/crates/incant_physics_runtime/Cargo.toml",
+        "target": {
+          "kind": [
+            "lib"
+          ],
+          "crate_types": [
+            "lib"
+          ],
+          "name": "incant_physics_runtime",
+          "src_path": "/Users/andreyyurlov/.codex/worktrees/outer-compound-checkpoints/incant/crates/incant_physics_runtime/src/lib.rs",
+          "edition": "2024",
+          "doc": true,
+          "doctest": true,
+          "test": true
+        },
+        "profile": {
+          "opt_level": "1",
+          "debuginfo": 0,
+          "debug_assertions": false,
+          "overflow_checks": false,
+          "test": true
+        },
+        "features": [
+          "deterministic",
+          "native-checkpoints"
+        ],
+        "filenames": [
+          "/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/incant_physics_runtime-14de23cf7e326617"
+        ],
+        "executable": "/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/incant_physics_runtime-14de23cf7e326617",
+        "fresh": false
+      }
+    },
+    {
+      "mode": "fast-simd8",
+      "crate": "incant_runtime",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-persisted-outer-qualification-001/binaries/fast-simd8/incant_runtime-e1e5fedc31e08f71",
+      "sha256": "ee0ba1fc4ffab125b8d88e4ace8db244dfe14fcd8bedac2bb1feb4a5d67e91f1",
+      "bytes": 15885072,
+      "compiler_artifact": {
+        "reason": "compiler-artifact",
+        "package_id": "path+file:///Users/andreyyurlov/.codex/worktrees/outer-compound-checkpoints/incant/crates/incant_runtime#0.0.1",
+        "manifest_path": "/Users/andreyyurlov/.codex/worktrees/outer-compound-checkpoints/incant/crates/incant_runtime/Cargo.toml",
+        "target": {
+          "kind": [
+            "lib"
+          ],
+          "crate_types": [
+            "lib"
+          ],
+          "name": "incant_runtime",
+          "src_path": "/Users/andreyyurlov/.codex/worktrees/outer-compound-checkpoints/incant/crates/incant_runtime/src/lib.rs",
+          "edition": "2024",
+          "doc": true,
+          "doctest": true,
+          "test": true
+        },
+        "profile": {
+          "opt_level": "1",
+          "debuginfo": 0,
+          "debug_assertions": false,
+          "overflow_checks": false,
+          "test": true
+        },
+        "features": [
+          "native-checkpoints",
+          "physics-fast-simd8"
+        ],
+        "filenames": [
+          "/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/incant_runtime-e1e5fedc31e08f71"
+        ],
+        "executable": "/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/incant_runtime-e1e5fedc31e08f71",
+        "fresh": false
+      }
+    },
+    {
+      "mode": "fast-simd8",
+      "crate": "incant_physics_2d_runtime",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-persisted-outer-qualification-001/binaries/fast-simd8/incant_physics_2d_runtime-87af875d37d4e854",
+      "sha256": "fbd20df245c79a2d72ec6e5d631ad664a1da977e44fdbb111aa3f22053b3cf14",
+      "bytes": 6155208,
+      "compiler_artifact": {
+        "reason": "compiler-artifact",
+        "package_id": "path+file:///Users/andreyyurlov/.codex/worktrees/outer-compound-checkpoints/incant/crates/incant_physics_2d_runtime#0.0.1",
+        "manifest_path": "/Users/andreyyurlov/.codex/worktrees/outer-compound-checkpoints/incant/crates/incant_physics_2d_runtime/Cargo.toml",
+        "target": {
+          "kind": [
+            "lib"
+          ],
+          "crate_types": [
+            "lib"
+          ],
+          "name": "incant_physics_2d_runtime",
+          "src_path": "/Users/andreyyurlov/.codex/worktrees/outer-compound-checkpoints/incant/crates/incant_physics_2d_runtime/src/lib.rs",
+          "edition": "2024",
+          "doc": true,
+          "doctest": true,
+          "test": true
+        },
+        "profile": {
+          "opt_level": "1",
+          "debuginfo": 0,
+          "debug_assertions": false,
+          "overflow_checks": false,
+          "test": true
+        },
+        "features": [
+          "fast-simd8",
+          "native-checkpoints"
+        ],
+        "filenames": [
+          "/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/incant_physics_2d_runtime-87af875d37d4e854"
+        ],
+        "executable": "/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/incant_physics_2d_runtime-87af875d37d4e854",
+        "fresh": false
+      }
+    },
+    {
+      "mode": "fast-simd8",
+      "crate": "incant_physics_runtime",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-persisted-outer-qualification-001/binaries/fast-simd8/incant_physics_runtime-a1b4467d402c10cd",
+      "sha256": "d96c9eaca2e7e1722aa19c74ac46b3ac75ffef1aab3526ff88f2388a8fba7d04",
+      "bytes": 7146696,
+      "compiler_artifact": {
+        "reason": "compiler-artifact",
+        "package_id": "path+file:///Users/andreyyurlov/.codex/worktrees/outer-compound-checkpoints/incant/crates/incant_physics_runtime#0.0.1",
+        "manifest_path": "/Users/andreyyurlov/.codex/worktrees/outer-compound-checkpoints/incant/crates/incant_physics_runtime/Cargo.toml",
+        "target": {
+          "kind": [
+            "lib"
+          ],
+          "crate_types": [
+            "lib"
+          ],
+          "name": "incant_physics_runtime",
+          "src_path": "/Users/andreyyurlov/.codex/worktrees/outer-compound-checkpoints/incant/crates/incant_physics_runtime/src/lib.rs",
+          "edition": "2024",
+          "doc": true,
+          "doctest": true,
+          "test": true
+        },
+        "profile": {
+          "opt_level": "1",
+          "debuginfo": 0,
+          "debug_assertions": false,
+          "overflow_checks": false,
+          "test": true
+        },
+        "features": [
+          "fast-simd8",
+          "native-checkpoints"
+        ],
+        "filenames": [
+          "/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/incant_physics_runtime-a1b4467d402c10cd"
+        ],
+        "executable": "/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/incant_physics_runtime-a1b4467d402c10cd",
+        "fresh": false
+      }
+    }
+  ],
+  "records": 165,
+  "payloads": 119,
+  "archive_sha256": "a5a91fdad859698dbb22764ff269be756cd0efcea027abee5e37e39f9117b941",
+  "freeze_sha256": "7d488a69334ab4092b975d2898457acba978648de44212026dc84e92fba97180",
+  "release_sha256": "cb5c66d0fad41f80e683535c78eecad42954d21512253ce74b2a421d042695c3",
+  "limits": [
+    "Old world/component save APIs still refuse physics; new version12 is default-off native-checkpoint API.",
+    "Outer fixtures retain explicit CCD-disabled declarations; ordinary default-enabled domain evidence belongs to separate native/root consumer packets.",
+    "Root/publisher own current-main and session/player composition; no publication acceptance here.",
+    "Logical budgets are not RSS/allocator/driver bounds; meshes/joints/soft bodies and other unproved native configurations stay refused.",
+    "All raw earlier failures and exact pending-motion native frames are retained; fixture unchanged.",
+    "No GPU, target-phone performance, full release or phase-gate claim."
+  ]
+}

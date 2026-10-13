@@ -1,0 +1,65 @@
+{
+  "format": "incant-independent-final-evidence-review",
+  "version": 1,
+  "at": "2026-10-13T22:48:37.545883+00:00",
+  "reviewer": "astra integration agent",
+  "disposition": "accepted_scoped_native_cpu_packet",
+  "producer": "544a53ec935bbdc1f253ae875cb4bab1b5a2d25f",
+  "production": "b78ff58d4de2a2ee7e1744ca1bd4a290d9d3f0f5",
+  "manifest_sha256": "a57f132bd4bfdd623006e7950cb295775b3d8924002651a2453f4037b6f971c7",
+  "archive_sha256": "85a8806bdce8c6ba7a4c6eb37237adaebed88ac91346189e6cf6def993a39575",
+  "findings": [],
+  "verified": [
+    "Read complete240-line collector, final scope/STATUS and all final command identities. Verify-only with originals and local binaries terminal0.",
+    "Independent archive decode rehashed1396payloads and matched all13330retained records against raw originals with lengths;1810sources match immutable production Git;20retained binaries match hashes/lengths/modes.",
+    "Fourteen source generations remain distinct. All51 command receipts/log identities match;47successful and4historical native failures retained without relabeling.",
+    "Each full native mode executes182planar+200spatial cases,0failed0ignored0filtered; independently counted382test starts and382passed results per mode including split stdout lines.",
+    "Four strict library Clippy configurations cover deterministic/fast8 parallel and native/wasm nonparallel.32guard tests, lean/ordinary graph exclusion, fmt/conventions/diff retained.",
+    "Prepared manifest differences are exact local snapshot dependency paths;16fast8fixture substitutions explicit. Private native-test lock adds only exact prior pinned bincode1.3.3/oorandom11.1.5 absent from normal graphs; root lock unchanged.",
+    "Initial collector subset-lock AssertionError and original helper retained; corrected dev-only comparison reviewed. No native rerun or source mutation follows that packaging correction.",
+    "b78ff58d production/source acceptance reused;544 contains evidence/docs/helper only. Historical42deeCCD premise rejection and max1/precision limitations remain explicit."
+  ],
+  "source_receipts": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/physics-persisted-ccd-source-independent-20261013.json",
+      "sha256": "f9add4b9de16ec143b9fc6d703b04f3ca2b2d249331de436089e81f8d50a7c8b"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/physics-persisted-revision-independent-20261013.json",
+      "sha256": "86305aa3c7ddccaca4feb71800fd567034f906c16e9f959e0eb39d525b3a666c"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/physics-native-persisted-source005-correction-20261013.json",
+      "sha256": "a084c6426f2bcf949fb593615a1863ae255475896393758dd4afde5debd4b992"
+    }
+  ],
+  "audit_artifacts": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/native-persisted-final-audit-20261013/verifier.json",
+      "sha256": "039c60ea279fb882dac2c7dc119dddb4e6e2cb9c009e2f302b9338c0a37be053"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/native-persisted-final-audit-20261013/verifier.log",
+      "sha256": "cecd99882ab082f4b2af6ae47541626e171bdf22ed035a1d7170db6d1640d533"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/native-persisted-final-audit-20261013/independent.py",
+      "sha256": "b080d3fa1c433488c55564ff428cb0d3cb5db7b3a31e4583bd4a9b3531c666bb"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/native-persisted-final-audit-20261013/independent-result.json",
+      "sha256": "44e5da6b9d53367d7014b49cab17c3cbe33f071f8a8ed0fd3f6d1833494eb7c1"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/native-persisted-final-audit-20261013/independent-regex-initial.py",
+      "sha256": "6010aa191ccf9eb6b63af5687831510e46442f1da2e80d372359774dd1fa6208"
+    }
+  ],
+  "reviewer_diagnostic": "Initial independent count regex assumed inline libtest output and failed; corrected to count separate actual test starts and inline/standalone ok records. Producer evidence and collector were unchanged; final independent audit passes.",
+  "limits": [
+    "Native default-off closed persisted subset, maxCCD1, no arbitrary joint/soft/custom/current-cluster/multi-pass admission.",
+    "Outer/session/player final union and current-main qualification remain separate and pending.",
+    "Logical work/allocation and finite setup envelope are not runtime performance or reciprocal/query-precision guarantees.",
+    "No reviewer build, native execution, GPU, publication or shared-ref action."
+  ]
+}

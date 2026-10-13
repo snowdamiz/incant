@@ -40,13 +40,15 @@ fn sensor() -> PhysicsSpec {
 #[test]
 fn a_late_scene_failure_hides_partial_motion_and_previous_trigger_events() {
     let mut runtime = PhysicsRuntime::default();
-    runtime.sync(
-        PreparedPhysics::new(BTreeMap::from([
-            (0_u8, BTreeMap::from([(1, sensor()), (2, moving(0., 1.))])),
-            (9, BTreeMap::from([(3, moving(999_999., 2.))])),
-        ]))
-        .unwrap(),
-    );
+    runtime
+        .sync(
+            PreparedPhysics::new(BTreeMap::from([
+                (0_u8, BTreeMap::from([(1, sensor()), (2, moving(0., 1.))])),
+                (9, BTreeMap::from([(3, moving(999_999., 2.))])),
+            ]))
+            .unwrap(),
+        )
+        .unwrap();
     runtime.step(1. / 60.).unwrap();
     assert_eq!(runtime.events().len(), 1);
     assert!(runtime.events()[0].entered);
@@ -68,9 +70,15 @@ fn a_late_scene_failure_hides_partial_motion_and_previous_trigger_events() {
     );
 
     // Structural calls cannot turn this failed instance into a fresh session.
-    runtime.remove(&9, &3);
-    runtime.install(0, 4, PreparedBody::new(moving(0., 0.)).unwrap());
-    runtime.sync(PreparedPhysics::new(BTreeMap::new()).unwrap());
+    assert_eq!(runtime.remove(&9, &3), Err(PhysicsError::NumericRange));
+    assert_eq!(
+        runtime.install(0, 4, PreparedBody::new(moving(0., 0.)).unwrap()),
+        Err(PhysicsError::NumericRange)
+    );
+    assert_eq!(
+        runtime.sync(PreparedPhysics::new(BTreeMap::new()).unwrap()),
+        Err(PhysicsError::NumericRange)
+    );
     assert_eq!(runtime.step(1. / 60.), Err(PhysicsError::NumericRange));
     assert!(runtime.state(&0, &4).is_none());
     assert!(runtime.events().is_empty());
@@ -79,13 +87,15 @@ fn a_late_scene_failure_hides_partial_motion_and_previous_trigger_events() {
 #[test]
 fn invalid_step_leaves_a_healthy_runtime_and_its_observations_unchanged() {
     let mut runtime = PhysicsRuntime::default();
-    runtime.sync(
-        PreparedPhysics::new(BTreeMap::from([(
-            0_u8,
-            BTreeMap::from([(1, sensor()), (2, moving(0., 1.))]),
-        )]))
-        .unwrap(),
-    );
+    runtime
+        .sync(
+            PreparedPhysics::new(BTreeMap::from([(
+                0_u8,
+                BTreeMap::from([(1, sensor()), (2, moving(0., 1.))]),
+            )]))
+            .unwrap(),
+        )
+        .unwrap();
     runtime.step(1. / 60.).unwrap();
     let states = runtime.states();
     let events = runtime.events().to_vec();
@@ -142,13 +152,15 @@ fn a_caught_unwind_cannot_expose_or_resume_the_advanced_solver() {
         panic_on_clone: Arc::clone(&panic_on_clone),
     };
     let mut runtime = PhysicsRuntime::default();
-    runtime.sync(
-        PreparedPhysics::new(BTreeMap::from([(
-            id(0),
-            BTreeMap::from([(id(1), sensor()), (id(2), moving(0., 1.))]),
-        )]))
-        .unwrap(),
-    );
+    runtime
+        .sync(
+            PreparedPhysics::new(BTreeMap::from([(
+                id(0),
+                BTreeMap::from([(id(1), sensor()), (id(2), moving(0., 1.))]),
+            )]))
+            .unwrap(),
+        )
+        .unwrap();
     runtime.step(1. / 60.).unwrap();
     assert_eq!(runtime.events().len(), 1);
     panic_on_clone.store(true, AtomicOrdering::Relaxed);
@@ -161,13 +173,19 @@ fn a_caught_unwind_cannot_expose_or_resume_the_advanced_solver() {
     assert_eq!(runtime.state_iter().count(), 0);
     assert!(runtime.state(&id(0), &id(2)).is_none());
     assert!(runtime.events().is_empty());
-    runtime.install(id(0), id(3), PreparedBody::new(moving(0., 0.)).unwrap());
-    runtime.sync(
-        PreparedPhysics::new(BTreeMap::from([(
-            id(0),
-            BTreeMap::from([(id(4), moving(0., 0.))]),
-        )]))
-        .unwrap(),
+    assert_eq!(
+        runtime.install(id(0), id(3), PreparedBody::new(moving(0., 0.)).unwrap()),
+        Err(PhysicsError::NumericRange)
+    );
+    assert_eq!(
+        runtime.sync(
+            PreparedPhysics::new(BTreeMap::from([(
+                id(0),
+                BTreeMap::from([(id(4), moving(0., 0.))]),
+            )]))
+            .unwrap(),
+        ),
+        Err(PhysicsError::NumericRange)
     );
     panic_on_clone.store(false, AtomicOrdering::Relaxed);
     assert_eq!(runtime.step(1. / 60.), Err(PhysicsError::NumericRange));

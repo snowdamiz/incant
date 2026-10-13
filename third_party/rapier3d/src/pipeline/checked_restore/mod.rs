@@ -101,3 +101,5 @@ pub(crate) mod world;
 
 /// Default-off exclusive in-memory native capture ownership.
 pub mod capture;
+/// Default-off bounded editable native records for an explicitly checked subset.
+pub mod persisted;

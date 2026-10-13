@@ -1,0 +1,133 @@
+{
+  "status": "accepted",
+  "scope": "Independent final persisted-game source/evidence review; no current-main composition or device/performance gate.",
+  "at": "2026-10-13T22:55:11.003182+00:00",
+  "reviewer": "astra publisher",
+  "producer": "4c3df96e3bbd7c15e24f452d438d435f63f2f53b",
+  "production": "2352679e52ecbd544a43400e212715000612fa3d",
+  "manifest_sha256": "683211ffa7671700b487469b0f1fb92266defb3ad9c031b944303efc8c4cfe89",
+  "archive_sha256": "3126eddbe9ae352cba39c5da6e1e92e0583998bb4518659e21dc379c1945f2db",
+  "findings": [],
+  "verification": {
+    "status": "accepted",
+    "records": 7671,
+    "payloads": 3161,
+    "originals": 183,
+    "source_generations": {
+      "2352679e52ecbd544a43400e212715000612fa3d": 3745,
+      "c4ae73e12b4c4a00681955064841cc624a0e1aa0": 3742
+    },
+    "binaries": 142,
+    "reviewed_source003_owned_files_exact": 24,
+    "stages": {
+      "ordinary-001": {
+        "counts": [
+          237,
+          1,
+          0
+        ],
+        "harnesses": 23
+      },
+      "ordinary-002": {
+        "counts": [
+          238,
+          0,
+          0
+        ],
+        "harnesses": 23
+      },
+      "native-focused-001": {
+        "counts": [
+          1,
+          4,
+          0
+        ],
+        "harnesses": 2
+      },
+      "native-existing-001": {
+        "counts": [
+          260,
+          0,
+          0
+        ],
+        "harnesses": 22
+      },
+      "native-focused-002": {
+        "counts": [
+          7,
+          0,
+          0
+        ],
+        "harnesses": 3
+      },
+      "native-all-001": {
+        "counts": [
+          267,
+          0,
+          0
+        ],
+        "harnesses": 23
+      },
+      "native-all-fast8-001": {
+        "counts": [
+          267,
+          0,
+          0
+        ],
+        "harnesses": 23
+      }
+    },
+    "final_unique_checks": 13,
+    "retained_failed_check": [
+      [
+        "checks-001",
+        "static-module",
+        101
+      ]
+    ],
+    "static_fixture_files_including_manifest": 7,
+    "new_builds_or_test_executions": 0
+  },
+  "reviewed_source": "All24 owned paths exactly equal reviewed4f609b44 and compiled2352679e. Prior framing/security/API source reviews remain applicable; actual consumer evidence now closes previously pending joined native execution.",
+  "reviewed_execution": "Read complete collector and runner; independently rehashed payloads/originals, source generation Git blobs, binary sizes/modes/hashes, test output and exact CLI artifact binding. Fresh separate process continuation compares104 versus67+37 ticks and exact PCM/save bytes; malformed/rate mismatch refuses outputs without modifying inputs.",
+  "limits": [
+    "CPU-only, default-off native-checkpoints; no phase, phone, GPU or performance approval.",
+    "All counts retain overlapping historical generations separately; ordinary002238pass is historical uncommitted147-input freeze, whose source bytes are not reconstructed.",
+    "Original237pass1failure, native1pass4CCDfailures and missing mandatory static bundle check101 remain historical failures.",
+    "Static fixture six non-manifest files plus manifest is reused and hash-bound; static-module/Wasmtime claims are compile-only, not fresh translation or shipped guest execution.",
+    "Native provenance is not authentication; imported validated data remains imported rather than CompletedStep.",
+    "Same numerical backend identity and supported native domain only; two output files are not a multi-file atomic transaction."
+  ],
+  "retained_audit": {
+    "independent.py": {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/persisted-game-final-audit-20261013/independent.py",
+      "sha256": "c0a6b3f877ba50eecb8c6dcec1e19f38bd772887deea067aa594fbc1e0e2ab6e"
+    },
+    "independent-result.json": {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/persisted-game-final-audit-20261013/independent-result.json",
+      "sha256": "d39bd028902eac58eea81f2bf47e785ffb8f3ec74695cfe985fcc5e7bc2bc2df"
+    },
+    "verifier.json": {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/persisted-game-final-audit-20261013/verifier.json",
+      "sha256": "3bd6ea86ed9855e1b3a5fe65146d20d44c52f220677b4bdc5109861385a921e3"
+    },
+    "verifier.log": {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/persisted-game-final-audit-20261013/verifier.log",
+      "sha256": "bfb68c947d3b29dd1b8f0aa9590cae12abe3b225c6e690c4486510be8b72c66d"
+    }
+  },
+  "prior_reviews": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/physics-persisted-session-source003-ordinary002-independent-20261013.json",
+      "sha256": "2bf50482de0fe543e4eed4b7f47f9a5c287a6df69e1f4925640ae837c7e24af6"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/physics-native-persisted-final-independent-20261013.json",
+      "sha256": "69be1b897d47a1577605c60f3c420d4277eb4933b7f3c60d4b2f7e063bf60ac2"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/physics-persisted-outer-final-root-20261013.json",
+      "sha256": "a572de2897d2572ff5ec09958310e9645f677e4063e757eadfbc336f3d7391db"
+    }
+  ]
+}

@@ -1,20 +1,34 @@
 # Implementation status
 
-Compound and tile opaque checkpoints have accepted source reviews and passing CPU qualification: 538 snapshot/physics/ECS cases per numerical mode, followed by 238 script/game cases per mode on the actual-main250 composition. Native Parry and Rapier suites pass separately. Eighteen current checks pass; independent final union review is accepted. Current-main251 composition preserves 3,155 inputs except the reviewed authoring test, matches three graphs and passes eight read-only checks; independent final composition review is accepted and publication awaits the required fast check. Public persisted physics stays closed. [Scope](docs/spikes/native-compound-checkpoints.md).
+The default-off persisted native game path has passing joined CPU qualification:
+267 script/game/player cases in each numerical mode, including separate-process
+save/resume with real fractional PCM timing. Thirteen current checks pass;
+earlier ordinary-diagnostic, CCD-admission and missing-bundle setup failures are
+retained. The files bind current trusted code and catalogs, preserve supported
+2D/3D physics, explicit script state, UI and offline audio, and refuse unsupported
+domains. All three producer packets now have independent final acceptance;
+current-main252 composition review is independently accepted, with publication
+subject to its required exact-head fast check. This does not qualify device audio, shipped Wasm state, GPU saves,
+reference-phone performance or a phase gate.
+[Scope and evidence](docs/spikes/persisted-game-checkpoints.md).
+
+Private typed outer physics and world-v12 persisted candidates now pass 321 actual cases per numerical mode, including explicit large fresh-constructor capacity, plus mode/compiler, strict Clippy, wasm/default library and dependency guards. The original pending-motion BroadBounds rejection is retained and closes only with the reviewed native flag correction; outer fixtures are unchanged. Final producer evidence and the joined main252/session composition are independently accepted. Old component save physics admission stays closed. [Scope](docs/spikes/physics-persisted-outer.md).
+
+Compound and tile opaque checkpoints have accepted source reviews and passing CPU qualification: 538 snapshot/physics/ECS cases per numerical mode, followed by 238 script/game cases per mode on the actual-main250 composition. Native Parry and Rapier suites pass separately. Eighteen current checks pass; independent final union review is accepted. Current-main251 composition preserves 3,155 inputs except the reviewed authoring test, matches three graphs and passes eight read-only checks; independent final composition review is accepted and PR252 merged after its required exact-head fast SUCCESS. That opaque checkpoint scope left public persisted physics closed. [Scope](docs/spikes/native-compound-checkpoints.md).
 
 Private Rapier regression qualification after lower compound integration and work precharge passed all 159 planar and 177 spatial unit tests in each of deterministic and SIMD8 modes, with no filtered or ignored cases. Both strict native-library Clippy checks passed; four immediately copied executables and the full source/graph/fixture ledger are retained. Independent final packet review is accepted. This CPU evidence does not qualify the outer game union or persisted physics saves. [Evidence](docs/spikes/rapier-compound-regressions.md).
 
-Checkpoint29 remains frozen on candidate `74e77456` after a Linux source-store lock test failed at immediate drop/reopen. A controlled inherited-descriptor diagnostic proves a possible `WouldBlock` mechanism; the hosted error was not printed, so its cause remains inferred. The reviewed one-file test isolation preserves production and all exclusivity assertions. Ten source-store cases, strict Clippy and ten concurrent repetitions pass; independent final evidence review is accepted and PR251 merged after its required exact-head fast check. No release promotion or repaired hosted-success claim. [Evidence](docs/spikes/source-lock-test-isolation.md).
+Historical checkpoint29 finished unpromoted on candidate `74e77456`: 22 required contexts succeeded and the Linux source-store lock test failed at immediate drop/reopen. A controlled inherited-descriptor diagnostic proves a possible `WouldBlock` mechanism; the hosted error was not printed, so its cause remains inferred. The reviewed one-file test isolation preserves production and all exclusivity assertions. Ten source-store cases, strict Clippy and ten concurrent repetitions pass; independent final evidence review is accepted and PR251 merged after its required exact-head fast check. No release promotion or repaired hosted-success claim. [Evidence](docs/spikes/source-lock-test-isolation.md).
 
 The complete game checkpoint producer is independently accepted: both numerical modes passed 39 game cases with real offline PCM continuation; the earlier 33 ordinary cases remain source002. Current composition binds all 3,667 producer inputs plus two evidence collectors, qualifies the six reviewed main248 repairs and passes fourteen read-only checks. Independent final composition review is accepted, hosted PR249 is merged and the actual-main249 join changes no implementation/build/tool input. PR250 merged after its exact-head required fast SUCCESS. The feature stays default-off and public persisted physics remains closed. [Scope](docs/spikes/native-game-main248.md).
 
 The hosted opaque session checkpoint producer is independently accepted with 200 script cases per numerical mode and strict headless/UI/audio feature checks. It preserves actual silent mixer chronology, binds captured UI/audio owners before VM initialization and leaves persisted physics admission closed. Current-main248 composition has fourteen passing read-only checks: all 3,663 inputs are bound, with only the six accepted repair paths different and three matching dependency graphs. Final composition review is independently accepted and PR249 merged after its exact-head fast check; producer execution is not relabeled. [Scope](docs/spikes/native-session-hosted-physics-checkpoints.md).
 
-Checkpoint28 finished unpromoted at reviewed main246 on PR232: 13 required checks succeeded, nine failed and one was skipped; all eight workflows are terminal. Native physics jobs failed at isolated lock resolution, and feature-off NativeOwner Clippy failures are diagnosed on all three desktop platforms. The reviewed combined repair passes seventeen lock/guard checks and four strict all-target Clippy configurations; PR248 merged after its exact-head required fast check. Checkpoint29 now freezes that main248 tree (`9493650a`, candidate `74e77456`) on the same PR232; all 23 requirements remain mandatory. Release is unchanged. [Lock evidence](docs/spikes/runtime-probe-locks-main247.md).
+Checkpoint28 finished unpromoted at reviewed main246 on PR232: 13 required checks succeeded, nine failed and one was skipped; all eight workflows are terminal. Native physics jobs failed at isolated lock resolution, and feature-off NativeOwner Clippy failures are diagnosed on all three desktop platforms. The reviewed combined repair passes seventeen lock/guard checks and four strict all-target Clippy configurations; PR248 merged after its exact-head required fast check. Historical checkpoint29 then froze that main248 tree (`9493650a`, candidate `74e77456`) on the same PR232 and finished unpromoted. Current checkpoint30 freezes reviewed main252; all 23 requirements remain mandatory. Release is unchanged. [Lock evidence](docs/spikes/runtime-probe-locks-main247.md).
 
 Opaque headless TypeScript/native-physics session checkpoints have accepted producer tests: 195 script cases per numerical mode, 186 feature-off cases, strict Clippy and optional/lean/wasm compilation. The original manifest guard failure is retained; its three-manifest repair merged with PR246 and has separate focused script qualification. Current main246 composition matches all 3,656 accepted repaired implementation/build/tool inputs; ten read-only checks pass, selected normal graphs match and ordinary snapshot stays excluded. Final current-main review is accepted; PR247 merged after its exact-head required fast SUCCESS. Public physics byte saves remain refused; subsequent PR249 adds the separately reviewed hosted UI/audio continuation API. [Producer scope](docs/spikes/native-session-physics-checkpoints.md).
 
-Native capture, primitive 2D/3D solver checkpoints and opaque ECS/physics world checkpoints are available as opt-in in-memory APIs. Public persisted physics and full script/session checkpoint admission remain separate. Historical checkpoint27 selected main241; its macOS conformance hit the configured 40-minute limit and cannot count as success. The reviewed main repair gives that macOS job 90 minutes, keeping Linux at 40 and every proof unchanged. Checkpoint27 finished unpromoted with 22 required checks successful and that macOS job cancelled. Checkpoint28 later finished unpromoted; current checkpoint29 freezes reviewed main248 (`9493650a`, candidate `74e77456`) on the same PR232. All 23 required checks remain mandatory and release is unchanged. [Timeout evidence](docs/spikes/macos-conformance-timeout.md).
+Native capture, primitive 2D/3D solver checkpoints and opaque ECS/physics world checkpoints are available as opt-in in-memory APIs. Public persisted physics and full script/session checkpoint admission remain separate. Historical checkpoint27 selected main241; its macOS conformance hit the configured 40-minute limit and cannot count as success. The reviewed main repair gives that macOS job 90 minutes, keeping Linux at 40 and every proof unchanged. Checkpoint27 finished unpromoted with 22 required checks successful and that macOS job cancelled. Checkpoints28 and29 later finished unpromoted. Current checkpoint30 freezes reviewed main252 (`c1988638`, candidate `721eddac`) on the same PR232. All 23 required checks remain mandatory and release is unchanged. [Timeout evidence](docs/spikes/macos-conformance-timeout.md).
 
 This grouped integration adds borrowed configuration views and opaque ECS/native-physics world checkpoints. The original 3,651-input/source004 composition has independent final acceptance. A subsequent all-path manifest audit found twelve optional snapshot forwarding omissions before merge; the reviewed three-manifest repair now passes both 261-case runtime suites and all seventeen scoped checks. Selected solver modes pass, and the ordinary graph excludes snapshot. The 205 ordinary consumer cases remain source003 evidence; the earlier passing PR check is retained separately. Final independent repaired evidence review is accepted; PR246 merged after a new exact-head fast SUCCESS, with the tested tree and author trailer verified. Public persisted physics and whole script/session saves stay closed. [Current composition](docs/spikes/world-checkpoints-main245.md).
 
@@ -22,7 +36,7 @@ Default-off native capture and outer primitive in-memory checkpoints merged as P
 
 Standalone 3D physics now hides incomplete state and trigger observations after a late step error or caught unwind, and cannot be revived through structural calls. Invalid time steps remain retryable. Independent source and final producer reviews are accepted. Both producer modes, strict Clippy, native consumers and wasm compilation pass; the exact current-main239 composition additionally passes all eight default runtime cases and six checks. Final current-main review is accepted; PR240 merged after its required exact-head fast check. This does not implement rollback or physics saves. [Evidence](docs/spikes/physics-failure-isolation.md).
 
-Checkpoint26 finished unpromoted with 22 required checks successful and its original Windows Dx12 SSAO filter failure retained. PR241 merged the reviewed full-target postprocess raster and conservative integer scissor, preserving shaders, geometry projection and strict intervals. Exact merged main241 then passed both original strict Dx12 projection contracts (570 R8 and 285 depth values each) and six observation submissions on Microsoft Basic Render Driver. Historical checkpoint27 froze that reviewed main241 tree on PR232 and later finished unpromoted at its macOS conformance timeout. Current checkpoint29 includes the reviewed timeout repair; all 23 required checks remain mandatory. No release promotion or appearance claim. [Portable Dx12 evidence](docs/spikes/evidence/ssao-strict-dx12-main241/manifest.json).
+Checkpoint26 finished unpromoted with 22 required checks successful and its original Windows Dx12 SSAO filter failure retained. PR241 merged the reviewed full-target postprocess raster and conservative integer scissor, preserving shaders, geometry projection and strict intervals. Exact merged main241 then passed both original strict Dx12 projection contracts (570 R8 and 285 depth values each) and six observation submissions on Microsoft Basic Render Driver. Historical checkpoint27 froze that reviewed main241 tree on PR232 and later finished unpromoted at its macOS conformance timeout. Current checkpoint30 includes the reviewed timeout and source-lock repairs; all 23 required checks remain mandatory. No release promotion or appearance claim. [Portable Dx12 evidence](docs/spikes/evidence/ssao-strict-dx12-main241/manifest.json).
 
 Private primitive narrow-phase construction on main237 passed 227 snapshot and 45 native cases per mode, 312 decoded continuation steps per dimension/mode and all 29 checks. Source and final current-main evidence reviews are accepted; PR238 merged after its required exact-head fast check. Sixteen fast8 fixture substitutions are explicitly bound. Compound construction, complete native world installation and public physics saves stay closed. [Evidence](docs/spikes/physics-native-narrow-main237.md).
 
@@ -277,9 +291,9 @@ unification also affects other cc build consumers in the selected host graph.
 Windows candidate execution and timing remain pending; no Windows speedup or
 performance gate is claimed. [Scope and evidence](docs/spikes/wasm-c-parallel.md).
 
-## Current overview — main251, 2026-10-13
+## Development and release overview — 2026-10-13
 
-Development main251 includes the reviewed opt-in cooked renderer families and
+The reviewed main252 baseline includes the opt-in cooked renderer families and
 Vulkan cache lifecycle, dynamic resolution, numerical retained motion, CPU/GPU
 profiling scopes and joined inert physics owner boundaries. Each lane retains its own
 execution and acceptance limits below; the complete engine and game remain open.
@@ -304,12 +318,14 @@ conformance hit its configured deadline. Main243 contains the reviewed macOS
 timeout repair. Checkpoint28 then froze main246 (`42e13e75`) at `be3422f8` on
 PR232 and finished with 13 required successes, nine failures and one skipped
 comparison. The reviewed isolated-lock and ordinary-owner Default repairs are
-merged in PR248 and await actual successor validation. Checkpoint29 freezes reviewed main248; its original Linux source-store lock test failure is retained while other jobs finish. Release remains `2a9d72ea`.
+merged in PR248. Checkpoint29 finished unpromoted with 22 required successes and the original Linux source-store lock failure. Checkpoint30 now freezes reviewed main252 (`c1988638`) at candidate `721eddac`, including the reviewed source-lock isolation from PR251, on the same PR232. All 23 exact-head required contexts must actually succeed; no previous success substitutes for them. Release remains `2a9d72ea`.
 PR242 merged the private primitive-world composition; PR244/245 added native
 capture and outer in-memory checkpoints, PR246 added opaque ECS/world ownership,
-and PR247 added headless native session checkpoints. These remain opt-in and
-process-local. Public persisted physics bytes remain refused; PR249 adds opt-in in-memory
-hosted UI/audio continuation and PR250 adds the complete typed game checkpoint. Each original execution generation retains its stated scope.
+and PR247 added headless native session checkpoints. PR249 adds opt-in in-memory
+hosted UI/audio continuation and PR250 adds the complete typed game checkpoint.
+This revision additionally composes the independently accepted default-off bounded
+persisted native world/session/player route; legacy component saves retain their
+physics refusal. Each original execution generation retains its stated scope.
 [Promotion evidence](docs/spikes/release-checkpoint-24.md).
 
 Checkpoint23 is terminal and unpromoted: 22 required contexts succeeded and its
@@ -2728,3 +2744,17 @@ Public persisted physics saves remain refused. See
 [scope and evidence](docs/spikes/physics-native-capture-owner.md).
 
 - Historical outer compound/tile checkpoint preparation: its 12 focused CPU controls on main246 ancestry are superseded by the accepted full native union above (538 physics/ECS plus 238 script/game cases per mode). Persisted physics save bytes remain refused. See `docs/spikes/outer-compound-checkpoints.md`.
+
+
+### Checked native persisted rigid subset — producer CPU qualified
+
+Default-off byte admission now reconstructs a staged native rigid candidate under
+joined identity, geometry/contact/cache, arithmetic and budget checks. Imported
+readiness remains distinct from historical completion. Single-pass CCD includes
+actual default-enabled and implicit fast-body clamping; unsupported multi-pass,
+soft/joint/custom/cluster states refuse explicitly. Both modes pass 382 complete
+native tests each, strict native/wasm Clippy and scoped graph/guard checks. The
+independent source correction and final producer evidence are accepted; the
+joined main252 world/session/player composition remains separately reviewed. Historical CCD premise
+and fixture failures are retained. See
+[contract and evidence](docs/spikes/physics-native-persisted.md).

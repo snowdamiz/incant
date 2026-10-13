@@ -1,0 +1,77 @@
+{
+  "format": "incant-checked-persisted-native-rigid-subset",
+  "version": 1,
+  "baseline": "296bff26",
+  "feature": "incant-checked-restore",
+  "scope": "Supersedes historical hashes for listed paths only. Bounded editable native records, imported lifecycle and operation fences; outer public save admission separate. Source review/broad qualification pending.",
+  "files": [
+    {
+      "path": "src/data/arena_checkpoint.rs",
+      "sha256": "4e0f5c25d1efc89622f81b4f9e55f0e7e4e29ef9928ba53090e1da4f8b3b4d79"
+    },
+    {
+      "path": "src/dynamics/island_manager/persistent_capture.rs",
+      "sha256": "a550be4513cf490ae1c5d3dd0b4951a636c676b5f5de33b6dce3f36dfe675a30"
+    },
+    {
+      "path": "src/pipeline/checked_restore/capture/frame.rs",
+      "sha256": "1311ba04076796548b68e0742b10cf694af3b045c22f79b50c6bd75b43530f29"
+    },
+    {
+      "path": "src/pipeline/checked_restore/capture/mod.rs",
+      "sha256": "b459c544fef5f7a3f625c1bd18e1dc4167821f949d789504b2da014722428d5e"
+    },
+    {
+      "path": "src/pipeline/checked_restore/capture/owner.rs",
+      "sha256": "a4484af58ab7c1f088581ff78a1120c170e55c55a278e2c9632a14f9c6ee555d"
+    },
+    {
+      "path": "src/pipeline/checked_restore/capture/structure.rs",
+      "sha256": "a710004f8f90a7c7a47706cc7ca7dd632cc805ac09d2c3d80c8656ea8351a845"
+    },
+    {
+      "path": "src/pipeline/checked_restore/capture/structure/tests.rs",
+      "sha256": "73e25d65a8792f48e213c487603f88edae27826d8675deead973ffdb13c58012"
+    },
+    {
+      "path": "src/pipeline/checked_restore/mod.rs",
+      "sha256": "ac59dcd245b60b90280346e9901d77dbbc9ada1768d0cbb88f93c2d1b0a5188f"
+    },
+    {
+      "path": "src/pipeline/checked_restore/persisted/domain.rs",
+      "sha256": "b3d3b27fddf03e2b69659c370947b890c082ab675fb3679e34984afad9b62440"
+    },
+    {
+      "path": "src/pipeline/checked_restore/persisted/domain/arithmetic.rs",
+      "sha256": "36b0e568e5d6053e639f856e0cbea5a50f12eb95ad2cf2ae0c44175b5c776c3c"
+    },
+    {
+      "path": "src/pipeline/checked_restore/persisted/domain/contacts.rs",
+      "sha256": "3efd79cf551d54f8747b5c2795a0681bdedf723764a5a298de5bd2cef9b66d9a"
+    },
+    {
+      "path": "src/pipeline/checked_restore/persisted/mod.rs",
+      "sha256": "19e13c44893b18635866c71a95a2a5ab885b409caf8f5cf79efe76111756ea6c"
+    },
+    {
+      "path": "src/pipeline/checked_restore/persisted/tests.rs",
+      "sha256": "63613ca59a0ab96e38aca0d3e7711da8353d6d5d5b76e7cdd07c66c5a517fb4a"
+    },
+    {
+      "path": "src/pipeline/checked_restore/persisted/tests/adversarial.rs",
+      "sha256": "d62dc7a7f99984550801653f445644056e26f78e9f4735d43c4e2b1e797d4ed5"
+    },
+    {
+      "path": "src/pipeline/checked_restore/persisted/tests/ccd_cases.rs",
+      "sha256": "e80e8430e2a84df8fdbed585a6bf8e15bb638b98be294f705617e2b2bcfe29a2"
+    },
+    {
+      "path": "src/pipeline/checked_restore/world.rs",
+      "sha256": "ff49efeed45e996d887757628f5c2331d38a33c06a7e61083b49039a04c0e9fc"
+    },
+    {
+      "path": "src/pipeline/checked_restore/world/admit.rs",
+      "sha256": "483e8e89eaed8dcfe12127445ef7a7235451b02011bf4f919a6a059ba9d095c5"
+    }
+  ]
+}
