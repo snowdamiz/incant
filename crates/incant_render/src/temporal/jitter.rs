@@ -18,3 +18,14 @@ pub(crate) fn ndc(phase: u32, rect: [f32; 4]) -> [f32; 2] {
 pub(crate) fn guard(rect: [f32; 4]) -> [f32; 2] {
     [1. / rect[2], 1. / rect[3]]
 }
+
+/// Two signed eighth-pixel deltas in one exactly represented f32 byte. The
+/// zero-delta code is 136 (not zero); missing phases describe an unjittered view.
+pub(crate) fn delta_code(previous: Option<u32>, current: Option<u32>) -> f32 {
+    let sample = |phase: Option<u32>| phase.map_or([0.; 2], |p| SAMPLES[p as usize]);
+    let a = sample(previous);
+    let b = sample(current);
+    let x = (8. * (a[0] - b[0]) + 8.) as u32;
+    let y = (8. * (a[1] - b[1]) + 8.) as u32;
+    (x | (y << 4)) as f32
+}

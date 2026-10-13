@@ -222,7 +222,12 @@ fn actual_fixed_temporal_coverage_silhouettes_mask_and_trailing_rejection() {
                         CONFIG.absolute_depth,
                         CONFIG.reactive_threshold,
                     ],
-                    reactive: [CONFIG.reactive_strength, 0., 0., 0.],
+                    reactive: [
+                        CONFIG.reactive_strength,
+                        0.,
+                        0.,
+                        super::super::jitter::delta_code(None, None),
+                    ],
                 };
                 renderer
                     .queue

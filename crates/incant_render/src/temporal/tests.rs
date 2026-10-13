@@ -9,6 +9,33 @@ fn config() -> TemporalConfig {
     }
 }
 #[test]
+fn registered_history_phase_codes_preserve_every_subpixel_delta() {
+    let zero = jitter::delta_code(None, None);
+    assert_eq!(zero, 136.);
+    for previous in 0..8 {
+        for current in 0..8 {
+            let code = jitter::delta_code(Some(previous), Some(current));
+            assert_eq!(code.fract(), 0.);
+            assert!((0. ..=255.).contains(&code));
+            let packed = code as u32;
+            let decoded = [
+                ((packed & 15) as f32 - 8.) * 0.125,
+                ((packed >> 4) as f32 - 8.) * 0.125,
+            ];
+            let expected: [f32; 2] = std::array::from_fn(|axis| {
+                jitter::SAMPLES[previous as usize][axis] - jitter::SAMPLES[current as usize][axis]
+            });
+            assert_eq!(decoded, expected);
+            for rect in [[3., 5., 65., 33.], [1.5, 2.5, 32.5, 16.5]] {
+                let at = glam::Vec2::new(9.5, 7.5);
+                let delta = glam::Vec2::from(decoded);
+                let size = glam::Vec2::new(rect[2], rect[3]);
+                assert!((at + delta / size * size - delta - at).abs().max_element() < 1e-6);
+            }
+        }
+    }
+}
+#[test]
 fn policy_rejects_nonfinite_unbounded_and_history_only_weights() {
     let good = config();
     good.validate().unwrap();

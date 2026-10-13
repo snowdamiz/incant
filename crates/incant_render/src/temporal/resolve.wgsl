@@ -1,6 +1,9 @@
 // Opaque premultiplied scene-linear HDR only. Alpha is one for opaque/MASK and
 // zero for clear. History also retains fractional coverage; excluded surfaces
 // are drawn after history publication and never enter this neighborhood.
+// Accumulated color uses the unjittered pixel grid. Motion and previous depth
+// retain their raster conventions; the packed jitter delta removes only the
+// static raster shift from color reprojection.
 struct Frame { rect:vec4f, depth:vec4f, options:vec4f, reactive:vec4f }
 @group(0) @binding(0) var<uniform> frame:Frame;
 @group(0) @binding(1) var current:texture_2d<f32>;
@@ -23,23 +26,41 @@ fn view_depth(d:f32)->f32 {
 fn valid_motion(m:vec4f)->bool {
     return finite4(m) && m.w>=0.5 && m.z>=0.0 && m.z<=1.0;
 }
+// History-free pixels keep the former presentation reconstruction of current
+// radiance. Only refusal/reset paths pay these four loads. Applying clean per
+// tap matches the former resolve-then-copy path, including zero-alpha RGB.
+fn registered_current(p:vec2f,lo:vec2i,hi:vec2i)->vec4f {
+    let q=p+frame.reactive.yz-vec2f(0.5);
+    let base=vec2i(floor(q)); let f=fract(q);
+    var result=vec4f(0.0);
+    for(var y=0;y<2;y++) {for(var x=0;x<2;x++) {
+        let w=select(1.0-f.x,f.x,x==1)*select(1.0-f.y,f.y,y==1);
+        if !(w>0.0) {continue;}
+        let c=clean(textureLoad(current,clamp(base+vec2i(x,y),lo,hi),0));
+        result+=c*w;
+    }}
+    return clean(result);
+}
 @fragment fn resolve(@builtin(position) p:vec4f)->@location(0) vec4f {
     let pixel=vec2i(p.xy);
     let raw=textureLoad(current,pixel,0); let c=clean(raw);
     let end=frame.rect.xy+frame.rect.zw;
-    if frame.depth.w<0.5 || !finite4(raw)
+    if !finite4(raw)
         || any(p.xy<frame.rect.xy) || any(p.xy>=end) { return c; }
-    let center=textureLoad(motion,pixel,0);
-    // New/invalid opaque owners must not acquire another owner's history. Clear
-    // has no motion record and is instead the far-plane coverage surface.
-    if c.a>0.0 && !valid_motion(center) { return c; }
     // Only pixel centers in this viewport are eligible, including offset/odd rects.
     let lo=vec2i(ceil(frame.rect.xy-vec2f(0.5)));
     let hi=vec2i(ceil(end-vec2f(0.5)))-vec2i(1);
     if any(hi<lo) { return c; }
+    if frame.depth.w<0.5 { return registered_current(p.xy,lo,hi); }
+    let center=textureLoad(motion,pixel,0);
+    // New/invalid opaque owners must not acquire another owner's history. Clear
+    // has no motion record and is instead the far-plane coverage surface.
+    if c.a>0.0 && !valid_motion(center) { return registered_current(p.xy,lo,hi); }
+    let code=u32(frame.reactive.w);
+    let dj=(vec2f(f32(code&15u),f32(code>>4u))-vec2f(8.0))*0.125;
     var minimum=c; var maximum=c;
     var near=frame.depth.y; var far=frame.depth.x;
-    var m=vec4f(0.0,0.0,1.0,1.0); var closest=2.0;
+    var m=vec4f(dj/frame.rect.zw,1.0,1.0); var closest=2.0;
     if c.a>0.0 { m=center; closest=center.z; }
     // Exactly nine current samples: range admission keeps both sides of a
     // silhouette. The nearest valid expected-depth motion dilates foreground
@@ -58,11 +79,11 @@ fn valid_motion(m:vec4f)->bool {
         // Strict comparison keeps center motion on equal-depth interiors.
         if candidate.z<closest { m=candidate; closest=candidate.z; }
     }}
-    if far<near { return c; }
+    if far<near { return registered_current(p.xy,lo,hi); }
     near-=max(frame.options.z,frame.options.y*near);
     far+=max(frame.options.z,frame.options.y*far);
-    let old=p.xy+m.xy*frame.rect.zw;
-    if any(old<frame.rect.xy) || any(old>=end) { return c; }
+    let old=p.xy+m.xy*frame.rect.zw-dj;
+    if any(old<frame.rect.xy) || any(old>=end) { return registered_current(p.xy,lo,hi); }
     let q=old-vec2f(0.5); let base=vec2i(floor(q)); let f=fract(q);
     var h=vec4f(0.0); var mass=0.0;
     for(var y=0;y<2;y++) { for(var x=0;x<2;x++) {
@@ -80,7 +101,7 @@ fn valid_motion(m:vec4f)->bool {
     }}
     // Reject disocclusion only when no finite, depth-compatible coverage support
     // survives. Never borrow clamped outside history or divide by zero.
-    if !(mass>0.0) {return c;}
+    if !(mass>0.0) {return registered_current(p.xy,lo,hi);}
     h=clean(h/mass);
     // Measure reaction before clipping so an abrupt radiance change cannot hide
     // inside the clipped value. All arithmetic is bounded by finite half range.

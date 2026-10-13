@@ -78,7 +78,28 @@ fn actual_temporal_resolve_disocclusion_reactivity_and_alpha_exclusion() {
         usage: wgpu::BufferUsages::COPY_DST | wgpu::BufferUsages::MAP_READ,
         mapped_at_creation: false,
     });
-    for mode in 0..14 {
+    // Retain all fourteen original controls, then execute every previous/current
+    // phase pair and eight independently registered reset frames.
+    for mode in 0..86 {
+        let phases = (14..78)
+            .contains(&mode)
+            .then(|| ((mode - 14) / 8, (mode - 14) % 8));
+        let reset = mode >= 78;
+        let jitter = if let Some((_, current)) = phases {
+            super::super::jitter::SAMPLES[current]
+        } else if reset {
+            super::super::jitter::SAMPLES[mode - 78]
+        } else if mode == 12 {
+            [0.375, -0.375]
+        } else {
+            [0.; 2]
+        };
+        let delta = phases.map_or([0.; 2], |(previous, current)| {
+            std::array::from_fn(|axis| {
+                super::super::jitter::SAMPLES[previous][axis]
+                    - super::super::jitter::SAMPLES[current][axis]
+            })
+        });
         let mut current = vec![[0.5, 0.5, 0.5, 1.]; 64];
         current[3 * 8 + 2] = [0., 0., 0., 1.];
         current[3 * 8 + 4] = [1.; 4];
@@ -91,7 +112,7 @@ fn actual_temporal_resolve_disocclusion_reactivity_and_alpha_exclusion() {
         if mode == 7 {
             current.fill([2., 0.5, 100., 1.]);
         }
-        if mode == 12 {
+        if mode == 12 || reset {
             for y in 0..8 {
                 for x in 0..8 {
                     current[y * 8 + x] = [0.2 + 0.03 * x as f32 + 0.02 * y as f32, 0.25, 0.5, 1.];
@@ -106,6 +127,10 @@ fn actual_temporal_resolve_disocclusion_reactivity_and_alpha_exclusion() {
             [0.25, 0.25, 0.25, 1.]
         };
         let mut old_values = vec![old; 64];
+        if phases.is_some() {
+            old_values.fill([0.75, 0.75, 0.75, 1.]);
+            old_values[3 * 8 + 3] = [0.25, 0.25, 0.25, 1.];
+        }
         if mode == 8 || mode == 9 {
             // Zero-weight and positive-weight incompatible neighbors respectively.
             old_values[3 * 8 + 4] = [f32::NAN, 0., 0., 1.];
@@ -119,7 +144,9 @@ fn actual_temporal_resolve_disocclusion_reactivity_and_alpha_exclusion() {
         let current = source(&current);
         let motion = source(&vec![
             [
-                if mode == 3 {
+                if phases.is_some() {
+                    delta[0] / 6.
+                } else if mode == 3 {
                     2.
                 } else if mode == 9 || mode == 13 {
                     0.5 / 6.
@@ -128,7 +155,7 @@ fn actual_temporal_resolve_disocclusion_reactivity_and_alpha_exclusion() {
                 } else {
                     0.
                 },
-                0.,
+                delta[1] / 6.,
                 if mode == 2 { 0.8 } else { 0.5 },
                 if mode == 12 { 0. } else { 1. }
             ];
@@ -136,13 +163,20 @@ fn actual_temporal_resolve_disocclusion_reactivity_and_alpha_exclusion() {
         ]);
         let uniform = Frame {
             rect: [1., 1., 6., 6.],
-            depth: [0.1, 100., f32::from(u8::from(mode == 1)), 1.],
+            depth: [
+                0.1,
+                100.,
+                f32::from(u8::from(mode == 1)),
+                f32::from(u8::from(!reset)),
+            ],
             options: [0.5, 0.001, 0.001, 1.],
             reactive: [
                 f32::from(u8::from(mode == 6)),
-                if mode == 12 { 0.375 } else { 0. },
-                if mode == 12 { -0.375 } else { 0. },
-                0.,
+                jitter[0],
+                jitter[1],
+                phases.map_or(super::super::jitter::delta_code(None, None), |(p, c)| {
+                    super::super::jitter::delta_code(Some(p as u32), Some(c as u32))
+                }),
             ],
         };
         let uniform = d.create_buffer_init(&wgpu::util::BufferInitDescriptor {
@@ -304,6 +338,13 @@ fn actual_temporal_resolve_disocclusion_reactivity_and_alpha_exclusion() {
             ))
         });
         let expected = match mode {
+            14..78 => [0.375, 0.375, 0.375, 1.],
+            78..86 => [
+                0.2 + 0.03 * (3. + jitter[0]) + 0.02 * (3. + jitter[1]),
+                0.25,
+                0.5,
+                1.,
+            ],
             0 | 1 | 8 | 9 | 11 | 13 => [0.375, 0.375, 0.375, 1.],
             4 => [0.; 4],
             5 => [0.2, 0.1, 0., 0.5],

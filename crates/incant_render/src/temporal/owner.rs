@@ -27,6 +27,7 @@ pub(crate) struct Pending {
     pub(super) targets: Option<Arc<Targets>>,
     pub(super) input: TemporalInput,
     pub(super) config: TemporalConfig,
+    pub(super) jitter_delta_code: f32,
 }
 impl TemporalState {
     pub fn new(config: TemporalConfig) -> Result<Self, TemporalError> {
@@ -85,10 +86,19 @@ impl TemporalState {
                 self.targets.as_ref(),
             ))
         };
+        let jitter_delta_code = if input.frame.has_previous() {
+            super::jitter::delta_code(
+                self.last.as_ref().and_then(TemporalFrame::jitter_phase),
+                input.frame.jitter_phase(),
+            )
+        } else {
+            super::jitter::delta_code(None, None)
+        };
         Ok(Pending {
             targets,
             input,
             config: self.config,
+            jitter_delta_code,
         })
     }
     pub fn accept(&mut self, pending: Pending) {

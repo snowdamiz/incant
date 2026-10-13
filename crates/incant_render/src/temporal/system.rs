@@ -165,7 +165,12 @@ impl TemporalSystem {
                 c.absolute_depth,
                 c.reactive_threshold,
             ],
-            reactive: [c.reactive_strength, jitter[0], jitter[1], 0.],
+            reactive: [
+                c.reactive_strength,
+                jitter[0],
+                jitter[1],
+                pending.jitter_delta_code,
+            ],
         };
         let uniform = device.create_buffer_init(&wgpu::util::BufferInitDescriptor {
             label: Some("Temporal resolve frame"),
