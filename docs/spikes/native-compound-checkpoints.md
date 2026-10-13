@@ -69,8 +69,24 @@ python3 tools/probes/native-compound-checkpoints/collect.py --verify-only
 
 On this producer machine, `--originals --local-binaries` also checks retained
 original records and all 174 immediately copied binaries, including historical
-generations. The final union evidence review and required fast CI remain separate
-from these local results.
+generations. Independent final union evidence review is accepted (e235399e). Required fast CI
+remains separate from these local results.
+
+## Current main251 composition
+
+The integration preserves the complete producer ancestry and all 79 owned source
+files. Of its 3,155 frozen build inputs, only the authoring source-store test
+changes: main251's independently reviewed exact-child lock isolation. No runtime,
+native, manifest, lock or build input changes. All three selected dependency
+graphs match after checkout-path normalization, with eight read-only checks
+passing. No compiler or native test was rerun for this disjoint join.
+
+The [current composition verifier](evidence/native-compound-main251/verify.py)
+checks the actual new test bytes against main251, then replays the original
+immutable assertions with only that explicitly bound historical test read.
+Every other source, log and executable remains checked unchanged. The original
+538/238 per-mode executions retain their source generations. Final current-main
+composition review is pending; public physics bytes remain refused.
 
 ## Remaining boundary
 

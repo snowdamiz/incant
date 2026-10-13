@@ -1,0 +1,29 @@
+{
+  "schema": 1,
+  "qualification": {
+    "path": "docs/spikes/evidence/native-compound-main251/qualification.json",
+    "sha256": "b74d6353377f111fdd57953105966fa1aa87600b1a38dc9e6f91ddbb5e4bc11a",
+    "bytes": 5299
+  },
+  "producer_review": {
+    "path": "docs/spikes/evidence/native-compound-main251/producer-review.json",
+    "sha256": "e235399ee72028d048f5644aedd4faf78ed0b74f968eaf3d2e2de035db8c7ae9",
+    "bytes": 4415
+  },
+  "archive": {
+    "path": "docs/spikes/evidence/native-compound-main251/records.json.gz",
+    "sha256": "3ede423ef3e438049b93854b4e5042072d74db1253cbd9569feca5096f8e9eb3",
+    "bytes": 16201
+  },
+  "records": 11,
+  "producer_manifest": {
+    "path": "docs/spikes/evidence/native-compound-checkpoints/manifest.json",
+    "sha256": "a82fa06ef1f856c9a2da68573b4c37d9b695ca29c4d38f841d32616dd4489483",
+    "bytes": 920665
+  },
+  "producer_collector": {
+    "path": "tools/probes/native-compound-checkpoints/collect.py",
+    "sha256": "65f4e73703ce8f28b8293ee31a0b5c40c5ca968cb2e6a6baa834e2f9b3d875ab",
+    "bytes": 8419
+  }
+}
