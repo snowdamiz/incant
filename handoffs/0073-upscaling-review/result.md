@@ -1,6 +1,94 @@
 # 0073 result — output upscaling numeric execution, visual review and repair design
 
-## Addendum 3 (current): bounded provenance support
+## Implementation 4 (current): owner attachment substrate within the existing memory admission
+
+**Status: IMPLEMENTATION PACKET WRITTEN for root, design and CPU arithmetic
+only.**
+- The packet is in
+  [`quality-repair-implementation-4.md`](quality-repair-implementation-4.md).
+- The arithmetic control is
+  [`repair-model/admission_v4.py`](repair-model/admission_v4.py), with its
+  output in [`repair-model/results-4.json`](repair-model/results-4.json).
+- No GPU, Cargo, target, image, production edit, account action, subagent,
+  memory write or push.
+- Addenda 1–3, their models and results, and the sections below are unchanged.
+
+**Model and effort:** Claude Opus 5.5 (`claude-opus-5-5`), thinking effort max.
+Root's `claude-0073-owner-substrate-acp.log` header reads `Resumed the latest
+ACP session scoped to this handoff worktree.` and `Claude session verified:
+Opus 5.5; thinking: max`.
+
+**Inputs, all read only:**
+- the brief's priority revision (`11944b7a…`, uncommitted);
+- root's foundation `temporal-owner-provenance.md` (`9208b343…`);
+- the motion and upscaling plan source in `native-agent-play`
+  (`codex/temporal-owner-provenance`, uncommitted over 2fe23dce; root's source
+  SHA `e1f3cde4…`).
+
+**Outcome:**
+- **Slice:** an exact R32Uint owner target, attached to the *existing* motion
+  pass as a second colour target.
+  - It holds the row's integer word `id | changed << 31`, read through a new
+    Uint32 attribute at offset 68 by a new `MotionOwner` kind.
+  - The existing `Motion` and `Depth` kinds, and their cooked artifacts, stay
+    byte-identical. No float lane carries an id.
+- **Consistency:** depth, MASK discard, mirror twins and skinning follow from
+  writing the owner in the same fragment as the motion vector, plus the
+  foundation's ids.
+- **Zero-owner cases:** clear, BLEND, overlays, discards and bypass.
+- **Lifecycle:** a startup opt-in and per-scene attachment, off by default, that
+  resets motion history when toggled. It fails closed when cooked artifacts are
+  missing.
+- **Colour:** no consumer yet, so colour output does not change.
+- **Memory:** the cap stays 671,105,024 B and every existing cap and default is
+  unchanged.
+  - Today's preflight counts a full candidate set even when allocations are
+    reused. With the owner target it would refuse steady 16/16 at 2560×1600
+    and 2048×2048.
+  - Proposed instead: count each live allocation once, with checked
+    arithmetic. The owner slice is then admitted at every steady state and
+    every DRS change. Only near-maximum output resizes refuse; for example,
+    2048×2048 → 2048×1920 at 16/16 needs 686,833,664 B. A cut then a retry
+    remedies those.
+  - The later history slice needs this accounting first; without it, steady
+    2560×1440 at 8/16 refuses.
+- **Shared substrate:** portable and MetalFX share the substrate, with no extra
+  pass. MetalFX attaches nothing until root approves 0074's owner variant.
+- **Acceptance controls:** CPU contract, vertex-pulling, layout, admission and
+  lifecycle tests, plus one bounded GPU readback test (32×32, at most 6
+  frames, ignored without a grant).
+- **Blockers and open gates:** later-history blockers are listed separately. The
+  a5ae3179 visual FAIL, C7 and C9 as written, and P1 all stay open.
+
+**Commands and results:**
+
+| Command | Result |
+|---|---|
+| `python3 -I -B handoffs/0073-upscaling-review/repair-model/admission_v4.py --out …/results-4.json` | Exit 0; 3 of 3 checks pass: the cap is reproduced, 973,121,760 B is reproduced, and the grid admits nothing above the cap; under 1 s |
+| Second run, compared with `cmp` | Byte-identical |
+| `/usr/bin/python3` (3.9.6) run | Identical to 3.14.8 apart from the version field |
+
+**Not run:** Cargo, cooker, renderer and GPU tests. The foundation is not
+re-verified here.
+
+**Screenshots:** none.
+
+**Changed paths:**
+- `handoffs/0073-upscaling-review/quality-repair-implementation-4.md` (new)
+- `handoffs/0073-upscaling-review/repair-model/admission_v4.py` (new)
+- `handoffs/0073-upscaling-review/repair-model/results-4.json` (new)
+- `handoffs/0073-upscaling-review/result.md` (this section)
+
+Root's `brief.md` is left uncommitted.
+
+**Limits:**
+- **Bytes:** logical only. They exclude pitch, tiling, padding, allocator and
+  driver bytes, and queued work.
+- **Resize sums:** approximate, because attachment rounding up is ignored. The
+  refusal predicate itself is exact.
+- **Claims:** no visual, performance, phone or phase-gate claim.
+
+## Addendum 3 (preserved): bounded provenance support
 
 **Status: BOUNDED CORRECTION WRITTEN for root review, CPU only.**
 - The correction is in
