@@ -22,7 +22,8 @@ byte-identical through these checks.
 
 The [manifest](evidence/native-pcm-main180.json) retains 1,946 frozen inputs,
 source comparisons, exact commands/streams, package/report identities and the
-assertion-only collector. Independent current-main final review is pending.
+assertion-only collector. [Independent current-main final review](evidence/native-pcm-main180/final-review.json)
+is accepted; publication awaits the exact-head fast check.
 The earlier producer failure/corrected helper evidence remains separate.
 
 This is ordinary offline CPU validation, with no GPU, native-window interaction,

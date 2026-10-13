@@ -37,7 +37,7 @@ The ordinary player stages bounded per-tick PCM and hashes incrementally. Curren
 validation passes 75 CPU tests and all eleven checks. A fresh source/map/build-deleted
 Core export passes eight actual process controls over the complete 2,156-tick route,
 with exact repeat PCM and preserved old prefix/no-clobber/diagnostic behavior.
-Final integration review and publication are pending. Native-window, device,
+Final integration review is accepted; publication awaits the exact-head fast check. Native-window, device,
 performance and appearance gates remain separate. [Evidence](docs/spikes/native-pcm-main180.md).
 
 ## Whole native session restart — CPU shipping proof accepted
