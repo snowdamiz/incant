@@ -584,5 +584,10 @@
     "Build-host mobile static-Wasm changes are guarded outside the desktop TypeScript path; five old/new bounded selector controls match without invoking any build.",
     "Original guard invocation usage failure, raw-log EOF metadata check failure and linked temporary selector fixture failure remain retained separately; no production fix was needed."
   ],
-  "review_state": "Independent current-main acceptance pending"
+  "review_state": "Independent current-main acceptance received",
+  "final_review": {
+    "path": "docs/spikes/evidence/native-cpu-profiler-main194/root-review.json",
+    "sha256": "53dcfcc064d2e8adc6b8a74ea8b39900e5647c3b95733e83d9f3a0fa46ec1f76",
+    "reviewed_manifest_sha256": "9a408c07aa7723ecfd9e51608487a637b335daa85898a464a763b690fd4cd3d6"
+  }
 }

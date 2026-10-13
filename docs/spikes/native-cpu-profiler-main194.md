@@ -3,7 +3,7 @@
 The accepted default-off CPU profiler is composed with actual main194. The current
 union passes 495 affected CPU tests in 62 groups, 19 default-player tests, all-target
 Clippy, default/summary wasm compilation, focused exporter tests, dependency guards,
-formatting and generated conventions. Independent integration review is pending.
+formatting and generated conventions. [Independent integration review](evidence/native-cpu-profiler-main194/root-review.json) accepts this scoped packet.
 
 The tested source is `8cc9a729869b5bf290bdf38641b70ef5b63efb6c`; the ancestry join at
 `5dfbc826324b18e40bdd512402cfcd9344305d7e` retains actual main194

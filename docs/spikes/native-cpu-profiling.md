@@ -2,7 +2,7 @@
 
 This slice adds connected system/script zones and bounded final player reports.
 Source and execution reviews are accepted; [main194 integration checks](native-cpu-profiler-main194.md)
-pass with independent integration review pending. It does not approve the full PLAN profiler, phone/network capture or any
+pass with independent integration review accepted; publication follows the fast check. It does not approve the full PLAN profiler, phone/network capture or any
 performance gate. Renderer GPU timestamps remain a separately owned feature.
 
 A default build has zero-sized no-op scopes and no profiler clock, allocator
