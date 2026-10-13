@@ -283,6 +283,7 @@ where
         let mut live = self.live.take().ok_or(GameError::Failed)?;
         #[cfg(feature = "ui")]
         let staged = {
+            let _profile = incant_profile::scope(incant_profile::Phase::UiStage);
             if !receipts.is_empty() && live.host.ui().is_none() {
                 self.live = Some(live);
                 return Err(GameError::UiHost);
@@ -324,11 +325,20 @@ where
         {
             return Err(GameError::UiHost);
         }
-        live.audio.sync(live.native.world()?)?;
-        render(&mut live.audio)?;
-        live.host
-            .sync(live.native.world()?)
-            .map_err(GameError::Host)?;
+        {
+            let _profile = incant_profile::scope(incant_profile::Phase::AudioSync);
+            live.audio.sync(live.native.world()?)?;
+        }
+        {
+            let _profile = incant_profile::scope(incant_profile::Phase::AudioRender);
+            render(&mut live.audio)?;
+        }
+        {
+            let _profile = incant_profile::scope(incant_profile::Phase::HostSync);
+            live.host
+                .sync(live.native.world()?)
+                .map_err(GameError::Host)?;
+        }
         self.live = Some(live);
         Ok(())
     }

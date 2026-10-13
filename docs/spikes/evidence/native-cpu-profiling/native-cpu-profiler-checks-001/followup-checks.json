@@ -1,0 +1,51 @@
+[
+  {
+    "name": "feature-unification-green",
+    "command": [
+      "tools/cargo",
+      "test",
+      "--locked",
+      "-p",
+      "incant_game_player",
+      "--features",
+      "incant_profile/summary",
+      "--lib",
+      "profile::tests"
+    ],
+    "exit": 0,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-checks-001/feature-unification-green.log",
+    "sha256": "51b23cc4058eaa61f8ccb9dc46ae4372246ced4cca74857a3c8f7e604a18b7cd"
+  },
+  {
+    "name": "transport-unification",
+    "command": [
+      "tools/cargo",
+      "test",
+      "--locked",
+      "-p",
+      "incant_game_player",
+      "--features",
+      "profile,incant_profile/tracy",
+      "--lib",
+      "profile::tests"
+    ],
+    "exit": 0,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-checks-001/transport-unification.log",
+    "sha256": "4d1310c2727003bb88196d68892f74e035538bab915a3714f406aedf2098d5d3"
+  },
+  {
+    "name": "profile-behavior-003",
+    "command": [
+      "tools/cargo",
+      "test",
+      "--locked",
+      "-p",
+      "incant_profile",
+      "--features",
+      "summary"
+    ],
+    "exit": 0,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-checks-001/profile-behavior-003.log",
+    "sha256": "d62a4d3eb230f5d2f5ef84b751526c4d41b0a193cbb417df5f1cd8994b2cb699"
+  }
+]

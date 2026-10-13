@@ -1,0 +1,33 @@
+{
+  "root": "/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant",
+  "engine_freeze": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-source-004/freeze.json",
+  "engine_freeze_sha256": "1eb27298a911c757bfb4fdc79504e3aaba00a55fedf8125ba15c9a1fdd3ba034",
+  "sources": [
+    {
+      "path": "tools/probes/native-cpu-profile.py",
+      "sha256": "9883aea2613b02f768ec81841408cbf7969337628365a20b43588dbab61d8443",
+      "bytes": 19517,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-helper-004/tools/probes/native-cpu-profile.py"
+    },
+    {
+      "path": "tools/probes/native-cpu-profile/behavior.ts",
+      "sha256": "a4156aa4502058bde76f7a7e39afa795951a1ef2567b220057323f6a749adbea",
+      "bytes": 894,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-helper-004/tools/probes/native-cpu-profile/behavior.ts"
+    },
+    {
+      "path": "tools/tests/test_native_cpu_profile_probe.py",
+      "sha256": "5c95e07141f1e50689a3e52056e88c60226fbb4dda26db9bffe0d10ce59468ec",
+      "bytes": 3423,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-helper-004/tools/tests/test_native_cpu_profile_probe.py"
+    }
+  ],
+  "previous_sha256": "6d8b78bd0b57f9ae75b162da4cd2d214c43615dd3d0e2a8e2a05105c023d71f6",
+  "changes": [
+    "Oracle only: bulk chunk world is shared by both source groups; expected per-entity speed is6+12, not source-local6/12. Source fixture unchanged."
+  ],
+  "tests": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-checks-001/helper-004-tests.log",
+    "sha256": "d8baddd13a8445c08671f7ac8e2aaccb17c6385f2e45b770720f67af9fbbb66e"
+  }
+}

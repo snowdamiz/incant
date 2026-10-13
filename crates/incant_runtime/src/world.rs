@@ -456,6 +456,7 @@ impl NativeWorld {
     }
 
     pub fn step(&mut self) -> Result<(), RuntimeError> {
+        let _profile = incant_profile::scope(incant_profile::Phase::WorldStep);
         self.ensure_usable()?;
         let next = self.tick.checked_add(1).ok_or(RuntimeError::TickOverflow)?;
         let dt = self.world.resource::<Step>().0;
@@ -463,10 +464,20 @@ impl NativeWorld {
         // the first solver write. No cloned configuration or document exists.
         // Root/character candidates remain private; the complete candidate
         // validation below still precedes every solver or ECS publication.
-        self.prepare_root_motion(dt, next)?;
-        self.prepare_globals(Some(dt))?;
-        let navigation = self.navigation_motion()?;
+        {
+            let _profile = incant_profile::scope(incant_profile::Phase::RootMotion);
+            self.prepare_root_motion(dt, next)?;
+        }
+        {
+            let _profile = incant_profile::scope(incant_profile::Phase::Transforms);
+            self.prepare_globals(Some(dt))?;
+        }
+        let navigation = {
+            let _profile = incant_profile::scope(incant_profile::Phase::Navigation);
+            self.navigation_motion()?
+        };
         if self.physics_used || self.physics_2d_used {
+            let physics_sync_profile = incant_profile::scope(incant_profile::Phase::PhysicsSync);
             self.sync_physics_2d()?;
             let mut query = self
                 .world
@@ -487,12 +498,19 @@ impl NativeWorld {
                     return Err(error.into());
                 }
             }
+            drop(physics_sync_profile);
             // Every post-advance error or caught unwind makes this world terminal.
             self.physics_failed = true;
-            if let Err(error) = self.physics_2d.step(dt) {
+            if let Err(error) = {
+                let _profile = incant_profile::scope(incant_profile::Phase::Physics2d);
+                self.physics_2d.step(dt)
+            } {
                 return Err(error.into());
             }
-            if let Err(error) = self.physics.step(dt) {
+            if let Err(error) = {
+                let _profile = incant_profile::scope(incant_profile::Phase::Physics3d);
+                self.physics.step(dt)
+            } {
                 self.physics_failed = true;
                 return Err(error.into());
             }
@@ -532,7 +550,10 @@ impl NativeWorld {
             }
         }
         self.publish_root_motion();
-        self.schedule.run(&mut self.world);
+        {
+            let _profile = incant_profile::scope(incant_profile::Phase::EcsSchedule);
+            self.schedule.run(&mut self.world);
+        }
         self.tick = next;
         if let Some(navigation) = navigation {
             self.navigation = navigation;
@@ -701,6 +722,7 @@ impl NativeWorld {
 type NonPhysics = (Without<Binding>, Without<Binding2D>);
 
 fn integrate(step: Res<Step>, mut query: Query<(&mut Local, &Motion), NonPhysics>) {
+    let _profile = incant_profile::scope(incant_profile::Phase::Integrate);
     let advance = |(mut local, motion): (Mut<Local>, &Motion)| {
         advance_translation(&mut local.0, &motion.0, step.0);
     };
@@ -717,6 +739,7 @@ fn advance_translation(transform: &mut Transform, velocity: &Velocity, step: f64
 }
 
 fn publish_globals(hierarchy: Res<Hierarchy>, mut query: Query<&mut Global>) {
+    let _profile = incant_profile::scope(incant_profile::Phase::Globals);
     for (index, &(entity, _)) in hierarchy.nodes.iter().enumerate() {
         query.get_mut(entity).expect("fixed topology").0 = hierarchy.globals[index];
     }
@@ -735,6 +758,7 @@ pub(crate) fn spawn(world: &mut World, entity: CookedEntity) -> Entity {
 }
 
 fn propagate(mut hierarchy: ResMut<Hierarchy>, mut query: Query<(&Local, &mut Global)>) {
+    let _profile = incant_profile::scope(incant_profile::Phase::Globals);
     propagate_values(&mut hierarchy, |entity, parent| {
         let (local, mut global) = query.get_mut(entity).expect("fixed topology");
         let value = parent * matrix(&local.0);

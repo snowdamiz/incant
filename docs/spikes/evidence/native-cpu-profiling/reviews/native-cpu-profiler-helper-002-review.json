@@ -1,0 +1,51 @@
+{
+  "scope": "Independent source-only review of CPU profiler execution helper002; no build, shipping, capture, listener or GPU execution by reviewer.",
+  "freeze": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-helper-002/freeze.json",
+  "freeze_sha256": "083ab0b27d23dbeac5a818b7243cb58aa7fc46ca1f24cb2c4f9813f5b1f9d8f9",
+  "sources": [
+    {
+      "path": "tools/probes/native-cpu-profile.py",
+      "sha256": "e912bc3a19cb9384bcaa7bfecd2934c95a6ec95bb47d4450c70cc95edb520ba6",
+      "bytes": 17622,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-helper-002/tools/probes/native-cpu-profile.py"
+    },
+    {
+      "path": "tools/probes/native-cpu-profile/behavior.ts",
+      "sha256": "a4156aa4502058bde76f7a7e39afa795951a1ef2567b220057323f6a749adbea",
+      "bytes": 894,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-helper-002/tools/probes/native-cpu-profile/behavior.ts"
+    }
+  ],
+  "status": "corrections_required",
+  "findings": [
+    {
+      "priority": 2,
+      "path": "tools/probes/native-cpu-profile.py",
+      "location": "Runner.run",
+      "issue": "Outer2400s subprocess timeout SIGKILLs only exporter Python; exporter native_process creates separate Cargo sessions and cannot execute finally cleanup after SIGKILL. Descendants can survive, so all_processes_reaped only demonstrates direct children.",
+      "required": "Keep trusted exporter owned subprocess cleanup effective on timeout/interruption and test an actual long-lived descendant; retain raw timeout records."
+    },
+    {
+      "priority": 2,
+      "path": "tools/probes/native-cpu-profile.py",
+      "location": "run_player",
+      "issue": "Polling for process exit before draining both PIPE outputs can deadlock final report writes when output exceeds pipe capacity; then a valid run is killed by60s timeout.",
+      "required": "Retain regular stdout/stderr files or drain concurrently while monitoring process-owned sockets; cover output larger than pipe capacity."
+    }
+  ],
+  "otherwise_reviewed": [
+    "public atomic two-source fixture and independent movement oracle",
+    "fresh selected summary/Tracy exports and explicit existing-proof bindings",
+    "source/cache/map deletion checks",
+    "all full logical reports and PCM comparisons",
+    "profile source identity and bounded frame/heap/allocation counts",
+    "exact CLI and guest failure/no-output controls",
+    "loopback process-owned lsof checks and explicit capture lifetime",
+    "upstream CSV zone/plot checks and private authored string exclusion"
+  ],
+  "limits": [
+    "No source changes by reviewer",
+    "No runtime performance or phone gate",
+    "Owner has active frozen proof; corrections must preserve any successful outputs and failures"
+  ]
+}

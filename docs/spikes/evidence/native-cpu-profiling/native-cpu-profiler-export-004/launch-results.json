@@ -1,0 +1,31 @@
+{
+  "runs": [
+    {
+      "helper": "helper-001/002",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-001",
+      "exit": 1,
+      "stage": "public authoring; multiple source writes refused; no export started"
+    },
+    {
+      "helper": "helper-003",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-002",
+      "exit": 1,
+      "stage": "native oracle assumed source-local chunks; no export started"
+    },
+    {
+      "helper": "helper-004",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-003",
+      "exit": 1,
+      "stage": "both shipping exports and all5 gameplay equivalents/5refusals passed; receiver handshake failure3; no trace"
+    },
+    {
+      "helper": "helper-005",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-004",
+      "exit": 0,
+      "stage": "same-package execution, trace capture and CSV parsing passed",
+      "reaped_tool_handle": 17734
+    }
+  ],
+  "launcher": "Codex exec_command/write_stdin; retained logs and terminal exit results",
+  "production_changes_between_shipping_and_retry": false
+}

@@ -1,0 +1,72 @@
+[package]
+name = "incant_script"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[features]
+profile = ["incant_profile/summary", "incant_runtime/profile"]
+default = ["compiler", "physics-deterministic"]
+# Authoring/cook and the development runner only. Native players disable this.
+compiler = []
+# Experimental trusted numeric probe only; default Android admission stays closed.
+probe-android-bytecode = []
+# Typed hosted UI checkpoint sections; never enables a renderer or authoring.
+ui = ["dep:incant_ui", "incant_ui/native"]
+audio = ["dep:incant_audio_runtime", "incant_audio_runtime/scene"]
+# Trusted build-linked wasm2c modules; no runtime compiler/JIT or module loader.
+static-module = ["dep:incant_wasm_runtime"]
+# Development-only raw Wasm host, explicitly absent from native exports.
+wasmtime-host = ["dep:incant_wasm_dev", "incant_wasm_dev/wasmtime-host"]
+
+# Select one physics kernel for the entire process, including build/test hosts.
+physics-deterministic = [
+    "incant_audio_runtime?/physics-deterministic",
+    "incant_runtime/physics-deterministic",
+    "incant_ui?/physics-deterministic",
+    "incant_wasm_dev?/physics-deterministic",
+    "incant_wasm_runtime?/physics-deterministic",
+]
+physics-fast-simd8 = [
+    "incant_audio_runtime?/physics-fast-simd8",
+    "incant_runtime/physics-fast-simd8",
+    "incant_ui?/physics-fast-simd8",
+    "incant_wasm_dev?/physics-fast-simd8",
+    "incant_wasm_runtime?/physics-fast-simd8",
+]
+
+[dependencies]
+incant_profile.workspace = true
+incant_wasm_dev = { path = "../incant_wasm_dev", optional = true, default-features = false }
+incant_localization.workspace = true
+incant_wasm_runtime = { path = "../incant_wasm_runtime", optional = true, default-features = false }
+incant_runtime.workspace = true
+incant_audio_runtime = { workspace = true, optional = true }
+incant_ui = { workspace = true, optional = true }
+incant_types.workspace = true
+incant_input.workspace = true
+rquickjs.workspace = true
+thiserror.workspace = true
+ulid.workspace = true
+sha2.workspace = true
+serde.workspace = true
+
+[dev-dependencies]
+incant_anim.workspace = true
+serde_json.workspace = true
+
+[build-dependencies]
+sha2.workspace = true
+
+[[example]]
+name = "native_bulk"
+required-features = ["compiler"]
+
+[target.'cfg(any(unix, windows))'.dependencies]
+cpu-time.workspace = true
+
+# This pinned QuickJS release has no bundled iOS/Android bindings. Generate
+# them from the actual SDK/NDK headers at build time.
+[target.'cfg(any(target_os = "ios", target_os = "android"))'.dependencies]
+rquickjs = { workspace = true, features = ["bindgen"] }

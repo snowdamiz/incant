@@ -6,6 +6,8 @@ rust-version.workspace = true
 publish.workspace = true
 
 [features]
+profile = ["incant_profile/summary", "incant_game_runtime/profile", "incant_script/profile", "incant_runtime/profile"]
+profile-tracy = ["profile", "incant_profile/tracy"]
 default = ["physics-deterministic"]
 # Thin platform ABI for bounded offline CPU package execution, not a UI host.
 mobile-ffi = ["dep:thiserror"]
@@ -51,6 +53,7 @@ physics-fast-simd8 = [
 ]
 
 [dependencies]
+incant_profile.workspace = true
 incant_ui = { workspace = true, optional = true }
 tempfile = "3"
 incant_wasm_runtime = { path = "../incant_wasm_runtime", optional = true, default-features = false }

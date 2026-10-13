@@ -1,0 +1,19 @@
+{
+  "kind": "process",
+  "argv": [
+    "/private/tmp/incant-cpu-profiler-target/debug/incant_headless",
+    "init",
+    "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-002/authoring/project.json",
+    "--entities",
+    "0"
+  ],
+  "pid": 58468,
+  "exit": 0,
+  "started_ns": 1791860757685900000,
+  "ended_ns": 1791860757726162000,
+  "stdout": "{\n  \"created\": \"01M4SKJN685PNKXXSQ359ZQ9P8\",\n  \"entities\": 0\n}\n",
+  "stderr": "",
+  "stdout_sha256": "bec964589b876145fbe2ca201451c702384ce3354399dae8b6c516d67745e37c",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "exception": null
+}

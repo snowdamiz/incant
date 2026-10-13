@@ -1,0 +1,95 @@
+{
+  "audio_clips": {},
+  "cameras": [],
+  "compiler": {
+    "bundleBytes": 2782,
+    "bundleSha256": "1a03ae2d9f50d10a91df54536062232ce7a34ec215dfb00f92cdedfe68074b84",
+    "compilers": {
+      "swc": "1.16.13",
+      "typescript": "5.9.3"
+    },
+    "format": "incant-native-typescript-project",
+    "limits": {
+      "bundleBytes": 1000000,
+      "fileBytes": 262144,
+      "mapBytes": 4194304,
+      "modules": 64,
+      "sourceBytes": 1048576
+    },
+    "mapBytes": 3652,
+    "mapSha256": "793f04d693dd02e4942c125d49b9064134c145855bd9b86ec0d0657ebc44e93e",
+    "modules": [
+      {
+        "bytes": 894,
+        "path": "source-0.ts",
+        "sha256": "a4156aa4502058bde76f7a7e39afa795951a1ef2567b220057323f6a749adbea"
+      },
+      {
+        "bytes": 895,
+        "path": "source-1.ts",
+        "sha256": "e9b863b3456c9a9ecd25295bc98d90596464392f5cb50a9ba4f5502ce0d34e6e"
+      }
+    ],
+    "sourceBytes": 1789,
+    "sources": [
+      {
+        "id": "00000000000000000000000001",
+        "path": "source-0.ts"
+      },
+      {
+        "id": "00000000000000000000000002",
+        "path": "source-1.ts"
+      }
+    ],
+    "trust": "fresh local source transform; no project code or configuration executed",
+    "version": 1
+  },
+  "font_assets": [],
+  "format": "incant-native-project-build",
+  "has_spatial_content": false,
+  "physics_mode": "deterministic",
+  "physics_variant": "deterministic",
+  "producer_kind": "native-desktop",
+  "producer_target": "aarch64-apple-darwin",
+  "program": null,
+  "project_id": "01M4SKM7VG0MTPE9RK2T7CR7JY",
+  "project_sha256": "e9c5f36602b3fe1b9fc331ec9aa4da52b74f99f9de76a1c4f27aee565d509295",
+  "scene_id": "01M4SKM7VGWM96FYXFXFTRGP53",
+  "scene_sha256": "a43a1e994ab950fa6609d4cf74403cfb012da98b5f09156f16b26811bd4e0cef",
+  "script": {
+    "bindings_sha256": "0681dab66c5325b291c6888a64231581bd3b990eaa3905bb130b0bd9b8762fc1",
+    "build_id": "12954ae79cb39e7a347ab198b43a804339d567cabdc109f507312c1fe823f494",
+    "bytecode_abi": {
+      "atom_bytes": 4,
+      "default_c_flags": true,
+      "float_mantissa": 53,
+      "float_max_exponent": 1024,
+      "little_endian": true,
+      "pointer_bits": 64,
+      "value_alignment": 8,
+      "value_bytes": 16,
+      "version": 28,
+      "write_flags": 17
+    },
+    "bytecode_bytes": 6181,
+    "bytecode_sha256": "a85f18b9d85d4495ef53af24a7a20377cea9111f32124541e003374c2292c2da",
+    "debug_line_tables": true,
+    "embedded_source": false,
+    "engine": "rquickjs-0.14.0/quickjs-ng-0.16.2/bytecode-28",
+    "format": 3,
+    "hardening_sha256": "971716e2f49f08f91ffd7ab3d3f9701f08c1d20ec46670a906875621e2659708",
+    "producer_target": "aarch64-apple-darwin",
+    "source_map_sha256": "793f04d693dd02e4942c125d49b9064134c145855bd9b86ec0d0657ebc44e93e",
+    "source_name": "incant-project-behaviors",
+    "source_sha256": "1a03ae2d9f50d10a91df54536062232ce7a34ec215dfb00f92cdedfe68074b84",
+    "symbolication": "map CommonJS locations after subtracting wrapper_prefix_lines; automatic runtime stack remapping remains unsupported",
+    "target": "aarch64-apple-darwin",
+    "trust": "fresh compiler output embedded by trusted native build; hashes are not authentication",
+    "wrapper_prefix_lines": 3
+  },
+  "startup_source_parsing": false,
+  "target": "aarch64-apple-darwin",
+  "tick_rate": 60,
+  "version": 1,
+  "visual_assets": []
+}

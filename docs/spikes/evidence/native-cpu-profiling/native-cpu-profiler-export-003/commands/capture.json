@@ -1,0 +1,25 @@
+{
+  "kind": "process",
+  "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-inspection/tracy-tools-0.14.0/tracy-capture",
+    "-a",
+    "127.0.0.1",
+    "-p",
+    "8086",
+    "-s",
+    "15",
+    "-m",
+    "1",
+    "-o",
+    "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-003/capture.tracy"
+  ],
+  "pid": 66678,
+  "exit": 3,
+  "started_ns": 1791861396119190000,
+  "ended_ns": 1791861397274743000,
+  "stdout": "Connecting to 127.0.0.1:8086...\nThe client you are trying to connect to has disconnected during the initial\nconnection handshake. Please check your network configuration.\n",
+  "stderr": "",
+  "stdout_sha256": "cba0d69baaef5d3613ff7ed0bc81ebdfa0847725e41659505ca0088a1629e696",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "exception": null
+}

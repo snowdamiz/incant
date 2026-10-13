@@ -1,0 +1,20 @@
+{
+  "decision": "accepted_source_only",
+  "freeze": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-helper-005/freeze.json",
+  "freeze_sha256": "18a3adbf9f71c5352ae623e9d24101ff8e784f59148e372680e4ffaffd62e5e2",
+  "reviewed_sources": [
+    "tools/probes/native-cpu-profile.py",
+    "tools/probes/native-cpu-profile/behavior.ts",
+    "tools/tests/test_native_cpu_profile_probe.py"
+  ],
+  "finding_count": 0,
+  "scope": [
+    "Compared helper004 to helper005; receiver starts once only after lsof restricted to exact owned player PID reports loopback 8086 LISTEN.",
+    "ExitStack owns capture and unwinds kill/wait/receipt on player assertion, receiver timeout or other exceptions; player context exits before capture wait.",
+    "Original package_root retained for existing-proof identity checks; no engine, fixture or package rebuild delta.",
+    "Rehashed all three live and frozen files and owner focused lifecycle test log; tests not freshly rerun in this review."
+  ],
+  "limits": [
+    "Actual trace and completed package execution require final independent evidence audit; this receipt accepts source and retained focused test identity only."
+  ]
+}

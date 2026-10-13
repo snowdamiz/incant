@@ -107,9 +107,15 @@ impl SessionVm {
         match self {
             Self::Bytecode(host) => Ok(host.tick_with_input(world, dt, input)?),
             #[cfg(feature = "wasmtime-host")]
-            Self::DevelopmentWasm(host) => Ok(host.tick_with_input(world, dt, input)?),
+            Self::DevelopmentWasm(host) => {
+                let _profile = incant_profile::scope(incant_profile::Phase::DevelopmentModule);
+                Ok(host.tick_with_input(world, dt, input)?)
+            }
             #[cfg(feature = "static-module")]
-            Self::Static(host) => Ok(host.tick_with_input(world, dt, input)?),
+            Self::Static(host) => {
+                let _profile = incant_profile::scope(incant_profile::Phase::StaticModule);
+                Ok(host.tick_with_input(world, dt, input)?)
+            }
         }
     }
 }

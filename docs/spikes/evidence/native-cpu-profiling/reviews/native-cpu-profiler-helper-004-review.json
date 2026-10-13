@@ -1,0 +1,18 @@
+{
+  "status": "accepted_source_only",
+  "freeze": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-helper-004/freeze.json",
+  "sha256": "934297e76dbec2f55174449f8fa1ad6affe4d2a929c101824e6f2a02c5dc1043",
+  "prior_review": "native-cpu-profiler-helper-final-20261013.json",
+  "scope": "Narrow helper003 to004 oracle correction only",
+  "review": [
+    "Both attached source groups see the entire bulk world, so each owner receives speed6 plus12 per tick. Expected translation18*ticks/rate matches actual fixture contract.",
+    "Both native20tick and ordinary shipping3600tick expected observations changed consistently.",
+    "Different fixed source contributions plus exact profile source-group IDs/calls still detect omitted source execution.",
+    "Fixture and lifecycle tests unchanged; initial wrong-oracle run retained by producer."
+  ],
+  "findings": [],
+  "limits": [
+    "Actual shipping/Tracy capture not reviewed here",
+    "No source edits, compilation, listener or GPU run by reviewer"
+  ]
+}

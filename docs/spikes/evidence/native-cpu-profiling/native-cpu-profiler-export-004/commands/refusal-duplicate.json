@@ -1,0 +1,17 @@
+{
+  "kind": "process",
+  "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-003/package-tracy/player/incant_game_player",
+    "--profile",
+    "--profile-tracy"
+  ],
+  "pid": 67286,
+  "exit": 1,
+  "started_ns": 1791861557158964000,
+  "ended_ns": 1791861557165022000,
+  "stdout": "",
+  "stderr": "Error: Options\n",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_sha256": "ebde826d61325388777e2fc8192a642832657307de948c5b6b3e639770093d4a",
+  "exception": null
+}

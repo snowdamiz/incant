@@ -1,0 +1,29 @@
+{
+  "original_source_sha256": "077d27d41baa2f6fe0bc17e2c303ccfa902097af7822bb009a3037eddb1d79d2",
+  "rows": [
+    {
+      "key": "CARGO_FEATURE_BROADCAST",
+      "value": "",
+      "original_accepted": true,
+      "corrected_refusal": "Unset CARGO_FEATURE_BROADCAST for the audited profiling exporter"
+    },
+    {
+      "key": "CARGO_FEATURE_BROADCAST",
+      "value": "1",
+      "original_accepted": true,
+      "corrected_refusal": "Unset CARGO_FEATURE_BROADCAST for the audited profiling exporter"
+    },
+    {
+      "key": "CARGO_FEATURE_CODE_TRANSFER",
+      "value": "",
+      "original_accepted": true,
+      "corrected_refusal": "Unset CARGO_FEATURE_CODE_TRANSFER for the audited profiling exporter"
+    },
+    {
+      "key": "CARGO_FEATURE_CODE_TRANSFER",
+      "value": "1",
+      "original_accepted": true,
+      "corrected_refusal": "Unset CARGO_FEATURE_CODE_TRANSFER for the audited profiling exporter"
+    }
+  ]
+}

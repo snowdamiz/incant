@@ -1,0 +1,19 @@
+{
+  "kind": "in_process_export",
+  "entrypoint": "export_native.export",
+  "kwargs": {
+    "project": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-003/authoring/project.json",
+    "output": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-003/package-tracy",
+    "profiling": "tracy"
+  },
+  "host_pid": 58969,
+  "exit": 0,
+  "exception": null,
+  "started_ns": 1791861106440159000,
+  "ended_ns": 1791861391633046000,
+  "stdout": "Compiling fresh aarch64-apple-darwin shipping player (headless)...\nChecking copied player after removal of private build storage...\n",
+  "stderr": "",
+  "stdout_sha256": "477d5edc41eb09e083f985cedbfd3bda05b43e83bf8bcd3c8bcbd284d7b35868",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "ownership": "Exporter native_process owns, drains and reaps each build/tool session; no outer timeout"
+}

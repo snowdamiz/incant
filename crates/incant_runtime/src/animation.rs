@@ -489,6 +489,7 @@ pub(crate) fn advance(
     step: Res<crate::world::Step>,
     mut query: Query<&mut Playback, Without<crate::root_motion::RootMotionState>>,
 ) {
+    let _profile = incant_profile::scope(incant_profile::Phase::Animation);
     for mut playback in &mut query {
         let Playback {
             definition,

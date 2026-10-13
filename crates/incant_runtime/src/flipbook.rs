@@ -141,6 +141,7 @@ impl NativeWorld {
 
 // A retained Bevy system/query: no query-state construction on each tick.
 pub(crate) fn advance(mut query: Query<&mut Playback>) {
+    let _profile = incant_profile::scope(incant_profile::Phase::Flipbook);
     for mut playback in &mut query {
         playback.clock.advance(&mut playback.state);
     }

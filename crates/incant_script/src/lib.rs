@@ -287,6 +287,7 @@ impl ScriptHost {
         dt: f64,
         input: &incant_input::InputRuntime,
     ) -> Result<(), ScriptError> {
+        let _profile = incant_profile::scope(incant_profile::Phase::ScriptTick);
         if self.failed {
             return Err(ScriptError::FailedSession);
         }
@@ -429,6 +430,10 @@ impl ScriptHost {
                     for (index, scope, instances, timer_api, state_api) in groups {
                         timers.activate(scope);
                         persistent.activate(scope);
+                        let source_profile = incant_profile::script_scope(match scope {
+                            schedule::Scope::Global => None,
+                            schedule::Scope::Source(id) => Some(id.0),
+                        });
                         let called = function.call::<_, Value>((
                             rquickjs::function::Flat((
                                 chunks.clone(),
@@ -450,6 +455,7 @@ impl ScriptHost {
                             state_api,
                             hud.clone(),
                         ));
+                        drop(source_profile);
                         timers.revoke();
                         persistent.revoke();
                         match called {
@@ -511,6 +517,7 @@ impl ScriptHost {
         // native host work, after the script CPU/deferred-work checks; its time
         // is separate from the JS execution budget, not a claimed phone budget.
         let result = result.and_then(|(undo, mut commands, request, schedule, logs, changes)| {
+            let _profile = incant_profile::scope(incant_profile::Phase::ScriptApply);
             undo.apply(world, &mut commands)?;
             self.logs.commit(schedule.tick, logs);
             self.schedule = schedule;
@@ -520,6 +527,22 @@ impl ScriptHost {
         });
         if result.is_err() {
             self.failed = true;
+        }
+        // Query only after JS/context loans are closed. This opt-in diagnostic
+        // walks the VM heap and is outside the guest CPU budget, never an RSS claim.
+        if incant_profile::enabled() {
+            let heap = self._runtime.memory_usage();
+            if let (Ok(used_bytes), Ok(allocated_bytes), Ok(allocation_count)) = (
+                u64::try_from(heap.memory_used_size),
+                u64::try_from(heap.malloc_size),
+                u64::try_from(heap.malloc_count),
+            ) {
+                incant_profile::quickjs_heap(incant_profile::HeapSample {
+                    used_bytes,
+                    allocated_bytes,
+                    allocation_count,
+                });
+            }
         }
         result
     }

@@ -149,13 +149,17 @@ impl NativeSession {
         events: &[InputEvent],
         ui: incant_input::UiSnapshot,
     ) -> Result<(), SessionError> {
+        let _profile = incant_profile::scope(incant_profile::Phase::NativeTick);
         self.ready()?;
         if !self.host.supports_ui() && !ui.is_empty() {
             return Err(SessionError::UiUnsupported);
         }
         let dt = 1. / f64::from(self.world.tick_rate());
-        self.input
-            .advance_validated_with_ui(events, dt, &self.bindings, ui)?;
+        {
+            let _profile = incant_profile::scope(incant_profile::Phase::Input);
+            self.input
+                .advance_validated_with_ui(events, dt, &self.bindings, ui)?;
+        }
         // Any failure after packet acceptance is terminal. There is deliberately
         // no second whole-world/VM rollback or partially resumable session.
         self.failed = true;

@@ -16,6 +16,18 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Opt-in native CPU profiler — locally accepted
+
+Connected runtime/system/script zones and bounded player summaries pass actual
+CPU checks. Explicit trusted headless exports bind summary/Tracy features; the
+unchanged default path starts no client. Two fresh shipping packages preserve
+full 3,600-tick reports and PCM with profiling off/on. An actual opted-in loopback
+Tracy capture contains 20 zone types and four memory/allocation plots; all owned
+processes are reaped. Rust requested bytes, QuickJS heap and RSS are distinct.
+Independent source and final evidence review are accepted; integration is pending.
+Native-window/device capture, allocation stacks and the full profiler/performance
+gates remain open. [Contract/evidence](docs/spikes/native-cpu-profiling.md).
+
 ## Authored Core runtime bindings — CPU proof accepted
 
 The 0060 mesa now binds its existing localized HUD and audio sources to the

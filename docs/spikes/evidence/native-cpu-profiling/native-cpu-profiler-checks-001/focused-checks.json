@@ -1,0 +1,64 @@
+[
+  {
+    "name": "default",
+    "command": [
+      "tools/cargo",
+      "test",
+      "--locked",
+      "-p",
+      "incant_profile"
+    ],
+    "exit": 0,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-checks-001/default.log",
+    "sha256": "00ac8a3a1f2548c88a2df928503ac4062f44080cd42ba1b23073364da4593d52"
+  },
+  {
+    "name": "script",
+    "command": [
+      "tools/cargo",
+      "test",
+      "--locked",
+      "-p",
+      "incant_script",
+      "--features",
+      "profile",
+      "--test",
+      "profile"
+    ],
+    "exit": 0,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-checks-001/script.log",
+    "sha256": "eaf1886ad214d333293f891fc5bd9dbce422a1b09a093a83e96832419ba74f07"
+  },
+  {
+    "name": "player",
+    "command": [
+      "tools/cargo",
+      "test",
+      "--locked",
+      "-p",
+      "incant_game_player",
+      "--features",
+      "profile",
+      "--test",
+      "profile"
+    ],
+    "exit": 0,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-checks-001/player.log",
+    "sha256": "e03f35d39f333d9be3088b7baf30ae96c695f25172629b77e11c4bd83d736d2d"
+  },
+  {
+    "name": "tracy-compile",
+    "command": [
+      "tools/cargo",
+      "check",
+      "--locked",
+      "-p",
+      "incant_profile",
+      "--features",
+      "tracy"
+    ],
+    "exit": 0,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-checks-001/tracy-compile.log",
+    "sha256": "eac281e8900aa14c54d2edad4cdca06adc93c9a345c50c7fc0b457580febc2d0"
+  }
+]

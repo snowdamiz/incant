@@ -1,0 +1,16 @@
+{
+  "kind": "process",
+  "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-inspection/tracy-tools-0.14.0/tracy-csvexport",
+    "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-004/capture.tracy"
+  ],
+  "pid": 67329,
+  "exit": 0,
+  "started_ns": 1791861558458074000,
+  "ended_ns": 1791861558478657000,
+  "stdout": "name,src_file,src_line,total_ns,total_perc,counts,mean_ns,min_ns,max_ns,std_ns\nworld.transforms,crates/incant_profile/src/tracy.rs,16,4010505,0.367594,3446,1163,958,20750,373.763044\necs.globals,crates/incant_profile/src/tracy.rs,23,1264384,0.115891,3446,366,226,9417,237.474146\ngame.host_sync,crates/incant_profile/src/tracy.rs,35,876698,0.080356,3447,254,208,708,28.869611\ngame.audio_render,crates/incant_profile/src/tracy.rs,34,12863274,1.179019,3447,3731,3375,14250,484.941139\nworld.navigation,crates/incant_profile/src/tracy.rs,17,876396,0.080328,3446,254,185,4083,70.856764\nscript.source,crates/incant_profile/src/tracy.rs,28,610205848,55.930090,6892,88538,77368,305259,8941.303934\nplayer.restart,crates/incant_profile/src/tracy.rs,36,1098839,0.100717,3447,318,226,5042,96.651499\nplayer.frame,crates/incant_profile/src/tracy.rs,12,784621612,71.916645,3446,227690,198456,557709,18270.861167\ngame.ui_stage,crates/incant_profile/src/tracy.rs,32,907907,0.083217,3446,263,208,1083,30.782702\nnative.input,crates/incant_profile/src/tracy.rs,26,1400538,0.128370,3446,406,309,7250,249.503092\nscript.tick,crates/incant_profile/src/tracy.rs,27,713158053,65.366457,3446,206952,183397,531924,16390.724428\necs.flipbook,crates/incant_profile/src/tracy.rs,24,1202597,0.110227,3446,348,226,12333,225.371008\nnative.tick,crates/incant_profile/src/tracy.rs,13,765640421,70.176872,3446,222182,193206,550401,18117.877322\nworld.root_motion,crates/incant_profile/src/tracy.rs,15,1053110,0.096526,3446,305,226,6042,186.287218\necs.animation,crates/incant_profile/src/tracy.rs,25,1197314,0.109743,3446,347,250,2459,118.595971\necs.schedule,crates/incant_profile/src/tracy.rs,21,42248376,3.872391,3446,12260,6809,86469,4617.475447\nworld.step,crates/incant_profile/src/tracy.rs,14,49850174,4.569154,3446,14466,8726,93553,4773.485689\necs.integrate,crates/incant_profile/src/tracy.rs,22,1782229,0.163355,3446,517,333,7166,221.121941\nscript.apply,crates/incant_profile/src/tracy.rs,29,1390036,0.127408,3447,403,291,5166,187.160013\ngame.audio_sync,crates/incant_profile/src/tracy.rs,33,1141022,0.104584,3447,331,250,1375,55.704898\n",
+  "stderr": "",
+  "stdout_sha256": "3f8e6606d5eb573ad3c5b44cf92e9448dc3f49c8d8ac92852ab1d80d5751db9f",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "exception": null
+}

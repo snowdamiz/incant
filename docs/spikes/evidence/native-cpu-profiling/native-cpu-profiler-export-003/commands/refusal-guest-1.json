@@ -1,0 +1,24 @@
+{
+  "kind": "process",
+  "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-003/package-summary/player/incant_game_player",
+    "--package",
+    "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-003/package-summary/player/data",
+    "--ticks",
+    "3",
+    "--input-recording",
+    "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-003/failure-input.json",
+    "--output",
+    "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-003/failed-1.pcm",
+    "--profile"
+  ],
+  "pid": 66675,
+  "exit": 1,
+  "started_ns": 1791861396015173000,
+  "ended_ns": 1791861396026651000,
+  "stdout": "",
+  "stderr": "Error: Session(Script(Javascript { phase: \"tick\", message: \"Error: cpu-profiler deliberate trap\" }))\n",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_sha256": "c368f1cb7f2b54658ae267a5803a8f8c9f4fad7d4f32d6092d9d0bd5ab500797",
+  "exception": null
+}
