@@ -287,7 +287,7 @@ fn directional_only(r: &Renderer) {
 #[test]
 #[ignore = "requires a native GPU; coordinated baseline/cooked run with --nocapture"]
 fn extended_cluster_readback_cameras_viewports_and_retained_motion() {
-    let renderer = Renderer::headless().unwrap();
+    let renderer = crate::test_support::checked(Renderer::headless().unwrap());
     println!("cluster-readback-adapter {:?}", renderer.adapter.get_info());
     configurations(&renderer);
     retained(&renderer, false);
