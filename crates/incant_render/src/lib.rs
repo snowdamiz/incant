@@ -16,6 +16,7 @@ mod hdr_output;
 mod lighting;
 mod material_pipeline;
 mod materials;
+pub mod metalfx;
 mod models;
 mod output;
 mod pipeline_cache;
@@ -90,6 +91,10 @@ pub struct Renderer {
     pub adapter_name: String,
     /// Startup-only persistence result; a supplied cache is not a measured hit.
     pub pipeline_cache_report: PipelineCacheReport,
+    #[cfg(feature = "native-metalfx")]
+    metalfx: Option<metalfx::System>,
+    #[cfg(feature = "native-metalfx")]
+    metalfx_admission: Option<std::result::Result<(), metalfx::Fallback>>,
     diagnostic_pipeline: wgpu::RenderPipeline,
     models: Mutex<models::ModelCache>,
     materials: materials::MaterialSystem,
@@ -201,6 +206,10 @@ impl Renderer {
             adapter,
             adapter_name,
             pipeline_cache_report: cache_session.finish(),
+            #[cfg(feature = "native-metalfx")]
+            metalfx: None,
+            #[cfg(feature = "native-metalfx")]
+            metalfx_admission: None,
             diagnostic_pipeline,
             models: Mutex::new(HashMap::new()),
             materials,
@@ -312,8 +321,14 @@ impl Renderer {
             None,
             None,
             None,
+            #[cfg(feature = "native-metalfx")]
+            None,
         )
+        .and_then(graph::into_single)
     }
+    // The optional native borrow extends the existing private transaction; the
+    // public single-command-buffer draw API remains unchanged.
+    #[cfg_attr(feature = "native-metalfx", allow(clippy::too_many_arguments))]
     fn draw_scene_scaled(
         &self,
         scene: &RenderScene,
@@ -322,7 +337,11 @@ impl Renderer {
         motion: Option<motion::MotionDraw>,
         temporal: Option<&temporal::Pending>,
         upscaling: Option<&upscaling::Pending>,
-    ) -> Result<wgpu::CommandBuffer> {
+        #[cfg(feature = "native-metalfx")] native: Option<(
+            &mut metalfx::Owner,
+            &mut metalfx::Pending,
+        )>,
+    ) -> Result<graph::Commands> {
         let RetainedTarget {
             view,
             format,
@@ -410,19 +429,43 @@ impl Renderer {
                 plan.output_mapping
             },
         )?;
-        self.graph.encode(
-            &self.device,
-            graph::PreparedFrame {
-                diagnostics,
-                models,
-                motion,
-                temporal,
-                upscaling: upscale_draw,
-                sprites,
-                text,
-                output,
-            },
-        )
+        let frame = graph::PreparedFrame {
+            diagnostics,
+            models,
+            motion,
+            temporal,
+            upscaling: upscale_draw,
+            sprites,
+            text,
+            output,
+        };
+        #[cfg(feature = "native-metalfx")]
+        if let Some((owner, pending)) = native
+            && pending.native()
+        {
+            let draw = self
+                .metalfx
+                .as_ref()
+                .ok_or(metalfx::MetalFxError::Disabled)?
+                .prepare(
+                    &self.device,
+                    pending,
+                    upscaling.ok_or(metalfx::MetalFxError::Interop)?,
+                    &attachments.color,
+                    scene.camera,
+                )?;
+            let completion = pending.completion();
+            return self.graph.encode_native(
+                &self.device,
+                frame,
+                &draw,
+                || Ok(owner.encode(&self.device, pending)?),
+                completion,
+            );
+        }
+        self.graph
+            .encode(&self.device, frame)
+            .map(graph::from_single)
     }
     /// Renderer-lifetime text texture/quad upload counts, for retention checks.
     pub fn text_uploads(&self) -> TextUploads {

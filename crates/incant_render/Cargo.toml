@@ -21,6 +21,8 @@ cooked-ui = ["cooked-output"]
 cooked-text = ["cooked-output"]
 cooked-materials = ["cooked-geometry"]
 cooked-clusters = ["cooked-output"]
+# Explicit Apple opt-in; portable temporal fallback remains available.
+native-metalfx = ["dep:objc2", "dep:objc2-metal", "dep:objc2-metal-fx"]
 
 # Select one physics kernel for the entire process, including build/test hosts.
 physics-deterministic = [
@@ -72,3 +74,8 @@ tempfile = "3.27"
 
 [target.'cfg(unix)'.dependencies]
 rustix = { version = "=1.1.5", features = ["fs", "process"], optional = true }
+
+[target.'cfg(any(target_os = "macos", target_os = "ios"))'.dependencies]
+objc2 = { version = "=0.6.5", optional = true }
+objc2-metal = { version = "=0.3.2", default-features = false, optional = true }
+objc2-metal-fx = { version = "=0.3.2", default-features = false, features = ["std", "MTLFXTemporalScaler"], optional = true }

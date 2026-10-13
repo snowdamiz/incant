@@ -1,0 +1,2419 @@
+{
+  "status": "Source003 independently accepted; CPU compilation/checks complete; final artifact audit and delegated GPU/appearance pending",
+  "source_review": {
+    "path": "docs/spikes/evidence/native-metalfx-source-review.json",
+    "sha256": "105e456508d7ec75361f886734c43535e92100ba34567f5992635bd68c61f85b",
+    "scope": "Independent source-only MetalFX ownership, raw command encoding, lifecycle/transition and fallback review; no build, GPU, native execution, visual or final producer evidence approval"
+  },
+  "source_freeze": {
+    "created_at": "2026-10-13T07:08:35.585800+00:00",
+    "base": "a337c86d8d74e819b3e879d4a7db830b74de8862",
+    "sources": [
+      {
+        "path": "Cargo.lock",
+        "bytes": 253273,
+        "sha256": "68c187dbeb8d0e45d79c83f5503950070bd13090dbe456ad4970f5444c4417a6",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/Cargo.lock"
+      },
+      {
+        "path": "crates/incant_render/Cargo.toml",
+        "bytes": 2967,
+        "sha256": "cfc6f23b6ae4fca82cd480f3bfe41047bf20b876a83f4898d0b691efa550afdd",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render/Cargo.toml"
+      },
+      {
+        "path": "crates/incant_render/src/graph.rs",
+        "bytes": 13776,
+        "sha256": "d75e5b7b37bca24214b29cda90109abfa756bb0e0b61d6621ba8a9d40573e641",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render/src/graph.rs"
+      },
+      {
+        "path": "crates/incant_render/src/graph/native.rs",
+        "bytes": 4518,
+        "sha256": "418f07120da1a782f4411ebcf1636cca38894af3607fe0fdf0c3ab3d93575c0d",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render/src/graph/native.rs"
+      },
+      {
+        "path": "crates/incant_render/src/lib.rs",
+        "bytes": 22374,
+        "sha256": "7539387113270a4fe4443cf897b0e762182ab093d7c061548497d52fd715bb19",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render/src/lib.rs"
+      },
+      {
+        "path": "crates/incant_render/src/metalfx/composite.wgsl",
+        "bytes": 1682,
+        "sha256": "cbe955c905a55650e06e5d1f3668dcc04de70beead4333315169ddbf2b4f66fc",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render/src/metalfx/composite.wgsl"
+      },
+      {
+        "path": "crates/incant_render/src/metalfx/lifecycle.rs",
+        "bytes": 7377,
+        "sha256": "8eb56da2f5a793f4d2a268fe99ab5e8cc02837667d5260d67395f09bc80218c5",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render/src/metalfx/lifecycle.rs"
+      },
+      {
+        "path": "crates/incant_render/src/metalfx/mod.rs",
+        "bytes": 2339,
+        "sha256": "cdb5282de97ec2a14b26fc75f7482cea42e1e167bec7a948acf29d73d6022ea5",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render/src/metalfx/mod.rs"
+      },
+      {
+        "path": "crates/incant_render/src/metalfx/native.rs",
+        "bytes": 9393,
+        "sha256": "74f41a8fbdfa22702c0bd2dbcf9165e8dcf5f64701e539a85d9cc1cc9a4e251c",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render/src/metalfx/native.rs"
+      },
+      {
+        "path": "crates/incant_render/src/metalfx/numerics.rs",
+        "bytes": 4799,
+        "sha256": "b98f99ba898674847281183977c9263e21072ecb63b9e8211c451a183eee7228",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render/src/metalfx/numerics.rs"
+      },
+      {
+        "path": "crates/incant_render/src/metalfx/owner.rs",
+        "bytes": 8615,
+        "sha256": "632a11e10cff34b69bc2f31c9f0a7719c0edf64551022ed3a50fbe1b7b0ab59b",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render/src/metalfx/owner.rs"
+      },
+      {
+        "path": "crates/incant_render/src/metalfx/plan.rs",
+        "bytes": 4179,
+        "sha256": "677a09e0033012f91bd46d9363aba2240ccf213b5db32246b32f4a8771c0dbdf",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render/src/metalfx/plan.rs"
+      },
+      {
+        "path": "crates/incant_render/src/metalfx/prepare.wgsl",
+        "bytes": 1105,
+        "sha256": "452887b49bb41def01b56cdfe11e336faae6de1965b2008d55b757f0ba9d1dc1",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render/src/metalfx/prepare.wgsl"
+      },
+      {
+        "path": "crates/incant_render/src/metalfx/system.rs",
+        "bytes": 12773,
+        "sha256": "c66f3bb80245dee5e5ac6e4c6217878c481f1c01da27181ddd4548067897d85c",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render/src/metalfx/system.rs"
+      },
+      {
+        "path": "crates/incant_render/src/metalfx/targets.rs",
+        "bytes": 2067,
+        "sha256": "5f03770e7a48dcb7a2ff3e4860f5e8f0a876335f16f9d3d13dad402c0fe0d198",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render/src/metalfx/targets.rs"
+      },
+      {
+        "path": "crates/incant_render/src/metalfx_retained_tests.rs",
+        "bytes": 6714,
+        "sha256": "fe6b1f209f4ddd0282b01436b944b8f8da688125003c6aa809d66380d0475b32",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render/src/metalfx_retained_tests.rs"
+      },
+      {
+        "path": "crates/incant_render/src/retained.rs",
+        "bytes": 25124,
+        "sha256": "e263b508fc0c42eaeef19040d76201921778129307c5269827781ca357362068",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render/src/retained.rs"
+      },
+      {
+        "path": "crates/incant_render/src/upscaling/owner.rs",
+        "bytes": 4555,
+        "sha256": "7491961f813a46daf634761975584eb3aef4b93820fc550cd86a3c47a2fe254a",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render/src/upscaling/owner.rs"
+      },
+      {
+        "path": "crates/incant_render_gpu_host/Cargo.toml",
+        "bytes": 2064,
+        "sha256": "924eac71db24a933ab5341eb89aeb07e2d212e8805ea85289ad6fb355183ea92",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render_gpu_host/Cargo.toml"
+      },
+      {
+        "path": "crates/incant_render_gpu_host/src/lib.rs",
+        "bytes": 14589,
+        "sha256": "8026419afd21bd83df0047da8997fac4b938f887c4d87b92b6846ee34453bfe9",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render_gpu_host/src/lib.rs"
+      },
+      {
+        "path": "crates/incant_render_gpu_host/src/motion.rs",
+        "bytes": 5099,
+        "sha256": "14854dd520e3c496499096dcc258b0c121ae7838813f362386e758029b33f899",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render_gpu_host/src/motion.rs"
+      },
+      {
+        "path": "crates/incant_render_gpu_host/src/resolution.rs",
+        "bytes": 3282,
+        "sha256": "cba901f393885dbf6f1a093e8ab0cbcb341ffebc1671ac47d23a9d22eef974e9",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render_gpu_host/src/resolution.rs"
+      },
+      {
+        "path": "docs/spikes/native-metalfx.md",
+        "bytes": 7404,
+        "sha256": "4d5ffa72669d99adc67d93f2c3ae0e9bfdbddbf427faf430131963a9000b9367",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/docs/spikes/native-metalfx.md"
+      }
+    ],
+    "unchanged_baselines": [
+      {
+        "path": "Cargo.toml",
+        "bytes": 3584,
+        "sha256": "cfed0cb20b760c0028e327913de49f59a5e71f5ac1becfaa5da241efeaf98857",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/Cargo.toml"
+      },
+      {
+        "path": "PLAN.md",
+        "bytes": 130811,
+        "sha256": "c60adc7457e6f5929b3430876f6b8ea02acffce5bf55fbaae9090933fe4aab6c",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/PLAN.md"
+      },
+      {
+        "path": "crates/incant_render/build.rs",
+        "bytes": 5555,
+        "sha256": "e43a3198ce1a5f03ed54291a7d30e13c77f676941e6b41394a55906530cd8663",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render/build.rs"
+      },
+      {
+        "path": "crates/incant_render/src/upscaling/common.wgsl",
+        "bytes": 1622,
+        "sha256": "7a1041707465239b046b31ae9d86e87f4372635056622eeacb8a3142e105344a",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render/src/upscaling/common.wgsl"
+      },
+      {
+        "path": "crates/incant_render/src/upscaling/resolve.wgsl",
+        "bytes": 3589,
+        "sha256": "a8e646701cb7e5d24476a2ecc49a76b2f7d77b3646ddfe469093586316337d34",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render/src/upscaling/resolve.wgsl"
+      },
+      {
+        "path": "crates/incant_render/src/upscaling/composite.wgsl",
+        "bytes": 820,
+        "sha256": "4be7f263090c163350cd5e54541330a6aedd2e32c5619532c5ca9d2fe6f43845",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render/src/upscaling/composite.wgsl"
+      },
+      {
+        "path": "crates/incant_render/src/timing/recorder.rs",
+        "bytes": 8077,
+        "sha256": "a86f809f7999edd11d3455889038b99a64f0cb76bd1139925bb3b72de3ec0e1a",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render/src/timing/recorder.rs"
+      },
+      {
+        "path": "crates/incant_render/src/timing/mod.rs",
+        "bytes": 3549,
+        "sha256": "eceadbf21fb200917eb26783ba0c74e944d7428c9fc1e4f4136fed9febb5a32e",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render/src/timing/mod.rs"
+      },
+      {
+        "path": "crates/incant_render/src/frame.rs",
+        "bytes": 2700,
+        "sha256": "1db2c09f12ea6e60ca3d0e8aaba17314e6d0d9e4f76e11cc3e0a7bd524323e7e",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render/src/frame.rs"
+      },
+      {
+        "path": "crates/incant_render/src/output.rs",
+        "bytes": 7872,
+        "sha256": "4004e06e997a8b778d38927c0d00502c5f98e531c1af64896b4b85ce96841e37",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render/src/output.rs"
+      }
+    ],
+    "pinned": [
+      {
+        "path": "pinned/6-command_encoder.rs",
+        "bytes": 19855,
+        "sha256": "b5a770f88388e3b1368e4c8adeb65886958353fb6130ac392b1f43e7f7a8bbe7",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/pinned/6-command_encoder.rs",
+        "original": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wgpu-29.0.4/src/api/command_encoder.rs"
+      },
+      {
+        "path": "pinned/7-texture.rs",
+        "bytes": 6446,
+        "sha256": "aee3469d3d722c85521b64a770de20105e49aa64c6f56342442c7335f79505cd",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/pinned/7-texture.rs",
+        "original": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wgpu-29.0.4/src/api/texture.rs"
+      },
+      {
+        "path": "pinned/8-as_hal.rs",
+        "bytes": 12413,
+        "sha256": "5d08d8e49b016abb662957d8e42ab748d580a2f3e449caeeb7311f222b8818f6",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/pinned/8-as_hal.rs",
+        "original": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wgpu-core-29.0.4/src/as_hal.rs"
+      },
+      {
+        "path": "pinned/9-mod.rs",
+        "bytes": 75727,
+        "sha256": "f995d91f620482e378724e3a3e972e4f1d65502a8c83f43469ce079887a5d8b8",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/pinned/9-mod.rs",
+        "original": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wgpu-core-29.0.4/src/command/mod.rs"
+      },
+      {
+        "path": "pinned/10-mod.rs",
+        "bytes": 36654,
+        "sha256": "daed7a2d7c1cd7b9431b3009b5b7feb2ca8e45648ffd7eb0185c46cfcbeb2ada",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/pinned/10-mod.rs",
+        "original": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wgpu-hal-29.0.4/src/metal/mod.rs"
+      },
+      {
+        "path": "pinned/11-command.rs",
+        "bytes": 76832,
+        "sha256": "49b3dd48ea241ac66738854b9e76a77ba2863fdc9fe1aaa936e1bc16e5d79e52",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/pinned/11-command.rs",
+        "original": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wgpu-hal-29.0.4/src/metal/command.rs"
+      },
+      {
+        "path": "pinned/12-device.rs",
+        "bytes": 89259,
+        "sha256": "c34d2bd9fe2a547f5cb28106c07ed22c99aa5891c0ad6a75f08ec6d70a1f6864",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/pinned/12-device.rs",
+        "original": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wgpu-hal-29.0.4/src/metal/device.rs"
+      },
+      {
+        "path": "pinned/13-MTLFXTemporalScaler.h",
+        "bytes": 23700,
+        "sha256": "e6cbd09203483aa5ab338ff8768cc2d04210e139efcb88803807a2291eb9030a",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/pinned/13-MTLFXTemporalScaler.h",
+        "original": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX27.0.sdk/System/Library/Frameworks/MetalFX.framework/Headers/MTLFXTemporalScaler.h"
+      },
+      {
+        "path": "pinned/objc-0-MTLFXTemporalScaler.rs",
+        "bytes": 35680,
+        "sha256": "c80bf2eede0888940630d6e17ff58773d7deb1f0d60a3d78388c76a486c557ef",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/pinned/objc-0-MTLFXTemporalScaler.rs",
+        "original": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/objc2-metal-fx-0.3.2/src/generated/MTLFXTemporalScaler.rs"
+      },
+      {
+        "path": "pinned/objc-1-object.rs",
+        "bytes": 3715,
+        "sha256": "190e54d96a4102babc3eaaf9993eea9cfaf5b7354602bc173d12c423e0f2c67e",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/pinned/objc-1-object.rs",
+        "original": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/objc2-0.6.5/src/ffi/object.rs"
+      }
+    ],
+    "lock_audit": {
+      "old_packages": 968,
+      "unchanged_old_packages": 967,
+      "modified_package": "incant_render",
+      "added_edges": [
+        "objc2",
+        "objc2-metal",
+        "objc2-metal-fx"
+      ],
+      "added_package": [
+        "objc2-metal-fx",
+        "0.3.2",
+        "registry+https://github.com/rust-lang/crates.io-index"
+      ]
+    },
+    "gpu_execution": false,
+    "supersedes": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-002/freeze.json",
+    "delta": "Retain the one budgeted native scaler/target cache through temporary portable fallback; invalidate history without needless unchanged-extent recompilation. Add private test-only cache identity accessor and assertions across actual fallback/resume; document policy."
+  },
+  "source_freeze_sha256": "b68c62d5e58b89a07aebfd17f144902917cee5890c4d09fbf06f51a64146a77b",
+  "checks": [
+    {
+      "generation": "native-metalfx-checks-001",
+      "label": "native-all",
+      "argv": [
+        "tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host",
+        "--features",
+        "incant_render_gpu_host/native-metalfx"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 17.732754945755005,
+      "pid": 66269,
+      "reaped": true,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-001/native-all.log",
+      "sha256": "41f0650dac77566f3a3d279b9ab591cb73aa743af4a9de557095c56875d59c23"
+    },
+    {
+      "generation": "native-metalfx-checks-001",
+      "label": "native-clippy",
+      "argv": [
+        "tools/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host",
+        "--features",
+        "incant_render_gpu_host/native-metalfx",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 1.9377059936523438,
+      "pid": 66455,
+      "reaped": true,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-001/native-clippy.log",
+      "sha256": "faaae28110f269817988bdad9fb366f0d59c2037fb22caf070e5771e6b05866c"
+    },
+    {
+      "generation": "native-metalfx-checks-001",
+      "label": "default-all",
+      "argv": [
+        "tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 20.626322269439697,
+      "pid": 66477,
+      "reaped": true,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-001/default-all.log",
+      "sha256": "0d2fa1385238ade1e475565435af87c7c982c2535d9d8641904dd5d7626cb72b"
+    },
+    {
+      "generation": "native-metalfx-checks-001",
+      "label": "default-clippy",
+      "argv": [
+        "tools/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 2.384321928024292,
+      "pid": 66685,
+      "reaped": true,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-001/default-clippy.log",
+      "sha256": "e3ca6ff02c1ec8eb9ef8b57d3bba62195aeaec5b0c21243a6fa4f963a3a06785"
+    },
+    {
+      "generation": "native-metalfx-checks-001",
+      "label": "web-native",
+      "argv": [
+        "tools/cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host",
+        "--features",
+        "incant_render_gpu_host/native-metalfx",
+        "--target",
+        "wasm32-unknown-unknown",
+        "--lib"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 1.3759851455688477,
+      "pid": 66718,
+      "reaped": true,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-001/web-native.log",
+      "sha256": "f15606f61ccf49bb10b4c601ca95e4480f6a3e41c797ab0cd2ba6c59ea3b825e"
+    },
+    {
+      "generation": "native-metalfx-checks-001",
+      "label": "web-default",
+      "argv": [
+        "tools/cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host",
+        "--target",
+        "wasm32-unknown-unknown",
+        "--lib"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 0.8025431632995605,
+      "pid": 66737,
+      "reaped": true,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-001/web-default.log",
+      "sha256": "a8f05712b836e8eeb7354bc96b913405e0c2a43225d0a916518322d4f3b02197"
+    },
+    {
+      "generation": "native-metalfx-checks-001",
+      "label": "ios-native",
+      "argv": [
+        "tools/cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--features",
+        "native-metalfx",
+        "--target",
+        "aarch64-apple-ios",
+        "--lib"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 13.96304178237915,
+      "pid": 66747,
+      "reaped": true,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-001/ios-native.log",
+      "sha256": "3d1d90eb58100602eca4028f2dca1a15c7990e4c421069180661af019eb65a70"
+    },
+    {
+      "generation": "native-metalfx-checks-001",
+      "label": "cooked-refusal",
+      "argv": [
+        "tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--features",
+        "native-metalfx,cooked-output,cooked-geometry,cooked-sprites,cooked-ui,cooked-text,cooked-materials,cooked-clusters",
+        "--lib"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 9.340677976608276,
+      "pid": 66999,
+      "reaped": true,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-001/cooked-refusal.log",
+      "sha256": "74523cb14e3863898615c1c95638805288cea3482b75193d14ce537bef0c931e"
+    },
+    {
+      "generation": "native-metalfx-checks-001",
+      "label": "runtime-graph",
+      "argv": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_render",
+        "incant_render_gpu_host"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 0.45157694816589355,
+      "pid": 67111,
+      "reaped": true,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-001/runtime-graph.log",
+      "sha256": "ee908c708715917b5f33863cfa9ff249311ea508407af2fd9ac86f714679c03c"
+    },
+    {
+      "generation": "native-metalfx-checks-001",
+      "label": "format",
+      "argv": [
+        "tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 1.3389549255371094,
+      "pid": 67118,
+      "reaped": true,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-001/format.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "generation": "native-metalfx-checks-001",
+      "label": "conventions",
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 0.049179792404174805,
+      "pid": 67133,
+      "reaped": true,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-001/conventions.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "generation": "native-metalfx-checks-002",
+      "label": "native-all",
+      "argv": [
+        "tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host",
+        "--features",
+        "incant_render_gpu_host/native-metalfx"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 18.048139095306396,
+      "pid": 68192,
+      "reaped": true,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-002/native-all.log",
+      "sha256": "b8e0ba4212d87c6f555d1dc627917446935e542c1fd639dba7b0e8c6857d5fdd"
+    },
+    {
+      "generation": "native-metalfx-checks-002",
+      "label": "native-clippy",
+      "argv": [
+        "tools/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host",
+        "--features",
+        "incant_render_gpu_host/native-metalfx",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 1.9508140087127686,
+      "pid": 68391,
+      "reaped": true,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-002/native-clippy.log",
+      "sha256": "24ec07f33a810b66f37d214aa844b699c05ba5cf97e8b21e83d0eb74d34cdd5b"
+    },
+    {
+      "generation": "native-metalfx-checks-002",
+      "label": "web-native",
+      "argv": [
+        "tools/cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host",
+        "--features",
+        "incant_render_gpu_host/native-metalfx",
+        "--target",
+        "wasm32-unknown-unknown",
+        "--lib"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 0.7990961074829102,
+      "pid": 68425,
+      "reaped": true,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-002/web-native.log",
+      "sha256": "a1c5a0ca7b50feb313ad9e1e33139fd180ac6aeee536a11cdbc47cd9859b537b"
+    },
+    {
+      "generation": "native-metalfx-checks-002",
+      "label": "ios-native",
+      "argv": [
+        "tools/cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--features",
+        "native-metalfx",
+        "--target",
+        "aarch64-apple-ios",
+        "--lib"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 0.8514590263366699,
+      "pid": 68435,
+      "reaped": true,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-002/ios-native.log",
+      "sha256": "86e47425112c6b3fb4a9f7d0453e7758b2ee473ae4f5b3448604c6a7042160a7"
+    },
+    {
+      "generation": "native-metalfx-checks-002",
+      "label": "format",
+      "argv": [
+        "tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 1.202329158782959,
+      "pid": 68441,
+      "reaped": true,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-002/format.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "generation": "native-metalfx-checks-003",
+      "label": "native-all",
+      "argv": [
+        "tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host",
+        "--features",
+        "incant_render_gpu_host/native-metalfx"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 18.835619688034058,
+      "pid": 71305,
+      "reaped": true,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-003/native-all.log",
+      "sha256": "3cf390763f891f460b6f7e038f45bc79bc2a06b75f12cfde2db4d5a5a63899b0"
+    },
+    {
+      "generation": "native-metalfx-checks-003",
+      "label": "native-clippy",
+      "argv": [
+        "tools/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host",
+        "--features",
+        "incant_render_gpu_host/native-metalfx",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 2.1400461196899414,
+      "pid": 71479,
+      "reaped": true,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-003/native-clippy.log",
+      "sha256": "81ae47405059b2806dcca8d0b962a13cc8fd6e5ed68b46319a7c54a47fa3980d"
+    },
+    {
+      "generation": "native-metalfx-checks-003",
+      "label": "web-native",
+      "argv": [
+        "tools/cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host",
+        "--features",
+        "incant_render_gpu_host/native-metalfx",
+        "--target",
+        "wasm32-unknown-unknown",
+        "--lib"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 1.146090030670166,
+      "pid": 71501,
+      "reaped": true,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-003/web-native.log",
+      "sha256": "a1a4c05b6180bbeee5dc6b049c611adcf1f712f3d755f3c08a14b7d746ad80bb"
+    },
+    {
+      "generation": "native-metalfx-checks-003",
+      "label": "ios-native",
+      "argv": [
+        "tools/cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--features",
+        "native-metalfx",
+        "--target",
+        "aarch64-apple-ios",
+        "--lib"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 1.2373788356781006,
+      "pid": 71522,
+      "reaped": true,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-003/ios-native.log",
+      "sha256": "c8c089b7a8636db0edb4733b1021b12d1daed8044461911c78327d7ce2540ca0"
+    },
+    {
+      "generation": "native-metalfx-checks-003",
+      "label": "format",
+      "argv": [
+        "tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 1.2687561511993408,
+      "pid": 71550,
+      "reaped": true,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-003/format.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "counts": {
+    "native-metalfx-checks-001/native-all": {
+      "passed": 128,
+      "failed": 0,
+      "ignored": 99,
+      "groups": 9
+    },
+    "native-metalfx-checks-001/default-all": {
+      "passed": 127,
+      "failed": 0,
+      "ignored": 98,
+      "groups": 9
+    },
+    "native-metalfx-checks-001/cooked-refusal": {
+      "passed": 133,
+      "failed": 0,
+      "ignored": 41,
+      "groups": 1
+    },
+    "native-metalfx-checks-002/native-all": {
+      "passed": 128,
+      "failed": 0,
+      "ignored": 99,
+      "groups": 9
+    },
+    "native-metalfx-checks-003/native-all": {
+      "passed": 128,
+      "failed": 0,
+      "ignored": 99,
+      "groups": 9
+    }
+  },
+  "artifacts": [
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-001/files/Cargo.lock",
+      "raw_sha256": "68c187dbeb8d0e45d79c83f5503950070bd13090dbe456ad4970f5444c4417a6",
+      "raw_bytes": 253273,
+      "retained": "docs/spikes/evidence/native-metalfx/68c187dbeb8d0e45d79c83f5503950070bd13090dbe456ad4970f5444c4417a6.gz",
+      "retained_sha256": "352446a3112d5416495c0bd04aeeba8622810e1a572f587ccd108fc26ab9746f"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-001/files/Cargo.toml",
+      "raw_sha256": "cfed0cb20b760c0028e327913de49f59a5e71f5ac1becfaa5da241efeaf98857",
+      "raw_bytes": 3584,
+      "retained": "docs/spikes/evidence/native-metalfx/cfed0cb20b760c0028e327913de49f59a5e71f5ac1becfaa5da241efeaf98857.gz",
+      "retained_sha256": "8a88b94a437b76f63d28bb04d3f5a7a21132718756eaa2fe89a59d328d319470"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-001/files/PLAN.md",
+      "raw_sha256": "c60adc7457e6f5929b3430876f6b8ea02acffce5bf55fbaae9090933fe4aab6c",
+      "raw_bytes": 130811,
+      "retained": "docs/spikes/evidence/native-metalfx/c60adc7457e6f5929b3430876f6b8ea02acffce5bf55fbaae9090933fe4aab6c.gz",
+      "retained_sha256": "931e0af23128a26a4d8d2a175242268a194861d537fc8f7f6a194ce0fba65ad5"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-001/files/crates/incant_render/Cargo.toml",
+      "raw_sha256": "cfc6f23b6ae4fca82cd480f3bfe41047bf20b876a83f4898d0b691efa550afdd",
+      "raw_bytes": 2967,
+      "retained": "docs/spikes/evidence/native-metalfx/cfc6f23b6ae4fca82cd480f3bfe41047bf20b876a83f4898d0b691efa550afdd.gz",
+      "retained_sha256": "d4f6ff0313e7c67025616f01bea381471cbd0384a5b027cf004103697e81045b"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-001/files/crates/incant_render/build.rs",
+      "raw_sha256": "e43a3198ce1a5f03ed54291a7d30e13c77f676941e6b41394a55906530cd8663",
+      "raw_bytes": 5555,
+      "retained": "docs/spikes/evidence/native-metalfx/e43a3198ce1a5f03ed54291a7d30e13c77f676941e6b41394a55906530cd8663.gz",
+      "retained_sha256": "a30f610126013f8d1bf3b76d61311a468f7fd31ec60d1b8699211bc0c79601fd"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-001/files/crates/incant_render/src/frame.rs",
+      "raw_sha256": "1db2c09f12ea6e60ca3d0e8aaba17314e6d0d9e4f76e11cc3e0a7bd524323e7e",
+      "raw_bytes": 2700,
+      "retained": "docs/spikes/evidence/native-metalfx/1db2c09f12ea6e60ca3d0e8aaba17314e6d0d9e4f76e11cc3e0a7bd524323e7e.gz",
+      "retained_sha256": "87cd843dbba5342e8182fc18ea3b57dbfa70000814b7f571b44849103755e0a8"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-001/files/crates/incant_render/src/graph/native.rs",
+      "raw_sha256": "418f07120da1a782f4411ebcf1636cca38894af3607fe0fdf0c3ab3d93575c0d",
+      "raw_bytes": 4518,
+      "retained": "docs/spikes/evidence/native-metalfx/418f07120da1a782f4411ebcf1636cca38894af3607fe0fdf0c3ab3d93575c0d.gz",
+      "retained_sha256": "bc6870802c758ec5e64abc487108563af7a2caf9184971f99e9fec09ab703ff9"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-001/files/crates/incant_render/src/graph.rs",
+      "raw_sha256": "d75e5b7b37bca24214b29cda90109abfa756bb0e0b61d6621ba8a9d40573e641",
+      "raw_bytes": 13776,
+      "retained": "docs/spikes/evidence/native-metalfx/d75e5b7b37bca24214b29cda90109abfa756bb0e0b61d6621ba8a9d40573e641.gz",
+      "retained_sha256": "99897bc01bc262c7ccc2523396c14c15a732efe23ac6f9be931b76970dcb75a2"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-001/files/crates/incant_render/src/lib.rs",
+      "raw_sha256": "7539387113270a4fe4443cf897b0e762182ab093d7c061548497d52fd715bb19",
+      "raw_bytes": 22374,
+      "retained": "docs/spikes/evidence/native-metalfx/7539387113270a4fe4443cf897b0e762182ab093d7c061548497d52fd715bb19.gz",
+      "retained_sha256": "2c31f0ec231c6be271d964b7b86ec7b2eed4d31ca15e693ab1bec29d221fe4da"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-001/files/crates/incant_render/src/metalfx/composite.wgsl",
+      "raw_sha256": "cbe955c905a55650e06e5d1f3668dcc04de70beead4333315169ddbf2b4f66fc",
+      "raw_bytes": 1682,
+      "retained": "docs/spikes/evidence/native-metalfx/cbe955c905a55650e06e5d1f3668dcc04de70beead4333315169ddbf2b4f66fc.gz",
+      "retained_sha256": "7d825dea2740842a793e3718c363de146b53e6d61e2f8104c644974b8cb80487"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-001/files/crates/incant_render/src/metalfx/lifecycle.rs",
+      "raw_sha256": "8eb56da2f5a793f4d2a268fe99ab5e8cc02837667d5260d67395f09bc80218c5",
+      "raw_bytes": 7377,
+      "retained": "docs/spikes/evidence/native-metalfx/8eb56da2f5a793f4d2a268fe99ab5e8cc02837667d5260d67395f09bc80218c5.gz",
+      "retained_sha256": "abc74e12fb1d44ee35a9d6839e22772db49485e1e59348a9c7697bdae2f9afef"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-001/files/crates/incant_render/src/metalfx/mod.rs",
+      "raw_sha256": "cdb5282de97ec2a14b26fc75f7482cea42e1e167bec7a948acf29d73d6022ea5",
+      "raw_bytes": 2339,
+      "retained": "docs/spikes/evidence/native-metalfx/cdb5282de97ec2a14b26fc75f7482cea42e1e167bec7a948acf29d73d6022ea5.gz",
+      "retained_sha256": "1579b4933be6b337af391c4b79ce5ba1073d3655ea77ba009ca6ce5139e64251"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-001/files/crates/incant_render/src/metalfx/native.rs",
+      "raw_sha256": "74f41a8fbdfa22702c0bd2dbcf9165e8dcf5f64701e539a85d9cc1cc9a4e251c",
+      "raw_bytes": 9393,
+      "retained": "docs/spikes/evidence/native-metalfx/74f41a8fbdfa22702c0bd2dbcf9165e8dcf5f64701e539a85d9cc1cc9a4e251c.gz",
+      "retained_sha256": "3ef9840ddb50c4395e97a94a8bf2b60ac81fc01936758e10c21ef478d02cad65"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-001/files/crates/incant_render/src/metalfx/numerics.rs",
+      "raw_sha256": "b98f99ba898674847281183977c9263e21072ecb63b9e8211c451a183eee7228",
+      "raw_bytes": 4799,
+      "retained": "docs/spikes/evidence/native-metalfx/b98f99ba898674847281183977c9263e21072ecb63b9e8211c451a183eee7228.gz",
+      "retained_sha256": "f1c2cd03c217be61cab01091ecc576745c95b89fd6d0433c88c1734cbce80964"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-001/files/crates/incant_render/src/metalfx/owner.rs",
+      "raw_sha256": "62e2f05bdfea40d7c8c5c7603cf37cc9b90df094eba11440f577526530704f7e",
+      "raw_bytes": 8449,
+      "retained": "docs/spikes/evidence/native-metalfx/62e2f05bdfea40d7c8c5c7603cf37cc9b90df094eba11440f577526530704f7e.gz",
+      "retained_sha256": "55c06c58bdc705e498e32ff6d9193d0b1d5c5fc5e14f273f913c32a2f4651a10"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-001/files/crates/incant_render/src/metalfx/plan.rs",
+      "raw_sha256": "677a09e0033012f91bd46d9363aba2240ccf213b5db32246b32f4a8771c0dbdf",
+      "raw_bytes": 4179,
+      "retained": "docs/spikes/evidence/native-metalfx/677a09e0033012f91bd46d9363aba2240ccf213b5db32246b32f4a8771c0dbdf.gz",
+      "retained_sha256": "bbfcf56960fc8b7830c0930e11b06b91b617df1064db031ab88da603b3bae219"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-001/files/crates/incant_render/src/metalfx/prepare.wgsl",
+      "raw_sha256": "452887b49bb41def01b56cdfe11e336faae6de1965b2008d55b757f0ba9d1dc1",
+      "raw_bytes": 1105,
+      "retained": "docs/spikes/evidence/native-metalfx/452887b49bb41def01b56cdfe11e336faae6de1965b2008d55b757f0ba9d1dc1.gz",
+      "retained_sha256": "f6835bacb7f7a7ab756e4391158ef950ea9e165d1da69472110b728b9654a501"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-001/files/crates/incant_render/src/metalfx/system.rs",
+      "raw_sha256": "c66f3bb80245dee5e5ac6e4c6217878c481f1c01da27181ddd4548067897d85c",
+      "raw_bytes": 12773,
+      "retained": "docs/spikes/evidence/native-metalfx/c66f3bb80245dee5e5ac6e4c6217878c481f1c01da27181ddd4548067897d85c.gz",
+      "retained_sha256": "5c1adccbbd01586e3a6ea8fa5a5545394be60d279690054fc6c427f24208fb4c"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-001/files/crates/incant_render/src/metalfx/targets.rs",
+      "raw_sha256": "5f03770e7a48dcb7a2ff3e4860f5e8f0a876335f16f9d3d13dad402c0fe0d198",
+      "raw_bytes": 2067,
+      "retained": "docs/spikes/evidence/native-metalfx/5f03770e7a48dcb7a2ff3e4860f5e8f0a876335f16f9d3d13dad402c0fe0d198.gz",
+      "retained_sha256": "cc35844c3ee7a48efac3f07b5367e1ab69ac9d1d7d88c6375eca7c55fa9c887c"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-001/files/crates/incant_render/src/metalfx_retained_tests.rs",
+      "raw_sha256": "fe0dca68b4d40f51c906efcab51ec6f9d58d33f1c07ece783e751eb7f076c3da",
+      "raw_bytes": 6428,
+      "retained": "docs/spikes/evidence/native-metalfx/fe0dca68b4d40f51c906efcab51ec6f9d58d33f1c07ece783e751eb7f076c3da.gz",
+      "retained_sha256": "10bedfd0cb5a1050562089182db069c8f2976857a711be0b98468cfe7413a6c5"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-001/files/crates/incant_render/src/output.rs",
+      "raw_sha256": "4004e06e997a8b778d38927c0d00502c5f98e531c1af64896b4b85ce96841e37",
+      "raw_bytes": 7872,
+      "retained": "docs/spikes/evidence/native-metalfx/4004e06e997a8b778d38927c0d00502c5f98e531c1af64896b4b85ce96841e37.gz",
+      "retained_sha256": "38989c12d8434a49a9c45b6b302794fb6af076f41d9560b1df6f2eaee7f6b46e"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-001/files/crates/incant_render/src/retained.rs",
+      "raw_sha256": "e263b508fc0c42eaeef19040d76201921778129307c5269827781ca357362068",
+      "raw_bytes": 25124,
+      "retained": "docs/spikes/evidence/native-metalfx/e263b508fc0c42eaeef19040d76201921778129307c5269827781ca357362068.gz",
+      "retained_sha256": "5083c4d0f73360c4c98cc41a50393213a6682a4f958f9f46ae41a896f33a3d90"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-001/files/crates/incant_render/src/timing/mod.rs",
+      "raw_sha256": "eceadbf21fb200917eb26783ba0c74e944d7428c9fc1e4f4136fed9febb5a32e",
+      "raw_bytes": 3549,
+      "retained": "docs/spikes/evidence/native-metalfx/eceadbf21fb200917eb26783ba0c74e944d7428c9fc1e4f4136fed9febb5a32e.gz",
+      "retained_sha256": "a5302e6a9c7df4d599fc27f0ef85cccb0641d8f7eceee04870272c756b7cede8"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-001/files/crates/incant_render/src/timing/recorder.rs",
+      "raw_sha256": "a86f809f7999edd11d3455889038b99a64f0cb76bd1139925bb3b72de3ec0e1a",
+      "raw_bytes": 8077,
+      "retained": "docs/spikes/evidence/native-metalfx/a86f809f7999edd11d3455889038b99a64f0cb76bd1139925bb3b72de3ec0e1a.gz",
+      "retained_sha256": "e102f7e93eee5ded57f9e165f7512f92e821e7f5543cdb030f72585459d20a14"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-001/files/crates/incant_render/src/upscaling/common.wgsl",
+      "raw_sha256": "7a1041707465239b046b31ae9d86e87f4372635056622eeacb8a3142e105344a",
+      "raw_bytes": 1622,
+      "retained": "docs/spikes/evidence/native-metalfx/7a1041707465239b046b31ae9d86e87f4372635056622eeacb8a3142e105344a.gz",
+      "retained_sha256": "c2c8c09f70fbbfd6fb93a36db080f7017e90768e7615a2a2287c02cff4e16ff2"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-001/files/crates/incant_render/src/upscaling/composite.wgsl",
+      "raw_sha256": "4be7f263090c163350cd5e54541330a6aedd2e32c5619532c5ca9d2fe6f43845",
+      "raw_bytes": 820,
+      "retained": "docs/spikes/evidence/native-metalfx/4be7f263090c163350cd5e54541330a6aedd2e32c5619532c5ca9d2fe6f43845.gz",
+      "retained_sha256": "e0832ad21b1e083244be5c1f784e9252f10b58247d0beace1d842d3cbe9f62d7"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-001/files/crates/incant_render/src/upscaling/owner.rs",
+      "raw_sha256": "7491961f813a46daf634761975584eb3aef4b93820fc550cd86a3c47a2fe254a",
+      "raw_bytes": 4555,
+      "retained": "docs/spikes/evidence/native-metalfx/7491961f813a46daf634761975584eb3aef4b93820fc550cd86a3c47a2fe254a.gz",
+      "retained_sha256": "07bee1989f73be49a9c8de6d3b75788c3a2b99121e3a9a504f01c39d5a4dfe0a"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-001/files/crates/incant_render/src/upscaling/resolve.wgsl",
+      "raw_sha256": "a8e646701cb7e5d24476a2ecc49a76b2f7d77b3646ddfe469093586316337d34",
+      "raw_bytes": 3589,
+      "retained": "docs/spikes/evidence/native-metalfx/a8e646701cb7e5d24476a2ecc49a76b2f7d77b3646ddfe469093586316337d34.gz",
+      "retained_sha256": "a17fe12e45fa34ac8b764a44843dd39bced413af92a9c8156254a1fa9c4cb55a"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-001/files/crates/incant_render_gpu_host/Cargo.toml",
+      "raw_sha256": "924eac71db24a933ab5341eb89aeb07e2d212e8805ea85289ad6fb355183ea92",
+      "raw_bytes": 2064,
+      "retained": "docs/spikes/evidence/native-metalfx/924eac71db24a933ab5341eb89aeb07e2d212e8805ea85289ad6fb355183ea92.gz",
+      "retained_sha256": "aa82974f26681abb93356ec6c560e1bd37569f81921c65d4eec140ef1e6cee42"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-001/files/crates/incant_render_gpu_host/src/lib.rs",
+      "raw_sha256": "8026419afd21bd83df0047da8997fac4b938f887c4d87b92b6846ee34453bfe9",
+      "raw_bytes": 14589,
+      "retained": "docs/spikes/evidence/native-metalfx/8026419afd21bd83df0047da8997fac4b938f887c4d87b92b6846ee34453bfe9.gz",
+      "retained_sha256": "a7f55c7772644ab71b5ac1eb4262c7eda43a8742b717af515df113bae42f5235"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-001/files/crates/incant_render_gpu_host/src/motion.rs",
+      "raw_sha256": "14854dd520e3c496499096dcc258b0c121ae7838813f362386e758029b33f899",
+      "raw_bytes": 5099,
+      "retained": "docs/spikes/evidence/native-metalfx/14854dd520e3c496499096dcc258b0c121ae7838813f362386e758029b33f899.gz",
+      "retained_sha256": "10c6dafbbe099c103f23ea17bb2e03001b212aab5919206b0c36a5eade24faab"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-001/files/crates/incant_render_gpu_host/src/resolution.rs",
+      "raw_sha256": "cba901f393885dbf6f1a093e8ab0cbcb341ffebc1671ac47d23a9d22eef974e9",
+      "raw_bytes": 3282,
+      "retained": "docs/spikes/evidence/native-metalfx/cba901f393885dbf6f1a093e8ab0cbcb341ffebc1671ac47d23a9d22eef974e9.gz",
+      "retained_sha256": "7f3a8d619f39e8474a19785b1f794e7b63d38f04d0d67e53571c3fe28acc3e06"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-001/files/docs/spikes/native-metalfx.md",
+      "raw_sha256": "f7d45a2cc6e6304df9507e48a8c5c30c9eac3970990d1ccbf536e4a74ff93cf3",
+      "raw_bytes": 7128,
+      "retained": "docs/spikes/evidence/native-metalfx/f7d45a2cc6e6304df9507e48a8c5c30c9eac3970990d1ccbf536e4a74ff93cf3.gz",
+      "retained_sha256": "1b28f3a895a9ceb2a242792b2cc5414f92accfab69948db417457e967fb34545"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-001/files/pinned/10-mod.rs",
+      "raw_sha256": "daed7a2d7c1cd7b9431b3009b5b7feb2ca8e45648ffd7eb0185c46cfcbeb2ada",
+      "raw_bytes": 36654,
+      "retained": "docs/spikes/evidence/native-metalfx/daed7a2d7c1cd7b9431b3009b5b7feb2ca8e45648ffd7eb0185c46cfcbeb2ada.gz",
+      "retained_sha256": "9345a160d8b46024cb31aa7167a5417544b41f0d6157346008c2ae5ea8fde762"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-001/files/pinned/11-command.rs",
+      "raw_sha256": "49b3dd48ea241ac66738854b9e76a77ba2863fdc9fe1aaa936e1bc16e5d79e52",
+      "raw_bytes": 76832,
+      "retained": "docs/spikes/evidence/native-metalfx/49b3dd48ea241ac66738854b9e76a77ba2863fdc9fe1aaa936e1bc16e5d79e52.gz",
+      "retained_sha256": "618907605a04aab9b30ac814397350e4047d784efd07c5923bd61c6158762e67"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-001/files/pinned/12-device.rs",
+      "raw_sha256": "c34d2bd9fe2a547f5cb28106c07ed22c99aa5891c0ad6a75f08ec6d70a1f6864",
+      "raw_bytes": 89259,
+      "retained": "docs/spikes/evidence/native-metalfx/c34d2bd9fe2a547f5cb28106c07ed22c99aa5891c0ad6a75f08ec6d70a1f6864.gz",
+      "retained_sha256": "ebd447b1938bde64cf1d9205f73f4a63cbdae7a3222902a2f9db0730081e68c3"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-001/files/pinned/13-MTLFXTemporalScaler.h",
+      "raw_sha256": "e6cbd09203483aa5ab338ff8768cc2d04210e139efcb88803807a2291eb9030a",
+      "raw_bytes": 23700,
+      "retained": "docs/spikes/evidence/native-metalfx/e6cbd09203483aa5ab338ff8768cc2d04210e139efcb88803807a2291eb9030a.gz",
+      "retained_sha256": "2f602742a3dcb4032041f77c342296eb9a39e92caaeca426204df3659cf93c4b"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-001/files/pinned/6-command_encoder.rs",
+      "raw_sha256": "b5a770f88388e3b1368e4c8adeb65886958353fb6130ac392b1f43e7f7a8bbe7",
+      "raw_bytes": 19855,
+      "retained": "docs/spikes/evidence/native-metalfx/b5a770f88388e3b1368e4c8adeb65886958353fb6130ac392b1f43e7f7a8bbe7.gz",
+      "retained_sha256": "e7e646d9198b718f7dcd677b7d5e5421ac21535ad920d09b213e7d5ac69a202e"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-001/files/pinned/7-texture.rs",
+      "raw_sha256": "aee3469d3d722c85521b64a770de20105e49aa64c6f56342442c7335f79505cd",
+      "raw_bytes": 6446,
+      "retained": "docs/spikes/evidence/native-metalfx/aee3469d3d722c85521b64a770de20105e49aa64c6f56342442c7335f79505cd.gz",
+      "retained_sha256": "bf14b94b01837f8a575af2af0bde9c4f897c78138b81bc5b184136c300f08af1"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-001/files/pinned/8-as_hal.rs",
+      "raw_sha256": "5d08d8e49b016abb662957d8e42ab748d580a2f3e449caeeb7311f222b8818f6",
+      "raw_bytes": 12413,
+      "retained": "docs/spikes/evidence/native-metalfx/5d08d8e49b016abb662957d8e42ab748d580a2f3e449caeeb7311f222b8818f6.gz",
+      "retained_sha256": "a0803a9a96fc7a37eea3aa8623236c09025999fe6a60de5f14a813478a68946e"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-001/files/pinned/9-mod.rs",
+      "raw_sha256": "f995d91f620482e378724e3a3e972e4f1d65502a8c83f43469ce079887a5d8b8",
+      "raw_bytes": 75727,
+      "retained": "docs/spikes/evidence/native-metalfx/f995d91f620482e378724e3a3e972e4f1d65502a8c83f43469ce079887a5d8b8.gz",
+      "retained_sha256": "b4c93f4323ee610201ea7a9705642dedbfd488101ef6ab466e9a57487d27dd78"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-001/files/pinned/objc-0-MTLFXTemporalScaler.rs",
+      "raw_sha256": "c80bf2eede0888940630d6e17ff58773d7deb1f0d60a3d78388c76a486c557ef",
+      "raw_bytes": 35680,
+      "retained": "docs/spikes/evidence/native-metalfx/c80bf2eede0888940630d6e17ff58773d7deb1f0d60a3d78388c76a486c557ef.gz",
+      "retained_sha256": "29fa37e34b58650fb266136626b5d620593d958bf7f69b6099bfb61ae9f0a17d"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-001/files/pinned/objc-1-object.rs",
+      "raw_sha256": "190e54d96a4102babc3eaaf9993eea9cfaf5b7354602bc173d12c423e0f2c67e",
+      "raw_bytes": 3715,
+      "retained": "docs/spikes/evidence/native-metalfx/190e54d96a4102babc3eaaf9993eea9cfaf5b7354602bc173d12c423e0f2c67e.gz",
+      "retained_sha256": "1c7cbc583f335583bc5a7b4bfd3ca44234095706f791971174693080b0f59c87"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-001/freeze.json",
+      "raw_sha256": "53f69befd0b10941bf716e384a1700503a5d50b0ae063b671de54d445c32cb90",
+      "raw_bytes": 14657,
+      "retained": "docs/spikes/evidence/native-metalfx/53f69befd0b10941bf716e384a1700503a5d50b0ae063b671de54d445c32cb90.gz",
+      "retained_sha256": "d788e4f927d63e697c03cb6fede2386e434a62a3a49f44faf9e7f34cef1bd787"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-001/tracked.patch",
+      "raw_sha256": "50bfdbfbe8db0e9757b6ccf87b40c11b8eef2cacd8d6d27c3dbb95684718944e",
+      "raw_bytes": 21899,
+      "retained": "docs/spikes/evidence/native-metalfx/50bfdbfbe8db0e9757b6ccf87b40c11b8eef2cacd8d6d27c3dbb95684718944e.gz",
+      "retained_sha256": "2bcfad4d28513ae6030f5d8c57207e2e1369457bd0feed9216e1ed2f3f6bd0aa"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-002/files/Cargo.lock",
+      "raw_sha256": "68c187dbeb8d0e45d79c83f5503950070bd13090dbe456ad4970f5444c4417a6",
+      "raw_bytes": 253273,
+      "retained": "docs/spikes/evidence/native-metalfx/68c187dbeb8d0e45d79c83f5503950070bd13090dbe456ad4970f5444c4417a6.gz",
+      "retained_sha256": "352446a3112d5416495c0bd04aeeba8622810e1a572f587ccd108fc26ab9746f"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-002/files/Cargo.toml",
+      "raw_sha256": "cfed0cb20b760c0028e327913de49f59a5e71f5ac1becfaa5da241efeaf98857",
+      "raw_bytes": 3584,
+      "retained": "docs/spikes/evidence/native-metalfx/cfed0cb20b760c0028e327913de49f59a5e71f5ac1becfaa5da241efeaf98857.gz",
+      "retained_sha256": "8a88b94a437b76f63d28bb04d3f5a7a21132718756eaa2fe89a59d328d319470"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-002/files/PLAN.md",
+      "raw_sha256": "c60adc7457e6f5929b3430876f6b8ea02acffce5bf55fbaae9090933fe4aab6c",
+      "raw_bytes": 130811,
+      "retained": "docs/spikes/evidence/native-metalfx/c60adc7457e6f5929b3430876f6b8ea02acffce5bf55fbaae9090933fe4aab6c.gz",
+      "retained_sha256": "931e0af23128a26a4d8d2a175242268a194861d537fc8f7f6a194ce0fba65ad5"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-002/files/crates/incant_render/Cargo.toml",
+      "raw_sha256": "cfc6f23b6ae4fca82cd480f3bfe41047bf20b876a83f4898d0b691efa550afdd",
+      "raw_bytes": 2967,
+      "retained": "docs/spikes/evidence/native-metalfx/cfc6f23b6ae4fca82cd480f3bfe41047bf20b876a83f4898d0b691efa550afdd.gz",
+      "retained_sha256": "d4f6ff0313e7c67025616f01bea381471cbd0384a5b027cf004103697e81045b"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-002/files/crates/incant_render/build.rs",
+      "raw_sha256": "e43a3198ce1a5f03ed54291a7d30e13c77f676941e6b41394a55906530cd8663",
+      "raw_bytes": 5555,
+      "retained": "docs/spikes/evidence/native-metalfx/e43a3198ce1a5f03ed54291a7d30e13c77f676941e6b41394a55906530cd8663.gz",
+      "retained_sha256": "a30f610126013f8d1bf3b76d61311a468f7fd31ec60d1b8699211bc0c79601fd"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-002/files/crates/incant_render/src/frame.rs",
+      "raw_sha256": "1db2c09f12ea6e60ca3d0e8aaba17314e6d0d9e4f76e11cc3e0a7bd524323e7e",
+      "raw_bytes": 2700,
+      "retained": "docs/spikes/evidence/native-metalfx/1db2c09f12ea6e60ca3d0e8aaba17314e6d0d9e4f76e11cc3e0a7bd524323e7e.gz",
+      "retained_sha256": "87cd843dbba5342e8182fc18ea3b57dbfa70000814b7f571b44849103755e0a8"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-002/files/crates/incant_render/src/graph/native.rs",
+      "raw_sha256": "418f07120da1a782f4411ebcf1636cca38894af3607fe0fdf0c3ab3d93575c0d",
+      "raw_bytes": 4518,
+      "retained": "docs/spikes/evidence/native-metalfx/418f07120da1a782f4411ebcf1636cca38894af3607fe0fdf0c3ab3d93575c0d.gz",
+      "retained_sha256": "bc6870802c758ec5e64abc487108563af7a2caf9184971f99e9fec09ab703ff9"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-002/files/crates/incant_render/src/graph.rs",
+      "raw_sha256": "d75e5b7b37bca24214b29cda90109abfa756bb0e0b61d6621ba8a9d40573e641",
+      "raw_bytes": 13776,
+      "retained": "docs/spikes/evidence/native-metalfx/d75e5b7b37bca24214b29cda90109abfa756bb0e0b61d6621ba8a9d40573e641.gz",
+      "retained_sha256": "99897bc01bc262c7ccc2523396c14c15a732efe23ac6f9be931b76970dcb75a2"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-002/files/crates/incant_render/src/lib.rs",
+      "raw_sha256": "7539387113270a4fe4443cf897b0e762182ab093d7c061548497d52fd715bb19",
+      "raw_bytes": 22374,
+      "retained": "docs/spikes/evidence/native-metalfx/7539387113270a4fe4443cf897b0e762182ab093d7c061548497d52fd715bb19.gz",
+      "retained_sha256": "2c31f0ec231c6be271d964b7b86ec7b2eed4d31ca15e693ab1bec29d221fe4da"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-002/files/crates/incant_render/src/metalfx/composite.wgsl",
+      "raw_sha256": "cbe955c905a55650e06e5d1f3668dcc04de70beead4333315169ddbf2b4f66fc",
+      "raw_bytes": 1682,
+      "retained": "docs/spikes/evidence/native-metalfx/cbe955c905a55650e06e5d1f3668dcc04de70beead4333315169ddbf2b4f66fc.gz",
+      "retained_sha256": "7d825dea2740842a793e3718c363de146b53e6d61e2f8104c644974b8cb80487"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-002/files/crates/incant_render/src/metalfx/lifecycle.rs",
+      "raw_sha256": "8eb56da2f5a793f4d2a268fe99ab5e8cc02837667d5260d67395f09bc80218c5",
+      "raw_bytes": 7377,
+      "retained": "docs/spikes/evidence/native-metalfx/8eb56da2f5a793f4d2a268fe99ab5e8cc02837667d5260d67395f09bc80218c5.gz",
+      "retained_sha256": "abc74e12fb1d44ee35a9d6839e22772db49485e1e59348a9c7697bdae2f9afef"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-002/files/crates/incant_render/src/metalfx/mod.rs",
+      "raw_sha256": "cdb5282de97ec2a14b26fc75f7482cea42e1e167bec7a948acf29d73d6022ea5",
+      "raw_bytes": 2339,
+      "retained": "docs/spikes/evidence/native-metalfx/cdb5282de97ec2a14b26fc75f7482cea42e1e167bec7a948acf29d73d6022ea5.gz",
+      "retained_sha256": "1579b4933be6b337af391c4b79ce5ba1073d3655ea77ba009ca6ce5139e64251"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-002/files/crates/incant_render/src/metalfx/native.rs",
+      "raw_sha256": "74f41a8fbdfa22702c0bd2dbcf9165e8dcf5f64701e539a85d9cc1cc9a4e251c",
+      "raw_bytes": 9393,
+      "retained": "docs/spikes/evidence/native-metalfx/74f41a8fbdfa22702c0bd2dbcf9165e8dcf5f64701e539a85d9cc1cc9a4e251c.gz",
+      "retained_sha256": "3ef9840ddb50c4395e97a94a8bf2b60ac81fc01936758e10c21ef478d02cad65"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-002/files/crates/incant_render/src/metalfx/numerics.rs",
+      "raw_sha256": "b98f99ba898674847281183977c9263e21072ecb63b9e8211c451a183eee7228",
+      "raw_bytes": 4799,
+      "retained": "docs/spikes/evidence/native-metalfx/b98f99ba898674847281183977c9263e21072ecb63b9e8211c451a183eee7228.gz",
+      "retained_sha256": "f1c2cd03c217be61cab01091ecc576745c95b89fd6d0433c88c1734cbce80964"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-002/files/crates/incant_render/src/metalfx/owner.rs",
+      "raw_sha256": "53d576aa5a2506fc9e3be7b398a57cc745d900117c2bd7a259b960cb242b197f",
+      "raw_bytes": 8465,
+      "retained": "docs/spikes/evidence/native-metalfx/53d576aa5a2506fc9e3be7b398a57cc745d900117c2bd7a259b960cb242b197f.gz",
+      "retained_sha256": "a13aa0ec8f4cf5bd0a16a09b6ff0b3bf2908401eb31ec7b1d06f2ae70f8769cb"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-002/files/crates/incant_render/src/metalfx/plan.rs",
+      "raw_sha256": "677a09e0033012f91bd46d9363aba2240ccf213b5db32246b32f4a8771c0dbdf",
+      "raw_bytes": 4179,
+      "retained": "docs/spikes/evidence/native-metalfx/677a09e0033012f91bd46d9363aba2240ccf213b5db32246b32f4a8771c0dbdf.gz",
+      "retained_sha256": "bbfcf56960fc8b7830c0930e11b06b91b617df1064db031ab88da603b3bae219"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-002/files/crates/incant_render/src/metalfx/prepare.wgsl",
+      "raw_sha256": "452887b49bb41def01b56cdfe11e336faae6de1965b2008d55b757f0ba9d1dc1",
+      "raw_bytes": 1105,
+      "retained": "docs/spikes/evidence/native-metalfx/452887b49bb41def01b56cdfe11e336faae6de1965b2008d55b757f0ba9d1dc1.gz",
+      "retained_sha256": "f6835bacb7f7a7ab756e4391158ef950ea9e165d1da69472110b728b9654a501"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-002/files/crates/incant_render/src/metalfx/system.rs",
+      "raw_sha256": "c66f3bb80245dee5e5ac6e4c6217878c481f1c01da27181ddd4548067897d85c",
+      "raw_bytes": 12773,
+      "retained": "docs/spikes/evidence/native-metalfx/c66f3bb80245dee5e5ac6e4c6217878c481f1c01da27181ddd4548067897d85c.gz",
+      "retained_sha256": "5c1adccbbd01586e3a6ea8fa5a5545394be60d279690054fc6c427f24208fb4c"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-002/files/crates/incant_render/src/metalfx/targets.rs",
+      "raw_sha256": "5f03770e7a48dcb7a2ff3e4860f5e8f0a876335f16f9d3d13dad402c0fe0d198",
+      "raw_bytes": 2067,
+      "retained": "docs/spikes/evidence/native-metalfx/5f03770e7a48dcb7a2ff3e4860f5e8f0a876335f16f9d3d13dad402c0fe0d198.gz",
+      "retained_sha256": "cc35844c3ee7a48efac3f07b5367e1ab69ac9d1d7d88c6375eca7c55fa9c887c"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-002/files/crates/incant_render/src/metalfx_retained_tests.rs",
+      "raw_sha256": "fe0dca68b4d40f51c906efcab51ec6f9d58d33f1c07ece783e751eb7f076c3da",
+      "raw_bytes": 6428,
+      "retained": "docs/spikes/evidence/native-metalfx/fe0dca68b4d40f51c906efcab51ec6f9d58d33f1c07ece783e751eb7f076c3da.gz",
+      "retained_sha256": "10bedfd0cb5a1050562089182db069c8f2976857a711be0b98468cfe7413a6c5"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-002/files/crates/incant_render/src/output.rs",
+      "raw_sha256": "4004e06e997a8b778d38927c0d00502c5f98e531c1af64896b4b85ce96841e37",
+      "raw_bytes": 7872,
+      "retained": "docs/spikes/evidence/native-metalfx/4004e06e997a8b778d38927c0d00502c5f98e531c1af64896b4b85ce96841e37.gz",
+      "retained_sha256": "38989c12d8434a49a9c45b6b302794fb6af076f41d9560b1df6f2eaee7f6b46e"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-002/files/crates/incant_render/src/retained.rs",
+      "raw_sha256": "e263b508fc0c42eaeef19040d76201921778129307c5269827781ca357362068",
+      "raw_bytes": 25124,
+      "retained": "docs/spikes/evidence/native-metalfx/e263b508fc0c42eaeef19040d76201921778129307c5269827781ca357362068.gz",
+      "retained_sha256": "5083c4d0f73360c4c98cc41a50393213a6682a4f958f9f46ae41a896f33a3d90"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-002/files/crates/incant_render/src/timing/mod.rs",
+      "raw_sha256": "eceadbf21fb200917eb26783ba0c74e944d7428c9fc1e4f4136fed9febb5a32e",
+      "raw_bytes": 3549,
+      "retained": "docs/spikes/evidence/native-metalfx/eceadbf21fb200917eb26783ba0c74e944d7428c9fc1e4f4136fed9febb5a32e.gz",
+      "retained_sha256": "a5302e6a9c7df4d599fc27f0ef85cccb0641d8f7eceee04870272c756b7cede8"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-002/files/crates/incant_render/src/timing/recorder.rs",
+      "raw_sha256": "a86f809f7999edd11d3455889038b99a64f0cb76bd1139925bb3b72de3ec0e1a",
+      "raw_bytes": 8077,
+      "retained": "docs/spikes/evidence/native-metalfx/a86f809f7999edd11d3455889038b99a64f0cb76bd1139925bb3b72de3ec0e1a.gz",
+      "retained_sha256": "e102f7e93eee5ded57f9e165f7512f92e821e7f5543cdb030f72585459d20a14"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-002/files/crates/incant_render/src/upscaling/common.wgsl",
+      "raw_sha256": "7a1041707465239b046b31ae9d86e87f4372635056622eeacb8a3142e105344a",
+      "raw_bytes": 1622,
+      "retained": "docs/spikes/evidence/native-metalfx/7a1041707465239b046b31ae9d86e87f4372635056622eeacb8a3142e105344a.gz",
+      "retained_sha256": "c2c8c09f70fbbfd6fb93a36db080f7017e90768e7615a2a2287c02cff4e16ff2"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-002/files/crates/incant_render/src/upscaling/composite.wgsl",
+      "raw_sha256": "4be7f263090c163350cd5e54541330a6aedd2e32c5619532c5ca9d2fe6f43845",
+      "raw_bytes": 820,
+      "retained": "docs/spikes/evidence/native-metalfx/4be7f263090c163350cd5e54541330a6aedd2e32c5619532c5ca9d2fe6f43845.gz",
+      "retained_sha256": "e0832ad21b1e083244be5c1f784e9252f10b58247d0beace1d842d3cbe9f62d7"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-002/files/crates/incant_render/src/upscaling/owner.rs",
+      "raw_sha256": "7491961f813a46daf634761975584eb3aef4b93820fc550cd86a3c47a2fe254a",
+      "raw_bytes": 4555,
+      "retained": "docs/spikes/evidence/native-metalfx/7491961f813a46daf634761975584eb3aef4b93820fc550cd86a3c47a2fe254a.gz",
+      "retained_sha256": "07bee1989f73be49a9c8de6d3b75788c3a2b99121e3a9a504f01c39d5a4dfe0a"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-002/files/crates/incant_render/src/upscaling/resolve.wgsl",
+      "raw_sha256": "a8e646701cb7e5d24476a2ecc49a76b2f7d77b3646ddfe469093586316337d34",
+      "raw_bytes": 3589,
+      "retained": "docs/spikes/evidence/native-metalfx/a8e646701cb7e5d24476a2ecc49a76b2f7d77b3646ddfe469093586316337d34.gz",
+      "retained_sha256": "a17fe12e45fa34ac8b764a44843dd39bced413af92a9c8156254a1fa9c4cb55a"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-002/files/crates/incant_render_gpu_host/Cargo.toml",
+      "raw_sha256": "924eac71db24a933ab5341eb89aeb07e2d212e8805ea85289ad6fb355183ea92",
+      "raw_bytes": 2064,
+      "retained": "docs/spikes/evidence/native-metalfx/924eac71db24a933ab5341eb89aeb07e2d212e8805ea85289ad6fb355183ea92.gz",
+      "retained_sha256": "aa82974f26681abb93356ec6c560e1bd37569f81921c65d4eec140ef1e6cee42"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-002/files/crates/incant_render_gpu_host/src/lib.rs",
+      "raw_sha256": "8026419afd21bd83df0047da8997fac4b938f887c4d87b92b6846ee34453bfe9",
+      "raw_bytes": 14589,
+      "retained": "docs/spikes/evidence/native-metalfx/8026419afd21bd83df0047da8997fac4b938f887c4d87b92b6846ee34453bfe9.gz",
+      "retained_sha256": "a7f55c7772644ab71b5ac1eb4262c7eda43a8742b717af515df113bae42f5235"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-002/files/crates/incant_render_gpu_host/src/motion.rs",
+      "raw_sha256": "14854dd520e3c496499096dcc258b0c121ae7838813f362386e758029b33f899",
+      "raw_bytes": 5099,
+      "retained": "docs/spikes/evidence/native-metalfx/14854dd520e3c496499096dcc258b0c121ae7838813f362386e758029b33f899.gz",
+      "retained_sha256": "10c6dafbbe099c103f23ea17bb2e03001b212aab5919206b0c36a5eade24faab"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-002/files/crates/incant_render_gpu_host/src/resolution.rs",
+      "raw_sha256": "cba901f393885dbf6f1a093e8ab0cbcb341ffebc1671ac47d23a9d22eef974e9",
+      "raw_bytes": 3282,
+      "retained": "docs/spikes/evidence/native-metalfx/cba901f393885dbf6f1a093e8ab0cbcb341ffebc1671ac47d23a9d22eef974e9.gz",
+      "retained_sha256": "7f3a8d619f39e8474a19785b1f794e7b63d38f04d0d67e53571c3fe28acc3e06"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-002/files/docs/spikes/native-metalfx.md",
+      "raw_sha256": "f7d45a2cc6e6304df9507e48a8c5c30c9eac3970990d1ccbf536e4a74ff93cf3",
+      "raw_bytes": 7128,
+      "retained": "docs/spikes/evidence/native-metalfx/f7d45a2cc6e6304df9507e48a8c5c30c9eac3970990d1ccbf536e4a74ff93cf3.gz",
+      "retained_sha256": "1b28f3a895a9ceb2a242792b2cc5414f92accfab69948db417457e967fb34545"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-002/files/pinned/10-mod.rs",
+      "raw_sha256": "daed7a2d7c1cd7b9431b3009b5b7feb2ca8e45648ffd7eb0185c46cfcbeb2ada",
+      "raw_bytes": 36654,
+      "retained": "docs/spikes/evidence/native-metalfx/daed7a2d7c1cd7b9431b3009b5b7feb2ca8e45648ffd7eb0185c46cfcbeb2ada.gz",
+      "retained_sha256": "9345a160d8b46024cb31aa7167a5417544b41f0d6157346008c2ae5ea8fde762"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-002/files/pinned/11-command.rs",
+      "raw_sha256": "49b3dd48ea241ac66738854b9e76a77ba2863fdc9fe1aaa936e1bc16e5d79e52",
+      "raw_bytes": 76832,
+      "retained": "docs/spikes/evidence/native-metalfx/49b3dd48ea241ac66738854b9e76a77ba2863fdc9fe1aaa936e1bc16e5d79e52.gz",
+      "retained_sha256": "618907605a04aab9b30ac814397350e4047d784efd07c5923bd61c6158762e67"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-002/files/pinned/12-device.rs",
+      "raw_sha256": "c34d2bd9fe2a547f5cb28106c07ed22c99aa5891c0ad6a75f08ec6d70a1f6864",
+      "raw_bytes": 89259,
+      "retained": "docs/spikes/evidence/native-metalfx/c34d2bd9fe2a547f5cb28106c07ed22c99aa5891c0ad6a75f08ec6d70a1f6864.gz",
+      "retained_sha256": "ebd447b1938bde64cf1d9205f73f4a63cbdae7a3222902a2f9db0730081e68c3"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-002/files/pinned/13-MTLFXTemporalScaler.h",
+      "raw_sha256": "e6cbd09203483aa5ab338ff8768cc2d04210e139efcb88803807a2291eb9030a",
+      "raw_bytes": 23700,
+      "retained": "docs/spikes/evidence/native-metalfx/e6cbd09203483aa5ab338ff8768cc2d04210e139efcb88803807a2291eb9030a.gz",
+      "retained_sha256": "2f602742a3dcb4032041f77c342296eb9a39e92caaeca426204df3659cf93c4b"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-002/files/pinned/6-command_encoder.rs",
+      "raw_sha256": "b5a770f88388e3b1368e4c8adeb65886958353fb6130ac392b1f43e7f7a8bbe7",
+      "raw_bytes": 19855,
+      "retained": "docs/spikes/evidence/native-metalfx/b5a770f88388e3b1368e4c8adeb65886958353fb6130ac392b1f43e7f7a8bbe7.gz",
+      "retained_sha256": "e7e646d9198b718f7dcd677b7d5e5421ac21535ad920d09b213e7d5ac69a202e"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-002/files/pinned/7-texture.rs",
+      "raw_sha256": "aee3469d3d722c85521b64a770de20105e49aa64c6f56342442c7335f79505cd",
+      "raw_bytes": 6446,
+      "retained": "docs/spikes/evidence/native-metalfx/aee3469d3d722c85521b64a770de20105e49aa64c6f56342442c7335f79505cd.gz",
+      "retained_sha256": "bf14b94b01837f8a575af2af0bde9c4f897c78138b81bc5b184136c300f08af1"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-002/files/pinned/8-as_hal.rs",
+      "raw_sha256": "5d08d8e49b016abb662957d8e42ab748d580a2f3e449caeeb7311f222b8818f6",
+      "raw_bytes": 12413,
+      "retained": "docs/spikes/evidence/native-metalfx/5d08d8e49b016abb662957d8e42ab748d580a2f3e449caeeb7311f222b8818f6.gz",
+      "retained_sha256": "a0803a9a96fc7a37eea3aa8623236c09025999fe6a60de5f14a813478a68946e"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-002/files/pinned/9-mod.rs",
+      "raw_sha256": "f995d91f620482e378724e3a3e972e4f1d65502a8c83f43469ce079887a5d8b8",
+      "raw_bytes": 75727,
+      "retained": "docs/spikes/evidence/native-metalfx/f995d91f620482e378724e3a3e972e4f1d65502a8c83f43469ce079887a5d8b8.gz",
+      "retained_sha256": "b4c93f4323ee610201ea7a9705642dedbfd488101ef6ab466e9a57487d27dd78"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-002/files/pinned/objc-0-MTLFXTemporalScaler.rs",
+      "raw_sha256": "c80bf2eede0888940630d6e17ff58773d7deb1f0d60a3d78388c76a486c557ef",
+      "raw_bytes": 35680,
+      "retained": "docs/spikes/evidence/native-metalfx/c80bf2eede0888940630d6e17ff58773d7deb1f0d60a3d78388c76a486c557ef.gz",
+      "retained_sha256": "29fa37e34b58650fb266136626b5d620593d958bf7f69b6099bfb61ae9f0a17d"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-002/files/pinned/objc-1-object.rs",
+      "raw_sha256": "190e54d96a4102babc3eaaf9993eea9cfaf5b7354602bc173d12c423e0f2c67e",
+      "raw_bytes": 3715,
+      "retained": "docs/spikes/evidence/native-metalfx/190e54d96a4102babc3eaaf9993eea9cfaf5b7354602bc173d12c423e0f2c67e.gz",
+      "retained_sha256": "1c7cbc583f335583bc5a7b4bfd3ca44234095706f791971174693080b0f59c87"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-002/freeze.json",
+      "raw_sha256": "2196f2b89db60b4b32f94d6f6a372cad5045510e6f63bba57546a229aa2413ca",
+      "raw_bytes": 14938,
+      "retained": "docs/spikes/evidence/native-metalfx/2196f2b89db60b4b32f94d6f6a372cad5045510e6f63bba57546a229aa2413ca.gz",
+      "retained_sha256": "62042bd8ba8672c3eb8d1a1e76206d0e36424a3e73f8d31dd1eb8e2c1978e0fd"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-002/tracked.patch",
+      "raw_sha256": "50bfdbfbe8db0e9757b6ccf87b40c11b8eef2cacd8d6d27c3dbb95684718944e",
+      "raw_bytes": 21899,
+      "retained": "docs/spikes/evidence/native-metalfx/50bfdbfbe8db0e9757b6ccf87b40c11b8eef2cacd8d6d27c3dbb95684718944e.gz",
+      "retained_sha256": "2bcfad4d28513ae6030f5d8c57207e2e1369457bd0feed9216e1ed2f3f6bd0aa"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/Cargo.lock",
+      "raw_sha256": "68c187dbeb8d0e45d79c83f5503950070bd13090dbe456ad4970f5444c4417a6",
+      "raw_bytes": 253273,
+      "retained": "docs/spikes/evidence/native-metalfx/68c187dbeb8d0e45d79c83f5503950070bd13090dbe456ad4970f5444c4417a6.gz",
+      "retained_sha256": "352446a3112d5416495c0bd04aeeba8622810e1a572f587ccd108fc26ab9746f"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/Cargo.toml",
+      "raw_sha256": "cfed0cb20b760c0028e327913de49f59a5e71f5ac1becfaa5da241efeaf98857",
+      "raw_bytes": 3584,
+      "retained": "docs/spikes/evidence/native-metalfx/cfed0cb20b760c0028e327913de49f59a5e71f5ac1becfaa5da241efeaf98857.gz",
+      "retained_sha256": "8a88b94a437b76f63d28bb04d3f5a7a21132718756eaa2fe89a59d328d319470"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/PLAN.md",
+      "raw_sha256": "c60adc7457e6f5929b3430876f6b8ea02acffce5bf55fbaae9090933fe4aab6c",
+      "raw_bytes": 130811,
+      "retained": "docs/spikes/evidence/native-metalfx/c60adc7457e6f5929b3430876f6b8ea02acffce5bf55fbaae9090933fe4aab6c.gz",
+      "retained_sha256": "931e0af23128a26a4d8d2a175242268a194861d537fc8f7f6a194ce0fba65ad5"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render/Cargo.toml",
+      "raw_sha256": "cfc6f23b6ae4fca82cd480f3bfe41047bf20b876a83f4898d0b691efa550afdd",
+      "raw_bytes": 2967,
+      "retained": "docs/spikes/evidence/native-metalfx/cfc6f23b6ae4fca82cd480f3bfe41047bf20b876a83f4898d0b691efa550afdd.gz",
+      "retained_sha256": "d4f6ff0313e7c67025616f01bea381471cbd0384a5b027cf004103697e81045b"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render/build.rs",
+      "raw_sha256": "e43a3198ce1a5f03ed54291a7d30e13c77f676941e6b41394a55906530cd8663",
+      "raw_bytes": 5555,
+      "retained": "docs/spikes/evidence/native-metalfx/e43a3198ce1a5f03ed54291a7d30e13c77f676941e6b41394a55906530cd8663.gz",
+      "retained_sha256": "a30f610126013f8d1bf3b76d61311a468f7fd31ec60d1b8699211bc0c79601fd"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render/src/frame.rs",
+      "raw_sha256": "1db2c09f12ea6e60ca3d0e8aaba17314e6d0d9e4f76e11cc3e0a7bd524323e7e",
+      "raw_bytes": 2700,
+      "retained": "docs/spikes/evidence/native-metalfx/1db2c09f12ea6e60ca3d0e8aaba17314e6d0d9e4f76e11cc3e0a7bd524323e7e.gz",
+      "retained_sha256": "87cd843dbba5342e8182fc18ea3b57dbfa70000814b7f571b44849103755e0a8"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render/src/graph/native.rs",
+      "raw_sha256": "418f07120da1a782f4411ebcf1636cca38894af3607fe0fdf0c3ab3d93575c0d",
+      "raw_bytes": 4518,
+      "retained": "docs/spikes/evidence/native-metalfx/418f07120da1a782f4411ebcf1636cca38894af3607fe0fdf0c3ab3d93575c0d.gz",
+      "retained_sha256": "bc6870802c758ec5e64abc487108563af7a2caf9184971f99e9fec09ab703ff9"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render/src/graph.rs",
+      "raw_sha256": "d75e5b7b37bca24214b29cda90109abfa756bb0e0b61d6621ba8a9d40573e641",
+      "raw_bytes": 13776,
+      "retained": "docs/spikes/evidence/native-metalfx/d75e5b7b37bca24214b29cda90109abfa756bb0e0b61d6621ba8a9d40573e641.gz",
+      "retained_sha256": "99897bc01bc262c7ccc2523396c14c15a732efe23ac6f9be931b76970dcb75a2"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render/src/lib.rs",
+      "raw_sha256": "7539387113270a4fe4443cf897b0e762182ab093d7c061548497d52fd715bb19",
+      "raw_bytes": 22374,
+      "retained": "docs/spikes/evidence/native-metalfx/7539387113270a4fe4443cf897b0e762182ab093d7c061548497d52fd715bb19.gz",
+      "retained_sha256": "2c31f0ec231c6be271d964b7b86ec7b2eed4d31ca15e693ab1bec29d221fe4da"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render/src/metalfx/composite.wgsl",
+      "raw_sha256": "cbe955c905a55650e06e5d1f3668dcc04de70beead4333315169ddbf2b4f66fc",
+      "raw_bytes": 1682,
+      "retained": "docs/spikes/evidence/native-metalfx/cbe955c905a55650e06e5d1f3668dcc04de70beead4333315169ddbf2b4f66fc.gz",
+      "retained_sha256": "7d825dea2740842a793e3718c363de146b53e6d61e2f8104c644974b8cb80487"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render/src/metalfx/lifecycle.rs",
+      "raw_sha256": "8eb56da2f5a793f4d2a268fe99ab5e8cc02837667d5260d67395f09bc80218c5",
+      "raw_bytes": 7377,
+      "retained": "docs/spikes/evidence/native-metalfx/8eb56da2f5a793f4d2a268fe99ab5e8cc02837667d5260d67395f09bc80218c5.gz",
+      "retained_sha256": "abc74e12fb1d44ee35a9d6839e22772db49485e1e59348a9c7697bdae2f9afef"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render/src/metalfx/mod.rs",
+      "raw_sha256": "cdb5282de97ec2a14b26fc75f7482cea42e1e167bec7a948acf29d73d6022ea5",
+      "raw_bytes": 2339,
+      "retained": "docs/spikes/evidence/native-metalfx/cdb5282de97ec2a14b26fc75f7482cea42e1e167bec7a948acf29d73d6022ea5.gz",
+      "retained_sha256": "1579b4933be6b337af391c4b79ce5ba1073d3655ea77ba009ca6ce5139e64251"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render/src/metalfx/native.rs",
+      "raw_sha256": "74f41a8fbdfa22702c0bd2dbcf9165e8dcf5f64701e539a85d9cc1cc9a4e251c",
+      "raw_bytes": 9393,
+      "retained": "docs/spikes/evidence/native-metalfx/74f41a8fbdfa22702c0bd2dbcf9165e8dcf5f64701e539a85d9cc1cc9a4e251c.gz",
+      "retained_sha256": "3ef9840ddb50c4395e97a94a8bf2b60ac81fc01936758e10c21ef478d02cad65"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render/src/metalfx/numerics.rs",
+      "raw_sha256": "b98f99ba898674847281183977c9263e21072ecb63b9e8211c451a183eee7228",
+      "raw_bytes": 4799,
+      "retained": "docs/spikes/evidence/native-metalfx/b98f99ba898674847281183977c9263e21072ecb63b9e8211c451a183eee7228.gz",
+      "retained_sha256": "f1c2cd03c217be61cab01091ecc576745c95b89fd6d0433c88c1734cbce80964"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render/src/metalfx/owner.rs",
+      "raw_sha256": "632a11e10cff34b69bc2f31c9f0a7719c0edf64551022ed3a50fbe1b7b0ab59b",
+      "raw_bytes": 8615,
+      "retained": "docs/spikes/evidence/native-metalfx/632a11e10cff34b69bc2f31c9f0a7719c0edf64551022ed3a50fbe1b7b0ab59b.gz",
+      "retained_sha256": "9600a290d3bdb8461ef2cedac4362ef944e86e1ab292f2d9d48116ae096ffa77"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render/src/metalfx/plan.rs",
+      "raw_sha256": "677a09e0033012f91bd46d9363aba2240ccf213b5db32246b32f4a8771c0dbdf",
+      "raw_bytes": 4179,
+      "retained": "docs/spikes/evidence/native-metalfx/677a09e0033012f91bd46d9363aba2240ccf213b5db32246b32f4a8771c0dbdf.gz",
+      "retained_sha256": "bbfcf56960fc8b7830c0930e11b06b91b617df1064db031ab88da603b3bae219"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render/src/metalfx/prepare.wgsl",
+      "raw_sha256": "452887b49bb41def01b56cdfe11e336faae6de1965b2008d55b757f0ba9d1dc1",
+      "raw_bytes": 1105,
+      "retained": "docs/spikes/evidence/native-metalfx/452887b49bb41def01b56cdfe11e336faae6de1965b2008d55b757f0ba9d1dc1.gz",
+      "retained_sha256": "f6835bacb7f7a7ab756e4391158ef950ea9e165d1da69472110b728b9654a501"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render/src/metalfx/system.rs",
+      "raw_sha256": "c66f3bb80245dee5e5ac6e4c6217878c481f1c01da27181ddd4548067897d85c",
+      "raw_bytes": 12773,
+      "retained": "docs/spikes/evidence/native-metalfx/c66f3bb80245dee5e5ac6e4c6217878c481f1c01da27181ddd4548067897d85c.gz",
+      "retained_sha256": "5c1adccbbd01586e3a6ea8fa5a5545394be60d279690054fc6c427f24208fb4c"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render/src/metalfx/targets.rs",
+      "raw_sha256": "5f03770e7a48dcb7a2ff3e4860f5e8f0a876335f16f9d3d13dad402c0fe0d198",
+      "raw_bytes": 2067,
+      "retained": "docs/spikes/evidence/native-metalfx/5f03770e7a48dcb7a2ff3e4860f5e8f0a876335f16f9d3d13dad402c0fe0d198.gz",
+      "retained_sha256": "cc35844c3ee7a48efac3f07b5367e1ab69ac9d1d7d88c6375eca7c55fa9c887c"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render/src/metalfx_retained_tests.rs",
+      "raw_sha256": "fe6b1f209f4ddd0282b01436b944b8f8da688125003c6aa809d66380d0475b32",
+      "raw_bytes": 6714,
+      "retained": "docs/spikes/evidence/native-metalfx/fe6b1f209f4ddd0282b01436b944b8f8da688125003c6aa809d66380d0475b32.gz",
+      "retained_sha256": "0c772927b49df8ada158250906de74756f7e02c04e25811ed6c9209e8c554ef5"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render/src/output.rs",
+      "raw_sha256": "4004e06e997a8b778d38927c0d00502c5f98e531c1af64896b4b85ce96841e37",
+      "raw_bytes": 7872,
+      "retained": "docs/spikes/evidence/native-metalfx/4004e06e997a8b778d38927c0d00502c5f98e531c1af64896b4b85ce96841e37.gz",
+      "retained_sha256": "38989c12d8434a49a9c45b6b302794fb6af076f41d9560b1df6f2eaee7f6b46e"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render/src/retained.rs",
+      "raw_sha256": "e263b508fc0c42eaeef19040d76201921778129307c5269827781ca357362068",
+      "raw_bytes": 25124,
+      "retained": "docs/spikes/evidence/native-metalfx/e263b508fc0c42eaeef19040d76201921778129307c5269827781ca357362068.gz",
+      "retained_sha256": "5083c4d0f73360c4c98cc41a50393213a6682a4f958f9f46ae41a896f33a3d90"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render/src/timing/mod.rs",
+      "raw_sha256": "eceadbf21fb200917eb26783ba0c74e944d7428c9fc1e4f4136fed9febb5a32e",
+      "raw_bytes": 3549,
+      "retained": "docs/spikes/evidence/native-metalfx/eceadbf21fb200917eb26783ba0c74e944d7428c9fc1e4f4136fed9febb5a32e.gz",
+      "retained_sha256": "a5302e6a9c7df4d599fc27f0ef85cccb0641d8f7eceee04870272c756b7cede8"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render/src/timing/recorder.rs",
+      "raw_sha256": "a86f809f7999edd11d3455889038b99a64f0cb76bd1139925bb3b72de3ec0e1a",
+      "raw_bytes": 8077,
+      "retained": "docs/spikes/evidence/native-metalfx/a86f809f7999edd11d3455889038b99a64f0cb76bd1139925bb3b72de3ec0e1a.gz",
+      "retained_sha256": "e102f7e93eee5ded57f9e165f7512f92e821e7f5543cdb030f72585459d20a14"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render/src/upscaling/common.wgsl",
+      "raw_sha256": "7a1041707465239b046b31ae9d86e87f4372635056622eeacb8a3142e105344a",
+      "raw_bytes": 1622,
+      "retained": "docs/spikes/evidence/native-metalfx/7a1041707465239b046b31ae9d86e87f4372635056622eeacb8a3142e105344a.gz",
+      "retained_sha256": "c2c8c09f70fbbfd6fb93a36db080f7017e90768e7615a2a2287c02cff4e16ff2"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render/src/upscaling/composite.wgsl",
+      "raw_sha256": "4be7f263090c163350cd5e54541330a6aedd2e32c5619532c5ca9d2fe6f43845",
+      "raw_bytes": 820,
+      "retained": "docs/spikes/evidence/native-metalfx/4be7f263090c163350cd5e54541330a6aedd2e32c5619532c5ca9d2fe6f43845.gz",
+      "retained_sha256": "e0832ad21b1e083244be5c1f784e9252f10b58247d0beace1d842d3cbe9f62d7"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render/src/upscaling/owner.rs",
+      "raw_sha256": "7491961f813a46daf634761975584eb3aef4b93820fc550cd86a3c47a2fe254a",
+      "raw_bytes": 4555,
+      "retained": "docs/spikes/evidence/native-metalfx/7491961f813a46daf634761975584eb3aef4b93820fc550cd86a3c47a2fe254a.gz",
+      "retained_sha256": "07bee1989f73be49a9c8de6d3b75788c3a2b99121e3a9a504f01c39d5a4dfe0a"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render/src/upscaling/resolve.wgsl",
+      "raw_sha256": "a8e646701cb7e5d24476a2ecc49a76b2f7d77b3646ddfe469093586316337d34",
+      "raw_bytes": 3589,
+      "retained": "docs/spikes/evidence/native-metalfx/a8e646701cb7e5d24476a2ecc49a76b2f7d77b3646ddfe469093586316337d34.gz",
+      "retained_sha256": "a17fe12e45fa34ac8b764a44843dd39bced413af92a9c8156254a1fa9c4cb55a"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render_gpu_host/Cargo.toml",
+      "raw_sha256": "924eac71db24a933ab5341eb89aeb07e2d212e8805ea85289ad6fb355183ea92",
+      "raw_bytes": 2064,
+      "retained": "docs/spikes/evidence/native-metalfx/924eac71db24a933ab5341eb89aeb07e2d212e8805ea85289ad6fb355183ea92.gz",
+      "retained_sha256": "aa82974f26681abb93356ec6c560e1bd37569f81921c65d4eec140ef1e6cee42"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render_gpu_host/src/lib.rs",
+      "raw_sha256": "8026419afd21bd83df0047da8997fac4b938f887c4d87b92b6846ee34453bfe9",
+      "raw_bytes": 14589,
+      "retained": "docs/spikes/evidence/native-metalfx/8026419afd21bd83df0047da8997fac4b938f887c4d87b92b6846ee34453bfe9.gz",
+      "retained_sha256": "a7f55c7772644ab71b5ac1eb4262c7eda43a8742b717af515df113bae42f5235"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render_gpu_host/src/motion.rs",
+      "raw_sha256": "14854dd520e3c496499096dcc258b0c121ae7838813f362386e758029b33f899",
+      "raw_bytes": 5099,
+      "retained": "docs/spikes/evidence/native-metalfx/14854dd520e3c496499096dcc258b0c121ae7838813f362386e758029b33f899.gz",
+      "retained_sha256": "10c6dafbbe099c103f23ea17bb2e03001b212aab5919206b0c36a5eade24faab"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/crates/incant_render_gpu_host/src/resolution.rs",
+      "raw_sha256": "cba901f393885dbf6f1a093e8ab0cbcb341ffebc1671ac47d23a9d22eef974e9",
+      "raw_bytes": 3282,
+      "retained": "docs/spikes/evidence/native-metalfx/cba901f393885dbf6f1a093e8ab0cbcb341ffebc1671ac47d23a9d22eef974e9.gz",
+      "retained_sha256": "7f3a8d619f39e8474a19785b1f794e7b63d38f04d0d67e53571c3fe28acc3e06"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/docs/spikes/native-metalfx.md",
+      "raw_sha256": "4d5ffa72669d99adc67d93f2c3ae0e9bfdbddbf427faf430131963a9000b9367",
+      "raw_bytes": 7404,
+      "retained": "docs/spikes/evidence/native-metalfx/4d5ffa72669d99adc67d93f2c3ae0e9bfdbddbf427faf430131963a9000b9367.gz",
+      "retained_sha256": "39cbeb60f1a87990810a6bf574abeb8d70810fa02816b189835a4db0388c9a34"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/pinned/10-mod.rs",
+      "raw_sha256": "daed7a2d7c1cd7b9431b3009b5b7feb2ca8e45648ffd7eb0185c46cfcbeb2ada",
+      "raw_bytes": 36654,
+      "retained": "docs/spikes/evidence/native-metalfx/daed7a2d7c1cd7b9431b3009b5b7feb2ca8e45648ffd7eb0185c46cfcbeb2ada.gz",
+      "retained_sha256": "9345a160d8b46024cb31aa7167a5417544b41f0d6157346008c2ae5ea8fde762"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/pinned/11-command.rs",
+      "raw_sha256": "49b3dd48ea241ac66738854b9e76a77ba2863fdc9fe1aaa936e1bc16e5d79e52",
+      "raw_bytes": 76832,
+      "retained": "docs/spikes/evidence/native-metalfx/49b3dd48ea241ac66738854b9e76a77ba2863fdc9fe1aaa936e1bc16e5d79e52.gz",
+      "retained_sha256": "618907605a04aab9b30ac814397350e4047d784efd07c5923bd61c6158762e67"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/pinned/12-device.rs",
+      "raw_sha256": "c34d2bd9fe2a547f5cb28106c07ed22c99aa5891c0ad6a75f08ec6d70a1f6864",
+      "raw_bytes": 89259,
+      "retained": "docs/spikes/evidence/native-metalfx/c34d2bd9fe2a547f5cb28106c07ed22c99aa5891c0ad6a75f08ec6d70a1f6864.gz",
+      "retained_sha256": "ebd447b1938bde64cf1d9205f73f4a63cbdae7a3222902a2f9db0730081e68c3"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/pinned/13-MTLFXTemporalScaler.h",
+      "raw_sha256": "e6cbd09203483aa5ab338ff8768cc2d04210e139efcb88803807a2291eb9030a",
+      "raw_bytes": 23700,
+      "retained": "docs/spikes/evidence/native-metalfx/e6cbd09203483aa5ab338ff8768cc2d04210e139efcb88803807a2291eb9030a.gz",
+      "retained_sha256": "2f602742a3dcb4032041f77c342296eb9a39e92caaeca426204df3659cf93c4b"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/pinned/6-command_encoder.rs",
+      "raw_sha256": "b5a770f88388e3b1368e4c8adeb65886958353fb6130ac392b1f43e7f7a8bbe7",
+      "raw_bytes": 19855,
+      "retained": "docs/spikes/evidence/native-metalfx/b5a770f88388e3b1368e4c8adeb65886958353fb6130ac392b1f43e7f7a8bbe7.gz",
+      "retained_sha256": "e7e646d9198b718f7dcd677b7d5e5421ac21535ad920d09b213e7d5ac69a202e"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/pinned/7-texture.rs",
+      "raw_sha256": "aee3469d3d722c85521b64a770de20105e49aa64c6f56342442c7335f79505cd",
+      "raw_bytes": 6446,
+      "retained": "docs/spikes/evidence/native-metalfx/aee3469d3d722c85521b64a770de20105e49aa64c6f56342442c7335f79505cd.gz",
+      "retained_sha256": "bf14b94b01837f8a575af2af0bde9c4f897c78138b81bc5b184136c300f08af1"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/pinned/8-as_hal.rs",
+      "raw_sha256": "5d08d8e49b016abb662957d8e42ab748d580a2f3e449caeeb7311f222b8818f6",
+      "raw_bytes": 12413,
+      "retained": "docs/spikes/evidence/native-metalfx/5d08d8e49b016abb662957d8e42ab748d580a2f3e449caeeb7311f222b8818f6.gz",
+      "retained_sha256": "a0803a9a96fc7a37eea3aa8623236c09025999fe6a60de5f14a813478a68946e"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/pinned/9-mod.rs",
+      "raw_sha256": "f995d91f620482e378724e3a3e972e4f1d65502a8c83f43469ce079887a5d8b8",
+      "raw_bytes": 75727,
+      "retained": "docs/spikes/evidence/native-metalfx/f995d91f620482e378724e3a3e972e4f1d65502a8c83f43469ce079887a5d8b8.gz",
+      "retained_sha256": "b4c93f4323ee610201ea7a9705642dedbfd488101ef6ab466e9a57487d27dd78"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/pinned/objc-0-MTLFXTemporalScaler.rs",
+      "raw_sha256": "c80bf2eede0888940630d6e17ff58773d7deb1f0d60a3d78388c76a486c557ef",
+      "raw_bytes": 35680,
+      "retained": "docs/spikes/evidence/native-metalfx/c80bf2eede0888940630d6e17ff58773d7deb1f0d60a3d78388c76a486c557ef.gz",
+      "retained_sha256": "29fa37e34b58650fb266136626b5d620593d958bf7f69b6099bfb61ae9f0a17d"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/files/pinned/objc-1-object.rs",
+      "raw_sha256": "190e54d96a4102babc3eaaf9993eea9cfaf5b7354602bc173d12c423e0f2c67e",
+      "raw_bytes": 3715,
+      "retained": "docs/spikes/evidence/native-metalfx/190e54d96a4102babc3eaaf9993eea9cfaf5b7354602bc173d12c423e0f2c67e.gz",
+      "retained_sha256": "1c7cbc583f335583bc5a7b4bfd3ca44234095706f791971174693080b0f59c87"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/freeze.json",
+      "raw_sha256": "b68c62d5e58b89a07aebfd17f144902917cee5890c4d09fbf06f51a64146a77b",
+      "raw_bytes": 15036,
+      "retained": "docs/spikes/evidence/native-metalfx/b68c62d5e58b89a07aebfd17f144902917cee5890c4d09fbf06f51a64146a77b.gz",
+      "retained_sha256": "0c3c55872a01c2fac26970391afcc03d17ad898e83cc9eaa8829706f3adfb6ca"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-source-003/tracked.patch",
+      "raw_sha256": "3ec285f561f83cbb17caa5365137a3de672895d5d44f0acb2193450d3a0bc27e",
+      "raw_bytes": 23072,
+      "retained": "docs/spikes/evidence/native-metalfx/3ec285f561f83cbb17caa5365137a3de672895d5d44f0acb2193450d3a0bc27e.gz",
+      "retained_sha256": "49a276e67066e08aae06cb31f340cb394ec4d4c9c846655c4d8659fc38faf270"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-survey-001/survey.json",
+      "raw_sha256": "aac9816b48970490b4a4220f6050ea9cdb6f13b6df4ae20dab7854d190b53272",
+      "raw_bytes": 4966,
+      "retained": "docs/spikes/evidence/native-metalfx/aac9816b48970490b4a4220f6050ea9cdb6f13b6df4ae20dab7854d190b53272.gz",
+      "retained_sha256": "6686b761f48f79ec27e4a82b38adac710b61bdc9517800428ed5c0b1588c491c"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-reviews/native-metalfx-source-20261013.json",
+      "raw_sha256": "105e456508d7ec75361f886734c43535e92100ba34567f5992635bd68c61f85b",
+      "raw_bytes": 38055,
+      "retained": "docs/spikes/evidence/native-metalfx/105e456508d7ec75361f886734c43535e92100ba34567f5992635bd68c61f85b.gz",
+      "retained_sha256": "539890878d484cb90d15e1309404325ffa8742e0b3daee8f746bee069648f61f"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-reviews/audit-native-metalfx-source-20261013.py",
+      "raw_sha256": "81708796162015988b55791c174d86ca4d2974e3c052f197fec9d5e26d4d6512",
+      "raw_bytes": 5761,
+      "retained": "docs/spikes/evidence/native-metalfx/81708796162015988b55791c174d86ca4d2974e3c052f197fec9d5e26d4d6512.gz",
+      "retained_sha256": "5209cb6e4f0f18354913828e7b8c2df0fef15db4bcb5c5a0c3f0e7cb02c443f2"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-reviews/native-metalfx-source-extra-pins/command_buffer_actions.rs",
+      "raw_sha256": "ebc5f8cfb69ec6aaa4ca35ee634b36e8b21ab54bd712a6730cfbda8cd7f192fd",
+      "raw_bytes": 6791,
+      "retained": "docs/spikes/evidence/native-metalfx/ebc5f8cfb69ec6aaa4ca35ee634b36e8b21ab54bd712a6730cfbda8cd7f192fd.gz",
+      "retained_sha256": "41433d0bf75f9bfa8695274950aa5d6ef2033229a51e32bf4364a47d91c9c54b"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-reviews/native-metalfx-source-extra-pins/queue.rs",
+      "raw_sha256": "b3811f0df3ccad53d990bfd66c650759abb67654779b08e160a437b51abd7c71",
+      "raw_bytes": 14680,
+      "retained": "docs/spikes/evidence/native-metalfx/b3811f0df3ccad53d990bfd66c650759abb67654779b08e160a437b51abd7c71.gz",
+      "retained_sha256": "f7735b0c847c9824228556523e09c88eb434c4a165b2f4aa81e24e36fa6d0e81"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-001/adapter-001.log",
+      "raw_sha256": "0689e028ad92cc89bc3fa620bc911c49b03a3eaa59156d8a59567617768ce199",
+      "raw_bytes": 5204,
+      "retained": "docs/spikes/evidence/native-metalfx/0689e028ad92cc89bc3fa620bc911c49b03a3eaa59156d8a59567617768ce199.gz",
+      "retained_sha256": "81d330c282a493f7b7c1e6f0e13c266e6bd5f8ed4dbf451ccf2e45aab65c588c"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-001/adapter-002.log",
+      "raw_sha256": "c590b445840f70179b32a0178d8663d9dd93ffdbd146f8c1e0da6e2db266d068",
+      "raw_bytes": 2781,
+      "retained": "docs/spikes/evidence/native-metalfx/c590b445840f70179b32a0178d8663d9dd93ffdbd146f8c1e0da6e2db266d068.gz",
+      "retained_sha256": "8c93103d285084cac4cd4fc8a1cd5840f055be5f19b2d262460d023bf5b49d3b"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-001/adapter-003.log",
+      "raw_sha256": "2e54d46183a9ee1707d12e1086a63a68eb36ee2fbe98888f2a7c56918e8195ff",
+      "raw_bytes": 4323,
+      "retained": "docs/spikes/evidence/native-metalfx/2e54d46183a9ee1707d12e1086a63a68eb36ee2fbe98888f2a7c56918e8195ff.gz",
+      "retained_sha256": "a8ee03c415feb26c77fb4ffb5638a5b3fcbcff0b89aaccf1b5f112c036ee8797"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-001/binaries.json",
+      "raw_sha256": "9430a95267d935ae08be592c7ac3ba2388b4bab26d12397aee71c4991c5f6ebe",
+      "raw_bytes": 5771,
+      "retained": "docs/spikes/evidence/native-metalfx/9430a95267d935ae08be592c7ac3ba2388b4bab26d12397aee71c4991c5f6ebe.gz",
+      "retained_sha256": "4833b9c1cc3e0ce08fe1dc332e74b66440a5daae0b2b79ce1a4e850f38d1ab62"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-001/checks.json",
+      "raw_sha256": "dfd91831e1184164fb7ae8410ac3a5360c6ef114647328fbdc792bfcd17c57a1",
+      "raw_bytes": 5989,
+      "retained": "docs/spikes/evidence/native-metalfx/dfd91831e1184164fb7ae8410ac3a5360c6ef114647328fbdc792bfcd17c57a1.gz",
+      "retained_sha256": "9c74d2fc9acf5c60a7de9c5957cfc0df29378f3c11bb2a0e5d00da4db3b45c56"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-001/clippy-001.log",
+      "raw_sha256": "0d5bc2a41e7c1c375cef7dc9f8aceedec04c5c2313a449ec90d0d3ed9cfcc654",
+      "raw_bytes": 2103,
+      "retained": "docs/spikes/evidence/native-metalfx/0d5bc2a41e7c1c375cef7dc9f8aceedec04c5c2313a449ec90d0d3ed9cfcc654.gz",
+      "retained_sha256": "a9e515fb9939ba0cca32dc1612f1d318a33a137993bdc0ba4bd4ffc1e50fe12b"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-001/clippy-002.log",
+      "raw_sha256": "4c44971a5a773e2867f465a3a1eb8073b078507056e79e06eb2e3a52a7ee924c",
+      "raw_bytes": 319,
+      "retained": "docs/spikes/evidence/native-metalfx/4c44971a5a773e2867f465a3a1eb8073b078507056e79e06eb2e3a52a7ee924c.gz",
+      "retained_sha256": "da0a90dc67d13e85533a692a82a08557081b929be48d65ba91f508a20e32acb3"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-001/conventions.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "retained": "docs/spikes/evidence/native-metalfx/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-001/cooked-refusal.log",
+      "raw_sha256": "74523cb14e3863898615c1c95638805288cea3482b75193d14ce537bef0c931e",
+      "raw_bytes": 20705,
+      "retained": "docs/spikes/evidence/native-metalfx/74523cb14e3863898615c1c95638805288cea3482b75193d14ce537bef0c931e.gz",
+      "retained_sha256": "e06617997e5444b853943846b31fd3b8e0376c20ff2f55a76a867407ee4dc97e"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-001/default-all.log",
+      "raw_sha256": "0d2fa1385238ade1e475565435af87c7c982c2535d9d8641904dd5d7626cb72b",
+      "raw_bytes": 30219,
+      "retained": "docs/spikes/evidence/native-metalfx/0d2fa1385238ade1e475565435af87c7c982c2535d9d8641904dd5d7626cb72b.gz",
+      "retained_sha256": "93ba7979a561378692cdb928c408b1fc4154d0ff90d81ed55e419c87c52bb593"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-001/default-clippy.log",
+      "raw_sha256": "e3ca6ff02c1ec8eb9ef8b57d3bba62195aeaec5b0c21243a6fa4f963a3a06785",
+      "raw_bytes": 319,
+      "retained": "docs/spikes/evidence/native-metalfx/e3ca6ff02c1ec8eb9ef8b57d3bba62195aeaec5b0c21243a6fa4f963a3a06785.gz",
+      "retained_sha256": "374f4ba84ad4cf5e925edbd2d650071bac0a93c907c8e3fee45d6487a922cfcb"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-001/focused-001.log",
+      "raw_sha256": "dbd1c4668a4e68ee437faef6e485d418e5ca0a2bf1f2eddec40818fde881ae8f",
+      "raw_bytes": 1230,
+      "retained": "docs/spikes/evidence/native-metalfx/dbd1c4668a4e68ee437faef6e485d418e5ca0a2bf1f2eddec40818fde881ae8f.gz",
+      "retained_sha256": "b71a61f2529cda0d0a09ef7d3b4ddcceb24f1fb94900646612495c9345d8acb9"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-001/focused-002.log",
+      "raw_sha256": "d570a1d620694b1174cf2c1fc0d70d9e8bbf6b4311e2043cc90856d4c8a55b49",
+      "raw_bytes": 1247,
+      "retained": "docs/spikes/evidence/native-metalfx/d570a1d620694b1174cf2c1fc0d70d9e8bbf6b4311e2043cc90856d4c8a55b49.gz",
+      "retained_sha256": "b8b761a41b17fa3ffab16bb594e0430cbc639bea21c33deeef5b39279e39911c"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-001/focused-003.log",
+      "raw_sha256": "bb8a913152701b323971877e8f654ebf664b5bb4b006084be4774756705d7c4c",
+      "raw_bytes": 1806,
+      "retained": "docs/spikes/evidence/native-metalfx/bb8a913152701b323971877e8f654ebf664b5bb4b006084be4774756705d7c4c.gz",
+      "retained_sha256": "f0f750bcee8b0d481d8faa512ec5e56584d596d7176f33225c547a5aa55e255f"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-001/focused-004.log",
+      "raw_sha256": "6265b73ea7af1d66f3b0db71b6142952c5c2b419d7c32da89f4b11e533e24a05",
+      "raw_bytes": 2796,
+      "retained": "docs/spikes/evidence/native-metalfx/6265b73ea7af1d66f3b0db71b6142952c5c2b419d7c32da89f4b11e533e24a05.gz",
+      "retained_sha256": "35e1fee14f6da5117092fea91d689f748101aa969db1a864f72d0c5131e3f6f8"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-001/format.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "retained": "docs/spikes/evidence/native-metalfx/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-001/host-001.log",
+      "raw_sha256": "4585209efa1c3bab0d49a5e21969e14d8ed6790f4d6a2a6e3fd0c69c6c3e99a2",
+      "raw_bytes": 4090,
+      "retained": "docs/spikes/evidence/native-metalfx/4585209efa1c3bab0d49a5e21969e14d8ed6790f4d6a2a6e3fd0c69c6c3e99a2.gz",
+      "retained_sha256": "699e12c49ea2969df021711350ea76bd778513f2d06bb644059498aa46133df3"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-001/ios-native.log",
+      "raw_sha256": "3d1d90eb58100602eca4028f2dca1a15c7990e4c421069180661af019eb65a70",
+      "raw_bytes": 4718,
+      "retained": "docs/spikes/evidence/native-metalfx/3d1d90eb58100602eca4028f2dca1a15c7990e4c421069180661af019eb65a70.gz",
+      "retained_sha256": "eab81ad75b5b81319aa41c22e0e5d6d8056e48c535d2ce6df2f740ad3b05b497"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-001/native-all.log",
+      "raw_sha256": "41f0650dac77566f3a3d279b9ab591cb73aa743af4a9de557095c56875d59c23",
+      "raw_bytes": 30492,
+      "retained": "docs/spikes/evidence/native-metalfx/41f0650dac77566f3a3d279b9ab591cb73aa743af4a9de557095c56875d59c23.gz",
+      "retained_sha256": "46bc97bea2b0d9e9199a222a96b9d3247731131f30d2051e8a39758991fbfa40"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-001/native-clippy.log",
+      "raw_sha256": "faaae28110f269817988bdad9fb366f0d59c2037fb22caf070e5771e6b05866c",
+      "raw_bytes": 319,
+      "retained": "docs/spikes/evidence/native-metalfx/faaae28110f269817988bdad9fb366f0d59c2037fb22caf070e5771e6b05866c.gz",
+      "retained_sha256": "772b2ac98a37b850de934fb9f2126c0dfe65ebe3c3cb310b49b5d66284330c74"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-001/retained-001.log",
+      "raw_sha256": "e8ce6ba81a86fe5b697a9d52563d6ade7f9e4711056808f9f5741730c794fe3a",
+      "raw_bytes": 1603,
+      "retained": "docs/spikes/evidence/native-metalfx/e8ce6ba81a86fe5b697a9d52563d6ade7f9e4711056808f9f5741730c794fe3a.gz",
+      "retained_sha256": "fd6211608e7979e06fab13af5ba36fcbff53518bc47a323c3992310f7004beb1"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-001/retained-002.log",
+      "raw_sha256": "2d79f1845c343511c8af76dc1f53b2d04fb416c9a82b5a162b97c944cd1272ce",
+      "raw_bytes": 179,
+      "retained": "docs/spikes/evidence/native-metalfx/2d79f1845c343511c8af76dc1f53b2d04fb416c9a82b5a162b97c944cd1272ce.gz",
+      "retained_sha256": "00f4ee74d38101cae27df6fa7b94ab5d8ec123042865f6ec0fed6a49c808c5d5"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-001/run.py",
+      "raw_sha256": "794c77b131b640d3e3092e997b712aaa4bf276e2002390ef01b02a33a6b8657c",
+      "raw_bytes": 3365,
+      "retained": "docs/spikes/evidence/native-metalfx/794c77b131b640d3e3092e997b712aaa4bf276e2002390ef01b02a33a6b8657c.gz",
+      "retained_sha256": "7d51899142930c834e2bfc5de6e9a52f1d98ddc8234f5c896a006fd6427513eb"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-001/runtime-graph.log",
+      "raw_sha256": "ee908c708715917b5f33863cfa9ff249311ea508407af2fd9ac86f714679c03c",
+      "raw_bytes": 76,
+      "retained": "docs/spikes/evidence/native-metalfx/ee908c708715917b5f33863cfa9ff249311ea508407af2fd9ac86f714679c03c.gz",
+      "retained_sha256": "5cc48cf24e534b5aef2d26bb0f40dceb92413d38847d6760fb850bdf4244bafc"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-001/web-default.log",
+      "raw_sha256": "a8f05712b836e8eeb7354bc96b913405e0c2a43225d0a916518322d4f3b02197",
+      "raw_bytes": 1972,
+      "retained": "docs/spikes/evidence/native-metalfx/a8f05712b836e8eeb7354bc96b913405e0c2a43225d0a916518322d4f3b02197.gz",
+      "retained_sha256": "5e2f0877b614e43a646de53a094dd54098a3b2d9f59e405e5ca7486c19c96aa3"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-001/web-native.log",
+      "raw_sha256": "f15606f61ccf49bb10b4c601ca95e4480f6a3e41c797ab0cd2ba6c59ea3b825e",
+      "raw_bytes": 2646,
+      "retained": "docs/spikes/evidence/native-metalfx/f15606f61ccf49bb10b4c601ca95e4480f6a3e41c797ab0cd2ba6c59ea3b825e.gz",
+      "retained_sha256": "ca6b4e5b1d65f568e371ec81cb3387d9b6eb6adfd43215c0f4ddd8805420e133"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-002/binaries.json",
+      "raw_sha256": "38b1aebd381a844d53d1436105c036452f6493ce8139badde8790a9774c2f92a",
+      "raw_bytes": 2684,
+      "retained": "docs/spikes/evidence/native-metalfx/38b1aebd381a844d53d1436105c036452f6493ce8139badde8790a9774c2f92a.gz",
+      "retained_sha256": "83b8db5a112e29faa6effcbe98a150f70013cffad22fb2d22099b7f148fa16ff"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-002/checks.json",
+      "raw_sha256": "2e65cb20c908ec4fa86631e5ed373e09701a8da870cc501a042314e2f9cd1b58",
+      "raw_bytes": 2832,
+      "retained": "docs/spikes/evidence/native-metalfx/2e65cb20c908ec4fa86631e5ed373e09701a8da870cc501a042314e2f9cd1b58.gz",
+      "retained_sha256": "963bf2e040da82ac72bad76f78b8802aed26c596eaa6c1215364283697c5c8ca"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-002/format.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "retained": "docs/spikes/evidence/native-metalfx/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-002/ios-native.log",
+      "raw_sha256": "86e47425112c6b3fb4a9f7d0453e7758b2ee473ae4f5b3448604c6a7042160a7",
+      "raw_bytes": 179,
+      "retained": "docs/spikes/evidence/native-metalfx/86e47425112c6b3fb4a9f7d0453e7758b2ee473ae4f5b3448604c6a7042160a7.gz",
+      "retained_sha256": "0777a8250ed1f001da50ceebe0b3d4d5c7c7ca13a1adf675a52555dcc2ee6375"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-002/manifest.json",
+      "raw_sha256": "ca8e07f1b47a59be326ebdb8794872df99c76cb4c946cc91c1fe31d3908b69f0",
+      "raw_bytes": 97222,
+      "retained": "docs/spikes/evidence/native-metalfx/ca8e07f1b47a59be326ebdb8794872df99c76cb4c946cc91c1fe31d3908b69f0.gz",
+      "retained_sha256": "1375b11de2006ed9c4e9cf8010623dc3c304abff3dbcfa555ce2283597ba2198"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-002/native-all.log",
+      "raw_sha256": "b8e0ba4212d87c6f555d1dc627917446935e542c1fd639dba7b0e8c6857d5fdd",
+      "raw_bytes": 30492,
+      "retained": "docs/spikes/evidence/native-metalfx/b8e0ba4212d87c6f555d1dc627917446935e542c1fd639dba7b0e8c6857d5fdd.gz",
+      "retained_sha256": "1c181d21401ee0321163f3e4438b2c25e91df9f339c2c74bd879cfc587cad74e"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-002/native-clippy.log",
+      "raw_sha256": "24ec07f33a810b66f37d214aa844b699c05ba5cf97e8b21e83d0eb74d34cdd5b",
+      "raw_bytes": 319,
+      "retained": "docs/spikes/evidence/native-metalfx/24ec07f33a810b66f37d214aa844b699c05ba5cf97e8b21e83d0eb74d34cdd5b.gz",
+      "retained_sha256": "7129dd9dbf3811d848355a457693c3213f68247295338d299a218f392650f1bb"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-002/retain.py",
+      "raw_sha256": "da06b25eea33aa2fbfcd7500f6c5152cfdf504c88b65f4dbdaff4ca9c9ec67ff",
+      "raw_bytes": 4422,
+      "retained": "docs/spikes/evidence/native-metalfx/da06b25eea33aa2fbfcd7500f6c5152cfdf504c88b65f4dbdaff4ca9c9ec67ff.gz",
+      "retained_sha256": "ccf486ed7b1c73ba2e7f4ce3d67650d4be9a6c9e392658a7a5835dd4047bba71"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-002/run.py",
+      "raw_sha256": "122c1dbb832a22c57899930e9ecf9c293c19149acee994c2e8cd570fa5e1e74f",
+      "raw_bytes": 3458,
+      "retained": "docs/spikes/evidence/native-metalfx/122c1dbb832a22c57899930e9ecf9c293c19149acee994c2e8cd570fa5e1e74f.gz",
+      "retained_sha256": "03722924dd3ca647ac96c56e9cc2154eca0a5e2a02bd9108432aca9b3dd31220"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-002/web-native.log",
+      "raw_sha256": "a1c5a0ca7b50feb313ad9e1e33139fd180ac6aeee536a11cdbc47cd9859b537b",
+      "raw_bytes": 1972,
+      "retained": "docs/spikes/evidence/native-metalfx/a1c5a0ca7b50feb313ad9e1e33139fd180ac6aeee536a11cdbc47cd9859b537b.gz",
+      "retained_sha256": "e5b06682b481bdda59b8798079869d480804d7b0ff2919b33a368c4a8ebebc0e"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-003/binaries.json",
+      "raw_sha256": "5c750802f8df2b11113476fe3f63ac93ff067bb11a1bf4fa4a6aaec0aab145af",
+      "raw_bytes": 2684,
+      "retained": "docs/spikes/evidence/native-metalfx/5c750802f8df2b11113476fe3f63ac93ff067bb11a1bf4fa4a6aaec0aab145af.gz",
+      "retained_sha256": "b2124b59e6bf7aa77d72670933f712837fc45801f537aaf246253c7ba83d22f8"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-003/checks.json",
+      "raw_sha256": "9e5a6710a879f18e264a7ceedb33d729ebf3c7e91561cc3ec4cf78b6c3152bd3",
+      "raw_bytes": 2832,
+      "retained": "docs/spikes/evidence/native-metalfx/9e5a6710a879f18e264a7ceedb33d729ebf3c7e91561cc3ec4cf78b6c3152bd3.gz",
+      "retained_sha256": "6ce49da5797a55d26e051f42f45e54f6805a5ddab80c5b3f4055cdc77697d949"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-003/format.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "retained": "docs/spikes/evidence/native-metalfx/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-003/ios-native.log",
+      "raw_sha256": "c8c089b7a8636db0edb4733b1021b12d1daed8044461911c78327d7ce2540ca0",
+      "raw_bytes": 179,
+      "retained": "docs/spikes/evidence/native-metalfx/c8c089b7a8636db0edb4733b1021b12d1daed8044461911c78327d7ce2540ca0.gz",
+      "retained_sha256": "8ec8338501a35254da6ce0c4bda3122d5fd75a213ca05b94bfb6cb6401e3b9bd"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-003/native-all.log",
+      "raw_sha256": "3cf390763f891f460b6f7e038f45bc79bc2a06b75f12cfde2db4d5a5a63899b0",
+      "raw_bytes": 30492,
+      "retained": "docs/spikes/evidence/native-metalfx/3cf390763f891f460b6f7e038f45bc79bc2a06b75f12cfde2db4d5a5a63899b0.gz",
+      "retained_sha256": "809da6bdc1cee38dc41f6ddddca51512d544f210af76395e8ae95b7f8c4b070d"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-003/native-clippy.log",
+      "raw_sha256": "81ae47405059b2806dcca8d0b962a13cc8fd6e5ed68b46319a7c54a47fa3980d",
+      "raw_bytes": 319,
+      "retained": "docs/spikes/evidence/native-metalfx/81ae47405059b2806dcca8d0b962a13cc8fd6e5ed68b46319a7c54a47fa3980d.gz",
+      "retained_sha256": "4bab65a417cf4eb0341efd66a130ee43329309d39b40ea8dfcd4ca146c3c0b92"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-003/retain.py",
+      "raw_sha256": "90d93c1854eb5d46423b981fb87b2307b86ac81e603c520389a06498e826761a",
+      "raw_bytes": 5362,
+      "retained": "docs/spikes/evidence/native-metalfx/90d93c1854eb5d46423b981fb87b2307b86ac81e603c520389a06498e826761a.gz",
+      "retained_sha256": "40b93b77115a6325e0d6aa02529dce0cc3672162e361038a51440e1bcb9ed9ad"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-003/run.py",
+      "raw_sha256": "5bdabe84b7e43fc62bb357b607acbac922132567f720dd02c391d3322e846698",
+      "raw_bytes": 3458,
+      "retained": "docs/spikes/evidence/native-metalfx/5bdabe84b7e43fc62bb357b607acbac922132567f720dd02c391d3322e846698.gz",
+      "retained_sha256": "7b3df615c68283ba6654f6a9d445dd7e1bf12b171037bf70e96dce74eb92d382"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-003/web-native.log",
+      "raw_sha256": "a1a4c05b6180bbeee5dc6b049c611adcf1f712f3d755f3c08a14b7d746ad80bb",
+      "raw_bytes": 1972,
+      "retained": "docs/spikes/evidence/native-metalfx/a1a4c05b6180bbeee5dc6b049c611adcf1f712f3d755f3c08a14b7d746ad80bb.gz",
+      "retained_sha256": "9dfc4d2110160b5c45e177f02cba5c6fbd44b0fdfe81d3a38fa38efeccf3a96b"
+    }
+  ],
+  "binaries": [
+    {
+      "generation": "native-metalfx-checks-001",
+      "source": "/tmp/incant-cpu-profiler-target/ci/deps/incant_render-867026fbadfe8587",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-001/binaries/native-all-incant_render-867026fbadfe8587",
+      "sha256": "251e1544a347b03824963dfb8ce157b5387636e41bb9e4d92055ec800f7e0f4c",
+      "bytes": 32079424,
+      "mode": "0o755",
+      "check": "native-all"
+    },
+    {
+      "generation": "native-metalfx-checks-001",
+      "source": "/tmp/incant-cpu-profiler-target/ci/deps/model_gpu-db508f280106b93a",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-001/binaries/native-all-model_gpu-db508f280106b93a",
+      "sha256": "3f92e880b58eb0a6a20c9dbb4fea5bf296e666356daa1f99a42bc9789f686313",
+      "bytes": 16694200,
+      "mode": "0o755",
+      "check": "native-all"
+    },
+    {
+      "generation": "native-metalfx-checks-001",
+      "source": "/tmp/incant-cpu-profiler-target/ci/deps/persistent_cache-66c0ea53b1b68c10",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-001/binaries/native-all-persistent_cache-66c0ea53b1b68c10",
+      "sha256": "29fac66c7286d03e2e917f366c2e3b99a37cc8eee3c01e1cb509f75b8fe1008d",
+      "bytes": 1027024,
+      "mode": "0o755",
+      "check": "native-all"
+    },
+    {
+      "generation": "native-metalfx-checks-001",
+      "source": "/tmp/incant-cpu-profiler-target/ci/deps/timestamp_backend_probe-249966a012e2760b",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-001/binaries/native-all-timestamp_backend_probe-249966a012e2760b",
+      "sha256": "2db06f94e9e293f58af92dfba458cca2e00ddcc80fd3bbf420e943ab794bba35",
+      "bytes": 6589768,
+      "mode": "0o755",
+      "check": "native-all"
+    },
+    {
+      "generation": "native-metalfx-checks-001",
+      "source": "/tmp/incant-cpu-profiler-target/ci/deps/incant_render_gpu_host-f6661bd04d8a8726",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-001/binaries/native-all-incant_render_gpu_host-f6661bd04d8a8726",
+      "sha256": "556a6bbfcf75bbfd5dc73b3162f5eaa17caa3d81555a1df021336e047d82bb29",
+      "bytes": 1075288,
+      "mode": "0o755",
+      "check": "native-all"
+    },
+    {
+      "generation": "native-metalfx-checks-001",
+      "source": "/tmp/incant-cpu-profiler-target/ci/deps/game-d389e05e8a51233d",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-001/binaries/native-all-game-d389e05e8a51233d",
+      "sha256": "4e364f2eaf2867b0cee985189d64667212af3290cda0cfa6647df519d4c058df",
+      "bytes": 32023976,
+      "mode": "0o755",
+      "check": "native-all"
+    },
+    {
+      "generation": "native-metalfx-checks-001",
+      "source": "/tmp/incant-cpu-profiler-target/ci/deps/ui-3092e001c1d32b43",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-001/binaries/native-all-ui-3092e001c1d32b43",
+      "sha256": "6a98885d40c64d9cc39d64e41b8f76bc32daa2bc8ed75d1205f29b1df081080e",
+      "bytes": 31564160,
+      "mode": "0o755",
+      "check": "native-all"
+    },
+    {
+      "generation": "native-metalfx-checks-001",
+      "source": "/tmp/incant-cpu-profiler-target/ci/deps/incant_render-90f6082e9b891519",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-001/binaries/default-all-incant_render-90f6082e9b891519",
+      "sha256": "818eacb2afd98620c5b3aeec927cf307b6429b2cb8ae90afd51e75990321c228",
+      "bytes": 31804288,
+      "mode": "0o755",
+      "check": "default-all"
+    },
+    {
+      "generation": "native-metalfx-checks-001",
+      "source": "/tmp/incant-cpu-profiler-target/ci/deps/model_gpu-ea4ec409a7f81803",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-001/binaries/default-all-model_gpu-ea4ec409a7f81803",
+      "sha256": "6f1f382c2c035999f28d85f3fc56c5e8bbafbc1983ee9ec33586c6cffee56716",
+      "bytes": 16550472,
+      "mode": "0o755",
+      "check": "default-all"
+    },
+    {
+      "generation": "native-metalfx-checks-001",
+      "source": "/tmp/incant-cpu-profiler-target/ci/deps/persistent_cache-56a84c8f1d426b30",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-001/binaries/default-all-persistent_cache-56a84c8f1d426b30",
+      "sha256": "8bea9987ad5177367977f1cb48cc1915c810b206ac89548ea6454fbdc36f72a6",
+      "bytes": 1027024,
+      "mode": "0o755",
+      "check": "default-all"
+    },
+    {
+      "generation": "native-metalfx-checks-001",
+      "source": "/tmp/incant-cpu-profiler-target/ci/deps/timestamp_backend_probe-f2bd3f8092008568",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-001/binaries/default-all-timestamp_backend_probe-f2bd3f8092008568",
+      "sha256": "e956b1ea6263a3afbc9892900fc8f5c197fbe850e17c3625fc4e56ad45859554",
+      "bytes": 6589624,
+      "mode": "0o755",
+      "check": "default-all"
+    },
+    {
+      "generation": "native-metalfx-checks-001",
+      "source": "/tmp/incant-cpu-profiler-target/ci/deps/incant_render_gpu_host-0795fd9ccf521965",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-001/binaries/default-all-incant_render_gpu_host-0795fd9ccf521965",
+      "sha256": "0a422372dc72ec42d0ed53cb647b2a95e002b49a9ada94f370fea08a3943e9dd",
+      "bytes": 1075272,
+      "mode": "0o755",
+      "check": "default-all"
+    },
+    {
+      "generation": "native-metalfx-checks-001",
+      "source": "/tmp/incant-cpu-profiler-target/ci/deps/game-35bb67096a4febdf",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-001/binaries/default-all-game-35bb67096a4febdf",
+      "sha256": "24edddeaf5972d60187a3883acf2e338b7fbb79b9f0295054353da15ab772701",
+      "bytes": 31865320,
+      "mode": "0o755",
+      "check": "default-all"
+    },
+    {
+      "generation": "native-metalfx-checks-001",
+      "source": "/tmp/incant-cpu-profiler-target/ci/deps/ui-a00b00c0f89810d0",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-001/binaries/default-all-ui-a00b00c0f89810d0",
+      "sha256": "9f5ec986ca34ee845c55313127e278713a070d3f1ec36c8fe6572045948cf80e",
+      "bytes": 31388976,
+      "mode": "0o755",
+      "check": "default-all"
+    },
+    {
+      "generation": "native-metalfx-checks-001",
+      "source": "/tmp/incant-cpu-profiler-target/ci/deps/incant_render-63edf8524b73f433",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-001/binaries/cooked-refusal-incant_render-63edf8524b73f433",
+      "sha256": "425bbdb26ab7b6859e30d4972a287392005e90f8661d181dabc2b83d8b75ea08",
+      "bytes": 32376832,
+      "mode": "0o755",
+      "check": "cooked-refusal"
+    },
+    {
+      "generation": "native-metalfx-checks-002",
+      "source": "/tmp/incant-cpu-profiler-target/ci/deps/incant_render-867026fbadfe8587",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-002/binaries/native-all-incant_render-867026fbadfe8587",
+      "sha256": "251e1544a347b03824963dfb8ce157b5387636e41bb9e4d92055ec800f7e0f4c",
+      "bytes": 32079424,
+      "mode": "0o755",
+      "check": "native-all"
+    },
+    {
+      "generation": "native-metalfx-checks-002",
+      "source": "/tmp/incant-cpu-profiler-target/ci/deps/model_gpu-db508f280106b93a",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-002/binaries/native-all-model_gpu-db508f280106b93a",
+      "sha256": "3f92e880b58eb0a6a20c9dbb4fea5bf296e666356daa1f99a42bc9789f686313",
+      "bytes": 16694200,
+      "mode": "0o755",
+      "check": "native-all"
+    },
+    {
+      "generation": "native-metalfx-checks-002",
+      "source": "/tmp/incant-cpu-profiler-target/ci/deps/persistent_cache-66c0ea53b1b68c10",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-002/binaries/native-all-persistent_cache-66c0ea53b1b68c10",
+      "sha256": "29fac66c7286d03e2e917f366c2e3b99a37cc8eee3c01e1cb509f75b8fe1008d",
+      "bytes": 1027024,
+      "mode": "0o755",
+      "check": "native-all"
+    },
+    {
+      "generation": "native-metalfx-checks-002",
+      "source": "/tmp/incant-cpu-profiler-target/ci/deps/timestamp_backend_probe-249966a012e2760b",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-002/binaries/native-all-timestamp_backend_probe-249966a012e2760b",
+      "sha256": "2db06f94e9e293f58af92dfba458cca2e00ddcc80fd3bbf420e943ab794bba35",
+      "bytes": 6589768,
+      "mode": "0o755",
+      "check": "native-all"
+    },
+    {
+      "generation": "native-metalfx-checks-002",
+      "source": "/tmp/incant-cpu-profiler-target/ci/deps/incant_render_gpu_host-f6661bd04d8a8726",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-002/binaries/native-all-incant_render_gpu_host-f6661bd04d8a8726",
+      "sha256": "556a6bbfcf75bbfd5dc73b3162f5eaa17caa3d81555a1df021336e047d82bb29",
+      "bytes": 1075288,
+      "mode": "0o755",
+      "check": "native-all"
+    },
+    {
+      "generation": "native-metalfx-checks-002",
+      "source": "/tmp/incant-cpu-profiler-target/ci/deps/game-d389e05e8a51233d",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-002/binaries/native-all-game-d389e05e8a51233d",
+      "sha256": "4e364f2eaf2867b0cee985189d64667212af3290cda0cfa6647df519d4c058df",
+      "bytes": 32023976,
+      "mode": "0o755",
+      "check": "native-all"
+    },
+    {
+      "generation": "native-metalfx-checks-002",
+      "source": "/tmp/incant-cpu-profiler-target/ci/deps/ui-3092e001c1d32b43",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-002/binaries/native-all-ui-3092e001c1d32b43",
+      "sha256": "6a98885d40c64d9cc39d64e41b8f76bc32daa2bc8ed75d1205f29b1df081080e",
+      "bytes": 31564160,
+      "mode": "0o755",
+      "check": "native-all"
+    },
+    {
+      "generation": "native-metalfx-checks-003",
+      "source": "/tmp/incant-cpu-profiler-target/ci/deps/incant_render-867026fbadfe8587",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-003/binaries/native-all-incant_render-867026fbadfe8587",
+      "sha256": "53ecd261e03fb21655519969123806d49d3489645ce4bf1e504f9d54ed23e671",
+      "bytes": 32071488,
+      "mode": "0o755",
+      "check": "native-all"
+    },
+    {
+      "generation": "native-metalfx-checks-003",
+      "source": "/tmp/incant-cpu-profiler-target/ci/deps/model_gpu-db508f280106b93a",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-003/binaries/native-all-model_gpu-db508f280106b93a",
+      "sha256": "9e14191a3ce555f7a55d761a59bcce435b6a600340e5e741be43f1713623d1d7",
+      "bytes": 16694200,
+      "mode": "0o755",
+      "check": "native-all"
+    },
+    {
+      "generation": "native-metalfx-checks-003",
+      "source": "/tmp/incant-cpu-profiler-target/ci/deps/persistent_cache-66c0ea53b1b68c10",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-003/binaries/native-all-persistent_cache-66c0ea53b1b68c10",
+      "sha256": "29fac66c7286d03e2e917f366c2e3b99a37cc8eee3c01e1cb509f75b8fe1008d",
+      "bytes": 1027024,
+      "mode": "0o755",
+      "check": "native-all"
+    },
+    {
+      "generation": "native-metalfx-checks-003",
+      "source": "/tmp/incant-cpu-profiler-target/ci/deps/timestamp_backend_probe-249966a012e2760b",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-003/binaries/native-all-timestamp_backend_probe-249966a012e2760b",
+      "sha256": "2db06f94e9e293f58af92dfba458cca2e00ddcc80fd3bbf420e943ab794bba35",
+      "bytes": 6589768,
+      "mode": "0o755",
+      "check": "native-all"
+    },
+    {
+      "generation": "native-metalfx-checks-003",
+      "source": "/tmp/incant-cpu-profiler-target/ci/deps/incant_render_gpu_host-f6661bd04d8a8726",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-003/binaries/native-all-incant_render_gpu_host-f6661bd04d8a8726",
+      "sha256": "556a6bbfcf75bbfd5dc73b3162f5eaa17caa3d81555a1df021336e047d82bb29",
+      "bytes": 1075288,
+      "mode": "0o755",
+      "check": "native-all"
+    },
+    {
+      "generation": "native-metalfx-checks-003",
+      "source": "/tmp/incant-cpu-profiler-target/ci/deps/game-d389e05e8a51233d",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-003/binaries/native-all-game-d389e05e8a51233d",
+      "sha256": "3b5eb7d3531ea6c822dad401866ae5a1dd512331a7d48a3a0f3b8b0f89fe95b1",
+      "bytes": 32023976,
+      "mode": "0o755",
+      "check": "native-all"
+    },
+    {
+      "generation": "native-metalfx-checks-003",
+      "source": "/tmp/incant-cpu-profiler-target/ci/deps/ui-3092e001c1d32b43",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-metalfx-checks-003/binaries/native-all-ui-3092e001c1d32b43",
+      "sha256": "2ec249176e80a3c734257c02658a52bb969e9c3410f16a9f067581483ef13cb2",
+      "bytes": 31564160,
+      "mode": "0o755",
+      "check": "native-all"
+    }
+  ],
+  "gpu_execution": false,
+  "history": [
+    "adapter-001 missing imported Metal command-buffer trait; adapter-002 ambiguous ObjC AsRef; retained-001 Plan visibility; focused-002 test Viewport used nonexistent scissor field; clippy-001 deprecated atomic spelling/private argument count. All original diagnostics retained.",
+    "All11 broad checks on source001 passed. Source002 changes only non-Apple unavailable branch argument consumption; five affected checks pass on source002, including exact native binaries for that freeze. Native128CPU/99ignored; default127CPU/98ignored and cooked133CPU/41ignored overlap. No summed gate claim.",
+    "Source003 retains the one bounded scaler/target cache across temporary fallback and adds exact cache identity assertions to the ignored native test. All five affected final checks pass; prior002 manifest retained.",
+    "web source003 retains five pre-existing timing warnings; MetalFX warning removed. iOS is compile-only; no link/archive/device execution."
+  ],
+  "native_gpu_regression": {
+    "filter": "models::retained::metalfx_tests::actual_native_batch_and_fallback_preserve_retained_submission_ownership",
+    "submitted_frames_max": 6,
+    "extent": [
+      64,
+      64
+    ],
+    "native_submissions": 5,
+    "portable_submissions": 1,
+    "command_buffers_max": 16,
+    "ordinary_rejected_submission": 1,
+    "execution": "not executed",
+    "scope": "retained owner/fallback/reset transaction, not vendor quality or final pixel acceptance"
+  },
+  "limits": [
+    "Feature default off; native MetalFX framework and macOS14.4/iOS17.4 admission",
+    "Thread-bound owner; no unsafe Send/Sync; same-queue three-buffer single-submit path",
+    "Native caller-owned target budget includes accepted/candidate/callback-retired sets; Apple hidden allocations and base-renderer resources excluded",
+    "Native DRS content change resets private history; portable output history behavior unchanged",
+    "Vendor alpha ignored; current-only mixed-depth/fractional coverage and overlays",
+    "Native cooked combinations still explicitly refused; root owns separate cooker work",
+    "No GPU run/appearance/performance/reference-phone/complete-renderer gate"
+  ]
+}

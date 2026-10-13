@@ -50,6 +50,10 @@ impl<P: TargetProvider> TargetProvider for ResolutionTargets<P> {
     fn resolution_config(&self) -> Option<ResolutionConfig> {
         Some(self.config)
     }
+    #[cfg(feature = "native-metalfx")]
+    fn metalfx_preference(&self) -> Option<incant_render::metalfx::Preference> {
+        self.inner.metalfx_preference()
+    }
     fn upscale_config(&self) -> Option<incant_render::upscaling::UpscaleConfig> {
         self.inner.upscale_config()
     }

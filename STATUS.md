@@ -2294,3 +2294,16 @@ checkpoint. [Evidence](docs/spikes/windows-conformance-split.md).
   cases remain ignored. Actual callback/render execution, Claude visual acceptance,
   temporal reconstruction/MetalFX and reference-device budgets remain open. See
   [contract and evidence](docs/spikes/dynamic-resolution.md).
+
+## Private native MetalFX interop — 2026-10-13
+
+The default-off retained MetalFX producer is CPU-complete and source-frozen,
+with independent source review accepted and final artifact/GPU review pending
+([contract](docs/spikes/native-metalfx.md),
+[verification](docs/spikes/native-metalfx-verification.md)). Native128CPU tests
+pass; default127 and cooked-refusal133 overlap. All GPU tests remain ignored.
+The optional thread-bound owner encodes one ordered pre/raw/post submission,
+retains resources through completion, reports fallback/refusal, and preserves
+current coverage/overlays. Native content-size changes reset private history.
+GPU numerical/appearance, native-cooked integration, vendor memory measurement,
+reference phones and performance remain open; no default enablement.

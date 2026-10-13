@@ -8,6 +8,7 @@ publish.workspace = true
 [features]
 cooked-temporal = ["incant_render/cooked-temporal"]
 default = ["physics-deterministic"]
+native-metalfx = ["incant_render/native-metalfx"]
 
 # Select one physics kernel for the entire process, including build/test hosts.
 physics-deterministic = [

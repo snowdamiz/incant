@@ -35,6 +35,8 @@ pub struct RetainedScene {
     temporal: Option<crate::temporal::TemporalState>,
     upscaling: Option<crate::upscaling::State>,
     resolution: Option<crate::resolution::ResolutionOwner>,
+    #[cfg(feature = "native-metalfx")]
+    metalfx: Option<crate::metalfx::Owner>,
     bindings: Vec<NodeBinding>,
     environment: Option<(AssetVersionId, f64, f64)>,
     camera_index: usize,
@@ -97,6 +99,8 @@ impl Renderer {
             temporal: None,
             upscaling: None,
             resolution: None,
+            #[cfg(feature = "native-metalfx")]
+            metalfx: None,
             bindings: input
                 .nodes
                 .iter()
@@ -130,6 +134,25 @@ impl Renderer {
     }
 }
 impl RetainedScene {
+    #[cfg(feature = "native-metalfx")]
+    pub fn enable_metalfx(
+        &mut self,
+        renderer: &Renderer,
+        preference: crate::metalfx::Preference,
+        config: crate::upscaling::UpscaleConfig,
+    ) -> Result<()> {
+        let support = renderer
+            .metalfx_admission
+            .ok_or(crate::metalfx::MetalFxError::Disabled)?;
+        let owner = crate::metalfx::Owner::new(&renderer.device, preference, support)?;
+        self.enable_temporal_upscaling(renderer, config)?;
+        self.metalfx = Some(owner);
+        Ok(())
+    }
+    #[cfg(feature = "native-metalfx")]
+    pub fn metalfx_selection(&self) -> Option<crate::metalfx::Selection> {
+        self.metalfx.as_ref().and_then(|o| o.selection())
+    }
     /// Pipelines must already be enabled on this renderer. Publication is atomic.
     pub fn enable_motion_history(&mut self, renderer: &Renderer) -> Result<()> {
         if !Arc::ptr_eq(&self.owner, &renderer.identity) {
@@ -144,12 +167,20 @@ impl RetainedScene {
         self.motion = Some(candidate);
         self.temporal = None;
         self.upscaling = None;
+        #[cfg(feature = "native-metalfx")]
+        {
+            self.metalfx = None;
+        }
         Ok(())
     }
     pub fn disable_motion_history(&mut self) {
         self.motion = None;
         self.temporal = None;
         self.upscaling = None;
+        #[cfg(feature = "native-metalfx")]
+        {
+            self.metalfx = None;
+        }
     }
     pub fn invalidate_motion_history(&mut self) {
         if let Some(motion) = &mut self.motion {
@@ -426,6 +457,10 @@ impl RetainedScene {
             } else {
                 None
             };
+        #[cfg(feature = "native-metalfx")]
+        if let Some(owner) = &self.metalfx {
+            owner.preflight(&renderer.device, upscale_plan)?;
+        }
         if let (Some(state), Some(p)) = (&self.upscaling, upscale_plan) {
             state.preflight(
                 &renderer.device,
@@ -480,7 +515,8 @@ impl RetainedScene {
                 temporal.prepare(&renderer.device, pending.temporal_input(plan.rect))
             })
             .transpose()?;
-        let upscale_pending = self
+        #[allow(unused_mut)]
+        let mut upscale_pending = self
             .upscaling
             .as_ref()
             .map(|state| {
@@ -495,6 +531,19 @@ impl RetainedScene {
                 )
             })
             .transpose()?;
+        #[cfg(feature = "native-metalfx")]
+        let mut native_pending = self
+            .metalfx
+            .as_ref()
+            .map(|owner| {
+                owner.prepare(
+                    &renderer.device,
+                    upscale_pending
+                        .as_mut()
+                        .ok_or(crate::metalfx::MetalFxError::Interop)?,
+                )
+            })
+            .transpose()?;
         if let Some(phase) = motion_pending.as_ref().and_then(|p| p.jitter_phase()) {
             self.staging.camera.jitter = crate::temporal::jitter::ndc(phase, plan.rect);
             self.staging.camera.jitter_guard = crate::temporal::jitter::guard(plan.rect);
@@ -506,6 +555,8 @@ impl RetainedScene {
             motion_draw,
             temporal_pending.as_ref(),
             upscale_pending.as_ref(),
+            #[cfg(feature = "native-metalfx")]
+            self.metalfx.as_mut().zip(native_pending.as_mut()),
         )?;
         for batch in &self.staging.batches {
             if !batch.updates.is_empty() {
@@ -529,6 +580,9 @@ impl RetainedScene {
         if let (Some(motion), Some(pending)) = (&self.motion, &motion_pending) {
             motion.write(&renderer.queue, pending);
         }
+        #[cfg(feature = "native-metalfx")]
+        let submission = renderer.queue.submit(commands);
+        #[cfg(not(feature = "native-metalfx"))]
         let submission = renderer.queue.submit([commands]);
         std::mem::swap(&mut self.live, &mut self.staging);
         if let (Some(motion), Some(pending)) = (&mut self.motion, motion_pending) {
@@ -542,6 +596,10 @@ impl RetainedScene {
         }
         if let (Some(owner), Some(frame)) = (&mut self.resolution, resolution) {
             owner.accept(frame);
+        }
+        #[cfg(feature = "native-metalfx")]
+        if let (Some(owner), Some(pending)) = (&mut self.metalfx, native_pending) {
+            owner.accept(pending);
         }
         Ok(submission)
     }
@@ -586,3 +644,7 @@ mod temporal_tests;
 #[cfg(test)]
 #[path = "upscaling_retained_tests.rs"]
 mod upscaling_tests;
+
+#[cfg(all(test, feature = "native-metalfx"))]
+#[path = "metalfx_retained_tests.rs"]
+mod metalfx_tests;

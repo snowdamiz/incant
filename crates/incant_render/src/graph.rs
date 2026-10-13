@@ -378,3 +378,33 @@ fn temporal_models_interval_counts_motion_and_each_real_resolve_overlay_pass() {
         }
     }
 }
+
+#[cfg(feature = "native-metalfx")]
+mod native;
+#[cfg(feature = "native-metalfx")]
+pub(crate) use native::Commands;
+#[cfg(not(feature = "native-metalfx"))]
+pub(crate) type Commands = wgpu::CommandBuffer;
+pub(crate) fn from_single(c: wgpu::CommandBuffer) -> Commands {
+    #[cfg(feature = "native-metalfx")]
+    {
+        Commands::Single(c)
+    }
+    #[cfg(not(feature = "native-metalfx"))]
+    {
+        c
+    }
+}
+pub(crate) fn into_single(c: Commands) -> Result<wgpu::CommandBuffer> {
+    #[cfg(feature = "native-metalfx")]
+    {
+        match c {
+            Commands::Single(c) => Ok(c),
+            Commands::Native(_) => Err(crate::metalfx::MetalFxError::Interop.into()),
+        }
+    }
+    #[cfg(not(feature = "native-metalfx"))]
+    {
+        Ok(c)
+    }
+}
