@@ -1,0 +1,1144 @@
+{
+  "format": "incant-native-world-checkpoints",
+  "version": 1,
+  "source_commit": "6f782a26ed56626bf133ddfea701fd69b6fecc20",
+  "base": "6252f4eeb0a7f214fa28a02be6737a78d5e95566",
+  "sources": [
+    {
+      "path": "Cargo.lock",
+      "sha256": "566663fdac00502620a84e9055b3fba04c5a812f12217627deff9f6f08b7ac72"
+    },
+    {
+      "path": "crates/incant_runtime/Cargo.toml",
+      "sha256": "57eebd5ba55887059dc8fcb4b12dfdc10d5b09afc4bb94d403b1869842521cb9"
+    },
+    {
+      "path": "crates/incant_runtime/src/lib.rs",
+      "sha256": "45b82fd52da3f58dd823513a69a14c4149c74dc4787ad6109e8b738bbd4ec42e"
+    },
+    {
+      "path": "crates/incant_runtime/src/save.rs",
+      "sha256": "e7d4b3df3c5e2e855f7d858a8d0451309ea7837abe126d69e574befb55e60b81"
+    },
+    {
+      "path": "crates/incant_runtime/src/save/checkpoint.rs",
+      "sha256": "d89733906cf72a10bc2c004bb346da864586a2d95552bdcae9eb409db5dcce9c"
+    },
+    {
+      "path": "crates/incant_runtime/src/save/checkpoint/tests.rs",
+      "sha256": "17fc9fa75880f658915b3d6cedf3246ca0c5bc9ed8e801504abba8b7441194a5"
+    },
+    {
+      "path": "crates/incant_runtime/src/save/checkpoint/validation.rs",
+      "sha256": "285cef2297087cbd9155d883ab047b385b3d921f0813d29f20d88267c515cba7"
+    },
+    {
+      "path": "crates/incant_runtime/src/world.rs",
+      "sha256": "4a1f944dda004e239602fb10fd7e4e32afc79dfbad23760642eadfc9dfd7ccc4"
+    }
+  ],
+  "archive": {
+    "path": "records.json.gz",
+    "sha256": "f86919529015ca0dfd0468be061feba2224487ce10fa74c22647e5f850fd6718",
+    "records": 342
+  },
+  "checks": [
+    {
+      "name": "world-all-det-004",
+      "receipt_sha256": "a6b7dc5a1b1f4727261506e6c092bc736e836da1fd10c1fe50aa4401f21203dd",
+      "exit_code": 0,
+      "passed": 261,
+      "groups": 34
+    },
+    {
+      "name": "world-all-fast8-004",
+      "receipt_sha256": "d82b80bf862ea4b4e6dfd6d9e0efc8b08dfe6a5f2debb23ae3d55553d92f83c8",
+      "exit_code": 0,
+      "passed": 261,
+      "groups": 34
+    },
+    {
+      "name": "clippy-det-004",
+      "receipt_sha256": "26c8c605ca69097fdfbbe9d3e8142ffc7213245fa88526a1432b5e168d1ee49e",
+      "exit_code": 0,
+      "passed": 0,
+      "groups": 0
+    },
+    {
+      "name": "clippy-fast8-004",
+      "receipt_sha256": "47da9ac9da6324a7566caba0d9aa04e532f244f08b1e0175d6fdc04fde90acfb",
+      "exit_code": 0,
+      "passed": 0,
+      "groups": 0
+    },
+    {
+      "name": "wasm-check-004",
+      "receipt_sha256": "c59f4d0ffa5046769914dd6d959a3be4e980069e660b11882c29189f42c5cf43",
+      "exit_code": 0,
+      "passed": 0,
+      "groups": 0
+    },
+    {
+      "name": "consumers-default-003",
+      "receipt_sha256": "faaab263cfdae5ef82a3bbaa135f17c6e9a94ff3c5ba646039b673f6989890da",
+      "exit_code": 0,
+      "passed": 205,
+      "groups": 16
+    },
+    {
+      "name": "graph-003",
+      "receipt_sha256": "15263ff933824740207053e5c5548c90f3f3f1e103408282e12a268972fa278e",
+      "exit_code": 0,
+      "passed": 0,
+      "groups": 0
+    },
+    {
+      "name": "fmt-004",
+      "receipt_sha256": "faf7db8f5bf01404cf6be3c771b6f8b44a0160b77500196a1150320319334d48",
+      "exit_code": 0,
+      "passed": 0,
+      "groups": 0
+    },
+    {
+      "name": "conventions-004",
+      "receipt_sha256": "c769f3f56efdc79cf516bc4de155bd1c9fd8f44d681194c90a87d5c15c7f4771",
+      "exit_code": 0,
+      "passed": 0,
+      "groups": 0
+    },
+    {
+      "name": "diff-004",
+      "receipt_sha256": "8ae4d7aa089aa79f5734eff09b0e015121ca0ed91d82bf377366a8c6761f7a87",
+      "exit_code": 0,
+      "passed": 0,
+      "groups": 0
+    }
+  ],
+  "source_freeze_sha256": "79d873ac9a88f27e3e46bd7bb0d9ccc514914018182e7dc49547d2921b4d0b06",
+  "binaries": [
+    {
+      "command": "world-all-det-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/incant_runtime-21c909f3b5651dc6",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-003/incant_runtime-21c909f3b5651dc6",
+      "sha256": "76d1e622cc1dd6afaaf3c09950a7ba2ddb8fdc92001fab1f69e76545d71dbcc8",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/animation-8d5f1d1aa3cfa930",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-003/animation-8d5f1d1aa3cfa930",
+      "sha256": "6bca85fca7f66b9eac12248a2bbe3010820898e3b61b7966727a2ca7ba895c80",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/animation_graph-d95deebd2db62140",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-003/animation_graph-d95deebd2db62140",
+      "sha256": "5dd13a4e8df6bacb198f7367030de9b84cfdd2b8b7ed128fd261c28d40004e06",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/animation_tree-5fa801f831b67f71",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-003/animation_tree-5fa801f831b67f71",
+      "sha256": "d82e454d7212614b7c2f55f0b8961d9e5a88ecb6e138abe84678e32a4080eff9",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/animation_tree_playback-80ff6826486f034d",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-003/animation_tree_playback-80ff6826486f034d",
+      "sha256": "7b76fedc20713b7e9f90d0207b4b4cf8273949bf81a5c515ff608a21dba3e783",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/audio-43a4adabcf1d79af",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-003/audio-43a4adabcf1d79af",
+      "sha256": "4303205d33a8e51b91ec7b1e1e52befbd4afbbedb6dcc4ba6c57c812c6b55092",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/audio_controls-70f57d3c52da9873",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-003/audio_controls-70f57d3c52da9873",
+      "sha256": "45495df539e1b40023a3903bcd96cf3f96f6942cbf1a7e33613c60399e8fa947",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/columns-1d3defffac70ae34",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-003/columns-1d3defffac70ae34",
+      "sha256": "9e49ddd1e19b0fd2ec4ab195f9ddbf4a256206fac793eabba6fa97e492db46b8",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/flipbook-08cae75d9e6f7358",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-003/flipbook-08cae75d9e6f7358",
+      "sha256": "73dc1dee4e249746495eab057f3be2985ef81c9fe22fdbc6f46f1ed3c9350fff",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/flipbook_snapshot-22e3cd2fd9e66ae3",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-003/flipbook_snapshot-22e3cd2fd9e66ae3",
+      "sha256": "f055a3ce5d551dd4aca473ef853d5a699eeb132ac835210a02ea694afea65397",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/hud-8cefccf56eacf474",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-003/hud-8cefccf56eacf474",
+      "sha256": "117099d6741bde6e95274098b391ff0e9e3ea6569f1754ac9cdb377d9105da5a",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/ik-65cf311e2ce023e0",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-003/ik-65cf311e2ce023e0",
+      "sha256": "3e4788ad6a503ef15dc591b0356412555f6d053db3e04528bb78975543d8da89",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/localization-a4a9fd4b2f441e57",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-003/localization-a4a9fd4b2f441e57",
+      "sha256": "43e7446f820f4d550f7934163478cffe42daccd5333791784c6fb7fa3acf9db5",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/navigation-102364a2a8bfd609",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-003/navigation-102364a2a8bfd609",
+      "sha256": "66bdf54a6d72cf7b70b84ba9a468e0266bb94b0dd647326f026334fad0d07086",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/navigation_queries-cbbe72f7e4c3eaa3",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-003/navigation_queries-cbbe72f7e4c3eaa3",
+      "sha256": "286231af366e50b830ffc575b8991a22b90f896fae680aca71605c5a85bd3d0b",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/navigation_snapshots-051d565c0f298f07",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-003/navigation_snapshots-051d565c0f298f07",
+      "sha256": "1ccb478a9a18c66aff79588772ea45bd36c2f0c1106691813ba7fa68688e0945",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/numeric_boundaries-107f4dce66f0a86a",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-003/numeric_boundaries-107f4dce66f0a86a",
+      "sha256": "c4e9e988463c98816afab47242b58155cd6c9e9929241a649c219163bbeaa157",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/physics-cd30c279c1b4a309",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-003/physics-cd30c279c1b4a309",
+      "sha256": "c78e57f68f4c0db05a831ddaac86bfaccc2d4b74749c096a4fc29aa3c6cfaeaa",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/physics_2d-9208cbb9a3cce55e",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-003/physics_2d-9208cbb9a3cce55e",
+      "sha256": "cc44d724e5a41a2ffcab5beb1661e5ed7bd7018cb93c79871ffe99e4bfcaca7c",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/physics_queries_2d-a8f32956fa8a28c0",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-003/physics_queries_2d-a8f32956fa8a28c0",
+      "sha256": "3e54ad1d6c79caec38492746825c6736cec0365f225d129a8bd5fcd963728657",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/physics_variant-d96344d7eb080e24",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-003/physics_variant-d96344d7eb080e24",
+      "sha256": "4984dd6ecf6bb093127294080dcf5676b8974b03b0fe19532c0c9ad02ee0cda9",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/queries-40e6f262a8eaad86",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-003/queries-40e6f262a8eaad86",
+      "sha256": "119d3b9bcd38289978871f18ed27f389feb7f62ae598ee759e00575b9f3319a8",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/retained_saves-4c9d54db76760cb7",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-003/retained_saves-4c9d54db76760cb7",
+      "sha256": "2100aedca9f27c477b3bbee277eecd7a50eebe5cae06bad4055f4667fac62b1b",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/saves-6f02159707c08dca",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-003/saves-6f02159707c08dca",
+      "sha256": "e31117f0ba90f5a833abc73deab8da79a4ca370d57405d93ff9673a3acba6383",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/scenes-990e34d380b23256",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-003/scenes-990e34d380b23256",
+      "sha256": "e1f1828afe6105caf96e7d2059d4bf7a6233184bb73ca93f6c10196a74703cac",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/spatial-cf8ac07a7af2470f",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-003/spatial-cf8ac07a7af2470f",
+      "sha256": "1d8a10b46a84b54784b8cefc77c4b4e2501b8d54beee0bb5a1d2953dd682436d",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/sprites-1454f80eaa980ca1",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-003/sprites-1454f80eaa980ca1",
+      "sha256": "c6051108a469e168fd3d385491415c5c971b3202c2a4ec0118f8d2f65469d0c9",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/steering_queries-e24d0ba0db41ac6a",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-003/steering_queries-e24d0ba0db41ac6a",
+      "sha256": "77f0c7c394609450ad7614efa68482b5b4ed4c98a161483fd651685ed8955a49",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/structural-30258d6549579edc",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-003/structural-30258d6549579edc",
+      "sha256": "80ea011d8926242f3d91a04fcdebe9b7967310c6d468d86cee6f5b8ada0598e7",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/text-e56e6a4cbf6c41b8",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-003/text-e56e6a4cbf6c41b8",
+      "sha256": "597e884aa6b4e21acdddd49079513dd4a07e7c5882e0bf0ab0a3d81e783fe5e4",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/tilemaps-4a692b0638871896",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-003/tilemaps-4a692b0638871896",
+      "sha256": "449af12fc3a9a648893e3537f5cb662adc49578aab57a143e37b3d72dea2c6ee",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/ui-9139b125b14738db",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-003/ui-9139b125b14738db",
+      "sha256": "9ba24bdd325abe38ed18fac8c55ccd3bff28ddc953b600378359a9d6de345101",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/incant_runtime-a8a23296f64f8c45",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-003/incant_runtime-a8a23296f64f8c45",
+      "sha256": "842749ba816026f107587a56af52a88b7fe23dea4dddf9561b23de9fdbd4b187",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/animation-419b92d6160e0f53",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-003/animation-419b92d6160e0f53",
+      "sha256": "89531386e16006fa27d584201938496f1815b95a6553e42e593c050dc84fcc6d",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/animation_graph-f5275621a217d384",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-003/animation_graph-f5275621a217d384",
+      "sha256": "804887ba52e57b2e5fd13cdc51f84e274c2eaf0f3301ec7e2162eafaf8a54f74",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/animation_tree-1f4e1b5144f78a7d",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-003/animation_tree-1f4e1b5144f78a7d",
+      "sha256": "ae3cf762566ac2b72c85234acbddfab3154b795274ded15d89456ec2c0ef6593",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/animation_tree_playback-6e312f82ab87f6d4",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-003/animation_tree_playback-6e312f82ab87f6d4",
+      "sha256": "4d784eea1658592d79a48d1ddd05e06acb10ec6206ed81bfa8f447cc6635e569",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/audio-a85e08e6a30dc210",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-003/audio-a85e08e6a30dc210",
+      "sha256": "429e1755dcc83ce3773b74e39cbf8b3c65d0a63c5d908c7010d2c3b1b73c58e3",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/audio_controls-48231fd7ecec0390",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-003/audio_controls-48231fd7ecec0390",
+      "sha256": "75719c1c73364ec0b433744d6039fb7b7a5c5b10dc4944a12a5b564d7392eb7f",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/columns-bd489b7aad3752af",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-003/columns-bd489b7aad3752af",
+      "sha256": "87319fb72e44dd335b3a9a1165001c7fc964ce1aa959f006c55cd26d83337456",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/flipbook-e18b13bfa29d11f8",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-003/flipbook-e18b13bfa29d11f8",
+      "sha256": "a4e6cb7033611f57039e0a0feea2e31fb5415cf6bdb66f3ae121b432eef69045",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/flipbook_snapshot-236ff317be9ac136",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-003/flipbook_snapshot-236ff317be9ac136",
+      "sha256": "3176ea132eb14295f5781796cd753e6f2fa4dadda00ba48ef95d22069c895736",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/hud-9b0510b5ca4350cd",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-003/hud-9b0510b5ca4350cd",
+      "sha256": "e175b673f651679a817e7a208cde13e1defd5248c8e4df61d577c1407551530b",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/ik-20d67379abeee5eb",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-003/ik-20d67379abeee5eb",
+      "sha256": "10ec3fef650afe4b0fcc526838d379e5b62608c00c46643547eda5ef04fa6732",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/localization-d1fc5eb9bbc54701",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-003/localization-d1fc5eb9bbc54701",
+      "sha256": "b49261261b5abc2549d249309efcaa360cc1b5fca72277874ad62bcc54ab71f2",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/navigation-6d5fa79349dbf3b6",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-003/navigation-6d5fa79349dbf3b6",
+      "sha256": "3a1b7854ce1536b4030208c5b2296ab01799a0b8cfd0c83efcb6db50dba109e4",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/navigation_queries-2eb1960b6b95f3ee",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-003/navigation_queries-2eb1960b6b95f3ee",
+      "sha256": "2b887a90ec81804f4669c19bce2994af65ef7e9ccb1c418f1b3c5e4622b17461",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/navigation_snapshots-bef8f857f94a86db",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-003/navigation_snapshots-bef8f857f94a86db",
+      "sha256": "a4f383d1ba722609ef0f66d9c0d43c41892d327647ccf8b1f7a4758a609e83a8",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/numeric_boundaries-04d1a30767178de3",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-003/numeric_boundaries-04d1a30767178de3",
+      "sha256": "75d216dd0c249cc745ad5d5eb9d3a962908c193d770c6c146264b22f2969ddd5",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/physics-81f102e9d2ecd5a1",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-003/physics-81f102e9d2ecd5a1",
+      "sha256": "3ca4e129e22cb74933b575aea4d4c3badbe8675ca3eac80e688da5459e9f292e",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/physics_2d-251ad509a4ea8bee",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-003/physics_2d-251ad509a4ea8bee",
+      "sha256": "6b8610bcff7917b17c8d75cb2819a1a643f316aa7d6b4126649b17de7ea610d9",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/physics_queries_2d-c6611c866f7ea802",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-003/physics_queries_2d-c6611c866f7ea802",
+      "sha256": "6e4fff01f75b06e57c8c9fd50878617145f8bc24875a463ee36d429e1eb64ec9",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/physics_variant-6be305f25f75ae4e",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-003/physics_variant-6be305f25f75ae4e",
+      "sha256": "303d7d62c3b006389a37893368dc5d4ea7b13e0effd8d5374fc870c1744f8624",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/queries-70339d352a51597f",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-003/queries-70339d352a51597f",
+      "sha256": "aa6daee02830606d141abd4beb1b30c32803fb4419cc6ce632a73f829d73435a",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/retained_saves-c3874a4eb3c257c6",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-003/retained_saves-c3874a4eb3c257c6",
+      "sha256": "eb7a9f8c2e8ebfb54a8887c0ab21723eda01e7818e8dd5775493a0564b72f1c9",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/saves-e15a1b048761b943",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-003/saves-e15a1b048761b943",
+      "sha256": "f603a7a7b1c1a81d7d263d8cad447b3b90b5d97b66bdedbf6bba160a594fdf05",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/scenes-4af8abaf70ab84fb",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-003/scenes-4af8abaf70ab84fb",
+      "sha256": "254599d1492eb491b2d3537226639467144b9dbc141f2fd832866d76d9c214e5",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/spatial-98072df1354b00b8",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-003/spatial-98072df1354b00b8",
+      "sha256": "0cd8b81b96820d7c81f7944271f34bd9caa850460543e836948f55bd0b1696d9",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/sprites-7b1b423e7890e75c",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-003/sprites-7b1b423e7890e75c",
+      "sha256": "6c1a34b2e29a56a11277aafcd7fa3f12bfb0f8205f917f66340c55d4a42ecf75",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/steering_queries-e2a3e9af892b9376",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-003/steering_queries-e2a3e9af892b9376",
+      "sha256": "d255c9e33258db7157edd5574b26c03accce2665cf65367e42daac11a801f145",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/structural-2cd724bea77aa788",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-003/structural-2cd724bea77aa788",
+      "sha256": "f579c9d685dcd9a88dca1e51d0e3475deb3f7107a6f366d0ab16016d7227925c",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/text-91f6d4e8701113de",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-003/text-91f6d4e8701113de",
+      "sha256": "22be30506830ace7b54d519c89bb57ca781eed12ff0ab5c2966ebdab8ef3b5c0",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/tilemaps-3f8d2e07f28cc5cb",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-003/tilemaps-3f8d2e07f28cc5cb",
+      "sha256": "9ace6a46ca2435c4da241d7fe712968c00406cc4a2007380fe6c9870be49197b",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/ui-8374c6c3ea8b22c7",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-003/ui-8374c6c3ea8b22c7",
+      "sha256": "bdf7ec58972b0e4dade23dcd5b9ab4d078aa08adb0dd862226c95c7beb79c190",
+      "mode": "0o755"
+    },
+    {
+      "command": "consumers-default-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/incant_physics-e9d6dfb63f113d98",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-consumers-default-003/incant_physics-e9d6dfb63f113d98",
+      "sha256": "6f644642c7b1d0c8d38c8b3ad0f74eb3ebb03fd740001d592d56ece691155ce4",
+      "mode": "0o755"
+    },
+    {
+      "command": "consumers-default-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/character-0c865778d112bd82",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-consumers-default-003/character-0c865778d112bd82",
+      "sha256": "5e7a6d0c80b0668e37eb8c311c956c650b3c01e6b88f4bcbd39a2245f013a679",
+      "mode": "0o755"
+    },
+    {
+      "command": "consumers-default-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/compound-7f6628657e38e215",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-consumers-default-003/compound-7f6628657e38e215",
+      "sha256": "12f50ba0324047d2dabf6b29602db71b01b5f08d0c7e2f8b8bbe77687b395431",
+      "mode": "0o755"
+    },
+    {
+      "command": "consumers-default-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/facade-5e73a3e857cc28b4",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-consumers-default-003/facade-5e73a3e857cc28b4",
+      "sha256": "3849ae06aeddb862d61e525eac7a665044aa193ef9e07825d59137e7adf7adf8",
+      "mode": "0o755"
+    },
+    {
+      "command": "consumers-default-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/navigation-2eba97c6eea77997",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-consumers-default-003/navigation-2eba97c6eea77997",
+      "sha256": "37f448272c21f5585c007fdc1f69a35fca87679cc7e9079a71ee7c4000318ea7",
+      "mode": "0o755"
+    },
+    {
+      "command": "consumers-default-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/runtime-9c8af3085ab98e15",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-consumers-default-003/runtime-9c8af3085ab98e15",
+      "sha256": "d24178d52e8bb8ef146595abd142ead67eb8c61156dff5ead1e26fe6ef3786ce",
+      "mode": "0o755"
+    },
+    {
+      "command": "consumers-default-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/incant_script-78d8b7d6011aa5d0",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-consumers-default-003/incant_script-78d8b7d6011aa5d0",
+      "sha256": "63f84090b3312a1e7007b77ef8829291a7047fe2b1f8e29ce99a6ec9dade8b5b",
+      "mode": "0o755"
+    },
+    {
+      "command": "consumers-default-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/animations-ab27793701043136",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-consumers-default-003/animations-ab27793701043136",
+      "sha256": "5e215ebe639a28e964544ffb2c4e21a4e0e6bca7f79518d070f430e96ca809a1",
+      "mode": "0o755"
+    },
+    {
+      "command": "consumers-default-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/audio_controls-46d0da90d381c950",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-consumers-default-003/audio_controls-46d0da90d381c950",
+      "sha256": "fc2505e21c3fd8f12ec9fcb5faa5086cb9e5632deaba601f59997455dbe06834",
+      "mode": "0o755"
+    },
+    {
+      "command": "consumers-default-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/flipbooks-edb12f5aeace0b4f",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-consumers-default-003/flipbooks-edb12f5aeace0b4f",
+      "sha256": "ec3035a5a9f2b90aede3fa6bc07ea5cf38e0278b2eaa9c368b7f49098c21c170",
+      "mode": "0o755"
+    },
+    {
+      "command": "consumers-default-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/hud-09e2d3f07506545a",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-consumers-default-003/hud-09e2d3f07506545a",
+      "sha256": "9600275956947d85f5ade809afbf9611fa74dc47f4c3041ea0059baacd9e28ba",
+      "mode": "0o755"
+    },
+    {
+      "command": "consumers-default-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/profile-3dbc0a1b38747405",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-consumers-default-003/profile-3dbc0a1b38747405",
+      "sha256": "e20045e369160206517dfdfe7e750a1c878fc2be51d50aa0abe91476dd69548b",
+      "mode": "0o755"
+    },
+    {
+      "command": "consumers-default-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/project_bindings-ba51e0f034a50284",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-consumers-default-003/project_bindings-ba51e0f034a50284",
+      "sha256": "7b9fda65105dd0ce6d84f5764c2793e289d9a51fb630e837cef9961b4febc97a",
+      "mode": "0o755"
+    },
+    {
+      "command": "consumers-default-003",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/spatial-912ed798bb410f5b",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-consumers-default-003/spatial-912ed798bb410f5b",
+      "sha256": "0c48a9bc8fd5a46df748fa5f0947fee596cfe1f04c82b317f7208ce309bf5d48",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/incant_runtime-21c909f3b5651dc6",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-004/incant_runtime-21c909f3b5651dc6",
+      "sha256": "257bdda768a9e4d99f0541e55e8915eda3786dd59a370c0a5f93776302d4d0bd",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/animation-8d5f1d1aa3cfa930",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-004/animation-8d5f1d1aa3cfa930",
+      "sha256": "8d60a9f17b8ecf77274229fc40c334fa44666ce1e4ead61b779fba0af3da517f",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/animation_graph-d95deebd2db62140",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-004/animation_graph-d95deebd2db62140",
+      "sha256": "27b76a89ecac1b61f554354fe4382080ac42f9927f0f19b12cb1b45eb06c1f73",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/animation_tree-5fa801f831b67f71",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-004/animation_tree-5fa801f831b67f71",
+      "sha256": "3b37f4d198224e243cdb41fdd388cb18c8e173b23e2731861fdb3093770f7d2a",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/animation_tree_playback-80ff6826486f034d",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-004/animation_tree_playback-80ff6826486f034d",
+      "sha256": "8d5a6fc00ad6b234fd92a5d7b5bace82a09cb630b31ed6913fa160327c7515a2",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/audio-43a4adabcf1d79af",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-004/audio-43a4adabcf1d79af",
+      "sha256": "f285a0a5c94bdface0c0f37c5054f9d2496aef52e74d221713f975512795874a",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/audio_controls-70f57d3c52da9873",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-004/audio_controls-70f57d3c52da9873",
+      "sha256": "f4227535391af731b059387cc689c993dd7abe20e3f7e465abf32bfecc3f2db2",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/columns-1d3defffac70ae34",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-004/columns-1d3defffac70ae34",
+      "sha256": "e7bd4bef4b3710b6475fb7a77a6932723c87de00c74168540066bd34748e7400",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/flipbook-08cae75d9e6f7358",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-004/flipbook-08cae75d9e6f7358",
+      "sha256": "0d839e9de7a2577dae21fba199b11e6d3df5e84e1d2c40f61c81dbfb28fe39ba",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/flipbook_snapshot-22e3cd2fd9e66ae3",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-004/flipbook_snapshot-22e3cd2fd9e66ae3",
+      "sha256": "1dc4543e8c596f8239f6626b10531be9e70cd48f63d468d0df16afee942fb2c2",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/hud-8cefccf56eacf474",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-004/hud-8cefccf56eacf474",
+      "sha256": "a7be9c428e1790224a1cc5a06b70fdb39b6887b624cc13bafb05bb9a0670b0bb",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/ik-65cf311e2ce023e0",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-004/ik-65cf311e2ce023e0",
+      "sha256": "163b4cd77f8b6d95009a2a4b2541d7e591c319859597d0e6993ebe2e61944c37",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/localization-a4a9fd4b2f441e57",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-004/localization-a4a9fd4b2f441e57",
+      "sha256": "a0c0db7c9f329e8e5929ea403209a4602daa59be10476820c44ea8006521d902",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/navigation-102364a2a8bfd609",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-004/navigation-102364a2a8bfd609",
+      "sha256": "9ff236fdd7e860b36743ecc10584d9ac8e94af02b6f7aa38d97734d0ae7b3bfe",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/navigation_queries-cbbe72f7e4c3eaa3",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-004/navigation_queries-cbbe72f7e4c3eaa3",
+      "sha256": "0ceb681d51f6ba9fdb54d6b29d92a4dc5b2e834ee3ab4a352471444bc774b6ed",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/navigation_snapshots-051d565c0f298f07",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-004/navigation_snapshots-051d565c0f298f07",
+      "sha256": "0b90a305b42e2e2a9e0bc5115343d06b6f4c4780c1a81d57379c9cbe9cc4080b",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/numeric_boundaries-107f4dce66f0a86a",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-004/numeric_boundaries-107f4dce66f0a86a",
+      "sha256": "7d47fbbd91c1aef3fd21b37784e415efa974ee2502260ed2c63aeeaa5100981a",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/physics-cd30c279c1b4a309",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-004/physics-cd30c279c1b4a309",
+      "sha256": "46d61f8710e0b721f6aca65bb5e89d69f714ecca7b13bc9c0f2207e45332d3bb",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/physics_2d-9208cbb9a3cce55e",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-004/physics_2d-9208cbb9a3cce55e",
+      "sha256": "c85be43a36b5eb8ccbc936c338ea21819232e9a4ac3fffad84b77a691f6e1d23",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/physics_queries_2d-a8f32956fa8a28c0",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-004/physics_queries_2d-a8f32956fa8a28c0",
+      "sha256": "48ecd569a87aaf4f261f8093118ea36388e81322cec7c32e6faff30f79c72216",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/physics_variant-d96344d7eb080e24",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-004/physics_variant-d96344d7eb080e24",
+      "sha256": "c2edaa00727a732a6fcb95682bd20b1a0b818746759ecdf0f7f29ad2cd7bed8c",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/queries-40e6f262a8eaad86",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-004/queries-40e6f262a8eaad86",
+      "sha256": "74d93e30e4576f86c0e783e88d4d5b4f3995dddec9d71366a08768478a4799f3",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/retained_saves-4c9d54db76760cb7",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-004/retained_saves-4c9d54db76760cb7",
+      "sha256": "a6e48279eb597e82bde6e010d044ef4819364127c4e2664c2cd0086672484b32",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/saves-6f02159707c08dca",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-004/saves-6f02159707c08dca",
+      "sha256": "de72ef10659918599898abc060132bb07622d54ffe1a591ea64b423d75b72de3",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/scenes-990e34d380b23256",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-004/scenes-990e34d380b23256",
+      "sha256": "740be617699475060695447b53d5dd23ba61ba01c15cd786a176190bd561eca3",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/spatial-cf8ac07a7af2470f",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-004/spatial-cf8ac07a7af2470f",
+      "sha256": "13a1826c948244a25c2e3de1867f1dd8880fcf07ff1c71a2ee532201e9d8f410",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/sprites-1454f80eaa980ca1",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-004/sprites-1454f80eaa980ca1",
+      "sha256": "2066702056879540b505a8aa93ac3cc5137c6f8251d69de3f4905f8d4a7cebdd",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/steering_queries-e24d0ba0db41ac6a",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-004/steering_queries-e24d0ba0db41ac6a",
+      "sha256": "039144ab275f2082ac693a4468f958092fcaa02d7a7e4ee9762ecc001a21da28",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/structural-30258d6549579edc",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-004/structural-30258d6549579edc",
+      "sha256": "11ca8f1cdc377e387e5cf4f0122997622943d67feefa3df5d2b31a212040f86b",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/text-e56e6a4cbf6c41b8",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-004/text-e56e6a4cbf6c41b8",
+      "sha256": "ba4a2831bec35dfd5984d40efc1d86c6e2872821d418d376e07025136bccfb27",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/tilemaps-4a692b0638871896",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-004/tilemaps-4a692b0638871896",
+      "sha256": "22c4e996eda5bb7f4152eb8773dee671e074cd36bd0a9f2c7e5b137d03cc8232",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-det-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/ui-9139b125b14738db",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-det-004/ui-9139b125b14738db",
+      "sha256": "87dcf43b97bea587f8b4a4ff25670bbc113650b5503160f769aa53140ebe466b",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/incant_runtime-a8a23296f64f8c45",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-004/incant_runtime-a8a23296f64f8c45",
+      "sha256": "0cc027e427e64fbdd5c2de2d45ef02968d8d9e0bf6b43ccb66b0dc9dc199abe0",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/animation-419b92d6160e0f53",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-004/animation-419b92d6160e0f53",
+      "sha256": "bb5169d7be1429afb842ed62ef8cfcf3e5678447f42d4b13d9cfd55970365e3b",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/animation_graph-f5275621a217d384",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-004/animation_graph-f5275621a217d384",
+      "sha256": "fc7327b12788cba03e04947d30d78f75e85bda946d8deccdb97701dd5f82ed0c",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/animation_tree-1f4e1b5144f78a7d",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-004/animation_tree-1f4e1b5144f78a7d",
+      "sha256": "f23e8dafe6bc34268c257a5cb5fc0f0ac21ce5f341336f2eed381ed7b086cd2a",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/animation_tree_playback-6e312f82ab87f6d4",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-004/animation_tree_playback-6e312f82ab87f6d4",
+      "sha256": "06d22ab49120262978f5d66e0137ee961eb2a346e2de11fefe9a00c1b23b97d1",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/audio-a85e08e6a30dc210",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-004/audio-a85e08e6a30dc210",
+      "sha256": "21e5959f165b52dab66755c2e44d16eb518396c4076bacbd4334a9516387cda1",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/audio_controls-48231fd7ecec0390",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-004/audio_controls-48231fd7ecec0390",
+      "sha256": "5d6328033285cac818eea8e5f57875fee2ab8bbe3a72c30df0b9063642ab9ba0",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/columns-bd489b7aad3752af",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-004/columns-bd489b7aad3752af",
+      "sha256": "a2f089477f96b3829b6710d173ee3f194725a6ded64c13133db1f65618e6ce05",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/flipbook-e18b13bfa29d11f8",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-004/flipbook-e18b13bfa29d11f8",
+      "sha256": "2c3669e87ae51b45b16f80078ce2c9e3308266d9ae5ce0ab037a1bbbfee14419",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/flipbook_snapshot-236ff317be9ac136",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-004/flipbook_snapshot-236ff317be9ac136",
+      "sha256": "14cdbce6bf718d37ef65ba0c4912ffeb2b495039ff3fdb74f5394251b3e498dd",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/hud-9b0510b5ca4350cd",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-004/hud-9b0510b5ca4350cd",
+      "sha256": "44b990749c14be24ac75970f2b2009fac20afe95ae37bf701f34d881b00ae89d",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/ik-20d67379abeee5eb",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-004/ik-20d67379abeee5eb",
+      "sha256": "24431f02308f701ff09c4cc22e9b5d7190e710fb00a475be10bbc97c02c0a09e",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/localization-d1fc5eb9bbc54701",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-004/localization-d1fc5eb9bbc54701",
+      "sha256": "f7340020d68f83f6b244c7e065629072d9081d350bd977b1c72aaf33fa60ef95",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/navigation-6d5fa79349dbf3b6",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-004/navigation-6d5fa79349dbf3b6",
+      "sha256": "315a65ac5d55eafbdb1633d63dd6ba02d6f816b7b3c4e0c303cc9c491673cda6",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/navigation_queries-2eb1960b6b95f3ee",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-004/navigation_queries-2eb1960b6b95f3ee",
+      "sha256": "87df6296cbdabca6869404f5fecfcd12aaf4d5c27d55da18ccbe6a0b7fd99718",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/navigation_snapshots-bef8f857f94a86db",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-004/navigation_snapshots-bef8f857f94a86db",
+      "sha256": "101f6841fc09ba7f14fd61a23f8e59f1c1c63a0df4c525fcd6ecac536554dbcd",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/numeric_boundaries-04d1a30767178de3",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-004/numeric_boundaries-04d1a30767178de3",
+      "sha256": "d2b0e264a5ad49c96b6d630086901839a9d466f1d2cad82194d1046c88ae940d",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/physics-81f102e9d2ecd5a1",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-004/physics-81f102e9d2ecd5a1",
+      "sha256": "8ea9379806c594a6501b4809e151fdb98b187d4abb9ca328e32ff1e1d9d96a56",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/physics_2d-251ad509a4ea8bee",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-004/physics_2d-251ad509a4ea8bee",
+      "sha256": "70e46dcf1e70fce3b694fc779ecddc80099227163888e2a8fe047519218b6fcb",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/physics_queries_2d-c6611c866f7ea802",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-004/physics_queries_2d-c6611c866f7ea802",
+      "sha256": "b6d6f0492cf937c51efb77bd4ff9907064b69682436fa38655cce33843da10bf",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/physics_variant-6be305f25f75ae4e",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-004/physics_variant-6be305f25f75ae4e",
+      "sha256": "774a75a70bbc8df8cf84d911a7eacbed9b1706713ae4a95adb00ca695fe9e922",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/queries-70339d352a51597f",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-004/queries-70339d352a51597f",
+      "sha256": "093a33c62816b046a8b8548974e915283cde2245bc368d1fb2e4b60b53c8f8ba",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/retained_saves-c3874a4eb3c257c6",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-004/retained_saves-c3874a4eb3c257c6",
+      "sha256": "0f12c7662e679507a5677e51b789f6a42cf9aaf16a468a402106de4c73a48325",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/saves-e15a1b048761b943",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-004/saves-e15a1b048761b943",
+      "sha256": "04ab7f05d56b697c97cad22cc3bf12e109bec0e5d7b626b095984c16458eea3e",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/scenes-4af8abaf70ab84fb",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-004/scenes-4af8abaf70ab84fb",
+      "sha256": "ae4c7f31eb43a8669717529741787bb3640fa50ee1b418e5f44276772ae648cb",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/spatial-98072df1354b00b8",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-004/spatial-98072df1354b00b8",
+      "sha256": "777b246ff41e828c176f2359b2d3880779d55512e0de549b8b63c55a36483a3b",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/sprites-7b1b423e7890e75c",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-004/sprites-7b1b423e7890e75c",
+      "sha256": "7eafc5f6ce3f1b105022f13a29e462408bc98ec4ffb357dbfab023c4be2d6a66",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/steering_queries-e2a3e9af892b9376",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-004/steering_queries-e2a3e9af892b9376",
+      "sha256": "614b4f349bdabb2a233625b911ff211e10e2f9d9d98d99f8804edf5a8a93921b",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/structural-2cd724bea77aa788",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-004/structural-2cd724bea77aa788",
+      "sha256": "c48d17a779ee046b52129b397294ff4e1bbefcdbfe5cca3bc8e6636937b43fce",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/text-91f6d4e8701113de",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-004/text-91f6d4e8701113de",
+      "sha256": "93ecd5c55d866323b84f2cbc9019ac8d27838672ad9356fdee10b6f36d730dce",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/tilemaps-3f8d2e07f28cc5cb",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-004/tilemaps-3f8d2e07f28cc5cb",
+      "sha256": "a1711df57b1d42b78c5c1bd5d33409e9d039258add5312f0e8e434a7d59efd81",
+      "mode": "0o755"
+    },
+    {
+      "command": "world-all-fast8-004",
+      "source": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/ui-8374c6c3ea8b22c7",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/binaries-world-all-fast8-004/ui-8374c6c3ea8b22c7",
+      "sha256": "0148bf257f02d98c7d747fa2a608926d308b065b83e743e60da69d0340b0111e",
+      "mode": "0o755"
+    }
+  ],
+  "limits": [
+    "Opaque in-memory NativeWorld checkpoint only; public persisted physics and whole script/host saves remain closed.",
+    "Source004 runtime261 per deterministic/fast8. Source003 default physics/script consumers205; the004 delta is feature-only API/refactoring and does not alter feature-off execution. No GPU/device/performance gate.",
+    "Physics budgets exclude ECS serializer allocation/RSS.",
+    "Original001 compile and002 legacy-admission failures retained.",
+    "Executable payloads remain local; immediate-copy receipts are portable. 003 and004 executions have separate frozen identities."
+  ],
+  "final_review": "Source003 and source004 delta/execution independently accepted; current-main composition/publication reviewed separately.",
+  "reviews": [
+    {
+      "path": "reviews/native-world-checkpoints-source001-independent-20261013.json",
+      "sha256": "f87cf0427e8f6297e432e3170bf00b930f4c281332f33c8eb9b1f5e19c96a9d5"
+    },
+    {
+      "path": "reviews/native-world-checkpoints-source002-independent-20261013.json",
+      "sha256": "12074135f57811ad0c06706c6bd08bc7928d306fd47a5a49f7df59ff32f407ce"
+    },
+    {
+      "path": "reviews/native-world-checkpoints-source003-independent-20261013.json",
+      "sha256": "9b60bddbd3b3f71d8b5302b8bbaa81d4bd38f31e1be2e89fa16de0267513fc76"
+    },
+    {
+      "path": "reviews/native-world-checkpoints-source004-independent-20261013.json",
+      "sha256": "e226fcb81f62cc3955ece7bd3c82be09aa5b9ceb90d685ab59618fa18e2c05d0"
+    },
+    {
+      "path": "reviews/physics-checkpoint-configurations-root-20261013.json",
+      "sha256": "6c19d0fb9a830261325aae281c9b468e5c56d21e171faf467c292c6691c3230e"
+    }
+  ]
+}
