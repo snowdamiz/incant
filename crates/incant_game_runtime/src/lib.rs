@@ -8,7 +8,7 @@ mod core;
 #[cfg(feature = "native-checkpoints")]
 mod native_checkpoint;
 #[cfg(feature = "native-checkpoints")]
-pub use native_checkpoint::{GameCheckpoint, PendingGameCheckpoint};
+pub use native_checkpoint::{GameCheckpoint, MAX_PERSISTED_GAME_BYTES, PendingGameCheckpoint};
 #[cfg(feature = "ui")]
 pub struct RoutedUiInput {
     pub events: Vec<incant_input::InputEvent>,

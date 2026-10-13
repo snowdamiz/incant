@@ -1,11 +1,14 @@
-//! Trusted in-memory composition of ECS components and complete native solvers.
-//! This module never admits native physics from caller-provided serialized bytes.
+//! Complete ECS/native composition with separate opaque and bounded persisted APIs.
+//! The persisted path validates untrusted bytes and joins trusted receiving catalogs;
+//! the conventional component-only save path still refuses native physics.
+mod persisted;
 mod validation;
 use super::{SaveError, codec};
 use crate::{CookedScene, NativeWorld, StableId, physics_2d::Binding2D};
 use incant_physics_2d_runtime::CheckpointWorkBudget as PlanarWork;
 use incant_physics_runtime::CheckpointWorkBudget as SpatialWork;
 use incant_physics_snapshot::{Budget, construction::AllocationBudget};
+pub use persisted::MAX_PERSISTED_WORLD_BYTES;
 use std::sync::Arc;
 use thiserror::Error;
 

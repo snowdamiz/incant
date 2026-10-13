@@ -2,6 +2,7 @@
 use super::*;
 #[cfg(any(feature = "ui", feature = "audio"))]
 mod hosted;
+mod persisted;
 mod prepare;
 use incant_input::ValidatedActions;
 use incant_runtime::{
@@ -9,9 +10,10 @@ use incant_runtime::{
     SpatialCheckpointWorkBudget, WorldCheckpoint,
 };
 
-/// A trusted, process-local checkpoint. There is deliberately no byte importer,
-/// heap snapshot, Clone implementation, or Wasm state admission. Physics state
-/// is owned by an opaque WorldCheckpoint; script state uses persistence version 1.
+/// A trusted, process-local checkpoint with separately validated data-file
+/// export. File loading creates a PendingSessionCheckpoint, never this capture
+/// type. There is no heap snapshot, Clone implementation or Wasm state admission.
+/// Physics uses an opaque WorldCheckpoint; script state uses persistence version 1.
 ///
 /// Reconstruction runs module initialization again. Globals, closures and logs
 /// are ephemeral. Validated action definitions are retained, but physical input
@@ -20,6 +22,7 @@ use incant_runtime::{
 /// must be rebuilt against the prepared candidate before its VM is started.
 pub struct NativeSessionCheckpoint {
     world: WorldCheckpoint,
+    origin: [u8; 32],
     code: CompiledScript,
     state: ScriptState,
     bindings: ValidatedActions,
@@ -67,6 +70,7 @@ impl NativeSession {
         let world = self.world.checkpoint(payload, planar_work, spatial_work)?;
         Ok(NativeSessionCheckpoint {
             world,
+            origin: self.world.source_scene_fingerprint(),
             code,
             state,
             bindings: self.bindings.clone(),

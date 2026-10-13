@@ -3,6 +3,8 @@
 mod audio_support;
 #[path = "native_checkpoints/cases.rs"]
 mod native_checkpoint_cases;
+#[path = "native_checkpoints/persisted.rs"]
+mod persisted;
 #[cfg(feature = "ui")]
 #[path = "native_checkpoints/ui.rs"]
 mod ui;

@@ -8,7 +8,7 @@ publish.workspace = true
 [features]
 profile = ["incant_profile/summary", "incant_script/profile", "incant_runtime/profile"]
 default = ["physics-deterministic"]
-native-checkpoints = ["incant_script/native-checkpoints", "incant_runtime/native-checkpoints"]
+native-checkpoints = ["incant_script/native-checkpoints", "incant_runtime/native-checkpoints", "dep:sha2"]
 ui = ["dep:incant_ui", "incant_ui/native", "incant_script/ui"]
 static-module = ["incant_script/static-module"]
 device = ["incant_audio_runtime/device"]
@@ -36,6 +36,7 @@ incant_input.workspace = true
 incant_audio_runtime = { workspace = true, features = ["scene"] }
 kira = { version = "=0.12.5", default-features = false }
 thiserror.workspace = true
+sha2 = { workspace = true, optional = true }
 
 [dev-dependencies]
 incant_script = { workspace = true, features = ["compiler"] }

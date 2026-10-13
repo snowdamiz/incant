@@ -19,8 +19,37 @@ const MAX_AUDIO_BYTES: usize = 176 + 128 * 92 + 128 * (25 + 8 + 240);
 // Same bound with or without the optional UI feature.
 const MAX_UI_BYTES: usize =
     80 + 48 * incant_types::MAX_UI_NODES + incant_types::MAX_SCENE_TEXT_BYTES;
-pub const MAX_CHECKPOINT_BYTES: usize =
-    incant_runtime::MAX_SAVE_BYTES + 2 * 1024 * 1024 + MAX_UI_BYTES + MAX_AUDIO_BYTES;
+const SESSION_OVERHEAD: usize = 2 * 1024 * 1024 + MAX_UI_BYTES + MAX_AUDIO_BYTES;
+pub const MAX_CHECKPOINT_BYTES: usize = incant_runtime::MAX_SAVE_BYTES + SESSION_OVERHEAD;
+#[cfg(feature = "native-checkpoints")]
+pub const MAX_PERSISTED_SESSION_BYTES: usize =
+    incant_runtime::MAX_PERSISTED_WORLD_BYTES + SESSION_OVERHEAD;
+
+#[derive(Clone, Copy)]
+enum Format {
+    Ordinary,
+    #[cfg(feature = "native-checkpoints")]
+    Persisted,
+}
+impl Format {
+    fn persisted(self) -> bool {
+        match self {
+            Self::Ordinary => false,
+            #[cfg(feature = "native-checkpoints")]
+            Self::Persisted => true,
+        }
+    }
+    fn world_limit(self) -> usize {
+        match self {
+            Self::Ordinary => incant_runtime::MAX_SAVE_BYTES,
+            #[cfg(feature = "native-checkpoints")]
+            Self::Persisted => incant_runtime::MAX_PERSISTED_WORLD_BYTES,
+        }
+    }
+    fn limit(self) -> usize {
+        self.world_limit() + SESSION_OVERHEAD
+    }
+}
 const MAX_ACTIVE: usize = crate::MAX_SCRIPT_INSTANCES;
 
 pub(super) struct Sections<'a> {
@@ -39,13 +68,21 @@ fn digest(bytes: &[u8], header: usize) -> [u8; 32] {
     h.finalize().into()
 }
 pub(super) fn sections<'a>(bytes: &'a [u8], program: [u8; 32]) -> Result<Sections<'a>> {
-    if !(HEADER..=MAX_CHECKPOINT_BYTES).contains(&bytes.len()) || &bytes[..8] != MAGIC {
+    sections_for(bytes, program, Format::Ordinary)
+}
+#[cfg(feature = "native-checkpoints")]
+pub(super) fn persisted_sections(bytes: &[u8], program: [u8; 32]) -> Result<Sections<'_>> {
+    sections_for(bytes, program, Format::Persisted)
+}
+fn sections_for(bytes: &[u8], program: [u8; 32], format: Format) -> Result<Sections<'_>> {
+    if !(HEADER..=format.limit()).contains(&bytes.len()) || &bytes[..8] != MAGIC {
         return Err(Error::Invalid("framing"));
     }
     let header = match u32::from_le_bytes(bytes[8..12].try_into().unwrap()) {
-        1 => HEADER,
-        2 if bytes.len() >= UI_HEADER => UI_HEADER,
-        3 if bytes.len() >= AUDIO_HEADER => AUDIO_HEADER,
+        1 if !format.persisted() => HEADER,
+        2 if !format.persisted() && bytes.len() >= UI_HEADER => UI_HEADER,
+        3 if !format.persisted() && bytes.len() >= AUDIO_HEADER => AUDIO_HEADER,
+        4 if format.persisted() && bytes.len() >= AUDIO_HEADER => AUDIO_HEADER,
         _ => return Err(Error::Invalid("version")),
     };
     if bytes[12..16] != 1u32.to_le_bytes() {
@@ -73,14 +110,14 @@ pub(super) fn sections<'a>(bytes: &'a [u8], program: [u8; 32]) -> Result<Section
             .ok_or(Error::Invalid("length overflow"))?;
     }
     if total != bytes.len()
-        || lens[0] > incant_runtime::MAX_SAVE_BYTES
+        || lens[0] > format.world_limit()
         || lens[1] > 4 + 16 * MAX_ACTIVE
         || lens[2] > MAX_BYTES + 4
         || lens[3] > 20 + 128 * 97
         || lens[4] > MAX_UI_BYTES
         || (count == 5 && lens[4] == 0)
         || lens[5] > MAX_AUDIO_BYTES
-        || (count == 6 && lens[5] == 0)
+        || (count == 6 && lens[5] == 0 && !format.persisted())
     {
         return Err(Error::Invalid("section lengths"));
     }
@@ -96,7 +133,7 @@ pub(super) fn sections<'a>(bytes: &'a [u8], program: [u8; 32]) -> Result<Section
         store,
         schedule,
         ui: (lens[4] != 0).then_some(ui),
-        audio: (count == 6).then_some(audio),
+        audio: (lens[5] != 0).then_some(audio),
     })
 }
 #[allow(clippy::too_many_arguments)] // Explicit versioned section inputs.
@@ -110,6 +147,57 @@ pub(super) fn encode(
     ui: Option<&[u8]>,
     audio: Option<&[u8]>,
 ) -> Result<Vec<u8>> {
+    encode_for(
+        program,
+        origin,
+        world,
+        active,
+        store,
+        schedule,
+        ui,
+        audio,
+        Format::Ordinary,
+    )
+}
+#[cfg(feature = "native-checkpoints")]
+#[allow(clippy::too_many_arguments)] // Explicit versioned section inputs.
+pub(super) fn encode_persisted(
+    program: [u8; 32],
+    origin: [u8; 32],
+    world: &[u8],
+    active: &[StableId],
+    store: &Store,
+    schedule: &schedule::Schedule,
+    ui: Option<&[u8]>,
+    audio: Option<&[u8]>,
+) -> Result<Vec<u8>> {
+    encode_for(
+        program,
+        origin,
+        world,
+        active,
+        store,
+        schedule,
+        ui,
+        audio,
+        Format::Persisted,
+    )
+}
+#[allow(clippy::too_many_arguments)] // One implementation for both bounded formats.
+fn encode_for(
+    program: [u8; 32],
+    origin: [u8; 32],
+    world: &[u8],
+    active: &[StableId],
+    store: &Store,
+    schedule: &schedule::Schedule,
+    ui: Option<&[u8]>,
+    audio: Option<&[u8]>,
+    format: Format,
+) -> Result<Vec<u8>> {
+    if world.len() > format.world_limit() {
+        return Err(Error::Invalid("world capacity"));
+    }
     let mut a = Vec::new();
     u32w(&mut a, active.len());
     for id in active {
@@ -132,7 +220,7 @@ pub(super) fn encode(
         t.extend(v.due.to_le_bytes());
         t.extend(v.interval.unwrap_or(0).to_le_bytes());
     }
-    let header = if audio.is_some() {
+    let header = if format.persisted() || audio.is_some() {
         AUDIO_HEADER
     } else if ui.is_some() {
         UI_HEADER
@@ -152,13 +240,15 @@ pub(super) fn encode(
         + t.len()
         + ui.map_or(0, <[u8]>::len)
         + audio.map_or(0, <[u8]>::len);
-    if total > MAX_CHECKPOINT_BYTES {
+    if total > format.limit() {
         return Err(Error::Invalid("checkpoint capacity"));
     }
     let mut out = Vec::with_capacity(total);
     out.extend(MAGIC);
     out.extend(
-        if audio.is_some() {
+        if format.persisted() {
+            4u32
+        } else if audio.is_some() {
             3u32
         } else if ui.is_some() {
             2u32
@@ -176,8 +266,8 @@ pub(super) fn encode(
     if header >= UI_HEADER {
         u32w(&mut out, ui.map_or(0, <[u8]>::len));
     }
-    if let Some(audio) = audio {
-        u32w(&mut out, audio.len());
+    if header == AUDIO_HEADER {
+        u32w(&mut out, audio.map_or(0, <[u8]>::len));
     }
     out.extend([0; 32]);
     out.extend(world);

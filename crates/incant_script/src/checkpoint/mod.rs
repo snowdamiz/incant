@@ -11,6 +11,8 @@ use crate::{
     schedule::{Schedule, Scope},
 };
 pub use codec::MAX_CHECKPOINT_BYTES;
+#[cfg(feature = "native-checkpoints")]
+pub use codec::MAX_PERSISTED_SESSION_BYTES;
 use incant_input::{InputActions, InputError};
 use incant_runtime::{CookedScene, NativeWorld, SaveError, StableId};
 #[cfg(feature = "native-checkpoints")]

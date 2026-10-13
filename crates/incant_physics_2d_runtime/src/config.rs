@@ -12,6 +12,7 @@ pub(crate) enum Geometry {
 
 /// Validated declaration. It cannot contain solver handles or arbitrary shapes.
 /// Configuration preparation is a load/structural operation, never a tick scan.
+#[derive(Clone)]
 pub struct PreparedBody {
     pub(crate) body: Option<RigidBody>,
     pub(crate) collider: Collider2D,

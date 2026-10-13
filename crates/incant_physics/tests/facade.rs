@@ -25,7 +25,9 @@ fn facade_preserves_distinct_textual_ids_and_lexical_ties() {
     }
     project.scenes.insert(scene.id.clone(), scene);
     let mut runtime = PhysicsRuntime::default();
-    runtime.sync(PreparedPhysics::new(&project).unwrap());
+    runtime
+        .sync(PreparedPhysics::new(&project).unwrap())
+        .unwrap();
     assert_eq!(
         runtime
             .states()
