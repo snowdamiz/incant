@@ -1,0 +1,23 @@
+{
+  "format": "incant-rapier-pipeline-capture",
+  "version": 1,
+  "feature": "incant-checkpoint",
+  "scope": "read-only copied observation; no phase authentication, task join, install or algorithm change",
+  "files": [
+    {
+      "path": "src/pipeline/mod.rs",
+      "upstream_sha256": "64d3fbd261fc689d10cbc47a32daa7260e712bfafaf5a5f94d7c244db4c2da75",
+      "sha256": "cf9fa7cdb76f2ef60b3e2266d7149d6d4fde1eeb082a51acd034558bdde1b55e"
+    },
+    {
+      "path": "src/pipeline/physics_pipeline/mod.rs",
+      "upstream_sha256": "31e0c921654bb7b7156011e53af869aa3774bb003ce64cf638ba452da22b30a4",
+      "sha256": "f690a026df3aa92f8772012454a24f04060281fc3afaaf6ac16206da706f64b6"
+    },
+    {
+      "path": "src/pipeline/physics_pipeline/checkpoint.rs",
+      "upstream_sha256": null,
+      "sha256": "62cc49a4a27452c0cf05b217f35f01582652684098d939446f928d85b47f1258"
+    }
+  ]
+}
