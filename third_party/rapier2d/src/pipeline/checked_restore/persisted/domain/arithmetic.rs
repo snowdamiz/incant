@@ -155,6 +155,13 @@ pub(super) fn admit(n: &NumericFrame<'_>) -> Result<()> {
             gyro(b, sub_dt)?;
         }
     }
+    // Parentless fixed targets have no body pose; their independent world
+    // translations still enter relative/shifted CCD and contact arithmetic.
+    for c in &cs.record().colliders {
+        let position = sum(c.position.translation);
+        squared(4. * position)?;
+        max_position = max_position.max(position);
+    }
     bounded(max_mass)?;
     bounded(max_inertia)?;
     let table = f.manifolds().record();
@@ -191,6 +198,43 @@ pub(super) fn admit(n: &NumericFrame<'_>) -> Result<()> {
     }
     squared(4. * velocity * (max_arm + 1.))?;
     squared(4. * (max_position + f64::from(dt) * velocity))?;
+    if config.max_ccd_substeps != 0 {
+        // Closed CCD proxies consume shifted world/local points. In the pinned
+        // 3D GJK the highest polynomial setup is the squared triple-cross search
+        // direction (degree6); 2D simplex setup has no higher degree. Include
+        // both endpoint motion, local COM/child offsets and all primitive points.
+        // The 3D overlap core radius can be max(.75*extent,4*slop)+slop.
+        // Slop is independent of body/shape size and must enter the same bound.
+        let slop = f64::from(
+            f32::from_bits(config.normalized_allowed_linear_error)
+                * f32::from_bits(config.length_unit),
+        );
+        let mut local = 5. * slop;
+        for b in bs {
+            local = local
+                .max(sum(b.mass.local.center))
+                .max(value(b.mass.max_extent));
+        }
+        for parent in f.attachments().record().colliders.iter().flatten() {
+            local = local.max(sum(parent.local_pose.translation));
+        }
+        for g in cs.context().geometries {
+            for p in &g.record().parts {
+                let shape = match p.shape {
+                    incant_physics_snapshot::Primitive::Box { half_extents } => sum(half_extents),
+                    incant_physics_snapshot::Primitive::Ball { radius } => value(radius),
+                    incant_physics_snapshot::Primitive::CapsuleY {
+                        half_height,
+                        radius,
+                    } => value(half_height) + value(radius),
+                };
+                local = local.max(sum(p.translation) + shape);
+            }
+        }
+        let span = (32. * (max_position + f64::from(dt) * velocity + local)).max(1.);
+        bounded(span.powi(6))?;
+    }
+
     for s in &table.solver {
         let anchor = sum(s.anchor1) + sum(s.anchor2);
         let relative = 4. * (anchor + max_position);

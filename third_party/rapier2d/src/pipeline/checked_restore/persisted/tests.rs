@@ -15,6 +15,9 @@ fn capture(owner: &mut CheckpointOwner) -> NativeFrame {
     owner.checkpoint(&mut payload(), &mut work()).unwrap()
 }
 fn boxes() -> CheckpointOwner {
+    boxes_with_ccd(false)
+}
+fn boxes_with_ccd(enabled: bool) -> CheckpointOwner {
     let mut o = CheckpointOwner::new().unwrap();
     let w = o.access_mut().unwrap();
     #[cfg(feature = "dim2")]
@@ -29,7 +32,9 @@ fn boxes() -> CheckpointOwner {
         let box_ = ColliderBuilder::cuboid(0.4, 0.4, 0.4);
         // Default gyroscopic/CCD/material settings, matching ordinary runtimes.
         w.insert(
-            RigidBodyBuilder::dynamic().translation(Vector::Y * (0.6 + i as f32)),
+            RigidBodyBuilder::dynamic()
+                .ccd_enabled(enabled)
+                .translation(Vector::Y * (0.6 + i as f32)),
             box_,
         );
     }
@@ -143,10 +148,10 @@ fn persisted_native_empty_import_budget_header_and_identity_refusals() {
     ));
 }
 #[test]
-fn persisted_native_ccd_refusal_and_imported_next_step_guard() {
+fn persisted_native_soft_ccd_refusal_and_imported_next_step_guard() {
     let mut o = CheckpointOwner::new().unwrap();
     o.access_mut().unwrap().insert(
-        RigidBodyBuilder::dynamic().ccd_enabled(true),
+        RigidBodyBuilder::dynamic().soft_ccd_prediction(0.1),
         ColliderBuilder::ball(0.5),
     );
     o.step().unwrap();
@@ -176,7 +181,12 @@ fn persisted_native_ccd_refusal_and_imported_next_step_guard() {
     )
     .unwrap();
     let w = imported.access_mut().unwrap();
-    w.bodies.iter_mut().next().unwrap().1.enable_ccd(true);
+    w.bodies
+        .iter_mut()
+        .next()
+        .unwrap()
+        .1
+        .set_soft_ccd_prediction(0.1);
     let before = serde_json::to_vec(w).unwrap();
     assert_eq!(
         imported.step(),
@@ -238,3 +248,5 @@ fn persisted_native_flat_compound_workspace_and_tile_order_continue() {
         );
     }
 }
+
+mod ccd_cases;

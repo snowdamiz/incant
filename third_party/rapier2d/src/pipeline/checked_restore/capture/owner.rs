@@ -74,8 +74,9 @@ impl CheckpointOwner {
             origin,
         }
     }
-    /// Capture after authenticating this owner's actual completed positive step.
-    /// No public path imports arbitrary record bytes or a caller phase claim.
+    /// Capture the owner's completed state or its independently validated imported
+    /// state. The latter retains imported provenance and cannot issue CompletedStep.
+    /// Neither path trusts a caller phase claim.
     pub fn checkpoint(
         &mut self,
         budget: &mut incant_physics_snapshot::Budget,
