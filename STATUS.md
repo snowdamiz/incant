@@ -2702,6 +2702,6 @@ completed native owner and reconstructs a full private primitive candidate. Both
 deterministic and SIMD8 qualification pass 182 native and 228 snapshot tests each;
 independent complete-source review is accepted. The warning-only source010 delta
 has strict native/wasm compilation, with the source009 test generations retained
-separately. Final producer execution review is accepted; current-main source qualification and outer runtime integration remain pending.
+separately. Final producer execution and current-main source composition reviews are accepted. Publication awaits the required fast check; outer runtime integration remains separate.
 Public persisted physics saves remain refused. See
 [scope and evidence](docs/spikes/physics-native-capture-owner.md).

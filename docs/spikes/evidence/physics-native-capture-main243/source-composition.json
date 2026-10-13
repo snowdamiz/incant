@@ -10630,6 +10630,10 @@
     {
       "path": "docs/spikes/evidence/physics-native-capture-main243/physics-native-capture-source010-delta-independent-20261013.json",
       "sha256": "f676ed991caf704ac60ec7e5bd1e24e7e263b501ab0f0568aafd064e981530e8"
+    },
+    {
+      "path": "docs/spikes/evidence/physics-native-capture-main243/physics-native-main243-composition-root-20261013.json",
+      "sha256": "3b8c263b3e8d61fabce7182926f42c19248ee5b27e1e5e9453970193b5f8bff1"
     }
   ],
   "qualification": "Source-only current-main composition; no integrated build or execution yet. Native producer execution retains source009/010 distinctions. Error declaration order matches main and changes the conservative native build identity; no reuse of its old compiled identity is claimed.",

@@ -107,5 +107,8 @@ Current-main243 intake preserves the original manifest/archive. Its source-only
 composition and final review copies are retained in
 [`evidence/physics-native-capture-main243/source-composition.json`](evidence/physics-native-capture-main243/source-composition.json).
 The sole relevant source difference is the existing snapshot Error declaration
-order. This changes the conservative compiled identity; integrated compilation
-and execution have not yet been claimed.
+order, independently accepted under receipt `3b8c263b`. This changes the
+conservative compiled identity. Producer tests remain bound to their original
+builds; no new standalone integrated compilation or execution is claimed.
+The separately prepared outer union exactly matches its previously executed
+source005 inputs; it is reviewed and published separately.
