@@ -16,6 +16,18 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Exact physics saves — inert contact leaf payloads verified locally
+
+The next std-only inert component preserves complete tracked-point warm-start
+data and ordered solver-contact rows, with exact float/feature/index bits and
+bounded hostile decoding. Sixty-five CPU tests, Clippy, wasm32 and dependency
+checks pass. Actual 2D/3D stepped contacts include nonzero warm starts/friction,
+retained recycle references, unchanged sleeping rows and wake changes.
+Independent source/final evidence acceptance is pending. Shape/owner/manifold
+composition and full exact continuation remain required; live construction and
+physics-save admission stay refused.
+[Contact leaf contract](docs/spikes/physics-inert-contact-points.md).
+
 ## Exact physics saves — inert attachment ownership verified locally
 
 The next std-only inert component preserves exact ordered body/collider
