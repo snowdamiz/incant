@@ -41,12 +41,13 @@ class IosExport(unittest.TestCase):
             self.assertEqual((audit.directory / records[0]['stderr']).read_text(), 'refused\n')
             self.assertEqual(records[0]['stdout_sha256'], ios_archive.sha256(b'observed\n'))
 
-    def test_module_selector_refuses_before_build_and_existing_output_is_preserved(self):
+    def test_module_selector_requires_trusted_translation_and_existing_output_is_preserved(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             project = root / 'project'
-            project.write_text(json.dumps({'settings': {}, 'scenes': {'scene': {'program': {'kind': 'wasm', 'module': 'id'}}}}))
-            with patch.object(export_ios, 'build') as build, self.assertRaisesRegex(ValueError, 'static Wasm'):
+            project.write_text(json.dumps({'settings': {}, 'assets': {'id': {'kind': 'wasm', 'sha256': 'a'*64}},
+                                          'scenes': {'scene': {'entities': {}, 'program': {'kind': 'wasm', 'module': 'id'}}}}))
+            with patch.object(export_ios, 'build') as build, self.assertRaisesRegex(ValueError, 'WABT'):
                 export_ios.export(project, root / 'output', TARGET)
             build.assert_not_called()
             self.assertFalse((root / 'output').exists())
