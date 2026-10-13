@@ -1,3 +1,11 @@
+# Additional review received — 2026-10-13
+
+The full independent helper review is now in `root-helper-review.json` next to
+this brief (root-owned). Read and close all five findings before asking for an
+execution grant: interrupt cleanup, unstripped porcelain -z source identity,
+review frame provenance, build-to-capture frozen identity, atomic frame debit.
+This source review does not decide appearance. Scope remains preparation only.
+
 # Priority revision — 2026-10-13, follow-up preparation
 
 Read this before all earlier instructions. Your preparation result is received.
