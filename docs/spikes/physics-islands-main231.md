@@ -8,4 +8,4 @@ The private native workspace retains 686 exact source copies, with only the two 
 
 `docs/spikes/evidence/physics-islands-main231.json` binds the 3,607-input freeze, checks, actual feature identities, binaries and 766 current lossless records. The original producer archive retains all 2,204 records. The assertion-only collector is retained inside the current archive and also available at `~/.codex/incant-integration-evidence/physics-islands-main231-001/verify.py --verify-only`.
 
-Final current-main packet review is pending. This remains a private, default-off island constructor. There is no complete decoded-world install, runtime physics-save admission, phone or performance claim; PhysicsUnsupported remains closed.
+Root independently accepted the final current-main packet (`cb3bc688`); later ancestry joins require explicit source-relevance qualification before publication. This remains a private, default-off island constructor. There is no complete decoded-world install, runtime physics-save admission, phone or performance claim; PhysicsUnsupported remains closed.
