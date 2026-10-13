@@ -44,6 +44,7 @@ use bytemuck::{Pod, Zeroable};
 use glam::{Mat4, Vec3};
 pub use incant_render_data::{SceneInput, ScenePreparer};
 pub use lighting::LocalLightSelection;
+pub use models::motion;
 pub use models::{RenderScene, RetainedScene, RetainedTarget};
 pub use resource_error::{PreparationError, ResourceError};
 pub use scene::{SceneError, SceneStats};
@@ -97,6 +98,7 @@ pub struct Renderer {
     frames: frame::FrameCache,
     output: output::OutputPass,
     graph: graph::FrameGraph,
+    motion: Option<motion::MotionSystem>,
 }
 impl Renderer {
     pub async fn new(
@@ -180,6 +182,7 @@ impl Renderer {
             frames: Default::default(),
             output,
             graph: Default::default(),
+            motion: None,
         })
     }
     pub fn headless() -> Result<Self> {
@@ -264,6 +267,7 @@ impl Renderer {
                 viewport,
             },
             resolution::ResolutionScale::FULL,
+            None,
         )
     }
     fn draw_scene_scaled(
@@ -271,6 +275,7 @@ impl Renderer {
         scene: &RenderScene,
         target: RetainedTarget<'_>,
         scale: resolution::ResolutionScale,
+        motion: Option<motion::MotionDraw>,
     ) -> Result<wgpu::CommandBuffer> {
         let RetainedTarget {
             view,
@@ -342,6 +347,7 @@ impl Renderer {
             graph::PreparedFrame {
                 diagnostics,
                 models,
+                motion,
                 sprites,
                 text,
                 output,

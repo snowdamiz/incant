@@ -2,6 +2,8 @@
 //! each accepted sync, submitted immediately, then presented. No authoring path.
 //! Screen-space UI is admitted before any target is consumed and drawn over the
 //! finished world frame in the same target (incant_render `ui` contract).
+mod motion;
+pub use motion::{MotionReset, MotionTargets};
 mod resolution;
 mod resolution_mailbox;
 use incant_render::resolution::{ResolutionConfig, ResolutionError, ResolutionFrame};
@@ -33,6 +35,11 @@ pub trait TargetProvider {
     fn resolution_config(&self) -> Option<ResolutionConfig> {
         None
     }
+    /// Explicit opt-in plus monotonic trusted camera-cut epoch. Simulation ticks
+    /// and arbitrary clock discontinuities never implicitly select history.
+    fn motion_epoch(&self) -> Option<u64> {
+        None
+    }
 }
 pub struct GpuRenderSettings<P: TargetProvider> {
     pub renderer: Arc<Renderer>,
@@ -57,6 +64,7 @@ struct Live<P> {
     ui: UiLayer,
     completion: Option<resolution::Completion>,
     resolution_config: Option<ResolutionConfig>,
+    motion_epoch: Option<u64>,
 }
 /// Owns the actual GPU bindings plus its target provider. NativeRenderHost owns
 /// the sole CPU adapter and calls this consumer inside every mandatory sync.
@@ -83,6 +91,11 @@ impl<P: TargetProvider> GpuRenderConsumer<P> {
         self.live
             .as_ref()
             .and_then(|live| live.scene.resolution_frame())
+    }
+    pub fn motion_frame(&self) -> Option<incant_render::motion::MotionFrame> {
+        self.live
+            .as_ref()
+            .and_then(|live| live.scene.motion_frame())
     }
     pub fn discarded_resolution_samples(&self) -> u64 {
         self.live
@@ -114,6 +127,12 @@ impl<P: TargetProvider> RenderInputConsumer for GpuRenderConsumer<P> {
             .prepare_retained(input, camera)
             .map_err(GpuHostError::Render)?;
         scene.set_dynamic_resolution(config)?;
+        let motion_epoch = settings.targets.motion_epoch();
+        if motion_epoch.is_some() {
+            scene
+                .enable_motion_history(&settings.renderer)
+                .map_err(GpuHostError::Render)?;
+        }
         let mut layer = settings.renderer.ui_layer();
         if let Some(ui) = ui {
             let stage = layer
@@ -131,6 +150,7 @@ impl<P: TargetProvider> RenderInputConsumer for GpuRenderConsumer<P> {
                 ui: layer,
                 completion: config.map(|_| resolution::Completion::default()),
                 resolution_config: config,
+                motion_epoch,
             }),
             frames: 0,
         })
@@ -174,6 +194,19 @@ impl<P: TargetProvider> RenderInputConsumer for GpuRenderConsumer<P> {
         {
             completion.discarded = completion.discarded.saturating_add(1);
         }
+        let motion_epoch = live.targets.motion_epoch();
+        if motion_epoch.is_some() != live.motion_epoch.is_some()
+            || motion_epoch
+                .zip(live.motion_epoch)
+                .is_some_and(|(next, last)| next < last)
+        {
+            return Err(GpuHostError::Render(Box::new(
+                incant_render::motion::MotionError::Sequence,
+            )));
+        }
+        if motion_epoch != live.motion_epoch {
+            live.scene.invalidate_motion_history();
+        }
         let start = live.completion.as_ref().map(|_| Instant::now());
         let next = self.frames.checked_add(1).ok_or(GpuHostError::FrameLimit)?;
         let mut replacement = if kind == UpdateKind::Rebuilt {
@@ -189,6 +222,11 @@ impl<P: TargetProvider> RenderInputConsumer for GpuRenderConsumer<P> {
             // Replacement has fresh timing ownership. Outstanding old callbacks
             // are retained in the bounded slot and discarded by the new owner.
             scene.set_dynamic_resolution(live.resolution_config)?;
+            if motion_epoch.is_some() {
+                scene
+                    .enable_motion_history(&self.renderer)
+                    .map_err(GpuHostError::Render)?;
+            }
         }
         let frame = live
             .targets
@@ -214,6 +252,7 @@ impl<P: TargetProvider> RenderInputConsumer for GpuRenderConsumer<P> {
         {
             completion.register(&self.renderer, start, receipt)?;
         }
+        live.motion_epoch = motion_epoch;
         self.live = Some(live);
         self.frames = next;
         Ok(())
