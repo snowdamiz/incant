@@ -4,6 +4,16 @@ mod device_tests;
 mod draw;
 mod math;
 mod pipelines;
+#[cfg(test)]
+mod quality_geometry;
+#[cfg(test)]
+mod quality_metrics;
+#[cfg(test)]
+mod quality_oracle;
+#[cfg(test)]
+mod quality_sphere;
+#[cfg(test)]
+mod quality_tests;
 mod targets;
 #[cfg(test)]
 mod tests;
