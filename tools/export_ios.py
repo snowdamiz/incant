@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fresh authored TypeScript project -> unsigned iOS CPU runtime archive + data.
+"""Fresh authored project -> unsigned iOS CPU runtime archive + data.
 
 This is an archive exporter, not an app/signing/window host. Simulator execution
 and device execution are distinct; this command records compilation only.
@@ -15,6 +15,7 @@ import tempfile
 import time
 
 import ios_archive
+import ios_wasm
 import native_process
 import physics_export
 from physics_features import selected_graph_errors, validate_artifacts
@@ -54,7 +55,7 @@ class CommandAudit:
         return result
 
 
-def build(project, staging, storage, target, scene, camera):
+def build(project, staging, storage, target, scene, camera, wabt=None):
     audit = CommandAudit(staging / 'audit')
     execute = audit.execute
     rustc = Path(execute(['rustup', 'which', 'rustc']).stdout.strip())
@@ -71,7 +72,9 @@ def build(project, staging, storage, target, scene, camera):
     cargo = ROOT / 'tools/cargo'
     project_bytes = read(project, 64 * 1024**2)
     mode = physics_export.project_mode(project_bytes)
-    selected_features = physics_export.cargo_features(mode, ios_archive.CAPABILITIES)
+    module = ios_wasm.prepare(project, scene, staging, storage, cargo, env, execute, wabt, sdk, target)
+    capabilities = ios_archive.CAPABILITIES + (['static-module'] if module else [])
+    selected_features = physics_export.cargo_features(mode, capabilities)
     features = ','.join(selected_features)
     project_hash = sha256(project_bytes)
     selected_graph = execute([cargo, 'tree', '--locked', '--no-default-features', '-p', ios_archive.NAME,
@@ -87,6 +90,9 @@ def build(project, staging, storage, target, scene, camera):
                '--message-format=json', '-vv']
     command_receipt = {'argv': list(map(str, command)), 'exit_code': None,
                        'env': {k: env[k] for k in ('INCANT_MOBILE_PROJECT', 'SDKROOT')}}
+    if module is not None:
+        command_receipt['env'].update({key: value for key, value in env.items()
+                                      if key.startswith(('INCANT_NATIVE_WASM_', 'INCANT_WASM_', 'CC_'))})
     if scene is not None:
         command_receipt['env']['INCANT_MOBILE_PROJECT_SCENE'] = scene
     write_json(staging / 'build-command.json', command_receipt)
@@ -100,7 +106,7 @@ def build(project, staging, storage, target, scene, camera):
     write_json(staging / 'build-command.json', command_receipt)
     log = (staging / 'build.log').read_text()
     require(result.returncode == 0, 'Authored iOS build failed; no archive was published:\n' + log[-8000:])
-    flags = ios_archive.verify_codegen(log, target)
+    flags = ios_archive.verify_codegen(log, target, module is not None)
     physics = ios_archive.kernel_provenance(log, target, mode)
     messages = [json.loads(line) for line in (staging / 'cargo.jsonl').read_text().splitlines() if line.startswith('{')]
     physics['compiled_target'] = validate_artifacts(messages, mode, target_dir=storage / 'target',
@@ -116,7 +122,9 @@ def build(project, staging, storage, target, scene, camera):
     require(len(outputs) == 1, 'Missing unique authored project producer')
     producer = outputs[0]
     receipt = json.loads(read(producer / 'project-export.json', 4 * 1024**2))
-    ios_archive.producer_receipt(receipt, target, project_hash, mode)
+    expected_program = module['program'] if module else None
+    ios_archive.producer_receipt(receipt, target, project_hash, mode, expected_program)
+    compiled_module = None if module is None else ios_wasm.compiler_audit(log, target, env['SDKROOT'], module, ROOT)
     require(sha256(read(project, 64 * 1024**2)) == project_hash, 'Project changed during archive build')
     camera = select_camera(receipt, camera, False)
     llvm = Path(execute([rustc, '--print', 'sysroot']).stdout.strip()) / 'lib/rustlib' / host / 'bin'
@@ -134,25 +142,28 @@ def build(project, staging, storage, target, scene, camera):
             'profile': 'shipping', 'features': selected_features, 'command': command_receipt,
             'compiler': compiler, 'sdk': {'name': sdk, 'version': sdk_version}, 'codegen': flags,
             'physics': physics, 'physics_mode': mode, 'physics_variant': mode,
+            'program': expected_program,
+            'static_module': None if module is None else {'translation': module['translation'], 'compiled': compiled_module},
             'normal_dependencies': graph, 'project_sha256': project_hash, 'scene_id': receipt['scene_id'],
             'script': receipt['script'], 'camera': camera, 'data': data, 'symbols': symbols,
             'archive': {'path': 'runtime/libincant_game_player.a', 'sha256': symbols['runtime_sha256'],
                         'bytes': (runtime / 'libincant_game_player.a').stat().st_size},
             'header': {'path': 'runtime/incant_game.h', 'sha256': sha256(read(header, 65536))},
             'startup_source_parsing': False, 'signed': False, 'execution': 'not executed; archive compilation only',
-            'limits': ['TypeScript only; static Wasm mobile export unsupported',
+            'limits': ['One scene program; mixed Wasm and per-entity TypeScript unsupported',
+                       'Static module checkpoints remain unsupported',
                        'CPU package API; no mobile window, touch or device audio host',
                        'final application requires dead stripping and separate executable/symbol audit',
                        'no device, performance, signing, store or phase gate']}
 
 
-def export(project, output, target, scene=None, camera=None, evidence=None):
+def export(project, output, target, scene=None, camera=None, evidence=None, wabt=None):
     require(target in ios_archive.TARGETS, 'Unsupported iOS destination; Android and arbitrary cross targets remain denied')
     project = project.resolve(strict=True)
     output = output.absolute()
     require(not output.exists() and not output.is_symlink(), 'Output already exists; choose a new directory')
     require(output.parent.is_dir(), 'Output parent does not exist')
-    ios_archive.preflight_project(project, scene)
+    ios_archive.preflight_project(project, scene, wabt)
     if evidence is not None:
         evidence = evidence.absolute()
         require(not evidence.exists() and not evidence.is_symlink() and evidence.parent.is_dir(),
@@ -165,7 +176,7 @@ def export(project, output, target, scene=None, camera=None, evidence=None):
         try:
             with tempfile.TemporaryDirectory(prefix='incant-ios-build-') as scratch:
                 storage = Path(scratch).resolve()
-                report = build(project, staging, storage, target, scene, camera)
+                report = build(project, staging, storage, target, scene, camera, wabt)
             require(not storage.exists(), 'Private archive build storage was not removed')
             report['private_build_storage_removed'] = True
             write_json(staging / 'export.json', report)
@@ -174,7 +185,7 @@ def export(project, output, target, scene=None, camera=None, evidence=None):
             # Failed or timed-out builds retain their actual logs on explicit
             # request; no output archive is advertised after producer failure.
             if evidence is not None:
-                for name in ('build-command.json', 'build.log', 'cargo.jsonl'):
+                for name in ('build-command.json', 'build.log', 'cargo.jsonl', 'wasm-translation.json'):
                     if (staging / name).is_file():
                         shutil.copy2(staging / name, evidence / name)
                 if (staging / 'audit').is_dir():
@@ -190,8 +201,9 @@ def main():
     parser.add_argument('--scene')
     parser.add_argument('--camera')
     parser.add_argument('--evidence', type=Path, help='new directory for raw build logs, including failed builds')
+    parser.add_argument('--wabt', type=Path, help='Trusted pinned WABT 1.0.42 tools for authored Wasm export')
     args = parser.parse_args()
-    result = export(args.project, args.output, args.target, args.scene, args.camera, args.evidence)
+    result = export(args.project, args.output, args.target, args.scene, args.camera, args.evidence, args.wabt)
     print(json.dumps({'target': result['target'], 'archive': result['archive'], 'execution': result['execution']}))
 
 

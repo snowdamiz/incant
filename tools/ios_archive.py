@@ -4,6 +4,8 @@ from pathlib import Path
 import re
 
 import physics_export
+import ios_wasm
+import native_wasm
 from physics_features import SOLVERS, feature_errors
 
 from native_package import read, require, sha256
@@ -26,7 +28,7 @@ def admit(host, target):
             'Authored iOS archive requires macOS arm64 and an explicitly supported iOS destination')
 
 
-def preflight_project(project, scene):
+def preflight_project(project, scene, wabt=None):
     """Early bounded refusal only; the Rust producer owns schema admission."""
     import json
     payload = read(project, 64 * 1024**2)
@@ -38,8 +40,8 @@ def preflight_project(project, scene):
         require(len(scenes) == 1, 'Choose --scene when the project does not contain exactly one scene')
         scene = next(iter(scenes))
     require(scene in scenes and isinstance(scenes[scene], dict), 'Selected project scene is missing')
-    require(scenes[scene].get('program') is None,
-            'Authored iOS archive currently requires TypeScript; static Wasm mobile export is unsupported')
+    if native_wasm.selection(project, scene) is not None:
+        require(wabt is not None, 'Wasm export requires --wabt pointing to trusted WABT 1.0.42 tools')
     return mode
 
 
@@ -47,7 +49,8 @@ def environment(source, rustc, project, scene):
     for name, value in source.items():
         if (name in ('RUSTFLAGS', 'CARGO_ENCODED_RUSTFLAGS', 'RUSTC', 'RUSTC_WRAPPER',
                      'RUSTC_WORKSPACE_WRAPPER', 'CFLAGS', 'HOST_CFLAGS', 'TARGET_CFLAGS')
-                or name.startswith(('CARGO_PROFILE_', 'CFLAGS_')) or name.endswith('_RUSTFLAGS')):
+                or name in ('CC', 'HOST_CC', 'TARGET_CC', 'AR', 'HOST_AR', 'TARGET_AR')
+                or name.startswith(('CARGO_PROFILE_', 'CFLAGS_', 'CC_', 'AR_')) or name.endswith('_RUSTFLAGS')):
             require(not value, f'Unset {name} for the audited iOS exporter')
     env = {k: v for k, v in source.items() if not k.startswith(('INCANT_NATIVE_', 'INCANT_MOBILE_',
                                                                'INCANT_WASM_', 'INCANT_AUTHORED_WASM'))}
@@ -77,13 +80,18 @@ def target_invocations(stderr, target):
     return [line for line in stderr.splitlines() if 'Running `' in line and pattern.search(line)]
 
 
-def verify_codegen(stderr, target):
+def verify_codegen(stderr, target, static_module=False):
     target_lines = target_invocations(stderr, target)
     flags = {}
-    for name in ('incant_runtime', 'incant_script', NAME):
+    crates = ['incant_runtime', 'incant_script', NAME]
+    if static_module:
+        crates.append('incant_wasm_runtime')
+    for name in crates:
         commands = [line for line in target_lines if re.search(r'--crate-name ' + name + r'\b', line)]
         require(len(commands) == 1, f'Missing fresh target invocation for {name}')
         require('feature="compiler"' not in commands[0], 'Runtime source compiler feature leaked')
+        if static_module and name == 'incant_wasm_runtime':
+            require('feature="embedded-fixture"' in commands[0], 'Missing trusted static module compilation')
         actual = codegen(commands[0])
         expected = {'opt-level': '3', 'codegen-units': '1', 'panic': 'abort',
                     'debuginfo': '2', 'split-debuginfo': 'off'}
@@ -117,14 +125,15 @@ def kernel_provenance(stderr, target, mode='deterministic'):
     return {'mode': mode, 'target': target, 'crates': result}
 
 
-def producer_receipt(receipt, target, project_hash, mode='deterministic'):
+def producer_receipt(receipt, target, project_hash, mode='deterministic', module=None):
     require(receipt.get('format') == 'incant-native-project-build' and receipt.get('version') == 1,
             'Unsupported authored project producer receipt')
     physics_export.verify_producer(receipt, mode)
     require(receipt['target'] == target and receipt['producer_target'] == 'aarch64-apple-darwin'
             and receipt['producer_kind'] == 'ios-archive' and receipt['project_sha256'] == project_hash
-            and receipt['startup_source_parsing'] is False and receipt['program'] is None,
+            and receipt['startup_source_parsing'] is False,
             'Authored iOS producer identity mismatch')
+    ios_wasm.program(receipt['program'], module)
     script = receipt['script']
     expected_abi = {'version': 28, 'pointer_bits': 64, 'little_endian': True, 'value_bytes': 16,
                     'value_alignment': 8, 'atom_bytes': 4, 'float_mantissa': 53,
