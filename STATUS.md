@@ -24,7 +24,8 @@ uses the existing main renderer, excludes private upscale/MetalFX ancestry, and
 refuses fixed temporal history while attached. Default output and old shader
 sources remain unchanged. Source review is accepted; all seventeen current checks pass with 146 default
 and 175 overlapping cooked CPU cases and exact old/new shader payload identity.
-Final integration review is pending. Original producer numerical Metal evidence covers twelve renders
+Final integration and checkpoint 24 documentation review is accepted (`6029ae16`);
+publication awaits the required fast check. Original producer numerical Metal evidence covers twelve renders
 plus twelve readback submissions only; no appearance or history-consumption
 claim. [Current integration](docs/spikes/temporal-owner-main228.md).
 

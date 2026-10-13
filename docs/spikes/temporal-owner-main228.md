@@ -64,7 +64,8 @@ the corrected exact filter and remaining guards ran afterward. No source change
 or repetition of passing expensive checks was needed. The final packet retains
 134 raw records / 97 payloads, all 3,545 frozen inputs and four immutable current
 test binaries; producer evidence retains 213 records / 127 payloads and two
-binary identities separately. Independent final integration review is pending.
+binary identities separately. Independent final integration and checkpoint 24 documentation review is accepted
+([root receipt](evidence/temporal-owner-main228-final-root.json), `6029ae16`).
 [Manifest](evidence/temporal-owner-main228.json) and
 [read-only verifier](evidence/temporal-owner-main228/verify.py). The ignored
 GPU test has not run on this composition. There is no color-history consumer,

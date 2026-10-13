@@ -729,6 +729,10 @@
     "producer_gpu": [
       "docs/spikes/evidence/temporal-owner-attachment-gpu-root.json",
       "ad7cde4b3991e3f80040ccb04a97ba81ab5ba1d84d17b6ff84fc1cc125be7954"
+    ],
+    "final": [
+      "docs/spikes/evidence/temporal-owner-main228-final-root.json",
+      "6029ae16776b8d0aa67bf6bf06ac1c48d7cc182ec680b2e6949b5910b35e47cb"
     ]
   },
   "archive": {
