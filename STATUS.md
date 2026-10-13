@@ -16,9 +16,9 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Current overview — main191, 2026-10-13
+## Current overview — main192, 2026-10-13
 
-Development main191 includes the restart quota-test repair (PR188) and the reviewed,
+Development main192 includes the restart quota-test repair (PR188) and the reviewed,
 opt-in cooked sprite/UI/text/material paths with private Vulkan pipeline persistence
 (PR189). Default renderer checks remain; the next frozen checkpoint also exercises
 cooked features and asserts the actual native backend. Producer Metal appearance
@@ -32,6 +32,9 @@ quota repair preserves production's 50 ms budget, and the reviewed player probe
 correction is merged in PR191. Checkpoint18 is frozen at the exact main191 tree;
 all 23 requirements must pass before release promotion.
 No release or phase approval follows from a main merge.
+Checkpoint18 has a Linux editor test compilation failure: its reused backend helper
+requires a Renderer alias in the integration test root. The narrow test-only repair
+is undergoing scoped compilation; the candidate remains frozen.
 
 Android static-Wasm integration is merged in PR190 after independent source-relevance
 review and the fast check. Current CPU/public preflights and both-mode target compile/
@@ -44,6 +47,11 @@ their queued GPU/appearance checks remain open. CPU profiling is being verified
 locally, with final package evidence pending. These independent lanes do not satisfy
 phone, performance, complete-renderer or phase gates. Older milestone narratives
 below are historical integration snapshots, not the current queue.
+
+Safe Core live-HUD changes are merged in PR192. The optional result-label and won-objective
+correction has passed current-main192 public native checks and is awaiting independent
+integration review. Original source-free shipping remains producer-scoped; no new
+appearance or device acceptance is inferred. See [Core result evidence](docs/spikes/core-result-hud-main192.md).
 
 ## Cooked renderer integration — CPU checks complete
 

@@ -1,0 +1,24 @@
+{
+  "at": "2026-10-13T03:22:41.829167+00:00",
+  "status": "accepted scoped producer",
+  "head": "16656913b3ea6ee6aa422875af4dcf1f0c6aca56",
+  "manifest_sha256": "92dd645a3c5c30ab21d469a7a0642a06a2f80b8a56acec5167731938b7b213c7",
+  "artifact_records": 575,
+  "external_artifacts": 407,
+  "payloads": 291,
+  "raw_shipping_runs_reaudited": 20,
+  "shipping_observation_checks": 426,
+  "fresh_vs_native_and_restart_pcm": "exact bytes",
+  "prior_source_review": {
+    "sha256": "f7aa9e4b0bb6f49f2f903f6d03cbc61295b39f04fbca6bfcdf346ac71db24a57",
+    "status": "accepted"
+  },
+  "limits": [
+    "No production UI node, localization wording, styling or layout change; optional fixture reuses approved controls only",
+    "No visual/window/GPU/device/performance or phase-gate acceptance",
+    "First retained headless reuse failed before gameplay due removed child checkout Node dependency path; fresh parent binary completed native proof",
+    "Historical0065 rendered/controller evidence remains immutable and is not relabeled",
+    "Physics session reset is not physics checkpoint save/restore"
+  ],
+  "findings": []
+}
