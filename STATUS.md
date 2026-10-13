@@ -850,15 +850,14 @@ all 250 non-whitespace glyphs with no new defect. Shipping/device/full Unicode
 and complete Game UI/IME gates remain open.
 [Evidence](docs/spikes/text-bidi-wrap.md).
 
-## Integration pause point
+## Whole-session restart — integration proof completed
 
-At the user’s request, work paused after the unchanged restart integration
-`7f6e41c4` completed its two fresh ordinary shipping proofs (24 processes).
-Local CPU/Clippy/contract checks pass; final independent integration review and
-publication remain pending. Main179 already contains the reviewed native worker
-and owner. Android is parked separately before integration validation. Checkpoint15
-remains frozen and unpromoted; its hosted CI may finish while local work is paused.
-[Exact resume evidence](docs/spikes/native-restart-main178-pause.md).
+The resumed private integration passes355CPU cases and two fresh ordinary shipping
+exports with24 separate player processes. Core/Planar restart matches fresh state
+and exact concatenated PCM; both matching headless fixtures explicitly refuse
+unsupported restart. Independent final integration review and publication are
+pending. [Current evidence](docs/spikes/native-restart-main179.md) retains the
+original missing-bundle compile attempt and unchanged-source correction.
 
 ## Current milestone
 
@@ -884,12 +883,12 @@ one-hour allowance. The main158 probe repair and main160 Windows job allowance
 were verified by this successful batch, without removing checks or reusing private
 shipping builds. [Promotion and evidence](docs/spikes/release-checkpoint-14.md).
 
-Checkpoint15 remains frozen at selected main173, candidate `a2cae856`. Its Linux,
-Windows desktop and general macOS jobs reached the old workspace-wide exporter
-graph false refusal after preceding tests passed. Main177 contains the reviewed
-selected-graph repair. The final Windows conformance job is still running; this
-failed candidate is not a release approval, and a repaired successor remains
-subject to all 23 exact-head requirements.
+Checkpoint15 finished unpromoted with20 required successes and three exporter-graph
+failures; Windows conformance passed in87minutes. Checkpoint16 now freezes selected
+main179 `02203670`, candidate `6a336ac5`, with the exact same tree `f9a6007d`.
+All eight existing workflows are running once on that candidate; all23 required
+contexts remain mandatory. Release stays at the checkpoint14 baseline until every
+exact-head context succeeds and promotion is reviewed.
 
 Native animation graphs now connect ordinary typed authoring, captured models,
 v14 cooking, deterministic native clip states and flat adjacent-pair 1D blends.

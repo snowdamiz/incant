@@ -1,0 +1,210 @@
+{
+  "producer": "be0ef2d7093071379dfc90a859ca54a38688f42d",
+  "rows": [
+    {
+      "path": "crates/incant_audio_runtime/src/mixer.rs",
+      "producer_sha256": "9b4928ec942aa66c703e9190bfc2faa33aeff0f09af6024fb380ad9af59bb052",
+      "current_sha256": "9b4928ec942aa66c703e9190bfc2faa33aeff0f09af6024fb380ad9af59bb052",
+      "exact": true
+    },
+    {
+      "path": "crates/incant_audio_runtime/src/scene.rs",
+      "producer_sha256": "5772a2105fb9a5cbd5d47fec32835837f452baab1236a0cd6e8683e8fd5ae33d",
+      "current_sha256": "5772a2105fb9a5cbd5d47fec32835837f452baab1236a0cd6e8683e8fd5ae33d",
+      "exact": true
+    },
+    {
+      "path": "crates/incant_audio_runtime/src/scene/binding.rs",
+      "producer_sha256": "657de6b00a996c9f4635ac9611cfc8979cd5b1f795c28b8d7fc0be3f9f126648",
+      "current_sha256": "657de6b00a996c9f4635ac9611cfc8979cd5b1f795c28b8d7fc0be3f9f126648",
+      "exact": true
+    },
+    {
+      "path": "crates/incant_audio_runtime/tests/scene.rs",
+      "producer_sha256": "7da9583c22d352c17603fb14c6267433557079bcc2a8a266a28ad563e9de53d4",
+      "current_sha256": "7da9583c22d352c17603fb14c6267433557079bcc2a8a266a28ad563e9de53d4",
+      "exact": true
+    },
+    {
+      "path": "crates/incant_game_player/Cargo.toml",
+      "producer_sha256": "f55f69fb27e06087f1c924ecc36adec81318a1ae5507d99191fd4f2f248603f2",
+      "current_sha256": "84d26bd2ff236e2588ae6ca53a6f6d4f89bb75f9c76a6e471488fdcb43c4065d",
+      "exact": false
+    },
+    {
+      "path": "crates/incant_game_player/src/lib.rs",
+      "producer_sha256": "eb6f1807af92e5208436b86cafa4a8ee13d537f2d7ccaf051df6576d84d72f67",
+      "current_sha256": "eb6f1807af92e5208436b86cafa4a8ee13d537f2d7ccaf051df6576d84d72f67",
+      "exact": true
+    },
+    {
+      "path": "crates/incant_game_player/src/session.rs",
+      "producer_sha256": "ea29d2b68b3a24e30ae6bf908c5c769b5e5744b4075b02e68a4667006c8eccee",
+      "current_sha256": "ea29d2b68b3a24e30ae6bf908c5c769b5e5744b4075b02e68a4667006c8eccee",
+      "exact": true
+    },
+    {
+      "path": "crates/incant_game_player/src/window/gamepad/tests.rs",
+      "producer_sha256": "46b31fff0bcae9e519aaed314992892b5107847ad7378b5aa90f173424544c10",
+      "current_sha256": "46b31fff0bcae9e519aaed314992892b5107847ad7378b5aa90f173424544c10",
+      "exact": true
+    },
+    {
+      "path": "crates/incant_game_player/src/window/mod.rs",
+      "producer_sha256": "907748d2b57fc669524db8bd5aec1e5b6016ba5565178acc836c47a6c03ac67f",
+      "current_sha256": "907748d2b57fc669524db8bd5aec1e5b6016ba5565178acc836c47a6c03ac67f",
+      "exact": true
+    },
+    {
+      "path": "crates/incant_game_player/src/window/surface.rs",
+      "producer_sha256": "a9c860514476d147500bbd6e3988783e6c365f214f498ef26a1af7edc6cf623c",
+      "current_sha256": "a9c860514476d147500bbd6e3988783e6c365f214f498ef26a1af7edc6cf623c",
+      "exact": true
+    },
+    {
+      "path": "crates/incant_game_player/src/window/ui_input.rs",
+      "producer_sha256": "a6296e20f3675210f9dd045b3ea0ac144022aa949098f20b8581f63047db22f5",
+      "current_sha256": "a6296e20f3675210f9dd045b3ea0ac144022aa949098f20b8581f63047db22f5",
+      "exact": true
+    },
+    {
+      "path": "crates/incant_game_player/src/window/ui_input/tests.rs",
+      "producer_sha256": "0a6c06412ff0f09dcc18c145d00caff803c41e37e8beb8df469f7449e5b49462",
+      "current_sha256": "0a6c06412ff0f09dcc18c145d00caff803c41e37e8beb8df469f7449e5b49462",
+      "exact": true
+    },
+    {
+      "path": "crates/incant_game_runtime/src/core.rs",
+      "producer_sha256": "db8885eca01d6b194ce9497b6334ac1aacd1561283ccae7aa29d4d143a2f554b",
+      "current_sha256": "db8885eca01d6b194ce9497b6334ac1aacd1561283ccae7aa29d4d143a2f554b",
+      "exact": true
+    },
+    {
+      "path": "crates/incant_game_runtime/src/hosted.rs",
+      "producer_sha256": "dd88ff6501f09caa3793af4c3e050f0b61a8eebba99aacbc5f47ae9c0902c1a4",
+      "current_sha256": "dd88ff6501f09caa3793af4c3e050f0b61a8eebba99aacbc5f47ae9c0902c1a4",
+      "exact": true
+    },
+    {
+      "path": "crates/incant_game_runtime/src/lib.rs",
+      "producer_sha256": "1f3cf3be48f410a388bde88afea3055e11d9c56eb1989f695e9e5908a58485b3",
+      "current_sha256": "1f3cf3be48f410a388bde88afea3055e11d9c56eb1989f695e9e5908a58485b3",
+      "exact": true
+    },
+    {
+      "path": "crates/incant_game_runtime/src/offline.rs",
+      "producer_sha256": "19e1b7ae9fa9337bab222134086b00013791a1e12e21fc8eff117f53bd0931bc",
+      "current_sha256": "19e1b7ae9fa9337bab222134086b00013791a1e12e21fc8eff117f53bd0931bc",
+      "exact": true
+    },
+    {
+      "path": "crates/incant_game_runtime/tests/hosting.rs",
+      "producer_sha256": "add1f3ed165df1979355e99f79e07bae4775ea3575f5043e6a16e1784abfaac9",
+      "current_sha256": "add1f3ed165df1979355e99f79e07bae4775ea3575f5043e6a16e1784abfaac9",
+      "exact": true
+    },
+    {
+      "path": "crates/incant_observe/src/lib.rs",
+      "producer_sha256": "c15032240bdf7ab115762902091330a966a9ee7cb2abc007ea6d854783c2345e",
+      "current_sha256": "c15032240bdf7ab115762902091330a966a9ee7cb2abc007ea6d854783c2345e",
+      "exact": true
+    },
+    {
+      "path": "crates/incant_observe/src/tests.rs",
+      "producer_sha256": "87695572d360885a86e05c0ca6914922232ceeecab259d531ab3082b4cbdd690",
+      "current_sha256": "87695572d360885a86e05c0ca6914922232ceeecab259d531ab3082b4cbdd690",
+      "exact": true
+    },
+    {
+      "path": "crates/incant_render_game/tests/ui/checkpoints.rs",
+      "producer_sha256": "f3616aa9f4b2537d7f3e1b51f1f68699f283bac89a20be68f7aecabd13775475",
+      "current_sha256": "f3616aa9f4b2537d7f3e1b51f1f68699f283bac89a20be68f7aecabd13775475",
+      "exact": true
+    },
+    {
+      "path": "crates/incant_script/src/checkpoint/mod.rs",
+      "producer_sha256": "064662800b4f4138d9aa96f5e372eda2b99f8d99cbcffeb2d277c56d36cf2480",
+      "current_sha256": "064662800b4f4138d9aa96f5e372eda2b99f8d99cbcffeb2d277c56d36cf2480",
+      "exact": true
+    },
+    {
+      "path": "crates/incant_script/src/commands.rs",
+      "producer_sha256": "d58969ae3f24eef677394fd16810c907ac715a4f3f0b77f867a5b728ef44f425",
+      "current_sha256": "d58969ae3f24eef677394fd16810c907ac715a4f3f0b77f867a5b728ef44f425",
+      "exact": true
+    },
+    {
+      "path": "crates/incant_script/src/lib.rs",
+      "producer_sha256": "9e0412af9de774afadedd4feb52d5f225020d3a53c0bdf39f46f151d0f376d57",
+      "current_sha256": "9e0412af9de774afadedd4feb52d5f225020d3a53c0bdf39f46f151d0f376d57",
+      "exact": true
+    },
+    {
+      "path": "crates/incant_script/src/program.rs",
+      "producer_sha256": "d13e6709e8768053de1aa6831d10c8b16a2f0602b24bb19606b22530a58ff15e",
+      "current_sha256": "d13e6709e8768053de1aa6831d10c8b16a2f0602b24bb19606b22530a58ff15e",
+      "exact": true
+    },
+    {
+      "path": "crates/incant_script/src/session.rs",
+      "producer_sha256": "101f6ec19a9221a5f658339278b2c127b624bfc47d34739ae03e2e873dedda7f",
+      "current_sha256": "101f6ec19a9221a5f658339278b2c127b624bfc47d34739ae03e2e873dedda7f",
+      "exact": true
+    },
+    {
+      "path": "crates/incant_script/tests/project_bindings.rs",
+      "producer_sha256": "89415d2e7223612293b8797e819290ca3f20196318876ed51f73c50cd72e42a8",
+      "current_sha256": "89415d2e7223612293b8797e819290ca3f20196318876ed51f73c50cd72e42a8",
+      "exact": true
+    },
+    {
+      "path": "samples/core/gameplay.ts",
+      "producer_sha256": "ff6158f60fa87a7fa6d42f8fa7bcd6fb16c50e903fa07c28f31df103341ca211",
+      "current_sha256": "ff6158f60fa87a7fa6d42f8fa7bcd6fb16c50e903fa07c28f31df103341ca211",
+      "exact": true
+    },
+    {
+      "path": "samples/planar/gameplay.ts",
+      "producer_sha256": "3aa27cdc2e0e3002e4d8251d0ab3cd0004875bfb0da02c3afbb222b3b9b6b7b8",
+      "current_sha256": "3aa27cdc2e0e3002e4d8251d0ab3cd0004875bfb0da02c3afbb222b3b9b6b7b8",
+      "exact": true
+    },
+    {
+      "path": "sdk/ts/src/native.d.ts",
+      "producer_sha256": "4a9e36893f882a48dc91e1675dbfa780386d44f43c819fdaa45adde16936161c",
+      "current_sha256": "4a9e36893f882a48dc91e1675dbfa780386d44f43c819fdaa45adde16936161c",
+      "exact": true
+    },
+    {
+      "path": "crates/incant_game_player/src/restart.rs",
+      "producer_sha256": "ff924b11dc50cf76403830ad52682836c44107ed63d29f926bbc272f6ce249c3",
+      "current_sha256": "ff924b11dc50cf76403830ad52682836c44107ed63d29f926bbc272f6ce249c3",
+      "exact": true
+    },
+    {
+      "path": "crates/incant_game_player/src/restart/input.rs",
+      "producer_sha256": "77976afd18f9e294287f361dfcbea4ee5e1035d89eeba5bdde300b4cfb2f074a",
+      "current_sha256": "77976afd18f9e294287f361dfcbea4ee5e1035d89eeba5bdde300b4cfb2f074a",
+      "exact": true
+    },
+    {
+      "path": "crates/incant_game_runtime/src/seed.rs",
+      "producer_sha256": "a2ebee27ba7da838d497a63c0dcb9200dbd0c92a8eae416ba17e6eb8bee33b9f",
+      "current_sha256": "a2ebee27ba7da838d497a63c0dcb9200dbd0c92a8eae416ba17e6eb8bee33b9f",
+      "exact": true
+    },
+    {
+      "path": "crates/incant_game_runtime/tests/restart.rs",
+      "producer_sha256": "f5e061efaa59d2efa3b9aa279ee09673560ef9bc31a2782b57837b5529142bb8",
+      "current_sha256": "f5e061efaa59d2efa3b9aa279ee09673560ef9bc31a2782b57837b5529142bb8",
+      "exact": true
+    },
+    {
+      "path": "crates/incant_script/src/restart_request_tests.rs",
+      "producer_sha256": "dd982d0f3084e421bc6b31cab991896cdc19653ddf490bea19beb7a4c5cf86e6",
+      "current_sha256": "dd982d0f3084e421bc6b31cab991896cdc19653ddf490bea19beb7a4c5cf86e6",
+      "exact": true
+    }
+  ],
+  "qualification": "Only player manifest differs: main physics defaults/forwards and defaults-off dependencies retained; restart compiler-only dev edge retained. No production Rust delta from accepted source."
+}
