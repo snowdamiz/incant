@@ -10451,11 +10451,15 @@
       "scope": "API37 local ARM emulator CPU only; no physical-device, minimum-OS, GPU or performance gate."
     }
   },
-  "review_state": "Current-main independent final review pending",
+  "review_state": "Independent final current-main review accepted; required hosted fast check still required",
   "limits": [
     "Current target work is compile/build-time admission only, no new archive/caller execution. Original accepted six Android API37 CPU processes remain producer-scoped.",
     "Three prior runner-only assertion/setup failures are retained: WABT root/bin mismatch, guest source-location hash difference and compiler diagnostic cwd hash difference. No production source changed or passing runtime suite rerun for them.",
     "Both selected runtime/build dependency graphs and source closure audited; conservative script identity freshly recooked with current lock.",
     "No physical-device, minimum-OS, GPU/audio-device, performance, signing or phase approval."
-  ]
+  ],
+  "final_review": {
+    "path": "docs/spikes/evidence/authored-android-wasm-main189/final-review.json",
+    "sha256": "931403e267c9fe1cef8c2fd0750f440de47d29d74c4911ebe2351badd2b982ba"
+  }
 }

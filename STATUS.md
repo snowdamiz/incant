@@ -32,7 +32,7 @@ No release or phase approval follows from a main merge.
 
 Android static-Wasm producer evidence is accepted. Current main189 integration has
 passed CPU/public preflights and both-mode target compile/admission checks; its final
-source-relevance audit is pending. Six actual Android callers remain producer-scoped.
+independent source-relevance audit is accepted, with the fast publication check pending. Six actual Android callers remain producer-scoped.
 Core authored bindings and the corrected locked-exit proof are merged in PR185
 ([current-main evidence](docs/spikes/core-main182.md)).
 

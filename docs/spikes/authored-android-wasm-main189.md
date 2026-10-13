@@ -39,4 +39,5 @@ or phase approval is claimed.
 
 Machine-readable closure, raw evidence and the assertion-only collector are in
 [the integration manifest](evidence/authored-android-wasm-main189.json).
-Independent final current-main review is pending.
+Independent final current-main review is accepted. Publication requires the exact-head
+fast development check; full release validation remains separate.
