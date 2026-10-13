@@ -1,6 +1,83 @@
-# 0073 result — output upscaling numeric execution, visual review and repair brief
+# 0073 result — output upscaling numeric execution, visual review and repair design
 
-## Repair brief (current): portable reconstruction quality repair
+## Disocclusion addendum (current): static-history correction
+
+**Status: CORRECTION WRITTEN, CPU only.**
+- The correction is in
+  [`quality-repair-addendum.md`](quality-repair-addendum.md).
+- The reproducible model is
+  [`repair-model/model.py`](repair-model/model.py), with its output in
+  [`repair-model/results.json`](repair-model/results.json).
+- No renderer source, GPU, Cargo, target or capture was used.
+- `quality-repair-brief.md`, the a5ae3179 evidence and all earlier records are
+  unchanged.
+
+**Model and effort:** Claude Opus 5.5 (`claude-opus-5-5`), thinking effort max.
+Root's `claude-0073-disocclusion-design-acp.log` header reads `Claude session
+verified: Opus 5.5; thinking: max`. No subagents, no memory writes.
+
+**Inputs:**
+- root's review `9649659c…`;
+- its proof `b8677710…` / `27df57b3…`;
+- the brief as root left it, uncommitted (not modified or committed here).
+
+**Outcome:**
+- **The counterexample holds.** The model reproduces it at both scales, over
+  black and over clear. The draft ghosts at up to 0.96 after 1 frame and 0.63
+  after 8.
+- **Corrected design.** Static pixels keep unclipped history only while every
+  stored contributing owner is unchanged. Owner ids and a per-frame changed set
+  are explicit metadata on the portable path. Otherwise the pixel drops its
+  history (the front owner left) or clips in place against near samples.
+  Moving pixels reproject along their own surface's motion and admit only
+  same-motion surfaces.
+- **Results.** The corrected rules leave zero residual in root's case, in the
+  partial-coverage band, after a start-stop, a sweeping occluder, a triple
+  junction and a camera pan. Static thin wires still persist in every phase.
+- **C7.** C7 as written measured disocclusion convergence, not ghosting. The
+  corrected design has 0.000 signed bias and equals a matched-reset floor
+  exactly. C7 is replaced by stricter ghost controls (C7a, C7b, C7d), and C7 as
+  written is kept as a visible expected failure.
+- **Corrected numbers.**
+  - C9 recovery is 0.68/0.87, measured against the converged steady state.
+  - The reset value is 0.125.
+  - The interior mass bound applies only where all 9 taps are valid.
+- **Shading key.** The worst case is stated as 72 comparisons plus 9
+  exponentials. The gated variant is identical (K2), and the gather variant is
+  rejected (K1).
+- **Also covered:** exact portable accounting (973,147,152 B, against 671,105,024
+  B today; MetalFX unchanged) and coordinate and edge rules.
+
+**Commands and results:**
+
+| Command | Result |
+|---|---|
+| `python3 -I -B handoffs/0073-upscaling-review/repair-model/model.py --out …/results.json` | Exit 0; 50 cases, none unexpected; about 10 s |
+| Second run, compared with `cmp` | Byte-identical output |
+| `/usr/bin/python3` (3.9.6) run | Same values as 3.14.8 |
+
+**Screenshots:** none new. No GPU was used.
+
+**Changed paths:**
+- `handoffs/0073-upscaling-review/quality-repair-addendum.md`
+- `handoffs/0073-upscaling-review/repair-model/model.py`
+- `handoffs/0073-upscaling-review/repair-model/results.json`
+- `handoffs/0073-upscaling-review/result.md` (this record)
+
+**Decisions applied, as root gave them:**
+- one combined review after the full algorithm passes correctness;
+- the label fixture is unchanged for that comparison and fixed afterwards;
+- meta and owner data exist on the portable path only;
+- the ceiling uses exact accounting.
+
+**Limits:**
+- The model is grey 2D with analytic scenes. It has no perspective, parallax,
+  MASK, HDR, overlays or half-float quantisation.
+- It checks the design's logic, not GPU numerics.
+- No appearance, performance or phone claim is made.
+- No phase gate is claimed or approved.
+
+## Repair brief (preserved): portable reconstruction quality repair
 
 **Status: BRIEF WRITTEN for Astra.**
 - The design is in [`quality-repair-brief.md`](quality-repair-brief.md).
