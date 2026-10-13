@@ -1,0 +1,143 @@
+{
+  "schema": "incant-independent-source-review-v1",
+  "at": "2026-10-13T18:23:28.581363+00:00",
+  "reviewer": "astra",
+  "verdict": "accepted for targeted compilation; no GPU or appearance acceptance",
+  "claude_source_commit": "21d71d85ab5d629d6a04273552fb44337585fbd0",
+  "production_commit": "fd5b86d03a2cabfcc9bd5a8441a137645fb858ae",
+  "packet": "/Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review/handoffs/0073-upscaling-review/owner_quality",
+  "files": [
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review/handoffs/0073-upscaling-review/owner_quality/ROOT_STEERING.md",
+      "sha256": "8cd864b90fe5c74618f66bc82005948f1f51b42182fd2ab3828186e5f64d5c4f"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review/handoffs/0073-upscaling-review/owner_quality/brief.md",
+      "sha256": "c8529663d0548163ce780b64fdc7b0cd310b7c668f2428ae185d77f55e632056"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review/handoffs/0073-upscaling-review/owner_quality/plan.json",
+      "sha256": "ff0f0f488faa3f6d4d6cc1321d5c4e87c35cbb4160130dddd050697bb824dbc4"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review/handoffs/0073-upscaling-review/owner_quality/preparation/selfcheck.json",
+      "sha256": "e97f2d661750f7ffebb074f8f23d16c5176c4c392ba1a8a3a6f8a3fdb71169cc"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review/handoffs/0073-upscaling-review/owner_quality/preparation-result.md",
+      "sha256": "7500e93b6fba7950f7177de63756447705ea1e8a158a0578035e39454c35d15a"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review/handoffs/0073-upscaling-review/owner_quality/review/upscaling_owner_review.rs",
+      "sha256": "650316a21f30bfb4f7cbe8c99b67f9b5be269b51eb62b4d017b519bd5130d997"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review/handoffs/0073-upscaling-review/owner_quality/tools/check.py",
+      "sha256": "97a2e860023949642ea772490e7616d88598b352fd8db043c78df2d91dc3413c"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-preparation-001/acp-start.json",
+      "sha256": "bbe7cbbb8f8f13870b161e802e49693731b4d635a53165fc7995cb116e01b7f7"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-preparation-001/acp-terminal.json",
+      "sha256": "0de129b95d05e55f3803672009a14a563b08403f91b444d7284c0438f0922d67"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-preparation-001/acp.log",
+      "sha256": "bf73c5723ba0bfb7f23b498725ece194ce4465103d9130ec7ccf76f18db232e4"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-preparation-001/before.json",
+      "sha256": "30554ede5f46fa12aa37a202f4aaa2bec5f846b53df39ddac7e2cc94e49e411c"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-preparation-001/closure-audit.json",
+      "sha256": "12fc18433942e1f0740f82b1f0bb95119ce940aacd926fb72c25b18d842bac42"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-preparation-001/independent-selfcheck.json",
+      "sha256": "e97f2d661750f7ffebb074f8f23d16c5176c4c392ba1a8a3a6f8a3fdb71169cc"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-preparation-001/independent-mutations.json",
+      "sha256": "36be73748b96ed6cc5d5819a9a561601e0489d5ef3a283ecf30189f9fdec218d"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-preparation-001/root-production-freeze-audit.json",
+      "sha256": "f9e156005534cfe747a178e94e54a30897ec5fe0a2dfb0ae5c6bad6524d71ad2"
+    }
+  ],
+  "completed_checks": {
+    "source_guards": {
+      "api": true,
+      "budgets": true,
+      "freeze": true,
+      "identity": true,
+      "pngs": true,
+      "schedule": true,
+      "static": true,
+      "tests": true
+    },
+    "guard_mutations_rejected": 6,
+    "protected_historical_files": 150,
+    "root_production_git_blobs": 2835,
+    "acp_terminal": 0,
+    "owned_pid_and_group_survivors": []
+  },
+  "reviewed": [
+    "Exact production APIs and pipeline/retained enable ordering; separate retained histories per variant",
+    "Existing fixture adaptation, finite matched phase/reference schedules and unchanged review policy",
+    "Explicit scene/UI/readback/map/image budgets for primary and optional stages",
+    "C7/C9 tone-mapped sRGB observations distinct from historical linear-model gates; no historical closure",
+    "Absent per-pixel history-drop replay disclosed for P1, no invented API",
+    "Exact ACP Opus 5.5/Max before prompt and terminal process closure"
+  ],
+  "proposed_budgets": {
+    "processes": 5,
+    "budget": {
+      "scene_submissions": 380,
+      "ui_submissions": 18,
+      "readback_submissions": 380,
+      "readback_maps": 380,
+      "queue_submissions": 778,
+      "rendered_frames": 380,
+      "pngs": 15
+    },
+    "primary_only": {
+      "processes": 3,
+      "scene_submissions": 200,
+      "ui_submissions": 18,
+      "readback_submissions": 200,
+      "readback_maps": 200,
+      "queue_submissions": 418,
+      "rendered_frames": 200,
+      "pngs": 12
+    },
+    "images": {
+      "format": "PNG, RGBA8, sRGB codes as read back",
+      "size": [
+        960,
+        540
+      ],
+      "raw_bytes_each": 2073600,
+      "file_bytes_max_each": 2100000,
+      "files_max": 15
+    },
+    "readback_buffer_bytes_each": 2073600,
+    "counting": "every scene, UI and readback queue submission is charged before it is attempted; each readback has exactly one map; controls, references and warmups are all counted; report.json fails unless the budget is consumed exactly. A numerical marker never substitutes for these budgets"
+  },
+  "build_production_freeze": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/owner-quality-build-001/production-freeze.json",
+    "sha256": "4143417b02a286cb9417c75df2791c34801d43fd2cedc7a37cffb9e1ce6d77c5"
+  },
+  "limitations": [
+    "Rust fixture not yet compiled or executed; root owns targeted build",
+    "Static Python checks do not prove raster output or appearance",
+    "Optional C7/P1 need explicit stage selection in a future grant",
+    "Old GPU001 and visual C7/C9/P1 failures remain preserved",
+    "No GPU/build/appearance/device/performance authority in this receipt"
+  ]
+}

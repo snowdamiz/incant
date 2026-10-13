@@ -24,3 +24,7 @@ Useful actual API order: renderer startup enables temporal upscaling and motion 
 ## Deliverable
 
 A packet-local Rust review fixture ready for root's targeted compile, a concise runnable command/build-injection map, concrete `plan.json` with exact source identity, per-group schedule and cumulative execution budgets, and a short preparation result describing changes, CPU checks, required APIs and unresolved limitations. Reuse established safe environment/lease/process patterns only as needed; root will finalize grants and build receipts after source review. No live or placeholder grant should be created. No renderer or GPU process may be run this turn.
+
+## Root steering during this preparation turn
+
+Prioritize the concrete existing-harness adaptation now: ordinary-UP versus owner-UP in the existing stationary/motion/transitions groups is the first useful quality evidence. Stop broad source investigation. A new P1 scene is optional only if it is a small fixture-only change using the existing public API; if it needs a new API or substantially expands the harness, leave P1 explicitly unresolved and deliver the three runnable groups promptly. Root will review/build after this preparation. No production API changes, build, or GPU is authorized.
