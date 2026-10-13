@@ -16,9 +16,9 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Current overview — main197, 2026-10-13
+## Current overview — main198, 2026-10-13
 
-Development main197 includes the restart quota-test repair (PR188) and the reviewed,
+Development main198 includes the restart quota-test repair (PR188) and the reviewed,
 opt-in cooked sprite/UI/text/material paths with private Vulkan pipeline persistence
 (PR189). Default renderer checks remain; the next frozen checkpoint also exercises
 cooked features and asserts the actual native backend. Producer Metal appearance
@@ -35,8 +35,7 @@ No release or phase approval follows from a main merge.
 Checkpoint18 Linux, Windows and macOS checks fail compiling the editor test
 that reuses a renderer helper without its root type alias. The [test-only repair](docs/spikes/editor-renderer-import.md)
 is merged in PR193 after local compile/CPU/Clippy, independent review and fast checks;
-production and backend assertions are unchanged. Other candidate jobs continue
-without an advance.
+production and backend assertions are unchanged. Checkpoint18 is terminal with 20 required successes and three same-cause failures. Checkpoint19 is frozen at exact main197; all 23 requirements are running on that single snapshot.
 
 Android static-Wasm integration is merged in PR190 after independent source-relevance
 review and the fast check. Current CPU/public preflights and both-mode target compile/
@@ -45,7 +44,7 @@ Core authored bindings and the corrected locked-exit proof are merged in PR185
 ([current-main evidence](docs/spikes/core-main182.md)).
 
 Dynamic resolution and cooked clusters have accepted producer Metal evidence; their
-[current-main197 integration](docs/spikes/clusters-drs-main197.md) passes 14 CPU/compile/tooling checks with independent final packet acceptance; the required fast check precedes publication.
+[current-main197 integration](docs/spikes/clusters-drs-main197.md) passes 14 CPU/compile/tooling checks with independent final packet acceptance; PR198 is merged after the required fast check.
 Current composed GPU execution remains pending. GPU timestamp execution remains pending. CPU profiling has accepted producer
 package evidence and passing [current-main194 CPU/source-relevance checks](docs/spikes/native-cpu-profiler-main194.md);
 independent integration review and the exact-head fast check passed, and PR195 is merged. These independent lanes do not satisfy
@@ -56,6 +55,17 @@ Safe Core live-HUD changes are merged in PR192. The optional result-label and wo
 correction is merged in PR194 after public native checks, independent integration
 review and the exact-head fast check. Original source-free shipping remains producer-scoped; no new
 appearance or device acceptance is inferred. See [Core result evidence](docs/spikes/core-result-hud-main192.md).
+
+## Exact physics saves — inert attachment ownership verified locally
+
+The next std-only inert component preserves exact ordered body/collider
+attachments and native local-pose bits against two checked arena layouts.
+Fifty-two CPU tests, Clippy, wasm32 and dependency checks pass, including actual
+2D/3D public attach/detach/reparent/remove/reuse observations and hostile decoding.
+Independent producer source/evidence review is accepted; [current-main197 integration](docs/spikes/physics-attachments-main197.md) passes all eight checks with 52 CPU cases; independent final integration review is accepted; the actual-main198 join is qualified as renderer-only with no snapshot or dependency change. Enclosing-owner authentication,
+complete body/collider/contact state and exact continuation remain required;
+no live construction or physics-save admission is enabled.
+[Attachment contract](docs/spikes/physics-inert-attachments.md).
 
 ## Exact physics saves — inert components merged; live restoration remains closed
 

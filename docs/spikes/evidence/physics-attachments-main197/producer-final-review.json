@@ -1,0 +1,29 @@
+{
+  "at": "2026-10-13T04:52:52.824349+00:00",
+  "decision": "accepted inert attachment source and final CPU evidence",
+  "head": "a5c839385c3e9aeaf15b8d6d57df36057f30e13b",
+  "manifest_sha256": "6652797c630cd0ae64fc7401b31e21b987ef72f377f20d15507fb7f716e47566",
+  "source_freeze_sha256": "9dc5fcc122428e6c2b173b9c3528e867f0e0e3797e344e6c7cc5533687527143",
+  "independent_audit": {
+    "raw_records": 92,
+    "unique_payloads": 58,
+    "source_inputs": 25,
+    "pinned_sources": 20,
+    "tests": 52,
+    "nonempty_groups": 9,
+    "final_checks": 8,
+    "historical_fixture_build_exit": 101,
+    "all_referenced_retained_paths_tracked": true,
+    "lock_unchanged": true,
+    "source_review": "Full attachment validation, codec, adversarial and trusted public-set tests read; only source002 fixture API/padding delta, no production changes."
+  },
+  "limits": [
+    "PhysicsUnsupported and world/session versions unchanged",
+    "No live constructor, body/collider semantic payload validation, save/load consumer or restored mutation continuation",
+    "Paired arena witnesses establish structure, not owner authentication; equal unrelated layouts can satisfy relationships",
+    "Local finite-f32 translations are not a world-range/composition-overflow proof; strict f64 rotation tolerance is a documented supported-domain policy",
+    "No contact feature/workspace, island, pending journal, solver coloring or complete geometry/native owner binding yet",
+    "Cumulative requested Vec budget excludes RSS/allocator rounding/caller-owned inputs",
+    "No GPU, phone, shipping or performance acceptance"
+  ]
+}
