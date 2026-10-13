@@ -1,5 +1,16 @@
 # Implementation status
 
+The default-off persisted native game path has passing joined CPU qualification:
+267 script/game/player cases in each numerical mode, including separate-process
+save/resume with real fractional PCM timing. Thirteen current checks pass;
+earlier ordinary-diagnostic, CCD-admission and missing-bundle setup failures are
+retained. The files bind current trusted code and catalogs, preserve supported
+2D/3D physics, explicit script state, UI and offline audio, and refuse unsupported
+domains. Final independent packet review and current-main integration remain
+pending. This does not qualify device audio, shipped Wasm state, GPU saves,
+reference-phone performance or a phase gate.
+[Scope and evidence](docs/spikes/persisted-game-checkpoints.md).
+
 Compound and tile opaque checkpoints have accepted source reviews and passing CPU qualification: 538 snapshot/physics/ECS cases per numerical mode, followed by 238 script/game cases per mode on the actual-main250 composition. Native Parry and Rapier suites pass separately. Eighteen current checks pass; final union review and publication remain pending. Public persisted physics stays closed. [Scope](docs/spikes/native-compound-checkpoints.md).
 
 Private Rapier regression qualification after lower compound integration and work precharge passed all 159 planar and 177 spatial unit tests in each of deterministic and SIMD8 modes, with no filtered or ignored cases. Both strict native-library Clippy checks passed; four immediately copied executables and the full source/graph/fixture ledger are retained. Independent final packet review is accepted. This CPU evidence does not qualify the outer game union or persisted physics saves. [Evidence](docs/spikes/rapier-compound-regressions.md).
