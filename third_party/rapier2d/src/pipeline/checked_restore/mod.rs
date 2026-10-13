@@ -20,6 +20,8 @@ pub(crate) mod convert;
 mod derived;
 #[allow(dead_code)]
 mod islands;
+#[allow(dead_code)]
+mod narrow;
 mod work;
 use incant_physics_snapshot::{Identity, WorldBoundary};
 pub use work::{WorkBudget, WorkReport};
@@ -56,7 +58,10 @@ pub struct NumericFrame<'a> {
     frame: WorldBoundary<'a>,
     work: WorkReport,
 }
-impl NumericFrame<'_> {
+impl<'a> NumericFrame<'a> {
+    pub(crate) fn boundary(&self) -> WorldBoundary<'a> {
+        self.frame
+    }
     /// Charged logical visits and admitted native integer maxima.
     pub fn report(&self) -> WorkReport {
         self.work
@@ -85,3 +90,6 @@ pub fn admit_numeric_frame<'a>(
     derived::admit(frame)?;
     Ok(NumericFrame { frame, work })
 }
+
+#[cfg(test)]
+pub(crate) mod allocation_test_meter;

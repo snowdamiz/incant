@@ -468,3 +468,6 @@ impl NarrowPhase {
         }
     }
 }
+
+#[cfg(feature = "incant-checked-restore")]
+mod checkpoint;
