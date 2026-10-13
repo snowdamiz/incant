@@ -39,6 +39,8 @@ ROOT_TARGET = Path("/Users/andreyyurlov/.codex/incant-gpu-timestamps-target")
 LEASE = EVIDENCE / "target-lease.json"
 LATCH = EVIDENCE / "gpu-released.json"
 LEDGER = EVIDENCE / "gpu-ledger.jsonl"
+# CPU-only steps after the GPU latch append here, so the latched ledger hash stays valid.
+POST_RELEASE_LEDGER = EVIDENCE / "post-release-ledger.jsonl"
 REFUSALS = EVIDENCE / "gpu-refusals.jsonl"
 LOCK = EVIDENCE / "gpu.lock"
 CHECKOUT = EVIDENCE / "checkout"
@@ -122,10 +124,11 @@ def grant():
     return data, sha(GRANT)
 
 
-def gate():
-    """Grant, then the release latch, then the lease (held, unreleased, same grant)."""
+def gate(after_gpu_release=False):
+    """Grant, then the release latch, then the lease (held, unreleased, same grant).
+    Only CPU-only steps may pass after_gpu_release=True."""
     data, grant_sha = grant()
-    if LATCH.exists():
+    if LATCH.exists() and not after_gpu_release:
         refuse("GPU and target already released by this packet")
     if not LEASE.is_file():
         refuse("target lease absent; run lease.py acquire first")

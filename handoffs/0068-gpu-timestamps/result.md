@@ -138,9 +138,15 @@ Budget totals:
   - `viewport-off` / `-on`.
   Every rendered frame is hashed whole and compared byte for byte in-process. The
   kept PNGs are also decoded and compared independently in Python.
-- **Reruns.** A case may rerun once, and only after an infrastructure failure: a
-  timeout, or a crash before `report.json` exists. A recorded comparison or timing
-  failure is never replaced, and both runs stay in the ledger.
+- **Reruns.** A review case may run a second time only in one of two cases:
+  - after an infrastructure failure, meaning a timeout or a crash before
+    `report.json` exists;
+  - after a committed `plan.json` amendment that names the case and the reason, for
+    example a helper assumption defect visible in the first run's raw data. This
+    follows 0067's lesson to keep a reserve.
+
+  Every run stays in the ledger, a recorded failure is never hidden, and the 24/48
+  caps still bind. The numeric test and the suites never rerun.
 - **Builds.** Builds (CPU only, 2700 s bound each) use the plan's three cargo
   invocations, all with `--locked --offline --profile ci -j2`:
   - `tests-render`: `-p incant_render --lib --test model_gpu --no-run`. This keeps
@@ -164,6 +170,7 @@ handoffs/0068-gpu-timestamps/tools/gpu.py suite lib|model_gpu|game|ui
 handoffs/0068-gpu-timestamps/tools/gpu.py review probe|lit|sprites_text|viewport   # owner_drop only if approved
 handoffs/0068-gpu-timestamps/tools/analyze.py check       # CPU only; then personal inspection of every kept frame
 handoffs/0068-gpu-timestamps/tools/gpu.py release
+handoffs/0068-gpu-timestamps/tools/build.py lint          # optional: clippy -D warnings on the helper, CPU only, still leased
 handoffs/0068-gpu-timestamps/tools/lease.py release
 handoffs/0068-gpu-timestamps/tools/analyze.py publish
 ```
@@ -180,7 +187,7 @@ test reads `CARGO_*` at runtime; I checked with grep.
 |---|---|
 | `tools/common.py` | Constants and guards. `grant()` refuses before touching the filesystem while the grant is absent. `gate()` adds the release latch and the lease. `tools_identity()` refuses uncommitted tool or plan edits. `verify_checkout()` re-checks every checkout file against its git blob before each child. Also holds the constructed child environment |
 | `tools/lease.py` | Create-only target lease. Verifies every `prior_*_path`/`prior_*_sha256` pin in the grant and the prior release's empty live-process fields, and refuses if any cargo/rustc or target-run binary is active. Release leaves the target as a warm cache |
-| `tools/build.py` | `checkout`, `toolchain`, `tests`, `review`, as described above. Parses Cargo JSON artifacts, records features and hashes, and freezes executables into `0068/bin`. It never runs them |
+| `tools/build.py` | `checkout`, `toolchain`, `tests`, `review`, as described above, plus an optional `lint`. Lint runs after the GPU latch, under the lease, and writes to a separate post-release ledger so the latched ledger hash stays valid. The tool parses Cargo JSON artifacts, records features and hashes, and freezes executables into `0068/bin`. It never runs them |
 | `tools/gpu.py` | Serial runner under an flock. Enforces budgets and run limits from `plan.json`, uses one process group per child with kill-and-reap on timeout, writes a ledger and refusal log, and writes the release latch |
 | `tools/analyze.py` | CPU-only checks independent of the helper: its own PNG decoder, pair diffs, content-derived labels, sequence/order/tick-to-ns checks, and parsing of the numeric test's samples. Its publish step makes create-only copies and keeps one unedited PNG per distinct byte content |
 | `tools/selfcheck.py` | Preparation check (below) |
@@ -257,7 +264,7 @@ What `selfcheck.json` confirms (Python 3.14.8):
 - the numeric test is the library suite's only skip, and the reviewed base totals 90;
 - the helper's five tests, frame and submission limits, PNG names, size and output
   variable match `plan.json`;
-- all 14 guarded commands exit 1 with "review-ready.json is absent";
+- all 15 guarded commands exit 1 with "review-ready.json is absent";
 - `incant-evidence/0068` is still absent and `git status` is unchanged.
 
 ## Changed paths

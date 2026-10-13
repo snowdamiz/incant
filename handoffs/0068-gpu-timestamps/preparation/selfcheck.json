@@ -1,14 +1,14 @@
 {
  "python": "3.14.8",
- "plan_sha256": "756d2cc27cca0efe82caf04325d2b7ef4356db5af13429d49bcb36ccdac9d7a5",
+ "plan_sha256": "477082b0c803741629ba88ede05153b80db16fbb1465c681dddfbf0b625d70dc",
  "helper_sha256": "4ad3da1933086a87011d0c52ca89df64b7d5c0d7295b7ef67e6bac3bf5286929",
  "tools": {
-  "analyze.py": "886b5e2babefbc349451037411406ecddc1e29b0dd4f8a86c4fc540e85fae63c",
-  "build.py": "73727aa676d8e86e55d139df1f9f53a3d9e8fa8aae781dde163309851c07460f",
-  "common.py": "e11e641a63fb1222c9469bc5ffee36fa52850837163aa1f2c13be70d57a8ad81",
-  "gpu.py": "58ac3660181c267c66f3cc4cc386c44859eea782eb4eed1e8f987036894dd639",
+  "analyze.py": "043f9b2e73640eb1f7ffc596302d6af4207c3bd21690194e956d4e950efeff7e",
+  "build.py": "ff15270b52f1cea9244692bd4f640073feeb85555c4cd12654d3ebe45e661f47",
+  "common.py": "b68d5221c8cef5704bab6f1ab984bc0583f739de3faa380e0065de7be5add30a",
+  "gpu.py": "91e0815bcebf3c91af8cbba0639cdb9604b02a6dd52e5bdc4222d7e529dc92f3",
   "lease.py": "8bf5d2875439e026ef61ce87b17bb1b064758f7067e19dd927d465f7e6b64d60",
-  "selfcheck.py": "3925315b1c2163c735e0fccecdebbfbfffaf527f277874d3c0a5e189f4bcb836"
+  "selfcheck.py": "64ddab754c33ab202aab1a5cbb0d29a597eddfe9ebce5d3bb3233e5ac8403cc4"
  },
  "syntax": "all tools parse",
  "plan": {
@@ -98,6 +98,10 @@
     "refused_for_absent_grant": true
    },
    "build.py review": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "build.py lint": {
     "exit": 1,
     "refused_for_absent_grant": true
    },

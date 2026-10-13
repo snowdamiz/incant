@@ -18,6 +18,8 @@ Steps:
   review     copy the committed review helper into the checkout, build it
              (--no-run) and freeze it; the incant_render library must be the
              same fresh artifact the tests build produced
+  lint       optional, CPU only, also allowed after the GPU latch while the
+             lease is held: clippy -D warnings on the review helper target
 """
 
 import fcntl
@@ -73,7 +75,7 @@ def run_group(label, argv, cwd, overrides, timeout, stdout_name, stderr_name):
                  "submissions_reserved": 0, "stdout": str(out_path),
                  "stdout_sha256": c.sha(out_path), "stderr": str(err_path),
                  "stderr_sha256": c.sha(err_path)}
-        with open(c.LEDGER, "a") as ledger:
+        with open(c.POST_RELEASE_LEDGER if c.LATCH.exists() else c.LEDGER, "a") as ledger:
             ledger.write(json.dumps(entry) + "\n")
     return entry
 
@@ -309,8 +311,25 @@ def review():
         raise SystemExit("the review build did not reuse the tests-render incant_render library")
 
 
+def lint():
+    c.gate(after_gpu_release=True)
+    tools = c.tools_identity()
+    source = c.verify_checkout()
+    if source["helper_copy_sha256"] is None:
+        c.refuse("build.py review first; lint checks the copied helper")
+    p = c.plan()
+    argv = [str(c.CHECKOUT / "tools/cargo"), *p["builds"]["lint"], *p["builds"]["common_flags"],
+            "--", "-D", "warnings"]
+    entry = run_group("lint", argv, c.CHECKOUT, build_overrides("lint"), p["budgets"]["build_timeout_s"],
+                      "build-lint.stdout.jsonl", "build-lint.stderr.txt")
+    c.write_new_json(c.BUILD / "lint.json", {"tools": tools, "source": source, **entry,
+                                             "recorded": c.now()})
+    print(json.dumps({k: entry[k] for k in ("label", "exit", "timed_out")}, indent=1))
+
+
 if __name__ == "__main__":
-    steps = {"checkout": checkout, "toolchain": toolchain, "tests": tests, "review": review}
+    steps = {"checkout": checkout, "toolchain": toolchain, "tests": tests, "review": review,
+             "lint": lint}
     if len(sys.argv) != 2 or sys.argv[1] not in steps:
         raise SystemExit(__doc__)
     steps[sys.argv[1]]()

@@ -28,6 +28,7 @@ import common as c  # noqa: E402
 
 COMMANDS = [["lease.py", "acquire"], ["lease.py", "release"], ["build.py", "checkout"],
             ["build.py", "toolchain"], ["build.py", "tests"], ["build.py", "review"],
+            ["build.py", "lint"],
             ["gpu.py", "list", "lib"], ["gpu.py", "numeric"], ["gpu.py", "suite", "lib"],
             ["gpu.py", "review", "lit"], ["gpu.py", "review", "owner_drop"], ["gpu.py", "release"],
             ["analyze.py", "check"], ["analyze.py", "publish"]]

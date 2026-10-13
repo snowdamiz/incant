@@ -20,6 +20,7 @@
     "tests-render": ["test", "-p", "incant_render", "--lib", "--test", "model_gpu", "--no-run"],
     "tests-host": ["test", "-p", "incant_render_gpu_host", "--test", "game", "--test", "ui", "--no-run"],
     "review": ["test", "-p", "incant_render", "--test", "gpu_timestamp_review", "--no-run"],
+    "lint": ["clippy", "-p", "incant_render", "--test", "gpu_timestamp_review"],
     "common_flags": ["--locked", "--offline", "--profile", "ci", "-j2", "--message-format=json-render-diagnostics"],
     "note": "tests-render keeps the brief's numeric-test package selection (-p incant_render alone). The review helper is copied into the child checkout only after tests-render and tests-host are frozen."
   },
@@ -70,7 +71,7 @@
     "output_env": "INCANT_0068_REVIEW_OUT",
     "args": ["--ignored", "--exact", "--nocapture", "--test-threads=1"],
     "max_runs_per_case": 2,
-    "rerun_rule": "A second run of a case is allowed only after an infrastructure failure (timeout, or a crash before report.json exists). It never replaces a recorded comparison or timing failure, and both runs stay in the ledger.",
+    "rerun_rule": "A second run of a case is allowed only after an infrastructure failure (timeout, or a crash before report.json exists) or when a committed entry in amendments names the case and the reason (for example a helper assumption defect found in the first run's raw data). It never hides a recorded failure: every run stays in the ledger and result.md reports both.",
     "cases": {
       "probe": {
         "test": "probe",
@@ -130,6 +131,7 @@
     ],
     "counting": "Every rendered review frame counts once as an appearance frame, including controls and frames whose PNG is not retained. Every timing-enabled review frame also counts as a numeric submission, and so does every numeric-test submission. Pixel readback copies are part of their frame's observation, not extra frames."
   },
+  "amendments": [],
   "order": [
     "lease.py acquire",
     "build.py checkout",
@@ -142,6 +144,7 @@
     "gpu.py review probe|lit|sprites_text|viewport [owner_drop only if approved]",
     "analyze.py check (CPU only) and personal inspection of every retained frame",
     "gpu.py release",
+    "build.py lint (optional, CPU only, still under the lease)",
     "lease.py release",
     "analyze.py publish"
   ]

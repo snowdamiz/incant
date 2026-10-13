@@ -243,8 +243,11 @@ def review(case):
     previous = runs("review", case)
     if len(previous) >= spec["max_runs_per_case"]:
         c.refuse(f"{case} reached its run limit")
-    if previous and not (previous[-1]["timed_out"] or previous[-1].get("report_sha256") is None):
-        c.refuse(f"{case} already has a complete run; reruns are only for infrastructure failures")
+    amended = [a for a in p.get("amendments", []) if a.get("case") == case and a.get("reason")]
+    if previous and not (previous[-1]["timed_out"] or previous[-1].get("report_sha256") is None
+                         or len(amended) >= len(previous)):
+        c.refuse(f"{case} already has a complete run; a rerun needs an infrastructure failure "
+                 "or a committed plan amendment with its reason")
     output = c.CAPTURES / f"{case}-r{len(previous) + 1}"
     if output.exists():
         c.refuse(f"{output} exists; captures are never overwritten")

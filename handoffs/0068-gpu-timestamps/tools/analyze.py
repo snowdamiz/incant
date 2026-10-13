@@ -221,7 +221,12 @@ def publish():
              (c.LATCH, "gpu/gpu-released.json"), (c.LEASE, "lease/target-lease.json")]
     if c.REFUSALS.exists():
         picks.append((c.REFUSALS, "gpu/refusals.jsonl"))
-    for name in ("source.json", "toolchain.json", "tests.json", "review.json"):
+    if c.POST_RELEASE_LEDGER.exists():
+        picks.append((c.POST_RELEASE_LEDGER, "gpu/post-release-ledger.jsonl"))
+        entries_after = [json.loads(line) for line in c.POST_RELEASE_LEDGER.read_text().splitlines()
+                         if line.strip()]
+        picks += [(Path(e["stderr"]), "logs/" + Path(e["stderr"]).name) for e in entries_after]
+    for name in ("source.json", "toolchain.json", "tests.json", "review.json", "lint.json"):
         if (c.BUILD / name).exists():
             picks.append((c.BUILD / name, "build/" + name))
     for entry in entries:
