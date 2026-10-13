@@ -1,0 +1,9 @@
+{
+  "producer": "d4bde636c685c799dcf6a34e2e8b25b7f9a57301",
+  "receipt_followup": "03869da43e14a0fd0b4f1dd204f5b45cc2e02c5c",
+  "manifest_sha256": "8346fd8b6d80d35826642fd2834da4fb2ce267ba9c82cf3ecdbaa83c8ffeaccf",
+  "archive_sha256": "4cc2c04d9f7ff99ccc0c88b510fabdc80a5c56fa65d2183e275bff6e50cd69de",
+  "archive_git_path": "docs/spikes/evidence/physics-native-world-construction-logs.json.gz",
+  "finding": "Collector copied source002 Cargo artifact paths only after source003 rebuilt the same paths. Those four copies cannot establish historical source002 executed binary identity. No contemporaneous source002 binary hashes were saved.",
+  "correction": "Retain only four previously frozen focused-final source003 binaries; broad source002 logs and exact source copies remain valid, original source002 binary bytes are not retained. No rebuild or rerun."
+}

@@ -1445,9 +1445,9 @@
   ],
   "archive": {
     "path": "docs/spikes/evidence/physics-native-world-construction-logs.json.gz",
-    "sha256": "4cc2c04d9f7ff99ccc0c88b510fabdc80a5c56fa65d2183e275bff6e50cd69de",
-    "records": 15702,
-    "payloads": 858
+    "sha256": "99674837e834b0a690c192d566f002fcc3b4568c926a26e649a82dcf1a653e60",
+    "records": 15706,
+    "payloads": 862
   },
   "tests": {
     "focused-013": {
@@ -2957,43 +2957,12 @@
   "binaries": [
     {
       "source": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/ci/deps/rapier2d-1496def7e0ef3cb6",
-      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/frozen-binaries/native-tests-det-002-rapier2d-1496def7e0ef3cb6",
-      "sha256": "970b093c815c9696aef5fe65139b217993c5bd41b898e53b9c4b5e25a2755689",
-      "bytes": 12239776,
-      "mode": "0o755",
-      "executed_log": "native-tests-det-002.log"
-    },
-    {
-      "source": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/ci/deps/rapier3d-cea959100e29d5a0",
-      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/frozen-binaries/native-tests-det-002-rapier3d-cea959100e29d5a0",
-      "sha256": "605427c645332d98ca3583bb8474c0bce91a0dc7d5a02bcbe574bcce0cc0d1e0",
-      "bytes": 13503856,
-      "mode": "0o755",
-      "executed_log": "native-tests-det-002.log"
-    },
-    {
-      "source": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/ci/deps/rapier2d-2d97f79c39c21dfc",
-      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/frozen-binaries/native-tests-fast8-002-rapier2d-2d97f79c39c21dfc",
-      "sha256": "30fad55bd253fe496f373e0f13bf647b5d73fb361ff536fc99342424d444e7ac",
-      "bytes": 12123920,
-      "mode": "0o755",
-      "executed_log": "native-tests-fast8-002.log"
-    },
-    {
-      "source": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/ci/deps/rapier3d-f5ebe9b7bfb42663",
-      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/frozen-binaries/native-tests-fast8-002-rapier3d-f5ebe9b7bfb42663",
-      "sha256": "e296855ea594bd2b1b9dc7f15aaa4b202bac0dbedb0a60b090daa09555f4aa55",
-      "bytes": 13358928,
-      "mode": "0o755",
-      "executed_log": "native-tests-fast8-002.log"
-    },
-    {
-      "source": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/ci/deps/rapier2d-1496def7e0ef3cb6",
       "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/frozen-binaries/focused-final-det-003-rapier2d-1496def7e0ef3cb6",
       "sha256": "970b093c815c9696aef5fe65139b217993c5bd41b898e53b9c4b5e25a2755689",
       "bytes": 12239776,
       "mode": "0o755",
-      "executed_log": "focused-final-det-003.log"
+      "executed_log": "focused-final-det-003.log",
+      "source_generation": 3
     },
     {
       "source": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/ci/deps/rapier3d-cea959100e29d5a0",
@@ -3001,7 +2970,8 @@
       "sha256": "605427c645332d98ca3583bb8474c0bce91a0dc7d5a02bcbe574bcce0cc0d1e0",
       "bytes": 13503856,
       "mode": "0o755",
-      "executed_log": "focused-final-det-003.log"
+      "executed_log": "focused-final-det-003.log",
+      "source_generation": 3
     },
     {
       "source": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/ci/deps/rapier2d-2d97f79c39c21dfc",
@@ -3009,7 +2979,8 @@
       "sha256": "30fad55bd253fe496f373e0f13bf647b5d73fb361ff536fc99342424d444e7ac",
       "bytes": 12123920,
       "mode": "0o755",
-      "executed_log": "focused-final-fast8-003.log"
+      "executed_log": "focused-final-fast8-003.log",
+      "source_generation": 3
     },
     {
       "source": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/ci/deps/rapier3d-f5ebe9b7bfb42663",
@@ -3017,10 +2988,21 @@
       "sha256": "e296855ea594bd2b1b9dc7f15aaa4b202bac0dbedb0a60b090daa09555f4aa55",
       "bytes": 13358928,
       "mode": "0o755",
-      "executed_log": "focused-final-fast8-003.log"
+      "executed_log": "focused-final-fast8-003.log",
+      "source_generation": 3
     }
   ],
+  "historical_binary_correction": {
+    "producer": "d4bde636c685c799dcf6a34e2e8b25b7f9a57301",
+    "receipt_followup": "03869da43e14a0fd0b4f1dd204f5b45cc2e02c5c",
+    "manifest_sha256": "8346fd8b6d80d35826642fd2834da4fb2ce267ba9c82cf3ecdbaa83c8ffeaccf",
+    "archive_sha256": "4cc2c04d9f7ff99ccc0c88b510fabdc80a5c56fa65d2183e275bff6e50cd69de",
+    "archive_git_path": "docs/spikes/evidence/physics-native-world-construction-logs.json.gz",
+    "finding": "Collector copied source002 Cargo artifact paths only after source003 rebuilt the same paths. Those four copies cannot establish historical source002 executed binary identity. No contemporaneous source002 binary hashes were saved.",
+    "correction": "Retain only four previously frozen focused-final source003 binaries; broad source002 logs and exact source copies remain valid, original source002 binary bytes are not retained. No rebuild or rerun."
+  },
   "limits": [
+    "Original source002 broad-test binaries were overwritten by later Cargo builds and are not retained; broad logs/source remain historical evidence. Only four source003 focused binaries are retained as executed identities.",
     "Private captured primitive-world candidate only. No public bytes-to-live installer or runtime save admission.",
     "No reconstructed physical owner is a trusted clone. A trusted Rayon pool Arc is shared process execution policy.",
     "Exact event bit records are compared as multisets, not parallel callback scheduling order.",
