@@ -1,0 +1,30 @@
+{
+  "schema": "incant-reviewed-evidence-wrapper-v1",
+  "status": "accepted_scoped_cpu",
+  "reviewed_original_unchanged": true,
+  "source_freeze_unchanged": true,
+  "entries": [
+    {
+      "path": "docs/spikes/evidence/temporal-owner-provenance.json",
+      "sha256": "ba95b3a89224ef20c1e3a614865e22294d4a0bb6003f973d6542a891d0daba49",
+      "bytes": 6134
+    },
+    {
+      "path": "docs/spikes/evidence/temporal-owner-provenance-final-review.json",
+      "sha256": "88b8a6e0dcb63003546530dcf93054943b4205e8678d1b8ee817d6fe4ef401ac",
+      "bytes": 783
+    },
+    {
+      "path": "docs/spikes/temporal-owner-provenance-verification.md",
+      "sha256": "925d162a9f939cea4e82d700a68378d2f814a1cd36c74e3d077aa0f2a6219a29",
+      "bytes": 2700
+    },
+    {
+      "path": "STATUS.md",
+      "sha256": "bd1d1c1268760727fcc9f4b4043dd86709d7e3d3d309b0ff98a4cbbaff015c71",
+      "bytes": 168815
+    }
+  ],
+  "gpu_executed": false,
+  "integration": "pending; isolate foundation from private renderer ancestry"
+}

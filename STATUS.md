@@ -16,6 +16,17 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Private accepted temporal owner foundation — CPU qualified
+
+The [owner/change provenance foundation](docs/spikes/temporal-owner-provenance-verification.md)
+assigns stable placement IDs across handedness batches and compares actual accepted
+transforms and joint palettes, publishing change membership only after submission.
+Independent source review and nine scoped checks pass (141 default CPU tests,
+156 overlapping cooked-native CPU tests). Shader bytes, textures, defaults and
+memory ceilings are unchanged. Independent final evidence review accepted the
+scoped packet. Integer shader transport, per-pixel provenance, portable/MetalFX
+repair and all GPU/appearance gates remain pending; producer integration is separate.
+
 ## Private reconstruction oracle — 2026-10-13
 
 The [test-only f64 reconstruction oracle](docs/spikes/upscaling-kernel-oracle.md)

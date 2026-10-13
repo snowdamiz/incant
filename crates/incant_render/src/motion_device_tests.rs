@@ -130,8 +130,17 @@ fn accepted_pose_buffers_and_history_swap_only_after_submission() {
         height: 33,
         viewport: None,
     };
+    assert!(retained.motion_changes().is_none());
     retained.submit(&renderer, &input, target(65)).unwrap();
     assert!(!retained.motion_frame().unwrap().has_previous());
+    let changes = retained.motion_changes().unwrap();
+    assert_eq!(
+        changes.highest_owner(),
+        1,
+        "handedness twins share a placement"
+    );
+    assert_eq!(changes.changed_count(), 1);
+    assert_eq!(changes.changed(1), Some(true));
     assert!(
         read(
             &renderer,
@@ -149,8 +158,14 @@ fn accepted_pose_buffers_and_history_swap_only_after_submission() {
         accepted.sequence()
     );
     assert_eq!(retained.live.batches[0].instances, live);
+    assert_eq!(
+        retained.motion_changes().unwrap().frame().sequence(),
+        accepted.sequence()
+    );
+    assert_eq!(retained.motion_changes().unwrap().changed(1), Some(true));
     retained.submit(&renderer, &input, target(65)).unwrap();
     assert_eq!(retained.staging.batches[0].instances, live);
+    assert_eq!(retained.motion_changes().unwrap().changed_count(), 1);
     let image = read(
         &renderer,
         &retained.motion.as_ref().unwrap().readback_view().unwrap(),
@@ -164,6 +179,7 @@ fn accepted_pose_buffers_and_history_swap_only_after_submission() {
     input.nodes[0].world = DMat4::ZERO;
     assert!(retained.submit(&renderer, &input, target(65)).is_err());
     assert_eq!(retained.motion_frame().unwrap().sequence(), 2);
+    assert_eq!(retained.motion_changes().unwrap().changed(1), Some(true));
     input.nodes[0].world = DMat4::from_scale(DVec3::new(-1., 1., 1.));
     retained.submit(&renderer, &input, target(65)).unwrap();
     assert!(
@@ -174,15 +190,21 @@ fn accepted_pose_buffers_and_history_swap_only_after_submission() {
         .iter()
         .any(|p| p[3] == 1. && p[0].abs() > 0.01)
     );
+    assert_eq!(retained.motion_changes().unwrap().highest_owner(), 1);
+    assert_eq!(retained.motion_changes().unwrap().changed(1), Some(true));
     retained.invalidate_motion_history();
     retained.submit(&renderer, &input, target(65)).unwrap();
     assert!(!retained.motion_frame().unwrap().has_previous());
+    assert_eq!(retained.motion_changes().unwrap().changed(1), Some(true));
     retained.submit(&renderer, &input, target(65)).unwrap();
     assert!(retained.motion_frame().unwrap().has_previous());
+    assert_eq!(retained.motion_changes().unwrap().changed(1), Some(false));
+    assert_eq!(retained.motion_changes().unwrap().changed_count(), 0);
     let mut replacement = renderer.prepare_retained(&input, "camera").unwrap();
     replacement.enable_motion_history(&renderer).unwrap();
     replacement.submit(&renderer, &input, target(65)).unwrap();
     assert!(!replacement.motion_frame().unwrap().has_previous());
+    assert_eq!(replacement.motion_changes().unwrap().changed(1), Some(true));
     assert!(
         !replacement
             .motion_frame()
@@ -252,6 +274,9 @@ fn skinned_and_ik_history_uses_exact_live_deformed_buffer_and_rejects_rebound_as
         viewport: None,
     };
     retained.submit(&renderer, &input, target()).unwrap();
+    let owners = retained.motion_changes().unwrap().highest_owner();
+    assert!(owners > 0);
+    assert_eq!(retained.motion_changes().unwrap().changed_count(), owners);
     let before: Vec<_> = retained
         .live
         .batches
@@ -295,6 +320,10 @@ fn skinned_and_ik_history_uses_exact_live_deformed_buffer_and_rejects_rebound_as
         ) != Some(*vertex);
     }
     assert!(changed);
+    assert_eq!(retained.motion_changes().unwrap().highest_owner(), owners);
+    assert!(retained.motion_changes().unwrap().changed_count() > 0);
+    let changed_count = retained.motion_changes().unwrap().changed_count();
+    let changed_classes = retained.motion_changes().unwrap().changed_classes();
     assert!(
         read(
             &renderer,
@@ -306,6 +335,14 @@ fn skinned_and_ik_history_uses_exact_live_deformed_buffer_and_rejects_rebound_as
     input.nodes[0].mesh.as_mut().unwrap().source = foreign;
     assert!(retained.submit(&renderer, &input, target()).is_err());
     assert_eq!(retained.motion_frame().unwrap().sequence(), 2);
+    assert_eq!(
+        retained.motion_changes().unwrap().changed_count(),
+        changed_count
+    );
+    assert_eq!(
+        retained.motion_changes().unwrap().changed_classes(),
+        changed_classes
+    );
     let mesh = input.nodes[0].mesh.as_mut().unwrap();
     mesh.source = source;
     mesh.animation = Some(incant_types::AnimationSample::REST);
@@ -318,6 +355,8 @@ fn skinned_and_ik_history_uses_exact_live_deformed_buffer_and_rejects_rebound_as
     }]));
     retained.submit(&renderer, &input, target()).unwrap();
     assert_eq!(retained.motion_frame().unwrap().sequence(), 3);
+    assert_eq!(retained.motion_changes().unwrap().highest_owner(), owners);
+    assert!(retained.motion_changes().unwrap().changed_count() > 0);
     let image = read(
         &renderer,
         &retained.motion.as_ref().unwrap().readback_view().unwrap(),

@@ -3,6 +3,7 @@
 mod draw;
 mod owner;
 mod plan;
+mod provenance;
 mod retained;
 pub(crate) mod system;
 mod targets;
@@ -12,6 +13,7 @@ mod tests;
 pub(crate) use draw::MotionDraw;
 pub use owner::MotionFrame;
 pub use plan::{MAX_MOTION_INSTANCE_BYTES, MAX_MOTION_PIXELS, MAX_MOTION_TARGET_BYTES};
+pub use provenance::MotionChanges;
 pub(crate) use retained::{MotionState, MotionView, TemporalInput};
 pub(crate) use system::MotionSystem;
 
