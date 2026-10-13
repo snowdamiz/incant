@@ -16,6 +16,17 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Exact physics saves — inert pair persistence verified locally
+
+The std-only inert format now checks rigid pair event/color/recycle fields and
+closed composite workspace maps against existing manifold/geometry ownership.
+Native tuple keys, detector order/timestamps and manifold bijections are retained;
+unknown workspace kinds refuse explicitly. 88 CPU tests plus Clippy/wasm32 and
+dependency guards pass, including actual both-dimension workspace churn and
+recycle observations. Independent review is pending. Previous-cluster scratch
+reconstruction, complete body/island/solver ownership and live/save admission
+remain open. [Pair-state contract](docs/spikes/physics-inert-pair-state.md).
+
 ## Exact physics saves — inert manifold ownership verified locally
 
 The std-only inert format now joins contact edges to exact collider generations,

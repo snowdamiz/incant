@@ -78,6 +78,15 @@ pub struct ValidatedManifolds<'a> {
     context: ManifoldContext<'a>,
 }
 impl ValidatedManifolds<'_> {
+    pub(crate) fn pair_shapes(&self, row: usize) -> Option<[&ValidatedGeometry; 2]> {
+        let p = self.record.pairs.get(row)?;
+        let a = self.context.attachments.collider_row(p.colliders[0])? as usize;
+        let b = self.context.attachments.collider_row(p.colliders[1])? as usize;
+        Some([
+            self.context.geometries.get(a)?,
+            self.context.geometries.get(b)?,
+        ])
+    }
     pub fn record(&self) -> &ManifoldTable {
         &self.record
     }

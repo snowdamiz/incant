@@ -4269,6 +4269,7 @@ dependencies = [
  "parry3d",
  "rapier2d",
  "rapier3d",
+ "serde",
  "serde_json",
 ]
 
