@@ -1,0 +1,6 @@
+{
+  "review": "native-session-main246-root-20261013.json",
+  "sha256": "12de683d719c70c0829e4469179fc9e26bde0b8990cf463eadd522b69651f722",
+  "reviewed_head": "4115600a95733ce8a0af2fb03cf803e4fa331b14",
+  "scope": "Accepted current-main source/evidence composition; no new runtime execution."
+}
