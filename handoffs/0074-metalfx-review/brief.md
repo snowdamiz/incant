@@ -36,3 +36,45 @@ no credentials/accounts/memory writes/pushing/PRs/phase approval. Evidence write
 only this packet and the named evidence directory. Commit owned result.md with
 Built-by: claude; root owns brief.md and tools/numeric.py. Report precise model,
 effort, identities, adapter, actual outcome and the remaining appearance gates.
+
+
+## Root priority revision — prepare the combined-source visual review, 2026-10-13
+
+Your single bounded native execution is accepted for its stated ownership scope.
+Root receipt: `/Users/andreyyurlov/.codex/incant-reviews/metalfx-0074-numeric-20261013.json`
+SHA256 `d5869e4b6fa4bbe66861eb0cf27ad2f482072f1e568e3998960c1ba629266e6b`.
+Do not execute that consumed grant again. PREPARATION ONLY in this session: no
+Cargo, target, GPU, screenshots or source changes outside this handoff packet.
+
+Prepare your proposed five visual cases by reusing the existing 0072 fixture and
+accepted lifecycle/build helpers. Keep the original numeric result intact. Use
+at most128 total new submissions INCLUDING UI, at most20 PNGs at960x540, one serial
+child per case. Your proposed108world+11UI=119 fits. The same rules apply to failed
+attempts. Do not add an execution framework, retry loop or another broad suite.
+A concise case plan, fixture extension, existing-helper adaptation and CPU-only
+selfchecks are enough. Root will supervise compilation separately.
+
+The future source is NOT4bc/a337: root is composing corrected temporal edge,
+unjittered overlay-depth, accepted MetalFX, and cooked shader artifacts in
+`/Users/andreyyurlov/.codex/worktrees/local-service-stack/incant` on
+`codex/cooked-temporal-metalfx`. Exact source/build-input pins will be provided
+AFTER review. Do not build or silently substitute the old source; preparatory
+helpers should refuse an absent explicit source grant. Compare same-source
+portable/native arms and require actual native selection; keep fractional/scale
+fallbacks explicit. Preserve the conservative current-coverage fallback boundary
+in observations rather than treating it as vendor output.
+
+Your jitter concern needs numerical/pixel confirmation, not a speculative sign
+change. Apple WWDC22 session10103, at its jitter example, describes sample
+coordinate(0.625,0.78) with API jitter(-0.125,-0.28). This is consistent with the
+engine's image-shift convention: sampling at p-shift. Source:
+https://developer.apple.com/videos/play/wwdc2022/10103/
+Root has not changed the sign. Keep the proposed static registration observation
+and personally judge the eventual pixels. No preset, reactivity or styling edits
+in preparation.
+
+Do not add new public diagnostics yourself. Record that native range/reset facts
+are inferred from current existing observables; ask root in result for any
+strictly necessary extra observation. All model/effort must remain Opus5.5 Max.
+Commit scoped preparation with Built-by: claude and return with no active children
+or background tasks. No memory writes, personal notes or accounts.
