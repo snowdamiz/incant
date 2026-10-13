@@ -469,5 +469,9 @@
     "Only clean sanitized8b82 producer ancestry retained; private original f517 and raw environment ledger excluded",
     "Immutable current-source headless reused by exact implementation/build input equality; no redundant build claim"
   ],
-  "review_state": "Final integration independent review pending"
+  "review_state": "Independent final integration review accepted; required fast check pending",
+  "final_review": {
+    "path": "docs/spikes/evidence/core-live-hud-main190/final-review.json",
+    "sha256": "d6e66b0f47cd2004633decdef71bb7413b333491cd7551cf74c06a9c3d2fbaf0"
+  }
 }
