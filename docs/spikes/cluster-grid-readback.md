@@ -65,6 +65,6 @@ The [manifest](evidence/cluster-grid-readback.json) binds the three source input
 seven command receipts/logs and two compiled test binary identities. Lossless
 logs and source copies are retained; large binaries remain outside the repository
 in the private target and are identified by hash. Original evidence is under
-`~/.codex/incant-evidence/cluster-grid-readback-001`. Independent source review
-and actual GPU parity remain pending. No GPU command has been executed by this
+`~/.codex/incant-evidence/cluster-grid-readback-001`. Independent [source review](evidence/cluster-grid-readback-source-review.json)
+accepted the frozen source and CPU evidence. Actual GPU parity remains pending. No GPU command has been executed by this
 implementation lane.

@@ -133,7 +133,7 @@ The ignored extension covers 75 camera/viewport/light-count combinations, eight
 retained frame steps and a directional-only control with raw count/mask hashes.
 Two CPU invariant tests and all-target Clippy pass in default and cooked-cluster
 configurations; no production renderer code changed. Independent source review
-and coordinated baseline/cooked GPU execution remain pending.
+accepted this bounded packet; coordinated baseline/cooked GPU execution remains pending.
 [Scope and evidence](docs/spikes/cluster-grid-readback.md).
 
 ## Fixed cluster assignment shaders — CPU/compiler checks passed
