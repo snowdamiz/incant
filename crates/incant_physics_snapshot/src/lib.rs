@@ -13,6 +13,8 @@ mod coarena;
 mod coarena_codec;
 mod codec;
 mod collider_state;
+#[cfg(feature = "construction")]
+pub mod construction;
 mod contact_manifolds;
 mod contact_points;
 mod contact_points_codec;

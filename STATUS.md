@@ -16,14 +16,24 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Exact island construction — source accepted, CPU qualification complete
+## Typed BVH construction — source accepted, CPU qualification complete
+
+The std-only shared cumulative allocation permit now supports default-off Parry
+construction from immutable strict or pending BVH witnesses. Exact storage bits,
+free-stack order and pending bounds are preserved. Both modes pass 225 snapshot
+and 26 private constructor tests; scoped strict Clippy, wasm, lean graphs and
+guards pass. Final evidence review is pending. No complete world installer or
+public physics-save admission is enabled.
+[Scope and evidence](docs/spikes/physics-parry-construction.md).
+
+## Exact island construction — scoped source and CPU evidence accepted
 
 Private typed island reconstruction preserves exact tables, free order, contacts
 and sleep-scan history. Both modes pass 218 snapshot and 28 private constructor
 tests, including 156 paired island steps per dimension per mode. Strict scoped
 Clippy, wasm and dependency guards pass; inherited vendor observer formatting is
-explicitly excluded from the owned-format result. Final evidence review remains
-pending. No public installer or live-save guard changed.
+explicitly excluded from the owned-format result. Root final evidence review is
+accepted at `1a1ad505`. No public installer or live-save guard changed.
 [Scope and evidence](docs/spikes/physics-native-islands-construction.md).
 
 ## Private physics constructors — scoped source and CPU evidence accepted

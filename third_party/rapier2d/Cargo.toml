@@ -58,7 +58,7 @@ status = "actively-developed"
 # Trusted checkpoint diagnostics only; no default solver behavior changes.
 incant-checkpoint = ["alloc"]
 # Private checked-frame staging; not enabled by ordinary runtime features.
-incant-checked-restore = ["std", "alloc", "dep:incant_physics_snapshot"]
+incant-checked-restore = ["std", "alloc", "dep:incant_physics_snapshot", "incant_physics_snapshot/construction", "parry2d/incant-checked-restore"]
 alloc = [
     "nalgebra/alloc",
     "parry2d/alloc",

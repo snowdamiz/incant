@@ -6,6 +6,8 @@ rust-version.workspace = true
 publish.workspace = true
 
 [features]
+# Default-off std-only cumulative construction allocation utility.
+construction = []
 # Forward numerical selection for native observer dev edges; normal graph is std-only.
 default = ["physics-deterministic"]
 physics-deterministic = ["rapier2d/enhanced-determinism", "rapier3d/enhanced-determinism"]

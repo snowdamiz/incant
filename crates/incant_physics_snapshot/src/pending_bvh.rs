@@ -1,5 +1,6 @@
 //! Exact end-of-step tree bytes with narrowly named, unresolved leaf updates.
-//! This is NOT a query-ready ValidatedBvh and has no live native conversion.
+//! This is NOT a query-ready ValidatedBvh. Optional typed native storage
+//! construction must preserve its unresolved bounds and matched pending queue.
 use crate::{
     Budget, BvhRecord, ColliderEnabled, Error, Handle, MAX_DEPTH, MAX_ITEMS, PendingJournals,
     Result, ValidatedColliderState, records::lengths, vector,

@@ -36,3 +36,13 @@ Runtime checkpoint identity includes both patched source trees and native physic
 owners, because local Cargo patches no longer have registry checksums in the lock.
 This does not enable persisted physics loads, validate arbitrary deserialized
 Rapier/Parry graphs, or audit every unsafe operation in these dependencies.
+
+## Default-off typed BVH construction layer
+
+`INCANT_CHECKED_BVH.json` in each Parry/Rapier vendor records the layered
+`incant-checked-restore` delta after the accepted island producer. It adds only
+immutable validated-witness tree constructors and an optional std-only shared
+allocation utility. All original patch inventories remain historical. Pending
+ancestor bounds/flags stay exact; this is not a query-ready promotion or world
+installer. No unsafe code or raw/serde live conversion is added. VecMap capacity
+allocation is precharged but remains infallible under process OOM.
