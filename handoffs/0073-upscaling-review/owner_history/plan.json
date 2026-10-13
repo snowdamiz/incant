@@ -1,0 +1,83 @@
+{
+  "schema": "incant-owner-history-numeric-plan-v1",
+  "state": "FROZEN_READY_FOR_ROOT_GRANT",
+  "producer": "2bccac7779c65cc8236ccdd878d42bf649c5bda8",
+  "evidence_dir": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-history-gpu-001",
+  "budget": {
+    "child_attempts": 2,
+    "cases": 24,
+    "owner_renders": 24,
+    "baseline_renders": 4,
+    "native_depth_clear_passes": 24,
+    "queue_submissions": 24,
+    "readback_maps": 24,
+    "maximum_extent": [
+      16,
+      16
+    ],
+    "timeout_seconds_each": 90,
+    "images": 0,
+    "builds": 0,
+    "retries": 0
+  },
+  "environment": {
+    "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+    "TMPDIR": "<fresh evidence root>/tmp",
+    "INCANT_EXPECT_GPU_BACKEND": "Metal",
+    "RUST_BACKTRACE": "0"
+  },
+  "identities": {
+    "shader": {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/source-final/crates/incant_render/src/upscaling/resolve_owner.wgsl",
+      "sha256": "df600750ab5cad117ae0cfa1e76fa635e07c96be4a76d8aa9e8470d9954c64ae"
+    },
+    "device_test": {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/source-final/crates/incant_render/src/upscaling/owner_device_tests.rs",
+      "sha256": "07b168aa4f9c5db51537beb0f16fbbb80b5cf0e6fae11f29148b40f03068d36e"
+    },
+    "common": {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/temporal-owner-host-source-20261013/source-followup/crates/incant_render/src/upscaling/common.wgsl",
+      "sha256": "7a1041707465239b046b31ae9d86e87f4372635056622eeacb8a3142e105344a"
+    },
+    "source_freeze": {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/source-final/freeze.json",
+      "sha256": "94bdcd863b42e54bdabdd449f3656171386be8aa3c2f99680f1575039539e9ff"
+    },
+    "cpu_review": {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/temporal-owner-consumer-cpu-final-independent-20261013.json",
+      "sha256": "54b0f853efa75a7cc074aee4e914c47aff427f1d73da1bf300a19ff9c707c80b"
+    },
+    "wgsl_build": {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/qualification-default-cpu-001.json",
+      "sha256": "c4e93ba73cc3be0afe32b1d318eff9ff2c37a6002f0f8143ca34e95ca1d65f23"
+    },
+    "cooked-metal_build": {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/qualification-cooked-native-cpu-001.json",
+      "sha256": "de831433de0df9ebb33ac6a8b44ad664b92bdccd42a2a4b54023d4ebe22e5db7"
+    },
+    "wgsl_list": {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-history-preparation-001/wgsl-exact-list.txt",
+      "sha256": "2535c6f5e6cfafc9a74a72122a436aef07ad84c6400e8f4571a0a41472037bd7"
+    },
+    "cooked-metal_list": {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-history-preparation-001/cooked-metal-exact-list.txt",
+      "sha256": "2535c6f5e6cfafc9a74a72122a436aef07ad84c6400e8f4571a0a41472037bd7"
+    }
+  },
+  "binaries": [
+    {
+      "kind": "wgsl",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/frozen-binaries/default",
+      "sha256": "ca9ae76e301913293c38e6d2b6d1529a523e1ca3342e44cf807d6a7c843792b4",
+      "bytes": 32280400,
+      "mode": "0755"
+    },
+    {
+      "kind": "cooked-metal",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/frozen-binaries/cooked-native",
+      "sha256": "fd965d4bef936bec79c8acac1ef2926df1b09e3749db67d7fc01ab85cbb40828",
+      "bytes": 33346448,
+      "mode": "0755"
+    }
+  ]
+}

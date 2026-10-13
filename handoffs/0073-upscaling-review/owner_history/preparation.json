@@ -1,0 +1,93 @@
+{
+  "schema": 1,
+  "author": "astra runtime_review",
+  "state": "prepared; root grant and ACP/GPU execution absent",
+  "files": [
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review/handoffs/0073-upscaling-review/owner_history/brief.md",
+      "sha256": "c41a9348cca8ef39c540ed2c365cb5aaa12c8cb194b491fc58307eb66144a1ba",
+      "bytes": 4582
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review/handoffs/0073-upscaling-review/owner_history/grant.template.json",
+      "sha256": "269c0144daacb90079cd0ffcc786fb1b8e820b71c758814e0d20c9b21d96c4d9",
+      "bytes": 1147
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review/handoffs/0073-upscaling-review/owner_history/plan.json",
+      "sha256": "19cdc72ce68564f24e4ec88eb732aa8a17b412d964556b5ae838b21b992168c7",
+      "bytes": 3566
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review/handoffs/0073-upscaling-review/owner_history/runner.py",
+      "sha256": "bf9acf839628bf48e34af08367c5c27275551a2dd895e088fddd3c76ffcdddda",
+      "bytes": 13256
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review/handoffs/0073-upscaling-review/owner_history/test_runner.py",
+      "sha256": "43ff14ad3e897d66695bd9674c14c4fe5c3a62c320b6502f9b5c819abf77090e",
+      "bytes": 9665
+    }
+  ],
+  "external_evidence": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-history-preparation-001/build-review.json",
+      "sha256": "10e6d079ebf13ea4d938f66709dbcd3f47100ed9b893e355e59f4d87ee815124"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-history-preparation-001/collector-verify.log",
+      "sha256": "d3066291d0673516084fad513e005c36e2c86a89c38a5af888d714f3bd1f3782"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-history-preparation-001/enumeration.json",
+      "sha256": "fc2edadfb3d8b6ab59c8139dd9b04c09d7d6c0cb57b64b5fc7008c51c1a7c8e7"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-history-preparation-001/runner-cpu-002.log",
+      "sha256": "e99a80452371b483736569970cc1ae0a1aadc59fb69fae94dbe5b203feb18581"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-history-preparation-001/runner-cpu-003.log",
+      "sha256": "ea4cf240e04f152b1d438297181e45f44759699983828c7478a1ae6bd9bbeedc"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-history-preparation-001/check-final.json",
+      "sha256": "4eab090122754021b8d06ffc76e76535056858bb107627fe19091b3f3d514e14"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/temporal-owner-consumer-cpu-final-independent-20261013.json",
+      "sha256": "54b0f853efa75a7cc074aee4e914c47aff427f1d73da1bf300a19ff9c707c80b"
+    }
+  ],
+  "cpu_checks": {
+    "focused_guard_lifecycle_tests": 11,
+    "failures": 0,
+    "tool_handles": [
+      41794,
+      46934,
+      4227
+    ],
+    "all_terminal_zero_reaped": true,
+    "cpu_only_exact_enumeration_processes": 2,
+    "gpu_submissions": 0
+  },
+  "future_budget": {
+    "child_attempts": 2,
+    "cases": 24,
+    "owner_renders": 24,
+    "baseline_renders": 4,
+    "native_depth_clear_passes": 24,
+    "queue_submissions": 24,
+    "readback_maps": 24,
+    "maximum_extent": [
+      16,
+      16
+    ],
+    "timeout_seconds_each": 90,
+    "images": 0,
+    "builds": 0,
+    "retries": 0
+  },
+  "preserved_input_sha256": "63e0cdf6acb1112d769394120702d14d809aefb40f33f359b47a82e223da2f6e",
+  "scope": "Two frozen kernel/backend numeric tests only. No GPU grant/launch; no full retained or appearance acceptance."
+}
