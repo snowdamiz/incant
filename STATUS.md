@@ -55,6 +55,15 @@ Safe Core live-HUD changes are merged in PR192. The optional result-label and wo
 correction is merged in PR194 after public native checks, independent integration
 review and the exact-head fast check. Original source-free shipping remains producer-scoped; no new
 appearance or device acceptance is inferred. See [Core result evidence](docs/spikes/core-result-hud-main192.md).
+## Native-window CPU profiling — producer accepted; integration checks pending
+
+The desktop player accepts explicit summary/standalone Tracy profiling on its
+window route. Simulation attempts, redraw-only CPU work and restarts have separate
+fixed zones; the final native report uses the existing host callback. Ten producer
+CPU/compile/tooling checks and independent review pass. Current integration checks,
+actual native-window execution and live Tracy capture remain pending.
+[Scope and evidence](docs/spikes/native-window-profile.md).
+
 ## Retained opaque motion — current-main CPU integration verified
 
 The opt-in retained motion/depth implementation preserves exact accepted live/staging
