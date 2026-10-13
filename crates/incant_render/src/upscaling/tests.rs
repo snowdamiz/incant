@@ -246,7 +246,10 @@ fn output_blend_grid_is_charged_as_old_plus_worst_case_candidate_under_the_ceili
     assert_eq!(p.with_output_grid(total, 7), Some(total + grid + 7));
     assert_eq!(p.with_output_grid(total, u64::MAX), None);
     let edge = MAX_UPSCALE_TRANSITION_BYTES - grid;
-    assert_eq!(p.with_output_grid(edge, 0), Some(MAX_UPSCALE_TRANSITION_BYTES));
+    assert_eq!(
+        p.with_output_grid(edge, 0),
+        Some(MAX_UPSCALE_TRANSITION_BYTES)
+    );
     assert_eq!(p.with_output_grid(edge + 1, 0), None);
     // Fractional offset viewport: tiles of its own extent, never the attachment.
     assert_eq!(
@@ -259,6 +262,9 @@ fn output_blend_grid_is_charged_as_old_plus_worst_case_candidate_under_the_ceili
         [0., 0., f32::INFINITY, 1.],
         [0., 0., 8192. * 64., 64.],
     ] {
-        assert!(crate::lighting::output_grid_allowance(bad).is_none(), "{bad:?}");
+        assert!(
+            crate::lighting::output_grid_allowance(bad).is_none(),
+            "{bad:?}"
+        );
     }
 }

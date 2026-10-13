@@ -361,7 +361,15 @@ impl LightingSystem {
         shadows: &crate::shadows::PreparedShadows,
         retained: Option<&Arc<GridBuffers>>,
     ) -> Result<(PreparedLighting, Arc<GridBuffers>)> {
-        self.prepare_in(device, lights, viewport, selection, camera, shadows, Some(retained))
+        self.prepare_in(
+            device,
+            lights,
+            viewport,
+            selection,
+            camera,
+            shadows,
+            Some(retained),
+        )
     }
     #[allow(clippy::too_many_arguments)]
     fn prepare_in(
@@ -564,8 +572,7 @@ pub(crate) fn output_grid_allowance(viewport: [f32; 4]) -> Option<u64> {
     let clusters = tiles(viewport[2])?
         .checked_mul(tiles(viewport[3])?)?
         .checked_mul(u64::from(DEPTH_SLICES))?;
-    (clusters <= u64::from(MAX_CLUSTERS))
-        .then(|| clusters * 4 * (1 + u64::from(MAX_MASK_WORDS)))
+    (clusters <= u64::from(MAX_CLUSTERS)).then(|| clusters * 4 * (1 + u64::from(MAX_MASK_WORDS)))
 }
 /// Immutable uniforms and retained storage bindings for one encoded frame.
 pub(crate) struct PreparedLighting {

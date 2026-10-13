@@ -389,7 +389,9 @@ impl Renderer {
         // upscaling transaction. Without a plan every overlay keeps its target.
         let screen = upscaling.and_then(|p| p.screen_overlay());
         if let Some(models) = &mut models {
-            if let (Some(pending), Some(overlay), Some((_, depth, rect))) = (upscaling, overlay, screen) {
+            if let (Some(pending), Some(overlay), Some((_, depth, rect))) =
+                (upscaling, overlay, screen)
+            {
                 let grid = self.prepare_transparent_output(
                     scene,
                     models,
