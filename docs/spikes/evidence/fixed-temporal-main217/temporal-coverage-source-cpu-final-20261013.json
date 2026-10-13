@@ -1,0 +1,437 @@
+{
+  "format": "incant-independent-source-cpu-review",
+  "version": 1,
+  "created_at": "2026-10-13T09:39:45.996735+00:00",
+  "reviewer": "astra /root/runtime_review",
+  "status": "accepted_scoped_no_remaining_findings",
+  "root": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+  "base": "077f7c39c0f4122aae36ea3a88537be006722822",
+  "source_freeze": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-coverage-001/source-004/freeze.json",
+    "sha256": "4a957f9f71ecee51f1b5ecdeb70f531cbcc7063ea91e0b26f17dd66077d5efa2",
+    "files": [
+      {
+        "path": "crates/incant_render/src/temporal/coverage.rs",
+        "sha256": "0488008c1fa6c039f9eb312637307ffdbacc57ca8fea63ffde6bafe4822a4963",
+        "bytes": 8369
+      },
+      {
+        "path": "crates/incant_render/src/temporal/coverage_device.rs",
+        "sha256": "3d1d3e29b51a01f84569b5855a3b22a38b97bc89a232af551e4c028d37ae7db1",
+        "bytes": 13712
+      },
+      {
+        "path": "crates/incant_render/src/temporal/coverage_tests.rs",
+        "sha256": "18f7c98156d22ef84a07902e9ff2b0cc9fa03eb062b8a8d425119dd59e663d2e",
+        "bytes": 6087
+      },
+      {
+        "path": "crates/incant_render/src/temporal/device_tests.rs",
+        "sha256": "12ead9f939f230bc21fd9a10534f996b9930932198bb7dc162e6778e13ed26e0",
+        "bytes": 12229
+      },
+      {
+        "path": "crates/incant_render/src/temporal/mod.rs",
+        "sha256": "1cb40151a8da19ba7c9dd03068333319eb5c639e4479441ddd260ec0e0173311",
+        "bytes": 1138
+      },
+      {
+        "path": "crates/incant_render/src/temporal/oracle.rs",
+        "sha256": "818e83528162c0b2db1ffbdc046fb66bebe86a84d0d082912030eaa2b2b9216c",
+        "bytes": 2770
+      },
+      {
+        "path": "crates/incant_render/src/temporal/resolve.wgsl",
+        "sha256": "4e7f1ee503e05bc7f2c126ae83b059881fe90b99530507be5ea9f7f037b68bce",
+        "bytes": 4630
+      },
+      {
+        "path": "crates/incant_render/src/temporal/system.rs",
+        "sha256": "ef64ac5d7b6334832a8bb4e23e21734814508fb228903c33ba184247db215793",
+        "bytes": 11198
+      },
+      {
+        "path": "crates/incant_render/src/temporal/tests.rs",
+        "sha256": "5cc16417e84067ee7e88042433845187de6b363ce26130f4d0bc7c92b9a91292",
+        "bytes": 11104
+      },
+      {
+        "path": "crates/incant_shader_cook/src/temporal/mod.rs",
+        "sha256": "e3a3c5366db672938713216a3bb5b470ec9716acb83d951a9a54590f2f8e7411",
+        "bytes": 7510
+      },
+      {
+        "path": "crates/incant_shader_cook/tests/fixtures/temporal-resolve-single-depth.wgsl",
+        "sha256": "e1af53565a299f6a03a13a3ee05a037b540e24cb2b0bed054ceeb8d2d484ebf1",
+        "bytes": 3480
+      },
+      {
+        "path": "crates/incant_shader_cook/tests/temporal.rs",
+        "sha256": "9131ef2b4940aa2072a92fbdde012927c03c915f53379f2c2a89ece316ea7338",
+        "bytes": 7361
+      }
+    ],
+    "live_and_frozen_copies_verified": true
+  },
+  "followup_changed_paths": [
+    "crates/incant_render/src/temporal/coverage.rs",
+    "crates/incant_render/src/temporal/coverage_device.rs",
+    "crates/incant_render/src/temporal/coverage_tests.rs",
+    "crates/incant_render/src/temporal/oracle.rs",
+    "crates/incant_render/src/temporal/resolve.wgsl",
+    "crates/incant_shader_cook/src/temporal/mod.rs"
+  ],
+  "historical_review": {
+    "path": "/Users/andreyyurlov/.codex/incant-reviews/temporal-coverage-source-003-review-20261013.json",
+    "sha256": "bcff277f10d6048fb934567fde2840667cca4508beb83a8b3b290541eb655644",
+    "finding": "R1",
+    "status": "closed"
+  },
+  "finding_closure": [
+    "Actual fixed WGSL clean now returns zero for nonfinite or alpha<=0 data. This single production condition applies before current early return, neighborhood extrema, history accumulation and final output.",
+    "Both scalar references use matching canonical clearing. New CPU controls distinguish malformed current, history-only and neighborhood-clamp contamination in both projections, with zero/negative-zero/negative alpha cases.",
+    "The ignored actual shader case has residual [4,3,2,0] current/history plus dark opaque history. It checks exact zero at the clear edge and the 0.325 neighbor result, detecting residual-color contamination rather than merely repeating requested writes.",
+    "Only the Resolve trusted source hash changes with the corrected program. Fixed 64-byte frame, texture/resource bindings, other program hashes and backend ABI remain unchanged."
+  ],
+  "reviewed_contracts": [
+    "Current opaque invalid owner motion refuses history. Previous UV minus current UV uses top-left normalized coordinates and viewport extent; expected previous NDC depth converts to previous view distance correctly for both projections. Projection identity changes invalidate history.",
+    "Positive inside-viewport bilinear taps are admitted individually and renormalized, no zero-mass divide or outside clamping. Nonfinite/negative history, invalid depths and invalid alpha are excluded or canonicalized as specified.",
+    "A bounded 3x3 current neighborhood provides conservative depth-range support and nearest valid expected-depth motion, with stable center priority on ties. Range admission is a one-pixel silhouette policy, not exact object correspondence.",
+    "Pure clear support lies near the far plane; even near-far foreground admitted by the numeric tolerance is clamped to zero by canonical all-clear neighborhood extrema. Covered background beyond the one-pixel neighborhood cannot retain foreground outside its current range/clamp.",
+    "Premultiplied RGBA coverage is blended as a convex combination, including fractional/zero coverage. Reactive RGB reduction and existing configuration/defaults are unchanged.",
+    "Test-only controlled post-MASK occupancy is honestly separated from real model/MASK rasterization. Independent f64 fixtures cover both projections, clear/depth edges, moving/trailing rejection, tie behavior, and malformed clear; they do not claim general full-raster or universal malformed-input equivalence."
+  ],
+  "contract_sources": [
+    {
+      "path": "crates/incant_render/src/motion/shader.wgsl",
+      "sha256": "1ebe19d03890654ad6d232881f97b6fd1d4a0ac3c9bdb29611d1b721a830477b"
+    },
+    {
+      "path": "crates/incant_render/src/motion/owner.rs",
+      "sha256": "e7af17af98a729c04d696979444f85c5c48344701f7650a00d55d6c40c7d79d8"
+    },
+    {
+      "path": "crates/incant_render/src/temporal/config.rs",
+      "sha256": "4fb93739b80c5e1e923cb8d087919cca924151bb8b687ffbc53bb23254f777ee"
+    },
+    {
+      "path": "crates/incant_render/src/temporal/owner.rs",
+      "sha256": "aafc0d329aa5ac85d46b5b728bd0efd8f938f969fdd9e48ded52227a23effe4a"
+    },
+    {
+      "path": "crates/incant_render/src/temporal/copy.wgsl",
+      "sha256": "096ee89ecb5c9112deea55935ac2da0bec4fd7f3ba603aa04c875ba48deb248b"
+    },
+    {
+      "path": "crates/incant_render/src/upscaling/common.wgsl",
+      "sha256": "7a1041707465239b046b31ae9d86e87f4372635056622eeacb8a3142e105344a"
+    }
+  ],
+  "checks_manifest": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-coverage-001/checks-005.json",
+    "sha256": "ee4d5dc5319567792f3606bbce4a2bbf21ada4b27297474485507d1b2dd73e6e",
+    "all_terminal_zero": true,
+    "commands": [
+      {
+        "name": "default-cpu",
+        "argv": [
+          "./tools/cargo",
+          "test",
+          "--locked",
+          "--offline",
+          "--profile",
+          "ci",
+          "-j2",
+          "-p",
+          "incant_render",
+          "--lib"
+        ],
+        "exit_code": 0,
+        "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-coverage-001/default-cpu-005.log",
+        "sha256": "93c8795b43a6eea5f807295d585dee1cedd3b772bb81336138c59eecb7c4b672",
+        "test_summaries": [
+          [
+            "ok",
+            "129",
+            "0",
+            "41"
+          ]
+        ]
+      },
+      {
+        "name": "cooked-cpu",
+        "argv": [
+          "./tools/cargo",
+          "test",
+          "--locked",
+          "--offline",
+          "--profile",
+          "ci",
+          "-j2",
+          "-p",
+          "incant_render",
+          "--lib",
+          "--features",
+          "cooked-temporal,native-metalfx"
+        ],
+        "exit_code": 0,
+        "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-coverage-001/cooked-cpu-005.log",
+        "sha256": "dae323bb56cee942aea791381d0c0df51e9b9efb70a1b05f5b15bbdda3f4feac",
+        "test_summaries": [
+          [
+            "ok",
+            "144",
+            "0",
+            "42"
+          ]
+        ]
+      },
+      {
+        "name": "cooker-interface",
+        "argv": [
+          "./tools/cargo",
+          "test",
+          "--locked",
+          "--offline",
+          "--profile",
+          "ci",
+          "-j2",
+          "-p",
+          "incant_shader_cook",
+          "--test",
+          "temporal"
+        ],
+        "exit_code": 0,
+        "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-coverage-001/cooker-interface-005.log",
+        "sha256": "46b666d6239f63af70ffb95d255bcae83129a0d22304bc5b320648ff2d280d74",
+        "test_summaries": [
+          [
+            "ok",
+            "3",
+            "0",
+            "0"
+          ]
+        ]
+      },
+      {
+        "name": "clippy",
+        "argv": [
+          "./tools/cargo",
+          "clippy",
+          "--locked",
+          "--offline",
+          "--profile",
+          "ci",
+          "-j2",
+          "-p",
+          "incant_render",
+          "-p",
+          "incant_shader_cook",
+          "--all-targets",
+          "--features",
+          "incant_render/cooked-temporal,incant_render/native-metalfx",
+          "--",
+          "-D",
+          "warnings"
+        ],
+        "exit_code": 0,
+        "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-coverage-001/clippy-005.log",
+        "sha256": "e33cf7d802598c3234dc813d5daeff8121b115577ff25cac2b58d3f9e70fc5c5",
+        "test_summaries": []
+      },
+      {
+        "name": "wasm32",
+        "argv": [
+          "./tools/cargo",
+          "check",
+          "--locked",
+          "--offline",
+          "--profile",
+          "ci",
+          "-j2",
+          "-p",
+          "incant_render",
+          "--target",
+          "wasm32-unknown-unknown",
+          "--features",
+          "cooked-temporal"
+        ],
+        "exit_code": 0,
+        "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-coverage-001/wasm32-005.log",
+        "sha256": "25f97cdae1aba015cc2b57b5eb17caebde50f1297c529c0d5144923edcaf7a15",
+        "test_summaries": []
+      },
+      {
+        "name": "runtime-graph",
+        "argv": [
+          "python3",
+          "tools/check_runtime_dependencies.py",
+          "incant_render",
+          "incant_render_native",
+          "--features",
+          "incant_render/cooked-temporal"
+        ],
+        "exit_code": 0,
+        "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-coverage-001/runtime-graph-005.log",
+        "sha256": "dee809680d1bc459a866790c5383b2e483e34b102ed97e607b129cf518d04fe1",
+        "test_summaries": []
+      },
+      {
+        "name": "conventions",
+        "argv": [
+          "python3",
+          "tools/generate_conventions.py",
+          "--check"
+        ],
+        "exit_code": 0,
+        "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-coverage-001/conventions-005.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "test_summaries": []
+      },
+      {
+        "name": "fmt",
+        "argv": [
+          "./tools/cargo",
+          "fmt",
+          "--all",
+          "--",
+          "--check"
+        ],
+        "exit_code": 0,
+        "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-coverage-001/fmt-005.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "test_summaries": []
+      },
+      {
+        "name": "diff",
+        "argv": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "exit_code": 0,
+        "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-coverage-001/diff-005.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "test_summaries": []
+      },
+      {
+        "name": "default-binary",
+        "argv": [
+          "./tools/cargo",
+          "test",
+          "--locked",
+          "--offline",
+          "--profile",
+          "ci",
+          "-j2",
+          "-p",
+          "incant_render",
+          "--lib",
+          "--no-run",
+          "--message-format=json"
+        ],
+        "exit_code": 0,
+        "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-coverage-001/default-binary-005.log",
+        "sha256": "453c6bc8ac9b5ca73ad507899c18c2d7364e2f3c0338a27a7cc4f59cdb408213",
+        "test_summaries": []
+      },
+      {
+        "name": "cooked-binary",
+        "argv": [
+          "./tools/cargo",
+          "test",
+          "--locked",
+          "--offline",
+          "--profile",
+          "ci",
+          "-j2",
+          "-p",
+          "incant_render",
+          "--lib",
+          "--no-run",
+          "--features",
+          "cooked-temporal,native-metalfx",
+          "--message-format=json"
+        ],
+        "exit_code": 0,
+        "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-coverage-001/cooked-binary-005.log",
+        "sha256": "752078bdbceffb7d37d2828d57e9bff4e3ecd02212f4cdce998f22d85144bd21",
+        "test_summaries": []
+      }
+    ]
+  },
+  "observed_binaries": [
+    {
+      "kind": "default-binary",
+      "path": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/ci/deps/incant_render-bf4961fb357f91a4",
+      "sha256": "d900fe08fb2023b42aca223868e6ac367cc5c85b7d8fdaeaa55e2e49c3d19537",
+      "bytes": 32021904,
+      "executable": true,
+      "reviewer_executed": false
+    },
+    {
+      "kind": "cooked-binary",
+      "path": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/ci/deps/incant_render-288759d68012f619",
+      "sha256": "821d5075f9446595c7e33e9d3ff99ff44d66b9a92249aee7e3c169309e5469c0",
+      "bytes": 32876352,
+      "executable": true,
+      "reviewer_executed": false
+    }
+  ],
+  "independent_scalar_reasoning": {
+    "projection_inverse_cases": 30,
+    "planes": [
+      [
+        0.1,
+        100
+      ],
+      [
+        0.5,
+        500
+      ],
+      [
+        1,
+        10
+      ]
+    ],
+    "both_projections": true,
+    "within_existing_depth_tolerances": true,
+    "source003_residual_witness": [
+      0.9,
+      0.45,
+      0.225,
+      0.0
+    ],
+    "source004_canonical_result": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "counts": {
+    "default": {
+      "passed": 129,
+      "failed": 0,
+      "ignored": 41
+    },
+    "cooked_temporal_native_metalfx": {
+      "passed": 144,
+      "failed": 0,
+      "ignored": 42
+    },
+    "cooker_interface": {
+      "passed": 3,
+      "failed": 0,
+      "ignored": 0
+    },
+    "note": "Configurations overlap; do not sum as unique tests. Reviewer verified producer logs rather than rerunning binaries."
+  },
+  "limits": [
+    "No reviewer repository edits, Cargo builds, GPU execution, image viewing, screenshots, native windows or appearance decisions.",
+    "Ignored actual shader execution remains pending: five cases times two projections times fifteen steps, at most150 tiny resolve submissions. Model rasterization, motion jitter correlation and rendered quality still require delegated execution.",
+    "This acceptance applies to fixed-resolution accumulation source and hash-bound CPU evidence. It does not validate portable upscaling, MetalFX appearance, performance/device budgets or a Phase1 gate.",
+    "Browser compile succeeds with five pre-existing timestamp dead-code warnings; strict native all-target Clippy succeeds.",
+    "Source003 finding and historical type-inference/stale-hash/Clippy/CLI failures remain preserved. Future production changes require a new source identity and review."
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "at": "2026-10-13T11:03:26.513301+00:00",
+  "verdict": "accepted scoped source composition; correct MASK detail wording before publication and qualify exact sources",
+  "freeze_sha256": "e351bcaf79ead06668ee3db5d5b8aaf0dece263c98504bc1caff1fb01a9d53cb",
+  "inputs_verified": 202,
+  "patch_sha256": "95d6792ebc24df5ead39ea06dc4430e5d15cf3eedf8a0d8c74d8c5c3cdc82546",
+  "reviewed": [
+    "Exact fixed temporal shaders, retained-owner tests and scalar coverage oracle",
+    "Exact fixed jitter owner; excluded output-scale/native transaction state",
+    "Four-program cooker/host feature closure and three retained cooked CI selections",
+    "Main217 constructor, output mapping, cache/HUD/timing decoder retained",
+    "Models first/last actual pass instrumentation including overlay depth"
+  ],
+  "required_checks": [
+    "Default and cooked-temporal CPU suites/strictClippy, consumers, wasm/lean dependency checks",
+    "Exact narrowed four-program offline recook",
+    "Current composition bounded device checks and Claude rendered review as relevant"
+  ],
+  "correction": "18% MASK detail is retained detail relative to reference, not an 18% reduction; preserve producer report metric precisely",
+  "limits": [
+    "Explicit opt-in fixed mode only; no default quality acceptance",
+    "No upscaling/MetalFX/phone/performance/phase gate",
+    "Prior e237 GPU execution remains producer scoped until current composition qualification"
+  ]
+}

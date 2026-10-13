@@ -1,4 +1,4 @@
-// Unjittered, top-left normalized opaque-surface motion. No color accumulation.
+// Top-left normalized opaque-surface motion; temporal projections include jitter.
 struct Frame { current:mat4x4f, previous:mat4x4f, rect:vec4f }
 struct Material { base:vec4f, emissive_roughness:vec4f, factors:vec4f, flags:vec4u }
 @group(0) @binding(0) var<uniform> frame:Frame;
@@ -21,10 +21,14 @@ struct Output {
     out.previous=frame.previous*mat4x4f(p0,p1,p2,p3)*vec4f(old_position,1);
     out.uv=uv;out.valid=valid.x;return out;
 }
-@fragment fn fragment(in:Output)->@location(0) vec4f {
+fn mask(in:Output) {
     // Match canonical MASK UV sampling, multiplier, cutoff and derivative order.
     let base=material.base*textureSample(base_map,base_sampler,in.uv);
     if material.flags.x==1u && base.a<material.factors.w { discard; }
+}
+@fragment fn depth_only(in:Output) {mask(in);}
+@fragment fn fragment(in:Output)->@location(0) vec4f {
+    mask(in);
     // Comparisons also reject NaN; w and all homogeneous coordinates are bounded.
     if in.valid==0 || !(in.previous.w>0) || !all(abs(in.previous)<=vec4f(3.402823e38)) { return vec4f(0); }
     let old=in.previous.xyz/in.previous.w;
