@@ -87,8 +87,9 @@ library Clippy runs, snapshot all-target Clippy, wasm default/construction build
 std-only and ordinary-runtime graphs, 31 Python guards, scoped formatting and
 convention checks passed. All source001 compiled inputs stayed unchanged. Four
 executed native binaries are retained with executable mode; no blanket vendored
-all-target lint or GPU claim is made. Final independent evidence review remains
-pending.
+all-target lint or GPU claim is made. The original producer final review is now accepted; the unchanged receipt is
+retained in [the current intake](evidence/physics-native-broad-main236/producer-final-root.json).
+This acceptance applies to the original producer; current-main qualification is separate.
 
 The [lossless evidence manifest](evidence/physics-native-broad-construction.json)
 retains raw commands, logs, source copies, map-layout references, mode/fixture
