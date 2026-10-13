@@ -1,0 +1,31 @@
+{
+  "at": "2026-10-13T10:32:43.664956+00:00",
+  "rows": [
+    {
+      "tool": "lease.py",
+      "step": "acquire",
+      "exit": 0
+    },
+    {
+      "tool": "build.py",
+      "step": "checkout",
+      "exit": 0
+    },
+    {
+      "tool": "build.py",
+      "step": "toolchain",
+      "exit": 0
+    },
+    {
+      "tool": "build.py",
+      "step": "review",
+      "exit": 0
+    },
+    {
+      "tool": "build.py",
+      "step": "lint",
+      "exit": 0
+    }
+  ],
+  "exit": 0
+}

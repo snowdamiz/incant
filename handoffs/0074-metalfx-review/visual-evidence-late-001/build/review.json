@@ -1,0 +1,179 @@
+{
+ "tools": {
+  "head": "9998e60c82c9e743fc6e0de25ea5b8f287909bde",
+  "visual_tree": "f969965830eeec23640d63c75923eac48fd38295",
+  "plan_sha256": "79d6bcafb0392b0dae3fc65605b238a733dc6a26b676800024b33fdd05f15fa0",
+  "helper_sha256": "4ec5d81c94af3f48b9c3f249f99df4cb128ad1ee22ce225df9b00caf3a45b45f"
+ },
+ "source": {
+  "commit": "077f7c39c0f4122aae36ea3a88537be006722822",
+  "tree": "408c4bb2948983cfde980fa40c31f443b5d78a0c",
+  "files": 18088,
+  "manifest_sha256": "c5d7899d593540ae876ec3cf460b1fd1bae6735d23a06f035fa5c188111942b5",
+  "helper_copy_sha256": "4ec5d81c94af3f48b9c3f249f99df4cb128ad1ee22ce225df9b00caf3a45b45f"
+ },
+ "helper_sha256": "4ec5d81c94af3f48b9c3f249f99df4cb128ad1ee22ce225df9b00caf3a45b45f",
+ "helper_copy": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-late-001/checkout/crates/incant_render/tests/metalfx_visual_review.rs",
+ "frozen": {
+  "metalfx_visual_review": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-late-001/bin/review/metalfx_visual_review",
+   "sha256": "41929cf53ff1ad825582b99d77f09807163a64066f05d49ce1ca70326f803a15",
+   "bytes": 18801368,
+   "mode": "0o555",
+   "built_from": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/metalfx_visual_review-c6bd6524509f3bfc",
+   "fresh": false,
+   "features": [
+    "cooked-clusters",
+    "cooked-geometry",
+    "cooked-materials",
+    "cooked-output",
+    "cooked-sprites",
+    "cooked-temporal",
+    "cooked-text",
+    "cooked-ui",
+    "default",
+    "native-metalfx",
+    "physics-deterministic"
+   ],
+   "package_id": "path+file:///Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-late-001/checkout/crates/incant_render#0.0.1"
+  }
+ },
+ "granted_features": [
+  "cooked-temporal",
+  "native-metalfx"
+ ],
+ "library_features_admitted": true,
+ "incant_render_library": [
+  {
+   "target": "incant_render",
+   "kind": [
+    "lib"
+   ],
+   "test": false,
+   "fresh": false,
+   "executable": null,
+   "features": [
+    "cooked-clusters",
+    "cooked-geometry",
+    "cooked-materials",
+    "cooked-output",
+    "cooked-sprites",
+    "cooked-temporal",
+    "cooked-text",
+    "cooked-ui",
+    "default",
+    "native-metalfx",
+    "physics-deterministic"
+   ],
+   "package_id": "path+file:///Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-late-001/checkout/crates/incant_render#0.0.1",
+   "filenames": {
+    "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/libincant_render-b43e550741207c7b.rlib": "86e6a16432bfeebb8a54612a1481f5a7ece3818bf918721e7ac905bc5d21215a",
+    "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/libincant_render-b43e550741207c7b.rmeta": "62a7fd1c9ada11ddd8230a5a0a80b1580a2f8490a1da75ee25950985a1ed3faa"
+   }
+  }
+ ],
+ "builds": [
+  {
+   "label": "review",
+   "kind": "build",
+   "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-late-001/checkout/tools/cargo",
+    "test",
+    "-p",
+    "incant_render",
+    "--test",
+    "metalfx_visual_review",
+    "--no-run",
+    "--features",
+    "cooked-temporal,native-metalfx",
+    "--locked",
+    "--offline",
+    "--profile",
+    "ci",
+    "-j2",
+    "--message-format=json-render-diagnostics"
+   ],
+   "cwd": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-late-001/checkout",
+   "env": {
+    "inherited_keys_values_not_recorded": [
+     "HOME"
+    ],
+    "overrides": {
+     "PATH": "/opt/homebrew/opt/rustup/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+     "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+     "TMPDIR": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-late-001/tmp/review",
+     "CARGO_TERM_COLOR": "never",
+     "RUSTUP_AUTO_INSTALL": "0"
+    }
+   },
+   "pid": 53704,
+   "started": "2026-10-13T10:32:34.418749+00:00",
+   "ended": "2026-10-13T10:32:41.001151+00:00",
+   "exit": 0,
+   "timed_out": false,
+   "wait_error": null,
+   "timeout_s": 2700,
+   "group_empty_after": true,
+   "stdout": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-late-001/logs/build-review.stdout.jsonl",
+   "stdout_sha256": "a6394d7ff6e2e114147063ec46ae7fec4eaf5136fc43a74022f94c68f02a6411",
+   "stderr": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-late-001/logs/build-review.stderr.txt",
+   "stderr_sha256": "904477e3212730dc8550c9e51136f9faa12358bd82e451162ba5388796018802",
+   "artifacts": [
+    {
+     "target": "incant_render",
+     "kind": [
+      "lib"
+     ],
+     "test": false,
+     "fresh": false,
+     "executable": null,
+     "features": [
+      "cooked-clusters",
+      "cooked-geometry",
+      "cooked-materials",
+      "cooked-output",
+      "cooked-sprites",
+      "cooked-temporal",
+      "cooked-text",
+      "cooked-ui",
+      "default",
+      "native-metalfx",
+      "physics-deterministic"
+     ],
+     "package_id": "path+file:///Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-late-001/checkout/crates/incant_render#0.0.1",
+     "filenames": {
+      "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/libincant_render-b43e550741207c7b.rlib": "86e6a16432bfeebb8a54612a1481f5a7ece3818bf918721e7ac905bc5d21215a",
+      "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/libincant_render-b43e550741207c7b.rmeta": "62a7fd1c9ada11ddd8230a5a0a80b1580a2f8490a1da75ee25950985a1ed3faa"
+     }
+    },
+    {
+     "target": "metalfx_visual_review",
+     "kind": [
+      "test"
+     ],
+     "test": true,
+     "fresh": false,
+     "executable": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/metalfx_visual_review-c6bd6524509f3bfc",
+     "features": [
+      "cooked-clusters",
+      "cooked-geometry",
+      "cooked-materials",
+      "cooked-output",
+      "cooked-sprites",
+      "cooked-temporal",
+      "cooked-text",
+      "cooked-ui",
+      "default",
+      "native-metalfx",
+      "physics-deterministic"
+     ],
+     "package_id": "path+file:///Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-late-001/checkout/crates/incant_render#0.0.1",
+     "filenames": {
+      "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/metalfx_visual_review-c6bd6524509f3bfc": "41929cf53ff1ad825582b99d77f09807163a64066f05d49ce1ca70326f803a15"
+     }
+    }
+   ]
+  }
+ ],
+ "recorded": "2026-10-13T10:32:41.039676+00:00"
+}

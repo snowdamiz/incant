@@ -1,0 +1,23 @@
+{
+ "packet": "0074-metalfx-review",
+ "stage": "metalfx-late",
+ "released_at": "2026-10-13T10:36:19.818678+00:00",
+ "children": 5,
+ "gpu_children": 3,
+ "stopped": null,
+ "debited": {
+  "frames": 126,
+  "ui_submissions": 0,
+  "pngs": 15
+ },
+ "debits": 2,
+ "frames_rendered": 126,
+ "ui_submissions": 0,
+ "pngs_written": 15,
+ "ledger_sha256": "d3bbc5e531f706463d556764b7e30f0873cb43e5befd7a0451378a375cac53c7",
+ "budget_sha256": "9b7f5b4b20a54311cc6e5a79d38a67ff1c4553b8846913dc28d633d104c6568d",
+ "grant_sha256_at_release": "ac949af2086e84c40a10da92bb0cca1972166d78fb351ab0596c7c652f6aac66",
+ "owned_processes": [],
+ "ledger_pids_alive": [],
+ "note": "GPU released for root; review-ready.json untouched. Run lease.py release next."
+}

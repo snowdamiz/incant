@@ -957,3 +957,76 @@ sections of this file are unchanged.
   - No GPU lock, lease, target, evidence-directory write, memory write, push or PR.
   - Root's `brief.md` is left uncommitted.
   - No background processes remain.
+
+## Native late-frame execution and coverage design follow-up (2026-10-13)
+
+**Status: executed once under root's `metalfx-late` grant. Numerical and contract
+verdict: PASS. Appearance is judged separately in `native-late-execution.md`.** The
+GPU and the target are both released. The numerical design follow-up is in
+`native-coverage-repair-addendum.md`. I made no build, lint, source, helper, plan or
+grant change, and ran no retries.
+
+- **Model and effort:** Claude Opus 5.5 (`claude-opus-5-5`), thinking effort max.
+  Line 2 of root's ACP log `claude-0074-native-late-execution-acp.log` reads "Claude
+  session verified: Opus 5.5; thinking: max". No subagents were used.
+- **Verified before device work:**
+  - root receipt `949c2f9d…`, with its source, build and lint records;
+  - grant `ac949af2…`, with visual tree `f9699658…` equal to HEAD's;
+  - binary `41929cf5…` on disk;
+  - the held lease;
+  - 0072's release at 10:04:19Z.
+- **Run (10:35:57–10:36:13Z):**
+  - `list review` showed only `late_motion` and `late_stationary`.
+  - `late_stationary` (75 frames, 8 PNGs) and `late_motion` (51 frames, 7 PNGs) both
+    exited 0, and all 14 checks are true.
+  - GPU released at 10:36:19.8Z and lease at 10:36:19.9Z; no owned processes.
+  - `analyze.py check` passed (`5cb0cdaf…`), and publish wrote
+    `visual-screenshots-late-001/` (manifest `8c846d19…`).
+- **Results:**
+  - **Selection:** MetalFX at 16/16, 12/16 and 8/16 in every native frame.
+  - **Interiors:** converged by frame 8.
+  - **Striation:** the 50% reset striation reproduces at the reset frame (0.546) and
+    is gone by frame 8 (0.075), staying there at frame 16 (0.122). The same column
+    structure is in single unaccumulated renders (off 0.425, off 8/16 0.541,
+    current-only 0.309). It is reset-frame input, not a lasting artifact.
+  - **Silhouettes:** horizon, posts, grille and outlines at 75% and 50% do not
+    improve from the reset frame to frame 16. At 8/16 they match portable (edge
+    difference 2.98), and 32.6% of edge pixels equal current-only. That is the
+    shared boundary policy; it is not fixed, and reduced-resolution silhouette
+    quality is not accepted.
+  - **Motion:** no lag and no trail; mild lag at the edge of the moving shadow.
+  - **Cross-run binding:** the 16/16 off reference is byte-identical to 002's
+    `off-b`. The 8/16 off reference is not (`1730684b…` against `ea8f6b94…`), and is
+    recorded as unattributed.
+- **Evidence:** `visual-evidence-late-001/` holds 21 records copied losslessly; its
+  manifest `16492522…` lists 19 hash-only files and 6 inspection aids.
+- **Design follow-up (`native-coverage-repair-addendum.md`):**
+  - **Conventions:** verified directly in source (prelude, jitter, motion, and that
+    `pack` removes both jitters). The runtime tolerances are `TemporalConfig`'s
+    0.05/0.02, not the oracle's constants.
+  - **Uniform fractional class:** added.
+  - **Model:** `coverage-model/model.py` (`c1ed1a77…`), results `432c1e29…`.
+    - The committed rule ghosts when a new nearby edge is present: 0.709 → 0.200
+      excess opacity at 16/16, 0.810 → 0.143 at 8/16.
+    - Its per-frame clamp erases a 0.8 px wire at 8/16 (0073's V3).
+    - EMA 0.9 deviates from the uniform 8-phase coverage by up to 0.042 in steady
+      state and 0.074 at frame 16, with the worst trajectory retained.
+  - **Proposed owner-depth admission (R1a):**
+    - no new-edge ghost;
+    - bounded residuals for owners within the depth tolerance;
+    - thin features missed by a phase stay at today's current-only behaviour.
+  - **Exact separation:** requires owner IDs with a per-frame changed set.
+  - **Memory:** 8 B/px history needs +64 MiB of transition budget at the maximum
+    extent. Root decides.
+- **Screenshots:** `visual-screenshots-late-001/`, 15 PNGs at 960×540, all inspected
+  personally.
+- **Limitations:**
+  - "Late" means 16 frames.
+  - One device, offscreen only.
+  - The model covers 1D bars only.
+  - No phone, performance or phase claims.
+- **Transients and process state:**
+  - `/tmp/0074-late-inspect/` was removed.
+  - No memory writes, credentials, push, PR or shared refs.
+  - Root's `brief.md` is left uncommitted.
+  - No background processes remain.

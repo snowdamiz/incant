@@ -1,0 +1,80 @@
+{
+ "packet": "0074-metalfx-review",
+ "stage": "metalfx-late",
+ "holder": "Root/astra supervises CPU build; Claude Opus 5.5 Max later executes GPU after root scheduling",
+ "target_dir": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+ "assigned_by": "root via review-ready.json",
+ "grant_sha256": "ac949af2086e84c40a10da92bb0cca1972166d78fb351ab0596c7c652f6aac66",
+ "grant": {
+  "packet": "0074-metalfx-review",
+  "stage": "metalfx-late",
+  "source_commit": "077f7c39c0f4122aae36ea3a88537be006722822",
+  "source_tree": "408c4bb2948983cfde980fa40c31f443b5d78a0c",
+  "source_freeze": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/metalfx-scale-correction-001/committed-build-source.json",
+   "sha256": "62db43cb2b769b89fde5431c776fc6d89ca670d67ae87ff7317ac1e75f2f33a9"
+  },
+  "features": [
+   "cooked-temporal",
+   "native-metalfx"
+  ],
+  "visual_tree": "f969965830eeec23640d63c75923eac48fd38295",
+  "target": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+  "holder": "Root/astra supervises CPU build; Claude Opus 5.5 Max later executes GPU after root scheduling",
+  "prior_build_release_path": "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-coverage-001/target-lease.json",
+  "prior_build_release_sha256": "ffdee29b69dae973213488d1cce3e2cdd0ad890cd99d9ca4170ded68bd00d3d7",
+  "root_review": {
+   "path": "/Users/andreyyurlov/.codex/incant-reviews/0074-late-helper-root-20261013.json",
+   "sha256": "b76c97969f7fe1d7451fe5301879c60cb7dc9ed2619f8f5d48e5b048f101bdd4"
+  },
+  "schedule": "Root CPU supervision only now. Claude may use GPU only after fresh root brief. Hold stage/target lease on successful build; cleanupGPU andtarget onfailure.",
+  "prior_gpu_release_path": "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-coverage-001/gpu-released.json",
+  "prior_gpu_release_sha256": "730249ba0e64a0f430e3a092b505d2f14b0b37cd8cac33f4a7c3c3ff0340a680"
+ },
+ "prior_receipts": {
+  "pins": {
+   "build_release": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-coverage-001/target-lease.json",
+    "expected": "ffdee29b69dae973213488d1cce3e2cdd0ad890cd99d9ca4170ded68bd00d3d7",
+    "sha256": "ffdee29b69dae973213488d1cce3e2cdd0ad890cd99d9ca4170ded68bd00d3d7"
+   },
+   "gpu_release": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-coverage-001/gpu-released.json",
+    "expected": "730249ba0e64a0f430e3a092b505d2f14b0b37cd8cac33f4a7c3c3ff0340a680",
+    "sha256": "730249ba0e64a0f430e3a092b505d2f14b0b37cd8cac33f4a7c3c3ff0340a680"
+   }
+  },
+  "release_alive_fields": {
+   "build_release": {
+    "processes_on_target_at_release": []
+   },
+   "gpu_release": {
+    "owned_processes": [],
+    "ledger_pids_alive": []
+   }
+  }
+ },
+ "tools": {
+  "head": "9998e60c82c9e743fc6e0de25ea5b8f287909bde",
+  "visual_tree": "f969965830eeec23640d63c75923eac48fd38295",
+  "plan_sha256": "79d6bcafb0392b0dae3fc65605b238a733dc6a26b676800024b33fdd05f15fa0",
+  "helper_sha256": "4ec5d81c94af3f48b9c3f249f99df4cb128ad1ee22ce225df9b00caf3a45b45f"
+ },
+ "brief_sha256": "68e9d9ea4203c435c56bd8bfcc84032a8cbd13dc9fe57fb4454ddc2118fd257d",
+ "worktree": "/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant/.worktrees/0074-metalfx-review",
+ "child_checkout": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-late-001/checkout",
+ "acquired_at": "2026-10-13T10:32:25.833042+00:00",
+ "processes_on_target_at_acquire": [],
+ "rules": [
+  "./tools/cargo only, --locked --offline --profile ci -j2, granted features only",
+  "builds from the git-archive child checkout of the granted combined source only",
+  "one bounded process group at a time under the packet flock",
+  "GPU children only under the global native-gpu.lock, budget debited first",
+  "one serial offscreen child per case; no window, desktop capture, audio or accounts",
+  "<= 128 new submissions including UI (<= 960x540), <= 20 PNGs; no retry",
+  "binaries and evidence only under /Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-late-001"
+ ],
+ "released_at": "2026-10-13T10:36:19.873844+00:00",
+ "processes_on_target_at_release": [],
+ "release_note": "No 0074 stage B cargo/rustc process or frozen binary remains on the target. Contents left as warm cache; nothing deleted."
+}

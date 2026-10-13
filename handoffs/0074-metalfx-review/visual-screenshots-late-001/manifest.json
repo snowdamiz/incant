@@ -1,0 +1,101 @@
+{
+ "grant_sha256": "ac949af2086e84c40a10da92bb0cca1972166d78fb351ab0596c7c652f6aac66",
+ "visual_tree": "f969965830eeec23640d63c75923eac48fd38295",
+ "analysis": {
+  "path": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-late-001/analysis/analysis-2026-10-13T103626.261649+0000.json",
+  "sha256": "5cb0cdaf460a4745d6d449e03b7c2fd6cfcfe29bb5e99b2a2c27f1dc6f34e09c"
+ },
+ "pngs": [
+  {
+   "case": "late_stationary",
+   "name": "late-stationary-native12-f01.png",
+   "sha256": "49711f4869e761727ad8847a31697e571f2c7a979badd99b9debaee057fd4326",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-late-001/captures/late_stationary/late-stationary-native12-f01.png"
+  },
+  {
+   "case": "late_stationary",
+   "name": "late-stationary-native12-f08.png",
+   "sha256": "b511a09303bf7fa126f4cf6dcb994e2034f27e21d9770cf0777e3e3d313c8d31",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-late-001/captures/late_stationary/late-stationary-native12-f08.png"
+  },
+  {
+   "case": "late_stationary",
+   "name": "late-stationary-native12-f16.png",
+   "sha256": "9fce0db6cb8f2165906fe473f7c8d8028db46a7cdb9d8cf2016d74519466ac3b",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-late-001/captures/late_stationary/late-stationary-native12-f16.png"
+  },
+  {
+   "case": "late_stationary",
+   "name": "late-stationary-native16-f16.png",
+   "sha256": "795eb9806d8c4d588bd76e524405ad482e3724667684813d58bdc8e354e5d04e",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-late-001/captures/late_stationary/late-stationary-native16-f16.png"
+  },
+  {
+   "case": "late_stationary",
+   "name": "late-stationary-native8-f01.png",
+   "sha256": "08476ed6c2a743e434096af2c57a29ea49a73be9a0799ad1dac809a8676d955a",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-late-001/captures/late_stationary/late-stationary-native8-f01.png"
+  },
+  {
+   "case": "late_stationary",
+   "name": "late-stationary-native8-f08.png",
+   "sha256": "e099c4e2b04704e5f1e51f0421a676ebc94a61bf07130e9eb5a3b3f718170a7f",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-late-001/captures/late_stationary/late-stationary-native8-f08.png"
+  },
+  {
+   "case": "late_stationary",
+   "name": "late-stationary-native8-f16.png",
+   "sha256": "ece8f853f61dc7bbe69115a9bc8e378d2e8a32e5d72aeac7dc80f1b7276c4cf2",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-late-001/captures/late_stationary/late-stationary-native8-f16.png"
+  },
+  {
+   "case": "late_stationary",
+   "name": "late-stationary-portable8-f16.png",
+   "sha256": "95020a35ef55e65834b65bb302dfe4c9b8a28082bb0927695f37c8e731b4b9ea",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-late-001/captures/late_stationary/late-stationary-portable8-f16.png"
+  },
+  {
+   "case": "late_motion",
+   "name": "late-motion-native12-f01.png",
+   "sha256": "c13654497eff5c5ca40acf5979ce8add10be01ffe54898a3cc4544b7f3d5f585",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-late-001/captures/late_motion/late-motion-native12-f01.png"
+  },
+  {
+   "case": "late_motion",
+   "name": "late-motion-native12-f08.png",
+   "sha256": "5f2079ad291ab246e3ff1cc9dc8ef3e1f052622531dd5a7d7cf96b9df7277dbf",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-late-001/captures/late_motion/late-motion-native12-f08.png"
+  },
+  {
+   "case": "late_motion",
+   "name": "late-motion-native12-f16.png",
+   "sha256": "3a4066fec5f6c273b81c6bcfa78919597d8628d3a48dbb2dc6aea9a1920ee7dd",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-late-001/captures/late_motion/late-motion-native12-f16.png"
+  },
+  {
+   "case": "late_motion",
+   "name": "late-motion-native8-f01.png",
+   "sha256": "1cbfe3e61969ee443b0cd4bce5702e62850670ef76ae233f3ac550e58741cff5",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-late-001/captures/late_motion/late-motion-native8-f01.png"
+  },
+  {
+   "case": "late_motion",
+   "name": "late-motion-native8-f08.png",
+   "sha256": "a11e63683a7b2973623662efe540f3cb99e909245c67dd61ea935de7ec5bde8c",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-late-001/captures/late_motion/late-motion-native8-f08.png"
+  },
+  {
+   "case": "late_motion",
+   "name": "late-motion-native8-f16.png",
+   "sha256": "66bc74866d664c74ffb64d9a9bb32b6d75a3dc65b2780e2b3bb2011ddf249c2c",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-late-001/captures/late_motion/late-motion-native8-f16.png"
+  },
+  {
+   "case": "late_motion",
+   "name": "late-motion-off-f16.png",
+   "sha256": "32a67bab92512e7b3ae657f42f04c694cd95a2b2586ea527f587e0e19333d003",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-late-001/captures/late_motion/late-motion-off-f16.png"
+  }
+ ],
+ "recorded": "2026-10-13T10:39:33.299799+00:00"
+}
