@@ -1,0 +1,40 @@
+{
+  "schema": "incant-integration-final-review-v1",
+  "at": "2026-10-13T18:50:48.458247+00:00",
+  "reviewer": "astra-root",
+  "decision": "accepted_for_scoped_pr_and_merge_after_required_checks",
+  "head": "cac94a07a415bf4ee53d0479bee7de16f16101ff",
+  "main": "e281fe7456c7fbb85349e109fcdff3643c701256",
+  "manifest_sha256": "3b848269d880b2b99d4935d35d88b0fe72e62007dd3251026f7f56cb52da960e",
+  "source_review_sha256": "f2e0d9d13cad69ae283a0049a71ffd082a99d3bd6b6735affc74326463eb3569",
+  "verification": {
+    "command": "physics-native-world-main241-001/verify.py --verify-only",
+    "exit": 0,
+    "checks": 28,
+    "modes": [
+      "default",
+      "fast8"
+    ],
+    "snapshot_passed_each": 227,
+    "native_passed_each": 138,
+    "inputs": 3699,
+    "source_files": 174,
+    "source_copies": 1532,
+    "root_package_identities": 968,
+    "world_steps_each": 176,
+    "archive_records": 1832,
+    "archive_payloads": 576
+  },
+  "windows_ssao_portable_verification": {
+    "exit": 0,
+    "run": 38446691046,
+    "head": "e281fe7456c7fbb85349e109fcdff3643c701256",
+    "strict_projections": 2,
+    "records": 10
+  },
+  "limits": [
+    "Private native primitive-world construction only; production capture and persisted public restoration remain unfinished.",
+    "Older source002 producer executable hashes were not retained; corrected archive binds four final source003 executables only.",
+    "No phone performance result, phase gate approval or release promotion implied."
+  ]
+}

@@ -365,3 +365,7 @@ impl CCDSolver {
         }
     }
 }
+
+#[cfg(feature = "incant-checked-restore")]
+#[path = "ccd_checkpoint.rs"]
+mod checkpoint;

@@ -105,3 +105,9 @@ mod tests {
         assert_eq!(a.data, b.data);
     }
 }
+
+impl<T> Coarena<T> {
+    pub(crate) fn checkpoint_no_rows(&self) -> bool {
+        self.data.is_empty()
+    }
+}

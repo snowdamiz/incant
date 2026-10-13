@@ -188,3 +188,36 @@ mod tests {
         assert_eq!(a.iter().map(|(_, v)| *v).collect::<Vec<_>>(), [7, 11]);
     }
 }
+
+impl<T> Arena<T> {
+    // Exact native new() storage, not merely len()==0. Used only for the
+    // explicitly unsupported joint/soft families, which must have no history.
+    pub(crate) fn checkpoint_pristine_empty(&self) -> bool {
+        self.len == 0
+            && self.generation == 0
+            && self.free_list_head == Some(0)
+            && self.items.len() == DEFAULT_CAPACITY
+            && self.items.iter().enumerate().all(|(i, e)| {
+                matches!(e,
+                Entry::Free { next_free } if *next_free ==
+                    (i + 1 < DEFAULT_CAPACITY).then_some((i + 1) as u32))
+            })
+    }
+    pub(crate) fn checkpoint_empty_plan() -> ConstructionResult<AllocationPlan> {
+        AllocationPlan::array::<Entry<T>>(DEFAULT_CAPACITY)
+    }
+    pub(crate) fn checkpoint_empty(permit: &mut AllocationPermit) -> ConstructionResult<Self> {
+        let mut items = permit.vector(DEFAULT_CAPACITY)?;
+        for i in 0..DEFAULT_CAPACITY {
+            items.push(Entry::Free {
+                next_free: (i + 1 < DEFAULT_CAPACITY).then_some((i + 1) as u32),
+            });
+        }
+        Ok(Self {
+            items,
+            generation: 0,
+            free_list_head: Some(0),
+            len: 0,
+        })
+    }
+}
