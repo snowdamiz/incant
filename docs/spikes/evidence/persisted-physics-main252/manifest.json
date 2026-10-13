@@ -1,0 +1,83 @@
+{
+  "schema": 1,
+  "qualification": {
+    "path": "docs/spikes/evidence/persisted-physics-main252/qualification.json",
+    "sha256": "1a8935dd137407acc7649a768b2ac6fcc9a3bb6642feec46cd4d1c5dc73263cc",
+    "bytes": 23453
+  },
+  "archive": {
+    "path": "docs/spikes/evidence/persisted-physics-main252/records.json.gz",
+    "sha256": "f39eb3ef0fe36ac3f77cef51840211854ca97f33d8915e9ae91296532038c728",
+    "bytes": 170283
+  },
+  "records": 20,
+  "reviews": [
+    {
+      "path": "docs/spikes/evidence/persisted-physics-main252/physics-native-persisted-final-independent-20261013.json",
+      "sha256": "69be1b897d47a1577605c60f3c420d4277eb4933b7f3c60d4b2f7e063bf60ac2",
+      "bytes": 4543
+    },
+    {
+      "path": "docs/spikes/evidence/persisted-physics-main252/physics-persisted-outer-final-root-20261013.json",
+      "sha256": "a572de2897d2572ff5ec09958310e9645f677e4063e757eadfbc336f3d7391db",
+      "bytes": 1518
+    },
+    {
+      "path": "docs/spikes/evidence/persisted-physics-main252/persisted-game-checkpoints-final-independent-20261013.json",
+      "sha256": "c66f0f4dc8335d9a4b987a23b7b257486ae1118361e16b22dc406ce12f575ae4",
+      "bytes": 5101
+    }
+  ],
+  "producer_manifests": [
+    {
+      "path": "docs/spikes/evidence/physics-native-persisted/manifest.json",
+      "sha256": "a57f132bd4bfdd623006e7950cb295775b3d8924002651a2453f4037b6f971c7",
+      "bytes": 5072608
+    },
+    {
+      "path": "docs/spikes/evidence/physics-persisted-outer/manifest.json",
+      "sha256": "3569bcaede6a157cd2d4d5201dc12f0f00ed476ed2ee9c089fd33a1f00a852d4",
+      "bytes": 12033
+    },
+    {
+      "path": "docs/spikes/evidence/persisted-game-checkpoints/manifest.json",
+      "sha256": "683211ffa7671700b487469b0f1fb92266defb3ad9c031b944303efc8c4cfe89",
+      "bytes": 52418
+    }
+  ],
+  "producer_collectors": [
+    {
+      "path": "tools/probes/physics-native-persisted/collect.py",
+      "sha256": "23f54e1fef7a5b41c9a4e11ffa43004239afd8fa4012f15c231787d112617c5d",
+      "bytes": 13172
+    },
+    {
+      "path": "tools/probes/persisted-game-checkpoints/collect.py",
+      "sha256": "42d412b79e475091e1793d60ba84a743b3063b707fbce2d55e9b068a4140a6b6",
+      "bytes": 9829
+    }
+  ],
+  "producer_archives": [
+    {
+      "path": "docs/spikes/evidence/physics-native-persisted/evidence.tar.gz",
+      "sha256": "85a8806bdce8c6ba7a4c6eb37237adaebed88ac91346189e6cf6def993a39575",
+      "bytes": 4908540
+    },
+    {
+      "path": "docs/spikes/evidence/physics-persisted-outer/records.json.gz",
+      "sha256": "a5a91fdad859698dbb22764ff269be756cd0efcea027abee5e37e39f9117b941",
+      "bytes": 826112
+    },
+    {
+      "path": "docs/spikes/evidence/persisted-game-checkpoints/records.json.gz",
+      "sha256": "3126eddbe9ae352cba39c5da6e1e92e0583998bb4518659e21dc379c1945f2db",
+      "bytes": 14568589
+    }
+  ],
+  "review_status": "Current-main final independent review pending; all producer source/final packets accepted.",
+  "verifier": {
+    "path": "docs/spikes/evidence/persisted-physics-main252/verify.py",
+    "sha256": "eb5d4abad00b9b5e1b875f0257159bb05fb2e8c6ed1d0035e227d03d8f5ba315",
+    "bytes": 6427
+  }
+}
