@@ -89,7 +89,7 @@ def plan_checks(p):
             and 0 <= config["reactive_strength"] <= 1),
         "expected_backend_metal": p["expected_backend"] == "Metal",
         "new_evidence_namespace": p["evidence_namespace"] == str(c.EVIDENCE)
-        and c.EVIDENCE.name == "0072-fixed-sharpness-001" and c.GRANT.parent == c.EVIDENCE
+        and c.EVIDENCE.name == "0072-fixed-sharpness-002" and c.GRANT.parent == c.EVIDENCE
         and c.BUILD_GRANT.parent == c.EVIDENCE,
         "new_stages": (p["stage"], p["build_stage"]) == (c.STAGE, c.BUILD_STAGE)
         == ("fixed-sharpness-visual", "fixed-sharpness-build"),

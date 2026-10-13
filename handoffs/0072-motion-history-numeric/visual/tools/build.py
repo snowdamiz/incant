@@ -293,6 +293,23 @@ def library(record):
             if a["target"] == "incant_render" and a["kind"] == ["lib"] and not a["test"]]
 
 
+def library_linkage(tested, linked, test_artifacts):
+    """A unit-test target may emit no ordinary rlib. In that case compare the
+    actual unit executable's package/features, never claim binary equivalence.
+    An emitted ordinary library must still match the linked files exactly.
+    """
+    units = [a for a in test_artifacts if a["target"] == "incant_render"
+             and a["kind"] == ["lib"] and a["test"] and a["executable"]]
+    same = None if not tested else (len(tested) == 1 and len(linked) == 1
+                                   and linked[0]["filenames"] == tested[0]["filenames"])
+    features = (len(units) == 1 and len(linked) == 1
+                and units[0]["package_id"] == linked[0]["package_id"]
+                and sorted(units[0]["features"]) == sorted(linked[0]["features"]))
+    return {"same_ordinary_library": same, "same_package_features": features,
+            "valid": features and same is not False,
+            "ordinary_library_emitted_by_unit_build": bool(tested)}
+
+
 def libtests():
     data, _ = c.build_gate()
     tools = c.tools_identity(data)
@@ -330,20 +347,21 @@ def review():
     tests_path = c.BUILD / "tests.json"
     tested = (c.read_json(tests_path)["incant_render_library"]["libtests"]
               if tests_path.exists() else None)
-    same = (None if tested is None else len(tested) == 1 and len(linked) == 1
-            and linked[0]["filenames"] == tested[0]["filenames"])
+    linkage = (None if tested is None else library_linkage(
+        tested, linked, c.read_json(tests_path)["builds"][0]["artifacts"]))
+    same = None if linkage is None else linkage["same_ordinary_library"]
     c.write_new_json(c.BUILD / "review.json", {
         "holder": data["holder"], "build_grant_sha256": c.sha(c.BUILD_GRANT),
         "source_commit": data["source_commit"], "tools": tools, "source": source,
         "source_record_sha256": c.sha(c.BUILD / "source.json"),
         "helper_sha256": c.sha(c.HELPER_SOURCE), "helper_copy": str(destination),
         "frozen": frozen, "incant_render_library": linked,
-        "library_same_as_libtests": same, "builds": [record], "recorded": c.now()})
+        "library_same_as_libtests": same, "library_linkage": linkage, "builds": [record], "recorded": c.now()})
     print(json.dumps({"temporal_visual_review": frozen["temporal_visual_review"]["sha256"],
                       "library_same_as_libtests": same}, indent=1))
-    if same is False:
-        c.latch_stop("review", "the review build did not link the library the library tests use")
-        raise SystemExit("the review build did not reuse the library-tests incant_render library")
+    if linkage is not None and not linkage["valid"]:
+        c.latch_stop("review", "review/unit-test library package, features or emitted bytes differ")
+        raise SystemExit("review/unit-test library linkage failed")
 
 
 def lint():
