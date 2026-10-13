@@ -1,0 +1,275 @@
+{
+  "schema": 1,
+  "original_base": "f1ff28398b0fc023ddb35d7e554e16482fb88b1f",
+  "actual_main": "f300dbc56a79bde82cd6dbaf936216c1955cd892",
+  "frozen_inputs": 3109,
+  "exceptions": [
+    {
+      "path": "crates/incant_physics_snapshot/src/lib.rs",
+      "old_sha256": "6d8d8c760d6d87b5ccd2a87b520530c0090f126edc6311f50c14f4eb83217f8e",
+      "new_sha256": "bdb18050fb2f5bdcf24868159939e746efe2cc8e284ab88661cd9763ee6d6c76",
+      "old_commit": "f1ff28398b0fc023ddb35d7e554e16482fb88b1f",
+      "new_commit": "f300dbc56a79bde82cd6dbaf936216c1955cd892"
+    },
+    {
+      "path": "third_party/rapier2d/INCANT_PATCH.md",
+      "old_sha256": "27c68bac443453d312d10b8ae45775c3c65940480dfe34787e49fc9518f9ba4d",
+      "new_sha256": "b4b08ef530792b4f4e5644b9ff22bd08c0074f10725e86e49266d974e172feb2",
+      "old_commit": "f1ff28398b0fc023ddb35d7e554e16482fb88b1f",
+      "new_commit": "f300dbc56a79bde82cd6dbaf936216c1955cd892"
+    },
+    {
+      "path": "third_party/rapier2d/src/dynamics/ccd/ccd_solver.rs",
+      "old_sha256": "0543f497406c6d404b6b214d42333532bfe97fc07180da2c946d196d60b7fee8",
+      "new_sha256": "059558201eb3437842f2eaf024aa9e29312686b9a00be26984c691fd1acd481d",
+      "old_commit": "f1ff28398b0fc023ddb35d7e554e16482fb88b1f",
+      "new_commit": "f300dbc56a79bde82cd6dbaf936216c1955cd892"
+    },
+    {
+      "path": "third_party/rapier3d/INCANT_PATCH.md",
+      "old_sha256": "27c68bac443453d312d10b8ae45775c3c65940480dfe34787e49fc9518f9ba4d",
+      "new_sha256": "b4b08ef530792b4f4e5644b9ff22bd08c0074f10725e86e49266d974e172feb2",
+      "old_commit": "f1ff28398b0fc023ddb35d7e554e16482fb88b1f",
+      "new_commit": "f300dbc56a79bde82cd6dbaf936216c1955cd892"
+    },
+    {
+      "path": "third_party/rapier3d/src/dynamics/ccd/ccd_solver.rs",
+      "old_sha256": "0543f497406c6d404b6b214d42333532bfe97fc07180da2c946d196d60b7fee8",
+      "new_sha256": "059558201eb3437842f2eaf024aa9e29312686b9a00be26984c691fd1acd481d",
+      "old_commit": "f1ff28398b0fc023ddb35d7e554e16482fb88b1f",
+      "new_commit": "f300dbc56a79bde82cd6dbaf936216c1955cd892"
+    }
+  ],
+  "main_delta": [
+    {
+      "path": "STATUS.md",
+      "old_sha256": "d54f68e740e5359be0d16fd037a5579df3bf562ca85bcfb5a456ec89a65ae433",
+      "new_sha256": "00d8ee051fa347506614e8a1db393777ee4c285fcb2ff75a8cf33123d73fb7ba"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/ccd_state/codec.rs",
+      "old_sha256": null,
+      "new_sha256": "52f66ee5dc350e5c7f0dfefe127def77ed56d3ef3d83a6a45419475d36a013d4"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/ccd_state/mod.rs",
+      "old_sha256": null,
+      "new_sha256": "2208abe0672f6e1c0b345b515a1e72c04135678fa26c9be504e1233a04348679"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/ccd_state/validate.rs",
+      "old_sha256": null,
+      "new_sha256": "c647e1c0e538ea46c36a8dcde63b970fda324ae5617c3915ed54740c5e77ca96"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/integration_config/codec.rs",
+      "old_sha256": null,
+      "new_sha256": "d590d72ce311cd096b4de2c28e749292b1318638965ecb8bf5bcbb1861baa079"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/integration_config/mod.rs",
+      "old_sha256": null,
+      "new_sha256": "5f33cea0b5f77bab0db2816753fdc5fb0a31206573c02e4891c21cb102223e99"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/integration_config/validate.rs",
+      "old_sha256": null,
+      "new_sha256": "029c1d580617c3289df4661eb46016d3c35210ef088aa472f0314446d43ce639"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/lib.rs",
+      "old_sha256": "6d8d8c760d6d87b5ccd2a87b520530c0090f126edc6311f50c14f4eb83217f8e",
+      "new_sha256": "bdb18050fb2f5bdcf24868159939e746efe2cc8e284ab88661cd9763ee6d6c76"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/integration_config.rs",
+      "old_sha256": null,
+      "new_sha256": "c6088a012445849820f0942a08bc9dfebc6aa1ddbde9fc5ba62dfd932bdcc0b6"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/support/ccd_capture.rs",
+      "old_sha256": null,
+      "new_sha256": "ab52fa2ec6eca16efc920e90bea002c2fb90532f29b5a9963a0c7198d2b8e5d9"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/support/integration_fixture.rs",
+      "old_sha256": null,
+      "new_sha256": "8641ae5c9fb720e34c2b238469082406d9b49151b356351df1bfc17022868d1a"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/trusted_ccd.rs",
+      "old_sha256": null,
+      "new_sha256": "d29f6dd22ecd978981948bb06bf0c9d248e1e7c2958aafa61f985b77e65cc112"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/trusted_integration.rs",
+      "old_sha256": null,
+      "new_sha256": "b63ec3b6b6dfcc7f297be348acb6beea7572a2e00f25b691d4a89b3ba3530eb9"
+    },
+    {
+      "path": "docs/spikes/evidence/physics-ccd-main220.json",
+      "old_sha256": null,
+      "new_sha256": "b2b951202f2792294582e0f0e658f20b8c25819abd1c24547755baef68a6fbf0"
+    },
+    {
+      "path": "docs/spikes/evidence/physics-ccd-main220/final-root-review.json",
+      "old_sha256": null,
+      "new_sha256": "c95c5cbf2a771fa6e4429734a4ae6a84b3716415a0f68914b338470d17d81859"
+    },
+    {
+      "path": "docs/spikes/evidence/physics-ccd-main220/freeze.json",
+      "old_sha256": null,
+      "new_sha256": "759ca632e516a6a6a708b60d60162734e18689cd1dc261fbaef3e27d8f8c6bd4"
+    },
+    {
+      "path": "docs/spikes/evidence/physics-ccd-main220/integration-seam.patch.gz",
+      "old_sha256": null,
+      "new_sha256": "711393483c714f1086757c5deeedcb61b46038324e7bce00bd23359509e8aa9c"
+    },
+    {
+      "path": "docs/spikes/evidence/physics-ccd-main220/producer-final-review.json",
+      "old_sha256": null,
+      "new_sha256": "476910a073ebda3a408618bf57acd7ac6123e654953f9f825c98e7a472c9354e"
+    },
+    {
+      "path": "docs/spikes/evidence/physics-ccd-main220/records.json.gz",
+      "old_sha256": null,
+      "new_sha256": "c14113b16841b9c2b3bdc1eb6068c19af062b11388508b6e388547169e568eb4"
+    },
+    {
+      "path": "docs/spikes/evidence/physics-ccd-main220/source-identity.json",
+      "old_sha256": null,
+      "new_sha256": "cc511e72f847da4e4643f8186afe9594e1583165e252c18f58ae4b257ce6a3a9"
+    },
+    {
+      "path": "docs/spikes/evidence/physics-ccd-main220/verify.py",
+      "old_sha256": null,
+      "new_sha256": "634c627dcdbdd841008adf63cf6943c1d5a640e2b6c92f0c3cca644675b00de0"
+    },
+    {
+      "path": "docs/spikes/evidence/physics-integration-config-logs.json.gz",
+      "old_sha256": null,
+      "new_sha256": "20212b20249bf9508bea5e97108ce7d67938db92ce126c4bcdf791c2a1ad5a63"
+    },
+    {
+      "path": "docs/spikes/evidence/physics-integration-config.json",
+      "old_sha256": null,
+      "new_sha256": "bdd1a905095e998f5ddf276826d42e9c94cec045d709de27d58e784ede94a6a3"
+    },
+    {
+      "path": "docs/spikes/physics-ccd-main220.md",
+      "old_sha256": null,
+      "new_sha256": "bffa8aa5b75e15d53239eacd424b7217b67d19c3526a21c9e913ca7cdb6801dc"
+    },
+    {
+      "path": "docs/spikes/physics-integration-config.md",
+      "old_sha256": null,
+      "new_sha256": "8157e0c97ed9ddee2cfd1c3c7c81e3e93177ba6109aac72342e0aa8ef740523b"
+    },
+    {
+      "path": "third_party/rapier2d/INCANT_CCD_CAPTURE.json",
+      "old_sha256": null,
+      "new_sha256": "2b67d0b4d658661d5edc28b7989974910c91d0f08b68d0cbe880fe1f3ab7b637"
+    },
+    {
+      "path": "third_party/rapier2d/INCANT_PATCH.md",
+      "old_sha256": "27c68bac443453d312d10b8ae45775c3c65940480dfe34787e49fc9518f9ba4d",
+      "new_sha256": "b4b08ef530792b4f4e5644b9ff22bd08c0074f10725e86e49266d974e172feb2"
+    },
+    {
+      "path": "third_party/rapier2d/src/dynamics/ccd/ccd_solver.rs",
+      "old_sha256": "0543f497406c6d404b6b214d42333532bfe97fc07180da2c946d196d60b7fee8",
+      "new_sha256": "059558201eb3437842f2eaf024aa9e29312686b9a00be26984c691fd1acd481d"
+    },
+    {
+      "path": "third_party/rapier3d/INCANT_CCD_CAPTURE.json",
+      "old_sha256": null,
+      "new_sha256": "2b67d0b4d658661d5edc28b7989974910c91d0f08b68d0cbe880fe1f3ab7b637"
+    },
+    {
+      "path": "third_party/rapier3d/INCANT_PATCH.md",
+      "old_sha256": "27c68bac443453d312d10b8ae45775c3c65940480dfe34787e49fc9518f9ba4d",
+      "new_sha256": "b4b08ef530792b4f4e5644b9ff22bd08c0074f10725e86e49266d974e172feb2"
+    },
+    {
+      "path": "third_party/rapier3d/src/dynamics/ccd/ccd_solver.rs",
+      "old_sha256": "0543f497406c6d404b6b214d42333532bfe97fc07180da2c946d196d60b7fee8",
+      "new_sha256": "059558201eb3437842f2eaf024aa9e29312686b9a00be26984c691fd1acd481d"
+    }
+  ],
+  "graphs": [
+    {
+      "name": "tested-default",
+      "command": [
+        "cargo",
+        "tree",
+        "--locked",
+        "--offline",
+        "--edges",
+        "normal,build,dev",
+        "--prefix",
+        "none",
+        "--format",
+        "{p} {f}",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host"
+      ],
+      "exit": 0,
+      "sha256": "53c42478cb4ec87d14527db047794a87591c4b68eab89bb0e4a8e4c6179e06c3",
+      "before": "docs/spikes/evidence/bloom-main221/tested-default-before.stdout",
+      "after": "docs/spikes/evidence/bloom-main221/tested-default-after.stdout"
+    },
+    {
+      "name": "tested-cooked",
+      "command": [
+        "cargo",
+        "tree",
+        "--locked",
+        "--offline",
+        "--edges",
+        "normal,build,dev",
+        "--prefix",
+        "none",
+        "--format",
+        "{p} {f}",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host",
+        "--features",
+        "incant_render/cooked-temporal,incant_render/persistent-pipeline-cache"
+      ],
+      "exit": 0,
+      "sha256": "92116bc939045510c6c8eac8d2c9390931a595935d962d7a4964241ab848b33a",
+      "before": "docs/spikes/evidence/bloom-main221/tested-cooked-before.stdout",
+      "after": "docs/spikes/evidence/bloom-main221/tested-cooked-after.stdout"
+    },
+    {
+      "name": "tested-player",
+      "command": [
+        "cargo",
+        "tree",
+        "--locked",
+        "--offline",
+        "--edges",
+        "normal,build,dev",
+        "--prefix",
+        "none",
+        "--format",
+        "{p} {f}",
+        "-p",
+        "incant_game_player",
+        "--features",
+        "incant_game_player/native-window,incant_render/cooked-temporal,incant_render/persistent-pipeline-cache"
+      ],
+      "exit": 0,
+      "sha256": "ea753ccbee211c3f60f46bc0786a5a34a34e5efca67f64ac451e74c0a56d8cb1",
+      "before": "docs/spikes/evidence/bloom-main221/tested-player-before.stdout",
+      "after": "docs/spikes/evidence/bloom-main221/tested-player-after.stdout"
+    }
+  ],
+  "original_verifier_sha256": "f2d19b1a9d1702731d0de2e9e86dcdd76d1af2e692804f412f68a43ac4a6a185",
+  "limits": "Prior CPU/GPU execution remains on frozen bloom source. Actual main221 adds only inert physics and a default-off borrowed getter; the selected all-target graphs and renderer/player/cooker inputs are unchanged. This is source relevance verification, not a fresh build or GPU run."
+}

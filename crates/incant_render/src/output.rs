@@ -35,6 +35,29 @@ fn decode(byte: u8) -> f32 {
 }
 pub(crate) struct OutputPass(HashMap<wgpu::TextureFormat, wgpu::RenderPipeline>);
 impl OutputPass {
+    pub(super) fn bloom(device: &wgpu::Device) -> Self {
+        let module = device.create_shader_module(wgpu::ShaderModuleDescriptor {
+            label: Some("Bloom HDR display transform"),
+            source: wgpu::ShaderSource::Wgsl(crate::bloom::output_source().into()),
+        });
+        let stages = Stages {
+            vertex: module.clone(),
+            fragment: module,
+            vertex_entry: "vertex",
+            fragment_entry: "fragment",
+        };
+        Self(
+            [
+                wgpu::TextureFormat::Rgba8Unorm,
+                wgpu::TextureFormat::Rgba8UnormSrgb,
+                wgpu::TextureFormat::Bgra8Unorm,
+                wgpu::TextureFormat::Bgra8UnormSrgb,
+            ]
+            .into_iter()
+            .map(|format| (format, build(device, &stages, None, format, None)))
+            .collect(),
+        )
+    }
     pub fn new(
         device: &wgpu::Device,
         backend: wgpu::Backend,
@@ -80,6 +103,19 @@ impl OutputPass {
         viewport: Option<Viewport>,
         pixel_grid: Option<[f32; 4]>,
     ) -> Result<OutputDraw> {
+        self.prepare_optional_bloom(device, source, target, format, viewport, pixel_grid, None)
+    }
+    #[allow(clippy::too_many_arguments)]
+    pub(super) fn prepare_optional_bloom(
+        &self,
+        device: &wgpu::Device,
+        source: &wgpu::TextureView,
+        target: &wgpu::TextureView,
+        format: wgpu::TextureFormat,
+        viewport: Option<Viewport>,
+        pixel_grid: Option<[f32; 4]>,
+        bloom: Option<(&wgpu::TextureView, f32, [u32; 2])>,
+    ) -> Result<OutputDraw> {
         let pipeline = self
             .0
             .get(&format)
@@ -111,19 +147,35 @@ impl OutputPass {
             contents: bytemuck::bytes_of(&uniform),
             usage: wgpu::BufferUsages::UNIFORM,
         });
+        let bloom_buffer = bloom.map(|(_, intensity, output)| {
+            device.create_buffer_init(&wgpu::util::BufferInitDescriptor {
+                label: Some("Bloom output gain"),
+                contents: bytemuck::bytes_of(&[intensity, output[0] as f32, output[1] as f32, 0.]),
+                usage: wgpu::BufferUsages::UNIFORM,
+            })
+        });
+        let entries = [
+            wgpu::BindGroupEntry {
+                binding: 0,
+                resource: wgpu::BindingResource::TextureView(source),
+            },
+            wgpu::BindGroupEntry {
+                binding: 1,
+                resource: buffer.as_entire_binding(),
+            },
+            wgpu::BindGroupEntry {
+                binding: 2,
+                resource: wgpu::BindingResource::TextureView(bloom.map_or(source, |b| b.0)),
+            },
+            wgpu::BindGroupEntry {
+                binding: 3,
+                resource: bloom_buffer.as_ref().unwrap_or(&buffer).as_entire_binding(),
+            },
+        ];
         let bindings = device.create_bind_group(&wgpu::BindGroupDescriptor {
             label: Some("HDR output"),
             layout: &pipeline.get_bind_group_layout(0),
-            entries: &[
-                wgpu::BindGroupEntry {
-                    binding: 0,
-                    resource: wgpu::BindingResource::TextureView(source),
-                },
-                wgpu::BindGroupEntry {
-                    binding: 1,
-                    resource: buffer.as_entire_binding(),
-                },
-            ],
+            entries: &entries[..if bloom.is_some() { 4 } else { 2 }],
         });
         Ok(OutputDraw {
             pipeline,
@@ -141,10 +193,10 @@ impl OutputDraw {
     pub fn encode(
         &self,
         encoder: &mut wgpu::CommandEncoder,
-        queries: Option<&crate::timing::PassQueries>,
+        timestamp_writes: Option<wgpu::RenderPassTimestampWrites<'_>>,
     ) {
         let mut pass = encoder.begin_render_pass(&wgpu::RenderPassDescriptor {
-            timestamp_writes: queries.map(|q| q.render()),
+            timestamp_writes,
             label: Some("Tone map scene and compose display backdrop"),
             color_attachments: &[Some(wgpu::RenderPassColorAttachment {
                 view: &self.target,
@@ -186,7 +238,7 @@ fn shader(device: &wgpu::Device, _backend: wgpu::Backend) -> Result<Stages> {
     }
 }
 
-fn build(
+pub(super) fn build(
     device: &wgpu::Device,
     shader: &Stages,
     layout: Option<&wgpu::PipelineLayout>,

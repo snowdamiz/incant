@@ -10,6 +10,16 @@ use std::{
 #[test]
 #[ignore = "requires native GPU; four numeric frames, no images or presentation"]
 fn fixed_history_overlay_depth_and_timestamps_share_real_submissions() {
+    run(false);
+}
+
+#[test]
+#[ignore = "requires native GPU; four bloom/fixed frames, no images or presentation"]
+fn fixed_history_bloom_and_display_timestamps_share_real_submissions() {
+    run(true);
+}
+
+fn run(with_bloom: bool) {
     let temp = tempfile::tempdir().unwrap();
     crate::test_support::model(temp.path(), 0.);
     let path = temp.path().join("triangle.gltf");
@@ -104,6 +114,23 @@ fn fixed_history_overlay_depth_and_timestamps_share_real_submissions() {
         );
         ordinary
     };
+    if with_bloom {
+        let enabled = pollster::block_on(renderer.enable_bloom(crate::Bloom {
+            threshold: 1.,
+            intensity: 0.5,
+            levels: 6,
+        }));
+        if cfg!(all(feature = "cooked-output", not(target_arch = "wasm32"))) {
+            assert_eq!(
+                enabled.unwrap_err().downcast_ref::<crate::BloomError>(),
+                Some(&crate::BloomError::CookedOutput)
+            );
+            assert!(renderer.bloom.is_none());
+        } else {
+            enabled.unwrap();
+            assert!(renderer.bloom.is_some());
+        }
+    }
     pollster::block_on(renderer.enable_temporal_accumulation()).unwrap();
     let mut retained = renderer.prepare_retained(&input, "camera").unwrap();
     retained

@@ -29,6 +29,7 @@ pub(crate) struct PreparedFrame {
     pub temporal: Option<crate::temporal::TemporalDraw>,
     pub sprites: Option<crate::sprites::SpriteDraw>,
     pub text: Option<crate::text::TextDraw>,
+    pub bloom: Option<crate::bloom::BloomDraw>,
     pub output: OutputDraw,
 }
 #[cfg_attr(not(target_arch = "wasm32"), derive(Resource))]
@@ -312,7 +313,14 @@ fn models(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
 }
 fn display(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
     encoder.timed(crate::timing::GpuPass::Display, |e, q| {
-        frame.output.encode(e, q)
+        let bloom_passes = frame.bloom.as_ref().map_or(0, |draw| draw.pass_count());
+        if let Some(draw) = &frame.bloom {
+            draw.encode(e, q);
+        }
+        frame.output.encode(
+            e,
+            q.and_then(|queries| queries.render_range(bloom_passes, bloom_passes + 1)),
+        )
     });
 }
 
