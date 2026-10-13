@@ -1,6 +1,8 @@
 //! Opt-in opaque-surface motion and depth, not temporal color reconstruction.
 //! History belongs to one immediately submitted retained scene, never world ticks.
 pub(crate) mod attachment;
+#[cfg(test)]
+mod camera_history_tests;
 mod draw;
 mod owner;
 mod owner_system;

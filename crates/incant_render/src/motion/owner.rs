@@ -57,8 +57,15 @@ pub struct MotionFrame {
     valid_previous: bool,
     bypassed: bool,
     phase: Option<u32>,
+    camera_static: bool,
 }
 impl MotionFrame {
+    /// Exact camera, shading-eye and source/output framing equality against the
+    /// last accepted temporal frame. False on reset, bypass and DRS transitions.
+    /// This is not a proof that lights, geometry or renderer effects are unchanged.
+    pub fn camera_static(&self) -> bool {
+        self.camera_static
+    }
     /// Present only for temporal accumulation; phase is internal-pixel jitter.
     pub fn jitter_phase(&self) -> Option<u32> {
         self.phase
@@ -91,6 +98,16 @@ struct Accepted {
     frame: MotionFrame,
     extent: Extent,
     matrix: Mat4,
+    camera: Option<CameraSignature>,
+}
+#[derive(Clone, PartialEq, Eq)]
+struct CameraSignature {
+    unjittered: [u32; 16],
+    view: [u32; 16],
+    eye: [u32; 3],
+    forward: [u32; 3],
+    jitter_guard: [u32; 2],
+    shading_eye: [u32; 4],
 }
 pub(super) struct Pending {
     pub frame: MotionFrame,
@@ -98,6 +115,7 @@ pub(super) struct Pending {
     pub previous: Mat4,
     pub previous_jitter_uv: [f32; 2],
     extent: Extent,
+    camera: Option<CameraSignature>,
 }
 impl Default for History {
     fn default() -> Self {
@@ -147,6 +165,7 @@ impl History {
                 valid_previous,
                 bypassed,
                 phase: None,
+                camera_static: false,
             },
             matrix,
             previous_jitter_uv: [0.; 2],
@@ -156,6 +175,7 @@ impl History {
                 matrix
             },
             extent,
+            camera: None,
         })
     }
     pub fn prepare_temporal(
@@ -170,6 +190,26 @@ impl History {
                 .matrix(rect[2] / rect[3])
                 .map_err(|_| MotionError::Projection)?,
         )?;
+        let signature = CameraSignature {
+            unjittered: camera
+                .unjittered()
+                .matrix(rect[2] / rect[3])
+                .map_err(|_| MotionError::Projection)?
+                .to_cols_array()
+                .map(f32::to_bits),
+            view: camera.view.to_cols_array().map(f32::to_bits),
+            eye: camera.eye.to_array().map(f32::to_bits),
+            forward: camera.forward.to_array().map(f32::to_bits),
+            jitter_guard: camera.jitter_guard.map(f32::to_bits),
+            shading_eye: camera.shading_eye().map(f32::to_bits),
+        };
+        // Compatible history can span DRS changes. Unclipped persistence cannot:
+        // source-sized receiver guards can change shadow cascade quantization.
+        pending.frame.camera_static = pending.frame.has_previous()
+            && self.last.as_ref().is_some_and(|old| {
+                old.extent == pending.extent && old.camera.as_ref() == Some(&signature)
+            });
+        pending.camera = Some(signature);
         if pending.frame.has_previous()
             && let Some(old) = &self.last
             && let Some(phase) = old.frame.phase
@@ -212,6 +252,7 @@ impl History {
             frame: pending.frame,
             extent: pending.extent,
             matrix: pending.matrix,
+            camera: pending.camera,
         });
         self.cut = false;
     }

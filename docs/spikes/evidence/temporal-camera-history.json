@@ -1,0 +1,41 @@
+{
+  "schema": 1,
+  "scope": "Accepted camera and framing equality foundation; no shader/history-consumer behavior change. Private upscale ancestry retained, not current-main acceptance.",
+  "base": "4c4310874405f569b60e32a0d8d5f21073546c9d",
+  "source": {
+    "base": "4c4310874405f569b60e32a0d8d5f21073546c9d",
+    "files": [
+      {
+        "path": "crates/incant_render/src/motion/mod.rs",
+        "sha256": "818240fcef679ebc9adf606822b8357339a3c4a1977688d872c35c724c99197e",
+        "bytes": 2152
+      },
+      {
+        "path": "crates/incant_render/src/motion/owner.rs",
+        "sha256": "54f2383d75c9ba9b5952aba8862485eeca0437c4d24824694bedcd9424f35e53",
+        "bytes": 9240
+      },
+      {
+        "path": "crates/incant_render/src/motion/camera_history_tests.rs",
+        "sha256": "f33b2497e11b3ebacc8caa8647bf8246d9d69d364689122c245d11df43e72897",
+        "bytes": 4366
+      }
+    ]
+  },
+  "independent_review_sha256": "b0e07f34c7a04b8deefac259c8419de873cdd5c1d8b8e1e7facc468cf8951aaa",
+  "tests": {
+    "default": {
+      "passed": 146,
+      "ignored_gpu": 41
+    },
+    "cooked_native_metalfx": {
+      "passed": 161,
+      "ignored_gpu": 42
+    }
+  },
+  "archive": {
+    "path": "temporal-camera-history-logs.json.gz",
+    "sha256": "0c36b5d195c43df3f13606ce29a82934c314ba5373f0766d7f00ea871d094757",
+    "records": 17
+  }
+}
