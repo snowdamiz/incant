@@ -56,3 +56,20 @@ results/helpers with Built-by: claude; root owns this brief/numeric runner.
 Root revision5: prior attempt failed before launching because its retained binary was mode0644. Original remains unchanged. Root created a byte-identical mode0700 copy under fresh0072-temporal-r3 and added executable preflight, one-shot durable attempt latch, prelaunch frame debits and SIGTERM/HUP cleanup. Root gracefully stopped the unproductive prior ACP session (exit130, all five owned PIDs gone). Do not rerun old runner/grant or alter failed evidence. 0068 GPU released and is pinned as predecessor. StageB stays preparation-only. Keep progress moving from targeted source reads to a small complete fixture; avoid another broad survey.
 
 Revision5 supersedes revision4 only after its recorded preflight KeyError: predecessor0068 ledger mixes metadata with21 actual PID rows. New runner verifies exactly21 process rows and their absence; root ran --preflight successfully without GPU. Preserve failed r2 and original evidence, use new r3 once.
+
+
+## Root revision 6: CPU build grant only
+
+Stage A is accepted numerically. Root grants ONLY these Stage B commands now,
+in this order: visual/tools/lease.py acquire; build.py checkout; build.py
+toolchain; build.py tests; build.py review. This explicitly brings the fixture
+compile before GPU regression execution. Use the root review-ready.json and
+the idle incant-core-presentation-target named there. No GPU process, test
+binary execution, screen capture, image generation or pixel inspection is
+authorized by this build-only grant. Do not run gpu.py, including list, suite,
+review or release; root will supply the later execution instruction. If a build
+fails, retain outputs and stop; report the precise diagnostic without changing
+production or helpers. If all builds pass, report binary/link identities and
+finish this turn, leaving the target lease assigned for the next review stage.
+Root is reviewing correctness of the fixture/helpers in parallel. Preserve
+Opus5.5 Max verified through ACP on resume. No new survey or helper redesign.
