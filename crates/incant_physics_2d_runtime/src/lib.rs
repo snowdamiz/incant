@@ -16,6 +16,8 @@ mod checkpoint;
 mod checkpoint_validation;
 #[cfg(feature = "native-checkpoints")]
 pub use checkpoint::{CheckpointError, PhysicsCheckpoint};
+#[cfg(feature = "native-checkpoints")]
+pub use rapier2d::pipeline::checked_restore::WorkBudget as CheckpointWorkBudget;
 mod native_owner;
 use native_owner::NativeOwner;
 mod config;

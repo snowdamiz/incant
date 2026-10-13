@@ -101,6 +101,24 @@ fn charge_native_pairs(
     Ok(())
 }
 impl PhysicsRuntime<StableId> {
+    /// Borrow declarations and cached observations in `(scene, entity)` order.
+    /// This does not synchronize pending inputs or acquire mutable native access.
+    /// It neither requires nor grants completed-step checkpoint authority; the
+    /// separate `checkpoint` operation validates the native owner and its joins.
+    pub fn checkpoint_configurations(
+        &self,
+    ) -> Result<impl Iterator<Item = (StableId, StableId, &PhysicsSpec)>, CheckpointError> {
+        if self.failed {
+            return Err(CheckpointError::Owner("failed runtime"));
+        }
+        Ok(self.scenes.iter().flat_map(|(&scene, world)| {
+            world
+                .entries
+                .iter()
+                .map(move |(&entity, entry)| (scene, entity, &entry.config))
+        }))
+    }
+
     /// Capture healthy completed primitive worlds under shared payload/work
     /// budgets. Active/retained character query caches and compound shapes are
     /// currently refused. Logical payload charging excludes allocator overhead.

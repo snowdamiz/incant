@@ -90,6 +90,42 @@ fn charge_native_pairs(
     Ok(())
 }
 impl PhysicsWorld2D {
+    /// Borrow primitive declarations and cached observations in entity order.
+    /// Tile geometry is refused before yielding any row: its retained collider
+    /// component alone does not describe its actual geometry. This neither
+    /// synchronizes pending inputs nor requires or grants checkpoint authority.
+    /// The separate `checkpoint` operation validates the native owner and joins.
+    pub fn checkpoint_configurations(
+        &self,
+    ) -> Result<
+        impl ExactSizeIterator<
+            Item = (
+                StableId,
+                &Option<incant_types::RigidBody>,
+                &incant_types::Collider2D,
+                &BodyState,
+            ),
+        >,
+        CheckpointError,
+    > {
+        if self.failed {
+            return Err(CheckpointError::Owner("failed runtime"));
+        }
+        if self
+            .entries
+            .values()
+            .any(|entry| !matches!(entry.config.geometry, config::Geometry::Primitive(_)))
+        {
+            return Err(CheckpointError::Owner(
+                "tile geometry checkpoint unsupported",
+            ));
+        }
+        Ok(self.entries.iter().map(|(&id, entry)| {
+            let value = &entry.config;
+            (id, &value.body, &value.collider, &value.state)
+        }))
+    }
+
     /// Capture only a healthy completed primitive world. One cumulative logical
     /// payload budget covers outer rows, native validation and encoded output;
     /// allocator bookkeeping/RSS is not represented by this budget.

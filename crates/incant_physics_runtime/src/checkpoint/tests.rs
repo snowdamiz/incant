@@ -8,7 +8,7 @@ fn budget() -> Budget {
     Budget::new(MAX_ALLOCATION).unwrap()
 }
 fn work() -> WorkBudget {
-    WorkBudget::new(100_000_000)
+    crate::CheckpointWorkBudget::new(100_000_000)
 }
 fn allocations() -> AllocationBudget {
     AllocationBudget::new(MAX_ALLOCATION, 100_000)
@@ -209,6 +209,7 @@ fn spatial_real_motion_invalidates_capture_until_a_completed_step() {
     let mut motion = runtime.state(&id(1), &id(11)).unwrap().clone();
     motion.velocity[0] = 1.;
     runtime.sync_motion(&id(1), &id(11), &motion).unwrap();
+    assert_eq!(runtime.checkpoint_configurations().unwrap().count(), 6);
     assert!(runtime.checkpoint(&mut budget(), &mut work()).is_err());
     runtime.step(1. / 64.).unwrap();
     capture(&mut runtime);
@@ -246,6 +247,10 @@ fn spatial_failed_simulation_refuses_capture_before_native_access_or_charges() {
     motion.velocity[0] = 2.;
     runtime.sync_motion(&id(2), &id(11), &motion).unwrap();
     assert_eq!(runtime.step(1.), Err(PhysicsError::NumericRange));
+    assert!(matches!(
+        runtime.checkpoint_configurations(),
+        Err(CheckpointError::Owner("failed runtime"))
+    ));
     let mut payload = budget();
     let mut visits = work();
     let before = (payload.remaining(), visits.remaining());
@@ -254,4 +259,31 @@ fn spatial_failed_simulation_refuses_capture_before_native_access_or_charges() {
         Err(CheckpointError::Owner("failed runtime"))
     ));
     assert_eq!(before, (payload.remaining(), visits.remaining()));
+}
+
+#[test]
+fn spatial_checkpoint_configurations_borrow_ordered_cached_state_and_preserve_authority() {
+    let empty = PhysicsRuntime::<StableId>::default();
+    assert_eq!(empty.checkpoint_configurations().unwrap().count(), 0);
+    let mut runtime = warm();
+    let before = frames(&capture(&mut runtime));
+    let mut keys = Vec::new();
+    for (scene, entity, config) in runtime.checkpoint_configurations().unwrap() {
+        keys.push((scene, entity));
+        assert!(std::ptr::eq(
+            config,
+            &runtime.scenes[&scene].entries[&entity].config
+        ));
+        assert_eq!(&config.state, runtime.state(&scene, &entity).unwrap());
+        assert_eq!(config.body.is_some(), entity == id(11));
+        assert_eq!(config.collider.sensor, entity == id(12));
+    }
+    assert_eq!(
+        keys,
+        [id(1), id(2)]
+            .into_iter()
+            .flat_map(|scene| [id(10), id(11), id(12)].map(|entity| (scene, entity)))
+            .collect::<Vec<_>>()
+    );
+    assert_eq!(before, frames(&capture(&mut runtime)));
 }
