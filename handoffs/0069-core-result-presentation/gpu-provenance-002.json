@@ -1,0 +1,252 @@
+{
+ "format": "incant-0069-gpu-provenance",
+ "packet": "0069-core-result-presentation",
+ "phase": "gpu-only-generation-5",
+ "attempt": 2,
+ "executor": {
+  "model": "Claude Opus 5.5 (claude-opus-5-5)",
+  "thinking_effort": "max",
+  "acp_record": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/claude-0069-gpu-only-002-acp.log",
+   "verification_line": "Claude session verified: Opus 5.5; thinking: max"
+  }
+ },
+ "outcome": "stopped after the regression stage: 6 of 8 exact GPU regressions passed, 2 failed; no appearance capture ran (the wrapper requires all regressions to pass first); released",
+ "command": "python3 -B handoffs/0069-core-result-presentation/gpu_only.py run --evidence /Users/andreyyurlov/.codex/incant-evidence/0069-gpu-002 --authority /Users/andreyyurlov/.codex/incant-evidence/0069-gpu-review-ready-002.json",
+ "invocations": 1,
+ "retries": 0,
+ "preflight": "gpu_only.py check passed (read-only) immediately before the run",
+ "authority": {
+  "path": "/Users/andreyyurlov/.codex/incant-evidence/0069-gpu-review-ready-002.json",
+  "sha256": "3b2d9e0b3a85ca1fdd2c3da08e04ec34098f3e7302eb8384e4542058c4033950"
+ },
+ "wrapper": {
+  "path": "handoffs/0069-core-result-presentation/gpu_only.py",
+  "sha256": "0cf379927af6ace42f8ef5d76b5249f455aa759690e0cdffa00911710bd77914",
+  "commit": "f81e1a18932de2f07b99480a1cbddc75bc94d50c"
+ },
+ "brief": {
+  "path": "handoffs/0069-core-result-presentation/brief.md",
+  "sha256": "b018e83960b0eb33fc960578c1012a04811ba6df04ba8a3d4bdaa358371325a5",
+  "bound_by": "authority brief_sha256"
+ },
+ "predecessor_release": {
+  "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/gpu-released.json",
+  "sha256": "d0998c95b860c574c9e3e7b1c361a7bca9ab65cb23e7d21f65e794d00b29f50e"
+ },
+ "source": {
+  "commit": "15a59060c06ea249c66740b5940b92721d032970",
+  "generation_5_sha256": "acb68a621b4b74acd4c4e14280171451de81f53d2feaa4f8585a9fc6d12d1f1d",
+  "regression_build_record": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0069-gpu-002/regression/build-g5.json",
+   "sha256": "dba7bc052da4f333a51fee3e6409d69507f7dfa1fc58f6d188a42b69c7e6a810"
+  },
+  "executables": {
+   "render-lib": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0069/frozen-binaries/generation-5/render-lib",
+    "sha256": "951e4f18535be547c428ded304b52d70d963da5f72711626e191f2aa608e46bb"
+   },
+   "gpu-host-ui": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0069/frozen-binaries/generation-5/gpu-host-ui",
+    "sha256": "8b85ceb1dca228e6ca04e60c55f5592afd8ce44cc37f727a40932092346d3b6e"
+   }
+  }
+ },
+ "cpu_packet": {
+  "cpu_result_sha256": "be6bad1c2b7367811f5e90e9e2f26aad361b1abdd3b59b31b57adef8954d2656",
+  "cpu_manifest_sha256": "1d5f8a8922e42a1bdda534c598633f7afce1c093bc6ebc615e8d61e7b70b4d27",
+  "cpu_review_sha256": "ef978631b061cdbbf37e11b761ba2e5c8a80a34c1fbcaef59eef8bae358ca20b",
+  "cpu_release_sha256": "bc2cabe26bae17700e300188e3c7f8e68fa06538cb44c7b4197d000c5862696f",
+  "cpu_ledger_sha256": "091729c84afba56f289f5a71d7814720f296d2bf5dc70081a6585726c956a0fa"
+ },
+ "run_evidence": {
+  "dir": "/Users/andreyyurlov/.codex/incant-evidence/0069-gpu-002",
+  "release.json": "a3b090e2432cf302162eb99fd742da538210f20d7e3fdd46fc383f84e2f94426",
+  "released": "5d541de12bad122a6e19e5b488e28f5d2824f3f9e976b2c4180844f95e7e9923",
+  "ledger.jsonl": "dfbd726b797d75ab59090ab51a257a9b5c48def755c3bb21910a40c53f4692ba",
+  "frames.json": "6a8cdb4d6131dc2c77d2964633aea97d5ea4d22cea71412ae95941c7018eb024",
+  "lease.json": "721a474d2acd65ebe7c9f16ce9d647390cc4c908aaab25f48568b4fac0f113e5",
+  "routes/routes.json": "214868f9fe621bca86f0631ffe565a8887e4580097c8ca4146b12cfc7c452c3b",
+  "regression/results.jsonl": "1eeda025e1d52aa9eeef96d1434e143d3ae3091bb65e9b674a0e93518cfb1015",
+  "logs": {
+   "0002-regression-g5-render-scales.stderr.txt": "6df74f3a2fb11f98802d116bace344276aa30a23f2b2e893bbe8caf624642b00",
+   "0002-regression-g5-render-scales.stdout.txt": "04f23f2637be82c92eb2b920bc4f4ab249c0d86a3cb4bff2bbc3ac3ccd0b94e0",
+   "0005-regression-g5-render-nested.stderr.txt": "652d6254f572047be28dd4dc9e3187627ffa4aa7da00e544ef726350a8b019ba",
+   "0005-regression-g5-render-nested.stdout.txt": "37ceec7786737ffde89a18c734bd9680e036bcf3887c2bce351013c6ce329f1e",
+   "0008-regression-g5-render-halo-backdrops.stderr.txt": "6b4f9a7e07156426b962a937a01903d5970144d6be57efdccf2dc2630df007be",
+   "0008-regression-g5-render-halo-backdrops.stdout.txt": "13c3b2decc5a8ebc67908d8164cd49164cb02439a64322fda3238ef9c7f5259a",
+   "0011-regression-g5-render-over-world.stderr.txt": "9498657fe15fda5112706fe88fb4682cccd9171a1f2f27ff5566752b9e2817fd",
+   "0011-regression-g5-render-over-world.stdout.txt": "82df581e9045ed785c188bad65673d4678ed277041f9a4d8c04a54f8a2e53e3d",
+   "0014-regression-g5-render-retained.stderr.txt": "d8d76c7860bc1361e3ffc59af664101c3f15b03db676fc061d6dcbf69f211fd1",
+   "0014-regression-g5-render-retained.stdout.txt": "8d3a62e185d36687c36360a90283a91a4385cb24c003a671166d0fe6f0e7799c",
+   "0017-regression-g5-render-region.stderr.txt": "287a8fba7c83b6e6657bb67b9dd117663974c99cd0088ee4ebb7d15f8ca3752d",
+   "0017-regression-g5-render-region.stdout.txt": "5331be84c7ddfdb5887ce5c25f25206822d189c29e964d96c620b4186b77c112",
+   "0020-regression-g5-host-composed.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "0020-regression-g5-host-composed.stdout.txt": "cdef27eb588b66ad8b63e33eb9dbf3c160eab1ec90fb9e87378f1d980018f928",
+   "0023-regression-g5-host-relayout.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "0023-regression-g5-host-relayout.stdout.txt": "34dfda0237f898315a3e2c271dad49f3158c76355f0169f6efc327876ccd8190"
+  }
+ },
+ "release": {
+  "released_at": "2026-10-13T08:42:26.417039+00:00",
+  "children": 8,
+  "frames_debited": {
+   "appearance": 0,
+   "regression": 39
+  },
+  "owned_processes_alive": [],
+  "target_users": [],
+  "ledger_rows": 26,
+  "ledger_hash_matches": true,
+  "latch_binds_release": true,
+  "checked_after_return": {
+   "owned_processes": [],
+   "native_gpu_lock_open_by_any_process": false
+  }
+ },
+ "adapter": "Apple M5 Pro, Metal (from each test log)",
+ "regressions": [
+  {
+   "case": "render-scales",
+   "coverage": "existing",
+   "test": "ui::draw_tests::logical_layout_maps_to_physical_pixels_at_integer_and_fractional_scales",
+   "frames_debited": 4,
+   "status": 101,
+   "passed": false,
+   "libtest": {
+    "passed": 0,
+    "failed": 1,
+    "ignored": 0,
+    "measured": 0
+   }
+  },
+  {
+   "case": "render-nested",
+   "coverage": "existing",
+   "test": "ui::draw_tests::nested_clips_cut_actual_glyph_bounds_including_negative_x_rtl_overflow",
+   "frames_debited": 2,
+   "status": 0,
+   "passed": true,
+   "libtest": {
+    "passed": 1,
+    "failed": 0,
+    "ignored": 0,
+    "measured": 0
+   }
+  },
+  {
+   "case": "render-halo-backdrops",
+   "coverage": "new",
+   "test": "ui::draw_tests::label_halo_separates_text_from_bright_and_dark_backdrops",
+   "frames_debited": 2,
+   "status": 101,
+   "passed": false,
+   "libtest": {
+    "passed": 0,
+    "failed": 1,
+    "ignored": 0,
+    "measured": 0
+   }
+  },
+  {
+   "case": "render-over-world",
+   "coverage": "existing",
+   "test": "ui::draw_tests::ui_composites_over_the_finished_world_frame_and_leaves_uncovered_pixels",
+   "frames_debited": 3,
+   "status": 0,
+   "passed": true,
+   "libtest": {
+    "passed": 1,
+    "failed": 0,
+    "ignored": 0,
+    "measured": 0
+   }
+  },
+  {
+   "case": "render-retained",
+   "coverage": "existing",
+   "test": "ui::draw_tests::retained_atlas_and_quads_follow_input_identity_and_survive_refused_stages",
+   "frames_debited": 6,
+   "status": 0,
+   "passed": true,
+   "libtest": {
+    "passed": 1,
+    "failed": 0,
+    "ignored": 0,
+    "measured": 0
+   }
+  },
+  {
+   "case": "render-region",
+   "coverage": "existing",
+   "test": "ui::draw_tests::editor_viewport_region_offsets_scales_and_bounds_the_ui",
+   "frames_debited": 1,
+   "status": 0,
+   "passed": true,
+   "libtest": {
+    "passed": 1,
+    "failed": 0,
+    "ignored": 0,
+    "measured": 0
+   }
+  },
+  {
+   "case": "host-composed",
+   "coverage": "existing",
+   "test": "composed_ui_draws_over_the_moving_world_and_reuses_unchanged_resources",
+   "frames_debited": 17,
+   "status": 0,
+   "passed": true,
+   "libtest": {
+    "passed": 1,
+    "failed": 0,
+    "ignored": 0,
+    "measured": 0
+   }
+  },
+  {
+   "case": "host-relayout",
+   "coverage": "existing",
+   "test": "refresh_and_viewport_relayout_use_the_same_ui_without_advancing_the_game",
+   "frames_debited": 4,
+   "status": 0,
+   "passed": true,
+   "libtest": {
+    "passed": 1,
+    "failed": 0,
+    "ignored": 0,
+    "measured": 0
+   }
+  }
+ ],
+ "images": {
+  "hosted-ui-button-focus.png": "ea13b0c7d34f18f6568cc755b065bafbbf4a281b819a1a9c8eb92a3cc7b69669",
+  "hosted-ui-field-commit.png": "3946a844dee612443bf9c81772ecec057fdcadd2a31eee0f1a589503a613503a",
+  "hosted-ui-field-preedit.png": "73b01cbc8d586282e5547040a7b26b8335e93d97f3bb581702ea5170c6773e6c",
+  "hosted-ui-narrow-2x.png": "f8c4693c4b3ead289d00f6e0f1e25d6181732dd6d1f39e2f4ad9067e4d55e5ab",
+  "hosted-ui-tick1.png": "79076fe7182e907ddb7f89c3c7999c90b16bd67e19caaa989f482621f171d39c",
+  "hosted-world-tick1.png": "11746e16d0da9a408ad76f7a27e5dd8450cd04368a9bccae952cb05808b61889",
+  "ui-clip-nested.png": "e8213c1c31070c3f1b16c7462d414fb4b3a9c486195945ba2d4627ff37d78a17",
+  "ui-clip-open.png": "cfeb3c77563aa6b97fb9429c19127b961f07cd4c32c084fa0f31df760a16e16e",
+  "ui-halo-black.png": "b9580c6fb9685c0b410c85ef9b43b23b0a7e9fef595a4cf1a2fb8ee21ea437c4",
+  "ui-halo-white.png": "d71548357c2a896357bdc180a5e4a0aee182237c074a1a805b59c7c819d127ab",
+  "ui-over-world.png": "95edee7ad4a14f680beeef9dbf892b352643f64e8866bd12326174aaf6d1f339",
+  "ui-panel-1x-Rgba8UnormSrgb.png": "60a6673c6ddbd2d6bc24f550c17cf91df5473dbbeeb8d15448a1982b714a61e6",
+  "ui-panel-2x-Rgba8UnormSrgb.png": "c263e7ab54e0c890ac6d09dd3e6711ea8a30768dfdbf7a3e8c813c9837785594",
+  "ui-region.png": "23c1e7f7f7e65d69c8a24ca0257c850240e785b97cbca974fe0026b43b2a227a"
+ },
+ "packet_copies": {
+  "gpu-attempt-002/images/ui-halo-white.png": "d71548357c2a896357bdc180a5e4a0aee182237c074a1a805b59c7c819d127ab",
+  "gpu-attempt-002/images/ui-halo-black.png": "b9580c6fb9685c0b410c85ef9b43b23b0a7e9fef595a4cf1a2fb8ee21ea437c4",
+  "gpu-attempt-002/images/ui-panel-2x-Rgba8UnormSrgb.png": "c263e7ab54e0c890ac6d09dd3e6711ea8a30768dfdbf7a3e8c813c9837785594",
+  "gpu-attempt-002/images/hosted-ui-narrow-2x.png": "f8c4693c4b3ead289d00f6e0f1e25d6181732dd6d1f39e2f4ad9067e4d55e5ab",
+  "gpu-attempt-002/images/ui-clip-open.png": "cfeb3c77563aa6b97fb9429c19127b961f07cd4c32c084fa0f31df760a16e16e"
+ },
+ "attempt_files": {
+  "exit-status.txt": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+  "finished-utc.txt": "ce78399bc86a4e2a9b7638b6ae4a3ad07d19e411d4e762f4e8f9973a0f557e0d",
+  "started-utc.txt": "fa6616fe0a9fefe83cf242a72e0f0e86370cc476cbdac556d9178003f65c6564",
+  "stderr.txt": "00b4d8cfdfbaa7fb9a7261e08c431a7a17de323bab31631d21ad30205e0d7e46",
+  "stdout.txt": "1eeda025e1d52aa9eeef96d1434e143d3ae3091bb65e9b674a0e93518cfb1015"
+ }
+}

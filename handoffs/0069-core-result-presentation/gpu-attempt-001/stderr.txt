@@ -1,0 +1,20 @@
+Traceback (most recent call last):
+  File "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/.worktrees/0069-core-result-presentation/handoffs/0069-core-result-presentation/gpu_only.py", line 260, in <module>
+    main()
+    ~~~~^^
+  File "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/.worktrees/0069-core-result-presentation/handoffs/0069-core-result-presentation/gpu_only.py", line 256, in main
+    execute(args.evidence, args.authority)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/.worktrees/0069-core-result-presentation/handoffs/0069-core-result-presentation/gpu_only.py", line 213, in execute
+    frozen, plans, built = inputs()
+                           ~~~~~~^^
+  File "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/.worktrees/0069-core-result-presentation/handoffs/0069-core-result-presentation/gpu_only.py", line 84, in inputs
+    frozen = checked_freeze()
+  File "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/.worktrees/0069-core-result-presentation/handoffs/0069-core-result-presentation/gpu_only.py", line 65, in checked_freeze
+    require(p.is_file() and p.stat().st_size == row['bytes'] and lease.digest(p) == row['sha256'],
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            f'frozen source changed: {row["path"]}')
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/.worktrees/0069-core-result-presentation/handoffs/0069-core-result-presentation/gpu_only.py", line 44, in require
+    raise lease.Refused(why)
+lease.Refused: frozen source changed: handoffs/0069-core-result-presentation/brief.md

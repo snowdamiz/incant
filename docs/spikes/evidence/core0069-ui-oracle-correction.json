@@ -1,0 +1,204 @@
+{
+  "format": "incant-0069-ui-oracle-correction",
+  "version": 1,
+  "base_source": "15a59060c06ea249c66740b5940b92721d032970",
+  "packet_parent": "b0685c42b0e763acfca8e425ecc4f0fb8d28b9ca",
+  "generation": 6,
+  "source_sha256": "9b51e6448f4203902baa6985fc79b7c2b3d8181ee1cab85394c9fdbac795ddf0",
+  "source_freeze_sha256": "255c7f15d28268e80c494102fc1a1e5c5dde2105551241a0451e76d57da90793",
+  "artifacts": [
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/0069-oracle-correction-002/freeze-g6.json",
+      "raw_sha256": "255c7f15d28268e80c494102fc1a1e5c5dde2105551241a0451e76d57da90793",
+      "raw_bytes": 491287,
+      "retained": "docs/spikes/evidence/core0069-ui-oracle-correction/freeze-g6.json.gz",
+      "retained_sha256": "c877f74dce50f44bc5f4dec1e6455fe2e33e5dc46852aaa88476d77860aa77ea"
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/0069-oracle-correction-002/source.patch",
+      "raw_sha256": "63feb368cc0058b2b3de1edc974c0350c7a9ac3ef90d36f0c590e56d45f1044d",
+      "raw_bytes": 8394,
+      "retained": "docs/spikes/evidence/core0069-ui-oracle-correction/source.patch",
+      "retained_sha256": "63feb368cc0058b2b3de1edc974c0350c7a9ac3ef90d36f0c590e56d45f1044d"
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/0069-oracle-correction-002/run_cpu.py",
+      "raw_sha256": "16aa65df3c4c48418e9aae81509337c5b0e464c6094f55743b01bea5e6903903",
+      "raw_bytes": 2815,
+      "retained": "docs/spikes/evidence/core0069-ui-oracle-correction/run_cpu.py",
+      "retained_sha256": "16aa65df3c4c48418e9aae81509337c5b0e464c6094f55743b01bea5e6903903"
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/0069-oracle-correction-002/commands.json",
+      "raw_sha256": "4fb1c179da64f6c76bd27034f5f0618097c3acf45c8954b9c1e6cecb53821dcc",
+      "raw_bytes": 2896,
+      "retained": "docs/spikes/evidence/core0069-ui-oracle-correction/commands.json",
+      "retained_sha256": "4fb1c179da64f6c76bd27034f5f0618097c3acf45c8954b9c1e6cecb53821dcc"
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/0069-oracle-correction-002/cpu-release.json",
+      "raw_sha256": "32df75ed4d7707182b5ef0269e142d35ccfd5c0cb149c541e9e063d03b3ebee2",
+      "raw_bytes": 218,
+      "retained": "docs/spikes/evidence/core0069-ui-oracle-correction/cpu-release.json",
+      "retained_sha256": "32df75ed4d7707182b5ef0269e142d35ccfd5c0cb149c541e9e063d03b3ebee2"
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/0069-oracle-correction-002/frozen-build-g6.json",
+      "raw_sha256": "c9c125462437aa1d1f212d4c00538867bd7c84eeca48ffd6d2ecc1e84348b12e",
+      "raw_bytes": 3052,
+      "retained": "docs/spikes/evidence/core0069-ui-oracle-correction/frozen-build-g6.json",
+      "retained_sha256": "c9c125462437aa1d1f212d4c00538867bd7c84eeca48ffd6d2ecc1e84348b12e"
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/0069-oracle-correction-002/regression-g6.json",
+      "raw_sha256": "fffb7857e5c9dd3e9c4d21fc9ca0bdc09319ac93fd042db40152f3340a0b01d0",
+      "raw_bytes": 5136,
+      "retained": "docs/spikes/evidence/core0069-ui-oracle-correction/regression-g6.json",
+      "retained_sha256": "fffb7857e5c9dd3e9c4d21fc9ca0bdc09319ac93fd042db40152f3340a0b01d0"
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/0069-oracle-correction-002/production-reuse.json",
+      "raw_sha256": "4e927c166819306a73b0c77eca323e172c9216bb47194a94b0c1f9cb5e94006a",
+      "raw_bytes": 21705,
+      "retained": "docs/spikes/evidence/core0069-ui-oracle-correction/production-reuse.json.gz",
+      "retained_sha256": "615c776f89c983f1bf979bb10fd3803a5a241868e16f6737ab32c3bbbbd5aab1"
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/0069-oracle-correction-002/logs/renderer-cpu.stdout",
+      "raw_sha256": "0395221628b9fe8b5b73b3e26b4e5c82ae8e5301ea2cd2a26f666491018aa726",
+      "raw_bytes": 318632,
+      "retained": "docs/spikes/evidence/core0069-ui-oracle-correction/renderer-cpu.stdout.gz",
+      "retained_sha256": "5da0b530fc57ebdc6d1af65ca5bad0fe77728b2ff5eb22c2eab26e38d8386f0e"
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/0069-oracle-correction-002/logs/renderer-cpu.stderr",
+      "raw_sha256": "d259a413486a53545422e0d76bd6abcefe4358fda76a72323116c769d3995d7b",
+      "raw_bytes": 566,
+      "retained": "docs/spikes/evidence/core0069-ui-oracle-correction/renderer-cpu.stderr",
+      "retained_sha256": "d259a413486a53545422e0d76bd6abcefe4358fda76a72323116c769d3995d7b"
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/0069-oracle-correction-002/logs/renderer-clippy.stdout",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "retained": "docs/spikes/evidence/core0069-ui-oracle-correction/renderer-clippy.stdout",
+      "retained_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/0069-oracle-correction-002/logs/renderer-clippy.stderr",
+      "raw_sha256": "908e8b1a5981056a9e246ebd9aa8e3463cf14bbfcb54eb617c3ecabaa44d91dc",
+      "raw_bytes": 1981,
+      "retained": "docs/spikes/evidence/core0069-ui-oracle-correction/renderer-clippy.stderr",
+      "retained_sha256": "908e8b1a5981056a9e246ebd9aa8e3463cf14bbfcb54eb617c3ecabaa44d91dc"
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-reviews/core0069-oracle-diagnosis-root-20261013.json",
+      "raw_sha256": "d33c4855ce74a584df1b141032ac2fb6b7fdaa5c3c73b552a8270bccb7de13c0",
+      "raw_bytes": 702,
+      "retained": "docs/spikes/evidence/core0069-ui-oracle-correction/core0069-oracle-diagnosis-root-20261013.json",
+      "retained_sha256": "d33c4855ce74a584df1b141032ac2fb6b7fdaa5c3c73b552a8270bccb7de13c0"
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-reviews/core0069-oracle-diagnosis-20261013.json",
+      "raw_sha256": "48a398ac2fd1b7f3410357e63c8e7e6ef88af737299138164e2a979a49744079",
+      "raw_bytes": 4584,
+      "retained": "docs/spikes/evidence/core0069-ui-oracle-correction/core0069-oracle-diagnosis-20261013.json",
+      "retained_sha256": "48a398ac2fd1b7f3410357e63c8e7e6ef88af737299138164e2a979a49744079"
+    }
+  ],
+  "checks": {
+    "renderer_cpu_groups": [
+      [
+        68,
+        0,
+        33
+      ],
+      [
+        1,
+        0,
+        50
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    "passed": 69,
+    "failed": 0,
+    "gpu_ignored": 83,
+    "all_target_clippy_exit": 0,
+    "scoped_rustfmt": true,
+    "git_diff_check": true
+  },
+  "regression_executables": {
+    "render-lib": {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0069-oracle-correction-002/frozen-binaries/generation-6/render-lib",
+      "sha256": "ddf12438b44998808feb2d7f2e2e34ed7bdb18420d355cb44f3db357cf4cdcaf",
+      "bytes": 31427008,
+      "package": "incant_render",
+      "target_path": "/tmp/incant-agent-font-target/ci/deps/incant_render-a4b2ee94e24592b0",
+      "mode": "0o755",
+      "compiler_artifact": {
+        "reason": "compiler-artifact",
+        "package_id": "path+file:///Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/.worktrees/0069-core-result-presentation/crates/incant_render#0.0.1",
+        "manifest_path": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/.worktrees/0069-core-result-presentation/crates/incant_render/Cargo.toml",
+        "target": {
+          "kind": [
+            "lib"
+          ],
+          "crate_types": [
+            "lib"
+          ],
+          "name": "incant_render",
+          "src_path": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/.worktrees/0069-core-result-presentation/crates/incant_render/src/lib.rs",
+          "edition": "2024",
+          "doc": true,
+          "doctest": true,
+          "test": true
+        },
+        "profile": {
+          "opt_level": "1",
+          "debuginfo": 0,
+          "debug_assertions": false,
+          "overflow_checks": false,
+          "test": true
+        },
+        "features": [
+          "default",
+          "physics-deterministic"
+        ],
+        "filenames": [
+          "/tmp/incant-agent-font-target/ci/deps/incant_render-a4b2ee94e24592b0"
+        ],
+        "executable": "/tmp/incant-agent-font-target/ci/deps/incant_render-a4b2ee94e24592b0",
+        "fresh": false
+      }
+    },
+    "gpu-host-ui": {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0069/frozen-binaries/generation-5/gpu-host-ui",
+      "sha256": "8b85ceb1dca228e6ca04e60c55f5592afd8ce44cc37f727a40932092346d3b6e",
+      "package": "incant_render_gpu_host",
+      "target_path": "/tmp/incant-agent-font-target/ci/deps/ui-1ce0ab6482f0d4a7",
+      "reused_from_generation": 5,
+      "reason": "No source/dependency/features/lock changes in this executable; sole source change is the private cfg(test) incant_render lib UI oracle"
+    }
+  },
+  "package_reuse": {
+    "unchanged_retained_files": 76,
+    "private_cfg_test_only": true,
+    "fresh_shipping_executed": false
+  },
+  "limits": [
+    "Measured Apple M5 Pro conversion behavior, not universal Metal precision guarantee",
+    "No new GPU execution or appearance acceptance",
+    "Original g5 six-pass/two-failure GPU results unchanged",
+    "New g6 authority and strict wrapper binding required before GPU",
+    "Original released CPU/GPU ledgers and freezes untouched"
+  ]
+}

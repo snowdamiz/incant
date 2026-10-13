@@ -1,0 +1,9 @@
+{
+  "at": "2026-10-13T09:06:57.074778+00:00",
+  "reviewer": "root/astra",
+  "accepted_diagnosis": true,
+  "manifest_sha256": "4e602ca8a8b329c8723240693eafd3c68d083e8712647aaaac9566e3b0e4c984",
+  "reproduction_exit": 0,
+  "reproduction_sha256": "de2499da5ae601efcc8b82a9af5d2fea4698c58ce43efeadf825b3f91083edc4",
+  "scope": "Read replay/negative controls;42 retained artifacts and15 inputs rehashed. CPU interval replay matches frozen Rust endpoints, Q12 candidate reproduces black33000RGB and isolated2x10vs11..12 failure; retain qualified observed-device hypothesis. Accept test-only pre-encode interval half-step with existing negative controls preserved. No production/GPU/appearance acceptance."
+}

@@ -29,7 +29,7 @@ pub use layout::{
 };
 pub use visual::{UiVisual, WidgetVisual};
 
-pub use incant_text::AtlasConfig;
+pub use incant_text::{AtlasConfig, HaloRule};
 pub use incant_types::{
     MAX_UI_DEPTH, MAX_UI_EXTENT, MAX_UI_NODES, StableId, UiAlign, UiDirection, UiJustify, UiKind,
     UiLength, UiNode, UiStyle, UiText,

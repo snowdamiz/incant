@@ -1,0 +1,23 @@
+{
+  "status": "accepted_current_main_qualification_packet",
+  "head": "5e3dac2ecb48af75db086157876824f4f26e5162",
+  "tested_source": "2489325ec5ebcf17e18e60d00c435d56f9b2bc26",
+  "source_and_observable_execution_review_sha256": "48eb36275f431abb1b99b41d636b0f88b79709a01e86547292843eaecb6e5810",
+  "manifest_sha256": "11ce50e3c471c58bc05ebbcde656aed5353a27c7d7bf19e15336b38aee229526",
+  "archive_sha256": "823a8becafbe7b39eff76cf7a0835f4f5df54f9793569cc811b442c09092513c",
+  "verification": {
+    "passed": true,
+    "records": 770,
+    "payloads": 2859,
+    "external_artifacts": 3
+  },
+  "findings": [],
+  "limits": [
+    "No new GPU, window, image inspection, phone, timing/performance or phase gate acceptance",
+    "Prior GPU runs remain the g6 regression and g5 capture binary identities",
+    "Current 4-locale public authoring/native proof and English source-deleted shipping are new executions",
+    "Original dirty brief and three untracked CPU/report paths preserved untouched in Claude checkout",
+    "Main214 disjoint Python helper/docs ancestry intentionally left to publisher; no source rebuild justified solely by that ancestry"
+  ],
+  "at": "2026-10-13T10:06:21.864046+00:00"
+}

@@ -1,0 +1,9 @@
+{
+  "status": "accepted_exact_raw_patch_packaging",
+  "head": "c9d9d42172afe6786d09be0d8f75b91140111785",
+  "attributes_sha256": "222e6314d57405619f89c28ba9420ae855cf63c3a3f32211b9daba17628f6914",
+  "exact_addition": "\n# Preserve exact reviewed 0069 oracle diff context, including blank context lines.\ndocs/spikes/evidence/core0069-ui-oracle-correction/source.patch -text whitespace=-blank-at-eol\n",
+  "preceding_qualification_review": "87956407d407015a1b026f7bc34c6208c04f696751a3b3e3f5327d6b40984878",
+  "note": "The preceding full review is pinned by path in retained qualification; no runtime/sample/lock/tool delta in packaging.",
+  "at": "2026-10-13T10:22:08.086614+00:00"
+}

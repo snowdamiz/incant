@@ -24,14 +24,14 @@
       "tool": "fonttools==4.60.1 (wheel fonttools-4.60.1-cp314-cp314-macosx_10_13_universal2.whl, sha256 a884aef09d45ba1206712c7dbda5829562d3fea7726935d3289d343232ecb0d3)",
       "recipe": "subset_sc.py",
       "recipe_sha256": "04ad8578a6544a424fed7a35c33523ac6aa47807256b993458ea10f257637cee",
-      "strings_sha256": "9024e49341edf27906f949d05bef1e965dda171e9ac8aee006587515320dcd80",
+      "strings_sha256": "0e21d0c1c648b9fa297797e796abc507a8cf35494ca898bee96921e20f1bda91",
       "instance": {
         "wght": 400
       },
       "renamed_family": "Core Sample SC",
-      "sha256": "8d78a4c412fca7fd980e12c4ccf958bc13d21d8dd016752808b4b83116e62af0",
-      "bytes": 13232,
-      "deterministic_rerun_sha256": "8d78a4c412fca7fd980e12c4ccf958bc13d21d8dd016752808b4b83116e62af0"
+      "sha256": "9ec258961c8800c709f05586b6fca8a47061f3f776ac088bb87fbb2a462c116e",
+      "bytes": 13764,
+      "deterministic_rerun_sha256": "9ec258961c8800c709f05586b6fca8a47061f3f776ac088bb87fbb2a462c116e"
     }
   }
 }

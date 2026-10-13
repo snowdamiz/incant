@@ -1,0 +1,6 @@
+   Compiling incant_render v0.0.1 (/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/.worktrees/0069-core-result-presentation/crates/incant_render)
+    Finished `ci` profile [optimized] target(s) in 12.27s
+     Running unittests src/lib.rs (/tmp/incant-agent-font-target/ci/deps/incant_render-a4b2ee94e24592b0)
+     Running tests/model_gpu.rs (/tmp/incant-agent-font-target/ci/deps/model_gpu-40e196803e735be0)
+     Running tests/persistent_cache.rs (/tmp/incant-agent-font-target/ci/deps/persistent_cache-967c164697791450)
+   Doc-tests incant_render

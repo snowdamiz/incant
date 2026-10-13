@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/.worktrees/0069-core-result-presentation/handoffs/0069-core-result-presentation/gpu_only.py", line 266, in <module>
+    main()
+    ~~~~^^
+  File "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/.worktrees/0069-core-result-presentation/handoffs/0069-core-result-presentation/gpu_only.py", line 262, in main
+    execute(args.evidence, args.authority)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/.worktrees/0069-core-result-presentation/handoffs/0069-core-result-presentation/gpu_only.py", line 230, in execute
+    require(all(row['passed'] for row in results), 'one or more exact GPU regressions failed')
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/.worktrees/0069-core-result-presentation/handoffs/0069-core-result-presentation/gpu_only.py", line 44, in require
+    raise lease.Refused(why)
+lease.Refused: one or more exact GPU regressions failed

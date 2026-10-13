@@ -96,18 +96,29 @@ the handoff result for the reproduction.
 
 ## HUD
 
-Plain type over the scene in the engine's fixed game-UI theme (light text, hard
-one-pixel shadow, no panels). Status top-left, progress top-right, the result
-title centred under the top bar. Fonts chain Inter, Noto Sans Arabic and a 42
-glyph Noto Sans SC subset (`art/fonts`, OFL, with recipe and provenance).
+Plain type over the scene in the engine's fixed game-UI theme: light text, no
+panels, and the engine's dark label halo around every glyph (1/16 em, 1 px for
+the 12-17 px text, 1.4 px for 22 px, 2 px for the 32 px title). The halo keeps
+text legible where it crosses bright haze, sand or the headframe, so placement
+serves composition rather than contrast. The engine prepares each halo with the
+glyph rasters when the HUD text changes and draws it as one more glyph, so it
+adds no per-frame dilation work. Status top-left, progress top-right.
+Fonts chain Inter, Noto Sans Arabic and a Noto Sans SC subset (`art/fonts`, OFL,
+with recipe and provenance).
 
-The controls legend ends with the restart key: "WASD move · Space jump · R play
-again". R (and gamepad Start) only restarts after a result, so the copy names
-what it does then rather than promising a mid-run restart. The legend stays
-keyboard-only, like move and jump. When status and progress do not fit on one
-row (English below about 490 pt, the pseudo-locale below about 700 pt), the top
-bar wraps progress onto a second row, still end-aligned, so no label wraps
-inside its column. Arabic and Chinese stay on one row down to 420 pt.
+When a run ends, the title and a restart prompt appear together, centred in the
+upper third of the screen above the surveyor: "Samples secured" or "Surveyor
+down", then "Press R or Start to play again". R and gamepad Start only restart
+after a result, so the prompt appears exactly when they work, and names both.
+The top bar never moves; after a win the objective clears. The legend names
+only what works during play: "WASD move · Space jump". It stays keyboard-only,
+like the move and jump bindings it describes.
+
+Each label has 2 px of padding left and right and 1 px top and bottom, room for
+its halo; the root's padding and the gaps are reduced by the same amounts, so
+text keeps its 22 px side and 16 px top inset. When status and progress do not
+fit on one row, the top bar wraps progress onto a second row, still
+end-aligned, so no label wraps inside its column.
 
 | Index | ID | Role | Content |
 |---|---|---|---|
@@ -118,11 +129,12 @@ inside its column. Arabic and Chinese stay on one row down to 420 pt.
 | 5 | `01CSWD00000000000000000005` | label | objective, `hud.objective.collect` / `.exit` |
 | 6 | `01CSWD00000000000000000006` | container | progress column |
 | 7 | `01CSWD00000000000000000007` | label | `hud.samples {collected} {total}` |
-| 8 | `01CSWD00000000000000000008` | label | `hud.controls` (move, jump, play again) |
-| 9 | `01CSWD00000000000000000009` | container | result slot |
+| 8 | `01CSWD00000000000000000008` | label | `hud.controls` (move, jump) |
+| 9 | `01CSWD00000000000000000009` | container | result box: 40% of the content height under the top bar, contents centred |
 | 10 | `01CSWD00000000000000000010` | container | zero-size stash (clips its children) |
 | 11 | `01CSWD00000000000000000011` | label | `hud.won`, parked in 10 |
 | 12 | `01CSWD00000000000000000012` | label | `hud.lost`, parked in 10 |
+| 13 | `01CSWD00000000000000000013` | label | `hud.prompt`, bound as `prompt`, parked in 10 |
 
 `ui/strings.json` is the string table (`01CSST00000000000000000001`, source
 `en`, plus `ar` and `zh-Hans`); `en-XA` is the engine's pseudo-locale. Display
@@ -137,18 +149,21 @@ Widget, entity and asset IDs are stable across builds. `bindings.py` connects
 the existing controller roles, without changing widget style or authored sound:
 
 - Win/loss: `setParent(WON or LOST, RESULT)` shows the existing localized title
-  once, on transition. The other title stays in the authored inactive container.
+  once, on transition, and `setParent(PROMPT, RESULT)` shows the prompt with it.
+  The other title stays in the authored inactive container; a fresh session
+  parks the title and prompt again.
 - Audio: `restartAudio` plays the existing first pickup (`01CSEN...43`) and
   hurt (`...47`) source on each occurrence, including after the voice ends.
   Won (`...50`) and lost (`...51`) play once at transition; music (`...42`)
   stops. Historical extra pickup/hurt sources stay unchanged and silent.
 - Text: `setUiText` receives the existing `localization.localize()` results for
-  health, samples and objective. The controller updates changed values and
-  locale changes, and localizes both result titles.
+  health, samples and objective (empty after a win). The controller updates
+  changed values and locale changes, and localizes both result titles and the
+  prompt.
 - Restart: R or gamepad Start while won/lost requests a complete fresh session.
   World, script, audio, UI and held input reset together; it is not a save load.
-  These actions are ignored while playing. The controls legend names R ("R play
-  again"); no state-dependent prompt is shown.
+  These actions are ignored while playing, which is why only the result-state
+  prompt names them.
 
 `verify_bindings.py prepare BUILD OUT --binary ...` copies an authored build and
 connects its roles through one reversible public transaction. It checks the real
@@ -161,16 +176,18 @@ results must be retained before calling the new bindings verified.
 
 - The four `--state` choices remain authored presentation snapshots; gameplay
   starts from its normal fresh state. They do not pre-complete gameplay.
-- The game UI theme is fixed (no colour, panels or per-widget styles), so the
-  HUD relies on placement over the deep sky band for contrast. On the live
-  routes (handoff 0065, estimated against each label's median background) the
-  one-row top bar measures 4.6:1 or better, but result titles over the horizon
-  haze measure 2.7-3.2:1 (four of six below 3:1), and a wrapped second row at
-  narrow widths 2.6-3.9:1. A theme text outline or scrim would fix both;
-  placement alone cannot.
-- The restart hint lives in the top-right legend, not under the result title:
-  the controller only reparents the two result labels, and a separate prompt
-  would need a controller binding.
+- Handoff 0065 measured result titles over the horizon haze at 2.7-3.2:1 and a
+  wrapped second row at 2.6-3.9:1 with the earlier one-pixel shadow. This
+  layout and the engine's label halo replace both; their rendered contrast and
+  readability, at normal and narrow sizes and in every locale, are pending the
+  granted handoff 0069 review. Nothing here claims them yet.
+- With 1 px of vertical label padding, a glyph whose ink meets its line box
+  (a deep descender) can lose the outer part of its halo at the label's border
+  box. The rendered review must check this in every locale.
+- The theme stays fixed: no colour, panels or per-widget text styles.
+- The legend is keyboard-only; the game has no input-device-aware copy.
+- In the pseudo-locale at the narrowest sizes, the title wraps and the result
+  box starts under a two-row top bar, so the prompt can reach the surveyor.
 - The original 0060 offscreen helper source hash remains unresolved. New
   correctly bound source evidence does not retroactively change that claim.
 - Desktop (Apple M5 Pro, Metal, ci profile) evidence only; no phone, shipping

@@ -16,6 +16,19 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Core result HUD — current-main qualification
+
+The accepted 0069 label halos, localized result/restart presentation and approved
+font subset have accepted main212 CPU/shipping evidence and a disjoint actual
+main215 tool/test-only ancestry qualification. All selected UI/text/sample
+sources equal Claude's accepted producer; 221 affected Rust CPU tests, 20 Python
+tests, four public locale builds, 14 native positive processes and ten fresh
+source-deleted shipping runs pass, including four exact whole-session PCM
+continuations. Original g5/g6 GPU acceptance remains attached to those binaries;
+no new GPU/device/performance claim is made. Final archive review is accepted;
+current-main qualification is independently accepted, with publication awaiting
+the required fast check. [Scope and evidence](docs/spikes/core0069-main212.md).
+
 ## Static Wasm C builds — bounded local scheduling verified
 
 The trusted bundle feature now enables pinned cc's Cargo-jobserver scheduler.
@@ -26,27 +39,37 @@ unification also affects other cc build consumers in the selected host graph.
 Windows candidate execution and timing remain pending; no Windows speedup or
 performance gate is claimed. [Scope and evidence](docs/spikes/wasm-c-parallel.md).
 
-## Current overview — main211, 2026-10-13
+## Current overview — main215, 2026-10-13
 
-Development main211 includes the reviewed opt-in cooked renderer families and
+Development main215 includes the reviewed opt-in cooked renderer families and
 Vulkan cache lifecycle, dynamic resolution, numerical retained motion, CPU/GPU
 profiling scopes and inert physics island validation. Each lane retains its own
 execution and acceptance limits below; the complete engine and game remain open.
+
+Checkpoint21 remains frozen at exact main212 through PR213 while its jobs finish.
+The pinned vendor-path portability failure is repaired in main214; hosted
+acceptance remains pending. A second hosted failure is the timestamp test
+unconditionally requiring an optional capability on Apple Paravirtual Metal.
+The [test correction](docs/spikes/timestamp-capability.md) checks the exact typed
+refusal and an ordinary completed frame when absent, preserving positive timing
+assertions when supported. Its CPU/compile checks and independent final review
+pass and PR215 merged after the required fast check. Successor hosted execution
+remains pending; both original failures are retained.
 
 Release now contains selected main205. [Checkpoint20](docs/spikes/release-checkpoint-20.md)
 promoted through PR174 after all 23 required contexts and eight exact-head workflows
 succeeded and independent review verified the exact tested tree. Release `065aac69`
 exactly matches selected main205 `7bfeecfd`. Hosted default/cooked Metal, Vulkan and
 Dx12 suites passed, including the repaired four-process Vulkan cache lifecycle.
-Later main206–209 runtime changes and main210 documentation remain outside that tested baseline. No device, performance or
+Later main206–215 changes remain outside that tested baseline. No device, performance or
 phase gate follows from this promotion.
 
 Failed checkpoints15–19 remain historical and unpromoted. In particular, checkpoint17
 exposed the quota/probe issues repaired in PR188/191; checkpoint18 exposed the editor
 test import repaired in PR193; checkpoint19 exposed the cache count and vendored
 Parry compiler-identity issues repaired in PR201/203. Their original failures remain
-retained. No checkpoint is currently active; the next selection follows ADR0014's
-regular cadence and preserves all23 requirements.
+retained. The active checkpoint21 and any reviewed repair successor preserve
+ADR0014's exact selected tree and all 23 requirements.
 
 Android static-Wasm integration is merged in PR190 after independent source-relevance
 review and the fast check. Current CPU/public preflights and both-mode target compile/
@@ -78,7 +101,7 @@ Clippy, runtime/wasm/compiler identity and tooling checks. The default-off pinne
 Rapier adapter stays absent from ordinary runtime compiler features.
 
 [The execution packet](docs/spikes/physics-world-continuation-results.md) has independent source and final evidence acceptance; current-main
-qualification is independently accepted; publication awaits the fast check. No hostile live constructor or engine save admission
+qualification is independently accepted and PR212 merged after the required fast check. No hostile live constructor or engine save admission
 is enabled; complete collider/manager/joint/phase composition remains pending.
 
 ## GPU timestamps — device review passed; concurrent interval corrected

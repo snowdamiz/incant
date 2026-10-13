@@ -1,6 +1,6 @@
 //! CPU checks of the UI layer's planning, caret and selection geometry over
 //! real shaped text. GPU draws live in ui_draw_tests.rs. No appearance approval.
-use super::geometry::{KIND_FILL, KIND_GLYPH, KIND_STROKE, UiQuad, plan};
+use super::geometry::{KIND_FILL, KIND_GLYPH, KIND_STROKE, UiQuad, halo_clip, plan};
 use super::*;
 use crate::text::tests::engine;
 use incant_render_data::{UiEdit, UiRect, UiRole, UiWidget};
@@ -57,7 +57,23 @@ impl Fixture {
             .collect();
         (layout, glyphs.into())
     }
-    /// A widget whose content box is `bounds` inset by `padding` on every side.
+    /// One prepared halo per glyph of `layout` at the theme's label rule, as
+    /// the UI owner prepares them.
+    pub fn halos(&mut self, layout: &ShapedText) -> Arc<[GlyphHandle]> {
+        let halos: Vec<_> = (0..layout.glyphs().len())
+            .map(|i| {
+                let radius = theme::LABEL_HALO_RULE
+                    .radius(layout.glyphs()[i].font_size)
+                    .unwrap();
+                self.engine
+                    .cache_halo(layout, i, &mut self.atlas, radius)
+                    .unwrap()
+            })
+            .collect();
+        halos.into()
+    }
+    /// A widget whose content box is `bounds` inset by `padding` on every side;
+    /// a label also gets its prepared halos.
     pub fn widget(
         &mut self,
         n: u8,
@@ -74,6 +90,7 @@ impl Fixture {
             bounds[3] - padding,
         ];
         let (layout, glyphs) = self.shape(content, font_size, clip[2] - clip[0], Wrap::Word);
+        let halos = (role == UiRole::Label).then(|| self.halos(&layout));
         UiWidget {
             id: id(n),
             role,
@@ -86,6 +103,7 @@ impl Fixture {
             clip,
             layout,
             glyphs,
+            halos,
             edit: (role == UiRole::TextInput).then(|| UiEdit {
                 selection: Some(Selection::caret(content.len())),
                 preedit: None,
@@ -290,26 +308,39 @@ fn plan_layers_each_widget_in_canonical_order_with_state_colours() {
         at += n;
         part
     };
-    let g = |n: usize| vec![KIND_GLYPH; n];
-    // Label: a one-pixel shadow pass, then the glyphs in the primary text
-    // colour, both clipped to the content box; no surface.
+    // Label: its prepared halos, then the glyphs in the primary text colour
+    // clipped to the content box; no surface. Both are ordinary glyph quads at
+    // the same pen: each halo samples its own atlas entry, the glyph's coverage
+    // dilated by the 1 px radius of 16 px text, one texel larger on every side.
     let part = take(2 * glyphs[0]);
-    assert_eq!(kinds(part), g(2 * glyphs[0]));
-    let (shadow, text) = part.split_at(glyphs[0]);
+    assert_eq!(kinds(part), vec![KIND_GLYPH; 2 * glyphs[0]]);
+    let (halo, text) = part.split_at(glyphs[0]);
     assert!(
         text.iter()
             .all(|q| q.color == theme::TEXT && q.clip == label.clip)
     );
-    for (s, t) in shadow.iter().zip(text) {
-        assert_eq!(s.color, theme::LABEL_SHADOW);
+    assert_eq!(theme::LABEL_HALO_RULE.radius(16.).unwrap(), 1.);
+    let handles = label.halos.as_ref().unwrap();
+    for ((h, t), handle) in halo.iter().zip(text).zip(handles.iter()) {
+        let entry = input.atlas.get(handle).unwrap();
+        let [x, y, w, height] = entry.rect.unwrap().map(|v| v as f32);
+        let [ox, oy] = entry.origin.map(|v| v as f32);
+        assert_eq!(h.color, theme::LABEL_HALO);
+        assert_eq!(h.pen, t.pen);
+        assert_eq!(h.rect, [ox - 1., oy - 1., ox + w + 1., oy + height + 1.]);
+        assert_eq!(h.extra, [x - 1., y - 1., x + w + 1., y + height + 1.]);
         assert_eq!(
-            s.pen,
+            h.rect,
             [
-                t.pen[0] + theme::LABEL_SHADOW_OFFSET[0],
-                t.pen[1] + theme::LABEL_SHADOW_OFFSET[1]
+                t.rect[0] - 1.,
+                t.rect[1] - 1.,
+                t.rect[2] + 1.,
+                t.rect[3] + 1.
             ]
         );
-        assert_eq!((s.rect, s.extra, s.clip), (t.rect, t.extra, t.clip));
+        // No padding: the visible border box is the content box, so the halo
+        // keeps the glyphs' own clip.
+        assert_eq!(h.clip, label.clip);
     }
     // Pressed button: darker surface, then glyphs.
     let part = take(1 + glyphs[1]);
@@ -601,6 +632,7 @@ fn glyph_quads_use_exact_shaped_positions_and_keep_overflowing_rtl_glyphs() {
     let token = "سلامعليكم";
     let mut label = f.widget(1, UiRole::Label, [20., 20., 60., 60.], 0., token, 20.);
     let (layout, glyphs) = f.shape(token, 20., 40., Wrap::Word);
+    label.halos = Some(f.halos(&layout));
     label.layout = layout;
     label.glyphs = glyphs;
     assert!(
@@ -610,8 +642,13 @@ fn glyph_quads_use_exact_shaped_positions_and_keep_overflowing_rtl_glyphs() {
     );
     let input = f.finish([100., 100.], vec![label.clone()]);
     let plan = plan(&input).unwrap();
-    // The label's shadow pass precedes its glyphs; check the glyph pass.
+    // The label's halo pass precedes its glyphs; check the glyph pass.
     assert_eq!(plan.quads.len(), 2 * plan.glyphs);
+    assert!(
+        plan.quads[..plan.glyphs]
+            .iter()
+            .all(|q| q.kind == KIND_GLYPH && q.color == theme::LABEL_HALO)
+    );
     let mut quads = plan.quads[plan.glyphs..].iter();
     for (glyph, handle) in label.layout.glyphs().iter().zip(label.glyphs.iter()) {
         let entry = input.atlas.get(handle).unwrap();
@@ -635,6 +672,158 @@ fn glyph_quads_use_exact_shaped_positions_and_keep_overflowing_rtl_glyphs() {
     }
     assert!(quads.next().is_none());
     assert!(plan.extent[0] > 0 && plan.extent[1] > 0);
+}
+
+#[test]
+fn label_halos_follow_font_size_padding_ancestor_clips_and_state() {
+    // One sixteenth of the em, within 1 and 2.5 logical pixels.
+    for (size, radius) in [
+        (8., 1.),
+        (12., 1.),
+        (16., 1.),
+        (17., 1.0625),
+        (22., 1.375),
+        (32., 2.),
+        (48., 2.5),
+    ] {
+        assert_eq!(
+            theme::LABEL_HALO_RULE.radius(size).unwrap(),
+            radius,
+            "{size}"
+        );
+    }
+    let mut f = Fixture::new();
+    // 32 px text: a 2 px radius, so a 2 texel margin and a halo clip 3 px past
+    // the text clip. 4 px of padding keeps the whole halo.
+    let roomy = f.widget(1, UiRole::Label, [10., 10., 210., 60.], 4., "Halo", 32.);
+    // 1 px of padding: the halo stops at the visible border box.
+    let tight = f.widget(2, UiRole::Label, [10., 70., 210., 120.], 1., "Halo", 32.);
+    // An ancestor clip narrower than the border box limits the halo too.
+    let mut nested = f.widget(3, UiRole::Label, [10., 130., 210., 180.], 4., "Halo", 32.);
+    nested.visible = [40., 130., 120., 180.];
+    nested.clip = [40., 134., 120., 176.];
+    // Parked in a zero-size container: nothing is visible, so no halo either.
+    let mut parked = f.widget(4, UiRole::Label, [10., 190., 210., 240.], 4., "Halo", 32.);
+    parked.visible = [0., 0., 0., 0.];
+    parked.clip = [0., 0., 0., 0.];
+    let mut disabled = f.widget(5, UiRole::Label, [10., 250., 210., 300.], 4., "Halo", 32.);
+    disabled.disabled = true;
+    let button = f.widget(6, UiRole::Button, [220., 10., 320., 60.], 6., "Go", 16.);
+    let field = f.widget(7, UiRole::TextInput, [220., 70., 320., 120.], 6., "ab", 16.);
+    assert!(button.halos.is_none() && field.halos.is_none());
+    let labels = [&roomy, &tight, &nested, &parked, &disabled].map(|w| (*w).clone());
+    let input = f.finish(
+        [400., 320.],
+        labels.iter().cloned().chain([button, field]).collect(),
+    );
+    let plan = plan(&input).unwrap();
+    let inked = roomy
+        .glyphs
+        .iter()
+        .filter(|h| input.atlas.get(h).unwrap().rect.is_some())
+        .count();
+    assert!(inked >= 4);
+    // Only labels draw halos: one per inked glyph, before that label's glyphs.
+    let halos: Vec<_> = plan
+        .quads
+        .iter()
+        .filter(|q| q.color[..3] == theme::LABEL_HALO[..3])
+        .collect();
+    assert_eq!(halos.len(), labels.len() * inked);
+    assert!(halos.iter().all(|q| q.kind == KIND_GLYPH));
+    let grown = |c: UiRect| [c[0] - 3., c[1] - 3., c[2] + 3., c[3] + 3.];
+    let expected = [
+        grown(roomy.clip),
+        tight.visible,
+        [40., 131., 120., 179.],
+        [0., 0., 0., 0.],
+        grown(disabled.clip),
+    ];
+    for ((label, chunk), clip) in labels.iter().zip(halos.chunks(inked)).zip(expected) {
+        assert_eq!(halo_clip(label, 3.), clip);
+        for q in chunk {
+            assert_eq!(q.clip, clip);
+            // Never past the visible border box.
+            let v = label.visible;
+            assert!(clip[0] >= v[0] && clip[1] >= v[1] && clip[2] <= v[2] && clip[3] <= v[3]);
+        }
+    }
+    assert!(roomy.visible[0] < expected[0][0] && expected[0][2] < roomy.visible[2]);
+    let dim = f32::from(theme::TEXT_DISABLED_ALPHA) / 255.;
+    assert!(
+        halos[..4 * inked]
+            .iter()
+            .all(|q| q.color == theme::LABEL_HALO)
+    );
+    assert!(
+        halos[4 * inked..]
+            .iter()
+            .all(|q| q.color == theme::alpha(theme::LABEL_HALO, dim))
+    );
+}
+
+/// The fixture's prepared halos, as the UI owner prepares them, hold what the
+/// contract documents, recomputed here independently in f64 over every glyph
+/// texel: the largest `clamp(r + c - d, 0, 1)` for coverage `c` at centre
+/// distance `d`, with `r` from the theme rule, inside a rectangle `ceil(r)`
+/// texels larger on every side and nothing beyond it.
+#[test]
+fn prepared_label_halos_are_the_documented_dilation_of_their_glyphs() {
+    let mut f = Fixture::new();
+    let [stride, _] = f.atlas.size();
+    let texel = |atlas: &GlyphAtlas, x: u32, y: u32| atlas.pixels()[(y * stride + x) as usize];
+    for size in [12., 17., 22., 40.] {
+        let label = f.widget(1, UiRole::Label, [0., 0., 400., 80.], 0., "Ag中س", size);
+        let r = f64::from((size / 16.).clamp(1., 2.5));
+        let margin = r.ceil() as u32;
+        let halos = label.halos.as_ref().unwrap();
+        assert_eq!(halos.len(), label.glyphs.len());
+        let mut checked = 0;
+        for (glyph, halo) in label.glyphs.iter().zip(halos.iter()) {
+            let (g, h) = (f.atlas.get(glyph).unwrap(), f.atlas.get(halo).unwrap());
+            let (Some([gx, gy, gw, gh]), Some([hx, hy, hw, hh])) = (g.rect, h.rect) else {
+                panic!("{size}: every glyph here has ink");
+            };
+            assert_eq!([hw, hh], [gw + 2 * margin, gh + 2 * margin], "{size}");
+            let m = margin as i32;
+            assert_eq!(h.origin, [g.origin[0] - m, g.origin[1] - m], "{size}");
+            let covered: Vec<(f64, f64, f64)> = (0..gh)
+                .flat_map(|y| (0..gw).map(move |x| (x, y)))
+                .filter_map(|(x, y)| {
+                    let c = texel(&f.atlas, gx + x, gy + y);
+                    (c > 0).then_some((f64::from(x), f64::from(y), f64::from(c) / 255.))
+                })
+                .collect();
+            let expected = |x: i64, y: i64| {
+                // Halo texel (x, y), in glyph texel coordinates.
+                let (cx, cy) = (
+                    (x - i64::from(margin)) as f64,
+                    (y - i64::from(margin)) as f64,
+                );
+                covered
+                    .iter()
+                    .map(|(u, v, c)| (r + c - (u - cx).hypot(v - cy)).clamp(0., 1.))
+                    .fold(0., f64::max)
+            };
+            for y in -1..=i64::from(hh) {
+                for x in -1..=i64::from(hw) {
+                    let want = expected(x, y) * 255.;
+                    let inside = (0..i64::from(hw)).contains(&x) && (0..i64::from(hh)).contains(&y);
+                    if !inside {
+                        assert!(want < 0.5, "{size}: halo ink outside its margin");
+                        continue;
+                    }
+                    let got = texel(&f.atlas, hx + x as u32, hy + y as u32);
+                    assert!(
+                        (f64::from(got) - want).abs() <= 1.,
+                        "{size}: {got} vs {want}"
+                    );
+                    checked += 1;
+                }
+            }
+        }
+        assert!(checked > 100, "{size}");
+    }
 }
 
 #[test]
@@ -695,6 +884,45 @@ fn plan_refuses_foreign_reset_and_inconsistent_input_before_building() {
         f.finish([200., 100.], vec![w; MAX_UI_WIDGETS + 1]),
         "widget limit",
     );
+    // Labels carry exactly one prepared halo per glyph at the theme's radius;
+    // no other role carries any.
+    let label = || {
+        let mut f = Fixture::new();
+        let w = f.widget(1, UiRole::Label, [0., 0., 100., 30.], 4., "ab", 16.);
+        (f, w)
+    };
+    let (f, w) = label();
+    assert!(plan(&f.finish([200., 100.], vec![w])).is_ok());
+    let (f, mut w) = label();
+    w.halos = None;
+    refuse(f.finish([200., 100.], vec![w]), "halo handles disagree");
+    let (f, mut w) = label();
+    w.halos = w.halos.map(|h| h[..1].to_vec().into());
+    refuse(f.finish([200., 100.], vec![w]), "halo handles disagree");
+    let (mut f, mut w) = base();
+    w.halos = Some(f.halos(&w.layout));
+    refuse(f.finish([200., 100.], vec![w]), "halo handles disagree");
+    // A handle that is not its glyph's halo at the theme radius: the glyph's
+    // own coverage, the other glyph's halo, or a halo of another radius.
+    let (f, mut w) = label();
+    w.halos = Some(Arc::clone(&w.glyphs));
+    refuse(f.finish([200., 100.], vec![w]), "halo entry disagrees");
+    let (f, mut w) = label();
+    w.halos = w.halos.map(|h| h.iter().rev().cloned().collect());
+    refuse(f.finish([200., 100.], vec![w]), "halo entry disagrees");
+    let (mut f, mut w) = label();
+    let wide: Vec<_> = (0..w.layout.glyphs().len())
+        .map(|i| f.engine.cache_halo(&w.layout, i, &mut f.atlas, 2.).unwrap())
+        .collect();
+    w.halos = Some(wide.into());
+    refuse(f.finish([200., 100.], vec![w]), "halo entry disagrees");
+    // A halo entry is never drawn as a glyph.
+    let (f, mut w) = label();
+    w.glyphs = w.halos.clone().unwrap();
+    refuse(f.finish([200., 100.], vec![w]), "halo entry disagrees");
+    let (mut f, mut w) = base();
+    w.glyphs = f.halos(&w.layout);
+    refuse(f.finish([200., 100.], vec![w]), "glyph handle is a halo");
     // Aggregate glyph placements are counted before any quad is built.
     let mut f = Fixture::new();
     let long = "a".repeat(16 * 1024);

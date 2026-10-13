@@ -1,0 +1,13 @@
+# 0069 UI reference conversion correction
+
+The retained generation-5 GPU run has six passing cases and two failed reference assertions. CPU diagnosis reproduced both failures: the reference omitted a measured linear conversion step before sRGB encoding. No production rendering, gameplay, appearance, layout, or shader bytes changed.
+
+The portable sRGB reference now expands the blended linear interval by `±0.5/4095` before the existing conversion. `ENCODE=.67`, `DECODE=.5`, filtering, geometry, clipping, coverage, alpha, UNORM, and all previous mutation thresholds remain unchanged. An explicit `ObservedM5` candidate independently quantizes destination decode and pre-encode linear values to 12 bits. This fits all 33,000 channels of the retained black-backdrop image and the isolated 2× blue10 result; it is observed Apple M5 Pro behavior, **not a universal Metal specification**. Two white-background candidate codes differ by one from the retained output but were already admitted by the prior reference.
+
+Added CPU regressions cover the isolated blue10 result, zero-alpha discard, and actual mixed Latin/Arabic/CJK glyphs over black and white. They admit the measured candidate, exact reference and llvmpipe candidate, while rejecting absent halos and reduced text alpha. Existing geometry, clipping, opacity, halo and blending-space negatives remain. Full renderer tests passed **69 CPU tests, zero failures; 83 GPU tests stayed ignored**. All-target strict Clippy, scoped rustfmt and diff checks passed.
+
+Generation6 freezes the new render-lib executable (`ddf12438…`,31,427,008B) with its executable permission and exact compiler artifact. The unaffected GPU-host executable retains its generation-5 identity. The unchanged eight-case manifest still declares39 tiny regression submissions, below its128 ceiling; this correction grants no GPU work. Root will bind the new source/build manifest into a fresh authority before delegated execution.
+
+The entire2713-input engine/tool/SDK inventory differs from15a59060 only in the private `#[cfg(test)]` UI reference. Six package producer/adapter inputs and all76 retained package files were independently rehashed unchanged. Existing source-free shipping evidence therefore remains applicable to production; it does not certify the new test executable or turn historical failed assertions into passes. No recook was performed.
+
+Evidence: [manifest](evidence/core0069-ui-oracle-correction.json), including lossless command logs, source freeze, package reuse checks, original diagnosis, and root's independent reproduction receipt. All owned CPU processes are terminal/reaped and the private target is released. GPU regression and appearance acceptance remain pending.
