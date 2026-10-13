@@ -1,0 +1,9 @@
+{
+  "result": "accepted",
+  "head": "5f71991d",
+  "source": "7f4ead27913aa6225d945a8807c67435d4ea57e5",
+  "manifest_sha256": "7fbe531a0c334d7c719bfc03aad8c3350147281b50d17fc5a462f0cd8c5b782e",
+  "independent_verifier_exit": 0,
+  "findings": [],
+  "review": "Independently reran151record/79payload/4136input verifier including originals and both actual binaries. Only reviewed test source differs from main250;15commands pass,10actualcases and10concurrent repetitions retained. Diagnostic proves typedWouldBlock while fork child retains descriptor and success after reap;50natural repeats pass so original hosted causal attribution remains inference. Existing exclusivity and immediate drop/reopen assertions retained; exactchild must report one executed passing case. No productionbehavior change, retry, weakened assert or claimed hosted successor success."
+}
