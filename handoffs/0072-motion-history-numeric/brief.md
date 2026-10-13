@@ -73,3 +73,36 @@ production or helpers. If all builds pass, report binary/link identities and
 finish this turn, leaving the target lease assigned for the next review stage.
 Root is reviewing correctness of the fixture/helpers in parallel. Preserve
 Opus5.5 Max verified through ACP on resume. No new survey or helper redesign.
+
+
+## Root revision 7: bounded Stage B execution granted
+
+The original ACP background CPU build ended without a terminal receipt when the
+ACP turn ended. Original logs are retained unchanged, with root-build-recovery1.json
+SHA728d2bc92101c17f241c635a94051d9ff795cee2c904adf935e44e766787d565.
+Root supervised unchanged build.py tests then review directly: all three child
+builds exited0, were reaped, and the fixture links the identical tested renderer.
+Do NOT rebuild, reacquire, modify or repeat the five revision6 CPU commands.
+
+Root execution-grant.json in ~/.codex/incant-evidence/0072-temporal-visual has
+SHA3121cda362835d42bd09dee20da5e8f9ed5d1963259701a17102e81b394a45aa.
+It pins build/tests.json, build/review.json, unchanged visual tree and binary
+48557af4894734528ec39d929646af548de46fe55089fa6308944d1dcaf5ba10.
+Read and verify that grant, then run the original guarded gpu.py listings and
+five existing suites once, followed by review listing and probe, stationary,
+motion, excluded, transitions, skinned, timing in order. Budgets remain96new
+submissions/16PNGs/960x540 and96existing cases once, with no blind retries.
+On any failure stop new GPU work, retain all evidence, release GPU then target,
+and report exact diagnostics. No production or fixture edits under this grant.
+After success analyze every numeric artifact and personally inspect every PNG;
+report actual quality findings, including current-only overlay jitter and any
+stationary or disocclusion defect. Release GPU before lengthy pixel analysis
+once all rendering is over. Optional fixture lint is CPU-only while target held.
+Publish/commit owned results and a self-contained recommendation with exact
+model/effort, source/build/binary hashes, raw outputs, limits and retained failure.
+
+Do not finish the ACP turn while any child build/GPU command is still running.
+Use the foreground command timeout or TaskOutput wait to obtain its terminal
+result; a background Monitor does not survive this ACP process ending. No
+unattended detached jobs. Root is available for process supervision if needed.
+Preserve Opus5.5 explicitly Max on this resumed session.
