@@ -1,0 +1,11 @@
+{
+  "previous_manifest_sha256": "42c943bec0898d0a4ebdc987168a2cbf666c70d332481a87026b4e47fdcf3732",
+  "original_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/parry-main194-001-integration-seams.patch",
+  "original_sha256": "f7866864b071803f189d2c569f56241a9c560eb52685ddde2eae4b2f3a295fce",
+  "gzip_sha256": "f5b7a74244e78ed2a74ae83bdab299454cb0fee3570e6c9acf89fff7a411d8e2",
+  "raw_bytes": 3232,
+  "gzip_bytes": 1011,
+  "lossless_verified": true,
+  "source_changes": false,
+  "reason": "Valid blank diff context lines triggered full-base whitespace check; lossless gzip preserves exact bytes without changing source whitespace policy."
+}
