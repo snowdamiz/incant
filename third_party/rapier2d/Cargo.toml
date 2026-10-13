@@ -57,6 +57,8 @@ status = "actively-developed"
 [features]
 # Trusted checkpoint diagnostics only; no default solver behavior changes.
 incant-checkpoint = ["alloc"]
+# Private checked-frame staging; not enabled by ordinary runtime features.
+incant-checked-restore = ["std", "alloc", "dep:incant_physics_snapshot"]
 alloc = [
     "nalgebra/alloc",
     "parry2d/alloc",
@@ -397,3 +399,8 @@ check-cfg = [
     'cfg(feature, values("dim3", "f64", "std", "alloc"))',
     'cfg(target_arch, values("spirv"))',
 ]
+
+[dependencies.incant_physics_snapshot]
+path = "../../crates/incant_physics_snapshot"
+default-features = false
+optional = true

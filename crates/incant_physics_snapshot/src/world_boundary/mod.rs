@@ -18,6 +18,28 @@ pub struct WorldBoundary<'a> {
     pipeline: &'a ValidatedPipelineState<'a>,
 }
 impl<'a> WorldBoundary<'a> {
+    /// Exact shared ownership, for separately gated native admission. This does
+    /// not grant construction or authenticate the enclosing runtime.
+    pub fn attachments(self) -> &'a crate::ValidatedAttachments<'a> {
+        self.broad
+            .context()
+            .narrow
+            .context()
+            .rigid
+            .collider_state()
+            .context()
+            .bodies
+            .attachments()
+    }
+    pub fn manifolds(self) -> &'a crate::ValidatedManifolds<'a> {
+        self.broad
+            .context()
+            .narrow
+            .context()
+            .rigid
+            .pairs()
+            .manifolds()
+    }
     pub fn broad(self) -> &'a ValidatedBroadOwner<'a> {
         self.broad
     }

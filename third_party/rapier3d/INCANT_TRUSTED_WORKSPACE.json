@@ -8,7 +8,7 @@
     {
       "path": "src/pipeline/mod.rs",
       "previous_sha256": "cf9fa7cdb76f2ef60b3e2266d7149d6d4fde1eeb082a51acd034558bdde1b55e",
-      "sha256": "a89b0fedf80778489347aaf4a256458507328263dbc97fd136e80001ba8746a0"
+      "sha256": "79266ab550d16699a502411efbc756acf8e18fa52d930e36918523c0415f3d7f"
     },
     {
       "path": "src/pipeline/physics_pipeline/mod.rs",

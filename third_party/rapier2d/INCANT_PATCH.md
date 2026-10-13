@@ -27,3 +27,9 @@ phase or scratch completeness. `INCANT_TRUSTED_WORKSPACE.json` layers these
 additions over the recorded historical pipeline-capture hashes. The current
 capture inventory reflects the additive exports. Generic live
 restoration and physics save admission remain disabled.
+
+The separate default-off `incant-checked-restore` feature adds numerical
+preflight of the joined inert frame through an optional dependency on the
+std-only snapshot crate. It has no native graph/world constructor or installer.
+`INCANT_CHECKED_ADMISSION.json` binds this layer and its prior hashes; upstream
+solver routines are unchanged. The public runtime does not enable this feature.

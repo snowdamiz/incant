@@ -41,6 +41,10 @@ mod world_capture;
 mod world_cases;
 #[path = "support/world_checks.rs"]
 mod world_checks;
+#[cfg(feature = "native-admission")]
+#[macro_use]
+#[path = "support/native_admission_cases.rs"]
+mod native_admission_cases;
 fn budget() -> Budget {
     Budget::new(MAX_ALLOCATION).unwrap()
 }
@@ -364,9 +368,15 @@ macro_rules! cases {
                     vec![Part {
                         translation: [0; 3],
                         rotation: [0, 0, 0, 1f32.to_bits()],
-                        shape: Primitive::Box {
-                            half_extents: $bits(shape.as_cuboid().unwrap().half_extents),
-                        },
+                        shape: if let Some(box_shape)=shape.as_cuboid() {
+                            Primitive::Box { half_extents:$bits(box_shape.half_extents) }
+                        } else if let Some(ball)=shape.as_ball() {
+                            Primitive::Ball { radius:ball.radius.to_bits() }
+                        } else if let Some(capsule)=shape.as_capsule() {
+                            assert_eq!(capsule.segment.a,-$rapier::math::Vector::Y*capsule.half_height());
+                            assert_eq!(capsule.segment.b,$rapier::math::Vector::Y*capsule.half_height());
+                            Primitive::CapsuleY { half_height:capsule.half_height().to_bits(),radius:capsule.radius.to_bits() }
+                        } else { panic!("unsupported actual native primitive") },
                     }]
                 };
                 let kind = if shape.as_compound().is_none() {
@@ -587,6 +597,8 @@ macro_rules! cases {
             broad_cases!($rapier, $vector, $cuboid);
             world_capture!($rapier, $bits, $posebits);
             world_cases!($rapier, $vector, $cuboid);
+            #[cfg(feature = "native-admission")]
+            native_admission_cases!($rapier, $vector, $cuboid);
             fn fixture(compound: bool) -> (PhysicsWorld, RigidBodyHandle, ColliderHandle) {
                 let mut w = PhysicsWorld::default();
                 w.integration_parameters.dt = 1. / 60.;

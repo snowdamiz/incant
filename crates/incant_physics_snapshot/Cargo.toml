@@ -10,6 +10,8 @@ publish.workspace = true
 default = ["physics-deterministic"]
 physics-deterministic = ["rapier2d/enhanced-determinism", "rapier3d/enhanced-determinism"]
 physics-fast-simd8 = ["rapier2d/simd8", "rapier3d/simd8"]
+# Test-only dev-edge selection for the default-off native admission experiment.
+native-admission = ["rapier2d/incant-checked-restore", "rapier3d/incant-checked-restore"]
 
 # Inert records only. No normal solver, serde, document or runtime dependency.
 [dev-dependencies]
