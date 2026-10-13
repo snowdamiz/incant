@@ -1,0 +1,265 @@
+{
+ "admission": {
+  "1890x1890 steady 16/16": {
+   "ordinary_36": {
+    "bytes": 642330912,
+    "fits": true
+   },
+   "ordinary_40": {
+    "bytes": 670907712,
+    "fits": true
+   },
+   "owner_36": {
+    "bytes": 470870112,
+    "fits": true
+   },
+   "owner_40": {
+    "bytes": 485158512,
+    "fits": true
+   }
+  },
+  "1923x1923 steady 16/16": {
+   "ordinary_36": {
+    "bytes": 660954504,
+    "fits": true
+   },
+   "ordinary_40": {
+    "bytes": 690537936,
+    "fits": false
+   },
+   "owner_36": {
+    "bytes": 483453912,
+    "fits": true
+   },
+   "owner_40": {
+    "bytes": 498245628,
+    "fits": true
+   }
+  },
+  "2014x2014 16/16 -> 8/16": {
+   "ordinary_36": {
+    "bytes": 638227672,
+    "fits": true
+   },
+   "ordinary_40": {
+    "bytes": 670677240,
+    "fits": true
+   },
+   "owner_36": {
+    "bytes": 544935164,
+    "fits": true
+   },
+   "owner_40": {
+    "bytes": 561159948,
+    "fits": true
+   }
+  },
+  "2015x2015 16/16 -> 8/16": {
+   "ordinary_36": {
+    "bytes": 638727280,
+    "fits": true
+   },
+   "ordinary_40": {
+    "bytes": 671209080,
+    "fits": false
+   },
+   "owner_36": {
+    "bytes": 545346136,
+    "fits": true
+   },
+   "owner_40": {
+    "bytes": 561587036,
+    "fits": true
+   }
+  },
+  "2048x2048 16/16 -> 8/16": {
+   "ordinary_36": {
+    "bytes": 654524416,
+    "fits": true
+   },
+   "ordinary_40": {
+    "bytes": 688078848,
+    "fits": false
+   },
+   "owner_36": {
+    "bytes": 558055424,
+    "fits": true
+   },
+   "owner_40": {
+    "bytes": 574832640,
+    "fits": true
+   }
+  },
+  "2048x2048 steady 8/16": {
+   "ordinary_36": {
+    "bytes": 579026944,
+    "fits": true
+   },
+   "ordinary_40": {
+    "bytes": 612581376,
+    "fits": true
+   },
+   "owner_36": {
+    "bytes": 440614912,
+    "fits": true
+   },
+   "owner_40": {
+    "bytes": 457392128,
+    "fits": true
+   }
+  },
+  "2532x1170 16/16 -> 8/16": {
+   "ordinary_36": {
+    "bytes": 502625712,
+    "fits": true
+   },
+   "ordinary_40": {
+    "bytes": 526325232,
+    "fits": true
+   },
+   "owner_36": {
+    "bytes": 434489592,
+    "fits": true
+   },
+   "owner_40": {
+    "bytes": 446339352,
+    "fits": true
+   }
+  },
+  "2560x1440 steady 16/16": {
+   "ordinary_36": {
+    "bytes": 658371072,
+    "fits": true
+   },
+   "ordinary_40": {
+    "bytes": 687862272,
+    "fits": false
+   },
+   "owner_36": {
+    "bytes": 481423872,
+    "fits": true
+   },
+   "owner_40": {
+    "bytes": 496169472,
+    "fits": true
+   }
+  }
+ },
+ "all_checks_pass": true,
+ "checks": [
+  {
+   "check": "same-support history: zero-confidence bright tap contributes nothing",
+   "detail": {
+    "independent_bilinear_H_would_give": 0.4,
+    "selected": 0.0
+   },
+   "ok": true
+  },
+  {
+   "check": "rejected tap removes its colour and its confidence",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "stored evidence nan reads as zero",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "stored evidence inf reads as zero",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "stored evidence -1.0 reads as zero",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "non-finite history colour is canonical zero with its confidence",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "evidence-invalid chain: output is current evidence plus prior only",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "8/16 -> 16/16: 36 units become 9 (= new cap), then + m",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "16/16 -> 8/16: 9 units become 36 (no softening pop), then capped",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "coverage blend is convex: 0 <= rgb <= alpha <= 1",
+   "detail": [
+    0.36000000000000004,
+    0.36000000000000004,
+    0.36000000000000004,
+    0.4666666666666667
+   ],
+   "ok": true
+  },
+  {
+   "check": "opaque history over all-clear 3x3 never persists",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "partial coverage over all-clear 3x3 may persist (thin wire missed phase)",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "resampling attenuation is 1 for a static (integer) reprojection",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "resampling attenuation is 0.25 at (0.5, 0.5)",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "history tap with changed secondary rejected at 2^-20 weight",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "DRS-frame mean clamp keeps the history's high-frequency part",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "DRS-frame mean clamp still bounds a mean (lighting) change",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "odd 2015: exact ceil source differs from the n*n//4 prototype by 24192 B",
+   "detail": 24192,
+   "ok": true
+  },
+  {
+   "check": "ordinary 40 B stride: 2014 fits and 2015 is refused under exact extents (16 -> 8)",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "production 36 B stride admits the 2048^2 16 -> 8 transition; 40 B refuses it",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "ceiling unchanged",
+   "detail": null,
+   "ok": true
+  }
+ ],
+ "scope": "analytic transcription; not renders, not historical gates"
+}
