@@ -71,7 +71,11 @@ fn cook_never_executes_project_code_or_interprets_names_as_rust() {
 fn reviewed_mobile_destination_is_explicit_and_bound_to_fresh_source() {
     let native = cook_script("mobile.js", SOURCE, None, artifact::TARGET).unwrap();
     let native: serde_json::Value = serde_json::from_str(&native.symbol_manifest).unwrap();
-    for target in ["aarch64-apple-ios", "aarch64-apple-ios-sim"] {
+    for target in [
+        "aarch64-apple-ios",
+        "aarch64-apple-ios-sim",
+        "aarch64-linux-android",
+    ] {
         if artifact::TARGET == "aarch64-apple-darwin"
             && artifact::BytecodeAbi::current().default_c_flags
         {
@@ -94,7 +98,8 @@ fn reviewed_mobile_destination_is_explicit_and_bound_to_fresh_source() {
     }
     // Architecture resemblance and source inspection do not admit an untested runtime.
     for target in [
-        "aarch64-linux-android",
+        "x86_64-linux-android",
+        "armv7-linux-androideabi",
         "x86_64-apple-ios",
         "aarch64-apple-tvos",
         "aarch64-apple-ios-wrong",

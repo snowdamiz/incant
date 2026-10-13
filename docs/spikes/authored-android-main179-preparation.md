@@ -14,3 +14,10 @@ changed compilation inputs, then perform relevant current-main validation before
 publication. Phone, rendering, platform-host, signing and performance gates remain
 open. [Preparation receipt](evidence/authored-android-main179-preparation/pause.json)
 retains the exact source comparison and accepted producer review.
+
+Resumed validation composed the frozen restart owner at `1573bd02`. The script
+suite passed; cooker checks caught an obsolete ARM Android refusal expectation.
+A test-only correction now verifies the admitted route metadata and keeps x86/ARMv7
+Android refusals; all four focused cooker cases pass. The original failure and
+unchanged production inputs are retained in the [correction receipt](evidence/authored-android-main179-correction/manifest.json).
+Current-union archive and caller checks remain pending.
