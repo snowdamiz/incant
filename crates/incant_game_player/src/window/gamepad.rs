@@ -1,5 +1,6 @@
 //! Gilrs is enabled only for the desktop window host. No backend handles,
-//! mapping strings, device names or force-feedback capabilities enter gameplay.
+//! mapping strings or device names enter gameplay. Haptic capabilities are
+//! bounded, generation-bearing host targets.
 use super::{Error, input::PendingInput};
 use gilrs::{Axis, Button, EventType, Gilrs, GilrsBuilder};
 use incant_input::{
@@ -10,35 +11,90 @@ use incant_input::{
 pub struct Gamepads {
     backend: Gilrs,
     adapter: GamepadAdapter<usize>,
+    haptics: super::haptics::Haptics<super::haptics::Motors>,
 }
 impl Gamepads {
     pub fn new() -> Result<Self, Error> {
-        let backend = require_backend(
+        let mut backend = require_backend(
             GilrsBuilder::new()
                 // Default filters can internally drain an unbounded number of
                 // dropped jitter/dead-zone events. Actions own our dead zones; the
                 // two D-pad axes are translated explicitly below.
                 .with_default_filters(false)
-                .with_force_feedback(false)
-                .build(),
+                .with_force_feedback(true)
+                .build()
+                // FF availability must never remove preexisting input support.
+                .or_else(|_| {
+                    GilrsBuilder::new()
+                        .with_default_filters(false)
+                        .with_force_feedback(false)
+                        .build()
+                }),
         )?;
         let mut adapter = GamepadAdapter::default();
-        for (id, _) in backend.gamepads() {
+        let mut haptics = super::haptics::Haptics::default();
+        // Collect only the supported bounded inventory before borrowing Gilrs
+        // mutably to create its reusable effects.
+        let mut devices = Vec::new();
+        for (id, pad) in backend.gamepads() {
             adapter.event(usize::from(id), DeviceEvent::Connected, false)?;
+            devices.push((id, pad.is_ff_supported()));
         }
-        Ok(Self { backend, adapter })
+        for (id, supported) in devices {
+            let logical = adapter
+                .logical_id(&usize::from(id))
+                .ok_or(Error::HapticBackend)?;
+            haptics.connect(logical, supported, || {
+                super::haptics::Motors::new(id, &mut backend)
+            })?;
+        }
+        Ok(Self {
+            backend,
+            adapter,
+            haptics,
+        })
     }
     pub fn poll(&mut self, input: &mut PendingInput, accepting: bool) -> Result<(), Error> {
         if accepting {
             self.synchronize(input)?;
         }
-        drain(&mut self.adapter, input, accepting, || {
-            self.backend
-                .next_event()
-                .map(|event| (usize::from(event.id), event.event))
-        })?;
+        for _ in 0..MAX_EVENTS_PER_TICK {
+            let Some(event) = self.backend.next_event() else {
+                self.backend.inc();
+                return Ok(());
+            };
+            let id = usize::from(event.id);
+            translate(&mut self.adapter, input, id, event.event, accepting)?;
+            if let Some(logical) = self.adapter.logical_id(&id) {
+                match event.event {
+                    EventType::Connected => {
+                        let supported = self
+                            .backend
+                            .connected_gamepad(event.id)
+                            .is_some_and(|pad| pad.is_ff_supported());
+                        self.haptics.connect(logical, supported, || {
+                            super::haptics::Motors::new(event.id, &mut self.backend)
+                        })?;
+                    }
+                    EventType::Disconnected => self.haptics.disconnect(logical)?,
+                    _ => {}
+                }
+            }
+        }
+        if self.backend.next_event().is_some() {
+            return Err(Error::InputCapacity);
+        }
         self.backend.inc();
         Ok(())
+    }
+    pub fn haptic_capabilities(&mut self) -> incant_input::haptics::HapticCapabilities {
+        self.haptics.resume()
+    }
+    pub fn haptics(&mut self, output: &incant_input::haptics::HapticRequests) -> Result<(), Error> {
+        self.haptics.dispatch(output)
+    }
+    pub fn pause_haptics(&mut self) -> Result<(), Error> {
+        self.haptics.pause()
     }
     pub fn synchronize(&mut self, input: &mut PendingInput) -> Result<(), Error> {
         while let Some(event) = self.adapter.next_connection_event() {
@@ -58,6 +114,7 @@ fn require_backend(backend: Result<Gilrs, gilrs::Error>) -> Result<Gilrs, Error>
     // be accepted as a functioning native gamepad host.
     backend.map_err(|_| Error::GamepadBackend)
 }
+#[cfg(test)]
 fn drain(
     adapter: &mut GamepadAdapter<usize>,
     input: &mut PendingInput,

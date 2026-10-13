@@ -196,6 +196,9 @@ fn copy_store(stored: &Store, active: &[StableId]) -> Result<Store> {
 }
 fn script_state(session: &NativeSession) -> Result<ScriptState> {
     let host = host(session)?;
+    if !host.haptic_requests.is_empty() {
+        return Err(CheckpointError::Unsupported("pending haptic output"));
+    }
     if host.session_request.is_some() {
         return Err(CheckpointError::Unsupported(
             "pending session restart request",
@@ -327,6 +330,9 @@ impl NativeSession {
     /// GameSession/device/export loading is a separate, not-yet-supported route.
     pub fn restore_checkpoint_bytes(&mut self, bytes: &[u8]) -> Result<()> {
         let host = host(self)?;
+        if !host.haptic_requests.is_empty() {
+            return Err(CheckpointError::Unsupported("pending haptic output"));
+        }
         let sections = codec::sections(bytes, identity(&host._compiled))?;
         if sections.origin != self.world.source_scene_fingerprint() {
             return Err(CheckpointError::WorldMismatch);

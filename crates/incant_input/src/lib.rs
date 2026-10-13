@@ -7,6 +7,7 @@ pub use actions::{
 };
 pub mod gamepad;
 mod gestures;
+pub mod haptics;
 mod recording;
 mod recording_ui;
 pub use recording_ui::RecordedUiEvent;
