@@ -1,0 +1,24 @@
+{
+ "format": "incant-0070-ssao-filter-002-review-stripes-v1",
+ "outputs": {
+  "diff_crop_v1_stripes_b003_vs_002.png": {
+   "description": "v1_ssao minus v1_off at the stripe bases, crop [290, 260, 160, 160] x3, mean RGB x16: build003 | 002 C2",
+   "png_sha256": "41c023d94115180fe4c0bd6ed25350aecfdea7b6c32bdb86bdb49f2e1cbc011a",
+   "size": [
+    966,
+    480
+   ]
+  },
+  "diff_crop_v2_stripes_b003_vs_002.png": {
+   "description": "v2_ssao minus v2_off at the stripe bases, crop [300, 260, 160, 160] x3, mean RGB x16: build003 | 002 C2",
+   "png_sha256": "f1db237c6f1dc2a9464dd28e35241ebaff68e40bdeb74303190a7e64d710006c",
+   "size": [
+    966,
+    480
+   ]
+  }
+ },
+ "tool": {
+  "make_stripes_review.py": "9a6a7a6164fa1508465caf718eedb527e18f2a79d06ae43700402fd3f22b7b1a"
+ }
+}

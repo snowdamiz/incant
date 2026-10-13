@@ -1,0 +1,316 @@
+{
+ "format": "incant-0070-ssao-filter-002-review-v1",
+ "note": "Derived after release from retained PNGs, decoded and verified against index.json; not renders and not acceptance evidence.",
+ "outputs": {
+  "crop_v2_pillar_stripes_ssao_b003_vs_002.png": {
+   "description": "v2_ssao crop [185, 215, 250, 180] x2: build003 | 002 C2",
+   "png_sha256": "e3ac11a0e0f9a77c235908f566aba83f0bc4ef7be15db8bbb658ecc65c16f565",
+   "size": [
+    1006,
+    360
+   ]
+  },
+  "crop_v2_sphere_crate_ssao_b003_vs_002.png": {
+   "description": "v2_ssao crop [470, 260, 240, 140] x2: build003 | 002 C2",
+   "png_sha256": "641e76f43e8eafe732c61d13b61b498b0017abc4cdd6fa1d3f1d6e461f96ce35",
+   "size": [
+    966,
+    280
+   ]
+  },
+  "crop_v4_crate_sphere_ssao_b003_vs_002.png": {
+   "description": "v4_ssao crop [180, 120, 230, 220] x2: build003 | 002 C2",
+   "png_sha256": "934c6651834a1e1382e65ff9244c9c381da6b63aaad5fd9e5ddb90db0ea8d550",
+   "size": [
+    926,
+    440
+   ]
+  },
+  "diff_v1_ssao_b003_vs_002.png": {
+   "description": "v1_ssao minus v1_off, mean RGB x16: build003 (left) | 002 C2 (right)",
+   "png_sha256": "ca0dbfaaeabfa960c82dcd8c383bc35d24b2ea37bfc081bf67bf7d85ee0be9db",
+   "size": [
+    1924,
+    539
+   ]
+  },
+  "diff_v2_ssao_b003_vs_002.png": {
+   "description": "v2_ssao minus v2_off, mean RGB x16: build003 (left) | 002 C2 (right)",
+   "png_sha256": "7615e117ca8a136787e6b11763a053e638862b464f7513e6a58c65e6d2ddcdb9",
+   "size": [
+    1926,
+    540
+   ]
+  },
+  "diff_v3_both_8_b003_vs_002.png": {
+   "description": "v3_both_8 minus v3_off_8, mean RGB x12: build003 | 002 C2",
+   "png_sha256": "9119233909a768e971aa1f582e388f4a35c645bc4a0ce77908fedec638b5778e",
+   "size": [
+    1924,
+    539
+   ]
+  },
+  "diff_v4_ssao_b003_vs_002.png": {
+   "description": "v4_ssao minus v4_off, mean RGB x12: build003 (left) | 002 C2 (right)",
+   "png_sha256": "b3306d30ba6a2c4615016b488b9895f3ef551ff7d182fb966d0e2e9b095d6252",
+   "size": [
+    1286,
+    480
+   ]
+  }
+ },
+ "sources": {
+  "002": {
+   "v1_bloom": "7285564b45abe25e197454faa4997dfb33fa5257f537633ee7a765756b0dd584",
+   "v1_both": "57c9c4059b85e510c74f920cbd45b273f0b14c436c8bd437309dbda84eb23397",
+   "v1_off": "0ced60a82035fb4d8dbd1cf1ba92a805d9acd340e68b505544107d61cd1eb608",
+   "v1_ssao": "706305c95199848e491851542ad634bf80d27454eba574cb7d1f66f233d74b3f",
+   "v2_bloom": "0f98b5d62f35ca18782c4b7a55f720a960e5b0ee1cbfdc1c5a2585b324fe330d",
+   "v2_both": "ce0aac0be54bcbc647858065561b8fe2be205330285843c48bda3f0706174530",
+   "v2_off": "d8cbfa8c5deb2eaa2f0ecb431597b855122fdc348f1b5d4be291ee34fa8220e8",
+   "v2_ssao": "27caae258bedb201d3951ec6e937d6798d6c7c9ea6884b5049fa1dc345d9ed33",
+   "v3_both_12": "1d2e709b66c85d555f4edaae6ad35a9422d361d37c331b89db58df8724c325f0",
+   "v3_both_8": "11cf540e1336740ec4b601bdbe333920e736534c2909b9096407ad254ff7b77e",
+   "v3_off_12": "5dc5467640f7ab24f360009c4cd5a0a88151a7498bbd554debe9ea0008aeb289",
+   "v3_off_8": "1b0a36010c98c3009d082a9d7f7f050f48e9a251c19ef32363c0d3067ecaef63",
+   "v4_bloom": "412168f9ff2da646cb75d869757673c2f677e0efa8c5dc4346176c32aa502d61",
+   "v4_both": "7007b8b10a2f2cbbdb4926b3899f5f604fadf7b92104152f1802a8af81307625",
+   "v4_off": "445b40250f28e17479101b95dd5a6c33afbcc3a6553b7329c50e6486ef6b5296",
+   "v4_ssao": "06b0bb4ab51a473dd83c19d8dd03e9afb23cc6d382da8abacf18dde4148f1a49"
+  },
+  "build003": {
+   "v1_bloom": "7285564b45abe25e197454faa4997dfb33fa5257f537633ee7a765756b0dd584",
+   "v1_both": "85a1262300849808e690d6e5d6edf1c2ffeb464e72d673602e4e4950b33d35b5",
+   "v1_off": "0ced60a82035fb4d8dbd1cf1ba92a805d9acd340e68b505544107d61cd1eb608",
+   "v1_ssao": "672c71c17d331d827bdedb022adae4618caa9480130a54e8207cd34de83077ff",
+   "v2_bloom": "0f98b5d62f35ca18782c4b7a55f720a960e5b0ee1cbfdc1c5a2585b324fe330d",
+   "v2_both": "ea0f6428ca377ef6d9ad7981ee03ff75784bb8a88e5d08c696d2098f7af56ef8",
+   "v2_off": "d8cbfa8c5deb2eaa2f0ecb431597b855122fdc348f1b5d4be291ee34fa8220e8",
+   "v2_ssao": "e1ee1640d422823a2ffc9ead5702c342d2e81aaf865016dc766979c7e25dcdc4",
+   "v3_both_12": "a19db1aa9f83eaf81ffcefdf8d1b4ba2f331faa5bc0f62b8feeffa28e0f486d6",
+   "v3_both_8": "47ba54566c9cbc314e060cd7aea96ef5ec48a38cbe6c0af67a7308b52c8fd261",
+   "v3_off_12": "5dc5467640f7ab24f360009c4cd5a0a88151a7498bbd554debe9ea0008aeb289",
+   "v3_off_8": "1b0a36010c98c3009d082a9d7f7f050f48e9a251c19ef32363c0d3067ecaef63",
+   "v4_bloom": "412168f9ff2da646cb75d869757673c2f677e0efa8c5dc4346176c32aa502d61",
+   "v4_both": "8b17e242c10892ec9daf9d9c272b86cd445a20ecdb55379793d2669b90dbc082",
+   "v4_off": "445b40250f28e17479101b95dd5a6c33afbcc3a6553b7329c50e6486ef6b5296",
+   "v4_ssao": "a4452f614a9ea3592c83e726bf8d3721d6e2586ffd17ccd61f73d434e3d87b24"
+  }
+ },
+ "ssao_brighter_than_off": {
+  "v1_002": {
+   "bbox": [
+    526,
+    276,
+    550,
+    305
+   ],
+   "first": [
+    [
+     526,
+     276,
+     0.33,
+     1
+    ],
+    [
+     531,
+     300,
+     0.33,
+     1
+    ],
+    [
+     535,
+     301,
+     0.33,
+     1
+    ],
+    [
+     542,
+     301,
+     0.33,
+     1
+    ],
+    [
+     540,
+     303,
+     0.33,
+     1
+    ],
+    [
+     550,
+     305,
+     0.33,
+     1
+    ]
+   ],
+   "max_channel_code": 1,
+   "max_mean_code": 0.33,
+   "pixels": 6
+  },
+  "v1_build003": {
+   "bbox": [
+    541,
+    313,
+    541,
+    313
+   ],
+   "first": [
+    [
+     541,
+     313,
+     0.33,
+     1
+    ]
+   ],
+   "max_channel_code": 1,
+   "max_mean_code": 0.33,
+   "pixels": 1
+  },
+  "v2_002": {
+   "bbox": [
+    520,
+    277,
+    552,
+    306
+   ],
+   "first": [
+    [
+     525,
+     277,
+     0.33,
+     1
+    ],
+    [
+     534,
+     301,
+     0.33,
+     1
+    ],
+    [
+     550,
+     302,
+     0.33,
+     1
+    ],
+    [
+     520,
+     304,
+     0.33,
+     1
+    ],
+    [
+     552,
+     306,
+     0.33,
+     1
+    ]
+   ],
+   "max_channel_code": 1,
+   "max_mean_code": 0.33,
+   "pixels": 5
+  },
+  "v2_build003": {
+   "bbox": null,
+   "first": [],
+   "max_channel_code": 0,
+   "max_mean_code": 0,
+   "pixels": 0
+  },
+  "v4_002": {
+   "bbox": [
+    25,
+    44,
+    245,
+    181
+   ],
+   "first": [
+    [
+     227,
+     44,
+     0.33,
+     1
+    ],
+    [
+     226,
+     45,
+     0.33,
+     1
+    ],
+    [
+     219,
+     48,
+     0.33,
+     1
+    ],
+    [
+     220,
+     48,
+     0.33,
+     1
+    ],
+    [
+     212,
+     54,
+     0.33,
+     1
+    ],
+    [
+     216,
+     54,
+     0.33,
+     1
+    ],
+    [
+     211,
+     55,
+     0.33,
+     1
+    ],
+    [
+     212,
+     55,
+     0.33,
+     1
+    ],
+    [
+     214,
+     55,
+     0.33,
+     1
+    ],
+    [
+     211,
+     56,
+     0.33,
+     1
+    ],
+    [
+     213,
+     56,
+     0.33,
+     1
+    ],
+    [
+     215,
+     57,
+     0.33,
+     1
+    ]
+   ],
+   "max_channel_code": 1,
+   "max_mean_code": 0.33,
+   "pixels": 83
+  },
+  "v4_build003": {
+   "bbox": null,
+   "first": [],
+   "max_channel_code": 0,
+   "max_mean_code": 0,
+   "pixels": 0
+  }
+ },
+ "tool": {
+  "make_review.py": "af4ffb7bf13cff511b04c3a956353e66fbf1d2f9e499c646bf73e237b290c5c4",
+  "pngtool.py": "8acdc898cd964fc3a47fa5cf8c890996b4e250ebe544b3ed10b404c37400cfa0"
+ }
+}
