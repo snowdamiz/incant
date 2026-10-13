@@ -81,7 +81,7 @@ The inert path now retains every fixed regular rigid-body field, including
 mass/force/velocity/CCD caches, activation history, exact u128 user data and
 island scalar references, bound to checked body/attachment rows. 101 CPU tests
 and all scoped checks pass; native both-dimension evidence covers force/mass
-changes, sleep/wake, automatic CCD and removal/reuse. Independent producer review is accepted. The [current-main206 integration](docs/spikes/physics-body-main206.md) passes all eight checks and 101 CPU cases with 2,900 unchanged inputs; final integration review is pending. Derived mass/island consistency, solver work admission, complete
+changes, sleep/wake, automatic CCD and removal/reuse. Independent producer review is accepted. The [current-main206 integration](docs/spikes/physics-body-main206.md) passes all eight checks and 101 CPU cases with 2,900 unchanged inputs; final integration review is accepted and publication requires the fast check. Derived mass/island consistency, solver work admission, complete
 collider/owner construction and exact continuation remain required; physics
 saves stay refused. [Body contract](docs/spikes/physics-inert-body-state.md).
 

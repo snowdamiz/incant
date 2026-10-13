@@ -15,7 +15,7 @@ The collector binds eight executed checks, full frozen inputs, 99 rehashed
 producer raw/retained artifact records, 20 pinned reference pairs and the
 [producer acceptance](evidence/physics-body-main206/producer-final-review.json)
 to the [integration manifest](evidence/physics-body-main206.json).
-Current-main final review is pending.
+[Current-main final acceptance](evidence/physics-body-main206/final-review.json) is retained. Publication requires the exact-head fast check.
 
 The format retains fixed regular-body force/mass/velocity/CCD/activation fields,
 exact user bits and island scalar references, bound to checked body/attachment

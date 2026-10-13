@@ -466,5 +466,9 @@
     "All44 crate source/test/manifest files equal acceptedc250. Older producer lock predates merged profiling packages/edges and renderer dev naga; current lock equals actualmain206.",
     "No live constructor, complete owner authentication, reciprocal solver/island ownership, previous-cluster scratch reconstruction, physics-save admission, GPU, shipping, device or performance claim."
   ],
-  "review_state": "Current-main final body-state integration review pending"
+  "review_state": "Independent current-main final acceptance; publication subject to exact-head fast check",
+  "final_review": {
+    "path": "docs/spikes/evidence/physics-body-main206/final-review.json",
+    "sha256": "55e0f33d004a17cfd1aa018cc2caea9a0f7d0baf901407961b10ba8c24173f11"
+  }
 }
