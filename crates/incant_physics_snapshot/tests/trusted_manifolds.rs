@@ -22,6 +22,13 @@ mod continuation_cases;
 #[macro_use]
 #[path = "support/narrow_cases.rs"]
 mod narrow_cases;
+#[path = "support/broad_capture.rs"]
+mod broad_capture;
+#[path = "support/broad_checks.rs"]
+mod broad_checks;
+#[macro_use]
+#[path = "support/broad_cases.rs"]
+mod broad_cases;
 #[path = "support/narrow_checks.rs"]
 mod narrow_checks;
 #[path = "support/ordered_capture.rs"]
@@ -569,6 +576,7 @@ macro_rules! cases {
             collider_cases!($rapier, $vector, $cuboid, $posebits);
             continuation_cases!($rapier, $vector, $cuboid);
             narrow_cases!($rapier, $vector, $cuboid);
+            broad_cases!($rapier, $vector, $cuboid);
             fn fixture(compound: bool) -> (PhysicsWorld, RigidBodyHandle, ColliderHandle) {
                 let mut w = PhysicsWorld::default();
                 w.integration_parameters.dt = 1. / 60.;

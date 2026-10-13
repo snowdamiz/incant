@@ -1,0 +1,10 @@
+{
+  "at": "2026-10-13T12:27:36.805787+00:00",
+  "reviewer": "astra root",
+  "head": "d23fbebaab64b0cf3befbe9bcf2d7f1b443b61c7",
+  "qualification_sha256": "a856e8c8f38859358a0d8381e21bf311fbf8c573faff133139449248e1c25272",
+  "prior_root_review_sha256": "b6708d3820d114ec7209d6bf99d1b271192227d0a0b925c7d037656c7697d5ff",
+  "verification": "Read full wrapper and qualification; executed --verify-only exit0, session30498 reaped. Exactly four renderer exceptions among3125 frozen inputs; all1549 physics inputs, vendor/lock/manifests/tooling unchanged; current std-only graph exact. All original27 records/11 checks and172 default+172 fast8 actual executions revalidated. No new build/GPU claim.",
+  "findings": [],
+  "scope": "Approve inert broad owner main222 relevance and scoped PR after required checks. No live-save, phase or device approval."
+}

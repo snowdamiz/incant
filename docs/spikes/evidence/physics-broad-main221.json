@@ -1,0 +1,349 @@
+{
+  "schema": 1,
+  "base": "f300dbc56a79bde82cd6dbaf936216c1955cd892",
+  "producer": "88c10fe1068a805f4d77f6873db555f6cc36a732",
+  "source_head": "99390d21939bab24fa4308125649c1d1dc2ebcfd",
+  "archive": {
+    "path": "docs/spikes/evidence/physics-broad-main221/records.json.gz",
+    "sha256": "6607155d5758b32bf689c2967d264d974a758fb63e0f60796fbe386e1e196d69",
+    "bytes": 347509,
+    "records": 27,
+    "payloads": 16
+  },
+  "checks": [
+    {
+      "name": "scoped-clean",
+      "argv": [
+        "./tools/cargo",
+        "clean",
+        "-p",
+        "incant_physics_snapshot"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 22772,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.12444012500054669,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-broad-main221-001/scoped-clean.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-broad-main221-001/scoped-clean.stderr",
+        "sha256": "0bdaeb2aa6a92a0fdfec2d2cc4d0ab71946de5d0654e08c526e4629130ae0f28"
+      }
+    },
+    {
+      "name": "default-tests",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--all-targets",
+        "--message-format=json",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 22776,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 26.518855040994822,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-broad-main221-001/default-tests.stdout",
+        "sha256": "b47b72b56d363da440d4310d71965482865e3aa10a8b0ffae4ad516108bb5870"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-broad-main221-001/default-tests.stderr",
+        "sha256": "91e813e89d7028162799050cf5807d1eab387f471e5ad4f3b132c724ed74b05c"
+      }
+    },
+    {
+      "name": "default-clippy",
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 23204,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 1.2505859579978278,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-broad-main221-001/default-clippy.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-broad-main221-001/default-clippy.stderr",
+        "sha256": "5955bd635a3a84094bf22be6da65aedfdc7d2baa3a5055aa8df534ccef024505"
+      }
+    },
+    {
+      "name": "fast8-tests",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--no-default-features",
+        "--features",
+        "physics-fast-simd8",
+        "--all-targets",
+        "--message-format=json",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 23241,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 26.143474334006896,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-broad-main221-001/fast8-tests.stdout",
+        "sha256": "ee3c21493cdeae6553c51595e9d244c56c2b5a47e3b04b1c756843ac111b24f8"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-broad-main221-001/fast8-tests.stderr",
+        "sha256": "37646758d644828b3ccdf9ebd55dfe24cd2a9b15eea0308ae8197e0227edc6e4"
+      }
+    },
+    {
+      "name": "fast8-clippy",
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--no-default-features",
+        "--features",
+        "physics-fast-simd8",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 23836,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 1.2857023749966174,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-broad-main221-001/fast8-clippy.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-broad-main221-001/fast8-clippy.stderr",
+        "sha256": "29124239bc4f5333552b72aa814a180b489b331ad29b7ea1e4382a8ec1f1c250"
+      }
+    },
+    {
+      "name": "wasm",
+      "argv": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--lib",
+        "--target",
+        "wasm32-unknown-unknown"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 23881,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.4961496670002816,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-broad-main221-001/wasm.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-broad-main221-001/wasm.stderr",
+        "sha256": "120382982cd24dbde6fba8a5732098a6d15e6768cf9a6a633ae3adc4f38c12a4"
+      }
+    },
+    {
+      "name": "normal-graph",
+      "argv": [
+        "./tools/cargo",
+        "tree",
+        "--locked",
+        "--offline",
+        "-p",
+        "incant_physics_snapshot",
+        "--edges",
+        "normal",
+        "--prefix",
+        "none"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 23890,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.11583116700057872,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-broad-main221-001/normal-graph.stdout",
+        "sha256": "4a393fa5ace88511dd8ae2bf90d087c3584026f17bcc4075db5b8d1f03a69044"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-broad-main221-001/normal-graph.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "runtime-guard",
+      "argv": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_physics_snapshot"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 23894,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.4258101669984171,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-broad-main221-001/runtime-guard.stdout",
+        "sha256": "5ef41ccdc08f92a9a1cc30fa588d7c6c800813dbea42b4b2961cbec2929633a6"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-broad-main221-001/runtime-guard.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "fmt",
+      "argv": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 23900,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 1.316537624996272,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-broad-main221-001/fmt.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-broad-main221-001/fmt.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "conventions",
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 23937,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.032811166005558334,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-broad-main221-001/conventions.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-broad-main221-001/conventions.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "diff",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "f300dbc56a79bde82cd6dbaf936216c1955cd892",
+        "HEAD"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 23938,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.00977591599803418,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-broad-main221-001/diff.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-broad-main221-001/diff.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "freeze": {
+    "path": "docs/spikes/evidence/physics-broad-main221/freeze.json",
+    "sha256": "5193b798639c486c4e31d857c62185ffa4c831f0443b74a3c7c472a525b0f18e",
+    "files": 3125
+  },
+  "source_identity": {
+    "path": "docs/spikes/evidence/physics-broad-main221/source-identity.json",
+    "sha256": "7cde95ee2e535694f11e492c68ca18893c9fb03cef8c938c543ef749d70c55ca",
+    "files": 1549
+  },
+  "producer_manifest": {
+    "path": "docs/spikes/evidence/physics-broad-owner.json",
+    "sha256": "5911adc28c34f201d7163bf293a6ad930aa51446fd03bca8b210aa98834d84c4"
+  },
+  "producer_review": {
+    "path": "docs/spikes/evidence/physics-broad-main221/producer-final-review.json",
+    "sha256": "81ca03260b5fa94e69ca6b283800ddfc3dbe9d416c8da44640d17b553bf17235"
+  },
+  "results": {
+    "default_cases": 172,
+    "fast8_cases": 172,
+    "groups_each": 22,
+    "failed": 0,
+    "ignored": 0
+  },
+  "qualification": [
+    "Actual composed snapshot freshly compiled and tested in default and fast8; prior binaries were not substituted.",
+    "Only lib module/exports/errors needed combining; all other physics sources match accepted producer or actual main221.",
+    "No vendor source, lock or manifest changes from main221. Normal snapshot dependency graph remains std-only.",
+    "No hostile decoder/live construction, full-owner restore, world save, device or performance admission."
+  ],
+  "final_review": {
+    "decision": "accepted",
+    "path": "docs/spikes/evidence/physics-broad-main221/final-root-review.json",
+    "sha256": "b6708d3820d114ec7209d6bf99d1b271192227d0a0b925c7d037656c7697d5ff"
+  }
+}
