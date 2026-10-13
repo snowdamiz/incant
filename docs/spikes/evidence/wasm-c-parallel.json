@@ -1,0 +1,195 @@
+{
+  "scope": "Cargo-jobserver C compilation for trusted static Wasm bundles",
+  "base": "8c1db376fc8c3e6651a353112c58ba66515f6733",
+  "production": {
+    "root": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+    "base": "8c1db376fc8c3e6651a353112c58ba66515f6733",
+    "files": {
+      "crates/incant_wasm_runtime/Cargo.toml": "4cd3c7888d57d7c20c600ed2f34efec21ee32bd9c0b2134828a25adfb160e265",
+      "crates/incant_wasm_runtime/build.rs": "b752b73bf585df002c6ee0d2a8f42f49dfaa5c0733748c18f5a331fa0b102f1b",
+      "Cargo.lock": "ecae698c336af3c2cbb9724e089d3455fe3848260cfc2f20acb04b260ccf9882",
+      ".github/workflows/development-wasm.yml": "9fdf6e92d4ce7c891ffb221bd3bf949cde16302973e3dc1a41de58fdfef1021b",
+      "tools/probes/shipping-wasm2c.py": "8599375d2064bc6658584bb67a92c0bc4133f1b93f5d13d541c31faa98a60ac9"
+    },
+    "production_delta": [
+      "crates/incant_wasm_runtime/Cargo.toml"
+    ],
+    "unchanged": "build.rs, lock, workflows, compiler arguments and guest lists"
+  },
+  "lock_unchanged": true,
+  "tests": {
+    "passed": 492,
+    "failed": 0,
+    "ignored": 0,
+    "summary_groups": 89,
+    "nonempty_groups": 75,
+    "modules": 221,
+    "prepared_files": 1106,
+    "retained_guest_files": 422
+  },
+  "checks": [
+    {
+      "name": "python-tests",
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/tests",
+        "-p",
+        "test_wasm2c_shipping.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.12422933299967553,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/windows-wasm-build-001/python-tests.log",
+      "sha256": "593089b461409d37fd72aac0cf61f7a443914b216ca5a1deef285deab922c559"
+    },
+    {
+      "name": "runtime-graph",
+      "argv": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_wasm_runtime",
+        "--features",
+        "incant_wasm_runtime/embedded-fixture"
+      ],
+      "exit_code": 0,
+      "seconds": 0.36363224999513477,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/windows-wasm-build-001/runtime-graph.log",
+      "sha256": "0cfe31876658b923477a4a4d6bcb538f1d6915c689f5c7584beac9fdcebaabc2"
+    },
+    {
+      "name": "conventions",
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.028899833996547386,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/windows-wasm-build-001/conventions.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "fmt",
+      "argv": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 1.256028707997757,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/windows-wasm-build-001/fmt.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "diff-check",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.02401083300355822,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/windows-wasm-build-001/diff-check.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "conformance": {
+    "command": [
+      "python3",
+      "-u",
+      "tools/probes/shipping-wasm2c.py",
+      "/Users/andreyyurlov/.codex/incant-evidence/windows-wasm-build-001/conformance",
+      "--conformance-only",
+      "--profile",
+      "dev"
+    ],
+    "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+    "environment": {
+      "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-windows-wasm-build-target/conformance"
+    },
+    "started": 1791881286.9307048,
+    "seconds": 450.2704350948334,
+    "exit_code": 0,
+    "changed_sources": [],
+    "stdout_sha256": "574af3621e3ea33f4f833844525fcf843cf3d6fd0f8b4c4cda3bea2cebb4805b",
+    "stderr_sha256": "44082bcf87b5ea0e548f2cd2bf7b98fa26598845d9b830c285a4b068972931bc"
+  },
+  "schedule": {
+    "scope": "Local Apple clang compiler scheduling; retained six-module C sample; not Windows timing or new guest conformance",
+    "compiler": {
+      "path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang",
+      "sha256": "1590ac950a3d627817d09ade5cb60b2115f17a72182a3141e010b4bcc482a0c9",
+      "version": "Apple clang version 21.0.0 (clang-2100.3.34.2)\nTarget: arm64-apple-darwin27.0.0\nThread model: posix\nInstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin\n"
+    },
+    "build_rs_sha256": "b752b73bf585df002c6ee0d2a8f42f49dfaa5c0733748c18f5a331fa0b102f1b",
+    "objects_byte_identical": true,
+    "archive_byte_identical": true,
+    "passed": true
+  },
+  "measurements": [
+    {
+      "exit_code": 0,
+      "seconds": 5.515811040997505,
+      "case": "baseline-j2",
+      "jobs": 2,
+      "peak_compilers": 1,
+      "compiler_interval_seconds": 4.551814333
+    },
+    {
+      "exit_code": 0,
+      "seconds": 4.628698792002979,
+      "case": "parallel-j2",
+      "jobs": 2,
+      "peak_compilers": 2,
+      "compiler_interval_seconds": 3.236047375
+    },
+    {
+      "exit_code": 0,
+      "seconds": 8.774090541999612,
+      "case": "parallel-j1",
+      "jobs": 1,
+      "peak_compilers": 1,
+      "compiler_interval_seconds": 6.811949375
+    },
+    {
+      "exit_code": 101,
+      "seconds": 4.510456999996677,
+      "case": "parallel-error-j2",
+      "jobs": 2,
+      "peak_compilers": 2,
+      "compiler_interval_seconds": 3.240264458
+    }
+  ],
+  "source_review": {
+    "reviewer": "root",
+    "status": "accepted source scope; final evidence pending",
+    "production_freeze_sha256": "23d52026ae2bb976e186a74d660a6c44c19ff228831a95440b34258c30999b28"
+  },
+  "lossless": {
+    "path": "docs/spikes/evidence/wasm-c-parallel-logs.json.gz",
+    "sha256": "2118260f22c45b96edd1eb0a52d9f1ca11706ba9f8ebf8a5ffbf3e09789e8231",
+    "bytes": 1819704,
+    "entries": 154,
+    "payloads": 148
+  },
+  "external_artifacts": {
+    "manifest": "/Users/andreyyurlov/.codex/incant-evidence/windows-wasm-build-001/external-artifacts.json",
+    "sha256": "17c5ad1f05bc7a6465a55a9a78deb3066dcb35d9747de8b06dd354e63b5b81df",
+    "count": 570,
+    "directly_verified_now": true
+  },
+  "limitations": [
+    "No Windows candidate execution or timing yet; previous Windows log durations are not a matched comparison.",
+    "Single local Apple clang scheduling observations, under concurrent machine load, not a general speedup claim.",
+    "Cargo feature unification can parallelize other cc build consumers in the same selected host graph.",
+    "No module list, compiler flags, Cargo.lock resolutions or CI commands changed.",
+    "Initial observer SDK-discovery failure is retained; no conformance source failure occurred.",
+    "Fresh host conformance is not shipping-package/device/frame-performance/phase acceptance.",
+    "All prepared inputs were directly hashed before normal helper cleanup; only selected guest artifacts remain afterward."
+  ]
+}

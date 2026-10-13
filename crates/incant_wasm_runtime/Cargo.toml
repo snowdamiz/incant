@@ -17,7 +17,8 @@ thiserror.workspace = true
 [features]
 default = ["physics-deterministic"]
 # Only a trusted build may supply prepared C. Not a runtime module loader.
-embedded-fixture = []
+# Compile its independent C objects with Cargo's bounded jobserver.
+embedded-fixture = ["cc/parallel"]
 
 # Select one physics kernel for the entire process, including build/test hosts.
 physics-deterministic = ["incant_runtime/physics-deterministic"]
