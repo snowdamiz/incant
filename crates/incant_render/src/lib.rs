@@ -123,8 +123,13 @@ impl Renderer {
         let validation = device.push_error_scope(wgpu::ErrorFilter::Validation);
         let environments = environment::EnvironmentSystem::new(&device, &queue);
         let lighting = lighting::LightingSystem::new(&device);
-        let materials =
-            materials::MaterialSystem::new(&device, &queue, &environments.layout, &lighting.layout);
+        let materials = materials::MaterialSystem::new(
+            &device,
+            &queue,
+            &environments.layout,
+            &lighting.layout,
+            adapter.get_info().backend,
+        )?;
         let shadows =
             shadows::ShadowSystem::new(&device, &materials.layout, adapter.get_info().backend)?;
         let diagnostic_pipeline =

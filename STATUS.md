@@ -16,6 +16,17 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Fixed material shaders — CPU/compiler checks passed
+
+The opt-in material path cooks the unchanged imported-material, light and shadow
+sampling shaders to native backend artifacts. Its explicit Metal storage-length
+binding covers metadata absent from passthrough; bounds and loop checks remain.
+All seven CPU/static checks pass: 92 enabled cases, 63 default-library cases,
+Clippy and browser portability. Both MSL stages compile and link. Independent source review passes.
+Claude GPU/appearance review remains pending; grid compute, full
+renderer cooking, pipeline caching and reference-phone gates remain open.
+[Contract and evidence](docs/spikes/cooked-material-shaders.md).
+
 ## Cooked world-space text shaders — CPU and Metal compilation passed
 
 The fixed text shader path passes independent source review, 90 enabled CPU

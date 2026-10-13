@@ -31,6 +31,14 @@ pub(crate) struct GridUniform {
     pub depth: [f32; 4],
     pub lights: [u32; 4],
 }
+const _: () = {
+    assert!(size_of::<GridUniform>() == 128);
+    assert!(std::mem::offset_of!(GridUniform, view) == 0);
+    assert!(std::mem::offset_of!(GridUniform, viewport) == 64);
+    assert!(std::mem::offset_of!(GridUniform, dimensions) == 80);
+    assert!(std::mem::offset_of!(GridUniform, depth) == 96);
+    assert!(std::mem::offset_of!(GridUniform, lights) == 112);
+};
 pub(crate) struct GpuLights {
     buffer: wgpu::Buffer,
     directional: u32,
@@ -94,7 +102,7 @@ pub(crate) struct LightingSystem {
     pipeline: wgpu::ComputePipeline,
     cache: Mutex<Option<Arc<GridBuffers>>>,
 }
-fn layout(device: &wgpu::Device, compute: bool) -> wgpu::BindGroupLayout {
+pub(crate) fn layout_entries(compute: bool) -> Vec<wgpu::BindGroupLayoutEntry> {
     let mut entries: Vec<_> = (0..4)
         .map(|binding| wgpu::BindGroupLayoutEntry {
             binding,
@@ -146,10 +154,24 @@ fn layout(device: &wgpu::Device, compute: bool) -> wgpu::BindGroupLayout {
                 count: None,
             },
         ]);
+        #[cfg(all(feature = "cooked-materials", not(target_arch = "wasm32")))]
+        entries.push(wgpu::BindGroupLayoutEntry {
+            binding: 7,
+            visibility: wgpu::ShaderStages::FRAGMENT,
+            ty: wgpu::BindingType::Buffer {
+                ty: wgpu::BufferBindingType::Uniform,
+                has_dynamic_offset: false,
+                min_binding_size: wgpu::BufferSize::new(16),
+            },
+            count: None,
+        });
     }
+    entries
+}
+fn layout(device: &wgpu::Device, compute: bool) -> wgpu::BindGroupLayout {
     device.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
         label: Some("Clustered lighting"),
-        entries: &entries,
+        entries: &layout_entries(compute),
     })
 }
 impl LightingSystem {
@@ -301,6 +323,24 @@ impl LightingSystem {
                 resource: shadows.uniform.as_entire_binding(),
             },
         ]);
+        // Metal passthrough omits Naga's dynamic-storage reflection. Bind the
+        // three real byte lengths explicitly in the compiler's verified order;
+        // never disable bounds checks or read a synthetic unset lengths buffer.
+        #[cfg(all(feature = "cooked-materials", not(target_arch = "wasm32")))]
+        let sizes = device.create_buffer_init(&wgpu::util::BufferInitDescriptor {
+            label: Some("Material storage byte lengths"),
+            contents: bytemuck::cast_slice(&storage_lengths([
+                lights.buffer.size(),
+                buffers.counts.size(),
+                buffers.masks.size(),
+            ])?),
+            usage: wgpu::BufferUsages::UNIFORM,
+        });
+        #[cfg(all(feature = "cooked-materials", not(target_arch = "wasm32")))]
+        entries.push(wgpu::BindGroupEntry {
+            binding: 7,
+            resource: sizes.as_entire_binding(),
+        });
         Ok(PreparedLighting {
             compute,
             shading: device.create_bind_group(&wgpu::BindGroupDescriptor {
@@ -309,6 +349,37 @@ impl LightingSystem {
                 entries: &entries,
             }),
         })
+    }
+}
+#[cfg(all(feature = "cooked-materials", not(target_arch = "wasm32")))]
+fn storage_lengths(bytes: [u64; 3]) -> Result<[u32; 4]> {
+    let mut values = [0; 4];
+    for (i, (size, stride)) in bytes.into_iter().zip([64, 4, 4]).enumerate() {
+        if size == 0 || size % stride != 0 {
+            return Err(ResourceError::CookedMaterial("storage buffer alignment").into());
+        }
+        values[i] = u32::try_from(size)
+            .map_err(|_| ResourceError::CookedMaterial("storage buffer length"))?;
+    }
+    Ok(values)
+}
+#[cfg(all(test, feature = "cooked-materials", not(target_arch = "wasm32")))]
+#[test]
+fn material_lengths_use_allocation_bytes_and_refuse_truncation() {
+    assert_eq!(
+        storage_lengths([64 * 4112, 4 * 24, 4 * 24 * 128]).unwrap(),
+        [263168, 96, 12288, 0]
+    );
+    for sizes in [
+        [0, 4, 4],
+        [63, 4, 4],
+        [64, 5, 4],
+        [64, 4, 5],
+        [1u64 << 32, 4, 4],
+        [64, 1u64 << 32, 4],
+        [64, 4, 1u64 << 32],
+    ] {
+        assert!(storage_lengths(sizes).is_err());
     }
 }
 /// Immutable uniforms and retained storage bindings for one encoded frame.

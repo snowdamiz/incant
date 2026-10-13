@@ -1,0 +1,696 @@
+{
+  "at": "2026-10-13T00:53:27.061790+00:00",
+  "base": "91b70493e29fda3164bae190ebb88ec918514542",
+  "source_freeze_sha256": "bbaefa71d809e522f5a788168e2b017e9e0bb7a07e6a4a1bf4812e52894c7c47",
+  "sources": [
+    {
+      "path": "Cargo.lock",
+      "bytes": 251963,
+      "sha256": "7eec85df8c7e53e760cb088e23f94e99502dc72792e8ac1c935cf432825ae383"
+    },
+    {
+      "path": "Cargo.toml",
+      "bytes": 3374,
+      "sha256": "c01e56676d729e7b6da4a0b80cee83056ab091ca695e3b3817e76f7419b742a4"
+    },
+    {
+      "path": "crates/incant_render/Cargo.toml",
+      "bytes": 2236,
+      "sha256": "1dd3fe0892d9200af96ce9eb74c1e7b53272aafe667f8b7d7a4661ac85fc0930"
+    },
+    {
+      "path": "crates/incant_render/build.rs",
+      "bytes": 4826,
+      "sha256": "01b23d0be22e07c40a923c66a495aaa8c9e428d5ebb583f910bee2dbc9d8f51c"
+    },
+    {
+      "path": "crates/incant_render/src/environment/mod.rs",
+      "bytes": 8764,
+      "sha256": "a2a950cd1af81e84fa2c0c616c54a876b9c53d8dd3eedd9f2091a246f21dd2e6"
+    },
+    {
+      "path": "crates/incant_render/src/geometry_shader.rs",
+      "bytes": 2474,
+      "sha256": "ff658bf24da9b38158dd6153eb54432da4467ef09648aa6c1ae448c662645587"
+    },
+    {
+      "path": "crates/incant_render/src/geometry_shader/cooked.rs",
+      "bytes": 6242,
+      "sha256": "44480701a0f8bee4444a6da7ddf0160e372f781f1cc321a8779c61357075145b"
+    },
+    {
+      "path": "crates/incant_render/src/lib.rs",
+      "bytes": 17022,
+      "sha256": "d5dcdc731a6cc4568c616956539a81cd280c2267916a0fb662cd39fca0725179"
+    },
+    {
+      "path": "crates/incant_render/src/lighting/mod.rs",
+      "bytes": 15312,
+      "sha256": "f6e72c247ec86aa0ba2a0124ff84b3a705d2d5cefba85f0d1181b6875f5f4baf"
+    },
+    {
+      "path": "crates/incant_render/src/lighting/scene.rs",
+      "bytes": 11038,
+      "sha256": "93a9798faf1b44a67a5ed87bae826478f346d0eadeb48fbfc0f80c0c11da6a15"
+    },
+    {
+      "path": "crates/incant_render/src/lighting/shade.wgsl",
+      "bytes": 3898,
+      "sha256": "52757ae31c0e68c6480bec626ee81386b792fe06c803b0853f9c0a546667e2ad"
+    },
+    {
+      "path": "crates/incant_render/src/material_pipeline.rs",
+      "bytes": 3554,
+      "sha256": "61319e86dc2dc0ea871550d07e185dd338a45af99110679ba7ff40659469560c"
+    },
+    {
+      "path": "crates/incant_render/src/material_shader.rs",
+      "bytes": 4229,
+      "sha256": "b58f8d86d3acd0db8419ab43af28fd1b3067006e1e91a65d5f82a27ad7d43fa9"
+    },
+    {
+      "path": "crates/incant_render/src/materials.rs",
+      "bytes": 13616,
+      "sha256": "1988f3b40e2eedf91b14d0bd91f10b1f1b3952c915011710e4fef7382a66d551"
+    },
+    {
+      "path": "crates/incant_render/src/model_draw.rs",
+      "bytes": 6973,
+      "sha256": "bae8055bac5246e608357bf76d3c4a4ccc5d626ca6ac233063c100ea9242be86"
+    },
+    {
+      "path": "crates/incant_render/src/model_material.wgsl",
+      "bytes": 4670,
+      "sha256": "45018e9c6029af03553aa933438277589835edac1fb75fddcba2833568c51c2b"
+    },
+    {
+      "path": "crates/incant_render/src/resource_error.rs",
+      "bytes": 2576,
+      "sha256": "add0ae37b94e3f279bea0f1384bae7ae925a928b15c84d0675f509aae4616237"
+    },
+    {
+      "path": "crates/incant_render/src/shader.rs",
+      "bytes": 345,
+      "sha256": "9aeadf08eae040fb3d955cbf7d93b1e059add0fee17ebcfbe5356de133587dd5"
+    },
+    {
+      "path": "crates/incant_render/src/shader/native.rs",
+      "bytes": 4815,
+      "sha256": "fdfa44e416827890eead023bd5960bea4a04c203b2a87b7ec0dd48648b5a296f"
+    },
+    {
+      "path": "crates/incant_render/src/shadows/mod.rs",
+      "bytes": 8305,
+      "sha256": "67a6347b8cf69f55c6f3851821c85337e2744c9d3db0690758132ca22545c25c"
+    },
+    {
+      "path": "crates/incant_render/src/shadows/shade.wgsl",
+      "bytes": 1495,
+      "sha256": "3f5d22bcef70b70fb7fe089c9940d5a29e6296984f65a718fe96c7f8d22dd8d4"
+    },
+    {
+      "path": "crates/incant_shader_cook/Cargo.toml",
+      "bytes": 371,
+      "sha256": "e12b8b89f3b2d344cfa0dc7def97c2262d23d76b0ffd4688aa75f5d5ed656270"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/geometry/contract.rs",
+      "bytes": 8570,
+      "sha256": "ac8627d82d4ace892326a2925bf876fe090370458aedd53c75849aa5bde225e3"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/geometry/emit.rs",
+      "bytes": 13559,
+      "sha256": "945b61562075231d02b608be74a6d6093a13298b3462e2ead76744229510d351"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/geometry/material.rs",
+      "bytes": 9577,
+      "sha256": "c83cca8d69cfdef9c9f24e2d1461e81c2bfcb78f1616f8b095a144fb3dfbadd9"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/geometry/material_emit.rs",
+      "bytes": 8968,
+      "sha256": "976f76dfdc879dcf2d72af59673e7b5faeb0a28994dcdecdb6ec27403e7c4c72"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/geometry/mod.rs",
+      "bytes": 5150,
+      "sha256": "6f90466399667b70c9d93170fb6b2511e6efe712ae07dd4ec22d6af53d1624d9"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/geometry/sprite.rs",
+      "bytes": 6237,
+      "sha256": "5061d2d170a76b384763474ffefcec65b934d2a28ad086e58981373992d4dcb2"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/geometry/text.rs",
+      "bytes": 5597,
+      "sha256": "fc609717cf6a86a72dd07d0bb79d82fde25df64216e0d769f0214152120e089e"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/geometry/ui.rs",
+      "bytes": 5479,
+      "sha256": "7a5c0786befbc4a78f3b3d70f56ed552898e9c723315925b52d1e37526bcc933"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/lib.rs",
+      "bytes": 3346,
+      "sha256": "6c60089be46ade672cdfa51510e683a0a15bff1c62c910a9395f9a192b737e57"
+    },
+    {
+      "path": "crates/incant_shader_cook/tests/geometry.rs",
+      "bytes": 10715,
+      "sha256": "a2362d0a3ee6fbef95c9d68e2b0b3d757c1dfe58fdfa18c1a376bd7c5342119d"
+    },
+    {
+      "path": "crates/incant_shader_cook/tests/material.rs",
+      "bytes": 4384,
+      "sha256": "a9e1b1a7d99e93cbba82e8f873890fb59336d4e1fdb17f835454896592b66eb7"
+    }
+  ],
+  "checks": [
+    {
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_shader_cook",
+        "-p",
+        "incant_render",
+        "--features",
+        "incant_render/cooked-output,incant_render/cooked-geometry,incant_render/cooked-sprites,incant_render/cooked-ui,incant_render/cooked-text,incant_render/cooked-materials"
+      ],
+      "exit": 0,
+      "seconds": 20.173093795776367,
+      "stdout_sha256": "3dc0896bb3786031bb0e8109e38ba3ebc94cab0504c9d124be187c936899a721",
+      "stderr_sha256": "592acaf62315acd17c159c22fc1fe94d0e224fa8ae4ac7fef413bdac586acc04"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_shader_cook",
+        "-p",
+        "incant_render",
+        "--features",
+        "incant_render/cooked-output,incant_render/cooked-geometry,incant_render/cooked-sprites,incant_render/cooked-ui,incant_render/cooked-text,incant_render/cooked-materials",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "seconds": 3.958646059036255,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "957dbbe9df0a61b8b8d4b8e5e70801b4e263b09d13e598c7ebdca29fb4ab9d52"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--lib"
+      ],
+      "exit": 0,
+      "seconds": 12.56686782836914,
+      "stdout_sha256": "0c03690116c9c0bb67ff6f31ecc0e2fa06e7bb56079c76905b5de441b305b4fc",
+      "stderr_sha256": "9017a77f9c0a7f9d85af4fdd3141b82300a15c7b09a753294d5c5d0c9680a618"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--target",
+        "wasm32-unknown-unknown",
+        "--features",
+        "incant_render/cooked-output,incant_render/cooked-geometry,incant_render/cooked-sprites,incant_render/cooked-ui,incant_render/cooked-text,incant_render/cooked-materials"
+      ],
+      "exit": 0,
+      "seconds": 2.623460292816162,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "a4a529abdf69f6df96ab9e01ca300afc09aa76fb187594e95a174dfae62a63d1"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 2.1298842430114746,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.05030989646911621,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.04435992240905762,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "cpu": {
+    "all_cooked": {
+      "passed": 92,
+      "ignored_gpu": 82,
+      "groups": 10
+    },
+    "default_library": {
+      "passed": 63,
+      "ignored_gpu": 32
+    }
+  },
+  "metal": [
+    {
+      "argv": [
+        "xcrun",
+        "--sdk",
+        "macosx",
+        "metal",
+        "--version"
+      ],
+      "exit": 0,
+      "seconds": 0.7431008815765381,
+      "stdout_sha256": "090d1019e5f4e70222ac8af2fd8f27bc68ecaa87abf10a2a6656b3b2f54bd4e2",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "xcrun",
+        "--sdk",
+        "macosx",
+        "metal",
+        "-x",
+        "metal",
+        "-std=macos-metal2.4",
+        "-c",
+        "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-metal-001/Metal-Vertex.shader",
+        "-o",
+        "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-metal-001/Vertex.air"
+      ],
+      "exit": 0,
+      "seconds": 0.8002622127532959,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "xcrun",
+        "--sdk",
+        "macosx",
+        "metal",
+        "-x",
+        "metal",
+        "-std=macos-metal2.4",
+        "-c",
+        "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-metal-001/Metal-Fragment.shader",
+        "-o",
+        "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-metal-001/Fragment.air"
+      ],
+      "exit": 0,
+      "seconds": 0.17569208145141602,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "xcrun",
+        "--sdk",
+        "macosx",
+        "metallib",
+        "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-metal-001/Vertex.air",
+        "-o",
+        "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-metal-001/Vertex.metallib"
+      ],
+      "exit": 0,
+      "seconds": 0.4389219284057617,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "xcrun",
+        "--sdk",
+        "macosx",
+        "metallib",
+        "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-metal-001/Fragment.air",
+        "-o",
+        "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-metal-001/Fragment.metallib"
+      ],
+      "exit": 0,
+      "seconds": 0.031075239181518555,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "artifacts": [
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-checks-001/00.stderr",
+      "path": "docs/spikes/evidence/cooked-material-shaders/00-00.stderr.gz",
+      "bytes": 1227,
+      "sha256": "592acaf62315acd17c159c22fc1fe94d0e224fa8ae4ac7fef413bdac586acc04",
+      "gzip_sha256": "2fef1bbb1567f97c23706ac7221fa747abe00188e64f0f092601c60067c100ae"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-checks-001/00.stdout",
+      "path": "docs/spikes/evidence/cooked-material-shaders/01-00.stdout.gz",
+      "bytes": 22683,
+      "sha256": "3dc0896bb3786031bb0e8109e38ba3ebc94cab0504c9d124be187c936899a721",
+      "gzip_sha256": "b037f33c419759bd4970b1d354e2327eb84f6907fe33ea6ecba4f935dfa94844"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-checks-001/01.stderr",
+      "path": "docs/spikes/evidence/cooked-material-shaders/02-01.stderr.gz",
+      "bytes": 305,
+      "sha256": "957dbbe9df0a61b8b8d4b8e5e70801b4e263b09d13e598c7ebdca29fb4ab9d52",
+      "gzip_sha256": "a7a88e6d25c9e4286c31f82e0415bf3cb1a5e492029b5bfed6f45d750a537198"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-checks-001/01.stdout",
+      "path": "docs/spikes/evidence/cooked-material-shaders/03-01.stdout.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-checks-001/02.stderr",
+      "path": "docs/spikes/evidence/cooked-material-shaders/04-02.stderr.gz",
+      "bytes": 309,
+      "sha256": "9017a77f9c0a7f9d85af4fdd3141b82300a15c7b09a753294d5c5d0c9680a618",
+      "gzip_sha256": "859e2aee0c6020070105458bf24186258bebb388e7ac09214f787228c13f6efe"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-checks-001/02.stdout",
+      "path": "docs/spikes/evidence/cooked-material-shaders/05-02.stdout.gz",
+      "bytes": 11729,
+      "sha256": "0c03690116c9c0bb67ff6f31ecc0e2fa06e7bb56079c76905b5de441b305b4fc",
+      "gzip_sha256": "2174a17c1d71431af11fdf906ac1ea9a6a5e867a5e7c0d5895dc2a94bca2ad09"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-checks-001/03.stderr",
+      "path": "docs/spikes/evidence/cooked-material-shaders/06-03.stderr.gz",
+      "bytes": 305,
+      "sha256": "a4a529abdf69f6df96ab9e01ca300afc09aa76fb187594e95a174dfae62a63d1",
+      "gzip_sha256": "9db1f03c64d1523374517c731d07a9e62697498fa4d4465b6ebeed87be6b759b"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-checks-001/03.stdout",
+      "path": "docs/spikes/evidence/cooked-material-shaders/07-03.stdout.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-checks-001/04.stderr",
+      "path": "docs/spikes/evidence/cooked-material-shaders/08-04.stderr.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-checks-001/04.stdout",
+      "path": "docs/spikes/evidence/cooked-material-shaders/09-04.stdout.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-checks-001/05.stderr",
+      "path": "docs/spikes/evidence/cooked-material-shaders/10-05.stderr.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-checks-001/05.stdout",
+      "path": "docs/spikes/evidence/cooked-material-shaders/11-05.stdout.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-checks-001/06.stderr",
+      "path": "docs/spikes/evidence/cooked-material-shaders/12-06.stderr.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-checks-001/06.stdout",
+      "path": "docs/spikes/evidence/cooked-material-shaders/13-06.stdout.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-checks-001/artifacts/Dx12-Fragment.shader",
+      "path": "docs/spikes/evidence/cooked-material-shaders/14-Dx12-Fragment.shader.gz",
+      "bytes": 19552,
+      "sha256": "ff908004333705e3436b30373ada08818e9e52049e316a9883cb110109a71a7d",
+      "gzip_sha256": "a26d0cd2050cfd112b4fbeb8ca31ad6c9449137ac74b21cb201b6d67046fb93b"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-checks-001/artifacts/Dx12-Vertex.shader",
+      "path": "docs/spikes/evidence/cooked-material-shaders/15-Dx12-Vertex.shader.gz",
+      "bytes": 1569,
+      "sha256": "ce37b1e438bd5d9e9c21d2d69795e340e726f51e5007b3c60633ce132163a5b3",
+      "gzip_sha256": "4700dcbc52a36ada9cbdce1d12f8b581022e3c06fa7fe6e16b013a926ab33916"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-checks-001/artifacts/Metal-Fragment.shader",
+      "path": "docs/spikes/evidence/cooked-material-shaders/16-Metal-Fragment.shader.gz",
+      "bytes": 20897,
+      "sha256": "98bfd23cb430029366407c0364b9a1abb0cc73f27a5c4fa41dfaa98b787dfba7",
+      "gzip_sha256": "e750c8e366a17e89a4583b6f24b34a3b08bc753b36bff2a4075cb43a06f294d7"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-checks-001/artifacts/Metal-Vertex.shader",
+      "path": "docs/spikes/evidence/cooked-material-shaders/17-Metal-Vertex.shader.gz",
+      "bytes": 7015,
+      "sha256": "7cfdc07307366ce9cd20ebe01bc22deb54fa688992f1e018ff9b632d95900eab",
+      "gzip_sha256": "8fb5934e76f617f5702edd6288fcea90f29e30620833155a11c7442fb46e0484"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-checks-001/artifacts/Vulkan-Fragment.shader",
+      "path": "docs/spikes/evidence/cooked-material-shaders/18-Vulkan-Fragment.shader.gz",
+      "bytes": 21888,
+      "sha256": "bddcec7ea1d464b03f1b9d9ac81846ed739c2a19ae6a452a6468bde827ce639f",
+      "gzip_sha256": "3a506a6016029f7f93e182a13d7e36f3422be142670db40369a4024a59cbf073"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-checks-001/artifacts/Vulkan-Vertex.shader",
+      "path": "docs/spikes/evidence/cooked-material-shaders/19-Vulkan-Vertex.shader.gz",
+      "bytes": 2656,
+      "sha256": "68925966199164db53e5f1e8da3d7c15f1b1e50c2ceaf2790c2376b00961a012",
+      "gzip_sha256": "da5ec4b680304ecf550aabf50d43aab0fcdc5fed1ea831e5aa9a2b9919725b6d"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-checks-001/artifacts/manifest.rs",
+      "path": "docs/spikes/evidence/cooked-material-shaders/20-manifest.rs.gz",
+      "bytes": 2335,
+      "sha256": "20f63b5158b436c751b6cfeff613fe2fe3809feed222edac2bb91e2630cfaacb",
+      "gzip_sha256": "ffa1b87d770153e47afab6375139d171c80480e4f1bb1aac1cb4d327b8a5bd89"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-checks-001/commands.json",
+      "path": "docs/spikes/evidence/cooked-material-shaders/21-commands.json.gz",
+      "bytes": 3319,
+      "sha256": "6d32b230588f63f314c3476e412b21c9c8fbc74eda445326b69a5bd76da3e62c",
+      "gzip_sha256": "21ef18903316c7bd37a4a8b033110ccc23e8e02853fb795030d90095834a7517"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-checks-001/complete.json",
+      "path": "docs/spikes/evidence/cooked-material-shaders/22-complete.json.gz",
+      "bytes": 169,
+      "sha256": "97bf47a2bfad27c1ee64a8a0ad32a142d9853c8b105fa5c08c59ff45c1c732d0",
+      "gzip_sha256": "67501a8585cad8a5f3cc120da416c88ae263410de2decccea2add07dc1df50c9"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-checks-001/run.py",
+      "path": "docs/spikes/evidence/cooked-material-shaders/23-run.py.gz",
+      "bytes": 2292,
+      "sha256": "7ebb7d16161db16874d9899d8a1318d9b41d98e2348aeef3b51b1abaf7a2a8f0",
+      "gzip_sha256": "9e6df156f7cd4eff1fddf8e90ad624c6f558857b32f3da7fab522626ae060dda"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-metal-001/00.stderr",
+      "path": "docs/spikes/evidence/cooked-material-shaders/24-00.stderr.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-metal-001/00.stdout",
+      "path": "docs/spikes/evidence/cooked-material-shaders/25-00.stdout.gz",
+      "bytes": 264,
+      "sha256": "090d1019e5f4e70222ac8af2fd8f27bc68ecaa87abf10a2a6656b3b2f54bd4e2",
+      "gzip_sha256": "f70fe9a1a7d570575b9749b2ee06140852ca24fa7f22c9190c59adbeabca6183"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-metal-001/01.stderr",
+      "path": "docs/spikes/evidence/cooked-material-shaders/26-01.stderr.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-metal-001/01.stdout",
+      "path": "docs/spikes/evidence/cooked-material-shaders/27-01.stdout.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-metal-001/02.stderr",
+      "path": "docs/spikes/evidence/cooked-material-shaders/28-02.stderr.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-metal-001/02.stdout",
+      "path": "docs/spikes/evidence/cooked-material-shaders/29-02.stdout.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-metal-001/03.stderr",
+      "path": "docs/spikes/evidence/cooked-material-shaders/30-03.stderr.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-metal-001/03.stdout",
+      "path": "docs/spikes/evidence/cooked-material-shaders/31-03.stdout.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-metal-001/04.stderr",
+      "path": "docs/spikes/evidence/cooked-material-shaders/32-04.stderr.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-metal-001/04.stdout",
+      "path": "docs/spikes/evidence/cooked-material-shaders/33-04.stdout.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-metal-001/Fragment.air",
+      "path": "docs/spikes/evidence/cooked-material-shaders/34-Fragment.air.gz",
+      "bytes": 17872,
+      "sha256": "80108140a43ffff55b65ed89e9d1b27aefd30d5b9ab38bb0b9a9be0ba21d6c90",
+      "gzip_sha256": "5f3a1d9d0e4827e3819da22df5afd2111248bb09135d160043540086fe945614"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-metal-001/Fragment.metallib",
+      "path": "docs/spikes/evidence/cooked-material-shaders/35-Fragment.metallib.gz",
+      "bytes": 15807,
+      "sha256": "f48e3e5c7fd22b242466f2dd9abca69120a5ca3f5023880e1f88dd59549d95d1",
+      "gzip_sha256": "a0422367c75ae8dfd20e6c4e38f98207efaebd91649e065621599b1c504f64eb"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-metal-001/Metal-Fragment.shader",
+      "path": "docs/spikes/evidence/cooked-material-shaders/36-Metal-Fragment.shader.gz",
+      "bytes": 20897,
+      "sha256": "98bfd23cb430029366407c0364b9a1abb0cc73f27a5c4fa41dfaa98b787dfba7",
+      "gzip_sha256": "e750c8e366a17e89a4583b6f24b34a3b08bc753b36bff2a4075cb43a06f294d7"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-metal-001/Metal-Vertex.shader",
+      "path": "docs/spikes/evidence/cooked-material-shaders/37-Metal-Vertex.shader.gz",
+      "bytes": 7015,
+      "sha256": "7cfdc07307366ce9cd20ebe01bc22deb54fa688992f1e018ff9b632d95900eab",
+      "gzip_sha256": "8fb5934e76f617f5702edd6288fcea90f29e30620833155a11c7442fb46e0484"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-metal-001/Vertex.air",
+      "path": "docs/spikes/evidence/cooked-material-shaders/38-Vertex.air.gz",
+      "bytes": 12992,
+      "sha256": "d382a031e88343659774a8fc231084991717d448d825b6ae927da1245ab8f1fa",
+      "gzip_sha256": "7269eb33f657b75cbbaed28311d7e9cf37403235647d27aa76ae251a73c9386d"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-metal-001/Vertex.metallib",
+      "path": "docs/spikes/evidence/cooked-material-shaders/39-Vertex.metallib.gz",
+      "bytes": 11373,
+      "sha256": "56c97065b1b19d71d8ec9a23d7265e1be71fa88bee94a089f59dab1850e4b842",
+      "gzip_sha256": "154db08f9de38fbdcd14ab74cadc17cbe40d1a9990d4fb3e11d1b68421c12f1b"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-metal-001/artifacts.json",
+      "path": "docs/spikes/evidence/cooked-material-shaders/40-artifacts.json.gz",
+      "bytes": 780,
+      "sha256": "435800cd5213cf40bd13445578333fa5de74c04755a769fe036f61d862b5d1a7",
+      "gzip_sha256": "9d2ffbfd042b32e53e6b0d28f61dde9c9cc19ff70f3616815b980ad48a4a697c"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-metal-001/commands.json",
+      "path": "docs/spikes/evidence/cooked-material-shaders/41-commands.json.gz",
+      "bytes": 2548,
+      "sha256": "a8a2ed904cd4edbb0d1320f3ddb840bbcf48ecc1bb49729e563c06c4de2f4143",
+      "gzip_sha256": "4a26a9acaed1396b35a6bb837fc222a96e8f46dbded237e18310ad9868ba8d57"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-source-001/freeze.json",
+      "path": "docs/spikes/evidence/cooked-material-shaders/42-freeze.json.gz",
+      "bytes": 6154,
+      "sha256": "bbaefa71d809e522f5a788168e2b017e9e0bb7a07e6a4a1bf4812e52894c7c47",
+      "gzip_sha256": "0e8ab74d6c8403394533b762c5cefd97e2745986af11f8d1415ce1b3eef3c512"
+    }
+  ],
+  "status": "CPU/compiler checks and independent source review passed; Claude native GPU and appearance review pending",
+  "limits": [
+    "Material shading only: grid compute retains runtime WGSL",
+    "No actual GPU,Vulkan/DX12,phone,performance,fullrenderer or phase acceptance"
+  ],
+  "source_review": {
+    "path": "docs/spikes/evidence/cooked-material-shaders/source-review.json",
+    "sha256": "14c26d98bd188f2ff8169519f6c9d00aa1594ee11f5bb6b2fd2510b928e87384",
+    "decision": "accepted_source_only"
+  }
+}

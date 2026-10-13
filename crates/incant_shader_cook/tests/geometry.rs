@@ -9,6 +9,13 @@ fn source(kind: Kind) -> &'static str {
         Kind::Text => include_str!("../../incant_render/src/text/text.wgsl"),
         Kind::Ui => include_str!("../../incant_render/src/ui/ui.wgsl"),
         Kind::Sprite => include_str!("../../incant_render/src/sprites/sprite.wgsl"),
+        Kind::Material => concat!(
+            include_str!("../../incant_render/src/shadows/shade.wgsl"),
+            "\n",
+            include_str!("../../incant_render/src/lighting/shade.wgsl"),
+            "\n",
+            include_str!("../../incant_render/src/model_material.wgsl")
+        ),
     }
 }
 #[test]
@@ -19,6 +26,7 @@ fn fixed_geometry_artifacts_are_deterministic_and_spirv_interfaces_validate() {
         Kind::Sprite,
         Kind::Ui,
         Kind::Text,
+        Kind::Material,
     ] {
         let a = cook(kind, source(kind)).unwrap();
         assert_eq!(a, cook(kind, source(kind)).unwrap());
@@ -73,6 +81,12 @@ fn fixed_geometry_artifacts_are_deterministic_and_spirv_interfaces_validate() {
                     (Kind::Ui, Stage::Fragment) => vec![(0, 0), (1, 0), (1, 1)],
                     (Kind::Text, Stage::Vertex) => vec![(0, 0), (1, 0)],
                     (Kind::Text, Stage::Fragment) => vec![(0, 0), (2, 0), (2, 1)],
+                    (Kind::Material, Stage::Vertex) => vec![(0, 0)],
+                    (Kind::Material, Stage::Fragment) => std::iter::once((0, 0))
+                        .chain((0..=10).map(|b| (1, b)))
+                        .chain((0..=3).map(|b| (2, b)))
+                        .chain((0..=6).map(|b| (3, b)))
+                        .collect(),
                 }
             );
         }
@@ -86,6 +100,7 @@ fn geometry_contract_rejects_changed_bindings_io_storage_and_stage_usage() {
         Kind::Sprite,
         Kind::Ui,
         Kind::Text,
+        Kind::Material,
     ] {
         for changed in [
             source(kind).replace("@location(0)", "@location(11)"),

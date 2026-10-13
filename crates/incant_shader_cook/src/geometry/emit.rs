@@ -7,7 +7,7 @@ use naga::{
     valid::ModuleInfo,
 };
 
-fn bounds() -> BoundsCheckPolicies {
+pub(super) fn bounds() -> BoundsCheckPolicies {
     BoundsCheckPolicies {
         index: BoundsCheckPolicy::Restrict,
         buffer: BoundsCheckPolicy::Restrict,
@@ -31,7 +31,7 @@ fn one(mut names: impl Iterator<Item = Result<String>>) -> Result<String> {
     Ok(name)
 }
 
-fn vertex_mappings(kind: Kind) -> Vec<msl::VertexBufferMapping> {
+pub(super) fn vertex_mappings(kind: Kind) -> Vec<msl::VertexBufferMapping> {
     use msl::{
         AttributeMapping as A, VertexBufferMapping as B, VertexBufferStepMode as S,
         VertexFormat as F,
@@ -51,7 +51,7 @@ fn vertex_mappings(kind: Kind) -> Vec<msl::VertexBufferMapping> {
                 attribute(1, 16, F::Float32x3),
             ],
         }],
-        Kind::Shadow => vec![
+        Kind::Shadow | Kind::Material => vec![
             B {
                 id: 15,
                 stride: 48,
@@ -126,6 +126,9 @@ pub(super) fn emit(
     entry: &str,
     backend: Backend,
 ) -> Result<(Vec<u8>, String)> {
+    if kind == Kind::Material {
+        return super::material_emit::emit(m, info, full, stage, entry, backend);
+    }
     let shadow = kind == Kind::Shadow;
     let textured = kind != Kind::Diagnostic;
     let world_text = kind == Kind::Text;
@@ -288,6 +291,7 @@ pub(super) fn emit(
                     Kind::Shadow | Kind::Text => 2,
                     Kind::Sprite | Kind::Ui => 1,
                     Kind::Diagnostic => 0,
+                    Kind::Material => unreachable!("material emitter is separate"),
                 })),
                 restrict_indexing: true,
                 force_loop_bounding: true,
