@@ -1,0 +1,90 @@
+{
+  "schema": 1,
+  "original_base": "f300dbc56a79bde82cd6dbaf936216c1955cd892",
+  "actual_main": "3e2fa8a94c544ace613e26c52bb2f438961162de",
+  "frozen_inputs": 3125,
+  "exceptions": [
+    {
+      "path": "crates/incant_render/src/graph.rs",
+      "old_sha256": "dcd4794b7c60b715375c7468c34db2f19a8f740868d3e9bd6d27bfad9ab2e5b9",
+      "new_sha256": "3ce2b06016056010c23a6d16c26f96f19fbef8269016d3b371550feadb78553d"
+    },
+    {
+      "path": "crates/incant_render/src/lib.rs",
+      "old_sha256": "4ff2f915421ea231311002c08723fdcf1c1c621ea5019867faf573127cce2437",
+      "new_sha256": "830af6c96af0187eaa988161891222f6f26f12b9d3919ab28283ceb0355b76f2"
+    },
+    {
+      "path": "crates/incant_render/src/output.rs",
+      "old_sha256": "792b2ce89d6cf7844dffd8e3fbd2e6ddefc06e3f8e8ff4953686ee066fd0341a",
+      "new_sha256": "8f078bf45886549dec1e04f42d407c4892d1a874a2099cef746ae903915b12f9"
+    },
+    {
+      "path": "crates/incant_render/src/temporal_joined_tests.rs",
+      "old_sha256": "066a1edc4c6b4c0f2e65b7ef3b9eaa54a29f8fe3f1f4b6d016168adad74e70b2",
+      "new_sha256": "054156ce3aab843c2e036ca47f48e37faa64e6c577c45d60c1523ae00b114d19"
+    }
+  ],
+  "main_paths": [
+    "STATUS.md",
+    "crates/incant_render/src/bloom/config.rs",
+    "crates/incant_render/src/bloom/filter.wgsl",
+    "crates/incant_render/src/bloom/mod.rs",
+    "crates/incant_render/src/bloom/output.wgsl",
+    "crates/incant_render/src/bloom/targets.rs",
+    "crates/incant_render/src/bloom/tests.rs",
+    "crates/incant_render/src/bloom/tests/device.rs",
+    "crates/incant_render/src/bloom/tests/output_space.rs",
+    "crates/incant_render/src/bloom/tests/reference.rs",
+    "crates/incant_render/src/graph.rs",
+    "crates/incant_render/src/lib.rs",
+    "crates/incant_render/src/output.rs",
+    "crates/incant_render/src/temporal_joined_tests.rs",
+    "docs/spikes/bloom-main219.md",
+    "docs/spikes/evidence/bloom-main219.json",
+    "docs/spikes/evidence/bloom-main219/0075-bloom004-execution-preaudit-root-20261013.json",
+    "docs/spikes/evidence/bloom-main219/0075-bloom004-final-root-20261013.json",
+    "docs/spikes/evidence/bloom-main219/bloom-main219-source-root-20261013.json",
+    "docs/spikes/evidence/bloom-main219/final-root-review.json",
+    "docs/spikes/evidence/bloom-main219/freeze.json",
+    "docs/spikes/evidence/bloom-main219/producer-appearance-review.md",
+    "docs/spikes/evidence/bloom-main219/records.json.gz",
+    "docs/spikes/evidence/bloom-main219/verify.py",
+    "docs/spikes/evidence/bloom-main221/ccd-final-root-review.json",
+    "docs/spikes/evidence/bloom-main221/final-root-review.json",
+    "docs/spikes/evidence/bloom-main221/initial-cargo-path-error.stderr",
+    "docs/spikes/evidence/bloom-main221/initial-cargo-path-error.stdout",
+    "docs/spikes/evidence/bloom-main221/qualification.json",
+    "docs/spikes/evidence/bloom-main221/tested-cooked-after.stderr",
+    "docs/spikes/evidence/bloom-main221/tested-cooked-after.stdout",
+    "docs/spikes/evidence/bloom-main221/tested-cooked-before.stderr",
+    "docs/spikes/evidence/bloom-main221/tested-cooked-before.stdout",
+    "docs/spikes/evidence/bloom-main221/tested-default-after.stderr",
+    "docs/spikes/evidence/bloom-main221/tested-default-after.stdout",
+    "docs/spikes/evidence/bloom-main221/tested-default-before.stderr",
+    "docs/spikes/evidence/bloom-main221/tested-default-before.stdout",
+    "docs/spikes/evidence/bloom-main221/tested-player-after.stderr",
+    "docs/spikes/evidence/bloom-main221/tested-player-after.stdout",
+    "docs/spikes/evidence/bloom-main221/tested-player-before.stderr",
+    "docs/spikes/evidence/bloom-main221/tested-player-before.stdout",
+    "docs/spikes/evidence/bloom-main221/verify.py"
+  ],
+  "original_verifier_sha256": "06077c07a5edad0d4ab3fe9f98ccac4fce4fe1f2653065320f980999f8ddc131",
+  "normal_graph": {
+    "command": [
+      "./tools/cargo",
+      "tree",
+      "--locked",
+      "--offline",
+      "-p",
+      "incant_physics_snapshot",
+      "--edges",
+      "normal",
+      "--prefix",
+      "none"
+    ],
+    "path": "docs/spikes/evidence/physics-broad-main222/normal-graph.stdout",
+    "sha256": "4a393fa5ace88511dd8ae2bf90d087c3584026f17bcc4075db5b8d1f03a69044"
+  },
+  "limits": "Only four reviewed renderer files differ among original frozen inputs. Physics crate/vendor/locks/tooling exactly unchanged; selected std-only normal graph unchanged. Original172+172 composed CPU checks remain main221 evidence; no fresh build or GPU claim."
+}

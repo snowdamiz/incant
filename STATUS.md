@@ -107,7 +107,7 @@ consumer and browser checks pass, followed by eight bounded Metal frames joining
 fixed history, bloom/refusal and Display timing. Original Claude0075 bloom-only
 appearance acceptance remains source-specific; no new appearance claim is made.
 Native cooked output refuses bloom explicitly. Independent final integration
-review and exact main221 source relevance are independently accepted; publication awaits the required fast check. [Scope and evidence](docs/spikes/bloom-main219.md).
+review and exact main221 source relevance are independently accepted; PR222 merged after the required fast check. [Scope and evidence](docs/spikes/bloom-main219.md).
 
 ## Static Wasm C builds — bounded local scheduling verified
 
@@ -119,9 +119,9 @@ unification also affects other cc build consumers in the selected host graph.
 Windows candidate execution and timing remain pending; no Windows speedup or
 performance gate is claimed. [Scope and evidence](docs/spikes/wasm-c-parallel.md).
 
-## Current overview — main221, 2026-10-13
+## Current overview — main222, 2026-10-13
 
-Development main221 includes the reviewed opt-in cooked renderer families and
+Development main222 includes the reviewed opt-in cooked renderer families and
 Vulkan cache lifecycle, dynamic resolution, numerical retained motion, CPU/GPU
 profiling scopes and inert physics island validation. Each lane retains its own
 execution and acceptance limits below; the complete engine and game remain open.
@@ -139,7 +139,7 @@ promoted through PR174 after all 23 required contexts and eight exact-head workf
 succeeded and independent review verified the exact tested tree. Release `065aac69`
 exactly matches selected main205 `7bfeecfd`. Hosted default/cooked Metal, Vulkan and
 Dx12 suites passed, including the repaired four-process Vulkan cache lifecycle.
-Later main206–221 changes remain outside that tested baseline. No device, performance or
+Later main206–222 changes remain outside that tested baseline. No device, performance or
 phase gate follows from this promotion.
 
 Failed checkpoints15–19 remain historical and unpromoted. In particular, checkpoint17

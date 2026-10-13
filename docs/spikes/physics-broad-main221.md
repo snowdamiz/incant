@@ -34,3 +34,11 @@ This remains checked inert representation and trusted native observation.
 There is no live construction, aggregate owner authentication, pipeline boundary
 admission or physics save enablement. `PhysicsUnsupported` stays closed. No GPU,
 phone, performance or phase gate is claimed.
+
+Main222 adds the separately accepted bloom renderer. Exactly four renderer paths
+in the original freeze changed; all physics sources, vendor files, manifests,
+locks, tools and CI remain unchanged. The current std-only normal graph exactly
+matches the tested graph. [Pinned qualification](evidence/physics-broad-main222/qualification.json)
+and [read-only replay](evidence/physics-broad-main222/verify.py) preserve the original
+verifier and all native execution assertions, with four explicit old/new Git
+source exceptions. This is source relevance, not a new compiled run.
