@@ -191,7 +191,11 @@ impl<I: Ord> Default for PhysicsRuntime<I> {
 impl<I: Ord + Clone> PhysicsRuntime<I> {
     /// Unchanged bodies retain their handles, sleep state and solver warm-start
     /// data. Changes to other components never reconstruct the physics world.
+    /// A failed runtime cannot be revived by synchronizing declarations.
     pub fn sync(&mut self, prepared: PreparedPhysics<I>) {
+        if self.failed {
+            return;
+        }
         self.scenes.retain(|id, _| prepared.0.contains_key(id));
         for (scene_id, specs) in prepared.0 {
             let scene = self.scenes.entry(scene_id).or_default();
@@ -243,6 +247,9 @@ impl<I: Ord + Clone> PhysicsRuntime<I> {
     /// Apply a previously checked structural delta, preserving unrelated bodies.
     /// The owner bounds its entity collection before committing this operation.
     pub fn install(&mut self, scene: I, id: I, body: PreparedBody) {
+        if self.failed {
+            return;
+        }
         let scene = self.scenes.entry(scene).or_default();
         let spec = body.0;
         if scene.entries.get(&id).is_some_and(|entry| {
@@ -259,6 +266,9 @@ impl<I: Ord + Clone> PhysicsRuntime<I> {
     }
 
     pub fn remove(&mut self, scene: &I, id: &I) {
+        if self.failed {
+            return;
+        }
         if let Some(scene) = self.scenes.get_mut(scene) {
             scene.remove(id);
             scene.query_dirty = true;
@@ -266,9 +276,14 @@ impl<I: Ord + Clone> PhysicsRuntime<I> {
     }
 
     pub fn state(&self, scene: &I, id: &I) -> Option<&BodyState> {
+        if self.failed {
+            return None;
+        }
         Some(&self.scenes.get(scene)?.entries.get(id)?.config.state)
     }
 
+    /// Invalid dt is retryable. Once advancement starts, a late error or unwind
+    /// poisons the whole runtime, including scenes already advanced this tick.
     pub fn step(&mut self, dt: f64) -> Result<(), PhysicsError> {
         if self.failed {
             return Err(PhysicsError::NumericRange);
@@ -276,6 +291,10 @@ impl<I: Ord + Clone> PhysicsRuntime<I> {
         if !dt.is_finite() || !(1. / 240. ..=1.).contains(&dt) {
             return Err(PhysicsError::InvalidStep);
         }
+        // Stay poisoned until every scene and trigger observation is published.
+        // A caller that catches an unwind must not reuse a partially advanced
+        // solver or read stale/partial observations as a successful frame.
+        self.failed = true;
         let mut overlaps = BTreeSet::new();
         for (scene_id, scene) in &mut self.scenes {
             if let Some(cache) = &mut scene.character {
@@ -341,29 +360,27 @@ impl<I: Ord + Clone> PhysicsRuntime<I> {
             .collect();
         self.events.sort();
         self.overlaps = overlaps;
+        self.failed = false;
         Ok(())
     }
     pub fn state_iter(&self) -> impl Iterator<Item = (&I, &BodyState)> {
-        self.scenes.values().flat_map(|scene| {
-            scene
-                .entries
-                .iter()
-                .map(|(id, entry)| (id, &entry.config.state))
-        })
-    }
-    pub fn states(&self) -> BTreeMap<I, BodyState> {
         self.scenes
             .values()
+            .filter(|_| !self.failed)
             .flat_map(|scene| {
                 scene
                     .entries
                     .iter()
-                    .map(|(id, entry)| (id.clone(), entry.config.state.clone()))
+                    .map(|(id, entry)| (id, &entry.config.state))
             })
+    }
+    pub fn states(&self) -> BTreeMap<I, BodyState> {
+        self.state_iter()
+            .map(|(id, state)| (id.clone(), state.clone()))
             .collect()
     }
     pub fn events(&self) -> &[TriggerEvent<I>] {
-        &self.events
+        if self.failed { &[] } else { &self.events }
     }
 }
 impl<I: Ord + Clone> SceneWorld<I> {

@@ -1,0 +1,30 @@
+{
+  "at": "2026-10-13T17:50:41.680271+00:00",
+  "accepted": true,
+  "reviewer": "astra/integrate_runtime_prs",
+  "head": "eb0447e50e8fb55a018ba4e8084a826faa44be8f",
+  "manifest": {
+    "path": "/Users/andreyyurlov/.codex/worktrees/ssao-viewport-diagnostic/incant/docs/spikes/evidence/ssao-viewport-diagnostic.json",
+    "sha256": "1e04010e85d20f5c04b14eeee084b8ecbd230fa0dad4c7d07951e295658417b9"
+  },
+  "archive": {
+    "path": "docs/spikes/evidence/ssao-viewport-diagnostic-logs.json.gz",
+    "sha256": "22d08e852242cf21e54df10c31438db0e6071235d8ecfc0eede56863a146b001",
+    "records": 10,
+    "payloads": 10
+  },
+  "source_review": "df3f741a7d38db76a9216efb5ec946f3a86bcb8d0139cfb0fc519924b625dad8",
+  "verified": [
+    "Ten raw/original records independently decoded, hashed and length-compared byte-exact.",
+    "Final fixture log records one CPU pass, two GPU ignored, no failed cases; strict Clippy completes; workflow policy records22tests/OK. Zero-exit metadata supplied by root is retained.",
+    "Original hosted failure and exact two reviewed source hashes retained. No shader, production render or numerical tolerance changes.",
+    "Formatting, actionlint and convention success remain root-reported checks with retained actionlint output; no GPU execution inferred."
+  ],
+  "limits": [
+    "GPU diagnostic not run locally; Metal is not the failing Windows backend.",
+    "Only observation harness and manual workflow changed; original strict assertions and production shaders/draw setup unchanged.",
+    "Six diagnostic submissions and maps;18 render passes,19x15,zero images. Completion does not imply any numerical oracle passed.",
+    "Frozen checkpoint remains failed; no release-check substitution or phase approval."
+  ],
+  "findings": []
+}

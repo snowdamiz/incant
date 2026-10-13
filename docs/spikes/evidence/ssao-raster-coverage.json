@@ -1,0 +1,188 @@
+{
+  "schema": "incant-ssao-raster-coverage-v1",
+  "at": "2026-10-13T18:19:50.321263+00:00",
+  "base": "05898d1d670e1004c63a3e37d74cee89502157a5",
+  "source": "5f3dc20a48f0479dcf0010582ea8eb4ba911eac8",
+  "workflow_original": "239b10b4be4b84ad7466fd1376fae5760f97a60c",
+  "files": [
+    {
+      "path": "crates/incant_render/src/ambient_occlusion/draw.rs",
+      "sha256": "9bbcb185b562f9a49e80a16428db8d05214c9033cfa0c52a804e850e05ccf124"
+    },
+    {
+      "path": "crates/incant_render/src/ambient_occlusion/mod.rs",
+      "sha256": "0b6e1a419a5cd217531876aa99dbb3908394f043b5b19a452c56e3def2ab80ed"
+    },
+    {
+      "path": "crates/incant_render/src/ambient_occlusion/filter_device_tests.rs",
+      "sha256": "e31dd2936baf9db80fd520adf9f17f4d914324ba22531b9622e0ccf5098a0ada"
+    },
+    {
+      "path": "crates/incant_render/src/ambient_occlusion/raster.rs",
+      "sha256": "20434e09ad91f2b03b8384e026e0c1f2d02c1bbd26e418eec447c5f274f72abc"
+    },
+    {
+      "path": ".github/workflows/renderer-diagnostic.yml",
+      "sha256": "d136dd3d2dbe3bafe668c3f2117c4e750c274afcf77ebe7cf1233af56c64af24"
+    }
+  ],
+  "review": {
+    "path": "/Users/andreyyurlov/.codex/incant-reviews/ssao-raster-coverage-source-independent-20261013.json",
+    "sha256": "0700bf13e8dead34af030f2b0aeb60daa987f6ef97baee0c4c95af054c2b0a9a"
+  },
+  "diagnostic": {
+    "run": 38443167867,
+    "head": "8bd2afb9af88cf74f586a68f1a051cba4a7fa20a",
+    "observations_sha256": "ed9c9caf039b26bd5cc4d31da37a51b89959a0cb4dfcafa239bd207667ce84ad",
+    "finding": "Fractional sentinel leaves value17 at focus, demonstrating untouched clear at this location. Full-target viewport yields zero scalar-interval mismatches in both stages/projections with unchanged uniforms and exact depth checks."
+  },
+  "checks": [
+    {
+      "name": "cpu",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "-p",
+        "incant_render",
+        "--lib",
+        "ambient_occlusion::",
+        "--profile",
+        "ci",
+        "--locked",
+        "--offline",
+        "-j2"
+      ],
+      "started": "2026-10-13T18:15:47.600005+00:00",
+      "finished": "2026-10-13T18:16:51.065988+00:00",
+      "exit": 0,
+      "reaped": true,
+      "pid": 45712,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/ssao-raster-coverage-001/cpu.log",
+      "sha256": "c413bccf684a73e3718d96186bc3e18a940b1bc9e0a0b5407a4e1575db389dce"
+    },
+    {
+      "name": "clippy",
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "-p",
+        "incant_render",
+        "--lib",
+        "--tests",
+        "--profile",
+        "ci",
+        "--locked",
+        "--offline",
+        "-j2",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "started": "2026-10-13T18:16:51.066544+00:00",
+      "finished": "2026-10-13T18:16:58.265667+00:00",
+      "exit": 0,
+      "reaped": true,
+      "pid": 46022,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/ssao-raster-coverage-001/clippy.log",
+      "sha256": "d2562a06122e81fb707d22b77ed3a20bb221e1880b88e2bfd80b139b90a96a23"
+    },
+    {
+      "name": "wasm",
+      "argv": [
+        "./tools/cargo",
+        "check",
+        "-p",
+        "incant_render",
+        "--lib",
+        "--target",
+        "wasm32-unknown-unknown",
+        "--profile",
+        "ci",
+        "--locked",
+        "--offline",
+        "-j2"
+      ],
+      "started": "2026-10-13T18:17:54.707389+00:00",
+      "finished": "2026-10-13T18:17:56.974954+00:00",
+      "exit": 0,
+      "reaped": true,
+      "pid": 46519,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/ssao-raster-coverage-001/wasm.log",
+      "sha256": "a033a984af8054ad76b0a90161b445029281b68cbb9718c92aa9a4a8c360058f"
+    },
+    {
+      "name": "format",
+      "argv": [
+        "./tools/cargo",
+        "fmt",
+        "-p",
+        "incant_render",
+        "--",
+        "--check"
+      ],
+      "started": "2026-10-13T18:17:56.975297+00:00",
+      "finished": "2026-10-13T18:17:57.265336+00:00",
+      "exit": 0,
+      "reaped": true,
+      "pid": 46537,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/ssao-raster-coverage-001/format.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "conventions",
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "started": "2026-10-13T18:17:57.265656+00:00",
+      "finished": "2026-10-13T18:17:57.297202+00:00",
+      "exit": 0,
+      "reaped": true,
+      "pid": 46549,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/ssao-raster-coverage-001/conventions.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "diff",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "started": "2026-10-13T18:17:57.297508+00:00",
+      "finished": "2026-10-13T18:17:57.319574+00:00",
+      "exit": 0,
+      "reaped": true,
+      "pid": 46550,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/ssao-raster-coverage-001/diff.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "counts": {
+    "cpu_passed": 22,
+    "gpu_ignored": 3,
+    "strict_filter_pending_submissions": 2,
+    "diagnostic_submissions": 6
+  },
+  "workflow_checks": {
+    "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/ssao-strict-workflow-main240-001/checks.json",
+    "sha256": "7c8b3c9cc3c2d3d25767d25f20b37711ab69cf2743ec63bc6745984eab824755",
+    "actionlint_exit": 0,
+    "policy_cases": 12,
+    "policy_exit": 0,
+    "conventions_exit": 0,
+    "diff_exit": 0
+  },
+  "archive": {
+    "path": "docs/spikes/evidence/ssao-raster-coverage-logs.json.gz",
+    "sha256": "fcb48bf9a3d798127ca2231e16d3e3141f59d8141c2751ebef498889d37d74f1",
+    "records": 32,
+    "payloads": 23
+  },
+  "limits": [
+    "Actual Dx12 observations prove the old fractional raster leaves clear values and fulltarget removes the mismatches. They do not execute the new scissored production helper.",
+    "Strict revised production filter contract on actual Dx12 is pending; no local GPU, appearance, performance or release promotion claimed.",
+    "Shaders, scalar interval oracle, geometry viewport, default-off behavior and attachment budgets remain unchanged."
+  ]
+}

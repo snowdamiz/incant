@@ -1,0 +1,24 @@
+{
+  "format": "incant-typed-bvh-construction-layer",
+  "version": 1,
+  "baseline": "1a1ad50594a70989deab92a4d1669d47b959cb49",
+  "feature": "incant-checked-restore",
+  "scope": "Typed strict/pending tree storage plus shared non-Clone allocation permit. Supersedes historical pins only for these listed paths. No public world installer or live save.",
+  "files": [
+    {
+      "path": "Cargo.toml",
+      "baseline_sha256": "4fa1f68134c43071c4369c72fe358d5f44d46376f16e8aaa2308f434a9a87fbf",
+      "sha256": "d880cc1492d488060fcade79ebd44e15fa79c9ac7ab77eff78bfd90b5a1cce99"
+    },
+    {
+      "path": "src/partitioning/bvh/bvh_tree.rs",
+      "baseline_sha256": "f46261e1e4ddeda600c5ca34ca4838b0130c5d01afbe1524c5f4cfccc7819bfe",
+      "sha256": "2bcba81ea1911d3dbbb4dbfcd8a8540c0ce503849562bf3e0965b6e55ff4a800"
+    },
+    {
+      "path": "src/partitioning/bvh/bvh_checkpoint.rs",
+      "baseline_sha256": null,
+      "sha256": "0cf1310fe100fd5e39656b15605e80e9e53e2c126b371a404cd00f6994901873"
+    }
+  ]
+}

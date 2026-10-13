@@ -1,10 +1,11 @@
-use super::{System, math::Uniform, targets::Targets};
+use super::{System, math::Uniform, raster::PostprocessRaster, targets::Targets};
 use crate::{Result, models::Draw};
 use std::sync::Arc;
 use wgpu::util::DeviceExt;
 
 pub(crate) struct Prepared {
     targets: Arc<Targets>,
+    raster: PostprocessRaster,
     group: wgpu::BindGroup,
     pipeline: wgpu::RenderPipeline,
     filter_groups: [wgpu::BindGroup; 2],
@@ -89,6 +90,7 @@ impl System {
         });
         Ok(Prepared {
             targets,
+            raster: PostprocessRaster::new(rect, size),
             group,
             pipeline: self.sample.clone(),
             filter_groups,
@@ -195,9 +197,9 @@ impl Prepared {
             });
             pass.set_pipeline(pipeline);
             pass.set_bind_group(0, group, &[]);
-            let [x, y, w, h] = rect;
-            pass.set_viewport(x, y, w, h, 0., 1.);
-            pass.draw(0..3, 0..1);
+            if self.raster.apply(&mut pass) {
+                pass.draw(0..3, 0..1);
+            }
             drop(pass);
             #[cfg(all(feature = "ssao-stage-readback", not(target_arch = "wasm32")))]
             if let Some(capture) = &capture {

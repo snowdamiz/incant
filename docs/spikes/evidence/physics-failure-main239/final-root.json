@@ -1,0 +1,28 @@
+{
+  "at": "2026-10-13T18:07:18.553820+00:00",
+  "accepted": true,
+  "reviewer": "astra/root",
+  "head": "b94ef83311e066e5b51d6920ca44541788e13763",
+  "manifest_sha256": "0ea2c64c69ad4b5724169cac8115298d670e592668ad902266329ea24d63a72e",
+  "verification": {
+    "session": 6257,
+    "exit": 0,
+    "reaped": true,
+    "inputs": 3281,
+    "checks": 6,
+    "default_tests": 8,
+    "current_archive_records": 10,
+    "current_archive_payloads": 8,
+    "producer_archive_records": 17,
+    "producer_archive_payloads": 14
+  },
+  "reviewed": [
+    "Read complete current-main verifier and manifest, replayed verifier successfully; all source inputs are producer-exact except the explicitly listed main239 renderer diagnostic paths absent from physics dependency graph.",
+    "Reviewed source remains unchanged; fresh current default tests and strict Clippy pass. Producer fast8, native consumer and wasm results are correctly scoped as reused evidence.",
+    "Expected failing baseline is retained and public save admission remains closed."
+  ],
+  "findings": [],
+  "limits": [
+    "Terminal failure isolation, not rollback, general structural panic safety, public restore or phase-gate acceptance."
+  ]
+}

@@ -440,9 +440,41 @@ fn copy(
         source.size(),
     );
 }
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+enum RasterMode {
+    Production,
+    Fractional,
+    FractionalSentinel,
+    FullTargetSentinel,
+}
+
 #[test]
 #[ignore = "requires delegated GPU: exactly two 19x15 submissions, six render passes, no images"]
 fn actual_plane_filter_horizontal_vertical_depth_and_r8_contract() {
+    run_filter_cases(&[RasterMode::Production], true);
+}
+
+/// Diagnostic only: retains the original uniform, shader and scalar bounds.
+/// A nonwhite clear distinguishes missing coverage from the shader's white
+/// rejection result. Full-target rasterization tests coverage independently of
+/// the original fractional viewport, still enforced by the shader's inside().
+#[test]
+#[ignore = "requires delegated GPU: six 19x15 submissions, eighteen render passes, no images"]
+fn diagnose_plane_filter_fractional_viewport_coverage() {
+    run_filter_cases(
+        &[
+            RasterMode::Fractional,
+            RasterMode::FractionalSentinel,
+            RasterMode::FullTargetSentinel,
+        ],
+        false,
+    );
+    eprintln!(
+        "SSAO_FILTER_DIAGNOSTIC observations_only=true projections=2 variants=3 submits=6 maps=6 render_passes=18 no_images=true"
+    );
+}
+
+fn run_filter_cases(raster_modes: &[RasterMode], assert_expected: bool) {
     let renderer = crate::test_support::checked(crate::Renderer::headless().unwrap());
     eprintln!("SSAO_FILTER_ADAPTER {:?}", renderer.adapter.get_info());
     let device = &renderer.device;
@@ -471,7 +503,10 @@ fn actual_plane_filter_horizontal_vertical_depth_and_r8_contract() {
     });
     let filters = ["horizontal", "vertical"]
         .map(|s| pipeline(device, &layout, include_str!("filter.wgsl"), s, false));
-    for ortho in [false, true] {
+    for (ortho, mode) in [false, true]
+        .into_iter()
+        .flat_map(|ortho| raster_modes.iter().copied().map(move |mode| (ortho, mode)))
+    {
         let f = Fixture::new(ortho);
         let depth_source = texture(&renderer, wgpu::TextureFormat::R32Float);
         let depth = texture(&renderer, wgpu::TextureFormat::Depth32Float);
@@ -571,7 +606,18 @@ fn actual_plane_filter_horizontal_vertical_depth_and_r8_contract() {
                     depth_slice: None,
                     resolve_target: None,
                     ops: wgpu::Operations {
-                        load: wgpu::LoadOp::Clear(wgpu::Color::WHITE),
+                        load: wgpu::LoadOp::Clear(
+                            if matches!(mode, RasterMode::Production | RasterMode::Fractional) {
+                                wgpu::Color::WHITE
+                            } else {
+                                wgpu::Color {
+                                    r: 17. / 255.,
+                                    g: 0.,
+                                    b: 0.,
+                                    a: 1.,
+                                }
+                            },
+                        ),
                         store: wgpu::StoreOp::Store,
                     },
                 })];
@@ -585,7 +631,17 @@ fn actual_plane_filter_horizontal_vertical_depth_and_r8_contract() {
                 });
                 pass.set_pipeline(&filters[axis]);
                 pass.set_bind_group(0, &groups[axis], &[]);
-                pass.set_viewport(RECT[0], RECT[1], RECT[2], RECT[3], 0., 1.);
+                match mode {
+                    RasterMode::Production => {
+                        assert!(
+                            super::raster::PostprocessRaster::new(RECT, [W, H]).apply(&mut pass)
+                        );
+                    }
+                    RasterMode::Fractional | RasterMode::FractionalSentinel => {
+                        pass.set_viewport(RECT[0], RECT[1], RECT[2], RECT[3], 0., 1.);
+                    }
+                    RasterMode::FullTargetSentinel => {}
+                }
                 pass.draw(0..3, 0..1);
             }
             copy(
@@ -634,18 +690,53 @@ fn actual_plane_filter_horizontal_vertical_depth_and_r8_contract() {
         }
         drop(data);
         readback.unmap();
-        assert_codes("horizontal", &stages[0], &f.stage(&f.raw, 0, Metric::Plane));
-        assert_codes(
-            "vertical",
-            &stages[1],
-            &f.stage(&stages[0], 1, Metric::Plane),
-        );
-        assert!(difference(&stages[0], &f.raw) > 20);
-        assert!(difference(&stages[1], &stages[0]) > 20);
+        let bounds = [
+            f.stage(&f.raw, 0, Metric::Plane),
+            f.stage(&stages[0], 1, Metric::Plane),
+        ];
+        for (axis, name) in ["horizontal", "vertical"].into_iter().enumerate() {
+            let mismatches: Vec<_> = stages[axis]
+                .iter()
+                .zip(&bounds[axis])
+                .enumerate()
+                .filter_map(|(i, (&actual, &[lo, hi]))| {
+                    (!(lo..=hi).contains(&actual)).then_some((
+                        i % W as usize,
+                        i / W as usize,
+                        actual,
+                        lo,
+                        hi,
+                    ))
+                })
+                .collect();
+            let inside_mismatches = mismatches
+                .iter()
+                .filter(|&&(x, y, _, _, _)| inside(x as u32, y as u32))
+                .count();
+            let focus = index(17, 1);
+            eprintln!(
+                "SSAO_FILTER_RASTER projection={} mode={mode:?} stage={name} mismatches={} inside_mismatches={inside_mismatches} focus_actual={} focus_bounds={:?} focus_depth_bits={} focus_normal_bits={:?} first_mismatches={:?}",
+                if ortho { "orthographic" } else { "perspective" },
+                mismatches.len(),
+                stages[axis][focus],
+                bounds[axis][focus],
+                f.depths[focus].to_bits(),
+                f.normals[focus],
+                &mismatches[..mismatches.len().min(12)],
+            );
+            if assert_expected {
+                assert_codes(name, &stages[axis], &bounds[axis]);
+            }
+        }
+        if assert_expected {
+            assert!(difference(&stages[0], &f.raw) > 20);
+            assert!(difference(&stages[1], &stages[0]) > 20);
+        }
         eprintln!(
-            "SSAO_FILTER projection={} size={W}x{H} submits=1 render_passes=3 checked_depth={} checked_r8={} h_sha256={:x} v_sha256={:x}",
+            "SSAO_FILTER projection={} size={W}x{H} submits=1 render_passes=3 checked_depth={} checked_r8={} observed_r8={} contract_asserted={assert_expected} mode={mode:?} h_sha256={:x} v_sha256={:x}",
             if ortho { "orthographic" } else { "perspective" },
             W * H,
+            if assert_expected { 2 * W * H } else { 0 },
             2 * W * H,
             Sha256::digest(&stages[0]),
             Sha256::digest(&stages[1])

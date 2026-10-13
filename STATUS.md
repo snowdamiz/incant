@@ -1,6 +1,16 @@
 # Implementation status
 
-Native island construction on main231 is source-reviewed and passed current composed CPU qualification: 218 snapshot + 28 private native cases in each of two parallel modes, 156 paired island steps per dimension/mode, all 21 checks successful. Final integration review is accepted; current-main join/fast check remain before publication. Complete-world restore and physics-save admission remain closed. See [the scoped evidence](docs/spikes/physics-islands-main231.md).
+Standalone 3D physics now hides incomplete state and trigger observations after a late step error or caught unwind, and cannot be revived through structural calls. Invalid time steps remain retryable. Independent source and final producer reviews are accepted. Both producer modes, strict Clippy, native consumers and wasm compilation pass; the exact current-main239 composition additionally passes all eight default runtime cases and six checks. Final current-main review is accepted; PR240 merged after its required exact-head fast check. This does not implement rollback or physics saves. [Evidence](docs/spikes/physics-failure-isolation.md).
+
+Checkpoint26 remains frozen and failed on the Windows Dx12 SSAO filter. Exact-main239 observations proved fractional raster coverage left clear values at accepted edge pixels; full-target rasterization removed all mismatches. The reviewed production repair uses a conservative integer scissor and preserves shaders, geometry projection and strict intervals. Local CPU/Clippy/wasm checks pass; actual strict Dx12 validation of the repaired helper remains pending. [Repair evidence](docs/spikes/ssao-raster-coverage.md).
+
+Private primitive narrow-phase construction on main237 passed 227 snapshot and 45 native cases per mode, 312 decoded continuation steps per dimension/mode and all 29 checks. Source and final current-main evidence reviews are accepted; PR238 merged after its required exact-head fast check. Sixteen fast8 fixture substitutions are explicitly bound. Compound construction, complete native world installation and public physics saves stay closed. [Evidence](docs/spikes/physics-native-narrow-main237.md).
+
+Private broad-phase manager construction on main236 passed both composed numerical modes: 225 snapshot and 36 native cases per mode, 220 paired broad steps per dimension/mode, and all 28 checks. Source and final current-main evidence reviews are accepted; PR237 merged after its required exact-head fast check. Fast8 fixture reuse is explicitly hash-bound. Other live owners remain trusted clones, and whole-world restore/public physics saves stay unsupported. [Evidence](docs/spikes/physics-native-broad-main236.md).
+
+Private typed Parry BVH construction and shared allocation on main234 passed both composed numerical modes: 225 snapshot + 26 native cases per mode, 226 paired BVH steps per dimension/mode, all23 checks successful. Final current-main packet and main235 join reviews are accepted; PR236 merged after its required exact-head fast check. The feature stays default-off and complete-world physics saves remain unsupported. [Evidence](docs/spikes/physics-parry-main234.md).
+
+Native island construction on main231 is source-reviewed and passed current composed CPU qualification: 218 snapshot + 28 private native cases in each of two parallel modes, 156 paired island steps per dimension/mode, all 21 checks successful. Final integration and main234 join reviews are accepted; PR235 merged after its required exact-head fast check. Complete-world restore and physics-save admission remain closed. See [the scoped evidence](docs/spikes/physics-islands-main231.md).
 
 [PLAN.md](PLAN.md) revision 8 is the source of truth. Phase 1 is in progress;
 the full engine and Driftwake release are not complete. Calendar targets and
@@ -25,8 +35,8 @@ half-pixel guard with temporal rendering off or on. The scene camera, lighting
 clusters, filtering and shaders are unchanged; default unjittered shadow fitting
 intentionally changes. Current composition passes171 default/203 overlapping
 cooked CPU cases and13 checks, with33 native payloads exact. Independent source,
-final evidence and main231 relevance reviews are accepted; publication awaits
-its fast check. Original Metal/Claude visual evidence remains producer-scoped:
+final evidence and main231/main233 relevance reviews are accepted; PR234 merged
+after its required exact-head fast check. Original Metal/Claude visual evidence remains producer-scoped:
 the initial strict comparison is still failed, same-binary one-frame variation
 is unresolved, and thin MASK/temporal quality limits remain. No current GPU or
 phone/performance claim. [Evidence](docs/spikes/shadow-main230.md).
@@ -231,9 +241,9 @@ unification also affects other cc build consumers in the selected host graph.
 Windows candidate execution and timing remain pending; no Windows speedup or
 performance gate is claimed. [Scope and evidence](docs/spikes/wasm-c-parallel.md).
 
-## Current overview — main231, 2026-10-13
+## Current overview — main237, 2026-10-13
 
-Development main231 includes the reviewed opt-in cooked renderer families and
+Development main237 includes the reviewed opt-in cooked renderer families and
 Vulkan cache lifecycle, dynamic resolution, numerical retained motion, CPU/GPU
 profiling scopes and joined inert physics owner boundaries. Each lane retains its own
 execution and acceptance limits below; the complete engine and game remain open.
@@ -244,12 +254,14 @@ main226 `079ee1aa` exactly. Independent review verified the tested tree, ancestr
 unchanged protection and all success receipts. The journal replay repair passed
 on actual macOS/Linux/Windows; optional timestamp diagnostics preserve explicit
 Unsupported results on Apple Paravirtual Metal and measured paths on Vulkan/Dx12.
-Checkpoint25 is frozen on reviewed main230 (`56185dab`) in PR232, with all23
-required contexts preserved. One Windows UI test timed out; the original failure
-remains failed while remaining workflows run. Its scoped per-case deadline
-repair passes local focused/full UI checks and is independently accepted;
-publication follows its required fast check.
-Later main changes do not alter either frozen checkpoint.
+Checkpoint25 finished without promotion: 21 required contexts succeeded, the
+Windows full-App UI test timed out, and the checks job was cancelled before a
+runner acquired it. Those outcomes remain retained. PR233 merged the reviewed
+single-case deadline repair after its required fast check.
+Checkpoint26 is frozen on main235 (`fd290c3b`) with candidate `0da0a6db` in the
+same PR232. All 23 required contexts and eight workflows remain required; actual
+checkpoint execution is pending. Later main changes do not alter that frozen
+head or the already promoted release.
 [Promotion evidence](docs/spikes/release-checkpoint-24.md).
 
 Checkpoint23 is terminal and unpromoted: 22 required contexts succeeded and its

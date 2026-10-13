@@ -1,0 +1,36 @@
+{
+  "at": "2026-10-13T17:04:17.095556+00:00",
+  "reviewer": "astra root",
+  "decision": "accepted scoped current-main Parry construction including docs-only main235 join",
+  "head": "aa0fe864bdaa1ba05aa7314f930f6890685bf502",
+  "source": "09ba77ae74f9c982ebef5c7b313d488d128fea00",
+  "main": "fd290c3bae2c6de5bb1de6f5e7b9005c32f1656e",
+  "manifest_sha256": "641963bd2a1392309986c68dfda010eac8a489442b0948d4c2307673bbe4aa15",
+  "collector_sha256": "c0de2127dd9d66e55741cee0382ae89c2cf28b9fd479f74554e99e82c5b65f79",
+  "qualifier_sha256": "b56168172c7f040d59a6ce07be28ccfcd982f97e6f817bc224a8677ff65d2355",
+  "archive": {
+    "path": "docs/spikes/evidence/physics-parry-main234/records.json.gz",
+    "sha256": "4442bed6b1d75d6aa7983267a62b224e72e09beb790be95ec23d80d849d84022",
+    "raw_sha256": "bde5f84b172226a7824d9e1051affb5c84eac6b6155ce6aa414bb7d7aa31cf45",
+    "records": 770,
+    "payloads": 472
+  },
+  "replay": {
+    "handle": 8337,
+    "exit": 0,
+    "reaped": true
+  },
+  "basis": [
+    "Read complete collector and main235 qualifier, replayed all assertions through qualified main entry.3617 compiled inputs and2019 selected physics closure verified unchanged.",
+    "23 successful local commands;225 snapshot and26 native cases per numerical mode;226 typed BVH paired steps per dimension/mode.",
+    "Actual compiler-artifact features/solver graphs prove selected modes.688 source copies,10 binaries,770 current and1639 producer lossless records verified.",
+    "Sole producer seam remains reviewed Error declaration ordering; main235 adds only three reviewed island documentation paths, no implementation changes.",
+    "Default-off standard-library-only construction graph and original runtime boundary guards remain checked."
+  ],
+  "limits": [
+    "Typed Parry BVH construction and shared allocation utility only; complete native owners remain outside this component.",
+    "Both current modes use unchanged checked-in deterministic capture bytes. Only decoded island state is installed; no raw whole-frame/body cross-mode equivalence is claimed. Producer variant-specific captures remain separate.",
+    "No decoded complete-world install, runtime physics saves, phone or performance claim.",
+    "Composed source actually rebuilt in two parallel numerical modes; focused and broad tests overlap."
+  ]
+}

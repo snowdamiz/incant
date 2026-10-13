@@ -2478,3 +2478,8 @@ impl Bvh {
     //     metric
     // }
 }
+
+// Incant: exact typed construction lives beside the private fields.
+#[cfg(feature = "incant-checked-restore")]
+#[path = "bvh_checkpoint.rs"]
+mod checked_checkpoint;
