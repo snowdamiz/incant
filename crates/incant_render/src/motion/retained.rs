@@ -1,0 +1,435 @@
+use super::{
+    MotionError, MotionFrame,
+    draw::{Draw, MotionDraw},
+    owner::{Extent, History, Pending},
+    plan,
+    targets::Targets,
+};
+use crate::{
+    RenderScene, Renderer, Result, SceneInput,
+    models::{Batch, animation},
+};
+use glam::DMat4;
+use std::sync::Arc;
+use wgpu::util::DeviceExt;
+
+#[repr(C)]
+#[derive(Clone, Copy, bytemuck::Pod, bytemuck::Zeroable)]
+struct Previous {
+    world: [[f32; 4]; 4],
+    valid: [f32; 4],
+}
+struct Rows {
+    slots: Vec<usize>,
+    packed: Vec<Previous>,
+    buffer: wgpu::Buffer,
+}
+#[repr(C)]
+#[derive(Clone, Copy, bytemuck::Pod, bytemuck::Zeroable)]
+struct Frame {
+    current: [[f32; 4]; 4],
+    previous: [[f32; 4]; 4],
+    rect: [f32; 4],
+}
+const _: () = {
+    assert!(size_of::<Previous>() == 80);
+    assert!(size_of::<Frame>() == 144);
+};
+
+pub(crate) struct MotionState {
+    pub(super) history: History,
+    nodes: Vec<usize>,
+    worlds: Vec<DMat4>,
+    rows: Vec<Rows>,
+    pub(super) targets: Option<Arc<Targets>>,
+    slot: usize,
+    bytes: u64,
+}
+pub(crate) struct Prepared {
+    history: Pending,
+    targets: Option<Arc<Targets>>,
+    slot: usize,
+}
+fn capacity(batch: &Batch) -> usize {
+    if batch.animated.is_some() {
+        1
+    } else {
+        batch.placements.len()
+    }
+}
+fn topology(live: &RenderScene, current: &RenderScene) -> std::result::Result<(), MotionError> {
+    if live.batches.len() != current.batches.len() {
+        return Err(MotionError::Topology);
+    }
+    for (a, b) in live.batches.iter().zip(&current.batches) {
+        if !Arc::ptr_eq(&a.model, &b.model)
+            || a.model._source.version_id() != b.model._source.version_id()
+            || a.primitive != b.primitive
+            || a.casts_shadows != b.casts_shadows
+            || a.mirrored != b.mirrored
+            || a.animated != b.animated
+            || a.placements.len() != b.placements.len()
+            || a.placements
+                .iter()
+                .zip(b.placements.iter())
+                .any(|(x, y)| x.node != y.node || x.local != y.local)
+            || a.vertices.as_ref().map(wgpu::Buffer::size)
+                != b.vertices.as_ref().map(wgpu::Buffer::size)
+        {
+            return Err(MotionError::Topology);
+        }
+    }
+    Ok(())
+}
+impl MotionState {
+    pub fn new(
+        renderer: &Renderer,
+        live: &RenderScene,
+        staging: &RenderScene,
+        old: Option<&Self>,
+    ) -> Result<Self> {
+        super::admission()?;
+        if renderer.motion.is_none() {
+            return Err(MotionError::Disabled.into());
+        }
+        topology(live, staging)?;
+        if live.camera.pixel_resolution.is_some() {
+            return Ok(Self {
+                history: History::default(),
+                nodes: Vec::new(),
+                worlds: Vec::new(),
+                rows: Vec::new(),
+                targets: None,
+                slot: 1,
+                bytes: size_of::<Self>() as u64,
+            });
+        }
+        let mut slots = 0usize;
+        // Both transition target headers/Arc controls and one prepared packet;
+        // opaque driver allocations and allocator padding are not logical payload.
+        let mut bytes = (size_of::<Self>()
+            + 2 * (size_of::<Targets>() + 2 * size_of::<usize>())
+            + size_of::<MotionDraw>()
+            + 2 * size_of::<usize>()) as u64;
+        plan::charge(
+            &mut bytes,
+            live.batches.len(),
+            size_of::<Rows>() + size_of::<Draw>(),
+        )?;
+        for batch in &live.batches {
+            let n = capacity(batch);
+            if n == 0 {
+                return Err(MotionError::Topology.into());
+            }
+            slots = slots
+                .checked_add(n)
+                .filter(|&n| n <= 2 * incant_render_data::MAX_INSTANCES)
+                .ok_or(MotionError::Capacity)?;
+            if (n as u64)
+                .checked_mul(size_of::<Previous>() as u64)
+                .is_none_or(|n| n > renderer.device.limits().max_buffer_size)
+            {
+                return Err(MotionError::Capacity.into());
+            }
+            // CPU packed row + GPU row + stable placement-to-node lookup.
+            plan::charge(
+                &mut bytes,
+                n,
+                2 * size_of::<Previous>() + size_of::<usize>(),
+            )?;
+        }
+        // Before allocating even the temporary node list, charge its worst case
+        // capacity and every previous entity transform (duplicates only reduce it).
+        plan::charge(&mut bytes, slots, size_of::<usize>() + size_of::<DMat4>())?;
+        plan::charge(&mut bytes, 1, size_of::<Frame>() * 2)?;
+        plan::overlap(
+            old.map_or(0, |o| o.bytes),
+            bytes,
+            plan::MAX_MOTION_INSTANCE_BYTES,
+        )?;
+        let mut nodes = Vec::with_capacity(slots);
+        for batch in &live.batches {
+            if let Some(binding) = batch.animated {
+                nodes.push(animation::motion_node(binding, &live.animations));
+            } else {
+                nodes.extend(batch.placements.iter().map(|p| p.node));
+            }
+        }
+        nodes.sort_unstable();
+        nodes.dedup();
+        let worlds = vec![DMat4::IDENTITY; nodes.len()];
+        let mut rows = Vec::with_capacity(live.batches.len());
+        for batch in &live.batches {
+            let count = capacity(batch);
+            let mut slots = Vec::with_capacity(count);
+            if let Some(binding) = batch.animated {
+                slots.push(
+                    nodes
+                        .binary_search(&animation::motion_node(binding, &live.animations))
+                        .unwrap(),
+                );
+            } else {
+                slots.extend(
+                    batch
+                        .placements
+                        .iter()
+                        .map(|p| nodes.binary_search(&p.node).unwrap()),
+                );
+            }
+            rows.push(Rows {
+                slots,
+                packed: Vec::with_capacity(count),
+                buffer: renderer.device.create_buffer(&wgpu::BufferDescriptor {
+                    label: Some("Motion previous instance rows"),
+                    size: (count.max(1) * size_of::<Previous>()) as u64,
+                    usage: wgpu::BufferUsages::VERTEX | wgpu::BufferUsages::COPY_DST,
+                    mapped_at_creation: false,
+                }),
+            });
+        }
+        Ok(Self {
+            history: History::default(),
+            nodes,
+            worlds,
+            rows,
+            targets: None,
+            slot: 1,
+            bytes,
+        })
+    }
+    #[cfg(test)]
+    pub(crate) fn readback_view(&self) -> Option<wgpu::TextureView> {
+        self.targets.as_ref().map(|t| t.motion.clone())
+    }
+    pub fn frame(&self) -> Option<MotionFrame> {
+        self.history.frame()
+    }
+    pub fn invalidate(&mut self) {
+        self.history.invalidate();
+    }
+    pub fn prepare(
+        &mut self,
+        renderer: &Renderer,
+        live: &RenderScene,
+        current: &RenderScene,
+        input: &SceneInput,
+        output: [u32; 2],
+        plan: &crate::resolution::FramePlan,
+    ) -> Result<(Option<MotionDraw>, Prepared)> {
+        topology(live, current)?;
+        let history = self.history.prepare(
+            Extent::new(output, plan.size, plan.rect, current.camera),
+            current.camera.matrix(plan.rect[2] / plan.rect[3])?,
+        )?;
+        if history.frame.bypassed() {
+            return Ok((
+                None,
+                Prepared {
+                    history,
+                    targets: None,
+                    slot: 1,
+                },
+            ));
+        }
+        // Preflight all target bytes before creating either a target or a packet.
+        let target_bytes =
+            plan::target_bytes(plan.size, renderer.device.limits().max_texture_dimension_2d)?;
+        plan::overlap(
+            self.targets.as_ref().map_or(0, |t| t.bytes),
+            target_bytes,
+            plan::MAX_MOTION_TARGET_BYTES,
+        )?;
+        let system = renderer.motion.as_ref().ok_or(MotionError::Disabled)?;
+        let valid = f32::from(u8::from(history.frame.has_previous()));
+        for (batch, rows) in current.batches.iter().zip(&mut self.rows) {
+            rows.packed.clear();
+            if let Some(binding) = batch.animated {
+                if batch.count > 0 {
+                    let world = animation::motion_world(
+                        binding,
+                        &live.animations,
+                        self.worlds[rows.slots[0]],
+                    );
+                    rows.packed.push(Previous {
+                        world: world.to_cols_array_2d(),
+                        valid: [valid, 0., 0., 0.],
+                    });
+                }
+            } else {
+                pack_static(
+                    &batch.placements,
+                    &rows.slots,
+                    &self.worlds,
+                    input,
+                    batch.mirrored,
+                    valid,
+                    &mut rows.packed,
+                )?;
+            }
+            if rows.packed.len() != batch.count as usize {
+                return Err(MotionError::Topology.into());
+            }
+        }
+        let targets = Targets::prepare(&renderer.device, plan.size, self.targets.as_ref())?;
+        let slot = if self
+            .targets
+            .as_ref()
+            .is_some_and(|t| Arc::ptr_eq(t, &targets))
+        {
+            1 - self.slot
+        } else {
+            0
+        };
+        let uniform = Frame {
+            current: history.matrix.to_cols_array_2d(),
+            previous: history.previous.to_cols_array_2d(),
+            rect: plan.rect,
+        };
+        let buffer = renderer
+            .device
+            .create_buffer_init(&wgpu::util::BufferInitDescriptor {
+                label: Some("Motion frame"),
+                contents: bytemuck::bytes_of(&uniform),
+                usage: wgpu::BufferUsages::UNIFORM,
+            });
+        let frame = renderer
+            .device
+            .create_bind_group(&wgpu::BindGroupDescriptor {
+                label: Some("Motion frame"),
+                layout: &system.globals,
+                entries: &[wgpu::BindGroupEntry {
+                    binding: 0,
+                    resource: buffer.as_entire_binding(),
+                }],
+            });
+        let mut draws = Vec::with_capacity(current.batches.len());
+        for ((batch, old), rows) in current.batches.iter().zip(&live.batches).zip(&self.rows) {
+            let primitive = &batch.model.primitives[batch.primitive];
+            let material = &batch.model.materials.materials[primitive.material];
+            if batch.count == 0 || material.alpha == incant_assets_runtime::AlphaMode::Blend {
+                continue;
+            }
+            draws.push(Draw {
+                batch: Arc::clone(batch),
+                previous_vertices: old.vertices.as_ref().unwrap_or(&primitive.vertices).clone(),
+                previous_instances: rows.buffer.clone(),
+                pipeline: system.pipeline(material.double_sided, batch.mirrored),
+            });
+        }
+        Ok((
+            Some(MotionDraw {
+                targets: Arc::clone(&targets),
+                slot,
+                rect: plan.rect,
+                frame,
+                draws,
+            }),
+            Prepared {
+                history,
+                targets: Some(targets),
+                slot,
+            },
+        ))
+    }
+    pub fn write(&self, queue: &wgpu::Queue, pending: &Prepared) {
+        if pending.history.frame.bypassed() {
+            return;
+        }
+        for rows in &self.rows {
+            if !rows.packed.is_empty() {
+                queue.write_buffer(&rows.buffer, 0, bytemuck::cast_slice(&rows.packed));
+            }
+        }
+    }
+    pub fn accept(&mut self, pending: Prepared, input: &SceneInput) {
+        for (&node, world) in self.nodes.iter().zip(&mut self.worlds) {
+            *world = input.nodes[node].world;
+        }
+        self.history.accept(pending.history);
+        self.targets = pending.targets;
+        self.slot = pending.slot;
+    }
+}
+
+fn pack_static(
+    placements: &[crate::scene::Placement],
+    slots: &[usize],
+    previous: &[DMat4],
+    input: &SceneInput,
+    mirrored: bool,
+    valid: f32,
+    out: &mut Vec<Previous>,
+) -> Result<()> {
+    for (placement, &slot) in placements.iter().zip(slots) {
+        let current_world = (input.nodes[placement.node].world * placement.local).as_mat4();
+        let transform = crate::scene::Instance::new(current_world)?;
+        if (transform.normal[0][3] < 0.) != mirrored {
+            continue;
+        }
+        let previous = (previous[slot] * placement.local).as_mat4();
+        out.push(Previous {
+            world: previous.to_cols_array_2d(),
+            valid: [valid, 0., 0., 0.],
+        });
+    }
+    Ok(())
+}
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn previous_rows_follow_placement_identity_across_mirrored_packing_without_allocations() {
+        let node = |id: &str, world| incant_render_data::SceneNode {
+            id: id.into(),
+            world,
+            camera: None,
+            light: None,
+            mesh: None,
+            sprite: None,
+            tilemap: None,
+            diagnostic: false,
+        };
+        let input = SceneInput {
+            nodes: vec![
+                node("a", DMat4::from_scale(glam::DVec3::new(-1., 1., 1.))),
+                node("b", DMat4::IDENTITY),
+            ],
+            ..Default::default()
+        };
+        let placements = [
+            crate::scene::Placement {
+                node: 0,
+                local: DMat4::from_translation(glam::DVec3::X),
+            },
+            crate::scene::Placement {
+                node: 1,
+                local: DMat4::from_translation(glam::DVec3::Y),
+            },
+        ];
+        let worlds = [
+            DMat4::from_translation(glam::DVec3::new(10., 0., 0.)),
+            DMat4::from_scale(glam::DVec3::new(-2., 1., 1.)),
+        ];
+        let mut rows = Vec::with_capacity(2);
+        let allocations = crate::retained_alloc::measured(|| {
+            pack_static(&placements, &[0, 1], &worlds, &input, false, 1., &mut rows).unwrap();
+            assert_eq!(rows.len(), 1);
+            assert_eq!(
+                rows[0].world,
+                (worlds[1] * placements[1].local)
+                    .as_mat4()
+                    .to_cols_array_2d()
+            );
+            rows.clear();
+            pack_static(&placements, &[0, 1], &worlds, &input, true, 1., &mut rows).unwrap();
+            assert_eq!(rows.len(), 1);
+            assert_eq!(
+                rows[0].world,
+                (worlds[0] * placements[0].local)
+                    .as_mat4()
+                    .to_cols_array_2d()
+            );
+        });
+        assert_eq!(allocations, 0);
+    }
+}

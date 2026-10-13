@@ -18,6 +18,11 @@ pub(crate) use drawing::{ModelDraw, ModelTarget};
 mod shadow_drawing;
 pub(crate) use shadow_drawing::ShadowDraw;
 pub(crate) mod animation;
+#[path = "motion/mod.rs"]
+pub mod motion;
+#[cfg(test)]
+#[path = "../../incant_assets/tests/skeletal/fixture.rs"]
+pub(crate) mod skeletal_fixture;
 
 struct Primitive {
     vertices: wgpu::Buffer,

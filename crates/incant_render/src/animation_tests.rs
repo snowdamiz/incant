@@ -1,6 +1,5 @@
 use super::*;
-#[path = "../../incant_assets/tests/skeletal/fixture.rs"]
-mod fixture;
+use crate::models::skeletal_fixture as fixture;
 use incant_render_data::{SceneInput, SceneNode};
 
 fn source(dir: &std::path::Path) -> Arc<RuntimeAsset> {

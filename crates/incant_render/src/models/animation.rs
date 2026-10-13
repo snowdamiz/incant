@@ -20,7 +20,7 @@ pub(crate) struct Plan {
     player: AnimationPlayer,
     placements: Vec<(usize, usize)>,
 }
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, PartialEq, Eq)]
 pub(super) struct Binding {
     instance: usize,
     model_node: usize,
@@ -516,6 +516,28 @@ pub(super) fn stage_batch(
         batch.updates.push(transform);
     }
     Ok(true)
+}
+/// Exact previous sampled geometry uses the accepted live pose, not a resample.
+#[cfg(test)]
+pub(super) fn motion_test_vertex(binding: Binding, instances: &[Instance]) -> Option<[f32; 12]> {
+    binding
+        .geometry
+        .map(|i| instances[binding.instance].geometry[i].vertices[0])
+}
+pub(super) fn motion_node(binding: Binding, instances: &[Instance]) -> usize {
+    instances[binding.instance].input_node
+}
+pub(super) fn motion_world(
+    binding: Binding,
+    instances: &[Instance],
+    entity_world: DMat4,
+) -> glam::Mat4 {
+    if binding.geometry.is_some() {
+        entity_world
+    } else {
+        entity_world * instances[binding.instance].player.globals()[binding.model_node]
+    }
+    .as_mat4()
 }
 pub(super) fn write(instances: &[Instance], queue: &wgpu::Queue) {
     for instance in instances {
