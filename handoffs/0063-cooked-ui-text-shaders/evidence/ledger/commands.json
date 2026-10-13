@@ -1,0 +1,1685 @@
+{
+ "packet": "0063-cooked-ui-text-shaders",
+ "session_order": [
+  {
+   "order": 0,
+   "command": "python3 -I -B handoffs/0063-cooked-ui-text-shaders/tools/lease.py acquire",
+   "exit": 0,
+   "note": "target lease after Astra's review-ready.json named 0063"
+  },
+  {
+   "order": 1,
+   "command": "python3 -I -B handoffs/0063-cooked-ui-text-shaders/tools/build.py freeze",
+   "exit": 0,
+   "note": "build/source-freeze.json"
+  },
+  {
+   "order": 2,
+   "command": "python3 -I -B handoffs/0063-cooked-ui-text-shaders/tools/build.py helper-lock",
+   "exit": 1,
+   "note": "cargo metadata --offline exited 0 and wrote the pruned lock; my verifier then rejected it (it merged [[patch.unused]] tao into a package block and compared dependency references without Cargo's version-suffix elision)"
+  },
+  {
+   "order": 3,
+   "command": "python3 -I -B handoffs/0063-cooked-ui-text-shaders/tools/build.py verify-lock",
+   "exit": 1,
+   "note": "same verifier defect; no record written"
+  },
+  {
+   "order": 4,
+   "command": "python3 -I -B handoffs/0063-cooked-ui-text-shaders/tools/build.py verify-lock",
+   "exit": 0,
+   "note": "corrected verifier: 375 identical entries, 0 added edges"
+  },
+  {
+   "order": 5,
+   "command": "background: build.py tools > logs/step-tools.txt",
+   "exit": 1,
+   "note": "shell redirect failed before Python started (logs/ did not exist yet); no cargo ran"
+  },
+  {
+   "order": 6,
+   "command": "background: build.py tools; build.py baseline; build.py candidate",
+   "exit": 0,
+   "note": "see build records"
+  },
+  {
+   "order": 7,
+   "command": "python3 -I -B handoffs/0063-cooked-ui-text-shaders/tools/author.py build /Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r1",
+   "exit": 0,
+   "note": "superseded: board W lacked exact in-scene controls"
+  },
+  {
+   "order": 8,
+   "command": "python3 -I -B handoffs/0063-cooked-ui-text-shaders/tools/embed.py /Users/andreyyurlov/.codex/incant-evidence/0063/analysis/embed.json",
+   "exit": 0,
+   "note": "static shader-byte check of frozen binaries"
+  },
+  {
+   "order": 9,
+   "command": "python3 -I -B handoffs/0063-cooked-ui-text-shaders/tools/author.py build /Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r2",
+   "exit": 0,
+   "note": "superseded after two baseline frames"
+  },
+  {
+   "order": 10,
+   "command": "GPU children: 8 lists, 12 test groups, 2 r2 captures",
+   "exit": 0,
+   "note": "see gpu-ledger.jsonl"
+  },
+  {
+   "order": 11,
+   "command": "mv captures/baseline/{W-ortho,U-1x-unorm} captures-r2-superseded/baseline/",
+   "exit": 0,
+   "note": "r2 frames kept and counted; MOVED.json"
+  },
+  {
+   "order": 12,
+   "command": "python3 -I -B handoffs/0063-cooked-ui-text-shaders/tools/author.py build /Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r3",
+   "exit": 0,
+   "note": "yaw -60 deg; Arabic field long enough to overflow"
+  },
+  {
+   "order": 13,
+   "command": "GPU children: 12 r3 captures",
+   "exit": 0,
+   "note": "U-15x children exited 1 in both variants; see gpu-ledger.jsonl"
+  },
+  {
+   "order": 14,
+   "command": "python3 -I -B handoffs/0063-cooked-ui-text-shaders/tools/author.py add-case /Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r3 U-15x-name",
+   "exit": 0,
+   "note": "supplementary request"
+  },
+  {
+   "order": 15,
+   "command": "GPU children: 2 U-15x-name captures",
+   "exit": 0,
+   "note": "see gpu-ledger.jsonl"
+  },
+  {
+   "order": 16,
+   "command": "python3 -I -B handoffs/0063-cooked-ui-text-shaders/tools/author.py source-free /Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r3 W",
+   "exit": 0,
+   "note": "9 sources removed; caches unchanged"
+  },
+  {
+   "order": 17,
+   "command": "python3 -I -B handoffs/0063-cooked-ui-text-shaders/tools/author.py source-free /Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r3 U",
+   "exit": 0,
+   "note": "9 sources removed; caches unchanged"
+  },
+  {
+   "order": 18,
+   "command": "GPU children: 2 source-free candidate captures",
+   "exit": 0,
+   "note": "see gpu-ledger.jsonl"
+  },
+  {
+   "order": 19,
+   "command": "python3 -I -B handoffs/0063-cooked-ui-text-shaders/tools/gpu.py release",
+   "exit": 0,
+   "note": "gpu-released.json"
+  },
+  {
+   "order": 20,
+   "command": "python3 -I -B handoffs/0063-cooked-ui-text-shaders/tools/gpu.py test candidate lib after-release-check",
+   "exit": 1,
+   "note": "expected refusal: latch present; no child or log"
+  },
+  {
+   "order": 21,
+   "command": "python3 -I -B handoffs/0063-cooked-ui-text-shaders/tools/gpu.py capture candidate W-ortho",
+   "exit": 1,
+   "note": "refused by the source-free mode check before the latch check"
+  },
+  {
+   "order": 22,
+   "command": "python3 -I -B handoffs/0063-cooked-ui-text-shaders/tools/gpu.py capture candidate W-ortho --source-free",
+   "exit": 1,
+   "note": "expected refusal: latch present; no child or log"
+  },
+  {
+   "order": 23,
+   "command": "python3 -I -B handoffs/0063-cooked-ui-text-shaders/tools/gpu.py list candidate ui",
+   "exit": 1,
+   "note": "expected refusal: latch present; no child or log"
+  },
+  {
+   "order": 24,
+   "command": "rustfmt --edition 2024 --check tools/review/src/main.rs",
+   "exit": 1,
+   "note": "one line-break difference"
+  },
+  {
+   "order": 25,
+   "command": "./tools/cargo clippy --manifest-path tools/review/Cargo.toml --locked --offline --profile ci -j2 --features <candidate> -- -D warnings",
+   "exit": 0,
+   "note": "as-built source; logs/helper-clippy.txt"
+  },
+  {
+   "order": 26,
+   "command": "cp tools/review/src/main.rs /Users/andreyyurlov/.codex/incant-evidence/0063/build/review-main.rs.as-built; rustfmt --edition 2024 main.rs; rustfmt --check",
+   "exit": 0,
+   "note": "whitespace-only change; frozen binaries were built from the as-built bytes"
+  },
+  {
+   "order": 27,
+   "command": "./tools/cargo clippy ... --features <baseline>; ... --features <candidate> -- -D warnings",
+   "exit": 0,
+   "note": "formatted source; logs/helper-clippy-formatted.txt"
+  },
+  {
+   "order": 28,
+   "command": "python3 -I -B handoffs/0063-cooked-ui-text-shaders/tools/lease.py release",
+   "exit": 1,
+   "note": "false positive: the process scan matched this shell's own command line"
+  },
+  {
+   "order": 29,
+   "command": "python3 -I -B handoffs/0063-cooked-ui-text-shaders/tools/lease.py release",
+   "exit": 0,
+   "note": "target-lease.json released_at"
+  },
+  {
+   "order": 30,
+   "command": "python3 -I -B handoffs/0063-cooked-ui-text-shaders/tools/analyze.py /Users/andreyyurlov/.codex/incant-evidence/0063 /Users/andreyyurlov/.codex/incant-evidence/0063/analysis/analysis-draft1.json",
+   "exit": 0,
+   "note": "probes ignored clipping (draft)"
+  },
+  {
+   "order": 31,
+   "command": "python3 -I -B handoffs/0063-cooked-ui-text-shaders/tools/analyze.py /Users/andreyyurlov/.codex/incant-evidence/0063 /Users/andreyyurlov/.codex/incant-evidence/0063/analysis/analysis-draft2.json",
+   "exit": 0,
+   "note": "draft"
+  },
+  {
+   "order": 32,
+   "command": "python3 -I -B handoffs/0063-cooked-ui-text-shaders/tools/analyze.py /Users/andreyyurlov/.codex/incant-evidence/0063 /Users/andreyyurlov/.codex/incant-evidence/0063/analysis/analysis.json",
+   "exit": 0,
+   "note": "final"
+  },
+  {
+   "order": 33,
+   "command": "python3 -I -B handoffs/0063-cooked-ui-text-shaders/tools/selfcheck.py /Users/andreyyurlov/.codex/incant-evidence/0063 /Users/andreyyurlov/.codex/incant-evidence/0063/analysis/selfcheck.json",
+   "exit": 0,
+   "note": ""
+  },
+  {
+   "order": 34,
+   "command": "python3 -I -B handoffs/0063-cooked-ui-text-shaders/tools/figures.py /Users/andreyyurlov/.codex/incant-evidence/0063 /Users/andreyyurlov/.codex/incant-evidence/0063/analysis/figures",
+   "exit": 0,
+   "note": "first figure set; deleted and regenerated"
+  },
+  {
+   "order": 35,
+   "command": "rm -r /Users/andreyyurlov/.codex/incant-evidence/0063/analysis/figures; python3 -I -B handoffs/0063-cooked-ui-text-shaders/tools/figures.py /Users/andreyyurlov/.codex/incant-evidence/0063 /Users/andreyyurlov/.codex/incant-evidence/0063/analysis/figures",
+   "exit": 0,
+   "note": "two figures re-laid out as columns to stay within 960x540"
+  }
+ ],
+ "cargo_builds": [
+  {
+   "argv": [
+    "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0063-cooked-ui-text-shaders/tools/cargo",
+    "test",
+    "--no-run",
+    "-p",
+    "incant_render",
+    "--features",
+    "incant_render/cooked-output,incant_render/cooked-geometry,incant_render/cooked-sprites",
+    "--locked",
+    "--offline",
+    "--profile",
+    "ci",
+    "-j2",
+    "--message-format=json-render-diagnostics"
+   ],
+   "exit": 0,
+   "started": "2026-10-13T00:49:09.781048+00:00",
+   "ended": "2026-10-13T00:50:02.700292+00:00",
+   "record": "baseline.json"
+  },
+  {
+   "argv": [
+    "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0063-cooked-ui-text-shaders/tools/cargo",
+    "test",
+    "--no-run",
+    "-p",
+    "incant_render_gpu_host",
+    "--features",
+    "incant_render/cooked-output,incant_render/cooked-geometry,incant_render/cooked-sprites",
+    "--locked",
+    "--offline",
+    "--profile",
+    "ci",
+    "-j2",
+    "--message-format=json-render-diagnostics"
+   ],
+   "exit": 0,
+   "started": "2026-10-13T00:50:02.702551+00:00",
+   "ended": "2026-10-13T00:51:31.872012+00:00",
+   "record": "baseline.json"
+  },
+  {
+   "argv": [
+    "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0063-cooked-ui-text-shaders/tools/cargo",
+    "build",
+    "--manifest-path",
+    "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0063-cooked-ui-text-shaders/handoffs/0063-cooked-ui-text-shaders/tools/review/Cargo.toml",
+    "--bin",
+    "ui_text_review",
+    "--features",
+    "incant_render/cooked-output,incant_render/cooked-geometry,incant_render/cooked-sprites",
+    "--locked",
+    "--offline",
+    "--profile",
+    "ci",
+    "-j2",
+    "--message-format=json-render-diagnostics"
+   ],
+   "exit": 0,
+   "started": "2026-10-13T00:51:31.874721+00:00",
+   "ended": "2026-10-13T00:52:13.249403+00:00",
+   "record": "baseline.json"
+  },
+  {
+   "argv": [
+    "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0063-cooked-ui-text-shaders/tools/cargo",
+    "test",
+    "--no-run",
+    "-p",
+    "incant_render",
+    "--features",
+    "incant_render/cooked-output,incant_render/cooked-geometry,incant_render/cooked-sprites,incant_render/cooked-ui,incant_render/cooked-text",
+    "--locked",
+    "--offline",
+    "--profile",
+    "ci",
+    "-j2",
+    "--message-format=json-render-diagnostics"
+   ],
+   "exit": 0,
+   "started": "2026-10-13T00:52:13.573131+00:00",
+   "ended": "2026-10-13T00:52:32.145836+00:00",
+   "record": "candidate.json"
+  },
+  {
+   "argv": [
+    "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0063-cooked-ui-text-shaders/tools/cargo",
+    "test",
+    "--no-run",
+    "-p",
+    "incant_render_gpu_host",
+    "--features",
+    "incant_render/cooked-output,incant_render/cooked-geometry,incant_render/cooked-sprites,incant_render/cooked-ui,incant_render/cooked-text",
+    "--locked",
+    "--offline",
+    "--profile",
+    "ci",
+    "-j2",
+    "--message-format=json-render-diagnostics"
+   ],
+   "exit": 0,
+   "started": "2026-10-13T00:52:32.147971+00:00",
+   "ended": "2026-10-13T00:52:40.328190+00:00",
+   "record": "candidate.json"
+  },
+  {
+   "argv": [
+    "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0063-cooked-ui-text-shaders/tools/cargo",
+    "build",
+    "--manifest-path",
+    "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0063-cooked-ui-text-shaders/handoffs/0063-cooked-ui-text-shaders/tools/review/Cargo.toml",
+    "--bin",
+    "ui_text_review",
+    "--features",
+    "incant_render/cooked-output,incant_render/cooked-geometry,incant_render/cooked-sprites,incant_render/cooked-ui,incant_render/cooked-text",
+    "--locked",
+    "--offline",
+    "--profile",
+    "ci",
+    "-j2",
+    "--message-format=json-render-diagnostics"
+   ],
+   "exit": 0,
+   "started": "2026-10-13T00:52:40.330052+00:00",
+   "ended": "2026-10-13T00:52:45.810995+00:00",
+   "record": "candidate.json"
+  },
+  {
+   "argv": [
+    "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0063-cooked-ui-text-shaders/tools/cargo",
+    "build",
+    "-p",
+    "incant_headless",
+    "--bin",
+    "incant_headless",
+    "--locked",
+    "--offline",
+    "--profile",
+    "ci",
+    "-j2",
+    "--message-format=json-render-diagnostics"
+   ],
+   "exit": 0,
+   "started": "2026-10-13T00:47:22.310160+00:00",
+   "ended": "2026-10-13T00:48:28.019217+00:00",
+   "record": "tools.json"
+  },
+  {
+   "argv": [
+    "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0063-cooked-ui-text-shaders/tools/cargo",
+    "build",
+    "-p",
+    "incant_cook",
+    "--example",
+    "cook_scene",
+    "--locked",
+    "--offline",
+    "--profile",
+    "ci",
+    "-j2",
+    "--message-format=json-render-diagnostics"
+   ],
+   "exit": 0,
+   "started": "2026-10-13T00:48:28.023454+00:00",
+   "ended": "2026-10-13T00:49:09.633504+00:00",
+   "record": "tools.json"
+  }
+ ],
+ "engine_calls": {
+  "r1": [
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "init",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r1/W/W.incant.json",
+     "--name",
+     "0063 board W",
+     "--entities",
+     "0"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:49:52.182383+00:00",
+    "ended": "2026-10-13T00:49:52.619477+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "import",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r1/W/W.incant.json",
+     "art/NotoSans-Regular.ttf"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:49:52.645898+00:00",
+    "ended": "2026-10-13T00:49:52.712013+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "import",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r1/W/W.incant.json",
+     "art/NotoSansArabic.ttf"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:49:52.738545+00:00",
+    "ended": "2026-10-13T00:49:52.796348+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "import",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r1/W/W.incant.json",
+     "art/IncantCJKFixture.ttf"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:49:52.822942+00:00",
+    "ended": "2026-10-13T00:49:52.876737+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "import",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r1/W/W.incant.json",
+     "art/slate.gltf"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:49:52.903270+00:00",
+    "ended": "2026-10-13T00:49:52.953367+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "import",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r1/W/W.incant.json",
+     "art/amber.gltf"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:49:52.980087+00:00",
+    "ended": "2026-10-13T00:49:53.029701+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "import",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r1/W/W.incant.json",
+     "art/teal.gltf"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:49:53.056980+00:00",
+    "ended": "2026-10-13T00:49:53.106390+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "import",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r1/W/W.incant.json",
+     "art/floor.gltf"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:49:53.132732+00:00",
+    "ended": "2026-10-13T00:49:53.185716+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "rpc",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r1/W/W.incant.json",
+     "--journal",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r1/W/W.incant.journal.jsonl"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:49:53.211439+00:00",
+    "ended": "2026-10-13T00:49:53.248032+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "rpc",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r1/W/W.incant.json",
+     "--journal",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r1/W/W.incant.journal.jsonl"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:49:53.275369+00:00",
+    "ended": "2026-10-13T00:49:53.337399+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "rpc",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r1/W/W.incant.json",
+     "--journal",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r1/W/W.incant.journal.jsonl"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:49:53.364232+00:00",
+    "ended": "2026-10-13T00:49:53.416940+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "validate",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r1/W/W.incant.json"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:49:53.442941+00:00",
+    "ended": "2026-10-13T00:49:53.479226+00:00"
+   },
+   {
+    "tool": "cook_scene",
+    "argv": [
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r1/W/W.incant.json",
+     "01M4SBSFE884QZSX6MGMW4P4GR",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r1/cooked/W.scene"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:49:53.505268+00:00",
+    "ended": "2026-10-13T00:49:53.607844+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "init",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r1/U/U.incant.json",
+     "--name",
+     "0063 board U",
+     "--entities",
+     "0"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:49:53.637232+00:00",
+    "ended": "2026-10-13T00:49:53.676515+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "import",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r1/U/U.incant.json",
+     "art/NotoSans-Regular.ttf"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:49:53.703240+00:00",
+    "ended": "2026-10-13T00:49:53.764990+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "import",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r1/U/U.incant.json",
+     "art/NotoSansArabic.ttf"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:49:53.791787+00:00",
+    "ended": "2026-10-13T00:49:53.849239+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "import",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r1/U/U.incant.json",
+     "art/IncantCJKFixture.ttf"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:49:53.876923+00:00",
+    "ended": "2026-10-13T00:49:53.929950+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "import",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r1/U/U.incant.json",
+     "art/slate.gltf"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:49:53.956784+00:00",
+    "ended": "2026-10-13T00:49:54.005886+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "import",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r1/U/U.incant.json",
+     "art/amber.gltf"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:49:54.032490+00:00",
+    "ended": "2026-10-13T00:49:54.080072+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "import",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r1/U/U.incant.json",
+     "art/teal.gltf"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:49:54.106396+00:00",
+    "ended": "2026-10-13T00:49:54.154971+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "import",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r1/U/U.incant.json",
+     "art/floor.gltf"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:49:54.186297+00:00",
+    "ended": "2026-10-13T00:49:54.235000+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "rpc",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r1/U/U.incant.json",
+     "--journal",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r1/U/U.incant.journal.jsonl"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:49:54.262012+00:00",
+    "ended": "2026-10-13T00:49:54.301758+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "rpc",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r1/U/U.incant.json",
+     "--journal",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r1/U/U.incant.journal.jsonl"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:49:54.329339+00:00",
+    "ended": "2026-10-13T00:49:54.399428+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "rpc",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r1/U/U.incant.json",
+     "--journal",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r1/U/U.incant.journal.jsonl"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:49:54.427802+00:00",
+    "ended": "2026-10-13T00:49:54.492180+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "validate",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r1/U/U.incant.json"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:49:54.519377+00:00",
+    "ended": "2026-10-13T00:49:54.554917+00:00"
+   },
+   {
+    "tool": "cook_scene",
+    "argv": [
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r1/U/U.incant.json",
+     "01M4SBSGFDSNX2HYVMJHKB2C0F",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r1/cooked/U.scene"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:49:54.582345+00:00",
+    "ended": "2026-10-13T00:49:54.617135+00:00"
+   }
+  ],
+  "r2": [
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "init",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r2/W/W.incant.json",
+     "--name",
+     "0063 board W",
+     "--entities",
+     "0"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:53:54.960028+00:00",
+    "ended": "2026-10-13T00:53:55.000114+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "import",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r2/W/W.incant.json",
+     "art/NotoSans-Regular.ttf"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:53:55.024034+00:00",
+    "ended": "2026-10-13T00:53:55.081982+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "import",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r2/W/W.incant.json",
+     "art/NotoSansArabic.ttf"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:53:55.105707+00:00",
+    "ended": "2026-10-13T00:53:55.154952+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "import",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r2/W/W.incant.json",
+     "art/IncantCJKFixture.ttf"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:53:55.178293+00:00",
+    "ended": "2026-10-13T00:53:55.223925+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "import",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r2/W/W.incant.json",
+     "art/slate.gltf"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:53:55.247129+00:00",
+    "ended": "2026-10-13T00:53:55.289003+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "import",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r2/W/W.incant.json",
+     "art/amber.gltf"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:53:55.312224+00:00",
+    "ended": "2026-10-13T00:53:55.354743+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "import",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r2/W/W.incant.json",
+     "art/teal.gltf"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:53:55.378022+00:00",
+    "ended": "2026-10-13T00:53:55.420834+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "import",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r2/W/W.incant.json",
+     "art/floor.gltf"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:53:55.444167+00:00",
+    "ended": "2026-10-13T00:53:55.488055+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "rpc",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r2/W/W.incant.json",
+     "--journal",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r2/W/W.incant.journal.jsonl"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:53:55.511080+00:00",
+    "ended": "2026-10-13T00:53:55.542842+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "rpc",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r2/W/W.incant.json",
+     "--journal",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r2/W/W.incant.journal.jsonl"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:53:55.566213+00:00",
+    "ended": "2026-10-13T00:53:55.620545+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "rpc",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r2/W/W.incant.json",
+     "--journal",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r2/W/W.incant.journal.jsonl"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:53:55.644190+00:00",
+    "ended": "2026-10-13T00:53:55.687973+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "validate",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r2/W/W.incant.json"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:53:55.711313+00:00",
+    "ended": "2026-10-13T00:53:55.742567+00:00"
+   },
+   {
+    "tool": "cook_scene",
+    "argv": [
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r2/W/W.incant.json",
+     "01M4SC0W4PWT8STH659E52JPY7",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r2/cooked/W.scene"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:53:55.766827+00:00",
+    "ended": "2026-10-13T00:53:55.797620+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "init",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r2/U/U.incant.json",
+     "--name",
+     "0063 board U",
+     "--entities",
+     "0"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:53:55.827745+00:00",
+    "ended": "2026-10-13T00:53:55.864413+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "import",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r2/U/U.incant.json",
+     "art/NotoSans-Regular.ttf"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:53:55.889744+00:00",
+    "ended": "2026-10-13T00:53:55.948820+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "import",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r2/U/U.incant.json",
+     "art/NotoSansArabic.ttf"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:53:55.973137+00:00",
+    "ended": "2026-10-13T00:53:56.023810+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "import",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r2/U/U.incant.json",
+     "art/IncantCJKFixture.ttf"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:53:56.048507+00:00",
+    "ended": "2026-10-13T00:53:56.096433+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "import",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r2/U/U.incant.json",
+     "art/slate.gltf"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:53:56.119921+00:00",
+    "ended": "2026-10-13T00:53:56.163490+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "import",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r2/U/U.incant.json",
+     "art/amber.gltf"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:53:56.186801+00:00",
+    "ended": "2026-10-13T00:53:56.229087+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "import",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r2/U/U.incant.json",
+     "art/teal.gltf"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:53:56.252326+00:00",
+    "ended": "2026-10-13T00:53:56.295005+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "import",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r2/U/U.incant.json",
+     "art/floor.gltf"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:53:56.318158+00:00",
+    "ended": "2026-10-13T00:53:56.360145+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "rpc",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r2/U/U.incant.json",
+     "--journal",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r2/U/U.incant.journal.jsonl"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:53:56.383170+00:00",
+    "ended": "2026-10-13T00:53:56.414712+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "rpc",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r2/U/U.incant.json",
+     "--journal",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r2/U/U.incant.journal.jsonl"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:53:56.438042+00:00",
+    "ended": "2026-10-13T00:53:56.497488+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "rpc",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r2/U/U.incant.json",
+     "--journal",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r2/U/U.incant.journal.jsonl"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:53:56.521129+00:00",
+    "ended": "2026-10-13T00:53:56.572671+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "validate",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r2/U/U.incant.json"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:53:56.595926+00:00",
+    "ended": "2026-10-13T00:53:56.626053+00:00"
+   },
+   {
+    "tool": "cook_scene",
+    "argv": [
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r2/U/U.incant.json",
+     "01M4SC0WZTFQSFMTNP5XRPADAS",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r2/cooked/U.scene"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:53:56.649317+00:00",
+    "ended": "2026-10-13T00:53:56.678004+00:00"
+   }
+  ],
+  "r3": [
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "init",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r3/W/W.incant.json",
+     "--name",
+     "0063 board W",
+     "--entities",
+     "0"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:57:08.175381+00:00",
+    "ended": "2026-10-13T00:57:08.210912+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "import",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r3/W/W.incant.json",
+     "art/NotoSans-Regular.ttf"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:57:08.234201+00:00",
+    "ended": "2026-10-13T00:57:08.295283+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "import",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r3/W/W.incant.json",
+     "art/NotoSansArabic.ttf"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:57:08.318809+00:00",
+    "ended": "2026-10-13T00:57:08.370383+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "import",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r3/W/W.incant.json",
+     "art/IncantCJKFixture.ttf"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:57:08.393662+00:00",
+    "ended": "2026-10-13T00:57:08.440420+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "import",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r3/W/W.incant.json",
+     "art/slate.gltf"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:57:08.463831+00:00",
+    "ended": "2026-10-13T00:57:08.505559+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "import",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r3/W/W.incant.json",
+     "art/amber.gltf"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:57:08.530060+00:00",
+    "ended": "2026-10-13T00:57:08.577588+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "import",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r3/W/W.incant.json",
+     "art/teal.gltf"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:57:08.600873+00:00",
+    "ended": "2026-10-13T00:57:08.643325+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "import",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r3/W/W.incant.json",
+     "art/floor.gltf"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:57:08.666589+00:00",
+    "ended": "2026-10-13T00:57:08.709935+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "rpc",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r3/W/W.incant.json",
+     "--journal",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r3/W/W.incant.journal.jsonl"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:57:08.732993+00:00",
+    "ended": "2026-10-13T00:57:08.764291+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "rpc",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r3/W/W.incant.json",
+     "--journal",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r3/W/W.incant.journal.jsonl"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:57:08.787531+00:00",
+    "ended": "2026-10-13T00:57:08.843850+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "rpc",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r3/W/W.incant.json",
+     "--journal",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r3/W/W.incant.journal.jsonl"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:57:08.867506+00:00",
+    "ended": "2026-10-13T00:57:08.910938+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "validate",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r3/W/W.incant.json"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:57:08.934308+00:00",
+    "ended": "2026-10-13T00:57:08.964097+00:00"
+   },
+   {
+    "tool": "cook_scene",
+    "argv": [
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r3/W/W.incant.json",
+     "01M4SC6RTNQF2NVZ0QJEQ24RGB",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r3/cooked/W.scene"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:57:08.990177+00:00",
+    "ended": "2026-10-13T00:57:09.020648+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "init",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r3/U/U.incant.json",
+     "--name",
+     "0063 board U",
+     "--entities",
+     "0"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:57:09.048939+00:00",
+    "ended": "2026-10-13T00:57:09.083812+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "import",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r3/U/U.incant.json",
+     "art/NotoSans-Regular.ttf"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:57:09.107680+00:00",
+    "ended": "2026-10-13T00:57:09.164669+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "import",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r3/U/U.incant.json",
+     "art/NotoSansArabic.ttf"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:57:09.187926+00:00",
+    "ended": "2026-10-13T00:57:09.238317+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "import",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r3/U/U.incant.json",
+     "art/IncantCJKFixture.ttf"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:57:09.261480+00:00",
+    "ended": "2026-10-13T00:57:09.308244+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "import",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r3/U/U.incant.json",
+     "art/slate.gltf"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:57:09.331591+00:00",
+    "ended": "2026-10-13T00:57:09.375283+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "import",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r3/U/U.incant.json",
+     "art/amber.gltf"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:57:09.399089+00:00",
+    "ended": "2026-10-13T00:57:09.442461+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "import",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r3/U/U.incant.json",
+     "art/teal.gltf"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:57:09.465963+00:00",
+    "ended": "2026-10-13T00:57:09.509372+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "import",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r3/U/U.incant.json",
+     "art/floor.gltf"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:57:09.532583+00:00",
+    "ended": "2026-10-13T00:57:09.576364+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "rpc",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r3/U/U.incant.json",
+     "--journal",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r3/U/U.incant.journal.jsonl"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:57:09.599549+00:00",
+    "ended": "2026-10-13T00:57:09.630991+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "rpc",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r3/U/U.incant.json",
+     "--journal",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r3/U/U.incant.journal.jsonl"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:57:09.654239+00:00",
+    "ended": "2026-10-13T00:57:09.713370+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "rpc",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r3/U/U.incant.json",
+     "--journal",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r3/U/U.incant.journal.jsonl"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:57:09.737221+00:00",
+    "ended": "2026-10-13T00:57:09.789349+00:00"
+   },
+   {
+    "tool": "incant_headless",
+    "argv": [
+     "validate",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r3/U/U.incant.json"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:57:09.812755+00:00",
+    "ended": "2026-10-13T00:57:09.842561+00:00"
+   },
+   {
+    "tool": "cook_scene",
+    "argv": [
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r3/U/U.incant.json",
+     "01M4SC6SNZK08XJK7DR7QWB9XQ",
+     "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r3/cooked/U.scene"
+    ],
+    "exit": 0,
+    "started": "2026-10-13T00:57:09.865652+00:00",
+    "ended": "2026-10-13T00:57:09.893982+00:00"
+   }
+  ]
+ },
+ "gpu_children": [
+  {
+   "label": "baseline-lib-list",
+   "kind": "list",
+   "variant": "baseline",
+   "pid": 56597,
+   "started": "2026-10-13T00:54:09.009573+00:00",
+   "ended": "2026-10-13T00:54:09.247622+00:00",
+   "exit": 0,
+   "timed_out": false
+  },
+  {
+   "label": "baseline-model_gpu-list",
+   "kind": "list",
+   "variant": "baseline",
+   "pid": 56599,
+   "started": "2026-10-13T00:54:09.294600+00:00",
+   "ended": "2026-10-13T00:54:09.425903+00:00",
+   "exit": 0,
+   "timed_out": false
+  },
+  {
+   "label": "baseline-ui-list",
+   "kind": "list",
+   "variant": "baseline",
+   "pid": 56601,
+   "started": "2026-10-13T00:54:09.473686+00:00",
+   "ended": "2026-10-13T00:54:09.709282+00:00",
+   "exit": 0,
+   "timed_out": false
+  },
+  {
+   "label": "baseline-game-list",
+   "kind": "list",
+   "variant": "baseline",
+   "pid": 56605,
+   "started": "2026-10-13T00:54:09.760631+00:00",
+   "ended": "2026-10-13T00:54:09.995958+00:00",
+   "exit": 0,
+   "timed_out": false
+  },
+  {
+   "label": "candidate-lib-list",
+   "kind": "list",
+   "variant": "candidate",
+   "pid": 56607,
+   "started": "2026-10-13T00:54:10.051539+00:00",
+   "ended": "2026-10-13T00:54:10.287557+00:00",
+   "exit": 0,
+   "timed_out": false
+  },
+  {
+   "label": "candidate-model_gpu-list",
+   "kind": "list",
+   "variant": "candidate",
+   "pid": 56611,
+   "started": "2026-10-13T00:54:10.334534+00:00",
+   "ended": "2026-10-13T00:54:10.514251+00:00",
+   "exit": 0,
+   "timed_out": false
+  },
+  {
+   "label": "candidate-ui-list",
+   "kind": "list",
+   "variant": "candidate",
+   "pid": 56613,
+   "started": "2026-10-13T00:54:10.563191+00:00",
+   "ended": "2026-10-13T00:54:10.799737+00:00",
+   "exit": 0,
+   "timed_out": false
+  },
+  {
+   "label": "candidate-game-list",
+   "kind": "list",
+   "variant": "candidate",
+   "pid": 56615,
+   "started": "2026-10-13T00:54:10.851733+00:00",
+   "ended": "2026-10-13T00:54:11.088435+00:00",
+   "exit": 0,
+   "timed_out": false
+  },
+  {
+   "label": "baseline-lib-ui-text",
+   "kind": "test",
+   "variant": "baseline",
+   "pid": 56681,
+   "started": "2026-10-13T00:54:23.437116+00:00",
+   "ended": "2026-10-13T00:54:24.326329+00:00",
+   "exit": 0,
+   "timed_out": false
+  },
+  {
+   "label": "candidate-lib-ui-text",
+   "kind": "test",
+   "variant": "candidate",
+   "pid": 56684,
+   "started": "2026-10-13T00:54:24.378146+00:00",
+   "ended": "2026-10-13T00:54:25.366778+00:00",
+   "exit": 0,
+   "timed_out": false
+  },
+  {
+   "label": "baseline-lib-rest",
+   "kind": "test",
+   "variant": "baseline",
+   "pid": 56705,
+   "started": "2026-10-13T00:54:32.734677+00:00",
+   "ended": "2026-10-13T00:54:33.933960+00:00",
+   "exit": 0,
+   "timed_out": false
+  },
+  {
+   "label": "candidate-lib-rest",
+   "kind": "test",
+   "variant": "candidate",
+   "pid": 56726,
+   "started": "2026-10-13T00:54:33.986372+00:00",
+   "ended": "2026-10-13T00:54:35.163326+00:00",
+   "exit": 0,
+   "timed_out": false
+  },
+  {
+   "label": "baseline-model_gpu-warmup",
+   "kind": "test",
+   "variant": "baseline",
+   "pid": 56757,
+   "started": "2026-10-13T00:54:35.210832+00:00",
+   "ended": "2026-10-13T00:54:35.717447+00:00",
+   "exit": 0,
+   "timed_out": false
+  },
+  {
+   "label": "candidate-model_gpu-warmup",
+   "kind": "test",
+   "variant": "candidate",
+   "pid": 56759,
+   "started": "2026-10-13T00:54:35.758406+00:00",
+   "ended": "2026-10-13T00:54:36.271636+00:00",
+   "exit": 0,
+   "timed_out": false
+  },
+  {
+   "label": "baseline-ui-all",
+   "kind": "test",
+   "variant": "baseline",
+   "pid": 56761,
+   "started": "2026-10-13T00:54:36.318304+00:00",
+   "ended": "2026-10-13T00:54:36.876645+00:00",
+   "exit": 0,
+   "timed_out": false
+  },
+  {
+   "label": "baseline-game-all",
+   "kind": "test",
+   "variant": "baseline",
+   "pid": 56763,
+   "started": "2026-10-13T00:54:36.929357+00:00",
+   "ended": "2026-10-13T00:54:37.596716+00:00",
+   "exit": 0,
+   "timed_out": false
+  },
+  {
+   "label": "candidate-ui-all",
+   "kind": "test",
+   "variant": "candidate",
+   "pid": 56765,
+   "started": "2026-10-13T00:54:37.649068+00:00",
+   "ended": "2026-10-13T00:54:38.207583+00:00",
+   "exit": 0,
+   "timed_out": false
+  },
+  {
+   "label": "candidate-game-all",
+   "kind": "test",
+   "variant": "candidate",
+   "pid": 56771,
+   "started": "2026-10-13T00:54:38.259005+00:00",
+   "ended": "2026-10-13T00:54:38.871669+00:00",
+   "exit": 0,
+   "timed_out": false
+  },
+  {
+   "label": "baseline-model_gpu-rest",
+   "kind": "test",
+   "variant": "baseline",
+   "pid": 56778,
+   "started": "2026-10-13T00:54:43.403068+00:00",
+   "ended": "2026-10-13T00:55:26.497522+00:00",
+   "exit": 0,
+   "timed_out": false
+  },
+  {
+   "label": "candidate-model_gpu-rest",
+   "kind": "test",
+   "variant": "candidate",
+   "pid": 57007,
+   "started": "2026-10-13T00:55:26.540042+00:00",
+   "ended": "2026-10-13T00:56:11.804267+00:00",
+   "exit": 0,
+   "timed_out": false
+  },
+  {
+   "label": "baseline-W-ortho",
+   "kind": "capture",
+   "variant": "baseline",
+   "pid": 57384,
+   "started": "2026-10-13T00:56:22.171625+00:00",
+   "ended": "2026-10-13T00:56:22.785044+00:00",
+   "exit": 0,
+   "timed_out": false
+  },
+  {
+   "label": "baseline-U-1x-unorm",
+   "kind": "capture",
+   "variant": "baseline",
+   "pid": 57389,
+   "started": "2026-10-13T00:56:22.837608+00:00",
+   "ended": "2026-10-13T00:56:23.293200+00:00",
+   "exit": 0,
+   "timed_out": false
+  },
+  {
+   "label": "baseline-W-ortho-r3",
+   "kind": "capture",
+   "variant": "baseline",
+   "pid": 59069,
+   "started": "2026-10-13T00:57:28.141874+00:00",
+   "ended": "2026-10-13T00:57:28.595040+00:00",
+   "exit": 0,
+   "timed_out": false
+  },
+  {
+   "label": "candidate-W-ortho-r3",
+   "kind": "capture",
+   "variant": "candidate",
+   "pid": 59077,
+   "started": "2026-10-13T00:57:28.647837+00:00",
+   "ended": "2026-10-13T00:57:29.260719+00:00",
+   "exit": 0,
+   "timed_out": false
+  },
+  {
+   "label": "baseline-W-persp-r3",
+   "kind": "capture",
+   "variant": "baseline",
+   "pid": 59088,
+   "started": "2026-10-13T00:57:29.312909+00:00",
+   "ended": "2026-10-13T00:57:29.762097+00:00",
+   "exit": 0,
+   "timed_out": false
+  },
+  {
+   "label": "candidate-W-persp-r3",
+   "kind": "capture",
+   "variant": "candidate",
+   "pid": 59107,
+   "started": "2026-10-13T00:57:29.813501+00:00",
+   "ended": "2026-10-13T00:57:30.272377+00:00",
+   "exit": 0,
+   "timed_out": false
+  },
+  {
+   "label": "baseline-U-1x-r3",
+   "kind": "capture",
+   "variant": "baseline",
+   "pid": 59114,
+   "started": "2026-10-13T00:57:30.326342+00:00",
+   "ended": "2026-10-13T00:57:30.769366+00:00",
+   "exit": 0,
+   "timed_out": false
+  },
+  {
+   "label": "candidate-U-1x-r3",
+   "kind": "capture",
+   "variant": "candidate",
+   "pid": 59124,
+   "started": "2026-10-13T00:57:30.821256+00:00",
+   "ended": "2026-10-13T00:57:31.278864+00:00",
+   "exit": 0,
+   "timed_out": false
+  },
+  {
+   "label": "baseline-U-15x-r3",
+   "kind": "capture",
+   "variant": "baseline",
+   "pid": 59127,
+   "started": "2026-10-13T00:57:31.332299+00:00",
+   "ended": "2026-10-13T00:57:31.732167+00:00",
+   "exit": 1,
+   "timed_out": false
+  },
+  {
+   "label": "candidate-U-15x-r3",
+   "kind": "capture",
+   "variant": "candidate",
+   "pid": 59131,
+   "started": "2026-10-13T00:57:31.785866+00:00",
+   "ended": "2026-10-13T00:57:32.182894+00:00",
+   "exit": 1,
+   "timed_out": false
+  },
+  {
+   "label": "baseline-U-2x-r3",
+   "kind": "capture",
+   "variant": "baseline",
+   "pid": 59136,
+   "started": "2026-10-13T00:57:32.235776+00:00",
+   "ended": "2026-10-13T00:57:32.691581+00:00",
+   "exit": 0,
+   "timed_out": false
+  },
+  {
+   "label": "candidate-U-2x-r3",
+   "kind": "capture",
+   "variant": "candidate",
+   "pid": 59148,
+   "started": "2026-10-13T00:57:32.743220+00:00",
+   "ended": "2026-10-13T00:57:33.204188+00:00",
+   "exit": 0,
+   "timed_out": false
+  },
+  {
+   "label": "baseline-U-1x-unorm-r3",
+   "kind": "capture",
+   "variant": "baseline",
+   "pid": 59153,
+   "started": "2026-10-13T00:57:33.256316+00:00",
+   "ended": "2026-10-13T00:57:33.706294+00:00",
+   "exit": 0,
+   "timed_out": false
+  },
+  {
+   "label": "candidate-U-1x-unorm-r3",
+   "kind": "capture",
+   "variant": "candidate",
+   "pid": 59169,
+   "started": "2026-10-13T00:57:33.758179+00:00",
+   "ended": "2026-10-13T00:57:34.204935+00:00",
+   "exit": 0,
+   "timed_out": false
+  },
+  {
+   "label": "baseline-U-15x-name-r3",
+   "kind": "capture",
+   "variant": "baseline",
+   "pid": 59710,
+   "started": "2026-10-13T00:58:19.552514+00:00",
+   "ended": "2026-10-13T00:58:19.999567+00:00",
+   "exit": 0,
+   "timed_out": false
+  },
+  {
+   "label": "candidate-U-15x-name-r3",
+   "kind": "capture",
+   "variant": "candidate",
+   "pid": 59716,
+   "started": "2026-10-13T00:58:20.060808+00:00",
+   "ended": "2026-10-13T00:58:20.506820+00:00",
+   "exit": 0,
+   "timed_out": false
+  },
+  {
+   "label": "candidate-W-persp-source-free-r3",
+   "kind": "capture",
+   "variant": "candidate",
+   "pid": 59879,
+   "started": "2026-10-13T00:58:28.774197+00:00",
+   "ended": "2026-10-13T00:58:29.232791+00:00",
+   "exit": 0,
+   "timed_out": false
+  },
+  {
+   "label": "candidate-U-15x-name-source-free-r3",
+   "kind": "capture",
+   "variant": "candidate",
+   "pid": 59881,
+   "started": "2026-10-13T00:58:29.286320+00:00",
+   "ended": "2026-10-13T00:58:29.732205+00:00",
+   "exit": 0,
+   "timed_out": false
+  }
+ ],
+ "totals": {
+  "cargo_builds": 8,
+  "cargo_failures": 0,
+  "engine_calls": {
+   "r1": 26,
+   "r2": 26,
+   "r3": 26
+  },
+  "engine_failures": 0,
+  "gpu_children": 38,
+  "gpu_nonzero": [
+   "baseline-U-15x-r3",
+   "candidate-U-15x-r3"
+  ],
+  "gpu_timeouts": 0
+ }
+}

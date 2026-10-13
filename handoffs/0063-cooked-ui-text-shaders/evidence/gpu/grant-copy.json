@@ -1,0 +1,10 @@
+{
+  "packet": "0063-cooked-ui-text-shaders",
+  "granted_at": "2026-10-13T00:32:40.911993+00:00",
+  "owner": "Claude Opus5.5 Max via ACP",
+  "prior_gpu_release_sha256": "b035a689e7f4239e9201429db2e21238caf21569f6aa1060ba9e52dd98014900",
+  "prior_target_lease_sha256": "385ba12584361e802c9a6f0aec8025ecf60cfb07e8e07bd0e635eece5d0a4426",
+  "target": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+  "restrictions": "serial offscreen only; 24frames max960x540; bounded processes; no nativewindows/desktopcapture; no further use by0062",
+  "owned_prior_processes": []
+}

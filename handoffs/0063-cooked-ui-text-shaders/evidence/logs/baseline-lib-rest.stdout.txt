@@ -1,0 +1,25 @@
+
+running 21 tests
+test diagnostic_output::diagnostic_vertices_draw_reflected_geometry_and_preserve_display_formats ... ok
+test graph::tests::queued_graph_frames_outlive_scene_versions_and_failed_preparation ... ok
+test graph::tests::queued_pixel_frames_retain_logical_targets_and_physical_chrome_after_resizing ... ok
+test hdr_output::hdr_values_survive_until_tone_mapping_and_transfer_runs_once ... ok
+test hdr_output::output_composes_display_colors_and_reuses_bounded_resize_targets ... ok
+test lighting::gpu_tests::clustered_viewport_offsets_and_queued_resize_commands_keep_their_own_light_data ... ok
+test lighting::gpu_tests::every_depth_slice_selects_its_light_and_reused_clusters_clear_old_membership ... ok
+test lighting::gpu_tests::masks_represent_every_light_and_clear_tail_bits_across_word_count_changes ... ok
+test models::animation::tests::retained_skin_matches_independent_static_oracle_and_preserves_rejected_frame ... ok
+test models::animation::tests::single_sided_reflected_skin_and_shadow_match_static_transform_oracle ... ok
+test models::retained::flipbook_tests::retained_flipbooks_match_static_frames_without_rebuilding_after_cache_deletion ... ok
+test models::retained::native_tests::binary_native_motion_and_structural_rebuilds_submit_without_source_or_document ... ok
+test models::retained::sprite_tests::source_free_native_atlas_sprites_match_fresh_frames_across_motion_reflection_and_rebuild ... ok
+test models::retained::tests::motion_staging_reuses_reserved_slots_and_rejects_unsupported_bindings ... ok
+test models::retained::tests::rejected_retained_frame_preserves_accepted_gpu_state_and_can_retry ... ok
+test models::retained::tests::retained_flipbook_selection_stages_without_allocation ... ok
+test models::retained::tests::retained_motion_matches_fresh_geometry_lights_camera_and_reflections_after_source_deletion ... ok
+test models::retained::tests::retained_sprite_cpu_staging_allocates_nothing_and_rejects_changed_bindings ... ok
+test models::retained::tests::retained_tile_cpu_staging_allocates_nothing_without_visiting_binding_cells ... ok
+test models::retained::tilemap_tests::cooked_source_free_tile_frames_match_raw_cell_sprite_oracle_and_survive_rejection ... ok
+test version_tests::live_gpu_versions_with_equal_recipe_keys_preserve_old_and_new_geometry ... ok
+
+test result: ok. 21 passed; 0 failed; 0 ignored; 0 measured; 81 filtered out; finished in 1.17s

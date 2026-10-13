@@ -1,0 +1,1 @@
+local renderer preparation: 38.250083ms; adapter Apple M5 Pro; render pipelines 31

@@ -1,0 +1,9 @@
+{
+ "moved_at": "2026-10-13T00:57:18.442601+00:00",
+ "from": "captures/baseline/{W-ortho,U-1x-unorm}",
+ "reason": "fixture run r2 superseded by r3 (yaw sign, Arabic overflow); frames kept and counted in the 24-frame budget",
+ "ledger_labels": [
+  "baseline-W-ortho",
+  "baseline-U-1x-unorm"
+ ]
+}

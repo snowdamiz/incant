@@ -1,0 +1,5 @@
+
+running 1 test
+test pipeline_warmup::all_current_variants_exist_before_first_draw_and_reimport_creates_no_pipelines ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 49 filtered out; finished in 0.49s

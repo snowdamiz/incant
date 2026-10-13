@@ -1,0 +1,27 @@
+{
+ "packet": "0063-cooked-ui-text-shaders",
+ "recorded": "2026-10-13T01:07:06.207660+00:00",
+ "gpu": {
+  "released_at": "2026-10-13T00:59:12.808519+00:00",
+  "children": 38,
+  "frames_written": 21,
+  "ledger_sha256": "cd326607155522b653bd3b1370f4f1b7ac6f87fd0efd7b42fca26208e678d24f",
+  "release_record_sha256": "a327d4706169d3d19d26061cebeaccd7426928a0cb043049c588f50fbe49dc29",
+  "first_start": "2026-10-13T00:54:09.009573+00:00",
+  "last_end": "2026-10-13T00:58:29.732205+00:00"
+ },
+ "target_lease": {
+  "target_dir": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+  "acquired_at": "2026-10-13T00:40:55.284223+00:00",
+  "released_at": "2026-10-13T01:00:41.173510+00:00",
+  "lease_sha256": "8269967a26f83152d39001c12d64d49fdb081591e2558d007f5ef87adfa50c36",
+  "left_as_warm_cache": true,
+  "deleted": []
+ },
+ "engine_frames_on_disk": 21,
+ "frame_limit": 24,
+ "processes_using_frozen_binaries_or_target_now": [],
+ "grant_sha256_now": "a7477ce249d100e6520c60a71053e11455648c597510583ad9a50c43b69c7e8e",
+ "grant_unmodified": true,
+ "note": "review-ready.json is Astra's and was never modified or deleted. No GPU child after 2026-10-13T00:59:12.808519+00:00; no cargo after 2026-10-13T01:00:41.173510+00:00."
+}

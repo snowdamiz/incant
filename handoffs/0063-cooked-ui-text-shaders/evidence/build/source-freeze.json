@@ -1,0 +1,306 @@
+{
+ "head": "91b70493e29fda3164bae190ebb88ec918514542",
+ "source_commit": "bacdd6f29bee40a1a14e61b2a224344c26d14da5",
+ "ui_commits": [
+  "f8b95de5161eed891fde419083d7c0dead34fdba",
+  "972a36f1141c4bad338674ea480a1cdc699d9b8a"
+ ],
+ "files_changed_since_source_commit": [
+  "docs/spikes/evidence/cooked-text-shaders/cooked-text-metal-001/artifacts/Dx12-Fragment.shader.gz",
+  "docs/spikes/evidence/cooked-text-shaders/cooked-text-metal-001/artifacts/Dx12-Vertex.shader.gz",
+  "docs/spikes/evidence/cooked-text-shaders/cooked-text-metal-001/artifacts/Metal-Fragment.shader.gz",
+  "docs/spikes/evidence/cooked-text-shaders/cooked-text-metal-001/artifacts/Metal-Vertex.shader.gz",
+  "docs/spikes/evidence/cooked-text-shaders/cooked-text-metal-001/artifacts/Vulkan-Fragment.shader.gz",
+  "docs/spikes/evidence/cooked-text-shaders/cooked-text-metal-001/artifacts/Vulkan-Vertex.shader.gz",
+  "docs/spikes/evidence/cooked-text-shaders/cooked-text-metal-001/artifacts/manifest.rs.gz",
+  "handoffs/0063-cooked-ui-text-shaders/brief.md"
+ ],
+ "only_evidence_and_brief_changed": true,
+ "crates_diff_empty": true,
+ "status_porcelain_outside_packet": "",
+ "ui_manifest_sources": [
+  {
+   "path": "crates/incant_render/Cargo.toml",
+   "manifest": "5d2cd162cc39007a5db38376ecb26c808cd261661978246fb0a1388b9a0d1116",
+   "at_commit": "5d2cd162cc39007a5db38376ecb26c808cd261661978246fb0a1388b9a0d1116",
+   "worktree": "4fe32ec55351565e3364239065cd9686c85b2fa6be2fa9576f1e8671e1e6ed5f"
+  },
+  {
+   "path": "crates/incant_render/build.rs",
+   "manifest": "52ee4fdd02cde2f5e51c769d1e004484044d846f699e65c2086b8bd64e18ac70",
+   "at_commit": "52ee4fdd02cde2f5e51c769d1e004484044d846f699e65c2086b8bd64e18ac70",
+   "worktree": "b38f2652a2a6fdaac0af92cf887ab9ec877958219371cab8416d5b5948257031"
+  },
+  {
+   "path": "crates/incant_render/src/lib.rs",
+   "manifest": "b64d3e202c6411428d66d62f2ff13341c1023afc1501d613e4ade5b09fe532bc",
+   "at_commit": "b64d3e202c6411428d66d62f2ff13341c1023afc1501d613e4ade5b09fe532bc",
+   "worktree": "dd131d40086be9f9e4cc22aa03996adf1da4c83d3d1e8b1faa8beee2c0ed6b37"
+  },
+  {
+   "path": "crates/incant_render/src/resource_error.rs",
+   "manifest": "ef370d932b681db882a92e68c3e68e8c94775274b2427fa5e3f426d5d28d6c33",
+   "at_commit": "ef370d932b681db882a92e68c3e68e8c94775274b2427fa5e3f426d5d28d6c33",
+   "worktree": "734c702f09efb78c34502681a2e882fe580948e9793cc7a718f97b5f2e90630c"
+  },
+  {
+   "path": "crates/incant_render/src/shader/native.rs",
+   "manifest": "6fb9c9c23991f0c60b784ee03663dcb3daa098eb48a194c58455c9f7dd54972a",
+   "at_commit": "6fb9c9c23991f0c60b784ee03663dcb3daa098eb48a194c58455c9f7dd54972a",
+   "worktree": "fdfa44e416827890eead023bd5960bea4a04c203b2a87b7ec0dd48648b5a296f"
+  },
+  {
+   "path": "crates/incant_render/src/ui/mod.rs",
+   "manifest": "d139c277697f76aa251a47d4b27cb084864240d197467b54763dc2ec143df866",
+   "at_commit": "d139c277697f76aa251a47d4b27cb084864240d197467b54763dc2ec143df866",
+   "worktree": "d139c277697f76aa251a47d4b27cb084864240d197467b54763dc2ec143df866"
+  },
+  {
+   "path": "crates/incant_render/src/ui/shader.rs",
+   "manifest": "b5126f0be567125744898352c772e2e6842bb78d4749cc46372f90e566cca4ce",
+   "at_commit": "b5126f0be567125744898352c772e2e6842bb78d4749cc46372f90e566cca4ce",
+   "worktree": "b5126f0be567125744898352c772e2e6842bb78d4749cc46372f90e566cca4ce"
+  },
+  {
+   "path": "crates/incant_render/src/ui/shader/cooked.rs",
+   "manifest": "d91ae311cacbee6662e3357da94f4c994b411173b5673b4f3d8fa3c87c6379d1",
+   "at_commit": "d91ae311cacbee6662e3357da94f4c994b411173b5673b4f3d8fa3c87c6379d1",
+   "worktree": "d91ae311cacbee6662e3357da94f4c994b411173b5673b4f3d8fa3c87c6379d1"
+  },
+  {
+   "path": "crates/incant_shader_cook/src/geometry/contract.rs",
+   "manifest": "43eaab1824a337b0da21a58ffe88849d531d38fc56fec47ac3c2dc805512f8c3",
+   "at_commit": "43eaab1824a337b0da21a58ffe88849d531d38fc56fec47ac3c2dc805512f8c3",
+   "worktree": "f2f7f2b6a1b877ed71ab76ddd2471a1fcaa4b69b6da09562aa1a42b7429dd2bf"
+  },
+  {
+   "path": "crates/incant_shader_cook/src/geometry/emit.rs",
+   "manifest": "b474a91e34d5b0444f41c532f28479e272bf5dfc95f2bc54e296083e4a9e1904",
+   "at_commit": "b474a91e34d5b0444f41c532f28479e272bf5dfc95f2bc54e296083e4a9e1904",
+   "worktree": "73fe39feeece5f62afff8078a7208509d15634d0b5a08edf577d42d4a1e1c7f5"
+  },
+  {
+   "path": "crates/incant_shader_cook/src/geometry/mod.rs",
+   "manifest": "b3e9a40276cb6d06cf5d9772b43bfee56ccb777d8faf25aec72bf6b2d52aca4e",
+   "at_commit": "b3e9a40276cb6d06cf5d9772b43bfee56ccb777d8faf25aec72bf6b2d52aca4e",
+   "worktree": "0cec8937e591b7656b961d5888367899602cb91f615b7a80f90680e1d895c284"
+  },
+  {
+   "path": "crates/incant_shader_cook/src/geometry/sprite.rs",
+   "manifest": "5061d2d170a76b384763474ffefcec65b934d2a28ad086e58981373992d4dcb2",
+   "at_commit": "5061d2d170a76b384763474ffefcec65b934d2a28ad086e58981373992d4dcb2",
+   "worktree": "5061d2d170a76b384763474ffefcec65b934d2a28ad086e58981373992d4dcb2"
+  },
+  {
+   "path": "crates/incant_shader_cook/src/geometry/ui.rs",
+   "manifest": "7a5c0786befbc4a78f3b3d70f56ed552898e9c723315925b52d1e37526bcc933",
+   "at_commit": "7a5c0786befbc4a78f3b3d70f56ed552898e9c723315925b52d1e37526bcc933",
+   "worktree": "7a5c0786befbc4a78f3b3d70f56ed552898e9c723315925b52d1e37526bcc933"
+  },
+  {
+   "path": "crates/incant_shader_cook/tests/geometry.rs",
+   "manifest": "89f8a2c886ba7a1952f5866e54628adaa4b87d4e66a164a8114043533ce919d9",
+   "at_commit": "89f8a2c886ba7a1952f5866e54628adaa4b87d4e66a164a8114043533ce919d9",
+   "worktree": "70a6a7d240e29944a22c945c51f3dd6b400a9a1a35d25a67794804b6f370e64d"
+  },
+  {
+   "path": "crates/incant_shader_cook/tests/ui.rs",
+   "manifest": "2deb4c141220b03b90ba8946499ba78eaed00d211121737fe85c202773febb73",
+   "at_commit": "2deb4c141220b03b90ba8946499ba78eaed00d211121737fe85c202773febb73",
+   "worktree": "2deb4c141220b03b90ba8946499ba78eaed00d211121737fe85c202773febb73"
+  }
+ ],
+ "ui_manifest_matches_ui_commit": true,
+ "ui_sources_changed_after_ui_commit": [
+  "crates/incant_render/Cargo.toml",
+  "crates/incant_render/build.rs",
+  "crates/incant_render/src/lib.rs",
+  "crates/incant_render/src/resource_error.rs",
+  "crates/incant_render/src/shader/native.rs",
+  "crates/incant_shader_cook/src/geometry/contract.rs",
+  "crates/incant_shader_cook/src/geometry/emit.rs",
+  "crates/incant_shader_cook/src/geometry/mod.rs",
+  "crates/incant_shader_cook/tests/geometry.rs"
+ ],
+ "text_manifest_sources": [
+  {
+   "path": "Cargo.lock",
+   "manifest": "7eec85df8c7e53e760cb088e23f94e99502dc72792e8ac1c935cf432825ae383",
+   "at_commit": "7eec85df8c7e53e760cb088e23f94e99502dc72792e8ac1c935cf432825ae383",
+   "worktree": "7eec85df8c7e53e760cb088e23f94e99502dc72792e8ac1c935cf432825ae383"
+  },
+  {
+   "path": "Cargo.toml",
+   "manifest": "c01e56676d729e7b6da4a0b80cee83056ab091ca695e3b3817e76f7419b742a4",
+   "at_commit": "c01e56676d729e7b6da4a0b80cee83056ab091ca695e3b3817e76f7419b742a4",
+   "worktree": "c01e56676d729e7b6da4a0b80cee83056ab091ca695e3b3817e76f7419b742a4"
+  },
+  {
+   "path": "crates/incant_render/Cargo.toml",
+   "manifest": "4fe32ec55351565e3364239065cd9686c85b2fa6be2fa9576f1e8671e1e6ed5f",
+   "at_commit": "4fe32ec55351565e3364239065cd9686c85b2fa6be2fa9576f1e8671e1e6ed5f",
+   "worktree": "4fe32ec55351565e3364239065cd9686c85b2fa6be2fa9576f1e8671e1e6ed5f"
+  },
+  {
+   "path": "crates/incant_render/build.rs",
+   "manifest": "b38f2652a2a6fdaac0af92cf887ab9ec877958219371cab8416d5b5948257031",
+   "at_commit": "b38f2652a2a6fdaac0af92cf887ab9ec877958219371cab8416d5b5948257031",
+   "worktree": "b38f2652a2a6fdaac0af92cf887ab9ec877958219371cab8416d5b5948257031"
+  },
+  {
+   "path": "crates/incant_render/src/lib.rs",
+   "manifest": "dd131d40086be9f9e4cc22aa03996adf1da4c83d3d1e8b1faa8beee2c0ed6b37",
+   "at_commit": "dd131d40086be9f9e4cc22aa03996adf1da4c83d3d1e8b1faa8beee2c0ed6b37",
+   "worktree": "dd131d40086be9f9e4cc22aa03996adf1da4c83d3d1e8b1faa8beee2c0ed6b37"
+  },
+  {
+   "path": "crates/incant_render/src/resource_error.rs",
+   "manifest": "734c702f09efb78c34502681a2e882fe580948e9793cc7a718f97b5f2e90630c",
+   "at_commit": "734c702f09efb78c34502681a2e882fe580948e9793cc7a718f97b5f2e90630c",
+   "worktree": "734c702f09efb78c34502681a2e882fe580948e9793cc7a718f97b5f2e90630c"
+  },
+  {
+   "path": "crates/incant_render/src/shader/native.rs",
+   "manifest": "fdfa44e416827890eead023bd5960bea4a04c203b2a87b7ec0dd48648b5a296f",
+   "at_commit": "fdfa44e416827890eead023bd5960bea4a04c203b2a87b7ec0dd48648b5a296f",
+   "worktree": "fdfa44e416827890eead023bd5960bea4a04c203b2a87b7ec0dd48648b5a296f"
+  },
+  {
+   "path": "crates/incant_render/src/sprites/sprite.wgsl",
+   "manifest": "1b8b9125541761ed6b54cbac79dd8abf312a1c0f1183a18ad8c94b4e818f774c",
+   "at_commit": "1b8b9125541761ed6b54cbac79dd8abf312a1c0f1183a18ad8c94b4e818f774c",
+   "worktree": "1b8b9125541761ed6b54cbac79dd8abf312a1c0f1183a18ad8c94b4e818f774c"
+  },
+  {
+   "path": "crates/incant_render/src/text/drawing.rs",
+   "manifest": "3051f05468556d4a8de810a13104057ea228ee84332db66ee273ee718a5eb965",
+   "at_commit": "3051f05468556d4a8de810a13104057ea228ee84332db66ee273ee718a5eb965",
+   "worktree": "3051f05468556d4a8de810a13104057ea228ee84332db66ee273ee718a5eb965"
+  },
+  {
+   "path": "crates/incant_render/src/text/geometry.rs",
+   "manifest": "6771378d16126429974a8b06925815da39fd9d891d89f198671b07a33649bd0e",
+   "at_commit": "6771378d16126429974a8b06925815da39fd9d891d89f198671b07a33649bd0e",
+   "worktree": "6771378d16126429974a8b06925815da39fd9d891d89f198671b07a33649bd0e"
+  },
+  {
+   "path": "crates/incant_render/src/text/mod.rs",
+   "manifest": "2765e32f7b0474dc4a5ec4657359b67eaf85585093423b680d6f6e10af9e5652",
+   "at_commit": "2765e32f7b0474dc4a5ec4657359b67eaf85585093423b680d6f6e10af9e5652",
+   "worktree": "2765e32f7b0474dc4a5ec4657359b67eaf85585093423b680d6f6e10af9e5652"
+  },
+  {
+   "path": "crates/incant_render/src/text/shader.rs",
+   "manifest": "9bf581c552681e05a948b3189d3b89c1faf2ea97752cfe13ca89d8ab9cfe459c",
+   "at_commit": "9bf581c552681e05a948b3189d3b89c1faf2ea97752cfe13ca89d8ab9cfe459c",
+   "worktree": "9bf581c552681e05a948b3189d3b89c1faf2ea97752cfe13ca89d8ab9cfe459c"
+  },
+  {
+   "path": "crates/incant_render/src/text/shader/cooked.rs",
+   "manifest": "ebc9007a83ce347d115d94b03ea57dfd6161d8a15817cd253b6508fbf3ec07c6",
+   "at_commit": "ebc9007a83ce347d115d94b03ea57dfd6161d8a15817cd253b6508fbf3ec07c6",
+   "worktree": "ebc9007a83ce347d115d94b03ea57dfd6161d8a15817cd253b6508fbf3ec07c6"
+  },
+  {
+   "path": "crates/incant_render/src/text/text.wgsl",
+   "manifest": "e6925b0518fb941794c1f929a3a4f0cd752b7a00608448c6b7b292b63f3dae00",
+   "at_commit": "e6925b0518fb941794c1f929a3a4f0cd752b7a00608448c6b7b292b63f3dae00",
+   "worktree": "e6925b0518fb941794c1f929a3a4f0cd752b7a00608448c6b7b292b63f3dae00"
+  },
+  {
+   "path": "crates/incant_render/src/ui/ui.wgsl",
+   "manifest": "f67e4982b038833e87ed84861d5be3018f5f0d6587ff8da6faf8bfd840c33c39",
+   "at_commit": "f67e4982b038833e87ed84861d5be3018f5f0d6587ff8da6faf8bfd840c33c39",
+   "worktree": "f67e4982b038833e87ed84861d5be3018f5f0d6587ff8da6faf8bfd840c33c39"
+  },
+  {
+   "path": "crates/incant_shader_cook/Cargo.toml",
+   "manifest": "e12b8b89f3b2d344cfa0dc7def97c2262d23d76b0ffd4688aa75f5d5ed656270",
+   "at_commit": "e12b8b89f3b2d344cfa0dc7def97c2262d23d76b0ffd4688aa75f5d5ed656270",
+   "worktree": "e12b8b89f3b2d344cfa0dc7def97c2262d23d76b0ffd4688aa75f5d5ed656270"
+  },
+  {
+   "path": "crates/incant_shader_cook/src/geometry/contract.rs",
+   "manifest": "f2f7f2b6a1b877ed71ab76ddd2471a1fcaa4b69b6da09562aa1a42b7429dd2bf",
+   "at_commit": "f2f7f2b6a1b877ed71ab76ddd2471a1fcaa4b69b6da09562aa1a42b7429dd2bf",
+   "worktree": "f2f7f2b6a1b877ed71ab76ddd2471a1fcaa4b69b6da09562aa1a42b7429dd2bf"
+  },
+  {
+   "path": "crates/incant_shader_cook/src/geometry/emit.rs",
+   "manifest": "73fe39feeece5f62afff8078a7208509d15634d0b5a08edf577d42d4a1e1c7f5",
+   "at_commit": "73fe39feeece5f62afff8078a7208509d15634d0b5a08edf577d42d4a1e1c7f5",
+   "worktree": "73fe39feeece5f62afff8078a7208509d15634d0b5a08edf577d42d4a1e1c7f5"
+  },
+  {
+   "path": "crates/incant_shader_cook/src/geometry/mod.rs",
+   "manifest": "0cec8937e591b7656b961d5888367899602cb91f615b7a80f90680e1d895c284",
+   "at_commit": "0cec8937e591b7656b961d5888367899602cb91f615b7a80f90680e1d895c284",
+   "worktree": "0cec8937e591b7656b961d5888367899602cb91f615b7a80f90680e1d895c284"
+  },
+  {
+   "path": "crates/incant_shader_cook/src/geometry/text.rs",
+   "manifest": "fc609717cf6a86a72dd07d0bb79d82fde25df64216e0d769f0214152120e089e",
+   "at_commit": "fc609717cf6a86a72dd07d0bb79d82fde25df64216e0d769f0214152120e089e",
+   "worktree": "fc609717cf6a86a72dd07d0bb79d82fde25df64216e0d769f0214152120e089e"
+  },
+  {
+   "path": "crates/incant_shader_cook/tests/geometry.rs",
+   "manifest": "70a6a7d240e29944a22c945c51f3dd6b400a9a1a35d25a67794804b6f370e64d",
+   "at_commit": "70a6a7d240e29944a22c945c51f3dd6b400a9a1a35d25a67794804b6f370e64d",
+   "worktree": "70a6a7d240e29944a22c945c51f3dd6b400a9a1a35d25a67794804b6f370e64d"
+  },
+  {
+   "path": "crates/incant_shader_cook/tests/text.rs",
+   "manifest": "7f50f4538d521fbeaad0b9a28aac42cce363644da18536b896fbf5ff3922b149",
+   "at_commit": "7f50f4538d521fbeaad0b9a28aac42cce363644da18536b896fbf5ff3922b149",
+   "worktree": "7f50f4538d521fbeaad0b9a28aac42cce363644da18536b896fbf5ff3922b149"
+  }
+ ],
+ "text_manifest_matches_source_commit_and_worktree": true,
+ "unchanged_since_before_ui_commit": {
+  "crates/incant_render/src/ui/ui.wgsl": {
+   "sha256": "f67e4982b038833e87ed84861d5be3018f5f0d6587ff8da6faf8bfd840c33c39",
+   "diff_from_parent_of_ui_commit_empty": true
+  },
+  "crates/incant_render/src/text/text.wgsl": {
+   "sha256": "e6925b0518fb941794c1f929a3a4f0cd752b7a00608448c6b7b292b63f3dae00",
+   "diff_from_parent_of_ui_commit_empty": true
+  },
+  "crates/incant_render/src/ui/geometry.rs": {
+   "sha256": "47bd7838b52a46e0034b05cf5458f8b12bf70c475889ba30848078dcb15d352b",
+   "diff_from_parent_of_ui_commit_empty": true
+  },
+  "crates/incant_render/src/ui/theme.rs": {
+   "sha256": "d8b7e0c7861a6c6d77a867d7fc0127c26dfef2c76f901e0d2597011d08779858",
+   "diff_from_parent_of_ui_commit_empty": true
+  },
+  "crates/incant_render/src/text/geometry.rs": {
+   "sha256": "6771378d16126429974a8b06925815da39fd9d891d89f198671b07a33649bd0e",
+   "diff_from_parent_of_ui_commit_empty": true
+  }
+ },
+ "pipeline_files_diff_from_parent_of_ui_commit": " crates/incant_render/src/text/drawing.rs |  93 ++++++++++++++-------------\n crates/incant_render/src/text/mod.rs     |  91 ++++++++++++++++-----------\n crates/incant_render/src/ui/mod.rs       | 105 +++++++++++++++++--------------\n 3 files changed, 161 insertions(+), 128 deletions(-)\n",
+ "source_reviews": {
+  "ui": {
+   "path": "docs/spikes/evidence/cooked-ui-shaders/cooked-ui-source-20261012.json",
+   "manifest": "8716abe20064278b566909b4c2b34a13c51c893dbbf4e06ba43053ce40c675d3",
+   "worktree": "8716abe20064278b566909b4c2b34a13c51c893dbbf4e06ba43053ce40c675d3"
+  },
+  "text": {
+   "path": "docs/spikes/evidence/cooked-text-shaders/cooked-text-source-20261012.json",
+   "manifest": "3af7e52b7ee7533034461ae803865100cac7636c0b63d327583fcc5f3c812be8",
+   "worktree": "3af7e52b7ee7533034461ae803865100cac7636c0b63d327583fcc5f3c812be8"
+  }
+ },
+ "manifests": {
+  "docs/spikes/evidence/cooked-ui-shaders.json": "5909162f29c5f67ed4456d2fd47ad4b68e9b6481898043144403843bbc8b57b1",
+  "docs/spikes/evidence/cooked-text-shaders.json": "6e2837974ecf0c7b795cb9af4bec08b673128e72a9e6b0f26442b5f751714cfd",
+  "docs/spikes/cooked-ui-shaders.md": "ce027d9e8a31358c13d2a590cf9cff334221b9161db2a70be547a83ab8782ea0",
+  "docs/spikes/cooked-text-shaders.md": "b94e80ab72f8dffb5b681c538dc7ce629cef537f3b22c4aee434e4b39868272e"
+ },
+ "brief_sha256": "7994fcf8adc1f88d6cb2025b0746f9a3d954b4cd189071d5b5fa9c7f9b37cb1e",
+ "cargo_lock_sha256": "7eec85df8c7e53e760cb088e23f94e99502dc72792e8ac1c935cf432825ae383",
+ "cargo_version": "cargo 1.99.0 (5f94df478 2026-08-27)",
+ "rustc_version": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1",
+ "recorded": "2026-10-13T00:44:56.193904+00:00"
+}

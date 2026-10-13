@@ -1,0 +1,2 @@
+   Compiling incant_render v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0063-cooked-ui-text-shaders/crates/incant_render)
+    Finished `ci` profile [optimized] target(s) in 18.49s

@@ -1,0 +1,44 @@
+{
+ "board": "W",
+ "at": "2026-10-13T00:58:28.687255+00:00",
+ "removed": {
+  "W/W.incant.json": "9e97ca8f36733c02f3ba455bef1b50135f78ec788054cca450cb79aa9dad2544",
+  "W/W.incant.journal.jsonl": "419eef07bf17d6b84f8bd30dff0b016558acd09b2e4ccc5f42467fe6c5fc01cf",
+  "W/art/IncantCJKFixture.ttf": "3299d6ab8033fb1d163f892dfcb1b8838cf1c46935c329d82da6f7b9e27dad82",
+  "W/art/NotoSans-Regular.ttf": "2ec33f84606cbaa0a1a944488e14f97faf2f6a25ecdd8354f5358f06da13c7d9",
+  "W/art/NotoSansArabic.ttf": "ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56",
+  "W/art/amber.gltf": "2af2a2df03a8b782361c5adeae1fade9130a282eb984578f819a771c25572c44",
+  "W/art/floor.gltf": "361ffa3c089931d3f034b456d3fcd8bf79d11adc55a0286e6d340e0fed49b8e2",
+  "W/art/slate.gltf": "abac29d061f7fa551eff14393caafc37c37411c6df379837ae91db914c81d7aa",
+  "W/art/teal.gltf": "5776303485047f4048422cc74d65929b8187a09a341dfbfb504ed0831d4a1b87"
+ },
+ "private_copy": "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r3/private-fixture/W",
+ "kept_unchanged": true,
+ "kept": {
+  "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r3/cooked/W.scene": "31fc2ac382852b9731ed71c1a6729c9d1604e0e69eb71d90a3b98d8f269d55e2",
+  "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r3/W/.incant/cache/fonts/10629e892a9c2294b0b886f9c8776ccba5358d5f678a6c5f6bb8ebcb361b3b1d.json": "2e4fbdb3b4f808e2188e96f5abb8cb7418afcb8f974d19fac83980165dd10a91",
+  "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r3/W/.incant/cache/fonts/2ec33f84606cbaa0a1a944488e14f97faf2f6a25ecdd8354f5358f06da13c7d9.ifont": "92960e6b23eff12e1bf13361b2b94b490d723f8d93e6945ba34b9f9b3acd2081",
+  "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r3/W/.incant/cache/fonts/3299d6ab8033fb1d163f892dfcb1b8838cf1c46935c329d82da6f7b9e27dad82.ifont": "49e09202aadc1c7463502004f791b596480a92d22e04b9948fabf8648a004814",
+  "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r3/W/.incant/cache/fonts/8a086d1a4d5925c8b6b54d6e5ea68c6cc82840b313b3a0328bda1eef09a32298.json": "b5b291a7bcf6e29b384c7cb01c37812856f0ff6d868e56fc30d2175ac85a024c",
+  "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r3/W/.incant/cache/fonts/e1bf83d3ae6380b9fc5266f14c05c39b11aa3cdc9ce5c9369cb7ed6c2987d802.json": "4d495b5de5233530baa56ed954bd76458e9ad50e394dc4dbdf7c42f6e91f515b",
+  "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r3/W/.incant/cache/fonts/ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56.ifont": "8bd20a742cc19c0fe65b106d983ea1ed816c4cd5ca1c3d50bdc4d05aeb5f8e7a",
+  "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r3/W/.incant/cache/models/8299ce0821b82a503386742bc6018c08b01f2bfa576226cfcd6739ea0e43ab78.incmodel": "ba9411d273aa3d9ef93155b05594e4e33db27583709d82f3b7e480e2aecd46e4",
+  "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r3/W/.incant/cache/models/ced3b7aaab93f8ef65e51ea414aac82ee0052bec0797c7d09bdd6a025df3e998.incmodel": "e958f40d1e0207d4a48de07c2834db2625cff4a761f79cdfe0e7ce5cde80dc80",
+  "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r3/W/.incant/cache/models/dbab9dc053726860400f294ed5f4997ea837fe9195ebf5c87b99c1f8b52f0dbd.incmodel": "70bb4d9b78e5f9ad314eb89db14320908a49d4c0abc1c806e6191d61b61744eb",
+  "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r3/W/.incant/cache/models/f7086cc618c9c1f59d7ff333e2fedd03e690225af6c4ee0fb15281601a2b8ca2.incmodel": "b0d9fbd6b0a1f23398d3aa2bb3eac893345289c64eb9927eaa0678ef8c18c7b6"
+ },
+ "remaining_in_project": [
+  ".incant-source-transactions/lock",
+  ".incant/cache/fonts/10629e892a9c2294b0b886f9c8776ccba5358d5f678a6c5f6bb8ebcb361b3b1d.json",
+  ".incant/cache/fonts/2ec33f84606cbaa0a1a944488e14f97faf2f6a25ecdd8354f5358f06da13c7d9.ifont",
+  ".incant/cache/fonts/3299d6ab8033fb1d163f892dfcb1b8838cf1c46935c329d82da6f7b9e27dad82.ifont",
+  ".incant/cache/fonts/8a086d1a4d5925c8b6b54d6e5ea68c6cc82840b313b3a0328bda1eef09a32298.json",
+  ".incant/cache/fonts/e1bf83d3ae6380b9fc5266f14c05c39b11aa3cdc9ce5c9369cb7ed6c2987d802.json",
+  ".incant/cache/fonts/ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56.ifont",
+  ".incant/cache/models/8299ce0821b82a503386742bc6018c08b01f2bfa576226cfcd6739ea0e43ab78.incmodel",
+  ".incant/cache/models/ced3b7aaab93f8ef65e51ea414aac82ee0052bec0797c7d09bdd6a025df3e998.incmodel",
+  ".incant/cache/models/dbab9dc053726860400f294ed5f4997ea837fe9195ebf5c87b99c1f8b52f0dbd.incmodel",
+  ".incant/cache/models/f7086cc618c9c1f59d7ff333e2fedd03e690225af6c4ee0fb15281601a2b8ca2.incmodel"
+ ],
+ "no_authoring_or_art_left": false
+}

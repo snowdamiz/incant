@@ -1,0 +1,416 @@
+{
+ "derived_from": "candidate captures (each byte-identical to its baseline); crops with nearest zoom only",
+ "figures": {
+  "w-mirror-controls": {
+   "parts": [
+    [
+     "W-ortho/t1",
+     13,
+     178,
+     304,
+     38,
+     2
+    ],
+    [
+     "W-ortho/t1",
+     333,
+     178,
+     304,
+     38,
+     2
+    ],
+    [
+     "W-ortho/t1",
+     653,
+     178,
+     304,
+     38,
+     2
+    ]
+   ],
+   "layout": "column",
+   "size": [
+    608,
+    240
+   ]
+  },
+  "w-flip-parent-control": {
+   "parts": [
+    [
+     "W-ortho/t1",
+     333,
+     296,
+     304,
+     36,
+     2
+    ],
+    [
+     "W-ortho/t1",
+     653,
+     263,
+     304,
+     36,
+     2
+    ]
+   ],
+   "layout": "column",
+   "size": [
+    608,
+    150
+   ]
+  },
+  "w-scripts": {
+   "parts": [
+    [
+     "W-ortho/t1",
+     13,
+     8,
+     304,
+     38,
+     2
+    ],
+    [
+     "W-ortho/t1",
+     430,
+     8,
+     215,
+     40,
+     2
+    ]
+   ],
+   "layout": "column",
+   "size": [
+    608,
+    162
+   ]
+  },
+  "w-coverage-over-bright": {
+   "parts": [
+    [
+     "W-ortho/t1",
+     652,
+     8,
+     260,
+     40,
+     3
+    ],
+    [
+     "W-ortho/t1",
+     652,
+     93,
+     260,
+     40,
+     3
+    ]
+   ],
+   "layout": "column",
+   "size": [
+    780,
+    246
+   ]
+  },
+  "w-magnified-rotated": {
+   "parts": [
+    [
+     "W-ortho/t1",
+     13,
+     263,
+     230,
+     60,
+     3
+    ],
+    [
+     "W-ortho/t1",
+     340,
+     65,
+     180,
+     110,
+     2
+    ]
+   ],
+   "layout": "column",
+   "size": [
+    690,
+    406
+   ]
+  },
+  "w-minification-ladder": {
+   "parts": [
+    [
+     "W-ortho/t1",
+     12,
+     346,
+     240,
+     62,
+     4
+    ]
+   ],
+   "layout": "column",
+   "size": [
+    960,
+    248
+   ]
+  },
+  "w-overlap": {
+   "parts": [
+    [
+     "W-ortho/t1",
+     333,
+     440,
+     215,
+     40,
+     3
+    ]
+   ],
+   "layout": "column",
+   "size": [
+    645,
+    120
+   ]
+  },
+  "w-persp-yaw-depth": {
+   "parts": [
+    [
+     "W-persp/t1",
+     330,
+     355,
+     150,
+     95,
+     3
+    ],
+    [
+     "W-persp/t1",
+     640,
+     335,
+     300,
+     100,
+     2
+    ]
+   ],
+   "layout": "column",
+   "size": [
+    600,
+    491
+   ]
+  },
+  "w-persp-motion": {
+   "parts": [
+    [
+     "W-persp/t1",
+     650,
+     440,
+     260,
+     42,
+     2
+    ],
+    [
+     "W-persp/t61",
+     650,
+     440,
+     260,
+     42,
+     2
+    ]
+   ],
+   "layout": "column",
+   "size": [
+    520,
+    174
+   ]
+  },
+  "u-rounded-corners-1x": {
+   "parts": [
+    [
+     "U-1x/idle",
+     28,
+     134,
+     102,
+     46,
+     6
+    ]
+   ],
+   "layout": "row",
+   "size": [
+    612,
+    276
+   ]
+  },
+  "u-disabled-and-arabic-buttons": {
+   "parts": [
+    [
+     "U-1x/idle",
+     232,
+     134,
+     206,
+     46,
+     3
+    ]
+   ],
+   "layout": "row",
+   "size": [
+    618,
+    138
+   ]
+  },
+  "u-clip-strip": {
+   "parts": [
+    [
+     "U-1x/idle",
+     186,
+     186,
+     102,
+     46,
+     4
+    ]
+   ],
+   "layout": "row",
+   "size": [
+    408,
+    184
+   ]
+  },
+  "u-overflow-clips": {
+   "parts": [
+    [
+     "U-1x/idle",
+     28,
+     330,
+     368,
+     44,
+     2
+    ],
+    [
+     "U-1x/idle",
+     28,
+     400,
+     368,
+     44,
+     2
+    ]
+   ],
+   "layout": "column",
+   "size": [
+    736,
+    182
+   ]
+  },
+  "u-selection-focus": {
+   "parts": [
+    [
+     "U-1x/select",
+     28,
+     260,
+     368,
+     44,
+     2
+    ]
+   ],
+   "layout": "column",
+   "size": [
+    736,
+    88
+   ]
+  },
+  "u-focus-2x": {
+   "parts": [
+    [
+     "U-2x/focus",
+     56,
+     268,
+     200,
+     92,
+     2
+    ]
+   ],
+   "layout": "column",
+   "size": [
+    400,
+    184
+   ]
+  },
+  "u-preedit-15x": {
+   "parts": [
+    [
+     "U-15x-name/preedit",
+     44,
+     392,
+     260,
+     62,
+     3
+    ]
+   ],
+   "layout": "column",
+   "size": [
+    780,
+    186
+   ]
+  },
+  "u-label-over-world-2x": {
+   "parts": [
+    [
+     "U-2x/focus",
+     600,
+     140,
+     240,
+     110,
+     2
+    ]
+   ],
+   "layout": "column",
+   "size": [
+    480,
+    220
+   ]
+  },
+  "u-srgb-vs-unorm": {
+   "parts": [
+    [
+     "U-1x/idle",
+     28,
+     134,
+     102,
+     46,
+     4
+    ],
+    [
+     "U-1x-unorm/idle",
+     28,
+     134,
+     102,
+     46,
+     4
+    ]
+   ],
+   "layout": "row",
+   "size": [
+    822,
+    184
+   ]
+  },
+  "u-srgb-vs-unorm-text": {
+   "parts": [
+    [
+     "U-1x/idle",
+     32,
+     78,
+     250,
+     24,
+     3
+    ],
+    [
+     "U-1x-unorm/idle",
+     32,
+     78,
+     250,
+     24,
+     3
+    ]
+   ],
+   "layout": "column",
+   "size": [
+    750,
+    150
+   ]
+  }
+ }
+}

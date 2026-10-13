@@ -1,0 +1,30 @@
+warning: patch `tao v0.37.1 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0063-cooked-ui-text-shaders/third_party/tao)` was not used in the crate graph
+help: Check that the patched package version and available features are compatible
+      with the dependency requirements. If the patch has a different version from
+      what is locked in the Cargo.lock file, run `cargo update` to use the new
+      version. This may also occur with an optional dependency that is not enabled.
+    Checking incant_types v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0063-cooked-ui-text-shaders/crates/incant_types)
+    Checking incant_2d v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0063-cooked-ui-text-shaders/crates/incant_2d)
+    Checking cosmic-text v0.14.2 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0063-cooked-ui-text-shaders/third_party/cosmic-text)
+    Checking incant_anim v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0063-cooked-ui-text-shaders/crates/incant_anim)
+    Checking incant_text v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0063-cooked-ui-text-shaders/crates/incant_text)
+    Checking rerecast v0.4.0 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0063-cooked-ui-text-shaders/third_party/rerecast)
+    Checking incant_assets_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0063-cooked-ui-text-shaders/crates/incant_assets_runtime)
+    Checking incant_nav v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0063-cooked-ui-text-shaders/crates/incant_nav)
+    Checking incant_localization v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0063-cooked-ui-text-shaders/crates/incant_localization)
+    Checking incant_physics_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0063-cooked-ui-text-shaders/crates/incant_physics_runtime)
+    Checking incant_physics_2d_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0063-cooked-ui-text-shaders/crates/incant_physics_2d_runtime)
+    Checking incant_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0063-cooked-ui-text-shaders/crates/incant_runtime)
+    Checking kira v0.12.5 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0063-cooked-ui-text-shaders/third_party/kira)
+    Checking incant_input v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0063-cooked-ui-text-shaders/crates/incant_input)
+    Checking incant_render_data v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0063-cooked-ui-text-shaders/crates/incant_render_data)
+    Checking incant_render v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0063-cooked-ui-text-shaders/crates/incant_render)
+    Checking incant_ui v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0063-cooked-ui-text-shaders/crates/incant_ui)
+    Checking incant_audio_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0063-cooked-ui-text-shaders/crates/incant_audio_runtime)
+    Checking incant_script v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0063-cooked-ui-text-shaders/crates/incant_script)
+    Checking incant_render_native v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0063-cooked-ui-text-shaders/crates/incant_render_native)
+    Checking incant_game_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0063-cooked-ui-text-shaders/crates/incant_game_runtime)
+    Checking incant_render_game v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0063-cooked-ui-text-shaders/crates/incant_render_game)
+    Checking incant_render_gpu_host v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0063-cooked-ui-text-shaders/crates/incant_render_gpu_host)
+    Checking incant_0063_review v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0063-cooked-ui-text-shaders/handoffs/0063-cooked-ui-text-shaders/tools/review)
+    Finished `ci` profile [optimized] target(s) in 3.62s

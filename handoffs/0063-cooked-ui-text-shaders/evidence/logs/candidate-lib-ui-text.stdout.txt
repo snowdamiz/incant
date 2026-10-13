@@ -1,0 +1,15 @@
+
+running 11 tests
+test models::retained::text_native_tests::source_free_native_text_moves_rebuilds_and_changes_through_the_retained_consumer ... ok
+test models::retained::text_tests::foreign_or_reset_handles_refuse_preparation_before_any_text_upload ... ok
+test models::retained::text_tests::opaque_geometry_occludes_text_behind_it_and_text_in_front_draws_over_it ... ok
+test models::retained::text_tests::retained_motion_rebuild_and_changed_text_reuse_or_replace_exact_identities ... ok
+test text::draw_tests::drawn_text_matches_layout_baselines_bearings_bidi_order_and_missing_glyphs ... ok
+test text::draw_tests::rotated_scaled_minified_and_magnified_text_matches_the_affine_reference ... ok
+test ui::draw_tests::editor_viewport_region_offsets_scales_and_bounds_the_ui ... ok
+test ui::draw_tests::logical_layout_maps_to_physical_pixels_at_integer_and_fractional_scales ... ok
+test ui::draw_tests::nested_clips_cut_actual_glyph_bounds_including_negative_x_rtl_overflow ... ok
+test ui::draw_tests::retained_atlas_and_quads_follow_input_identity_and_survive_refused_stages ... ok
+test ui::draw_tests::ui_composites_over_the_finished_world_frame_and_leaves_uncovered_pixels ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 93 filtered out; finished in 0.93s
