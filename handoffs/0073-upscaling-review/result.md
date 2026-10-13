@@ -1,6 +1,128 @@
 # 0073 result — output upscaling numeric execution, visual review and repair design
 
-## Disocclusion addendum (current): static-history correction
+## Addendum 2 (current): shading changes, camera ownership and owner identity
+
+**Status: CORRECTION WRITTEN for root review, CPU only.**
+- The correction is in
+  [`quality-repair-addendum-2.md`](quality-repair-addendum-2.md).
+- The model delta is [`repair-model/model_v2.py`](repair-model/model_v2.py). It
+  imports the unchanged `model.py`, and its output is in
+  [`repair-model/results-2.json`](repair-model/results-2.json).
+- No renderer source, GPU, Cargo, build, target or capture was used. No shader
+  or resource change was made, and none should start before root's review.
+- **Preserved unchanged:**
+  - 7b3dc64c: `quality-repair-addendum.md`, `model.py` (`2c4b0bfc…`) and
+    `results.json` (`c88992f9…`);
+  - e1b26907 and all earlier evidence;
+  - all 50 retained controls.
+
+**Model and effort:** Claude Opus 5.5 (`claude-opus-5-5`), thinking effort max.
+Root's `claude-0073-admission-review2-acp.log` header reads `Resumed the latest
+ACP session scoped to this handoff worktree.` and `Claude session verified:
+Opus 5.5; thinking: max`. No subagents, memory writes or background work.
+
+**Inputs, read first:**
+- root's feedback `b85631cf…`;
+- the readiness audit, found under `~/.codex/incant-evidence/` (no copy was
+  under `~/.codex/incant-reviews/` during this session):
+  - feedback `faae6df3…`;
+  - implementation map `05a0b3fe…`;
+  - review `85a05dc2…`;
+  - counterexamples `2a7cdb3c…` / `fcb38800…`;
+- root's oracle acceptance `935b1662…` and the oracle record at 2fe23dce;
+- renderer and cooker source at 2fe23dce, read only.
+
+**Outcome:**
+- **Blocker 1, the scalar key.** It is withdrawn.
+  - **Required replacement: changed-caster footprints.** The host lists each
+    changed caster's swept light-space rectangle per shadowed light. Static
+    pixels whose depth range meets one are clipped and reset.
+  - **What that avoids:** no visibility is evaluated, so there is no
+    quantisation, no collision, and no shadow map or lighting group in the
+    resolve.
+  - **N1:** lag 0.017, against 0.378 for the scalar key.
+  - **Cost:** over-invalidation. K3's shadow-interior error is 0.039, against
+    0.021 for a per-light 8-bit signature. That signature is measured as the
+    alternative, with three stated gaps.
+- **Blocker 2, the camera.**
+  - **Definition:** `camera_static` is an exact host comparison with the
+    accepted frame: the unjittered view and projection, and the output size and
+    rectangle. It is separate from screen displacement.
+  - **Rule:** unclipped persistence, and any world point rebuilt from stored
+    depth, happen only with a static camera. Zero-motion pixels under a changed
+    camera take the moving path, admitted against the expected previous depth.
+  - **N2 and N3:** 0 persisted pixels and 0 shading tests while the camera
+    changes, against 6,144 and 3,072 under the 7b3dc64c rules.
+  - **F10:** current-depth admission gives 0.261, against 0.091.
+- **Owners:**
+  - **Current contributors:** persistence also requires every one to be
+    unchanged. A newcomer, nearer or at the same depth, no longer keeps the
+    old background (N5: 0.292 → 0.031 for both).
+  - **Drops:** by identity (N4: 0.691 → 0.000).
+  - **Moving admission:** by identity. In N6 a tolerance-close wall equals a
+    separated one bit for bit; under the 7b3dc64c rules they differ by 0.715.
+  - **Provenance:** kept as bookkeeping, with no measured benefit (P1).
+- **Retained-scene events:** each one is classified:
+  - topology → replacement → reset;
+  - transforms and skins → owner change;
+  - the camera;
+  - light transforms and cascades → frame-global;
+  - sprites, text, tilemaps and Blend → current-only overlay.
+
+  This corrects addendum 1: environment and light-list changes force a
+  replacement.
+- **Mechanics:**
+  - stable per-placement ids, because packed rows shift on handedness flips;
+  - exact `u32` transport: row lane 12 → flat varying → `R32Uint` target;
+  - `Rgba32Uint` meta with canonical reads;
+  - an explicit 10-binding resolve layout with its Metal, DX12 and Vulkan map;
+  - cooker contract and emitter changes, with negative controls;
+  - no-light behaviour;
+  - an accepted-state witness;
+  - an exact ceiling of 973,121,728 B (671,105,024 B today).
+- **Numbers:**
+  - root's oracle is cited as definition-specific;
+  - the brief's 8 ± 0.07, < 10⁻⁴, C3 activity and C9 claims are corrected;
+  - addendum 1's 0.65/0.85 is withdrawn as a target;
+  - the original C7 and C9 are recorded as failed;
+  - replacement controls await root's review, and no GPU gate changes.
+
+**Commands and results:**
+
+| Command | Result |
+|---|---|
+| `python3 -I -B handoffs/0073-upscaling-review/repair-model/model_v2.py --out …/results-2.json` | Exit 0; none unexpected. 50 retained cases per detector (2 detectors) and 21 new cases, 10 of them expected failures. About 50 s |
+| Second run, compared with `cmp` | Byte-identical |
+| `/usr/bin/python3` (3.9.6) run | Identical to 3.14.8 apart from the version field |
+| `shasum -a 256` on `model.py` and `results.json` | Unchanged: `2c4b0bfc…`, `c88992f9…` |
+
+**Not run:** Cargo, the cooker, renderer tests and GPU tests. They are outside
+this preparation-only packet.
+
+**Screenshots:** none. No GPU was used.
+
+**Changed paths:**
+- `handoffs/0073-upscaling-review/quality-repair-addendum-2.md` (new)
+- `handoffs/0073-upscaling-review/repair-model/model_v2.py` (new)
+- `handoffs/0073-upscaling-review/repair-model/results-2.json` (new)
+- `handoffs/0073-upscaling-review/result.md` (this section)
+
+Root's uncommitted `brief.md` is left as found and is not committed.
+
+**Open questions for root:**
+1. Footprints (exact, over-invalidating), or the per-light signature with its
+   gaps?
+2. Keep provenance?
+3. Numerical review of the replacement controls.
+4. Palette comparison for animated owners, or always changed?
+
+**Limits:**
+- **Model:** grey 2D. It has no world points, light space or cascades. The
+  footprint slab and assumptions A1–A5 are argued, not modelled. The dolly's
+  wrong world point is not modelled, so N3 is a structural check.
+- **Claims:** no appearance, performance, phone or phase-gate claim.
+
+## Disocclusion addendum (preserved): static-history correction
 
 **Status: CORRECTION WRITTEN, CPU only.**
 - The correction is in

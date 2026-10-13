@@ -1,0 +1,1322 @@
+{
+ "model": "0073 repair model, addendum-2 delta (imports unchanged model.py)",
+ "python": "3.14.8",
+ "detectors": {
+  "rect": "required: changed casters' swept light-space footprints; in retained cases key 'none' disables it and 'pcf3'/'gather2' both select it",
+  "slots": "alternative: per-light 8-bit visibility at the stored point; for one light it equals the 7b3dc64c key"
+ },
+ "retained_cases_rect": [
+  {
+   "case": "F1 root recurrence: draft static path retains stale white",
+   "expect": "fail",
+   "observed": "fail",
+   "as_expected": true,
+   "values": {
+    "after_1": 0.9,
+    "after_3": 0.729,
+    "after_8": 0.4305,
+    "after_9": 0.0
+   }
+  },
+  {
+   "case": "C0 calibration: 535003d7 model vs measured a5ae3179 chart",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "model_lines1": 0.0,
+    "model_checker2": 0.0497,
+    "model_checker4": 0.4228,
+    "measured_lines1": 0.032,
+    "measured_checker2": 0.061,
+    "measured_checker4": 0.434
+   }
+  },
+  {
+   "case": "F2 draft: stationary square starts moving over black at 8/16",
+   "expect": "fail",
+   "observed": "fail",
+   "as_expected": true,
+   "values": {
+    "max_residual_after_1": 0.9617,
+    "max_residual_after_3": 0.9121,
+    "max_residual_after_8": 0.6312
+   }
+  },
+  {
+   "case": "C12 corrected: stationary square starts moving over black at 8/16",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "max_residual_after_1": 0.0,
+    "max_residual_after_3": 0.0,
+    "max_residual_after_8": 0.0
+   }
+  },
+  {
+   "case": "F2 draft: stationary square starts moving over black at 16/16",
+   "expect": "fail",
+   "observed": "fail",
+   "as_expected": true,
+   "values": {
+    "max_residual_after_1": 0.8413,
+    "max_residual_after_3": 0.7288,
+    "max_residual_after_8": 0.4313
+   }
+  },
+  {
+   "case": "C12 corrected: stationary square starts moving over black at 16/16",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "max_residual_after_1": 0.0,
+    "max_residual_after_3": 0.0002,
+    "max_residual_after_8": 0.0001
+   }
+  },
+  {
+   "case": "F2 draft: stationary square starts moving over clear at 8/16",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "max_residual_after_1": 0.0,
+    "max_residual_after_3": 0.0,
+    "max_residual_after_8": 0.0
+   }
+  },
+  {
+   "case": "C12 corrected: stationary square starts moving over clear at 8/16",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "max_residual_after_1": 0.0,
+    "max_residual_after_3": 0.0,
+    "max_residual_after_8": 0.0
+   }
+  },
+  {
+   "case": "F2 draft: stationary square starts moving over clear at 16/16",
+   "expect": "fail",
+   "observed": "fail",
+   "as_expected": true,
+   "values": {
+    "max_residual_after_1": 0.8413,
+    "max_residual_after_3": 0.7283,
+    "max_residual_after_8": 0.431
+   }
+  },
+  {
+   "case": "C12 corrected: stationary square starts moving over clear at 16/16",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "max_residual_after_1": 0.0,
+    "max_residual_after_3": 0.0002,
+    "max_residual_after_8": 0.0001
+   }
+  },
+  {
+   "case": "C7 as written (draft): |moving - never moved| per column <= 0.06",
+   "expect": "fail",
+   "observed": "fail",
+   "as_expected": true,
+   "values": {
+    "worst_column": 0.3617,
+    "mean_column": 0.1126
+   }
+  },
+  {
+   "case": "C7a (draft): signed bias toward the white occluder per column <= 0.01",
+   "expect": "fail",
+   "observed": "fail",
+   "as_expected": true,
+   "values": {
+    "worst_signed_bias": 0.3617
+   }
+  },
+  {
+   "case": "C7 as written (corrected): |moving - never moved| per column <= 0.06",
+   "expect": "fail",
+   "observed": "fail",
+   "as_expected": true,
+   "values": {
+    "worst_column": 0.0918,
+    "mean_column": 0.0474
+   }
+  },
+  {
+   "case": "C7a (corrected): signed bias toward the white occluder per column <= 0.01",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "worst_signed_bias": 0.0
+   }
+  },
+  {
+   "case": "C7b (corrected): equals a never-moved floor reset at the same pixels and frames",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "worst_pixel": 0.0,
+    "dropped_pixel_frames": 255
+   }
+  },
+  {
+   "case": "C7c reference: a current-frame-only floor vs the converged floor",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "mean_difference": 0.1788
+   }
+  },
+  {
+   "case": "C7d (corrected): disocclusion residue converges below 0.06 within 6 frames",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "frames_since_vacated_5": 0.0277,
+    "frames_since_vacated_6": 0.0263,
+    "frames_since_vacated_7": 0.0086,
+    "frames_since_vacated_8": 0.0171
+   }
+  },
+  {
+   "case": "F7 wider kernel for fresh history: C7 as written still fails",
+   "expect": "fail",
+   "observed": "fail",
+   "as_expected": true,
+   "values": {
+    "worst_column": 0.0918,
+    "mean_column": 0.0474
+   }
+  },
+  {
+   "case": "C14 corrected: start-move-stop over texture",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "worst_column": 0.0189
+   }
+  },
+  {
+   "case": "C15 corrected: occluder passes over floor and wire",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "wire_presence_max": 0.4177,
+    "wire_presence_min": 0.2061,
+    "wire_presence_reference_min": 0.3118,
+    "floor_worst_column": 0.0251
+   }
+  },
+  {
+   "case": "C16 corrected: camera pan then hold",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "floor_worst_column": 0.0149,
+    "floor_activity_codes": 2.9874,
+    "persisted": 31744,
+    "moving": 4605
+   }
+  },
+  {
+   "case": "C17 (draft): partial-coverage band over black",
+   "expect": "fail",
+   "observed": "fail",
+   "as_expected": true,
+   "values": {
+    "max_residual": 0.9362
+   }
+  },
+  {
+   "case": "C17 (corrected): partial-coverage band over black",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "max_residual": 0.0
+   }
+  },
+  {
+   "case": "C17 (draft): partial-coverage band over clear",
+   "expect": "fail",
+   "observed": "fail",
+   "as_expected": true,
+   "values": {
+    "max_residual": 0.0595
+   }
+  },
+  {
+   "case": "C17 (corrected): partial-coverage band over clear",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "max_residual": 0.0
+   }
+  },
+  {
+   "case": "C19 corrected: triple junction after a passing bar",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "max_residual": 0.014,
+    "overflow_pixel_frames": 213
+   }
+  },
+  {
+   "case": "C5 (draft): static wires over clear present in every phase",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "wire_1_6_min": 0.7496,
+    "wire_0_8_min": 0.3322,
+    "wire_0_8_max": 0.3744
+   }
+  },
+  {
+   "case": "C5 (corrected): static wires over clear present in every phase",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "wire_1_6_min": 0.7496,
+    "wire_0_8_min": 0.3322,
+    "wire_0_8_max": 0.3744
+   }
+  },
+  {
+   "case": "C5 (draft): static wires over floor present in every phase",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "wire_1_6_min": 0.7559,
+    "wire_0_8_min": 0.3907,
+    "wire_0_8_max": 0.4276
+   }
+  },
+  {
+   "case": "C5 (corrected): static wires over floor present in every phase",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "wire_1_6_min": 0.7559,
+    "wire_0_8_min": 0.3907,
+    "wire_0_8_max": 0.4276
+   }
+  },
+  {
+   "case": "V5 limit: 0.4 px wire between 8/16 sub-rows gets no sample",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "sub_row_offsets": "[0.25, 0.75, 1.25, 1.75]",
+    "max_presence": 0.0
+   }
+  },
+  {
+   "case": "C3 corrected: static lines1 at 8/16",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "contrast_fraction": 0.3824,
+    "activity_codes": 1.0465,
+    "activity_535003d7_codes": 0.0
+   }
+  },
+  {
+   "case": "C3 corrected: static checker2 at 8/16",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "contrast_fraction": 0.4775,
+    "activity_codes": 2.5493,
+    "activity_535003d7_codes": 1.6946
+   }
+  },
+  {
+   "case": "C3 corrected: static checker4 at 8/16",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "contrast_fraction": 0.7383,
+    "activity_codes": 2.3294,
+    "activity_535003d7_codes": 2.1078
+   }
+  },
+  {
+   "case": "F3 flat W cap 9: static checker2 shimmer at 8/16",
+   "expect": "fail",
+   "observed": "fail",
+   "as_expected": true,
+   "values": {
+    "activity_codes": 9.0774,
+    "activity_535003d7_codes": 1.6946
+   }
+  },
+  {
+   "case": "F4 bias with per-frame clamp (D1): 1-texel lines flicker",
+   "expect": "fail",
+   "observed": "fail",
+   "as_expected": true,
+   "values": {
+    "linear_activity": 0.5
+   }
+  },
+  {
+   "case": "F8 current/history colour ratio cannot separate a 0.2 shadow from aliasing",
+   "expect": "fail",
+   "observed": "fail",
+   "as_expected": true,
+   "values": {
+    "p05": 0.0607,
+    "p95": 2.87,
+    "samples": 4608
+   }
+  },
+  {
+   "case": "C8 corrected, exact PCF key: moving shadow lag",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "signed_lag": 0.018,
+    "key_resets": 4224
+   }
+  },
+  {
+   "case": "F5 no shading key: moving shadow lags",
+   "expect": "fail",
+   "observed": "fail",
+   "as_expected": true,
+   "values": {
+    "signed_lag": 0.1439
+   }
+  },
+  {
+   "case": "K1 gather 2x2 key",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "signed_lag": 0.018,
+    "key_resets": 4224
+   }
+  },
+  {
+   "case": "K2 gated exact key equals the ungated key",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "worst_difference": 0.0,
+    "ungated_evaluations": 0,
+    "gated_evaluations": 0
+   }
+  },
+  {
+   "case": "R1 reset value after a key change (reported)",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "lag_at_0.25": 0.0298,
+    "abs_at_0.25": 0.0605,
+    "lag_at_0.125": 0.018,
+    "abs_at_0.125": 0.0653,
+    "lag_at_0.0": -0.0083,
+    "abs_at_0.0": 0.0998
+   }
+  },
+  {
+   "case": "C6 corrected: light change with frame-global suspension",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "signed_lag_second_frame": 0.0058
+   }
+  },
+  {
+   "case": "F9 light change without the frame-global flag lags",
+   "expect": "fail",
+   "observed": "fail",
+   "as_expected": true,
+   "values": {
+    "signed_lag_second_frame": 0.2312
+   }
+  },
+  {
+   "case": "C9 corrected: 4/16 -> 16/16 recovery",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "third_frame": 0.6833,
+    "fourth_frame": 0.8691,
+    "third_vs_frame_39": 0.7412,
+    "fourth_vs_frame_39": 0.9428
+   }
+  },
+  {
+   "case": "F6 no confidence rescale: slow 4/16 -> 16/16",
+   "expect": "fail",
+   "observed": "fail",
+   "as_expected": true,
+   "values": {
+    "third_frame": 0.2347,
+    "fourth_frame": 0.372,
+    "third_vs_frame_39": 0.3999,
+    "fourth_vs_frame_39": 0.6337
+   }
+  },
+  {
+   "case": "C9 corrected: 12/16 -> 4/16 retention",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "first_frame_kept": 0.9565
+   }
+  },
+  {
+   "case": "C10 corrected: cut restarts bit-identically",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {}
+  },
+  {
+   "case": "C2 interior cycle mass within [7.9, 8.1] for n = 4..16",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "minimum": 7.9274,
+    "maximum": 8.0729
+   }
+  },
+  {
+   "case": "C21 fractional viewport: outside zero, finite, interior mass in bound",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "interior_min": 7.998,
+    "interior_max": 7.998,
+    "edge_min": 0.0018,
+    "edge_max": 7.998
+   }
+  }
+ ],
+ "retained_cases_slots": [
+  {
+   "case": "F1 root recurrence: draft static path retains stale white",
+   "expect": "fail",
+   "observed": "fail",
+   "as_expected": true,
+   "values": {
+    "after_1": 0.9,
+    "after_3": 0.729,
+    "after_8": 0.4305,
+    "after_9": 0.0
+   }
+  },
+  {
+   "case": "C0 calibration: 535003d7 model vs measured a5ae3179 chart",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "model_lines1": 0.0,
+    "model_checker2": 0.0497,
+    "model_checker4": 0.4228,
+    "measured_lines1": 0.032,
+    "measured_checker2": 0.061,
+    "measured_checker4": 0.434
+   }
+  },
+  {
+   "case": "F2 draft: stationary square starts moving over black at 8/16",
+   "expect": "fail",
+   "observed": "fail",
+   "as_expected": true,
+   "values": {
+    "max_residual_after_1": 0.9617,
+    "max_residual_after_3": 0.9121,
+    "max_residual_after_8": 0.6312
+   }
+  },
+  {
+   "case": "C12 corrected: stationary square starts moving over black at 8/16",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "max_residual_after_1": 0.0,
+    "max_residual_after_3": 0.0,
+    "max_residual_after_8": 0.0
+   }
+  },
+  {
+   "case": "F2 draft: stationary square starts moving over black at 16/16",
+   "expect": "fail",
+   "observed": "fail",
+   "as_expected": true,
+   "values": {
+    "max_residual_after_1": 0.8413,
+    "max_residual_after_3": 0.7288,
+    "max_residual_after_8": 0.4313
+   }
+  },
+  {
+   "case": "C12 corrected: stationary square starts moving over black at 16/16",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "max_residual_after_1": 0.0,
+    "max_residual_after_3": 0.0002,
+    "max_residual_after_8": 0.0001
+   }
+  },
+  {
+   "case": "F2 draft: stationary square starts moving over clear at 8/16",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "max_residual_after_1": 0.0,
+    "max_residual_after_3": 0.0,
+    "max_residual_after_8": 0.0
+   }
+  },
+  {
+   "case": "C12 corrected: stationary square starts moving over clear at 8/16",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "max_residual_after_1": 0.0,
+    "max_residual_after_3": 0.0,
+    "max_residual_after_8": 0.0
+   }
+  },
+  {
+   "case": "F2 draft: stationary square starts moving over clear at 16/16",
+   "expect": "fail",
+   "observed": "fail",
+   "as_expected": true,
+   "values": {
+    "max_residual_after_1": 0.8413,
+    "max_residual_after_3": 0.7283,
+    "max_residual_after_8": 0.431
+   }
+  },
+  {
+   "case": "C12 corrected: stationary square starts moving over clear at 16/16",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "max_residual_after_1": 0.0,
+    "max_residual_after_3": 0.0002,
+    "max_residual_after_8": 0.0001
+   }
+  },
+  {
+   "case": "C7 as written (draft): |moving - never moved| per column <= 0.06",
+   "expect": "fail",
+   "observed": "fail",
+   "as_expected": true,
+   "values": {
+    "worst_column": 0.3617,
+    "mean_column": 0.1126
+   }
+  },
+  {
+   "case": "C7a (draft): signed bias toward the white occluder per column <= 0.01",
+   "expect": "fail",
+   "observed": "fail",
+   "as_expected": true,
+   "values": {
+    "worst_signed_bias": 0.3617
+   }
+  },
+  {
+   "case": "C7 as written (corrected): |moving - never moved| per column <= 0.06",
+   "expect": "fail",
+   "observed": "fail",
+   "as_expected": true,
+   "values": {
+    "worst_column": 0.0918,
+    "mean_column": 0.0474
+   }
+  },
+  {
+   "case": "C7a (corrected): signed bias toward the white occluder per column <= 0.01",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "worst_signed_bias": 0.0
+   }
+  },
+  {
+   "case": "C7b (corrected): equals a never-moved floor reset at the same pixels and frames",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "worst_pixel": 0.0,
+    "dropped_pixel_frames": 255
+   }
+  },
+  {
+   "case": "C7c reference: a current-frame-only floor vs the converged floor",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "mean_difference": 0.1788
+   }
+  },
+  {
+   "case": "C7d (corrected): disocclusion residue converges below 0.06 within 6 frames",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "frames_since_vacated_5": 0.0277,
+    "frames_since_vacated_6": 0.0263,
+    "frames_since_vacated_7": 0.0086,
+    "frames_since_vacated_8": 0.0171
+   }
+  },
+  {
+   "case": "F7 wider kernel for fresh history: C7 as written still fails",
+   "expect": "fail",
+   "observed": "fail",
+   "as_expected": true,
+   "values": {
+    "worst_column": 0.0918,
+    "mean_column": 0.0474
+   }
+  },
+  {
+   "case": "C14 corrected: start-move-stop over texture",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "worst_column": 0.0189
+   }
+  },
+  {
+   "case": "C15 corrected: occluder passes over floor and wire",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "wire_presence_max": 0.4177,
+    "wire_presence_min": 0.2061,
+    "wire_presence_reference_min": 0.3118,
+    "floor_worst_column": 0.0251
+   }
+  },
+  {
+   "case": "C16 corrected: camera pan then hold",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "floor_worst_column": 0.0149,
+    "floor_activity_codes": 2.9874,
+    "persisted": 31744,
+    "moving": 4605
+   }
+  },
+  {
+   "case": "C17 (draft): partial-coverage band over black",
+   "expect": "fail",
+   "observed": "fail",
+   "as_expected": true,
+   "values": {
+    "max_residual": 0.9362
+   }
+  },
+  {
+   "case": "C17 (corrected): partial-coverage band over black",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "max_residual": 0.0
+   }
+  },
+  {
+   "case": "C17 (draft): partial-coverage band over clear",
+   "expect": "fail",
+   "observed": "fail",
+   "as_expected": true,
+   "values": {
+    "max_residual": 0.0595
+   }
+  },
+  {
+   "case": "C17 (corrected): partial-coverage band over clear",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "max_residual": 0.0
+   }
+  },
+  {
+   "case": "C19 corrected: triple junction after a passing bar",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "max_residual": 0.014,
+    "overflow_pixel_frames": 213
+   }
+  },
+  {
+   "case": "C5 (draft): static wires over clear present in every phase",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "wire_1_6_min": 0.7496,
+    "wire_0_8_min": 0.3322,
+    "wire_0_8_max": 0.3744
+   }
+  },
+  {
+   "case": "C5 (corrected): static wires over clear present in every phase",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "wire_1_6_min": 0.7496,
+    "wire_0_8_min": 0.3322,
+    "wire_0_8_max": 0.3744
+   }
+  },
+  {
+   "case": "C5 (draft): static wires over floor present in every phase",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "wire_1_6_min": 0.7559,
+    "wire_0_8_min": 0.3907,
+    "wire_0_8_max": 0.4276
+   }
+  },
+  {
+   "case": "C5 (corrected): static wires over floor present in every phase",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "wire_1_6_min": 0.7559,
+    "wire_0_8_min": 0.3907,
+    "wire_0_8_max": 0.4276
+   }
+  },
+  {
+   "case": "V5 limit: 0.4 px wire between 8/16 sub-rows gets no sample",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "sub_row_offsets": "[0.25, 0.75, 1.25, 1.75]",
+    "max_presence": 0.0
+   }
+  },
+  {
+   "case": "C3 corrected: static lines1 at 8/16",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "contrast_fraction": 0.3824,
+    "activity_codes": 1.0465,
+    "activity_535003d7_codes": 0.0
+   }
+  },
+  {
+   "case": "C3 corrected: static checker2 at 8/16",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "contrast_fraction": 0.4775,
+    "activity_codes": 2.5493,
+    "activity_535003d7_codes": 1.6946
+   }
+  },
+  {
+   "case": "C3 corrected: static checker4 at 8/16",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "contrast_fraction": 0.7383,
+    "activity_codes": 2.3294,
+    "activity_535003d7_codes": 2.1078
+   }
+  },
+  {
+   "case": "F3 flat W cap 9: static checker2 shimmer at 8/16",
+   "expect": "fail",
+   "observed": "fail",
+   "as_expected": true,
+   "values": {
+    "activity_codes": 9.0774,
+    "activity_535003d7_codes": 1.6946
+   }
+  },
+  {
+   "case": "F4 bias with per-frame clamp (D1): 1-texel lines flicker",
+   "expect": "fail",
+   "observed": "fail",
+   "as_expected": true,
+   "values": {
+    "linear_activity": 0.5
+   }
+  },
+  {
+   "case": "F8 current/history colour ratio cannot separate a 0.2 shadow from aliasing",
+   "expect": "fail",
+   "observed": "fail",
+   "as_expected": true,
+   "values": {
+    "p05": 0.0607,
+    "p95": 2.87,
+    "samples": 4608
+   }
+  },
+  {
+   "case": "C8 corrected, exact PCF key: moving shadow lag",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "signed_lag": 0.0189,
+    "key_resets": 2816
+   }
+  },
+  {
+   "case": "F5 no shading key: moving shadow lags",
+   "expect": "fail",
+   "observed": "fail",
+   "as_expected": true,
+   "values": {
+    "signed_lag": 0.1439
+   }
+  },
+  {
+   "case": "K1 gather 2x2 key",
+   "expect": "fail",
+   "observed": "fail",
+   "as_expected": true,
+   "values": {
+    "signed_lag": 0.0395,
+    "key_resets": 1888
+   }
+  },
+  {
+   "case": "K2 gated exact key equals the ungated key",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "worst_difference": 0.0,
+    "ungated_evaluations": 25600,
+    "gated_evaluations": 4608
+   }
+  },
+  {
+   "case": "R1 reset value after a key change (reported)",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "lag_at_0.25": 0.0309,
+    "abs_at_0.25": 0.0604,
+    "lag_at_0.125": 0.0189,
+    "abs_at_0.125": 0.0641,
+    "lag_at_0.0": -0.0083,
+    "abs_at_0.0": 0.0932
+   }
+  },
+  {
+   "case": "C6 corrected: light change with frame-global suspension",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "signed_lag_second_frame": 0.0058
+   }
+  },
+  {
+   "case": "F9 light change without the frame-global flag lags",
+   "expect": "fail",
+   "observed": "fail",
+   "as_expected": true,
+   "values": {
+    "signed_lag_second_frame": 0.2312
+   }
+  },
+  {
+   "case": "C9 corrected: 4/16 -> 16/16 recovery",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "third_frame": 0.6833,
+    "fourth_frame": 0.8691,
+    "third_vs_frame_39": 0.7412,
+    "fourth_vs_frame_39": 0.9428
+   }
+  },
+  {
+   "case": "F6 no confidence rescale: slow 4/16 -> 16/16",
+   "expect": "fail",
+   "observed": "fail",
+   "as_expected": true,
+   "values": {
+    "third_frame": 0.2347,
+    "fourth_frame": 0.372,
+    "third_vs_frame_39": 0.3999,
+    "fourth_vs_frame_39": 0.6337
+   }
+  },
+  {
+   "case": "C9 corrected: 12/16 -> 4/16 retention",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "first_frame_kept": 0.9565
+   }
+  },
+  {
+   "case": "C10 corrected: cut restarts bit-identically",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {}
+  },
+  {
+   "case": "C2 interior cycle mass within [7.9, 8.1] for n = 4..16",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "minimum": 7.9274,
+    "maximum": 8.0729
+   }
+  },
+  {
+   "case": "C21 fractional viewport: outside zero, finite, interior mass in bound",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "interior_min": 7.998,
+    "interior_max": 7.998,
+    "edge_min": 0.0018,
+    "edge_max": 7.998
+   }
+  }
+ ],
+ "new_cases": [
+  {
+   "case": "N1 (7b3dc64c scalar key): two-light visibility swap at a fixed receiver",
+   "expect": "fail",
+   "observed": "fail",
+   "as_expected": true,
+   "values": {
+    "lag_first": 0.3783,
+    "lag_second": 0.3571,
+    "lag_fourth": 0.32
+   }
+  },
+  {
+   "case": "N1 (addendum-2 caster footprints): two-light visibility swap at a fixed receiver",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "lag_first": 0.0173,
+    "lag_second": 0.0044,
+    "lag_fourth": 0.0016
+   }
+  },
+  {
+   "case": "N1 (alternative per-light signature): two-light visibility swap at a fixed receiver",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "lag_first": 0.0173,
+    "lag_second": 0.0044,
+    "lag_fourth": 0.0016
+   }
+  },
+  {
+   "case": "N2 (7b3dc64c screen-static): zero-motion camera orbit",
+   "expect": "fail",
+   "observed": "fail",
+   "as_expected": true,
+   "values": {
+    "error_first": 0.1064,
+    "error_second": 0.1532,
+    "error_last": 0.4209,
+    "static_camera_reference_error": 0.1427,
+    "persisted_while_camera_changed": 6144,
+    "shading_tests_while_camera_changed": 6144,
+    "camera_blocked": 0
+   }
+  },
+  {
+   "case": "N2 (addendum-2 camera ownership): zero-motion camera orbit",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "error_first": 0.0857,
+    "error_second": 0.0728,
+    "error_last": 0.0001,
+    "static_camera_reference_error": 0.1427,
+    "persisted_while_camera_changed": 0,
+    "shading_tests_while_camera_changed": 0,
+    "camera_blocked": 6144
+   }
+  },
+  {
+   "case": "N3 (7b3dc64c screen-static): zero-motion camera dolly",
+   "expect": "fail",
+   "observed": "fail",
+   "as_expected": true,
+   "values": {
+    "error_first": 0.1188,
+    "error_second": 0.1113,
+    "error_last": 0.1362,
+    "static_camera_reference_error": 0.1427,
+    "persisted_while_camera_changed": 3072,
+    "shading_tests_while_camera_changed": 3072,
+    "camera_blocked": 0
+   }
+  },
+  {
+   "case": "N3 (addendum-2 camera ownership): zero-motion camera dolly",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "error_first": 0.1071,
+    "error_second": 0.0821,
+    "error_last": 0.0914,
+    "static_camera_reference_error": 0.1427,
+    "persisted_while_camera_changed": 0,
+    "shading_tests_while_camera_changed": 0,
+    "camera_blocked": 3072
+   }
+  },
+  {
+   "case": "F10 dolly admission by current depth rejects valid history",
+   "expect": "fail",
+   "observed": "fail",
+   "as_expected": true,
+   "values": {
+    "error_current_depth_admission": 0.261,
+    "error_previous_depth_admission": 0.0914
+   }
+  },
+  {
+   "case": "N4 (7b3dc64c front-owner drop): coplanar panel leaves a textured wall",
+   "expect": "fail",
+   "observed": "fail",
+   "as_expected": true,
+   "values": {
+    "worst_matched_reset_residual": 0.6912,
+    "worst_signed_bias": 0.1637,
+    "columns": 12,
+    "dropped": 0
+   }
+  },
+  {
+   "case": "N4 (addendum-2 any-owner drop): coplanar panel leaves a textured wall",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "worst_matched_reset_residual": 0.0,
+    "worst_signed_bias": 0.0101,
+    "columns": 12,
+    "dropped": 314
+   }
+  },
+  {
+   "case": "N5 (7b3dc64c stored owners only): nearer owner enters and stops; no stale background",
+   "expect": "fail",
+   "observed": "fail",
+   "as_expected": true,
+   "values": {
+    "worst_residual": 0.2923
+   }
+  },
+  {
+   "case": "N5 (addendum-2 every involved owner): nearer owner enters and stops; no stale background",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "worst_residual": 0.0313
+   }
+  },
+  {
+   "case": "N5 (7b3dc64c stored owners only): same-depth owner enters and stops; no stale background",
+   "expect": "fail",
+   "observed": "fail",
+   "as_expected": true,
+   "values": {
+    "worst_residual": 0.2923
+   }
+  },
+  {
+   "case": "N5 (addendum-2 every involved owner): same-depth owner enters and stops; no stale background",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "worst_residual": 0.0313
+   }
+  },
+  {
+   "case": "N6 (7b3dc64c depth admission): a tolerance-close static wall behaves like a separated one",
+   "expect": "fail",
+   "observed": "fail",
+   "as_expected": true,
+   "values": {
+    "worst_difference": 0.7147,
+    "differing_pixel_frames": 4451
+   }
+  },
+  {
+   "case": "N6 (depth-only admission): a tolerance-close static wall behaves like a separated one",
+   "expect": "fail",
+   "observed": "fail",
+   "as_expected": true,
+   "values": {
+    "worst_difference": 0.4993,
+    "differing_pixel_frames": 195
+   }
+  },
+  {
+   "case": "N6 (addendum-2 identity admission): a tolerance-close static wall behaves like a separated one",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "worst_difference": 0.0,
+    "differing_pixel_frames": 0
+   }
+  },
+  {
+   "case": "P1 provenance on crossing owners, with and without (reported)",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "clear_8of16_worst_with": 0.3493,
+    "clear_8of16_worst_without": 0.3493,
+    "clear_8of16_stops_lower_with": 2,
+    "clear_8of16_stops_lower_without": 0,
+    "clear_16of16_worst_with": 0.2212,
+    "clear_16of16_worst_without": 0.2212,
+    "clear_16of16_stops_lower_with": 1,
+    "clear_16of16_stops_lower_without": 0,
+    "grey_8of16_worst_with": 0.2962,
+    "grey_8of16_worst_without": 0.2962,
+    "grey_8of16_stops_lower_with": 1,
+    "grey_8of16_stops_lower_without": 2,
+    "grey_16of16_worst_with": 0.0626,
+    "grey_16of16_worst_without": 0.0626,
+    "grey_16of16_stops_lower_with": 0,
+    "grey_16of16_stops_lower_without": 0,
+    "other_scene_runs": 33,
+    "other_scene_runs_changed": 0
+   }
+  },
+  {
+   "case": "K3 moving shadow: caster-footprint lag <= 0.03 (signature alternative reported)",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "rect_lag": 0.018,
+    "rect_shadow_interior_error": 0.0391,
+    "rect_invalidations": 4224,
+    "signature_lag": 0.0189,
+    "signature_shadow_interior_error": 0.0205,
+    "signature_evaluations": 4608
+   }
+  },
+  {
+   "case": "Q1 signature code: never below 15/255, always from 17/255",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "grid_pairs": 1042441,
+    "triggers_below": 0,
+    "misses_from": 0,
+    "band_pairs": 16206,
+    "band_triggered": 11824,
+    "pcf_level_pairs": 5329,
+    "pcf_level_extra_vs_one_sixteenth": 118,
+    "pcf_level_missed_vs_one_sixteenth": 0
+   }
+  },
+  {
+   "case": "C9 as written (e1b26907): >= 0.75 by the third 16/16 frame and >= 0.90 by the fourth",
+   "expect": "fail",
+   "observed": "fail",
+   "as_expected": true,
+   "values": {
+    "third_frame": 0.6833,
+    "fourth_frame": 0.8691,
+    "third_vs_frame_39": 0.7412,
+    "fourth_vs_frame_39": 0.9428
+   }
+  }
+ ],
+ "unexpected": []
+}
