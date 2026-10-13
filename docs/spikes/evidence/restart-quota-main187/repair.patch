@@ -1,0 +1,68 @@
+diff --git a/crates/incant_script/src/restart_request_tests.rs b/crates/incant_script/src/restart_request_tests.rs
+index f97510bb..7be4ed4e 100644
+--- a/crates/incant_script/src/restart_request_tests.rs
++++ b/crates/incant_script/src/restart_request_tests.rs
+@@ -57,13 +57,56 @@ fn accepted_restart_coalesces_and_expired_function_cannot_request_again() {
+ }
+ #[test]
+ fn restart_calls_share_structural_quota_including_caught_overflow() {
+-    let mut host=ScriptHost::new(code(&format!("for(let i=0;i<{};i++)commands.requestRestart();try{{commands.requestRestart()}}catch(_){{}}",incant_runtime::MAX_FRAME_COMMANDS))).unwrap();
+-    host.enable_restart_requests().unwrap();
+-    assert!(matches!(
+-        host.tick(&mut world(), 0.1),
+-        Err(ScriptError::InputLimit)
+-    ));
+-    assert!(host.take_session_request().is_err());
++    for queued in [0, 1] {
++        for overflow in [false, true] {
++            let prefix = if queued == 1 {
++                "commands.setVelocity('00000000000000000000000001',[3,0,0]);"
++            } else {
++                ""
++            };
++            let suffix = if overflow {
++                "try {commands.requestRestart()} catch (_) {}"
++            } else {
++                ""
++            };
++            // Exercise the structural quota independently of the default CPU
++            // deadline, as the other full-buffer command tests do.
++            let mut host = ScriptHost::with_budget(
++                code(&format!(
++                    "chunks[0].transforms[0]=77;{prefix}for(let i=0;i<{};i++)commands.requestRestart();{suffix}",
++                    incant_runtime::MAX_FRAME_COMMANDS - queued
++                )),
++                Duration::from_secs(5),
++            )
++            .unwrap();
++            host.enable_restart_requests().unwrap();
++            let mut world = world();
++            let before = world.snapshot();
++            let result = host.tick(&mut world, 0.1);
++            if overflow {
++                assert!(matches!(result, Err(ScriptError::InputLimit)), "{result:?}");
++                assert_eq!(world.snapshot(), before);
++                assert!(matches!(
++                    host.take_session_request(),
++                    Err(ScriptError::FailedSession)
++                ));
++            } else {
++                result.unwrap();
++                assert_eq!(world.inspect(id(1)).unwrap().transform.translation[0], 77.);
++                if queued == 1 {
++                    assert_eq!(
++                        world.inspect(id(1)).unwrap().velocity.unwrap().linear[0],
++                        3.
++                    );
++                }
++                assert_eq!(
++                    host.take_session_request().unwrap(),
++                    Some(SessionRequest::Restart)
++                );
++                assert_eq!(host.take_session_request().unwrap(), None);
++            }
++        }
++    }
+ }
+ 
+ #[test]
