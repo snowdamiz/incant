@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "decision": "accepted scoped source correction, no findings",
+  "reviewer": "astra /root/runtime_review",
+  "checkout": "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant",
+  "head": "946f42dccafae269214a4ba51d49f4f9dfa37e33",
+  "path": "crates/incant_render/tests/lighting_gpu/extended.rs",
+  "sha256": "80d33a7796d4b923d4dd8dd85165ef9f6409603bdf1b284e43643759d72b09a9",
+  "diff_sha256": "9974824f524155556ffbdb56e7ba877428a01017f71a3494eddd6ec04c3c7ca1",
+  "checks": [
+    "Read complete diff and fixture/plan/retained consumers",
+    "Standard cooked glTF fixture produces two model owners; returned SceneInput retains Arc asset data after temporary source directory/assets drop",
+    "CPU resolve asserts two models, positive primitive count and unchanged 2 directional+33 local light cardinality",
+    "Only point/spot transforms change; camera/directional/model transforms stay fixed",
+    "Retained submit now cannot take model-free early return; existing raw count/mask and cache identity assertions remain",
+    "Actual adapter logged from executing renderer"
+  ],
+  "executed": "No builds, tests, GPU, native windows or images. Source only; original empty-model retained result must not be counted as successful motion coverage.",
+  "limitations": [
+    "Pending actual CPU fixture test and both baseline/cooked numerical GPU execution",
+    "Does not establish raster appearance/performance or exact shader parity by itself"
+  ]
+}

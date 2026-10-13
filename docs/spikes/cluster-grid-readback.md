@@ -3,7 +3,7 @@
 This adds only `cfg(test)` numeric observation requested by the 0066 cooked
 cluster handoff. Production renderer, shaders, resource layouts and feature
 admission are unchanged. Actual GPU execution of this extension is pending a
-coordinated Claude run; CPU compilation is not GPU or appearance acceptance.
+coordinated numerical GPU run; CPU compilation is not GPU or appearance acceptance.
 
 The observer clones the already prepared grid from the lighting cache, queues a
 counts/masks copy after the caller's submission, waits with bounded poll/map
@@ -28,8 +28,9 @@ prints 84 distinct `cluster-readback` records.
 
 Every record validates count equals mask popcount and rejects bits beyond the
 local-light count. Hashes cover explicit little-endian raw count/mask words.
-The two CPU tests exercise valid mask boundaries and malformed count, tail-bit
-and length refusal. No pixels, screenshots, image decoding or performance
+Two CPU tests exercise valid mask boundaries and malformed count, tail-bit
+and length refusal. A third resolves actual cooked model geometry and light
+bindings after the temporary authoring sources have been dropped. No pixels, screenshots, image decoding or performance
 measurements are involved.
 
 ## Coordinated GPU follow-up
@@ -55,16 +56,27 @@ results remain separate and do not count as execution of this new test.
 
 ## Local verification
 
-The two CPU invariant cases pass in both default and `cooked-clusters` builds;
-these are the same cases in two configurations, not four distinct tests.
-Both complete ignored GPU test bodies compile. All-target Clippy passes with
-warnings denied in both configurations. Scoped rustfmt, conventions and diff
-checks pass. The source stayed byte-identical through all seven commands.
+The original source001 fixture contained only lights and a camera. Independent
+pre-execution review found that the retained renderer skips clustered compute
+when there are no model draws. That fixture could observe an older grid rather
+than test submitted light changes. No GPU execution had occurred. The original
+CPU evidence is preserved in the [historical manifest](evidence/cluster-grid-readback-source001.json), and its source acceptance is superseded for this case.
 
-The [manifest](evidence/cluster-grid-readback.json) binds the three source inputs,
-seven command receipts/logs and two compiled test binary identities. Lossless
-logs and source copies are retained; large binaries remain outside the repository
-in the private target and are identified by hash. Original evidence is under
-`~/.codex/incant-evidence/cluster-grid-readback-001`. Independent [source review](evidence/cluster-grid-readback-source-review.json)
-accepted the frozen source and CPU evidence. Actual GPU parity remains pending. No GPU command has been executed by this
-implementation lane.
+Source002 includes the existing cooked triangle fixture, keeps its immutable
+model bindings after source removal, asserts nonzero prepared primitive instances,
+and moves only point/spot lights. A new CPU regression resolves this geometry
+without creating a GPU device. Actual adapter information is printed by the
+future GPU execution, not inferred from the machine name.
+
+All three CPU cases pass in both default and cooked-cluster configurations;
+four GPU tests remain explicitly ignored in each filtered run. Both complete
+GPU test bodies compile. All-target Clippy passes in both configurations;
+scoped rustfmt, conventions and diff checks also pass. These are seven successful
+commands over 1,119 frozen engine/build files. Neither configuration has run the
+new GPU test. Cooked-clusters also enables its existing cooked-output dependency.
+
+The [current manifest](evidence/cluster-grid-readback.json) binds the source,
+all terminal logs/receipts and two binaries copied outside the reusable build
+target. A lossless archive retains the full freeze, repair and logs.
+[Independent source review](evidence/cluster-grid-readback-002/source-review.json)
+accepted the corrected fixture. Actual 84-record GPU parity remains pending.
