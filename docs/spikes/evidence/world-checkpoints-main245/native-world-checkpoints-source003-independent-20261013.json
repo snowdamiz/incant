@@ -1,0 +1,160 @@
+{
+  "scope": "Independent narrow source003 review closing R3 and restoring public legacy error precedence; no reviewer builds, edits or GPU",
+  "status": "accepted_source_only_no_remaining_findings",
+  "freeze": "/Users/andreyyurlov/.codex/incant-evidence/native-world-checkpoints-001/freeze-003.json",
+  "freeze_sha256": "75e1a1b8c4c73b3ffb3492110e3c7fc004987f353bb9260ecf90d3ec7b108002",
+  "reviewed_inputs": [
+    {
+      "path": "Cargo.lock",
+      "sha256": "566663fdac00502620a84e9055b3fba04c5a812f12217627deff9f6f08b7ac72"
+    },
+    {
+      "path": "crates/incant_runtime/Cargo.toml",
+      "sha256": "57eebd5ba55887059dc8fcb4b12dfdc10d5b09afc4bb94d403b1869842521cb9"
+    },
+    {
+      "path": "crates/incant_runtime/src/lib.rs",
+      "sha256": "0854cbe1415f1032a6539802a6d171887389e208ab402c1c765eb38937bc039c"
+    },
+    {
+      "path": "crates/incant_runtime/src/save.rs",
+      "sha256": "e7d4b3df3c5e2e855f7d858a8d0451309ea7837abe126d69e574befb55e60b81"
+    },
+    {
+      "path": "crates/incant_runtime/src/save/checkpoint.rs",
+      "sha256": "36b898ec71b266541e3cf0151828a731c48350f377ade36d827d78d9320ae984"
+    },
+    {
+      "path": "crates/incant_runtime/src/save/checkpoint/validation.rs",
+      "sha256": "285cef2297087cbd9155d883ab047b385b3d921f0813d29f20d88267c515cba7"
+    },
+    {
+      "path": "crates/incant_runtime/src/save/checkpoint/tests.rs",
+      "sha256": "35fcb4fad673efe004cc82a76d73afb98d1ae06f71d6126757c485d864318589"
+    },
+    {
+      "path": "crates/incant_runtime/src/world.rs",
+      "sha256": "4a1f944dda004e239602fb10fd7e4e32afc79dfbad23760642eadfc9dfd7ccc4"
+    },
+    {
+      "path": "crates/incant_runtime/src/world_identity.rs",
+      "sha256": "7ffc1f183c00110cc06f48f678b07f220d6bad73ed3e62690db142c0df23a809"
+    },
+    {
+      "path": "crates/incant_runtime/src/scene.rs",
+      "sha256": "6a214ecc17922f6097c2ce3d693c0be7ada42b6f9f568fcac578da8f89727a62"
+    },
+    {
+      "path": "crates/incant_runtime/src/commands.rs",
+      "sha256": "c85cef7899206542eac66b00e5f3bdfc478e93e3ec7102c86b19addc3f9f64fb"
+    },
+    {
+      "path": "crates/incant_runtime/src/columns.rs",
+      "sha256": "80a615d853fea52e86cc58e634dfad7b2e371d944f840b91ebc888fa23718c66"
+    },
+    {
+      "path": "crates/incant_runtime/src/physics.rs",
+      "sha256": "ba1f98eddeef3becebe82831ea45cf6de4f7462e8e24ca422e4e68f7152a397f"
+    },
+    {
+      "path": "crates/incant_runtime/src/physics_2d.rs",
+      "sha256": "3f3563e72e81d05a70d104291dddcc0d9e1355070ea8eb01f67581d319d8c3ac"
+    },
+    {
+      "path": "crates/incant_runtime/src/physics_binary.rs",
+      "sha256": "39b766313db1d0d0487e90e419cc777e18d7062a556b237608ed03c93c65e822"
+    },
+    {
+      "path": "crates/incant_runtime/src/physics_2d_binary.rs",
+      "sha256": "481bb0071e06690491d512c76cffde7efe85cc6bc4a87699fd0c4a155f865e2b"
+    },
+    {
+      "path": "crates/incant_runtime/src/navigation_runtime.rs",
+      "sha256": "9945df566a125c0216d8a55635eade907f49943df7454eb5a3a6c40e3a1544ee"
+    },
+    {
+      "path": "crates/incant_runtime/src/save/codec.rs",
+      "sha256": "89c7b7b3d7254db8542719cd417ac32ed9948eb1899204f4e49b52db89e9bcf9"
+    },
+    {
+      "path": "crates/incant_physics_runtime/src/checkpoint.rs",
+      "sha256": "eec3f92fa2a1dbfb026f5d8ed7401ae9bd577db82a4cbf78aea86ac8e8d1d144"
+    },
+    {
+      "path": "crates/incant_physics_2d_runtime/src/checkpoint.rs",
+      "sha256": "bffb719bddc6208eaf3bf9dd2e3cae513e8f6cb3d81724f4a6fdb415bf672572"
+    },
+    {
+      "path": "crates/incant_physics_2d_runtime/src/checkpoint_validation.rs",
+      "sha256": "167b86b50f88106d09b2152706b5d6f5298539419e7b94bc7336f8fe99acad2e"
+    },
+    {
+      "path": "crates/incant_physics_2d_runtime/src/lib.rs",
+      "sha256": "c098ff861d12bedc7bc7f5dee18ae3a43b2bd4f738626f43af9120d07fef17c9"
+    },
+    {
+      "path": "crates/incant_physics_2d_runtime/src/native_owner.rs",
+      "sha256": "4c0bc2ea6fe119797fb0b4e5151b5427a6d858ed850722a410ab1a5b998368f5"
+    },
+    {
+      "path": "third_party/rapier2d/src/geometry/broad_phase_bvh/update.rs",
+      "sha256": "62fa0c4c5a959cb32dc8ddd5416174b0135de9c9d3199dd3ad0bdcb3eb924fec"
+    },
+    {
+      "path": "third_party/rapier2d/src/pipeline/physics_pipeline/substep.rs",
+      "sha256": "c8afc37889439dcb59ffaaae0f0cd040c652b76b32af1452ef5e156b805e7447"
+    },
+    {
+      "path": "third_party/rapier2d/src/pipeline/physics_pipeline/solve.rs",
+      "sha256": "27a362665ab370375aaa15fc9494bc3aefe2ebf0690e44e238f7aca83ab4d69c"
+    },
+    {
+      "path": "third_party/rapier2d/src/pipeline/physics_pipeline/mod.rs",
+      "sha256": "a7c328cca1c5c3b27d899219de8080e2b8280f20a297a7c62966d04b9a18ef25"
+    },
+    {
+      "path": "third_party/rapier2d/src/pipeline/physics_world.rs",
+      "sha256": "6cf5f8ba115e355ebbf615b20e392a0a8220ed6af38dfc5a2ddfc878c5d431de"
+    }
+  ],
+  "delta_from_source002": [
+    "crates/incant_runtime/src/save/checkpoint/tests.rs",
+    "crates/incant_runtime/src/save/checkpoint.rs",
+    "crates/incant_runtime/src/save.rs",
+    "crates/incant_runtime/src/world.rs"
+  ],
+  "delta_copies": "/Users/andreyyurlov/.codex/incant-reviews/native-world-checkpoints-source003-copies-20261013",
+  "prior_reviews": [
+    {
+      "source001_sha256": "f87cf0427e8f6297e432e3170bf00b930f4c281332f33c8eb9b1f5e19c96a9d5"
+    },
+    {
+      "source002_sha256": "12074135f57811ad0c06706c6bd08bc7928d306fd47a5a49f7df59ff32f407ce"
+    }
+  ],
+  "closures": [
+    {
+      "id": "R1",
+      "status": "remains_closed",
+      "basis": "Hydration retains actual supplied owner tuple and skips ordinary native preparation, install and apply. Source002 logic unchanged."
+    },
+    {
+      "id": "R2",
+      "status": "remains_closed",
+      "basis": "Capture retains both stepped native owners separately from dimension declaration flags. Source002 logic unchanged."
+    },
+    {
+      "id": "R3",
+      "status": "closed_at_source",
+      "basis": "physics_used and physics_2d_used restore exactly and alone retain original simulation stepping behavior. In-place restore only ORs destination physics history into physics_save_required, which is captured/reconstructed separately and checked by public save admission. Normal initialization leaves it false.",
+      "observable": "New rewind regression captures a never-physics world, uses planar physics, rewinds, checks byte-save refusal, compares eight empty ticks against fresh reconstruction, requires both empty native owners to refuse completed capture, checks recaptured sticky refusal and performs first planar insertion plus32pairedticks."
+    }
+  ],
+  "legacy_admission": "The owners=None branch checks physics after the original localization/origin-text/navigation/spatial legacy checks and before audio/UI checks, restoring the previous public error precedence. Only private caller supplying actual reconstructed owner tuple skips this physics gate.",
+  "execution": "Source003 full qualification is parent-owned and was running at review time; no broad pass or final packet acceptance claimed here. Historical source001 compile failure and source002 legacy-navigation failure remain distinct from the passing nine focused source002 tests.",
+  "limitations": [
+    "Opaque in-memory NativeWorld checkpoint only. No caller bytes -> checkpoint constructor, VM heap restoration or public physics-save support.",
+    "Physics budgets exclude existing ECS serialization/derived ECS allocation per documented scope.",
+    "Complete native/outer source contracts rely on the separately accepted independent reviews."
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "format": "incant-native-world-producer-independent-audit",
+  "reviewed_at": "2026-10-13T20:19:38.957741+00:00",
+  "producer": "5f25c7dd54c7597bd5195fb3e1454e266155b777",
+  "manifest_sha256": "3b56115a4377bef4bb76076963c52bab1e3a2ad52b874a167669f3faff9b3cf2",
+  "archive_sha256": "f86919529015ca0dfd0468be061feba2224487ce10fa74c22647e5f850fd6718",
+  "records": 342,
+  "original_bytes_all_equal": true,
+  "local_executables_verified": 142,
+  "source_rows": 3651,
+  "selected_graphs_exact": 3,
+  "read_verifier": true,
+  "verifier_local_binaries_exit": 0,
+  "findings": [],
+  "acceptance": "Scoped portable CPU evidence and current-main source/build-input composition accepted. No new test/GPU/device/performance or persisted-save admission claim."
+}
