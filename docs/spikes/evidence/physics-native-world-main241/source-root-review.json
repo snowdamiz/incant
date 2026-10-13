@@ -1,0 +1,17 @@
+{
+  "schema": "incant-integration-source-review-v1",
+  "at": "2026-10-13T18:35:46.158606+00:00",
+  "reviewer": "astra-root",
+  "decision": "accepted_for_scoped_qualification",
+  "head": "08377c173c5e89d0a9cd2c990bdc4fa3cd84cae6",
+  "main": "e281fe7456c7fbb85349e109fcdff3643c701256",
+  "producer": "ea4f6e80196f49e153248d22aed83d5412cae87b",
+  "freeze_sha256": "ce4bd2cd0fbc2aa5103513748766d31612c2af4599a37e9e796acd91fa3f2a28",
+  "exact_producer_files": 174,
+  "seam_sha256": "4b02924d1dd4baa84ff977e3287da6fa5d8ebfbafe2871e4b0e5dc7c80818192",
+  "findings": [
+    "All listed producer source inputs rehashed and compared with immutable producer git blobs.",
+    "Only known closure seam reorders error enum declarations; actual current-main file is preserved unchanged. No error wire representation or mutation semantics change.",
+    "Qualify current composition in both numerical modes; producer scope remains private and public saves stay refused."
+  ]
+}

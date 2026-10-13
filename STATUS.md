@@ -2,7 +2,7 @@
 
 Standalone 3D physics now hides incomplete state and trigger observations after a late step error or caught unwind, and cannot be revived through structural calls. Invalid time steps remain retryable. Independent source and final producer reviews are accepted. Both producer modes, strict Clippy, native consumers and wasm compilation pass; the exact current-main239 composition additionally passes all eight default runtime cases and six checks. Final current-main review is accepted; PR240 merged after its required exact-head fast check. This does not implement rollback or physics saves. [Evidence](docs/spikes/physics-failure-isolation.md).
 
-Checkpoint26 remains frozen and failed on the Windows Dx12 SSAO filter. Exact-main239 observations proved fractional raster coverage left clear values at accepted edge pixels; full-target rasterization removed all mismatches. The reviewed production repair uses a conservative integer scissor and preserves shaders, geometry projection and strict intervals. Local CPU/Clippy/wasm checks pass; actual strict Dx12 validation of the repaired helper remains pending. [Repair evidence](docs/spikes/ssao-raster-coverage.md).
+Checkpoint26 finished unpromoted with 22 required checks successful and its original Windows Dx12 SSAO filter failure retained. PR241 merged the reviewed full-target postprocess raster and conservative integer scissor, preserving shaders, geometry projection and strict intervals. Exact merged main241 then passed both original strict Dx12 projection contracts (570 R8 and 285 depth values each) and six observation submissions on Microsoft Basic Render Driver. Checkpoint27 now freezes that same reviewed main241 tree on PR232; all 23 required checks remain mandatory. No release promotion or appearance claim. [Portable Dx12 evidence](docs/spikes/evidence/ssao-strict-dx12-main241/manifest.json).
 
 Private primitive narrow-phase construction on main237 passed 227 snapshot and 45 native cases per mode, 312 decoded continuation steps per dimension/mode and all 29 checks. Source and final current-main evidence reviews are accepted; PR238 merged after its required exact-head fast check. Sixteen fast8 fixture substitutions are explicitly bound. Compound construction, complete native world installation and public physics saves stay closed. [Evidence](docs/spikes/physics-native-narrow-main237.md).
 
@@ -28,18 +28,21 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Private primitive world — source accepted, CPU qualification complete
+## Private primitive world — current-main qualification complete
 
-One checked frame/epoch binding and cumulative allocation permit now compose a
-complete private primitive Rapier candidate, with no trusted physical-owner
-clones. Deterministic and fast8 each pass 138 native and 227 snapshot cases;
-21 focused final controls per mode preserve exact events, generations, CCD
-history and the one explicitly refused wake boundary. Strict scoped Clippy,
-wasm, graph and tooling checks pass. Source002 is accepted; final evidence
-review is pending. Capture provenance is still supplied only by the exclusive
-native test harness. Outer stable-ID/ECS/event owners and public physics-save
-admission remain closed.
-[Scope and evidence](docs/spikes/physics-native-world-construction.md).
+One checked frame/epoch binding and cumulative allocation permit compose a
+complete private primitive Rapier candidate with no trusted physical-owner
+clones in its new world controls. On exact main241, deterministic and fast8 each
+pass 138 native and 227 snapshot cases and all 28 scoped checks. Four fresh
+captures per dimension/mode continue for 156 paired steps, plus 20 CCD steps;
+3D also checks 32 steps under each friction model. The wake-tick-7 refusal stays
+explicit. Current executable copies are retained immediately per mode.
+Producer and current-source reviews are accepted; final current-main evidence
+review and publication are pending. Capture provenance is supplied only by the
+exclusive native harness. Outer stable-ID/ECS/event owners and public
+physics-save admission remain closed. Historical source002 producer broad
+binaries were not retained; its original logs and four final003 focused binaries
+are preserved with that correction. [Current composition](docs/spikes/physics-native-world-main241.md).
 
 ## Consistent shadow receiver fitting — current-main qualification
 

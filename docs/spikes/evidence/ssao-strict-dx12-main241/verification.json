@@ -1,0 +1,69 @@
+{
+  "at": "2026-10-13T18:35:12.491982+00:00",
+  "head": "e281fe7456c7fbb85349e109fcdff3643c701256",
+  "run": 38446691046,
+  "result": "strict_contract_passed",
+  "adapter": "SSAO_FILTER_ADAPTER AdapterInfo { name: \"Microsoft Basic Render Driver\", vendor: 5140, device: 140, device_type: Cpu, device_pci_bus_id: \"\", driver: \"10.0.26100.33438\", driver_info: \"\", backend: Dx12, subgroup_min_size: 4, subgroup_max_size: 4, transient_saves_memory: false }",
+  "strict_markers": [
+    "SSAO_FILTER projection=perspective size=19x15 submits=1 render_passes=3 checked_depth=285 checked_r8=570 observed_r8=570 contract_asserted=true mode=Production h_sha256=53f12e69ae32fe6740dc73e98fa53870d01752432cdc3c22e521cdc90e80168e v_sha256=8f59d6cdc34d05699b75f09d1545d9b8a8110f001745a08d64b05ae079f23013",
+    "SSAO_FILTER projection=orthographic size=19x15 submits=1 render_passes=3 checked_depth=285 checked_r8=570 observed_r8=570 contract_asserted=true mode=Production h_sha256=53f12e69ae32fe6740dc73e98fa53870d01752432cdc3c22e521cdc90e80168e v_sha256=880656ddbb5aed7b97a86b35a609df0f376ceca2c0c4c61df7731612f9643371"
+  ],
+  "strict_submissions": 2,
+  "observations_submissions": 6,
+  "total_submissions": 8,
+  "total_render_passes": 24,
+  "images": 0,
+  "records": [
+    {
+      "path": "terminal-run.json",
+      "sha256": "0e3cc2301fcd2f93ed53351ab8307bc3083d03215a80b20f4636253173c2c9de",
+      "bytes": 2501
+    },
+    {
+      "path": "terminal-job.log",
+      "sha256": "0a613b2f38bee1245a7a34ea5545ebd1e02daa49c9f87ffa5b15f773a0ec52d3",
+      "bytes": 175749
+    },
+    {
+      "path": "dispatch.json",
+      "sha256": "546b838fa60d68831d5183619860266bf63b6ea681d56386ba2868da12ee368c",
+      "bytes": 263
+    },
+    {
+      "path": "run.json",
+      "sha256": "eb62cdc3bc047249b42401852bfeb325143174e7de75f0270ce2ee52fc19147a",
+      "bytes": 13467
+    },
+    {
+      "path": "artifacts/windows-filter-diagnostic/exit.txt",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "bytes": 3
+    },
+    {
+      "path": "artifacts/windows-filter-diagnostic/run.log",
+      "sha256": "b85455ded0b56c6757fbb1f7c191db51cbeef2c76c897932324a43fae23dddf0",
+      "bytes": 8055
+    },
+    {
+      "path": "artifacts/windows-filter-diagnostic/source.txt",
+      "sha256": "998f2e7837b6af1debd5a64a8575e79a5498b5d6bf9671348eccfc288900ffb7",
+      "bytes": 42
+    },
+    {
+      "path": "artifacts/windows-filter-diagnostic/strict-exit.txt",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "bytes": 3
+    },
+    {
+      "path": "artifacts/windows-filter-diagnostic/strict.log",
+      "sha256": "ae436a73e0ef574eadeea49955fe331ea8d08b9e30bb6f56c632cdaaf91e1278",
+      "bytes": 25551
+    },
+    {
+      "path": "artifacts/windows-filter-diagnostic/toolchain.txt",
+      "sha256": "10d838f8896732d1aee793e4694fa2678274fb4e37780fe8209bafe88cd3316d",
+      "bytes": 201
+    }
+  ],
+  "scope": "Actual strict original scalar/depth filter contract on hosted forced Dx12 at exact merged source. Historical observation modes retained separately. No appearance/performance/phone or release promotion claim; checkpoint26 remains failed."
+}
