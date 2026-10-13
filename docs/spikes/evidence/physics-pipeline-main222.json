@@ -506,5 +506,9 @@
     "counts_overlap_full_suites": true
   },
   "preliminary": "Initial explicit parallel-feature runs used the default Rayon pool. Those successful receipts remain, followed by focused pipeline_state/trusted_pipeline reruns with an explicit two-worker setting. No source changed.",
-  "final_review": "pending"
+  "final_review": {
+    "path": "docs/spikes/evidence/physics-pipeline-main222/final-review.json",
+    "sha256": "c3a6c280bf4a59ba35b2967365891bbeb3de7151622185219ba72ab2278bb44a",
+    "status": "accepted"
+  }
 }

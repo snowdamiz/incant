@@ -34,3 +34,5 @@ or unauthenticated phases. The trusted counterexample establishes a CCD cache an
 substep-counter difference, not trajectory divergence or complete pipeline-phase
 authentication. There is no live constructor, hostile restore admission, world-save
 enablement or device/performance/phase claim. `PhysicsUnsupported` stays closed.
+
+Root final review accepted the complete current-source packet (c3a6c280). The main223 ancestry join changes only broad-owner review documents and STATUS; the original executable freeze and all execution receipts remain exact. See `evidence/physics-pipeline-main222/main223-qualification.json`. No new execution is claimed for this documentation-only join.
