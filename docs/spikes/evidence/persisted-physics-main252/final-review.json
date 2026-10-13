@@ -1,0 +1,37 @@
+{
+  "schema": 1,
+  "reviewer": "astra-root",
+  "at": "2026-10-13T23:37:33.970802+00:00",
+  "verdict": "accepted scoped current-main composition",
+  "head": "f332c69ba413b7692f807ef8a01baa8354dda5da",
+  "manifest_sha256": "2e135fb0d3e23c4530e250de3eee40d13f280f13964c15fd2c56bd4b36816f68",
+  "independent_verification": {
+    "command": [
+      "python3",
+      "docs/spikes/evidence/persisted-physics-main252/verify.py",
+      "--verify-only",
+      "--originals",
+      "--local-binaries"
+    ],
+    "tool_session": 24230,
+    "exit": 0,
+    "reaped": true,
+    "source_inputs": 3745,
+    "exact_implementation_files": 93,
+    "exact_graphs": 3,
+    "retained_current_checks": 12
+  },
+  "reviewed": [
+    "Three unchanged-tree ancestry joins retain immutable producer objects without copying private unreviewed code.",
+    "All joined executed source/build inputs match except cfg(test) authoring isolation already accepted on main251.",
+    "Native/outer root-lock difference is the game-runtime edge to already locked sha2 0.10.9, executed in joined game suites; no resolution churn.",
+    "Collector portability patch normalizes archived absolute source and copy locations against recorded producer roots, while current Git access remains rooted in actual checkout; alternate-HOME success and initial failure preserved.",
+    "Native, outer and game producer final acceptances and original artifact/source/executable hashes replayed; overlapping counts remain attributed separately."
+  ],
+  "limits": [
+    "No new native execution attributed to this read-only current composition.",
+    "Default-off scoped persisted physics domain only; existing component saves retain physics refusal.",
+    "No phone, device audio, GPU-save, arbitrary Wasm heap, performance or phase gate approval.",
+    "Required exact-head development check and merge remain outstanding."
+  ]
+}

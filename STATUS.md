@@ -7,11 +7,12 @@ earlier ordinary-diagnostic, CCD-admission and missing-bundle setup failures are
 retained. The files bind current trusted code and catalogs, preserve supported
 2D/3D physics, explicit script state, UI and offline audio, and refuse unsupported
 domains. All three producer packets now have independent final acceptance;
-current-main252 composition review and its required fast check remain pending. This does not qualify device audio, shipped Wasm state, GPU saves,
+current-main252 composition review is independently accepted, with publication
+subject to its required exact-head fast check. This does not qualify device audio, shipped Wasm state, GPU saves,
 reference-phone performance or a phase gate.
 [Scope and evidence](docs/spikes/persisted-game-checkpoints.md).
 
-Private typed outer physics and world-v12 persisted candidates now pass 321 actual cases per numerical mode, including explicit large fresh-constructor capacity, plus mode/compiler, strict Clippy, wasm/default library and dependency guards. The original pending-motion BroadBounds rejection is retained and closes only with the reviewed native flag correction; outer fixtures are unchanged. Final producer evidence is independently accepted; the joined main252/session composition is being reviewed. Old component save physics admission stays closed. [Scope](docs/spikes/physics-persisted-outer.md).
+Private typed outer physics and world-v12 persisted candidates now pass 321 actual cases per numerical mode, including explicit large fresh-constructor capacity, plus mode/compiler, strict Clippy, wasm/default library and dependency guards. The original pending-motion BroadBounds rejection is retained and closes only with the reviewed native flag correction; outer fixtures are unchanged. Final producer evidence and the joined main252/session composition are independently accepted. Old component save physics admission stays closed. [Scope](docs/spikes/physics-persisted-outer.md).
 
 Compound and tile opaque checkpoints have accepted source reviews and passing CPU qualification: 538 snapshot/physics/ECS cases per numerical mode, followed by 238 script/game cases per mode on the actual-main250 composition. Native Parry and Rapier suites pass separately. Eighteen current checks pass; independent final union review is accepted. Current-main251 composition preserves 3,155 inputs except the reviewed authoring test, matches three graphs and passes eight read-only checks; independent final composition review is accepted and PR252 merged after its required exact-head fast SUCCESS. That opaque checkpoint scope left public persisted physics closed. [Scope](docs/spikes/native-compound-checkpoints.md).
 
@@ -290,9 +291,9 @@ unification also affects other cc build consumers in the selected host graph.
 Windows candidate execution and timing remain pending; no Windows speedup or
 performance gate is claimed. [Scope and evidence](docs/spikes/wasm-c-parallel.md).
 
-## Current overview — main252, 2026-10-13
+## Development and release overview — 2026-10-13
 
-Development main252 includes the reviewed opt-in cooked renderer families and
+The reviewed main252 baseline includes the opt-in cooked renderer families and
 Vulkan cache lifecycle, dynamic resolution, numerical retained motion, CPU/GPU
 profiling scopes and joined inert physics owner boundaries. Each lane retains its own
 execution and acceptance limits below; the complete engine and game remain open.
@@ -320,9 +321,11 @@ comparison. The reviewed isolated-lock and ordinary-owner Default repairs are
 merged in PR248. Checkpoint29 finished unpromoted with 22 required successes and the original Linux source-store lock failure. Checkpoint30 now freezes reviewed main252 (`c1988638`) at candidate `721eddac`, including the reviewed source-lock isolation from PR251, on the same PR232. All 23 exact-head required contexts must actually succeed; no previous success substitutes for them. Release remains `2a9d72ea`.
 PR242 merged the private primitive-world composition; PR244/245 added native
 capture and outer in-memory checkpoints, PR246 added opaque ECS/world ownership,
-and PR247 added headless native session checkpoints. These remain opt-in and
-process-local. Public persisted physics bytes remain refused; PR249 adds opt-in in-memory
-hosted UI/audio continuation and PR250 adds the complete typed game checkpoint. Each original execution generation retains its stated scope.
+and PR247 added headless native session checkpoints. PR249 adds opt-in in-memory
+hosted UI/audio continuation and PR250 adds the complete typed game checkpoint.
+This revision additionally composes the independently accepted default-off bounded
+persisted native world/session/player route; legacy component saves retain their
+physics refusal. Each original execution generation retains its stated scope.
 [Promotion evidence](docs/spikes/release-checkpoint-24.md).
 
 Checkpoint23 is terminal and unpromoted: 22 required contexts succeeded and its
