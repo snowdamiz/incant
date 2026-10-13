@@ -1,0 +1,23 @@
+{
+  "scope": "0064 material packet independent byte/provenance/numeric review; appearance exclusively Claude",
+  "reviewed_at": "2026-10-13T01:41:20.688373+00:00",
+  "manifest_sha256": "b6debd9aeec8154ba86c73fbc483ecc64c95fa4e7544e1c892304c23a4385c4c",
+  "retained_files": 150,
+  "external_files": 212,
+  "ledger_rows": 34,
+  "comparison_rows_including_dry": 40,
+  "control_rows_including_dry": 204,
+  "cross_variant_png_files_verified": 20,
+  "source_deleted_frame_reports_verified": 7,
+  "limits": [
+    "Appearance assessment by Claude only",
+    "Metal on Apple M5 Pro only",
+    "No Vulkan/DX12/phone/performance/default-enablement/phase-gate acceptance"
+  ],
+  "status": "accepted",
+  "head": "6eeef1ff4bf70e73e397210b365cb6171206b576",
+  "independent_source_files_verified": 33,
+  "helper_as_built_rustfmt_equivalence": true,
+  "prior_review_sha256": "ea5aba059dfa90669f273dbff593a8fc18f871ac129763b4f056d660ca61aaef",
+  "result_sha256": "8d5805c66cab5e26e49eab58fe2ad8099344babc78afa160f5823aefdd2cb301"
+}

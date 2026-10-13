@@ -83,7 +83,7 @@ fn fresh_pixels(renderer: &Renderer, input: &SceneInput) -> Vec<u8> {
 #[test]
 #[ignore = "requires a native GPU; run by desktop workflows"]
 fn retained_motion_matches_fresh_geometry_lights_camera_and_reflections_after_source_deletion() {
-    let renderer = Renderer::headless().unwrap();
+    let renderer = crate::test_support::checked(Renderer::headless().unwrap());
     let mut input = fixture();
     let mut retained = renderer.prepare_retained(&input, "camera").unwrap();
     let output = texture(&renderer, FORMAT, 160, 96);
@@ -116,7 +116,7 @@ fn retained_motion_matches_fresh_geometry_lights_camera_and_reflections_after_so
 #[test]
 #[ignore = "requires a native GPU; run by desktop workflows"]
 fn rejected_retained_frame_preserves_accepted_gpu_state_and_can_retry() {
-    let renderer = Renderer::headless().unwrap();
+    let renderer = crate::test_support::checked(Renderer::headless().unwrap());
     let mut input = fixture();
     let mut retained = renderer.prepare_retained(&input, "camera").unwrap();
     let output = texture(&renderer, FORMAT, 160, 96);
@@ -153,13 +153,13 @@ fn rejected_retained_frame_preserves_accepted_gpu_state_and_can_retry() {
     );
     retained.submit(&renderer, &input, target(&view)).unwrap();
     assert_eq!(read(&renderer, &output), fresh_pixels(&renderer, &input));
-    let other = Renderer::headless().unwrap();
+    let other = crate::test_support::checked(Renderer::headless().unwrap());
     assert!(retained.submit(&other, &input, target(&view)).is_err());
 }
 #[test]
 #[ignore = "requires a native GPU; run by desktop workflows"]
 fn motion_staging_reuses_reserved_slots_and_rejects_unsupported_bindings() {
-    let renderer = Renderer::headless().unwrap();
+    let renderer = crate::test_support::checked(Renderer::headless().unwrap());
     let mut input = fixture();
     let mut retained = renderer.prepare_retained(&input, "camera").unwrap();
     let storage = |s: &RetainedScene| {
@@ -209,7 +209,7 @@ fn motion_staging_reuses_reserved_slots_and_rejects_unsupported_bindings() {
 #[ignore = "requires a native GPU; run by desktop workflows"]
 fn retained_sprite_cpu_staging_allocates_nothing_and_rejects_changed_bindings() {
     let (_, input, _) = super::sprite_tests::fixture();
-    let renderer = Renderer::headless().unwrap();
+    let renderer = crate::test_support::checked(Renderer::headless().unwrap());
     let mut retained = renderer
         .prepare_retained(input.input(), input.camera_label())
         .unwrap();
@@ -235,7 +235,7 @@ fn retained_sprite_cpu_staging_allocates_nothing_and_rejects_changed_bindings() 
 #[ignore = "requires a native GPU; run by desktop workflows"]
 fn retained_tile_cpu_staging_allocates_nothing_without_visiting_binding_cells() {
     let (_, input, _) = super::sprite_tests::tile_fixture();
-    let renderer = Renderer::headless().unwrap();
+    let renderer = crate::test_support::checked(Renderer::headless().unwrap());
     let mut retained = renderer
         .prepare_retained(input.input(), input.camera_label())
         .unwrap();
@@ -289,7 +289,7 @@ fn retained_flipbook_selection_stages_without_allocation() {
     input
         .try_sync(&world.spatial_view().unwrap(), |_, _, _| Ok::<_, ()>(()))
         .unwrap();
-    let renderer = Renderer::headless().unwrap();
+    let renderer = crate::test_support::checked(Renderer::headless().unwrap());
     let mut retained = renderer
         .prepare_retained(input.input(), input.camera_label())
         .unwrap();

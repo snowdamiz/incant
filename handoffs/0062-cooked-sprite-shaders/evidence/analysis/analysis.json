@@ -1,0 +1,888 @@
+{
+ "pairs": [
+  {
+   "case": "A-ortho",
+   "png": "tick-00000.png",
+   "size": [
+    960,
+    540
+   ],
+   "chunks": [
+    "IHDR",
+    "IDAT",
+    "IEND"
+   ],
+   "baseline_file_sha256": "70f6876e6e7084442051e5fb27b0defb230df4c50acf033e82df9781b1b915d3",
+   "candidate_file_sha256": "70f6876e6e7084442051e5fb27b0defb230df4c50acf033e82df9781b1b915d3",
+   "baseline_rgba_sha256": "16b0aed2a302af8aef9b9c8c964ad2de05ac2064a599980e206cb7b17d5b2304",
+   "candidate_rgba_sha256": "16b0aed2a302af8aef9b9c8c964ad2de05ac2064a599980e206cb7b17d5b2304",
+   "file_identical": true,
+   "rgba_identical": true,
+   "pixels": 518400,
+   "differing": 0,
+   "worst_channel_delta": 0
+  },
+  {
+   "case": "A-persp",
+   "png": "tick-00000.png",
+   "size": [
+    960,
+    540
+   ],
+   "chunks": [
+    "IHDR",
+    "IDAT",
+    "IEND"
+   ],
+   "baseline_file_sha256": "12703d40a3b69a427746ff20812b182317933e5bff45d2963ecf178de1de1e7d",
+   "candidate_file_sha256": "12703d40a3b69a427746ff20812b182317933e5bff45d2963ecf178de1de1e7d",
+   "baseline_rgba_sha256": "bc617e36bc02d36ead757361d72377b4d834791991859ada26e8cabc67136336",
+   "candidate_rgba_sha256": "bc617e36bc02d36ead757361d72377b4d834791991859ada26e8cabc67136336",
+   "file_identical": true,
+   "rgba_identical": true,
+   "pixels": 518400,
+   "differing": 0,
+   "worst_channel_delta": 0
+  },
+  {
+   "case": "A-pp",
+   "png": "tick-00000.png",
+   "size": [
+    960,
+    540
+   ],
+   "chunks": [
+    "IHDR",
+    "IDAT",
+    "IEND"
+   ],
+   "baseline_file_sha256": "da6ef43edbb57e4e39ada3479aac2dfd43002782247d2171d49d05bbb9a2ce70",
+   "candidate_file_sha256": "da6ef43edbb57e4e39ada3479aac2dfd43002782247d2171d49d05bbb9a2ce70",
+   "baseline_rgba_sha256": "f4ca98b10da8c6fec41f91b152a493db0c696916bf0e0767df3c5748123dd60d",
+   "candidate_rgba_sha256": "f4ca98b10da8c6fec41f91b152a493db0c696916bf0e0767df3c5748123dd60d",
+   "file_identical": true,
+   "rgba_identical": true,
+   "pixels": 518400,
+   "differing": 0,
+   "worst_channel_delta": 0
+  },
+  {
+   "case": "B-ortho",
+   "png": "tick-00000.png",
+   "size": [
+    960,
+    540
+   ],
+   "chunks": [
+    "IHDR",
+    "IDAT",
+    "IEND"
+   ],
+   "baseline_file_sha256": "a31e024b2c272b6d0a5e829c24eb67ed4e2fb0fdbafa9aeff71440d1305aaa50",
+   "candidate_file_sha256": "a31e024b2c272b6d0a5e829c24eb67ed4e2fb0fdbafa9aeff71440d1305aaa50",
+   "baseline_rgba_sha256": "73a2500253d2b68d649ede417695d347e721032c4c6520c816f522275b3d376e",
+   "candidate_rgba_sha256": "73a2500253d2b68d649ede417695d347e721032c4c6520c816f522275b3d376e",
+   "file_identical": true,
+   "rgba_identical": true,
+   "pixels": 518400,
+   "differing": 0,
+   "worst_channel_delta": 0
+  },
+  {
+   "case": "B-ortho",
+   "png": "tick-00048.png",
+   "size": [
+    960,
+    540
+   ],
+   "chunks": [
+    "IHDR",
+    "IDAT",
+    "IEND"
+   ],
+   "baseline_file_sha256": "a31e024b2c272b6d0a5e829c24eb67ed4e2fb0fdbafa9aeff71440d1305aaa50",
+   "candidate_file_sha256": "a31e024b2c272b6d0a5e829c24eb67ed4e2fb0fdbafa9aeff71440d1305aaa50",
+   "baseline_rgba_sha256": "73a2500253d2b68d649ede417695d347e721032c4c6520c816f522275b3d376e",
+   "candidate_rgba_sha256": "73a2500253d2b68d649ede417695d347e721032c4c6520c816f522275b3d376e",
+   "file_identical": true,
+   "rgba_identical": true,
+   "pixels": 518400,
+   "differing": 0,
+   "worst_channel_delta": 0
+  },
+  {
+   "case": "B-pp",
+   "png": "tick-00000.png",
+   "size": [
+    960,
+    540
+   ],
+   "chunks": [
+    "IHDR",
+    "IDAT",
+    "IEND"
+   ],
+   "baseline_file_sha256": "9afbfd6bec2519b513cda81d0129d778950d716676d325a470f81c6ef69e29c5",
+   "candidate_file_sha256": "9afbfd6bec2519b513cda81d0129d778950d716676d325a470f81c6ef69e29c5",
+   "baseline_rgba_sha256": "fe031c0010c51caaa3c505bac3dd503f8911d4f6b6f58765073c0a11f03e4d27",
+   "candidate_rgba_sha256": "fe031c0010c51caaa3c505bac3dd503f8911d4f6b6f58765073c0a11f03e4d27",
+   "file_identical": true,
+   "rgba_identical": true,
+   "pixels": 518400,
+   "differing": 0,
+   "worst_channel_delta": 0
+  },
+  {
+   "case": "B-pp",
+   "png": "tick-00048.png",
+   "size": [
+    960,
+    540
+   ],
+   "chunks": [
+    "IHDR",
+    "IDAT",
+    "IEND"
+   ],
+   "baseline_file_sha256": "efb8d40b0eda1a9ff3cd3afbcb4936ddc52adf50ea55511357d9e4367b559bc3",
+   "candidate_file_sha256": "efb8d40b0eda1a9ff3cd3afbcb4936ddc52adf50ea55511357d9e4367b559bc3",
+   "baseline_rgba_sha256": "8bd790d6cfef3583ded5df4d43d55f3423995dd49b61a5452cd6412346b670f5",
+   "candidate_rgba_sha256": "8bd790d6cfef3583ded5df4d43d55f3423995dd49b61a5452cd6412346b670f5",
+   "file_identical": true,
+   "rgba_identical": true,
+   "pixels": 518400,
+   "differing": 0,
+   "worst_channel_delta": 0
+  },
+  {
+   "case": "W-ortho",
+   "png": "tick-00000.png",
+   "size": [
+    960,
+    540
+   ],
+   "chunks": [
+    "IHDR",
+    "IDAT",
+    "IEND"
+   ],
+   "baseline_file_sha256": "f9627d71d5e1a1409a4640847619fb546614ff5d8ff8d84b677a10c3ceec34c1",
+   "candidate_file_sha256": "f9627d71d5e1a1409a4640847619fb546614ff5d8ff8d84b677a10c3ceec34c1",
+   "baseline_rgba_sha256": "3055ab8fc005a5b5ecc8fec07475119f238034503338549232e656cd40614bd6",
+   "candidate_rgba_sha256": "3055ab8fc005a5b5ecc8fec07475119f238034503338549232e656cd40614bd6",
+   "file_identical": true,
+   "rgba_identical": true,
+   "pixels": 518400,
+   "differing": 0,
+   "worst_channel_delta": 0
+  },
+  {
+   "case": "W-pp",
+   "png": "tick-00000.png",
+   "size": [
+    960,
+    540
+   ],
+   "chunks": [
+    "IHDR",
+    "IDAT",
+    "IEND"
+   ],
+   "baseline_file_sha256": "31ba871b89ee2a4ea3b9d803b81d207e3e75a9e7861c1cd4667ed2ab59ce8604",
+   "candidate_file_sha256": "31ba871b89ee2a4ea3b9d803b81d207e3e75a9e7861c1cd4667ed2ab59ce8604",
+   "baseline_rgba_sha256": "ce4cc8e5a2fdda1c36e26751641d0bb5920314b960505c2aa22d56afdec23449",
+   "candidate_rgba_sha256": "ce4cc8e5a2fdda1c36e26751641d0bb5920314b960505c2aa22d56afdec23449",
+   "file_identical": true,
+   "rgba_identical": true,
+   "pixels": 518400,
+   "differing": 0,
+   "worst_channel_delta": 0
+  }
+ ],
+ "source_free": [
+  {
+   "case": "A-pp",
+   "png": "tick-00000.png",
+   "file_sha256": "da6ef43edbb57e4e39ada3479aac2dfd43002782247d2171d49d05bbb9a2ce70",
+   "identical_to_pre_deletion": true,
+   "rgba_identical": true
+  },
+  {
+   "case": "B-pp",
+   "png": "tick-00000.png",
+   "file_sha256": "9afbfd6bec2519b513cda81d0129d778950d716676d325a470f81c6ef69e29c5",
+   "identical_to_pre_deletion": true,
+   "rgba_identical": true
+  },
+  {
+   "case": "B-pp",
+   "png": "tick-00048.png",
+   "file_sha256": "efb8d40b0eda1a9ff3cd3afbcb4936ddc52adf50ea55511357d9e4367b559bc3",
+   "identical_to_pre_deletion": true,
+   "rgba_identical": true
+  },
+  {
+   "case": "W-pp",
+   "png": "tick-00000.png",
+   "file_sha256": "31ba871b89ee2a4ea3b9d803b81d207e3e75a9e7861c1cd4667ed2ab59ce8604",
+   "identical_to_pre_deletion": true,
+   "rgba_identical": true
+  }
+ ],
+ "controls": {
+  "A-pp": [
+   {
+    "name": "A6 half-pixel tie 2x == A2 aligned 2x",
+    "box_a": [
+     372,
+     36,
+     420,
+     84
+    ],
+    "box_b": [
+     72,
+     36,
+     120,
+     84
+    ],
+    "flips": {},
+    "pixels": 2304,
+    "differing": 0,
+    "worst_channel_delta": 0
+   },
+   {
+    "name": "A7 tie flipped xy == A2 flipped xy",
+    "box_a": [
+     432,
+     36,
+     480,
+     84
+    ],
+    "box_b": [
+     72,
+     36,
+     120,
+     84
+    ],
+    "flips": {
+     "flip_x": true,
+     "flip_y": true
+    },
+    "pixels": 2304,
+    "differing": 0,
+    "worst_channel_delta": 0
+   },
+   {
+    "name": "C5 mirrored parent == C2 flip_x",
+    "a": [
+     348,
+     258,
+     72,
+     72
+    ],
+    "b": [
+     96,
+     258,
+     72,
+     72
+    ],
+    "flips": {},
+    "pixels": 5184,
+    "differing": 0,
+    "worst_channel_delta": 0
+   },
+   {
+    "name": "C6 mirrored parent + flip_x == C1",
+    "a": [
+     432,
+     258,
+     72,
+     72
+    ],
+    "b": [
+     12,
+     258,
+     72,
+     72
+    ],
+    "flips": {},
+    "pixels": 5184,
+    "differing": 0,
+    "worst_channel_delta": 0
+   },
+   {
+    "name": "C8 rot180 == C4 flip_xy",
+    "a": [
+     600,
+     258,
+     72,
+     72
+    ],
+    "b": [
+     264,
+     258,
+     72,
+     72
+    ],
+    "flips": {},
+    "pixels": 5184,
+    "differing": 0,
+    "worst_channel_delta": 0
+   },
+   {
+    "name": "C2 flip_x == C1 mirrored",
+    "a": [
+     96,
+     258,
+     72,
+     72
+    ],
+    "b": [
+     12,
+     258,
+     72,
+     72
+    ],
+    "flips": {
+     "flip_x": true
+    },
+    "pixels": 5184,
+    "differing": 0,
+    "worst_channel_delta": 0
+   },
+   {
+    "name": "C3 flip_y == C1 flipped vertically",
+    "a": [
+     180,
+     258,
+     72,
+     72
+    ],
+    "b": [
+     12,
+     258,
+     72,
+     72
+    ],
+    "flips": {
+     "flip_y": true
+    },
+    "pixels": 5184,
+    "differing": 0,
+    "worst_channel_delta": 0
+   },
+   {
+    "name": "A2 2x nearest == A1 1x replicated 2x2",
+    "exact": true
+   }
+  ],
+  "W-pp": [
+   {
+    "name": "W1 trailing 144 px == W1c tail control",
+    "a": [
+     312,
+     81,
+     144,
+     18
+    ],
+    "b": [
+     312,
+     111,
+     144,
+     18
+    ],
+    "flips": {},
+    "pixels": 2592,
+    "differing": 0,
+    "worst_channel_delta": 0
+   },
+   {
+    "name": "W2 flipped leading 144 px == W2c control",
+    "a": [
+     504,
+     441,
+     144,
+     18
+    ],
+    "b": [
+     504,
+     411,
+     144,
+     18
+    ],
+    "flips": {},
+    "pixels": 2592,
+    "differing": 0,
+    "worst_channel_delta": 0
+   },
+   {
+    "name": "W3 bottom 144 px == W3c control",
+    "a": [
+     651,
+     102,
+     18,
+     144
+    ],
+    "b": [
+     621,
+     102,
+     18,
+     144
+    ],
+    "flips": {},
+    "pixels": 2592,
+    "differing": 0,
+    "worst_channel_delta": 0
+   },
+   {
+    "name": "W4 flipped top rows 294-320 == W4c (above W6 overlap)",
+    "a": [
+     291,
+     294,
+     18,
+     27
+    ],
+    "b": [
+     321,
+     294,
+     18,
+     27
+    ],
+    "flips": {},
+    "pixels": 486,
+    "differing": 0,
+    "worst_channel_delta": 0
+   },
+   {
+    "name": "W4 flipped rows 339-437 == W4c (below W6 overlap)",
+    "a": [
+     291,
+     339,
+     18,
+     99
+    ],
+    "b": [
+     321,
+     339,
+     18,
+     99
+    ],
+    "flips": {},
+    "pixels": 1782,
+    "differing": 0,
+    "worst_channel_delta": 0
+   },
+   {
+    "name": "W4/W4c rows 321-338 are the W6 strip drawn on top (each column constant over the band)",
+    "exact": true
+   },
+   {
+    "name": "W5 linear trailing 135 px == W5c (excluding first texel)",
+    "a": [
+     321,
+     171,
+     135,
+     18
+    ],
+    "b": [
+     321,
+     201,
+     135,
+     18
+    ],
+    "flips": {},
+    "pixels": 2430,
+    "differing": 0,
+    "worst_channel_delta": 0
+   },
+   {
+    "name": "W6 half-pixel tie tail == W6c tie control",
+    "box_a": [
+     672,
+     321,
+     810,
+     339
+    ],
+    "box_b": [
+     672,
+     351,
+     810,
+     369
+    ],
+    "flips": {},
+    "pixels": 2484,
+    "differing": 0,
+    "worst_channel_delta": 0
+   }
+  ],
+  "B-pp tick 0": [
+   {
+    "name": "T1 tilemap == T1c raw cell sprites",
+    "a": [
+     30,
+     114,
+     192,
+     96
+    ],
+    "b": [
+     30,
+     264,
+     192,
+     96
+    ],
+    "flips": {},
+    "pixels": 18432,
+    "differing": 0,
+    "worst_channel_delta": 0
+   },
+   {
+    "name": "F1 at tick 0 == F1c-first",
+    "a": [
+     504,
+     54,
+     72,
+     72
+    ],
+    "b": [
+     504,
+     144,
+     72,
+     72
+    ],
+    "flips": {},
+    "pixels": 5184,
+    "differing": 0,
+    "worst_channel_delta": 0
+   },
+   {
+    "name": "F2 at tick 0 == F2c-first",
+    "a": [
+     600,
+     54,
+     72,
+     72
+    ],
+    "b": [
+     600,
+     144,
+     72,
+     72
+    ],
+    "flips": {},
+    "pixels": 5184,
+    "differing": 0,
+    "worst_channel_delta": 0
+   },
+   {
+    "name": "F3 at tick 0 == F3c-first",
+    "a": [
+     696,
+     54,
+     72,
+     72
+    ],
+    "b": [
+     696,
+     144,
+     72,
+     72
+    ],
+    "flips": {},
+    "pixels": 5184,
+    "differing": 0,
+    "worst_channel_delta": 0
+   },
+   {
+    "name": "F4 at tick 0 == F4c-first",
+    "a": [
+     792,
+     54,
+     72,
+     72
+    ],
+    "b": [
+     792,
+     144,
+     72,
+     72
+    ],
+    "flips": {},
+    "pixels": 5184,
+    "differing": 0,
+    "worst_channel_delta": 0
+   },
+   {
+    "name": "F5 at tick 0 == F5c-first",
+    "a": [
+     888,
+     54,
+     72,
+     72
+    ],
+    "b": [
+     888,
+     144,
+     72,
+     72
+    ],
+    "flips": {},
+    "pixels": 5184,
+    "differing": 0,
+    "worst_channel_delta": 0
+   },
+   {
+    "name": "F6 paused at tick 0 == F6c-held",
+    "a": [
+     504,
+     354,
+     72,
+     72
+    ],
+    "b": [
+     600,
+     354,
+     72,
+     72
+    ],
+    "flips": {},
+    "pixels": 5184,
+    "differing": 0,
+    "worst_channel_delta": 0
+   },
+   {
+    "name": "F7 rot90 at tick 0 == F7c-first",
+    "a": [
+     696,
+     354,
+     72,
+     72
+    ],
+    "b": [
+     792,
+     354,
+     72,
+     72
+    ],
+    "flips": {},
+    "pixels": 5184,
+    "differing": 0,
+    "worst_channel_delta": 0
+   }
+  ],
+  "B-pp tick 48": [
+   {
+    "name": "T1 tilemap == T1c raw cell sprites",
+    "a": [
+     30,
+     114,
+     192,
+     96
+    ],
+    "b": [
+     30,
+     264,
+     192,
+     96
+    ],
+    "flips": {},
+    "pixels": 18432,
+    "differing": 0,
+    "worst_channel_delta": 0
+   },
+   {
+    "name": "F1 at tick 48 == F1c-final",
+    "a": [
+     504,
+     54,
+     72,
+     72
+    ],
+    "b": [
+     504,
+     234,
+     72,
+     72
+    ],
+    "flips": {},
+    "pixels": 5184,
+    "differing": 0,
+    "worst_channel_delta": 0
+   },
+   {
+    "name": "F2 at tick 48 == F2c-final",
+    "a": [
+     600,
+     54,
+     72,
+     72
+    ],
+    "b": [
+     600,
+     234,
+     72,
+     72
+    ],
+    "flips": {},
+    "pixels": 5184,
+    "differing": 0,
+    "worst_channel_delta": 0
+   },
+   {
+    "name": "F3 at tick 48 == F3c-final",
+    "a": [
+     696,
+     54,
+     72,
+     72
+    ],
+    "b": [
+     696,
+     234,
+     72,
+     72
+    ],
+    "flips": {},
+    "pixels": 5184,
+    "differing": 0,
+    "worst_channel_delta": 0
+   },
+   {
+    "name": "F4 at tick 48 == F4c-final",
+    "a": [
+     792,
+     54,
+     72,
+     72
+    ],
+    "b": [
+     792,
+     234,
+     72,
+     72
+    ],
+    "flips": {},
+    "pixels": 5184,
+    "differing": 0,
+    "worst_channel_delta": 0
+   },
+   {
+    "name": "F5 at tick 48 == F5c-final",
+    "a": [
+     888,
+     54,
+     72,
+     72
+    ],
+    "b": [
+     888,
+     234,
+     72,
+     72
+    ],
+    "flips": {},
+    "pixels": 5184,
+    "differing": 0,
+    "worst_channel_delta": 0
+   },
+   {
+    "name": "F6 paused at tick 48 == F6c-held",
+    "a": [
+     504,
+     354,
+     72,
+     72
+    ],
+    "b": [
+     600,
+     354,
+     72,
+     72
+    ],
+    "flips": {},
+    "pixels": 5184,
+    "differing": 0,
+    "worst_channel_delta": 0
+   },
+   {
+    "name": "F7 rot90 at tick 48 == F7c-final",
+    "a": [
+     696,
+     354,
+     72,
+     72
+    ],
+    "b": [
+     888,
+     354,
+     72,
+     72
+    ],
+    "flips": {},
+    "pixels": 5184,
+    "differing": 0,
+    "worst_channel_delta": 0
+   },
+   {
+    "name": "F8 rot30 linear at final == F8c-final (+96 px)",
+    "a": [
+     490,
+     446,
+     100,
+     94
+    ],
+    "b": [
+     586,
+     446,
+     100,
+     94
+    ],
+    "flips": {},
+    "pixels": 9400,
+    "differing": 0,
+    "worst_channel_delta": 0
+   }
+  ]
+ },
+ "tick_change": {
+  "B-pp 0->48": {
+   "changed_pixels": 28242,
+   "bbox": [
+    495,
+    54,
+    960,
+    540
+   ],
+   "per_animated_box_pp": {
+    "F1": 3573,
+    "F2": 4356,
+    "F3": 3573,
+    "F4": 3573,
+    "F5": 5184,
+    "F7": 3573,
+    "F8": 4410
+   },
+   "outside_animated_boxes_pp": 0
+  },
+  "B-ortho 0->48": {
+   "changed_pixels": 0,
+   "bbox": null,
+   "per_animated_box_pp": {
+    "F1": 0,
+    "F2": 0,
+    "F3": 0,
+    "F4": 0,
+    "F5": 0,
+    "F7": 0,
+    "F8": 0
+   },
+   "outside_animated_boxes_pp": 0
+  }
+ },
+ "summary": {
+  "pairs": 9,
+  "pairs_file_identical": 9,
+  "pairs_rgba_identical": 9,
+  "source_free_identical": 4,
+  "source_free_total": 4
+ }
+}

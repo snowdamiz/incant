@@ -1,0 +1,1686 @@
+[
+ {
+  "op": "create_entity",
+  "scene_id": "01M4SC6SNZK08XJK7DR7QWB9XQ",
+  "entity": {
+   "id": "00000000000000000000006340",
+   "name": "Camera",
+   "parent": null,
+   "provenance": null,
+   "components": {
+    "Transform": {
+     "translation": [
+      0,
+      0.9,
+      7
+     ],
+     "rotation": [
+      -0.0697564737441253,
+      -0.0,
+      -0.0,
+      0.9975640502598242
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ]
+    },
+    "Camera": {
+     "fov_degrees": 45,
+     "near": 0.1,
+     "far": 100,
+     "projection": {
+      "kind": "perspective"
+     }
+    }
+   }
+  }
+ },
+ {
+  "op": "create_entity",
+  "scene_id": "01M4SC6SNZK08XJK7DR7QWB9XQ",
+  "entity": {
+   "id": "00000000000000000000006341",
+   "name": "Key light",
+   "parent": null,
+   "provenance": null,
+   "components": {
+    "Transform": {
+     "translation": [
+      0,
+      0,
+      0
+     ],
+     "rotation": [
+      -0.33036608954935215,
+      0.24321034680169396,
+      0.08852132690137686,
+      0.9076733711903687
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ]
+    },
+    "DirectionalLight": {
+     "color": [
+      1,
+      0.97,
+      0.92
+     ],
+     "intensity": 2.4,
+     "shadows": null
+    }
+   }
+  }
+ },
+ {
+  "op": "create_entity",
+  "scene_id": "01M4SC6SNZK08XJK7DR7QWB9XQ",
+  "entity": {
+   "id": "00000000000000000000006342",
+   "name": "Floor",
+   "parent": null,
+   "provenance": null,
+   "components": {
+    "Transform": {
+     "translation": [
+      0,
+      -1.25,
+      -2
+     ],
+     "rotation": [
+      0,
+      0,
+      0,
+      1
+     ],
+     "scale": [
+      16,
+      0.1,
+      12
+     ]
+    },
+    "MeshRenderer": {
+     "mesh": "01M4SC6T58JFPATV006T7EE9MD",
+     "materials": [],
+     "cast_shadows": false
+    }
+   }
+  }
+ },
+ {
+  "op": "create_entity",
+  "scene_id": "01M4SC6SNZK08XJK7DR7QWB9XQ",
+  "entity": {
+   "id": "00000000000000000000006343",
+   "name": "Moving crate",
+   "parent": null,
+   "provenance": null,
+   "components": {
+    "Transform": {
+     "translation": [
+      2.2,
+      -0.6,
+      0.4
+     ],
+     "rotation": [
+      0,
+      0,
+      0,
+      1
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ]
+    },
+    "MeshRenderer": {
+     "mesh": "01M4SC6T12J20EWRP5RW89YXY3",
+     "materials": [],
+     "cast_shadows": false
+    },
+    "Velocity": {
+     "linear": [
+      -0.4,
+      0,
+      0
+     ]
+    }
+   }
+  }
+ },
+ {
+  "op": "create_entity",
+  "scene_id": "01M4SC6SNZK08XJK7DR7QWB9XQ",
+  "entity": {
+   "id": "00000000000000000000006344",
+   "name": "Pillar",
+   "parent": null,
+   "provenance": null,
+   "components": {
+    "Transform": {
+     "translation": [
+      2.6,
+      0.2,
+      -2.5
+     ],
+     "rotation": [
+      0,
+      0,
+      0,
+      1
+     ],
+     "scale": [
+      1.6,
+      3,
+      0.9
+     ]
+    },
+    "MeshRenderer": {
+     "mesh": "01M4SC6T35ZPN0N0S9EPQEESQ8",
+     "materials": [],
+     "cast_shadows": false
+    }
+   }
+  }
+ },
+ {
+  "op": "create_entity",
+  "scene_id": "01M4SC6SNZK08XJK7DR7QWB9XQ",
+  "entity": {
+   "id": "00000000000000000000006345",
+   "name": "World text sign",
+   "parent": null,
+   "provenance": null,
+   "components": {
+    "Transform": {
+     "translation": [
+      1.9,
+      1.3,
+      -2.0
+     ],
+     "rotation": [
+      0,
+      0,
+      0,
+      1
+     ],
+     "scale": [
+      1,
+      1,
+      1
+     ]
+    },
+    "Text": {
+     "content": "World سلام 中文 ffi",
+     "fonts": [
+      "01M4SC6SRCK8KAFY8SX0CPVM00",
+      "01M4SC6STPK7J6FVRN9AFM2AXP",
+      "01M4SC6SWWYFDBP4G3M7DCXPXT"
+     ],
+     "font_size": 28,
+     "line_height": 34,
+     "width": 400,
+     "wrap": "none"
+    }
+   }
+  }
+ },
+ {
+  "op": "create_entity",
+  "scene_id": "01M4SC6SNZK08XJK7DR7QWB9XQ",
+  "entity": {
+   "id": "00000000000000000000006350",
+   "name": "UI root",
+   "parent": null,
+   "provenance": null,
+   "components": {
+    "UiNode": {
+     "kind": {
+      "role": "root"
+     },
+     "style": {
+      "size": [
+       "auto",
+       "auto"
+      ],
+      "min_size": [
+       0,
+       0
+      ],
+      "max_size": [
+       null,
+       null
+      ],
+      "padding": [
+       32,
+       28,
+       32,
+       28
+      ],
+      "gap": [
+       0,
+       14
+      ],
+      "direction": "column",
+      "wrap": false,
+      "align": "start",
+      "justify": "start",
+      "grow": 0,
+      "shrink": 1,
+      "basis": "auto"
+     },
+     "order": 0,
+     "disabled": false
+    }
+   }
+  }
+ },
+ {
+  "op": "create_entity",
+  "scene_id": "01M4SC6SNZK08XJK7DR7QWB9XQ",
+  "entity": {
+   "id": "00000000000000000000006351",
+   "name": "Title",
+   "parent": "00000000000000000000006350",
+   "provenance": null,
+   "components": {
+    "UiNode": {
+     "kind": {
+      "role": "label",
+      "text": {
+       "content": "Paused",
+       "fonts": [
+        "01M4SC6SRCK8KAFY8SX0CPVM00",
+        "01M4SC6STPK7J6FVRN9AFM2AXP",
+        "01M4SC6SWWYFDBP4G3M7DCXPXT"
+       ],
+       "font_size": 30,
+       "line_height": 36,
+       "wrap": "none"
+      }
+     },
+     "style": {
+      "size": [
+       "auto",
+       "auto"
+      ],
+      "min_size": [
+       0,
+       0
+      ],
+      "max_size": [
+       null,
+       null
+      ],
+      "padding": [
+       0,
+       0,
+       0,
+       0
+      ],
+      "gap": [
+       0,
+       0
+      ],
+      "direction": "column",
+      "wrap": false,
+      "align": "stretch",
+      "justify": "start",
+      "grow": 0,
+      "shrink": 0,
+      "basis": "auto"
+     },
+     "order": 1,
+     "disabled": false
+    }
+   }
+  }
+ },
+ {
+  "op": "create_entity",
+  "scene_id": "01M4SC6SNZK08XJK7DR7QWB9XQ",
+  "entity": {
+   "id": "00000000000000000000006352",
+   "name": "Body",
+   "parent": "00000000000000000000006350",
+   "provenance": null,
+   "components": {
+    "UiNode": {
+     "kind": {
+      "role": "label",
+      "text": {
+       "content": "Progress is saved at every checkpoint. يتم حفظ التقدم تلقائيا عند كل نقطة. 日本語 中文",
+       "fonts": [
+        "01M4SC6SRCK8KAFY8SX0CPVM00",
+        "01M4SC6STPK7J6FVRN9AFM2AXP",
+        "01M4SC6SWWYFDBP4G3M7DCXPXT"
+       ],
+       "font_size": 16,
+       "line_height": 23,
+       "wrap": "word"
+      }
+     },
+     "style": {
+      "size": [
+       {
+        "fraction": 1
+       },
+       "auto"
+      ],
+      "min_size": [
+       0,
+       0
+      ],
+      "max_size": [
+       520,
+       null
+      ],
+      "padding": [
+       0,
+       0,
+       0,
+       0
+      ],
+      "gap": [
+       0,
+       0
+      ],
+      "direction": "column",
+      "wrap": false,
+      "align": "stretch",
+      "justify": "start",
+      "grow": 0,
+      "shrink": 0,
+      "basis": "auto"
+     },
+     "order": 2,
+     "disabled": false
+    }
+   }
+  }
+ },
+ {
+  "op": "create_entity",
+  "scene_id": "01M4SC6SNZK08XJK7DR7QWB9XQ",
+  "entity": {
+   "id": "00000000000000000000006353",
+   "name": "Actions",
+   "parent": "00000000000000000000006350",
+   "provenance": null,
+   "components": {
+    "UiNode": {
+     "kind": {
+      "role": "container"
+     },
+     "style": {
+      "size": [
+       {
+        "fraction": 1
+       },
+       "auto"
+      ],
+      "min_size": [
+       0,
+       0
+      ],
+      "max_size": [
+       560,
+       null
+      ],
+      "padding": [
+       0,
+       0,
+       0,
+       0
+      ],
+      "gap": [
+       10,
+       10
+      ],
+      "direction": "row",
+      "wrap": true,
+      "align": "start",
+      "justify": "start",
+      "grow": 0,
+      "shrink": 0,
+      "basis": "auto"
+     },
+     "order": 3,
+     "disabled": false
+    }
+   }
+  }
+ },
+ {
+  "op": "create_entity",
+  "scene_id": "01M4SC6SNZK08XJK7DR7QWB9XQ",
+  "entity": {
+   "id": "00000000000000000000006354",
+   "name": "Resume",
+   "parent": "00000000000000000000006353",
+   "provenance": null,
+   "components": {
+    "UiNode": {
+     "kind": {
+      "role": "button",
+      "text": {
+       "content": "Resume",
+       "fonts": [
+        "01M4SC6SRCK8KAFY8SX0CPVM00",
+        "01M4SC6STPK7J6FVRN9AFM2AXP",
+        "01M4SC6SWWYFDBP4G3M7DCXPXT"
+       ],
+       "font_size": 16,
+       "line_height": 20,
+       "wrap": "word"
+      }
+     },
+     "style": {
+      "size": [
+       "auto",
+       "auto"
+      ],
+      "min_size": [
+       0,
+       0
+      ],
+      "max_size": [
+       null,
+       null
+      ],
+      "padding": [
+       16,
+       9,
+       16,
+       9
+      ],
+      "gap": [
+       0,
+       0
+      ],
+      "direction": "column",
+      "wrap": false,
+      "align": "stretch",
+      "justify": "start",
+      "grow": 0,
+      "shrink": 0,
+      "basis": "auto"
+     },
+     "order": 1,
+     "disabled": false
+    }
+   }
+  }
+ },
+ {
+  "op": "create_entity",
+  "scene_id": "01M4SC6SNZK08XJK7DR7QWB9XQ",
+  "entity": {
+   "id": "00000000000000000000006355",
+   "name": "Options",
+   "parent": "00000000000000000000006353",
+   "provenance": null,
+   "components": {
+    "UiNode": {
+     "kind": {
+      "role": "button",
+      "text": {
+       "content": "Options",
+       "fonts": [
+        "01M4SC6SRCK8KAFY8SX0CPVM00",
+        "01M4SC6STPK7J6FVRN9AFM2AXP",
+        "01M4SC6SWWYFDBP4G3M7DCXPXT"
+       ],
+       "font_size": 16,
+       "line_height": 20,
+       "wrap": "word"
+      }
+     },
+     "style": {
+      "size": [
+       "auto",
+       "auto"
+      ],
+      "min_size": [
+       0,
+       0
+      ],
+      "max_size": [
+       null,
+       null
+      ],
+      "padding": [
+       16,
+       9,
+       16,
+       9
+      ],
+      "gap": [
+       0,
+       0
+      ],
+      "direction": "column",
+      "wrap": false,
+      "align": "stretch",
+      "justify": "start",
+      "grow": 0,
+      "shrink": 0,
+      "basis": "auto"
+     },
+     "order": 2,
+     "disabled": false
+    }
+   }
+  }
+ },
+ {
+  "op": "create_entity",
+  "scene_id": "01M4SC6SNZK08XJK7DR7QWB9XQ",
+  "entity": {
+   "id": "00000000000000000000006356",
+   "name": "Online play",
+   "parent": "00000000000000000000006353",
+   "provenance": null,
+   "components": {
+    "UiNode": {
+     "kind": {
+      "role": "button",
+      "text": {
+       "content": "Online play",
+       "fonts": [
+        "01M4SC6SRCK8KAFY8SX0CPVM00",
+        "01M4SC6STPK7J6FVRN9AFM2AXP",
+        "01M4SC6SWWYFDBP4G3M7DCXPXT"
+       ],
+       "font_size": 16,
+       "line_height": 20,
+       "wrap": "word"
+      }
+     },
+     "style": {
+      "size": [
+       "auto",
+       "auto"
+      ],
+      "min_size": [
+       0,
+       0
+      ],
+      "max_size": [
+       null,
+       null
+      ],
+      "padding": [
+       16,
+       9,
+       16,
+       9
+      ],
+      "gap": [
+       0,
+       0
+      ],
+      "direction": "column",
+      "wrap": false,
+      "align": "stretch",
+      "justify": "start",
+      "grow": 0,
+      "shrink": 0,
+      "basis": "auto"
+     },
+     "order": 3,
+     "disabled": true
+    }
+   }
+  }
+ },
+ {
+  "op": "create_entity",
+  "scene_id": "01M4SC6SNZK08XJK7DR7QWB9XQ",
+  "entity": {
+   "id": "00000000000000000000006357",
+   "name": "متابعة",
+   "parent": "00000000000000000000006353",
+   "provenance": null,
+   "components": {
+    "UiNode": {
+     "kind": {
+      "role": "button",
+      "text": {
+       "content": "متابعة",
+       "fonts": [
+        "01M4SC6SRCK8KAFY8SX0CPVM00",
+        "01M4SC6STPK7J6FVRN9AFM2AXP",
+        "01M4SC6SWWYFDBP4G3M7DCXPXT"
+       ],
+       "font_size": 16,
+       "line_height": 20,
+       "wrap": "word"
+      }
+     },
+     "style": {
+      "size": [
+       "auto",
+       "auto"
+      ],
+      "min_size": [
+       0,
+       0
+      ],
+      "max_size": [
+       null,
+       null
+      ],
+      "padding": [
+       16,
+       9,
+       16,
+       9
+      ],
+      "gap": [
+       0,
+       0
+      ],
+      "direction": "column",
+      "wrap": false,
+      "align": "stretch",
+      "justify": "start",
+      "grow": 0,
+      "shrink": 0,
+      "basis": "auto"
+     },
+     "order": 4,
+     "disabled": false
+    }
+   }
+  }
+ },
+ {
+  "op": "create_entity",
+  "scene_id": "01M4SC6SNZK08XJK7DR7QWB9XQ",
+  "entity": {
+   "id": "00000000000000000000006358",
+   "name": "Clip strip",
+   "parent": "00000000000000000000006350",
+   "provenance": null,
+   "components": {
+    "UiNode": {
+     "kind": {
+      "role": "container"
+     },
+     "style": {
+      "size": [
+       {
+        "pixels": 250
+       },
+       "auto"
+      ],
+      "min_size": [
+       0,
+       0
+      ],
+      "max_size": [
+       null,
+       null
+      ],
+      "padding": [
+       0,
+       0,
+       0,
+       0
+      ],
+      "gap": [
+       10,
+       0
+      ],
+      "direction": "row",
+      "wrap": false,
+      "align": "start",
+      "justify": "start",
+      "grow": 0,
+      "shrink": 0,
+      "basis": "auto"
+     },
+     "order": 4,
+     "disabled": false
+    }
+   }
+  }
+ },
+ {
+  "op": "create_entity",
+  "scene_id": "01M4SC6SNZK08XJK7DR7QWB9XQ",
+  "entity": {
+   "id": "00000000000000000000006359",
+   "name": "Alpha",
+   "parent": "00000000000000000000006358",
+   "provenance": null,
+   "components": {
+    "UiNode": {
+     "kind": {
+      "role": "button",
+      "text": {
+       "content": "Alpha",
+       "fonts": [
+        "01M4SC6SRCK8KAFY8SX0CPVM00",
+        "01M4SC6STPK7J6FVRN9AFM2AXP",
+        "01M4SC6SWWYFDBP4G3M7DCXPXT"
+       ],
+       "font_size": 16,
+       "line_height": 20,
+       "wrap": "word"
+      }
+     },
+     "style": {
+      "size": [
+       "auto",
+       "auto"
+      ],
+      "min_size": [
+       0,
+       0
+      ],
+      "max_size": [
+       null,
+       null
+      ],
+      "padding": [
+       16,
+       9,
+       16,
+       9
+      ],
+      "gap": [
+       0,
+       0
+      ],
+      "direction": "column",
+      "wrap": false,
+      "align": "stretch",
+      "justify": "start",
+      "grow": 0,
+      "shrink": 0,
+      "basis": "auto"
+     },
+     "order": 1,
+     "disabled": false
+    }
+   }
+  }
+ },
+ {
+  "op": "create_entity",
+  "scene_id": "01M4SC6SNZK08XJK7DR7QWB9XQ",
+  "entity": {
+   "id": "0000000000000000000000635A",
+   "name": "Beta",
+   "parent": "00000000000000000000006358",
+   "provenance": null,
+   "components": {
+    "UiNode": {
+     "kind": {
+      "role": "button",
+      "text": {
+       "content": "Beta",
+       "fonts": [
+        "01M4SC6SRCK8KAFY8SX0CPVM00",
+        "01M4SC6STPK7J6FVRN9AFM2AXP",
+        "01M4SC6SWWYFDBP4G3M7DCXPXT"
+       ],
+       "font_size": 16,
+       "line_height": 20,
+       "wrap": "word"
+      }
+     },
+     "style": {
+      "size": [
+       "auto",
+       "auto"
+      ],
+      "min_size": [
+       0,
+       0
+      ],
+      "max_size": [
+       null,
+       null
+      ],
+      "padding": [
+       16,
+       9,
+       16,
+       9
+      ],
+      "gap": [
+       0,
+       0
+      ],
+      "direction": "column",
+      "wrap": false,
+      "align": "stretch",
+      "justify": "start",
+      "grow": 0,
+      "shrink": 0,
+      "basis": "auto"
+     },
+     "order": 2,
+     "disabled": false
+    }
+   }
+  }
+ },
+ {
+  "op": "create_entity",
+  "scene_id": "01M4SC6SNZK08XJK7DR7QWB9XQ",
+  "entity": {
+   "id": "0000000000000000000000635B",
+   "name": "Gamma 中文 سلام",
+   "parent": "00000000000000000000006358",
+   "provenance": null,
+   "components": {
+    "UiNode": {
+     "kind": {
+      "role": "button",
+      "text": {
+       "content": "Gamma 中文 سلام",
+       "fonts": [
+        "01M4SC6SRCK8KAFY8SX0CPVM00",
+        "01M4SC6STPK7J6FVRN9AFM2AXP",
+        "01M4SC6SWWYFDBP4G3M7DCXPXT"
+       ],
+       "font_size": 16,
+       "line_height": 20,
+       "wrap": "word"
+      }
+     },
+     "style": {
+      "size": [
+       "auto",
+       "auto"
+      ],
+      "min_size": [
+       0,
+       0
+      ],
+      "max_size": [
+       null,
+       null
+      ],
+      "padding": [
+       16,
+       9,
+       16,
+       9
+      ],
+      "gap": [
+       0,
+       0
+      ],
+      "direction": "column",
+      "wrap": false,
+      "align": "stretch",
+      "justify": "start",
+      "grow": 0,
+      "shrink": 0,
+      "basis": "auto"
+     },
+     "order": 3,
+     "disabled": false
+    }
+   }
+  }
+ },
+ {
+  "op": "create_entity",
+  "scene_id": "01M4SC6SNZK08XJK7DR7QWB9XQ",
+  "entity": {
+   "id": "0000000000000000000000635C",
+   "name": "Fields",
+   "parent": "00000000000000000000006350",
+   "provenance": null,
+   "components": {
+    "UiNode": {
+     "kind": {
+      "role": "container"
+     },
+     "style": {
+      "size": [
+       {
+        "fraction": 1
+       },
+       "auto"
+      ],
+      "min_size": [
+       0,
+       0
+      ],
+      "max_size": [
+       360,
+       null
+      ],
+      "padding": [
+       0,
+       0,
+       0,
+       0
+      ],
+      "gap": [
+       0,
+       12
+      ],
+      "direction": "column",
+      "wrap": false,
+      "align": "stretch",
+      "justify": "start",
+      "grow": 0,
+      "shrink": 0,
+      "basis": "auto"
+     },
+     "order": 5,
+     "disabled": false
+    }
+   }
+  }
+ },
+ {
+  "op": "create_entity",
+  "scene_id": "01M4SC6SNZK08XJK7DR7QWB9XQ",
+  "entity": {
+   "id": "0000000000000000000000635D",
+   "name": "name group",
+   "parent": "0000000000000000000000635C",
+   "provenance": null,
+   "components": {
+    "UiNode": {
+     "kind": {
+      "role": "container"
+     },
+     "style": {
+      "size": [
+       "auto",
+       "auto"
+      ],
+      "min_size": [
+       0,
+       0
+      ],
+      "max_size": [
+       null,
+       null
+      ],
+      "padding": [
+       0,
+       0,
+       0,
+       0
+      ],
+      "gap": [
+       0,
+       4
+      ],
+      "direction": "column",
+      "wrap": false,
+      "align": "stretch",
+      "justify": "start",
+      "grow": 0,
+      "shrink": 0,
+      "basis": "auto"
+     },
+     "order": 1,
+     "disabled": false
+    }
+   }
+  }
+ },
+ {
+  "op": "create_entity",
+  "scene_id": "01M4SC6SNZK08XJK7DR7QWB9XQ",
+  "entity": {
+   "id": "0000000000000000000000635E",
+   "name": "name caption",
+   "parent": "0000000000000000000000635D",
+   "provenance": null,
+   "components": {
+    "UiNode": {
+     "kind": {
+      "role": "label",
+      "text": {
+       "content": "Player name",
+       "fonts": [
+        "01M4SC6SRCK8KAFY8SX0CPVM00",
+        "01M4SC6STPK7J6FVRN9AFM2AXP",
+        "01M4SC6SWWYFDBP4G3M7DCXPXT"
+       ],
+       "font_size": 13,
+       "line_height": 18,
+       "wrap": "word"
+      }
+     },
+     "style": {
+      "size": [
+       "auto",
+       "auto"
+      ],
+      "min_size": [
+       0,
+       0
+      ],
+      "max_size": [
+       null,
+       null
+      ],
+      "padding": [
+       0,
+       0,
+       0,
+       0
+      ],
+      "gap": [
+       0,
+       0
+      ],
+      "direction": "column",
+      "wrap": false,
+      "align": "stretch",
+      "justify": "start",
+      "grow": 0,
+      "shrink": 0,
+      "basis": "auto"
+     },
+     "order": 1,
+     "disabled": false
+    }
+   }
+  }
+ },
+ {
+  "op": "create_entity",
+  "scene_id": "01M4SC6SNZK08XJK7DR7QWB9XQ",
+  "entity": {
+   "id": "0000000000000000000000635F",
+   "name": "name field",
+   "parent": "0000000000000000000000635D",
+   "provenance": null,
+   "components": {
+    "UiNode": {
+     "kind": {
+      "role": "text_input",
+      "text": {
+       "content": "Ada Lovelace",
+       "fonts": [
+        "01M4SC6SRCK8KAFY8SX0CPVM00",
+        "01M4SC6STPK7J6FVRN9AFM2AXP",
+        "01M4SC6SWWYFDBP4G3M7DCXPXT"
+       ],
+       "font_size": 16,
+       "line_height": 22,
+       "wrap": "none"
+      }
+     },
+     "style": {
+      "size": [
+       {
+        "fraction": 1
+       },
+       "auto"
+      ],
+      "min_size": [
+       0,
+       0
+      ],
+      "max_size": [
+       null,
+       null
+      ],
+      "padding": [
+       10,
+       7,
+       10,
+       7
+      ],
+      "gap": [
+       0,
+       0
+      ],
+      "direction": "column",
+      "wrap": false,
+      "align": "stretch",
+      "justify": "start",
+      "grow": 0,
+      "shrink": 0,
+      "basis": "auto"
+     },
+     "order": 2,
+     "disabled": false
+    }
+   }
+  }
+ },
+ {
+  "op": "create_entity",
+  "scene_id": "01M4SC6SNZK08XJK7DR7QWB9XQ",
+  "entity": {
+   "id": "00000000000000000000006360",
+   "name": "long group",
+   "parent": "0000000000000000000000635C",
+   "provenance": null,
+   "components": {
+    "UiNode": {
+     "kind": {
+      "role": "container"
+     },
+     "style": {
+      "size": [
+       "auto",
+       "auto"
+      ],
+      "min_size": [
+       0,
+       0
+      ],
+      "max_size": [
+       null,
+       null
+      ],
+      "padding": [
+       0,
+       0,
+       0,
+       0
+      ],
+      "gap": [
+       0,
+       4
+      ],
+      "direction": "column",
+      "wrap": false,
+      "align": "stretch",
+      "justify": "start",
+      "grow": 0,
+      "shrink": 0,
+      "basis": "auto"
+     },
+     "order": 2,
+     "disabled": false
+    }
+   }
+  }
+ },
+ {
+  "op": "create_entity",
+  "scene_id": "01M4SC6SNZK08XJK7DR7QWB9XQ",
+  "entity": {
+   "id": "00000000000000000000006361",
+   "name": "long caption",
+   "parent": "00000000000000000000006360",
+   "provenance": null,
+   "components": {
+    "UiNode": {
+     "kind": {
+      "role": "label",
+      "text": {
+       "content": "Long value",
+       "fonts": [
+        "01M4SC6SRCK8KAFY8SX0CPVM00",
+        "01M4SC6STPK7J6FVRN9AFM2AXP",
+        "01M4SC6SWWYFDBP4G3M7DCXPXT"
+       ],
+       "font_size": 13,
+       "line_height": 18,
+       "wrap": "word"
+      }
+     },
+     "style": {
+      "size": [
+       "auto",
+       "auto"
+      ],
+      "min_size": [
+       0,
+       0
+      ],
+      "max_size": [
+       null,
+       null
+      ],
+      "padding": [
+       0,
+       0,
+       0,
+       0
+      ],
+      "gap": [
+       0,
+       0
+      ],
+      "direction": "column",
+      "wrap": false,
+      "align": "stretch",
+      "justify": "start",
+      "grow": 0,
+      "shrink": 0,
+      "basis": "auto"
+     },
+     "order": 1,
+     "disabled": false
+    }
+   }
+  }
+ },
+ {
+  "op": "create_entity",
+  "scene_id": "01M4SC6SNZK08XJK7DR7QWB9XQ",
+  "entity": {
+   "id": "00000000000000000000006362",
+   "name": "long field",
+   "parent": "00000000000000000000006360",
+   "provenance": null,
+   "components": {
+    "UiNode": {
+     "kind": {
+      "role": "text_input",
+      "text": {
+       "content": "This field holds a long value that overflows its box ffi",
+       "fonts": [
+        "01M4SC6SRCK8KAFY8SX0CPVM00",
+        "01M4SC6STPK7J6FVRN9AFM2AXP",
+        "01M4SC6SWWYFDBP4G3M7DCXPXT"
+       ],
+       "font_size": 16,
+       "line_height": 22,
+       "wrap": "none"
+      }
+     },
+     "style": {
+      "size": [
+       {
+        "fraction": 1
+       },
+       "auto"
+      ],
+      "min_size": [
+       0,
+       0
+      ],
+      "max_size": [
+       null,
+       null
+      ],
+      "padding": [
+       10,
+       7,
+       10,
+       7
+      ],
+      "gap": [
+       0,
+       0
+      ],
+      "direction": "column",
+      "wrap": false,
+      "align": "stretch",
+      "justify": "start",
+      "grow": 0,
+      "shrink": 0,
+      "basis": "auto"
+     },
+     "order": 2,
+     "disabled": false
+    }
+   }
+  }
+ },
+ {
+  "op": "create_entity",
+  "scene_id": "01M4SC6SNZK08XJK7DR7QWB9XQ",
+  "entity": {
+   "id": "00000000000000000000006363",
+   "name": "arabic group",
+   "parent": "0000000000000000000000635C",
+   "provenance": null,
+   "components": {
+    "UiNode": {
+     "kind": {
+      "role": "container"
+     },
+     "style": {
+      "size": [
+       "auto",
+       "auto"
+      ],
+      "min_size": [
+       0,
+       0
+      ],
+      "max_size": [
+       null,
+       null
+      ],
+      "padding": [
+       0,
+       0,
+       0,
+       0
+      ],
+      "gap": [
+       0,
+       4
+      ],
+      "direction": "column",
+      "wrap": false,
+      "align": "stretch",
+      "justify": "start",
+      "grow": 0,
+      "shrink": 0,
+      "basis": "auto"
+     },
+     "order": 3,
+     "disabled": false
+    }
+   }
+  }
+ },
+ {
+  "op": "create_entity",
+  "scene_id": "01M4SC6SNZK08XJK7DR7QWB9XQ",
+  "entity": {
+   "id": "00000000000000000000006364",
+   "name": "arabic caption",
+   "parent": "00000000000000000000006363",
+   "provenance": null,
+   "components": {
+    "UiNode": {
+     "kind": {
+      "role": "label",
+      "text": {
+       "content": "الاسم",
+       "fonts": [
+        "01M4SC6SRCK8KAFY8SX0CPVM00",
+        "01M4SC6STPK7J6FVRN9AFM2AXP",
+        "01M4SC6SWWYFDBP4G3M7DCXPXT"
+       ],
+       "font_size": 13,
+       "line_height": 18,
+       "wrap": "word"
+      }
+     },
+     "style": {
+      "size": [
+       "auto",
+       "auto"
+      ],
+      "min_size": [
+       0,
+       0
+      ],
+      "max_size": [
+       null,
+       null
+      ],
+      "padding": [
+       0,
+       0,
+       0,
+       0
+      ],
+      "gap": [
+       0,
+       0
+      ],
+      "direction": "column",
+      "wrap": false,
+      "align": "stretch",
+      "justify": "start",
+      "grow": 0,
+      "shrink": 0,
+      "basis": "auto"
+     },
+     "order": 1,
+     "disabled": false
+    }
+   }
+  }
+ },
+ {
+  "op": "create_entity",
+  "scene_id": "01M4SC6SNZK08XJK7DR7QWB9XQ",
+  "entity": {
+   "id": "00000000000000000000006365",
+   "name": "arabic field",
+   "parent": "00000000000000000000006363",
+   "provenance": null,
+   "components": {
+    "UiNode": {
+     "kind": {
+      "role": "text_input",
+      "text": {
+       "content": "سلام عليكم ورحمة الله وبركاته يا أصدقاء الأعزاء في كل مكان وزمان",
+       "fonts": [
+        "01M4SC6SRCK8KAFY8SX0CPVM00",
+        "01M4SC6STPK7J6FVRN9AFM2AXP",
+        "01M4SC6SWWYFDBP4G3M7DCXPXT"
+       ],
+       "font_size": 16,
+       "line_height": 22,
+       "wrap": "none"
+      }
+     },
+     "style": {
+      "size": [
+       {
+        "fraction": 1
+       },
+       "auto"
+      ],
+      "min_size": [
+       0,
+       0
+      ],
+      "max_size": [
+       null,
+       null
+      ],
+      "padding": [
+       10,
+       7,
+       10,
+       7
+      ],
+      "gap": [
+       0,
+       0
+      ],
+      "direction": "column",
+      "wrap": false,
+      "align": "stretch",
+      "justify": "start",
+      "grow": 0,
+      "shrink": 0,
+      "basis": "auto"
+     },
+     "order": 2,
+     "disabled": false
+    }
+   }
+  }
+ },
+ {
+  "op": "create_entity",
+  "scene_id": "01M4SC6SNZK08XJK7DR7QWB9XQ",
+  "entity": {
+   "id": "00000000000000000000006366",
+   "name": "cjk group",
+   "parent": "0000000000000000000000635C",
+   "provenance": null,
+   "components": {
+    "UiNode": {
+     "kind": {
+      "role": "container"
+     },
+     "style": {
+      "size": [
+       "auto",
+       "auto"
+      ],
+      "min_size": [
+       0,
+       0
+      ],
+      "max_size": [
+       null,
+       null
+      ],
+      "padding": [
+       0,
+       0,
+       0,
+       0
+      ],
+      "gap": [
+       0,
+       4
+      ],
+      "direction": "column",
+      "wrap": false,
+      "align": "stretch",
+      "justify": "start",
+      "grow": 0,
+      "shrink": 0,
+      "basis": "auto"
+     },
+     "order": 4,
+     "disabled": false
+    }
+   }
+  }
+ },
+ {
+  "op": "create_entity",
+  "scene_id": "01M4SC6SNZK08XJK7DR7QWB9XQ",
+  "entity": {
+   "id": "00000000000000000000006367",
+   "name": "cjk caption",
+   "parent": "00000000000000000000006366",
+   "provenance": null,
+   "components": {
+    "UiNode": {
+     "kind": {
+      "role": "label",
+      "text": {
+       "content": "日本語",
+       "fonts": [
+        "01M4SC6SRCK8KAFY8SX0CPVM00",
+        "01M4SC6STPK7J6FVRN9AFM2AXP",
+        "01M4SC6SWWYFDBP4G3M7DCXPXT"
+       ],
+       "font_size": 13,
+       "line_height": 18,
+       "wrap": "word"
+      }
+     },
+     "style": {
+      "size": [
+       "auto",
+       "auto"
+      ],
+      "min_size": [
+       0,
+       0
+      ],
+      "max_size": [
+       null,
+       null
+      ],
+      "padding": [
+       0,
+       0,
+       0,
+       0
+      ],
+      "gap": [
+       0,
+       0
+      ],
+      "direction": "column",
+      "wrap": false,
+      "align": "stretch",
+      "justify": "start",
+      "grow": 0,
+      "shrink": 0,
+      "basis": "auto"
+     },
+     "order": 1,
+     "disabled": false
+    }
+   }
+  }
+ },
+ {
+  "op": "create_entity",
+  "scene_id": "01M4SC6SNZK08XJK7DR7QWB9XQ",
+  "entity": {
+   "id": "00000000000000000000006368",
+   "name": "cjk field",
+   "parent": "00000000000000000000006366",
+   "provenance": null,
+   "components": {
+    "UiNode": {
+     "kind": {
+      "role": "text_input",
+      "text": {
+       "content": "日本",
+       "fonts": [
+        "01M4SC6SRCK8KAFY8SX0CPVM00",
+        "01M4SC6STPK7J6FVRN9AFM2AXP",
+        "01M4SC6SWWYFDBP4G3M7DCXPXT"
+       ],
+       "font_size": 16,
+       "line_height": 22,
+       "wrap": "none"
+      }
+     },
+     "style": {
+      "size": [
+       {
+        "fraction": 1
+       },
+       "auto"
+      ],
+      "min_size": [
+       0,
+       0
+      ],
+      "max_size": [
+       null,
+       null
+      ],
+      "padding": [
+       10,
+       7,
+       10,
+       7
+      ],
+      "gap": [
+       0,
+       0
+      ],
+      "direction": "column",
+      "wrap": false,
+      "align": "stretch",
+      "justify": "start",
+      "grow": 0,
+      "shrink": 0,
+      "basis": "auto"
+     },
+     "order": 2,
+     "disabled": false
+    }
+   }
+  }
+ }
+]

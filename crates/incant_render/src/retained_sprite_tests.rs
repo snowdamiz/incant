@@ -157,7 +157,7 @@ fn fixture_kind(tiles: bool) -> (NativeWorld, NativeRenderInput, StableId, Scene
 #[ignore = "requires a native GPU; run by desktop workflows"]
 fn source_free_native_atlas_sprites_match_fresh_frames_across_motion_reflection_and_rebuild() {
     let (mut world, mut input, moving) = fixture();
-    let renderer = Renderer::headless().unwrap();
+    let renderer = crate::test_support::checked(Renderer::headless().unwrap());
     let mut gpu = renderer
         .prepare_retained(input.input(), input.camera_label())
         .unwrap();

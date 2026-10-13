@@ -5,7 +5,7 @@ use super::*;
 #[test]
 #[ignore = "requires a native GPU; desktop workflows execute this"]
 fn wide_magnified_nearest_regions_preserve_their_leading_and_trailing_texels() {
-    let renderer = Renderer::headless().unwrap();
+    let renderer = crate::support::checked(Renderer::headless().unwrap());
     eprintln!(
         "wide sprite sweep adapter: {:?}",
         renderer.adapter.get_info()

@@ -37,7 +37,7 @@ fn fixture() -> (Fixture, String) {
 #[test]
 #[ignore = "requires a native GPU; run by desktop workflows"]
 fn fixed_logical_pixels_replicate_exactly_with_integer_scaling_and_letterboxing() {
-    let r = Renderer::headless().unwrap();
+    let r = crate::support::checked(Renderer::headless().unwrap());
     let (f, id) = fixture();
     let scene = f.scene(&r).with_camera(&id).unwrap();
     let base_png = r.screenshot_scene_png(&scene, 64, 48).unwrap();
@@ -77,7 +77,7 @@ fn fixed_logical_pixels_replicate_exactly_with_integer_scaling_and_letterboxing(
 #[test]
 #[ignore = "requires a native GPU; run by desktop workflows"]
 fn subpixel_camera_motion_is_stable_and_crossing_the_grid_moves_by_one_logical_pixel() {
-    let r = Renderer::headless().unwrap();
+    let r = crate::support::checked(Renderer::headless().unwrap());
     let (mut f, id) = fixture();
     let retained = f.scene(&r).with_camera(&id).unwrap();
     let original = r.screenshot_scene_png(&retained, 192, 144).unwrap();
@@ -136,7 +136,7 @@ fn subpixel_camera_motion_is_stable_and_crossing_the_grid_moves_by_one_logical_p
 #[test]
 #[ignore = "requires a native GPU; run by desktop workflows"]
 fn followed_grid_geometry_is_stable_at_half_pixel_ties_and_odd_resolutions() {
-    let r = Renderer::headless().unwrap();
+    let r = crate::support::checked(Renderer::headless().unwrap());
     let (mut f, id) = fixture();
     f.edit(|g| {
         g["nodes"][0]["scale"] = json!([0.25, 0.25, 1.]);

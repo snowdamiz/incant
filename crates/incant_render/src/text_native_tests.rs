@@ -114,7 +114,7 @@ fn fixture() -> (NativeWorld, NativeRenderInput, Vec<FontAssetRef>) {
 #[ignore = "requires a native GPU; run by desktop workflows"]
 fn source_free_native_text_moves_rebuilds_and_changes_through_the_retained_consumer() {
     let (mut world, mut input, fonts) = fixture();
-    let renderer = Renderer::headless().unwrap();
+    let renderer = crate::test_support::checked(Renderer::headless().unwrap());
     let format = wgpu::TextureFormat::Rgba8UnormSrgb;
     let output = texture(&renderer, format, 160, 96);
     let view = output.create_view(&Default::default());

@@ -42,7 +42,7 @@ pub(super) fn stages(device: &wgpu::Device, backend: wgpu::Backend, kind: Kind) 
         .map_err(|e| ResourceError::CookedGeometry(e).into())
 }
 
-fn validate_host(kind: Kind) -> std::result::Result<(), &'static str> {
+pub(crate) fn validate_host(kind: Kind) -> std::result::Result<(), &'static str> {
     use wgpu::{VertexFormat as F, VertexStepMode as S};
     let expected = match kind {
         Kind::Diagnostic => vec![(

@@ -71,7 +71,7 @@ fn linear(v: u8) -> f64 {
 #[test]
 #[ignore = "requires a native GPU; run by desktop workflows"]
 fn finite_range_light_eases_to_zero_without_a_linear_edge_crease() {
-    let r = Renderer::headless().unwrap();
+    let r = crate::support::checked(Renderer::headless().unwrap());
     let mut f = fixture();
     let id = light(
         &mut f,
@@ -102,7 +102,7 @@ fn finite_range_light_eases_to_zero_without_a_linear_edge_crease() {
 #[test]
 #[ignore = "requires a native GPU; run by desktop workflows"]
 fn directional_point_and_spot_lights_obey_authored_physical_parameters() {
-    let r = Renderer::headless().unwrap();
+    let r = crate::support::checked(Renderer::headless().unwrap());
     let mut f = fixture();
     let id = light(
         &mut f,
@@ -237,7 +237,7 @@ fn directional_point_and_spot_lights_obey_authored_physical_parameters() {
 #[test]
 #[ignore = "requires a native GPU; run by desktop workflows"]
 fn clustered_masks_match_total_light_energy_and_retain_old_scenes() {
-    let r = Renderer::headless().unwrap();
+    let r = crate::support::checked(Renderer::headless().unwrap());
     let mut f = fixture();
     let id = light(
         &mut f,
@@ -283,7 +283,7 @@ fn clustered_masks_match_total_light_energy_and_retain_old_scenes() {
 #[test]
 #[ignore = "requires a native GPU; run by desktop workflows"]
 fn spatial_clusters_match_brute_force_lighting_across_tile_edges_and_resize() {
-    let r = Renderer::headless().unwrap();
+    let r = crate::support::checked(Renderer::headless().unwrap());
     let mut f = fixture();
     // Localized colored lights straddle screen tile edges and depth slices.
     // The all-light oracle below uses the exact same BRDF but explicitly

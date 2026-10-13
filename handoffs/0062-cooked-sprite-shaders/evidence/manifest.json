@@ -1,0 +1,1210 @@
+{
+ "packet": "0062-cooked-sprite-shaders",
+ "files": [
+  {
+   "path": "captures/A-pp-tick-00000.png",
+   "kind": "capture",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/captures/candidate/A-pp/tick-00000.png",
+   "raw_sha256": "da6ef43edbb57e4e39ada3479aac2dfd43002782247d2171d49d05bbb9a2ce70",
+   "committed_sha256": "da6ef43edbb57e4e39ada3479aac2dfd43002782247d2171d49d05bbb9a2ce70",
+   "normalized": false,
+   "bytes": 17201
+  },
+  {
+   "path": "captures/A-ortho-tick-00000.png",
+   "kind": "capture",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/captures/candidate/A-ortho/tick-00000.png",
+   "raw_sha256": "70f6876e6e7084442051e5fb27b0defb230df4c50acf033e82df9781b1b915d3",
+   "committed_sha256": "70f6876e6e7084442051e5fb27b0defb230df4c50acf033e82df9781b1b915d3",
+   "normalized": false,
+   "bytes": 39804
+  },
+  {
+   "path": "captures/A-persp-tick-00000.png",
+   "kind": "capture",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/captures/candidate/A-persp/tick-00000.png",
+   "raw_sha256": "12703d40a3b69a427746ff20812b182317933e5bff45d2963ecf178de1de1e7d",
+   "committed_sha256": "12703d40a3b69a427746ff20812b182317933e5bff45d2963ecf178de1de1e7d",
+   "normalized": false,
+   "bytes": 46935
+  },
+  {
+   "path": "captures/W-pp-tick-00000.png",
+   "kind": "capture",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/captures/candidate/W-pp/tick-00000.png",
+   "raw_sha256": "31ba871b89ee2a4ea3b9d803b81d207e3e75a9e7861c1cd4667ed2ab59ce8604",
+   "committed_sha256": "31ba871b89ee2a4ea3b9d803b81d207e3e75a9e7861c1cd4667ed2ab59ce8604",
+   "normalized": false,
+   "bytes": 4018
+  },
+  {
+   "path": "captures/W-ortho-tick-00000.png",
+   "kind": "capture",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/captures/candidate/W-ortho/tick-00000.png",
+   "raw_sha256": "f9627d71d5e1a1409a4640847619fb546614ff5d8ff8d84b677a10c3ceec34c1",
+   "committed_sha256": "f9627d71d5e1a1409a4640847619fb546614ff5d8ff8d84b677a10c3ceec34c1",
+   "normalized": false,
+   "bytes": 4014
+  },
+  {
+   "path": "captures/B-pp-tick-00000.png",
+   "kind": "capture",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/captures/candidate/B-pp/tick-00000.png",
+   "raw_sha256": "9afbfd6bec2519b513cda81d0129d778950d716676d325a470f81c6ef69e29c5",
+   "committed_sha256": "9afbfd6bec2519b513cda81d0129d778950d716676d325a470f81c6ef69e29c5",
+   "normalized": false,
+   "bytes": 13556
+  },
+  {
+   "path": "captures/B-pp-tick-00048.png",
+   "kind": "capture",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/captures/candidate/B-pp/tick-00048.png",
+   "raw_sha256": "efb8d40b0eda1a9ff3cd3afbcb4936ddc52adf50ea55511357d9e4367b559bc3",
+   "committed_sha256": "efb8d40b0eda1a9ff3cd3afbcb4936ddc52adf50ea55511357d9e4367b559bc3",
+   "normalized": false,
+   "bytes": 12177
+  },
+  {
+   "path": "captures/B-ortho-tick-00000.png",
+   "kind": "capture",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/captures/candidate/B-ortho/tick-00000.png",
+   "raw_sha256": "a31e024b2c272b6d0a5e829c24eb67ed4e2fb0fdbafa9aeff71440d1305aaa50",
+   "committed_sha256": "a31e024b2c272b6d0a5e829c24eb67ed4e2fb0fdbafa9aeff71440d1305aaa50",
+   "normalized": false,
+   "bytes": 7120
+  },
+  {
+   "path": "derived/ties-A2-A6-A7.png",
+   "kind": "derived",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/analysis/figures/ties-A2-A6-A7.png",
+   "raw_sha256": "c65cb7f73407b9aeae8883a82de3344023e9fd92136c8567b2c6a2389fdbee4f",
+   "committed_sha256": "c65cb7f73407b9aeae8883a82de3344023e9fd92136c8567b2c6a2389fdbee4f",
+   "normalized": false,
+   "bytes": 6729
+  },
+  {
+   "path": "derived/atlas-edges-ring.png",
+   "kind": "derived",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/analysis/figures/atlas-edges-ring.png",
+   "raw_sha256": "3b567a4fbdc5db763c2ac3d07f638412cabb9688b6d5f033ea913e4ca0f00899",
+   "committed_sha256": "3b567a4fbdc5db763c2ac3d07f638412cabb9688b6d5f033ea913e4ca0f00899",
+   "normalized": false,
+   "bytes": 6369
+  },
+  {
+   "path": "derived/plain-sheet-neighbours.png",
+   "kind": "derived",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/analysis/figures/plain-sheet-neighbours.png",
+   "raw_sha256": "520e77b2ef15e03e52af68da77a8911ef3609d92571f0bca613c587db1b16ac9",
+   "committed_sha256": "520e77b2ef15e03e52af68da77a8911ef3609d92571f0bca613c587db1b16ac9",
+   "normalized": false,
+   "bytes": 5646
+  },
+  {
+   "path": "derived/premultiplied-alpha.png",
+   "kind": "derived",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/analysis/figures/premultiplied-alpha.png",
+   "raw_sha256": "136cb04b199e4b3afbc684ffe6426e187e860446aabfe5e57ba528fdb027afcd",
+   "committed_sha256": "136cb04b199e4b3afbc684ffe6426e187e860446aabfe5e57ba528fdb027afcd",
+   "normalized": false,
+   "bytes": 6032
+  },
+  {
+   "path": "derived/order-ties-depth.png",
+   "kind": "derived",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/analysis/figures/order-ties-depth.png",
+   "raw_sha256": "bebc26acb0d65ac349e2283713d85005023e017f73842d7791a9d30a8936369b",
+   "committed_sha256": "bebc26acb0d65ac349e2283713d85005023e017f73842d7791a9d30a8936369b",
+   "normalized": false,
+   "bytes": 8626
+  },
+  {
+   "path": "derived/tilemap-vs-cells.png",
+   "kind": "derived",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/analysis/figures/tilemap-vs-cells.png",
+   "raw_sha256": "f48e348a7caf5b50af8e478e23f8df15854f9567da61f996b207a0f28fc164a5",
+   "committed_sha256": "f48e348a7caf5b50af8e478e23f8df15854f9567da61f996b207a0f28fc164a5",
+   "normalized": false,
+   "bytes": 10182
+  },
+  {
+   "path": "derived/flipbooks-tick48.png",
+   "kind": "derived",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/analysis/figures/flipbooks-tick48.png",
+   "raw_sha256": "ebff4656c92ca646d6af16984a019c144bb478747c61fc47a90ab455338e0a6f",
+   "committed_sha256": "ebff4656c92ca646d6af16984a019c144bb478747c61fc47a90ab455338e0a6f",
+   "normalized": false,
+   "bytes": 9474
+  },
+  {
+   "path": "derived/wide-ends.png",
+   "kind": "derived",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/analysis/figures/wide-ends.png",
+   "raw_sha256": "5e3c93722e37cc59f259c202d211f0fffbfbe4b130eb5d94958ac0d296272adb",
+   "committed_sha256": "5e3c93722e37cc59f259c202d211f0fffbfbe4b130eb5d94958ac0d296272adb",
+   "normalized": false,
+   "bytes": 8550
+  },
+  {
+   "path": "derived/figures.json",
+   "kind": "json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/analysis/figures/figures.json",
+   "raw_sha256": "17a1087d26b659084b9aa75c8e165e70135fdc8b80a74c082f6d6f7a35a648d4",
+   "committed_sha256": "17a1087d26b659084b9aa75c8e165e70135fdc8b80a74c082f6d6f7a35a648d4",
+   "normalized": false,
+   "bytes": 4712
+  },
+  {
+   "path": "analysis/analysis.json",
+   "kind": "json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/analysis/analysis.json",
+   "raw_sha256": "70bf86184e3e508675157b6406dd304abc0e88a29021c030f3cac2143f2949d9",
+   "committed_sha256": "70bf86184e3e508675157b6406dd304abc0e88a29021c030f3cac2143f2949d9",
+   "normalized": false,
+   "bytes": 15779
+  },
+  {
+   "path": "analysis/selfcheck.json",
+   "kind": "json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/analysis/selfcheck.json",
+   "raw_sha256": "a310a404a282df9b8592b23093acbd059477370b520321a917c8a38e9421dde3",
+   "committed_sha256": "a310a404a282df9b8592b23093acbd059477370b520321a917c8a38e9421dde3",
+   "normalized": false,
+   "bytes": 3485
+  },
+  {
+   "path": "gpu/ledger.jsonl",
+   "kind": "json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-ledger.jsonl",
+   "raw_sha256": "e72193177e1a81b610606e4c8d26f199674ce217b28683f89b96cec20b3a62a2",
+   "committed_sha256": "e72193177e1a81b610606e4c8d26f199674ce217b28683f89b96cec20b3a62a2",
+   "normalized": false,
+   "bytes": 65832
+  },
+  {
+   "path": "gpu/released.json",
+   "kind": "json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-released.json",
+   "raw_sha256": "b035a689e7f4239e9201429db2e21238caf21569f6aa1060ba9e52dd98014900",
+   "committed_sha256": "b035a689e7f4239e9201429db2e21238caf21569f6aa1060ba9e52dd98014900",
+   "normalized": false,
+   "bytes": 559
+  },
+  {
+   "path": "gpu/grant-marker-copy.json",
+   "kind": "json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-review-ready",
+   "raw_sha256": "9c61859de3683c4f408f8049a929d4513708b6ab84e43b2cbb43e48465406a36",
+   "committed_sha256": "9c61859de3683c4f408f8049a929d4513708b6ab84e43b2cbb43e48465406a36",
+   "normalized": false,
+   "bytes": 441
+  },
+  {
+   "path": "lease/target-lease.json",
+   "kind": "json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/target-lease.json",
+   "raw_sha256": "385ba12584361e802c9a6f0aec8025ecf60cfb07e8e07bd0e635eece5d0a4426",
+   "committed_sha256": "385ba12584361e802c9a6f0aec8025ecf60cfb07e8e07bd0e635eece5d0a4426",
+   "normalized": false,
+   "bytes": 1180
+  },
+  {
+   "path": "logs/baseline-A-ortho.stderr.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/baseline-A-ortho.stderr.txt",
+   "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "committed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "normalized": false,
+   "bytes": 0
+  },
+  {
+   "path": "logs/baseline-A-ortho.stdout.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/baseline-A-ortho.stdout.txt",
+   "raw_sha256": "204c0352db530733b390eca659c23789f659a67ba68ef4770df7bd271525fe9d",
+   "committed_sha256": "204c0352db530733b390eca659c23789f659a67ba68ef4770df7bd271525fe9d",
+   "normalized": false,
+   "bytes": 328
+  },
+  {
+   "path": "logs/baseline-A-persp.stderr.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/baseline-A-persp.stderr.txt",
+   "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "committed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "normalized": false,
+   "bytes": 0
+  },
+  {
+   "path": "logs/baseline-A-persp.stdout.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/baseline-A-persp.stdout.txt",
+   "raw_sha256": "204c0352db530733b390eca659c23789f659a67ba68ef4770df7bd271525fe9d",
+   "committed_sha256": "204c0352db530733b390eca659c23789f659a67ba68ef4770df7bd271525fe9d",
+   "normalized": false,
+   "bytes": 328
+  },
+  {
+   "path": "logs/baseline-A-pp.stderr.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/baseline-A-pp.stderr.txt",
+   "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "committed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "normalized": false,
+   "bytes": 0
+  },
+  {
+   "path": "logs/baseline-A-pp.stdout.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/baseline-A-pp.stdout.txt",
+   "raw_sha256": "204c0352db530733b390eca659c23789f659a67ba68ef4770df7bd271525fe9d",
+   "committed_sha256": "204c0352db530733b390eca659c23789f659a67ba68ef4770df7bd271525fe9d",
+   "normalized": false,
+   "bytes": 328
+  },
+  {
+   "path": "logs/baseline-B-ortho.stderr.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/baseline-B-ortho.stderr.txt",
+   "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "committed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "normalized": false,
+   "bytes": 0
+  },
+  {
+   "path": "logs/baseline-B-ortho.stdout.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/baseline-B-ortho.stdout.txt",
+   "raw_sha256": "f7e6a17705d4748a4ed1b5c740d1e4ac5dfa626eaf25e38b5e9b3aba1a0d2e05",
+   "committed_sha256": "f7e6a17705d4748a4ed1b5c740d1e4ac5dfa626eaf25e38b5e9b3aba1a0d2e05",
+   "normalized": false,
+   "bytes": 2969
+  },
+  {
+   "path": "logs/baseline-B-pp.stderr.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/baseline-B-pp.stderr.txt",
+   "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "committed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "normalized": false,
+   "bytes": 0
+  },
+  {
+   "path": "logs/baseline-B-pp.stdout.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/baseline-B-pp.stdout.txt",
+   "raw_sha256": "f7e6a17705d4748a4ed1b5c740d1e4ac5dfa626eaf25e38b5e9b3aba1a0d2e05",
+   "committed_sha256": "f7e6a17705d4748a4ed1b5c740d1e4ac5dfa626eaf25e38b5e9b3aba1a0d2e05",
+   "normalized": false,
+   "bytes": 2969
+  },
+  {
+   "path": "logs/baseline-W-ortho.stderr.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/baseline-W-ortho.stderr.txt",
+   "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "committed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "normalized": false,
+   "bytes": 0
+  },
+  {
+   "path": "logs/baseline-W-ortho.stdout.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/baseline-W-ortho.stdout.txt",
+   "raw_sha256": "204c0352db530733b390eca659c23789f659a67ba68ef4770df7bd271525fe9d",
+   "committed_sha256": "204c0352db530733b390eca659c23789f659a67ba68ef4770df7bd271525fe9d",
+   "normalized": false,
+   "bytes": 328
+  },
+  {
+   "path": "logs/baseline-W-pp.stderr.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/baseline-W-pp.stderr.txt",
+   "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "committed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "normalized": false,
+   "bytes": 0
+  },
+  {
+   "path": "logs/baseline-W-pp.stdout.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/baseline-W-pp.stdout.txt",
+   "raw_sha256": "204c0352db530733b390eca659c23789f659a67ba68ef4770df7bd271525fe9d",
+   "committed_sha256": "204c0352db530733b390eca659c23789f659a67ba68ef4770df7bd271525fe9d",
+   "normalized": false,
+   "bytes": 328
+  },
+  {
+   "path": "logs/baseline-lib-list.stderr.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/baseline-lib-list.stderr.txt",
+   "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "committed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "normalized": false,
+   "bytes": 0
+  },
+  {
+   "path": "logs/baseline-lib-list.stdout.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/baseline-lib-list.stdout.txt",
+   "raw_sha256": "352ef9bc491146e1c09b77666564ffef05eb198fd5452723e2f0a5acd2822263",
+   "committed_sha256": "352ef9bc491146e1c09b77666564ffef05eb198fd5452723e2f0a5acd2822263",
+   "normalized": false,
+   "bytes": 3280
+  },
+  {
+   "path": "logs/baseline-lib-rest.stderr.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/baseline-lib-rest.stderr.txt",
+   "raw_sha256": "327f7492572ef7b9c96f3c2140e183ffa35f61770d075303ff07e724a2a1f60d",
+   "committed_sha256": "327f7492572ef7b9c96f3c2140e183ffa35f61770d075303ff07e724a2a1f60d",
+   "normalized": false,
+   "bytes": 2523
+  },
+  {
+   "path": "logs/baseline-lib-rest.stdout.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/baseline-lib-rest.stdout.txt",
+   "raw_sha256": "4f85ecb0861f33c5c8cb969f2a81c319db01d0d6f07b79922b3fd694bbe1d35c",
+   "committed_sha256": "b53804d12188a84a3107005d9f01633b063e11a4463375c94f0a6d6dae4cd0e8",
+   "normalized": true,
+   "bytes": 2863
+  },
+  {
+   "path": "logs/baseline-lib-sprite-relevant.stderr.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/baseline-lib-sprite-relevant.stderr.txt",
+   "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "committed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "normalized": false,
+   "bytes": 0
+  },
+  {
+   "path": "logs/baseline-lib-sprite-relevant.stdout.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/baseline-lib-sprite-relevant.stdout.txt",
+   "raw_sha256": "5021325a3555e7b3cfc6e0bfaf8e9d8c301ea54896a651711e3e7ba671ec14c4",
+   "committed_sha256": "bf68e0c8df3303cf35c01abff76cff355c1b27302a46ea795038c8f48d633e82",
+   "normalized": true,
+   "bytes": 813
+  },
+  {
+   "path": "logs/baseline-model_gpu-list.stderr.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/baseline-model_gpu-list.stderr.txt",
+   "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "committed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "normalized": false,
+   "bytes": 0
+  },
+  {
+   "path": "logs/baseline-model_gpu-list.stdout.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/baseline-model_gpu-list.stdout.txt",
+   "raw_sha256": "c5dc612c5f1a90427cab9daf43818104f39bfa0340ef4ac739336ccc71e80efe",
+   "committed_sha256": "c5dc612c5f1a90427cab9daf43818104f39bfa0340ef4ac739336ccc71e80efe",
+   "normalized": false,
+   "bytes": 4435
+  },
+  {
+   "path": "logs/baseline-model_gpu-rest.stderr.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/baseline-model_gpu-rest.stderr.txt",
+   "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "committed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "normalized": false,
+   "bytes": 0
+  },
+  {
+   "path": "logs/baseline-model_gpu-rest.stdout.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/baseline-model_gpu-rest.stdout.txt",
+   "raw_sha256": "1bff69880ff20b919b4e9456808439f4da5817879bb62df7de860c498d280f50",
+   "committed_sha256": "dc7824dc18f73c4b4da6b54ac4dbd8461a80d092087fa7c32f9afef63e7c4c65",
+   "normalized": true,
+   "bytes": 2912
+  },
+  {
+   "path": "logs/baseline-model_gpu-sprite-relevant.stderr.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/baseline-model_gpu-sprite-relevant.stderr.txt",
+   "raw_sha256": "ffac18afcd06f382dccdb3f60f1c636fd027f67a880fb6ff6956f504a9f411cd",
+   "committed_sha256": "ffac18afcd06f382dccdb3f60f1c636fd027f67a880fb6ff6956f504a9f411cd",
+   "normalized": false,
+   "bytes": 597
+  },
+  {
+   "path": "logs/baseline-model_gpu-sprite-relevant.stdout.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/baseline-model_gpu-sprite-relevant.stdout.txt",
+   "raw_sha256": "c9704673b41c4b2053f564f27d438f9eaa52e76a20161e2051c1d43459be24ff",
+   "committed_sha256": "c9cbbeae8bb023bc5614d2dd29377d2c3a416cfc13ce6164d65ba61ddde66c6e",
+   "normalized": true,
+   "bytes": 2031
+  },
+  {
+   "path": "logs/candidate-A-ortho.stderr.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/candidate-A-ortho.stderr.txt",
+   "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "committed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "normalized": false,
+   "bytes": 0
+  },
+  {
+   "path": "logs/candidate-A-ortho.stdout.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/candidate-A-ortho.stdout.txt",
+   "raw_sha256": "204c0352db530733b390eca659c23789f659a67ba68ef4770df7bd271525fe9d",
+   "committed_sha256": "204c0352db530733b390eca659c23789f659a67ba68ef4770df7bd271525fe9d",
+   "normalized": false,
+   "bytes": 328
+  },
+  {
+   "path": "logs/candidate-A-persp.stderr.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/candidate-A-persp.stderr.txt",
+   "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "committed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "normalized": false,
+   "bytes": 0
+  },
+  {
+   "path": "logs/candidate-A-persp.stdout.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/candidate-A-persp.stdout.txt",
+   "raw_sha256": "204c0352db530733b390eca659c23789f659a67ba68ef4770df7bd271525fe9d",
+   "committed_sha256": "204c0352db530733b390eca659c23789f659a67ba68ef4770df7bd271525fe9d",
+   "normalized": false,
+   "bytes": 328
+  },
+  {
+   "path": "logs/candidate-A-pp-source-free.stderr.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/candidate-A-pp-source-free.stderr.txt",
+   "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "committed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "normalized": false,
+   "bytes": 0
+  },
+  {
+   "path": "logs/candidate-A-pp-source-free.stdout.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/candidate-A-pp-source-free.stdout.txt",
+   "raw_sha256": "204c0352db530733b390eca659c23789f659a67ba68ef4770df7bd271525fe9d",
+   "committed_sha256": "204c0352db530733b390eca659c23789f659a67ba68ef4770df7bd271525fe9d",
+   "normalized": false,
+   "bytes": 328
+  },
+  {
+   "path": "logs/candidate-A-pp.stderr.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/candidate-A-pp.stderr.txt",
+   "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "committed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "normalized": false,
+   "bytes": 0
+  },
+  {
+   "path": "logs/candidate-A-pp.stdout.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/candidate-A-pp.stdout.txt",
+   "raw_sha256": "204c0352db530733b390eca659c23789f659a67ba68ef4770df7bd271525fe9d",
+   "committed_sha256": "204c0352db530733b390eca659c23789f659a67ba68ef4770df7bd271525fe9d",
+   "normalized": false,
+   "bytes": 328
+  },
+  {
+   "path": "logs/candidate-B-ortho.stderr.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/candidate-B-ortho.stderr.txt",
+   "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "committed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "normalized": false,
+   "bytes": 0
+  },
+  {
+   "path": "logs/candidate-B-ortho.stdout.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/candidate-B-ortho.stdout.txt",
+   "raw_sha256": "f7e6a17705d4748a4ed1b5c740d1e4ac5dfa626eaf25e38b5e9b3aba1a0d2e05",
+   "committed_sha256": "f7e6a17705d4748a4ed1b5c740d1e4ac5dfa626eaf25e38b5e9b3aba1a0d2e05",
+   "normalized": false,
+   "bytes": 2969
+  },
+  {
+   "path": "logs/candidate-B-pp-source-free.stderr.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/candidate-B-pp-source-free.stderr.txt",
+   "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "committed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "normalized": false,
+   "bytes": 0
+  },
+  {
+   "path": "logs/candidate-B-pp-source-free.stdout.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/candidate-B-pp-source-free.stdout.txt",
+   "raw_sha256": "f7e6a17705d4748a4ed1b5c740d1e4ac5dfa626eaf25e38b5e9b3aba1a0d2e05",
+   "committed_sha256": "f7e6a17705d4748a4ed1b5c740d1e4ac5dfa626eaf25e38b5e9b3aba1a0d2e05",
+   "normalized": false,
+   "bytes": 2969
+  },
+  {
+   "path": "logs/candidate-B-pp.stderr.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/candidate-B-pp.stderr.txt",
+   "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "committed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "normalized": false,
+   "bytes": 0
+  },
+  {
+   "path": "logs/candidate-B-pp.stdout.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/candidate-B-pp.stdout.txt",
+   "raw_sha256": "f7e6a17705d4748a4ed1b5c740d1e4ac5dfa626eaf25e38b5e9b3aba1a0d2e05",
+   "committed_sha256": "f7e6a17705d4748a4ed1b5c740d1e4ac5dfa626eaf25e38b5e9b3aba1a0d2e05",
+   "normalized": false,
+   "bytes": 2969
+  },
+  {
+   "path": "logs/candidate-W-ortho.stderr.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/candidate-W-ortho.stderr.txt",
+   "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "committed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "normalized": false,
+   "bytes": 0
+  },
+  {
+   "path": "logs/candidate-W-ortho.stdout.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/candidate-W-ortho.stdout.txt",
+   "raw_sha256": "204c0352db530733b390eca659c23789f659a67ba68ef4770df7bd271525fe9d",
+   "committed_sha256": "204c0352db530733b390eca659c23789f659a67ba68ef4770df7bd271525fe9d",
+   "normalized": false,
+   "bytes": 328
+  },
+  {
+   "path": "logs/candidate-W-pp-source-free.stderr.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/candidate-W-pp-source-free.stderr.txt",
+   "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "committed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "normalized": false,
+   "bytes": 0
+  },
+  {
+   "path": "logs/candidate-W-pp-source-free.stdout.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/candidate-W-pp-source-free.stdout.txt",
+   "raw_sha256": "204c0352db530733b390eca659c23789f659a67ba68ef4770df7bd271525fe9d",
+   "committed_sha256": "204c0352db530733b390eca659c23789f659a67ba68ef4770df7bd271525fe9d",
+   "normalized": false,
+   "bytes": 328
+  },
+  {
+   "path": "logs/candidate-W-pp.stderr.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/candidate-W-pp.stderr.txt",
+   "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "committed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "normalized": false,
+   "bytes": 0
+  },
+  {
+   "path": "logs/candidate-W-pp.stdout.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/candidate-W-pp.stdout.txt",
+   "raw_sha256": "204c0352db530733b390eca659c23789f659a67ba68ef4770df7bd271525fe9d",
+   "committed_sha256": "204c0352db530733b390eca659c23789f659a67ba68ef4770df7bd271525fe9d",
+   "normalized": false,
+   "bytes": 328
+  },
+  {
+   "path": "logs/candidate-lib-list.stderr.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/candidate-lib-list.stderr.txt",
+   "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "committed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "normalized": false,
+   "bytes": 0
+  },
+  {
+   "path": "logs/candidate-lib-list.stdout.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/candidate-lib-list.stdout.txt",
+   "raw_sha256": "352ef9bc491146e1c09b77666564ffef05eb198fd5452723e2f0a5acd2822263",
+   "committed_sha256": "352ef9bc491146e1c09b77666564ffef05eb198fd5452723e2f0a5acd2822263",
+   "normalized": false,
+   "bytes": 3280
+  },
+  {
+   "path": "logs/candidate-lib-rest.stderr.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/candidate-lib-rest.stderr.txt",
+   "raw_sha256": "327f7492572ef7b9c96f3c2140e183ffa35f61770d075303ff07e724a2a1f60d",
+   "committed_sha256": "327f7492572ef7b9c96f3c2140e183ffa35f61770d075303ff07e724a2a1f60d",
+   "normalized": false,
+   "bytes": 2523
+  },
+  {
+   "path": "logs/candidate-lib-rest.stdout.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/candidate-lib-rest.stdout.txt",
+   "raw_sha256": "3fda4d72e7799642881da01708dd684f3cc3dc3f2950964a880f4a75b922f66e",
+   "committed_sha256": "422fbf9d4e90aee24996205a8a41526fc77c87aad920a364db23ab22e51ad6ba",
+   "normalized": true,
+   "bytes": 2863
+  },
+  {
+   "path": "logs/candidate-lib-sprite-relevant.stderr.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/candidate-lib-sprite-relevant.stderr.txt",
+   "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "committed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "normalized": false,
+   "bytes": 0
+  },
+  {
+   "path": "logs/candidate-lib-sprite-relevant.stdout.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/candidate-lib-sprite-relevant.stdout.txt",
+   "raw_sha256": "8a9da4b0326b066b68788e7b720500ee77ed6afda4ea432077e1d9c2e392710c",
+   "committed_sha256": "3d2d61981fa41c576f69f764d84375131eeb19f8c10741f780085c35a86afe40",
+   "normalized": true,
+   "bytes": 813
+  },
+  {
+   "path": "logs/candidate-model_gpu-list.stderr.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/candidate-model_gpu-list.stderr.txt",
+   "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "committed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "normalized": false,
+   "bytes": 0
+  },
+  {
+   "path": "logs/candidate-model_gpu-list.stdout.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/candidate-model_gpu-list.stdout.txt",
+   "raw_sha256": "c5dc612c5f1a90427cab9daf43818104f39bfa0340ef4ac739336ccc71e80efe",
+   "committed_sha256": "c5dc612c5f1a90427cab9daf43818104f39bfa0340ef4ac739336ccc71e80efe",
+   "normalized": false,
+   "bytes": 4435
+  },
+  {
+   "path": "logs/candidate-model_gpu-rest.stderr.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/candidate-model_gpu-rest.stderr.txt",
+   "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "committed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "normalized": false,
+   "bytes": 0
+  },
+  {
+   "path": "logs/candidate-model_gpu-rest.stdout.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/candidate-model_gpu-rest.stdout.txt",
+   "raw_sha256": "3c21cefde83ecd8823923062c1c25148f97c02448f14311079f858c08eb9ab60",
+   "committed_sha256": "6f0c423b7eabfdbe5afd0ff4154483bf067c81bd1d657985ef7a14ced300000d",
+   "normalized": true,
+   "bytes": 2912
+  },
+  {
+   "path": "logs/candidate-model_gpu-sprite-relevant.stderr.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/candidate-model_gpu-sprite-relevant.stderr.txt",
+   "raw_sha256": "01b2f0dab8b0c925ef149f763c257c28438b521d75d4301d2e4c986c3e6b077f",
+   "committed_sha256": "01b2f0dab8b0c925ef149f763c257c28438b521d75d4301d2e4c986c3e6b077f",
+   "normalized": false,
+   "bytes": 598
+  },
+  {
+   "path": "logs/candidate-model_gpu-sprite-relevant.stdout.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/gpu-logs/candidate-model_gpu-sprite-relevant.stdout.txt",
+   "raw_sha256": "ea8d60e954197da2b02b9bb88110e4ada298d22cbaca5033fc871b49d2dd2d52",
+   "committed_sha256": "55cb6670b73e5e1d128bdf804c322ce80b0d6b9d950a36dcbd555eaa2bc85405",
+   "normalized": true,
+   "bytes": 2031
+  },
+  {
+   "path": "reports/baseline-A-ortho.json",
+   "kind": "json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/captures/baseline/A-ortho/report.json",
+   "raw_sha256": "04f1f8c29fe741312e077c8b55ace24c1058a5b5c891d9c1e4ee3e2aac1b9571",
+   "committed_sha256": "04f1f8c29fe741312e077c8b55ace24c1058a5b5c891d9c1e4ee3e2aac1b9571",
+   "normalized": false,
+   "bytes": 327
+  },
+  {
+   "path": "reports/baseline-A-persp.json",
+   "kind": "json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/captures/baseline/A-persp/report.json",
+   "raw_sha256": "04f1f8c29fe741312e077c8b55ace24c1058a5b5c891d9c1e4ee3e2aac1b9571",
+   "committed_sha256": "04f1f8c29fe741312e077c8b55ace24c1058a5b5c891d9c1e4ee3e2aac1b9571",
+   "normalized": false,
+   "bytes": 327
+  },
+  {
+   "path": "reports/baseline-A-pp.json",
+   "kind": "json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/captures/baseline/A-pp/report.json",
+   "raw_sha256": "04f1f8c29fe741312e077c8b55ace24c1058a5b5c891d9c1e4ee3e2aac1b9571",
+   "committed_sha256": "04f1f8c29fe741312e077c8b55ace24c1058a5b5c891d9c1e4ee3e2aac1b9571",
+   "normalized": false,
+   "bytes": 327
+  },
+  {
+   "path": "reports/baseline-B-ortho.json",
+   "kind": "json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/captures/baseline/B-ortho/report.json",
+   "raw_sha256": "2ba49af598da685d35b030f1776a0a374c28bbb87f22f7179e1f205bed2fcc5a",
+   "committed_sha256": "2ba49af598da685d35b030f1776a0a374c28bbb87f22f7179e1f205bed2fcc5a",
+   "normalized": false,
+   "bytes": 2968
+  },
+  {
+   "path": "reports/baseline-B-pp.json",
+   "kind": "json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/captures/baseline/B-pp/report.json",
+   "raw_sha256": "2ba49af598da685d35b030f1776a0a374c28bbb87f22f7179e1f205bed2fcc5a",
+   "committed_sha256": "2ba49af598da685d35b030f1776a0a374c28bbb87f22f7179e1f205bed2fcc5a",
+   "normalized": false,
+   "bytes": 2968
+  },
+  {
+   "path": "reports/baseline-W-ortho.json",
+   "kind": "json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/captures/baseline/W-ortho/report.json",
+   "raw_sha256": "04f1f8c29fe741312e077c8b55ace24c1058a5b5c891d9c1e4ee3e2aac1b9571",
+   "committed_sha256": "04f1f8c29fe741312e077c8b55ace24c1058a5b5c891d9c1e4ee3e2aac1b9571",
+   "normalized": false,
+   "bytes": 327
+  },
+  {
+   "path": "reports/baseline-W-pp.json",
+   "kind": "json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/captures/baseline/W-pp/report.json",
+   "raw_sha256": "04f1f8c29fe741312e077c8b55ace24c1058a5b5c891d9c1e4ee3e2aac1b9571",
+   "committed_sha256": "04f1f8c29fe741312e077c8b55ace24c1058a5b5c891d9c1e4ee3e2aac1b9571",
+   "normalized": false,
+   "bytes": 327
+  },
+  {
+   "path": "reports/candidate-A-ortho.json",
+   "kind": "json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/captures/candidate/A-ortho/report.json",
+   "raw_sha256": "04f1f8c29fe741312e077c8b55ace24c1058a5b5c891d9c1e4ee3e2aac1b9571",
+   "committed_sha256": "04f1f8c29fe741312e077c8b55ace24c1058a5b5c891d9c1e4ee3e2aac1b9571",
+   "normalized": false,
+   "bytes": 327
+  },
+  {
+   "path": "reports/candidate-A-persp.json",
+   "kind": "json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/captures/candidate/A-persp/report.json",
+   "raw_sha256": "04f1f8c29fe741312e077c8b55ace24c1058a5b5c891d9c1e4ee3e2aac1b9571",
+   "committed_sha256": "04f1f8c29fe741312e077c8b55ace24c1058a5b5c891d9c1e4ee3e2aac1b9571",
+   "normalized": false,
+   "bytes": 327
+  },
+  {
+   "path": "reports/candidate-A-pp.json",
+   "kind": "json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/captures/candidate/A-pp/report.json",
+   "raw_sha256": "04f1f8c29fe741312e077c8b55ace24c1058a5b5c891d9c1e4ee3e2aac1b9571",
+   "committed_sha256": "04f1f8c29fe741312e077c8b55ace24c1058a5b5c891d9c1e4ee3e2aac1b9571",
+   "normalized": false,
+   "bytes": 327
+  },
+  {
+   "path": "reports/candidate-A-pp-source-free.json",
+   "kind": "json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/captures/candidate/A-pp-source-free/report.json",
+   "raw_sha256": "04f1f8c29fe741312e077c8b55ace24c1058a5b5c891d9c1e4ee3e2aac1b9571",
+   "committed_sha256": "04f1f8c29fe741312e077c8b55ace24c1058a5b5c891d9c1e4ee3e2aac1b9571",
+   "normalized": false,
+   "bytes": 327
+  },
+  {
+   "path": "reports/candidate-B-ortho.json",
+   "kind": "json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/captures/candidate/B-ortho/report.json",
+   "raw_sha256": "2ba49af598da685d35b030f1776a0a374c28bbb87f22f7179e1f205bed2fcc5a",
+   "committed_sha256": "2ba49af598da685d35b030f1776a0a374c28bbb87f22f7179e1f205bed2fcc5a",
+   "normalized": false,
+   "bytes": 2968
+  },
+  {
+   "path": "reports/candidate-B-pp.json",
+   "kind": "json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/captures/candidate/B-pp/report.json",
+   "raw_sha256": "2ba49af598da685d35b030f1776a0a374c28bbb87f22f7179e1f205bed2fcc5a",
+   "committed_sha256": "2ba49af598da685d35b030f1776a0a374c28bbb87f22f7179e1f205bed2fcc5a",
+   "normalized": false,
+   "bytes": 2968
+  },
+  {
+   "path": "reports/candidate-B-pp-source-free.json",
+   "kind": "json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/captures/candidate/B-pp-source-free/report.json",
+   "raw_sha256": "2ba49af598da685d35b030f1776a0a374c28bbb87f22f7179e1f205bed2fcc5a",
+   "committed_sha256": "2ba49af598da685d35b030f1776a0a374c28bbb87f22f7179e1f205bed2fcc5a",
+   "normalized": false,
+   "bytes": 2968
+  },
+  {
+   "path": "reports/candidate-W-ortho.json",
+   "kind": "json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/captures/candidate/W-ortho/report.json",
+   "raw_sha256": "04f1f8c29fe741312e077c8b55ace24c1058a5b5c891d9c1e4ee3e2aac1b9571",
+   "committed_sha256": "04f1f8c29fe741312e077c8b55ace24c1058a5b5c891d9c1e4ee3e2aac1b9571",
+   "normalized": false,
+   "bytes": 327
+  },
+  {
+   "path": "reports/candidate-W-pp.json",
+   "kind": "json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/captures/candidate/W-pp/report.json",
+   "raw_sha256": "04f1f8c29fe741312e077c8b55ace24c1058a5b5c891d9c1e4ee3e2aac1b9571",
+   "committed_sha256": "04f1f8c29fe741312e077c8b55ace24c1058a5b5c891d9c1e4ee3e2aac1b9571",
+   "normalized": false,
+   "bytes": 327
+  },
+  {
+   "path": "reports/candidate-W-pp-source-free.json",
+   "kind": "json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/captures/candidate/W-pp-source-free/report.json",
+   "raw_sha256": "04f1f8c29fe741312e077c8b55ace24c1058a5b5c891d9c1e4ee3e2aac1b9571",
+   "committed_sha256": "04f1f8c29fe741312e077c8b55ace24c1058a5b5c891d9c1e4ee3e2aac1b9571",
+   "normalized": false,
+   "bytes": 327
+  },
+  {
+   "path": "build/baseline.json",
+   "kind": "json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/build/baseline.json",
+   "raw_sha256": "b21a5b3abb4ffda949af9fbac50779ce61bd1574e725377d4f4ada8c2ba965df",
+   "committed_sha256": "b21a5b3abb4ffda949af9fbac50779ce61bd1574e725377d4f4ada8c2ba965df",
+   "normalized": false,
+   "bytes": 6126
+  },
+  {
+   "path": "build/candidate.json",
+   "kind": "json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/build/candidate.json",
+   "raw_sha256": "38a97c7b8dafaa1b69a23bcb1a34ddb6c258bd237de16feab8662bc8a25daac3",
+   "committed_sha256": "38a97c7b8dafaa1b69a23bcb1a34ddb6c258bd237de16feab8662bc8a25daac3",
+   "normalized": false,
+   "bytes": 6405
+  },
+  {
+   "path": "build/source-freeze.json",
+   "kind": "json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/build/source-freeze.json",
+   "raw_sha256": "aabc7dac8dd38074e97a50b6e10d449cabd699f7595ae47cc509254fbfd97b76",
+   "committed_sha256": "aabc7dac8dd38074e97a50b6e10d449cabd699f7595ae47cc509254fbfd97b76",
+   "normalized": false,
+   "bytes": 5906
+  },
+  {
+   "path": "build/tools-cook.json",
+   "kind": "json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/build/tools-cook.json",
+   "raw_sha256": "50443e18a5067c6c8ff4346bad9fbcbe81ece97804a5d0ca7d04a6492faa5fef",
+   "committed_sha256": "50443e18a5067c6c8ff4346bad9fbcbe81ece97804a5d0ca7d04a6492faa5fef",
+   "normalized": false,
+   "bytes": 1941
+  },
+  {
+   "path": "build/tools-headless.json",
+   "kind": "json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/build/tools-headless.json",
+   "raw_sha256": "17fbdf11fba1767404290120fd090e0f7759d2c8aa938c989894426223df1db7",
+   "committed_sha256": "17fbdf11fba1767404290120fd090e0f7759d2c8aa938c989894426223df1db7",
+   "normalized": false,
+   "bytes": 1905
+  },
+  {
+   "path": "build/build-baseline-native-frames.stderr.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/logs/build-baseline-native-frames.stderr.txt",
+   "raw_sha256": "c146aab7630055f4aa4a3a8efa286e7992f701176d6acd0d874d0e729742a80d",
+   "committed_sha256": "c146aab7630055f4aa4a3a8efa286e7992f701176d6acd0d874d0e729742a80d",
+   "normalized": false,
+   "bytes": 57
+  },
+  {
+   "path": "build/build-baseline-tests.stderr.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/logs/build-baseline-tests.stderr.txt",
+   "raw_sha256": "7f2e8141fe92f3f569e2543a316bcfe9c2811e088791e55bfca4b55471f20313",
+   "committed_sha256": "7f2e8141fe92f3f569e2543a316bcfe9c2811e088791e55bfca4b55471f20313",
+   "normalized": false,
+   "bytes": 4274
+  },
+  {
+   "path": "build/build-candidate-native-frames.stderr.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/logs/build-candidate-native-frames.stderr.txt",
+   "raw_sha256": "71129b09f2f3019e50cd43f5a1a78b6f553e9f421604ef63d39646fa0d76cc02",
+   "committed_sha256": "71129b09f2f3019e50cd43f5a1a78b6f553e9f421604ef63d39646fa0d76cc02",
+   "normalized": false,
+   "bytes": 57
+  },
+  {
+   "path": "build/build-candidate-tests.stderr.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/logs/build-candidate-tests.stderr.txt",
+   "raw_sha256": "503039cf97d0a6b2dc0bb76d56be4669afc092491ff0a08c9c0ebd7442db9832",
+   "committed_sha256": "503039cf97d0a6b2dc0bb76d56be4669afc092491ff0a08c9c0ebd7442db9832",
+   "normalized": false,
+   "bytes": 215
+  },
+  {
+   "path": "build/build-cook-scene.stderr.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/logs/build-cook-scene.stderr.txt",
+   "raw_sha256": "cd7c944dd979014e54466c539d45823376cce0da99bd107c5f9f438860b92074",
+   "committed_sha256": "cd7c944dd979014e54466c539d45823376cce0da99bd107c5f9f438860b92074",
+   "normalized": false,
+   "bytes": 3709
+  },
+  {
+   "path": "build/build-incant-headless.stderr.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/logs/build-incant-headless.stderr.txt",
+   "raw_sha256": "3f230e68b2f280c8a183c500c0287a05334e9ed623df829f61e229e54655fc8d",
+   "committed_sha256": "3f230e68b2f280c8a183c500c0287a05334e9ed623df829f61e229e54655fc8d",
+   "normalized": false,
+   "bytes": 6147
+  },
+  {
+   "path": "build/step-baseline.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/logs/step-baseline.txt",
+   "raw_sha256": "7eadcd0037ead2f5e280351fc5b3b0b69cc7111b5d8f5fa7c78d20487406fb17",
+   "committed_sha256": "7eadcd0037ead2f5e280351fc5b3b0b69cc7111b5d8f5fa7c78d20487406fb17",
+   "normalized": false,
+   "bytes": 1612
+  },
+  {
+   "path": "build/step-candidate.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/logs/step-candidate.txt",
+   "raw_sha256": "a80b60a2a89b0e0a5c87457e64ec974f2f10d183d83de11bf1be3c416b050fe8",
+   "committed_sha256": "a80b60a2a89b0e0a5c87457e64ec974f2f10d183d83de11bf1be3c416b050fe8",
+   "normalized": false,
+   "bytes": 1711
+  },
+  {
+   "path": "build/step-tools.txt",
+   "kind": "text",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/logs/step-tools.txt",
+   "raw_sha256": "5f7b8bd36fcdb0684ab80ef5f4183fa489dc56f790f2ca083379e2ae79274966",
+   "committed_sha256": "5f7b8bd36fcdb0684ab80ef5f4183fa489dc56f790f2ca083379e2ae79274966",
+   "normalized": false,
+   "bytes": 1109
+  },
+  {
+   "path": "fixtures/build.json",
+   "kind": "json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/fixtures/r2/build.json",
+   "raw_sha256": "472e1f7f0ef57bab0ff07269104a2fdba12cff7206f801c2f44f7de9dd0e1ee6",
+   "committed_sha256": "472e1f7f0ef57bab0ff07269104a2fdba12cff7206f801c2f44f7de9dd0e1ee6",
+   "normalized": false,
+   "bytes": 10943
+  },
+  {
+   "path": "fixtures/engine-calls.jsonl",
+   "kind": "json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/fixtures/r2/engine-calls.jsonl",
+   "raw_sha256": "e53143efc923d5b667376712e5c7f12d5c41b0c4da835f14b2daae89a0e4fc20",
+   "committed_sha256": "e53143efc923d5b667376712e5c7f12d5c41b0c4da835f14b2daae89a0e4fc20",
+   "normalized": false,
+   "bytes": 12788
+  },
+  {
+   "path": "fixtures/source-free-A.json",
+   "kind": "json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/fixtures/r2/source-free-A.json",
+   "raw_sha256": "9f332acbaa50646b443dea34b02cd67cdaad028791b632067b8122460b715081",
+   "committed_sha256": "9f332acbaa50646b443dea34b02cd67cdaad028791b632067b8122460b715081",
+   "normalized": false,
+   "bytes": 4387
+  },
+  {
+   "path": "fixtures/source-free-W.json",
+   "kind": "json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/fixtures/r2/source-free-W.json",
+   "raw_sha256": "3cc368d1a8b69bda23d6df8d46d3d3cddd3cdb5fae4fcdcd6f58f5ae73a61c47",
+   "committed_sha256": "3cc368d1a8b69bda23d6df8d46d3d3cddd3cdb5fae4fcdcd6f58f5ae73a61c47",
+   "normalized": false,
+   "bytes": 3731
+  },
+  {
+   "path": "fixtures/source-free-B.json",
+   "kind": "json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/fixtures/r2/source-free-B.json",
+   "raw_sha256": "21c5230588897d73bc8a140ddd3e2207d57befe70d61bbd5903029a2ff03271a",
+   "committed_sha256": "21c5230588897d73bc8a140ddd3e2207d57befe70d61bbd5903029a2ff03271a",
+   "normalized": false,
+   "bytes": 4057
+  },
+  {
+   "path": "fixtures/art-manifest.json",
+   "kind": "json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/fixtures/r2/art/manifest.json",
+   "raw_sha256": "6e6355b9cc8dc604a65ac68141cace552f42dae730844d5dbc71b29196b8eee4",
+   "committed_sha256": "6e6355b9cc8dc604a65ac68141cace552f42dae730844d5dbc71b29196b8eee4",
+   "normalized": false,
+   "bytes": 2981
+  },
+  {
+   "path": "fixtures/boards/A-entities.json",
+   "kind": "json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/fixtures/r2/boards/A-entities.json",
+   "raw_sha256": "b01d7a3407fc946e64711935834289c67873b1ae4525138e49dae58540c8fdcf",
+   "committed_sha256": "b01d7a3407fc946e64711935834289c67873b1ae4525138e49dae58540c8fdcf",
+   "normalized": false,
+   "bytes": 38895
+  },
+  {
+   "path": "fixtures/boards/A.json",
+   "kind": "json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/fixtures/r2/boards/A.json",
+   "raw_sha256": "9dc5fa6cc3d77434a09f5991ee5b9a8a1b747ec80fae2c06fda5400a472cd7b0",
+   "committed_sha256": "9dc5fa6cc3d77434a09f5991ee5b9a8a1b747ec80fae2c06fda5400a472cd7b0",
+   "normalized": false,
+   "bytes": 34591
+  },
+  {
+   "path": "fixtures/boards/B-entities.json",
+   "kind": "json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/fixtures/r2/boards/B-entities.json",
+   "raw_sha256": "219a0eeaa82672309971770798f3d5886528f7ddeb3f9ec1a5418ca139371745",
+   "committed_sha256": "219a0eeaa82672309971770798f3d5886528f7ddeb3f9ec1a5418ca139371745",
+   "normalized": false,
+   "bytes": 60275
+  },
+  {
+   "path": "fixtures/boards/B.json",
+   "kind": "json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/fixtures/r2/boards/B.json",
+   "raw_sha256": "fe28abdd71f34d705c242c53220974e61a7d2cbf4398ca6c10efcd360ebbc7ff",
+   "committed_sha256": "fe28abdd71f34d705c242c53220974e61a7d2cbf4398ca6c10efcd360ebbc7ff",
+   "normalized": false,
+   "bytes": 47268
+  },
+  {
+   "path": "fixtures/boards/W-entities.json",
+   "kind": "json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/fixtures/r2/boards/W-entities.json",
+   "raw_sha256": "1d389c65b5603917c74675119a29149e230ab4d7fed91dbcce78f092b7319ad2",
+   "committed_sha256": "1d389c65b5603917c74675119a29149e230ab4d7fed91dbcce78f092b7319ad2",
+   "normalized": false,
+   "bytes": 9904
+  },
+  {
+   "path": "fixtures/boards/W.json",
+   "kind": "json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/fixtures/r2/boards/W.json",
+   "raw_sha256": "cc5272f76ba0c762d0cf9accda4eeba36467af6bcc463cc5463bc3939aaf6c86",
+   "committed_sha256": "cc5272f76ba0c762d0cf9accda4eeba36467af6bcc463cc5463bc3939aaf6c86",
+   "normalized": false,
+   "bytes": 9511
+  },
+  {
+   "path": "fixtures/requests/A-ortho.json",
+   "kind": "json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/fixtures/r2/requests/A-ortho.json",
+   "raw_sha256": "824e45e525499ec3263a51d137b0c08a84e78f3cd4d7a83fe6a20df7e91cf301",
+   "committed_sha256": "824e45e525499ec3263a51d137b0c08a84e78f3cd4d7a83fe6a20df7e91cf301",
+   "normalized": false,
+   "bytes": 44
+  },
+  {
+   "path": "fixtures/requests/A-persp.json",
+   "kind": "json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/fixtures/r2/requests/A-persp.json",
+   "raw_sha256": "824e45e525499ec3263a51d137b0c08a84e78f3cd4d7a83fe6a20df7e91cf301",
+   "committed_sha256": "824e45e525499ec3263a51d137b0c08a84e78f3cd4d7a83fe6a20df7e91cf301",
+   "normalized": false,
+   "bytes": 44
+  },
+  {
+   "path": "fixtures/requests/A-pp.json",
+   "kind": "json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/fixtures/r2/requests/A-pp.json",
+   "raw_sha256": "824e45e525499ec3263a51d137b0c08a84e78f3cd4d7a83fe6a20df7e91cf301",
+   "committed_sha256": "824e45e525499ec3263a51d137b0c08a84e78f3cd4d7a83fe6a20df7e91cf301",
+   "normalized": false,
+   "bytes": 44
+  },
+  {
+   "path": "fixtures/requests/B-ortho.json",
+   "kind": "json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/fixtures/r2/requests/B-ortho.json",
+   "raw_sha256": "02e9fb1061d69565803f1fc4e3eef4f2c85976bb758655e0b82e55368b12a248",
+   "committed_sha256": "02e9fb1061d69565803f1fc4e3eef4f2c85976bb758655e0b82e55368b12a248",
+   "normalized": false,
+   "bytes": 48
+  },
+  {
+   "path": "fixtures/requests/B-pp.json",
+   "kind": "json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/fixtures/r2/requests/B-pp.json",
+   "raw_sha256": "02e9fb1061d69565803f1fc4e3eef4f2c85976bb758655e0b82e55368b12a248",
+   "committed_sha256": "02e9fb1061d69565803f1fc4e3eef4f2c85976bb758655e0b82e55368b12a248",
+   "normalized": false,
+   "bytes": 48
+  },
+  {
+   "path": "fixtures/requests/W-ortho.json",
+   "kind": "json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/fixtures/r2/requests/W-ortho.json",
+   "raw_sha256": "824e45e525499ec3263a51d137b0c08a84e78f3cd4d7a83fe6a20df7e91cf301",
+   "committed_sha256": "824e45e525499ec3263a51d137b0c08a84e78f3cd4d7a83fe6a20df7e91cf301",
+   "normalized": false,
+   "bytes": 44
+  },
+  {
+   "path": "fixtures/requests/W-pp.json",
+   "kind": "json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/fixtures/r2/requests/W-pp.json",
+   "raw_sha256": "824e45e525499ec3263a51d137b0c08a84e78f3cd4d7a83fe6a20df7e91cf301",
+   "committed_sha256": "824e45e525499ec3263a51d137b0c08a84e78f3cd4d7a83fe6a20df7e91cf301",
+   "normalized": false,
+   "bytes": 44
+  },
+  {
+   "path": "fixtures/r1-failed-engine-calls.jsonl",
+   "kind": "json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0062/fixtures/r1-failed-layer-ulid/engine-calls.jsonl",
+   "raw_sha256": "e8250b3889669e45b588da4829e125ac7bcf4062b384b26bb189b9b1e7193736",
+   "committed_sha256": "e8250b3889669e45b588da4829e125ac7bcf4062b384b26bb189b9b1e7193736",
+   "normalized": false,
+   "bytes": 11655
+  }
+ ],
+ "hashed_only": {
+  "/Users/andreyyurlov/.codex/incant-evidence/0062/logs/build-baseline-native-frames.stdout.jsonl": "3149407ea9bf856c18108520d876be0d420ffaad50216ceeaaa7de25a2c39ee6",
+  "/Users/andreyyurlov/.codex/incant-evidence/0062/logs/build-baseline-tests.stdout.jsonl": "e98bb52307800bb0c4c02c85b41ff7a59bc3ee75f8b2c18208b90c621395fdc9",
+  "/Users/andreyyurlov/.codex/incant-evidence/0062/logs/build-candidate-native-frames.stdout.jsonl": "3765b1d030d72bde81d8e089e7da17fb9ea41a765e5a7f88c8f2a522b86b298d",
+  "/Users/andreyyurlov/.codex/incant-evidence/0062/logs/build-candidate-tests.stdout.jsonl": "245e07695e1a146fed198eec43fdbcc9a2939f62cfde505ac48ac720b2250dfd",
+  "/Users/andreyyurlov/.codex/incant-evidence/0062/logs/build-cook-scene.stdout.jsonl": "6241d4eb004908ba253e911bb399d8c7f6341298b64f34d1ef38ef871976a655",
+  "/Users/andreyyurlov/.codex/incant-evidence/0062/logs/build-incant-headless.stdout.jsonl": "62309a600c08183f505269fc44b80f46f99cc3f21d0d212facb81ce417367ed9",
+  "/Users/andreyyurlov/.codex/incant-evidence/0062/bin/baseline/incant_render-lib-tests": "fcc8743eb77471bd922d2f76eca2bc6f3ea89eaed6cc9281e55175e3e9a84439",
+  "/Users/andreyyurlov/.codex/incant-evidence/0062/bin/baseline/model_gpu": "4128c1cf863318f6a55a5f31239984861464943396c7b98df4423c8ca4341cd5",
+  "/Users/andreyyurlov/.codex/incant-evidence/0062/bin/baseline/native_frames": "f48a4e16b6a6362e481ed042537fb59d4385404bce2b3e25029d4d8bdf90d3b4",
+  "/Users/andreyyurlov/.codex/incant-evidence/0062/bin/candidate/incant_render-lib-tests": "0e74223a770bbb0e8b11ba326f69e2044addeb05801b480ade4b43552d024b1c",
+  "/Users/andreyyurlov/.codex/incant-evidence/0062/bin/candidate/model_gpu": "2954e09db2bcfab426e37cc63f358631948201cf15345cb63d5241e7a62f01bd",
+  "/Users/andreyyurlov/.codex/incant-evidence/0062/bin/candidate/native_frames": "a8321a5075a66dfd45fed83ec844be7ea283797d70013900de6023b2054fe6cc",
+  "/Users/andreyyurlov/.codex/incant-evidence/0062/bin/tools/cook_scene": "940529cf0de9af90c2fc71253b02a738c7ebe21056c64957df396210b58f0a53",
+  "/Users/andreyyurlov/.codex/incant-evidence/0062/bin/tools/incant_headless": "e8260ae81a641e1362aed22a1a15e20b374b454757ff0814695ece807805ea50"
+ },
+ "note": "Captures are unedited candidate PNGs (byte-identical to baseline). Derived figures are CPU crops/zooms of those captures, not renders. Text logs drop only a final blank line."
+}

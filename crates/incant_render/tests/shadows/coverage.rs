@@ -11,7 +11,7 @@ fn orthographic_cascade_transitions_preserve_occlusion_and_fade_at_the_declared_
     check_cascade_coverage(true);
 }
 fn check_cascade_coverage(orthographic: bool) {
-    let r = Renderer::headless().unwrap();
+    let r = crate::support::checked(Renderer::headless().unwrap());
     let (mut f, camera, _caster, light) = fixture();
     f.project
         .scenes

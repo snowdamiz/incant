@@ -172,7 +172,7 @@ fn sun(elevation_degrees: f64, azimuth_degrees: f64) -> [f64; 4] {
 #[test]
 #[ignore = "requires a native GPU; look-dev captures for Claude review"]
 fn directional_shadow_lookdev_contact_slopes_and_curves() {
-    let r = Renderer::headless().unwrap();
+    let r = crate::support::checked(Renderer::headless().unwrap());
     let mut f = Fixture::new(json!({}));
     write_scene(&mut f);
     // Dim, slightly cool uniform fill so shadowed regions keep their shape.

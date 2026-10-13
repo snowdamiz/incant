@@ -1,0 +1,18 @@
+
+thread 'target_errors_and_presentation_unwind_terminalize_game_and_silence_offline_pcm' (5087348) panicked at crates/incant_render_gpu_host/tests/game.rs:78:18:
+target presentation panic
+stack backtrace:
+   0: __rustc::rust_begin_unwind
+             at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/std/src/panicking.rs:679:5
+   1: core::panicking::panic_fmt
+             at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/panicking.rs:80:14
+   2: <game::Frame as incant_render_gpu_host::RenderFrame>::present
+   3: <incant_render_gpu_host::GpuRenderConsumer<game::Targets> as incant_render_game::RenderInputConsumer>::accept
+   4: <incant_render_native::NativeRenderInput>::sync_inner::<(), incant_render_gpu_host::GpuHostError<game::TargetError>, <incant_render_game::NativeRenderHost<incant_render_gpu_host::GpuRenderConsumer<game::Targets>> as incant_game_runtime::hosted::SceneHost>::sync::{closure#2}>
+   5: <incant_render_game::NativeRenderHost<incant_render_gpu_host::GpuRenderConsumer<game::Targets>> as incant_game_runtime::hosted::SceneHost>::sync
+   6: <incant_game_runtime::core::Core<incant_audio_runtime::offline::OfflineBackend, incant_game_runtime::core::WithHost<incant_render_game::NativeRenderHost<incant_render_gpu_host::GpuRenderConsumer<game::Targets>>>>>::tick_packet::<<incant_game_runtime::offline::OfflineCore<incant_game_runtime::core::WithHost<incant_render_game::NativeRenderHost<incant_render_gpu_host::GpuRenderConsumer<game::Targets>>>>>::tick_packet::{closure#0}>
+   7: <incant_game_runtime::offline::OfflineCore<incant_game_runtime::core::WithHost<incant_render_game::NativeRenderHost<incant_render_gpu_host::GpuRenderConsumer<game::Targets>>>>>::tick
+   8: <game::target_errors_and_presentation_unwind_terminalize_game_and_silence_offline_pcm::{closure#0} as core::ops::function::FnOnce<()>>::call_once
+   9: <fn() -> core::result::Result<(), alloc::string::String> as core::ops::function::FnOnce<()>>::call_once
+             at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/ops/function.rs:250:5
+note: Some details are omitted, run with `RUST_BACKTRACE=full` for a verbose backtrace.

@@ -100,7 +100,7 @@ fn retained_flipbooks_match_static_frames_without_rebuilding_after_cache_deletio
             Ok::<_, ()>(())
         })
         .unwrap();
-    let renderer = Renderer::headless().unwrap();
+    let renderer = crate::test_support::checked(Renderer::headless().unwrap());
     let mut gpu = renderer
         .prepare_retained(input.input(), input.camera_label())
         .unwrap();

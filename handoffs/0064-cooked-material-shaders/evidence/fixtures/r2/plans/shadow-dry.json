@@ -1,0 +1,21 @@
+{
+ "png_budget": 0,
+ "steps": [
+  {
+   "label": "S-shadows",
+   "scene": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r2/cooked/S.scene",
+   "models": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r2/S/.incant/cache/models",
+   "textures": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r2/S/.incant/cache/textures",
+   "camera": "01928c4cc40000000000000000000001",
+   "despawn": [],
+   "frames": [
+    {
+     "tick": 0,
+     "width": 960,
+     "height": 540,
+     "controls": true
+    }
+   ]
+  }
+ ]
+}

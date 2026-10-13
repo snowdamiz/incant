@@ -1,0 +1,130 @@
+{
+ "mutation": {
+  "capture": "L-ortho-t090.png",
+  "pixel": [
+   480,
+   270
+  ],
+  "diff": {
+   "differing_pixels": 1,
+   "pixels_over_one": 0,
+   "max_channel_delta": 1,
+   "bbox": [
+    480,
+    270,
+    480,
+    270
+   ]
+  },
+  "hash_changed": true,
+  "detected_exactly": true
+ },
+ "round_trip": {
+  "captures/baseline/main/M-wide.png": {
+   "round_trip_identical": true,
+   "matches_helper_readback": true,
+   "png_sha256_matches_report": true
+  },
+  "captures/baseline/main/M-close.png": {
+   "round_trip_identical": true,
+   "matches_helper_readback": true,
+   "png_sha256_matches_report": true
+  },
+  "captures/baseline/main/L-persp-t000.png": {
+   "round_trip_identical": true,
+   "matches_helper_readback": true,
+   "png_sha256_matches_report": true
+  },
+  "captures/baseline/main/L-persp-t090.png": {
+   "round_trip_identical": true,
+   "matches_helper_readback": true,
+   "png_sha256_matches_report": true
+  },
+  "captures/baseline/main/L-persp-t092.png": {
+   "round_trip_identical": true,
+   "matches_helper_readback": true,
+   "png_sha256_matches_report": true
+  },
+  "captures/baseline/main/L-ortho-t090.png": {
+   "round_trip_identical": true,
+   "matches_helper_readback": true,
+   "png_sha256_matches_report": true
+  },
+  "captures/baseline/main/Z1.png": {
+   "round_trip_identical": true,
+   "matches_helper_readback": true,
+   "png_sha256_matches_report": true
+  },
+  "captures/baseline/main/R-v1.png": {
+   "round_trip_identical": true,
+   "matches_helper_readback": true,
+   "png_sha256_matches_report": true
+  },
+  "captures/baseline/main/R-v2.png": {
+   "round_trip_identical": true,
+   "matches_helper_readback": true,
+   "png_sha256_matches_report": true
+  },
+  "captures/baseline/shadow/S-shadows.png": {
+   "round_trip_identical": true,
+   "matches_helper_readback": true,
+   "png_sha256_matches_report": true
+  },
+  "captures/candidate/main/M-wide.png": {
+   "round_trip_identical": true,
+   "matches_helper_readback": true,
+   "png_sha256_matches_report": true
+  },
+  "captures/candidate/main/M-close.png": {
+   "round_trip_identical": true,
+   "matches_helper_readback": true,
+   "png_sha256_matches_report": true
+  },
+  "captures/candidate/main/L-persp-t000.png": {
+   "round_trip_identical": true,
+   "matches_helper_readback": true,
+   "png_sha256_matches_report": true
+  },
+  "captures/candidate/main/L-persp-t090.png": {
+   "round_trip_identical": true,
+   "matches_helper_readback": true,
+   "png_sha256_matches_report": true
+  },
+  "captures/candidate/main/L-persp-t092.png": {
+   "round_trip_identical": true,
+   "matches_helper_readback": true,
+   "png_sha256_matches_report": true
+  },
+  "captures/candidate/main/L-ortho-t090.png": {
+   "round_trip_identical": true,
+   "matches_helper_readback": true,
+   "png_sha256_matches_report": true
+  },
+  "captures/candidate/main/Z1.png": {
+   "round_trip_identical": true,
+   "matches_helper_readback": true,
+   "png_sha256_matches_report": true
+  },
+  "captures/candidate/main/R-v1.png": {
+   "round_trip_identical": true,
+   "matches_helper_readback": true,
+   "png_sha256_matches_report": true
+  },
+  "captures/candidate/main/R-v2.png": {
+   "round_trip_identical": true,
+   "matches_helper_readback": true,
+   "png_sha256_matches_report": true
+  },
+  "captures/candidate/shadow/S-shadows.png": {
+   "round_trip_identical": true,
+   "matches_helper_readback": true,
+   "png_sha256_matches_report": true
+  },
+  "captures/candidate/source-free/M-wide-source-free.png": {
+   "round_trip_identical": true,
+   "matches_helper_readback": true,
+   "png_sha256_matches_report": true
+  }
+ },
+ "all_pass": true
+}

@@ -58,6 +58,9 @@ fn uniform_entry(binding: u32, visibility: wgpu::ShaderStages) -> wgpu::BindGrou
         count: None,
     }
 }
+pub(crate) fn frame_entry() -> wgpu::BindGroupLayoutEntry {
+    uniform_entry(0, wgpu::ShaderStages::VERTEX_FRAGMENT)
+}
 pub(crate) fn layout_entries() -> Vec<wgpu::BindGroupLayoutEntry> {
     let mut entries = vec![uniform_entry(0, wgpu::ShaderStages::FRAGMENT)];
     for slot in 0..5 {
@@ -86,10 +89,12 @@ impl MaterialSystem {
         queue: &wgpu::Queue,
         environment: &wgpu::BindGroupLayout,
         lighting: &wgpu::BindGroupLayout,
-    ) -> Self {
+        backend: wgpu::Backend,
+        cache: Option<&wgpu::PipelineCache>,
+    ) -> Result<Self> {
         let globals = device.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
             label: Some("Material frame"),
-            entries: &[uniform_entry(0, wgpu::ShaderStages::VERTEX_FRAGMENT)],
+            entries: &[frame_entry()],
         });
         let entries = layout_entries();
         let layout = device.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
@@ -129,7 +134,7 @@ impl MaterialSystem {
                 depth_or_array_layers: 1,
             },
         );
-        let shader = crate::material_pipeline::shader(device);
+        let shader = crate::material_pipeline::shader(device, backend)?;
         let mut pipelines = HashMap::new();
         for alpha in [AlphaMode::Opaque, AlphaMode::Mask, AlphaMode::Blend] {
             for double_sided in [false, true] {
@@ -146,22 +151,20 @@ impl MaterialSystem {
                             device,
                             &shader,
                             key,
-                            &globals,
-                            &layout,
-                            environment,
-                            lighting,
+                            [&globals, &layout, environment, lighting],
+                            cache,
                         ),
                     );
                 }
             }
         }
-        Self {
+        Ok(Self {
             globals,
             layout,
             fallback: texture.create_view(&Default::default()),
             sampler: device.create_sampler(&Default::default()),
             pipelines,
-        }
+        })
     }
 
     pub fn upload(

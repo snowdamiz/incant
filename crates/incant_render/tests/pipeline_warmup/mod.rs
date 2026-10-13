@@ -8,7 +8,8 @@ use serde_json::json;
 fn all_current_variants_exist_before_first_draw_and_reimport_creates_no_pipelines() {
     let instance = wgpu::Instance::default();
     let start = std::time::Instant::now();
-    let renderer = pollster::block_on(Renderer::new(&instance, None)).unwrap();
+    let renderer =
+        crate::support::checked(pollster::block_on(Renderer::new(&instance, None)).unwrap());
     let initial = instance.generate_report().expect("native backend report");
     assert!(initial.hub.render_pipelines.num_allocated >= 26);
     assert!(initial.hub.compute_pipelines.num_allocated >= 1);

@@ -1,0 +1,2530 @@
+{
+ "full_frame": [
+  {
+   "frame": "U-15x-name/preedit",
+   "size": [
+    960,
+    540
+   ],
+   "baseline_png_sha256": "cd9e0281be552e0c83c767bd857a68e2f59e8068da9511d3f1d8749753ccd88d",
+   "candidate_png_sha256": "cd9e0281be552e0c83c767bd857a68e2f59e8068da9511d3f1d8749753ccd88d",
+   "png_bytes_identical": true,
+   "baseline_rgba_sha256": "188f5d35dbf704bf7996bb65af5cc3f04b38f2ed4f80bcc57537c30ba6d1aa13",
+   "candidate_rgba_sha256": "188f5d35dbf704bf7996bb65af5cc3f04b38f2ed4f80bcc57537c30ba6d1aa13",
+   "chunks": [
+    "IDAT",
+    "IEND",
+    "IHDR"
+   ],
+   "differing_pixels": 0,
+   "max_channel_delta": 0,
+   "delta_histogram": {},
+   "bounding_box": null
+  },
+  {
+   "frame": "U-1x/idle",
+   "size": [
+    960,
+    540
+   ],
+   "baseline_png_sha256": "c0fd239d40e6e52fa68048127039aa215731dc0850e2b1fadd1af6cb36fbf467",
+   "candidate_png_sha256": "c0fd239d40e6e52fa68048127039aa215731dc0850e2b1fadd1af6cb36fbf467",
+   "png_bytes_identical": true,
+   "baseline_rgba_sha256": "e8de33a0810a74e678ad48b8b498105c12502dd064edd74debe91f6799414924",
+   "candidate_rgba_sha256": "e8de33a0810a74e678ad48b8b498105c12502dd064edd74debe91f6799414924",
+   "chunks": [
+    "IDAT",
+    "IEND",
+    "IHDR"
+   ],
+   "differing_pixels": 0,
+   "max_channel_delta": 0,
+   "delta_histogram": {},
+   "bounding_box": null
+  },
+  {
+   "frame": "U-1x/select",
+   "size": [
+    960,
+    540
+   ],
+   "baseline_png_sha256": "00e01c7414e68d3249f2d48c513efdc9710735c3280cfd1b86b78b8b6be538a4",
+   "candidate_png_sha256": "00e01c7414e68d3249f2d48c513efdc9710735c3280cfd1b86b78b8b6be538a4",
+   "png_bytes_identical": true,
+   "baseline_rgba_sha256": "d299331530b05401ba8a031a90e21f975194e553c6e3caf2b2ebeb44f10a062a",
+   "candidate_rgba_sha256": "d299331530b05401ba8a031a90e21f975194e553c6e3caf2b2ebeb44f10a062a",
+   "chunks": [
+    "IDAT",
+    "IEND",
+    "IHDR"
+   ],
+   "differing_pixels": 0,
+   "max_channel_delta": 0,
+   "delta_histogram": {},
+   "bounding_box": null
+  },
+  {
+   "frame": "U-1x-unorm/idle",
+   "size": [
+    960,
+    540
+   ],
+   "baseline_png_sha256": "d526b55a17643b8f8364799097feb05dcd42f79b6f76ef8a83c4a7a4baeaf595",
+   "candidate_png_sha256": "d526b55a17643b8f8364799097feb05dcd42f79b6f76ef8a83c4a7a4baeaf595",
+   "png_bytes_identical": true,
+   "baseline_rgba_sha256": "3be58198ebd5f9bfed83bfc9973331a0a5fa6c044a8f5a3928847a864886cf33",
+   "candidate_rgba_sha256": "3be58198ebd5f9bfed83bfc9973331a0a5fa6c044a8f5a3928847a864886cf33",
+   "chunks": [
+    "IDAT",
+    "IEND",
+    "IHDR"
+   ],
+   "differing_pixels": 0,
+   "max_channel_delta": 0,
+   "delta_histogram": {},
+   "bounding_box": null
+  },
+  {
+   "frame": "U-2x/focus",
+   "size": [
+    960,
+    540
+   ],
+   "baseline_png_sha256": "f19d0a7a0d04b825ab044e912b43daa233dd4bbea5886adadab023af8bece788",
+   "candidate_png_sha256": "f19d0a7a0d04b825ab044e912b43daa233dd4bbea5886adadab023af8bece788",
+   "png_bytes_identical": true,
+   "baseline_rgba_sha256": "a0eb44a8c2945591f84335f487c8724fd9a400c56555f18ea5cbc2c81f5d9484",
+   "candidate_rgba_sha256": "a0eb44a8c2945591f84335f487c8724fd9a400c56555f18ea5cbc2c81f5d9484",
+   "chunks": [
+    "IDAT",
+    "IEND",
+    "IHDR"
+   ],
+   "differing_pixels": 0,
+   "max_channel_delta": 0,
+   "delta_histogram": {},
+   "bounding_box": null
+  },
+  {
+   "frame": "W-ortho/t1",
+   "size": [
+    960,
+    540
+   ],
+   "baseline_png_sha256": "a446d2d0db44fa13a6b623aaa5feca3d4e573f396d53833ff62c457f5abb4a28",
+   "candidate_png_sha256": "a446d2d0db44fa13a6b623aaa5feca3d4e573f396d53833ff62c457f5abb4a28",
+   "png_bytes_identical": true,
+   "baseline_rgba_sha256": "219b6903362f8469cb17af5906812018b157a2ad3ad2971af31588f9182f5dfb",
+   "candidate_rgba_sha256": "219b6903362f8469cb17af5906812018b157a2ad3ad2971af31588f9182f5dfb",
+   "chunks": [
+    "IDAT",
+    "IEND",
+    "IHDR"
+   ],
+   "differing_pixels": 0,
+   "max_channel_delta": 0,
+   "delta_histogram": {},
+   "bounding_box": null
+  },
+  {
+   "frame": "W-persp/t1",
+   "size": [
+    960,
+    540
+   ],
+   "baseline_png_sha256": "3d8c373c09f6c97823d05300528672a1eee059a58668f38f9f42e22bf736a95a",
+   "candidate_png_sha256": "3d8c373c09f6c97823d05300528672a1eee059a58668f38f9f42e22bf736a95a",
+   "png_bytes_identical": true,
+   "baseline_rgba_sha256": "cb78a174fc9a1ba8a27816a9b8bccdfebb3af3e406e0ef7bf57ff064b6fda1ba",
+   "candidate_rgba_sha256": "cb78a174fc9a1ba8a27816a9b8bccdfebb3af3e406e0ef7bf57ff064b6fda1ba",
+   "chunks": [
+    "IDAT",
+    "IEND",
+    "IHDR"
+   ],
+   "differing_pixels": 0,
+   "max_channel_delta": 0,
+   "delta_histogram": {},
+   "bounding_box": null
+  },
+  {
+   "frame": "W-persp/t61",
+   "size": [
+    960,
+    540
+   ],
+   "baseline_png_sha256": "b2cc9cabd58f00acb87c22ee601552799d6903491ed9b6af08e8c40f0e0454e1",
+   "candidate_png_sha256": "b2cc9cabd58f00acb87c22ee601552799d6903491ed9b6af08e8c40f0e0454e1",
+   "png_bytes_identical": true,
+   "baseline_rgba_sha256": "07e7a633eb2c0cfb8323391e210eed48d564d99cd23a23935cf7e51d3abd2f9f",
+   "candidate_rgba_sha256": "07e7a633eb2c0cfb8323391e210eed48d564d99cd23a23935cf7e51d3abd2f9f",
+   "chunks": [
+    "IDAT",
+    "IEND",
+    "IHDR"
+   ],
+   "differing_pixels": 0,
+   "max_channel_delta": 0,
+   "delta_histogram": {},
+   "bounding_box": null
+  }
+ ],
+ "source_free": [
+  {
+   "frame": "U-15x-name/preedit",
+   "png_bytes_identical": true,
+   "png_sha256": "cd9e0281be552e0c83c767bd857a68e2f59e8068da9511d3f1d8749753ccd88d",
+   "differing_pixels": 0,
+   "max_channel_delta": 0,
+   "delta_histogram": {},
+   "bounding_box": null
+  },
+  {
+   "frame": "W-persp/t1",
+   "png_bytes_identical": true,
+   "png_sha256": "3d8c373c09f6c97823d05300528672a1eee059a58668f38f9f42e22bf736a95a",
+   "differing_pixels": 0,
+   "max_channel_delta": 0,
+   "delta_histogram": {},
+   "bounding_box": null
+  },
+  {
+   "frame": "W-persp/t61",
+   "png_bytes_identical": true,
+   "png_sha256": "b2cc9cabd58f00acb87c22ee601552799d6903491ed9b6af08e8c40f0e0454e1",
+   "differing_pixels": 0,
+   "max_channel_delta": 0,
+   "delta_histogram": {},
+   "bounding_box": null
+  }
+ ],
+ "superseded_r2": [
+  {
+   "frame": "U-1x-unorm/idle.png",
+   "png_sha256": "95531dcb5f2585adae8216cf029ab9e00d57c7ca44e180f15b5017cdeb9bfe8f"
+  },
+  {
+   "frame": "W-ortho/t1.png",
+   "png_sha256": "21af6da2e71cddf879f273bcc996a02c1855c2dba84d8a9cb7cd0d131d62325c"
+  }
+ ],
+ "scope": {
+  "W-persp t1 -> t61": {
+   "differing_pixels": 3127,
+   "max_channel_delta": 150,
+   "delta_histogram": {
+    "1": 80,
+    "2": 56,
+    "3": 63,
+    "4": 30,
+    "5": 32,
+    "6": 43,
+    "7": 29,
+    "8": 29,
+    "9": 28,
+    "10": 26,
+    "11": 25,
+    "12": 20,
+    "13": 20,
+    "14": 25,
+    "15": 33,
+    "16": 26,
+    "17": 27,
+    "18": 24,
+    "19": 22,
+    "20": 21,
+    "21": 10,
+    "22": 17,
+    "23": 13,
+    "24": 12,
+    "25": 18,
+    "26": 11,
+    "27": 8,
+    "28": 8,
+    "29": 8,
+    "30": 18,
+    "31": 20,
+    "32": 11,
+    "33": 12,
+    "34": 13,
+    "35": 6,
+    "36": 18,
+    "37": 9,
+    "38": 6,
+    "39": 5,
+    "40": 17,
+    "41": 8,
+    "42": 11,
+    "43": 4,
+    "44": 28,
+    "45": 12,
+    "46": 14,
+    "47": 15,
+    "48": 5,
+    "49": 16,
+    "50": 4,
+    "51": 9,
+    "52": 12,
+    "53": 7,
+    "54": 8,
+    "55": 12,
+    "56": 13,
+    "57": 8,
+    "58": 12,
+    "59": 6,
+    "60": 10,
+    "61": 5,
+    "62": 12,
+    "63": 14,
+    "64": 12,
+    "65": 15,
+    "66": 24,
+    "67": 15,
+    "68": 18,
+    "69": 4,
+    "70": 10,
+    "71": 10,
+    "72": 9,
+    "73": 16,
+    "74": 44,
+    "75": 22,
+    "76": 15,
+    "77": 12,
+    "78": 9,
+    "79": 38,
+    "80": 16,
+    "81": 7,
+    "82": 18,
+    "83": 14,
+    "84": 17,
+    "85": 9,
+    "86": 8,
+    "87": 14,
+    "88": 16,
+    "89": 8,
+    "90": 21,
+    "91": 10,
+    "92": 13,
+    "93": 27,
+    "94": 20,
+    "95": 15,
+    "96": 17,
+    "97": 12,
+    "98": 14,
+    "99": 10,
+    "100": 15,
+    "101": 9,
+    "102": 10,
+    "103": 11,
+    "104": 8,
+    "105": 12,
+    "106": 17,
+    "107": 29,
+    "108": 12,
+    "109": 19,
+    "110": 5,
+    "111": 26,
+    "112": 8,
+    "113": 15,
+    "114": 6,
+    "115": 23,
+    "116": 11,
+    "117": 13,
+    "118": 13,
+    "119": 13,
+    "120": 20,
+    "121": 24,
+    "122": 43,
+    "123": 9,
+    "124": 19,
+    "125": 42,
+    "126": 17,
+    "127": 12,
+    "128": 17,
+    "129": 23,
+    "130": 20,
+    "131": 36,
+    "132": 19,
+    "133": 7,
+    "134": 8,
+    "135": 13,
+    "136": 9,
+    "137": 27,
+    "138": 16,
+    "139": 9,
+    "140": 20,
+    "141": 19,
+    "142": 38,
+    "143": 41,
+    "144": 32,
+    "145": 68,
+    "146": 105,
+    "147": 83,
+    "148": 103,
+    "149": 202,
+    "150": 48
+   },
+   "bounding_box": [
+    658,
+    446,
+    905,
+    478
+   ],
+   "expected": "only the moving text (row 5, right column) changes"
+  },
+  "U-1x idle -> select": {
+   "whole_frame": {
+    "differing_pixels": 3428,
+    "max_channel_delta": 227,
+    "delta_histogram": {
+     "1": 27,
+     "2": 4,
+     "3": 5,
+     "4": 7,
+     "5": 4,
+     "6": 5,
+     "7": 3,
+     "8": 5,
+     "9": 5,
+     "10": 1,
+     "11": 2,
+     "12": 4,
+     "13": 1,
+     "14": 15,
+     "15": 1,
+     "16": 2,
+     "17": 6,
+     "18": 7,
+     "19": 3,
+     "20": 15,
+     "21": 1,
+     "22": 12,
+     "23": 2,
+     "24": 2,
+     "25": 5,
+     "26": 3,
+     "27": 5,
+     "28": 2,
+     "29": 1,
+     "30": 4,
+     "31": 7,
+     "32": 1,
+     "33": 2,
+     "35": 3,
+     "36": 2,
+     "37": 3,
+     "38": 2,
+     "39": 14,
+     "40": 4,
+     "41": 2,
+     "42": 5,
+     "43": 4,
+     "45": 23,
+     "46": 46,
+     "47": 10,
+     "48": 4,
+     "49": 2,
+     "50": 1,
+     "51": 1,
+     "52": 2,
+     "54": 1,
+     "55": 1,
+     "57": 8,
+     "60": 6,
+     "62": 1,
+     "63": 1,
+     "64": 2,
+     "65": 2,
+     "66": 4,
+     "69": 4,
+     "70": 1,
+     "71": 1,
+     "72": 3,
+     "74": 1,
+     "75": 1,
+     "77": 44,
+     "78": 96,
+     "79": 1,
+     "81": 1,
+     "84": 2,
+     "85": 4,
+     "86": 4,
+     "87": 24,
+     "88": 1,
+     "89": 30,
+     "90": 41,
+     "91": 4,
+     "94": 7,
+     "95": 3,
+     "96": 42,
+     "97": 55,
+     "98": 53,
+     "99": 5,
+     "101": 2,
+     "102": 1,
+     "105": 15,
+     "106": 6,
+     "108": 1,
+     "112": 5,
+     "114": 2,
+     "116": 6,
+     "117": 1,
+     "119": 1,
+     "122": 1,
+     "124": 2,
+     "126": 4,
+     "129": 3,
+     "132": 2,
+     "134": 17,
+     "136": 760,
+     "137": 3,
+     "141": 6,
+     "144": 8,
+     "149": 1051,
+     "173": 8,
+     "179": 4,
+     "216": 8,
+     "227": 760
+    },
+    "bounding_box": [
+     32,
+     264,
+     764,
+     387
+    ]
+   },
+   "inside_name_field": {
+    "differing_pixels": 2963,
+    "max_channel_delta": 227,
+    "delta_histogram": {
+     "1": 27,
+     "2": 4,
+     "3": 5,
+     "4": 7,
+     "5": 4,
+     "6": 5,
+     "7": 3,
+     "8": 5,
+     "9": 5,
+     "10": 1,
+     "11": 2,
+     "12": 4,
+     "13": 1,
+     "14": 15,
+     "15": 1,
+     "16": 2,
+     "17": 6,
+     "18": 7,
+     "19": 3,
+     "20": 15,
+     "21": 1,
+     "22": 12,
+     "23": 2,
+     "24": 2,
+     "25": 5,
+     "26": 3,
+     "27": 5,
+     "28": 2,
+     "29": 1,
+     "30": 4,
+     "31": 7,
+     "32": 1,
+     "33": 2,
+     "35": 3,
+     "36": 2,
+     "37": 3,
+     "38": 2,
+     "39": 14,
+     "40": 4,
+     "41": 2,
+     "42": 5,
+     "43": 4,
+     "45": 4,
+     "47": 2,
+     "48": 4,
+     "49": 2,
+     "50": 1,
+     "51": 1,
+     "52": 2,
+     "54": 1,
+     "55": 1,
+     "57": 8,
+     "60": 6,
+     "62": 1,
+     "63": 1,
+     "64": 2,
+     "65": 2,
+     "66": 4,
+     "69": 4,
+     "70": 1,
+     "71": 1,
+     "72": 3,
+     "74": 1,
+     "75": 1,
+     "79": 1,
+     "81": 1,
+     "84": 2,
+     "85": 4,
+     "86": 4,
+     "87": 7,
+     "88": 1,
+     "89": 1,
+     "91": 4,
+     "94": 7,
+     "95": 3,
+     "97": 6,
+     "99": 5,
+     "101": 2,
+     "102": 1,
+     "105": 1,
+     "112": 5,
+     "114": 2,
+     "116": 6,
+     "117": 1,
+     "119": 1,
+     "122": 1,
+     "124": 2,
+     "126": 4,
+     "129": 3,
+     "132": 2,
+     "134": 17,
+     "136": 760,
+     "137": 3,
+     "141": 6,
+     "144": 8,
+     "149": 1051,
+     "173": 8,
+     "179": 4,
+     "216": 8,
+     "227": 760
+    },
+    "bounding_box": [
+     32,
+     264,
+     392,
+     300
+    ]
+   },
+   "name_field_box": [
+    32,
+    264,
+    392,
+    300
+   ],
+   "outside_name_field_pixels": 465,
+   "outside_name_field_bounding_box": [
+    630,
+    270,
+    764,
+    387
+   ],
+   "expected": "focus ring, selection and caret inside the name field; the world crate moves 2 ticks (Velocity)"
+  }
+ },
+ "controls": {
+  "wall_background": {
+   "box": [
+    440,
+    236,
+    640,
+    258
+   ],
+   "distinct_colours": 1,
+   "mode": [
+    96,
+    98,
+    105,
+    255
+   ],
+   "mode_count": 4400,
+   "pixels": 4400
+  },
+  "checks": [
+   {
+    "label": "w_latin_dup (row 1) equals w_latin (row 0): same string 85 px lower",
+    "subject": [
+     13,
+     93,
+     317,
+     131
+    ],
+    "reference": [
+     13,
+     8,
+     317,
+     46
+    ],
+    "transform": "none",
+    "reference_non_background_pixels": 2016,
+    "differing_pixels": 0,
+    "max_channel_delta": 0,
+    "delta_histogram": {},
+    "bounding_box": null
+   },
+   {
+    "label": "w_mirror (scale -1, 1, 1) mirrored back equals its unmirrored control",
+    "subject": [
+     13,
+     178,
+     317,
+     216
+    ],
+    "reference": [
+     333,
+     178,
+     637,
+     216
+    ],
+    "transform": "flip_h",
+    "reference_non_background_pixels": 1937,
+    "differing_pixels": 0,
+    "max_channel_delta": 0,
+    "delta_histogram": {},
+    "bounding_box": null
+   },
+   {
+    "label": "w_back (rotated 180 deg about Y, seen from behind) equals w_mirror",
+    "subject": [
+     653,
+     178,
+     957,
+     216
+    ],
+    "reference": [
+     13,
+     178,
+     317,
+     216
+    ],
+    "transform": "none",
+    "reference_non_background_pixels": 1937,
+    "differing_pixels": 0,
+    "max_channel_delta": 0,
+    "delta_histogram": {},
+    "bounding_box": null
+   },
+   {
+    "label": "w_child (parent scale 1, -1, 1) flipped back equals its unflipped control",
+    "subject": [
+     333,
+     296,
+     637,
+     332
+    ],
+    "reference": [
+     653,
+     263,
+     957,
+     299
+    ],
+    "transform": "flip_v",
+    "reference_non_background_pixels": 2558,
+    "differing_pixels": 0,
+    "max_channel_delta": 0,
+    "delta_histogram": {},
+    "bounding_box": null
+   }
+  ]
+ },
+ "colours": {
+  "U-1x/idle (Rgba8UnormSrgb)": [
+   {
+    "check": "resume surface interior",
+    "at": [
+     38,
+     157
+    ],
+    "expected": [
+     46,
+     50,
+     58
+    ],
+    "actual": [
+     46,
+     50,
+     58
+    ],
+    "exact": true
+   },
+   {
+    "check": "options surface interior",
+    "at": [
+     141,
+     157
+    ],
+    "expected": [
+     46,
+     50,
+     58
+    ],
+    "actual": [
+     46,
+     50,
+     58
+    ],
+    "exact": true
+   },
+   {
+    "check": "online surface interior",
+    "at": [
+     242,
+     157
+    ],
+    "expected": [
+     35,
+     38,
+     44
+    ],
+    "actual": [
+     35,
+     38,
+     44
+    ],
+    "exact": true
+   },
+   {
+    "check": "clip_a surface interior",
+    "at": [
+     38,
+     209
+    ],
+    "expected": [
+     46,
+     50,
+     58
+    ],
+    "actual": [
+     46,
+     50,
+     58
+    ],
+    "exact": true
+   },
+   {
+    "check": "name field border",
+    "at": [
+     32,
+     282
+    ],
+    "expected": [
+     100,
+     106,
+     119
+    ],
+    "actual": [
+     100,
+     106,
+     119
+    ],
+    "exact": true
+   },
+   {
+    "check": "name field interior",
+    "at": [
+     36,
+     282
+    ],
+    "expected": [
+     21,
+     23,
+     28
+    ],
+    "actual": [
+     21,
+     23,
+     28
+    ],
+    "exact": true
+   },
+   {
+    "check": "long field border",
+    "at": [
+     32,
+     352
+    ],
+    "expected": [
+     100,
+     106,
+     119
+    ],
+    "actual": [
+     100,
+     106,
+     119
+    ],
+    "exact": true
+   },
+   {
+    "check": "long field interior",
+    "at": [
+     36,
+     352
+    ],
+    "expected": [
+     21,
+     23,
+     28
+    ],
+    "actual": [
+     21,
+     23,
+     28
+    ],
+    "exact": true
+   },
+   {
+    "check": "cjk field border",
+    "at": [
+     32,
+     492
+    ],
+    "expected": [
+     100,
+     106,
+     119
+    ],
+    "actual": [
+     100,
+     106,
+     119
+    ],
+    "exact": true
+   },
+   {
+    "check": "cjk field interior",
+    "at": [
+     36,
+     492
+    ],
+    "expected": [
+     21,
+     23,
+     28
+    ],
+    "actual": [
+     21,
+     23,
+     28
+    ],
+    "exact": true
+   },
+   {
+    "check": "title glyph full-coverage colour",
+    "box": [
+     32,
+     28,
+     135,
+     64
+    ],
+    "expected": [
+     236,
+     238,
+     242
+    ],
+    "actual": [
+     236,
+     238,
+     242
+    ],
+    "exact": true
+   }
+  ],
+  "U-1x-unorm/idle (Rgba8Unorm)": [
+   {
+    "check": "resume surface interior",
+    "at": [
+     38,
+     157
+    ],
+    "expected": [
+     46,
+     50,
+     58
+    ],
+    "actual": [
+     46,
+     50,
+     58
+    ],
+    "exact": true
+   },
+   {
+    "check": "options surface interior",
+    "at": [
+     141,
+     157
+    ],
+    "expected": [
+     46,
+     50,
+     58
+    ],
+    "actual": [
+     46,
+     50,
+     58
+    ],
+    "exact": true
+   },
+   {
+    "check": "online surface interior",
+    "at": [
+     242,
+     157
+    ],
+    "expected": [
+     35,
+     38,
+     44
+    ],
+    "actual": [
+     35,
+     38,
+     44
+    ],
+    "exact": true
+   },
+   {
+    "check": "clip_a surface interior",
+    "at": [
+     38,
+     209
+    ],
+    "expected": [
+     46,
+     50,
+     58
+    ],
+    "actual": [
+     46,
+     50,
+     58
+    ],
+    "exact": true
+   },
+   {
+    "check": "name field border",
+    "at": [
+     32,
+     282
+    ],
+    "expected": [
+     100,
+     106,
+     119
+    ],
+    "actual": [
+     100,
+     106,
+     119
+    ],
+    "exact": true
+   },
+   {
+    "check": "name field interior",
+    "at": [
+     36,
+     282
+    ],
+    "expected": [
+     21,
+     23,
+     28
+    ],
+    "actual": [
+     21,
+     23,
+     28
+    ],
+    "exact": true
+   },
+   {
+    "check": "long field border",
+    "at": [
+     32,
+     352
+    ],
+    "expected": [
+     100,
+     106,
+     119
+    ],
+    "actual": [
+     100,
+     106,
+     119
+    ],
+    "exact": true
+   },
+   {
+    "check": "long field interior",
+    "at": [
+     36,
+     352
+    ],
+    "expected": [
+     21,
+     23,
+     28
+    ],
+    "actual": [
+     21,
+     23,
+     28
+    ],
+    "exact": true
+   },
+   {
+    "check": "cjk field border",
+    "at": [
+     32,
+     492
+    ],
+    "expected": [
+     100,
+     106,
+     119
+    ],
+    "actual": [
+     100,
+     106,
+     119
+    ],
+    "exact": true
+   },
+   {
+    "check": "cjk field interior",
+    "at": [
+     36,
+     492
+    ],
+    "expected": [
+     21,
+     23,
+     28
+    ],
+    "actual": [
+     21,
+     23,
+     28
+    ],
+    "exact": true
+   },
+   {
+    "check": "title glyph full-coverage colour",
+    "box": [
+     32,
+     28,
+     135,
+     64
+    ],
+    "expected": [
+     236,
+     238,
+     242
+    ],
+    "actual": [
+     236,
+     238,
+     242
+    ],
+    "exact": true
+   }
+  ],
+  "U-1x/select (name focused, 2 px ring)": [
+   {
+    "check": "resume surface interior",
+    "at": [
+     38,
+     157
+    ],
+    "expected": [
+     46,
+     50,
+     58
+    ],
+    "actual": [
+     46,
+     50,
+     58
+    ],
+    "exact": true
+   },
+   {
+    "check": "options surface interior",
+    "at": [
+     141,
+     157
+    ],
+    "expected": [
+     46,
+     50,
+     58
+    ],
+    "actual": [
+     46,
+     50,
+     58
+    ],
+    "exact": true
+   },
+   {
+    "check": "online surface interior",
+    "at": [
+     242,
+     157
+    ],
+    "expected": [
+     35,
+     38,
+     44
+    ],
+    "actual": [
+     35,
+     38,
+     44
+    ],
+    "exact": true
+   },
+   {
+    "check": "clip_a surface interior",
+    "at": [
+     38,
+     209
+    ],
+    "expected": [
+     46,
+     50,
+     58
+    ],
+    "actual": [
+     46,
+     50,
+     58
+    ],
+    "exact": true
+   },
+   {
+    "check": "name focus ring column 0",
+    "at": [
+     32,
+     282
+    ],
+    "expected": [
+     76,
+     146,
+     255
+    ],
+    "actual": [
+     76,
+     146,
+     255
+    ],
+    "exact": true
+   },
+   {
+    "check": "name focus ring column 1",
+    "at": [
+     33,
+     282
+    ],
+    "expected": [
+     76,
+     146,
+     255
+    ],
+    "actual": [
+     76,
+     146,
+     255
+    ],
+    "exact": true
+   },
+   {
+    "check": "name field interior inside ring",
+    "at": [
+     36,
+     282
+    ],
+    "expected": [
+     21,
+     23,
+     28
+    ],
+    "actual": [
+     21,
+     23,
+     28
+    ],
+    "exact": true
+   },
+   {
+    "check": "long field border",
+    "at": [
+     32,
+     352
+    ],
+    "expected": [
+     100,
+     106,
+     119
+    ],
+    "actual": [
+     100,
+     106,
+     119
+    ],
+    "exact": true
+   },
+   {
+    "check": "long field interior",
+    "at": [
+     36,
+     352
+    ],
+    "expected": [
+     21,
+     23,
+     28
+    ],
+    "actual": [
+     21,
+     23,
+     28
+    ],
+    "exact": true
+   },
+   {
+    "check": "cjk field border",
+    "at": [
+     32,
+     492
+    ],
+    "expected": [
+     100,
+     106,
+     119
+    ],
+    "actual": [
+     100,
+     106,
+     119
+    ],
+    "exact": true
+   },
+   {
+    "check": "cjk field interior",
+    "at": [
+     36,
+     492
+    ],
+    "expected": [
+     21,
+     23,
+     28
+    ],
+    "actual": [
+     21,
+     23,
+     28
+    ],
+    "exact": true
+   },
+   {
+    "check": "title glyph full-coverage colour",
+    "box": [
+     32,
+     28,
+     135,
+     64
+    ],
+    "expected": [
+     236,
+     238,
+     242
+    ],
+    "actual": [
+     236,
+     238,
+     242
+    ],
+    "exact": true
+   }
+  ],
+  "U-2x/focus (Resume focused, 4 px ring)": [
+   {
+    "check": "resume surface interior",
+    "at": [
+     70,
+     314
+    ],
+    "expected": [
+     46,
+     50,
+     58
+    ],
+    "actual": [
+     46,
+     50,
+     58
+    ],
+    "exact": true
+   },
+   {
+    "check": "options surface interior",
+    "at": [
+     275,
+     314
+    ],
+    "expected": [
+     46,
+     50,
+     58
+    ],
+    "actual": [
+     46,
+     50,
+     58
+    ],
+    "exact": true
+   },
+   {
+    "check": "online surface interior",
+    "at": [
+     478,
+     314
+    ],
+    "expected": [
+     35,
+     38,
+     44
+    ],
+    "actual": [
+     35,
+     38,
+     44
+    ],
+    "exact": true
+   },
+   {
+    "check": "clip_a surface interior",
+    "at": [
+     70,
+     418
+    ],
+    "expected": [
+     46,
+     50,
+     58
+    ],
+    "actual": [
+     46,
+     50,
+     58
+    ],
+    "exact": true
+   },
+   {
+    "check": "name field border",
+    "at": [
+     64,
+     564
+    ],
+    "clipped": true,
+    "visible_box": [
+     64,
+     528,
+     784,
+     528
+    ],
+    "exact": null
+   },
+   {
+    "check": "name field interior",
+    "at": [
+     68,
+     564
+    ],
+    "clipped": true,
+    "visible_box": [
+     64,
+     528,
+     784,
+     528
+    ],
+    "exact": null
+   },
+   {
+    "check": "long field border",
+    "at": [
+     64,
+     704
+    ],
+    "clipped": true,
+    "visible_box": [
+     64,
+     668,
+     784,
+     668
+    ],
+    "exact": null
+   },
+   {
+    "check": "long field interior",
+    "at": [
+     68,
+     704
+    ],
+    "clipped": true,
+    "visible_box": [
+     64,
+     668,
+     784,
+     668
+    ],
+    "exact": null
+   },
+   {
+    "check": "cjk field border",
+    "at": [
+     64,
+     984
+    ],
+    "clipped": true,
+    "visible_box": [
+     64,
+     948,
+     784,
+     948
+    ],
+    "exact": null
+   },
+   {
+    "check": "cjk field interior",
+    "at": [
+     68,
+     984
+    ],
+    "clipped": true,
+    "visible_box": [
+     64,
+     948,
+     784,
+     948
+    ],
+    "exact": null
+   },
+   {
+    "check": "resume focus ring column 0",
+    "at": [
+     64,
+     314
+    ],
+    "expected": [
+     76,
+     146,
+     255
+    ],
+    "actual": [
+     76,
+     146,
+     255
+    ],
+    "exact": true
+   },
+   {
+    "check": "resume focus ring column 1",
+    "at": [
+     65,
+     314
+    ],
+    "expected": [
+     76,
+     146,
+     255
+    ],
+    "actual": [
+     76,
+     146,
+     255
+    ],
+    "exact": true
+   },
+   {
+    "check": "resume focus ring column 2",
+    "at": [
+     66,
+     314
+    ],
+    "expected": [
+     76,
+     146,
+     255
+    ],
+    "actual": [
+     76,
+     146,
+     255
+    ],
+    "exact": true
+   },
+   {
+    "check": "resume focus ring column 3",
+    "at": [
+     67,
+     314
+    ],
+    "expected": [
+     76,
+     146,
+     255
+    ],
+    "actual": [
+     76,
+     146,
+     255
+    ],
+    "exact": true
+   },
+   {
+    "check": "resume surface inside ring",
+    "at": [
+     70,
+     314
+    ],
+    "expected": [
+     46,
+     50,
+     58
+    ],
+    "actual": [
+     46,
+     50,
+     58
+    ],
+    "exact": true
+   },
+   {
+    "check": "title glyph full-coverage colour",
+    "box": [
+     64,
+     56,
+     184,
+     128
+    ],
+    "expected": [
+     236,
+     238,
+     242
+    ],
+    "actual": [
+     236,
+     238,
+     242
+    ],
+    "exact": true
+   }
+  ],
+  "U-15x-name/preedit (name focused, 3 px ring)": [
+   {
+    "check": "resume surface interior",
+    "at": [
+     54,
+     235
+    ],
+    "expected": [
+     46,
+     50,
+     58
+    ],
+    "actual": [
+     46,
+     50,
+     58
+    ],
+    "exact": true
+   },
+   {
+    "check": "options surface interior",
+    "at": [
+     208,
+     235
+    ],
+    "expected": [
+     46,
+     50,
+     58
+    ],
+    "actual": [
+     46,
+     50,
+     58
+    ],
+    "exact": true
+   },
+   {
+    "check": "online surface interior",
+    "at": [
+     360,
+     235
+    ],
+    "expected": [
+     35,
+     38,
+     44
+    ],
+    "actual": [
+     35,
+     38,
+     44
+    ],
+    "exact": true
+   },
+   {
+    "check": "clip_a surface interior",
+    "at": [
+     54,
+     313
+    ],
+    "expected": [
+     46,
+     50,
+     58
+    ],
+    "actual": [
+     46,
+     50,
+     58
+    ],
+    "exact": true
+   },
+   {
+    "check": "name focus ring column 0",
+    "at": [
+     48,
+     423
+    ],
+    "expected": [
+     76,
+     146,
+     255
+    ],
+    "actual": [
+     76,
+     146,
+     255
+    ],
+    "exact": true
+   },
+   {
+    "check": "name focus ring column 1",
+    "at": [
+     49,
+     423
+    ],
+    "expected": [
+     76,
+     146,
+     255
+    ],
+    "actual": [
+     76,
+     146,
+     255
+    ],
+    "exact": true
+   },
+   {
+    "check": "name focus ring column 2",
+    "at": [
+     50,
+     423
+    ],
+    "expected": [
+     76,
+     146,
+     255
+    ],
+    "actual": [
+     76,
+     146,
+     255
+    ],
+    "exact": true
+   },
+   {
+    "check": "name field interior inside ring",
+    "at": [
+     53,
+     423
+    ],
+    "expected": [
+     21,
+     23,
+     28
+    ],
+    "actual": [
+     21,
+     23,
+     28
+    ],
+    "exact": true
+   },
+   {
+    "check": "long field border",
+    "at": [
+     48,
+     528
+    ],
+    "clipped": true,
+    "visible_box": [
+     48,
+     501,
+     588,
+     501
+    ],
+    "exact": null
+   },
+   {
+    "check": "long field interior",
+    "at": [
+     52,
+     528
+    ],
+    "clipped": true,
+    "visible_box": [
+     48,
+     501,
+     588,
+     501
+    ],
+    "exact": null
+   },
+   {
+    "check": "cjk field border",
+    "at": [
+     48,
+     738
+    ],
+    "clipped": true,
+    "visible_box": [
+     48,
+     711,
+     588,
+     711
+    ],
+    "exact": null
+   },
+   {
+    "check": "cjk field interior",
+    "at": [
+     52,
+     738
+    ],
+    "clipped": true,
+    "visible_box": [
+     48,
+     711,
+     588,
+     711
+    ],
+    "exact": null
+   },
+   {
+    "check": "title glyph full-coverage colour",
+    "box": [
+     48,
+     42,
+     168,
+     96
+    ],
+    "expected": [
+     236,
+     238,
+     242
+    ],
+    "actual": [
+     236,
+     238,
+     242
+    ],
+    "exact": true
+   }
+  ]
+ },
+ "srgb_vs_unorm": {
+  "whole_frame": {
+   "differing_pixels": 23385,
+   "max_channel_delta": 63,
+   "delta_histogram": {
+    "1": 11491,
+    "2": 771,
+    "3": 371,
+    "4": 205,
+    "5": 190,
+    "6": 163,
+    "7": 181,
+    "8": 150,
+    "9": 232,
+    "10": 179,
+    "11": 97,
+    "12": 269,
+    "13": 133,
+    "14": 109,
+    "15": 150,
+    "16": 160,
+    "17": 121,
+    "18": 162,
+    "19": 152,
+    "20": 182,
+    "21": 128,
+    "22": 163,
+    "23": 134,
+    "24": 131,
+    "25": 252,
+    "26": 157,
+    "27": 159,
+    "28": 210,
+    "29": 239,
+    "30": 160,
+    "31": 209,
+    "32": 202,
+    "33": 150,
+    "34": 168,
+    "35": 155,
+    "36": 309,
+    "37": 276,
+    "38": 228,
+    "39": 317,
+    "40": 150,
+    "41": 157,
+    "42": 183,
+    "43": 281,
+    "44": 248,
+    "45": 302,
+    "46": 206,
+    "47": 274,
+    "48": 195,
+    "49": 203,
+    "50": 206,
+    "51": 218,
+    "52": 345,
+    "53": 456,
+    "54": 294,
+    "55": 76,
+    "56": 105,
+    "57": 68,
+    "58": 43,
+    "59": 46,
+    "60": 43,
+    "61": 21,
+    "62": 43,
+    "63": 7
+   },
+   "bounding_box": [
+    0,
+    35,
+    960,
+    540
+   ]
+  },
+  "inside_drawn_widgets": 13793,
+  "outside_drawn_widgets": 9592,
+  "max_delta": {
+   "inside": 63,
+   "outside": 1
+  },
+  "note": "One UI and world into an sRGB and a UNORM target. UI blends encoded values on UNORM targets and linear values on sRGB targets (ui.wgsl frame.encode); the world output pass encodes in the shader for UNORM and on store for sRGB. A target-format property, identical in both variants; not a parity result."
+ },
+ "reports": {
+  "U-15x-name": {
+   "adapter": {
+    "backend": "Metal",
+    "device_type": "IntegratedGpu",
+    "driver": "",
+    "driver_info": "",
+    "name": "Apple M5 Pro"
+   },
+   "target_format": "Rgba8UnormSrgb",
+   "size": [
+    960,
+    540
+   ],
+   "ui_viewport": [
+    640.0,
+    360.0
+   ],
+   "final_tick": 2,
+   "failed": false,
+   "captures": [
+    {
+     "capture": "preedit",
+     "tick": 2,
+     "accepted_frames": 2,
+     "scene_stats": {
+      "diagnostic_entities": 0,
+      "model_draw_calls": 3,
+      "model_entities": 3,
+      "model_triangles": 36,
+      "primitive_instances": 3,
+      "sprite_entities": 0,
+      "text_entities": 1,
+      "text_glyph_quads": 11,
+      "text_gpu_bytes": 7186,
+      "text_missing_glyphs": 0,
+      "tile_cells": 0,
+      "tilemap_entities": 0
+     },
+     "uploads_since_startup": {
+      "text_atlas_textures": 0,
+      "text_glyph_buffers": 0,
+      "ui_atlas_textures": 1,
+      "ui_frame_writes": 1,
+      "ui_quad_buffers": 2
+     },
+     "startup_uploads": {
+      "text_atlas_textures": 1,
+      "text_glyph_buffers": 1,
+      "ui_atlas_textures": 1,
+      "ui_quad_buffers": 1
+     },
+     "ui_stats": {
+      "glyph_quads": 251,
+      "gpu_bytes": 54558,
+      "missing_glyphs": 0,
+      "quads": 367,
+      "widgets": 17
+     },
+     "focus": "0000000000000000000000635F"
+    }
+   ]
+  },
+  "U-15x-name-source-free": {
+   "adapter": {
+    "backend": "Metal",
+    "device_type": "IntegratedGpu",
+    "driver": "",
+    "driver_info": "",
+    "name": "Apple M5 Pro"
+   },
+   "target_format": "Rgba8UnormSrgb",
+   "size": [
+    960,
+    540
+   ],
+   "ui_viewport": [
+    640.0,
+    360.0
+   ],
+   "final_tick": 2,
+   "failed": false,
+   "captures": [
+    {
+     "capture": "preedit",
+     "tick": 2,
+     "accepted_frames": 2,
+     "scene_stats": {
+      "diagnostic_entities": 0,
+      "model_draw_calls": 3,
+      "model_entities": 3,
+      "model_triangles": 36,
+      "primitive_instances": 3,
+      "sprite_entities": 0,
+      "text_entities": 1,
+      "text_glyph_quads": 11,
+      "text_gpu_bytes": 7186,
+      "text_missing_glyphs": 0,
+      "tile_cells": 0,
+      "tilemap_entities": 0
+     },
+     "uploads_since_startup": {
+      "text_atlas_textures": 0,
+      "text_glyph_buffers": 0,
+      "ui_atlas_textures": 1,
+      "ui_frame_writes": 1,
+      "ui_quad_buffers": 2
+     },
+     "startup_uploads": {
+      "text_atlas_textures": 1,
+      "text_glyph_buffers": 1,
+      "ui_atlas_textures": 1,
+      "ui_quad_buffers": 1
+     },
+     "ui_stats": {
+      "glyph_quads": 251,
+      "gpu_bytes": 54558,
+      "missing_glyphs": 0,
+      "quads": 367,
+      "widgets": 17
+     },
+     "focus": "0000000000000000000000635F"
+    }
+   ]
+  },
+  "U-1x": {
+   "adapter": {
+    "backend": "Metal",
+    "device_type": "IntegratedGpu",
+    "driver": "",
+    "driver_info": "",
+    "name": "Apple M5 Pro"
+   },
+   "target_format": "Rgba8UnormSrgb",
+   "size": [
+    960,
+    540
+   ],
+   "ui_viewport": [
+    960.0,
+    540.0
+   ],
+   "final_tick": 3,
+   "failed": false,
+   "captures": [
+    {
+     "capture": "idle",
+     "tick": 1,
+     "accepted_frames": 1,
+     "scene_stats": {
+      "diagnostic_entities": 0,
+      "model_draw_calls": 3,
+      "model_entities": 3,
+      "model_triangles": 36,
+      "primitive_instances": 3,
+      "sprite_entities": 0,
+      "text_entities": 1,
+      "text_glyph_quads": 11,
+      "text_gpu_bytes": 7186,
+      "text_missing_glyphs": 0,
+      "tile_cells": 0,
+      "tilemap_entities": 0
+     },
+     "uploads_since_startup": {
+      "text_atlas_textures": 0,
+      "text_glyph_buffers": 0,
+      "ui_atlas_textures": 0,
+      "ui_frame_writes": 1,
+      "ui_quad_buffers": 0
+     },
+     "startup_uploads": {
+      "text_atlas_textures": 1,
+      "text_glyph_buffers": 1,
+      "ui_atlas_textures": 1,
+      "ui_quad_buffers": 1
+     },
+     "ui_stats": {
+      "glyph_quads": 250,
+      "gpu_bytes": 54366,
+      "missing_glyphs": 0,
+      "quads": 364,
+      "widgets": 17
+     },
+     "focus": null
+    },
+    {
+     "capture": "select",
+     "tick": 3,
+     "accepted_frames": 3,
+     "scene_stats": {
+      "diagnostic_entities": 0,
+      "model_draw_calls": 3,
+      "model_entities": 3,
+      "model_triangles": 36,
+      "primitive_instances": 3,
+      "sprite_entities": 0,
+      "text_entities": 1,
+      "text_glyph_quads": 11,
+      "text_gpu_bytes": 7186,
+      "text_missing_glyphs": 0,
+      "tile_cells": 0,
+      "tilemap_entities": 0
+     },
+     "uploads_since_startup": {
+      "text_atlas_textures": 0,
+      "text_glyph_buffers": 0,
+      "ui_atlas_textures": 0,
+      "ui_frame_writes": 1,
+      "ui_quad_buffers": 2
+     },
+     "startup_uploads": {
+      "text_atlas_textures": 1,
+      "text_glyph_buffers": 1,
+      "ui_atlas_textures": 1,
+      "ui_quad_buffers": 1
+     },
+     "ui_stats": {
+      "glyph_quads": 250,
+      "gpu_bytes": 54430,
+      "missing_glyphs": 0,
+      "quads": 365,
+      "widgets": 17
+     },
+     "focus": "0000000000000000000000635F"
+    }
+   ]
+  },
+  "U-1x-unorm": {
+   "adapter": {
+    "backend": "Metal",
+    "device_type": "IntegratedGpu",
+    "driver": "",
+    "driver_info": "",
+    "name": "Apple M5 Pro"
+   },
+   "target_format": "Rgba8Unorm",
+   "size": [
+    960,
+    540
+   ],
+   "ui_viewport": [
+    960.0,
+    540.0
+   ],
+   "final_tick": 1,
+   "failed": false,
+   "captures": [
+    {
+     "capture": "idle",
+     "tick": 1,
+     "accepted_frames": 1,
+     "scene_stats": {
+      "diagnostic_entities": 0,
+      "model_draw_calls": 3,
+      "model_entities": 3,
+      "model_triangles": 36,
+      "primitive_instances": 3,
+      "sprite_entities": 0,
+      "text_entities": 1,
+      "text_glyph_quads": 11,
+      "text_gpu_bytes": 7186,
+      "text_missing_glyphs": 0,
+      "tile_cells": 0,
+      "tilemap_entities": 0
+     },
+     "uploads_since_startup": {
+      "text_atlas_textures": 0,
+      "text_glyph_buffers": 0,
+      "ui_atlas_textures": 0,
+      "ui_frame_writes": 1,
+      "ui_quad_buffers": 0
+     },
+     "startup_uploads": {
+      "text_atlas_textures": 1,
+      "text_glyph_buffers": 1,
+      "ui_atlas_textures": 1,
+      "ui_quad_buffers": 1
+     },
+     "ui_stats": {
+      "glyph_quads": 250,
+      "gpu_bytes": 54366,
+      "missing_glyphs": 0,
+      "quads": 364,
+      "widgets": 17
+     },
+     "focus": null
+    }
+   ]
+  },
+  "U-2x": {
+   "adapter": {
+    "backend": "Metal",
+    "device_type": "IntegratedGpu",
+    "driver": "",
+    "driver_info": "",
+    "name": "Apple M5 Pro"
+   },
+   "target_format": "Rgba8UnormSrgb",
+   "size": [
+    960,
+    540
+   ],
+   "ui_viewport": [
+    480.0,
+    270.0
+   ],
+   "final_tick": 2,
+   "failed": false,
+   "captures": [
+    {
+     "capture": "focus",
+     "tick": 2,
+     "accepted_frames": 2,
+     "scene_stats": {
+      "diagnostic_entities": 0,
+      "model_draw_calls": 3,
+      "model_entities": 3,
+      "model_triangles": 36,
+      "primitive_instances": 3,
+      "sprite_entities": 0,
+      "text_entities": 1,
+      "text_glyph_quads": 11,
+      "text_gpu_bytes": 7186,
+      "text_missing_glyphs": 0,
+      "tile_cells": 0,
+      "tilemap_entities": 0
+     },
+     "uploads_since_startup": {
+      "text_atlas_textures": 0,
+      "text_glyph_buffers": 0,
+      "ui_atlas_textures": 0,
+      "ui_frame_writes": 1,
+      "ui_quad_buffers": 1
+     },
+     "startup_uploads": {
+      "text_atlas_textures": 1,
+      "text_glyph_buffers": 1,
+      "ui_atlas_textures": 1,
+      "ui_quad_buffers": 1
+     },
+     "ui_stats": {
+      "glyph_quads": 250,
+      "gpu_bytes": 54430,
+      "missing_glyphs": 0,
+      "quads": 365,
+      "widgets": 17
+     },
+     "focus": "00000000000000000000006354"
+    }
+   ]
+  },
+  "W-ortho": {
+   "adapter": {
+    "backend": "Metal",
+    "device_type": "IntegratedGpu",
+    "driver": "",
+    "driver_info": "",
+    "name": "Apple M5 Pro"
+   },
+   "target_format": "Rgba8UnormSrgb",
+   "size": [
+    960,
+    540
+   ],
+   "ui_viewport": null,
+   "final_tick": 1,
+   "failed": false,
+   "captures": [
+    {
+     "capture": "t1",
+     "tick": 1,
+     "accepted_frames": 1,
+     "scene_stats": {
+      "diagnostic_entities": 0,
+      "model_draw_calls": 3,
+      "model_entities": 3,
+      "model_triangles": 36,
+      "primitive_instances": 3,
+      "sprite_entities": 0,
+      "text_entities": 22,
+      "text_glyph_quads": 327,
+      "text_gpu_bytes": 255638,
+      "text_missing_glyphs": 0,
+      "tile_cells": 0,
+      "tilemap_entities": 0
+     },
+     "uploads_since_startup": {
+      "text_atlas_textures": 0,
+      "text_glyph_buffers": 0,
+      "ui_atlas_textures": 0,
+      "ui_frame_writes": 0,
+      "ui_quad_buffers": 0
+     },
+     "startup_uploads": {
+      "text_atlas_textures": 1,
+      "text_glyph_buffers": 1,
+      "ui_atlas_textures": 0,
+      "ui_quad_buffers": 0
+     },
+     "ui_stats": null,
+     "focus": null
+    }
+   ]
+  },
+  "W-persp": {
+   "adapter": {
+    "backend": "Metal",
+    "device_type": "IntegratedGpu",
+    "driver": "",
+    "driver_info": "",
+    "name": "Apple M5 Pro"
+   },
+   "target_format": "Rgba8UnormSrgb",
+   "size": [
+    960,
+    540
+   ],
+   "ui_viewport": null,
+   "final_tick": 61,
+   "failed": false,
+   "captures": [
+    {
+     "capture": "t1",
+     "tick": 1,
+     "accepted_frames": 1,
+     "scene_stats": {
+      "diagnostic_entities": 0,
+      "model_draw_calls": 3,
+      "model_entities": 3,
+      "model_triangles": 36,
+      "primitive_instances": 3,
+      "sprite_entities": 0,
+      "text_entities": 22,
+      "text_glyph_quads": 327,
+      "text_gpu_bytes": 255638,
+      "text_missing_glyphs": 0,
+      "tile_cells": 0,
+      "tilemap_entities": 0
+     },
+     "uploads_since_startup": {
+      "text_atlas_textures": 0,
+      "text_glyph_buffers": 0,
+      "ui_atlas_textures": 0,
+      "ui_frame_writes": 0,
+      "ui_quad_buffers": 0
+     },
+     "startup_uploads": {
+      "text_atlas_textures": 1,
+      "text_glyph_buffers": 1,
+      "ui_atlas_textures": 0,
+      "ui_quad_buffers": 0
+     },
+     "ui_stats": null,
+     "focus": null
+    },
+    {
+     "capture": "t61",
+     "tick": 61,
+     "accepted_frames": 61,
+     "scene_stats": {
+      "diagnostic_entities": 0,
+      "model_draw_calls": 3,
+      "model_entities": 3,
+      "model_triangles": 36,
+      "primitive_instances": 3,
+      "sprite_entities": 0,
+      "text_entities": 22,
+      "text_glyph_quads": 327,
+      "text_gpu_bytes": 255638,
+      "text_missing_glyphs": 0,
+      "tile_cells": 0,
+      "tilemap_entities": 0
+     },
+     "uploads_since_startup": {
+      "text_atlas_textures": 0,
+      "text_glyph_buffers": 0,
+      "ui_atlas_textures": 0,
+      "ui_frame_writes": 0,
+      "ui_quad_buffers": 0
+     },
+     "startup_uploads": {
+      "text_atlas_textures": 1,
+      "text_glyph_buffers": 1,
+      "ui_atlas_textures": 0,
+      "ui_quad_buffers": 0
+     },
+     "ui_stats": null,
+     "focus": null
+    }
+   ]
+  },
+  "W-persp-source-free": {
+   "adapter": {
+    "backend": "Metal",
+    "device_type": "IntegratedGpu",
+    "driver": "",
+    "driver_info": "",
+    "name": "Apple M5 Pro"
+   },
+   "target_format": "Rgba8UnormSrgb",
+   "size": [
+    960,
+    540
+   ],
+   "ui_viewport": null,
+   "final_tick": 61,
+   "failed": false,
+   "captures": [
+    {
+     "capture": "t1",
+     "tick": 1,
+     "accepted_frames": 1,
+     "scene_stats": {
+      "diagnostic_entities": 0,
+      "model_draw_calls": 3,
+      "model_entities": 3,
+      "model_triangles": 36,
+      "primitive_instances": 3,
+      "sprite_entities": 0,
+      "text_entities": 22,
+      "text_glyph_quads": 327,
+      "text_gpu_bytes": 255638,
+      "text_missing_glyphs": 0,
+      "tile_cells": 0,
+      "tilemap_entities": 0
+     },
+     "uploads_since_startup": {
+      "text_atlas_textures": 0,
+      "text_glyph_buffers": 0,
+      "ui_atlas_textures": 0,
+      "ui_frame_writes": 0,
+      "ui_quad_buffers": 0
+     },
+     "startup_uploads": {
+      "text_atlas_textures": 1,
+      "text_glyph_buffers": 1,
+      "ui_atlas_textures": 0,
+      "ui_quad_buffers": 0
+     },
+     "ui_stats": null,
+     "focus": null
+    },
+    {
+     "capture": "t61",
+     "tick": 61,
+     "accepted_frames": 61,
+     "scene_stats": {
+      "diagnostic_entities": 0,
+      "model_draw_calls": 3,
+      "model_entities": 3,
+      "model_triangles": 36,
+      "primitive_instances": 3,
+      "sprite_entities": 0,
+      "text_entities": 22,
+      "text_glyph_quads": 327,
+      "text_gpu_bytes": 255638,
+      "text_missing_glyphs": 0,
+      "tile_cells": 0,
+      "tilemap_entities": 0
+     },
+     "uploads_since_startup": {
+      "text_atlas_textures": 0,
+      "text_glyph_buffers": 0,
+      "ui_atlas_textures": 0,
+      "ui_frame_writes": 0,
+      "ui_quad_buffers": 0
+     },
+     "startup_uploads": {
+      "text_atlas_textures": 1,
+      "text_glyph_buffers": 1,
+      "ui_atlas_textures": 0,
+      "ui_quad_buffers": 0
+     },
+     "ui_stats": null,
+     "focus": null
+    }
+   ]
+  }
+ },
+ "summary": {
+  "frames_compared": 8,
+  "png_identical": 8,
+  "rgba_identical": 8,
+  "source_free_identical": 3,
+  "source_free_frames": 3,
+  "controls_exact": 4,
+  "controls": 4,
+  "colour_checks_exact": 53,
+  "colour_checks": 53,
+  "colour_probes_clipped": 10
+ }
+}

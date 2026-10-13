@@ -39,7 +39,7 @@ fn grid(pixels: &[[u8; 4]], side: usize) -> Vec<[u8; 4]> {
 #[test]
 #[ignore = "requires a native GPU; desktop workflows execute this"]
 fn nearest_texel_ties_preserve_each_texel_through_orientation_and_sheet_resize() {
-    let renderer = Renderer::headless().unwrap();
+    let renderer = crate::support::checked(Renderer::headless().unwrap());
     let mut fixture = Fixture::new(&sheet(64), 64, 64);
     fixture.edit("region", json!([13, 17, 7, 7]));
     fixture.edit("size", json!([7. / 8., 7. / 8.]));
@@ -139,7 +139,7 @@ fn nearest_texel_ties_preserve_each_texel_through_orientation_and_sheet_resize()
 #[test]
 #[ignore = "requires a native GPU; desktop workflows execute this"]
 fn magnified_nearest_texels_keep_uniform_widths_past_pixel_center_ties() {
-    let renderer = Renderer::headless().unwrap();
+    let renderer = crate::support::checked(Renderer::headless().unwrap());
     eprintln!(
         "sprite offset sweep adapter: {:?}",
         renderer.adapter.get_info()

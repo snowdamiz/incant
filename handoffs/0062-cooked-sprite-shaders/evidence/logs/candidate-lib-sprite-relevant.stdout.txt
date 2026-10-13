@@ -1,0 +1,10 @@
+
+running 6 tests
+test models::retained::flipbook_tests::retained_flipbooks_match_static_frames_without_rebuilding_after_cache_deletion ... ok
+test models::retained::sprite_tests::source_free_native_atlas_sprites_match_fresh_frames_across_motion_reflection_and_rebuild ... ok
+test models::retained::tests::retained_flipbook_selection_stages_without_allocation ... ok
+test models::retained::tests::retained_sprite_cpu_staging_allocates_nothing_and_rejects_changed_bindings ... ok
+test models::retained::tests::retained_tile_cpu_staging_allocates_nothing_without_visiting_binding_cells ... ok
+test models::retained::tilemap_tests::cooked_source_free_tile_frames_match_raw_cell_sprite_oracle_and_survive_rejection ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 96 filtered out; finished in 0.67s

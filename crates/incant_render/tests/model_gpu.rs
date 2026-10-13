@@ -36,7 +36,7 @@ fn capture(fixture: &Fixture, renderer: &Renderer, name: &str) -> Vec<u8> {
 #[test]
 #[ignore = "requires a native GPU; run by the desktop workflow"]
 fn color_maps_use_srgb_and_texture_reimport_keeps_retained_materials() {
-    let renderer = Renderer::headless().unwrap();
+    let renderer = crate::support::checked(Renderer::headless().unwrap());
     let mut fixture = Fixture::new(json!({"pbrMetallicRoughness":{"metallicFactor":0}}));
     fixture.texture(&[128, 64, 32, 255], 1, 1, |g| {
         g["materials"][0]["pbrMetallicRoughness"]["baseColorTexture"] = json!({"index":0});
@@ -74,7 +74,7 @@ fn color_maps_use_srgb_and_texture_reimport_keeps_retained_materials() {
 #[test]
 #[ignore = "requires a native GPU; run by the desktop workflow"]
 fn alpha_modes_and_back_faces_follow_material_semantics() {
-    let renderer = Renderer::headless().unwrap();
+    let renderer = crate::support::checked(Renderer::headless().unwrap());
     let mut fixture = Fixture::new(emissive([1., 0., 0.], 0., "OPAQUE"));
     near(
         center(&capture(&fixture, &renderer, "opaque-alpha-zero")),
@@ -148,7 +148,7 @@ fn alpha_modes_and_back_faces_follow_material_semantics() {
 #[test]
 #[ignore = "requires a native GPU; run by the desktop workflow"]
 fn material_maps_preserve_numeric_channels_normal_scale_and_occlusion_strength() {
-    let renderer = Renderer::headless().unwrap();
+    let renderer = crate::support::checked(Renderer::headless().unwrap());
     let mut fixture = Fixture::new(
         json!({"pbrMetallicRoughness":{"baseColorFactor":[0.7,0.4,0.2,1],"metallicFactor":1,"roughnessFactor":1}}),
     );
@@ -194,7 +194,7 @@ fn material_maps_preserve_numeric_channels_normal_scale_and_occlusion_strength()
 #[test]
 #[ignore = "requires a native GPU; run by the desktop workflow"]
 fn emissive_maps_and_samplers_retain_color_and_addressing() {
-    let renderer = Renderer::headless().unwrap();
+    let renderer = crate::support::checked(Renderer::headless().unwrap());
     let mut fixture = Fixture::new(emissive([1.; 3], 1., "OPAQUE"));
     fixture.texture(&[128, 64, 32, 255], 1, 1, |g| {
         g["materials"][0]["emissiveTexture"] = json!({"index":0})
@@ -278,7 +278,7 @@ fn emissive_maps_and_samplers_retain_color_and_addressing() {
 fn imported_geometry_survives_sources_and_retained_versions_survive_reimport() {
     let temp = tempfile::tempdir().unwrap();
     let (mut project, mut assets, id) = support::fixture(temp.path());
-    let renderer = Renderer::headless().unwrap();
+    let renderer = crate::support::checked(Renderer::headless().unwrap());
     let original = renderer.prepare_scene(&project, &assets).unwrap();
     assert_eq!(original.stats().model_draw_calls, 1);
     assert_eq!(original.stats().primitive_instances, 2);
@@ -318,7 +318,7 @@ fn imported_geometry_survives_sources_and_retained_versions_survive_reimport() {
 #[test]
 #[ignore = "requires a native GPU; run by the desktop workflow"]
 fn highlight_energy_survives_and_transparency_blends_before_tone_mapping() {
-    let renderer = Renderer::headless().unwrap();
+    let renderer = crate::support::checked(Renderer::headless().unwrap());
     let mut fixture =
         Fixture::new(json!({"pbrMetallicRoughness":{"metallicFactor":0,"roughnessFactor":0.3}}));
     let normal = (glam::Vec3::new(1., 2., 3.).normalize()
@@ -354,7 +354,7 @@ fn highlight_energy_survives_and_transparency_blends_before_tone_mapping() {
 #[test]
 #[ignore = "requires a native GPU; run by the desktop workflow"]
 fn dark_fill_lit_materials_remain_distinguishable() {
-    let renderer = Renderer::headless().unwrap();
+    let renderer = crate::support::checked(Renderer::headless().unwrap());
     let mut fixture = Fixture::new(json!({"pbrMetallicRoughness":{"metallicFactor":0}}));
     // This surface faces the camera but away from the key. Only the convolved
     // environment contributes, including dielectric specular reflection.
