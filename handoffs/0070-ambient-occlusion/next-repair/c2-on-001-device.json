@@ -1,0 +1,222 @@
+{
+ "authored_n6": {
+  "at": 161,
+  "max_step_255": 7.0,
+  "verdict": "failed"
+ },
+ "authored_quality_pass": false,
+ "binding": {
+  "build_record_sha256": "38c06d0bf43379d5e64c4a815941b5db5333d82bc33150b248e2033a9486edb7",
+  "engine_commit": "5dfc522ec164f2bc50d760f12db57eae233f33d8",
+  "feature_binding": {
+   "expected": {
+    "helper_incant_render_expected": [
+     "default",
+     "physics-deterministic",
+     "ssao-stage-readback"
+    ],
+    "lib_cooked_requested": [
+     "cooked-materials",
+     "ssao-stage-readback"
+    ],
+    "lib_cooked_required": [
+     "cooked-materials",
+     "ssao-stage-readback"
+    ],
+    "lib_expected": [
+     "default",
+     "physics-deterministic",
+     "ssao-stage-readback"
+    ],
+    "lib_requested": [
+     "ssao-stage-readback"
+    ],
+    "note": "Test default shader features include the non-default diagnostic ssao-stage-readback; the build records the actual compiler-artifact features and refuses any other set."
+   },
+   "helper_incant_render": [
+    "default",
+    "physics-deterministic",
+    "ssao-stage-readback"
+   ],
+   "lib": [
+    "default",
+    "physics-deterministic",
+    "ssao-stage-readback"
+   ],
+   "lib_cooked": [
+    "cooked-geometry",
+    "cooked-materials",
+    "cooked-output",
+    "default",
+    "physics-deterministic",
+    "ssao-stage-readback"
+   ],
+   "problems": []
+  },
+  "frozen": {
+   "effects_gpu": "de30ad74eead283acf32702adc98df0cc639a0f9875e72fca1e0a54df57c931e",
+   "lib": "4614a9932da985dc4bb905a5f33961d19c971ed1fc9dcdc16e157810cdb1c95d",
+   "lib-cooked": "932694c68db210d1b65b5ae47b1e61e1e97206da5c580a53e800a3b4994a02b4"
+  },
+  "namespace": "0070-ssao-filter-001",
+  "plan_matches_build": false,
+  "plan_sha256": "5bdceae405a45e209177ae9d4af14abee9b2f2d8c630a2b0196d7b0a8677f4f6"
+ },
+ "evidence": "/Users/andreyyurlov/.codex/incant-evidence/0070-ssao-filter-001",
+ "failed_numeric_gates": [
+  "ssao_core_edge_filtered",
+  "ssao_core_edge_filtered_stages",
+  "ssao_core_o_filtered",
+  "ssao_core_o_filtered_stages",
+  "ssao_core_p_filtered",
+  "ssao_core_p_filtered_stages",
+  "ssao_core_strength_0_5_filtered",
+  "ssao_core_strength_0_5_filtered_stages",
+  "ssao_geometry_g_ao_backface_filtered",
+  "ssao_geometry_g_ao_backface_filtered_stages",
+  "ssao_geometry_g_ao_mask_cutout_filtered",
+  "ssao_geometry_g_ao_mask_cutout_filtered_stages",
+  "ssao_geometry_g_ao_mask_equal_filtered",
+  "ssao_geometry_g_ao_mask_equal_filtered_stages",
+  "ssao_geometry_g_ao_mirrored_filtered",
+  "ssao_geometry_g_ao_mirrored_filtered_stages",
+  "ssao_geometry_g_ao_motion_near_filtered",
+  "ssao_geometry_g_ao_motion_near_filtered_stages",
+  "ssao_geometry_g_ao_skin_t1_filtered",
+  "ssao_geometry_g_ao_skin_t1_filtered_stages",
+  "ssao_geometry_g_ao_white_filtered",
+  "ssao_geometry_g_ao_white_filtered_stages",
+  "ssao_quality_o_stripes_filtered",
+  "ssao_quality_o_stripes_filtered_stages",
+  "ssao_quality_p_stripes_filtered",
+  "ssao_quality_p_stripes_filtered_stages"
+ ],
+ "failed_quality_gates": [
+  "quality_n8_persp"
+ ],
+ "format": "incant-0070-c2-analysis-of-001-device-v1",
+ "n6t_ortho_diagnostic_255": 4.63,
+ "n6t_revised_persp_255": 3.37,
+ "n7": {
+  "quality_n7_edge_slab_persp": 0,
+  "quality_n7_white_slab_ortho": 0,
+  "quality_n7_white_slab_persp": 0
+ },
+ "n8_rows_ortho": {
+  "110": [
+   0.176,
+   true
+  ],
+  "111": [
+   0.163,
+   true
+  ],
+  "112": [
+   0.188,
+   true
+  ],
+  "113": [
+   0.167,
+   true
+  ],
+  "114": [
+   0.167,
+   true
+  ],
+  "115": [
+   0.125,
+   true
+  ],
+  "116": [
+   0.146,
+   true
+  ]
+ },
+ "n8_rows_persp": {
+  "124": [
+   0.376,
+   false
+  ],
+  "125": [
+   0.439,
+   false
+  ],
+  "126": [
+   0.502,
+   false
+  ],
+  "127": [
+   0.533,
+   false
+  ],
+  "128": [
+   0.356,
+   false
+  ],
+  "129": [
+   0.335,
+   false
+  ],
+  "130": [
+   0.272,
+   false
+  ]
+ },
+ "numeric_pass": false,
+ "pass": false,
+ "passed_numeric_gates": [
+  "determinism_g_ao_white_equals_p_ao_white",
+  "determinism_g_off_white_equals_p_off_white",
+  "determinism_retained_drs_disabled_equals_ordinary",
+  "drs_bloom_halo_centroid_on_physical_emitter",
+  "drs_ssao_nearest_expansion_12",
+  "drs_ssao_nearest_expansion_8",
+  "mixed_blend_pane_scales_receiver_change",
+  "ssao_core_p_ao_far_identity",
+  "ssao_core_p_ao_flat_identity",
+  "ssao_core_p_ao_radius_0_5_identity",
+  "ssao_core_p_ao_reversed_identity",
+  "ssao_geometry_g_ao_motion_far_filtered",
+  "ssao_geometry_g_ao_motion_far_filtered_stages",
+  "ssao_geometry_g_ao_skin_t0_filtered",
+  "ssao_geometry_g_ao_skin_t0_filtered_stages",
+  "ssao_quality_o_sphere_identity",
+  "ssao_quality_p_sphere_identity"
+ ],
+ "quality_pass": false,
+ "reference_disagreements": {
+  "ssao_core_edge_filtered": 3031,
+  "ssao_core_o_filtered": 732,
+  "ssao_core_p_filtered": 1029,
+  "ssao_core_strength_0_5_filtered": 125,
+  "ssao_geometry_g_ao_backface_filtered": 1029,
+  "ssao_geometry_g_ao_mask_cutout_filtered": 2989,
+  "ssao_geometry_g_ao_mask_equal_filtered": 1029,
+  "ssao_geometry_g_ao_mirrored_filtered": 1029,
+  "ssao_geometry_g_ao_motion_far_filtered": 0,
+  "ssao_geometry_g_ao_motion_near_filtered": 1029,
+  "ssao_geometry_g_ao_skin_t0_filtered": 0,
+  "ssao_geometry_g_ao_skin_t1_filtered": 1029,
+  "ssao_geometry_g_ao_white_filtered": 1029,
+  "ssao_quality_o_stripes_filtered": 1101,
+  "ssao_quality_p_stripes_filtered": 4578
+ },
+ "seconds": 698.9,
+ "stage_raw_outside": {
+  "ssao_core_edge_filtered_stages": 5401,
+  "ssao_core_o_filtered_stages": 2689,
+  "ssao_core_p_filtered_stages": 3374,
+  "ssao_core_strength_0_5_filtered_stages": 3374,
+  "ssao_geometry_g_ao_backface_filtered_stages": 3374,
+  "ssao_geometry_g_ao_mask_cutout_filtered_stages": 4971,
+  "ssao_geometry_g_ao_mask_equal_filtered_stages": 3374,
+  "ssao_geometry_g_ao_mirrored_filtered_stages": 3374,
+  "ssao_geometry_g_ao_motion_far_filtered_stages": 0,
+  "ssao_geometry_g_ao_motion_near_filtered_stages": 3374,
+  "ssao_geometry_g_ao_skin_t0_filtered_stages": 0,
+  "ssao_geometry_g_ao_skin_t1_filtered_stages": 3374,
+  "ssao_geometry_g_ao_white_filtered_stages": 3374,
+  "ssao_quality_o_stripes_filtered_stages": 3080,
+  "ssao_quality_p_stripes_filtered_stages": 9330
+ }
+}

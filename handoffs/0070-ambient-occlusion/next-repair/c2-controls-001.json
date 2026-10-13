@@ -1,0 +1,557 @@
+{
+ "phase": {
+  "sobol_table_equals_direction_numbers": true,
+  "independent_phase_equals_c2_phase": true,
+  "per_texel_phases_fill_16_strata": true,
+  "tile_pairing_0_4_2_net": true,
+  "design_pairing_coarse_cells": 4
+ },
+ "binding": {
+  "tampered_reuse_refused": true,
+  "r1r3_shader_refused": [
+   "0 SOBOL tables",
+   "missing `let stratum=BAYER[phase.y*4u+phase.x];`",
+   "missing `let rotation=ao.rotations[stratum].xy;`",
+   "missing `let base=reverseBits(stratum)>>28u;`",
+   "missing `let jitter=(f32(base^SOBOL[ray])+0.5)/16.;`",
+   "the R1/R3 step phase is still present"
+  ],
+  "c2_edit_accepted": true,
+  "root_frozen_shader": "present: hash and C2 phase lines match"
+ },
+ "fidelity": {
+  "fixture": "stripes perspective",
+  "k_intervals_equal": 43489
+ },
+ "positive_independent_c2_model": {
+  "ssao_core_p_filtered": {
+   "filtered": "pass",
+   "stages": "pass",
+   "certainly_occluded": 11352,
+   "oracle_final_widths": {
+    "0": 38181,
+    "1": 4516,
+    "2": 792
+   },
+   "raw_rounding_measured": {
+    "exact_raw_texels": 45149,
+    "ties": {
+     "down": 0,
+     "up": 354
+    }
+   }
+  },
+  "ssao_core_o_filtered": {
+   "filtered": "pass",
+   "stages": "pass",
+   "certainly_occluded": 9821,
+   "oracle_final_widths": {
+    "0": 38494,
+    "1": 4563,
+    "2": 409,
+    "3": 23
+   },
+   "raw_rounding_measured": {
+    "exact_raw_texels": 45163,
+    "ties": {
+     "down": 0,
+     "up": 114
+    }
+   }
+  },
+  "ssao_core_edge_filtered": {
+   "filtered": "pass",
+   "stages": "pass",
+   "certainly_occluded": 12727,
+   "oracle_final_widths": {
+    "0": 35788,
+    "1": 6069,
+    "2": 1544,
+    "3": 88
+   },
+   "raw_rounding_measured": {
+    "exact_raw_texels": 45017,
+    "ties": {
+     "down": 0,
+     "up": 393
+    }
+   }
+  },
+  "ssao_quality_p_stripes_filtered": {
+   "filtered": "pass",
+   "stages": "pass",
+   "certainly_occluded": 18773,
+   "oracle_final_widths": {
+    "0": 34034,
+    "1": 8429,
+    "2": 972,
+    "3": 54
+   },
+   "raw_rounding_measured": {
+    "exact_raw_texels": 45082,
+    "ties": {
+     "down": 0,
+     "up": 554
+    }
+   }
+  },
+  "ssao_quality_o_stripes_filtered": {
+   "filtered": "pass",
+   "stages": "pass",
+   "certainly_occluded": 6670,
+   "oracle_final_widths": {
+    "0": 39983,
+    "1": 2963,
+    "2": 381,
+    "3": 96,
+    "4": 47,
+    "5": 15,
+    "6": 4
+   },
+   "raw_rounding_measured": {
+    "exact_raw_texels": 45150,
+    "ties": {
+     "down": 0,
+     "up": 83
+    }
+   }
+  },
+  "perturbations": {
+   "raw_code_plus_1": [
+    "raw_outside 1"
+   ],
+   "final_code_below_interval": [
+    "v_outside 1",
+    "v_outside_final 1"
+   ]
+  }
+ },
+ "masquerade": {
+  "ssao_core_p_filtered": {
+   "raw_texels_differing": 3284,
+   "c2_stage_pass": false,
+   "c2_stage_raw_outside": 3374,
+   "c2_frames_only_pass": false,
+   "c2_frames_only_disagree": 1012
+  },
+  "ssao_core_o_filtered": {
+   "raw_texels_differing": 2718,
+   "c2_stage_pass": false,
+   "c2_stage_raw_outside": 2689,
+   "c2_frames_only_pass": false,
+   "c2_frames_only_disagree": 632
+  },
+  "ssao_core_edge_filtered": {
+   "raw_texels_differing": 5389,
+   "c2_stage_pass": false,
+   "c2_stage_raw_outside": 5401,
+   "c2_frames_only_pass": false,
+   "c2_frames_only_disagree": 2732
+  },
+  "ssao_quality_p_stripes_filtered": {
+   "raw_texels_differing": 9249,
+   "c2_stage_pass": false,
+   "c2_stage_raw_outside": 9330,
+   "c2_frames_only_pass": false,
+   "c2_frames_only_disagree": 4452
+  },
+  "ssao_quality_o_stripes_filtered": {
+   "raw_texels_differing": 3100,
+   "c2_stage_pass": false,
+   "c2_stage_raw_outside": 3080,
+   "c2_frames_only_pass": false,
+   "c2_frames_only_disagree": 1062
+  },
+  "ssao_core_p_filtered: c2 planes under the shared R1/R3 oracle": {
+   "raw_outside": 3270
+  },
+  "ssao_quality_p_stripes_filtered: c2 planes under the shared R1/R3 oracle": {
+   "raw_outside": 9296
+  }
+ },
+ "wrong_variants": {
+  "c1_shared_phase": {
+   "ssao_core_p_filtered": {
+    "stage_problems": [
+     "raw_outside 2728",
+     "v_outside_final 6510"
+    ],
+    "frames_only_pass": false
+   },
+   "ssao_quality_p_stripes_filtered": {
+    "stage_problems": [
+     "raw_outside 9094",
+     "v_outside_final 13845"
+    ],
+    "frames_only_pass": false
+   }
+  },
+  "transposed_base_index": {
+   "ssao_core_p_filtered": {
+    "stage_problems": [
+     "raw_outside 2546",
+     "v_outside_final 6079"
+    ],
+    "frames_only_pass": false
+   },
+   "ssao_quality_p_stripes_filtered": {
+    "stage_problems": [
+     "raw_outside 7561",
+     "v_outside_final 14192"
+    ],
+    "frames_only_pass": false
+   }
+  },
+  "reversed_ray_order": {
+   "ssao_core_p_filtered": {
+    "stage_problems": [
+     "raw_outside 1190",
+     "v_outside_final 5302"
+    ],
+    "frames_only_pass": false
+   },
+   "ssao_quality_p_stripes_filtered": {
+    "stage_problems": [
+     "raw_outside 4976",
+     "v_outside_final 12905"
+    ],
+    "frames_only_pass": false
+   }
+  },
+  "stratum_start_offset": {
+   "ssao_core_p_filtered": {
+    "stage_problems": [
+     "raw_outside 769",
+     "v_outside_final 4240"
+    ],
+    "frames_only_pass": false
+   },
+   "ssao_quality_p_stripes_filtered": {
+    "stage_problems": [
+     "raw_outside 2935",
+     "v_outside_final 10055"
+    ],
+    "frames_only_pass": false
+   }
+  },
+  "missing_vertical_pass": {
+   "ssao_core_p_filtered": {
+    "stage_problems": [
+     "v_outside 8954",
+     "v_outside_final 8109"
+    ],
+    "frames_only_pass": false
+   },
+   "ssao_quality_p_stripes_filtered": {
+    "stage_problems": [
+     "v_outside 17002",
+     "v_outside_final 16512"
+    ],
+    "frames_only_pass": false
+   }
+  },
+  "missing_filter": {
+   "ssao_core_p_filtered": {
+    "stage_problems": [
+     "h_outside 8261",
+     "v_outside 7540",
+     "v_outside_final 9249"
+    ],
+    "frames_only_pass": false
+   },
+   "ssao_quality_p_stripes_filtered": {
+    "stage_problems": [
+     "h_outside 16278",
+     "v_outside 15186",
+     "v_outside_final 18225"
+    ],
+    "frames_only_pass": false
+   }
+  }
+ },
+ "ambiguous": [
+  "conflicting RGB (empty inference)",
+  "no diffuse signal (coverage)",
+  "every ray ambiguous (no certain occlusion)",
+  "inflated decisive widths",
+  "absence mismatch"
+ ],
+ "missing": [
+  "stage plane",
+  "all planes (quality gates)",
+  "frame"
+ ],
+ "quality": {
+  "c2": {
+   "revised_gates": {
+    "quality_n6t_revised_persp": true,
+    "quality_n7_white_slab_persp": true,
+    "quality_n7_white_slab_ortho": true,
+    "quality_n7_edge_slab_persp": true,
+    "quality_n8_persp": true,
+    "quality_n8_ortho": true
+   },
+   "n6t_persp_255": 3.19,
+   "authored_n6": {
+    "max_step_255": 7.0,
+    "at": 164,
+    "verdict": "failed"
+   },
+   "n6t_ortho_diagnostic_255": 4.14,
+   "n7": [
+    0,
+    1,
+    0
+   ],
+   "n8_rows_persp": {
+    "124": {
+     "p2p_255": 7.0,
+     "shipped_255": 31.88,
+     "ratio": 0.22,
+     "pass": true
+    },
+    "125": {
+     "p2p_255": 7.0,
+     "shipped_255": 31.88,
+     "ratio": 0.22,
+     "pass": true
+    },
+    "126": {
+     "p2p_255": 7.0,
+     "shipped_255": 31.88,
+     "ratio": 0.22,
+     "pass": true
+    },
+    "127": {
+     "p2p_255": 3.0,
+     "shipped_255": 31.88,
+     "ratio": 0.094,
+     "pass": true
+    },
+    "128": {
+     "p2p_255": 5.0,
+     "shipped_255": 47.81,
+     "ratio": 0.105,
+     "pass": true
+    },
+    "129": {
+     "p2p_255": 7.0,
+     "shipped_255": 47.81,
+     "ratio": 0.146,
+     "pass": true
+    },
+    "130": {
+     "p2p_255": 6.0,
+     "shipped_255": 47.81,
+     "ratio": 0.125,
+     "pass": true
+    }
+   },
+   "n8_rows_ortho": {
+    "110": {
+     "p2p_255": 6.0,
+     "shipped_255": 79.69,
+     "ratio": 0.075,
+     "pass": true
+    },
+    "111": {
+     "p2p_255": 6.0,
+     "shipped_255": 79.69,
+     "ratio": 0.075,
+     "pass": true
+    },
+    "112": {
+     "p2p_255": 8.0,
+     "shipped_255": 63.75,
+     "ratio": 0.125,
+     "pass": true
+    },
+    "113": {
+     "p2p_255": 6.0,
+     "shipped_255": 47.81,
+     "ratio": 0.125,
+     "pass": true
+    },
+    "114": {
+     "p2p_255": 5.0,
+     "shipped_255": 47.81,
+     "ratio": 0.105,
+     "pass": true
+    },
+    "115": {
+     "p2p_255": 5.0,
+     "shipped_255": 47.81,
+     "ratio": 0.105,
+     "pass": true
+    },
+    "116": {
+     "p2p_255": 4.0,
+     "shipped_255": 47.81,
+     "ratio": 0.084,
+     "pass": true
+    }
+   }
+  },
+  "r1r3": {
+   "revised_gates": {
+    "quality_n6t_revised_persp": true,
+    "quality_n7_white_slab_persp": true,
+    "quality_n7_white_slab_ortho": true,
+    "quality_n7_edge_slab_persp": true,
+    "quality_n8_persp": false,
+    "quality_n8_ortho": true
+   },
+   "n6t_persp_255": 3.37,
+   "authored_n6": {
+    "max_step_255": 7.0,
+    "at": 161,
+    "verdict": "failed"
+   },
+   "n6t_ortho_diagnostic_255": 4.63,
+   "n7": [
+    0,
+    0,
+    0
+   ],
+   "n8_rows_persp": {
+    "124": {
+     "p2p_255": 12.0,
+     "shipped_255": 31.88,
+     "ratio": 0.376,
+     "pass": false
+    },
+    "125": {
+     "p2p_255": 14.0,
+     "shipped_255": 31.88,
+     "ratio": 0.439,
+     "pass": false
+    },
+    "126": {
+     "p2p_255": 16.0,
+     "shipped_255": 31.88,
+     "ratio": 0.502,
+     "pass": false
+    },
+    "127": {
+     "p2p_255": 17.0,
+     "shipped_255": 31.88,
+     "ratio": 0.533,
+     "pass": false
+    },
+    "128": {
+     "p2p_255": 17.0,
+     "shipped_255": 47.81,
+     "ratio": 0.356,
+     "pass": false
+    },
+    "129": {
+     "p2p_255": 16.0,
+     "shipped_255": 47.81,
+     "ratio": 0.335,
+     "pass": false
+    },
+    "130": {
+     "p2p_255": 13.0,
+     "shipped_255": 47.81,
+     "ratio": 0.272,
+     "pass": false
+    }
+   },
+   "n8_rows_ortho": {
+    "110": {
+     "p2p_255": 14.0,
+     "shipped_255": 79.69,
+     "ratio": 0.176,
+     "pass": true
+    },
+    "111": {
+     "p2p_255": 13.0,
+     "shipped_255": 79.69,
+     "ratio": 0.163,
+     "pass": true
+    },
+    "112": {
+     "p2p_255": 11.0,
+     "shipped_255": 63.75,
+     "ratio": 0.173,
+     "pass": true
+    },
+    "113": {
+     "p2p_255": 8.0,
+     "shipped_255": 47.81,
+     "ratio": 0.167,
+     "pass": true
+    },
+    "114": {
+     "p2p_255": 8.0,
+     "shipped_255": 47.81,
+     "ratio": 0.167,
+     "pass": true
+    },
+    "115": {
+     "p2p_255": 6.0,
+     "shipped_255": 47.81,
+     "ratio": 0.125,
+     "pass": true
+    },
+    "116": {
+     "p2p_255": 7.0,
+     "shipped_255": 47.81,
+     "ratio": 0.146,
+     "pass": true
+    }
+   }
+  }
+ },
+ "n6t_known_fields": {
+  "smooth_fine_limit_r3_r8": {
+   "n6t_255": 1.02,
+   "n6t_pass": true,
+   "authored_n6_255": 4.0,
+   "authored_n6_pass": false
+  },
+  "shipped_stepped": {
+   "n6t_255": 29.22,
+   "n6t_pass": false,
+   "authored_n6_255": 31.88,
+   "authored_n6_pass": false
+  },
+  "shipped_stepped_against_r3_truth": {
+   "n6t_255": 29.34,
+   "n6t_pass": false,
+   "authored_n6_255": 31.88,
+   "authored_n6_pass": false
+  },
+  "banded_1_16": {
+   "n6t_255": 14.78,
+   "n6t_pass": false,
+   "authored_n6_255": 15.94,
+   "authored_n6_pass": false
+  },
+  "hatch_pm_1_32": {
+   "n6t_255": 16.96,
+   "n6t_pass": false,
+   "authored_n6_255": 19.94,
+   "authored_n6_pass": false
+  },
+  "step_4_codes": {
+   "n6t_255": 4.65,
+   "n6t_pass": false,
+   "authored_n6_255": 4.0,
+   "authored_n6_pass": false
+  },
+  "step_3_codes": {
+   "n6t_255": 3.65,
+   "n6t_pass": true,
+   "authored_n6_255": 4.0,
+   "authored_n6_pass": false
+  }
+ },
+ "report": [
+  "empty evidence: every case missing, every gate fails, authored N6 unavailable",
+  "build record from the foreign plan: numeric_pass false",
+  "build record from the ssao-filter-001 plan: numeric_pass false",
+  "empty index and zero-length plane: cases invalid",
+  "002 CLI: failing report written (exit 1), never replaced (exit 2)"
+ ]
+}

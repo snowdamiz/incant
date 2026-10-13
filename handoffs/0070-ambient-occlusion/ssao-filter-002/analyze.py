@@ -1,23 +1,21 @@
 #!/usr/bin/env python3
 """Offline analysis entry for 0070-ssao-filter-002 (after release only).
 
-Runs ssao-repair/filter/analyze_filter.py unchanged; the only binding is its
-plan check, which must compare the evidence's build record with this
-namespace's plan.json rather than 0070-ssao-filter-001's. Exit status, report
-format and every gate are analyze_filter.py's.
+Runs the shared ssao-repair/filter/analyze_filter.py gates through
+c2_analysis.py: the C2 oracle, this namespace's plan check, the revised N6T
+measure with authored N6 retained, and every screened N8 row. Shared modules
+are imported read only and refused unless their bytes match the pins.
 
   python3 -I -B analyze.py <evidence-dir>
+  python3 -I -B analyze.py --selftest
 """
 
 import sys
 from pathlib import Path
 
 sys.dont_write_bytecode = True
-HERE = Path(__file__).resolve().parent
-sys.path[:0] = [str(HERE.parent / "ssao-repair" / "filter")]
-import analyze_filter  # noqa: E402
-
-analyze_filter.NAMESPACE_PLAN = HERE / "plan.json"
+sys.path[:0] = [str(Path(__file__).resolve().parent)]
+import c2_analysis  # noqa: E402
 
 if __name__ == "__main__":
-    sys.exit(analyze_filter.main())
+    sys.exit(c2_analysis.main())

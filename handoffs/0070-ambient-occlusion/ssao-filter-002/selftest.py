@@ -9,8 +9,12 @@ ledger and the digest coverage. Added for 002: the helper copy differs from
 001's only by the corrected sphere-coverage predicate, its unchanged 10%
 tolerance and the synthetic regression; a Python twin of that regression's
 fixture shows it rejects 001's predicate and accepts the corrected one; the
-build's guard step refuses any other test set. Scratch stays inside this
-namespace and is removed; the shared GPU lock is never touched.
+build's guard step refuses any other test set. Added for C2: the plan binds
+root's frozen C2 source and the C2 phase; --engine-commit refuses the R1/R3
+shader; reused analyzer bytes are pinned and a tampered copy is refused; the
+C2 oracle with the R1/R3 phase reproduces the shared oracle on a sample. The
+full C2 analyzer controls run separately (analyze.py --selftest). Scratch stays
+inside this namespace and is removed; the shared GPU lock is never touched.
 
   python3 -I -B selftest.py
 """
@@ -30,6 +34,14 @@ PACKET = HERE.parent
 sys.path[:0] = [str(HERE), str(HERE.parent / "tools")]
 import filter_common as fc  # noqa: E402
 import filter_runner as fr  # noqa: E402
+import c2_analysis as c2  # noqa: E402
+import c2_controls  # noqa: E402
+import importlib.util  # noqa: E402
+
+# By path: the shared analyzer puts tools/ (build004's own make_plan.py) ahead on sys.path.
+_spec = importlib.util.spec_from_file_location("filter_002_make_plan", HERE / "make_plan.py")
+make_plan = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(make_plan)
 from ledger import Ledger, Refused  # noqa: E402
 
 
@@ -59,6 +71,12 @@ def plan_controls():
     assert engine is None or (len(engine) == 40 and all(c in "0123456789abcdef" for c in engine))
     assert plan["namespace"] == "0070-ssao-filter-002" and plan["guard_regression"]["tests"] == list(fr.GUARD_TESTS)
     assert plan["analysis"]["command"].startswith(f"python3 -I -B {fc.NAMESPACE_REL}/analyze.py")
+    assert plan["source_binding"]["engine_source_frozen"] == c2.ENGINE_SOURCE
+    assert plan["analysis"]["sampling"]["sobol"] == list(c2.SOBOL)
+    assert plan["analysis"]["sampling"]["reused_sources"] == c2.REUSED
+    assert plan["analysis"]["quality"]["gates"] == sorted(c2.REVISED_GATES)
+    assert "quality_n6_authored" not in plan["analysis"]["quality"]["gates"]
+    assert plan["analysis"]["quality"]["retained_001"]["quality_n6_authored"]["pass"] is False
     return plan
 
 
@@ -320,13 +338,39 @@ def guard_controls():
     return out
 
 
+def c2_controls_fast(scratch):
+    """C2 binding checks that need no oracle sweep (the full set: analyze.py --selftest)."""
+    out = {"phase": c2_controls.phase_controls(), "binding": c2_controls.binding_controls(scratch)}
+    try:
+        make_plan.verify_engine(c2.ENGINE_SOURCE["base"])
+        raise AssertionError("verify_engine accepted the R1/R3 engine")
+    except SystemExit as refusal:
+        assert "is not the C2 shader" in str(refusal), str(refusal)
+        out["engine_pin_refuses_r1r3"] = str(refusal)[:160]
+
+    class Through(c2.C2FilterOracle):
+        @staticmethod
+        def phase(x, y, ray):
+            return c2.orc.jitter(x, y)
+
+    scene = c2.orc.scene("stripes", False)
+    shared, through = c2.orc.FilterOracle(scene), Through(scene)
+    sample = c2.af.INTERIOR[::211]
+    for x, y in sample:
+        for surface in scene.candidates((x, y)):
+            if surface is not None:
+                assert through.k_interval(x, y, surface) == shared.k_interval(x, y, surface), (x, y)
+    out["fidelity_sample_texels"] = len(sample)
+    return out
+
+
 def digest_controls():
     digest, files = fc.helper_digest()
     reused = {f"{fc.base.TOOLS_REL}/{n}" for n in fc.REUSED}
     analyzer = {f"{fc.REPAIR_REL}/{n}" for n in fc.ANALYZER}
     own = {f"{fc.NAMESPACE_REL}/{n}" for n in ("plan.json", "filter_common.py", "filter_runner.py", "make_plan.py",
-                                               "selftest.py", "analyze.py", "effects/Cargo.toml",
-                                               "effects/src/numeric.rs")}
+                                               "selftest.py", "analyze.py", "c2_analysis.py",
+                                               "c2_controls.py", "effects/Cargo.toml", "effects/src/numeric.rs")}
     assert reused | analyzer | own <= set(files), sorted((reused | analyzer | own) - set(files))
     assert fc.HELPER_LOCK_REL not in files
     return {"digest": digest, "files": len(files), "reused_tools": len(reused), "analyzer": len(analyzer)}
@@ -353,6 +397,7 @@ def main():
                   "order_and_latch": order_and_latch_controls(plan, scratch),
                   "helper_scope": helper_scope(),
                   "sphere_guard": guard_controls(),
+                  "c2": c2_controls_fast(scratch),
                   "digest": digest_controls(),
                   "cli": cli_controls()}
     finally:

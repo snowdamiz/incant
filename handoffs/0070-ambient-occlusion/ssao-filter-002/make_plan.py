@@ -5,9 +5,11 @@ The same bounded sequence as 0070-ssao-filter-001, repeated once in a new
 namespace so one report stays tied to one frozen build: the numeric cases
 come from ssao-repair/filter/cases.json; the appearance set is build004's,
 unchanged; the two control tests and their submission counts are root's
-(9f3a6b03). The build adds the helper's CPU guard regression. The engine
-commit stays pending until root picks the final candidate; root supplies it
-at the source freeze and it is verified against HEAD's engine source.
+(9f3a6b03). The build adds the helper's CPU guard regression. Root selected
+the C2 sampling candidate; the engine commit stays pending until root commits
+it, and --engine-commit refuses any commit whose ao.wgsl is not the frozen C2
+shader that c2_analysis.py models. At the source freeze it is verified against
+HEAD's engine source.
 
   python3 -I -B make_plan.py                      # keep the plan's engine_commit
   python3 -I -B make_plan.py --engine-commit SHA  # bind the frozen engine source
@@ -23,6 +25,7 @@ sys.dont_write_bytecode = True
 HERE = Path(__file__).resolve().parent
 sys.path[:0] = [str(HERE), str(HERE.parent / "tools")]
 import filter_common as fc  # noqa: E402
+import c2_analysis as c2  # noqa: E402  (binds the reused analyzer bytes on import)
 
 CASES = json.loads((fc.PACKET_DIR / "ssao-repair" / "filter" / "cases.json").read_text())
 BUILD004_PLAN = json.loads((fc.BASE_TOOLS / "plan.json").read_text())
@@ -98,6 +101,13 @@ def verify_engine(commit):
         name = ctl["test"].rsplit("::", 1)[1]
         if f"fn {name}()" not in text:
             raise SystemExit(f"{ctl['source']} at {commit} has no fn {name}()")
+    shader = fc.git("show", f"{commit}:{c2.AO_WGSL}", binary=True)
+    problems = c2.shader_problems(shader.decode())
+    if hashlib.sha256(shader).hexdigest() != c2.ENGINE_SOURCE[c2.AO_WGSL]:
+        problems.append("bytes differ from root's frozen C2 ao.wgsl")
+    if problems:
+        raise SystemExit(f"{c2.AO_WGSL} at {commit} is not the C2 shader the 002 oracle models: {problems}; "
+                         "review the change and re-bind c2_analysis.ENGINE_SOURCE before pinning")
     manifest = fc.git("show", f"{commit}:crates/incant_render/Cargo.toml")
     if "ssao-stage-readback" not in manifest:
         raise SystemExit(f"crates/incant_render/Cargo.toml at {commit} declares no ssao-stage-readback feature")
@@ -117,14 +127,15 @@ def build(engine_commit):
         "namespace": fc.NAMESPACE,
         "engine_commit": engine_commit,
         "source_binding": {
-            "engine_candidate": ("pending root's final pick: R1/R3 as measured (5dfc522ec164f2bc50d760f12db57eae233f33d8) "
-                                 "or a repaired sampling candidate (next-repair-preparation.md)"),
-            "freeze": ("root commits the chosen engine on this branch, then runs make_plan.py "
-                       "--engine-commit <that commit>; the source freeze requires HEAD's engine inputs "
-                       "to equal it byte for byte"),
-            "oracle_condition": ("analyze_filter.py's oracle and quality model encode R1/R3's rotation and "
-                                 "phase; a different sampling candidate needs the matching oracle change "
-                                 "before the freeze, or its numeric gates fail by construction"),
+            "engine_candidate": ("C2, selected by root on 2026-10-13: Hammersley tile pairing plus a per-ray "
+                                 "Sobol' phase, at most 64 probes; uniform, filter and resource budget unchanged"),
+            "engine_source_frozen": c2.ENGINE_SOURCE,
+            "engine_pin": ("pending: root commits the frozen C2 sources on this branch, then runs make_plan.py "
+                           "--engine-commit <that commit>; it refuses unless ao.wgsl there is byte-identical to "
+                           "the frozen shader and carries the C2 phase lines. The source freeze then requires "
+                           "HEAD's engine inputs to equal that commit byte for byte"),
+            "oracle": ("c2_analysis.C2FilterOracle: the shared oracle with only k_interval's phase moved per ray; "
+                       "reused analyzer, oracle, controls and models are pinned by sha256 and refused if changed"),
             "previous_namespace": "0070-ssao-filter-001 stays latched on case-ssao_quality; nothing of it is reused",
         },
         "guard_regression": GUARD,
@@ -140,10 +151,22 @@ def build(engine_commit):
             "after": "release (never before; quality results never affect device work)",
             "command": f"python3 -I -B {ANALYZE} <evidence-dir>",
             "analyzer": ANALYZER_REL,
-            "entry": f"{ANALYZE} binds analyze_filter.py's plan check to this namespace's plan.json",
-            "note": ("Numerical gates and the original quality gates (N6 authored, N7, N8 stripes ROI) are all "
-                     "recorded; the predicted N6 and N8-perspective failures are reported as failed quality, "
-                     "never as a device-work failure. N6T is a diagnostic."),
+            "entry": (f"{ANALYZE} runs analyze_filter.py's gates through c2_analysis.py: the C2 oracle, "
+                      "this namespace's plan check and the revised quality report"),
+            "sampling": c2.sampling(),
+            "quality": {
+                "revised_measure": c2.REVISED_MEASURE,
+                "gates": sorted(c2.REVISED_GATES),
+                "authored_n6": ("quality_n6_authored is computed in every report with its actual value and "
+                                "verdict, beside 0070-ssao-filter-001's retained failure; never waived"),
+                "retained_001": c2.RETAINED_001,
+                "diagnostics": {"n6t_ortho": "named diagnostic (currently failing in the model)",
+                                "n8_rows_persp": "rows 124-130, each against 0.25 of its shipped value",
+                                "n8_rows_ortho": "rows 110-116, each against 0.25 of its shipped value"},
+            },
+            "note": ("Numeric gates, the revised quality gates, authored N6 and every screened N8 row are all "
+                     "recorded; quality results never affect device work and acceptance is not granted by them. "
+                     "C2's CPU-model N8 margin is under one code, so the device result decides."),
         },
         "budgets": {
             "gpu_children_max": children,
