@@ -1,0 +1,15 @@
+{
+  "at": "2026-10-13T08:11:07.716202+00:00",
+  "reviewer": "root/astra",
+  "commit": "69a768e2223d1ea141dcf0488bbbeb79de27915e",
+  "verdict": "accepted",
+  "scope": "Documentation-only retention and STATUS/ADR update after independently accepted release promotion",
+  "manifest_sha256": "3fc9a842508ba4e1bcac25c3ddf319e26585ba229e8d159434f7ce3e0d79d488",
+  "checks": [
+    "Read full STATUS/ADR/spike diff and changed-path inventory",
+    "Ran portable verify.py:35records/23SUCCESS/eightSUCCESSworkflows/exacttestedtree",
+    "Read independent prepromotion receipt and publisher postmerge identities; release065aac69 matches selectedmain205; main209 remains separate",
+    "Hosted adapters, noappearance/device/performance/phase approval and89m30Windowsduration precisely qualified"
+  ],
+  "findings": []
+}
