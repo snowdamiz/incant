@@ -361,6 +361,8 @@ def lint():
     c.write_new_json(c.BUILD / "lint.json", {"tools": tools, "source": source, **entry,
                                              "recorded": c.now()})
     print(json.dumps({k: entry[k] for k in ("label", "exit", "timed_out")}, indent=1))
+    if entry["exit"] != 0 or entry["timed_out"]:
+        raise SystemExit(entry["exit"] if entry["exit"] else 1)
 
 
 if __name__ == "__main__":
