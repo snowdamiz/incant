@@ -36,9 +36,16 @@ Local CPU qualification in `~/.codex/incant-evidence/fixed-sharpness-001`:
   passed.
 
 The device test retains its 14 previous controls and adds all 64 pairs of
-previous/current jitter phases plus eight registered reset frames. The original
-150-frame coverage suite remains present. These tests compiled but have not
-been executed for this experiment. CPU results do not count as GPU or rendered
+previous/current jitter phases plus eight registered reset frames. Sixteen more
+cases combine each actual phase transition with nonuniform previous depth or
+total depth refusal, alternating perspective and orthographic projections. The
+partial-admission cases give four history taps positive weight, with only one
+depth-compatible tap; the other cases must reconstruct registered current data.
+The original 150-frame coverage suite remains present, for 252 numerical
+submissions in total. These tests compiled but have not been executed for this
+experiment. The test-only follow-up passes the focused default and cooked suites
+(15 CPU cases each, two device cases ignored) and strict Clippy. CPU results do
+not count as GPU or rendered
 appearance evidence. Cooked shader hashes were updated; no native recook or
 shipping/device performance claim is made here.
 

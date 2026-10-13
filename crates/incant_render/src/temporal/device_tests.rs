@@ -79,12 +79,19 @@ fn actual_temporal_resolve_disocclusion_reactivity_and_alpha_exclusion() {
         mapped_at_creation: false,
     });
     // Retain all fourteen original controls, then execute every previous/current
-    // phase pair and eight independently registered reset frames.
-    for mode in 0..86 {
-        let phases = (14..78)
-            .contains(&mode)
-            .then(|| ((mode - 14) / 8, (mode - 14) % 8));
-        let reset = mode >= 78;
+    // phase pair, eight reset frames, and sixteen jittered depth-admission cases.
+    for mode in 0..102 {
+        let partial_depth = (86..94).contains(&mode);
+        let refused_depth = mode >= 94;
+        let phases = if mode >= 86 {
+            let previous = (mode - 86) % 8;
+            Some((previous, (previous + 1) % 8))
+        } else {
+            (14..78)
+                .contains(&mode)
+                .then(|| ((mode - 14) / 8, (mode - 14) % 8))
+        };
+        let reset = (78..86).contains(&mode);
         let jitter = if let Some((_, current)) = phases {
             super::super::jitter::SAMPLES[current]
         } else if reset {
@@ -112,7 +119,7 @@ fn actual_temporal_resolve_disocclusion_reactivity_and_alpha_exclusion() {
         if mode == 7 {
             current.fill([2., 0.5, 100., 1.]);
         }
-        if mode == 12 || reset {
+        if mode == 12 || reset || refused_depth {
             for y in 0..8 {
                 for x in 0..8 {
                     current[y * 8 + x] = [0.2 + 0.03 * x as f32 + 0.02 * y as f32, 0.25, 0.5, 1.];
@@ -145,7 +152,7 @@ fn actual_temporal_resolve_disocclusion_reactivity_and_alpha_exclusion() {
         let motion = source(&vec![
             [
                 if phases.is_some() {
-                    delta[0] / 6.
+                    (delta[0] + if partial_depth { 0.5 } else { 0. }) / 6.
                 } else if mode == 3 {
                     2.
                 } else if mode == 9 || mode == 13 {
@@ -155,7 +162,7 @@ fn actual_temporal_resolve_disocclusion_reactivity_and_alpha_exclusion() {
                 } else {
                     0.
                 },
-                delta[1] / 6.,
+                (delta[1] + if partial_depth { 0.5 } else { 0. }) / 6.,
                 if mode == 2 { 0.8 } else { 0.5 },
                 if mode == 12 { 0. } else { 1. }
             ];
@@ -166,7 +173,7 @@ fn actual_temporal_resolve_disocclusion_reactivity_and_alpha_exclusion() {
             depth: [
                 0.1,
                 100.,
-                f32::from(u8::from(mode == 1)),
+                f32::from(u8::from(mode == 1 || (mode >= 86 && mode % 2 == 0))),
                 f32::from(u8::from(!reset)),
             ],
             options: [0.5, 0.001, 0.001, 1.],
@@ -239,16 +246,17 @@ fn actual_temporal_resolve_disocclusion_reactivity_and_alpha_exclusion() {
             depth_stencil_attachment: Some(wgpu::RenderPassDepthStencilAttachment {
                 view: &depth,
                 depth_ops: Some(wgpu::Operations {
-                    load: wgpu::LoadOp::Clear(0.5),
+                    load: wgpu::LoadOp::Clear(if refused_depth { 0.8 } else { 0.5 }),
                     store: wgpu::StoreOp::Store,
                 }),
                 stencil_ops: None,
             }),
             ..Default::default()
         }));
-        if mode == 13 {
+        if mode == 13 || partial_depth {
             // Real nonuniform depth at the positive-weight neighbor. Correct
-            // renormalization admits x=3 and rejects x=4 without dropping history.
+            // renormalization admits (3,3) while rejecting the other three
+            // bilinear taps, including after both axes remove raster jitter.
             let shader = d.create_shader_module(wgpu::ShaderModuleDescriptor {
                 label: Some("Depth discontinuity fixture"),
                 source: wgpu::ShaderSource::Wgsl(
@@ -257,7 +265,7 @@ fn actual_temporal_resolve_disocclusion_reactivity_and_alpha_exclusion() {
                         let uv=vec2f(f32((i<<1u)&2u),f32(i&2u));return vec4f(uv*2.-1.,0.,1.);
                     }
                     @fragment fn fragment(@builtin(position) p:vec4f)->@builtin(frag_depth) f32 {
-                        return select(0.5,0.8,p.x>=4.);
+                        return select(0.5,0.8,p.x>=4. || p.y>=4.);
                     }"#
                     .into(),
                 ),
@@ -338,8 +346,8 @@ fn actual_temporal_resolve_disocclusion_reactivity_and_alpha_exclusion() {
             ))
         });
         let expected = match mode {
-            14..78 => [0.375, 0.375, 0.375, 1.],
-            78..86 => [
+            14..78 | 86..94 => [0.375, 0.375, 0.375, 1.],
+            78..86 | 94..102 => [
                 0.2 + 0.03 * (3. + jitter[0]) + 0.02 * (3. + jitter[1]),
                 0.25,
                 0.5,
