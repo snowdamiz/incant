@@ -1,0 +1,32 @@
+{
+  "passed": true,
+  "tested_head": "5f7df382ecb72104286cde4bb882d9b58c04ebbe",
+  "actual_main": "7b10ba000b2ca61a4cb36fdc710a89a370864101",
+  "integration_head": "a0d758047709c456c4c82ea545b47640a580cfe1",
+  "exemptions": [
+    {
+      "path": "tools/probes/native-game.py",
+      "tested_sha256": "60054a02738652c5956a4c38db985579352f68438a3dd34fae141bf31303655a",
+      "current_sha256": "8d437fd1317de8fc5e8fd6591a8bcca3da59264841e8dabcf3c55a646608c4ca"
+    },
+    {
+      "path": "tools/probes/native-window.py",
+      "tested_sha256": "15f9bcbb7e825c66d96994877beba1bf3fbeb4427740c4103ab292acd0a1242b",
+      "current_sha256": "68d0759220f8b4bef515c34fa76f7ef21eaf2362e49c9f8a223708fe7e1558bd"
+    },
+    {
+      "path": "tools/shipping.py",
+      "tested_sha256": "08c1217464f47ce2ef408cc7cfaa600a69ad9b4eaac004e7940be90b7f6c6323",
+      "current_sha256": "38346ddb4c4a94683d94509be3809eb39b279fe232bb129b55a4beb637c2a6e7"
+    }
+  ],
+  "added_test": {
+    "path": "tools/tests/test_player_probe_codegen.py",
+    "sha256": "1822ca46fffecfa48fb1613c7e709235e4f368733a902ef3519972010e9e1c36"
+  },
+  "collector_original": {
+    "path": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/docs/spikes/evidence/core-live-hud-main190/collect.py",
+    "sha256": "27d32289d3fc1356470ace67d5fb44902f827aba5946d9100cfa59f184e572f5"
+  },
+  "scope": "Only independently accepted shipping proof helpers and their new test differ; no crate/build/lock/SDK/schema/vendor input changed. Current native sample checks did not execute these helpers. No new runtime build or proof claimed."
+}

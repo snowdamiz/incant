@@ -1,0 +1,32 @@
+{
+  "at": "2026-10-13T03:21:00.334039+00:00",
+  "status": "accepted scoped integration",
+  "head": "f678ab5a29e2b6ada88769a555ecd03a58e80cec",
+  "manifest_sha256": "4b62410971738b642a1863bd1c299a46aa633454dec2210d18530852ba8d680d",
+  "archive_records": 351,
+  "payloads": 169,
+  "producer_files": 47,
+  "collector": "Root previously read collector and independently reran --verify-only successfully on this immutable manifest",
+  "summary": {
+    "passed": true,
+    "current_checks": 7,
+    "current_native_positive": 14,
+    "current_native_refusal": 1,
+    "public_binding_refusals": 3,
+    "locales": 4,
+    "frozen_inputs": 2028,
+    "safe_producer_files": 47,
+    "sanitized_environment_rows": 49,
+    "private_ancestry_excluded": true,
+    "baseline_gameplay_and_pcm_exact": true
+  },
+  "limits": [
+    "Current CPU authoring/native readback/font coverage only; no current GPU, native window or source-free shipping of changed HUD",
+    "Claude producer reports result-title and narrow contrast defects; full visual acceptance remains open",
+    "Original0060 offscreen helper identity gap remains unresolved; prompt/stale objective follow-up separate",
+    "Only clean sanitized8b82 producer ancestry retained; private original f517 and raw environment ledger excluded",
+    "Immutable current-source headless reused by exact implementation/build input equality; no redundant build claim"
+  ],
+  "findings": [],
+  "visual_review": "Claude producer review remains bounded; root hashes bytes only"
+}

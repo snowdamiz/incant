@@ -16,9 +16,9 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Current overview — main190, 2026-10-13
+## Current overview — main191, 2026-10-13
 
-Development main190 includes the restart quota-test repair (PR188) and the reviewed,
+Development main191 includes the restart quota-test repair (PR188) and the reviewed,
 opt-in cooked sprite/UI/text/material paths with private Vulkan pipeline persistence
 (PR189). Default renderer checks remain; the next frozen checkpoint also exercises
 cooked features and asserts the actual native backend. Producer Metal appearance
@@ -28,8 +28,9 @@ Release remains the checkpoint14 baseline selected from main160. Checkpoint17 is
 terminal and unpromoted at its exact main186 tree: 20 requirements passed; Linux and
 Windows conformance failed the quota assertion, and macOS rejected a successful
 player compile because its probe confused library and executable units. The main188
-quota repair preserves production's 50 ms budget; the probe correction has independent final acceptance and awaits its fast check
-and the next frozen full checkpoint.
+quota repair preserves production's 50 ms budget, and the reviewed player probe
+correction is merged in PR191. Checkpoint18 is frozen at the exact main191 tree;
+all 23 requirements must pass before release promotion.
 No release or phase approval follows from a main merge.
 
 Android static-Wasm integration is merged in PR190 after independent source-relevance
@@ -1087,6 +1088,10 @@ acceptance is separate. [Evidence](docs/spikes/core-main182.md).
 ## Checkpoint17 terminal and shipping probe repair
 
 Checkpoint17 finished with 20 required successes and three failures and was not promoted. Linux/Windows quota controls have the reviewed main188 repair. A separate macOS player library/executable audit correction now passes the exact retained compile-log replay and six regression controls; independent final review is accepted and the fast/full frozen checks remain required. See [probe evidence](docs/spikes/shipping-player-probe-kinds.md).
+
+## Core live HUD integration reviewed
+
+The sanitized Claude0065 hint/wrapping/font changes are composed with main190 and independently accepted for scoped integration; the fast publication check remains pending. Seven CPU checks, 14 native positive processes, four-locale font coverage and exact baseline gameplay/PCM pass. Result-title/narrow contrast and separate prompt/objective follow-ups remain open; no new rendered or device acceptance. See [integration evidence](docs/spikes/core-live-hud-main190.md).
 
 ## Historical integration snapshots
 

@@ -1,0 +1,487 @@
+{
+  "at": "2026-10-13T03:08:56.307266+00:00",
+  "tested_head": "5f7df382ecb72104286cde4bb882d9b58c04ebbe",
+  "review_head": "5f7df382ecb72104286cde4bb882d9b58c04ebbe",
+  "summary": {
+    "passed": true,
+    "current_checks": 7,
+    "current_native_positive": 14,
+    "current_native_refusal": 1,
+    "public_binding_refusals": 3,
+    "locales": 4,
+    "frozen_inputs": 2028,
+    "safe_producer_files": 47,
+    "sanitized_environment_rows": 49,
+    "private_ancestry_excluded": true,
+    "baseline_gameplay_and_pcm_exact": true
+  },
+  "source_freeze": {
+    "path": "docs/spikes/evidence/core-live-hud-main190/freeze.json",
+    "sha256": "15c3b507c6bc00dd1f504e11417941dcdf592ddf364407fdc43ccd66bf0645f1"
+  },
+  "checks": [
+    {
+      "name": "units",
+      "command": [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "samples/core",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "exit": 0,
+      "seconds": 0.07101149999652989,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-live-hud-main190-001/units.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-live-hud-main190-001/units.stderr",
+        "sha256": "9cd517a9f7d31eded58e3a03f8d180f20e3ab08802879c128146347d0237b3f1"
+      }
+    },
+    {
+      "name": "strict-types",
+      "command": [
+        "node",
+        "node_modules/typescript/bin/tsc",
+        "--noEmit",
+        "-p",
+        "samples/core/tsconfig.json"
+      ],
+      "exit": 0,
+      "seconds": 0.3031447079993086,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-live-hud-main190-001/strict-types.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-live-hud-main190-001/strict-types.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "public-scene",
+      "command": [
+        "python3",
+        "-B",
+        "samples/core/scene.py",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/core-live-hud-main190-001/scene",
+        "--binary",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-wasm-main189-001/deterministic-binaries/incant_headless",
+        "--art",
+        "/Users/andreyyurlov/.codex/incant-evidence/0060/builds/f5-en-playing/project/art"
+      ],
+      "exit": 0,
+      "seconds": 2.170035041999654,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-live-hud-main190-001/public-scene.stdout",
+        "sha256": "044f2207cedd9ec8cd1204593c1e984519b8fc0d271fb20e8e71f251a50297ef"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-live-hud-main190-001/public-scene.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "authored-bindings",
+      "command": [
+        "python3",
+        "-B",
+        "samples/core/verify_bindings.py",
+        "prepare",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/core-live-hud-main190-001/scene",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/core-live-hud-main190-001/native",
+        "--binary",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-wasm-main189-001/deterministic-binaries/incant_headless"
+      ],
+      "exit": 0,
+      "seconds": 35.83514508399821,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-live-hud-main190-001/authored-bindings.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-live-hud-main190-001/authored-bindings.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "all-locale-font-coverage",
+      "command": [
+        "python3",
+        "-B",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/core-live-hud-fonts.py",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/core-live-hud-main190-001"
+      ],
+      "exit": 0,
+      "seconds": 0.053066417000081856,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-live-hud-main190-001/all-locale-font-coverage.stdout",
+        "sha256": "33c4f00c707d3d08f15021cc36bf01bf74433d31840d1b1077f608e4fa824f24"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-live-hud-main190-001/all-locale-font-coverage.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "conventions",
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.03353204199811444,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-live-hud-main190-001/conventions.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-live-hud-main190-001/conventions.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "diff",
+      "command": [
+        "git",
+        "diff",
+        "--check",
+        "origin/main"
+      ],
+      "exit": 0,
+      "seconds": 0.029139958001906052,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-live-hud-main190-001/diff.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-live-hud-main190-001/diff.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "headless_relevance": {
+    "binary": {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-wasm-main189-001/deterministic-binaries/incant_headless",
+      "sha256": "72894a389bcb4eadba400d9b73e78db2e09d8a1383dbc325e14aa3f514914d56"
+    },
+    "tested_head": "04c816cf7250cb66ccb109b4a66c42cff517d3d6",
+    "all_crates_manifests_lock_sdk_schemas_vendor_toolchain_tools_equal": true,
+    "note": "Current immutable deterministic Wasmtime-capable headless reused; all implementation/build source exact. No new build. Original private f517 history is not an ancestor."
+  },
+  "safe_producer": "8b82ad4d12445edf9abbc71e264147544f87cce6",
+  "accepted_source_files": [
+    {
+      "path": "handoffs/0065-core-live-hud/evidence/builds.json",
+      "sha256": "230381690614d948fc14e1783043fff783cbb62faa138b553601f45de053b535",
+      "bytes": 5184
+    },
+    {
+      "path": "handoffs/0065-core-live-hud/evidence/captures.json",
+      "sha256": "44406286b741f6919f98de36caab4214156f01ec709bb176873db5a094e2090e",
+      "bytes": 149301
+    },
+    {
+      "path": "handoffs/0065-core-live-hud/evidence/checks.json",
+      "sha256": "7b270fe5aaa35ca69555ae603472f9862e5e75de8fcf3508855c00cf3e5b2807",
+      "bytes": 6901
+    },
+    {
+      "path": "handoffs/0065-core-live-hud/evidence/environment-redaction.json",
+      "sha256": "d1167ac72b8a77d2e5c8f91a803f49a28d1051e26f16b20bdcf075855267c383",
+      "bytes": 829
+    },
+    {
+      "path": "handoffs/0065-core-live-hud/evidence/font.json",
+      "sha256": "929aec3dd1680e06dab21fa926b14ff8e74ff0a6f1ed9168c1be3ea608c67cc1",
+      "bytes": 1523
+    },
+    {
+      "path": "handoffs/0065-core-live-hud/evidence/identities.json",
+      "sha256": "74a4dad7b333a48d5b7a88e6ace80ea025c2ec4b5c0acdeac1ee250d80cf411c",
+      "bytes": 7229
+    },
+    {
+      "path": "handoffs/0065-core-live-hud/evidence/ledger.json",
+      "sha256": "7b14b2a5882f6f96edb2ad1e605a7e02ab0806759afcf456c9e121fbf7ee5f54",
+      "bytes": 64369
+    },
+    {
+      "path": "handoffs/0065-core-live-hud/evidence/packages.json",
+      "sha256": "868185e67950bfd51326878b5e40d40ccf7c39bbdcd7b6750c1a6e8af759b187",
+      "bytes": 3565
+    },
+    {
+      "path": "handoffs/0065-core-live-hud/evidence/screenshots.json",
+      "sha256": "588ab7bf97ddd99771d775f17b37b616a83ea13818a17840cd5098fdfa0b54d5",
+      "bytes": 10480
+    },
+    {
+      "path": "handoffs/0065-core-live-hud/evidence/sources.json",
+      "sha256": "a0da6114458a4a199b54e90d099f178c9b322a91d0c2af3da772da7dd3572d60",
+      "bytes": 9293
+    },
+    {
+      "path": "handoffs/0065-core-live-hud/result.md",
+      "sha256": "f3455b651423ce2f5573b688f055c9bd7a404590599ec4ef375e8c202c01bf33",
+      "bytes": 20022
+    },
+    {
+      "path": "handoffs/0065-core-live-hud/screenshots/01-en-960x540-start.png",
+      "sha256": "dc5a26dfd3fb17915004f29a5b6e9a8e6fdba8583dc307748a34b30ee5f48a37",
+      "bytes": 477213
+    },
+    {
+      "path": "handoffs/0065-core-live-hud/screenshots/02-en-960x540-pickup-1.png",
+      "sha256": "6027399b3026e74710f4d44afce03dfd6448f98eed828ec5372ecf13e0dd55c4",
+      "bytes": 462401
+    },
+    {
+      "path": "handoffs/0065-core-live-hud/screenshots/03-en-960x540-damage.png",
+      "sha256": "1d5605b01151b0f7d4914559fa665db458602b24cad3c92b692e2fcb475ec0a7",
+      "bytes": 469028
+    },
+    {
+      "path": "handoffs/0065-core-live-hud/screenshots/04-en-960x540-collected.png",
+      "sha256": "3950d6f0f3085f79f44f3631eac6d5b0a07728efd438c8db1e55c46db455f092",
+      "bytes": 331770
+    },
+    {
+      "path": "handoffs/0065-core-live-hud/screenshots/05-en-960x540-won.png",
+      "sha256": "6e1a6ecf9fb6c4ea8420bb5ba381dddf7f5f47dbf52b10d53fcf77b8a7ae1eff",
+      "bytes": 344428
+    },
+    {
+      "path": "handoffs/0065-core-live-hud/screenshots/06-en-960x540-lost.png",
+      "sha256": "59d5ced56c6eea5f868daad84b5a93031611361d370070e7f30510535560368f",
+      "bytes": 499875
+    },
+    {
+      "path": "handoffs/0065-core-live-hud/screenshots/07-en-960x540-locked-exit.png",
+      "sha256": "67197c8e7df8a9aac471c88f70b1b2ef4eeed33b3df644489e53a69256d17df9",
+      "bytes": 338034
+    },
+    {
+      "path": "handoffs/0065-core-live-hud/screenshots/08-en-640x480-start.png",
+      "sha256": "5c8e13a3ee93874f5fa56dfd8bea886ddc6862dfbd9089427a489910b35d70d1",
+      "bytes": 295906
+    },
+    {
+      "path": "handoffs/0065-core-live-hud/screenshots/09-ar-640x480-pickup-1.png",
+      "sha256": "dd6d8f957f9739d3771cf274bcd05b98ec19a4e3b3c930d48459ea3f1d5f1e6d",
+      "bytes": 296493
+    },
+    {
+      "path": "handoffs/0065-core-live-hud/screenshots/10-ar-640x480-won.png",
+      "sha256": "0577c2072060f55b1196dc6fd223a271e8eecc3a7111aab289fb601b1a411989",
+      "bytes": 224159
+    },
+    {
+      "path": "handoffs/0065-core-live-hud/screenshots/11-zh-Hans-640x480-pickup-1.png",
+      "sha256": "e72e8711503b3eb3e5e744776094e7c27f840b07fb525b3ef5584731e5e3c220",
+      "bytes": 296652
+    },
+    {
+      "path": "handoffs/0065-core-live-hud/screenshots/12-zh-Hans-640x480-won.png",
+      "sha256": "08af4cd2c921b7161b7d7f93af6c4506b314d786cc1db957e2ac7bae88305da5",
+      "bytes": 224212
+    },
+    {
+      "path": "handoffs/0065-core-live-hud/screenshots/13-en-XA-640x480-pickup-1.png",
+      "sha256": "41913148893ab236f168ee1b59e52ba69c8dc63c07c0739e3d391615ec3b2a53",
+      "bytes": 301160
+    },
+    {
+      "path": "handoffs/0065-core-live-hud/screenshots/14-en-XA-640x480-won.png",
+      "sha256": "bb32aea517d3d5dfdd479524607ce0d2e76a10389407a0633e081bf695a1bf31",
+      "bytes": 232817
+    },
+    {
+      "path": "handoffs/0065-core-live-hud/screenshots/15-en-420x320-start.png",
+      "sha256": "eb222db0daf91fb2a26793c0cd49f1b42041ab9e03550f27d35b1f5eb4de0482",
+      "bytes": 148538
+    },
+    {
+      "path": "handoffs/0065-core-live-hud/screenshots/16-en-420x320-lost.png",
+      "sha256": "3aff4be0ceb0aafe4317e822daa5510a484729bdb40f4886c1757d1cbbdf4a25",
+      "bytes": 154319
+    },
+    {
+      "path": "handoffs/0065-core-live-hud/screenshots/crop-ar-640x480-progress-x4.png",
+      "sha256": "0245f483a345735cf588fc6b8a0469beef0bd31cde01ed5140170510e265e8fd",
+      "bytes": 11431
+    },
+    {
+      "path": "handoffs/0065-core-live-hud/screenshots/crop-en-960x540-progress-x4.png",
+      "sha256": "fd7cc969b29a8bd6148341463ae7de1b8a0cba52a1b36f0c88a3ecb60257e2ae",
+      "bytes": 15402
+    },
+    {
+      "path": "handoffs/0065-core-live-hud/screenshots/crop-zh-Hans-640x480-progress-x4.png",
+      "sha256": "e8f17ef84c5ece152e1c09171d18bcd17923334e5751a5a1176569f1d393e426",
+      "bytes": 16876
+    },
+    {
+      "path": "handoffs/0065-core-live-hud/tools/build_variant.py",
+      "sha256": "eebc07e62f33534eb837ecda0e6e37b4ceea19352274aed94a51007ced0f7e3f",
+      "bytes": 9118
+    },
+    {
+      "path": "handoffs/0065-core-live-hud/tools/capture.py",
+      "sha256": "2b2891b48da7b3c9cf00d5d7a253eecd8a3e33bac9d11cda9b3f6afe3e53c507",
+      "bytes": 4631
+    },
+    {
+      "path": "handoffs/0065-core-live-hud/tools/collect.py",
+      "sha256": "dc7db286b8598bd2ec1934f9d9f2ea37b675e1d77d5e94cabea94f1219210a62",
+      "bytes": 21638
+    },
+    {
+      "path": "handoffs/0065-core-live-hud/tools/contrast.py",
+      "sha256": "8ef599c18a03f25f2c3e339ee7e95138b06ca9749c562ff1704634a1bce7af56",
+      "bytes": 2346
+    },
+    {
+      "path": "handoffs/0065-core-live-hud/tools/layout_check.py",
+      "sha256": "3675769c13f6e875aae9335209a3598056925e20bb9a0208591a1bde9fd3221f",
+      "bytes": 3705
+    },
+    {
+      "path": "handoffs/0065-core-live-hud/tools/lease.py",
+      "sha256": "ad8977a00715084d94ec190197d3efb5dc7a00a9bb6f98c8cdd04b8b0dc1d0ca",
+      "bytes": 11567
+    },
+    {
+      "path": "handoffs/0065-core-live-hud/tools/live_hud.rs",
+      "sha256": "ed75e61459dfc1a1bbbe687d6066006a6ad7522a3f57f0edbd423eca4f2b9faf",
+      "bytes": 26494
+    },
+    {
+      "path": "handoffs/0065-core-live-hud/tools/mutate_checks.py",
+      "sha256": "8be04cbcb973e581fc243273ae5f79506629c953c0aef2bdd2382b1e72e13da5",
+      "bytes": 3257
+    },
+    {
+      "path": "handoffs/0065-core-live-hud/tools/plans.json",
+      "sha256": "66de7315ef0458b35d15edc34a781d87368dd41050bc7ef70bdb6511ebd91656",
+      "bytes": 12833
+    },
+    {
+      "path": "handoffs/0065-core-live-hud/tools/png.py",
+      "sha256": "600a993da3976bde6e2b0aa4d11f6a3d4a50628368d1f19f95c9cd8555d77951",
+      "bytes": 2964
+    },
+    {
+      "path": "handoffs/0065-core-live-hud/tools/route_check.py",
+      "sha256": "37e38f2318911142ef49cc162a056e1d1cd7814150dc908386d4313ca90eadea",
+      "bytes": 5721
+    },
+    {
+      "path": "handoffs/0065-core-live-hud/tools/routes.py",
+      "sha256": "8669209a0e942bd2b976f5ec9bfe4abbdcc2a87a3e96f159aabb9ce111cca819",
+      "bytes": 2172
+    },
+    {
+      "path": "samples/core/PRESENTATION.md",
+      "sha256": "a1232c17af9b0baf81830602b418ba1810cc87d96a6a35111bcead79fb698f42",
+      "bytes": 10017
+    },
+    {
+      "path": "samples/core/art/fonts/CoreSampleSC-Regular.ttf",
+      "sha256": "8d78a4c412fca7fd980e12c4ccf958bc13d21d8dd016752808b4b83116e62af0",
+      "bytes": 13232
+    },
+    {
+      "path": "samples/core/art/fonts/provenance.json",
+      "sha256": "b02a35532889c46ac9b3df8b421e5959954f7e99743b32c47a6180c6c6383fe0",
+      "bytes": 2109
+    },
+    {
+      "path": "samples/core/ui/hud.json",
+      "sha256": "dd51ad74a30969efd6911f63701250611d28c46337d3fcdec6b3812a3ff8951c",
+      "bytes": 3034
+    },
+    {
+      "path": "samples/core/ui/strings.json",
+      "sha256": "9024e49341edf27906f949d05bef1e965dda171e9ac8aee006587515320dcd80",
+      "bytes": 1450
+    }
+  ],
+  "producer_review": {
+    "path": "docs/spikes/evidence/core-live-hud-main190/producer-review.json",
+    "sha256": "8c29be8dcd748265b8c366391b9c683b5bff4184ec9b1114048ad00731f98260"
+  },
+  "archive": {
+    "parts": [
+      {
+        "path": "docs/spikes/evidence/core-live-hud-main190/artifacts.json.gz.part-000",
+        "sha256": "c78ace887f44bfdc389d782d1daccacf920a651b6f08b39703912cc2fc0b7cd4",
+        "bytes": 16777216
+      },
+      {
+        "path": "docs/spikes/evidence/core-live-hud-main190/artifacts.json.gz.part-001",
+        "sha256": "32ba87fe072e8ad260073db075e8a716b92d9efc3b617e170b46be9e29c4f9a0",
+        "bytes": 16777216
+      },
+      {
+        "path": "docs/spikes/evidence/core-live-hud-main190/artifacts.json.gz.part-002",
+        "sha256": "e917cc63ac3420fb60f45acbb371a8c403b2fc218485bf0a1a66ea97b0b4d0ab",
+        "bytes": 16777216
+      },
+      {
+        "path": "docs/spikes/evidence/core-live-hud-main190/artifacts.json.gz.part-003",
+        "sha256": "626f7a791df8cbbdce19d3aaf9c6b4320ac3e1099f925ae20cd7ab3b3f05e07a",
+        "bytes": 16777216
+      },
+      {
+        "path": "docs/spikes/evidence/core-live-hud-main190/artifacts.json.gz.part-004",
+        "sha256": "d5b1468ef0fdf870bc1642bbc3b502d6056c68201735828a08588336b2446bd9",
+        "bytes": 16777216
+      },
+      {
+        "path": "docs/spikes/evidence/core-live-hud-main190/artifacts.json.gz.part-005",
+        "sha256": "55a6d6c7b65693d2b81abc5cbdd644697006243523bd20fdba2c04e5ffa4565f",
+        "bytes": 16777216
+      },
+      {
+        "path": "docs/spikes/evidence/core-live-hud-main190/artifacts.json.gz.part-006",
+        "sha256": "baed55503bb2ba0e643ccfe2bc38a6f2f56cee33fc4c31a374ed5a3331ab09ce",
+        "bytes": 9467205
+      }
+    ],
+    "gzip_sha256": "27e1b6a1aa35e8d826fea75b1053ea6c5541efd0304e98379b1c34b89b51a9a1",
+    "gzip_bytes": 110130501,
+    "records": 351,
+    "payloads": 169
+  },
+  "limits": [
+    "Current CPU authoring/native readback/font coverage only; no current GPU, native window or source-free shipping of changed HUD",
+    "Claude producer reports result-title and narrow contrast defects; full visual acceptance remains open",
+    "Original0060 offscreen helper identity gap remains unresolved; prompt/stale objective follow-up separate",
+    "Only clean sanitized8b82 producer ancestry retained; private original f517 and raw environment ledger excluded",
+    "Immutable current-source headless reused by exact implementation/build input equality; no redundant build claim"
+  ],
+  "review_state": "Independent final integration review accepted; required fast check pending",
+  "final_review": {
+    "path": "docs/spikes/evidence/core-live-hud-main190/final-review.json",
+    "sha256": "d6e66b0f47cd2004633decdef71bb7413b333491cd7551cf74c06a9c3d2fbaf0"
+  },
+  "post_main191_qualification": {
+    "path": "docs/spikes/evidence/core-live-hud-main190/main191-qualification.json",
+    "sha256": "e6ede8b0bd6ec4b0db0bf5f1b267b1045f1a123a05698520e7a68f94118fffef",
+    "script": "docs/spikes/evidence/core-live-hud-main190/qualify-main191.py",
+    "script_sha256": "2d1be40b12326704a0d8de6f36fe5cf0b7479e864b0b386bbe4d2fa349e53552",
+    "review": {
+      "path": "docs/spikes/evidence/core-live-hud-main190/main191-review.json",
+      "source": "Parent independent review message; supplements retained d6e66b0f final receipt"
+    }
+  }
+}
