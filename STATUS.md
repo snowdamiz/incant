@@ -16,9 +16,9 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Current overview — main205, 2026-10-13
+## Current overview — main206, 2026-10-13
 
-Development main205 includes the restart quota-test repair (PR188) and the reviewed,
+Development main206 includes the restart quota-test repair (PR188) and the reviewed,
 opt-in cooked sprite/UI/text/material paths with private Vulkan pipeline persistence
 (PR189). Default renderer checks remain; the next frozen checkpoint also exercises
 cooked features and asserts the actual native backend. Producer Metal appearance
@@ -75,13 +75,23 @@ their recorded producer binary; no current composed GPU or appearance claim is m
 Final integration review and the exact-head fast check passed; PR204 is merged. Default rendering is unchanged; temporal color,
 upscaling and cooked motion remain separate.
 
+## Exact physics saves — inert regular body state verified locally
+
+The inert path now retains every fixed regular rigid-body field, including
+mass/force/velocity/CCD caches, activation history, exact u128 user data and
+island scalar references, bound to checked body/attachment rows. 101 CPU tests
+and all scoped checks pass; native both-dimension evidence covers force/mass
+changes, sleep/wake, automatic CCD and removal/reuse. Independent producer review is accepted. The [current-main206 integration](docs/spikes/physics-body-main206.md) passes all eight checks and 101 CPU cases with 2,900 unchanged inputs; final integration review is accepted and publication requires the fast check. Derived mass/island consistency, solver work admission, complete
+collider/owner construction and exact continuation remain required; physics
+saves stay refused. [Body contract](docs/spikes/physics-inert-body-state.md).
+
 ## Exact physics saves — inert pair persistence producer accepted
 
 The std-only inert format checks pair event/color/recycle fields and closed
 composite workspace maps against existing manifold/geometry ownership. Native
 tuple keys, detector order/timestamps and manifold bijections are retained;
 unknown workspace kinds refuse explicitly. Producer88 CPU cases, Clippy/wasm32
-and dependency checks have independent acceptance. The [current-main205 integration](docs/spikes/physics-pair-main205.md) also passes all eight checks with 88 CPU cases and 2,895 unchanged inputs; final integration review is accepted; publication requires the fast check. Previous-cluster scratch reconstruction, complete
+and dependency checks have independent acceptance. The [current-main205 integration](docs/spikes/physics-pair-main205.md) also passes all eight checks with 88 CPU cases and 2,895 unchanged inputs; final integration review and the exact-head fast check passed, and PR206 is merged. Previous-cluster scratch reconstruction, complete
 body/island/solver ownership and live/save admission remain open.
 [Pair-state contract](docs/spikes/physics-inert-pair-state.md).
 
