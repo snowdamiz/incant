@@ -43,22 +43,23 @@ fn timestamp_write_and_resolve_paths() {
         compilation_options: Default::default(),
         cache: None,
     });
-    let work = device.create_buffer(&wgpu::BufferDescriptor {
-        label: Some("Timestamp independently checked integer work"),
-        size: u64::from(WORDS) * 4,
-        usage: wgpu::BufferUsages::STORAGE | wgpu::BufferUsages::COPY_SRC,
-        mapped_at_creation: false,
-    });
-    let bindings = device.create_bind_group(&wgpu::BindGroupDescriptor {
-        label: None,
-        layout: &pipeline.get_bind_group_layout(0),
-        entries: &[wgpu::BindGroupEntry {
-            binding: 0,
-            resource: work.as_entire_binding(),
-        }],
-    });
     for descriptor in [false, true] {
         for later_resolve in [false, true] {
+            // Fresh zeroed work storage makes every case independently observable.
+            let work = device.create_buffer(&wgpu::BufferDescriptor {
+                label: Some("Timestamp independently checked integer work"),
+                size: u64::from(WORDS) * 4,
+                usage: wgpu::BufferUsages::STORAGE | wgpu::BufferUsages::COPY_SRC,
+                mapped_at_creation: false,
+            });
+            let bindings = device.create_bind_group(&wgpu::BindGroupDescriptor {
+                label: None,
+                layout: &pipeline.get_bind_group_layout(0),
+                entries: &[wgpu::BindGroupEntry {
+                    binding: 0,
+                    resource: work.as_entire_binding(),
+                }],
+            });
             let queries = device.create_query_set(&wgpu::QuerySetDescriptor {
                 label: None,
                 ty: wgpu::QueryType::Timestamp,
