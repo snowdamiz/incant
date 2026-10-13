@@ -1,0 +1,18 @@
+{
+  "candidate": "dbace214b5bef7d6708a871b8059125673939732",
+  "job": 115113632977,
+  "run": 38341581332,
+  "conclusion": "FAILURE",
+  "log": {
+    "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/checkpoint18/macos-checks-115113632977.log",
+    "sha256": "fcaa6c411b9c3f468c3280831eb0501550a6a330086846b43f1275df8ad9b3d4",
+    "bytes": 183429
+  },
+  "same_cause": "Shared support crate::Renderer root alias E0425",
+  "source_repair": "a7b9542b70171d1aca5ef17ce4b3be6130f34ce2104a92686240b6be39d543d3",
+  "retained": {
+    "path": "docs/spikes/evidence/editor-renderer-import/macos-checks-115113632977.log.gz",
+    "sha256": "7afd7bc55427f9239d07f1b0d6f764c785763de0bff38461a268b1cfb80948a1",
+    "bytes": 36803
+  }
+}

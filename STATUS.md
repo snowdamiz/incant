@@ -32,9 +32,10 @@ quota repair preserves production's 50 ms budget, and the reviewed player probe
 correction is merged in PR191. Checkpoint18 is frozen at the exact main191 tree;
 all 23 requirements must pass before release promotion.
 No release or phase approval follows from a main merge.
-Checkpoint18 has a Linux editor test compilation failure: its reused backend helper
-requires a Renderer alias in the integration test root. The narrow test-only repair
-is undergoing scoped compilation; the candidate remains frozen.
+Checkpoint18 Linux and Windows desktop jobs both fail compiling the editor test
+that reuses a renderer helper without its root type alias. The [test-only repair](docs/spikes/editor-renderer-import.md)
+passes local compile/CPU/Clippy checks and final review; production and backend
+assertions are unchanged. Other candidate jobs continue without an advance.
 
 Android static-Wasm integration is merged in PR190 after independent source-relevance
 review and the fast check. Current CPU/public preflights and both-mode target compile/
