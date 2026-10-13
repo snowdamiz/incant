@@ -21,3 +21,11 @@ A test-only correction now verifies the admitted route metadata and keeps x86/AR
 Android refusals; all four focused cooker cases pass. The original failure and
 unchanged production inputs are retained in the [correction receipt](evidence/authored-android-main179-correction/manifest.json).
 Current-union archive and caller checks remain pending.
+
+On frozen `79557b89`, the remaining 19 commands pass, including both actual
+physics headless builds and fresh deterministic/fast Android archives. Six
+source-deleted copied emulator processes and fourteen precise refusals pass;
+owned emulators are reaped and deleted. This is the pre-PCM integration proof,
+not a rebuild of a later union. The [full retained packet](evidence/authored-android-main180.json)
+pins 1,954 inputs and all process streams. A final composed PCM archive and
+scoped checks remain required before publication.
