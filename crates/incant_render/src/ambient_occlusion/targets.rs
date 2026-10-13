@@ -36,7 +36,16 @@ impl Cache {
                     dimension: wgpu::TextureDimension::D2,
                     format,
                     usage: wgpu::TextureUsages::RENDER_ATTACHMENT
-                        | wgpu::TextureUsages::TEXTURE_BINDING,
+                        | wgpu::TextureUsages::TEXTURE_BINDING
+                        | if cfg!(all(
+                            feature = "ssao-stage-readback",
+                            not(target_arch = "wasm32")
+                        )) && format == wgpu::TextureFormat::R8Unorm
+                        {
+                            wgpu::TextureUsages::COPY_SRC
+                        } else {
+                            wgpu::TextureUsages::empty()
+                        },
                     view_formats: &[],
                 })
                 .create_view(&Default::default())
