@@ -1,0 +1,25 @@
+{
+  "source_commit": "7a900ece47306b2678f8ba003f69f205d4059f25",
+  "repair_upstream": "78fa7e8be556cd5fb955ccbbefb688bde368aa95",
+  "archive_sha256": "78194c25ce868e6b3b9dc34eaba8659733f28c113ec9824987964137808db2dd",
+  "records": 11,
+  "tests": {
+    "focused-det-005": 9,
+    "focused-fast8-005": 9
+  },
+  "binaries": [
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/ci/deps/incant_script-88e04b4a4a256258",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-session-physics-checkpoints-001/binaries-focused-det-005/incant_script-88e04b4a4a256258",
+      "sha256": "38a54a3cfae423c789e7ef6ac1a3de62f63c20e9ced2bb95647b2dc823484ed6",
+      "mode": "0o755"
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/ci/deps/incant_script-4dcd730f7e0d582b",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-session-physics-checkpoints-001/binaries-focused-fast8-005/incant_script-4dcd730f7e0d582b",
+      "sha256": "cfcd4c1301ceb2c00632df19d314a8bc8554f9947493d73a7ecedc2fd0f0839c",
+      "mode": "0o755"
+    }
+  ],
+  "qualification": "Inherited manifest repair now passes conservative guard and both selected normal solver graphs; unchanged script sources passed9focusedcases per mode. Broad195/195/186 belongs preceding source004 generation. Root source/final headless review retained."
+}
