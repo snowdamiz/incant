@@ -144,5 +144,9 @@
     "payloads": 16
   },
   "verifier_sha256": "d9cade37585d60358fddff016ec0152a46c5da1d316ebfd86b485f066a9a5bea",
-  "final_review": "pending"
+  "final_review": {
+    "path": "docs/spikes/evidence/hierarchy-menu-timeout/final-root.json",
+    "sha256": "addf23a2c84966dba44a890fe584d81c603461194a7937fb0b2938f984ff5266",
+    "decision": "accepted"
+  }
 }

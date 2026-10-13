@@ -6,4 +6,4 @@ The original case passes locally. Instrumented local execution measured about 36
 
 Only that existing case receives a bounded twenty-second deadline, consistent with the existing full-page DockPaging audit budget. All original action, focus, accessibility, dispatch and command-bus assertions remain. There is no global timeout, production, CI, retry or skip change. The ordinary UI suite is not a performance gate.
 
-Five repaired-source checks pass: all three focused tests, all 936 UI tests across 45 files, the strict TypeScript/UI build, conventions and whitespace. The original hosted failure is unchanged; a later frozen checkpoint must provide actual Windows evidence. Final independent review is pending. [Manifest](evidence/hierarchy-menu-timeout.json).
+Five repaired-source checks pass: all three focused tests, all 936 UI tests across 45 files, the strict TypeScript/UI build, conventions and whitespace. The original hosted failure is unchanged; a later frozen checkpoint must provide actual Windows evidence. Final independent review is accepted (`addf23a2`); publication follows the required fast check. [Manifest](evidence/hierarchy-menu-timeout.json).

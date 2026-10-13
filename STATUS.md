@@ -232,7 +232,8 @@ Unsupported results on Apple Paravirtual Metal and measured paths on Vulkan/Dx12
 Checkpoint25 is frozen on reviewed main230 (`56185dab`) in PR232, with all23
 required contexts preserved. One Windows UI test timed out; the original failure
 remains failed while remaining workflows run. Its scoped per-case deadline
-repair passes local focused/full UI checks and is under independent review.
+repair passes local focused/full UI checks and is independently accepted;
+publication follows its required fast check.
 Later main changes do not alter either frozen checkpoint.
 [Promotion evidence](docs/spikes/release-checkpoint-24.md).
 
