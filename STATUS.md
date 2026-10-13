@@ -2337,3 +2337,15 @@ retains resources through completion, reports fallback/refusal, and preserves
 current coverage/overlays. Native content-size changes reset private history.
 GPU numerical/appearance, native-cooked integration, vendor memory measurement,
 reference phones and performance remain open; no default enablement.
+
+## Integer motion-owner attachment — CPU/offline review accepted
+
+Private producer `613ee59a` adds explicit R32Uint owner transport with checked
+aggregate admission under the unchanged logical ceiling. Default shaders and
+the twelve original Motion/Depth native payloads remain exact. Final independent
+source/CPU/offline review is accepted: 143 default and 158 cooked/native CPU tests
+(overlapping), eleven cooker tests and all nine final checks pass. The compiled
+ignored control is pending a fresh root GPU grant: twelve renders plus twelve
+readback submissions, no images. History consumption, visual-quality repair,
+physical residency and device/performance gates remain open. See
+[verification](docs/spikes/temporal-owner-attachment-verification.md).

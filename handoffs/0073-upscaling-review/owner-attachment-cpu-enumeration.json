@@ -1,0 +1,34 @@
+{
+  "scope": "CPU test enumeration only",
+  "rows": [
+    {
+      "argv": [
+        "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-attachment-001/binaries/incant_render-bf4961fb357f91a4",
+        "--list",
+        "--exact",
+        "models::retained::motion_owner_tests::exact_integer_owner_matches_visibility_and_leaves_motion_depth_color_unchanged"
+      ],
+      "pid": 97838,
+      "exit": 0,
+      "reaped": true,
+      "binary_sha256": "35316fcd455cdd490c238e872b824e1daeb08556660bff065c582de9e8f96389",
+      "stdout_sha256": "0b2289fa1dca8f61bd98210221026c4e4308120bae5b6caeb9ab0f178e1f2be1",
+      "gpu_execution": false
+    },
+    {
+      "argv": [
+        "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-attachment-001/binaries/incant_render-288759d68012f619",
+        "--list",
+        "--exact",
+        "models::retained::motion_owner_tests::exact_integer_owner_matches_visibility_and_leaves_motion_depth_color_unchanged"
+      ],
+      "pid": 97839,
+      "exit": 0,
+      "reaped": true,
+      "binary_sha256": "fc3cd75685839d4b2fa465b853925ee2841ef3b28a568cc9c5cf5e8c650693d1",
+      "stdout_sha256": "0b2289fa1dca8f61bd98210221026c4e4308120bae5b6caeb9ab0f178e1f2be1",
+      "gpu_execution": false
+    }
+  ],
+  "gpu_executed": false
+}

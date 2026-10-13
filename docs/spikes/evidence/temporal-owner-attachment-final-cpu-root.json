@@ -1,0 +1,49 @@
+{
+  "at": "2026-10-13T13:29:47.953835+00:00",
+  "reviewer": "astra root",
+  "decision": "accepted_scoped_final_CPU_and_offline_compiler_evidence",
+  "manifest_sha256": "eff501183d1226cba85a192b8b5db30e9f8b78eec9a630c5f791501071c523fc",
+  "source_freeze_sha256": "95e4b8308badb57837d15b2d5759613d5dce1a50a1682a65b0492b8fb31f7365",
+  "prior_source_reviews": [
+    "e159df60e9e7d4008aecbf85b5fe62aba0b2042db362022d0723814bf9750813",
+    "9cdd40b772b9908d13ff4e1a52e4d6069de7e2ffeb3de37aea6d61e5d96d4572"
+  ],
+  "reviewed": [
+    "full spike report",
+    "full assertion audit",
+    "full ignored analytic device fixture",
+    "complete independent source and followup receipts"
+  ],
+  "verification": {
+    "command": "python3 /Users/andreyyurlov/.codex/incant-evidence/temporal-owner-attachment-001/audit.py",
+    "exit": 0,
+    "reaped": true,
+    "records": 213,
+    "payloads": 127,
+    "inputs": 30,
+    "checks": 9,
+    "default_cpu": 143,
+    "cooked_native_cpu": 158,
+    "cooker_cpu": 11,
+    "offline_compiler_commands": 9,
+    "old_native_payloads_exact": 12,
+    "copied_binaries": 2
+  },
+  "gpu_execution_pending": {
+    "renders": 12,
+    "explicit_readback_submissions": 12,
+    "total_queue_submissions": 24,
+    "max_extent": [
+      32,
+      32
+    ],
+    "images": 0,
+    "required_completion_marker": "MOTION_OWNER renders=12 readback_submissions=12 max_extent=32x32 source_removed=true no_images=true"
+  },
+  "limitations": [
+    "No GPU execution yet; unsupported early return cannot count as acceptance",
+    "Source transport only, not history consumer or quality fix",
+    "Logical allocation bound not physical GPU residency",
+    "No phase, device or performance approval"
+  ]
+}

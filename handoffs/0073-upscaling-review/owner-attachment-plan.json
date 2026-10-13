@@ -1,0 +1,79 @@
+{
+  "schema": "incant-owner-numeric-preparation-v1",
+  "state": "PREPARATION_ONLY_NO_GPU_AUTHORITY",
+  "producer": "613ee59aec1f2bce080d4a1e335dc45f732b993f",
+  "source_freeze_sha256": "95e4b8308badb57837d15b2d5759613d5dce1a50a1682a65b0492b8fb31f7365",
+  "manifest_sha256": "eff501183d1226cba85a192b8b5db30e9f8b78eec9a630c5f791501071c523fc",
+  "root_cpu_review_sha256": "d232a2241667c7258a4211489b851b2b7bdb7f72bf72b245d613fa678d23d3e2",
+  "binary": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-attachment-001/binaries/incant_render-288759d68012f619",
+    "sha256": "fc3cd75685839d4b2fa465b853925ee2841ef3b28a568cc9c5cf5e8c650693d1",
+    "bytes": 33339024,
+    "mode": "0755",
+    "profile": "ci",
+    "features": [
+      "cooked-temporal",
+      "native-metalfx"
+    ],
+    "execution": "native Metal MotionOwner; fixture does not enable MetalFX or GPU timing"
+  },
+  "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-attachment-001/binaries/incant_render-288759d68012f619",
+    "--ignored",
+    "--exact",
+    "models::retained::motion_owner_tests::exact_integer_owner_matches_visibility_and_leaves_motion_depth_color_unchanged",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "budget": {
+    "process_launches": 1,
+    "render_submissions": 12,
+    "batched_readback_submissions": 12,
+    "total_explicit_queue_submissions": 24,
+    "maximum_extent": [
+      32,
+      32
+    ],
+    "timeout_seconds": 90,
+    "image_files": 0,
+    "builds": 0,
+    "retries": 0
+  },
+  "environment": {
+    "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+    "TMPDIR": "<fresh evidence root>/tmp",
+    "INCANT_EXPECT_GPU_BACKEND": "Metal",
+    "RUST_BACKTRACE": "0"
+  },
+  "acceptance": {
+    "exit": 0,
+    "tests_passed": 1,
+    "tests_failed": 0,
+    "tests_ignored": 0,
+    "exact_final_marker": "MOTION_OWNER renders=12 readback_submissions=12 max_extent=32x32 source_removed=true no_images=true",
+    "required_backend": "Metal",
+    "adapter_identity_must_be_recorded": true,
+    "unsupported_early_return": "failure: final marker absent",
+    "process_groups_alive_after_release": 0
+  },
+  "preconditions": [
+    "Root issues fresh explicit GPU authority binding this plan, final reviewed runner, exact executable and predecessor release.",
+    "Verify Claude Opus 5.5 and Max through ACP before any resumed prompt.",
+    "Acquire global GPU and packet locks atomically; verify previous holder released and owned groups gone.",
+    "Predebit one full attempt before launch; no refund, rerun or second binary on failure.",
+    "Retain source/executable hashes and executable bit; no target/Cargo access or mutable source dependency."
+  ],
+  "cleanup": [
+    "Regular retained stdout/stderr files; no PIPE backpressure.",
+    "New process group, bounded timeout, unconditional BaseException kill/wait/reap and truthful release ledger.",
+    "Preserve original exception/output; record all child PID/PGID and actual terminal status."
+  ],
+  "cpu_enumeration": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-attachment-preparation-001/result.json",
+    "sha256": "68c5434e926678071f4291896f6897137b4010b3885ab8043db7d9785136cfba"
+  },
+  "not_covered": [
+    "Default portable-WGSL GPU variant remains compiled only. A second full test needs separate24-submit authority.",
+    "No history consumption, quality/appearance, native owner packing, physical queued-memory, performance or phone gate."
+  ]
+}
