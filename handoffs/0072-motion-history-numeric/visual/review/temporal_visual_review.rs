@@ -1415,7 +1415,7 @@ impl Rig {
 #[test]
 #[ignore = "handoff 0072 temporal visual review; run only by the guarded packet runner"]
 fn probe() {
-    let mut report = Report::open("probe", 0, 0);
+    let report = Report::open("probe", 0, 0);
     let instance = wgpu::Instance::default();
     let mut renderer =
         support::checked(pollster::block_on(Renderer::new(&instance, None)).expect("renderer"));

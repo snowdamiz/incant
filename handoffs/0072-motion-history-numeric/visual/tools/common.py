@@ -1,17 +1,27 @@
-"""Shared constants and guards for handoff 0072 stage B (temporal visual review).
+"""Shared constants and guards for handoff 0072's corrected-source temporal review.
 Standard library only. Importing this module has no side effects.
 
-Adapted from handoff 0068's committed tools/common.py (read-only reuse). Stage
-differences: the grant also pins the reviewed visual tree and names the Cargo
-target (validated, never a forbidden shared one); GPU children run under the
-global native-gpu.lock; review budgets are debited before launch; signals are
-deferred so every owned child is killed and reaped; any failure latches
-stop.json; frozen binaries must be executable before anything is charged.
+Adapted from this packet's original stage B tools (themselves from handoff 0068),
+with the accepted 0073 source-pin routines reused read-only: two root grants gate
+the stage, and every mutating entry point checks its grant first; without it,
+tools refuse without creating any file or directory.
+- build-ready.json (root-supervised CPU build): this packet and build stage, the
+  actual holder, a committed source as a 40-hex commit (never a branch name),
+  root's source freeze by path and SHA-256, the committed visual tree and a
+  dedicated Cargo target. Every build input of the exported commit must equal
+  that freeze (build.py checkout).
+- review-ready.json (GPU review, written after the build): this packet and
+  review stage, the actual holder, the visual tree, the SHA-256 of the frozen
+  build record, at least one prior release pin and optionally root's frozen
+  same-source default library test binary for the one numeric regression.
+Old namespaces (0072-temporal-visual and earlier) are never read or written.
 
-Every mutating entry point calls grant() first. Until root's review-ready.json
-exists, tools refuse without creating any file or directory. Child
-environments are built from scratch: HOME is passed through (never recorded)
-and every other variable is an explicit, recorded, nonsecret override.
+GPU children run under the global non-waiting native-gpu.lock; budgets are
+debited before launch, monotonic and never refunded; signals are deferred so
+every owned child is killed and reaped; any failure latches stop.json; frozen
+binaries must be executable before anything is charged. Child environments are
+built from scratch: HOME is passed through (never recorded) and every other
+variable is an explicit, recorded, nonsecret override.
 """
 
 import contextlib
@@ -29,7 +39,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[4]
 PACKET = "0072-motion-history-numeric"
-STAGE = "temporal-visual"
+STAGE = "temporal-corrected-visual"
+BUILD_STAGE = "temporal-corrected-build"
 PACKET_DIR = ROOT / "handoffs" / PACKET
 VISUAL_RELATIVE = "handoffs/" + PACKET + "/visual"
 VISUAL = ROOT / VISUAL_RELATIVE
@@ -37,9 +48,11 @@ TOOLS = VISUAL / "tools"
 PLAN_PATH = VISUAL / "plan.json"
 HELPER_SOURCE = VISUAL / "review" / "temporal_visual_review.rs"
 HELPER_DEST = "crates/incant_render/tests/temporal_visual_review.rs"
-EVIDENCE_ROOT = Path("/Users/andreyyurlov/.codex/incant-evidence")
-EVIDENCE = EVIDENCE_ROOT / "0072-temporal-visual"
+CODEX = Path("/Users/andreyyurlov/.codex")
+EVIDENCE_ROOT = CODEX / "incant-evidence"
+EVIDENCE = EVIDENCE_ROOT / "0072-temporal-corrected-001"
 GRANT = EVIDENCE / "review-ready.json"
+BUILD_GRANT = EVIDENCE / "build-ready.json"
 GPU_LOCK = EVIDENCE_ROOT / "native-gpu.lock"  # global; shared with root's runners
 PACKET_LOCK = EVIDENCE / "packet.lock"
 LEASE = EVIDENCE / "target-lease.json"
@@ -55,17 +68,15 @@ BIN = EVIDENCE / "bin"
 LOGS = EVIDENCE / "logs"
 SCRATCH = EVIDENCE / "tmp"
 CAPTURES = EVIDENCE / "captures"
-PUBLISHED = PACKET_DIR / "temporal-visual-screenshots"
+ANALYSIS = EVIDENCE / "analysis"
+PUBLISHED = PACKET_DIR / "temporal-corrected-screenshots"
+PUBLISHED_EVIDENCE = PACKET_DIR / "temporal-corrected-evidence"
 RUSTUP_BIN = "/opt/homebrew/opt/rustup/bin"
 SYSTEM_PATH = "/usr/bin:/bin:/usr/sbin:/sbin"
-TARGET_PARENT = Path("/Users/andreyyurlov/.codex")
 FORBIDDEN_TARGETS = ("/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
                      "/tmp/incant-cpu-profiler-target")
-FREEZE = Path("/Users/andreyyurlov/.codex/incant-evidence/temporal-color-source-001/freeze.json")
-FREEZE_SHA256 = "06a242fd0d56fa2afc05c9931567795a12919e6b82f0dd90ee8dcd94adeeb39f"
-REVIEWED_SOURCE = "e73afe43ffaf78e73b725876411128d092791f5a"
-BUILD_INPUTS = ("crates", "Cargo.toml", "Cargo.lock", "third_party", "tools/cargo",
-                "rust-toolchain.toml")
+HEX40 = re.compile(r"[0-9a-f]{40}")
+HEX64 = re.compile(r"[0-9a-f]{64}")
 INHERITED = ("HOME",)
 # The only variables a child receives besides INHERITED, all nonsecret.
 OVERRIDES = {
@@ -114,41 +125,88 @@ def append_durable(path, entry):
         os.fsync(out.fileno())
 
 
+def read_lines(path):
+    path = Path(path)
+    if not path.exists():
+        return []
+    return [json.loads(line) for line in path.read_text().splitlines() if line.strip()]
+
+
 def plan():
     return read_json(PLAN_PATH)
 
 
-def git(*args, cwd=ROOT):
-    return subprocess.run(["git", *args], cwd=cwd, capture_output=True, text=True,
+def git(*args, cwd=None):
+    return subprocess.run(["git", *args], cwd=cwd or ROOT, capture_output=True, text=True,
                           check=True).stdout
 
 
 def refuse(reason):
-    """Record a refusal only once the grant exists; before it, touch nothing."""
-    if GRANT.is_file():
+    """Record a refusal only once a grant exists; before any grant, touch nothing."""
+    if GRANT.is_file() or BUILD_GRANT.is_file():
         append_durable(REFUSALS, {"at": now(), "reason": reason, "argv": sys.argv[1:]})
     raise SystemExit("refused: " + reason)
 
 
 def target_allowed(value):
+    """A dedicated directory directly under ~/.codex named *-target; never a shared
+    or forbidden target, the worktree or an evidence directory."""
+    if not isinstance(value, str) or not value.startswith("/"):
+        return False
     path = Path(value)
-    return (isinstance(value, str) and path.is_absolute() and str(path) == value
-            and ".." not in path.parts and path.parent == TARGET_PARENT
-            and path.name.endswith("-target") and value not in FORBIDDEN_TARGETS)
+    return (str(path) == value and ".." not in path.parts and path.parent == CODEX
+            and path.name.endswith("-target") and value not in FORBIDDEN_TARGETS
+            and ROOT not in path.parents)
+
+
+def holder_ok(value):
+    return isinstance(value, str) and 0 < len(value.strip()) <= 120
+
+
+def release_pins(data):
+    return [k for k in data if k.startswith("prior_") and k.endswith("_path") and "release" in k]
+
+
+def build_grant():
+    """Root's supervised CPU build grant (0073 routine): a committed source
+    (40-hex commit, never a branch name), root's source freeze by path and
+    SHA-256, the committed visual tree, an allowed target and the actual holder."""
+    if not BUILD_GRANT.is_file():
+        raise SystemExit("refused: build-ready.json is absent; preparation only")
+    data = read_json(BUILD_GRANT)
+    freeze = data.get("source_freeze")
+    if (data.get("packet") != PACKET or data.get("stage") != BUILD_STAGE
+            or not holder_ok(data.get("holder"))
+            or not HEX40.fullmatch(str(data.get("source_commit", "")))
+            or not isinstance(freeze, dict) or not str(freeze.get("path", "")).startswith("/")
+            or not HEX64.fullmatch(str(freeze.get("sha256", "")))
+            or not HEX40.fullmatch(str(data.get("visual_tree", "")))
+            or not target_allowed(data.get("target"))):
+        refuse("build-ready.json does not name this packet and build stage, the holder, a 40-hex "
+               "source commit, root's source freeze path and SHA-256, the visual tree and an "
+               "allowed ~/.codex/*-target")
+    return data, sha(BUILD_GRANT)
 
 
 def grant():
-    """Root's grant names this packet/stage, a full source commit, the exact
-    committed visual tree it reviewed and an allowed Cargo target."""
+    """Root's GPU review grant, written after the build: this packet and review
+    stage, the holder, the visual tree, the build record's SHA-256, a prior release
+    pin and, optionally, root's frozen default library test binary by path/SHA."""
     if not GRANT.is_file():
         raise SystemExit("refused: review-ready.json is absent; preparation only")
     data = read_json(GRANT)
-    full = lambda v: isinstance(v, str) and re.fullmatch(r"[0-9a-f]{40}", v) is not None
-    if not (data.get("packet") == PACKET and data.get("stage") == STAGE
-            and full(data.get("source_commit")) and full(data.get("visual_tree"))
-            and target_allowed(data.get("target"))):
-        refuse("review-ready.json does not name this packet/stage, a source commit, "
-               "the visual tree and an allowed target")
+    numeric = data.get("numeric_binary")
+    if (data.get("packet") != PACKET or data.get("stage") != STAGE
+            or not holder_ok(data.get("holder"))
+            or not HEX40.fullmatch(str(data.get("visual_tree", "")))
+            or not HEX64.fullmatch(str(data.get("build_record_sha256", "")))
+            or not release_pins(data)
+            or (numeric is not None and not (isinstance(numeric, dict)
+                                             and str(numeric.get("path", "")).startswith("/")
+                                             and HEX64.fullmatch(str(numeric.get("sha256", "")))))):
+        refuse("review-ready.json does not name this packet and review stage, the holder, the "
+               "visual tree, the build record SHA-256 and a prior release pin (and a well-formed "
+               "numeric_binary when present)")
     return data, sha(GRANT)
 
 
@@ -156,24 +214,57 @@ def target(data):
     return Path(data["target"])
 
 
-def gate(allow_stopped=False, after_gpu_release=False):
-    """Grant, stop latch, GPU release latch, then the held lease of the same grant."""
-    data, grant_sha = grant()
-    if STOP.exists() and not allow_stopped:
+def build_gate():
+    """Build grant, no GPU release or stop latch, and the build lease (held,
+    unreleased, taken under this build grant)."""
+    data, grant_sha = build_grant()
+    if LATCH.exists():
+        refuse("GPU and target already released by this stage")
+    if STOP.exists():
         refuse("stop.json latched a failure; only analysis and releases may run")
-    if LATCH.exists() and not after_gpu_release:
-        refuse("GPU already released by this stage")
     if not LEASE.is_file():
         refuse("target lease absent; run lease.py acquire first")
     lease = read_json(LEASE)
     if lease.get("released_at") or lease.get("grant_sha256") != grant_sha:
-        refuse("lease released, or the grant changed since the lease was taken")
+        refuse("lease released, or the build grant changed since the lease was taken")
     return data, grant_sha
+
+
+def gate():
+    """GPU grant, then the release and stop latches. GPU children need no Cargo
+    target: they run frozen binaries the grant binds by hash."""
+    data, grant_sha = grant()
+    if LATCH.exists():
+        refuse("GPU already released by this stage")
+    if STOP.exists():
+        refuse("stop.json latched a failure; only analysis and releases may run")
+    return data, grant_sha
+
+
+def prior_receipts(data, required):
+    """Every prior_<name>_path / _sha256 pin must verify, and every pinned release
+    body must list no live process (0073 routine)."""
+    alive_fields = ("owned_processes", "owned_processes_alive", "ledger_pids_alive",
+                    "target_users", "processes_on_target_at_release")
+    pins = {}
+    for key, value in data.items():
+        if key.startswith("prior_") and key.endswith("_path"):
+            name = key[len("prior_"):-len("_path")]
+            path = Path(value)
+            pins[name] = {"path": value, "expected": data.get("prior_" + name + "_sha256"),
+                          "sha256": sha(path) if path.is_file() else None}
+    releases = sorted(name for name in pins if "release" in name)
+    ok = (bool(releases) or not required) and all(
+        p["expected"] and p["sha256"] == p["expected"] for p in pins.values())
+    bodies = {name: read_json(pins[name]["path"]) for name in releases} if ok else {}
+    alive = {name: {k: body[k] for k in alive_fields if k in body} for name, body in bodies.items()}
+    ok = ok and all(v == [] for fields in alive.values() for v in fields.values())
+    return {"pins": pins, "release_pins": releases, "release_alive_fields": alive}, ok
 
 
 def tools_identity(data):
     """The committed visual tools, plan and fixture run unchanged: no local edits,
-    and HEAD's visual tree is exactly the one root granted."""
+    and HEAD's visual tree is exactly the one the grant names."""
     dirty = git("status", "--porcelain", "--untracked-files=all", "--", VISUAL_RELATIVE).strip()
     if dirty:
         refuse("visual tools, plan or fixture differ from HEAD: " + dirty[:300])
@@ -266,9 +357,7 @@ def latch_stop(label, reason):
 
 
 def budget_rows():
-    if not BUDGET.exists():
-        return []
-    return [json.loads(line) for line in BUDGET.read_text().splitlines() if line.strip()]
+    return read_lines(BUDGET)
 
 
 def budget_used():
@@ -277,11 +366,12 @@ def budget_used():
 
 
 def debit(label, item, frames, ui, pngs, grant_sha):
-    """Monotonic prelaunch debit, fsynced before the child starts, never refunded."""
+    """Monotonic prelaunch debit, fsynced before the child starts, never refunded.
+    The ceiling includes failed and interrupted attempts."""
     budgets = plan()["budgets"]
     used = budget_used()
-    if used["frames"] + used["ui_submissions"] + frames + ui > budgets["new_submissions_max"]:
-        refuse(f"submission budget: {used} used, {frames} frames + {ui} UI requested")
+    if used["frames"] + used["ui_submissions"] + frames + ui > budgets["submissions_max"]:
+        refuse(f"submission ceiling: {used} used, {frames} frames + {ui} UI requested")
     if used["pngs"] + pngs > budgets["pngs_max"]:
         refuse(f"PNG budget: {used['pngs']} used, {pngs} requested")
     entry = {"label": label, "item": item, "frames": frames, "ui_submissions": ui, "pngs": pngs,

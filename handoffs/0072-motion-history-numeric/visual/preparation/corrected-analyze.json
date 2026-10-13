@@ -1,0 +1,85 @@
+{
+ "cpu_only": true,
+ "passed": true,
+ "tests_run": 9,
+ "records": [
+  {
+   "test": "complete",
+   "exit": 0,
+   "verdict": "pass",
+   "problems": []
+  },
+  {
+   "test": "empty_evidence",
+   "exit": 1,
+   "verdict": "fail",
+   "problems": [
+    "the GPU release latch is absent; run gpu.py release first",
+    "expected one passing lib listing, found 0",
+    "expected one passing review listing, found 0"
+   ]
+  },
+  {
+   "test": "failed_child",
+   "exit": 1,
+   "verdict": "fail",
+   "problems": [
+    "case timing: the child failed or exited nonzero"
+   ]
+  },
+  {
+   "test": "false_contract_check",
+   "exit": 1,
+   "verdict": "fail",
+   "problems": [
+    "case transitions: a contract check is false or missing"
+   ]
+  },
+  {
+   "test": "missing_case",
+   "exit": 1,
+   "verdict": "fail",
+   "problems": [
+    "review children ['probe', 'stationary', 'motion', 'excluded', 'transitions', 'timing'] are not the plan cases once each in order",
+    "case skinned: not exactly one debit of the plan's charge",
+    "case skinned: missing or duplicate review child (0 rows)"
+   ]
+  },
+  {
+   "test": "missing_report",
+   "exit": 1,
+   "verdict": "fail",
+   "problems": [
+    "case motion: output holds ['events.jsonl', 'motion-object-off-f8.png', 'motion-object-on-f8.png', 'motion-pan-off-f6.png', 'motion-pan-on-f6.png'], not ['events.jsonl', 'motion-object-off-f8.png', 'motion-object-on-f8.png', 'motion-pan-off-f6.png', 'motion-pan-on-f6.png', 'report.json']",
+    "case motion: report.json is absent or empty",
+    "case motion: report.json differs from the ledger"
+   ]
+  },
+  {
+   "test": "numeric_not_run",
+   "exit": 1,
+   "verdict": "fail",
+   "problems": [
+    "expected one numeric child, found 0"
+   ]
+  },
+  {
+   "test": "stale_before_change",
+   "exit": 0,
+   "verdict": "pass",
+   "problems": []
+  },
+  {
+   "test": "stale_summary_blocks_publication",
+   "publish": "refused"
+  },
+  {
+   "test": "stop_latch",
+   "exit": 1,
+   "verdict": "fail",
+   "problems": [
+    "stop latched: {\"label\": \"synthetic\", \"reason\": \"control\"}"
+   ]
+  }
+ ]
+}

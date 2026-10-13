@@ -30,7 +30,8 @@ import common as c  # noqa: E402
 import gpu  # noqa: E402
 
 RECORDS = []
-PLAN = {"expected_backend": "Metal", "budgets": {"new_submissions_max": 96, "pngs_max": 16}}
+PLAN = {"expected_backend": "Metal", "budgets": {"submissions_max": 128, "pngs_max": 16}}
+HOLDER = "lifecycle-test-holder"
 
 
 def absent(pid):
@@ -53,6 +54,7 @@ class Lifecycle(unittest.TestCase):
         root = Path(self.directory.name)
         self.paths = {name: root / relative for name, relative in {
             "EVIDENCE": "evidence", "GRANT": "evidence/review-ready.json",
+            "BUILD_GRANT": "evidence/build-ready.json",
             "LEASE": "evidence/target-lease.json", "LOGS": "evidence/logs",
             "LEDGER": "evidence/ledger.jsonl", "BUDGET": "evidence/budget.jsonl",
             "POST_RELEASE_LEDGER": "evidence/post.jsonl", "STOP": "evidence/stop.json",
@@ -73,7 +75,7 @@ class Lifecycle(unittest.TestCase):
         self.directory.cleanup()
 
     def fake_gate(self):
-        return mock.patch.object(c, "gate", return_value=({}, "cpu-only-grant"))
+        return mock.patch.object(c, "gate", return_value=({"holder": HOLDER}, "cpu-only-grant"))
 
     def child(self, label, program, args=(), timeout=5, charge=(8, 0, 1), killer=None):
         """run_child with a dummy program; returns (raised exception or None, rows)."""
@@ -82,7 +84,7 @@ class Lifecycle(unittest.TestCase):
         if killer:
             sender = subprocess.Popen(["/bin/sh", "-c", f"sleep 0.4; kill -{killer} {os.getpid()}"])
         raised = None
-        with self.fake_gate(), mock.patch.object(gpu, "frozen", return_value=(program, c.sha(program))):
+        with self.fake_gate(), mock.patch.object(gpu, "frozen", return_value=(program, c.sha(program), "cpu-fixture")):
             try:
                 gpu.run_child(label, "review", label, "cpu-fixture", list(args), ".", timeout,
                               charge=charge)
@@ -111,6 +113,7 @@ class Lifecycle(unittest.TestCase):
         debit = lines(c.BUDGET)[0]
         self.assertLessEqual(debit["at"], row["started"])
         self.assertEqual((debit["frames"], debit["pngs"]), (8, 1))
+        self.assertEqual(row["holder"], HOLDER)  # receipts name the actual grant holder
         self.assertFalse(c.STOP.exists())
         self.record("gpu_success", row, raised)
 
@@ -172,9 +175,9 @@ class Lifecycle(unittest.TestCase):
         RECORDS.append({"test": "non_executable_refused", "raised": str(raised)})
 
     def test_budget_exhaustion_refused_before_launch(self):
-        raised, rows = self.child("excess", "/usr/bin/true", charge=(90, 9, 1))
+        raised, rows = self.child("excess", "/usr/bin/true", charge=(120, 9, 1))
         self.assertIsInstance(raised, SystemExit)
-        self.assertIn("submission budget", str(raised))
+        self.assertIn("submission ceiling", str(raised))
         self.assertEqual((rows, lines(c.BUDGET)), ([], []))
         RECORDS.append({"test": "budget_exhaustion_refused", "raised": str(raised)})
 
@@ -197,13 +200,14 @@ class Lifecycle(unittest.TestCase):
         RECORDS.append({"test": "busy_gpu_lock_refused", "raised": str(raised)})
 
     def test_stop_latch_blocks_the_next_child(self):
-        grant = {"packet": c.PACKET, "stage": c.STAGE, "source_commit": "a" * 40,
-                 "visual_tree": "b" * 40, "target": "/Users/andreyyurlov/.codex/lifecycle-test-target"}
+        grant = {"packet": c.PACKET, "stage": c.STAGE, "holder": HOLDER, "visual_tree": "b" * 40,
+                 "build_record_sha256": "c" * 64,
+                 "prior_test_release_path": "/nonexistent/gpu-released.json",
+                 "prior_test_release_sha256": "d" * 64}
         c.write_new_json(c.GRANT, grant)
-        c.write_new_json(c.LEASE, {"grant_sha256": c.sha(c.GRANT)})
         c.latch_stop("earlier", "simulated failure")
         program = Path("/usr/bin/true")
-        with mock.patch.object(gpu, "frozen", return_value=(program, c.sha(program))):
+        with mock.patch.object(gpu, "frozen", return_value=(program, c.sha(program), "cpu-fixture")):
             with self.assertRaisesRegex(SystemExit, "stop.json latched a failure"):
                 gpu.run_child("after-stop", "review", "after", "cpu-fixture", [], ".", 5,
                               charge=(1, 0, 0))
@@ -218,7 +222,7 @@ class Lifecycle(unittest.TestCase):
         raised = None
         try:
             build.run_group(name, [program, *args], Path(self.directory.name),
-                            {"PATH": c.SYSTEM_PATH}, timeout, f"{name}.out", f"{name}.err")
+                            {"PATH": c.SYSTEM_PATH}, timeout, f"{name}.out", f"{name}.err", HOLDER)
         except BaseException as error:
             raised = error
         finally:
