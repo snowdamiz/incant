@@ -49,3 +49,11 @@ their immutable historical layers. The same allocation permit precharges every
 new owner allocation; the native VecMap API has only infallible reserves, so its
 precharged safe allocation retains ordinary process-OOM behavior. No runtime
 feature, native solver algorithm or public world installer is added.
+
+Private exact narrow-phase staging is layered by `INCANT_CHECKED_NARROW.json`.
+This also pins mechanical relocation of the cfg(test) allocation observer; the
+historical broad-layer pin remains unchanged. Persistent manifold, solver and
+event state is retained exactly, with explicit primitive/default-dispatcher scope.
+Fresh scratch has native overwrite/reset witnesses. No public world installer,
+custom dispatcher authentication, soft/composite continuation or runtime save
+admission is added.

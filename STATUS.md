@@ -16,6 +16,18 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Private narrow phase — source accepted, CPU qualification complete
+
+A typed NumericFrame and the shared allocation permit now stage exact primitive
+contact/sensor graphs, manifold and solver history, generations and event state.
+Both physics modes pass 227 snapshot and 45 private native tests, including 312
+paired decoded continuation steps per dimension and exact collision/force event
+records. Actual allocation charges, scoped strict Clippy, wasm/graphs and guards
+pass. Final evidence review is pending. Other owners remain trusted clones;
+custom dispatcher/compound/soft histories and whole-world installation remain
+outside this slice. Public physics saves still refuse.
+[Scope and evidence](docs/spikes/physics-native-narrow-construction.md).
+
 ## Private broad manager — source accepted, CPU qualification complete
 
 Typed broad-phase reconstruction preserves pending BVH storage, pair stamps,

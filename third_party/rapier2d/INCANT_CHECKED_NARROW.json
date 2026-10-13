@@ -1,0 +1,89 @@
+{
+  "format": "incant-private-narrow-construction-layer",
+  "version": 1,
+  "baseline": "2967a484c09dfb3c1ece0b11caceca11a2dfcc31",
+  "feature": "incant-checked-restore",
+  "scope": "Private typed primitive narrow owner only. Supersedes historical pins only for listed paths; no public installer or save admission.",
+  "files": [
+    {
+      "path": "src/dynamics/solver/solver_contact_graph.rs",
+      "baseline_sha256": "11f0849330fdfe0c83fdc137fb515d6f21688a7ba4d81de18b755158fc8e188b",
+      "sha256": "eb436a976acf1ce1e46c74ba9781e4511de21d819b6c8ef754f0ed6f9394dfcb"
+    },
+    {
+      "path": "src/dynamics/solver/solver_contact_graph_checkpoint.rs",
+      "baseline_sha256": null,
+      "sha256": "55ff52d4dcde4a381946cfb93f587e7ca7fd273d5f9f3ac7c5a6d5e20f5ca0c7"
+    },
+    {
+      "path": "src/geometry/broad_phase_bvh/checkpoint/map_tests.rs",
+      "baseline_sha256": "e9c9b059f7c56f6ca073f6f4fd64dfe4a4f61c163db85b6d4350d1eb6008120b",
+      "sha256": "806edd955c2f3cd4966a71b5e1d8eecc7b200f41c5324f623cf57ab232bd6afc"
+    },
+    {
+      "path": "src/geometry/narrow_phase/checkpoint/manifold.rs",
+      "baseline_sha256": null,
+      "sha256": "d5ca2d2dd0e891435544cadccd847418f59c4dbcb79e61979ea2869f41230602"
+    },
+    {
+      "path": "src/geometry/narrow_phase/checkpoint/mod.rs",
+      "baseline_sha256": null,
+      "sha256": "e7e56f19ab57001c6fadd6e2d1e9b9a47817e50830761c9497f50ba53974fb10"
+    },
+    {
+      "path": "src/geometry/narrow_phase/checkpoint/pair.rs",
+      "baseline_sha256": null,
+      "sha256": "2a33e5b6d1cfdeaf3838e259b00433c557a0a10ba56f898dbabd5efafd2da7a1"
+    },
+    {
+      "path": "src/geometry/narrow_phase/checkpoint/tests.rs",
+      "baseline_sha256": null,
+      "sha256": "cd28c2415377ff2b80c0d4c882c02eae65f3687f16e26fd95b872f9dfc32c34d"
+    },
+    {
+      "path": "src/geometry/narrow_phase/mod.rs",
+      "baseline_sha256": "df4e5f7d6f18eda3489f3682a7509100f3201460849ea56458ea8ebff7a0fe85",
+      "sha256": "d2e9cf363cc8741eea7a1b0243d35c3b2a16356d9e078f3d67054db8fc683950"
+    },
+    {
+      "path": "src/pipeline/checked_restore/allocation_test_meter.rs",
+      "baseline_sha256": null,
+      "sha256": "822e87f390102e2558d57a468a89c8a68b16cb2c5399a52108ccbc05ca01f234"
+    },
+    {
+      "path": "src/pipeline/checked_restore/mod.rs",
+      "baseline_sha256": "637e745938e614edaef3d59490dafb5137ffe6ad3402ef2693204f27c990eac3",
+      "sha256": "1c3f8c7a31e5dcd04846f11a12d2e4557f6c559e02b0b24b1c1095246422ccb4"
+    },
+    {
+      "path": "src/pipeline/checked_restore/narrow.rs",
+      "baseline_sha256": null,
+      "sha256": "d81f7052f24877c91032a0d7ef255125e16950311eb97059e3844725ae3cfb1b"
+    },
+    {
+      "path": "src/pipeline/checked_restore/narrow_fixture.rs",
+      "baseline_sha256": null,
+      "sha256": "758c39a187e7dc8a68b70161b8427d07127989a4178303c046aea05054590c4b"
+    },
+    {
+      "path": "src/pipeline/checked_restore/narrow_fixtures/0.bin",
+      "baseline_sha256": null,
+      "sha256": "70cc4e15add55fe4e031be422109b4267d648d0970935cfcf4a0b1338eb515d8"
+    },
+    {
+      "path": "src/pipeline/checked_restore/narrow_fixtures/16.bin",
+      "baseline_sha256": null,
+      "sha256": "ebaaa46b0abb78d7262f3f185b45586ce99c8165b8382b67aade6251dc01e195"
+    },
+    {
+      "path": "src/pipeline/checked_restore/narrow_fixtures/32.bin",
+      "baseline_sha256": null,
+      "sha256": "c78d8675f2f0ccf05c2c0770a6e42ec9ee8c5f17063d3e7ed312eae8baa297c0"
+    },
+    {
+      "path": "src/pipeline/checked_restore/narrow_fixtures/48.bin",
+      "baseline_sha256": null,
+      "sha256": "1e9614a3f58933641206b35dc44136b45098e1240f4f849ed3c8a6fa68e2df30"
+    }
+  ]
+}

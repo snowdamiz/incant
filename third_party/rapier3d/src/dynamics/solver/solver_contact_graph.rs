@@ -332,3 +332,7 @@ mod test {
         }
     }
 }
+
+#[cfg(feature = "incant-checked-restore")]
+#[path = "solver_contact_graph_checkpoint.rs"]
+mod checkpoint;

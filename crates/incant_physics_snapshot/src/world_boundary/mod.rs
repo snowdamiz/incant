@@ -35,6 +35,10 @@ impl<'a> WorldBoundary<'a> {
     pub fn body_arena(self) -> &'a crate::ValidatedArena {
         self.attachments().body_arena()
     }
+    /// Exact immutable graph witness already joined by the contact manifolds.
+    pub fn contact_graph(self) -> &'a crate::ValidatedGraph {
+        self.manifolds().graph()
+    }
     /// Exact witnessed arena layout, with no construction authority.
     pub fn collider_arena(self) -> &'a crate::ValidatedArena {
         self.attachments().collider_arena()
