@@ -2,7 +2,7 @@
 //! Native frame admission supplies solver coherence; this checks the identities,
 //! typed declarations and committed observations owned by Incant around it.
 use super::*;
-use incant_types::{ColliderShape, StableId};
+use incant_types::{ColliderShape, PrimitiveColliderShape, StableId};
 
 #[cfg(test)]
 mod tests;
@@ -199,6 +199,48 @@ fn shape_matches(shape: &dyn Shape, expected: &ColliderShape) -> Result<bool, &'
                 && s.segment.a == Vector::new(0., -(*half_height as f32), 0.)
                 && s.segment.b == Vector::new(0., *half_height as f32, 0.)
         }),
-        ColliderShape::Compound { .. } => return Err("compound checkpoint unsupported"),
+        ColliderShape::Compound { parts } => {
+            if !(1..=64).contains(&parts.len()) || !parts.windows(2).all(|w| w[0].id < w[1].id) {
+                return Err("compound part order or limit");
+            }
+            let Some(compound) = shape.as_compound() else {
+                return Ok(false);
+            };
+            if !compound.flags().is_empty() || compound.shapes().len() != parts.len() {
+                return Ok(false);
+            }
+            for ((pose, child), part) in compound.shapes().iter().zip(parts) {
+                // Match the original constructor's f64 -> f32 normalized rotation,
+                // not a reconstructed Compound or an approximate pose comparison.
+                let rotation = Rotation::from_array(part.rotation.map(|v| v as f32)).normalize();
+                if !array_same(
+                    pose.translation.to_array(),
+                    part.translation.map(|v| v as f32),
+                ) || !array_same(pose.rotation.to_array(), rotation.to_array())
+                    || !primitive_matches(child.as_ref(), &part.shape)?
+                {
+                    return Ok(false);
+                }
+            }
+            true
+        }
     })
+}
+
+fn primitive_matches(
+    shape: &dyn Shape,
+    expected: &PrimitiveColliderShape,
+) -> Result<bool, &'static str> {
+    let expected = match *expected {
+        PrimitiveColliderShape::Box { half_extents } => ColliderShape::Box { half_extents },
+        PrimitiveColliderShape::Sphere { radius } => ColliderShape::Sphere { radius },
+        PrimitiveColliderShape::Capsule {
+            half_height,
+            radius,
+        } => ColliderShape::Capsule {
+            half_height,
+            radius,
+        },
+    };
+    shape_matches(shape, &expected)
 }

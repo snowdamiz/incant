@@ -2707,3 +2707,5 @@ has strict native/wasm compilation, with the source009 test generations retained
 separately. Final producer execution and current-main source composition reviews are accepted. PR244 merged after its required exact-head fast check; outer runtime integration remains separate.
 Public persisted physics saves remain refused. See
 [scope and evidence](docs/spikes/physics-native-capture-owner.md).
+
+- Private outer compound/tile checkpoint join: 12 focused CPU controls pass on main246 ancestry; independent source review and complete native compound reconstruction/paired continuation await the lower Parry/Rapier union. Persisted physics save bytes remain refused. See `docs/spikes/outer-compound-checkpoints.md`.

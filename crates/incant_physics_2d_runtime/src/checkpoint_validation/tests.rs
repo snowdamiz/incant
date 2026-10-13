@@ -116,3 +116,74 @@ fn checkpoint_outer_joins_refuse_planar_identity_config_and_output_corruption() 
     runtime.failed = true;
     assert_eq!(validate(&runtime), Err("failed runtime"));
 }
+
+fn tiles() -> PhysicsWorld2D {
+    let map = incant_2d::Tilemap {
+        tileset: id(20),
+        size: [3, 2],
+        cell_size: [0.75, 0.5],
+        layers: vec![incant_2d::TilemapLayer {
+            id: id(21),
+            cells: vec![
+                Some(id(22)),
+                None,
+                Some(id(22)),
+                Some(id(22)),
+                None,
+                Some(id(22)),
+            ],
+            layer: 0,
+            order: 0,
+            solid: true,
+        }],
+    }
+    .prepare()
+    .unwrap();
+    assert_eq!(map.collision().len(), 2);
+    let mut runtime = PhysicsWorld2D::default();
+    runtime
+        .apply(vec![(
+            id(10),
+            Some(PreparedBody::tilemap(&map, BodyState::default()).unwrap()),
+        )])
+        .unwrap();
+    runtime.step(1. / 64.).unwrap();
+    runtime
+}
+#[test]
+fn tile_join_preserves_rectangle_order_and_refuses_geometry_or_material_drift() {
+    let mut runtime = tiles();
+    assert_eq!(validate(&runtime), Ok(()));
+    let config::Geometry::Tiles(parts) =
+        &mut runtime.entries.get_mut(&id(10)).unwrap().config.geometry
+    else {
+        panic!()
+    };
+    parts.swap(0, 1);
+    assert_eq!(validate(&runtime), Err("collider geometry"));
+    let mut runtime = tiles();
+    let config::Geometry::Tiles(parts) =
+        &mut runtime.entries.get_mut(&id(10)).unwrap().config.geometry
+    else {
+        panic!()
+    };
+    parts[0].1[0] += 0.1;
+    assert_eq!(validate(&runtime), Err("collider geometry"));
+    let mut runtime = tiles();
+    runtime
+        .entries
+        .get_mut(&id(10))
+        .unwrap()
+        .config
+        .collider
+        .sensor = true;
+    assert_eq!(validate(&runtime), Err("tile declaration"));
+    let mut runtime = tiles();
+    let config::Geometry::Tiles(parts) =
+        &mut runtime.entries.get_mut(&id(10)).unwrap().config.geometry
+    else {
+        panic!()
+    };
+    parts[0].0[0] = f64::NAN;
+    assert_eq!(validate(&runtime), Err("collider geometry"));
+}
