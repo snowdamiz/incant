@@ -1,0 +1,70 @@
+{
+  "format": "incant-root-bounded-gpu-diagnostic-v1",
+  "packet": "0076-shadow-guard-review",
+  "holder": "Claude Opus5.5 Max",
+  "created_at": "2026-10-13T15:16:11.516104+00:00",
+  "purpose": "Complete full-frame shadow-fit regression review on existing stationary fixture, including far cascade.",
+  "prior_release": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-determinism-001/released.json",
+    "sha256": "1df641e806ef42393552316645431980ba2760205e816ba4fa6293b1edcf4d01"
+  },
+  "frozen_visual_tree": "8d9de3edbbe6f2c2f66ccff7e3ef97493e4dd65d",
+  "build_records": {
+    "baseline": {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/build/baseline/review.json",
+      "sha256": "7d38ef4339443e4c2e5283e06b397b355efe33e9194346b19b864f52c7191fd4",
+      "binary": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/bin/baseline/temporal_visual_review",
+        "sha256": "bd81f74ed14995d247fe6ae9dc558f7a7cf62f8ac0e10c5d1b0587e2baa3ce96",
+        "bytes": 18234552,
+        "mode": "0o555",
+        "built_from": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/temporal_visual_review-734142753be117b5",
+        "fresh": false,
+        "features": [
+          "default",
+          "physics-deterministic"
+        ],
+        "package_id": "path+file:///Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/checkout/baseline/crates/incant_render#0.0.1"
+      }
+    },
+    "candidate": {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/build/candidate/review.json",
+      "sha256": "17e0dfc6e17cbf2fc9914b3fc44a15498249bb1b3435df45550c05a715aab6d3",
+      "binary": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/bin/candidate/temporal_visual_review",
+        "sha256": "e693f8724b518a1ea66ab0cf284ac5f8a5125d534f314c6212901ad67f4b3f7f",
+        "bytes": 18234664,
+        "mode": "0o555",
+        "built_from": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/temporal_visual_review-734142753be117b5",
+        "fresh": false,
+        "features": [
+          "default",
+          "physics-deterministic"
+        ],
+        "package_id": "path+file:///Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/checkout/candidate/crates/incant_render#0.0.1"
+      }
+    }
+  },
+  "runs": [
+    "baseline-stationary",
+    "candidate-stationary"
+  ],
+  "case": "stationary",
+  "args": [
+    "stationary",
+    "--ignored",
+    "--exact",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "submissions_per_run": 17,
+  "submissions_total_max": 34,
+  "png_total_max": 6,
+  "max_size": [
+    960,
+    540
+  ],
+  "timeout_seconds_per_child": 120,
+  "automatic_retries": 0,
+  "source_or_fixture_edits_allowed": false
+}

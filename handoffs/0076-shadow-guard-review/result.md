@@ -1,5 +1,72 @@
 # 0076 result: current status
 
+**Current stage: full-frame shadow regression coverage, complete. See
+[`fullframe-addendum.md`](fullframe-addendum.md).**
+- **Scope.** This completes the scoped visual check, with the inherited limits
+  below.
+- **Who decides.** Root makes the scoped integration decision. Nothing here
+  approves a phase gate.
+
+**Model, effort and packet:**
+- **Model:** Claude Opus 5.5 (`claude-opus-5-5`).
+- **Thinking effort:** max, as reported by this session's environment.
+- **Packet:** `brief.md` with root's revision "finish full-frame shadow regression
+  coverage", sha256 `1072a326…09b0fbbeb`. It is uncommitted and left so.
+
+**Verdicts:**
+- **Original 001 comparison: still FAILED.** It is not exact, and nothing here
+  converts it.
+- **Determinism (`045bbee0`): same-binary variation demonstrated.**
+  - Root accepts it as a separate finding.
+  - Root did not adopt a modal-hash pass policy, and I withdraw my earlier
+    proposal of one.
+- **Full-frame coverage: executed.** Every expectation held, with one
+  qualification (addendum §2).
+  - **The run.** Two children, `baseline-stationary` then
+    `candidate-stationary`:
+    - 34 of 34 submissions and 6 of 6 PNGs;
+    - every contract check true;
+    - no stop and no retry;
+    - the GPU released.
+  - **Temporal-on.** All 16 frames, the on-f16 PNG and the activity PNG are
+    byte-identical across binaries, and to 0072's accepted coverage baseline.
+  - **Temporal-off.** The reference differs in 298 pixels.
+    - 297 are on the far fence-post shadow lines, in cascade 3 and its blend band,
+      with a maximum of 44 steps.
+    - One is an invisible one-step change on the ramp, seen through a grille hole
+      (cascade 1).
+  - **My visual verdict: no newly introduced regression.**
+
+**Evidence:**
+- **Full-frame:**
+  - helper and pre-registration in `fullframe/` (`c1cdc6f6`);
+  - receipts in `fullframe/evidence/`, with `manifest.json`;
+  - namespace `~/.codex/incant-evidence/0076-shadow-fullframe-001`.
+- **Determinism:** `determinism/run.py` (`93ab2d85`) and `determinism/evidence/`.
+
+**Screenshots:**
+- **New:** six PNGs at 960×540 in `fullframe/screenshots/`. For both baseline
+  and candidate: `stationary-off`, `stationary-on-f16` and `stationary-activity`.
+- **Earlier:** in `screenshots/`.
+
+**Open items and limitations:** see full-frame addendum §5 and determinism
+addendum §6.
+- **Open:**
+  - the 001 strict FAIL;
+  - one-frame same-binary variation;
+  - thin MASK shadow fidelity;
+  - temporal quality.
+- **Limits:**
+  - one desktop only (Apple M5 Pro, Metal);
+  - only `stationary` ran in this slice.
+
+The previous status header (`045bbee0`) follows, unchanged. Its "current stage"
+line is now historical.
+
+---
+
+# 0076 result: current status
+
 **Current stage: bounded same-binary determinism diagnosis. See
 [`determinism-addendum.md`](determinism-addendum.md).**
 
