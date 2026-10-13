@@ -25,7 +25,7 @@ cumulative logical work model. Both 214-case deterministic/fast8 suites and
 scoped strict Clippy, wasm, dependency and formatting checks pass. Independent
 source and final producer reviews are accepted. Current main227 rebuilt suites
 also pass 214 cases per mode and all fifteen scoped checks; final integration
-review is independently accepted, with the required fast check still pending. [Current composition](docs/spikes/physics-numerics-main227.md).
+review and the required fast check passed; PR228 merged. [Current composition](docs/spikes/physics-numerics-main227.md).
 Whole-solver derived
 arithmetic, exact private construction, capture authentication and stable IDs/
 events remain required; `PhysicsUnsupported` is unchanged.
@@ -187,37 +187,37 @@ unification also affects other cc build consumers in the selected host graph.
 Windows candidate execution and timing remain pending; no Windows speedup or
 performance gate is claimed. [Scope and evidence](docs/spikes/wasm-c-parallel.md).
 
-## Current overview — main227, 2026-10-13
+## Current overview — main228, 2026-10-13
 
-Development main227 includes the reviewed opt-in cooked renderer families and
+Development main228 includes the reviewed opt-in cooked renderer families and
 Vulkan cache lifecycle, dynamic resolution, numerical retained motion, CPU/GPU
 profiling scopes and joined inert physics owner boundaries. Each lane retains its own
 execution and acceptance limits below; the complete engine and game remain open.
 
-Checkpoint24 is frozen at exact main226 through PR213, candidate `669bd7ae`,
-with all 23 required contexts and eight workflows preserved. Checkpoint23 is
-terminal and unpromoted: 22 required contexts succeeded and the macOS command
-journal replay assertion failed. Its original error was not printed, so the
-inherited-lock cause remains inferred from a controlled local reproduction.
-The independently accepted test-only isolation repair merged in PR225; production
-locking and authorization are unchanged. [Repair evidence](docs/spikes/journal-replay-test-isolation.md).
-The hosted successor must execute the repair. Earlier checkpoint22's optional
-query diagnostic failure and reviewed main219 repair remain retained. Later main
-changes will not move or restart this frozen candidate.
+Checkpoint24 promoted exact main226 through PR213 after all 23 required contexts
+and eight exact-head workflows succeeded. Release `2a9d72ea` matches selected
+main226 `079ee1aa` exactly. Independent review verified the tested tree, ancestry,
+unchanged protection and all success receipts. The journal replay repair passed
+on actual macOS/Linux/Windows; optional timestamp diagnostics preserve explicit
+Unsupported results on Apple Paravirtual Metal and measured paths on Vulkan/Dx12.
+No checkpoint is currently active. The next regular selection follows the
+three-hour cadence; later main changes do not alter this tested baseline.
+[Promotion evidence](docs/spikes/release-checkpoint-24.md).
 
-Release now contains selected main205. [Checkpoint20](docs/spikes/release-checkpoint-20.md)
-promoted through PR174 after all 23 required contexts and eight exact-head workflows
-succeeded and independent review verified the exact tested tree. Release `065aac69`
-exactly matches selected main205 `7bfeecfd`. Hosted default/cooked Metal, Vulkan and
-Dx12 suites passed, including the repaired four-process Vulkan cache lifecycle.
-Later main206–227 changes remain outside that tested baseline. No device, performance or
-phase gate follows from this promotion.
+Checkpoint23 is terminal and unpromoted: 22 required contexts succeeded and its
+macOS command journal assertion failed. The hosted error was not printed, so the
+inherited-lock cause remains inferred from a controlled local reproduction.
+PR225's test-only isolation preserves production locking and authorization.
+Earlier checkpoint21/22 portability and optional-query failures remain retained.
+Main227–228 work stays outside release; no device, performance or phase gate follows
+from promotion. [Previous checkpoint20](docs/spikes/release-checkpoint-20.md) remains
+historical evidence for selected main205.
 
 Failed checkpoints15–19 remain historical and unpromoted. In particular, checkpoint17
 exposed the quota/probe issues repaired in PR188/191; checkpoint18 exposed the editor
 test import repaired in PR193; checkpoint19 exposed the cache count and vendored
 Parry compiler-identity issues repaired in PR201/203. Their original failures remain
-retained. The subsequent frozen checkpoint24 preserves
+retained. Promoted checkpoint24 preserves
 ADR0014's exact selected tree and all 23 requirements.
 
 Android static-Wasm integration is merged in PR190 after independent source-relevance

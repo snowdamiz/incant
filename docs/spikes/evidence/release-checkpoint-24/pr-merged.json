@@ -1,0 +1,10 @@
+{
+  "baseRefName": "release",
+  "headRefOid": "669bd7ae87d7d1603f2c01ac39ff0cd3e8403e1f",
+  "mergeCommit": {
+    "oid": "2a9d72eaf804a00b7752015e33ad2dfa087665f4"
+  },
+  "mergedAt": "2026-10-13T14:45:08Z",
+  "state": "MERGED",
+  "url": "https://github.com/snowdamiz/incant/pull/213"
+}
