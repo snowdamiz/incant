@@ -1,0 +1,513 @@
+{
+ "packet": "0072-motion-history-numeric",
+ "stage": "fixed-sharpness-visual",
+ "build_stage": "fixed-sharpness-build",
+ "status": "prepared for root's fixed-sharpness grants; frozen by the commit whose visual tree root pins",
+ "evidence_namespace": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002",
+ "history": {
+  "original_review": {
+   "commit": "9009f088ac230e31185e8ce64183ca93878e9444",
+   "visual_tree": "ac8a48de3a4df9314bee210c6e3c050172ec4862",
+   "result": "handoffs/0072-motion-history-numeric/temporal-visual-result.md",
+   "evidence": "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-visual",
+   "verdict": "rejected for appearance: depth-edge and current-only overlay shimmer; retained with its failed optional lint",
+   "fixture_change": "only line 1418 (unused mut in probe) for strict Clippy; every case, policy and measurement is unchanged"
+  },
+  "corrected_review": {
+   "source_commit": "535003d766bcc1386fd2d2f454c83808a0fcc4c8",
+   "helper_commit": "f329e9a61a4f9c3469cc59df60f5aab78016fa2f",
+   "visual_tree": "53fd64b6ec2ddaef1cd1802e04411d7672d06c5e",
+   "result": "handoffs/0072-motion-history-numeric/corrected-visual-result.md",
+   "evidence": "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001",
+   "verdict": "numerical pass; appearance fail: silhouettes, thin geometry and the MASK grille kept per-phase single samples (history admitted only from the current sample's own surface)",
+   "fixture_change": "none: the fixture is byte-identical (SHA-256 9841c6b1384a9f02db140d58d588f40a262e63ea061127518781e1c799952dde)"
+  },
+  "coverage_review": {
+   "source_commit": "e23776df275fa1de81b2027110d9c7b6916999ac",
+   "helper_commit": "91c59e86b5729feca47be1582f1cb2b2a9a738a5",
+   "visual_tree": "b1327f3d9abbaf10f4ba8701dc4ef81231b6d60e",
+   "result_commit": "9927598c",
+   "result": "handoffs/0072-motion-history-numeric/temporal-coverage-result.md",
+   "evidence": "handoffs/0072-motion-history-numeric/temporal-coverage-evidence (manifest e337bc34ba0f1a83b73a862fac229f65827cbd4313a55114d1075032c5227016)",
+   "root_acceptance": {
+    "path": "/Users/andreyyurlov/.codex/incant-reviews/0072-fixed-coverage-execution-root-20261013.json",
+    "sha256": "ed99f05b54bd00e3d29ad2dbed37988f0736b101b528eefcf632bbbf805b4197"
+   },
+   "verdict": "accepted baseline: numerical pass; shimmer fixed, no ghosts, coverage preserved; softness retained (sigma about 0.82-0.90 px, grille detail 18%)"
+  },
+  "sharpness_design": {
+   "commit": "e2b499e7",
+   "design": "handoffs/0072-motion-history-numeric/fixed-sharpness-design.md"
+  },
+  "candidate_reviews": {
+   "production_0c80df4e": {
+    "path": "/Users/andreyyurlov/.codex/incant-reviews/fixed-sharpness-source-independent-20261013.json",
+    "sha256": "eb5ff0a1826bcf444db5e6c5c6ae07cacee51aff04f88528b20b0af17c3780c9",
+    "decision": "accepted_scoped_source_and_retained_CPU_evidence; limitation: keep an explicit nonzero-jitter moving-edge/depth-pairing gate"
+   },
+   "test_only_a143b5c0": {
+    "path": "/Users/andreyyurlov/.codex/incant-reviews/fixed-sharpness-depth-controls-source-20261013.json",
+    "sha256": "bc1bece391ad89c9fa2ddc5b288ad904a81c8c38961a3e8ed1508b43b439f32e",
+    "decision": "accepted_test_only_source_delta; moving/rasterized silhouette pairing remains a numerical/appearance responsibility"
+   }
+  }
+ },
+ "source_pinning": {
+  "expected_commit": "a143b5c0f537bd35111e40e99626f40318a385ac",
+  "supersedes": "0c80df4e3733ef6c18718753884f38b4f32f6b17 (production bytes identical; a143b5c0 adds 16 numeric controls in device_tests.rs only)",
+  "base_commit": "e23776df275fa1de81b2027110d9c7b6916999ac",
+  "expected_freeze": "named by root's build-ready.json after its source/helper/build audit",
+  "rule": "Only root's build-ready.json pins the source: a 40-hex commit object and the freeze by path and SHA-256 (accepted 0073 routine, reused read-only). Every build input of the exported commit must equal the freeze exactly; the expected values above are for review, not trusted by the tools."
+ },
+ "build_inputs": [
+  "crates",
+  "Cargo.toml",
+  "Cargo.lock",
+  "third_party",
+  "tools/cargo",
+  "rust-toolchain.toml"
+ ],
+ "grants": {
+  "build-ready.json": "packet, stage fixed-sharpness-build, holder, source_commit (40-hex), source_freeze {path, sha256}, visual_tree, target (~/.codex/*-target); optional prior_*_path/_sha256 pins",
+  "review-ready.json": "packet, stage fixed-sharpness-visual, holder, visual_tree, build_record_sha256 (SHA-256 of build/review.json), at least one prior_*release*_path/_sha256 pin, optional numeric_binary {path, sha256} for root's frozen same-source default library test binary"
+ },
+ "expected_backend": "Metal",
+ "review_config": {
+  "history_weight": 0.9,
+  "relative_depth": 0.05,
+  "absolute_depth": 0.02,
+  "reactive_threshold": 4.0,
+  "reactive_strength": 0.5
+ },
+ "budgets": {
+  "submissions_max": 372,
+  "visual_submissions_max": 120,
+  "numeric_submissions_max": 252,
+  "planned_submissions": 357,
+  "pngs_max": 16,
+  "frame_max_width": 960,
+  "frame_max_height": 540,
+  "compile_jobs": 2,
+  "build_timeout_s": 2700,
+  "listing_timeout_s": 60,
+  "numeric_timeout_s": 120,
+  "review_case_timeout_s": 120,
+  "counting": "Every world-frame submission (temporal-off references and frames whose PNG is not kept included), every UI overlay submission and every numeric-control submission (102 + 150) is one actual submission. Readback copies are part of their frame's observation. Each charged child is debited, fsynced, under the global GPU lock before launch and never refunded; the ceilings include failed or interrupted attempts. Visual (world + UI) submissions are capped separately at 120. No whole-suite regression runs under this packet."
+ },
+ "builds": {
+  "libtests": [
+   "test",
+   "-p",
+   "incant_render",
+   "--lib",
+   "--no-run"
+  ],
+  "review": [
+   "test",
+   "-p",
+   "incant_render",
+   "--test",
+   "temporal_visual_review",
+   "--no-run"
+  ],
+  "lint": [
+   "clippy",
+   "-p",
+   "incant_render",
+   "--test",
+   "temporal_visual_review"
+  ],
+  "common_flags": [
+   "--locked",
+   "--offline",
+   "--profile",
+   "ci",
+   "-j2",
+   "--message-format=json-render-diagnostics"
+  ],
+  "note": "libtests is only for the case where root supplies no frozen same-source default library test binary; no whole-workspace build."
+ },
+ "numeric": {
+  "binary": "incant_render-lib-tests",
+  "cwd": "crates/incant_render",
+  "args": [
+   "--ignored",
+   "--exact",
+   "--nocapture",
+   "--test-threads=1"
+  ],
+  "max_runs": 1,
+  "source_mount": "a143b5c0: lib.rs:35 `pub mod temporal`; temporal/mod.rs:12 `pub(crate) mod system`; temporal/system.rs:321-322 `#[path = \"device_tests.rs\"] mod device_tests` and 325-326 `#[path = \"coverage_device.rs\"] mod coverage_device`",
+  "tests": [
+   {
+    "id": "resolve",
+    "test": "temporal::system::device_tests::actual_temporal_resolve_disocclusion_reactivity_and_alpha_exclusion",
+    "submissions": 102,
+    "bound": "device_tests.rs: for mode in 0..102 (14 original controls + 64 previous/current jitter-phase pairs + 8 registered resets + 8 nonzero-jitter transitions with nonuniform 2-D depth admitting one of four taps + 8 with every tap depth-refused, perspective/orthographic alternating); the one queue.submit is at line 328, on 8x8 targets"
+   },
+   {
+    "id": "coverage",
+    "test": "temporal::system::coverage_device::actual_fixed_temporal_coverage_silhouettes_mask_and_trailing_rejection",
+    "submissions": 150,
+    "bound": "coverage_device.rs: for ortho in [false, true] x for case in CASES (5) x for tick in 1..16; the one queue.submit is at line 266, on 12x8 targets"
+   }
+  ],
+  "rule": "Run each only after `gpu.py list lib` shows both exact names; never broaden a filter. A different name is reported before any grant."
+ },
+ "review": {
+  "binary": "temporal_visual_review",
+  "cwd": "crates/incant_render",
+  "output_env": "INCANT_0072_REVIEW_OUT",
+  "args": [
+   "--ignored",
+   "--exact",
+   "--nocapture",
+   "--test-threads=1"
+  ],
+  "size": [
+   960,
+   540
+  ],
+  "max_runs_per_case": 1,
+  "order": [
+   "probe",
+   "stationary",
+   "motion",
+   "excluded",
+   "transitions",
+   "skinned",
+   "timing",
+   "viewport"
+  ],
+  "cases": {
+   "probe": {
+    "frames": 0,
+    "ui_submissions": 0,
+    "pngs": [],
+    "checks": [
+     "temporal_pipelines_enabled",
+     "second_enable_is_idempotent",
+     "review_config_validates",
+     "invalid_configs_rejected"
+    ],
+    "purpose": "Adapter/backend identity, temporal pipeline enablement and idempotence, validation of the review config and rejection of five invalid configs, availability of the timing constructor. No frame."
+   },
+   "stationary": {
+    "frames": 17,
+    "ui_submissions": 0,
+    "pngs": [
+     "stationary-off.png",
+     "stationary-on-f16.png",
+     "stationary-activity.png"
+    ],
+    "checks": [
+     "one_uninterrupted_run_over_two_cycles",
+     "reference_has_no_temporal_state",
+     "frames_match_plan"
+    ],
+    "purpose": "Static look-dev stage (ground at grazing angles, sphere and cube silhouettes, thin post and wall, 19 receding fence posts, one-texel MASK grille card): one temporal-off reference, then 16 frames = two full 8-phase jitter cycles; activity map over frames 9-16."
+   },
+   "motion": {
+    "frames": 16,
+    "ui_submissions": 0,
+    "pngs": [
+     "motion-object-on-f8.png",
+     "motion-object-off-f8.png",
+     "motion-pan-on-f6.png",
+     "motion-pan-off-f6.png"
+    ],
+    "checks": [
+     "object_run_uninterrupted",
+     "pan_run_uninterrupted",
+     "references_have_no_temporal_state",
+     "frames_match_plan"
+    ],
+    "purpose": "8 frames of a bright cube crossing in front of the thin wall towards the sphere (about 21 px/frame, revealing disoccluded background), off reference; then a fresh owner and 6 frames of lateral camera pan with yaw (parallax), off reference."
+   },
+   "excluded": {
+    "frames": 9,
+    "ui_submissions": 9,
+    "pngs": [
+     "excluded-on-f8.png",
+     "excluded-off.png",
+     "excluded-activity.png"
+    ],
+    "checks": [
+     "accumulation_run_uninterrupted",
+     "ui_stable_across_jitter_phases_and_off",
+     "scene_has_blend_sprites_and_text",
+     "reference_has_no_temporal_state",
+     "frames_match_plan"
+    ],
+    "purpose": "Opaque checker backdrop that accumulates, BLEND card, three sprites and world text that are current-only and jittered, plus a screen-space UI button over uniform sky after every world frame: one 8-phase cycle and an off reference."
+   },
+   "transitions": {
+    "frames": 13,
+    "ui_submissions": 0,
+    "pngs": [
+     "transition-cut-f7.png",
+     "transition-drs-f9.png"
+    ],
+    "checks": [
+     "view_a_run_uninterrupted",
+     "cut_restarts_history_at_phase_zero",
+     "cut_advances_epoch",
+     "half_scale_restarts_history",
+     "output_scale_restarts_history",
+     "one_owner_through_cut_and_scale_changes",
+     "reference_has_no_temporal_state",
+     "frames_match_plan"
+    ],
+    "purpose": "6 frames of view A, explicit cut to view B (2 frames), fixed half-scale dynamic resolution (3 frames), output scale again (1 frame), off reference of view B. Checks phase/history/epoch/extent resets and one owner."
+   },
+   "skinned": {
+    "frames": 7,
+    "ui_submissions": 0,
+    "pngs": [
+     "skinned-on-f6.png",
+     "skinned-off-f6.png"
+    ],
+    "checks": [
+     "skinned_run_uninterrupted",
+     "reference_has_no_temporal_state",
+     "frames_match_plan"
+    ],
+    "purpose": "The skeletal fixture used by the passing motion test, clip 1 (second joint rotation, two vertices deform) at 0.0-0.5 s over 6 frames in front of a checker backdrop, orthographic camera, off reference."
+   },
+   "timing": {
+    "frames": 8,
+    "ui_submissions": 0,
+    "pngs": [],
+    "checks": [
+     "every_frame_produced_one_sample",
+     "samples_well_formed_with_models_group",
+     "temporal_run_uninterrupted",
+     "models_span_grows_with_motion_and_resolve_passes",
+     "frames_match_plan"
+    ],
+    "purpose": "Timing-enabled device: the stationary stage alternates a temporal-off and a temporal-on owner for 4 pairs; each frame's sample must exist and be well formed, and the median Models span must grow when the motion, resolve and copy passes are encoded inside it."
+   },
+   "viewport": {
+    "frames": 26,
+    "ui_submissions": 0,
+    "pngs": [
+     "viewport-on-f24.png",
+     "viewport-off-f24.png"
+    ],
+    "checks": [
+     "viewport_run_uninterrupted",
+     "references_have_no_temporal_state",
+     "outside_viewport_matches_reference",
+     "frames_match_plan"
+    ],
+    "purpose": "New for this comparison: the stationary stage in an integer-offset, odd-sized viewport [37, 19, 885, 501] inside the 960x540 output (also the temporal rect at full scale). Temporal-off at the still pose; one owner accumulates 16 still frames (two cycles, activity bands over frames 9-16 recorded in the report), then 8 frames of lateral pan with yaw that carry content across the viewport border; temporal-off at the final pan pose. Outside the viewport every frame must equal the reference surround."
+   }
+  }
+ },
+ "totals": {
+  "frames": 96,
+  "ui_submissions": 9,
+  "review_submissions": 105,
+  "numeric_submissions": 252,
+  "submissions": 357,
+  "pngs": 16,
+  "reserve_visual_submissions": 15,
+  "reserve_submissions": 15,
+  "reserve_pngs": 0
+ },
+ "comparison": {
+  "candidate_commit": "a143b5c0f537bd35111e40e99626f40318a385ac",
+  "note": "Thresholds are fixed-sharpness-design.md proposals plus every earlier coverage, ghost, reset and overlay constraint, unchanged and not relaxed. They are not plan gates. The baseline is reused only when the comparison is exact; the new viewport case has no baseline and uses absolute bounds.",
+  "baseline": {
+   "label": "accepted fixed-coverage run (9927598c, source e23776df)",
+   "evidence": "handoffs/0072-motion-history-numeric/temporal-coverage-evidence",
+   "screenshots": "handoffs/0072-motion-history-numeric/temporal-coverage-screenshots",
+   "manifest_sha256": "e337bc34ba0f1a83b73a862fac229f65827cbd4313a55114d1075032c5227016",
+   "source_commit": "e23776df275fa1de81b2027110d9c7b6916999ac",
+   "visual_tree": "b1327f3d9abbaf10f4ba8701dc4ef81231b6d60e",
+   "review_binary_sha256": "27756c0dad957287c328f690d15ef14565dd3fb83be3156275fefa042c934d64",
+   "cases": [
+    "probe",
+    "stationary",
+    "motion",
+    "excluded",
+    "transitions",
+    "skinned",
+    "timing"
+   ],
+   "pngs": [
+    "stationary-off.png",
+    "stationary-on-f16.png",
+    "stationary-activity.png",
+    "motion-object-on-f8.png",
+    "motion-object-off-f8.png",
+    "motion-pan-on-f6.png",
+    "motion-pan-off-f6.png",
+    "excluded-on-f8.png",
+    "excluded-off.png",
+    "excluded-activity.png",
+    "transition-cut-f7.png",
+    "transition-drs-f9.png",
+    "skinned-on-f6.png",
+    "skinned-off-f6.png"
+   ],
+   "identical_references": [
+    "stationary-off.png",
+    "motion-object-off-f8.png",
+    "motion-pan-off-f6.png",
+    "excluded-off.png",
+    "skinned-off-f6.png"
+   ]
+  },
+  "sharpness": {
+   "regions": {
+    "grille": [
+     545,
+     158,
+     665,
+     262
+    ],
+    "posts+shadows": [
+     290,
+     60,
+     380,
+     150
+    ],
+    "far-posts": [
+     380,
+     30,
+     450,
+     95
+    ],
+    "horizon-diag": [
+     180,
+     80,
+     250,
+     120
+    ],
+    "sphere-edge": [
+     430,
+     205,
+     500,
+     260
+    ]
+   },
+   "detail_region": "grille",
+   "detail_min": 0.5,
+   "sigma_max_px": 0.6,
+   "source": "fixed-sharpness-design.md: grille detail >= 50% of reference; effective sigma <= 0.6 px in the five regions (stationary on-f16 against temporal-off, linear light)"
+  },
+  "stability": {
+   "activity_ge33_max": 318,
+   "saturated_max": 0,
+   "edge_mean_max": 5,
+   "edge_max_max": 50,
+   "interior_changed_max": 100,
+   "same_phase_interior_max": 0,
+   "halo_steps": 2,
+   "halo_pixels_max": 0,
+   "halo_pairs": [
+    [
+     "stationary-on-f16.png",
+     "stationary-off.png"
+    ],
+    [
+     "excluded-on-f8.png",
+     "excluded-off.png"
+    ]
+   ],
+   "source": "design: 33+ activity <= 2 x 159, none saturated, edge mean frames 9-16 <= 5, no pixel more than 2 steps above the reference's local 3x3 maximum; corrected-visual-result.md: edge max <= 50, interiors <= 100 changed per frame, same-phase f8/f16 interior 0"
+  },
+  "ghosts": {
+   "pairs": [
+    [
+     "motion-object-on-f8.png",
+     "motion-object-off-f8.png"
+    ],
+    [
+     "motion-pan-on-f6.png",
+     "motion-pan-off-f6.png"
+    ],
+    [
+     "skinned-on-f6.png",
+     "skinned-off-f6.png"
+    ]
+   ],
+   "rule": "each off-edge bin (3-8, 9-16, >16 steps at >= 3 px from any edge) no worse than the baseline run",
+   "expected_baseline": {
+    "motion-object-on-f8.png": [
+     830,
+     30,
+     0
+    ],
+    "motion-pan-on-f6.png": [
+     391,
+     0,
+     0
+    ],
+    "skinned-on-f6.png": [
+     0,
+     0,
+     0
+    ]
+   },
+   "trailing_over_top_max": 1.1,
+   "trailing_no_worse_than_baseline": true,
+   "pairing_gate": "explicit nonzero-jitter moving-edge/depth-pairing gate (review eb5ff0a1): the moving cube's trailing 1 px band within 1.1 x its top-edge control and no worse than the baseline's, object off-edge bins no worse than the baseline's, and the viewport pan border and off-edge rules"
+  },
+  "exclusion": {
+   "activity_ge33_max": 0,
+   "ui_identical": true
+  },
+  "reset": {
+   "identical_to_baseline": [
+    "transition-cut-f7.png",
+    "transition-drs-f9.png"
+   ],
+   "max_step": 1
+  },
+  "registration": {
+   "pairs": [
+    [
+     "stationary-on-f16.png",
+     "stationary-off.png"
+    ],
+    [
+     "motion-object-on-f8.png",
+     "motion-object-off-f8.png"
+    ],
+    [
+     "skinned-on-f6.png",
+     "skinned-off-f6.png"
+    ],
+    [
+     "excluded-on-f8.png",
+     "excluded-off.png"
+    ]
+   ],
+   "max_px": 0.1,
+   "space": "global Lucas-Kanade on linear-light luminance"
+  },
+  "viewport": {
+   "activity_ge33_max": 318,
+   "saturated_max": 0,
+   "edge_mean_max": 5,
+   "edge_max_max": 50,
+   "interior_changed_max": 100,
+   "same_phase_interior_max": 0,
+   "rules": "still and pan: the 3 px border band's non-edge max difference may not exceed the inner viewport's; pan f24: no off-edge difference of 9 steps or more; outside the viewport: identical to the reference",
+   "note": "candidate-only proposals: no baseline exists for this new case"
+  }
+ },
+ "amendments": [
+  {
+   "author": "astra",
+   "reason": "Retain001 compile-helper false failure: unit test build emits no ordinary rlib. New002 requires exact source and package/features, and exact rlib bytes whenever unit build emits an rlib. No GPU ran in001; thresholds/fixture/engine unchanged."
+  }
+ ],
+ "order": [
+  "CPU, root-supervised in the foreground under build-ready.json: lease.py acquire; build.py checkout (candidate a143b5c0 and its freeze); build.py toolchain; build.py review; build.py libtests only if root pins no library test binary; build.py lint (strict Clippy); lease.py release",
+  "GPU under review-ready.json: gpu.py list lib; gpu.py numeric resolve; gpu.py numeric coverage; gpu.py list review; gpu.py review probe|stationary|motion|excluded|transitions|skinned|timing|viewport in this order; gpu.py release",
+  "CPU: analyze.py check (fail-closed integrity); analyze.py compare (exact baseline comparison and thresholds; fails honestly); personal inspection of every PNG against the baseline and earlier captures; analyze.py publish (only from a current passing integrity summary)"
+ ]
+}
