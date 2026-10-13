@@ -1,3 +1,54 @@
+# Priority revision — execute the corrected portable upscaling review
+
+Root completed and independently checked the foreground CPU build. Resume using
+Claude Opus 5.5 with thinking explicitly verified Max. This session is execution:
+no Cargo, builds, source edits, helper edits or target access. Root grants this
+packet exclusive native GPU use until release. Do not start background children.
+
+Use only the current committed visual tree
+`7e6d4b08d6da34bbb3c660fe448aa6cf318c81ae` and the fresh evidence directory
+`~/.codex/incant-evidence/0073-upscaling-visual-002`.
+Its review-ready.json SHA is
+`ebf34321918600bbb545bb08e465d9c2db96eff073f703e258ebcc22839b0692`;
+build/review.json SHA is
+`b52c6918ff908c693312022b5b439423a78ba4af816cdac67a38bbb1ea35bbde`.
+Frozen helper SHA is
+`786adfbb10be761a6283af7703145a9d70daba7287a3690dee14686137999723`.
+Root's build receipt is
+`~/.codex/incant-reviews/upscaling0073-build-final-20261013.json`, SHA
+`6109ca8b2d349094ee1347800eb0b6a7028a3db4a93fe27e8dec00500690bddd`.
+Actual engine source is535003d766bcc1386fd2d2f454c83808a0fcc4c8.
+Default portable WGSL features only. Do not label this cooked or native MetalFX.
+
+Original first build and lint failure remain in0073-upscaling-visual. Root fixed
+unused mut, the equivalent chunks-to-array lint, and lint failure propagation in
+ce20026a, then built and passed strict Clippy in this new namespace. The source,
+fixture observations and appearance definitions are otherwise unchanged. All
+owned CPU groups are reaped and the target lease is released. Do not reuse or
+modify the first failed attempt or any old grant.
+
+Run in the foreground, serially, with the existing helpers:
+1. `python3 -I -B handoffs/0073-upscaling-review/visual/tools/gpu.py list`
+2. `gpu.py review probe`, then stationary, motion and transitions in plan order.
+3. Always `gpu.py release`, including after a failure. Stop further cases on the
+   first nonzero result; preserve the latch and all failed evidence. No retry.
+4. `analyze.py check` after release. Inspect every retained PNG yourself, including
+   failure captures if useful. Separate hard contract results from your quality
+   verdict. Root does not judge pixels.
+5. Only if analysis passes, `analyze.py publish`. Record a candid visual verdict,
+   useful concrete findings, exact source/binary and bound evidence, and commit
+   owned results with Built-by: claude. Never call the phase complete.
+
+The plan is89 actual submissions and13 PNGs. Hard limits96 submissions,16 PNGs,
+960x540, one listing and each of the four cases once. All failed attempts count.
+Root verified the preceding0070 GPU release; do not execute other packets. No
+memory writes, browser/system screenshots, pushes or PRs are needed. Focus on
+whether the corrected renderer actually converges and preserves stable current
+content, not just whether the fixture passes. If quality fails, report it and
+leave production unchanged for coordinated repair. Do not wait for user approval.
+
+---
+
 # 0073 — portable output upscaling numerical execution and visual preparation
 
 Claude Opus5.5 via ACP, explicitly Max; verify both before prompt. Source0452c5f5,
