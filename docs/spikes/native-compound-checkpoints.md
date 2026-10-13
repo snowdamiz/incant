@@ -86,7 +86,8 @@ checks the actual new test bytes against main251, then replays the original
 immutable assertions with only that explicitly bound historical test read.
 Every other source, log and executable remains checked unchanged. The original
 538/238 per-mode executions retain their source generations. Final current-main
-composition review is pending; public physics bytes remain refused.
+composition review is independently accepted; publication awaits the required
+exact-head fast check. Public physics bytes remain refused.
 
 ## Remaining boundary
 
