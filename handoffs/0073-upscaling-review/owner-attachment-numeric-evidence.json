@@ -1,0 +1,216 @@
+{
+ "schema": "incant-owner-numeric-evidence-v1",
+ "scope": "One root-granted owner-attachment numeric GPU run; raw originals retained outside the checkout",
+ "verdict": {
+  "accepted": true,
+  "checks": {
+   "exit_zero": true,
+   "no_timeout_interrupt_exception": true,
+   "running_one_test": true,
+   "libtest_ok_1_passed_0_failed_0_ignored": true,
+   "no_failures_section": true,
+   "adapter_recorded_with_metal": true,
+   "adapter_then_exact_final_marker_only": true,
+   "binary_unchanged": true,
+   "no_image_files": true,
+   "reaped_group_empty_no_survivors": true
+  }
+ },
+ "child": {
+  "argv": [
+   "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-attachment-001/binaries/incant_render-288759d68012f619",
+   "--ignored",
+   "--exact",
+   "models::retained::motion_owner_tests::exact_integer_owner_matches_visibility_and_leaves_motion_depth_color_unchanged",
+   "--nocapture",
+   "--test-threads=1"
+  ],
+  "cwd": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-attachment-gpu-001/tmp",
+  "env": {
+   "keys": [
+    "HOME",
+    "INCANT_EXPECT_GPU_BACKEND",
+    "PATH",
+    "RUST_BACKTRACE",
+    "TMPDIR"
+   ],
+   "values_recorded": {
+    "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+    "TMPDIR": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-attachment-gpu-001/tmp",
+    "INCANT_EXPECT_GPU_BACKEND": "Metal",
+    "RUST_BACKTRACE": "0"
+   },
+   "home": "inherited unchanged, value not recorded"
+  },
+  "pid": 20471,
+  "pgid": 20471,
+  "exit": 0,
+  "timed_out": false,
+  "interrupted_by": [],
+  "reaped": true,
+  "group_empty_after": true,
+  "seconds": 0.583,
+  "survivors": [],
+  "images": [],
+  "tmp_leftovers": [],
+  "os": {
+   "uname": [
+    "Darwin",
+    "Andreys-MBP.lan",
+    "27.0.0",
+    "Darwin Kernel Version 27.0.0: Tue Aug 11 21:06:40 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T6050",
+    "arm64"
+   ]
+  },
+  "started": "2026-10-13T14:36:46.540332+00:00",
+  "at": "2026-10-13T14:36:47.167072+00:00"
+ },
+ "adapter": "MOTION_OWNER adapter=AdapterInfo { name: \"Apple M5 Pro\", vendor: 0, device: 0, device_type: IntegratedGpu, device_pci_bus_id: \"\", driver: \"\", driver_info: \"\", backend: Metal, subgroup_min_size: 4, subgroup_max_size: 64, transient_saves_memory: true }",
+ "bindings": {
+  "runner": {
+   "path": "handoffs/0073-upscaling-review/owner/owner_runner.py",
+   "sha256": "b9e12895389a046e1c0a0bd4c43f01a215505c793be4106b31fafc18aa2aff34"
+  },
+  "plan": {
+   "path": "handoffs/0073-upscaling-review/owner-attachment-plan.json",
+   "sha256": "d7da3f1ccbe73b18a0f6d90f7da9d6c4ac586be351b04541afe7ae619c6b6512"
+  },
+  "grant_sha256": "fb711be759ec19e594a4d080a76a3dbec00edadf5e40c06ec8edc8d5b145371c",
+  "predecessor": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/gpu-released.json",
+   "sha256": "7e1a55aca025c3c980761d588bf07136a176e3d69d0afa7d3a65091970a3f091"
+  },
+  "identities": {
+   "source_freeze": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-attachment-001/source-003/freeze.json",
+    "sha256": "95e4b8308badb57837d15b2d5759613d5dce1a50a1682a65b0492b8fb31f7365"
+   },
+   "root_cpu_review": {
+    "path": "/Users/andreyyurlov/.codex/incant-reviews/temporal-owner-attachment-final-cpu-root-20261013.json",
+    "sha256": "d232a2241667c7258a4211489b851b2b7bdb7f72bf72b245d613fa678d23d3e2"
+   },
+   "cpu_enumeration": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-attachment-preparation-001/result.json",
+    "sha256": "68c5434e926678071f4291896f6897137b4010b3885ab8043db7d9785136cfba"
+   },
+   "manifest": {
+    "object": "613ee59aec1f2bce080d4a1e335dc45f732b993f:docs/spikes/evidence/temporal-owner-attachment.json",
+    "sha256": "eff501183d1226cba85a192b8b5db30e9f8b78eec9a630c5f791501071c523fc"
+   },
+   "binary": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-attachment-001/binaries/incant_render-288759d68012f619",
+    "sha256": "fc3cd75685839d4b2fa465b853925ee2841ef3b28a568cc9c5cf5e8c650693d1",
+    "bytes": 33339024,
+    "mode": "0755"
+   }
+  },
+  "binary_after": {
+   "sha256": "fc3cd75685839d4b2fa465b853925ee2841ef3b28a568cc9c5cf5e8c650693d1",
+   "bytes": 33339024,
+   "mode": "0755"
+  }
+ },
+ "files": [
+  {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-attachment-gpu-001/grant.json",
+   "bytes": 838,
+   "sha256": "fb711be759ec19e594a4d080a76a3dbec00edadf5e40c06ec8edc8d5b145371c",
+   "encoding": "utf-8",
+   "content": "{\n  \"schema\": \"incant-owner-numeric-gpu-grant-v1\",\n  \"packet\": \"0073-upscaling-review\",\n  \"stage\": \"owner-attachment-numeric\",\n  \"authority\": \"root\",\n  \"issued_at\": \"2026-10-13T13:54:09.401207+00:00\",\n  \"plan_sha256\": \"d7da3f1ccbe73b18a0f6d90f7da9d6c4ac586be351b04541afe7ae619c6b6512\",\n  \"runner_sha256\": \"b9e12895389a046e1c0a0bd4c43f01a215505c793be4106b31fafc18aa2aff34\",\n  \"binary_sha256\": \"fc3cd75685839d4b2fa465b853925ee2841ef3b28a568cc9c5cf5e8c650693d1\",\n  \"evidence_dir\": \"/Users/andreyyurlov/.codex/incant-evidence/0073-owner-attachment-gpu-001\",\n  \"predecessor_release_path\": \"/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/gpu-released.json\",\n  \"predecessor_release_sha256\": \"7e1a55aca025c3c980761d588bf07136a176e3d69d0afa7d3a65091970a3f091\",\n  \"process_launches\": 1,\n  \"total_explicit_queue_submissions\": 24\n}\n"
+  },
+  {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-attachment-gpu-001/debits.jsonl",
+   "bytes": 478,
+   "sha256": "dce5a242880412a6df13db4075fcf1a39352a6235b6f45b856df97da7ecb5a62",
+   "encoding": "utf-8",
+   "content": "{\"at\": \"2026-10-13T14:36:46.539889+00:00\", \"attempt\": 1, \"process_launches\": 1, \"total_explicit_queue_submissions\": 24, \"grant_sha256\": \"fb711be759ec19e594a4d080a76a3dbec00edadf5e40c06ec8edc8d5b145371c\", \"runner_sha256\": \"b9e12895389a046e1c0a0bd4c43f01a215505c793be4106b31fafc18aa2aff34\", \"plan_sha256\": \"d7da3f1ccbe73b18a0f6d90f7da9d6c4ac586be351b04541afe7ae619c6b6512\", \"binary_sha256\": \"fc3cd75685839d4b2fa465b853925ee2841ef3b28a568cc9c5cf5e8c650693d1\", \"refundable\": false}\n"
+  },
+  {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-attachment-gpu-001/ledger.jsonl",
+   "bytes": 3550,
+   "sha256": "31878dfebcd9b295d216985d5f70c66c61fbbbc7eb544ce2e65eb4f002192496",
+   "encoding": "utf-8",
+   "content": "{\"at\": \"2026-10-13T14:36:47.167072+00:00\", \"started\": \"2026-10-13T14:36:46.540332+00:00\", \"argv\": [\"/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-attachment-001/binaries/incant_render-288759d68012f619\", \"--ignored\", \"--exact\", \"models::retained::motion_owner_tests::exact_integer_owner_matches_visibility_and_leaves_motion_depth_color_unchanged\", \"--nocapture\", \"--test-threads=1\"], \"cwd\": \"/Users/andreyyurlov/.codex/incant-evidence/0073-owner-attachment-gpu-001/tmp\", \"env\": {\"keys\": [\"HOME\", \"INCANT_EXPECT_GPU_BACKEND\", \"PATH\", \"RUST_BACKTRACE\", \"TMPDIR\"], \"values_recorded\": {\"PATH\": \"/usr/bin:/bin:/usr/sbin:/sbin\", \"TMPDIR\": \"/Users/andreyyurlov/.codex/incant-evidence/0073-owner-attachment-gpu-001/tmp\", \"INCANT_EXPECT_GPU_BACKEND\": \"Metal\", \"RUST_BACKTRACE\": \"0\"}, \"home\": \"inherited unchanged, value not recorded\"}, \"pid\": 20471, \"pgid\": 20471, \"exit\": 0, \"timed_out\": false, \"interrupted_by\": [], \"reaped\": true, \"group_empty_after\": true, \"seconds\": 0.583, \"survivors\": [], \"binary_sha256_before\": \"fc3cd75685839d4b2fa465b853925ee2841ef3b28a568cc9c5cf5e8c650693d1\", \"binary_sha256_after\": \"fc3cd75685839d4b2fa465b853925ee2841ef3b28a568cc9c5cf5e8c650693d1\", \"grant_sha256\": \"fb711be759ec19e594a4d080a76a3dbec00edadf5e40c06ec8edc8d5b145371c\", \"predecessor\": {\"path\": \"/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/gpu-released.json\", \"sha256\": \"7e1a55aca025c3c980761d588bf07136a176e3d69d0afa7d3a65091970a3f091\"}, \"identities\": {\"source_freeze\": {\"path\": \"/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-attachment-001/source-003/freeze.json\", \"sha256\": \"95e4b8308badb57837d15b2d5759613d5dce1a50a1682a65b0492b8fb31f7365\"}, \"root_cpu_review\": {\"path\": \"/Users/andreyyurlov/.codex/incant-reviews/temporal-owner-attachment-final-cpu-root-20261013.json\", \"sha256\": \"d232a2241667c7258a4211489b851b2b7bdb7f72bf72b245d613fa678d23d3e2\"}, \"cpu_enumeration\": {\"path\": \"/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-attachment-preparation-001/result.json\", \"sha256\": \"68c5434e926678071f4291896f6897137b4010b3885ab8043db7d9785136cfba\"}, \"manifest\": {\"object\": \"613ee59aec1f2bce080d4a1e335dc45f732b993f:docs/spikes/evidence/temporal-owner-attachment.json\", \"sha256\": \"eff501183d1226cba85a192b8b5db30e9f8b78eec9a630c5f791501071c523fc\"}, \"binary\": {\"path\": \"/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-attachment-001/binaries/incant_render-288759d68012f619\", \"sha256\": \"fc3cd75685839d4b2fa465b853925ee2841ef3b28a568cc9c5cf5e8c650693d1\", \"bytes\": 33339024, \"mode\": \"0755\"}}, \"stdout_sha256\": \"e26b6fb85f82030cb5eaf52cd678d8aff9f56e3dd0cdf9e1dd34ed719a05e01a\", \"stderr_sha256\": \"342b88abfe50be5882512bb09fe1a8a3eb86abc818b6e468afd2aa61303bc557\", \"adapter\": \"MOTION_OWNER adapter=AdapterInfo { name: \\\"Apple M5 Pro\\\", vendor: 0, device: 0, device_type: IntegratedGpu, device_pci_bus_id: \\\"\\\", driver: \\\"\\\", driver_info: \\\"\\\", backend: Metal, subgroup_min_size: 4, subgroup_max_size: 64, transient_saves_memory: true }\", \"images\": [], \"checks\": {\"exit_zero\": true, \"no_timeout_interrupt_exception\": true, \"running_one_test\": true, \"libtest_ok_1_passed_0_failed_0_ignored\": true, \"no_failures_section\": true, \"adapter_recorded_with_metal\": true, \"adapter_then_exact_final_marker_only\": true, \"binary_unchanged\": true, \"no_image_files\": true, \"reaped_group_empty_no_survivors\": true}, \"accepted\": true, \"tmp_leftovers\": [], \"os\": {\"uname\": [\"Darwin\", \"Andreys-MBP.lan\", \"27.0.0\", \"Darwin Kernel Version 27.0.0: Tue Aug 11 21:06:40 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T6050\", \"arm64\"]}}\n"
+  },
+  {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-attachment-gpu-001/release.json",
+   "bytes": 464,
+   "sha256": "44cadf67477c235eb9f176a6ad22c76beb857532e6dd53c421553001832c1786",
+   "encoding": "utf-8",
+   "content": "{\n \"at\": \"2026-10-13T14:36:47.167330+00:00\",\n \"released\": true,\n \"child_pid\": 20471,\n \"child_pgid\": 20471,\n \"reaped\": true,\n \"group_empty_after\": true,\n \"survivors\": [],\n \"ledger_sha256\": \"31878dfebcd9b295d216985d5f70c66c61fbbbc7eb544ce2e65eb4f002192496\",\n \"debits_sha256\": \"dce5a242880412a6df13db4075fcf1a39352a6235b6f45b856df97da7ecb5a62\",\n \"accepted\": true,\n \"released_at\": \"2026-10-13T14:36:47.167330+00:00\",\n \"owned_processes\": [],\n \"ledger_pids_alive\": []\n}\n"
+  },
+  {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-attachment-gpu-001/stdout.txt",
+   "bytes": 243,
+   "sha256": "e26b6fb85f82030cb5eaf52cd678d8aff9f56e3dd0cdf9e1dd34ed719a05e01a",
+   "encoding": "utf-8",
+   "content": "\nrunning 1 test\ntest models::retained::motion_owner_tests::exact_integer_owner_matches_visibility_and_leaves_motion_depth_color_unchanged ... ok\n\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 199 filtered out; finished in 0.56s\n\n"
+  },
+  {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-attachment-gpu-001/stderr.txt",
+   "bytes": 633,
+   "sha256": "342b88abfe50be5882512bb09fe1a8a3eb86abc818b6e468afd2aa61303bc557",
+   "encoding": "utf-8",
+   "content": "Incant required GPU backend: Metal; actual adapter: AdapterInfo { name: \"Apple M5 Pro\", vendor: 0, device: 0, device_type: IntegratedGpu, device_pci_bus_id: \"\", driver: \"\", driver_info: \"\", backend: Metal, subgroup_min_size: 4, subgroup_max_size: 64, transient_saves_memory: true }\nMOTION_OWNER adapter=AdapterInfo { name: \"Apple M5 Pro\", vendor: 0, device: 0, device_type: IntegratedGpu, device_pci_bus_id: \"\", driver: \"\", driver_info: \"\", backend: Metal, subgroup_min_size: 4, subgroup_max_size: 64, transient_saves_memory: true }\nMOTION_OWNER renders=12 readback_submissions=12 max_extent=32x32 source_removed=true no_images=true\n"
+  },
+  {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-attachment-gpu-001/owner.lock",
+   "bytes": 0,
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "encoding": "utf-8",
+   "content": ""
+  },
+  {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-attachment-gpu-001-console/invoked-at.txt",
+   "bytes": 21,
+   "sha256": "f6903d7afd1c5a1f41b477006e1d4756916d51d723e9831facd9067bcda8c442",
+   "encoding": "utf-8",
+   "content": "2026-10-13T14:36:46Z\n"
+  },
+  {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-attachment-gpu-001-console/console.stdout.txt",
+   "bytes": 716,
+   "sha256": "2ef80d40938c990b460c27df9aa52f5ad18f641537a175f0e34f05fa8bf77001",
+   "encoding": "utf-8",
+   "content": "{\n \"pid\": 20471,\n \"exit\": 0,\n \"timed_out\": false,\n \"accepted\": true,\n \"checks\": {\n  \"exit_zero\": true,\n  \"no_timeout_interrupt_exception\": true,\n  \"running_one_test\": true,\n  \"libtest_ok_1_passed_0_failed_0_ignored\": true,\n  \"no_failures_section\": true,\n  \"adapter_recorded_with_metal\": true,\n  \"adapter_then_exact_final_marker_only\": true,\n  \"binary_unchanged\": true,\n  \"no_image_files\": true,\n  \"reaped_group_empty_no_survivors\": true\n },\n \"adapter\": \"MOTION_OWNER adapter=AdapterInfo { name: \\\"Apple M5 Pro\\\", vendor: 0, device: 0, device_type: IntegratedGpu, device_pci_bus_id: \\\"\\\", driver: \\\"\\\", driver_info: \\\"\\\", backend: Metal, subgroup_min_size: 4, subgroup_max_size: 64, transient_saves_memory: true }\"\n}\n"
+  },
+  {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-attachment-gpu-001-console/console.stderr.txt",
+   "bytes": 0,
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "encoding": "utf-8",
+   "content": ""
+  },
+  {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-attachment-gpu-001-console/exit.txt",
+   "bytes": 14,
+   "sha256": "84da846ded77e90e198ada90f442137abdf2a0f0179f6703cee5065501fe591a",
+   "encoding": "utf-8",
+   "content": "runner exit 0\n"
+  },
+  {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-attachment-gpu-001-console/finished-at.txt",
+   "bytes": 21,
+   "sha256": "e87e26aca277a68e1aaa30ca6e1433da7c2fc8d4d77240f6f89fe6cb7ba11e58",
+   "encoding": "utf-8",
+   "content": "2026-10-13T14:36:47Z\n"
+  },
+  {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/gpu-released.json",
+   "bytes": 840,
+   "sha256": "7e1a55aca025c3c980761d588bf07136a176e3d69d0afa7d3a65091970a3f091",
+   "encoding": "utf-8",
+   "content": "{\n \"packet\": \"0072-motion-history-numeric\",\n \"stage\": \"fixed-warmup-visual\",\n \"holder\": \"Claude0072 Opus5.5 Max frozen warmup comparison\",\n \"released_at\": \"2026-10-13T13:29:52.008874+00:00\",\n \"children\": 14,\n \"gpu_children\": 11,\n \"stop_latched\": false,\n \"stopped\": null,\n \"debited\": {\n  \"frames\": 101,\n  \"ui_submissions\": 9,\n  \"pngs\": 16\n },\n \"debits\": 9,\n \"debits_without_ledger_row\": [],\n \"frames_rendered\": 96,\n \"ui_submissions\": 9,\n \"pngs_written\": 16,\n \"ledger_sha256\": \"6c3f008caf1bd0b7b74c70ad5d982e5b91ea5cc0515d6248b50396d06d604d3a\",\n \"debits_sha256\": \"94ce7d4294a87a36a895950cef7c85a6fac476a2f07869be59d98b0779444b42\",\n \"grant_sha256_at_release\": \"a06113250697f54640d6886b335bd47b001eebdd1ebe1ec0270fb7ac08e94050\",\n \"owned_processes\": [],\n \"ledger_pids_alive\": [],\n \"note\": \"GPU released for root; review-ready.json untouched.\"\n}\n"
+  },
+  {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-attachment-execution-supervision-001/acp-start.json",
+   "bytes": 272,
+   "sha256": "7baab672ed2a9bd41cb7dcd2bff1d87ab5b800e4f8f8671f99768ffcc5b3a29c",
+   "encoding": "utf-8",
+   "content": "{\n  \"scope\": \"Root-granted owner attachment numeric execution\",\n  \"started\": 1791899751.909899,\n  \"gpu_authorized\": true,\n  \"model\": \"Opus 5.5\",\n  \"effort\": \"max\",\n  \"verified\": true,\n  \"prompt_sha256\": \"06701a711f2fb89b95b83e4bc6a6311e1e92c69a34066bee3e477f1116667774\"\n}\n"
+  }
+ ],
+ "empty_directories": [
+  "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-attachment-gpu-001/tmp"
+ ]
+}
