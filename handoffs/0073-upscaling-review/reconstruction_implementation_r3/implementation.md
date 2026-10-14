@@ -1,12 +1,12 @@
 # 0073 reconstruction implementation, r3: status and rationale
 
-**Status: PARTIAL, not buildable-verified and not accepted.** In this bounded turn I implemented the corrected evidence estimator end-to-end for the **ordinary (UP) program and its host**. The OWN program, texture LOD, DRS shading and the jitter sequence are **not** implemented here; each is listed in §4 with its exact remaining source path. No Cargo, naga, GPU or render was run.
+**Status: PARTIAL, not buildable-verified and not accepted.** In this bounded turn I implemented the corrected evidence estimator end-to-end for the **ordinary (UP) program and its host**, plus the **upscale-only split jitter** (§2b). The OWN program, texture LOD and DRS shading are **not** implemented here; each is listed in §4 with its exact remaining source path. No Cargo, naga, GPU or render was run.
 
 **Model:** Claude Opus 5.5 (`claude-opus-5-5`), thinking effort max; per the packet, root verified both through ACP.
 
 **Base and patch:**
 - Base: exact `76be9608e99bf089fcb1e0908827330f70c28ac1`.
-- Patch: `reconstruction_r3.patch`, sha256 `774c4a683aa4267b8531256642b2a9fcea18669e453ce88e2c8148d72001d609`, 8 files.
+- Patch: `reconstruction_r3.patch`, sha256 `36820c3f3f249aeeb23d0fee1f7bb79afd78e1a6bf077cbc4a4aafe190cbdd0c`, 12 files. Commit b3c7ceb3 held the first 8-file version.
 - It passes `git apply --cached --check` against 76be (`patch_check.json`).
 - Changed source copies are under `src/`.
 
@@ -80,6 +80,21 @@
 
 **Cooker:** root must re-pin `Upscale` (new source and ABI: binding 6, RG16F target). The fixed TAA, default and pixel-camera paths are unchanged.
 
+## 2b. Thin sampling: upscale-only split jitter (implemented)
+
+**Sequence:** `temporal/jitter.rs` `UPSCALE_SAMPLES` is the fixed lattice with frames 0–3 moved by (−1/16, −1/16) and frames 4–7 by (+1/16, +1/16). That gives:
+- 8 distinct offsets per axis, zero mean;
+- every 1/8-internal-pixel band sampled once per cycle (checked numerically).
+
+**Wiring:**
+- `jitter::offset(phase, upscaled)` and `ndc_offset` are added. The fixed sequence's `ndc` becomes test-only.
+- `MotionFrame` records `upscaled` (from `Extent.output_rect`), and `jitter_offset()` feeds the camera jitter, the previous-jitter UV, `upscale_input` (which also serves MetalFX) and `retained.rs`.
+- `Prepared::jitter_phase` is replaced by `jitter_offset`, and the motion test uses `offset(step, true)`.
+
+**Unchanged:** the fixed TAA sequence `SAMPLES` (and its `temporal/system.rs` use), and `guard`, which still covers at most half a pixel.
+
+**Design-oracle tests:** `kernel_oracle` and `kernel_tests` still describe the fixed lattice. Updating them to `UPSCALE_SAMPLES`, with re-measured per-cycle mass bounds (the worst deviation was 0.127 at n = 8 in my earlier scratch run), is a remaining test task.
+
 ## 3. Rationale and visual intent (ordinary path)
 
 **Detail:** true-position accumulation lets output pixels collect sub-internal-pixel samples, instead of blending interpolations. Static texture detail present in internal frames can exceed DRS, but the clamp still bounds Nyquist-level detail in UP.
@@ -111,7 +126,7 @@
 
    Until then sub-internal-texel texture detail is unrecoverable.
 4. **DRS shading:** the ordinary path still clamps every frame, so shading drift on DRS frames stays bounded, but the first-4/16 detail wipe remains. A justified shadow-guard invariant, or conservative rejection on real shadow incompatibility, is not implemented.
-5. **Thin sampling:** the upscale-only split jitter (d05ea011 §3E) is not implemented, so the 0.4 px wire stays position-dependent.
+5. **Oracle tests:** update `upscaling/kernel_oracle.rs`, `kernel_tests.rs` and `kernel_patterns.rs` to `UPSCALE_SAMPLES` with exact measured bounds. The split jitter itself is implemented in §2b.
 
 ## Limitations
 

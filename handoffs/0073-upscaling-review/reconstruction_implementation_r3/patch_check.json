@@ -11,14 +11,54 @@
    "removed": 9
   },
   {
-   "added": 6,
+   "added": 13,
+   "base_blob": "84c04651696f12e2661e254b09388e5bf60b965a",
+   "base_sha256": "54f2383d75c9ba9b5952aba8862485eeca0437c4d24824694bedcd9424f35e53",
+   "changed": true,
+   "path": "crates/incant_render/src/motion/owner.rs",
+   "proposed_blob": "73f9188476d77a0d270183919e9a8a2e89d2511c",
+   "proposed_sha256": "98c4c43efd28b56ab29efbd661124c91b8f1e41045f520bf87813fd8c29373d2",
+   "removed": 2
+  },
+  {
+   "added": 3,
+   "base_blob": "16c3b41fb461314be19b780780ef7dc3a66fa4c3",
+   "base_sha256": "400eb57b3d067eaa3cdf3d2e0c216a4868d09947d61c49dca62e909f0a394d00",
+   "changed": true,
+   "path": "crates/incant_render/src/motion/retained.rs",
+   "proposed_blob": "30a7cb12ba4525446d6d18730c79d87b07029113",
+   "proposed_sha256": "14878c5aba3a8863c5897aff008c0f90b647ce537c64f649a920cef24de4a56a",
+   "removed": 4
+  },
+  {
+   "added": 2,
+   "base_blob": "19752889ed8606570a51e105e63cedc6089d569b",
+   "base_sha256": "5c123128b7f534267750463ea0e34663cac19f58e05f0f563b563554c9224f81",
+   "changed": true,
+   "path": "crates/incant_render/src/motion/tests.rs",
+   "proposed_blob": "80dff08e3090a2242dd72a90019a1f49bd264dcc",
+   "proposed_sha256": "015ccc81d4fa6303776078a7ecee68976ed2192db94959b2821bfdd5be79f05f",
+   "removed": 2
+  },
+  {
+   "added": 8,
    "base_blob": "76c6e26c4eb4d88ffb6e4e841c40c5261b800f6d",
    "base_sha256": "7b3ddefbef62fb24e93122ce9f8cd52c1b9b7f61d2a48f1a4c5a4a8f8cdffa39",
    "changed": true,
    "path": "crates/incant_render/src/retained.rs",
-   "proposed_blob": "1c25c3d0714ca478ed67aaf0ea30a695fed03549",
-   "proposed_sha256": "66f519e7c11ac239ee3b65c17ec53a7a40a922313a44f8b0d461bf5f8b55963b",
-   "removed": 0
+   "proposed_blob": "2dab7bcbf4dc13363c0b6d558a8d6843a0dc790d",
+   "proposed_sha256": "af138afbbb4aa33a67fd23eaa42cd1153df4358d24205fc12455feeff5c0e1b1",
+   "removed": 2
+  },
+  {
+   "added": 25,
+   "base_blob": "28ed7fde7ddeb692eed25e14337e55ebab8d4c1d",
+   "base_sha256": "41d80973344b080d3608d1306dba7d7a08a3b2746fb737d22e30e5f9b496a4dd",
+   "changed": true,
+   "path": "crates/incant_render/src/temporal/jitter.rs",
+   "proposed_blob": "9e994f3be22a7eb1bfe12e88d9afde1f8aad9ed8",
+   "proposed_sha256": "b57bfd504d8511ba9445db25eafa04f21acb9ad28de7c94211cfbe30ddec39ce",
+   "removed": 2
   },
   {
    "added": 43,
@@ -84,10 +124,10 @@
  "git_apply_cached_check_against_76be": true,
  "git_apply_stderr": "",
  "patch": {
-  "bytes": 26500,
-  "files": 8,
+  "bytes": 33278,
+  "files": 12,
   "path": "reconstruction_r3.patch",
-  "sha256": "774c4a683aa4267b8531256642b2a9fcea18669e453ce88e2c8148d72001d609"
+  "sha256": "36820c3f3f249aeeb23d0fee1f7bb79afd78e1a6bf077cbc4a4aafe190cbdd0c"
  },
  "production": "76be9608e99bf089fcb1e0908827330f70c28ac1",
  "python_reapply_reproduces_proposed_files": true,

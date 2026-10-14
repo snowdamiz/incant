@@ -598,8 +598,8 @@ impl RetainedScene {
                 )
             })
             .transpose()?;
-        if let Some(phase) = motion_pending.as_ref().and_then(|p| p.jitter_phase()) {
-            self.staging.camera.jitter = crate::temporal::jitter::ndc(phase, plan.rect);
+        if let Some(offset) = motion_pending.as_ref().and_then(|p| p.jitter_offset()) {
+            self.staging.camera.jitter = crate::temporal::jitter::ndc_offset(offset, plan.rect);
             self.staging.camera.jitter_guard = crate::temporal::jitter::guard(plan.rect);
         }
         let commands = renderer.draw_scene_scaled(
