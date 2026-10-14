@@ -19,6 +19,8 @@ mod compiled;
 mod compiler;
 mod diagnostics;
 mod flipbooks;
+#[cfg(feature = "profile")]
+mod heap_profile;
 mod hud;
 mod input;
 mod loan;
@@ -614,22 +616,9 @@ impl ScriptHost {
         }
         #[cfg(all(test, feature = "profile", feature = "compiler"))]
         tick_probe::mark(tick_probe::Region::Publication);
-        // Query only after JS/context loans are closed. This opt-in diagnostic
-        // walks the VM heap and is outside the guest CPU budget, never an RSS claim.
-        if incant_profile::enabled() {
-            let heap = self._runtime.memory_usage();
-            if let (Ok(used_bytes), Ok(allocated_bytes), Ok(allocation_count)) = (
-                u64::try_from(heap.memory_used_size),
-                u64::try_from(heap.malloc_size),
-                u64::try_from(heap.malloc_count),
-            ) {
-                incant_profile::quickjs_heap(incant_profile::HeapSample {
-                    used_bytes,
-                    allocated_bytes,
-                    allocation_count,
-                });
-            }
-        }
+        // After all JS/context loans close; outside the guest CPU budget.
+        #[cfg(feature = "profile")]
+        heap_profile::observe(&self._runtime);
 
         #[cfg(all(test, feature = "profile", feature = "compiler"))]
         tick_probe::mark(tick_probe::Region::HeapTelemetry);

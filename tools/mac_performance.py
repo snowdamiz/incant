@@ -84,13 +84,48 @@ def interval(row, frames):
     raise ValueError('Empty histogram')
 
 
+def profile_instrumentation(report):
+    """Observation overhead is part of matched timing, including legacy reports."""
+    p = report['profile']
+    if p['version'] == 2:
+        return {'profile_version': 2, 'quickjs_heap_mode': 'legacy_full_scan'}
+    require(p['version'] == 3, 'Incomplete or unsupported profile')
+    heap = p['quickjs_heap']
+    require(heap['version'] == 1 and heap['mode'] in ('maintained', 'detailed')
+            and heap['sampling'] == 'script_tick_end_per_vm', 'Unsupported heap instrumentation')
+    require(integer(heap['invalid_samples'], 'invalid heap samples') == 0,
+            'Invalid heap observations')
+    samples = integer(heap['samples'], 'heap samples')
+    require(integer(heap['detailed_samples'], 'detailed heap samples') ==
+            (samples if heap['mode'] == 'detailed' else 0), 'Heap mode coverage disagrees')
+    keys = ('sampled_peak_allocated_bytes', 'sampled_peak_allocation_count',
+            'sampled_peak_estimated_used_bytes')
+    if samples == 0:
+        require(heap['latest'] is None and all(heap[k] is None for k in keys),
+                'Missing heap samples must remain explicit')
+    else:
+        latest = heap['latest']
+        for field, peak in [('allocated_bytes', keys[0]), ('allocation_count', keys[1])]:
+            require(integer(heap[peak], peak) >= integer(latest[field], field), 'Heap peak below latest')
+        integer(latest['limit_bytes'], 'heap limit')
+        if heap['mode'] == 'maintained':
+            require(latest['estimated_used_bytes'] is None and heap[keys[2]] is None,
+                    'Maintained mode cannot claim estimated used size')
+        else:
+            require(integer(heap[keys[2]], keys[2]) >=
+                    integer(latest['estimated_used_bytes'], 'estimated used bytes'), 'Heap peak below latest')
+    return {'profile_version': 3, 'quickjs_heap_version': 1,
+            'quickjs_heap_mode': heap['mode'], 'quickjs_heap_sampling': heap['sampling']}
+
+
 def metrics(report, ticks, *, script_phase='script.tick'):
     require(script_phase in SCRIPT_PHASES, 'Unknown script timing phase')
     phases = ('player.frame', script_phase)
     integer(ticks, 'ticks', 1)
     require(report['tick'] == ticks, 'Player did not finish requested ticks')
     p = report['profile']
-    require(p['version'] == 2 and p['completed_frames'] == ticks and p['failed_frames'] == 0,
+    profile_instrumentation(report)
+    require(p['completed_frames'] == ticks and p['failed_frames'] == 0,
             'Incomplete or unsupported profile')
     require(p['dropped_source_samples'] == 0 and p['tracy_process_transport'] is False,
             'Dropped script samples or unexpected transport')
@@ -116,11 +151,20 @@ def metrics(report, ticks, *, script_phase='script.tick'):
 
 def comparison(current, baseline):
     require(current['format'] == baseline['format'] == 'incant-mac-cpu-measurement'
-            and current['version'] == baseline['version'] == 1, 'Unknown measurement format')
+            and current['version'] in (1, 2) and baseline['version'] in (1, 2), 'Unknown measurement format')
     for item in (current, baseline):
+        if item['version'] == 2:
+            require('profile_instrumentation' in item['match'], 'Missing instrumentation identity')
         require(item.get('script_phase', 'script.tick') == item['match'].get('script_phase', 'script.tick'),
                 'Measurement phase disagrees with its identity')
-    require(current['match'] == baseline['match'], 'Baseline machine, workload or build configuration differs')
+    def matched(item):
+        identity = dict(item['match'])
+        if item['version'] == 1:
+            require('profile_instrumentation' not in identity, 'Legacy measurement has new identity fields')
+            identity['profile_instrumentation'] = {'profile_version': 2, 'quickjs_heap_mode': 'legacy_full_scan'}
+        return identity
+    require(matched(current) == matched(baseline),
+            'Baseline machine, workload, build configuration or instrumentation differs')
     require(current['match'].get('script_phase', 'script.tick') == 'script.tick',
             'The TypeScript regression policy does not compare static-module phases')
     result = {}
@@ -150,7 +194,14 @@ def load_baseline(path):
     baseline = json.loads(read(path, 16 * 1024**2))
     raw = read(path.parent / 'stdout.json', 16 * 1024**2)
     require(digest(raw) == baseline['profile_report_sha256'], 'Baseline raw report identity differs')
-    require(metrics(json.loads(raw), baseline['match']['ticks'],
+    report = json.loads(raw)
+    instrumentation = profile_instrumentation(report)
+    if baseline['version'] == 1:
+        require(instrumentation['profile_version'] == 2, 'Legacy measurement cannot carry new instrumentation')
+    else:
+        require(baseline['version'] == 2 and baseline['match'].get('profile_instrumentation') == instrumentation,
+                'Baseline instrumentation identity differs')
+    require(metrics(report, baseline['match']['ticks'],
                     script_phase=baseline['match'].get('script_phase', 'script.tick')) == baseline['metrics'],
             'Baseline metrics differ from actual retained profile')
     return baseline
@@ -222,7 +273,10 @@ def measure(package, output, ticks, recording=None, observe=None, baseline=None,
         match['script_phase'] = script_phase
     prior = load_baseline(baseline.absolute()) if baseline else None
     if prior is not None:
-        require(prior.get('match') == match, 'Baseline machine, workload or build configuration differs')
+        # Actual instrumentation is learned from the retained report after execution.
+        # Refuse changed workloads now; compare instrumentation before any verdict.
+        prior_match = {k: v for k, v in prior['match'].items() if k != 'profile_instrumentation'}
+        require(prior_match == match, 'Baseline machine, workload or build configuration differs')
     output.mkdir()
     for name, data in inputs.items():
         (output / (name + '.json')).write_bytes(data)
@@ -247,7 +301,8 @@ def measure(package, output, ticks, recording=None, observe=None, baseline=None,
         values = metrics(report, ticks, script_phase=script_phase)
         require(package_inputs(package)[2] == identities, 'Package changed during execution')
         require(mac_identity() == machine, 'Mac configuration changed during execution')
-        result = {'format': 'incant-mac-cpu-measurement', 'version': 1, 'match': match,
+        match['profile_instrumentation'] = profile_instrumentation(report)
+        result = {'format': 'incant-mac-cpu-measurement', 'version': 2, 'match': match,
                   'identities': identities, 'metrics': values, 'script_phase': script_phase,
                   'profile_report_sha256': digest(read(output / 'stdout.json', 16 * 1024**2)),
                   'phase_gate_passed': False,

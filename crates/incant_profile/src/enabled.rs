@@ -41,16 +41,7 @@ impl State {
             sources: [None; MAX_SOURCES],
             dropped: 0,
             frames: [0; 2],
-            heap: QuickJsHeap {
-                samples: 0,
-                latest: HeapSample {
-                    used_bytes: 0,
-                    allocated_bytes: 0,
-                    allocation_count: 0,
-                },
-                peak_used_bytes: 0,
-                peak_allocated_bytes: 0,
-            },
+            heap: QuickJsHeap::empty(HeapMode::Maintained),
             tracy: false,
             distribution: crate::frame::Frames::empty(),
         }
@@ -84,14 +75,21 @@ pub struct Capture {
 }
 impl Capture {
     pub fn start() -> Result<Self, Error> {
-        Self::begin(false)
+        Self::start_with_heap_mode(HeapMode::Maintained)
     }
     /// Standalone CLI only: transport is loopback/on-demand, lives until process exit.
     /// No unsafe Tracy shutdown or restart is attempted. Embedded hosts use start().
     pub fn start_tracy_process() -> Result<Self, Error> {
-        Self::begin(true)
+        Self::start_tracy_process_with_heap_mode(HeapMode::Maintained)
     }
-    fn begin(tracy: bool) -> Result<Self, Error> {
+    /// Select detailed heap enumeration explicitly; default collection is constant-time.
+    pub fn start_with_heap_mode(mode: HeapMode) -> Result<Self, Error> {
+        Self::begin(false, mode)
+    }
+    pub fn start_tracy_process_with_heap_mode(mode: HeapMode) -> Result<Self, Error> {
+        Self::begin(true, mode)
+    }
+    fn begin(tracy: bool, mode: HeapMode) -> Result<Self, Error> {
         if !cfg!(any(unix, windows)) || cpu().is_none() {
             return Err(Error::ClockUnavailable);
         }
@@ -107,6 +105,7 @@ impl Capture {
         *s = State {
             generation,
             tracy,
+            heap: QuickJsHeap::empty(mode),
             distribution: crate::frame::Frames::allocated()?,
             ..State::new()
         };
@@ -131,7 +130,7 @@ impl Capture {
         let s = state();
         let allocations = crate::allocation::since(self.allocation_start);
         Report {
-            version: 2,
+            version: 3,
             frame_wall: s.distribution.report(),
             scope: "process; inclusive wall and current-thread CPU zones; allocation counters are requested Rust sizes, not RSS",
             generation: self.generation,
@@ -278,22 +277,46 @@ impl Drop for Scope {
         }
     }
 }
-pub fn quickjs_heap(sample: HeapSample) {
+/// Capture a generation-bound observation request before touching the VM.
+/// A retired request can never publish a sample into a replacement capture.
+pub fn quickjs_observation() -> Option<HeapObservation> {
     let generation = ACTIVE.load(Ordering::Acquire);
     if generation == 0 {
-        return;
+        return None;
     }
-    let mut s = state();
+    let s = state();
     if ACTIVE.load(Ordering::Acquire) != generation {
-        return;
+        return None;
     }
-    s.heap.samples = s.heap.samples.saturating_add(1);
-    s.heap.latest = sample;
-    s.heap.peak_used_bytes = s.heap.peak_used_bytes.max(sample.used_bytes);
-    s.heap.peak_allocated_bytes = s.heap.peak_allocated_bytes.max(sample.allocated_bytes);
-    #[cfg(all(feature = "tracy", any(unix, windows)))]
-    if s.tracy {
-        crate::tracy::heap(sample);
+    Some(HeapObservation {
+        generation,
+        mode: s.heap.mode,
+    })
+}
+pub struct HeapObservation {
+    generation: u64,
+    mode: HeapMode,
+}
+impl HeapObservation {
+    pub fn mode(&self) -> HeapMode {
+        self.mode
+    }
+    /// None records a conversion/measurement failure, not a zero-sized heap.
+    pub fn record(self, sample: Option<HeapSample>) {
+        let mut s = state();
+        if ACTIVE.load(Ordering::Acquire) != self.generation {
+            return;
+        }
+        #[cfg(all(feature = "tracy", any(unix, windows)))]
+        let sample = s.heap.record(sample);
+        #[cfg(not(all(feature = "tracy", any(unix, windows))))]
+        s.heap.record(sample);
+        #[cfg(all(feature = "tracy", any(unix, windows)))]
+        if s.tracy
+            && let Some(sample) = sample
+        {
+            crate::tracy::heap(sample);
+        }
     }
 }
 pub fn frame_outcome(success: bool) {
