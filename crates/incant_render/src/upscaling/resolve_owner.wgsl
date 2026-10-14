@@ -190,6 +190,9 @@ fn sees(s:Owners,n:u32)->bool {return n!=0u && (s.a==n || s.b==n);}
     if e.mass>0.0 {fresh=clean(e.sum/e.mass);}
     result.color=fresh;
     if !e.valid || !e.owners.ok {return result;}
+    // Canonical opacity is proved by the current support, never by an epsilon.
+    // Partial coverage remains fractional, including its static persistence.
+    if e.single {result.color.a=1.0;}
     var changed_classes=changes.header.x;
     if e.changed {changed_classes|=e.classes;}
     let flags=changes.header.y;
@@ -223,6 +226,7 @@ fn sees(s:Owners,n:u32)->bool {return n!=0u && (s.a==n || s.b==n);}
             let total=w+e.mass;
             if total>0.0 {
                 result.color=clean((clean(c)*w+e.sum)/total);
+                if e.single && c.a==1.0 {result.color.a=1.0;}
                 // The carried primary stays primary while its colour survives, so a
                 // fresh owner cannot restart the old primary's absence clock.
                 result.record=encode(carried(r,e.owners));
@@ -296,6 +300,7 @@ fn sees(s:Owners,n:u32)->bool {return n!=0u && (s.a==n || s.b==n);}
     let total=w+e.mass;
     if !(total>0.0) {return result;}
     result.color=clean((history*w+e.sum)/total);
+    result.color.a=1.0;
     result.record=encode(joined);
     result.evidence=vec2f(min(total,evidence_cap()),0.0);
     return result;

@@ -107,6 +107,10 @@ fn motion_support_coherent(p:vec2f,a:vec4f)->bool {
     result.color=fresh;
     // Clear, mixed-layer or malformed support: current-only, no reusable history.
     if !e.single || !e.valid {return result;}
+    // Every admitted contributor is exactly opaque. Preserve that invariant
+    // explicitly: weighted division can round just below one before RGBA16F
+    // storage, which would make the next frame reject this valid opaque history.
+    result.color.a=1.0;
     result.depth=e.nearest;
     result.evidence=vec2f(min(e.mass,evidence_cap()),0.0);
     if frame.depth.w<0.5 {return result;}
@@ -155,6 +159,7 @@ fn motion_support_coherent(p:vec2f,a:vec4f)->bool {
     let total=w+e.mass;
     if !(total>0.0) {return result;}
     result.color=clean((history*w+e.sum)/total);
+    result.color.a=1.0;
     result.evidence=vec2f(min(total,evidence_cap()),0.0);
     return result;
 }

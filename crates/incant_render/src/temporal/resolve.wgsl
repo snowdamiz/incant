@@ -65,5 +65,9 @@ fn compatible(d:f32, expected:f32)->bool {
     let change=abs(h.rgb-c.rgb);
     let reaction=clamp(max(change.x,max(change.y,change.z))/frame.options.w,0.0,1.0);
     let weight=frame.options.x*(1.0-frame.reactive.x*reaction);
-    return clean(mix(c,clamp(h,minimum,maximum),weight));
+    var result=clean(mix(c,clamp(h,minimum,maximum),weight));
+    // Current and every accepted history tap are exactly opaque. Do not let
+    // normalization/mixing round their invariant below one in RGBA16F history.
+    result.a=1.0;
+    return result;
 }

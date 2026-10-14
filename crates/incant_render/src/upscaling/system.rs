@@ -471,3 +471,7 @@ mod device_tests;
 #[cfg(test)]
 #[path = "owner_device_tests.rs"]
 mod owner_device_tests;
+
+#[cfg(test)]
+#[path = "opaque_feedback_tests.rs"]
+mod opaque_feedback_tests;
