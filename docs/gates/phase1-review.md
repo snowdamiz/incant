@@ -1,7 +1,7 @@
 # Phase 1 review ledger
 
-Updated against main293 (`1f3628a23886aae6c3f0ede699fd287c3dd481d4`) and the
-locally qualified ordinary-editor antialiasing change.
+Updated against main295 (`cecfdb3d7bd9da259afcfa0e933330b3245bef21`) and
+release checkpoint38, which tested the earlier main290 tree.
 Phase 1 remains open; this ledger records evidence and remaining work, not director
 approval. [PLAN.md](../../PLAN.md#phase-1-core-engine) defines the requirements.
 Only actual testing on the available Mac is required as device evidence. Other
@@ -10,7 +10,7 @@ device execution is deferred; hosted build and release checks remain required.
 | Exit requirement | Recorded evidence | Remaining qualification |
 | --- | --- | --- |
 | Core Sample runs at 60 fps, using TypeScript and no editor | Authored Core gameplay, packaged HUD/audio and source-free native execution have scoped proofs. [Core integration](../spikes/core-main182.md), [HUD](../spikes/core-result-hud-main192.md). | A shipping run of the complete rendered game meeting the frame budget. CPU simulation timing alone does not establish FPS. Rendering reconstruction still has unresolved appearance defects. |
-| CI plays Core Sample and asserts game state | The general Mac and desktop workflows execute `samples/core/verify.py` against the native headless binary. All required checks passed on [checkpoint37](../spikes/release-checkpoint-37.md). | Preserve these checks as the sample and runtime change. This requirement's recorded coverage does not pass the other exit requirements. |
+| CI plays Core Sample and asserts game state | The general Mac and desktop workflows execute `samples/core/verify.py` against the native headless binary. All required checks passed on [checkpoint38](../spikes/release-checkpoint-38.md). | Preserve these checks as the sample and runtime change. This requirement's recorded coverage does not pass the other exit requirements. |
 | Navmesh enemies, pseudo-localization, RTL/CJK rendering and the 2D sample | Native Core/planar scenarios, text shaping and presentation each have scoped evidence in [STATUS.md](../../STATUS.md). Desktop CI also runs `samples/planar/verify.py`. | Qualify the complete specified presentation on this Mac; individual CPU, shaping and numerical pixel controls do not substitute for the combined rendered sample. |
 | Script p95 within 2 ms with 10,000 scripted entities; no shader compilation stalls above twice the frame budget | Shipping script comparisons and exact gameplay/audio parity are recorded. The latest bounded [navigation cache comparison](../spikes/navigation-search-cache-outcome.md) remained above 2 ms and was not adopted. | The 2 ms requirement remains unmet. The director's 2026-10-14 clarification permits periodic bounded investigations, including subagents, while other engine work continues. Preserve negative results and require a distinct hypothesis before another measured experiment. Whole rendered-game shader/pipeline stall qualification also remains open. |
 | Native runtime data path and shipped dependency boundary | Cooked-world, source-free gameplay and runtime dependency checks have recorded implementations and proofs. See [Core integration](../spikes/core-main182.md) and the [shipping observations](../spikes/quickjs-loan-main278.md). | Retain the boundary on the final complete sample/export configuration. No authoring document, command bus or agent dependency may enter its runtime tick path. |
