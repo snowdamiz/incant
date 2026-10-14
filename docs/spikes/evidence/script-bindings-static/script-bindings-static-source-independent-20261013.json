@@ -1,0 +1,544 @@
+{
+  "review": "script-bindings-static-source-independent",
+  "date": "2026-10-13",
+  "reviewer": "astra /root/native_wasm_export",
+  "status": "accepted-scoped-no-findings",
+  "commit": "3c81bbe6763f78c10c7d13d08975f2ffeff7caa3",
+  "base": "64d536d5388349da07ce44f78c24b2ef3663e104",
+  "checkout": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+  "freeze": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/script-bindings-static-001/source-001/freeze.json",
+    "sha256": "8bdbb4952e33cfeabff38fd783101eb51412aabe1e3a0a4bb90a33b600076d24"
+  },
+  "source_files": [
+    {
+      "path": "crates/incant_script/src/bindings.rs",
+      "sha256": "93c516680411dfd7870602eee6e03bf1cff1852e594c0a79cb5f592e546c5508"
+    },
+    {
+      "path": "crates/incant_script/src/bindings_embed.rs",
+      "sha256": "2cfca679df92a5deb701b36fcca8a53cf07bdef5f003f51e4b94e5553deb8f95"
+    },
+    {
+      "path": "crates/incant_script/src/bindings_embed/tests.rs",
+      "sha256": "542cda713cc70b6ea945b020cc7c63cf69896c131321e019395b2f35c65c88cd"
+    },
+    {
+      "path": "crates/incant_script/src/bindings_static.rs",
+      "sha256": "bb9ddc45906c002ff10c368836cbe5abe15a7edc66a4c053cd44d43fb69c8bff"
+    },
+    {
+      "path": "crates/incant_script/src/lib.rs",
+      "sha256": "bb48e764b6e9057641749d6b119e2a76e7adabc8b49775a6cae717a397421f00"
+    },
+    {
+      "path": "crates/incant_script/tests/bindings_static.rs",
+      "sha256": "8ce34a4f53bf69a736c37487e49d59e5205cca1c558e07d6fc26f44badc0337b"
+    }
+  ],
+  "related_unchanged_inputs": [
+    {
+      "path": "crates/incant_script/src/compiled.rs",
+      "sha256": "9357e2c8ad48ea609a81328d04d358285d8d643095b00490c039c35e39def853",
+      "unchanged_from_base": true
+    },
+    {
+      "path": "crates/incant_script/src/compiler.rs",
+      "sha256": "1de5c6bd1207c571b21cbdcb425cd9d1026e6c156e60cbaa5c4d00c8b8134f87",
+      "unchanged_from_base": true
+    },
+    {
+      "path": "crates/incant_script/src/artifact.rs",
+      "sha256": "af5f82dea89b8e1e96f68264b4413606e90ece9b07caf9564d2b816a217c52ac",
+      "unchanged_from_base": true
+    },
+    {
+      "path": "Cargo.lock",
+      "sha256": "e8b06cba61eb910d0e47dd3238642286b276a5afe0eb11e336f397074c2873dd",
+      "unchanged_from_base": true
+    },
+    {
+      "path": "crates/incant_script/Cargo.toml",
+      "sha256": "2412fe2fdb7a2078ead70b3aeb12f85a15048445166ca6b318eccf156dc91c00",
+      "unchanged_from_base": true
+    }
+  ],
+  "findings": [],
+  "source_checks": [
+    "Read every changed source and test. Borrowed preflight shares PropsBudget node/byte/depth accounting with owned constructor; nested objects count the same object and value nodes, string/key lengths include the same eight-byte charges. All properties preflight before owned allocation; count checks precede scanning.",
+    "Ordered object keys are explicitly strict and duplicate-free before BTreeMap materialization, including nested objects. Source/entity ordering and duplicate/source membership checks remain in ScriptBindings::new. Aggregate row properties share a single budget.",
+    "NumberBits/from_bits preserves every admitted finite f64 bit pattern, including signed zero and subnormal; nonfinite values refuse. UTF-8/control/quote/backslash data uses Rust Debug string literals rather than executable interpolation.",
+    "Emission uses bounded validated catalog data in const borrowed slices and one common from_embedded call. Existing unsafe CompiledScript executable trust crossing, metadata hashes, exact bindings fingerprint and runtime immutable property construction remain unchanged.",
+    "Reviewed actual generated consumer source plus retained compile/execute logs and hashes. It checks every one of 10000 ordered rows, every mixed value kind, negative zero, complete binding fingerprint and trusted artifact metadata. It does not run a 10000-entity game tick; separate public host test executes borrowed properties through two real ScriptHost ticks.",
+    "No manifest/lock/dependency or default feature changes; six-path source scope is exact. Shared bindings.rs change is limited to budget visibility/text_size, independent of pending BoundGroup cache."
+  ],
+  "retained_execution": {
+    "commands": [
+      {
+        "generation": "initial-001",
+        "name": "build",
+        "argv": [
+          "./tools/cargo",
+          "test",
+          "--offline",
+          "--locked",
+          "--profile",
+          "ci",
+          "--target",
+          "aarch64-apple-darwin",
+          "-j2",
+          "-p",
+          "incant_script",
+          "--no-default-features",
+          "--features",
+          "compiler,physics-deterministic",
+          "--lib",
+          "--test",
+          "bindings_static",
+          "--test",
+          "project_bindings",
+          "--no-run",
+          "--message-format=json"
+        ],
+        "source": "3c81bbe6763f78c10c7d13d08975f2ffeff7caa3",
+        "pid": 36940,
+        "exit_code": 0,
+        "seconds": 16.985053666998283,
+        "reaped": true,
+        "log_sha256": "e8ecba0d016a224b9eb097cdb14a4e846a0e702d9c1b0c75dd084e14a8f271d1",
+        "summaries": []
+      },
+      {
+        "generation": "initial-001",
+        "name": "tests-project_bindings",
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-evidence/script-bindings-static-001/initial-001/project_bindings-test",
+          "--nocapture",
+          "--test-threads=2"
+        ],
+        "source": "3c81bbe6763f78c10c7d13d08975f2ffeff7caa3",
+        "pid": 37047,
+        "exit_code": 0,
+        "seconds": 0.26299041700258385,
+        "reaped": true,
+        "log_sha256": "d9287dfcdf0a506c7ce7c47f2cfacf06b1911110af3c98826df2171ea2806aa5",
+        "summaries": [
+          "ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s"
+        ]
+      },
+      {
+        "generation": "initial-001",
+        "name": "tests-bindings_static",
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-evidence/script-bindings-static-001/initial-001/bindings_static-test",
+          "--nocapture",
+          "--test-threads=2"
+        ],
+        "source": "3c81bbe6763f78c10c7d13d08975f2ffeff7caa3",
+        "pid": 37048,
+        "exit_code": 0,
+        "seconds": 0.14804699999513105,
+        "reaped": true,
+        "log_sha256": "84705e370749fe52f2fd7459e0c35de5cdc1c10822a1d9e3092d27abfccfd3a4",
+        "summaries": [
+          "ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s"
+        ]
+      },
+      {
+        "generation": "initial-001",
+        "name": "tests-incant_script",
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-evidence/script-bindings-static-001/initial-001/incant_script-test",
+          "--nocapture",
+          "--test-threads=2"
+        ],
+        "source": "3c81bbe6763f78c10c7d13d08975f2ffeff7caa3",
+        "pid": 37049,
+        "exit_code": 0,
+        "seconds": 0.4844247920118505,
+        "reaped": true,
+        "log_sha256": "305de215ae9b47bcfb8466aee1eb469f981fc3d80add95ec1161ad2699d0c071",
+        "summaries": [
+          "ok. 138 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.29s"
+        ]
+      },
+      {
+        "generation": "initial-001",
+        "name": "emit-fixture",
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-evidence/script-bindings-static-001/initial-001/incant_script-test",
+          "bindings_embed::tests::generated_ten_thousand_rows_are_data_with_one_shared_materialization",
+          "--exact",
+          "--nocapture"
+        ],
+        "source": "3c81bbe6763f78c10c7d13d08975f2ffeff7caa3",
+        "pid": 37050,
+        "exit_code": 0,
+        "seconds": 0.04306379199260846,
+        "reaped": true,
+        "log_sha256": "46c2b828100d8051ec1f937a8054e94b25cf6f104d5993c7f7f8c1975cc6d317",
+        "summaries": [
+          "ok. 1 passed; 0 failed; 0 ignored; 0 measured; 137 filtered out; finished in 0.02s"
+        ]
+      },
+      {
+        "generation": "initial-001",
+        "name": "clippy",
+        "argv": [
+          "./tools/cargo",
+          "clippy",
+          "--offline",
+          "--locked",
+          "--profile",
+          "ci",
+          "--target",
+          "aarch64-apple-darwin",
+          "-j2",
+          "-p",
+          "incant_script",
+          "--no-default-features",
+          "--features",
+          "compiler,physics-deterministic",
+          "--lib",
+          "--test",
+          "bindings_static",
+          "--test",
+          "project_bindings",
+          "--",
+          "-D",
+          "warnings"
+        ],
+        "source": "3c81bbe6763f78c10c7d13d08975f2ffeff7caa3",
+        "pid": 37051,
+        "exit_code": 0,
+        "seconds": 2.0015602500061505,
+        "reaped": true,
+        "log_sha256": "388d10a0c158291ea8eea89446c7faf2ac8196d7d4107186b410162dbf77360e",
+        "summaries": []
+      },
+      {
+        "generation": "initial-001",
+        "name": "lean",
+        "argv": [
+          "./tools/cargo",
+          "check",
+          "--offline",
+          "--locked",
+          "--profile",
+          "ci",
+          "--target",
+          "aarch64-apple-darwin",
+          "-j2",
+          "-p",
+          "incant_script",
+          "--no-default-features",
+          "--features",
+          "physics-deterministic",
+          "--lib"
+        ],
+        "source": "3c81bbe6763f78c10c7d13d08975f2ffeff7caa3",
+        "pid": 37076,
+        "exit_code": 0,
+        "seconds": 1.69434824999189,
+        "reaped": true,
+        "log_sha256": "61ed3c15d92caab541f5ef65f68c9d0d48f9716d2d6b6e772e40553d6e38fa23",
+        "summaries": []
+      },
+      {
+        "generation": "initial-001",
+        "name": "fmt",
+        "argv": [
+          "./tools/cargo",
+          "fmt",
+          "-p",
+          "incant_script",
+          "--",
+          "--check"
+        ],
+        "source": "3c81bbe6763f78c10c7d13d08975f2ffeff7caa3",
+        "pid": 37100,
+        "exit_code": 0,
+        "seconds": 0.19730679200438317,
+        "reaped": true,
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "summaries": []
+      },
+      {
+        "generation": "portability-001",
+        "name": "wasm-lean",
+        "argv": [
+          "./tools/cargo",
+          "check",
+          "--offline",
+          "--locked",
+          "--profile",
+          "ci",
+          "--target",
+          "wasm32-unknown-unknown",
+          "-j2",
+          "-p",
+          "incant_script",
+          "--no-default-features",
+          "--features",
+          "physics-deterministic",
+          "--lib"
+        ],
+        "source": "3c81bbe6763f78c10c7d13d08975f2ffeff7caa3",
+        "pid": 38053,
+        "exit_code": 0,
+        "seconds": 5.097678083999199,
+        "reaped": true,
+        "log_sha256": "6667a8451d0a4a7d6178bfb47503f27aa270ff44dc6935e5f640c2369ace16f8",
+        "summaries": []
+      },
+      {
+        "generation": "portability-001",
+        "name": "runtime-graph",
+        "argv": [
+          "python3",
+          "tools/check_runtime_dependencies.py",
+          "incant_script"
+        ],
+        "source": "3c81bbe6763f78c10c7d13d08975f2ffeff7caa3",
+        "pid": 38119,
+        "exit_code": 0,
+        "seconds": 0.5632513330056099,
+        "reaped": true,
+        "log_sha256": "6dff3366fe04e0273d21b25f6e69714ee1edabb1caf7be655230b2a13ee6648f",
+        "summaries": []
+      },
+      {
+        "generation": "portability-001",
+        "name": "conventions",
+        "argv": [
+          "python3",
+          "tools/generate_conventions.py",
+          "--check"
+        ],
+        "source": "3c81bbe6763f78c10c7d13d08975f2ffeff7caa3",
+        "pid": 38126,
+        "exit_code": 0,
+        "seconds": 0.04039983300026506,
+        "reaped": true,
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "summaries": []
+      },
+      {
+        "generation": "portability-001",
+        "name": "diff",
+        "argv": [
+          "git",
+          "diff",
+          "HEAD^",
+          "--check"
+        ],
+        "source": "3c81bbe6763f78c10c7d13d08975f2ffeff7caa3",
+        "pid": 38127,
+        "exit_code": 0,
+        "seconds": 0.041631708008935675,
+        "reaped": true,
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "summaries": []
+      },
+      {
+        "generation": "consumer-002",
+        "name": "compile",
+        "argv": [
+          "rustc",
+          "--edition=2024",
+          "--target",
+          "aarch64-apple-darwin",
+          "-C",
+          "opt-level=1",
+          "-L",
+          "dependency=/Users/andreyyurlov/.codex/incant-core-presentation-target/aarch64-apple-darwin/ci/deps",
+          "-L",
+          "dependency=/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps",
+          "--extern",
+          "incant_script=/Users/andreyyurlov/.codex/incant-core-presentation-target/aarch64-apple-darwin/ci/deps/libincant_script-71ed19e40e71a98a.rlib",
+          "--extern",
+          "incant_types=/Users/andreyyurlov/.codex/incant-core-presentation-target/aarch64-apple-darwin/ci/deps/libincant_types-7bcc324c0d36992e.rlib",
+          "/Users/andreyyurlov/.codex/incant-evidence/script-bindings-static-001/consumer-002/consumer.rs",
+          "-o",
+          "/Users/andreyyurlov/.codex/incant-evidence/script-bindings-static-001/consumer-002/generated-consumer"
+        ],
+        "pid": 37406,
+        "exit_code": 0,
+        "seconds": 2.822706624996499,
+        "reaped": true,
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "generation": "consumer-002",
+        "name": "execute",
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-evidence/script-bindings-static-001/consumer-002/generated-consumer"
+        ],
+        "pid": 37418,
+        "exit_code": 0,
+        "seconds": 0.12849824999284465,
+        "reaped": true,
+        "log_sha256": "4ab8e7454804199ea8c222404cc27c3818a6a5835f95528892157e94e17f881f"
+      }
+    ],
+    "distinct_test_cases": 156,
+    "test_groups": {
+      "library": 138,
+      "project_bindings": 12,
+      "bindings_static": 6
+    },
+    "generated_fixture_test_repeats_one_library_case": true,
+    "historical_failure": "Initial standalone consumer compile exits 1 with E0463 because host dependency search path omitted. Corrected consumer adds the host dependency path; generated sources and library hashes unchanged. No source failure or speedup inferred.",
+    "binary": {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-bindings-static-001/consumer-002/generated-consumer",
+      "sha256": "e8e5976422dcb6f33be17c8ae579842d5dadb6f191e1f40c5be04c783ed304e2",
+      "bytes": 1545792,
+      "bindings_source_bytes": 2323808,
+      "artifact_source_bytes": 2341746
+    }
+  },
+  "retained_hashes": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-bindings-static-001/initial-001/result.json",
+      "sha256": "8f68025d5489b0e5593e932febc8b4995cba9af68c99fdbb26522c1650f0dadc",
+      "bytes": 5552
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-bindings-static-001/initial-001/build.log",
+      "sha256": "e8ecba0d016a224b9eb097cdb14a4e846a0e702d9c1b0c75dd084e14a8f271d1",
+      "bytes": 219281
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-bindings-static-001/initial-001/tests-project_bindings.log",
+      "sha256": "d9287dfcdf0a506c7ce7c47f2cfacf06b1911110af3c98826df2171ea2806aa5",
+      "bytes": 1101
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-bindings-static-001/initial-001/tests-bindings_static.log",
+      "sha256": "84705e370749fe52f2fd7459e0c35de5cdc1c10822a1d9e3092d27abfccfd3a4",
+      "bytes": 575
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-bindings-static-001/initial-001/tests-incant_script.log",
+      "sha256": "305de215ae9b47bcfb8466aee1eb469f981fc3d80add95ec1161ad2699d0c071",
+      "bytes": 13318
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-bindings-static-001/initial-001/emit-fixture.log",
+      "sha256": "46c2b828100d8051ec1f937a8054e94b25cf6f104d5993c7f7f8c1975cc6d317",
+      "bytes": 218
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-bindings-static-001/initial-001/clippy.log",
+      "sha256": "388d10a0c158291ea8eea89446c7faf2ac8196d7d4107186b410162dbf77360e",
+      "bytes": 409
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-bindings-static-001/initial-001/lean.log",
+      "sha256": "61ed3c15d92caab541f5ef65f68c9d0d48f9716d2d6b6e772e40553d6e38fa23",
+      "bytes": 683
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-bindings-static-001/initial-001/fmt.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-bindings-static-001/portability-001/result.json",
+      "sha256": "affcaaef9f1665a25696acf097ae17c63a424e1d12fb59770a7b453800a045f0",
+      "bytes": 1937
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-bindings-static-001/portability-001/wasm-lean.log",
+      "sha256": "6667a8451d0a4a7d6178bfb47503f27aa270ff44dc6935e5f640c2369ace16f8",
+      "bytes": 1241
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-bindings-static-001/portability-001/runtime-graph.log",
+      "sha256": "6dff3366fe04e0273d21b25f6e69714ee1edabb1caf7be655230b2a13ee6648f",
+      "bytes": 52
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-bindings-static-001/portability-001/conventions.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-bindings-static-001/portability-001/diff.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-bindings-static-001/consumer-002/consumer-result.json",
+      "sha256": "8a39275b3be619354a7a30abe51efbc341a1540b6afbb76dad808bef95eb1c61",
+      "bytes": 3002
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-core-presentation-target/aarch64-apple-darwin/ci/deps/libincant_script-71ed19e40e71a98a.rlib",
+      "sha256": "36cda5e7c319c22e9093f0581bc49bc0699735764469e5e13ffa62eb93001ce3",
+      "bytes": 3415712
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-core-presentation-target/aarch64-apple-darwin/ci/deps/libincant_types-7bcc324c0d36992e.rlib",
+      "sha256": "7e438611232897c843afd0bfc286bd22e32419fdb7fd41fa8ca4c5d2126f045b",
+      "bytes": 3523536
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-bindings-static-001/initial-001/generated/behavior.rs",
+      "sha256": "ec28cf40babfcf642b6f6e6b6c3cd6e5b53556a6f8696325bf3974b4b2b04df1",
+      "bytes": 2341746
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-bindings-static-001/initial-001/generated/bindings.rs",
+      "sha256": "c36ec26a475ec2d90b194b9a17deaeaf21a84e703a5b106e89146b81efeed14b",
+      "bytes": 2323808
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-bindings-static-001/initial-001/generated/expected.json",
+      "sha256": "cd7f2346f9435fdc3f4fad033d2d90c150d05f857f7c256fa1cea4d25f5a879d",
+      "bytes": 417
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-bindings-static-001/consumer-002/consumer.rs",
+      "sha256": "8099d4f3d6de3708880343d24681ae9277d7ae7e1e751453614bbf7d6747e243",
+      "bytes": 2410
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-bindings-static-001/consumer-002/consumer-compile.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-bindings-static-001/consumer-002/consumer-execute.log",
+      "sha256": "4ab8e7454804199ea8c222404cc27c3818a6a5835f95528892157e94e17f881f",
+      "bytes": 103
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-bindings-static-001/consumer-002/consumer-binary.json",
+      "sha256": "04de9214e54c7ed8f52cad7c9f46d5187416ca7ccb3143929526b09c1fef49f4",
+      "bytes": 290
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-bindings-static-001/consumer-002/generated-consumer",
+      "sha256": "e8e5976422dcb6f33be17c8ae579842d5dadb6f191e1f40c5be04c783ed304e2",
+      "bytes": 1545792
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-bindings-static-001/initial-001/consumer-result.json",
+      "sha256": "43c1eb9ac38061bd937d7d8dfb87c69ec72860ece38b2210a7341d586b43fa83",
+      "bytes": 2534
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-bindings-static-001/initial-001/consumer-compile.log",
+      "sha256": "16492ef52121e6151e07c54da7dbd179cd4f2882e49684ccae5d65364e5515a9",
+      "bytes": 511
+    }
+  ],
+  "limits": [
+    "No reviewer compiler, test-binary, GPU, device or shipping workload execution. All execution evidence is producer-owned retained logs inspected and rehashed.",
+    "Strict Clippy applies to selected library and two integration targets, not an all-workspace claim. Wasm lean is compile-only.",
+    "No performance speedup, full Core 10000-entity gate, prior-engine improvement or GPU/FPS claim. Final portable packaging is a separate audit.",
+    "Property quotas bound logical bytes/nodes, not exact allocator resident memory; ordinary bounded allocations retain prior process OOM behavior."
+  ],
+  "mutations": "Only this external review receipt; no publisher source, refs or targets changed."
+}

@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "source": "d3a7b3eda62807db3aaf3d46229b5fb990f2d780",
+  "archive_sha256": "06aa6d2daf24d0da93ad0abd4e601486940e439000d628e46ea585d7d4a77d68",
+  "records": 29,
+  "collector_sha256": "903915dbb70f1400f0ba1f7d84bffe72de3cc00a78a882ee5412ae40049e9552",
+  "claim": "Retained native owner CPU tests and iOS library compilation only; no platform surface, device audio, shipping measurement or phase gate."
+}

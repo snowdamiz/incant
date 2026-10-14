@@ -10,6 +10,7 @@ mod audio_commands;
 mod bindings;
 #[cfg(feature = "compiler")]
 mod bindings_embed;
+mod bindings_static;
 mod budget;
 mod checkpoint;
 mod commands;
@@ -40,9 +41,10 @@ pub use artifact::{EmbeddedScript, ScriptMetadata};
 pub use bindings::{
     MAX_SCRIPT_INSTANCES, MAX_SCRIPT_SOURCES, ScriptBindings, ScriptInstance, ScriptValue,
 };
-#[cfg(feature = "native-checkpoints")]
-pub use checkpoint::NativeSessionCheckpoint;
+pub use bindings_static::{EmbeddedScriptInstance, EmbeddedScriptValue};
 pub use checkpoint::{CheckpointError, MAX_CHECKPOINT_BYTES, PendingSessionCheckpoint};
+#[cfg(feature = "native-checkpoints")]
+pub use checkpoint::{MAX_PERSISTED_SESSION_BYTES, NativeSessionCheckpoint};
 pub use compiled::CompiledScript;
 #[cfg(feature = "compiler")]
 pub use compiler::ScriptBuild;
@@ -66,6 +68,8 @@ pub enum SessionRequest {
 
 #[derive(Debug, Error)]
 pub enum ScriptError {
+    #[error(transparent)]
+    Haptics(#[from] incant_input::haptics::HapticError),
     #[error("this host does not accept session restart requests")]
     SessionRequestsUnsupported,
     #[error("script engine failed without a JavaScript diagnostic")]
@@ -138,6 +142,7 @@ pub struct ScriptHost {
     persistent_opt_in: Vec<bool>,
     persistent: std::rc::Rc<std::cell::RefCell<persistence::Store>>,
     project: Option<bindings::BoundProject>,
+    chunk_ids: loan::IdCache,
     context: Context,
     _runtime: Runtime,
     _compiled: CompiledScript,
@@ -149,6 +154,8 @@ pub struct ScriptHost {
     animations: animations::Scratch,
     restart_requests: bool,
     session_request: Option<SessionRequest>,
+    haptic_capabilities: incant_input::haptics::HapticCapabilities,
+    haptic_requests: incant_input::haptics::HapticRequests,
     failed: bool,
 }
 
@@ -230,6 +237,7 @@ impl ScriptHost {
             persistent_opt_in,
             persistent: Default::default(),
             project,
+            chunk_ids: Default::default(),
             context,
             _runtime: runtime,
             _compiled: compiled,
@@ -241,6 +249,8 @@ impl ScriptHost {
             animations: animations::Scratch::default(),
             restart_requests: false,
             session_request: None,
+            haptic_capabilities: Default::default(),
+            haptic_requests: Default::default(),
             failed: false,
         })
     }
@@ -273,6 +283,38 @@ impl ScriptHost {
         Ok(self.session_request.take())
     }
 
+    /// Current trusted host authority; never read from a checkpoint or recording.
+    pub fn set_haptic_capabilities(
+        &mut self,
+        value: incant_input::haptics::HapticCapabilities,
+    ) -> Result<(), ScriptError> {
+        self.haptics_ready()?;
+        self.haptic_capabilities = value;
+        Ok(())
+    }
+    pub(crate) fn haptics_ready(&self) -> Result<(), ScriptError> {
+        if self.failed {
+            return Err(ScriptError::FailedSession);
+        }
+        if !self.haptic_requests.is_empty() {
+            return Err(incant_input::haptics::HapticError::Pending.into());
+        }
+        Ok(())
+    }
+    /// Consume only after the complete composed tick has accepted. Delivery is
+    /// asynchronous host work, not proof of physical actuator success.
+    pub fn take_haptics(&mut self) -> Result<incant_input::haptics::HapticRequests, ScriptError> {
+        if self.failed {
+            return Err(ScriptError::FailedSession);
+        }
+        Ok(std::mem::take(&mut self.haptic_requests))
+    }
+    /// Host suspension/replacement discards transient effects and authority.
+    pub fn clear_haptics(&mut self) {
+        self.haptic_requests = Default::default();
+        self.haptic_capabilities = Default::default();
+    }
+
     /// Run only the script phase. Native simulation stepping remains explicitly
     /// owned by the caller. Tick is unchanged; hierarchy is refreshed on return.
     /// Undo storage is bounded to 32 MiB of numeric columns, separate from the
@@ -293,6 +335,7 @@ impl ScriptHost {
         if self.failed {
             return Err(ScriptError::FailedSession);
         }
+        self.haptics_ready()?;
         if !dt.is_finite() || dt <= 0. || dt > 1. {
             return Err(ScriptError::InputLimit);
         }
@@ -328,14 +371,14 @@ impl ScriptHost {
                     return Err(ScriptError::ScriptBindings);
                 }
                 for (index, group) in project.groups.iter_mut().enumerate() {
-                    let instances = group
+                    let (instances, ids) = group
                         .snapshot(&ctx, &freeze, world, &mut retired)
                         .map_err(diagnostics::allocation)?;
                     let scope = schedule::Scope::Source(group.source);
                     if instances.is_empty() {
                         schedule.cancel_scope(scope);
                     } else {
-                        groups.push((index, scope, instances, group.ids()));
+                        groups.push((index, scope, instances, ids));
                     }
                 }
             } else {
@@ -384,7 +427,8 @@ impl ScriptHost {
                 .clone()
                 .restore(&ctx)
                 .map_err(diagnostics::allocation)?;
-            let commands = commands::TickCommands::new(self.restart_requests);
+            let commands =
+                commands::TickCommands::new(self.restart_requests, self.haptic_capabilities);
             let hud = hud::expose(&ctx, world)?;
             let api = commands.expose(&ctx).map_err(|error| {
                 diagnostics::javascript(&ctx, error, "command bindings", &self.deadline)
@@ -411,7 +455,7 @@ impl ScriptHost {
                         )
                     })?;
                     let mut loan = loan::Loan::new(columns)?;
-                    let chunks = match loan.expose(&ctx) {
+                    let chunks = match loan.expose(&ctx, &freeze, &mut self.chunk_ids) {
                         Ok(chunks) => chunks,
                         Err(error) => {
                             // Prototype setters can run while metadata is installed.
@@ -507,26 +551,37 @@ impl ScriptHost {
                     self.synchronous.check(&ctx, false)?;
                     queries.check()?;
                     loan.validate_numeric()?;
-                    let (commands, request) = commands.take()?;
+                    let (commands, request, haptics) = commands.take()?;
                     schedule.apply(timers.take()?)?;
                     let logs = logs.take()?;
                     let changes = persistent.take()?;
-                    Ok((loan.finish(), commands, request, schedule, logs, changes))
+                    Ok((
+                        loan.finish(),
+                        commands,
+                        request,
+                        haptics,
+                        schedule,
+                        logs,
+                        changes,
+                    ))
                 })
                 .map_err(ScriptError::Structural)?
         });
         // No JS value or raw column pointer crosses this sync point. Apply is
         // native host work, after the script CPU/deferred-work checks; its time
         // is separate from the JS execution budget, not a claimed phone budget.
-        let result = result.and_then(|(undo, mut commands, request, schedule, logs, changes)| {
-            let _profile = incant_profile::scope(incant_profile::Phase::ScriptApply);
-            undo.apply(world, &mut commands)?;
-            self.logs.commit(schedule.tick, logs);
-            self.schedule = schedule;
-            self.persistent.borrow_mut().apply(changes);
-            self.session_request = self.session_request.or(request);
-            Ok(())
-        });
+        let result = result.and_then(
+            |(undo, mut commands, request, haptics, schedule, logs, changes)| {
+                let _profile = incant_profile::scope(incant_profile::Phase::ScriptApply);
+                undo.apply(world, &mut commands)?;
+                self.logs.commit(schedule.tick, logs);
+                self.schedule = schedule;
+                self.persistent.borrow_mut().apply(changes);
+                self.session_request = self.session_request.or(request);
+                self.haptic_requests = haptics;
+                Ok(())
+            },
+        );
         if result.is_err() {
             self.failed = true;
         }
@@ -599,6 +654,9 @@ mod structural_tests;
 mod tests;
 
 #[cfg(all(test, feature = "compiler"))]
+mod loan_id_tests;
+
+#[cfg(all(test, feature = "compiler"))]
 mod input_tests;
 
 #[cfg(all(test, feature = "compiler"))]
@@ -626,3 +684,6 @@ mod hud_tests;
 
 #[cfg(all(test, feature = "compiler"))]
 mod restart_request_tests;
+
+#[cfg(all(test, feature = "compiler"))]
+mod haptic_tests;

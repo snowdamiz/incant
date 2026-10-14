@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "source": "ab738f41781689b008b0572ce6ca07f78a0788e3",
+  "initial_source": "34d84332cb288b7542e2264def874c45d91fdb50",
+  "archive_sha256": "ada995d70c8677aca599d76ad342274149ae7187b1db39d08c07b32e2f9a031c",
+  "records": 43,
+  "collector_sha256": "302b6f0e5e545e4e86fed41f52bf00973dd21e06f164d3b9d8b3bc070dfbebfd",
+  "claim": "Mac CPU, compiler and Swift typechecking evidence only. Native Apple surface/device-audio source is implemented, but no GPU/audio-device/app execution or exported app is claimed. IME, mobile haptics and platform packaging remain follow-up."
+}

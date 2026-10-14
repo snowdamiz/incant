@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "scope": "A host-port checklist, not an executed conformance percentage. All AOT host rows remain pending.",
+  "native_context_members": ["hud", "instances", "state", "flipbooks", "animations", "chunks", "dt", "commands", "input", "physics", "navigation", "localization", "clock", "timers", "log"],
+  "requirements": [
+    {"name": "strict frontend and recursive props", "fixtures": ["sdk-behavior", "recursive-props", "weak-metadata"], "existing": ["tools/native_script/cook.mjs", "crates/incant_script/tests/project_bindings.rs"], "aot_host": "pending"},
+    {"name": "borrowed ECS typed columns, detach on success and failure, no retained numeric views", "existing": ["crates/incant_script/src/loan.rs", "crates/incant_script/src/tests.rs"], "aot_host": "pending"},
+    {"name": "transaction rollback, caught invalid calls, expiring callbacks, structural commands", "fixtures": ["closure", "caught-error"], "existing": ["crates/incant_script/src/tests.rs"], "aot_host": "pending"},
+    {"name": "memory, deadline, typed errors and capability denial", "existing": ["crates/incant_script/src/lib.rs", "crates/incant_script/src/tests.rs"], "aot_host": "pending"},
+    {"name": "immutable snapshots, persistence and native physics continuation", "existing": ["crates/incant_script/src/checkpoint/mod.rs", "crates/incant_script/src/checkpoint/native/persisted.rs"], "aot_host": "pending"},
+    {"name": "physics, navigation, input, localization, clocks, timers and logs", "existing": ["sdk/ts/src/native.d.ts", "crates/incant_script/tests/spatial.rs"], "aot_host": "pending"},
+    {"name": "HUD, audio, animations, root motion and flipbooks", "existing": ["crates/incant_script/tests/hud.rs", "crates/incant_script/tests/audio_controls.rs", "crates/incant_script/tests/animations.rs", "crates/incant_script/tests/flipbooks.rs"], "aot_host": "pending"},
+    {"name": "haptics and restart, including failure cleanup and receiver authority", "existing": ["sdk/ts/src/native.d.ts", "crates/incant_script/src/checkpoint/native/persisted.rs"], "aot_host": "pending"},
+    {"name": "stable floating-point semantics and deterministic selected physics mode", "fixtures": ["bulk-kernel", "for-of"], "existing": ["docs/adr/0006-scripting.md"], "aot_host": "pending"}
+  ],
+  "decision18": {"sdk100percent": "unmeasured", "nativeMac2x": "unmeasured", "iosNoJit": "unmeasured", "mobileAddedBytesUnder5MB": "unmeasured", "maintainedSecurityRelease": "unresolved", "adopted": false}
+}

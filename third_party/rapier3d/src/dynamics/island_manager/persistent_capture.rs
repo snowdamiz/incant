@@ -3,6 +3,11 @@ use super::*;
 use crate::pipeline::checked_restore::capture::util::{copy, count, handle, map, total};
 use incant_physics_snapshot::{self as s, Budget, Error};
 impl IslandManager {
+    /// Exact count of already queued unlinks; observing never drains the journal.
+    pub(crate) fn checkpoint_pending_removal_count(&self) -> usize {
+        self.persistent.removal_journal.len()
+    }
+
     pub(crate) fn checkpoint_capture(
         &self,
         identity: Identity,

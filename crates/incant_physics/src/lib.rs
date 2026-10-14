@@ -79,8 +79,8 @@ impl PreparedPhysics {
 #[derive(Default)]
 pub struct PhysicsRuntime(incant_physics_runtime::PhysicsRuntime<String>);
 impl PhysicsRuntime {
-    pub fn sync(&mut self, prepared: PreparedPhysics) {
-        self.0.sync(prepared.0);
+    pub fn sync(&mut self, prepared: PreparedPhysics) -> Result<(), PhysicsError> {
+        self.0.sync(prepared.0)
     }
     pub fn step(&mut self, dt: f64) -> Result<(), PhysicsError> {
         self.0.step(dt)

@@ -1,4 +1,6 @@
 #![cfg(feature = "compiler")]
+#[path = "project_bindings/cache.rs"]
+mod cache;
 use incant_runtime::{
     CookedEntity, CookedScene, FrameCommands, NativeWorld, StableId, StructuralCommand,
 };
@@ -342,6 +344,14 @@ fn dangerous_property_names_are_frozen_own_data_even_after_guest_changes_intrins
     );
     let mut world = NativeWorld::new(initial);
     let mut host = ScriptHost::for_world(code, &world).unwrap();
+    for _ in 0..3 {
+        host.tick(&mut world, 0.1).unwrap();
+    }
+    let mut commands = FrameCommands::default();
+    commands.push(StructuralCommand::Despawn(id(2))).unwrap();
+    world.apply(&mut commands).unwrap();
+    commands.push(StructuralCommand::Spawn(entity(2))).unwrap();
+    world.apply(&mut commands).unwrap();
     host.tick(&mut world, 0.1).unwrap();
 }
 

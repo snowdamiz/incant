@@ -7,6 +7,12 @@ mod checkpoint;
 mod gpu;
 #[cfg(feature = "mobile-ffi")]
 pub mod mobile;
+#[cfg(feature = "mobile-android")]
+mod mobile_android;
+#[cfg(feature = "mobile-host")]
+pub mod mobile_host;
+#[cfg(all(feature = "mobile-apple", target_vendor = "apple"))]
+pub mod mobile_native;
 mod observe;
 mod package;
 mod pcm_output;
@@ -133,7 +139,7 @@ fn run_owned(
     let mut restart = restart::Restart::prepare(&scene, &program, &actions, &clips, &spatial)?;
     let mut game = if let Some(path) = &checkpoint.load {
         Player::from_checkpoint(
-            &bounded(path, incant_script::MAX_CHECKPOINT_BYTES)?,
+            &bounded(path, checkpoint::MAX_CHECKPOINT_BYTES)?,
             &scene,
             program,
             actions,
@@ -146,10 +152,11 @@ fn run_owned(
     };
     restart.enable(&mut game)?;
     game.validate_ui_recording(replay.has_ui())?;
-    // A requested save must be supported before gameplay begins. The final save
-    // is checked again: a script may introduce an unsupported capability later.
+    // Check the selected route before gameplay. Native physics has no completed
+    // owner before its first tick, so actual native save admission is performed
+    // strictly at the final boundary, before either output is published.
     if checkpoint.save.is_some() {
-        game.checkpoint_bytes()?;
+        game.preflight_checkpoint()?;
     }
     let start_tick = game.world()?.tick();
     let (end_tick, frames) =

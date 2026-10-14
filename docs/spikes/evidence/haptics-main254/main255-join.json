@@ -1,0 +1,90 @@
+{
+  "base": "7c746ebec7e5553bf34c2643ab4c952a1a433db7",
+  "main": "96e8a9daba83a8536bb2b4d3eebb0d8997a6cb13",
+  "paths": [
+    {
+      "path": "AGENTS.md",
+      "old_sha256": "cab17f69f519b40681263a4e6cdf6de7d74f00e3d25316c769e6ec63ee3e145a",
+      "new_sha256": "41f368eb741ef4e2f40f303c88433513ab0501b9e85d0e128f1f38a306ebaac5",
+      "in_frozen_inputs": true
+    },
+    {
+      "path": "CLAUDE.md",
+      "old_sha256": "a84cd0f5441a4c40d11c1b2555fc94698ce470e27d692ce3930190ca275578dc",
+      "new_sha256": "06c66cf4e355fb0a89a37cbb9a2537eb30b07695b6fe300c190ba871e4b30b34",
+      "in_frozen_inputs": false
+    },
+    {
+      "path": "PLAN.md",
+      "old_sha256": "c60adc7457e6f5929b3430876f6b8ea02acffce5bf55fbaae9090933fe4aab6c",
+      "new_sha256": "42053ef28591c98dd14124fde21edf45589ac8c8f60dc93c2828c6cb5bf81911",
+      "in_frozen_inputs": true
+    },
+    {
+      "path": "STATUS.md",
+      "old_sha256": "4958197b9f18735788dd049dfd60eab34136ab8247c5797c9e13a2e770fdc93d",
+      "new_sha256": "e9cb5d8fe1b1d2f8dcfd201feaf599a06da01fb54250739a9953ef9ca686d3de",
+      "in_frozen_inputs": false
+    },
+    {
+      "path": "docs/adr/0003-physics.md",
+      "old_sha256": "c3509ef849dfc37e9b81fe42d53055d35cf05a7502dd34ae5c97ebaa7b314991",
+      "new_sha256": "ad63417670fb95ae6fbecd66b79ae184a62b0f5c1323c8b34d6f5202889aa4a1",
+      "in_frozen_inputs": false
+    },
+    {
+      "path": "docs/adr/0006-scripting.md",
+      "old_sha256": "c04d776017250f420143b7368d8ed39ce09bc2f381bfc8010fe9aaeb147412d8",
+      "new_sha256": "c318a8945f25f03d4a349429027488d165f968df45fc8b0e4d0952812a3ad213",
+      "in_frozen_inputs": false
+    },
+    {
+      "path": "docs/adr/0014-ci.md",
+      "old_sha256": "72807718d6919117442ec6984fb03cc2276220f20469727a07781ba2c87be722",
+      "new_sha256": "bae80a24b1e6ebd7b372804ecb4c9c6b0f57edec13182dfd230573fc3f27f2c4",
+      "in_frozen_inputs": false
+    },
+    {
+      "path": "docs/conventions/shared.md",
+      "old_sha256": "f33538bc651ebe7fae3a61dec87fcde02eb7542795ecce634a989f6fb48a9bf0",
+      "new_sha256": "de8a90fff9dcc94d8e65436df72a30eb8d1f6d3056d6421c1a3b1bf390b7bb92",
+      "in_frozen_inputs": false
+    },
+    {
+      "path": "docs/spikes/evidence/mac-gate-policy/qualification.json",
+      "old_sha256": null,
+      "new_sha256": "d2feb56e00f99f8a8c80908edf502d68ff9fa47cf8926a8d31b53b6f7dce4b42",
+      "in_frozen_inputs": false
+    },
+    {
+      "path": "docs/spikes/evidence/mac-gate-policy/root-review.json",
+      "old_sha256": null,
+      "new_sha256": "4ab1f3a13d11c436fd2b459b1008b9641593e74e8154ee07a90e7058c88527de",
+      "in_frozen_inputs": false
+    },
+    {
+      "path": "docs/spikes/evidence/release-checkpoint-30/artifacts.json.gz",
+      "old_sha256": null,
+      "new_sha256": "61848e479663aa3a5925bba7dcfc1520a05cce066b8a0808be06b14b8960bfad",
+      "in_frozen_inputs": false
+    },
+    {
+      "path": "docs/spikes/evidence/release-checkpoint-30/manifest.json",
+      "old_sha256": null,
+      "new_sha256": "0fa556496ac847fd1e4eb53a277aeeefc5dc677abe0408aefd82cab5528095c1",
+      "in_frozen_inputs": false
+    },
+    {
+      "path": "docs/spikes/evidence/release-checkpoint-30/verify.py",
+      "old_sha256": null,
+      "new_sha256": "f244fc8532f94394d27559b1bf42db83232a08bf0d98bcbab858dfc91456433d",
+      "in_frozen_inputs": false
+    }
+  ],
+  "input_exceptions": [
+    "AGENTS.md",
+    "PLAN.md"
+  ],
+  "production_build_tool_changes": [],
+  "scope": "Reviewed policy and promotion documentation only; no implementation/build/tool change or new execution claim."
+}

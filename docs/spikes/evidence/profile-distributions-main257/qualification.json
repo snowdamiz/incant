@@ -1,0 +1,9 @@
+{
+  "source": "f0f91be4fd1761edd9b0dfd042f5d818ca8ee1aa",
+  "main": "5017908020c318e644407c8a83342a30b68cde51",
+  "profiler_packet": "f57232fe9cf030c1c59096028db1995b08953f43",
+  "runner_packet": "75b44848fd24c012459244325793099c6b1f7e6d",
+  "commands": 24,
+  "scope": "Focused current Mac CI-profile CPU correctness, report parser and compiler checks. Not a shipping performance sample or phase gate. Root actual shipping export/measurement remains independent.",
+  "review": "Final current-main source and CPU evidence independently accepted; exact-head fast check required before main merge."
+}

@@ -1,0 +1,19 @@
+{
+  "format": "incant-mac-fast10k-independent-packaging-audit",
+  "at": "2026-10-14T02:11:21.686600+00:00",
+  "base": "64abee888ab78f950a84f9bfae26195d06e94734",
+  "manifest_sha256": "adef101b1e1ef007fa4c578d1b3b504a5f5265ed165ea9cc1776ee5cb8d94540",
+  "audit_result_sha256": "b7711f6c75eba1b7e0eeaf3c2103d8017f7e6f819f117eca76856ce0c8aeb673",
+  "command": "python3 docs/spikes/evidence/mac-core-fast10k/verify.py --verify-only --external --git-source",
+  "exit": 0,
+  "other_checks": {
+    "generate_conventions_check": 0,
+    "git_diff_check": 0
+  },
+  "scope": "Read-only source/archive/measurement audit; no player, export, build or fresh measurement execution. Final independent packet review pending.",
+  "limits": [
+    "External originals are mandatory for --external; portable default verifies retained text/log payloads and declared hashes/sizes.",
+    "Complete successful source inventories are Git-replayable ancestors; old compiler timeout source is preserved as a hash-bound historical inventory.",
+    "Initial auditor development assumptions were corrected: input_receipt means stress receipt, and actual observation output sorts by name. No engine evidence changed."
+  ]
+}

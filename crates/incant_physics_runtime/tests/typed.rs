@@ -43,13 +43,14 @@ fn specs<I: Ord>(scene: I, floor: I, ball: I) -> PreparedPhysics<I> {
 #[test]
 fn binary_ids_and_text_ids_have_identical_motion_and_keep_unchanged_bodies_asleep() {
     let mut native = PhysicsRuntime::default();
-    native.sync(specs(id(0), id(1), id(2)));
+    native.sync(specs(id(0), id(1), id(2))).unwrap();
     let mut text = PhysicsRuntime::default();
     text.sync(specs(
         "scene".to_owned(),
         "floor".to_owned(),
         "object".to_owned(),
-    ));
+    ))
+    .unwrap();
     for _ in 0..600 {
         let motion = native.state(&id(0), &id(2)).unwrap().clone();
         native.sync_motion(&id(0), &id(2), &motion).unwrap();

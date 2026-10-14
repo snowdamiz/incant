@@ -1,0 +1,14 @@
+{
+  "at": "2026-10-14T02:13:20.478551+00:00",
+  "head": "5620a387ee250761a98b7d9bd292e46742e40c3e",
+  "manifest_sha256": "adef101b1e1ef007fa4c578d1b3b504a5f5265ed165ea9cc1776ee5cb8d94540",
+  "accepted": true,
+  "scope": "Historical actual Mac shipping evidence and honest failed2ms gate reporting; not fresh main260 qualification or phase approval",
+  "review": [
+    "Read full scope/limitations/table",
+    "Reviewed source/build/functional/raw histogram and interval audit",
+    "Executed --verify-only --external --git-source: exit0 supervisor98291 reaped;416records102payloads251external,20542+20580Gitinputs,12controls",
+    "Verified original timeout preserved and source/script identity distinction"
+  ],
+  "findings": []
+}

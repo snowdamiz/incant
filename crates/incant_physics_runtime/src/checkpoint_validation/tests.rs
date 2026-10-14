@@ -22,9 +22,12 @@ fn body(shape: ColliderShape) -> PhysicsRuntime<StableId> {
         state: state(),
     };
     let mut runtime = PhysicsRuntime::default();
-    runtime.sync(
-        PreparedPhysics::new(BTreeMap::from([(id(1), BTreeMap::from([(id(10), spec)]))])).unwrap(),
-    );
+    runtime
+        .sync(
+            PreparedPhysics::new(BTreeMap::from([(id(1), BTreeMap::from([(id(10), spec)]))]))
+                .unwrap(),
+        )
+        .unwrap();
     runtime.step(1. / 60.).unwrap();
     runtime
 }
@@ -65,21 +68,25 @@ fn checkpoint_outer_joins_preserve_removed_entity_and_scene_exit_events() {
     };
     for remove_scene in [false, true] {
         let mut runtime = PhysicsRuntime::default();
-        runtime.sync(
-            PreparedPhysics::new(BTreeMap::from([(
-                id(1),
-                BTreeMap::from([(id(10), spec.clone()), (id(11), spec.clone())]),
-            )]))
-            .unwrap(),
-        );
+        runtime
+            .sync(
+                PreparedPhysics::new(BTreeMap::from([(
+                    id(1),
+                    BTreeMap::from([(id(10), spec.clone()), (id(11), spec.clone())]),
+                )]))
+                .unwrap(),
+            )
+            .unwrap();
         runtime.step(1. / 60.).unwrap();
         assert_eq!(runtime.events().len(), 1);
         assert!(runtime.events()[0].entered);
         assert_eq!(validate(&runtime), Ok(()));
         if remove_scene {
-            runtime.sync(PreparedPhysics::new(BTreeMap::new()).unwrap());
+            runtime
+                .sync(PreparedPhysics::new(BTreeMap::new()).unwrap())
+                .unwrap();
         } else {
-            runtime.remove(&id(1), &id(11));
+            runtime.remove(&id(1), &id(11)).unwrap();
         }
         runtime.step(1. / 60.).unwrap();
         assert_eq!(runtime.events().len(), 1);

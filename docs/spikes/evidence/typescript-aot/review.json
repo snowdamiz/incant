@@ -1,0 +1,44 @@
+{
+  "at": "2026-10-14T02:38:56.880529+00:00",
+  "head": "a15558c5daf46b37653af47e875aad1fe448631f",
+  "manifest": "90f2ee8c6bdcf84fc7276d5fa9812ac26b9cc1066a7d2a69d1e99836449403b9",
+  "commands": [
+    {
+      "argv": [
+        "python3",
+        "-B",
+        "tools/probes/typescript-aot/collect.py",
+        "--verify-only",
+        "--external"
+      ],
+      "exit": 0,
+      "stdout": "576a6b04328dc25bab1c03e4d61fd3a5d184bc8dbf3ce0acf4daedd25553afa9",
+      "stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/probes/typescript-aot",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "exit": 0,
+      "stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": "980f2ebf91ffcb4687397751076e10456b87195013423f59f704bfd3dcc9118c"
+    }
+  ],
+  "review": "Actual same-source compiler controls and SDK frontend cook only, five distinct AssemblyScript diagnostics and one arithmetic control; no performance, hostconformance, securitymaintenance oradoption claim. Both historical runs preserved. No production runtime/dependency changes.",
+  "status": "accepted_scoped_language_spike",
+  "limitations": [
+    "Static Hermes not built",
+    "100 percent SDK hostconformance untested",
+    "No shipping or iOS artifacts",
+    "Remaining adoption gates unmeasured"
+  ]
+}

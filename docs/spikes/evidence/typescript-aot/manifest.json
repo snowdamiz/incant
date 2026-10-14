@@ -1,0 +1,662 @@
+{
+  "version": 1,
+  "scope": "Language observations only; native AOT and all five adoption conditions remain open.",
+  "decision18": {
+    "sdk100percent": "unmeasured",
+    "nativeMac2x": "unmeasured",
+    "iosNoJit": "unmeasured",
+    "mobileAddedBytesUnder5MB": "unmeasured",
+    "maintainedSecurityRelease": "unresolved",
+    "adopted": false
+  },
+  "sources": {
+    "package-lock.json": "cbea068b7d9182270271319a7a77d24805b9c9c66ed5e9eb3e188d60e5337c60",
+    "sdk/ts/src/generated.d.ts": "5cdbd8bd50ff57692f438ea0d592cd1b149ccbb4f692a7b85117f8a486847431",
+    "sdk/ts/src/native.d.ts": "85dcfa025f687c977484ac3b22f72c7e34567f723778e5c08cf15d11ac344518",
+    "tools/native_script/cook.mjs": "326d0a5817798aabac8c057fb4174ec0a81ee86e97ace22a60f6d51c4d84be37",
+    "tools/native_script/graph.mjs": "b681b4df2feecbaba82ce55dc13cc26aebfc9e9c1062753338e9312415554841",
+    "tools/native_script/typecheck_host.mjs": "4cc7c7d0d212547a6ed55286eb8786d1cfdd66f96d1116e3f4e8f7145d5132c4",
+    "tools/probes/typescript-aot/README.md": "22e3c95b735c2ccb45bb093d1aa1bc42cef6917eaa91a29369e4df9dcd79a939",
+    "tools/probes/typescript-aot/collect.py": "201e2644c016468c888cff102f078c1e2fab8ca6469b7c18445ff9ab22d2e8c8",
+    "tools/probes/typescript-aot/coverage.json": "98a5de3d39425ad799f6f05a846504f810287d9a9760f093316545499e8e2137",
+    "tools/probes/typescript-aot/fixtures/bulk-kernel.ts": "39c9edc80938367b78502abeac3489ec461f35cddc312b4987a2d6a0794af47e",
+    "tools/probes/typescript-aot/fixtures/caught-error.ts": "dc317d808604cbb0110d44680eef2778f0c6ca3cc1e2078921f8503a77b8081f",
+    "tools/probes/typescript-aot/fixtures/closure.ts": "3602e9994c731831a31d79c487bf65ca148ddb410206556b3b5acb8bd0e8a568",
+    "tools/probes/typescript-aot/fixtures/for-of.ts": "40ba4748d4b5d0033cefe59a1089e15dc5f00c4f732ceecd933801a7fcfea713",
+    "tools/probes/typescript-aot/fixtures/recursive-props.ts": "152bc334bebfd473771921f8a8f95ecec832c3c07d50da0bb0907b6f5f18b6e4",
+    "tools/probes/typescript-aot/fixtures/sdk-behavior.ts": "b87442b167c2d5082cecb9f8d69f63ac3ca8d5f2f53c571f85a0b384bc7723a2",
+    "tools/probes/typescript-aot/fixtures/weak-metadata.ts": "a36b61e95e00b5661776bfd6f09fe9beb84bfa0d6dda8783b0cfcdb532209713",
+    "tools/probes/typescript-aot/run.mjs": "0e14770065214d778cf9e1c6ea4f6d6fb5ab330213591c6ff4acfc7cae94b769",
+    "tools/probes/typescript-aot/test_collect.py": "2fd1f59bc82ca4f640368e66a2be9ad83d1cc53889c77d7460ecb07a6eb25a46",
+    "tools/probes/typescript-aot/toolchain/package-lock.json": "f58581abd2fc2c0e7c8ead7713709d6d4bd7e287ab1b9e9271d4846df46b2477",
+    "tools/probes/typescript-aot/toolchain/package.json": "78e4c2864303f5ecd30426e6fa5464055dc6b0c6fa8c195532ab9c77538ed8bd",
+    "tools/probes/typescript-aot/upstream.json": "722b5f06d1180936eda8c73607806b7bec3902c531a8ace24ceaa4dfbaa833a5"
+  },
+  "records": [
+    {
+      "path": "upstream/assembly-head.json",
+      "bytes": 26604,
+      "sha256": "bc1cc65b2fb8146c3ee6b0e501fb7ac00ba8fd5b31376e9ad139d2f7289462dc",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/upstream/assembly-head.json"
+    },
+    {
+      "path": "upstream/assembly-npm.json",
+      "bytes": 938,
+      "sha256": "4c739ea309c4a2f40e2dd8f3bca27f441bff66d1515c9492945c551e9d6f52cb",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/upstream/assembly-npm.json"
+    },
+    {
+      "path": "upstream/assembly-release-source.json",
+      "bytes": 26604,
+      "sha256": "bc1cc65b2fb8146c3ee6b0e501fb7ac00ba8fd5b31376e9ad139d2f7289462dc",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/upstream/assembly-release-source.json"
+    },
+    {
+      "path": "upstream/assembly-releases.json",
+      "bytes": 7251,
+      "sha256": "89fa49ab5d59e068c5917a0718adaaa62488f3723d081897a83307737cb997e7",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/upstream/assembly-releases.json"
+    },
+    {
+      "path": "upstream/assembly-tree.json",
+      "bytes": 347872,
+      "sha256": "253d485dd927c0f89aa20c66eb7138449cbb4866ce8ee8d0c852aecaba4ba01c",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/upstream/assembly-tree.json"
+    },
+    {
+      "path": "upstream/hermes/API/hermes/CompileJS.h",
+      "bytes": 3039,
+      "sha256": "d1de3a9804eacadea089790f004d9b6cba843b36234ac564a624372f4a96cbc2",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/upstream/hermes/API/hermes/CompileJS.h"
+    },
+    {
+      "path": "upstream/hermes/API/hermes/hermes.h",
+      "bytes": 8212,
+      "sha256": "4c50981c18cc3b0399532a6b5e1e0735f34c81761514bef3b4e4ffa363a851ce",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/upstream/hermes/API/hermes/hermes.h"
+    },
+    {
+      "path": "upstream/hermes/CMakeLists.txt",
+      "bytes": 32678,
+      "sha256": "75bc37a90889b976b01528c6a389196ecff15bcf6af71eddc74936c03e08e1f7",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/upstream/hermes/CMakeLists.txt"
+    },
+    {
+      "path": "upstream/hermes/LICENSE",
+      "bytes": 1088,
+      "sha256": "da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/upstream/hermes/LICENSE"
+    },
+    {
+      "path": "upstream/hermes/README.md",
+      "bytes": 3571,
+      "sha256": "64a7dbce19a64c89a9c3a563cd6a2fa3fd0192b82a0496655d018294561f7680",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/upstream/hermes/README.md"
+    },
+    {
+      "path": "upstream/hermes/doc/BuildingAndRunning.md",
+      "bytes": 4079,
+      "sha256": "075b5331199bba1c4979414c4309df0e9db4a53b20f5248b8c7f3b928ed68bc9",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/upstream/hermes/doc/BuildingAndRunning.md"
+    },
+    {
+      "path": "upstream/hermes/doc/blog/2024-12-19-static-hermes-update-dec-2024.md",
+      "bytes": 3063,
+      "sha256": "ae849190d84ecce629115f5f1c583afc74024865aa2fd7daca481b0941348322",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/upstream/hermes/doc/blog/2024-12-19-static-hermes-update-dec-2024.md"
+    },
+    {
+      "path": "upstream/hermes/include/hermes/VM/JSTypedArray.h",
+      "bytes": 20197,
+      "sha256": "c756b190a3eb5f7edf4d0f4d86295ae215496aae56ec14f068ddca1e85e5eee1",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/upstream/hermes/include/hermes/VM/JSTypedArray.h"
+    },
+    {
+      "path": "upstream/hermes/include/hermes/VM/static_h.h",
+      "bytes": 66068,
+      "sha256": "fafffcd691e05e1ca73ffc1f63ec7b748cd2b99fffabce98a037864a8327c9c8",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/upstream/hermes/include/hermes/VM/static_h.h"
+    },
+    {
+      "path": "upstream/hermes/tools/shermes/CMakeLists.txt",
+      "bytes": 3646,
+      "sha256": "ff67dcb12c2fcc791b8bfe8ae94a511975004ef2ff2d5dfdb4ac4226f1548da1",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/upstream/hermes/tools/shermes/CMakeLists.txt"
+    },
+    {
+      "path": "upstream/hermes/tools/shermes/compile.cpp",
+      "bytes": 16560,
+      "sha256": "3d899cf9e99c550e7549b13449c63b2dfe1a0a20e9b045610c705f7632925a27",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/upstream/hermes/tools/shermes/compile.cpp"
+    },
+    {
+      "path": "upstream/hermes/tools/shermes/shermes.cpp",
+      "bytes": 35907,
+      "sha256": "80f97ebc29d72cef62b4bb3e3b92a1c5fc97ed7801b1b09d089247f359d1976f",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/upstream/hermes/tools/shermes/shermes.cpp"
+    },
+    {
+      "path": "upstream/hermes-main-head.json",
+      "bytes": 10701,
+      "sha256": "8eaa96fd02d1424e4b665e304104db9f8fc405ad0abd979b4db529e007a25d4e",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/upstream/hermes-main-head.json"
+    },
+    {
+      "path": "upstream/hermes-releases.json",
+      "bytes": 51568,
+      "sha256": "0611eb59fca9f5d7edb58075c710f5d17455a36203df459854b54967bfbc8d73",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/upstream/hermes-releases.json"
+    },
+    {
+      "path": "upstream/hermes-static-head.json",
+      "bytes": 16188,
+      "sha256": "e31e296c9ec79151dc48db67de737884cca00dc792ebb9510c324a05b90dbfb5",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/upstream/hermes-static-head.json"
+    },
+    {
+      "path": "upstream/hermes-static-tree.json",
+      "bytes": 3591208,
+      "sha256": "cfb6408ca77c634f726cf42c8b1ba99fc7b87eb91f83d01d1b2e796504d34a25",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/upstream/hermes-static-tree.json"
+    },
+    {
+      "path": "upstream/hermes-tags.json",
+      "bytes": 4103,
+      "sha256": "c1edfaaec7eaa9211ef544a02d7c4859ebf2e448af84abf1cb0e8cd807c66135",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/upstream/hermes-tags.json"
+    },
+    {
+      "path": "run-001/bulk-kernel.hermes.js",
+      "bytes": 1202,
+      "sha256": "ae395a899066b9b64f90b2a3c60592aa57fc9c3a9f87e71805e3f0430f9ebd34",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-001/bulk-kernel.hermes.js"
+    },
+    {
+      "path": "run-001/bulk-kernel.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-001/bulk-kernel.stderr"
+    },
+    {
+      "path": "run-001/bulk-kernel.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-001/bulk-kernel.stdout"
+    },
+    {
+      "path": "run-001/bulk-kernel.wasm",
+      "bytes": 4926,
+      "sha256": "a6b5ee0981a5caccdab7ea24ed0a7a2edb84adf68688e368f191a1363e9e42e1",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-001/bulk-kernel.wasm"
+    },
+    {
+      "path": "run-001/bulk-kernel.wat",
+      "bytes": 42576,
+      "sha256": "1f8332e822b3eebb51e729c8947149f0fafe117a14669208c5ece411dbd75c46",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-001/bulk-kernel.wat"
+    },
+    {
+      "path": "run-001/caught-error.hermes.js",
+      "bytes": 399,
+      "sha256": "f80c17bb03cc63997e38ee52f8f082a232a25c41235b752a03595310a874a088",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-001/caught-error.hermes.js"
+    },
+    {
+      "path": "run-001/caught-error.stderr",
+      "bytes": 311,
+      "sha256": "b17ff444410081b3fe162d6a92334b1b2492510d26c25a75dcd1c43360edd801",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-001/caught-error.stderr"
+    },
+    {
+      "path": "run-001/caught-error.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-001/caught-error.stdout"
+    },
+    {
+      "path": "run-001/closure.hermes.js",
+      "bytes": 340,
+      "sha256": "76aa1c2ae4f55d48983f513eb7466dd9fac04f772aee47976e590f7576cc81ef",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-001/closure.hermes.js"
+    },
+    {
+      "path": "run-001/closure.stderr",
+      "bytes": 526,
+      "sha256": "f0a1d4ae435dc3bec4215814d034567cf4177aff05a342d9139acb48d4f90e20",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-001/closure.stderr"
+    },
+    {
+      "path": "run-001/closure.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-001/closure.stdout"
+    },
+    {
+      "path": "run-001/for-of.hermes.js",
+      "bytes": 419,
+      "sha256": "97d0edcce5f1ab67abc52de948b65cabe99372a9f66f77e3443981f62b3fd6d1",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-001/for-of.hermes.js"
+    },
+    {
+      "path": "run-001/for-of.stderr",
+      "bytes": 566,
+      "sha256": "a9ab5b5addb227705a422968462cf1d5b269d2a5c4426fc8a2525d767a6990cc",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-001/for-of.stderr"
+    },
+    {
+      "path": "run-001/for-of.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-001/for-of.stdout"
+    },
+    {
+      "path": "run-001/recursive-props.hermes.js",
+      "bytes": 515,
+      "sha256": "aa9ed651e6681174f4636d3e5a6308aecd7674f2f70131bbb3430135bb3a5327",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-001/recursive-props.hermes.js"
+    },
+    {
+      "path": "run-001/recursive-props.stderr",
+      "bytes": 1464,
+      "sha256": "aff678882734051664fc938ef69f8949653bdb09cd5ecc3491cf3b3665e20131",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-001/recursive-props.stderr"
+    },
+    {
+      "path": "run-001/recursive-props.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-001/recursive-props.stdout"
+    },
+    {
+      "path": "run-001/result.json",
+      "bytes": 11010,
+      "sha256": "9e626b71d5d1531c6fd4f970683dcc8c074763982e02d80f141ecff091949667",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-001/result.json"
+    },
+    {
+      "path": "run-001/sdk-behavior.cjs",
+      "bytes": 1466,
+      "sha256": "dda6b9354ee2b945bd54dfc74be45bdf2025cc69a7c36f0491945096191a8166",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-001/sdk-behavior.cjs"
+    },
+    {
+      "path": "run-001/sdk-cook.json",
+      "bytes": 790,
+      "sha256": "7a4464039bf1014455d87d27b9b9db9176762fcf8884fa308c641e7901f5d99e",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-001/sdk-cook.json"
+    },
+    {
+      "path": "run-001/toolchain-files.json",
+      "bytes": 15875,
+      "sha256": "411035636be78c2f02b0b2307f104a70ca580b66be8301d6e40b16f6613a6b93",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-001/toolchain-files.json"
+    },
+    {
+      "path": "run-001/weak-metadata.hermes.js",
+      "bytes": 528,
+      "sha256": "0cf2d78c957a7f072da5afe4c430fb8e007a3e40a147179ec782623259f303b9",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-001/weak-metadata.hermes.js"
+    },
+    {
+      "path": "run-001/weak-metadata.stderr",
+      "bytes": 1069,
+      "sha256": "e32831520035e684d1c8b96404ce6d7103e02e2884f08bd8aa03aa8180c159c5",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-001/weak-metadata.stderr"
+    },
+    {
+      "path": "run-001/weak-metadata.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-001/weak-metadata.stdout"
+    },
+    {
+      "path": "run-002/bulk-kernel.hermes.js",
+      "bytes": 1202,
+      "sha256": "ae395a899066b9b64f90b2a3c60592aa57fc9c3a9f87e71805e3f0430f9ebd34",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-002/bulk-kernel.hermes.js"
+    },
+    {
+      "path": "run-002/bulk-kernel.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-002/bulk-kernel.stderr"
+    },
+    {
+      "path": "run-002/bulk-kernel.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-002/bulk-kernel.stdout"
+    },
+    {
+      "path": "run-002/bulk-kernel.wasm",
+      "bytes": 4926,
+      "sha256": "a6b5ee0981a5caccdab7ea24ed0a7a2edb84adf68688e368f191a1363e9e42e1",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-002/bulk-kernel.wasm"
+    },
+    {
+      "path": "run-002/bulk-kernel.wat",
+      "bytes": 42576,
+      "sha256": "1f8332e822b3eebb51e729c8947149f0fafe117a14669208c5ece411dbd75c46",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-002/bulk-kernel.wat"
+    },
+    {
+      "path": "run-002/caught-error.hermes.js",
+      "bytes": 407,
+      "sha256": "08a0469f847196c404c7c1855933308023cee99bb100024d69238ed807500852",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-002/caught-error.hermes.js"
+    },
+    {
+      "path": "run-002/caught-error.stderr",
+      "bytes": 358,
+      "sha256": "0fcb1608a3bce646d449b8106c9f21bfd4173734e0d895c22339d61d2fddf0b4",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-002/caught-error.stderr"
+    },
+    {
+      "path": "run-002/caught-error.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-002/caught-error.stdout"
+    },
+    {
+      "path": "run-002/closure.hermes.js",
+      "bytes": 340,
+      "sha256": "76aa1c2ae4f55d48983f513eb7466dd9fac04f772aee47976e590f7576cc81ef",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-002/closure.hermes.js"
+    },
+    {
+      "path": "run-002/closure.stderr",
+      "bytes": 526,
+      "sha256": "f0a1d4ae435dc3bec4215814d034567cf4177aff05a342d9139acb48d4f90e20",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-002/closure.stderr"
+    },
+    {
+      "path": "run-002/closure.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-002/closure.stdout"
+    },
+    {
+      "path": "run-002/for-of.hermes.js",
+      "bytes": 438,
+      "sha256": "938135b23f2ae1753bd25e6757a6413ae92ac115effc42c7480652d3d860aa6e",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-002/for-of.hermes.js"
+    },
+    {
+      "path": "run-002/for-of.stderr",
+      "bytes": 277,
+      "sha256": "c674352457dc4157665387763c7163d04bae2e81b4fb8251f8c4dd0b1a756093",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-002/for-of.stderr"
+    },
+    {
+      "path": "run-002/for-of.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-002/for-of.stdout"
+    },
+    {
+      "path": "run-002/recursive-props.hermes.js",
+      "bytes": 515,
+      "sha256": "aa9ed651e6681174f4636d3e5a6308aecd7674f2f70131bbb3430135bb3a5327",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-002/recursive-props.hermes.js"
+    },
+    {
+      "path": "run-002/recursive-props.stderr",
+      "bytes": 1464,
+      "sha256": "aff678882734051664fc938ef69f8949653bdb09cd5ecc3491cf3b3665e20131",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-002/recursive-props.stderr"
+    },
+    {
+      "path": "run-002/recursive-props.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-002/recursive-props.stdout"
+    },
+    {
+      "path": "run-002/result.json",
+      "bytes": 11010,
+      "sha256": "406b89abc390f89fb6b4ccda4d307e70244f83b91d01fb3ab068fe5d9f46fa39",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-002/result.json"
+    },
+    {
+      "path": "run-002/sdk-behavior.cjs",
+      "bytes": 1466,
+      "sha256": "dda6b9354ee2b945bd54dfc74be45bdf2025cc69a7c36f0491945096191a8166",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-002/sdk-behavior.cjs"
+    },
+    {
+      "path": "run-002/sdk-cook.json",
+      "bytes": 790,
+      "sha256": "7a4464039bf1014455d87d27b9b9db9176762fcf8884fa308c641e7901f5d99e",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-002/sdk-cook.json"
+    },
+    {
+      "path": "run-002/toolchain-files.json",
+      "bytes": 15875,
+      "sha256": "411035636be78c2f02b0b2307f104a70ca580b66be8301d6e40b16f6613a6b93",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-002/toolchain-files.json"
+    },
+    {
+      "path": "run-002/weak-metadata.hermes.js",
+      "bytes": 528,
+      "sha256": "0cf2d78c957a7f072da5afe4c430fb8e007a3e40a147179ec782623259f303b9",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-002/weak-metadata.hermes.js"
+    },
+    {
+      "path": "run-002/weak-metadata.stderr",
+      "bytes": 1069,
+      "sha256": "e32831520035e684d1c8b96404ce6d7103e02e2884f08bd8aa03aa8180c159c5",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-002/weak-metadata.stderr"
+    },
+    {
+      "path": "run-002/weak-metadata.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-002/weak-metadata.stdout"
+    },
+    {
+      "path": "run-001-sources/fixtures/bulk-kernel.ts",
+      "bytes": 664,
+      "sha256": "39c9edc80938367b78502abeac3489ec461f35cddc312b4987a2d6a0794af47e",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-001-sources/fixtures/bulk-kernel.ts"
+    },
+    {
+      "path": "run-001-sources/fixtures/caught-error.ts",
+      "bytes": 141,
+      "sha256": "aaefd964f09a4ac92b8557366e2f770509283f435b7810ab0518ab86c815780b",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-001-sources/fixtures/caught-error.ts"
+    },
+    {
+      "path": "run-001-sources/fixtures/closure.ts",
+      "bytes": 117,
+      "sha256": "3602e9994c731831a31d79c487bf65ca148ddb410206556b3b5acb8bd0e8a568",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-001-sources/fixtures/closure.ts"
+    },
+    {
+      "path": "run-001-sources/fixtures/for-of.ts",
+      "bytes": 155,
+      "sha256": "07211c29d5861b29949804a9e8af58f9225b8d23cc6523bf9da971723553efc6",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-001-sources/fixtures/for-of.ts"
+    },
+    {
+      "path": "run-001-sources/fixtures/recursive-props.ts",
+      "bytes": 363,
+      "sha256": "152bc334bebfd473771921f8a8f95ecec832c3c07d50da0bb0907b6f5f18b6e4",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-001-sources/fixtures/recursive-props.ts"
+    },
+    {
+      "path": "run-001-sources/fixtures/sdk-behavior.ts",
+      "bytes": 802,
+      "sha256": "b87442b167c2d5082cecb9f8d69f63ac3ca8d5f2f53c571f85a0b384bc7723a2",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-001-sources/fixtures/sdk-behavior.ts"
+    },
+    {
+      "path": "run-001-sources/fixtures/weak-metadata.ts",
+      "bytes": 306,
+      "sha256": "a36b61e95e00b5661776bfd6f09fe9beb84bfa0d6dda8783b0cfcdb532209713",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-001-sources/fixtures/weak-metadata.ts"
+    },
+    {
+      "path": "run-001-sources/run.mjs",
+      "bytes": 8675,
+      "sha256": "0e14770065214d778cf9e1c6ea4f6d6fb5ab330213591c6ff4acfc7cae94b769",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-001-sources/run.mjs"
+    },
+    {
+      "path": "run-001-sources/sdk/ts/src/generated.d.ts",
+      "bytes": 48756,
+      "sha256": "5cdbd8bd50ff57692f438ea0d592cd1b149ccbb4f692a7b85117f8a486847431",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-001-sources/sdk/ts/src/generated.d.ts"
+    },
+    {
+      "path": "run-001-sources/sdk/ts/src/native.d.ts",
+      "bytes": 28965,
+      "sha256": "85dcfa025f687c977484ac3b22f72c7e34567f723778e5c08cf15d11ac344518",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-001-sources/sdk/ts/src/native.d.ts"
+    },
+    {
+      "path": "run-001-sources/tools/native_script/cook.mjs",
+      "bytes": 7550,
+      "sha256": "326d0a5817798aabac8c057fb4174ec0a81ee86e97ace22a60f6d51c4d84be37",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-001-sources/tools/native_script/cook.mjs"
+    },
+    {
+      "path": "run-001-sources/tools/native_script/graph.mjs",
+      "bytes": 9144,
+      "sha256": "b681b4df2feecbaba82ce55dc13cc26aebfc9e9c1062753338e9312415554841",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-001-sources/tools/native_script/graph.mjs"
+    },
+    {
+      "path": "run-001-sources/tools/native_script/typecheck_host.mjs",
+      "bytes": 2463,
+      "sha256": "4cc7c7d0d212547a6ed55286eb8786d1cfdd66f96d1116e3f4e8f7145d5132c4",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-001-sources/tools/native_script/typecheck_host.mjs"
+    },
+    {
+      "path": "run-002-sources/fixtures/bulk-kernel.ts",
+      "bytes": 664,
+      "sha256": "39c9edc80938367b78502abeac3489ec461f35cddc312b4987a2d6a0794af47e",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-002-sources/fixtures/bulk-kernel.ts"
+    },
+    {
+      "path": "run-002-sources/fixtures/caught-error.ts",
+      "bytes": 150,
+      "sha256": "dc317d808604cbb0110d44680eef2778f0c6ca3cc1e2078921f8503a77b8081f",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-002-sources/fixtures/caught-error.ts"
+    },
+    {
+      "path": "run-002-sources/fixtures/closure.ts",
+      "bytes": 117,
+      "sha256": "3602e9994c731831a31d79c487bf65ca148ddb410206556b3b5acb8bd0e8a568",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-002-sources/fixtures/closure.ts"
+    },
+    {
+      "path": "run-002-sources/fixtures/for-of.ts",
+      "bytes": 194,
+      "sha256": "40ba4748d4b5d0033cefe59a1089e15dc5f00c4f732ceecd933801a7fcfea713",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-002-sources/fixtures/for-of.ts"
+    },
+    {
+      "path": "run-002-sources/fixtures/recursive-props.ts",
+      "bytes": 363,
+      "sha256": "152bc334bebfd473771921f8a8f95ecec832c3c07d50da0bb0907b6f5f18b6e4",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-002-sources/fixtures/recursive-props.ts"
+    },
+    {
+      "path": "run-002-sources/fixtures/sdk-behavior.ts",
+      "bytes": 802,
+      "sha256": "b87442b167c2d5082cecb9f8d69f63ac3ca8d5f2f53c571f85a0b384bc7723a2",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-002-sources/fixtures/sdk-behavior.ts"
+    },
+    {
+      "path": "run-002-sources/fixtures/weak-metadata.ts",
+      "bytes": 306,
+      "sha256": "a36b61e95e00b5661776bfd6f09fe9beb84bfa0d6dda8783b0cfcdb532209713",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-002-sources/fixtures/weak-metadata.ts"
+    },
+    {
+      "path": "run-002-sources/run.mjs",
+      "bytes": 8675,
+      "sha256": "0e14770065214d778cf9e1c6ea4f6d6fb5ab330213591c6ff4acfc7cae94b769",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-002-sources/run.mjs"
+    },
+    {
+      "path": "run-002-sources/sdk/ts/src/generated.d.ts",
+      "bytes": 48756,
+      "sha256": "5cdbd8bd50ff57692f438ea0d592cd1b149ccbb4f692a7b85117f8a486847431",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-002-sources/sdk/ts/src/generated.d.ts"
+    },
+    {
+      "path": "run-002-sources/sdk/ts/src/native.d.ts",
+      "bytes": 28965,
+      "sha256": "85dcfa025f687c977484ac3b22f72c7e34567f723778e5c08cf15d11ac344518",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-002-sources/sdk/ts/src/native.d.ts"
+    },
+    {
+      "path": "run-002-sources/tools/native_script/cook.mjs",
+      "bytes": 7550,
+      "sha256": "326d0a5817798aabac8c057fb4174ec0a81ee86e97ace22a60f6d51c4d84be37",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-002-sources/tools/native_script/cook.mjs"
+    },
+    {
+      "path": "run-002-sources/tools/native_script/graph.mjs",
+      "bytes": 9144,
+      "sha256": "b681b4df2feecbaba82ce55dc13cc26aebfc9e9c1062753338e9312415554841",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-002-sources/tools/native_script/graph.mjs"
+    },
+    {
+      "path": "run-002-sources/tools/native_script/typecheck_host.mjs",
+      "bytes": 2463,
+      "sha256": "4cc7c7d0d212547a6ed55286eb8786d1cfdd66f96d1116e3f4e8f7145d5132c4",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/run-002-sources/tools/native_script/typecheck_host.mjs"
+    },
+    {
+      "path": "checks/00.log",
+      "bytes": 143,
+      "sha256": "58d0e20ad9b103bb29cb724af2f609b8f58ae6f783251eaacc527be2d7fe884c",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/checks/00.log"
+    },
+    {
+      "path": "checks/01.log",
+      "bytes": 107,
+      "sha256": "092f3ef0c082b5e2a61888b77b1f68ffbd0afb7284e19601ea6250cb7141c478",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/checks/01.log"
+    },
+    {
+      "path": "checks/02.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/checks/02.log"
+    },
+    {
+      "path": "checks/03.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/checks/03.log"
+    },
+    {
+      "path": "checks/04.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/checks/04.log"
+    },
+    {
+      "path": "checks/result.json",
+      "bytes": 1920,
+      "sha256": "4ca166a482bdcb4a1bcfa1c3ae6cd7fc9dab943023018255acf3ea1581e6976e",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/checks/result.json"
+    },
+    {
+      "path": "npm-lock.log",
+      "bytes": 21,
+      "sha256": "913872cf0a2b0eb67e37282092c48b9420bd5da6ae81eb070987d3e5a22fe87d",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/npm-lock.log"
+    },
+    {
+      "path": "npm-ci.log",
+      "bytes": 27,
+      "sha256": "652cd7bc6df205e35dc927d43fb80a8a0e9c486ad3fd86d485974c27d84d16f3",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/typescript-aot-spike-001/npm-ci.log"
+    }
+  ],
+  "archive_sha256": "04a86c5f99ddd6a664bb0d93be9a623ae130e81c3e5f12cb916a0f7e24a402f9"
+}

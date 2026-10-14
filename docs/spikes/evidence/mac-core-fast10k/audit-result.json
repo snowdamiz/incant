@@ -1,0 +1,249 @@
+{
+  "passed": true,
+  "records": 416,
+  "payloads": 102,
+  "external_checked": true,
+  "git_source_rows": {
+    "baseline": 20542,
+    "candidate": 20580
+  },
+  "mutation_controls": 12,
+  "builds": {
+    "baseline": {
+      "codegen_units_verified": 4,
+      "target_feature_artifacts": 11,
+      "runtime_data_files": 28
+    },
+    "candidate": {
+      "codegen_units_verified": 4,
+      "target_feature_artifacts": 11,
+      "runtime_data_files": 28
+    }
+  },
+  "runs": [
+    {
+      "label": "baseline",
+      "run": 0,
+      "metrics": {
+        "player.frame.p95_wall_ns": {
+          "lower": 6460001,
+          "upper": 6470000
+        },
+        "script.tick.p95_wall_ns": {
+          "lower": 5430001,
+          "upper": 5440000
+        },
+        "rust.process_peak_requested_bytes": {
+          "lower": 76880695,
+          "upper": 76880695
+        }
+      },
+      "comparison": null,
+      "functional_control_equal": {
+        "tick": true,
+        "frames": true,
+        "logs": true,
+        "observations": true,
+        "pcm_sha256": true
+      },
+      "measurement_sha256": "a59cdc73824aabd9b5f957bbf2972c99b5806406d53815d1b56dbb3bdb952e67"
+    },
+    {
+      "label": "candidate",
+      "run": 0,
+      "metrics": {
+        "player.frame.p95_wall_ns": {
+          "lower": 5300001,
+          "upper": 5310000
+        },
+        "script.tick.p95_wall_ns": {
+          "lower": 4400001,
+          "upper": 4410000
+        },
+        "rust.process_peak_requested_bytes": {
+          "lower": 76880503,
+          "upper": 76880503
+        }
+      },
+      "comparison": {
+        "regression_limit_percent": 5,
+        "metrics": {
+          "player.frame.p95_wall_ns": "pass",
+          "script.tick.p95_wall_ns": "pass",
+          "rust.process_peak_requested_bytes": "pass"
+        },
+        "script_2ms_p95": "fail",
+        "passed": false,
+        "phase_gate_passed": false
+      },
+      "functional_control_equal": {
+        "tick": true,
+        "frames": true,
+        "logs": true,
+        "observations": true,
+        "pcm_sha256": true
+      },
+      "measurement_sha256": "3117b1f6e22b014545ca629d3eb9c4fa4dbbce88c5f89f73d3ee0124a84a9359"
+    },
+    {
+      "label": "baseline",
+      "run": 1,
+      "metrics": {
+        "player.frame.p95_wall_ns": {
+          "lower": 6320001,
+          "upper": 6330000
+        },
+        "script.tick.p95_wall_ns": {
+          "lower": 5400001,
+          "upper": 5410000
+        },
+        "rust.process_peak_requested_bytes": {
+          "lower": 76880695,
+          "upper": 76880695
+        }
+      },
+      "comparison": {
+        "regression_limit_percent": 5,
+        "metrics": {
+          "player.frame.p95_wall_ns": "pass",
+          "script.tick.p95_wall_ns": "pass",
+          "rust.process_peak_requested_bytes": "pass"
+        },
+        "script_2ms_p95": "fail",
+        "passed": false,
+        "phase_gate_passed": false
+      },
+      "functional_control_equal": {
+        "tick": true,
+        "frames": true,
+        "logs": true,
+        "observations": true,
+        "pcm_sha256": true
+      },
+      "measurement_sha256": "dac1e5eeabc659357313504024d7f99252be7b469a1e3ba412fb40dbfbc4750f"
+    },
+    {
+      "label": "candidate",
+      "run": 1,
+      "metrics": {
+        "player.frame.p95_wall_ns": {
+          "lower": 5800001,
+          "upper": 5810000
+        },
+        "script.tick.p95_wall_ns": {
+          "lower": 4830001,
+          "upper": 4840000
+        },
+        "rust.process_peak_requested_bytes": {
+          "lower": 76880503,
+          "upper": 76880503
+        }
+      },
+      "comparison": {
+        "regression_limit_percent": 5,
+        "metrics": {
+          "player.frame.p95_wall_ns": "pass",
+          "script.tick.p95_wall_ns": "pass",
+          "rust.process_peak_requested_bytes": "pass"
+        },
+        "script_2ms_p95": "fail",
+        "passed": false,
+        "phase_gate_passed": false
+      },
+      "functional_control_equal": {
+        "tick": true,
+        "frames": true,
+        "logs": true,
+        "observations": true,
+        "pcm_sha256": true
+      },
+      "measurement_sha256": "c8cb0b54446c37a316fd5f1a52cd8ee97a268835b48e92ede21d7a4a8fe25d27"
+    },
+    {
+      "label": "baseline",
+      "run": 2,
+      "metrics": {
+        "player.frame.p95_wall_ns": {
+          "lower": 6280001,
+          "upper": 6290000
+        },
+        "script.tick.p95_wall_ns": {
+          "lower": 5370001,
+          "upper": 5380000
+        },
+        "rust.process_peak_requested_bytes": {
+          "lower": 76880663,
+          "upper": 76880663
+        }
+      },
+      "comparison": {
+        "regression_limit_percent": 5,
+        "metrics": {
+          "player.frame.p95_wall_ns": "pass",
+          "script.tick.p95_wall_ns": "pass",
+          "rust.process_peak_requested_bytes": "pass"
+        },
+        "script_2ms_p95": "fail",
+        "passed": false,
+        "phase_gate_passed": false
+      },
+      "functional_control_equal": {
+        "tick": true,
+        "frames": true,
+        "logs": true,
+        "observations": true,
+        "pcm_sha256": true
+      },
+      "measurement_sha256": "902dc4b43cd8b10bc2d681ba89b0b2f01f87ca52125b6f5d51330c63216ab055"
+    },
+    {
+      "label": "candidate",
+      "run": 2,
+      "metrics": {
+        "player.frame.p95_wall_ns": {
+          "lower": 5460001,
+          "upper": 5470000
+        },
+        "script.tick.p95_wall_ns": {
+          "lower": 4560001,
+          "upper": 4570000
+        },
+        "rust.process_peak_requested_bytes": {
+          "lower": 76880503,
+          "upper": 76880503
+        }
+      },
+      "comparison": {
+        "regression_limit_percent": 5,
+        "metrics": {
+          "player.frame.p95_wall_ns": "pass",
+          "script.tick.p95_wall_ns": "pass",
+          "rust.process_peak_requested_bytes": "pass"
+        },
+        "script_2ms_p95": "fail",
+        "passed": false,
+        "phase_gate_passed": false
+      },
+      "functional_control_equal": {
+        "tick": true,
+        "frames": true,
+        "logs": true,
+        "observations": true,
+        "pcm_sha256": true
+      },
+      "measurement_sha256": "b790344d0ba21ebaef51c2e9ee7bf7a4e8b783631f4b324bdaebe3344d0ed458"
+    }
+  ],
+  "machine": {
+    "model": "Mac17,9",
+    "chip": "Apple M5 Pro",
+    "memory_bytes": "51539607552",
+    "physical_cpus": "15",
+    "os_build": "26A434",
+    "os_version": "27.0.1",
+    "architecture": "arm64",
+    "power_source": "AC Power",
+    "low_power_mode": null
+  },
+  "phase_gate_passed": false
+}

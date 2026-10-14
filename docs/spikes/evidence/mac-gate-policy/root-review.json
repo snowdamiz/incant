@@ -1,0 +1,24 @@
+{
+  "at": "2026-10-14T00:15:57.795089+00:00",
+  "reviewer": "astra/root",
+  "accepted": true,
+  "base": "7c746ebec7e5553bf34c2643ab4c952a1a433db7",
+  "patch_sha256": "1cdcf855051196d5971d3d56cdac8f6a3d1e59deea07c175c5d199252e606537",
+  "paths": [
+    "AGENTS.md",
+    "CLAUDE.md",
+    "PLAN.md",
+    "STATUS.md",
+    "docs/adr/0003-physics.md",
+    "docs/adr/0006-scripting.md",
+    "docs/adr/0014-ci.md",
+    "docs/conventions/shared.md"
+  ],
+  "source_review": "Direct user instruction implemented across active phase/performance/adoption rules, current outstanding work and generated conventions. Actual Mac desktop is sole required device; other-device execution/performance explicitly nonblocking and not passed. Existing CI matrices/required23checks and non-device release/human duties unchanged. Numerical thresholds and platform implementation scope preserved.",
+  "verification": [
+    "git diff --check exit0",
+    "python3 tools/generate_conventions.py --check exit0",
+    "exact eight-doc patch identity checked"
+  ],
+  "findings": []
+}

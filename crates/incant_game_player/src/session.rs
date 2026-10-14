@@ -5,6 +5,8 @@ use incant_game_runtime::OfflineGameSession;
 use incant_input::{InputActions, InputEvent, InputFrame};
 use incant_runtime::{CookedScene, NativeWorld};
 use incant_script::SessionProgram;
+#[cfg(feature = "native-checkpoints")]
+mod persisted;
 pub(crate) type Result<T> = std::result::Result<T, Box<dyn std::error::Error>>;
 #[cfg(feature = "render-input")]
 use incant_game_runtime::HostedOfflineGameSession;
@@ -154,6 +156,10 @@ impl Player {
         settings: Option<Settings>,
     ) -> Result<Self> {
         let script = script.into();
+        #[cfg(feature = "native-checkpoints")]
+        if bytes.starts_with(b"INCNGM01") {
+            return persisted::load(bytes, initial, script, actions, clips, rate, settings);
+        }
         #[cfg(feature = "render-input")]
         if let Some(settings) = settings {
             return Ok(match settings {
@@ -195,7 +201,24 @@ impl Player {
             Self::Gpu(game) => game.inner.take_session_request()?,
         })
     }
-    pub fn checkpoint_bytes(&self) -> Result<Vec<u8>> {
+    pub fn preflight_checkpoint(&mut self) -> Result<()> {
+        #[cfg(feature = "native-checkpoints")]
+        {
+            // This is route admission only. It neither steps the world nor
+            // claims that future physics/script state will be saveable.
+            #[cfg(feature = "render-gpu")]
+            if matches!(self, Self::Gpu(_)) {
+                return Err("GPU checkpoint saving is unsupported".into());
+            }
+            Ok(())
+        }
+        #[cfg(not(feature = "native-checkpoints"))]
+        self.checkpoint_bytes().map(|_| ())
+    }
+    pub fn checkpoint_bytes(&mut self) -> Result<Vec<u8>> {
+        #[cfg(feature = "native-checkpoints")]
+        return persisted::save(self);
+        #[cfg(not(feature = "native-checkpoints"))]
         Ok(match self {
             Self::Plain(game) => game.checkpoint_bytes()?,
             #[cfg(feature = "render-input")]

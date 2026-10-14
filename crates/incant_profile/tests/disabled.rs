@@ -4,6 +4,8 @@ use incant_profile::*;
 fn default_has_no_capture_clock_or_dynamic_state() {
     assert_eq!(std::mem::size_of::<Scope>(), 0);
     assert!(!enabled());
+    assert_eq!(frame(|| Ok::<_, ()>(17)), Ok(17));
+    assert_eq!(frame(|| Err::<(), _>("unchanged")), Err("unchanged"));
     for _ in 0..1000 {
         let _zone = scope(Phase::Frame);
         let _script = script_scope(Some([8; 16]));

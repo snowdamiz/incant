@@ -1,5 +1,5 @@
-//! Opaque in-memory stable-ID checkpoint around the complete native owner.
-//! No persisted-byte admission or ECS/game-session save capability is implied.
+//! Opaque checkpoints plus a separate bounded persisted native admission path.
+//! Whole-session/script/host composition is required independently.
 use super::*;
 use incant_physics_snapshot::{
     Budget, Error as RecordError, MAX_ITEMS, construction::AllocationBudget,
@@ -18,6 +18,8 @@ pub enum CheckpointError {
     Native(CaptureError),
     #[error(transparent)]
     Record(#[from] RecordError),
+    #[error("persisted native physics refused: {0:?}")]
+    Persisted(rapier3d::pipeline::checked_restore::persisted::PersistedError),
 }
 impl From<CaptureError> for CheckpointError {
     fn from(error: CaptureError) -> Self {
@@ -329,3 +331,12 @@ impl PhysicsCheckpoint {
 
 #[cfg(test)]
 mod tests;
+
+mod persisted;
+mod wire;
+
+impl From<rapier3d::pipeline::checked_restore::persisted::PersistedError> for CheckpointError {
+    fn from(error: rapier3d::pipeline::checked_restore::persisted::PersistedError) -> Self {
+        Self::Persisted(error)
+    }
+}

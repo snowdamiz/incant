@@ -9,8 +9,15 @@ publish.workspace = true
 profile = ["incant_profile/summary", "incant_game_runtime/profile", "incant_script/profile", "incant_runtime/profile"]
 profile-tracy = ["profile", "incant_profile/tracy"]
 default = ["physics-deterministic"]
+native-checkpoints = ["incant_game_runtime/native-checkpoints", "incant_script/native-checkpoints", "incant_runtime/native-checkpoints"]
 # Thin platform ABI for bounded offline CPU package execution, not a UI host.
 mobile-ffi = ["dep:thiserror"]
+# Retained native callback owner; platform surface/audio adapters are supplied by the host.
+mobile-host = ["render-input", "dep:thiserror"]
+# Actual native audio backend for the retained platform callback owner.
+mobile-device = ["mobile-host", "incant_game_runtime/device"]
+mobile-android = ["mobile-device", "render-gpu", "dep:pollster", "dep:jni", "dep:ndk", "dep:ndk-context"]
+mobile-apple = ["mobile-device", "render-gpu", "dep:pollster"]
 # Trusted, fresh numeric bytecode compatibility experiment; not production admission.
 probe-android-bytecode = ["mobile-ffi", "incant_script/probe-android-bytecode", "incant_cook/probe-android-bytecode"]
 # Project source is compiled exclusively by the trusted build-time producer.
@@ -62,6 +69,7 @@ incant_render_gpu_host = { path = "../incant_render_gpu_host", optional = true, 
 incant_render = { path = "../incant_render", optional = true, default-features = false }
 incant_render_native = { path = "../incant_render_native", optional = true, default-features = false }
 thiserror = { workspace = true, optional = true }
+pollster = { version = "=0.4.0", optional = true }
 incant_render_game = { path = "../incant_render_game", optional = true, default-features = false }
 incant_game_runtime = { path = "../incant_game_runtime", default-features = false }
 incant_script.workspace = true
@@ -77,13 +85,18 @@ ulid = { version = "1.2", default-features = false }
 
 [target.'cfg(any(target_os = "macos", target_os = "windows", target_os = "linux"))'.dependencies]
 tao = { version = "=0.37.1", optional = true, default-features = false, features = ["rwh_06", "x11"] }
-pollster = { version = "=0.4.0", optional = true }
 gilrs = { version = "=0.11.2", optional = true }
 
 [build-dependencies]
 incant_cook = { path = "../incant_cook", default-features = false, features = ["script"] }
 
 [dev-dependencies]
+incant_render_data.workspace = true
 incant_script = { workspace = true, features = ["compiler"] }
 incant_types.workspace = true
 tempfile = "3"
+
+[target.'cfg(target_os = "android")'.dependencies]
+jni = { version = "=0.22.4", optional = true, default-features = false }
+ndk = { version = "=0.9.0", optional = true, features = ["nativewindow", "rwh_06", "api-level-26"] }
+ndk-context = { version = "=0.1.1", optional = true }

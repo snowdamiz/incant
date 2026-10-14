@@ -21,8 +21,12 @@ binary scenes. Do not extend the legacy document/command-bus play path. Migrate
 existing gameplay to typed bulk access and structural command buffers, with no
 per-tick project cloning, JSON serialization or authoring validation. Keep the
 shipped runtime free of document, CRDT, command-bus and agent dependencies.
-Performance claims require the plan's shipping-profile/device measurements;
-desktop tests and compile-only CI do not satisfy the reference-phone gates.
+Performance claims require actual shipping-profile measurements on this Mac with
+its model/OS and matched baseline recorded. The director's 2026-10-13 decision
+makes this Mac the only required device for development and phase gates. Mobile
+and other-device execution/performance are deferred, nonblocking follow-up, not
+passed gates. Preserve all existing hosted CI/build/release requirements and
+non-device correctness, security, distribution and human-owned obligations.
 Section 12 decisions are settled, including wasm2c for shipped native modules,
 Wasmtime for development, and the numerical adoption rules for TypeScript AOT
 and the physics backend. Apply those rules without reopening the decisions;
@@ -30,7 +34,8 @@ record measured outcomes and keep human-owned actions separate.
 Revision 6 uses hosted real phones in AWS Device Farm; do not request phone
 purchases, name clearance or package reservations. Store accounts and distribution
 signing first gate Phase 5 uploads. Record the actual device model/OS and matched
-baseline for performance results; simulator builds do not satisfy those gates.
+baseline for performance results. Simulators and compile-only checks do not
+establish actual Mac or other-device execution; other-device evidence is deferred.
 Revision 7 removes calendar dates. Do not add target dates, phase durations or
 ship-date targets; exit gates alone measure progress.
 Revision 8 makes outside services local-first: develop and test against the

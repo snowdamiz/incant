@@ -43,3 +43,32 @@ pub(super) fn with_admitted<T>(
     .map_err(AssemblyError::Decode)?;
     outcome.ok_or(AssemblyError::Construction(ConstructionError::Incomplete))?
 }
+
+// Imported data is checked through the same envelope-bound numeric witness,
+// then the stricter persisted domain. No completion token is manufactured.
+pub(super) fn with_persisted<T>(
+    assembly: &AssemblyFrame<'_>,
+    expected: Identity,
+    decode: &mut Budget,
+    work: &mut WorkBudget,
+    f: impl for<'a> FnOnce(&AdmittedAssembly<'a>) -> ConstructionResult<T>,
+) -> core::result::Result<T, super::super::persisted::PersistedError> {
+    use super::super::persisted::{self, PersistedError as E};
+    let mut outcome = None;
+    with_decoded_world_boundary(assembly.inner(), expected, decode, |frame| {
+        outcome = Some(match admit_numeric_frame(frame, expected, work) {
+            Ok(numeric) => match persisted::admit(&numeric, work) {
+                Ok(()) => f(&AdmittedAssembly {
+                    numeric,
+                    impulse_epoch: assembly.impulse_epoch(),
+                })
+                .map_err(E::Construction),
+                Err(e) => Err(E::Domain(e)),
+            },
+            Err(e) => Err(E::Numeric(e)),
+        });
+        Ok(())
+    })
+    .map_err(E::Record)?;
+    outcome.ok_or(E::Construction(ConstructionError::Incomplete))?
+}

@@ -89,6 +89,14 @@ impl<I: Eq> GamepadAdapter<I> {
             None
         })
     }
+    /// Stable host-local slot for a known physical device; no names or OS
+    /// handles are exposed to gameplay.
+    pub fn logical_id(&self, device: &I) -> Option<u32> {
+        self.pads
+            .iter()
+            .position(|pad| &pad.device == device)
+            .map(|id| id as u32)
+    }
     /// Emit these before collecting controls/resuming a tick. At most16 events
     /// are pending. The caller uses its normal bounded input queue.
     pub fn next_connection_event(&mut self) -> Option<InputEvent> {

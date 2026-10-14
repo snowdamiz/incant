@@ -9,7 +9,8 @@
   "scripts": {
     "conventions": "python3 tools/generate_conventions.py",
     "handoff": "python3 tools/handoff/main.py",
-    "test:tools": "python3 -m unittest discover -s tools/tests -v && node --test tools/tests/native_script.test.mjs"
+    "test:core": "tsc -p samples/core/tsconfig.json && node samples/core/gameplay_test.mjs && node samples/core/stress_test.mjs && python3 -m unittest discover -s samples/core -p 'test_stress*.py' -v",
+    "test:tools": "python3 -m unittest discover -s tools/tests -v && node --test tools/tests/native_script.test.mjs && npm run test:core"
   },
   "devDependencies": {
     "@agentclientprotocol/claude-agent-acp": "0.88.0",
