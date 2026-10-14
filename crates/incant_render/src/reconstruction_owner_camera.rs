@@ -10,6 +10,8 @@ mod cubic_controls;
 mod footprint_controls;
 #[path = "reconstruction_owner_output_controls.rs"]
 mod output_controls;
+#[path = "reconstruction_owner_sampling.rs"]
+mod sampling;
 #[path = "reconstruction_owner_camera_support.rs"]
 mod support;
 
@@ -424,9 +426,13 @@ impl Experiment {
 #[test]
 #[ignore = "bounded test-only owner camera experiment; no production or visual acceptance"]
 fn actual_scene_owner_camera_gather() {
-    use super::recurrence_fixture::{Frame, color_range, evict_stage, png, pose};
+    use super::recurrence_fixture::{Frame, color_range, evict_stage, png};
     let out = PathBuf::from(std::env::var("INCANT_OWNER_CAMERA_OUT").unwrap());
     std::fs::create_dir(&out).expect("new diagnostic output");
+    let motion = sampling::Motion::selected();
+    let sampling = sampling::Sampling::selected();
+    let _sampling = sampling.begin();
+    let phases = crate::temporal::jitter::phase_count(true);
     let renderer = owner_renderer();
     assert_eq!(renderer.adapter.get_info().backend, wgpu::Backend::Metal);
     let _footprint = crate::temporal::jitter::DiagnosticInternalFootprint::begin();
@@ -470,7 +476,7 @@ fn actual_scene_owner_camera_gather() {
         let mut old_matrix = matrix(&input, &stage.camera);
         let mut old_jitter = [0.; 2];
         for frame in 1..=64 {
-            pose(&stage, &mut input, frame, true);
+            motion.pose(&stage, &mut input, frame);
             if eviction {
                 evict_stage(&stage, &mut input, frame);
             }
@@ -491,6 +497,7 @@ fn actual_scene_owner_camera_gather() {
             submits += 1;
             let state = scene.upscale_frame().unwrap();
             let jitter = state.motion().jitter_offset().unwrap();
+            assert_eq!(jitter, crate::temporal::jitter::offset(frame - 1, true));
             assert_eq!(state.motion().has_previous(), frame > 1);
             let motion_state = scene.motion.as_ref().unwrap();
             let (owner, motion, depth) = motion_state.owner_test_views().unwrap();
@@ -621,7 +628,7 @@ fn actual_scene_owner_camera_gather() {
                 let p = planes[i];
                 files.push(json!({"name":name,"sha256":hex(data(i)),"rect":p.rect,"stride":p.stride,"bytes_per_pixel":p.bpp,"format":format!("{:?}",views[i].texture().format())}));
             }
-            if [1, 14, 24, 32, 33, 40, 64].contains(&frame) {
+            if [1, 8, 14, 16, 24, 32, 33, 40, 64].contains(&frame) {
                 for (i, name) in ["candidate", "baseline"].into_iter().enumerate() {
                     images.push(png(
                         &out,
@@ -631,7 +638,12 @@ fn actual_scene_owner_camera_gather() {
                     ));
                 }
             }
-            rows.push(json!({"case":label,"frame":frame,"jitter":jitter,"changes":header,"previous_matrix":old_matrix.to_cols_array(),"current_matrix":current_matrix.to_cols_array(),"candidate_range":color_range(data(0)),"planes":files}));
+            let poses: Vec<_> = input
+                .nodes
+                .iter()
+                .map(|n| n.world.to_cols_array())
+                .collect();
+            rows.push(json!({"case":label,"frame":frame,"jitter":jitter,"jitter_phase":(frame-1)%phases,"node_world_matrices":poses,"changes":header,"previous_matrix":old_matrix.to_cols_array(),"current_matrix":current_matrix.to_cols_array(),"candidate_range":color_range(data(0)),"planes":files}));
             std::fs::write(
                 out.join("progress.json"),
                 serde_json::to_vec_pretty(
@@ -647,7 +659,7 @@ fn actual_scene_owner_camera_gather() {
         }
     }
     assert_eq!((submits, maps), (256, 128));
-    let report = json!({"schema":"incant-owner-camera-diagnostic-v1","adapter":describe(&renderer),"output":SIZE,"source":[480,270],"submissions":submits,"maps":maps,"frames":rows,"images":images,"kernel":Kernel::selected().name(),"history_filter":History::selected().name(),"shader_sha256":hex(shader().as_bytes()),"raw_bytes":total*128,"scope":"Test-only radius3 (7x7) forward gather of static single-owner fractional coverage; fixed projection and small camera motion, internal LOD footprint. No production, arbitrary motion, timing or visual acceptance."});
+    let report = json!({"schema":"incant-owner-camera-diagnostic-v1","adapter":describe(&renderer),"output":SIZE,"source":[480,270],"submissions":submits,"maps":maps,"frames":rows,"images":images,"kernel":Kernel::selected().name(),"history_filter":History::selected().name(),"motion":motion.name(),"sampling":sampling.name(),"jitter_phase_count":phases,"shader_sha256":hex(shader().as_bytes()),"raw_bytes":total*128,"scope":"Test-only radius3 (7x7) forward gather of static single-owner fractional coverage; selected stationary or small camera motion, internal LOD footprint, unchanged history age8. Halton32 changes sequence and count, not a sample-count theorem. No production, arbitrary motion, timing or visual acceptance."});
     std::fs::write(
         out.join("report.json"),
         serde_json::to_vec_pretty(&report).unwrap(),

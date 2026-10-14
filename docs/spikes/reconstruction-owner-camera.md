@@ -305,3 +305,54 @@ not described as a one-pixel correction. The bounded comparison is retained at
 `~/.codex/incant-evidence/reconstruction-owner-output-comparison-001/stdout.json`,
 SHA-256 `de4246e5c9fdf254f6f25fdd5de80149d451d19cfb206fdf294fbbfb26cdc203`.
 Root's rendered-pixel review still rejects the candidate's remaining aliasing.
+
+### Stationary sampling and paired camera motion (015–018)
+
+A separate test-only harness option holds every pose fixed for 64 frames, while
+another selects the existing `incant8` or diagnostic `halton32` sequence. Both
+retain the Point kernel, Cubic camera helper, explicit final-output conversion
+and unchanged age limit 8. The static path uses the original owner persistence;
+selecting Cubic does not mean that helper runs for stationary pixels. Unknown
+options refuse. A new CPU control verifies fixed poses/lights, distinct bounded
+Halton phases and restoration of the ordinary sequence after the guard drops.
+Build, 4 CPU controls (6 ignored GPU diagnostics) and strict renderer Clippy pass.
+
+All four actual runs share source freeze
+`1b52b914abad20b4db7689457f32bf67544d6a0e13658730019ff433aeaa15dc`
+and binary `f255d92e0bb605a76c025ee695dc25656a158b8024346e4d9caf92dd3fbe020b`.
+Each captures 64 ordinary and 64 changed-owner frames, with 256 submissions,
+128 maps, and 36 PNGs. Generations 015/016 are stationary incant8/Halton32;
+017/018 repeat the pairing with the existing camera pan after frame 14. All
+four execute successfully. These runtimes are capture durations, not performance
+measurements.
+
+The independent bounded comparisons verify 2,048 raw planes and 72 PNGs per
+pair, common source/binary/shader, actual jitter schedules and camera matrices,
+exact within-arm pre-eviction raw planes, and zero disappearance-region color
+after eviction. Stored color/alpha checks pass. Random fixture entity ordering
+means node matrices compare as exact multisets across arms/cases, with stable
+indices within each case. The report lacks semantic node labels: this is not
+exact cross-arm authored-node identity proof. Initial packaging/order assertion
+failures remain preserved; no color, ownership or disappearance rule was relaxed.
+
+Stationary Halton32 makes the height-3.9 wire continuous at 68/68 observed centers
+from frame 3, compared with 34/68 incant8 centers at frame 64. However, the
+height-3.5 wire remains present in only 25% of phases in **both** arms. Frame 64
+happens to favor Halton32. At center [199,123], current coverage can store alpha
+1 and then become zero on the following clear frame; the next investigation is
+whether rounded alpha is being mistaken for opaque-coverage provenance. No
+sampled eight-frame support absence or age expiry explains this stationary
+observation. It does not justify widening retention.
+
+For the pan, both arms have all 200 projected diagonal centers and all 67 sampled
+height-3.5 centers present at frame 64. Cross-section variance and peak changes
+do not establish uniform sharpening. The sampled age-7 counts differ (470 vs49
+center-frame observations), but these are not independent history lineages or
+proven expirations. Root reviewed actual static and moving images: the sphere,
+pole and other depth edges still alias; **neither sampling choice is accepted**.
+
+Comparison reports (external bounded evidence):
+- `~/.codex/incant-evidence/reconstruction-owner-stationary-comparison-001/stdout-v4.json`,
+  SHA-256 `50a5030de7c48c41d7fade1165b30fc70975816a33df907e3164e3ed8c714d84`.
+- `~/.codex/incant-evidence/reconstruction-owner-pan-comparison-001/stdout-v2.json`,
+  SHA-256 `a47172345b7742fd9d872367b4a0e8220e740158aeffeefdfbbe9dc66b90af79`.
