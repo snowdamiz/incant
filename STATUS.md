@@ -1,15 +1,17 @@
 # Implementation status
 
-## Host-bound engine-pin file protocol — application binding pending
+## Host-bound project pin migration — current-main qualification
 
-The host-only opened-project capability now supports exact-current legacy pin,
-create-only original-byte backup, durable journal/file recovery and undo/redo.
-Independent filesystem/journal source reviews and 87 source/command tests pass,
-including real subprocess crash/write-error controls; strict lint and lean checks
-pass. One real redo Abort snapshot mismatch was diagnosed and repaired with exact
-durable CRDT-byte reuse; its failed attempt remains retained. No CLI/RPC/editor
-endpoint or older-format conversion is exposed. [Scope and evidence](docs/spikes/project-pin-migration.md).
-
+The main273 composition preserves linked-prefab authoring and adds the reviewed
+host-only exact-current legacy pin, original-byte backups, recovery and undo/redo.
+The initial composition passed 129 source/doc/cmd/headless cases and nine checks.
+A test-only successor preserves journal assertions under Windows locking; 19
+focused Mac controls pass, with four overlapping final-generation controls and
+strict lint. The original hosted Windows failure, local cache failure and test
+lint failure remain retained. Final independent packet review is pending.
+No CLI/RPC/editor route or older-format conversion is exposed; checkpoint33
+remains failed and frozen while its other workflows finish.
+[Current composition and evidence](docs/spikes/project-pin-main273.md).
 
 ## QuickJS allocation getter — diagnostic-only main272 intake
 
@@ -18,7 +20,7 @@ and a deliberately failing wrong-count control. Twelve imported tool/evidence
 paths remain producer-exact; current lock/source/replay checks pass without a
 native rerun. The retained patch-context whitespace failure is resolved by two
 exact-path packaging exceptions. Independent current-main review is accepted;
-publication awaits its exact-head hosted fast check. No production dependency, profiler mode, performance or gate changes
+PR273 merged after its exact-head hosted fast SUCCESS. No production dependency, profiler mode, performance or gate changes
 are included. [Current scope](docs/spikes/quickjs-getter-main272.md).
 
 ## Engine compatibility and pin review — qualified main271 composition
@@ -99,8 +101,10 @@ exact-head fast SUCCESS, following the merged synchronization test repair. [Evid
 
 Checkpoint33 freezes candidate `b3eb0a98` on the existing PR263, exact main272
 tree `1c9687fc`, for its regularly scheduled comprehensive qualification.
-All 23 required contexts and eight exact-head workflows must succeed; checks
-are running and release30 remains unchanged. The substantive new main includes
+All 23 required contexts and eight exact-head workflows must succeed. The Windows
+desktop job failed two engine-pin test snapshots that read the journal while its
+bus still holds the exclusive lock (Windows error33). Remaining jobs are running;
+the candidate stays frozen and release30 remains unchanged. The substantive new main includes
 prefab authoring, engine pin review and bounded compiler-phase observation.
 This is not a claimed repair of checkpoint32's unexplained Windows timeout.
 

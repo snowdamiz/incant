@@ -81,11 +81,12 @@ project from arbitrary backup paths. External editors do not participate in the
 root lock: this is not a universal filesystem CAS against a writer retaining an
 open handle; displaced nodes are retained and all observable mismatches refuse.
 
-Planned controls exercise real fresh-process exits through apply/undo/redo,
+The pre-build control plan covered real fresh-process exits through apply/undo/redo,
 partial OS write failures and ambiguous durability, missing project recovery,
 foreign replacements, review invalidation, bounds, corruption, backup collisions,
-and legacy script protocol replay. Application wiring remains closed until these
-controls pass and the protocol has independent source review.
+and legacy script protocol replay. Source003 subsequently passed the qualified
+controls and independent protocol review described below. Application wiring
+remains a separate, unimplemented follow-up.
 
 ## Pre-build source review corrections
 
@@ -94,7 +95,8 @@ finding with held file handles, closes the unmatched-Prepared/foreign-marker
 state transition before filesystem effects, and applies the stricter new-host
 incomplete-Initialize refusal. Added controls directly exercise unlink/recreate,
 held unlinked nodes, a renamed-artifact valid foreign marker, and unchanged full
-artifact inventories after refusal. No builds or application endpoints yet.
+artifact inventories after refusal. At that source002 review checkpoint, no builds
+had run and no application endpoints existed; the later execution follows below.
 
 Source002 compiled. Its command unit run passed 19 cases and retained one real
 redo/known-Commit-error recovery failure: an Abort re-export of an unchanged
@@ -136,3 +138,10 @@ Project schema changed in this follow-up. No CLI/RPC schema/tool, older-format
 conversion, GUI, GPU, performance or phase-gate acceptance is claimed. This is
 the qualified host protocol for a later reviewed application binding, not a
 claim that users can already invoke file migration through the editor/headless app.
+
+## Current-main successor
+
+The producer executions above remain source-specific. The later main273
+composition and Windows-safe test observation successor are recorded separately
+in [the integration report](project-pin-main273.md); no original execution or
+archive has been rewritten.
