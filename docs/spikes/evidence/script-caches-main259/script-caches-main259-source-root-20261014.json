@@ -1,0 +1,14 @@
+{
+  "at": "2026-10-14T01:42:34.558056+00:00",
+  "decision": "accepted composition source; joined execution pending",
+  "source": "40433f104a35e59c2ac1017be6092fcf44c0958f",
+  "base": "64d536d5388349da07ce44f78c24b2ef3663e104",
+  "freeze_sha256": "e67a6b3ebbc94da6a061c33e4a39177fb65215a8749e42aedc34ac380d62c141",
+  "independent_tree": "fa7d0b03478ef7720e159c811948bc996a337a77",
+  "verified_live_inputs": 3885,
+  "review": [
+    "Independently replayed exact three accepted source patches in a temporary Git index on actual main259; crates/vendor/manifests/lock equal frozen composed source",
+    "Read combined bindings.rs/lib.rs seams: startup conversion, paired instance metadata, and chunk labels remain separate; numeric capabilities and VM drop order preserved"
+  ],
+  "performance_claim": false
+}

@@ -1,0 +1,13 @@
+{
+  "at": "2026-10-14T01:40:24.302952+00:00",
+  "decision": "accepted producer source and final qualification; composed source requires its own joined checks",
+  "source": "3c81bbe6763f78c10c7d13d08975f2ffeff7caa3",
+  "packet": "f5d1894dc9d26f95cc10a80bb5026c942b865f92",
+  "manifest_sha256": "ff6ee0d92c3c939a0b6c10ae688d73362b291dd1c7797a43cb223151ea2233b3",
+  "review": [
+    "Root and independent peer source reviews accepted",
+    "Replayed --verify-only --historical --originals --local-binaries: 3881 committed inputs,55 records51payloads,14success and1retained setupfailure,156cases,4immediatebinaries,actual10000row Rust consumer",
+    "Current tree725263f4 differs at precisely bindings.rs/lib.rs/project_bindings.rs due reviewed BoundGroup intake; read and accepted these three deltas; producer execution stays labeled3c81",
+    "No shipping speed or runtime budget claim"
+  ]
+}

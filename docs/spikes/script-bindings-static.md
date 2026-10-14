@@ -63,8 +63,8 @@ python3 docs/spikes/evidence/script-bindings-static/verify.py --verify-only
 Add `--originals --local-binaries` on the producer machine to verify retained raw
 files and executable copies. `--historical` permits later changes while reporting
 them explicitly and still verifies every immutable source input; a later union
-must separately qualify those changes. The source review is independently
-accepted; final packet review and cache composition remain pending.
+must separately qualify those changes. Source and final packet reviews are independently accepted. The subsequent
+cache composition has separate source and execution qualification.
 
 The original Core fast-10k shipping build and its 3,520,096-byte generated source
 remain separately preserved. This packet does not claim that build completed,

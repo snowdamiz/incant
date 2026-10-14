@@ -1,0 +1,168 @@
+{
+  "version": 1,
+  "source": "40433f104a35e59c2ac1017be6092fcf44c0958f",
+  "base": "64d536d5388349da07ce44f78c24b2ef3663e104",
+  "records": 45,
+  "payloads": 42,
+  "archive": {
+    "path": "docs/spikes/evidence/script-caches-main259/records.json.gz",
+    "bytes": 346637,
+    "sha256": "ea69ae466d5934d7604a5f0382889c4e7612b0a26d7356a793637b49add373c7"
+  },
+  "verifier": {
+    "path": "docs/spikes/evidence/script-caches-main259/verify.py",
+    "bytes": 5312,
+    "sha256": "776992fff02bcaf983f1d479f6fad12a3f2433339c81eed6fb0610cd8b7d0bf7"
+  },
+  "reviews": [
+    {
+      "path": "docs/spikes/evidence/script-caches-main259/mac-core-baseline-root-20261014.json",
+      "bytes": 651,
+      "sha256": "297fa502c904c38b8d329c57b1ce3d8aec2c9e2aac06e40003e4cfeb1c3900e0"
+    },
+    {
+      "path": "docs/spikes/evidence/script-caches-main259/script-caches-main259-source-root-20261014.json",
+      "bytes": 805,
+      "sha256": "4e7ef2ecdd5163c2639e64f654fb0a5c6285e94dddd855fd9cf3f6f613aeefaa"
+    },
+    {
+      "path": "docs/spikes/evidence/script-caches-main259/script-instance-cache-root-20261014.json",
+      "bytes": 1570,
+      "sha256": "55affb1ce0c77b1a789db8e63a2689ebb05112a98f7dbf872d77e80f4bf8dd5c"
+    },
+    {
+      "path": "docs/spikes/evidence/script-caches-main259/script-chunk-id-cache-final-independent-20261013.json",
+      "bytes": 11251,
+      "sha256": "6c809a6aae9ce2ff889184619b10231a6bbeb5e250cd3c8b94a28f72257bc7c2"
+    }
+  ],
+  "producer_files": [
+    {
+      "path": "docs/spikes/evidence/script-bindings-static/manifest.json",
+      "bytes": 1392,
+      "sha256": "b1d0313e02aa9b07edeb55a727a54eb1a97cf355592057aeb781e4edd0e668d8"
+    },
+    {
+      "path": "docs/spikes/evidence/script-bindings-static/records.json.gz",
+      "bytes": 687078,
+      "sha256": "c4031f0eb6cec9b8d99a7fd389c1de5534662fd0eb64019ff26d8f4b98f98484"
+    },
+    {
+      "path": "docs/spikes/evidence/script-bindings-static/script-bindings-static-final-root-20261014.json",
+      "bytes": 890,
+      "sha256": "1d640d2e8d273f4750d44175a2d320c2c203d9b3fdb72ec18d49218f9961d787"
+    },
+    {
+      "path": "docs/spikes/evidence/script-bindings-static/script-bindings-static-source-independent-20261013.json",
+      "bytes": 21981,
+      "sha256": "11ebe7d1b2bd3ee12f5e4ef2ff6d1a4030d60e3b1413f8485eecfa9ff924af2e"
+    },
+    {
+      "path": "docs/spikes/evidence/script-bindings-static/script-bindings-static-source-root-20261014.json",
+      "bytes": 1740,
+      "sha256": "da87ad51651106f88880c9db4964fd502d8aad6913974ed9b34d48f510d6f500"
+    },
+    {
+      "path": "docs/spikes/evidence/script-bindings-static/verify.py",
+      "bytes": 5826,
+      "sha256": "0efe52f88657d6a6e5d7a14c60f917b0720c40474b0f2bd86816fad4d3ef9429"
+    },
+    {
+      "path": "docs/spikes/evidence/script-instance-cache/artifacts.json.gz",
+      "bytes": 41207,
+      "sha256": "1efceae5eacf4808913dcaef5ff0fa50d0684b4a17020f276db4e6f8ceb98d41"
+    },
+    {
+      "path": "docs/spikes/evidence/script-instance-cache/collect.py",
+      "bytes": 2670,
+      "sha256": "9b147bd18f734c665f06caf33e8058ad232b1706293f2703a9f478d0819d295c"
+    },
+    {
+      "path": "docs/spikes/evidence/script-instance-cache/manifest.json",
+      "bytes": 12978,
+      "sha256": "fee160cc1a6a5fbafc7cf7b8aa7a3121db69b55071a48cc5962e2414eda58c24"
+    },
+    {
+      "path": "docs/spikes/evidence/script-instance-cache/verify.py",
+      "bytes": 5137,
+      "sha256": "b2ace1a4db38046a64196b5e70f4b1eb92407bc2f073dc6c80a7576b9ea5978b"
+    },
+    {
+      "path": "docs/spikes/evidence/script-chunk-id-cache/artifacts.json.gz",
+      "bytes": 33189,
+      "sha256": "7f042840b3a1cf643fb5f8c8147333d381563f736e8e0b62992c078debecc11c"
+    },
+    {
+      "path": "docs/spikes/evidence/script-chunk-id-cache/collect.py",
+      "bytes": 2717,
+      "sha256": "b95d2a1dff96d15a4f78d33f3a93ac99185b503a22ee05e6a7548c1bca22e6f0"
+    },
+    {
+      "path": "docs/spikes/evidence/script-chunk-id-cache/manifest.json",
+      "bytes": 7608,
+      "sha256": "45dc28e26ac3befd400452c64ab674ef5f574a5939c0dc4db179def557406a4e"
+    },
+    {
+      "path": "docs/spikes/evidence/script-chunk-id-cache/verify.py",
+      "bytes": 4344,
+      "sha256": "7c99b59da97a02b821d84f80ee5378295b4a1b93f2092ed3d4f65a8d0adea10e"
+    },
+    {
+      "path": "docs/spikes/evidence/mac-core-baseline/artifacts.json.gz",
+      "bytes": 4203280,
+      "sha256": "464615f6df17f02c0a2ed59f0f6d72267ba9503abca00ad1518f00baaa44d2a0"
+    },
+    {
+      "path": "docs/spikes/evidence/mac-core-baseline/audit-result.json",
+      "bytes": 2386,
+      "sha256": "ed634d36521a14cce946b0b29ed5fb83be224f7c0aed23943972c768c800cb3a"
+    },
+    {
+      "path": "docs/spikes/evidence/mac-core-baseline/build.py",
+      "bytes": 4672,
+      "sha256": "d1b46a6da07be370d1552b2f8f48696509ccaad3d3a22dbb0314ee79ee1f49b1"
+    },
+    {
+      "path": "docs/spikes/evidence/mac-core-baseline/collect.py",
+      "bytes": 3852,
+      "sha256": "0207438fa206c6dac396e62e39e048a10be16112529fae19be19f321586923b2"
+    },
+    {
+      "path": "docs/spikes/evidence/mac-core-baseline/manifest.json",
+      "bytes": 97113,
+      "sha256": "134b7cc3a5ba95bb7319ae11dcadc2edacc237c0f5365818483652dd44ddfad4"
+    },
+    {
+      "path": "docs/spikes/evidence/mac-core-baseline/metrics.py",
+      "bytes": 4149,
+      "sha256": "bceec9a46b2bca5c22d518d6f054dd01eeb85aa34b722d1792f5876a7aa5f8d7"
+    },
+    {
+      "path": "docs/spikes/evidence/mac-core-baseline/review.json",
+      "bytes": 2511,
+      "sha256": "489b068a9513294d339e29552d8938237f24b22d58b6b34d4240f377e151fc0d"
+    },
+    {
+      "path": "docs/spikes/evidence/mac-core-baseline/verify.py",
+      "bytes": 9308,
+      "sha256": "755b00a10d5b7d4db93cac824f56a09f7c96971749556d5578f80720fd27f345"
+    }
+  ],
+  "production_patches": [
+    {
+      "producer": "3c81bbe6763f78c10c7d13d08975f2ffeff7caa3",
+      "record": "3c81bbe6.patch",
+      "sha256": "225e42fff2fe7f6ef18a40c4a418379eff33e6ffad5fc18d94412c2c6728859f"
+    },
+    {
+      "producer": "7a667eae",
+      "record": "7a667eae.patch",
+      "sha256": "449a652c29ce478c4a6c498ea665e5280fa5b75f73e4e6b944196b0cd7190ff8"
+    },
+    {
+      "producer": "3a8a17e2",
+      "record": "3a8a17e2.patch",
+      "sha256": "e9d8c7313c4b13aea9cab080b9be4751e8a58a29200019dd1bf113c88b501e93"
+    }
+  ]
+}

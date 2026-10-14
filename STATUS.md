@@ -1,5 +1,16 @@
 # Implementation status
 
+## Script startup data and immutable metadata caches — joined CPU checks pass
+
+The current main259 composition preserves the three reviewed changes: constant
+binding tables, immutable attachment snapshots and immutable bulk-query row IDs.
+Both numerical modes pass 167 CPU cases and strict all-target lint; compiler-free
+native/wasm and dependency checks pass. All 3,885 frozen inputs remain exact and
+six immediate binaries are retained. Final integration review and PR checks are
+pending; the historical Core measurements below do not measure this union. No
+shipping build/runtime speedup or performance gate is claimed.
+[Current evidence](docs/spikes/script-caches-main259.md).
+
 ## Bulk-query row-label cache — CPU correctness verified
 
 Immutable ordered row IDs now reuse frozen metadata arrays while numeric views
@@ -33,8 +44,8 @@ bounded startup conversion. The unchanged catalog validator preserves identity
 and finite f64 bits; dependencies and bytecode authority stay unchanged. Source
 review is accepted; 156 current CPU cases, strict lint, native/wasm lean builds
 and a real generated 10,000-row Rust consumer pass. The first standalone
-consumer-driver dependency-path failure is retained. Final packet review and
-current cache composition are pending; no shipping build/runtime speedup is
+consumer-driver dependency-path failure is retained. Final producer review is
+accepted; the joined cache qualification is recorded above. No shipping build/runtime speedup is
 claimed. [Evidence](docs/spikes/script-bindings-static.md).
 
 ## Core 10k-script input — native correctness, measurement pending

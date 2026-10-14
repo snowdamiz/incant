@@ -29,6 +29,11 @@
       "path": "docs/spikes/evidence/script-bindings-static/script-bindings-static-source-independent-20261013.json",
       "bytes": 21981,
       "sha256": "11ebe7d1b2bd3ee12f5e4ef2ff6d1a4030d60e3b1413f8485eecfa9ff924af2e"
+    },
+    {
+      "path": "docs/spikes/evidence/script-bindings-static/script-bindings-static-final-root-20261014.json",
+      "bytes": 890,
+      "sha256": "1d640d2e8d273f4750d44175a2d320c2c203d9b3fdb72ec18d49218f9961d787"
     }
   ]
 }
