@@ -1,5 +1,16 @@
 # Implementation status
 
+## Host-bound engine-pin file protocol — application binding pending
+
+The host-only opened-project capability now supports exact-current legacy pin,
+create-only original-byte backup, durable journal/file recovery and undo/redo.
+Independent filesystem/journal source reviews and 87 source/command tests pass,
+including real subprocess crash/write-error controls; strict lint and lean checks
+pass. One real redo Abort snapshot mismatch was diagnosed and repaired with exact
+durable CRDT-byte reuse; its failed attempt remains retained. No CLI/RPC/editor
+endpoint or older-format conversion is exposed. [Scope and evidence](docs/spikes/project-pin-migration.md).
+
+
 ## QuickJS allocation getter — diagnostic-only main272 intake
 
 The isolated Apple arm64 getter has 32 historical same-lock parity observations
