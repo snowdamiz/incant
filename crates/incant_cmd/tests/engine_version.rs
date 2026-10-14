@@ -88,7 +88,7 @@ fn review_binds_exact_source_identity_revision_and_candidate_without_writing() {
     let bus = CommandBus::persistent(&journal, project.clone()).unwrap();
     drop(bus);
     let old_journal = std::fs::read(&journal).unwrap();
-    let mut bus = CommandBus::persistent(&journal, project.clone()).unwrap();
+    let bus = CommandBus::persistent(&journal, project.clone()).unwrap();
     let plan = bus.review_engine_pin(&source, 0).unwrap();
     assert_eq!(
         plan.source_sha256,
