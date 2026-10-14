@@ -109,6 +109,160 @@
     0.03125
    ],
    "ok": true
+  },
+  {
+   "check": "old age 7, current clear, reaction 0: the 8th absent frame keeps no old colour and no record",
+   "detail": {
+    "color": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "red": 0.0
+   },
+   "ok": true
+  },
+  {
+   "check": "mutation: blending before the age test leaves old colour at age 8 (detected)",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "previous primary 5, current support only 7: record [5,7], ages 1..7, refused at 8, fresh [7] seed",
+   "detail": [
+    [
+     [
+      5,
+      7
+     ],
+     1.0,
+     0.972973
+    ],
+    [
+     [
+      5,
+      7
+     ],
+     2.0,
+     0.946676
+    ],
+    [
+     [
+      5,
+      7
+     ],
+     3.0,
+     0.921091
+    ],
+    [
+     [
+      5,
+      7
+     ],
+     4.0,
+     0.896196
+    ],
+    [
+     [
+      5,
+      7
+     ],
+     5.0,
+     0.871975
+    ],
+    [
+     [
+      5,
+      7
+     ],
+     6.0,
+     0.848408
+    ],
+    [
+     [
+      5,
+      7
+     ],
+     7.0,
+     0.825478
+    ],
+    [
+     [
+      7
+     ],
+     0.0,
+     0.0
+    ],
+    [
+     [
+      7
+     ],
+     0.0,
+     0.0
+    ]
+   ],
+   "ok": true
+  },
+  {
+   "check": "mutation: fresh-primary-first [7,5] resets the clock and old colour survives 20 frames (detected)",
+   "detail": [
+    [
+     [
+      7,
+      5
+     ],
+     1.0,
+     0.972973
+    ],
+    [
+     [
+      7,
+      5
+     ],
+     0.0,
+     0.946676
+    ],
+    [
+     [
+      7,
+      5
+     ],
+     0.0,
+     0.921091
+    ]
+   ],
+   "ok": true
+  },
+  {
+   "check": "conservative overflow keeps carried primary 5 and every class",
+   "detail": "{'a': 5, 'over': True, 'classes': {5, 6, 7}}",
+   "ok": true
+  },
+  {
+   "check": "nine coplanar depth-5 samples with one moving outer contributor: no single-motion history",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "mutation: anchor-only motion admits that history (detected)",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "uniform motion over the full support is admitted",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "previous-depth disagreement alone refuses (existing tolerance)",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "alpha-0 sample with a positive (malformed) depth is clear, not surface or primary evidence",
+   "detail": null,
+   "ok": true
   }
  ],
  "scope": "transcription of resolve.wgsl and resolve_owner.wgsl rules; not a render or gate"

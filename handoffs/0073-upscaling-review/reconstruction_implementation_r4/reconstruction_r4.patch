@@ -248,6 +248,39 @@ index 28ed7fde7dde..9e994f3be22a 100644
  }
  /// Conservative receiver/cluster guard includes all phases (at most half pixel).
  pub(crate) fn guard(rect: [f32; 4]) -> [f32; 2] {
+diff --git a/crates/incant_render/src/temporal_shader/cooked/host.rs b/crates/incant_render/src/temporal_shader/cooked/host.rs
+index 7b26def3be36..0e0cd3da047d 100644
+--- a/crates/incant_render/src/temporal_shader/cooked/host.rs
++++ b/crates/incant_render/src/temporal_shader/cooked/host.rs
+@@ -84,8 +84,8 @@
+         let (actual, size, count) = match kind {
+             Kind::Resolve => (crate::temporal::system::layout_entries(false), 64, 4),
+             Kind::Copy => (crate::temporal::system::layout_entries(true), 64, 1),
+-            Kind::UpscaleOwner => (crate::upscaling::system::owner_layout_entries(), 96, 7),
+-            Kind::Upscale => (crate::upscaling::system::layout_entries(5), 96, 5),
++            Kind::UpscaleOwner => (crate::upscaling::system::owner_layout_entries(), 96, 8),
++            Kind::Upscale => (crate::upscaling::system::layout_entries(6), 96, 6),
+             Kind::Composite => (crate::upscaling::system::layout_entries(2), 96, 2),
+             #[cfg(feature = "native-metalfx")]
+             Kind::MetalFxPack | Kind::MetalFxNormalize => {
+@@ -105,7 +105,7 @@
+             let mut e = vec![uniform(size, wgpu::ShaderStages::FRAGMENT)];
+             e.extend((1..=count).map(|i| {
+                 let mut entry = texture(i, i == 3);
+-                if kind == Kind::UpscaleOwner && matches!(i, 6 | 7) {
++                if kind == Kind::UpscaleOwner && matches!(i, 7 | 8) {
+                     entry.ty = wgpu::BindingType::Texture {
+                         sample_type: wgpu::TextureSampleType::Uint,
+                         view_dimension: wgpu::TextureViewDimension::D2,
+@@ -116,7 +116,7 @@
+             }));
+             if kind == Kind::UpscaleOwner {
+                 e.push(wgpu::BindGroupLayoutEntry {
+-                    binding: 8,
++                    binding: 9,
+                     ..uniform(12_528, wgpu::ShaderStages::FRAGMENT)
+                 });
+             }
 diff --git a/crates/incant_render/src/upscaling/device_tests.rs b/crates/incant_render/src/upscaling/device_tests.rs
 index 0b142dbc55df..e3278b798d0d 100644
 --- a/crates/incant_render/src/upscaling/device_tests.rs
@@ -482,10 +515,10 @@ index f202ef11628d..f3afcea62895 100644
  pub(super) const MAX_OVERLAY_BYTES: u64 = 8 * crate::motion::MAX_MOTION_PIXELS;
  #[derive(Clone, Copy, Debug)]
 diff --git a/crates/incant_render/src/upscaling/resolve.wgsl b/crates/incant_render/src/upscaling/resolve.wgsl
-index 70c33d23ef18..3c5fc127024b 100644
+index 70c33d23ef18..63bf8144516f 100644
 --- a/crates/incant_render/src/upscaling/resolve.wgsl
 +++ b/crates/incant_render/src/upscaling/resolve.wgsl
-@@ -3,109 +3,128 @@
+@@ -3,109 +3,148 @@
  @group(0) @binding(3) var current_depth:texture_depth_2d;
  @group(0) @binding(4) var previous_color:texture_2d<f32>;
  @group(0) @binding(5) var previous_depth:texture_2d<f32>;
@@ -562,11 +595,22 @@ index 70c33d23ef18..3c5fc127024b 100644
 +        e.sum+=clean(v)*w; e.mass+=w;
 +        let z=linear_depth(textureLoad(current_depth,t,0));
 +        if v.a<1.0 || z<=0.0 {e.single=false;}
-+        if z>0.0 && z<e.nearest {e.nearest=z;e.anchor=t;}
++        // Only a covered sample (a > 0) can be a surface; an alpha-0 claim is clear.
++        if v.a>0.0 && z>0.0 && z<e.nearest {e.nearest=z;e.anchor=t;}
      }}
 -    if !central {return bilinear;}
 -    return clean(vec4f(clamp(sum,low,high),1.0));
--}
++    if !(e.nearest<=frame.depth.y) {e.single=false;}
++    if e.single {
++        for(var y=-1;y<=1;y++) {for(var x=-1;x<=1;x++) {
++            let t=c+vec2i(x,y);
++            if any(t<lo(frame.source)) || any(t>hi(frame.source)) || !(kernel_weight(p,t)>0.0) {continue;}
++            if !admitted(textureLoad(current,t,0)) {continue;}
++            e.single=e.single && compatible(linear_depth(textureLoad(current_depth,t,0)),e.nearest);
++        }}
++    }
++    return e;
+ }
 -// Reprojected history: Catmull-Rom over the 4x4 previous taps around old when every
 -// tap with a nonzero weight is inside and admitted at the expected depth, clamped
 -// to the central 2x2 range. Otherwise the bilinear history with per-tap rejection.
@@ -583,19 +627,26 @@ index 70c33d23ef18..3c5fc127024b 100644
 -        let v=clean(c).rgb;
 -        sum+=v*w;
 -        if x>=0 && x<=1 && y>=0 && y<=1 {low=min(low,v);high=max(high,v);central=true;}
--    }}
++// Single-motion proof. One depth does not prove one motion: coplanar samples may
++// move independently. Every contributing current sample must carry valid motion
++// whose reprojection agrees with the anchor's within MOTION_SLACK output pixels
++// (the static proof's existing bound) and whose previous depth is compatible with
++// the anchor's (the existing depth tolerance, not widened). Otherwise the pixel
++// keeps its current evidence but reuses no history.
++const MOTION_SLACK:f32=1.0/256.0;
++fn coherent(p:vec2f,a:vec4f)->bool {
++    let c=vec2i(floor(source_position(p)));
++    let za=linear_depth(a.z);
++    for(var y=-1;y<=1;y++) {for(var x=-1;x<=1;x++) {
++        let t=c+vec2i(x,y);
++        if any(t<lo(frame.source)) || any(t>hi(frame.source)) || !(kernel_weight(p,t)>0.0) {continue;}
++        let m=textureLoad(motion,t,0);
++        if !finite4(m) || m.w<0.5 || !compatible(linear_depth(m.z),za) {return false;}
++        if any(abs(m.xy-a.xy)*frame.output.zw>=vec2f(MOTION_SLACK)) {return false;}
+     }}
 -    if !central {return bilinear;}
 -    return clean(vec4f(clamp(sum,low,high),1.0));
-+    if !(e.nearest<=frame.depth.y) {e.single=false;}
-+    if e.single {
-+        for(var y=-1;y<=1;y++) {for(var x=-1;x<=1;x++) {
-+            let t=c+vec2i(x,y);
-+            if any(t<lo(frame.source)) || any(t>hi(frame.source)) || !(kernel_weight(p,t)>0.0) {continue;}
-+            if !admitted(textureLoad(current,t,0)) {continue;}
-+            e.single=e.single && compatible(linear_depth(textureLoad(current_depth,t,0)),e.nearest);
-+        }}
-+    }
-+    return e;
++    return true;
  }
  @fragment fn resolve(@builtin(position) position:vec4f)->Resolved {
 -    var result=Resolved(vec4f(0.0),0.0);
@@ -638,8 +689,9 @@ index 70c33d23ef18..3c5fc127024b 100644
 +    result.evidence=vec2f(min(e.mass,evidence_cap()),0.0);
      if frame.depth.w<0.5 {return result;}
 -    let m=textureLoad(motion,anchor,0);
+-    if !finite4(m) || m.w<0.5 {return result;}
 +    let m=textureLoad(motion,e.anchor,0);
-     if !finite4(m) || m.w<0.5 {return result;}
++    if !finite4(m) || m.w<0.5 || !coherent(p,m) {return result;}
      let expected=linear_depth(m.z);
      // Motion includes both jittered projections. Output history is unjittered.
      let u=(p-frame.output.xy)/frame.output.zw;
@@ -697,7 +749,7 @@ index 70c33d23ef18..3c5fc127024b 100644
      return result;
  }
 diff --git a/crates/incant_render/src/upscaling/resolve_owner.wgsl b/crates/incant_render/src/upscaling/resolve_owner.wgsl
-index 94b217799af6..599e9b8b2e7a 100644
+index 94b217799af6..79d8816c8955 100644
 --- a/crates/incant_render/src/upscaling/resolve_owner.wgsl
 +++ b/crates/incant_render/src/upscaling/resolve_owner.wgsl
 @@ -1,41 +1,47 @@
@@ -762,7 +814,24 @@ index 94b217799af6..599e9b8b2e7a 100644
      return vec2u(HIGH_BIT|s.a,select(s.b,HIGH_BIT|s.m,s.over));
  }
  // Canonical previous record; anything else is no history.
-@@ -62,182 +68,183 @@
+@@ -55,6 +61,16 @@
+     if r.over {o.m|=r.m;o.over=true;} else if r.b!=0u {o=with_id(o,r.b);}
+     return o;
+ }
++// The carried record keeps its primary (the absence clock's identity); every
++// fresh contributor joins after it, overflowing conservatively.
++fn carried(r:Stored,s:Owners)->Owners {
++    var o=owner_set(r.a);
++    if r.over {o.m|=r.m;o.over=true;} else if r.b!=0u {o=with_id(o,r.b);}
++    if s.a!=0u {o=with_id(o,s.a);}
++    if s.over {o.m|=s.m;o.over=true;} else if s.b!=0u {o=with_id(o,s.b);}
++    o.ok=o.ok && s.ok;
++    return o;
++}
+ // Exact recorded IDs by the changed table; overflow records by class.
+ fn record_unchanged(r:Stored,support_classes:u32,changed_classes:u32)->bool {
+     if r.over {return ((r.m|support_classes)&changed_classes)==0u;}
+@@ -62,182 +78,215 @@
  }
  // A reprojected tap follows the motion of the current anchor, which the caller
  // requires to be r.a, so only that owner may have changed. Any other changed exact
@@ -791,7 +860,94 @@ index 94b217799af6..599e9b8b2e7a 100644
 -        let c=textureLoad(current,tap,0);
 -        if !admitted(c) || c.a<1.0 || !compatible(linear_depth(textureLoad(current_depth,tap,0)),nearest) {
 -            return fallback;
--        }
++fn evidence_cap()->f32 {
++    let h=clamp(frame.options.x,0.0,0.99);
++    let r=frame.output.z/frame.source.z;
++    return h/(1.0-h)*min(r*r,4.0);
++}
++fn kernel_weight(p:vec2f,t:vec2i)->f32 {
++    let r=frame.output.z/frame.source.z;
++    let rho=0.35+0.325*max(r-2.0,0.0);
++    let at=frame.output.xy+((vec2f(t)+vec2f(0.5)-frame.source.xy)/frame.source.zw-frame.jitter.xy)*frame.output.zw;
++    let d=p-at;
++    return r*r/(6.283185307*rho*rho)*exp(-dot(d,d)/(2.0*rho*rho));
++}
++// Single-motion proof. One depth does not prove one motion: coplanar samples may
++// move independently. Every contributing current sample must carry valid motion
++// whose reprojection agrees with the anchor's within MOTION_SLACK output pixels
++// (the static proof's existing bound) and whose previous depth is compatible with
++// the anchor's (the existing depth tolerance, not widened). Otherwise the pixel
++// keeps its current evidence but reuses no history.
++const MOTION_SLACK:f32=1.0/256.0;
++fn coherent(p:vec2f,a:vec4f)->bool {
++    let c=vec2i(floor(source_position(p)));
++    let za=linear_depth(a.z);
++    for(var y=-1;y<=1;y++) {for(var x=-1;x<=1;x++) {
++        let t=c+vec2i(x,y);
++        if any(t<lo(frame.source)) || any(t>hi(frame.source)) || !(kernel_weight(p,t)>0.0) {continue;}
++        let m=textureLoad(motion,t,0);
++        if !finite4(m) || m.w<0.5 || !compatible(linear_depth(m.z),za) {return false;}
++        if any(abs(m.xy-a.xy)*frame.output.zw>=vec2f(MOTION_SLACK)) {return false;}
++    }}
++    return true;
++}
++// Stored mass and integer age of one previous texel, or (-1,-1) when unusable.
++fn stored_evidence(v:vec4f)->vec2f {
++    if frame.reactive.w<0.5 || !(v.x>=0.0 && v.x<=65504.0) || !(v.y>=0.0 && v.y<MAX_AGE) || v.y!=floor(v.y) {
++        return vec2f(-1.0);
++    }
++    // Validated only against the RG16F wire range. The current cap must not clip a
++    // tap before accumulation: density, cap and reaction act once on the
++    // associated mass C = sum(b*W), so H = N/C keeps every tap's true weight.
++    return v.xy;
++}
++// The owner word of a surface tap: its ID and whether it changed this frame.
++fn owner_of(t:vec2i)->vec2u {
++    let word=textureLoad(owner,t,0).x; let n=word&~HIGH_BIT;
++    return vec2u(n,select(0u,1u,(word&HIGH_BIT)!=0u || (valid_id(n) && changed_id(n))));
++}
++// Current evidence with provenance over the same declared 3x3 support as
++// resolve.wgsl. Every positive in-rect contributor counts (clear: zero colour,
++// full weight); every contributing surface owner joins `owners`, the nearest
++// surface's owner first. Changed owners stay valid current evidence; they only
++// forbid unclipped persistence. An invalid owner makes the record unprovable.
++struct Evidence {
++    sum:vec4f, mass:f32, valid:bool, single:bool, surface:bool, changed:bool,
++    nearest:f32, anchor:vec2i, owners:Owners, classes:u32, changed_secondary:bool,
++}
++fn current_evidence(p:vec2f)->Evidence {
++    var e=Evidence(vec4f(0.0),0.0,true,true,false,false,frame.depth.y+1.0,vec2i(0),Owners(0u,0u,0u,false,true),0u,false);
++    let c=vec2i(floor(source_position(p)));
++    for(var y=-1;y<=1;y++) {for(var x=-1;x<=1;x++) {
++        let t=c+vec2i(x,y);
++        if any(t<lo(frame.source)) || any(t>hi(frame.source)) {continue;}
++        let w=kernel_weight(p,t);
++        if !(w>0.0) {continue;}
++        let v=textureLoad(current,t,0);
++        if !admitted(v) {e.valid=false;continue;}
++        e.sum+=clean(v)*w; e.mass+=w;
++        let z=linear_depth(textureLoad(current_depth,t,0));
++        if v.a<1.0 || z<=0.0 {e.single=false;}
++        // Only a covered sample (a > 0) is surface evidence; an alpha-0 claim with a
++        // positive (malformed) depth is clear and never current primary evidence.
++        if v.a>0.0 && z>0.0 {e.surface=true; if z<e.nearest {e.nearest=z;e.anchor=t;}}
++    }}
++    if !e.surface {e.single=false; return e;}
++    e.owners=owner_set(owner_of(e.anchor).x);
++    for(var y=-1;y<=1;y++) {for(var x=-1;x<=1;x++) {
++        let t=c+vec2i(x,y);
++        if any(t<lo(frame.source)) || any(t>hi(frame.source)) || !(kernel_weight(p,t)>0.0) {continue;}
++        let v=textureLoad(current,t,0);
++        if !admitted(v) {continue;}
++        let z=linear_depth(textureLoad(current_depth,t,0));
++        if !(v.a>0.0) || z<=0.0 {continue;}
++        e.single=e.single && compatible(z,e.nearest);
++        let o=owner_of(t);
++        e.owners=with_id(e.owners,o.x);
++        if valid_id(o.x) {
++            e.classes|=class_of(o.x);
++            if o.y!=0u {e.changed=true; if o.x!=e.owners.a {e.changed_secondary=true;}}
+         }
 -        let v=clean(c).rgb;
 -        sum+=v*w;
 -        if x>=0 && x<=1 && y>=0 && y<=1 {
@@ -831,69 +987,6 @@ index 94b217799af6..599e9b8b2e7a 100644
 -    if !central {return bilinear;}
 -    return SharpHistory(clean(vec4f(clamp(sum,low,high),1.0)),joined);
 -}
-+fn evidence_cap()->f32 {
-+    let h=clamp(frame.options.x,0.0,0.99);
-+    let r=frame.output.z/frame.source.z;
-+    return h/(1.0-h)*min(r*r,4.0);
-+}
-+fn kernel_weight(p:vec2f,t:vec2i)->f32 {
-+    let r=frame.output.z/frame.source.z;
-+    let rho=0.35+0.325*max(r-2.0,0.0);
-+    let at=frame.output.xy+((vec2f(t)+vec2f(0.5)-frame.source.xy)/frame.source.zw-frame.jitter.xy)*frame.output.zw;
-+    let d=p-at;
-+    return r*r/(6.283185307*rho*rho)*exp(-dot(d,d)/(2.0*rho*rho));
-+}
-+// Stored mass and integer age of one previous texel, or (-1,-1) when unusable.
-+fn stored_evidence(v:vec4f)->vec2f {
-+    if frame.reactive.w<0.5 || !(v.x>=0.0 && v.x<=65504.0) || !(v.y>=0.0 && v.y<MAX_AGE) || v.y!=floor(v.y) {
-+        return vec2f(-1.0);
-+    }
-+    // Validated only against the RG16F wire range. The current cap must not clip a
-+    // tap before accumulation: density, cap and reaction act once on the
-+    // associated mass C = sum(b*W), so H = N/C keeps every tap's true weight.
-+    return v.xy;
-+}
-+// The owner word of a surface tap: its ID and whether it changed this frame.
-+fn owner_of(t:vec2i)->vec2u {
-+    let word=textureLoad(owner,t,0).x; let n=word&~HIGH_BIT;
-+    return vec2u(n,select(0u,1u,(word&HIGH_BIT)!=0u || (valid_id(n) && changed_id(n))));
-+}
-+// Current evidence with provenance over the same declared 3x3 support as
-+// resolve.wgsl. Every positive in-rect contributor counts (clear: zero colour,
-+// full weight); every contributing surface owner joins `owners`, the nearest
-+// surface's owner first. Changed owners stay valid current evidence; they only
-+// forbid unclipped persistence. An invalid owner makes the record unprovable.
-+struct Evidence {
-+    sum:vec4f, mass:f32, valid:bool, single:bool, surface:bool, changed:bool,
-+    nearest:f32, anchor:vec2i, owners:Owners, classes:u32,
-+}
-+fn current_evidence(p:vec2f)->Evidence {
-+    var e=Evidence(vec4f(0.0),0.0,true,true,false,false,frame.depth.y+1.0,vec2i(0),Owners(0u,0u,0u,false,true),0u);
-+    let c=vec2i(floor(source_position(p)));
-+    for(var y=-1;y<=1;y++) {for(var x=-1;x<=1;x++) {
-+        let t=c+vec2i(x,y);
-+        if any(t<lo(frame.source)) || any(t>hi(frame.source)) {continue;}
-+        let w=kernel_weight(p,t);
-+        if !(w>0.0) {continue;}
-+        let v=textureLoad(current,t,0);
-+        if !admitted(v) {e.valid=false;continue;}
-+        e.sum+=clean(v)*w; e.mass+=w;
-+        let z=linear_depth(textureLoad(current_depth,t,0));
-+        if v.a<1.0 || z<=0.0 {e.single=false;}
-+        if z>0.0 {e.surface=true; if z<e.nearest {e.nearest=z;e.anchor=t;}}
-+    }}
-+    if !e.surface {e.single=false; return e;}
-+    e.owners=owner_set(owner_of(e.anchor).x);
-+    for(var y=-1;y<=1;y++) {for(var x=-1;x<=1;x++) {
-+        let t=c+vec2i(x,y);
-+        if any(t<lo(frame.source)) || any(t>hi(frame.source)) || !(kernel_weight(p,t)>0.0) {continue;}
-+        if !admitted(textureLoad(current,t,0)) {continue;}
-+        let z=linear_depth(textureLoad(current_depth,t,0));
-+        if z<=0.0 {continue;}
-+        e.single=e.single && compatible(z,e.nearest);
-+        let o=owner_of(t);
-+        e.owners=with_id(e.owners,o.x);
-+        if valid_id(o.x) {e.classes|=class_of(o.x); if o.y!=0u {e.changed=true;}}
 +    }}
 +    return e;
 +}
@@ -954,18 +1047,22 @@ index 94b217799af6..599e9b8b2e7a 100644
 +        let c=textureLoad(previous_color,own,0); let z=textureLoad(previous_depth,own,0).x;
 +        let r=stored(textureLoad(previous_record,own,0).xy);
 +        let s=stored_evidence(textureLoad(previous_evidence,own,0));
-+        let persist=admitted(c) && c.a>0.0 && r.ok && s.x>=0.0
++        // The candidate age is decided BEFORE blending: history whose primary would
++        // reach MAX_AGE is refused, so no old colour survives the eighth absent frame.
++        let age=select(s.y+1.0,0.0,e.surface && sees(e.owners,r.a));
++        let persist=admitted(c) && c.a>0.0 && r.ok && s.x>=0.0 && age<MAX_AGE
 +            && record_unchanged(r,e.classes,changed_classes) && (e.surface || c.a<1.0)
 +            && z==z && z>=0.0 && z<=frame.depth.y;
 +        if persist {
-+            let age=select(s.y+1.0,0.0,e.surface && sees(e.owners,r.a));
 +            // One own texel (b = 1), same extent (density 1): cap once, no reaction.
 +            let w=min(s.x,evidence_cap());
 +            let total=w+e.mass;
 +            if total>0.0 {
 +                result.color=clean((clean(c)*w+e.sum)/total);
-+                result.record=encode(with_record(e.owners,r));
-+                result.depth=select(z,e.nearest,e.surface);
++                // The carried primary stays primary while its colour survives, so a
++                // fresh owner cannot restart the old primary's absence clock.
++                result.record=encode(carried(r,e.owners));
++                result.depth=select(z,e.nearest,e.surface && e.owners.a==r.a);
 +                result.evidence=vec2f(min(total,evidence_cap()),age);
 +                if result.record.x==0u {result.depth=0.0;result.evidence=vec2f(0.0);}
 +                return result;
@@ -992,7 +1089,11 @@ index 94b217799af6..599e9b8b2e7a 100644
 -    result.color=sharp.color; fresh=sharp.owners; support_classes|=sharp.classes;
 -    let provable=fresh.ok;
 -    result.record=encode(fresh);
-+        // Seed: fresh evidence with its surface owners starts coverage history.
+-    if frame.depth.w<0.5 {return result;}
+-    let m=textureLoad(motion,anchor,0);
+-    if !finite4(m) || m.w<0.5 {return result;}
++        // Seed: only fresh surface evidence starts a genuinely fresh record (age 0);
++        // clear alone never seeds.
 +        if e.surface {
 +            result.record=encode(e.owners);
 +            result.depth=e.nearest;
@@ -1009,10 +1110,11 @@ index 94b217799af6..599e9b8b2e7a 100644
 +    var joined=e.owners;
 +    result.record=encode(joined);
 +    result.evidence=vec2f(min(e.mass,evidence_cap()),0.0);
-     if frame.depth.w<0.5 {return result;}
--    let m=textureLoad(motion,anchor,0);
++    // A changed non-anchor current contributor does not follow the anchor's motion
++    // proof: current-only.
++    if frame.depth.w<0.5 || e.changed_secondary {return result;}
 +    let m=textureLoad(motion,e.anchor,0);
-     if !finite4(m) || m.w<0.5 {return result;}
++    if !finite4(m) || m.w<0.5 || !coherent(p,m) {return result;}
      let expected=linear_depth(m.z);
 -    // Motion includes both jittered projections. Output history is unjittered.
      let u=(p-frame.output.xy)/frame.output.zw;
@@ -1063,12 +1165,7 @@ index 94b217799af6..599e9b8b2e7a 100644
 -        SharpHistory(clean(history/mass),joined));
 -    history=sharp_old.color; joined=sharp_old.owners;
 -    var minimum=result.color;var maximum=result.color;
-+    var history=numerator/mass;
-+    // Clamp support is exactly the contributing current support; its owners are
-+    // already in `joined`.
-+    var minimum=fresh;var maximum=fresh;
-+    let c=vec2i(floor(source_position(p)));
-     for(var y=-1;y<=1;y++) {for(var x=-1;x<=1;x++) {
+-    for(var y=-1;y<=1;y++) {for(var x=-1;x<=1;x++) {
 -        let tap=clamp(anchor+vec2i(x,y),lo(frame.source),hi(frame.source));
 -        let c=textureLoad(current,tap,0);
 -        if admitted(c) && c.a>=1.0 && compatible(linear_depth(textureLoad(current_depth,tap,0)),nearest) {
@@ -1078,6 +1175,12 @@ index 94b217799af6..599e9b8b2e7a 100644
 -        }
 -    }}
 -    let change=abs(history.rgb-result.color.rgb);
++    var history=numerator/mass;
++    // Clamp support is exactly the contributing current support; its owners are
++    // already in `joined`.
++    var minimum=fresh;var maximum=fresh;
++    let c=vec2i(floor(source_position(p)));
++    for(var y=-1;y<=1;y++) {for(var x=-1;x<=1;x++) {
 +        let t=c+vec2i(x,y);
 +        if any(t<lo(frame.source)) || any(t>hi(frame.source)) || !(kernel_weight(p,t)>0.0) {continue;}
 +        let v=textureLoad(current,t,0);
@@ -1359,3 +1462,149 @@ index 97266ec1e942..e805b60db650 100644
      assert_eq!(MAX_UPSCALE_TRANSITION_BYTES, 640 * 1024 * 1024 + 16384);
      for (o, a, m) in [
          (MAX_OUTPUT_BYTES + 1, 0, 0),
+diff --git a/crates/incant_shader_cook/src/temporal/contract.rs b/crates/incant_shader_cook/src/temporal/contract.rs
+index 6f01e1fddba1..641b4360d1b4 100644
+--- a/crates/incant_shader_cook/src/temporal/contract.rs
++++ b/crates/incant_shader_cook/src/temporal/contract.rs
+@@ -271,8 +271,15 @@
+                 Io::Float(0, 4, false),
+                 Io::Float(1, 1, false),
+                 Io::Uint(2, 2, false),
++                Io::Float(3, 2, false),
+             ]
+-        } else if matches!(kind, Kind::Upscale | Kind::MetalFxNormalize) {
++        } else if kind == Kind::Upscale {
++            vec![
++                Io::Float(0, 4, false),
++                Io::Float(1, 1, false),
++                Io::Float(2, 2, false),
++            ]
++        } else if kind == Kind::MetalFxNormalize {
+             vec![Io::Float(0, 4, false), Io::Float(1, 1, false)]
+         } else if kind == Kind::MetalFxPack {
+             vec![
+@@ -304,8 +311,8 @@
+         Kind::Motion | Kind::Depth | Kind::MotionOwner => 4,
+         Kind::Resolve => 5,
+         Kind::Copy => 2,
+-        Kind::Upscale => 6,
+-        Kind::UpscaleOwner => 9,
++        Kind::Upscale => 7,
++        Kind::UpscaleOwner => 10,
+         Kind::Composite => 3,
+         Kind::MetalFxPack | Kind::MetalFxNormalize => 4,
+     };
+@@ -342,7 +349,7 @@
+                 }
+             };
+             uniform(m, g.ty, names, frame && motion, material)?;
+-        } else if kind == Kind::UpscaleOwner && b.group == 0 && b.binding == 8 {
++        } else if kind == Kind::UpscaleOwner && b.group == 0 && b.binding == 9 {
+             require(
+                 g.space == AddressSpace::Uniform,
+                 "owner changes uniform space",
+@@ -370,7 +377,7 @@
+                 ImageClass::Depth { multi: false }
+             } else {
+                 ImageClass::Sampled {
+-                    kind: if kind == Kind::UpscaleOwner && matches!(b.binding, 6 | 7) {
++                    kind: if kind == Kind::UpscaleOwner && matches!(b.binding, 7 | 8) {
+                         ScalarKind::Uint
+                     } else {
+                         ScalarKind::Float
+diff --git a/crates/incant_shader_cook/src/temporal/emit.rs b/crates/incant_shader_cook/src/temporal/emit.rs
+index 7cc849db7064..93aa060d4d3e 100644
+--- a/crates/incant_shader_cook/src/temporal/emit.rs
++++ b/crates/incant_shader_cook/src/temporal/emit.rs
+@@ -98,7 +98,7 @@
+                 if g.space == naga::AddressSpace::Uniform {
+                     target.buffer = Some(
+                         if (motion && b.group == 1)
+-                            || (kind == Kind::UpscaleOwner && b.binding == 8)
++                            || (kind == Kind::UpscaleOwner && b.binding == 9)
+                         {
+                             1
+                         } else {
+@@ -213,7 +213,7 @@
+                     .ok_or(CookError::Contract("temporal emitted binding"))?;
+                 let target = if g.space == naga::AddressSpace::Uniform {
+                     bind(u32::from(
+-                        (motion && b.group == 1) || (kind == Kind::UpscaleOwner && b.binding == 8),
++                        (motion && b.group == 1) || (kind == Kind::UpscaleOwner && b.binding == 9),
+                     ))
+                 } else if motion && b.binding == 2 {
+                     hlsl::BindTarget {
+diff --git a/crates/incant_shader_cook/src/temporal/mod.rs b/crates/incant_shader_cook/src/temporal/mod.rs
+index a87caaf31159..f59164791b93 100644
+--- a/crates/incant_shader_cook/src/temporal/mod.rs
++++ b/crates/incant_shader_cook/src/temporal/mod.rs
+@@ -55,10 +55,10 @@
+                 "incant-temporal-copy-v2;naga=29.0.4;wgpu=29.0.4;frame64-f@1,textures1@0,mrt1;msl=2.4;hlsl=6.0,special-b1;spv=1.0,no-y-flip;bounds=restrict;loops=bounded"
+             }
+             Self::UpscaleOwner => {
+-                "incant-temporal-upscale-owner-v1;naga=29.0.4;wgpu=29.0.4;frame96-f,changes12528-f,5float-depth+2uint-textures,mrt=rgba16f-r32f-rg32u;msl=2.4,frame0,changes1;hlsl=6.0,b0-b1,special-b2;spv=1.0,no-y-flip;bounds=restrict;loops=bounded"
++                "incant-temporal-upscale-owner-v2;naga=29.0.4;wgpu=29.0.4;frame96-f,changes12528-f,6float-depth+2uint-textures,mrt=rgba16f-r32f-rg32u-rg16f;msl=2.4,frame0,changes1;hlsl=6.0,b0-b1,special-b2;spv=1.0,no-y-flip;bounds=restrict;loops=bounded"
+             }
+             Self::Upscale => {
+-                "incant-temporal-upscale-v1;naga=29.0.4;wgpu=29.0.4;frame96-f,textures5,mrt2;msl=2.4;hlsl=6.0,special-b1;spv=1.0,no-y-flip;bounds=restrict;loops=bounded"
++                "incant-temporal-upscale-v2;naga=29.0.4;wgpu=29.0.4;frame96-f,textures6,mrt3;msl=2.4;hlsl=6.0,special-b1;spv=1.0,no-y-flip;bounds=restrict;loops=bounded"
+             }
+             Self::Composite => {
+                 "incant-temporal-composite-v1;naga=29.0.4;wgpu=29.0.4;frame96-f,textures2,mrt1;msl=2.4;hlsl=6.0,special-b1;spv=1.0,no-y-flip;bounds=restrict;loops=bounded"
+@@ -94,13 +94,13 @@
+                 215, 243, 186, 96, 58, 160, 76, 135, 91, 164, 141, 235, 36, 139,
+             ],
+             Self::UpscaleOwner => [
+-                27, 85, 27, 146, 191, 29, 9, 129, 89, 255, 19, 72, 60, 81, 19, 109, 50, 4, 181, 5,
+-                234, 254, 126, 203, 122, 233, 142, 128, 187, 32, 162, 128,
+-            ], // Claude 0073 anchor-only changed-owner admission
++                196, 143, 100, 141, 101, 180, 10, 123, 203, 93, 196, 76, 56, 137, 133, 255,
++                121, 85, 90, 116, 173, 34, 246, 123, 64, 132, 199, 18, 238, 232, 32, 3,
++            ], // Claude 0073 r4 evidence estimator, full-support provenance
+             Self::Upscale => [
+-                247, 139, 204, 170, 171, 214, 166, 247, 251, 91, 6, 168, 46, 114, 232, 168, 64,
+-                131, 247, 97, 183, 38, 176, 190, 80, 80, 97, 40, 216, 116, 8, 246,
+-            ],
++                156, 81, 85, 37, 233, 70, 163, 20, 168, 70, 215, 15, 97, 67, 241, 183,
++                34, 19, 130, 97, 137, 190, 180, 171, 181, 156, 6, 186, 20, 189, 40, 54,
++            ], // Claude 0073 r4 evidence estimator
+             Self::Composite => [
+                 129, 207, 231, 197, 156, 114, 85, 211, 53, 86, 189, 212, 33, 103, 207, 218, 245,
+                 203, 31, 62, 204, 242, 36, 180, 61, 83, 155, 186, 117, 165, 155, 55,
+diff --git a/crates/incant_shader_cook/tests/temporal.rs b/crates/incant_shader_cook/tests/temporal.rs
+index 4f513c0f567e..83fc132cf42e 100644
+--- a/crates/incant_shader_cook/tests/temporal.rs
++++ b/crates/incant_shader_cook/tests/temporal.rs
+@@ -138,7 +138,9 @@
+                     "[[buffer(1)]]",
+                     "[[texture(5)]]",
+                     "[[texture(6)]]",
++                    "[[texture(7)]]",
+                     "[[color(2)]]",
++                    "[[color(3)]]",
+                     "uint2",
+                 ],
+                 (Kind::UpscaleOwner, Backend::Dx12, Stage::Fragment) => &[
+@@ -146,17 +148,21 @@
+                     "register(b1)",
+                     "register(t5)",
+                     "register(t6)",
++                    "register(t7)",
+                     "SV_Target2",
++                    "SV_Target3",
+                     "uint2",
+                 ],
+                 (Kind::Upscale, Backend::Metal, Stage::Fragment) => &[
+                     "[[color(0)]]",
+                     "[[color(1)]]",
++                    "[[color(2)]]",
+                     "[[texture(4)]]",
++                    "[[texture(5)]]",
+                     "get_width",
+                 ],
+                 (Kind::Upscale, Backend::Dx12, Stage::Fragment) => {
+-                    &["SV_Target0", "SV_Target1", "register(t4)", ".Load("]
++                    &["SV_Target0", "SV_Target1", "SV_Target2", "register(t5)", ".Load("]
+                 }
+                 (_, Backend::Metal, Stage::Fragment) => &["[[texture(0)]]", "get_width"],
+                 (_, Backend::Dx12, Stage::Fragment) => &["register(t0)", ".Load("],

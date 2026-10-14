@@ -61,6 +61,16 @@
    "removed": 2
   },
   {
+   "added": 4,
+   "base_blob": "7b26def3be36da478888230ff6837d9a593d3314",
+   "base_sha256": "81536a000ae50de240f833d8c5a218ad31c1d617d6cc0d94038ea398b6a2b231",
+   "changed": true,
+   "path": "crates/incant_render/src/temporal_shader/cooked/host.rs",
+   "proposed_blob": "0e0cd3da047df7002232e08373d9a2500d101f50",
+   "proposed_sha256": "1e50b6966444db099b902a925f7219b6485ab81b1c2b601a3cc25272c5e21eeb",
+   "removed": 4
+  },
+  {
    "added": 8,
    "base_blob": "0b142dbc55dffe9c2125e768cb103e0637291c0c",
    "base_sha256": "5665df3ad9395fed273e1057c31acef2fe482fdc77edf7ce743804a00c99257e",
@@ -101,24 +111,24 @@
    "removed": 3
   },
   {
-   "added": 101,
+   "added": 120,
    "base_blob": "70c33d23ef18fac6b8c4ac3d7c25e0b18abdc132",
    "base_sha256": "296fe89066865c4feff4d486506d762a4955a8351aa3f83aa0eff72ba375fc03",
    "changed": true,
    "path": "crates/incant_render/src/upscaling/resolve.wgsl",
-   "proposed_blob": "3c5fc127024b35dadeb2822d200dbad66114b719",
-   "proposed_sha256": "54200022c47e839895a6d54bd1028d056335f1548c31234e3645cae12b97354b",
-   "removed": 82
+   "proposed_blob": "63bf8144516f7e472ea1e17977f6581867c82b3c",
+   "proposed_sha256": "240069814b80af16133998892f2865cc5227f2cb9fcf534977feace3443b0ef5",
+   "removed": 81
   },
   {
-   "added": 171,
+   "added": 215,
    "base_blob": "94b217799af6d03e69ae4e1fe50c821b09c10a5a",
    "base_sha256": "23c094e20e62bba3da35fca373457024cfe5405c2be042802493bbfc1cea4c9f",
    "changed": true,
    "path": "crates/incant_render/src/upscaling/resolve_owner.wgsl",
-   "proposed_blob": "599e9b8b2e7a35db36c9f1892ef59efa663d4f8e",
-   "proposed_sha256": "5fd8449669559e154b740b53e33fec9035277147089878fe7e99219a0509c3aa",
-   "removed": 164
+   "proposed_blob": "79d8816c8955b6eac1ca2a77c7e261bf5f474781",
+   "proposed_sha256": "bdad50d3a8869563921ccaa2515c9eaa1b619d5f8cdf414bd59f972ed57fc14d",
+   "removed": 166
   },
   {
    "added": 61,
@@ -149,15 +159,55 @@
    "proposed_blob": "e805b60db650eb2a453e9dd595e03d9d5006e60d",
    "proposed_sha256": "7b5daed21b62aa5c8e162a40cb735c18f038279597845029868e515eb7a3e84a",
    "removed": 8
+  },
+  {
+   "added": 12,
+   "base_blob": "6f01e1fddba1fe100dc3be4ea28aee93499bf492",
+   "base_sha256": "24fa46bc7e33fd54572f83ab8ecfbb0ee5fcaca54501afb382de9b879ae57e9f",
+   "changed": true,
+   "path": "crates/incant_shader_cook/src/temporal/contract.rs",
+   "proposed_blob": "641b4360d1b401b1e3ed1ad04155795d4c64dd53",
+   "proposed_sha256": "559285d72e6485ee4ebeefea214637e6b2f0650378146c113b50125887d4c5dd",
+   "removed": 5
+  },
+  {
+   "added": 2,
+   "base_blob": "7cc849db70645209128355af35176248c9a16d58",
+   "base_sha256": "daec7c35cbbb2e06ebd8f55201b9d72c8e0d3219c6a506d5ee1dcd28bc34fe27",
+   "changed": true,
+   "path": "crates/incant_shader_cook/src/temporal/emit.rs",
+   "proposed_blob": "93aa060d4d3e7a43b25948d369f5a6123ad9869a",
+   "proposed_sha256": "3b0c6ed0aebace7cc33515f8b7872d300495cdc325db8d85f8eae0ee57b05190",
+   "removed": 2
+  },
+  {
+   "added": 8,
+   "base_blob": "a87caaf31159c4dd80ad5a9f1e61f354c86ee1f4",
+   "base_sha256": "5ef62a338bc73f7526ea2ffd81469e89fd49ebd2046b25aa5d6bd7325fb936c6",
+   "changed": true,
+   "path": "crates/incant_shader_cook/src/temporal/mod.rs",
+   "proposed_blob": "f59164791b93500f863327db861f2afcd3175eb7",
+   "proposed_sha256": "e4f691b3a13f27aab3f0c27d9ccde5fa26d8e3378e61b72e4c9947c51b25e182",
+   "removed": 8
+  },
+  {
+   "added": 7,
+   "base_blob": "4f513c0f567ea36f514c01852b322196c86f1241",
+   "base_sha256": "036c816e14822a228b184fa3d77d5665b527e06b07b4e8f9c1d31ee4c6c49aa1",
+   "changed": true,
+   "path": "crates/incant_shader_cook/tests/temporal.rs",
+   "proposed_blob": "83fc132cf42e7726bbd141b94ebfbed3e675238d",
+   "proposed_sha256": "f9fe961a65844389f0602123c9d2de4811ba8a8ebcd222c823a0a599e9bbf6fb",
+   "removed": 1
   }
  ],
  "git_apply_cached_check_against_76be": true,
  "git_apply_stderr": "",
  "patch": {
-  "bytes": 65882,
-  "files": 15,
+  "bytes": 79785,
+  "files": 20,
   "path": "reconstruction_r4.patch",
-  "sha256": "8d5550a6ab0d026d3c322ef500d770276e947f7aed98fa10b3a5c753607facae"
+  "sha256": "d7e2bd273406cd4c8ef2b33f53cdecf1ea22b18a3345d18a691fdf3c863fee74"
  },
  "production": "76be9608e99bf089fcb1e0908827330f70c28ac1",
  "python_reapply_reproduces_proposed_files": true,

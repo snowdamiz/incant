@@ -72,7 +72,7 @@ def evidence(taps):
         m += w
         if col[3] < 1 or z <= 0:
             single = False
-        if z > 0:
+        if col[3] > 0 and z > 0:                         # an alpha-0 claim is clear
             nearest = min(nearest, z)
     if not math.isfinite(nearest):
         single = False
@@ -84,6 +84,49 @@ def evidence(taps):
 def owner_age(hist_age, surface, sees_primary):
     """resolve_owner.wgsl static persistence: reset only on primary surface evidence."""
     return 0.0 if (surface and sees_primary) else hist_age + 1.0
+
+
+def carried(record, fresh):
+    """resolve_owner.wgsl carried(): record primary first, fresh owners after, overflow at 3."""
+    ids = list(record)
+    for n in fresh:
+        if n not in ids:
+            ids.append(n)
+    if len(ids) > 2:
+        return {"a": ids[0], "over": True, "classes": {n % 31 for n in ids}}
+    return ids
+
+
+def own_static(prev, cur, cap, mutate_age=False, mutate_primary=False):
+    """resolve_owner.wgsl static branch with one own texel (b = 1, density 1, reaction 0).
+    Returns (output, stored) where stored is None when nothing is recorded."""
+    s, m = cur["sum"], cur["mass"]
+    fresh = tuple(x / m for x in s) if m > 0 else (0.0,) * 4
+    if prev is not None:
+        primary = prev["record"][0]
+        age = 0.0 if cur["surface"] and primary in cur["owners"][:2] else prev["age"] + 1.0
+        if (mutate_age or age < MAX_AGE) and (cur["surface"] or prev["color"][3] < 1):
+            w = min(prev["mass"], cap)
+            total = w + m
+            color = tuple((a * w + b) / total for a, b in zip(prev["color"], s))
+            record = (list(cur["owners"]) + [n for n in prev["record"] if n not in cur["owners"]]
+                      if mutate_primary else carried(prev["record"], cur["owners"]))
+            return ({"color": color, "red": prev.get("red", 0.0) * w / total},
+                    {"record": record, "age": age, "mass": min(total, cap)})
+    if cur["surface"]:
+        return {"color": fresh, "red": 0.0}, {"record": list(cur["owners"]), "age": 0.0, "mass": min(m, cap)}
+    return {"color": fresh, "red": 0.0}, None
+
+
+def coherent(taps, anchor, width, slack=1 / 256):
+    """coherent(): every contributor's motion within slack output px and compatible previous depth."""
+    (ax, ay), az = anchor
+    for (mx, my), z in taps:
+        if abs(z - az) > max(0.02, 0.05 * az):
+            return False
+        if abs(mx - ax) * width >= slack or abs(my - ay) * width >= slack:
+            return False
+    return True
 
 
 def main():
@@ -150,6 +193,47 @@ def main():
         return any(abs((y - (slope * (x - x0))) * math.cos(math.atan(slope))) < width / 2 for x, y in zip(xs, ys))
     missed = [x0 / 64 for x0 in range(64) if not hit(x0 / 64, 1.0, 0.05)]
     check("a 0.05-px 45-degree line can miss all 8 samples (axis stratification only)", len(missed) > 0, missed[:3])
+    # 8. Supervision-004 continuation-002: retirement before blend, carried primary,
+    #    full-support motion coherence, alpha-0 clear is not surface evidence.
+    red, blue = (1.0, 0.0, 0.0, 1.0), (0.0, 0.0, 1.0, 1.0)
+    out, rec = own_static({"color": (1.0, 1.0, 1.0, 0.5), "mass": 36.0, "age": 7.0, "record": [5]},
+                          {"sum": (0.0,) * 4, "mass": 1.0, "surface": False, "owners": []}, 36.0)
+    check("old age 7, current clear, reaction 0: the 8th absent frame keeps no old colour and no record",
+          out["color"] == (0.0,) * 4 and rec is None, out)
+    out_m, rec_m = own_static({"color": (1.0, 1.0, 1.0, 0.5), "mass": 36.0, "age": 7.0, "record": [5]},
+                              {"sum": (0.0,) * 4, "mass": 1.0, "surface": False, "owners": []}, 36.0, mutate_age=True)
+    check("mutation: blending before the age test leaves old colour at age 8 (detected)",
+          out_m["color"][0] > 0.9 and rec_m is not None and rec_m["age"] == 8.0)
+    def migrate(mutate_primary):
+        prev, trace = {"color": red, "mass": 36.0, "age": 0.0, "record": [5], "red": 1.0}, []
+        for _ in range(20):
+            cur = {"sum": blue, "mass": 1.0, "surface": True, "owners": [7]}
+            out, rec = own_static(prev, cur, 36.0, mutate_primary=mutate_primary)
+            red_left = out.get("red", 0.0)
+            trace.append((rec["record"] if rec else None, rec["age"] if rec else None, round(red_left, 6)))
+            prev = dict(rec, color=out["color"], red=red_left) if rec else None
+        return trace
+    trace = migrate(False)
+    check("previous primary 5, current support only 7: record [5,7], ages 1..7, refused at 8, fresh [7] seed",
+          [r[:2] for r in trace[:8]] == [([5, 7], float(a)) for a in range(1, 8)] + [([7], 0.0)]
+          and trace[7][2] == 0.0 and all(r[2] == 0.0 for r in trace[7:]), trace[:9])
+    trace_m = migrate(True)
+    check("mutation: fresh-primary-first [7,5] resets the clock and old colour survives 20 frames (detected)",
+          trace_m[0][:2] == ([7, 5], 1.0) and trace_m[1][1] == 0.0 and trace_m[-1][2] > 0.5, trace_m[:3])
+    joined = carried([5, 6], [7])
+    check("conservative overflow keeps carried primary 5 and every class",
+          joined == {"a": 5, "over": True, "classes": {5 % 31, 6 % 31, 7 % 31}}, str(joined))
+    zero, moving = (0.0, 0.0), (0.1, 0.0)
+    taps = [(zero, 5.0)] * 8 + [(moving, 5.0)]           # all nine depth 5; outer positive tap moves
+    check("nine coplanar depth-5 samples with one moving outer contributor: no single-motion history",
+          not coherent(taps, (zero, 5.0), 1920.0))
+    check("mutation: anchor-only motion admits that history (detected)", coherent(taps[:1], (zero, 5.0), 1920.0))
+    check("uniform motion over the full support is admitted", coherent([(moving, 5.0)] * 9, (moving, 5.0), 1920.0))
+    check("previous-depth disagreement alone refuses (existing tolerance)",
+          not coherent([(zero, 5.0)] * 8 + [(zero, 6.0)], (zero, 5.0), 1920.0))
+    clear_claim = evidence([(1.0, (0.0, 0.0, 0.0, 0.0), 4.0)])
+    check("alpha-0 sample with a positive (malformed) depth is clear, not surface or primary evidence",
+          clear_claim[4] == math.inf and not clear_claim[3])
     result = {"scope": "transcription of resolve.wgsl and resolve_owner.wgsl rules; not a render or gate",
               "checks": CHECKS, "all_checks_pass": all(c["ok"] for c in CHECKS)}
     if args.out:

@@ -61,6 +61,16 @@ fn with_record(s:Owners,r:Stored)->Owners {
     if r.over {o.m|=r.m;o.over=true;} else if r.b!=0u {o=with_id(o,r.b);}
     return o;
 }
+// The carried record keeps its primary (the absence clock's identity); every
+// fresh contributor joins after it, overflowing conservatively.
+fn carried(r:Stored,s:Owners)->Owners {
+    var o=owner_set(r.a);
+    if r.over {o.m|=r.m;o.over=true;} else if r.b!=0u {o=with_id(o,r.b);}
+    if s.a!=0u {o=with_id(o,s.a);}
+    if s.over {o.m|=s.m;o.over=true;} else if s.b!=0u {o=with_id(o,s.b);}
+    o.ok=o.ok && s.ok;
+    return o;
+}
 // Exact recorded IDs by the changed table; overflow records by class.
 fn record_unchanged(r:Stored,support_classes:u32,changed_classes:u32)->bool {
     if r.over {return ((r.m|support_classes)&changed_classes)==0u;}
@@ -85,6 +95,25 @@ fn kernel_weight(p:vec2f,t:vec2i)->f32 {
     let d=p-at;
     return r*r/(6.283185307*rho*rho)*exp(-dot(d,d)/(2.0*rho*rho));
 }
+// Single-motion proof. One depth does not prove one motion: coplanar samples may
+// move independently. Every contributing current sample must carry valid motion
+// whose reprojection agrees with the anchor's within MOTION_SLACK output pixels
+// (the static proof's existing bound) and whose previous depth is compatible with
+// the anchor's (the existing depth tolerance, not widened). Otherwise the pixel
+// keeps its current evidence but reuses no history.
+const MOTION_SLACK:f32=1.0/256.0;
+fn coherent(p:vec2f,a:vec4f)->bool {
+    let c=vec2i(floor(source_position(p)));
+    let za=linear_depth(a.z);
+    for(var y=-1;y<=1;y++) {for(var x=-1;x<=1;x++) {
+        let t=c+vec2i(x,y);
+        if any(t<lo(frame.source)) || any(t>hi(frame.source)) || !(kernel_weight(p,t)>0.0) {continue;}
+        let m=textureLoad(motion,t,0);
+        if !finite4(m) || m.w<0.5 || !compatible(linear_depth(m.z),za) {return false;}
+        if any(abs(m.xy-a.xy)*frame.output.zw>=vec2f(MOTION_SLACK)) {return false;}
+    }}
+    return true;
+}
 // Stored mass and integer age of one previous texel, or (-1,-1) when unusable.
 fn stored_evidence(v:vec4f)->vec2f {
     if frame.reactive.w<0.5 || !(v.x>=0.0 && v.x<=65504.0) || !(v.y>=0.0 && v.y<MAX_AGE) || v.y!=floor(v.y) {
@@ -107,10 +136,10 @@ fn owner_of(t:vec2i)->vec2u {
 // forbid unclipped persistence. An invalid owner makes the record unprovable.
 struct Evidence {
     sum:vec4f, mass:f32, valid:bool, single:bool, surface:bool, changed:bool,
-    nearest:f32, anchor:vec2i, owners:Owners, classes:u32,
+    nearest:f32, anchor:vec2i, owners:Owners, classes:u32, changed_secondary:bool,
 }
 fn current_evidence(p:vec2f)->Evidence {
-    var e=Evidence(vec4f(0.0),0.0,true,true,false,false,frame.depth.y+1.0,vec2i(0),Owners(0u,0u,0u,false,true),0u);
+    var e=Evidence(vec4f(0.0),0.0,true,true,false,false,frame.depth.y+1.0,vec2i(0),Owners(0u,0u,0u,false,true),0u,false);
     let c=vec2i(floor(source_position(p)));
     for(var y=-1;y<=1;y++) {for(var x=-1;x<=1;x++) {
         let t=c+vec2i(x,y);
@@ -122,20 +151,26 @@ fn current_evidence(p:vec2f)->Evidence {
         e.sum+=clean(v)*w; e.mass+=w;
         let z=linear_depth(textureLoad(current_depth,t,0));
         if v.a<1.0 || z<=0.0 {e.single=false;}
-        if z>0.0 {e.surface=true; if z<e.nearest {e.nearest=z;e.anchor=t;}}
+        // Only a covered sample (a > 0) is surface evidence; an alpha-0 claim with a
+        // positive (malformed) depth is clear and never current primary evidence.
+        if v.a>0.0 && z>0.0 {e.surface=true; if z<e.nearest {e.nearest=z;e.anchor=t;}}
     }}
     if !e.surface {e.single=false; return e;}
     e.owners=owner_set(owner_of(e.anchor).x);
     for(var y=-1;y<=1;y++) {for(var x=-1;x<=1;x++) {
         let t=c+vec2i(x,y);
         if any(t<lo(frame.source)) || any(t>hi(frame.source)) || !(kernel_weight(p,t)>0.0) {continue;}
-        if !admitted(textureLoad(current,t,0)) {continue;}
+        let v=textureLoad(current,t,0);
+        if !admitted(v) {continue;}
         let z=linear_depth(textureLoad(current_depth,t,0));
-        if z<=0.0 {continue;}
+        if !(v.a>0.0) || z<=0.0 {continue;}
         e.single=e.single && compatible(z,e.nearest);
         let o=owner_of(t);
         e.owners=with_id(e.owners,o.x);
-        if valid_id(o.x) {e.classes|=class_of(o.x); if o.y!=0u {e.changed=true;}}
+        if valid_id(o.x) {
+            e.classes|=class_of(o.x);
+            if o.y!=0u {e.changed=true; if o.x!=e.owners.a {e.changed_secondary=true;}}
+        }
     }}
     return e;
 }
@@ -171,24 +206,29 @@ fn sees(s:Owners,n:u32)->bool {return n!=0u && (s.a==n || s.b==n);}
         let c=textureLoad(previous_color,own,0); let z=textureLoad(previous_depth,own,0).x;
         let r=stored(textureLoad(previous_record,own,0).xy);
         let s=stored_evidence(textureLoad(previous_evidence,own,0));
-        let persist=admitted(c) && c.a>0.0 && r.ok && s.x>=0.0
+        // The candidate age is decided BEFORE blending: history whose primary would
+        // reach MAX_AGE is refused, so no old colour survives the eighth absent frame.
+        let age=select(s.y+1.0,0.0,e.surface && sees(e.owners,r.a));
+        let persist=admitted(c) && c.a>0.0 && r.ok && s.x>=0.0 && age<MAX_AGE
             && record_unchanged(r,e.classes,changed_classes) && (e.surface || c.a<1.0)
             && z==z && z>=0.0 && z<=frame.depth.y;
         if persist {
-            let age=select(s.y+1.0,0.0,e.surface && sees(e.owners,r.a));
             // One own texel (b = 1), same extent (density 1): cap once, no reaction.
             let w=min(s.x,evidence_cap());
             let total=w+e.mass;
             if total>0.0 {
                 result.color=clean((clean(c)*w+e.sum)/total);
-                result.record=encode(with_record(e.owners,r));
-                result.depth=select(z,e.nearest,e.surface);
+                // The carried primary stays primary while its colour survives, so a
+                // fresh owner cannot restart the old primary's absence clock.
+                result.record=encode(carried(r,e.owners));
+                result.depth=select(z,e.nearest,e.surface && e.owners.a==r.a);
                 result.evidence=vec2f(min(total,evidence_cap()),age);
                 if result.record.x==0u {result.depth=0.0;result.evidence=vec2f(0.0);}
                 return result;
             }
         }
-        // Seed: fresh evidence with its surface owners starts coverage history.
+        // Seed: only fresh surface evidence starts a genuinely fresh record (age 0);
+        // clear alone never seeds.
         if e.surface {
             result.record=encode(e.owners);
             result.depth=e.nearest;
@@ -205,9 +245,11 @@ fn sees(s:Owners,n:u32)->bool {return n!=0u && (s.a==n || s.b==n);}
     var joined=e.owners;
     result.record=encode(joined);
     result.evidence=vec2f(min(e.mass,evidence_cap()),0.0);
-    if frame.depth.w<0.5 {return result;}
+    // A changed non-anchor current contributor does not follow the anchor's motion
+    // proof: current-only.
+    if frame.depth.w<0.5 || e.changed_secondary {return result;}
     let m=textureLoad(motion,e.anchor,0);
-    if !finite4(m) || m.w<0.5 {return result;}
+    if !finite4(m) || m.w<0.5 || !coherent(p,m) {return result;}
     let expected=linear_depth(m.z);
     let u=(p-frame.output.xy)/frame.output.zw;
     let old=frame.output.xy+(u+frame.jitter.xy+m.xy-frame.jitter.zw)*frame.output.zw;

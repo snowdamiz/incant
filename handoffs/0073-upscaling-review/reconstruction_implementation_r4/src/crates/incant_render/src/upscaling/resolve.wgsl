@@ -58,7 +58,8 @@ fn current_evidence(p:vec2f)->Evidence {
         e.sum+=clean(v)*w; e.mass+=w;
         let z=linear_depth(textureLoad(current_depth,t,0));
         if v.a<1.0 || z<=0.0 {e.single=false;}
-        if z>0.0 && z<e.nearest {e.nearest=z;e.anchor=t;}
+        // Only a covered sample (a > 0) can be a surface; an alpha-0 claim is clear.
+        if v.a>0.0 && z>0.0 && z<e.nearest {e.nearest=z;e.anchor=t;}
     }}
     if !(e.nearest<=frame.depth.y) {e.single=false;}
     if e.single {
@@ -70,6 +71,25 @@ fn current_evidence(p:vec2f)->Evidence {
         }}
     }
     return e;
+}
+// Single-motion proof. One depth does not prove one motion: coplanar samples may
+// move independently. Every contributing current sample must carry valid motion
+// whose reprojection agrees with the anchor's within MOTION_SLACK output pixels
+// (the static proof's existing bound) and whose previous depth is compatible with
+// the anchor's (the existing depth tolerance, not widened). Otherwise the pixel
+// keeps its current evidence but reuses no history.
+const MOTION_SLACK:f32=1.0/256.0;
+fn coherent(p:vec2f,a:vec4f)->bool {
+    let c=vec2i(floor(source_position(p)));
+    let za=linear_depth(a.z);
+    for(var y=-1;y<=1;y++) {for(var x=-1;x<=1;x++) {
+        let t=c+vec2i(x,y);
+        if any(t<lo(frame.source)) || any(t>hi(frame.source)) || !(kernel_weight(p,t)>0.0) {continue;}
+        let m=textureLoad(motion,t,0);
+        if !finite4(m) || m.w<0.5 || !compatible(linear_depth(m.z),za) {return false;}
+        if any(abs(m.xy-a.xy)*frame.output.zw>=vec2f(MOTION_SLACK)) {return false;}
+    }}
+    return true;
 }
 @fragment fn resolve(@builtin(position) position:vec4f)->Resolved {
     var result=Resolved(vec4f(0.0),0.0,vec2f(0.0));
@@ -86,7 +106,7 @@ fn current_evidence(p:vec2f)->Evidence {
     result.evidence=vec2f(min(e.mass,evidence_cap()),0.0);
     if frame.depth.w<0.5 {return result;}
     let m=textureLoad(motion,e.anchor,0);
-    if !finite4(m) || m.w<0.5 {return result;}
+    if !finite4(m) || m.w<0.5 || !coherent(p,m) {return result;}
     let expected=linear_depth(m.z);
     // Motion includes both jittered projections. Output history is unjittered.
     let u=(p-frame.output.xy)/frame.output.zw;

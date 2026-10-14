@@ -1,0 +1,43 @@
+{
+ "all_pins_match_packet_sources": true,
+ "base": "76be9608e99bf089fcb1e0908827330f70c28ac1",
+ "composition": "common.wgsl + \\n + program (cooker and include_str)",
+ "programs": {
+  "Composite": {
+   "changed": false,
+   "new": "81cfe7c59c7255d33556bdd42167cfdaf5cb1f3eccf224b43d539bba75a59b37",
+   "old": "81cfe7c59c7255d33556bdd42167cfdaf5cb1f3eccf224b43d539bba75a59b37",
+   "pin": "81cfe7c59c7255d33556bdd42167cfdaf5cb1f3eccf224b43d539bba75a59b37",
+   "pin_matches_new": true
+  },
+  "MetalFxNormalize": {
+   "changed": false,
+   "new": "0923e7ba4dc5afde03dc2ac144e5c0ac556cd173768970d554de7cd0816075b5",
+   "old": "0923e7ba4dc5afde03dc2ac144e5c0ac556cd173768970d554de7cd0816075b5",
+   "pin": "0923e7ba4dc5afde03dc2ac144e5c0ac556cd173768970d554de7cd0816075b5",
+   "pin_matches_new": true
+  },
+  "MetalFxPack": {
+   "changed": false,
+   "new": "8f08b6e0f442e4968916a6ca4aa098a1c70baf4ee33a9c91908a4926391681f1",
+   "old": "8f08b6e0f442e4968916a6ca4aa098a1c70baf4ee33a9c91908a4926391681f1",
+   "pin": "8f08b6e0f442e4968916a6ca4aa098a1c70baf4ee33a9c91908a4926391681f1",
+   "pin_matches_new": true
+  },
+  "Upscale": {
+   "changed": true,
+   "new": "9c515525e946a314a846d70f6143f1b72213826189beb4abb59c06ba14bd2836",
+   "old": "f78bccaaabd6a6f7fb5b06a82e72e8a84083f761b726b0be50506128d87408f6",
+   "pin": "9c515525e946a314a846d70f6143f1b72213826189beb4abb59c06ba14bd2836",
+   "pin_matches_new": true
+  },
+  "UpscaleOwner": {
+   "changed": true,
+   "new": "c48f648d65b40a7bcb5dc44c388985ff79555a74ad22f67b4084c712eee82003",
+   "old": "1b551b92bf1d098159ff13483c51136d3204b505eafe7ecb7ae98e80bb20a280",
+   "pin": "c48f648d65b40a7bcb5dc44c388985ff79555a74ad22f67b4084c712eee82003",
+   "pin_matches_new": true
+  }
+ },
+ "scope": "source identity only; no cook, naga, build or GPU"
+}
