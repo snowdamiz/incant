@@ -1,11 +1,23 @@
 # Implementation status
 
+## Per-frame CPU distributions — scoped Mac controls pass
+
+The opt-in profiler now reports bounded per-frame phase wall histograms and
+conservative p95 intervals, including aggregate `script.tick`. Seventeen explicit
+native CI-profile CPU cases, a dedicated allocation control and eight runner tests
+pass on actual main257, including the real three-tick CLI report. All 24 current
+checks pass; final integration review is independently accepted and publication
+awaits its exact-head fast check. Missing/failed/overflow samples
+refuse p95; default dependencies remain empty. Shipping 10,000-entity Mac
+measurements and the 60 fps/GPU/hitch gates remain separate.
+[Current evidence](docs/spikes/profile-distributions-main257.md).
+
 The optional Apple and Android native hosts now have a qualified main256
 composition with haptics and persisted checkpoints. Both numerical modes pass
 148 player/game CPU cases (103 player +45 game), and all 44 current checks pass,
 including strict lint and iOS/Android compilation. The shared clock-module
 correction preserves its implementation and the initial duplicate-module lint
-failure. Final integration review is independently accepted; publication awaits its exact-head fast check. GPU/device audio, phone launches,
+failure. Final integration review is independently accepted and PR257 merged after its exact-head fast SUCCESS. GPU/device audio, phone launches,
 exported apps, mobile haptics/IME and performance remain separate, with other-
 device testing deferred and nonblocking. [Scope](docs/spikes/mobile-platforms-main256.md).
 
@@ -17,11 +29,19 @@ Required hosted CI/build checks, actual-success release promotion, Mac shipping-
 profile measurements and non-device release/human obligations remain in force.
 No phase is approved by this policy update. [Plan](PLAN.md).
 
+The Mac CPU measurement runner has independent source acceptance, eight passing
+policy tests and a successful parse of the actual version 2 profiler CLI output.
+It binds shipping codegen, player/data/script identities, this Mac's configuration
+and matched baselines, retaining uncertainty around the 5% comparison threshold.
+That CLI fixture is one entity and three ticks in the CI profile; shipping Core
+Sample/10,000-entity measurements and presentation timing remain open.
+[Scope and evidence](docs/spikes/mac-cpu-measurements.md).
+
 Checkpoint30 is promoted through PR232: release `71bdd2e7` has the exact tested
 main252 tree `393eb78c`. All 23 required contexts and all eight push workflows
 succeeded; independent review, merge parents, author trailer and post-merge tree
-are verified. Later main253–256 persisted-session/mobile/haptics work remains outside
-that tested release. No checkpoint is currently active; main256 is the latest
+are verified. Later main253–257 persisted-session/mobile/haptics work remains outside
+that tested release. No checkpoint is currently active; main257 is the latest
 integration. This promotion does not approve a phase or distribution gate.
 [Portable evidence](docs/spikes/evidence/release-checkpoint-30/manifest.json).
 
@@ -333,7 +353,8 @@ performance gate is claimed. [Scope and evidence](docs/spikes/wasm-c-parallel.md
 
 ## Development and release overview — 2026-10-13
 
-The reviewed main254 baseline includes the retained mobile Rust host, supported
+The reviewed main257 baseline includes Apple/Android host bindings, desktop
+haptics, the retained mobile Rust host, supported
 persisted native game checkpoints, and the opt-in cooked renderer families and
 Vulkan cache lifecycle, dynamic resolution, numerical retained motion, CPU/GPU
 profiling scopes and joined inert physics owner boundaries. Each lane retains its own
@@ -359,7 +380,7 @@ conformance hit its configured deadline. Main243 contains the reviewed macOS
 timeout repair. Checkpoint28 then froze main246 (`42e13e75`) at `be3422f8` on
 PR232 and finished with 13 required successes, nine failures and one skipped
 comparison. The reviewed isolated-lock and ordinary-owner Default repairs are
-merged in PR248. Checkpoint29 finished unpromoted with 22 required successes and the original Linux source-store lock failure. Checkpoint30 now freezes reviewed main252 (`c1988638`) at candidate `721eddac`, including the reviewed source-lock isolation from PR251, on the same PR232. All 23 exact-head required contexts must actually succeed; no previous success substitutes for them. Release remains `2a9d72ea`.
+merged in PR248. Checkpoint29 finished unpromoted with 22 required successes and the original Linux source-store lock failure. Checkpoint30 promoted exact reviewed main252 (`c1988638`, tree `393eb78c`) through PR232 after all 23 exact-head required contexts and eight workflows succeeded. Release is `71bdd2e7`; its parents, trailer and exact tested tree are verified. Later main253–257 work is outside that release, and no checkpoint is currently active.
 PR242 merged the private primitive-world composition; PR244/245 added native
 capture and outer in-memory checkpoints, PR246 added opaque ECS/world ownership,
 and PR247 added headless native session checkpoints. PR249 adds opt-in in-memory

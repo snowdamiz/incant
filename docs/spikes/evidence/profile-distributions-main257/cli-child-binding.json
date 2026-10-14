@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "source_packet": "31147574",
+  "runner_record": "run.py",
+  "runner_sha256": "7127033a7b54249868a5a8abd563db486b5dd80092ad161c6cb55cdfb455f948",
+  "assertion_lines": [
+    42,
+    44
+  ],
+  "target_path": "/Users/andreyyurlov/.codex/incant-core-presentation-target/aarch64-apple-darwin/ci/incant_game_player",
+  "copied_binary_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/profile-distributions-main257/binaries/player/incant_game_player",
+  "expected_sha256": "fa2e1649eac3c4526f050dea82e66d0c556c0c90d17094b5d37b8112900d1e23",
+  "evidence": "Retained runner source asserts target bytes equal the immediate copied CLI hash before and after each player test; passed result records establish successful completion of those assertions. Separate observed before/after hash values and child-open-time hashes were not serialized. No new execution or retrospective sample is claimed."
+}

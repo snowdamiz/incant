@@ -51,11 +51,7 @@ pub(crate) fn split(
 /// One actual simulation attempt. Event-loop waits and redraw-only work do not
 /// pass through this boundary. Inclusive nested native/script zones remain separate.
 pub(crate) fn frame<T, E>(run: impl FnOnce() -> Result<T, E>) -> Result<T, E> {
-    let scope = incant_profile::scope(incant_profile::Phase::Frame);
-    let result = run();
-    drop(scope);
-    incant_profile::frame_outcome(result.is_ok());
-    result
+    incant_profile::frame(run)
 }
 #[cfg(all(
     feature = "native-window",
@@ -135,6 +131,9 @@ fn completed_attempts_refreshes_and_capture_retirement_are_distinct() {
     assert_eq!(report["tick"], 17);
     assert_eq!(report["profile"]["completed_frames"], 1);
     assert_eq!(report["profile"]["failed_frames"], 1);
+    assert_eq!(report["profile"]["version"], 2);
+    assert_eq!(report["profile"]["frame_wall"]["attempted_frames"], 2);
+    assert_eq!(report["profile"]["frame_wall"]["failed_frames"], 1);
     let count = |name: &str| {
         report["profile"]["zones"]
             .as_array()

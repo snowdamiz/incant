@@ -1,0 +1,9 @@
+{
+  "accepted": true,
+  "source": "f0f91be4fd1761edd9b0dfd042f5d818ca8ee1aa",
+  "base": "5017908020c318e644407c8a83342a30b68cde51",
+  "source_map_sha256": "2d4f5b43a00f22d692ed4f6054b199567ff0c416e6447cf5531afdb9e32bf843",
+  "exact_producer_paths": 15,
+  "production_conflicts": false,
+  "scope": "Independent exact15path Git/livehash equality; current composed CPUcontrols still required; no shipping/performance/appearance claim"
+}

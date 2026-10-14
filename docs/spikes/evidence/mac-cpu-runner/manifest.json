@@ -1,0 +1,65 @@
+{
+  "format": "incant-mac-cpu-runner-qualification",
+  "version": 1,
+  "source": "97c0e197cfc4d04c1a5e659327f0b626e698eb8c",
+  "archive_sha256": "657769cbb00849cded4d2780120b0c71e9a5bdc9c6b842f49dd86827120be655",
+  "records": {
+    "source/tools/mac_performance.py": {
+      "sha256": "2ddd43719485618ec107671f5dfa779ce6b558e75d0b1f57ac46b455b3dcde3a",
+      "bytes": 14413
+    },
+    "source/tools/tests/test_mac_performance.py": {
+      "sha256": "24454cdaf945e67c53cf9aed9b591c8fd8584beae72b67ba21bc7da9046e8573",
+      "bytes": 6676
+    },
+    "source/docs/spikes/mac-cpu-measurements.md": {
+      "sha256": "455c4167e05b9426f5a25b80adc48ea35b84cec807972c4c873b46293ff54b59",
+      "bytes": 2863
+    },
+    "independent-review.json": {
+      "sha256": "7995f0a41dbee083ecbb8a7aa5023ad5086e8294bb1675d1a7e0e92760b8910a",
+      "bytes": 2694
+    },
+    "command-0.log": {
+      "sha256": "65e4da3fab7ff7e9d2390128b41a5fab7880ffefdd63c9d56989712f04acb76f",
+      "bytes": 1336
+    },
+    "command-0.json": {
+      "sha256": "04d2315b688334fb029902dd6a58a6534c2a8841e94f4ed69fe72636400a87bc",
+      "bytes": 325
+    },
+    "command-1.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "command-1.json": {
+      "sha256": "b7904c3461d4a1bb94bc88bf9140f9c6a7959f66955cb40691350ac2a275f0f0",
+      "bytes": 255
+    },
+    "command-2.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "command-2.json": {
+      "sha256": "ff941389329f986f7e14f681551a7ee698999d837b0733f04e8fe1d54976d03e",
+      "bytes": 226
+    },
+    "player-report.json": {
+      "sha256": "84119e9ff3294ab18e116add3f05c04d17bc3ee16ec2bf0c19caab159fe91172",
+      "bytes": 527812
+    },
+    "derived-metrics.json": {
+      "sha256": "8f4aee120b5533713b019b580cbbb32e832e3470d05571a2262c2dccd957fff4",
+      "bytes": 247
+    },
+    "actual-mac.json": {
+      "sha256": "aec30cb210a89ddbce4aab60d81ac5fce2c5efd9066ced45c6947c86f835b6ee",
+      "bytes": 242
+    }
+  },
+  "profile_report_source": "f57232fe9cf030c1c59096028db1995b08953f43",
+  "profile_report_scope": "Actual CI-profile player stdout; one entity and three ticks; protocol qualification only",
+  "tests": 8,
+  "shipping_measurement": false,
+  "performance_gate": false
+}
