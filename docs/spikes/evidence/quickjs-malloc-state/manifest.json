@@ -1,0 +1,16 @@
+{
+  "schema": "incant-quickjs-malloc-state-v1",
+  "source": "3d75ae61c9a2e0ce8fee6595979c5d04b0ced6cd",
+  "scope": "Standalone native diagnostic parity only; no native ECS loan, production, platform matrix or performance acceptance.",
+  "execution": "execution-001",
+  "archive_sha256": "5b40e55da3245baeca2b7d51719b40bf1c0d69520c972eb11ceeb4b7fa69421a",
+  "records": 929,
+  "payloads": 444,
+  "observations": 32,
+  "commands": 15,
+  "success_commands": 14,
+  "expected_negative": "wrong-count native getter exits 101 at first count assertion",
+  "source_review_sha256": "0315a7820863e3c454199d4c84e4245b245f9fafdafe2258c290b9aef6ca11ca",
+  "external_scope": "Executables and compiled native objects/libraries remain external and hash-bound. --external rehashes all originals and tool executables without executing them.",
+  "limits": "Native Apple arm64 CI, default libc/stdlib only. No timing, custom allocator, mutable ECS loan, continuous peak, production integration or gate acceptance. Original preflight PATH/read mistakes remain source-freeze notes; no failed native generation beyond the deliberate negative."
+}
