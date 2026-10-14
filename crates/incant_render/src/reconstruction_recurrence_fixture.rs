@@ -334,6 +334,36 @@ struct Plane {
 fn planes() -> [Plane; 8] {
     capture_planes(false)
 }
+fn pose(stage: &Stage, input: &mut SceneInput, step: u32, camera_only: bool) {
+    stage.pose(input, if camera_only { 1 } else { step });
+    if camera_only {
+        let camera = node(input, &stage.camera);
+        input.nodes[camera].world = camera_world(step);
+    }
+}
+#[test]
+fn recurrence_camera_only_pose_keeps_every_other_node_fixed() {
+    let stage = Stage::new(true);
+    let mut input = stage.input();
+    stage.pose(&mut input, 1);
+    let original: Vec<_> = input.nodes.iter().map(|n| n.world).collect();
+    let camera = node(&input, &stage.camera);
+    let mover = node(&input, stage.mover.as_ref().unwrap());
+    for step in [1, 8, 15, 32, 64] {
+        pose(&stage, &mut input, step, true);
+        assert_eq!(input.nodes[camera].world, camera_world(step));
+        assert_eq!(input.nodes.len(), original.len());
+        for (index, before) in original.iter().enumerate() {
+            if index != camera {
+                assert_eq!(input.nodes[index].world, *before);
+            }
+        }
+    }
+    assert_eq!(input.nodes[mover].world, mover_world(1));
+    pose(&stage, &mut input, 64, false);
+    assert_eq!(input.nodes[mover].world, mover_world(64));
+    assert_ne!(input.nodes[mover].world, mover_world(1));
+}
 fn capture_planes(reference_state: bool) -> [Plane; 8] {
     let mut offset = 0;
     std::array::from_fn(|i| {
@@ -457,6 +487,11 @@ fn actual_scene_recurrence_comparison() {
     assert_eq!(renderer.adapter.get_info().backend, wgpu::Backend::Metal);
     let external =
         std::env::var("INCANT_RECURRENCE_ABLATION").as_deref() == Ok("external-reference");
+    let camera_only = match std::env::var("INCANT_REFERENCE_MOTION").as_deref() {
+        Err(std::env::VarError::NotPresent) | Ok("combined") => false,
+        Ok("camera-only") if external => true,
+        other => panic!("unknown diagnostic motion: {other:?}"),
+    };
     let reference_state = match std::env::var("INCANT_REFERENCE_STATE").as_deref() {
         Err(std::env::VarError::NotPresent) => false,
         Ok("capture") if external => true,
@@ -510,7 +545,12 @@ fn actual_scene_recurrence_comparison() {
         let slots: [Slot; 2] = std::array::from_fn(|_| Slot::new(&renderer.device, OUTPUT));
         let mut previous_jitter = [0_f32; 2];
         for frame in 1..=frame_count {
-            stage.pose(&mut input, if moving { frame } else { 1 });
+            pose(
+                &stage,
+                &mut input,
+                if moving { frame } else { 1 },
+                camera_only,
+            );
             scene
                 .submit(
                     &renderer,
@@ -662,7 +702,13 @@ fn actual_scene_recurrence_comparison() {
                     nonzero_lock_samples += usize::from(remaining > 0.0);
                 }
             }
-            let label = if moving { "moving" } else { "stationary" };
+            let label = if !moving {
+                "stationary"
+            } else if camera_only {
+                "camera-only"
+            } else {
+                "moving"
+            };
             let mut files = Vec::new();
             let names = if reference_state {
                 [
@@ -783,6 +829,11 @@ fn actual_scene_recurrence_comparison() {
     });
     report["nonzero_lock_samples"] = json!(nonzero_lock_samples);
     report["reference_state_captured"] = json!(reference_state);
+    report["diagnostic_motion"] = json!(if camera_only {
+        "camera pans after frame 14; mover and every other node held at frame 1"
+    } else {
+        "camera pans after frame 14; mover begins after frame 8"
+    });
     report["recurrence_state_captured"] = json!(!reference_state);
     if reference_state {
         report["four_channel_history_semantics"] =

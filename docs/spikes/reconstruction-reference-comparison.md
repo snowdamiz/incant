@@ -135,3 +135,32 @@ stationary is needed before changing that logic. No threshold is tuned here and
 no visual repair is claimed. `state-observations.json`, `analyze_state.py`,
 `observer-equivalence.json` and `verify_observer.py` in the 007 evidence directory
 retain the raw-analysis and matched-observer receipts.
+
+## Camera-only control
+
+009 keeps the moving cube at its initial pose and changes only the camera after
+frame 14. A CPU control checks every non-camera node at five steps and confirms
+the ordinary combined-motion route still moves the cube. Build, three CPU
+controls, strict lint and the complete 128-frame Metal run pass; all processes
+are reaped. The preceding 008 build failed because the new test attempted to
+clone non-Clone scene nodes; it produced no GPU output. The repair copies only
+the transform matrices being compared. The failed generation is retained.
+
+009 freeze is
+`ad497f4d39025b1ae1e64b8e60d428168779f54d07ec04c8bea2335fd6b894d9`;
+its executable is
+`ffc4a05871bde0ad6a500c3d27e0b7a17df0d938a2507a9a6081bd36b38f0f6b`.
+The 576 raw planes covering all stationary frames and the first eight motion
+frames match 007 exactly. At frames 15, 19, 23, 27 and 31, the sampled line
+region's shading-change and history-count statistics also match the original
+combined-motion case exactly. The moving shadow caster is therefore not needed
+to produce this rejection. This control does not eliminate view-dependent
+shading or camera-relative shadow-map sampling.
+
+Root inspected camera-only frames 24/64 and the private baseline at 24. Broad
+moire in the one-texel stripe chart and broken thin diagonals remain. No visual
+repair or algorithm adoption is claimed. `camera-only-comparison.json` binds the
+matched raw identities, observations and inspection. The output-grid texture
+LOD bias admits frequencies above the internal grid's Nyquist limit; the next
+input-bandwidth control will isolate that deliberate undersampling from history
+rejection, without treating a blurrier input as proof of better reconstruction.
