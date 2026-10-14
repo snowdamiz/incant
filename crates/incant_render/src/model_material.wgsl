@@ -17,7 +17,7 @@ struct Material { base:vec4f, emissive_roughness:vec4f, factors:vec4f, flags:vec
 @group(2) @binding(1) var diffuse_environment:texture_cube<f32>;
 @group(2) @binding(2) var brdf_lut:texture_2d<f32>;
 @group(2) @binding(3) var environment_sampler:sampler;
-struct VertexOut { @builtin(position) position:vec4f, @location(0) world:vec3f, @location(1) normal:vec3f, @location(2) tangent:vec4f, @location(3) uv:vec2f }
+struct VertexOut { @builtin(position) position:vec4f, @location(0) @interpolate(perspective, centroid) world:vec3f, @location(1) @interpolate(perspective, centroid) normal:vec3f, @location(2) @interpolate(perspective, centroid) tangent:vec4f, @location(3) @interpolate(perspective, centroid) uv:vec2f }
 fn unit(v:vec3f) -> vec3f { return v*inverseSqrt(max(dot(v,v),1e-16)); }
 // Rotate world directions into the source image's coordinates (inverse +Y yaw).
 fn environment_direction(d:vec3f) -> vec3f {

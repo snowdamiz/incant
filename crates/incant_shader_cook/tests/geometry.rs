@@ -210,6 +210,92 @@ fn shader_math_and_family_are_in_artifact_identity() {
 }
 
 #[test]
+fn world_centroid_and_single_sample_shadow_ui_contracts_cannot_be_exchanged() {
+    fn centroid(
+        module: &naga::Module,
+        ty: naga::Handle<naga::Type>,
+        binding: Option<&naga::Binding>,
+    ) -> bool {
+        match binding {
+            Some(naga::Binding::Location { sampling, .. }) => {
+                *sampling == Some(naga::Sampling::Centroid)
+            }
+            None => match &module.types[ty].inner {
+                naga::TypeInner::Struct { members, .. } => members
+                    .iter()
+                    .any(|m| centroid(module, m.ty, m.binding.as_ref())),
+                _ => false,
+            },
+            _ => false,
+        }
+    }
+    for kind in [Kind::Diagnostic, Kind::Material, Kind::Sprite, Kind::Text] {
+        let original = source(kind);
+        assert!(original.contains("@interpolate(perspective, centroid)"));
+        assert!(kind.contract().contains("interpolation=centroid"));
+        for wrong in [
+            original.replace("@interpolate(perspective, centroid)", ""),
+            original.replace(
+                "@interpolate(perspective, centroid)",
+                "@interpolate(perspective, center)",
+            ),
+            original.replace(
+                "@interpolate(perspective, centroid)",
+                "@interpolate(perspective, sample)",
+            ),
+        ] {
+            assert_ne!(original, wrong);
+            assert!(
+                cook(kind, &wrong).is_err(),
+                "accepted {kind:?} sampling mismatch"
+            );
+        }
+        let bundle = cook(kind, original).unwrap();
+        for artifact in bundle
+            .artifacts
+            .iter()
+            .filter(|a| a.stage == Stage::Fragment)
+        {
+            if artifact.backend == Backend::Vulkan {
+                let module = naga::front::spv::parse_u8_slice(
+                    &artifact.bytes,
+                    &naga::front::spv::Options::default(),
+                )
+                .unwrap();
+                assert!(
+                    module.entry_points[0]
+                        .function
+                        .arguments
+                        .iter()
+                        .any(|a| centroid(&module, a.ty, a.binding.as_ref())),
+                    "lost SPIR-V centroid decoration"
+                );
+            } else {
+                let emitted = std::str::from_utf8(&artifact.bytes).unwrap();
+                assert!(
+                    emitted.contains("centroid"),
+                    "lost {kind:?} native centroid qualifier"
+                );
+            }
+        }
+    }
+    let shadow = source(Kind::Shadow);
+    let changed = shadow.replace(
+        "@location(0) uv",
+        "@location(0) @interpolate(perspective, centroid) uv",
+    );
+    assert_ne!(shadow, changed);
+    assert!(cook(Kind::Shadow, &changed).is_err());
+    let ui = source(Kind::Ui);
+    let changed = ui.replace(
+        "@interpolate(flat) rect",
+        "@interpolate(perspective, centroid) rect",
+    );
+    assert_ne!(ui, changed);
+    assert!(cook(Kind::Ui, &changed).is_err());
+}
+
+#[test]
 fn sprite_contract_refuses_sampling_interpolation_and_resource_changes() {
     for changed in [
         source(Kind::Sprite)

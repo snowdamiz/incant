@@ -19,11 +19,13 @@ enum Pass {
     Models,
     Sprites,
     Text,
+    SceneResolve,
     Display,
 }
 #[cfg_attr(not(target_arch = "wasm32"), derive(Resource))]
 pub(crate) struct PreparedFrame {
     pub diagnostics: DiagnosticDraw,
+    pub scene_resolve: Option<crate::frame::SceneResolve>,
     pub models: Option<ModelDraw>,
     pub motion: Option<crate::motion::MotionDraw>,
     pub temporal: Option<crate::temporal::TemporalDraw>,
@@ -91,7 +93,8 @@ fn pass_schedule() -> Schedule {
         Pass::Shadows.before(Pass::Models),
         Pass::Models.before(Pass::Sprites),
         Pass::Sprites.before(Pass::Text),
-        Pass::Text.before(Pass::Display),
+        Pass::Text.before(Pass::SceneResolve),
+        Pass::SceneResolve.before(Pass::Display),
     ));
     schedule
 }
@@ -101,6 +104,7 @@ impl Default for FrameGraph {
         // Registration order is deliberately unrelated to dependency order.
         schedule.add_systems((
             display.in_set(Pass::Display),
+            scene_resolve.in_set(Pass::SceneResolve),
             models.in_set(Pass::Models),
             sprites.in_set(Pass::Sprites),
             text.in_set(Pass::Text),
@@ -330,6 +334,13 @@ fn models(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
         }
         debug_assert_eq!(index, plan.count());
     });
+}
+fn scene_resolve(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
+    if let Some(resolve) = &frame.scene_resolve {
+        encoder.timed(crate::timing::GpuPass::SceneResolve, |e, q| {
+            resolve.encode(e, q)
+        });
+    }
 }
 fn display(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
     encoder.timed(crate::timing::GpuPass::Display, |e, q| {

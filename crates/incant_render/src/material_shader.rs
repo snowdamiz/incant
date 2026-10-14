@@ -9,7 +9,7 @@ use crate::{
 include!(concat!(env!("OUT_DIR"), "/material-shaders/manifest.rs"));
 const BUNDLE: Bundle = Bundle {
     contract: MANIFEST_CONTRACT,
-    expected: "incant-material-v1;naga=29.0.4;wgpu=29.0.4;msl=2.4,pull15v14i,stride48-112,vertex-sizes1,fragment-sizes7;spv=1.0,no-y-flip;hlsl=6.0,special-b5;bounds=restrict;loops=bounded",
+    expected: "incant-material-v2;interpolation=centroid;naga=29.0.4;wgpu=29.0.4;msl=2.4,pull15v14i,stride48-112,vertex-sizes1,fragment-sizes7;spv=1.0,no-y-flip;hlsl=6.0,special-b5;bounds=restrict;loops=bounded",
     source: SOURCE_HASH,
     producer: PRODUCER_HASH,
     artifacts: &ARTIFACTS,

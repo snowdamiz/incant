@@ -88,6 +88,7 @@ impl System {
                         alpha,
                         double_sided,
                         mirrored,
+                        samples: crate::SceneMsaa::One,
                     };
                     let stages = |module: &wgpu::ShaderModule| crate::shader::Stages {
                         vertex: module.clone(),

@@ -108,6 +108,7 @@ impl Renderer {
                 &batch.model.materials.materials[batch.model.primitives[batch.primitive].material];
             let key = PipelineKey {
                 format: target.format,
+                samples: target.samples,
                 alpha: material.alpha,
                 double_sided: material.double_sided,
                 mirrored: batch.mirrored,
@@ -320,4 +321,5 @@ pub(crate) struct ModelTarget {
     pub depth: wgpu::TextureView,
     pub format: wgpu::TextureFormat,
     pub rect: [f32; 4],
+    pub samples: crate::SceneMsaa,
 }

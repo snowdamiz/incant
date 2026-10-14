@@ -103,6 +103,7 @@ fn hdr_text(renderer: &Renderer, input: &SceneInput, size: [u32; 2]) -> Vec<[f32
                 depth: depth_view.clone(),
                 format: HDR_FORMAT,
                 rect: [0., 0., size[0] as f32, size[1] as f32],
+                samples: crate::SceneMsaa::One,
             },
         )
         .unwrap()

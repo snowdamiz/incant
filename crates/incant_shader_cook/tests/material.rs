@@ -115,7 +115,7 @@ fn material_refuses_changed_binding_memory_and_io_contracts() {
             "view_projection: mat4x4f, eye",
             "@size(80) view_projection: mat4x4f, eye",
         ),
-        original.replace("@location(10) tangent", "@location(11) tangent"),
+        original.replace("@location(10)", "@location(11)"),
         original.replace("@builtin(front_facing)", "@location(7)"),
     ] {
         assert_ne!(original, changed);

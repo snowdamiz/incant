@@ -10,7 +10,7 @@ use crate::{
 include!(concat!(env!("OUT_DIR"), "/sprite-shaders/manifest.rs"));
 const BUNDLE: Bundle = Bundle {
     contract: MANIFEST_CONTRACT,
-    expected: "incant-sprite-v1;naga=29.0.4;wgpu=29.0.4;msl=2.4,pull15v14v,stride12-52,sizes1;spv=1.0,no-y-flip;hlsl=6.0,camera-b0,texture-t0,sampler-indices-t1,special-b1;bounds=restrict;loops=bounded",
+    expected: "incant-sprite-v2;interpolation=centroid;naga=29.0.4;wgpu=29.0.4;msl=2.4,pull15v14v,stride12-52,sizes1;spv=1.0,no-y-flip;hlsl=6.0,camera-b0,texture-t0,sampler-indices-t1,special-b1;bounds=restrict;loops=bounded",
     source: SOURCE_HASH,
     producer: PRODUCER_HASH,
     artifacts: &ARTIFACTS,
