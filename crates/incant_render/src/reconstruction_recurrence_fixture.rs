@@ -270,7 +270,10 @@ fn pixel_half(bytes: &[u8]) -> [f32; 4] {
 fn display(hdr: [f32; 4]) -> [u8; 4] {
     // f64 CPU transcription of tone_map.wgsl + output.wgsl. It is diagnostic,
     // not bit-exact production display output; physical overlays are excluded.
-    assert!(hdr.iter().all(|v| v.is_finite() && *v >= 0.));
+    // The external reference can contain small signed RGB after inverse YCoCg.
+    // The unchanged display conversion below clamps RGB before tone mapping;
+    // raw signed values and their counts remain in the diagnostic evidence.
+    assert!(hdr.iter().all(|v| v.is_finite()));
     let coverage = f64::from(hdr[3]).clamp(0., 1.);
     let c: [f64; 3] =
         std::array::from_fn(|i| (f64::from(hdr[i]) / coverage.max(1e-8)).clamp(0., 65504.));
@@ -366,6 +369,26 @@ fn cold_delta(candidate: &[u8], baseline: &[u8]) -> u16 {
     }
     maximum
 }
+fn color_range(raw: &[u8]) -> Value {
+    let mut low = [f32::INFINITY; 4];
+    let mut high = [f32::NEG_INFINITY; 4];
+    let mut negative_rgb = 0;
+    let mut nonzero_rgb_at_zero_alpha = 0;
+    for pixel in raw.as_chunks::<8>().0 {
+        let values: [f32; 4] =
+            std::array::from_fn(|i| half(u16::from_le_bytes([pixel[2 * i], pixel[2 * i + 1]])));
+        assert!(values.iter().all(|v| v.is_finite()), "nonfinite output");
+        for i in 0..4 {
+            low[i] = low[i].min(values[i]);
+            high[i] = high[i].max(values[i]);
+        }
+        negative_rgb += usize::from(values[..3].iter().any(|v| *v < 0.));
+        nonzero_rgb_at_zero_alpha +=
+            usize::from(values[3] == 0. && values[..3].iter().any(|v| *v != 0.));
+    }
+    json!({"minimum":low,"maximum":high,"negative_rgb_pixels":negative_rgb,
+        "nonzero_rgb_at_zero_alpha_pixels":nonzero_rgb_at_zero_alpha})
+}
 #[test]
 fn recurrence_fixture_layout_and_display_controls() {
     let p = planes();
@@ -386,6 +409,8 @@ fn actual_scene_recurrence_comparison() {
     std::fs::create_dir(&out).expect("fresh experimental output directory");
     let renderer = owner_renderer();
     assert_eq!(renderer.adapter.get_info().backend, wgpu::Backend::Metal);
+    let external =
+        std::env::var("INCANT_RECURRENCE_ABLATION").as_deref() == Ok("external-reference");
     let (ablation, cubic, lock, nearest, coarse) =
         match std::env::var("INCANT_RECURRENCE_ABLATION").as_deref() {
             Err(std::env::VarError::NotPresent) | Ok("recurrence") => {
@@ -395,6 +420,7 @@ fn actual_scene_recurrence_comparison() {
             Ok("unclipped-cubic") => (true, true, false, false, false),
             Ok("bounded-lock") => (false, false, true, false, false),
             Ok("nearest-surface") => (false, false, false, true, false),
+            Ok("external-reference") => (false, false, false, false, false),
             Ok("coarse-shading") => (false, false, false, false, true),
             other => panic!("unknown recurrence experiment mode: {other:?}"),
         };
@@ -414,6 +440,7 @@ fn actual_scene_recurrence_comparison() {
     let mut maps = 0;
     let mut nonzero_lock_samples = 0usize;
     for moving in [false, true] {
+        let reference = external.then(|| super::reference_fixture::Reference::new(&renderer));
         let stage = Stage::new(moving);
         let mut input = stage.input();
         stage.pose(&mut input, 1);
@@ -488,8 +515,21 @@ fn actual_scene_recurrence_comparison() {
                 uniform,
                 [&current, &motion, &depth],
             );
+            if let Some(reference) = &reference {
+                reference.dispatch(
+                    &renderer,
+                    &mut encoder,
+                    frame,
+                    jitter,
+                    previous_jitter,
+                    [&current, &motion, &depth],
+                );
+            }
+            let candidate_view = reference
+                .as_ref()
+                .map_or(&destination.views[0], |v| &v.output);
             let views = [
-                &destination.views[0],
+                candidate_view,
                 &history[0],
                 &destination.views[1],
                 &destination.views[2],
@@ -570,7 +610,11 @@ fn actual_scene_recurrence_comparison() {
                 std::fs::write(out.join(&name), data(i)).unwrap();
                 files.push(json!({"name":name,"sha256":hex(data(i)),"rect":p.rect,"stride":p.stride,"bytes_per_pixel":p.bpp,"format":format!("{:?}",views[i].texture().format())}));
             }
-            let delta = if frame == 1 {
+            // This equality compares two Incant kernels. The external kernel
+            // differs even on reset and can emit signed RGB after YCoCg inverse.
+            // Preserve its full raw range instead of interpreting signed half
+            // bit patterns as a nonnegative half-code distance.
+            let delta = if frame == 1 && !external {
                 Some(cold_delta(data(0), data(1)))
             } else {
                 None
@@ -586,7 +630,7 @@ fn actual_scene_recurrence_comparison() {
                     ));
                 }
             }
-            rows.push(json!({"case":label,"frame":frame,"phase":state.motion().jitter_phase(),"jitter":jitter,"previous_jitter":previous_jitter,"cold_max_half_code_delta":delta,"planes":files}));
+            rows.push(json!({"case":label,"frame":frame,"phase":state.motion().jitter_phase(),"jitter":jitter,"previous_jitter":previous_jitter,"cold_max_half_code_delta":delta,"candidate_range":color_range(data(0)),"planes":files}));
             // Preserve raw bytes and comparisons before refusing a cold mismatch.
             std::fs::write(
                 out.join("progress.json"),
@@ -599,7 +643,7 @@ fn actual_scene_recurrence_comparison() {
             drop(bytes);
             read.unmap();
             previous_jitter = jitter;
-            if let Some(delta) = delta {
+            if let Some(delta) = delta.filter(|_| !external) {
                 assert!(
                     delta <= 1,
                     "cold reconstruction differs by {delta} half codes"
@@ -615,6 +659,22 @@ fn actual_scene_recurrence_comparison() {
     } else {
         "recurrence_candidate"
     });
+    if external {
+        report["external_reference"] = json!({
+            "upstream": "https://github.com/pmndrs/upscaler",
+            "commit": "96184a6812bc5fd5e5fd7898257788a1663105a9",
+            "algorithm_modified": false,
+            "dispatches": 48 * 7,
+            "input_adapter": "Incant jittered previous-current UV to unjittered current-previous; opposite jitter convention; invalid vectors zeroed",
+            "settings": "fixed exposure 1, max accumulation 24, thin locks and shading detector enabled, no sharpening, existing Incant eight-phase jitter",
+            "cold_equality_required": false,
+            "auxiliary_planes": "Incant recurrence path; NOT external reference state",
+            "limits": "Test-only external reference. No production adoption, invalid-motion/alpha conformance, performance or memory admission claim."
+        });
+        report["scope"] = json!(
+            "Same actual UP scene inputs; external pinned compute reference compared with Incant baseline. CPU tone transform, no display/performance/adoption claim."
+        );
+    }
     report["bounded_lock"] = json!(lock);
     report["nearest_surface_guidance"] = json!(nearest);
     report["coarse_shading_transfer"] = json!(coarse);

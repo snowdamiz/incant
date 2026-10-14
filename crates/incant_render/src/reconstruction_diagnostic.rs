@@ -2034,6 +2034,8 @@ fn stationary_raw_history_diagnostic() {
 
 #[path = "reconstruction_recurrence_fixture.rs"]
 mod recurrence_fixture;
+#[path = "reconstruction_reference.rs"]
+mod reference_fixture;
 
 #[path = "reconstruction_recurrence_controls.rs"]
 mod recurrence_controls;
