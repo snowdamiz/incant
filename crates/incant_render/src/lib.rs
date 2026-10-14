@@ -29,6 +29,8 @@ mod pixel_grid;
 pub use pipeline_cache::{CacheRead, CacheWrite, PipelineCacheReport};
 pub mod metalfx;
 #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+extern crate self as incant_render;
+#[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
 mod metalfx_image;
 mod preview_environment;
 pub mod resolution;
