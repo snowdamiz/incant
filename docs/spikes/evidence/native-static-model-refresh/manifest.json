@@ -1,0 +1,1653 @@
+{
+  "format": "incant-native-static-model-refresh-v1",
+  "created_utc": "2026-10-14T17:20:58.400019+00:00",
+  "final_code_source": "193f5e43d0c790db3b4327420ab49bef375448dc",
+  "producer_cpu_source": "68e2706b55f2770dd99906a08e56bda4d1aee90a",
+  "producer_lint_source": "9d6f38ae5a83d7c39ad2ffe7a54d95118db7a7e5",
+  "window_executed_source": "44e567f76740b287464f0ad1840e29180bf5f18e",
+  "gpu_executed_sources": {
+    "001": "44e567f76740b287464f0ad1840e29180bf5f18e",
+    "002": "fa1d6d5bf3a5d86c54744ef4d618a16c590a0e36",
+    "003": "193f5e43d0c790db3b4327420ab49bef375448dc"
+  },
+  "base_main288": "85a3a5e0434dd0b89b5a00d01f8696e130cb25d2",
+  "archive_sha256": "f2ec9aef3045aabe1b4551379a4840eaed81f7f784f981e9eeb4a65fd6a3b552",
+  "archive_bytes": 1178182,
+  "archive_decoded_bytes": 8314696,
+  "records": [
+    {
+      "name": "producer/cpu-launch-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/cpu-launch-001.json",
+      "bytes": 5397,
+      "sha256": "2c25ffc3db8b5e0e3e7610372535273fd67d788c32d02e58f20be65acac3c1f8"
+    },
+    {
+      "name": "producer/cpu-launch-002.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/cpu-launch-002.json",
+      "bytes": 3442,
+      "sha256": "6350d96865db04cfc893369547dfafe85a4765409feaffd96a4571e80a723145"
+    },
+    {
+      "name": "producer/cpu-proposal-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/cpu-proposal-001.json",
+      "bytes": 10392,
+      "sha256": "d68c499527cb779a24df10ee76c346a010f8d3be85864edf6d65b66fc1fbaead"
+    },
+    {
+      "name": "producer/cpu-proposal-002.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/cpu-proposal-002.json",
+      "bytes": 8591,
+      "sha256": "e4b0b65a348f7a8265250e6b846b80429be06121529e4826c8075ba97533157b"
+    },
+    {
+      "name": "producer/cpu-source001-0.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/cpu-source001-0.raw.log",
+      "bytes": 275660,
+      "sha256": "849de7c7ec6b3370b062882a80dc5f21a272fe1d7f0dc7de5ee845246ce58b54"
+    },
+    {
+      "name": "producer/cpu-source001-1.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/cpu-source001-1.raw.log",
+      "bytes": 385258,
+      "sha256": "cf8f66741e12288d1044b3450ea287a39e7f073b846c00af57aff54eb90766bb"
+    },
+    {
+      "name": "producer/cpu-source001-2.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/cpu-source001-2.raw.log",
+      "bytes": 760809,
+      "sha256": "eff00f69690e2e72772c5c2f0132d155fddfabb35abff71b1612cbb467c800e6"
+    },
+    {
+      "name": "producer/cpu-source001-3.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/cpu-source001-3.raw.log",
+      "bytes": 5800,
+      "sha256": "e56507e618097ddbeee5b5c64bbcb8e1acde0806d7511b75aad8f773f6644a71"
+    },
+    {
+      "name": "producer/cpu-source001-results.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/cpu-source001-results.json",
+      "bytes": 14588,
+      "sha256": "93aaaa1decf05a425fc9ff251bfe829389a37bcb759d1ae989d7c5fd14fd3ffd"
+    },
+    {
+      "name": "producer/cpu-source002-0.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/cpu-source002-0.raw.log",
+      "bytes": 452,
+      "sha256": "847e4c1afea091615e91e7610d140f4f6b077efdf23eb8eacc74fb8dc4b16e48"
+    },
+    {
+      "name": "producer/cpu-source002-1.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/cpu-source002-1.raw.log",
+      "bytes": 10449,
+      "sha256": "70435b8f575d17f52df9c650bdc2372a1800fd7b46e393a553502e40c6a7baa5"
+    },
+    {
+      "name": "producer/cpu-source002-results.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/cpu-source002-results.json",
+      "bytes": 2371,
+      "sha256": "0e06d2dff18dde484af546a25bfe9161a1308c8a62006ee45ae4f7bab2a1bb7e"
+    },
+    {
+      "name": "producer/cpu-supervisor-001.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/cpu-supervisor-001.py",
+      "bytes": 8856,
+      "sha256": "467bb2312e709742f3062437879adc9be15e6a4f7a60cd86aafae4061272f265"
+    },
+    {
+      "name": "producer/cpu-supervisor-001.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/cpu-supervisor-001.raw.log",
+      "bytes": 25149,
+      "sha256": "fc5364837b484c01c25a9197a824e3361b466aca05e6b712882971f28c51c9fe"
+    },
+    {
+      "name": "producer/cpu-supervisor-002.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/cpu-supervisor-002.py",
+      "bytes": 8856,
+      "sha256": "9144b3da6ccfaf16a7709eacd1365679b0d3641ebd671c25c2011ef279e6ce9a"
+    },
+    {
+      "name": "producer/cpu-supervisor-002.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/cpu-supervisor-002.raw.log",
+      "bytes": 13883,
+      "sha256": "36265842fd53e715169daa7a433780612efd9485547dbb8bbc5fd306e9892e49"
+    },
+    {
+      "name": "producer/cpu-terminal-002.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/cpu-terminal-002.json",
+      "bytes": 5502,
+      "sha256": "df5fbee2767b3b99e2a8dd36028ba1a98482cb81714bf93099059b35e4934498"
+    },
+    {
+      "name": "producer/gpu-source-proposal-003.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/gpu-source-proposal-003.json",
+      "bytes": 4016,
+      "sha256": "965afb150b9b09018aa7443136e3a70e1884e84a770e549082165fc0ce7c5ca5"
+    },
+    {
+      "name": "producer/source-001/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/source-001/freeze.json",
+      "bytes": 3863,
+      "sha256": "7e4577d36f7d3475d196a396b5f1c03bf3704456d15b32b035cc63ae4c4974a9"
+    },
+    {
+      "name": "producer/source-002/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/source-002/freeze.json",
+      "bytes": 4070,
+      "sha256": "daa7b7eae251ccd73dd17ea8bd454560d3aeb887df940b6e35e97134935a7beb"
+    },
+    {
+      "name": "producer/source-003/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/source-003/freeze.json",
+      "bytes": 4614,
+      "sha256": "b58efb96d06af848aaafdd47ea12f18a24a06e7e8dbbbd549d51e7023c7b5b71"
+    },
+    {
+      "name": "producer/source-004/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/source-004/freeze.json",
+      "bytes": 5127,
+      "sha256": "8c65d7ad9d8f7c690647d305775a039d65d1407be24c3280c451183d353b14b1"
+    },
+    {
+      "name": "root/build-proposal-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/build-proposal-001.json",
+      "bytes": 8140,
+      "sha256": "9dcb6a4c3f2974aeed37f8addfbe5ad08de25f2bf6558e4d1e12bf82949abae8"
+    },
+    {
+      "name": "root/build-proposal-003.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/build-proposal-003.json",
+      "bytes": 6991,
+      "sha256": "5e8da75967ba0fe4adf579495fdcf5f4afb8b2f8e34cd78d32fe3481236e5d54"
+    },
+    {
+      "name": "root/build-proposal-004.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/build-proposal-004.json",
+      "bytes": 6983,
+      "sha256": "afa1f1330fe0fbf292cca51c54a20ca1196bc18aba0690ec78a25d0448923309"
+    },
+    {
+      "name": "root/build-supervisor-001.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/build-supervisor-001.py",
+      "bytes": 8782,
+      "sha256": "bf7944a1c228a745a6acdd939fdd7eacce41aa9188f8572569aa7bfb437517b5"
+    },
+    {
+      "name": "root/build-supervisor-003.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/build-supervisor-003.py",
+      "bytes": 8782,
+      "sha256": "e1a012c9694b406d64d4a3836cba43221eecd34951549e5b61d68c634f6f94e0"
+    },
+    {
+      "name": "root/build-supervisor-004.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/build-supervisor-004.py",
+      "bytes": 8782,
+      "sha256": "1c731ad1e5011d16f08b8da6ce8c5f4d1069d72f3a7ac9fbe85c73b6e828d9d2"
+    },
+    {
+      "name": "root/cpu-launch-002.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/cpu-launch-002.json",
+      "bytes": 6098,
+      "sha256": "e8f8122940a5c7a9f6e3837f365b194ce3a05a4df4365b9b2159c049453f7a93"
+    },
+    {
+      "name": "root/cpu-launch-003.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/cpu-launch-003.json",
+      "bytes": 4911,
+      "sha256": "257aea94cbad82242274b9a39bae75ef57c69b2d9d246c3dd84846c726c302ac"
+    },
+    {
+      "name": "root/cpu-launch-004.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/cpu-launch-004.json",
+      "bytes": 4911,
+      "sha256": "3d54d08c3dfae9628eac659c224ac07aafd3bde35051a85445c5e1458ef76b26"
+    },
+    {
+      "name": "root/cpu-source002-0.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/cpu-source002-0.raw.log",
+      "bytes": 332391,
+      "sha256": "85feb83dbb9888413f86db25a4e4cf22b161f8168a65368c0a8cf181027272cf"
+    },
+    {
+      "name": "root/cpu-source002-1.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/cpu-source002-1.raw.log",
+      "bytes": 759012,
+      "sha256": "c7707a70390cd7eec1394319df6fb5e2c55c55c39c309c54d69421fbf390ef90"
+    },
+    {
+      "name": "root/cpu-source002-2.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/cpu-source002-2.raw.log",
+      "bytes": 10404,
+      "sha256": "d86b6245b15f9db9e44021667f0b80a647727e40ca75a58bbe7867a590e1984a"
+    },
+    {
+      "name": "root/cpu-source002-3.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/cpu-source002-3.raw.log",
+      "bytes": 751090,
+      "sha256": "72fbc284f52c9b2a3c80a2cca612c9359f501771a467f6be1c17f01cebc738b3"
+    },
+    {
+      "name": "root/cpu-source002-results.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/cpu-source002-results.json",
+      "bytes": 7969,
+      "sha256": "275a82292745cf532286f7d747b7b38612d969975127d289ec6c601f3045f711"
+    },
+    {
+      "name": "root/cpu-source003-0.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/cpu-source003-0.raw.log",
+      "bytes": 330685,
+      "sha256": "0d020432fa9b2a46c5ea1f6f7d568830f5b0a4e7e635967ed0d9eb8c1ab024f2"
+    },
+    {
+      "name": "root/cpu-source003-1.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/cpu-source003-1.raw.log",
+      "bytes": 1881,
+      "sha256": "9b59558027f563b20bea80e53d50a8156d8b8a3c9a187fd7701e41ccc2d58157"
+    },
+    {
+      "name": "root/cpu-source003-results.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/cpu-source003-results.json",
+      "bytes": 3938,
+      "sha256": "6298bcb08ec5c0766da8b5173182308357625ec98cead89ceb43d33cb316cdc2"
+    },
+    {
+      "name": "root/cpu-source004-0.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/cpu-source004-0.raw.log",
+      "bytes": 330685,
+      "sha256": "4ba505a21e22ddfcd4fcb65b861b0520d84a2c9d16c4873794a99e449e887593"
+    },
+    {
+      "name": "root/cpu-source004-1.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/cpu-source004-1.raw.log",
+      "bytes": 191,
+      "sha256": "3aafdc66073a89b723fd88a32214dd0325bc4b5df527dbb1cd4f7cf717833094"
+    },
+    {
+      "name": "root/cpu-source004-results.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/cpu-source004-results.json",
+      "bytes": 3937,
+      "sha256": "e5e469a515aeca3c222461f1daf5d67e7590b731bbffe6379a02de71b623e73c"
+    },
+    {
+      "name": "root/window-supervisor-001.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/window-supervisor-001.py",
+      "bytes": 6565,
+      "sha256": "8eee6560a134f0b92c4662e5e24bf8562bd0b9eac8b5a92dd277f07c75bce6ea"
+    },
+    {
+      "name": "root/window-supervisor-001.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/window-supervisor-001.raw.log",
+      "bytes": 131,
+      "sha256": "175020ab8326e94f99e79025bc554d521b65a5e108dbe8c93c57e92f43f08568"
+    },
+    {
+      "name": "root/source-001/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-001/freeze.json",
+      "bytes": 1370,
+      "sha256": "eade9dd4162615fcd72a0bace7b70470f5cd6b0b7a5a326565e9a3b3583a6c8c"
+    },
+    {
+      "name": "root/source-002/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-002/freeze.json",
+      "bytes": 877510,
+      "sha256": "3de176a2031bb9ef49dce2581b9f3b2922a2f74850bb7e9a4d77be466e2f23e1"
+    },
+    {
+      "name": "root/source-003/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-003/freeze.json",
+      "bytes": 877543,
+      "sha256": "543dfd8c648d8f5d1aec6d1a0bde3b222e1895de44955a9cd6dbbad0c5d2cd57"
+    },
+    {
+      "name": "root/source-004/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-004/freeze.json",
+      "bytes": 877522,
+      "sha256": "79cba12879eca9d883df5101f2f8c7b09f986166e8511d56ee73ccbaf2326aab"
+    },
+    {
+      "name": "root/window-launch-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/window-launch-001.json",
+      "bytes": 6516,
+      "sha256": "a41190743907e4657f44b1c5ffccbd6e066747c2a2db9ffd8eb335ed8cae4ef2"
+    },
+    {
+      "name": "root/window-owned-live-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/window-owned-live-001.json",
+      "bytes": 704,
+      "sha256": "9ae40d20f041a3cf9294b2e902e0635840c76a7bcdff5cc3ab55aed0f8ba2a57"
+    },
+    {
+      "name": "root/window-activation-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/window-activation-001.json",
+      "bytes": 469,
+      "sha256": "46358559b0e2a8b5b3272d8f4232c004a0431f2db2472434b23ea5517eb3373e"
+    },
+    {
+      "name": "root/window-extra-launch-correction-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/window-extra-launch-correction-001.json",
+      "bytes": 986,
+      "sha256": "1b3b77d4fc993c0e20f91bbaedbe7734b412658fccfeed722018089809a63098"
+    },
+    {
+      "name": "root/window-supervisor-001-result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/window-supervisor-001-result.json",
+      "bytes": 1423,
+      "sha256": "b107fc206d15056b6beb5732514905cc14b5ac9a82420448e1552480bc997b28"
+    },
+    {
+      "name": "root/window-001/fixture.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/window-001/fixture.json",
+      "bytes": 389,
+      "sha256": "d4c0c44a4e0516268288caa0cb66b8fa20a8489a73083581f3f7fefb5176f4c2"
+    },
+    {
+      "name": "root/window-001/model-workflow.fixture.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/window-001/model-workflow.fixture.json",
+      "bytes": 109,
+      "sha256": "60e0ce6e0793ca9253223547bad2904372ad9fea67f6ef0c50af19bc9a795a76"
+    },
+    {
+      "name": "root/window-001/move.ts",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/window-001/move.ts",
+      "bytes": 377,
+      "sha256": "2a5fee2b337d10c656398f19204fe77de9566423b66ce6d0c403031c94b87858"
+    },
+    {
+      "name": "root/window-001/native-window.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/window-001/native-window.json",
+      "bytes": 9827,
+      "sha256": "3537580512266b06893b342bc141e1ecbe5f46d49f3c4110fdc524af8f8dc8df"
+    },
+    {
+      "name": "root/window-001/processes.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/window-001/processes.json",
+      "bytes": 9181,
+      "sha256": "2629a5779f0d03f031cb841634fa69558c41ea9a57f252e26d99835cb6f88b54"
+    },
+    {
+      "name": "root/window-001/project.journal.jsonl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/window-001/project.journal.jsonl",
+      "bytes": 63500,
+      "sha256": "509fc4ad29bbd5516bd6a36ff44ccb594be6d3e9fca815d4a0eedd3725145e4a"
+    },
+    {
+      "name": "root/window-001/project.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/window-001/project.json",
+      "bytes": 2384,
+      "sha256": "abf855ab80369f5b0e89a2e60b8edf5955c0645a4363e178354030c83d57a415"
+    },
+    {
+      "name": "root/window-001/refresh-replacement.gltf",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/window-001/refresh-replacement.gltf",
+      "bytes": 592,
+      "sha256": "76cbb7dc310c7dc16d65e1be5c3eaf0af4dd61968a76e064c7ba2bc5468445b5"
+    },
+    {
+      "name": "root/window-001/refresh.gltf",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/window-001/refresh.gltf",
+      "bytes": 592,
+      "sha256": "76cbb7dc310c7dc16d65e1be5c3eaf0af4dd61968a76e064c7ba2bc5468445b5"
+    },
+    {
+      "name": "root/window-001/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/window-001/result.json",
+      "bytes": 10983,
+      "sha256": "cf131dc1babcdf46b3ae6718700c5493e8c24269d064b7868c18b6b5eb0cd6d4"
+    },
+    {
+      "name": "root/model-gpu-plan-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/model-gpu-plan-001.json",
+      "bytes": 1383,
+      "sha256": "058b8cdaa556f2e4987314016928caab08eaf9331ee9392642bfbabb86ffe947"
+    },
+    {
+      "name": "root/run-model-gpu-001.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/run-model-gpu-001.py",
+      "bytes": 2578,
+      "sha256": "a6c880908c53cd63952a9ff5e524d6c8b385f7bbfae888caf2fab9594b1f942f"
+    },
+    {
+      "name": "root/model-gpu-001/inventory.txt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/model-gpu-001/inventory.txt",
+      "bytes": 702,
+      "sha256": "e12fc5d21054a46dda120363388b506b00d84ee804ee28d18315c7c48a62c55c"
+    },
+    {
+      "name": "root/model-gpu-001/output.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/model-gpu-001/output.log",
+      "bytes": 1225,
+      "sha256": "ea090a3cfc866cf45f767fa730bab03d0800a98efd16c406df91e5a5cda9fe56"
+    },
+    {
+      "name": "root/model-gpu-001/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/model-gpu-001/result.json",
+      "bytes": 1916,
+      "sha256": "c02709c018ee4e4c2ac2870eb16527fc258c3bc6b66027c01eff2334f4137571"
+    },
+    {
+      "name": "root/model-gpu-plan-002.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/model-gpu-plan-002.json",
+      "bytes": 1452,
+      "sha256": "a9f46db6eda1cae355adbf724f7f0ac3ba455cfef63e820a43cf010e9d5f00a7"
+    },
+    {
+      "name": "root/run-model-gpu-002.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/run-model-gpu-002.py",
+      "bytes": 2624,
+      "sha256": "2b0c2d41b792f12c72eb42e6aceee944bf9ac1b14276f6f97d372778ae2c1ccd"
+    },
+    {
+      "name": "root/model-gpu-002/inventory.txt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/model-gpu-002/inventory.txt",
+      "bytes": 702,
+      "sha256": "e12fc5d21054a46dda120363388b506b00d84ee804ee28d18315c7c48a62c55c"
+    },
+    {
+      "name": "root/model-gpu-002/output.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/model-gpu-002/output.log",
+      "bytes": 2302,
+      "sha256": "e96d77bce0de57fbb18a2be4d9ce347748691ad5cf7453dac9838f61e875c4c0"
+    },
+    {
+      "name": "root/model-gpu-002/pixels/initial.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/model-gpu-002/pixels/initial.json",
+      "bytes": 439,
+      "sha256": "e277640b8e31fa22b970406b49ea226f9e5481f7fc267840cf7422771501ec00"
+    },
+    {
+      "name": "root/model-gpu-002/pixels/initial.rgba",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/model-gpu-002/pixels/initial.rgba",
+      "bytes": 61440,
+      "sha256": "3908725dc9450387e249204ee941a612ac604cee41c89d1e34c5e91f6a714f6e"
+    },
+    {
+      "name": "root/model-gpu-002/pixels/rejected_retained.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/model-gpu-002/pixels/rejected_retained.json",
+      "bytes": 449,
+      "sha256": "782cb5e931fda1a764780269828cfcef8216539f56f1edb02257ebdd0a4fbb81"
+    },
+    {
+      "name": "root/model-gpu-002/pixels/rejected_retained.rgba",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/model-gpu-002/pixels/rejected_retained.rgba",
+      "bytes": 61440,
+      "sha256": "3908725dc9450387e249204ee941a612ac604cee41c89d1e34c5e91f6a714f6e"
+    },
+    {
+      "name": "root/model-gpu-002/pixels/replacement.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/model-gpu-002/pixels/replacement.json",
+      "bytes": 444,
+      "sha256": "4643c0da048372546f2ad2fd863c8863b4ee6db780b3370236c875b89fbb591b"
+    },
+    {
+      "name": "root/model-gpu-002/pixels/replacement.rgba",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/model-gpu-002/pixels/replacement.rgba",
+      "bytes": 61440,
+      "sha256": "7d7c5a87c6e90a4461e98a020dd37e8d9f3dacd8fe56832994212dfc1474f1b7"
+    },
+    {
+      "name": "root/model-gpu-002/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/model-gpu-002/result.json",
+      "bytes": 1985,
+      "sha256": "cfec4e5d43de5d999e3ed8b9d52eec7c2d8d9025d8854d086e5fd2468be15833"
+    },
+    {
+      "name": "root/model-gpu-plan-003.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/model-gpu-plan-003.json",
+      "bytes": 1420,
+      "sha256": "d0ae9dcbf9fa692f9c6376ca80980f547ac9fc523949a791f1afec6a1277718f"
+    },
+    {
+      "name": "root/run-model-gpu-003.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/run-model-gpu-003.py",
+      "bytes": 2624,
+      "sha256": "1c68abfa8bfe5098678eb791d0588fab87773fd33d65475c1a93eb12ae88541d"
+    },
+    {
+      "name": "root/model-gpu-003/inventory.txt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/model-gpu-003/inventory.txt",
+      "bytes": 702,
+      "sha256": "e12fc5d21054a46dda120363388b506b00d84ee804ee28d18315c7c48a62c55c"
+    },
+    {
+      "name": "root/model-gpu-003/output.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/model-gpu-003/output.log",
+      "bytes": 1964,
+      "sha256": "845ce18b4cc9b0fd4c96835d4a3b796a0abc51ad0b8196c8579dbcfc9a25e73d"
+    },
+    {
+      "name": "root/model-gpu-003/pixels/initial.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/model-gpu-003/pixels/initial.json",
+      "bytes": 441,
+      "sha256": "6af613dbc673dce0ad1868f2fa62b6e799466c832336e9eb05d7647aa77b2f0e"
+    },
+    {
+      "name": "root/model-gpu-003/pixels/initial.rgba",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/model-gpu-003/pixels/initial.rgba",
+      "bytes": 61440,
+      "sha256": "3908725dc9450387e249204ee941a612ac604cee41c89d1e34c5e91f6a714f6e"
+    },
+    {
+      "name": "root/model-gpu-003/pixels/rejected_retained.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/model-gpu-003/pixels/rejected_retained.json",
+      "bytes": 451,
+      "sha256": "125e028069e6848bfabfe2fe672c1589c7e67aad25e0144e2b0f10a3cf0440ea"
+    },
+    {
+      "name": "root/model-gpu-003/pixels/rejected_retained.rgba",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/model-gpu-003/pixels/rejected_retained.rgba",
+      "bytes": 61440,
+      "sha256": "3908725dc9450387e249204ee941a612ac604cee41c89d1e34c5e91f6a714f6e"
+    },
+    {
+      "name": "root/model-gpu-003/pixels/replacement.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/model-gpu-003/pixels/replacement.json",
+      "bytes": 453,
+      "sha256": "f3d1a3f900b4d270909136731d11f15c5cc2d5a91b949e32b7f1d1fcdda6568a"
+    },
+    {
+      "name": "root/model-gpu-003/pixels/replacement.rgba",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/model-gpu-003/pixels/replacement.rgba",
+      "bytes": 61440,
+      "sha256": "7d7c5a87c6e90a4461e98a020dd37e8d9f3dacd8fe56832994212dfc1474f1b7"
+    },
+    {
+      "name": "root/model-gpu-003/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/model-gpu-003/result.json",
+      "bytes": 1919,
+      "sha256": "5b58baeb5eafc23b4eab14c1cdbc1df09720faed38dbd72eced90bffdb823552"
+    },
+    {
+      "name": "source/final/crates/incant_play/src/texture_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-004/inputs/crates/incant_play/src/texture_refresh.rs",
+      "bytes": 4903,
+      "sha256": "4501459152be7addf2994f67ca460e5adeb43e4782e0cd9f9c5898bd872f1d3b"
+    },
+    {
+      "name": "source/final/crates/incant_play/tests/model_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-004/inputs/crates/incant_play/tests/model_refresh.rs",
+      "bytes": 13891,
+      "sha256": "4dba28754cc3d9a831d41519ab007af92f6548b4dd258dd9c2651c900aa5402e"
+    },
+    {
+      "name": "source/final/crates/incant_render_game/src/lib.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-004/inputs/crates/incant_render_game/src/lib.rs",
+      "bytes": 10452,
+      "sha256": "2942bf16946feee1be5e215be3237c139ed9ee3ce8d12034d194e8d9becd5d51"
+    },
+    {
+      "name": "source/final/crates/incant_render_gpu_host/tests/game.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-004/inputs/crates/incant_render_gpu_host/tests/game.rs",
+      "bytes": 17983,
+      "sha256": "1b4fba481e910a0fa1fd91a3ea2ed9ad3f325cccd3a0c746349d97c0ef57fbc4"
+    },
+    {
+      "name": "source/final/crates/incant_render_gpu_host/tests/game/model_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-004/inputs/crates/incant_render_gpu_host/tests/game/model_refresh.rs",
+      "bytes": 16871,
+      "sha256": "232c410b9d1fe2448d83a22dae4db3a0f1c8415ddcb1b0f33eff7d9705619e75"
+    },
+    {
+      "name": "source/final/crates/incant_render_native/src/lib.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-004/inputs/crates/incant_render_native/src/lib.rs",
+      "bytes": 9456,
+      "sha256": "b599aa0acfcf3e906ed89b237641482cc74a6b065de30663b7d6c4d82f2cea7d"
+    },
+    {
+      "name": "source/final/crates/incant_render_native/src/model_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-004/inputs/crates/incant_render_native/src/model_refresh.rs",
+      "bytes": 1506,
+      "sha256": "735f01a978ce31d2b66f8a25c25a5b55b3daceba7e49e7be4d8513925d59602d"
+    },
+    {
+      "name": "source/final/crates/incant_render_native/src/texture_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-004/inputs/crates/incant_render_native/src/texture_refresh.rs",
+      "bytes": 14940,
+      "sha256": "17b7eea688fffbabec45bc4c27671eda2246fd21205970323fcf0ab9a1e69b8c"
+    },
+    {
+      "name": "source/final/crates/incant_render_native/tests/common/model_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-004/inputs/crates/incant_render_native/tests/common/model_refresh.rs",
+      "bytes": 6459,
+      "sha256": "30d29c077d3f9e5009b5c470d2992c952a7a860d66645cf80db0316c65ea0ae5"
+    },
+    {
+      "name": "source/final/crates/incant_render_native/tests/model_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-004/inputs/crates/incant_render_native/tests/model_refresh.rs",
+      "bytes": 13099,
+      "sha256": "32ce67fd76fddac9359f38fec9ded391ba305878c1249c1502f762e883424663"
+    },
+    {
+      "name": "source/final/crates/incant_runtime/src/spatial_view.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-004/inputs/crates/incant_runtime/src/spatial_view.rs",
+      "bytes": 5680,
+      "sha256": "0ddf484e31aeb252fb2b8bf00c21b13eb0b1937a62ea27b76a6a7e2b760ad601"
+    },
+    {
+      "name": "source/final/editor/app/src/play/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-004/inputs/editor/app/src/play/mod.rs",
+      "bytes": 12424,
+      "sha256": "5f2ca0e9ac46fb9b4c719fe7850c785009863ae43105e6c140062be60f107ca9"
+    },
+    {
+      "name": "source/final/editor/app/src/play/probe.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-004/inputs/editor/app/src/play/probe.rs",
+      "bytes": 11761,
+      "sha256": "503635a35c3158fc8b47a21bc4987c4d57414ec6aca23c0ef7b93431f8feb0ac"
+    },
+    {
+      "name": "source/final/editor/app/src/play/probe/asset_workflow.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-004/inputs/editor/app/src/play/probe/asset_workflow.rs",
+      "bytes": 20006,
+      "sha256": "3956c542d045784f437a8453464641cdb5e24e986831dc763d29c7177b4aaf82"
+    },
+    {
+      "name": "source/final/editor/app/src/play/probe/asset_workflow/kind.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-004/inputs/editor/app/src/play/probe/asset_workflow/kind.rs",
+      "bytes": 3190,
+      "sha256": "9d47c605467c79540c6fec669b372ab33b7fd3fb002a5436b9eef30574cb4c14"
+    },
+    {
+      "name": "source/final/editor/app/src/play/texture_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-004/inputs/editor/app/src/play/texture_refresh.rs",
+      "bytes": 16540,
+      "sha256": "5de0926f4e34d39b56bb71fddbf96ce73d2d9de504300736be0dd6a64aee43ce"
+    },
+    {
+      "name": "source/final/editor/app/src/play/worker.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-004/inputs/editor/app/src/play/worker.rs",
+      "bytes": 25066,
+      "sha256": "5e33d26695a2c54984c48761a8cbed9d51020e3faf56eb85196e87a47902360b"
+    },
+    {
+      "name": "source/final/tools/probes/native-editor-textures.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-004/inputs/tools/probes/native-editor-textures.py",
+      "bytes": 18197,
+      "sha256": "8b8fd1b3f6d7265f2bb4b555e920f6fac77878e6d7f43df7322f3470d533f3cb"
+    },
+    {
+      "name": "source/final/tools/tests/test_native_editor_textures.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-004/inputs/tools/tests/test_native_editor_textures.py",
+      "bytes": 9406,
+      "sha256": "7de41202aa1ce258dc27ff1c11db2c0e8e79889d102310d971d1b1469f2329b9"
+    },
+    {
+      "name": "source/root-002/model_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-002/inputs/crates/incant_render_gpu_host/tests/game/model_refresh.rs",
+      "bytes": 14113,
+      "sha256": "40526ee9f2eca90237709f7388858f7b58b76ba1e1704ad9c9d558e7d1a0abe7"
+    },
+    {
+      "name": "source/root-003/model_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-003/inputs/crates/incant_render_gpu_host/tests/game/model_refresh.rs",
+      "bytes": 16455,
+      "sha256": "5039da2e651552905cdf0a0f80beb437781d3d8080f89d652d0b2a64491c2960"
+    },
+    {
+      "name": "source-closure.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/packet-source-closure.json",
+      "bytes": 620,
+      "sha256": "0d592d5fdafd606655113c004d908702d5c829341f502c600a962628904a6a9b"
+    },
+    {
+      "name": "reviews/native-model-window-probe-source-independent-20261014.json",
+      "original": "/Users/andreyyurlov/.codex/incant-reviews/native-model-window-probe-source-independent-20261014.json",
+      "bytes": 3270,
+      "sha256": "1417694aabfa7a631f2da9b129b1b62a7dc94bca694e8018812532b1de761e75"
+    },
+    {
+      "name": "reviews/native-model-main288-join-build-protocol-20261014.json",
+      "original": "/Users/andreyyurlov/.codex/incant-reviews/native-model-main288-join-build-protocol-20261014.json",
+      "bytes": 8249,
+      "sha256": "b6a833f92bda7cc9fa84af5ccd1092c9c04eb510ba221db262999175eaf93853"
+    },
+    {
+      "name": "reviews/native-static-model-classifier-window-final-20261014.json",
+      "original": "/Users/andreyyurlov/.codex/incant-reviews/native-static-model-classifier-window-final-20261014.json",
+      "bytes": 9676,
+      "sha256": "4c9e29cfae707d1135bf0152ffed0f180acc9a29c0378818607bb494a96732e2"
+    },
+    {
+      "name": "historical-texture/cpu-source002-results.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/cpu-source002-results.json",
+      "bytes": 7252,
+      "sha256": "70b56a71deaa9c9c4474caffa15fd24baa7dbffd203d0b40fee28a4b8bbbf74d"
+    },
+    {
+      "name": "historical-texture/cpu-source003-results.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/cpu-source003-results.json",
+      "bytes": 6920,
+      "sha256": "1de491a4357d69efe82f1164fcd6d6554e49232739920da604b0f7cd3da9049b"
+    }
+  ],
+  "source_records": [
+    {
+      "path": "crates/incant_play/src/texture_refresh.rs",
+      "record": "source/final/crates/incant_play/src/texture_refresh.rs",
+      "bytes": 4903,
+      "sha256": "4501459152be7addf2994f67ca460e5adeb43e4782e0cd9f9c5898bd872f1d3b"
+    },
+    {
+      "path": "crates/incant_play/tests/model_refresh.rs",
+      "record": "source/final/crates/incant_play/tests/model_refresh.rs",
+      "bytes": 13891,
+      "sha256": "4dba28754cc3d9a831d41519ab007af92f6548b4dd258dd9c2651c900aa5402e"
+    },
+    {
+      "path": "crates/incant_render_game/src/lib.rs",
+      "record": "source/final/crates/incant_render_game/src/lib.rs",
+      "bytes": 10452,
+      "sha256": "2942bf16946feee1be5e215be3237c139ed9ee3ce8d12034d194e8d9becd5d51"
+    },
+    {
+      "path": "crates/incant_render_gpu_host/tests/game.rs",
+      "record": "source/final/crates/incant_render_gpu_host/tests/game.rs",
+      "bytes": 17983,
+      "sha256": "1b4fba481e910a0fa1fd91a3ea2ed9ad3f325cccd3a0c746349d97c0ef57fbc4"
+    },
+    {
+      "path": "crates/incant_render_gpu_host/tests/game/model_refresh.rs",
+      "record": "source/final/crates/incant_render_gpu_host/tests/game/model_refresh.rs",
+      "bytes": 16871,
+      "sha256": "232c410b9d1fe2448d83a22dae4db3a0f1c8415ddcb1b0f33eff7d9705619e75"
+    },
+    {
+      "path": "crates/incant_render_native/src/lib.rs",
+      "record": "source/final/crates/incant_render_native/src/lib.rs",
+      "bytes": 9456,
+      "sha256": "b599aa0acfcf3e906ed89b237641482cc74a6b065de30663b7d6c4d82f2cea7d"
+    },
+    {
+      "path": "crates/incant_render_native/src/model_refresh.rs",
+      "record": "source/final/crates/incant_render_native/src/model_refresh.rs",
+      "bytes": 1506,
+      "sha256": "735f01a978ce31d2b66f8a25c25a5b55b3daceba7e49e7be4d8513925d59602d"
+    },
+    {
+      "path": "crates/incant_render_native/src/texture_refresh.rs",
+      "record": "source/final/crates/incant_render_native/src/texture_refresh.rs",
+      "bytes": 14940,
+      "sha256": "17b7eea688fffbabec45bc4c27671eda2246fd21205970323fcf0ab9a1e69b8c"
+    },
+    {
+      "path": "crates/incant_render_native/tests/common/model_refresh.rs",
+      "record": "source/final/crates/incant_render_native/tests/common/model_refresh.rs",
+      "bytes": 6459,
+      "sha256": "30d29c077d3f9e5009b5c470d2992c952a7a860d66645cf80db0316c65ea0ae5"
+    },
+    {
+      "path": "crates/incant_render_native/tests/model_refresh.rs",
+      "record": "source/final/crates/incant_render_native/tests/model_refresh.rs",
+      "bytes": 13099,
+      "sha256": "32ce67fd76fddac9359f38fec9ded391ba305878c1249c1502f762e883424663"
+    },
+    {
+      "path": "crates/incant_runtime/src/spatial_view.rs",
+      "record": "source/final/crates/incant_runtime/src/spatial_view.rs",
+      "bytes": 5680,
+      "sha256": "0ddf484e31aeb252fb2b8bf00c21b13eb0b1937a62ea27b76a6a7e2b760ad601"
+    },
+    {
+      "path": "editor/app/src/play/mod.rs",
+      "record": "source/final/editor/app/src/play/mod.rs",
+      "bytes": 12424,
+      "sha256": "5f2ca0e9ac46fb9b4c719fe7850c785009863ae43105e6c140062be60f107ca9"
+    },
+    {
+      "path": "editor/app/src/play/probe.rs",
+      "record": "source/final/editor/app/src/play/probe.rs",
+      "bytes": 11761,
+      "sha256": "503635a35c3158fc8b47a21bc4987c4d57414ec6aca23c0ef7b93431f8feb0ac"
+    },
+    {
+      "path": "editor/app/src/play/probe/asset_workflow.rs",
+      "record": "source/final/editor/app/src/play/probe/asset_workflow.rs",
+      "bytes": 20006,
+      "sha256": "3956c542d045784f437a8453464641cdb5e24e986831dc763d29c7177b4aaf82"
+    },
+    {
+      "path": "editor/app/src/play/probe/asset_workflow/kind.rs",
+      "record": "source/final/editor/app/src/play/probe/asset_workflow/kind.rs",
+      "bytes": 3190,
+      "sha256": "9d47c605467c79540c6fec669b372ab33b7fd3fb002a5436b9eef30574cb4c14"
+    },
+    {
+      "path": "editor/app/src/play/texture_refresh.rs",
+      "record": "source/final/editor/app/src/play/texture_refresh.rs",
+      "bytes": 16540,
+      "sha256": "5de0926f4e34d39b56bb71fddbf96ce73d2d9de504300736be0dd6a64aee43ce"
+    },
+    {
+      "path": "editor/app/src/play/worker.rs",
+      "record": "source/final/editor/app/src/play/worker.rs",
+      "bytes": 25066,
+      "sha256": "5e33d26695a2c54984c48761a8cbed9d51020e3faf56eb85196e87a47902360b"
+    },
+    {
+      "path": "tools/probes/native-editor-textures.py",
+      "record": "source/final/tools/probes/native-editor-textures.py",
+      "bytes": 18197,
+      "sha256": "8b8fd1b3f6d7265f2bb4b555e920f6fac77878e6d7f43df7322f3470d533f3cb"
+    },
+    {
+      "path": "tools/tests/test_native_editor_textures.py",
+      "record": "source/final/tools/tests/test_native_editor_textures.py",
+      "bytes": 9406,
+      "sha256": "7de41202aa1ce258dc27ff1c11db2c0e8e79889d102310d971d1b1469f2329b9"
+    }
+  ],
+  "compiler_inventory": {
+    "record": "root/source-004/freeze.json",
+    "count": 4761,
+    "meaning": "Full frozen tracked-input hashes; only19 changed source paths included as bytes."
+  },
+  "compiler_seam_records": [
+    {
+      "path": "Cargo.toml",
+      "bytes": 3887,
+      "sha256": "c9020614708894acf9e8f5cc0b139f4d9f675259ae7c878fea560459e1fadf2c"
+    },
+    {
+      "path": "Cargo.lock",
+      "bytes": 252751,
+      "sha256": "7b86f0e00614d76eeb68c71a41f7b529f10e74ad34967ca0b33cdc6418c0f9cf"
+    },
+    {
+      "path": "rust-toolchain.toml",
+      "bytes": 100,
+      "sha256": "c6e63d9832830b858d930007e4fd1fc3f4a3ca1d287483b08077b7f0267ca124"
+    },
+    {
+      "path": ".cargo/config.toml",
+      "bytes": 385,
+      "sha256": "0d3b42ee7bc4ef237cb8af440c47e506dcc9cc8b24d49d3cd3d3fea76ae5caa1"
+    },
+    {
+      "path": "tools/cargo",
+      "bytes": 179,
+      "sha256": "9aef98d613601b0c374c1d0499afb39d710cbf5002faba537f21be9c11ff72e3"
+    },
+    {
+      "path": "tools/native_process.py",
+      "bytes": 19307,
+      "sha256": "58dd2a8231d7f9d1e42070fc85425461e06a43f279fa5e7f8e57b4a40c3a3aa4"
+    },
+    {
+      "path": "package.json",
+      "bytes": 865,
+      "sha256": "bb8e7500fecc2e50fdf50716823a65ca4ff6b8cd742be881db7155b65ab21012"
+    },
+    {
+      "path": "package-lock.json",
+      "bytes": 134157,
+      "sha256": "cbea068b7d9182270271319a7a77d24805b9c9c66ed5e9eb3e188d60e5337c60"
+    }
+  ],
+  "retained_artifacts": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/binaries/0-texture_refresh-source001",
+      "bytes": 17727664,
+      "sha256": "c78ccec0a1087d10bd1aeb01fa20b81c073d1b3c1c7803f96a419fc4223e18d2",
+      "kind": "producer_cpu_test",
+      "producing_source": "68e2706b55f2770dd99906a08e56bda4d1aee90a"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/binaries/0-model_refresh-source001",
+      "bytes": 13926864,
+      "sha256": "3a546c0d54946bc9b566364a499205d086f34916f5fd589c690ab55df990eb12",
+      "kind": "producer_cpu_test",
+      "producing_source": "68e2706b55f2770dd99906a08e56bda4d1aee90a"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/binaries/1-texture_refresh-source001",
+      "bytes": 32136032,
+      "sha256": "18d0150bd8e35adc5f62aa66b9f6666f190983e88b06b6d41370870675fb4f2b",
+      "kind": "producer_cpu_test",
+      "producing_source": "68e2706b55f2770dd99906a08e56bda4d1aee90a"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/binaries/1-model_refresh-source001",
+      "bytes": 37751168,
+      "sha256": "40e5174484006470c36089208305d7a1f27922cbd6acb4fa145d5707c1b6d482",
+      "kind": "producer_cpu_test",
+      "producing_source": "68e2706b55f2770dd99906a08e56bda4d1aee90a"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/binaries/2-incant_editor-source001",
+      "bytes": 57838240,
+      "sha256": "e421f583fbc6dfa57de166849b7baaba2d76e434c1740bd6f9381e24f9cbba8b",
+      "kind": "producer_cpu_test",
+      "producing_source": "68e2706b55f2770dd99906a08e56bda4d1aee90a"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/binaries/game-source002",
+      "bytes": 33256760,
+      "sha256": "e818444f6c80ecae1d30cc12408afab9ba4c685e784d215fb1ccebbcaf41646d",
+      "kind": "gpu_test_001",
+      "producing_source": "44e567f76740b287464f0ad1840e29180bf5f18e"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/binaries/incant_editor-source002",
+      "bytes": 72698512,
+      "sha256": "1f31d887aa79ccf1bae0a1e19a83b4ebb46dd55aaa54a734a358edc3bbf961b3",
+      "kind": "joined_native_editor",
+      "producing_source": "44e567f76740b287464f0ad1840e29180bf5f18e"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/binaries/game-source003",
+      "bytes": 33283336,
+      "sha256": "618b95d9aa620794174597f072790140c1fc1cb8eee22940448d309b1bb158db",
+      "kind": "gpu_test_002",
+      "producing_source": "fa1d6d5bf3a5d86c54744ef4d618a16c590a0e36"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/binaries/game-source004",
+      "bytes": 33283336,
+      "sha256": "8bae22527bf1951e381bf63ad1806cabbf74eb14c095cfab0f810ee2cbf13f72",
+      "kind": "gpu_test_003",
+      "producing_source": "193f5e43d0c790db3b4327420ab49bef375448dc"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/binaries/incant_headless-source003",
+      "bytes": 62122800,
+      "sha256": "ff8c4365346b2b85cc2285ac53a8167f6e7989e551dc9d4af87df87acaf68b88",
+      "kind": "historical_headless_fixture_helper",
+      "producing_source": null
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/binaries/Incant Model Workflow Probe.app/Contents/MacOS/incant_editor",
+      "bytes": 72698512,
+      "sha256": "1f31d887aa79ccf1bae0a1e19a83b4ebb46dd55aaa54a734a358edc3bbf961b3",
+      "kind": "actual_window_bundle_editor",
+      "producing_source": "44e567f76740b287464f0ad1840e29180bf5f18e"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/binaries/Incant Model Workflow Probe.app/Contents/Info.plist",
+      "bytes": 724,
+      "sha256": "1ff2ef132f79d21e12120c80ef015b86a21b14d3bdd5ade432d931e33e3e6719",
+      "kind": "owned_bundle_identity",
+      "producing_source": null
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/frontend-dist-source002/assets/index-4A6FDmvL.css",
+      "bytes": 92165,
+      "sha256": "0b2651dea4a0592aa4867227eebf24fe82a9566d3556cf7f748f24e2bf5277dc",
+      "kind": "genuine_historical_frontend",
+      "producing_source": "3ab736cc1d29c7229fdc5fbb3392df0b1ed8343e"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/frontend-dist-source002/assets/index-W90srANs.js",
+      "bytes": 485008,
+      "sha256": "5151789c45e2ca84dc45acd2ce4a4aad1eb6d2392a6d9da10da004a879c2214a",
+      "kind": "genuine_historical_frontend",
+      "producing_source": "3ab736cc1d29c7229fdc5fbb3392df0b1ed8343e"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/frontend-dist-source002/assets/index-W90srANs.js.map",
+      "bytes": 2026158,
+      "sha256": "3c9f2c07ab1915b5db80a1e2c529a445cb80ced4f5db39b9e2bb2e7f5eb4d471",
+      "kind": "genuine_historical_frontend",
+      "producing_source": "3ab736cc1d29c7229fdc5fbb3392df0b1ed8343e"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/frontend-dist-source002/assets/inter-cyrillic-ext-wght-normal-BOeWTOD4.woff2",
+      "bytes": 25960,
+      "sha256": "ca157063339ac4ad418f214f3abfed119b0798ab4d377386ce5c9e5a7a435ebd",
+      "kind": "genuine_historical_frontend",
+      "producing_source": "3ab736cc1d29c7229fdc5fbb3392df0b1ed8343e"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/frontend-dist-source002/assets/inter-cyrillic-wght-normal-DqGufNeO.woff2",
+      "bytes": 18748,
+      "sha256": "71d5ee93cc1e9f1d520a3a8b66456de18c7879d8df09d57fcd2eaff75fef0075",
+      "kind": "genuine_historical_frontend",
+      "producing_source": "3ab736cc1d29c7229fdc5fbb3392df0b1ed8343e"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/frontend-dist-source002/assets/inter-greek-ext-wght-normal-DlzME5K_.woff2",
+      "bytes": 11232,
+      "sha256": "6e9e020a25f9b56d418f2c085b1d3c09725a4da23fe693a5b463064606732190",
+      "kind": "genuine_historical_frontend",
+      "producing_source": "3ab736cc1d29c7229fdc5fbb3392df0b1ed8343e"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/frontend-dist-source002/assets/inter-greek-wght-normal-CkhJZR-_.woff2",
+      "bytes": 18996,
+      "sha256": "1be3448e292fbf05ffe176fe1e43f135013d50b1e7d324ad1a558f623d3bb6f6",
+      "kind": "genuine_historical_frontend",
+      "producing_source": "3ab736cc1d29c7229fdc5fbb3392df0b1ed8343e"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/frontend-dist-source002/assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2",
+      "bytes": 85068,
+      "sha256": "34b9c504cab7a73e37b746343a449132e56cf7b5481af2cb81dc74dcff25c956",
+      "kind": "genuine_historical_frontend",
+      "producing_source": "3ab736cc1d29c7229fdc5fbb3392df0b1ed8343e"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/frontend-dist-source002/assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+      "bytes": 48256,
+      "sha256": "3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62",
+      "kind": "genuine_historical_frontend",
+      "producing_source": "3ab736cc1d29c7229fdc5fbb3392df0b1ed8343e"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/frontend-dist-source002/assets/inter-vietnamese-wght-normal-CBcvBZtf.woff2",
+      "bytes": 10252,
+      "sha256": "5c66f9e07e90c6d4ac4922cc68d60de26c17b1858e677fb5e603fce3952b3ff2",
+      "kind": "genuine_historical_frontend",
+      "producing_source": "3ab736cc1d29c7229fdc5fbb3392df0b1ed8343e"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/frontend-dist-source002/assets/jetbrains-mono-cyrillic-ext-wght-normal-EocZY2iu.woff2",
+      "bytes": 2028,
+      "sha256": "593ccd6fe36e299e151aeae4521be9bfe83ac487d96d7cdb44f50be4a04041c7",
+      "kind": "genuine_historical_frontend",
+      "producing_source": "3ab736cc1d29c7229fdc5fbb3392df0b1ed8343e"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/frontend-dist-source002/assets/jetbrains-mono-cyrillic-wght-normal-D73BlboJ.woff2",
+      "bytes": 12108,
+      "sha256": "d274604c40757f98f07df623a8b8fb5194508a6fa4f5413a7a107f09e3b7452a",
+      "kind": "genuine_historical_frontend",
+      "producing_source": "3ab736cc1d29c7229fdc5fbb3392df0b1ed8343e"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/frontend-dist-source002/assets/jetbrains-mono-greek-wght-normal-Bw9x6K1M.woff2",
+      "bytes": 9004,
+      "sha256": "ee863198077f3093ffa81c072581cc4bd608a04e60a8a9c0b846396ce4f14109",
+      "kind": "genuine_historical_frontend",
+      "producing_source": "3ab736cc1d29c7229fdc5fbb3392df0b1ed8343e"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/frontend-dist-source002/assets/jetbrains-mono-latin-ext-wght-normal-DBQx-q_a.woff2",
+      "bytes": 15196,
+      "sha256": "79bfdab9ba467e26eea4122e6f2567e188dd8a09a8c730d501fc487c4ab99c6e",
+      "kind": "genuine_historical_frontend",
+      "producing_source": "3ab736cc1d29c7229fdc5fbb3392df0b1ed8343e"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/frontend-dist-source002/assets/jetbrains-mono-latin-wght-normal-B9CIFXIH.woff2",
+      "bytes": 40404,
+      "sha256": "18be452724bfdc236c074ca94a249a7f41a86752c7d04ab258ce9ed5651f6a7e",
+      "kind": "genuine_historical_frontend",
+      "producing_source": "3ab736cc1d29c7229fdc5fbb3392df0b1ed8343e"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/frontend-dist-source002/assets/jetbrains-mono-vietnamese-wght-normal-Bt-aOZkq.woff2",
+      "bytes": 7504,
+      "sha256": "2288795da89dd97e648954b96e22b4501bd85dfc453264460b252f888b582ca2",
+      "kind": "genuine_historical_frontend",
+      "producing_source": "3ab736cc1d29c7229fdc5fbb3392df0b1ed8343e"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/frontend-dist-source002/icon.png",
+      "bytes": 7144,
+      "sha256": "7525176384661738c92475b9cf88ae00d05a42ce1cc63f63afcf81e0c63b8e6e",
+      "kind": "genuine_historical_frontend",
+      "producing_source": "3ab736cc1d29c7229fdc5fbb3392df0b1ed8343e"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/frontend-dist-source002/icon.svg",
+      "bytes": 1588,
+      "sha256": "52cc3f9a2f248fa5c791f976a67482f31d107552f2f27a62f072451eb07c4fb5",
+      "kind": "genuine_historical_frontend",
+      "producing_source": "3ab736cc1d29c7229fdc5fbb3392df0b1ed8343e"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/frontend-dist-source002/index.html",
+      "bytes": 998,
+      "sha256": "7c99d98278e80b791c4a0586f8f1d8f29be9f1f63f127f3c9213a69eedbfd70a",
+      "kind": "genuine_historical_frontend",
+      "producing_source": "3ab736cc1d29c7229fdc5fbb3392df0b1ed8343e"
+    }
+  ],
+  "retained_source_copies": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/source-001/files/crates/incant_play/src/texture_refresh.rs",
+      "sha256": "4501459152be7addf2994f67ca460e5adeb43e4782e0cd9f9c5898bd872f1d3b",
+      "bytes": 4903
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/source-001/files/crates/incant_play/tests/model_refresh.rs",
+      "sha256": "4dba28754cc3d9a831d41519ab007af92f6548b4dd258dd9c2651c900aa5402e",
+      "bytes": 13891
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/source-001/files/crates/incant_render_game/src/lib.rs",
+      "sha256": "2942bf16946feee1be5e215be3237c139ed9ee3ce8d12034d194e8d9becd5d51",
+      "bytes": 10452
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/source-001/files/crates/incant_render_native/src/lib.rs",
+      "sha256": "b599aa0acfcf3e906ed89b237641482cc74a6b065de30663b7d6c4d82f2cea7d",
+      "bytes": 9456
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/source-001/files/crates/incant_render_native/src/model_refresh.rs",
+      "sha256": "735f01a978ce31d2b66f8a25c25a5b55b3daceba7e49e7be4d8513925d59602d",
+      "bytes": 1506
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/source-001/files/crates/incant_render_native/src/texture_refresh.rs",
+      "sha256": "17b7eea688fffbabec45bc4c27671eda2246fd21205970323fcf0ab9a1e69b8c",
+      "bytes": 14940
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/source-001/files/crates/incant_render_native/tests/common/model_refresh.rs",
+      "sha256": "30d29c077d3f9e5009b5c470d2992c952a7a860d66645cf80db0316c65ea0ae5",
+      "bytes": 6459
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/source-001/files/crates/incant_render_native/tests/model_refresh.rs",
+      "sha256": "ecc7a8a0f3e11ac7324a44e349b33944ed9114c5ee81c7103807bb1d6a716852",
+      "bytes": 13005
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/source-001/files/crates/incant_runtime/src/spatial_view.rs",
+      "sha256": "0ddf484e31aeb252fb2b8bf00c21b13eb0b1937a62ea27b76a6a7e2b760ad601",
+      "bytes": 5680
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/source-001/files/editor/app/src/play/texture_refresh.rs",
+      "sha256": "5de0926f4e34d39b56bb71fddbf96ce73d2d9de504300736be0dd6a64aee43ce",
+      "bytes": 16540
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/source-002/files/crates/incant_play/src/texture_refresh.rs",
+      "sha256": "4501459152be7addf2994f67ca460e5adeb43e4782e0cd9f9c5898bd872f1d3b",
+      "bytes": 4903
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/source-002/files/crates/incant_play/tests/model_refresh.rs",
+      "sha256": "4dba28754cc3d9a831d41519ab007af92f6548b4dd258dd9c2651c900aa5402e",
+      "bytes": 13891
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/source-002/files/crates/incant_render_game/src/lib.rs",
+      "sha256": "2942bf16946feee1be5e215be3237c139ed9ee3ce8d12034d194e8d9becd5d51",
+      "bytes": 10452
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/source-002/files/crates/incant_render_native/src/lib.rs",
+      "sha256": "b599aa0acfcf3e906ed89b237641482cc74a6b065de30663b7d6c4d82f2cea7d",
+      "bytes": 9456
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/source-002/files/crates/incant_render_native/src/model_refresh.rs",
+      "sha256": "735f01a978ce31d2b66f8a25c25a5b55b3daceba7e49e7be4d8513925d59602d",
+      "bytes": 1506
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/source-002/files/crates/incant_render_native/src/texture_refresh.rs",
+      "sha256": "17b7eea688fffbabec45bc4c27671eda2246fd21205970323fcf0ab9a1e69b8c",
+      "bytes": 14940
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/source-002/files/crates/incant_render_native/tests/common/model_refresh.rs",
+      "sha256": "30d29c077d3f9e5009b5c470d2992c952a7a860d66645cf80db0316c65ea0ae5",
+      "bytes": 6459
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/source-002/files/crates/incant_render_native/tests/model_refresh.rs",
+      "sha256": "32ce67fd76fddac9359f38fec9ded391ba305878c1249c1502f762e883424663",
+      "bytes": 13099
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/source-002/files/crates/incant_runtime/src/spatial_view.rs",
+      "sha256": "0ddf484e31aeb252fb2b8bf00c21b13eb0b1937a62ea27b76a6a7e2b760ad601",
+      "bytes": 5680
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/source-002/files/editor/app/src/play/texture_refresh.rs",
+      "sha256": "5de0926f4e34d39b56bb71fddbf96ce73d2d9de504300736be0dd6a64aee43ce",
+      "bytes": 16540
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/source-003/files/crates/incant_play/src/texture_refresh.rs",
+      "sha256": "4501459152be7addf2994f67ca460e5adeb43e4782e0cd9f9c5898bd872f1d3b",
+      "bytes": 4903
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/source-003/files/crates/incant_play/tests/model_refresh.rs",
+      "sha256": "4dba28754cc3d9a831d41519ab007af92f6548b4dd258dd9c2651c900aa5402e",
+      "bytes": 13891
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/source-003/files/crates/incant_render_game/src/lib.rs",
+      "sha256": "2942bf16946feee1be5e215be3237c139ed9ee3ce8d12034d194e8d9becd5d51",
+      "bytes": 10452
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/source-003/files/crates/incant_render_gpu_host/tests/game.rs",
+      "sha256": "1b4fba481e910a0fa1fd91a3ea2ed9ad3f325cccd3a0c746349d97c0ef57fbc4",
+      "bytes": 17983
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/source-003/files/crates/incant_render_gpu_host/tests/game/model_refresh.rs",
+      "sha256": "40526ee9f2eca90237709f7388858f7b58b76ba1e1704ad9c9d558e7d1a0abe7",
+      "bytes": 14113
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/source-003/files/crates/incant_render_native/src/lib.rs",
+      "sha256": "b599aa0acfcf3e906ed89b237641482cc74a6b065de30663b7d6c4d82f2cea7d",
+      "bytes": 9456
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/source-003/files/crates/incant_render_native/src/model_refresh.rs",
+      "sha256": "735f01a978ce31d2b66f8a25c25a5b55b3daceba7e49e7be4d8513925d59602d",
+      "bytes": 1506
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/source-003/files/crates/incant_render_native/src/texture_refresh.rs",
+      "sha256": "17b7eea688fffbabec45bc4c27671eda2246fd21205970323fcf0ab9a1e69b8c",
+      "bytes": 14940
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/source-003/files/crates/incant_render_native/tests/common/model_refresh.rs",
+      "sha256": "30d29c077d3f9e5009b5c470d2992c952a7a860d66645cf80db0316c65ea0ae5",
+      "bytes": 6459
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/source-003/files/crates/incant_render_native/tests/model_refresh.rs",
+      "sha256": "32ce67fd76fddac9359f38fec9ded391ba305878c1249c1502f762e883424663",
+      "bytes": 13099
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/source-003/files/crates/incant_runtime/src/spatial_view.rs",
+      "sha256": "0ddf484e31aeb252fb2b8bf00c21b13eb0b1937a62ea27b76a6a7e2b760ad601",
+      "bytes": 5680
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/source-003/files/editor/app/src/play/texture_refresh.rs",
+      "sha256": "5de0926f4e34d39b56bb71fddbf96ce73d2d9de504300736be0dd6a64aee43ce",
+      "bytes": 16540
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/source-004/files/crates/incant_play/src/texture_refresh.rs",
+      "sha256": "4501459152be7addf2994f67ca460e5adeb43e4782e0cd9f9c5898bd872f1d3b",
+      "bytes": 4903
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/source-004/files/crates/incant_play/tests/model_refresh.rs",
+      "sha256": "4dba28754cc3d9a831d41519ab007af92f6548b4dd258dd9c2651c900aa5402e",
+      "bytes": 13891
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/source-004/files/crates/incant_render_game/src/lib.rs",
+      "sha256": "2942bf16946feee1be5e215be3237c139ed9ee3ce8d12034d194e8d9becd5d51",
+      "bytes": 10452
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/source-004/files/crates/incant_render_gpu_host/tests/game.rs",
+      "sha256": "1b4fba481e910a0fa1fd91a3ea2ed9ad3f325cccd3a0c746349d97c0ef57fbc4",
+      "bytes": 17983
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/source-004/files/crates/incant_render_gpu_host/tests/game/model_refresh.rs",
+      "sha256": "f6c8ef102ead1539f80d0cfa5c1d8f0f6a324c1537f9c85c22304e011dd96a42",
+      "bytes": 16433
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/source-004/files/crates/incant_render_native/src/lib.rs",
+      "sha256": "b599aa0acfcf3e906ed89b237641482cc74a6b065de30663b7d6c4d82f2cea7d",
+      "bytes": 9456
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/source-004/files/crates/incant_render_native/src/model_refresh.rs",
+      "sha256": "735f01a978ce31d2b66f8a25c25a5b55b3daceba7e49e7be4d8513925d59602d",
+      "bytes": 1506
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/source-004/files/crates/incant_render_native/src/texture_refresh.rs",
+      "sha256": "17b7eea688fffbabec45bc4c27671eda2246fd21205970323fcf0ab9a1e69b8c",
+      "bytes": 14940
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/source-004/files/crates/incant_render_native/tests/common/model_refresh.rs",
+      "sha256": "30d29c077d3f9e5009b5c470d2992c952a7a860d66645cf80db0316c65ea0ae5",
+      "bytes": 6459
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/source-004/files/crates/incant_render_native/tests/model_refresh.rs",
+      "sha256": "32ce67fd76fddac9359f38fec9ded391ba305878c1249c1502f762e883424663",
+      "bytes": 13099
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/source-004/files/crates/incant_runtime/src/spatial_view.rs",
+      "sha256": "0ddf484e31aeb252fb2b8bf00c21b13eb0b1937a62ea27b76a6a7e2b760ad601",
+      "bytes": 5680
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-static-model-refresh-001/source-004/files/editor/app/src/play/texture_refresh.rs",
+      "sha256": "5de0926f4e34d39b56bb71fddbf96ce73d2d9de504300736be0dd6a64aee43ce",
+      "bytes": 16540
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-002/inputs/crates/incant_play/src/texture_refresh.rs",
+      "sha256": "4501459152be7addf2994f67ca460e5adeb43e4782e0cd9f9c5898bd872f1d3b",
+      "bytes": 4903
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-002/inputs/crates/incant_play/tests/model_refresh.rs",
+      "sha256": "4dba28754cc3d9a831d41519ab007af92f6548b4dd258dd9c2651c900aa5402e",
+      "bytes": 13891
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-002/inputs/crates/incant_render_game/src/lib.rs",
+      "sha256": "2942bf16946feee1be5e215be3237c139ed9ee3ce8d12034d194e8d9becd5d51",
+      "bytes": 10452
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-002/inputs/crates/incant_render_gpu_host/tests/game.rs",
+      "sha256": "1b4fba481e910a0fa1fd91a3ea2ed9ad3f325cccd3a0c746349d97c0ef57fbc4",
+      "bytes": 17983
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-002/inputs/crates/incant_render_gpu_host/tests/game/model_refresh.rs",
+      "sha256": "40526ee9f2eca90237709f7388858f7b58b76ba1e1704ad9c9d558e7d1a0abe7",
+      "bytes": 14113
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-002/inputs/crates/incant_render_native/src/lib.rs",
+      "sha256": "b599aa0acfcf3e906ed89b237641482cc74a6b065de30663b7d6c4d82f2cea7d",
+      "bytes": 9456
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-002/inputs/crates/incant_render_native/src/model_refresh.rs",
+      "sha256": "735f01a978ce31d2b66f8a25c25a5b55b3daceba7e49e7be4d8513925d59602d",
+      "bytes": 1506
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-002/inputs/crates/incant_render_native/src/texture_refresh.rs",
+      "sha256": "17b7eea688fffbabec45bc4c27671eda2246fd21205970323fcf0ab9a1e69b8c",
+      "bytes": 14940
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-002/inputs/crates/incant_render_native/tests/common/model_refresh.rs",
+      "sha256": "30d29c077d3f9e5009b5c470d2992c952a7a860d66645cf80db0316c65ea0ae5",
+      "bytes": 6459
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-002/inputs/crates/incant_render_native/tests/model_refresh.rs",
+      "sha256": "32ce67fd76fddac9359f38fec9ded391ba305878c1249c1502f762e883424663",
+      "bytes": 13099
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-002/inputs/crates/incant_runtime/src/spatial_view.rs",
+      "sha256": "0ddf484e31aeb252fb2b8bf00c21b13eb0b1937a62ea27b76a6a7e2b760ad601",
+      "bytes": 5680
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-002/inputs/editor/app/src/play/mod.rs",
+      "sha256": "5f2ca0e9ac46fb9b4c719fe7850c785009863ae43105e6c140062be60f107ca9",
+      "bytes": 12424
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-002/inputs/editor/app/src/play/probe.rs",
+      "sha256": "503635a35c3158fc8b47a21bc4987c4d57414ec6aca23c0ef7b93431f8feb0ac",
+      "bytes": 11761
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-002/inputs/editor/app/src/play/probe/asset_workflow.rs",
+      "sha256": "3956c542d045784f437a8453464641cdb5e24e986831dc763d29c7177b4aaf82",
+      "bytes": 20006
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-002/inputs/editor/app/src/play/probe/asset_workflow/kind.rs",
+      "sha256": "9d47c605467c79540c6fec669b372ab33b7fd3fb002a5436b9eef30574cb4c14",
+      "bytes": 3190
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-002/inputs/editor/app/src/play/texture_refresh.rs",
+      "sha256": "5de0926f4e34d39b56bb71fddbf96ce73d2d9de504300736be0dd6a64aee43ce",
+      "bytes": 16540
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-002/inputs/editor/app/src/play/worker.rs",
+      "sha256": "5e33d26695a2c54984c48761a8cbed9d51020e3faf56eb85196e87a47902360b",
+      "bytes": 25066
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-002/inputs/tools/probes/native-editor-textures.py",
+      "sha256": "8b8fd1b3f6d7265f2bb4b555e920f6fac77878e6d7f43df7322f3470d533f3cb",
+      "bytes": 18197
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-002/inputs/tools/tests/test_native_editor_textures.py",
+      "sha256": "7de41202aa1ce258dc27ff1c11db2c0e8e79889d102310d971d1b1469f2329b9",
+      "bytes": 9406
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-003/inputs/crates/incant_play/src/texture_refresh.rs",
+      "sha256": "4501459152be7addf2994f67ca460e5adeb43e4782e0cd9f9c5898bd872f1d3b",
+      "bytes": 4903
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-003/inputs/crates/incant_play/tests/model_refresh.rs",
+      "sha256": "4dba28754cc3d9a831d41519ab007af92f6548b4dd258dd9c2651c900aa5402e",
+      "bytes": 13891
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-003/inputs/crates/incant_render_game/src/lib.rs",
+      "sha256": "2942bf16946feee1be5e215be3237c139ed9ee3ce8d12034d194e8d9becd5d51",
+      "bytes": 10452
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-003/inputs/crates/incant_render_gpu_host/tests/game.rs",
+      "sha256": "1b4fba481e910a0fa1fd91a3ea2ed9ad3f325cccd3a0c746349d97c0ef57fbc4",
+      "bytes": 17983
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-003/inputs/crates/incant_render_gpu_host/tests/game/model_refresh.rs",
+      "sha256": "5039da2e651552905cdf0a0f80beb437781d3d8080f89d652d0b2a64491c2960",
+      "bytes": 16455
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-003/inputs/crates/incant_render_native/src/lib.rs",
+      "sha256": "b599aa0acfcf3e906ed89b237641482cc74a6b065de30663b7d6c4d82f2cea7d",
+      "bytes": 9456
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-003/inputs/crates/incant_render_native/src/model_refresh.rs",
+      "sha256": "735f01a978ce31d2b66f8a25c25a5b55b3daceba7e49e7be4d8513925d59602d",
+      "bytes": 1506
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-003/inputs/crates/incant_render_native/src/texture_refresh.rs",
+      "sha256": "17b7eea688fffbabec45bc4c27671eda2246fd21205970323fcf0ab9a1e69b8c",
+      "bytes": 14940
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-003/inputs/crates/incant_render_native/tests/common/model_refresh.rs",
+      "sha256": "30d29c077d3f9e5009b5c470d2992c952a7a860d66645cf80db0316c65ea0ae5",
+      "bytes": 6459
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-003/inputs/crates/incant_render_native/tests/model_refresh.rs",
+      "sha256": "32ce67fd76fddac9359f38fec9ded391ba305878c1249c1502f762e883424663",
+      "bytes": 13099
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-003/inputs/crates/incant_runtime/src/spatial_view.rs",
+      "sha256": "0ddf484e31aeb252fb2b8bf00c21b13eb0b1937a62ea27b76a6a7e2b760ad601",
+      "bytes": 5680
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-003/inputs/editor/app/src/play/mod.rs",
+      "sha256": "5f2ca0e9ac46fb9b4c719fe7850c785009863ae43105e6c140062be60f107ca9",
+      "bytes": 12424
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-003/inputs/editor/app/src/play/probe.rs",
+      "sha256": "503635a35c3158fc8b47a21bc4987c4d57414ec6aca23c0ef7b93431f8feb0ac",
+      "bytes": 11761
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-003/inputs/editor/app/src/play/probe/asset_workflow.rs",
+      "sha256": "3956c542d045784f437a8453464641cdb5e24e986831dc763d29c7177b4aaf82",
+      "bytes": 20006
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-003/inputs/editor/app/src/play/probe/asset_workflow/kind.rs",
+      "sha256": "9d47c605467c79540c6fec669b372ab33b7fd3fb002a5436b9eef30574cb4c14",
+      "bytes": 3190
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-003/inputs/editor/app/src/play/texture_refresh.rs",
+      "sha256": "5de0926f4e34d39b56bb71fddbf96ce73d2d9de504300736be0dd6a64aee43ce",
+      "bytes": 16540
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-003/inputs/editor/app/src/play/worker.rs",
+      "sha256": "5e33d26695a2c54984c48761a8cbed9d51020e3faf56eb85196e87a47902360b",
+      "bytes": 25066
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-003/inputs/tools/probes/native-editor-textures.py",
+      "sha256": "8b8fd1b3f6d7265f2bb4b555e920f6fac77878e6d7f43df7322f3470d533f3cb",
+      "bytes": 18197
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-003/inputs/tools/tests/test_native_editor_textures.py",
+      "sha256": "7de41202aa1ce258dc27ff1c11db2c0e8e79889d102310d971d1b1469f2329b9",
+      "bytes": 9406
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-004/inputs/crates/incant_play/src/texture_refresh.rs",
+      "sha256": "4501459152be7addf2994f67ca460e5adeb43e4782e0cd9f9c5898bd872f1d3b",
+      "bytes": 4903
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-004/inputs/crates/incant_play/tests/model_refresh.rs",
+      "sha256": "4dba28754cc3d9a831d41519ab007af92f6548b4dd258dd9c2651c900aa5402e",
+      "bytes": 13891
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-004/inputs/crates/incant_render_game/src/lib.rs",
+      "sha256": "2942bf16946feee1be5e215be3237c139ed9ee3ce8d12034d194e8d9becd5d51",
+      "bytes": 10452
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-004/inputs/crates/incant_render_gpu_host/tests/game.rs",
+      "sha256": "1b4fba481e910a0fa1fd91a3ea2ed9ad3f325cccd3a0c746349d97c0ef57fbc4",
+      "bytes": 17983
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-004/inputs/crates/incant_render_gpu_host/tests/game/model_refresh.rs",
+      "sha256": "232c410b9d1fe2448d83a22dae4db3a0f1c8415ddcb1b0f33eff7d9705619e75",
+      "bytes": 16871
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-004/inputs/crates/incant_render_native/src/lib.rs",
+      "sha256": "b599aa0acfcf3e906ed89b237641482cc74a6b065de30663b7d6c4d82f2cea7d",
+      "bytes": 9456
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-004/inputs/crates/incant_render_native/src/model_refresh.rs",
+      "sha256": "735f01a978ce31d2b66f8a25c25a5b55b3daceba7e49e7be4d8513925d59602d",
+      "bytes": 1506
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-004/inputs/crates/incant_render_native/src/texture_refresh.rs",
+      "sha256": "17b7eea688fffbabec45bc4c27671eda2246fd21205970323fcf0ab9a1e69b8c",
+      "bytes": 14940
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-004/inputs/crates/incant_render_native/tests/common/model_refresh.rs",
+      "sha256": "30d29c077d3f9e5009b5c470d2992c952a7a860d66645cf80db0316c65ea0ae5",
+      "bytes": 6459
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-004/inputs/crates/incant_render_native/tests/model_refresh.rs",
+      "sha256": "32ce67fd76fddac9359f38fec9ded391ba305878c1249c1502f762e883424663",
+      "bytes": 13099
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-004/inputs/crates/incant_runtime/src/spatial_view.rs",
+      "sha256": "0ddf484e31aeb252fb2b8bf00c21b13eb0b1937a62ea27b76a6a7e2b760ad601",
+      "bytes": 5680
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-004/inputs/editor/app/src/play/mod.rs",
+      "sha256": "5f2ca0e9ac46fb9b4c719fe7850c785009863ae43105e6c140062be60f107ca9",
+      "bytes": 12424
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-004/inputs/editor/app/src/play/probe.rs",
+      "sha256": "503635a35c3158fc8b47a21bc4987c4d57414ec6aca23c0ef7b93431f8feb0ac",
+      "bytes": 11761
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-004/inputs/editor/app/src/play/probe/asset_workflow.rs",
+      "sha256": "3956c542d045784f437a8453464641cdb5e24e986831dc763d29c7177b4aaf82",
+      "bytes": 20006
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-004/inputs/editor/app/src/play/probe/asset_workflow/kind.rs",
+      "sha256": "9d47c605467c79540c6fec669b372ab33b7fd3fb002a5436b9eef30574cb4c14",
+      "bytes": 3190
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-004/inputs/editor/app/src/play/texture_refresh.rs",
+      "sha256": "5de0926f4e34d39b56bb71fddbf96ce73d2d9de504300736be0dd6a64aee43ce",
+      "bytes": 16540
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-004/inputs/editor/app/src/play/worker.rs",
+      "sha256": "5e33d26695a2c54984c48761a8cbed9d51020e3faf56eb85196e87a47902360b",
+      "bytes": 25066
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-004/inputs/tools/probes/native-editor-textures.py",
+      "sha256": "8b8fd1b3f6d7265f2bb4b555e920f6fac77878e6d7f43df7322f3470d533f3cb",
+      "bytes": 18197
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-model-workflow-001/source-004/inputs/tools/tests/test_native_editor_textures.py",
+      "sha256": "7de41202aa1ce258dc27ff1c11db2c0e8e79889d102310d971d1b1469f2329b9",
+      "bytes": 9406
+    }
+  ],
+  "summary": {
+    "producer_cpu_passed": 38,
+    "producer_original_lint_failed": true,
+    "producer_corrected_lint_scopes_passed": 2,
+    "root_joined_editor_cpu_passed": 20,
+    "root_joined_editor_build_and_lint_passed": true,
+    "gpu001_passed": false,
+    "gpu002_passed": false,
+    "gpu003_passed": true,
+    "initial_red": 200,
+    "new_blue_left": 1152,
+    "new_blue_right": 1152,
+    "gpu_final_tick": 2,
+    "gpu_frames_and_presents": 6,
+    "window_passed": true,
+    "window_frames": [
+      9,
+      159,
+      164,
+      260,
+      309,
+      338
+    ],
+    "window_ticks": [
+      3,
+      4
+    ],
+    "window_vm_delta": 8,
+    "window_journal_revision": 6,
+    "window_children_reaped": 6,
+    "excluded_default_app_pid": 91320
+  },
+  "limitations": [
+    "Existing static-model identity, scene/node/primitive/material/texture role bindings only; bounded geometry/PBR/image content may change.",
+    "Animated/skinned models, changed node/scene/primitive/material binding structure or counts, IDs/interpretation and baked navigation dependencies explicitly refuse; vertex/index contents and triangle connectivity may change.",
+    "Cold preparation outside authoring locks; existing revision/Play/catalog/world authority and external retirement unchanged. New incompatible committed authoring edit retains the complete prior live catalog plus explicit error.",
+    "Actual-window proof uses real native handler/watch/history/presentation path, not import/history GUI clicks or window-pixel appearance review.",
+    "Numerical headless Metal pixels are a separate geometry/material-image output/retention control, not isolated shadow-bound fit or appearance assessment.",
+    "GPU001+002 and producer initial lint failure remain failed original executions; GPU003 is a distinct final-code pass.",
+    "Later no-args91320 launched after the successful owned window child; original activation claim is superseded by explicit correction, and extra app is excluded/closed.",
+    "Retained frontend and older headless helper are explicit historical derived inputs; no fresh/current-runtime claim for them.",
+    "CI-profile CPU/native correctness only; no shipping timing, speedup, ScriptTick budget or Phase1 gate approval."
+  ]
+}
