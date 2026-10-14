@@ -1,0 +1,39 @@
+{
+  "format": "incant-independent-packet-review-v1",
+  "reviewer": "astra-runtime-review",
+  "created_utc": "2026-10-14T18:25:23.805388+00:00",
+  "commit": "9dcf9970562f5d122d528828a288001ff7abdff8",
+  "decision": "accepted_scoped_evidence_documentation",
+  "blocking_findings": [],
+  "packet": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/docs/spikes/evidence/profiled-window-export",
+  "packet_sha256": {
+    "manifest.json": "cbcc1c08046ab0f19fa13337b18fecf8b15ad4e47f0d544551146de318c9908c",
+    "records.json.gz": "4869b8ba626db66dfcaacb63df07b09a2a3e63e09bec23325c34ba356839bd30",
+    "verify.py": "d81b9f067cc596b4cd52e30aa9697f1efbb0652ec4d5d3631236f380350b66ff"
+  },
+  "records": 25,
+  "verification": {
+    "command": "python3 -B docs/spikes/evidence/profiled-window-export/verify.py",
+    "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+    "exit_code": 0,
+    "stdout": "PASS: shipping export and corrected window observations; original harness failure retained; no visual/FPS acceptance",
+    "additional_checks": [
+      "export plan binds retained source freeze",
+      "shipping and window source identities correspond",
+      "raw report hash joins data-only correction",
+      "retained UI source equals immutable shipping Git source",
+      "docs and STATUS match reviewed immutable commit"
+    ]
+  },
+  "conclusions": [
+    "Portable verifier checks bounded archive decoding, each record length/hash, raw command/window outcomes and prior review/lifecycle bindings without launching package code.",
+    "Shipping ceda3a94 and later lifecycle repair 9f27327d are identified separately; original synchronous symbol supervision gap and incomplete outer deadline scope remain retained. No retroactive managed-lifecycle claim is made.",
+    "Original window harness exit1/AssertionError and child exit0 remain explicit. Source-based seven text widget/102 glyph observation is distinguished from the original incorrect13-node expectation. Documentation explicitly says later package postchecks did not execute.",
+    "600ticks/601accepted frames/600completed profile samples are reported as limited runtime observations; no screenshot, displayed FPS, active gameplay or performance/phase acceptance is claimed.",
+    "Lifecycle counts11new+80existing pass and4Windows-only skips agree with retained logs/receipt. No new native export, player, GPU, window or test execution was performed by this review."
+  ],
+  "limitations": [
+    "Default portable replay does not rerun export or actual window. Local binaries and full authoring payload remain external and were not independently rehashed in this bounded packet review.",
+    "This is evidence/documentation acceptance, not a new full source/build correctness, appearance, performance or device gate approval."
+  ]
+}

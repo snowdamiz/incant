@@ -12,17 +12,28 @@ import subprocess
 import uuid
 import zlib
 
+import native_process
+
 
 def require(condition, message):
     if not condition:
         raise ValueError(message)
 
 
-def run(command):
-    try:
-        return subprocess.check_output([str(arg) for arg in command], text=True, stderr=subprocess.STDOUT)
-    except subprocess.CalledProcessError as error:
-        raise ValueError(f'{Path(command[0]).name} failed: {error.output[-4000:]}') from error
+def run(command, *, timeout=120, cancel=None):
+    """Own symbol-tool descendants until cleanup, including successful exits.
+
+    Resolve the runner through its module so an export supervisor can apply its
+    remaining deadline/cancellation checks to these commands too. Captured
+    output retains the existing merged diagnostic behavior, not a byte cap.
+    """
+    result = native_process.run([str(arg) for arg in command], timeout=timeout,
+                                cancel=cancel, text=True, encoding='utf-8',
+                                stderr=subprocess.STDOUT)
+    if result.returncode != 0:
+        error = subprocess.CalledProcessError(result.returncode, result.args, output=result.stdout)
+        raise ValueError(f'{Path(result.args[0]).name} failed: {result.stdout[-4000:]}') from error
+    return result.stdout
 
 
 def backend(target):
