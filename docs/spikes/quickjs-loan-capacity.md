@@ -72,3 +72,16 @@ measurements remain **2 ms gate failures**; these source checks establish no
 speedup, new shipping memory result or phase approval. The completed measurement
 checkout, package and 74 authored inputs were preserved. Main277 intake and any
 new matched shipping execution belong to the integration owner.
+
+## Main277 composition
+
+The integration onto main277 (`38c0178a60ae9021a1c16787bfba39a8249aabcb`)
+preserves all five reviewed Rust files and the portable packet byte for byte.
+The main276-to-main277 delta contains no crates, Cargo manifests/lock, Rust
+configuration, TypeScript SDK or Cargo-wrapper changes. Root replayed the packet
+with external originals, all 18 retained test binaries and the current source
+hashes; it passes without rerunning or relabeling the producer executions.
+Generated conventions, formatting and whitespace checks pass. The first direct
+`cargo fmt` invocation could not find Cargo on this shell's PATH; the repository
+wrapper with the pinned 1.99.0 toolchain passes. This was a command-launch failure,
+not a compiler or test result. No shipping measurement was made during intake.

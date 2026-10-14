@@ -11,7 +11,8 @@ paths have independent acceptance. Deterministic and four-lane fast each pass
 233 checks with one intentionally ignored CPU diagnostic, strict lint, and
 compiler-disabled profile off/on checks. The initial detached-DataView test
 failure is retained and corrected. No player/export/timing was executed; the
-prior main275 2 ms gate remains failed. Current-main intake is owner-controlled.
+prior main275 2 ms gate remains failed. Main277 intake preserves the reviewed
+source exactly, with full packet/binary replay and no Rust dependency seam.
 [Source, observable controls and replay](docs/spikes/quickjs-loan-capacity.md).
 
 ## Maintained QuickJS shipping observation — budget still open
