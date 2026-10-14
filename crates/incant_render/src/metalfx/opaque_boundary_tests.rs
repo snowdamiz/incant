@@ -421,13 +421,13 @@ fn actual_opaque_domain_boundary_controls() {
         let base = index * 5 * 1024;
         let actual = std::array::from_fn::<_, 4, _>(|i| h(base + 4 * 1024 + 256 + 8 + i * 2));
         assert_eq!(actual[3], c.expected[3], "{} alpha", c.name);
-        for i in 0..3 {
-            half_close(actual[i], c.expected[i], c.name);
+        for (actual, expected) in actual[..3].iter().zip(c.expected) {
+            half_close(*actual, expected, c.name);
         }
         let packed = std::array::from_fn::<_, 4, _>(|i| h(base + i * 2));
         assert_eq!(packed[3], c.packed[3], "{} packed alpha", c.name);
-        for i in 0..3 {
-            half_close(packed[i], c.packed[i], c.name);
+        for (actual, expected) in packed[..3].iter().zip(c.packed) {
+            half_close(*actual, expected, c.name);
         }
         let z = f32::from_le_bytes(bytes[base + 1024..base + 1024 + 4].try_into().unwrap());
         assert_eq!(z, c.packed_depth, "{} depth", c.name);
