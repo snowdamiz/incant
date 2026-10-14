@@ -1,8 +1,6 @@
 use super::*;
-use std::{
-    panic::{catch_unwind, AssertUnwindSafe},
-    time::Duration,
-};
+use std::panic;
+use std::time::Duration;
 
 fn context(step: u64) -> Context {
     Context {
@@ -154,7 +152,7 @@ fn native_result_and_error_are_returned_unchanged_exactly_once() {
 fn scope_and_call_unwinding_remain_observable() {
     let observer = Observer::default();
     observer.start(1).unwrap();
-    let result = catch_unwind(AssertUnwindSafe(|| {
+    let result = panic::catch_unwind(panic::AssertUnwindSafe(|| {
         let _scope = observer.scope(context(1)).unwrap();
         let _call = observer.begin(Kind::RenderPipeline, Stage::Unspecified);
         panic!("injected native-call failure");

@@ -333,7 +333,8 @@ impl Observer {
 pub struct Scope(Observer);
 impl Drop for Scope {
     fn drop(&mut self) {
-        self.0 .0.state.lock().scope = None;
+        let observer = &self.0;
+        observer.0.state.lock().scope = None;
     }
 }
 pub(crate) struct Call {

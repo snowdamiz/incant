@@ -3,8 +3,9 @@
 This private, default-off source milestone adds `diagnostic-compilation` only to
 the pinned Metal HAL. Its source003 CPU qualification passed; no native creation
 API or GPU was exercised. Native
-player/renderer feature forwarding, cold binding and final sidecar output are
-still pending; no public exporter or default feature selection changes here.
+player/renderer forwarding, cold binding and final sidecar are now authored in
+the successor described below, but are not yet CPU- or hardware-qualified. No
+public exporter or default feature selection changes here.
 The existing presentation and audio evidence is unchanged.
 
 A diagnostic handle is owned by each Metal `Device`, initialized in both adapter
@@ -68,12 +69,10 @@ The native call-site correspondence received independent source review; actual
 feature-on/off HAL compilation and strict lint passed. Subsequent hardware qualification must
 retain the original shader options and errors rather than use mocks as proof.
 
-The next host step is to bind immediately after device creation and before the
-finite pipeline catalog prewarm, preserving unobserved prefix counts. Host
-wiring will follow the separate window-eligibility integration to avoid a shared
-`window/mod.rs` conflict. It will use an explicit trusted host option with a
-create-only output path and finite capture bound. No project/script capability,
-per-frame snapshot, new rendering wait or performance verdict is introduced.
+The host successor binds immediately after device creation and before the
+finite pipeline catalog prewarm, preserving unobserved prefix counts. It joins
+main306 window eligibility without changing that policy. See the authored
+contract below; this section records source, not a completed live qualification.
 
 The first CPU admission refused an inherited fixture-only lock edge before any
 compilation. The second compiled the actual HAL and found ambiguous NSString
@@ -101,6 +100,63 @@ commands/logs, compiler feature rows and copied test artifact. External original
 remain at its recorded evidence root. All 80 registry package identities match
 the producing engine lock. The final supervisor returned0 and reaped every
 managed child; the shared build target was released. These are CPU correctness
-and compilation results, not complete-game shader-stall evidence. Player feature
-forwarding, cold catalog binding, host sidecar and actual live observation remain
-pending.
+and compilation results, not complete-game shader-stall evidence. The authored
+host successor and actual live observation require separate qualification.
+
+
+## Authored host successor (not yet executed)
+
+The explicit `native-compilation` player feature enables a renderer forwarding
+feature and the HAL observer. Normal native-window/profile/presentation features
+do not imply it. Trusted host CLI requires both `--compilation-output FILE` and
+`--compilation-capacity 1..4096`, plus `--stop-after 1..36000`, and refuses a
+lifecycle probe. Unsupported builds refuse those arguments. Package manifests
+and scripts cannot supply output authority. The file is create-only, opened
+before scene/device startup; an early error leaves an explicitly abandoned
+record rather than an invented successful measurement. Offline package execution
+refuses the capture options. No normal exporter admission is widened.
+
+`incant_render::compilation::Capture` owns only the observer handle. The explicit
+cold constructor attaches it immediately after `request_device`, before the
+ordinary one-sample fixed catalog. The handle survives a partial catalog failure
+without retaining the renderer, device, native pipeline, window or surface.
+Other constructors preserve existing behavior. The collector's small fixed
+header and counts exist with the feature enabled even without an active capture;
+feature-off builds omit them entirely.
+
+Host RAII scopes distinguish catalog, game startup/restart, background refresh,
+and gameplay work. Gameplay starts before surface reservation; deferred or failed
+attempts are abandoned, and commit is recorded only after the existing accepted
+host-step increment. Catalog rows do not increment host-attempt counters. Refresh commits are
+distinct from gameplay; neither proves
+that a drawable displayed. Requested host-step identity is independent of world
+tick. Focus, size, suspend, resume, restart, surface reconfiguration/recreation,
+deferred reservation and reservation error counters fence subsequent scopes.
+All contexts are immutable **scope-entry** identities: a recreation inside one
+reservation can change the active surface during that scope, and is separately
+recorded; it cannot retroactively rewrite prior rows. Calls outside the listed
+scopes and calls on other threads remain explicitly unscoped. Background surface
+reservation occurs before its refresh scope. Final haptic/error checks and
+presentation-drain work are not attributed to gameplay scopes.
+
+Final output is version1 `incant-native-compilation`, capped at4MiB. It records
+all bounded rows, pending/outcome/clock anomalies, unbound prefix and cumulative
+counts, fixed host-scope commit/abandon counters, boundary counts and the final
+reservation counters. Source/binary/package identity must be bound externally;
+the sidecar does not infer it. Snapshot and JSON allocations are additional to
+the393216-byte row maximum. Final serialization/flush/sync happens after game
+and audio shutdown, before the existing bounded presentation callback drain;
+there is no per-frame serialization, polling or GPU wait. A sidecar failure
+cannot replace an earlier gameplay/window error, and turns an otherwise
+successful result into an error. It cannot claim the final process exit status.
+
+Authored CPU controls cover create-only/no-effect refusal, early-failure output,
+explicit commit versus unwind, distinct boundaries, saturated counters, capped
+writes, original-error precedence, inert absent capture, trusted CLI/package
+forwarding, and cold observer handle ownership. The19 qualified collector
+controls are included as exact source; one nested tuple expression and panic
+imports were made edition-neutral for the2024 host tests and2021 HAL. These are
+format-compatible mechanical changes, not altered collector semantics. The full
+upstream patch is regenerated; prior CPU source identities remain retained.
+No host CPU test, actual API call, window capture, shader-stall pass or display
+performance result is claimed for this unexecuted successor.

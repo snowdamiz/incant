@@ -45,3 +45,10 @@ actual HAL/host feature-on/off compilation plus strict lint passed. No native
 creation API or GPU execution follows from that result. Host integration and
 actual hardware observations remain pending; existing presentation evidence
 does not qualify compilation timing.
+
+
+The following host-wiring successor uses edition-neutral spelling of a nested
+observer-field access and panic imports so the exact collector tests can be
+included by the Rust2024 player while the HAL remains Rust2021. Collector
+semantics are unchanged; the preceding qualified source remains immutable.
+Host wiring qualification and live native-creation evidence remain pending.

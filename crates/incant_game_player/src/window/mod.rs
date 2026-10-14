@@ -3,6 +3,10 @@
 #[cfg(feature = "profile")]
 mod cadence;
 pub(crate) mod clock;
+#[cfg(test)]
+mod compilation_options_tests;
+#[cfg(all(feature = "native-compilation", target_os = "macos"))]
+mod compilations;
 mod devices;
 mod gamepad;
 mod haptics;
@@ -82,6 +86,8 @@ pub enum Error {
     UiUnsupported,
 }
 struct Options {
+    #[cfg(all(feature = "native-compilation", target_os = "macos"))]
+    compilation: Option<(String, usize)>,
     #[cfg(all(feature = "native-presentations", target_os = "macos"))]
     capture: Option<(String, usize)>,
     scene: String,
@@ -117,6 +123,8 @@ impl Options {
         let mut recording = None;
         let mut observations = None;
         let mut state_log = None;
+        let mut compilation_output = None;
+        let mut compilation_capacity = None;
         let mut presentation_output = None;
         let mut presentation_capacity = None;
         while let [flag, value, tail @ ..] = rest {
@@ -131,6 +139,12 @@ impl Options {
                 "--input-recording" if recording.is_none() => recording = Some(value.clone()),
                 "--observe" if observations.is_none() => observations = Some(value.clone()),
                 "--window-state-log" if state_log.is_none() => state_log = Some(value.clone()),
+                "--compilation-output" if compilation_output.is_none() => {
+                    compilation_output = Some(value.clone())
+                }
+                "--compilation-capacity" if compilation_capacity.is_none() => {
+                    compilation_capacity = Some(value.parse::<usize>()?)
+                }
                 "--presentation-output" if presentation_output.is_none() => {
                     presentation_output = Some(value.clone())
                 }
@@ -167,6 +181,20 @@ impl Options {
                 return Err("presentation capture needs bounded --stop-after, --presentation-output and --presentation-capacity1..36000; no lifecycle probe".into());
             }
         }
+        if compilation_output.is_some() || compilation_capacity.is_some() {
+            if !cfg!(all(feature = "native-compilation", target_os = "macos")) {
+                return Err("compilation capture requires native-compilation on macOS".into());
+            }
+            if probe
+                || stop_after.is_none()
+                || compilation_output.as_ref().is_none_or(|p| {
+                    p.is_empty() || p.len() > 4096 || p.chars().any(char::is_control)
+                })
+                || compilation_capacity.is_none_or(|n| !(1..=4096).contains(&n))
+            {
+                return Err("compilation capture needs bounded --stop-after, --compilation-output and --compilation-capacity1..4096; no lifecycle probe".into());
+            }
+        }
         let hex = &args[6];
         if hex.len() != 32 || !hex.bytes().all(|b| b.is_ascii_hexdigit()) {
             return Err("CAMERA_HEX must contain exactly32 hexadecimal digits".into());
@@ -176,6 +204,8 @@ impl Options {
             *v = u8::from_str_radix(&hex[i * 2..i * 2 + 2], 16)?;
         }
         Ok(Self {
+            #[cfg(all(feature = "native-compilation", target_os = "macos"))]
+            compilation: compilation_output.zip(compilation_capacity),
             #[cfg(all(feature = "native-presentations", target_os = "macos"))]
             capture: presentation_output.zip(presentation_capacity),
             scene: args[0].clone(),
@@ -216,6 +246,20 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                 options
                     .stop_after
                     .ok_or("presentation capture lacks host bound")?,
+            )
+        })
+        .transpose()?;
+    #[cfg(all(feature = "native-compilation", target_os = "macos"))]
+    let mut compilation = options
+        .compilation
+        .as_ref()
+        .map(|(path, capacity)| {
+            compilations::Capture::new(
+                path,
+                *capacity,
+                options
+                    .stop_after
+                    .ok_or("compilation capture lacks host bound")?,
             )
         })
         .transpose()?;
@@ -275,7 +319,26 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
         .transpose()?
         .map(UiSettings::new);
     let mut gamepads = devices::Devices::new(replay.is_none())?;
-    let (mut surface, renderer, targets) = SurfaceState::new(Arc::clone(&window))?;
+    let (mut surface, renderer, targets) = SurfaceState::new(
+        Arc::clone(&window),
+        #[cfg(all(feature = "native-compilation", target_os = "macos"))]
+        compilation.as_mut().map(|c| &mut c.renderer),
+    )?;
+    #[cfg(all(feature = "native-compilation", target_os = "macos"))]
+    macro_rules! compilation_scope {
+        ($phase:ident, $generation:expr, $step:expr) => {
+            compilations::enter(
+                &compilation,
+                incant_render::compilation::Phase::$phase,
+                $generation,
+                surface
+                    .recreations
+                    .checked_add(1)
+                    .ok_or("compilation surface identity exhausted")?,
+                $step,
+            )?
+        };
+    }
     #[cfg(all(feature = "native-presentations", target_os = "macos"))]
     if let Some(capture) = capture {
         surface.install_capture(capture)?;
@@ -292,11 +355,18 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
             targets,
         },
     };
+    #[cfg(all(feature = "native-compilation", target_os = "macos"))]
+    let mut startup_compilation = compilation_scope!(Startup, 1, 0);
     let mut game = Game::from_seed_suspended(
         &seed,
         AudioManagerSettings::default(),
         render_settings(targets, ui_settings),
     )?;
+    #[cfg(all(feature = "native-compilation", target_os = "macos"))]
+    {
+        compilations::commit(&mut startup_compilation);
+        drop(startup_compilation);
+    }
     game.poll_device()?;
     if let Some(plan) = &mut observations {
         plan.observe_at(0, game.world()?, game.input()?)?;
@@ -376,6 +446,10 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                         *exit = true;
                     }
                     WindowEvent::Resized(_) | WindowEvent::ScaleFactorChanged { .. } => {
+                        #[cfg(all(feature = "native-compilation", target_os = "macos"))]
+                        if let Some(c) = &compilation {
+                            c.boundary(compilations::Boundary::Resize);
+                        }
                         #[cfg(all(feature = "native-presentations", target_os = "macos"))]
                         surface.presentation_boundary(Boundary::Resize);
                         #[cfg(feature = "profile")]
@@ -389,6 +463,10 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                         observe_state!(state_log::Reason::Resize);
                     }
                     WindowEvent::Focused(value) => {
+                        #[cfg(all(feature = "native-compilation", target_os = "macos"))]
+                        if let Some(c) = &compilation {
+                            c.boundary(compilations::Boundary::Focus);
+                        }
                         #[cfg(all(feature = "native-presentations", target_os = "macos"))]
                         surface.presentation_boundary(Boundary::Focus);
                         #[cfg(feature = "profile")]
@@ -412,6 +490,10 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                         });
                     }
                     WindowEvent::Suspended => {
+                        #[cfg(all(feature = "native-compilation", target_os = "macos"))]
+                        if let Some(c) = &compilation {
+                            c.boundary(compilations::Boundary::Suspend);
+                        }
                         #[cfg(all(feature = "native-presentations", target_os = "macos"))]
                         surface.presentation_boundary(Boundary::Suspend);
                         #[cfg(feature = "profile")]
@@ -427,6 +509,10 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                         observe_state!(state_log::Reason::Suspended);
                     }
                     WindowEvent::Resumed => {
+                        #[cfg(all(feature = "native-compilation", target_os = "macos"))]
+                        if let Some(c) = &compilation {
+                            c.boundary(compilations::Boundary::Resume);
+                        }
                         #[cfg(all(feature = "native-presentations", target_os = "macos"))]
                         surface.presentation_boundary(Boundary::Resume);
                         platform_suspended = false;
@@ -482,7 +568,13 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                         if !{
                             #[cfg(all(feature = "native-presentations", target_os = "macos"))]
                             surface.presentation_attempt(Role::UiResize, generation, host_steps);
-                            reserve_observed(&mut surface, &renderer, &mut state_log)?
+                            reserve_observed(
+                                &mut surface,
+                                &renderer,
+                                &mut state_log,
+                                #[cfg(all(feature = "native-compilation", target_os = "macos"))]
+                                &compilation,
+                            )?
                         } {
                             if !suspended {
                                 gamepads.pause_haptics()?;
@@ -494,6 +586,9 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                             retry = now + Duration::from_millis(50);
                             return Ok(());
                         }
+                        #[cfg(all(feature = "native-compilation", target_os = "macos"))]
+                        let mut refresh_compilation =
+                            compilation_scope!(Background, generation, host_steps);
                         // Resize and actual consumption share this callback and
                         // reservation, even when no simulation tick is due.
                         let result = crate::profile::presentation(|| -> session::Result<()> {
@@ -516,6 +611,8 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                         #[cfg(all(feature = "native-presentations", target_os = "macos"))]
                         surface.presentation_complete(Status::RefreshCompleted);
                         ui_input.presented(game.host()?.ui(), &mut input)?;
+                        #[cfg(all(feature = "native-compilation", target_os = "macos"))]
+                        compilations::commit(&mut refresh_compilation);
                         ui_resize = false;
                         redraw_pending = false;
                         presentation_refreshes += 1;
@@ -557,8 +654,17 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                                 generation,
                                 host_steps,
                             );
-                            reserve_observed(&mut surface, &renderer, &mut state_log)?
+                            reserve_observed(
+                                &mut surface,
+                                &renderer,
+                                &mut state_log,
+                                #[cfg(all(feature = "native-compilation", target_os = "macos"))]
+                                &compilation,
+                            )?
                         } {
+                            #[cfg(all(feature = "native-compilation", target_os = "macos"))]
+                            let mut refresh_compilation =
+                                compilation_scope!(Background, generation, host_steps);
                             let result = crate::profile::presentation(|| -> session::Result<()> {
                                 if has_ui {
                                     ui_relayouts += fit_ui(
@@ -581,6 +687,8 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                             #[cfg(all(feature = "native-presentations", target_os = "macos"))]
                             surface.presentation_complete(Status::RefreshCompleted);
                             ui_input.presented(game.host()?.ui(), &mut input)?;
+                            #[cfg(all(feature = "native-compilation", target_os = "macos"))]
+                            compilations::commit(&mut refresh_compilation);
                             redraw_pending = false;
                             presentation_refreshes += 1;
                             initial_frame = false;
@@ -592,12 +700,24 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                             if !{
                                 #[cfg(all(feature = "native-presentations", target_os = "macos"))]
                                 surface.presentation_attempt(Role::Initial, generation, host_steps);
-                                reserve_observed(&mut surface, &renderer, &mut state_log)?
+                                reserve_observed(
+                                    &mut surface,
+                                    &renderer,
+                                    &mut state_log,
+                                    #[cfg(all(
+                                        feature = "native-compilation",
+                                        target_os = "macos"
+                                    ))]
+                                    &compilation,
+                                )?
                             } {
                                 retry = now + Duration::from_millis(50);
                                 clock.reset(now);
                                 return Ok(());
                             }
+                            #[cfg(all(feature = "native-compilation", target_os = "macos"))]
+                            let mut refresh_compilation =
+                                compilation_scope!(Background, generation, host_steps);
                             let result = crate::profile::presentation(|| game.refresh_host());
                             let consumed = surface.consumed();
                             surface.cancel();
@@ -611,11 +731,21 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                             presentation_refreshes += 1;
                             redraw_pending = false;
                             initial_frame = false;
+                            #[cfg(all(feature = "native-compilation", target_os = "macos"))]
+                            compilations::commit(&mut refresh_compilation);
                             clock.reset(now);
                             return Ok(());
                         }
                         let due = if suspended { 1 } else { clock.due(now) };
                         for _ in 0..due {
+                            #[cfg(all(feature = "native-compilation", target_os = "macos"))]
+                            let mut tick_compilation = compilation_scope!(
+                                Gameplay,
+                                generation,
+                                host_steps
+                                    .checked_add(1)
+                                    .ok_or("compilation host step exhausted")?
+                            );
                             // Includes surface acquisition, input/UI preparation and
                             // normal haptics. This is CPU host time, not scanout.
                             #[cfg(feature = "profile")]
@@ -627,7 +757,16 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                                     generation,
                                     host_steps + 1,
                                 );
-                                reserve_observed(&mut surface, &renderer, &mut state_log)?
+                                reserve_observed(
+                                    &mut surface,
+                                    &renderer,
+                                    &mut state_log,
+                                    #[cfg(all(
+                                        feature = "native-compilation",
+                                        target_os = "macos"
+                                    ))]
+                                    &compilation,
+                                )?
                             } {
                                 #[cfg(feature = "profile")]
                                 cadence.interrupt();
@@ -700,6 +839,11 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                             ui_input.presented(game.host()?.ui(), &mut input)?;
                             redraw_pending = false;
                             host_steps = host_steps.checked_add(1).ok_or("host step exhausted")?;
+                            #[cfg(all(feature = "native-compilation", target_os = "macos"))]
+                            {
+                                compilations::commit(&mut tick_compilation);
+                                drop(tick_compilation);
+                            }
                             #[cfg(all(feature = "native-presentations", target_os = "macos"))]
                             surface.presentation_complete(Status::HostCommitted);
                             if let Some(plan) = &mut observations {
@@ -739,11 +883,23 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                                     })
                                     .transpose()?
                                     .map(UiSettings::new);
+                                #[cfg(all(feature = "native-compilation", target_os = "macos"))]
+                                if let Some(c) = &compilation {
+                                    c.boundary(compilations::Boundary::Restart);
+                                }
+                                #[cfg(all(feature = "native-compilation", target_os = "macos"))]
+                                let mut restart_compilation =
+                                    compilation_scope!(Startup, next, host_steps);
                                 game = Game::from_seed_suspended(
                                     &seed,
                                     AudioManagerSettings::default(),
                                     render_settings(surface.replacement_targets()?, ui),
                                 )?;
+                                #[cfg(all(feature = "native-compilation", target_os = "macos"))]
+                                {
+                                    compilations::commit(&mut restart_compilation);
+                                    drop(restart_compilation);
+                                }
                                 generation = next;
                                 #[cfg(all(feature = "native-presentations", target_os = "macos"))]
                                 surface.presentation_boundary(Boundary::Restart);
@@ -852,6 +1008,15 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
         .transpose()
         .map(|_| ());
     let result = state_log::preserve_result(result, logged);
+    #[cfg(all(feature = "native-compilation", target_os = "macos"))]
+    let result = {
+        let observed = compilation
+            .as_mut()
+            .map(|c| c.finish(host_steps, generation, code, &result))
+            .transpose()
+            .map(|_| ());
+        compilations::preserve_result(result, observed)
+    };
     #[cfg(all(feature = "native-presentations", target_os = "macos"))]
     {
         let observed = surface.finish_capture(host_steps, generation, code, &result);
@@ -868,8 +1033,30 @@ fn reserve_observed(
     surface: &mut SurfaceState,
     renderer: &incant_render::Renderer,
     log: &mut Option<state_log::Log>,
+    #[cfg(all(feature = "native-compilation", target_os = "macos"))] compilation: &Option<
+        compilations::Capture,
+    >,
 ) -> Result<bool, Error> {
-    let ready = surface.reserve(renderer)?;
+    #[cfg(all(feature = "native-compilation", target_os = "macos"))]
+    let before = [
+        surface.reconfigurations,
+        surface.recreations,
+        surface.skipped,
+    ];
+    let result = surface.reserve(renderer);
+    #[cfg(all(feature = "native-compilation", target_os = "macos"))]
+    if let Some(capture) = compilation {
+        capture.reservation(
+            before,
+            [
+                surface.reconfigurations,
+                surface.recreations,
+                surface.skipped,
+            ],
+            result.as_ref().ok().copied(),
+        );
+    }
+    let ready = result?;
     if let Some(log) = log {
         log.reservation(ready);
     }

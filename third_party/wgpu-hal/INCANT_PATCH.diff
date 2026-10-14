@@ -23,7 +23,7 @@
                  counters: Default::default(),
 --- /dev/null
 +++ b/src/metal/compilation.rs
-@@ -0,0 +1,438 @@
+@@ -0,0 +1,439 @@
 +//! Default-off observation of native creation calls, not proof of driver work.
 +use alloc::{boxed::Box, sync::Arc, vec::Vec};
 +use core::{
@@ -359,7 +359,8 @@
 +pub struct Scope(Observer);
 +impl Drop for Scope {
 +    fn drop(&mut self) {
-+        self.0 .0.state.lock().scope = None;
++        let observer = &self.0;
++        observer.0.state.lock().scope = None;
 +    }
 +}
 +pub(crate) struct Call {
@@ -502,12 +503,10 @@
 +}
 --- /dev/null
 +++ b/src/metal/compilation_tests.rs
-@@ -0,0 +1,347 @@
+@@ -0,0 +1,345 @@
 +use super::*;
-+use std::{
-+    panic::{catch_unwind, AssertUnwindSafe},
-+    time::Duration,
-+};
++use std::panic;
++use std::time::Duration;
 +
 +fn context(step: u64) -> Context {
 +    Context {
@@ -659,7 +658,7 @@
 +fn scope_and_call_unwinding_remain_observable() {
 +    let observer = Observer::default();
 +    observer.start(1).unwrap();
-+    let result = catch_unwind(AssertUnwindSafe(|| {
++    let result = panic::catch_unwind(panic::AssertUnwindSafe(|| {
 +        let _scope = observer.scope(context(1)).unwrap();
 +        let _call = observer.begin(Kind::RenderPipeline, Stage::Unspecified);
 +        panic!("injected native-call failure");
