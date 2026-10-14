@@ -1,0 +1,3379 @@
+{
+  "schema": "incant-owner-footprint-reference-v1",
+  "abs_tolerance": 2e-06,
+  "rel_tolerance": 2e-05,
+  "comparison": "abs(actual-expected) <= abs_tolerance + rel_tolerance*abs(expected); require_positive is separate",
+  "expected_method": "Independent positive adaptive Simpson integral; math.erf cross-check, no GL expected values",
+  "cases": [
+    {
+      "name": "one-range-0",
+      "d": [
+        0.0,
+        0.0
+      ],
+      "rho": 0.3499999940395355,
+      "r": 1.0,
+      "expected": 0.7171931260671702,
+      "require_positive": true
+    },
+    {
+      "name": "one-range-1",
+      "d": [
+        0.5,
+        0.0
+      ],
+      "rho": 0.3499999940395355,
+      "r": 1.0,
+      "expected": 0.42162620082854435,
+      "require_positive": true
+    },
+    {
+      "name": "one-range-2",
+      "d": [
+        0.5,
+        0.5
+      ],
+      "rho": 0.3499999940395355,
+      "r": 1.0,
+      "expected": 0.2478672016837801,
+      "require_positive": true
+    },
+    {
+      "name": "one-range-3",
+      "d": [
+        1.0,
+        0.0
+      ],
+      "rho": 0.3499999940395355,
+      "r": 1.0,
+      "expected": 0.0648320019398712,
+      "require_positive": true
+    },
+    {
+      "name": "one-range-4",
+      "d": [
+        2.0,
+        0.0
+      ],
+      "rho": 0.3499999940395355,
+      "r": 1.0,
+      "expected": 7.713014707678277e-06,
+      "require_positive": true
+    },
+    {
+      "name": "one-range-5",
+      "d": [
+        3.0,
+        0.0
+      ],
+      "rho": 0.3499999940395355,
+      "r": 1.0,
+      "expected": 3.870653697073e-13,
+      "require_positive": true
+    },
+    {
+      "name": "one-range-6",
+      "d": [
+        4.0,
+        0.0
+      ],
+      "rho": 0.3499999940395355,
+      "r": 1.0,
+      "expected": 6.453033309483059e-24,
+      "require_positive": true
+    },
+    {
+      "name": "one-range-7",
+      "d": [
+        6.0,
+        0.0
+      ],
+      "rho": 0.3499999940395355,
+      "r": 1.0,
+      "expected": 5.1123032395221345e-56,
+      "require_positive": false
+    },
+    {
+      "name": "one-range-8",
+      "d": [
+        3.0,
+        3.0
+      ],
+      "rho": 0.3499999940395355,
+      "r": 1.0,
+      "expected": 2.088971505460541e-25,
+      "require_positive": true
+    },
+    {
+      "name": "one-symmetry-0",
+      "d": [
+        0.25,
+        0.75
+      ],
+      "rho": 0.3499999940395355,
+      "r": 1.0,
+      "expected": 0.1771593088862201,
+      "require_positive": true
+    },
+    {
+      "name": "one-symmetry-1",
+      "d": [
+        -0.25,
+        0.75
+      ],
+      "rho": 0.3499999940395355,
+      "r": 1.0,
+      "expected": 0.1771593088862201,
+      "require_positive": true
+    },
+    {
+      "name": "one-symmetry-2",
+      "d": [
+        0.25,
+        -0.75
+      ],
+      "rho": 0.3499999940395355,
+      "r": 1.0,
+      "expected": 0.1771593088862201,
+      "require_positive": true
+    },
+    {
+      "name": "one-symmetry-3",
+      "d": [
+        0.75,
+        0.25
+      ],
+      "rho": 0.3499999940395355,
+      "r": 1.0,
+      "expected": 0.1771593088862201,
+      "require_positive": true
+    },
+    {
+      "name": "two-range-0",
+      "d": [
+        0.0,
+        0.0
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 2.868772504268681,
+      "require_positive": true
+    },
+    {
+      "name": "two-range-1",
+      "d": [
+        0.5,
+        0.0
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 1.6865048033141774,
+      "require_positive": true
+    },
+    {
+      "name": "two-range-2",
+      "d": [
+        0.5,
+        0.5
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 0.9914688067351204,
+      "require_positive": true
+    },
+    {
+      "name": "two-range-3",
+      "d": [
+        1.0,
+        0.0
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 0.2593280077594848,
+      "require_positive": true
+    },
+    {
+      "name": "two-range-4",
+      "d": [
+        2.0,
+        0.0
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 3.085205883071311e-05,
+      "require_positive": true
+    },
+    {
+      "name": "two-range-5",
+      "d": [
+        3.0,
+        0.0
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 1.5482614788292e-12,
+      "require_positive": true
+    },
+    {
+      "name": "two-range-6",
+      "d": [
+        4.0,
+        0.0
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 2.5812133237932237e-23,
+      "require_positive": true
+    },
+    {
+      "name": "two-range-7",
+      "d": [
+        6.0,
+        0.0
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 2.0449212958088538e-55,
+      "require_positive": false
+    },
+    {
+      "name": "two-range-8",
+      "d": [
+        3.0,
+        3.0
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 8.355886021842165e-25,
+      "require_positive": true
+    },
+    {
+      "name": "two-symmetry-0",
+      "d": [
+        0.25,
+        0.75
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 0.7086372355448805,
+      "require_positive": true
+    },
+    {
+      "name": "two-symmetry-1",
+      "d": [
+        -0.25,
+        0.75
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 0.7086372355448805,
+      "require_positive": true
+    },
+    {
+      "name": "two-symmetry-2",
+      "d": [
+        0.25,
+        -0.75
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 0.7086372355448805,
+      "require_positive": true
+    },
+    {
+      "name": "two-symmetry-3",
+      "d": [
+        0.75,
+        0.25
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 0.7086372355448805,
+      "require_positive": true
+    },
+    {
+      "name": "three-range-0",
+      "d": [
+        0.0,
+        0.0
+      ],
+      "rho": 0.6749999523162842,
+      "r": 3.0,
+      "expected": 2.635583861365653,
+      "require_positive": true
+    },
+    {
+      "name": "three-range-1",
+      "d": [
+        0.5,
+        0.0
+      ],
+      "rho": 0.6749999523162842,
+      "r": 3.0,
+      "expected": 2.0979537301329025,
+      "require_positive": true
+    },
+    {
+      "name": "three-range-2",
+      "d": [
+        0.5,
+        0.5
+      ],
+      "rho": 0.6749999523162842,
+      "r": 3.0,
+      "expected": 1.6699942347870982,
+      "require_positive": true
+    },
+    {
+      "name": "three-range-3",
+      "d": [
+        1.0,
+        0.0
+      ],
+      "rho": 0.6749999523162842,
+      "r": 3.0,
+      "expected": 1.0534124911051128,
+      "require_positive": true
+    },
+    {
+      "name": "three-range-4",
+      "d": [
+        2.0,
+        0.0
+      ],
+      "rho": 0.6749999523162842,
+      "r": 3.0,
+      "expected": 0.0634503760761398,
+      "require_positive": true
+    },
+    {
+      "name": "three-range-5",
+      "d": [
+        3.0,
+        0.0
+      ],
+      "rho": 0.6749999523162842,
+      "r": 3.0,
+      "expected": 0.0005168857464689864,
+      "require_positive": true
+    },
+    {
+      "name": "three-range-6",
+      "d": [
+        4.0,
+        0.0
+      ],
+      "rho": 0.6749999523162842,
+      "r": 3.0,
+      "expected": 5.254462059433814e-07,
+      "require_positive": true
+    },
+    {
+      "name": "three-range-7",
+      "d": [
+        6.0,
+        0.0
+      ],
+      "rho": 0.6749999523162842,
+      "r": 3.0,
+      "expected": 8.99886500875914e-16,
+      "require_positive": true
+    },
+    {
+      "name": "three-range-8",
+      "d": [
+        3.0,
+        3.0
+      ],
+      "rho": 0.6749999523162842,
+      "r": 3.0,
+      "expected": 1.0137065976886202e-07,
+      "require_positive": true
+    },
+    {
+      "name": "three-symmetry-0",
+      "d": [
+        0.25,
+        0.75
+      ],
+      "rho": 0.6749999523162842,
+      "r": 3.0,
+      "expected": 1.4884562146634177,
+      "require_positive": true
+    },
+    {
+      "name": "three-symmetry-1",
+      "d": [
+        -0.25,
+        0.75
+      ],
+      "rho": 0.6749999523162842,
+      "r": 3.0,
+      "expected": 1.4884562146634177,
+      "require_positive": true
+    },
+    {
+      "name": "three-symmetry-2",
+      "d": [
+        0.25,
+        -0.75
+      ],
+      "rho": 0.6749999523162842,
+      "r": 3.0,
+      "expected": 1.4884562146634177,
+      "require_positive": true
+    },
+    {
+      "name": "three-symmetry-3",
+      "d": [
+        0.75,
+        0.25
+      ],
+      "rho": 0.6749999523162842,
+      "r": 3.0,
+      "expected": 1.4884562146634175,
+      "require_positive": true
+    },
+    {
+      "name": "four-range-0",
+      "d": [
+        0.0,
+        0.0
+      ],
+      "rho": 1.0,
+      "r": 4.0,
+      "expected": 2.3461039409349365,
+      "require_positive": true
+    },
+    {
+      "name": "four-range-1",
+      "d": [
+        0.5,
+        0.0
+      ],
+      "rho": 1.0,
+      "r": 4.0,
+      "expected": 2.091350567207775,
+      "require_positive": true
+    },
+    {
+      "name": "four-range-2",
+      "d": [
+        0.5,
+        0.5
+      ],
+      "rho": 1.0,
+      "r": 4.0,
+      "expected": 1.8642597706976773,
+      "require_positive": true
+    },
+    {
+      "name": "four-range-3",
+      "d": [
+        1.0,
+        0.0
+      ],
+      "rho": 1.0,
+      "r": 4.0,
+      "expected": 1.481033131972546,
+      "require_positive": true
+    },
+    {
+      "name": "four-range-4",
+      "d": [
+        2.0,
+        0.0
+      ],
+      "rho": 1.0,
+      "r": 4.0,
+      "expected": 0.3712689081217086,
+      "require_positive": true
+    },
+    {
+      "name": "four-range-5",
+      "d": [
+        3.0,
+        0.0
+      ],
+      "rho": 1.0,
+      "r": 4.0,
+      "expected": 0.03662009826960454,
+      "require_positive": true
+    },
+    {
+      "name": "four-range-6",
+      "d": [
+        4.0,
+        0.0
+      ],
+      "rho": 1.0,
+      "r": 4.0,
+      "expected": 0.0014044546936636598,
+      "require_positive": true
+    },
+    {
+      "name": "four-range-7",
+      "d": [
+        6.0,
+        0.0
+      ],
+      "rho": 1.0,
+      "r": 4.0,
+      "expected": 1.1609917550954858e-07,
+      "require_positive": true
+    },
+    {
+      "name": "four-range-8",
+      "d": [
+        3.0,
+        3.0
+      ],
+      "rho": 1.0,
+      "r": 4.0,
+      "expected": 0.0005715993967177278,
+      "require_positive": true
+    },
+    {
+      "name": "four-symmetry-0",
+      "d": [
+        0.25,
+        0.75
+      ],
+      "rho": 1.0,
+      "r": 4.0,
+      "expected": 1.7600460642901605,
+      "require_positive": true
+    },
+    {
+      "name": "four-symmetry-1",
+      "d": [
+        -0.25,
+        0.75
+      ],
+      "rho": 1.0,
+      "r": 4.0,
+      "expected": 1.7600460642901605,
+      "require_positive": true
+    },
+    {
+      "name": "four-symmetry-2",
+      "d": [
+        0.25,
+        -0.75
+      ],
+      "rho": 1.0,
+      "r": 4.0,
+      "expected": 1.7600460642901605,
+      "require_positive": true
+    },
+    {
+      "name": "four-symmetry-3",
+      "d": [
+        0.75,
+        0.25
+      ],
+      "rho": 1.0,
+      "r": 4.0,
+      "expected": 1.7600460642901605,
+      "require_positive": true
+    },
+    {
+      "name": "odd-range-0",
+      "d": [
+        0.0,
+        0.0
+      ],
+      "rho": 0.44285717606544495,
+      "r": 2.2857143878936768,
+      "expected": 2.86956453470582,
+      "require_positive": true
+    },
+    {
+      "name": "odd-range-1",
+      "d": [
+        0.5,
+        0.0
+      ],
+      "rho": 0.44285717606544495,
+      "r": 2.2857143878936768,
+      "expected": 1.8896255238694009,
+      "require_positive": true
+    },
+    {
+      "name": "odd-range-2",
+      "d": [
+        0.5,
+        0.5
+      ],
+      "rho": 0.44285717606544495,
+      "r": 2.2857143878936768,
+      "expected": 1.2443297849806902,
+      "require_positive": true
+    },
+    {
+      "name": "odd-range-3",
+      "d": [
+        1.0,
+        0.0
+      ],
+      "rho": 0.44285717606544495,
+      "r": 2.2857143878936768,
+      "expected": 0.49982620571457254,
+      "require_positive": true
+    },
+    {
+      "name": "odd-range-4",
+      "d": [
+        2.0,
+        0.0
+      ],
+      "rho": 0.44285717606544495,
+      "r": 2.2857143878936768,
+      "expected": 0.0013674743472141726,
+      "require_positive": true
+    },
+    {
+      "name": "odd-range-5",
+      "d": [
+        3.0,
+        0.0
+      ],
+      "rho": 0.44285717606544495,
+      "r": 2.2857143878936768,
+      "expected": 3.194880018724169e-08,
+      "require_positive": true
+    },
+    {
+      "name": "odd-range-6",
+      "d": [
+        4.0,
+        0.0
+      ],
+      "rho": 0.44285717606544495,
+      "r": 2.2857143878936768,
+      "expected": 5.261554729473195e-15,
+      "require_positive": true
+    },
+    {
+      "name": "odd-range-7",
+      "d": [
+        6.0,
+        0.0
+      ],
+      "rho": 0.44285717606544495,
+      "r": 2.2857143878936768,
+      "expected": 3.9728557712686384e-35,
+      "require_positive": false
+    },
+    {
+      "name": "odd-range-8",
+      "d": [
+        3.0,
+        3.0
+      ],
+      "rho": 0.44285717606544495,
+      "r": 2.2857143878936768,
+      "expected": 3.5570757202327095e-16,
+      "require_positive": true
+    },
+    {
+      "name": "odd-symmetry-0",
+      "d": [
+        0.25,
+        0.75
+      ],
+      "rho": 0.44285717606544495,
+      "r": 2.2857143878936768,
+      "expected": 0.991442387120366,
+      "require_positive": true
+    },
+    {
+      "name": "odd-symmetry-1",
+      "d": [
+        -0.25,
+        0.75
+      ],
+      "rho": 0.44285717606544495,
+      "r": 2.2857143878936768,
+      "expected": 0.9914423871203661,
+      "require_positive": true
+    },
+    {
+      "name": "odd-symmetry-2",
+      "d": [
+        0.25,
+        -0.75
+      ],
+      "rho": 0.44285717606544495,
+      "r": 2.2857143878936768,
+      "expected": 0.9914423871203661,
+      "require_positive": true
+    },
+    {
+      "name": "odd-symmetry-3",
+      "d": [
+        0.75,
+        0.25
+      ],
+      "rho": 0.44285717606544495,
+      "r": 2.2857143878936768,
+      "expected": 0.9914423871203659,
+      "require_positive": true
+    },
+    {
+      "name": "one-phase-0-tap--1--1",
+      "d": [
+        0.5625,
+        0.8125
+      ],
+      "rho": 0.3499999940395355,
+      "r": 1.0,
+      "expected": 0.07954430520328955,
+      "require_positive": true
+    },
+    {
+      "name": "one-phase-0-tap-0--1",
+      "d": [
+        -0.4375,
+        0.8125
+      ],
+      "rho": 0.3499999940395355,
+      "r": 1.0,
+      "expected": 0.10542392647846091,
+      "require_positive": true
+    },
+    {
+      "name": "one-phase-0-tap-1--1",
+      "d": [
+        -1.4375,
+        0.8125
+      ],
+      "rho": 0.3499999940395355,
+      "r": 1.0,
+      "expected": 0.0006871612914731157,
+      "require_positive": true
+    },
+    {
+      "name": "one-phase-0-tap--1-0",
+      "d": [
+        0.5625,
+        -0.1875
+      ],
+      "rho": 0.3499999940395355,
+      "r": 1.0,
+      "expected": 0.33776434084291557,
+      "require_positive": true
+    },
+    {
+      "name": "one-phase-0-tap-0-0",
+      "d": [
+        -0.4375,
+        -0.1875
+      ],
+      "rho": 0.3499999940395355,
+      "r": 1.0,
+      "expected": 0.4476554662846783,
+      "require_positive": true
+    },
+    {
+      "name": "one-phase-0-tap-1-0",
+      "d": [
+        -1.4375,
+        -0.1875
+      ],
+      "rho": 0.3499999940395355,
+      "r": 1.0,
+      "expected": 0.002917852888073062,
+      "require_positive": true
+    },
+    {
+      "name": "one-phase-0-tap--1-1",
+      "d": [
+        0.5625,
+        -1.1875
+      ],
+      "rho": 0.3499999940395355,
+      "r": 1.0,
+      "expected": 0.010590493026392749,
+      "require_positive": true
+    },
+    {
+      "name": "one-phase-0-tap-0-1",
+      "d": [
+        -0.4375,
+        -1.1875
+      ],
+      "rho": 0.3499999940395355,
+      "r": 1.0,
+      "expected": 0.014036094165782087,
+      "require_positive": true
+    },
+    {
+      "name": "one-phase-0-tap-1-1",
+      "d": [
+        -1.4375,
+        -1.1875
+      ],
+      "rho": 0.3499999940395355,
+      "r": 1.0,
+      "expected": 9.148834535362955e-05,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-0-tap--1--1",
+      "d": [
+        2.625,
+        1.125
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 9.399531573709929e-11,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-0-tap-0--1",
+      "d": [
+        0.625,
+        1.125
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 0.0533583689362383,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-0-tap-1--1",
+      "d": [
+        -1.375,
+        1.125
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 0.0009207887510054815,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-0-tap--1-0",
+      "d": [
+        2.625,
+        -0.875
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 3.599096476553674e-10,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-0-tap-0-0",
+      "d": [
+        0.625,
+        -0.875
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 0.2043100936755178,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-0-tap-1-0",
+      "d": [
+        -1.375,
+        -0.875
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 0.0035257156416849734,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-0-tap--1-1",
+      "d": [
+        2.625,
+        -2.875
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 1.4644481273281764e-20,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-0-tap-0-1",
+      "d": [
+        0.625,
+        -2.875
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 8.313240170873599e-12,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-0-tap-1-1",
+      "d": [
+        -1.375,
+        -2.875
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 1.4345899596171102e-13,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-1-tap--1--1",
+      "d": [
+        1.625,
+        2.125
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 4.4935455402137654e-09,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-1-tap-0--1",
+      "d": [
+        -0.375,
+        2.125
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 4.352324821159975e-06,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-1-tap-1--1",
+      "d": [
+        -2.375,
+        2.125
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 2.905278418097613e-13,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-1-tap--1-0",
+      "d": [
+        1.625,
+        0.125
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 0.0021470724663886667,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-1-tap-0-0",
+      "d": [
+        -0.375,
+        0.125
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 2.0795954340874476,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-1-tap-1-0",
+      "d": [
+        -2.375,
+        0.125
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 1.388178497996008e-07,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-1-tap--1-1",
+      "d": [
+        1.625,
+        -1.875
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 1.1174492257562966e-07,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-1-tap-0-1",
+      "d": [
+        -0.375,
+        -1.875
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 0.00010823306358243252,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-1-tap-1-1",
+      "d": [
+        -2.375,
+        -1.875
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 7.2248096516569724e-12,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-2-tap--1--1",
+      "d": [
+        2.125,
+        2.625
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 4.3563687991667346e-15,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-2-tap-0--1",
+      "d": [
+        0.125,
+        2.625
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 2.081527697542951e-09,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-2-tap-1--1",
+      "d": [
+        -1.875,
+        2.625
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 1.0833362871640498e-13,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-2-tap--1-0",
+      "d": [
+        2.125,
+        0.625
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 2.472982103261452e-06,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-2-tap-0-0",
+      "d": [
+        0.125,
+        0.625
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 1.1816218921711445,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-2-tap-1-0",
+      "d": [
+        -1.875,
+        0.625
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 6.149780639515287e-05,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-2-tap--1-1",
+      "d": [
+        2.125,
+        -1.375
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 4.267548179446944e-08,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-2-tap-0-1",
+      "d": [
+        0.125,
+        -1.375
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 0.02039088090479601,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-2-tap-1-1",
+      "d": [
+        -1.875,
+        -1.375
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 1.0612484877083992e-06,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-3-tap--1--1",
+      "d": [
+        1.125,
+        1.625
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 9.695511360567465e-05,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-3-tap-0--1",
+      "d": [
+        -0.875,
+        1.625
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 0.00037124276356286174,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-3-tap-1--1",
+      "d": [
+        -2.875,
+        1.625
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 1.5105618130146892e-14,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-3-tap--1-0",
+      "d": [
+        1.125,
+        -0.375
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 0.09390806073021098,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-3-tap-0-0",
+      "d": [
+        -0.875,
+        -0.375
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 0.35957554676385944,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-3-tap-1-0",
+      "d": [
+        -2.875,
+        -0.375
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 1.4630886932921763e-11,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-3-tap--1-1",
+      "d": [
+        1.125,
+        -2.375
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 6.268582271214029e-09,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-3-tap-0-1",
+      "d": [
+        -0.875,
+        -2.375
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 2.4002507133883144e-08,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-3-tap-1-1",
+      "d": [
+        -2.875,
+        -2.375
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 9.766458568805792e-19,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-4-tap--1--1",
+      "d": [
+        2.375,
+        1.875
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 7.2248096516569724e-12,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-4-tap-0--1",
+      "d": [
+        0.375,
+        1.875
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 0.00010823306358243252,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-4-tap-1--1",
+      "d": [
+        -1.625,
+        1.875
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 1.1174492257562966e-07,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-4-tap--1-0",
+      "d": [
+        2.375,
+        -0.125
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 1.388178497996008e-07,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-4-tap-0-0",
+      "d": [
+        0.375,
+        -0.125
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 2.0795954340874476,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-4-tap-1-0",
+      "d": [
+        -1.625,
+        -0.125
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 0.0021470724663886667,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-4-tap--1-1",
+      "d": [
+        2.375,
+        -2.125
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 2.905278418097613e-13,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-4-tap-0-1",
+      "d": [
+        0.375,
+        -2.125
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 4.352324821159975e-06,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-4-tap-1-1",
+      "d": [
+        -1.625,
+        -2.125
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 4.4935455402137654e-09,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-5-tap--1--1",
+      "d": [
+        1.375,
+        2.875
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 1.4345899596171102e-13,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-5-tap-0--1",
+      "d": [
+        -0.625,
+        2.875
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 8.313240170873599e-12,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-5-tap-1--1",
+      "d": [
+        -2.625,
+        2.875
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 1.4644481273281764e-20,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-5-tap--1-0",
+      "d": [
+        1.375,
+        0.875
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 0.003525715641684973,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-5-tap-0-0",
+      "d": [
+        -0.625,
+        0.875
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 0.20431009367551778,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-5-tap-1-0",
+      "d": [
+        -2.625,
+        0.875
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 3.5990964765536735e-10,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-5-tap--1-1",
+      "d": [
+        1.375,
+        -1.125
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 0.0009207887510054815,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-5-tap-0-1",
+      "d": [
+        -0.625,
+        -1.125
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 0.0533583689362383,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-5-tap-1-1",
+      "d": [
+        -2.625,
+        -1.125
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 9.399531573709929e-11,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-6-tap--1--1",
+      "d": [
+        2.875,
+        2.375
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 9.766458568805792e-19,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-6-tap-0--1",
+      "d": [
+        0.875,
+        2.375
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 2.400250713388314e-08,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-6-tap-1--1",
+      "d": [
+        -1.125,
+        2.375
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 6.268582271214029e-09,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-6-tap--1-0",
+      "d": [
+        2.875,
+        0.375
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 1.4630886932921763e-11,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-6-tap-0-0",
+      "d": [
+        0.875,
+        0.375
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 0.3595755467638594,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-6-tap-1-0",
+      "d": [
+        -1.125,
+        0.375
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 0.09390806073021098,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-6-tap--1-1",
+      "d": [
+        2.875,
+        -1.625
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 1.5105618130146892e-14,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-6-tap-0-1",
+      "d": [
+        0.875,
+        -1.625
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 0.0003712427635628617,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-6-tap-1-1",
+      "d": [
+        -1.125,
+        -1.625
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 9.695511360567465e-05,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-7-tap--1--1",
+      "d": [
+        1.875,
+        1.375
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 1.0612484877083992e-06,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-7-tap-0--1",
+      "d": [
+        -0.125,
+        1.375
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 0.02039088090479601,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-7-tap-1--1",
+      "d": [
+        -2.125,
+        1.375
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 4.267548179446944e-08,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-7-tap--1-0",
+      "d": [
+        1.875,
+        -0.625
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 6.149780639515287e-05,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-7-tap-0-0",
+      "d": [
+        -0.125,
+        -0.625
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 1.1816218921711445,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-7-tap-1-0",
+      "d": [
+        -2.125,
+        -0.625
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 2.472982103261452e-06,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-7-tap--1-1",
+      "d": [
+        1.875,
+        -2.625
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 1.0833362871640498e-13,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-7-tap-0-1",
+      "d": [
+        -0.125,
+        -2.625
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 2.081527697542951e-09,
+      "require_positive": true
+    },
+    {
+      "name": "two-phase-7-tap-1-1",
+      "d": [
+        -2.125,
+        -2.625
+      ],
+      "rho": 0.3499999940395355,
+      "r": 2.0,
+      "expected": 4.3563687991667346e-15,
+      "require_positive": true
+    },
+    {
+      "name": "three-phase-0-tap--1--1",
+      "d": [
+        2.6875,
+        3.4375
+      ],
+      "rho": 0.6749999523162842,
+      "r": 3.0,
+      "expected": 3.612544022320636e-08,
+      "require_positive": true
+    },
+    {
+      "name": "three-phase-0-tap-0--1",
+      "d": [
+        -0.3125,
+        3.4375
+      ],
+      "rho": 0.6749999523162842,
+      "r": 3.0,
+      "expected": 3.00608582520534e-05,
+      "require_positive": true
+    },
+    {
+      "name": "three-phase-0-tap-1--1",
+      "d": [
+        -3.3125,
+        3.4375
+      ],
+      "rho": 0.6749999523162842,
+      "r": 3.0,
+      "expected": 9.379233849426994e-10,
+      "require_positive": true
+    },
+    {
+      "name": "three-phase-0-tap--1-0",
+      "d": [
+        2.6875,
+        0.4375
+      ],
+      "rho": 0.6749999523162842,
+      "r": 3.0,
+      "expected": 0.0024333139212861306,
+      "require_positive": true
+    },
+    {
+      "name": "three-phase-0-tap-0-0",
+      "d": [
+        -0.3125,
+        0.4375
+      ],
+      "rho": 0.6749999523162842,
+      "r": 3.0,
+      "expected": 2.0248197508065773,
+      "require_positive": true
+    },
+    {
+      "name": "three-phase-0-tap-1-0",
+      "d": [
+        -3.3125,
+        0.4375
+      ],
+      "rho": 0.6749999523162842,
+      "r": 3.0,
+      "expected": 6.317603371971632e-05,
+      "require_positive": true
+    },
+    {
+      "name": "three-phase-0-tap--1-1",
+      "d": [
+        2.6875,
+        -2.5625
+      ],
+      "rho": 0.6749999523162842,
+      "r": 3.0,
+      "expected": 5.998866395615572e-06,
+      "require_positive": true
+    },
+    {
+      "name": "three-phase-0-tap-0-1",
+      "d": [
+        -0.3125,
+        -2.5625
+      ],
+      "rho": 0.6749999523162842,
+      "r": 3.0,
+      "expected": 0.004991802764960208,
+      "require_positive": true
+    },
+    {
+      "name": "three-phase-0-tap-1-1",
+      "d": [
+        -3.3125,
+        -2.5625
+      ],
+      "rho": 0.6749999523162842,
+      "r": 3.0,
+      "expected": 1.5574833250005396e-07,
+      "require_positive": true
+    },
+    {
+      "name": "four-phase-0-tap--1--1",
+      "d": [
+        4.75,
+        5.75
+      ],
+      "rho": 1.0,
+      "r": 4.0,
+      "expected": 1.287834660581521e-11,
+      "require_positive": true
+    },
+    {
+      "name": "four-phase-0-tap-0--1",
+      "d": [
+        0.75,
+        5.75
+      ],
+      "rho": 1.0,
+      "r": 4.0,
+      "expected": 3.5876684795901136e-07,
+      "require_positive": true
+    },
+    {
+      "name": "four-phase-0-tap-1--1",
+      "d": [
+        -3.25,
+        5.75
+      ],
+      "rho": 1.0,
+      "r": 4.0,
+      "expected": 3.5086774004360742e-09,
+      "require_positive": true
+    },
+    {
+      "name": "four-phase-0-tap--1-0",
+      "d": [
+        4.75,
+        1.75
+      ],
+      "rho": 1.0,
+      "r": 4.0,
+      "expected": 1.5863580490262667e-05,
+      "require_positive": true
+    },
+    {
+      "name": "four-phase-0-tap-0-0",
+      "d": [
+        0.75,
+        1.75
+      ],
+      "rho": 1.0,
+      "r": 4.0,
+      "expected": 0.4419299265688104,
+      "require_positive": true
+    },
+    {
+      "name": "four-phase-0-tap-1-0",
+      "d": [
+        -3.25,
+        1.75
+      ],
+      "rho": 1.0,
+      "r": 4.0,
+      "expected": 0.004321997851110011,
+      "require_positive": true
+    },
+    {
+      "name": "four-phase-0-tap--1-1",
+      "d": [
+        4.75,
+        -2.25
+      ],
+      "rho": 1.0,
+      "r": 4.0,
+      "expected": 6.296066900396426e-06,
+      "require_positive": true
+    },
+    {
+      "name": "four-phase-0-tap-0-1",
+      "d": [
+        0.75,
+        -2.25
+      ],
+      "rho": 1.0,
+      "r": 4.0,
+      "expected": 0.1753967450584316,
+      "require_positive": true
+    },
+    {
+      "name": "four-phase-0-tap-1-1",
+      "d": [
+        -3.25,
+        -2.25
+      ],
+      "rho": 1.0,
+      "r": 4.0,
+      "expected": 0.0017153496734650258,
+      "require_positive": true
+    },
+    {
+      "name": "odd-phase-0-tap--1--1",
+      "d": [
+        1.7857141494750977,
+        2.357142925262451
+      ],
+      "rho": 0.44285717606544495,
+      "r": 2.2857143878936768,
+      "expected": 1.3247081760173074e-07,
+      "require_positive": true
+    },
+    {
+      "name": "odd-phase-0-tap-0--1",
+      "d": [
+        -0.5,
+        2.357142925262451
+      ],
+      "rho": 0.44285717606544495,
+      "r": 2.2857143878936768,
+      "expected": 3.5010433978348e-05,
+      "require_positive": true
+    },
+    {
+      "name": "odd-phase-0-tap-1--1",
+      "d": [
+        -2.7857141494750977,
+        2.357142925262451
+      ],
+      "rho": 0.44285717606544495,
+      "r": 2.2857143878936768,
+      "expected": 8.797075125984126e-12,
+      "require_positive": true
+    },
+    {
+      "name": "odd-phase-0-tap--1-0",
+      "d": [
+        1.7857141494750977,
+        0.07142829895019531
+      ],
+      "rho": 0.44285717606544495,
+      "r": 2.2857143878936768,
+      "expected": 0.0070903341668298375,
+      "require_positive": true
+    },
+    {
+      "name": "odd-phase-0-tap-0-0",
+      "d": [
+        -0.5,
+        0.07142829895019531
+      ],
+      "rho": 0.44285717606544495,
+      "r": 2.2857143878936768,
+      "expected": 1.873889515640597,
+      "require_positive": true
+    },
+    {
+      "name": "odd-phase-0-tap-1-0",
+      "d": [
+        -2.7857141494750977,
+        0.07142829895019531
+      ],
+      "rho": 0.44285717606544495,
+      "r": 2.2857143878936768,
+      "expected": 4.7085239951836164e-07,
+      "require_positive": true
+    },
+    {
+      "name": "odd-phase-0-tap--1-1",
+      "d": [
+        1.7857141494750977,
+        -2.2142858505249023
+      ],
+      "rho": 0.44285717606544495,
+      "r": 2.2857143878936768,
+      "expected": 5.229073243140753e-07,
+      "require_positive": true
+    },
+    {
+      "name": "odd-phase-0-tap-0-1",
+      "d": [
+        -0.5,
+        -2.2142858505249023
+      ],
+      "rho": 0.44285717606544495,
+      "r": 2.2857143878936768,
+      "expected": 0.0001381980777814219,
+      "require_positive": true
+    },
+    {
+      "name": "odd-phase-0-tap-1-1",
+      "d": [
+        -2.7857141494750977,
+        -2.2142858505249023
+      ],
+      "rho": 0.44285717606544495,
+      "r": 2.2857143878936768,
+      "expected": 3.472504434711185e-11,
+      "require_positive": true
+    }
+  ],
+  "symmetry_groups": [
+    {
+      "name": "one",
+      "case_indices": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "expected": 0.1771593088862201
+    },
+    {
+      "name": "two",
+      "case_indices": [
+        22,
+        23,
+        24,
+        25
+      ],
+      "expected": 0.7086372355448805
+    },
+    {
+      "name": "three",
+      "case_indices": [
+        35,
+        36,
+        37,
+        38
+      ],
+      "expected": 1.4884562146634177
+    },
+    {
+      "name": "four",
+      "case_indices": [
+        48,
+        49,
+        50,
+        51
+      ],
+      "expected": 1.7600460642901605
+    },
+    {
+      "name": "odd",
+      "case_indices": [
+        61,
+        62,
+        63,
+        64
+      ],
+      "expected": 0.991442387120366
+    }
+  ],
+  "matrices": [
+    {
+      "name": "one-phase-0",
+      "shape": [
+        3,
+        3
+      ],
+      "case_indices": [
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73
+      ],
+      "source_extent": 16.0,
+      "output_extent": 16.0,
+      "pixel": [
+        8.5,
+        8.5
+      ],
+      "jitter_internal": [
+        -0.4375,
+        -0.1875
+      ],
+      "jitter_uv": [
+        -0.02734375,
+        -0.01171875
+      ],
+      "taps": [
+        [
+          7,
+          7
+        ],
+        [
+          8,
+          7
+        ],
+        [
+          9,
+          7
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          8,
+          8
+        ],
+        [
+          9,
+          8
+        ],
+        [
+          7,
+          9
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          9,
+          9
+        ]
+      ],
+      "expected_mass": 0.998711128526419,
+      "point_mass_comparison": 0.8923005235847808,
+      "constant_input": [
+        0.25,
+        0.0,
+        0.125,
+        0.5
+      ],
+      "expected_constant_color": [
+        0.25,
+        0.0,
+        0.125,
+        0.5
+      ],
+      "expected_clear_color": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "edge_column": 8,
+      "edge_positive_mass": 0.5708119894538212,
+      "expected_edge_color": [
+        0.1428871605486274,
+        0.0,
+        0.0714435802743137,
+        0.2857743210972548
+      ]
+    },
+    {
+      "name": "two-phase-0",
+      "shape": [
+        3,
+        3
+      ],
+      "case_indices": [
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82
+      ],
+      "source_extent": 16.0,
+      "output_extent": 32.0,
+      "pixel": [
+        8.5,
+        8.5
+      ],
+      "jitter_internal": [
+        -0.4375,
+        -0.1875
+      ],
+      "jitter_uv": [
+        -0.02734375,
+        -0.01171875
+      ],
+      "taps": [
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "expected_mass": 0.26211496746680824,
+      "point_mass_comparison": 0.052497668122859616,
+      "constant_input": [
+        0.25,
+        0.0,
+        0.125,
+        0.5
+      ],
+      "expected_constant_color": [
+        0.25,
+        0.0,
+        0.125,
+        0.5
+      ],
+      "expected_clear_color": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "edge_column": 4,
+      "edge_positive_mass": 0.004446504392833914,
+      "expected_edge_color": [
+        0.004240986727891624,
+        0.0,
+        0.002120493363945812,
+        0.008481973455783248
+      ]
+    },
+    {
+      "name": "two-phase-1",
+      "shape": [
+        3,
+        3
+      ],
+      "case_indices": [
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91
+      ],
+      "source_extent": 16.0,
+      "output_extent": 32.0,
+      "pixel": [
+        8.5,
+        8.5
+      ],
+      "jitter_internal": [
+        0.0625,
+        0.3125
+      ],
+      "jitter_uv": [
+        0.00390625,
+        0.01953125
+      ],
+      "taps": [
+        [
+          3,
+          3
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          5
+        ]
+      ],
+      "expected_mass": 2.081855347006073,
+      "point_mass_comparison": 2.746545960367954,
+      "constant_input": [
+        0.25,
+        0.0,
+        0.125,
+        0.5
+      ],
+      "expected_constant_color": [
+        0.25,
+        0.0,
+        0.125,
+        0.5
+      ],
+      "expected_clear_color": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "edge_column": 4,
+      "edge_positive_mass": 2.0797081583012167,
+      "expected_edge_color": [
+        0.24974215443114908,
+        0.0,
+        0.12487107721557454,
+        0.49948430886229817
+      ]
+    },
+    {
+      "name": "two-phase-2",
+      "shape": [
+        3,
+        3
+      ],
+      "case_indices": [
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100
+      ],
+      "source_extent": 16.0,
+      "output_extent": 32.0,
+      "pixel": [
+        8.5,
+        8.5
+      ],
+      "jitter_internal": [
+        0.3125,
+        -0.4375
+      ],
+      "jitter_uv": [
+        0.01953125,
+        -0.02734375
+      ],
+      "taps": [
+        [
+          3,
+          2
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          5,
+          4
+        ]
+      ],
+      "expected_mass": 1.2020778498700488,
+      "point_mass_comparison": 0.9921207733727053,
+      "constant_input": [
+        0.25,
+        0.0,
+        0.125,
+        0.5
+      ],
+      "expected_constant_color": [
+        0.25,
+        0.0,
+        0.125,
+        0.5
+      ],
+      "expected_clear_color": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "edge_column": 4,
+      "edge_positive_mass": 1.2020753342124593,
+      "expected_edge_color": [
+        0.24999947681059304,
+        0.0,
+        0.12499973840529652,
+        0.49999895362118607
+      ]
+    },
+    {
+      "name": "two-phase-3",
+      "shape": [
+        3,
+        3
+      ],
+      "case_indices": [
+        101,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109
+      ],
+      "source_extent": 16.0,
+      "output_extent": 32.0,
+      "pixel": [
+        8.5,
+        8.5
+      ],
+      "jitter_internal": [
+        -0.1875,
+        0.0625
+      ],
+      "jitter_uv": [
+        -0.01171875,
+        0.00390625
+      ],
+      "taps": [
+        [
+          3,
+          3
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          5
+        ]
+      ],
+      "expected_mass": 0.45395183565697433,
+      "point_mass_comparison": 0.14533236495130963,
+      "constant_input": [
+        0.25,
+        0.0,
+        0.125,
+        0.5
+      ],
+      "expected_constant_color": [
+        0.25,
+        0.0,
+        0.125,
+        0.5
+      ],
+      "expected_clear_color": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "edge_column": 4,
+      "edge_positive_mass": 0.3599468135445755,
+      "expected_edge_color": [
+        0.19822962772231573,
+        0.0,
+        0.09911481386115786,
+        0.39645925544463145
+      ]
+    },
+    {
+      "name": "two-phase-4",
+      "shape": [
+        3,
+        3
+      ],
+      "case_indices": [
+        110,
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118
+      ],
+      "source_extent": 16.0,
+      "output_extent": 32.0,
+      "pixel": [
+        8.5,
+        8.5
+      ],
+      "jitter_internal": [
+        0.4375,
+        0.1875
+      ],
+      "jitter_uv": [
+        0.02734375,
+        0.01171875
+      ],
+      "taps": [
+        [
+          3,
+          3
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          5
+        ]
+      ],
+      "expected_mass": 2.081855347006073,
+      "point_mass_comparison": 2.7465459603679534,
+      "constant_input": [
+        0.25,
+        0.0,
+        0.125,
+        0.5
+      ],
+      "expected_constant_color": [
+        0.25,
+        0.0,
+        0.125,
+        0.5
+      ],
+      "expected_clear_color": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "edge_column": 4,
+      "edge_positive_mass": 2.081855208180708,
+      "expected_edge_color": [
+        0.2499999833291293,
+        0.0,
+        0.12499999166456464,
+        0.4999999666582586
+      ]
+    },
+    {
+      "name": "two-phase-5",
+      "shape": [
+        3,
+        3
+      ],
+      "case_indices": [
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127
+      ],
+      "source_extent": 16.0,
+      "output_extent": 32.0,
+      "pixel": [
+        8.5,
+        8.5
+      ],
+      "jitter_internal": [
+        -0.0625,
+        -0.3125
+      ],
+      "jitter_uv": [
+        -0.00390625,
+        -0.01953125
+      ],
+      "taps": [
+        [
+          3,
+          2
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          5,
+          4
+        ]
+      ],
+      "expected_mass": 0.2621149674668082,
+      "point_mass_comparison": 0.05249766812285961,
+      "constant_input": [
+        0.25,
+        0.0,
+        0.125,
+        0.5
+      ],
+      "expected_constant_color": [
+        0.25,
+        0.0,
+        0.125,
+        0.5
+      ],
+      "expected_clear_color": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "edge_column": 4,
+      "edge_positive_mass": 0.2576684630739743,
+      "expected_edge_color": [
+        0.2457590132721084,
+        0.0,
+        0.1228795066360542,
+        0.4915180265442168
+      ]
+    },
+    {
+      "name": "two-phase-6",
+      "shape": [
+        3,
+        3
+      ],
+      "case_indices": [
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136
+      ],
+      "source_extent": 16.0,
+      "output_extent": 32.0,
+      "pixel": [
+        8.5,
+        8.5
+      ],
+      "jitter_internal": [
+        -0.3125,
+        0.4375
+      ],
+      "jitter_uv": [
+        -0.01953125,
+        0.02734375
+      ],
+      "taps": [
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "expected_mass": 0.4539518356569743,
+      "point_mass_comparison": 0.14533236495130966,
+      "constant_input": [
+        0.25,
+        0.0,
+        0.125,
+        0.5
+      ],
+      "expected_constant_color": [
+        0.25,
+        0.0,
+        0.125,
+        0.5
+      ],
+      "expected_clear_color": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "edge_column": 4,
+      "edge_positive_mass": 0.09400502211239892,
+      "expected_edge_color": [
+        0.05177037227768432,
+        0.0,
+        0.02588518613884216,
+        0.10354074455536864
+      ]
+    },
+    {
+      "name": "two-phase-7",
+      "shape": [
+        3,
+        3
+      ],
+      "case_indices": [
+        137,
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144,
+        145
+      ],
+      "source_extent": 16.0,
+      "output_extent": 32.0,
+      "pixel": [
+        8.5,
+        8.5
+      ],
+      "jitter_internal": [
+        0.1875,
+        -0.0625
+      ],
+      "jitter_uv": [
+        0.01171875,
+        -0.00390625
+      ],
+      "taps": [
+        [
+          3,
+          3
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          5
+        ]
+      ],
+      "expected_mass": 1.2020778498700488,
+      "point_mass_comparison": 0.9921207733727053,
+      "constant_input": [
+        0.25,
+        0.0,
+        0.125,
+        0.5
+      ],
+      "expected_constant_color": [
+        0.25,
+        0.0,
+        0.125,
+        0.5
+      ],
+      "expected_clear_color": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "edge_column": 4,
+      "edge_positive_mass": 1.2020152908150576,
+      "expected_edge_color": [
+        0.24998698939195205,
+        0.0,
+        0.12499349469597602,
+        0.4999739787839041
+      ]
+    },
+    {
+      "name": "three-phase-0",
+      "shape": [
+        3,
+        3
+      ],
+      "case_indices": [
+        146,
+        147,
+        148,
+        149,
+        150,
+        151,
+        152,
+        153,
+        154
+      ],
+      "source_extent": 16.0,
+      "output_extent": 48.0,
+      "pixel": [
+        8.5,
+        8.5
+      ],
+      "jitter_internal": [
+        -0.4375,
+        -0.1875
+      ],
+      "jitter_uv": [
+        -0.02734375,
+        -0.01171875
+      ],
+      "taps": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          3
+        ]
+      ],
+      "expected_mass": 2.0323442960628872,
+      "point_mass_comparison": 2.2922733433700566,
+      "constant_input": [
+        0.25,
+        0.0,
+        0.125,
+        0.5
+      ],
+      "expected_constant_color": [
+        0.25,
+        0.0,
+        0.125,
+        0.5
+      ],
+      "expected_clear_color": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "edge_column": 2,
+      "edge_positive_mass": 2.029904947149765,
+      "expected_edge_color": [
+        0.24969993409607716,
+        0.0,
+        0.12484996704803858,
+        0.4993998681921543
+      ]
+    },
+    {
+      "name": "four-phase-0",
+      "shape": [
+        3,
+        3
+      ],
+      "case_indices": [
+        155,
+        156,
+        157,
+        158,
+        159,
+        160,
+        161,
+        162,
+        163
+      ],
+      "source_extent": 16.0,
+      "output_extent": 64.0,
+      "pixel": [
+        8.5,
+        8.5
+      ],
+      "jitter_internal": [
+        -0.4375,
+        -0.1875
+      ],
+      "jitter_uv": [
+        -0.02734375,
+        -0.01171875
+      ],
+      "taps": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "expected_mass": 0.6233865410876114,
+      "point_mass_comparison": 0.5724702587135286,
+      "constant_input": [
+        0.25,
+        0.0,
+        0.125,
+        0.5
+      ],
+      "expected_constant_color": [
+        0.25,
+        0.0,
+        0.125,
+        0.5
+      ],
+      "expected_clear_color": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "edge_column": 2,
+      "edge_positive_mass": 0.006037351033252437,
+      "expected_edge_color": [
+        0.0024211908003015183,
+        0.0,
+        0.0012105954001507592,
+        0.004842381600603037
+      ]
+    },
+    {
+      "name": "odd-phase-0",
+      "shape": [
+        3,
+        3
+      ],
+      "case_indices": [
+        164,
+        165,
+        166,
+        167,
+        168,
+        169,
+        170,
+        171,
+        172
+      ],
+      "source_extent": 14.0,
+      "output_extent": 32.0,
+      "pixel": [
+        8.5,
+        8.5
+      ],
+      "jitter_internal": [
+        -0.4375,
+        -0.1875
+      ],
+      "jitter_uv": [
+        -0.03125,
+        -0.013392857275903225
+      ],
+      "taps": [
+        [
+          2,
+          2
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "expected_mass": 1.8811541845932502,
+      "point_mass_comparison": 2.2137631399193984,
+      "constant_input": [
+        0.25,
+        0.0,
+        0.125,
+        0.5
+      ],
+      "expected_constant_color": [
+        0.25,
+        0.0,
+        0.125,
+        0.5
+      ],
+      "expected_clear_color": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "edge_column": 3,
+      "edge_positive_mass": 1.8740631950482785,
+      "expected_edge_color": [
+        0.24905762781128638,
+        0.0,
+        0.12452881390564319,
+        0.49811525562257275
+      ]
+    }
+  ],
+  "unit_source_tiling": [
+    {
+      "rho": 0.3499999940395355,
+      "phase": 0.0,
+      "centers": [
+        -4,
+        4
+      ],
+      "expected_integrated_mass": 1.0,
+      "summed_positive_integrals": 1.0000000000000138,
+      "outside_tail_mass": 0.0
+    },
+    {
+      "rho": 0.3499999940395355,
+      "phase": 0.125,
+      "centers": [
+        -4,
+        4
+      ],
+      "expected_integrated_mass": 1.0,
+      "summed_positive_integrals": 1.0000000000000124,
+      "outside_tail_mass": 0.0
+    },
+    {
+      "rho": 0.3499999940395355,
+      "phase": 0.5,
+      "centers": [
+        -4,
+        4
+      ],
+      "expected_integrated_mass": 1.0,
+      "summed_positive_integrals": 0.9999999999999993,
+      "outside_tail_mass": 0.0
+    },
+    {
+      "rho": 0.3499999940395355,
+      "phase": 0.875,
+      "centers": [
+        -4,
+        4
+      ],
+      "expected_integrated_mass": 1.0,
+      "summed_positive_integrals": 1.0000000000000124,
+      "outside_tail_mass": 0.0
+    },
+    {
+      "rho": 0.675000011920929,
+      "phase": 0.0,
+      "centers": [
+        -4,
+        4
+      ],
+      "expected_integrated_mass": 0.9999999999738322,
+      "summed_positive_integrals": 0.9999999999738309,
+      "outside_tail_mass": 2.6167845668112477e-11
+    },
+    {
+      "rho": 0.675000011920929,
+      "phase": 0.125,
+      "centers": [
+        -4,
+        4
+      ],
+      "expected_integrated_mass": 0.9999999999509418,
+      "summed_positive_integrals": 0.9999999999509358,
+      "outside_tail_mass": 4.905820194522903e-11
+    },
+    {
+      "rho": 0.675000011920929,
+      "phase": 0.5,
+      "centers": [
+        -4,
+        4
+      ],
+      "expected_integrated_mass": 0.9999999984472219,
+      "summed_positive_integrals": 0.999999998447229,
+      "outside_tail_mass": 1.5527781282997921e-09
+    },
+    {
+      "rho": 0.675000011920929,
+      "phase": 0.875,
+      "centers": [
+        -4,
+        4
+      ],
+      "expected_integrated_mass": 0.9999999607124295,
+      "summed_positive_integrals": 0.9999999607124236,
+      "outside_tail_mass": 3.928757053017762e-08
+    },
+    {
+      "rho": 1.0,
+      "phase": 0.0,
+      "centers": [
+        -4,
+        4
+      ],
+      "expected_integrated_mass": 0.9999932046537505,
+      "summed_positive_integrals": 0.9999932046537653,
+      "outside_tail_mass": 6.795346249477419e-06
+    },
+    {
+      "rho": 1.0,
+      "phase": 0.125,
+      "centers": [
+        -4,
+        4
+      ],
+      "expected_integrated_mass": 0.9999920553840831,
+      "summed_positive_integrals": 0.9999920553840931,
+      "outside_tail_mass": 7.944615916910536e-06
+    },
+    {
+      "rho": 1.0,
+      "phase": 0.5,
+      "centers": [
+        -4,
+        4
+      ],
+      "expected_integrated_mass": 0.9999680421065951,
+      "summed_positive_integrals": 0.9999680421066063,
+      "outside_tail_mass": 3.195789340493249e-05
+    },
+    {
+      "rho": 1.0,
+      "phase": 0.875,
+      "centers": [
+        -4,
+        4
+      ],
+      "expected_integrated_mass": 0.9998554809827777,
+      "summed_positive_integrals": 0.9998554809827876,
+      "outside_tail_mass": 0.00014451901722234428
+    }
+  ],
+  "legendre_moments": [
+    {
+      "degree": 0,
+      "actual": 2.0,
+      "expected": 2.0
+    },
+    {
+      "degree": 1,
+      "actual": 0.0,
+      "expected": 0.0
+    },
+    {
+      "degree": 2,
+      "actual": 0.6666666666666666,
+      "expected": 0.6666666666666666
+    },
+    {
+      "degree": 3,
+      "actual": 0.0,
+      "expected": 0.0
+    },
+    {
+      "degree": 4,
+      "actual": 0.39999999999999997,
+      "expected": 0.4
+    },
+    {
+      "degree": 5,
+      "actual": 0.0,
+      "expected": 0.0
+    },
+    {
+      "degree": 6,
+      "actual": 0.2857142857142857,
+      "expected": 0.2857142857142857
+    },
+    {
+      "degree": 7,
+      "actual": 0.0,
+      "expected": 0.0
+    },
+    {
+      "degree": 8,
+      "actual": 0.22222222222222224,
+      "expected": 0.2222222222222222
+    },
+    {
+      "degree": 9,
+      "actual": 0.0,
+      "expected": 0.0
+    },
+    {
+      "degree": 10,
+      "actual": 0.18181818181818182,
+      "expected": 0.18181818181818182
+    },
+    {
+      "degree": 11,
+      "actual": 0.0,
+      "expected": 0.0
+    },
+    {
+      "degree": 12,
+      "actual": 0.15384615384615388,
+      "expected": 0.15384615384615385
+    },
+    {
+      "degree": 13,
+      "actual": 0.0,
+      "expected": 0.0
+    },
+    {
+      "degree": 14,
+      "actual": 0.13333333333333336,
+      "expected": 0.13333333333333333
+    },
+    {
+      "degree": 15,
+      "actual": 0.0,
+      "expected": 0.0
+    }
+  ],
+  "nodes_minus_half_to_half": [
+    -0.48014492824876814,
+    -0.3983332387068134,
+    -0.2627662049581645,
+    -0.09171732124782489,
+    0.09171732124782489,
+    0.2627662049581645,
+    0.3983332387068134,
+    0.48014492824876814
+  ],
+  "weights_minus_half_to_half": [
+    0.05061426814518809,
+    0.11119051722668723,
+    0.1568533229389437,
+    0.181341891689181,
+    0.181341891689181,
+    0.1568533229389437,
+    0.11119051722668723,
+    0.05061426814518809
+  ],
+  "scope": "Test-only weight and discrete-support controls; ratio of integrated moments, no quality or performance acceptance"
+}

@@ -145,3 +145,51 @@ full and cannot establish this quality difference. The support defect is fixed
 within the tested translation bound, but **appearance is still not accepted**.
 No shipping-performance or production-adoption claim follows. Box-integrated
 reconstruction remains a separate, unimplemented hypothesis.
+
+
+## Integrated output-footprint experiment
+
+The next private variant integrates the existing positive Gaussian over a unit
+output pixel instead of sampling it only at the output center. Its radius-3
+history gather, source coordinates, rho, r-squared scale, eight jitter phases,
+3x3 current stencil, ownership and rejection policy remain fixed. The normalized
+ratio of integrated numerator and mass is not the exact area integral of the
+normalized estimate. This cannot recover never-sampled geometry or establish
+correctness for arbitrary motion or layered occlusion.
+
+The separable kernel uses positive eight-point Gauss-Legendre weights on each
+axis. Independent adaptive integration and erf references cover 173 distinct
+weights and twelve sample matrices; quadrature moments through degree 15 pass.
+A scalar f32 model is preparation for actual Metal execution, not GPU evidence.
+The external generator and raw numerical reports are retained under
+`~/.codex/incant-evidence/reconstruction-owner-footprint-oracle-001`. The shader
+performs sixteen scalar exponentials per weight instead of the point kernel's
+one; there is no performance claim or production adoption. Generation 006 retains the actual shader probe, refusal controls and scene
+comparison separately from generation 005.
+
+Generation 006 source freeze is
+`c4c48f3ef6f5c6364b158e3643b73948bcbe005f7736a965667a9e219f94ebba`;
+its executed binary is
+`d87a9f94202e8fe7fda9b4395de141b82c602b5e4ddf82070b9ebcc9de181f99`.
+Two CPU controls, all 173 actual Metal weight cases, the fourteen refusal cases,
+the 128-frame scene and strict all-target renderer Clippy pass. The maximum
+absolute GPU weight error is 5.83548e-7 against the independent reference. This
+checks the additive 2e-6 + 2e-5*abs(expected) envelope and positive normal weights;
+it does not establish a uniform relative-error bound for arbitrarily tiny tails.
+
+A read-only comparison verifies all 128 frame identities, 512 unchanged input
+and baseline planes, 2,048 raw-plane hashes and 56 PNG hashes against generation
+005. Both disappearance ROIs remain exactly clear after eviction; captured PMA
+invariants remain valid. All 128 candidate frames change, including cold outputs
+as expected from the different spatial kernel. The first comparison stopped
+because this generation has no copied analyzer; its failure is retained. The
+successor pins and executes the immutable original analysis body and preserves
+all data/source checks. Its output SHA-256 is
+`65843658d4a70d9dd37b92d86b10fd2deed28fd09649feada68f35c490676458`.
+
+Root inspected actual frames 14, 24 and 64 and eviction frame 33. The spatial
+change is modest. Frame 14 still shows dotted thin detail and jagged edges;
+frame 64 shows smeared thin detail during camera motion, and sphere silhouettes
+remain stepped. **Not visually accepted and not adopted.** Static sampling,
+repeated history resampling and depth-layer admission need separate diagnosis;
+these observations do not establish which mechanism dominates each artifact.

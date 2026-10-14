@@ -4,6 +4,8 @@ use glam::{Mat4, Vec2, Vec3};
 use wgpu::util::DeviceExt;
 #[path = "reconstruction_owner_camera_controls.rs"]
 mod controls;
+#[path = "reconstruction_owner_footprint_controls.rs"]
+mod footprint_controls;
 #[path = "reconstruction_owner_camera_support.rs"]
 mod support;
 
@@ -20,23 +22,58 @@ struct Plane {
     stride: u32,
     offset: u64,
 }
+#[derive(Clone, Copy)]
+enum Kernel {
+    Point,
+    Footprint,
+}
+impl Kernel {
+    fn name(self) -> &'static str {
+        match self {
+            Self::Point => "point",
+            Self::Footprint => "integrated-footprint",
+        }
+    }
+    fn selected() -> Self {
+        match std::env::var("INCANT_OWNER_CAMERA_KERNEL").as_deref() {
+            Err(std::env::VarError::NotPresent) | Ok("point") => Self::Point,
+            Ok("footprint") => Self::Footprint,
+            Ok(other) => panic!("unknown diagnostic kernel: {other}"),
+            Err(error) => panic!("invalid diagnostic kernel: {error}"),
+        }
+    }
+}
 fn shader() -> String {
-    shader_with_radius(3)
+    shader_with_kernel(3, Kernel::selected())
 }
 fn shader_with_radius(radius: i32) -> String {
+    shader_with_kernel(radius, Kernel::Point)
+}
+fn shader_with_kernel(radius: i32, kernel: Kernel) -> String {
     assert!([2, 3].contains(&radius));
     let original = include_str!("upscaling/resolve_owner.wgsl");
     let entry = "@fragment fn resolve(@builtin(position) position:vec4f)";
     assert_eq!(original.matches(entry).count(), 1);
-    [
-        include_str!("upscaling/common.wgsl").to_owned(),
-        original.replace(entry, "fn original_resolve(position:vec4f)"),
+    let mut owner = original.replace(entry, "fn original_resolve(position:vec4f)");
+    let footprint = match kernel {
+        Kernel::Point => "",
+        Kernel::Footprint => {
+            assert_eq!(owner.matches("fn kernel_weight(").count(), 1);
+            owner = owner.replace("fn kernel_weight(", "fn point_kernel_weight(");
+            include_str!("upscaling/owner_footprint_experiment.wgsl")
+        }
+    };
+    let mut parts = vec![include_str!("upscaling/common.wgsl").to_owned(), owner];
+    if !footprint.is_empty() {
+        parts.push(footprint.to_owned());
+    }
+    parts.push(
         include_str!("upscaling/owner_camera_experiment.wgsl").replace(
             "const CAMERA_RADIUS:i32=3;",
             &format!("const CAMERA_RADIUS:i32={radius};"),
         ),
-    ]
-    .join("\n")
+    );
+    parts.join("\n")
 }
 #[repr(C)]
 #[derive(Clone, Copy, bytemuck::Pod, bytemuck::Zeroable)]
@@ -65,13 +102,15 @@ fn project(matrix: Mat4, world: Vec3) -> (Vec2, f32) {
 #[test]
 fn owner_camera_shader_and_projection_controls() {
     for radius in [2, 3] {
-        let module = naga::front::wgsl::parse_str(&shader_with_radius(radius)).unwrap();
-        naga::valid::Validator::new(
-            naga::valid::ValidationFlags::all(),
-            naga::valid::Capabilities::all(),
-        )
-        .validate(&module)
-        .unwrap();
+        for kernel in [Kernel::Point, Kernel::Footprint] {
+            let module = naga::front::wgsl::parse_str(&shader_with_kernel(radius, kernel)).unwrap();
+            naga::valid::Validator::new(
+                naga::valid::ValidationFlags::all(),
+                naga::valid::Capabilities::all(),
+            )
+            .validate(&module)
+            .unwrap();
+        }
     }
     let stage = Stage::new(true);
     let mut input = stage.input();
@@ -157,9 +196,12 @@ struct Experiment {
 }
 impl Experiment {
     fn new(renderer: &Renderer) -> Self {
-        Self::with_radius(renderer, 3)
+        Self::with_kernel(renderer, 3, Kernel::selected())
     }
     fn with_radius(renderer: &Renderer, radius: i32) -> Self {
+        Self::with_kernel(renderer, radius, Kernel::Point)
+    }
+    fn with_kernel(renderer: &Renderer, radius: i32, kernel: Kernel) -> Self {
         let d = &renderer.device;
         let mut entries = crate::upscaling::system::owner_layout_entries();
         entries.push(wgpu::BindGroupLayoutEntry {
@@ -178,7 +220,7 @@ impl Experiment {
         });
         let module = d.create_shader_module(wgpu::ShaderModuleDescriptor {
             label: Some("Test camera owner shader"),
-            source: wgpu::ShaderSource::Wgsl(shader_with_radius(radius).into()),
+            source: wgpu::ShaderSource::Wgsl(shader_with_kernel(radius, kernel).into()),
         });
         let pipeline_layout = d.create_pipeline_layout(&wgpu::PipelineLayoutDescriptor {
             label: None,
@@ -510,7 +552,7 @@ fn actual_scene_owner_camera_gather() {
         }
     }
     assert_eq!((submits, maps), (256, 128));
-    let report = json!({"schema":"incant-owner-camera-diagnostic-v1","adapter":describe(&renderer),"output":SIZE,"source":[480,270],"submissions":submits,"maps":maps,"frames":rows,"images":images,"shader_sha256":hex(shader().as_bytes()),"raw_bytes":total*128,"scope":"Test-only radius3 (7x7) forward gather of static single-owner fractional coverage; fixed projection and small camera motion, internal LOD footprint. No production, arbitrary motion, timing or visual acceptance."});
+    let report = json!({"schema":"incant-owner-camera-diagnostic-v1","adapter":describe(&renderer),"output":SIZE,"source":[480,270],"submissions":submits,"maps":maps,"frames":rows,"images":images,"kernel":Kernel::selected().name(),"shader_sha256":hex(shader().as_bytes()),"raw_bytes":total*128,"scope":"Test-only radius3 (7x7) forward gather of static single-owner fractional coverage; fixed projection and small camera motion, internal LOD footprint. No production, arbitrary motion, timing or visual acceptance."});
     std::fs::write(
         out.join("report.json"),
         serde_json::to_vec_pretty(&report).unwrap(),
