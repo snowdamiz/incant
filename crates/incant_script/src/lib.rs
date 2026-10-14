@@ -35,6 +35,8 @@ mod schedule;
 mod session;
 mod steering_values;
 mod synchronous;
+#[cfg(all(test, feature = "profile", feature = "compiler"))]
+mod tick_probe;
 mod timers;
 
 pub use artifact::{EmbeddedScript, ScriptMetadata};
@@ -332,6 +334,8 @@ impl ScriptHost {
         input: &incant_input::InputRuntime,
     ) -> Result<(), ScriptError> {
         let _profile = incant_profile::scope(incant_profile::Phase::ScriptTick);
+        #[cfg(all(test, feature = "profile", feature = "compiler"))]
+        tick_probe::mark(tick_probe::Region::Enter);
         if self.failed {
             return Err(ScriptError::FailedSession);
         }
@@ -344,6 +348,8 @@ impl ScriptHost {
             .unwrap_or_else(|error| error.into_inner())
             .reset()?;
         self.synchronous.reset();
+        #[cfg(all(test, feature = "profile", feature = "compiler"))]
+        tick_probe::mark(tick_probe::Region::InitialChecks);
         let result = self.context.with(|ctx| {
             self.flipbooks.capture(world)?;
             let flipbooks = self.flipbooks.expose(&ctx).map_err(|error| {
@@ -353,6 +359,8 @@ impl ScriptHost {
             let animations = self.animations.expose(&ctx).map_err(|error| {
                 diagnostics::javascript(&ctx, error, "animation snapshot", &self.deadline)
             })?;
+            #[cfg(all(test, feature = "profile", feature = "compiler"))]
+            tick_probe::mark(tick_probe::Region::Snapshots);
             let freeze = self
                 .freeze
                 .clone()
@@ -415,6 +423,8 @@ impl ScriptHost {
                     Ok::<_, ScriptError>((index, scope, instances, api, state_api))
                 })
                 .collect::<Result<Vec<_>, _>>()?;
+            #[cfg(all(test, feature = "profile", feature = "compiler"))]
+            tick_probe::mark(tick_probe::Region::GroupSetup);
             let clock = timers::clock(&ctx, &schedule).map_err(|error| {
                 diagnostics::javascript(&ctx, error, "script clock", &self.deadline)
             })?;
@@ -454,7 +464,11 @@ impl ScriptHost {
                             &self.deadline,
                         )
                     })?;
+                    #[cfg(all(test, feature = "profile", feature = "compiler"))]
+                    tick_probe::mark(tick_probe::Region::Capabilities);
                     let mut loan = loan::Loan::new(columns)?;
+                    #[cfg(all(test, feature = "profile", feature = "compiler"))]
+                    tick_probe::mark(tick_probe::Region::UndoCapture);
                     let chunks = match loan.expose(&ctx, &freeze, &mut self.chunk_ids) {
                         Ok(chunks) => chunks,
                         Err(error) => {
@@ -469,6 +483,8 @@ impl ScriptHost {
                             ));
                         }
                     };
+                    #[cfg(all(test, feature = "profile", feature = "compiler"))]
+                    tick_probe::mark(tick_probe::Region::ViewExposure);
                     commands.activate();
                     queries.activate();
                     logs.activate();
@@ -537,6 +553,8 @@ impl ScriptHost {
                             }
                         }
                     }
+                    #[cfg(all(test, feature = "profile", feature = "compiler"))]
+                    tick_probe::mark(tick_probe::Region::Callbacks);
                     commands.revoke();
                     queries.revoke();
                     timers.revoke();
@@ -550,11 +568,17 @@ impl ScriptHost {
                     diagnostics::check_deadline(&self.deadline)?;
                     self.synchronous.check(&ctx, false)?;
                     queries.check()?;
+                    #[cfg(all(test, feature = "profile", feature = "compiler"))]
+                    tick_probe::mark(tick_probe::Region::RevokeChecks);
                     loan.validate_numeric()?;
+                    #[cfg(all(test, feature = "profile", feature = "compiler"))]
+                    tick_probe::mark(tick_probe::Region::NumericValidation);
                     let (commands, request, haptics) = commands.take()?;
                     schedule.apply(timers.take()?)?;
                     let logs = logs.take()?;
                     let changes = persistent.take()?;
+                    #[cfg(all(test, feature = "profile", feature = "compiler"))]
+                    tick_probe::mark(tick_probe::Region::TransactionStage);
                     Ok((
                         loan.finish(),
                         commands,
@@ -567,6 +591,9 @@ impl ScriptHost {
                 })
                 .map_err(ScriptError::Structural)?
         });
+
+        #[cfg(all(test, feature = "profile", feature = "compiler"))]
+        tick_probe::mark(tick_probe::Region::ScopeCleanup);
         // No JS value or raw column pointer crosses this sync point. Apply is
         // native host work, after the script CPU/deferred-work checks; its time
         // is separate from the JS execution budget, not a claimed phone budget.
@@ -585,6 +612,8 @@ impl ScriptHost {
         if result.is_err() {
             self.failed = true;
         }
+        #[cfg(all(test, feature = "profile", feature = "compiler"))]
+        tick_probe::mark(tick_probe::Region::Publication);
         // Query only after JS/context loans are closed. This opt-in diagnostic
         // walks the VM heap and is outside the guest CPU budget, never an RSS claim.
         if incant_profile::enabled() {
@@ -601,6 +630,9 @@ impl ScriptHost {
                 });
             }
         }
+
+        #[cfg(all(test, feature = "profile", feature = "compiler"))]
+        tick_probe::mark(tick_probe::Region::HeapTelemetry);
         result
     }
 }
