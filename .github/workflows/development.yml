@@ -16,6 +16,15 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          # Keep all source, fixtures and checks. Archived review evidence is
+          # unnecessary for this development job; release jobs still check out all.
+          # Sparse checkout enables blob:none in the pinned checkout action.
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/docs/spikes/evidence/
+            !/handoffs/
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         with: {python-version: '3.12'}
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
