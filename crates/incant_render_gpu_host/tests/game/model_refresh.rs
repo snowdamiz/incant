@@ -292,10 +292,10 @@ fn retain_pixels(output: &Path, name: &str, bytes: &[u8]) {
 #[test]
 #[ignore = "requires a native GPU; run explicitly after resource grant"]
 fn compatible_static_model_rebuilds_bounds_geometry_material_images_and_retains_rejected_pixels() {
-    let pixel_output = std::path::PathBuf::from(
-        std::env::var_os("INCANT_MODEL_REFRESH_PIXELS")
-            .expect("set INCANT_MODEL_REFRESH_PIXELS to a fresh owned absolute output directory"),
-    );
+    let pixel_temporary = tempfile::tempdir().unwrap();
+    let pixel_output = std::env::var_os("INCANT_MODEL_REFRESH_PIXELS")
+        .map(std::path::PathBuf::from)
+        .unwrap_or_else(|| pixel_temporary.path().join("pixels"));
     assert!(pixel_output.is_absolute());
     fs::create_dir(&pixel_output).unwrap();
     let root = tempfile::tempdir().unwrap();
