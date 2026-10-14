@@ -54,7 +54,7 @@ and producer audit have not been widened silently from API24 to API26.
 
 The APK carries only cooked assets and linked bytecode. A bounded hashed catalog
 extracts up to 8192 files/512 MiB into a fresh application-private directory; each
-file is at most 128 MiB. No external path or shell comes from project content.
+file is at most 128 MiB and each ASCII catalog line is at most 512 characters. No external path or shell comes from project content.
 The exporter never signs, installs, launches, or supplies credentials. The APK
 build helper is implemented but a full authored shipping APK run remains separate
 from the focused source/compile evidence below.
@@ -73,7 +73,10 @@ Source002 passed five CPU lifecycle/slot tests, six exporter policy tests, Java
 three optional dependency edges were added; locked package identities did not
 change. The full selected Mac player library passed 38 CPU tests and strict library/test
 Clippy. The first formatting check found only module declaration ordering; that
-mechanical correction is source003. Independent source review is still pending. No Android device, GPU, physical audio, rendered appearance or
+mechanical correction is source003. Independent source review found one catalog line-bound mismatch. Source004
+enforces the same 512-character limit before export, with exact-boundary and
+513-character refusal controls. Native source and its execution evidence are
+unchanged; final packet review is pending. No Android device, GPU, physical audio, rendered appearance or
 performance result follows from these checks. Per the current director's gate,
 mobile/other-device execution is deferred and nonblocking; desktop Mac testing
 remains the required execution surface.
