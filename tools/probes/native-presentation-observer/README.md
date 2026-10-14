@@ -1,7 +1,8 @@
 # Exact-drawable presentation observer probe
 
-Source-only private qualification package. No Cargo, native window, GPU, listener
-or timestamp capture has been executed for this package. It does not modify the
+CPU-qualified private package: ten collector tests, strict host/HAL lint and
+feature-off checking pass. No native window, GPU, listener or timestamp capture
+has been executed for this package. It does not modify the
 engine dependency graph or normal player. See
 [design and qualification](../../../docs/spikes/native-presentation-observer.md).
 
