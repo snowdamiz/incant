@@ -1,9 +1,12 @@
 //! Opt-in numerical acceptance over the actual editor worker/window. This is not
-//! a rendered-pixel or physical-device performance review. No project mutations.
+//! a rendered-pixel or physical-device performance review. The lifecycle mode
+//! makes no project mutations; the texture mode uses real editor command paths.
+pub(super) mod textures;
 use super::{Action, StartOptions, Status, execute};
 use crate::{Editor, project};
 use serde_json::{Value, json};
 use std::{
+    ffi::{OsStr, OsString},
     fs::OpenOptions,
     io::Write,
     path::PathBuf,
@@ -15,13 +18,27 @@ use tauri::Manager;
 pub struct Options {
     output: PathBuf,
     entity: String,
+    textures: bool,
 }
 impl Options {
+    fn texture_mode(flag: &OsStr) -> Option<bool> {
+        match flag.to_str() {
+            Some("--play-probe") => Some(false),
+            Some("--texture-probe") => Some(true),
+            _ => None,
+        }
+    }
+    pub fn accepts_mode(flag: &OsStr) -> bool {
+        Self::texture_mode(flag).is_some()
+    }
     pub fn from_args() -> Option<Self> {
-        let mut args = std::env::args_os().skip(2);
+        Self::from_probe_args(std::env::args_os().skip(2))
+    }
+    fn from_probe_args(mut args: impl Iterator<Item = OsString>) -> Option<Self> {
         match args.next() {
             None => None,
-            Some(flag) if flag == "--play-probe" => Some(Self {
+            Some(flag) if Self::accepts_mode(&flag) => Some(Self {
+                textures: Self::texture_mode(&flag).expect("accepted probe mode"),
                 output: args.next().expect("probe output path").into(),
                 entity: args
                     .next()
@@ -29,7 +46,9 @@ impl Options {
                     .into_string()
                     .expect("UTF-8 entity"),
             }),
-            _ => panic!("expected --play-probe OUTPUT ENTITY after the project path"),
+            _ => panic!(
+                "expected --play-probe or --texture-probe OUTPUT ENTITY after the project path"
+            ),
         }
     }
 }
@@ -48,6 +67,13 @@ fn project(editor: &Editor) -> Result<(Value, u64, usize), String> {
     ))
 }
 fn wait(editor: &Editor, condition: impl Fn(&Status) -> bool) -> Result<Status, String> {
+    wait_observed(editor, condition, |_| "native Play probe deadline".into())
+}
+fn wait_observed(
+    editor: &Editor,
+    condition: impl Fn(&Status) -> bool,
+    deadline_failure: impl Fn(&Status) -> String,
+) -> Result<Status, String> {
     let deadline = Instant::now() + Duration::from_secs(20);
     loop {
         let state = editor.play.snapshot()?;
@@ -57,7 +83,9 @@ fn wait(editor: &Editor, condition: impl Fn(&Status) -> bool) -> Result<Status, 
         if condition(&state) {
             return Ok(state);
         }
-        require(Instant::now() < deadline, "native Play probe deadline")?;
+        if Instant::now() >= deadline {
+            return Err(deadline_failure(&state));
+        }
         thread::sleep(Duration::from_millis(10));
     }
 }
@@ -238,7 +266,11 @@ pub fn start(app: tauri::AppHandle, editor: Arc<Editor>, options: Options) {
                 .create_new(true)
                 .open(&options.output)
                 .map_err(|e| e.to_string())?;
-            let result = run(&app, &editor, &options);
+            let result = if options.textures {
+                textures::run(&app, &editor, &options)
+            } else {
+                run(&app, &editor, &options)
+            };
             let report = match &result {
                 Ok(value) => value.clone(),
                 Err(error) => json!({"passed":false,"error":error}),
@@ -262,4 +294,39 @@ pub fn start(app: tauri::AppHandle, editor: Arc<Editor>, options: Options) {
         }
         app.exit(if result.is_ok() { 0 } else { 1 });
     });
+}
+
+#[cfg(test)]
+mod options_tests {
+    use super::*;
+
+    #[test]
+    fn outer_dispatch_and_parser_accept_both_probe_modes() {
+        for (flag, textures) in [("--play-probe", false), ("--texture-probe", true)] {
+            assert!(Options::accepts_mode(OsStr::new(flag)));
+            let options = Options::from_probe_args(
+                [flag, "receipt.json", "00000000000000000000000002"]
+                    .map(OsString::from)
+                    .into_iter(),
+            )
+            .expect("recognized probe mode");
+            assert_eq!(options.textures, textures);
+            assert_eq!(options.output, PathBuf::from("receipt.json"));
+            assert_eq!(options.entity, "00000000000000000000000002");
+        }
+    }
+
+    #[test]
+    fn unknown_modes_are_not_dispatched_as_probes() {
+        for flag in ["", "--unknown-probe", "--texture-probe-extra"] {
+            assert!(!Options::accepts_mode(OsStr::new(flag)));
+        }
+        assert!(Options::from_probe_args(std::iter::empty()).is_none());
+    }
+
+    #[test]
+    #[should_panic(expected = "expected --play-probe or --texture-probe")]
+    fn explicit_probe_parser_refuses_unknown_mode() {
+        Options::from_probe_args([OsString::from("--unknown-probe")].into_iter());
+    }
 }

@@ -1,5 +1,28 @@
 # Implementation status
 
+## Native Play texture workflow — actual Mac verified
+
+The real editor import/history handlers, source watcher and native surface now
+pass the complete texture refresh workflow: import, watched replacement,
+Undo/Redo, malformed-source retention and recovery. The same paused native world
+and script module continue; journal reopening preserves the accepted revision.
+Normal Finder activation resolved the prior focus-held startup without changing
+simulation eligibility or deadlines. Scoped source/CPU and independent actual
+workflow reviews pass; the main285 join changes no runtime/build inputs.
+This is handler/catalog/presentation evidence, with texture pixels covered by the
+earlier numerical Metal control. Broader asset refresh and phase/performance gates
+remain open. [Source, actual results and replay](docs/spikes/native-window-texture-workflow.md).
+
+## Release checkpoint37 — promoted
+
+All 23 required contexts and eight frozen-candidate workflows passed. PR286
+promotes the exact tested main285 tree, including existing-texture refresh,
+diagnostic profiling and the faster development checkout. The original Android
+SDK download failure and its successful single-job retry remain recorded.
+The later native-window texture probe and private rendering/pointer work are
+outside this baseline. This is integration evidence, not phase approval or a
+performance/appearance pass. [Exact checks and identities](docs/spikes/release-checkpoint-37.md).
+
 ## Navigation cache comparison — bounded optimization concluded
 
 The one fixed six-run shipping comparison found a small ScriptTick p95 reduction,
@@ -22,8 +45,8 @@ lock; final publication rejects stale revisions, changed sessions and incompatib
 catalogs while retaining the prior live resources. The producer passed scoped
 CPU checks and an actual Metal control that changed red pixels to blue without
 restarting the game. Current main283 composition separately passes 11 texture
-controls and five editor publication controls. Native-window import/Undo/Redo
-and broader asset refresh remain open; this does not establish performance or a
+controls and five editor publication controls. The native-window workflow is
+subsequently verified above; broader asset refresh remains open. This does not establish performance or a
 phase gate. [Scope and evidence](docs/spikes/native-texture-refresh.md).
 
 ## Full-Core script attribution — merged through PR283

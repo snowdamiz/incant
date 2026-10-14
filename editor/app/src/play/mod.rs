@@ -134,6 +134,13 @@ enum Request {
         generation: u32,
         token: u64,
     },
+    #[cfg(feature = "play-probe")]
+    ObserveTexture {
+        generation: u32,
+        asset: incant_runtime::StableId,
+        fingerprint: String,
+        reply: mpsc::Sender<Result<probe::textures::Observation, String>>,
+    },
 }
 impl Service {
     pub fn new() -> (Arc<Self>, mpsc::Receiver<Message>) {

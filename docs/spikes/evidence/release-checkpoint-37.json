@@ -1,0 +1,2302 @@
+{
+  "checkpoint": 37,
+  "promotion": {
+    "at": "2026-10-14T16:10:27.307107+00:00",
+    "checkpoint": 37,
+    "release": "1034930898bb2b8a7bfa08f9d426ba71a907bf29",
+    "tree": "ebd3daeb1c49eaa289cb083e5656bd71dbdc1dcb",
+    "selected_main": "1eca995cb36d9f9cada732dce7d52447569e63ac",
+    "candidate": "e7f3d2c1e7118bfbff23402961daa98daa689fc8",
+    "parents": [
+      "e26c14e595f7a9aaa31225aa8ba81cd1cdc854f1",
+      "e7f3d2c1e7118bfbff23402961daa98daa689fc8"
+    ],
+    "pr": {
+      "baseRefName": "release",
+      "headRefOid": "e7f3d2c1e7118bfbff23402961daa98daa689fc8",
+      "mergeCommit": {
+        "oid": "1034930898bb2b8a7bfa08f9d426ba71a907bf29"
+      },
+      "mergedAt": "2026-10-14T16:10:14Z",
+      "state": "MERGED",
+      "url": "https://github.com/snowdamiz/incant/pull/286"
+    },
+    "exact_tested_tree": true,
+    "built_by_astra": true,
+    "all23_required_success": true,
+    "all8_push_workflows_success": true,
+    "review_sha256": "20a5874d176837e5daff57dc57f3de5b15b00d07ff94e8fe8a410b290e996a48",
+    "prepromotion_sha256": "9b07667fdb3165c6e3ae7576d6148ad2e82f181cecbd57e456adf34c49b11d6f",
+    "limitations": [
+      "No phase/performance/appearance or distribution approval.",
+      "Native-window texture workflow source and private pointer/reconstruction/MetalFX work remain outside this release."
+    ]
+  },
+  "required_checks": [
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-14T15:26:38Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38583843842/job/115934937703",
+      "name": "android",
+      "startedAt": "2026-10-14T15:17:08Z",
+      "status": "COMPLETED",
+      "workflowName": "Six platform probes"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-14T14:50:22Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38583843676/job/115920447231",
+      "name": "build",
+      "startedAt": "2026-10-14T14:48:46Z",
+      "status": "COMPLETED",
+      "workflowName": "Website \u00b7 check and deploy"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-14T15:53:34Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38583844104/job/115920736019",
+      "name": "checks",
+      "startedAt": "2026-10-14T14:53:51Z",
+      "status": "COMPLETED",
+      "workflowName": "Incant checks"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-14T14:49:17Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38583844104/job/115920449786",
+      "name": "classify",
+      "startedAt": "2026-10-14T14:48:45Z",
+      "status": "COMPLETED",
+      "workflowName": "Incant checks"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-14T15:15:06Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38583843924/job/115933447705",
+      "name": "compare",
+      "startedAt": "2026-10-14T15:14:16Z",
+      "status": "COMPLETED",
+      "workflowName": "Physics candidate feasibility"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-14T15:21:15Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38583843961/job/115920451091",
+      "name": "conformance (macos-latest)",
+      "startedAt": "2026-10-14T15:00:14Z",
+      "status": "COMPLETED",
+      "workflowName": "Development Wasm conformance"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-14T15:16:07Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38583843961/job/115920451054",
+      "name": "conformance (ubuntu-latest)",
+      "startedAt": "2026-10-14T14:48:46Z",
+      "status": "COMPLETED",
+      "workflowName": "Development Wasm conformance"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-14T15:55:31Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38583843961/job/115953945749",
+      "name": "conformance (windows-latest)",
+      "startedAt": "2026-10-14T15:54:22Z",
+      "status": "COMPLETED",
+      "workflowName": "Development Wasm conformance"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-14T15:07:24Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38583843842/job/115934943598",
+      "name": "desktop (linux, ubuntu-latest, incant_platform_smoke)",
+      "startedAt": "2026-10-14T14:50:58Z",
+      "status": "COMPLETED",
+      "workflowName": "Six platform probes"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-14T15:14:24Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38583843842/job/115934940291",
+      "name": "desktop (macos, macos-latest, incant_platform_smoke)",
+      "startedAt": "2026-10-14T15:00:20Z",
+      "status": "COMPLETED",
+      "workflowName": "Six platform probes"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-14T15:30:00Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38583843823/job/115920452680",
+      "name": "desktop (ubuntu-latest, Linux)",
+      "startedAt": "2026-10-14T14:48:46Z",
+      "status": "COMPLETED",
+      "workflowName": "Desktop editor and engine"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-14T15:06:24Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38583843842/job/115934941352",
+      "name": "desktop (windows, windows-latest, incant_platform_smoke.exe)",
+      "startedAt": "2026-10-14T14:48:46Z",
+      "status": "COMPLETED",
+      "workflowName": "Six platform probes"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-14T16:06:51Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38583843823/job/115920452346",
+      "name": "desktop (windows-latest, Windows, .exe)",
+      "startedAt": "2026-10-14T14:50:23Z",
+      "status": "COMPLETED",
+      "workflowName": "Desktop editor and engine"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-14T15:05:30Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38583843842/job/115934987994",
+      "name": "ios",
+      "startedAt": "2026-10-14T14:53:52Z",
+      "status": "COMPLETED",
+      "workflowName": "Six platform probes"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-14T14:50:57Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38583843813/job/115920450147",
+      "name": "local-service-protocols",
+      "startedAt": "2026-10-14T14:48:46Z",
+      "status": "COMPLETED",
+      "workflowName": "Local service protocols"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-14T15:14:12Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38583843924/job/115920450566",
+      "name": "native (macos-latest)",
+      "startedAt": "2026-10-14T14:53:53Z",
+      "status": "COMPLETED",
+      "workflowName": "Physics candidate feasibility"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-14T15:04:29Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38583843924/job/115920450283",
+      "name": "native (ubuntu-latest)",
+      "startedAt": "2026-10-14T14:48:46Z",
+      "status": "COMPLETED",
+      "workflowName": "Physics candidate feasibility"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-14T15:10:54Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38583843924/job/115920449550",
+      "name": "native (windows-latest)",
+      "startedAt": "2026-10-14T14:48:45Z",
+      "status": "COMPLETED",
+      "workflowName": "Physics candidate feasibility"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-14T15:00:06Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38583843924/job/115920449988",
+      "name": "portability",
+      "startedAt": "2026-10-14T14:53:51Z",
+      "status": "COMPLETED",
+      "workflowName": "Physics candidate feasibility"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-14T15:00:12Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38583843978/job/115920449294",
+      "name": "storage (macos-latest)",
+      "startedAt": "2026-10-14T14:53:54Z",
+      "status": "COMPLETED",
+      "workflowName": "Desktop credential persistence"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-14T14:52:30Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38583843978/job/115920449961",
+      "name": "storage (ubuntu-latest)",
+      "startedAt": "2026-10-14T14:48:46Z",
+      "status": "COMPLETED",
+      "workflowName": "Desktop credential persistence"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-14T14:57:04Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38583843978/job/115920450007",
+      "name": "storage (windows-latest)",
+      "startedAt": "2026-10-14T14:48:46Z",
+      "status": "COMPLETED",
+      "workflowName": "Desktop credential persistence"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-14T14:53:58Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38583843842/job/115935026778",
+      "name": "web",
+      "startedAt": "2026-10-14T14:49:18Z",
+      "status": "COMPLETED",
+      "workflowName": "Six platform probes"
+    }
+  ],
+  "workflows": [
+    {
+      "id": 38583843676,
+      "name": "Website \u00b7 check and deploy",
+      "head_sha": "e7f3d2c1e7118bfbff23402961daa98daa689fc8",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "run_attempt": 1,
+      "html_url": "https://github.com/snowdamiz/incant/actions/runs/38583843676",
+      "created_at": "2026-10-14T14:48:42Z",
+      "updated_at": "2026-10-14T14:50:23Z"
+    },
+    {
+      "id": 38583843813,
+      "name": "Local service protocols",
+      "head_sha": "e7f3d2c1e7118bfbff23402961daa98daa689fc8",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "run_attempt": 1,
+      "html_url": "https://github.com/snowdamiz/incant/actions/runs/38583843813",
+      "created_at": "2026-10-14T14:48:42Z",
+      "updated_at": "2026-10-14T14:50:58Z"
+    },
+    {
+      "id": 38583843978,
+      "name": "Desktop credential persistence",
+      "head_sha": "e7f3d2c1e7118bfbff23402961daa98daa689fc8",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "run_attempt": 1,
+      "html_url": "https://github.com/snowdamiz/incant/actions/runs/38583843978",
+      "created_at": "2026-10-14T14:48:42Z",
+      "updated_at": "2026-10-14T15:00:13Z"
+    },
+    {
+      "id": 38583843924,
+      "name": "Physics candidate feasibility",
+      "head_sha": "e7f3d2c1e7118bfbff23402961daa98daa689fc8",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "run_attempt": 1,
+      "html_url": "https://github.com/snowdamiz/incant/actions/runs/38583843924",
+      "created_at": "2026-10-14T14:48:42Z",
+      "updated_at": "2026-10-14T15:15:06Z"
+    },
+    {
+      "id": 38583843842,
+      "name": "Six platform probes",
+      "head_sha": "e7f3d2c1e7118bfbff23402961daa98daa689fc8",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "run_attempt": 2,
+      "html_url": "https://github.com/snowdamiz/incant/actions/runs/38583843842",
+      "created_at": "2026-10-14T14:48:42Z",
+      "updated_at": "2026-10-14T15:26:39Z"
+    },
+    {
+      "id": 38583843961,
+      "name": "Development Wasm conformance",
+      "head_sha": "e7f3d2c1e7118bfbff23402961daa98daa689fc8",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "run_attempt": 1,
+      "html_url": "https://github.com/snowdamiz/incant/actions/runs/38583843961",
+      "created_at": "2026-10-14T14:48:42Z",
+      "updated_at": "2026-10-14T15:55:32Z"
+    },
+    {
+      "id": 38583844104,
+      "name": "Incant checks",
+      "head_sha": "e7f3d2c1e7118bfbff23402961daa98daa689fc8",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "run_attempt": 1,
+      "html_url": "https://github.com/snowdamiz/incant/actions/runs/38583844104",
+      "created_at": "2026-10-14T14:48:42Z",
+      "updated_at": "2026-10-14T15:53:35Z"
+    },
+    {
+      "id": 38583843823,
+      "name": "Desktop editor and engine",
+      "head_sha": "e7f3d2c1e7118bfbff23402961daa98daa689fc8",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "run_attempt": 1,
+      "html_url": "https://github.com/snowdamiz/incant/actions/runs/38583843823",
+      "created_at": "2026-10-14T14:48:42Z",
+      "updated_at": "2026-10-14T16:06:52Z"
+    }
+  ],
+  "integrated_review": {
+    "at": "2026-10-14T15:57:57.751411+00:00",
+    "candidate": "e7f3d2c1e7118bfbff23402961daa98daa689fc8",
+    "selected_main": "1eca995cb36d9f9cada732dce7d52447569e63ac",
+    "tree": "ebd3daeb1c49eaa289cb083e5656bd71dbdc1dcb",
+    "review": "accepted for checked integration baseline; promotion still requires all exact-head checks",
+    "reviewed_paths": [
+      ".github/workflows/development.yml",
+      "STATUS.md",
+      "crates/incant_game_player/Cargo.toml",
+      "crates/incant_game_runtime/src/host_update.rs",
+      "crates/incant_game_runtime/src/hosted.rs",
+      "crates/incant_game_runtime/src/lib.rs",
+      "crates/incant_play/src/control.rs",
+      "crates/incant_play/src/lib.rs",
+      "crates/incant_play/src/texture_refresh.rs",
+      "crates/incant_play/tests/texture_refresh.rs",
+      "crates/incant_profile/Cargo.toml",
+      "crates/incant_profile/src/diagnostic.rs",
+      "crates/incant_profile/src/diagnostic/storage.rs",
+      "crates/incant_profile/src/diagnostic/tests.rs",
+      "crates/incant_profile/src/enabled.rs",
+      "crates/incant_profile/src/frame.rs",
+      "crates/incant_profile/src/lib.rs",
+      "crates/incant_profile/src/model.rs",
+      "crates/incant_render/src/lib.rs",
+      "crates/incant_render_game/src/lib.rs",
+      "crates/incant_render_game/src/texture_refresh.rs",
+      "crates/incant_render_gpu_host/src/lib.rs",
+      "crates/incant_render_gpu_host/tests/game.rs",
+      "crates/incant_render_gpu_host/tests/game/texture_refresh.rs",
+      "crates/incant_render_native/src/lib.rs",
+      "crates/incant_render_native/src/texture_refresh.rs",
+      "crates/incant_render_native/tests/animation/ik.rs",
+      "crates/incant_render_native/tests/common/allocations.rs",
+      "crates/incant_render_native/tests/texture_refresh.rs",
+      "crates/incant_runtime/Cargo.toml",
+      "crates/incant_runtime/src/columns.rs",
+      "crates/incant_runtime/src/world.rs",
+      "crates/incant_script/Cargo.toml",
+      "crates/incant_script/src/attribution_tests.rs",
+      "crates/incant_script/src/lib.rs",
+      "docs/adr/0014-ci.md",
+      "docs/spikes/core-script-attribution.md",
+      "docs/spikes/evidence/core-script-attribution/manifest.json",
+      "docs/spikes/evidence/core-script-attribution/observations.json",
+      "docs/spikes/evidence/core-script-attribution/verify.py",
+      "docs/spikes/evidence/development-sparse-checkout.json",
+      "docs/spikes/evidence/native-texture-main283-records.json.gz",
+      "docs/spikes/evidence/native-texture-main283.json",
+      "docs/spikes/evidence/native-texture-refresh/artifacts.json.gz",
+      "docs/spikes/evidence/native-texture-refresh/manifest.json",
+      "docs/spikes/evidence/native-texture-refresh/verify.py",
+      "docs/spikes/evidence/navigation-search-cache-shipping/manifest.json",
+      "docs/spikes/evidence/navigation-search-cache-shipping/records.json.gz",
+      "docs/spikes/evidence/navigation-search-cache-shipping/verify.py",
+      "docs/spikes/evidence/ordered-numeric-query-main279.json",
+      "docs/spikes/evidence/ordered-numeric-query-shipping/manifest.json",
+      "docs/spikes/evidence/ordered-numeric-query-shipping/records.json.gz",
+      "docs/spikes/evidence/ordered-numeric-query-shipping/verify.py",
+      "docs/spikes/evidence/release-checkpoint-36.json",
+      "docs/spikes/native-texture-refresh.md",
+      "docs/spikes/navigation-search-cache-outcome.md",
+      "docs/spikes/ordered-numeric-query.md",
+      "docs/spikes/release-checkpoint-36.md",
+      "editor/app/src/main.rs",
+      "editor/app/src/play/mod.rs",
+      "editor/app/src/play/texture_refresh.rs",
+      "editor/app/src/play/worker.rs",
+      "editor/app/src/source_watch.rs",
+      "tools/probes/core-script-attribution/README.md",
+      "tools/probes/core-script-attribution/analyze.py",
+      "tools/probes/core-script-attribution/build.py",
+      "tools/probes/core-script-attribution/collect.py",
+      "tools/probes/core-script-attribution/common.py",
+      "tools/probes/core-script-attribution/test_protocol.py",
+      "tools/tests/test_mac_performance.py"
+    ],
+    "composition": [
+      "PR282 negative ordered-query evidence only; rejected optimization remains outside main.",
+      "PR283 default-off diagnostic call sites compile out; correlated report version distinct and normal shipping readers reject it. Same-frame source/numeric spans do not become extra exclusive totals.",
+      "PR284 texture preparation remains outside authoring locks; revision/session/catalog authority rechecked at publication; displaced and failed owners retire after lock release. Existing runtime-world and script identity retained. Native-window workflow qualification still open.",
+      "PR285 records non-adoption of navigation cache; no production optimization change.",
+      "Sparse development checkout changes only excluded archives; validation commands and complete release checkout remain unchanged."
+    ],
+    "limitations": [
+      "Native-window texture workflow is still unpassed; private source006 is outside candidate.",
+      "Private pointer and renderer experiments are outside candidate.",
+      "This is release baseline review, not phase, visual-quality, shipping performance, signing or distribution approval."
+    ],
+    "all_scoped_prs_previously_reviewed": true
+  },
+  "android_sdk_retry": {
+    "original": {
+      "conclusion": "failure",
+      "headSha": "e7f3d2c1e7118bfbff23402961daa98daa689fc8",
+      "jobs": [
+        {
+          "completedAt": "2026-10-14T14:50:56Z",
+          "conclusion": "failure",
+          "databaseId": 115920453628,
+          "name": "android",
+          "startedAt": "2026-10-14T14:48:46Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-10-14T14:48:52Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-10-14T14:48:47Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:49:29Z",
+              "conclusion": "success",
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 2,
+              "startedAt": "2026-10-14T14:48:52Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:49:30Z",
+              "conclusion": "success",
+              "name": "Run actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3",
+              "number": 3,
+              "startedAt": "2026-10-14T14:49:30Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:49:41Z",
+              "conclusion": "success",
+              "name": "Run gradle/actions/setup-gradle@0b6dd653ba04f4f93bf581ec31e66cbd7dcb644d",
+              "number": 4,
+              "startedAt": "2026-10-14T14:49:30Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:49:52Z",
+              "conclusion": "success",
+              "name": "Run rustup show",
+              "number": 5,
+              "startedAt": "2026-10-14T14:49:41Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:49:58Z",
+              "conclusion": "success",
+              "name": "Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+              "number": 6,
+              "startedAt": "2026-10-14T14:49:52Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:49:58Z",
+              "conclusion": "success",
+              "name": "Select pinned cargo-ndk cache",
+              "number": 7,
+              "startedAt": "2026-10-14T14:49:58Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:49:59Z",
+              "conclusion": "success",
+              "name": "Run actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9",
+              "number": 8,
+              "startedAt": "2026-10-14T14:49:58Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:49:59Z",
+              "conclusion": "success",
+              "name": "Verify or install pinned cargo-ndk",
+              "number": 9,
+              "startedAt": "2026-10-14T14:49:59Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:50:52Z",
+              "conclusion": "failure",
+              "name": "Install SDK components already licensed on the hosted runner",
+              "number": 10,
+              "startedAt": "2026-10-14T14:49:59Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:50:52Z",
+              "conclusion": "skipped",
+              "name": "Run ANDROID_NDK_HOME=\"$ANDROID_HOME/ndk/28.0.13004108\" tools/platforms/android.sh",
+              "number": 11,
+              "startedAt": "2026-10-14T14:50:52Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:50:52Z",
+              "conclusion": "skipped",
+              "name": "Run ANDROID_NDK_HOME=\"$ANDROID_HOME/ndk/28.0.13004108\" cargo ndk -t arm64-v8a check -p incant_audio --features device --locked",
+              "number": 12,
+              "startedAt": "2026-10-14T14:50:52Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:50:52Z",
+              "conclusion": "skipped",
+              "name": "Run cargo check -p incant_runtime --target aarch64-linux-android --locked",
+              "number": 13,
+              "startedAt": "2026-10-14T14:50:52Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:50:52Z",
+              "conclusion": "skipped",
+              "name": "Compile the native QuickJS host for Android",
+              "number": 14,
+              "startedAt": "2026-10-14T14:50:52Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:50:52Z",
+              "conclusion": "skipped",
+              "name": "Execute native probe in a disposable Android emulator",
+              "number": 15,
+              "startedAt": "2026-10-14T14:50:52Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:50:52Z",
+              "conclusion": "failure",
+              "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+              "number": 16,
+              "startedAt": "2026-10-14T14:50:52Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:50:52Z",
+              "conclusion": "skipped",
+              "name": "Run actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9",
+              "number": 17,
+              "startedAt": "2026-10-14T14:50:52Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:50:52Z",
+              "conclusion": "skipped",
+              "name": "Post Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+              "number": 31,
+              "startedAt": "2026-10-14T14:50:52Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:50:52Z",
+              "conclusion": "success",
+              "name": "Post Run gradle/actions/setup-gradle@0b6dd653ba04f4f93bf581ec31e66cbd7dcb644d",
+              "number": 32,
+              "startedAt": "2026-10-14T14:50:52Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:50:52Z",
+              "conclusion": "success",
+              "name": "Post Run actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3",
+              "number": 33,
+              "startedAt": "2026-10-14T14:50:52Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:50:52Z",
+              "conclusion": "success",
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 34,
+              "startedAt": "2026-10-14T14:50:52Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:50:53Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 35,
+              "startedAt": "2026-10-14T14:50:52Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/snowdamiz/incant/actions/runs/38583843842/job/115920453628"
+        },
+        {
+          "completedAt": "2026-10-14T15:14:24Z",
+          "conclusion": "success",
+          "databaseId": 115920453923,
+          "name": "desktop (macos, macos-latest, incant_platform_smoke)",
+          "startedAt": "2026-10-14T15:00:20Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-10-14T15:00:23Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-10-14T15:00:22Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:01:15Z",
+              "conclusion": "success",
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 2,
+              "startedAt": "2026-10-14T15:00:23Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:01:25Z",
+              "conclusion": "success",
+              "name": "Run rustup show",
+              "number": 3,
+              "startedAt": "2026-10-14T15:01:15Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:01:37Z",
+              "conclusion": "success",
+              "name": "Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+              "number": 4,
+              "startedAt": "2026-10-14T15:01:25Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:04:38Z",
+              "conclusion": "success",
+              "name": "Run cargo build -p incant_platform_smoke --release --locked",
+              "number": 5,
+              "startedAt": "2026-10-14T15:01:37Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:14:12Z",
+              "conclusion": "success",
+              "name": "Run cargo test -p incant_runtime -p incant_cook --release --locked",
+              "number": 6,
+              "startedAt": "2026-10-14T15:04:38Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:14:12Z",
+              "conclusion": "success",
+              "name": "Run target/release/incant_platform_smoke | tee smoke.json",
+              "number": 7,
+              "startedAt": "2026-10-14T15:14:12Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:14:15Z",
+              "conclusion": "success",
+              "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+              "number": 8,
+              "startedAt": "2026-10-14T15:14:12Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:14:15Z",
+              "conclusion": "success",
+              "name": "Post Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+              "number": 15,
+              "startedAt": "2026-10-14T15:14:15Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:14:16Z",
+              "conclusion": "success",
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 16,
+              "startedAt": "2026-10-14T15:14:15Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:14:22Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 17,
+              "startedAt": "2026-10-14T15:14:16Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/snowdamiz/incant/actions/runs/38583843842/job/115920453923"
+        },
+        {
+          "completedAt": "2026-10-14T15:06:24Z",
+          "conclusion": "success",
+          "databaseId": 115920453974,
+          "name": "desktop (windows, windows-latest, incant_platform_smoke.exe)",
+          "startedAt": "2026-10-14T14:48:46Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-10-14T14:48:48Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-10-14T14:48:46Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:49:28Z",
+              "conclusion": "success",
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 2,
+              "startedAt": "2026-10-14T14:48:48Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:49:44Z",
+              "conclusion": "success",
+              "name": "Run rustup show",
+              "number": 3,
+              "startedAt": "2026-10-14T14:49:28Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:50:11Z",
+              "conclusion": "success",
+              "name": "Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+              "number": 4,
+              "startedAt": "2026-10-14T14:49:44Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:53:36Z",
+              "conclusion": "success",
+              "name": "Run cargo build -p incant_platform_smoke --release --locked",
+              "number": 5,
+              "startedAt": "2026-10-14T14:50:11Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:05:33Z",
+              "conclusion": "success",
+              "name": "Run cargo test -p incant_runtime -p incant_cook --release --locked",
+              "number": 6,
+              "startedAt": "2026-10-14T14:53:36Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:05:34Z",
+              "conclusion": "success",
+              "name": "Run target/release/incant_platform_smoke.exe | tee smoke.json",
+              "number": 7,
+              "startedAt": "2026-10-14T15:05:33Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:05:36Z",
+              "conclusion": "success",
+              "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+              "number": 8,
+              "startedAt": "2026-10-14T15:05:34Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:06:21Z",
+              "conclusion": "success",
+              "name": "Post Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+              "number": 15,
+              "startedAt": "2026-10-14T15:05:36Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:06:23Z",
+              "conclusion": "success",
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 16,
+              "startedAt": "2026-10-14T15:06:21Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:06:23Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 17,
+              "startedAt": "2026-10-14T15:06:23Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/snowdamiz/incant/actions/runs/38583843842/job/115920453974"
+        },
+        {
+          "completedAt": "2026-10-14T14:53:58Z",
+          "conclusion": "success",
+          "databaseId": 115920454188,
+          "name": "web",
+          "startedAt": "2026-10-14T14:49:18Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-10-14T14:49:20Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-10-14T14:49:19Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:49:44Z",
+              "conclusion": "success",
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 2,
+              "startedAt": "2026-10-14T14:49:20Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:49:45Z",
+              "conclusion": "success",
+              "name": "Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+              "number": 3,
+              "startedAt": "2026-10-14T14:49:44Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:49:50Z",
+              "conclusion": "success",
+              "name": "Run ./.github/actions/npm-cache",
+              "number": 4,
+              "startedAt": "2026-10-14T14:49:45Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:49:58Z",
+              "conclusion": "success",
+              "name": "Run npm ci",
+              "number": 5,
+              "startedAt": "2026-10-14T14:49:50Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:50:10Z",
+              "conclusion": "success",
+              "name": "Run rustup show",
+              "number": 6,
+              "startedAt": "2026-10-14T14:49:58Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:50:16Z",
+              "conclusion": "success",
+              "name": "Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+              "number": 7,
+              "startedAt": "2026-10-14T14:50:10Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:50:16Z",
+              "conclusion": "success",
+              "name": "Select pinned wasm-bindgen cache",
+              "number": 8,
+              "startedAt": "2026-10-14T14:50:16Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:50:17Z",
+              "conclusion": "success",
+              "name": "Run actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9",
+              "number": 9,
+              "startedAt": "2026-10-14T14:50:16Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:50:17Z",
+              "conclusion": "success",
+              "name": "Verify or install pinned wasm-bindgen",
+              "number": 10,
+              "startedAt": "2026-10-14T14:50:17Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:52:10Z",
+              "conclusion": "success",
+              "name": "Run tools/platforms/web.sh",
+              "number": 11,
+              "startedAt": "2026-10-14T14:50:17Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:52:46Z",
+              "conclusion": "success",
+              "name": "Run cargo check -p incant_audio --target wasm32-unknown-unknown --locked",
+              "number": 12,
+              "startedAt": "2026-10-14T14:52:10Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:53:02Z",
+              "conclusion": "success",
+              "name": "Run cargo check -p incant_runtime --target wasm32-unknown-unknown --locked",
+              "number": 13,
+              "startedAt": "2026-10-14T14:52:46Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:53:22Z",
+              "conclusion": "success",
+              "name": "Run cargo check -p incant_render --lib --target wasm32-unknown-unknown --locked",
+              "number": 14,
+              "startedAt": "2026-10-14T14:53:02Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:53:48Z",
+              "conclusion": "success",
+              "name": "Run node_modules/.bin/playwright-core install --with-deps chromium",
+              "number": 15,
+              "startedAt": "2026-10-14T14:53:22Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:53:48Z",
+              "conclusion": "success",
+              "name": "Run python3 -m http.server 4188 --bind 127.0.0.1 --directory artifacts/web > /tmp/incant-web.log 2>&1 &",
+              "number": 16,
+              "startedAt": "2026-10-14T14:53:48Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:53:49Z",
+              "conclusion": "success",
+              "name": "Run node tools/platforms/web-check.mjs",
+              "number": 17,
+              "startedAt": "2026-10-14T14:53:48Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:53:51Z",
+              "conclusion": "success",
+              "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+              "number": 18,
+              "startedAt": "2026-10-14T14:53:49Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:53:51Z",
+              "conclusion": "skipped",
+              "name": "Run actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9",
+              "number": 19,
+              "startedAt": "2026-10-14T14:53:51Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:53:56Z",
+              "conclusion": "success",
+              "name": "Post Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+              "number": 35,
+              "startedAt": "2026-10-14T14:53:51Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:53:56Z",
+              "conclusion": "success",
+              "name": "Post Run ./.github/actions/npm-cache",
+              "number": 36,
+              "startedAt": "2026-10-14T14:53:56Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:53:57Z",
+              "conclusion": "success",
+              "name": "Post Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+              "number": 37,
+              "startedAt": "2026-10-14T14:53:56Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:53:57Z",
+              "conclusion": "success",
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 38,
+              "startedAt": "2026-10-14T14:53:57Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:53:57Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 39,
+              "startedAt": "2026-10-14T14:53:57Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/snowdamiz/incant/actions/runs/38583843842/job/115920454188"
+        },
+        {
+          "completedAt": "2026-10-14T15:07:24Z",
+          "conclusion": "success",
+          "databaseId": 115920454286,
+          "name": "desktop (linux, ubuntu-latest, incant_platform_smoke)",
+          "startedAt": "2026-10-14T14:50:58Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-10-14T14:51:02Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-10-14T14:51:00Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:51:46Z",
+              "conclusion": "success",
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 2,
+              "startedAt": "2026-10-14T14:51:02Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:52:01Z",
+              "conclusion": "success",
+              "name": "Run rustup show",
+              "number": 3,
+              "startedAt": "2026-10-14T14:51:46Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:52:11Z",
+              "conclusion": "success",
+              "name": "Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+              "number": 4,
+              "startedAt": "2026-10-14T14:52:01Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:55:29Z",
+              "conclusion": "success",
+              "name": "Run cargo build -p incant_platform_smoke --release --locked",
+              "number": 5,
+              "startedAt": "2026-10-14T14:52:11Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:07:06Z",
+              "conclusion": "success",
+              "name": "Run cargo test -p incant_runtime -p incant_cook --release --locked",
+              "number": 6,
+              "startedAt": "2026-10-14T14:55:29Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:07:06Z",
+              "conclusion": "success",
+              "name": "Run target/release/incant_platform_smoke | tee smoke.json",
+              "number": 7,
+              "startedAt": "2026-10-14T15:07:06Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:07:10Z",
+              "conclusion": "success",
+              "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+              "number": 8,
+              "startedAt": "2026-10-14T15:07:06Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:07:21Z",
+              "conclusion": "success",
+              "name": "Post Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+              "number": 15,
+              "startedAt": "2026-10-14T15:07:10Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:07:21Z",
+              "conclusion": "success",
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 16,
+              "startedAt": "2026-10-14T15:07:21Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:07:21Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 17,
+              "startedAt": "2026-10-14T15:07:21Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/snowdamiz/incant/actions/runs/38583843842/job/115920454286"
+        },
+        {
+          "completedAt": "2026-10-14T15:05:30Z",
+          "conclusion": "success",
+          "databaseId": 115920454435,
+          "name": "ios",
+          "startedAt": "2026-10-14T14:53:52Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-10-14T14:53:55Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-10-14T14:53:53Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:55:01Z",
+              "conclusion": "success",
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 2,
+              "startedAt": "2026-10-14T14:53:55Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:55:14Z",
+              "conclusion": "success",
+              "name": "Run rustup show",
+              "number": 3,
+              "startedAt": "2026-10-14T14:55:01Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:55:34Z",
+              "conclusion": "success",
+              "name": "Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+              "number": 4,
+              "startedAt": "2026-10-14T14:55:14Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:57:26Z",
+              "conclusion": "success",
+              "name": "Run tools/platforms/ios.sh simulator",
+              "number": 5,
+              "startedAt": "2026-10-14T14:55:34Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:57:47Z",
+              "conclusion": "success",
+              "name": "Run cargo check -p incant_audio --features device --target aarch64-apple-ios-sim --locked",
+              "number": 6,
+              "startedAt": "2026-10-14T14:57:26Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:58:05Z",
+              "conclusion": "success",
+              "name": "Run cargo check -p incant_runtime --target aarch64-apple-ios-sim --locked",
+              "number": 7,
+              "startedAt": "2026-10-14T14:57:47Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:58:36Z",
+              "conclusion": "success",
+              "name": "Run cargo check -p incant_script --target aarch64-apple-ios-sim --locked",
+              "number": 8,
+              "startedAt": "2026-10-14T14:58:05Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:04:38Z",
+              "conclusion": "success",
+              "name": "Run python3 tools/platforms/ios-check.py",
+              "number": 9,
+              "startedAt": "2026-10-14T14:58:36Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:04:41Z",
+              "conclusion": "success",
+              "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+              "number": 10,
+              "startedAt": "2026-10-14T15:04:38Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:05:21Z",
+              "conclusion": "success",
+              "name": "Post Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+              "number": 19,
+              "startedAt": "2026-10-14T15:04:41Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:05:23Z",
+              "conclusion": "success",
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 20,
+              "startedAt": "2026-10-14T15:05:21Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:05:27Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 21,
+              "startedAt": "2026-10-14T15:05:23Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/snowdamiz/incant/actions/runs/38583843842/job/115920454435"
+        }
+      ],
+      "status": "completed"
+    },
+    "retry_receipt": {
+      "created_utc": "2026-10-14T15:17:04.147514+00:00",
+      "candidate": "e7f3d2c1e7118bfbff23402961daa98daa689fc8",
+      "run": 38583843842,
+      "failed_job": 115920453628,
+      "original_terminal_sha256": "16ac2183c2707f46fbfe709fd245df344c7806bec816fbec605f0b5f32cab625",
+      "reason": "SDK manager downloaded invalid Google APIs x86_64 API35 zip before engine compilation; retry this failed job once without changing the frozen candidate.",
+      "command": [
+        "gh",
+        "run",
+        "rerun",
+        "38583843842",
+        "--job",
+        "115920453628"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "promotion": "not permitted until every required exact-head context and workflow actually succeeds"
+    },
+    "latest": {
+      "attempt": 2,
+      "conclusion": "success",
+      "headSha": "e7f3d2c1e7118bfbff23402961daa98daa689fc8",
+      "jobs": [
+        {
+          "completedAt": "2026-10-14T15:26:38Z",
+          "conclusion": "success",
+          "databaseId": 115934937703,
+          "name": "android",
+          "startedAt": "2026-10-14T15:17:08Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-10-14T15:17:12Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-10-14T15:17:09Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:17:48Z",
+              "conclusion": "success",
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 2,
+              "startedAt": "2026-10-14T15:17:12Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:17:49Z",
+              "conclusion": "success",
+              "name": "Run actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3",
+              "number": 3,
+              "startedAt": "2026-10-14T15:17:48Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:18:02Z",
+              "conclusion": "success",
+              "name": "Run gradle/actions/setup-gradle@0b6dd653ba04f4f93bf581ec31e66cbd7dcb644d",
+              "number": 4,
+              "startedAt": "2026-10-14T15:17:49Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:18:13Z",
+              "conclusion": "success",
+              "name": "Run rustup show",
+              "number": 5,
+              "startedAt": "2026-10-14T15:18:02Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:18:18Z",
+              "conclusion": "success",
+              "name": "Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+              "number": 6,
+              "startedAt": "2026-10-14T15:18:13Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:18:18Z",
+              "conclusion": "success",
+              "name": "Select pinned cargo-ndk cache",
+              "number": 7,
+              "startedAt": "2026-10-14T15:18:18Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:18:19Z",
+              "conclusion": "success",
+              "name": "Run actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9",
+              "number": 8,
+              "startedAt": "2026-10-14T15:18:18Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:18:19Z",
+              "conclusion": "success",
+              "name": "Verify or install pinned cargo-ndk",
+              "number": 9,
+              "startedAt": "2026-10-14T15:18:19Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:19:17Z",
+              "conclusion": "success",
+              "name": "Install SDK components already licensed on the hosted runner",
+              "number": 10,
+              "startedAt": "2026-10-14T15:18:19Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:23:40Z",
+              "conclusion": "success",
+              "name": "Run ANDROID_NDK_HOME=\"$ANDROID_HOME/ndk/28.0.13004108\" tools/platforms/android.sh",
+              "number": 11,
+              "startedAt": "2026-10-14T15:19:17Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:24:32Z",
+              "conclusion": "success",
+              "name": "Run ANDROID_NDK_HOME=\"$ANDROID_HOME/ndk/28.0.13004108\" cargo ndk -t arm64-v8a check -p incant_audio --features device --locked",
+              "number": 12,
+              "startedAt": "2026-10-14T15:23:40Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:24:59Z",
+              "conclusion": "success",
+              "name": "Run cargo check -p incant_runtime --target aarch64-linux-android --locked",
+              "number": 13,
+              "startedAt": "2026-10-14T15:24:32Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:25:37Z",
+              "conclusion": "success",
+              "name": "Compile the native QuickJS host for Android",
+              "number": 14,
+              "startedAt": "2026-10-14T15:24:59Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:26:32Z",
+              "conclusion": "success",
+              "name": "Execute native probe in a disposable Android emulator",
+              "number": 15,
+              "startedAt": "2026-10-14T15:25:37Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:26:34Z",
+              "conclusion": "success",
+              "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+              "number": 16,
+              "startedAt": "2026-10-14T15:26:32Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:26:34Z",
+              "conclusion": "skipped",
+              "name": "Run actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9",
+              "number": 17,
+              "startedAt": "2026-10-14T15:26:34Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:26:34Z",
+              "conclusion": "success",
+              "name": "Post Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+              "number": 31,
+              "startedAt": "2026-10-14T15:26:34Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:26:34Z",
+              "conclusion": "success",
+              "name": "Post Run gradle/actions/setup-gradle@0b6dd653ba04f4f93bf581ec31e66cbd7dcb644d",
+              "number": 32,
+              "startedAt": "2026-10-14T15:26:34Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:26:35Z",
+              "conclusion": "success",
+              "name": "Post Run actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3",
+              "number": 33,
+              "startedAt": "2026-10-14T15:26:34Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:26:35Z",
+              "conclusion": "success",
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 34,
+              "startedAt": "2026-10-14T15:26:35Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:26:35Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 35,
+              "startedAt": "2026-10-14T15:26:35Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/snowdamiz/incant/actions/runs/38583843842/job/115934937703"
+        },
+        {
+          "completedAt": "2026-10-14T15:14:24Z",
+          "conclusion": "success",
+          "databaseId": 115934940291,
+          "name": "desktop (macos, macos-latest, incant_platform_smoke)",
+          "startedAt": "2026-10-14T15:00:20Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-10-14T15:00:23Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-10-14T15:00:22Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:01:15Z",
+              "conclusion": "success",
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 2,
+              "startedAt": "2026-10-14T15:00:23Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:01:25Z",
+              "conclusion": "success",
+              "name": "Run rustup show",
+              "number": 3,
+              "startedAt": "2026-10-14T15:01:15Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:01:37Z",
+              "conclusion": "success",
+              "name": "Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+              "number": 4,
+              "startedAt": "2026-10-14T15:01:25Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:04:38Z",
+              "conclusion": "success",
+              "name": "Run cargo build -p incant_platform_smoke --release --locked",
+              "number": 5,
+              "startedAt": "2026-10-14T15:01:37Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:14:12Z",
+              "conclusion": "success",
+              "name": "Run cargo test -p incant_runtime -p incant_cook --release --locked",
+              "number": 6,
+              "startedAt": "2026-10-14T15:04:38Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:14:12Z",
+              "conclusion": "success",
+              "name": "Run target/release/incant_platform_smoke | tee smoke.json",
+              "number": 7,
+              "startedAt": "2026-10-14T15:14:12Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:14:15Z",
+              "conclusion": "success",
+              "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+              "number": 8,
+              "startedAt": "2026-10-14T15:14:12Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:14:15Z",
+              "conclusion": "success",
+              "name": "Post Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+              "number": 15,
+              "startedAt": "2026-10-14T15:14:15Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:14:16Z",
+              "conclusion": "success",
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 16,
+              "startedAt": "2026-10-14T15:14:15Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:14:22Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 17,
+              "startedAt": "2026-10-14T15:14:16Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/snowdamiz/incant/actions/runs/38583843842/job/115934940291"
+        },
+        {
+          "completedAt": "2026-10-14T15:06:24Z",
+          "conclusion": "success",
+          "databaseId": 115934941352,
+          "name": "desktop (windows, windows-latest, incant_platform_smoke.exe)",
+          "startedAt": "2026-10-14T14:48:46Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-10-14T14:48:48Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-10-14T14:48:46Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:49:28Z",
+              "conclusion": "success",
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 2,
+              "startedAt": "2026-10-14T14:48:48Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:49:44Z",
+              "conclusion": "success",
+              "name": "Run rustup show",
+              "number": 3,
+              "startedAt": "2026-10-14T14:49:28Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:50:11Z",
+              "conclusion": "success",
+              "name": "Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+              "number": 4,
+              "startedAt": "2026-10-14T14:49:44Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:53:36Z",
+              "conclusion": "success",
+              "name": "Run cargo build -p incant_platform_smoke --release --locked",
+              "number": 5,
+              "startedAt": "2026-10-14T14:50:11Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:05:33Z",
+              "conclusion": "success",
+              "name": "Run cargo test -p incant_runtime -p incant_cook --release --locked",
+              "number": 6,
+              "startedAt": "2026-10-14T14:53:36Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:05:34Z",
+              "conclusion": "success",
+              "name": "Run target/release/incant_platform_smoke.exe | tee smoke.json",
+              "number": 7,
+              "startedAt": "2026-10-14T15:05:33Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:05:36Z",
+              "conclusion": "success",
+              "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+              "number": 8,
+              "startedAt": "2026-10-14T15:05:34Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:06:21Z",
+              "conclusion": "success",
+              "name": "Post Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+              "number": 15,
+              "startedAt": "2026-10-14T15:05:36Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:06:23Z",
+              "conclusion": "success",
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 16,
+              "startedAt": "2026-10-14T15:06:21Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:06:23Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 17,
+              "startedAt": "2026-10-14T15:06:23Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/snowdamiz/incant/actions/runs/38583843842/job/115934941352"
+        },
+        {
+          "completedAt": "2026-10-14T15:07:24Z",
+          "conclusion": "success",
+          "databaseId": 115934943598,
+          "name": "desktop (linux, ubuntu-latest, incant_platform_smoke)",
+          "startedAt": "2026-10-14T14:50:58Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-10-14T14:51:02Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-10-14T14:51:00Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:51:46Z",
+              "conclusion": "success",
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 2,
+              "startedAt": "2026-10-14T14:51:02Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:52:01Z",
+              "conclusion": "success",
+              "name": "Run rustup show",
+              "number": 3,
+              "startedAt": "2026-10-14T14:51:46Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:52:11Z",
+              "conclusion": "success",
+              "name": "Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+              "number": 4,
+              "startedAt": "2026-10-14T14:52:01Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:55:29Z",
+              "conclusion": "success",
+              "name": "Run cargo build -p incant_platform_smoke --release --locked",
+              "number": 5,
+              "startedAt": "2026-10-14T14:52:11Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:07:06Z",
+              "conclusion": "success",
+              "name": "Run cargo test -p incant_runtime -p incant_cook --release --locked",
+              "number": 6,
+              "startedAt": "2026-10-14T14:55:29Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:07:06Z",
+              "conclusion": "success",
+              "name": "Run target/release/incant_platform_smoke | tee smoke.json",
+              "number": 7,
+              "startedAt": "2026-10-14T15:07:06Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:07:10Z",
+              "conclusion": "success",
+              "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+              "number": 8,
+              "startedAt": "2026-10-14T15:07:06Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:07:21Z",
+              "conclusion": "success",
+              "name": "Post Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+              "number": 15,
+              "startedAt": "2026-10-14T15:07:10Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:07:21Z",
+              "conclusion": "success",
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 16,
+              "startedAt": "2026-10-14T15:07:21Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:07:21Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 17,
+              "startedAt": "2026-10-14T15:07:21Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/snowdamiz/incant/actions/runs/38583843842/job/115934943598"
+        },
+        {
+          "completedAt": "2026-10-14T15:05:30Z",
+          "conclusion": "success",
+          "databaseId": 115934987994,
+          "name": "ios",
+          "startedAt": "2026-10-14T14:53:52Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-10-14T14:53:55Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-10-14T14:53:53Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:55:01Z",
+              "conclusion": "success",
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 2,
+              "startedAt": "2026-10-14T14:53:55Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:55:14Z",
+              "conclusion": "success",
+              "name": "Run rustup show",
+              "number": 3,
+              "startedAt": "2026-10-14T14:55:01Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:55:34Z",
+              "conclusion": "success",
+              "name": "Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+              "number": 4,
+              "startedAt": "2026-10-14T14:55:14Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:57:26Z",
+              "conclusion": "success",
+              "name": "Run tools/platforms/ios.sh simulator",
+              "number": 5,
+              "startedAt": "2026-10-14T14:55:34Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:57:47Z",
+              "conclusion": "success",
+              "name": "Run cargo check -p incant_audio --features device --target aarch64-apple-ios-sim --locked",
+              "number": 6,
+              "startedAt": "2026-10-14T14:57:26Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:58:05Z",
+              "conclusion": "success",
+              "name": "Run cargo check -p incant_runtime --target aarch64-apple-ios-sim --locked",
+              "number": 7,
+              "startedAt": "2026-10-14T14:57:47Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:58:36Z",
+              "conclusion": "success",
+              "name": "Run cargo check -p incant_script --target aarch64-apple-ios-sim --locked",
+              "number": 8,
+              "startedAt": "2026-10-14T14:58:05Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:04:38Z",
+              "conclusion": "success",
+              "name": "Run python3 tools/platforms/ios-check.py",
+              "number": 9,
+              "startedAt": "2026-10-14T14:58:36Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:04:41Z",
+              "conclusion": "success",
+              "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+              "number": 10,
+              "startedAt": "2026-10-14T15:04:38Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:05:21Z",
+              "conclusion": "success",
+              "name": "Post Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+              "number": 19,
+              "startedAt": "2026-10-14T15:04:41Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:05:23Z",
+              "conclusion": "success",
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 20,
+              "startedAt": "2026-10-14T15:05:21Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T15:05:27Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 21,
+              "startedAt": "2026-10-14T15:05:23Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/snowdamiz/incant/actions/runs/38583843842/job/115934987994"
+        },
+        {
+          "completedAt": "2026-10-14T14:53:58Z",
+          "conclusion": "success",
+          "databaseId": 115935026778,
+          "name": "web",
+          "startedAt": "2026-10-14T14:49:18Z",
+          "status": "completed",
+          "steps": [
+            {
+              "completedAt": "2026-10-14T14:49:20Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "startedAt": "2026-10-14T14:49:19Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:49:44Z",
+              "conclusion": "success",
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 2,
+              "startedAt": "2026-10-14T14:49:20Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:49:45Z",
+              "conclusion": "success",
+              "name": "Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+              "number": 3,
+              "startedAt": "2026-10-14T14:49:44Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:49:50Z",
+              "conclusion": "success",
+              "name": "Run ./.github/actions/npm-cache",
+              "number": 4,
+              "startedAt": "2026-10-14T14:49:45Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:49:58Z",
+              "conclusion": "success",
+              "name": "Run npm ci",
+              "number": 5,
+              "startedAt": "2026-10-14T14:49:50Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:50:10Z",
+              "conclusion": "success",
+              "name": "Run rustup show",
+              "number": 6,
+              "startedAt": "2026-10-14T14:49:58Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:50:16Z",
+              "conclusion": "success",
+              "name": "Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+              "number": 7,
+              "startedAt": "2026-10-14T14:50:10Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:50:16Z",
+              "conclusion": "success",
+              "name": "Select pinned wasm-bindgen cache",
+              "number": 8,
+              "startedAt": "2026-10-14T14:50:16Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:50:17Z",
+              "conclusion": "success",
+              "name": "Run actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9",
+              "number": 9,
+              "startedAt": "2026-10-14T14:50:16Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:50:17Z",
+              "conclusion": "success",
+              "name": "Verify or install pinned wasm-bindgen",
+              "number": 10,
+              "startedAt": "2026-10-14T14:50:17Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:52:10Z",
+              "conclusion": "success",
+              "name": "Run tools/platforms/web.sh",
+              "number": 11,
+              "startedAt": "2026-10-14T14:50:17Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:52:46Z",
+              "conclusion": "success",
+              "name": "Run cargo check -p incant_audio --target wasm32-unknown-unknown --locked",
+              "number": 12,
+              "startedAt": "2026-10-14T14:52:10Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:53:02Z",
+              "conclusion": "success",
+              "name": "Run cargo check -p incant_runtime --target wasm32-unknown-unknown --locked",
+              "number": 13,
+              "startedAt": "2026-10-14T14:52:46Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:53:22Z",
+              "conclusion": "success",
+              "name": "Run cargo check -p incant_render --lib --target wasm32-unknown-unknown --locked",
+              "number": 14,
+              "startedAt": "2026-10-14T14:53:02Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:53:48Z",
+              "conclusion": "success",
+              "name": "Run node_modules/.bin/playwright-core install --with-deps chromium",
+              "number": 15,
+              "startedAt": "2026-10-14T14:53:22Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:53:48Z",
+              "conclusion": "success",
+              "name": "Run python3 -m http.server 4188 --bind 127.0.0.1 --directory artifacts/web > /tmp/incant-web.log 2>&1 &",
+              "number": 16,
+              "startedAt": "2026-10-14T14:53:48Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:53:49Z",
+              "conclusion": "success",
+              "name": "Run node tools/platforms/web-check.mjs",
+              "number": 17,
+              "startedAt": "2026-10-14T14:53:48Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:53:51Z",
+              "conclusion": "success",
+              "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+              "number": 18,
+              "startedAt": "2026-10-14T14:53:49Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:53:51Z",
+              "conclusion": "skipped",
+              "name": "Run actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9",
+              "number": 19,
+              "startedAt": "2026-10-14T14:53:51Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:53:56Z",
+              "conclusion": "success",
+              "name": "Post Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+              "number": 35,
+              "startedAt": "2026-10-14T14:53:51Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:53:56Z",
+              "conclusion": "success",
+              "name": "Post Run ./.github/actions/npm-cache",
+              "number": 36,
+              "startedAt": "2026-10-14T14:53:56Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:53:57Z",
+              "conclusion": "success",
+              "name": "Post Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+              "number": 37,
+              "startedAt": "2026-10-14T14:53:56Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:53:57Z",
+              "conclusion": "success",
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 38,
+              "startedAt": "2026-10-14T14:53:57Z",
+              "status": "completed"
+            },
+            {
+              "completedAt": "2026-10-14T14:53:57Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 39,
+              "startedAt": "2026-10-14T14:53:57Z",
+              "status": "completed"
+            }
+          ],
+          "url": "https://github.com/snowdamiz/incant/actions/runs/38583843842/job/115935026778"
+        }
+      ],
+      "status": "completed"
+    }
+  },
+  "policy": {
+    "required_contexts_unchanged": true,
+    "required_context_count": 23,
+    "jobs": 28,
+    "success_jobs": 27,
+    "only_nonrequired_skipped": [
+      "Website / deploy"
+    ]
+  },
+  "retained_external_packet": {
+    "directory": "/Users/andreyyurlov/.codex/incant-integration-evidence/checkpoint37",
+    "records": [
+      {
+        "name": "android-failed.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "name": "android-failure-diagnosis.json",
+        "sha256": "bf39692658d776107943cab4d9564cad0a41370991feaacc282162bb4e4a138f",
+        "bytes": 629
+      },
+      {
+        "name": "android-job.log",
+        "sha256": "e0afe7c13f716bca04cf7e399f62499c67ad12c83d3d4eea6b67b184afa5b027",
+        "bytes": 58255
+      },
+      {
+        "name": "android-retry-once.json",
+        "sha256": "f3ffaf0ae3bf78da5c4ef7fc2ec48f66ef7135b1f206bf88d607051687fc24de",
+        "bytes": 686
+      },
+      {
+        "name": "attachment-result.json",
+        "sha256": "f75ed7fb967d09fb869e59b59835408e074a30f8ac4bcb04d28036a77f984682",
+        "bytes": 145
+      },
+      {
+        "name": "desktop-1605.json",
+        "sha256": "909e2653e0274a7671fba9b8bd5d24a2efa6cfc7d53fb034c423e6190d052dee",
+        "bytes": 24348
+      },
+      {
+        "name": "freeze.py",
+        "sha256": "0f41b99c05f364efe7a31786d0d6b3312c480f2c6cbf329717883f01be5fd9b6",
+        "bytes": 4633
+      },
+      {
+        "name": "integrated-review.json",
+        "sha256": "20a5874d176837e5daff57dc57f3de5b15b00d07ff94e8fe8a410b290e996a48",
+        "bytes": 5135
+      },
+      {
+        "name": "jobs-38583843676.json",
+        "sha256": "6601f41e0c194d72a4f6c9cb635d359916ce52d8c2772c659173392f0449e461",
+        "bytes": 4149
+      },
+      {
+        "name": "jobs-38583843813.json",
+        "sha256": "158101ea8b3da59488ac185739d43d69f32bc89b6c30304f7f3a5bbab0802a76",
+        "bytes": 2454
+      },
+      {
+        "name": "jobs-38583843823.json",
+        "sha256": "b5e7f6ff5bfeb43cb2e54a14baa3c76f29f1c34316e2bdc049c8c481cd533bf7",
+        "bytes": 26287
+      },
+      {
+        "name": "jobs-38583843842.json",
+        "sha256": "7e8b980cea15b772c8431d3ab54853d21919f6f5fcfbee367dbcb280a6d336df",
+        "bytes": 23409
+      },
+      {
+        "name": "jobs-38583843924.json",
+        "sha256": "bb582104023cde2efab0c055fc66e37c99d22393d2724e001cca9b4c506712a7",
+        "bytes": 27988
+      },
+      {
+        "name": "jobs-38583843961.json",
+        "sha256": "fd63d3ceaa94f067b173e55bec19a92d8287feaf6e099ab3b8c5c28a8422b3b4",
+        "bytes": 25530
+      },
+      {
+        "name": "jobs-38583843978.json",
+        "sha256": "29381a38067f68388a6a5313f1e1c42bb9f5f6bb78e243b484856e3887853167",
+        "bytes": 12101
+      },
+      {
+        "name": "jobs-38583844104.json",
+        "sha256": "f0f3a3dfd678f77353985ef0207ce7253be841f85a172e215b59c26bc4b4ee6f",
+        "bytes": 19192
+      },
+      {
+        "name": "manifest.json",
+        "sha256": "186a5262cee58bdcb64a9159f1c5ec0a19795d84026b72019a0cf66f40472267",
+        "bytes": 1262
+      },
+      {
+        "name": "merge-body.txt",
+        "sha256": "81c88555c18774e56fd2f33d18f2929f2a8aae6597921979e25c8c6e05e9f042",
+        "bytes": 702
+      },
+      {
+        "name": "pr-body.md",
+        "sha256": "d0233d16b4f0905e3864ed7a1c4da4176a8e0fc0d5e65b8e26ea28772a2ad60c",
+        "bytes": 1328
+      },
+      {
+        "name": "pr-final.json",
+        "sha256": "113e63b893a426c489d211c2bd3af9507b65f87f19f800149ddf478567df7e6b",
+        "bytes": 8975
+      },
+      {
+        "name": "pr-promoted.json",
+        "sha256": "9a37690ad6fecb1704e26d4f837516f873797ee6ad4a361f9d1f0882c684bf5a",
+        "bytes": 251
+      },
+      {
+        "name": "prepare-promotion.py",
+        "sha256": "6da9aee9f06f4066d5dd4b064e784ff1c4820f332088e0951b58948feda167e6",
+        "bytes": 5275
+      },
+      {
+        "name": "prepromotion.json",
+        "sha256": "9b07667fdb3165c6e3ae7576d6148ad2e82f181cecbd57e456adf34c49b11d6f",
+        "bytes": 4737
+      },
+      {
+        "name": "promotion.json",
+        "sha256": "b57fdc36d96bb733a4afd465ea886a2a08490cc0b16125e00f08038d33e79180",
+        "bytes": 1245
+      },
+      {
+        "name": "protection-final.json",
+        "sha256": "09fa0f6fed923b02c858824b316c8f29f45a20cb001a634685b60a1332218058",
+        "bytes": 3015
+      },
+      {
+        "name": "protection.json",
+        "sha256": "5c904412bdd5bb66a2b99566fb8ee8737be1207963224c1a7b33a8ef08d74057",
+        "bytes": 4177
+      },
+      {
+        "name": "release-to-main.stat",
+        "sha256": "7ae1878021fbafef4876e547186ddcc40ff0b3b78a6ccf199bf4ee05831a1928",
+        "bytes": 4466
+      },
+      {
+        "name": "release-to-selected.paths",
+        "sha256": "6f7e41a9f2e1945f05a0d747e602a8373380ad1d13e38ed802297f9ccf46cead",
+        "bytes": 3100
+      },
+      {
+        "name": "release-to-selected.stat",
+        "sha256": "7ae1878021fbafef4876e547186ddcc40ff0b3b78a6ccf199bf4ee05831a1928",
+        "bytes": 4466
+      },
+      {
+        "name": "required-final.json",
+        "sha256": "a914f48aeade20edcb3bb72a9a1d7837bff8766c2ec6ba617290a639ab3e2694",
+        "bytes": 8919
+      },
+      {
+        "name": "runs-final.json",
+        "sha256": "0cf4110adb69748acbbb0aea826bcfe7c074fea2dcd302aa8423e71664900beb",
+        "bytes": 99859
+      },
+      {
+        "name": "selected-main-merge.json",
+        "sha256": "4a86f1420f0a08cd7165a677c7d0a7fd6f16dbd3e65866847f49350fbde0bc9d",
+        "bytes": 621
+      },
+      {
+        "name": "six-platform-original-terminal.json",
+        "sha256": "16ac2183c2707f46fbfe709fd245df344c7806bec816fbec605f0b5f32cab625",
+        "bytes": 28227
+      },
+      {
+        "name": "six-platform-retry-terminal.json",
+        "sha256": "8ec00680db3a33c9689dc633bf984d8d9fb98e837fdcee17e8b8f884334db685",
+        "bytes": 28243
+      },
+      {
+        "name": "status-154051.json",
+        "sha256": "ffdd5780507951d08ed0e4f4d2726384b448641b12a8f57876b61e9a65caab4a",
+        "bytes": 10472
+      },
+      {
+        "name": "status-1558.json",
+        "sha256": "4623a03abcee82521a20d529adc1bcfc5ed5a86e65e225cd45465e3f50c5f6a1",
+        "bytes": 8775
+      },
+      {
+        "name": "status-1605-actual.json",
+        "sha256": "4623a03abcee82521a20d529adc1bcfc5ed5a86e65e225cd45465e3f50c5f6a1",
+        "bytes": 8775
+      },
+      {
+        "name": "status-160940.json",
+        "sha256": "98ea706584d4c0a67b89dddd99d02eef15c5a656bb5cd1f53661382309989568",
+        "bytes": 8778
+      }
+    ]
+  }
+}
