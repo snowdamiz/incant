@@ -121,3 +121,23 @@ These experiments identify two different signals needed by a replacement design:
 recurring detail should survive changes in sampling phase, while moving shadows
 and real shading changes must retire history promptly. The current short-window
 color rule, with or without this bounded extension, is not sufficient.
+
+## Nearest-surface guidance ablation
+
+Run 009 admits mixed depth and partial coverage under the nearest covered
+sample's motion/depth, keeping the original positive color/mass reprojection and
+recurrence clamp. This conventional guidance is a heuristic, not evidence that
+every contributing color follows that surface. It does not change the motion
+tolerance, use bounded retention or enable cubic history. Alpha is canonicalized
+only when all actual contributors are opaque; partial coverage is preserved.
+
+The frozen source is
+`0a42971d2de464c059241b3caf471270bedba8da4369b1b626ca8f8b20830499`.
+Build, two CPU controls and strict all-target Clippy pass. The same 48 actual
+Metal scene frames complete with 96 submissions, 48 maps and cold-frame error at
+most one half-float code. Root inspected stationary frame 24 and moving frames
+8 and 24: moving stripe aliasing and broken thin lines remain visible. This
+result is rejected for adoption. In particular, lifting the mixed-support
+refusal alone does not repair the temporal color decision, and completely clear
+current support still cannot recover an intermittently sampled thin surface.
+No production shader, allocation, admission cap or gate changed.

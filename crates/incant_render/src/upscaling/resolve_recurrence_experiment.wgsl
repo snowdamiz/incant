@@ -4,6 +4,9 @@
 override diagnostic_disable_color_rectification: bool = false;
 override diagnostic_cubic_history: bool = false;
 override diagnostic_bounded_lock: bool = false;
+// Conventional nearest-surface guidance is a heuristic for mixed coverage,
+// not a proof that every contributing color follows one surface.
+override diagnostic_nearest_surface: bool = false;
 @group(0) @binding(1) var current:texture_2d<f32>;
 @group(0) @binding(2) var motion:texture_2d<f32>;
 @group(0) @binding(3) var current_depth:texture_depth_2d;
@@ -51,9 +54,9 @@ fn stored_evidence(v:vec4f)->vec2f {
 // opaque surface compatible with the nearest one (the anchor): only then may one
 // depth and one motion describe the stored history. Ambiguous support keeps its
 // current colour and coverage but writes no reusable history.
-struct Evidence { sum:vec4f, mass:f32, valid:bool, single:bool, nearest:f32, anchor:vec2i }
+struct Evidence { sum:vec4f, mass:f32, valid:bool, single:bool, opaque:bool, nearest:f32, anchor:vec2i }
 fn current_evidence(p:vec2f)->Evidence {
-    var e=Evidence(vec4f(0.0),0.0,true,true,frame.depth.y+1.0,vec2i(0));
+    var e=Evidence(vec4f(0.0),0.0,true,true,true,frame.depth.y+1.0,vec2i(0));
     let c=vec2i(floor(source_position(p)));
     for(var y=-1;y<=1;y++) {for(var x=-1;x<=1;x++) {
         let t=c+vec2i(x,y);
@@ -64,6 +67,7 @@ fn current_evidence(p:vec2f)->Evidence {
         if !admitted(v) {e.valid=false;continue;}
         e.sum+=clean(v)*w; e.mass+=w;
         let z=linear_depth(textureLoad(current_depth,t,0));
+        if v.a<1.0 {e.opaque=false;}
         if v.a<1.0 || z<=0.0 {e.single=false;}
         // Only a covered sample (a > 0) can be a surface; an alpha-0 claim is clear.
         if v.a>0.0 && z>0.0 && z<e.nearest {e.nearest=z;e.anchor=t;}
@@ -142,17 +146,17 @@ fn diagnostic_cubic(old:vec2f,expected:f32,fallback:vec4f)->vec4f {
     if e.mass>0.0 {fresh=clean(e.sum/e.mass);}
     result.color=fresh;
     // Clear, mixed-layer or malformed support: current-only, no reusable history.
-    if !e.single || !e.valid {return result;}
+    if !e.valid || (!diagnostic_nearest_surface && !e.single) || !(e.nearest<=frame.depth.y) {return result;}
     // Every admitted contributor is exactly opaque. Preserve that invariant
     // explicitly: weighted division can round just below one before RGBA16F
     // storage, which would make the next frame reject this valid opaque history.
-    result.color.a=1.0;
+    if e.opaque {result.color.a=1.0;}
     result.depth=e.nearest;
     result.recurrence=vec4f(recurrence_luma(fresh.rgb),-1.0,-1.0,-1.0);
     result.evidence=vec2f(min(e.mass,evidence_cap()),0.0);
     if frame.depth.w<0.5 {return result;}
     let m=textureLoad(motion,e.anchor,0);
-    if !finite4(m) || m.w<0.5 || !motion_support_coherent(p,m) {return result;}
+    if !finite4(m) || m.w<0.5 || (!diagnostic_nearest_surface && !motion_support_coherent(p,m)) {return result;}
     let expected=linear_depth(m.z);
     // Motion includes both jittered projections. Output history is unjittered.
     let u=(p-frame.output.xy)/frame.output.zw;
@@ -161,7 +165,7 @@ fn diagnostic_cubic(old:vec2f,expected:f32,fallback:vec4f)->vec4f {
     // Colour, depth and evidence of each tap are admitted together; the history
     // numerator and its mass come from the same nonnegative bilinear support.
     let oldq=old-vec2f(0.5);let oldbase=vec2i(floor(oldq));let oldf=fract(oldq);
-    var numerator=vec4f(0.0); var mass=0.0;
+    var numerator=vec4f(0.0); var mass=0.0;var history_opaque=true;
     var recurrence_sum=vec4f(0.0);var recurrence_ok=vec4<bool>(true);
     var remaining=7.0;
     for(var y=0;y<2;y++) {for(var x=0;x<2;x++) {
@@ -170,11 +174,12 @@ fn diagnostic_cubic(old:vec2f,expected:f32,fallback:vec4f)->vec4f {
         if any(tap<lo(frame.output)) || any(tap>hi(frame.output)) {continue;}
         let c=textureLoad(previous_color,tap,0);let z=textureLoad(previous_depth,tap,0).x;
         let s=stored_evidence(textureLoad(previous_evidence,tap,0));
-        if !admitted(c) || c.a<1.0 || !compatible(z,expected) || s.x<0.0 {continue;}
+        if !admitted(c) || (!diagnostic_nearest_surface && c.a<1.0) || !compatible(z,expected) || s.x<0.0 {continue;}
         numerator+=clean(c)*(b*s.x); mass+=b*s.x;
         // These are the exact joint colour/mass taps, never a separately
         // renormalized subset. Zero-mass taps cannot contribute an observation.
         if b*s.x>0.0 {
+            history_opaque=history_opaque && c.a==1.0;
             remaining=min(remaining,s.y);
             let observation=textureLoad(previous_recurrence,tap,0);
             let valid=recurrence_valid(observation);
@@ -217,7 +222,7 @@ fn diagnostic_cubic(old:vec2f,expected:f32,fallback:vec4f)->vec4f {
     let total=w+e.mass;
     if !(total>0.0) {return result;}
     result.color=clean((history*w+e.sum)/total);
-    result.color.a=1.0;
+    if e.opaque && history_opaque {result.color.a=1.0;}
     result.evidence=vec2f(min(total,evidence_cap()),next_remaining);
     return result;
 }

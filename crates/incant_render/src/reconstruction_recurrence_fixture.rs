@@ -96,6 +96,7 @@ impl Experiment {
         unclipped_ablation: bool,
         cubic_ablation: bool,
         lock: bool,
+        nearest: bool,
     ) -> Self {
         let d = &renderer.device;
         assert!(d.limits().max_color_attachments >= 4);
@@ -181,6 +182,7 @@ impl Experiment {
                             f64::from(u8::from(cubic_ablation)),
                         ),
                         ("diagnostic_bounded_lock", f64::from(u8::from(lock))),
+                        ("diagnostic_nearest_surface", f64::from(u8::from(nearest))),
                     ],
                     ..Default::default()
                 },
@@ -382,14 +384,16 @@ fn actual_scene_recurrence_comparison() {
     std::fs::create_dir(&out).expect("fresh experimental output directory");
     let renderer = owner_renderer();
     assert_eq!(renderer.adapter.get_info().backend, wgpu::Backend::Metal);
-    let (ablation, cubic, lock) = match std::env::var("INCANT_RECURRENCE_ABLATION").as_deref() {
-        Err(std::env::VarError::NotPresent) | Ok("recurrence") => (false, false, false),
-        Ok("unclipped") => (true, false, false),
-        Ok("unclipped-cubic") => (true, true, false),
-        Ok("bounded-lock") => (false, false, true),
-        other => panic!("unknown recurrence experiment mode: {other:?}"),
-    };
-    let experiment = Experiment::new(&renderer, ablation, cubic, lock);
+    let (ablation, cubic, lock, nearest) =
+        match std::env::var("INCANT_RECURRENCE_ABLATION").as_deref() {
+            Err(std::env::VarError::NotPresent) | Ok("recurrence") => (false, false, false, false),
+            Ok("unclipped") => (true, false, false, false),
+            Ok("unclipped-cubic") => (true, true, false, false),
+            Ok("bounded-lock") => (false, false, true, false),
+            Ok("nearest-surface") => (false, false, false, true),
+            other => panic!("unknown recurrence experiment mode: {other:?}"),
+        };
+    let experiment = Experiment::new(&renderer, ablation, cubic, lock, nearest);
     let (_target, view) = review_target(&renderer);
     let layout = planes();
     let total = layout[7].offset + u64::from(layout[7].stride * layout[7].rect[3]);
@@ -607,6 +611,7 @@ fn actual_scene_recurrence_comparison() {
         "recurrence_candidate"
     });
     report["bounded_lock"] = json!(lock);
+    report["nearest_surface_guidance"] = json!(nearest);
     report["nonzero_lock_samples"] = json!(nonzero_lock_samples);
     report["history_filter"] = json!(if cubic {
         "bounded_signed_cubic_diagnostic"
