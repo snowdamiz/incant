@@ -24,6 +24,8 @@ struct State {
     heap: QuickJsHeap,
     tracy: bool,
     distribution: crate::frame::Frames,
+    #[cfg(feature = "diagnostic-script-phases")]
+    diagnostic: crate::diagnostic::Storage,
 }
 impl State {
     const fn new() -> Self {
@@ -44,6 +46,8 @@ impl State {
             heap: QuickJsHeap::empty(HeapMode::Maintained),
             tracy: false,
             distribution: crate::frame::Frames::empty(),
+            #[cfg(feature = "diagnostic-script-phases")]
+            diagnostic: crate::diagnostic::Storage::empty(),
         }
     }
 }
@@ -107,6 +111,8 @@ impl Capture {
             tracy,
             heap: QuickJsHeap::empty(mode),
             distribution: crate::frame::Frames::allocated()?,
+            #[cfg(feature = "diagnostic-script-phases")]
+            diagnostic: crate::diagnostic::Storage::allocated()?,
             ..State::new()
         };
         #[cfg(all(feature = "tracy", any(unix, windows)))]
@@ -130,7 +136,13 @@ impl Capture {
         let s = state();
         let allocations = crate::allocation::since(self.allocation_start);
         Report {
-            version: 3,
+            version: if cfg!(feature = "diagnostic-script-phases") {
+                4
+            } else {
+                3
+            },
+            #[cfg(feature = "diagnostic-script-phases")]
+            script_phase_diagnostic: s.diagnostic.report(),
             frame_wall: s.distribution.report(),
             scope: "process; inclusive wall and current-thread CPU zones; allocation counters are requested Rust sizes, not RSS",
             generation: self.generation,
@@ -247,6 +259,10 @@ impl Drop for Scope {
             .zip(cpu())
             .and_then(|(a, b)| b.checked_sub(a))
             .map(nanos);
+        #[cfg(feature = "diagnostic-script-phases")]
+        if start.phase == Phase::ScriptTick {
+            crate::diagnostic::whole_tick(start.generation, start.frame, wall);
+        }
         let mut s = state();
         if ACTIVE.load(Ordering::Acquire) != start.generation {
             return;
@@ -275,6 +291,48 @@ impl Drop for Scope {
                     .totals,
             );
         }
+    }
+}
+
+#[cfg(feature = "diagnostic-script-phases")]
+pub(crate) fn diagnostic_start() -> Option<crate::diagnostic::Identity> {
+    let generation = ACTIVE.load(Ordering::Acquire);
+    if generation == 0 {
+        return None;
+    }
+    let mut s = state();
+    if ACTIVE.load(Ordering::Acquire) != generation {
+        return None;
+    }
+    let frame = s.distribution.diagnostic_frame();
+    s.diagnostic.start(generation, frame)
+}
+#[cfg(feature = "diagnostic-script-phases")]
+pub(crate) fn diagnostic_source(source: Option<[u8; 16]>) -> Option<usize> {
+    let generation = ACTIVE.load(Ordering::Acquire);
+    if generation == 0 {
+        return None;
+    }
+    let s = state();
+    if ACTIVE.load(Ordering::Acquire) != generation {
+        return None;
+    }
+    s.sources
+        .iter()
+        .position(|r| r.is_some_and(|r| r.id == source))
+}
+#[cfg(feature = "diagnostic-script-phases")]
+pub(crate) fn diagnostic_reject(generation: u64) {
+    let mut s = state();
+    if ACTIVE.load(Ordering::Acquire) == generation {
+        s.diagnostic.reject();
+    }
+}
+#[cfg(feature = "diagnostic-script-phases")]
+pub(crate) fn diagnostic_append(row: crate::diagnostic::RawRow) {
+    let mut s = state();
+    if ACTIVE.load(Ordering::Acquire) == row.id.generation {
+        s.diagnostic.append(row);
     }
 }
 /// Capture a generation-bound observation request before touching the VM.

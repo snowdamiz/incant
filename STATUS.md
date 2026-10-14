@@ -1,5 +1,76 @@
 # Implementation status
 
+## Navigation cache comparison — bounded optimization concluded
+
+The one fixed six-run shipping comparison found a small ScriptTick p95 reduction,
+from matched baseline intervals spanning 2.13–2.23 ms to candidate intervals
+spanning 2.11–2.16 ms. Every candidate remains above 2 ms; the last pair has the
+same whole-player CPU frame-p95 interval, and baselines declined through the
+sequence. The cache adds retained graph storage. It is not adopted for this
+budget effort; all results and exact gameplay/audio parity remain recorded.
+Following the director's instruction, development moves on to other engine
+work without further profiling or optimization branches for this threshold.
+The existing plan gate stays unmet; this is not evidence that sub-2 ms is
+impossible or that the full rendered game misses its frame budget.
+[Outcome and replay](docs/spikes/navigation-search-cache-outcome.md).
+
+## Native Play texture refresh — merged through PR284
+
+Existing texture content can be reimported while native Play continues, without
+restarting its scripts or simulation. Preparation occurs outside the authoring
+lock; final publication rejects stale revisions, changed sessions and incompatible
+catalogs while retaining the prior live resources. The producer passed scoped
+CPU checks and an actual Metal control that changed red pixels to blue without
+restarting the game. Current main283 composition separately passes 11 texture
+controls and five editor publication controls. Native-window import/Undo/Redo
+and broader asset refresh remain open; this does not establish performance or a
+phase gate. [Scope and evidence](docs/spikes/native-texture-refresh.md).
+
+## Full-Core script attribution — merged through PR283
+
+A default-off profiler now correlates the whole script tick, its callback sources
+and native numeric work by frame. One fresh private shipping build and its full
+2,156-tick functional and diagnostic runs preserve exact gameplay and PCM. The
+same-frame tail points to the authored navigation refresh cadence, while source
+inspection finds repeated construction of immutable path-search adjacency. The
+generation-owned graph cache was subsequently measured and not adopted, as
+recorded above. The ordinary 2 ms gate remains unmet and normal
+performance readers reject the instrumented report.
+[Source, actual results and replay](docs/spikes/core-script-attribution.md).
+
+PR283 also preserves all development checks while omitting archived review
+evidence from that job’s checkout. Its exact-head hosted run passed in 177 seconds,
+with a four-second checkout; the previous run had spent over nine minutes
+fetching archives. This is one observed run, not a general speed guarantee.
+The merged tree matches the reviewed and tested head.
+
+
+## Release checkpoint36 — promoted
+
+All 23 required contexts and eight exact-candidate push workflows passed. PR263
+now advances release to the exact tested main281 tree, including the repaired
+desktop smoke revision, project Save/engine-pin UI, prefab authoring and the
+reviewed runtime/profiling integrations. Failed checkpoints remain retained.
+Later main282+ work stays outside this release baseline. This is comprehensive
+integration evidence, not phase approval or a rendering/performance pass.
+[Exact identities and checks](docs/spikes/release-checkpoint-36.md).
+
+## Ordered-query experiment — measured and rejected
+
+The ordered native ECS query candidate passes scoped correctness tests and
+shipping gameplay/audio parity, but its one fixed six-run paired comparison
+establishes no consistent saving. All three candidate ScriptTick p95 intervals
+remain above 2 ms (2.07–2.12 ms), and all three player-frame intervals are higher
+than their matched baseline. The unchanged 5% nonregression checks pass; that
+alone does not justify adoption. The runtime change stays outside main. All
+original failures, raw histograms, exact inputs and executable identities remain
+replayable. [Negative result and evidence](docs/spikes/ordered-numeric-query.md).
+
+Checkpoint35 finished with 21 required contexts successful and both desktop
+contexts failed at the smoke helper's stale second-edit revision. The successor
+checkpoint36 now passed every required context and promoted exact main281 as
+recorded above. No phase gate is approved.
+
 ## Main278 Loan shipping measurement — budget remains open
 
 The fresh main278 shipping export preserves all three functional modes, exact
@@ -9,8 +80,8 @@ runs span 2.08–2.21 ms and detailed runs span 2.18–2.22 ms. All same-mode sc
 and requested-memory stability checks pass, but the final maintained player-frame
 sample fails the 5% stability bound. No shipping saving is established. The
 portable packet retains all original failures and distinguishes CPU simulation
-from GPU/presentation qualification. An ordered native-query candidate is being
-qualified separately and has not been adopted.
+from GPU/presentation qualification. The ordered native-query experiment below was subsequently rejected after its
+fixed paired shipping measurement.
 [Actual results and replay](docs/spikes/quickjs-loan-main278.md).
 
 ## CI renderer smoke revision repair — merged through PR280
@@ -22,7 +93,9 @@ pass nine cases (six geometry plus three profile); root's focused run passes six
 Four actual RPC protocol processes pass; root separately passes the complete
 Mac renderer helper on the retained historical application executable. This
 does not relabel the binary as current whole-runtime source. Checkpoint35's
-Linux failure is retained; hosted repair execution is pending. PR280 merged
+Linux and Windows failures are retained; both failed at the second edit. The
+repair subsequently passed frozen checkpoint36 and release advanced to its exact
+tested tree, as recorded above. PR280 merged
 after exact-head fast SUCCESS and matching tree verification. No new build,
 shipping timing, visual approval or phase gate is included.
 [Cause, scope and replay](docs/spikes/render-smoke-revision.md).

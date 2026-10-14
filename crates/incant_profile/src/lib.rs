@@ -1,6 +1,8 @@
 //! Opt-in, process-scoped native diagnostics. Default hooks are zero-sized no-ops.
 //! Fixed phase labels and at most64 numeric script identities; no authored strings.
 //! Nested wall/thread-CPU durations are inclusive and must not be summed as frame time.
+#[cfg(feature = "diagnostic-script-phases")]
+pub mod diagnostic;
 mod frame_model;
 mod heap_model;
 mod model;
