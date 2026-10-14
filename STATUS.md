@@ -8,7 +8,8 @@ Core win reports and PCM; all three paired script p95 intervals improve to
 2.800001–3.080000 ms, but every 2 ms script gate still fails. This is a new
 script identity with unchanged engine/runtime data, not another engine-only
 comparison. QuickJS heap peaks increase. Current-main source/Node/TypeScript
-controls pass; independent final packet review is pending. No FPS/GPU/phase
+controls pass; independent final packet review is accepted and publication
+awaits the exact-head fast check. No FPS/GPU/phase
 claim. [Evidence](docs/spikes/core-bulk-row-metadata.md).
 
 ## TypeScript AOT spike — language controls retained, adoption open

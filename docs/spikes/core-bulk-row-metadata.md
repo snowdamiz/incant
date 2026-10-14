@@ -89,6 +89,7 @@ python3 docs/spikes/evidence/core-bulk-row-metadata/verify.py --verify-only
 python3 docs/spikes/evidence/core-bulk-row-metadata/verify.py --verify-only --external --git-source
 ```
 
-Independent final integration review is pending. Release and phase decisions
+Independent [final integration review](evidence/core-bulk-row-metadata/review.json)
+is accepted. Release and phase decisions
 remain separate, and other-device execution remains deferred under the Mac-only
 current device policy.
