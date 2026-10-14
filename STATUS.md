@@ -1,10 +1,18 @@
 # Implementation status
 
+Director policy, 2026-10-13: actual desktop testing on this Mac is the only
+device qualification required for development and phase gates. Mobile and other-
+device execution/performance comparisons are deferred, nonblocking follow-up;
+historical pending device gates below are superseded on that point, not passed.
+Required hosted CI/build checks, actual-success release promotion, Mac shipping-
+profile measurements and non-device release/human obligations remain in force.
+No phase is approved by this policy update. [Plan](PLAN.md).
+
 The retained mobile Rust host is composed on actual main253 with its accepted
 producer implementation unchanged. Fresh current-source tests pass 31 mobile+FFI
 library cases and 34 native-checkpoint player cases in each numerical mode,
 including matched fresh CLI continuation; all 26 commands pass. Independent
-current-main final review is accepted; publication awaits its exact-head fast gate. Platform surface, touch/IME, device audio
+current-main final review is accepted and PR254 merged after its exact-head fast SUCCESS. Platform surface, touch/IME, device audio
 and phone performance remain separate. [Scope](docs/spikes/mobile-host-main253.md).
 
 The default-off persisted native game path has passing joined CPU qualification:
@@ -300,8 +308,8 @@ performance gate is claimed. [Scope and evidence](docs/spikes/wasm-c-parallel.md
 
 ## Development and release overview — 2026-10-13
 
-The reviewed main253 baseline includes supported persisted native game checkpoints,
-plus the opt-in cooked renderer families and
+The reviewed main254 baseline includes the retained mobile Rust host, supported
+persisted native game checkpoints, and the opt-in cooked renderer families and
 Vulkan cache lifecycle, dynamic resolution, numerical retained motion, CPU/GPU
 profiling scopes and joined inert physics owner boundaries. Each lane retains its own
 execution and acceptance limits below; the complete engine and game remain open.
@@ -2456,14 +2464,15 @@ applicable checks passed; its actual-main tree equals the tested head. [Integrat
   input/haptics/native SDK deliverables. Existing scoped/legacy implementations
   are not evidence of full native feature parity.
 - Complete Wasm gameplay SDK and module checkpoint coverage beyond the locally
-  verified single-scene public import/Play/export route; establish platform/device
-  conformance and measure the
-  settled TypeScript AOT/physics candidate adoption rules. Do not reopen Section
-  12 decisions or substitute desktop timings for reference-phone results.
-- Build and exercise Core Sample and the 2D sample on the required device classes,
-  including hosted real iPhone/Pixel devices through AWS Device Farm, with actual
-  device model/OS, shipping profile and matched baselines. Phone script p95,
-  shader-stall, frame-time and memory gates remain open.
+  verified single-scene public import/Play/export route; establish the required
+  build and hosted-CI conformance and measure the settled TypeScript AOT/physics
+  adoption criteria on this actual Mac. Keep Section 12 numerical thresholds and
+  source/build obligations; other-device comparisons are deferred, not passed.
+- Build and exercise Core Sample and the 2D sample on this actual Mac, recording
+  its model/chip/OS, shipping profile and matched baselines. Required script p95,
+  shader-stall, frame-time and memory measurements remain outstanding until
+  measured. iPhone/Pixel, other desktop and additional device execution/performance
+  are nonblocking follow-up, including any later AWS Device Farm work.
 - Deliver the remaining editor/AI/content/export/network/services/game production
   and release scope in PLAN.md. Phase 1 progress is not Engine 1.0 or Driftwake
   release completion.
@@ -2487,12 +2496,15 @@ Do not revoke the director's working account for a test. Manual Windows/Linux
 account checks and the Windows viewport review were replaced by CI under the
 director's explicit decision; no extra desktop machine or live API key is requested.
 
-Hosted device/service accounts first gate real staging or device work, not
-local feature development. Payments and human staffing/legal commitments remain
-human-owned. Signing credentials and store/developer accounts first gate
-Phase 5 store uploads. No phone purchases, name clearance or package reservations
-are required. Unsigned packages and simulator/compile-only results do not satisfy
-store distribution or real-device gates.
+Actual shipping-profile measurements on this Mac remain required where the plan
+sets a performance gate. Mobile and other-device execution/performance are deferred,
+nonblocking follow-up; their results remain unmeasured, not passed. Hosted device
+accounts are needed only for those later runs. Service accounts still gate real
+staging work. Payments and human staffing/legal commitments remain human-owned.
+Signing credentials and store/developer accounts first gate Phase 5 store uploads.
+No phone purchases, name clearance or package reservations are required. Unsigned
+packages do not satisfy store distribution, and simulator/compile-only evidence
+must not be described as actual Mac or other-device execution.
 
 Earlier implementation notes, superseded counts and publication chronology are
 preserved in the [historical ledger](docs/spikes/implementation-history-2026-10-10.md).
