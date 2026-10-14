@@ -1,0 +1,31 @@
+{
+  "at": "2026-10-13T23:56:09.595359+00:00",
+  "reviewer": "astra/root",
+  "head": "f4d839858af21a93e8d9a7769b58a40c88787590",
+  "tested_source": "3e257acdb7b8173dad70f63675ab39e04cd2fd97",
+  "manifest_sha256": "2475b585adc95765bfe8013e2294953111e704fa02db838d17c3263d1cd708d5",
+  "accepted": true,
+  "scope": "Independent additive main253 composition and final CPU evidence audit; producer source independently reviewed by runtime_review. Publication still requires exact PR head fast-check SUCCESS.",
+  "verification": {
+    "command": "python3 docs/spikes/evidence/mobile-host-main253/verify.py --verify-only --originals --local-binaries",
+    "handle": 93692,
+    "exit": 0,
+    "reaped": true,
+    "inputs": 3750,
+    "records": 31,
+    "commands": 26,
+    "binaries": 15,
+    "mobile_library_tests": 31,
+    "native_player_each_mode": 34
+  },
+  "reviewed": [
+    "Exact producer mobile/package/test files",
+    "Additive Cargo module/feature/dev-dependency composition",
+    "Existing native save preflight and bounds unchanged",
+    "Lock only existing local dev-dependency edge",
+    "Actual command statuses, executable identity and separate-process CLI selection",
+    "Full portable verifier source and qualification evidence",
+    "No renderer/device/phone/phase claims"
+  ],
+  "findings": []
+}

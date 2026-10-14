@@ -7,6 +7,8 @@ mod checkpoint;
 mod gpu;
 #[cfg(feature = "mobile-ffi")]
 pub mod mobile;
+#[cfg(feature = "mobile-host")]
+pub mod mobile_host;
 mod observe;
 mod package;
 mod pcm_output;

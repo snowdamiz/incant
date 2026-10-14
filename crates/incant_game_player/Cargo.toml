@@ -12,6 +12,8 @@ default = ["physics-deterministic"]
 native-checkpoints = ["incant_game_runtime/native-checkpoints", "incant_script/native-checkpoints", "incant_runtime/native-checkpoints"]
 # Thin platform ABI for bounded offline CPU package execution, not a UI host.
 mobile-ffi = ["dep:thiserror"]
+# Retained native callback owner; platform surface/audio adapters are supplied by the host.
+mobile-host = ["render-input", "dep:thiserror"]
 # Trusted, fresh numeric bytecode compatibility experiment; not production admission.
 probe-android-bytecode = ["mobile-ffi", "incant_script/probe-android-bytecode", "incant_cook/probe-android-bytecode"]
 # Project source is compiled exclusively by the trusted build-time producer.
@@ -85,6 +87,7 @@ gilrs = { version = "=0.11.2", optional = true }
 incant_cook = { path = "../incant_cook", default-features = false, features = ["script"] }
 
 [dev-dependencies]
+incant_render_data.workspace = true
 incant_script = { workspace = true, features = ["compiler"] }
 incant_types.workspace = true
 tempfile = "3"

@@ -1,5 +1,12 @@
 # Implementation status
 
+The retained mobile Rust host is composed on actual main253 with its accepted
+producer implementation unchanged. Fresh current-source tests pass 31 mobile+FFI
+library cases and 34 native-checkpoint player cases in each numerical mode,
+including matched fresh CLI continuation; all 26 commands pass. Independent
+current-main final review is accepted; publication awaits its exact-head fast gate. Platform surface, touch/IME, device audio
+and phone performance remain separate. [Scope](docs/spikes/mobile-host-main253.md).
+
 The default-off persisted native game path has passing joined CPU qualification:
 267 script/game/player cases in each numerical mode, including separate-process
 save/resume with real fractional PCM timing. Thirteen current checks pass;
@@ -7,8 +14,8 @@ earlier ordinary-diagnostic, CCD-admission and missing-bundle setup failures are
 retained. The files bind current trusted code and catalogs, preserve supported
 2D/3D physics, explicit script state, UI and offline audio, and refuse unsupported
 domains. All three producer packets now have independent final acceptance;
-current-main252 composition review is independently accepted, with publication
-subject to its required exact-head fast check. This does not qualify device audio, shipped Wasm state, GPU saves,
+current-main252 composition review is independently accepted and PR253 merged
+after its required exact-head fast SUCCESS. This does not qualify device audio, shipped Wasm state, GPU saves,
 reference-phone performance or a phase gate.
 [Scope and evidence](docs/spikes/persisted-game-checkpoints.md).
 
@@ -293,7 +300,8 @@ performance gate is claimed. [Scope and evidence](docs/spikes/wasm-c-parallel.md
 
 ## Development and release overview — 2026-10-13
 
-The reviewed main252 baseline includes the opt-in cooked renderer families and
+The reviewed main253 baseline includes supported persisted native game checkpoints,
+plus the opt-in cooked renderer families and
 Vulkan cache lifecycle, dynamic resolution, numerical retained motion, CPU/GPU
 profiling scopes and joined inert physics owner boundaries. Each lane retains its own
 execution and acceptance limits below; the complete engine and game remain open.

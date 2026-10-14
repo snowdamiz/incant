@@ -1,0 +1,65 @@
+{
+  "main": "31519f8be9d09ce53eb93dc68b69ec275915492e",
+  "tested_source": "3e257acdb7b8173dad70f63675ab39e04cd2fd97",
+  "producer": "d3a7b3eda62807db3aaf3d46229b5fb990f2d780",
+  "packet": "26dd8f696ca79424812720631f625a4eb765a7ac",
+  "changed_inputs": [
+    "Cargo.lock",
+    "crates/incant_game_player/Cargo.toml",
+    "crates/incant_game_player/src/lib.rs",
+    "crates/incant_game_player/src/mobile_host.rs",
+    "crates/incant_game_player/src/mobile_host/tests.rs",
+    "crates/incant_game_player/src/package.rs",
+    "tools/probes/mobile-retained-host/collect.py"
+  ],
+  "producer_exact": [
+    "crates/incant_game_player/src/mobile_host.rs",
+    "crates/incant_game_player/src/mobile_host/tests.rs",
+    "crates/incant_game_player/src/package.rs"
+  ],
+  "source_inputs": 3750,
+  "commands": 26,
+  "binary_copies": 15,
+  "stages": [
+    {
+      "mode": "mobile",
+      "features": "physics-deterministic,mobile-host,mobile-ffi",
+      "counts": [
+        31,
+        0,
+        0
+      ],
+      "harnesses": 1,
+      "player": null
+    },
+    {
+      "mode": "native-det",
+      "features": "physics-deterministic,mobile-host,mobile-ffi,native-checkpoints",
+      "counts": [
+        34,
+        0,
+        0
+      ],
+      "harnesses": 6,
+      "player": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-host-main253/native-det/incant_game_player"
+    },
+    {
+      "mode": "native-fast8",
+      "features": "physics-fast-simd8,mobile-host,mobile-ffi,native-checkpoints",
+      "counts": [
+        34,
+        0,
+        0
+      ],
+      "harnesses": 6,
+      "player": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-host-main253/native-fast8/incant_game_player"
+    }
+  ],
+  "join": "Actual main253 persisted APIs, save preflight and checkpoint bounds are preserved. Three mobile implementation/test files are producer exact; Cargo/lib have only additive feature/module joins. Only one existing local dev-dependency lock edge is added; no version/identity changes.",
+  "limitations": [
+    "CPU consumer and offline PCM, no GPU or device audio",
+    "iOS library compile only, no app/device execution",
+    "Mobile host exposes no persisted restart/restore or haptics API",
+    "Historical producer7/28 and9checks are distinct from fresh31/34/34 and26commands"
+  ]
+}
