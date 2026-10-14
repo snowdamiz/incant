@@ -49,5 +49,7 @@ python3 docs/spikes/evidence/prefab-main270/verify.py --current
 
 Optional `--originals --local-binaries` additionally verifies the retained local
 raw files and executable copies. The portable archive always binds their hashes;
-local artifacts are not silently synthesized. Final current-main independent
-review and required hosted fast check remain pending before publication.
+local artifacts are not silently synthesized. Final current-main independent review accepted the source, complete evidence
+replay and Windows reporting follow-up; its byte-exact [receipt](evidence/prefab-main270/review.json)
+is retained (SHA256 `262bb4baaa0ee0abc99da2d0b6e5396d74362731fbf9809cf4691b4fa65d1763`).
+Publication still requires the exact-head hosted fast check.

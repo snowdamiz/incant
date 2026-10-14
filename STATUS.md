@@ -8,8 +8,8 @@ revert, prototype value updates, detach and deletion. The accepted producer is
 preserved byte-exact on main270. Current qualification passes 87 document/command
 cases, one live RPC save/reopen/undo/redo case and one cooked NativeWorld case
 with 60 steps, plus strict four-package lint and SDK/fmt/conventions checks.
-All nine commands passed. Final current-main independent review and publication
-are pending; nested/topology edits and editor UI remain open.
+All nine commands and final independent source/evidence review passed.
+Publication awaits its required hosted fast check; nested/topology edits and editor UI remain open.
 [Composition and evidence](docs/spikes/prefab-main270.md).
 
 ## Windows TypeScript deadline — one actual observation passed; timeout retained
