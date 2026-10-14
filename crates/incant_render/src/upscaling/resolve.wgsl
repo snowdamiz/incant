@@ -79,7 +79,7 @@ fn current_evidence(p:vec2f)->Evidence {
 // the anchor's (the existing depth tolerance, not widened). Otherwise the pixel
 // keeps its current evidence but reuses no history.
 const MOTION_SLACK:f32=1.0/256.0;
-fn coherent(p:vec2f,a:vec4f)->bool {
+fn motion_support_coherent(p:vec2f,a:vec4f)->bool {
     let c=vec2i(floor(source_position(p)));
     let za=linear_depth(a.z);
     for(var y=-1;y<=1;y++) {for(var x=-1;x<=1;x++) {
@@ -106,7 +106,7 @@ fn coherent(p:vec2f,a:vec4f)->bool {
     result.evidence=vec2f(min(e.mass,evidence_cap()),0.0);
     if frame.depth.w<0.5 {return result;}
     let m=textureLoad(motion,e.anchor,0);
-    if !finite4(m) || m.w<0.5 || !coherent(p,m) {return result;}
+    if !finite4(m) || m.w<0.5 || !motion_support_coherent(p,m) {return result;}
     let expected=linear_depth(m.z);
     // Motion includes both jittered projections. Output history is unjittered.
     let u=(p-frame.output.xy)/frame.output.zw;

@@ -102,7 +102,7 @@ fn kernel_weight(p:vec2f,t:vec2i)->f32 {
 // the anchor's (the existing depth tolerance, not widened). Otherwise the pixel
 // keeps its current evidence but reuses no history.
 const MOTION_SLACK:f32=1.0/256.0;
-fn coherent(p:vec2f,a:vec4f)->bool {
+fn motion_support_coherent(p:vec2f,a:vec4f)->bool {
     let c=vec2i(floor(source_position(p)));
     let za=linear_depth(a.z);
     for(var y=-1;y<=1;y++) {for(var x=-1;x<=1;x++) {
@@ -249,7 +249,7 @@ fn sees(s:Owners,n:u32)->bool {return n!=0u && (s.a==n || s.b==n);}
     // proof: current-only.
     if frame.depth.w<0.5 || e.changed_secondary {return result;}
     let m=textureLoad(motion,e.anchor,0);
-    if !finite4(m) || m.w<0.5 || !coherent(p,m) {return result;}
+    if !finite4(m) || m.w<0.5 || !motion_support_coherent(p,m) {return result;}
     let expected=linear_depth(m.z);
     let u=(p-frame.output.xy)/frame.output.zw;
     let old=frame.output.xy+(u+frame.jitter.xy+m.xy-frame.jitter.zw)*frame.output.zw;
