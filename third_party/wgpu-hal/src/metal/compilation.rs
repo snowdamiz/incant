@@ -86,8 +86,11 @@ pub struct ErrorIdentity {
 pub struct Row {
     pub sequence: u64,
     pub context: Context,
-    pub begin_ns: u64,
-    pub elapsed_ns: u64,
+    /// None when the entry clock precedes the device epoch.
+    pub begin_ns: Option<u64>,
+    /// None while pending or when the end clock precedes entry; outcome
+    /// distinguishes those states. A genuine zero duration remains Some(0).
+    pub elapsed_ns: Option<u64>,
     pub error_code: i64,
     pub kind: Kind,
     pub stage: Stage,
@@ -101,6 +104,13 @@ pub struct Counts {
     pub errors: u64,
     pub unwound: u64,
 }
+/// Cumulative invalid clock comparisons, including calls without retained rows.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub struct ClockAnomalies {
+    pub entry: u64,
+    pub completion: u64,
+    pub snapshot: u64,
+}
 struct ActiveScope {
     thread: ThreadId,
     context: Context,
@@ -112,6 +122,7 @@ struct State {
     counts: [Counts; KIND_COUNT],
     unbound: [Counts; KIND_COUNT],
     overflow: u64,
+    clock_anomalies: ClockAnomalies,
     saturated: bool,
     scope: Option<ActiveScope>,
 }
@@ -145,6 +156,7 @@ impl Default for Observer {
                 counts: [Counts::default(); KIND_COUNT],
                 unbound: [Counts::default(); KIND_COUNT],
                 overflow: 0,
+                clock_anomalies: ClockAnomalies::default(),
                 saturated: false,
                 scope: None,
             }),
@@ -159,10 +171,12 @@ pub struct Snapshot {
     /// Calls entered before capture was started, including later completions.
     pub unbound: [Counts; KIND_COUNT],
     pub overflow: u64,
+    pub clock_anomalies: ClockAnomalies,
     pub saturated: bool,
     pub capture_started: bool,
     pub scope_active: bool,
-    pub snapshot_ns: u64,
+    /// None when the snapshot clock precedes the device epoch.
+    pub snapshot_ns: Option<u64>,
 }
 impl Observer {
     /// Allocate once on a cold host path, before catalog preparation. Never reset
@@ -186,8 +200,8 @@ impl Observer {
             Row {
                 sequence: 0,
                 context: Context::default(),
-                begin_ns: 0,
-                elapsed_ns: 0,
+                begin_ns: None,
+                elapsed_ns: None,
                 error_code: 0,
                 kind: Kind::NagaLibrary,
                 stage: Stage::Unspecified,
@@ -245,8 +259,8 @@ impl Observer {
                 rows[at] = Row {
                     sequence,
                     context,
-                    begin_ns: 0,
-                    elapsed_ns: 0,
+                    begin_ns: None,
+                    elapsed_ns: None,
                     error_code: 0,
                     kind,
                     stage,
@@ -265,8 +279,10 @@ impl Observer {
         // Timestamp after admission bookkeeping. The native call follows begin;
         // return/dispatch overhead remains in the observed window.
         let begin = Instant::now();
-        let begin_ns = nanos(
-            begin.duration_since(self.0.epoch).as_nanos(),
+        let begin_ns = checked_nanos(
+            begin,
+            self.0.epoch,
+            &mut state.clock_anomalies.entry,
             &mut saturated,
         );
         if let Some(slot) = slot {
@@ -285,9 +301,15 @@ impl Observer {
     /// Final/cold-path allocation only. Pending rows remain pending; no wait,
     /// GPU polling or invented completion. Snapshot/JSON memory is additional.
     pub fn snapshot(&self) -> Snapshot {
-        let state = self.0.state.lock();
+        let mut state = self.0.state.lock();
         let mut saturated = state.saturated;
-        let snapshot_ns = nanos(self.0.epoch.elapsed().as_nanos(), &mut saturated);
+        let snapshot_ns = checked_nanos(
+            Instant::now(),
+            self.0.epoch,
+            &mut state.clock_anomalies.snapshot,
+            &mut saturated,
+        );
+        state.saturated = saturated;
         Snapshot {
             device: self.0.device,
             rows: state
@@ -297,6 +319,7 @@ impl Observer {
             counts: state.counts,
             unbound: state.unbound,
             overflow: state.overflow,
+            clock_anomalies: state.clock_anomalies,
             saturated,
             capture_started: state.rows.is_some(),
             scope_active: state.scope.is_some(),
@@ -330,7 +353,12 @@ impl Call {
     fn record(&mut self, ended: Instant, outcome: Outcome, error: Option<ErrorIdentity>) {
         let mut state = self.observer.0.state.lock();
         let mut saturated = state.saturated;
-        let elapsed_ns = nanos(ended.duration_since(self.begin).as_nanos(), &mut saturated);
+        let elapsed_ns = checked_nanos(
+            ended,
+            self.begin,
+            &mut state.clock_anomalies.completion,
+            &mut saturated,
+        );
         let index = self.kind as usize;
         finish(&mut state.counts[index], outcome, &mut saturated);
         if self.unbound {
@@ -368,6 +396,20 @@ fn nanos(value: u128, saturated: &mut bool) -> u64 {
         *saturated = true;
         u64::MAX
     })
+}
+fn checked_nanos(
+    end: Instant,
+    start: Instant,
+    anomalies: &mut u64,
+    saturated: &mut bool,
+) -> Option<u64> {
+    match end.checked_duration_since(start) {
+        Some(duration) => Some(nanos(duration.as_nanos(), saturated)),
+        None => {
+            bump(anomalies, saturated);
+            None
+        }
+    }
 }
 fn finish(counts: &mut Counts, outcome: Outcome, saturated: &mut bool) {
     match outcome {

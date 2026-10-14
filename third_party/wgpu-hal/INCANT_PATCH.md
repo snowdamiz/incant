@@ -34,6 +34,8 @@ invalid, discard, abandoned and overflow states remain separate.
 The default-off macOS `diagnostic-compilation` feature adds a device-owned
 observer and hooks around the actual source/binary library and render/mesh/compute
 pipeline creation calls. Cumulative counts do not decrement on destruction.
+Backward clock comparisons retain explicit missing timestamps and cumulative
+anomaly counts rather than silently fabricating valid zero-duration samples.
 It changes no native options, cache/permutation policy, resource return values,
 normal scheduling or default feature graph. See
 `docs/spikes/native-compilation-observer.md` for exact scope and bounds.

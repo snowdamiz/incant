@@ -1,5 +1,8 @@
 use super::*;
-use std::panic::{catch_unwind, AssertUnwindSafe};
+use std::{
+    panic::{catch_unwind, AssertUnwindSafe},
+    time::Duration,
+};
 
 fn context(step: u64) -> Context {
     Context {
@@ -191,6 +194,7 @@ fn snapshot_does_not_turn_pending_into_completion() {
     let pending = observer.begin(Kind::BinaryLibrary, Stage::Unspecified);
     let before = observer.snapshot();
     assert_eq!(before.rows[0].outcome, Outcome::Pending);
+    assert_eq!(before.rows[0].elapsed_ns, None);
     pending.complete(Instant::now(), None);
     assert_eq!(before.rows[0].outcome, Outcome::Pending);
     assert_eq!(observer.snapshot().rows[0].outcome, Outcome::Success);
@@ -237,4 +241,98 @@ fn collector_handle_survives_owner_without_native_retention() {
     drop(observer);
     call.complete(Instant::now(), None);
     assert_eq!(retained.snapshot().rows[0].outcome, Outcome::Success);
+}
+
+#[test]
+fn backward_end_is_invalid_time_without_changing_native_error() {
+    let observer = Observer::default();
+    observer.start(1).unwrap();
+    let call = observer.begin(Kind::ComputePipeline, Stage::Compute);
+    let backwards = call.begin.checked_sub(Duration::from_nanos(1)).unwrap();
+    let error = ErrorIdentity {
+        domain: ErrorDomain::ComputePipeline,
+        code: -29,
+    };
+    call.complete(backwards, Some(error));
+    let snapshot = observer.snapshot();
+    let row = snapshot.rows[0];
+    assert!(row.begin_ns.is_some());
+    assert_eq!(row.elapsed_ns, None);
+    assert_eq!(row.outcome, Outcome::Error);
+    assert_eq!(row.error_domain, error.domain);
+    assert_eq!(row.error_code, error.code);
+    assert_eq!(snapshot.counts[Kind::ComputePipeline as usize].errors, 1);
+    assert_eq!(snapshot.clock_anomalies.completion, 1);
+    assert_eq!(observer.snapshot().clock_anomalies.completion, 1);
+}
+
+#[test]
+fn equal_end_is_a_valid_zero_duration() {
+    let observer = Observer::default();
+    observer.start(1).unwrap();
+    let call = observer.begin(Kind::RenderPipeline, Stage::Unspecified);
+    let end = call.begin;
+    call.complete(end, None);
+    let snapshot = observer.snapshot();
+    assert_eq!(snapshot.rows[0].elapsed_ns, Some(0));
+    assert_eq!(snapshot.rows[0].outcome, Outcome::Success);
+    assert_eq!(snapshot.clock_anomalies, ClockAnomalies::default());
+}
+
+#[test]
+fn backward_entry_and_snapshot_are_absent_and_retained_as_anomalies() {
+    let mut observer = Observer::default();
+    Arc::get_mut(&mut observer.0).unwrap().epoch = Instant::now()
+        .checked_add(Duration::from_secs(3600))
+        .unwrap();
+    observer.start(1).unwrap();
+    success(&observer, Kind::NagaLibrary);
+    let snapshot = observer.snapshot();
+    assert_eq!(snapshot.rows[0].begin_ns, None);
+    assert!(snapshot.rows[0].elapsed_ns.is_some());
+    assert_eq!(snapshot.rows[0].outcome, Outcome::Success);
+    assert_eq!(snapshot.snapshot_ns, None);
+    assert_eq!(
+        snapshot.clock_anomalies,
+        ClockAnomalies {
+            entry: 1,
+            completion: 0,
+            snapshot: 1,
+        }
+    );
+    assert_eq!(observer.snapshot().clock_anomalies.snapshot, 2);
+}
+
+#[test]
+fn missing_rows_do_not_hide_backward_completion() {
+    let observer = Observer::default();
+    let unbound = observer.begin(Kind::MslLibrary, Stage::Unspecified);
+    observer.start(1).unwrap();
+    success(&observer, Kind::MslLibrary);
+    let overflow = observer.begin(Kind::MslLibrary, Stage::Unspecified);
+    for call in [unbound, overflow] {
+        let end = call.begin.checked_sub(Duration::from_nanos(1)).unwrap();
+        call.complete(end, None);
+    }
+    let snapshot = observer.snapshot();
+    assert_eq!(snapshot.rows.len(), 1);
+    assert_eq!(snapshot.overflow, 1);
+    assert_eq!(snapshot.clock_anomalies.completion, 2);
+    assert_eq!(snapshot.counts[Kind::MslLibrary as usize].successes, 3);
+    assert_eq!(snapshot.unbound[Kind::MslLibrary as usize].successes, 1);
+}
+
+#[test]
+fn clock_anomaly_counter_saturation_is_retained() {
+    let observer = Observer::default();
+    observer.start(1).unwrap();
+    observer.0.state.lock().clock_anomalies.completion = u64::MAX;
+    let call = observer.begin(Kind::BinaryLibrary, Stage::Unspecified);
+    let end = call.begin.checked_sub(Duration::from_nanos(1)).unwrap();
+    call.complete(end, None);
+    let snapshot = observer.snapshot();
+    assert!(snapshot.saturated);
+    assert_eq!(snapshot.clock_anomalies.completion, u64::MAX);
+    assert_eq!(snapshot.rows[0].elapsed_ns, None);
+    assert_eq!(snapshot.rows[0].outcome, Outcome::Success);
 }

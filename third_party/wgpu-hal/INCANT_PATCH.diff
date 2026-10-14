@@ -1,5 +1,5 @@
---- upstream/Cargo.toml
-+++ incant/Cargo.toml
+--- a/Cargo.toml
++++ b/Cargo.toml
 @@ -50,6 +50,9 @@
  ignored = ["cfg_aliases"]
  
@@ -10,8 +10,8 @@
  device_lost_panic = []
  dx12 = [
      "dep:arrayvec",
---- upstream/src/metal/adapter.rs
-+++ incant/src/metal/adapter.rs
+--- a/src/metal/adapter.rs
++++ b/src/metal/adapter.rs
 @@ -96,6 +96,8 @@
  
          Ok(crate::OpenDevice {
@@ -21,9 +21,9 @@
                  shared: Arc::clone(&self.shared),
                  features,
                  counters: Default::default(),
---- upstream/src/metal/compilation.rs
-+++ incant/src/metal/compilation.rs
-@@ -0,0 +1,382 @@
+--- /dev/null
++++ b/src/metal/compilation.rs
+@@ -0,0 +1,424 @@
 +//! Default-off observation of native creation calls, not proof of driver work.
 +use alloc::{boxed::Box, sync::Arc, vec::Vec};
 +use core::{
@@ -112,8 +112,11 @@
 +pub struct Row {
 +    pub sequence: u64,
 +    pub context: Context,
-+    pub begin_ns: u64,
-+    pub elapsed_ns: u64,
++    /// None when the entry clock precedes the device epoch.
++    pub begin_ns: Option<u64>,
++    /// None while pending or when the end clock precedes entry; outcome
++    /// distinguishes those states. A genuine zero duration remains Some(0).
++    pub elapsed_ns: Option<u64>,
 +    pub error_code: i64,
 +    pub kind: Kind,
 +    pub stage: Stage,
@@ -127,6 +130,13 @@
 +    pub errors: u64,
 +    pub unwound: u64,
 +}
++/// Cumulative invalid clock comparisons, including calls without retained rows.
++#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
++pub struct ClockAnomalies {
++    pub entry: u64,
++    pub completion: u64,
++    pub snapshot: u64,
++}
 +struct ActiveScope {
 +    thread: ThreadId,
 +    context: Context,
@@ -138,6 +148,7 @@
 +    counts: [Counts; KIND_COUNT],
 +    unbound: [Counts; KIND_COUNT],
 +    overflow: u64,
++    clock_anomalies: ClockAnomalies,
 +    saturated: bool,
 +    scope: Option<ActiveScope>,
 +}
@@ -171,6 +182,7 @@
 +                counts: [Counts::default(); KIND_COUNT],
 +                unbound: [Counts::default(); KIND_COUNT],
 +                overflow: 0,
++                clock_anomalies: ClockAnomalies::default(),
 +                saturated: false,
 +                scope: None,
 +            }),
@@ -185,10 +197,12 @@
 +    /// Calls entered before capture was started, including later completions.
 +    pub unbound: [Counts; KIND_COUNT],
 +    pub overflow: u64,
++    pub clock_anomalies: ClockAnomalies,
 +    pub saturated: bool,
 +    pub capture_started: bool,
 +    pub scope_active: bool,
-+    pub snapshot_ns: u64,
++    /// None when the snapshot clock precedes the device epoch.
++    pub snapshot_ns: Option<u64>,
 +}
 +impl Observer {
 +    /// Allocate once on a cold host path, before catalog preparation. Never reset
@@ -212,8 +226,8 @@
 +            Row {
 +                sequence: 0,
 +                context: Context::default(),
-+                begin_ns: 0,
-+                elapsed_ns: 0,
++                begin_ns: None,
++                elapsed_ns: None,
 +                error_code: 0,
 +                kind: Kind::NagaLibrary,
 +                stage: Stage::Unspecified,
@@ -271,8 +285,8 @@
 +                rows[at] = Row {
 +                    sequence,
 +                    context,
-+                    begin_ns: 0,
-+                    elapsed_ns: 0,
++                    begin_ns: None,
++                    elapsed_ns: None,
 +                    error_code: 0,
 +                    kind,
 +                    stage,
@@ -291,8 +305,10 @@
 +        // Timestamp after admission bookkeeping. The native call follows begin;
 +        // return/dispatch overhead remains in the observed window.
 +        let begin = Instant::now();
-+        let begin_ns = nanos(
-+            begin.duration_since(self.0.epoch).as_nanos(),
++        let begin_ns = checked_nanos(
++            begin,
++            self.0.epoch,
++            &mut state.clock_anomalies.entry,
 +            &mut saturated,
 +        );
 +        if let Some(slot) = slot {
@@ -311,9 +327,15 @@
 +    /// Final/cold-path allocation only. Pending rows remain pending; no wait,
 +    /// GPU polling or invented completion. Snapshot/JSON memory is additional.
 +    pub fn snapshot(&self) -> Snapshot {
-+        let state = self.0.state.lock();
++        let mut state = self.0.state.lock();
 +        let mut saturated = state.saturated;
-+        let snapshot_ns = nanos(self.0.epoch.elapsed().as_nanos(), &mut saturated);
++        let snapshot_ns = checked_nanos(
++            Instant::now(),
++            self.0.epoch,
++            &mut state.clock_anomalies.snapshot,
++            &mut saturated,
++        );
++        state.saturated = saturated;
 +        Snapshot {
 +            device: self.0.device,
 +            rows: state
@@ -323,6 +345,7 @@
 +            counts: state.counts,
 +            unbound: state.unbound,
 +            overflow: state.overflow,
++            clock_anomalies: state.clock_anomalies,
 +            saturated,
 +            capture_started: state.rows.is_some(),
 +            scope_active: state.scope.is_some(),
@@ -356,7 +379,12 @@
 +    fn record(&mut self, ended: Instant, outcome: Outcome, error: Option<ErrorIdentity>) {
 +        let mut state = self.observer.0.state.lock();
 +        let mut saturated = state.saturated;
-+        let elapsed_ns = nanos(ended.duration_since(self.begin).as_nanos(), &mut saturated);
++        let elapsed_ns = checked_nanos(
++            ended,
++            self.begin,
++            &mut state.clock_anomalies.completion,
++            &mut saturated,
++        );
 +        let index = self.kind as usize;
 +        finish(&mut state.counts[index], outcome, &mut saturated);
 +        if self.unbound {
@@ -395,6 +423,20 @@
 +        u64::MAX
 +    })
 +}
++fn checked_nanos(
++    end: Instant,
++    start: Instant,
++    anomalies: &mut u64,
++    saturated: &mut bool,
++) -> Option<u64> {
++    match end.checked_duration_since(start) {
++        Some(duration) => Some(nanos(duration.as_nanos(), saturated)),
++        None => {
++            bump(anomalies, saturated);
++            None
++        }
++    }
++}
 +fn finish(counts: &mut Counts, outcome: Outcome, saturated: &mut bool) {
 +    match outcome {
 +        Outcome::Success => bump(&mut counts.successes, saturated),
@@ -406,8 +448,8 @@
 +#[cfg(test)]
 +#[path = "compilation_tests.rs"]
 +mod tests;
---- upstream/src/metal/compilation_native.rs
-+++ incant/src/metal/compilation_native.rs
+--- /dev/null
++++ b/src/metal/compilation_native.rs
 @@ -0,0 +1,34 @@
 +//! Native error identity is observed before the existing error mapping.
 +use super::compilation::{Call, ErrorDomain, ErrorIdentity, Observer};
@@ -443,11 +485,14 @@
 +        self.complete(ended, error);
 +    }
 +}
---- upstream/src/metal/compilation_tests.rs
-+++ incant/src/metal/compilation_tests.rs
-@@ -0,0 +1,240 @@
+--- /dev/null
++++ b/src/metal/compilation_tests.rs
+@@ -0,0 +1,338 @@
 +use super::*;
-+use std::panic::{catch_unwind, AssertUnwindSafe};
++use std::{
++    panic::{catch_unwind, AssertUnwindSafe},
++    time::Duration,
++};
 +
 +fn context(step: u64) -> Context {
 +    Context {
@@ -639,6 +684,7 @@
 +    let pending = observer.begin(Kind::BinaryLibrary, Stage::Unspecified);
 +    let before = observer.snapshot();
 +    assert_eq!(before.rows[0].outcome, Outcome::Pending);
++    assert_eq!(before.rows[0].elapsed_ns, None);
 +    pending.complete(Instant::now(), None);
 +    assert_eq!(before.rows[0].outcome, Outcome::Pending);
 +    assert_eq!(observer.snapshot().rows[0].outcome, Outcome::Success);
@@ -686,8 +732,102 @@
 +    call.complete(Instant::now(), None);
 +    assert_eq!(retained.snapshot().rows[0].outcome, Outcome::Success);
 +}
---- upstream/src/metal/device.rs
-+++ incant/src/metal/device.rs
++
++#[test]
++fn backward_end_is_invalid_time_without_changing_native_error() {
++    let observer = Observer::default();
++    observer.start(1).unwrap();
++    let call = observer.begin(Kind::ComputePipeline, Stage::Compute);
++    let backwards = call.begin.checked_sub(Duration::from_nanos(1)).unwrap();
++    let error = ErrorIdentity {
++        domain: ErrorDomain::ComputePipeline,
++        code: -29,
++    };
++    call.complete(backwards, Some(error));
++    let snapshot = observer.snapshot();
++    let row = snapshot.rows[0];
++    assert!(row.begin_ns.is_some());
++    assert_eq!(row.elapsed_ns, None);
++    assert_eq!(row.outcome, Outcome::Error);
++    assert_eq!(row.error_domain, error.domain);
++    assert_eq!(row.error_code, error.code);
++    assert_eq!(snapshot.counts[Kind::ComputePipeline as usize].errors, 1);
++    assert_eq!(snapshot.clock_anomalies.completion, 1);
++    assert_eq!(observer.snapshot().clock_anomalies.completion, 1);
++}
++
++#[test]
++fn equal_end_is_a_valid_zero_duration() {
++    let observer = Observer::default();
++    observer.start(1).unwrap();
++    let call = observer.begin(Kind::RenderPipeline, Stage::Unspecified);
++    let end = call.begin;
++    call.complete(end, None);
++    let snapshot = observer.snapshot();
++    assert_eq!(snapshot.rows[0].elapsed_ns, Some(0));
++    assert_eq!(snapshot.rows[0].outcome, Outcome::Success);
++    assert_eq!(snapshot.clock_anomalies, ClockAnomalies::default());
++}
++
++#[test]
++fn backward_entry_and_snapshot_are_absent_and_retained_as_anomalies() {
++    let mut observer = Observer::default();
++    Arc::get_mut(&mut observer.0).unwrap().epoch = Instant::now()
++        .checked_add(Duration::from_secs(3600))
++        .unwrap();
++    observer.start(1).unwrap();
++    success(&observer, Kind::NagaLibrary);
++    let snapshot = observer.snapshot();
++    assert_eq!(snapshot.rows[0].begin_ns, None);
++    assert!(snapshot.rows[0].elapsed_ns.is_some());
++    assert_eq!(snapshot.rows[0].outcome, Outcome::Success);
++    assert_eq!(snapshot.snapshot_ns, None);
++    assert_eq!(
++        snapshot.clock_anomalies,
++        ClockAnomalies {
++            entry: 1,
++            completion: 0,
++            snapshot: 1,
++        }
++    );
++    assert_eq!(observer.snapshot().clock_anomalies.snapshot, 2);
++}
++
++#[test]
++fn missing_rows_do_not_hide_backward_completion() {
++    let observer = Observer::default();
++    let unbound = observer.begin(Kind::MslLibrary, Stage::Unspecified);
++    observer.start(1).unwrap();
++    success(&observer, Kind::MslLibrary);
++    let overflow = observer.begin(Kind::MslLibrary, Stage::Unspecified);
++    for call in [unbound, overflow] {
++        let end = call.begin.checked_sub(Duration::from_nanos(1)).unwrap();
++        call.complete(end, None);
++    }
++    let snapshot = observer.snapshot();
++    assert_eq!(snapshot.rows.len(), 1);
++    assert_eq!(snapshot.overflow, 1);
++    assert_eq!(snapshot.clock_anomalies.completion, 2);
++    assert_eq!(snapshot.counts[Kind::MslLibrary as usize].successes, 3);
++    assert_eq!(snapshot.unbound[Kind::MslLibrary as usize].successes, 1);
++}
++
++#[test]
++fn clock_anomaly_counter_saturation_is_retained() {
++    let observer = Observer::default();
++    observer.start(1).unwrap();
++    observer.0.state.lock().clock_anomalies.completion = u64::MAX;
++    let call = observer.begin(Kind::BinaryLibrary, Stage::Unspecified);
++    let end = call.begin.checked_sub(Duration::from_nanos(1)).unwrap();
++    call.complete(end, None);
++    let snapshot = observer.snapshot();
++    assert!(snapshot.saturated);
++    assert_eq!(snapshot.clock_anomalies.completion, u64::MAX);
++    assert_eq!(snapshot.rows[0].elapsed_ns, None);
++    assert_eq!(snapshot.rows[0].outcome, Outcome::Success);
++}
+--- a/src/metal/device.rs
++++ b/src/metal/device.rs
 @@ -24,6 +24,8 @@
      MTLVertexStepFunction,
  };
@@ -853,8 +993,8 @@
  
              let raw: Retained<ProtocolObject<dyn MTLComputePipelineState>> =
                  raw.map_err(|e: Retained<NSError>| {
---- upstream/src/metal/library_from_metallib.rs
-+++ incant/src/metal/library_from_metallib.rs
+--- a/src/metal/library_from_metallib.rs
++++ b/src/metal/library_from_metallib.rs
 @@ -34,14 +34,24 @@
  pub(crate) fn new_library_from_metallib_bytes(
      device: &ProtocolObject<dyn MTLDevice>,
@@ -880,8 +1020,8 @@
  
      unsafe { dispatch_release(data) };
      res
---- upstream/src/metal/mod.rs
-+++ incant/src/metal/mod.rs
+--- a/src/metal/mod.rs
++++ b/src/metal/mod.rs
 @@ -20,9 +20,17 @@
  #[allow(deprecated)]
  mod adapter;
@@ -938,8 +1078,8 @@
  
              // https://developer.apple.com/documentation/quartzcore/cametallayer/1478157-presentswithtransaction?language=objc
              if !texture.present_with_transaction {
---- upstream/src/metal/presentation.rs
-+++ incant/src/metal/presentation.rs
+--- /dev/null
++++ b/src/metal/presentation.rs
 @@ -0,0 +1,334 @@
 +//! Private diagnostic: exact drawable observations, never a performance verdict.
 +//! All row storage is allocated before acquisition; callbacks only mutate a row.
@@ -1275,8 +1415,8 @@
 +#[cfg(test)]
 +#[path = "presentation_tests.rs"]
 +mod tests;
---- upstream/src/metal/presentation_native.rs
-+++ incant/src/metal/presentation_native.rs
+--- /dev/null
++++ b/src/metal/presentation_native.rs
 @@ -0,0 +1,40 @@
 +//! macOS-only adapter. Never retains the drawable in its own callback.
 +use super::{
@@ -1318,8 +1458,8 @@
 +        drawable.addPresentedHandler(block2::RcBlock::as_ptr(&block));
 +    }
 +}
---- upstream/src/metal/presentation_tests.rs
-+++ incant/src/metal/presentation_tests.rs
+--- /dev/null
++++ b/src/metal/presentation_tests.rs
 @@ -0,0 +1,225 @@
 +use super::*;
 +fn binding(c: &Arc<Collector>, generation: u64, segment: u64, step: u64) -> Observation {
@@ -1546,8 +1686,8 @@
 +    assert_eq!(collector.pending(), 0);
 +    assert_eq!(collector.snapshot().rows[0].context.attempt, 42);
 +}
---- upstream/src/metal/surface.rs
-+++ incant/src/metal/surface.rs
+--- a/src/metal/surface.rs
++++ b/src/metal/surface.rs
 @@ -18,6 +18,8 @@
      pub fn new(layer: Retained<CAMetalLayer>) -> Self {
          Self {

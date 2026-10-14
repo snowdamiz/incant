@@ -34,7 +34,13 @@ a one-time cold-path operation. It allocates 1..4096 rows with a compile-time
 96-byte upper bound per row (393,216 bytes maximum), plus fixed headers and
 allocation bookkeeping. Row overflow does not allocate or block rendering; it
 increments a visible omitted-row count while cumulative outcomes continue.
-Counter/time saturation is explicit. Snapshots clone bounded rows only on a
+Counter/time saturation is explicit. Entry, completion and snapshot comparisons
+use `checked_duration_since`; backward values are absent (`None`), with retained
+per-device anomaly counts even when a call has no retained row. Pending and
+clock-invalid completion remain distinguishable by outcome; a genuine equal-clock
+duration is `Some(0)`. Native success/error classification is independent of the
+clock. Snapshot clock anomalies also persist into later snapshots. These counts
+measure invalid comparisons, not unique calls. Snapshots clone bounded rows only on a
 final/cold path; snapshot and JSON allocations are additional, not included in
 the row bound. Feature-off builds contain none of these fields, clocks, locks,
 allocations or branches.
@@ -48,11 +54,15 @@ rows pending. The collector does not wait, poll GPU, reset counters or imply
 that concurrent spans sum to exclusive frame time. Diagnostic locks, clocks,
 Arc work and metadata recording add overhead.
 
-Thirteen source controls cover capacity admission, pre-binding calls completing
+Eighteen source controls cover capacity admission, pre-binding calls completing
 after capture starts, independent devices, cross-thread exclusion, nested/invalid
 scope refusal, immutable entry context, exact-once result/error propagation,
 unwinding, bounded overflow, pending snapshots, destruction/recreation,
-saturation and handle lifetime. They are authored only, not passing evidence.
+saturation, handle lifetime, backward completion preserving native error, valid
+zero duration, backward entry/snapshot retention, anomalies without retained rows
+and anomaly-counter saturation. They are authored only, not passing evidence.
+Source milestone `052e032e1eb543e3c177603651d1f7b3d5560d36` and its
+13-test freeze are retained; this successor fixes its saturating-clock ambiguity.
 The native call-site correspondence still needs independent source review and
 an actual feature-on CPU compile/lint. Subsequent hardware qualification must
 retain the original shader options and errors rather than use mocks as proof.
