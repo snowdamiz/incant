@@ -1,0 +1,21 @@
+{
+  "archive_sha256": "fc04335bf04240505b0ee455d3081127857b86f3c36f97403358dcbebb0e4454",
+  "base": "b2475341baca4144f66cb5805a6c5b66baf27176",
+  "collector_sha256": "26d87deab3aaa9c2844c688003847f5ad34ac523a9a14dc8fafb9c6fc8c189d9",
+  "evidence_root": "/Users/andreyyurlov/.codex/incant-integration-evidence/quickjs-profile-main274",
+  "inputs": 3984,
+  "payloads": 56,
+  "producer": "717c48ba45c8d149d6a7106fc81b5767554f934e",
+  "producer_files": {
+    "collect.py": "656a7c23c93d3b7afb55657234027adeab4cf743cf7c515e173f99e67d3ba7cb",
+    "manifest.json": "a1a6ea8c475f63d5827ef9c1003d059df29aab1e5c5f15f6d2539cbd9b6d9149",
+    "records.json.gz": "2ee2ca99bc444f0771deb1c4e9e59f99cf2b604f686a2f1d46d9eea6c76a2d99",
+    "verify.py": "60762eed73a62ee5be784df664c9cf5132067e0537a1327549e1103e667e961b"
+  },
+  "producer_review_sha256": "0637a7747f030ec4f4bc0f58a4853cf62c3f2115ba82eba2e392d6bb16d9f9dc",
+  "records": 66,
+  "scope": "Current main274 profile off/summary and actual script/player fixtures in both physics modes; thirteen checks and thirteen immediate executable copies. Producer broad tests remain historical. No shipping measurement or performance gate claim.",
+  "source": "d46db9c9cd792b84c12a5b53fdba73dd20bb186d",
+  "verifier_sha256": "5d0f130aa63fe459f4bd79d667447d03b0ba1a767d8a8a457f979ed1bf8d97fc",
+  "version": 1
+}

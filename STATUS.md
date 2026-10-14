@@ -1,5 +1,17 @@
 # Implementation status
 
+## Maintained QuickJS profiling — qualified main274 composition
+
+The reviewed producer now composes with main274 without a runtime source seam.
+Thirteen current commands pass: profile off/summary, script/player fixtures in
+both physics modes, strict lint, 21 metric controls, ten probe-lock controls and
+vendor/dependency/static checks. Thirteen current executable copies and the
+unchanged 3,325-record producer packet are retained. Final integration review and
+publication are pending. Reports distinguish maintained allocation counters from
+explicit detailed scans and refuse mismatched instrumentation comparisons.
+No shipping speedup, continuous heap peak, 2ms gate or phase claim is made.
+[Current composition and limits](docs/spikes/quickjs-profile-main274.md).
+
 ## Host-bound project pin migration — current-main qualification
 
 The main273 composition preserves linked-prefab authoring and adds the reviewed
@@ -10,8 +22,8 @@ focused Mac controls pass, with four overlapping final-generation controls and
 strict lint. A later live-RPC test successor also passes its focused control and
 strict headless lint after closing each child before journal byte comparisons.
 The original hosted Windows failure, local cache failure and test
-lint failure remain retained. Final independent packet review is accepted; scoped publication awaits the
-exact-head hosted fast check.
+lint failure remain retained. Final independent packet review is accepted;
+PR274 merged after its exact-head hosted fast SUCCESS.
 No CLI/RPC/editor route or older-format conversion is exposed; checkpoint33
 remains failed and frozen while its other workflows finish.
 [Current composition and evidence](docs/spikes/project-pin-main273.md).
