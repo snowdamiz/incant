@@ -95,7 +95,7 @@ interface Run {
  * before it writes.
  */
 export function ProjectFileProvider({ children }: { children: ReactNode }) {
-  const { bridge, snapshot, capabilities, request, announce } = useShell();
+  const { bridge, snapshot, capabilities, request, announce: shellAnnounce } = useShell();
   const unavailable = fileUnavailable(bridge, snapshot, capabilities);
   const openProject = useMemo(() => openProjectOf(snapshot), [snapshot]);
 
@@ -110,6 +110,24 @@ export function ProjectFileProvider({ children }: { children: ReactNode }) {
   // The dialog's current request. Closing it or asking again retires an earlier answer.
   const ticket = useRef(0);
   const opener = useRef<HTMLElement | null>(null);
+  const mounted = useRef(false);
+  // Shell supersedes every earlier message, so only our latest revocation can be live.
+  const revokeAnnouncement = useRef<(() => void) | null>(null);
+  const announce = useCallback((text: string) => {
+    if (!mounted.current) return;
+    revokeAnnouncement.current?.();
+    revokeAnnouncement.current = shellAnnounce(text);
+  }, [shellAnnounce]);
+
+  useLayoutEffect(() => {
+    mounted.current = true;
+    return () => {
+      mounted.current = false;
+      running.current = null;
+      revokeAnnouncement.current?.();
+      revokeAnnouncement.current = null;
+    };
+  }, []);
 
   // Observed on every publish, which comes before the bridge resolves the request it
   // answers, so a late answer is always compared with the project open by then.
@@ -120,6 +138,8 @@ export function ProjectFileProvider({ children }: { children: ReactNode }) {
       if (seen.bridge === bridge && (project === null || project === seen.project)) return;
       const next: Scope = { bridge, project: project ?? (seen.bridge === bridge ? seen.project : null) };
       scopeRef.current = next;
+      revokeAnnouncement.current?.();
+      revokeAnnouncement.current = null;
       // The newly open project has no request of its own yet, and no earlier failure.
       running.current = null;
       setBusy(null);
@@ -142,7 +162,7 @@ export function ProjectFileProvider({ children }: { children: ReactNode }) {
     setBusy(null);
   };
   /** An answer belongs to the scope it was requested in, or to nothing shown now. */
-  const belongs = (run: Run) => run.scope === scopeRef.current;
+  const belongs = (run: Run) => mounted.current && run.scope === scopeRef.current;
 
   const save = useCallback(async () => {
     if (unavailable !== null) {

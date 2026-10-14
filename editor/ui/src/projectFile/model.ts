@@ -9,7 +9,6 @@ import type { CapabilitySet } from '../bridge/resolve';
 import { unavailableMessage } from '../bridge/resolve';
 import { projectState } from '../shell/projectState';
 import type { RequestResult } from '../shell/requests';
-import { wasRejected } from '../shell/requests';
 
 export type PinReview = Extract<ProjectFileResponse, { readonly operation: 'review_pin' }>['review'];
 export type SaveReceipt = Extract<ProjectFileResponse, { readonly operation: 'save' }>['receipt'];
@@ -94,13 +93,13 @@ export interface FileFailure {
 
 /**
  * A failed request as shown, its code and message exactly as they came. Unknown exactly
- * when `Shell.request` caught a rejected promise, whatever was thrown; a host's own
- * failure answer is definite, whatever its code.
+ * when the bridge or Shell could not verify completion after dispatch. Error text
+ * and codes never establish whether a write committed.
  */
 export const requestFailure = (result: Extract<RequestResult, { readonly ok: false }>): FileFailure => ({
   message: result.error.message,
   code: result.error.code,
-  unknown: wasRejected(result),
+  unknown: result.outcomeUnknown === true,
 });
 
 /** A success that arrived without its typed receipt is not reported as a success. */

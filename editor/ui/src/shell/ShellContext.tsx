@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useMemo, useRef, useState, useSyncExternalStore } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react';
 import type { ReactNode } from 'react';
 import type {
   BridgeResult,
@@ -41,7 +41,8 @@ export interface Shell {
   readonly dockTab: DockTab;
   readonly setDockTab: (tab: DockTab) => void;
   readonly message: string;
-  readonly announce: (message: string) => void;
+  /** Revoke only this announcement; revoking a superseded one leaves the newer message alone. */
+  readonly announce: (message: string) => () => void;
   /** Checks the capability, dispatches, and announces any failure. Resolves true on success. */
   readonly run: (command: EditorCommand) => Promise<boolean>;
   /** Like `run`, but returns the bridge's result so a caller can show the exact error inline. */
@@ -49,8 +50,8 @@ export interface Shell {
   readonly ask: (request: HostRequest) => Promise<boolean>;
   /**
    * Like `ask`, but returns the host's result so a caller can show the exact error inline.
-   * Always resolves: a rejected bridge request becomes a failure marked as rejected, so a
-   * caller can tell "no result arrived" from a host's refusal (shell/requests.ts).
+   * Always resolves: a rejected bridge request carries outcomeUnknown. The same marker
+   * is preserved when the native bridge cannot verify a file completion receipt.
    */
   readonly request: (request: HostRequest, options?: RequestOptions) => Promise<RequestResult>;
   readonly explainUnavailable: (capability: Capability) => void;
@@ -147,14 +148,43 @@ export function ShellProvider({ bridge, children }: { bridge: EditorBridge | nul
     setPanels((current) => ({ ...current, [panel]: !current[panel] }));
   }, []);
   const [message, setMessage] = useState('');
+  const announcementGeneration = useRef(0);
+  const enqueueTimer = useRef<number | undefined>(undefined);
   const clearTimer = useRef<number | undefined>(undefined);
 
   const announce = useCallback((text: string) => {
+    const generation = ++announcementGeneration.current;
+    window.clearTimeout(enqueueTimer.current);
     window.clearTimeout(clearTimer.current);
     // Clear first so repeating the same message is announced again.
     setMessage('');
-    window.setTimeout(() => setMessage(text), 30);
-    clearTimer.current = window.setTimeout(() => setMessage(''), 8000);
+    enqueueTimer.current = window.setTimeout(() => {
+      if (announcementGeneration.current !== generation) return;
+      enqueueTimer.current = undefined;
+      setMessage(text);
+    }, 30);
+    clearTimer.current = window.setTimeout(() => {
+      if (announcementGeneration.current !== generation) return;
+      clearTimer.current = undefined;
+      setMessage('');
+    }, 8000);
+    return () => {
+      if (announcementGeneration.current !== generation) return;
+      ++announcementGeneration.current;
+      window.clearTimeout(enqueueTimer.current);
+      window.clearTimeout(clearTimer.current);
+      enqueueTimer.current = undefined;
+      clearTimer.current = undefined;
+      setMessage('');
+    };
+  }, []);
+
+  useEffect(() => () => {
+    ++announcementGeneration.current;
+    window.clearTimeout(enqueueTimer.current);
+    window.clearTimeout(clearTimer.current);
+    enqueueTimer.current = undefined;
+    clearTimer.current = undefined;
   }, []);
 
   const explainUnavailable = useCallback(

@@ -1,6 +1,6 @@
 import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import axe from 'axe-core';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import type { EngineRead, Invoke } from '../../../bridge/native';
 import { NativeBridge } from '../../../bridge/native';
 import { App } from '../App';
@@ -79,7 +79,7 @@ const settle = () => act(async () => { await new Promise((done) => setTimeout(do
 interface FileCall {
   readonly request: Record<string, unknown>;
   /** Answers as the host does: the response and the read that follows it. */
-  answer(response: unknown, next?: EngineRead): Promise<void>;
+  answer(response: unknown, next?: EngineRead, settleAnswer?: boolean): Promise<void>;
   /** Fails as the host does: Tauri rejects with the command's error text. */
   refuse(error: unknown): Promise<void>;
 }
@@ -94,10 +94,10 @@ async function createHost(read: EngineRead, platform: 'macos' | 'windows' = 'mac
     return new Promise<T>((resolve, reject) => {
       files.push({
         request: args?.request as Record<string, unknown>,
-        answer: async (response, next = current) => {
+        answer: async (response, next = current, settleAnswer = true) => {
           current = next;
           resolve({ response, snapshot: next } as T);
-          await settle();
+          if (settleAnswer) await settle();
         },
         refuse: async (error) => {
           reject(error);
@@ -330,7 +330,7 @@ describe('failed saves', () => {
     await files[0]!.refuse('The project file changed outside the editor.');
     const region = screen.getByRole('region', { name: 'Project status' });
     const alert = within(region).getByRole('alert');
-    expect(alert.textContent).toContain('Save failed. The project file changed outside the editor.');
+    expect(alert.textContent).toContain('Save result unknown. The project file changed outside the editor.');
     expect(alert.textContent).toContain('engine.request');
     expect(message()).not.toMatch(/Saved/);
 
@@ -356,7 +356,7 @@ describe('failed saves', () => {
     // The production bridge refuses a receipt for a revision it did not send.
     await files[0]!.answer(savedAt(9, true));
     const alert = within(screen.getByRole('region', { name: 'Project status' })).getByRole('alert');
-    expect(alert.textContent).toContain('Save failed. Invalid project file response.');
+    expect(alert.textContent).toContain('Save result unknown. Invalid project file response.');
     expect(message()).not.toMatch(/Saved/);
   });
 
@@ -509,7 +509,7 @@ describe('engine pin review', () => {
     const dialog = pinDialog();
     const refusal = within(dialog).getByRole('alert');
     expect(refusal.textContent).toBe(
-      'The review could not be prepared. engine pin review applies only to a legacy project without an engine declarationengine.request',
+      'No review was returned. engine pin review applies only to a legacy project without an engine declarationengine.request',
     );
     expect(describedBy(dialog)).toBe(refusal.textContent);
     expect(within(dialog).queryByRole('button', { name: 'Pin' })).toBeNull();
@@ -522,7 +522,7 @@ describe('engine pin review', () => {
     fireEvent.click(footer('Pin'));
     await files[2]!.refuse('document revision conflict: expected 3, current 4');
     expect(within(dialog).getByRole('alert').textContent).toBe(
-      'The engine pin was not applied. document revision conflict: expected 3, current 4engine.requestA new review is needed to try again.',
+      'Engine pin result unknown. document revision conflict: expected 3, current 4engine.requestA new review is needed to try again.',
     );
     expect(within(dialog).queryByRole('button', { name: 'Pin' })).toBeNull();
     expect(document.activeElement).toBe(footer('Close'));
@@ -542,7 +542,7 @@ describe('engine pin review', () => {
     await waitFor(() => expect(message()).toBe('The engine pin is being applied.'));
     await files[1]!.refuse('project source conflict');
     const alert = within(screen.getByRole('region', { name: 'Project status' })).getByRole('alert');
-    expect(alert.textContent).toContain('The engine pin was not applied. project source conflict');
+    expect(alert.textContent).toContain('Engine pin result unknown. project source conflict');
 
     choose(/^Pin engine version/);
     await files[2]!.answer(reviewAt(3));
@@ -577,6 +577,33 @@ describe('engine pin review', () => {
 });
 
 describe('answers that arrive after another project opened', () => {
+  it.each(['queued', 'visible'] as const)('retires a %s Save success announcement when another project opens', async (phase) => {
+    vi.useFakeTimers();
+    let view: ReturnType<typeof render> | undefined;
+    try {
+      const host = await openEditor();
+      view = host.view;
+      press({ metaKey: true });
+      // Own the async act boundary here: the helper's real-clock settling wrapper must
+      // not remain open while this test advances its fake announcement clock.
+      await act(async () => { await host.files[0]!.answer(savedAt(3, true), undefined, false); });
+      if (phase === 'visible') {
+        await act(async () => { await vi.advanceTimersByTimeAsync(30); });
+        expect(message()).toBe('Saved revision 3 to the project file.');
+      } else {
+        expect(message()).toBe('');
+      }
+      await host.publish(lighthouse());
+      expect(screen.getByRole('button', { name: /^Project: Lighthouse/ })).not.toBeNull();
+      await act(async () => { await vi.advanceTimersByTimeAsync(100); });
+      expect(message()).toBe('');
+      expect(screen.queryByRole('region', { name: 'Project status' })).toBeNull();
+    } finally {
+      view?.unmount();
+      vi.useRealTimers();
+    }
+  });
+
   it('drops a Save answer when another project opens while it is pending', async () => {
     const { files, publish } = await openEditor();
     press({ metaKey: true });

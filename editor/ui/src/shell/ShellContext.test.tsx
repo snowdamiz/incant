@@ -1,5 +1,5 @@
 import { act, render, waitFor } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { NativeBridge } from '../../../bridge/native';
 import type { BridgeResult, EditorBridge } from '../bridge/contract';
 import { createFixtureBridge } from '../bridge/fixture';
@@ -9,7 +9,6 @@ import type { EngineRead } from '../../../bridge/native';
 import projectSchema from '../../../../schemas/Project.schema.json';
 import { ShellProvider, capabilityOf, useShell } from './ShellContext';
 import type { RequestResult } from './requests';
-import { wasRejected } from './requests';
 
 describe('shell snapshot', () => {
   it('updates native budget capabilities after loading and preserves the authored cap', async () => {
@@ -96,6 +95,63 @@ describe('shell snapshot', () => {
     expect(capabilityOf({ type: 'window.close' })).toBe('window.close');
   });
 
+  it('an old revocation cannot erase a newer queued or visible announcement', () => {
+    vi.useFakeTimers();
+    let view: ReturnType<typeof render> | undefined;
+    try {
+      let shell!: Shell;
+      function Panel() { shell = useShell(); return <div role="status">{shell.message}</div>; }
+      view = render(<ShellProvider bridge={null}><Panel /></ShellProvider>);
+      let revokeOld!: () => void;
+      act(() => { revokeOld = shell.announce('Earlier result'); });
+      act(() => { vi.advanceTimersByTime(10); });
+      act(() => {
+        shell.announce('New unrelated result');
+        revokeOld();
+      });
+      // The earlier queued message never appears, even before the newer one is due.
+      act(() => { vi.advanceTimersByTime(20); });
+      expect(view.getByRole('status').textContent).toBe('');
+      act(() => { vi.advanceTimersByTime(10); });
+      expect(view.getByRole('status').textContent).toBe('New unrelated result');
+      act(() => { revokeOld(); });
+      expect(view.getByRole('status').textContent).toBe('New unrelated result');
+    } finally {
+      view?.unmount();
+      vi.useRealTimers();
+    }
+  });
+
+  it('revokes its own queued and visible messages and cancels superseded and unmounted timers', () => {
+    vi.useFakeTimers();
+    let view: ReturnType<typeof render> | undefined;
+    try {
+      let shell!: Shell;
+      function Panel() { shell = useShell(); return <div role="status">{shell.message}</div>; }
+      view = render(<ShellProvider bridge={null}><Panel /></ShellProvider>);
+      let revoke!: () => void;
+      act(() => { revoke = shell.announce('Never shown'); revoke(); });
+      act(() => { vi.advanceTimersByTime(30); });
+      expect(view.getByRole('status').textContent).toBe('');
+      act(() => { revoke = shell.announce('Visible result'); });
+      act(() => { vi.advanceTimersByTime(30); });
+      expect(view.getByRole('status').textContent).toBe('Visible result');
+      act(() => { revoke(); });
+      expect(view.getByRole('status').textContent).toBe('');
+
+      act(() => { shell.announce('Older result'); vi.advanceTimersByTime(4000); });
+      act(() => { shell.announce('Longer-lived result'); });
+      // The older message's expiry must not clear its replacement.
+      act(() => { vi.advanceTimersByTime(4050); });
+      expect(view.getByRole('status').textContent).toBe('Longer-lived result');
+      view.unmount();
+      expect(vi.getTimerCount()).toBe(0);
+    } finally {
+      view?.unmount();
+      vi.useRealTimers();
+    }
+  });
+
   it('resolves a rejected bridge request as a failure marked rejected, keeping the thrown code and message', async () => {
     // TEST DOUBLE: a bridge whose request promise rejects instead of resolving to a result,
     // and finally resolves to a host failure carrying the editor's own rejection code.
@@ -130,8 +186,8 @@ describe('shell snapshot', () => {
       { code: 'host.closed', message: 'The editor process exited.' },
       { code: 'request.rejected', message: 'A host refusal.' },
     ]);
-    // Only a caught rejection is marked, whatever its code; a host's answer never is.
-    expect(results.map(wasRejected)).toEqual([true, true, false]);
+    // Codes cannot establish whether completion arrived; the local marker does.
+    expect(results.map((result) => !result.ok && result.outcomeUnknown === true)).toEqual([true, true, false]);
     await waitFor(() => expect(shell.message).toBe('window.close failed: The request ended without a result.'));
   });
 });
