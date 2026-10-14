@@ -15,6 +15,10 @@ pub(crate) struct FrameTargets {
 #[derive(Default)]
 pub(crate) struct FrameCache(Mutex<Option<Arc<FrameTargets>>>);
 impl FrameCache {
+    #[cfg(test)]
+    pub(crate) fn diagnostic_color(&self) -> wgpu::TextureView {
+        self.0.lock().unwrap().as_ref().unwrap().color.clone()
+    }
     pub fn validate(device: &wgpu::Device, width: u32, height: u32) -> Result<()> {
         let limit = device.limits().max_texture_dimension_2d.min(8192);
         if width == 0
@@ -59,7 +63,13 @@ impl FrameCache {
             color: create(
                 "Linear HDR scene",
                 HDR_FORMAT,
-                wgpu::TextureUsages::RENDER_ATTACHMENT | wgpu::TextureUsages::TEXTURE_BINDING,
+                wgpu::TextureUsages::RENDER_ATTACHMENT
+                    | wgpu::TextureUsages::TEXTURE_BINDING
+                    | if cfg!(test) {
+                        wgpu::TextureUsages::COPY_SRC
+                    } else {
+                        wgpu::TextureUsages::empty()
+                    },
             ),
             depth: create(
                 "Scene depth",

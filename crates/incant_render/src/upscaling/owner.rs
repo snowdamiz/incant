@@ -319,6 +319,15 @@ impl Pending {
 }
 #[cfg(test)]
 impl State {
+    pub(crate) fn diagnostic_surfaces(&self) -> Option<[wgpu::TextureView; 3]> {
+        let output = self.output.as_ref()?;
+        let slot = self.last.as_ref()?.slot;
+        Some([
+            output.color[slot].clone(),
+            output.depth[slot].clone(),
+            output.evidence[slot].clone(),
+        ])
+    }
     pub(crate) fn accepted_owner_surfaces(&self) -> Option<[wgpu::TextureView; 3]> {
         let output = self.output.as_ref()?;
         let slot = self.last.as_ref()?.slot;

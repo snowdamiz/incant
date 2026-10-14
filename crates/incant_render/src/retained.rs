@@ -723,3 +723,7 @@ mod motion_owner_tests;
 #[cfg(test)]
 #[path = "upscaling_owner_retained_tests.rs"]
 mod upscaling_owner_tests;
+
+#[cfg(test)]
+#[path = "reconstruction_diagnostic.rs"]
+mod reconstruction_diagnostic;
