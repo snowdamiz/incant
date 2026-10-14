@@ -10,8 +10,8 @@
   },
   "qualification": {
     "path": "docs/spikes/evidence/profile-distributions-main257/qualification.json",
-    "bytes": 560,
-    "sha256": "237c948582c431ae3be9c2836d2a480e87dafaa937d818ed6959212f21f3478d"
+    "bytes": 598,
+    "sha256": "a0e6fece71e27d701c6dca7107a82dc4de99d6400039b2d949222dc9029b2f8b"
   },
   "verifier": {
     "path": "docs/spikes/evidence/profile-distributions-main257/verify.py",
@@ -33,6 +33,11 @@
       "path": "docs/spikes/evidence/profile-distributions-main257/mac-cpu-runner-final-independent-20261013.json",
       "bytes": 1898,
       "sha256": "3531862ea72eaa6e22149e4cc16c40a8df5c2bc2e9f79e7d1e836fab519c9807"
+    },
+    {
+      "path": "docs/spikes/evidence/profile-distributions-main257/profile-distributions-main257-final-root-20261014.json",
+      "bytes": 1113,
+      "sha256": "b309f43ee293584a7a64e512a8811602e82b4359da76954a5e1ccabaaffa2ef5"
     }
   ],
   "producer_files": [

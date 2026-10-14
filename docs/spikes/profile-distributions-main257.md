@@ -5,7 +5,7 @@ accepted per-frame CPU profiler and Mac measurement runner on actual main257.
 All 15 changed implementation/test/tool paths are byte-exact producer inputs.
 There are no source conflicts, dependency-manifest changes or lock changes.
 The STATUS merge is documentation only. Current source review is accepted;
-final execution evidence review is pending.
+final execution evidence review is independently accepted. Publication requires the exact-head fast check.
 
 The focused current-source qualification passed all 24 commands. Its 17 named
 CPU cases cover five histogram units, five summary controls, actual two-source

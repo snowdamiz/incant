@@ -6,7 +6,8 @@ The opt-in profiler now reports bounded per-frame phase wall histograms and
 conservative p95 intervals, including aggregate `script.tick`. Seventeen explicit
 native CI-profile CPU cases, a dedicated allocation control and eight runner tests
 pass on actual main257, including the real three-tick CLI report. All 24 current
-checks pass; final integration review is pending. Missing/failed/overflow samples
+checks pass; final integration review is independently accepted and publication
+awaits its exact-head fast check. Missing/failed/overflow samples
 refuse p95; default dependencies remain empty. Shipping 10,000-entity Mac
 measurements and the 60 fps/GPU/hitch gates remain separate.
 [Current evidence](docs/spikes/profile-distributions-main257.md).

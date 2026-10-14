@@ -5,5 +5,5 @@
   "runner_packet": "75b44848fd24c012459244325793099c6b1f7e6d",
   "commands": 24,
   "scope": "Focused current Mac CI-profile CPU correctness, report parser and compiler checks. Not a shipping performance sample or phase gate. Root actual shipping export/measurement remains independent.",
-  "review": "Current source independently accepted; final current execution review pending."
+  "review": "Final current-main source and CPU evidence independently accepted; exact-head fast check required before main merge."
 }

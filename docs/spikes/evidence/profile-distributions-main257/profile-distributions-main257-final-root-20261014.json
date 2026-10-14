@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "reviewer": "astra root",
+  "candidate": "804fd8b91b0e2cb9fcc2f3c464fff38c99ef4f8c",
+  "accepted": true,
+  "source_review": "profile-distributions-main257-source-root-20261013.json",
+  "files": {
+    "docs/spikes/evidence/profile-distributions-main257/manifest.json": "b4e12e981913c7fc617eb45b58bc42902ae45086cb1392e2b3d9816bafb22b74",
+    "docs/spikes/evidence/profile-distributions-main257/cli-child-binding.json": "4544e819dc03a56f37768cdfaf7be2d05b850bae534f04c46fe850a0c4054c46",
+    "docs/spikes/evidence/profile-distributions-main257/verify.py": "ad3af099ae7ac6d8f6426a10425003b5ab0d56d19868a77a7fa4ebb809801a39"
+  },
+  "verification": "portable archive + originals + local binary copies independently passed; 24 commands, 17 CPU cases, 8 runner tests, dedicated allocation process",
+  "child_binding": "retained runner before/after assertions bind target to copied CLI hash; separate observed and child-open values not serialized",
+  "scope": "CPU correctness and runner integration only; no shipping performance or phase approval",
+  "timestamp": "2026-10-14T01:06:17.232730+00:00"
+}
