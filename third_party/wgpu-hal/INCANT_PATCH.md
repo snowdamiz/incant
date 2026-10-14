@@ -42,8 +42,8 @@ normal scheduling or default feature graph. See
 The original source-only status is superseded by source
 `dda197ae907a5d34e7c7a69a4041e1ec4f45aee2`: 19 exact collector controls and
 actual HAL/host feature-on/off compilation plus strict lint passed. No native
-creation API or GPU execution follows from that result. Host integration and
-actual hardware observations remain pending; existing presentation evidence
+creation API or GPU execution follows from that result. The later host integration is CPU-qualified below;
+actual hardware compilation observations remain pending; existing presentation evidence
 does not qualify compilation timing.
 
 
@@ -51,4 +51,8 @@ The following host-wiring successor uses edition-neutral spelling of a nested
 observer-field access and panic imports so the exact collector tests can be
 included by the Rust2024 player while the HAL remains Rust2021. Collector
 semantics are unchanged; the preceding qualified source remains immutable.
-Host wiring qualification and live native-creation evidence remain pending.
+Host wiring source `6fa2ba2540280d7bb088d4dd03ec2426779bd8b1` subsequently
+passed142 observer-enabled and97 ordinary player tests,3 renderer binding controls,
+and strict all-target on/off host lint. Its two failed attempts remain bound in
+`docs/spikes/evidence/native-compilation-observer/host-cpu-qualification.json`.
+Live native-creation evidence remains pending; no default feature was enabled.

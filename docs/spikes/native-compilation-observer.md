@@ -3,8 +3,8 @@
 This private, default-off source milestone adds `diagnostic-compilation` only to
 the pinned Metal HAL. Its source003 CPU qualification passed; no native creation
 API or GPU was exercised. Native
-player/renderer forwarding, cold binding and final sidecar are now authored in
-the successor described below, but are not yet CPU- or hardware-qualified. No
+player/renderer forwarding, cold binding and final sidecar successor below is
+now CPU-qualified; actual native creation/hardware observation remains pending. No
 public exporter or default feature selection changes here.
 The existing presentation and audio evidence is unchanged.
 
@@ -104,7 +104,7 @@ and compilation results, not complete-game shader-stall evidence. The authored
 host successor and actual live observation require separate qualification.
 
 
-## Authored host successor (not yet executed)
+## Host successor (CPU-qualified; hardware observation pending)
 
 The explicit `native-compilation` player feature enables a renderer forwarding
 feature and the HAL observer. Normal native-window/profile/presentation features
@@ -150,7 +150,7 @@ there is no per-frame serialization, polling or GPU wait. A sidecar failure
 cannot replace an earlier gameplay/window error, and turns an otherwise
 successful result into an error. It cannot claim the final process exit status.
 
-Authored CPU controls cover create-only/no-effect refusal, early-failure output,
+CPU controls cover create-only/no-effect refusal, early-failure output,
 explicit commit versus unwind, distinct boundaries, saturated counters, capped
 writes, original-error precedence, inert absent capture, trusted CLI/package
 forwarding, and cold observer handle ownership. The19 qualified collector
@@ -158,5 +158,30 @@ controls are included as exact source; one nested tuple expression and panic
 imports were made edition-neutral for the2024 host tests and2021 HAL. These are
 format-compatible mechanical changes, not altered collector semantics. The full
 upstream patch is regenerated; prior CPU source identities remain retained.
-No host CPU test, actual API call, window capture, shader-stall pass or display
-performance result is claimed for this unexecuted successor.
+The [host CPU receipt](evidence/native-compilation-observer/host-cpu-qualification.json)
+binds source `6fa2ba2540280d7bb088d4dd03ec2426779bd8b1`, both failures, every
+managed command/log, actual feature rows and all four retained test binaries.
+The142 observer-enabled player tests passed, including19 collector and8 host
+controls. Three renderer cold-binding tests passed, including catalog unwind and
+handle retention. All97 ordinary-window/profile player tests passed, and strict
+all-target player/renderer Clippy passed with both observers enabled and with
+both disabled. These are mode-specific executions, not242 unique test cases.
+Actual HAL dependencies were compiled in the expected on/off configurations.
+
+The first attempt compiled but found one new test expectation wrong: existing
+closed package manifests reject an injected output field instead of ignoring it.
+Only that test was corrected. The second passed all142 player controls, then
+standalone renderer compilation exposed cached pre-halo dependency metadata
+that disagreed with frozen source. The metadata, relative dep-info and all35
+fingerprint directories were copied and bound. Only the two affected packages'
+fingerprints were invalidated; source and existing artifacts were preserved.
+The four remaining commands then passed on unchanged source. No failing input,
+assertion or compiler diagnostic was hidden.
+
+All owned children returned after cleanup and the target/CPU slot was released.
+Across all attempts the supervisor recorded250.44s, minimum sampled free space
+91,935,801,344 bytes, and472,377,454 bytes cumulative target growth, within the
+6GiB floor and2GiB growth bound. Immediate executable copies were retained before
+release. Source and CPU evidence do not establish a live native API duration,
+complete-game shader-stall pass or display performance result. A fresh private
+shipping build and separate owned-window observation still require review.
