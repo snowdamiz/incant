@@ -15,8 +15,9 @@ player tests (87), audio tests (39), strict all-target player lint in both modes
 and HAL lint pass. All owned commands exited successfully and were reaped.
 [Composition manifest](evidence/native-presentation-audio/manifest.json) binds
 exact logs, feature graphs, copied test binaries and the resolution diff.
-The producer packet below remains unchanged and replayable. Its live evidence
-predates the audio fix; a fresh complete shipping replay is still outstanding.
+The producer packet below remains unchanged and replayable. Its original live evidence
+predates the audio fix. The [fresh complete replay](native-presentation-audio.md)
+now verifies gameplay parity while retaining timing limitations.
 
 The first PR integration check found a formatting conflict in a test shared by
 Rust 2021 and 2024 modules. Binding its existing result before asserting removes
@@ -196,6 +197,15 @@ The observer foundation has real partial callback evidence. Complete replay,
 glitch-free output, complete display cadence and final-game shader-hitch
 qualification remain open. Pipeline/shader object prewarming alone cannot prove
 absence of later driver compilation. This packet makes no such claim.
+
+## Later observer/audio composition
+
+A fresh build with the separately reviewed typed-Xrun policy subsequently
+completed all 2,156 replay steps. Its retained zero/equal callback timestamps
+still prevent complete display timing acceptance. See
+[native-presentation-audio.md](native-presentation-audio.md) for the distinct
+source, artifact, full gameplay parity and limited callback result. The two
+failed attempts above remain unchanged historical outcomes.
 
 ## Portable read-only replay
 
