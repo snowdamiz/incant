@@ -11,6 +11,18 @@ antialiasing. This is a separate viewport defect, not a rendering-quality pass
 or proof of the low-resolution reconstruction cause. The entries
 below preserve earlier scoped results and superseded integration snapshots.
 
+## Prepared MetalFX interop — correctness verified, appearance failed
+
+The default-off Mac path now has reviewed native queue ownership, bounded target
+lifetimes, explicit extent preparation, typed fallback/refusal and camera-cut
+history reset. Local CPU checks and actual Metal controls pass. A subsequent
+full-material comparison at 50 and 75 percent fails appearance review: thin lines
+are lost or dotted, silhouettes remain stepped and texture detail softens. Its
+current-only coverage/depth normalization prevents vendor reconstruction at
+precisely those boundaries. The path remains disabled while that contract is
+reworked; runtime correctness does not establish visual acceptance.
+[Native scope and evidence](docs/spikes/metalfx-main285.md).
+
 ## Compatible static-model refresh — actual Mac verified
 
 Native Play accepts bounded geometry, material-factor and image-content

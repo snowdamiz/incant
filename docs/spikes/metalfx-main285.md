@@ -2,7 +2,10 @@
 
 This default-off candidate starts at `1eca995cb36d9f9cada732dce7d52447569e63ac`.
 It does not merge the private reconstruction branch. Bounded native correctness
-controls passed on an Apple M5 Pro / Metal; rendered quality remains unreviewed. The built-in temporal upscaler remains
+controls passed on an Apple M5 Pro / Metal. A later real-material comparison
+failed appearance review: thin lines disappear at 50 percent, silhouettes remain
+stepped, and detail loses sharpness. This integration stays default-off and is
+not an accepted rendering-quality mode. The built-in temporal upscaler remains
 unfinished; this optional vendor path cannot satisfy that requirement.
 
 The private producer `4bc810fe` established a raw-only command encoder, lifetime
@@ -132,5 +135,7 @@ Portable receipt: [manifest](evidence/metalfx-main285/manifest.json) and
 checks retained external records, `--binaries` checks immediate executable copies,
 and `--git-source` checks the frozen compiler-input inventory against the immutable
 source commit. Readback verification is a boundary-policy check; it cannot decide
-appearance or replace actual material/motion image comparisons. Those comparisons,
-vendor memory/performance measurements and cooked shader support remain open.
+appearance or replace actual material/motion image comparisons. The later material/motion comparison confirms the structural edge limitation;
+quality repair, vendor memory/performance measurements and cooked shader support
+remain open. See the subsequent image qualification before treating this path as
+a usable quality setting.
