@@ -16,7 +16,9 @@ use std::{
 };
 use tauri::Manager;
 
+mod animation;
 mod kind;
+pub(in crate::play) use animation::AnimationObservation;
 pub(super) use kind::Kind;
 const ENTITY: &str = "00000000000000000000000004";
 
@@ -24,6 +26,7 @@ const ENTITY: &str = "00000000000000000000000004";
 struct ObservedAsset {
     id: StableId,
     kind: incant_runtime::VisualAssetKind,
+    animation_entity: Option<StableId>,
 }
 const CAMERA: &str = "00000000000000000000000003";
 
@@ -33,6 +36,7 @@ pub(in crate::play) struct Observation {
     pub frames: u64,
     pub recipe_matches: bool,
     pub adapter: String,
+    pub animation: Option<AnimationObservation>,
 }
 #[derive(Deserialize)]
 #[serde(deny_unknown_fields)]
@@ -47,6 +51,14 @@ fn owned_fixture(root: &Path, document: &Value, kind: Kind) -> Result<(), String
         require(
             metadata.is_file() && !metadata.file_type().is_symlink() && metadata.len() <= 65536,
             "asset probe requires its bounded regular fixture files",
+        )?;
+    }
+    if kind.animated() {
+        let metadata = fs::symlink_metadata(root.join("refresh-incompatible.gltf"))
+            .map_err(|e| e.to_string())?;
+        require(
+            metadata.is_file() && !metadata.file_type().is_symlink() && metadata.len() <= 65536,
+            "animation probe requires its bounded incompatible fixture",
         )?;
     }
     let fixture: Fixture =
@@ -72,6 +84,7 @@ fn observe(
         asset: asset.id,
         kind: asset.kind,
         fingerprint: fingerprint.into(),
+        animation_entity: asset.animation_entity,
         reply,
     })?;
     result
@@ -80,8 +93,10 @@ fn observe(
 }
 fn stable(observed: &Observation, baseline: &Observation) -> Result<(), String> {
     require(
-        observed.identity == baseline.identity && observed.tick == baseline.tick,
-        "asset workflow replaced or advanced the paused native world",
+        observed.identity == baseline.identity
+            && observed.tick == baseline.tick
+            && observed.animation == baseline.animation,
+        "asset workflow replaced or advanced the paused native world/animation",
     )
 }
 fn catalog_frame(
@@ -157,7 +172,8 @@ fn wait_source(editor: &Editor, kind: Kind, failed: bool) -> Result<(), String> 
 }
 fn point(name: &str, observation: &Observation, fingerprint: &str, history: Value) -> Value {
     json!({"stage":name,"tick":observation.tick,"frames":observation.frames,
-        "accepted_fingerprint":fingerprint,"recipe_matches":observation.recipe_matches,"history":history})
+        "accepted_fingerprint":fingerprint,"recipe_matches":observation.recipe_matches,"history":history,
+        "animation":observation.animation})
 }
 fn initial_play_ready(status: &super::Status) -> bool {
     status.spatial && status.tick >= 2 && status.presented_frames >= 2
@@ -234,6 +250,12 @@ pub(super) fn run(
                 .map_err(|e| e.to_string())?
                 .to_bytes(),
         ),
+        animation_entity: kind.animated().then_some(StableId(
+            ENTITY
+                .parse::<ulid::Ulid>()
+                .map_err(|e| e.to_string())?
+                .to_bytes(),
+        )),
     };
     let scene = before.0["scenes"]
         .as_object()
@@ -295,6 +317,9 @@ pub(super) fn run(
     )?;
     let generation = editor.play.snapshot()?.generation;
     let baseline = catalog_frame(editor, generation, stable_asset, &red, None)?;
+    if kind.animated() {
+        animation::validate_at_tick(baseline.animation.as_ref(), baseline.tick)?;
+    }
     require(
         baseline.adapter.contains("backend: Metal"),
         "this control requires the actual Mac Metal adapter",
@@ -380,65 +405,79 @@ pub(super) fn run(
         &blue_fingerprint,
         history(editor)?,
     ));
-    let before_bad = project(editor)?;
-    fs::write(
-        root.join(kind.source()),
-        b"invalid source owned by the native asset workflow fixture",
-    )
-    .map_err(|e| e.to_string())?;
-    let refusal = match tauri::async_runtime::block_on(assets::engine_import(
-        app.state::<Arc<Editor>>(),
-        app.clone(),
-        vec![incant_import::ImportRequest {
-            source: kind.source().into(),
-            texture_usage: kind.texture_usage(),
-        }],
-        before_bad.1,
-    )) {
-        Ok(_) => return Err("malformed manual import was accepted".into()),
-        Err(error) => serde_json::to_value(error).map_err(|e| e.to_string())?,
+    let (refusal, stable_authoring) = if kind.animated() {
+        let recovered = animation::refuse_and_recover(
+            editor,
+            generation,
+            stable_asset,
+            &blue_fingerprint,
+            &baseline,
+            &blue,
+            &mut stages,
+        )?;
+        (recovered.refusal, recovered.authoring)
+    } else {
+        let before_bad = project(editor)?;
+        fs::write(
+            root.join(kind.source()),
+            b"invalid source owned by the native asset workflow fixture",
+        )
+        .map_err(|e| e.to_string())?;
+        let refusal = match tauri::async_runtime::block_on(assets::engine_import(
+            app.state::<Arc<Editor>>(),
+            app.clone(),
+            vec![incant_import::ImportRequest {
+                source: kind.source().into(),
+                texture_usage: kind.texture_usage(),
+            }],
+            before_bad.1,
+        )) {
+            Ok(_) => return Err("malformed manual import was accepted".into()),
+            Err(error) => serde_json::to_value(error).map_err(|e| e.to_string())?,
+        };
+        require(
+            refusal["code"] == "asset.import",
+            "manual refusal lost its structured import diagnostic",
+        )?;
+        wait_source(editor, kind, true)?;
+        require(
+            project(editor)? == before_bad,
+            "bad source changed project/revision/history",
+        )?;
+        let retained = catalog_frame(
+            editor,
+            generation,
+            stable_asset,
+            &blue_fingerprint,
+            Some(&baseline),
+        )?;
+        stages.push(point(
+            kind.stage(4),
+            &retained,
+            &blue_fingerprint,
+            history(editor)?,
+        ));
+        fs::write(root.join(kind.source()), &blue).map_err(|e| e.to_string())?;
+        wait_source(editor, kind, false)?;
+        require(
+            project(editor)? == before_bad,
+            "identical source recovery appended a transaction",
+        )?;
+        let recovered = catalog_frame(
+            editor,
+            generation,
+            stable_asset,
+            &blue_fingerprint,
+            Some(&baseline),
+        )?;
+        stages.push(point(
+            kind.stage(5),
+            &recovered,
+            &blue_fingerprint,
+            history(editor)?,
+        ));
+        (refusal, before_bad)
     };
-    require(
-        refusal["code"] == "asset.import",
-        "manual refusal lost its structured import diagnostic",
-    )?;
-    wait_source(editor, kind, true)?;
-    require(
-        project(editor)? == before_bad,
-        "bad source changed project/revision/history",
-    )?;
-    let retained = catalog_frame(
-        editor,
-        generation,
-        stable_asset,
-        &blue_fingerprint,
-        Some(&baseline),
-    )?;
-    stages.push(point(
-        kind.stage(4),
-        &retained,
-        &blue_fingerprint,
-        history(editor)?,
-    ));
-    fs::write(root.join(kind.source()), &blue).map_err(|e| e.to_string())?;
-    wait_source(editor, kind, false)?;
-    require(
-        project(editor)? == before_bad,
-        "identical source recovery appended a transaction",
-    )?;
-    let recovered = catalog_frame(
-        editor,
-        generation,
-        stable_asset,
-        &blue_fingerprint,
-        Some(&baseline),
-    )?;
-    stages.push(point(
-        kind.stage(5),
-        &recovered,
-        &blue_fingerprint,
-        history(editor)?,
-    ));
     require(
         execute(
             editor,
@@ -488,24 +527,40 @@ pub(super) fn run(
         "step replaced world/catalog",
     )?;
     require(
-        project(editor)? == before_bad,
+        project(editor)? == stable_authoring,
         "Play continuation changed authoring",
     )?;
+    if kind.animated() {
+        animation::continued(
+            baseline.animation.as_ref(),
+            final_observation.animation.as_ref(),
+        )?;
+    }
     execute(editor, Action::Stop { generation })?;
     require(
         observe(editor, generation, stable_asset, &blue_fingerprint).is_err(),
         "stopped world remained observable",
     )?;
-    Ok(
-        json!({"passed":true,"asset_kind":kind.label(),"platform":std::env::consts::OS,"adapter":baseline.adapter,
+    let mut report = json!({"passed":true,"asset_kind":kind.label(),"platform":std::env::consts::OS,"adapter":baseline.adapter,
         "play_generation":generation,"paused_tick":baseline.tick,"final_tick":final_observation.tick,
         "world_identity_unchanged":true,"module_counter_continued":true,"actual_window_presentations":true,
         "vm_counter":{"before_translation":before_translation,"observed_delta":observed_delta,"expected_delta":expected_delta},
         "manual_import_execute_history_handlers":true,"real_source_watcher":true,"undo_not_overwritten":true,
         "malformed_source_refusal":refusal,"source_recovery":true,"stale_generation_refused":true,
         "stop_releases_world":true,"stages":stages,"pixel_capture":false,"appearance_review":false,
-        "performance_or_phase_gate":false}),
-    )
+        "performance_or_phase_gate":false});
+    if kind.animated() {
+        report
+            .as_object_mut()
+            .unwrap()
+            .remove("malformed_source_refusal");
+        report["incompatible_refresh_refusal"] = refusal;
+        report["animation_continued"] = json!(true);
+        report["committed_incompatible_refused"] = json!(true);
+        report["animation_step"] =
+            json!({"before":baseline.animation,"after":final_observation.animation});
+    }
+    Ok(report)
 }
 
 #[cfg(test)]
