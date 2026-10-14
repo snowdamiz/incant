@@ -23,7 +23,7 @@
                  counters: Default::default(),
 --- /dev/null
 +++ b/src/metal/compilation.rs
-@@ -0,0 +1,424 @@
+@@ -0,0 +1,438 @@
 +//! Default-off observation of native creation calls, not proof of driver work.
 +use alloc::{boxed::Box, sync::Arc, vec::Vec};
 +use core::{
@@ -70,6 +70,10 @@
 +    Compute,
 +    Task,
 +    Mesh,
++    RayGeneration,
++    Miss,
++    AnyHit,
++    ClosestHit,
 +}
 +#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
 +pub enum Phase {
@@ -169,9 +173,7 @@
 +}
 +impl Default for Observer {
 +    fn default() -> Self {
-+        let device = NEXT_DEVICE
-+            .fetch_update(Ordering::Relaxed, Ordering::Relaxed, |n| n.checked_add(1))
-+            .unwrap_or(0);
++        let device = take_identity(&NEXT_DEVICE);
 +        Self(Arc::new(Shared {
 +            device,
 +            epoch: Instant::now(),
@@ -410,6 +412,18 @@
 +        }
 +    }
 +}
++fn take_identity(counter: &AtomicU64) -> u64 {
++    let mut value = counter.load(Ordering::Relaxed);
++    loop {
++        let Some(next) = value.checked_add(1) else {
++            return 0;
++        };
++        match counter.compare_exchange_weak(value, next, Ordering::Relaxed, Ordering::Relaxed) {
++            Ok(_) => return value,
++            Err(current) => value = current,
++        }
++    }
++}
 +fn bump(value: &mut u64, saturated: &mut bool) {
 +    if let Some(next) = value.checked_add(1) {
 +        *value = next;
@@ -450,11 +464,11 @@
 +mod tests;
 --- /dev/null
 +++ b/src/metal/compilation_native.rs
-@@ -0,0 +1,34 @@
+@@ -0,0 +1,35 @@
 +//! Native error identity is observed before the existing error mapping.
 +use super::compilation::{Call, ErrorDomain, ErrorIdentity, Observer};
 +use objc2::rc::Retained;
-+use objc2_foundation::{ns_string, NSError};
++use objc2_foundation::{ns_string, NSError, NSString};
 +use std::time::Instant;
 +
 +impl super::Device {
@@ -468,11 +482,12 @@
 +        let ended = Instant::now();
 +        let error = result.as_ref().err().map(|error| {
 +            let domain = error.domain();
-+            let domain = if domain.as_ref() == ns_string!("MTLLibraryErrorDomain") {
++            let domain: &NSString = &domain;
++            let domain = if domain == ns_string!("MTLLibraryErrorDomain") {
 +                ErrorDomain::Library
-+            } else if domain.as_ref() == ns_string!("MTLRenderPipelineErrorDomain") {
++            } else if domain == ns_string!("MTLRenderPipelineErrorDomain") {
 +                ErrorDomain::RenderPipeline
-+            } else if domain.as_ref() == ns_string!("MTLComputePipelineErrorDomain") {
++            } else if domain == ns_string!("MTLComputePipelineErrorDomain") {
 +                ErrorDomain::ComputePipeline
 +            } else {
 +                ErrorDomain::Other
@@ -487,7 +502,7 @@
 +}
 --- /dev/null
 +++ b/src/metal/compilation_tests.rs
-@@ -0,0 +1,338 @@
+@@ -0,0 +1,347 @@
 +use super::*;
 +use std::{
 +    panic::{catch_unwind, AssertUnwindSafe},
@@ -826,6 +841,15 @@
 +    assert_eq!(snapshot.rows[0].elapsed_ns, None);
 +    assert_eq!(snapshot.rows[0].outcome, Outcome::Success);
 +}
++
++#[test]
++fn device_identity_exhaustion_refuses_without_wrapping() {
++    let counter = AtomicU64::new(u64::MAX - 1);
++    assert_eq!(take_identity(&counter), u64::MAX - 1);
++    assert_eq!(take_identity(&counter), 0);
++    assert_eq!(take_identity(&counter), 0);
++    assert_eq!(counter.load(Ordering::Relaxed), u64::MAX);
++}
 --- a/src/metal/device.rs
 +++ b/src/metal/device.rs
 @@ -24,6 +24,8 @@
@@ -837,7 +861,7 @@
  use super::{conv, PassthroughShader, ShaderModuleSource};
  use crate::{auxil::map_naga_stage, TlasInstance};
  
-@@ -232,17 +234,31 @@
+@@ -232,17 +234,35 @@
                      options.setPreserveInvariance(true);
                  }
  
@@ -863,6 +887,10 @@
 +                            naga::ShaderStage::Compute => CompilationStage::Compute,
 +                            naga::ShaderStage::Task => CompilationStage::Task,
 +                            naga::ShaderStage::Mesh => CompilationStage::Mesh,
++                            naga::ShaderStage::RayGeneration => CompilationStage::RayGeneration,
++                            naga::ShaderStage::Miss => CompilationStage::Miss,
++                            naga::ShaderStage::AnyHit => CompilationStage::AnyHit,
++                            naga::ShaderStage::ClosestHit => CompilationStage::ClosestHit,
 +                        },
 +                    );
 +                    let result = self
@@ -880,7 +908,7 @@
  
                  let ep_index = module
                      .entry_points
-@@ -380,6 +396,8 @@
+@@ -380,6 +400,8 @@
          let capabilities_query = super::CapabilitiesQuery::new(&raw);
          let shared = super::AdapterShared::new(raw, &capabilities_query);
          super::Device {
@@ -889,7 +917,7 @@
              shared: Arc::new(shared),
              features,
              counters: Default::default(),
-@@ -1157,6 +1175,8 @@
+@@ -1157,6 +1179,8 @@
                  let library = super::library_from_metallib::new_library_from_metallib_bytes(
                      &self.shared.device,
                      file,
@@ -898,7 +926,7 @@
                  )
                  .map_err(|e| crate::ShaderError::Compilation(format!("Metallib: {e:?}")))?;
                  Ok(super::ShaderModule {
-@@ -1175,9 +1195,20 @@
+@@ -1175,9 +1199,20 @@
                  let options = MTLCompileOptions::new();
                  // Obtain the device from shared
                  let device = &self.shared.device;
@@ -922,7 +950,7 @@
  
                  Ok(super::ShaderModule {
                      source: ShaderModuleSource::Passthrough(PassthroughShader {
-@@ -1621,18 +1652,37 @@
+@@ -1621,18 +1656,37 @@
  
              // Create the pipeline from descriptor
              let raw = match descriptor {
@@ -972,7 +1000,7 @@
              }
              .map_err(|e| {
                  crate::PipelineError::Linkage(
-@@ -1730,6 +1780,10 @@
+@@ -1730,6 +1784,10 @@
                  descriptor.setLabel(Some(&NSString::from_str(name)));
              }
  
@@ -983,7 +1011,7 @@
              let raw = self
                  .shared
                  .device
-@@ -1738,6 +1792,9 @@
+@@ -1738,6 +1796,9 @@
                      MTLPipelineOption::empty(),
                      None,
                  );

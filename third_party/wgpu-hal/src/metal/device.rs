@@ -245,6 +245,10 @@ impl super::Device {
                             naga::ShaderStage::Compute => CompilationStage::Compute,
                             naga::ShaderStage::Task => CompilationStage::Task,
                             naga::ShaderStage::Mesh => CompilationStage::Mesh,
+                            naga::ShaderStage::RayGeneration => CompilationStage::RayGeneration,
+                            naga::ShaderStage::Miss => CompilationStage::Miss,
+                            naga::ShaderStage::AnyHit => CompilationStage::AnyHit,
+                            naga::ShaderStage::ClosestHit => CompilationStage::ClosestHit,
                         },
                     );
                     let result = self

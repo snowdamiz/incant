@@ -44,6 +44,10 @@ pub enum Stage {
     Compute,
     Task,
     Mesh,
+    RayGeneration,
+    Miss,
+    AnyHit,
+    ClosestHit,
 }
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
 pub enum Phase {
@@ -143,9 +147,7 @@ impl fmt::Debug for Observer {
 }
 impl Default for Observer {
     fn default() -> Self {
-        let device = NEXT_DEVICE
-            .fetch_update(Ordering::Relaxed, Ordering::Relaxed, |n| n.checked_add(1))
-            .unwrap_or(0);
+        let device = take_identity(&NEXT_DEVICE);
         Self(Arc::new(Shared {
             device,
             epoch: Instant::now(),
@@ -381,6 +383,18 @@ impl Drop for Call {
     fn drop(&mut self) {
         if !self.completed {
             self.record(Instant::now(), Outcome::Unwound, None);
+        }
+    }
+}
+fn take_identity(counter: &AtomicU64) -> u64 {
+    let mut value = counter.load(Ordering::Relaxed);
+    loop {
+        let Some(next) = value.checked_add(1) else {
+            return 0;
+        };
+        match counter.compare_exchange_weak(value, next, Ordering::Relaxed, Ordering::Relaxed) {
+            Ok(_) => return value,
+            Err(current) => value = current,
         }
     }
 }

@@ -336,3 +336,12 @@ fn clock_anomaly_counter_saturation_is_retained() {
     assert_eq!(snapshot.rows[0].elapsed_ns, None);
     assert_eq!(snapshot.rows[0].outcome, Outcome::Success);
 }
+
+#[test]
+fn device_identity_exhaustion_refuses_without_wrapping() {
+    let counter = AtomicU64::new(u64::MAX - 1);
+    assert_eq!(take_identity(&counter), u64::MAX - 1);
+    assert_eq!(take_identity(&counter), 0);
+    assert_eq!(take_identity(&counter), 0);
+    assert_eq!(counter.load(Ordering::Relaxed), u64::MAX);
+}

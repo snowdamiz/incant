@@ -54,13 +54,13 @@ rows pending. The collector does not wait, poll GPU, reset counters or imply
 that concurrent spans sum to exclusive frame time. Diagnostic locks, clocks,
 Arc work and metadata recording add overhead.
 
-Eighteen source controls cover capacity admission, pre-binding calls completing
+Nineteen source controls cover capacity admission, pre-binding calls completing
 after capture starts, independent devices, cross-thread exclusion, nested/invalid
 scope refusal, immutable entry context, exact-once result/error propagation,
 unwinding, bounded overflow, pending snapshots, destruction/recreation,
 saturation, handle lifetime, backward completion preserving native error, valid
 zero duration, backward entry/snapshot retention, anomalies without retained rows
-and anomaly-counter saturation. They are authored only, not passing evidence.
+anomaly-counter saturation and identity exhaustion. They are authored only, not passing evidence.
 Source milestone `052e032e1eb543e3c177603651d1f7b3d5560d36` and its
 13-test freeze are retained; this successor fixes its saturating-clock ambiguity.
 The native call-site correspondence still needs independent source review and
@@ -73,3 +73,11 @@ wiring will follow the separate window-eligibility integration to avoid a shared
 `window/mod.rs` conflict. It will use an explicit trusted host option with a
 create-only output path and finite capture bound. No project/script capability,
 per-frame snapshot, new rendering wait or performance verdict is introduced.
+
+The first CPU admission refused an inherited fixture-only lock edge before any
+compilation. The second compiled the actual HAL and found ambiguous NSString
+borrows and missing diagnostic mappings for the pinned Naga ray stages; neither
+attempt executed these controls. Both failures are retained externally. The
+compiler successor explicitly borrows NSString, records every pinned stage, and
+uses checked compare-exchange identity allocation without the deprecated atomic
+API. No native call, option, return value or scheduling behavior changes.
