@@ -1,5 +1,22 @@
 # Implementation status
 
+## Ordered-query experiment — measured and rejected
+
+The ordered native ECS query candidate passes scoped correctness tests and
+shipping gameplay/audio parity, but its one fixed six-run paired comparison
+establishes no consistent saving. All three candidate ScriptTick p95 intervals
+remain above 2 ms (2.07–2.12 ms), and all three player-frame intervals are higher
+than their matched baseline. The unchanged 5% nonregression checks pass; that
+alone does not justify adoption. The runtime change stays outside main. All
+original failures, raw histograms, exact inputs and executable identities remain
+replayable. [Negative result and evidence](docs/spikes/ordered-numeric-query.md).
+
+Checkpoint35 finished with 21 required contexts successful and both desktop
+contexts failed at the smoke helper's stale second-edit revision. Checkpoint36
+now freezes exact main281, including the reviewed helper repair, in the same
+release PR. All 23 required contexts and eight exact-head workflows must succeed
+before promotion. Release remains checkpoint30; no phase gate is approved.
+
 ## Main278 Loan shipping measurement — budget remains open
 
 The fresh main278 shipping export preserves all three functional modes, exact
@@ -9,8 +26,8 @@ runs span 2.08–2.21 ms and detailed runs span 2.18–2.22 ms. All same-mode sc
 and requested-memory stability checks pass, but the final maintained player-frame
 sample fails the 5% stability bound. No shipping saving is established. The
 portable packet retains all original failures and distinguishes CPU simulation
-from GPU/presentation qualification. An ordered native-query candidate is being
-qualified separately and has not been adopted.
+from GPU/presentation qualification. The ordered native-query experiment below was subsequently rejected after its
+fixed paired shipping measurement.
 [Actual results and replay](docs/spikes/quickjs-loan-main278.md).
 
 ## CI renderer smoke revision repair — merged through PR280
@@ -22,7 +39,8 @@ pass nine cases (six geometry plus three profile); root's focused run passes six
 Four actual RPC protocol processes pass; root separately passes the complete
 Mac renderer helper on the retained historical application executable. This
 does not relabel the binary as current whole-runtime source. Checkpoint35's
-Linux failure is retained; hosted repair execution is pending. PR280 merged
+Linux and Windows failures are retained; both failed at the second edit. The
+repair is now being tested in frozen checkpoint36; release has not advanced. PR280 merged
 after exact-head fast SUCCESS and matching tree verification. No new build,
 shipping timing, visual approval or phase gate is included.
 [Cause, scope and replay](docs/spikes/render-smoke-revision.md).
