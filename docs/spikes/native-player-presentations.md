@@ -1,5 +1,25 @@
 # Native player drawable observation — partial live qualification
 
+## Main303 composition
+
+The integration joins this observer with main303's typed audio-overrun policy.
+Source `b94c6c7c62ae425074ef1928cb19559e0b958582` and integration
+`9719bea79bdc5a88e891df275fe6f815b83a1e1d` have identical trees. The only
+overlapping behavioral integration adds the current-owner audio diagnostics
+inside the observer's existing report closure; shutdown, callback drain and
+original-error precedence remain intact. Reviewed main changes, including the
+default-off navigation diagnostic, retain their existing implementation.
+
+All 149 focused inputs were verified. Observer-enabled player tests (105), normal
+player tests (87), audio tests (39), strict all-target player lint in both modes,
+and HAL lint pass. All owned commands exited successfully and were reaped.
+[Composition manifest](evidence/native-presentation-audio/manifest.json) binds
+exact logs, feature graphs, copied test binaries and the resolution diff.
+The producer packet below remains unchanged and replayable. Its live evidence
+predates the audio fix; a fresh complete shipping replay is still outstanding.
+
+## Original observer producer
+
 This default-off source candidate joins the CPU-qualified HAL seam and main297's
 native replay host to main298. The main298 join adds the reviewed animation
 consumer source and its distinct dev-only pollster lock edge; it changes no
