@@ -28,6 +28,8 @@ pub enum PlayError {
     Stopped,
     #[error("Play failed; start a new session")]
     Failed,
+    #[error("Texture publication ticket was already used")]
+    TexturePublicationUsed,
     #[error("Pause Play before stepping one tick")]
     NotPaused,
     #[error("Resume Play before advancing")]
@@ -53,11 +55,7 @@ pub struct ReadyTexturePublication<'a, B: Backend, C: incant_render_game::Textur
 impl<B: Backend, C: incant_render_game::TextureRefreshConsumer> ReadyTexturePublication<'_, B, C> {
     pub fn publish(&mut self) -> TexturePublishAttempt {
         if self.used {
-            return TexturePublishAttempt::Refused(native(
-                incant_render_native::NativeRenderError::TextureRefresh(
-                    "texture publication ticket was already used",
-                ),
-            ));
+            return TexturePublishAttempt::Refused(PlayError::TexturePublicationUsed);
         }
         self.used = true;
         match self.host.update(&mut self.request) {
