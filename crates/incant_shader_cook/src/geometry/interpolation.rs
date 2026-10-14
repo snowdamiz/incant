@@ -14,12 +14,15 @@ fn check(
             sampling,
             ..
         }) => {
-            let wanted = if *interpolation == Some(naga::Interpolation::Flat) {
-                naga::Sampling::First
+            // Naga leaves the existing @interpolate(flat) sampling unset.
+            // Explicit `first` is its equivalent existing contract; neither
+            // centroid nor sample is admissible on a flat value.
+            let valid = if *interpolation == Some(naga::Interpolation::Flat) {
+                sampling.is_none_or(|s| s == naga::Sampling::First)
             } else {
-                expected
+                *sampling == Some(expected)
             };
-            if *sampling != Some(wanted) {
+            if !valid {
                 return Err(CookError::Contract("geometry interstage sampling"));
             }
         }
