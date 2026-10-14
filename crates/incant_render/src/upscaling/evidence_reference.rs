@@ -418,8 +418,9 @@ impl Input<'_> {
             / f64::from(self.frame.options[3]);
         let w = (c * f64::from(self.frame.reactive[2]).max(0.)).min(cap)
             * (1. - f64::from(self.frame.reactive[0]) * reaction.clamp(0., 1.));
-        result.color =
-            oracle::color(std::array::from_fn(|i| (clamped[i] * w + sum[i]) / (w + mass)));
+        result.color = oracle::color(std::array::from_fn(|i| {
+            (clamped[i] * w + sum[i]) / (w + mass)
+        }));
         result.evidence = [(w + mass).min(cap), 0.];
         if let Some(r) = record {
             result.record = r.encode();
