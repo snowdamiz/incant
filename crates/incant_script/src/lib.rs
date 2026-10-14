@@ -147,6 +147,7 @@ pub struct ScriptHost {
     persistent: std::rc::Rc<std::cell::RefCell<persistence::Store>>,
     project: Option<bindings::BoundProject>,
     chunk_ids: loan::IdCache,
+    loan_scratch: loan::Scratch,
     context: Context,
     _runtime: Runtime,
     _compiled: CompiledScript,
@@ -242,6 +243,7 @@ impl ScriptHost {
             persistent: Default::default(),
             project,
             chunk_ids: Default::default(),
+            loan_scratch: Default::default(),
             context,
             _runtime: runtime,
             _compiled: compiled,
@@ -468,7 +470,7 @@ impl ScriptHost {
                     })?;
                     #[cfg(all(test, feature = "profile", feature = "compiler"))]
                     tick_probe::mark(tick_probe::Region::Capabilities);
-                    let mut loan = loan::Loan::new(columns)?;
+                    let mut loan = loan::Loan::new(columns, &mut self.loan_scratch)?;
                     #[cfg(all(test, feature = "profile", feature = "compiler"))]
                     tick_probe::mark(tick_probe::Region::UndoCapture);
                     let chunks = match loan.expose(&ctx, &freeze, &mut self.chunk_ids) {
