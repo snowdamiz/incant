@@ -204,9 +204,11 @@ def build(project, staging, storage, scene, camera, mode, wabt=None, profiling=N
 
 
 def ui_startup_options(mode, viewport):
+    require(mode in ('headless', 'window'), 'Unknown native export mode')
     if viewport is None:
         return []
-    require(mode == 'headless', 'Screen-space UI drawing in native windows is not implemented')
+    # Both packages have an offline one-tick startup proof. This explicit
+    # viewport belongs only to that proof; a live window uses its actual size.
     require(isinstance(viewport, str) and re.fullmatch(r'[1-9][0-9]{0,4}x[1-9][0-9]{0,4}', viewport),
             'UI viewport must be WIDTHxHEIGHT logical pixels')
     require(all(int(n) <= 65536 for n in viewport.split('x')), 'UI viewport exceeds bounds')
@@ -254,7 +256,7 @@ def main():
     parser.add_argument('project', type=Path)
     parser.add_argument('output', type=Path)
     parser.add_argument('--wabt', type=Path, help='Trusted pinned WABT 1.0.42 directory for authored Wasm export')
-    parser.add_argument('--profiling', choices=('summary', 'tracy'), help='Trusted opt-in offline diagnostics build; runtime capture remains explicit')
+    parser.add_argument('--profiling', choices=('summary', 'tracy'), help='Trusted opt-in diagnostics build for headless or window playback; runtime capture remains explicit')
     parser.add_argument('--scene')
     parser.add_argument('--camera')
     parser.add_argument('--mode', choices=('headless', 'window'), default='headless')
