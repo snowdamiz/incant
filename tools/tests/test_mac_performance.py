@@ -49,6 +49,33 @@ def measurement():
 
 
 class MacPerformance(unittest.TestCase):
+    def test_version_discriminators_reject_boolean_float_text_and_unknown_values(self):
+        for value in (True, False, 1.0, 2.0, 3.0, '3', None, 0, 4):
+            for path in [('version',), ('quickjs_heap', 'version'), ('frame_wall', 'version')]:
+                data = current_report(); node = data['profile']
+                for key in path[:-1]: node = node[key]
+                node[path[-1]] = value
+                with self.subTest(value=value, path=path), self.assertRaises(ValueError):
+                    subject.metrics(data, 100)
+            current = measurement(); current['version'] = value
+            with self.subTest(value=value, route='comparison'), self.assertRaises(ValueError):
+                subject.comparison(current, measurement())
+        # Genuine supported integer versions remain admitted on both protocols.
+        subject.metrics(report(), 100)
+        subject.metrics(current_report(), 100)
+        self.assertTrue(subject.comparison(measurement(), measurement())['passed'])
+
+    def test_raw_baseline_loader_rejects_coercible_measurement_versions(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            directory = Path(temporary).resolve()
+            raw = json.dumps(report()).encode()
+            (directory / 'stdout.json').write_bytes(raw)
+            measured = measurement(); measured['profile_report_sha256'] = subject.digest(raw)
+            path = directory / 'measurement.json'
+            for value in (True, 1.0, '1', None, 0, 3):
+                measured['version'] = value; path.write_text(json.dumps(measured))
+                with self.subTest(value=value), self.assertRaises(ValueError): subject.load_baseline(path)
+
     def test_maintained_and_detailed_instrumentation_are_explicit(self):
         for mode in ('maintained', 'detailed'):
             data = current_report(mode)
@@ -88,7 +115,7 @@ class MacPerformance(unittest.TestCase):
 
     def test_current_baseline_binds_raw_instrumentation_and_refuses_relabeling(self):
         with tempfile.TemporaryDirectory() as temporary:
-            directory = Path(temporary)
+            directory = Path(temporary).resolve()
             raw = json.dumps(current_report()).encode()
             (directory / 'stdout.json').write_bytes(raw)
             measured = measurement(); measured['version'] = 2

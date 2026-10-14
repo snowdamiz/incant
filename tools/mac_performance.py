@@ -87,11 +87,12 @@ def interval(row, frames):
 def profile_instrumentation(report):
     """Observation overhead is part of matched timing, including legacy reports."""
     p = report['profile']
-    if p['version'] == 2:
+    version = integer(p['version'], 'profile version', 1)
+    if version == 2:
         return {'profile_version': 2, 'quickjs_heap_mode': 'legacy_full_scan'}
-    require(p['version'] == 3, 'Incomplete or unsupported profile')
+    require(version == 3, 'Incomplete or unsupported profile')
     heap = p['quickjs_heap']
-    require(heap['version'] == 1 and heap['mode'] in ('maintained', 'detailed')
+    require(integer(heap['version'], 'heap version', 1) == 1 and heap['mode'] in ('maintained', 'detailed')
             and heap['sampling'] == 'script_tick_end_per_vm', 'Unsupported heap instrumentation')
     require(integer(heap['invalid_samples'], 'invalid heap samples') == 0,
             'Invalid heap observations')
@@ -130,7 +131,7 @@ def metrics(report, ticks, *, script_phase='script.tick'):
     require(p['dropped_source_samples'] == 0 and p['tracy_process_transport'] is False,
             'Dropped script samples or unexpected transport')
     frame = p['frame_wall']
-    require(frame['version'] == 1 and frame['unit'] == 'ns'
+    require(integer(frame['version'], 'frame version', 1) == 1 and frame['unit'] == 'ns'
             and frame['bucket_width_ns'] == WIDTH and frame['max_ns'] == MAX_NS,
             'Unsupported frame histogram protocol')
     require(frame['attempted_frames'] == ticks and frame['successful_frames'] == ticks
@@ -151,7 +152,8 @@ def metrics(report, ticks, *, script_phase='script.tick'):
 
 def comparison(current, baseline):
     require(current['format'] == baseline['format'] == 'incant-mac-cpu-measurement'
-            and current['version'] in (1, 2) and baseline['version'] in (1, 2), 'Unknown measurement format')
+            and integer(current['version'], 'measurement version', 1) in (1, 2)
+            and integer(baseline['version'], 'measurement version', 1) in (1, 2), 'Unknown measurement format')
     for item in (current, baseline):
         if item['version'] == 2:
             require('profile_instrumentation' in item['match'], 'Missing instrumentation identity')
@@ -196,10 +198,11 @@ def load_baseline(path):
     require(digest(raw) == baseline['profile_report_sha256'], 'Baseline raw report identity differs')
     report = json.loads(raw)
     instrumentation = profile_instrumentation(report)
-    if baseline['version'] == 1:
+    version = integer(baseline['version'], 'measurement version', 1)
+    if version == 1:
         require(instrumentation['profile_version'] == 2, 'Legacy measurement cannot carry new instrumentation')
     else:
-        require(baseline['version'] == 2 and baseline['match'].get('profile_instrumentation') == instrumentation,
+        require(version == 2 and baseline['match'].get('profile_instrumentation') == instrumentation,
                 'Baseline instrumentation identity differs')
     require(metrics(report, baseline['match']['ticks'],
                     script_phase=baseline['match'].get('script_phase', 'script.tick')) == baseline['metrics'],
