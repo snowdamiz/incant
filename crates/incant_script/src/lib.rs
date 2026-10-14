@@ -10,6 +10,7 @@ mod audio_commands;
 mod bindings;
 #[cfg(feature = "compiler")]
 mod bindings_embed;
+mod bindings_static;
 mod budget;
 mod checkpoint;
 mod commands;
@@ -40,6 +41,7 @@ pub use artifact::{EmbeddedScript, ScriptMetadata};
 pub use bindings::{
     MAX_SCRIPT_INSTANCES, MAX_SCRIPT_SOURCES, ScriptBindings, ScriptInstance, ScriptValue,
 };
+pub use bindings_static::{EmbeddedScriptInstance, EmbeddedScriptValue};
 pub use checkpoint::{CheckpointError, MAX_CHECKPOINT_BYTES, PendingSessionCheckpoint};
 #[cfg(feature = "native-checkpoints")]
 pub use checkpoint::{MAX_PERSISTED_SESSION_BYTES, NativeSessionCheckpoint};

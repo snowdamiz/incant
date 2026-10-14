@@ -98,12 +98,12 @@ impl ScriptBindings {
 }
 
 #[derive(Default)]
-struct PropsBudget {
+pub(crate) struct PropsBudget {
     nodes: usize,
     bytes: usize,
 }
 impl PropsBudget {
-    fn add(&mut self, depth: usize, bytes: usize) -> Result<(), ScriptError> {
+    pub(crate) fn add(&mut self, depth: usize, bytes: usize) -> Result<(), ScriptError> {
         self.nodes += 1;
         self.bytes = self
             .bytes
@@ -114,8 +114,11 @@ impl PropsBudget {
         }
         Ok(())
     }
+    pub(crate) fn text_size(&mut self, text: &str) -> Result<(), ScriptError> {
+        self.add(0, text.len().checked_add(8).ok_or(ScriptError::InputLimit)?)
+    }
     fn text(&mut self, text: &str, hash: &mut Sha256) -> Result<(), ScriptError> {
-        self.add(0, text.len() + 8)?;
+        self.text_size(text)?;
         hash.update((text.len() as u64).to_le_bytes());
         hash.update(text.as_bytes());
         Ok(())
