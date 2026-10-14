@@ -88,8 +88,16 @@ pub fn expand(args: Vec<String>) -> Result<Vec<String>> {
     let clips = path(root, "clips.bin")?;
     let actions = path(root, "input-actions.json")?;
     if window {
-        if options.keys().any(|key| *key != "--stop-after") {
+        if options
+            .keys()
+            .any(|key| !matches!(*key, "--stop-after" | "--input-recording" | "--observe"))
+        {
             return Err("window package options conflict with offline options".into());
+        }
+        if (options.contains_key("--input-recording") || options.contains_key("--observe"))
+            && !options.contains_key("--stop-after")
+        {
+            return Err("window recording/observation requires --stop-after".into());
         }
         let mut result = vec![
             "--window".into(),
@@ -103,8 +111,10 @@ pub fn expand(args: Vec<String>) -> Result<Vec<String>> {
             "--font-cache".into(),
             path(root, "fonts")?,
         ];
-        if let Some(stop) = options.remove("--stop-after") {
-            result.extend(["--stop-after".into(), stop]);
+        for key in ["--stop-after", "--input-recording", "--observe"] {
+            if let Some(value) = options.remove(key) {
+                result.extend([key.into(), value]);
+            }
         }
         return Ok(result);
     }
@@ -307,6 +317,42 @@ mod tests {
         };
         assert_eq!(settings.ui.unwrap().viewport, [320., 200.]);
         assert!(settings.text.is_some());
+    }
+    #[test]
+    fn window_replay_expands_only_explicit_bounded_inputs() {
+        let dir = fixture();
+        let expanded = expand(args(
+            dir.path(),
+            &[
+                "--window",
+                "--input-recording",
+                "route.json",
+                "--stop-after",
+                "12",
+                "--observe",
+                "checks.json",
+            ],
+        ))
+        .unwrap();
+        assert_eq!(
+            &expanded[10..],
+            [
+                "--stop-after",
+                "12",
+                "--input-recording",
+                "route.json",
+                "--observe",
+                "checks.json"
+            ]
+        );
+        for tail in [
+            vec!["--window", "--input-recording", "route.json"],
+            vec!["--window", "--observe", "checks.json"],
+            vec!["--window", "--stop-after", "12", "--ui-viewport", "640x480"],
+            vec!["--window", "--stop-after", "12", "--ticks", "12"],
+        ] {
+            assert!(expand(args(dir.path(), &tail)).is_err(), "{tail:?}");
+        }
     }
     #[test]
     fn tampered_or_indirected_startup_files_are_refused() {

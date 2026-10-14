@@ -87,6 +87,18 @@ fn run_owned(
             let mut report = window::run(&args[1..])?;
             profile::append(&mut report, &profile)?;
             emit(&report.to_string());
+            if report
+                .get("observations")
+                .is_some_and(|v| v["passed"] == false)
+            {
+                return Err("native observation assertions failed (see completed report)".into());
+            }
+            if report
+                .get("input_recording")
+                .is_some_and(|v| v["completed"] == false)
+            {
+                return Err("native window closed before completing the input recording".into());
+            }
             return Ok(());
         }
         #[cfg(not(all(

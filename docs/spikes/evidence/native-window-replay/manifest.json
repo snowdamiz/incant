@@ -1,0 +1,198 @@
+{
+  "source": "6a77d64b9e93521cbe2bd794d7db11223f595e0f",
+  "scope": "85 CPU controls, strict Clippy, source-free shipping export, actual2156-step Metal window and exact headless observations; no performance/phase acceptance",
+  "archive_sha256": "669ff2e98f70c0dc29eee030a5dc6aadeea99bbaa3af0646ab242f7c46fae936",
+  "records": [
+    {
+      "path": "cpu/plan.json",
+      "bytes": 1701,
+      "sha256": "71fabf586aac9aaf2fe4f90bbbd77ec1ab38e9a6c1abb01764fff30f30b6ffa9"
+    },
+    {
+      "path": "cpu/freeze.json",
+      "bytes": 238584,
+      "sha256": "37d96953f125272c762ac93ab7f52e526c50fcc5192e71470c79810c01a6828f"
+    },
+    {
+      "path": "cpu/source-inventory.json",
+      "bytes": 226433,
+      "sha256": "292aabc8611d986faf6fb3081ab3d941fd46ad41e3573bc72b9e4edf9cf16f7a"
+    },
+    {
+      "path": "cpu/qualify.py",
+      "bytes": 5220,
+      "sha256": "a90462728559e74f38951d33f13eae461ad7fe2d7adf5a6c0aab5d103ed72396"
+    },
+    {
+      "path": "cpu/native_process.py",
+      "bytes": 19307,
+      "sha256": "58dd2a8231d7f9d1e42070fc85425461e06a43f279fa5e7f8e57b4a40c3a3aa4"
+    },
+    {
+      "path": "cpu/qualify-001/result.json",
+      "bytes": 2977,
+      "sha256": "628055be9fd2717f33af6d70a354316d83eb5eb75170562d1b436e736c4236b6"
+    },
+    {
+      "path": "cpu/qualify-001/player-cpu.stdout",
+      "bytes": 503603,
+      "sha256": "7850dccb34ee490ab49f2dd7ec9671250aada3959a3890de0b0cb318556faf49"
+    },
+    {
+      "path": "cpu/qualify-001/player-cpu.stderr",
+      "bytes": 2265,
+      "sha256": "a2bbcdd76f8b1fadffd3fdc70a55037903e1ae707a48a1b0a4064fa7937864ce"
+    },
+    {
+      "path": "cpu/qualify-001/player-clippy.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "cpu/qualify-001/player-clippy.stderr",
+      "bytes": 9592,
+      "sha256": "72afc0728d755e2c3dbd26702ee906729052251ba4ef052019170e1c394c7238"
+    },
+    {
+      "path": "cpu/qualify-001/environment.json",
+      "bytes": 1276,
+      "sha256": "97087c8935f554c20b92cddf4f290ff8eb902a9b2890c93118dd7dd7ef4e77ce"
+    },
+    {
+      "path": "cpu/qualify-001/rustc.txt",
+      "bytes": 192,
+      "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909"
+    },
+    {
+      "path": "shipping/export-plan.json",
+      "bytes": 1843,
+      "sha256": "cd6273f7bf4ffaea6e47c264ce2b6f9d9e9c92b5679ab99e9e9fc0ca948c56cf"
+    },
+    {
+      "path": "shipping/source-freeze.json",
+      "bytes": 4481535,
+      "sha256": "00bbc586dbaca3a79dd7510927015903469bc086070e2c1a66dc1315bbf52e37"
+    },
+    {
+      "path": "shipping/run-export.py",
+      "bytes": 5233,
+      "sha256": "ad78daa5602b33dc8a9edaa851d01ac76351324df597e2fc12f4906f6f842e42"
+    },
+    {
+      "path": "shipping/children.json",
+      "bytes": 7651,
+      "sha256": "cf68a56101a24bc0cf16f48086f1be9196c8e517e3d87bf73235b9d5b8845b36"
+    },
+    {
+      "path": "shipping/result.json",
+      "bytes": 1116,
+      "sha256": "eaefd35109b5fdaa06f9f2a3ef5b97695968d51f084da49ec63c92a1f3016417"
+    },
+    {
+      "path": "shipping/package/export.json",
+      "bytes": 19842,
+      "sha256": "e0f3aee9d952a166db1247bc96d1558a2255817985cfd1dc37edd71bbe388b72"
+    },
+    {
+      "path": "shipping/package/project-build.json",
+      "bytes": 5292,
+      "sha256": "b11b938509d3d0a8ea97eb2885f4b6cffd2ccfa11d43c2198c4d6bbafb2d9b01"
+    },
+    {
+      "path": "shipping/package/normal-dependencies.txt",
+      "bytes": 52453,
+      "sha256": "09d357ac7aacb4633d0a536bcca0aeb4ff45190512e43af24e55dcd59c3a7db9"
+    },
+    {
+      "path": "window/plan.json",
+      "bytes": 8543,
+      "sha256": "24ad00d20cb024a2fbd680c54c11ea9a60e538c4775bcbc6dc08139557979045"
+    },
+    {
+      "path": "window/run.py",
+      "bytes": 3610,
+      "sha256": "583473921d9c6494ef55a3a78eaa0519af50a7118efcd276b0410cdee397ecc5"
+    },
+    {
+      "path": "window/input.json",
+      "bytes": 27753,
+      "sha256": "4fbfffad568d1b7b8eae3b7b9041579fce6f0e8e67c83a66f76c9f78a1c5fcbf"
+    },
+    {
+      "path": "window/observe.json",
+      "bytes": 2893,
+      "sha256": "36915362c461c0772414c2b97aa80d522b6ada851e94e0ca718057d700e1f89b"
+    },
+    {
+      "path": "window/result.json",
+      "bytes": 705,
+      "sha256": "3b3448dd15086c4f1a907bbbf020fba11f2e27a03de92447ebdb7fc68c826972"
+    },
+    {
+      "path": "window/report.json",
+      "bytes": 4152694,
+      "sha256": "1fce53808a6c3b0484353c4c7c92fc6bd0c48cd034c3796982d5c653f3ca1d52"
+    },
+    {
+      "path": "window/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "window/parity.json",
+      "bytes": 155,
+      "sha256": "79df4d0ddb30bbd4691269811006fb4eaecd4b48cfb9d2e66d16079720df6607"
+    },
+    {
+      "path": "window/listener-schema/not-launched.json",
+      "bytes": 181,
+      "sha256": "940d9c6c6e24949924023b01a9b188d6575093ea10badaadb224ceb683b056e6"
+    },
+    {
+      "path": "headless-reference.json",
+      "bytes": 8455,
+      "sha256": "37ccafc52a22a341c7776961e5171f48c988638224445395fe94db55da2f4279"
+    },
+    {
+      "path": "review.json",
+      "bytes": 4420,
+      "sha256": "e51284a37c89f21278fe9686c6d867b189a4cf5fd3b2781cd959b242ab16dd5a"
+    },
+    {
+      "path": "source/crates/incant_game_player/src/lib.rs",
+      "bytes": 10809,
+      "sha256": "03311d7069b869b5d5c9bf56a9ae874ee5a3339b255958227a1d6f0b5524281b"
+    },
+    {
+      "path": "source/crates/incant_game_player/src/package.rs",
+      "bytes": 12799,
+      "sha256": "a3c998be72adba959ab79333c9e649520f9c4a985698aca9dbb5f609118bdd30"
+    },
+    {
+      "path": "source/crates/incant_game_player/src/window/mod.rs",
+      "bytes": 37199,
+      "sha256": "a7d728d08d405c8b3667c6efc780f6aa3c95859a89fac85af99e3ede6525c0a4"
+    },
+    {
+      "path": "source/crates/incant_game_player/src/window/replay.rs",
+      "bytes": 4819,
+      "sha256": "a6d60da583165dd371f2390498f74d097839b90887a974e4bedcc559c9c490c7"
+    },
+    {
+      "path": "source/crates/incant_game_player/src/window/devices.rs",
+      "bytes": 2832,
+      "sha256": "692c9c84bb06661708e008991b9e0a73bbdad2f5633153d6652bce18c696c9fc"
+    }
+  ],
+  "visual_observation": {
+    "method": "Direct CUA native-window screenshot inspection during the owned run",
+    "observed": "Rendered canyon scene, player and enemies, HUD Samples2/4; actual route advanced. No final-state screenshot claim.",
+    "pixels_in_archive": false
+  },
+  "remaining": [
+    "Displayed-frame timing and shader-stall qualification",
+    "Real-mouse capture check deferred",
+    "Recorded UI and viewport events explicitly unsupported",
+    "No window device haptic or controller proof"
+  ]
+}
