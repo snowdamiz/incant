@@ -1,0 +1,37 @@
+{
+  "schema": "incant-owner-quality-grant-v1",
+  "authority": "root",
+  "holder": "Claude0073 Opus5.5 Max",
+  "issued_at": "2026-10-14T02:05:48.242170+00:00",
+  "plan_sha256": "9792295b1f625820029c4a43f31d4f4afe88d1d589c03dbc2fb5fa6f220fc3ba",
+  "runner_sha256": "2a991b3abde5fb2b5e5ddcc28eac6187f88e0f5fa4b1c7dbe235eae112b8af6c",
+  "lifecycle_sha256": "b9e12895389a046e1c0a0bd4c43f01a215505c793be4106b31fafc18aa2aff34",
+  "binary_sha256": "9c3a458c3a14f524e594dfdb4e03d5d42c02c91ecd8aca4cd3493248aad0fa59",
+  "evidence_dir": "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001",
+  "groups": [
+    "stationary",
+    "motion",
+    "transitions",
+    "c7_disocclusion",
+    "p1_crossing"
+  ],
+  "budget": {
+    "processes": 5,
+    "scene_submissions": 380,
+    "ui_submissions": 18,
+    "readback_submissions": 380,
+    "readback_maps": 380,
+    "queue_submissions": 778,
+    "rendered_frames": 380,
+    "pngs": 15,
+    "maximum_extent": [
+      960,
+      540
+    ],
+    "timeout_seconds_each": 90,
+    "builds": 0,
+    "retries": 0
+  },
+  "predecessor_release_path": "/Users/andreyyurlov/.codex/incant-evidence/reconstruction-r4-numeric-002/release.json",
+  "predecessor_release_sha256": "114f9cf5af67176f8eeeed3250931496af5ed907d3e696e1bbac2b719b4691eb"
+}

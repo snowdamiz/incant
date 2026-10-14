@@ -1,0 +1,800 @@
+{
+ "released": true,
+ "at": "2026-10-14T02:07:53.406440+00:00",
+ "accepted": true,
+ "plan_sha256": "9792295b1f625820029c4a43f31d4f4afe88d1d589c03dbc2fb5fa6f220fc3ba",
+ "runner_sha256": "2a991b3abde5fb2b5e5ddcc28eac6187f88e0f5fa4b1c7dbe235eae112b8af6c",
+ "lifecycle_sha256": "b9e12895389a046e1c0a0bd4c43f01a215505c793be4106b31fafc18aa2aff34",
+ "grant_sha256": "397f5a3a701a45a8c8b61d4ec138feb9ac1d340fd22f57b2a67fd4e53fe5c9c4",
+ "predecessor": {
+  "path": "/Users/andreyyurlov/.codex/incant-evidence/reconstruction-r4-numeric-002/release.json",
+  "sha256": "114f9cf5af67176f8eeeed3250931496af5ed907d3e696e1bbac2b719b4691eb"
+ },
+ "groups": [
+  "stationary",
+  "motion",
+  "transitions",
+  "c7_disocclusion",
+  "p1_crossing"
+ ],
+ "budget": {
+  "processes": 5,
+  "scene_submissions": 380,
+  "ui_submissions": 18,
+  "readback_submissions": 380,
+  "readback_maps": 380,
+  "queue_submissions": 778,
+  "rendered_frames": 380,
+  "pngs": 15,
+  "maximum_extent": [
+   960,
+   540
+  ],
+  "timeout_seconds_each": 90,
+  "builds": 0,
+  "retries": 0
+ },
+ "children": [
+  {
+   "pid": 54054,
+   "pgid": 54054,
+   "exit": 0,
+   "timed_out": false,
+   "interrupted_by": [],
+   "reaped": true,
+   "group_empty_after": true,
+   "seconds": 2.786,
+   "group": "stationary",
+   "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/r4-quality-build-001/upscaling_owner_review",
+    "--ignored",
+    "--exact",
+    "stationary",
+    "--nocapture",
+    "--test-threads=1"
+   ],
+   "cwd": "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/stationary",
+   "environment": {
+    "keys": [
+     "HOME",
+     "INCANT_0073_OWNER_REVIEW_OUT",
+     "INCANT_EXPECT_GPU_BACKEND",
+     "PATH",
+     "RUST_BACKTRACE",
+     "TMPDIR"
+    ],
+    "values_recorded": {
+     "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+     "TMPDIR": "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/tmp/stationary",
+     "INCANT_EXPECT_GPU_BACKEND": "Metal",
+     "RUST_BACKTRACE": "0",
+     "INCANT_0073_OWNER_REVIEW_OUT": "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/stationary/artifacts"
+    },
+    "home": "inherited unchanged, value not recorded"
+   },
+   "accepted": true,
+   "checks": {
+    "successful_process": true,
+    "one_test": true,
+    "no_panic": true,
+    "binary_unchanged": true,
+    "no_survivors": true
+   },
+   "artifacts": {
+    "adapter": {
+     "backend": "Metal",
+     "device": 0,
+     "device_type": "IntegratedGpu",
+     "driver": "",
+     "driver_info": "",
+     "max_texture_dimension_2d": 8192,
+     "name": "Apple M5 Pro",
+     "vendor": 0
+    },
+    "pngs": [
+     {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/stationary/artifacts/stationary-full.png",
+      "sha256": "992c5543b4f9bbdf6fd703eb764e143f7649836452df28aaac6f1dfc2debceb9",
+      "bytes": 84389,
+      "width": 960,
+      "height": 540,
+      "reported_rgba_sha256": "4c69efe238a452d096301faf24ca013877bf0f0430f83ccf1147502e51da6e01"
+     },
+     {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/stationary/artifacts/stationary-drs50.png",
+      "sha256": "724fa644d3561ff00aa2301fd40ab6b49c4111b0376df5469028ef6265cb40e0",
+      "bytes": 40131,
+      "width": 960,
+      "height": 540,
+      "reported_rgba_sha256": "6611c41fa62f782b4d96080e6d43f481d41a54c01a8d93e870367b9786d8464e"
+     },
+     {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/stationary/artifacts/stationary-up50.png",
+      "sha256": "e1156008fb51eba1c35d58875c6ee98e2f334ce41816f350fff8e23f4568c503",
+      "bytes": 100395,
+      "width": 960,
+      "height": 540,
+      "reported_rgba_sha256": "45b861bbd81aac4459bc2739d777062d33ead8705b74c5356dce5815ac1109f8"
+     },
+     {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/stationary/artifacts/stationary-own50.png",
+      "sha256": "57b53ca3e195254f4eca9947899b62c823e35240b1a0f072a9d339b83098e7d8",
+      "bytes": 98742,
+      "width": 960,
+      "height": 540,
+      "reported_rgba_sha256": "70af5324896b4cd19cec5ab53fc9c37b5487d0ded6d0984cf830dba6c5658bb5"
+     },
+     {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/stationary/artifacts/stationary-phases.png",
+      "sha256": "bdfeb4dba501be1ce69d30b894346573482bbc60b1ed16c6ccb48ab0afb4f245",
+      "bytes": 14137,
+      "width": 960,
+      "height": 540,
+      "reported_rgba_sha256": "2850b29d1593834b86a54657ba55fc8bdd19101b98128c3fd2b1aea2fdb2bdaa"
+     },
+     {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/stationary/artifacts/stationary-detail.png",
+      "sha256": "37d599a0079a7bb5ec081a032590b329a9b7247c8071b70d05d18153abeb980d",
+      "bytes": 50594,
+      "width": 960,
+      "height": 540,
+      "reported_rgba_sha256": "247719bdbe0bd341dcda6da45a1d00d038557b16883117da6ab295f7fa001138"
+     }
+    ],
+    "report_sha256": "d91d1c58a18fb3c1ef4286a89f2060b40d84a0fabc83dba7f68609d3902f5647",
+    "events_sha256": "9deec11aa92daa3b63b9aa457c924765726646c1b5a7507631fb602310a5ce6c",
+    "events": 176,
+    "shots": 50,
+    "contract_checks": {
+     "adapter_backend_metal": true,
+     "attachment_only_on_own": true,
+     "budget_exactly_consumed": true,
+     "drs_control_internal_480x270_without_upscaling": true,
+     "frames_nonblank": true,
+     "full_control_has_no_upscale_or_resolution_owner": true,
+     "own_one_owner_phases_history_and_sizes": true,
+     "ui_button_interior_identical_on_all_eighteen_ui_frames": true,
+     "up_one_owner_phases_history_and_sizes": true
+    },
+    "budget": {
+     "scene_submissions": 50,
+     "ui_submissions": 18,
+     "readback_submissions": 50,
+     "readback_maps": 50,
+     "queue_submissions": 118,
+     "rendered_frames": 50,
+     "pngs": 6
+    },
+    "scope": "process/artifact/contracts only; observations do not imply historical-gate or appearance acceptance"
+   },
+   "adapter": {
+    "backend": "Metal",
+    "device": 0,
+    "device_type": "IntegratedGpu",
+    "driver": "",
+    "driver_info": "",
+    "max_texture_dimension_2d": 8192,
+    "name": "Apple M5 Pro",
+    "vendor": 0
+   },
+   "stdout_sha256": "64ba5ca954c80116ba89d6d232a62900f93774478e8fd0ae6dfe44d58a585d9f",
+   "stderr_sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef"
+  },
+  {
+   "pid": 54064,
+   "pgid": 54064,
+   "exit": 0,
+   "timed_out": false,
+   "interrupted_by": [],
+   "reaped": true,
+   "group_empty_after": true,
+   "seconds": 1.209,
+   "group": "motion",
+   "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/r4-quality-build-001/upscaling_owner_review",
+    "--ignored",
+    "--exact",
+    "motion",
+    "--nocapture",
+    "--test-threads=1"
+   ],
+   "cwd": "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/motion",
+   "environment": {
+    "keys": [
+     "HOME",
+     "INCANT_0073_OWNER_REVIEW_OUT",
+     "INCANT_EXPECT_GPU_BACKEND",
+     "PATH",
+     "RUST_BACKTRACE",
+     "TMPDIR"
+    ],
+    "values_recorded": {
+     "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+     "TMPDIR": "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/tmp/motion",
+     "INCANT_EXPECT_GPU_BACKEND": "Metal",
+     "RUST_BACKTRACE": "0",
+     "INCANT_0073_OWNER_REVIEW_OUT": "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/motion/artifacts"
+    },
+    "home": "inherited unchanged, value not recorded"
+   },
+   "accepted": true,
+   "checks": {
+    "successful_process": true,
+    "one_test": true,
+    "no_panic": true,
+    "binary_unchanged": true,
+    "no_survivors": true
+   },
+   "artifacts": {
+    "adapter": {
+     "backend": "Metal",
+     "device": 0,
+     "device_type": "IntegratedGpu",
+     "driver": "",
+     "driver_info": "",
+     "max_texture_dimension_2d": 8192,
+     "name": "Apple M5 Pro",
+     "vendor": 0
+    },
+    "pngs": [
+     {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/motion/artifacts/motion-full.png",
+      "sha256": "9eeb1222becd6f4d2cec7afa88343ccb528ea9f6e27246cb3410a42bade35b52",
+      "bytes": 77464,
+      "width": 960,
+      "height": 540,
+      "reported_rgba_sha256": "47c3bee7ff948ae7f41fc903cad53d085ed58405e9fc40a44e7e5d3213ebac05"
+     },
+     {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/motion/artifacts/motion-up50.png",
+      "sha256": "af438cfc7cb898c8bc832774d335461146af2ad3dd910c099212e5609113a5eb",
+      "bytes": 73363,
+      "width": 960,
+      "height": 540,
+      "reported_rgba_sha256": "450cabf57eef12b535f7e1ba589dcee9cb9394115ea6533bbdc7c6f12023f529"
+     },
+     {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/motion/artifacts/motion-own50.png",
+      "sha256": "8c035e2ca9de3d3b243548ca420d3505cb22d5cb3f4d17fc20ed8eba2414077d",
+      "bytes": 73180,
+      "width": 960,
+      "height": 540,
+      "reported_rgba_sha256": "fcb4b6092a48434620eec468ff92cffa57ee2d5ed14e835bf1955ed14a314282"
+     },
+     {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/motion/artifacts/motion-detail.png",
+      "sha256": "ff40c93f2030b9501d351fafa3003621ce18de98ba78214e26657281a3b682fc",
+      "bytes": 115277,
+      "width": 960,
+      "height": 540,
+      "reported_rgba_sha256": "5e998aa85b5c389eadf6d370eb10929334c3c8fab9eb97b55524ad68e9450753"
+     }
+    ],
+    "report_sha256": "d663237b3408b80192e9184ece1e652a94b09556f2fba19437ffdafc6632d2da",
+    "events_sha256": "368239bb6a5728692d59179a0a32a0bba6c4fe29cf59e7b769330e0ac440c2c5",
+    "events": 138,
+    "shots": 44,
+    "contract_checks": {
+     "adapter_backend_metal": true,
+     "attachment_only_on_own": true,
+     "budget_exactly_consumed": true,
+     "controls_plain_and_drs_480x270": true,
+     "frames_nonblank": true,
+     "own_history_survives_object_and_camera_motion": true,
+     "up_history_survives_object_and_camera_motion": true
+    },
+    "budget": {
+     "scene_submissions": 44,
+     "ui_submissions": 0,
+     "readback_submissions": 44,
+     "readback_maps": 44,
+     "queue_submissions": 88,
+     "rendered_frames": 44,
+     "pngs": 4
+    },
+    "scope": "process/artifact/contracts only; observations do not imply historical-gate or appearance acceptance"
+   },
+   "adapter": {
+    "backend": "Metal",
+    "device": 0,
+    "device_type": "IntegratedGpu",
+    "driver": "",
+    "driver_info": "",
+    "max_texture_dimension_2d": 8192,
+    "name": "Apple M5 Pro",
+    "vendor": 0
+   },
+   "stdout_sha256": "691ade87a84b9ad2ab4d81cc556fc74082a28fb73025ef1916671b2fac87d238",
+   "stderr_sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef"
+  },
+  {
+   "pid": 54067,
+   "pgid": 54067,
+   "exit": 0,
+   "timed_out": false,
+   "interrupted_by": [],
+   "reaped": true,
+   "group_empty_after": true,
+   "seconds": 2.148,
+   "group": "transitions",
+   "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/r4-quality-build-001/upscaling_owner_review",
+    "--ignored",
+    "--exact",
+    "transitions",
+    "--nocapture",
+    "--test-threads=1"
+   ],
+   "cwd": "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/transitions",
+   "environment": {
+    "keys": [
+     "HOME",
+     "INCANT_0073_OWNER_REVIEW_OUT",
+     "INCANT_EXPECT_GPU_BACKEND",
+     "PATH",
+     "RUST_BACKTRACE",
+     "TMPDIR"
+    ],
+    "values_recorded": {
+     "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+     "TMPDIR": "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/tmp/transitions",
+     "INCANT_EXPECT_GPU_BACKEND": "Metal",
+     "RUST_BACKTRACE": "0",
+     "INCANT_0073_OWNER_REVIEW_OUT": "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/transitions/artifacts"
+    },
+    "home": "inherited unchanged, value not recorded"
+   },
+   "accepted": true,
+   "checks": {
+    "successful_process": true,
+    "one_test": true,
+    "no_panic": true,
+    "binary_unchanged": true,
+    "no_survivors": true
+   },
+   "artifacts": {
+    "adapter": {
+     "backend": "Metal",
+     "device": 0,
+     "device_type": "IntegratedGpu",
+     "driver": "",
+     "driver_info": "",
+     "max_texture_dimension_2d": 8192,
+     "name": "Apple M5 Pro",
+     "vendor": 0
+    },
+    "pngs": [
+     {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/transitions/artifacts/transitions-full.png",
+      "sha256": "1be9b9308bb1d404291ec976f0ff1b0c6b3853d3effa0bb2a36fe15270e0f88e",
+      "bytes": 72999,
+      "width": 960,
+      "height": 540,
+      "reported_rgba_sha256": "49d0f741bc50634f0b15c9ff88d5fbefef146630db83a034bd77581d9964f6bb"
+     },
+     {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/transitions/artifacts/transitions-strip.png",
+      "sha256": "20ac066c4b979e17432fc12abc1c0127dff3a1ea5829a1ac2aba5a8af47813d8",
+      "bytes": 139107,
+      "width": 960,
+      "height": 540,
+      "reported_rgba_sha256": "4ba9f251d021b6bd4f651e3f65e152626c752be9db25ccfed97fdd36111b5cc4"
+     }
+    ],
+    "report_sha256": "0bc7bf8258cf418e0b38d66fcecec10cac54ffa21191ec5a5085c3174742f61a",
+    "events_sha256": "b6a72704903cfb7aa1ebc15b12bf412222a37ddd39b4596382be1824ca6a09d4",
+    "events": 322,
+    "shots": 106,
+    "contract_checks": {
+     "adapter_backend_metal": true,
+     "attachment_only_on_own": true,
+     "budget_exactly_consumed": true,
+     "chrome_outside_viewport_identical": true,
+     "controls_plain_and_drs_480x270": true,
+     "fixed16_up_and_own_one_owner": true,
+     "frames_nonblank": true,
+     "own_scale_changes_keep_owner_and_history_then_cut_resets": true,
+     "up_scale_changes_keep_owner_and_history_then_cut_resets": true
+    },
+    "budget": {
+     "scene_submissions": 106,
+     "ui_submissions": 0,
+     "readback_submissions": 106,
+     "readback_maps": 106,
+     "queue_submissions": 212,
+     "rendered_frames": 106,
+     "pngs": 2
+    },
+    "scope": "process/artifact/contracts only; observations do not imply historical-gate or appearance acceptance"
+   },
+   "adapter": {
+    "backend": "Metal",
+    "device": 0,
+    "device_type": "IntegratedGpu",
+    "driver": "",
+    "driver_info": "",
+    "max_texture_dimension_2d": 8192,
+    "name": "Apple M5 Pro",
+    "vendor": 0
+   },
+   "stdout_sha256": "305ff4b5a21a66e28bc8e818cd9bf42accbc3766b0edcd2ee8c54ecc59991196",
+   "stderr_sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef"
+  },
+  {
+   "pid": 54071,
+   "pgid": 54071,
+   "exit": 0,
+   "timed_out": false,
+   "interrupted_by": [],
+   "reaped": true,
+   "group_empty_after": true,
+   "seconds": 1.718,
+   "group": "c7_disocclusion",
+   "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/r4-quality-build-001/upscaling_owner_review",
+    "--ignored",
+    "--exact",
+    "c7_disocclusion",
+    "--nocapture",
+    "--test-threads=1"
+   ],
+   "cwd": "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/c7_disocclusion",
+   "environment": {
+    "keys": [
+     "HOME",
+     "INCANT_0073_OWNER_REVIEW_OUT",
+     "INCANT_EXPECT_GPU_BACKEND",
+     "PATH",
+     "RUST_BACKTRACE",
+     "TMPDIR"
+    ],
+    "values_recorded": {
+     "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+     "TMPDIR": "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/tmp/c7_disocclusion",
+     "INCANT_EXPECT_GPU_BACKEND": "Metal",
+     "RUST_BACKTRACE": "0",
+     "INCANT_0073_OWNER_REVIEW_OUT": "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/c7_disocclusion/artifacts"
+    },
+    "home": "inherited unchanged, value not recorded"
+   },
+   "accepted": true,
+   "checks": {
+    "successful_process": true,
+    "one_test": true,
+    "no_panic": true,
+    "binary_unchanged": true,
+    "no_survivors": true
+   },
+   "artifacts": {
+    "adapter": {
+     "backend": "Metal",
+     "device": 0,
+     "device_type": "IntegratedGpu",
+     "driver": "",
+     "driver_info": "",
+     "max_texture_dimension_2d": 8192,
+     "name": "Apple M5 Pro",
+     "vendor": 0
+    },
+    "pngs": [
+     {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/c7_disocclusion/artifacts/c7-detail.png",
+      "sha256": "57a437a0a2923fde2521fe217adced45dabe060ef28bf4ed2a4720ef8bf58882",
+      "bytes": 85102,
+      "width": 960,
+      "height": 540,
+      "reported_rgba_sha256": "151c6dc2a47acf2c5159ef779ea18f0893610c06606bbdad3115cff50bcf7055"
+     },
+     {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/c7_disocclusion/artifacts/c7-own-moving.png",
+      "sha256": "a0251bb9cd9a326e848f91696b47c1bb6a1cd3cebcce8260641f24a3ee507e2a",
+      "bytes": 272548,
+      "width": 960,
+      "height": 540,
+      "reported_rgba_sha256": "a3d945f0977dea509a474fbf2117dd1fa2b1b4062906f5b9867f34c6dc6abec7"
+     }
+    ],
+    "report_sha256": "b9dfbeb3f4bfffe49edb6899fe2e1ca8665e79b453bbdd6898aa68ac5a43c458",
+    "events_sha256": "ecdfa57d098b2637892c0f91b6a8b80deebe4a8f06e4a3616c1bf480b3d0b98d",
+    "events": 250,
+    "shots": 82,
+    "contract_checks": {
+     "adapter_backend_metal": true,
+     "attachment_only_on_own": true,
+     "budget_exactly_consumed": true,
+     "frames_nonblank": true,
+     "full_controls_plain": true,
+     "own_moving_one_owner_phases_history": true,
+     "own_reference_one_owner_phases_history": true,
+     "trailing_region_measurable": true,
+     "up_moving_one_owner_phases_history": true,
+     "up_reference_one_owner_phases_history": true
+    },
+    "budget": {
+     "scene_submissions": 82,
+     "ui_submissions": 0,
+     "readback_submissions": 82,
+     "readback_maps": 82,
+     "queue_submissions": 164,
+     "rendered_frames": 82,
+     "pngs": 2
+    },
+    "scope": "process/artifact/contracts only; observations do not imply historical-gate or appearance acceptance"
+   },
+   "adapter": {
+    "backend": "Metal",
+    "device": 0,
+    "device_type": "IntegratedGpu",
+    "driver": "",
+    "driver_info": "",
+    "max_texture_dimension_2d": 8192,
+    "name": "Apple M5 Pro",
+    "vendor": 0
+   },
+   "stdout_sha256": "dbdd0071765f43e8bc3b0191a9f2ae067a4440a7c495172b75a02b381ca03b8e",
+   "stderr_sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef"
+  },
+  {
+   "pid": 54073,
+   "pgid": 54073,
+   "exit": 0,
+   "timed_out": false,
+   "interrupted_by": [],
+   "reaped": true,
+   "group_empty_after": true,
+   "seconds": 1.771,
+   "group": "p1_crossing",
+   "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/r4-quality-build-001/upscaling_owner_review",
+    "--ignored",
+    "--exact",
+    "p1_crossing",
+    "--nocapture",
+    "--test-threads=1"
+   ],
+   "cwd": "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/p1_crossing",
+   "environment": {
+    "keys": [
+     "HOME",
+     "INCANT_0073_OWNER_REVIEW_OUT",
+     "INCANT_EXPECT_GPU_BACKEND",
+     "PATH",
+     "RUST_BACKTRACE",
+     "TMPDIR"
+    ],
+    "values_recorded": {
+     "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+     "TMPDIR": "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/tmp/p1_crossing",
+     "INCANT_EXPECT_GPU_BACKEND": "Metal",
+     "RUST_BACKTRACE": "0",
+     "INCANT_0073_OWNER_REVIEW_OUT": "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/p1_crossing/artifacts"
+    },
+    "home": "inherited unchanged, value not recorded"
+   },
+   "accepted": true,
+   "checks": {
+    "successful_process": true,
+    "one_test": true,
+    "no_panic": true,
+    "binary_unchanged": true,
+    "no_survivors": true
+   },
+   "artifacts": {
+    "adapter": {
+     "backend": "Metal",
+     "device": 0,
+     "device_type": "IntegratedGpu",
+     "driver": "",
+     "driver_info": "",
+     "max_texture_dimension_2d": 8192,
+     "name": "Apple M5 Pro",
+     "vendor": 0
+    },
+    "pngs": [
+     {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/p1_crossing/artifacts/p1-detail.png",
+      "sha256": "5f9a22f3e61c0d975b56df652f6bb5d1fe23bf0fe29919cc90d62e969c9036e1",
+      "bytes": 237944,
+      "width": 960,
+      "height": 540,
+      "reported_rgba_sha256": "c7748ba0521d2af1e077bc4f49a8e19dbd0a225b541260163ede4f2c31d38fdf"
+     }
+    ],
+    "report_sha256": "9709217b1511efc1f1ded5690dff1f9fe2cee3a4dc1f423630c3fcee1f9f63c1",
+    "events_sha256": "91992d3db7aaa8e668d3e99acffc2062699c672a8e647c24df4c6f8748081d2b",
+    "events": 297,
+    "shots": 98,
+    "contract_checks": {
+     "adapter_backend_metal": true,
+     "attachment_only_on_own": true,
+     "budget_exactly_consumed": true,
+     "frames_nonblank": true,
+     "full_controls_plain": true,
+     "own_bar_one_owner_phases_history": true,
+     "own_reference_one_owner_phases_history": true,
+     "panel_region_measurable": true,
+     "up_bar_one_owner_phases_history": true,
+     "up_reference_one_owner_phases_history": true
+    },
+    "budget": {
+     "scene_submissions": 98,
+     "ui_submissions": 0,
+     "readback_submissions": 98,
+     "readback_maps": 98,
+     "queue_submissions": 196,
+     "rendered_frames": 98,
+     "pngs": 1
+    },
+    "scope": "process/artifact/contracts only; observations do not imply historical-gate or appearance acceptance"
+   },
+   "adapter": {
+    "backend": "Metal",
+    "device": 0,
+    "device_type": "IntegratedGpu",
+    "driver": "",
+    "driver_info": "",
+    "max_texture_dimension_2d": 8192,
+    "name": "Apple M5 Pro",
+    "vendor": 0
+   },
+   "stdout_sha256": "0be36b0c826c575b15b586a6ece4f39adcde6b91d3860ba3653574f828c56a83",
+   "stderr_sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef"
+  }
+ ],
+ "owned_processes": [],
+ "process_groups_alive": [],
+ "images": [
+  {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/stationary/artifacts/stationary-full.png",
+   "sha256": "992c5543b4f9bbdf6fd703eb764e143f7649836452df28aaac6f1dfc2debceb9",
+   "bytes": 84389,
+   "width": 960,
+   "height": 540,
+   "reported_rgba_sha256": "4c69efe238a452d096301faf24ca013877bf0f0430f83ccf1147502e51da6e01"
+  },
+  {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/stationary/artifacts/stationary-drs50.png",
+   "sha256": "724fa644d3561ff00aa2301fd40ab6b49c4111b0376df5469028ef6265cb40e0",
+   "bytes": 40131,
+   "width": 960,
+   "height": 540,
+   "reported_rgba_sha256": "6611c41fa62f782b4d96080e6d43f481d41a54c01a8d93e870367b9786d8464e"
+  },
+  {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/stationary/artifacts/stationary-up50.png",
+   "sha256": "e1156008fb51eba1c35d58875c6ee98e2f334ce41816f350fff8e23f4568c503",
+   "bytes": 100395,
+   "width": 960,
+   "height": 540,
+   "reported_rgba_sha256": "45b861bbd81aac4459bc2739d777062d33ead8705b74c5356dce5815ac1109f8"
+  },
+  {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/stationary/artifacts/stationary-own50.png",
+   "sha256": "57b53ca3e195254f4eca9947899b62c823e35240b1a0f072a9d339b83098e7d8",
+   "bytes": 98742,
+   "width": 960,
+   "height": 540,
+   "reported_rgba_sha256": "70af5324896b4cd19cec5ab53fc9c37b5487d0ded6d0984cf830dba6c5658bb5"
+  },
+  {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/stationary/artifacts/stationary-phases.png",
+   "sha256": "bdfeb4dba501be1ce69d30b894346573482bbc60b1ed16c6ccb48ab0afb4f245",
+   "bytes": 14137,
+   "width": 960,
+   "height": 540,
+   "reported_rgba_sha256": "2850b29d1593834b86a54657ba55fc8bdd19101b98128c3fd2b1aea2fdb2bdaa"
+  },
+  {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/stationary/artifacts/stationary-detail.png",
+   "sha256": "37d599a0079a7bb5ec081a032590b329a9b7247c8071b70d05d18153abeb980d",
+   "bytes": 50594,
+   "width": 960,
+   "height": 540,
+   "reported_rgba_sha256": "247719bdbe0bd341dcda6da45a1d00d038557b16883117da6ab295f7fa001138"
+  },
+  {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/motion/artifacts/motion-full.png",
+   "sha256": "9eeb1222becd6f4d2cec7afa88343ccb528ea9f6e27246cb3410a42bade35b52",
+   "bytes": 77464,
+   "width": 960,
+   "height": 540,
+   "reported_rgba_sha256": "47c3bee7ff948ae7f41fc903cad53d085ed58405e9fc40a44e7e5d3213ebac05"
+  },
+  {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/motion/artifacts/motion-up50.png",
+   "sha256": "af438cfc7cb898c8bc832774d335461146af2ad3dd910c099212e5609113a5eb",
+   "bytes": 73363,
+   "width": 960,
+   "height": 540,
+   "reported_rgba_sha256": "450cabf57eef12b535f7e1ba589dcee9cb9394115ea6533bbdc7c6f12023f529"
+  },
+  {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/motion/artifacts/motion-own50.png",
+   "sha256": "8c035e2ca9de3d3b243548ca420d3505cb22d5cb3f4d17fc20ed8eba2414077d",
+   "bytes": 73180,
+   "width": 960,
+   "height": 540,
+   "reported_rgba_sha256": "fcb4b6092a48434620eec468ff92cffa57ee2d5ed14e835bf1955ed14a314282"
+  },
+  {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/motion/artifacts/motion-detail.png",
+   "sha256": "ff40c93f2030b9501d351fafa3003621ce18de98ba78214e26657281a3b682fc",
+   "bytes": 115277,
+   "width": 960,
+   "height": 540,
+   "reported_rgba_sha256": "5e998aa85b5c389eadf6d370eb10929334c3c8fab9eb97b55524ad68e9450753"
+  },
+  {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/transitions/artifacts/transitions-full.png",
+   "sha256": "1be9b9308bb1d404291ec976f0ff1b0c6b3853d3effa0bb2a36fe15270e0f88e",
+   "bytes": 72999,
+   "width": 960,
+   "height": 540,
+   "reported_rgba_sha256": "49d0f741bc50634f0b15c9ff88d5fbefef146630db83a034bd77581d9964f6bb"
+  },
+  {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/transitions/artifacts/transitions-strip.png",
+   "sha256": "20ac066c4b979e17432fc12abc1c0127dff3a1ea5829a1ac2aba5a8af47813d8",
+   "bytes": 139107,
+   "width": 960,
+   "height": 540,
+   "reported_rgba_sha256": "4ba9f251d021b6bd4f651e3f65e152626c752be9db25ccfed97fdd36111b5cc4"
+  },
+  {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/c7_disocclusion/artifacts/c7-detail.png",
+   "sha256": "57a437a0a2923fde2521fe217adced45dabe060ef28bf4ed2a4720ef8bf58882",
+   "bytes": 85102,
+   "width": 960,
+   "height": 540,
+   "reported_rgba_sha256": "151c6dc2a47acf2c5159ef779ea18f0893610c06606bbdad3115cff50bcf7055"
+  },
+  {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/c7_disocclusion/artifacts/c7-own-moving.png",
+   "sha256": "a0251bb9cd9a326e848f91696b47c1bb6a1cd3cebcce8260641f24a3ee507e2a",
+   "bytes": 272548,
+   "width": 960,
+   "height": 540,
+   "reported_rgba_sha256": "a3d945f0977dea509a474fbf2117dd1fa2b1b4062906f5b9867f34c6dc6abec7"
+  },
+  {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/p1_crossing/artifacts/p1-detail.png",
+   "sha256": "5f9a22f3e61c0d975b56df652f6bb5d1fe23bf0fe29919cc90d62e969c9036e1",
+   "bytes": 237944,
+   "width": 960,
+   "height": 540,
+   "reported_rgba_sha256": "c7748ba0521d2af1e077bc4f49a8e19dbd0a225b541260163ede4f2c31d38fdf"
+  }
+ ],
+ "actual_image_paths": [
+  "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/c7_disocclusion/artifacts/c7-detail.png",
+  "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/c7_disocclusion/artifacts/c7-own-moving.png",
+  "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/motion/artifacts/motion-detail.png",
+  "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/motion/artifacts/motion-full.png",
+  "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/motion/artifacts/motion-own50.png",
+  "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/motion/artifacts/motion-up50.png",
+  "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/p1_crossing/artifacts/p1-detail.png",
+  "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/stationary/artifacts/stationary-detail.png",
+  "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/stationary/artifacts/stationary-drs50.png",
+  "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/stationary/artifacts/stationary-full.png",
+  "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/stationary/artifacts/stationary-own50.png",
+  "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/stationary/artifacts/stationary-phases.png",
+  "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/stationary/artifacts/stationary-up50.png",
+  "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/transitions/artifacts/transitions-full.png",
+  "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/transitions/artifacts/transitions-strip.png"
+ ],
+ "image_inventory_matches": true,
+ "exception": null,
+ "debits_sha256": "1de2dc0bf8bdc59fb83b026c741403c404e326f9c4b77e2a6260097e6f7c3f3d",
+ "ledger_sha256": "92683b61f6ecb64747b21c28e6d023446763713234bdecd0813e7724163dc9e5",
+ "scope": "contract and artifact completion only; appearance remains Claude review",
+ "os": {
+  "uname": [
+   "Darwin",
+   "Andreys-MacBook-Pro.local",
+   "27.0.0",
+   "Darwin Kernel Version 27.0.0: Tue Aug 11 21:06:40 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T6050",
+   "arm64"
+  ]
+ },
+ "released_at": "2026-10-14T02:07:53.406440+00:00"
+}

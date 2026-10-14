@@ -1,0 +1,31 @@
+Resumed the latest ACP session scoped to this handoff worktree.
+Claude session verified: Opus 5.5; thinking: max
+Claude session permission mode: auto
+Grant and identities verified; running the single granted GPU command now.Run accepted (5/5 children, released, 15 PNGs). Now inspecting all 15 images.Writing the results now; extracting compact C7/C9/P1 observation values first.I ran the one granted execution and reviewed all 15 images: the run was accepted, but **overall R4 appearance is rejected**. Results are committed as **`974ee69e1251975baca00ab80e0f989c255d7f8b`**, containing only `r4_quality/execution-result.md` and `.json`.
+
+**Execution:**
+- All identities matched the grant before running (runner, ready plan, binary, grant, fixture). I ran `check` once, then the single granted `run`, which exited 0 with an empty stderr.
+- All five groups were accepted on Apple M5 Pro (Metal): stationary PID 54054, motion 54064, transitions 54067, c7_disocclusion 54071, p1_crossing 54073. No child timed out.
+- Usage was exactly the granted budget: 778 queue submissions, 380 maps, 15 PNGs at 960×540, no builds or retries.
+- The GPU lease was released at 02:07:53Z with no processes left running, before I opened any image. I made no other GPU calls, extra images or repairs.
+
+**Pixel verdicts:**
+
+| Area | Verdict | What the images show |
+|---|---|---|
+| Stationary | OWN improved; UP fails | OWN is close to FULL: all four wires continuous across all 8 jitter phases, card stripes, checker and rings resolved, smooth silhouettes. It beats DRS and every earlier run. Ordinary UP loses wires, stair-steps the pole and turns the card stripes into a false moiré pattern, which is worse than DRS's grey blur. |
+| Motion / disocclusion | Rejected | Moving OWN looks the same as UP: current-only and aliased, with texture moiré, broken fence posts and dotted wires. Disocclusion is clean with no ghost trails, only thin speckle at cell edges. |
+| DRS / transitions | Rejected | The first frame at 4/16 shows a large blocky dark band, and the first frame after a cut shows moiré bands. Recovery at 16/16 is fast. The new shadow guard can't be confirmed visually because the views offer little shadow comparison. |
+| Overlays | Pass | Sprites, multi-script world text, the BLEND card and the physical UI are crisp and unchanged. |
+| Overall | **Rejected** | |
+
+**Historical gates (rendered observations only, nothing closed):**
+- **C7:** worst column is UP 0.0268 and OWN 0.0206 against the quoted 0.06, measured in 8-bit sRGB. The original linear-model failure stays open.
+- **C9:** most regions miss in both UP and OWN.
+- **P1:** grey 8/16 at one stop only; still unresolved.
+- **GPU001 case 3:** recorded as a retained historical failed attempt that the corrected numeric-002 run later passed, not a current failure.
+
+My guesses at the causes, which I did not test or repair: the negative LOD bias applied when no history is reused, the strict 1/256-pixel motion-agreement rule, and ordinary UP's single-surface requirement.
+
+I wrote no top-level `result.md`: the packet allowed only these two new files, and the earlier preparation packet said to preserve the root one. No performance claim is made. Model was Claude Opus 5.5 at max thinking effort, verified through ACP, with auto-memory off.
+Review: git diff --no-index handoffs/0073-upscaling-review .worktrees/0073-upscaling-review/handoffs/0073-upscaling-review

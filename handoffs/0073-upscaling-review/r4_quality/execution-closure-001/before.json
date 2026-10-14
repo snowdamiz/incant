@@ -1,0 +1,1686 @@
+{
+ "head": "272024c1f361e59d3d2bdf67c6d5819f51606a0d",
+ "protected_tracked": [
+  {
+   "path": "handoffs/0073-upscaling-review/brief.md",
+   "sha256": "fe502d34ec17d0e3421924b6d470910cb1a0395da0a1288a3a482eec1957f4fc"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/evidence/numeric/49f0bab07480c5c680fa7e228740f927c67ba127fd841b322c6866c7298cef4d.gz",
+   "sha256": "0b6b21bbaf28e35d36778f82ddf6618a2b243bee88da6cbabefa799ed04311a6"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/evidence/numeric/4a411682bf00ba1301860ab89a7752a1d43a8ff71d5ec07c6847c592b4db8e6a.gz",
+   "sha256": "7cd9957b8b242b8d7c5e5a5427d892cfb94867b0e80f7ef6ea0522ae7e3a9b1d"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/evidence/numeric/56686dbb670c93dc3f27fd8cf2d1befb85918fc5dd474ede042a2731e3f13110.gz",
+   "sha256": "4a940bd407c40ebd6f3fd7a9c47c74fe4de60a0e4d0a24efb8fc67f5129485aa"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/evidence/numeric/5f62109447bdced7a7aaaa6618418500526626634f06b4e6594c352f83a4945a.gz",
+   "sha256": "34fec0e2f873a96cf5fc950380dfa56f1e074d7d90c0705a408c471d3c034c7c"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/evidence/numeric/61065efe85c43642b175809920b934ae1155370a9b2a3eaeddd45fb56c4f6b05.gz",
+   "sha256": "e14a9553ab6a13b88d9657838dfc6af5e618bcea84bdb9a3b4daa1b3c541ce12"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/evidence/numeric/8691e961ceebfbb6b23690bfbff92bd6214131b6126f5456a40519633b9d11c9.gz",
+   "sha256": "764ecc85a2aa25d272b1585bd86900c16d9059ca0795b83703b112263f4e2c09"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/evidence/numeric/cad389d63af2e7b6fd7954b9fa3522c9036d11cb66253cb7666633f2ff9009d1.gz",
+   "sha256": "b7176e6009903bd48050d05d3b6d1c91cedc7f1640c251b7d3c021ec692424ba"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/evidence/numeric/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+   "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/evidence/numeric/ea36f4a210c383cabeb730af0bcc3b3499e908ce3c7c64cd6dfbdd9666cd0419.gz",
+   "sha256": "0fa19c3427718fe6b2787aa28a98074214e81665f7a0280b00381eea3f8b8d7a"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/evidence/numeric/f9ea4ab55fd7bb4b2d684252b8f6ea84a71e6e363c7fa30f420ac0a65b19fd44.gz",
+   "sha256": "8636d367a326304eac95c922e12722a8a9528d3df78a58cf4a8394e3dbb9e994"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/evidence/numeric/fe268a84193da4765bf47e0545d654668e8a2441c7ea153cc64699a6df6d6678.gz",
+   "sha256": "146358ff2a8dae289cf8e562a937b08bc2315ca38b1c4bf3b305cbd8e254ea9a"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/evidence/numeric/receipt.json",
+   "sha256": "63f340153d0133ba5692663b996f4848ec06634b014b9771baef416e28e90395"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/evidence/visual/analysis/summary-2026-10-13T082346.098894+0000.json",
+   "sha256": "2fba8a75e4ff7bcf8d3fa436862f454bf590b088c7bdf76bc8c0b55079f93fb1"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/evidence/visual/build/build-grant-copy.json",
+   "sha256": "6231fd37f3ae3170894a82dbab72934bc2dbf69df67c458aaf036df8127909bb"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/evidence/visual/build/lint.json",
+   "sha256": "221e73efca63e29d88f8392d96579479b82f09a905ed16a6b8e079bfd39952f0"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/evidence/visual/build/review.json",
+   "sha256": "b52c6918ff908c693312022b5b439423a78ba4af816cdac67a38bbb1ea35bbde"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/evidence/visual/build/source.json",
+   "sha256": "40ae57950113db717780ad33b880f38d973be064222b46a180e6f0872f6a9fa0"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/evidence/visual/build/toolchain.json",
+   "sha256": "c4a14d318b0a0cfaa9dd10a767daf6e99e528a3bbda46471fd8e68022263980f"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/evidence/visual/captures/motion-r1/events.jsonl",
+   "sha256": "bcb3faa7ba33f9e4d8c16fed7c08c913058a7984ac467c95de46b11f4e69a214"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/evidence/visual/captures/motion-r1/report.json",
+   "sha256": "27372028adcd211f3458db67807aea39100ebcff222c1ea2bba7c4781871b491"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/evidence/visual/captures/probe-r1/events.jsonl",
+   "sha256": "ac19506c094443e030bcd244e1867d56088e305ae0710d29f7fa58a26ff7252b"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/evidence/visual/captures/probe-r1/report.json",
+   "sha256": "8792fcba18826ccb45dc174951a39d23d1cddce4105f9707cf412b77df5ab7f5"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/evidence/visual/captures/stationary-r1/events.jsonl",
+   "sha256": "42c5992cd8ae89a8c1c5c16d65f8acd5e581787ab6a5f621f8123551fbed314a"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/evidence/visual/captures/stationary-r1/report.json",
+   "sha256": "764c4e326f4f0ac83cc8565c03b93d6c6175121751e99169d22c9488f7319d54"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/evidence/visual/captures/transitions-r1/events.jsonl",
+   "sha256": "0b8d8c4ae8da7631230d596592ffadb94ea80db8f2440cd5b3d6f2e8910cb44e"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/evidence/visual/captures/transitions-r1/report.json",
+   "sha256": "f755d4bc9ec7f743444627624e23508a27ae19be04d79d9ab811e20043614dda"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/evidence/visual/gpu/debits.jsonl",
+   "sha256": "f0b9aceb57ca9f6ba78526e00baadeba1ca732136b5290eb5c2d8f252b5c7118"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/evidence/visual/gpu/gpu-released.json",
+   "sha256": "d0998c95b860c574c9e3e7b1c361a7bca9ab65cb23e7d21f65e794d00b29f50e"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/evidence/visual/gpu/grant-copy.json",
+   "sha256": "ebf34321918600bbb545bb08e465d9c2db96eff073f703e258ebcc22839b0692"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/evidence/visual/gpu/ledger.jsonl",
+   "sha256": "88b269e85c0d528f844673ecacfab4a41c1e3c08c4f1ce80f91035fc4762152e"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/evidence/visual/lease/target-lease.json",
+   "sha256": "7502da7f9fd756d0d2b37cd52bf26c48d59d3fd272afb32df8392ece3e2acd32"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/evidence/visual/logs/build-lint.stderr.txt",
+   "sha256": "3bf9237fd0348b5d212151a0cacaf29dd9a4c38f3831177b0ad9c4c561a7f3da"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/evidence/visual/logs/build-review.stderr.txt",
+   "sha256": "dbc2d40b935f1e72f67a60ccdeea5976a1a553d925c3c52c478fb3ad2de8cffc"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/evidence/visual/logs/gpu-list-review.stderr.txt",
+   "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/evidence/visual/logs/gpu-list-review.stdout.txt",
+   "sha256": "a3714fe7e26643c6386d278d8cb384adc1a1496248e8bea531ce6e3f6eec07dc"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/evidence/visual/logs/gpu-review-motion-r1.stderr.txt",
+   "sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/evidence/visual/logs/gpu-review-motion-r1.stdout.txt",
+   "sha256": "4e12a0ef1a229289b1518dc60bf1020cb0a504fb3427165016778308882cc0f3"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/evidence/visual/logs/gpu-review-probe-r1.stderr.txt",
+   "sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/evidence/visual/logs/gpu-review-probe-r1.stdout.txt",
+   "sha256": "bb13e69544d4d9aca8f52684930f3b6fd4f5d1a13ee0186a7f09b887f6e0d1e3"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/evidence/visual/logs/gpu-review-stationary-r1.stderr.txt",
+   "sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/evidence/visual/logs/gpu-review-stationary-r1.stdout.txt",
+   "sha256": "b81480f2564a8e98b00395055f79871f41b6d495e224a7915396ee7635d41e6c"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/evidence/visual/logs/gpu-review-transitions-r1.stderr.txt",
+   "sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/evidence/visual/logs/gpu-review-transitions-r1.stdout.txt",
+   "sha256": "589f00e4a40ab4e58484e36a3ad3354af07131f8d4c02c75cf4de0deac4ed6ce"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/evidence/visual/logs/toolchain-cargo.stderr.txt",
+   "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/evidence/visual/logs/toolchain-cpu.stderr.txt",
+   "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/evidence/visual/logs/toolchain-hw_model.stderr.txt",
+   "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/evidence/visual/logs/toolchain-rustc.stderr.txt",
+   "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/evidence/visual/logs/toolchain-sw_vers.stderr.txt",
+   "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/evidence/visual/logs/toolchain-uname.stderr.txt",
+   "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/evidence/visual/manifest.json",
+   "sha256": "c0552e9af2a967cf49d93fc605df948bf881660d8d46e319f9d49b15bfa4e323"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/numerical-result.md",
+   "sha256": "4f36237c727301bc6cb24a6b9aed14559bc0c4d2831364aa8d8a776cd53993ac"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner-attachment-numeric-evidence.json",
+   "sha256": "ea4b9dc399ff8e77223df98bedc45cc0d64f34edff5cc13db4c2aa47407902af"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner-attachment-numeric-result.md",
+   "sha256": "9dd6603da34d73bf8658284ce079b3de43b9b2e155355adae6b48c6aff6b9774"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner-attachment-preparation-result.md",
+   "sha256": "69779bd463e5ca746d908a1ef20618ef95402eafca34e882236862834c57977a"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner-consumer-shader-result.md",
+   "sha256": "145eecf2c7b4450f02cd034334b74acb4e180ff7eca7db514f8e4a79ac158ac5"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner/owner-grant.template.json",
+   "sha256": "e69f5cc3d75f33df04ec036b550da038271e9bd2b70bb67e0c2092e6241c7a9f"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner/owner_runner.py",
+   "sha256": "b9e12895389a046e1c0a0bd4c43f01a215505c793be4106b31fafc18aa2aff34"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner/test_owner_runner.py",
+   "sha256": "571929ffc5d358af49f45ea911b97828e76d8742fea84d463a22f05cd63b6865"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_history/brief.md",
+   "sha256": "c41a9348cca8ef39c540ed2c365cb5aaa12c8cb194b491fc58307eb66144a1ba"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_history/diagnosis/case3_oracle.py",
+   "sha256": "61cfa488675f4bd2a0188fff68c3caa4cd69201d8944ed893393fda1e3923ca8"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_history/diagnosis/diagnosis.md",
+   "sha256": "7b92dcd10922fcc5e09f309595c51b2c4e897ef4a5b2fbbb5f5bf097fe4e763e"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_history/diagnosis/owner_device_tests-discrimination.patch",
+   "sha256": "dd7b8cadde1bbaa8f7e01e0389443c43f4e290179a659eb6830276097b8ca907"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_history/diagnosis/resolve_owner-anchor-change.patch",
+   "sha256": "97029540083930d34399477c9b35268112a38503eb75199df23cbee854f38f46"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_history/diagnosis/results.json",
+   "sha256": "d6433fcfcf90a51a37bbbf92d70767c6eebb803a06965edda5ce37eeb57b097b"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_history/grant.template.json",
+   "sha256": "269c0144daacb90079cd0ffcc786fb1b8e820b71c758814e0d20c9b21d96c4d9"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_history/plan.json",
+   "sha256": "19cdc72ce68564f24e4ec88eb732aa8a17b412d964556b5ae838b21b992168c7"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_history/preparation.json",
+   "sha256": "bdcea328053d15f8e25fa95d7f0e3bd5127aab286989d3167aa6051bf705cf6b"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_history/result.json",
+   "sha256": "9ca74372da9c16c0c8ccb8042386dd35a309ed419b651adff4333c6e5e647f58"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_history/result.md",
+   "sha256": "a699014a97413ab53e0eb4b716620a6af320b3d73a2bbc0f6b1d2ba6b8f8d390"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_history/runner.py",
+   "sha256": "bf9acf839628bf48e34af08367c5c27275551a2dd895e088fddd3c76ffcdddda"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_history/test_runner.py",
+   "sha256": "43ff14ad3e897d66695bd9674c14c4fe5c3a62c320b6502f9b5c819abf77090e"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_history_002/brief.md",
+   "sha256": "1f15c55e88329fef3b10b11b13fd48d125871a8cc385d7e3f78b00634595a537"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_history_002/cpu/check.json",
+   "sha256": "592c4b55e04d97d46ff46bdec40456207e2b6d39423050b53966ce34cf59fa86"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_history_002/cpu/check.stderr",
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_history_002/cpu/check.stdout",
+   "sha256": "ef1533f27a0a4d531a3dec3c5789ea7a21f5c56504569bad75641e1fc1af8622"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_history_002/cpu/cpu-archive-audit.stderr",
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_history_002/cpu/cpu-archive-audit.stdout",
+   "sha256": "53e37a95600e75336ad52b2e2ae8c8e35ed79a3442e3416eddcacf53273d4947"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_history_002/cpu/guard-tests-001.source.py.txt",
+   "sha256": "8f57d9c9b9ce66ed8ea4441d843c4c19db7cda49e54ae90f30a95a3dc9309081"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_history_002/cpu/guard-tests-002.json",
+   "sha256": "93c3bfd8d0a5f73ebcfea967c9a20289b054be192de282cb2273771b4ad59758"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_history_002/cpu/guard-tests-002.stderr",
+   "sha256": "8df17192fe2e7c9ffc84ca3a6cde16a0b72f95f1a8fbf4e011eb5c6abea6fd79"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_history_002/cpu/guard-tests-002.stdout",
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_history_002/cpu/guard-tests.json",
+   "sha256": "0847aabab4301f04dcf46b47aafb308fa6fee8129e0ba76d0d5afac850fc1efa"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_history_002/cpu/guard-tests.stderr",
+   "sha256": "706cd942a2862097f8f4f246eec77632c1cacd3d1ded1fce14ece40bf5c71ad0"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_history_002/cpu/guard-tests.stdout",
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_history_002/grant.template.json",
+   "sha256": "0dbb40089f0d2399e50f558314cd1943dfb902ffa2ec230421c3bd1fb7444680"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_history_002/plan.json",
+   "sha256": "6a618f250e17e50015621ac9c9aef649dd12338fd23f2ac2f55b801962bdb2e0"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_history_002/preparation.json",
+   "sha256": "1da9b7d3d42251541aee1c31586a353610e2b0fc148703f221298886e719b9dd"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_history_002/result.json",
+   "sha256": "422a240caf03d9b0f3f2e8534881241b7ba88713f1580a70d13a5e141d25827b"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_history_002/result.md",
+   "sha256": "0cdc4ecc81e70ad633e9c49d6d50ca7675c4ba75898805fa6dceeb58e36149b6"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_history_002/runner.py",
+   "sha256": "d89272e66a039d43911a58a04447056ccab26822a3a005429c5edf5c0221cf13"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_history_002/test_runner.py",
+   "sha256": "9c935d6a388f1ba24f8e6f54a79c3cca0da178b0bda1845d0da74ecccbe7ace8"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_output_quality/execution/README.md",
+   "sha256": "6de90e3223a884ace4965a53d79ea6a03a680ac1cac8795a9b78bc5a5ce68615"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_output_quality/execution/controls-receipt.json",
+   "sha256": "35cd9bd215615dfc60e5f3681561e2d29bf9c3439c7efbe4add90ac20946666e"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_output_quality/execution/grant-template.json",
+   "sha256": "0081792b4370d2175a2f1cc25133095f978d3319f16ad7c17da3a347efbe8789"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_output_quality/execution/plan.json",
+   "sha256": "46189ae9e4fdd5f9bdd4949ba43745b24dd52e16d7227c5f6e02c064ae18e854"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_output_quality/execution/protocol-delta.patch",
+   "sha256": "ef374e547b9d8ac3f4053dce9711e14608932a6544ed8fa31db7303ebdef049f"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_output_quality/execution/runner.py",
+   "sha256": "5bd9fa2f0b6da826193f9225517b02a2ec92f4482554d6636cff762ca1406d9c"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_output_quality/execution/test_runner.py",
+   "sha256": "ade74c6a0f091ba001975393a4378f87a01cea7a289ba0011546dd44de3ba991"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_output_quality/result.json",
+   "sha256": "a11a5c2cf3b5140294d6745a44b720d0846be1c7f8d5cec225dfe759ca41b712"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_output_quality/result.md",
+   "sha256": "99332d1d5299b7b152112c5e03fa67fbe6738ba097c86f1d6d5c30e88a1eae1c"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality/ROOT_STEERING.md",
+   "sha256": "8cd864b90fe5c74618f66bc82005948f1f51b42182fd2ab3828186e5f64d5c4f"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality/brief.md",
+   "sha256": "c8529663d0548163ce780b64fdc7b0cd310b7c668f2428ae185d77f55e632056"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality/closure/README.md",
+   "sha256": "b81e0ccb436fedbaa48aeaee87b8ad2da9e7f1fa57fe677568fe8108b30fe64f"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality/closure/acp-terminal.json",
+   "sha256": "35c26695d770b733dab0472475519028e9921cc6379396dcb0dfb9a4a54f0226"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality/closure/execution-audit.json",
+   "sha256": "552b230535e8ae87a2860c268661872614a8b254de9954c9e0c996ad73d787be"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality/closure/image-read-metadata.json",
+   "sha256": "bcb91443f3d47e421b873d6f6ffaab4f135f7b493375c34eae4de03f829daa0d"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality/closure/independent-closure.json",
+   "sha256": "5354db29bb519c0917c90a7f9dcfad693dc40d7abf30c181ab700a7987026510"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality/closure/independent-original.json",
+   "sha256": "a377f878b9a4cfcabc521b2c4be39e8ae9043da6475212cf6577f09dd5b6c4b0"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality/execution/README.md",
+   "sha256": "a4a938c879263a96d50151dc44392d80489f170f7cefc65563ed721aa0e5af3c"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality/execution/build-review.json",
+   "sha256": "7fe3b52b64c92554f921f5e2d4978ffb5cb1b48a02ab91930d348bcad27386a5"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality/execution/grant-template.json",
+   "sha256": "e1f8a9d99c4fc6469503622ef7646b2741205b454386eda77bd593d0a83ea9d3"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality/execution/plan.json",
+   "sha256": "f2ffc19ddfd9a616979631e056b4846ad74ba56e0109cb9fe2b1f5ea092f957a"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality/execution/preparation/check.log",
+   "sha256": "36315838ccc9aa2875c0b8858cbc0e189ff52ea3a07ab62574c3eb450df4e8ee"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality/execution/preparation/cpu001.json",
+   "sha256": "af006ceb33a9ab6c48b9fad04cbcc0fb58676369c5cdf09bacfa6061d515f369"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality/execution/preparation/cpu002.log",
+   "sha256": "5271b02566e846fceefbcc9fb62fb5800783b4606d4e4ea2915ef0d5424a5548"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality/execution/preparation/receipt.json",
+   "sha256": "9e1c786c14f5f7aa09092b0d7a5450f750a1392fa7f6a23216760c063892e5d8"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality/execution/preparation/test_runner-original.py",
+   "sha256": "1cd2c6890d27d02388edb940851d130961a5c99de5157b8e728dc1110a11f551"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality/execution/runner.py",
+   "sha256": "5eacd386161a8bbc669cf00df0a43450c78553bd9e37a3b675895ff00b75d479"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality/execution/test_runner.py",
+   "sha256": "ade74c6a0f091ba001975393a4378f87a01cea7a289ba0011546dd44de3ba991"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality/plan.json",
+   "sha256": "ff0f0f488faa3f6d4d6cc1321d5c4e87c35cbb4160130dddd050697bb824dbc4"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality/preparation-result.md",
+   "sha256": "7500e93b6fba7950f7177de63756447705ea1e8a158a0578035e39454c35d15a"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality/preparation/closure.md",
+   "sha256": "17621a7d06702f37c1fdef296d335768c3e20fec5114d7dfd36c5625717936bb"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality/preparation/independent-review.json",
+   "sha256": "361f0ca5c8c38f213f9b020dbb76882757010ea35bee1f454fd024a46c83634f"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality/preparation/selfcheck.json",
+   "sha256": "e97f2d661750f7ffebb074f8f23d16c5176c4c392ba1a8a3a6f8a3fdb71169cc"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality/result.json",
+   "sha256": "14a5e66c185bfa73cd64cf13f85312aef71aefa13034c7bd1250bab01174e544"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality/result.md",
+   "sha256": "8c3e285425f87e309380e0831ab564975400488164eaa58fc68fe276dc826dbf"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality/review/upscaling_owner_review.rs",
+   "sha256": "650316a21f30bfb4f7cbe8c99b67f9b5be269b51eb62b4d017b519bd5130d997"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality/tools/check.py",
+   "sha256": "97a2e860023949642ea772490e7616d88598b352fd8db043c78df2d91dc3413c"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_blend/blend.patch",
+   "sha256": "93fd2b23762f484e495a024f2d27548de2dd7aa324d98edbc932d87b33b9f69c"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_blend/controls/blend_controls.json",
+   "sha256": "9e3669346e66ae073814ba1d1d3b096d6a3ac167a9667dc6ffba22a53ff5f514"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_blend/controls/blend_controls.py",
+   "sha256": "0a21dd96195ede7d41a2ac0aa80ab364e8591e5db26af04104079a9d1db1ae76"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_blend/controls/patch_check.json",
+   "sha256": "687559a68505662f121f7e251ceefb835f1e192a1d2826b789d166dd2144009c"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_blend/controls/patch_check.py",
+   "sha256": "03c78dd2b5dc134aa01ac1fb12f01edbb455a773ee43b7a7aeb602b20e58b974"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_blend/implementation.md",
+   "sha256": "93982cc8de179c77af910f037c5aefef0795f635f53ae8463fc346102ec0c5b8"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_blend/src/crates/incant_render/src/graph.rs",
+   "sha256": "fad04f0f9ac4c42b51f3f6a0dc6eb23c9c59e5be949fba6285aa9ebfe717bdb6"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_blend/src/crates/incant_render/src/graph/native.rs",
+   "sha256": "d4ee17460d8d91cc62bbef51f157ebb38b71f8ecbaef70df8e404895bc52c445"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_blend/src/crates/incant_render/src/lib.rs",
+   "sha256": "d7df7bfcd630fb7ba4d5f52f24fa3530a260139406f3fc5fc42ca2f37fb96ee0"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_blend/src/crates/incant_render/src/lighting/mod.rs",
+   "sha256": "51ce482d943bb7ef69e7e42c6191da3b55cee2abc391662665074dd1eb3b24d5"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_blend/src/crates/incant_render/src/model_draw.rs",
+   "sha256": "81050d540252c1a6e092e4fbba07e949660e110d5d8032838aba5b7eedce0859"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_blend/src/crates/incant_render/src/retained.rs",
+   "sha256": "8a80f11205067d7c27a0f8d7a336724b2d2bd310217da98dda639094155be857"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_blend/src/crates/incant_render/src/upscaling/owner.rs",
+   "sha256": "d76150032d102aa18402956a26533d292b923d83569a20ace8a5a2748809e10e"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_blend/src/crates/incant_render/src/upscaling/plan.rs",
+   "sha256": "9143953303b30e529ff0546a02355810d4214a3027be81eee4205f3c56eb37a3"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_blend/src/crates/incant_render/src/upscaling/tests.rs",
+   "sha256": "0a7df9883df6778c261e08d7973b5625ed9c4cdf044212e983317f9141c1eec9"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_blend_guard/blend_guard.patch",
+   "sha256": "da5c5bc13b56d39ec359c01549a2d11fb8587d5b3736944db5fe5339c39eee10"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_blend_guard/controls/guard_controls.json",
+   "sha256": "2eec85172b0c7edb376729e7995f83e4158d4d133079f9d032ae41aa86e577a1"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_blend_guard/controls/guard_controls.py",
+   "sha256": "1fe6133781a21bcc53ce9c7c45100646ac75990d0089e64fdb61b6018cf82d95"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_blend_guard/controls/patch_check.json",
+   "sha256": "e6ecddb8651d4ebdb605f15aa22f97b6e83a89860459e9bbfd611f6c80a6c416"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_blend_guard/controls/patch_check.py",
+   "sha256": "55883edee566ca1debaaa1347b794557bdda3f66fc6cf5ba46959fcfc8fdc7bd"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_blend_guard/implementation.md",
+   "sha256": "17d6f536b6fc7256841a0ba33dd004014536c3806797d60eb948e2f6c2f21e70"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_blend_guard/review_vs_blend.diff",
+   "sha256": "b45f6a08da6463500ab5359daf0c9084ecf8ac5240959ca600725604cce8a146"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_blend_guard/src/crates/incant_render/src/graph.rs",
+   "sha256": "36afa630dd146ac3708f1f05d919d4eadbb016d1b60bcef5f92adc8238f3642f"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_blend_guard/src/crates/incant_render/src/graph/native.rs",
+   "sha256": "8238ea61019af71f702468c2c06095f62939bd0d10e7b60ecabbe41c93eaef2b"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_blend_guard/src/crates/incant_render/src/lib.rs",
+   "sha256": "a6a77fe140e0513f5d58cfeeb94933747c0c88380635ffa07f26208ab0213894"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_blend_guard/src/crates/incant_render/src/lighting/mod.rs",
+   "sha256": "e961fe2ebc9f5f01a550734a878bda3ef2d1d407f8c0f34ab31642536d57eb36"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_blend_guard/src/crates/incant_render/src/model_draw.rs",
+   "sha256": "2a5f12fa54b25ac4fc8a8868c1fca03e9fe5bce5e178073387f875f7040bab3d"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_blend_guard/src/crates/incant_render/src/motion/attachment.rs",
+   "sha256": "0537dd58409e0dfd485e09633b41091cb461e09f4859f6217147fdabb840d601"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_blend_guard/src/crates/incant_render/src/upscaling/owner.rs",
+   "sha256": "65c64e6c1510f56fe8fd3d999fa45229d61165d70677d4f28531bcaed14107b8"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_blend_guard/src/crates/incant_render/src/upscaling/plan.rs",
+   "sha256": "f87cf1506ab43ffbe99d5dc95cc6aab2d2d3ed9816230a08e4d066c528741f7a"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_blend_guard/src/crates/incant_render/src/upscaling/system.rs",
+   "sha256": "2b06ec041bc75e2f0b32a1ea2a20acdfc556e8e5bee155026d99b401a82fdd82"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_blend_guard/src/crates/incant_render/src/upscaling/tests.rs",
+   "sha256": "0a7df9883df6778c261e08d7973b5625ed9c4cdf044212e983317f9141c1eec9"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_overlays/controls/overlay_controls.json",
+   "sha256": "142af8f207c3391865b7308cbb9051d75ff98c3d9a176001ac200678eb28b884"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_overlays/controls/overlay_controls.py",
+   "sha256": "76ea76df10f43afa21c844f18dc2221293ab08f26874798ff3f4cc5db931f730"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_overlays/controls/patch_check.json",
+   "sha256": "5413e82cbc2dce9a54606796e8c2f29aeec2fb10a5723012846d2b8419a355ff"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_overlays/controls/patch_check.py",
+   "sha256": "7999ab71982e4850d785117c320b69f901e8e9b0643ee1108b5bb8b35e11f356"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_overlays/implementation.md",
+   "sha256": "1b732582a1c0504dae33703650976b3045e903806c7096444cc90483df9e03b2"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_overlays/overlays.patch",
+   "sha256": "bd89d69d085f53e68ce7dd67940e59a48e2d80eb2d91c930fe5b3302d379113d"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_overlays/src/crates/incant_render/src/graph.rs",
+   "sha256": "8e9342ddd3da757afa7c8cb1ddd7e36081761a28c5ade55b35dcca9a011800f5"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_overlays/src/crates/incant_render/src/graph/native.rs",
+   "sha256": "97b5c3cffdf640935ce3bce3c62b668d2f6a59f8a36db5a3bfb2a7ed8464ec1a"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_overlays/src/crates/incant_render/src/lib.rs",
+   "sha256": "83eff3bf449f52b88a667eb456e9f0d9dd9d38d48a540fb97ebcbc33446f931d"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_overlays/src/crates/incant_render/src/motion/attachment.rs",
+   "sha256": "bf6e3893e52edfad57cd9f2f06e25c80fe7282805c972c3ea982aeba711a9540"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_overlays/src/crates/incant_render/src/motion/draw.rs",
+   "sha256": "7920e73fb8d5c9934e68d1664f50acb999663dd790d43853b463d6c4e525d507"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_overlays/src/crates/incant_render/src/motion/retained.rs",
+   "sha256": "400eb57b3d067eaa3cdf3d2e0c216a4868d09947d61c49dca62e909f0a394d00"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_overlays/src/crates/incant_render/src/upscaling/owner.rs",
+   "sha256": "e50b6c72866579428c041e6600a986f986c4c391b91b780f1c4af8db4dcb4fc8"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_overlays/src/crates/incant_render/src/upscaling/plan.rs",
+   "sha256": "b718183cf0829003c3650fd6a186328985fb2cc80b4a4a0625d2b47909efe092"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_overlays/src/crates/incant_render/src/upscaling/targets.rs",
+   "sha256": "19bd758883610efcec537bb1ce41db05f5e08efe39fcc5358841c8d16a02f094"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_overlays/src/crates/incant_render/src/upscaling/tests.rs",
+   "sha256": "2c50fad78ede2aede47c9d834bf7836c1429d2c8d1f49dbfc0a664e40ed85c13"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_reconstruction/closure/README.md",
+   "sha256": "625305441dbfdb1dfc9acff8db67d94071d164238bddf5b3e33be075b78f1984"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_reconstruction/closure/acp-terminal.json",
+   "sha256": "397505f60a1d8ee67b408b9827ef66b3de5d8c6abf0313ee0c108e39bf5cbada"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_reconstruction/closure/independent-closure.json",
+   "sha256": "6c8b6cdf9942bcb7f6ec9bae78fc38a2ef283de3a150970d83158baed04055b8"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_reconstruction/closure/process-verification.json",
+   "sha256": "894cc98fdfee29e19e3d2010fb34a8f8f01762bd2dc4f920d501bc1dc252845a"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_reconstruction/controls/reconstruction_model.py",
+   "sha256": "3a859f23a90142cfb9778fe24f6752f03c01aa01b092e003c6e224cba63621e0"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_reconstruction/src/crates/incant_render/src/graph.rs",
+   "sha256": "c1e9fb546cb16b30b14bcda5804b18e406a0794d45039fc6f4358595e070945f"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_reconstruction/src/crates/incant_render/src/graph/native.rs",
+   "sha256": "599cd44f1e4feb8418ce1e487c50a2eed0ac222be6af2d7ed5122f1a76b31c09"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_reconstruction/src/crates/incant_render/src/lib.rs",
+   "sha256": "a6e15e55f3a0d425dddc445c98d5bbcd9bb791670903a298683014acc60fdaf3"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_reconstruction/src/crates/incant_render/src/motion/attachment.rs",
+   "sha256": "949c7f1b3a2263633a6524d398b138b070898ad91411d47d6aeede84528506ed"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_reconstruction/src/crates/incant_render/src/motion/draw.rs",
+   "sha256": "be21e724375898916e1615c6e96631a9b46c34b4de35a18eb1bc0be854127f59"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_reconstruction/src/crates/incant_render/src/motion/owner.rs",
+   "sha256": "54f2383d75c9ba9b5952aba8862485eeca0437c4d24824694bedcd9424f35e53"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_reconstruction/src/crates/incant_render/src/motion/retained.rs",
+   "sha256": "5ebc0ee9fc3c5c37ae2fd6defa94b3956d857b26c7448ccda2f34962e3419b8d"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_reconstruction/src/crates/incant_render/src/motion/tests.rs",
+   "sha256": "5c123128b7f534267750463ea0e34663cac19f58e05f0f563b563554c9224f81"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_reconstruction/src/crates/incant_render/src/retained.rs",
+   "sha256": "7b3ddefbef62fb24e93122ce9f8cd52c1b9b7f61d2a48f1a4c5a4a8f8cdffa39"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_reconstruction/src/crates/incant_render/src/temporal/jitter.rs",
+   "sha256": "41d80973344b080d3608d1306dba7d7a08a3b2746fb737d22e30e5f9b496a4dd"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_reconstruction/src/crates/incant_render/src/upscaling/common.wgsl",
+   "sha256": "e1c2e552e462a3e27ad6632324b3880ef0cb8f96ec2e1c346ec6205e0520c879"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_reconstruction/src/crates/incant_render/src/upscaling/confidence_oracle.rs",
+   "sha256": "888c1a3f213d40007a1c2e285e43f6badb21312a13592598f3dd777cf85ac40a"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_reconstruction/src/crates/incant_render/src/upscaling/device_tests.rs",
+   "sha256": "5665df3ad9395fed273e1057c31acef2fe482fdc77edf7ce743804a00c99257e"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_reconstruction/src/crates/incant_render/src/upscaling/kernel_oracle.rs",
+   "sha256": "499d6492d500bce2e97eb6c55e64e8632b69fdb8308c861a014b9a8cb7c20570"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_reconstruction/src/crates/incant_render/src/upscaling/kernel_patterns.rs",
+   "sha256": "8a5cb4afd73bf98e4aaf153df69f8e1f6625ff365c09d1cd58d10083d5958c36"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_reconstruction/src/crates/incant_render/src/upscaling/kernel_tests.rs",
+   "sha256": "1f6b60b02ea236c4c04253dd733950931464ba85689fb1ba28e6d90a5fdb5398"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_reconstruction/src/crates/incant_render/src/upscaling/mod.rs",
+   "sha256": "f2f821de7c985aa32257f34fcd6d1afeebb8d773f13fa72660294308d4bd005a"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_reconstruction/src/crates/incant_render/src/upscaling/owner.rs",
+   "sha256": "dea16cd9362d9ed8839c4f86813554f89296204ac9a996fad05f7c1788d80b80"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_reconstruction/src/crates/incant_render/src/upscaling/owner_device_tests.rs",
+   "sha256": "40d3f0465934ca0dd252d57953c7e41457dfbfdbab6c87070ea20af99f9347dc"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_reconstruction/src/crates/incant_render/src/upscaling/plan.rs",
+   "sha256": "a5fe81bce82b19aefbc7507c034ba38a22a29ec776dcb7a9faf2f8457074bbaa"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_reconstruction/src/crates/incant_render/src/upscaling/resolve.wgsl",
+   "sha256": "296fe89066865c4feff4d486506d762a4955a8351aa3f83aa0eff72ba375fc03"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_reconstruction/src/crates/incant_render/src/upscaling/resolve_owner.wgsl",
+   "sha256": "23c094e20e62bba3da35fca373457024cfe5405c2be042802493bbfc1cea4c9f"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_reconstruction/src/crates/incant_render/src/upscaling/system.rs",
+   "sha256": "00ddce30484539148b2887e778db8203f4bfbec222964978bf6ad9a91fcb5442"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_reconstruction/src/crates/incant_render/src/upscaling/targets.rs",
+   "sha256": "d7b6129b9e81cc8f06b4da069fccced8d551bd49098202019d38a915984d730b"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_reconstruction/src/crates/incant_render/src/upscaling/tests.rs",
+   "sha256": "c0c29e73c5ef10f08994a7c601c9a8a24a46a0142e6db35cbae687a718de52d8"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_repair/closure/README.md",
+   "sha256": "20783fe3b4abc04cb9d1eca3ad1199e45ea28ddd98f0ced1e2e30c7a11201488"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_repair/closure/aborted-acp-terminal.json",
+   "sha256": "4bf54cdf6485f9893f2589e94a560c6e8ebb5ef6e98e6da159ad76b8477bbd7f"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_repair/closure/aborted-preparation.json",
+   "sha256": "21308874bb6b6acee089b7415b6a658327eb14e0cf90cfd7087398253fe5ccac"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_repair/closure/acp-terminal.json",
+   "sha256": "24583bd4c4f05221749c09e77ef2c35435875a963be0aefc8cb51764d6e07db3"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_repair/closure/audit.json",
+   "sha256": "0d210c77a7cf593c9b4509d746e714627635adb27c293ded5d4c345c98bcf762"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_repair/closure/image-read-metadata.json",
+   "sha256": "51b909474508404d79afb0a6cf2e5c32f69b9e413034b8cc4dce7eed7f6f9f40"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_repair/closure/independent-closure.json",
+   "sha256": "3b7e8dfbdb675cec643ebf4b5a4767bfb63bb5cf34e52229d10b8edc9e3e4812"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_repair/closure/prior-reference-view.json",
+   "sha256": "cbf1e3f51b11fca8beec0e3c0bd0db8cee0389cf8389c0c793fe910afa788936"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_repair/closure/process-verification.json",
+   "sha256": "7da6896d863db022ebe4cd7b8db5b9e7c11269f0cd8a10a9d5900988fe4ffa10"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_repair/controls/dark_block.json",
+   "sha256": "9554b95ee34675fdfca5796b8ad6316e783dc00d1dcb519c60b8aafbb4fc8a0c"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_repair/controls/dark_block.py",
+   "sha256": "6333680042391c9c6973bce0a2671bfede83f0ab559570e517429ce6ad170055"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_repair/controls/patch_check.json",
+   "sha256": "db6fe92ef21a30c0512598d12e329bf52533ae93773d5a7589898b08a92e4911"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_repair/controls/patch_check.py",
+   "sha256": "44b1802179e81ebcb7e9e3b1a21081bc188f30d714a6eff06beb8d57f1a7fcb9"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_repair/controls/reconstruction_model.json",
+   "sha256": "b8edbde6a3e13451d659714fba2a8507efefeab144b6e3b496f630179c9b88d1"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_repair/controls/reconstruction_model.py",
+   "sha256": "003ec456fb0f14305d997a0f8d60c05f390f6d327844c7194511da4c8309506b"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_repair/diagnosis.md",
+   "sha256": "7da76458b69afd5c8169ab8aef984e5f7c00ba2ff91d3acbde07015dc129a81b"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_repair/execution/README.md",
+   "sha256": "d80a0fa12be9481a27a05353fe40a928b6367eb39f800a7213a075c67a527cf7"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_repair/execution/controls-receipt.json",
+   "sha256": "2eae8147c343884bde305b64916c4e5dd78862fbc9b58b985a1418e7aaf85a48"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_repair/execution/grant-template.json",
+   "sha256": "22b0d9953d955327dc2febbadf56cafae52be234a756835b3732ceca33099e78"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_repair/execution/plan.json",
+   "sha256": "11fb0f702be37dbd2631922fe9794a1d7a1daeed0f62e3ff39f78e1be8b39013"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_repair/execution/runner.py",
+   "sha256": "10e0cfde16592e624c93552907d8ed5fe823b817355ca2931aa794b8bec4a721"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_repair/execution/test_runner.py",
+   "sha256": "ade74c6a0f091ba001975393a4378f87a01cea7a289ba0011546dd44de3ba991"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_repair/repair.patch",
+   "sha256": "7dc2c3303784cbbd5ac6bbe464f9f614ce743691d5664edd088e0a58c9cf29aa"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_repair/result.json",
+   "sha256": "bca73f5f82bd3630b9fd9f7698cf889617e7f2af6986aacc55009346f3fcdffb"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_repair/result.md",
+   "sha256": "9c8fb2077edc9dc4a4009ed60b362f3be95350d3846cb4a3b2191084ac64fd52"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_repair/review/shadow_ghost.json",
+   "sha256": "84b145eef4ac3fb7bc629f3512902ad2b5ccfe4cf529756300b9bcd2acdd67d7"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_repair/review/shadow_ghost.py",
+   "sha256": "463f4952312236c0aab7b287b5736cebd5a15d544a54276dd6ea4198de4ddcf9"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_repair/src/crates/incant_render/src/upscaling/common.wgsl",
+   "sha256": "e1c2e552e462a3e27ad6632324b3880ef0cb8f96ec2e1c346ec6205e0520c879"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_repair/src/crates/incant_render/src/upscaling/device_tests.rs",
+   "sha256": "5665df3ad9395fed273e1057c31acef2fe482fdc77edf7ce743804a00c99257e"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_repair/src/crates/incant_render/src/upscaling/owner.rs",
+   "sha256": "5a726faa275d0a2b8782caaaca872e6bd70c97f66df2215aabf5355b777f2642"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_repair/src/crates/incant_render/src/upscaling/owner_device_tests.rs",
+   "sha256": "40d3f0465934ca0dd252d57953c7e41457dfbfdbab6c87070ea20af99f9347dc"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_repair/src/crates/incant_render/src/upscaling/resolve.wgsl",
+   "sha256": "296fe89066865c4feff4d486506d762a4955a8351aa3f83aa0eff72ba375fc03"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_repair/src/crates/incant_render/src/upscaling/resolve_owner.wgsl",
+   "sha256": "23c094e20e62bba3da35fca373457024cfe5405c2be042802493bbfc1cea4c9f"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_repair/src/crates/incant_render/src/upscaling/system.rs",
+   "sha256": "00ddce30484539148b2887e778db8203f4bfbec222964978bf6ad9a91fcb5442"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner_quality_repair/src/crates/incant_render/src/upscaling/tests.rs",
+   "sha256": "a106ea8c249ab7c9b9c44ce8c3041a6f189e6070d9a8eeec68f0029140b1749f"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/preparation-result.md",
+   "sha256": "e29b8b812b026cca0329a74aa171eb1e97e0ee4d61f74e1d4af59be2ddae83a5"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/quality-repair-addendum-2.md",
+   "sha256": "4ece422dd141f3fb17277948c494288c3266bfc914157732d7ef998d28c288fc"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/quality-repair-addendum-3.md",
+   "sha256": "66ec5030067049857e20df7656579128c6d7147ff5eaa499739a52672f487a46"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/quality-repair-addendum.md",
+   "sha256": "d75fc7ad7481f3b7247f5b43d6f8bbd7881f379859b02c96463adf76906bd0a8"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/quality-repair-brief.md",
+   "sha256": "c365fdb8520fb792e7fd51a2e25006172e36cf87f4d9b79873102c79502cc4d2"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/quality-repair-implementation-4.md",
+   "sha256": "924fc75ce3c3838b8f28bbe407810d586073d8612daca46ce3efc4df1fe98044"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/quality-repair-implementation-5-correction.md",
+   "sha256": "6e56556e5fce920b49c284b028ef2136ec9b30d6f6f7aa24916433a8ed1bd023"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/quality-repair-implementation-5.md",
+   "sha256": "855b22ae9c0c882f2936e16e28f0a8e66c75ae7298294c1796aa44599296325a"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/r4_quality/brief.md",
+   "sha256": "272f530e459f9b04fc0b9e9d169fa32ab509ce2132d9ed7fe168af4a76019362"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/r4_quality/build-001/README.md",
+   "sha256": "5caf211ff2b2369b61ed19ddac92f6329d426a4136f3aff6756f1e2e5ea65898"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/r4_quality/build-001/artifact.json",
+   "sha256": "cd7237c5acd4554b1eb4395a9bbc370ce155d5575588dd9b8fd554c0d0babde0"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/r4_quality/build-001/authority.json",
+   "sha256": "9dfbb2e7167c2633f5e26e28dd326ac60a03ea81845eaa7e30f7820c8bbf2c78"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/r4_quality/build-001/build.log",
+   "sha256": "d5b1d832aa6306f57e3d8e843b1b08235938166ed88e4176e154d8fa306b1bf2"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/r4_quality/build-001/build.py",
+   "sha256": "2f1156ea3b797cfb21070ecf4e327536c3748f2ec5ffbfe278888f1d7a1ccd31"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/r4_quality/build-001/checks.json",
+   "sha256": "c675d97435c0628e5cb1b732daa9b69228b4221ab45291b1b3b312c3571abde2"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/r4_quality/build-001/clippy.log",
+   "sha256": "99ea3a16c49f0a7987ce7cbaa7f3a4219c5936bb60d52684e23f1c752bc57e6d"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/r4_quality/build-001/controls-receipt.json",
+   "sha256": "a5cfd1263c8b612c624ae5c6fe63a13f92d79aae1397c51def202b122df12e10"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/r4_quality/build-001/controls.log",
+   "sha256": "13041058bfb61cd27330ad939332746a0b15f5b077b842cad0c9612d8f72fc82"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/r4_quality/build-001/library-artifact.json",
+   "sha256": "21c00d857342f28ba13aa1a629913da18789227f5f309f6ce60c8870f573fd03"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/r4_quality/build-001/listing.log",
+   "sha256": "a0472f0502ae15b73b4b98c8206066562e23f14ec2a949fd37deaf961a26b97d"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/r4_quality/build-001/plan-check.log",
+   "sha256": "5a7518f17b28c97b93344cbbe35deec7ce83f124b1a27ff21ce4a6b25c716443"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/r4_quality/build-001/receipt.json",
+   "sha256": "78206ab459a446fb428774caddde3e82316b4f48a7d20828853ca209fc214818"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/r4_quality/build-001/release.json",
+   "sha256": "50c0512c97cc779daa2b7c459e658b5ade76da986da0b7ec4437f77b56d6f005"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/r4_quality/build-001/source-build-audit.json",
+   "sha256": "57d15429dea98d5df2a239aa8f150135c9d1bfe086a9fc13baa23afd9583669c"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/r4_quality/build-001/supervisor.log",
+   "sha256": "6d531885325407e35026f49dae112fb3c00f9f1baf6ceba2e7b56fc9d4f029b1"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/r4_quality/build-001/terminal.json",
+   "sha256": "bf2aa634164d6200b883c0bbe83d1f7480ef9979d565f6e0f1f99925c6fdd1fe"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/r4_quality/closure/README.md",
+   "sha256": "36b1633a105637c522e68cbb22e099c510ee86cf191d30db6158ee6724fe4875"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/r4_quality/closure/acp-stderr.log",
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/r4_quality/closure/acp-terminal.json",
+   "sha256": "b2f0976acb66c012d2552d090cefe24b93c1b3dcc662fefb20b6f94fe3f3b187"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/r4_quality/closure/acp.log",
+   "sha256": "9bb61f8c6f56d65640e991d27f674297a52d8f953e3c4763da1ef4325ab8fc7f"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/r4_quality/closure/before.json",
+   "sha256": "dad7b0e7906422daa7a02156186a8c5e1c0de3bb78e6a464beb6f04566452d9d"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/r4_quality/closure/child-brief-before.md",
+   "sha256": "849a57c3910b711e7ff4c57300a5adce7160d5dcd8aa60c7a0d06cdf86ad4980"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/r4_quality/closure/independent-review.json",
+   "sha256": "b6fc8d13779d4e9601c137672d0409a63b5e039703d0fbfa062c54987b73fdfb"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/r4_quality/closure/parent-brief-before.md",
+   "sha256": "849a57c3910b711e7ff4c57300a5adce7160d5dcd8aa60c7a0d06cdf86ad4980"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/r4_quality/closure/runner-check-independent.log",
+   "sha256": "d4c19542f9c8f63697d1235172f468f48368c70b4da392d347011400d7aef69d"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/r4_quality/closure/selfcheck-independent.log",
+   "sha256": "582f62ffad90fbab19a81ee36eb1492e570e540c98b1c3fd735dfff049d22736"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/r4_quality/closure/supervise.py",
+   "sha256": "181942e1f36e2f2f0f5072dab861d05443f15b549d5c8aca7831242dea9eff22"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/r4_quality/closure/tool-metadata.json",
+   "sha256": "cb7064697b5b60b1e129b7e0c95125d4b175031faa2a08e17759bed321b94ed2"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/r4_quality/execution/grant-template.json",
+   "sha256": "1b55e78d6b9fce9357d3edbc94d3b037911a56e1e8bb91ae166107b3aecb6258"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/r4_quality/execution/plan-ready.json",
+   "sha256": "9792295b1f625820029c4a43f31d4f4afe88d1d589c03dbc2fb5fa6f220fc3ba"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/r4_quality/execution/plan.json",
+   "sha256": "e019cd7fb3ea6a2bf4315125a2c0806650a6141cc82e4e00237e6c44cc39b760"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/r4_quality/execution/protocol-delta.patch",
+   "sha256": "c1ca9a875468a7896851f2c0d95d5fb41310f330602e1d95218b42a456e1cd2c"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/r4_quality/execution/runner.py",
+   "sha256": "2a991b3abde5fb2b5e5ddcc28eac6187f88e0f5fa4b1c7dbe235eae112b8af6c"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/r4_quality/execution/selfcheck.json",
+   "sha256": "098a586a823dbe26bbc48cfc86891cdbf42bb87b0ad3fbe89c1710f6073c1677"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/r4_quality/execution/selfcheck.py",
+   "sha256": "c732a3c63c5da1f7abffd92ee233cda957fe1c0f8298d6e77ff04763ae9553f4"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/r4_quality/execution/test_runner.py",
+   "sha256": "78330b27bcaed36d256aaeff5138935d58ade8255540a0d831977b91f5195b12"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/r4_quality/inputs/manifest.json",
+   "sha256": "270aa61f5b517c8424945b787744044e8623fe5b43886be8956c61b733314894"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/r4_quality/inputs/reconstruction-r4-attachment-reference.md",
+   "sha256": "0b6de8ef8b89083b9d61f82a0cd1097a2fd853f8776fc6061b02442ae1d4cdb8"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/r4_quality/inputs/reconstruction-r4-cpu.md",
+   "sha256": "663333d7952f1f4f68f47d05d5b83c95de0a57cceea09ac00766737eab2d643f"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/r4_quality/inputs/reconstruction-r4-numeric-002.md",
+   "sha256": "0c3b2123eae106eed5594b366559195f91a516db96d6b12407311bfa5d97b1bc"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/r4_quality/production-freeze.json",
+   "sha256": "9e36e8c3a8d7253a3619a85f8cb8e3e313c663bb37c9f15dab5946528c164f62"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/r4_quality/result.json",
+   "sha256": "971391cbb38189ef946682705ea2707d2be48bee25e852be469efca2f7343594"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/r4_quality/result.md",
+   "sha256": "c848527fb4ce1539e2c6e64dc4125c88c9c831f8a853df1ca853594a11c61d23"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/r4_quality/review-checklist.md",
+   "sha256": "469494e786fc493bb2772b651ea1a0b1ee7e94a27d6c8401550998e2928f912e"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/r4_quality/review/compatibility.json",
+   "sha256": "99036d37d2cdd264c636da29c6a2faa8cd823dc80f77c14a9b42ca70ba08478a"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/r4_quality/review/upscaling_owner_review.rs",
+   "sha256": "650316a21f30bfb4f7cbe8c99b67f9b5be269b51eb62b4d017b519bd5130d997"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r3/controls.json",
+   "sha256": "1cfc6fc04cc6de2795dddff3baff91bf9650ae420979f8aab027d706d24c806f"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r3/controls.py",
+   "sha256": "998dbd2309302e734ddf3ccf9a1951923437aebea1e0f94ce83745cd8d30e356"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r3/implementation.md",
+   "sha256": "65baf367854349faa398afd0ea673478c7ee2a473948c53dd7d25aea991961b1"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r3/patch_check.json",
+   "sha256": "0d9e7290fa7d92a4e67c8ca57125c9f81397fe84df8b14299c792a0a1eb728e4"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r3/patch_check.py",
+   "sha256": "eb43c6f8e23dfd8e4d60aa940f145221083b29de025a83c8a58f457f75309df2"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r3/reconstruction_r3.patch",
+   "sha256": "36820c3f3f249aeeb23d0fee1f7bb79afd78e1a6bf077cbc4a4aafe190cbdd0c"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r3/src/crates/incant_render/src/motion/attachment.rs",
+   "sha256": "c6d0ae3264480d8cedb42662b36e943aac1ec0748d9a1954e323b4ad20885e37"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r3/src/crates/incant_render/src/motion/owner.rs",
+   "sha256": "98c4c43efd28b56ab29efbd661124c91b8f1e41045f520bf87813fd8c29373d2"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r3/src/crates/incant_render/src/motion/retained.rs",
+   "sha256": "14878c5aba3a8863c5897aff008c0f90b647ce537c64f649a920cef24de4a56a"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r3/src/crates/incant_render/src/motion/tests.rs",
+   "sha256": "015ccc81d4fa6303776078a7ecee68976ed2192db94959b2821bfdd5be79f05f"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r3/src/crates/incant_render/src/retained.rs",
+   "sha256": "af138afbbb4aa33a67fd23eaa42cd1153df4358d24205fc12455feeff5c0e1b1"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r3/src/crates/incant_render/src/temporal/jitter.rs",
+   "sha256": "b57bfd504d8511ba9445db25eafa04f21acb9ad28de7c94211cfbe30ddec39ce"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r3/src/crates/incant_render/src/upscaling/owner.rs",
+   "sha256": "c094cf1e51f44e639cdb324d2ab4c01ccf69c83288e35f647752bd71333a1a2a"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r3/src/crates/incant_render/src/upscaling/plan.rs",
+   "sha256": "a5eb8c9f79192a66e3332861ed14c778f3a8ac9d53a98892fc16009d0adf2b77"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r3/src/crates/incant_render/src/upscaling/resolve.wgsl",
+   "sha256": "3938a9cfc78959a4294420fd4f9bf8748c257c7b121bdbce14fa5f583c81efbc"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r3/src/crates/incant_render/src/upscaling/system.rs",
+   "sha256": "e6651e016c6adcb1ef8b2696847cc3fae4a8ffddd2219827015554042c076c1c"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r3/src/crates/incant_render/src/upscaling/targets.rs",
+   "sha256": "8f4f3c5a244d86f07580829e24705bc6f1f6896855bf894b34e068f9d82d72a6"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r3/src/crates/incant_render/src/upscaling/tests.rs",
+   "sha256": "7b5daed21b62aa5c8e162a40cb735c18f038279597845029868e515eb7a3e84a"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r4/controls.json",
+   "sha256": "e8b304c4934e0b38959042278b3e2c7a0ad35e88e82222d0fb8ca8685a563651"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r4/controls.py",
+   "sha256": "7fb684ee08189591551867d1b7b8273d7dfcc23c6e2312a3e32e98f35fb5d46f"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r4/implementation.md",
+   "sha256": "141315a350ac856fadc3bc5a9c446b655037deceb5d6a3e23076843dadba7889"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r4/inventory.json",
+   "sha256": "6febaaa63f5855bffd596e4d14b1ff2cf799e1849545ebb8de5b9a0ccfed66bf"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r4/inventory.py",
+   "sha256": "0f4b8f3add75ff876ba1e113d532353f02223c381adcfbbd56ba0dfe40088342"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r4/patch_check.json",
+   "sha256": "0b3b7f3b9b099302658a6f71fe63fe56390d4c4c20fc6a5d2a3ab81ecf8926ea"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r4/patch_check.py",
+   "sha256": "e5e1d04cb2039f8d176a5abe4b87b2f69771c0d8d218cf29e97b8b925a1f7728"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r4/reconstruction_r4.patch",
+   "sha256": "c9a7f48d76ec72118721d45631833d1cb55c546d1322b76c6499fd88c606d35a"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r4/src/crates/incant_render/src/lib.rs",
+   "sha256": "c197b93b33bcaf0808644c9805155003897b0e2519b23d8594ea2fd740d5fba1"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r4/src/crates/incant_render/src/model_draw.rs",
+   "sha256": "df5f94f93601949bbaac6829b083c6c407af4b35c8e4a1d1017864195437e1cd"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r4/src/crates/incant_render/src/model_material.wgsl",
+   "sha256": "28f28b27578ca4b4e5ea9aacb9f7901a5c97af570ab6521ad66d0eac0657efc3"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r4/src/crates/incant_render/src/motion/attachment.rs",
+   "sha256": "c6d0ae3264480d8cedb42662b36e943aac1ec0748d9a1954e323b4ad20885e37"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r4/src/crates/incant_render/src/motion/owner.rs",
+   "sha256": "98c4c43efd28b56ab29efbd661124c91b8f1e41045f520bf87813fd8c29373d2"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r4/src/crates/incant_render/src/motion/owner.wgsl",
+   "sha256": "a2659879cd59698633d28f5db7f8a4f086382f260ee6911de312a5b2d10c42db"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r4/src/crates/incant_render/src/motion/retained.rs",
+   "sha256": "4aaa08bdc9806772fb535407171e8b66a0f2f8802c863764ca0b92360515a78d"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r4/src/crates/incant_render/src/motion/shader.wgsl",
+   "sha256": "e64b4a1cc0e393c752eddeba8af792b59db9cac3ce2991f9ffc7f17e1e2164d0"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r4/src/crates/incant_render/src/motion/system.rs",
+   "sha256": "0f3795b849178fdcc5a18a413b9473f2b65bf202b45ddb3217bce9a3077a6621"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r4/src/crates/incant_render/src/motion/tests.rs",
+   "sha256": "015ccc81d4fa6303776078a7ecee68976ed2192db94959b2821bfdd5be79f05f"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r4/src/crates/incant_render/src/retained.rs",
+   "sha256": "1d409d45194153d3558f36884f5440e679dc606c4903503d3ba0593dba0117c6"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r4/src/crates/incant_render/src/temporal/jitter.rs",
+   "sha256": "e292eea9dbef1a8f0d958e42c2f556df74a2943ed7d76d714ac065e8fe69793a"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r4/src/crates/incant_render/src/temporal_shader/cooked.rs",
+   "sha256": "36ed4e4e680ac8111233e9f111b79787c88d1cff2473237969782620dfbb36e5"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r4/src/crates/incant_render/src/temporal_shader/cooked/host.rs",
+   "sha256": "fc4245ba0e59e4600b95aa079da1ecbd2f1af8fa85cf7526389020e0864f0c15"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r4/src/crates/incant_render/src/upscaling/device_tests.rs",
+   "sha256": "505ecca4e930eb307c2ebca6228262ca8b645389dc4e95343327fff2e6b8cfb2"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r4/src/crates/incant_render/src/upscaling/owner.rs",
+   "sha256": "f859e5cd069a5359b601eea361aed19726abd44d6b4308c53890a213ab93be56"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r4/src/crates/incant_render/src/upscaling/owner_device_tests.rs",
+   "sha256": "3b80226ed13602ebb699fc71ebb0663a31d51d0029cdd53fcccb23c3fe5f2dbc"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r4/src/crates/incant_render/src/upscaling/plan.rs",
+   "sha256": "a5eb8c9f79192a66e3332861ed14c778f3a8ac9d53a98892fc16009d0adf2b77"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r4/src/crates/incant_render/src/upscaling/resolve.wgsl",
+   "sha256": "240069814b80af16133998892f2865cc5227f2cb9fcf534977feace3443b0ef5"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r4/src/crates/incant_render/src/upscaling/resolve_owner.wgsl",
+   "sha256": "bdad50d3a8869563921ccaa2515c9eaa1b619d5f8cdf414bd59f972ed57fc14d"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r4/src/crates/incant_render/src/upscaling/system.rs",
+   "sha256": "31ff953d7c1fbea0533faea3c4b00c801c0fc0bd5627fc7c597db70579703b50"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r4/src/crates/incant_render/src/upscaling/targets.rs",
+   "sha256": "8f4f3c5a244d86f07580829e24705bc6f1f6896855bf894b34e068f9d82d72a6"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r4/src/crates/incant_render/src/upscaling/tests.rs",
+   "sha256": "7b5daed21b62aa5c8e162a40cb735c18f038279597845029868e515eb7a3e84a"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r4/src/crates/incant_shader_cook/src/geometry/material.rs",
+   "sha256": "6ad2455593be8db7b03e95eb36b22c7f0850155932138a57ed11883859805856"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r4/src/crates/incant_shader_cook/src/temporal/contract.rs",
+   "sha256": "ee00fcfef75b9ee97b89b37a213a240a1a746d0ce34f511af643b510186cd2cb"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r4/src/crates/incant_shader_cook/src/temporal/emit.rs",
+   "sha256": "3b0c6ed0aebace7cc33515f8b7872d300495cdc325db8d85f8eae0ee57b05190"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r4/src/crates/incant_shader_cook/src/temporal/mod.rs",
+   "sha256": "1992e76021dd155169adede92130f91018b0476eb3fa54ed6cdd9bb2c618e5e6"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_implementation_r4/src/crates/incant_shader_cook/tests/temporal.rs",
+   "sha256": "f9fe961a65844389f0602123c9d2de4811ba8a8ebcd222c823a0a599e9bbf6fb"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_next/proposal.md",
+   "sha256": "067e95199b2272f7e9dce2f2487b4765fc94891232d7f6cb7d7c6c68245cfee4"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_next_r2/scalar_controls.json",
+   "sha256": "7a64250486bf3cbf7aedb6f228dabd2a7d7ae14dc09a086ec87d080f60f87714"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_next_r2/scalar_controls.py",
+   "sha256": "b25357b2249d79797d4d16d2ac9fae9e92ce9232f7aca014d6c6fef256617b5a"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_next_r2/selected-strategy.md",
+   "sha256": "aba23246ea06bfb35abbb68f876ac8120fd658483c642464833dbfc354cdac9a"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_r4_compile_fix/compile_fix.patch",
+   "sha256": "44c1d5544e13efec368e71e65bcff0e8b5182c4a865518c2236c0044c0f4c639"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_r4_compile_fix/compile_fix.py",
+   "sha256": "9f86eae9f04d5f7c9c0fc6a1031fae6feb3c45ace01fb58b8f12405e7bef2116"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_r4_compile_fix/result.json",
+   "sha256": "e926ddffe35d08084ff0508415b5d325072bbec5ad16637be549c3f6ff2b7e2f"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_r4_compile_fix/result.md",
+   "sha256": "449666edc510cf8056e3cb750051aef9b0f089e88c32ff5c8a426adcd9912cfe"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_r4_compile_fix/src/crates/incant_render/src/upscaling/resolve.wgsl",
+   "sha256": "a0853f1c934a3e68fa5a69904c4308e53176ae75d32af9bd1065236fdef43607"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_r4_compile_fix/src/crates/incant_render/src/upscaling/resolve_owner.wgsl",
+   "sha256": "dc43ac2aea2c057cead64cb97bef1fb2429b8eadde52c20a5605e4d7487a51fe"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/reconstruction_r4_compile_fix/src/crates/incant_shader_cook/src/temporal/mod.rs",
+   "sha256": "2cbaeb743ce9fefcc666bbcc2ff81bae4e87896bbcafd9a00e377e64251d3f77"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/repair-model/admission_v4.py",
+   "sha256": "dea1b4c05a1a10d450975de9c3690cae06b58568f8f3116b1113a169569d61c4"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/repair-model/consumer_v5.py",
+   "sha256": "196cad707f13c50b1a5445deec016f95d02bd2174deeb116efab61c4d13f9cd7"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/repair-model/correction_v5.py",
+   "sha256": "96464a75ff1ec84b32e400c953e5ab5b5b004f98a4d592a800a3ad5fc93c534f"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/repair-model/model.py",
+   "sha256": "2c4b0bfc8ddd76b76cc483abf776f1aed5370a918cf9c07e645b522e49bd2238"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/repair-model/model_v2.py",
+   "sha256": "572955629a341e0b1f370b204f7ab3bdc938849bfce3ec9590af1628efef54e4"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/repair-model/results-2.json",
+   "sha256": "cb9c256e932c4d964e0451a4246505ed457e0dfe0480ec7a485a8219e8c7e4a1"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/repair-model/results-3.json",
+   "sha256": "51358ceabb85d3b75a331500a115e7c7e0a6c3806707d4af8ce264c2d8865071"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/repair-model/results-4.json",
+   "sha256": "c4f7c9d279fdbae28aa1051aa00f0affb4043b62594fb1c9f043db95225cbf5d"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/repair-model/results-5-correction.json",
+   "sha256": "7d2cd52fcdf1db1878fff4c2e6dc42a3157ea8ba2a1b4aa4b9fd614fcfc87979"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/repair-model/results-5.json",
+   "sha256": "5fbc9b195baf27971acaaecd5f188860c019c5e836026a0393b4064436732183"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/repair-model/results-shader-v5.json",
+   "sha256": "10e52a44ac96ecfb30fa2011d9620fbc4b2bf6a3ba72e4d4759625428f2d1283"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/repair-model/results.json",
+   "sha256": "c88992f9304120db1681e53096efddf7f581aef37c084dbd2e506a5fe88bed1f"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/repair-model/shader_v5_check.py",
+   "sha256": "ac3e48fd65b711488b501d7e23625a0318d9198d9a91b6a11e74ac26f858d2d3"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/repair-model/witness_v3.py",
+   "sha256": "77722834b14e22ec43796245c99d37bc20a33522df8f9f8ba2e434327184a865"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/result.md",
+   "sha256": "78d5d0e1ac8b57a0db90bf8c4e863bbd23dde64705f6c5ed16ce69b88605e691"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/revision-result.md",
+   "sha256": "4929b69e30679ae6270d6651aaa5db43f5a2887faea9256eca1b6bd1df37b98b"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/screenshots/motion-detail.png",
+   "sha256": "ae049f346c3ff8a652aff0afc62cc6f6de75edb7bdf6d5ee5e16ed6f0edbba37"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/screenshots/motion-full.png",
+   "sha256": "9eeb1222becd6f4d2cec7afa88343ccb528ea9f6e27246cb3410a42bade35b52"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/screenshots/motion-up50.png",
+   "sha256": "fd13d7b902ad8b7bb311a1db5282de2006c9840f3c12b894da38aace626bc073"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/screenshots/stationary-activity.png",
+   "sha256": "f44be9c9659af0bad27d9449e237ee6908d24bc782cc693a7bda7d4a9dd9c5fd"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/screenshots/stationary-detail.png",
+   "sha256": "698ae2b9959a8c6c564a3a816dd7b51dab6ec1767cb25a423a8c7b89a0a067a4"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/screenshots/stationary-drs50.png",
+   "sha256": "724fa644d3561ff00aa2301fd40ab6b49c4111b0376df5469028ef6265cb40e0"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/screenshots/stationary-full.png",
+   "sha256": "992c5543b4f9bbdf6fd703eb764e143f7649836452df28aaac6f1dfc2debceb9"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/screenshots/stationary-phases.png",
+   "sha256": "7927d17a03f2f6da568c28b876a4daedd12ddb4f32eb9079bafa25baff7c6f4a"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/screenshots/stationary-up50.png",
+   "sha256": "1493c6b514f3b528e6d3426016b54ad3189e9fede336b4db6f14cda4adc314ce"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/screenshots/transitions-cut.png",
+   "sha256": "b184ce1aa212ef1b587f0d6d5abdf8b1a1e9668a5da2c15a7b9eba1f9e1e0146"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/screenshots/transitions-full.png",
+   "sha256": "1be9b9308bb1d404291ec976f0ff1b0c6b3853d3effa0bb2a36fe15270e0f88e"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/screenshots/transitions-strip.png",
+   "sha256": "89c61777160bb86c2624a82b5c47e5144edcab326123061159bab9767b514702"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/screenshots/transitions-up50.png",
+   "sha256": "ad445b93da940fc4dfcc319df46fd1b86f55a72239ea704f41da7ff876d32d74"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/tools/numeric.py",
+   "sha256": "405864682d7ba2d22d204cf14370d4c4f285d37fa6733fbe9af847d59e7081a0"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/tools/numeric_receipt.py",
+   "sha256": "a0c72cb624554c4da95830aef320cc587c01f67025dc67eab1bab4bfab66e011"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/visual-result.md",
+   "sha256": "0be20af4ef78d3f011405f709aae53d7ff501e50392f938cec8bcac2c9b83177"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/visual/plan.json",
+   "sha256": "b177ee0c1a8dac57e34b7fafea7484f75e70a4ef97c64c891281666a383ee1ca"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/visual/preparation/analyze-selftest.json",
+   "sha256": "31c32b947506839377d6c5f1de6c7fc9fd94c6cc65bc853660d9b436d412762a"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/visual/preparation/lifecycle.json",
+   "sha256": "d961734ba25fa2104f8620503db99a3c4ac06fa2178efe7a296dc705bbcb4b50"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/visual/preparation/r1-analyze-controls.json",
+   "sha256": "2d037647ca6bede481de99ba4aff768532d5ec56804048c029e17321753a0fd7"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/visual/preparation/r1-lifecycle.json",
+   "sha256": "61387e76655f81d5c94c31c3973b59650f572b96929dc313f5ef3b4d12416214"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/visual/preparation/r1-selfcheck.json",
+   "sha256": "76c7498ed9f474395229fe7f388ee6a19d7f1ef16e2085c9a5c26ac398c376eb"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/visual/preparation/r1-source-controls.json",
+   "sha256": "2c1d8f84cc1848a3a56cf385eba5dd9afb573024f7fed0da6c295f377f67fad2"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/visual/preparation/selfcheck.json",
+   "sha256": "66305135ca670ff2473d530220992e8fe49a3a631e4ae5ac734e518c32328daf"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/visual/review/upscaling_review.rs",
+   "sha256": "c0169e34d1f096cc2b1387b416968a46b1adf863eea8a27b4850d92a9abf335e"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/visual/tools/analyze.py",
+   "sha256": "cba70dccfa9cf7db30c5d1ee6edc43aba46eeac3c390aa3d82bf941c6e5ca3e4"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/visual/tools/build.py",
+   "sha256": "652a16fa588883b333df4617bc8fcaf040b076f7371f324740fe6ba119120807"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/visual/tools/common.py",
+   "sha256": "ebc668a7a3c597a24e5681128232e3bed262510ceb7427f3bfb10443791207e3"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/visual/tools/gpu.py",
+   "sha256": "66e39aa305a49d88701b2a7c0d7412813792cfedb7b110269db262c106783b2c"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/visual/tools/lease.py",
+   "sha256": "9173d4dcf00f6a14dd1870d62c94c78030bdec185226621e9e53124a63c1cb67"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/visual/tools/selfcheck.py",
+   "sha256": "294529dcc784fac5840fda799e851a68c5302560412f59713dca42807d3a2555"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/visual/tools/test_analyze.py",
+   "sha256": "111ad4bd9d79443f65c24f5074f3f9f86e20ea31c3584820632be2c56df45278"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/visual/tools/test_lifecycle.py",
+   "sha256": "5005ac36b5e486cc83a81403d29c4e783ca56e5b1848ebd99d56aaa9314f9821"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/visual/tools/test_source.py",
+   "sha256": "85e5d633a8c88827f013751ec65a50bfc54194a4461d83b70503c2e7f3b56873"
+  }
+ ],
+ "protected_untracked": [
+  {
+   "path": "handoffs/0073-upscaling-review/owner-attachment-cpu-enumeration.json",
+   "sha256": "68c5434e926678071f4291896f6897137b4010b3885ab8043db7d9785136cfba"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner-attachment-plan.json",
+   "sha256": "d7da3f1ccbe73b18a0f6d90f7da9d6c4ac586be351b04541afe7ae619c6b6512"
+  },
+  {
+   "path": "handoffs/0073-upscaling-review/owner-attachment-prep.md",
+   "sha256": "0332bad7a8a627b01b925474e94824cf462bc0c450d8c2718334463872390d9e"
+  }
+ ],
+ "argv": [
+  "/opt/homebrew/opt/python@3.14/bin/python3.14",
+  "tools/handoff/main.py",
+  "run",
+  "0073-upscaling-review",
+  "--permission-mode",
+  "auto"
+ ],
+ "main_sha256": "3619c5db4a62916e2b21e46f9bb4d215bb65150c6d0af17a2bdf123ca255c992",
+ "config_sha256": "a911ce8fdcf6fe3ff7a5f258093922fb14c51f58e87f4a668370620a6dda8328",
+ "wrapper_pid": 53816,
+ "started_at": "2026-10-14T02:07:25.395997+00:00",
+ "wall_epoch_seconds": 1791943645.388535,
+ "monotonic_seconds": 123881.758322291,
+ "limit_seconds_each_clock": 900
+}

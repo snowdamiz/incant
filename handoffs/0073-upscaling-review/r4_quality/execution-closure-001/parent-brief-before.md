@@ -1,0 +1,25 @@
+# 0073 R4 appearance preparation — CPU/source only, no GPU authority
+
+Continue the existing 0073 session using exactly Claude Opus 5.5 with thinking explicitly Max, verified through ACP before this prompt. Auto-memory is disabled. Do not read/write memory or preferences; no external persistent edits. This turn is bounded to 15 minutes by wall AND monotonic clocks; finish a concrete packet, not a new reconstruction design investigation.
+
+## Exact state and objective
+
+Production R4 is `72b1ba8ec351e86d66a90c401e0a75a530633616`, in read-only `/Users/andreyyurlov/.codex/worktrees/owner-quality-repair/incant`. Test-only correction `cae2bffcdef061d3e1505b7f78a2d9888b582e61` and final packet `825ff047284e84252d00f786a7b14cb6ecb44293` preserve every production/WGSL byte. Source/build and four tiny numeric tests passed; no R4 appearance has been rendered or accepted. All earlier failed quality findings remain open. Inputs/report copies and exact full build-input freeze are in `r4_quality/`.
+
+Prepare the smallest runnable appearance review packet against that exact source, using the EXISTING `owner_quality/review/upscaling_owner_review.rs` (SHA650316a21f30bfb4f7cbe8c99b67f9b5be269b51eb62b4d017b519bd5130d997) and prior `owner_output_quality` execution protocol. The handoff checkout engine itself is stale: inspect immutable Git objects from825ff / read-only candidate for APIs, not its HEAD engine. Existing eight-phase jitter schedule remains eight phases; preserve the24-frame schedule, scenes, views, thresholds, references, overlays and outputs. Check API compatibility concretely and reuse fixture byte-for-byte if valid. If there is a real contract incompatibility, report an exact minimal fixture-only adaptation; never change production or weaken an assertion to admit this candidate.
+
+## Scope this turn
+
+Write ONLY new files within `handoffs/0073-upscaling-review/r4_quality/`, except its pre-existing `inputs/`, `production-freeze.json` and `brief.md` are read-only. Preserve every old packet, top-level result, current dirty brief and untracked file. No source shader, engine, catalog, old fixture, threshold, user data, memory or preference edits. No Cargo/compiler, GPU command, capture, new rendering, browser or image generation. Existing retained images may be inspected for prior context only; do not label them R4 results. Python source/count/hash checks are allowed. Named disposable `/tmp/incant-0073-r4-quality-*` scratch is allowed, no persistent writes elsewhere. Commit only newly authored packet outputs with Built-by: claude; preserve authorship and state explicitly that fresh build/execution/pixel review are pending.
+
+Use the old rejected `owner_quality/result.md`, `owner_quality_repair/result.md`, and latest `owner_output_quality/result.md` history: output-space sprite/text+BLEND was accepted within that fixture; overall reconstruction remained rejected. Preserve shadow-comparison limits, texture/fine-detail, phase-dependent thin geometry, silhouettes, DRS wipe/transition, C7/C9/P1 limitations. Do not substitute numeric tests for appearance.
+
+## Concrete deliverables, no new framework
+
+1. Copy/reuse the established fixture in `r4_quality/review/`, confirm source APIs with exact pins; produce a concise compatibility result.
+2. A fresh preparation plan bound to production-freeze and candidate825ff, with no grant/build/binary invented. Retain all five ordered groups: stationary, motion, transitions, c7_disocclusion, p1_crossing. Reuse the existing runner/lifecycle; adapt ONLY source/path/hash metadata in a new execution copy/template. Missing binary/build receipts must fail closed. A fresh root grant is required later.
+3. Preserve exact maximums:5 child processes,380 scenes +18 UI +380 readback submits =778queue submissions;380maps;15PNGs960x540;90s per child; primary-first stopfirstfailure;no retries, extra probes, images or builds. Produce per-group counts and a CPU-only guard/source selfcheck. Do not execute the runner's run branch.
+4. A short pixel review checklist for the later granted run: inspect ALL15 current PNGs, compare FULL/DRS/ordinaryUP/OWN, assess usable reduced-resolution quality rather than requiring fullresolution identity, and judge detail/thin features/overlay clarity/stability together. Keep original thresholds quoted and current sRGB/finite-reference observations distinct: no historical C7/C9 pass/closure based on differently defined rendered metrics; P1 limits explicit. Candid failure is an allowed outcome. No new quality thresholds.
+5. `r4_quality/result.md` records exact model/effort, immutable inputs, changes/commands and missing build/GPU/appearance evidence. Do not edit the existing top-level result.md.
+
+This is preparation only; root will review source, assign an isolated build and then decide the actual GPU lease around the shipping timing window. Subsequent fixes require actual R4 pixels and a separately coordinated source scope. Do not launch a speculative production repair in this turn.

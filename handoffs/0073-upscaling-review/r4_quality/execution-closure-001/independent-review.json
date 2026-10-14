@@ -1,0 +1,60 @@
+{
+  "at": "2026-10-14T02:13:10.459087+00:00",
+  "scope": "Independent execution/source/provenance review only; pixel verdict belongs to Claude Opus5.5 Max",
+  "result_commit": "974ee69e1251975baca00ab80e0f989c255d7f8b",
+  "result_files": {
+    "handoffs/0073-upscaling-review/r4_quality/execution-result.json": "f6047b831575250018306b3f5da907dd784671adc2601d1382e898870f7cb561",
+    "handoffs/0073-upscaling-review/r4_quality/execution-result.md": "3d5e71bc715f2d57eb323c49c57b74c461225b7e66357b1c6891b3281edce68f"
+  },
+  "execution_integrity_accepted": true,
+  "claude_appearance_verdict": "REJECTED",
+  "acp": {
+    "handle": 16749,
+    "pid": 53828,
+    "exit": 0,
+    "reaped": true,
+    "group_empty": true,
+    "wall_seconds": 200.30600881576538,
+    "monotonic_seconds": 200.30575320900243,
+    "timeout": false,
+    "model_verified": "Opus 5.5",
+    "thinking_verified": "max",
+    "auto_memory_disabled": true
+  },
+  "tool_calls": {
+    "Bash": 10,
+    "Read": 15,
+    "Write": 1
+  },
+  "actual_png_reads": 15,
+  "all_png_reads_succeeded": true,
+  "protected_tracked": 413,
+  "protected_untracked": 3,
+  "protected_bytes_unchanged": true,
+  "production_candidate_clean": true,
+  "scope_deviations_observed": [],
+  "gpu_release_sha256": "7d6422441d1bd71d26a79d33f9fe493265a142bdfa80c2c41da36ed03d70149f",
+  "submissions": 778,
+  "maps": 380,
+  "images": 15,
+  "records_replayed": 39,
+  "inputs": {
+    "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-supervision-001/before.json": "707699f38a0c27ec18821c83cca847b5952f9f580d260a556bfcfe7eca07cd18",
+    "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-supervision-001/acp-terminal.json": "9c6df76cb17b07ca79f41d2b9b67263c02a996bffa601fe6aeeb6954e90b6d4e",
+    "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-supervision-001/acp.log": "5bcf25f92d957744238ace7cef37669c613b42950118553aaa491663fc36b21e",
+    "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-supervision-001/acp-stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-supervision-001/tool-metadata.json": "4bd420a5200c0fa447c8bc980a6e7fda6eac903f6a94df94c07d73f305c41405",
+    "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-supervision-001/execution-audit.json": "b8451b4c68a6c7d929d617c86a08c7829b69ff6e4a97aab7495555dc6f0f7bcd",
+    "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-supervision-001/audit_execution.py": "83b0568dbcea171119b20ebb137c6366644fdd1c3194e0e441cd7ea23828d618",
+    "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-supervision-001/execution-brief.md": "fe502d34ec17d0e3421924b6d470910cb1a0395da0a1288a3a482eec1957f4fc",
+    "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/release.json": "7d6422441d1bd71d26a79d33f9fe493265a142bdfa80c2c41da36ed03d70149f",
+    "/Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review/handoffs/0073-upscaling-review/r4_quality/execution-result.md": "3d5e71bc715f2d57eb323c49c57b74c461225b7e66357b1c6891b3281edce68f",
+    "/Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review/handoffs/0073-upscaling-review/r4_quality/execution-result.json": "f6047b831575250018306b3f5da907dd784671adc2601d1382e898870f7cb561"
+  },
+  "limitations": [
+    "No Astra pixel interpretation; reported appearance result is Claude-authored.",
+    "Single default WGSL five-group fixture on Apple M5 Pro; no cooked or MetalFX appearance or timing claim.",
+    "Historical quality failures preserved; C7/C9 metrics have different rendered units/references and P1 remains limited.",
+    "No new repair, GPU follow-up or integration acceptance authorized by this receipt."
+  ]
+}
