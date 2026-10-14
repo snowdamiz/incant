@@ -1,0 +1,16 @@
+{
+  "schema": "incant-quickjs-f64-functional-v1",
+  "source": "831c89a8fedf977df737d78493b9e4a26396c27a",
+  "scope": "Standalone functional diagnostic only; no production or performance acceptance.",
+  "final_execution": "execution-004",
+  "archive_sha256": "c4f2618a59b9418cf2169fb44c4f34f5f239f5502dbb9db314c7d40a3c867559",
+  "records": 4147,
+  "payloads": 463,
+  "external_scope": "Retained executables and compiled native objects/libraries; --external rehashes all original evidence files. No test is rerun.",
+  "historical_failures": {
+    "execution-001": "metadata --no-deps left lock unreconciled; checker refused before build",
+    "execution-002": "7.0 canonicalized to INT; Rust float-tag witness failed before JS controls",
+    "execution-003": "common target reused baseline for all variants; wrong-store reachability failed; not candidate evidence"
+  },
+  "limits": "CI standalone interpreter controls only. No timing samples, native host/borrowed-loan integration, conformance or shipping gate acceptance. Production dependency unchanged."
+}
