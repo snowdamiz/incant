@@ -1,5 +1,15 @@
 # Implementation status
 
+## Release checkpoint37 — promoted
+
+All 23 required contexts and eight frozen-candidate workflows passed. PR286
+promotes the exact tested main285 tree, including existing-texture refresh,
+diagnostic profiling and the faster development checkout. The original Android
+SDK download failure and its successful single-job retry remain recorded.
+The later native-window texture probe and private rendering/pointer work are
+outside this baseline. This is integration evidence, not phase approval or a
+performance/appearance pass. [Exact checks and identities](docs/spikes/release-checkpoint-37.md).
+
 ## Navigation cache comparison — bounded optimization concluded
 
 The one fixed six-run shipping comparison found a small ScriptTick p95 reduction,
