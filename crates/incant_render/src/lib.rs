@@ -28,6 +28,8 @@ mod pipeline_cache;
 mod pixel_grid;
 pub use pipeline_cache::{CacheRead, CacheWrite, PipelineCacheReport};
 pub mod metalfx;
+#[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+mod metalfx_image;
 mod preview_environment;
 pub mod resolution;
 mod resource_error;
