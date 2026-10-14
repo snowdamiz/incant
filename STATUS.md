@@ -1,6 +1,19 @@
 # Implementation status
 
-## CI renderer smoke revision repair — local qualification
+## Main278 Loan shipping measurement — budget remains open
+
+The fresh main278 shipping export preserves all three functional modes, exact
+PCM, Core win/stress behavior and all 74 authoring files. Its one fixed six-run
+quiet sequence remains over the whole ScriptTick 2 ms p95 budget: maintained
+runs span 2.08–2.21 ms and detailed runs span 2.18–2.22 ms. All same-mode script
+and requested-memory stability checks pass, but the final maintained player-frame
+sample fails the 5% stability bound. No shipping saving is established. The
+portable packet retains all original failures and distinguishes CPU simulation
+from GPU/presentation qualification. An ordered native-query candidate is being
+qualified separately and has not been adopted.
+[Actual results and replay](docs/spikes/quickjs-loan-main278.md).
+
+## CI renderer smoke revision repair — merged through PR280
 
 The renderer helper now carries its first command revision into the reopened
 second RPC session and retains structured failures, including an absent native
@@ -9,7 +22,8 @@ pass nine cases (six geometry plus three profile); root's focused run passes six
 Four actual RPC protocol processes pass; root separately passes the complete
 Mac renderer helper on the retained historical application executable. This
 does not relabel the binary as current whole-runtime source. Checkpoint35's
-Linux failure is retained; hosted repair execution is pending. No new build,
+Linux failure is retained; hosted repair execution is pending. PR280 merged
+after exact-head fast SUCCESS and matching tree verification. No new build,
 shipping timing, visual approval or phase gate is included.
 [Cause, scope and replay](docs/spikes/render-smoke-revision.md).
 
@@ -36,8 +50,9 @@ additional, and scratch remains allocated while its host is idle. The five Rust
 paths have independent acceptance. Deterministic and four-lane fast each pass
 233 checks with one intentionally ignored CPU diagnostic, strict lint, and
 compiler-disabled profile off/on checks. The initial detached-DataView test
-failure is retained and corrected. No player/export/timing was executed; the
-prior main275 2 ms gate remains failed. Main277 intake preserves the reviewed
+failure is retained and corrected. No player/export/timing was executed for
+that source qualification; the separate main278 measurement above now retains
+the actual shipping result with its 2 ms gate still failed. Main277 intake preserves the reviewed
 source exactly, with full packet/binary replay and no Rust dependency seam.
 [Source, observable controls and replay](docs/spikes/quickjs-loan-capacity.md).
 
@@ -50,8 +65,8 @@ maintained runs span 2.08–2.11 ms; detailed runs span 2.20–2.24 ms. Every sa
 5% stability check passes; no cross-mode speedup or phase gate is claimed.
 The bounded runner and portable raw replay are independently reviewed. Execution
 remains exact main275-based source; this intake onto main276 does not relabel it.
-Rust-owned rollback buffer capacity reuse is the next implementation hypothesis,
-not an established saving. [Results and replay](docs/spikes/quickjs-maintained-main275.md).
+Rust-owned rollback buffer capacity reuse was subsequently merged in PR278;
+the separate main278 result above still establishes no shipping saving. [Results and replay](docs/spikes/quickjs-maintained-main275.md).
 
 ## Project-file application binding — qualified main275 composition
 
