@@ -91,7 +91,12 @@ pub(super) struct Experiment {
     pipeline: wgpu::RenderPipeline,
 }
 impl Experiment {
-    pub(super) fn new(renderer: &Renderer, unclipped_ablation: bool, cubic_ablation: bool) -> Self {
+    pub(super) fn new(
+        renderer: &Renderer,
+        unclipped_ablation: bool,
+        cubic_ablation: bool,
+        lock: bool,
+    ) -> Self {
         let d = &renderer.device;
         assert!(d.limits().max_color_attachments >= 4);
         assert!(d.limits().max_color_attachment_bytes_per_sample >= 24);
@@ -175,6 +180,7 @@ impl Experiment {
                             "diagnostic_cubic_history",
                             f64::from(u8::from(cubic_ablation)),
                         ),
+                        ("diagnostic_bounded_lock", f64::from(u8::from(lock))),
                     ],
                     ..Default::default()
                 },
@@ -376,13 +382,14 @@ fn actual_scene_recurrence_comparison() {
     std::fs::create_dir(&out).expect("fresh experimental output directory");
     let renderer = owner_renderer();
     assert_eq!(renderer.adapter.get_info().backend, wgpu::Backend::Metal);
-    let (ablation, cubic) = match std::env::var("INCANT_RECURRENCE_ABLATION").as_deref() {
-        Err(std::env::VarError::NotPresent) | Ok("recurrence") => (false, false),
-        Ok("unclipped") => (true, false),
-        Ok("unclipped-cubic") => (true, true),
+    let (ablation, cubic, lock) = match std::env::var("INCANT_RECURRENCE_ABLATION").as_deref() {
+        Err(std::env::VarError::NotPresent) | Ok("recurrence") => (false, false, false),
+        Ok("unclipped") => (true, false, false),
+        Ok("unclipped-cubic") => (true, true, false),
+        Ok("bounded-lock") => (false, false, true),
         other => panic!("unknown recurrence experiment mode: {other:?}"),
     };
-    let experiment = Experiment::new(&renderer, ablation, cubic);
+    let experiment = Experiment::new(&renderer, ablation, cubic, lock);
     let (_target, view) = review_target(&renderer);
     let layout = planes();
     let total = layout[7].offset + u64::from(layout[7].stride * layout[7].rect[3]);
@@ -396,6 +403,7 @@ fn actual_scene_recurrence_comparison() {
     let mut images = Vec::new();
     let mut submissions = 0;
     let mut maps = 0;
+    let mut nonzero_lock_samples = 0usize;
     for moving in [false, true] {
         let stage = Stage::new(moving);
         let mut input = stage.input();
@@ -528,6 +536,11 @@ fn actual_scene_recurrence_comparison() {
                 let p = layout[i];
                 &bytes[p.offset as usize..p.offset as usize + (p.stride * p.rect[3]) as usize]
             };
+            for sample in data(3).as_chunks::<4>().0 {
+                let remaining = half(u16::from_le_bytes([sample[2], sample[3]]));
+                assert!((0.0..=7.0).contains(&remaining) && remaining == remaining.floor());
+                nonzero_lock_samples += usize::from(remaining > 0.0);
+            }
             let label = if moving { "moving" } else { "stationary" };
             let mut files = Vec::new();
             for (i, name) in [
@@ -593,6 +606,8 @@ fn actual_scene_recurrence_comparison() {
     } else {
         "recurrence_candidate"
     });
+    report["bounded_lock"] = json!(lock);
+    report["nonzero_lock_samples"] = json!(nonzero_lock_samples);
     report["history_filter"] = json!(if cubic {
         "bounded_signed_cubic_diagnostic"
     } else {
@@ -603,6 +618,14 @@ fn actual_scene_recurrence_comparison() {
         serde_json::to_vec_pretty(&report).unwrap(),
     )
     .unwrap();
+    if lock {
+        assert!(
+            nonzero_lock_samples > 0,
+            "scene must actually exercise retention state"
+        );
+    } else {
+        assert_eq!(nonzero_lock_samples, 0);
+    }
     println!(
         "RECURRENCE_EXPERIMENT frames=48 submissions=96 maps=48 resolves=48 pngs=10 adapter={:?}",
         renderer.adapter.get_info()

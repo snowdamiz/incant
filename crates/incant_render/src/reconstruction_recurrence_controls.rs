@@ -10,6 +10,7 @@ struct Input {
     minimum: [f32; 4],
     maximum: [f32; 4],
     ring: [f32; 4],
+    lock: [f32; 4],
 }
 fn half_round(v: f32) -> f32 {
     half::f16::from_f32(v).to_f32()
@@ -47,6 +48,7 @@ fn actual_recurrence_classifier_controls() {
         minimum: [0.4, 0.4, 0.4, 1.],
         maximum: [0.4, 0.4, 0.4, 0.],
         ring: [0.8, 0.3, 0.6, 0.1].map(half_round),
+        lock: [0.; 4],
     };
     let mut cases = vec![("reversal_with_matching_chroma", base, true)];
     let mut add = |name, mut value: Input, expected| {
@@ -162,6 +164,44 @@ fn actual_recurrence_classifier_controls() {
         },
         true,
     );
+    let monotonic = Input {
+        history: [0.2648, 0.2648, 0.2648, 1.],
+        fresh: [0.606445, 0.606445, 0.606445, 1.],
+        minimum: [0.606445; 4],
+        maximum: [0.606445, 0.606445, 0.606445, 0.],
+        ring: [0.354004, 0.300049, 0.109558, 0.105896],
+        lock: [7., 0., 0., 0.],
+    };
+    add("monotonic_window_live_lock", monotonic, false);
+    add(
+        "monotonic_window_expired_lock",
+        Input {
+            lock: [0.; 4],
+            ..monotonic
+        },
+        false,
+    );
+    add(
+        "live_lock_cannot_override_hue_change",
+        Input {
+            fresh: [0., green, 0., 1.],
+            minimum: [0., green, 0., 1.],
+            maximum: [0., green, 0., 0.],
+            history: [0.6, 0., 0., 1.],
+            lock: [7., 0., 0., 0.],
+            ..base
+        },
+        false,
+    );
+    add(
+        "live_lock_cannot_override_missing_observation",
+        Input {
+            ring: [0.8, -1., 0.6, 0.1],
+            lock: [7., 0., 0., 0.],
+            ..base
+        },
+        false,
+    );
     let inputs: Vec<_> = cases.iter().map(|(_, value, _)| *value).collect();
     let input_bytes = bytemuck::cast_slice(&inputs);
     std::fs::write(out.join("inputs.bin"), input_bytes).unwrap();
@@ -169,14 +209,30 @@ fn actual_recurrence_classifier_controls() {
         "{}\n{}",
         include_str!("upscaling/recurrence_experiment.wgsl"),
         r#"
-struct Input { history:vec4f, fresh:vec4f, minimum:vec4f, maximum:vec4f, ring:vec4f }
+struct Input { history:vec4f, fresh:vec4f, minimum:vec4f, maximum:vec4f, ring:vec4f, lock:vec4f }
+struct Output { classification:vec4u, lock:vec4u }
 @group(0) @binding(0) var<storage,read> inputs:array<Input>;
-@group(0) @binding(1) var<storage,read_write> outputs:array<vec4u>;
+@group(0) @binding(1) var<storage,read_write> outputs:array<Output>;
+// Hold the old color fixed to expose lease lifetime, independently of blending.
+// A permanent bright step leaves the observed envelope by its fourth sample.
+fn permanent_step_refusal()->u32 {
+    var ring=recurrence_quantize(vec4f(0.8,0.3,0.6,0.1));var remaining=7.0;
+    for(var i=1u;i<=12u;i++) {
+        let lock=recurrence_lock(vec3f(0.45),vec3f(0.9),vec3f(0.9),vec3f(0.9),ring,remaining);
+        if lock.x==0.0 {return i;}
+        remaining=lock.y;
+        ring=recurrence_quantize(vec4f(0.9,ring.xyz));
+    }
+    return 0u;
+}
 @compute @workgroup_size(32) fn controls(@builtin(global_invocation_id) gid:vec3u) {
     if gid.x>=arrayLength(&inputs) {return;}
     let v=inputs[gid.x];let b=recurrence_bounds(v.maximum.w);
     let accepted=recurrence_retains(v.history.rgb,v.fresh.rgb,v.minimum.rgb,v.maximum.rgb,v.ring);
-    outputs[gid.x]=vec4u(select(0u,1u,accepted),bitcast<u32>(b.x),bitcast<u32>(b.y),0u);
+    let lock=recurrence_lock(v.history.rgb,v.fresh.rgb,v.minimum.rgb,v.maximum.rgb,v.ring,v.lock.x);
+    var step_refusal=0u;if gid.x==0u {step_refusal=permanent_step_refusal();}
+    outputs[gid.x]=Output(vec4u(select(0u,1u,accepted),bitcast<u32>(b.x),bitcast<u32>(b.y),0u),
+        vec4u(u32(lock.x),u32(lock.y),step_refusal,0u));
 }
 "#
     );
@@ -197,7 +253,7 @@ struct Input { history:vec4f, fresh:vec4f, minimum:vec4f, maximum:vec4f, ring:ve
         contents: input_bytes,
         usage: wgpu::BufferUsages::STORAGE,
     });
-    let size = (cases.len() * 16) as u64;
+    let size = (cases.len() * 32) as u64;
     let output = d.create_buffer(&wgpu::BufferDescriptor {
         label: None,
         size,
@@ -247,12 +303,23 @@ struct Input { history:vec4f, fresh:vec4f, minimum:vec4f, maximum:vec4f, ring:ve
     rx.recv_timeout(Duration::from_secs(10)).unwrap().unwrap();
     let mapped = readback.slice(..).get_mapped_range();
     std::fs::write(out.join("outputs.bin"), &mapped).unwrap();
-    let outputs: &[[u32; 4]] = bytemuck::cast_slice(&mapped);
+    let outputs: &[[u32; 8]] = bytemuck::cast_slice(&mapped);
+    let expected_lock = |name: &str, accepted: bool| {
+        if name == "monotonic_window_live_lock" {
+            [1, 6]
+        } else if accepted {
+            [1, 7]
+        } else {
+            [0, 0]
+        }
+    };
     let mut rows = Vec::new();
     for ((name, input, expected), actual) in cases.iter().zip(outputs) {
         let expected_bounds = bounds(input.maximum[3]).map(f32::to_bits);
         rows.push(json!({"case":name,"expected":expected,"actual":actual[0],
-            "bounds_bits":&actual[1..3],"expected_bounds_bits":expected_bounds}));
+            "bounds_bits":&actual[1..3],"expected_bounds_bits":expected_bounds,
+            "lock":&actual[4..6],"expected_lock":expected_lock(name,*expected),
+            "permanent_step_refusal":actual[6]}));
     }
     let report = json!({"adapter":describe(&renderer),"shader_sha256":hex(code.as_bytes()),
         "input_sha256":hex(input_bytes),"output_sha256":hex(&mapped),"cases":rows,
@@ -269,7 +336,9 @@ struct Input { history:vec4f, fresh:vec4f, minimum:vec4f, maximum:vec4f, ring:ve
             &bounds(input.maximum[3]).map(f32::to_bits),
             "{name}"
         );
+        assert_eq!(&actual[4..6], &expected_lock(name, *expected), "{name}");
     }
+    assert_eq!(outputs[0][6], 4, "permanent step must retire the old color");
     drop(mapped);
     readback.unmap();
     println!(

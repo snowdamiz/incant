@@ -3,6 +3,7 @@
 // geometric admission and reprojection kernel. Never a shipping setting.
 override diagnostic_disable_color_rectification: bool = false;
 override diagnostic_cubic_history: bool = false;
+override diagnostic_bounded_lock: bool = false;
 @group(0) @binding(1) var current:texture_2d<f32>;
 @group(0) @binding(2) var motion:texture_2d<f32>;
 @group(0) @binding(3) var current_depth:texture_depth_2d;
@@ -162,6 +163,7 @@ fn diagnostic_cubic(old:vec2f,expected:f32,fallback:vec4f)->vec4f {
     let oldq=old-vec2f(0.5);let oldbase=vec2i(floor(oldq));let oldf=fract(oldq);
     var numerator=vec4f(0.0); var mass=0.0;
     var recurrence_sum=vec4f(0.0);var recurrence_ok=vec4<bool>(true);
+    var remaining=7.0;
     for(var y=0;y<2;y++) {for(var x=0;x<2;x++) {
         let b=tap_weight(oldf,x,y);if !(b>0.0) {continue;}
         let tap=oldbase+vec2i(x,y);
@@ -173,6 +175,7 @@ fn diagnostic_cubic(old:vec2f,expected:f32,fallback:vec4f)->vec4f {
         // These are the exact joint colour/mass taps, never a separately
         // renormalized subset. Zero-mass taps cannot contribute an observation.
         if b*s.x>0.0 {
+            remaining=min(remaining,s.y);
             let observation=textureLoad(previous_recurrence,tap,0);
             let valid=recurrence_valid(observation);
             recurrence_ok=recurrence_ok & valid;
@@ -199,6 +202,12 @@ fn diagnostic_cubic(old:vec2f,expected:f32,fallback:vec4f)->vec4f {
     // texture keeps accumulating; history outside it loses mass as before.
     var clamped=clamp(history,minimum,maximum);
     if diagnostic_disable_color_rectification || recurrence_retains(history.rgb,fresh.rgb,minimum.rgb,maximum.rgb,recurrence) {clamped=history;}
+    var next_remaining=0.0;
+    if diagnostic_bounded_lock {
+        let lock=recurrence_lock(history.rgb,fresh.rgb,minimum.rgb,maximum.rgb,recurrence,remaining);
+        if lock.x>0.0 {clamped=history;}
+        next_remaining=lock.y;
+    }
     let change=abs(history.rgb-clamped.rgb);
     let reaction=clamp(max(change.x,max(change.y,change.z))/frame.options.w,0.0,1.0);
     // Density and reaction scale the associated history mass; the clamp is a
@@ -209,6 +218,6 @@ fn diagnostic_cubic(old:vec2f,expected:f32,fallback:vec4f)->vec4f {
     if !(total>0.0) {return result;}
     result.color=clean((history*w+e.sum)/total);
     result.color.a=1.0;
-    result.evidence=vec2f(min(total,evidence_cap()),0.0);
+    result.evidence=vec2f(min(total,evidence_cap()),next_remaining);
     return result;
 }

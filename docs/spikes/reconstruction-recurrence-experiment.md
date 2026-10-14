@@ -93,3 +93,31 @@ only modestly and does not remove the trail or broken thin lines. Root inspected
 the actual PNGs; there is no quality acceptance. Run 006 strict all-target Clippy
 passes. The next experiment targets bounded temporal retention, preserving the
 unclipped shadow failure as a counterexample rather than adopting either ablation.
+
+## Bounded retention experiment
+
+The next test carries at most seven remaining frames after detecting a new
+reversal (one eight-phase cycle including recognition). Reprojection takes the
+minimum remaining count of every contributing history tap. An old reversal still
+inside the observation window cannot renew it. Invalid observations, inconsistent
+chroma and the observed luminance envelope can retire it immediately.
+
+Run 007 passes 20 actual Metal classifier controls, including the monotonic-window
+counterexample, expiration, hue/missing-observation refusal and a permanent bright
+step that rejects the fixed old color on its fourth sample. Its scene **does not
+exercise the new retention**: a missing pipeline constant left the shader default
+off, caught by strict Clippy's unused-variable error. The scene report's
+`bounded_lock: true` is incorrect and must not count as execution evidence.
+
+Run 008 fixes that binding and checks actual readback for nonzero retention state.
+Build, two CPU controls and strict all-target Clippy pass; 48 actual Metal frames
+complete with 96 submissions and 48 maps. The readback contains 521,282 nonzero
+retention samples in the captured regions. The helper shader is unchanged from
+007's executed classifier controls; no second classifier run is claimed. Root's
+moving-frame review still rejects the result: striped aliasing remains conspicuous
+and thin lines remain broken. No production source, allocation or gate changed.
+
+These experiments identify two different signals needed by a replacement design:
+recurring detail should survive changes in sampling phase, while moving shadows
+and real shading changes must retire history promptly. The current short-window
+color rule, with or without this bounded extension, is not sufficient.
