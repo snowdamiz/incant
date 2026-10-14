@@ -93,3 +93,23 @@ sources are portable. The collector never executes native work.
 ```sh
 python3 docs/spikes/evidence/core-script-phase/verify.py --external --git-source
 ```
+
+## Current-main composition
+
+The reviewed source and packet are curated onto main268 without runtime changes.
+Of 3,876 recorded source inputs, 3,871 are identical; the five explicit exceptions
+are PR266 physics integration-test Result assertions and PR267 Python measurement
+phase selection/tests. Neither group participates in this ScriptHost diagnostic
+or its preparation. No manifest, lock, script or runtime input differs.
+
+Scoped strict lib/tests Clippy passes on the current compiler/profile/fast-mode
+composition; this is a new lint result, not a new native test or timing run. The
+original one-test execution and source generations remain explicit. An ordinary
+unchanged-tree merge retains the producer Git source references for portable
+verification. The initial intake inventory expected only the three Rust-test
+exceptions and refused the two additional tool paths; the following wrapper
+failed before Cargo because that inventory file had not been written. Both
+preflight failures are retained, with the corrected five-path qualification.
+
+[Independent acceptance and current evidence](evidence/core-script-phase-intake/manifest.json).
+Replay with `python3 docs/spikes/evidence/core-script-phase-intake/verify.py --current --external`.
