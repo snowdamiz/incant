@@ -11,6 +11,16 @@ comparison. QuickJS heap peaks increase. Current-main source/Node/TypeScript
 controls pass; independent final packet review is pending. No FPS/GPU/phase
 claim. [Evidence](docs/spikes/core-bulk-row-metadata.md).
 
+## TypeScript AOT spike — language controls retained, adoption open
+
+Pinned AssemblyScript 0.28.20 rejects five current TypeScript language fixtures;
+a separate 9,999-row arithmetic kernel compiles and matches selected values.
+The actual NativeBehavior frontend cook passes. Static Hermes source and future
+compiler inputs are pinned, but no native compiler/host was built. All complete
+SDK, matched shipping performance, iOS no-JIT/size and security-release adoption
+conditions remain open. No production host or dependency changed. Independent
+source/final review is pending. [Evidence](docs/spikes/typescript-aot.md).
+
 ## Core 10k Mac shipping — cache improvement measured, 2 ms script gate failed
 
 Actual paired fast-mode shipping runs complete the 2,156-tick Core win with
