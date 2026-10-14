@@ -1,5 +1,53 @@
 # Implementation status
 
+## Script startup data and immutable metadata caches — joined CPU checks pass
+
+The current main259 composition preserves the three reviewed changes: constant
+binding tables, immutable attachment snapshots and immutable bulk-query row IDs.
+Both numerical modes pass 167 CPU cases and strict all-target lint; compiler-free
+native/wasm and dependency checks pass. All 3,885 frozen inputs remain exact and
+six immediate binaries are retained. Final integration review is independently
+accepted; publication awaits the exact-head PR check; the historical Core measurements below do not measure this union. No
+shipping build/runtime speedup or performance gate is claimed.
+[Current evidence](docs/spikes/script-caches-main259.md).
+
+## Bulk-query row-label cache — CPU correctness verified
+
+Immutable ordered row IDs now reuse frozen metadata arrays while numeric views
+remain fresh and revocable. Structural edits and retained history have explicit
+regressions; all 150 script library/project cases and strict all-target Clippy
+pass in each numerical mode. Current-main integration and matched shipping
+timing remain separate; no performance gate is claimed.
+[Scope and evidence](docs/spikes/script-chunk-id-cache.md).
+
+## Original Core Mac shipping CPU reference — scoped evidence
+
+Three actual M5 Pro shipping runs complete the deterministic 46-entity Core win
+with script p95 intervals 0.820001–0.890000 ms and identical reports/PCM. One
+same-binary 5% script comparison remains inconclusive. Independent raw-histogram,
+compiler/source and external-file verification is retained; this is not the fast
+10k, display/GPU or phase gate. [Evidence](docs/spikes/mac-core-baseline.md).
+
+## Script attachment cache — scoped CPU correctness
+
+Unchanged authored attachment groups reuse one frozen instance array and paired
+ID authorization list while every entity lifetime is still checked each tick.
+Thirty-five distinct scoped native cases and strict all-target Clippy pass;
+retirement/reuse, prior snapshot immutability, capability revocation and fresh-VM
+restore are covered. No shipping speedup or 10k gate is claimed.
+[Evidence](docs/spikes/script-instance-cache.md).
+
+## Static script binding emission — CPU qualification, cache union pending
+
+The trusted emitter now generates borrowed constant property tables and one
+bounded startup conversion. The unchanged catalog validator preserves identity
+and finite f64 bits; dependencies and bytecode authority stay unchanged. Source
+review is accepted; 156 current CPU cases, strict lint, native/wasm lean builds
+and a real generated 10,000-row Rust consumer pass. The first standalone
+consumer-driver dependency-path failure is retained. Final producer review is
+accepted; the joined cache qualification is recorded above. No shipping build/runtime speedup is
+claimed. [Evidence](docs/spikes/script-bindings-static.md).
+
 ## Core 10k-script input — native correctness, measurement pending
 
 A public-command extension preserves the original Core controller/assets and adds
@@ -11,7 +59,7 @@ journal-reopen failure. Fresh fast shipping measurements remain pending; no
 GPU/60 fps or appearance gate is claimed. Current main258 qualification passes
 ten Python controls, strict TypeScript and Node bulk/mutation controls against
 the current SDK; the original archive and all external payloads replay unchanged.
-Independent current-main final review is accepted; publication awaits the exact-head fast check. [Producer evidence](docs/spikes/core-script-stress.md) and [composition](docs/spikes/core-stress-main258.md).
+Independent current-main final review is accepted; PR259 merged after its exact-head fast SUCCESS. [Producer evidence](docs/spikes/core-script-stress.md) and [composition](docs/spikes/core-stress-main258.md).
 
 ## Per-frame CPU distributions — scoped Mac controls pass
 
@@ -53,8 +101,8 @@ Sample/10,000-entity measurements and presentation timing remain open.
 Checkpoint30 is promoted through PR232: release `71bdd2e7` has the exact tested
 main252 tree `393eb78c`. All 23 required contexts and all eight push workflows
 succeeded; independent review, merge parents, author trailer and post-merge tree
-are verified. Later main253–258 persisted-session/mobile/haptics/profiler work remains outside
-that tested release. No checkpoint is currently active; main258 is the latest
+are verified. Later main253–259 persisted-session/mobile/haptics/profiler/workload work remains outside
+that tested release. No checkpoint is currently active; main259 is the latest
 integration. This promotion does not approve a phase or distribution gate.
 [Portable evidence](docs/spikes/evidence/release-checkpoint-30/manifest.json).
 

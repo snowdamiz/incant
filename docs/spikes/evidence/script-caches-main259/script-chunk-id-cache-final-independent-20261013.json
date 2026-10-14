@@ -1,0 +1,315 @@
+{
+  "review": "script-chunk-id-cache-final-independent",
+  "version": 1,
+  "date": "2026-10-13",
+  "reviewer": "astra /root/native_wasm_export",
+  "status": "accepted-scoped-no-findings",
+  "source_commit": "3a8a17e2c942275ff5c5d0e1fb29be2f789077e1",
+  "packet_commit": "a10c80218a588a40feac264c6988e94a053529fe",
+  "base_commit": "bff83af61807435926b10d77b5a04718a464aae5",
+  "manifest": {
+    "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/docs/spikes/evidence/script-chunk-id-cache/manifest.json",
+    "sha256": "45dc28e26ac3befd400452c64ab674ef5f574a5939c0dc4db179def557406a4e"
+  },
+  "prior_source_review": {
+    "path": "/Users/andreyyurlov/.codex/incant-reviews/script-chunk-id-cache-source-independent-20261013.json",
+    "sha256": "8c07b67f9267d19bfc6eea18a2c8d1321939bbecca08b83abcdbf6ab51231e48",
+    "unchanged_source": true
+  },
+  "source_files": [
+    {
+      "path": "crates/incant_script/src/lib.rs",
+      "sha256": "68e88be2431585b4dd3289ccb0625d8bdf1a796ed4fed85177951b4d5a8ecac7"
+    },
+    {
+      "path": "crates/incant_script/src/loan.rs",
+      "sha256": "6b365b055a56de3155b1ff26d3699834b40de29e63e8bd3f73fc9ca0c0cfe47f"
+    },
+    {
+      "path": "crates/incant_script/src/loan/ids.rs",
+      "sha256": "99de883125f7ca2b071ff565ffc4f0d0741cc41e7a2ede25c0e4f3f38d5bf7b2"
+    },
+    {
+      "path": "crates/incant_script/src/loan_id_tests.rs",
+      "sha256": "f1d5a3bd3518ac0d6370ad2e7c9082365c65a16d798874fbc6102af9557e3381"
+    }
+  ],
+  "findings": [],
+  "verification": {
+    "producer_verifier": "python3 docs/spikes/evidence/script-chunk-id-cache/verify.py --external",
+    "producer_verifier_exit": 0,
+    "independent_archive_raw_git_audit": true,
+    "records": 28,
+    "payloads": 23,
+    "sources": 4,
+    "executables": [
+      {
+        "command": "deterministic-lib",
+        "original": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/aarch64-apple-darwin/ci/deps/incant_script-142ea1b496f386b0",
+        "copy": "binaries/deterministic-lib/incant_script-142ea1b496f386b0",
+        "sha256": "d32c39f820f5cee5d51c981e314f72bb37279a5efe55661934e723b0aea5126c",
+        "bytes": 20031376
+      },
+      {
+        "command": "deterministic-project",
+        "original": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/aarch64-apple-darwin/ci/deps/project_bindings-3d9ca1177e3ebff8",
+        "copy": "binaries/deterministic-project/project_bindings-3d9ca1177e3ebff8",
+        "sha256": "3c52ac55008fcfd17c975304d20955f3ae0646a82be7ad4ab17668a7093ae94f",
+        "bytes": 17812160
+      },
+      {
+        "command": "fast-lib",
+        "original": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/aarch64-apple-darwin/ci/deps/incant_script-1a5c74f1f30add2a",
+        "copy": "binaries/fast-lib/incant_script-1a5c74f1f30add2a",
+        "sha256": "cc8e27c247b6d4e90cc1bf5113763ebcebc05db94e7a6ca06a869e70c6429428",
+        "bytes": 19730832
+      },
+      {
+        "command": "fast-project",
+        "original": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/aarch64-apple-darwin/ci/deps/project_bindings-9602e26d94033658",
+        "copy": "binaries/fast-project/project_bindings-9602e26d94033658",
+        "sha256": "5fb085c0152583d6b364703b4a5e7570cc1c4699fdd7dd224ca18a6de4db832d",
+        "bytes": 17547536
+      }
+    ],
+    "passing_commands": [
+      {
+        "name": "deterministic-lib",
+        "receipt_sha256": "2e0bbe4b4ad4e876f381f6830084d51b4ed0faedcf87e02ed811275e2846c7a5",
+        "exit": 0,
+        "argv": [
+          "./tools/cargo",
+          "test",
+          "--lib",
+          "--offline",
+          "--locked",
+          "--profile",
+          "ci",
+          "-j2",
+          "--target",
+          "aarch64-apple-darwin",
+          "-p",
+          "incant_script",
+          "--no-default-features",
+          "--features",
+          "compiler,physics-deterministic"
+        ],
+        "logs": {
+          "stdout": {
+            "path": "deterministic-lib.stdout",
+            "sha256": "ad0610c74a2d319a579bba7ee79addf9de7db178e476009e6dead664cebfcd6c",
+            "bytes": 13303
+          },
+          "stderr": {
+            "path": "deterministic-lib.stderr",
+            "sha256": "e7b573640bd136aa44e93533d401960fc4887374b6feed32461fb5da6a227131",
+            "bytes": 1303
+          }
+        }
+      },
+      {
+        "name": "deterministic-project",
+        "receipt_sha256": "9544a8d04096fb2ca9b5bcb71fe7ff6c98511c14f491b935a2a9009e5d09b995",
+        "exit": 0,
+        "argv": [
+          "./tools/cargo",
+          "test",
+          "--test",
+          "project_bindings",
+          "--offline",
+          "--locked",
+          "--profile",
+          "ci",
+          "-j2",
+          "--target",
+          "aarch64-apple-darwin",
+          "-p",
+          "incant_script",
+          "--no-default-features",
+          "--features",
+          "compiler,physics-deterministic"
+        ],
+        "logs": {
+          "stdout": {
+            "path": "deterministic-project.stdout",
+            "sha256": "70e115ea1a2dfefc965d88e7a39a8855a1bb950aa2f3d0ef87fba39bbdaa2084",
+            "bytes": 1101
+          },
+          "stderr": {
+            "path": "deterministic-project.stderr",
+            "sha256": "1cd418f83ec3df8d6573c32f8a1f108421811ca3bd4f6ad83c227dc0d48b44e4",
+            "bytes": 336
+          }
+        }
+      },
+      {
+        "name": "deterministic-clippy",
+        "receipt_sha256": "033aa0c7abe9ba9a746e9226fa21da39beb2053519d0fe28a786e9042da9c6d6",
+        "exit": 0,
+        "argv": [
+          "./tools/cargo",
+          "clippy",
+          "--all-targets",
+          "--offline",
+          "--locked",
+          "--profile",
+          "ci",
+          "-j2",
+          "--target",
+          "aarch64-apple-darwin",
+          "-p",
+          "incant_script",
+          "--no-default-features",
+          "--features",
+          "compiler,physics-deterministic",
+          "--",
+          "-D",
+          "warnings"
+        ],
+        "logs": {
+          "stdout": {
+            "path": "deterministic-clippy.stdout",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "bytes": 0
+          },
+          "stderr": {
+            "path": "deterministic-clippy.stderr",
+            "sha256": "0a956e750fa0c56061ca9a2bc4cc41c294c742b0821a1959abe00f3e5d0c950b",
+            "bytes": 1150
+          }
+        }
+      },
+      {
+        "name": "fast-lib",
+        "receipt_sha256": "ca053430dc1ee94e8243db16e5916be9b4e8c6308eb97078f8df5e6150823812",
+        "exit": 0,
+        "argv": [
+          "./tools/cargo",
+          "test",
+          "--lib",
+          "--offline",
+          "--locked",
+          "--profile",
+          "ci",
+          "-j2",
+          "--target",
+          "aarch64-apple-darwin",
+          "-p",
+          "incant_script",
+          "--no-default-features",
+          "--features",
+          "compiler,physics-fast-simd8"
+        ],
+        "logs": {
+          "stdout": {
+            "path": "fast-lib.stdout",
+            "sha256": "4f356a2c2d6a0aef0e6b397788c5731d3246eaf7d843d578106e0ea0c1adced6",
+            "bytes": 13303
+          },
+          "stderr": {
+            "path": "fast-lib.stderr",
+            "sha256": "54c75e4e5ad026d19c93e76eef41c9cd41dc71e49d707e89193759ae095161dd",
+            "bytes": 1388
+          }
+        }
+      },
+      {
+        "name": "fast-project",
+        "receipt_sha256": "0940b38abe6a78c22729e5ea5e4513dff3d4c6a5b16e429610739c44fe2831b1",
+        "exit": 0,
+        "argv": [
+          "./tools/cargo",
+          "test",
+          "--test",
+          "project_bindings",
+          "--offline",
+          "--locked",
+          "--profile",
+          "ci",
+          "-j2",
+          "--target",
+          "aarch64-apple-darwin",
+          "-p",
+          "incant_script",
+          "--no-default-features",
+          "--features",
+          "compiler,physics-fast-simd8"
+        ],
+        "logs": {
+          "stdout": {
+            "path": "fast-project.stdout",
+            "sha256": "f3346becf95c080789fc147c6cb1ae401a3eb6c7cb24c710ea0dccddaaf938f4",
+            "bytes": 1101
+          },
+          "stderr": {
+            "path": "fast-project.stderr",
+            "sha256": "b04a5090b4590898c492a062df2175396f9c3767a148b73261bf7a76bb40ca1a",
+            "bytes": 336
+          }
+        }
+      },
+      {
+        "name": "fast-clippy",
+        "receipt_sha256": "3775f0bf291238d66d069098f801e3f8c6dca0cd4dde56ba0a92c31011a8a199",
+        "exit": 0,
+        "argv": [
+          "./tools/cargo",
+          "clippy",
+          "--all-targets",
+          "--offline",
+          "--locked",
+          "--profile",
+          "ci",
+          "-j2",
+          "--target",
+          "aarch64-apple-darwin",
+          "-p",
+          "incant_script",
+          "--no-default-features",
+          "--features",
+          "compiler,physics-fast-simd8",
+          "--",
+          "-D",
+          "warnings"
+        ],
+        "logs": {
+          "stdout": {
+            "path": "fast-clippy.stdout",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "bytes": 0
+          },
+          "stderr": {
+            "path": "fast-clippy.stderr",
+            "sha256": "7ccdecf14fac05efd4cf8c052d6df4521cd50a7845a7fae266b117a0045f46b7",
+            "bytes": 1235
+          }
+        }
+      }
+    ],
+    "cases_per_mode": {
+      "library": 138,
+      "project_bindings": 12
+    },
+    "new_cases_per_mode": 2,
+    "library_and_project_names_match_between_modes": true,
+    "strict_all_target_clippy_modes": [
+      "physics-deterministic",
+      "physics-fast-simd8"
+    ],
+    "unchanged_lock_and_crate_manifest": true
+  },
+  "assessment": [
+    "Source matches the prior independent lifetime/cache/row-order review exactly. Re-read collector, verifier, runner, changed code, two new test bodies and final documentation/STATUS claims.",
+    "Immediate executable copying occurs in the retained runner after each completed test command and before subsequent commands; raw copies have exact recorded hashes and executable modes.",
+    "Both numerical modes include actual metadata-reuse/fresh-detached-view/GC and despawn/archetype/reuse/row-write controls; existing error, rollback and revocation tests remain in retained passing library suites.",
+    "Documentation correctly separates scoped CPU correctness from current-main integration and matched shipping measurements."
+  ],
+  "limitations": [
+    "No reviewer compiler/test-binary/GPU/shipping execution; only read-only packet verifier and independent hashing/parsing.",
+    "Runtime speedup, 10000-script shipping p95, FPS and GPU gates remain unmeasured by this packet.",
+    "Initial rustfmt PATH lookup failure is recorded as a setup note, not one of the six retained successful command receipts.",
+    "The four binaries are external hash-bound records, not embedded portable payloads.",
+    "Producer orchestration handle79821 terminal/reaped is parent-reported; the six receipts bind command exits and logs but do not record child PIDs for an independent process-lifecycle replay."
+  ],
+  "mutation_scope": "Only this external review receipt. No source/ref/target changes."
+}

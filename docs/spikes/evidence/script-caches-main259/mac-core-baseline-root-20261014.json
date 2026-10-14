@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "candidate": "b34beb2883a00ecb5fcb6416e56af050889464c4",
+  "accepted": true,
+  "manifest_sha256": "134b7cc3a5ba95bb7319ae11dcadc2edacc237c0f5365818483652dd44ddfad4",
+  "independent_audit": "mac-core-baseline-independent-20261013.json",
+  "root_replay": "--external --git-source passed; 278records61payloads185external,4724source rows,8mutation controls",
+  "claims_review": "Original46entitydeterministic/onecontroller context,11 observed entity readbacks,3repeatabilityruns allretained; run2 inconclusive, nofast10k/GPU/FPS/phaseclaim. Authoring and startup failure retained.",
+  "timestamp": "2026-10-14T01:19:25.936811+00:00"
+}

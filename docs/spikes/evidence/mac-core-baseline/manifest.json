@@ -1,0 +1,1962 @@
+{
+  "format": "incant-mac-core-baseline-evidence",
+  "version": 1,
+  "executed_source": "bff83af61807435926b10d77b5a04718a464aae5",
+  "records": [
+    {
+      "path": "001/authoring/.incant/cache/audio/08b4d5af1f19e43c1c228d7c6ca243e8d2362f27f336f87a347cb697f6ebca28.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/.incant/cache/audio/08b4d5af1f19e43c1c228d7c6ca243e8d2362f27f336f87a347cb697f6ebca28.json",
+      "bytes": 1096,
+      "sha256": "59363a80bbac59c6f139695407f2e76c31ed47b4345b03177801b01640480139",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/.incant/cache/audio/1e53cd57bfecb7115ad888e9d40f01c6d957b7130bd6f8975a2d16100d7eda46.ipcm",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/.incant/cache/audio/1e53cd57bfecb7115ad888e9d40f01c6d957b7130bd6f8975a2d16100d7eda46.ipcm",
+      "bytes": 691200,
+      "sha256": "1e53cd57bfecb7115ad888e9d40f01c6d957b7130bd6f8975a2d16100d7eda46",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/.incant/cache/audio/2b67780f0ec6ce10736909aa8ec0a3b386d6b308382b7eaf33d40a5a28977718.ipcm",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/.incant/cache/audio/2b67780f0ec6ce10736909aa8ec0a3b386d6b308382b7eaf33d40a5a28977718.ipcm",
+      "bytes": 8777144,
+      "sha256": "2b67780f0ec6ce10736909aa8ec0a3b386d6b308382b7eaf33d40a5a28977718",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/.incant/cache/audio/2e05653f8752033823f84b711926070f2d4d237aef0087105be217b401c89637.ipcm",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/.incant/cache/audio/2e05653f8752033823f84b711926070f2d4d237aef0087105be217b401c89637.ipcm",
+      "bytes": 345600,
+      "sha256": "2e05653f8752033823f84b711926070f2d4d237aef0087105be217b401c89637",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/.incant/cache/audio/384ae95c87bd2678c8b4b80f85bca02c73035338461b423f514e25fc891f9778.ipcm",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/.incant/cache/audio/384ae95c87bd2678c8b4b80f85bca02c73035338461b423f514e25fc891f9778.ipcm",
+      "bytes": 576000,
+      "sha256": "384ae95c87bd2678c8b4b80f85bca02c73035338461b423f514e25fc891f9778",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/.incant/cache/audio/3d3e537168e5bf96036e6625c0b5d55b12cf122a4715f7e8d77baf937edc8c58.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/.incant/cache/audio/3d3e537168e5bf96036e6625c0b5d55b12cf122a4715f7e8d77baf937edc8c58.json",
+      "bytes": 561,
+      "sha256": "fd7c43cb6347a021fcfe215fa66bbd817620ff596a04bc8b32259202352921ea",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/.incant/cache/audio/4ecb37a4cf20667d8d7922971a3b609c1898cb988fb96bc0a3857546f3123c4e.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/.incant/cache/audio/4ecb37a4cf20667d8d7922971a3b609c1898cb988fb96bc0a3857546f3123c4e.json",
+      "bytes": 963,
+      "sha256": "d9ca5bd9b8d52ced2826915913857e90baea981bcdfe6d9ace42e9105929fdd2",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/.incant/cache/audio/4f31a36d777d5ce2702b9a5237742cc8a69efa73d7067afae35dff713cbb935f.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/.incant/cache/audio/4f31a36d777d5ce2702b9a5237742cc8a69efa73d7067afae35dff713cbb935f.json",
+      "bytes": 9341,
+      "sha256": "8d841a107aff6df0511e0e9dfdf8c6d36cf01928d91dd82e415b26858f58cc96",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/.incant/cache/audio/6c94df51cc76f31375178021c1fec7775a5e448cba6bde2d1120f9efa6a32c56.ipcm",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/.incant/cache/audio/6c94df51cc76f31375178021c1fec7775a5e448cba6bde2d1120f9efa6a32c56.ipcm",
+      "bytes": 138240,
+      "sha256": "6c94df51cc76f31375178021c1fec7775a5e448cba6bde2d1120f9efa6a32c56",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/.incant/cache/audio/b63a98f27758a1bb7f2a4ba44f4fb8d263230bf401520116b87e6946cdf56117.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/.incant/cache/audio/b63a98f27758a1bb7f2a4ba44f4fb8d263230bf401520116b87e6946cdf56117.json",
+      "bytes": 764,
+      "sha256": "d5748ced504a28a21d72eaf9c0b26c3fee6ff900c07ea491c06b79c4c5680642",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/.incant/cache/fonts/0e1cd7265c7a2fa6109d995205dd8e070723bb824fe28daa8299ba1105063a1f.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/.incant/cache/fonts/0e1cd7265c7a2fa6109d995205dd8e070723bb824fe28daa8299ba1105063a1f.json",
+      "bytes": 323,
+      "sha256": "0538183b4a25a91d05296686e8092634f8c572c4c1dc34329c4685843c7661e1",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/.incant/cache/fonts/3127f0b873387ee37e2040135a06e9e9c05030f509eb63689529becf28b50384.ifont",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/.incant/cache/fonts/3127f0b873387ee37e2040135a06e9e9c05030f509eb63689529becf28b50384.ifont",
+      "bytes": 310300,
+      "sha256": "48804b712c66bb0ce00b2cc3272c7be18171810a3bb0555e3d247544951e0fdc",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/.incant/cache/fonts/74f2395f9b27e4c4ff06183b1baed5684ce4a090490bd00f42637547cca5da0f.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/.incant/cache/fonts/74f2395f9b27e4c4ff06183b1baed5684ce4a090490bd00f42637547cca5da0f.json",
+      "bytes": 317,
+      "sha256": "76b2977309e2485a6007bcb9c6e75df3a2e161dc576ebbf6be00f6b8b961d0f0",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/.incant/cache/fonts/9ec258961c8800c709f05586b6fca8a47061f3f776ac088bb87fbb2a462c116e.ifont",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/.incant/cache/fonts/9ec258961c8800c709f05586b6fca8a47061f3f776ac088bb87fbb2a462c116e.ifont",
+      "bytes": 13812,
+      "sha256": "db12e66306387bf4fdcf4b6be1fc31eed9f136e60211061e65cc97ba71500311",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/.incant/cache/fonts/ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56.ifont",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/.incant/cache/fonts/ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56.ifont",
+      "bytes": 765788,
+      "sha256": "8bd20a742cc19c0fe65b106d983ea1ed816c4cd5ca1c3d50bdc4d05aeb5f8e7a",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/.incant/cache/fonts/efbee025bcb27036123566525a911cd346bbe425cceb413eb800661df6b65767.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/.incant/cache/fonts/efbee025bcb27036123566525a911cd346bbe425cceb413eb800661df6b65767.json",
+      "bytes": 318,
+      "sha256": "ce4cd118624295e30ed4514c80bfad49c379702ead14327faf7ff92184d6034a",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/.incant/cache/models/018d021c673a74b618fc3516d8ab4e64b32a88f6c8323d0d84395e684d811c13.incmodel",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/.incant/cache/models/018d021c673a74b618fc3516d8ab4e64b32a88f6c8323d0d84395e684d811c13.incmodel",
+      "bytes": 25810,
+      "sha256": "509cf7c24253b675ed0a3d36ae344d35272050107a97c4aeae4db79417d132e7",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/.incant/cache/models/1649bb952607a07a912661374fa6a8c104a261d625b339a5aa2e096f52970bec.incmodel",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/.incant/cache/models/1649bb952607a07a912661374fa6a8c104a261d625b339a5aa2e096f52970bec.incmodel",
+      "bytes": 18726133,
+      "sha256": "b32c0ae9a0305abd7610713aa77a270e320090bbb31be1792a47f857ec939f99",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/.incant/cache/models/b85f1046e4d28277bd6bb792cdcff4dc070268bb95b3b8040b697bbf7f631262.incmodel",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/.incant/cache/models/b85f1046e4d28277bd6bb792cdcff4dc070268bb95b3b8040b697bbf7f631262.incmodel",
+      "bytes": 181633,
+      "sha256": "80dbf175a19dfda0db4c8e5c1992657fd435b6778d0b49d056755d088563e778",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/.incant/cache/models/da2588e81cf9f61d9b06dec86cbf644e5322cdc48594af5c9ac4e9aa08a6e1ad.incmodel",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/.incant/cache/models/da2588e81cf9f61d9b06dec86cbf644e5322cdc48594af5c9ac4e9aa08a6e1ad.incmodel",
+      "bytes": 207725,
+      "sha256": "a20e33175acb4af55ddad2168307ce3e0c02a23127566cac769e6f290bf799bf",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/.incant/cache/models/ec9f2569b551d61c9552dd311c3190e9dd262c96b8823e1f3c3c04819811bf99.incmodel",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/.incant/cache/models/ec9f2569b551d61c9552dd311c3190e9dd262c96b8823e1f3c3c04819811bf99.incmodel",
+      "bytes": 2832033,
+      "sha256": "88e2f2c56975f6bde0c0e7c131e870bf783fb86384a27d55b20fd40d40d77621",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/.incant/cache/textures/17da802ffd07a79a3041b9ba748180e8eccde82c6461eb24ce092cb378e94333.ktx2",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/.incant/cache/textures/17da802ffd07a79a3041b9ba748180e8eccde82c6461eb24ce092cb378e94333.ktx2",
+      "bytes": 699516,
+      "sha256": "17da802ffd07a79a3041b9ba748180e8eccde82c6461eb24ce092cb378e94333",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/.incant/cache/textures/5c2d2703c28f3deb6e566781de8833f45f442888602c7a72872b3ea7f5b141c8.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/.incant/cache/textures/5c2d2703c28f3deb6e566781de8833f45f442888602c7a72872b3ea7f5b141c8.json",
+      "bytes": 413,
+      "sha256": "f0bd2e231b9cc1839811dd7faf3a748bb2a41df3e95e84e45c727b5be5a5d840",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/.incant-source-transactions/01M4TAWWQA0Y0MQJ3N1C6QD1PP.old-receipt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/.incant-source-transactions/01M4TAWWQA0Y0MQJ3N1C6QD1PP.old-receipt",
+      "bytes": 26,
+      "sha256": "93d0a4aee1ada2d7ccc9aeedf54e0db089b8a5cf1cac42b9201c53f961037695",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/.incant-source-transactions/01M4TAWWQA0Y0MQJ3N1C6QD1PP.previous",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/.incant-source-transactions/01M4TAWWQA0Y0MQJ3N1C6QD1PP.previous",
+      "bytes": 16096,
+      "sha256": "8d5f5feec2235f1718235901c6073f7425acf971a4e087755a0b3833ecb79698",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/.incant-source-transactions/01M4TAWWRSS8Z8K4CPTTGAEVAR.old-receipt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/.incant-source-transactions/01M4TAWWRSS8Z8K4CPTTGAEVAR.old-receipt",
+      "bytes": 26,
+      "sha256": "387a5d3ee367ee5a2fb7784b35f75562c9693a98f9ed93ef2d64744a6a63c101",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/.incant-source-transactions/01M4TAX4XW74K42SW2CZMV3ZQZ.old-receipt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/.incant-source-transactions/01M4TAX4XW74K42SW2CZMV3ZQZ.old-receipt",
+      "bytes": 26,
+      "sha256": "bd0ed0eb3f185664bab97c841de6564be96f89945418aa33c95f414df3fb04e5",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/.incant-source-transactions/01M4TAX4ZJASNDMP3FBEJR2TNX.old-receipt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/.incant-source-transactions/01M4TAX4ZJASNDMP3FBEJR2TNX.old-receipt",
+      "bytes": 26,
+      "sha256": "922281094ef52386904ee1e21a6be61417cbf9a1184c4a22d6e9b7d63bc2a371",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/.incant-source-transactions/01M4TAX4ZJASNDMP3FBEJR2TNX.previous",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/.incant-source-transactions/01M4TAX4ZJASNDMP3FBEJR2TNX.previous",
+      "bytes": 16096,
+      "sha256": "8d5f5feec2235f1718235901c6073f7425acf971a4e087755a0b3833ecb79698",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/.incant-source-transactions/01M4TAX539SMCXQE6V74P1W4G0.old-receipt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/.incant-source-transactions/01M4TAX539SMCXQE6V74P1W4G0.old-receipt",
+      "bytes": 26,
+      "sha256": "29854b19a476b534bc23a490098bc1ee99aad0ea72a91ea234979c111a950c5f",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/.incant-source-transactions/01M4TAX539SMCXQE6V74P1W4G0.previous",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/.incant-source-transactions/01M4TAX539SMCXQE6V74P1W4G0.previous",
+      "bytes": 16096,
+      "sha256": "8d5f5feec2235f1718235901c6073f7425acf971a4e087755a0b3833ecb79698",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/.incant-source-transactions/01M4TAX55C86YMCG7Q1T41JS02.old-receipt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/.incant-source-transactions/01M4TAX55C86YMCG7Q1T41JS02.old-receipt",
+      "bytes": 26,
+      "sha256": "77d3e9112ce10be416f2c5ff870028732b3f8ac7699406eb40f7dde2bfb3a1be",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/.incant-source-transactions/01M4TAX55C86YMCG7Q1T41JS02.previous",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/.incant-source-transactions/01M4TAX55C86YMCG7Q1T41JS02.previous",
+      "bytes": 16096,
+      "sha256": "8d5f5feec2235f1718235901c6073f7425acf971a4e087755a0b3833ecb79698",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/.incant-source-transactions/01M4TAX580M4HA1ZKKWF4EBFBK.old-receipt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/.incant-source-transactions/01M4TAX580M4HA1ZKKWF4EBFBK.old-receipt",
+      "bytes": 26,
+      "sha256": "1c0223deef56c907d511bf0707fe78a8544caf30732548fdc12bb987e9b48f54",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/.incant-source-transactions/01M4TAX580M4HA1ZKKWF4EBFBK.previous",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/.incant-source-transactions/01M4TAX580M4HA1ZKKWF4EBFBK.previous",
+      "bytes": 16096,
+      "sha256": "8d5f5feec2235f1718235901c6073f7425acf971a4e087755a0b3833ecb79698",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/.incant-source-transactions/lock",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/.incant-source-transactions/lock",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/.incant-source-transactions/receipt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/.incant-source-transactions/receipt",
+      "bytes": 26,
+      "sha256": "0319c7495bab5263c0c9849974c210c2fd8a84c11b05f5a43dbabe3c1bd0597f",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/art/canyon.bin",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/art/canyon.bin",
+      "bytes": 3161612,
+      "sha256": "c32b0431a835c4c998cd69ff850291e2ed888ca0fe84e0907d1afebeba90e08d",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/art/canyon.gltf",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/art/canyon.gltf",
+      "bytes": 22404,
+      "sha256": "a8622cbd4caea047abd781309fc3869f5207117815ad65631c5e52d317ce30f7",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/art/cliff_albedo.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/art/cliff_albedo.png",
+      "bytes": 388767,
+      "sha256": "d1fed013a536eb47c40252b5e5f8375f4209509ed51ed7741950eb365f917069",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/art/cliff_normal.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/art/cliff_normal.png",
+      "bytes": 453616,
+      "sha256": "db93eb916ad971a8ee32ce3a5985d1c88115d113932ac7a358dc9702c7084939",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/art/core_albedo.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/art/core_albedo.png",
+      "bytes": 6691,
+      "sha256": "b1c535ceafd2c64e03e79c3e46eaa63cab18df359bbf77a70292af7d7e68946e",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/art/core_emissive.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/art/core_emissive.png",
+      "bytes": 8040,
+      "sha256": "42576b50d661af3f3940eeadc4217122470263695dcb0a7ce9509c515b9d97d1",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/art/cue_hurt.wav",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/art/cue_hurt.wav",
+      "bytes": 34604,
+      "sha256": "209bf03bf0d9eeedf13d67a9bf5e526b8b9d76b90350c116a07b304d6b2212d9",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/art/cue_lost.wav",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/art/cue_lost.wav",
+      "bytes": 144044,
+      "sha256": "d5757fbfa8f6b4e3e427c0b2748c9343011088ea520715bc91a176ddfa3ac465",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/art/cue_pickup.wav",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/art/cue_pickup.wav",
+      "bytes": 86444,
+      "sha256": "a9cfe5207be237b6976cdafb2944b0f71e63c1a73c7f7608f629ee96bbbcd0c9",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/art/cue_won.wav",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/art/cue_won.wav",
+      "bytes": 172844,
+      "sha256": "8b17713a334cb6d830310985b31cbb3c6c7653922e0c03ce121552765a6541e0",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/art/far_albedo.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/art/far_albedo.png",
+      "bytes": 7178,
+      "sha256": "1f09709ceb8101b85a6ba8b39f4734688624c75ebf4415d69208ad5081b2c902",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/art/floor_albedo.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/art/floor_albedo.png",
+      "bytes": 842112,
+      "sha256": "81445089016eba8e5d992f5d058890a75d06486f5468542df5eededd2e4c3c87",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/art/manifest.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/art/manifest.json",
+      "bytes": 3722,
+      "sha256": "19d87aca92ee147526a7eb1cfdcc648e6bbe949a37a127a61f3687a695632956",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/art/mesa_loop.wav",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/art/mesa_loop.wav",
+      "bytes": 4388616,
+      "sha256": "4f80337e2eef1ec9b414ae8959435fd114a6d77bb85b10022aef7f3abb968816",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/art/mite.bin",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/art/mite.bin",
+      "bytes": 44724,
+      "sha256": "2809da2175266acf004be462557404623f727e84c4400fc91363d37c2d9220e7",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/art/mite.gltf",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/art/mite.gltf",
+      "bytes": 5676,
+      "sha256": "62d807da1b4623e69670e467ef045386df1dc83c999aa1bdb45abf5814c868e2",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/art/mite_albedo.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/art/mite_albedo.png",
+      "bytes": 7592,
+      "sha256": "d3e231c3435475dd201652dc7e50ab835b623ed50042c6d14eba088193c65fde",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/art/mite_emissive.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/art/mite_emissive.png",
+      "bytes": 7495,
+      "sha256": "5298667c8f706a5a4418ae08bd1e93d943e5a382d36b40730991bf2d43befe76",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/art/pad_albedo.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/art/pad_albedo.png",
+      "bytes": 63444,
+      "sha256": "d0cfa2eeaf175365e390491051d05c7203e0b6dc2afc8b7fd950f927a1a3f002",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/art/rock_albedo.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/art/rock_albedo.png",
+      "bytes": 59674,
+      "sha256": "c6ea897e8c3811c4ce737d0dabd2d0b85aa4018a21e97aa8a8be414895ff9f6f",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/art/sample.bin",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/art/sample.bin",
+      "bytes": 9428,
+      "sha256": "5f17bd5753223c313f622778e8eb6da801e93fe90ec85128c845a17b92c599fc",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/art/sample.gltf",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/art/sample.gltf",
+      "bytes": 4325,
+      "sha256": "6eda3386082556270d7dd567d02fda5f7e2808792705786c8729d892078179ef",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/art/sky.bin",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/art/sky.bin",
+      "bytes": 66848,
+      "sha256": "5908df68041666952ab3808fbcd5578b960595cc7a5258d0bd4b41c83ea6d27f",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/art/sky.gltf",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/art/sky.gltf",
+      "bytes": 1887,
+      "sha256": "d752767b74d4bc39329dbd022c314bd3298c4529c3b5a325f8bcf29d03168e08",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/art/sky_dome.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/art/sky_dome.png",
+      "bytes": 148023,
+      "sha256": "dea2f93735ff70b2e6cf543f4bcdfdb9324e4cb72a31abe3cfdd5e0c047d69c0",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/art/sky_environment.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/art/sky_environment.png",
+      "bytes": 59757,
+      "sha256": "8bf279ee439137e9e1da9d1dc1f1868477b4f398e607a127524dc0d209571d82",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/art/surveyor.bin",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/art/surveyor.bin",
+      "bytes": 48372,
+      "sha256": "bfef4a6f7af144a221a86ae9977df320942ff1fcb252ee1f7d30ae9e28d1da5f",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/art/surveyor.gltf",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/art/surveyor.gltf",
+      "bytes": 9517,
+      "sha256": "8633af82a9e2e247c8c1509ef30f1f41e6866687b492c8329361fdec8d084003",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/art/top_albedo.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/art/top_albedo.png",
+      "bytes": 229296,
+      "sha256": "0456e5dd8c177da4f1296428356cba8d94815e69568342086def5e88cf107d8a",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/art/top_normal.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/art/top_normal.png",
+      "bytes": 121528,
+      "sha256": "5e9171d91392549a8e07b852273b0de5aab1a8c398ce1121712ff1e344ffd5ab",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/art/valley.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/art/valley.png",
+      "bytes": 10020,
+      "sha256": "c866ba77b019320be6fea2c8f4d5d988664f9816c20b98a8c1ef007dfb57d93e",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/bindings.journal.jsonl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/bindings.journal.jsonl",
+      "bytes": 1590759,
+      "sha256": "39f77262901e4a82caab18e4ab0cf82a5de5f1e45f0c0f84a4000b4213e1bdde",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/core.journal.jsonl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/core.journal.jsonl",
+      "bytes": 1617905,
+      "sha256": "2415936e1b5d00ed0522e007afe69e93f3f629406b5e355435b9b408cf4e1274",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/core.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/core.json",
+      "bytes": 112379,
+      "sha256": "0df80837afec5e9074387213d4a7b257deb3b4053748d4a4b9b50aec5516b4c3",
+      "embedded": true
+    },
+    {
+      "path": "001/authoring/fonts/CoreSampleSC-Regular.ttf",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/fonts/CoreSampleSC-Regular.ttf",
+      "bytes": 13764,
+      "sha256": "9ec258961c8800c709f05586b6fca8a47061f3f776ac088bb87fbb2a462c116e",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/fonts/Inter-Regular.ttf",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/fonts/Inter-Regular.ttf",
+      "bytes": 310252,
+      "sha256": "3127f0b873387ee37e2040135a06e9e9c05030f509eb63689529becf28b50384",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/fonts/NotoSansArabic.ttf",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/fonts/NotoSansArabic.ttf",
+      "bytes": 765740,
+      "sha256": "ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56",
+      "embedded": false
+    },
+    {
+      "path": "001/authoring/gameplay.ts",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/authoring/gameplay.ts",
+      "bytes": 16096,
+      "sha256": "8d5f5feec2235f1718235901c6073f7425acf971a4e087755a0b3833ecb79698",
+      "embedded": true
+    },
+    {
+      "path": "001/command-00-stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/command-00-stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true
+    },
+    {
+      "path": "001/command-00-stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/command-00-stdout.log",
+      "bytes": 77,
+      "sha256": "1dc5ff25a027f5c0a04ac183e96b6665181272c327130fb0663c5c1be8aad81d",
+      "embedded": true
+    },
+    {
+      "path": "001/command-01-stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/command-01-stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true
+    },
+    {
+      "path": "001/command-01-stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/command-01-stdout.log",
+      "bytes": 192,
+      "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "embedded": true
+    },
+    {
+      "path": "001/command-02-stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/command-02-stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true
+    },
+    {
+      "path": "001/command-02-stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/command-02-stdout.log",
+      "bytes": 67,
+      "sha256": "b22adee5ac5a93ade5d52f11392360e1c1a95ef2add2bd03365e896e8f1688e1",
+      "embedded": true
+    },
+    {
+      "path": "001/command-03-stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/command-03-stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true
+    },
+    {
+      "path": "001/command-03-stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/command-03-stdout.log",
+      "bytes": 31381,
+      "sha256": "9979dc4ba3a30e63ef3e93694b67293147924e8ef9d56afa83f6650c483fd98b",
+      "embedded": true
+    },
+    {
+      "path": "001/command-04-stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/command-04-stderr.log",
+      "bytes": 1387717,
+      "sha256": "5ccbb68632a3fdfd22804904412af013de2c7ebab869e80f2b7f9258475968f9",
+      "embedded": true
+    },
+    {
+      "path": "001/command-04-stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/command-04-stdout.log",
+      "bytes": 33295838,
+      "sha256": "93e9500d37b920dbc08296ab5bcee40fbe5c0c1c171edadb949336137afdcf9d",
+      "embedded": true
+    },
+    {
+      "path": "001/commands.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/commands.json",
+      "bytes": 3589,
+      "sha256": "74159c752e84381f90baad287a148f30b1b104608c63f594c3660bc2fa6e3926",
+      "embedded": true
+    },
+    {
+      "path": "001/export-result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/export-result.json",
+      "bytes": 8206,
+      "sha256": "e9311161662fc93f886711841dced1723886be644ee0f2d00301adf36cc46e9d",
+      "embedded": true
+    },
+    {
+      "path": "001/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/freeze.json",
+      "bytes": 593385,
+      "sha256": "384f579c53d1e2b3b93533682e9811364845b7ac6c7a424e366df68d2b341862",
+      "embedded": true
+    },
+    {
+      "path": "001/prepared.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/prepared.json",
+      "bytes": 159997,
+      "sha256": "22c0678926de9c2f2162ac2b6deac4b26be4b6b666a08bffe12d597831606cfe",
+      "embedded": true
+    },
+    {
+      "path": "001/run.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-001/run.py",
+      "bytes": 1941,
+      "sha256": "e52f415b495da1fdf781c4a628889f343af0a4fd5b966f0bd10d51d0ed7e58d5",
+      "embedded": true
+    },
+    {
+      "path": "002/authoring/.incant/cache/audio/08b4d5af1f19e43c1c228d7c6ca243e8d2362f27f336f87a347cb697f6ebca28.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/.incant/cache/audio/08b4d5af1f19e43c1c228d7c6ca243e8d2362f27f336f87a347cb697f6ebca28.json",
+      "bytes": 1096,
+      "sha256": "59363a80bbac59c6f139695407f2e76c31ed47b4345b03177801b01640480139",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/.incant/cache/audio/1e53cd57bfecb7115ad888e9d40f01c6d957b7130bd6f8975a2d16100d7eda46.ipcm",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/.incant/cache/audio/1e53cd57bfecb7115ad888e9d40f01c6d957b7130bd6f8975a2d16100d7eda46.ipcm",
+      "bytes": 691200,
+      "sha256": "1e53cd57bfecb7115ad888e9d40f01c6d957b7130bd6f8975a2d16100d7eda46",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/.incant/cache/audio/2b67780f0ec6ce10736909aa8ec0a3b386d6b308382b7eaf33d40a5a28977718.ipcm",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/.incant/cache/audio/2b67780f0ec6ce10736909aa8ec0a3b386d6b308382b7eaf33d40a5a28977718.ipcm",
+      "bytes": 8777144,
+      "sha256": "2b67780f0ec6ce10736909aa8ec0a3b386d6b308382b7eaf33d40a5a28977718",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/.incant/cache/audio/2e05653f8752033823f84b711926070f2d4d237aef0087105be217b401c89637.ipcm",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/.incant/cache/audio/2e05653f8752033823f84b711926070f2d4d237aef0087105be217b401c89637.ipcm",
+      "bytes": 345600,
+      "sha256": "2e05653f8752033823f84b711926070f2d4d237aef0087105be217b401c89637",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/.incant/cache/audio/384ae95c87bd2678c8b4b80f85bca02c73035338461b423f514e25fc891f9778.ipcm",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/.incant/cache/audio/384ae95c87bd2678c8b4b80f85bca02c73035338461b423f514e25fc891f9778.ipcm",
+      "bytes": 576000,
+      "sha256": "384ae95c87bd2678c8b4b80f85bca02c73035338461b423f514e25fc891f9778",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/.incant/cache/audio/3d3e537168e5bf96036e6625c0b5d55b12cf122a4715f7e8d77baf937edc8c58.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/.incant/cache/audio/3d3e537168e5bf96036e6625c0b5d55b12cf122a4715f7e8d77baf937edc8c58.json",
+      "bytes": 561,
+      "sha256": "fd7c43cb6347a021fcfe215fa66bbd817620ff596a04bc8b32259202352921ea",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/.incant/cache/audio/4ecb37a4cf20667d8d7922971a3b609c1898cb988fb96bc0a3857546f3123c4e.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/.incant/cache/audio/4ecb37a4cf20667d8d7922971a3b609c1898cb988fb96bc0a3857546f3123c4e.json",
+      "bytes": 963,
+      "sha256": "d9ca5bd9b8d52ced2826915913857e90baea981bcdfe6d9ace42e9105929fdd2",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/.incant/cache/audio/4f31a36d777d5ce2702b9a5237742cc8a69efa73d7067afae35dff713cbb935f.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/.incant/cache/audio/4f31a36d777d5ce2702b9a5237742cc8a69efa73d7067afae35dff713cbb935f.json",
+      "bytes": 9341,
+      "sha256": "8d841a107aff6df0511e0e9dfdf8c6d36cf01928d91dd82e415b26858f58cc96",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/.incant/cache/audio/6c94df51cc76f31375178021c1fec7775a5e448cba6bde2d1120f9efa6a32c56.ipcm",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/.incant/cache/audio/6c94df51cc76f31375178021c1fec7775a5e448cba6bde2d1120f9efa6a32c56.ipcm",
+      "bytes": 138240,
+      "sha256": "6c94df51cc76f31375178021c1fec7775a5e448cba6bde2d1120f9efa6a32c56",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/.incant/cache/audio/b63a98f27758a1bb7f2a4ba44f4fb8d263230bf401520116b87e6946cdf56117.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/.incant/cache/audio/b63a98f27758a1bb7f2a4ba44f4fb8d263230bf401520116b87e6946cdf56117.json",
+      "bytes": 764,
+      "sha256": "d5748ced504a28a21d72eaf9c0b26c3fee6ff900c07ea491c06b79c4c5680642",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/.incant/cache/fonts/0e1cd7265c7a2fa6109d995205dd8e070723bb824fe28daa8299ba1105063a1f.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/.incant/cache/fonts/0e1cd7265c7a2fa6109d995205dd8e070723bb824fe28daa8299ba1105063a1f.json",
+      "bytes": 323,
+      "sha256": "0538183b4a25a91d05296686e8092634f8c572c4c1dc34329c4685843c7661e1",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/.incant/cache/fonts/3127f0b873387ee37e2040135a06e9e9c05030f509eb63689529becf28b50384.ifont",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/.incant/cache/fonts/3127f0b873387ee37e2040135a06e9e9c05030f509eb63689529becf28b50384.ifont",
+      "bytes": 310300,
+      "sha256": "48804b712c66bb0ce00b2cc3272c7be18171810a3bb0555e3d247544951e0fdc",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/.incant/cache/fonts/74f2395f9b27e4c4ff06183b1baed5684ce4a090490bd00f42637547cca5da0f.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/.incant/cache/fonts/74f2395f9b27e4c4ff06183b1baed5684ce4a090490bd00f42637547cca5da0f.json",
+      "bytes": 317,
+      "sha256": "76b2977309e2485a6007bcb9c6e75df3a2e161dc576ebbf6be00f6b8b961d0f0",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/.incant/cache/fonts/9ec258961c8800c709f05586b6fca8a47061f3f776ac088bb87fbb2a462c116e.ifont",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/.incant/cache/fonts/9ec258961c8800c709f05586b6fca8a47061f3f776ac088bb87fbb2a462c116e.ifont",
+      "bytes": 13812,
+      "sha256": "db12e66306387bf4fdcf4b6be1fc31eed9f136e60211061e65cc97ba71500311",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/.incant/cache/fonts/ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56.ifont",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/.incant/cache/fonts/ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56.ifont",
+      "bytes": 765788,
+      "sha256": "8bd20a742cc19c0fe65b106d983ea1ed816c4cd5ca1c3d50bdc4d05aeb5f8e7a",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/.incant/cache/fonts/efbee025bcb27036123566525a911cd346bbe425cceb413eb800661df6b65767.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/.incant/cache/fonts/efbee025bcb27036123566525a911cd346bbe425cceb413eb800661df6b65767.json",
+      "bytes": 318,
+      "sha256": "ce4cd118624295e30ed4514c80bfad49c379702ead14327faf7ff92184d6034a",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/.incant/cache/models/018d021c673a74b618fc3516d8ab4e64b32a88f6c8323d0d84395e684d811c13.incmodel",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/.incant/cache/models/018d021c673a74b618fc3516d8ab4e64b32a88f6c8323d0d84395e684d811c13.incmodel",
+      "bytes": 25810,
+      "sha256": "509cf7c24253b675ed0a3d36ae344d35272050107a97c4aeae4db79417d132e7",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/.incant/cache/models/1649bb952607a07a912661374fa6a8c104a261d625b339a5aa2e096f52970bec.incmodel",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/.incant/cache/models/1649bb952607a07a912661374fa6a8c104a261d625b339a5aa2e096f52970bec.incmodel",
+      "bytes": 18726133,
+      "sha256": "b32c0ae9a0305abd7610713aa77a270e320090bbb31be1792a47f857ec939f99",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/.incant/cache/models/b85f1046e4d28277bd6bb792cdcff4dc070268bb95b3b8040b697bbf7f631262.incmodel",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/.incant/cache/models/b85f1046e4d28277bd6bb792cdcff4dc070268bb95b3b8040b697bbf7f631262.incmodel",
+      "bytes": 181633,
+      "sha256": "80dbf175a19dfda0db4c8e5c1992657fd435b6778d0b49d056755d088563e778",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/.incant/cache/models/da2588e81cf9f61d9b06dec86cbf644e5322cdc48594af5c9ac4e9aa08a6e1ad.incmodel",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/.incant/cache/models/da2588e81cf9f61d9b06dec86cbf644e5322cdc48594af5c9ac4e9aa08a6e1ad.incmodel",
+      "bytes": 207725,
+      "sha256": "a20e33175acb4af55ddad2168307ce3e0c02a23127566cac769e6f290bf799bf",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/.incant/cache/models/ec9f2569b551d61c9552dd311c3190e9dd262c96b8823e1f3c3c04819811bf99.incmodel",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/.incant/cache/models/ec9f2569b551d61c9552dd311c3190e9dd262c96b8823e1f3c3c04819811bf99.incmodel",
+      "bytes": 2832033,
+      "sha256": "88e2f2c56975f6bde0c0e7c131e870bf783fb86384a27d55b20fd40d40d77621",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/.incant/cache/textures/17da802ffd07a79a3041b9ba748180e8eccde82c6461eb24ce092cb378e94333.ktx2",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/.incant/cache/textures/17da802ffd07a79a3041b9ba748180e8eccde82c6461eb24ce092cb378e94333.ktx2",
+      "bytes": 699516,
+      "sha256": "17da802ffd07a79a3041b9ba748180e8eccde82c6461eb24ce092cb378e94333",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/.incant/cache/textures/5c2d2703c28f3deb6e566781de8833f45f442888602c7a72872b3ea7f5b141c8.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/.incant/cache/textures/5c2d2703c28f3deb6e566781de8833f45f442888602c7a72872b3ea7f5b141c8.json",
+      "bytes": 413,
+      "sha256": "f0bd2e231b9cc1839811dd7faf3a748bb2a41df3e95e84e45c727b5be5a5d840",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/.incant-source-transactions/01M4TAWWQA0Y0MQJ3N1C6QD1PP.old-receipt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/.incant-source-transactions/01M4TAWWQA0Y0MQJ3N1C6QD1PP.old-receipt",
+      "bytes": 26,
+      "sha256": "93d0a4aee1ada2d7ccc9aeedf54e0db089b8a5cf1cac42b9201c53f961037695",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/.incant-source-transactions/01M4TAWWQA0Y0MQJ3N1C6QD1PP.previous",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/.incant-source-transactions/01M4TAWWQA0Y0MQJ3N1C6QD1PP.previous",
+      "bytes": 16096,
+      "sha256": "8d5f5feec2235f1718235901c6073f7425acf971a4e087755a0b3833ecb79698",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/.incant-source-transactions/01M4TAWWRSS8Z8K4CPTTGAEVAR.old-receipt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/.incant-source-transactions/01M4TAWWRSS8Z8K4CPTTGAEVAR.old-receipt",
+      "bytes": 26,
+      "sha256": "387a5d3ee367ee5a2fb7784b35f75562c9693a98f9ed93ef2d64744a6a63c101",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/.incant-source-transactions/01M4TAX4XW74K42SW2CZMV3ZQZ.old-receipt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/.incant-source-transactions/01M4TAX4XW74K42SW2CZMV3ZQZ.old-receipt",
+      "bytes": 26,
+      "sha256": "bd0ed0eb3f185664bab97c841de6564be96f89945418aa33c95f414df3fb04e5",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/.incant-source-transactions/01M4TAX4ZJASNDMP3FBEJR2TNX.old-receipt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/.incant-source-transactions/01M4TAX4ZJASNDMP3FBEJR2TNX.old-receipt",
+      "bytes": 26,
+      "sha256": "922281094ef52386904ee1e21a6be61417cbf9a1184c4a22d6e9b7d63bc2a371",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/.incant-source-transactions/01M4TAX4ZJASNDMP3FBEJR2TNX.previous",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/.incant-source-transactions/01M4TAX4ZJASNDMP3FBEJR2TNX.previous",
+      "bytes": 16096,
+      "sha256": "8d5f5feec2235f1718235901c6073f7425acf971a4e087755a0b3833ecb79698",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/.incant-source-transactions/01M4TAX539SMCXQE6V74P1W4G0.old-receipt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/.incant-source-transactions/01M4TAX539SMCXQE6V74P1W4G0.old-receipt",
+      "bytes": 26,
+      "sha256": "29854b19a476b534bc23a490098bc1ee99aad0ea72a91ea234979c111a950c5f",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/.incant-source-transactions/01M4TAX539SMCXQE6V74P1W4G0.previous",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/.incant-source-transactions/01M4TAX539SMCXQE6V74P1W4G0.previous",
+      "bytes": 16096,
+      "sha256": "8d5f5feec2235f1718235901c6073f7425acf971a4e087755a0b3833ecb79698",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/.incant-source-transactions/01M4TAX55C86YMCG7Q1T41JS02.old-receipt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/.incant-source-transactions/01M4TAX55C86YMCG7Q1T41JS02.old-receipt",
+      "bytes": 26,
+      "sha256": "77d3e9112ce10be416f2c5ff870028732b3f8ac7699406eb40f7dde2bfb3a1be",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/.incant-source-transactions/01M4TAX55C86YMCG7Q1T41JS02.previous",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/.incant-source-transactions/01M4TAX55C86YMCG7Q1T41JS02.previous",
+      "bytes": 16096,
+      "sha256": "8d5f5feec2235f1718235901c6073f7425acf971a4e087755a0b3833ecb79698",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/.incant-source-transactions/01M4TAX580M4HA1ZKKWF4EBFBK.old-receipt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/.incant-source-transactions/01M4TAX580M4HA1ZKKWF4EBFBK.old-receipt",
+      "bytes": 26,
+      "sha256": "1c0223deef56c907d511bf0707fe78a8544caf30732548fdc12bb987e9b48f54",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/.incant-source-transactions/01M4TAX580M4HA1ZKKWF4EBFBK.previous",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/.incant-source-transactions/01M4TAX580M4HA1ZKKWF4EBFBK.previous",
+      "bytes": 16096,
+      "sha256": "8d5f5feec2235f1718235901c6073f7425acf971a4e087755a0b3833ecb79698",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/.incant-source-transactions/lock",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/.incant-source-transactions/lock",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/.incant-source-transactions/receipt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/.incant-source-transactions/receipt",
+      "bytes": 26,
+      "sha256": "0319c7495bab5263c0c9849974c210c2fd8a84c11b05f5a43dbabe3c1bd0597f",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/art/canyon.bin",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/art/canyon.bin",
+      "bytes": 3161612,
+      "sha256": "c32b0431a835c4c998cd69ff850291e2ed888ca0fe84e0907d1afebeba90e08d",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/art/canyon.gltf",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/art/canyon.gltf",
+      "bytes": 22404,
+      "sha256": "a8622cbd4caea047abd781309fc3869f5207117815ad65631c5e52d317ce30f7",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/art/cliff_albedo.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/art/cliff_albedo.png",
+      "bytes": 388767,
+      "sha256": "d1fed013a536eb47c40252b5e5f8375f4209509ed51ed7741950eb365f917069",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/art/cliff_normal.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/art/cliff_normal.png",
+      "bytes": 453616,
+      "sha256": "db93eb916ad971a8ee32ce3a5985d1c88115d113932ac7a358dc9702c7084939",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/art/core_albedo.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/art/core_albedo.png",
+      "bytes": 6691,
+      "sha256": "b1c535ceafd2c64e03e79c3e46eaa63cab18df359bbf77a70292af7d7e68946e",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/art/core_emissive.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/art/core_emissive.png",
+      "bytes": 8040,
+      "sha256": "42576b50d661af3f3940eeadc4217122470263695dcb0a7ce9509c515b9d97d1",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/art/cue_hurt.wav",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/art/cue_hurt.wav",
+      "bytes": 34604,
+      "sha256": "209bf03bf0d9eeedf13d67a9bf5e526b8b9d76b90350c116a07b304d6b2212d9",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/art/cue_lost.wav",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/art/cue_lost.wav",
+      "bytes": 144044,
+      "sha256": "d5757fbfa8f6b4e3e427c0b2748c9343011088ea520715bc91a176ddfa3ac465",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/art/cue_pickup.wav",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/art/cue_pickup.wav",
+      "bytes": 86444,
+      "sha256": "a9cfe5207be237b6976cdafb2944b0f71e63c1a73c7f7608f629ee96bbbcd0c9",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/art/cue_won.wav",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/art/cue_won.wav",
+      "bytes": 172844,
+      "sha256": "8b17713a334cb6d830310985b31cbb3c6c7653922e0c03ce121552765a6541e0",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/art/far_albedo.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/art/far_albedo.png",
+      "bytes": 7178,
+      "sha256": "1f09709ceb8101b85a6ba8b39f4734688624c75ebf4415d69208ad5081b2c902",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/art/floor_albedo.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/art/floor_albedo.png",
+      "bytes": 842112,
+      "sha256": "81445089016eba8e5d992f5d058890a75d06486f5468542df5eededd2e4c3c87",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/art/manifest.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/art/manifest.json",
+      "bytes": 3722,
+      "sha256": "19d87aca92ee147526a7eb1cfdcc648e6bbe949a37a127a61f3687a695632956",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/art/mesa_loop.wav",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/art/mesa_loop.wav",
+      "bytes": 4388616,
+      "sha256": "4f80337e2eef1ec9b414ae8959435fd114a6d77bb85b10022aef7f3abb968816",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/art/mite.bin",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/art/mite.bin",
+      "bytes": 44724,
+      "sha256": "2809da2175266acf004be462557404623f727e84c4400fc91363d37c2d9220e7",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/art/mite.gltf",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/art/mite.gltf",
+      "bytes": 5676,
+      "sha256": "62d807da1b4623e69670e467ef045386df1dc83c999aa1bdb45abf5814c868e2",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/art/mite_albedo.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/art/mite_albedo.png",
+      "bytes": 7592,
+      "sha256": "d3e231c3435475dd201652dc7e50ab835b623ed50042c6d14eba088193c65fde",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/art/mite_emissive.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/art/mite_emissive.png",
+      "bytes": 7495,
+      "sha256": "5298667c8f706a5a4418ae08bd1e93d943e5a382d36b40730991bf2d43befe76",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/art/pad_albedo.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/art/pad_albedo.png",
+      "bytes": 63444,
+      "sha256": "d0cfa2eeaf175365e390491051d05c7203e0b6dc2afc8b7fd950f927a1a3f002",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/art/rock_albedo.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/art/rock_albedo.png",
+      "bytes": 59674,
+      "sha256": "c6ea897e8c3811c4ce737d0dabd2d0b85aa4018a21e97aa8a8be414895ff9f6f",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/art/sample.bin",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/art/sample.bin",
+      "bytes": 9428,
+      "sha256": "5f17bd5753223c313f622778e8eb6da801e93fe90ec85128c845a17b92c599fc",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/art/sample.gltf",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/art/sample.gltf",
+      "bytes": 4325,
+      "sha256": "6eda3386082556270d7dd567d02fda5f7e2808792705786c8729d892078179ef",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/art/sky.bin",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/art/sky.bin",
+      "bytes": 66848,
+      "sha256": "5908df68041666952ab3808fbcd5578b960595cc7a5258d0bd4b41c83ea6d27f",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/art/sky.gltf",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/art/sky.gltf",
+      "bytes": 1887,
+      "sha256": "d752767b74d4bc39329dbd022c314bd3298c4529c3b5a325f8bcf29d03168e08",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/art/sky_dome.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/art/sky_dome.png",
+      "bytes": 148023,
+      "sha256": "dea2f93735ff70b2e6cf543f4bcdfdb9324e4cb72a31abe3cfdd5e0c047d69c0",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/art/sky_environment.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/art/sky_environment.png",
+      "bytes": 59757,
+      "sha256": "8bf279ee439137e9e1da9d1dc1f1868477b4f398e607a127524dc0d209571d82",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/art/surveyor.bin",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/art/surveyor.bin",
+      "bytes": 48372,
+      "sha256": "bfef4a6f7af144a221a86ae9977df320942ff1fcb252ee1f7d30ae9e28d1da5f",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/art/surveyor.gltf",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/art/surveyor.gltf",
+      "bytes": 9517,
+      "sha256": "8633af82a9e2e247c8c1509ef30f1f41e6866687b492c8329361fdec8d084003",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/art/top_albedo.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/art/top_albedo.png",
+      "bytes": 229296,
+      "sha256": "0456e5dd8c177da4f1296428356cba8d94815e69568342086def5e88cf107d8a",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/art/top_normal.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/art/top_normal.png",
+      "bytes": 121528,
+      "sha256": "5e9171d91392549a8e07b852273b0de5aab1a8c398ce1121712ff1e344ffd5ab",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/art/valley.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/art/valley.png",
+      "bytes": 10020,
+      "sha256": "c866ba77b019320be6fea2c8f4d5d988664f9816c20b98a8c1ef007dfb57d93e",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/bindings.journal.jsonl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/bindings.journal.jsonl",
+      "bytes": 1590759,
+      "sha256": "39f77262901e4a82caab18e4ab0cf82a5de5f1e45f0c0f84a4000b4213e1bdde",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/core.journal.jsonl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/core.journal.jsonl",
+      "bytes": 1617905,
+      "sha256": "2415936e1b5d00ed0522e007afe69e93f3f629406b5e355435b9b408cf4e1274",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/core.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/core.json",
+      "bytes": 112379,
+      "sha256": "0df80837afec5e9074387213d4a7b257deb3b4053748d4a4b9b50aec5516b4c3",
+      "embedded": true
+    },
+    {
+      "path": "002/authoring/fonts/CoreSampleSC-Regular.ttf",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/fonts/CoreSampleSC-Regular.ttf",
+      "bytes": 13764,
+      "sha256": "9ec258961c8800c709f05586b6fca8a47061f3f776ac088bb87fbb2a462c116e",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/fonts/Inter-Regular.ttf",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/fonts/Inter-Regular.ttf",
+      "bytes": 310252,
+      "sha256": "3127f0b873387ee37e2040135a06e9e9c05030f509eb63689529becf28b50384",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/fonts/NotoSansArabic.ttf",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/fonts/NotoSansArabic.ttf",
+      "bytes": 765740,
+      "sha256": "ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56",
+      "embedded": false
+    },
+    {
+      "path": "002/authoring/gameplay.ts",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/authoring/gameplay.ts",
+      "bytes": 16096,
+      "sha256": "8d5f5feec2235f1718235901c6073f7425acf971a4e087755a0b3833ecb79698",
+      "embedded": true
+    },
+    {
+      "path": "002/command-00-stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/command-00-stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true
+    },
+    {
+      "path": "002/command-00-stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/command-00-stdout.log",
+      "bytes": 77,
+      "sha256": "1dc5ff25a027f5c0a04ac183e96b6665181272c327130fb0663c5c1be8aad81d",
+      "embedded": true
+    },
+    {
+      "path": "002/command-01-stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/command-01-stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true
+    },
+    {
+      "path": "002/command-01-stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/command-01-stdout.log",
+      "bytes": 192,
+      "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "embedded": true
+    },
+    {
+      "path": "002/command-02-stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/command-02-stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true
+    },
+    {
+      "path": "002/command-02-stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/command-02-stdout.log",
+      "bytes": 67,
+      "sha256": "b22adee5ac5a93ade5d52f11392360e1c1a95ef2add2bd03365e896e8f1688e1",
+      "embedded": true
+    },
+    {
+      "path": "002/command-03-stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/command-03-stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true
+    },
+    {
+      "path": "002/command-03-stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/command-03-stdout.log",
+      "bytes": 31381,
+      "sha256": "9979dc4ba3a30e63ef3e93694b67293147924e8ef9d56afa83f6650c483fd98b",
+      "embedded": true
+    },
+    {
+      "path": "002/command-04-stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/command-04-stderr.log",
+      "bytes": 1398947,
+      "sha256": "044bb07abb892142b56c1118993ead4244f363f9ddb52e30b0459504695b75b6",
+      "embedded": true
+    },
+    {
+      "path": "002/command-04-stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/command-04-stdout.log",
+      "bytes": 33300251,
+      "sha256": "f382c407d8a5501ca6d77c89900d6b7ef88747a2326c72df74d36dcb0480b50d",
+      "embedded": true
+    },
+    {
+      "path": "002/command-05-stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/command-05-stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true
+    },
+    {
+      "path": "002/command-05-stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/command-05-stdout.log",
+      "bytes": 1819511,
+      "sha256": "74e35aeefd9504938e6803521532f30a0404924726710407b3584020aaa4829f",
+      "embedded": true
+    },
+    {
+      "path": "002/command-06-stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/command-06-stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true
+    },
+    {
+      "path": "002/command-06-stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/command-06-stdout.log",
+      "bytes": 2226,
+      "sha256": "a6de4ceddefb4527c5fe986636466a29773397d03f4503d56c3061501f176806",
+      "embedded": true
+    },
+    {
+      "path": "002/commands.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/commands.json",
+      "bytes": 5246,
+      "sha256": "d98c81df6174de24e00532772014706559c5565b04213d27764a4125d75369fb",
+      "embedded": true
+    },
+    {
+      "path": "002/export-result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/export-result.json",
+      "bytes": 268,
+      "sha256": "28a76acfcaf4e013295dbacfa12f6d12447c4be63a72fa0c3a9af18abad13216",
+      "embedded": true
+    },
+    {
+      "path": "002/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/freeze.json",
+      "bytes": 593385,
+      "sha256": "384f579c53d1e2b3b93533682e9811364845b7ac6c7a424e366df68d2b341862",
+      "embedded": true
+    },
+    {
+      "path": "002/functional-win/command.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/functional-win/command.json",
+      "bytes": 5910,
+      "sha256": "977f34e0e5a6441963a855aded6df3fb266056ac63388eacb0a5d2a512e49185",
+      "embedded": true
+    },
+    {
+      "path": "002/functional-win/output.pcm",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/functional-win/output.pcm",
+      "bytes": 13798400,
+      "sha256": "ccabf2c68b6388ac554ac3efb5609ddf6b4a45d1a3f316891d5f344094e99ee3",
+      "embedded": false
+    },
+    {
+      "path": "002/functional-win/stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/functional-win/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true
+    },
+    {
+      "path": "002/functional-win/stdout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/functional-win/stdout.json",
+      "bytes": 5383,
+      "sha256": "58accfbdedd61564950c5ecc6cb61a38e81bf1bc2b88b4cfc86c406a3c96ab7f",
+      "embedded": true
+    },
+    {
+      "path": "002/functional-win/win-input.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/functional-win/win-input.json",
+      "bytes": 27753,
+      "sha256": "4fbfffad568d1b7b8eae3b7b9041579fce6f0e8e67c83a66f76c9f78a1c5fcbf",
+      "embedded": true
+    },
+    {
+      "path": "002/functional-win/win-observe.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/functional-win/win-observe.json",
+      "bytes": 656,
+      "sha256": "f083760b364f0875aa29f736fa52e98a999302ed078cc42527a9c2aaab9b8548",
+      "embedded": true
+    },
+    {
+      "path": "002/matched-runs.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/matched-runs.json",
+      "bytes": 2112,
+      "sha256": "4771ed7f8e4665aefb69e40539280382e5f0fb2bb74cd3d84d7876beb65922ae",
+      "embedded": true
+    },
+    {
+      "path": "002/measured-0/command.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/measured-0/command.json",
+      "bytes": 1395,
+      "sha256": "2b509c348eed32977e00b43fc9d1122f8b01002802778b3c75b9cf53c9003c86",
+      "embedded": true
+    },
+    {
+      "path": "002/measured-0/input.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/measured-0/input.json",
+      "bytes": 27753,
+      "sha256": "4fbfffad568d1b7b8eae3b7b9041579fce6f0e8e67c83a66f76c9f78a1c5fcbf",
+      "embedded": true
+    },
+    {
+      "path": "002/measured-0/measurement.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/measured-0/measurement.json",
+      "bytes": 11813,
+      "sha256": "59e661f613b161507358f54526a2b8284220703e9b2b835c6fb6b81097023f07",
+      "embedded": true
+    },
+    {
+      "path": "002/measured-0/observe.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/measured-0/observe.json",
+      "bytes": 656,
+      "sha256": "f083760b364f0875aa29f736fa52e98a999302ed078cc42527a9c2aaab9b8548",
+      "embedded": true
+    },
+    {
+      "path": "002/measured-0/output.pcm",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/measured-0/output.pcm",
+      "bytes": 13798400,
+      "sha256": "ccabf2c68b6388ac554ac3efb5609ddf6b4a45d1a3f316891d5f344094e99ee3",
+      "embedded": false
+    },
+    {
+      "path": "002/measured-0/stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/measured-0/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true
+    },
+    {
+      "path": "002/measured-0/stdout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/measured-0/stdout.json",
+      "bytes": 534234,
+      "sha256": "52327d766d2fc89b039292a5de5e1cf4520725acbdabc80f2fc0e8b61079cc82",
+      "embedded": true
+    },
+    {
+      "path": "002/measured-1/command.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/measured-1/command.json",
+      "bytes": 1390,
+      "sha256": "3cdb0c23437d41a3ed948726285862a950459e38f6165764b12d12e7b983c9dc",
+      "embedded": true
+    },
+    {
+      "path": "002/measured-1/input.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/measured-1/input.json",
+      "bytes": 27753,
+      "sha256": "4fbfffad568d1b7b8eae3b7b9041579fce6f0e8e67c83a66f76c9f78a1c5fcbf",
+      "embedded": true
+    },
+    {
+      "path": "002/measured-1/measurement.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/measured-1/measurement.json",
+      "bytes": 12087,
+      "sha256": "88baabd29f63f5fd18866576bd018fe367d61b9f2dd37fba34cd779c7cfd7eb6",
+      "embedded": true
+    },
+    {
+      "path": "002/measured-1/observe.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/measured-1/observe.json",
+      "bytes": 656,
+      "sha256": "f083760b364f0875aa29f736fa52e98a999302ed078cc42527a9c2aaab9b8548",
+      "embedded": true
+    },
+    {
+      "path": "002/measured-1/output.pcm",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/measured-1/output.pcm",
+      "bytes": 13798400,
+      "sha256": "ccabf2c68b6388ac554ac3efb5609ddf6b4a45d1a3f316891d5f344094e99ee3",
+      "embedded": false
+    },
+    {
+      "path": "002/measured-1/stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/measured-1/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true
+    },
+    {
+      "path": "002/measured-1/stdout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/measured-1/stdout.json",
+      "bytes": 534231,
+      "sha256": "1d3b1718bae7582e0904132faddc3e2e86982d2ede27629a46dbd1274716941e",
+      "embedded": true
+    },
+    {
+      "path": "002/measured-2/command.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/measured-2/command.json",
+      "bytes": 1390,
+      "sha256": "d4547698a2731cce5782da3f65bb52d98ad13699f5344ba3ecbd9968271c0b62",
+      "embedded": true
+    },
+    {
+      "path": "002/measured-2/input.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/measured-2/input.json",
+      "bytes": 27753,
+      "sha256": "4fbfffad568d1b7b8eae3b7b9041579fce6f0e8e67c83a66f76c9f78a1c5fcbf",
+      "embedded": true
+    },
+    {
+      "path": "002/measured-2/measurement.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/measured-2/measurement.json",
+      "bytes": 12096,
+      "sha256": "770aa337595d16abe15df64245851814b997c8e55b4220430c70acd952c4ebed",
+      "embedded": true
+    },
+    {
+      "path": "002/measured-2/observe.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/measured-2/observe.json",
+      "bytes": 656,
+      "sha256": "f083760b364f0875aa29f736fa52e98a999302ed078cc42527a9c2aaab9b8548",
+      "embedded": true
+    },
+    {
+      "path": "002/measured-2/output.pcm",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/measured-2/output.pcm",
+      "bytes": 13798400,
+      "sha256": "ccabf2c68b6388ac554ac3efb5609ddf6b4a45d1a3f316891d5f344094e99ee3",
+      "embedded": false
+    },
+    {
+      "path": "002/measured-2/stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/measured-2/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true
+    },
+    {
+      "path": "002/measured-2/stdout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/measured-2/stdout.json",
+      "bytes": 534226,
+      "sha256": "16026a2e6ecdd7326e3f3995455ed83371d5983002ae4f42f024a16bfc8b98d1",
+      "embedded": true
+    },
+    {
+      "path": "002/package/build.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/package/build.log",
+      "bytes": 1398947,
+      "sha256": "044bb07abb892142b56c1118993ead4244f363f9ddb52e30b0459504695b75b6",
+      "embedded": true
+    },
+    {
+      "path": "002/package/export.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/package/export.json",
+      "bytes": 18724,
+      "sha256": "82d3d573a15cbd308a8f169536ec995564c49081679a806d1dc973f6e667a038",
+      "embedded": true
+    },
+    {
+      "path": "002/package/normal-dependencies.txt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/package/normal-dependencies.txt",
+      "bytes": 31381,
+      "sha256": "9979dc4ba3a30e63ef3e93694b67293147924e8ef9d56afa83f6650c483fd98b",
+      "embedded": true
+    },
+    {
+      "path": "002/package/player/data/audio/08b4d5af1f19e43c1c228d7c6ca243e8d2362f27f336f87a347cb697f6ebca28.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/package/player/data/audio/08b4d5af1f19e43c1c228d7c6ca243e8d2362f27f336f87a347cb697f6ebca28.json",
+      "bytes": 1096,
+      "sha256": "59363a80bbac59c6f139695407f2e76c31ed47b4345b03177801b01640480139",
+      "embedded": false
+    },
+    {
+      "path": "002/package/player/data/audio/1e53cd57bfecb7115ad888e9d40f01c6d957b7130bd6f8975a2d16100d7eda46.ipcm",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/package/player/data/audio/1e53cd57bfecb7115ad888e9d40f01c6d957b7130bd6f8975a2d16100d7eda46.ipcm",
+      "bytes": 691200,
+      "sha256": "1e53cd57bfecb7115ad888e9d40f01c6d957b7130bd6f8975a2d16100d7eda46",
+      "embedded": false
+    },
+    {
+      "path": "002/package/player/data/audio/2b67780f0ec6ce10736909aa8ec0a3b386d6b308382b7eaf33d40a5a28977718.ipcm",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/package/player/data/audio/2b67780f0ec6ce10736909aa8ec0a3b386d6b308382b7eaf33d40a5a28977718.ipcm",
+      "bytes": 8777144,
+      "sha256": "2b67780f0ec6ce10736909aa8ec0a3b386d6b308382b7eaf33d40a5a28977718",
+      "embedded": false
+    },
+    {
+      "path": "002/package/player/data/audio/2e05653f8752033823f84b711926070f2d4d237aef0087105be217b401c89637.ipcm",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/package/player/data/audio/2e05653f8752033823f84b711926070f2d4d237aef0087105be217b401c89637.ipcm",
+      "bytes": 345600,
+      "sha256": "2e05653f8752033823f84b711926070f2d4d237aef0087105be217b401c89637",
+      "embedded": false
+    },
+    {
+      "path": "002/package/player/data/audio/384ae95c87bd2678c8b4b80f85bca02c73035338461b423f514e25fc891f9778.ipcm",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/package/player/data/audio/384ae95c87bd2678c8b4b80f85bca02c73035338461b423f514e25fc891f9778.ipcm",
+      "bytes": 576000,
+      "sha256": "384ae95c87bd2678c8b4b80f85bca02c73035338461b423f514e25fc891f9778",
+      "embedded": false
+    },
+    {
+      "path": "002/package/player/data/audio/3d3e537168e5bf96036e6625c0b5d55b12cf122a4715f7e8d77baf937edc8c58.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/package/player/data/audio/3d3e537168e5bf96036e6625c0b5d55b12cf122a4715f7e8d77baf937edc8c58.json",
+      "bytes": 561,
+      "sha256": "fd7c43cb6347a021fcfe215fa66bbd817620ff596a04bc8b32259202352921ea",
+      "embedded": false
+    },
+    {
+      "path": "002/package/player/data/audio/4ecb37a4cf20667d8d7922971a3b609c1898cb988fb96bc0a3857546f3123c4e.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/package/player/data/audio/4ecb37a4cf20667d8d7922971a3b609c1898cb988fb96bc0a3857546f3123c4e.json",
+      "bytes": 963,
+      "sha256": "d9ca5bd9b8d52ced2826915913857e90baea981bcdfe6d9ace42e9105929fdd2",
+      "embedded": false
+    },
+    {
+      "path": "002/package/player/data/audio/4f31a36d777d5ce2702b9a5237742cc8a69efa73d7067afae35dff713cbb935f.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/package/player/data/audio/4f31a36d777d5ce2702b9a5237742cc8a69efa73d7067afae35dff713cbb935f.json",
+      "bytes": 9341,
+      "sha256": "8d841a107aff6df0511e0e9dfdf8c6d36cf01928d91dd82e415b26858f58cc96",
+      "embedded": false
+    },
+    {
+      "path": "002/package/player/data/audio/6c94df51cc76f31375178021c1fec7775a5e448cba6bde2d1120f9efa6a32c56.ipcm",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/package/player/data/audio/6c94df51cc76f31375178021c1fec7775a5e448cba6bde2d1120f9efa6a32c56.ipcm",
+      "bytes": 138240,
+      "sha256": "6c94df51cc76f31375178021c1fec7775a5e448cba6bde2d1120f9efa6a32c56",
+      "embedded": false
+    },
+    {
+      "path": "002/package/player/data/audio/b63a98f27758a1bb7f2a4ba44f4fb8d263230bf401520116b87e6946cdf56117.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/package/player/data/audio/b63a98f27758a1bb7f2a4ba44f4fb8d263230bf401520116b87e6946cdf56117.json",
+      "bytes": 764,
+      "sha256": "d5748ced504a28a21d72eaf9c0b26c3fee6ff900c07ea491c06b79c4c5680642",
+      "embedded": false
+    },
+    {
+      "path": "002/package/player/data/clips.bin",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/package/player/data/clips.bin",
+      "bytes": 252,
+      "sha256": "1047a8c04273bb4b8157d4c933e93de4aab1128b7891d0e195431722f369d865",
+      "embedded": false
+    },
+    {
+      "path": "002/package/player/data/empty-input.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/package/player/data/empty-input.json",
+      "bytes": 103,
+      "sha256": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+      "embedded": false
+    },
+    {
+      "path": "002/package/player/data/fonts/0e1cd7265c7a2fa6109d995205dd8e070723bb824fe28daa8299ba1105063a1f.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/package/player/data/fonts/0e1cd7265c7a2fa6109d995205dd8e070723bb824fe28daa8299ba1105063a1f.json",
+      "bytes": 323,
+      "sha256": "0538183b4a25a91d05296686e8092634f8c572c4c1dc34329c4685843c7661e1",
+      "embedded": false
+    },
+    {
+      "path": "002/package/player/data/fonts/3127f0b873387ee37e2040135a06e9e9c05030f509eb63689529becf28b50384.ifont",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/package/player/data/fonts/3127f0b873387ee37e2040135a06e9e9c05030f509eb63689529becf28b50384.ifont",
+      "bytes": 310300,
+      "sha256": "48804b712c66bb0ce00b2cc3272c7be18171810a3bb0555e3d247544951e0fdc",
+      "embedded": false
+    },
+    {
+      "path": "002/package/player/data/fonts/74f2395f9b27e4c4ff06183b1baed5684ce4a090490bd00f42637547cca5da0f.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/package/player/data/fonts/74f2395f9b27e4c4ff06183b1baed5684ce4a090490bd00f42637547cca5da0f.json",
+      "bytes": 317,
+      "sha256": "76b2977309e2485a6007bcb9c6e75df3a2e161dc576ebbf6be00f6b8b961d0f0",
+      "embedded": false
+    },
+    {
+      "path": "002/package/player/data/fonts/9ec258961c8800c709f05586b6fca8a47061f3f776ac088bb87fbb2a462c116e.ifont",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/package/player/data/fonts/9ec258961c8800c709f05586b6fca8a47061f3f776ac088bb87fbb2a462c116e.ifont",
+      "bytes": 13812,
+      "sha256": "db12e66306387bf4fdcf4b6be1fc31eed9f136e60211061e65cc97ba71500311",
+      "embedded": false
+    },
+    {
+      "path": "002/package/player/data/fonts/ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56.ifont",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/package/player/data/fonts/ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56.ifont",
+      "bytes": 765788,
+      "sha256": "8bd20a742cc19c0fe65b106d983ea1ed816c4cd5ca1c3d50bdc4d05aeb5f8e7a",
+      "embedded": false
+    },
+    {
+      "path": "002/package/player/data/fonts/efbee025bcb27036123566525a911cd346bbe425cceb413eb800661df6b65767.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/package/player/data/fonts/efbee025bcb27036123566525a911cd346bbe425cceb413eb800661df6b65767.json",
+      "bytes": 318,
+      "sha256": "ce4cd118624295e30ed4514c80bfad49c379702ead14327faf7ff92184d6034a",
+      "embedded": false
+    },
+    {
+      "path": "002/package/player/data/input-actions.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/package/player/data/input-actions.json",
+      "bytes": 859,
+      "sha256": "aa13d11e49bbd03a2bfb59cc64b60701f83e5b1b4985f4272c12b4640dd12bdf",
+      "embedded": false
+    },
+    {
+      "path": "002/package/player/data/models/018d021c673a74b618fc3516d8ab4e64b32a88f6c8323d0d84395e684d811c13.incmodel",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/package/player/data/models/018d021c673a74b618fc3516d8ab4e64b32a88f6c8323d0d84395e684d811c13.incmodel",
+      "bytes": 25810,
+      "sha256": "509cf7c24253b675ed0a3d36ae344d35272050107a97c4aeae4db79417d132e7",
+      "embedded": false
+    },
+    {
+      "path": "002/package/player/data/models/1649bb952607a07a912661374fa6a8c104a261d625b339a5aa2e096f52970bec.incmodel",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/package/player/data/models/1649bb952607a07a912661374fa6a8c104a261d625b339a5aa2e096f52970bec.incmodel",
+      "bytes": 18726133,
+      "sha256": "b32c0ae9a0305abd7610713aa77a270e320090bbb31be1792a47f857ec939f99",
+      "embedded": false
+    },
+    {
+      "path": "002/package/player/data/models/b85f1046e4d28277bd6bb792cdcff4dc070268bb95b3b8040b697bbf7f631262.incmodel",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/package/player/data/models/b85f1046e4d28277bd6bb792cdcff4dc070268bb95b3b8040b697bbf7f631262.incmodel",
+      "bytes": 181633,
+      "sha256": "80dbf175a19dfda0db4c8e5c1992657fd435b6778d0b49d056755d088563e778",
+      "embedded": false
+    },
+    {
+      "path": "002/package/player/data/models/da2588e81cf9f61d9b06dec86cbf644e5322cdc48594af5c9ac4e9aa08a6e1ad.incmodel",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/package/player/data/models/da2588e81cf9f61d9b06dec86cbf644e5322cdc48594af5c9ac4e9aa08a6e1ad.incmodel",
+      "bytes": 207725,
+      "sha256": "a20e33175acb4af55ddad2168307ce3e0c02a23127566cac769e6f290bf799bf",
+      "embedded": false
+    },
+    {
+      "path": "002/package/player/data/models/ec9f2569b551d61c9552dd311c3190e9dd262c96b8823e1f3c3c04819811bf99.incmodel",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/package/player/data/models/ec9f2569b551d61c9552dd311c3190e9dd262c96b8823e1f3c3c04819811bf99.incmodel",
+      "bytes": 2832033,
+      "sha256": "88e2f2c56975f6bde0c0e7c131e870bf783fb86384a27d55b20fd40d40d77621",
+      "embedded": false
+    },
+    {
+      "path": "002/package/player/data/package.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/package/player/data/package.json",
+      "bytes": 479,
+      "sha256": "5c4fe3a11168699b8b3560227a4efc552bc6a40c8bdfe151264f7b1d7c1e39b8",
+      "embedded": true
+    },
+    {
+      "path": "002/package/player/data/textures/17da802ffd07a79a3041b9ba748180e8eccde82c6461eb24ce092cb378e94333.ktx2",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/package/player/data/textures/17da802ffd07a79a3041b9ba748180e8eccde82c6461eb24ce092cb378e94333.ktx2",
+      "bytes": 699516,
+      "sha256": "17da802ffd07a79a3041b9ba748180e8eccde82c6461eb24ce092cb378e94333",
+      "embedded": false
+    },
+    {
+      "path": "002/package/player/data/textures/5c2d2703c28f3deb6e566781de8833f45f442888602c7a72872b3ea7f5b141c8.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/package/player/data/textures/5c2d2703c28f3deb6e566781de8833f45f442888602c7a72872b3ea7f5b141c8.json",
+      "bytes": 413,
+      "sha256": "f0bd2e231b9cc1839811dd7faf3a748bb2a41df3e95e84e45c727b5be5a5d840",
+      "embedded": false
+    },
+    {
+      "path": "002/package/player/data/world.scene",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/package/player/data/world.scene",
+      "bytes": 18751,
+      "sha256": "1fdf7948747b9567ee44fd4dcadc698932e59faa9526ccd6a1996e374c18139e",
+      "embedded": false
+    },
+    {
+      "path": "002/package/player/incant_game_player",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/package/player/incant_game_player",
+      "bytes": 11894976,
+      "sha256": "64824523e66398d5b320b8f9ab895c5375c034b78a80a4936dd305d5577f57d5",
+      "embedded": false
+    },
+    {
+      "path": "002/package/project-build.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/package/project-build.json",
+      "bytes": 5067,
+      "sha256": "d07abe7456b3e2d21c62fbf50b8fb3a0bb3ea4961a083500f6f72be920ddcf12",
+      "embedded": true
+    },
+    {
+      "path": "002/package/symbols/behavior.js.map",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/package/symbols/behavior.js.map",
+      "bytes": 31819,
+      "sha256": "d0372a1e08265e3f65682848f629ebdf870e0ac8af6016fd8bd10415ac7ad23a",
+      "embedded": false
+    },
+    {
+      "path": "002/package/symbols/incant_game_player.dSYM/Contents/Info.plist",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/package/symbols/incant_game_player.dSYM/Contents/Info.plist",
+      "bytes": 664,
+      "sha256": "f24bbd4a2d79c23d91ac44962706390d5761b8598560aed5151bee9cf4f7c044",
+      "embedded": false
+    },
+    {
+      "path": "002/package/symbols/incant_game_player.dSYM/Contents/Resources/DWARF/incant_game_player-f45d8a73f22fa1f9",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/package/symbols/incant_game_player.dSYM/Contents/Resources/DWARF/incant_game_player-f45d8a73f22fa1f9",
+      "bytes": 251197050,
+      "sha256": "01642ed76eefb39db529e610512f82f57492fd5007765b30c986fd5dcd197d37",
+      "embedded": false
+    },
+    {
+      "path": "002/package/symbols/incant_game_player.dSYM/Contents/Resources/Relocations/aarch64/incant_game_player-f45d8a73f22fa1f9.yml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/package/symbols/incant_game_player.dSYM/Contents/Resources/Relocations/aarch64/incant_game_player-f45d8a73f22fa1f9.yml",
+      "bytes": 3294369,
+      "sha256": "42a6025e53446dd6a459223c5767d9f58e90a089c6388b86a944ec8500331070",
+      "embedded": false
+    },
+    {
+      "path": "002/package/symbols/script-symbols.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/package/symbols/script-symbols.json",
+      "bytes": 1359,
+      "sha256": "e7d298fe7fa1eb63ad7c7d9d242dde0f31caa6e2ce9300250472b9bfffceca9c",
+      "embedded": false
+    },
+    {
+      "path": "002/prepared.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/prepared.json",
+      "bytes": 159997,
+      "sha256": "22c0678926de9c2f2162ac2b6deac4b26be4b6b666a08bffe12d597831606cfe",
+      "embedded": true
+    },
+    {
+      "path": "002/run.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/run.py",
+      "bytes": 1941,
+      "sha256": "e52f415b495da1fdf781c4a628889f343af0a4fd5b966f0bd10d51d0ed7e58d5",
+      "embedded": true
+    },
+    {
+      "path": "002/setup.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/setup.json",
+      "bytes": 1083,
+      "sha256": "ea012ffcd5c49b6cc54eaa368aeac151baffef27fcd1b22b0bcf45c993e15b7c",
+      "embedded": true
+    },
+    {
+      "path": "historical/win.json",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core0069-main212-001/public-002/bindings-development/win.json",
+      "bytes": 8133,
+      "sha256": "815fc5ece7c57877e0a5a7baec842c90dd9c93841617e06a3af4841662a5347f",
+      "embedded": true
+    },
+    {
+      "path": "historical/win-input.json",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core0069-main212-001/public-002/bindings-development/win-input.json",
+      "bytes": 27753,
+      "sha256": "4fbfffad568d1b7b8eae3b7b9041579fce6f0e8e67c83a66f76c9f78a1c5fcbf",
+      "embedded": true
+    },
+    {
+      "path": "historical/win-observe.json",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core0069-main212-001/public-002/bindings-development/win-observe.json",
+      "bytes": 656,
+      "sha256": "f083760b364f0875aa29f736fa52e98a999302ed078cc42527a9c2aaab9b8548",
+      "embedded": true
+    },
+    {
+      "path": "historical/win.pcm",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core0069-main212-001/public-002/bindings-development/win.pcm",
+      "bytes": 13798400,
+      "sha256": "ccabf2c68b6388ac554ac3efb5609ddf6b4a45d1a3f316891d5f344094e99ee3",
+      "embedded": false
+    },
+    {
+      "path": "reviews/native-profile-distributions-root-20261013.json",
+      "original": "/Users/andreyyurlov/.codex/incant-reviews/native-profile-distributions-root-20261013.json",
+      "bytes": 1142,
+      "sha256": "1c6716d55bb90544d0af7431547b812b78f324c5dd735433f95d2473da001295",
+      "embedded": true
+    },
+    {
+      "path": "reviews/profile-distributions-main257-final-root-20261014.json",
+      "original": "/Users/andreyyurlov/.codex/incant-reviews/profile-distributions-main257-final-root-20261014.json",
+      "bytes": 1113,
+      "sha256": "b309f43ee293584a7a64e512a8811602e82b4359da76954a5e1ccabaaffa2ef5",
+      "embedded": true
+    },
+    {
+      "path": "tools/node",
+      "original": "/Users/andreyyurlov/.local/share/fnm/node-versions/v22.23.3/installation/bin/node",
+      "bytes": 112925600,
+      "sha256": "68f4d07ca49e0500cc135c7e0a445093e228e42e126ac22306d045f0a8c2636b",
+      "embedded": false
+    },
+    {
+      "path": "source/tools/mac_performance.py",
+      "git_commit": "bff83af61807435926b10d77b5a04718a464aae5",
+      "bytes": 14413,
+      "sha256": "2ddd43719485618ec107671f5dfa779ce6b558e75d0b1f57ac46b455b3dcde3a",
+      "embedded": true
+    },
+    {
+      "path": "source/tools/export_native.py",
+      "git_commit": "bff83af61807435926b10d77b5a04718a464aae5",
+      "bytes": 16861,
+      "sha256": "b29b2c9befa358bbd1cf31d76a61ea945f30ec0b886a4a01a51c76897831ff01",
+      "embedded": true
+    },
+    {
+      "path": "source/tools/native_profiling.py",
+      "git_commit": "bff83af61807435926b10d77b5a04718a464aae5",
+      "bytes": 5159,
+      "sha256": "04b455e44a4252e8d7e12fc15b87e4b5a297950d643a0eac03d879b7a46f65a5",
+      "embedded": true
+    },
+    {
+      "path": "source/tools/native_process.py",
+      "git_commit": "bff83af61807435926b10d77b5a04718a464aae5",
+      "bytes": 18782,
+      "sha256": "5f7c07e0f8e79d8db807d0fa85016b86a241de164ff545826baf223f847ec6c6",
+      "embedded": true
+    },
+    {
+      "path": "source/Cargo.lock",
+      "git_commit": "bff83af61807435926b10d77b5a04718a464aae5",
+      "bytes": 252987,
+      "sha256": "1d8fe7fe894dc1dd4a5f8ed3a1eba82eaad4bdb4b360ab7648b7fedbdcd2cec3",
+      "embedded": true
+    },
+    {
+      "path": "source/Cargo.toml",
+      "git_commit": "bff83af61807435926b10d77b5a04718a464aae5",
+      "bytes": 3722,
+      "sha256": "9d721f2b105c0c539e8a16347338a2e68170d524723122e0101d7ccded92c7d5",
+      "embedded": true
+    },
+    {
+      "path": "source/.cargo/config.toml",
+      "git_commit": "bff83af61807435926b10d77b5a04718a464aae5",
+      "bytes": 385,
+      "sha256": "0d3b42ee7bc4ef237cb8af440c47e506dcc9cc8b24d49d3cd3d3fea76ae5caa1",
+      "embedded": true
+    },
+    {
+      "path": "source/crates/incant_profile/Cargo.toml",
+      "git_commit": "bff83af61807435926b10d77b5a04718a464aae5",
+      "bytes": 902,
+      "sha256": "0c73866dc079b138471c83c5a8849b33a71ad438d5484e5589ec1057ed4f51ef",
+      "embedded": true
+    },
+    {
+      "path": "source/crates/incant_profile/src/allocation.rs",
+      "git_commit": "bff83af61807435926b10d77b5a04718a464aae5",
+      "bytes": 4422,
+      "sha256": "d5ead34f95e07db61d494a1100c2161dfefb073653df900680dae9a841877b0f",
+      "embedded": true
+    },
+    {
+      "path": "source/crates/incant_profile/src/disabled.rs",
+      "git_commit": "bff83af61807435926b10d77b5a04718a464aae5",
+      "bytes": 914,
+      "sha256": "9e6a5413147b9367f33ff7a04b20ffd9605f96533ece097735c5a54ef9665232",
+      "embedded": true
+    },
+    {
+      "path": "source/crates/incant_profile/src/enabled.rs",
+      "git_commit": "bff83af61807435926b10d77b5a04718a464aae5",
+      "bytes": 11531,
+      "sha256": "adc20302bb381b1497d3d1019be57de3640b8d1f76d1769a25e4825913567392",
+      "embedded": true
+    },
+    {
+      "path": "source/crates/incant_profile/src/frame.rs",
+      "git_commit": "bff83af61807435926b10d77b5a04718a464aae5",
+      "bytes": 7992,
+      "sha256": "bb425636451e311be77b0a75e21dec1fe6786f41fcdb862521511a98982f3551",
+      "embedded": true
+    },
+    {
+      "path": "source/crates/incant_profile/src/frame_model.rs",
+      "git_commit": "bff83af61807435926b10d77b5a04718a464aae5",
+      "bytes": 1094,
+      "sha256": "19ad66f6325f2fe94d1d6a346d4c12fd2a5acd7ef0f6a8c7e794f70fb9868ed4",
+      "embedded": true
+    },
+    {
+      "path": "source/crates/incant_profile/src/frame_tests.rs",
+      "git_commit": "bff83af61807435926b10d77b5a04718a464aae5",
+      "bytes": 4395,
+      "sha256": "cbdb41ce62d94d17ac5118a723a8cc8e14ea0d853ef6a1a802424d213b0af0ad",
+      "embedded": true
+    },
+    {
+      "path": "source/crates/incant_profile/src/lib.rs",
+      "git_commit": "bff83af61807435926b10d77b5a04718a464aae5",
+      "bytes": 730,
+      "sha256": "3f4c422e85c75a55f28c9b400c99d37c10917512e1514a2780679cfc3ab0db0b",
+      "embedded": true
+    },
+    {
+      "path": "source/crates/incant_profile/src/model.rs",
+      "git_commit": "bff83af61807435926b10d77b5a04718a464aae5",
+      "bytes": 5896,
+      "sha256": "f5b67f59ab1933cc6a714feb544f7419e4bc36c62bea61ce28363b9e6e837b47",
+      "embedded": true
+    },
+    {
+      "path": "source/crates/incant_profile/src/tracy.rs",
+      "git_commit": "bff83af61807435926b10d77b5a04718a464aae5",
+      "bytes": 2933,
+      "sha256": "73a4b3a6d1830fd9bc7b5e20afdf5c894cfecc50277e187944eed780d2a22c72",
+      "embedded": true
+    },
+    {
+      "path": "source/crates/incant_profile/tests/allocations.rs",
+      "git_commit": "bff83af61807435926b10d77b5a04718a464aae5",
+      "bytes": 5092,
+      "sha256": "e5270d73889e8f56124901eb7a4ca1c991a21193845cf5c747b2415c5bf0b5fe",
+      "embedded": true
+    },
+    {
+      "path": "source/crates/incant_profile/tests/disabled.rs",
+      "git_commit": "bff83af61807435926b10d77b5a04718a464aae5",
+      "bytes": 607,
+      "sha256": "501a8386ece410d8259585297d0c1bbe1c39d13437f918935c0ee7f69469ab13",
+      "embedded": true
+    },
+    {
+      "path": "source/crates/incant_profile/tests/summary.rs",
+      "git_commit": "bff83af61807435926b10d77b5a04718a464aae5",
+      "bytes": 5358,
+      "sha256": "4b510765393fc30f2ac751a8f683675f0a360d7e2fc54493c15a031e1289dc5b",
+      "embedded": true
+    }
+  ],
+  "archive_sha256": "464615f6df17f02c0a2ed59f0f6d72267ba9503abca00ad1518f00baaa44d2a0",
+  "audit_files": {
+    "build.py": "d1b46a6da07be370d1552b2f8f48696509ccaad3d3a22dbb0314ee79ee1f49b1",
+    "collect.py": "0207438fa206c6dac396e62e39e048a10be16112529fae19be19f321586923b2",
+    "metrics.py": "bceec9a46b2bca5c22d518d6f054dd01eeb85aa34b722d1792f5876a7aa5f8d7",
+    "verify.py": "755b00a10d5b7d4db93cac824f56a09f7c96971749556d5578f80720fd27f345"
+  },
+  "scope": "Three shipping Mac deterministic original Core runs; repeatability baseline, not fast10k or display/GPU qualification.",
+  "external_scope": "Player, symbols, reused authoring/cooked assets and PCM remain at original hash-bound paths. --external checks every original file; --git-source checks all 4724 frozen source rows against immutable Git."
+}
