@@ -1,10 +1,23 @@
 # Implementation status
 
+## Native script phase diagnostic — one bounded CPU test
+
+The real ScriptHost diagnostic checks all 9,999 transform rows after each of 128
+ticks and rejects three omitted-write variants. Independent source, raw interval,
+profile and executable review passes. The main268 composition preserves the
+executed script/runtime inputs and passes strict compiler/profile/fast-mode
+Clippy. Fourteen markers compile only into the selected test configuration;
+shipping libraries are unchanged. Mean callback time is 1.134 ms, numeric
+validation 0.253 ms and heap telemetry 0.104 ms in this CI-profile fixture. These
+are diagnostic intervals, with no quiet guarantee or complete Core workload;
+the actual shipping 2 ms gate remains failed. [Scope](docs/spikes/core-script-phase-diagnostic.md)
+and [current composition](docs/spikes/evidence/core-script-phase-intake/manifest.json).
+
 ## Core tick diagnostics — candidate evidence only
 
 The retained standalone QuickJS/Bevy probe compares six loop variants and safe
 identity access using 6,600 raw intervals and three negative controls. Independent
-source, raw archive, binary and percentile replay passes on the main267 intake.
+source, raw archive, binary and percentile replay passes on the main267 intake, merged through PR268.
 It changes no engine or authored workload, and adopts no candidate. The fixed-order
 CI-profile experiment has no quiet-window guarantee; actual Core shipping remains
 above the 2 ms script gate. [Scope](docs/spikes/core-tick-cost-diagnostics.md) and
@@ -20,14 +33,16 @@ source97834, not a Core10k, startup, FPS or phase gate. Independent raw evidence
 review and current helper Python/TypeScript checks pass. PR267 merged after its
 exact-head fast SUCCESS, following the merged synchronization test repair. [Evidence](docs/spikes/wasm-typescript-cost.md).
 
-## Checkpoint31 — retained strict Clippy failure and scoped repair
+## Checkpoint32 — frozen main268; checkpoint31 failure retained
 
 The frozen main262 candidate failed macOS workspace Clippy because three existing
 physics tests ignored fallible synchronization results. A source-reviewed repair
 asserts those calls succeed and passes affected package Clippy/tests. PR266
-merged after its exact-head fast SUCCESS; the original failed job remains retained, and remaining candidate jobs continue on
-the exact frozen head. No release promotion or comprehensive rerun success is
-claimed. [Repair evidence](docs/spikes/physics-sync-result.md).
+merged after its exact-head fast SUCCESS. Checkpoint31 finished with 22 required
+SUCCESS and one FAILURE; every original job is retained. The same PR263 now
+freezes checkpoint32 candidate `e4faac52`, exact main268 tree `17054960`. All
+23 contexts and eight comprehensive workflows remain required. Release30 is
+unchanged; no successor success or promotion is claimed. [Repair evidence](docs/spikes/physics-sync-result.md).
 
 ## Director routing clarification — editor UI only
 
@@ -49,7 +64,7 @@ comparison checks pass, while all three 2 ms gates still fail. Full nonprofile
 reports and PCM match; QuickJS heap peaks are unchanged. Portable raw evidence is
 retained with independent final integration acceptance. PR264 merged after its
 exact-head fast SUCCESS; main264 includes the prior Core sample and AOT packets.
-Release30 is unchanged while checkpoint31 tests its frozen main262 tree. No phase/FPS/GPU claim.
+Release30 is unchanged while checkpoint32 tests its frozen main268 tree. No phase/FPS/GPU claim.
 [Evidence](docs/spikes/numeric-loan-main262.md).
 
 ## Core row metadata — actual shipping improves, 2 ms still failed
@@ -192,9 +207,9 @@ shipping Core/10k results are recorded above. Presentation timing remains open.
 Checkpoint30 is promoted through PR232: release `71bdd2e7` has the exact tested
 main252 tree `393eb78c`. All 23 required contexts and all eight push workflows
 succeeded; independent review, merge parents, author trailer and post-merge tree
-are verified. Later main253–260 persisted-session/mobile/haptics/profiler/workload/cache work remains outside
-that tested release. No checkpoint is currently active; main260 is the latest
-integration. This promotion does not approve a phase or distribution gate.
+are verified. Later main253–268 persisted-session/mobile/haptics/profiler/workload/cache and
+diagnostic work remains outside that tested release. Checkpoint32 is active on
+frozen main268 as described above. This promotion does not approve a phase or distribution gate.
 [Portable evidence](docs/spikes/evidence/release-checkpoint-30/manifest.json).
 
 Typed ephemeral haptics now have a qualified main254 composition: both physics

@@ -1,0 +1,35 @@
+{
+  "source": "4635c3bd19fdbbaf040cded6447da44b94751dfe",
+  "producer": "13b178c81998b6b74bb4db2b06b0fc343cea0eb0",
+  "main": "fdd480355ba70b28bbebe35f58b8af188f0abb82",
+  "recorded_inputs": 3876,
+  "equal_inputs": 3871,
+  "exceptions": [
+    {
+      "path": "crates/incant_physics/tests/character.rs",
+      "producer_sha256": "86c5ccb5a5f093e51be6adbd92389dedd294ae9f4ce5f9ce128a948330a7a9df",
+      "current_sha256": "4384362401fca3b688b17615f417b7f0c54753d03a0739a74ed2e1f76fda8b90"
+    },
+    {
+      "path": "crates/incant_physics/tests/compound.rs",
+      "producer_sha256": "cfb27c8bfdfd2b03af8b3d003b82006c750d0f7344c21a5d5c5cd9a38a77be56",
+      "current_sha256": "fc6438f82bf92d9bec9023b1ffcd2511960c651fe3e4b88cd6db3660464c9b20"
+    },
+    {
+      "path": "crates/incant_physics/tests/runtime.rs",
+      "producer_sha256": "eb6539c39398c04f408bfa014fafbeaadfe461aa7a97684a1c7f59411f437f0e",
+      "current_sha256": "6b7af5382839ad0e16bf04e7d4a1914acc99f211d6f69a567fd6381dfed337fd"
+    },
+    {
+      "path": "tools/mac_performance.py",
+      "producer_sha256": "2ddd43719485618ec107671f5dfa779ce6b558e75d0b1f57ac46b455b3dcde3a",
+      "current_sha256": "8ba317dcf8cd49ffc9e0a1ec2f1c95fb71a67fc943b361b8ccfb768e39bef80f"
+    },
+    {
+      "path": "tools/tests/test_mac_performance.py",
+      "producer_sha256": "24454cdaf945e67c53cf9aed9b591c8fd8584beae72b67ba21bc7da9046e8573",
+      "current_sha256": "d6af8a69ecfd7cdf74d02668e155bd596b77cfa2089e60a99c61b7914e07e397"
+    }
+  ],
+  "exception_reason": "Reviewed PR266 expected-success Result assertions in separate incant_physics tests and PR267 Python Mac measurement phase selection/tool tests. No exception participates in incant_script lib diagnostic or fixture preparation. Runtime, manifests, lock and selected mode unchanged."
+}

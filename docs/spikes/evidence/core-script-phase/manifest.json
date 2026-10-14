@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "source_commit": "13b178c81998b6b74bb4db2b06b0fc343cea0eb0",
+  "base_commit": "03bc4b987f3e553249846c4cfce991793d4d2c48",
+  "archive_sha256": "bbdbfe77bbf243b78916c2cebcf97b247afc790ead249ae31c2c22491adfc391",
+  "records": 28,
+  "portable_payloads": 27,
+  "scope": "One explicitly selected CI native ScriptHost diagnostic, not shipping or quiet timing",
+  "external_scope": "One immediate 0755 test executable is hash-bound, not embedded. Original paths optional for --external replay.",
+  "test": "tick_probe::tests::actual_native_stress_regions_128",
+  "ticks": 128,
+  "rows_per_tick": 9999,
+  "omitted_write_controls": 3,
+  "build": "Rust1.99.0, explicit aarch64-apple-darwin, ci, offline+locked, two jobs, Rayon2; compiler/profile/physics-fast-simd8",
+  "failures": [],
+  "production_algorithm_changed": false,
+  "limits": [
+    "Only the unchanged stress script and 9999 rows; no Core controller/assets/UI/audio/physics.",
+    "All intervals include the first tick; oracle, compilation and fixture setup are outside each interval.",
+    "Region means are additive; percentile values are not additive or shipping gate evidence.",
+    "Parent reported rendering stopped; a peer was allowed bounded raw CPU analysis.",
+    "One exact test passed; no full suite or strict Clippy qualification claimed.",
+    "No player Frame guard: frame histograms are empty, while script zones and heap have128 samples."
+  ]
+}
