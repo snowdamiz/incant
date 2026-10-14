@@ -1,0 +1,637 @@
+{
+  "source_commit": "421018733c270ae44b7ce6e5068479b4cec9587c",
+  "source_base": "78d41fdb2d87546f8a7b93a4e095deaa3693224a",
+  "source_freeze_sha256": "b4f3119ed2a0613a4cc0780dc4ec5dd889593dc1f55e0fd3c6493b71dc70d0ec",
+  "source_rows": [
+    {
+      "path": "crates/incant_script/build.rs",
+      "sha256": "941ab1963907b6e936f9d0752bd73982eb237f9e4ba2b607d3d0ea548f2d01ba",
+      "bytes": 8561,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-loan-capacity-001/source-001/files/crates/incant_script/build.rs"
+    },
+    {
+      "path": "crates/incant_script/src/lib.rs",
+      "sha256": "21f03c42be0377f1ebabc4673c918c64a103b9762fc4be21530a4ecc5cf9cfef",
+      "bytes": 30303,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-loan-capacity-001/source-001/files/crates/incant_script/src/lib.rs"
+    },
+    {
+      "path": "crates/incant_script/src/loan.rs",
+      "sha256": "5aca7cf70f2c174dec2b993f1736ff4b6e575eb0af2ad3fbeca9b3c10a117c86",
+      "bytes": 10420,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-loan-capacity-001/source-001/files/crates/incant_script/src/loan.rs"
+    },
+    {
+      "path": "crates/incant_script/src/loan/scratch.rs",
+      "sha256": "7c08b23dcf95d614dc29c25212289d4ec13901090b6765219d653f22e419a8d1",
+      "bytes": 3083,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-loan-capacity-001/source-001/files/crates/incant_script/src/loan/scratch.rs"
+    },
+    {
+      "path": "crates/incant_script/src/loan/tests.rs",
+      "sha256": "4d3e509842526fe7fa79cf072c6ec2ec017168f7acdef6e81e866a3c81d91330",
+      "bytes": 12444,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-loan-capacity-001/source-001/files/crates/incant_script/src/loan/tests.rs"
+    }
+  ],
+  "records": [
+    {
+      "original": "/Users/andreyyurlov/.codex/worktrees/cooked-native-scripts/incant/crates/incant_script/build.rs",
+      "role": "final-source",
+      "sha256": "941ab1963907b6e936f9d0752bd73982eb237f9e4ba2b607d3d0ea548f2d01ba",
+      "bytes": 8561
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/worktrees/cooked-native-scripts/incant/crates/incant_script/src/lib.rs",
+      "role": "final-source",
+      "sha256": "21f03c42be0377f1ebabc4673c918c64a103b9762fc4be21530a4ecc5cf9cfef",
+      "bytes": 30303
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/worktrees/cooked-native-scripts/incant/crates/incant_script/src/loan.rs",
+      "role": "final-source",
+      "sha256": "5aca7cf70f2c174dec2b993f1736ff4b6e575eb0af2ad3fbeca9b3c10a117c86",
+      "bytes": 10420
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/worktrees/cooked-native-scripts/incant/crates/incant_script/src/loan/scratch.rs",
+      "role": "final-source",
+      "sha256": "7c08b23dcf95d614dc29c25212289d4ec13901090b6765219d653f22e419a8d1",
+      "bytes": 3083
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/worktrees/cooked-native-scripts/incant/crates/incant_script/src/loan/tests.rs",
+      "role": "final-source",
+      "sha256": "4d3e509842526fe7fa79cf072c6ec2ec017168f7acdef6e81e866a3c81d91330",
+      "bytes": 12444
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-loan-capacity-001/default-lib-001.log",
+      "role": "raw-command-log",
+      "sha256": "44f14a80f0196070619eef45702a85c5953efafaba8d677d3555ad3c1b58bf06",
+      "bytes": 17418
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-loan-capacity-001/default-lib-002.log",
+      "role": "raw-command-log",
+      "sha256": "10babc6fbb33355db2b45ef47f5afee4cf3c2856c2c6d614bff25f94abd7969a",
+      "bytes": 14969
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-loan-capacity-001/default-all-003.log",
+      "role": "raw-command-log",
+      "sha256": "895c0bb9988a05c627ae4ac8faf80f2bb8dea3c65fd77096be5abca26240f9f6",
+      "bytes": 25718
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-loan-capacity-001/fast-all-001.log",
+      "role": "raw-command-log",
+      "sha256": "fcc17671a4a73e4edd6db763a8eb7cc6b0a5ab997db95772ba56b1d882006c22",
+      "bytes": 25748
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-loan-capacity-001/default-clippy-001.log",
+      "role": "raw-command-log",
+      "sha256": "ab920abdc9bf058c97a3506d81d64094fb7bb370216feb4f499a6ab6a977b553",
+      "bytes": 2127
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-loan-capacity-001/fast-clippy-001.log",
+      "role": "raw-command-log",
+      "sha256": "057812159fb55f6e01efe698e49b91a1e6957f2d611772ec6c860b396f790210",
+      "bytes": 1348
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-loan-capacity-001/shipping-surface-profile-off-clippy-001.log",
+      "role": "raw-command-log",
+      "sha256": "e023c1cc2364e5b614bda814b23231c099c49962ae4f6490de2c094b447a0427",
+      "bytes": 1190
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-loan-capacity-001/shipping-surface-profile-on-clippy-001.log",
+      "role": "raw-command-log",
+      "sha256": "8fa61630a602c1a83b45584a5c0ab27364073321a8a1b5edfd568c306fbfb79d",
+      "bytes": 305
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-loan-capacity-001/fmt-final.log",
+      "role": "raw-command-log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-loan-capacity-001/diff-final.log",
+      "role": "raw-command-log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-reviews/quickjs-loan-capacity-source001-independent-20261014.json",
+      "role": "independent-source-review",
+      "sha256": "21474c611a04280ce9861f1a91e0df5fdcb8b47785b0b0a1017719ff4f8810b0",
+      "bytes": 4856
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-loan-capacity-001/preflight.json",
+      "role": "executor-receipt",
+      "sha256": "46afa4539be7da96d45bb93a69714a49e3bbd7bb0b373ead211326b7e260d82e",
+      "bytes": 2243
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-loan-capacity-001/attempts.json",
+      "role": "executor-receipt",
+      "sha256": "08d27b5c363a2acfa021413779236444371e20e83a1eb48ebaba079af3399c94",
+      "bytes": 2566
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-loan-capacity-001/postflight.json",
+      "role": "executor-receipt",
+      "sha256": "c8951f7723b77a3fe248a2d81c50929e75ab204b859b0684c31ab8f6fcc3ac35",
+      "bytes": 3153
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-loan-capacity-001/executables.json",
+      "role": "executor-receipt",
+      "sha256": "33e263302e1f19f15ee4142b5f310bd7f12a014deea3df4de769ad7d7614c7a1",
+      "bytes": 8859
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-loan-capacity-001/source-001/freeze.json",
+      "role": "executor-receipt",
+      "sha256": "b4f3119ed2a0613a4cc0780dc4ec5dd889593dc1f55e0fd3c6493b71dc70d0ec",
+      "bytes": 1927
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-loan-capacity-001/build-identities/incant_script-1adbe2ae8fe8cd1c/output",
+      "role": "actual-build-identity-output",
+      "sha256": "427c4e85196bc6f97ebd52ac1359a4c8c61c9e46f7f5491be3d896f23bcb60bc",
+      "bytes": 208787
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-loan-capacity-001/build-identities/incant_script-82c57147d377bfa5/output",
+      "role": "actual-build-identity-output",
+      "sha256": "427c4e85196bc6f97ebd52ac1359a4c8c61c9e46f7f5491be3d896f23bcb60bc",
+      "bytes": 208787
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-loan-capacity-001/build-identities/incant_script-ed119a2034d1d43a/output",
+      "role": "actual-build-identity-output",
+      "sha256": "427c4e85196bc6f97ebd52ac1359a4c8c61c9e46f7f5491be3d896f23bcb60bc",
+      "bytes": 208787
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-loan-capacity-001/build-identities/incant_script-613bb64e1f2f59fb/output",
+      "role": "actual-build-identity-output",
+      "sha256": "427c4e85196bc6f97ebd52ac1359a4c8c61c9e46f7f5491be3d896f23bcb60bc",
+      "bytes": 208787
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-loan-capacity-001/build-identities/incant_script-bf42b29bebf94cb6/output",
+      "role": "actual-build-identity-output",
+      "sha256": "427c4e85196bc6f97ebd52ac1359a4c8c61c9e46f7f5491be3d896f23bcb60bc",
+      "bytes": 208787
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-loan-capacity-001/build-identities/incant_script-5a15980f887d4ffa/output",
+      "role": "actual-build-identity-output",
+      "sha256": "427c4e85196bc6f97ebd52ac1359a4c8c61c9e46f7f5491be3d896f23bcb60bc",
+      "bytes": 208787
+    }
+  ],
+  "archive_sha256": "bd0a6c7fd765783595b630f0db4bad6d5f6774d8c59a558ad6b63c1010e685eb",
+  "commands": [
+    {
+      "id": "default-lib-001",
+      "argv": [
+        "tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "-j2",
+        "--target",
+        "aarch64-apple-darwin",
+        "--target-dir",
+        "/private/tmp/incant-agent-font-target",
+        "--profile",
+        "ci",
+        "-p",
+        "incant_script",
+        "--lib",
+        "--features",
+        "profile"
+      ],
+      "session_id": 48794,
+      "exit_code": 101,
+      "phase": "pre-source001",
+      "log_sha256": "44f14a80f0196070619eef45702a85c5953efafaba8d677d3555ad3c1b58bf06",
+      "test_totals": {
+        "passed": 149,
+        "failed": 1,
+        "ignored": 1,
+        "harnesses": 1
+      }
+    },
+    {
+      "id": "default-lib-002",
+      "argv": [
+        "tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "-j2",
+        "--target",
+        "aarch64-apple-darwin",
+        "--target-dir",
+        "/private/tmp/incant-agent-font-target",
+        "--profile",
+        "ci",
+        "-p",
+        "incant_script",
+        "--lib",
+        "--features",
+        "profile"
+      ],
+      "session_id": 52306,
+      "exit_code": 0,
+      "phase": "pre-source001",
+      "log_sha256": "10babc6fbb33355db2b45ef47f5afee4cf3c2856c2c6d614bff25f94abd7969a",
+      "test_totals": {
+        "passed": 150,
+        "failed": 0,
+        "ignored": 1,
+        "harnesses": 1
+      }
+    },
+    {
+      "id": "default-all-003",
+      "argv": [
+        "tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "-j2",
+        "--target",
+        "aarch64-apple-darwin",
+        "--target-dir",
+        "/private/tmp/incant-agent-font-target",
+        "--profile",
+        "ci",
+        "-p",
+        "incant_script",
+        "--features",
+        "profile,native-checkpoints"
+      ],
+      "session_id": 21968,
+      "exit_code": 0,
+      "phase": "source001",
+      "log_sha256": "895c0bb9988a05c627ae4ac8faf80f2bb8dea3c65fd77096be5abca26240f9f6",
+      "test_totals": {
+        "passed": 233,
+        "failed": 0,
+        "ignored": 1,
+        "harnesses": 10
+      }
+    },
+    {
+      "id": "fast-all-001",
+      "argv": [
+        "tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "-j2",
+        "--target",
+        "aarch64-apple-darwin",
+        "--target-dir",
+        "/private/tmp/incant-agent-font-target",
+        "--profile",
+        "ci",
+        "-p",
+        "incant_script",
+        "--no-default-features",
+        "--features",
+        "compiler,profile,native-checkpoints"
+      ],
+      "session_id": 26086,
+      "exit_code": 0,
+      "phase": "source001",
+      "log_sha256": "fcc17671a4a73e4edd6db763a8eb7cc6b0a5ab997db95772ba56b1d882006c22",
+      "test_totals": {
+        "passed": 233,
+        "failed": 0,
+        "ignored": 1,
+        "harnesses": 10
+      }
+    },
+    {
+      "id": "default-clippy-001",
+      "argv": [
+        "tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "-j2",
+        "--target",
+        "aarch64-apple-darwin",
+        "--target-dir",
+        "/private/tmp/incant-agent-font-target",
+        "--profile",
+        "ci",
+        "-p",
+        "incant_script",
+        "--all-targets",
+        "--features",
+        "profile,native-checkpoints",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "session_id": 39522,
+      "exit_code": 0,
+      "phase": "source001",
+      "log_sha256": "ab920abdc9bf058c97a3506d81d64094fb7bb370216feb4f499a6ab6a977b553"
+    },
+    {
+      "id": "fast-clippy-001",
+      "argv": [
+        "tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "-j2",
+        "--target",
+        "aarch64-apple-darwin",
+        "--target-dir",
+        "/private/tmp/incant-agent-font-target",
+        "--profile",
+        "ci",
+        "-p",
+        "incant_script",
+        "--all-targets",
+        "--no-default-features",
+        "--features",
+        "compiler,profile,native-checkpoints",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "session_id": 15427,
+      "exit_code": 0,
+      "phase": "source001",
+      "log_sha256": "057812159fb55f6e01efe698e49b91a1e6957f2d611772ec6c860b396f790210"
+    },
+    {
+      "id": "shipping-surface-profile-off-clippy-001",
+      "argv": [
+        "tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "-j2",
+        "--target",
+        "aarch64-apple-darwin",
+        "--target-dir",
+        "/private/tmp/incant-agent-font-target",
+        "--profile",
+        "ci",
+        "-p",
+        "incant_script",
+        "--lib",
+        "--no-default-features",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "session_id": 6138,
+      "exit_code": 0,
+      "phase": "source001",
+      "log_sha256": "e023c1cc2364e5b614bda814b23231c099c49962ae4f6490de2c094b447a0427"
+    },
+    {
+      "id": "shipping-surface-profile-on-clippy-001",
+      "argv": [
+        "tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "-j2",
+        "--target",
+        "aarch64-apple-darwin",
+        "--target-dir",
+        "/private/tmp/incant-agent-font-target",
+        "--profile",
+        "ci",
+        "-p",
+        "incant_script",
+        "--lib",
+        "--no-default-features",
+        "--features",
+        "profile",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "session_id": 36961,
+      "exit_code": 0,
+      "phase": "source001",
+      "log_sha256": "8fa61630a602c1a83b45584a5c0ab27364073321a8a1b5edfd568c306fbfb79d"
+    },
+    {
+      "id": "fmt-final",
+      "argv": [
+        "tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "session_id": 69467,
+      "exit_code": 0,
+      "phase": "source001",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "diff-final",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "session_id": null,
+      "exit_code": 0,
+      "phase": "source001",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "environment": {
+    "RUSTUP_TOOLCHAIN": "1.99.0",
+    "RAYON_NUM_THREADS": "2",
+    "CARGO_BUILD_JOBS": "2",
+    "CARGO_NET_OFFLINE": "true",
+    "RUST_TEST_THREADS": "2"
+  },
+  "test_executables": [
+    {
+      "log": "default-all-003.log",
+      "source": "/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/incant_script-8f3726c6e4de385d",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-loan-capacity-001/executables/default-all-003/incant_script-8f3726c6e4de385d",
+      "sha256": "3461ebdf666a5909a4a17cc342f84991dc07141a18044328241f596d831c330f",
+      "bytes": 22402368,
+      "scope": "CI-profile test executable, no shipping performance identity"
+    },
+    {
+      "log": "default-all-003.log",
+      "source": "/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/animations-22a6c0e773380688",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-loan-capacity-001/executables/default-all-003/animations-22a6c0e773380688",
+      "sha256": "089e40bc2038e6a3036c480d6dd568ba6646fb3b2c855525f47fd63a93481697",
+      "bytes": 19314856,
+      "scope": "CI-profile test executable, no shipping performance identity"
+    },
+    {
+      "log": "default-all-003.log",
+      "source": "/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/audio_controls-ab50929602ce937b",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-loan-capacity-001/executables/default-all-003/audio_controls-ab50929602ce937b",
+      "sha256": "214ee94198ed167db1af7feef0b1dd9450aa540e181534fb358b46297e9e8db0",
+      "bytes": 12467664,
+      "scope": "CI-profile test executable, no shipping performance identity"
+    },
+    {
+      "log": "default-all-003.log",
+      "source": "/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/bindings_static-ff5a2c73a8e2ba49",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-loan-capacity-001/executables/default-all-003/bindings_static-ff5a2c73a8e2ba49",
+      "sha256": "120e3cd3035bc77d66688f58e66fd72d2dd6fbb7a4435dbba7f6e4a4863fcfa9",
+      "bytes": 12437360,
+      "scope": "CI-profile test executable, no shipping performance identity"
+    },
+    {
+      "log": "default-all-003.log",
+      "source": "/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/flipbooks-7ab4a855cb316b81",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-loan-capacity-001/executables/default-all-003/flipbooks-7ab4a855cb316b81",
+      "sha256": "7e87cbbd1edf4f456c0a70c7c608bd33ab375a9740e18fa59e6444a7332393f3",
+      "bytes": 17810024,
+      "scope": "CI-profile test executable, no shipping performance identity"
+    },
+    {
+      "log": "default-all-003.log",
+      "source": "/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/hud-3695f97d2a1692af",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-loan-capacity-001/executables/default-all-003/hud-3695f97d2a1692af",
+      "sha256": "170502f450950c392c39ccd51bc600e0caa3d5e6f5308a82c02d5b814cd16065",
+      "bytes": 12485592,
+      "scope": "CI-profile test executable, no shipping performance identity"
+    },
+    {
+      "log": "default-all-003.log",
+      "source": "/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/profile-f87c786dec2e215c",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-loan-capacity-001/executables/default-all-003/profile-f87c786dec2e215c",
+      "sha256": "9aaaf1a9b31771e1585b8447f8ad29c8eeb27d36bd499fbd5c39f94b60710302",
+      "bytes": 12417448,
+      "scope": "CI-profile test executable, no shipping performance identity"
+    },
+    {
+      "log": "default-all-003.log",
+      "source": "/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/project_bindings-0730c8830794cbb5",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-loan-capacity-001/executables/default-all-003/project_bindings-0730c8830794cbb5",
+      "sha256": "9c0eb551b48196e2dc7c03f60de396fb8f30e942a2e68c50619525db04f951c9",
+      "bytes": 18737264,
+      "scope": "CI-profile test executable, no shipping performance identity"
+    },
+    {
+      "log": "default-all-003.log",
+      "source": "/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/spatial-80d2ddfa03729a31",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-loan-capacity-001/executables/default-all-003/spatial-80d2ddfa03729a31",
+      "sha256": "31b3347b3a9f25cb6902d514c84a2f3b37bd60ec08a6d13ebe202bba2b568e4c",
+      "bytes": 12532152,
+      "scope": "CI-profile test executable, no shipping performance identity"
+    },
+    {
+      "log": "fast-all-001.log",
+      "source": "/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/incant_script-f78d306bef394a36",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-loan-capacity-001/executables/fast-all-001/incant_script-f78d306bef394a36",
+      "sha256": "ea8fae36f5f0e920bf1cbaaa7e0b24a706662cc67ca7b84aa09f06583c7a6a81",
+      "bytes": 21922384,
+      "scope": "CI-profile test executable, no shipping performance identity"
+    },
+    {
+      "log": "fast-all-001.log",
+      "source": "/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/animations-81b53971b9f1717e",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-loan-capacity-001/executables/fast-all-001/animations-81b53971b9f1717e",
+      "sha256": "a60434b27151395bee23f77a2aa3d74413fbeb3611008e063cf2402ba9d9cc25",
+      "bytes": 18823544,
+      "scope": "CI-profile test executable, no shipping performance identity"
+    },
+    {
+      "log": "fast-all-001.log",
+      "source": "/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/audio_controls-e1ead41b83c90d2b",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-loan-capacity-001/executables/fast-all-001/audio_controls-e1ead41b83c90d2b",
+      "sha256": "e143e7505799ac7b98abeacb26437bc6d5d8bffa8fdf10f95109487ae0a41e30",
+      "bytes": 12121648,
+      "scope": "CI-profile test executable, no shipping performance identity"
+    },
+    {
+      "log": "fast-all-001.log",
+      "source": "/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/bindings_static-af1c7b1a15bad4e1",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-loan-capacity-001/executables/fast-all-001/bindings_static-af1c7b1a15bad4e1",
+      "sha256": "c9cbce4ee677ef65a7d9b798e6a56b1b2ea65ef321d42d45e0ca05f524abe223",
+      "bytes": 12091136,
+      "scope": "CI-profile test executable, no shipping performance identity"
+    },
+    {
+      "log": "fast-all-001.log",
+      "source": "/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/flipbooks-f16cfe09e7ff05b8",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-loan-capacity-001/executables/fast-all-001/flipbooks-f16cfe09e7ff05b8",
+      "sha256": "dc83b7ceb561aa95a35af417df0a4103ab6017026f8c4a4daeeb40d8f43bf1be",
+      "bytes": 17382952,
+      "scope": "CI-profile test executable, no shipping performance identity"
+    },
+    {
+      "log": "fast-all-001.log",
+      "source": "/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/hud-92cc62c1ae6b68f1",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-loan-capacity-001/executables/fast-all-001/hud-92cc62c1ae6b68f1",
+      "sha256": "5f1a9a8a06279a06436a53755f0dd260df4d79c86eccb01fd160316a352247c3",
+      "bytes": 12139896,
+      "scope": "CI-profile test executable, no shipping performance identity"
+    },
+    {
+      "log": "fast-all-001.log",
+      "source": "/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/profile-63f4e40a8d643261",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-loan-capacity-001/executables/fast-all-001/profile-63f4e40a8d643261",
+      "sha256": "342b4d6c0eb9d0b316ed16a2611ac04b530e3643be54b13775686d8702d34161",
+      "bytes": 12054824,
+      "scope": "CI-profile test executable, no shipping performance identity"
+    },
+    {
+      "log": "fast-all-001.log",
+      "source": "/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/project_bindings-2a831f09f7c56a35",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-loan-capacity-001/executables/fast-all-001/project_bindings-2a831f09f7c56a35",
+      "sha256": "72583481433c7a15f7dd28ea3fc997a8f88853ddb0a72b6f8219d23df8722ef8",
+      "bytes": 18280208,
+      "scope": "CI-profile test executable, no shipping performance identity"
+    },
+    {
+      "log": "fast-all-001.log",
+      "source": "/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/spatial-ee713be2f9260d96",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-loan-capacity-001/executables/fast-all-001/spatial-ee713be2f9260d96",
+      "sha256": "a32d944444a0fcf67e60e7d3c85743f6a31c6a555c83826fd5ef7000c21b3fbe",
+      "bytes": 12186280,
+      "scope": "CI-profile test executable, no shipping performance identity"
+    }
+  ],
+  "build_identity": {
+    "loan_inputs": [
+      "src/loan.rs",
+      "src/loan/ids.rs",
+      "src/loan/scratch.rs"
+    ],
+    "build_id": "7f658f667c95bc7510ad046c5dd18e7699c6895b1e1de02fa3c3028ac94f9653"
+  },
+  "scope": "CI-profile native regression execution and source qualification; not shipping performance",
+  "no_shipping_export_or_measurement": true,
+  "phase_gate_passed": false,
+  "retained_failure": "default-lib-001 accessed detached DataView.byteLength; corrected to view.buffer.byteLength. No production correction was needed.",
+  "limits": [
+    "32 MiB covers numeric saved copies only; IDs, container metadata and the existing JavaScript label cache remain additional.",
+    "Latest admitted scratch remains allocated while its ScriptHost is idle and is destroyed with that owner.",
+    "Constructor refusal control uses a reduced private test budget; production new always admits at most 32 MiB.",
+    "Static-module, Wasmtime, UI/audio feature combinations, non-Mac execution and shipping performance were not newly qualified by these commands."
+  ]
+}
