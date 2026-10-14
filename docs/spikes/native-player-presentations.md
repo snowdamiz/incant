@@ -3,8 +3,8 @@
 This default-off source candidate joins the CPU-qualified HAL seam and main297's
 native replay host to main298. The main298 join adds the reviewed animation
 consumer source and its distinct dev-only pollster lock edge; it changes no
-presentation-observer bytes. It has not been built or run. It supplies no display-rate or
-performance verdict. The probe qualification and all earlier failures remain in
+presentation-observer bytes. CPU qualification passed; no native-window capture
+has run. It supplies no display-rate or performance verdict. The probe qualification and all earlier failures remain in
 [native-presentation-observer.md](native-presentation-observer.md).
 
 The trusted native host opts in with `native-presentations` on macOS and both
@@ -63,7 +63,7 @@ An error writing the sidecar never replaces the original game/window failure.
 The sidecar does not guess the later CLI/process exit status. Normal report,
 replay completion and observation checks remain independently required.
 
-The first proposed CPU qualification is native-presentations+profile player
+The CPU qualification covers native-presentations+profile player
 library tests and strict all-target lint, the normal native-window+profile
 library tests and strict lint, including the eleven pure HAL collector controls compiled from the exact
 vendored source, plus direct HAL lint (selected together with the player workspace
@@ -81,3 +81,31 @@ Only after source/CPU review may a separately bounded actual replay establish
 whether callbacks deliver enough timestamp coverage. The first live result is
 coverage evidence, not an FPS gate, uncapped GPU throughput, or an uninstrumented
 shipping performance result.
+
+## CPU qualification, 2026-10-14
+
+Executed source `8dbc74c4191f1e793e3e593ee68bdae28665e3ae` on main298 passed
+105 observer-enabled and 87 normal-window library tests (zero failures/ignored),
+including the 20 added pure controls. Strict all-target player Clippy passed in
+both modes, and strict HAL library Clippy passed. Both copied binaries and exact
+`--list` outputs are retained. Actual graph differences are only the player
+`native-presentations`, HAL `diagnostic-presentations`, and objc2-metal
+`objc2-core-foundation` feature recipients. These are CI CPU checks, not shipping
+or presentation measurements.
+
+The first joined attempt002 refused a missing lock edge before compilation;
+offline resolution added only objc2-metal's existing pinned core-foundation
+dependency. Attempt003 then exposed private enum re-export visibility and the
+included collector model's missing direct dev dependency. The successor scoped
+the four enums to `crate::window` and added already-locked parking_lot0.12.5
+only to player dev dependencies. Both failed generations and exact logs remain.
+No algorithm, scheduling, bound or test assertion was relaxed. Attempt004 passed
+all five commands in93.845s. All attempts together consumed242.270s and
+992,948,965B of sampled target growth; minimum sampled free space was
+120,854,564,864B. The target and builder lease were released.
+
+External receipt: `~/.codex/incant-evidence/native-presentation-player-001/cpu-final.json`.
+Its immutable source freeze, plans, results, dependency graphs, compiler messages,
+binary copies and original failures remain adjacent. Final result SHA256:
+`e611b72b6f108096fc2914b00e489c00e532e4b462777658615e9d0c83bde9b9`.
+The later documentation commit changes no qualified production source.
