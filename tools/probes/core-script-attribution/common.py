@@ -14,6 +14,8 @@ DIAGNOSTIC = 'diagnostic-script-phases'
 EXTRA = {'incant_game_player', 'incant_script', 'incant_runtime', 'incant_profile'}
 FEATURES = ['project', 'render-input', 'profile', DIAGNOSTIC]
 TICKS = 2156
+SOURCE_ROOTS = ('crates/', 'third_party/', 'sdk/', 'tools/', '.cargo/')
+SOURCE_FILES = ('Cargo.toml', 'Cargo.lock', 'rust-toolchain.toml')
 
 
 def load(path, limit=16 * 1024**2):
@@ -39,14 +41,24 @@ def plan(path):
     return data, sha256(raw)
 
 
+def source_inventory(files, tracked):
+    """Bind every tracked compiler/helper input, not a caller-selected subset."""
+    require(isinstance(files, dict) and 1 <= len(files) <= 10000, 'Invalid source inventory')
+    expected = {name for name in tracked if name.startswith(SOURCE_ROOTS) or name in SOURCE_FILES}
+    require(set(files) == expected, 'Incomplete tracked compiler/source inventory')
+
+
 def source_check(data):
     require(subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True, timeout=10).strip()
             == data['source_commit'], 'Diagnostic source commit changed')
     require(not subprocess.check_output(['git', 'status', '--porcelain'], cwd=ROOT, timeout=10).strip(),
             'Diagnostic source is dirty')
     _, raw = checked_file(data['source_manifest'], 4 * 1024**2)
-    files = json.loads(raw)['files']
-    require(isinstance(files, dict) and 1 <= len(files) <= 10000, 'Invalid source inventory')
+    manifest = json.loads(raw)
+    require(manifest['source_commit'] == data['source_commit'], 'Inventory commit differs')
+    files = manifest['files']
+    tracked = subprocess.check_output(['git', 'ls-files', '-z'], cwd=ROOT, timeout=10).decode().split('\0')[:-1]
+    source_inventory(files, tracked)
     for name, digest in files.items():
         p = Path(name)
         require(not p.is_absolute() and '..' not in p.parts, 'Invalid source name')

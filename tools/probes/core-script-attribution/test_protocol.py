@@ -3,7 +3,7 @@ import copy
 from pathlib import Path
 import unittest
 
-from common import DIAGNOSTIC, EXTRA, TARGET, TICKS, compiler_features, graph_delta
+from common import DIAGNOSTIC, EXTRA, TARGET, TICKS, compiler_features, graph_delta, source_inventory
 from analyze import analyze, REGIONS, NUMERIC
 
 
@@ -47,6 +47,18 @@ def report():
 
 
 class Protocol(unittest.TestCase):
+    def test_inventory_refuses_missing_transitive_sources_or_extra_rows(self):
+        tracked = ['Cargo.lock', 'Cargo.toml', 'rust-toolchain.toml', '.cargo/config.toml',
+                   'crates/example/build.rs', 'sdk/compiler.js', 'third_party/engine/source.c',
+                   'tools/package.py', 'docs/scope.md']
+        files = {name: 'digest' for name in tracked if not name.startswith('docs/')}
+        source_inventory(files, tracked)
+        for name in files:
+            with self.assertRaises(ValueError):
+                source_inventory({k: v for k, v in files.items() if k != name}, tracked)
+        with self.assertRaises(ValueError):
+            source_inventory(dict(files, arbitrary='digest'), tracked)
+
     def test_same_frame_tail_and_nested_residuals(self):
         raw, sources = report()
         got = analyze(raw, sources)

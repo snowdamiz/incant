@@ -28,6 +28,13 @@ All other producer fields, including the compiler manifest, scene and assets,
 and every packaged data file must remain identical. No old fingerprint is forced
 onto the new executable or envelope.
 
+The inventory is checked against every tracked file in `crates`, `third_party`,
+`sdk`, `tools` and `.cargo`, plus the workspace manifest, lock and Rust toolchain
+files. The plan also binds the real fnm Node 24.21.0 executable by absolute path,
+SHA-256 and observed version. The private build prepends its directory to PATH,
+verifies that `node` resolves to that executable, and refuses Node option/module
+injection. Both the Node binding and compiler inputs are rechecked after build.
+
 The separate `collect.py` command supports exactly two predeclared stages at
 create-only fixed output locations:
 
@@ -57,7 +64,9 @@ adds nested spans as exclusive work. Observed instrumentation and residual work
 stay included. No 2 ms, 5%, speedup, gate or distribution approval is emitted.
 
 `test_protocol.py` contains data-only correspondence/refusal controls for the
-collector and exact feature admission. These adapter controls have not run yet.
+collector, exact feature admission and complete input inventories. The original
+four controls passed before adding the final Node/inventory binding; final
+control outcomes are recorded with the external source freeze.
 The Rust observer's earlier focused qualification is separate; see
 `docs/spikes/core-script-attribution.md` and its external receipt. The normal
 shipping 2 ms failures remain unchanged.
