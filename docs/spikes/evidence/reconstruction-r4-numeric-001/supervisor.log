@@ -1,0 +1,77 @@
+{
+  "released": true,
+  "released_at": "2026-10-14T01:13:30.981549+00:00",
+  "accepted": false,
+  "children": [
+    {
+      "pid": 32664,
+      "pgid": 32664,
+      "exit": 101,
+      "timed_out": false,
+      "interrupted_by": [],
+      "reaped": true,
+      "group_empty_after": true,
+      "seconds": 1.098,
+      "job": "ordinary-default",
+      "argv": [
+        "/Users/andreyyurlov/.codex/incant-evidence/reconstruction-r4-cpu-001/binaries-002/default",
+        "--ignored",
+        "--exact",
+        "upscaling::system::device_tests::actual_output_reconstruction_rejects_bad_history_and_never_retains_overlay",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "environment": {
+        "keys": [
+          "HOME",
+          "INCANT_EXPECT_GPU_BACKEND",
+          "PATH",
+          "RUST_BACKTRACE",
+          "TMPDIR"
+        ],
+        "values_recorded": {
+          "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+          "RUST_BACKTRACE": "0",
+          "TMPDIR": "/Users/andreyyurlov/.codex/incant-evidence/reconstruction-r4-numeric-001/tmp",
+          "INCANT_EXPECT_GPU_BACKEND": "Metal"
+        },
+        "home": "inherited unchanged, value not recorded"
+      },
+      "accepted": false,
+      "checks": {
+        "exit": false,
+        "reaped": true,
+        "empty_group": true,
+        "uninterrupted": true,
+        "no_exception": true,
+        "one_test": false,
+        "no_panic": false,
+        "metal": true,
+        "full_sequence": false,
+        "unchanged": true,
+        "same_adapter": true,
+        "no_images": true
+      },
+      "adapter": "AdapterInfo { name: \"Apple M5 Pro\", vendor: 0, device: 0, device_type: IntegratedGpu, device_pci_bus_id: \"\", driver: \"\", driver_info: \"\", backend: Metal, subgroup_min_size: 4, subgroup_max_size: 64, transient_saves_memory: true }",
+      "stdout_sha256": "ce6a8ceed244f36c31696687f223cc28765d8542b8b6a44b0a265300131508cf",
+      "stderr_sha256": "23d985f55b0cb23c24082e2b27f3f6d5958ba093822f53ae34142484bbb2e7c8"
+    }
+  ],
+  "owned_processes": [],
+  "process_groups_alive": [],
+  "images": [],
+  "exception": null,
+  "runner_sha256": "22f17d766cc7bf2b4e9cd6ac5968b03b16e438827c1cc8b69464a037aa3bbae5",
+  "plan_sha256": "5dc693f6eeb19f4232cb623224d1ff9b34c2930f1b9973671f1a63eac2887574",
+  "grant_sha256": "16bcdc23277f21ccba1c84fe546677331ba3281522c11403a7087e35b2582ea4",
+  "lifecycle_sha256": "b9e12895389a046e1c0a0bd4c43f01a215505c793be4106b31fafc18aa2aff34",
+  "os": {
+    "uname": [
+      "Darwin",
+      "Andreys-MacBook-Pro.local",
+      "27.0.0",
+      "Darwin Kernel Version 27.0.0: Tue Aug 11 21:06:40 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T6050",
+      "arm64"
+    ]
+  }
+}
