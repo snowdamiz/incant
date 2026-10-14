@@ -1,0 +1,166 @@
+{
+  "format": "incant-physics-sync-result-repair",
+  "version": 1,
+  "source": "eb069cd2f4a1b01a911735f5aa357f617c980302",
+  "candidate": "b99d5c4f9553caf0b24b837a6975b01a25dc8816",
+  "failed_job": 115661202655,
+  "archive_sha256": "761c269b735bebab7c7f1a94fc13542ba322eb4d255a6e362b23d3cd6e5680c5",
+  "records": [
+    {
+      "path": "freeze.json",
+      "sha256": "f96e84bd4aff78a6ce85f1a640a5ad1550dd9ee8ad3ed62b970d1db835a5bc7c",
+      "bytes": 447253,
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-sync-result-001/freeze.json"
+    },
+    {
+      "path": "repair.patch",
+      "sha256": "9894d121f236dc4e272612c051341391eb50109d1eea7854b258cf0ff52a0ab6",
+      "bytes": 1908,
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-sync-result-001/repair.patch"
+    },
+    {
+      "path": "run.py",
+      "sha256": "163ffad579a97dc0d95ba28017b7d14bda4234fd2e8f6c9d8ecc2cf8204c1098",
+      "bytes": 2378,
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-sync-result-001/run.py"
+    },
+    {
+      "path": "results.json",
+      "sha256": "0a439a9f8da2b31643016e65dc34f7cd8e3b47a7cf181f1980e73432c4148ce8",
+      "bytes": 4060,
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-sync-result-001/results.json"
+    },
+    {
+      "path": "released.json",
+      "sha256": "03c7137b804f25f04269a4fa56e08d821b30cca2c15b7cdcb41cd934cf041e28",
+      "bytes": 119,
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-sync-result-001/released.json"
+    },
+    {
+      "path": "job.json",
+      "sha256": "799c1bf0cf474bbfc5ac62b3e2aca48ff6be8ddc880ac3ddddbf1e000acc3243",
+      "bytes": 16957,
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-sync-result-001/job.json"
+    },
+    {
+      "path": "job.log",
+      "sha256": "6005bb75d9e85fdb33879a2497f788811814d2063bc134b873e7347c92225bc0",
+      "bytes": 189568,
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-sync-result-001/job.log"
+    },
+    {
+      "path": "clippy.json",
+      "sha256": "e297b6217d4629fc3b06bf6d0989b1709105b95b318ae39b6e21df1e1b932afb",
+      "bytes": 693,
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-sync-result-001/clippy.json"
+    },
+    {
+      "path": "clippy.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-sync-result-001/clippy.stdout"
+    },
+    {
+      "path": "clippy.stderr",
+      "sha256": "8647fd8549160829e9c9c739235a751e731eeb89b844f2e0d8375163bfea9ac6",
+      "bytes": 1457,
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-sync-result-001/clippy.stderr"
+    },
+    {
+      "path": "tests.json",
+      "sha256": "53111006bf40cbbf8a15cd8407f6465f591f2516cdf6480685b51824ca76452a",
+      "bytes": 1241,
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-sync-result-001/tests.json"
+    },
+    {
+      "path": "tests.stdout",
+      "sha256": "2ff02fc2c26fbc96b62d67e8b0b904892f04ee36c9cbd3e903f6ba7e4f527881",
+      "bytes": 1558,
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-sync-result-001/tests.stdout"
+    },
+    {
+      "path": "tests.stderr",
+      "sha256": "b93d75f7b05650ba6a82785785dad940b656ec45804bcb9c4be24f2dd2354a79",
+      "bytes": 1863,
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-sync-result-001/tests.stderr"
+    },
+    {
+      "path": "fmt.json",
+      "sha256": "ef057669ee234e4caa27c280705beb02992fca1a3cd536c39bff01015917f05e",
+      "bytes": 734,
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-sync-result-001/fmt.json"
+    },
+    {
+      "path": "fmt.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-sync-result-001/fmt.stdout"
+    },
+    {
+      "path": "fmt.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-sync-result-001/fmt.stderr"
+    },
+    {
+      "path": "conventions.json",
+      "sha256": "c38dd331a2d56860ccd3d81a330984aeb82bd636492c805483f0f709438f6a07",
+      "bytes": 570,
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-sync-result-001/conventions.json"
+    },
+    {
+      "path": "conventions.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-sync-result-001/conventions.stdout"
+    },
+    {
+      "path": "conventions.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-sync-result-001/conventions.stderr"
+    },
+    {
+      "path": "diff.json",
+      "sha256": "049041c59781647758820e54b5c2c0ac98f81d084857f71aee6c89234e1e573b",
+      "bytes": 534,
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-sync-result-001/diff.json"
+    },
+    {
+      "path": "diff.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-sync-result-001/diff.stdout"
+    },
+    {
+      "path": "diff.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-sync-result-001/diff.stderr"
+    }
+  ],
+  "checks": 5,
+  "affected_test_counts": [
+    5,
+    4,
+    7
+  ],
+  "binaries": [
+    {
+      "path": "binaries/character-e5918a3c7dbec5fe",
+      "sha256": "12deeedef4ad0497fe6b92ed2d532eb25c42b699b3734d02938176993c2ec3a9",
+      "bytes": 7989912
+    },
+    {
+      "path": "binaries/compound-782767a034da7254",
+      "sha256": "cff3a355de1a3beefa2b50ea8b51c03420095eb5bc57d247e1fbd207c667bb9d",
+      "bytes": 7974760
+    },
+    {
+      "path": "binaries/runtime-ff064ccdc1216f4c",
+      "sha256": "4f32c9951ab6e138f146753b2deccdab77e6e4be4f71bb8d8a2c8a616c0e4b13",
+      "bytes": 7992696
+    }
+  ],
+  "scope": "Three expected-success test Result assertions; production unchanged. Local package Clippy and three test harnesses, not full workspace/hosted rerun."
+}

@@ -7,8 +7,17 @@ all-row functional parity and exact silent PCM. Across three quiet pairs,
 TypeScript script p95 was 0.140001–0.160000 ms and Wasm static-module p95 was
 0.080001–0.090000 ms. These are descriptive different-phase measurements on
 source97834, not a Core10k, startup, FPS or phase gate. Independent raw evidence
-review and current helper Python/TypeScript checks pass; serial intake follows
-the reviewed synchronization test repair. [Evidence](docs/spikes/wasm-typescript-cost.md).
+review and current helper Python/TypeScript checks pass; current-main intake is
+qualified after the merged synchronization test repair. [Evidence](docs/spikes/wasm-typescript-cost.md).
+
+## Checkpoint31 — retained strict Clippy failure and scoped repair
+
+The frozen main262 candidate failed macOS workspace Clippy because three existing
+physics tests ignored fallible synchronization results. A source-reviewed repair
+asserts those calls succeed and passes affected package Clippy/tests. PR266
+merged after its exact-head fast SUCCESS; the original failed job remains retained, and remaining candidate jobs continue on
+the exact frozen head. No release promotion or comprehensive rerun success is
+claimed. [Repair evidence](docs/spikes/physics-sync-result.md).
 
 ## Director routing clarification — editor UI only
 
