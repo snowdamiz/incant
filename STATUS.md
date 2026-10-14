@@ -1,5 +1,21 @@
 # Implementation status
 
+Director policy, 2026-10-13: actual desktop testing on this Mac is the only
+device qualification required for development and phase gates. Mobile and other-
+device execution/performance comparisons are deferred, nonblocking follow-up;
+historical pending device gates below are superseded on that point, not passed.
+Required hosted CI/build checks, actual-success release promotion, Mac shipping-
+profile measurements and non-device release/human obligations remain in force.
+No phase is approved by this policy update. [Plan](PLAN.md).
+
+Checkpoint30 is promoted through PR232: release `71bdd2e7` has the exact tested
+main252 tree `393eb78c`. All 23 required contexts and all eight push workflows
+succeeded; independent review, merge parents, author trailer and post-merge tree
+are verified. Later main253/254 persisted-session/mobile work remains outside
+that tested release. No checkpoint is currently active; main255 is the latest
+integration. This promotion does not approve a phase or distribution gate.
+[Portable evidence](docs/spikes/evidence/release-checkpoint-30/manifest.json).
+
 Typed ephemeral haptics now have a qualified main254 composition: both physics
 modes pass 85 player CPU cases with native-window, mobile-host/FFI, native
 checkpoints and the linked static fixture together. Both strict lint runs and
@@ -8,20 +24,11 @@ setup failures are retained. All 27 owned producer paths remain exact. Final
 current-main review is pending; physical motor/mobile actuator execution and
 performance remain untested. [Evidence](docs/spikes/haptics-main254.md).
 
-Native TypeScript haptics now has a bounded committed request queue and optional
-desktop gamepad consumer. CPU qualification passes 29 input, 172 script, 44 game
-and 53 window/input cases, plus the static-module refusal and focused SIMD8
-controls. Strict lint, SDK and dependency guards pass; three failed generations
-are retained. Final independent review is pending. No physical motor/window/GPU
-was exercised; Gilrs worker lifetime and asynchronous delivery limits are explicit.
-Wasm haptic ABI parity and mobile actuators remain open.
-[Scope and evidence](docs/spikes/native-haptics-qualification.md).
-
 The retained mobile Rust host is composed on actual main253 with its accepted
 producer implementation unchanged. Fresh current-source tests pass 31 mobile+FFI
 library cases and 34 native-checkpoint player cases in each numerical mode,
 including matched fresh CLI continuation; all 26 commands pass. Independent
-current-main final review is accepted; publication awaits its exact-head fast gate. Platform surface, touch/IME, device audio
+current-main final review is accepted and PR254 merged after its exact-head fast SUCCESS. Platform surface, touch/IME, device audio
 and phone performance remain separate. [Scope](docs/spikes/mobile-host-main253.md).
 
 The default-off persisted native game path has passing joined CPU qualification:
@@ -48,11 +55,11 @@ The complete game checkpoint producer is independently accepted: both numerical 
 
 The hosted opaque session checkpoint producer is independently accepted with 200 script cases per numerical mode and strict headless/UI/audio feature checks. It preserves actual silent mixer chronology, binds captured UI/audio owners before VM initialization and leaves persisted physics admission closed. Current-main248 composition has fourteen passing read-only checks: all 3,663 inputs are bound, with only the six accepted repair paths different and three matching dependency graphs. Final composition review is independently accepted and PR249 merged after its exact-head fast check; producer execution is not relabeled. [Scope](docs/spikes/native-session-hosted-physics-checkpoints.md).
 
-Checkpoint28 finished unpromoted at reviewed main246 on PR232: 13 required checks succeeded, nine failed and one was skipped; all eight workflows are terminal. Native physics jobs failed at isolated lock resolution, and feature-off NativeOwner Clippy failures are diagnosed on all three desktop platforms. The reviewed combined repair passes seventeen lock/guard checks and four strict all-target Clippy configurations; PR248 merged after its exact-head required fast check. Historical checkpoint29 then froze that main248 tree (`9493650a`, candidate `74e77456`) on the same PR232 and finished unpromoted. Current checkpoint30 freezes reviewed main252; all 23 requirements remain mandatory. Release is unchanged. [Lock evidence](docs/spikes/runtime-probe-locks-main247.md).
+Checkpoint28 finished unpromoted at reviewed main246 on PR232: 13 required checks succeeded, nine failed and one was skipped; all eight workflows are terminal. Native physics jobs failed at isolated lock resolution, and feature-off NativeOwner Clippy failures are diagnosed on all three desktop platforms. The reviewed combined repair passes seventeen lock/guard checks and four strict all-target Clippy configurations; PR248 merged after its exact-head required fast check. Historical checkpoint29 then froze that main248 tree (`9493650a`, candidate `74e77456`) on the same PR232 and finished unpromoted. Checkpoint30 subsequently passed all 23 requirements and promoted the exact main252 tree; see the current summary above. [Lock evidence](docs/spikes/runtime-probe-locks-main247.md).
 
 Opaque headless TypeScript/native-physics session checkpoints have accepted producer tests: 195 script cases per numerical mode, 186 feature-off cases, strict Clippy and optional/lean/wasm compilation. The original manifest guard failure is retained; its three-manifest repair merged with PR246 and has separate focused script qualification. Current main246 composition matches all 3,656 accepted repaired implementation/build/tool inputs; ten read-only checks pass, selected normal graphs match and ordinary snapshot stays excluded. Final current-main review is accepted; PR247 merged after its exact-head required fast SUCCESS. Public physics byte saves remain refused; subsequent PR249 adds the separately reviewed hosted UI/audio continuation API. [Producer scope](docs/spikes/native-session-physics-checkpoints.md).
 
-Native capture, primitive 2D/3D solver checkpoints and opaque ECS/physics world checkpoints are available as opt-in in-memory APIs. Public persisted physics and full script/session checkpoint admission remain separate. Historical checkpoint27 selected main241; its macOS conformance hit the configured 40-minute limit and cannot count as success. The reviewed main repair gives that macOS job 90 minutes, keeping Linux at 40 and every proof unchanged. Checkpoint27 finished unpromoted with 22 required checks successful and that macOS job cancelled. Checkpoints28 and29 later finished unpromoted. Current checkpoint30 freezes reviewed main252 (`c1988638`, candidate `721eddac`) on the same PR232. All 23 required checks remain mandatory and release is unchanged. [Timeout evidence](docs/spikes/macos-conformance-timeout.md).
+Native capture, primitive 2D/3D solver checkpoints and opaque ECS/physics world checkpoints are available as opt-in in-memory APIs. Public persisted physics and full script/session checkpoint admission remain separate. Historical checkpoint27 selected main241; its macOS conformance hit the configured 40-minute limit and cannot count as success. The reviewed main repair gives that macOS job 90 minutes, keeping Linux at 40 and every proof unchanged. Checkpoint27 finished unpromoted with 22 required checks successful and that macOS job cancelled. Checkpoints28 and29 later finished unpromoted. Checkpoint30 subsequently passed all 23 requirements and promoted that reviewed main252 tree (`c1988638`, candidate `721eddac`) through the same PR232. [Timeout evidence](docs/spikes/macos-conformance-timeout.md).
 
 This grouped integration adds borrowed configuration views and opaque ECS/native-physics world checkpoints. The original 3,651-input/source004 composition has independent final acceptance. A subsequent all-path manifest audit found twelve optional snapshot forwarding omissions before merge; the reviewed three-manifest repair now passes both 261-case runtime suites and all seventeen scoped checks. Selected solver modes pass, and the ordinary graph excludes snapshot. The 205 ordinary consumer cases remain source003 evidence; the earlier passing PR check is retained separately. Final independent repaired evidence review is accepted; PR246 merged after a new exact-head fast SUCCESS, with the tested tree and author trailer verified. Public persisted physics and whole script/session saves stay closed. [Current composition](docs/spikes/world-checkpoints-main245.md).
 
@@ -60,7 +67,7 @@ Default-off native capture and outer primitive in-memory checkpoints merged as P
 
 Standalone 3D physics now hides incomplete state and trigger observations after a late step error or caught unwind, and cannot be revived through structural calls. Invalid time steps remain retryable. Independent source and final producer reviews are accepted. Both producer modes, strict Clippy, native consumers and wasm compilation pass; the exact current-main239 composition additionally passes all eight default runtime cases and six checks. Final current-main review is accepted; PR240 merged after its required exact-head fast check. This does not implement rollback or physics saves. [Evidence](docs/spikes/physics-failure-isolation.md).
 
-Checkpoint26 finished unpromoted with 22 required checks successful and its original Windows Dx12 SSAO filter failure retained. PR241 merged the reviewed full-target postprocess raster and conservative integer scissor, preserving shaders, geometry projection and strict intervals. Exact merged main241 then passed both original strict Dx12 projection contracts (570 R8 and 285 depth values each) and six observation submissions on Microsoft Basic Render Driver. Historical checkpoint27 froze that reviewed main241 tree on PR232 and later finished unpromoted at its macOS conformance timeout. Current checkpoint30 includes the reviewed timeout and source-lock repairs; all 23 required checks remain mandatory. No release promotion or appearance claim. [Portable Dx12 evidence](docs/spikes/evidence/ssao-strict-dx12-main241/manifest.json).
+Checkpoint26 finished unpromoted with 22 required checks successful and its original Windows Dx12 SSAO filter failure retained. PR241 merged the reviewed full-target postprocess raster and conservative integer scissor, preserving shaders, geometry projection and strict intervals. Exact merged main241 then passed both original strict Dx12 projection contracts (570 R8 and 285 depth values each) and six observation submissions on Microsoft Basic Render Driver. Historical checkpoint27 froze that reviewed main241 tree on PR232 and later finished unpromoted at its macOS conformance timeout. Checkpoint30 subsequently passed all 23 requirements with the reviewed timeout and source-lock repairs, and its tested tree was promoted. No new appearance claim. [Portable Dx12 evidence](docs/spikes/evidence/ssao-strict-dx12-main241/manifest.json).
 
 Private primitive narrow-phase construction on main237 passed 227 snapshot and 45 native cases per mode, 312 decoded continuation steps per dimension/mode and all 29 checks. Source and final current-main evidence reviews are accepted; PR238 merged after its required exact-head fast check. Sixteen fast8 fixture substitutions are explicitly bound. Compound construction, complete native world installation and public physics saves stay closed. [Evidence](docs/spikes/physics-native-narrow-main237.md).
 
@@ -70,7 +77,7 @@ Private typed Parry BVH construction and shared allocation on main234 passed bot
 
 Native island construction on main231 is source-reviewed and passed current composed CPU qualification: 218 snapshot + 28 private native cases in each of two parallel modes, 156 paired island steps per dimension/mode, all 21 checks successful. Final integration and main234 join reviews are accepted; PR235 merged after its required exact-head fast check. Complete-world restore and physics-save admission remain closed. See [the scoped evidence](docs/spikes/physics-islands-main231.md).
 
-[PLAN.md](PLAN.md) revision 8 is the source of truth. Phase 1 is in progress;
+[PLAN.md](PLAN.md) revision 9 is the source of truth. Phase 1 is in progress;
 the full engine and Driftwake release are not complete. Calendar targets and
 phase durations have been removed. Work proceeds continuously and in parallel
 where dependencies allow; exit gates still require their stated evidence.
@@ -317,8 +324,8 @@ performance gate is claimed. [Scope and evidence](docs/spikes/wasm-c-parallel.md
 
 ## Development and release overview — 2026-10-13
 
-The reviewed main253 baseline includes supported persisted native game checkpoints,
-plus the opt-in cooked renderer families and
+The reviewed main254 baseline includes the retained mobile Rust host, supported
+persisted native game checkpoints, and the opt-in cooked renderer families and
 Vulkan cache lifecycle, dynamic resolution, numerical retained motion, CPU/GPU
 profiling scopes and joined inert physics owner boundaries. Each lane retains its own
 execution and acceptance limits below; the complete engine and game remain open.
@@ -2473,14 +2480,15 @@ applicable checks passed; its actual-main tree equals the tested head. [Integrat
   input/haptics/native SDK deliverables. Existing scoped/legacy implementations
   are not evidence of full native feature parity.
 - Complete Wasm gameplay SDK and module checkpoint coverage beyond the locally
-  verified single-scene public import/Play/export route; establish platform/device
-  conformance and measure the
-  settled TypeScript AOT/physics candidate adoption rules. Do not reopen Section
-  12 decisions or substitute desktop timings for reference-phone results.
-- Build and exercise Core Sample and the 2D sample on the required device classes,
-  including hosted real iPhone/Pixel devices through AWS Device Farm, with actual
-  device model/OS, shipping profile and matched baselines. Phone script p95,
-  shader-stall, frame-time and memory gates remain open.
+  verified single-scene public import/Play/export route; establish the required
+  build and hosted-CI conformance and measure the settled TypeScript AOT/physics
+  adoption criteria on this actual Mac. Keep Section 12 numerical thresholds and
+  source/build obligations; other-device comparisons are deferred, not passed.
+- Build and exercise Core Sample and the 2D sample on this actual Mac, recording
+  its model/chip/OS, shipping profile and matched baselines. Required script p95,
+  shader-stall, frame-time and memory measurements remain outstanding until
+  measured. iPhone/Pixel, other desktop and additional device execution/performance
+  are nonblocking follow-up, including any later AWS Device Farm work.
 - Deliver the remaining editor/AI/content/export/network/services/game production
   and release scope in PLAN.md. Phase 1 progress is not Engine 1.0 or Driftwake
   release completion.
@@ -2504,12 +2512,15 @@ Do not revoke the director's working account for a test. Manual Windows/Linux
 account checks and the Windows viewport review were replaced by CI under the
 director's explicit decision; no extra desktop machine or live API key is requested.
 
-Hosted device/service accounts first gate real staging or device work, not
-local feature development. Payments and human staffing/legal commitments remain
-human-owned. Signing credentials and store/developer accounts first gate
-Phase 5 store uploads. No phone purchases, name clearance or package reservations
-are required. Unsigned packages and simulator/compile-only results do not satisfy
-store distribution or real-device gates.
+Actual shipping-profile measurements on this Mac remain required where the plan
+sets a performance gate. Mobile and other-device execution/performance are deferred,
+nonblocking follow-up; their results remain unmeasured, not passed. Hosted device
+accounts are needed only for those later runs. Service accounts still gate real
+staging work. Payments and human staffing/legal commitments remain human-owned.
+Signing credentials and store/developer accounts first gate Phase 5 store uploads.
+No phone purchases, name clearance or package reservations are required. Unsigned
+packages do not satisfy store distribution, and simulator/compile-only evidence
+must not be described as actual Mac or other-device execution.
 
 Earlier implementation notes, superseded counts and publication chronology are
 preserved in the [historical ledger](docs/spikes/implementation-history-2026-10-10.md).
