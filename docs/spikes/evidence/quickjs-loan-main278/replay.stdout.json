@@ -1,0 +1,1 @@
+{"verified": true, "functional_processes": 3, "timing_processes": 6, "same_mode_script_5percent": "pass", "same_mode_frame_5percent": {"M1": "pass", "D1": "pass", "D2": "pass", "M2": "regression"}, "same_mode_requested_memory_5percent": "pass", "all_2ms_budgets": "fail", "phase_gate_passed": false, "external_rehashed": true}
