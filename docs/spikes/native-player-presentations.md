@@ -18,6 +18,12 @@ exact logs, feature graphs, copied test binaries and the resolution diff.
 The producer packet below remains unchanged and replayable. Its live evidence
 predates the audio fix; a fresh complete shipping replay is still outstanding.
 
+The first PR integration check found a formatting conflict in a test shared by
+Rust 2021 and 2024 modules. Binding its existing result before asserting removes
+that conflict; both format checks pass. This changes no production behavior or
+test expectation. The [retained failure and correction](evidence/native-presentation-audio/format-followup.json)
+remain separate from the exact earlier CPU and shipping source identities.
+
 ## Original observer producer
 
 This default-off source candidate joins the CPU-qualified HAL seam and main297's
