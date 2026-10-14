@@ -11,20 +11,21 @@ const load = (text = source) => {
 };
 const id = n => `row-${String(n).padStart(5, '0')}`;
 const instances = Array.from({ length: 9999 }, (_, n) => ({ entity: id(n), props: { ordinal: n } }));
-function context(tick, reverse = false) {
+function context(tick, reverse = false, previous, stride = 10) {
   const rows = ['core-controller', ...instances.map(i => i.entity)];
   if (reverse) rows.reverse();
   const chunks = [];
   for (let start = 0; start < rows.length; start += 137) {
-    const ids = rows.slice(start, start + 137), transforms = new Float64Array(ids.length * 10).fill(777);
-    chunks.push({ ids, transforms, transformStride: 10 });
+    const ids = previous?.chunks[chunks.length].ids ?? Object.freeze(rows.slice(start, start + 137));
+    const transforms = new Float64Array(ids.length * stride).fill(777);
+    chunks.push({ ids, transforms, transformStride: stride });
   }
   return { instances, chunks, clock: { tick } };
 }
 function read(c, entity) {
   for (const chunk of c.chunks) {
     const row = chunk.ids.indexOf(entity);
-    if (row >= 0) return Array.from(chunk.transforms.slice(row * 10, row * 10 + 3));
+    if (row >= 0) return Array.from(chunk.transforms.slice(row * chunk.transformStride, row * chunk.transformStride + 3));
   }
   throw Error('absent row');
 }
@@ -38,14 +39,20 @@ function sentinel(tick) {
   return [9999, residue(9999, 97) / 9999 - 48 + phase, residue(9999, 13) / 9999 - 6 - phase];
 }
 const behavior = load();
-for (const tick of [1, 63, 64, 65]) {
-  const c = context(tick, tick % 2 === 0);
+let previous;
+for (const [tick, reuse, reverse, stride] of [[1, false, false, 10], [63, true, false, 13],
+    [64, false, true, 10], [65, true, true, 11]]) {
+  const c = context(tick, reverse, reuse ? previous : undefined, stride);
+  // Native loans are revoked after each tick. Matching immutable IDs do not
+  // authorize retaining a previous chunk, view or stride.
+  if (previous) for (const chunk of previous.chunks) structuredClone(chunk.transforms.buffer, { transfer: [chunk.transforms.buffer] });
   assert.equal(behavior.update(c), undefined);
   assert.deepEqual(read(c, 'core-controller'), [777, 777, 777]);
   for (let n = 1; n < 9999; n++) assert.deepEqual(read(c, id(n)), expected(tick, n));
   read(c, id(0)).forEach((v, i) => assert.ok(Math.abs(v - sentinel(tick)[i]) < 1e-12));
   for (const chunk of c.chunks) for (let n = 0; n < chunk.ids.length; n++)
-    assert.ok(Array.from(chunk.transforms.slice(n * 10 + 3, n * 10 + 10)).every(v => v === 777));
+    assert.ok(Array.from(chunk.transforms.slice(n * stride + 3, n * stride + stride)).every(v => v === 777));
+  previous = c;
 }
 for (const invalid of ['few', 'ordinal', 'duplicate', 'extra-prop', 'missing-row']) {
   const c = context(1); c.instances = structuredClone(instances);
@@ -53,12 +60,26 @@ for (const invalid of ['few', 'ordinal', 'duplicate', 'extra-prop', 'missing-row
   if (invalid === 'ordinal') c.instances[9].props.ordinal = 8;
   if (invalid === 'duplicate') c.instances[9].entity = c.instances[8].entity;
   if (invalid === 'extra-prop') c.instances[9].props.extra = 1;
-  if (invalid === 'missing-row') c.chunks[0].ids[10] = 'not-owned';
+  if (invalid === 'missing-row') c.chunks[0].ids = Object.freeze(c.chunks[0].ids.map((v, i) => i === 10 ? 'not-owned' : v));
   assert.throws(() => load().update(c), /Core stress/);
 }
 // An omitted actual write must fail the checksum observable, even with count intact.
-const broken = source.replace('chunk.transforms[offset] = ordinal % 97 - 48 + phase;', '/* omitted x write */');
+const broken = source.replace('transforms[offset] = values[index + 1] + phase;', '/* omitted x write */');
 assert.notEqual(broken, source);
 const c = context(2); load(broken).update(c);
 assert.ok(Math.abs(read(c, id(0))[1] - sentinel(2)[1]) > 1);
-console.log('Core stress typed bulk controls passed: all 9999 rows, four phases, five refusals, omitted-write mutation.');
+
+// A new valid attachment snapshot may keep the same world rows but change the
+// owned ordinal mapping. Cached metadata must not preserve the old assignments.
+const changed = context(66, false, previous);
+changed.instances = structuredClone(instances);
+[changed.instances[1].entity, changed.instances[97].entity] = [changed.instances[97].entity, changed.instances[1].entity];
+behavior.update(changed);
+assert.deepEqual(read(changed, id(1)), expected(66, 97));
+assert.deepEqual(read(changed, id(97)), expected(66, 1));
+changed.instances = structuredClone(changed.instances);
+changed.instances[1].props.ordinal = 97;
+const beforeRejected = changed.chunks.map(chunk => Buffer.from(chunk.transforms.buffer).toString('hex'));
+assert.throws(() => behavior.update(changed), /Core stress membership/);
+assert.deepEqual(changed.chunks.map(chunk => Buffer.from(chunk.transforms.buffer).toString('hex')), beforeRejected);
+console.log('Core stress controls passed: all 9999 rows/four phases, replaced row and attachment snapshots, detached old views, changed stride, five refusals and omitted-write mutation.');

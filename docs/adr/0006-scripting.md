@@ -78,6 +78,13 @@ measurements are deferred, nonblocking follow-up and are not inferred from Mac r
 and memory limits remain denial-of-service safeguards, not a proof against VM
 vulnerabilities. See the [migration review](../spikes/performance-plan-v4-review.md).
 
+The [pinned AOT language spike](../spikes/typescript-aot.md) now retains actual
+AssemblyScript compiler refusals for five current-language requirements and one
+matching arithmetic control. It prepares fixed Static Hermes inputs and lists
+the pending host contracts. This is language-level evidence only: no candidate
+has passed the complete SDK, native shipping comparison, iOS/size or upstream
+security-release requirements. The adoption decision remains open.
+
 Source: [PLAN.md](../../PLAN.md), sections 2, 3, 5 and 6.
 
 A bounded [development Wasmtime implementation](../spikes/development-wasm-host.md)
