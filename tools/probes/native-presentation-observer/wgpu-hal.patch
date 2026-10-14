@@ -5,7 +5,7 @@
  
  [features]
 +# Incant private diagnostic only; off in all normal feature graphs.
-+diagnostic-presentations = []
++diagnostic-presentations = ["objc2-metal?/objc2-core-foundation"]
  device_lost_panic = []
  dx12 = [
      "dep:arrayvec",
