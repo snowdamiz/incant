@@ -229,12 +229,18 @@ fn scene_msaa_queued_resize_clear_refusal_and_explicit_one_sample_routes() {
         one_pixels, four_pixels,
         "geometric diagonal fixture did not exercise sample coverage"
     );
-    let mut retained = renderer.prepare_retained(&input, "camera").unwrap();
+    // Diagnostic cubes are ordinary authoring geometry, explicitly unsupported
+    // by native retained preparation. Keep the retained comparison on actual
+    // imported models, PMA sprites and shaped world text instead.
+    let mut native_input = fixture::mixed(1.);
+    native_input.nodes.retain(|node| !node.diagnostic);
+    let native_one_pixels = fixture::draw(&ordinary, &native_input, [160, 96], None);
+    let mut retained = renderer.prepare_retained(&native_input, "camera").unwrap();
     let output = hdr_output::texture(&renderer, FORMAT, 160, 96);
     retained
         .submit(
             &renderer,
-            &input,
+            &native_input,
             RetainedTarget {
                 view: &output.create_view(&Default::default()),
                 format: FORMAT,
@@ -246,7 +252,7 @@ fn scene_msaa_queued_resize_clear_refusal_and_explicit_one_sample_routes() {
         .unwrap();
     assert_eq!(
         hdr_output::read(&renderer, &output),
-        one_pixels,
+        native_one_pixels,
         "retained submit inherited editor MSAA"
     );
     let mut pixel_input = fixture::mixed(1.);
