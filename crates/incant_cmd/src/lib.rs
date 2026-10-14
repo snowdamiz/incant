@@ -824,3 +824,6 @@ mod project_file_tests;
 
 #[cfg(test)]
 mod project_checkpoint_tests;
+
+#[cfg(test)]
+mod test_isolation;

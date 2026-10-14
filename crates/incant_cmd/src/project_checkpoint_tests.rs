@@ -39,6 +39,11 @@ fn save(bus: &mut CommandBus) -> Result<ProjectSaveReceipt, CommandError> {
 }
 #[test]
 fn legacy_custom_journal_save_pin_history_and_reopen_share_one_capability() {
+    if crate::test_isolation::isolated(
+        "project_checkpoint_tests::legacy_custom_journal_save_pin_history_and_reopen_share_one_capability",
+    ) {
+        return;
+    }
     let root = tempfile::tempdir().unwrap();
     let logs = tempfile::tempdir().unwrap();
     let path = root.path().join("game.incant.json");
@@ -103,6 +108,11 @@ fn legacy_custom_journal_save_pin_history_and_reopen_share_one_capability() {
 }
 #[test]
 fn save_refuses_stale_revision_external_bytes_and_same_byte_replacement_before_effects() {
+    if crate::test_isolation::isolated(
+        "project_checkpoint_tests::save_refuses_stale_revision_external_bytes_and_same_byte_replacement_before_effects",
+    ) {
+        return;
+    }
     for kind in ["revision", "bytes", "node"] {
         let dir = tempfile::tempdir().unwrap();
         let path = dir.path().join("game.incant");
@@ -141,6 +151,11 @@ fn save_refuses_stale_revision_external_bytes_and_same_byte_replacement_before_e
 }
 #[test]
 fn file_requests_are_closed_and_no_capability_is_deserialized() {
+    if crate::test_isolation::isolated(
+        "project_checkpoint_tests::file_requests_are_closed_and_no_capability_is_deserialized",
+    ) {
+        return;
+    }
     for value in [
         serde_json::json!({"operation":"save","expected_revision":0,"path":"evil"}),
         serde_json::json!({"operation":"apply_pin","expected_revision":0,"review_id":new_id(),"candidate_text":"{}"}),
@@ -206,6 +221,11 @@ fn child(root: &Path) -> Process {
 }
 #[test]
 fn checkpoint_save_crashes_and_partial_errors_recover_without_logical_advance() {
+    if crate::test_isolation::isolated(
+        "project_checkpoint_tests::checkpoint_save_crashes_and_partial_errors_recover_without_logical_advance",
+    ) {
+        return;
+    }
     for (env, phases, exit) in [
         (
             "INCANT_PROJECT_PROTOCOL_CRASH",
@@ -261,6 +281,11 @@ fn checkpoint_save_crashes_and_partial_errors_recover_without_logical_advance() 
 }
 #[test]
 fn checkpoint_save_cannot_replace_causal_state_with_equal_projection() {
+    if crate::test_isolation::isolated(
+        "project_checkpoint_tests::checkpoint_save_cannot_replace_causal_state_with_equal_projection",
+    ) {
+        return;
+    }
     use base64::{Engine as _, engine::general_purpose::STANDARD};
     let root = tempfile::tempdir().unwrap();
     prepared(root.path());
@@ -320,6 +345,11 @@ fn checkpoint_save_cannot_replace_causal_state_with_equal_projection() {
 
 #[test]
 fn legacy_pending_script_recovers_under_exact_custom_journal_binding() {
+    if crate::test_isolation::isolated(
+        "project_checkpoint_tests::legacy_pending_script_recovers_under_exact_custom_journal_binding",
+    ) {
+        return;
+    }
     let root = tempfile::tempdir().unwrap();
     let logs = tempfile::tempdir().unwrap();
     let path = root.path().join("game.incant.json");
@@ -404,6 +434,11 @@ fn legacy_pending_script_recovers_under_exact_custom_journal_binding() {
 
 #[test]
 fn checkpoint_capacity_and_custom_journal_replacement_refuse_before_backup() {
+    if crate::test_isolation::isolated(
+        "project_checkpoint_tests::checkpoint_capacity_and_custom_journal_replacement_refuse_before_backup",
+    ) {
+        return;
+    }
     let root = tempfile::tempdir().unwrap();
     let logs = tempfile::tempdir().unwrap();
     let path = root.path().join("game.incant.json");
