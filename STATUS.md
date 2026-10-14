@@ -1,5 +1,13 @@
 # Implementation status
 
+Typed ephemeral haptics now have a qualified main254 composition: both physics
+modes pass 85 player CPU cases with native-window, mobile-host/FFI, native
+checkpoints and the linked static fixture together. Both strict lint runs and
+three selected graph comparisons pass; 18 successful commands and two SDK-driver
+setup failures are retained. All 27 owned producer paths remain exact. Final
+current-main review is pending; physical motor/mobile actuator execution and
+performance remain untested. [Evidence](docs/spikes/haptics-main254.md).
+
 Native TypeScript haptics now has a bounded committed request queue and optional
 desktop gamepad consumer. CPU qualification passes 29 input, 172 script, 44 game
 and 53 window/input cases, plus the static-module refusal and focused SIMD8

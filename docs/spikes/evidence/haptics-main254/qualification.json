@@ -1,0 +1,42 @@
+{
+  "main": "7c746ebec7e5553bf34c2643ab4c952a1a433db7",
+  "producer": "44b9aead71fe83252445264adb597f51b984843b",
+  "tested_source": "88e52c482f13aa1ee55c2c9c5506319f618d2d3c",
+  "packet": "08abf8af1fa21f8b6660d1a0918bb9deebb35650",
+  "changed_inputs": [
+    "crates/incant_game_player/src/program.rs",
+    "crates/incant_game_player/src/window/gamepad.rs",
+    "crates/incant_game_player/src/window/haptics.rs",
+    "crates/incant_game_player/src/window/haptics/tests.rs",
+    "crates/incant_game_player/src/window/mod.rs",
+    "crates/incant_game_runtime/src/core.rs",
+    "crates/incant_game_runtime/src/hosted.rs",
+    "crates/incant_game_runtime/src/lib.rs",
+    "crates/incant_game_runtime/src/offline.rs",
+    "crates/incant_game_runtime/tests/hosting.rs",
+    "crates/incant_input/src/gamepad.rs",
+    "crates/incant_input/src/haptics.rs",
+    "crates/incant_input/src/lib.rs",
+    "crates/incant_script/src/checkpoint/mod.rs",
+    "crates/incant_script/src/checkpoint/native/persisted.rs",
+    "crates/incant_script/src/checkpoint/native/prepare.rs",
+    "crates/incant_script/src/checkpoint/native/tests/persisted.rs",
+    "crates/incant_script/src/commands.rs",
+    "crates/incant_script/src/haptic_tests.rs",
+    "crates/incant_script/src/haptics.rs",
+    "crates/incant_script/src/lib.rs",
+    "crates/incant_script/src/program.rs",
+    "crates/incant_script/src/session.rs",
+    "sdk/ts/src/index.d.ts",
+    "sdk/ts/src/native.d.ts",
+    "sdk/ts/type-tests/haptics.ts"
+  ],
+  "producer_execution": "Original input/script/game/window/SDK/Wasmtime and static tests remain source44b9. Current player85 cases per numerical mode exercise the actual joined native-window/mobile-host/mobile-ffi/native-checkpoints/static-module features.",
+  "limits": [
+    "CPU only; no GPU/window launch/physical motor, mobile actuator, timing or platform appearance proof.",
+    "Gilrs worker remains process-lifetime and asynchronous, not an acknowledged bounded hardware-delivery queue.",
+    "No dependency changes from haptics; four prior mobile inputs are exact main254.",
+    "Two SDK driver setup failures are retained. Final TypeScript5.9.3 compiler was reused from an existing installation and hash-bound, not freshly installed.",
+    "No new script/game full-suite execution is claimed."
+  ]
+}
