@@ -1,0 +1,12 @@
+{
+  "schema": "incant-quickjs-f64-timing-v1",
+  "source": "831c89a8fedf977df737d78493b9e4a26396c27a",
+  "functional_packet": "3a6552e09b3238d97fb1bc70b2881180f34be5be",
+  "plan_sha256": "55702a6af1376a64f99ff230e15723381e8690cb5007f956b615bb63752e5f7b",
+  "runner_sha256": "58d667b2aca08bc0ae4208c410ec92d82b68340a552456ccbefd20548658864c",
+  "records": 27,
+  "payloads": 21,
+  "archive_sha256": "93ae8aa161c1f89182a4f7ebf4c6f87119101ef6c6d946078b5334d128d9be37",
+  "scope": "Standalone rquickjs CI diagnostic only; actual unchanged stress callback update Function.call interval. No Incant ScriptHost, native loan, frame/FPS/shipping gate or adoption claim.",
+  "outcome": "Mixed/slower diagnostic; no adoption or shipping evidence."
+}
