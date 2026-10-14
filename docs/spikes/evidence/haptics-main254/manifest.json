@@ -44,13 +44,18 @@
       "path": "docs/spikes/evidence/haptics-main254/current-main254-review.json",
       "bytes": 995,
       "sha256": "709b79086b82a431168cae6471710fd86b79b2fe96fefd09e42e9a7a9a6f75cd"
+    },
+    {
+      "path": "docs/spikes/evidence/haptics-main254/main255-review.json",
+      "bytes": 621,
+      "sha256": "391ad7c6f39c09e800e0194533634d13bde53d34f19b98508b90fb663686d82e"
     }
   ],
   "current_player_cases_per_mode": 85,
   "successful_commands": 18,
   "retained_harness_failures": 2,
   "current_binary_copies": 2,
-  "final_current_main_review": "main254 accepted; main255 documentation-only join pending",
+  "final_current_main_review": "main254 final and main255 documentation-only join independently accepted",
   "main255_join": {
     "path": "docs/spikes/evidence/haptics-main254/main255-join.json",
     "bytes": 3551,

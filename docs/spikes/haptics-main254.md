@@ -44,7 +44,8 @@ Independent final main254 review is accepted. The later main255 join contains
 13 reviewed policy/promotion documentation paths and changes only AGENTS.md and
 PLAN.md among frozen inputs. Their original/new Git hashes are explicit; all
 implementation/build/tool inputs, archives and executions stay unchanged. Final
-documentation-join review is pending. No actual haptic delivery,
+documentation-join review is independently accepted; publication awaits the
+required exact-head fast check. No actual haptic delivery,
 mobile support, platform appearance, device timing or phase approval is claimed.
 
 Read-only verification (no builds or executable launch):

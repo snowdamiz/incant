@@ -21,7 +21,7 @@ modes pass 85 player CPU cases with native-window, mobile-host/FFI, native
 checkpoints and the linked static fixture together. Both strict lint runs and
 three selected graph comparisons pass; 18 successful commands and two SDK-driver
 setup failures are retained. All 27 owned producer paths remain exact. Final
-main254 review is accepted; the main255 documentation-only join is pending final review. Physical motor/mobile actuator execution and
+main254 review is accepted; the main255 documentation-only join is independently accepted. Publication awaits the required exact-head fast check. Physical motor/mobile actuator execution and
 performance remain untested. [Evidence](docs/spikes/haptics-main254.md).
 
 The retained mobile Rust host is composed on actual main253 with its accepted
