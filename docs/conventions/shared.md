@@ -19,8 +19,12 @@ binary scenes. Do not extend the legacy document/command-bus play path. Migrate
 existing gameplay to typed bulk access and structural command buffers, with no
 per-tick project cloning, JSON serialization or authoring validation. Keep the
 shipped runtime free of document, CRDT, command-bus and agent dependencies.
-Performance claims require the plan's shipping-profile/device measurements;
-desktop tests and compile-only CI do not satisfy the reference-phone gates.
+Performance claims require actual shipping-profile measurements on this Mac with
+its model/OS and matched baseline recorded. The director's 2026-10-13 decision
+makes this Mac the only required device for development and phase gates. Mobile
+and other-device execution/performance are deferred, nonblocking follow-up, not
+passed gates. Preserve all existing hosted CI/build/release requirements and
+non-device correctness, security, distribution and human-owned obligations.
 Section 12 decisions are settled, including wasm2c for shipped native modules,
 Wasmtime for development, and the numerical adoption rules for TypeScript AOT
 and the physics backend. Apply those rules without reopening the decisions;
@@ -28,22 +32,29 @@ record measured outcomes and keep human-owned actions separate.
 Revision 6 uses hosted real phones in AWS Device Farm; do not request phone
 purchases, name clearance or package reservations. Store accounts and distribution
 signing first gate Phase 5 uploads. Record the actual device model/OS and matched
-baseline for performance results; simulator builds do not satisfy those gates.
+baseline for performance results. Simulators and compile-only checks do not
+establish actual Mac or other-device execution; other-device evidence is deferred.
 Revision 7 removes calendar dates. Do not add target dates, phase durations or
 ship-date targets; exit gates alone measure progress.
 Revision 8 makes outside services local-first: develop and test against the
 local containers or in-process substitutes in PLAN.md section 2.7, use hosted
 services only where a gate needs the real one, and label local results as local.
 
-Astra owns nonvisual implementation and integration. Claude Opus 5.5 through ACP,
-with thinking explicitly set to Max for every new or resumed session, owns
-visual design, layouts, styling, look-dev, rendered-pixel review, screenshots,
-diagrams and game art. Mixed tasks split correctness from appearance. Do not
-substitute another model or effort level silently. Verify both settings through
-ACP before prompting; a default effort setting is insufficient. If ACP is
-unavailable, leave a self-contained
-packet in handoffs/<id>/brief.md for manual Claude execution. Never self-approve a
-routing exception. Build-time accounts must never become runtime dependencies.
+Astra/root and its subagents own all work except the default editor UI handoff:
+rendering algorithms, graphics/runtime correctness, non-editor visuals, game art,
+HUD, look-dev, screenshots, diagrams, implementation and integration. Claude Opus
+5.5 through ACP, with thinking explicitly set to Max for every new or resumed
+session, owns editor UI design, layout, styling and rendered-pixel review by
+default. Mixed editor UI tasks split correctness from appearance. Verify both
+model and effort through ACP before prompting; a default effort setting is
+insufficient. Do not substitute another model or effort level silently. If ACP is
+unavailable, leave a self-contained packet in handoffs/<id>/brief.md for manual
+Claude execution. The director's 2026-10-13 clarification limits default Claude
+routing to editor UI and authorizes Astra to take over any work Claude is failing
+to resolve, including editor UI implementation and pixel review. Apply that
+standing authorization without asking again; retain prior attempts, identify the
+takeover, and preserve acceptance and evidence standards. Do not invent other
+routing exceptions. Build-time accounts must never become runtime dependencies.
 
 Use Rust 2024, cargo fmt, cargo clippy, typed errors, and tests of observable
 behavior. Avoid unnecessary unsafe code. Pin dependency resolutions. Keep files

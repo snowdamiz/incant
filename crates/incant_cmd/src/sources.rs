@@ -121,10 +121,23 @@ impl CommandBus {
         &mut self,
         change: journal::Change,
         edit: Option<&SourceEdit>,
+        project_edit: Option<&incant_source::ProjectEdit>,
         next: Option<&CollaborativeDocument>,
     ) -> Result<(), CommandError> {
         if self.replaying {
             return Ok(());
+        }
+        if let Some(project_edit) = project_edit {
+            if edit.is_some() {
+                return Err(CommandError::Invalid("mixed file edits".into()));
+            }
+            if matches!(
+                change,
+                journal::Change::Undo { .. } | journal::Change::Redo { .. }
+            ) {
+                return self.record_checkpoint_history(change, project_edit, next);
+            }
+            return self.record_project(change, project_edit, next);
         }
         let Some(edit) = edit else {
             if let Some(journal) = &mut self.journal {

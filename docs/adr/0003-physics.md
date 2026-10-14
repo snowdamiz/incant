@@ -69,15 +69,17 @@ See [runtime integration](../spikes/physics-runtime.md) for supported shapes,
 queries, script semantics and current limitations. Read-only character movement
 queries are implemented in the [character increment](../spikes/character-movement.md),
 including actual platform execution and rendered review. Mesh colliders,
-hierarchy/scale support, runtime rollback snapshots and physical-device
-performance gates remain open. Before Phase 6, compare the fast and deterministic
+hierarchy/scale support and runtime rollback snapshots are described by their
+respective implementation evidence. Other-device performance comparisons remain
+deferred, nonblocking follow-up under the director's 2026-10-13 decision. Before Phase 6, compare the fast and deterministic
 variants with Jolt through a maintained portable shim on the Section 6.14 workload:
 500 dynamic bodies, destructible props, four characters and enemy crowds. Measure
-on reference phones and desktops, then apply decision 19's rule: keep Rapier
-unless Jolt is at least 1.5 times faster in p95 step time on both reference phones
+on this Mac in the shipping profile, then apply decision 19's rule: keep Rapier
+unless Jolt is at least 1.5 times faster in p95 step time on the matched Mac workload
 and a maintained C shim builds for all six targets; if both hold, switch behind
 this boundary before Phase 6. A binding failure or a microbenchmark alone does
-not establish which solver is faster.
+not establish which solver is faster. Record actual Mac model/OS and baseline;
+reference-phone comparisons are deferred and do not block the adoption decision.
 
 Native parallel stepping and the separately built fast kernel are implemented.
 See [kernel build evidence](../spikes/physics-runtime-variants.md). Project-level

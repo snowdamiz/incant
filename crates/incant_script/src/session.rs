@@ -9,6 +9,8 @@ use thiserror::Error;
 
 #[derive(Debug, Error)]
 pub enum SessionError {
+    #[error("this program has no haptics command capability")]
+    HapticsUnsupported,
     #[error("this program has no session restart request capability")]
     RestartUnsupported,
     #[error("this program has no native UI snapshot capability")]
@@ -114,6 +116,25 @@ impl NativeSession {
         self.host.logs()
     }
 
+    pub fn supports_haptics(&self) -> Result<bool, SessionError> {
+        self.ready()?;
+        Ok(self.host.supports_haptics())
+    }
+    pub fn set_haptic_capabilities(
+        &mut self,
+        value: incant_input::haptics::HapticCapabilities,
+    ) -> Result<(), SessionError> {
+        self.ready()?;
+        self.host.set_haptic_capabilities(value)
+    }
+    pub fn take_haptics(&mut self) -> Result<incant_input::haptics::HapticRequests, SessionError> {
+        self.ready()?;
+        self.host.take_haptics()
+    }
+    pub fn clear_haptics(&mut self) {
+        self.host.clear_haptics();
+    }
+
     /// Opt in only when the trusted owner implements whole-session replacement.
     /// Wasm request parity is unsupported; normal hosts refuse by default.
     pub fn enable_restart_requests(&mut self) -> Result<(), SessionError> {
@@ -154,6 +175,7 @@ impl NativeSession {
         if !self.host.supports_ui() && !ui.is_empty() {
             return Err(SessionError::UiUnsupported);
         }
+        self.host.haptics_ready()?;
         let dt = 1. / f64::from(self.world.tick_rate());
         {
             let _profile = incant_profile::scope(incant_profile::Phase::Input);

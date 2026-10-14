@@ -1,6 +1,7 @@
-//! Atomic private closed-shape world assembly. The production exclusive capture
-//! owner issues the context after its authentic completed step. No public
-//! arbitrary bytes-to-live entry or caller-supplied authority flag exists.
+//! Atomic private closed-shape world assembly. Opaque reconstruction retains its
+//! exclusive owner context. The separate persisted path validates a stricter
+//! editable-data domain and chooses receiving native context, without claiming
+//! historical completion or accepting caller-supplied authority.
 use super::{
     NumericFrame, allocation, allocation::*, body, broad, collider, convert::v, integration,
     islands, narrow,
@@ -161,5 +162,33 @@ pub(super) fn restore_captured(
         admit::AssemblyError::Decode(e) => E::Record(e),
         admit::AssemblyError::Numeric(e) => E::Numeric(e),
         admit::AssemblyError::Construction(e) => E::Construction(e),
+    })
+}
+
+pub(super) fn validate_persisted(
+    bytes: &[u8],
+    expected: incant_physics_snapshot::Identity,
+    decode: &mut incant_physics_snapshot::Budget,
+    work: &mut super::WorkBudget,
+) -> Result<(), super::persisted::PersistedError> {
+    let a = AssemblyFrame::decode(bytes).map_err(super::persisted::PersistedError::Construction)?;
+    admit::with_persisted(&a, expected, decode, work, |_| Ok(()))
+}
+pub(super) fn restore_persisted(
+    bytes: &[u8],
+    expected: incant_physics_snapshot::Identity,
+    decode: &mut incant_physics_snapshot::Budget,
+    work: &mut super::WorkBudget,
+    allocations: &mut AllocationBudget,
+) -> Result<PhysicsWorld, super::persisted::PersistedError> {
+    let a = AssemblyFrame::decode(bytes).map_err(super::persisted::PersistedError::Construction)?;
+    // No submitted pointer selects execution context. The receiving library's
+    // default/global pool and built-in dispatcher are used for imports.
+    let context = CaptureContext {
+        #[cfg(all(feature = "parallel", not(feature = "unsync-callbacks")))]
+        pool: None,
+    };
+    admit::with_persisted(&a, expected, decode, work, |admitted| {
+        construct(admitted, &context, allocations)
     })
 }

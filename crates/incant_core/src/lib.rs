@@ -297,7 +297,12 @@ impl Engine {
             .unwrap_or_else(|e| e.into_inner())
             .prepare(project, &staged, &self.navigation_resources)?;
         let mut physics = self.physics.lock().unwrap_or_else(|e| e.into_inner());
-        physics.sync(prepared_physics);
+        physics.sync(prepared_physics).map_err(|error| {
+            incant_doc::DocumentError::Validation(vec![incant_doc::Diagnostic {
+                path: "/scenes".into(),
+                message: error.to_string(),
+            }])
+        })?;
         *self.navigation.lock().unwrap_or_else(|e| e.into_inner()) = staged_navigation;
         *self
             .grid_navigation

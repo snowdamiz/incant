@@ -25,6 +25,7 @@ fn fixture() -> (Project, String, String) {
                     name: "Body".into(),
                     parent: None,
                     provenance: None,
+                    prefab: None,
                     components: BTreeMap::from([
                         (
                             "Transform".into(),

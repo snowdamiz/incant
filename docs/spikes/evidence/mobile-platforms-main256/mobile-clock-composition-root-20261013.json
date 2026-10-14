@@ -1,0 +1,11 @@
+{
+  "reviewer": "astra/root",
+  "base": "d0777898cd60b20197fa72cb02b7a81c94c73721",
+  "patch_sha256": "091e039326f83275d4935d7a7b84e50bccf86afddb2d57b1e4ef21070018a89b",
+  "accepted": true,
+  "scope": "Two-file cfg/module reuse only; clock implementation unchanged. Mac native-window reuses the compiled window module; other Apple targets retain path module. Android is target-disjoint. Existing lib cfg inspected. Requires composed tests and strict Clippy after correction.",
+  "paths": [
+    "crates/incant_game_player/src/mobile_native.rs",
+    "crates/incant_game_player/src/window/mod.rs"
+  ]
+}

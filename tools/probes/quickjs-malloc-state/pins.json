@@ -1,0 +1,20 @@
+{
+  "rquickjs-sys": {
+    "quickjs/quickjs.c": "3a6b52a225c21709ef1fd314183efd3af862e867ce4ef8caabcae67922a745b3",
+    "quickjs/quickjs.h": "979127138da79cad5ddc7effa1afb13e8b02f744da2aa36844d4cb9d8cb92de9",
+    "quickjs/LICENSE": "96f73f9d2a16c21a36b418f06073be26e7d6d5e7c1bc99756b21a4f2c74ef171",
+    "src/bindings/aarch64-apple-darwin.rs": "d117928c085b9f341176d79e0b831b9fadf6a824c8d10fbbfa3155c93b6b823b",
+    "build.rs": "d392d7194ae5bcaa0e0dac28a14c55656f6cf2cce3b16a8e6968c09e2ecfff85",
+    "Cargo.toml": "e127f802730c72074e34db76bd24ebbec3d7fa15cbb6da81b034d02b372452e3",
+    "Cargo.toml.orig": "f95c0cce12c4aa0179471abe3490cb6edbdd38033f1710cbdeafcbe36198030b"
+  },
+  "rquickjs-core": {
+    "src/runtime.rs": "0a51347ad3b91fd18ca4c3fa6993f3487ea9158577698fae96344271c2622799",
+    "src/runtime/base.rs": "1e5c5e85453096e647867d3978a03298614fa609c243f90270a339c000ae399c",
+    "src/runtime/raw.rs": "e7f70ab2752c2c91fcd36474d326fc24b3e4fd7c346dcc52a01673abb3eb36eb",
+    "Cargo.toml": "a496d9302ac21dbb9415d7bb64e0f3e46e0a14ff748c15bd18275c3cba5d54f3",
+    "src/value/array_buffer.rs": "62a4d82adf005bcb40d50e299466c5d0a96f987b14ef67ac61ad34743355c85c",
+    "src/safe_ref.rs": "f94ca7c42f20257348d92db7900e0b42e6119064d725d47312e9d57843dbc1b3",
+    "Cargo.toml.orig": "05e4ddcc38f159a102121ae531091cead0f7e2e3debd03bdc05d9c89d3fb360e"
+  }
+}

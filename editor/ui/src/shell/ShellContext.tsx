@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useMemo, useRef, useState, useSyncExternalStore } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react';
 import type { ReactNode } from 'react';
 import type {
   BridgeResult,
@@ -12,6 +12,8 @@ import type {
 import type { CapabilitySet } from '../bridge/resolve';
 import { readCapabilities, unavailableMessage } from '../bridge/resolve';
 import type { PanelVisibility } from '../components/Titlebar';
+import type { RequestResult } from './requests';
+import { rejectedRequest } from './requests';
 
 export type DockTab = 'problems' | 'console' | 'history';
 
@@ -39,14 +41,19 @@ export interface Shell {
   readonly dockTab: DockTab;
   readonly setDockTab: (tab: DockTab) => void;
   readonly message: string;
-  readonly announce: (message: string) => void;
+  /** Revoke only this announcement; revoking a superseded one leaves the newer message alone. */
+  readonly announce: (message: string) => () => void;
   /** Checks the capability, dispatches, and announces any failure. Resolves true on success. */
   readonly run: (command: EditorCommand) => Promise<boolean>;
   /** Like `run`, but returns the bridge's result so a caller can show the exact error inline. */
   readonly dispatch: (command: EditorCommand) => Promise<BridgeResult>;
   readonly ask: (request: HostRequest) => Promise<boolean>;
-  /** Like `ask`, but returns the host's result so a caller can show the exact error inline. */
-  readonly request: (request: HostRequest, options?: RequestOptions) => Promise<BridgeResult>;
+  /**
+   * Like `ask`, but returns the host's result so a caller can show the exact error inline.
+   * Always resolves: a rejected bridge request carries outcomeUnknown. The same marker
+   * is preserved when the native bridge cannot verify a file completion receipt.
+   */
+  readonly request: (request: HostRequest, options?: RequestOptions) => Promise<RequestResult>;
   readonly explainUnavailable: (capability: Capability) => void;
   /** The ChatGPT account dialog. `from` regains focus when it closes. */
   readonly accountOpen: boolean;
@@ -63,9 +70,13 @@ const NO_CAPABILITIES = readCapabilities([]);
 const noopSubscribe = () => () => undefined;
 const nullSnapshot = () => null;
 
-/** Play operations share one capability; the others are their own capability. */
+/** Play and project-file operations each share their host capability. */
 export function capabilityOf(request: HostRequest): Capability {
   switch (request.type) {
+    case 'project.pin.review':
+    case 'project.pin.apply':
+    case 'project.save':
+      return 'project.file';
     case 'play.start':
     case 'play.pause':
     case 'play.resume':
@@ -137,14 +148,43 @@ export function ShellProvider({ bridge, children }: { bridge: EditorBridge | nul
     setPanels((current) => ({ ...current, [panel]: !current[panel] }));
   }, []);
   const [message, setMessage] = useState('');
+  const announcementGeneration = useRef(0);
+  const enqueueTimer = useRef<number | undefined>(undefined);
   const clearTimer = useRef<number | undefined>(undefined);
 
   const announce = useCallback((text: string) => {
+    const generation = ++announcementGeneration.current;
+    window.clearTimeout(enqueueTimer.current);
     window.clearTimeout(clearTimer.current);
     // Clear first so repeating the same message is announced again.
     setMessage('');
-    window.setTimeout(() => setMessage(text), 30);
-    clearTimer.current = window.setTimeout(() => setMessage(''), 8000);
+    enqueueTimer.current = window.setTimeout(() => {
+      if (announcementGeneration.current !== generation) return;
+      enqueueTimer.current = undefined;
+      setMessage(text);
+    }, 30);
+    clearTimer.current = window.setTimeout(() => {
+      if (announcementGeneration.current !== generation) return;
+      clearTimer.current = undefined;
+      setMessage('');
+    }, 8000);
+    return () => {
+      if (announcementGeneration.current !== generation) return;
+      ++announcementGeneration.current;
+      window.clearTimeout(enqueueTimer.current);
+      window.clearTimeout(clearTimer.current);
+      enqueueTimer.current = undefined;
+      clearTimer.current = undefined;
+      setMessage('');
+    };
+  }, []);
+
+  useEffect(() => () => {
+    ++announcementGeneration.current;
+    window.clearTimeout(enqueueTimer.current);
+    window.clearTimeout(clearTimer.current);
+    enqueueTimer.current = undefined;
+    clearTimer.current = undefined;
   }, []);
 
   const explainUnavailable = useCallback(
@@ -168,14 +208,21 @@ export function ShellProvider({ bridge, children }: { bridge: EditorBridge | nul
   const run = useCallback(async (command: EditorCommand) => (await dispatch(command)).ok, [dispatch]);
 
   const request = useCallback(
-    async (hostRequest: HostRequest, options?: RequestOptions): Promise<BridgeResult> => {
+    async (hostRequest: HostRequest, options?: RequestOptions): Promise<RequestResult> => {
       const capability = capabilityOf(hostRequest);
       if (!bridge || !capabilities.has(capability)) {
         const message = unavailableMessage(capability, bridge);
         if (!options?.quiet) announce(message);
         return { ok: false, error: { code: 'unsupported', message } };
       }
-      const result = await bridge.request(hostRequest);
+      let result: RequestResult;
+      try {
+        result = await bridge.request(hostRequest);
+      } catch (error) {
+        // A rejection is not a result: the caller gets a failure it can show, never a
+        // pending state that cannot end, and nothing is claimed about what the host did.
+        result = rejectedRequest(error);
+      }
       if (!result.ok && !options?.quiet) announce(`${hostRequest.type} failed: ${result.error.message}`);
       return result;
     },

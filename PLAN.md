@@ -4,6 +4,7 @@ Engine name: **Incant** (decided 2026-10-08; the shortlist it was chosen from is
 Launch game: **Driftwake** (decided 2026-10-10).
 
 Plan author: Claude, for Andrey Yurlov. Date: 2026-10-08. Revision 2 (same day): renamed engine, added agent-first execution model and Claude ACP visual handoff. Revision 3 (2026-10-09): filled the networking and online-services gaps: transport and service rows in 2.1 and 2.2, Phase 6 rewritten, Sections 6.8 and 6.10, additions to Phases 5, 7, 8 and 9, risks, metrics, budget, open decisions 10 to 17, and network entries in Appendices A to C. The same revision filled engine gaps (navigation, 2D, text and localization, lighting for runtime-assembled content, gameplay analytics, Steam Deck and video playback, editor versioning, haptics), recorded the decided stack rows (Rapier, Loro, canonical JSON, React) and the dispositions of open decisions 1 to 9, and re-baselined the timeline at the top of Section 5. Revision 4 (2026-10-10): added script and shader performance requirements: a bulk query API for scripts, build-time script bytecode, a per-frame script budget enforced on the reference phones, and offline shader compilation with pipeline caching and pre-warming. The same revision adopted the performance architecture by director instruction: a native runtime data path separate from authoring (2.6), WebAssembly modules as a native-speed script tier, physics determinism as a per-project mode, temporal upscaling with dynamic resolution and native backend interop, a shipping build profile, per-PR performance gates, browser-native scripts on the web, per-scene CRDT documents at 100,000-entity scale, a Physics workstream (6.14), a competitive benchmark against Unity and Godot, and open decisions 18 and 19. ADRs 0002, 0003, 0006 and 0008 were updated to match in revision 5. Revision 5 (2026-10-10): resolved every open decision by director instruction, so Section 12 is now a decision record followed by the human-owned actions that remain; corrected the physics determinism description against Rapier 0.36's feature contract and the CRDT benchmark summary; chose wasm2c for shipped WebAssembly modules; and added the business model (1.4), Driftwake pricing, marketing and support (7.6), external reviews, license auditing and a community role. Revision 6 (2026-10-10): removed name clearance and package reservations, moved store accounts and signing certificates from Phase 0 to Phase 5 store uploads, and replaced reference-phone purchases with hosted real devices in AWS Device Farm. Revision 7 (2026-10-10): removed calendar windows, phase durations, the timeline chart and the ship-date target by director instruction; phases advance only through their exit gates. Revision 8 (2026-10-10): made outside services local-first by director instruction: development, CI and integration tests run every third-party service the plan depends on as a local container or in-process substitute, and hosted services are used only where a gate needs the real one (Section 2.7).
+Revision 9 (2026-10-13): the director makes actual desktop testing on the available Mac the only device qualification required for development and phase gates. Mobile and other-device execution/performance comparisons are deferred, nonblocking follow-up; hosted CI, build checks and non-device release obligations remain required.
 Scope: from the engine foundation to Driftwake live on three stores and Engine 1.0 released. The plan sets no calendar dates; exit gates alone mark progress.
 
 ---
@@ -13,7 +14,7 @@ Scope: from the engine foundation to Driftwake live on three stores and Engine 1
 1. Section 1 defines the product, the principles that must not be violated, and what "done" means.
 2. Section 2 is the technical architecture: stack, repo layout, and the data model everything hangs on.
 3. Section 3 covers accounts, login, and the OpenAI integration requirement in detail.
-4. Section 4 is the execution model and team: which AI agents build what, the hard rule that routes visual work to Claude 5.5 over ACP, and the small human team around them.
+4. Section 4 is the execution model and team: which AI agents build what, the default editor UI route to Claude 5.5 over ACP and the director-authorized takeover, and the small human team around them.
 5. Section 5 lists the phases with their deliverables and exit gates.
 6. Section 6 details each engineering workstream.
 7. Section 7 is the game production plan.
@@ -60,6 +61,16 @@ Director decision, 2026-10-10: use Claude Opus 5.5 with thinking explicitly set
 to Max for all visual handoffs. Verify model and effort on every new or resumed
 ACP session; do not inherit Default or substitute another level.
 
+Director clarification, 2026-10-13: the original visual-routing rule means editor
+UI design, layout, styling and rendered-pixel review. Claude Opus 5.5 with
+explicitly verified Max remains the default for that work. Astra/root and its
+subagents own everything else, including rendering algorithms, graphics/runtime
+correctness and non-editor visuals. Astra may also directly take over anything
+Claude is failing to resolve, including editor UI work, without asking again.
+Retain prior attempts, identify the takeover and preserve acceptance and evidence
+requirements. Other routing exceptions still require the director. This does not
+approve a phase gate.
+
 Director decision, 2026-10-10: remove calendar target dates, phase durations and
 the ship-date target. Agents build far faster than a human-paced calendar, so
 dates are neither forecasts nor limits. A phase is complete when its exit gate
@@ -70,6 +81,28 @@ possible, using containers such as Docker. Development, CI and integration tests
 use local substitutes; hosted services are reserved for what cannot be reproduced
 locally (Section 2.7). Cloud and identity accounts are therefore needed only when
 a gate requires the real service. This changes the plan; it does not approve any gate.
+
+
+Director decision, 2026-10-13: “Ensure that only desktop testing on this mac is
+required for the gate. We will test on mobile devices and other sometime later,
+dont make it a requirement for the gate. Keep developing.” Actual execution and
+performance measurements on the available local Mac are the device evidence for
+development and phase gates. Record its model, chip, OS, build profile and matched
+baseline; retain the numerical and observable acceptance criteria. Another Mac
+model, Windows/Linux machine, mobile phone, tablet, Steam Deck or hosted device
+is not a prerequisite. Test mobile quality tiers on this Mac where applicable;
+this does not establish mobile hardware behavior.
+
+This supersedes device-execution prerequisites throughout this plan and its ADRs,
+including reference-phone benchmarks and decisions 18/19. Mobile and other-device
+functional, visual, performance, thermal, power and network-transition evidence
+remain explicitly deferred, nonblocking follow-up. Do not label those checks
+passed, infer their results from this Mac or remove platform implementations.
+Existing hosted CI/build matrices, every required exact-head release context,
+correctness/security tests, shipping-profile measurement requirements and
+non-device release obligations stay in force. Distribution signing, store
+certification, legal/account obligations and director phase approval are not
+waived. A Mac result or this policy change alone does not complete a gate.
 
 ---
 
@@ -88,7 +121,7 @@ A single application that is a 3D/2D modeling tool, a game engine, and an editor
 5. **Bring-your-own-model.** The user connects their own OpenAI account. We never proxy model calls through our servers by default, and we never store their keys or tokens server-side.
 6. **Dogfood everything.** The launch game is built in the engine, by the team, with the agent. Anything the game needs that the engine lacks is an engine bug.
 7. **Rust core, TypeScript gameplay, WebAssembly for hot code, web editor chrome.** Chosen for safety, portability, performance, and LLM fluency. TypeScript is the default for gameplay logic; sandboxed WebAssembly modules, written in Rust first, carry performance-critical gameplay code at native speed on every target, including iOS where JIT compilation is banned. Revisit only with strong evidence.
-8. **Agent-first build with a hard routing rule.** The engine and game are built primarily by Astra running in OpenAI Codex. Any visual work is handed off to Claude 5.5 over ACP (Agent Client Protocol) using the director's already logged-in Claude account. Section 4 defines "visual" precisely. This is a build-time arrangement; the engine's end users still bring their own OpenAI account (Section 3), and the shipped engine never embeds the director's credentials.
+8. **Agent-first build with a default routing rule.** The engine and game are built primarily by Astra running in OpenAI Codex. Editor UI design, layout, styling and pixel review default to Claude 5.5 over ACP (Agent Client Protocol) using the director's already logged-in Claude account. Astra/root and its subagents own all other work; Section 4 defines the boundary. This is a build-time arrangement; the engine's end users still bring their own OpenAI account (Section 3), and the shipped engine never embeds the director's credentials.
 9. **Outside services run locally first.** Every third-party service the engine, its online services or the build depends on has a local substitute, run as a container (Docker or a compatible runtime) or in-process, so development and CI need no cloud, identity or store account. Hosted services are used only for what cannot run locally: real phones, store review, production hosting and live provider evaluations (Section 2.7).
 
 ### 1.3 Definition of done
@@ -250,15 +283,15 @@ Every third-party service in this plan is developed and tested against a local s
 | Steam, Apple and Google player sign-in | Local fakes of the Steam ticket API and Apple/Google OpenID Connect behind the player service's provider boundary | Real platform sign-in in each store's sandbox |
 | Store-native cloud saves, achievements and purchase hooks | A file-backed implementation of the platform-services abstraction; StoreKit configuration files for Apple purchase flows | Store-specific behavior in each store's sandbox, then store review |
 | TURN and STUN for WebRTC | coturn container | Carrier-grade NAT on real cellular networks |
-| Network conditions | Container network shaping (latency, jitter, loss, NAT) driven by the Section 6.8 latency profiles | The Phase 6 cellular and Wi-Fi-to-cellular gate on real phones |
-| AWS Device Farm phones | iOS simulator and Android emulator for functional runs | Every performance, shader-hitch and device gate; simulators never count |
+| Network conditions | Container network shaping (latency, jitter, loss, NAT) driven by the Section 6.8 latency profiles | Phase 6 gates use modeled transitions on the actual local Mac; real cellular and Wi-Fi-to-cellular phone execution is deferred, nonblocking follow-up |
+| AWS Device Farm phones | iOS simulator and Android emulator for functional runs | Deferred mobile execution/performance follow-up; not a development or phase-gate prerequisite. Mac gates use actual local Mac execution, not simulator evidence |
 | OpenAI (in-engine agent) | A recorded-response replay server for protocol and tool-loop tests; an optional local OpenAI-compatible model server for smoke runs | Live agent evaluations, which measure the real provider |
 
 Rules:
 - Code may depend on a hosted-only API only through a boundary that has a local substitute in this table. A new outside dependency adds its row before code relies on it.
 - Local substitutes are open source under licenses the dependency allowlist accepts, and run without accounts, tokens or telemetry.
 - Development, CI, staging and engine users' self-hosted deployments run the same service images (Section 6.10). AWS-specific code is limited to deployment in `services/deploy/` and thin adapters behind those boundaries.
-- Results from the local stack are labeled as local. They prove behavior against the protocol, not the hosted service, and never satisfy a gate that names real devices, a real provider, a store or a production region.
+- Results from the local stack are labeled as local. They prove behavior against the protocol, not the hosted service, and never establish a real-device, live-provider, store or production-region result. Other-device results are deferred under revision 9; non-device hosted-service and distribution obligations remain.
 
 ---
 
@@ -334,49 +367,52 @@ This plan is executed primarily by AI coding agents under human direction. Two a
 
 | Actor | Runs in | Account used | Owns |
 |---|---|---|---|
-| **Astra** | OpenAI Codex (cloud tasks and the Codex CLI) | Andrey's OpenAI account | Everything that is not visual: architecture, Rust crates, document model, command bus, scripting runtime and TS SDK, physics, audio, animation runtime, networking, asset pipeline, platform and export, backend services, CI, tests, eval graders, documentation text, Driftwake gameplay and systems code. Also integrates every Claude handoff and opens all PRs. |
-| **Claude Opus 5.5, Max thinking** | Claude Code, reached over ACP (Agent Client Protocol) | Andrey's already logged-in Claude account. No API key, nothing stored in the repo or CI | All visual work as defined in 4.2: editor UI and UX design and implementation, viewport and gizmo visuals, look-dev, shader and material appearance, VFX, lighting tuning, golden-image and screenshot review, art direction, Driftwake art, HUD, trailer and store art, diagrams and site design. |
+| **Astra/root and subagents** | OpenAI Codex (cloud tasks and the Codex CLI) | Andrey's OpenAI account | All work other than the default editor UI handoff: architecture, rendering algorithms and quality, runtime, game art and UI, tools, platforms, tests, documentation and integration. May also take over unresolved Claude editor UI work under 4.2. |
+| **Claude Opus 5.5, Max thinking** | Claude Code, reached over ACP (Agent Client Protocol) | Andrey's already logged-in Claude account. No API key, nothing stored in the repo or CI | Editor UI design, layout, styling and rendered-pixel review by default, as defined in 4.2. |
 | **Andrey** (director) | | | Priorities, phase gate approvals, routing tie-breaks, and anything requiring a human: store and developer accounts, signing keys, payments, legal, age ratings. |
 
 The build-time agents are separate from the in-engine agent that end users talk to. End users connect their own OpenAI account (Section 3). The engine, the templates, and the shipped game must never contain or depend on the director's Codex or Claude sessions.
 
-### 4.2 Routing rule: what counts as visual work
+### 4.2 Routing rule: editor UI and all other work
 
-A task is handed to Claude if any of these is true:
+The default Claude route covers editor UI design, layout, styling and pixel
+review: panels, inspectors, chat/history presentation, themes, icons, editor
+controls, onboarding and accessibility appearance. Mixed editor UI tasks split
+correctness from appearance: Astra implements data, commands and behavior;
+Claude handles the editor UI design and visual review.
 
-1. Acceptance can only be judged by looking at rendered pixels or a laid-out screen.
-2. The deliverable is a design: layout, color, typography, iconography, motion, or composition.
-3. The task is reviewing screenshots, golden images, playtest footage, or art.
-4. The task is look-dev: materials, lighting, post-processing, VFX, or shaders judged by appearance rather than by math or performance.
+Astra/root and its subagents own everything else, including rendering algorithms,
+graphics/runtime correctness, shader and material appearance, temporal quality,
+lighting, VFX, game art and HUD, screenshots, diagrams and site design. A task
+does not require a Claude handoff merely because it is visual or its acceptance
+requires rendered pixels. Editor UI controls over a renderer can be split from
+the underlying rendering implementation and output review.
 
-Everything else stays with Astra. Astra owns correctness, performance, architecture, and data. Claude owns appearance and judgment-by-eye. When a task has both parts it is split: Astra implements, Claude reviews the result visually and returns either approval or concrete diffs.
+The director also authorizes Astra to directly take over anything Claude is
+failing to resolve, including editor UI implementation and pixel review. Record
+the unresolved work and takeover, preserve earlier results, and apply the same
+correctness, rendered-evidence and acceptance requirements. This standing
+authorization needs no additional routing approval.
 
-| Area | Astra (Codex) | Claude 5.5 (ACP) |
+| Area | Astra/root and subagents | Claude Opus 5.5, Max through ACP (default) |
 |---|---|---|
-| Editor | Panel data binding, IPC bridge, command wiring, schema-driven inspector logic, undo and history mechanics | Panel layouts, inspector visual design, chat UI, history UI, gizmo visuals, icons, themes, empty states, onboarding flow design, accessibility visual checks |
-| Rendering | Render graph, culling, GPU buffers, shader compiler, tier system, performance budgets | Tonemapping, bloom, TAA and GI quality judgment, golden image approval, visual regression triage, reference scenes |
-| Shaders and materials | WGSL codegen, graph compiler, node evaluation | Node library appearance, default material library, sample materials, look-dev |
-| Content tools | Geometry graph evaluator, mesh ops, retopo, UV, LOD algorithms | Graph editor UI, default presets, the two-day environment exit test in Phase 4 |
-| Animation and VFX | Playback, blend trees, IK solvers, particle simulation | Animation feel review, effect authoring, particle look |
-| In-engine agent | Agent loop, tools, providers, skills, eval graders | Vision-check graders and their reference images, chat UI, inline diff presentation |
-| Platforms | Export pipeline, store packaging, device farm, crash reporting | Store screenshots, icons, splash screens, platform UI conformance review |
-| Driftwake | Gameplay scripts, netcode, save, progression, procedural generation logic | Art bible, HUD and menus, level visual dressing, lighting, VFX, trailer, store art |
-| Networking | Transport, replication, prediction and rollback, services, protocol versioning, load and soak tests | Network simulation panel, connection quality indicators, lobby, invite, rejoin and forced-update screens, desync inspector layout |
-| 2D | Atlas packing, tilemap data and autotile evaluation, 2D physics, sorting | Sprite and tilemap editor UI, 2D lighting look, template art |
-| Text and localization | Shaping, bidi, string tables, locale data, IME bridge | Font fallback and right-to-left layout review, localization panel design, pseudo-localization visual check |
-| Navigation | Navmesh generation, pathfinding, steering | Navmesh and path debug visualization design |
-| Docs and marketing | Reference and tutorial text, API docs | Diagrams, screenshots, site design, video |
+| Editor | Data binding, IPC, commands, schema logic, undo, history mechanics; unresolved Claude work after takeover | Editor UI design, layout, styling and rendered-pixel review |
+| Rendering and content | Render graph, shaders, materials, lighting, post-processing, performance, output quality, animation, VFX, geometry and content algorithms | Editor panels and controls for these systems |
+| Game, platform and services | Gameplay, game UI/HUD/art, exports, platform visuals, networking, agents, physics, audio and all runtime work | Editor UI for authoring and inspecting these systems |
+| Documentation and marketing | Text, diagrams, screenshots, site design, trailers and store art | Editor UI handoff documentation |
 
-If routing is ambiguous, Astra asks the director in the task thread and defaults to the split pattern in the meantime.
+For ambiguity outside these assignments and the standing takeover authorization,
+Astra asks the director in the task thread. Settled ownership and an authorized
+takeover do not require another approval.
 
 ### 4.3 Handoff protocol (Astra to Claude over ACP)
 
 1. **Packet.** Astra writes a self-contained handoff packet to `handoffs/<id>/brief.md`: goal, acceptance criteria, relevant file paths, build and run commands, the headless-runner command that captures screenshots, reference images, constraints (performance budgets, target platforms, tiers), and exactly what to return.
-2. **Session.** Astra runs `tools/handoff run <id>`. The tool opens an ACP session to Claude Code through the Claude Code ACP adapter. The session inherits the director's logged-in Claude account. No API key or token is written anywhere.
+2. **Session.** Astra runs `python3 tools/handoff/main.py run <id>` and explicitly verifies Claude Opus 5.5 and Max thinking before every new or resumed prompt. The tool opens an ACP session to Claude Code through the Claude Code ACP adapter. The session inherits the director's logged-in Claude account. No API key or token is written anywhere.
 3. **Work.** Claude works in a git worktree on branch `handoff/<id>`, runs the visual regression suite, and writes `handoffs/<id>/result.md` with before and after screenshots, rationale, and open questions.
 4. **Integration.** Astra reviews the result, merges the worktree, opens the PR, and runs full CI. Once the scoped work is complete, reviewed, and its required checks pass, Astra merges the PR into main under the director’s standing authorization. Every commit carries a trailer `Built-by: astra` or `Built-by: claude` so provenance covers engine development as well as game content.
 5. **Fallback.** If ACP or the Claude account is unavailable, the packet stays in `handoffs/` and the director runs Claude Code on it manually. Packets are written so that this always works.
-6. **Batching.** Non-urgent visual tasks are batched per sprint to respect subscription limits. Blocking ones go immediately.
+6. **Batching.** Non-urgent editor UI tasks are batched per sprint to respect subscription limits. Blocking ones go immediately.
 
 Repository files that make this work:
 
@@ -400,7 +436,7 @@ The agents do the building. Humans direct, review, and do what agents cannot.
 | Role | Phases 0–1 | Phases 2–6 | Phases 7–9 | Notes |
 |---|---|---|---|---|
 | Director, product, architecture approvals | 1 | 1 | 1 | Andrey |
-| Senior graphics reviewer | 0.5 | 1 | 1 | Reviews rendering PRs and Claude look-dev results; part-time through Phase 1 |
+| Senior graphics reviewer | 0.5 | 1 | 1 | Reviews rendering PRs and retained look-dev results; part-time through Phase 1 |
 | Platform and release engineer | 0 | 1 | 1 | Store accounts, signing, certification, device lab ownership |
 | Game designer | 0 | 1 | 2 | Owns Driftwake's design document and playtests |
 | QA and device lab | 0 | 1 | 2 | Physical devices, store-submission dry runs |
@@ -413,9 +449,9 @@ The agents do the building. Humans direct, review, and do what agents cannot.
 
 - Every PR is agent-authored and agent-merged into main after review and passing required checks. No separate merge confirmation is needed. The director approves every phase gate; a PR merge does not approve a gate.
 - Weekly the director reviews the handoff log, eval results, and friction logs, and resolves any routing disputes.
-- Agents never self-approve a routing exception. Ambiguity defaults to the split pattern.
-- Both agents dogfood the product. Astra and Claude build Driftwake content through the in-engine agent wherever possible, which is what the provenance metric measures.
-- Agent-first execution runs around the clock and parallelizes by crate; phases advance as fast as their exit gates pass, not on a calendar. Hosted device testing, store review and human-owned actions are the external dependencies agents cannot shorten.
+- Agents never invent routing exceptions. The director has already authorized Astra takeover of unresolved Claude work, including visuals (4.2); applying that exception needs no further approval. Other routing ambiguity goes to the director.
+- Both agents dogfood the product. Astra/root and subagents build Driftwake content through the in-engine agent wherever possible, which is what the provenance metric measures.
+- Agent-first execution runs around the clock and parallelizes by crate; phases advance as fast as their exit gates pass, not on a calendar. Store review and required human-owned actions are external dependencies agents cannot shorten; additional hosted device testing is deferred and does not block current gates.
 
 ---
 
@@ -428,6 +464,10 @@ Work began on 2026-10-08. Phases overlap where their dependencies allow. Each ph
 | 0 | 2026-10-08 | Spikes done; gate open: staffing, nightly history, live revocation, director approval |
 | 1 | 2026-10-08 | In progress |
 | 2 to 9 | — | Not started |
+
+Device references in phase deliverables describe retained platform features or
+deferred follow-up under revision 9. Only actual testing on this Mac is required
+as device evidence; existing hosted CI and non-device delivery obligations remain.
 
 ### Phase 0: Foundation
 
@@ -445,7 +485,7 @@ Deliverables:
 - Director, part-time graphics reviewer, and contract arrangements in place for Phases 0 and 1.
 
 Exit gate:
-- All six spikes pass with written results.
+- All six spikes pass with written results on the available Mac and their applicable hosted CI checks; additional device execution is deferred under revision 9.
 - Spike 6 round-trips a handoff end to end with no credentials written to disk.
 - Spike 4 succeeds on at least 14 of 20 tasks without human help.
 - CI produces a runnable artifact for every target nightly.
@@ -478,9 +518,9 @@ Deliverables:
 - Script bytecode: the cook step precompiles every script to QuickJS bytecode, so shipped builds and headless runs parse no TypeScript or JavaScript at startup. Bytecode is tied to the runtime version, produced only by the cook step, and covered by the package's content hashes. The runtime never loads bytecode from project files, mods or the network, because QuickJS does not verify bytecode. Source maps are kept for crash symbolication.
 - Runtime data path (Section 2.6): cooked binary scenes, the native ECS world, direct component access for scripts, the per-frame command buffer, world snapshots for observation, and binary saves. The existing document-backed play session migrates to it.
 - WebAssembly modules: a module host with the same capability model, bulk query views and command buffer as TypeScript; a Rust SDK generated from the schema registry; Wasmtime with JIT and hot reload in the editor and development builds; shipped builds on every native platform translate modules to C with wasm2c, the approach Firefox uses to sandbox libraries, and compile them into the signed binary, which is the only route on iOS. Relaxed SIMD is disabled in rollback projects to keep arithmetic deterministic.
-- Spike: ahead-of-time compilation of typed TypeScript, with Static Hermes as the first candidate and a TypeScript-subset-to-WebAssembly compiler as the alternative. Adopt only if it passes the SDK conformance suite and beats bytecode by a measured margin on the reference phones (decision 18).
+- Spike: ahead-of-time compilation of typed TypeScript, with Static Hermes as the first candidate and a TypeScript-subset-to-WebAssembly compiler as the alternative. Adopt only if it passes the SDK conformance suite and beats bytecode by a measured margin on this Mac (decision 18); phone comparisons are deferred.
 - Profiler: Tracy integration with CPU zones per system and script, GPU timestamp queries, memory and allocation tracking, and on-device capture over the network from phones.
-- Shipping build profile for the runtime: fat link-time optimization, one codegen unit, abort on panic, symbols split for crash reporting. All device performance gates are measured with this profile.
+- Shipping build profile for the runtime: fat link-time optimization, one codegen unit, abort on panic, symbols split for crash reporting. Gate performance is measured on this Mac with this profile; later other-device comparisons use the same profile.
 - Headless runner: run a project for N seconds on the runtime world, capture frames, logs and state snapshots, exit with a status.
 - Input: keyboard, mouse, gamepad, touch with gesture recognition; haptics (gamepad rumble and mobile haptic feedback) through one API.
 - Save system: serialize game state to a versioned format.
@@ -489,12 +529,12 @@ Deliverables:
 - Localization: string tables as typed document assets with per-locale values, plural, select and gender rules (an ICU MessageFormat subset), fallback chains, locale-aware number and date formatting through ICU4X, runtime locale switching, a pseudo-localization mode and missing-string reports. The editor UI ships in English at 1.0 and reuses the same string tables for its own localization in 1.1.
 
 Exit gate:
-- A "Core Sample" test game (third-person character on a terrain with enemies, pickups, UI, music) runs at 60 fps on an M1 MacBook Air, a mid-range Windows laptop, an iPhone 13, and a Pixel 6, written entirely in TypeScript against the SDK with no editor.
+- A "Core Sample" test game (third-person character on a terrain with enemies, pickups, UI, music) runs at 60 fps on this Mac, written entirely in TypeScript against the SDK with no editor. Record actual hardware/OS and shipping profile; the previously named reference devices are deferred comparison targets.
 - Headless runner used in CI to play Core Sample and assert on game state.
-- Core Sample's enemies navigate by navmesh, its UI passes pseudo-localization and renders one right-to-left and one CJK locale correctly, and a 2D sample scene (tilemap, sprites, 2D physics) runs on the same four devices.
-- On the iPhone 13 and the Pixel 6, Core Sample's scripts stay within 2 ms per frame at p95 with ten thousand scripted entities, and no gameplay frame exceeds twice the frame budget because of shader or pipeline compilation. Desktop measurements do not count toward this gate.
+- Core Sample's enemies navigate by navmesh, its UI passes pseudo-localization and renders one right-to-left and one CJK locale correctly, and a 2D sample scene (tilemap, sprites, 2D physics) runs on this Mac; other-device runs are deferred.
+- On this Mac, Core Sample's scripts stay within 2 ms per frame at p95 with ten thousand scripted entities, and no gameplay frame exceeds twice the frame budget because of shader or pipeline compilation. Measure the shipping profile against a matched Mac baseline; this is the current gate, with phone measurements deferred.
 - Core Sample runs on the runtime data path: the shipped binary passes the dependency test, and its scripts never serialize world state per tick.
-- A WebAssembly gameplay module runs on all four devices, compiled ahead of time on the iPhone, and its per-frame cost on both phones is recorded against the same system written in TypeScript.
+- A shipped native WebAssembly gameplay module runs through wasm2c on this Mac, and its per-frame cost is recorded against the same system written in TypeScript. Existing target builds and iOS no-JIT architecture remain required; device execution on the other targets is deferred.
 
 ### Phase 2: Editor and document model (overlaps Phase 1)
 
@@ -518,7 +558,7 @@ Deliverables:
 Exit gate:
 - Core Sample can be rebuilt from an empty project using only the editor in under four hours by someone who has never seen the code.
 - Every editor action is a command on the bus (verified by a test that disables direct document mutation and runs the UI test suite).
-- On a 100,000-entity scene, the editor applies an edit in under 100 ms and keeps the viewport at 60 fps on the M1 MacBook Air.
+- On a 100,000-entity scene, the editor applies an edit in under 100 ms and keeps the viewport at 60 fps on this Mac, with its actual model/OS recorded.
 - Undo/redo passes a fuzz test of ten thousand random command sequences with document equality checks.
 - The 2D platformer template is rebuilt from an empty project through the editor alone and plays with tilemap collision, sprite animation and a following camera.
 
@@ -563,7 +603,7 @@ Deliverables:
 Exit gate:
 - A technical artist builds a complete environment (terrain, twenty props, five materials, lighting, VFX) in two days using only the engine, with at least half the props from the geometry graph or generation.
 - Agent eval extended with fifty content tasks, pass rate at or above 70%.
-- A room graph of ten templates assembled at runtime shows no visible lighting seams in Claude's review at mobile and desktop tiers.
+- A room graph of ten templates assembled at runtime shows no visible lighting seams in rendered-pixel review at the applicable device tiers.
 
 ### Phase 5: Platforms and export
 
@@ -587,7 +627,7 @@ Deliverables:
 
 Exit gate:
 - Core Sample ships to TestFlight, Google Play internal testing, and a private Steam app, from CI, with no manual steps beyond pressing a button.
-- Cold start under three seconds on an iPhone 13 and under five seconds on a Pixel 6.
+- Cold start under three seconds on this Mac in the shipping profile. The iPhone 13 three-second and Pixel 6 five-second comparisons are deferred, nonblocking follow-up.
 
 ### Phase 6: Networking and online services
 
@@ -630,12 +670,12 @@ Deliverables, editor and agent:
 Editor collaboration: real-time multi-user editing of a project (the CRDT document over this transport through a collaboration relay) is Engine 1.1 scope. Engine 1.0 ships single-user cloud sync (Phase 2) and journal-based session sharing.
 
 Exit gate:
-- Core Sample runs four-player co-op across desktop and mobile with 150 ms simulated latency and feels acceptable to a playtest group.
+- Core Sample runs four-player co-op on this Mac with 150 ms simulated latency and feels acceptable to a playtest group. Real desktop/mobile cross-device play is deferred; the shared platform implementations remain in scope.
 - Desync detection catches all seeded determinism bugs in a test suite.
-- A client on cellular behind carrier NAT joins by room code through the relay, backgrounds the app for 60 seconds, returns, and is still in the run; the same holds for a Wi-Fi to cellular switch.
+- On this Mac, a client under the local network profiles joins by room code through the relay, survives the modeled 60-second suspension and network transition, and rejoins the run. Actual cellular/carrier-NAT, phone backgrounding and Wi-Fi-to-cellular execution are deferred; modeled tests do not establish those device results.
 - A current-version client and a previous-version client complete a session together; a client two versions behind is refused with the forced-update flow.
 - Sessions, relay and player services pass a load test at twice the Phase 8 projected launch concurrency in one region, and a self-hosting run from the documentation on a clean machine works without any Incant credentials.
-- Determinism CI passes on all four reference device classes, or the plan records which architecture classes rollback cross-play is limited to.
+- Mac determinism tests and the existing hosted determinism CI pass; record the architecture classes actually covered and keep unsupported cross-architecture rollback disabled. Additional reference-device comparisons are deferred and do not block the gate.
 
 ### Phase 7: Driftwake vertical slice (overlaps 5 and 6)
 
@@ -667,7 +707,7 @@ Engine deliverables:
 - Public beta with a thousand invited users. Telemetry opt-in. Weekly releases.
 - Engine repository and documentation go public under MIT OR Apache-2.0 with the beta; Incant Cloud opens to beta users; Discord and GitHub Discussions open with the community lead in place.
 - Engine 1.0 release candidate.
-- Competitive benchmark: Core Sample reimplemented in Unity and Godot by the same team, measured on every reference device for frame time, cold start, memory and build size. Target: Incant within 10 percent or better on each. Publication is subject to each engine's license terms on benchmarks, reviewed by a human.
+- Competitive benchmark: Core Sample reimplemented in Unity and Godot by the same team, measured on this Mac for frame time, cold start, memory and build size. Target: Incant within 10 percent or better on the matched Mac workloads; other-device comparisons are deferred. Publication is subject to each engine's license terms on benchmarks, reviewed by a human.
 - Live-service readiness: load test at twice projected launch concurrency in every launch region, runbooks, status page, alerting, a backup restore drill, a staffed on-call rotation, and cross-version compatibility (current and previous client) tested in CI.
 - Release channels (stable, beta, nightly), a signed editor updater (Tauri updater with a human-held signing key; offline installers stay available), per-project runtime pinning so a shipped game bundles the runtime it was tested with, and a support policy: each 1.x stable receives fixes for twelve months.
 
@@ -707,7 +747,11 @@ Browser mode, the 2D pipeline, screen-space GI and hardware ray tracing all stay
 
 ## 6. Workstream detail
 
-Each workstream lists its human owner (the reviewer accountable for it), its first milestone, its key design choices, and its tests. Build execution for every workstream follows Section 4: Astra in Codex builds, and anything matching the visual rule in 4.2 is handed to Claude 5.5 over ACP.
+Each workstream lists its human owner (the reviewer accountable for it), its first milestone, its key design choices, and its tests. Build execution for every workstream follows Section 4: Astra in Codex builds, and editor UI design, layout, styling and pixel review default to Claude Opus 5.5/Max over ACP, subject to the director-authorized takeover. Astra/root and subagents own all other work.
+
+Workstream device test lists retain planned coverage. Under revision 9, execution
+on mobile or other devices is deferred, nonblocking follow-up; use this Mac for
+current device gates and preserve existing automated hosted checks.
 
 ### 6.1 Document model and command bus
 - Owner: engine lead.
@@ -724,8 +768,8 @@ Each workstream lists its human owner (the reviewer accountable for it), its fir
 ### 6.3 Scripting
 - Owner: scripting engineer.
 - First milestone: Phase 0 Spike 3.
-- Choices: QuickJS for portability and sandboxing; V8 optional on desktop. TS compiled with a bundled SWC, then to QuickJS bytecode at cook time. Bindings generated from the schema registry so the SDK never drifts. Hot reload preserves entity state where types match. A bulk query API over typed-array component views is the default for per-tick logic, so script cost scales with systems rather than entities. Scripts get a per-frame time budget of 2 ms at p95 on the reference phones, shown in the profiler and enforced in CI. Scripts access the runtime world directly (Section 2.6), never through the command bus. WebAssembly modules, Rust first, are the native-speed tier: JIT and hot reload in the editor, ahead-of-time native code at export. Web builds run TypeScript in the browser's JavaScript engine. Ahead-of-time TypeScript is a Phase 1 spike (decision 18).
-- Tests: SDK conformance suite, sandbox escape tests, hot reload state preservation tests, bytecode tamper and version-mismatch tests, and performance tests with ten thousand scripted entities measured on the iPhone 13 and the Pixel 6 against the per-frame budget. Desktop benchmarks are informative only. Phase 0 measured one thousand entities on an Apple M5 Pro. The same conformance suite runs against the QuickJS, browser and WebAssembly hosts; module build sandbox tests confirm that disallowed build scripts and procedural macros are refused.
+- Choices: QuickJS for portability and sandboxing; V8 optional on desktop. TS compiled with a bundled SWC, then to QuickJS bytecode at cook time. Bindings generated from the schema registry so the SDK never drifts. Hot reload preserves entity state where types match. A bulk query API over typed-array component views is the default for per-tick logic, so script cost scales with systems rather than entities. Scripts get a per-frame gate budget of 2 ms at p95 on this Mac in the shipping profile, shown in the profiler; phone enforcement is deferred. Existing hosted CI remains required. Scripts access the runtime world directly (Section 2.6), never through the command bus. WebAssembly modules, Rust first, are the native-speed tier: JIT and hot reload in the editor, ahead-of-time native code at export. Web builds run TypeScript in the browser's JavaScript engine. Ahead-of-time TypeScript is a Phase 1 spike (decision 18).
+- Tests: SDK conformance suite, sandbox escape tests, hot reload state preservation tests, bytecode tamper and version-mismatch tests, and performance tests with ten thousand scripted entities measured on this Mac against the per-frame budget. Phone comparisons are deferred and are not prerequisites. Phase 0 measured one thousand entities on an Apple M5 Pro. The same conformance suite runs against the QuickJS, browser and WebAssembly hosts; module build sandbox tests confirm that disallowed build scripts and procedural macros are refused.
 
 ### 6.4 Editor
 - Owner: editor lead.
@@ -812,7 +856,7 @@ Tests: service integration and chaos tests (simulated region loss, Postgres fail
 
 ### 6.12 2D
 - Owner: rendering lead, with the editor lead for tools.
-- First milestone: Phase 1 sprite, tilemap and 2D physics sample on all four reference devices.
+- First milestone: Phase 1 sprite, tilemap and 2D physics sample on this Mac; other reference-device execution is deferred.
 - Choices: sprites, atlases, nine-slice, sorting layers and tilemaps in `incant_2d` on the shared render graph; Rapier 2D behind the ADR 0003 physics boundary; pixel-perfect camera; autotile rules in the Phase 2 editor; 2D lights in Phase 4. Out of scope for 1.0: skeletal 2D animation, isometric and hex tilemaps.
 - Tests: golden images for sprite sorting and pixel-perfect rendering, atlas packing property tests, tilemap collision tests, 2D physics determinism, the 2D platformer template exit gate.
 
@@ -826,8 +870,8 @@ Tests: service integration and chaos tests (simulated region loss, Postgres fail
 - Owner: core engine engineer.
 - First milestone: Phase 1 per-project determinism variants with Core Sample on the fast variant.
 - Choices: Rapier 3D and 2D behind the Rust-owned boundary (ADR 0003). Both native variants enable the multithreaded solver, which Rapier guarantees bit-identical to its serial path. The fast variant uses hardware math and adds 8-lane SIMD where the target benefits; the deterministic variant uses `enhanced-determinism`, which forces software math and 4-lane SIMD, and is selected by projects that need rollback or exact cross-platform replays. Stable entity IDs cross the boundary, so a backend change does not touch scripts or documents.
-- Driftwake-scale benchmark, completed before Phase 6 starts: destructible props, five hundred dynamic bodies, four characters and enemy crowds on the mobile and desktop tiers, comparing Rapier fast, Rapier deterministic and Jolt through a maintained C shim. The result updates ADR 0003; the backend changes only on measured evidence (decision 19).
-- Tests: determinism tests per variant, cross-platform checksum comparison for the deterministic variant, per-step budgets on the reference phones, and the benchmark scenes in nightly CI.
+- Driftwake-scale benchmark, completed before Phase 6 starts: destructible props, five hundred dynamic bodies, four characters and enemy crowds on this Mac using the mobile and desktop workload tiers, comparing Rapier fast, Rapier deterministic and Jolt through a maintained C shim. Other-device comparisons are deferred. The result updates ADR 0003; the backend changes only on measured evidence (decision 19).
+- Tests: determinism tests per variant, cross-platform checksum comparison for the deterministic variant, per-step budgets on this Mac, and the benchmark scenes in existing CI. Reference-phone step budgets remain deferred follow-up.
 
 ---
 
@@ -874,7 +918,7 @@ A 3D co-op action roguelite exercises everything: 3D rendering on mobile and des
 
 - **Pricing (decision 21).** Desktop: premium at 19.99 USD on Steam, with a free demo. Mobile: free download with one non-consumable full-game unlock at 9.99 USD after the first biome. No ads, consumables, loot boxes or battle pass. Post-launch content patches are free. Purchases are per store; saves sync across stores through the player service, purchases do not.
 - **Repository.** Driftwake moves to its own private repository at the start of pre-production; Core Sample stays public in the engine repository.
-- **Marketing (decision 23).** Steam page with wishlists by the end of Phase 7; devlog and engine case-study posts from Phase 7; playable demo in a Steam Next Fest during Phase 8; trailer, press kit and store art in Phase 9, with visual assets routed to Claude per Section 4.2. Wishlists are tracked weekly from the page launch.
+- **Marketing (decision 23).** Steam page with wishlists by the end of Phase 7; devlog and engine case-study posts from Phase 7; playable demo in a Steam Next Fest during Phase 8; trailer, press kit and store art in Phase 9, with visual assets owned by Astra/root and subagents per Section 4.2. Wishlists are tracked weekly from the page launch.
 - **Support and community (decision 24).** Engine: GitHub issues and Discussions plus a Discord server from the Phase 8 beta, triaged by agents with the community lead accountable. Driftwake: an in-game bug reporter that attaches logs only with consent and never personal data, a support address answered within two business days, and store review responses. The community lead moderates every channel.
 
 ---
@@ -882,10 +926,10 @@ A 3D co-op action roguelite exercises everything: 3D rendering on mobile and des
 ## 8. Quality, testing, and release engineering
 
 - **Development and release CI (director decision, 2026-10-11):** run all applicable locally feasible tests and review before merging development PRs into `main`; require the fast hosted development check. Approximately every three hours, freeze a snapshot of `main` on `codex/release-candidate` and open one PR to `release`. Comprehensive CI gates that exact candidate, including: build all crates, unit tests, schema validation, TS SDK conformance, the runtime dependency test, service and multi-client integration tests against the Section 2.7 local stack on Linux runners, and a dependency license check (cargo-deny and an npm license checker against an allowlist) that regenerates THIRD_PARTY_NOTICES.md.
-- **Performance gates on release checkpoints containing runtime changes:** a Core Sample run in the shipping profile on a reference desktop and a reference phone, failing on frame-time, script-time or memory regressions over 5 percent, with Tracy captures attached to the PR.
-- **Comprehensive release checkpoints and nightly device/soak work:** checkpoints include full target builds, golden-image rendering tests, headless play-test suite on Core Sample and Driftwake, agent eval harness, device farm smoke tests, performance budgets, four-client network soak with bots under the latency profiles on the local stack, determinism checksum comparison across reference device classes, script time budget and shader-hitch checks on the reference phones. These run on hosted real devices in AWS Device Farm, using the reference models or the nearest available ones; Incant buys no phones.
+- **Performance gates on release checkpoints containing runtime changes:** a Core Sample run in the shipping profile on this Mac, failing on frame-time, script-time or memory regressions over 5 percent against a matched Mac baseline, with Tracy captures attached to the PR. Other-device comparisons are deferred, nonblocking follow-up; compile-only or mock results do not replace actual Mac measurements.
+- **Comprehensive release checkpoints and deferred device work:** preserve every configured hosted workflow, full target build, required check context and existing automated test, including hosted Metal/Vulkan/Dx12 numerical checks. Core Sample/Driftwake play tests, agent evals, service soak, determinism and security obligations remain. Current device performance/script/shader-hitch gate evidence comes from this Mac. Additional real-phone/device-farm smoke, performance and cross-device comparisons are deferred follow-up, not gate prerequisites; no existing hosted check is removed or converted to a skip.
 - **Weekly:** store-submission dry run on one platform in rotation, security dependency audit, crash report triage, service load test in one region, backup restore check.
-- **Checkpoint integration:** keep the candidate frozen while checks run; fix failures in `main`, then advance the candidate and rerun all affected validation. Merge into `release` only when every required check passes. A checkpoint is a tested integration baseline, not distribution publication or phase-gate approval. Missing reference-phone, service, performance and live-evaluation evidence remains open; changing CI cadence does not waive it. See [ADR 0014](docs/adr/0014-ci.md).
+- **Checkpoint integration:** keep the candidate frozen while checks run; fix failures in `main`, then advance the candidate and rerun all affected validation. Merge into `release` only when every required check passes. A checkpoint is a tested integration baseline, not distribution publication or phase-gate approval. Missing other-device evidence is deferred, nonblocking follow-up under revision 9. Required Mac performance, service and live-evaluation evidence remains open where not established; changing CI cadence does not waive those obligations. See [ADR 0014](docs/adr/0014-ci.md).
 - **Release trains:** engine beta releases every two weeks during Phase 8; game builds to internal QA daily.
 - **Bug priority:** P0 (data loss, crash on launch, credential exposure), P1 (blocks a workflow), P2 (workaround exists), P3 (cosmetic). P0 and P1 block releases.
 - **Telemetry:** opt-in only. Never includes project content, prompts, or credentials. Includes crash stacks, feature usage counts, agent turn success/failure (not content). Gameplay analytics for a shipped game is a separate, consent-gated service (Section 6.10) that the game developer enables; it never flows into engine telemetry.
@@ -904,7 +948,7 @@ A 3D co-op action roguelite exercises everything: 3D rendering on mobile and des
 | CRDT performance on large scenes | Medium | High | Per-scene CRDT documents loaded lazily; 100,000-entity responsiveness in the Phase 2 gate; per-subtree documents as the fallback |
 | Agent quality plateaus below usable | Medium | Fatal | Eval harness from Phase 0, skills to constrain the problem, approval modes, invest in tool ergonomics over prompts |
 | Mobile performance | Medium | High | Mobile rendering engineer from day one, device farm, budgets in CI |
-| Interpreted scripts exceed the frame budget on phones | High | High | Runtime data path without per-tick serialization, bulk query API, build-time bytecode, WebAssembly modules compiled ahead of time for hot code, a 2 ms per-frame script budget enforced on the reference phones |
+| Interpreted scripts exceed the frame budget on phones | High | High | Runtime data path without per-tick serialization, bulk query API, build-time bytecode, WebAssembly modules compiled ahead of time for hot code, a 2 ms per-frame script gate budget measured on this Mac; phone comparisons deferred |
 | Script hosts diverge in behavior (QuickJS, browser JavaScript, WebAssembly) | Medium | Medium | One SDK surface generated from the schema registry; one conformance suite run against every host; deterministic math in the SDK |
 | Compiling Rust modules runs untrusted code on the user's machine | Medium | High | Offline sandboxed builds, vetted vendored dependencies, no build scripts or procedural macros outside the allowlist, red-team coverage |
 | Native backend interop erodes portability | Medium | Medium | Every interop pass has a portable fallback that golden-image tests cover on all backends |
@@ -916,10 +960,10 @@ A 3D co-op action roguelite exercises everything: 3D rendering on mobile and des
 | Store rejection for AI-generated content policies | Low | Medium | Track platform policies, attach provenance and licensing to all assets |
 | Prompt injection via shared projects or templates | Medium | High | Data labeling, sandboxed scripts, no shell access, red-team pass before each release |
 | Team burnout building engine and game simultaneously | High | High | Separate teams, gate-driven progress with no calendar deadlines, no death marches |
-| ACP adapter or Claude account limits stall visual work | Medium | Medium | Handoff packets are self-contained so the director can run Claude Code manually; batch non-urgent visual tasks per sprint |
+| ACP adapter or Claude account limits stall editor UI work | Medium | Medium | Handoff packets are self-contained so the director can run Claude Code manually; batch non-urgent editor UI tasks; Astra may take over unresolved work under the standing authorization |
 | Codex outages or task limits stall the primary builder | Medium | Medium | Codex CLI fallback on the director's machine; work queue lives in the repo so any agent session can resume it |
 | Two agents drift on conventions and style | High | Medium | Both instruction files generated from one conventions source; CI lint; Astra integrates every handoff and owns the final PR |
-| Routing ambiguity causes rework | Medium | Low | Default to the split pattern; director tie-breaks weekly |
+| Routing ambiguity causes rework | Medium | Low | Use the editor UI boundary in 4.2; director resolves remaining ambiguity |
 | Director becomes the bottleneck for approvals | High | Medium | Approval modes per risk level; agents merge completed PRs after review and passing checks; gates and routing disputes need the director |
 | Cross-architecture determinism (x86 versus ARM) breaks rollback cross-play | High | Medium | Driftwake defaults to host-authoritative with prediction; rollback cross-play gated on determinism CI across the four reference device classes; deterministic math and RNG in the TS SDK |
 | Mobile networks (carrier NAT, IPv6-only, backgrounding, Wi-Fi to cellular switches) drop sessions | High | High | Relay by default on cellular, dual-stack services, QUIC connection migration, rejoin grace period, network-transition tests on the device farm |
@@ -939,11 +983,11 @@ Tracked continuously from Phase 1 and reviewed at every phase review.
 - Agent eval pass rate per model (target 80% core, 70% content).
 - Time-to-playable-prototype for a new user (target under fifteen minutes).
 - Agent provenance share in Driftwake (target 60%).
-- Frame time per tier per reference device (targets: 16.6 ms desktop, 16.6 ms mobile high, 33 ms mobile low).
-- Script time per frame on the reference phones (target: 2 ms at p95 in Core Sample and in Driftwake combat).
+- Frame time per tier on this Mac (targets: 16.6 ms desktop, 16.6 ms mobile high, 33 ms mobile low). Other-device results stay separate deferred comparisons; Mac mobile-tier results are not phone measurements.
+- Script time per frame on this Mac (target: 2 ms at p95 in Core Sample and in Driftwake combat); reference-phone comparisons deferred.
 - Gameplay frames over twice budget caused by shader or pipeline compilation (target: zero; compilation happens on load screens).
-- Competitive benchmark against Unity and Godot on Core Sample equivalents: frame time, cold start, memory and build size per reference device (target: within 10 percent or better).
-- Editor responsiveness on a 100,000-entity scene (target: edits under 100 ms, viewport at 60 fps on the M1 MacBook Air).
+- Competitive benchmark against Unity and Godot on Core Sample equivalents: frame time, cold start, memory and build size on this Mac (target: within 10 percent or better); other-device comparisons deferred.
+- Editor responsiveness on a 100,000-entity scene (target: edits under 100 ms, viewport at 60 fps on this Mac, with the actual model/OS recorded).
 - Cold start per platform.
 - Build size per platform (targets: under 150 MB mobile base, under 500 MB desktop base).
 - Crash-free sessions (target 99.5% in beta).
@@ -1008,8 +1052,8 @@ Networking and online services:
 
 Performance:
 
-18. **Ahead-of-time compiled TypeScript (rule):** adopt it for shipped builds only if the Phase 1 spike passes 100 percent of the SDK conformance suite, runs at least twice as fast as bytecode on the script benchmark on both reference phones, needs no JIT on iOS, adds under 5 MB to the mobile binary, and has an upstream release line with security fixes. Otherwise TypeScript stays on bytecode and WebAssembly modules remain the native-speed tier. The outcome is recorded in ADR 0006 at the Phase 1 gate.
-19. **Physics backend (rule):** keep Rapier unless the Section 6.14 benchmark shows Jolt at least 1.5 times faster in p95 step time on both reference phones at Driftwake scale and a maintained C shim builds for all six targets. If both hold, switch behind the physics boundary before Phase 6. The outcome is recorded in ADR 0003.
+18. **Ahead-of-time compiled TypeScript (rule):** adopt it for shipped builds only if the Phase 1 spike passes 100 percent of the SDK conformance suite, runs at least twice as fast as bytecode on the matched shipping-profile script benchmark on this Mac, needs no JIT on iOS, adds under 5 MB to the mobile binary, and has an upstream release line with security fixes. The iOS architecture and binary-size clauses use build/inspection evidence, not required phone execution. Reference-phone speed comparisons are deferred and do not block this adoption decision. Otherwise TypeScript stays on bytecode and WebAssembly modules remain the native-speed tier. The outcome is recorded in ADR 0006 at the Phase 1 gate.
+19. **Physics backend (rule):** keep Rapier unless the Section 6.14 benchmark shows Jolt at least 1.5 times faster in p95 step time on this Mac at Driftwake scale in the shipping profile and a maintained C shim builds for all six targets. Reference-phone comparisons are deferred and do not block this adoption decision. If both hold, switch behind the physics boundary before Phase 6. The outcome is recorded in ADR 0003.
 20. **Shipped WebAssembly path:** wasm2c translation compiled into the signed binary on every native platform; Wasmtime with JIT in the editor and development builds; native WebAssembly in browsers (ADR 0006).
 
 Product, business and operations:
@@ -1140,9 +1184,9 @@ Component (examples)
 - **Eval harness:** the automated suite that measures agent success on scripted tasks.
 - **Tier:** a rendering quality level (mobile, desktop, desktop-high).
 - **BYO model:** bring-your-own model, where the user supplies their own provider account.
-- **Astra:** the agent running in OpenAI Codex that builds everything non-visual and integrates all work.
-- **ACP:** Agent Client Protocol, the open protocol for talking to coding agents such as Claude Code from another tool. Used to hand visual work to Claude 5.5.
-- **Handoff packet:** a self-contained folder describing one visual task for Claude, plus the result it returns.
+- **Astra:** the agent running in OpenAI Codex that, with its subagents, owns all work except the default editor UI handoff and integrates all work.
+- **ACP:** Agent Client Protocol, the open protocol for talking to coding agents such as Claude Code from another tool. Used for editor UI handoffs to Claude Opus 5.5 with explicit Max.
+- **Handoff packet:** a self-contained folder describing one editor UI task for Claude, plus the result it returns.
 - **Director:** the human (Andrey) who sets priorities, approves gates and breaks routing ties. Agents merge completed PRs under the director’s standing authorization.
 - **Relay:** a server that forwards game traffic between players who cannot connect directly, hiding their addresses from each other.
 - **Host-authoritative:** one player's client runs the authoritative simulation and the others predict and reconcile. Server-authoritative is the same code running on a dedicated server.

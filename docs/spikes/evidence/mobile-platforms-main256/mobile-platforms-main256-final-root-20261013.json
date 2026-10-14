@@ -1,0 +1,22 @@
+{
+  "reviewer": "astra/root",
+  "accepted": true,
+  "head": "91017829238c4fbdc08b7e1571a5a5f76dba14f3",
+  "tested": "a928652ad67a714c9709cfb12db813a0f3163378",
+  "manifest_sha256": "c845c1a256d8d188d01ec3cabbe6dbfef861aebbf91ea55d2cd20306bb0a7c78",
+  "source_reviews": [
+    "d60183875cb318091c68a826b88cd4a9aa0a2670d30c37d676b51ce9c3502899",
+    "d0227f09e1590cf149957ec6721e3bbf751d618c3a87f93e84fdf31c703579ae"
+  ],
+  "checks": [
+    "Independently read final doc and full read-only verifier",
+    "Replayed exact3875currentinputs,29source/buildpaths,107records/85payloads,44successfulchecks,148cases/mode,32final+16initialbinary copies",
+    "Replayed unchanged Apple43records/7bins andAndroid131records/3bins through retainedsource boundaries",
+    "Confirmed packageids unchanged968,3optional edges only, original151pass+duplicate_modlint failure retained, final148removes3duplicate clock tests only"
+  ],
+  "limits": [
+    "CPU/compiler qualification only; no GPU/appearance/deviceexecution,physicalaudio/haptics,fullAPK/app export orperformancegate",
+    "Deviceexecutionnonblockingdeferredperrevision9"
+  ],
+  "merge": "Scoped publication allowed after required actualSUCCESS and unchanged tested production"
+}

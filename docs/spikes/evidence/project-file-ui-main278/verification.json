@@ -1,0 +1,47 @@
+{
+  "source": "d803cc2cc15d399bdf61cbf5743f5db81712f64b",
+  "binary_sha256": "0be02172b4ce09e66adea8c82df407753b30d909c7cb676857bf577587b01966",
+  "platform": "Native macOS Tauri/WebKit, actual local Mac",
+  "method": "Root computer-use actions and rendered-pixel/AX observation; independent filesystem byte checks. No injected browser fixture or native automation hook.",
+  "save": {
+    "action": "Hierarchy F2 rename to Saved through native UI, then Command-S",
+    "initial_overlap_refusal": "First immediate save overlapped rename and truthfully returned Wait for the current engine operation. engine.request; explicit later Command-S succeeded.",
+    "receipt": "Saved revision 1 to the project file.",
+    "reopened": true,
+    "reopened_hierarchy_name": "Saved through native UI",
+    "reopened_history_entries": 1,
+    "saved_sha256": "34bba3f0bc9d4ce074f7f091f422bba7adc342f6aa59353324a180a66f4cdc47"
+  },
+  "already_pinned": {
+    "refused": true,
+    "ui_message": "No review was returned. engine pin review applies only to a legacy project without an engine declaration",
+    "escape_focus": "Project: Native Save Review"
+  },
+  "legacy": {
+    "fixture": "Byte-exact sdk/templates/empty/project.incant.json",
+    "before_sha256": "34d525b7bc48a01f88d6c0cb06998c2e31c8123f6917158f063748eb0b5e7e72",
+    "review_read_only": true,
+    "review_revision": 0,
+    "review_id": "01M4X04WMYZMY17NT1GNPTPD67",
+    "candidate_sha256": "51ee8be666b079e27dc8cf3b1d94b6a974f44c8e5dbbe4fa232cad30ea3f21e6",
+    "applied_receipt": "Pinned. Empty now requires engine =0.0.1 (revision 1).",
+    "candidate_bytes_match": true,
+    "backup_original_bytes_match": true,
+    "undo_revision": 2,
+    "undo_original_bytes_match": true,
+    "undo_save_receipt": "Nothing to save: the project file already matches revision 2.",
+    "redo_pinned_bytes_match": true
+  },
+  "interaction_note": "AX observation after the first quit relaunched a no-argument app. Its owned process was closed; actual project-bound reopened instance was inspected and is the persistence result.",
+  "native_exit_codes": [
+    0,
+    0,
+    0
+  ],
+  "limits": [
+    "Native screenshots were inspected through the computer-use tool and remain in the task trace, not in this portable packet.",
+    "Scoped save/pin review; no older-format conversion, Save As, native accessibility audit, Windows/Linux UI execution or phase approval."
+  ],
+  "phase_gate_passed": false,
+  "recorded": "2026-10-14T10:44:48.386630+00:00"
+}

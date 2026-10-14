@@ -11,31 +11,38 @@ fn main() {
         env::var_os("CARGO_FEATURE_PROBE_ANDROID_BYTECODE").is_some(),
     )]);
     let lock = fs::read_to_string(root.join("Cargo.lock")).expect("pinned Cargo.lock");
-    for (package, checksum) in [
-        (
-            "rquickjs",
-            "a0a22bf72f515cc4189dd7c63d016f6de92a11eee98ddf7dd64794198f6eb34e",
-        ),
-        (
-            "rquickjs-core",
-            "6657979a24d543e5fc66f32cef2f47ca82ce8eb55cec5f7d59a12b7b570bbf24",
-        ),
-        (
-            "rquickjs-sys",
-            "cee271d0eeba64f0915b846cb7ae02e16faf3dfdffdca91731101d9d30fe3423",
-        ),
-    ] {
-        let entry = lock
+    let wrapper = lock
+        .split("[[package]]")
+        .find(|p| p.contains("name = \"rquickjs\"\n"))
+        .expect("pinned QuickJS wrapper");
+    assert!(
+        wrapper.contains("version = \"0.14.0\"")
+            && wrapper
+                .contains("source = \"registry+https://github.com/rust-lang/crates.io-index\"")
+            && wrapper.contains(
+                "checksum = \"a0a22bf72f515cc4189dd7c63d016f6de92a11eee98ddf7dd64794198f6eb34e\""
+            ),
+        "Re-audit the cooked script ABI before changing the pinned wrapper"
+    );
+    let manifest = fs::read_to_string(root.join("Cargo.toml")).expect("workspace patches");
+    for package in ["rquickjs-core", "rquickjs-sys"] {
+        let entries: Vec<_> = lock
             .split("[[package]]")
-            .find(|part| part.contains(&format!("name = \"{package}\"\n")))
-            .expect("pinned QuickJS package");
+            .filter(|p| p.contains(&format!("name = \"{package}\"\n")))
+            .collect();
         assert!(
-            entry.contains("version = \"0.14.0\"")
-                && entry
-                    .contains("source = \"registry+https://github.com/rust-lang/crates.io-index\"")
-                && entry.contains(&format!("checksum = \"{checksum}\"")),
-            "Re-audit the cooked script ABI before changing the pinned engine"
+            entries.len() == 1
+                && entries[0].contains("version = \"0.14.0\"")
+                && !entries[0].contains("source = ")
+                && !entries[0].contains("checksum = ")
+                && manifest.contains(&format!(
+                    "{package} = {{ path = \"third_party/{package}\" }}"
+                )),
+            "Re-audit the maintained-counter patch before changing the native engine"
         );
+        // Include C, headers, bundled ABI declarations, build support and Rust,
+        // with logical names. No machine-dependent checkout path enters identity.
+        hash_vendor_tree(root, &root.join("third_party").join(package), &mut identity);
     }
     // cc accepts these environment overrides for the linked QuickJS build.
     // Cross-target admission uses the audited default C configuration only;
@@ -68,6 +75,10 @@ fn main() {
         Path::new("src/bindings.rs").into(),
         Path::new("src/bindings_embed.rs").into(),
         Path::new("src/lib.rs").into(),
+        Path::new("src/loan.rs").into(),
+        Path::new("src/loan/ids.rs").into(),
+        Path::new("src/loan/scratch.rs").into(),
+        Path::new("src/heap_profile.rs").into(),
         Path::new("src/input.rs").into(),
         Path::new("src/hud.rs").into(),
         Path::new("src/flipbooks.rs").into(),
@@ -167,6 +178,30 @@ fn hash_tree(path: &Path, hash: &mut Sha256) {
         if path.is_dir() {
             hash_tree(&path, hash);
         } else if path.extension().is_some_and(|s| s == "rs") {
+            hash_file(&path, hash);
+        }
+    }
+}
+
+fn hash_vendor_tree(root: &Path, path: &Path, hash: &mut Sha256) {
+    println!("cargo:rerun-if-changed={}", path.display());
+    let mut paths: Vec<_> = fs::read_dir(path)
+        .expect("vendored QuickJS directory")
+        .map(|p| p.expect("vendor entry").path())
+        .collect();
+    paths.sort();
+    for path in paths {
+        if path.is_dir() {
+            hash_vendor_tree(root, &path, hash);
+        } else {
+            let relative = path
+                .strip_prefix(root)
+                .expect("vendor below root")
+                .to_str()
+                .expect("UTF-8 vendor path")
+                .replace('\\', "/");
+            hash.update((relative.len() as u64).to_le_bytes());
+            hash.update(relative.as_bytes());
             hash_file(&path, hash);
         }
     }

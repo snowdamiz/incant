@@ -1,0 +1,371 @@
+{
+  "source_head": "44b9aead71fe83252445264adb597f51b984843b",
+  "actual_main": "31519f8be9d09ce53eb93dc68b69ec275915492e",
+  "summary": {
+    "commands": 31,
+    "successful_commands": 28,
+    "historical_failures": {
+      "desktop-002": 101,
+      "clippy-003": 101,
+      "script-regression-003": 101
+    },
+    "source_inputs": 3839,
+    "final_frozen_inputs": 33,
+    "immediate_binary_copies": 46,
+    "counts": {
+      "desktop-002": [
+        5,
+        1,
+        0
+      ],
+      "script-regression-003": [
+        150,
+        1,
+        0
+      ],
+      "script-002": [
+        9,
+        0,
+        0
+      ],
+      "desktop-003": [
+        6,
+        0,
+        0
+      ],
+      "desktop-004": [
+        6,
+        0,
+        0
+      ],
+      "script-regression-005": [
+        152,
+        0,
+        0
+      ],
+      "game-regression-005": [
+        44,
+        0,
+        0
+      ],
+      "script-fast-005": [
+        10,
+        0,
+        0
+      ],
+      "game-fast-005": [
+        1,
+        0,
+        0
+      ],
+      "desktop-input-regression-005": [
+        53,
+        0,
+        0
+      ],
+      "input-integration-005": [
+        29,
+        0,
+        0
+      ],
+      "script-hosted-regression-005": [
+        20,
+        0,
+        0
+      ]
+    },
+    "manifest_and_lock_unchanged": true
+  },
+  "archive": {
+    "sha256": "4cb520f9e96b9319448ab630ce87795830e4faa6571bf2cb592d1d0f1685e9ee",
+    "bytes": 1976129,
+    "records": 266,
+    "payloads": 149
+  },
+  "binaries": [
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-haptics-001/binaries/desktop-001/incant_game_player-ec29dba9e227aafe",
+      "sha256": "944626a928074dd18ad4737c0b0f6a932a9c5a596de8c4b4660f63ed651b0ebc",
+      "bytes": 128277600,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-haptics-001/binaries/desktop-002/incant_game_player-1ee2ee3f8c541b19",
+      "sha256": "236dbb63904bfd6fc2e496702f426389cd8e583bdeebb9a22ba879a0dc2eb7e6",
+      "bytes": 132785584,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-haptics-001/binaries/desktop-003/incant_game_player-1ee2ee3f8c541b19",
+      "sha256": "76056ef25e3385eab837a4bdaa96fd4b2d662d0514db4f37861f8379402711df",
+      "bytes": 130275968,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-haptics-001/binaries/desktop-004/incant_game_player-1ee2ee3f8c541b19",
+      "sha256": "b9e888fc660b3fb8db4c6289857205847ad92ebe58fd9befc741c821fad9e928",
+      "bytes": 130275968,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-haptics-001/binaries/desktop-input-regression-005/incant_game_player-1ee2ee3f8c541b19",
+      "sha256": "970d925d2f7801db99334fe14606e5ffcb6943669e4aa6b5f1b00aeb033d46cc",
+      "bytes": 130275968,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-haptics-001/binaries/game-001/hosting-43a5111984eb3fd7",
+      "sha256": "0f1097f8d62345c9073719e41d57911c5daae900723e8a9b8140a54b7f604672",
+      "bytes": 75356456,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-haptics-001/binaries/game-fast-005/hosting-e82ae0f1bfc8b325",
+      "sha256": "bea71de765770e60cbf2ca1f00d031068046e41f58906632ef75562b8ff0f249",
+      "bytes": 75776856,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-haptics-001/binaries/game-regression-005/audio_checkpoints-8d864c127ba10166",
+      "sha256": "fbd22850222a9d1c321769a78b99a1208c8e47c50910bf5a2c7271876918378b",
+      "bytes": 78748848,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-haptics-001/binaries/game-regression-005/checkpoints-cce0dae51b108a75",
+      "sha256": "7269f73b36b6bebb7b5bbd028d972cafed7efa2b2b5768776d90f2ba743343b4",
+      "bytes": 78266112,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-haptics-001/binaries/game-regression-005/hosting-2131483bfc2ce6f1",
+      "sha256": "c2d5f165c01875e4cbd446beabb1afb15c3835960c83112b8045827543e97c3e",
+      "bytes": 76502712,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-haptics-001/binaries/game-regression-005/incant_game_runtime-19efab364f8287dd",
+      "sha256": "96981808f6f57772a5db746c14647497c77156e128cc83850a4ed9a5d59ce5a8",
+      "bytes": 1029928,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-haptics-001/binaries/game-regression-005/native_checkpoints-a887062ad147420f",
+      "sha256": "0ee739635a08997128e96a18349e9b8d5122a4de7dd5af85966aa3e2901d3a38",
+      "bytes": 86118656,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-haptics-001/binaries/game-regression-005/restart-4d948d8430ac4c1f",
+      "sha256": "07c6641b6cc993a2ce34758c607c31e010dba764457792fc7a72a5b0d1e30bc7",
+      "bytes": 75998632,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-haptics-001/binaries/game-regression-005/script_audio_controls-b0ef338019264e2e",
+      "sha256": "7630a73ed33f283b65b14cedd0dcc729cfce8aa9c27cc98a8c2468a8324789f5",
+      "bytes": 75997288,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-haptics-001/binaries/game-regression-005/session-d0d87d4d2d31270f",
+      "sha256": "d39f6bddd61c51e7adb793cc950d133304cd7fc03ae9c92146d9820c8af32561",
+      "bytes": 77559272,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-haptics-001/binaries/game-regression-005/text_refusal-3d2a2e8bdeb1db48",
+      "sha256": "05a704e9c6e622175d5313b4eaf1a85fb6266a901a98c42858f2ea307ab328b1",
+      "bytes": 29193040,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-haptics-001/binaries/input-001/actions-975f1ce80a59f393",
+      "sha256": "038c9b5033edaf76dbea8ddbeeb7d24fe5df74b3e777b22690a270aaae404c10",
+      "bytes": 5058792,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-haptics-001/binaries/input-001/devices-a61d604c57688a55",
+      "sha256": "e144a3b5f943e9e36a15228b1c90f9524e9194042e7ee3ccd1d499decc2fa05c",
+      "bytes": 3285144,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-haptics-001/binaries/input-001/gamepad_adapter-eae743a4205115cc",
+      "sha256": "75dc7298f6d489c8a0cdf9604f62393f135cd0c16c778af258aa9e670d680f9b",
+      "bytes": 2208608,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-haptics-001/binaries/input-001/gestures-f8698aea6ddd6a6e",
+      "sha256": "60ba8676234b9c06bd5cf2562851206817c6a8def8a66de9348bcb2cf3d6203a",
+      "bytes": 2122968,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-haptics-001/binaries/input-001/incant_input-2a3b081ad4f69bf0",
+      "sha256": "abb8a40388ee70b0da5ae317835cdd25048b540f3f91d14a4c71294c45c790bb",
+      "bytes": 1098048,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-haptics-001/binaries/input-001/recording-ac27f83cf2fd64ca",
+      "sha256": "bfdbde9ccaf1ac2949e43f2d0842e98fb3f237204fc45e77c1bb323b814bb754",
+      "bytes": 4226424,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-haptics-001/binaries/input-001/ui_recording-5ddc58bd2d4a3955",
+      "sha256": "baaf9797c127725687f550b92d85c5c19a7b533dee187a2df293962263952ba4",
+      "bytes": 4049088,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-haptics-001/binaries/input-integration-005/actions-975f1ce80a59f393",
+      "sha256": "038c9b5033edaf76dbea8ddbeeb7d24fe5df74b3e777b22690a270aaae404c10",
+      "bytes": 5058792,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-haptics-001/binaries/input-integration-005/devices-a61d604c57688a55",
+      "sha256": "e144a3b5f943e9e36a15228b1c90f9524e9194042e7ee3ccd1d499decc2fa05c",
+      "bytes": 3285144,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-haptics-001/binaries/input-integration-005/gamepad_adapter-eae743a4205115cc",
+      "sha256": "75dc7298f6d489c8a0cdf9604f62393f135cd0c16c778af258aa9e670d680f9b",
+      "bytes": 2208608,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-haptics-001/binaries/input-integration-005/gestures-f8698aea6ddd6a6e",
+      "sha256": "60ba8676234b9c06bd5cf2562851206817c6a8def8a66de9348bcb2cf3d6203a",
+      "bytes": 2122968,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-haptics-001/binaries/input-integration-005/incant_input-2a3b081ad4f69bf0",
+      "sha256": "abb8a40388ee70b0da5ae317835cdd25048b540f3f91d14a4c71294c45c790bb",
+      "bytes": 1098048,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-haptics-001/binaries/input-integration-005/recording-ac27f83cf2fd64ca",
+      "sha256": "bfdbde9ccaf1ac2949e43f2d0842e98fb3f237204fc45e77c1bb323b814bb754",
+      "bytes": 4226424,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-haptics-001/binaries/input-integration-005/ui_recording-5ddc58bd2d4a3955",
+      "sha256": "baaf9797c127725687f550b92d85c5c19a7b533dee187a2df293962263952ba4",
+      "bytes": 4049088,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-haptics-001/binaries/input-regression-003/incant_input-2a3b081ad4f69bf0",
+      "sha256": "abb8a40388ee70b0da5ae317835cdd25048b540f3f91d14a4c71294c45c790bb",
+      "bytes": 1098048,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-haptics-001/binaries/script-001/animations-d5d16705bad4020d",
+      "sha256": "89650ddc0dd41e4cd3bc5cdad3a748f2ea89dc0d2b5f32173858a811ebd9e984",
+      "bytes": 73345432,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-haptics-001/binaries/script-001/audio_controls-1457d0d4cc18ff2f",
+      "sha256": "27564b1be79d75ce4493143ded119b5bfc0082b73a53f76f814b3c2c611baa83",
+      "bytes": 40169232,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-haptics-001/binaries/script-001/flipbooks-896deded7acc3650",
+      "sha256": "5a9b86a943f5462dc1226cbe35edf7298852650b921f5f3c07ced82472952c71",
+      "bytes": 71296808,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-haptics-001/binaries/script-001/hud-b67092baedcf75c1",
+      "sha256": "01519a88cb3f542e8177eedadcda33372d32abd94840ef1966c4a7ec9c5dd1d2",
+      "bytes": 40337064,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-haptics-001/binaries/script-001/incant_script-d45e8400aea2305e",
+      "sha256": "aa088bb649e61633faf2a09a31a4dd14a18fd69279855f8d563c68eb62c8df67",
+      "bytes": 75783312,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-haptics-001/binaries/script-001/profile-649d592210abec84",
+      "sha256": "d41388a4ed5538e9dde592e4b31522f41c61ad0ed3fbbb22cb224c576d91a08f",
+      "bytes": 1029704,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-haptics-001/binaries/script-001/project_bindings-db17f5b491a98cfa",
+      "sha256": "4b406efd6a27c529718599d101f6304dc65d4995ecb7e78d2f1b1eb2e6b8e7cb",
+      "bytes": 72811344,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-haptics-001/binaries/script-001/spatial-ecf8a05989e5ab28",
+      "sha256": "91183490bdd52bd49a86c695e74c9824e64a50fc66b78baa75f686f9b1d32eb3",
+      "bytes": 40303832,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-haptics-001/binaries/script-002/incant_script-f0824b3c77e6a65f",
+      "sha256": "c4b3fbcdcd04ea5e20308591089ec9b666f7ebd77daa9dfaf8cf13670709987f",
+      "bytes": 83473984,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-haptics-001/binaries/script-fast-005/incant_script-4c1ec4b494ee368c",
+      "sha256": "b8dbb3660d47147f0659734a48efdcc739cf8bd31803c6b6f6ed92729a6ce435",
+      "bytes": 87586816,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-haptics-001/binaries/script-hosted-regression-005/audio_controls-f8f89d153368dffa",
+      "sha256": "e4e257f9568fb0a636ff5aad1f93435881c858c71dff3e793417aebb71bce730",
+      "bytes": 41379216,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-haptics-001/binaries/script-hosted-regression-005/hud-79ab765a1d22aa52",
+      "sha256": "94c0df60aaf2f717572bdc2d92c7a289e10e00686b7b82e65c06e4567f721ade",
+      "bytes": 41564312,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-haptics-001/binaries/script-hosted-regression-005/project_bindings-71305b9ed966c0c5",
+      "sha256": "4b08ede9748516088043772db7ea3b413cc806e8abcfda0dfdff7e6e8e01bd7d",
+      "bytes": 73989952,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-haptics-001/binaries/script-regression-003/incant_script-908eb41dddfa433b",
+      "sha256": "56f64819348a8791c87ef852077e17e1231d7f4e634e509dbeed959b11a2c9dc",
+      "bytes": 88156240,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-haptics-001/binaries/script-regression-005/incant_script-908eb41dddfa433b",
+      "sha256": "c192a5aebe4943fd45804bf33ef4fb5904f8f7dbc6232c39b07122ecc4ff1d20",
+      "bytes": 88157072,
+      "mode": "0o755"
+    }
+  ],
+  "limits": [
+    "CPU/mock desired-output and adapter invocation evidence only; no hardware/GPU/window run.",
+    "Gilrs process-lifetime worker is not joined on drop; asynchronous channel and physical delivery are not bounded or acknowledged by these proofs.",
+    "Wasm haptic capability enabling explicitly refuses; mobile actuator and physical-device parity remain open.",
+    "Counts overlap across focused/regression/mode generations; no summed unique-case claim.",
+    "Source001 predates accepted persisted union. Source002 adds receiver guard and persistent cleanup error. Source003 is mechanical Clippy correction. Source004 uncompiled test spelling was corrected in005. Source005 preserves historical structural overflow diagnostics.",
+    "Immediate copied executables are local evidence, hash-bound but not embedded in this compact portable archive."
+  ]
+}

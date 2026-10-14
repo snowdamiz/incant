@@ -8,7 +8,7 @@ mod core;
 #[cfg(feature = "native-checkpoints")]
 mod native_checkpoint;
 #[cfg(feature = "native-checkpoints")]
-pub use native_checkpoint::{GameCheckpoint, PendingGameCheckpoint};
+pub use native_checkpoint::{GameCheckpoint, MAX_PERSISTED_GAME_BYTES, PendingGameCheckpoint};
 #[cfg(feature = "ui")]
 pub struct RoutedUiInput {
     pub events: Vec<incant_input::InputEvent>,
@@ -195,6 +195,22 @@ where
     pub fn logs(&self) -> Result<&incant_script::NativeLogs> {
         self.core.logs()
     }
+    /// True only for a program with the implemented typed haptic capability.
+    pub fn supports_haptics(&self) -> Result<bool> {
+        self.core.supports_haptics()
+    }
+    /// Current host-issued targets; never reconstructed from saved data.
+    pub fn set_haptic_capabilities(
+        &mut self,
+        value: incant_input::haptics::HapticCapabilities,
+    ) -> Result<()> {
+        self.core.set_haptic_capabilities(value)
+    }
+    /// Drain only accepted composed output. Suspension clears pending requests.
+    pub fn take_haptics(&mut self) -> Result<incant_input::haptics::HapticRequests> {
+        self.core.take_haptics()
+    }
+
     /// Explicit trusted-owner opt-in for whole-session replacement.
     pub fn enable_restart_requests(&mut self) -> Result<()> {
         self.core.enable_restart_requests()

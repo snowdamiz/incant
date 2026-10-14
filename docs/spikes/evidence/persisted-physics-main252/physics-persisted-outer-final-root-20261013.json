@@ -1,0 +1,27 @@
+{
+  "at": "2026-10-13T22:52:08.404384+00:00",
+  "decision": "Accepted final outer producer CPU evidence; integration and whole-session gates separate",
+  "packet_head": "7bb45af8e37a881e97fc050c5913e91a2a98bc8a",
+  "production": "7f368565e3b31781ac86b971786626c82a50ad5e",
+  "manifest_sha256": "3569bcaede6a157cd2d4d5201dc12f0f00ed476ed2ee9c089fd33a1f00a852d4",
+  "archive_sha256": "a5a91fdad859698dbb22764ff269be756cd0efcea027abee5e37e39f9117b941",
+  "verified": {
+    "records": 165,
+    "payloads": 119,
+    "committed_and_live_source_inputs": 3734,
+    "binary_copies": 6,
+    "qualification_commands": 12,
+    "cases_per_mode": 321,
+    "focused_cases_overlap": 14
+  },
+  "source_review": "physics-persisted-outer-followup-source-20261013.json; lower CCD f9add4b9 accepted separately",
+  "limits": [
+    "Old world/component save APIs still refuse physics; new version12 is default-off native-checkpoint API.",
+    "Outer fixtures retain explicit CCD-disabled declarations; ordinary default-enabled domain evidence belongs to separate native/root consumer packets.",
+    "Root/publisher own current-main and session/player composition; no publication acceptance here.",
+    "Logical budgets are not RSS/allocator/driver bounds; meshes/joints/soft bodies and other unproved native configurations stay refused.",
+    "All raw earlier failures and exact pending-motion native frames are retained; fixture unchanged.",
+    "No GPU, target-phone performance, full release or phase-gate claim."
+  ],
+  "findings": []
+}

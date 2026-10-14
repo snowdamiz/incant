@@ -1,0 +1,20 @@
+{
+  "run1-projectfile-failed.txt": {
+    "source": "/tmp/0077-logs/run1-projectfile-failed.txt",
+    "raw_bytes": 269749,
+    "raw_sha256": "d5dfc98044526e9e0fbb2a221b907ace7e63c49eca0ca29e11977661f094e8a9",
+    "gzip_sha256": "a022bd9ac1d43cba01c4eb45bfb8581a45387d2040263ada81e3303628a72037"
+  },
+  "tsc2-failed.txt": {
+    "source": "/tmp/0077-logs/tsc2-failed.txt",
+    "raw_bytes": 291,
+    "raw_sha256": "c1d6e12f5cf8a631b753c4a2d90678eaa89d0175fb295ca16c72748ae9699c43",
+    "gzip_sha256": "e0a8e3eb9531cb4a7bb1295bd90852278e87850aef0f1d46853975b17afb4718"
+  },
+  "full1-interrupted.txt": {
+    "source": "/tmp/0077-full-1.txt",
+    "raw_bytes": 3017,
+    "raw_sha256": "82f7236ef460b90aebbecd2808bc660a612426fd9e7892546cf716709fecbc28",
+    "gzip_sha256": "4d9930433e93382bc288ecb37c50c8cebbc80dd1616c26e0ffa825a0101d076d"
+  }
+}

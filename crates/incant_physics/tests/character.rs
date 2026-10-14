@@ -60,7 +60,7 @@ fn scene() -> (Project, CharacterQuery, String) {
 }
 fn runtime(p: &Project) -> PhysicsRuntime {
     let mut r = PhysicsRuntime::default();
-    r.sync(PreparedPhysics::new(p).unwrap());
+    r.sync(PreparedPhysics::new(p).unwrap()).unwrap();
     r
 }
 
@@ -153,7 +153,9 @@ fn walk(
             "Velocity".into(),
             json!({"linear": movement.translation.map(|v| v * 60.)}),
         );
-        physics.sync(PreparedPhysics::new(&project).unwrap());
+        physics
+            .sync(PreparedPhysics::new(&project).unwrap())
+            .unwrap();
         physics.step(1. / 60.).unwrap();
     }
     (physics.states()[&query.entity_id].clone(), grounded)
@@ -286,7 +288,9 @@ fn character_queries_honor_masks_ignore_sensors_and_see_unsimulated_edits() {
         .components
         .get_mut("Collider")
         .unwrap()["sensor"] = json!(true);
-    physics.sync(PreparedPhysics::new(&project).unwrap());
+    physics
+        .sync(PreparedPhysics::new(&project).unwrap())
+        .unwrap();
     assert!(
         physics
             .compute_character_motion(&query, 1. / 60.)
@@ -307,7 +311,9 @@ fn character_queries_honor_masks_ignore_sensors_and_see_unsimulated_edits() {
         .components
         .get_mut("Collider")
         .unwrap()["filter"] = json!(0);
-    physics.sync(PreparedPhysics::new(&project).unwrap());
+    physics
+        .sync(PreparedPhysics::new(&project).unwrap())
+        .unwrap();
     let unfiltered = physics.compute_character_motion(&query, 1. / 60.).unwrap();
     assert!(unfiltered.translation[0] > 3.9);
     assert!(!unfiltered.grounded);

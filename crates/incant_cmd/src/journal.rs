@@ -1,3 +1,7 @@
+pub(super) mod scan;
+pub(super) use scan::{ProjectRecord, ProjectStatus};
+pub(super) const MAX_PROJECT_RECORD_BYTES: usize = 128 * 1024 * 1024;
+pub(super) const MAX_PROJECT_JOURNAL_BYTES: usize = 256 * 1024 * 1024;
 use super::*;
 use base64::{Engine, engine::general_purpose::STANDARD};
 use sha2::{Digest, Sha256};
@@ -40,6 +44,30 @@ pub(super) enum Action {
     Abort {
         operation: Id,
     },
+    ProjectPrepare {
+        operation: Id,
+        edit: incant_source::ProjectEdit,
+        change: Change,
+    },
+    CheckpointPrepare {
+        operation: Id,
+        edit: incant_source::ProjectEdit,
+        revision: u64,
+        actor: Actor,
+        change: Option<Change>,
+    },
+    CheckpointCommit {
+        operation: Id,
+    },
+    CheckpointAbort {
+        operation: Id,
+    },
+    ProjectCommit {
+        operation: Id,
+    },
+    ProjectAbort {
+        operation: Id,
+    },
 }
 impl From<Change> for Action {
     fn from(change: Change) -> Self {
@@ -55,7 +83,7 @@ pub(super) struct SourceRecord {
     pub edit: incant_source::SourceEdit,
     pub finished: bool,
 }
-fn replay_change(
+pub(super) fn replay_change(
     bus: &mut CommandBus,
     change: Change,
     project_id: &str,
@@ -66,6 +94,7 @@ fn replay_change(
                 return Err(CommandError::Corrupt("transaction base mismatch".into()));
             }
             transaction.actor.provenance(&transaction.id)?;
+            super::project_file::validate_transaction(&transaction)?;
             transaction.after.validate()?;
             if let Some(edit) = &transaction.source_edit {
                 edit.validate()?;
@@ -88,7 +117,7 @@ fn replay_change(
     }
     Ok(())
 }
-fn change_edit(bus: &CommandBus, change: &Change) -> Option<incant_source::SourceEdit> {
+pub(super) fn change_edit(bus: &CommandBus, change: &Change) -> Option<incant_source::SourceEdit> {
     match change {
         Change::Apply { transaction } => transaction.source_edit.clone(),
         Change::Undo { transaction_id } => bus
@@ -109,13 +138,13 @@ fn change_edit(bus: &CommandBus, change: &Change) -> Option<incant_source::Sourc
 }
 #[derive(Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
-struct Entry {
-    version: u32,
-    sequence: u64,
-    previous: String,
-    action: Action,
-    crdt: String,
-    digest: String,
+pub(super) struct Entry {
+    pub version: u32,
+    pub sequence: u64,
+    pub previous: String,
+    pub action: Action,
+    pub crdt: String,
+    pub digest: String,
 }
 /// Hash-chained JSONL write-ahead journal. Exclusive OS lock prevents two writers.
 pub struct Journal {
@@ -123,8 +152,12 @@ pub struct Journal {
     pub(super) poisoned: bool,
     sequence: u64,
     previous: String,
+    bounded: bool,
+    // Bounded host journals retain exact durable logical snapshot encoding.
+    // Re-export after Loro import is not byte-canonical; Abort must reuse this.
+    checkpoint: Option<String>,
 }
-fn digest(
+pub(super) fn digest(
     version: u32,
     sequence: u64,
     previous: &str,
@@ -136,6 +169,11 @@ fn digest(
     Ok(format!("{:x}", Sha256::digest(bytes)))
 }
 impl Journal {
+    #[cfg(test)]
+    pub(super) fn test_file(&mut self) -> &mut File {
+        &mut self.file
+    }
+
     pub(super) fn open(
         path: &Path,
         initial: Project,
@@ -152,168 +190,179 @@ impl Journal {
             .map_err(|e| CommandError::Io(std::io::Error::other(e)))?;
         let mut bytes = vec![];
         file.read_to_end(&mut bytes)?;
-        // A crash may leave one incomplete last line. Never hide corruption of a complete line.
-        let complete = bytes.iter().rposition(|b| *b == b'\n').map_or(0, |i| i + 1);
-        let mut bus = CommandBus::new(initial.clone())?;
-        let mut journal = Self {
-            file,
-            poisoned: false,
-            sequence: 0,
-            previous: String::new(),
-        };
-        bus.replaying = true;
-        let mut pending: Option<(Id, incant_source::SourceEdit, Change, String)> = None;
-        let mut last_source = None;
-        let mut checkpoint_matches = false;
-        let mut last_crdt = None;
-        for line in bytes[..complete]
-            .split(|b| *b == b'\n')
-            .filter(|line| !line.is_empty())
+        let result = scan::replay(file, &bytes, initial.clone(), false)?;
+        if !result
+            .checkpoints
+            .contains(&scan::project_digest(&initial)?)
         {
-            let entry: Entry =
-                serde_json::from_slice(line).map_err(|e| CommandError::Corrupt(e.to_string()))?;
-            if !matches!(entry.version, 1 | 2)
-                || entry.sequence != journal.sequence
-                || entry.previous != journal.previous
-                || entry.digest
-                    != digest(
-                        entry.version,
-                        entry.sequence,
-                        &entry.previous,
-                        &entry.action,
-                        &entry.crdt,
-                    )?
-            {
-                return Err(CommandError::Corrupt(
-                    "hash chain or sequence mismatch".into(),
-                ));
-            }
-            let mut logical = true;
-            let committed = matches!(&entry.action, Action::Commit { .. });
-            match entry.action {
-                Action::Initialize { project } => {
-                    if journal.sequence != 0 || project.id != initial.id {
-                        return Err(CommandError::Corrupt(
-                            "journal initial project mismatch".into(),
-                        ));
-                    }
-                    bus = CommandBus::new(*project)?;
-                    bus.replaying = true;
-                }
-                Action::Prepare {
-                    operation,
-                    edit,
-                    change,
-                } => {
-                    if entry.version != 2
-                        || journal.sequence == 0
-                        || pending.is_some()
-                        || change_edit(&bus, &change).as_ref() != Some(&edit)
-                        || ulid::Ulid::from_string(&operation).is_err()
-                    {
-                        return Err(CommandError::Corrupt("invalid source prepare".into()));
-                    }
-                    edit.validate()?;
-                    last_source = Some(SourceRecord {
-                        operation: operation.clone(),
-                        edit: edit.clone(),
-                        finished: false,
-                    });
-                    pending = Some((operation, edit, change, entry.crdt.clone()));
-                    logical = false;
-                }
-                Action::Commit { operation } | Action::Abort { operation } => {
-                    let Some((prepared, _, change, crdt)) = pending.take() else {
-                        return Err(CommandError::Corrupt(
-                            "source terminal without prepare".into(),
-                        ));
-                    };
-                    if entry.version != 2 || operation != prepared {
-                        return Err(CommandError::Corrupt("source operation mismatch".into()));
-                    }
-                    if committed {
-                        if entry.crdt != crdt {
-                            return Err(CommandError::Corrupt(
-                                "source commit projection mismatch".into(),
-                            ));
-                        }
-                        replay_change(&mut bus, change, &initial.id)?;
-                    }
-                    last_source.as_mut().expect("prepared source").finished = true;
-                }
-                action => {
-                    if pending.is_some() || journal.sequence == 0 {
-                        return Err(CommandError::Corrupt(
-                            "change overlaps pending source operation".into(),
-                        ));
-                    }
-                    let change = match action {
-                        Action::Apply { transaction } => Change::Apply { transaction },
-                        Action::Undo { transaction_id } => Change::Undo { transaction_id },
-                        Action::Redo { transaction_id } => Change::Redo { transaction_id },
-                        _ => unreachable!(),
-                    };
-                    if change_edit(&bus, &change).is_some() {
-                        return Err(CommandError::Corrupt(
-                            "source change lacks prepare/commit".into(),
-                        ));
-                    }
-                    replay_change(&mut bus, change, &initial.id)?;
-                }
-            }
-            if logical {
-                last_crdt = Some(entry.crdt);
-            }
-            checkpoint_matches |= bus.project == initial;
-            journal.sequence += 1;
-            journal.previous = entry.digest;
-        }
-        if journal.sequence > 0 && !checkpoint_matches {
             return Err(CommandError::Corrupt(
                 "project file is not a checkpoint of this journal".into(),
             ));
         }
-        if complete < bytes.len() {
-            journal.file.set_len(complete as u64)?;
-            journal.file.sync_all()?;
+        let scan::Replay {
+            mut bus,
+            last_source,
+            last_project,
+            complete,
+            ..
+        } = result;
+        if last_project.is_some() {
+            return Err(SourceError::RecoveryRequired.into());
         }
-        journal.file.seek(SeekFrom::End(0))?;
-        if journal.sequence == 0 {
-            journal.append(
-                Action::Initialize {
-                    project: Box::new(initial),
-                },
-                &bus.export_crdt()?,
-            )?;
-        }
-        if let Some(encoded) = last_crdt {
-            let bytes = STANDARD
-                .decode(encoded)
-                .map_err(|_| CommandError::Corrupt("invalid CRDT encoding".into()))?;
-            let restored = CollaborativeDocument::from_export(&bytes)?;
-            if restored.project()? != bus.project {
-                return Err(CommandError::Corrupt(
-                    "CRDT projection and journal state differ".into(),
-                ));
-            }
-            bus.document = Some(restored);
-        }
-        bus.replaying = false;
-        bus.journal = Some(journal);
+        bus.journal
+            .as_mut()
+            .expect("replayed journal")
+            .finish_read(complete, bytes.len())?;
+        bus.initialize_journal()?;
         if let Some(root) = root {
             let store = incant_source::SourceStore::open(root, path, &bus.project.id)?;
             bus.recover_sources(store, last_source)?;
-        } else if pending.is_some() {
+        } else if last_source.is_some_and(|r| !r.finished) {
             return Err(SourceError::RecoveryRequired.into());
         }
         Ok(bus)
+    }
+    pub(super) fn initialize(
+        &mut self,
+        project: &Project,
+        crdt: &[u8],
+    ) -> Result<(), CommandError> {
+        if self.sequence == 0 {
+            self.append(
+                Action::Initialize {
+                    project: Box::new(project.clone()),
+                },
+                crdt,
+            )?;
+        }
+        Ok(())
+    }
+    pub(super) fn admit_project(
+        &mut self,
+        prepare: &Action,
+        operation: &str,
+        current: &[u8],
+        desired: &[u8],
+    ) -> Result<(), CommandError> {
+        if !self.bounded || self.poisoned {
+            return Err(SourceError::RecoveryRequired.into());
+        }
+        let checkpoint = matches!(prepare, Action::CheckpointPrepare { .. });
+        let version = if checkpoint { 4 } else { 3 };
+        let size = |action: &Action, crdt: &[u8]| -> Result<usize, CommandError> {
+            let crdt = if matches!(
+                action,
+                Action::ProjectAbort { .. } | Action::CheckpointAbort { .. }
+            ) {
+                self.checkpoint
+                    .clone()
+                    .ok_or(SourceError::RecoveryRequired)?
+            } else {
+                STANDARD.encode(crdt)
+            };
+            let digest = digest(version, self.sequence, &self.previous, action, &crdt)?;
+            // Sequence width may grow at Commit; reserve twenty decimal digits.
+            let entry = Entry {
+                version,
+                sequence: u64::MAX,
+                previous: self.previous.clone(),
+                action: action.clone(),
+                crdt,
+                digest,
+            };
+            Ok(incant_source::bounded_json(&entry, MAX_PROJECT_RECORD_BYTES)?.len() + 1)
+        };
+        let required = size(prepare, desired)?
+            .checked_add(
+                size(
+                    &if checkpoint {
+                        Action::CheckpointCommit {
+                            operation: operation.into(),
+                        }
+                    } else {
+                        Action::ProjectCommit {
+                            operation: operation.into(),
+                        }
+                    },
+                    desired,
+                )?
+                .max(size(
+                    &if checkpoint {
+                        Action::CheckpointAbort {
+                            operation: operation.into(),
+                        }
+                    } else {
+                        Action::ProjectAbort {
+                            operation: operation.into(),
+                        }
+                    },
+                    current,
+                )?),
+            )
+            .ok_or_else(|| CommandError::Invalid("project journal size overflow".into()))?;
+        if self.file.metadata()?.len().saturating_add(required as u64)
+            > MAX_PROJECT_JOURNAL_BYTES as u64
+        {
+            return Err(CommandError::Invalid(
+                "project journal has no room for Prepare and terminal record".into(),
+            ));
+        }
+        Ok(())
+    }
+    pub(super) fn checkpoint_bytes(&self) -> Result<Vec<u8>, CommandError> {
+        STANDARD
+            .decode(self.checkpoint.as_ref().ok_or(SourceError::Unavailable)?)
+            .map_err(|_| CommandError::Corrupt("invalid durable checkpoint".into()))
+    }
+    pub(super) fn finish_read(&mut self, complete: usize, len: usize) -> Result<(), CommandError> {
+        if complete < len {
+            self.file.set_len(complete as u64)?;
+            self.file.sync_all()?;
+        }
+        self.file.seek(SeekFrom::End(0))?;
+        Ok(())
     }
     pub(super) fn append(&mut self, action: Action, crdt_bytes: &[u8]) -> Result<(), CommandError> {
         if self.poisoned {
             return Err(SourceError::RecoveryRequired.into());
         }
-        let crdt = STANDARD.encode(crdt_bytes);
+        let crdt = if matches!(
+            action,
+            Action::ProjectAbort { .. } | Action::CheckpointAbort { .. }
+        ) {
+            self.checkpoint
+                .clone()
+                .ok_or(SourceError::RecoveryRequired)?
+        } else {
+            STANDARD.encode(crdt_bytes)
+        };
+        let logical = !matches!(
+            action,
+            Action::Prepare { .. }
+                | Action::ProjectPrepare { .. }
+                | Action::CheckpointPrepare { .. }
+        );
         let version = if matches!(
+            action,
+            Action::CheckpointPrepare { .. }
+                | Action::CheckpointCommit { .. }
+                | Action::CheckpointAbort { .. }
+        ) {
+            if !self.bounded {
+                return Err(SourceError::Unavailable.into());
+            }
+            4
+        } else if matches!(
+            action,
+            Action::ProjectPrepare { .. }
+                | Action::ProjectCommit { .. }
+                | Action::ProjectAbort { .. }
+        ) {
+            if !self.bounded {
+                return Err(SourceError::Unavailable.into());
+            }
+            3
+        } else if matches!(
             action,
             Action::Prepare { .. } | Action::Commit { .. } | Action::Abort { .. }
         ) {
@@ -330,13 +379,30 @@ impl Journal {
             crdt,
             digest: hash.clone(),
         };
-        let mut bytes =
-            serde_json::to_vec(&entry).map_err(|e| CommandError::Corrupt(e.to_string()))?;
+        let mut bytes = if self.bounded {
+            incant_source::bounded_json(&entry, MAX_PROJECT_RECORD_BYTES)?
+        } else {
+            serde_json::to_vec(&entry).map_err(|e| CommandError::Corrupt(e.to_string()))?
+        };
         bytes.push(b'\n');
         let position = self.file.seek(SeekFrom::End(0))?;
+        if self.bounded
+            && position.saturating_add(bytes.len() as u64) > MAX_PROJECT_JOURNAL_BYTES as u64
+        {
+            return Err(CommandError::Invalid(
+                "project journal exceeds 256 MiB; no transaction written".into(),
+            ));
+        }
         #[cfg(test)]
         let injected =
-            crate::source_protocol_tests::journal_failure(&entry.action, &mut self.file, &bytes);
+            crate::source_protocol_tests::journal_failure(&entry.action, &mut self.file, &bytes)
+                .and_then(|()| {
+                    crate::project_file_tests::journal_failure(
+                        &entry.action,
+                        &mut self.file,
+                        &bytes,
+                    )
+                });
         #[cfg(not(test))]
         let injected: std::io::Result<()> = Ok(());
         let result = injected
@@ -357,6 +423,9 @@ impl Journal {
         }
         self.sequence += 1;
         self.previous = hash;
+        if self.bounded && logical {
+            self.checkpoint = Some(entry.crdt);
+        }
         Ok(())
     }
 }

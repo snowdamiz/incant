@@ -9,12 +9,14 @@ import { AgentPanel, agentPaneResizable } from './components/AgentPanel';
 import { BottomDock } from './components/BottomDock';
 import { HierarchyPanel } from './components/HierarchyPanel';
 import { InspectorPanel } from './components/inspector/InspectorPanel';
+import { PinDialog } from './components/PinDialog';
 import { ShortcutsDialog } from './components/ShortcutsDialog';
 import { Splitter } from './components/Splitter';
 import { Titlebar } from './components/Titlebar';
 import { ViewportPanel } from './components/ViewportPanel';
 import { Icon } from './icons/Icon';
 import { PlayProvider, usePlay } from './play/PlayContext';
+import { ProjectFileProvider, useProjectFile } from './projectFile/ProjectFileContext';
 import { ShellProvider, useShell } from './shell/ShellContext';
 import { installInputModality } from './shell/inputModality';
 import { projectState } from './shell/projectState';
@@ -50,11 +52,13 @@ export function App({ resolution }: { resolution: BridgeResolution }) {
   }
   return (
     <ShellProvider bridge={resolution.kind === 'bridge' ? resolution.bridge : null}>
-      <AssetsProvider>
-        <PlayProvider>
-          <Workbench />
-        </PlayProvider>
-      </AssetsProvider>
+      <ProjectFileProvider>
+        <AssetsProvider>
+          <PlayProvider>
+            <Workbench />
+          </PlayProvider>
+        </AssetsProvider>
+      </ProjectFileProvider>
     </ShellProvider>
   );
 }
@@ -99,10 +103,14 @@ function Workbench() {
   // The Play actions of the latest commit: a shortcut pressed right after a state change
   // must not reach the previous render's action (Step while it still thinks "running").
   const play = usePlay();
+  const projectFile = useProjectFile();
+  const pinOpen = projectFile.pin.status !== 'closed';
   const mac = snapshot?.window ? snapshot.window.platform === 'macos' : /Mac|iPhone|iPad/.test(`${navigator.platform} ${navigator.userAgent}`);
   const playActions = useRef(play);
+  const save = useRef(projectFile.save);
   useLayoutEffect(() => {
     playActions.current = play;
+    save.current = projectFile.save;
   });
   const [layout, setLayout] = useState<Layout>(() => defaultLayout(window.innerWidth, window.innerHeight));
   // The agent pane's disclosure; collapsing leaves its one-line status. A short window
@@ -142,13 +150,24 @@ function Workbench() {
       if (typeof document.execCommand === 'function') document.execCommand(action);
       return;
     }
-    if (shortcutsOpen || accountOpen || document.activeElement?.closest('[role="dialog"]')) return;
+    if (shortcutsOpen || accountOpen || pinOpen || document.activeElement?.closest('[role="dialog"]')) return;
     runHistory(action);
-  }), [bridge, runHistory, shortcutsOpen, accountOpen]);
+  }), [bridge, runHistory, shortcutsOpen, accountOpen, pinOpen]);
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.defaultPrevented || shortcutsOpen || accountOpen) return;
+      // A key the focused game view sent to the game arrives here already handled.
+      if (event.defaultPrevented) return;
+      if (isSaveShortcut(event, mac)) {
+        // The browser's own Save Page never applies to the editor, so the keys are always
+        // taken. Inside a dialog they do nothing; elsewhere, text fields included, they are
+        // the project menu's Save, sent to the host like it.
+        event.preventDefault();
+        const inDialog = shortcutsOpen || accountOpen || pinOpen || document.activeElement?.closest('[role="dialog"]');
+        if (!event.repeat && !inDialog) save.current();
+        return;
+      }
+      if (shortcutsOpen || accountOpen || pinOpen) return;
       const mod = event.metaKey || event.ctrlKey;
       const key = event.key.toLowerCase();
       if (event.key === 'F6') {
@@ -188,7 +207,7 @@ function Workbench() {
     };
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [runHistory, shortcutsOpen, accountOpen, togglePanel, mac]);
+  }, [runHistory, shortcutsOpen, accountOpen, pinOpen, togglePanel, mac]);
 
   const openShortcuts = (from: HTMLElement) => {
     shortcutsReturn.current = from;
@@ -271,6 +290,7 @@ function Workbench() {
         />
       ) : null}
       {accountOpen ? <AccountDialog /> : null}
+      {pinOpen ? <PinDialog /> : null}
     </div>
   );
 }
@@ -283,12 +303,25 @@ function isTextEntry(target: EventTarget | null): boolean {
 }
 
 /**
+ * ⌘S on macOS, Ctrl+S elsewhere: by the S of the current layout, or by the physical S key
+ * on a layout without Latin letters. Shift, Option and AltGr combinations are left alone:
+ * there is no Save As, and AltGr types characters.
+ */
+function isSaveShortcut(event: KeyboardEvent, mac: boolean): boolean {
+  if (event.shiftKey || event.altKey || (mac ? !event.metaKey || event.ctrlKey : !event.ctrlKey || event.metaKey)) return false;
+  const key = event.key.toLowerCase();
+  return key === 's' || (event.code === 'KeyS' && !/^[a-z]$/.test(key));
+}
+
+/**
  * Slim notice under the titlebar, only when the engine is absent, the project is
- * opening, or it failed. This is the one place the full failure text is shown;
- * panels show a short state and Problems lists the engine's diagnostic.
+ * opening, or it failed, and after a project file request failed outside a dialog. This is
+ * the one place the full failure text is shown; panels show a short state and Problems
+ * lists the engine's diagnostic.
  */
 function ConnectionBanner() {
   const { snapshot, bridge } = useShell();
+  const { notice, dismissNotice } = useProjectFile();
   const project = projectState(snapshot);
   let content = null;
   if (!bridge) {
@@ -323,10 +356,33 @@ function ConnectionBanner() {
       </div>
     );
   }
-  if (!content) return null;
+  if (!content && !notice) return null;
   return (
     <div className="notice-region" role="region" aria-label="Project status">
       {content}
+      {notice ? (
+        // A failed save, or a pin that failed after its dialog closed, stays in view until
+        // dismissed, superseded or another project opens. The host's words are shown as
+        // they are, with no added explanation of the cause.
+        <div className="notice notice--error" role="alert">
+          <Icon name="error" size={14} />
+          <span className="notice__text">
+            <strong>{notice.title}</strong> {notice.failure.message}
+          </span>
+          {notice.failure.code !== null ? <span className="notice__code mono">{notice.failure.code}</span> : null}
+          <button
+            type="button"
+            className="button button--ghost button--small notice__dismiss"
+            onClick={(event) => {
+              // The notice goes with its button: keyboard focus continues at the project menu.
+              if (document.activeElement === event.currentTarget) document.querySelector<HTMLElement>('.titlebar__project-button')?.focus();
+              dismissNotice();
+            }}
+          >
+            Dismiss
+          </button>
+        </div>
+      ) : null}
     </div>
   );
 }

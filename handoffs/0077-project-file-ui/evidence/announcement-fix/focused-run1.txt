@@ -1,0 +1,277 @@
+
+> @incant/editor-ui@0.0.1 test
+> vitest run src/shell/ShellContext.test.tsx src/components/ProjectFile.test.tsx --no-file-parallelism
+
+
+ RUN  v5.0.3 /Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/.worktrees/0077-project-file-ui/editor/ui
+
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+ ❯ src/components/ProjectFile.test.tsx (28 tests | 10 failed) 3635ms
+   ❯ answers that arrive after another project opened (7)
+     × retires a visible Save success announcement when another project opens 3ms
+     × drops a Save answer when another project opens while it is pending 1ms
+     × drops a Save receipt or refusal when the host connection is replaced while it is pending 1ms
+     × shows a pin still in flight for a project that is no longer open as unknown, never as the open one’s 1ms
+     × does not report, in the project open now, a pin answered after its dialog closed 1ms
+     × cannot apply an earlier connection’s review once the host connection is replaced 1ms
+   ❯ requests that reject instead of answering (4)
+     × Save: an unknown result in the rejection’s own words and code, and the request slot freed 1004ms
+     × review and pin: leave their pending state with a failure, never a success 3ms
+     × a structured transport rejection keeps its code and message, and never says the pin was not applied 2ms
+     × a host’s resolved refusal stays definite, even with the editor’s own rejection code 1004ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 10 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/components/ProjectFile.test.tsx > answers that arrive after another project opened > retires a visible Save success announcement when another project opens
+TypeError: Cannot read properties of undefined (reading 'answer')
+ ❯ src/components/ProjectFile.test.tsx:587:37
+    585|       view = host.view;
+    586|       press({ metaKey: true });
+    587|       const answer = host.files[0]!.answer(savedAt(3, true));
+       |                                     ^
+    588|       await act(async () => { await vi.advanceTimersByTimeAsync(0); });
+    589|       await answer;
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/10]⎯
+
+ FAIL  src/components/ProjectFile.test.tsx > answers that arrive after another project opened > drops a Save answer when another project opens while it is pending
+TestingLibraryElementError: Unable to find an accessible element with the role "button" and name `/^Project: Harbor/`
+
+There are no accessible roles. But there might be some inaccessible roles. If you wish to access them, then set the `hidden` option to `true`. Learn more about this here: https://testing-library.com/docs/dom-testing-library/api-queries#byrole
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div />[39m
+[36m</body>[39m
+ ❯ Object.getElementError ../../../../../../native-fbx-import/incant/node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ ../../../../../../native-fbx-import/incant/node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ ../../../../../../native-fbx-import/incant/node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ ../../../../../../native-fbx-import/incant/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ projectButton src/components/ProjectFile.test.tsx:158:36
+    156| }
+    157|
+    158| const projectButton = () => screen.getByRole('button', { name: /^Proje…
+       |                                    ^
+    159| const message = () => document.querySelector('.statusbar__message')?.t…
+    160| const requests = (files: readonly FileCall[]) => files.map((call) => c…
+ ❯ src/components/ProjectFile.test.tsx:610:12
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/10]⎯
+
+ FAIL  src/components/ProjectFile.test.tsx > answers that arrive after another project opened > drops a Save receipt or refusal when the host connection is replaced while it is pending
+TestingLibraryElementError: Unable to find an accessible element with the role "button" and name `/^Project: Lighthouse/`
+
+There are no accessible roles. But there might be some inaccessible roles. If you wish to access them, then set the `hidden` option to `true`. Learn more about this here: https://testing-library.com/docs/dom-testing-library/api-queries#byrole
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div />[39m
+[36m</body>[39m
+ ❯ Object.getElementError ../../../../../../native-fbx-import/incant/node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ ../../../../../../native-fbx-import/incant/node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ ../../../../../../native-fbx-import/incant/node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ ../../../../../../native-fbx-import/incant/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/components/ProjectFile.test.tsx:640:19
+    638|     press({ metaKey: true });
+    639|     view.rerender(<App resolution={{ kind: 'bridge', bridge: other.bri…
+    640|     expect(screen.getByRole('button', { name: /^Project: Lighthouse/ }…
+       |                   ^
+    641|
+    642|     // Harbor's host saves and sends a valid receipt; it is not Lighth…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/10]⎯
+
+ FAIL  src/components/ProjectFile.test.tsx > answers that arrive after another project opened > shows a pin still in flight for a project that is no longer open as unknown, never as the open one’s
+TestingLibraryElementError: Unable to find an accessible element with the role "button" and name `/^Project: Harbor/`
+
+There are no accessible roles. But there might be some inaccessible roles. If you wish to access them, then set the `hidden` option to `true`. Learn more about this here: https://testing-library.com/docs/dom-testing-library/api-queries#byrole
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div />[39m
+[36m</body>[39m
+ ❯ Object.getElementError ../../../../../../native-fbx-import/incant/node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ ../../../../../../native-fbx-import/incant/node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ ../../../../../../native-fbx-import/incant/node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ ../../../../../../native-fbx-import/incant/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ projectButton src/components/ProjectFile.test.tsx:158:36
+    156| }
+    157|
+    158| const projectButton = () => screen.getByRole('button', { name: /^Proje…
+       |                                    ^
+    159| const message = () => document.querySelector('.statusbar__message')?.t…
+    160| const requests = (files: readonly FileCall[]) => files.map((call) => c…
+ ❯ openMenu src/components/ProjectFile.test.tsx:162:19
+ ❯ choose src/components/ProjectFile.test.tsx:165:57
+ ❯ src/components/ProjectFile.test.tsx:661:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/10]⎯
+
+ FAIL  src/components/ProjectFile.test.tsx > answers that arrive after another project opened > does not report, in the project open now, a pin answered after its dialog closed
+TestingLibraryElementError: Unable to find an accessible element with the role "button" and name `/^Project: Harbor/`
+
+There are no accessible roles. But there might be some inaccessible roles. If you wish to access them, then set the `hidden` option to `true`. Learn more about this here: https://testing-library.com/docs/dom-testing-library/api-queries#byrole
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div />[39m
+[36m</body>[39m
+ ❯ Object.getElementError ../../../../../../native-fbx-import/incant/node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ ../../../../../../native-fbx-import/incant/node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ ../../../../../../native-fbx-import/incant/node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ ../../../../../../native-fbx-import/incant/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ projectButton src/components/ProjectFile.test.tsx:158:36
+    156| }
+    157|
+    158| const projectButton = () => screen.getByRole('button', { name: /^Proje…
+       |                                    ^
+    159| const message = () => document.querySelector('.statusbar__message')?.t…
+    160| const requests = (files: readonly FileCall[]) => files.map((call) => c…
+ ❯ openMenu src/components/ProjectFile.test.tsx:162:19
+ ❯ choose src/components/ProjectFile.test.tsx:165:57
+ ❯ src/components/ProjectFile.test.tsx:694:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/10]⎯
+
+ FAIL  src/components/ProjectFile.test.tsx > answers that arrive after another project opened > cannot apply an earlier connection’s review once the host connection is replaced
+TestingLibraryElementError: Unable to find an accessible element with the role "button" and name `/^Project: Harbor/`
+
+There are no accessible roles. But there might be some inaccessible roles. If you wish to access them, then set the `hidden` option to `true`. Learn more about this here: https://testing-library.com/docs/dom-testing-library/api-queries#byrole
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div />[39m
+[36m</body>[39m
+ ❯ Object.getElementError ../../../../../../native-fbx-import/incant/node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ ../../../../../../native-fbx-import/incant/node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ ../../../../../../native-fbx-import/incant/node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ ../../../../../../native-fbx-import/incant/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ projectButton src/components/ProjectFile.test.tsx:158:36
+    156| }
+    157|
+    158| const projectButton = () => screen.getByRole('button', { name: /^Proje…
+       |                                    ^
+    159| const message = () => document.querySelector('.statusbar__message')?.t…
+    160| const requests = (files: readonly FileCall[]) => files.map((call) => c…
+ ❯ openMenu src/components/ProjectFile.test.tsx:162:19
+ ❯ choose src/components/ProjectFile.test.tsx:165:57
+ ❯ src/components/ProjectFile.test.tsx:726:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/10]⎯
+
+ FAIL  src/components/ProjectFile.test.tsx > requests that reject instead of answering > Save: an unknown result in the rejection’s own words and code, and the request slot freed
+TestingLibraryElementError: Unable to find role="region" and name "Project status"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div />[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div />[39m
+[36m</body>[39m
+ ❯ waitForWrapper ../../../../../../native-fbx-import/incant/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../../../../../native-fbx-import/incant/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/components/ProjectFile.test.tsx:764:33
+    762|     next.error = new Error('IPC channel closed');
+    763|     press({ metaKey: true });
+    764|     const region = await screen.findByRole('region', { name: 'Project …
+       |                                 ^
+    765|     expect(within(region).getByRole('alert').textContent).toBe('Save r…
+    766|     expect(projectButton().querySelector('.spinner')).toBeNull();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/10]⎯
+
+ FAIL  src/components/ProjectFile.test.tsx > requests that reject instead of answering > review and pin: leave their pending state with a failure, never a success
+TestingLibraryElementError: Unable to find an accessible element with the role "button" and name `/^Project: Harbor/`
+
+There are no accessible roles. But there might be some inaccessible roles. If you wish to access them, then set the `hidden` option to `true`. Learn more about this here: https://testing-library.com/docs/dom-testing-library/api-queries#byrole
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div />[39m
+[36m</body>[39m
+ ❯ Object.getElementError ../../../../../../native-fbx-import/incant/node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ ../../../../../../native-fbx-import/incant/node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ ../../../../../../native-fbx-import/incant/node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ ../../../../../../native-fbx-import/incant/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ projectButton src/components/ProjectFile.test.tsx:158:36
+    156| }
+    157|
+    158| const projectButton = () => screen.getByRole('button', { name: /^Proje…
+       |                                    ^
+    159| const message = () => document.querySelector('.statusbar__message')?.t…
+    160| const requests = (files: readonly FileCall[]) => files.map((call) => c…
+ ❯ openMenu src/components/ProjectFile.test.tsx:162:19
+ ❯ choose src/components/ProjectFile.test.tsx:165:57
+ ❯ src/components/ProjectFile.test.tsx:786:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/10]⎯
+
+ FAIL  src/components/ProjectFile.test.tsx > requests that reject instead of answering > a structured transport rejection keeps its code and message, and never says the pin was not applied
+TestingLibraryElementError: Unable to find an accessible element with the role "button" and name `/^Project: Harbor/`
+
+There are no accessible roles. But there might be some inaccessible roles. If you wish to access them, then set the `hidden` option to `true`. Learn more about this here: https://testing-library.com/docs/dom-testing-library/api-queries#byrole
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div />[39m
+[36m</body>[39m
+ ❯ Object.getElementError ../../../../../../native-fbx-import/incant/node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ ../../../../../../native-fbx-import/incant/node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ ../../../../../../native-fbx-import/incant/node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ ../../../../../../native-fbx-import/incant/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ projectButton src/components/ProjectFile.test.tsx:158:36
+    156| }
+    157|
+    158| const projectButton = () => screen.getByRole('button', { name: /^Proje…
+       |                                    ^
+    159| const message = () => document.querySelector('.statusbar__message')?.t…
+    160| const requests = (files: readonly FileCall[]) => files.map((call) => c…
+ ❯ openMenu src/components/ProjectFile.test.tsx:162:19
+ ❯ choose src/components/ProjectFile.test.tsx:165:57
+ ❯ src/components/ProjectFile.test.tsx:823:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/10]⎯
+
+ FAIL  src/components/ProjectFile.test.tsx > requests that reject instead of answering > a host’s resolved refusal stays definite, even with the editor’s own rejection code
+TestingLibraryElementError: Unable to find role="region" and name "Project status"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div />[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div />[39m
+[36m</body>[39m
+ ❯ waitForWrapper ../../../../../../native-fbx-import/incant/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../../../../../native-fbx-import/incant/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/components/ProjectFile.test.tsx:862:33
+    860|     render(<App resolution={{ kind: 'bridge', bridge }} />);
+    861|     press({ ctrlKey: true });
+    862|     const region = await screen.findByRole('region', { name: 'Project …
+       |                                 ^
+    863|     expect(within(region).getByRole('alert').textContent).toBe('Save f…
+    864|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/10]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  10 failed | 24 passed (34)
+   Start at  06:21:46
+   Duration  4.61s (tests 83%, environment 8%, transform 5%, import 2%, setup 1%)
+
+npm error Lifecycle script `test` failed with error:
+npm error code 1
+npm error path /Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/.worktrees/0077-project-file-ui/editor/ui
+npm error workspace @incant/editor-ui@0.0.1
+npm error location /Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/.worktrees/0077-project-file-ui/editor/ui
+npm error command failed
+npm error command sh -c vitest run src/shell/ShellContext.test.tsx src/components/ProjectFile.test.tsx --no-file-parallelism

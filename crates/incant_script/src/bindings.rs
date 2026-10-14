@@ -3,7 +3,13 @@ use crate::ScriptError;
 use incant_runtime::{EntityIdentity, NativeWorld, StableId};
 use rquickjs::{Array, Ctx, Function, Object, Persistent, Value, object::Property};
 use sha2::{Digest, Sha256};
-use std::collections::{BTreeMap, BTreeSet};
+use std::{
+    collections::{BTreeMap, BTreeSet},
+    sync::Arc,
+};
+
+#[cfg(test)]
+mod cache_tests;
 
 pub const MAX_SCRIPT_SOURCES: usize = 64;
 pub const MAX_SCRIPT_INSTANCES: usize = 32_768;
@@ -98,12 +104,12 @@ impl ScriptBindings {
 }
 
 #[derive(Default)]
-struct PropsBudget {
+pub(crate) struct PropsBudget {
     nodes: usize,
     bytes: usize,
 }
 impl PropsBudget {
-    fn add(&mut self, depth: usize, bytes: usize) -> Result<(), ScriptError> {
+    pub(crate) fn add(&mut self, depth: usize, bytes: usize) -> Result<(), ScriptError> {
         self.nodes += 1;
         self.bytes = self
             .bytes
@@ -114,8 +120,11 @@ impl PropsBudget {
         }
         Ok(())
     }
+    pub(crate) fn text_size(&mut self, text: &str) -> Result<(), ScriptError> {
+        self.add(0, text.len().checked_add(8).ok_or(ScriptError::InputLimit)?)
+    }
     fn text(&mut self, text: &str, hash: &mut Sha256) -> Result<(), ScriptError> {
-        self.add(0, text.len() + 8)?;
+        self.text_size(text)?;
         hash.update((text.len() as u64).to_le_bytes());
         hash.update(text.as_bytes());
         Ok(())
@@ -176,6 +185,14 @@ pub(crate) struct BoundProject {
 pub(crate) struct BoundGroup {
     pub source: StableId,
     instances: Vec<(StableId, EntityIdentity, Persistent<Object<'static>>)>,
+    snapshot: Option<GroupSnapshot>,
+}
+
+// Immutable attachment data only. Tick capabilities and numeric loans must
+// never be retained here. This root drops with BoundProject before its VM.
+struct GroupSnapshot {
+    array: Persistent<Array<'static>>,
+    ids: Arc<[StableId]>,
 }
 impl BoundProject {
     /// Build and deeply freeze props before any guest initialization runs.
@@ -225,6 +242,7 @@ impl BoundProject {
             .map(|&source| BoundGroup {
                 source,
                 instances: Vec::new(),
+                snapshot: None,
             })
             .collect();
         for instance in &bindings.instances {
@@ -276,7 +294,7 @@ impl BoundProject {
             .groups
             .iter()
             .flat_map(|g| g.instances.iter())
-            .filter(|(id, identity, _)| world.entity_identity(*id) == Some(*identity))
+            .filter(|(id, identity, _)| world.matches_entity_identity(*id, *identity))
             .map(|v| v.0)
             .collect();
         ids.sort_unstable();
@@ -284,20 +302,18 @@ impl BoundProject {
     }
 }
 impl BoundGroup {
-    pub fn ids(&self) -> std::sync::Arc<[StableId]> {
-        self.instances.iter().map(|v| v.0).collect()
-    }
     pub fn snapshot<'js>(
         &mut self,
         ctx: &Ctx<'js>,
         freeze: &Function<'js>,
         world: &NativeWorld,
         retired: &mut Vec<crate::persistence::Key>,
-    ) -> rquickjs::Result<Array<'js>> {
+    ) -> rquickjs::Result<(Array<'js>, Arc<[StableId]>)> {
         // A committed despawn retires an attachment forever. Stable-ID reuse,
         // even between script ticks, cannot reconnect it to a new ECS lifetime.
+        let previous_len = self.instances.len();
         self.instances.retain(|(id, identity, _)| {
-            let live = world.entity_identity(*id) == Some(*identity);
+            let live = world.matches_entity_identity(*id, *identity);
             if !live {
                 retired.push(crate::persistence::Key {
                     scope: crate::schedule::Scope::Source(self.source),
@@ -306,6 +322,17 @@ impl BoundGroup {
             }
             live
         });
+        if self.instances.len() != previous_len {
+            // Invalidate both views before any fallible construction. Previously
+            // returned frozen arrays remain valid historical data, not authority.
+            self.snapshot = None;
+        }
+        if let Some(snapshot) = &self.snapshot {
+            return Ok((
+                snapshot.array.clone().restore(ctx)?,
+                Arc::clone(&snapshot.ids),
+            ));
+        }
         let array = Array::new(ctx.clone())?;
         for (index, (_, _, instance)) in self.instances.iter().enumerate() {
             array.as_object().prop(
@@ -314,7 +341,12 @@ impl BoundGroup {
             )?;
         }
         freeze.call::<_, ()>((array.clone(),))?;
-        Ok(array)
+        let ids: Arc<[StableId]> = self.instances.iter().map(|v| v.0).collect();
+        self.snapshot = Some(GroupSnapshot {
+            array: Persistent::save(ctx, array.clone()),
+            ids: Arc::clone(&ids),
+        });
+        Ok((array, ids))
     }
 }
 fn expose_object<'js>(

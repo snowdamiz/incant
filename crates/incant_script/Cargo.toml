@@ -10,7 +10,7 @@ profile = ["incant_profile/summary", "incant_runtime/profile"]
 default = ["compiler", "physics-deterministic"]
 # Authoring/cook and the development runner only. Native players disable this.
 compiler = []
-# Opaque in-memory physics + explicit script data; no persisted physics loader.
+# Opaque native checkpoints and separately validated, bounded physics data files.
 native-checkpoints = ["incant_runtime/native-checkpoints"]
 # Experimental trusted numeric probe only; default Android admission stays closed.
 probe-android-bytecode = []

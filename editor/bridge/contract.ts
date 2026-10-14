@@ -8,6 +8,7 @@ export type Ulid = string & { readonly __brand: 'Ulid' };
 
 /** Every capability the UI knows how to use. Unknown strings are ignored and reported. */
 export const KNOWN_CAPABILITIES = [
+  'project.file',
   'entity.rename',
   'entity.delete',
   'asset.import',
@@ -432,8 +433,27 @@ export type EditorCommand =
   | { readonly type: 'history.undo' }
   | { readonly type: 'history.redo' };
 
-/** Requests to the host that are not document edits and are not journaled. */
+/** File requests carry no paths or candidate bytes. Pin and save are journaled
+ * by the host-owned command bus; other requests retain their own lifecycle. */
+export type ProjectFileRequest =
+  | { readonly type: 'project.pin.review' }
+  | { readonly type: 'project.pin.apply'; readonly reviewId: Ulid }
+  | { readonly type: 'project.save' };
+export type ProjectFileResponse =
+  | { readonly operation: 'review_pin'; readonly review: {
+      readonly review_id: Ulid; readonly expected_revision: number;
+      readonly source_sha256: string; readonly candidate_sha256: string;
+      readonly candidate_text: string;
+      readonly command: { readonly op: 'set_engine_version'; readonly requirement: string };
+    } }
+  | { readonly operation: 'apply_pin'; readonly transaction_id: Ulid; readonly revision: number }
+  | { readonly operation: 'save'; readonly receipt: {
+      readonly revision: number; readonly changed: boolean;
+      readonly source_sha256: string; readonly candidate_sha256: string;
+    } };
+
 export type HostRequest =
+  | ProjectFileRequest
   | PlayRequest
   | { readonly type: 'provider.connect'; readonly method: 'oauth' | 'api-key'; readonly accountId?: string; readonly add?: boolean }
   | { readonly type: 'provider.cancel' }
@@ -469,8 +489,14 @@ export interface AssetImportCommit {
 }
 
 export type BridgeResult =
-  | { readonly ok: true; readonly assetImport?: AssetImportCommit; readonly playEntity?: PlayEntity; readonly agentTurnId?: number }
-  | { readonly ok: false; readonly error: BridgeError };
+  | { readonly ok: true; readonly projectFile?: ProjectFileResponse; readonly assetImport?: AssetImportCommit; readonly playEntity?: PlayEntity; readonly agentTurnId?: number }
+  | {
+      readonly ok: false;
+      readonly error: BridgeError;
+      /** Local transport metadata: no verified completion arrived after dispatch.
+       * The host may have acted. Preserve the error without inferring rollback. */
+      readonly outcomeUnknown?: true;
+    };
 
 export interface EditorBridge {
   readonly protocolVersion: number;

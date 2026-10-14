@@ -155,7 +155,11 @@ fn running_cli_reimports_recovers_reloads_and_preserves_external_edits_and_histo
         external
     );
     reader.join().unwrap();
-    let mut recovered = CommandBus::persistent(root.join("game.journal.jsonl"), project).unwrap();
+    let mut recovered = CommandBus::open_project_file_with_journal(
+        root.join("game.json"),
+        root.join("game.journal.jsonl"),
+    )
+    .unwrap();
     assert_eq!(recovered.history().len(), 2);
     recovered.undo().unwrap();
     assert_eq!(

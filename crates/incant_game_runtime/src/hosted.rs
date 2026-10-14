@@ -94,22 +94,41 @@ where
         audio_settings: AudioManagerSettings<B>,
         host_settings: H::Settings,
     ) -> Result<Self, H::Error> {
-        let mut game = Self {
+        let mut game = Self::new_suspended(
+            seed.scene.clone(),
+            seed.program.clone(),
+            seed.actions.clone(),
+            seed.clips.clone(),
+            audio_settings,
+            host_settings,
+        )?;
+        game.enable_restart_requests()?;
+        Ok(game)
+    }
+    /// Native callback hosts start with silent audio before any asynchronous
+    /// backend callback can run. This does not grant restart capabilities.
+    pub fn new_suspended(
+        scene: CookedScene,
+        program: impl Into<SessionProgram>,
+        actions: InputActions,
+        clips: Vec<ClipBinding>,
+        audio_settings: AudioManagerSettings<B>,
+        host_settings: H::Settings,
+    ) -> Result<Self, H::Error> {
+        Ok(Self {
             core: Core::prepare(
-                seed.scene.clone(),
-                seed.program.clone(),
-                seed.actions.clone(),
+                scene,
+                program,
+                actions,
                 |world| {
                     H::prepare(world, host_settings)
                         .map(WithHost)
                         .map_err(GameError::Host)
                 },
-                |world| SceneAudio::new_suspended(world, seed.clips.clone(), audio_settings),
+                |world| SceneAudio::new_suspended(world, clips, audio_settings),
             )?
             .initially_suspended(),
-        };
-        game.enable_restart_requests()?;
-        Ok(game)
+        })
     }
     /// Destroy all live state before replacement. Failure leaves this owner
     /// terminal. The fresh session stays paused until explicitly resumed.
@@ -227,6 +246,22 @@ where
     pub fn logs(&self) -> Result<&incant_script::NativeLogs, H::Error> {
         self.core.logs()
     }
+    /// True only for a program with the implemented typed haptic capability.
+    pub fn supports_haptics(&self) -> Result<bool, H::Error> {
+        self.core.supports_haptics()
+    }
+    /// Current host-issued targets; never reconstructed from saved data.
+    pub fn set_haptic_capabilities(
+        &mut self,
+        value: incant_input::haptics::HapticCapabilities,
+    ) -> Result<(), H::Error> {
+        self.core.set_haptic_capabilities(value)
+    }
+    /// Drain only accepted composed output. Suspension clears pending requests.
+    pub fn take_haptics(&mut self) -> Result<incant_input::haptics::HapticRequests, H::Error> {
+        self.core.take_haptics()
+    }
+
     /// Explicit trusted-owner opt-in for whole-session replacement.
     pub fn enable_restart_requests(&mut self) -> Result<(), H::Error> {
         self.core.enable_restart_requests()
@@ -401,6 +436,22 @@ impl<H: SceneHost> HostedOfflineGameSession<H> {
     pub fn logs(&self) -> Result<&incant_script::NativeLogs, H::Error> {
         self.inner.core.logs()
     }
+    /// True only for a program with the implemented typed haptic capability.
+    pub fn supports_haptics(&self) -> Result<bool, H::Error> {
+        self.inner.core.supports_haptics()
+    }
+    /// Current host-issued targets; never reconstructed from saved data.
+    pub fn set_haptic_capabilities(
+        &mut self,
+        value: incant_input::haptics::HapticCapabilities,
+    ) -> Result<(), H::Error> {
+        self.inner.core.set_haptic_capabilities(value)
+    }
+    /// Drain only accepted composed output. Suspension clears pending requests.
+    pub fn take_haptics(&mut self) -> Result<incant_input::haptics::HapticRequests, H::Error> {
+        self.inner.core.take_haptics()
+    }
+
     /// Explicit trusted-owner opt-in for whole-session replacement.
     pub fn enable_restart_requests(&mut self) -> Result<(), H::Error> {
         self.inner.core.enable_restart_requests()

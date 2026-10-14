@@ -14,6 +14,7 @@ import { cookNativeScript, cookNativeProjectScripts } from '../native_script/coo
 import { snapshotGraph, snapshotProjectGraph, sourceCatalog, LIMITS } from '../native_script/graph.mjs';
 import { publishArtifact } from '../native_script/publish.mjs';
 import { snapshotCompilerHost } from '../native_script/typecheck_host.mjs';
+import { PHASES, phaseRecorder } from '../native_script/phases.mjs';
 
 const REPO = fileURLToPath(new URL('../../', import.meta.url));
 const ENTRY = `import type { NativeBehavior } from '@incant/runtime/native';
@@ -360,6 +361,41 @@ test('project CLI accepts only bounded catalog data and publishes no failed arti
       assert.notEqual(run(input, name).status, 0);
       await assert.rejects(fs.stat(path.join(root, name)), { code: 'ENOENT' });
     }
+  });
+});
+
+test('compiler phase observer preserves artifacts and emits only a bounded fixed sequence', async () => {
+  await fixture({ 'entry.ts': ENTRY }, async root => {
+    const phaseFile = path.join(root, 'phases.jsonl');
+    const run = (name, observed) => spawnSync(process.execPath, ['--max-old-space-size=512',
+      path.join(REPO, 'tools/build_native_script.mjs'), '--project', root, path.join(root, name)],
+    { input: JSON.stringify([{ id: A, path: 'entry.ts' }]), encoding: 'utf8', timeout: 60_000,
+      env: { ...process.env, INCANT_NATIVE_COOK_PHASE_FILE: observed ? phaseFile : '' } });
+    for (const [name, observed] of [['plain', false], ['observed', true]]) {
+      const result = run(name, observed);
+      assert.equal(result.status, 0, result.stderr);
+    }
+    for (const name of ['behavior.cjs', 'behavior.cjs.map', 'manifest.json']) {
+      assert.deepEqual(await fs.readFile(path.join(root, 'plain', name)),
+        await fs.readFile(path.join(root, 'observed', name)));
+    }
+    const text = await fs.readFile(phaseFile, 'utf8');
+    const rows = text.trimEnd().split('\n').map(JSON.parse);
+    assert.deepEqual(rows.map(row => row.phase), PHASES);
+    assert.ok(Buffer.byteLength(text) < 4096);
+    let previous = 0;
+    for (const row of rows) {
+      assert.deepEqual(Object.keys(row).sort(), ['elapsed_us', 'phase']);
+      assert.ok(Number.isSafeInteger(row.elapsed_us) && row.elapsed_us >= previous);
+      previous = row.elapsed_us;
+    }
+    const refused = phaseRecorder(path.join(root, 'refused.jsonl'));
+    try {
+      assert.throws(() => refused.mark('private-source'), /phase order/u);
+      refused.mark('driver_entry');
+      assert.throws(() => refused.mark('driver_entry'), /phase order/u);
+    } finally { refused.close(); }
+    assert.equal((await fs.readFile(path.join(root, 'refused.jsonl'), 'utf8')).includes('private'), false);
   });
 });
 

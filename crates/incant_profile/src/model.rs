@@ -94,6 +94,7 @@ impl Phase {
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Error {
     Disabled,
+    Storage,
     Busy,
     Sequence,
     ClockUnavailable,
@@ -107,6 +108,7 @@ impl std::fmt::Display for Error {
         f.write_str(match self {
             Self::UnsupportedRoute => "profiling is unavailable for the requested player route",
             Self::Options => "duplicate profiling option",
+            Self::Storage => "profile histogram storage unavailable",
             Self::Disabled => "CPU profiling requires the profile build feature",
             Self::Busy => "a process profile capture is already active",
             Self::Sequence => "profile capture sequence exhausted",
@@ -128,21 +130,6 @@ pub struct Totals {
     pub max_wall_ns: u64,
     pub unavailable_cpu_samples: u64,
     pub unwound: u64,
-}
-#[derive(Clone, Copy, Debug, Default)]
-#[cfg_attr(feature = "summary", derive(serde::Serialize))]
-pub struct HeapSample {
-    pub used_bytes: u64,
-    pub allocated_bytes: u64,
-    pub allocation_count: u64,
-}
-#[derive(Clone, Copy, Debug, Default)]
-#[cfg_attr(feature = "summary", derive(serde::Serialize))]
-pub struct QuickJsHeap {
-    pub samples: u64,
-    pub latest: HeapSample,
-    pub peak_used_bytes: u64,
-    pub peak_allocated_bytes: u64,
 }
 #[derive(Clone, Copy, Debug, Default)]
 #[cfg_attr(feature = "summary", derive(serde::Serialize))]
@@ -175,6 +162,7 @@ pub struct SourceReport {
 #[cfg_attr(feature = "summary", derive(serde::Serialize))]
 pub struct Report {
     pub version: u32,
+    pub frame_wall: crate::FrameWallReport,
     pub scope: &'static str,
     pub generation: u64,
     pub zones: Vec<PhaseReport>,
@@ -182,7 +170,7 @@ pub struct Report {
     pub dropped_source_samples: u64,
     pub completed_frames: u64,
     pub failed_frames: u64,
-    pub quickjs_heap: QuickJsHeap,
+    pub quickjs_heap: crate::QuickJsHeap,
     pub rust_allocations: Allocations,
     pub tracy_process_transport: bool,
 }

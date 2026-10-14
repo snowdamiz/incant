@@ -1,0 +1,117 @@
+{
+  "final_integration_commit": "d803cc2cc15d399bdf61cbf5743f5db81712f64b",
+  "root_bridge_replay_parent": "a5e862d692b66aaf0afe0bf113eb97ead1d0265e",
+  "final_commit_body": "Keep project file outcomes and announcements bound to their requests\n\nConsume the bridge outcomeUnknown marker, preserve native errors, and revoke queued or visible save messages when their project scope changes. Superseded revocations cannot erase newer messages.\n\nBuilt-by: astra",
+  "astra_ui_delta_paths": [
+    "editor/ui/src/components/ProjectFile.test.tsx",
+    "editor/ui/src/projectFile/ProjectFileContext.tsx",
+    "editor/ui/src/projectFile/model.ts",
+    "editor/ui/src/shell/ShellContext.test.tsx",
+    "editor/ui/src/shell/ShellContext.tsx",
+    "editor/ui/src/shell/requests.ts"
+  ],
+  "astra_ui_delta_sha256": "6600c64fb3841171ac725e9dfab21547832d88e4714fed77ede7be7dcc83f23c",
+  "final_ui_fingerprint": "f9181f983a4849f4e40b54636b61b51d02ba7c06c3456ad0388ab02fc666ab4b",
+  "final_ui_files": [
+    {
+      "path": "editor/ui/src/App.tsx",
+      "sha256": "ded22d851c6decb6ec6b7de5013a22e60cc4d7c1b257a468d9a40d60f6a04d2d",
+      "bytes": 19581
+    },
+    {
+      "path": "editor/ui/src/bridge/resolve.ts",
+      "sha256": "a97cf68108e645f1de272bc50f95b72499458e18c96689e8b35ba90705af4c88",
+      "bytes": 3595
+    },
+    {
+      "path": "editor/ui/src/components/PinDialog.tsx",
+      "sha256": "2cb83dfb198b29f2275e8efe4258cf015020118f9b1a2be48031b51bdcf049e2",
+      "bytes": 12942
+    },
+    {
+      "path": "editor/ui/src/components/ProjectFile.test.tsx",
+      "sha256": "a36344095d2e956c09640b1367d5d7f0dee56053ebe37ec5b71188517b74d7b1",
+      "bytes": 43661
+    },
+    {
+      "path": "editor/ui/src/components/ProjectMenu.tsx",
+      "sha256": "da47327f7392c23af1962c2978162d7ad54ab3c42f823417f93cabfa33c24f98",
+      "bytes": 3442
+    },
+    {
+      "path": "editor/ui/src/components/ShortcutsDialog.test.tsx",
+      "sha256": "9d626126810b56f9113044f208cc7fbe49849fbe5627ff2780375a82d55f2dd9",
+      "bytes": 6364
+    },
+    {
+      "path": "editor/ui/src/components/ShortcutsDialog.tsx",
+      "sha256": "356d7fa749e92f81c72f59cc30c1306c5a5b07a5adb09e72549b9462071174b4",
+      "bytes": 12652
+    },
+    {
+      "path": "editor/ui/src/components/Titlebar.tsx",
+      "sha256": "9f623be6f6c51ad25df64d55dddadfb6cc4fdbaeece314f754a1ba7f2f409a09",
+      "bytes": 9323
+    },
+    {
+      "path": "editor/ui/src/icons/Icon.tsx",
+      "sha256": "c91b7a898fe4f1d18cd38b888af21a3c80cd7cf4e90918c56f3d7d86a252676a",
+      "bytes": 6588
+    },
+    {
+      "path": "editor/ui/src/projectFile/ProjectFileContext.tsx",
+      "sha256": "66e4c3a7f702d619d795116494b2fd00934ed3f46161de37d1b1335a40a8b880",
+      "bytes": 14050
+    },
+    {
+      "path": "editor/ui/src/projectFile/model.ts",
+      "sha256": "fe113bf687493f96457cc83a379c9537097dbfe8de4a2a0784281639bc369f00",
+      "bytes": 6411
+    },
+    {
+      "path": "editor/ui/src/shell/ShellContext.test.tsx",
+      "sha256": "9760cde1336ae33ea0c2229736f8e0611896dce01febd65ac837204e69018d1d",
+      "bytes": 9308
+    },
+    {
+      "path": "editor/ui/src/shell/ShellContext.tsx",
+      "sha256": "d2be7d7de26e0d57c780c9120e0f93d42cc73a3b21dac71b5528ad20278c833c",
+      "bytes": 11301
+    },
+    {
+      "path": "editor/ui/src/shell/requests.ts",
+      "sha256": "8b3d19807e664109cf1946ef35d07d9969c8c593042cc443bc3ac39210e97617",
+      "bytes": 1289
+    },
+    {
+      "path": "editor/ui/src/styles/dialogs.css",
+      "sha256": "55c929ab7d24ce90f23bb6b66b72cd99e4700a298a6955c77daa6e130fe5b125",
+      "bytes": 10952
+    },
+    {
+      "path": "editor/ui/src/styles/shell.css",
+      "sha256": "bfee74f3ff2889027367c1d341fe50d3be4aaf54dd741e58b23db9c756ebb38f",
+      "bytes": 17317
+    }
+  ],
+  "producer_fingerprint_before_root_whitespace_cleanup": "d3cbe982842bf93fc5c1f25226f6ddcff0aa1c1b8277cf43d541dd7ae53fc554",
+  "producer_vs_final_differences": [
+    {
+      "path": "editor/ui/src/shell/requests.ts",
+      "producer_sha256": "0963c4930e160d58f4bb65b7bcef501023b6c9b72caf4dbbabf0941f4547b72f",
+      "final_sha256": "8b3d19807e664109cf1946ef35d07d9969c8c593042cc443bc3ac39210e97617",
+      "only_trailing_newlines": true,
+      "producer_trailing_newlines": 2,
+      "final_trailing_newlines": 1
+    }
+  ],
+  "source_ownership": {
+    "claude_ui_baseline": "e824206a",
+    "astra_bridge_original": "806e467f",
+    "astra_bridge_replay": "a5e862d6",
+    "astra_ui_correctness": "d803cc2cc15d399bdf61cbf5743f5db81712f64b"
+  },
+  "root_reported_checks": "47 files / 973 UI tests, typecheck and production build passed at final integration. No checks/captures/builds were run for this read-only comparison.",
+  "rendered_comparison": "r6-r7-comparison.json",
+  "remaining": "Root owns native application/live backend qualification after the quiet shipping measurement; fixture evidence does not establish native file persistence or phase gates."
+}

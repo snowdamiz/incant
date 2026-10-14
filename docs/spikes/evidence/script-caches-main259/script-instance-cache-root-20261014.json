@@ -1,0 +1,34 @@
+{
+  "at": "2026-10-14T01:35:37.714596+00:00",
+  "decision": "accepted scoped source and producer evidence; current-main composition remains separate",
+  "source_commit": "7a667eaefb5dc7db1d9cae37bf4119f5172fff95",
+  "packet_commit": "353360657b87f8f14a48fe8066fea192400233b5",
+  "manifest_sha256": "fee160cc1a6a5fbafc7cf7b8aa7a3121db69b55071a48cc5962e2414eda58c24",
+  "source_paths": [
+    {
+      "path": "crates/incant_script/src/bindings.rs",
+      "sha256": "227c71059fa5c1d13b9e0976ae3df52916a26eca48e514b0b4c34c05fba7baff"
+    },
+    {
+      "path": "crates/incant_script/src/bindings/cache_tests.rs",
+      "sha256": "904539f406caa4fbf5f843e87f48e5220754ba50a8e68b9e89e5a32c254fb00f"
+    },
+    {
+      "path": "crates/incant_script/src/lib.rs",
+      "sha256": "0603cf6f40e6eece7744bd5a29cd5506aca809e09579e3bf1695f1edf2521af9"
+    },
+    {
+      "path": "crates/incant_script/tests/project_bindings.rs",
+      "sha256": "277cce5692f35809cef316e3e319a8f50f2b11eb2ee822952f48b8e2d6c4e344"
+    },
+    {
+      "path": "crates/incant_script/tests/project_bindings/cache.rs",
+      "sha256": "0c4667eb94e5985b63b62f8476368e0556b9e4ae4f09e32032ef10ce6c294942"
+    }
+  ],
+  "checks": [
+    "Independent review of BoundGroup pair publication, lifetime scan/invalidation, VM root drop order and public authorization regressions",
+    "Portable+external verifier succeeded: 51 records, 34 payloads, 5 immediate binaries, 7 commands with one retained test-fixture syntax failure",
+    "35 distinct scoped cases and strict all-target Clippy; no shipping timing claim"
+  ]
+}

@@ -13,11 +13,7 @@ struct Manifest {
     files: BTreeMap<String, String>,
 }
 
-pub fn expand(args: Vec<String>) -> Result<Vec<String>> {
-    if args.first().is_none_or(|arg| arg != "--package") {
-        return Ok(args);
-    }
-    let root = Path::new(args.get(1).ok_or("--package needs a data directory")?);
+fn verify(root: &Path) -> Result<Manifest> {
     let manifest: Manifest = serde_json::from_slice(&bounded(&path(root, "package.json")?, 8192)?)?;
     if manifest.format != "incant-native-package" || manifest.version != 1 {
         return Err("unsupported native package manifest".into());
@@ -45,6 +41,15 @@ pub fn expand(args: Vec<String>) -> Result<Vec<String>> {
             return Err("native package startup checksum mismatch".into());
         }
     }
+    Ok(manifest)
+}
+
+pub fn expand(args: Vec<String>) -> Result<Vec<String>> {
+    if args.first().is_none_or(|arg| arg != "--package") {
+        return Ok(args);
+    }
+    let root = Path::new(args.get(1).ok_or("--package needs a data directory")?);
+    let manifest = verify(root)?;
     let mut options = BTreeMap::new();
     let mut window = false;
     let mut index = 2;
@@ -145,6 +150,40 @@ pub fn expand(args: Vec<String>) -> Result<Vec<String>> {
         result.extend(["--observe".into(), plan]);
     }
     Ok(result)
+}
+
+#[cfg(feature = "mobile-host")]
+pub(crate) struct HostedPackage {
+    pub scene: incant_runtime::CookedScene,
+    pub actions: incant_input::InputActions,
+    pub clips: Vec<incant_audio_runtime::ClipBinding>,
+    pub settings: incant_render_game::NativeRenderSettings,
+}
+
+#[cfg(feature = "mobile-host")]
+pub(crate) fn hosted(root: &Path, viewport: Option<[f32; 2]>) -> Result<HostedPackage> {
+    let manifest = verify(root)?;
+    let camera = camera(&manifest)?;
+    let mut id = [0; 16];
+    for (i, byte) in id.iter_mut().enumerate() {
+        *byte = u8::from_str_radix(&camera[i * 2..i * 2 + 2], 16)?;
+    }
+    Ok(HostedPackage {
+        scene: incant_runtime::CookedScene::from_bytes(&bounded(
+            &path(root, "world.scene")?,
+            128 * 1024 * 1024,
+        )?)?,
+        actions: serde_json::from_slice(&bounded(&path(root, "input-actions.json")?, 256 * 1024)?)?,
+        clips: crate::startup::clips(&path(root, "audio")?, &path(root, "clips.bin")?)?,
+        settings: incant_render_game::NativeRenderSettings {
+            model_cache: root.join("models"),
+            texture_cache: root.join("textures"),
+            camera: incant_runtime::StableId(id),
+            text: Some(incant_render_game::TextSettings::new(root.join("fonts"))),
+            ui: viewport.map(incant_render_game::UiSettings::new),
+            consumer: (),
+        },
+    })
 }
 
 fn camera(manifest: &Manifest) -> Result<String> {

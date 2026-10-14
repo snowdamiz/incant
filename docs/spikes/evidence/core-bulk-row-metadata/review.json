@@ -1,0 +1,231 @@
+{
+  "at": "2026-10-14T02:47:22.743144+00:00",
+  "head": "b01a766b7c45d6c8f3373a3e6459b020084436e3",
+  "manifest_sha256": "505fc87407b69997e81529060ade438f6ee169c6b11c4be7d7018ac7965f51b8",
+  "replay_exit": 0,
+  "stdout_sha256": "816d9296344ded6b0ecbaef56ce82bc14bf0fdf85e8b4889a8ce9cc9a3a39b3c",
+  "scope": "Independent source/CI wiring review and complete portable/external/Git/build/profile/public-RPC replay accepted; sixpairedactualruns, all2msFAIL, onlyscriptidentitydifferenceallowed; QuickJSgrowth disclosed. PriorAOTscopedreviewb073 remainsvalid.",
+  "result": {
+    "passed": true,
+    "records": 488,
+    "payloads": 103,
+    "source_counts": {
+      "baseline": 20580,
+      "candidate": 20582
+    },
+    "builds": {
+      "baseline": {
+        "codegen_units_verified": 4,
+        "target_feature_artifacts": 11,
+        "runtime_data_files": 28
+      },
+      "candidate": {
+        "codegen_units_verified": 4,
+        "target_feature_artifacts": 11,
+        "runtime_data_files": 28
+      }
+    },
+    "mutation_controls": 12,
+    "pairs": [
+      {
+        "repeat": 0,
+        "script_budget": "fail",
+        "metrics": {
+          "player.frame.p95_wall_ns": {
+            "baseline": {
+              "lower": 5170001,
+              "upper": 5180000
+            },
+            "candidate": {
+              "lower": 3770001,
+              "upper": 3780000
+            },
+            "within_5_percent": "pass"
+          },
+          "script.tick.p95_wall_ns": {
+            "baseline": {
+              "lower": 4310001,
+              "upper": 4320000
+            },
+            "candidate": {
+              "lower": 2860001,
+              "upper": 2870000
+            },
+            "within_5_percent": "pass"
+          },
+          "rust.process_peak_requested_bytes": {
+            "baseline": {
+              "lower": 76880521,
+              "upper": 76880521
+            },
+            "candidate": {
+              "lower": 76881220,
+              "upper": 76881220
+            },
+            "within_5_percent": "pass"
+          }
+        }
+      },
+      {
+        "repeat": 1,
+        "script_budget": "fail",
+        "metrics": {
+          "player.frame.p95_wall_ns": {
+            "baseline": {
+              "lower": 5720001,
+              "upper": 5730000
+            },
+            "candidate": {
+              "lower": 3650001,
+              "upper": 3660000
+            },
+            "within_5_percent": "pass"
+          },
+          "script.tick.p95_wall_ns": {
+            "baseline": {
+              "lower": 4740001,
+              "upper": 4750000
+            },
+            "candidate": {
+              "lower": 2800001,
+              "upper": 2810000
+            },
+            "within_5_percent": "pass"
+          },
+          "rust.process_peak_requested_bytes": {
+            "baseline": {
+              "lower": 76880521,
+              "upper": 76880521
+            },
+            "candidate": {
+              "lower": 76881252,
+              "upper": 76881252
+            },
+            "within_5_percent": "pass"
+          }
+        }
+      },
+      {
+        "repeat": 2,
+        "script_budget": "fail",
+        "metrics": {
+          "player.frame.p95_wall_ns": {
+            "baseline": {
+              "lower": 5730001,
+              "upper": 5740000
+            },
+            "candidate": {
+              "lower": 4410001,
+              "upper": 4420000
+            },
+            "within_5_percent": "pass"
+          },
+          "script.tick.p95_wall_ns": {
+            "baseline": {
+              "lower": 4770001,
+              "upper": 4780000
+            },
+            "candidate": {
+              "lower": 3070001,
+              "upper": 3080000
+            },
+            "within_5_percent": "pass"
+          },
+          "rust.process_peak_requested_bytes": {
+            "baseline": {
+              "lower": 76880553,
+              "upper": 76880553
+            },
+            "candidate": {
+              "lower": 76881252,
+              "upper": 76881252
+            },
+            "within_5_percent": "pass"
+          }
+        }
+      }
+    ],
+    "quickjs_heaps": [
+      {
+        "run": "baseline0",
+        "quickjs": {
+          "latest": {
+            "allocated_bytes": 5363896,
+            "allocation_count": 71882,
+            "used_bytes": 3961809
+          },
+          "peak_allocated_bytes": 5364384,
+          "peak_used_bytes": 3962281,
+          "samples": 2156
+        }
+      },
+      {
+        "run": "candidate0",
+        "quickjs": {
+          "latest": {
+            "allocated_bytes": 6320960,
+            "allocation_count": 71993,
+            "used_bytes": 4606534
+          },
+          "peak_allocated_bytes": 6322432,
+          "peak_used_bytes": 4607766,
+          "samples": 2156
+        }
+      },
+      {
+        "run": "candidate1",
+        "quickjs": {
+          "latest": {
+            "allocated_bytes": 6320960,
+            "allocation_count": 71993,
+            "used_bytes": 4606534
+          },
+          "peak_allocated_bytes": 6322432,
+          "peak_used_bytes": 4607766,
+          "samples": 2156
+        }
+      },
+      {
+        "run": "baseline1",
+        "quickjs": {
+          "latest": {
+            "allocated_bytes": 5363896,
+            "allocation_count": 71882,
+            "used_bytes": 3961809
+          },
+          "peak_allocated_bytes": 5364384,
+          "peak_used_bytes": 3962281,
+          "samples": 2156
+        }
+      },
+      {
+        "run": "baseline2",
+        "quickjs": {
+          "latest": {
+            "allocated_bytes": 5363896,
+            "allocation_count": 71882,
+            "used_bytes": 3961809
+          },
+          "peak_allocated_bytes": 5364384,
+          "peak_used_bytes": 3962281,
+          "samples": 2156
+        }
+      },
+      {
+        "run": "candidate2",
+        "quickjs": {
+          "latest": {
+            "allocated_bytes": 6320960,
+            "allocation_count": 71993,
+            "used_bytes": 4606534
+          },
+          "peak_allocated_bytes": 6322432,
+          "peak_used_bytes": 4607766,
+          "samples": 2156
+        }
+      }
+    ],
+    "phase_gate_passed": false
+  },
+  "gate_approved": false
+}

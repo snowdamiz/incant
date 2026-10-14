@@ -1,0 +1,20 @@
+{
+  "archive_sha256": "0e80fedbd155a3e4bc9ac80a6a461f4b4e3f6dfed10c84ccdc09df31d42bc494",
+  "base": "e3fd0bebd92787abad6f82f370b3d4a807b787e1",
+  "current_test_counts": {
+    "cook": 2,
+    "doc-cmd": 96,
+    "headless": 2
+  },
+  "evidence_root": "/Users/andreyyurlov/.codex/incant-integration-evidence/engine-compat-main271",
+  "payloads": 49,
+  "producer": "730a7e4523b81de29fff2fe914b567a556dfc859",
+  "producer_evidence_root": "/Users/andreyyurlov/.codex/incant-evidence/project-engine-compatibility-001",
+  "producer_manifest_sha256": "393777f4e58c22777bf5c03e6f8dad70f7f0d7e2f02a688330e1494526b39fd7",
+  "producer_review_sha256": "bd414ee5a0d530c842057ffbf059bf44e2b34de890e3e2618c8997e8d386ec60",
+  "records": 62,
+  "scope": "Current main271 engine compatibility plus linked-prefab authoring.100 deterministic CPU cases, nine qualification commands plus successful headless generator build and74generated schemas. No migration/backup/application, GUI, alternate-mode, performance or phase/release gate claim.",
+  "source": "0a2a066583bd1a1a4f548f94b45f22df072ecbac",
+  "verifier_sha256": "85e26106751254abb4d7bc6a9a0aa1ea01afa0e9b166f2c67c340090209ca61e",
+  "version": 1
+}

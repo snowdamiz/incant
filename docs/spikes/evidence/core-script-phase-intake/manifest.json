@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "composition_source": "4635c3bd19fdbbaf040cded6447da44b94751dfe",
+  "retained_ancestry": "04263874dff8caec728bfe7bb2b76d9d59cf85f1",
+  "main": "fdd480355ba70b28bbebe35f58b8af188f0abb82",
+  "producer_source": "13b178c81998b6b74bb4db2b06b0fc343cea0eb0",
+  "producer_packet": "1af5607314249f8d6656e1abbb1097b4e42de4aa",
+  "archive_sha256": "49bbee0ad57dc88df6df0da21ed8528c340d10283bd064e5433bfbd9eb25dc53",
+  "records": 6,
+  "review_sha256": "9c9065af6524bf561abe3342093460415ae6546ffde208446e04bee1b8c5c29b",
+  "composition_sha256": "1d64981b9808f0e70ccd36e05075fe2efa14c8fe26dab37825fa90e2a856e695",
+  "scope": "Exact diagnostic source and retained one-test execution, plus current strict Clippy. No new native test/timing run, production change or shipping gate."
+}

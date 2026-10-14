@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "checkpoint": 30,
+  "candidate": "721eddac00b356a1ccef4d28759c98649c6629c6",
+  "selected_main": "c1988638dc6e6b85c58fe24f09525eada43c5aac",
+  "release": "71bdd2e7833a2c4b16352be05b4126225b9d834a",
+  "release_parents": [
+    "2a9d72eaf804a00b7752015e33ad2dfa087665f4",
+    "721eddac00b356a1ccef4d28759c98649c6629c6"
+  ],
+  "tree": "393eb78c2d7f44ed9737d3ce2ab2b73bc0902d42",
+  "main_at_promotion": "7c746ebec7e5553bf34c2643ab4c952a1a433db7",
+  "pr": 232,
+  "archive_sha256": "61848e479663aa3a5925bba7dcfc1520a05cce066b8a0808be06b14b8960bfad",
+  "archive_bytes": 117407,
+  "records": 29,
+  "prepromotion_sha256": "af80f933fb535e57906e7c32c7715b45f72dc65adfa3af7aef3e17027344fc69",
+  "root_review_sha256": "38cffccc9d8d268c14d7b50d43b0b9bfa99b24af939ca2e8d090c4c687281a20",
+  "required_actual_success": 23,
+  "push_workflows_success": 8,
+  "jobs_success": 27,
+  "nonrequired_skipped_jobs": [
+    "deploy"
+  ],
+  "limits": "Selected main252 only. No phase, performance, device, store or distribution approval."
+}

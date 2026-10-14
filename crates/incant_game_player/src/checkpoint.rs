@@ -1,6 +1,10 @@
 //! Data-only ordinary-load options and create-only save-file publication.
 use crate::session::Result;
 use std::{io::Write, path::Path};
+#[cfg(feature = "native-checkpoints")]
+pub const MAX_CHECKPOINT_BYTES: usize = incant_game_runtime::MAX_PERSISTED_GAME_BYTES;
+#[cfg(not(feature = "native-checkpoints"))]
+pub const MAX_CHECKPOINT_BYTES: usize = incant_script::MAX_CHECKPOINT_BYTES;
 #[derive(Default, Debug)]
 pub struct Options {
     pub load: Option<String>,
@@ -58,7 +62,7 @@ pub fn frame_range(start: u64, ticks: u64, rate: u32, tick_rate: u32) -> Result<
 /// Same-directory staging + atomic no-clobber publication. The file is synced;
 /// this is not a universal power-loss durability or multi-file PCM transaction.
 pub fn publish(path: &Path, bytes: &[u8]) -> Result<()> {
-    if bytes.len() > incant_script::MAX_CHECKPOINT_BYTES {
+    if bytes.len() > MAX_CHECKPOINT_BYTES {
         return Err("checkpoint size limit".into());
     }
     publish_with(path, |file| {

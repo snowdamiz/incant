@@ -1,0 +1,2485 @@
+diff --git a/editor/ui/src/App.tsx b/editor/ui/src/App.tsx
+index 6b814e16f07bdc16d357f060aeeca57c6ed889d9..fdc9a2df847914908f76e8fa19402b7febe47a9e 100644
+--- a/editor/ui/src/App.tsx
++++ b/editor/ui/src/App.tsx
+@@ -9,12 +9,14 @@ import { AgentPanel, agentPaneResizable } from './components/AgentPanel';
+ import { BottomDock } from './components/BottomDock';
+ import { HierarchyPanel } from './components/HierarchyPanel';
+ import { InspectorPanel } from './components/inspector/InspectorPanel';
++import { PinDialog } from './components/PinDialog';
+ import { ShortcutsDialog } from './components/ShortcutsDialog';
+ import { Splitter } from './components/Splitter';
+ import { Titlebar } from './components/Titlebar';
+ import { ViewportPanel } from './components/ViewportPanel';
+ import { Icon } from './icons/Icon';
+ import { PlayProvider, usePlay } from './play/PlayContext';
++import { ProjectFileProvider, useProjectFile } from './projectFile/ProjectFileContext';
+ import { ShellProvider, useShell } from './shell/ShellContext';
+ import { installInputModality } from './shell/inputModality';
+ import { projectState } from './shell/projectState';
+@@ -50,11 +52,13 @@ export function App({ resolution }: { resolution: BridgeResolution }) {
+   }
+   return (
+     <ShellProvider bridge={resolution.kind === 'bridge' ? resolution.bridge : null}>
+-      <AssetsProvider>
+-        <PlayProvider>
+-          <Workbench />
+-        </PlayProvider>
+-      </AssetsProvider>
++      <ProjectFileProvider>
++        <AssetsProvider>
++          <PlayProvider>
++            <Workbench />
++          </PlayProvider>
++        </AssetsProvider>
++      </ProjectFileProvider>
+     </ShellProvider>
+   );
+ }
+@@ -99,10 +103,14 @@ function Workbench() {
+   // The Play actions of the latest commit: a shortcut pressed right after a state change
+   // must not reach the previous render's action (Step while it still thinks "running").
+   const play = usePlay();
++  const projectFile = useProjectFile();
++  const pinOpen = projectFile.pin.status !== 'closed';
+   const mac = snapshot?.window ? snapshot.window.platform === 'macos' : /Mac|iPhone|iPad/.test(`${navigator.platform} ${navigator.userAgent}`);
+   const playActions = useRef(play);
++  const save = useRef(projectFile.save);
+   useLayoutEffect(() => {
+     playActions.current = play;
++    save.current = projectFile.save;
+   });
+   const [layout, setLayout] = useState<Layout>(() => defaultLayout(window.innerWidth, window.innerHeight));
+   // The agent pane's disclosure; collapsing leaves its one-line status. A short window
+@@ -142,13 +150,24 @@ function Workbench() {
+       if (typeof document.execCommand === 'function') document.execCommand(action);
+       return;
+     }
+-    if (shortcutsOpen || accountOpen || document.activeElement?.closest('[role="dialog"]')) return;
++    if (shortcutsOpen || accountOpen || pinOpen || document.activeElement?.closest('[role="dialog"]')) return;
+     runHistory(action);
+-  }), [bridge, runHistory, shortcutsOpen, accountOpen]);
++  }), [bridge, runHistory, shortcutsOpen, accountOpen, pinOpen]);
+ 
+   useEffect(() => {
+     const onKeyDown = (event: KeyboardEvent) => {
+-      if (event.defaultPrevented || shortcutsOpen || accountOpen) return;
++      // A key the focused game view sent to the game arrives here already handled.
++      if (event.defaultPrevented) return;
++      if (isSaveShortcut(event, mac)) {
++        // The browser's own Save Page never applies to the editor, so the keys are always
++        // taken. Inside a dialog they do nothing; elsewhere, text fields included, they are
++        // the project menu's Save, sent to the host like it.
++        event.preventDefault();
++        const inDialog = shortcutsOpen || accountOpen || pinOpen || document.activeElement?.closest('[role="dialog"]');
++        if (!event.repeat && !inDialog) save.current();
++        return;
++      }
++      if (shortcutsOpen || accountOpen || pinOpen) return;
+       const mod = event.metaKey || event.ctrlKey;
+       const key = event.key.toLowerCase();
+       if (event.key === 'F6') {
+@@ -188,7 +207,7 @@ function Workbench() {
+     };
+     window.addEventListener('keydown', onKeyDown);
+     return () => window.removeEventListener('keydown', onKeyDown);
+-  }, [runHistory, shortcutsOpen, accountOpen, togglePanel, mac]);
++  }, [runHistory, shortcutsOpen, accountOpen, pinOpen, togglePanel, mac]);
+ 
+   const openShortcuts = (from: HTMLElement) => {
+     shortcutsReturn.current = from;
+@@ -271,6 +290,7 @@ function Workbench() {
+         />
+       ) : null}
+       {accountOpen ? <AccountDialog /> : null}
++      {pinOpen ? <PinDialog /> : null}
+     </div>
+   );
+ }
+@@ -282,13 +302,26 @@ function isTextEntry(target: EventTarget | null): boolean {
+   return target.isContentEditable;
+ }
+ 
++/**
++ * ⌘S on macOS, Ctrl+S elsewhere: by the S of the current layout, or by the physical S key
++ * on a layout without Latin letters. Shift, Option and AltGr combinations are left alone:
++ * there is no Save As, and AltGr types characters.
++ */
++function isSaveShortcut(event: KeyboardEvent, mac: boolean): boolean {
++  if (event.shiftKey || event.altKey || (mac ? !event.metaKey || event.ctrlKey : !event.ctrlKey || event.metaKey)) return false;
++  const key = event.key.toLowerCase();
++  return key === 's' || (event.code === 'KeyS' && !/^[a-z]$/.test(key));
++}
++
+ /**
+  * Slim notice under the titlebar, only when the engine is absent, the project is
+- * opening, or it failed. This is the one place the full failure text is shown;
+- * panels show a short state and Problems lists the engine's diagnostic.
++ * opening, or it failed, and after a project file request failed outside a dialog. This is
++ * the one place the full failure text is shown; panels show a short state and Problems
++ * lists the engine's diagnostic.
+  */
+ function ConnectionBanner() {
+   const { snapshot, bridge } = useShell();
++  const { notice, dismissNotice } = useProjectFile();
+   const project = projectState(snapshot);
+   let content = null;
+   if (!bridge) {
+@@ -323,10 +356,33 @@ function ConnectionBanner() {
+       </div>
+     );
+   }
+-  if (!content) return null;
++  if (!content && !notice) return null;
+   return (
+     <div className="notice-region" role="region" aria-label="Project status">
+       {content}
++      {notice ? (
++        // A failed save, or a pin that failed after its dialog closed, stays in view until
++        // dismissed, superseded or another project opens. The host's words are shown as
++        // they are, with no added explanation of the cause.
++        <div className="notice notice--error" role="alert">
++          <Icon name="error" size={14} />
++          <span className="notice__text">
++            <strong>{notice.title}</strong> {notice.failure.message}
++          </span>
++          {notice.failure.code !== null ? <span className="notice__code mono">{notice.failure.code}</span> : null}
++          <button
++            type="button"
++            className="button button--ghost button--small notice__dismiss"
++            onClick={(event) => {
++              // The notice goes with its button: keyboard focus continues at the project menu.
++              if (document.activeElement === event.currentTarget) document.querySelector<HTMLElement>('.titlebar__project-button')?.focus();
++              dismissNotice();
++            }}
++          >
++            Dismiss
++          </button>
++        </div>
++      ) : null}
+     </div>
+   );
+ }
+diff --git a/editor/ui/src/bridge/resolve.ts b/editor/ui/src/bridge/resolve.ts
+index f06dfa9637c55caf5a27917c75a587310b99a440..0ed48273c14278d34fb4c34e59f185c667f659a2 100644
+--- a/editor/ui/src/bridge/resolve.ts
++++ b/editor/ui/src/bridge/resolve.ts
+@@ -49,7 +49,7 @@ export function readCapabilities(advertised: readonly string[]): CapabilitySet {
+ }
+ 
+ const CAPABILITY_LABELS: Record<Capability, string> = {
+-  'project.file': 'Project file operations',
++  'project.file': 'Project file access',
+   'entity.rename': 'Rename',
+   'entity.delete': 'Delete',
+   'asset.import': 'Import assets',
+diff --git a/editor/ui/src/components/ShortcutsDialog.test.tsx b/editor/ui/src/components/ShortcutsDialog.test.tsx
+index de3c9c890af86cf69c71ec7450f3769ff0f1b497..c6a473e959a24dd604d716974d64193cae2c6bcd 100644
+--- a/editor/ui/src/components/ShortcutsDialog.test.tsx
++++ b/editor/ui/src/components/ShortcutsDialog.test.tsx
+@@ -63,6 +63,7 @@ describe('keyboard shortcuts dialog', () => {
+     expect(combos(row(dialog, 'Redo'))).toEqual(['⇧⌘Z']);
+     expect(combos(row(dialog, 'Show or hide the hierarchy'))).toEqual(['⌥⌘1']);
+     expect(combos(row(dialog, 'Keyboard shortcuts'))).toEqual(['?', '⌘/']);
++    expect(combos(row(dialog, 'Save the project'))).toEqual(['⌘S']);
+     expect(row(dialog, 'Redo').querySelector('.shortcuts__keys')?.textContent).toContain('Shift Command Z');
+     // One table of sections, no cards: each section caption heads its rows.
+     expect([...dialog.querySelectorAll('.shortcuts__section th')].map((th) => th.textContent)).toEqual([
+@@ -81,6 +82,7 @@ describe('keyboard shortcuts dialog', () => {
+     const { dialog } = open('windows');
+     expect(combos(row(dialog, 'Undo'))).toEqual(['Ctrl+Z']);
+     expect(combos(row(dialog, 'Redo'))).toEqual(['Ctrl+Y', 'Ctrl+Shift+Z']);
++    expect(combos(row(dialog, 'Save the project'))).toEqual(['Ctrl+S']);
+     expect(combos(row(dialog, 'Send the message'))).toEqual(['Ctrl+Enter']);
+   });
+ 
+diff --git a/editor/ui/src/components/ShortcutsDialog.tsx b/editor/ui/src/components/ShortcutsDialog.tsx
+index 41b3bb45b964c52c3db342ed561cdc1882dcb771..5d7e7825dd21afe9458267cc33c75a3a4a5b1212 100644
+--- a/editor/ui/src/components/ShortcutsDialog.tsx
++++ b/editor/ui/src/components/ShortcutsDialog.tsx
+@@ -38,6 +38,7 @@ export const SHORTCUT_GROUPS: readonly ShortcutGroup[] = [
+       { action: 'Previous panel', keys: [['Shift', 'F6']] },
+       { action: 'Undo', keys: [['Mod', 'Z']] },
+       { action: 'Redo', keys: [['Shift', 'Mod', 'Z']], other: [['Ctrl', 'Y'], ['Ctrl', 'Shift', 'Z']] },
++      { action: 'Save the project', keys: [['Mod', 'S']] },
+       { action: 'Keyboard shortcuts', keys: [['?'], ['Mod', '/']] },
+       { action: 'Close a dialog or menu', keys: [['Esc']] },
+     ],
+diff --git a/editor/ui/src/components/Titlebar.tsx b/editor/ui/src/components/Titlebar.tsx
+index 8bb680f8e931a7d76f70f3a65f17d698c14bc6c1..7aab899451c7b2ea329c95a53c49fb6b263e328f 100644
+--- a/editor/ui/src/components/Titlebar.tsx
++++ b/editor/ui/src/components/Titlebar.tsx
+@@ -3,6 +3,7 @@ import type { Capability } from '../bridge/contract';
+ import type { IconName } from '../icons/Icon';
+ import { Icon } from '../icons/Icon';
+ import { useShell } from '../shell/ShellContext';
++import { ProjectTitle } from './ProjectMenu';
+ import { ProviderChip } from './ProviderChip';
+ 
+ export interface PanelVisibility {
+@@ -72,13 +73,7 @@ export function Titlebar({
+       <div className="titlebar__start">
+         <div className="titlebar__identity">
+           <img className="titlebar__logo" src="./icon.svg" alt="Incant" width={16} height={16} />
+-          <h1
+-            className={`titlebar__project${connection?.status === 'ready' ? '' : ' is-pending'}`}
+-            title={project}
+-          >
+-            {connection?.status === 'ready' ? <span className="visually-hidden">Project: </span> : null}
+-            {project}
+-          </h1>
++          <ProjectTitle name={project} ready={connection?.status === 'ready'} />
+           {scene ? (
+             <span className="titlebar__scene" title={scene.title}>
+               <span className="titlebar__slash" aria-hidden="true">
+diff --git a/editor/ui/src/icons/Icon.tsx b/editor/ui/src/icons/Icon.tsx
+index 5f030d2dd083c5cb58af8c5bbef28f313cd23404..7d941216f0b735cb21f7598486cd5077ec96c45b 100644
+--- a/editor/ui/src/icons/Icon.tsx
++++ b/editor/ui/src/icons/Icon.tsx
+@@ -60,6 +60,9 @@ const PATHS = {
+   stop: 'M4 4h8v8H4z',
+   refresh: 'M13 8a5 5 0 01-8.6 3.5M3 8a5 5 0 018.6-3.5M11.5 2v2.6H8.9M4.5 14v-2.6h2.6',
+   pencil: 'M10.25 3.25l2.5 2.5L6 12.5H3.5V10zM8.75 4.75l2.5 2.5',
++  // Project file menu: a disk for Save, a pushpin for pinning the engine version.
++  save: 'M2.5 2.5h8.25l2.75 2.75v8.25h-11zM5 2.5v3h5v-3M5 13.5v-4h6v4',
++  pin: 'M5.5 2.5h5M6.5 2.5V6L4.5 9h7l-2-3V2.5M8 9v4.5',
+   trash: 'M3 4.5h10M6.5 4.5V3h3v1.5M4.5 4.5l.75 9h5.5l.75-9M6.75 7v4.25M9.25 7v4.25',
+   // Component marks for Inspector section headers.
+   move: 'M8 2v12M2 8h12M6.25 3.75L8 2l1.75 1.75M6.25 12.25L8 14l1.75-1.75M3.75 6.25L2 8l1.75 1.75M12.25 6.25L14 8l-1.75 1.75',
+diff --git a/editor/ui/src/shell/ShellContext.test.tsx b/editor/ui/src/shell/ShellContext.test.tsx
+index 64cd69fe415f70450e6b4963adfa80dc1e13092a..d490758b61d8eb74a91a0cb01950f78a740c8491 100644
+--- a/editor/ui/src/shell/ShellContext.test.tsx
++++ b/editor/ui/src/shell/ShellContext.test.tsx
+@@ -1,11 +1,15 @@
+-import { act, render } from '@testing-library/react';
++import { act, render, waitFor } from '@testing-library/react';
+ import { describe, expect, it } from 'vitest';
+ import { NativeBridge } from '../../../bridge/native';
++import type { BridgeResult, EditorBridge } from '../bridge/contract';
++import { createFixtureBridge } from '../bridge/fixture';
+ import { createNativePlayDouble, doubleRead } from '../test/nativePlayDouble';
+ import type { AuthoringSnapshot, Shell } from './ShellContext';
+ import type { EngineRead } from '../../../bridge/native';
+ import projectSchema from '../../../../schemas/Project.schema.json';
+ import { ShellProvider, capabilityOf, useShell } from './ShellContext';
++import type { RequestResult } from './requests';
++import { wasRejected } from './requests';
+ 
+ describe('shell snapshot', () => {
+   it('updates native budget capabilities after loading and preserves the authored cap', async () => {
+@@ -91,4 +95,43 @@ describe('shell snapshot', () => {
+     expect(capabilityOf({ type: 'play.input', generation: 1, events: [] })).toBe('play.input');
+     expect(capabilityOf({ type: 'window.close' })).toBe('window.close');
+   });
++
++  it('resolves a rejected bridge request as a failure marked rejected, keeping the thrown code and message', async () => {
++    // TEST DOUBLE: a bridge whose request promise rejects instead of resolving to a result,
++    // and finally resolves to a host failure carrying the editor's own rejection code.
++    const answers: (() => Promise<BridgeResult>)[] = [
++      () => Promise.reject(new Error('IPC channel closed')),
++      () => Promise.reject({ code: 'host.closed', message: 'The editor process exited.' }),
++      () => Promise.reject(42),
++      () => Promise.resolve({ ok: false, error: { code: 'request.rejected', message: 'A host refusal.' } }),
++    ];
++    const bridge: EditorBridge = {
++      ...createFixtureBridge('sample'),
++      isFixture: false,
++      label: 'Test double',
++      capabilities: ['window.close'],
++      request: () => answers.shift()!(),
++    };
++    let shell!: Shell;
++    function Panel() {
++      shell = useShell();
++      return null;
++    }
++    render(<ShellProvider bridge={bridge}><Panel /></ShellProvider>);
++    const results: RequestResult[] = [];
++    await act(async () => {
++      results.push(await shell.request({ type: 'window.close' }, { quiet: true }));
++      results.push(await shell.request({ type: 'window.close' }, { quiet: true }));
++      expect(await shell.ask({ type: 'window.close' })).toBe(false);
++      results.push(await shell.request({ type: 'window.close' }, { quiet: true }));
++    });
++    expect(results.map((result) => (result.ok ? null : result.error))).toEqual([
++      { code: 'request.rejected', message: 'IPC channel closed' },
++      { code: 'host.closed', message: 'The editor process exited.' },
++      { code: 'request.rejected', message: 'A host refusal.' },
++    ]);
++    // Only a caught rejection is marked, whatever its code; a host's answer never is.
++    expect(results.map(wasRejected)).toEqual([true, true, false]);
++    await waitFor(() => expect(shell.message).toBe('window.close failed: The request ended without a result.'));
++  });
+ });
+diff --git a/editor/ui/src/shell/ShellContext.tsx b/editor/ui/src/shell/ShellContext.tsx
+index 093d9b55392faa32c52f8ab686a181bf7717d96d..81f202d49e557e6ae3771331fb718b74f9e4bd44 100644
+--- a/editor/ui/src/shell/ShellContext.tsx
++++ b/editor/ui/src/shell/ShellContext.tsx
+@@ -12,6 +12,8 @@ import type {
+ import type { CapabilitySet } from '../bridge/resolve';
+ import { readCapabilities, unavailableMessage } from '../bridge/resolve';
+ import type { PanelVisibility } from '../components/Titlebar';
++import type { RequestResult } from './requests';
++import { rejectedRequest } from './requests';
+ 
+ export type DockTab = 'problems' | 'console' | 'history';
+ 
+@@ -45,8 +47,12 @@ export interface Shell {
+   /** Like `run`, but returns the bridge's result so a caller can show the exact error inline. */
+   readonly dispatch: (command: EditorCommand) => Promise<BridgeResult>;
+   readonly ask: (request: HostRequest) => Promise<boolean>;
+-  /** Like `ask`, but returns the host's result so a caller can show the exact error inline. */
+-  readonly request: (request: HostRequest, options?: RequestOptions) => Promise<BridgeResult>;
++  /**
++   * Like `ask`, but returns the host's result so a caller can show the exact error inline.
++   * Always resolves: a rejected bridge request becomes a failure marked as rejected, so a
++   * caller can tell "no result arrived" from a host's refusal (shell/requests.ts).
++   */
++  readonly request: (request: HostRequest, options?: RequestOptions) => Promise<RequestResult>;
+   readonly explainUnavailable: (capability: Capability) => void;
+   /** The ChatGPT account dialog. `from` regains focus when it closes. */
+   readonly accountOpen: boolean;
+@@ -172,14 +178,21 @@ export function ShellProvider({ bridge, children }: { bridge: EditorBridge | nul
+   const run = useCallback(async (command: EditorCommand) => (await dispatch(command)).ok, [dispatch]);
+ 
+   const request = useCallback(
+-    async (hostRequest: HostRequest, options?: RequestOptions): Promise<BridgeResult> => {
++    async (hostRequest: HostRequest, options?: RequestOptions): Promise<RequestResult> => {
+       const capability = capabilityOf(hostRequest);
+       if (!bridge || !capabilities.has(capability)) {
+         const message = unavailableMessage(capability, bridge);
+         if (!options?.quiet) announce(message);
+         return { ok: false, error: { code: 'unsupported', message } };
+       }
+-      const result = await bridge.request(hostRequest);
++      let result: RequestResult;
++      try {
++        result = await bridge.request(hostRequest);
++      } catch (error) {
++        // A rejection is not a result: the caller gets a failure it can show, never a
++        // pending state that cannot end, and nothing is claimed about what the host did.
++        result = rejectedRequest(error);
++      }
+       if (!result.ok && !options?.quiet) announce(`${hostRequest.type} failed: ${result.error.message}`);
+       return result;
+     },
+diff --git a/editor/ui/src/styles/dialogs.css b/editor/ui/src/styles/dialogs.css
+index f37e591bebe56eb172fd2e05c460638217ba4ed0..384834506e569499a92bf5995f4a50f1afab44f8 100644
+--- a/editor/ui/src/styles/dialogs.css
++++ b/editor/ui/src/styles/dialogs.css
+@@ -1,4 +1,4 @@
+-/* Modal dialogs: keyboard shortcuts and the ChatGPT account. */
++/* Modal dialogs: keyboard shortcuts, the ChatGPT account and the engine pin review. */
+ 
+ .scrim {
+   position: fixed;
+@@ -314,3 +314,252 @@ kbd.shortcuts__combo {
+   font-size: var(--text-xs);
+   line-height: 17px;
+ }
++
++/* ---- Engine pin review ---- */
++
++/* The review in two lines of words, the rest of it on request, then the decision. No
++   cards: the checksums and file text sit in the dialog's own column. */
++.dialog--pin {
++  width: min(480px, calc(100vw - 48px));
++}
++
++.pin {
++  display: flex;
++  flex-direction: column;
++  gap: var(--space-4);
++  padding-top: var(--space-2);
++}
++
++.pin__summary {
++  display: flex;
++  flex-direction: column;
++  gap: 2px;
++}
++
++.pin__lead {
++  display: flex;
++  align-items: flex-start;
++  gap: var(--space-3);
++  color: var(--color-text-soft);
++  line-height: var(--leading);
++  overflow-wrap: anywhere;
++}
++
++.pin__lead > .spinner {
++  margin-top: 5px;
++}
++
++.pin__done {
++  flex: none;
++  margin-top: 3px;
++  color: var(--color-success);
++}
++
++.pin__name {
++  color: var(--color-text);
++  font-weight: var(--weight-medium);
++}
++
++code.pin__value {
++  color: var(--color-text);
++}
++
++.pin__note {
++  color: var(--color-text-muted);
++  font-size: var(--text-xs);
++  line-height: 17px;
++}
++
++/* "Review details": a quiet disclosure, as the agent's "Exact arguments". */
++.pin__details {
++  display: flex;
++  flex-direction: column;
++  align-items: flex-start;
++  gap: var(--space-3);
++}
++
++.pin__disclosure {
++  display: inline-flex;
++  align-items: center;
++  gap: 5px;
++  height: 22px;
++  margin-left: -4px;
++  padding: 0 6px 0 4px;
++  border: 0;
++  border-radius: var(--radius-sm);
++  background: transparent;
++  color: var(--color-text-muted);
++  font-size: var(--text-xs);
++  cursor: pointer;
++}
++
++.pin__disclosure:hover {
++  background: var(--color-bg-hover);
++  color: var(--color-text);
++}
++
++.pin__disclosure:focus-visible,
++.pin__disclosure[data-focus-visible] {
++  outline-offset: 0;
++}
++
++.pin__chevron {
++  color: var(--color-text-subtle);
++  transition: transform var(--duration-fast);
++}
++
++.pin__chevron.is-open {
++  transform: rotate(90deg);
++}
++
++.pin__detail-body {
++  align-self: stretch;
++  display: flex;
++  flex-direction: column;
++  align-items: flex-start;
++  gap: var(--space-3);
++}
++
++/* Labels in one column, values in the other, as in the Inspector. */
++.pin__facts {
++  align-self: stretch;
++  display: grid;
++  grid-template-columns: max-content minmax(0, 1fr);
++  gap: 4px var(--space-4);
++  margin: 0;
++  font-size: var(--text-xs);
++  line-height: 17px;
++}
++
++.pin__facts dt {
++  color: var(--color-text-muted);
++}
++
++.pin__facts dd {
++  margin: 0;
++  min-width: 0;
++  color: var(--color-text-soft);
++  overflow-wrap: anywhere;
++}
++
++.pin__hash {
++  word-break: break-all;
++}
++
++.pin__caption {
++  color: var(--color-text-muted);
++  font-size: var(--text-xs);
++  line-height: 17px;
++}
++
++.pin__size {
++  margin-left: 6px;
++  color: var(--color-text-subtle);
++  font-variant-numeric: tabular-nums;
++}
++
++/* The file the host would write: bounded and scrolling, wrapped so it never widens the dialog. */
++.pin__text {
++  align-self: stretch;
++  max-height: 200px;
++  margin: calc(-1 * var(--space-2)) 0 0;
++  padding: 6px var(--space-3);
++  overflow: auto;
++  overscroll-behavior: contain;
++  border-radius: var(--radius-sm);
++  background: var(--color-bg-well);
++  color: var(--color-text-soft);
++  font-family: var(--font-mono);
++  font-size: var(--text-xs);
++  line-height: 16px;
++  white-space: pre-wrap;
++  overflow-wrap: anywhere;
++}
++
++.pin__text:focus-visible,
++.pin__text[data-focus-visible] {
++  outline-offset: -2px;
++}
++
++.pin__more {
++  padding: 0;
++  border: 0;
++  border-radius: 3px;
++  background: none;
++  color: var(--color-text-muted);
++  font-size: var(--text-xs);
++  line-height: 16px;
++  cursor: pointer;
++}
++
++.pin__more:hover {
++  color: var(--color-text);
++  text-decoration: underline;
++  text-underline-offset: 2px;
++}
++
++.pin__more:focus-visible,
++.pin__more[data-focus-visible] {
++  outline-offset: 1px;
++}
++
++/* A refusal or an outdated review: the icon in its colour, the words in text colour. */
++.pin__problem {
++  display: flex;
++  align-items: flex-start;
++  gap: var(--space-3);
++  color: var(--color-text-soft);
++  font-size: var(--text-xs);
++  line-height: 17px;
++  overflow-wrap: anywhere;
++}
++
++.pin__problem strong {
++  color: var(--color-text);
++  font-weight: var(--weight-medium);
++}
++
++.pin__problem-icon {
++  flex: none;
++  margin-top: 1px;
++}
++
++.pin__problem--error .pin__problem-icon {
++  color: var(--color-danger);
++}
++
++.pin__problem--warning .pin__problem-icon {
++  color: var(--color-warning);
++}
++
++.pin__problem-text {
++  display: flex;
++  flex-direction: column;
++  gap: 2px;
++  min-width: 0;
++}
++
++.pin__code {
++  color: var(--color-text-subtle);
++}
++
++.pin__hint {
++  color: var(--color-text-muted);
++}
++
++/* In a notice the sentence's own emphasis leads; a name inside it stays plain. */
++.pin__problem .pin__name {
++  color: inherit;
++  font-weight: inherit;
++}
++
++.pin__actions {
++  display: flex;
++  justify-content: flex-end;
++  gap: var(--space-3);
++  margin-top: var(--space-2);
++}
++
++.pin__spinner {
++  margin-left: -2px;
++}
+diff --git a/editor/ui/src/styles/shell.css b/editor/ui/src/styles/shell.css
+index e2876fc2bbb811887311cf9111b7511c1a789d2f..1dde9f4c6d3b92c91027a07f8b2c40cd6c989a98 100644
+--- a/editor/ui/src/styles/shell.css
++++ b/editor/ui/src/styles/shell.css
+@@ -130,6 +130,59 @@ html.native-viewport .panel--viewport {
+   font-weight: var(--weight-medium);
+ }
+ 
++/* An open project's name is also its file menu's button: quiet until hovered, like the
++   Play target button, with the name in its usual weight and place after the logo. The
++   button truncates the name itself, so its focus ring is never clipped. */
++.titlebar__project--menu {
++  display: flex;
++  overflow: visible;
++}
++
++/* No percentage max-width: it would resolve against the heading's width, which already
++   counts the negative margin, and clip the name by that margin. min-width lets it shrink. */
++.titlebar__project-button {
++  display: inline-flex;
++  align-items: center;
++  gap: 5px;
++  min-width: 0;
++  height: 24px;
++  margin-left: -5px;
++  padding: 0 4px 0 5px;
++  border: 0;
++  border-radius: var(--radius-sm);
++  background: transparent;
++  letter-spacing: inherit;
++  cursor: pointer;
++  transition: background var(--duration-fast);
++}
++
++.titlebar__project-button:hover,
++.titlebar__project-button[aria-expanded='true'] {
++  background: var(--color-bg-hover);
++}
++
++.titlebar__project-name {
++  min-width: 0;
++  overflow: hidden;
++  text-overflow: ellipsis;
++  white-space: nowrap;
++}
++
++.titlebar__project-mark {
++  flex: none;
++  color: var(--color-text-subtle);
++}
++
++.titlebar__project-chevron {
++  transform: rotate(90deg);
++}
++
++/* The project file menu is fixed below its button; this wrapper only marks it as not a
++   drag area and takes no room in the row. */
++.titlebar__menu {
++  display: contents;
++}
++
+ /* "Project / Scene": the open scene, quieter than the project. */
+ .titlebar__scene {
+   flex: 0 1 auto;
+@@ -328,6 +381,21 @@ html.native-viewport .panel--viewport {
+   color: var(--color-text-muted);
+ }
+ 
++.notice__text {
++  min-width: 0;
++  overflow-wrap: anywhere;
++}
++
++/* Dismiss keeps the trailing edge, after the code when there is one. */
++.notice__dismiss {
++  flex: none;
++  margin: -2px -8px -2px auto;
++}
++
++.notice__code + .notice__dismiss {
++  margin-left: 0;
++}
++
+ /* ---- Workspace: panels joined edge to edge ---- */
+ 
+ .workspace {
+diff --git a/editor/ui/src/components/PinDialog.tsx b/editor/ui/src/components/PinDialog.tsx
+new file mode 100644
+index 0000000000000000000000000000000000000000..a4c2d28f9570ac4e07cfaf9dea579d4b76566373
+--- /dev/null
++++ b/editor/ui/src/components/PinDialog.tsx
+@@ -0,0 +1,334 @@
++import { useId, useLayoutEffect, useMemo, useRef, useState } from 'react';
++import type { KeyboardEvent, ReactNode } from 'react';
++import { Icon } from '../icons/Icon';
++import type { PinState } from '../projectFile/ProjectFileContext';
++import { useProjectFile } from '../projectFile/ProjectFileContext';
++import type { FileFailure, FileOperation, PinReview } from '../projectFile/model';
++import { CANDIDATE_PREVIEW, failureTitle, revisionText } from '../projectFile/model';
++import { reveal, sizeText, utf8Bytes } from './agent/agentText';
++
++const FOCUSABLE = 'button, [href], input, [tabindex="0"]';
++
++/**
++ * Review, then pin the open project to the current engine version. The dialog shows the
++ * host's review as returned: the requirement and the revision it was prepared at, with
++ * the command, review ID, file checksums and the resulting file text (plain text, never
++ * markup) on request. Pin sends only the review's ID. Nothing is chosen or applied by
++ * itself: the safe answer has focus, and a review that the project has moved past offers
++ * Review again instead of Pin. The review is named for the project it was requested
++ * for; if another project opens meanwhile, the dialog says so and shows nothing of the
++ * earlier one as current. Traps focus; Escape closes, and focus returns to the opener.
++ */
++export function PinDialog() {
++  const file = useProjectFile();
++  const { pin } = file;
++  const dialogRef = useRef<HTMLDivElement>(null);
++  const safeRef = useRef<HTMLButtonElement>(null);
++  const ids = useId();
++  const titleId = `${ids}-title`;
++  const leadId = `${ids}-lead`;
++  const project = file.pinProject?.name ?? null;
++
++  // Focus starts on the safe answer, and returns to it whenever the focused control goes
++  // away (Pin after it finishes, Review again while a review is prepared). It never moves
++  // onto Pin by itself.
++  useLayoutEffect(() => {
++    const dialog = dialogRef.current;
++    if (!dialog || (dialog.contains(document.activeElement) && document.activeElement !== dialog)) return;
++    safeRef.current?.focus();
++  }, [pin.status]);
++
++  const onKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
++    if (event.key === 'Escape') {
++      event.preventDefault();
++      file.closePin();
++      return;
++    }
++    if (event.key !== 'Tab') return;
++    const focusable = dialogRef.current?.querySelectorAll<HTMLElement>(FOCUSABLE);
++    if (!focusable || focusable.length === 0) return;
++    const first = focusable[0]!;
++    const last = focusable[focusable.length - 1]!;
++    if (event.shiftKey && (document.activeElement === first || document.activeElement === dialogRef.current)) {
++      event.preventDefault();
++      last.focus();
++    } else if (!event.shiftKey && document.activeElement === last) {
++      event.preventDefault();
++      first.focus();
++    }
++  };
++
++  const busy = pin.status === 'requesting' || pin.status === 'applying';
++  // Before a decision this dismisses the review; afterwards it only closes the dialog.
++  const settled = pin.status !== 'requesting' && pin.status !== 'ready' && pin.status !== 'stale';
++  const canReview = file.unavailable === null && file.busy === null;
++
++  return (
++    <div className="scrim" onMouseDown={file.closePin}>
++      <div
++        ref={dialogRef}
++        className="dialog dialog--pin"
++        role="dialog"
++        aria-modal="true"
++        aria-labelledby={titleId}
++        aria-describedby={leadId}
++        aria-busy={busy || undefined}
++        tabIndex={-1}
++        onKeyDown={onKeyDown}
++        onMouseDown={(event) => event.stopPropagation()}
++      >
++        {/* No close glyph: Cancel or Close is always in the footer, beside the decision. */}
++        <div className="dialog__header">
++          <h2 id={titleId} className="dialog__title">
++            Pin engine version
++          </h2>
++        </div>
++        <div className="dialog__body pin">
++          <PinBody pin={pin} project={project} now={file.openProject?.name ?? null} leadId={leadId} canReview={canReview} />
++          <div className="pin__actions">
++            <button ref={safeRef} type="button" className="button" onClick={file.closePin}>
++              {settled ? 'Close' : 'Cancel'}
++            </button>
++            <PrimaryAction pin={pin} canReview={canReview} onPin={file.applyPin} onReview={file.reviewAgain} />
++          </div>
++        </div>
++      </div>
++    </div>
++  );
++}
++
++function PinBody({
++  pin,
++  project,
++  now,
++  leadId,
++  canReview,
++}: {
++  pin: PinState;
++  /** The project the review was requested for. */
++  project: string | null;
++  /** The project open now. */
++  now: string | null;
++  leadId: string;
++  canReview: boolean;
++}) {
++  switch (pin.status) {
++    case 'closed':
++      return null;
++    case 'requesting':
++      return (
++        <div role="status">
++          <p id={leadId} className="pin__lead">
++            <span className="spinner spinner--small" aria-hidden="true" />
++            Preparing the review…
++          </p>
++        </div>
++      );
++    case 'refused':
++      return <Failure id={leadId} operation="review" failure={pin.failure} />;
++    case 'retired':
++      // Nothing of the earlier project is shown as current; a pin still in flight for it
++      // is said to be unknown here rather than guessed.
++      return (
++        <p id={leadId} className="pin__problem pin__problem--warning" role="alert">
++          <Icon name="warning" size={14} className="pin__problem-icon" />
++          <span>
++            {pin.reconnected ? (
++              <strong>
++                The editor reconnected to <ProjectName project={project} /> after this review was requested.
++              </strong>
++            ) : (
++              <>
++                <strong>
++                  <ProjectName project={project} /> is no longer the open project.
++                </strong>
++                {now !== null ? (
++                  <>
++                    {' '}
++                    <ProjectName project={now} /> is open now.
++                  </>
++                ) : null}
++              </>
++            )}
++            {pin.applying ? (
++              <>
++                {' '}
++                Whether <ProjectName project={project} /> was pinned is not shown here.
++              </>
++            ) : null}
++            {canReview ? ' Review again before pinning.' : ''}
++          </span>
++        </p>
++      );
++    case 'applied':
++      return (
++        <div role="status">
++          <p id={leadId} className="pin__lead">
++            <Icon name="check" size={14} className="pin__done" />
++            <span>
++              Pinned. <ProjectName project={project} /> now requires engine <code className="pin__value">{pin.review.command.requirement}</code>{' '}
++              (revision {revisionText(pin.receipt.revision)}).
++            </span>
++          </p>
++        </div>
++      );
++    default:
++      return (
++        <>
++          <div role="status">
++            <Summary id={leadId} review={pin.review} project={project} />
++          </div>
++          <ReviewDetails review={pin.review} />
++          {pin.status === 'stale' ? (
++            <p className="pin__problem pin__problem--warning" role="alert">
++              <Icon name="warning" size={14} className="pin__problem-icon" />
++              <span>
++                <strong>This review can no longer be used.</strong> {pin.reason}
++                {canReview ? ' Review again before pinning.' : ''}
++              </span>
++            </p>
++          ) : null}
++          {pin.status === 'failed' ? <Failure operation="apply" failure={pin.failure} hint="A new review is needed to try again." /> : null}
++        </>
++      );
++  }
++}
++
++/** The project's name as untrusted text, isolated so its direction cannot reorder the sentence. */
++function ProjectName({ project }: { project: string | null }) {
++  return project === null ? <>The project</> : <bdi className="pin__name">{reveal(project)}</bdi>;
++}
++
++function Summary({ id, review, project }: { id: string; review: PinReview; project: string | null }) {
++  return (
++    <div id={id} className="pin__summary">
++      <p className="pin__lead">
++        <span>
++          <ProjectName project={project} /> will require engine <code className="pin__value">{review.command.requirement}</code>.
++        </span>
++      </p>
++      <p className="pin__note">Reviewed at revision {revisionText(review.expected_revision)}. The project file changes only when you pin.</p>
++    </div>
++  );
++}
++
++/**
++ * The rest of the review, on request: the command and review ID, both checksums, and the
++ * file the host would write, as text. Long text waits for "Show all", as approval
++ * arguments do; hidden direction characters are shown as escapes.
++ */
++function ReviewDetails({ review }: { review: PinReview }) {
++  const [open, setOpen] = useState(false);
++  const [whole, setWhole] = useState(false);
++  const regionId = useId();
++  const captionId = useId();
++  const textRef = useRef<HTMLPreElement>(null);
++  const bytes = useMemo(() => utf8Bytes(review.candidate_text), [review.candidate_text]);
++  const shown = useMemo(() => {
++    if (!open) return null;
++    const full = review.candidate_text;
++    if (whole || full.length <= CANDIDATE_PREVIEW) return { text: reveal(full), truncated: false };
++    // Never end the preview inside a surrogate pair.
++    const cut = /[\uD800-\uDBFF]/.test(full.charAt(CANDIDATE_PREVIEW - 1)) ? CANDIDATE_PREVIEW - 1 : CANDIDATE_PREVIEW;
++    return { text: reveal(full.slice(0, cut)), truncated: true };
++  }, [open, whole, review.candidate_text]);
++  return (
++    <div className="pin__details">
++      <button type="button" className="pin__disclosure" aria-expanded={open} aria-controls={regionId} onClick={() => setOpen((value) => !value)}>
++        <Icon name="chevron" size={10} className={`pin__chevron${open ? ' is-open' : ''}`} />
++        Review details
++      </button>
++      {shown ? (
++        <div id={regionId} className="pin__detail-body">
++          <dl className="pin__facts">
++            <dt>Command</dt>
++            <dd className="mono">{review.command.op}</dd>
++            <dt>Review ID</dt>
++            <dd className="mono">{review.review_id}</dd>
++            <dt>Current SHA-256</dt>
++            <dd className="mono pin__hash">{review.source_sha256}</dd>
++            <dt>Pinned SHA-256</dt>
++            <dd className="mono pin__hash">{review.candidate_sha256}</dd>
++          </dl>
++          <p id={captionId} className="pin__caption">
++            Pinned file <span className="pin__size">{sizeText(bytes)}</span>
++          </p>
++          <pre ref={textRef} className="pin__text" tabIndex={0} aria-labelledby={captionId}>
++            {shown.text}
++          </pre>
++          {shown.truncated ? (
++            <button
++              type="button"
++              className="pin__more"
++              onClick={() => {
++                setWhole(true);
++                // The button goes; reading continues in the text rather than outside the dialog.
++                textRef.current?.focus();
++              }}
++            >
++              Show all {sizeText(bytes)}
++            </button>
++          ) : null}
++        </div>
++      ) : null}
++    </div>
++  );
++}
++
++/**
++ * A refusal in the host's own words, its code beside it, or a result nobody reported,
++ * titled as unknown. Never retried by itself.
++ */
++function Failure({ id, operation, failure, hint }: { id?: string; operation: FileOperation; failure: FileFailure; hint?: string }) {
++  return (
++    <div id={id} className="pin__problem pin__problem--error" role="alert">
++      <Icon name="error" size={14} className="pin__problem-icon" />
++      <span className="pin__problem-text">
++        <span>
++          <strong>{failureTitle(operation, failure)}</strong> {failure.message}
++        </span>
++        {failure.code !== null ? <span className="pin__code mono">{failure.code}</span> : null}
++        {/* Its own line: the host's words are shown as sent, with or without a full stop. */}
++        {hint ? <span className="pin__hint">{hint}</span> : null}
++      </span>
++    </div>
++  );
++}
++
++function PrimaryAction({
++  pin,
++  canReview,
++  onPin,
++  onReview,
++}: {
++  pin: PinState;
++  canReview: boolean;
++  onPin: () => void;
++  onReview: () => void;
++}): ReactNode {
++  const status = pin.status;
++  if (status === 'requesting' || status === 'ready' || status === 'applying') {
++    const waiting = status !== 'ready';
++    return (
++      <button
++        key="pin"
++        type="button"
++        className="button button--primary"
++        aria-disabled={waiting || undefined}
++        title={status === 'requesting' ? 'Waiting for the review' : undefined}
++        onClick={() => !waiting && onPin()}
++      >
++        {status === 'applying' ? <span className="spinner spinner--small pin__spinner" aria-hidden="true" /> : null}
++        {status === 'applying' ? 'Pinning…' : 'Pin'}
++      </button>
++    );
++  }
++  if ((status === 'stale' || status === 'refused' || status === 'failed' || status === 'retired') && canReview) {
++    return (
++      <button key="review" type="button" className="button" onClick={onReview}>
++        Review again
++      </button>
++    );
++  }
++  return null;
++}
+diff --git a/editor/ui/src/components/ProjectFile.test.tsx b/editor/ui/src/components/ProjectFile.test.tsx
+new file mode 100644
+index 0000000000000000000000000000000000000000..63ff9659dfa7860e4d146d097847cdf7ab05c86e
+--- /dev/null
++++ b/editor/ui/src/components/ProjectFile.test.tsx
+@@ -0,0 +1,838 @@
++import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
++import axe from 'axe-core';
++import { describe, expect, it } from 'vitest';
++import type { EngineRead, Invoke } from '../../../bridge/native';
++import { NativeBridge } from '../../../bridge/native';
++import { App } from '../App';
++import type { EditorBridge, WindowChrome } from '../bridge/contract';
++import { createFixtureBridge } from '../bridge/fixture';
++import { createNativePlayDouble, doubleRead } from '../test/nativePlayDouble';
++
++/**
++ * Save and the engine pin against the REAL NativeBridge class (editor/bridge/native.ts).
++ * Its Tauri commands are answered by a scripted TEST DOUBLE that holds each file request
++ * until the test answers it. Request wiring, revision checks and receipt validation are
++ * the production bridge's; every host answer is invented, so these are transport and UI
++ * tests. Nothing here writes or reads a project file.
++ */
++const PROJECT = '01ARZ3NDEKTSV4RRFFQ69G5FAX';
++const SCENE = '01ARZ3NDEKTSV4RRFFQ69G5FAV';
++const OTHER_PROJECT = '01ARZ3NDEKTSV4RRFFQ69G5FAW';
++const REVIEW = '01ARZ3NDEKTSV4RRFFQ69G5FAY';
++const SECOND_REVIEW = '01ARZ3NDEKTSV4RRFFQ69G5FB1';
++const PIN_TX = '01ARZ3NDEKTSV4RRFFQ69G5FAZ';
++const BEFORE = 'a1'.repeat(32);
++const AFTER = 'b2'.repeat(32);
++/** Untrusted text: markup and a hidden direction override must stay visible as text. */
++const CANDIDATE = '{\n  "engine_version": "=0.4.2",\n  "name": "Harbor <img src=x onerror=alert(1)>‮"\n}\n';
++
++/** An invented project with one user edit per revision. */
++function engine(revision: number, overrides: Partial<EngineRead> = {}): EngineRead {
++  const history = Array.from({ length: revision }, (_, index) => ({
++    id: `01ARZ3NDEKTSV4RRFFQ69H${String(index).padStart(4, '0')}`,
++    description: `Edit ${index + 1}`,
++    actor: { origin: 'user' as const, actor: 'editor', model: null, conversation_id: null },
++  }));
++  return {
++    project: { id: PROJECT, name: 'Harbor', scenes: { [SCENE]: { id: SCENE, name: 'Docks', entities: {} } } },
++    revision,
++    can_redo: false,
++    history,
++    applied: revision,
++    schemas: {},
++    console: [],
++    viewport_error: null,
++    project_file: { available: true },
++    ...overrides,
++  };
++}
++
++const reviewAt = (revision: number, id = REVIEW) => ({
++  operation: 'review_pin',
++  review: {
++    review_id: id,
++    expected_revision: revision,
++    source_sha256: BEFORE,
++    candidate_sha256: AFTER,
++    candidate_text: CANDIDATE,
++    command: { op: 'set_engine_version', requirement: '=0.4.2' },
++  },
++});
++const savedAt = (revision: number, changed: boolean) => ({
++  operation: 'save',
++  receipt: { revision, changed, source_sha256: BEFORE, candidate_sha256: changed ? AFTER : BEFORE },
++});
++
++const chrome = (platform: 'macos' | 'windows'): WindowChrome => ({
++  platform,
++  controls: platform === 'macos' ? 'native-overlay' : 'custom',
++  maximized: false,
++  fullscreen: false,
++  focused: true,
++  leadingInset: platform === 'macos' ? 78 : 0,
++  trailingInset: 0,
++});
++
++/** Lets every promise the host's answer settles run, then React commit. */
++const settle = () => act(async () => { await new Promise((done) => setTimeout(done, 0)); });
++
++interface FileCall {
++  readonly request: Record<string, unknown>;
++  /** Answers as the host does: the response and the read that follows it. */
++  answer(response: unknown, next?: EngineRead): Promise<void>;
++  /** Fails as the host does: Tauri rejects with the command's error text. */
++  refuse(error: unknown): Promise<void>;
++}
++
++/** One host connection: the real bridge over a double whose file requests wait for the test. */
++async function createHost(read: EngineRead, platform: 'macos' | 'windows' = 'macos') {
++  let current = read;
++  const files: FileCall[] = [];
++  const invoke: Invoke = <T,>(name: string, args?: Record<string, unknown>): Promise<T> => {
++    if (name === 'engine_read') return Promise.resolve(current as T);
++    if (name !== 'engine_project_file') return Promise.resolve(null as T);
++    return new Promise<T>((resolve, reject) => {
++      files.push({
++        request: args?.request as Record<string, unknown>,
++        answer: async (response, next = current) => {
++          current = next;
++          resolve({ response, snapshot: next } as T);
++          await settle();
++        },
++        refuse: async (error) => {
++          reject(error);
++          await settle();
++        },
++      });
++    });
++  };
++  const bridge = new NativeBridge(invoke);
++  await bridge.start();
++  bridge.updateWindow(chrome(platform));
++  /** Another edit, project or host change, published as the host's change event is. */
++  const publish = async (next: EngineRead) => {
++    current = next;
++    await act(async () => {
++      await bridge.start();
++    });
++  };
++  return { bridge, files, publish };
++}
++
++async function openEditor({ read = engine(3), platform = 'macos' }: { read?: EngineRead; platform?: 'macos' | 'windows' } = {}) {
++  const host = await createHost(read, platform);
++  const view = render(<App resolution={{ kind: 'bridge', bridge: host.bridge }} />);
++  return { ...host, view };
++}
++
++/** Another invented project, opened later in the same window. */
++const lighthouse = (revision = 7, overrides: Partial<EngineRead> = {}) =>
++  engine(revision, { project: { id: OTHER_PROJECT, name: 'Lighthouse', scenes: {} }, ...overrides });
++
++/**
++ * TEST DOUBLE: the same bridge, except that a request rejects with `next.error` once it is
++ * set, as a faulty bridge would, instead of resolving to a result.
++ */
++function rejecting(native: NativeBridge) {
++  const next: { error: unknown } = { error: undefined };
++  const bridge: EditorBridge = {
++    protocolVersion: native.protocolVersion,
++    get capabilities() {
++      return native.capabilities;
++    },
++    label: native.label,
++    isFixture: false,
++    getSnapshot: () => native.getSnapshot(),
++    subscribe: (listener) => native.subscribe(listener),
++    dispatch: (command) => native.dispatch(command),
++    request: (hostRequest) => {
++      const { error } = next;
++      if (error === undefined) return native.request(hostRequest);
++      next.error = undefined;
++      return Promise.reject(error);
++    },
++  };
++  return { bridge, next };
++}
++
++const projectButton = () => screen.getByRole('button', { name: /^Project: Harbor/ });
++const message = () => document.querySelector('.statusbar__message')?.textContent ?? '';
++const requests = (files: readonly FileCall[]) => files.map((call) => call.request);
++const openMenu = () => {
++  fireEvent.click(projectButton());
++  return screen.getByRole('menu', { name: 'Project file' });
++};
++const choose = (name: RegExp) => fireEvent.click(within(openMenu()).getByRole('menuitem', { name }));
++const pinDialog = () => screen.getByRole('dialog', { name: 'Pin engine version' });
++const footer = (name: string) => within(pinDialog()).getByRole('button', { name });
++const describedBy = (element: HTMLElement) =>
++  (element.getAttribute('aria-describedby') ?? '')
++    .split(' ')
++    .map((id) => document.getElementById(id)?.textContent ?? '')
++    .join(' ');
++const press = (init: KeyboardEventInit, target: Element = document.body) => fireEvent.keyDown(target, { key: 's', code: 'KeyS', ...init });
++
++async function expectNoAxeViolations(container: HTMLElement) {
++  // jsdom has no layout or computed colours; contrast is checked by tokens.test.ts and the browser review.
++  const results = await axe.run(container, { rules: { 'color-contrast': { enabled: false } } });
++  expect(results.violations.map((v) => `${v.id}: ${v.nodes.map((n) => n.target.join(' ')).join(', ')}`)).toEqual([]);
++}
++
++describe('project file menu', () => {
++  it('opens from the project name and saves through project.save, reporting the receipt', async () => {
++    const { files, view } = await openEditor();
++    const menu = openMenu();
++    expect(projectButton().getAttribute('aria-expanded')).toBe('true');
++    const items = within(menu).getAllByRole('menuitem');
++    expect(items.map((item) => item.textContent)).toEqual(['Save⌘S', 'Pin engine version…']);
++    expect(items.every((item) => item.getAttribute('aria-disabled') === null)).toBe(true);
++    await expectNoAxeViolations(view.container);
++
++    fireEvent.click(items[0]!);
++    expect(screen.queryByRole('menu')).toBeNull();
++    expect(document.activeElement).toBe(projectButton());
++    expect(requests(files)).toEqual([{ operation: 'save', expected_revision: 3 }]);
++    // While the host saves, the title says so and a second Save is the same request.
++    expect(projectButton().querySelector('.spinner')).not.toBeNull();
++    expect(projectButton().getAttribute('aria-label')).toBe('Project: Harbor, saving');
++    choose(/^Save/);
++    expect(press({ metaKey: true })).toBe(false);
++    expect(files).toHaveLength(1);
++
++    await files[0]!.answer(savedAt(3, true));
++    await waitFor(() => expect(message()).toBe('Saved revision 3 to the project file.'));
++    expect(projectButton().querySelector('.spinner')).toBeNull();
++
++    press({ metaKey: true });
++    expect(requests(files)).toEqual([{ operation: 'save', expected_revision: 3 }, { operation: 'save', expected_revision: 3 }]);
++    await files[1]!.answer(savedAt(3, false));
++    await waitFor(() => expect(message()).toBe('Nothing to save: the project file already matches revision 3.'));
++  });
++
++  it('says why it cannot save, without a request, on the sample fixture, an older host and with no engine', async () => {
++    const fixture = render(<App resolution={{ kind: 'bridge', bridge: createFixtureBridge('sample') }} />);
++    fireEvent.click(screen.getByRole('button', { name: /^Project: Dock Prototype/ }));
++    const reason = 'Project file access is unavailable: the sample fixture is read-only.';
++    for (const item of screen.getAllByRole('menuitem')) {
++      expect(item.getAttribute('aria-disabled')).toBe('true');
++      expect(item.textContent).toContain(`unavailable: ${reason}`);
++    }
++    fireEvent.click(screen.getByRole('menuitem', { name: /^Pin engine version/ }));
++    await waitFor(() => expect(message()).toBe(reason));
++    expect(screen.queryByRole('dialog')).toBeNull();
++    fixture.unmount();
++
++    const { files } = await openEditor({ read: engine(3, { project_file: { available: false } }), platform: 'windows' });
++    expect(press({ ctrlKey: true })).toBe(false);
++    await waitFor(() => expect(message()).toBe('Project file access is unavailable in this editor build (project.file).'));
++    choose(/^Save/);
++    expect(files).toEqual([]);
++  });
++
++  it('with no engine, the title is not a menu and the shortcut says why', async () => {
++    render(<App resolution={{ kind: 'none' }} />);
++    expect(screen.queryByRole('button', { name: /^Project:/ })).toBeNull();
++    expect(screen.getByRole('heading', { level: 1 }).textContent).toBe('No project open');
++    press({ ctrlKey: true });
++    await waitFor(() => expect(message()).toBe('Project file access is unavailable: no engine is connected.'));
++  });
++});
++
++describe('Save shortcut', () => {
++  it('is ⌘S on macOS, from anywhere outside a dialog, text fields included', async () => {
++    const { files } = await openEditor({ platform: 'macos' });
++    // Not Save on macOS: Control+S, Save As, Option (a different character) and a held key.
++    expect(press({ ctrlKey: true })).toBe(true);
++    expect(press({ metaKey: true, shiftKey: true })).toBe(true);
++    expect(press({ metaKey: true, altKey: true, key: 'ß' })).toBe(true);
++    expect(press({ metaKey: true, repeat: true })).toBe(false);
++    expect(files).toEqual([]);
++
++    const filter = screen.getByRole('searchbox', { name: 'Filter hierarchy by name' });
++    filter.focus();
++    expect(press({ metaKey: true }, filter)).toBe(false);
++    expect(requests(files)).toEqual([{ operation: 'save', expected_revision: 3 }]);
++    expect(document.activeElement).toBe(filter);
++    await files[0]!.answer(savedAt(3, false));
++  });
++
++  it('is Ctrl+S on Windows and Linux, by the S key on a layout without Latin letters', async () => {
++    const { files } = await openEditor({ platform: 'windows' });
++    expect(press({ metaKey: true })).toBe(true);
++    // AltGr arrives as Ctrl+Alt and types a character.
++    expect(press({ ctrlKey: true, altKey: true, key: 'ś' })).toBe(true);
++    expect(files).toEqual([]);
++    expect(press({ ctrlKey: true, key: 'ы' })).toBe(false);
++    expect(requests(files)).toEqual([{ operation: 'save', expected_revision: 3 }]);
++    await files[0]!.answer(savedAt(3, true));
++    expect(press({ ctrlKey: true, key: 'S' })).toBe(false);
++    expect(files).toHaveLength(2);
++    await files[1]!.answer(savedAt(3, false));
++  });
++
++  it('is taken but does nothing while a dialog is open, and is listed with the shortcuts', async () => {
++    const { files } = await openEditor({ platform: 'windows' });
++    fireEvent.click(screen.getByRole('button', { name: 'Keyboard shortcuts' }));
++    const shortcuts = screen.getByRole('dialog', { name: 'Keyboard shortcuts' });
++    expect(within(shortcuts).getByRole('cell', { name: 'General Save the project Ctrl S' })).toBeTruthy();
++    expect(press({ ctrlKey: true }, within(shortcuts).getByRole('searchbox'))).toBe(false);
++    expect(files).toEqual([]);
++    expect(screen.getByRole('dialog', { name: 'Keyboard shortcuts' })).toBeTruthy();
++  });
++
++  it('leaves Ctrl+S to the focused game on Windows and Linux, and keeps ⌘S the editor’s on macOS', async () => {
++    for (const platform of ['windows', 'macos'] as const) {
++      const files: unknown[] = [];
++      const double = createNativePlayDouble({ read: { ...doubleRead('single', {}), project_file: { available: true } }, window: chrome(platform) });
++      const invoke: Invoke = <T,>(name: string, args?: Record<string, unknown>) => {
++        if (name !== 'engine_project_file') return double.invoke<T>(name, args);
++        files.push(args?.request);
++        return new Promise<T>(() => undefined);
++      };
++      const bridge = new NativeBridge(invoke);
++      await bridge.startEngineUpdates(double.listen);
++      await bridge.refreshPlay();
++      bridge.updateWindow(chrome(platform));
++      const view = render(<App resolution={{ kind: 'bridge', bridge }} />);
++      const header = document.querySelector<HTMLElement>('.panel--viewport > .panel__header')!;
++      fireEvent.click(within(header).getByRole('button', { name: 'Play' }));
++      await waitFor(() => expect(double.status().phase).toBe('running'));
++      double.frame();
++      await act(async () => {
++        await bridge.refreshPlay();
++      });
++      const host = document.querySelector<HTMLElement>('[data-viewport-host]')!;
++      await waitFor(() => expect(host.getAttribute('aria-label')).toBe('Game view'));
++      fireEvent.pointerDown(host, { button: 0, pointerType: 'mouse', clientX: 30, clientY: 40 });
++      expect(document.activeElement).toBe(host);
++      await waitFor(() => expect(double.inputs.flatMap((packet) => packet.events)).toContainEqual({ type: 'focus', focused: true }));
++
++      expect(press(platform === 'macos' ? { metaKey: true } : { ctrlKey: true }, host)).toBe(false);
++      const keys = () => double.inputs.flatMap((packet) => packet.events).filter((event) => event.type === 'key');
++      if (platform === 'windows') {
++        await waitFor(() => expect(keys()).toContainEqual({ type: 'key', code: 'KeyS', down: true }));
++        expect(files).toEqual([]);
++      } else {
++        expect(files).toEqual([{ operation: 'save', expected_revision: 41 }]);
++        await new Promise((done) => setTimeout(done, 60));
++        expect(keys()).not.toContainEqual({ type: 'key', code: 'KeyS', down: true });
++      }
++      view.unmount();
++    }
++  });
++});
++
++describe('failed saves', () => {
++  it('stay in view in the host’s words until dismissed or a later save succeeds', async () => {
++    const { files } = await openEditor({ platform: 'windows' });
++    press({ ctrlKey: true });
++    // Tauri rejects with the native error's text; the bridge keeps it as written.
++    await files[0]!.refuse('The project file changed outside the editor.');
++    const region = screen.getByRole('region', { name: 'Project status' });
++    const alert = within(region).getByRole('alert');
++    expect(alert.textContent).toContain('Save failed. The project file changed outside the editor.');
++    expect(alert.textContent).toContain('engine.request');
++    expect(message()).not.toMatch(/Saved/);
++
++    const dismiss = within(alert).getByRole('button', { name: 'Dismiss' });
++    dismiss.focus();
++    fireEvent.click(dismiss);
++    expect(screen.queryByRole('region', { name: 'Project status' })).toBeNull();
++    expect(document.activeElement).toBe(projectButton());
++
++    press({ ctrlKey: true });
++    await files[1]!.refuse({ code: 'engine.request', message: 'Wait for the current engine operation.' });
++    expect(within(screen.getByRole('region', { name: 'Project status' })).getByRole('alert').textContent).toContain('Wait for the current engine operation.');
++    press({ ctrlKey: true });
++    expect(requests(files)).toHaveLength(3);
++    await files[2]!.answer(savedAt(3, true));
++    await waitFor(() => expect(message()).toBe('Saved revision 3 to the project file.'));
++    expect(screen.queryByRole('region', { name: 'Project status' })).toBeNull();
++  });
++
++  it('a receipt the bridge cannot verify is a failure, never a save', async () => {
++    const { files } = await openEditor();
++    press({ metaKey: true });
++    // The production bridge refuses a receipt for a revision it did not send.
++    await files[0]!.answer(savedAt(9, true));
++    const alert = within(screen.getByRole('region', { name: 'Project status' })).getByRole('alert');
++    expect(alert.textContent).toContain('Save failed. Invalid project file response.');
++    expect(message()).not.toMatch(/Saved/);
++  });
++
++  it('a success without its receipt is reported as unknown, never as saved', async () => {
++    // TEST DOUBLE: a host that answers ok but returns no typed receipt.
++    const bridge: EditorBridge = {
++      ...createFixtureBridge('sample'),
++      isFixture: false,
++      label: 'Test double',
++      capabilities: ['project.file'],
++      request: () => Promise.resolve({ ok: true }),
++    };
++    render(<App resolution={{ kind: 'bridge', bridge }} />);
++    press({ ctrlKey: true });
++    const region = await screen.findByRole('region', { name: 'Project status' });
++    expect(within(region).getByRole('alert').textContent).toContain(
++      'Save result unknown. The host reported success but returned no save receipt.',
++    );
++    expect(message()).not.toMatch(/Saved/);
++  });
++});
++
++describe('engine pin review', () => {
++  it('shows the host’s review, pins with only its review ID, and returns focus', async () => {
++    const { files, view } = await openEditor();
++    choose(/^Pin engine version/);
++    const dialog = pinDialog();
++    expect(requests(files)).toEqual([{ operation: 'review_pin', expected_revision: 3 }]);
++    expect(describedBy(dialog)).toBe('Preparing the review…');
++    expect(footer('Pin').getAttribute('aria-disabled')).toBe('true');
++    // The safe answer has focus, never Pin.
++    expect(document.activeElement).toBe(footer('Cancel'));
++    await expectNoAxeViolations(view.container);
++
++    await files[0]!.answer(reviewAt(3));
++    expect(describedBy(dialog)).toBe('Harbor will require engine =0.4.2.Reviewed at revision 3. The project file changes only when you pin.');
++    expect(footer('Pin').getAttribute('aria-disabled')).toBeNull();
++    expect(document.activeElement).toBe(footer('Cancel'));
++
++    fireEvent.click(within(dialog).getByRole('button', { name: 'Review details' }));
++    const facts = [...dialog.querySelectorAll('.pin__facts dt, .pin__facts dd')].map((cell) => cell.textContent);
++    expect(facts).toEqual(['Command', 'set_engine_version', 'Review ID', REVIEW, 'Current SHA-256', BEFORE, 'Pinned SHA-256', AFTER]);
++    const text = within(dialog).getByLabelText(/^Pinned file/);
++    expect(text.tagName).toBe('PRE');
++    expect(text.textContent).toBe(CANDIDATE.replace('‮', '\\u202E'));
++    expect(dialog.querySelector('img')).toBeNull();
++    await expectNoAxeViolations(view.container);
++
++    fireEvent.click(footer('Pin'));
++    fireEvent.click(footer('Pinning…'));
++    expect(requests(files)).toEqual([
++      { operation: 'review_pin', expected_revision: 3 },
++      { operation: 'apply_pin', expected_revision: 3, review_id: REVIEW },
++    ]);
++    expect(footer('Pinning…').getAttribute('aria-disabled')).toBe('true');
++    expect(footer('Close')).toBeTruthy();
++
++    await files[1]!.answer({ operation: 'apply_pin', transaction_id: PIN_TX, revision: 4 }, engine(4));
++    expect(describedBy(dialog)).toBe('Pinned. Harbor now requires engine =0.4.2 (revision 4).');
++    expect(within(dialog).queryByRole('button', { name: /^Pin/ })).toBeNull();
++    expect(document.activeElement).toBe(footer('Close'));
++
++    fireEvent.keyDown(document.activeElement!, { key: 'Escape' });
++    expect(screen.queryByRole('dialog')).toBeNull();
++    expect(document.activeElement).toBe(projectButton());
++    expect(files).toHaveLength(2);
++  });
++
++  it('keeps keyboard focus inside the dialog and closes on Escape', async () => {
++    const { files } = await openEditor();
++    const button = projectButton();
++    button.focus();
++    fireEvent.click(button);
++    const item = within(screen.getByRole('menu')).getByRole('menuitem', { name: 'Save' });
++    expect(document.activeElement).toBe(item);
++    fireEvent.keyDown(item, { key: 'ArrowDown' });
++    fireEvent.keyDown(document.activeElement!, { key: 'Enter' });
++    const dialog = pinDialog();
++    await files[0]!.answer(reviewAt(3));
++    const details = within(dialog).getByRole('button', { name: 'Review details' });
++    const pin = footer('Pin');
++    pin.focus();
++    fireEvent.keyDown(pin, { key: 'Tab' });
++    expect(document.activeElement).toBe(details);
++    fireEvent.keyDown(details, { key: 'Tab', shiftKey: true });
++    expect(document.activeElement).toBe(pin);
++    fireEvent.keyDown(pin, { key: 'Escape' });
++    expect(screen.queryByRole('dialog')).toBeNull();
++    expect(document.activeElement).toBe(button);
++    expect(requests(files)).toEqual([{ operation: 'review_pin', expected_revision: 3 }]);
++  });
++
++  it('retires a review the project has moved past and asks for a fresh one, never reusing the old ID', async () => {
++    const { files, publish } = await openEditor();
++    choose(/^Pin engine version/);
++    await files[0]!.answer(reviewAt(3));
++    footer('Pin');
++
++    // An Undo elsewhere (revision 4)...
++    await publish({ ...engine(3), revision: 4, applied: 2, can_redo: true });
++    const dialog = pinDialog();
++    expect(within(dialog).getByRole('alert').textContent).toBe(
++      'This review can no longer be used. The project changed after this review. Review again before pinning.',
++    );
++    expect(within(dialog).queryByRole('button', { name: 'Pin' })).toBeNull();
++    // ...and a Redo (revision 5) return History to exactly what was reviewed. That does
++    // not revive the review: the revision has still moved on.
++    await publish({ ...engine(3), revision: 5 });
++    expect(within(dialog).queryByRole('button', { name: 'Pin' })).toBeNull();
++    expect(within(dialog).getByRole('alert').textContent).toContain('The project changed after this review.');
++
++    fireEvent.click(footer('Review again'));
++    expect(document.activeElement).toBe(footer('Cancel'));
++    await files[1]!.answer(reviewAt(5, SECOND_REVIEW));
++    fireEvent.click(footer('Pin'));
++    expect(requests(files)).toEqual([
++      { operation: 'review_pin', expected_revision: 3 },
++      { operation: 'review_pin', expected_revision: 5 },
++      { operation: 'apply_pin', expected_revision: 5, review_id: SECOND_REVIEW },
++    ]);
++  });
++
++  it('retires the review when another project opens or file access is withdrawn', async () => {
++    const other = await openEditor();
++    choose(/^Pin engine version/);
++    await other.files[0]!.answer(reviewAt(3));
++    await other.publish(engine(3, { project: { id: OTHER_PROJECT, name: 'Lighthouse', scenes: {} } }));
++    expect(within(pinDialog()).getByRole('alert').textContent).toBe(
++      'Harbor is no longer the open project. Lighthouse is open now. Review again before pinning.',
++    );
++    expect(within(pinDialog()).queryByRole('button', { name: 'Pin' })).toBeNull();
++    other.view.unmount();
++
++    const withdrawn = await openEditor();
++    choose(/^Pin engine version/);
++    await withdrawn.files[0]!.answer(reviewAt(3));
++    await withdrawn.publish(engine(3, { project_file: { available: false } }));
++    const dialog = pinDialog();
++    expect(within(dialog).getByRole('alert').textContent).toBe(
++      'This review can no longer be used. Project file access is unavailable in this editor build (project.file).',
++    );
++    expect(within(dialog).queryByRole('button', { name: /^(Pin|Review again)$/ })).toBeNull();
++    expect(withdrawn.files).toHaveLength(1);
++  });
++
++  it('shows a refused review and a refused pin in the host’s words, and never retries by itself', async () => {
++    const { files, view } = await openEditor();
++    choose(/^Pin engine version/);
++    await files[0]!.refuse('engine pin review applies only to a legacy project without an engine declaration');
++    const dialog = pinDialog();
++    const refusal = within(dialog).getByRole('alert');
++    expect(refusal.textContent).toBe(
++      'The review could not be prepared. engine pin review applies only to a legacy project without an engine declarationengine.request',
++    );
++    expect(describedBy(dialog)).toBe(refusal.textContent);
++    expect(within(dialog).queryByRole('button', { name: 'Pin' })).toBeNull();
++    await expectNoAxeViolations(view.container);
++    await new Promise((done) => setTimeout(done, 60));
++    expect(files).toHaveLength(1);
++
++    fireEvent.click(footer('Review again'));
++    await files[1]!.answer(reviewAt(3));
++    fireEvent.click(footer('Pin'));
++    await files[2]!.refuse('document revision conflict: expected 3, current 4');
++    expect(within(dialog).getByRole('alert').textContent).toBe(
++      'The engine pin was not applied. document revision conflict: expected 3, current 4engine.requestA new review is needed to try again.',
++    );
++    expect(within(dialog).queryByRole('button', { name: 'Pin' })).toBeNull();
++    expect(document.activeElement).toBe(footer('Close'));
++    await new Promise((done) => setTimeout(done, 60));
++    expect(requests(files).map((request) => request.operation)).toEqual(['review_pin', 'review_pin', 'apply_pin']);
++  });
++
++  it('reports a pin that finishes after its dialog closed', async () => {
++    const { files } = await openEditor();
++    choose(/^Pin engine version/);
++    await files[0]!.answer(reviewAt(3));
++    fireEvent.click(footer('Pin'));
++    fireEvent.keyDown(pinDialog(), { key: 'Escape' });
++    expect(screen.queryByRole('dialog')).toBeNull();
++    // The menu waits for the pin; it does not start a second request.
++    choose(/^Save/);
++    await waitFor(() => expect(message()).toBe('The engine pin is being applied.'));
++    await files[1]!.refuse('project source conflict');
++    const alert = within(screen.getByRole('region', { name: 'Project status' })).getByRole('alert');
++    expect(alert.textContent).toContain('The engine pin was not applied. project source conflict');
++
++    choose(/^Pin engine version/);
++    await files[2]!.answer(reviewAt(3));
++    fireEvent.click(footer('Pin'));
++    fireEvent.click(footer('Close'));
++    await files[3]!.answer({ operation: 'apply_pin', transaction_id: PIN_TX, revision: 4 }, engine(4));
++    await waitFor(() => expect(message()).toBe('Pinned to engine =0.4.2 at revision 4.'));
++    expect(screen.queryByRole('region', { name: 'Project status' })).toBeNull();
++  });
++
++  it('sends one file request at a time and drops a review whose dialog was closed', async () => {
++    const { files } = await openEditor();
++    press({ metaKey: true });
++    openMenu();
++    const pin = screen.getByRole('menuitem', { name: /^Pin engine version/ });
++    expect(pin.textContent).toContain('unavailable: The project is being saved.');
++    fireEvent.click(pin);
++    expect(screen.queryByRole('dialog')).toBeNull();
++    await files[0]!.answer(savedAt(3, false));
++
++    choose(/^Pin engine version/);
++    fireEvent.keyDown(pinDialog(), { key: 'Escape' });
++    press({ metaKey: true });
++    await waitFor(() => expect(message()).toBe('An engine pin review is in progress.'));
++    expect(requests(files).map((request) => request.operation)).toEqual(['save', 'review_pin']);
++    await files[1]!.answer(reviewAt(3));
++    expect(screen.queryByRole('dialog')).toBeNull();
++    press({ metaKey: true });
++    expect(requests(files).map((request) => request.operation)).toEqual(['save', 'review_pin', 'save']);
++    await files[2]!.answer(savedAt(3, false));
++  });
++});
++
++describe('answers that arrive after another project opened', () => {
++  it('drops a Save answer when another project opens while it is pending', async () => {
++    const { files, publish } = await openEditor();
++    press({ metaKey: true });
++    expect(projectButton().querySelector('.spinner')).not.toBeNull();
++
++    await publish(lighthouse());
++    // The project open now has no request of its own: no spinner, and its Save is free.
++    const title = screen.getByRole('button', { name: /^Project: Lighthouse/ });
++    expect(title.getAttribute('aria-label')).toBe('Project: Lighthouse');
++    expect(title.querySelector('.spinner')).toBeNull();
++
++    // The host answers Harbor's save with its current read (Lighthouse's); the bridge
++    // refuses that pairing. Neither that nor a host refusal is reported in Lighthouse.
++    await files[0]!.answer(savedAt(3, true));
++    await new Promise((done) => setTimeout(done, 60));
++    expect(message()).toBe('');
++    expect(screen.queryByRole('region', { name: 'Project status' })).toBeNull();
++
++    press({ metaKey: true });
++    expect(requests(files)).toEqual([
++      { operation: 'save', expected_revision: 3 },
++      { operation: 'save', expected_revision: 7 },
++    ]);
++    await files[1]!.answer(savedAt(7, false));
++    await waitFor(() => expect(message()).toBe('Nothing to save: the project file already matches revision 7.'));
++  });
++
++  it('drops a Save receipt or refusal when the host connection is replaced while it is pending', async () => {
++    const harbor = await createHost(engine(3));
++    const other = await createHost(lighthouse());
++    const view = render(<App resolution={{ kind: 'bridge', bridge: harbor.bridge }} />);
++    press({ metaKey: true });
++    view.rerender(<App resolution={{ kind: 'bridge', bridge: other.bridge }} />);
++    expect(screen.getByRole('button', { name: /^Project: Lighthouse/ }).querySelector('.spinner')).toBeNull();
++
++    // Harbor's host saves and sends a valid receipt; it is not Lighthouse's.
++    await harbor.files[0]!.answer(savedAt(3, true));
++    await new Promise((done) => setTimeout(done, 60));
++    expect(message()).toBe('');
++    expect(screen.queryByRole('region', { name: 'Project status' })).toBeNull();
++
++    // The same for a refusal that arrives late.
++    press({ metaKey: true });
++    view.rerender(<App resolution={{ kind: 'bridge', bridge: harbor.bridge }} />);
++    await other.files[0]!.refuse('The project file changed outside the editor.');
++    await new Promise((done) => setTimeout(done, 60));
++    expect(screen.queryByRole('region', { name: 'Project status' })).toBeNull();
++    expect(message()).toBe('');
++    expect(requests(harbor.files)).toEqual([{ operation: 'save', expected_revision: 3 }]);
++    expect(requests(other.files)).toEqual([{ operation: 'save', expected_revision: 7 }]);
++  });
++
++  it('shows a pin still in flight for a project that is no longer open as unknown, never as the open one’s', async () => {
++    const { files, publish } = await openEditor();
++    choose(/^Pin engine version/);
++    await files[0]!.answer(reviewAt(3));
++    fireEvent.click(footer('Pin'));
++    expect(requests(files).at(-1)).toEqual({ operation: 'apply_pin', expected_revision: 3, review_id: REVIEW });
++
++    await publish(lighthouse());
++    const dialog = pinDialog();
++    expect(within(dialog).getByRole('alert').textContent).toBe(
++      'Harbor is no longer the open project. Lighthouse is open now. Whether Harbor was pinned is not shown here. Review again before pinning.',
++    );
++    expect(describedBy(dialog)).toBe(within(dialog).getByRole('alert').textContent);
++    expect(within(dialog).queryByRole('button', { name: /^(Pin|Pinning…)$/ })).toBeNull();
++    expect(dialog.textContent).not.toContain('will require engine');
++
++    // The host answers for Harbor with Lighthouse's read; nothing of it reaches Lighthouse.
++    await files[1]!.answer({ operation: 'apply_pin', transaction_id: PIN_TX, revision: 4 });
++    await new Promise((done) => setTimeout(done, 60));
++    expect(dialog.textContent).not.toMatch(/Pinned|not applied|unknown\./);
++    expect(message()).toBe('');
++    expect(screen.queryByRole('region', { name: 'Project status' })).toBeNull();
++
++    fireEvent.click(footer('Review again'));
++    expect(requests(files).at(-1)).toEqual({ operation: 'review_pin', expected_revision: 7 });
++    await files[2]!.answer(reviewAt(7, SECOND_REVIEW));
++    expect(describedBy(dialog)).toBe('Lighthouse will require engine =0.4.2.Reviewed at revision 7. The project file changes only when you pin.');
++    fireEvent.click(footer('Pin'));
++    expect(requests(files).at(-1)).toEqual({ operation: 'apply_pin', expected_revision: 7, review_id: SECOND_REVIEW });
++  });
++
++  it('does not report, in the project open now, a pin answered after its dialog closed', async () => {
++    // Same connection, another project: Harbor's pin is refused late, as the bridge refuses
++    // an answer paired with Lighthouse's read.
++    const same = await openEditor();
++    choose(/^Pin engine version/);
++    await same.files[0]!.answer(reviewAt(3));
++    fireEvent.click(footer('Pin'));
++    fireEvent.click(footer('Close'));
++    expect(screen.queryByRole('dialog')).toBeNull();
++    await same.publish(lighthouse());
++    await same.files[1]!.answer({ operation: 'apply_pin', transaction_id: PIN_TX, revision: 4 });
++    await new Promise((done) => setTimeout(done, 60));
++    expect(screen.queryByRole('region', { name: 'Project status' })).toBeNull();
++    expect(message()).toBe('');
++    same.view.unmount();
++
++    // A replaced connection: Harbor's host pins and answers with a valid receipt.
++    const harbor = await createHost(engine(3));
++    const other = await createHost(lighthouse());
++    const view = render(<App resolution={{ kind: 'bridge', bridge: harbor.bridge }} />);
++    choose(/^Pin engine version/);
++    await harbor.files[0]!.answer(reviewAt(3));
++    fireEvent.click(footer('Pin'));
++    fireEvent.click(footer('Close'));
++    view.rerender(<App resolution={{ kind: 'bridge', bridge: other.bridge }} />);
++    await harbor.files[1]!.answer({ operation: 'apply_pin', transaction_id: PIN_TX, revision: 4 }, engine(4));
++    await new Promise((done) => setTimeout(done, 60));
++    expect(message()).toBe('');
++    expect(screen.queryByRole('region', { name: 'Project status' })).toBeNull();
++    expect(other.files).toEqual([]);
++  });
++
++  it('cannot apply an earlier connection’s review once the host connection is replaced', async () => {
++    const harbor = await createHost(engine(3));
++    const other = await createHost(lighthouse());
++    const view = render(<App resolution={{ kind: 'bridge', bridge: harbor.bridge }} />);
++    choose(/^Pin engine version/);
++    await harbor.files[0]!.answer(reviewAt(3));
++    expect(footer('Pin').getAttribute('aria-disabled')).toBeNull();
++
++    view.rerender(<App resolution={{ kind: 'bridge', bridge: other.bridge }} />);
++    const dialog = pinDialog();
++    expect(within(dialog).getByRole('alert').textContent).toBe(
++      'Harbor is no longer the open project. Lighthouse is open now. Review again before pinning.',
++    );
++    expect(within(dialog).queryByRole('button', { name: 'Pin' })).toBeNull();
++
++    // A reconnection to the same project is said as such; its review still cannot be used.
++    const again = await createHost(engine(3));
++    fireEvent.keyDown(dialog, { key: 'Escape' });
++    view.rerender(<App resolution={{ kind: 'bridge', bridge: harbor.bridge }} />);
++    choose(/^Pin engine version/);
++    await harbor.files[1]!.answer(reviewAt(3, SECOND_REVIEW));
++    view.rerender(<App resolution={{ kind: 'bridge', bridge: again.bridge }} />);
++    expect(within(pinDialog()).getByRole('alert').textContent).toBe(
++      'The editor reconnected to Harbor after this review was requested. Review again before pinning.',
++    );
++    expect(within(pinDialog()).queryByRole('button', { name: 'Pin' })).toBeNull();
++
++    fireEvent.click(footer('Review again'));
++    expect(requests(again.files)).toEqual([{ operation: 'review_pin', expected_revision: 3 }]);
++    // No review was ever applied, on any connection.
++    for (const host of [harbor, other, again]) expect(requests(host.files).some((request) => request.operation === 'apply_pin')).toBe(false);
++  });
++});
++
++describe('requests that reject instead of answering', () => {
++  it('Save: an unknown result in the rejection’s own words and code, and the request slot freed', async () => {
++    const native = (await createHost(engine(3))).bridge;
++    const { bridge, next } = rejecting(native);
++    render(<App resolution={{ kind: 'bridge', bridge }} />);
++
++    next.error = new Error('IPC channel closed');
++    press({ metaKey: true });
++    const region = await screen.findByRole('region', { name: 'Project status' });
++    expect(within(region).getByRole('alert').textContent).toBe('Save result unknown. IPC channel closedrequest.rejectedDismiss');
++    expect(projectButton().querySelector('.spinner')).toBeNull();
++    expect(projectButton().getAttribute('aria-label')).toBe('Project: Harbor');
++    expect(message()).not.toMatch(/Saved/);
++
++    next.error = { code: 'host.closed', message: 'The editor process exited.' };
++    press({ metaKey: true });
++    await waitFor(() =>
++      expect(within(screen.getByRole('region', { name: 'Project status' })).getByRole('alert').textContent).toBe(
++        // A structured rejection keeps its own code and words, and is still no result.
++        'Save result unknown. The editor process exited.host.closedDismiss',
++      ),
++    );
++  });
++
++  it('review and pin: leave their pending state with a failure, never a success', async () => {
++    const host = await createHost(engine(3));
++    const { bridge, next } = rejecting(host.bridge);
++    render(<App resolution={{ kind: 'bridge', bridge }} />);
++
++    next.error = 'Bridge transport closed';
++    choose(/^Pin engine version/);
++    const dialog = pinDialog();
++    await waitFor(() => expect(within(dialog).getByRole('alert').textContent).toBe('No review was returned. Bridge transport closedrequest.rejected'));
++    expect(dialog.getAttribute('aria-busy')).toBeNull();
++    expect(dialog.querySelector('.spinner')).toBeNull();
++    expect(host.files).toEqual([]);
++
++    fireEvent.click(footer('Review again'));
++    await host.files[0]!.answer(reviewAt(3));
++    next.error = new TypeError('Failed to fetch');
++    fireEvent.click(footer('Pin'));
++    await waitFor(() =>
++      expect(within(dialog).getByRole('alert').textContent).toBe(
++        'Engine pin result unknown. Failed to fetchrequest.rejectedA new review is needed to try again.',
++      ),
++    );
++    expect(within(dialog).queryByRole('button', { name: /^(Pin|Pinning…)$/ })).toBeNull();
++    expect(dialog.getAttribute('aria-busy')).toBeNull();
++    expect(document.activeElement).toBe(footer('Close'));
++    // The rejected pin never reached the host, and nothing claims it was applied.
++    expect(requests(host.files)).toEqual([{ operation: 'review_pin', expected_revision: 3 }]);
++    expect(dialog.textContent).not.toContain('Pinned');
++
++    // The slot is free again: a save goes out.
++    fireEvent.keyDown(dialog, { key: 'Escape' });
++    press({ metaKey: true });
++    expect(requests(host.files).at(-1)).toEqual({ operation: 'save', expected_revision: 3 });
++    await host.files[1]!.answer(savedAt(3, false));
++  });
++
++  it('a structured transport rejection keeps its code and message, and never says the pin was not applied', async () => {
++    const host = await createHost(engine(3));
++    const { bridge, next } = rejecting(host.bridge);
++    render(<App resolution={{ kind: 'bridge', bridge }} />);
++    const closed = { code: 'host.closed', message: 'The editor process exited.' };
++
++    next.error = closed;
++    choose(/^Pin engine version/);
++    const dialog = pinDialog();
++    await waitFor(() => expect(within(dialog).getByRole('alert').textContent).toBe('No review was returned. The editor process exited.host.closed'));
++
++    fireEvent.click(footer('Review again'));
++    await host.files[0]!.answer(reviewAt(3));
++    next.error = closed;
++    fireEvent.click(footer('Pin'));
++    await waitFor(() =>
++      expect(within(dialog).getByRole('alert').textContent).toBe(
++        'Engine pin result unknown. The editor process exited.host.closedA new review is needed to try again.',
++      ),
++    );
++    expect(dialog.textContent).not.toContain('was not applied');
++    expect(within(dialog).queryByRole('button', { name: /^(Pin|Pinning…)$/ })).toBeNull();
++
++    // With the dialog closed first, the notice says the same.
++    fireEvent.click(footer('Review again'));
++    await host.files[1]!.answer(reviewAt(3));
++    next.error = closed;
++    fireEvent.click(footer('Pin'));
++    fireEvent.click(footer('Close'));
++    const region = await screen.findByRole('region', { name: 'Project status' });
++    expect(within(region).getByRole('alert').textContent).toBe('Engine pin result unknown. The editor process exited.host.closedDismiss');
++    expect(requests(host.files).map((request) => request.operation)).toEqual(['review_pin', 'review_pin']);
++  });
++
++  it('a host’s resolved refusal stays definite, even with the editor’s own rejection code', async () => {
++    // TEST DOUBLE: a host that answers with a failure result (no rejection) whose code
++    // happens to be the one the editor gives rejections without a code.
++    const bridge: EditorBridge = {
++      ...createFixtureBridge('sample'),
++      isFixture: false,
++      label: 'Test double',
++      capabilities: ['project.file'],
++      request: () => Promise.resolve({ ok: false, error: { code: 'request.rejected', message: 'The host refused this save.' } }),
++    };
++    render(<App resolution={{ kind: 'bridge', bridge }} />);
++    press({ ctrlKey: true });
++    const region = await screen.findByRole('region', { name: 'Project status' });
++    expect(within(region).getByRole('alert').textContent).toBe('Save failed. The host refused this save.request.rejectedDismiss');
++  });
++});
+diff --git a/editor/ui/src/components/ProjectMenu.tsx b/editor/ui/src/components/ProjectMenu.tsx
+new file mode 100644
+index 0000000000000000000000000000000000000000..df33e41f67bda7c240c6e9b41a566304b9f80814
+--- /dev/null
++++ b/editor/ui/src/components/ProjectMenu.tsx
+@@ -0,0 +1,101 @@
++import { useRef, useState } from 'react';
++import { Icon } from '../icons/Icon';
++import { useProjectFile } from '../projectFile/ProjectFileContext';
++import { BUSY_REASON } from '../projectFile/model';
++import type { FileOperation } from '../projectFile/model';
++import { useShell } from '../shell/ShellContext';
++import type { MenuItem } from './Menu';
++import { ContextMenu } from './Menu';
++import { comboText, usePlatform } from './ShortcutsDialog';
++
++/** Spoken after the project's name while a file request runs. */
++const BUSY_WORDS: Readonly<Record<FileOperation, string>> = {
++  save: 'saving',
++  review: 'preparing an engine pin review',
++  apply: 'pinning the engine version',
++};
++
++/**
++ * The project's name in the titlebar: the page's heading until a project is open, then
++ * also the button for the project file's menu (Save, and Pin engine version, which
++ * reviews first). Items the host does not offer stay listed, marked unavailable, and say
++ * why when chosen. The menu sits outside the window's drag area.
++ */
++export function ProjectTitle({ name, ready }: { name: string; ready: boolean }) {
++  if (!ready) {
++    return (
++      <h1 className="titlebar__project is-pending" title={name}>
++        {name}
++      </h1>
++    );
++  }
++  return <ProjectMenu name={name} />;
++}
++
++function ProjectMenu({ name }: { name: string }) {
++  const file = useProjectFile();
++  const { announce } = useShell();
++  const platform = usePlatform();
++  const button = useRef<HTMLButtonElement>(null);
++  const [at, setAt] = useState<{ x: number; y: number } | null>(null);
++  const blocked = file.unavailable ?? (file.busy ? BUSY_REASON[file.busy] : undefined);
++  const items: MenuItem[] = [
++    {
++      id: 'save',
++      label: 'Save',
++      icon: 'save',
++      shortcut: comboText(['Mod', 'S'], platform),
++      unavailable: blocked,
++      onSelect: file.save,
++    },
++    {
++      id: 'pin',
++      label: 'Pin engine version…',
++      icon: 'pin',
++      unavailable: blocked,
++      onSelect: () => file.openPin(button.current),
++    },
++  ];
++  const open = () => {
++    const rect = button.current?.getBoundingClientRect();
++    if (rect) setAt({ x: rect.left, y: rect.bottom + 4 });
++  };
++  return (
++    <>
++      <h1 className="titlebar__project titlebar__project--menu" title={name}>
++        <button
++          ref={button}
++          type="button"
++          className="titlebar__project-button"
++          aria-haspopup="menu"
++          aria-expanded={at !== null}
++          aria-label={`Project: ${name}${file.busy ? `, ${BUSY_WORDS[file.busy]}` : ''}`}
++          onClick={() => (at ? setAt(null) : open())}
++        >
++          <span className="titlebar__project-name">{name}</span>
++          {file.busy ? (
++            <span className="spinner spinner--small titlebar__project-mark" aria-hidden="true" />
++          ) : (
++            <Icon name="chevron" size={12} className="titlebar__project-mark titlebar__project-chevron" />
++          )}
++        </button>
++      </h1>
++      {at ? (
++        // Not a drag area: a press on an item must not move the window.
++        <div className="titlebar__menu" data-no-drag="">
++          <ContextMenu
++            label="Project file"
++            items={items}
++            at={at}
++            onClose={(restore) => {
++              setAt(null);
++              if (restore) button.current?.focus();
++            }}
++            onUnavailable={announce}
++            anchor={button}
++          />
++        </div>
++      ) : null}
++    </>
++  );
++}
+diff --git a/editor/ui/src/projectFile/ProjectFileContext.tsx b/editor/ui/src/projectFile/ProjectFileContext.tsx
+new file mode 100644
+index 0000000000000000000000000000000000000000..b8d382cca95311fdfe623d7a5cbd7739cd35cd44
+--- /dev/null
++++ b/editor/ui/src/projectFile/ProjectFileContext.tsx
+@@ -0,0 +1,301 @@
++import { createContext, useCallback, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
++import type { ReactNode } from 'react';
++import type { BridgeSnapshot, EditorBridge } from '../bridge/contract';
++import { useShell } from '../shell/ShellContext';
++import type { FileFailure, FileOperation, PinReceipt, PinReview, ReviewBasis } from './model';
++import {
++  BUSY_REASON,
++  MISSING_RECEIPT,
++  failureTitle,
++  fileUnavailable,
++  requestFailure,
++  revisionText,
++  reviewBasis,
++  savedWords,
++  staleReason,
++} from './model';
++
++/** An open project as the titlebar names it. */
++export interface OpenProject {
++  readonly id: string;
++  readonly name: string;
++}
++
++/** The engine pin dialog, from its review request to the outcome of applying it. */
++export type PinState =
++  | { readonly status: 'closed' }
++  | { readonly status: 'requesting' }
++  | { readonly status: 'refused'; readonly failure: FileFailure }
++  | { readonly status: 'ready'; readonly review: PinReview; readonly basis: ReviewBasis }
++  | { readonly status: 'stale'; readonly review: PinReview; readonly reason: string }
++  | { readonly status: 'applying'; readonly review: PinReview }
++  | { readonly status: 'applied'; readonly review: PinReview; readonly receipt: PinReceipt }
++  | { readonly status: 'failed'; readonly review: PinReview; readonly failure: FileFailure }
++  /**
++   * The host connection or the open project changed after the dialog was opened. Nothing
++   * requested before is applied, shown or reported here; `applying` says a pin was still
++   * in flight, so its result is unknown here.
++   */
++  | { readonly status: 'retired'; readonly applying: boolean; readonly reconnected: boolean };
++
++/** A failure no dialog is showing. It stays until dismissed or superseded, in its own project. */
++export interface FileNotice {
++  readonly operation: 'save' | 'pin';
++  readonly title: string;
++  readonly failure: FileFailure;
++}
++
++export interface ProjectFile {
++  /** Why Save and Pin cannot be requested now, or null. */
++  readonly unavailable: string | null;
++  /** The open project's request in flight. There is never more than one. */
++  readonly busy: FileOperation | null;
++  readonly save: () => void;
++  readonly pin: PinState;
++  /** The project the dialog's review was requested for; it labels the review. */
++  readonly pinProject: OpenProject | null;
++  /** The project open now. */
++  readonly openProject: OpenProject | null;
++  readonly openPin: (from: HTMLElement | null) => void;
++  readonly closePin: () => void;
++  readonly reviewAgain: () => void;
++  readonly applyPin: () => void;
++  readonly notice: FileNotice | null;
++  readonly dismissNotice: () => void;
++}
++
++const ProjectFileContext = createContext<ProjectFile | null>(null);
++
++const openProjectOf = (snapshot: BridgeSnapshot | null | undefined): OpenProject | null =>
++  snapshot?.connection.status === 'ready' ? { id: snapshot.connection.project.id, name: snapshot.connection.project.name } : null;
++
++/**
++ * The host connection and project that requests belong to. A new object whenever the
++ * bridge is replaced or a different project is read; a project that is only reloading or
++ * failed does not end it. Requests compare it by identity when their answers arrive.
++ */
++interface Scope {
++  readonly bridge: EditorBridge | null;
++  readonly project: string | null;
++}
++
++interface Run {
++  readonly operation: FileOperation;
++  readonly scope: Scope;
++}
++
++/**
++ * Save and the engine pin, through the host's existing `project.save`,
++ * `project.pin.review` and `project.pin.apply` requests only. The editor never writes a
++ * file or a document itself, sends one request at a time, never retries on its own, and
++ * reports only what the host's receipt says, to the project that asked: an answer that
++ * arrives after another project (or another host connection) opened is dropped. A review
++ * is applied only by its own ID and only while nothing the editor can see has changed
++ * since it was requested; the host checks the same review, revision and file again
++ * before it writes.
++ */
++export function ProjectFileProvider({ children }: { children: ReactNode }) {
++  const { bridge, snapshot, capabilities, request, announce } = useShell();
++  const unavailable = fileUnavailable(bridge, snapshot, capabilities);
++  const openProject = useMemo(() => openProjectOf(snapshot), [snapshot]);
++
++  const [scope, setScope] = useState<Scope>(() => ({ bridge, project: openProjectOf(bridge?.getSnapshot())?.id ?? null }));
++  const scopeRef = useRef(scope);
++  // Read synchronously, so a second request in the same event cannot start.
++  const running = useRef<Run | null>(null);
++  const [busy, setBusy] = useState<FileOperation | null>(null);
++  const [notice, setNotice] = useState<FileNotice | null>(null);
++  const [pin, setPin] = useState<PinState>({ status: 'closed' });
++  const [pinFor, setPinFor] = useState<{ readonly scope: Scope; readonly project: OpenProject | null } | null>(null);
++  // The dialog's current request. Closing it or asking again retires an earlier answer.
++  const ticket = useRef(0);
++  const opener = useRef<HTMLElement | null>(null);
++
++  // Observed on every publish, which comes before the bridge resolves the request it
++  // answers, so a late answer is always compared with the project open by then.
++  useLayoutEffect(() => {
++    const observe = () => {
++      const project = openProjectOf(bridge?.getSnapshot())?.id ?? null;
++      const seen = scopeRef.current;
++      if (seen.bridge === bridge && (project === null || project === seen.project)) return;
++      const next: Scope = { bridge, project: project ?? (seen.bridge === bridge ? seen.project : null) };
++      scopeRef.current = next;
++      // The newly open project has no request of its own yet, and no earlier failure.
++      running.current = null;
++      setBusy(null);
++      setNotice(null);
++      setScope(next);
++    };
++    observe();
++    return bridge?.subscribe(observe);
++  }, [bridge]);
++
++  const begin = (operation: FileOperation): Run => {
++    const run = { operation, scope: scopeRef.current };
++    running.current = run;
++    setBusy(operation);
++    return run;
++  };
++  const end = (run: Run) => {
++    if (running.current !== run) return;
++    running.current = null;
++    setBusy(null);
++  };
++  /** An answer belongs to the scope it was requested in, or to nothing shown now. */
++  const belongs = (run: Run) => run.scope === scopeRef.current;
++
++  const save = useCallback(async () => {
++    if (unavailable !== null) {
++      announce(unavailable);
++      return;
++    }
++    if (running.current !== null) {
++      // A second Save while one runs is the same request; anything else says what runs.
++      if (running.current.operation !== 'save') announce(BUSY_REASON[running.current.operation]);
++      return;
++    }
++    const run = begin('save');
++    try {
++      const result = await request({ type: 'project.save' }, { quiet: true });
++      if (!belongs(run)) return;
++      if (result.ok && result.projectFile?.operation === 'save') {
++        announce(savedWords(result.projectFile.receipt));
++        setNotice((current) => (current?.operation === 'save' ? null : current));
++        return;
++      }
++      const failure = result.ok ? MISSING_RECEIPT.save : requestFailure(result);
++      setNotice({ operation: 'save', title: failureTitle('save', failure), failure });
++    } finally {
++      end(run);
++    }
++  }, [announce, request, unavailable]);
++
++  const requestReview = useCallback(async () => {
++    if (running.current !== null) return;
++    const id = ++ticket.current;
++    setPinFor({ scope: scopeRef.current, project: openProjectOf(bridge?.getSnapshot()) });
++    if (unavailable !== null) {
++      setPin({ status: 'refused', failure: { message: unavailable, code: null, unknown: false } });
++      return;
++    }
++    const run = begin('review');
++    setPin({ status: 'requesting' });
++    // Taken from the same publish whose read's revision the bridge sends with the request.
++    // The snapshot itself has no revision, so the basis is its History mark (model.ts).
++    const basis = reviewBasis(bridge?.getSnapshot() ?? null);
++    try {
++      const result = await request({ type: 'project.pin.review' }, { quiet: true });
++      // A closed dialog, a newer request or another project retires this answer; the host
++      // keeps only its latest review in any case.
++      if (id !== ticket.current || !belongs(run)) return;
++      if (result.ok && result.projectFile?.operation === 'review_pin' && basis !== null) {
++        setPin({ status: 'ready', review: result.projectFile.review, basis });
++      } else if (result.ok && result.projectFile?.operation === 'review_pin') {
++        setPin({ status: 'refused', failure: { message: 'The project was not open when the review was requested.', code: null, unknown: false } });
++      } else {
++        setPin({ status: 'refused', failure: result.ok ? MISSING_RECEIPT.review : requestFailure(result) });
++      }
++    } finally {
++      end(run);
++    }
++  }, [bridge, request, unavailable]);
++
++  const openPin = useCallback(
++    (from: HTMLElement | null) => {
++      if (unavailable !== null) {
++        announce(unavailable);
++        return;
++      }
++      if (running.current !== null) {
++        announce(BUSY_REASON[running.current.operation]);
++        return;
++      }
++      opener.current = from;
++      void requestReview();
++    },
++    [announce, requestReview, unavailable],
++  );
++
++  const closePin = useCallback(() => {
++    ticket.current += 1;
++    setPin({ status: 'closed' });
++    setPinFor(null);
++    const target = opener.current;
++    opener.current = null;
++    // The opener can be gone (the project closed while the dialog was open).
++    if (target?.isConnected) target.focus();
++    else document.querySelector<HTMLElement>('.titlebar__project-button')?.focus();
++  }, []);
++
++  // A dialog opened for another connection or project shows nothing of it as current.
++  const retired = pin.status !== 'closed' && pin.status !== 'retired' && pinFor !== null && pinFor.scope !== scope;
++  const reconnected = pinFor !== null && scope.project !== null && pinFor.scope.project === scope.project;
++  // Anything the editor can see that changes after a review retires it for good: History
++  // that returns to an identical mark has still been through other revisions.
++  const changed = !retired && pin.status === 'ready' ? staleReason(pin.basis, reviewBasis(snapshot), unavailable) : null;
++  useEffect(() => {
++    if (retired) setPin({ status: 'retired', applying: pin.status === 'applying', reconnected });
++    else if (pin.status === 'ready' && changed !== null) setPin({ status: 'stale', review: pin.review, reason: changed });
++  }, [retired, reconnected, pin, changed]);
++  const shownPin = useMemo<PinState>(() => {
++    if (retired) return { status: 'retired', applying: pin.status === 'applying', reconnected };
++    if (pin.status === 'ready' && changed !== null) return { status: 'stale', review: pin.review, reason: changed };
++    return pin;
++  }, [retired, reconnected, pin, changed]);
++
++  const applyPin = useCallback(async () => {
++    if (pin.status !== 'ready' || retired || changed !== null || running.current !== null) return;
++    const { review } = pin;
++    const id = ticket.current;
++    const run = begin('apply');
++    setPin({ status: 'applying', review });
++    try {
++      // Only the review's own ID: the host applies its retained review, never a payload from here.
++      const result = await request({ type: 'project.pin.apply', reviewId: review.review_id }, { quiet: true });
++      // The pin belonged to a project that is no longer open: nothing is said about it here.
++      if (!belongs(run)) return;
++      const shown = id === ticket.current;
++      if (result.ok && result.projectFile?.operation === 'apply_pin') {
++        const receipt = result.projectFile;
++        setNotice((current) => (current?.operation === 'pin' ? null : current));
++        // The open dialog says it; a closed one leaves it to the status line.
++        if (shown) setPin({ status: 'applied', review, receipt });
++        else announce(`Pinned to engine ${review.command.requirement} at revision ${revisionText(receipt.revision)}.`);
++        return;
++      }
++      const failure = result.ok ? MISSING_RECEIPT.apply : requestFailure(result);
++      if (shown) setPin({ status: 'failed', review, failure });
++      else setNotice({ operation: 'pin', title: failureTitle('apply', failure), failure });
++    } finally {
++      end(run);
++    }
++  }, [announce, changed, pin, request, retired]);
++
++  const reviewAgain = useCallback(() => void requestReview(), [requestReview]);
++  const dismissNotice = useCallback(() => setNotice(null), []);
++
++  const value = useMemo<ProjectFile>(
++    () => ({
++      unavailable,
++      busy,
++      save: () => void save(),
++      pin: shownPin,
++      pinProject: pinFor?.project ?? null,
++      openProject,
++      openPin,
++      closePin,
++      reviewAgain,
++      applyPin: () => void applyPin(),
++      notice,
++      dismissNotice,
++    }),
++    [unavailable, busy, save, shownPin, pinFor, openProject, openPin, closePin, reviewAgain, applyPin, notice, dismissNotice],
++  );
++  return <ProjectFileContext.Provider value={value}>{children}</ProjectFileContext.Provider>;
++}
++
++export function useProjectFile(): ProjectFile {
++  const value = useContext(ProjectFileContext);
++  if (!value) throw new Error('useProjectFile must be used inside ProjectFileProvider');
++  return value;
++}
+diff --git a/editor/ui/src/projectFile/model.ts b/editor/ui/src/projectFile/model.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..3713d6cd5a5b96218d202a7d105eb42ea758d6c3
+--- /dev/null
++++ b/editor/ui/src/projectFile/model.ts
+@@ -0,0 +1,124 @@
++/**
++ * Project Save and engine pin: what the editor may say about them, read only from the
++ * bridge snapshot and the host's typed receipts (editor/bridge/contract.ts,
++ * ProjectFileResponse). Pure functions with no bridge calls. Host messages are shown as
++ * written and never parsed into a cause or a promise.
++ */
++import type { BridgeSnapshot, EditorBridge, HistoryState, ProjectFileResponse } from '../bridge/contract';
++import type { CapabilitySet } from '../bridge/resolve';
++import { unavailableMessage } from '../bridge/resolve';
++import { projectState } from '../shell/projectState';
++import type { RequestResult } from '../shell/requests';
++import { wasRejected } from '../shell/requests';
++
++export type PinReview = Extract<ProjectFileResponse, { readonly operation: 'review_pin' }>['review'];
++export type SaveReceipt = Extract<ProjectFileResponse, { readonly operation: 'save' }>['receipt'];
++export type PinReceipt = Extract<ProjectFileResponse, { readonly operation: 'apply_pin' }>;
++
++/** One host request at a time: the host itself refuses a second while one runs. */
++export type FileOperation = 'save' | 'review' | 'apply';
++
++/** Why a request cannot start while another runs, in the words of the one running. */
++export const BUSY_REASON: Readonly<Record<FileOperation, string>> = {
++  save: 'The project is being saved.',
++  review: 'An engine pin review is in progress.',
++  apply: 'The engine pin is being applied.',
++};
++
++/** Why Save and Pin cannot be requested now, or null when the host offers them. */
++export function fileUnavailable(bridge: EditorBridge | null, snapshot: BridgeSnapshot | null, capabilities: CapabilitySet): string | null {
++  if (!bridge) return unavailableMessage('project.file', null);
++  const project = projectState(snapshot);
++  if (project.kind === 'loading') return 'Wait for the project to open.';
++  if (project.kind === 'failed') return project.projectError ? 'The project could not be opened.' : 'Lost connection to the editor process.';
++  return capabilities.has('project.file') ? null : unavailableMessage('project.file', bridge);
++}
++
++/** The open document a review was prepared from, as far as the snapshot shows it. */
++export interface ReviewBasis {
++  readonly project: string;
++  readonly history: string;
++}
++
++/**
++ * The snapshot carries no project revision. Each revision step in the command bus
++ * (crates/incant_cmd/src/lib.rs: commit, undo, redo, remote merge) pushes or pops a
++ * History transaction, which moves the applied position or the transaction IDs at either
++ * end, so this mark changes with it. An undo and redo that both land between two reads
++ * look unchanged here; the host's own revision check still refuses that review.
++ */
++function historyMark(history: HistoryState): string {
++  const { entries, applied } = history;
++  return `${applied}/${entries.length}/${entries[applied - 1]?.transaction ?? ''}/${entries.at(-1)?.transaction ?? ''}`;
++}
++
++export function reviewBasis(snapshot: BridgeSnapshot | null): ReviewBasis | null {
++  if (snapshot?.connection.status !== 'ready') return null;
++  return { project: snapshot.connection.project.id, history: historyMark(snapshot.history) };
++}
++
++/**
++ * Why a review can no longer be applied, or null while nothing the editor can see has
++ * changed since it was requested. Null is not a promise: the host checks the review's
++ * identity, revision and file again when it applies.
++ */
++export function staleReason(basis: ReviewBasis, now: ReviewBasis | null, unavailable: string | null): string | null {
++  if (unavailable !== null) return unavailable;
++  if (now === null) return 'The project is not open.';
++  if (now.project !== basis.project) return 'A different project is open now.';
++  if (now.history !== basis.history) return 'The project changed after this review.';
++  return null;
++}
++
++/** Revisions are counts: grouped for reading, never abbreviated. */
++export const revisionText = (revision: number) => revision.toLocaleString('en-US');
++
++/** What a save receipt says, and no more: the file was written, or already matched. */
++export function savedWords(receipt: SaveReceipt): string {
++  return receipt.changed
++    ? `Saved revision ${revisionText(receipt.revision)} to the project file.`
++    : `Nothing to save: the project file already matches revision ${revisionText(receipt.revision)}.`;
++}
++
++/** A failure as shown: the host's message and code exactly, or the editor's own words with no code. */
++export interface FileFailure {
++  readonly message: string;
++  readonly code: string | null;
++  /**
++   * Nothing says whether the host acted: the request's promise rejected, so no result
++   * arrived, or the host reported success without its receipt. Shown as an unknown
++   * result, not a failure.
++   */
++  readonly unknown: boolean;
++}
++
++/**
++ * A failed request as shown, its code and message exactly as they came. Unknown exactly
++ * when `Shell.request` caught a rejected promise, whatever was thrown; a host's own
++ * failure answer is definite, whatever its code.
++ */
++export const requestFailure = (result: Extract<RequestResult, { readonly ok: false }>): FileFailure => ({
++  message: result.error.message,
++  code: result.error.code,
++  unknown: wasRejected(result),
++});
++
++/** A success that arrived without its typed receipt is not reported as a success. */
++export const MISSING_RECEIPT: Readonly<Record<FileOperation, FileFailure>> = {
++  save: { code: null, unknown: true, message: 'The host reported success but returned no save receipt.' },
++  review: { code: null, unknown: true, message: 'The host reported success but returned no review.' },
++  apply: { code: null, unknown: true, message: 'The host reported success but returned no pin receipt.' },
++};
++
++/** How each outcome is titled: a refusal the host reported, or a result nobody reported. */
++const FAILURE_TITLE: Readonly<Record<FileOperation, { readonly refused: string; readonly unknown: string }>> = {
++  save: { refused: 'Save failed.', unknown: 'Save result unknown.' },
++  review: { refused: 'The review could not be prepared.', unknown: 'No review was returned.' },
++  apply: { refused: 'The engine pin was not applied.', unknown: 'Engine pin result unknown.' },
++};
++
++export const failureTitle = (operation: FileOperation, failure: FileFailure) =>
++  failure.unknown ? FAILURE_TITLE[operation].unknown : FAILURE_TITLE[operation].refused;
++
++/** Candidate text beyond this many characters waits for an explicit "Show all", as approval arguments do. */
++export const CANDIDATE_PREVIEW = 64 * 1024;
+diff --git a/editor/ui/src/shell/requests.ts b/editor/ui/src/shell/requests.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..1aeaf338faa1aec52e57b9833bed63963f86f8a2
+--- /dev/null
++++ b/editor/ui/src/shell/requests.ts
+@@ -0,0 +1,37 @@
++import type { BridgeError, BridgeResult } from '../bridge/contract';
++
++/**
++ * The editor's own code for a host request whose promise rejected with no code of its own.
++ * Bridges report failures as results, so a rejection says only that no result arrived:
++ * not whether the host acted.
++ */
++export const REQUEST_REJECTED = 'request.rejected';
++
++/**
++ * Marks a failure the editor made itself, in `Shell.request`'s catch, for a request whose
++ * promise rejected. A symbol, so no host answer, IPC payload or code can carry it.
++ */
++const REJECTED: unique symbol = Symbol('request rejected');
++
++/** A request whose promise rejected: the error as thrown, and no result from the host. */
++export interface RejectedRequest {
++  readonly ok: false;
++  readonly error: BridgeError;
++  readonly [REJECTED]: true;
++}
++
++/** What `Shell.request` resolves to: the bridge's own result, or a rejected request. */
++export type RequestResult = BridgeResult | RejectedRequest;
++
++/** The failure for a rejected request: the thrown error's own code and message when it has them, else its text. */
++export function rejectedRequest(error: unknown): RejectedRequest {
++  if (typeof error === 'object' && error !== null) {
++    const { code, message } = error as { readonly code?: unknown; readonly message?: unknown };
++    if (typeof code === 'string' && typeof message === 'string') return { ok: false, error: { code, message }, [REJECTED]: true };
++  }
++  const detail = typeof error === 'string' ? error : error instanceof Error ? error.message : '';
++  return { ok: false, error: { code: REQUEST_REJECTED, message: detail.trim() || 'The request ended without a result.' }, [REJECTED]: true };
++}
++
++/** True only for a failure `Shell.request` made from a rejected promise, never from a host's answer. */
++export const wasRejected = (result: RequestResult): result is RejectedRequest => REJECTED in result;

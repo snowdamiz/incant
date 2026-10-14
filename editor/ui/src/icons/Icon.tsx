@@ -60,6 +60,9 @@ const PATHS = {
   stop: 'M4 4h8v8H4z',
   refresh: 'M13 8a5 5 0 01-8.6 3.5M3 8a5 5 0 018.6-3.5M11.5 2v2.6H8.9M4.5 14v-2.6h2.6',
   pencil: 'M10.25 3.25l2.5 2.5L6 12.5H3.5V10zM8.75 4.75l2.5 2.5',
+  // Project file menu: a disk for Save, a pushpin for pinning the engine version.
+  save: 'M2.5 2.5h8.25l2.75 2.75v8.25h-11zM5 2.5v3h5v-3M5 13.5v-4h6v4',
+  pin: 'M5.5 2.5h5M6.5 2.5V6L4.5 9h7l-2-3V2.5M8 9v4.5',
   trash: 'M3 4.5h10M6.5 4.5V3h3v1.5M4.5 4.5l.75 9h5.5l.75-9M6.75 7v4.25M9.25 7v4.25',
   // Component marks for Inspector section headers.
   move: 'M8 2v12M2 8h12M6.25 3.75L8 2l1.75 1.75M6.25 12.25L8 14l1.75-1.75M3.75 6.25L2 8l1.75 1.75M12.25 6.25L14 8l-1.75 1.75',

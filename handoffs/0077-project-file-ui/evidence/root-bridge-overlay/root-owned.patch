@@ -1,0 +1,96 @@
+diff --git a/editor/bridge/contract.ts b/editor/bridge/contract.ts
+index 6be3508dbed66e2231075db96fa63e48b9e7d810..fe484232d10bb8e884d72947b71664166c72e92c 100644
+--- a/editor/bridge/contract.ts
++++ b/editor/bridge/contract.ts
+@@ -490,7 +490,13 @@ export interface AssetImportCommit {
+ 
+ export type BridgeResult =
+   | { readonly ok: true; readonly projectFile?: ProjectFileResponse; readonly assetImport?: AssetImportCommit; readonly playEntity?: PlayEntity; readonly agentTurnId?: number }
+-  | { readonly ok: false; readonly error: BridgeError };
++  | {
++      readonly ok: false;
++      readonly error: BridgeError;
++      /** Local transport metadata: no verified completion arrived after dispatch.
++       * The host may have acted. Preserve the error without inferring rollback. */
++      readonly outcomeUnknown?: true;
++    };
+ 
+ export interface EditorBridge {
+   readonly protocolVersion: number;
+diff --git a/editor/bridge/native.generated.js b/editor/bridge/native.generated.js
+index 9b561fe3bf5d7a6f0dd04cdcd16c0393fe6f47c3..78fa92952b55eeb074ae3ebcf8b688d3c0a14491 100644
+--- a/editor/bridge/native.generated.js
++++ b/editor/bridge/native.generated.js
+@@ -1689,7 +1689,13 @@ class NativeBridge {
+             };
+         } catch (error) {
+             await this.start();
+-            return failure(error);
++            // A rejected invocation or an unverifiable receipt is not proof that the
++            // file stayed unchanged. The host can commit before the reply/read fails.
++            // Keep its exact error, refresh state, and never repeat the write here.
++            return {
++                ...failure(error),
++                outcomeUnknown: true
++            };
+         } finally{
+             this.pending = false;
+         }
+diff --git a/editor/bridge/native.project-file.test.ts b/editor/bridge/native.project-file.test.ts
+index 99f7ef580bb8d10c0aeefd6f499a681fc836f343..cf170a087f9222e3a01e4bf2929ca0e4fe6dbae4 100644
+--- a/editor/bridge/native.project-file.test.ts
++++ b/editor/bridge/native.project-file.test.ts
+@@ -71,3 +71,28 @@ it('rejects duplicate pending requests and refreshes actual host state after fai
+   expect(calls).toBe(2);
+   rejectFile('another refusal'); await next;
+ });
++
++it.each(['invalid receipt', 'rejected reply'] as const)('does not infer rollback after a committed pin and %s', async (kind) => {
++  let current = read();
++  let writes = 0;
++  const original = {code:'transport.closed', message:'The reply channel closed.'};
++  const bridge = new NativeBridge(async <T>(name: string) => {
++    if (name === 'engine_read') return current as T;
++    expect(name).toBe('engine_project_file');
++    ++writes;
++    // The host committed, but the caller cannot verify its completion receipt.
++    current = {...read(), revision:1};
++    if (kind === 'rejected reply') throw original;
++    return {snapshot:current, response:{operation:'apply_pin', transaction_id:'invalid', revision:1}} as T;
++  });
++  await bridge.start();
++  const result = await bridge.request({type:'project.pin.apply', reviewId:review as Ulid});
++  expect(result).toEqual({ok:false, outcomeUnknown:true, error:kind === 'rejected reply' ? original : {code:'engine.request', message:'Invalid project file response.'}});
++  expect(writes).toBe(1);
++  expect(bridge.getSnapshot().connection).toMatchObject({status:'ready', project:{id:project}});
++  // An invalid caller request never reaches the host and has no uncertain write.
++  const invalid = await bridge.request({type:'project.pin.apply',reviewId:'invalid' as Ulid});
++  expect(invalid).toMatchObject({ok:false});
++  expect('outcomeUnknown' in invalid).toBe(false);
++  expect(writes).toBe(1);
++});
+diff --git a/editor/bridge/native.ts b/editor/bridge/native.ts
+index 348b817a726ac5e0058f70cc07c276f24cac5c74..6d4608f4801f8d0dfa2ffc0c0407fe903c636ce6 100644
+--- a/editor/bridge/native.ts
++++ b/editor/bridge/native.ts
+@@ -351,7 +351,7 @@ export function snapshotFromEngine(read: EngineResponse): BridgeSnapshot {
+       : { status: "attached", surface: "Native wgpu" },
+   };
+ }
+-function failure(error: unknown): BridgeResult {
++function failure(error: unknown): Extract<BridgeResult, { readonly ok: false }> {
+   if (typeof error === 'object' && error !== null && 'code' in error && 'message' in error && typeof error.code === 'string' && typeof error.message === 'string') {
+     return { ok: false, error: { code: error.code, message: error.message } };
+   }
+@@ -1261,7 +1261,10 @@ export class NativeBridge implements EditorBridge {
+       return { ok: true, projectFile: freeze(response) };
+     } catch (error) {
+       await this.start();
+-      return failure(error);
++      // A rejected invocation or an unverifiable receipt is not proof that the
++      // file stayed unchanged. The host can commit before the reply/read fails.
++      // Keep its exact error, refresh state, and never repeat the write here.
++      return { ...failure(error), outcomeUnknown: true };
+     } finally { this.pending = false; }
+   }
+   async request(request: HostRequest): Promise<BridgeResult> {

@@ -22,6 +22,10 @@ type HudBinding = {
 type AudioBinding = Partial<Record<'music' | 'pickup' | 'damage' | 'won' | 'lost', string>>;
 let cached: Config | undefined;
 let displayed: { health: number; collected: number; phase: Progress['phase']; locale: string } | undefined;
+// IDs are immutable snapshots. Cache only their row metadata, never a borrowed
+// chunk or numeric view. Changed ordered row labels supply a different IDs array;
+// reused labels remain safe because views and strides always come from this tick.
+const actorRows = new WeakMap<readonly NativeId[], readonly { entity: NativeId; row: number }[]>();
 
 function properties(value: NativeProp, field: string): { readonly [key: string]: NativeProp } {
   if (value === null || typeof value !== 'object' || Array.isArray(value))
@@ -189,9 +193,13 @@ export default {
     const needed = new Set([c.player, c.exit, ...c.enemies, ...c.pickups]);
     if (c.camera) needed.add(c.camera);
     const actors = new Map<string, Actor>();
-    for (const chunk of context.chunks) for (let row = 0; row < chunk.ids.length; row++) {
-      const entity = chunk.ids[row];
-      if (needed.has(entity)) actors.set(entity, { chunk, row });
+    for (const chunk of context.chunks) {
+      let rows = actorRows.get(chunk.ids);
+      if (!rows) {
+        rows = chunk.ids.flatMap((entity, row) => needed.has(entity) ? [{ entity, row }] : []);
+        actorRows.set(chunk.ids, rows);
+      }
+      for (const { entity, row } of rows) actors.set(entity, { chunk, row });
     }
     const player = actor(actors, c.player), at = position(player);
     const previous = context.state.get();

@@ -44,12 +44,18 @@ fn profiler_reports_real_native_phases_and_preserves_default_gameplay_pcm() {
     let temp = tempfile::tempdir().unwrap();
     let mut reports = Vec::new();
     let mut pcm = Vec::new();
-    for (index, profile) in [false, true].into_iter().enumerate() {
+    for (index, mode) in [None, Some("maintained"), Some("detailed")]
+        .into_iter()
+        .enumerate()
+    {
         let root = temp.path().join(index.to_string());
         fs::create_dir(&root).unwrap();
         let mut args = fixture(&root, false);
-        if profile {
+        if mode.is_some() {
             args.push("--profile".into());
+            if mode == Some("detailed") {
+                args.push("--profile-heap-detail".into());
+            }
         }
         let result = Command::new(env!("CARGO_BIN_EXE_incant_game_player"))
             .args(&args)
@@ -61,11 +67,59 @@ fn profiler_reports_real_native_phases_and_preserves_default_gameplay_pcm() {
             String::from_utf8_lossy(&result.stderr)
         );
         let mut report: Value = serde_json::from_slice(&result.stdout).unwrap();
-        if profile {
+        if let Some(heap_mode) = mode {
+            // Retain the actual child stdout for protocol-consumer qualification.
+            // This CI-profile fixture is not shipping/10k-entity performance proof.
+            println!(
+                "CLI_PROFILE_REPORT={}",
+                String::from_utf8_lossy(&result.stdout).trim()
+            );
             let profile = report.as_object_mut().unwrap().remove("profile").unwrap();
+            assert_eq!(profile["version"], 3);
+            assert_eq!(profile["frame_wall"]["version"], 1);
+            assert_eq!(profile["frame_wall"]["attempted_frames"], 3);
+            assert_eq!(profile["frame_wall"]["successful_frames"], 3);
+            assert_eq!(profile["frame_wall"]["invalid_frames"], 0);
+            for name in ["player.frame", "script.tick"] {
+                let row = profile["frame_wall"]["phases"]
+                    .as_array()
+                    .unwrap()
+                    .iter()
+                    .find(|r| r["name"] == name)
+                    .unwrap();
+                assert_eq!(row["samples"], 3);
+                assert_eq!(row["missing_frames"], 0);
+                assert_eq!(row["invalid_frames"], 0);
+                assert_eq!(row["overflow_samples"], 0);
+                assert_eq!(
+                    row["counts"]
+                        .as_array()
+                        .unwrap()
+                        .iter()
+                        .map(|n| n.as_u64().unwrap())
+                        .sum::<u64>(),
+                    3
+                );
+                let max = profile["zones"]
+                    .as_array()
+                    .unwrap()
+                    .iter()
+                    .find(|r| r["name"] == name)
+                    .unwrap()["totals"]["max_wall_ns"]
+                    .as_u64()
+                    .unwrap();
+                assert!(row["p95_lower_ns"].as_u64().unwrap() <= max);
+                assert!(row["p95_upper_ns"].as_u64().unwrap() >= max);
+            }
             assert_eq!(profile["completed_frames"], 3);
             assert_eq!(profile["failed_frames"], 0);
             assert_eq!(profile["quickjs_heap"]["samples"], 3);
+            assert_eq!(profile["quickjs_heap"]["mode"], heap_mode);
+            assert_eq!(profile["quickjs_heap"]["invalid_samples"], 0);
+            assert_eq!(
+                profile["quickjs_heap"]["latest"]["estimated_used_bytes"].is_null(),
+                heap_mode == "maintained"
+            );
             assert_eq!(profile["rust_allocations"]["installed"], true);
             assert_eq!(profile["tracy_process_transport"], false);
             for name in [
@@ -104,6 +158,8 @@ fn profiler_reports_real_native_phases_and_preserves_default_gameplay_pcm() {
     }
     assert_eq!(reports[0], reports[1]);
     assert_eq!(pcm[0], pcm[1]);
+    assert_eq!(reports[0], reports[2]);
+    assert_eq!(pcm[0], pcm[2]);
     let root = temp.path().join("failure");
     fs::create_dir(&root).unwrap();
     let mut args = fixture(&root, true);

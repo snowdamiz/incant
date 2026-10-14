@@ -7,6 +7,8 @@ use incant_runtime::{
 use incant_types::{Transform, Velocity};
 use rquickjs::{Ctx, Exception, Function, Object, TypedArray, Value, function::Rest};
 use std::{cell::RefCell, rc::Rc};
+#[path = "haptics.rs"]
+mod haptics;
 
 #[derive(Default)]
 struct State {
@@ -16,15 +18,21 @@ struct State {
     locales: usize,
     failure: Option<ScriptError>,
     queue: FrameCommands,
+    haptic_capabilities: incant_input::haptics::HapticCapabilities,
+    haptics: incant_input::haptics::HapticRequests,
 }
 
 #[derive(Default)]
 pub(crate) struct TickCommands(Rc<RefCell<State>>);
 
 impl TickCommands {
-    pub fn new(restart_enabled: bool) -> Self {
+    pub fn new(
+        restart_enabled: bool,
+        haptic_capabilities: incant_input::haptics::HapticCapabilities,
+    ) -> Self {
         Self(Rc::new(RefCell::new(State {
             restart_enabled,
+            haptic_capabilities,
             ..State::default()
         })))
     }
@@ -64,7 +72,8 @@ impl TickCommands {
                             Some("structural commands belong to their active tick only")
                         } else if state.failure.is_some() {
                             Some("structural command buffer already failed")
-                        } else if state.queue.len() + state.restarts == MAX_FRAME_COMMANDS
+                        } else if state.queue.len() + state.restarts + state.haptics.len()
+                            >= MAX_FRAME_COMMANDS
                             || (name == "setLocale" && state.locales == 64)
                         {
                             state.failure = Some(ScriptError::InputLimit);
@@ -112,8 +121,9 @@ impl TickCommands {
                         let mut state = state.borrow_mut();
                         if !state.active || state.failure.is_some() {
                             true
-                        } else if state.restarts != 0
-                            && state.queue.len() + state.restarts == MAX_FRAME_COMMANDS
+                        } else if (state.restarts != 0 || !state.haptics.is_empty())
+                            && state.queue.len() + state.restarts + state.haptics.len()
+                                >= MAX_FRAME_COMMANDS
                         {
                             state.failure = Some(ScriptError::InputLimit);
                             true
@@ -135,6 +145,7 @@ impl TickCommands {
             // Own properties on a null prototype cannot invoke guest setters.
             object.set(name, function)?;
         }
+        haptics::expose(ctx, &object, &self.0)?;
         Ok(object)
     }
 
@@ -144,7 +155,16 @@ impl TickCommands {
     pub fn revoke(&self) {
         self.0.borrow_mut().active = false;
     }
-    pub fn take(&self) -> Result<(FrameCommands, Option<crate::SessionRequest>), ScriptError> {
+    pub fn take(
+        &self,
+    ) -> Result<
+        (
+            FrameCommands,
+            Option<crate::SessionRequest>,
+            incant_input::haptics::HapticRequests,
+        ),
+        ScriptError,
+    > {
         self.revoke();
         let mut state = self.0.borrow_mut();
         if let Some(error) = state.failure.take() {
@@ -152,7 +172,11 @@ impl TickCommands {
         }
         let request = (state.restarts != 0).then_some(crate::SessionRequest::Restart);
         state.restarts = 0;
-        Ok((std::mem::take(&mut state.queue), request))
+        Ok((
+            std::mem::take(&mut state.queue),
+            request,
+            std::mem::take(&mut state.haptics),
+        ))
     }
 }
 
@@ -162,6 +186,7 @@ impl Drop for TickCommands {
         state.active = false;
         // Retained JS functions cannot retain the queue's native allocation.
         state.queue = FrameCommands::default();
+        state.haptics = Default::default();
     }
 }
 

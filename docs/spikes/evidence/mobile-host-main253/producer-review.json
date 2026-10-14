@@ -1,0 +1,73 @@
+{
+  "reviewer": "astra-runtime-review",
+  "at": "2026-10-13T23:43:02.409797+00:00",
+  "verdict": "accepted scoped source and retained CPU/compile evidence; no actionable finding",
+  "source": "d3a7b3eda62807db3aaf3d46229b5fb990f2d780",
+  "packet_head": "26dd8f696ca79424812720631f625a4eb765a7ac",
+  "manifest": {
+    "path": "/Users/andreyyurlov/.codex/worktrees/ssao-raster-coverage/incant/docs/spikes/evidence/mobile-retained-host/manifest.json",
+    "sha256": "9db1f003f272e1b1a68d3ca13acc2bb21ce6c6551d470bad88deacf021ebd80f"
+  },
+  "archive": {
+    "path": "/Users/andreyyurlov/.codex/worktrees/ssao-raster-coverage/incant/docs/spikes/evidence/mobile-retained-host/records.json.gz",
+    "sha256": "06aa6d2daf24d0da93ad0abd4e601486940e439000d628e46ea585d7d4a77d68"
+  },
+  "collector": {
+    "path": "/Users/andreyyurlov/.codex/worktrees/ssao-raster-coverage/incant/tools/probes/mobile-retained-host/collect.py",
+    "sha256": "903915dbb70f1400f0ba1f7d84bffe72de3cc00a78a882ee5412ae40049e9552"
+  },
+  "independent_audit": {
+    "argv": [
+      "python3",
+      "tools/probes/mobile-retained-host/collect.py",
+      "--verify-only",
+      "--originals",
+      "--local-binaries"
+    ],
+    "exit": 0,
+    "log": "/Users/andreyyurlov/.codex/incant-reviews/mobile-retained-host-audit-independent-20261013.log",
+    "sha256": "e07bc5f4fd33954e65e72b7b523c0e9c8205fb6c85f59f0d78ba6e80e8d677d0",
+    "result": {
+      "verified": true,
+      "source_inputs": 3709,
+      "records": 29,
+      "focused_tests": 7,
+      "player_library_tests": 28,
+      "passing_checks": 9,
+      "retained_driver_argument_failures": 1,
+      "originals": true,
+      "binaries": true
+    }
+  },
+  "live_source_inputs_verified": 3709,
+  "changed_source": {
+    "crates/incant_game_player/Cargo.toml": "38163216c00437204e1d1d842e95b8aaadbb706d8b58c610efb9ce8c3f14d10b",
+    "crates/incant_game_player/src/lib.rs": "5aeb223c821dbeee721a2f49ad98d486c05d452b953b803d37ac81cfe29c16e4",
+    "crates/incant_game_player/src/mobile_host.rs": "08f67b2d60e36c7c00b8795ee0581e2a65e162af463877a7b834d1cd67d0c7ad",
+    "crates/incant_game_player/src/mobile_host/tests.rs": "ea9729a239c91ffb14fa60efcac4b1e9c2089d16b4db13b1e159759e1759d5fb",
+    "crates/incant_game_player/src/package.rs": "b3fd20932e03bcd7e06a0aadc4e844e9a766e7a765afca63e59ba9853ebbfa4b"
+  },
+  "underlying_contracts_reviewed": {
+    "crates/incant_game_runtime/src/core.rs": "df4de6db23e13e224492e81aa112df7a60b01614ebaae59f73c01eab2e427fe0",
+    "crates/incant_game_runtime/src/hosted.rs": "3ffa8419b209df820993904a32a7c978da39d0108f817d96ddbe2d0dc771726e",
+    "crates/incant_game_runtime/src/offline.rs": "55e92a01f1a55759e4f378eaa27ff2e17eb8fe7364f0b0897806818aa8a2f8c2",
+    "crates/incant_render_game/src/lib.rs": "d187fd6678691b0a23267120970154f5734a76761438923b171b3b0031532005"
+  },
+  "source_findings": [],
+  "review": [
+    "Default-off feature owns a real HostedOfflineGameSession and mandatory generic render-input consumer, one world/VM/offline mixer; no per-tick package or document reload.",
+    "Delivery authority uses live Arc owner identity and checked epochs. Suspend/resume and accepted UI resize retire stale callbacks; wrong owner/epoch/count/buffer refuse before mutation.",
+    "Resume focus neutralization remains pending after retryable malformed physical/UI input. The new source002 controls test this and failed UI resize without revoking valid delivery.",
+    "Accepted guest/mandatory-consumer error inherits terminal composite drop and full tick PCM silence; retryable errors retain world/sample chronology and caller output.",
+    "Shared package verifier refactor preserves prior argument route; new hosted path uses bounded cooked data, checked camera hex and existing render asset caches. Build-linked program remains trusted.",
+    "Collector independently replays two source generations; only tests.rs changed. Initial source is reconstructed against its prebuild hash, final3709 inputs match live and immutable Git; both executable copies and every29 lossless record match.",
+    "Seven focused tests are included in28 player library tests, not35 distinct cases. Nine final checks pass; preserved misspelled physics guard subcommand exit2 is superseded by exact corrected command without source change."
+  ],
+  "limits": [
+    "CPU consumer and silent offline PCM fixture; not rendered frames, real device audio, native platform callback integration or mobile performance.",
+    "iOS evidence is library compilation only; no linked app/device run.",
+    "Platform must keep delivery token attached to queued events, stop external output on suspend/failure, schedule fixed ticks and supply concrete render/audio/IME adapters.",
+    "No new restart/persisted save/haptics capability; existing immutable-package startup assumptions and inability to roll back already submitted external GPU work remain explicit."
+  ],
+  "reviewer_actions": "Read-only source/evidence and assertion-only collector. No builds, GPU, images or source edits."
+}

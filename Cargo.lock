@@ -4026,6 +4026,7 @@ dependencies = [
  "incant_types",
  "loro",
  "schemars 1.2.2",
+ "semver",
  "serde",
  "serde_json",
  "thiserror 2.0.21",
@@ -4074,6 +4075,7 @@ dependencies = [
  "incant_observe",
  "incant_profile",
  "incant_render",
+ "incant_render_data",
  "incant_render_game",
  "incant_render_gpu_host",
  "incant_render_native",
@@ -4082,6 +4084,9 @@ dependencies = [
  "incant_types",
  "incant_ui",
  "incant_wasm_runtime",
+ "jni 0.22.4",
+ "ndk",
+ "ndk-context",
  "pollster",
  "serde",
  "serde_json",
@@ -4106,6 +4111,7 @@ dependencies = [
  "incant_ui",
  "kira",
  "serde_json",
+ "sha2 0.10.9",
  "tempfile",
  "thiserror 2.0.21",
 ]
@@ -7337,8 +7343,6 @@ dependencies = [
 [[package]]
 name = "rquickjs-core"
 version = "0.14.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6657979a24d543e5fc66f32cef2f47ca82ce8eb55cec5f7d59a12b7b570bbf24"
 dependencies = [
  "hashbrown 0.17.1",
  "relative-path",
@@ -7363,8 +7367,6 @@ dependencies = [
 [[package]]
 name = "rquickjs-sys"
 version = "0.14.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cee271d0eeba64f0915b846cb7ae02e16faf3dfdffdca91731101d9d30fe3423"
 dependencies = [
  "bindgen",
  "cc",

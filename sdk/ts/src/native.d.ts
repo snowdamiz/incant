@@ -37,6 +37,14 @@ export interface NativeChunk {
   readonly transforms: Float64Array;
   readonly velocities: Float64Array | undefined;
 }
+/** Host-issued ephemeral actuator identity. Generations expire on reconnect or
+ * session replacement and must never be restored from saved gameplay state. */
+export type HapticTarget =
+  | { readonly kind: "gamepad"; readonly id: number; readonly generation: number }
+  | { readonly kind: "device"; readonly generation: number };
+export type HapticEffect =
+  | { readonly kind: "rumble"; readonly strong: number; readonly weak: number; readonly durationMs: number }
+  | { readonly kind: "impact"; readonly intensity: number };
 /** Bounded to 65,536 operations per tick. Validated/applied after views detach.
  * Active-call errors reject numeric writes and the complete batch even when
  * caught, and fail the host. An expired function always throws; catching that
@@ -44,6 +52,19 @@ export interface NativeChunk {
  * Functions belong to one tick only; retained functions never reactivate.
  * Vector/transform inputs are copied as fixed numeric fields, never JSON. */
 export interface NativeCommands {
+  /** Current host capabilities. Empty on ordinary/headless/mobile hosts; Wasm
+   * parity is not yet implemented. Gamepad targets support rumble, device targets
+   * impact. Query again after topology/session changes; never assume support. */
+  hapticCapabilities(): ReadonlyArray<HapticTarget>;
+  /** At most32 requests/tick within the shared command quota. Finite amplitudes
+   * 0..1, integer rumble duration1..5000ms. Target generation and effect kind must
+   * match current authority. Errors (even caught) reject the whole transaction.
+   * Delivery follows complete game acceptance; OS acceptance is asynchronous,
+   * not physical confirmation. Desktop timing is quantized upward to50ms. */
+  playHaptic(target: HapticTarget, effect: HapticEffect): void;
+  /** Stop the matching current target. This is also a committed bounded request. */
+  stopHaptic(target: HapticTarget): void;
+
   /** Request whole-session replacement at the next accepted host boundary.
    * Requires an explicitly restart-capable native host; unsupported hosts refuse
    * and poison the active tick. No arguments, coalesced within the shared command

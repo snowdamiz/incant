@@ -1,20 +1,441 @@
 # Implementation status
 
-Compound and tile opaque checkpoints have accepted source reviews and passing CPU qualification: 538 snapshot/physics/ECS cases per numerical mode, followed by 238 script/game cases per mode on the actual-main250 composition. Native Parry and Rapier suites pass separately. Eighteen current checks pass; independent final union review is accepted. Current-main251 composition preserves 3,155 inputs except the reviewed authoring test, matches three graphs and passes eight read-only checks; independent final composition review is accepted and publication awaits the required fast check. Public persisted physics stays closed. [Scope](docs/spikes/native-compound-checkpoints.md).
+## Main278 Loan shipping measurement — budget remains open
+
+The fresh main278 shipping export preserves all three functional modes, exact
+PCM, Core win/stress behavior and all 74 authoring files. Its one fixed six-run
+quiet sequence remains over the whole ScriptTick 2 ms p95 budget: maintained
+runs span 2.08–2.21 ms and detailed runs span 2.18–2.22 ms. All same-mode script
+and requested-memory stability checks pass, but the final maintained player-frame
+sample fails the 5% stability bound. No shipping saving is established. The
+portable packet retains all original failures and distinguishes CPU simulation
+from GPU/presentation qualification. An ordered native-query candidate is being
+qualified separately and has not been adopted.
+[Actual results and replay](docs/spikes/quickjs-loan-main278.md).
+
+## CI renderer smoke revision repair — merged through PR280
+
+The renderer helper now carries its first command revision into the reopened
+second RPC session and retains structured failures, including an absent native
+code field. All render/geometry assertions remain. Producer Python controls
+pass nine cases (six geometry plus three profile); root's focused run passes six.
+Four actual RPC protocol processes pass; root separately passes the complete
+Mac renderer helper on the retained historical application executable. This
+does not relabel the binary as current whole-runtime source. Checkpoint35's
+Linux failure is retained; hosted repair execution is pending. PR280 merged
+after exact-head fast SUCCESS and matching tree verification. No new build,
+shipping timing, visual approval or phase gate is included.
+[Cause, scope and replay](docs/spikes/render-smoke-revision.md).
+
+## Project Save and engine-pin UI — merged through PR279
+
+The native project menu now exposes Save/Command-S and host-issued engine-pin
+review/apply. Project changes retire stale results, and transport uncertainty
+never claims that a possibly committed write failed definitively. Claude's
+bounded design is retained with separately reviewed Astra correctness repairs.
+All 973 UI tests pass; 30 browser states and five flows report zero accessibility
+violations or errors. Actual Mac Tauri/WebKit checks verify save/reopen, a
+read-only legacy review, exact candidate bytes, backup and undo/redo. These
+changes merged through PR279 after exact-head fast SUCCESS; the merged tree
+matches the tested tree. Older-format conversion and
+phase gates remain open. [Evidence](docs/spikes/project-file-ui-main278.md).
+
+## Native script undo capacity reuse — source qualified
+
+ScriptHost now reuses exact-size native ID/numeric undo storage across matching
+ticks, recapturing every value and preserving fresh-view detachment, validation
+and full rollback. Shape changes evict unused tails; checkpoint/new hosts start
+empty. The 32 MiB bound remains numeric copies only; IDs/metadata/JS labels are
+additional, and scratch remains allocated while its host is idle. The five Rust
+paths have independent acceptance. Deterministic and four-lane fast each pass
+233 checks with one intentionally ignored CPU diagnostic, strict lint, and
+compiler-disabled profile off/on checks. The initial detached-DataView test
+failure is retained and corrected. No player/export/timing was executed for
+that source qualification; the separate main278 measurement above now retains
+the actual shipping result with its 2 ms gate still failed. Main277 intake preserves the reviewed
+source exactly, with full packet/binary replay and no Rust dependency seam.
+[Source, observable controls and replay](docs/spikes/quickjs-loan-capacity.md).
+
+## Maintained QuickJS shipping observation — budget still open
+
+One fresh shipping export on this Mac passes unprofiled, detailed and maintained
+functional parity, including exact PCM and the Core win/stress route. Six quiet
+measurements keep the whole ScriptTick p95 above the unchanged 2 ms budget:
+maintained runs span 2.08–2.11 ms; detailed runs span 2.20–2.24 ms. Every same-mode
+5% stability check passes; no cross-mode speedup or phase gate is claimed.
+The bounded runner and portable raw replay are independently reviewed. Execution
+remains exact main275-based source; this intake onto main276 does not relabel it.
+Rust-owned rollback buffer capacity reuse was subsequently merged in PR278;
+the separate main278 result above still establishes no shipping saving. [Results and replay](docs/spikes/quickjs-maintained-main275.md).
+
+## Project-file application binding — qualified main275 composition
+
+The accepted application backend now composes with the merged maintained QuickJS
+profiler without a production source seam. Fresh checks pass 107 source/command,
+39 headless, four editor lifecycle and 189 bridge cases, strict four-crate lint,
+78 exact JSON contracts, 19 frozen editor assets and all 14 commands. A separate
+test-only successor passes 29 parallel command-library and ten prefab cases plus
+strict lint/static checks. It isolates lock-owning test cases and closes the
+prefab journal owner before byte snapshots, preserving every production lock and
+rollback assertion. Checkpoint34's actual Linux WouldBlock and Windows error33
+failures remain retained; future hosted repair validation is pending. One local
+supervisor schema-inventory error is retained, with corrected exact comparison.
+Final independent integration review is accepted; PR276 merged after exact-head
+hosted fast SUCCESS. Checkpoint35 is frozen at this composition; checkpoint34
+remains failed, including a GitHub internal error in the general job. No new
+editor UI controls, older-format conversion, GPU, performance or phase claim.
+[Current composition and evidence](docs/spikes/project-application-main275.md).
+
+## Maintained QuickJS profiling — qualified main274 composition
+
+The reviewed producer now composes with main274 without a runtime source seam.
+Thirteen current commands pass: profile off/summary, script/player fixtures in
+both physics modes, strict lint, 21 metric controls, ten probe-lock controls and
+vendor/dependency/static checks. Thirteen current executable copies and the
+unchanged 3,325-record producer packet are retained. Final integration review is
+accepted; PR275 merged after exact-head hosted fast SUCCESS. Reports distinguish maintained allocation counters from
+explicit detailed scans and refuse mismatched instrumentation comparisons.
+No shipping speedup, continuous heap peak, 2ms gate or phase claim is made.
+[Current composition and limits](docs/spikes/quickjs-profile-main274.md).
+
+## Host-bound project pin migration — current-main qualification
+
+The main273 composition preserves linked-prefab authoring and adds the reviewed
+host-only exact-current legacy pin, original-byte backups, recovery and undo/redo.
+The initial composition passed 129 source/doc/cmd/headless cases and nine checks.
+A test-only successor preserves journal assertions under Windows locking; 19
+focused Mac controls pass, with four overlapping final-generation controls and
+strict lint. A later live-RPC test successor also passes its focused control and
+strict headless lint after closing each child before journal byte comparisons.
+The original hosted Windows failure, local cache failure and test
+lint failure remain retained. Final independent packet review is accepted;
+PR274 merged after its exact-head hosted fast SUCCESS.
+This historical migration slice exposed no CLI/RPC/editor application route;
+the current application composition above adds host-bound routing. Older-format
+conversion remains open. Checkpoint33 is terminal and failed; checkpoint34
+qualifies reviewed main275 and has two retained failed desktop contexts.
+[Current composition and evidence](docs/spikes/project-pin-main273.md).
+
+## QuickJS allocation getter — diagnostic-only main272 intake
+
+The isolated Apple arm64 getter has 32 historical same-lock parity observations
+and a deliberately failing wrong-count control. Twelve imported tool/evidence
+paths remain producer-exact; current lock/source/replay checks pass without a
+native rerun. The retained patch-context whitespace failure is resolved by two
+exact-path packaging exceptions. Independent current-main review is accepted;
+PR273 merged after its exact-head hosted fast SUCCESS. No production dependency, profiler mode, performance or gate changes
+are included. [Current scope](docs/spikes/quickjs-getter-main272.md).
+
+## Engine compatibility and pin review — qualified main271 composition
+
+New projects declare the exact engine version; legacy unpinned v1 projects keep
+its absence. Bounded SemVer validation, atomic pin commands and read-only CLI/RPC
+reviews now compose with linked prefab authoring. Current source passes 96
+document/command cases, two live headless cases and two cooked native controls,
+strict four-package lint and all nine qualification commands. The actual joined
+headless binary regenerated all 74 schemas. Prior producer failures and distinct
+source generations remain retained. Independent final source/evidence review is
+accepted; PR272 merged after its exact-head hosted fast SUCCESS. The later PR274 supplies file-pin migration and backup/recovery; the current
+application composition above supplies host-bound routes. Editor UI remains open;
+no phase or release gate is claimed. [Current composition](docs/spikes/engine-compat-main271.md).
+
+## Linked prefab authoring — qualified main270 composition
+
+The fixed-topology backend materializes ordinary entities through atomic
+`incant_cmd` transactions, with explicit identity maps, whole-component overrides,
+revert, prototype value updates, detach and deletion. The accepted producer is
+preserved byte-exact on main270. Current qualification passes 87 document/command
+cases, one live RPC save/reopen/undo/redo case and one cooked NativeWorld case
+with 60 steps, plus strict four-package lint and SDK/fmt/conventions checks.
+All nine commands and final independent source/evidence review passed.
+PR271 merged after its exact-head hosted fast SUCCESS; nested/topology edits and editor UI remain open.
+[Composition and evidence](docs/spikes/prefab-main270.md).
+
+## Windows TypeScript deadline — one actual observation passed; timeout retained
+
+Main270 includes the source-scoped script phase diagnostic and bounded cook observer. Checkpoint32's frozen
+Windows desktop job failed the unchanged authored fallback test at its existing
+eight-second compiler deadline; the original failed job and prior passing Windows
+log remain retained. A reviewed eight-phase observer now preserves sanitized
+bounded evidence after child cleanup, including no first phase. Ten current local
+checks pass (23 Node controls and six Rust cases, strict lint and policy checks).
+PR270 merged after its exact-head fast SUCCESS. Its one Windows diagnostic
+passed the exact selected test on main270: the successful cook took 2.442570 s
+and the expected deleted-source refusal took 0.783991 s. All eight successful
+phases and both raw observations are retained, with no retry or deadline
+override. The original timeout is still unexplained; this observation neither
+clears the failed context nor establishes a repair.
+[Actual Windows receipt](docs/spikes/evidence/typescript-cook-windows/manifest.json). [Scope and evidence](docs/spikes/typescript-cook-phases.md).
+
+## Native script phase diagnostic — one bounded CPU test
+
+The real ScriptHost diagnostic checks all 9,999 transform rows after each of 128
+ticks and rejects three omitted-write variants. Independent source, raw interval,
+profile and executable review passes. The main268 composition preserves the
+executed script/runtime inputs and passes strict compiler/profile/fast-mode
+Clippy. PR269 merged after its exact-head fast SUCCESS. Fourteen markers compile only into the selected test configuration;
+shipping libraries are unchanged. Mean callback time is 1.134 ms, numeric
+validation 0.253 ms and heap telemetry 0.104 ms in this CI-profile fixture. These
+are diagnostic intervals, with no quiet guarantee or complete Core workload;
+the actual shipping 2 ms gate remains failed. [Scope](docs/spikes/core-script-phase-diagnostic.md)
+and [current composition](docs/spikes/evidence/core-script-phase-intake/manifest.json).
+
+## Core tick diagnostics — candidate evidence only
+
+The retained standalone QuickJS/Bevy probe compares six loop variants and safe
+identity access using 6,600 raw intervals and three negative controls. Independent
+source, raw archive, binary and percentile replay passes on the main267 intake, merged through PR268.
+It changes no engine or authored workload, and adopts no candidate. The fixed-order
+CI-profile experiment has no quiet-window guarantee; actual Core shipping remains
+above the 2 ms script gate. [Scope](docs/spikes/core-tick-cost-diagnostics.md) and
+[independent acceptance](docs/spikes/evidence/core-tick-cost-intake/review.json).
+
+## Matched Wasm/TypeScript workload — bounded historical shipping evidence
+
+Two shipping backends completed the same 1,024-entity/3,600-tick workload with
+all-row functional parity and exact silent PCM. Across three quiet pairs,
+TypeScript script p95 was 0.140001–0.160000 ms and Wasm static-module p95 was
+0.080001–0.090000 ms. These are descriptive different-phase measurements on
+source97834, not a Core10k, startup, FPS or phase gate. Independent raw evidence
+review and current helper Python/TypeScript checks pass. PR267 merged after its
+exact-head fast SUCCESS, following the merged synchronization test repair. [Evidence](docs/spikes/wasm-typescript-cost.md).
+
+## Checkpoint34 — frozen main275; two desktop failures retained
+
+Checkpoint33 finished with 22 required successes and the Windows journal-read
+failure. Its final macOS checks job succeeded, including all four fresh shipping
+proofs in 2,177.721 seconds. There is no explicit timeout on that four-proof step
+or its job; the adjacent 45-minute step limit applies to a different export proof.
+PR274's reviewed test-lifetime repair and PR275's maintained profiling are merged.
+
+Checkpoint34 freezes candidate `c5c5a0c2` on the existing PR263, exact reviewed
+main275 `0b1f739c`, tree `c596fde9`. Linux desktop failed an immediate lock reopen
+with WouldBlock; Windows desktop failed an older prefab test's live journal read
+with error33. Both original logs and the separate proposed test-only repairs are
+retained. Remaining jobs continue on this unchanged candidate. All 23 required
+contexts and eight exact-head workflows must succeed before release advancement;
+release30 remains unchanged. No timeout repair, hosted repair success or phase
+approval is inferred from local tests.
+
+Checkpoint31 finished with 22 required SUCCESS and one macOS Clippy FAILURE;
+PR266 separately repaired the three fallible test calls. Checkpoint32 finished
+with 22 required SUCCESS and one Windows deadline FAILURE. Every original job
+and the separate passing Windows observation remain retained. No promotion is
+claimed. [Prior repair evidence](docs/spikes/physics-sync-result.md) and
+[Windows observation](docs/spikes/evidence/typescript-cook-windows/manifest.json).
+
+## Director routing clarification — editor UI only
+
+Claude Opus 5.5 with explicitly verified Max is the default for editor UI design,
+layout, styling and rendered-pixel review. Astra/root and subagents own all other
+work, including rendering algorithms, graphics/runtime correctness and non-editor
+visuals. Astra may also take over any unresolved Claude work, including editor UI,
+without asking again. Preserve prior attempts, provenance and acceptance/evidence
+requirements. This changes ownership, not phase-gate approval.
+
+## Numeric-loan engine optimization — matched shipping improves, 2 ms still failed
+
+PR264 merged the main262 composition preserving the six reviewed numeric hierarchy and
+opaque entity-token changes. Source002 passes 466 runtime/script tests in each
+physics mode, both strict lint runs and lean native/wasm checks. All 3,874 executed
+build inputs match the current composition. Actual unchanged-workload Core
+shipping script p95 improves to 2.250001–2.370000 ms across three pairs; all 5%
+comparison checks pass, while all three 2 ms gates still fail. Full nonprofile
+reports and PCM match; QuickJS heap peaks are unchanged. Portable raw evidence is
+retained with independent final integration acceptance. PR264 merged after its
+exact-head fast SUCCESS; main264 includes the prior Core sample and AOT packets.
+Release30 is unchanged while checkpoint34 tests its frozen main275 tree. No phase/FPS/GPU claim.
+[Evidence](docs/spikes/numeric-loan-main262.md).
+
+## Core row metadata — actual shipping improves, 2 ms still failed
+
+The sample now caches immutable row indices/base coordinates while taking fresh
+numeric views each tick. The six actual fast-mode runs retain matching full
+Core win reports and PCM; all three paired script p95 intervals improve to
+2.800001–3.080000 ms, but every 2 ms script gate still fails. This is a new
+script identity with unchanged engine/runtime data, not another engine-only
+comparison. QuickJS heap peaks increase. Current-main source/Node/TypeScript
+controls pass; independent final packet review was accepted and PR262 merged
+after its exact-head fast SUCCESS. No FPS/GPU/phase
+claim. [Evidence](docs/spikes/core-bulk-row-metadata.md).
+
+## TypeScript AOT spike — language controls retained, adoption open
+
+Pinned AssemblyScript 0.28.20 rejects five current TypeScript language fixtures;
+a separate 9,999-row arithmetic kernel compiles and matches selected values.
+The actual NativeBehavior frontend cook passes. Static Hermes source and future
+compiler inputs are pinned, but no native compiler/host was built. All complete
+SDK, matched shipping performance, iOS no-JIT/size and security-release adoption
+conditions remain open. No production host or dependency changed. Independent
+source/final review was accepted and PR262 merged after its exact-head fast
+SUCCESS. [Evidence](docs/spikes/typescript-aot.md).
+
+## Core 10k Mac shipping — cache improvement measured, 2 ms script gate failed
+
+Actual paired fast-mode shipping runs complete the 2,156-tick Core win with
+10,000 bound attachments, matching PCM and sampled stress/sentinel observations.
+The three cached script p95 intervals are 4.400001–4.410000,
+4.830001–4.840000 and 4.560001–4.570000 ms, versus baseline
+5.430001–5.440000, 5.400001–5.410000 and 5.370001–5.380000 ms.
+All three 5% comparison metrics pass; the 2 ms script requirement fails every
+candidate. The original old-emitter 2,400-second compile timeout remains a
+historical failure, not a runnable baseline. Independent final packet review
+is accepted and PR261 merged after exact-head fast SUCCESS. No new build or
+measurement was performed during its audit. QuickJS allocated/used heap peaks
+increase with cached metadata, so no total-memory improvement is claimed. Main260 contains the accepted static/cache implementation; release30 is
+unchanged. No display/GPU/full-phase claim. [Evidence](docs/spikes/mac-core-fast10k.md).
+
+## Script startup data and immutable metadata caches — joined CPU checks pass
+
+PR260 merged the main259 composition after its exact-head fast SUCCESS. It preserves the three reviewed changes: constant
+binding tables, immutable attachment snapshots and immutable bulk-query row IDs.
+Both numerical modes pass 167 CPU cases and strict all-target lint; compiler-free
+native/wasm and dependency checks pass. All 3,885 frozen inputs remain exact and
+six immediate binaries are retained. Final integration review is independently
+accepted. The matched fast10k shipping measurements above apply to executed
+source031a; the earlier original Core reference below is separate. The script
+budget remains failed and no full performance gate is claimed.
+[Current evidence](docs/spikes/script-caches-main259.md).
+
+## Bulk-query row-label cache — CPU correctness verified
+
+Immutable ordered row IDs now reuse frozen metadata arrays while numeric views
+remain fresh and revocable. Structural edits and retained history have explicit
+regressions; all 150 script library/project cases and strict all-target Clippy
+pass in each numerical mode. Current-main integration and matched shipping
+timing remain separate; no performance gate is claimed.
+[Scope and evidence](docs/spikes/script-chunk-id-cache.md).
+
+## Original Core Mac shipping CPU reference — scoped evidence
+
+Three actual M5 Pro shipping runs complete the deterministic 46-entity Core win
+with script p95 intervals 0.820001–0.890000 ms and identical reports/PCM. One
+same-binary 5% script comparison remains inconclusive. Independent raw-histogram,
+compiler/source and external-file verification is retained; this is not the fast
+10k, display/GPU or phase gate. [Evidence](docs/spikes/mac-core-baseline.md).
+
+## Script attachment cache — scoped CPU correctness
+
+Unchanged authored attachment groups reuse one frozen instance array and paired
+ID authorization list while every entity lifetime is still checked each tick.
+Thirty-five distinct scoped native cases and strict all-target Clippy pass;
+retirement/reuse, prior snapshot immutability, capability revocation and fresh-VM
+restore are covered. No shipping speedup or 10k gate is claimed.
+[Evidence](docs/spikes/script-instance-cache.md).
+
+## Static script binding emission — CPU qualification and merged cache union
+
+The trusted emitter now generates borrowed constant property tables and one
+bounded startup conversion. The unchanged catalog validator preserves identity
+and finite f64 bits; dependencies and bytecode authority stay unchanged. Source
+review is accepted; 156 current CPU cases, strict lint, native/wasm lean builds
+and a real generated 10,000-row Rust consumer pass. The first standalone
+consumer-driver dependency-path failure is retained. Final producer review is
+accepted; the joined cache qualification is recorded above. No shipping build/runtime speedup is
+claimed. [Evidence](docs/spikes/script-bindings-static.md).
+
+## Core 10k-script input — native correctness and scoped measurements
+
+A public-command extension preserves the original Core controller/assets and adds
+9,999 invisible typed-bulk attachments under a second source. Ten helper controls
+and 65 actual retained-engine ticks pass: 28 numeric checks, all 46 original
+entity readbacks and matching logs/PCM. Public undo/redo/reopen and separate
+fast-mode settings-only preparation are retained, including the initial slow
+journal-reopen failure. The fast shipping measurements above now preserve an actual failed 2 ms script
+gate; no GPU/60 fps or appearance gate is claimed. Current main258 qualification passes
+ten Python controls, strict TypeScript and Node bulk/mutation controls against
+the current SDK; the original archive and all external payloads replay unchanged.
+Independent current-main final review is accepted; PR259 merged after its exact-head fast SUCCESS. [Producer evidence](docs/spikes/core-script-stress.md) and [composition](docs/spikes/core-stress-main258.md).
+
+## Per-frame CPU distributions — scoped Mac controls pass
+
+The opt-in profiler now reports bounded per-frame phase wall histograms and
+conservative p95 intervals, including aggregate `script.tick`. Seventeen explicit
+native CI-profile CPU cases, a dedicated allocation control and eight runner tests
+pass on actual main257, including the real three-tick CLI report. All 24 current
+checks pass; final integration review is independently accepted and PR258 merged
+after its exact-head fast SUCCESS. Missing/failed/overflow samples
+refuse p95; default dependencies remain empty. Shipping 10,000-entity Mac
+measurements and the 60 fps/GPU/hitch gates remain separate.
+[Current evidence](docs/spikes/profile-distributions-main257.md).
+
+The optional Apple and Android native hosts now have a qualified main256
+composition with haptics and persisted checkpoints. Both numerical modes pass
+148 player/game CPU cases (103 player +45 game), and all 44 current checks pass,
+including strict lint and iOS/Android compilation. The shared clock-module
+correction preserves its implementation and the initial duplicate-module lint
+failure. Final integration review is independently accepted and PR257 merged after its exact-head fast SUCCESS. GPU/device audio, phone launches,
+exported apps, mobile haptics/IME and performance remain separate, with other-
+device testing deferred and nonblocking. [Scope](docs/spikes/mobile-platforms-main256.md).
+
+Director policy, 2026-10-13: actual desktop testing on this Mac is the only
+device qualification required for development and phase gates. Mobile and other-
+device execution/performance comparisons are deferred, nonblocking follow-up;
+historical pending device gates below are superseded on that point, not passed.
+Required hosted CI/build checks, actual-success release promotion, Mac shipping-
+profile measurements and non-device release/human obligations remain in force.
+No phase is approved by this policy update. [Plan](PLAN.md).
+
+The Mac CPU measurement runner has independent source acceptance, eight passing
+policy tests and a successful parse of the actual version 2 profiler CLI output.
+It binds shipping codegen, player/data/script identities, this Mac's configuration
+and matched baselines, retaining uncertainty around the 5% comparison threshold.
+That CLI fixture is one entity and three ticks in the CI profile; the separate
+shipping Core/10k results are recorded above. Presentation timing remains open.
+[Scope and evidence](docs/spikes/mac-cpu-measurements.md).
+
+Checkpoint30 is promoted through PR232: release `71bdd2e7` has the exact tested
+main252 tree `393eb78c`. All 23 required contexts and all eight push workflows
+succeeded; independent review, merge parents, author trailer and post-merge tree
+are verified. Later main253–275 persisted-session/mobile/haptics/profiler/workload/cache,
+diagnostic and authoring work remains outside that tested release. Checkpoint33
+is superseded by frozen checkpoint34 on main275 as described above. This promotion does not approve a phase or distribution gate.
+[Portable evidence](docs/spikes/evidence/release-checkpoint-30/manifest.json).
+
+Typed ephemeral haptics now have a qualified main254 composition: both physics
+modes pass 85 player CPU cases with native-window, mobile-host/FFI, native
+checkpoints and the linked static fixture together. Both strict lint runs and
+three selected graph comparisons pass; 18 successful commands and two SDK-driver
+setup failures are retained. All 27 owned producer paths remain exact. Final
+main254 review and the main255 documentation-only join are independently accepted. PR256 merged after its exact-head fast SUCCESS. Physical motor/mobile actuator execution and
+performance remain untested. [Evidence](docs/spikes/haptics-main254.md).
+
+The retained mobile Rust host is composed on actual main253 with its accepted
+producer implementation unchanged. Fresh current-source tests pass 31 mobile+FFI
+library cases and 34 native-checkpoint player cases in each numerical mode,
+including matched fresh CLI continuation; all 26 commands pass. Independent
+current-main final review is accepted and PR254 merged after its exact-head fast SUCCESS. The later grouped platform composition adds surface, touch and device-audio
+source; IME, actual device execution and phone performance remain separate. [Scope](docs/spikes/mobile-host-main253.md).
+
+The default-off persisted native game path has passing joined CPU qualification:
+267 script/game/player cases in each numerical mode, including separate-process
+save/resume with real fractional PCM timing. Thirteen current checks pass;
+earlier ordinary-diagnostic, CCD-admission and missing-bundle setup failures are
+retained. The files bind current trusted code and catalogs, preserve supported
+2D/3D physics, explicit script state, UI and offline audio, and refuse unsupported
+domains. All three producer packets now have independent final acceptance;
+current-main252 composition review is independently accepted and PR253 merged
+after its required exact-head fast SUCCESS. This does not qualify device audio, shipped Wasm state, GPU saves,
+reference-phone performance or a phase gate.
+[Scope and evidence](docs/spikes/persisted-game-checkpoints.md).
+
+Private typed outer physics and world-v12 persisted candidates now pass 321 actual cases per numerical mode, including explicit large fresh-constructor capacity, plus mode/compiler, strict Clippy, wasm/default library and dependency guards. The original pending-motion BroadBounds rejection is retained and closes only with the reviewed native flag correction; outer fixtures are unchanged. Final producer evidence and the joined main252/session composition are independently accepted. Old component save physics admission stays closed. [Scope](docs/spikes/physics-persisted-outer.md).
+
+Compound and tile opaque checkpoints have accepted source reviews and passing CPU qualification: 538 snapshot/physics/ECS cases per numerical mode, followed by 238 script/game cases per mode on the actual-main250 composition. Native Parry and Rapier suites pass separately. Eighteen current checks pass; independent final union review is accepted. Current-main251 composition preserves 3,155 inputs except the reviewed authoring test, matches three graphs and passes eight read-only checks; independent final composition review is accepted and PR252 merged after its required exact-head fast SUCCESS. That opaque checkpoint scope left public persisted physics closed. [Scope](docs/spikes/native-compound-checkpoints.md).
 
 Private Rapier regression qualification after lower compound integration and work precharge passed all 159 planar and 177 spatial unit tests in each of deterministic and SIMD8 modes, with no filtered or ignored cases. Both strict native-library Clippy checks passed; four immediately copied executables and the full source/graph/fixture ledger are retained. Independent final packet review is accepted. This CPU evidence does not qualify the outer game union or persisted physics saves. [Evidence](docs/spikes/rapier-compound-regressions.md).
 
-Checkpoint29 remains frozen on candidate `74e77456` after a Linux source-store lock test failed at immediate drop/reopen. A controlled inherited-descriptor diagnostic proves a possible `WouldBlock` mechanism; the hosted error was not printed, so its cause remains inferred. The reviewed one-file test isolation preserves production and all exclusivity assertions. Ten source-store cases, strict Clippy and ten concurrent repetitions pass; independent final evidence review is accepted and PR251 merged after its required exact-head fast check. No release promotion or repaired hosted-success claim. [Evidence](docs/spikes/source-lock-test-isolation.md).
+Historical checkpoint29 finished unpromoted on candidate `74e77456`: 22 required contexts succeeded and the Linux source-store lock test failed at immediate drop/reopen. A controlled inherited-descriptor diagnostic proves a possible `WouldBlock` mechanism; the hosted error was not printed, so its cause remains inferred. The reviewed one-file test isolation preserves production and all exclusivity assertions. Ten source-store cases, strict Clippy and ten concurrent repetitions pass; independent final evidence review is accepted and PR251 merged after its required exact-head fast check. No release promotion or repaired hosted-success claim. [Evidence](docs/spikes/source-lock-test-isolation.md).
 
 The complete game checkpoint producer is independently accepted: both numerical modes passed 39 game cases with real offline PCM continuation; the earlier 33 ordinary cases remain source002. Current composition binds all 3,667 producer inputs plus two evidence collectors, qualifies the six reviewed main248 repairs and passes fourteen read-only checks. Independent final composition review is accepted, hosted PR249 is merged and the actual-main249 join changes no implementation/build/tool input. PR250 merged after its exact-head required fast SUCCESS. The feature stays default-off and public persisted physics remains closed. [Scope](docs/spikes/native-game-main248.md).
 
 The hosted opaque session checkpoint producer is independently accepted with 200 script cases per numerical mode and strict headless/UI/audio feature checks. It preserves actual silent mixer chronology, binds captured UI/audio owners before VM initialization and leaves persisted physics admission closed. Current-main248 composition has fourteen passing read-only checks: all 3,663 inputs are bound, with only the six accepted repair paths different and three matching dependency graphs. Final composition review is independently accepted and PR249 merged after its exact-head fast check; producer execution is not relabeled. [Scope](docs/spikes/native-session-hosted-physics-checkpoints.md).
 
-Checkpoint28 finished unpromoted at reviewed main246 on PR232: 13 required checks succeeded, nine failed and one was skipped; all eight workflows are terminal. Native physics jobs failed at isolated lock resolution, and feature-off NativeOwner Clippy failures are diagnosed on all three desktop platforms. The reviewed combined repair passes seventeen lock/guard checks and four strict all-target Clippy configurations; PR248 merged after its exact-head required fast check. Checkpoint29 now freezes that main248 tree (`9493650a`, candidate `74e77456`) on the same PR232; all 23 requirements remain mandatory. Release is unchanged. [Lock evidence](docs/spikes/runtime-probe-locks-main247.md).
+Checkpoint28 finished unpromoted at reviewed main246 on PR232: 13 required checks succeeded, nine failed and one was skipped; all eight workflows are terminal. Native physics jobs failed at isolated lock resolution, and feature-off NativeOwner Clippy failures are diagnosed on all three desktop platforms. The reviewed combined repair passes seventeen lock/guard checks and four strict all-target Clippy configurations; PR248 merged after its exact-head required fast check. Historical checkpoint29 then froze that main248 tree (`9493650a`, candidate `74e77456`) on the same PR232 and finished unpromoted. Checkpoint30 subsequently passed all 23 requirements and promoted the exact main252 tree; see the current summary above. [Lock evidence](docs/spikes/runtime-probe-locks-main247.md).
 
 Opaque headless TypeScript/native-physics session checkpoints have accepted producer tests: 195 script cases per numerical mode, 186 feature-off cases, strict Clippy and optional/lean/wasm compilation. The original manifest guard failure is retained; its three-manifest repair merged with PR246 and has separate focused script qualification. Current main246 composition matches all 3,656 accepted repaired implementation/build/tool inputs; ten read-only checks pass, selected normal graphs match and ordinary snapshot stays excluded. Final current-main review is accepted; PR247 merged after its exact-head required fast SUCCESS. Public physics byte saves remain refused; subsequent PR249 adds the separately reviewed hosted UI/audio continuation API. [Producer scope](docs/spikes/native-session-physics-checkpoints.md).
 
-Native capture, primitive 2D/3D solver checkpoints and opaque ECS/physics world checkpoints are available as opt-in in-memory APIs. Public persisted physics and full script/session checkpoint admission remain separate. Historical checkpoint27 selected main241; its macOS conformance hit the configured 40-minute limit and cannot count as success. The reviewed main repair gives that macOS job 90 minutes, keeping Linux at 40 and every proof unchanged. Checkpoint27 finished unpromoted with 22 required checks successful and that macOS job cancelled. Checkpoint28 later finished unpromoted; current checkpoint29 freezes reviewed main248 (`9493650a`, candidate `74e77456`) on the same PR232. All 23 required checks remain mandatory and release is unchanged. [Timeout evidence](docs/spikes/macos-conformance-timeout.md).
+Native capture, primitive 2D/3D solver checkpoints and opaque ECS/physics world checkpoints are available as opt-in in-memory APIs. Public persisted physics and full script/session checkpoint admission remain separate. Historical checkpoint27 selected main241; its macOS conformance hit the configured 40-minute limit and cannot count as success. The reviewed main repair gives that macOS job 90 minutes, keeping Linux at 40 and every proof unchanged. Checkpoint27 finished unpromoted with 22 required checks successful and that macOS job cancelled. Checkpoints28 and29 later finished unpromoted. Checkpoint30 subsequently passed all 23 requirements and promoted that reviewed main252 tree (`c1988638`, candidate `721eddac`) through the same PR232. [Timeout evidence](docs/spikes/macos-conformance-timeout.md).
 
 This grouped integration adds borrowed configuration views and opaque ECS/native-physics world checkpoints. The original 3,651-input/source004 composition has independent final acceptance. A subsequent all-path manifest audit found twelve optional snapshot forwarding omissions before merge; the reviewed three-manifest repair now passes both 261-case runtime suites and all seventeen scoped checks. Selected solver modes pass, and the ordinary graph excludes snapshot. The 205 ordinary consumer cases remain source003 evidence; the earlier passing PR check is retained separately. Final independent repaired evidence review is accepted; PR246 merged after a new exact-head fast SUCCESS, with the tested tree and author trailer verified. Public persisted physics and whole script/session saves stay closed. [Current composition](docs/spikes/world-checkpoints-main245.md).
 
@@ -22,7 +443,7 @@ Default-off native capture and outer primitive in-memory checkpoints merged as P
 
 Standalone 3D physics now hides incomplete state and trigger observations after a late step error or caught unwind, and cannot be revived through structural calls. Invalid time steps remain retryable. Independent source and final producer reviews are accepted. Both producer modes, strict Clippy, native consumers and wasm compilation pass; the exact current-main239 composition additionally passes all eight default runtime cases and six checks. Final current-main review is accepted; PR240 merged after its required exact-head fast check. This does not implement rollback or physics saves. [Evidence](docs/spikes/physics-failure-isolation.md).
 
-Checkpoint26 finished unpromoted with 22 required checks successful and its original Windows Dx12 SSAO filter failure retained. PR241 merged the reviewed full-target postprocess raster and conservative integer scissor, preserving shaders, geometry projection and strict intervals. Exact merged main241 then passed both original strict Dx12 projection contracts (570 R8 and 285 depth values each) and six observation submissions on Microsoft Basic Render Driver. Historical checkpoint27 froze that reviewed main241 tree on PR232 and later finished unpromoted at its macOS conformance timeout. Current checkpoint29 includes the reviewed timeout repair; all 23 required checks remain mandatory. No release promotion or appearance claim. [Portable Dx12 evidence](docs/spikes/evidence/ssao-strict-dx12-main241/manifest.json).
+Checkpoint26 finished unpromoted with 22 required checks successful and its original Windows Dx12 SSAO filter failure retained. PR241 merged the reviewed full-target postprocess raster and conservative integer scissor, preserving shaders, geometry projection and strict intervals. Exact merged main241 then passed both original strict Dx12 projection contracts (570 R8 and 285 depth values each) and six observation submissions on Microsoft Basic Render Driver. Historical checkpoint27 froze that reviewed main241 tree on PR232 and later finished unpromoted at its macOS conformance timeout. Checkpoint30 subsequently passed all 23 requirements with the reviewed timeout and source-lock repairs, and its tested tree was promoted. No new appearance claim. [Portable Dx12 evidence](docs/spikes/evidence/ssao-strict-dx12-main241/manifest.json).
 
 Private primitive narrow-phase construction on main237 passed 227 snapshot and 45 native cases per mode, 312 decoded continuation steps per dimension/mode and all 29 checks. Source and final current-main evidence reviews are accepted; PR238 merged after its required exact-head fast check. Sixteen fast8 fixture substitutions are explicitly bound. Compound construction, complete native world installation and public physics saves stay closed. [Evidence](docs/spikes/physics-native-narrow-main237.md).
 
@@ -32,7 +453,7 @@ Private typed Parry BVH construction and shared allocation on main234 passed bot
 
 Native island construction on main231 is source-reviewed and passed current composed CPU qualification: 218 snapshot + 28 private native cases in each of two parallel modes, 156 paired island steps per dimension/mode, all 21 checks successful. Final integration and main234 join reviews are accepted; PR235 merged after its required exact-head fast check. Complete-world restore and physics-save admission remain closed. See [the scoped evidence](docs/spikes/physics-islands-main231.md).
 
-[PLAN.md](PLAN.md) revision 8 is the source of truth. Phase 1 is in progress;
+[PLAN.md](PLAN.md) revision 9 is the source of truth. Phase 1 is in progress;
 the full engine and Driftwake release are not complete. Calendar targets and
 phase durations have been removed. Work proceeds continuously and in parallel
 where dependencies allow; exit gates still require their stated evidence.
@@ -45,8 +466,11 @@ The director authorized Phase 1 with remaining Phase 0 items deferred, sensible
 engineering progress without repeated advancement questions, and agent merges
 after scoped review and passing checks. These authorizations do not approve a
 phase gate. Section 12 decisions are settled. Current computer use and screen
-capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
-visual work, and Astra owns correctness and integration.
+capture are authorized. Claude Opus 5.5 with explicitly verified Max effort owns
+editor UI design, layout, styling and pixel review by default. Astra/root and
+subagents own all other work, including rendering and non-editor visuals, and may
+take over unresolved Claude editor UI work without another routing approval.
+Prior attempts and the same acceptance/evidence requirements remain in force.
 
 ## Private primitive world — current-main qualification complete
 
@@ -277,9 +701,14 @@ unification also affects other cc build consumers in the selected host graph.
 Windows candidate execution and timing remain pending; no Windows speedup or
 performance gate is claimed. [Scope and evidence](docs/spikes/wasm-c-parallel.md).
 
-## Current overview — main251, 2026-10-13
+## Development and release overview — 2026-10-14
 
-Development main251 includes the reviewed opt-in cooked renderer families and
+The reviewed main275 baseline includes linked prefab authoring, engine pin review,
+host-bound file-pin migration and maintained QuickJS profiling,
+the measured numeric-loan optimization,
+Core sample/diagnostic tooling, profiler distributions, the Mac runner, Apple/Android host bindings, desktop
+haptics, the retained mobile Rust host, supported
+persisted native game checkpoints, and the opt-in cooked renderer families and
 Vulkan cache lifecycle, dynamic resolution, numerical retained motion, CPU/GPU
 profiling scopes and joined inert physics owner boundaries. Each lane retains its own
 execution and acceptance limits below; the complete engine and game remain open.
@@ -304,12 +733,21 @@ conformance hit its configured deadline. Main243 contains the reviewed macOS
 timeout repair. Checkpoint28 then froze main246 (`42e13e75`) at `be3422f8` on
 PR232 and finished with 13 required successes, nine failures and one skipped
 comparison. The reviewed isolated-lock and ordinary-owner Default repairs are
-merged in PR248 and await actual successor validation. Checkpoint29 freezes reviewed main248; its original Linux source-store lock test failure is retained while other jobs finish. Release remains `2a9d72ea`.
+merged in PR248. Checkpoint29 finished unpromoted with 22 required successes and the original Linux source-store lock failure. Checkpoint30 promoted exact reviewed main252 (`c1988638`, tree `393eb78c`) through PR232 after all 23 exact-head required contexts and eight workflows succeeded. Release is `71bdd2e7`; its parents, trailer and exact tested tree are verified. Later main253–275 work is outside that release. Checkpoint31 and checkpoint32
+are terminal and unpromoted, each with 22 required successes and one retained
+failure. Checkpoint33 also finished unpromoted with 22 successes and the Windows
+journal-read failure. Checkpoint34 candidate `c5c5a0c2` freezes exact main275 tree
+`c596fde9`; both desktop failures remain and other jobs continue. The current
+application/test-repair integration remains private pending final review and fast CI. The one-shot main270 Windows compiler-phase
+diagnostic passed once; its result cannot substitute for checkpoint32's failed
+required context and no timeout repair is claimed.
 PR242 merged the private primitive-world composition; PR244/245 added native
 capture and outer in-memory checkpoints, PR246 added opaque ECS/world ownership,
-and PR247 added headless native session checkpoints. These remain opt-in and
-process-local. Public persisted physics bytes remain refused; PR249 adds opt-in in-memory
-hosted UI/audio continuation and PR250 adds the complete typed game checkpoint. Each original execution generation retains its stated scope.
+and PR247 added headless native session checkpoints. PR249 adds opt-in in-memory
+hosted UI/audio continuation and PR250 adds the complete typed game checkpoint.
+This revision additionally composes the independently accepted default-off bounded
+persisted native world/session/player route; legacy component saves retain their
+physics refusal. Each original execution generation retains its stated scope.
 [Promotion evidence](docs/spikes/release-checkpoint-24.md).
 
 Checkpoint23 is terminal and unpromoted: 22 required contexts succeeded and its
@@ -317,8 +755,8 @@ macOS command journal assertion failed. The hosted error was not printed, so the
 inherited-lock cause remains inferred from a controlled local reproduction.
 PR225's test-only isolation preserves production locking and authorization.
 Earlier checkpoint21/22 portability and optional-query failures remain retained.
-Main227 onward stays outside the currently promoted release; no device, performance or phase gate follows
-from promotion. [Previous checkpoint20](docs/spikes/release-checkpoint-20.md) remains
+At checkpoint24, main227 onward remained outside that release; Release30 now
+selects main252. Neither promotion establishes a performance or phase gate. [Previous checkpoint20](docs/spikes/release-checkpoint-20.md) remains
 historical evidence for selected main205.
 
 Failed checkpoints15–19 remain historical and unpromoted. In particular, checkpoint17
@@ -2155,7 +2593,7 @@ desktop input routing and inspector presentation remain Claude handoff 0044 work
 not a completed Play UI, pixel review, phone/performance or phase gate.
 [Evidence](docs/spikes/native-editor-play.md).
 
-## Current integration and parallel work
+## Historical main89 integration and parallel work
 
 The closed retained-state / native SDK / shared Play-startup union passes 837
 ordinary and 75 serialized GPU tests, full Clippy, 536 UI tests and the fresh
@@ -2432,14 +2870,15 @@ applicable checks passed; its actual-main tree equals the tested head. [Integrat
   input/haptics/native SDK deliverables. Existing scoped/legacy implementations
   are not evidence of full native feature parity.
 - Complete Wasm gameplay SDK and module checkpoint coverage beyond the locally
-  verified single-scene public import/Play/export route; establish platform/device
-  conformance and measure the
-  settled TypeScript AOT/physics candidate adoption rules. Do not reopen Section
-  12 decisions or substitute desktop timings for reference-phone results.
-- Build and exercise Core Sample and the 2D sample on the required device classes,
-  including hosted real iPhone/Pixel devices through AWS Device Farm, with actual
-  device model/OS, shipping profile and matched baselines. Phone script p95,
-  shader-stall, frame-time and memory gates remain open.
+  verified single-scene public import/Play/export route; establish the required
+  build and hosted-CI conformance and measure the settled TypeScript AOT/physics
+  adoption criteria on this actual Mac. Keep Section 12 numerical thresholds and
+  source/build obligations; other-device comparisons are deferred, not passed.
+- Build and exercise Core Sample and the 2D sample on this actual Mac, recording
+  its model/chip/OS, shipping profile and matched baselines. Required script p95,
+  shader-stall, frame-time and memory measurements remain outstanding until
+  measured. iPhone/Pixel, other desktop and additional device execution/performance
+  are nonblocking follow-up, including any later AWS Device Farm work.
 - Deliver the remaining editor/AI/content/export/network/services/game production
   and release scope in PLAN.md. Phase 1 progress is not Engine 1.0 or Driftwake
   release completion.
@@ -2463,12 +2902,15 @@ Do not revoke the director's working account for a test. Manual Windows/Linux
 account checks and the Windows viewport review were replaced by CI under the
 director's explicit decision; no extra desktop machine or live API key is requested.
 
-Hosted device/service accounts first gate real staging or device work, not
-local feature development. Payments and human staffing/legal commitments remain
-human-owned. Signing credentials and store/developer accounts first gate
-Phase 5 store uploads. No phone purchases, name clearance or package reservations
-are required. Unsigned packages and simulator/compile-only results do not satisfy
-store distribution or real-device gates.
+Actual shipping-profile measurements on this Mac remain required where the plan
+sets a performance gate. Mobile and other-device execution/performance are deferred,
+nonblocking follow-up; their results remain unmeasured, not passed. Hosted device
+accounts are needed only for those later runs. Service accounts still gate real
+staging work. Payments and human staffing/legal commitments remain human-owned.
+Signing credentials and store/developer accounts first gate Phase 5 store uploads.
+No phone purchases, name clearance or package reservations are required. Unsigned
+packages do not satisfy store distribution, and simulator/compile-only evidence
+must not be described as actual Mac or other-device execution.
 
 Earlier implementation notes, superseded counts and publication chronology are
 preserved in the [historical ledger](docs/spikes/implementation-history-2026-10-10.md).
@@ -2728,3 +3170,17 @@ Public persisted physics saves remain refused. See
 [scope and evidence](docs/spikes/physics-native-capture-owner.md).
 
 - Historical outer compound/tile checkpoint preparation: its 12 focused CPU controls on main246 ancestry are superseded by the accepted full native union above (538 physics/ECS plus 238 script/game cases per mode). Persisted physics save bytes remain refused. See `docs/spikes/outer-compound-checkpoints.md`.
+
+
+### Checked native persisted rigid subset — producer CPU qualified
+
+Default-off byte admission now reconstructs a staged native rigid candidate under
+joined identity, geometry/contact/cache, arithmetic and budget checks. Imported
+readiness remains distinct from historical completion. Single-pass CCD includes
+actual default-enabled and implicit fast-body clamping; unsupported multi-pass,
+soft/joint/custom/cluster states refuse explicitly. Both modes pass 382 complete
+native tests each, strict native/wasm Clippy and scoped graph/guard checks. The
+independent source correction and final producer evidence are accepted; the
+joined main252 world/session/player composition remains separately reviewed. Historical CCD premise
+and fixture failures are retained. See
+[contract and evidence](docs/spikes/physics-native-persisted.md).

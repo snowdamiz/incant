@@ -1,0 +1,11 @@
+{
+  "reason": "Force reread of root-supplied shared outcome marker; only owned 0077 runner interrupted.",
+  "runner_pids": [
+    18654
+  ],
+  "owned_pids": [
+    18654,
+    18669,
+    18677
+  ]
+}

@@ -1,0 +1,404 @@
+{
+  "format": "incant-script-instance-cache-evidence",
+  "version": 1,
+  "source_commit": "7a667eaefb5dc7db1d9cae37bf4119f5172fff95",
+  "base_commit": "b34beb2883a00ecb5fcb6416e56af050889464c4",
+  "raw_root": "/Users/andreyyurlov/.codex/incant-evidence/script-instance-cache-001",
+  "records": [
+    {
+      "path": "binaries/checkpoint-001/incant_script-142ea1b496f386b0",
+      "bytes": 19998480,
+      "sha256": "b3e09c5c317ac2550d6a5d6796694ca13477c1fca22e1f2104295983e8d572fb",
+      "embedded": false,
+      "mode": "0o755"
+    },
+    {
+      "path": "binaries/private-001/incant_script-142ea1b496f386b0",
+      "bytes": 19998480,
+      "sha256": "b3e09c5c317ac2550d6a5d6796694ca13477c1fca22e1f2104295983e8d572fb",
+      "embedded": false,
+      "mode": "0o755"
+    },
+    {
+      "path": "binaries/project-001/project_bindings-3d9ca1177e3ebff8",
+      "bytes": 18199424,
+      "sha256": "e4c9f6314f394eb0f2c82338afef27e07609f5bb2c430121606b4a6ee19136d4",
+      "embedded": false,
+      "mode": "0o755"
+    },
+    {
+      "path": "binaries/project-002/project_bindings-3d9ca1177e3ebff8",
+      "bytes": 18216320,
+      "sha256": "ab05b339c691e45672dff96f304071b115a586f1ea03caf5bbfd2c0124d94e65",
+      "embedded": false,
+      "mode": "0o755"
+    },
+    {
+      "path": "binaries/project-003/project_bindings-3d9ca1177e3ebff8",
+      "bytes": 18216320,
+      "sha256": "51b51cc8411f363cfe37a47efe586d537abfe59615307db831c85ed4e2aab14c",
+      "embedded": false,
+      "mode": "0o755"
+    },
+    {
+      "path": "checkpoint-001.json",
+      "bytes": 1522,
+      "sha256": "fb3ef5d94974da93c19779f57c06dbad94d05b3b8c45607d96716776f684f2a7",
+      "embedded": true,
+      "mode": "0o644"
+    },
+    {
+      "path": "checkpoint-001.stderr",
+      "bytes": 209,
+      "sha256": "575e1671e6e6ce40cff67c0dafc45e957b3312c63eb12be474764cd43437c06d",
+      "embedded": true,
+      "mode": "0o644"
+    },
+    {
+      "path": "checkpoint-001.stdout",
+      "bytes": 1539,
+      "sha256": "62b1940a056804da7fe117692af448faa9a7fd95937c91de48991a41f840d862",
+      "embedded": true,
+      "mode": "0o644"
+    },
+    {
+      "path": "clippy-001.json",
+      "bytes": 1200,
+      "sha256": "b051c8bd537cfffa576da31d4d005511260353a230fd31625d8d4fdf9db98cb0",
+      "embedded": true,
+      "mode": "0o644"
+    },
+    {
+      "path": "clippy-001.stderr",
+      "bytes": 412,
+      "sha256": "8e97ffc0e5fa384d00f795a27c63556be1826ff0deca3ce584c3075f990fb8d5",
+      "embedded": true,
+      "mode": "0o644"
+    },
+    {
+      "path": "clippy-001.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true,
+      "mode": "0o644"
+    },
+    {
+      "path": "clippy-003.json",
+      "bytes": 1200,
+      "sha256": "e7c9d39ea285804540de15d0f07ff12ecf6ca321db336a3ef27feb15c9fedb8c",
+      "embedded": true,
+      "mode": "0o644"
+    },
+    {
+      "path": "clippy-003.stderr",
+      "bytes": 174,
+      "sha256": "c339981ab147d86deaceffcf9c5b6b22dd7237a81b064eced84b3a02554bf917",
+      "embedded": true,
+      "mode": "0o644"
+    },
+    {
+      "path": "clippy-003.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true,
+      "mode": "0o644"
+    },
+    {
+      "path": "private-001.json",
+      "bytes": 1516,
+      "sha256": "8f43f5a2bed1cf4ec75461e54563173d26245e6e901a3b4f2f3d428b2c1268de",
+      "embedded": true,
+      "mode": "0o644"
+    },
+    {
+      "path": "private-001.stderr",
+      "bytes": 565,
+      "sha256": "43231a22ab3504fbbbbff8c1db518bb6e9d11af3878ee700e08ab11ca87893e5",
+      "embedded": true,
+      "mode": "0o644"
+    },
+    {
+      "path": "private-001.stdout",
+      "bytes": 533,
+      "sha256": "d8a707504f444091de75c1a5d30d4d87b0f11a985ba3cd08f988c7b6104fd0d4",
+      "embedded": true,
+      "mode": "0o644"
+    },
+    {
+      "path": "project-001.json",
+      "bytes": 1519,
+      "sha256": "bd838e290c44c27228d8951558c250c36584e21950cdb61ac89b0db425a47f31",
+      "embedded": true,
+      "mode": "0o644"
+    },
+    {
+      "path": "project-001.stderr",
+      "bytes": 334,
+      "sha256": "fe51a8643a7a5057c741d34e8e6398b718a5bd5fef73085d790edf7cb257616f",
+      "embedded": true,
+      "mode": "0o644"
+    },
+    {
+      "path": "project-001.stdout",
+      "bytes": 1470,
+      "sha256": "5f01be3d06949ad024a005b3a5b51f160e97477d1e89f4aa41d034861c546f0c",
+      "embedded": true,
+      "mode": "0o644"
+    },
+    {
+      "path": "project-002.json",
+      "bytes": 1521,
+      "sha256": "008f03ec24dbce2001691f48cbe87555e8cd6e1dc5ea68f2c9715fd6b22fa246",
+      "embedded": true,
+      "mode": "0o644"
+    },
+    {
+      "path": "project-002.stderr",
+      "bytes": 411,
+      "sha256": "998b115096c47a78e81e65de78205585376d3b7fe601502b1a5815fe40770564",
+      "embedded": true,
+      "mode": "0o644"
+    },
+    {
+      "path": "project-002.stdout",
+      "bytes": 2143,
+      "sha256": "00d404736a1649528c2db43a8a34bb361ee4d1a77269595bfbadea50c1a41261",
+      "embedded": true,
+      "mode": "0o644"
+    },
+    {
+      "path": "project-003.json",
+      "bytes": 1519,
+      "sha256": "1fa5cee74834a70b036c5b53fd70ea03a075ab476f979fe97111b6e6d6f35b53",
+      "embedded": true,
+      "mode": "0o644"
+    },
+    {
+      "path": "project-003.stderr",
+      "bytes": 334,
+      "sha256": "3b29765ff08f44995671073703f354e606c12af6ad78bd173f1d06aecbc424e4",
+      "embedded": true,
+      "mode": "0o644"
+    },
+    {
+      "path": "project-003.stdout",
+      "bytes": 1559,
+      "sha256": "934f336fa63a52b543b6a7c14e5b3d6e68745c5affca79be6e234836e81915c5",
+      "embedded": true,
+      "mode": "0o644"
+    },
+    {
+      "path": "run.py",
+      "bytes": 2657,
+      "sha256": "bf45b18e8330ff6247f5d38ff20360dc1997935b2e6431db697088c078a2d0d8",
+      "embedded": true,
+      "mode": "0o644"
+    },
+    {
+      "path": "source-001/crates/incant_script/src/bindings/cache_tests.rs",
+      "bytes": 6805,
+      "sha256": "a8fe1842967330ba904252f74342d248a931d04e906c563e55a1c2bf445306c9",
+      "embedded": true,
+      "mode": "0o644"
+    },
+    {
+      "path": "source-001/crates/incant_script/src/bindings.rs",
+      "bytes": 13297,
+      "sha256": "227c71059fa5c1d13b9e0976ae3df52916a26eca48e514b0b4c34c05fba7baff",
+      "embedded": true,
+      "mode": "0o644"
+    },
+    {
+      "path": "source-001/crates/incant_script/src/lib.rs",
+      "bytes": 26386,
+      "sha256": "0603cf6f40e6eece7744bd5a29cd5506aca809e09579e3bf1695f1edf2521af9",
+      "embedded": true,
+      "mode": "0o644"
+    },
+    {
+      "path": "source-001/crates/incant_script/tests/project_bindings/cache.rs",
+      "bytes": 5380,
+      "sha256": "8755317ffe495771180237e001ddab4cf3f1340eb79b4e99c06e5fb59af5b934",
+      "embedded": true,
+      "mode": "0o644"
+    },
+    {
+      "path": "source-001/crates/incant_script/tests/project_bindings.rs",
+      "bytes": 16671,
+      "sha256": "277cce5692f35809cef316e3e319a8f50f2b11eb2ee822952f48b8e2d6c4e344",
+      "embedded": true,
+      "mode": "0o644"
+    },
+    {
+      "path": "source-001/freeze.json",
+      "bytes": 956,
+      "sha256": "fe41adaef46dda8ca5c6875f621045d99109b19943d88a11f56611e5d91defb0",
+      "embedded": true,
+      "mode": "0o644"
+    },
+    {
+      "path": "source-002/crates/incant_script/src/bindings/cache_tests.rs",
+      "bytes": 8238,
+      "sha256": "904539f406caa4fbf5f843e87f48e5220754ba50a8e68b9e89e5a32c254fb00f",
+      "embedded": true,
+      "mode": "0o644"
+    },
+    {
+      "path": "source-002/crates/incant_script/src/bindings.rs",
+      "bytes": 13297,
+      "sha256": "227c71059fa5c1d13b9e0976ae3df52916a26eca48e514b0b4c34c05fba7baff",
+      "embedded": true,
+      "mode": "0o644"
+    },
+    {
+      "path": "source-002/crates/incant_script/src/lib.rs",
+      "bytes": 26386,
+      "sha256": "0603cf6f40e6eece7744bd5a29cd5506aca809e09579e3bf1695f1edf2521af9",
+      "embedded": true,
+      "mode": "0o644"
+    },
+    {
+      "path": "source-002/crates/incant_script/tests/project_bindings/cache.rs",
+      "bytes": 5392,
+      "sha256": "2d62289065022a37f7252e1c36d0253cabad886bdee98af26ec338814f9ce415",
+      "embedded": true,
+      "mode": "0o644"
+    },
+    {
+      "path": "source-002/crates/incant_script/tests/project_bindings.rs",
+      "bytes": 16671,
+      "sha256": "277cce5692f35809cef316e3e319a8f50f2b11eb2ee822952f48b8e2d6c4e344",
+      "embedded": true,
+      "mode": "0o644"
+    },
+    {
+      "path": "source-002/freeze.json",
+      "bytes": 1104,
+      "sha256": "eb3cc959da5e89a82aaf183d37f1d5b651b2e6a7d47fe6092e38af88f45e88de",
+      "embedded": true,
+      "mode": "0o644"
+    },
+    {
+      "path": "source-003/crates/incant_script/src/bindings/cache_tests.rs",
+      "bytes": 8238,
+      "sha256": "904539f406caa4fbf5f843e87f48e5220754ba50a8e68b9e89e5a32c254fb00f",
+      "embedded": true,
+      "mode": "0o644"
+    },
+    {
+      "path": "source-003/crates/incant_script/src/bindings.rs",
+      "bytes": 13297,
+      "sha256": "227c71059fa5c1d13b9e0976ae3df52916a26eca48e514b0b4c34c05fba7baff",
+      "embedded": true,
+      "mode": "0o644"
+    },
+    {
+      "path": "source-003/crates/incant_script/src/lib.rs",
+      "bytes": 26386,
+      "sha256": "0603cf6f40e6eece7744bd5a29cd5506aca809e09579e3bf1695f1edf2521af9",
+      "embedded": true,
+      "mode": "0o644"
+    },
+    {
+      "path": "source-003/crates/incant_script/tests/project_bindings/cache.rs",
+      "bytes": 6991,
+      "sha256": "6a127db73fdf66da640e718a7e542d54c126b07911af98a3d47f803747d19010",
+      "embedded": true,
+      "mode": "0o644"
+    },
+    {
+      "path": "source-003/crates/incant_script/tests/project_bindings.rs",
+      "bytes": 16671,
+      "sha256": "277cce5692f35809cef316e3e319a8f50f2b11eb2ee822952f48b8e2d6c4e344",
+      "embedded": true,
+      "mode": "0o644"
+    },
+    {
+      "path": "source-003/freeze.json",
+      "bytes": 1126,
+      "sha256": "e16654d3f6c77ff84fa0482bb596d898995018e430a67c2489f7dc77695f0fc0",
+      "embedded": true,
+      "mode": "0o644"
+    },
+    {
+      "path": "source-004/crates/incant_script/src/bindings/cache_tests.rs",
+      "bytes": 8238,
+      "sha256": "904539f406caa4fbf5f843e87f48e5220754ba50a8e68b9e89e5a32c254fb00f",
+      "embedded": true,
+      "mode": "0o644"
+    },
+    {
+      "path": "source-004/crates/incant_script/src/bindings.rs",
+      "bytes": 13297,
+      "sha256": "227c71059fa5c1d13b9e0976ae3df52916a26eca48e514b0b4c34c05fba7baff",
+      "embedded": true,
+      "mode": "0o644"
+    },
+    {
+      "path": "source-004/crates/incant_script/src/lib.rs",
+      "bytes": 26386,
+      "sha256": "0603cf6f40e6eece7744bd5a29cd5506aca809e09579e3bf1695f1edf2521af9",
+      "embedded": true,
+      "mode": "0o644"
+    },
+    {
+      "path": "source-004/crates/incant_script/tests/project_bindings/cache.rs",
+      "bytes": 6993,
+      "sha256": "0c4667eb94e5985b63b62f8476368e0556b9e4ae4f09e32032ef10ce6c294942",
+      "embedded": true,
+      "mode": "0o644"
+    },
+    {
+      "path": "source-004/crates/incant_script/tests/project_bindings.rs",
+      "bytes": 16671,
+      "sha256": "277cce5692f35809cef316e3e319a8f50f2b11eb2ee822952f48b8e2d6c4e344",
+      "embedded": true,
+      "mode": "0o644"
+    },
+    {
+      "path": "source-004/freeze.json",
+      "bytes": 1095,
+      "sha256": "e3c6e998c74adf8526cd6c1e1ed327f0d586197a7df6526ca51ffc7f9052062d",
+      "embedded": true,
+      "mode": "0o644"
+    }
+  ],
+  "archive_sha256": "1efceae5eacf4808913dcaef5ff0fa50d0684b4a17020f276db4e6f8ceb98d41",
+  "sources": [
+    {
+      "path": "crates/incant_script/src/bindings.rs",
+      "sha256": "227c71059fa5c1d13b9e0976ae3df52916a26eca48e514b0b4c34c05fba7baff"
+    },
+    {
+      "path": "crates/incant_script/src/bindings/cache_tests.rs",
+      "sha256": "904539f406caa4fbf5f843e87f48e5220754ba50a8e68b9e89e5a32c254fb00f"
+    },
+    {
+      "path": "crates/incant_script/src/lib.rs",
+      "sha256": "0603cf6f40e6eece7744bd5a29cd5506aca809e09579e3bf1695f1edf2521af9"
+    },
+    {
+      "path": "crates/incant_script/tests/project_bindings.rs",
+      "sha256": "277cce5692f35809cef316e3e319a8f50f2b11eb2ee822952f48b8e2d6c4e344"
+    },
+    {
+      "path": "crates/incant_script/tests/project_bindings/cache.rs",
+      "sha256": "0c4667eb94e5985b63b62f8476368e0556b9e4ae4f09e32032ef10ce6c294942"
+    }
+  ],
+  "verifier_sha256": "b2ace1a4db38046a64196b5e70f4b1eb92407bc2f073dc6c80a7576b9ea5978b",
+  "passing_commands": [
+    "private-001",
+    "project-001",
+    "checkpoint-001",
+    "clippy-001",
+    "project-003",
+    "clippy-003"
+  ],
+  "historical_failure": "project-002: source003 added fixture has malformed JS;16passed/1failed. source004 brace-only correction passes.",
+  "limits": [
+    "Explicit native ci/deterministic/compiler scope, no full-workspace or fast-mode claim.",
+    "No shipping measurement, GPU, changed workload or altered runtime budgets.",
+    "Immediate copied executables are externally hash-bound; portable mode verifies their recorded identities only."
+  ]
+}

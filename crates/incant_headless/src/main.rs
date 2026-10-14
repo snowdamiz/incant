@@ -3,6 +3,7 @@ use incant_agent_native::GpuPerception;
 use incant_render_authoring::RendererAuthoringExt as _;
 mod agent_command;
 mod assets;
+mod engine_version;
 mod eval;
 mod localization;
 mod native_play;
@@ -19,7 +20,7 @@ use incant_agent::{
 };
 use incant_cmd::{Actor, CommandBus};
 use incant_core::Engine;
-use incant_doc::{Entity, Project, Scene, Transform, new_id, schema_registry};
+use incant_doc::{Entity, Project, Scene, Transform, new_id};
 use incant_play_legacy::PlaySession;
 use serde::Serialize;
 use serde_json::{Value, json};
@@ -91,6 +92,14 @@ enum Cli {
         polls: Option<u64>,
     },
     Validate {
+        project: PathBuf,
+    },
+    /// Inspect the declared engine requirement without changing the project.
+    EngineCompatibility {
+        project: PathBuf,
+    },
+    /// Review an explicit metadata pin for a legacy unpinned project; writes nothing.
+    ReviewEnginePin {
         project: PathBuf,
     },
     /// Report absent translations; exits unsuccessfully unless fallback is explicitly allowed.
@@ -176,7 +185,7 @@ enum AuthCli {
 fn read_project(path: &Path) -> Result<Project> {
     Ok(Project::from_text(&fs::read_to_string(path)?)?)
 }
-fn save(path: &Path, text: &str) -> Result<()> {
+fn save_derived(path: &Path, text: &str) -> Result<()> {
     let parent = path
         .parent()
         .filter(|p| !p.as_os_str().is_empty())
@@ -279,16 +288,12 @@ fn auth_command(action: AuthCli) -> Result<()> {
     Ok(())
 }
 fn rpc(project: PathBuf, journal: Option<PathBuf>) -> Result<()> {
-    let initial = read_project(&project)?;
     let root = project
         .parent()
         .filter(|p| !p.as_os_str().is_empty())
         .unwrap_or(Path::new("."));
-    let mut bus = if let Some(path) = journal {
-        CommandBus::persistent_with_sources(path, initial, root)?
-    } else {
-        CommandBus::new(initial)?
-    };
+    let journal = journal.unwrap_or_else(|| project.with_extension("journal.jsonl"));
+    let mut bus = CommandBus::open_project_file_with_journal(&project, journal)?;
     let mut play = incant_agent_native::Controller::new(native_play::embedded::load);
     for line in io::stdin().lock().lines() {
         let line = line?;
@@ -301,9 +306,12 @@ fn rpc(project: PathBuf, journal: Option<PathBuf>) -> Result<()> {
             let empty = json!({});
             let params = request.get("params").unwrap_or(&empty);
             match request["method"].as_str().ok_or("missing RPC method")?{
-  "project.read"=>Ok(json!({"project":bus.project(),"revision":bus.revision()})),
-  "project.save"=>{bus.ensure_sources_ready()?;save(&project,&bus.project().canonical_text()?)?;Ok(json!({"saved":true}))},
-  "schema.list"=>Ok(json!(schema_registry())),
+  "project.engine_compatibility"=>Ok(serde_json::to_value(bus.project().engine_compatibility()?)?),
+  "project.review_engine_pin"=>engine_version::review(&bus,&project,params.clone()),
+  "project.read"=>Ok(json!({"project":bus.project(),"revision":bus.revision(),"project_file":{"available":bus.has_project_file()}})),
+  "project.file"=>Ok(serde_json::to_value(bus.project_file_request(serde_json::from_value(params.clone())?,Actor::user("editor"))?)?),
+  "project.save"=>{let request: engine_version::SaveRequest=serde_json::from_value(params.clone())?;let receipt=bus.save_project_file(request.expected_revision.unwrap_or_else(|| bus.revision()),Actor::user("editor"))?;Ok(json!({"saved":true,"receipt":receipt}))},
+  "schema.list"=>Ok(json!(engine_version::schemas())),
   "command.execute"=>{let commands=serde_json::from_value(params["commands"].clone())?;let revision=params["expected_revision"].as_u64().ok_or("expected_revision required")?;let tx=bus.execute(commands,Actor::user("editor"),params["description"].as_str().unwrap_or("Editor edit"),Some(revision))?;let tid=tx.id.clone();Ok(json!({"transaction_id":tid,"revision":bus.revision(),"project":bus.project()}))},
   "script.read"=>Ok(incant_agent::dispatch(&mut bus,&mut incant_agent::NoViewport,"script_read",params.clone(),Actor::user("editor"))?),
   "script.write"=>Ok(incant_agent::dispatch(&mut bus,&mut incant_agent::NoViewport,"script_write",params.clone(),Actor::user("editor"))?),
@@ -376,6 +384,8 @@ fn run() -> Result<()> {
             print(json!({"created":project.id,"entities":entities}))?;
         }
         Cli::Validate { project } => assets::validate(&project)?,
+        Cli::EngineCompatibility { project } => print(engine_version::inspect(&project, false)?)?,
+        Cli::ReviewEnginePin { project } => print(engine_version::inspect(&project, true)?)?,
         Cli::LocalizationCheck {
             project,
             locale,
@@ -428,7 +438,7 @@ fn run() -> Result<()> {
         }
         Cli::Schema { directory } => {
             fs::create_dir_all(&directory)?;
-            let mut registry = schema_registry();
+            let mut registry = engine_version::schemas();
             registry.insert(
                 "GameSave".into(),
                 json!(schemars::schema_for!(incant_play_legacy::GameSave)),
@@ -592,12 +602,12 @@ fn run() -> Result<()> {
                 ),
             ]);
             for (name, schema) in registry {
-                save(
+                save_derived(
                     &directory.join(format!("{name}.schema.json")),
                     &(serde_json::to_string_pretty(&schema)? + "\n"),
                 )?;
             }
-            save(
+            save_derived(
                 &directory.join("agent-tools.json"),
                 &(serde_json::to_string_pretty(&incant_agent::tools())? + "\n"),
             )?;

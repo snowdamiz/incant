@@ -112,22 +112,111 @@ fn numeric_source_bound_drops_excess_without_unbounded_registry_or_hot_allocatio
     assert_eq!(report.scripts[0].totals.calls, 1001);
 }
 #[test]
-fn heap_metrics_are_vm_samples_and_rust_requested_sizes_are_separate() {
+fn heap_modes_preserve_missing_detail_and_sampled_peaks() {
     let _lock = lock();
+    for mode in [HeapMode::Maintained, HeapMode::Detailed] {
+        let capture = Capture::start_with_heap_mode(mode).unwrap();
+        let empty = capture.report().quickjs_heap;
+        assert!(empty.latest.is_none());
+        assert!(empty.sampled_peak_allocated_bytes.is_none());
+        for (allocated_bytes, allocation_count, used) in [(32, 3, 17), (24, 2, 12)] {
+            quickjs_observation().unwrap().record(Some(HeapSample {
+                allocated_bytes,
+                allocation_count,
+                limit_bytes: 64,
+                estimated_used_bytes: (mode == HeapMode::Detailed).then_some(used),
+            }));
+        }
+        let report = capture.report();
+        let heap = report.quickjs_heap;
+        assert_eq!(heap.samples, 2);
+        assert_eq!(heap.invalid_samples, 0);
+        assert_eq!(heap.latest.unwrap().allocated_bytes, 24);
+        assert_eq!(heap.sampled_peak_allocated_bytes, Some(32));
+        assert_eq!(heap.sampled_peak_allocation_count, Some(3));
+        assert_eq!(
+            heap.sampled_peak_estimated_used_bytes,
+            (mode == HeapMode::Detailed).then_some(17)
+        );
+        assert_eq!(
+            heap.detailed_samples,
+            if mode == HeapMode::Detailed { 2 } else { 0 }
+        );
+        assert!(report.rust_allocations.installed);
+    }
+}
+#[test]
+fn heap_failure_mode_mismatch_and_retired_request_never_forge_samples() {
+    let _lock = lock();
+    assert!(quickjs_observation().is_none());
     let capture = Capture::start().unwrap();
-    quickjs_heap(HeapSample {
-        used_bytes: 17,
+    let stale = quickjs_observation().unwrap();
+    let value = HeapSample {
         allocated_bytes: 32,
         allocation_count: 3,
-    });
-    quickjs_heap(HeapSample {
-        used_bytes: 12,
-        allocated_bytes: 24,
-        allocation_count: 2,
-    });
+        limit_bytes: 64,
+        estimated_used_bytes: None,
+    };
+    quickjs_observation().unwrap().record(None);
+    quickjs_observation().unwrap().record(Some(HeapSample {
+        estimated_used_bytes: Some(1),
+        ..value
+    }));
+    assert_eq!(capture.report().quickjs_heap.invalid_samples, 2);
+    assert_eq!(capture.report().quickjs_heap.samples, 0);
+    drop(capture);
+    let replacement = Capture::start_with_heap_mode(HeapMode::Detailed).unwrap();
+    stale.record(Some(value));
+    assert_eq!(replacement.report().quickjs_heap.samples, 0);
+    assert_eq!(replacement.report().quickjs_heap.invalid_samples, 0);
+    quickjs_observation().unwrap().record(Some(value));
+    assert_eq!(replacement.report().quickjs_heap.invalid_samples, 1);
+    assert!(replacement.report().quickjs_heap.latest.is_none());
+}
+
+#[test]
+fn guarded_frames_track_success_failure_unwind_and_capture_generation() {
+    let _lock = lock();
+    let capture = Capture::start().unwrap();
+    frame(|| {
+        let _tick = scope(Phase::ScriptTick);
+        Ok::<_, ()>(())
+    })
+    .unwrap();
     let report = capture.report();
-    assert_eq!(report.quickjs_heap.samples, 2);
-    assert_eq!(report.quickjs_heap.latest.used_bytes, 12);
-    assert_eq!(report.quickjs_heap.peak_used_bytes, 17);
-    assert!(report.rust_allocations.installed);
+    assert_eq!(report.version, 3);
+    assert_eq!(report.frame_wall.successful_frames, 1);
+    assert_eq!(
+        report.frame_wall.phases[Phase::ScriptTick as usize].samples,
+        1
+    );
+    assert!(
+        report.frame_wall.phases[Phase::ScriptTick as usize]
+            .p95_upper_ns
+            .is_some()
+    );
+    assert!(
+        std::panic::catch_unwind(|| frame(|| -> Result<(), ()> { panic!("frame unwind") }))
+            .is_err()
+    );
+    let report = capture.report();
+    assert_eq!(report.failed_frames, 1);
+    assert_eq!(report.frame_wall.failed_frames, 1);
+    assert!(
+        report
+            .frame_wall
+            .phases
+            .iter()
+            .all(|r| r.p95_upper_ns.is_none())
+    );
+    let mut replacement = None;
+    frame(|| {
+        drop(capture);
+        replacement = Some(Capture::start().unwrap());
+        Ok::<_, ()>(())
+    })
+    .unwrap();
+    let report = replacement.unwrap().report();
+    assert_eq!(report.frame_wall.attempted_frames, 0);
+    assert_eq!(report.completed_frames, 0);
 }

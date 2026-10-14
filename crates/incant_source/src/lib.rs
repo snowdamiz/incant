@@ -11,6 +11,10 @@ mod platform;
 #[path = "unsupported.rs"]
 mod platform;
 use platform::Dir;
+mod project;
+pub use project::{
+    MAX_PROJECT_BYTES, OpenedProject, ProjectEdit, ProjectPending, ProjectSnapshot, bounded_json,
+};
 const SUPPORTED: bool = cfg!(any(target_os = "linux", target_os = "macos", windows));
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
@@ -189,9 +193,13 @@ pub fn check_recovery(root: &Path) -> Result<SourceEpoch, SourceError> {
     let Some(state) = state(&root)? else {
         return Ok(SourceEpoch(String::new()));
     };
-    let check = || match optional_read(&state, "pending", MAX_MARKER_BYTES) {
-        Ok(None) => Ok(()),
-        _ => Err(SourceError::RecoveryRequired),
+    let check = || {
+        for name in ["pending", "project.pending"] {
+            if !matches!(optional_read(&state, name, 0), Ok(None)) {
+                return Err(SourceError::RecoveryRequired);
+            }
+        }
+        Ok(())
     };
     check()?;
     let receipt = optional_read(&state, "receipt", 128)
@@ -217,7 +225,10 @@ impl SourceStore {
         if !SUPPORTED {
             return Err(SourceError::Unavailable);
         }
-        let root = Dir::root(root)?;
+        let canonical = std::fs::canonicalize(journal)?;
+        Self::open_at(Dir::root(root)?, &canonical, project_id)
+    }
+    fn open_at(root: Dir, journal: &Path, project_id: &str) -> Result<Self, SourceError> {
         let state = match state(&root)? {
             Some(dir) => dir,
             None => {
@@ -233,7 +244,6 @@ impl SourceStore {
         platform::regular(&lock)?;
         lock.try_lock()
             .map_err(|e| SourceError::Io(io::Error::other(e)))?;
-        let journal = std::fs::canonicalize(journal)?;
         let binding = format!(
             "{:x}",
             Sha256::digest(format!("{project_id}\n{}", journal.to_string_lossy()))
@@ -297,7 +307,9 @@ impl SourceStore {
         Ok(Some(pending))
     }
     pub fn ensure_ready(&self) -> Result<(), SourceError> {
-        if self.pending()?.is_some() {
+        if self.pending()?.is_some()
+            || !matches!(optional_read(&self.state, "project.pending", 0), Ok(None))
+        {
             return Err(SourceError::RecoveryRequired);
         }
         Ok(())
@@ -423,6 +435,11 @@ impl SourceStore {
         if self.pending()?.is_none_or(|p| p.operation != operation) {
             return Err(SourceError::RecoveryRequired);
         }
+        self.publish_receipt(operation)?;
+        self.state.remove("pending")?;
+        Ok(())
+    }
+    fn publish_receipt(&self, operation: &str) -> Result<(), SourceError> {
         let next = format!("{operation}.receipt");
         // Idempotent after crashes anywhere during receipt publication.
         if optional_read(&self.state, "receipt", 128)? != Some(operation.into()) {
@@ -439,7 +456,6 @@ impl SourceStore {
             #[cfg(test)]
             crash_point("receipt_published");
         }
-        self.state.remove("pending")?;
         Ok(())
     }
 }

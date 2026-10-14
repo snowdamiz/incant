@@ -136,7 +136,7 @@ pub fn run(
         };
         results.push(json!({"case":case.id,"passed":ok,"exact_state":exact_state,"three_tools":all_tools,"provenance":provenance,"undo":undo_ok,"transaction_limit":transaction_limit,"elapsed_ms":started.elapsed().as_millis(),"used_tokens":agent.budget.used_tokens,"report":report,"error":error,"actual":actual}));
         // Persist after each case; interrupted runs cannot masquerade as 20/20.
-        save(
+        save_derived(
             output,
             &(serde_json::to_string_pretty(
                 &json!({"version":1,"live_inference":true,"model":model,"selected_case":selected,"max_output_tokens":max_output_tokens,"completed":results.len(),"passed":passed,"required":required,"gate_passed":gate_passed(selected, results.len(), passed),"cases":results}),

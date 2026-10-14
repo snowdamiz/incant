@@ -23,6 +23,7 @@ struct State {
     frames: [u64; 2],
     heap: QuickJsHeap,
     tracy: bool,
+    distribution: crate::frame::Frames,
 }
 impl State {
     const fn new() -> Self {
@@ -40,17 +41,9 @@ impl State {
             sources: [None; MAX_SOURCES],
             dropped: 0,
             frames: [0; 2],
-            heap: QuickJsHeap {
-                samples: 0,
-                latest: HeapSample {
-                    used_bytes: 0,
-                    allocated_bytes: 0,
-                    allocation_count: 0,
-                },
-                peak_used_bytes: 0,
-                peak_allocated_bytes: 0,
-            },
+            heap: QuickJsHeap::empty(HeapMode::Maintained),
             tracy: false,
+            distribution: crate::frame::Frames::empty(),
         }
     }
 }
@@ -82,14 +75,21 @@ pub struct Capture {
 }
 impl Capture {
     pub fn start() -> Result<Self, Error> {
-        Self::begin(false)
+        Self::start_with_heap_mode(HeapMode::Maintained)
     }
     /// Standalone CLI only: transport is loopback/on-demand, lives until process exit.
     /// No unsafe Tracy shutdown or restart is attempted. Embedded hosts use start().
     pub fn start_tracy_process() -> Result<Self, Error> {
-        Self::begin(true)
+        Self::start_tracy_process_with_heap_mode(HeapMode::Maintained)
     }
-    fn begin(tracy: bool) -> Result<Self, Error> {
+    /// Select detailed heap enumeration explicitly; default collection is constant-time.
+    pub fn start_with_heap_mode(mode: HeapMode) -> Result<Self, Error> {
+        Self::begin(false, mode)
+    }
+    pub fn start_tracy_process_with_heap_mode(mode: HeapMode) -> Result<Self, Error> {
+        Self::begin(true, mode)
+    }
+    fn begin(tracy: bool, mode: HeapMode) -> Result<Self, Error> {
         if !cfg!(any(unix, windows)) || cpu().is_none() {
             return Err(Error::ClockUnavailable);
         }
@@ -105,6 +105,8 @@ impl Capture {
         *s = State {
             generation,
             tracy,
+            heap: QuickJsHeap::empty(mode),
+            distribution: crate::frame::Frames::allocated()?,
             ..State::new()
         };
         #[cfg(all(feature = "tracy", any(unix, windows)))]
@@ -128,7 +130,8 @@ impl Capture {
         let s = state();
         let allocations = crate::allocation::since(self.allocation_start);
         Report {
-            version: 1,
+            version: 3,
+            frame_wall: s.distribution.report(),
             scope: "process; inclusive wall and current-thread CPU zones; allocation counters are requested Rust sizes, not RSS",
             generation: self.generation,
             zones: Phase::ALL
@@ -174,6 +177,7 @@ struct Started {
     generation: u64,
     phase: Phase,
     source: Option<usize>,
+    frame: Option<u64>,
     wall: Instant,
     cpu: Option<Duration>,
     _thread: PhantomData<Rc<()>>,
@@ -183,15 +187,15 @@ struct Started {
 pub struct Scope(Option<Started>);
 #[inline]
 pub fn scope(phase: Phase) -> Scope {
-    begin(phase, None)
+    begin(phase, None, None)
 }
 #[inline]
 pub fn script_scope(source: Option<[u8; 16]>) -> Scope {
-    begin(Phase::ScriptSource, Some(source))
+    begin(Phase::ScriptSource, Some(source), None)
 }
-fn begin(phase: Phase, source: Option<Option<[u8; 16]>>) -> Scope {
+fn begin(phase: Phase, source: Option<Option<[u8; 16]>>, expected: Option<u64>) -> Scope {
     let generation = ACTIVE.load(Ordering::Acquire);
-    if generation == 0 {
+    if generation == 0 || expected.is_some_and(|expected| expected != generation) {
         return Scope(None);
     }
     let mut s = state();
@@ -218,11 +222,13 @@ fn begin(phase: Phase, source: Option<Option<[u8; 16]>>) -> Scope {
     } else {
         None
     };
+    let frame = s.distribution.begin_scope(phase);
     drop(s);
     Scope(Some(Started {
         generation,
         phase,
         source: slot,
+        frame,
         wall: Instant::now(),
         cpu: cpu(),
         _thread: PhantomData,
@@ -245,6 +251,8 @@ impl Drop for Scope {
         if ACTIVE.load(Ordering::Acquire) != start.generation {
             return;
         }
+        s.distribution
+            .end_scope(start.frame, start.phase, wall, std::thread::panicking());
         let update = |t: &mut Totals| {
             t.calls = t.calls.saturating_add(1);
             t.wall_ns = t.wall_ns.saturating_add(wall);
@@ -269,22 +277,46 @@ impl Drop for Scope {
         }
     }
 }
-pub fn quickjs_heap(sample: HeapSample) {
+/// Capture a generation-bound observation request before touching the VM.
+/// A retired request can never publish a sample into a replacement capture.
+pub fn quickjs_observation() -> Option<HeapObservation> {
     let generation = ACTIVE.load(Ordering::Acquire);
     if generation == 0 {
-        return;
+        return None;
     }
-    let mut s = state();
+    let s = state();
     if ACTIVE.load(Ordering::Acquire) != generation {
-        return;
+        return None;
     }
-    s.heap.samples = s.heap.samples.saturating_add(1);
-    s.heap.latest = sample;
-    s.heap.peak_used_bytes = s.heap.peak_used_bytes.max(sample.used_bytes);
-    s.heap.peak_allocated_bytes = s.heap.peak_allocated_bytes.max(sample.allocated_bytes);
-    #[cfg(all(feature = "tracy", any(unix, windows)))]
-    if s.tracy {
-        crate::tracy::heap(sample);
+    Some(HeapObservation {
+        generation,
+        mode: s.heap.mode,
+    })
+}
+pub struct HeapObservation {
+    generation: u64,
+    mode: HeapMode,
+}
+impl HeapObservation {
+    pub fn mode(&self) -> HeapMode {
+        self.mode
+    }
+    /// None records a conversion/measurement failure, not a zero-sized heap.
+    pub fn record(self, sample: Option<HeapSample>) {
+        let mut s = state();
+        if ACTIVE.load(Ordering::Acquire) != self.generation {
+            return;
+        }
+        #[cfg(all(feature = "tracy", any(unix, windows)))]
+        let sample = s.heap.record(sample);
+        #[cfg(not(all(feature = "tracy", any(unix, windows))))]
+        s.heap.record(sample);
+        #[cfg(all(feature = "tracy", any(unix, windows)))]
+        if s.tracy
+            && let Some(sample) = sample
+        {
+            crate::tracy::heap(sample);
+        }
     }
 }
 pub fn frame_outcome(success: bool) {
@@ -301,5 +333,65 @@ pub fn frame_outcome(success: bool) {
     #[cfg(all(feature = "tracy", any(unix, windows)))]
     if s.tracy {
         crate::tracy::frame(crate::allocation::snapshot());
+    }
+}
+
+/// Measure one synchronous simulation attempt. Failure and unwind invalidate
+/// quantiles; event-loop waits and presentation-only refreshes stay outside.
+#[inline]
+pub fn frame<T, E>(run: impl FnOnce() -> Result<T, E>) -> Result<T, E> {
+    let mut guard = FrameGuard::begin();
+    let result = run();
+    guard.success = result.is_ok();
+    result
+}
+struct FrameGuard {
+    generation: u64,
+    id: Option<u64>,
+    scope: Option<Scope>,
+    success: bool,
+}
+impl FrameGuard {
+    fn begin() -> Self {
+        let generation = ACTIVE.load(Ordering::Acquire);
+        let mut guard = Self {
+            generation,
+            id: None,
+            scope: None,
+            success: false,
+        };
+        if generation == 0 {
+            return guard;
+        }
+        let mut s = state();
+        if ACTIVE.load(Ordering::Acquire) != generation {
+            guard.generation = 0;
+            return guard;
+        }
+        guard.id = s.distribution.begin();
+        drop(s);
+        if guard.id.is_some() {
+            guard.scope = Some(begin(Phase::Frame, None, Some(generation)));
+        }
+        guard
+    }
+}
+impl Drop for FrameGuard {
+    fn drop(&mut self) {
+        drop(self.scope.take());
+        if self.generation == 0 {
+            return;
+        }
+        let mut s = state();
+        if ACTIVE.load(Ordering::Acquire) != self.generation {
+            return;
+        }
+        s.distribution.finish(self.id, self.success);
+        let i = usize::from(!self.success);
+        s.frames[i] = s.frames[i].saturating_add(1);
+        #[cfg(all(feature = "tracy", any(unix, windows)))]
+        if s.tracy {
+            crate::tracy::frame(crate::allocation::snapshot());
+        }
     }
 }

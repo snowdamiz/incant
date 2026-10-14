@@ -2,8 +2,9 @@
 
 Work in progress toward the Phase 1 sample in PLAN.md. The native TypeScript
 gameplay controller has passed development and source-free shipping checks;
-the finished level, presentation, audio and reference-device results are still
-being assembled.
+the finished level, presentation and Mac performance qualification remain in
+progress. Other-device testing is deferred and does not block the phase gate.
+See [current implementation status](../../STATUS.md) for measured results.
 
 `gameplay.ts` updates the scene through native bulk component columns. Its one
 controller instance references a player, a navigation mesh, an exit, enemies
@@ -14,7 +15,13 @@ camera follows the player while preserving its authored offset and rotation.
 Configured actors must be unparented. Off-mesh links need an explicit traversal
 controller and are refused here.
 
-Check the source with `node node_modules/typescript/bin/tsc -p samples/core/tsconfig.json`.
+Run `npm run test:core` for strict TypeScript, bulk-view lifetime and stress-helper
+controls. These also run through `npm run test:tools` in CI. The scripts cache
+immutable row labels and configuration-derived offsets only; each callback reads
+the current numeric views and strides. Controls cover reordered and removed rows,
+detached old buffers, changed strides and attachment membership. Node controls
+do not replace native execution or shipping measurements.
+
 Build the headless tool using `./tools/cargo build --locked --profile ci -p incant_headless`.
 Then run `python3 samples/core/verify.py <new-output-directory> --binary <incant_headless>`.
 

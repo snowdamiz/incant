@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "source": "f0f91be4fd1761edd9b0dfd042f5d818ca8ee1aa",
+  "records": 31,
+  "payloads": 27,
+  "archive": {
+    "path": "docs/spikes/evidence/profile-distributions-main257/records.json.gz",
+    "bytes": 363887,
+    "sha256": "9e2a583301c7078921b007755a6b48db616a75d976cc1416964d516afefe352c"
+  },
+  "qualification": {
+    "path": "docs/spikes/evidence/profile-distributions-main257/qualification.json",
+    "bytes": 598,
+    "sha256": "a0e6fece71e27d701c6dca7107a82dc4de99d6400039b2d949222dc9029b2f8b"
+  },
+  "verifier": {
+    "path": "docs/spikes/evidence/profile-distributions-main257/verify.py",
+    "bytes": 6727,
+    "sha256": "ad3af099ae7ac6d8f6426a10425003b5ab0d56d19868a77a7fa4ebb809801a39"
+  },
+  "reviews": [
+    {
+      "path": "docs/spikes/evidence/profile-distributions-main257/profile-distributions-main257-source-root-20261013.json",
+      "bytes": 434,
+      "sha256": "c898d0af6acf1171935c23dc16886de317069bf81abf6bd5653b30309ea74260"
+    },
+    {
+      "path": "docs/spikes/evidence/profile-distributions-main257/native-profile-distributions-root-20261013.json",
+      "bytes": 1142,
+      "sha256": "1c6716d55bb90544d0af7431547b812b78f324c5dd735433f95d2473da001295"
+    },
+    {
+      "path": "docs/spikes/evidence/profile-distributions-main257/mac-cpu-runner-final-independent-20261013.json",
+      "bytes": 1898,
+      "sha256": "3531862ea72eaa6e22149e4cc16c40a8df5c2bc2e9f79e7d1e836fab519c9807"
+    },
+    {
+      "path": "docs/spikes/evidence/profile-distributions-main257/profile-distributions-main257-final-root-20261014.json",
+      "bytes": 1113,
+      "sha256": "b309f43ee293584a7a64e512a8811602e82b4359da76954a5e1ccabaaffa2ef5"
+    }
+  ],
+  "producer_files": [
+    {
+      "path": "docs/spikes/evidence/native-profile-distributions/manifest.json",
+      "bytes": 8685,
+      "sha256": "9620f7251c8878f977bcaeaab547a6a0d993c7b5759fda69465ed42c2b268bc2"
+    },
+    {
+      "path": "docs/spikes/evidence/native-profile-distributions/artifacts.json.gz",
+      "bytes": 247418,
+      "sha256": "5ac07e6c1f90750825f3530ba36510f2740d5d1d18dd5e6399646d85c2249937"
+    },
+    {
+      "path": "docs/spikes/evidence/native-profile-distributions/verify.py",
+      "bytes": 3794,
+      "sha256": "e9dd8ca7aab63befa7340edfdbbf2890719c7fc8652f93fe9875c69c6a9417e6"
+    },
+    {
+      "path": "docs/spikes/evidence/mac-cpu-runner/manifest.json",
+      "bytes": 2335,
+      "sha256": "d55b312a74e2aca197a6a488aa62a5856b36f02514e82fd5b547f05aaab4731e"
+    },
+    {
+      "path": "docs/spikes/evidence/mac-cpu-runner/records.json.gz",
+      "bytes": 21695,
+      "sha256": "657769cbb00849cded4d2780120b0c71e9a5bdc9c6b842f49dd86827120be655"
+    },
+    {
+      "path": "docs/spikes/evidence/mac-cpu-runner/verify.py",
+      "bytes": 1700,
+      "sha256": "29d297adb68a30532ff07b8739bf54990036f66ce89273b11d4bc6fbc8b828ed"
+    }
+  ],
+  "cli_child_binding": {
+    "path": "docs/spikes/evidence/profile-distributions-main257/cli-child-binding.json",
+    "bytes": 918,
+    "sha256": "4544e819dc03a56f37768cdfaf7be2d05b850bae534f04c46fe850a0c4054c46"
+  }
+}

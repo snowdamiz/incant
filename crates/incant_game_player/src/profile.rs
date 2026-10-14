@@ -1,17 +1,27 @@
 //! Host-only profiling options. Never interpreted from project/gameplay data.
-use incant_profile::{Capture, Error};
+use incant_profile::{Capture, Error, HeapMode};
 pub(crate) fn split(
     mut args: Vec<String>,
     standalone: bool,
 ) -> Result<(Vec<String>, Option<Capture>), Error> {
     let mut selected = None;
+    let mut detail = false;
     for arg in &args {
+        if arg == "--profile-heap-detail" {
+            if detail {
+                return Err(Error::Options);
+            }
+            detail = true;
+        }
         if matches!(arg.as_str(), "--profile" | "--profile-tracy") {
             if selected.is_some() {
                 return Err(Error::Options);
             }
             selected = Some(arg == "--profile-tracy");
         }
+    }
+    if detail && selected.is_none() {
+        return Err(Error::Options);
     }
     if selected.is_none() {
         return Ok((args, None));
@@ -40,22 +50,28 @@ pub(crate) fn split(
     {
         return Err(Error::UnsupportedRoute);
     }
-    args.retain(|arg| !matches!(arg.as_str(), "--profile" | "--profile-tracy"));
+    args.retain(|arg| {
+        !matches!(
+            arg.as_str(),
+            "--profile" | "--profile-tracy" | "--profile-heap-detail"
+        )
+    });
+    let mode = if detail {
+        HeapMode::Detailed
+    } else {
+        HeapMode::Maintained
+    };
     let capture = match selected {
         None => None,
-        Some(false) => Some(Capture::start()?),
-        Some(true) => Some(Capture::start_tracy_process()?),
+        Some(false) => Some(Capture::start_with_heap_mode(mode)?),
+        Some(true) => Some(Capture::start_tracy_process_with_heap_mode(mode)?),
     };
     Ok((args, capture))
 }
 /// One actual simulation attempt. Event-loop waits and redraw-only work do not
 /// pass through this boundary. Inclusive nested native/script zones remain separate.
 pub(crate) fn frame<T, E>(run: impl FnOnce() -> Result<T, E>) -> Result<T, E> {
-    let scope = incant_profile::scope(incant_profile::Phase::Frame);
-    let result = run();
-    drop(scope);
-    incant_profile::frame_outcome(result.is_ok());
-    result
+    incant_profile::frame(run)
 }
 #[cfg(all(
     feature = "native-window",
@@ -92,6 +108,22 @@ mod tests {
             super::split(vec!["--profile".into(), "--profile".into()], false),
             Err(incant_profile::Error::Options)
         ));
+    }
+    #[test]
+    fn detail_modifier_requires_one_capture_option() {
+        for args in [
+            vec!["--profile-heap-detail"],
+            vec![
+                "--profile",
+                "--profile-heap-detail",
+                "--profile-heap-detail",
+            ],
+        ] {
+            assert!(matches!(
+                super::split(args.into_iter().map(str::to_owned).collect(), false),
+                Err(incant_profile::Error::Options)
+            ));
+        }
     }
     #[cfg(not(feature = "profile"))]
     #[test]
@@ -135,6 +167,9 @@ fn completed_attempts_refreshes_and_capture_retirement_are_distinct() {
     assert_eq!(report["tick"], 17);
     assert_eq!(report["profile"]["completed_frames"], 1);
     assert_eq!(report["profile"]["failed_frames"], 1);
+    assert_eq!(report["profile"]["version"], 3);
+    assert_eq!(report["profile"]["frame_wall"]["attempted_frames"], 2);
+    assert_eq!(report["profile"]["frame_wall"]["failed_frames"], 1);
     let count = |name: &str| {
         report["profile"]["zones"]
             .as_array()

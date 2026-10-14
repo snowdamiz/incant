@@ -23,7 +23,10 @@ pub use checkpoint::{CheckpointError, PhysicsCheckpoint};
 #[cfg(feature = "native-checkpoints")]
 pub use rapier3d::pipeline::checked_restore::WorkBudget as CheckpointWorkBudget;
 mod native_owner;
+mod structural;
 use native_owner::NativeOwner;
+#[cfg(feature = "native-checkpoints")]
+pub use structural::{StructuralAdmission, StructuralChanges};
 mod queries;
 mod shapes;
 pub use character::{
@@ -44,6 +47,9 @@ pub enum PhysicsError {
     InvalidStep,
     #[error("physics state exceeded the supported numeric range; restart this play session")]
     NumericRange,
+    #[cfg(feature = "native-checkpoints")]
+    #[error("native structural admission refused: {0:?}")]
+    Structural(rapier3d::pipeline::checked_restore::capture::StructuralError),
     #[error("physics collection limit exceeded")]
     Limit,
     #[error("invalid typed physics component: {0}")]
@@ -78,7 +84,8 @@ pub struct PhysicsSpec {
 }
 
 /// Validated owned declaration for one structural installation. Construction is
-/// the only fallible step; installing it never revalidates a running world.
+/// geometry validation boundary; native structural exhaustion is checked before installation.
+#[derive(Clone)]
 pub struct PreparedBody(PhysicsSpec);
 impl PreparedBody {
     pub fn new(mut spec: PhysicsSpec) -> Result<Self, PhysicsError> {
@@ -202,39 +209,34 @@ impl<I: Ord + Clone> PhysicsRuntime<I> {
     /// Unchanged bodies retain their handles, sleep state and solver warm-start
     /// data. Changes to other components never reconstruct the physics world.
     /// A failed runtime cannot be revived by synchronizing declarations.
-    pub fn sync(&mut self, prepared: PreparedPhysics<I>) {
+    pub fn sync(&mut self, prepared: PreparedPhysics<I>) -> Result<(), PhysicsError> {
         if self.failed {
-            return;
+            return Err(PhysicsError::NumericRange);
         }
-        self.scenes.retain(|id, _| prepared.0.contains_key(id));
-        for (scene_id, specs) in prepared.0 {
-            let scene = self.scenes.entry(scene_id).or_default();
-            let removed: Vec<_> = scene
-                .entries
-                .keys()
-                .filter(|id| !specs.contains_key(*id))
-                .cloned()
-                .collect();
-            let mut changed = !removed.is_empty();
-            for id in removed {
-                scene.remove(&id);
-            }
-            for (id, spec) in specs {
-                let rebuild = scene.entries.get(&id).is_none_or(|entry| {
-                    entry.config.body != spec.body || entry.config.collider != spec.collider
-                });
-                if rebuild {
-                    scene.remove(&id);
-                    scene.insert(id, spec);
-                    changed = true;
-                    continue;
+        let mut changes = Vec::new();
+        for (scene_id, scene) in &self.scenes {
+            for id in scene.entries.keys() {
+                if !prepared
+                    .0
+                    .get(scene_id)
+                    .is_some_and(|rows| rows.contains_key(id))
+                {
+                    changes.push((scene_id.clone(), id.clone(), None));
                 }
-                scene
-                    .update_motion(&id, &spec.state)
-                    .expect("prepared entry/state");
             }
-            scene.query_dirty |= changed;
         }
+        let keep: BTreeSet<_> = prepared.0.keys().cloned().collect();
+        for (scene, specs) in prepared.0 {
+            for (id, spec) in specs {
+                changes.push((scene.clone(), id, Some(PreparedBody(spec))));
+            }
+        }
+        self.apply_changes(changes)?;
+        self.scenes.retain(|id, _| keep.contains(id));
+        for id in keep {
+            self.scenes.entry(id).or_default();
+        }
+        Ok(())
     }
     /// Update only committed motion, preserving unchanged bodies, contacts and
     /// sleep state. No configuration/world clone or text/JSON conversion occurs.
@@ -256,33 +258,15 @@ impl<I: Ord + Clone> PhysicsRuntime<I> {
 
     /// Apply a previously checked structural delta, preserving unrelated bodies.
     /// The owner bounds its entity collection before committing this operation.
-    pub fn install(&mut self, scene: I, id: I, body: PreparedBody) {
-        if self.failed {
-            return;
-        }
-        let scene = self.scenes.entry(scene).or_default();
-        let spec = body.0;
-        if scene.entries.get(&id).is_some_and(|entry| {
-            entry.config.body == spec.body && entry.config.collider == spec.collider
-        }) {
-            scene
-                .update_motion(&id, &spec.state)
-                .expect("prepared state");
-        } else {
-            scene.remove(&id);
-            scene.insert(id, spec);
-            scene.query_dirty = true;
-        }
+    pub fn install(&mut self, scene: I, id: I, body: PreparedBody) -> Result<(), PhysicsError> {
+        self.apply_changes(vec![(scene, id, Some(body))])
     }
 
-    pub fn remove(&mut self, scene: &I, id: &I) {
+    pub fn remove(&mut self, scene: &I, id: &I) -> Result<(), PhysicsError> {
         if self.failed {
-            return;
+            return Err(PhysicsError::NumericRange);
         }
-        if let Some(scene) = self.scenes.get_mut(scene) {
-            scene.remove(id);
-            scene.query_dirty = true;
-        }
+        self.apply_changes(vec![(scene.clone(), id.clone(), None)])
     }
 
     pub fn state(&self, scene: &I, id: &I) -> Option<&BodyState> {
@@ -432,6 +416,7 @@ impl<I: Ord + Clone> SceneWorld<I> {
             .is_some_and(|body| self.world.read().bodies[body].is_sleeping());
         Ok(())
     }
+    #[cfg(not(feature = "native-checkpoints"))]
     fn remove(&mut self, id: &I) {
         if let Some(entry) = self.entries.remove(id) {
             self.character = None;
@@ -503,4 +488,11 @@ fn groups(memberships: u32, filter: u32) -> InteractionGroups {
         Group::from_bits_retain(filter),
         InteractionTestMode::And,
     )
+}
+
+#[cfg(feature = "native-checkpoints")]
+impl From<rapier3d::pipeline::checked_restore::capture::StructuralError> for PhysicsError {
+    fn from(error: rapier3d::pipeline::checked_restore::capture::StructuralError) -> Self {
+        Self::Structural(error)
+    }
 }

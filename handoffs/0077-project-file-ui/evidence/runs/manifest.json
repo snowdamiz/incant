@@ -1,0 +1,170 @@
+{
+  "existing-related-tests-before-new-tests.txt": {
+    "what": "7 existing titlebar/shortcut/menu/shell files after the first implementation",
+    "outcome": "exit 0: 7 files, 99 tests passed",
+    "raw_bytes": 1177,
+    "raw_sha256": "85f02a08f2347dd3cce0b4fbf2fd0e89c49a3f24408ada3b4f91b04c28a837f6",
+    "gzip_sha256": "7a6cc83be4cbf4c8e735d7fed73a79f6ee73acb9b27d737fd199c285b402e804"
+  },
+  "run2-projectfile.txt": {
+    "what": "new flow tests, successor of original-failures/run1",
+    "outcome": "exit 0: 17 passed",
+    "raw_bytes": 678,
+    "raw_sha256": "c336b554b413acad354d77a090e13d221f51500e8d1cc04cd75c35ec34b87eef",
+    "gzip_sha256": "a2c88fea76bce5a79f93b3fe3940348582b0df7487348fd19a70ea157e6502f5"
+  },
+  "run3-projectfile-shell.txt": {
+    "what": "after root's first revision: project-file + shell tests",
+    "outcome": "exit 1: 1 failed, 26 passed (an expectation of the superseded project-change wording)",
+    "raw_bytes": 2094,
+    "raw_sha256": "79e2e1819331a6c53c721b8f5e10c674cc135c1d5aa96c90c8376cbf33db61d3",
+    "gzip_sha256": "e58cb4348bee3a0f6154fc871f2a90575014ba394a96f552f365d023a22ef30b"
+  },
+  "run4-projectfile-shell.txt": {
+    "what": "successor of run3",
+    "outcome": "exit 0: 27 passed",
+    "raw_bytes": 678,
+    "raw_sha256": "1164f01729ff1214ab0981cf24583f8948448315f389249bd6ba687892b6ccc0",
+    "gzip_sha256": "bd27c832fe54f2d205f9f72a90d42cc8cc5a76baddec9bb7c9a4623b7b46291f"
+  },
+  "run5-projectfile.txt": {
+    "what": "with the closed-dialog late-pin test",
+    "outcome": "exit 0: 24 passed",
+    "raw_bytes": 677,
+    "raw_sha256": "22d0781b79d024b9e26c3f4f1f1160fa0dd0019e37b21c721b8731f6b8723ef1",
+    "gzip_sha256": "82f1b017f3fd21b5adff51c6068455ee5471bb6bbfec563e25bbac6f06b35993"
+  },
+  "run6-projectfile-shell.txt": {
+    "what": "after the hint-line and retired-wording fixes",
+    "outcome": "exit 0: 28 passed",
+    "raw_bytes": 877,
+    "raw_sha256": "54c29d43bd7866eb428e758a6f5e40802ff90599e67948cee15d5c1a4f5bb8d6",
+    "gzip_sha256": "e2fe89b55914ae7c6b9fb810b9b1afcea430f74b93edf91d8a2a9446cda78632"
+  },
+  "full2.txt": {
+    "what": "full UI suite, serial",
+    "outcome": "exit 0: 47 files, 965 tests passed",
+    "raw_bytes": 3984,
+    "raw_sha256": "daeff875f10c0da6d6b66d2edf581f50696da851f8f5dc87c7dbc3648127fb48",
+    "gzip_sha256": "ebb84a2c5bb083ea0a543faa74d26eb45028878315765c339effce70247f4762"
+  },
+  "rev1-typecheck.txt": {
+    "what": "tsc -b --noEmit, delivered state of root's first revision",
+    "outcome": "exit 0, no output",
+    "raw_bytes": 0,
+    "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "rev1-tests.txt": {
+    "what": "full UI suite, serial, delivered state of root's first revision",
+    "outcome": "exit 0: 47 files, 965 tests passed",
+    "raw_bytes": 3984,
+    "raw_sha256": "9b516f05cc0bab531e9a7bafb6f904f64ac1124ddc28521c78d004c49ab951bf",
+    "gzip_sha256": "5a44e5fdb352bdcf5f440343de1113b985bc656d7a59ad88faec6ba9fdcf742a"
+  },
+  "rev1-build.txt": {
+    "what": "tsc -b && vite build, delivered state of root's first revision",
+    "outcome": "exit 0",
+    "raw_bytes": 1494,
+    "raw_sha256": "f3863a3d3ec185e5a04338e0e45d15738a1d00be46e9c6af8e4268da0b272003",
+    "gzip_sha256": "e50c6e0f0adb8ff0ffe663ad9320996dd36d204b79ee095d85b5bcd244e5976c"
+  },
+  "rev1-mutations.txt": {
+    "what": "tools/mutations.py console, root's first revision",
+    "outcome": "exit 0: 5 of 6 mutations detected",
+    "raw_bytes": 217,
+    "raw_sha256": "5c9fe65d4fccbeb83f948b83351ccf029bfb0d5f6aa26a8514cf0c6ea4d26769",
+    "gzip_sha256": "e349fe6e6e977c2e5a0afacb23511d2687afac4715f6bbeb369621264b90a8fe"
+  },
+  "rev1-mutations.json": {
+    "what": "tools/mutations.py report, root's first revision",
+    "outcome": "5 of 6 detected; review-scope-guard not observable",
+    "raw_bytes": 3240,
+    "raw_sha256": "251b65ab66f94e9d9c2bd8ca751ad8a7c6b603627205a33c12b67e4cd6044c3d",
+    "gzip_sha256": "83b829d81f90c996955a8d5b34ae9df9581d085aff6f9ccc009974618610604e"
+  },
+  "mutations-run1.json": {
+    "what": "first mutation run, before the undo/redo stale test",
+    "outcome": "stale-latch and review-scope-guard survived; the stale test was then corrected",
+    "raw_bytes": 3106,
+    "raw_sha256": "1bb43bd238a4e9cbd87b8c6d2754e975602c049dec060ec6a004b3fb80eebea8",
+    "gzip_sha256": "d57c28bf01469eda878de8530b4446b909921a291f97e02a3a24ba0c6ef6a737"
+  },
+  "browser-report-r4.json": {
+    "what": "capture set r4 report, root's first revision",
+    "outcome": "28 captures, 5 flows, axe 0, no page errors",
+    "raw_bytes": 78313,
+    "raw_sha256": "e943ed83edfa4b0ac8d9d8fbaee550e12bcfb71963ba067c4a7ceb66d4049ddd",
+    "gzip_sha256": "1293ac4092e472d5f4798831463e21160f715966d988806b389f2e3c25bed6d5"
+  },
+  "run7-projectfile-shell.txt": {
+    "what": "after root's second revision (structured rejection): project-file + shell tests",
+    "outcome": "exit 0: 30 passed",
+    "raw_bytes": 877,
+    "raw_sha256": "f13f479609e9f3bb9faa735004ac4e34392355b9b0ff91e58a16520529d98792",
+    "gzip_sha256": "9f43d9bb51571098bca7ffda6ddbff801530da3622bc3c09bf592158f23fb63b"
+  },
+  "final-typecheck.txt": {
+    "what": "final tsc -b --noEmit (app, node and test projects)",
+    "outcome": "exit 0, no output",
+    "raw_bytes": 0,
+    "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "final-tests.txt": {
+    "what": "final full UI suite, serial (vitest run --no-file-parallelism)",
+    "outcome": "exit 0: 47 files, 967 tests passed",
+    "raw_bytes": 3984,
+    "raw_sha256": "b78abf4c00f04a6791e6c7a37378d70d5219389170ece2a69015f7ef68c26a43",
+    "gzip_sha256": "c45c260dc365acced1408714dae937ca9a29c19d985faea20790ebacee228e5a"
+  },
+  "final-build.txt": {
+    "what": "final tsc -b && vite build",
+    "outcome": "exit 0",
+    "raw_bytes": 1494,
+    "raw_sha256": "021bfab6e517fc5bf61ff07d02140592fe630c322e613caa22002b207a7fdc74",
+    "gzip_sha256": "713c98e5920d566a19d474854f5f82b1a392e0303c3cc886ab4e17bedc367e21"
+  },
+  "final-mutations.txt": {
+    "what": "tools/mutations.py console (report: evidence/mutations.json)",
+    "outcome": "exit 0: 6 of 7 mutations detected",
+    "raw_bytes": 250,
+    "raw_sha256": "50701f5404f65d6668e4fbb02c8afb679644963245d7669bb856ca47cebf2052",
+    "gzip_sha256": "44dd68e397d81c0654eeb03a07f512468d6d7856255a81faa0db38941f2eb5de"
+  },
+  "capture-r1.txt": {
+    "what": "browser capture set r1",
+    "outcome": "exit 0; review found the truncated project name (iterations/)",
+    "raw_bytes": 1363,
+    "raw_sha256": "6234cde1e9bcaea1634180b9f3320766b312610e6aa49c8bf294fee1aedb5abf",
+    "gzip_sha256": "de5f6fec607406254a1710044fd48bb78d6ece28b4b6f82a1ba271c9c99f34f5"
+  },
+  "capture-r2.txt": {
+    "what": "browser capture set r2",
+    "outcome": "exit 0; review found the run-on hint and merged emphasis (iterations/)",
+    "raw_bytes": 1363,
+    "raw_sha256": "bb9a08d16073e995ad82988611ba11334806b893c1fd6f6ee0a8133ab9363a1c",
+    "gzip_sha256": "8f0d6eb85924994f3a055a29519e5f241687dc27d51fd777cd4068fb4f4e388f"
+  },
+  "capture-r3.txt": {
+    "what": "browser capture set r3",
+    "outcome": "exit 0",
+    "raw_bytes": 1363,
+    "raw_sha256": "58fa81df03c4847fbcaa2b8c42119e6c2584ac4528fc0fc5629cb574dc92cf3b",
+    "gzip_sha256": "093189ad8ecbed3ee5cc856f9c9e95003e58f62a9800859cb420917e4fa64948"
+  },
+  "capture-r4.txt": {
+    "what": "browser capture set r4, root's first revision",
+    "outcome": "exit 0: 28 captures, 5 flows, axe 0, no page errors",
+    "raw_bytes": 1363,
+    "raw_sha256": "51175420d12d1fc0917925a18af74b2d131c173f0c97bcc0d30a389c84034f10",
+    "gzip_sha256": "6cb1416657fbfa58a728b359cbb89b26b503bcc307e4f0c20d4d0ab536ea64c5"
+  },
+  "capture-r5.txt": {
+    "what": "final browser capture set r5 (screenshots/, evidence/browser-report.json)",
+    "outcome": "exit 0: 30 captures, 5 flows, axe 0, no page errors; the 31 PNGs shared with r4 are byte-identical (evidence/r4-r5-comparison.json)",
+    "raw_bytes": 1446,
+    "raw_sha256": "23393af756b4ff77b9d0749f7b6c21b0e5051a3921b1b37250a83da301755bc9",
+    "gzip_sha256": "289435ce464403251d236763c2a783eab52c2550257beb02386a4f511c9faa49"
+  }
+}

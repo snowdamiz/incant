@@ -1,0 +1,58 @@
+{
+  "reviewer": "astra/runtime_review",
+  "scope": "Final evidence-only Mac CPU runner qualification; no shipping performance acceptance",
+  "packet": "75b44848fd24c012459244325793099c6b1f7e6d",
+  "source": "97c0e197cfc4d04c1a5e659327f0b626e698eb8c",
+  "manifest_sha256": "d55b312a74e2aca197a6a488aa62a5856b36f02514e82fd5b547f05aaab4731e",
+  "archive_sha256": "657769cbb00849cded4d2780120b0c71e9a5bdc9c6b842f49dd86827120be655",
+  "verifier_sha256": "29d297adb68a30532ff07b8739bf54990036f66ce89273b11d4bc6fbc8b828ed",
+  "verified_records": 13,
+  "commands": [
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/tests",
+        "-p",
+        "test_mac_performance.py",
+        "-v"
+      ],
+      "exit": 0,
+      "started_ns": 1791938546849240000,
+      "ended_ns": 1791938546944746000,
+      "log_sha256": "65e4da3fab7ff7e9d2390128b41a5fab7880ffefdd63c9d56989712f04acb76f"
+    },
+    {
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "started_ns": 1791938546944842000,
+      "ended_ns": 1791938546980352000,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "started_ns": 1791938546980402000,
+      "ended_ns": 1791938547003514000,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "independent_replay_exit": 0,
+  "source_receipt_sha256": "7995f0a41dbee083ecbb8a7aa5023ad5086e8294bb1675d1a7e0e92760b8910a",
+  "verdict": "accepted scoped; no findings",
+  "limits": [
+    "Actual three-tick CI-profile report validates parser; no fresh shipping measurement.",
+    "No GPU, frame-rate, thermal equivalence or overall performance-gate acceptance."
+  ]
+}

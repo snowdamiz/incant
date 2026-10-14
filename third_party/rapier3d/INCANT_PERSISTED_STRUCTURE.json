@@ -1,0 +1,29 @@
+{
+  "format": "incant-checked-structural-operation-fence",
+  "version": 1,
+  "baseline": "6c25a3d3365bbac62f16e7113ce9fb2383e39384",
+  "feature": "incant-checked-restore",
+  "scope": "Supersedes historical hashes only for these paths. Immutable all-scene structural plan plus owner-bound execution permit; no persisted importer or public save admission.",
+  "files": [
+    {
+      "path": "src/data/arena_checkpoint.rs",
+      "sha256": "82ed7116663cbe5b59797ed259659d41b18b24efa8ec99af2c648dcb53a579e1"
+    },
+    {
+      "path": "src/pipeline/checked_restore/capture/mod.rs",
+      "sha256": "b2f9ec345a566abfd49b232a581aacc3b44f7e73403910411ed2a80cb037b790"
+    },
+    {
+      "path": "src/pipeline/checked_restore/capture/owner.rs",
+      "sha256": "c5770449d33c38a1f8e9ff65a52ac5b5638ae4356783ed7cd48c14462a21457c"
+    },
+    {
+      "path": "src/pipeline/checked_restore/capture/structure.rs",
+      "sha256": "8994c5ace93101958828d3cd328294a5a163416917ad9550ae474fc054228770"
+    },
+    {
+      "path": "src/pipeline/checked_restore/capture/structure/tests.rs",
+      "sha256": "f57c5f5608cbf7cbf2fb5748c1e587ed404cfd4100e02b61011f03952ddbc2c3"
+    }
+  ]
+}

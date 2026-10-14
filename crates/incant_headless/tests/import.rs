@@ -52,9 +52,11 @@ fn cli_import_is_idempotent_and_persists_reimport_history() {
     assert_eq!(played["state"]["tick"], 2);
     let loaded = incant_doc::Project::from_text(&fs::read_to_string(&project).unwrap()).unwrap();
     assert_eq!(loaded.assets.len(), 1);
-    let mut bus =
-        incant_cmd::CommandBus::persistent(project.with_extension("journal.jsonl"), loaded)
-            .unwrap();
+    let mut bus = incant_cmd::CommandBus::open_project_file_with_journal(
+        &project,
+        project.with_extension("journal.jsonl"),
+    )
+    .unwrap();
     assert_eq!(bus.history().len(), 2);
     bus.undo().unwrap();
     assert_eq!(
@@ -121,10 +123,11 @@ fn texture_settings_survive_restart_and_cache_rebuild() {
     assert_eq!(changed["asset"]["id"], first["asset"]["id"]);
     assert_ne!(changed["asset"]["sha256"], first["asset"]["sha256"]);
     let project = root.join("game.incant.json");
-    let loaded = incant_doc::Project::from_text(&fs::read_to_string(&project).unwrap()).unwrap();
-    let mut bus =
-        incant_cmd::CommandBus::persistent(project.with_extension("journal.jsonl"), loaded)
-            .unwrap();
+    let mut bus = incant_cmd::CommandBus::open_project_file_with_journal(
+        &project,
+        project.with_extension("journal.jsonl"),
+    )
+    .unwrap();
     assert_eq!(bus.history().len(), 2);
     bus.undo().unwrap();
     assert_eq!(
