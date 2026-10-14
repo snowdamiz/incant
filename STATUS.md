@@ -12,9 +12,17 @@ Checkpoint30 is promoted through PR232: release `71bdd2e7` has the exact tested
 main252 tree `393eb78c`. All 23 required contexts and all eight push workflows
 succeeded; independent review, merge parents, author trailer and post-merge tree
 are verified. Later main253/254 persisted-session/mobile work remains outside
-that tested release. No checkpoint is currently active; main254 is the latest
+that tested release. No checkpoint is currently active; main255 is the latest
 integration. This promotion does not approve a phase or distribution gate.
 [Portable evidence](docs/spikes/evidence/release-checkpoint-30/manifest.json).
+
+Typed ephemeral haptics now have a qualified main254 composition: both physics
+modes pass 85 player CPU cases with native-window, mobile-host/FFI, native
+checkpoints and the linked static fixture together. Both strict lint runs and
+three selected graph comparisons pass; 18 successful commands and two SDK-driver
+setup failures are retained. All 27 owned producer paths remain exact. Final
+main254 review is accepted; the main255 documentation-only join is independently accepted. Publication awaits the required exact-head fast check. Physical motor/mobile actuator execution and
+performance remain untested. [Evidence](docs/spikes/haptics-main254.md).
 
 The retained mobile Rust host is composed on actual main253 with its accepted
 producer implementation unchanged. Fresh current-source tests pass 31 mobile+FFI

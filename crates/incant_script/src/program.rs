@@ -60,6 +60,42 @@ pub(crate) enum SessionVm {
     Static(Box<incant_wasm_runtime::StaticModule>),
 }
 impl SessionVm {
+    pub fn supports_haptics(&self) -> bool {
+        matches!(self, Self::Bytecode(_))
+    }
+    pub fn set_haptic_capabilities(
+        &mut self,
+        value: incant_input::haptics::HapticCapabilities,
+    ) -> Result<(), SessionError> {
+        match self {
+            Self::Bytecode(host) => Ok(host.set_haptic_capabilities(value)?),
+            #[cfg(any(feature = "static-module", feature = "wasmtime-host"))]
+            _ if value.is_empty() => Ok(()),
+            #[cfg(any(feature = "static-module", feature = "wasmtime-host"))]
+            _ => Err(SessionError::HapticsUnsupported),
+        }
+    }
+    pub fn haptics_ready(&self) -> Result<(), SessionError> {
+        match self {
+            Self::Bytecode(host) => Ok(host.haptics_ready()?),
+            #[cfg(any(feature = "static-module", feature = "wasmtime-host"))]
+            _ => Ok(()),
+        }
+    }
+    pub fn take_haptics(&mut self) -> Result<incant_input::haptics::HapticRequests, SessionError> {
+        match self {
+            Self::Bytecode(host) => Ok(host.take_haptics()?),
+            #[cfg(any(feature = "static-module", feature = "wasmtime-host"))]
+            _ => Ok(Default::default()),
+        }
+    }
+    pub fn clear_haptics(&mut self) {
+        match self {
+            Self::Bytecode(host) => host.clear_haptics(),
+            #[cfg(any(feature = "static-module", feature = "wasmtime-host"))]
+            _ => {}
+        }
+    }
     pub fn enable_restart_requests(&mut self) -> Result<(), SessionError> {
         match self {
             Self::Bytecode(host) => Ok(host.enable_restart_requests()?),

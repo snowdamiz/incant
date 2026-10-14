@@ -250,6 +250,19 @@ where
     pub fn logs(&self) -> Result<&incant_script::NativeLogs, H::Error> {
         Ok(self.ready()?.native.logs()?)
     }
+    pub fn supports_haptics(&self) -> Result<bool, H::Error> {
+        Ok(self.ready()?.native.supports_haptics()?)
+    }
+    pub fn set_haptic_capabilities(
+        &mut self,
+        value: incant_input::haptics::HapticCapabilities,
+    ) -> Result<(), H::Error> {
+        Ok(self.ready_mut()?.native.set_haptic_capabilities(value)?)
+    }
+    pub fn take_haptics(&mut self) -> Result<incant_input::haptics::HapticRequests, H::Error> {
+        // Audio and the mandatory host have accepted before Live is published.
+        Ok(self.ready_mut()?.native.take_haptics()?)
+    }
     pub fn enable_restart_requests(&mut self) -> Result<(), H::Error> {
         Ok(self.ready_mut()?.native.enable_restart_requests()?)
     }
@@ -275,6 +288,9 @@ where
     pub fn set_suspended(&mut self, suspended: bool) -> Result<(), H::Error> {
         let mut live = self.live.take().ok_or(GameError::Failed)?;
         live.audio.set_suspended(suspended)?;
+        if suspended {
+            live.native.clear_haptics();
+        }
         self.suspended = suspended;
         self.live = Some(live);
         Ok(())
