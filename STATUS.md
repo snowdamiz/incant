@@ -1,5 +1,17 @@
 # Implementation status
 
+## Maintained QuickJS shipping observation — budget still open
+
+One fresh shipping export on this Mac passes unprofiled, detailed and maintained
+functional parity, including exact PCM and the Core win/stress route. Six quiet
+measurements keep the whole ScriptTick p95 above the unchanged 2 ms budget:
+maintained runs span 2.08–2.11 ms; detailed runs span 2.20–2.24 ms. Every same-mode
+5% stability check passes; no cross-mode speedup or phase gate is claimed.
+The bounded runner and portable raw replay are independently reviewed. Execution
+remains exact main275-based source; this intake onto main276 does not relabel it.
+Rust-owned rollback buffer capacity reuse is the next implementation hypothesis,
+not an established saving. [Results and replay](docs/spikes/quickjs-maintained-main275.md).
+
 ## Project-file application binding — qualified main275 composition
 
 The accepted application backend now composes with the merged maintained QuickJS
@@ -12,8 +24,9 @@ prefab journal owner before byte snapshots, preserving every production lock and
 rollback assertion. Checkpoint34's actual Linux WouldBlock and Windows error33
 failures remain retained; future hosted repair validation is pending. One local
 supervisor schema-inventory error is retained, with corrected exact comparison.
-Final independent integration review is accepted; exact-head required fast CI
-precedes merge. No new
+Final independent integration review is accepted; PR276 merged after exact-head
+hosted fast SUCCESS. Checkpoint35 is frozen at this composition; checkpoint34
+remains failed, including a GitHub internal error in the general job. No new
 editor UI controls, older-format conversion, GPU, performance or phase claim.
 [Current composition and evidence](docs/spikes/project-application-main275.md).
 
