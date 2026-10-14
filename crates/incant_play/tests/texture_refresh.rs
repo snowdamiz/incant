@@ -347,7 +347,7 @@ fn authoring_undo_redo_uses_the_same_basis_and_nontexture_edits_refuse() {
     let mut project = incant_doc::Project::empty("Refresh");
     project.assets.insert(asset.id.clone(), asset.clone());
     let basis = TextureRefreshBasis::capture(&project, &[first]).unwrap();
-    let mut bus = CommandBus::new(project);
+    let mut bus = CommandBus::new(project).unwrap();
     let probe = Arc::new(Probe::default());
     let mut game = game(root.path(), first, probe);
     let mut replacement = asset.clone();
