@@ -9,7 +9,7 @@ heap enumeration computes another, partly estimated object-graph metric.
 This is a source-only assessment against main
 `ed3999b02d2a747dee93d278a2c1c50d43f275b7` and registry rquickjs 0.14.0.
 The relevant production behavior also matches shipping reference `03bc4b98`.
-Nineteen source copies/hashes are retained in
+Twenty source copies/hashes are retained in
 `~/.codex/incant-evidence/quickjs-heap-accounting-001/inputs.json`
 (SHA recorded with the review handoff). No allocator code, dependencies, runtime
 limits or measurements changed.
@@ -142,3 +142,42 @@ No extra region measurement is needed to decide this semantic boundary. A direct
 custom-allocator substitution preserving the old report fields should be rejected.
 A distinct backing-accounting experiment or narrowly reviewed native scalar getter
 is the next concrete design choice; neither has been implemented here.
+
+## Existing accessor and required telemetry decision
+
+The pinned public header exposes `JS_ComputeMemoryUsage`, `JS_DumpMemoryUsage`,
+`JS_SetMemoryLimit` and per-pointer usable-size functions. It exposes no scalar
+runtime malloc-state getter. rquickjs's `memory_usage` always performs the full
+scan. The runtime struct is opaque; an unsafe offset/layout cast would bypass
+that contract and is rejected. The hypothetical scalar getter above is therefore
+an additive native API proposal, not an existing API that can simply be called.
+
+The 32 MiB enforcement does **not** require a telemetry call: it is already checked
+on native allocation operations, with GC threshold enforcement similarly using
+maintained counters. `incant_game_player/src/profile.rs` enables one process
+capture for `--profile`/`--profile-tracy`. During an active capture, current
+ScriptHost calls the scan once per completed tick attempt that reaches this tail,
+including errors handled there; disabled captures call it zero times. Thus the
+retained 2,156-tick successful Core runs incur 2,156 scans, not one per source
+callback. The heap sampler is separate from the two script-source callbacks.
+
+`tools/mac_performance.py:99` currently compares **process Rust requested-byte
+peak** for its memory metric. It does not consume QuickJS used/allocated fields.
+PLAN requires memory/allocation tracking and truthful profiling; it does not make
+full QuickJS object enumeration an enforcement primitive. An explicit detailed
+heap-snapshot mode is conceptually separable from mandatory time distributions,
+Rust allocation accounting and unchanged VM limit enforcement. Such a mode must
+report snapshot timing, sample count and sampled-peak semantics, with unavailable
+fields when not requested. It must not silently lower scan frequency and retain
+old exact-looking peak claims.
+
+Preferred next source choice is the small additive scalar native getter if its
+pinned dependency-maintenance cost is acceptable: it preserves the current backing
+allocator and existing logical-byte/count meaning, avoids new allocator callback
+unsafe code, and leaves detailed used-size enumeration explicitly opt-in. It still
+needs metric/sampling identity and a fresh matched reference; omitting a scan is
+an instrumentation-overhead change, not a guest algorithm improvement. Continuous
+peak tracking is a separate contract and should not be claimed by sampled scalar
+reads. A custom allocator is a larger semantic change and is not preferred solely
+to avoid the scan. No new shipping result should be compared to the old report
+without acknowledging and matching the changed instrumentation mode.
