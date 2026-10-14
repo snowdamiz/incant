@@ -1,0 +1,245 @@
+{
+  "format": "incant-native-profile-distributions",
+  "version": 1,
+  "source": "c295f56d4ef83436f384c66ed83cd046bb433da1",
+  "base": "96e8a9da",
+  "archive_sha256": "5ac07e6c1f90750825f3530ba36510f2740d5d1d18dd5e6399646d85c2249937",
+  "records": 83,
+  "payloads": 52,
+  "sources": [
+    {
+      "path": "Cargo.lock",
+      "sha256": "1d8fe7fe894dc1dd4a5f8ed3a1eba82eaad4bdb4b360ab7648b7fedbdcd2cec3",
+      "bytes": 252987
+    },
+    {
+      "path": "STATUS.md",
+      "sha256": "acebe3ea76691b193992d675c273ebecfae4f6306762cb69748cd8fc8115205f",
+      "bytes": 210912
+    },
+    {
+      "path": "crates/incant_game_player/src/profile.rs",
+      "sha256": "baf41c450cdbb0cd32621d75c883967483bb1932a6a666fd12b60f4d299f5a7b",
+      "bytes": 6688
+    },
+    {
+      "path": "crates/incant_game_player/tests/profile.rs",
+      "sha256": "b86d0d381fc2a8fb8b98b9076545eb2a3da3c2f0c756232a2e6f00f6fb6af633",
+      "bytes": 6642
+    },
+    {
+      "path": "crates/incant_profile/Cargo.toml",
+      "sha256": "0c73866dc079b138471c83c5a8849b33a71ad438d5484e5589ec1057ed4f51ef",
+      "bytes": 902
+    },
+    {
+      "path": "crates/incant_profile/src/disabled.rs",
+      "sha256": "9e6a5413147b9367f33ff7a04b20ffd9605f96533ece097735c5a54ef9665232",
+      "bytes": 914
+    },
+    {
+      "path": "crates/incant_profile/src/enabled.rs",
+      "sha256": "adc20302bb381b1497d3d1019be57de3640b8d1f76d1769a25e4825913567392",
+      "bytes": 11531
+    },
+    {
+      "path": "crates/incant_profile/src/frame.rs",
+      "sha256": "bb425636451e311be77b0a75e21dec1fe6786f41fcdb862521511a98982f3551",
+      "bytes": 7992
+    },
+    {
+      "path": "crates/incant_profile/src/frame_model.rs",
+      "sha256": "19ad66f6325f2fe94d1d6a346d4c12fd2a5acd7ef0f6a8c7e794f70fb9868ed4",
+      "bytes": 1094
+    },
+    {
+      "path": "crates/incant_profile/src/frame_tests.rs",
+      "sha256": "cbdb41ce62d94d17ac5118a723a8cc8e14ea0d853ef6a1a802424d213b0af0ad",
+      "bytes": 4395
+    },
+    {
+      "path": "crates/incant_profile/src/lib.rs",
+      "sha256": "3f4c422e85c75a55f28c9b400c99d37c10917512e1514a2780679cfc3ab0db0b",
+      "bytes": 730
+    },
+    {
+      "path": "crates/incant_profile/src/model.rs",
+      "sha256": "f5b67f59ab1933cc6a714feb544f7419e4bc36c62bea61ce28363b9e6e837b47",
+      "bytes": 5896
+    },
+    {
+      "path": "crates/incant_profile/tests/allocations.rs",
+      "sha256": "e5270d73889e8f56124901eb7a4ca1c991a21193845cf5c747b2415c5bf0b5fe",
+      "bytes": 5092
+    },
+    {
+      "path": "crates/incant_profile/tests/disabled.rs",
+      "sha256": "501a8386ece410d8259585297d0c1bbe1c39d13437f918935c0ee7f69469ab13",
+      "bytes": 607
+    },
+    {
+      "path": "crates/incant_profile/tests/summary.rs",
+      "sha256": "4b510765393fc30f2ac751a8f683675f0a360d7e2fc54493c15a031e1289dc5b",
+      "bytes": 5358
+    },
+    {
+      "path": "crates/incant_script/tests/profile.rs",
+      "sha256": "760b8157f8826116b17ab5fe23fde7e1ac3502df43c7f6eec5d0a2d32f36c079",
+      "bytes": 3562
+    },
+    {
+      "path": "docs/spikes/native-profile-distributions.md",
+      "sha256": "32b7e1f91e55684d693a6f3c0b57bb9efe22c3c1f82d559d2f4e6b0cc32c060f",
+      "bytes": 6013
+    }
+  ],
+  "commands": [
+    {
+      "receipt": "cli-clippy-002.json",
+      "exit": 0
+    },
+    {
+      "receipt": "conventions-002.json",
+      "exit": 0
+    },
+    {
+      "receipt": "diff-002.json",
+      "exit": 0
+    },
+    {
+      "receipt": "fmt-002.json",
+      "exit": 0
+    },
+    {
+      "receipt": "player-clippy-002.json",
+      "exit": 0
+    },
+    {
+      "receipt": "profile-cli-002.json",
+      "exit": 0
+    },
+    {
+      "receipt": "profile-clippy-002.json",
+      "exit": 0
+    },
+    {
+      "receipt": "profile-default-002.json",
+      "exit": 0
+    },
+    {
+      "receipt": "profile-graph-002.json",
+      "exit": 0
+    },
+    {
+      "receipt": "profile-player-001.json",
+      "exit": 0
+    },
+    {
+      "receipt": "profile-script-001.json",
+      "exit": 0
+    },
+    {
+      "receipt": "profile-summary-001.json",
+      "exit": 0
+    },
+    {
+      "receipt": "profile-wasm-002.json",
+      "exit": 0
+    },
+    {
+      "receipt": "script-clippy-002.json",
+      "exit": 0
+    }
+  ],
+  "binaries": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-profile-distributions-001/profile-cli-002-binaries/profile-25fd9aec02bf2879",
+      "sha256": "2708e32578a75a73258fcc496d10210fada73459455569b809672c7c53b23785",
+      "bytes": 1792776
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-profile-distributions-001/profile-default-002-binaries/incant_profile-3d4abd3294b515bf",
+      "sha256": "7206a7a6677d4153c194dd6f2f0ad0b4498782f95a1e6dad4dead8e72165b8fb",
+      "bytes": 1027024
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-profile-distributions-001/profile-default-002-binaries/disabled-0c2488aa984770d4",
+      "sha256": "4066ff2c3d6df5528e853c69764d356cb5fef6875b4876b6fec2bc245db61a8d",
+      "bytes": 1027160
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-profile-distributions-001/profile-default-002-binaries/summary-9ad3cd3cf4c85740",
+      "sha256": "9fad55714ca87176242d9ffdc80ee941e5d78a2d299cc3e132b5d8a5a3144e91",
+      "bytes": 1026984
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-profile-distributions-001/profile-player-001-binaries/incant_game_player-70f6218a13d36316",
+      "sha256": "4660af9f795454160ce461867dea07ffd98bdbbfae0271a44bf3bfa7b3cccb4c",
+      "bytes": 21475488
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-profile-distributions-001/profile-script-001-binaries/profile-9686c4156516233e",
+      "sha256": "92fe8b165de2e194248de0f0853c1089200f153a1621e566ffa7e69b3b170216",
+      "bytes": 11929160
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-profile-distributions-001/profile-summary-001-binaries/incant_profile-54aa9cfc316f0721",
+      "sha256": "4a5ec70155c0b5936147930098504e9b032a6641d0870ce23a0178908be9b3ce",
+      "bytes": 1071184
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-profile-distributions-001/profile-summary-001-binaries/allocations-35d51ba2ef20747f",
+      "sha256": "e8144ce3d8d4dcf34870660abbd98a6a615e4fe1afa8d8b38c8dedf12354eb37",
+      "bytes": 493760
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-profile-distributions-001/profile-summary-001-binaries/disabled-0e1a331066a0d787",
+      "sha256": "c347bb8810c272f9bc41dc6b0cd255427a76fe1dd1c12ebfa2d2401cc8908a9c",
+      "bytes": 1026984
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-profile-distributions-001/profile-summary-001-binaries/summary-af544a549c6de145",
+      "sha256": "9a175fa3006e59603c111f327051e5eefdd556ec263d522bc90d1b0d2dfb91f8",
+      "bytes": 1161432
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-profile-distributions-001/profile-cli-002-binaries/incant_game_player",
+      "sha256": "954977ef7a9b0ae7dbb75b7f122042ebfc3f40c2ed14d052b6d90c1a17fcb96d",
+      "bytes": 20518368
+    }
+  ],
+  "cli_report": {
+    "report": "/Users/andreyyurlov/.codex/incant-evidence/native-profile-distributions-001/player-report-002.json",
+    "report_sha256": "84119e9ff3294ab18e116add3f05c04d17bc3ee16ec2bf0c19caab159fe91172",
+    "binary": "/Users/andreyyurlov/.codex/incant-evidence/native-profile-distributions-001/profile-cli-002-binaries/incant_game_player",
+    "binary_sha256": "954977ef7a9b0ae7dbb75b7f122042ebfc3f40c2ed14d052b6d90c1a17fcb96d",
+    "source_freeze": "source-002/freeze.json",
+    "executed_log": "profile-cli-002.log",
+    "binding": "CLI child launched by retained integration test; binary copied immediately after test before target reuse",
+    "profile": "ci",
+    "target": "aarch64-apple-darwin",
+    "ticks": 3,
+    "entities": 1,
+    "performance_gate": false
+  },
+  "qualification": {
+    "named_cpu_tests": 17,
+    "dedicated_allocation_process": true,
+    "strict_clippy_scopes": 4,
+    "target": "aarch64-apple-darwin",
+    "profile": "ci",
+    "jobs": 2,
+    "rayon_threads": 2,
+    "production_source": "source-001",
+    "cli_test_source": "source-002",
+    "shipping_or_10k_gate": false,
+    "gpu_or_device_execution": false,
+    "all_handles_terminal": true
+  },
+  "limitations": [
+    "inclusive same-thread phase wall time; not parallel critical-path reconstruction",
+    "missing/failed/invalid/overflow/saturated coverage refuses p95",
+    "histogram and report requested storage do not bound full process memory",
+    "3-tick CLI fixture is CI-profile, one entity; no performance claim"
+  ]
+}
