@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "accepted": true,
+  "candidate": "dfd9a875a30b47736529203945f4b5ba61d2d372",
+  "tested_source": "1e58cea4",
+  "main": "7c65ef261e9638182412d4273cb3eb519d6140b9",
+  "manifest_sha256": "cc42c03f2f854c36131728721ec3ea4c216cb8ed2199aeaab68af40bc2a05594",
+  "review": "Independent full --verify-only --originals --external replay passed; 61 current inputs,14/16 producerexact plus additivehapticsSDK/reporting exceptions, seven commands. Producer source accepted separately in1efa receipt; no implementation delta in composition.",
+  "scope": "public authoring helper and numerical workload; historical65tick native proof remains historical; no new runtime/performanceclaim",
+  "timestamp": "2026-10-14T01:16:19.660505+00:00"
+}

@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "candidate": "86b0a38e42e67b1291097dfb305253c2eacff642",
+  "source": "e76a2a78",
+  "accepted": true,
+  "manifest_sha256": "f3827dbe42b5c9b9f20d330f0bebd442c905e2c1a2f7c0651aa44ff48e09d5d4",
+  "review": "Read public authoring/session/fast-mode helpers, TS workload and independent observation oracle; constructor cleanup preserved; exact original project preservation and finite bulk readback controls. Independently replayed verifier with all external hashes.",
+  "scope": "Prepared10000attachment workload and historical deterministic native65tick correctness. Actual fast shipping execution and performance pending.",
+  "retained_limitations": [
+    "Historical native binary explicitly identified",
+    "307 large payload records remain external",
+    "Original reopen timeout and cancelled redundant fast authoring remain failures"
+  ],
+  "timestamp": "2026-10-14T01:09:07.455825+00:00"
+}

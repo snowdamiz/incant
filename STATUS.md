@@ -1,13 +1,26 @@
 # Implementation status
 
+## Core 10k-script input — native correctness, measurement pending
+
+A public-command extension preserves the original Core controller/assets and adds
+9,999 invisible typed-bulk attachments under a second source. Ten helper controls
+and 65 actual retained-engine ticks pass: 28 numeric checks, all 46 original
+entity readbacks and matching logs/PCM. Public undo/redo/reopen and separate
+fast-mode settings-only preparation are retained, including the initial slow
+journal-reopen failure. Fresh fast shipping measurements remain pending; no
+GPU/60 fps or appearance gate is claimed. Current main258 qualification passes
+ten Python controls, strict TypeScript and Node bulk/mutation controls against
+the current SDK; the original archive and all external payloads replay unchanged.
+Independent current-main final review is accepted; publication awaits the exact-head fast check. [Producer evidence](docs/spikes/core-script-stress.md) and [composition](docs/spikes/core-stress-main258.md).
+
 ## Per-frame CPU distributions — scoped Mac controls pass
 
 The opt-in profiler now reports bounded per-frame phase wall histograms and
 conservative p95 intervals, including aggregate `script.tick`. Seventeen explicit
 native CI-profile CPU cases, a dedicated allocation control and eight runner tests
 pass on actual main257, including the real three-tick CLI report. All 24 current
-checks pass; final integration review is independently accepted and publication
-awaits its exact-head fast check. Missing/failed/overflow samples
+checks pass; final integration review is independently accepted and PR258 merged
+after its exact-head fast SUCCESS. Missing/failed/overflow samples
 refuse p95; default dependencies remain empty. Shipping 10,000-entity Mac
 measurements and the 60 fps/GPU/hitch gates remain separate.
 [Current evidence](docs/spikes/profile-distributions-main257.md).
@@ -40,8 +53,8 @@ Sample/10,000-entity measurements and presentation timing remain open.
 Checkpoint30 is promoted through PR232: release `71bdd2e7` has the exact tested
 main252 tree `393eb78c`. All 23 required contexts and all eight push workflows
 succeeded; independent review, merge parents, author trailer and post-merge tree
-are verified. Later main253–257 persisted-session/mobile/haptics work remains outside
-that tested release. No checkpoint is currently active; main257 is the latest
+are verified. Later main253–258 persisted-session/mobile/haptics/profiler work remains outside
+that tested release. No checkpoint is currently active; main258 is the latest
 integration. This promotion does not approve a phase or distribution gate.
 [Portable evidence](docs/spikes/evidence/release-checkpoint-30/manifest.json).
 
@@ -353,7 +366,7 @@ performance gate is claimed. [Scope and evidence](docs/spikes/wasm-c-parallel.md
 
 ## Development and release overview — 2026-10-13
 
-The reviewed main257 baseline includes Apple/Android host bindings, desktop
+The reviewed main258 baseline includes profiler distributions, the Mac runner, Apple/Android host bindings, desktop
 haptics, the retained mobile Rust host, supported
 persisted native game checkpoints, and the opt-in cooked renderer families and
 Vulkan cache lifecycle, dynamic resolution, numerical retained motion, CPU/GPU
