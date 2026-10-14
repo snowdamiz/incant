@@ -163,7 +163,16 @@ impl NavigationMesh {
             if work > 2_000_000 {
                 return None;
             }
-            let (start, _) = self.nearest(a, 0.001)?;
+            #[cfg(feature = "diagnostic-navigation")]
+            let observation = incant_profile::diagnostic::navigation::Span::start(if begin == 0 {
+                incant_profile::diagnostic::navigation::Region::InitialStart
+            } else {
+                incant_profile::diagnostic::navigation::Region::RepeatedStart
+            });
+            let nearest = self.nearest(a, 0.001);
+            #[cfg(feature = "diagnostic-navigation")]
+            observation.finish(nearest.is_some());
+            let (start, _) = nearest?;
             let mut found = None;
             for last in (begin + 1..path.points.len()).rev() {
                 attempts += 1;
