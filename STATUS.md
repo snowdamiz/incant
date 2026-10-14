@@ -11,6 +11,15 @@ controls. This fixes the ordinary viewport route; low-resolution reconstruction
 still has separate appearance defects. The entries
 below preserve earlier scoped results and superseded integration snapshots.
 
+## Device audio overrun handling — CPU verified
+
+An actual Mac game replay exposed a typed audio overrun notification terminating
+the entire session after 1,444 steps. The audio host now counts these notifications
+without replacing the stream or mixer; device failures and lost error reports
+remain fatal. Seventy-four scoped CPU tests and strict native-device/window lint
+pass, including exact nonzero PCM continuation. A fresh full native replay and
+actual output-quality evidence remain outstanding. [Cause and qualification](docs/spikes/device-audio-xrun.md).
+
 ## Repeated navigation-start cost — diagnostic complete
 
 A default-off observer now measures initial and repeated navigation starts in
@@ -163,13 +172,11 @@ The existing plan gate stays unmet; this is not evidence that sub-2 ms is
 impossible or that the full rendered game misses its frame budget.
 [Outcome and replay](docs/spikes/navigation-search-cache-outcome.md).
 
-Last reassessment: 2026-10-14, a bounded source review identified repeated
-nearest-surface scans between accepted navigation shortcut segments. The prior
-endpoint lookup could supply the next segment's identical start polygon within
-the same immutable query. This is distinct from the rejected graph cache and
-ordered-query candidates; its actual cost has not been measured. Next useful
-step: measure those repeated scans on the same full-Core frames before choosing
-an implementation. Revisit after relevant engine changes or every few hours of
+Last reassessment: 2026-10-14, actual full-Core attribution measured repeated
+nearest-surface scans between accepted navigation shortcut segments. Removing
+their entire measured cost hypothetically still leaves a 2.544041 ms p95, so
+this hypothesis is closed without changing navigation. The diagnostic and exact
+gameplay/PCM parity are recorded above. Revisit after relevant engine changes or every few hours of
 active development, with a distinct hypothesis and stop condition. Preserve
 matched shipping inputs, work limits, rollback and gameplay/audio parity. Other
 implementation lanes continue throughout.
