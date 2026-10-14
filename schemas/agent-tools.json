@@ -112,6 +112,179 @@
             {
               "additionalProperties": false,
               "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "nodes": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "description": "Exact source entity -> fresh prototype node identity map.",
+                  "type": "object"
+                },
+                "op": {
+                  "const": "create_prefab",
+                  "type": "string"
+                },
+                "prefab_id": {
+                  "type": "string"
+                },
+                "root_entity_id": {
+                  "type": "string"
+                },
+                "scene_id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "op",
+                "scene_id",
+                "root_entity_id",
+                "prefab_id",
+                "name",
+                "nodes"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "entities": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "description": "Exact prototype node -> fresh instance entity identity map.",
+                  "type": "object"
+                },
+                "op": {
+                  "const": "instantiate_prefab",
+                  "type": "string"
+                },
+                "parent": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "scene_id": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "op",
+                "source",
+                "scene_id",
+                "entities"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "op": {
+                  "const": "update_prefab",
+                  "type": "string"
+                },
+                "prefab": {
+                  "$ref": "#/$defs/Prefab"
+                }
+              },
+              "required": [
+                "op",
+                "prefab"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "component": {
+                  "type": "string"
+                },
+                "entity_id": {
+                  "type": "string"
+                },
+                "op": {
+                  "const": "revert_prefab_component",
+                  "type": "string"
+                },
+                "scene_id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "op",
+                "scene_id",
+                "entity_id",
+                "component"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "op": {
+                  "const": "detach_prefab",
+                  "type": "string"
+                },
+                "root_entity_id": {
+                  "type": "string"
+                },
+                "scene_id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "op",
+                "scene_id",
+                "root_entity_id"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "op": {
+                  "const": "delete_prefab_instance",
+                  "type": "string"
+                },
+                "root_entity_id": {
+                  "type": "string"
+                },
+                "scene_id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "op",
+                "scene_id",
+                "root_entity_id"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "op": {
+                  "const": "delete_prefab",
+                  "type": "string"
+                },
+                "prefab_id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "op",
+                "prefab_id"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
                 "op": {
                   "const": "create_scene",
                   "type": "string"
@@ -562,6 +735,16 @@
               "type": [
                 "string",
                 "null"
+              ]
+            },
+            "prefab": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/PrefabLink"
+                },
+                {
+                  "type": "null"
+                }
               ]
             },
             "provenance": {
@@ -1047,6 +1230,95 @@
             "deterministic"
           ],
           "type": "string"
+        },
+        "Prefab": {
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "nodes": {
+              "additionalProperties": {
+                "$ref": "#/$defs/PrefabNode"
+              },
+              "type": "object"
+            },
+            "provenance": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/Provenance"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "root": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "name",
+            "root",
+            "nodes"
+          ],
+          "type": "object"
+        },
+        "PrefabLink": {
+          "additionalProperties": false,
+          "properties": {
+            "node": {
+              "type": "string"
+            },
+            "overrides": {
+              "description": "Whole-component overrides. A listed but absent component is removed.",
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 64,
+              "type": "array",
+              "uniqueItems": true
+            },
+            "root": {
+              "type": "string"
+            },
+            "source": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "source",
+            "root",
+            "node"
+          ],
+          "type": "object"
+        },
+        "PrefabNode": {
+          "additionalProperties": false,
+          "properties": {
+            "components": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "name": {
+              "type": "string"
+            },
+            "parent": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "name",
+            "components"
+          ],
+          "type": "object"
         },
         "Provenance": {
           "additionalProperties": false,

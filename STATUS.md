@@ -1,5 +1,16 @@
 # Implementation status
 
+## Linked prefab authoring — private backend candidate
+
+A fixed-topology linked-prefab backend materializes ordinary entities through
+atomic `incant_cmd` transactions. Explicit identity maps, component overrides,
+revert, prototype updates, detach and deletion retain validation and undo/replay.
+87 document/command CPU cases, a live headless save/reopen case, a cooked native
+consumer case and scoped strict all-target Clippy pass. Published schemas and SDK
+types are regenerated. The source and lossless evidence await final independent
+review/current-main intake; nested/topology edits and editor UI remain open.
+[Scope and limitations](docs/spikes/prefab-authoring.md).
+
 ## Core tick diagnostics — candidate evidence only
 
 The retained standalone QuickJS/Bevy probe compares six loop variants and safe
