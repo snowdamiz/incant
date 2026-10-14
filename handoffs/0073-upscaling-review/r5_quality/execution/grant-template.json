@@ -1,0 +1,33 @@
+{
+  "schema": "incant-r5-numeric-quality-grant-v1",
+  "authority": "root",
+  "holder": "Claude0073 Opus5.5 Max",
+  "issued_at": null,
+  "plan_sha256": "4713388422e1f2ea36a7893060d41159d10c3dc3fde07712644fae19ce3c5a2f",
+  "runner_sha256": "f2ba4c9695cc276b0ce7fcf2faff967ad7f1b52ca5967735ad7ce4078849d72f",
+  "lifecycle_sha256": "b9e12895389a046e1c0a0bd4c43f01a215505c793be4106b31fafc18aa2aff34",
+  "binary_sha256": "2bb892db69d724166727e0beeae495124c659664d0d0e81da0d1e73c1b3cb315",
+  "numeric_binary_sha256": [
+    "f4123f827f5696d496bbc6b1fe785c697d02f2af775cee6941ad4d0a8d65c9bf",
+    "f74086ba2577a7a930110c30c168df662fd88cc0719627323301dbc2e614440e"
+  ],
+  "evidence_dir": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001",
+  "groups": ["stationary", "motion", "transitions", "c7_disocclusion", "p1_crossing"],
+  "budget": {
+    "processes": 9,
+    "scene_submissions": 380,
+    "ui_submissions": 18,
+    "readback_submissions": 380,
+    "readback_maps": 442,
+    "queue_submissions": 840,
+    "rendered_frames": 380,
+    "pngs": 15,
+    "numeric_submissions": 62,
+    "maximum_extent": [960, 540],
+    "timeout_seconds_each": 90,
+    "builds": 0,
+    "retries": 0
+  },
+  "predecessor_release_path": null,
+  "predecessor_release_sha256": null
+}

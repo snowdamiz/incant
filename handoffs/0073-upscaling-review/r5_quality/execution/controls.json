@@ -1,0 +1,65 @@
+{
+  "schema": "incant-r5-protocol-controls-v1",
+  "at": "2026-10-14T03:06:31.412918+00:00",
+  "tests": 17,
+  "exit_code": 0,
+  "supervisor_handle": 33081,
+  "terminal_reaped": true,
+  "renderer_test_executions": 0,
+  "gpu_executions": 0,
+  "strict_numeric_judge_unchanged": true,
+  "quality_artifact_png_child_helpers_unchanged": true,
+  "existing_lifecycle_sha256": "b9e12895389a046e1c0a0bd4c43f01a215505c793be4106b31fafc18aa2aff34",
+  "quality_fixture_sha256": "650316a21f30bfb4f7cbe8c99b67f9b5be269b51eb62b4d017b519bd5130d997",
+  "build_receipt": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/r5-quality-build-001/receipt.json",
+    "sha256": "0a29cc65180fe96f0131c154ad080e563d62c33ef4f07d6ed03381d902ee6a51"
+  },
+  "build_release": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/r5-quality-build-001/release.json",
+    "sha256": "21945d2ba4a393f28da92b2df2db2fb10937276e68a53caaf7c01abaeb8dce1e"
+  },
+  "build_audit": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/r5-quality-build-001/audit.json",
+    "sha256": "0376d12f776b55b582a4b679b72fe1d3ebb0792b7f12a43167e806b31f95a07a"
+  },
+  "packet_files": [
+    {
+      "path": "runner.py",
+      "sha256": "f2ba4c9695cc276b0ce7fcf2faff967ad7f1b52ca5967735ad7ce4078849d72f",
+      "bytes": 29839
+    },
+    {
+      "path": "plan-ready.json",
+      "sha256": "4713388422e1f2ea36a7893060d41159d10c3dc3fde07712644fae19ce3c5a2f",
+      "bytes": 5063
+    },
+    {
+      "path": "grant-template.json",
+      "sha256": "17ee24c1120391fa29c692ba71766e95314821dc00f05703bb5d5611a6634bc8",
+      "bytes": 1277
+    },
+    {
+      "path": "test_runner.py",
+      "sha256": "f229dd3597a99405f6db660bb66510e118b2e8cb8f1b8e19574d847649dd6695",
+      "bytes": 15709
+    },
+    {
+      "path": "controls.log",
+      "sha256": "204474d83e11a2c78246cd9597ff043140ffecb976cd94714c10d13548cec95c",
+      "bytes": 1846
+    },
+    {
+      "path": "README.md",
+      "sha256": "e1a1605d438c8743ce5f60c43654e2c0b6b77d0a2efda5462e66f7cc5dd8b92a",
+      "bytes": 4043
+    },
+    {
+      "path": "protocol-delta.patch",
+      "sha256": "1678ea62f883ca5713e85b258e327f2950663ba6c5ba6840f51d014338a8de63",
+      "bytes": 19510
+    }
+  ],
+  "grant": "absent; template invalid until root fills authority fields",
+  "scope": "source/process/contract controls only; no GPU or appearance evidence"
+}

@@ -1,0 +1,130 @@
+{
+  "schema": "incant-r5-numeric-quality-execution-v1",
+  "state": "FROZEN_READY_FOR_ROOT_GRANT",
+  "producer": "8c39fd6adbf95d470388867de4d305756b05913c",
+  "evidence_dir": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001",
+  "groups": [
+    "stationary",
+    "motion",
+    "transitions",
+    "c7_disocclusion",
+    "p1_crossing"
+  ],
+  "budget": {
+    "processes": 9,
+    "scene_submissions": 380,
+    "ui_submissions": 18,
+    "readback_submissions": 380,
+    "readback_maps": 442,
+    "queue_submissions": 840,
+    "rendered_frames": 380,
+    "pngs": 15,
+    "maximum_extent": [
+      960,
+      540
+    ],
+    "timeout_seconds_each": 90,
+    "builds": 0,
+    "retries": 0,
+    "numeric_submissions": 62
+  },
+  "environment": {
+    "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+    "TMPDIR": "<fresh evidence root>/tmp/<group>",
+    "INCANT_EXPECT_GPU_BACKEND": "Metal",
+    "RUST_BACKTRACE": "0",
+    "INCANT_0073_OWNER_REVIEW_OUT": "<fresh evidence root>/<group>/artifacts"
+  },
+  "quality_plan": {
+    "path": "/Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review/handoffs/0073-upscaling-review/owner_quality/plan.json",
+    "sha256": "ff0f0f488faa3f6d4d6cc1321d5c4e87c35cbb4160130dddd050697bb824dbc4"
+  },
+  "fixture": {
+    "path": "/Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review/handoffs/0073-upscaling-review/r5_quality/review/upscaling_owner_review.rs",
+    "sha256": "650316a21f30bfb4f7cbe8c99b67f9b5be269b51eb62b4d017b519bd5130d997"
+  },
+  "production_freeze": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/r5-quality-build-001/production-freeze.json",
+    "sha256": "60b9239be68c4516709e557e7da029da394c635b124e73749c550c19545318c9"
+  },
+  "build": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/r5-quality-build-001/receipt.json",
+    "sha256": "0a29cc65180fe96f0131c154ad080e563d62c33ef4f07d6ed03381d902ee6a51"
+  },
+  "enumeration": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/r5-quality-build-001/listing.log",
+    "sha256": "a0472f0502ae15b73b4b98c8206066562e23f14ec2a949fd37deaf961a26b97d"
+  },
+  "build_review": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/r5-quality-build-001/audit.json",
+    "sha256": "0376d12f776b55b582a4b679b72fe1d3ebb0792b7f12a43167e806b31f95a07a"
+  },
+  "binary": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/r5-quality-build-001/upscaling_owner_review",
+    "sha256": "2bb892db69d724166727e0beeae495124c659664d0d0e81da0d1e73c1b3cb315",
+    "bytes": 18356104,
+    "mode": "0555"
+  },
+  "numeric_binaries": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/reconstruction-r5-cpu-001/attempt-002/binaries/default/incant_render-bf4961fb357f91a4",
+      "sha256": "f4123f827f5696d496bbc6b1fe785c697d02f2af775cee6941ad4d0a8d65c9bf",
+      "bytes": 32412464,
+      "mode": "0555"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/reconstruction-r5-cpu-001/attempt-002/binaries/cooked-native/incant_render-288759d68012f619",
+      "sha256": "f74086ba2577a7a930110c30c168df662fd88cc0719627323301dbc2e614440e",
+      "bytes": 33930640,
+      "mode": "0555"
+    }
+  ],
+  "numeric_order": [
+    [
+      "ordinary-default",
+      0,
+      "upscaling::system::device_tests::actual_output_reconstruction_rejects_bad_history_and_never_retains_overlay",
+      19
+    ],
+    [
+      "owner-default",
+      0,
+      "upscaling::system::owner_device_tests::actual_owner_history_obeys_provenance_and_preserves_ordinary_fallback",
+      12
+    ],
+    [
+      "ordinary-cooked",
+      1,
+      "upscaling::system::device_tests::actual_output_reconstruction_rejects_bad_history_and_never_retains_overlay",
+      19
+    ],
+    [
+      "owner-cooked",
+      1,
+      "upscaling::system::owner_device_tests::actual_owner_history_obeys_provenance_and_preserves_ordinary_fallback",
+      12
+    ]
+  ],
+  "numeric_evidence": {
+    "freeze": {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/reconstruction-r5-cpu-001/source-002/freeze.json",
+      "sha256": "d615ab15dfc3ae10ec0bd060b9df2d473854cdae093c98514b28ebee93e37407"
+    },
+    "release": {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/reconstruction-r5-cpu-001/attempt-002/release.json",
+      "sha256": "9267694bddab242ec70adb348ed3cf69ac1be3bb787ed0de04b17bbdd8b84d42"
+    },
+    "default": {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/reconstruction-r5-cpu-001/attempt-002/default.json",
+      "sha256": "9c1af3c0a29bfedeb1478fb12a0706d99a2c34a359b28a33ab1e15465a2e9c9a"
+    },
+    "cooked-native": {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/reconstruction-r5-cpu-001/attempt-002/cooked-native.json",
+      "sha256": "3cadfffde07c468c139c1216da24100cad7b782705eb45233085ba58dca69de1"
+    },
+    "root_review": {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/reconstruction-r5-cpu-final-root-20261014.json",
+      "sha256": "6bf96cd6e2d1f3149a47da8ea8818583f216b9835e991bd8cf35bbf102e487de"
+    }
+  }
+}
