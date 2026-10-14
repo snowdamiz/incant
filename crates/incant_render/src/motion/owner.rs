@@ -99,14 +99,21 @@ impl History {
         self.last.as_ref().map(|a| a.frame.clone())
     }
     pub fn prepare(&self, extent: Extent, matrix: Mat4) -> Result<Pending, MotionError> {
+        self.prepare_mode(extent, matrix, false)
+    }
+    fn prepare_mode(
+        &self,
+        extent: Extent,
+        matrix: Mat4,
+        temporal: bool,
+    ) -> Result<Pending, MotionError> {
         if !matrix.is_finite() || !matrix.inverse().is_finite() {
             return Err(MotionError::Projection);
         }
         let reset = self.cut
-            || self
-                .last
-                .as_ref()
-                .is_none_or(|a| a.extent != extent || a.frame.bypassed);
+            || self.last.as_ref().is_none_or(|a| {
+                a.extent != extent || a.frame.bypassed || a.frame.phase.is_some() != temporal
+            });
         let bypassed = extent.pixel.is_some();
         let sequence = self
             .last
@@ -146,11 +153,12 @@ impl History {
         camera: CameraView,
         rect: [f32; 4],
     ) -> Result<Pending, MotionError> {
-        let mut pending = self.prepare(
+        let mut pending = self.prepare_mode(
             extent,
             camera
                 .matrix(rect[2] / rect[3])
                 .map_err(|_| MotionError::Projection)?,
+            true,
         )?;
         if !pending.frame.bypassed {
             let phase = if pending.frame.has_previous() {
@@ -213,4 +221,31 @@ pub(super) fn reproject(current: Vec4, previous: Vec4) -> Option<[f32; 4]> {
     }
     let d = uv(b) - uv(a);
     Some([d.x, d.y, b.z, 1.])
+}
+
+#[cfg(test)]
+#[test]
+fn switching_jitter_modes_resets_only_the_candidate_until_accept() {
+    let camera = CameraView::preview();
+    let rect = [0., 0., 64., 64.];
+    let extent = Extent::new([64, 64], [64, 64], rect, camera);
+    let matrix = camera.matrix(1.).unwrap();
+    let mut h = History::default();
+    h.accept(h.prepare_temporal(extent.clone(), camera, rect).unwrap());
+    let accepted = h.frame().unwrap();
+    let candidate = h.prepare(extent.clone(), matrix).unwrap();
+    assert!(!candidate.frame.has_previous());
+    assert_eq!(candidate.frame.epoch(), accepted.epoch() + 1);
+    assert_eq!(h.frame().unwrap().sequence(), accepted.sequence());
+    drop(candidate);
+    assert!(
+        h.prepare_temporal(extent.clone(), camera, rect)
+            .unwrap()
+            .frame
+            .has_previous()
+    );
+    h.accept(h.prepare(extent.clone(), matrix).unwrap());
+    let native = h.prepare_temporal(extent, camera, rect).unwrap();
+    assert!(!native.frame.has_previous());
+    assert_eq!(native.frame.jitter_phase(), Some(0));
 }

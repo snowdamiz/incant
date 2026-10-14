@@ -19,6 +19,11 @@ pub(crate) struct MotionDraw {
     pub(super) draws: Vec<Draw>,
 }
 impl MotionDraw {
+    #[cfg(feature = "native-metalfx")]
+    pub(crate) fn native_views(&self) -> (&wgpu::TextureView, &wgpu::TextureView) {
+        (&self.targets.motion, &self.targets.depth[self.slot])
+    }
+
     pub fn encode(
         &self,
         encoder: &mut wgpu::CommandEncoder,

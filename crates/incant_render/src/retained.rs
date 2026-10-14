@@ -33,6 +33,8 @@ pub struct RetainedScene {
     owner: Arc<()>,
     motion: Option<super::motion::MotionState>,
     temporal: Option<crate::temporal::TemporalState>,
+    #[cfg(feature = "native-metalfx")]
+    metalfx: Option<crate::metalfx::Owner>,
     resolution: Option<crate::resolution::ResolutionOwner>,
     bindings: Vec<NodeBinding>,
     environment: Option<(AssetVersionId, f64, f64)>,
@@ -94,6 +96,8 @@ impl Renderer {
             owner: Arc::clone(&self.identity),
             motion: None,
             temporal: None,
+            #[cfg(feature = "native-metalfx")]
+            metalfx: None,
             resolution: None,
             bindings: input
                 .nodes
@@ -128,6 +132,51 @@ impl Renderer {
     }
 }
 impl RetainedScene {
+    /// Explicit startup opt-in. Spatial fallback keeps the ordinary renderer;
+    /// screen-space host UI remains after the world. No built-in upscale claim.
+    #[cfg(feature = "native-metalfx")]
+    pub fn enable_metalfx(
+        &mut self,
+        renderer: &Renderer,
+        preference: crate::metalfx::Preference,
+        config: crate::metalfx::Config,
+    ) -> Result<()> {
+        let owner = crate::metalfx::Owner::new(
+            preference,
+            config,
+            renderer
+                .metalfx_admission
+                .ok_or(crate::metalfx::MetalFxError::Disabled)?,
+        )?;
+        if !Arc::ptr_eq(&self.owner, &renderer.identity) {
+            return Err(crate::motion::MotionError::Owner.into());
+        }
+        if renderer.metalfx_admission.is_some_and(|r| r.is_ok()) {
+            self.enable_motion_history(renderer)?;
+        } else {
+            self.disable_motion_history();
+        }
+        self.metalfx = Some(owner);
+        Ok(())
+    }
+    /// Prepare a future output extent outside ordinary frame submission. This
+    /// may synchronously initialize the vendor scaler; call at startup/resize.
+    #[cfg(feature = "native-metalfx")]
+    pub fn prepare_metalfx_extent(&mut self, renderer: &Renderer, extent: [u32; 2]) -> Result<()> {
+        if !Arc::ptr_eq(&self.owner, &renderer.identity) {
+            return Err(crate::motion::MotionError::Owner.into());
+        }
+        self.metalfx
+            .as_mut()
+            .ok_or(crate::metalfx::MetalFxError::Disabled)?
+            .prepare_extent(renderer, extent)?;
+        Ok(())
+    }
+    #[cfg(feature = "native-metalfx")]
+    pub fn metalfx_selection(&self) -> Option<crate::metalfx::Selection> {
+        self.metalfx.as_ref().and_then(|o| o.selection())
+    }
+
     /// Explicit owner attachment reset. Toggling creates a fresh motion owner
     /// and drops accepted fixed color history atomically. No color consumer
     /// reads the attachment yet; upscale/native history owners are not present.
@@ -172,11 +221,19 @@ impl RetainedScene {
         )?;
         self.motion = Some(candidate);
         self.temporal = None;
+        #[cfg(feature = "native-metalfx")]
+        {
+            self.metalfx = None;
+        }
         Ok(())
     }
     pub fn disable_motion_history(&mut self) {
         self.motion = None;
         self.temporal = None;
+        #[cfg(feature = "native-metalfx")]
+        {
+            self.metalfx = None;
+        }
     }
     pub fn invalidate_motion_history(&mut self) {
         if let Some(motion) = &mut self.motion {
@@ -426,6 +483,35 @@ impl RetainedScene {
             self.staging.camera.pixel_resolution,
             scale,
         )?;
+        #[cfg(feature = "native-metalfx")]
+        let mut native_pending = self
+            .metalfx
+            .as_ref()
+            .map(|owner| {
+                let overlays = self.staging.sprites.is_some()
+                    || self.staging.text.is_some()
+                    || self.staging.batches.iter().any(|b| {
+                        b.model.materials.materials[b.model.primitives[b.primitive].material].alpha
+                            == incant_assets_runtime::AlphaMode::Blend
+                    });
+                owner.prepare(
+                    renderer,
+                    &self.staging,
+                    overlays,
+                    &plan,
+                    target.viewport.map(|v| v.rect).unwrap_or([
+                        0.,
+                        0.,
+                        target.width as f32,
+                        target.height as f32,
+                    ]),
+                )
+            })
+            .transpose()?;
+        #[cfg(feature = "native-metalfx")]
+        let native_active = native_pending.as_ref().is_some_and(|p| p.native());
+        #[cfg(not(feature = "native-metalfx"))]
+        let native_active = false;
         if let Some(temporal) = &self.temporal
             && self.staging.camera.pixel_resolution.is_none()
         {
@@ -450,7 +536,7 @@ impl RetainedScene {
                     crate::motion::MotionView {
                         output: [target.width, target.height],
                         plan: &plan,
-                        temporal: self.temporal.is_some(),
+                        temporal: self.temporal.is_some() || native_active,
                     },
                 )
             })
@@ -473,6 +559,36 @@ impl RetainedScene {
             self.staging.camera.jitter = crate::temporal::jitter::ndc(phase, plan.rect);
             self.staging.camera.jitter_guard = crate::temporal::jitter::guard(plan.rect);
         }
+        #[cfg(feature = "native-metalfx")]
+        let commands = if let Some(pending) = native_pending.as_mut().filter(|p| p.native()) {
+            let owner = self
+                .metalfx
+                .as_mut()
+                .ok_or(crate::metalfx::MetalFxError::Interop)?;
+            let frame = motion_pending
+                .as_ref()
+                .ok_or(crate::metalfx::MetalFxError::Interop)?
+                .temporal_input(plan.rect)
+                .frame;
+            owner.bind_motion(pending, &frame)?;
+            renderer.draw_scene_metalfx(
+                &self.staging,
+                target,
+                &plan,
+                motion_draw.ok_or(crate::metalfx::MetalFxError::Interop)?,
+                owner,
+                pending,
+            )?
+        } else {
+            crate::graph::Commands::Single(renderer.draw_scene_scaled(
+                &self.staging,
+                target,
+                scale,
+                motion_draw,
+                temporal_pending.as_ref(),
+            )?)
+        };
+        #[cfg(not(feature = "native-metalfx"))]
         let commands = renderer.draw_scene_scaled(
             &self.staging,
             target,
@@ -502,7 +618,14 @@ impl RetainedScene {
         if let (Some(motion), Some(pending)) = (&self.motion, &motion_pending) {
             motion.write(&renderer.queue, pending);
         }
+        #[cfg(feature = "native-metalfx")]
+        let submission = renderer.queue.submit(commands);
+        #[cfg(not(feature = "native-metalfx"))]
         let submission = renderer.queue.submit([commands]);
+        #[cfg(feature = "native-metalfx")]
+        if let (Some(owner), Some(pending)) = (&mut self.metalfx, native_pending) {
+            owner.accept(pending);
+        }
         std::mem::swap(&mut self.live, &mut self.staging);
         if let (Some(motion), Some(pending)) = (&mut self.motion, motion_pending) {
             motion.accept(pending, input);
@@ -556,3 +679,7 @@ mod temporal_tests;
 #[cfg(test)]
 #[path = "motion_owner_device_tests.rs"]
 mod motion_owner_tests;
+
+#[cfg(all(test, feature = "native-metalfx"))]
+#[path = "metalfx_retained_tests.rs"]
+mod metalfx_tests;
