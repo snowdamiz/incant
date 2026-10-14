@@ -112,5 +112,10 @@
     }
   ],
   "review_sha256": "fa0dea239a86fa34c12497b9805c4bd310947e85aa5d7834e92c56421ae77d00",
-  "scope": "Exact producer helper/evidence curation on current main; original runtime/shipping execution remains source97834; no fresh player/build/measurement."
+  "scope": "Exact producer helper/evidence curation on current main; original runtime/shipping execution remains source97834; no fresh player/build/measurement.",
+  "current_main_join": {
+    "main": "f55bcbbc8aa72c9c5b3c93ec1b678452a7351b57",
+    "head": "8555da5c3c9a1dffa26c44233887245768c7c2ff",
+    "scope": "Main266 adds three expected-success test assertions and repair evidence. All current helper paths remain exact; no engine/SDK/vendor/manifests/lock delta in this intake."
+  }
 }
