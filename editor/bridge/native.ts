@@ -351,7 +351,7 @@ export function snapshotFromEngine(read: EngineResponse): BridgeSnapshot {
       : { status: "attached", surface: "Native wgpu" },
   };
 }
-function failure(error: unknown): BridgeResult {
+function failure(error: unknown): Extract<BridgeResult, { readonly ok: false }> {
   if (typeof error === 'object' && error !== null && 'code' in error && 'message' in error && typeof error.code === 'string' && typeof error.message === 'string') {
     return { ok: false, error: { code: error.code, message: error.message } };
   }
@@ -1261,7 +1261,10 @@ export class NativeBridge implements EditorBridge {
       return { ok: true, projectFile: freeze(response) };
     } catch (error) {
       await this.start();
-      return failure(error);
+      // A rejected invocation or an unverifiable receipt is not proof that the
+      // file stayed unchanged. The host can commit before the reply/read fails.
+      // Keep its exact error, refresh state, and never repeat the write here.
+      return { ...failure(error), outcomeUnknown: true };
     } finally { this.pending = false; }
   }
   async request(request: HostRequest): Promise<BridgeResult> {

@@ -490,7 +490,13 @@ export interface AssetImportCommit {
 
 export type BridgeResult =
   | { readonly ok: true; readonly projectFile?: ProjectFileResponse; readonly assetImport?: AssetImportCommit; readonly playEntity?: PlayEntity; readonly agentTurnId?: number }
-  | { readonly ok: false; readonly error: BridgeError };
+  | {
+      readonly ok: false;
+      readonly error: BridgeError;
+      /** Local transport metadata: no verified completion arrived after dispatch.
+       * The host may have acted. Preserve the error without inferring rollback. */
+      readonly outcomeUnknown?: true;
+    };
 
 export interface EditorBridge {
   readonly protocolVersion: number;
