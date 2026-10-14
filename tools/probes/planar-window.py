@@ -312,6 +312,8 @@ def execute(args):
                     argv = [player, '--package', args.package / 'player/data']
                     argv += ['--window', '--stop-after', str(row['ticks'])] if args.stage == 'window' else [
                         '--ticks', str(row['ticks']), '--ui-viewport', '640x360', '--output', output / (name + '.pcm')]
+                    if args.stage == 'window' and args.window_state_log:
+                        argv += ['--window-state-log', output / 'eligibility.jsonl']
                     argv += ['--input-recording', args.recordings / (name + '-input.json'),
                              '--observe', args.recordings / (name + '-observe.json')]
                     raw = run_stage(argv, output, name, 90, check, ledger, env, player.parent, args.stage == 'window')
@@ -338,6 +340,11 @@ def execute(args):
         result['error'] = repr(error)
         raise
     finally:
+        if args.stage == 'window' and args.window_state_log:
+            log = output / 'eligibility.jsonl'
+            result['window_state_log'] = {'requested': True, 'present': log.is_file()}
+            if log.is_file():
+                result['window_state_log'].update(path=log.name, bytes=log.stat().st_size, sha256=digest(log))
         write(output / 'result.json', result)
 
 
@@ -350,6 +357,7 @@ def main():
         p = modes.add_parser(mode); p.add_argument('package', type=Path); p.add_argument('recordings', type=Path)
         p.add_argument('output', type=Path)
         if mode == 'window':
+            p.add_argument('--window-state-log', action='store_true', help='Explicit bounded eligibility log in this fresh output; diagnostic overhead, not a timing run')
             p.add_argument('--case', choices=ORDER, required=True, help='One explicitly coordinated route; never launches the next app automatically')
             p.add_argument('--baseline', type=Path, required=True)
             p.add_argument('--player', type=Path, help='Optional unique bundle copy; must hash-match the actual export')
