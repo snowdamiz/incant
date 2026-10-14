@@ -2,6 +2,7 @@
 import copy
 import json
 import sys
+import subprocess
 import tempfile
 import unittest
 from pathlib import Path
@@ -49,6 +50,73 @@ def measurement():
 
 
 class MacPerformance(unittest.TestCase):
+    def measure_fixture(self, data, *, heap_mode=None, process_timeout=600):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary).resolve()
+            package = root / 'package'; package.mkdir()
+            output = root / 'measurement'
+            exported = {'target': 'fixture', 'codegen': {}, 'physics_mode': 'fast',
+                        'compiler': {}, 'project_sha256': 'fixture',
+                        'profiling': {'compiler': {'features': {}}}}
+            identity = {'data': {}, 'script_source_sha256': 'fixture', 'program': None}
+            def run(argv, **options):
+                options['stdout'].write(json.dumps(data).encode())
+                return subprocess.CompletedProcess(argv, 0)
+            with patch.object(subject, 'mac_identity', return_value={'model': 'fixture'}), \
+                    patch.object(subject, 'package_inputs', return_value=(package / 'player', exported, identity, 60)), \
+                    patch.object(subject.native_process, 'run', side_effect=run) as process:
+                try:
+                    result = subject.measure(package, output, 100, heap_mode=heap_mode,
+                                             process_timeout=process_timeout)
+                except ValueError:
+                    command = json.loads((output / 'command.json').read_text())
+                    self.assertIn('error', command)
+                    self.assertTrue((output / 'stdout.json').exists())
+                    self.assertFalse((output / 'measurement.json').exists())
+                    raise
+            return result, json.loads((output / 'command.json').read_text()), process.call_args
+
+    def test_explicit_heap_mode_controls_actual_argv_and_retained_identity(self):
+        for mode in subject.HEAP_MODES:
+            with self.subTest(mode=mode):
+                result, command, call = self.measure_fixture(current_report(mode), heap_mode=mode, process_timeout=45)
+                self.assertEqual(command['argv'].count('--profile'), 1)
+                self.assertEqual('--profile-heap-detail' in command['argv'], mode == 'detailed')
+                self.assertEqual(command['requested_heap_mode'], mode)
+                self.assertEqual(command['timeout_seconds'], 45)
+                self.assertEqual(call.kwargs['timeout'], 45)
+                self.assertEqual(result['match']['profile_instrumentation'], subject.profile_instrumentation(current_report(mode)))
+                self.assertFalse(result['phase_gate_passed'])
+
+    def test_explicit_heap_mode_refuses_legacy_or_wrong_returned_mode_and_retains_failure(self):
+        for data, mode in [(report(), 'maintained'), (report(), 'detailed'),
+                           (current_report('maintained'), 'detailed'),
+                           (current_report('detailed'), 'maintained')]:
+            with self.subTest(mode=mode, version=data['profile']['version']), \
+                    self.assertRaisesRegex(ValueError, 'requested mode'):
+                self.measure_fixture(data, heap_mode=mode)
+
+    def test_omitted_heap_mode_preserves_default_argv_legacy_and_current_ingestion(self):
+        for data in (report(), current_report()):
+            result, command, call = self.measure_fixture(data)
+            self.assertNotIn('--profile-heap-detail', command['argv'])
+            self.assertNotIn('requested_heap_mode', command)
+            self.assertEqual(call.kwargs['timeout'], 600)
+            self.assertEqual(result['match']['profile_instrumentation'], subject.profile_instrumentation(data))
+
+    def test_malformed_heap_mode_or_timeout_refuses_before_host_commands(self):
+        for mode in ('unknown', '', True, 3, ['maintained']):
+            with self.subTest(mode=mode), patch.object(subject, 'mac_identity') as host, self.assertRaises(ValueError):
+                subject.measure(Path('package'), Path('new'), 100, heap_mode=mode)
+            host.assert_not_called()
+        with patch.object(subject, 'mac_identity') as host, self.assertRaisesRegex(ValueError, 'callable'):
+            subject.measure(Path('package'), Path('new'), 100, cancel=True)
+        host.assert_not_called()
+        for timeout in (0, True, 1.0, -1, 601):
+            with self.subTest(timeout=timeout), patch.object(subject, 'mac_identity') as host, self.assertRaises(ValueError):
+                subject.measure(Path('package'), Path('new'), 100, process_timeout=timeout)
+            host.assert_not_called()
+
     def test_version_discriminators_reject_boolean_float_text_and_unknown_values(self):
         for value in (True, False, 1.0, 2.0, 3.0, '3', None, 0, 4):
             for path in [('version',), ('quickjs_heap', 'version'), ('frame_wall', 'version')]:
