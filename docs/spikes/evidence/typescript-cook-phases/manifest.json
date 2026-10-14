@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "source": "9d506ec97876e1fb066f04d34fe9e91772d46da3",
+  "base": "3610036d1b079944ce9b314f19dbe5201d3d71fd",
+  "failed_candidate": "e4faac52679749f20765a18ff6024e17889f1d46",
+  "records": 50,
+  "inputs": 3909,
+  "archive_sha256": "516506e08b71b622a40d86c3579c9c2937b5bade0e24937b9c535d801cba3ddd",
+  "verifier_sha256": "449b1afadc22850d0f63001ef035b5c569b4a6931e2bcebf728ebd89943e177b",
+  "binaries": [
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/incant_cook-ad58ba61f156bd32",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/typescript-cook-phases-001/binaries/unit-incant_cook-ad58ba61f156bd32",
+      "sha256": "8c6712858f9aebcc153cdc33243a7a854a135cc4204a3355c7fd2715932a0173",
+      "size": 4233104,
+      "target": "incant_cook"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/typescript-83cf823b80d34141",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/typescript-cook-phases-001/binaries/integration-typescript-83cf823b80d34141",
+      "sha256": "2cbb035046411b57340f1f5edb654e111a306cbb24c0b3ae75a4a30283dd7847",
+      "size": 20126264,
+      "target": "typescript"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/fallback-fc351e7e7657c3cd",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/typescript-cook-phases-001/binaries/fallback-fallback-fc351e7e7657c3cd",
+      "sha256": "5cc0d868534c7c2805db2ff2ed39e58c03c89a48b5cfc5b3d0f38150c5e7234c",
+      "size": 26851608,
+      "target": "fallback"
+    }
+  ],
+  "checks": {
+    "commands": 10,
+    "node": 23,
+    "rust_unit": 3,
+    "rust_integration": 2,
+    "exact_fallback": 1
+  },
+  "windows_diagnostic": "Pending one manual invocation on exact reviewed merge SHA; not a release substitute or timeout fix."
+}

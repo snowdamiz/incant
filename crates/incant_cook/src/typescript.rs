@@ -6,16 +6,20 @@ use std::{
     fs::{self, File},
     io::Read,
     path::{Path, PathBuf},
-    process::{Child, Command, Stdio},
+    process::{Child, Command, ExitStatus, Stdio},
     time::{Duration, Instant},
 };
 
+mod phases;
+#[cfg(test)]
+mod tests;
 #[cfg(windows)]
 mod windows;
 
 const DRIVER: &str = "tools/build_native_script.mjs";
 const DEADLINE: Duration = Duration::from_secs(8);
 const MAX_LOG_BYTES: u64 = 2 * 1024 * 1024;
+const DEADLINE_MESSAGE: &str = "native TypeScript cook exceeded its 8 second deadline";
 
 /// The caller has already checked the document and bounded all attachments.
 /// A temporary private artifact is consumed only after a successful fixed cook.
@@ -85,6 +89,8 @@ fn compile_sources<T>(
     fs::write(&input_path, catalog)?;
     let stdout_path = directory.path().join("stdout");
     let stderr_path = directory.path().join("stderr");
+    let phase_path = directory.path().join("phases.jsonl");
+    File::create(&phase_path)?;
     let output = directory.path().join("cooked");
     let mut command = Command::new(&node);
     command
@@ -103,6 +109,7 @@ fn compile_sources<T>(
         .env("TMPDIR", directory.path())
         .env("TEMP", directory.path())
         .env("TMP", directory.path())
+        .env("INCANT_NATIVE_COOK_PHASE_FILE", &phase_path)
         // The pinned SWC carrier materializes its verified native payload. Keep
         // this transient cache private instead of inheriting a user's HOME/cache.
         // Its no-symlink check requires resolving macOS's /var -> /private/var.
@@ -122,24 +129,35 @@ fn compile_sources<T>(
     }
     let mut child = CookChild(command.spawn()?);
     let started = Instant::now();
-    let status = loop {
-        if let Some(status) = child.0.try_wait()? {
-            break status;
-        }
-        if started.elapsed() > DEADLINE {
-            return Err(invalid(
-                "native TypeScript cook exceeded its 8 second deadline",
-            ));
-        }
-        if fs::metadata(&stdout_path)?.len() > MAX_LOG_BYTES
-            || fs::metadata(&stderr_path)?.len() > MAX_LOG_BYTES
-        {
-            return Err(invalid(
-                "native TypeScript cook exceeded its diagnostic byte limit",
-            ));
-        }
-        std::thread::sleep(Duration::from_millis(10));
-    };
+    let status = wait_for_cook(
+        &mut child,
+        started,
+        DEADLINE,
+        &stdout_path,
+        &stderr_path,
+        &phase_path,
+    );
+    // Close all writes before reading the sidecar, including a deadline with no
+    // first phase. This also reaps the child on every refusal/error path.
+    drop(child);
+    let timed_out = matches!(&status, Err(TypeScriptCookError::Invalid(DEADLINE_MESSAGE)));
+    if timed_out
+        || std::env::var_os("INCANT_NATIVE_COOK_DIAGNOSTIC").as_deref()
+            == Some(std::ffi::OsStr::new("1"))
+    {
+        let outcome = if timed_out {
+            "deadline"
+        } else if status.as_ref().is_ok_and(ExitStatus::success) {
+            "exited_success"
+        } else {
+            "refused"
+        };
+        eprintln!(
+            "INCANT_NATIVE_COOK_PHASES {}",
+            phases::observation(&phase_path, started.elapsed(), outcome)
+        );
+    }
+    let status = status?;
     if !status.success() {
         let diagnostic = bounded(&stderr_path, MAX_LOG_BYTES as usize)?;
         let message = String::from_utf8_lossy(&diagnostic);
@@ -173,6 +191,33 @@ fn compile_sources<T>(
         return Err(TypeScriptCookError::SourcesChanged);
     }
     Ok(compiled)
+}
+
+fn wait_for_cook(
+    child: &mut CookChild,
+    started: Instant,
+    deadline: Duration,
+    stdout_path: &Path,
+    stderr_path: &Path,
+    phase_path: &Path,
+) -> Result<ExitStatus> {
+    loop {
+        if let Some(status) = child.0.try_wait()? {
+            return Ok(status);
+        }
+        if started.elapsed() > deadline {
+            return Err(invalid(DEADLINE_MESSAGE));
+        }
+        if fs::metadata(stdout_path)?.len() > MAX_LOG_BYTES
+            || fs::metadata(stderr_path)?.len() > MAX_LOG_BYTES
+            || fs::metadata(phase_path)?.len() > phases::MAX_BYTES
+        {
+            return Err(invalid(
+                "native TypeScript cook exceeded its diagnostic byte limit",
+            ));
+        }
+        std::thread::sleep(Duration::from_millis(10));
+    }
 }
 
 /// Both outputs were produced in this invocation from one immutable source graph.
@@ -227,10 +272,15 @@ fn bounded(path: &Path, limit: usize) -> Result<Vec<u8>> {
 
 /// Always kill and reap on deadline/error before temporary inputs are removed.
 struct CookChild(Child);
-impl Drop for CookChild {
-    fn drop(&mut self) {
+impl CookChild {
+    fn stop(&mut self) {
         let _ = self.0.kill();
         let _ = self.0.wait();
+    }
+}
+impl Drop for CookChild {
+    fn drop(&mut self) {
+        self.stop();
     }
 }
 fn node_executable(project: &Path) -> Result<PathBuf> {

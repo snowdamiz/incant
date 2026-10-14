@@ -1,12 +1,24 @@
 # Implementation status
 
+## Windows TypeScript deadline — bounded observation, no timeout fix claim
+
+Main269 includes the source-scoped script phase diagnostic. Checkpoint32's frozen
+Windows desktop job failed the unchanged authored fallback test at its existing
+eight-second compiler deadline; the original failed job and prior passing Windows
+log remain retained. A reviewed eight-phase observer now preserves sanitized
+bounded evidence after child cleanup, including no first phase. Ten current local
+checks pass (23 Node controls and six Rust cases, strict lint and policy checks).
+The exact Windows diagnostic is authorized once after this scoped PR's fast check
+and merge; it has no retry or deadline override. A successful diagnostic will not
+promote the failed candidate or establish a timeout repair. [Scope and evidence](docs/spikes/typescript-cook-phases.md).
+
 ## Native script phase diagnostic — one bounded CPU test
 
 The real ScriptHost diagnostic checks all 9,999 transform rows after each of 128
 ticks and rejects three omitted-write variants. Independent source, raw interval,
 profile and executable review passes. The main268 composition preserves the
 executed script/runtime inputs and passes strict compiler/profile/fast-mode
-Clippy. Fourteen markers compile only into the selected test configuration;
+Clippy. PR269 merged after its exact-head fast SUCCESS. Fourteen markers compile only into the selected test configuration;
 shipping libraries are unchanged. Mean callback time is 1.134 ms, numeric
 validation 0.253 ms and heap telemetry 0.104 ms in this CI-profile fixture. These
 are diagnostic intervals, with no quiet guarantee or complete Core workload;
@@ -41,8 +53,9 @@ asserts those calls succeed and passes affected package Clippy/tests. PR266
 merged after its exact-head fast SUCCESS. Checkpoint31 finished with 22 required
 SUCCESS and one FAILURE; every original job is retained. The same PR263 now
 freezes checkpoint32 candidate `e4faac52`, exact main268 tree `17054960`. All
-23 contexts and eight comprehensive workflows remain required. Release30 is
-unchanged; no successor success or promotion is claimed. [Repair evidence](docs/spikes/physics-sync-result.md).
+23 contexts and eight comprehensive workflows remain required. Its Windows
+desktop deadline failure is retained while the remaining original jobs finish.
+Release30 is unchanged; no successor success or promotion is claimed. [Repair evidence](docs/spikes/physics-sync-result.md).
 
 ## Director routing clarification — editor UI only
 
