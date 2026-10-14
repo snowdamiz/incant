@@ -196,3 +196,38 @@ This is a partial diagnostic result on the private comparison branch. No
 production change, complete visual acceptance, shipping performance result or
 phase-gate acceptance is claimed. Geometry coverage and stable detail recovery
 remain unresolved.
+
+## Coverage-lock derivative
+
+011 changes exactly one expression in the diagnostic reference's accumulation
+shader: its existing luminance lock also relaxes coverage rectification. The six
+original external sources are verified before the derivative is assembled;
+immutable upstream files remain unchanged. The report identifies the modified
+algorithm and hashes the actual accumulation shader. This is an experiment,
+not an upstream or production result.
+
+The source freeze is
+`54adc8f796a320d1a84b4b2e59ea68c971b42bb635b82f393d4001af0d4f64b5`;
+the executable is
+`3e6df2c94a6a71316c0bf7c50b2133f70624cfe8af9a0b4e3efa378d982a19e6`.
+Build, four CPU controls, strict lint and the 128-frame Metal run pass. The scene
+has 256 submissions and 128 maps; its owned process group is cleaned and reaped.
+The original and derivative share all 512 baseline/current/motion/depth planes
+byte-for-byte. Every RGB channel is also exactly equal across all 128 candidate
+frames; alpha differs in 50 moving frames. Thus this particular coverage change
+does not repair the color loss. Root inspected both camera-only frame 24 images:
+the broken thin diagonal remains. No production adoption is justified.
+
+A bounded observation samples 200 projected positions on the authored diagonal.
+At frames 14, 15, 16, 19, 24, 32 and 64, between 16 and 30 sampled positions have
+no geometry in the corresponding current 3×3 depth neighborhood. Between 22 and
+32 positions have strongest RGB below 0.005 across five output rows, with many
+of those positions coinciding with empty depth neighborhoods. This is sampled
+diagnostic evidence, not an analytic coverage oracle or proof of causality.
+It directs further investigation toward the treatment of history when thin
+geometry is missed by rasterization, rather than an alpha-only change.
+
+The 011 evidence directory retains `comparison.json`, `channel-comparison.json`
+and `diagonal-depth-observation.json`, in addition to the exact shader derivative,
+raw outputs and execution records. No shipping memory/performance, final-display
+quality or gate claim is made.

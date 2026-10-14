@@ -164,6 +164,7 @@ fn texture(d: &wgpu::Device, size: [u32; 2], format: wgpu::TextureFormat) -> wgp
     .create_view(&Default::default())
 }
 pub(super) struct Reference {
+    pub(super) accumulation_sha256: String,
     passes: [Pass; 6],
     bridge: Pass,
     uniform: wgpu::Buffer,
@@ -187,7 +188,7 @@ impl Reference {
         let now = frame as usize % 2;
         [&self.masks, &self.history[now], &self.locks[now]]
     }
-    pub(super) fn new(r: &Renderer) -> Self {
+    pub(super) fn new(r: &Renderer, locked_coverage: bool) -> Self {
         use Kind::*;
         use wgpu::TextureFormat::{R32Float, Rgba8Unorm, Rgba16Float, Rgba32Float, Rgba32Uint};
         let d = &r.device;
@@ -258,6 +259,7 @@ impl Reference {
                 Float(true),
             ],
         ];
+        let mut accumulation_sha256 = String::new();
         let passes = std::array::from_fn(|i| {
             let (name, digest) = SHADERS[i];
             let source = std::fs::read_to_string(root.join(format!("{name}.wgsl"))).unwrap();
@@ -266,6 +268,21 @@ impl Reference {
                 digest,
                 "external reference source identity"
             );
+            // Deliberately separate experimental derivative: verify the original
+            // first, then replace exactly one expression. The immutable external
+            // files and the default comparison remain byte-for-byte unchanged.
+            let source =
+                if locked_coverage && name == "ACCUMULATE_SHADER" {
+                    let original = "let alphaRelax = stillRelax / max(STILL_CLAMP_RELAX, 1.0e-6);";
+                    assert_eq!(source.matches(original).count(), 1);
+                    source.replace(original,
+                    "let alphaRelax = max(stillRelax / max(STILL_CLAMP_RELAX, 1.0e-6), lockLife);")
+                } else {
+                    source
+                };
+            if name == "ACCUMULATE_SHADER" {
+                accumulation_sha256 = hex(source.as_bytes());
+            }
             Pass::new(d, name, &source, &kinds[i])
         });
         let bridge = Pass::new(
@@ -292,6 +309,7 @@ impl Reference {
             })
         });
         Self {
+            accumulation_sha256,
             passes,
             bridge,
             uniform,

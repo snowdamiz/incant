@@ -501,6 +501,11 @@ fn actual_scene_recurrence_comparison() {
     assert_eq!(renderer.adapter.get_info().backend, wgpu::Backend::Metal);
     let external =
         std::env::var("INCANT_RECURRENCE_ABLATION").as_deref() == Ok("external-reference");
+    let locked_coverage = match std::env::var("INCANT_REFERENCE_COVERAGE").as_deref() {
+        Err(std::env::VarError::NotPresent) | Ok("original") => false,
+        Ok("locked") if external => true,
+        other => panic!("unknown diagnostic coverage: {other:?}"),
+    };
     let internal_footprint = match std::env::var("INCANT_REFERENCE_FOOTPRINT").as_deref() {
         Err(std::env::VarError::NotPresent) | Ok("output") => false,
         Ok("internal") if external => true,
@@ -557,8 +562,16 @@ fn actual_scene_recurrence_comparison() {
     let mut submissions = 0;
     let mut maps = 0;
     let mut nonzero_lock_samples = 0usize;
+    let mut accumulation_sha256 = None;
     for moving in [false, true] {
-        let reference = external.then(|| super::reference_fixture::Reference::new(&renderer));
+        let reference =
+            external.then(|| super::reference_fixture::Reference::new(&renderer, locked_coverage));
+        if let Some(reference) = &reference {
+            if let Some(previous) = &accumulation_sha256 {
+                assert_eq!(previous, &reference.accumulation_sha256);
+            }
+            accumulation_sha256 = Some(reference.accumulation_sha256.clone());
+        }
         let stage = Stage::new(moving);
         let mut input = stage.input();
         stage.pose(&mut input, 1);
@@ -828,7 +841,9 @@ fn actual_scene_recurrence_comparison() {
         report["external_reference"] = json!({
             "upstream": "https://github.com/pmndrs/upscaler",
             "commit": "96184a6812bc5fd5e5fd7898257788a1663105a9",
-            "algorithm_modified": false,
+            "algorithm_modified": locked_coverage,
+            "accumulate_shader_sha256": accumulation_sha256,
+            "modification": if locked_coverage { "Test-only derivative: existing luminance lock also relaxes coverage rectification; no new thresholds. Not upstream behavior or production adoption." } else { "none" },
             "dispatches": frame_count * 2 * 7,
             "input_adapter": "Incant jittered previous-current UV to unjittered current-previous; opposite jitter convention; invalid vectors zeroed",
             "settings": "fixed exposure 1, max accumulation 24, thin locks and shading detector enabled, no sharpening; sequence recorded in diagnostic_jitter",
