@@ -11,6 +11,18 @@ controls. This fixes the ordinary viewport route; low-resolution reconstruction
 still has separate appearance defects. The entries
 below preserve earlier scoped results and superseded integration snapshots.
 
+## Native shipping-window replay — actual gameplay verified
+
+A fresh source-free shipping player now consumes bounded physical recordings in
+its actual Metal window. The complete 2,156-step Core10k route passes all eight
+checks and exactly matches 17 selected headless entity states while rendering
+its models and HUD. Focus and surface pauses retain normal eligibility; recorded
+input uses accepted host steps, remains isolated from real controllers/haptics,
+and does not rewind on a session restart. Recorded UI and viewport changes remain
+explicitly unsupported. Eighty-five CPU controls, strict lint and independent
+source review pass. This qualifies gameplay parity; displayed-frame timing and
+phase performance gates remain open. [Scope, export and actual run](docs/spikes/native-window-replay.md).
+
 ## Ordinary editor antialiasing — actual Mac verified
 
 The ordinary viewport resolves four geometric samples in linear HDR after all
