@@ -50,7 +50,7 @@ class PlanarWindowTests(unittest.TestCase):
                     'requested_host_steps': 781, 'accepted_host_steps': 781, 'physical_devices': False,
                     'native_focus_and_surface_required': True},
                 'observations': copy.deepcopy(self.cpu()['observations']),
-                'ui': {'widgets': 3, 'glyph_quads': 28}}
+                'ui': {'widgets': 2, 'glyph_quads': 28}}
 
     def test_exact_existing_routes_and_no_ui_or_viewport_injection(self):
         self.assertEqual([(r['name'], r['ticks']) for r in self.manifest['cases']],
@@ -98,6 +98,26 @@ class PlanarWindowTests(unittest.TestCase):
                 report = self.window(); mutation(report)
                 with self.assertRaises(ValueError):
                     PROBE['check_window'](self.row, report, self.cpu(), self.manifest)
+
+    def test_native_draw_input_counts_both_labels_and_excludes_logical_root(self):
+        # Pearl Cove authors Root + STATUS + PROMPT. The native draw input
+        # retains both labels, including empty PROMPT; it excludes Root.
+        self.assertEqual(self.cpu()['render_input']['ui']['widgets'], 3)
+        self.assertEqual(self.window()['ui']['widgets'], 2)
+        PROBE['check_window'](self.row, self.window(), self.cpu(), self.manifest)
+        for count in (0, 1, 3, True, 2.0, '2', None):
+            with self.subTest(widgets=count):
+                report = self.window(); report['ui']['widgets'] = count
+                with self.assertRaises(ValueError):
+                    PROBE['check_window'](self.row, report, self.cpu(), self.manifest)
+        for glyphs in (0, True, 22.0, None):
+            with self.subTest(glyph_quads=glyphs):
+                report = self.window(); report['ui']['glyph_quads'] = glyphs
+                with self.assertRaises(ValueError):
+                    PROBE['check_window'](self.row, report, self.cpu(), self.manifest)
+        report = self.cpu(); report['render_input']['ui']['widgets'] = 2
+        with self.assertRaises(ValueError):
+            PROBE['check_cpu'](self.row, report, self.manifest)
 
     def test_package_requires_actual_window_export_and_all_data_hashes(self):
         with tempfile.TemporaryDirectory() as temporary:

@@ -180,8 +180,11 @@ def check_window(row, report, baseline, manifest):
             'Recorded physical events through real native eligibility')
     require(report['observations'] == baseline['observations'] and report['observations']['passed'] is True,
             'Exact same-package CPU/window entity and physics observations')
+    # Native UiInput keeps the two text-bearing labels (including the empty
+    # prompt). Its Root has no draw input; the CPU logical tree still counts three.
     require(type(report['accepted_frames']) is int and report['accepted_frames'] >= row['ticks']
-            and report['ui']['widgets'] == 3 and type(report['ui']['glyph_quads']) is int and report['ui']['glyph_quads'] > 0,
+            and type(report['ui']['widgets']) is int and report['ui']['widgets'] == 2
+            and type(report['ui']['glyph_quads']) is int and report['ui']['glyph_quads'] > 0,
             'Native scene/HUD submissions; pixel appearance remains separate')
 
 
