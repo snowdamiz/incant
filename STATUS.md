@@ -1,5 +1,15 @@
 # Implementation status
 
+## Core 10k-script input — native correctness, measurement pending
+
+A public-command extension preserves the original Core controller/assets and adds
+9,999 invisible typed-bulk attachments under a second source. Ten helper controls
+and 65 actual retained-engine ticks pass: 28 numeric checks, all 46 original
+entity readbacks and matching logs/PCM. Public undo/redo/reopen and separate
+fast-mode settings-only preparation are retained, including the initial slow
+journal-reopen failure. Fresh fast shipping measurements remain pending; no
+GPU/60 fps or appearance gate is claimed. [Evidence](docs/spikes/core-script-stress.md).
+
 ## Per-frame CPU distributions — scoped Mac controls pass
 
 The opt-in profiler now reports bounded per-frame phase wall histograms and
