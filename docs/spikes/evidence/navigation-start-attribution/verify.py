@@ -82,7 +82,8 @@ def replay(manifest, records):
         require(result['machine_before'] == result['machine_after'], 'Stable machine settings')
         if identity is None:
             identity = result['build_identity']
-        require(result['build_identity'] == identity and result['plan_sha256'] == build['plan_sha256'],
+        require(result['build_identity'] == identity == sha(records['private-build-001/diagnostic-build.json'])
+                and result['plan_sha256'] == build['plan_sha256'],
                 'Same admitted build')
         require({k: v for k, v in actual.items() if k != 'profile'} == baseline,
                 'Complete historical logical parity')
@@ -157,7 +158,8 @@ def main():
             raw = Path(row['path']).read_bytes()
             require(len(raw) == row['bytes'] and sha(raw) == row['sha256'], 'Retained binary/data/PCM')
     p95 = replay(manifest, records)
-    print(f'PASS: {len(records)} retained records; full gameplay/PCM parity; '
+    pcm_scope = 'PCM bytes verified' if args.binaries else 'recorded PCM identity'
+    print(f'PASS: {len(records)} retained records; full logical parity and {pcm_scope}; '
           f'hypothetical repeated-scan p95 {p95} ns remains above 2 ms. No speedup or gate claim.')
 
 
