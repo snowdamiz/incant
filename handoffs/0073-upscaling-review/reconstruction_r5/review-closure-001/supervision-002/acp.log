@@ -1,0 +1,26 @@
+Resumed the latest ACP session scoped to this handoff worktree.
+Claude session verified: Opus 5.5; thinking: max
+Claude session permission mode: auto
+Now correcting the controls (pre-add W, exact fractions, synthetic label, no false derivation).All four review findings are fixed and committed as **`51deb3848801f46c78ea85ca65fc330c5f60b758`**. The earlier R5 commit `329bfc6a` is unchanged. Nothing was compiled or rendered, so the R4 failure verdict still stands.
+
+1. **LOD floor of −1.5:** now described everywhere as an empirical visual candidate chosen after the R4 4/16 artefacts. I removed the √8-samples-per-axis argument from `jitter.rs`, the controls and the rationale; it was not a valid band-limit proof.
+2. **Motion slack (1/16 internal pixel):** the shader comments now say it is an empirical candidate. They also say it is neither a positional-quantization bound nor a same-motion proof, since distinct same-depth surfaces moving by less than the slack can share one history. The 0.04 px spread in the controls is now labelled synthetic, not a projected dolly.
+3. **Residual calculation:** it now uses the history weight before the new sample is added, `W = min(C, cap)·k`, instead of the stored mass C. The exact values below are asserted. The resulting amplitudes come from a simplified constant-reaction model, not measured aliasing or full shader behaviour. My earlier figures of 0.079 and 0.152 were wrong.
+
+   | Case | k | C | W | Current fraction | Amplitude |
+   |---|---|---|---|---|---|
+   | 825ff, contrast 0.5 | 0.9375 | 16 | 15 | 1/16 | 0.084 |
+   | 825ff, contrast 1 | 0.875 | 8 | 7 | 1/8 | 0.172 |
+   | R5 | 1 | 36 | 36 | 1/37 | 0.036 |
+
+4. **Limits:** thin lines over clear sky in ordinary UP, and the blocky current-only frames at low scale (4/16 entry and post-cut), are still listed as unrepaired. No pixel acceptance is claimed.
+
+**Hashes** (only comments changed in the shaders, so the two trusted hashes were regenerated):
+- Upscale: `ac7ecdf49b844713e1b35666cbea8bf7a4789edba3b12a1dd1787e88d5845e5d`
+- UpscaleOwner: `81eb48402b9d1c92b3b64b92bbae833cb711348152654377d21f3ba5c34645da`
+- `repair.patch`: sha256 `8e226ad36180561868b899b54188fabfa2a4bcf692bc0ec43df5e7b1e6bc8253`, 7 files. It applies cleanly to the 825ff copies and reproduces the source mirrors exactly.
+
+**Checks run:** `controls.py` passes 22/22, and `inventory.py` confirms the patch applies and both hashes match the sources. No algorithm, constant, ABI or memory changed.
+
+The correction is recorded at the top of `reconstruction_r5/result.md` and in `result.json`; I left the root `result.md` untouched, per the earlier packets. Model was Claude Opus 5.5 at max thinking effort, verified through ACP, with auto-memory off. Only my own `reconstruction_r5` outputs were committed (Built-by: claude); the baseline, manifest, brief and other untracked inputs are untouched.
+Review: git diff --no-index handoffs/0073-upscaling-review .worktrees/0073-upscaling-review/handoffs/0073-upscaling-review

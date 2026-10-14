@@ -1,0 +1,30 @@
+Resumed the latest ACP session scoped to this handoff worktree.
+Claude session verified: Opus 5.5; thinking: max
+Claude session permission mode: auto
+Root cause analysis done; implementing three focused changes now (reaction from clamp displacement, scale-aware motion slack, LOD-bias floor).Source edits and pins done; generating the patch and checking it applies to the 825ff copies.Patch now covers 7 files including the synced cfg(test) reference. Writing the scalar controls.Controls 21/21 and patch verified. Writing result.md/json now.The R5 repair is written and committed as **`329bfc6a5d368a03681e1ab5843590901f17815e`**, but it has not been compiled, cooked or rendered. Whether it actually fixes the pixels is unknown until a granted render. It took about 6½ minutes of the 20.
+
+**Diagnosis from the R4 images:** stationary OWN looks close to FULL. Ordinary UP (even when stationary) and moving UP/OWN all show the same moiré and broken features. Those cases share the "ordinary" history path, so the problem is in how that path accumulates history, not in the per-frame samples.
+
+**Three changes:**
+1. **Reaction now measures how far the clamp moves the history** (both resolve shaders). Before, it measured the distance to the current frame's single, aliased estimate. At high-contrast texture (with the review fixture's settings) that held history weight at 8–16 instead of the cap of 36. The leftover 8-phase aliasing becomes 0.036 instead of 0.079 at half contrast and 0.152 at full contrast. History outside the current neighbourhood's range still loses weight and is clamped, so stale colour can't linger.
+2. **Motion agreement now allows up to one jitter-lattice step** (output/source ÷ 16 output pixels, e.g. 1/8 px at 8/16 scale). The old 1/256 px limit rejected nearly all perspective motion, so moving content fell back to current-only. The R4 counterexample (an independently moving neighbour, 192 px off) is still refused, as is anything exactly at the limit. Stationary OWN's own 1/256 check is untouched.
+3. **The internal texture LOD bias is floored at −1.5.** One 8-phase cycle gives only √8 samples per axis per internal texel, so sharper bias just adds aliasing. This only changes 4/16 (−2 → −1.5) and 5/16 scale; 8/16 stays −1, and the default and fixed-TAA paths stay 0. Material and masked-texture draws use the same value.
+
+The test-only Rust mirror of the shader (`evidence_reference.rs`) is updated to match, so the numeric tests still compare like with like. Its separate quantization correction is untouched.
+
+**Checks:**
+- **Patch:** `repair.patch` (7 files, sha256 `f0987c43…`) applies cleanly to copies of 825ff and reproduces the source mirrors exactly. All baseline copies match the manifest and the 825ff Git objects.
+- **Controls:** `controls.py` passes 21/21. Each rule is checked against the actual mirror text, and each has a mutation case that restores the 825ff behaviour and must fail.
+
+**Shader hashes and ABI:**
+- **New trusted hashes:** Upscale `5fd02204…139e`, UpscaleOwner `d293a2fc…4933`.
+- **Unchanged:** uniforms, bindings, targets, passes, pipelines and memory. All other shader programs, the overlay route, fixture 650316a, the 24-frame schedule and the historical thresholds are also unchanged.
+
+**Open — needs a decision before I touch them:**
+- **Thin wires over clear sky in ordinary UP:** these stay current-only. UP keeps no history where a single surface is mixed with clear pixels, and allowing that changes the R4 rule that ambiguous UP history is unusable. The exact question: may UP carry partial coverage forward using that one surface's motion when the other samples are clear?
+- **The 4/16 entry and post-cut frames:** with no usable history, the reconstruction kernel is so narrow at 4/16 that the result is close to nearest-neighbour (blocky). Fixing that means changing the kernel width or the "no stored prior" rule, both of which affect the numeric oracle tests. The LOD floor only reduces the aliasing part.
+
+**Not run:** compiler, clippy, rustfmt (the Rust was formatted by hand), naga, the cooker and any GPU work. No images were created; I only re-read the existing R4 ones. All historical failures stay open, including C7, C9, P1, the DRS wipe, thin lines and moving detail.
+
+The full write-up is in `reconstruction_r5/result.md` and `result.json`; I didn't touch the top-level `result.md`. Model was Claude Opus 5.5 at max thinking effort, verified through ACP, with auto-memory off. Only my new outputs were committed (Built-by: claude); the baseline, manifest, brief and other untracked inputs are untouched.
+Review: git diff --no-index handoffs/0073-upscaling-review .worktrees/0073-upscaling-review/handoffs/0073-upscaling-review

@@ -12,7 +12,7 @@ blob=lambda ref,p:subprocess.check_output(['git','show',f'{ref}:{p}'],cwd=C)
 FIRST='329bfc6a5d368a03681e1ab5843590901f17815e'
 FINAL='51deb3848801f46c78ea85ca65fc330c5f60b758'
 BASE='825ff047284e84252d00f786a7b14cb6ecb44293'
-assert subprocess.check_output(['git','rev-parse','HEAD'],cwd=C,text=True).strip()==FINAL
+assert subprocess.run(['git','merge-base','--is-ancestor',FINAL,'HEAD'],cwd=C).returncode==0
 assert subprocess.check_output(['git','rev-parse','HEAD'],cwd=Q,text=True).strip()==BASE
 assert not subprocess.check_output(['git','status','--porcelain'],cwd=Q,text=True).strip()
 changed=subprocess.check_output(['git','diff','--name-only','f099a898',FINAL],cwd=C,text=True).splitlines()
@@ -77,6 +77,6 @@ for n in [1,2]:
  (S/'tool-metadata.json').write_text(json.dumps(rows,indent=2)+'\n')
  turns.append({'turn':n,'terminal':term,'supervisor_sha256':sha(S/'supervise.py'),'before_sha256':sha(S/'before.json'),'tool_metadata_sha256':sha(S/'tool-metadata.json'),'tools':dict(collections.Counter(x['name'] for x in rows))})
 assert turns[1]['terminal']['total_original_wall_seconds']<1200 and turns[1]['terminal']['total_original_monotonic_seconds']<1200
-files=[p for p in P.rglob('*') if p.is_file() and '/baseline/' not in str(p)]
+files=[p for p in P.rglob('*') if p.is_file() and '/baseline/' not in str(p) and '/review-closure-' not in str(p)]
 result={'scope':'Independent source/scalar/ACP integrity only; no Rust compile, cook, GPU, pixel review or appearance acceptance', 'first_producer':FIRST,'final_producer':FINAL,'base':BASE,'baseline_files':61,'source_files':7,'scalar_checks':22,'control_results_exact':True,'comment_only_correction':True,'protected_original_files':len(b1['protected_tracked'])+len(b1['protected_untracked'])-1,'candidate_unchanged':True,'turns':turns,'files':[{'path':str(p.relative_to(P)),'sha256':sha(p),'bytes':p.stat().st_size} for p in sorted(files)]}
 (E/'audit.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps({k:v for k,v in result.items() if k not in ['turns','files']}))
