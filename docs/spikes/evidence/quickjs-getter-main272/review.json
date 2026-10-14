@@ -1,0 +1,18 @@
+{
+  "reviewer": "astra root",
+  "date_utc": "2026-10-14T06:31:16.586975+00:00",
+  "status": "accepted-scoped-diagnostic-intake",
+  "packet": "b06f34517a2cec96caa9ce974d2694a52c3fd878",
+  "manifest_sha256": "dd494bbe09a7234504b81ff0f9991a6563e068959aaab6e8488c97d4f2477b5a",
+  "verifier_sha256": "b271b3e9fd638919c1d7677715364d6d0ccf214b22c7ad3d50ad6321d8bb40b8",
+  "review": [
+    "Read full original diagnostic document and verifier, independent final review862c8924 covers source/runtime parity/negative counter.",
+    "Read current composition document and verifier; independently replayed --current --external exit0.25current records/22payloads/12producer-exactpaths/6inputs/968 unchanged lock identities; original929records/444payloads/32 observations replayed.",
+    "Only unrelated incant_doc semver edge differs in full lock rows. No engine/profiler/manifests changed. Exact two patch-path attributes retain unified-diff bytes, initial diff failure retained.",
+    "Portable wrapper binds reachable cherry-picked source; does not silently require excluded producer ancestry."
+  ],
+  "limits": [
+    "No new native execution, performance gain, continuous heap peak, production adoption, or release repair."
+  ],
+  "publication": "Approved scoped PR and merge only after exact required fast check actualSUCCESS, Built-by trailer."
+}
