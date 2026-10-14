@@ -11,6 +11,19 @@ controls. This fixes the ordinary viewport route; low-resolution reconstruction
 still has separate appearance defects. The entries
 below preserve earlier scoped results and superseded integration snapshots.
 
+## Compatible animation refresh — CPU and Metal verified
+
+Native Play now admits compatible clip key changes without replacing the live
+world, script VM or animation clock. Skeletons, animated geometry, clip bindings
+and durations stay fixed; incompatible root-motion and baked-navigation changes
+remain refused. Existing import, Undo/Redo and atomic catalog publication paths
+are reused. Sixty-six scoped CPU controls and strict lint pass. An actual Metal
+control verifies changed deformation at the same clock, exact old pixels after
+refusal, fresh motion history and continued playback/script state. Initial test
+fixture failures and their narrow corrections remain recorded. The actual
+animated editor-window workflow and performance remain unverified.
+[Contract and retained evidence](docs/spikes/animated-model-refresh.md).
+
 ## Native shipping-window replay — actual gameplay verified
 
 A fresh source-free shipping player now consumes bounded physical recordings in
@@ -72,8 +85,10 @@ reworked; runtime correctness does not establish visual acceptance.
 
 Native Play accepts bounded geometry, material-factor and image-content
 reimports for existing static models with unchanged bindings, scene structure
-and import settings. Animated/skinned models, changed scene or material-binding structure and models
-used by baked navigation remain refused. Preparation stays outside the authoring lock;
+and import settings. That workflow's scope excluded animated/skinned models;
+compatible animation content is now separately qualified above. Changed scene or
+material-binding structure and models used by baked navigation remain refused.
+Preparation stays outside the authoring lock;
 final publication preserves the running world/VM and atomically retains the old
 catalog on refusal.
 
