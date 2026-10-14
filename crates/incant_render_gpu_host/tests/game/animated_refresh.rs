@@ -75,7 +75,7 @@ fn keys_only_fixture_changes_skin_sample_without_geometry_material_or_image_chan
     assert_eq!(before.images, after.images);
     let a = sampled_position(&before, 0.5);
     let b = sampled_position(&after, 0.5);
-    assert_eq!((a, b), ([11.5, 0., 0.], [12., 0., 0.]));
+    assert_eq!((a, b), ([11.5, 1., 0.], [12., 1., 0.]));
 }
 
 fn game(root: &Path, reference: VisualAssetRef, epoch: Arc<AtomicUsize>) -> (AnimationGame, Probe) {
@@ -359,7 +359,7 @@ fn compatible_clip_keys_deform_pixels_at_same_clock_and_keep_refused_pixels_and_
     let incant_assets_runtime::RuntimeAssetData::Model(old_model) = old_asset.data() else {
         panic!("retained model")
     };
-    assert_eq!(sampled_position(old_model, 0.5), [11.5, 0., 0.]);
+    assert_eq!(sampled_position(old_model, 0.5), [11.5, 1., 0.]);
     let motion = game.host().unwrap().consumer().motion_frame().unwrap();
     assert!(!motion.has_previous());
     assert!(!motion.same_owner(&old_motion));

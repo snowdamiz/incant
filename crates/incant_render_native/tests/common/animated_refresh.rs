@@ -4,6 +4,7 @@
 mod images;
 #[path = "../../../incant_assets/tests/skeletal/fixture.rs"]
 mod skeletal;
+#[allow(unused_imports)] // Executables use different subsets of the shared fixture API.
 pub use images::{DARK, RED, id, key, reference, texture};
 use incant_runtime::{VisualAssetKind, VisualAssetRef};
 use serde_json::{Value, json};
