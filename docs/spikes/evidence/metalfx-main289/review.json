@@ -1,0 +1,50 @@
+{
+  "commit": "0885bab3c033da215f86b5533ed3dff3a866da47",
+  "baseline": "074999b02484ffca8129cee6b3021649c9b3c6b2",
+  "decision": "accepted scoped source composition and optional CPU CI step; no visual acceptance",
+  "byte_exact_production_and_test_paths": [
+    "Cargo.lock",
+    "crates/incant_render/Cargo.toml",
+    "crates/incant_render/src/graph.rs",
+    "crates/incant_render/src/graph/native.rs",
+    "crates/incant_render/src/metalfx/alpha.wgsl",
+    "crates/incant_render/src/metalfx/boundary_tests.rs",
+    "crates/incant_render/src/metalfx/common.wgsl",
+    "crates/incant_render/src/metalfx/lifecycle.rs",
+    "crates/incant_render/src/metalfx/mod.rs",
+    "crates/incant_render/src/metalfx/native.rs",
+    "crates/incant_render/src/metalfx/normalize.wgsl",
+    "crates/incant_render/src/metalfx/owner.rs",
+    "crates/incant_render/src/metalfx/plan.rs",
+    "crates/incant_render/src/metalfx/prepare.wgsl",
+    "crates/incant_render/src/metalfx/prewarm_tests.rs",
+    "crates/incant_render/src/metalfx/render.rs",
+    "crates/incant_render/src/metalfx/system.rs",
+    "crates/incant_render/src/metalfx/targets.rs",
+    "crates/incant_render/src/metalfx_retained_tests.rs",
+    "crates/incant_render/src/motion/draw.rs",
+    "crates/incant_render/src/motion/owner.rs",
+    "crates/incant_render/src/retained.rs",
+    "crates/incant_render_gpu_host/Cargo.toml",
+    "crates/incant_render_gpu_host/src/lib.rs",
+    "crates/incant_render_gpu_host/src/metalfx.rs",
+    "crates/incant_render_gpu_host/src/metalfx_tests.rs",
+    "crates/incant_render_gpu_host/src/motion.rs",
+    "crates/incant_render_gpu_host/src/resolution.rs"
+  ],
+  "only_existing_renderer_difference": {
+    "path": "crates/incant_render/src/lib.rs",
+    "description": "four test/macOS/native-feature-gated alias/module registration lines"
+  },
+  "default_features": [
+    "physics-deterministic"
+  ],
+  "ci": "Mac non-doc job explicitly selects gpu_host/native-metalfx for lib CPU tests; does not execute ignored GPU tests or change defaults; subsequent workspace ignored GPU invocation uses ordinary feature arguments",
+  "evidence_result_sha256": "80bbe1390c178920a6d72377649ffeb93981082d08db588e912399ad037a5b72",
+  "command_exits": [
+    0,
+    0
+  ],
+  "reviewer_execution": "read-only source/hash/log review; no builds/GPU/native tests",
+  "nonblocking_note": "Existing GPU serialization comment now says preceding test run although optional native step intervenes; refer to workspace test run above for precision."
+}

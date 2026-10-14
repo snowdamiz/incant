@@ -137,5 +137,16 @@ and `--git-source` checks the frozen compiler-input inventory against the immuta
 source commit. Readback verification is a boundary-policy check; it cannot decide
 appearance or replace actual material/motion image comparisons. The later material/motion comparison confirms the structural edge limitation;
 quality repair, vendor memory/performance measurements and cooked shader support
-remain open. See the subsequent image qualification before treating this path as
-a usable quality setting.
+remain open. The [material/motion capture](metalfx-image-motion.md) records the
+appearance failure explicitly.
+
+Final composition on main289 (`0885bab3`) preserves the production implementation
+and adds only the real-material fixture, its test-only crate alias and negative
+evidence. A fresh CPU join passes 176 renderer and four GPU-host library tests
+(56 actual-GPU tests remain ignored), plus strict native-feature all-target
+Clippy. Pinned Rust 1.99 arm64, locked/offline CI profile and jobs/Rayon 2 apply.
+This join executes no GPU work and does not relabel the producer's separately
+identified actual Metal results. [Raw commands, outputs and executable identities](evidence/metalfx-main289/manifest.json)
+are replayable with `python3 docs/spikes/evidence/metalfx-main289/verify.py`.
+Checkpoint CI now compiles this optional feature and runs its CPU contracts;
+the feature stays off by default and no required check is removed.
