@@ -285,6 +285,7 @@ fn actual_output_reconstruction_rejects_bad_history_and_never_retains_overlay() 
         } else {
             over
         };
+        let composite = evidence_reference::attachment::composite(history, over.map(f64::from));
         for (index, expected) in [
             history,
             std::array::from_fn(|i| f64::from(over[i]) + history[i] * (1. - f64::from(over[3]))),
@@ -299,11 +300,20 @@ fn actual_output_reconstruction_rejects_bad_history_and_never_retains_overlay() 
                 ))
             });
             println!("upscaling mode{mode} attachment{index}: {actual:?}");
-            for (a, b) in actual.into_iter().zip(expected) {
-                assert!(
-                    (f64::from(a) - b).abs() <= evidence_reference::half_bound(b),
-                    "mode{mode} attachment{index}: {actual:?} != {expected:?}"
-                );
+            if index == 1 {
+                for (channel, bound) in actual.into_iter().zip(composite) {
+                    assert!(
+                        bound.contains(f64::from(channel)),
+                        "mode{mode} composite {actual:?} outside {composite:?}"
+                    );
+                }
+            } else {
+                for (a, b) in actual.into_iter().zip(expected) {
+                    assert!(
+                        (f64::from(a) - b).abs() <= evidence_reference::half_bound(b),
+                        "mode{mode} attachment{index}: {actual:?} != {expected:?}"
+                    );
+                }
             }
             assert!(
                 mapped[index * 2048..index * 2048 + 8]

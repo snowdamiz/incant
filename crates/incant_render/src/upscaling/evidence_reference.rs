@@ -5,6 +5,9 @@ use super::super::oracle;
 use super::Frame;
 use std::collections::BTreeSet;
 
+#[path = "attachment_reference.rs"]
+pub(super) mod attachment;
+
 const PRESENT: u32 = 1 << 31;
 #[derive(Clone, Copy, Debug, Default)]
 pub(super) struct Result {
