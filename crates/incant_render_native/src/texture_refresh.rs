@@ -26,6 +26,7 @@ pub struct StagedTextureRefresh {
     prepared: PreparedTextureRefresh,
     candidate: binding::Prepared,
     generation: u64,
+    used: bool,
     // An intervening simulation update can replace a staged IK owner. Retain
     // that displaced payload until the publication is retired after unlocking.
     retired_ik: Vec<Option<Arc<[incant_runtime::AnimationIkSample]>>>,
@@ -45,11 +46,6 @@ impl StagedTextureRefresh {
 pub struct TextureRefreshReceipt {
     pub generation: u64,
     pub changed: usize,
-}
-/// Retired handles are dropped outside the final publication lock.
-pub struct TextureRefreshPublication {
-    pub receipt: TextureRefreshReceipt,
-    _retired: StagedTextureRefresh,
 }
 fn refused(why: &'static str) -> NativeRenderError {
     NativeRenderError::TextureRefresh(why)
@@ -203,6 +199,7 @@ impl NativeRenderInput {
             prepared,
             candidate,
             generation,
+            used: false,
             retired_ik,
         })
     }
@@ -211,29 +208,29 @@ impl NativeRenderInput {
         view: &SpatialView<'_>,
         staged: &StagedTextureRefresh,
     ) -> Result<(), NativeRenderError> {
+        if staged.used {
+            return Err(refused("texture publication ticket was already used"));
+        }
         self.validate_refresh(view, &staged.prepared.ticket)
     }
     /// Final cold operation. No allocation/source IO occurs on the success path;
     /// the callback must publish an already-prepared consumer without GPU work.
     /// Its refusal/unwind preserves the complete accepted CPU catalog and input.
-    pub fn try_publish_textures<T, E>(
+    /// The caller retains this single-use storage throughout its final lock, then
+    /// drops the rejected candidate or retired owners after unlocking.
+    pub fn try_publish_textures<E>(
         &mut self,
         view: &SpatialView<'_>,
-        mut staged: StagedTextureRefresh,
-        admit: impl FnOnce() -> Result<T, E>,
-    ) -> Result<(TextureRefreshPublication, Option<T>), SyncError<E>> {
-        self.validate_refresh(view, &staged.prepared.ticket)?;
+        staged: &mut StagedTextureRefresh,
+        admit: impl FnOnce() -> Result<(), E>,
+    ) -> Result<TextureRefreshReceipt, SyncError<E>> {
+        self.validate_texture_publication(view, staged)?;
+        staged.used = true;
         if staged.prepared.changed == 0 {
-            return Ok((
-                TextureRefreshPublication {
-                    receipt: TextureRefreshReceipt {
-                        generation: self.asset_generation,
-                        changed: 0,
-                    },
-                    _retired: staged,
-                },
-                None,
-            ));
+            return Ok(TextureRefreshReceipt {
+                generation: self.asset_generation,
+                changed: 0,
+            });
         }
         let candidate = &mut staged.candidate;
         // Simulation may move while resources are staged. Topology/configuration
@@ -266,7 +263,7 @@ impl NativeRenderInput {
                 next.world = current.world;
             }
         }
-        let retired = admit().map_err(SyncError::Consumer)?;
+        admit().map_err(SyncError::Consumer)?;
         std::mem::swap(&mut self.assets, &mut staged.prepared.assets);
         std::mem::swap(&mut self.payload_bytes, &mut staged.prepared.payload_bytes);
         std::mem::swap(&mut self.input, &mut staged.candidate.input);
@@ -278,12 +275,6 @@ impl NativeRenderInput {
             generation: staged.generation,
             changed: staged.prepared.changed,
         };
-        Ok((
-            TextureRefreshPublication {
-                receipt,
-                _retired: staged,
-            },
-            Some(retired),
-        ))
+        Ok(receipt)
     }
 }

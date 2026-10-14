@@ -149,7 +149,7 @@ fn staged_replacement_publishes_without_allocations_preserves_world_and_old_hand
         .texture_refresh_ticket()
         .prepare(&f.next(), &f.root.path().join("textures"))
         .unwrap();
-    let stage = input
+    let mut stage = input
         .stage_texture_refresh(&world.spatial_view().unwrap(), prepared)
         .unwrap();
     assert_eq!(versions(&input), before);
@@ -161,17 +161,17 @@ fn staged_replacement_publishes_without_allocations_preserves_world_and_old_hand
     let tick = world.tick();
     let view = world.spatial_view().unwrap();
     let (published, count) =
-        allocations::record(|| input.try_publish_textures(&view, stage, || Ok::<_, ()>(())));
-    let (publication, _) = published.unwrap();
+        allocations::record(|| input.try_publish_textures(&view, &mut stage, || Ok::<_, ()>(())));
+    let receipt = published.unwrap();
     assert_eq!(count, 0);
-    assert_eq!(publication.receipt.changed, 2);
+    assert_eq!(receipt.changed, 2);
     assert_eq!(input.asset_generation(), 1);
     assert_ne!(versions(&input), before);
     assert_eq!(old.version_id(), before[0]);
     assert_eq!(world.tick(), tick);
     assert_eq!(view.identity(), &identity);
     assert_eq!(matrices(&input), poses);
-    drop(publication);
+    drop(stage);
     assert_eq!(old.version_id(), before[0]);
 }
 #[test]
@@ -191,20 +191,20 @@ fn consumer_refusal_and_unwind_keep_complete_catalog_and_generation() {
             )
             .unwrap()
     };
-    let stage = prepare(&input);
+    let mut stage = prepare(&input);
     assert!(matches!(
-        input.try_publish_textures(&world.spatial_view().unwrap(), stage, || Err::<(), _>(
+        input.try_publish_textures(&world.spatial_view().unwrap(), &mut stage, || Err::<(), _>(
             "late refusal"
         )),
         Err(SyncError::Consumer("late refusal"))
     ));
     assert_eq!(versions(&input), before);
     assert_eq!(input.asset_generation(), 0);
-    let stage = prepare(&input);
+    let mut stage = prepare(&input);
     assert!(
         catch_unwind(AssertUnwindSafe(|| input.try_publish_textures(
             &world.spatial_view().unwrap(),
-            stage,
+            &mut stage,
             || -> Result<(), ()> { panic!("late unwind") }
         )))
         .is_err()
@@ -219,7 +219,7 @@ fn stale_catalog_and_foreign_world_refuse_before_publication() {
     let mut input = f.load(&world);
     let ticket = input.texture_refresh_ticket();
     let refs = f.next();
-    let a = input
+    let mut a = input
         .stage_texture_refresh(
             &world.spatial_view().unwrap(),
             ticket
@@ -228,7 +228,7 @@ fn stale_catalog_and_foreign_world_refuse_before_publication() {
                 .unwrap(),
         )
         .unwrap();
-    let b = input
+    let mut b = input
         .stage_texture_refresh(
             &world.spatial_view().unwrap(),
             ticket
@@ -237,14 +237,16 @@ fn stale_catalog_and_foreign_world_refuse_before_publication() {
         )
         .unwrap();
     input
-        .try_publish_textures(&world.spatial_view().unwrap(), a, || Ok::<_, ()>(()))
+        .try_publish_textures(&world.spatial_view().unwrap(), &mut a, || Ok::<_, ()>(()))
         .unwrap();
     let before = versions(&input);
     assert!(
         input
-            .try_publish_textures(&world.spatial_view().unwrap(), b, || -> Result<(), ()> {
-                panic!("stale callback")
-            })
+            .try_publish_textures(
+                &world.spatial_view().unwrap(),
+                &mut b,
+                || -> Result<(), ()> { panic!("stale callback") }
+            )
             .is_err()
     );
     let foreign = f.world();
@@ -268,7 +270,7 @@ fn topology_change_between_staging_and_publication_preserves_complete_old_input(
         .texture_refresh_ticket()
         .prepare(&f.next(), &f.root.path().join("textures"))
         .unwrap();
-    let stage = input
+    let mut stage = input
         .stage_texture_refresh(&world.spatial_view().unwrap(), prepared)
         .unwrap();
     world
@@ -281,7 +283,7 @@ fn topology_change_between_staging_and_publication_preserves_complete_old_input(
         input
             .try_publish_textures(
                 &world.spatial_view().unwrap(),
-                stage,
+                &mut stage,
                 || -> Result<(), ()> { panic!("changed topology callback") }
             )
             .is_err()

@@ -77,7 +77,7 @@ fn texture_publication_retires_intervening_ik_owner_after_the_lock() {
         .texture_refresh_ticket()
         .prepare(&references, &dir.path().join("textures"))
         .unwrap();
-    let staged = input
+    let mut staged = input
         .stage_texture_refresh(&world.spatial_view().unwrap(), prepared)
         .unwrap();
     move_ik(&mut world, 0.25);
@@ -91,14 +91,15 @@ fn texture_publication_retires_intervening_ik_owner_after_the_lock() {
     let current = binding(&input, 1).animation_ik.as_ref().unwrap().clone();
     let view = world.spatial_view().unwrap();
     let (result, allocations, disposals) = allocation_counter::record_lifecycle(|| {
-        input.try_publish_textures(&view, staged, || {
+        input.try_publish_textures(&view, &mut staged, || {
             // Weak does not keep the payload alive. The displaced staged owner
             // must still exist throughout this final publication callback.
             assert_eq!(staged_ik.upgrade().unwrap()[0].weight, 0.75);
             Ok::<_, ()>(())
         })
     });
-    let (publication, _) = result.unwrap();
+    let receipt = result.unwrap();
+    assert_eq!(receipt.changed, 1);
     assert_eq!((allocations, disposals), (0, 0));
     assert!(Arc::ptr_eq(
         binding(&input, 1).animation_ik.as_ref().unwrap(),
@@ -115,7 +116,7 @@ fn texture_publication_retires_intervening_ik_owner_after_the_lock() {
             .version_id(),
         old_texture.version_id()
     );
-    drop(publication);
+    drop(staged);
     assert!(staged_ik.upgrade().is_none());
     assert_eq!(current[0].weight, 0.25);
     assert_eq!(old_texture.version_id(), old_version);

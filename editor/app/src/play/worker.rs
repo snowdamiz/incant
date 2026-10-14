@@ -298,19 +298,20 @@ impl Worker {
                         drop(refusal.candidate); // Before acquiring the bus lock.
                         message
                     })?;
-                let attempt = super::texture_refresh::publish_at_revision(&bus, revision, || {
-                    Ok(ready.publish())
-                })?;
+                let attempt = super::texture_refresh::publish_at_revision(
+                    &bus,
+                    &self.service,
+                    revision,
+                    generation,
+                    || Ok(ready.publish()),
+                )?;
                 drop(ready); // Restore readiness/retire a failed composite after unlocking.
-                let publication = match attempt {
-                    incant_play::TexturePublishAttempt::Published(publication) => publication,
-                    incant_play::TexturePublishAttempt::Refused { error, candidate } => {
-                        drop(candidate); // Refusal also disposes resources after unlocking.
+                let receipt = match attempt {
+                    incant_play::TexturePublishAttempt::Published(receipt) => receipt,
+                    incant_play::TexturePublishAttempt::Refused(error) => {
                         return Err(error.to_string());
                     }
                 };
-                let receipt = publication.receipt();
-                drop(publication); // Retirement occurs after the short bus guard.
                 return Ok(json!({"generation":generation,"revision":revision,
                     "assetGeneration":receipt.generation,"changed":receipt.changed}));
             }

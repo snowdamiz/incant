@@ -163,10 +163,28 @@ impl TextureRefreshConsumer for Consumer {
             Ok(())
         }
     }
-    fn publish_textures(&mut self, prepared: Candidate) -> Candidate {
+    fn publish_textures(&mut self, prepared: &mut Candidate) {
+        if self.probe.refuse.load(Ordering::SeqCst) == 3 {
+            panic!("before handle swap");
+        }
         self.probe.publications.fetch_add(1, Ordering::SeqCst);
-        std::mem::replace(&mut self.current, prepared)
+        std::mem::swap(&mut self.current, prepared);
+        if self.probe.refuse.load(Ordering::SeqCst) == 4 {
+            panic!("after handle swap");
+        }
     }
+}
+fn publish(
+    game: &mut PlaySession<OfflineBackend, Consumer>,
+    candidate: incant_render_game::PreparedHostTextureRefresh<Consumer>,
+) -> TexturePublishAttempt {
+    let mut ready = match game.prepare_texture_publication(candidate) {
+        Ok(ready) => ready,
+        Err(_) => panic!("expected ready native game"),
+    };
+    let attempt = ready.publish();
+    drop(ready);
+    attempt
 }
 fn game(
     root: &Path,
@@ -276,8 +294,8 @@ fn prepare_and_late_consumer_refusal_keep_world_vm_clock_input_and_live_host() {
     assert_eq!(game.world().unwrap().tick(), 1);
     probe.refuse.store(2, Ordering::SeqCst);
     assert!(matches!(
-        game.publish_texture_refresh(stage).unwrap(),
-        TexturePublishAttempt::Refused { .. }
+        publish(&mut game, stage),
+        TexturePublishAttempt::Refused(_)
     ));
     assert_eq!(game.consumer().unwrap().unwrap().current.key, key(first));
     assert_eq!(probe.publications.load(Ordering::SeqCst), 0);
@@ -286,11 +304,11 @@ fn prepare_and_late_consumer_refusal_keep_world_vm_clock_input_and_live_host() {
     assert_eq!(probe.drops.load(Ordering::SeqCst), 0);
     probe.refuse.store(0, Ordering::SeqCst);
     let stage = game.prepare_texture_refresh(prepared(&game)).unwrap();
-    let publication = match game.publish_texture_refresh(stage).unwrap() {
+    let publication = match publish(&mut game, stage) {
         TexturePublishAttempt::Published(p) => p,
         _ => panic!("expected publication"),
     };
-    assert_eq!(publication.receipt().changed, 1);
+    assert_eq!(publication.changed, 1);
     assert_eq!(game.consumer().unwrap().unwrap().current.key, key(next));
     assert_eq!(game.world().unwrap().tick(), 1);
     assert_eq!(probe.accepts.load(Ordering::SeqCst), 1);
@@ -309,7 +327,6 @@ fn prepare_and_late_consumer_refusal_keep_world_vm_clock_input_and_live_host() {
         3.
     ); // same VM's calls=2
     assert_eq!(probe.accepts.load(Ordering::SeqCst), 2);
-    drop(publication);
     game.stop();
     assert_eq!(probe.drops.load(Ordering::SeqCst), 1);
 }
@@ -353,7 +370,7 @@ fn authoring_undo_redo_uses_the_same_basis_and_nontexture_edits_refuse() {
             .unwrap();
         let stage = game.prepare_texture_refresh(prepared).unwrap();
         assert!(matches!(
-            game.publish_texture_refresh(stage).unwrap(),
+            publish(&mut game, stage),
             TexturePublishAttempt::Published(_)
         ));
         assert_eq!(game.consumer().unwrap().unwrap().current.key, key(expected));
@@ -502,6 +519,7 @@ fn late_validation_refusal_and_success_retire_only_after_the_publication_lock() 
             .store(if refuse { 2 } else { 0 }, Ordering::SeqCst);
         let guard = probe.publication_lock.lock().unwrap();
         let attempt = ready.publish();
+        assert!(matches!(ready.publish(), TexturePublishAttempt::Refused(_)));
         assert_eq!(probe.candidate_drops.load(Ordering::SeqCst), before);
         drop(guard);
         drop(ready);
@@ -509,9 +527,50 @@ fn late_validation_refusal_and_success_retire_only_after_the_publication_lock() 
             game.consumer().unwrap().unwrap().current.key,
             if refuse { key(first) } else { key(next) }
         );
-        assert!(matches!(&attempt, TexturePublishAttempt::Refused { .. }) == refuse);
-        drop(attempt);
+        assert!(matches!(&attempt, TexturePublishAttempt::Refused(_)) == refuse);
         assert_eq!(probe.candidate_drops.load(Ordering::SeqCst), before + 1);
+        assert_eq!(probe.drops_under_lock.load(Ordering::SeqCst), 0);
+    }
+}
+
+#[test]
+fn publication_unwind_before_and_after_swap_retains_all_owners_until_unlock() {
+    use std::panic::{AssertUnwindSafe, catch_unwind};
+    let root = tempfile::tempdir().unwrap();
+    let first = cook(root.path(), RED);
+    let next = cook(root.path(), DARK);
+    for panic_at in [3, 4] {
+        let probe = Arc::new(Probe::default());
+        let mut game = game(root.path(), first, probe.clone());
+        let prepared = game
+            .texture_refresh_ticket()
+            .unwrap()
+            .prepare(&[next], &root.path().join(".incant/cache/textures"))
+            .unwrap();
+        let candidate = game.prepare_texture_refresh(prepared).unwrap();
+        let mut ready = match game.prepare_texture_publication(candidate) {
+            Ok(ready) => ready,
+            Err(_) => panic!("ready game"),
+        };
+        probe.refuse.store(panic_at, Ordering::SeqCst);
+        let before = probe.candidate_drops.load(Ordering::SeqCst);
+        let guard = probe.publication_lock.lock().unwrap();
+        assert!(catch_unwind(AssertUnwindSafe(|| ready.publish())).is_err());
+        assert_eq!(probe.candidate_drops.load(Ordering::SeqCst), before);
+        assert_eq!(probe.drops.load(Ordering::SeqCst), 0);
+        assert_eq!(probe.drops_under_lock.load(Ordering::SeqCst), 0);
+        drop(guard);
+        drop(ready);
+        // An unexpected trusted native panic is terminal, as for other host
+        // operations. Both the live composite and staged/retired candidate are
+        // destroyed after unlocking, regardless of which side of the swap ran.
+        assert_eq!(game.mode(), PlayMode::Failed);
+        assert_eq!(
+            probe.publications.load(Ordering::SeqCst),
+            usize::from(panic_at == 4)
+        );
+        assert_eq!(probe.candidate_drops.load(Ordering::SeqCst), before + 2);
+        assert_eq!(probe.drops.load(Ordering::SeqCst), 1);
         assert_eq!(probe.drops_under_lock.load(Ordering::SeqCst), 0);
     }
 }

@@ -14,8 +14,7 @@ use incant_render_data::SceneInput;
 use incant_runtime::{SpatialView, StableId, WorldIdentity};
 use std::{collections::BTreeMap, path::Path, sync::Arc};
 pub use texture_refresh::{
-    PreparedTextureRefresh, StagedTextureRefresh, TextureRefreshPublication, TextureRefreshReceipt,
-    TextureRefreshTicket,
+    PreparedTextureRefresh, StagedTextureRefresh, TextureRefreshReceipt, TextureRefreshTicket,
 };
 use thiserror::Error;
 
