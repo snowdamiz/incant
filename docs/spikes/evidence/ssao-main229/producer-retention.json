@@ -1,0 +1,63 @@
+{
+  "producer_engine": "02c71fdb60715a24ca519bf3258ebaf22025d42f",
+  "claude_result": "c73d276a5224de10b149a18280654c74f5e6ec8a",
+  "archives": [
+    {
+      "path": "docs/spikes/evidence/ssao-main229/producer-001.json.gz",
+      "sha256": "8f92072e609b7058ddeac4e7f4c2ddad0f937f6fd6213029db0378a222050109",
+      "raw_sha256": "e63150a34af6f0ac50cbed252eadbe1501bff5836b3c6948f83be891b68485d1",
+      "bytes": 848791,
+      "records": 163,
+      "payloads": 90
+    },
+    {
+      "path": "docs/spikes/evidence/ssao-main229/producer-002.json.gz",
+      "sha256": "83445cf65e1af06f7e24776b153815fe5180d02107dd4d9508b933f61051905b",
+      "raw_sha256": "5d8ed444ef9308c734efe9bb488f93379d5d29425fa177114cdb4b9fe7d0b07a",
+      "bytes": 2232877,
+      "records": 217,
+      "payloads": 135
+    }
+  ],
+  "external_binaries": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-ssao-filter-001/bin/effects_gpu",
+      "sha256": "de30ad74eead283acf32702adc98df0cc639a0f9875e72fca1e0a54df57c931e",
+      "bytes": 31918672
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-ssao-filter-001/bin/lib",
+      "sha256": "4614a9932da985dc4bb905a5f33961d19c971ed1fc9dcdc16e157810cdb1c95d",
+      "bytes": 31850144
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-ssao-filter-001/bin/lib-cooked",
+      "sha256": "932694c68db210d1b65b5ae47b1e61e1e97206da5c580a53e800a3b4994a02b4",
+      "bytes": 32028432
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-ssao-filter-002/bin/effects_gpu",
+      "sha256": "46c6a88ed393d89f183d43fdd55fec4095428cf0038cf20954fbedddea84d10d",
+      "bytes": 31918672
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-ssao-filter-002/bin/lib",
+      "sha256": "f995d7c58ccc9543459676e1ea1f7a97b77064f20e2502e84d900bde3fdf63e6",
+      "bytes": 31836960
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-ssao-filter-002/bin/lib-cooked",
+      "sha256": "0b918d57073409ff4634ada8f9c2cb7952d957af94e5d047ded2f7287d49dca5",
+      "bytes": 31984608
+    }
+  ],
+  "root_review": {
+    "path": "docs/spikes/evidence/ssao-c2-gpu-root.json",
+    "sha256": "22ac4dc7b01443539ee0fcc9ccddaf4bc25007a1cada42fd007253a7b4c4edbd"
+  },
+  "limits": [
+    "Source-specific Metal producer execution; no current-main GPU inference.",
+    "Original001 quality failures and authored002 N6 failure retained.",
+    "No cooked SSAO, non-Metal appearance, phone or performance claim."
+  ]
+}

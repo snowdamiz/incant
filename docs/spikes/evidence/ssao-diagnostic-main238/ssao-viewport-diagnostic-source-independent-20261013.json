@@ -1,0 +1,36 @@
+{
+  "at": "2026-10-13T17:47:09.970768+00:00",
+  "reviewer": "astra/integrate_runtime_prs",
+  "accepted": true,
+  "scope": "Test-only fractional viewport diagnostic and manual-only fixed Dx12 workflow; source correctness review, no GPU or hosted result claim.",
+  "checkout": "/Users/andreyyurlov/.codex/worktrees/ssao-viewport-diagnostic/incant",
+  "base": "fec0d04092c5c015de9c8cbb56802b5370f6fe37",
+  "files": [
+    {
+      "path": "crates/incant_render/src/ambient_occlusion/filter_device_tests.rs",
+      "sha256": "51c0e5421ae23abb32219d2deb0e923fb183ea986d1489e5b71af51a067292f7"
+    },
+    {
+      "path": ".github/workflows/renderer-diagnostic.yml",
+      "sha256": "6a70e7c1ad837dab63f9c17e06a1de199c202ef7db0e655b72ec8d2552c9d50c"
+    }
+  ],
+  "patch": {
+    "path": "/Users/andreyyurlov/.codex/incant-reviews/ssao-viewport-diagnostic-source-independent-20261013.patch",
+    "sha256": "4444309b4e29ae4b4c9f32c1a90a02515d2f25ab67ed2026e3c40262fe953283"
+  },
+  "reviewed": [
+    "Original strict Fractional test retains two projection cases, actual depth bit equality, scalar interval assertions and nontrivial filter assertions.",
+    "Separate observation route runs three raster variants per projection: original white clear, fractional sentinel17 clear, full-target sentinel17 clear; uniform RECT and filter shader are identical. Six submissions, eighteen passes and six bounded maps, no images.",
+    "Reports all mismatch counts, interior mismatch counts and focus actual/bounds; first twelve mismatches are diagnostic samples, not claimed complete per-pixel output. Observational cases explicitly report checked_r8=0, observed_r8=570 and contract_asserted=false.",
+    "Actual backend check is unchanged and workflow requires Dx12, one exact successful diagnostic test, twelve raster observation rows and the six-submission completion marker.",
+    "Workflow is manual-only with fixed command and no caller inputs, read-only token/cache usage, pinned actions, finite timeout and retained source/toolchain/log/exit artifacts. No release context or assertions are substituted.",
+    "Production draw path also sets the fractional viewport; current result may represent a production coverage issue. This change diagnoses it without altering production behavior."
+  ],
+  "limits": [
+    "No reviewer builds or GPU calls; root-reported CPU/actionlint checks are separate.",
+    "Sentinel and full-target observations do not themselves establish a fix; a hosted actual Dx12 result remains necessary.",
+    "Original checkpoint26 Windows failure remains unchanged and disqualifies that candidate."
+  ],
+  "findings": []
+}

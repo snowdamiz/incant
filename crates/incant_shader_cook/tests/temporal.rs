@@ -4,6 +4,7 @@ use incant_shader_cook::{
 };
 fn source(kind: Kind) -> String {
     match kind {
+        Kind::MotionOwner => include_str!("../../incant_render/src/motion/owner.wgsl").into(),
         Kind::Motion | Kind::Depth => {
             include_str!("../../incant_render/src/motion/shader.wgsl").into()
         }
@@ -13,7 +14,13 @@ fn source(kind: Kind) -> String {
 }
 #[test]
 fn fixed_programs_preserve_interfaces_robust_accesses_and_native_binding_maps() {
-    for kind in [Kind::Motion, Kind::Depth, Kind::Resolve, Kind::Copy] {
+    for kind in [
+        Kind::Motion,
+        Kind::MotionOwner,
+        Kind::Depth,
+        Kind::Resolve,
+        Kind::Copy,
+    ] {
         let b = cook(kind, &source(kind)).unwrap();
         assert_eq!(b.artifacts.len(), 6);
         assert_eq!(b, cook(kind, &source(kind)).unwrap());
@@ -39,28 +46,30 @@ fn fixed_programs_preserve_interfaces_robust_accesses_and_native_binding_maps() 
             }
             let text = std::str::from_utf8(&a.bytes).unwrap();
             let required: &[&str] = match (kind, a.backend, a.stage) {
-                (Kind::Motion | Kind::Depth, Backend::Metal, Stage::Vertex) => &[
-                    "[[buffer(0)]]",
-                    "[[buffer(1)]]",
-                    "[[buffer(15)]]",
-                    "[[buffer(14)]]",
-                    "[[buffer(13)]]",
-                    "[[buffer(12)]]",
-                    "buffer_size15 / 48",
-                    "buffer_size14 / 48",
-                    "buffer_size13 / 112",
-                    "buffer_size12 / 80",
-                ],
-                (Kind::Motion, Backend::Metal, Stage::Fragment) => &[
+                (Kind::Motion | Kind::Depth | Kind::MotionOwner, Backend::Metal, Stage::Vertex) => {
+                    &[
+                        "[[buffer(0)]]",
+                        "[[buffer(1)]]",
+                        "[[buffer(15)]]",
+                        "[[buffer(14)]]",
+                        "[[buffer(13)]]",
+                        "[[buffer(12)]]",
+                        "buffer_size15 / 48",
+                        "buffer_size14 / 48",
+                        "buffer_size13 / 112",
+                        "buffer_size12 / 80",
+                    ]
+                }
+                (Kind::Motion | Kind::MotionOwner, Backend::Metal, Stage::Fragment) => &[
                     "[[buffer(0)]]",
                     "[[buffer(1)]]",
                     "[[texture(0)]]",
                     "[[sampler(0)]]",
                 ],
-                (Kind::Motion | Kind::Depth, Backend::Dx12, Stage::Vertex) => {
+                (Kind::Motion | Kind::Depth | Kind::MotionOwner, Backend::Dx12, Stage::Vertex) => {
                     &["register(b0)", "SV_Position"]
                 }
-                (Kind::Motion, Backend::Dx12, Stage::Fragment) => &[
+                (Kind::Motion | Kind::MotionOwner, Backend::Dx12, Stage::Fragment) => &[
                     "register(b0)",
                     "register(b1)",
                     "register(t0)",
@@ -83,6 +92,22 @@ fn fixed_programs_preserve_interfaces_robust_accesses_and_native_binding_maps() 
                     a.backend,
                     a.stage
                 );
+            }
+        }
+        if kind == Kind::MotionOwner {
+            for a in &b.artifacts {
+                if a.backend == Backend::Vulkan {
+                    continue;
+                }
+                let text = std::str::from_utf8(&a.bytes).unwrap();
+                if a.stage == Stage::Fragment {
+                    assert!(text.contains(if a.backend == Backend::Metal {
+                        "[[color(1)]]"
+                    } else {
+                        "SV_Target1"
+                    }));
+                    assert!(text.contains("uint"));
+                }
             }
         }
         if let Some(root) = std::env::var_os("INCANT_TEMPORAL_COOK_EVIDENCE") {

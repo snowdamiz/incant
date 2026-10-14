@@ -83,12 +83,12 @@ impl<I: Ord + Clone> PhysicsRuntime<I> {
         let hits: Box<dyn Iterator<Item = (ColliderHandle, RayIntersection)> + '_> =
             if scene.query_dirty {
                 Box::new(scene.entries.values().filter_map(|entry| {
-                    let collider = &scene.world.colliders[entry.collider];
-                    if !filter.test(&scene.world.bodies, entry.collider, collider) {
+                    let collider = &scene.world.read().colliders[entry.collider];
+                    if !filter.test(&scene.world.read().bodies, entry.collider, collider) {
                         return None;
                     }
                     let pose = entry.body.map_or(collider.position(), |handle| {
-                        scene.world.bodies[handle].position()
+                        scene.world.read().bodies[handle].position()
                     });
                     collider
                         .shape()
@@ -99,6 +99,7 @@ impl<I: Ord + Clone> PhysicsRuntime<I> {
                 Box::new(
                     scene
                         .world
+                        .read()
                         .intersect_ray(ray, request.max_distance as f32, true, filter)
                         .map(|(handle, _, hit)| (handle, hit)),
                 )

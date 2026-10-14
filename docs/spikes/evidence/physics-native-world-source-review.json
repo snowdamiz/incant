@@ -1,0 +1,27 @@
+{
+  "at": "2026-10-13T18:13:36.046636+00:00",
+  "accepted": true,
+  "scope": "Source correctness for private captured primitive-world assembly; broader qualification pending.",
+  "source_freeze": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-001/freeze.json",
+    "sha256": "eccc6088eccca38830071c0a63e8f4515bb05402c87f1c1c2273e930d634e276"
+  },
+  "verified_files": 176,
+  "owned_files": 66,
+  "dimensional_owned_files": "All32 paired Rapier2D/3D owned files byte-identical.",
+  "reviewed": [
+    "Single private AdmittedAssembly derives numeric witness and impulse epoch from the same bounded envelope within the higher-ranked decode callback; no public constructor or caller authenticity boolean.",
+    "All physical owners constructed under one aggregate allocation plan and non-Clone permit. Fixed SIMD bucket, stage cursor, empty arena slots and graph capacities are charged; Vec reservations fallible, Box process-OOM limitation explicit.",
+    "Native scalar bits, CCD cache variants/order and retained post-solve verdict preserved; pipeline and collision scratch reset paths inspected. Pool Arc is explicit process execution policy.",
+    "Empty-family gates inspect generation/free chain, coarena/graph/journal/attachment histories; nonzero and wrapped impulse epochs retained rather than equating empty length with pristine state.",
+    "Continuation compares actual events, ray queries, handles, owner serialization, CCD and pipeline observations every step; exact admission outcomes match and only tick7 PendingMutation is permitted, with complete inert bytes matched at all admitted boundaries.",
+    "Envelope truncation/size/identity and allocation-limit controls, actual inserted/removed joint/soft histories and omitted CCD-verdict negative controls are preserved. No runtime stable-ID/ECS/event-queue or public save admission change.",
+    "Prepared test adapter contains explicit mechanical source aliases; both dimensions use the same frozen new fixture files."
+  ],
+  "findings": [],
+  "limits": [
+    "Approval is source-only; focused21 execution is producer evidence, broad deterministic/fast8/wasm/consumer qualification still required.",
+    "Private primitive-only construction, not a public capture capability or completed physics-save system.",
+    "No CPU/GPU/device/performance gate approval."
+  ]
+}

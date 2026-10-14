@@ -1,0 +1,61 @@
+{
+ "candidate": "per-ray full-stratum step phase t_i = frac((b + 0.5)/16 + i/16)",
+ "n6_authored_255": 6.0,
+ "n7": {
+  "edge_slab_persp": {
+   "bound": 202.7,
+   "count": 0
+  },
+  "white_slab_ortho": {
+   "bound": 176.7,
+   "count": 0
+  },
+  "white_slab_persp": {
+   "bound": 138.2,
+   "count": 0
+  }
+ },
+ "n8_ortho": {
+  "roi_row": 110,
+  "rows": {
+   "110": {
+    "candidate_ratio": 0.151,
+    "design_ratio": 0.176
+   }
+  }
+ },
+ "n8_persp": {
+  "roi_row": 124,
+  "rows": {
+   "124": {
+    "candidate_ratio": 0.439,
+    "design_ratio": 0.376
+   },
+   "125": {
+    "candidate_ratio": 0.471,
+    "design_ratio": 0.439
+   },
+   "126": {
+    "candidate_ratio": 0.471,
+    "design_ratio": 0.502
+   },
+   "127": {
+    "candidate_ratio": 0.439,
+    "design_ratio": 0.533
+   },
+   "128": {
+    "candidate_ratio": 0.314,
+    "design_ratio": 0.356
+   },
+   "129": {
+    "candidate_ratio": 0.272,
+    "design_ratio": 0.335
+   },
+   "130": {
+    "candidate_ratio": 0.209,
+    "design_ratio": 0.272
+   }
+  }
+ },
+ "seconds": 3.3
+}

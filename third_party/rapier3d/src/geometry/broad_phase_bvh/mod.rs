@@ -331,3 +331,7 @@ mod test {
         }
     }
 }
+
+// Private typed staging, never a public world installer.
+#[cfg(feature = "incant-checked-restore")]
+mod checkpoint;

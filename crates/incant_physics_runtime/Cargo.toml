@@ -8,11 +8,14 @@ publish.workspace = true
 [features]
 # Preserve the existing deterministic build until project/process selection lands.
 default = ["deterministic"]
-deterministic = ["rapier3d/enhanced-determinism"]
+deterministic = ["rapier3d/enhanced-determinism", "incant_physics_snapshot?/physics-deterministic"]
 # An explicit build candidate; adoption depends on target measurements.
-fast-simd8 = ["rapier3d/simd8"]
+fast-simd8 = ["rapier3d/simd8", "incant_physics_snapshot?/physics-fast-simd8"]
+# Native completed-state ownership; public game-save admission remains separate.
+native-checkpoints = ["rapier3d/incant-checked-restore", "dep:incant_physics_snapshot"]
 
 [dependencies]
+incant_physics_snapshot = { path = "../incant_physics_snapshot", optional = true, default-features = false, features = ["construction"] }
 incant_nav.workspace = true
 incant_types.workspace = true
 serde.workspace = true

@@ -1,6 +1,10 @@
 //! Native rendering and GPU readback with retained imported material previews.
 //! Bevy-scheduled HDR geometry, lighting, display transform and composition.
 //! Authored clustered lights; the full production render graph remains open.
+mod ambient_occlusion;
+pub use ambient_occlusion::{AmbientOcclusion, AmbientOcclusionError};
+#[cfg(feature = "ssao-stage-readback")]
+pub use ambient_occlusion::{AmbientOcclusionCaptureError, AmbientOcclusionStages};
 mod bloom;
 pub use bloom::{Bloom, BloomError};
 mod camera;
@@ -94,6 +98,7 @@ pub struct Renderer {
     diagnostic_pipeline: wgpu::RenderPipeline,
     models: Mutex<models::ModelCache>,
     materials: materials::MaterialSystem,
+    ambient_occlusion: Option<ambient_occlusion::System>,
     sprites: sprites::SpriteSystem,
     text: text::TextSystem,
     ui: ui::UiSystem,
@@ -205,6 +210,7 @@ impl Renderer {
             diagnostic_pipeline,
             models: Mutex::new(HashMap::new()),
             materials,
+            ambient_occlusion: None,
             environments,
             lighting,
             shadows,

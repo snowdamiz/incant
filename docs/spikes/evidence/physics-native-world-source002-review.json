@@ -1,0 +1,10 @@
+{
+  "at": "2026-10-13T18:18:15.733802+00:00",
+  "accepted": true,
+  "prior_source_acceptance": "7a3eb1c36361dcc8b0d701d778f5f3568fa0e89e4dff6c1fafa80766241430dd",
+  "source_freeze_sha256": "95f7bd46f1da19c0113c7e0297c51e3ac0d5cac940c2f6291c891dc3e800ea23",
+  "verified_inputs": 176,
+  "changes": "Only mirrored cfg-gated test import, documented expect(dead_code) attributes on three test-capture gates and current pin hashes. All constructor, admission and fixture algorithms unchanged.",
+  "findings": [],
+  "qualification": "Broad execution pending; source001 raw native counts corrected by producer to68+70=138. No need to repeat a passed test configuration solely for lint-only attributes."
+}

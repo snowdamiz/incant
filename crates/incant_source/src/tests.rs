@@ -124,12 +124,32 @@ fn byte_limit_paths_links_and_missing_parent_refuse_without_effects() {
 }
 #[test]
 fn root_lock_is_exclusive_across_different_journals() {
+    const TEST: &str = "tests::root_lock_is_exclusive_across_different_journals";
+    if std::env::var("INCANT_SOURCE_LOCK_TEST").as_deref() != Ok(TEST) {
+        // Keep ownership inside one exact-filtered child. Concurrent recovery
+        // tests can otherwise fork while this test holds the lock and retain
+        // its descriptor briefly after drop, until their child execs.
+        let output = Command::new(std::env::current_exe().unwrap())
+            .args(["--exact", TEST, "--test-threads=1", "--nocapture"])
+            .env("INCANT_SOURCE_LOCK_TEST", TEST)
+            .output()
+            .unwrap();
+        let stdout = String::from_utf8_lossy(&output.stdout);
+        let stderr = String::from_utf8_lossy(&output.stderr);
+        assert!(output.status.success(), "{TEST}: {stdout}\n{stderr}");
+        assert!(
+            stdout.contains("test result: ok. 1 passed; 0 failed; 0 ignored;"),
+            "exact lock test did not execute: {stdout}\n{stderr}"
+        );
+        return;
+    }
     let dir = tempfile::tempdir().unwrap();
     let first = store(dir.path());
     fs::write(dir.path().join("other-journal"), "").unwrap();
     assert!(SourceStore::open(dir.path(), &dir.path().join("other-journal"), SCRIPT).is_err());
     drop(first);
-    assert!(SourceStore::open(dir.path(), &dir.path().join("other-journal"), SCRIPT).is_ok());
+    let actual = SourceStore::open(dir.path(), &dir.path().join("other-journal"), SCRIPT).err();
+    assert!(actual.is_none(), "actual reopen error: {actual:?}");
 }
 #[test]
 fn process_crash_child() {

@@ -109,3 +109,10 @@ mod simd {
     #[cfg(not(all(feature = "simd8", feature = "f32")))]
     pub const SIMD_LAST_INDEX: usize = 3;
 }
+
+/// Actual linked native source and feature identity; no restore authority.
+#[cfg(feature = "incant-checked-restore")]
+pub mod checkpoint_identity;
+
+#[cfg(all(test, feature = "incant-checked-restore"))]
+mod checkpoint_allocation_tests;

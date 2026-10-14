@@ -1,0 +1,8 @@
+{
+  "at": "2026-10-13T20:33:33.776138+00:00",
+  "reviewer": "astra-root",
+  "head": "d0b094357e380ea2f820d1975d4d5beabbeb0da4",
+  "manifest_sha256": "00b70a9a440e77b0b90cbc4f0320fc2b7ab6026be75d9d6ff1535c418a32ed94",
+  "decision": "accepted",
+  "scope": "Exactly three optional snapshot dependency manifests; selected numerical mode forwarded with no default activation. 3651 frozen inputs,17 zero-result checks,261 runtime tests per mode,64 immediate executable copies and unchanged historical packet verified. New exact-head fast CI still required before merge. No persisted/game/UI/device gate approval."
+}

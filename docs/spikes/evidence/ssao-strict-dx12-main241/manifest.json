@@ -1,0 +1,13 @@
+{
+  "head": "e281fe7456c7fbb85349e109fcdff3643c701256",
+  "run": 38446691046,
+  "verification_sha256": "3e9995fe4c606b39b80aa67581f90c023b3351de1d390e578f3ac293468d7ab7",
+  "archive": {
+    "path": "records.json.gz",
+    "sha256": "0da8e76db7ef76903973b8358e7a6a9fddaaf1ed8776e37c3d1326488d575c92",
+    "raw_sha256": "4e6ce62c3316e014e59a7d498153600aa10d955f73c5c62e3b14c6f73663139f",
+    "records": 10,
+    "payloads": 9
+  },
+  "claims": "Actual strict original scalar/depth filter contract on hosted forced Dx12 at exact merged source. Historical observation modes retained separately. No appearance/performance/phone or release promotion claim; checkpoint26 remains failed."
+}

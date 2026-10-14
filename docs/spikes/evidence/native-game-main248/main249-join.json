@@ -1,0 +1,18 @@
+{
+  "review": "native-game-main248-final-root-20261013.json",
+  "review_sha256": "9c0ed96d276851f84a233da8d796a29c9764b20b0b7845c3b4895e9872a70ed2",
+  "reviewed_head": "e4f7bfad746e239031e49ca1b5a6bf9406ece408",
+  "actual_main": "ae2ba44bd60e0f931899b080aea62438174e743c",
+  "joined_head": "6c8ea88f9ce522c6f33228c30135394fb37980cc",
+  "implementation_build_tool_roots": [
+    "Cargo.toml",
+    "Cargo.lock",
+    "rust-toolchain.toml",
+    ".cargo",
+    "crates",
+    "third_party",
+    "tools"
+  ],
+  "changed_inputs": [],
+  "scope": "Ancestry, STATUS and hosted final review documents only; no rebuild/relabel."
+}

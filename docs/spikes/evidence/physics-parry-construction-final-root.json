@@ -1,0 +1,19 @@
+{
+  "decision": "accepted scoped producer for main integration",
+  "commit": "c39ad333eafcffd3f47e5b168f91b811fb727b77",
+  "manifest_sha256": "2ade7b0b2ab2b803b6eec691ecba114c2ad9fff1283b336ee6bc788c8f75857b",
+  "verification": "independently read collector and reran verify-only; directly compared source001->002->003 test-syntax corrections",
+  "records": 1639,
+  "payloads": 546,
+  "final_inputs": 37,
+  "frozen_executables": 7,
+  "tests": {
+    "snapshot_each_mode": 225,
+    "private_constructor_each_mode": 26,
+    "paired_bvh_steps_each_dimension_each_mode": 226,
+    "inherited_paired_island_steps_each_dimension_each_mode": 156
+  },
+  "source_changes_after_source_review": "return-expression test helper and test-only lexical permit scope; production identical",
+  "scope": "Shared non-Clone allocation permit and default-off typed strict/pending Parry tree storage. Locked identities unchanged apart from two declared optional edges; native test-only bincode/oorandom identities pinned to existing vendor locks. Strict scoped native/snapshot checks, wasm and lean graphs pass. Six failed attempts retained.",
+  "limits": "Native broad/narrow/CCD/pipeline owners still incomplete; pending tree not query-ready until native processing; no public world/save, GPU/device/performance or phase gate."
+}

@@ -1,0 +1,16 @@
+{
+  "format": "incant-runtime-checkpoints-main244-documentation-join",
+  "accepted_composition": "1f1a4c34",
+  "before": "0ea1f8b98d9d7f33b5ef679af0c5f7d9844b0ed3",
+  "after": "c927124ef56678d5488cf1e3041f6c9aea46e12f",
+  "main": "a288436e19a55b08686e894f1659ee2dfbd4febe",
+  "changed_paths": [
+    "STATUS.md",
+    "docs/spikes/evidence/physics-native-capture-main243/physics-native-main243-composition-root-20261013.json",
+    "docs/spikes/evidence/physics-native-capture-main243/source-composition.json",
+    "docs/spikes/evidence/physics-native-capture-main243/verify.py",
+    "docs/spikes/physics-native-capture-owner.md"
+  ],
+  "implementation_build_tool_delta": false,
+  "qualification": "Actual merged main244 joined; only documentation/review/verifier changes. Exact 3,647-input/three-graph qualification remains unchanged."
+}

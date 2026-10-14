@@ -36,6 +36,10 @@ pub struct CCDSolver {
 /// itself — `None` past [`FIXED_TARGETS_LIST_MAX`], where the sweep queries the full BVH.
 type FixedTargetsCache = (Real, Option<Vec<(ColliderHandle, Aabb)>>);
 
+/// Borrowed three-state observer result; no owned cache or install authority.
+#[cfg(feature = "incant-checkpoint")]
+type FixedTargetsCheckpoint<'a> = Option<(Real, Option<&'a [(ColliderHandle, Aabb)]>)>;
+
 impl CCDSolver {
     /// Initializes a new CCD solver
     pub fn new() -> Self {
@@ -49,7 +53,7 @@ impl CCDSolver {
     /// list order are unchanged. No validation, allocation or mutation occurs.
     /// This default-off adapter does not authorize hostile saves or restoration.
     #[cfg(feature = "incant-checkpoint")]
-    pub fn checkpoint_fixed_targets(&self) -> Option<(Real, Option<&[(ColliderHandle, Aabb)]>)> {
+    pub fn checkpoint_fixed_targets(&self) -> FixedTargetsCheckpoint<'_> {
         self.fixed_targets_cache
             .as_ref()
             .map(|(prediction, targets)| (*prediction, targets.as_deref()))
@@ -361,3 +365,7 @@ impl CCDSolver {
         }
     }
 }
+
+#[cfg(feature = "incant-checked-restore")]
+#[path = "ccd_checkpoint.rs"]
+mod checkpoint;

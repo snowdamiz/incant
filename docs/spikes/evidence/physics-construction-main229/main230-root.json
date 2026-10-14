@@ -1,0 +1,8 @@
+{
+  "at": "2026-10-13T16:11:35.830246+00:00",
+  "verdict": "accepted disjoint main230 join for fast-check publication",
+  "head": "d7a28a21dc5c3cffa3a9a72db7e13bd0937aaabc",
+  "qualification_sha256": "53d975d55bccdf7f5245a73997744432e22504bd6ffe224c7d58d634bdb05023",
+  "review": "Read and independently replayed qualification. All27 incoming source paths are exact reviewed main230 renderer changes. Nine explicitly identified frozen renderer exceptions bind old tested Git and current main hashes. Physics snapshot, vendor, manifests, lock, config and private build tool inputs are unchanged; all original validation replays. No new test execution inferred.",
+  "prior_final_review": "2f90c6ff3920c4b0cb75f603b526f9c66b9a64eb2e0c224875cf51ddf2ffbffb"
+}

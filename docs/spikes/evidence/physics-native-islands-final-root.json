@@ -1,0 +1,22 @@
+{
+  "at": "2026-10-13T16:00:27.762023+00:00",
+  "verdict": "accepted scoped private island construction producer for current-main intake",
+  "head": "1a1ad50594a70989deab92a4d1669d47b959cb49",
+  "manifest_sha256": "eb50366407270ae48b7732a39de7f391d0e78e295f9295a9d53d5be7367c427d",
+  "source_review": "56edc9aef6b0961d35385c4f0dd78effb2f4c151eb5c0e506bbc39f4cb75c9d9",
+  "verification": {
+    "archive_records": 2204,
+    "payloads": 501,
+    "retained_native_binaries": 4,
+    "snapshot_tests_per_mode": 218,
+    "checked_native_tests_per_mode": 28,
+    "paired_island_steps_per_dimension_per_mode": 156
+  },
+  "review": "Reverified frozen source and complete lossless collector. Read native island continuation and negative controls, exact fast8 capture binding and distinct native feature graphs, retained det/fast8 logs, inherited vendor formatting diagnostic and scoped passing format. Tests compare actual native bincode and omitted sleep scan observation through mutations; other owners remain trusted clones. All accepted source paths unchanged.",
+  "limits": [
+    "No whole-world installer or live-save admission",
+    "Ordinary VecMap reserve retains process OOM; logical precharge only",
+    "No blanket vendor formatting success; original failed captures and compile diagnostic retained",
+    "No GPU/device/performance or phase gate acceptance"
+  ]
+}

@@ -35,7 +35,21 @@ impl Budget {
     pub fn remaining(&self) -> usize {
         self.remaining
     }
-    pub(crate) fn charge(&mut self, bytes: usize) -> Result<()> {
+    /// Precharged fallible Vec payload for typed native/outer capture. Logical
+    /// bytes exclude allocator overhead and are cumulative even on failure.
+    #[cfg(feature = "construction")]
+    pub fn vector<T>(&mut self, count: usize) -> Result<Vec<T>> {
+        let bytes = count.checked_mul(size_of::<T>()).ok_or(Error::Limit)?;
+        if bytes > isize::MAX as usize {
+            return Err(Error::Limit);
+        }
+        self.charge(bytes)?;
+        crate::vector(count)
+    }
+
+    /// Charge an outer or native capture allocation before requesting it.
+    /// The same budget can cover enclosing maps, records, scratch and encoding.
+    pub fn charge(&mut self, bytes: usize) -> Result<()> {
         self.remaining = self.remaining.checked_sub(bytes).ok_or(Error::Limit)?;
         Ok(())
     }
@@ -86,8 +100,9 @@ pub struct BvhRecord {
     pub rebuild_start: u32,
 }
 
-/// Private ownership prevents mutation after validation. There is deliberately
-/// no conversion from this witness to Parry, Rapier or a native physics owner.
+/// Private ownership prevents mutation after validation. The ordinary inert
+/// crate has no native dependencies. A separate default-off Parry feature may
+/// construct tree storage; that is not native world or physics-save admission.
 pub struct ValidatedBvh {
     pub(crate) record: BvhRecord,
 }
@@ -114,4 +129,23 @@ pub(crate) fn lengths(
         return Err(Error::Length);
     }
     Ok(())
+}
+
+#[cfg(all(test, feature = "construction"))]
+mod capture_budget_tests {
+    use super::*;
+    #[test]
+    fn outer_and_native_capture_share_cumulative_precharged_payload() {
+        let mut budget = Budget::new(40).unwrap();
+        budget.charge(8).unwrap();
+        let mut values = budget.vector::<u64>(4).unwrap();
+        values.extend([1, 2, 3, 4]);
+        assert_eq!(budget.remaining(), 0);
+        assert_eq!(values, [1, 2, 3, 4]);
+        assert_eq!(budget.charge(1), Err(Error::Limit));
+        assert!(budget.vector::<u64>(1).is_err());
+        let mut overflow = Budget::new(40).unwrap();
+        assert!(overflow.vector::<u64>(usize::MAX).is_err());
+        assert_eq!(overflow.remaining(), 40);
+    }
 }

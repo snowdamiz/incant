@@ -1,0 +1,6 @@
+{
+  "review": "native-session-hosted-main248-final-20261013.json",
+  "sha256": "60fb1a2400c0fd8cad0aaa35ae024bdaad398a8938d9fa21584f29d847bd0b23",
+  "reviewed_head": "15e316da6f16c8ab110e1cfa979fd0379e3b8baf",
+  "status": "accepted; required exact-head fast check still required"
+}

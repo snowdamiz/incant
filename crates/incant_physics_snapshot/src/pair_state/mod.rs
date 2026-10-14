@@ -39,12 +39,22 @@ pub struct SubDetector {
     pub manifold: u32,
     pub timestamp: bool,
 }
+/// A captured closed native workspace before joining its detector indices to
+/// the independently captured manifold table.
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct WorkspaceRecord {
+    pub kind: WorkspaceKind,
+    pub timestamp: bool,
+    pub detectors: Vec<SubDetector>,
+}
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct PairStateTable {
     pub identity: Identity,
     /// Same payload row order as the checked contact graph/manifold table.
     pub pairs: Vec<PairState>,
-    /// Exact observed native map iteration order, never sorted in the record.
+    /// Deterministic builds preserve native insertion order. Fast hash-map
+    /// builds capture canonical key order: their bucket layout is not semantic
+    /// state, and contact order comes from the preserved BVH traversal.
     pub detectors: Vec<SubDetector>,
 }
 pub struct ValidatedPairState<'a> {

@@ -91,19 +91,29 @@ pub use audio::{
 pub use columns::{NumericChunk, NumericColumns, TRANSFORM_STRIDE, VELOCITY_STRIDE};
 pub use commands::{FrameCommands, MAX_FRAME_COMMANDS, StructuralCommand};
 pub use entity_identity::{EntityIdentity, WorldIncarnation};
+#[cfg(feature = "native-checkpoints")]
+pub use incant_physics_2d_runtime::CheckpointWorkBudget as PlanarCheckpointWorkBudget;
 pub use incant_physics_2d_runtime::{
     BodyState as BodyState2D, RayHit as RayHit2D, RayQuery as RayQuery2D,
     TriggerEvent as TriggerEvent2D,
 };
+#[cfg(feature = "native-checkpoints")]
+pub use incant_physics_runtime::CheckpointWorkBudget as SpatialCheckpointWorkBudget;
 pub use incant_physics_runtime::{BodyState, MAX_TRIGGER_EVENTS, MAX_TRIGGER_PAIRS, TriggerEvent};
 pub use incant_physics_runtime::{
     CharacterMovement, CharacterOptions, CharacterQuery, CharacterStep,
 };
 pub use incant_physics_runtime::{RayHit, RayQuery};
+#[cfg(feature = "native-checkpoints")]
+pub use incant_physics_snapshot::{
+    Budget as CheckpointPayloadBudget, construction::AllocationBudget as CheckpointAllocationBudget,
+};
 pub use physics::CookedPhysics;
 pub use physics_2d::CookedPhysics2D;
 pub use physics_queries::{NativeQueries, QueryError};
 pub use save::{MAX_SAVE_BYTES, SaveError};
+#[cfg(feature = "native-checkpoints")]
+pub use save::{WorldCheckpoint, WorldCheckpointError};
 pub use scene::{CookedEntity, CookedScene, SceneError, StableId};
 mod physics_variant;
 pub use physics_variant::{PHYSICS_VARIANT, PhysicsMode, PhysicsVariant, require_physics_mode};

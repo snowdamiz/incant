@@ -1,0 +1,22 @@
+{
+  "at": "2026-10-13T14:42:15.060345+00:00",
+  "reviewer": "astra /root",
+  "decision": "accepted-scoped-native-owner-numeric-GPU",
+  "producer": "bf39fd83a4e41aef592d757b255f5ee839917d29",
+  "source_producer": "4c4310874405f569b60e32a0d8d5f21073546c9d",
+  "report_sha256": "9dd6603da34d73bf8658284ce079b3de43b9b2e155355adae6b48c6aff6b9774",
+  "evidence_sha256": "ea4b9dc399ff8e77223df98bedc45cc0d64f34edff5cc13db4c2aa47407902af",
+  "source_cpu_review_sha256": "d232a2241667c7258a4211489b851b2b7bdb7f72bf72b245d613fa678d23d3e2",
+  "verified": [
+    "Full result read; all14 embedded original records independently reencoded, hashed and byte-matched.",
+    "Single exact ignored test passed with mandatory Metal adapter and final marker:12renders12readbacks32x32, noimages.",
+    "Exactly1predebit/1ledger,24queue submits, clean release hash bindings and PIDgone; frozen binary unchanged.",
+    "Opus5.5Max ACP start record embedded and matches original."
+  ],
+  "release_sha256": "44cadf67477c235eb9f176a6ad22c76beb857532e6dd53c421553001832c1786",
+  "findings": [],
+  "limits": [
+    "No new appearance/history-consumption/defaultWGSL/runtimeGPU-memory/performance/phone claim.",
+    "Private owner attachment may be curated onto current main only after scoped integration review and checks; do not import private upscaler ancestry."
+  ]
+}

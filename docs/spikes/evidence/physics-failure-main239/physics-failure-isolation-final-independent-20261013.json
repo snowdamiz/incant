@@ -1,0 +1,20 @@
+{
+  "at": "2026-10-13T18:02:34.038305+00:00",
+  "accepted": true,
+  "reviewer": "astra/integrate_runtime_prs",
+  "head": "2989ced7eaf7cf122d2f1f1a9813ec02b0ab9e13",
+  "manifest_sha256": "dbc14b0af4a6dfef498a65a97d490d05a6d2a94f9664b974fa54047f9b44a9ff",
+  "archive_sha256": "cc92f598df8c622c2d9c155e64361e2befa0290458debbf909c6834bc5036dee",
+  "source_review": "9d59b3c6ce9cd41eca6704f16e4c565aa6d605cbb7c25573a61a8594fcd42d43",
+  "verified": [
+    "17 archived records/14 payloads independently decoded and compared byte-exact with originals, plus two reviewed live source hashes.",
+    "Both default/fast8 logs parsed to eight passed, zero failed/ignored; native consumer logs11+5 passed; strict Clippy and wasm logs complete.",
+    "Expected pre-fix failures show leaked late-scene state and caught-unwind reuse with identical new tests; healthy invalid-dt control passes.",
+    "All nine manifest check records exit0; baseline101 is explicitly retained as expected failure."
+  ],
+  "limits": [
+    "No reviewer rebuild; source remains identical to independent source acceptance.",
+    "Standalone3D terminal isolation, not rollback, general structural panic safety, complete-world restore or physics-save admission."
+  ],
+  "findings": []
+}

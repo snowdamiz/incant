@@ -8,6 +8,7 @@ use std::{fmt::Write as _, fs, path::Path};
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Kind {
     Motion,
+    MotionOwner,
     Depth,
     Resolve,
     Copy,
@@ -15,7 +16,7 @@ pub enum Kind {
 impl Kind {
     pub fn entry(self) -> &'static str {
         match self {
-            Self::Motion => "fragment",
+            Self::Motion | Self::MotionOwner => "fragment",
             Self::Depth => "depth_only",
             Self::Resolve => "resolve",
             Self::Copy => "copy",
@@ -23,6 +24,9 @@ impl Kind {
     }
     pub fn contract(self) -> &'static str {
         match self {
+            Self::MotionOwner => {
+                "incant-temporal-motion-owner-v1;naga=29.0.4;wgpu=29.0.4;frame144-vf,material64-f,5textures-samplers;mrt=rgba32f-r32u;owner=uint-loc12-offset68-flat3;msl=2.4,pulls15-14-13-12,strides48-48-112-80,lengths1,frame0,material1;hlsl=6.0,b0-b1,sampler-t5,special-b2;spv=1.0,no-y-flip;bounds=restrict;loops=bounded"
+            }
             Self::Depth => {
                 "incant-temporal-depth-v1;naga=29.0.4;wgpu=29.0.4;frame144-v,material64-f,5textures-samplers;msl=2.4,pulls15-14-13-12,strides48-48-112-80,lengths1,frame0,material1;hlsl=6.0,b0-b1,sampler-t5,special-b2;spv=1.0,no-y-flip;bounds=restrict;loops=bounded"
             }
@@ -41,6 +45,10 @@ impl Kind {
     /// checks alone must not authorize a changed trusted passthrough program.
     pub fn source_hash(self) -> [u8; 32] {
         match self {
+            Self::MotionOwner => [
+                102, 9, 205, 235, 39, 74, 200, 74, 255, 222, 133, 196, 199, 126, 142, 116, 65, 223,
+                251, 183, 72, 224, 124, 45, 112, 156, 179, 170, 141, 96, 109, 0,
+            ],
             Self::Motion | Self::Depth => [
                 30, 190, 25, 208, 56, 144, 101, 74, 214, 210, 50, 136, 31, 151, 182, 253, 29, 74,
                 10, 195, 201, 189, 178, 150, 17, 209, 183, 33, 168, 48, 71, 123,

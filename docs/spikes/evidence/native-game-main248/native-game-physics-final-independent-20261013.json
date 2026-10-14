@@ -1,0 +1,67 @@
+{
+  "status": "accepted_source_and_scoped_final_execution",
+  "source_commit": "a2e312e6b8d144073603bc4619de57a4977e6a02",
+  "manifest": "docs/spikes/evidence/native-game-physics-checkpoints/manifest.json",
+  "manifest_sha256": "80d7b2f49a76c1679eae40e20e0e5baddbd7838ff8b7e84071603c31009345e9",
+  "archive_sha256": "7f8e519a3311c281d1fe8fceb495d2e7c6648503ff2ecbd97e36b69745d26bca",
+  "prior_source_review": {
+    "path": "native-game-physics-source003-independent-20261013.json",
+    "sha256": "b1cf47c1e1eb2d7ab8418506ce261e17dc5aa82121423f28bd27a4fd5d928861"
+  },
+  "audit": {
+    "script": "native-game-physics-final-independent-20261013-audit.py",
+    "script_sha256": "837f140faec6e4447070d421ffc64e9baa359ddefd7d378198fbe5a9819554f3",
+    "result": "native-game-physics-final-independent-20261013-audit.json",
+    "result_sha256": "045b347c7fc7549e13f0f257375812bcedb74dcbd5d0259580f88cad63a4791d"
+  },
+  "verified": {
+    "verified_records_and_originals": 96,
+    "verified_final_build_inputs": 3667,
+    "verified_game_sources": 21,
+    "verified_executables": 29
+  },
+  "execution": {
+    "final_source003_tests": {
+      "deterministic": 39,
+      "fast8": 39,
+      "failures": 0,
+      "ignored": 0,
+      "summary_rows_per_mode": 10
+    },
+    "source002_ordinary": 33,
+    "source002_focused": 6,
+    "source001_historical": {
+      "passed": 5,
+      "failed": 1,
+      "reason": "UI input before initial layout"
+    },
+    "successful_commands": 13,
+    "historical_failed_commands": 1,
+    "strict_clippy": "all-target deterministic, fast8 and headless",
+    "compilation_only": [
+      "static-module feature",
+      "wasm32 native-checkpoints/ui"
+    ],
+    "guards": [
+      "manifest",
+      "fmt",
+      "conventions",
+      "diff"
+    ]
+  },
+  "observables_reviewed": [
+    "Mixed 2D/3D physics plus opted-in TypeScript state/timers, 37 paired ticks after capture at67, exact nonzero static and streaming PCM, sample counter20518 and source-state equality.",
+    "Silent suspension preserves failed-tick output/state; resumes from13 to14, recaptures then continues17 more ticks and recaptures. This closes original R1 dropped-empty-mixer chronology.",
+    "Typed UI text/focus rebinds fresh token, rejects incorrect reset/incapable host, compares37 paired tick UI/world/PCM state. Measurement is a CPU fixture.",
+    "Missing clips refuse before host setup; setup error/unwind leaves old world identity and state live, then valid candidate continues7 paired ticks.",
+    "Clock family mismatch, failed-session capture and small payload budget refuse. Public byte physics checkpoints remain refused."
+  ],
+  "findings": [],
+  "limitations": [
+    "No reviewer build, executable run, GPU, rendered pixel or device/performance evidence.",
+    "Reviewer-authored script dependency is excluded from independent source approval; root separately accepted and tested that dependency.",
+    "Opaque process-local continuation only; no arbitrary JS heap, Wasm state, file-imported physics or device transport restore.",
+    "Budget accounting remains component-scoped; Rust host external side effects remain host responsibility.",
+    "The failed001 manifest passed field counts successful summary rows only (0); raw record correctly reports5 passed/1 failed and scope explicitly records it."
+  ]
+}

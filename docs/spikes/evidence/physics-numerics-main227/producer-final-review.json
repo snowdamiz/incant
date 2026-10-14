@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "reviewer": "astra /root/runtime_review",
+  "status": "accepted-scoped-final-source-and-CPU-evidence",
+  "time_utc": "2026-10-13T13:28:28.947491+00:00",
+  "producer": "7afb2b8b42bcb4cd28a5611e42d26ae37fd9e6d4",
+  "base": "4c0190e2422e5bc85000dfec142668728239bb1d",
+  "manifest": {
+    "path": "docs/spikes/evidence/physics-native-admission.json",
+    "sha256": "66e76062a4be90750621981d1c1f1fc86c5a16f296b8846649f9ac78c2bad2f0"
+  },
+  "archive": {
+    "path": "docs/spikes/evidence/physics-native-admission-logs.json.gz",
+    "sha256": "601b4f26dc8d94de08bbd2d5786e926ad459f6e58415c5f7e159411f54364589",
+    "records": 270,
+    "unique_payloads": 143
+  },
+  "prior_source_review": {
+    "path": "/Users/andreyyurlov/.codex/incant-reviews/physics-native-admission-source-independent-20261013.json",
+    "sha256": "3cc596477ec48c16b363c1bc645d0f8a9840374c13b0bb2d15b4d0d21d2db74d"
+  },
+  "assertion_audit": {
+    "path": "/Users/andreyyurlov/.codex/incant-reviews/audit-native-admission-final-20261013.py",
+    "sha256": "4a3af301635d4452946a2e9bfcb1626658a9584f87072564b6f2c43ddf7907db",
+    "executed": true,
+    "exit_code": 0
+  },
+  "verified": [
+    "Immutable Git objects and ancestry, Built-by trailer, manifest/archive digests, all 270 original versus retained records and all 143 payload digests.",
+    "All 103 final source identities against Git and frozen copies. Production remains source001; final source changes only spike documentation and added STATUS.",
+    "All 16 successful command receipts and exact argv/log hashes; both complete suites each 214 passed, zero failed/ignored. Focused tests overlap these totals.",
+    "Native dimension 2 and 3 logs each record 72 primitive completed steps per mode, 144 combined. Observations concern checked numerical fields, not decoded installation.",
+    "Five historical failures are retained and qualified: two native fixture pending journals; a Cargo feature invocation failure; a pinned Cargo resolver panic; vendor all-target dev dependency failure. Later relevant checks are separately bound.",
+    "Two retained executable copies are byte-identical and executable, with original executed test log associations.",
+    "Default runtime graph excludes optional snapshot/checked-restore dependencies; snapshot normal graph stays a single package.",
+    "Producer assertion-only collector also replayed successfully. No reviewer build or GPU execution."
+  ],
+  "limits": [
+    "Only inert numerical admission. No native constructor, decoded installation, authenticated completed phase, full live restore, or ordinary physics save admission.",
+    "Not complete solver arithmetic/work admission: compounds, hooks, full Jacobian/gyro/CCD-substep arithmetic, historical broad-phase coherence and total execution/allocation work remain open.",
+    "PhysicsUnsupported remains; no shipping, device, performance, GPU or visual gate is inferred.",
+    "Producer checkout is now used for separately authorized constructor work; this review binds immutable producer Git objects, not later checkout changes."
+  ],
+  "findings": []
+}

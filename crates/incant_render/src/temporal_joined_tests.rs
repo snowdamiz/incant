@@ -10,16 +10,22 @@ use std::{
 #[test]
 #[ignore = "requires native GPU; four numeric frames, no images or presentation"]
 fn fixed_history_overlay_depth_and_timestamps_share_real_submissions() {
-    run(false);
+    run(false, false);
 }
 
 #[test]
 #[ignore = "requires native GPU; four bloom/fixed frames, no images or presentation"]
 fn fixed_history_bloom_and_display_timestamps_share_real_submissions() {
-    run(true);
+    run(true, false);
 }
 
-fn run(with_bloom: bool) {
+#[test]
+#[ignore = "requires native GPU; four SSAO/fixed/bloom frames, no images or presentation"]
+fn fixed_history_ssao_bloom_and_model_timestamps_share_real_submissions() {
+    run(true, true);
+}
+
+fn run(with_bloom: bool, with_ssao: bool) {
     let temp = tempfile::tempdir().unwrap();
     crate::test_support::model(temp.path(), 0.);
     let path = temp.path().join("triangle.gltf");
@@ -130,6 +136,37 @@ fn run(with_bloom: bool) {
             enabled.unwrap();
             assert!(renderer.bloom.is_some());
         }
+    }
+    if with_ssao {
+        let enabled =
+            pollster::block_on(renderer.enable_ambient_occlusion(crate::AmbientOcclusion {
+                radius: 1.,
+                bias: 0.01,
+                strength: 1.,
+            }));
+        if cfg!(all(
+            feature = "cooked-materials",
+            not(target_arch = "wasm32")
+        )) {
+            assert_eq!(
+                enabled
+                    .unwrap_err()
+                    .downcast_ref::<crate::AmbientOcclusionError>(),
+                Some(&crate::AmbientOcclusionError::CookedMaterials)
+            );
+            assert!(renderer.ambient_occlusion.is_none());
+        } else {
+            enabled.unwrap();
+            assert!(renderer.ambient_occlusion.is_some());
+        }
+        eprintln!(
+            "SSAO_JOINED admitted={}; cooked_refusal={}",
+            renderer.ambient_occlusion.is_some(),
+            cfg!(all(
+                feature = "cooked-materials",
+                not(target_arch = "wasm32")
+            ))
+        );
     }
     pollster::block_on(renderer.enable_temporal_accumulation()).unwrap();
     let mut retained = renderer.prepare_retained(&input, "camera").unwrap();

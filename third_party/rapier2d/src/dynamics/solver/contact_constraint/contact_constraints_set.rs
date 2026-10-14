@@ -69,3 +69,7 @@ impl ContactConstraintsSet {
         }
     }
 }
+
+#[cfg(feature = "incant-checked-restore")]
+#[path = "contact_constraints_checkpoint.rs"]
+mod checkpoint;

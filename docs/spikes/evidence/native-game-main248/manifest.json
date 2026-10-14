@@ -1,0 +1,24 @@
+{
+  "source_composition_sha256": "66790ae50b5d96a763413582cfcce6e8bf5ff5330f43a0dcb223555fa2c0fee1",
+  "source_files": 3669,
+  "checks": [
+    "producer-verify",
+    "manifest",
+    "runtime-guard",
+    "producer-graph-det",
+    "graph-det",
+    "producer-graph-fast8",
+    "graph-fast8",
+    "producer-graph-ordinary",
+    "graph-ordinary",
+    "audit-det",
+    "audit-fast8",
+    "fmt",
+    "conventions",
+    "diff"
+  ],
+  "records": 28,
+  "archive_sha256": "0eabc78d5d03a6a7c231c53bdbdb0db1ed08921dc2223d57d96efcbcdbb60cdf",
+  "producer_manifest_sha256": "80d7b2f49a76c1679eae40e20e0e5baddbd7838ff8b7e84071603c31009345e9",
+  "scope": "Six accepted main248 repairs differ plus two evidence-only collectors; game and hosted script implementation match producer. Both39-case game suites remain source003, ordinary33 cases remain source002. No new compilation or execution."
+}

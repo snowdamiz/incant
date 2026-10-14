@@ -1,0 +1,104 @@
+{
+  "decision": "accepted disjoint main231 join for scoped publication",
+  "replay_sha256": "a144a91d631f582827731a2edfd0ba447b3e03f7a3b958b1af492cdc343fa6db",
+  "main": "b4b0d5e919de8432a6c643d4486e0230ebddbc58",
+  "incoming_paths": 45,
+  "frozen_exceptions": [
+    {
+      "path": "crates/incant_physics_snapshot/src/world_boundary/mod.rs",
+      "old_sha256": "7cd480874314f125f5f136c297e3ad4d7f59f4ef2ae23ab59142abaaaf752b60",
+      "new_sha256": "d99c544627d1509ce9b3fd77a2106d03b41c442ccebcb5a1c1a2f1f6fea44275"
+    },
+    {
+      "path": "third_party/rapier2d/INCANT_CCD_CAPTURE.json",
+      "old_sha256": "2b67d0b4d658661d5edc28b7989974910c91d0f08b68d0cbe880fe1f3ab7b637",
+      "new_sha256": "0fbe106b331f17b19eb6600918016db7571e80291d5ebc8b1038ba0cccc7a420"
+    },
+    {
+      "path": "third_party/rapier2d/INCANT_PATCH.md",
+      "old_sha256": "1d543e7f7e1080a5d8d33c9cc3734513de9711d68471d1c4e653f2fe33b8dfa7",
+      "new_sha256": "237ba7297faee3fbf194f9df9ff91a443b88eeb093f576f502ce484d97b0d587"
+    },
+    {
+      "path": "third_party/rapier2d/src/data/arena.rs",
+      "old_sha256": "895b4a352c977df4ef8e7b064780e679b015a14a2d650ebb9fc88caadfe31915",
+      "new_sha256": "5a5138390d4b9d22c22c805dbda7c1a2fe7048874f055a1c7d31e8ef46ed59df"
+    },
+    {
+      "path": "third_party/rapier2d/src/data/coarena.rs",
+      "old_sha256": "ceef7e1a827be657c520c023a5d19259fe277ab3ac4885151c13aacd69642d61",
+      "new_sha256": "8091da4f62c363dcb3b89bc4564e8941ebe47c0f29cda3c7847e8a5a0190f3bb"
+    },
+    {
+      "path": "third_party/rapier2d/src/data/graph.rs",
+      "old_sha256": "2a08bdffaac1dcf9ef516b6c8cf6a34ab282b2fd29d7774d88790a1b0d1d41fb",
+      "new_sha256": "92b46c3580a206ef6ee3eb190f1524c47d1120bae7086e0b119d18f29d7503c8"
+    },
+    {
+      "path": "third_party/rapier2d/src/dynamics/ccd/ccd_solver.rs",
+      "old_sha256": "059558201eb3437842f2eaf024aa9e29312686b9a00be26984c691fd1acd481d",
+      "new_sha256": "368ce950557926755617fb1008a311f59116b6f1536f1903a7a1601d0f7d7d47"
+    },
+    {
+      "path": "third_party/rapier2d/src/geometry/collider.rs",
+      "old_sha256": "dc5395bbf3f3d53e002d913471aa9683ca787eba5f22e0116293d612646be148",
+      "new_sha256": "cfda081691078cecc015b753cc37fa20193ccae6b07a76be6e30433e3b133f59"
+    },
+    {
+      "path": "third_party/rapier2d/src/pipeline/checked_restore/convert.rs",
+      "old_sha256": "6c5052129cf468e7ef686dcc2f2de76a1d9d7cef59c11b479a3b117f9a3e479a",
+      "new_sha256": "78f3aaf874139df74453def47076c6155d66869cca1abbbf9a381cb8f6b20a3d"
+    },
+    {
+      "path": "third_party/rapier2d/src/pipeline/checked_restore/mod.rs",
+      "old_sha256": "3f2637d424a0708278df157f4bfc1e57403418d032ba6695ec56beeea08fee45",
+      "new_sha256": "704682e80bc6664199380464ac1fc966a409adb4c8bc58fbbe9b78cf3aaaa9cb"
+    },
+    {
+      "path": "third_party/rapier3d/INCANT_CCD_CAPTURE.json",
+      "old_sha256": "2b67d0b4d658661d5edc28b7989974910c91d0f08b68d0cbe880fe1f3ab7b637",
+      "new_sha256": "0fbe106b331f17b19eb6600918016db7571e80291d5ebc8b1038ba0cccc7a420"
+    },
+    {
+      "path": "third_party/rapier3d/INCANT_PATCH.md",
+      "old_sha256": "1d543e7f7e1080a5d8d33c9cc3734513de9711d68471d1c4e653f2fe33b8dfa7",
+      "new_sha256": "237ba7297faee3fbf194f9df9ff91a443b88eeb093f576f502ce484d97b0d587"
+    },
+    {
+      "path": "third_party/rapier3d/src/data/arena.rs",
+      "old_sha256": "895b4a352c977df4ef8e7b064780e679b015a14a2d650ebb9fc88caadfe31915",
+      "new_sha256": "5a5138390d4b9d22c22c805dbda7c1a2fe7048874f055a1c7d31e8ef46ed59df"
+    },
+    {
+      "path": "third_party/rapier3d/src/data/coarena.rs",
+      "old_sha256": "ceef7e1a827be657c520c023a5d19259fe277ab3ac4885151c13aacd69642d61",
+      "new_sha256": "8091da4f62c363dcb3b89bc4564e8941ebe47c0f29cda3c7847e8a5a0190f3bb"
+    },
+    {
+      "path": "third_party/rapier3d/src/data/graph.rs",
+      "old_sha256": "2a08bdffaac1dcf9ef516b6c8cf6a34ab282b2fd29d7774d88790a1b0d1d41fb",
+      "new_sha256": "92b46c3580a206ef6ee3eb190f1524c47d1120bae7086e0b119d18f29d7503c8"
+    },
+    {
+      "path": "third_party/rapier3d/src/dynamics/ccd/ccd_solver.rs",
+      "old_sha256": "059558201eb3437842f2eaf024aa9e29312686b9a00be26984c691fd1acd481d",
+      "new_sha256": "368ce950557926755617fb1008a311f59116b6f1536f1903a7a1601d0f7d7d47"
+    },
+    {
+      "path": "third_party/rapier3d/src/geometry/collider.rs",
+      "old_sha256": "dc5395bbf3f3d53e002d913471aa9683ca787eba5f22e0116293d612646be148",
+      "new_sha256": "cfda081691078cecc015b753cc37fa20193ccae6b07a76be6e30433e3b133f59"
+    },
+    {
+      "path": "third_party/rapier3d/src/pipeline/checked_restore/convert.rs",
+      "old_sha256": "6c5052129cf468e7ef686dcc2f2de76a1d9d7cef59c11b479a3b117f9a3e479a",
+      "new_sha256": "78f3aaf874139df74453def47076c6155d66869cca1abbbf9a381cb8f6b20a3d"
+    },
+    {
+      "path": "third_party/rapier3d/src/pipeline/checked_restore/mod.rs",
+      "old_sha256": "3f2637d424a0708278df157f4bfc1e57403418d032ba6695ec56beeea08fee45",
+      "new_sha256": "704682e80bc6664199380464ac1fc966a409adb4c8bc58fbbe9b78cf3aaaa9cb"
+    }
+  ],
+  "review": "Independently read/reran qualification script and original full verifier. Renderer/Cargo manifests/lock identical; incoming constructor code equal main231 and cfg excluded by both actual tested solver feature lists. No current-main rebuild claim. Prior scoped CPU/final/source review and limits preserved."
+}

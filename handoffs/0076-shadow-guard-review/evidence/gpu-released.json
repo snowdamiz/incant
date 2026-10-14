@@ -1,0 +1,26 @@
+{
+ "packet": "0076-shadow-guard-review",
+ "stage": "shadow-guard-visual",
+ "holder": "Claude0076 Opus5.5 Max bounded shadow viewport comparison",
+ "released_at": "2026-10-13T14:50:16.111356+00:00",
+ "children": 10,
+ "gpu_children": 4,
+ "stop_latched": false,
+ "stopped": null,
+ "debited": {
+  "frames": 52,
+  "ui_submissions": 0,
+  "pngs": 4
+ },
+ "debits": 2,
+ "debits_without_ledger_row": [],
+ "frames_rendered": 52,
+ "ui_submissions": 0,
+ "pngs_written": 4,
+ "ledger_sha256": "58b77135607094c578cab1fb3e0c8e0dcbccd595d963daaa5b092e98d1401a47",
+ "debits_sha256": "9e210890c25f461eab6717ef30fbc66c8099626ca1f5274687eb883a07963a95",
+ "grant_sha256_at_release": "18e483b361e4a07ad894a7046a7ea094d001c5e55cfc250d4d36f192069a88fc",
+ "owned_processes": [],
+ "ledger_pids_alive": [],
+ "note": "GPU released for root; review-ready.json untouched."
+}

@@ -1,0 +1,72 @@
+name: Renderer numerical diagnostic
+# Explicit, fixed-scope investigation only; never a release-check substitute.
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: renderer-diagnostic-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  windows-filter-coverage:
+    runs-on: windows-latest
+    timeout-minutes: 35
+    env:
+      INCANT_EXPECT_GPU_BACKEND: Dx12
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - run: rustup show
+      - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2.9.2
+        with:
+          key: Desktop editor and engine-${{ runner.os }}-${{ runner.arch }}
+          cache-bin: 'false'
+          save-if: 'false'
+      - name: Record exact source and toolchain
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force artifacts/filter-diagnostic | Out-Null
+          git rev-parse HEAD | Out-File artifacts/filter-diagnostic/source.txt
+          rustc -vV | Out-File artifacts/filter-diagnostic/toolchain.txt
+      - name: Verify strict filter contract on actual Dx12
+        id: strict_filter
+        shell: pwsh
+        run: |
+          cargo test -p incant_render --lib --profile ci --locked -j2 ambient_occlusion::filter_device_tests::actual_plane_filter_horizontal_vertical_depth_and_r8_contract -- --ignored --exact --nocapture --test-threads=1 2>&1 | Tee-Object -FilePath artifacts/filter-diagnostic/strict.log
+          $strictExit = $LASTEXITCODE
+          if ($strictExit -eq 0) {
+            $strictText = Get-Content artifacts/filter-diagnostic/strict.log -Raw
+            if ($strictText -notmatch 'test result: ok\. 1 passed; 0 failed; 0 ignored;' -or
+                $strictText -notmatch 'SSAO_FILTER_ADAPTER[^\r\n]*backend: Dx12' -or
+                $strictText -notmatch 'SSAO_FILTER projection=perspective size=19x15 submits=1 render_passes=3 checked_depth=285 checked_r8=570 observed_r8=570 contract_asserted=true' -or
+                $strictText -notmatch 'SSAO_FILTER projection=orthographic size=19x15 submits=1 render_passes=3 checked_depth=285 checked_r8=570 observed_r8=570 contract_asserted=true') {
+              Write-Host 'The exact strict filter contract did not complete both projections on Dx12.'
+              $strictExit = 1
+            }
+          }
+          $strictExit | Out-File artifacts/filter-diagnostic/strict-exit.txt
+          exit $strictExit
+      - name: Diagnose fractional viewport coverage on actual Dx12
+        if: ${{ !cancelled() && steps.strict_filter.outcome != 'skipped' }}
+        shell: pwsh
+        run: |
+          cargo test -p incant_render --lib --profile ci --locked -j2 ambient_occlusion::filter_device_tests::diagnose_plane_filter_fractional_viewport_coverage -- --ignored --exact --nocapture --test-threads=1 2>&1 | Tee-Object -FilePath artifacts/filter-diagnostic/run.log
+          $diagnosticExit = $LASTEXITCODE
+          if ($diagnosticExit -eq 0) {
+            $diagnosticText = Get-Content artifacts/filter-diagnostic/run.log -Raw
+            if ($diagnosticText -notmatch 'test result: ok\. 1 passed; 0 failed; 0 ignored;' -or
+                $diagnosticText -notmatch 'SSAO_FILTER_ADAPTER[^\r\n]*backend: Dx12' -or
+                $diagnosticText -notmatch 'SSAO_FILTER_DIAGNOSTIC observations_only=true projections=2 variants=3 submits=6 maps=6 render_passes=18 no_images=true' -or
+                [regex]::Matches($diagnosticText, 'SSAO_FILTER_RASTER projection=').Count -ne 12) {
+              Write-Error 'The exact diagnostic did not reach all required observations on Dx12.'
+              $diagnosticExit = 1
+            }
+          }
+          $diagnosticExit | Out-File artifacts/filter-diagnostic/exit.txt
+          exit $diagnosticExit
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: windows-filter-diagnostic
+          path: artifacts/filter-diagnostic
+          if-no-files-found: error
+          retention-days: 7

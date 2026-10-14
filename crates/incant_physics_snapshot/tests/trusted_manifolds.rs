@@ -33,6 +33,20 @@ mod broad_cases;
 mod narrow_checks;
 #[path = "support/ordered_capture.rs"]
 mod ordered_capture;
+#[macro_use]
+#[path = "support/world_capture.rs"]
+mod world_capture;
+#[macro_use]
+#[path = "support/world_cases.rs"]
+mod world_cases;
+#[path = "support/world_checks.rs"]
+mod world_checks;
+#[cfg(feature = "native-admission")]
+#[macro_use]
+#[path = "support/native_admission_cases.rs"]
+mod native_admission_cases;
+include!("../../../third_party/rapier2d/src/pipeline/checked_restore/island_fixture.rs");
+include!("../../../third_party/rapier2d/src/pipeline/checked_restore/narrow_fixture.rs");
 fn budget() -> Budget {
     Budget::new(MAX_ALLOCATION).unwrap()
 }
@@ -356,9 +370,15 @@ macro_rules! cases {
                     vec![Part {
                         translation: [0; 3],
                         rotation: [0, 0, 0, 1f32.to_bits()],
-                        shape: Primitive::Box {
-                            half_extents: $bits(shape.as_cuboid().unwrap().half_extents),
-                        },
+                        shape: if let Some(box_shape)=shape.as_cuboid() {
+                            Primitive::Box { half_extents:$bits(box_shape.half_extents) }
+                        } else if let Some(ball)=shape.as_ball() {
+                            Primitive::Ball { radius:ball.radius.to_bits() }
+                        } else if let Some(capsule)=shape.as_capsule() {
+                            assert_eq!(capsule.segment.a,-$rapier::math::Vector::Y*capsule.half_height());
+                            assert_eq!(capsule.segment.b,$rapier::math::Vector::Y*capsule.half_height());
+                            Primitive::CapsuleY { half_height:capsule.half_height().to_bits(),radius:capsule.radius.to_bits() }
+                        } else { panic!("unsupported actual native primitive") },
                     }]
                 };
                 let kind = if shape.as_compound().is_none() {
@@ -577,6 +597,56 @@ macro_rules! cases {
             continuation_cases!($rapier, $vector, $cuboid);
             narrow_cases!($rapier, $vector, $cuboid);
             broad_cases!($rapier, $vector, $cuboid);
+            world_capture!($rapier, $bits, $posebits);
+            manager_fixture!($vector);
+            #[test]
+            fn checked_islands_capture_actual_joined_frames() {
+                let output = std::env::var_os("INCANT_ISLAND_CAPTURE_OUTPUT").map(std::path::PathBuf::from);
+                let mut saved = 0;
+                manager_run(|tick, w, _| {
+                    if [0, 16, 32, 48].contains(&tick) {
+                        eprintln!("ISLAND_CAPTURE attempt dimension={} tick={tick}", identity().dimension as u8);
+                        let bytes = world_bytes(w);
+                        if let Some(root) = &output {
+                            let dir = root.join(format!("rapier{}d", identity().dimension as u8));
+                            std::fs::create_dir_all(&dir).unwrap();
+                            use std::io::Write;
+                            let mut f = std::fs::OpenOptions::new().write(true).create_new(true).open(dir.join(format!("{tick}.bin"))).unwrap();
+                            f.write_all(&bytes).unwrap();
+                        }
+                        saved += 1;
+                    }
+                });
+                assert_eq!(saved, 4);
+                eprintln!("ISLAND_CAPTURE dimension={} actual_steps=64 frames=4", identity().dimension as u8);
+            }
+
+            narrow_fixture!($vector, $rapier);
+            #[test]
+            fn checked_narrow_capture_actual_event_frames() {
+                let output=std::env::var_os("INCANT_NARROW_CAPTURE_OUTPUT").map(std::path::PathBuf::from);
+                let mut saved=0; let mut collisions=0; let mut forces=0;
+                narrow_run(|tick,w,_,_,events| {
+                    collisions+=events.iter().filter(|r|r[0]==0).count();
+                    forces+=events.iter().filter(|r|r[0]==1).count();
+                    if [0,16,32,48].contains(&tick) {
+                        let bytes=world_bytes(w);
+                        if let Some(root)=&output {
+                            let dir=root.join(format!("rapier{}d", identity().dimension as u8));
+                            std::fs::create_dir_all(&dir).unwrap();
+                            use std::io::Write;
+                            std::fs::OpenOptions::new().write(true).create_new(true).open(dir.join(format!("{tick}.bin"))).unwrap().write_all(&bytes).unwrap();
+                        }
+                        saved+=1;
+                    }
+                });
+                assert_eq!(saved,4); assert!(collisions>0 && forces>0);
+                eprintln!("NARROW_CAPTURE dimension={} frames=4 steps=64 collisions={collisions} forces={forces}",identity().dimension as u8);
+            }
+
+            world_cases!($rapier, $vector, $cuboid);
+            #[cfg(feature = "native-admission")]
+            native_admission_cases!($rapier, $vector, $cuboid);
             fn fixture(compound: bool) -> (PhysicsWorld, RigidBodyHandle, ColliderHandle) {
                 let mut w = PhysicsWorld::default();
                 w.integration_parameters.dt = 1. / 60.;

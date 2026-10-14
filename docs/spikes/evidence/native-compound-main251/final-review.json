@@ -1,0 +1,30 @@
+{
+  "source": "9fb4ff418e2ea484f8675aeb580791f62681e4b2",
+  "review": "accepted",
+  "scope": "Independent current-main251 composition review, no new executable tests",
+  "inspected": [
+    "manifest.json",
+    "qualification.json",
+    "verify.py",
+    "STATUS.md diff",
+    "native-compound-checkpoints.md diff"
+  ],
+  "verified": {
+    "command": "python3 docs/spikes/evidence/native-compound-main251/verify.py --verify-only --originals --local-binaries",
+    "exit": 0,
+    "reaped": true,
+    "inputs": 3155,
+    "explicit_exception": "crates/incant_source/src/tests.rs exact reviewed main251 bytes",
+    "matching_graphs": 3,
+    "read_only_checks": 8,
+    "original_records": 75,
+    "owned_sources": 79,
+    "immediate_binaries": 174
+  },
+  "findings": [],
+  "limitations": [
+    "Original test executions retain their source generations.",
+    "Persisted physics admission remains closed.",
+    "No appearance, device, performance or phase-gate acceptance."
+  ]
+}

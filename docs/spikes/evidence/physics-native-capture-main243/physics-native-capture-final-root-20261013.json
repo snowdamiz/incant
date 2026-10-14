@@ -1,0 +1,57 @@
+{
+  "reviewer": "astra-root",
+  "timestamp": "2026-10-13T19:42:06.181138+00:00",
+  "status": "accepted",
+  "scope": "Native checkpoint source009 qualification and source010 warning-only successor packet; independent source review delegated and verified",
+  "source_commit": "d6ca98670cc13afe1cb63323f1761d770e822a42",
+  "packet_commit": "924f419a3d299e4f861cd48e4848d16d4aa3e866",
+  "manifest_sha256": "e8ee4202aa5c3f61ad2456f68eb6a9ff120ea5986a776b8b4957d35892b626c7",
+  "archive_sha256": "5f62fc6106af647240c464502530f1e4fc8103aac954402b0d7350fce3a8d1e3",
+  "verified_sources": 83,
+  "verified_contemporaneous_executables": 4,
+  "tests": {
+    "native-tests-det-001": {
+      "passed": 182,
+      "summary_rows": 2,
+      "nonempty_groups": 2
+    },
+    "native-tests-fast8-001": {
+      "passed": 182,
+      "summary_rows": 2,
+      "nonempty_groups": 2
+    },
+    "snapshot-tests-det-001": {
+      "passed": 228,
+      "summary_rows": 27,
+      "nonempty_groups": 26
+    },
+    "snapshot-tests-fast8-001": {
+      "passed": 228,
+      "summary_rows": 27,
+      "nonempty_groups": 26
+    }
+  },
+  "source_reviews": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/physics-native-capture-source009-independent-20261013.json",
+      "sha256": "f43b5b74444ac96c269a6c973497f26129befb91a28f553ca867ba2479831737"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/physics-native-capture-source010-delta-independent-20261013.json",
+      "sha256": "f676ed991caf704ac60ec7e5bd1e24e7e263b501ab0f0568aafd064e981530e8"
+    }
+  ],
+  "collector_verify_only": {
+    "exit_code": 0,
+    "records": 14052,
+    "payloads": 801,
+    "sources": 83,
+    "binaries": 4
+  },
+  "findings": [],
+  "limits": [
+    "Opaque in-memory native checkpoint capability only; no persisted physics saves, ECS/session joins or device gate claim.",
+    "Broad execution is source009; source010 four-path warning-only delta separately reviewed and strict-checked. Root outer source005 qualification additionally executes both modes against source010.",
+    "Historical failed commands remain preserved and are not relabeled as successful qualification."
+  ]
+}

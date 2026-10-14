@@ -171,6 +171,30 @@ impl CameraView {
         }
         Ok(matrix)
     }
+    /// Exact view-space projection for screen effects, including the current
+    /// temporal jitter. Keep geometry matrix multiplication order unchanged.
+    pub fn projection(self, aspect: f32) -> Result<Mat4, SceneError> {
+        if !aspect.is_finite() || aspect <= 0. {
+            return Err(SceneError::CameraProjection);
+        }
+        let aspect = self
+            .pixel_resolution
+            .map_or(aspect, |[w, h]| w as f32 / h as f32);
+        let projection = if let Some(h) = self.orthographic_half_height {
+            let w = h * aspect;
+            Mat4::orthographic_rh(-w, w, -h, h, self.near, self.far)
+        } else {
+            Mat4::perspective_rh(self.fov, aspect, self.near, self.far)
+        };
+        let mut matrix = projection;
+        if self.jitter != [0.; 2] {
+            matrix = Mat4::from_translation(Vec3::new(self.jitter[0], self.jitter[1], 0.)) * matrix;
+        }
+        if !matrix.is_finite() {
+            return Err(SceneError::CameraProjection);
+        }
+        Ok(matrix)
+    }
     /// View-space half height at a forward distance, for fitting shadow receivers.
     pub fn half_height_at(self, depth: f64) -> f64 {
         self.orthographic_half_height

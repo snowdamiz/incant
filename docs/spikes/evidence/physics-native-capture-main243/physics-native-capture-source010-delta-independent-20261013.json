@@ -1,0 +1,27 @@
+{
+  "schema": 1,
+  "reviewer": "astra /root/integrate_runtime_prs",
+  "at": "2026-10-13T19:37:43.261359+00:00",
+  "status": "accepted",
+  "findings": [],
+  "head": "d6ca98670cc13afe1cb63323f1761d770e822a42",
+  "base": "f19f54ac06f21827390d7afbcddc4f77be3ec3f0",
+  "freeze": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-capture-001/capture-source-010/freeze.json",
+    "sha256": "fd71d172980aae7d3bd0c0c77e7dcb9d61a801fd15cc42fabfb52cb8ddabb6b4",
+    "verified_rows": 83
+  },
+  "delta_paths": [
+    "third_party/rapier2d/INCANT_NATIVE_CAPTURE.json",
+    "third_party/rapier2d/src/pipeline/checked_restore/world.rs",
+    "third_party/rapier3d/INCANT_NATIVE_CAPTURE.json",
+    "third_party/rapier3d/src/pipeline/checked_restore/world.rs"
+  ],
+  "scope": "Source009-to010 exact parameter-spelling and matching vendor pin closure only.",
+  "reason": "Both capture_context arguments rename world to _world and update the sole parallel-only reference, suppressing nonparallel unused-variable lint. Exact reverse substitution restores source009. No API/type/algorithm/ownership/encoding/default changes.",
+  "prior_review": {
+    "path": "/Users/andreyyurlov/.codex/incant-reviews/physics-native-capture-source009-independent-20261013.json",
+    "sha256": "f43b5b74444ac96c269a6c973497f26129befb91a28f553ca867ba2479831737"
+  },
+  "execution_limits": "No reviewer build or test. Source009 producer execution and source010 root outer execution remain separately identified."
+}

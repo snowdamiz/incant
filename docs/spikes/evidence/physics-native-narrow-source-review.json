@@ -1,0 +1,21 @@
+{
+  "at": "2026-10-13T17:20:53.187129+00:00",
+  "reviewer": "astra root",
+  "decision": "accepted private narrow source for broad qualification",
+  "freeze_sha256": "ad2f79779142f468108b3f5a581f55782d8d2f53ed2a6b0f7d159fb6a7a79eae",
+  "base": "2967a484c09dfb3c1ece0b11caceca11a2dfcc31",
+  "files": 95,
+  "owned": 39,
+  "mirrored_owned_rust": 12,
+  "basis": [
+    "Read private constructor, manifold/pair exact fields, graph buckets, typed facade and immutable graph accessor. Validated ranges guard casts and inline 2D capacities; all planned dynamic payloads charge shared permit before allocation.",
+    "Independently rehashed95live/copy sources and mirrored owned Rust; test allocator System forwarding and unwind guard are byte-equivalent.",
+    "Read native scratch clear/swap/recycle sites, populated retired-pool control, trusted compound scratch diagnostic and decoded event-rich continuation controls. Current clusters and contact/force state remain persistent.",
+    "Read primitive-only workspace/custom-dispatcher limits. No raw native decode or enclosing runtime authorization introduced."
+  ],
+  "limits": [
+    "Broad deterministic/fast8 qualification, independent final evidence review remain pending.",
+    "Other owners are trusted clones; compound scratch diagnostic does not admit compound construction.",
+    "Full-world atomic install, exclusive completed runtime authentication, stable IDs/event queues and public physics save remain unimplemented."
+  ]
+}

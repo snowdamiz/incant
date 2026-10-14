@@ -1,0 +1,76 @@
+{
+ "cpu_only": true,
+ "passed": true,
+ "tests_run": 7,
+ "records": [
+  {
+   "test": "baseline_freeze_cannot_pin_the_candidate",
+   "mismatched": [
+    "crates/a/src/lib.rs"
+   ]
+  },
+  {
+   "test": "branch_name_refused",
+   "refused_before_export": true
+  },
+  {
+   "test": "build_input_missing_stops",
+   "stop_latched": true
+  },
+  {
+   "test": "commit_other_than_plan_refused",
+   "refused_before_export": true
+  },
+  {
+   "test": "exact_committed_freezes_export_both_roles",
+   "coverage": {
+    "baseline": {
+     "build_input_roots": [
+      "crates",
+      "Cargo.toml",
+      "Cargo.lock",
+      "third_party",
+      "tools/cargo",
+      "rust-toolchain.toml",
+      ".cargo"
+     ],
+     "build_inputs": 8,
+     "freeze_rows": 10,
+     "freeze_build_input_rows": 8,
+     "inputs_missing_from_freeze": [],
+     "freeze_rows_missing_from_commit": [],
+     "mismatched": [],
+     "mismatched_count": 0,
+     "exact": true
+    },
+    "candidate": {
+     "build_input_roots": [
+      "crates",
+      "Cargo.toml",
+      "Cargo.lock",
+      "third_party",
+      "tools/cargo",
+      "rust-toolchain.toml",
+      ".cargo"
+     ],
+     "build_inputs": 8,
+     "freeze_rows": 10,
+     "freeze_build_input_rows": 8,
+     "inputs_missing_from_freeze": [],
+     "freeze_rows_missing_from_commit": [],
+     "mismatched": [],
+     "mismatched_count": 0,
+     "exact": true
+    }
+   }
+  },
+  {
+   "test": "freeze_hash_mismatch_refused",
+   "refused_before_export": true
+  },
+  {
+   "test": "missing_role_refused",
+   "refused_before_export": true
+  }
+ ]
+}

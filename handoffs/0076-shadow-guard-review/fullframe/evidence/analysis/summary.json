@@ -1,0 +1,114 @@
+{
+ "frame_hashes": {
+  "baseline-stationary": {
+   "off": "3caa4d5dedae0116d51ad1f0b2c9bf0850db7148d11ebf1eb294bf1e50a57405",
+   "on-01": "5bf8f23d340f1e46a56794399737baa9cec5e066caef1cdbd0bc379b92022668",
+   "on-02": "bb1cf0bd175cbd90663e9445800cab4139bd17686cf5e195de6751804d742cd0",
+   "on-03": "123a19257ae327cacf1c35716c1d391585f52b4b71b7f6d21bd76ef307050430",
+   "on-04": "858df6da44d9ac1fe33b32eda342a2f429e5d00c8c8df007315fecdc61b9c81c",
+   "on-05": "44292fec3a342c4b3a03a7579a29ab375eb879547a9c268640a22883b1ec2f12",
+   "on-06": "5333e0e91ca7b5e1ec733ea56bf4e0b32b32fc8d611892fef379a29160d3b348",
+   "on-07": "b05c98d1713d5f3b9887e83fc149810c1fb1182b522eb06d9778f99b5da8df9f",
+   "on-08": "32fb2059b5c1f4e92bfa5ef7774359c538c46c033beddc13578dbc0bf0241db7",
+   "on-09": "d9eff652fd8c3600aa1e4111838e45c60b130a3882f10a31f900ee87e8d40de8",
+   "on-10": "641e2300307d0c6c979f8c305791c450cd67dd219fc517f71d2c38cd5d8f3f62",
+   "on-11": "fc2dcbb61aa46f37f509344dc6fde8ccbec3e9d630fefc84eb05c10a78cb60b8",
+   "on-12": "c26545f6f50f2a77b248f48fdd5bece471813ccc802c96e118288eae0248d945",
+   "on-13": "39a54e7b27663e8fb910be3a65c0b56509388a3e92a46b5ebad26ea1f2449aae",
+   "on-14": "edbbb0912d7cb31b87a80d3651d7d6ea11cb59528ffe344d5b8381c62ecad27e",
+   "on-15": "9faf0f741502f3049859cb1f4fd60a0f2cc123cc06b4ac1a56582c2cca70550f",
+   "on-16": "9d043488d2ae04b5fb8c5e9535b9d6ceb9663e0990c935905eb54911752ad105"
+  },
+  "candidate-stationary": {
+   "off": "ba2c25770fe6a70afbb545239119fb5050a6f225a1af619524b592ffcca0f271",
+   "on-01": "5bf8f23d340f1e46a56794399737baa9cec5e066caef1cdbd0bc379b92022668",
+   "on-02": "bb1cf0bd175cbd90663e9445800cab4139bd17686cf5e195de6751804d742cd0",
+   "on-03": "123a19257ae327cacf1c35716c1d391585f52b4b71b7f6d21bd76ef307050430",
+   "on-04": "858df6da44d9ac1fe33b32eda342a2f429e5d00c8c8df007315fecdc61b9c81c",
+   "on-05": "44292fec3a342c4b3a03a7579a29ab375eb879547a9c268640a22883b1ec2f12",
+   "on-06": "5333e0e91ca7b5e1ec733ea56bf4e0b32b32fc8d611892fef379a29160d3b348",
+   "on-07": "b05c98d1713d5f3b9887e83fc149810c1fb1182b522eb06d9778f99b5da8df9f",
+   "on-08": "32fb2059b5c1f4e92bfa5ef7774359c538c46c033beddc13578dbc0bf0241db7",
+   "on-09": "d9eff652fd8c3600aa1e4111838e45c60b130a3882f10a31f900ee87e8d40de8",
+   "on-10": "641e2300307d0c6c979f8c305791c450cd67dd219fc517f71d2c38cd5d8f3f62",
+   "on-11": "fc2dcbb61aa46f37f509344dc6fde8ccbec3e9d630fefc84eb05c10a78cb60b8",
+   "on-12": "c26545f6f50f2a77b248f48fdd5bece471813ccc802c96e118288eae0248d945",
+   "on-13": "39a54e7b27663e8fb910be3a65c0b56509388a3e92a46b5ebad26ea1f2449aae",
+   "on-14": "edbbb0912d7cb31b87a80d3651d7d6ea11cb59528ffe344d5b8381c62ecad27e",
+   "on-15": "9faf0f741502f3049859cb1f4fd60a0f2cc123cc06b4ac1a56582c2cca70550f",
+   "on-16": "9d043488d2ae04b5fb8c5e9535b9d6ceb9663e0990c935905eb54911752ad105"
+  }
+ },
+ "frames": [
+  "off",
+  "on-01",
+  "on-02",
+  "on-03",
+  "on-04",
+  "on-05",
+  "on-06",
+  "on-07",
+  "on-08",
+  "on-09",
+  "on-10",
+  "on-11",
+  "on-12",
+  "on-13",
+  "on-14",
+  "on-15",
+  "on-16"
+ ],
+ "frames_differing_across_binaries": [
+  "off"
+ ],
+ "frames_identical_across_binaries": [
+  "on-01",
+  "on-02",
+  "on-03",
+  "on-04",
+  "on-05",
+  "on-06",
+  "on-07",
+  "on-08",
+  "on-09",
+  "on-10",
+  "on-11",
+  "on-12",
+  "on-13",
+  "on-14",
+  "on-15",
+  "on-16"
+ ],
+ "grant_sha256": "228b2f201cc8fc3dee50c66fbb446f9db72bc00d5073f1946e33b6e5884b865b",
+ "inputs": {
+  "baseline-stationary": "7f849663d7fe219ef2aff5b5a8288d1c64d1b229566b75e19be3bf0b7d82e82e",
+  "candidate-stationary": "90a507f002e6626b0997eaa5a0868708c004348d9211fb7cbba900263273f013"
+ },
+ "ledger_sha256": "cf9ececa783dcd7faf221e5df0c7df5b62bcf3e41c144bf2941262a894247a3f",
+ "missing_runs": [],
+ "notes": [
+  "One run per binary: a differing frame here cannot be separated from same-binary variation, which 0076 demonstrated once in 144 temporal-on frames; it is reported as observed, never passed by a modal rule."
+ ],
+ "png_rgba_hashes": {
+  "baseline-stationary": {
+   "stationary-activity.png": "f67ae0c8cf5b030db3dada6b1d0ae3ef18afa2a5a479c457d650a0fa57856fac",
+   "stationary-off.png": "3caa4d5dedae0116d51ad1f0b2c9bf0850db7148d11ebf1eb294bf1e50a57405",
+   "stationary-on-f16.png": "9d043488d2ae04b5fb8c5e9535b9d6ceb9663e0990c935905eb54911752ad105"
+  },
+  "candidate-stationary": {
+   "stationary-activity.png": "f67ae0c8cf5b030db3dada6b1d0ae3ef18afa2a5a479c457d650a0fa57856fac",
+   "stationary-off.png": "ba2c25770fe6a70afbb545239119fb5050a6f225a1af619524b592ffcca0f271",
+   "stationary-on-f16.png": "9d043488d2ae04b5fb8c5e9535b9d6ceb9663e0990c935905eb54911752ad105"
+  }
+ },
+ "pngs_identical_across_binaries": {
+  "stationary-activity.png": true,
+  "stationary-off.png": false,
+  "stationary-on-f16.png": true
+ },
+ "released_sha256": "81601b5832a20c8144a82dd74cf4fe32ee2a304bc845afba9b56107b738dd282",
+ "runs_compared": [
+  "baseline-stationary",
+  "candidate-stationary"
+ ]
+}

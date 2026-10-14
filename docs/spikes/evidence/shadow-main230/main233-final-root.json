@@ -1,0 +1,24 @@
+{
+  "at": "2026-10-13T16:46:22.753124+00:00",
+  "reviewer": "astra root",
+  "decision": "accepted scoped main233 UI-only join",
+  "head": "c222467869d92d9a917179ba8a9996720872e2b7",
+  "main": "ca21c8221e87c60c9adafa59dcda4841d2e09b95",
+  "qualifier_sha256": "6b2799d823bf680c7aad5d3a068aebdcbf74badf23244c230ba68ba6a2808135",
+  "qualification_sha256": "0c29f78e2f81433d626ceaa258e9bd3febf29514de677914bb01a4ce870da9b6",
+  "manifest_sha256": "05f5105e49333b81400dd0b8961b93c49098bb8b43fe57818070c4281e5a2d93",
+  "replay": {
+    "handle": 32573,
+    "exit": 0,
+    "reaped": true
+  },
+  "basis": [
+    "Read qualifier source and replayed prior main231 and original full assertion-only audit.",
+    "Exactly the accepted UI timeout test and five status/evidence paths enter; render/physics/tools/SDK/manifests/lock unchanged.",
+    "No fresh build/GPU claim. Prior shadow source, CPU, and scoped GPU acceptance carry forward."
+  ],
+  "limits": [
+    "Original failed comparison and unresolved non-shadow one-quantum control remain preserved.",
+    "No full temporal quality, phase gate, phone or performance acceptance."
+  ]
+}

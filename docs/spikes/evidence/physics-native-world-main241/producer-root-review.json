@@ -1,0 +1,38 @@
+{
+  "schema": "incant-independent-final-review-v1",
+  "at": "2026-10-13T18:32:36.813069+00:00",
+  "reviewer": "astra-root",
+  "decision": "accepted_scoped_private_primitive_world_producer",
+  "producer": "ea4f6e80196f49e153248d22aed83d5412cae87b",
+  "manifest_sha256": "c2bde17b948c20564c7f78e0c4576c48f87de08ed1672b3b075cecbff67114aa",
+  "archive": {
+    "path": "docs/spikes/evidence/physics-native-world-construction-logs.json.gz",
+    "sha256": "99674837e834b0a690c192d566f002fcc3b4568c926a26e649a82dcf1a653e60",
+    "records": 15706,
+    "payloads": 862
+  },
+  "verified_sources": 179,
+  "verified_binary_copies": 4,
+  "test_counts": {
+    "native-tests-det-002": 138,
+    "native-tests-fast8-002": 138,
+    "snapshot-tests-det-002": 227,
+    "snapshot-tests-fast8-002": 227,
+    "focused-final-det-003": 21,
+    "focused-final-fast8-003": 21
+  },
+  "source_review_sha256": "7a3eb1c36361dcc8b0d701d778f5f3568fa0e89e4dff6c1fafa80766241430dd",
+  "source002_review_sha256": "726689aa1937bb6c23e47af93812c9be6d601f26786311e4be086acf09159084",
+  "source003_review_sha256": "77bdc0e7c46c8f8111140e137edacd5fd0f7797f435ddb7b5f2c74a20c7984f9",
+  "audit": [
+    "Reviewed collector source and replayed lossless archive validation:15706 records,862 payloads,179 current source files,4 final source003 executable copies.",
+    "Independently matched raw final test summaries and receipt hashes; 138 native and227 snapshot per numerical mode plus21 tightened focused tests per mode.",
+    "Detected original packet incorrectly attributed source003 late-copied executable bytes to earlier source002 runs. Correction removes those four attributions; source002 executable hashes are explicitly unavailable while original source/log results remain valid. Original packet is retained in history.",
+    "Source003 changes only test assertions and pins; source002 qualified production bytes are unchanged."
+  ],
+  "limitations": [
+    "Private primitive candidate and trusted in-crate capture only; no public runtime/save capability.",
+    "Outer stable-ID,configuration,trigger-event,ECS and atomic publication work remains.",
+    "Actual allocation request evidence is local macOS and excludes allocator overhead; no device/performance/phase claim."
+  ]
+}

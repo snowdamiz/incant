@@ -13,6 +13,10 @@ mod coarena;
 mod coarena_codec;
 mod codec;
 mod collider_state;
+mod compound;
+mod compound_codec;
+#[cfg(feature = "construction")]
+pub mod construction;
 mod contact_manifolds;
 mod contact_points;
 mod contact_points_codec;
@@ -29,6 +33,7 @@ mod pipeline_state;
 mod records;
 mod rigid_owner;
 mod validate;
+mod world_boundary;
 
 pub use arena::*;
 pub use arena_codec::{decode_arena, encode_arena};
@@ -41,6 +46,7 @@ pub use coarena::*;
 pub use coarena_codec::{decode_coarena, encode_coarena};
 pub use codec::{decode, encode};
 pub use collider_state::*;
+pub use compound::*;
 pub use contact_manifolds::*;
 pub use contact_points::*;
 pub use contact_points_codec::{decode_contact_points, encode_contact_points};
@@ -57,6 +63,7 @@ pub use pipeline_state::*;
 pub use records::*;
 pub use rigid_owner::*;
 pub use validate::validate;
+pub use world_boundary::*;
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Error {

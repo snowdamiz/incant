@@ -1,0 +1,19 @@
+{
+  "at": "2026-10-13T17:29:14.818780+00:00",
+  "reviewer": "astra root",
+  "decision": "accepted narrow constructor main237 composition for scoped qualification",
+  "head": "682ce36e5b11c10f746f39c429e392947f87d05d",
+  "main": "fec0d04092c5c015de9c8cbb56802b5370f6fe37",
+  "producer": "333e7f46cf01c32eac5d10b54371d1960a72bf9d",
+  "freeze_sha256": "93e4832c2bb2f4b0ad85ca4ccd5879709395cabe2894c4191393fd6f3f5f4c19",
+  "seam_sha256": "069bc38c37b5d9494620d2da716b342b17fbce74bb445167a703387d5286e0ca",
+  "basis": [
+    "Read sole Error-order seam; declaration exactly equals main237, no encoded discriminant contract.",
+    "Independently rehashed2057current physics closure and producer git blobs;95source/pin/tool paths rehashed against copies,94producer-exact.",
+    "Private primitive-only narrow source and final producer acceptance4953/1c702 retained. No new algorithms or admission."
+  ],
+  "limits": [
+    "Current composition qualification/final review pending; deterministic andfast8fixtures must remain separatelybound.",
+    "Otherowners are trustedclones. Fullworld/runtime-save/device/phase gates remain open."
+  ]
+}
