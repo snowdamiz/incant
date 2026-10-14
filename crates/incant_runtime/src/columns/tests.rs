@@ -119,6 +119,7 @@ fn bevy_observers_see_touched_columns_and_derived_values_after_scope_exit() {
     observe_schedule.run(&mut native.world);
     assert!(native.world.resource::<Changes>().local.is_empty());
     native.with_numeric_columns(|_| ());
+    native.with_numeric_columns(|columns| columns.validate().unwrap());
     observe_schedule.run(&mut native.world);
     assert!(native.world.resource::<Changes>().global.is_empty());
 
@@ -164,4 +165,17 @@ fn bevy_observers_see_touched_columns_and_derived_values_after_scope_exit() {
             .collect::<Vec<_>>()
     );
     assert_eq!(changes.global.len(), 6);
+
+    observe_schedule.run(&mut native.world);
+    native.with_numeric_columns(|columns| {
+        columns.for_each_chunk(|_| {});
+        columns.validate().unwrap();
+    });
+    observe_schedule.run(&mut native.world);
+    let changes = native.world.resource::<Changes>();
+    assert_eq!(
+        changes.local,
+        (1..=6).map(|n| StableId([n; 16])).collect::<Vec<_>>()
+    );
+    assert_eq!(changes.global, changes.local);
 }

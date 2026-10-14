@@ -1,0 +1,3583 @@
+{
+  "version": 1,
+  "sources": {
+    "baseline": "051e0de7f26c6f38c470765ae86b8bc415d19fcc",
+    "candidate": "03bc4b987f3e553249846c4cfce991793d4d2c48"
+  },
+  "owned": {
+    "crates/incant_runtime/src/columns.rs": "faadfb9d001b7492f8f2ac766533eef4997bfe5b24739ed90b8a2b3fba83816f",
+    "crates/incant_runtime/src/columns/tests.rs": "441bd771c1e27c45b5fe99653164af3897692c3c087c8482fcc5f8591398fac1",
+    "crates/incant_runtime/src/columns/validation_tests.rs": "98c249ebbd5cfdc40e5f9e733b2e41d54e1abfbd3ed4c435c0c3693f23b7ee8a",
+    "crates/incant_runtime/src/world.rs": "022b782570ca1ae9e588c01aa45598dd8cc43055fa842e19a11439842193b7a2",
+    "crates/incant_runtime/tests/entity_identity.rs": "8ffe2f25db7455270c1d644cb5b721788dfe5bb49f3268db981eaec341c2f8c4",
+    "crates/incant_script/src/bindings.rs": "de74c4be541b87be809946e84ea4d594db528005501307c6f39889c9af6a311b"
+  },
+  "records": [
+    {
+      "path": "baseline/authoring/.incant/cache/audio/08b4d5af1f19e43c1c228d7c6ca243e8d2362f27f336f87a347cb697f6ebca28.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/.incant/cache/audio/08b4d5af1f19e43c1c228d7c6ca243e8d2362f27f336f87a347cb697f6ebca28.json",
+      "bytes": 1096,
+      "sha256": "59363a80bbac59c6f139695407f2e76c31ed47b4345b03177801b01640480139",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/.incant/cache/audio/1e53cd57bfecb7115ad888e9d40f01c6d957b7130bd6f8975a2d16100d7eda46.ipcm",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/.incant/cache/audio/1e53cd57bfecb7115ad888e9d40f01c6d957b7130bd6f8975a2d16100d7eda46.ipcm",
+      "bytes": 691200,
+      "sha256": "1e53cd57bfecb7115ad888e9d40f01c6d957b7130bd6f8975a2d16100d7eda46",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/.incant/cache/audio/2b67780f0ec6ce10736909aa8ec0a3b386d6b308382b7eaf33d40a5a28977718.ipcm",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/.incant/cache/audio/2b67780f0ec6ce10736909aa8ec0a3b386d6b308382b7eaf33d40a5a28977718.ipcm",
+      "bytes": 8777144,
+      "sha256": "2b67780f0ec6ce10736909aa8ec0a3b386d6b308382b7eaf33d40a5a28977718",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/.incant/cache/audio/2e05653f8752033823f84b711926070f2d4d237aef0087105be217b401c89637.ipcm",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/.incant/cache/audio/2e05653f8752033823f84b711926070f2d4d237aef0087105be217b401c89637.ipcm",
+      "bytes": 345600,
+      "sha256": "2e05653f8752033823f84b711926070f2d4d237aef0087105be217b401c89637",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/.incant/cache/audio/384ae95c87bd2678c8b4b80f85bca02c73035338461b423f514e25fc891f9778.ipcm",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/.incant/cache/audio/384ae95c87bd2678c8b4b80f85bca02c73035338461b423f514e25fc891f9778.ipcm",
+      "bytes": 576000,
+      "sha256": "384ae95c87bd2678c8b4b80f85bca02c73035338461b423f514e25fc891f9778",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/.incant/cache/audio/3d3e537168e5bf96036e6625c0b5d55b12cf122a4715f7e8d77baf937edc8c58.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/.incant/cache/audio/3d3e537168e5bf96036e6625c0b5d55b12cf122a4715f7e8d77baf937edc8c58.json",
+      "bytes": 561,
+      "sha256": "fd7c43cb6347a021fcfe215fa66bbd817620ff596a04bc8b32259202352921ea",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/.incant/cache/audio/4ecb37a4cf20667d8d7922971a3b609c1898cb988fb96bc0a3857546f3123c4e.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/.incant/cache/audio/4ecb37a4cf20667d8d7922971a3b609c1898cb988fb96bc0a3857546f3123c4e.json",
+      "bytes": 963,
+      "sha256": "d9ca5bd9b8d52ced2826915913857e90baea981bcdfe6d9ace42e9105929fdd2",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/.incant/cache/audio/4f31a36d777d5ce2702b9a5237742cc8a69efa73d7067afae35dff713cbb935f.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/.incant/cache/audio/4f31a36d777d5ce2702b9a5237742cc8a69efa73d7067afae35dff713cbb935f.json",
+      "bytes": 9341,
+      "sha256": "8d841a107aff6df0511e0e9dfdf8c6d36cf01928d91dd82e415b26858f58cc96",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/.incant/cache/audio/6c94df51cc76f31375178021c1fec7775a5e448cba6bde2d1120f9efa6a32c56.ipcm",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/.incant/cache/audio/6c94df51cc76f31375178021c1fec7775a5e448cba6bde2d1120f9efa6a32c56.ipcm",
+      "bytes": 138240,
+      "sha256": "6c94df51cc76f31375178021c1fec7775a5e448cba6bde2d1120f9efa6a32c56",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/.incant/cache/audio/b63a98f27758a1bb7f2a4ba44f4fb8d263230bf401520116b87e6946cdf56117.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/.incant/cache/audio/b63a98f27758a1bb7f2a4ba44f4fb8d263230bf401520116b87e6946cdf56117.json",
+      "bytes": 764,
+      "sha256": "d5748ced504a28a21d72eaf9c0b26c3fee6ff900c07ea491c06b79c4c5680642",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/.incant/cache/fonts/0e1cd7265c7a2fa6109d995205dd8e070723bb824fe28daa8299ba1105063a1f.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/.incant/cache/fonts/0e1cd7265c7a2fa6109d995205dd8e070723bb824fe28daa8299ba1105063a1f.json",
+      "bytes": 323,
+      "sha256": "0538183b4a25a91d05296686e8092634f8c572c4c1dc34329c4685843c7661e1",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/.incant/cache/fonts/3127f0b873387ee37e2040135a06e9e9c05030f509eb63689529becf28b50384.ifont",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/.incant/cache/fonts/3127f0b873387ee37e2040135a06e9e9c05030f509eb63689529becf28b50384.ifont",
+      "bytes": 310300,
+      "sha256": "48804b712c66bb0ce00b2cc3272c7be18171810a3bb0555e3d247544951e0fdc",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/.incant/cache/fonts/74f2395f9b27e4c4ff06183b1baed5684ce4a090490bd00f42637547cca5da0f.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/.incant/cache/fonts/74f2395f9b27e4c4ff06183b1baed5684ce4a090490bd00f42637547cca5da0f.json",
+      "bytes": 317,
+      "sha256": "76b2977309e2485a6007bcb9c6e75df3a2e161dc576ebbf6be00f6b8b961d0f0",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/.incant/cache/fonts/9ec258961c8800c709f05586b6fca8a47061f3f776ac088bb87fbb2a462c116e.ifont",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/.incant/cache/fonts/9ec258961c8800c709f05586b6fca8a47061f3f776ac088bb87fbb2a462c116e.ifont",
+      "bytes": 13812,
+      "sha256": "db12e66306387bf4fdcf4b6be1fc31eed9f136e60211061e65cc97ba71500311",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/.incant/cache/fonts/ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56.ifont",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/.incant/cache/fonts/ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56.ifont",
+      "bytes": 765788,
+      "sha256": "8bd20a742cc19c0fe65b106d983ea1ed816c4cd5ca1c3d50bdc4d05aeb5f8e7a",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/.incant/cache/fonts/efbee025bcb27036123566525a911cd346bbe425cceb413eb800661df6b65767.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/.incant/cache/fonts/efbee025bcb27036123566525a911cd346bbe425cceb413eb800661df6b65767.json",
+      "bytes": 318,
+      "sha256": "ce4cd118624295e30ed4514c80bfad49c379702ead14327faf7ff92184d6034a",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/.incant/cache/models/018d021c673a74b618fc3516d8ab4e64b32a88f6c8323d0d84395e684d811c13.incmodel",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/.incant/cache/models/018d021c673a74b618fc3516d8ab4e64b32a88f6c8323d0d84395e684d811c13.incmodel",
+      "bytes": 25810,
+      "sha256": "509cf7c24253b675ed0a3d36ae344d35272050107a97c4aeae4db79417d132e7",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/.incant/cache/models/1649bb952607a07a912661374fa6a8c104a261d625b339a5aa2e096f52970bec.incmodel",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/.incant/cache/models/1649bb952607a07a912661374fa6a8c104a261d625b339a5aa2e096f52970bec.incmodel",
+      "bytes": 18726133,
+      "sha256": "b32c0ae9a0305abd7610713aa77a270e320090bbb31be1792a47f857ec939f99",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/.incant/cache/models/b85f1046e4d28277bd6bb792cdcff4dc070268bb95b3b8040b697bbf7f631262.incmodel",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/.incant/cache/models/b85f1046e4d28277bd6bb792cdcff4dc070268bb95b3b8040b697bbf7f631262.incmodel",
+      "bytes": 181633,
+      "sha256": "80dbf175a19dfda0db4c8e5c1992657fd435b6778d0b49d056755d088563e778",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/.incant/cache/models/da2588e81cf9f61d9b06dec86cbf644e5322cdc48594af5c9ac4e9aa08a6e1ad.incmodel",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/.incant/cache/models/da2588e81cf9f61d9b06dec86cbf644e5322cdc48594af5c9ac4e9aa08a6e1ad.incmodel",
+      "bytes": 207725,
+      "sha256": "a20e33175acb4af55ddad2168307ce3e0c02a23127566cac769e6f290bf799bf",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/.incant/cache/models/ec9f2569b551d61c9552dd311c3190e9dd262c96b8823e1f3c3c04819811bf99.incmodel",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/.incant/cache/models/ec9f2569b551d61c9552dd311c3190e9dd262c96b8823e1f3c3c04819811bf99.incmodel",
+      "bytes": 2832033,
+      "sha256": "88e2f2c56975f6bde0c0e7c131e870bf783fb86384a27d55b20fd40d40d77621",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/.incant/cache/textures/17da802ffd07a79a3041b9ba748180e8eccde82c6461eb24ce092cb378e94333.ktx2",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/.incant/cache/textures/17da802ffd07a79a3041b9ba748180e8eccde82c6461eb24ce092cb378e94333.ktx2",
+      "bytes": 699516,
+      "sha256": "17da802ffd07a79a3041b9ba748180e8eccde82c6461eb24ce092cb378e94333",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/.incant/cache/textures/5c2d2703c28f3deb6e566781de8833f45f442888602c7a72872b3ea7f5b141c8.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/.incant/cache/textures/5c2d2703c28f3deb6e566781de8833f45f442888602c7a72872b3ea7f5b141c8.json",
+      "bytes": 413,
+      "sha256": "f0bd2e231b9cc1839811dd7faf3a748bb2a41df3e95e84e45c727b5be5a5d840",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/.incant-source-transactions/01M4W2ZS8HBYETF98R514TCYW8.previous",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/.incant-source-transactions/01M4W2ZS8HBYETF98R514TCYW8.previous",
+      "bytes": 16096,
+      "sha256": "8d5f5feec2235f1718235901c6073f7425acf971a4e087755a0b3833ecb79698",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/.incant-source-transactions/01M4W2ZT8FH3JJ1V2SCAC2XWA9.old-receipt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/.incant-source-transactions/01M4W2ZT8FH3JJ1V2SCAC2XWA9.old-receipt",
+      "bytes": 26,
+      "sha256": "c7f20dcb63fc1a69d53cce013f3eb603c86c8ec9440fa0e559ce6107484ae387",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/.incant-source-transactions/01M4W2ZT8FH3JJ1V2SCAC2XWA9.previous",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/.incant-source-transactions/01M4W2ZT8FH3JJ1V2SCAC2XWA9.previous",
+      "bytes": 2509,
+      "sha256": "861e425066d0d7668451876c8c8cf0a930e8724c9cda8f5ffbcd99f8501ee38e",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/.incant-source-transactions/01M4W2ZV7JG48C67P7SSFQ8MAC.old-receipt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/.incant-source-transactions/01M4W2ZV7JG48C67P7SSFQ8MAC.old-receipt",
+      "bytes": 26,
+      "sha256": "1b8d419b188fb9d79c431d6515954d04662b10cf4f160c92b04496373be7b6d7",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/.incant-source-transactions/01M4W2ZV7JG48C67P7SSFQ8MAC.previous",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/.incant-source-transactions/01M4W2ZV7JG48C67P7SSFQ8MAC.previous",
+      "bytes": 3513,
+      "sha256": "7285e9009633052ba86ee0996c87f58097eb47fdaf0a73df10f42597b0119f1a",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/.incant-source-transactions/01M4W2ZW1Y3GVNSM224C67FEV3.old-receipt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/.incant-source-transactions/01M4W2ZW1Y3GVNSM224C67FEV3.old-receipt",
+      "bytes": 26,
+      "sha256": "2c27848882b54a85bcac3c53513734eb49601d24d4a2d2b195e58d39208ed8c1",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/.incant-source-transactions/01M4W2ZW1Y3GVNSM224C67FEV3.previous",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/.incant-source-transactions/01M4W2ZW1Y3GVNSM224C67FEV3.previous",
+      "bytes": 16574,
+      "sha256": "f471293cf6a3b6a355f0f2c8ec6406bf5f3942f438411121b2e63ae6e6f31095",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/.incant-source-transactions/01M4W2ZWZ9232C2ERBWYBR5Y04.old-receipt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/.incant-source-transactions/01M4W2ZWZ9232C2ERBWYBR5Y04.old-receipt",
+      "bytes": 26,
+      "sha256": "322a1c67f12efe894bc4351b30ce697f89831d5834304c6c014b4900e518cf96",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/.incant-source-transactions/01M4W2ZWZ9232C2ERBWYBR5Y04.previous",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/.incant-source-transactions/01M4W2ZWZ9232C2ERBWYBR5Y04.previous",
+      "bytes": 16096,
+      "sha256": "8d5f5feec2235f1718235901c6073f7425acf971a4e087755a0b3833ecb79698",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/.incant-source-transactions/01M4W2ZXRN2TA8HSNZV6B6R2WQ.old-receipt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/.incant-source-transactions/01M4W2ZXRN2TA8HSNZV6B6R2WQ.old-receipt",
+      "bytes": 26,
+      "sha256": "5bdf65bfcc5fee806848d94a4dd6369a8c9b34f7ba82f7738fed5de8aa36e62b",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/.incant-source-transactions/01M4W2ZXRN2TA8HSNZV6B6R2WQ.previous",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/.incant-source-transactions/01M4W2ZXRN2TA8HSNZV6B6R2WQ.previous",
+      "bytes": 2509,
+      "sha256": "861e425066d0d7668451876c8c8cf0a930e8724c9cda8f5ffbcd99f8501ee38e",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/.incant-source-transactions/lock",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/.incant-source-transactions/lock",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/.incant-source-transactions/receipt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/.incant-source-transactions/receipt",
+      "bytes": 26,
+      "sha256": "a7bb96b21ebdcf753989cd95ac49e02361d8494d381432dc124dea281293423f",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/art/canyon.bin",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/art/canyon.bin",
+      "bytes": 3161612,
+      "sha256": "c32b0431a835c4c998cd69ff850291e2ed888ca0fe84e0907d1afebeba90e08d",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/art/canyon.gltf",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/art/canyon.gltf",
+      "bytes": 22404,
+      "sha256": "a8622cbd4caea047abd781309fc3869f5207117815ad65631c5e52d317ce30f7",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/art/cliff_albedo.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/art/cliff_albedo.png",
+      "bytes": 388767,
+      "sha256": "d1fed013a536eb47c40252b5e5f8375f4209509ed51ed7741950eb365f917069",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/art/cliff_normal.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/art/cliff_normal.png",
+      "bytes": 453616,
+      "sha256": "db93eb916ad971a8ee32ce3a5985d1c88115d113932ac7a358dc9702c7084939",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/art/core_albedo.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/art/core_albedo.png",
+      "bytes": 6691,
+      "sha256": "b1c535ceafd2c64e03e79c3e46eaa63cab18df359bbf77a70292af7d7e68946e",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/art/core_emissive.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/art/core_emissive.png",
+      "bytes": 8040,
+      "sha256": "42576b50d661af3f3940eeadc4217122470263695dcb0a7ce9509c515b9d97d1",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/art/cue_hurt.wav",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/art/cue_hurt.wav",
+      "bytes": 34604,
+      "sha256": "209bf03bf0d9eeedf13d67a9bf5e526b8b9d76b90350c116a07b304d6b2212d9",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/art/cue_lost.wav",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/art/cue_lost.wav",
+      "bytes": 144044,
+      "sha256": "d5757fbfa8f6b4e3e427c0b2748c9343011088ea520715bc91a176ddfa3ac465",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/art/cue_pickup.wav",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/art/cue_pickup.wav",
+      "bytes": 86444,
+      "sha256": "a9cfe5207be237b6976cdafb2944b0f71e63c1a73c7f7608f629ee96bbbcd0c9",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/art/cue_won.wav",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/art/cue_won.wav",
+      "bytes": 172844,
+      "sha256": "8b17713a334cb6d830310985b31cbb3c6c7653922e0c03ce121552765a6541e0",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/art/far_albedo.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/art/far_albedo.png",
+      "bytes": 7178,
+      "sha256": "1f09709ceb8101b85a6ba8b39f4734688624c75ebf4415d69208ad5081b2c902",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/art/floor_albedo.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/art/floor_albedo.png",
+      "bytes": 842112,
+      "sha256": "81445089016eba8e5d992f5d058890a75d06486f5468542df5eededd2e4c3c87",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/art/manifest.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/art/manifest.json",
+      "bytes": 3722,
+      "sha256": "19d87aca92ee147526a7eb1cfdcc648e6bbe949a37a127a61f3687a695632956",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/art/mesa_loop.wav",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/art/mesa_loop.wav",
+      "bytes": 4388616,
+      "sha256": "4f80337e2eef1ec9b414ae8959435fd114a6d77bb85b10022aef7f3abb968816",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/art/mite.bin",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/art/mite.bin",
+      "bytes": 44724,
+      "sha256": "2809da2175266acf004be462557404623f727e84c4400fc91363d37c2d9220e7",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/art/mite.gltf",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/art/mite.gltf",
+      "bytes": 5676,
+      "sha256": "62d807da1b4623e69670e467ef045386df1dc83c999aa1bdb45abf5814c868e2",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/art/mite_albedo.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/art/mite_albedo.png",
+      "bytes": 7592,
+      "sha256": "d3e231c3435475dd201652dc7e50ab835b623ed50042c6d14eba088193c65fde",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/art/mite_emissive.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/art/mite_emissive.png",
+      "bytes": 7495,
+      "sha256": "5298667c8f706a5a4418ae08bd1e93d943e5a382d36b40730991bf2d43befe76",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/art/pad_albedo.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/art/pad_albedo.png",
+      "bytes": 63444,
+      "sha256": "d0cfa2eeaf175365e390491051d05c7203e0b6dc2afc8b7fd950f927a1a3f002",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/art/rock_albedo.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/art/rock_albedo.png",
+      "bytes": 59674,
+      "sha256": "c6ea897e8c3811c4ce737d0dabd2d0b85aa4018a21e97aa8a8be414895ff9f6f",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/art/sample.bin",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/art/sample.bin",
+      "bytes": 9428,
+      "sha256": "5f17bd5753223c313f622778e8eb6da801e93fe90ec85128c845a17b92c599fc",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/art/sample.gltf",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/art/sample.gltf",
+      "bytes": 4325,
+      "sha256": "6eda3386082556270d7dd567d02fda5f7e2808792705786c8729d892078179ef",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/art/sky.bin",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/art/sky.bin",
+      "bytes": 66848,
+      "sha256": "5908df68041666952ab3808fbcd5578b960595cc7a5258d0bd4b41c83ea6d27f",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/art/sky.gltf",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/art/sky.gltf",
+      "bytes": 1887,
+      "sha256": "d752767b74d4bc39329dbd022c314bd3298c4529c3b5a325f8bcf29d03168e08",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/art/sky_dome.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/art/sky_dome.png",
+      "bytes": 148023,
+      "sha256": "dea2f93735ff70b2e6cf543f4bcdfdb9324e4cb72a31abe3cfdd5e0c047d69c0",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/art/sky_environment.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/art/sky_environment.png",
+      "bytes": 59757,
+      "sha256": "8bf279ee439137e9e1da9d1dc1f1868477b4f398e607a127524dc0d209571d82",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/art/surveyor.bin",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/art/surveyor.bin",
+      "bytes": 48372,
+      "sha256": "bfef4a6f7af144a221a86ae9977df320942ff1fcb252ee1f7d30ae9e28d1da5f",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/art/surveyor.gltf",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/art/surveyor.gltf",
+      "bytes": 9517,
+      "sha256": "8633af82a9e2e247c8c1509ef30f1f41e6866687b492c8329361fdec8d084003",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/art/top_albedo.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/art/top_albedo.png",
+      "bytes": 229296,
+      "sha256": "0456e5dd8c177da4f1296428356cba8d94815e69568342086def5e88cf107d8a",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/art/top_normal.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/art/top_normal.png",
+      "bytes": 121528,
+      "sha256": "5e9171d91392549a8e07b852273b0de5aab1a8c398ce1121712ff1e344ffd5ab",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/art/valley.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/art/valley.png",
+      "bytes": 10020,
+      "sha256": "c866ba77b019320be6fea2c8f4d5d988664f9816c20b98a8c1ef007dfb57d93e",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/core.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/core.json",
+      "bytes": 9579385,
+      "sha256": "027621691da3043e25cd30a02c76a8fb92f1a4464448c3c6c7d04e6f8b38c30b",
+      "embedded": true
+    },
+    {
+      "path": "baseline/authoring/fonts/CoreSampleSC-Regular.ttf",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/fonts/CoreSampleSC-Regular.ttf",
+      "bytes": 13764,
+      "sha256": "9ec258961c8800c709f05586b6fca8a47061f3f776ac088bb87fbb2a462c116e",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/fonts/Inter-Regular.ttf",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/fonts/Inter-Regular.ttf",
+      "bytes": 310252,
+      "sha256": "3127f0b873387ee37e2040135a06e9e9c05030f509eb63689529becf28b50384",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/fonts/NotoSansArabic.ttf",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/fonts/NotoSansArabic.ttf",
+      "bytes": 765740,
+      "sha256": "ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/gameplay.ts",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/gameplay.ts",
+      "bytes": 16574,
+      "sha256": "f471293cf6a3b6a355f0f2c8ec6406bf5f3942f438411121b2e63ae6e6f31095",
+      "embedded": true
+    },
+    {
+      "path": "baseline/authoring/source.journal.jsonl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/source.journal.jsonl",
+      "bytes": 99023236,
+      "sha256": "b7d34540a973adf96c65cec922270085fe1c29e777f53c4247e31e58021478eb",
+      "embedded": false
+    },
+    {
+      "path": "baseline/authoring/stress.ts",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/authoring/stress.ts",
+      "bytes": 3513,
+      "sha256": "7285e9009633052ba86ee0996c87f58097eb47fdaf0a73df10f42597b0119f1a",
+      "embedded": true
+    },
+    {
+      "path": "baseline/calls.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/calls.json",
+      "bytes": 4304,
+      "sha256": "a64dc6763d19f745194babd96e292c7ec483d367b5fea9934dc6089305586f2f",
+      "embedded": true
+    },
+    {
+      "path": "baseline/command-00-stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/command-00-stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true
+    },
+    {
+      "path": "baseline/command-00-stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/command-00-stdout.log",
+      "bytes": 77,
+      "sha256": "1dc5ff25a027f5c0a04ac183e96b6665181272c327130fb0663c5c1be8aad81d",
+      "embedded": true
+    },
+    {
+      "path": "baseline/command-01-stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/command-01-stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true
+    },
+    {
+      "path": "baseline/command-01-stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/command-01-stdout.log",
+      "bytes": 192,
+      "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "embedded": true
+    },
+    {
+      "path": "baseline/command-02-stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/command-02-stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true
+    },
+    {
+      "path": "baseline/command-02-stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/command-02-stdout.log",
+      "bytes": 67,
+      "sha256": "b22adee5ac5a93ade5d52f11392360e1c1a95ef2add2bd03365e896e8f1688e1",
+      "embedded": true
+    },
+    {
+      "path": "baseline/command-03-stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/command-03-stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true
+    },
+    {
+      "path": "baseline/command-03-stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/command-03-stdout.log",
+      "bytes": 30332,
+      "sha256": "5d4e56f699b32b97a015b1bb2966453b46d4ee7d556a1fc4fedae01119757cb7",
+      "embedded": true
+    },
+    {
+      "path": "baseline/command-04-stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/command-04-stderr.log",
+      "bytes": 1395202,
+      "sha256": "f40a14415fac57c58745aa57abe08567d67dee1c42f06fa7518ad763eb651d8a",
+      "embedded": true
+    },
+    {
+      "path": "baseline/command-04-stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/command-04-stdout.log",
+      "bytes": 33299498,
+      "sha256": "20df700bb6f4fd05b89e61409b1ce936814daec56f490144b0e71c2bf5c32636",
+      "embedded": true
+    },
+    {
+      "path": "baseline/command-05-stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/command-05-stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true
+    },
+    {
+      "path": "baseline/command-05-stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/command-05-stdout.log",
+      "bytes": 1823262,
+      "sha256": "8cb3a29668b8786937036a6862878099f197300702ab3fa36c8dae1e78bac6e4",
+      "embedded": true
+    },
+    {
+      "path": "baseline/command-06-stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/command-06-stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true
+    },
+    {
+      "path": "baseline/command-06-stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/command-06-stdout.log",
+      "bytes": 2226,
+      "sha256": "a6de4ceddefb4527c5fe986636466a29773397d03f4503d56c3061501f176806",
+      "embedded": true
+    },
+    {
+      "path": "baseline/commands.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/commands.json",
+      "bytes": 5202,
+      "sha256": "5ea87e42d2d9e3d08f02a9ac75d44fba702501f090acde9cd2f8cb9e9f9e4f04",
+      "embedded": true
+    },
+    {
+      "path": "baseline/export-result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/export-result.json",
+      "bytes": 268,
+      "sha256": "f6d001f3d1e7bad205b05ee998316c73a6f2cfc68e5c8b12949832964ab6d8d7",
+      "embedded": true
+    },
+    {
+      "path": "baseline/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/freeze.json",
+      "bytes": 3095583,
+      "sha256": "9f4c37c9399689e9bd3c51f99d479b65cdabe88794a9defec2ffea7f51a9df9a",
+      "embedded": true
+    },
+    {
+      "path": "baseline/functional-win/command.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/functional-win/command.json",
+      "bytes": 5851,
+      "sha256": "a7f793f9228a7a40e3f046ea534f42105d132802aea257eca1f2133285b24770",
+      "embedded": true
+    },
+    {
+      "path": "baseline/functional-win/input.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/functional-win/input.json",
+      "bytes": 27753,
+      "sha256": "4fbfffad568d1b7b8eae3b7b9041579fce6f0e8e67c83a66f76c9f78a1c5fcbf",
+      "embedded": true
+    },
+    {
+      "path": "baseline/functional-win/observe.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/functional-win/observe.json",
+      "bytes": 2893,
+      "sha256": "36915362c461c0772414c2b97aa80d522b6ada851e94e0ca718057d700e1f89b",
+      "embedded": true
+    },
+    {
+      "path": "baseline/functional-win/output.pcm",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/functional-win/output.pcm",
+      "bytes": 13798400,
+      "sha256": "ccabf2c68b6388ac554ac3efb5609ddf6b4a45d1a3f316891d5f344094e99ee3",
+      "embedded": false
+    },
+    {
+      "path": "baseline/functional-win/stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/functional-win/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true
+    },
+    {
+      "path": "baseline/functional-win/stdout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/functional-win/stdout.json",
+      "bytes": 8455,
+      "sha256": "37ccafc52a22a341c7776961e5171f48c988638224445395fe94db55da2f4279",
+      "embedded": true
+    },
+    {
+      "path": "baseline/functional.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/functional.py",
+      "bytes": 2282,
+      "sha256": "0cc87d16026369802aa55be156581dc90280799532dda78a291b54736ca2a496",
+      "embedded": true
+    },
+    {
+      "path": "baseline/npm-test-tools.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/npm-test-tools.json",
+      "bytes": 1101,
+      "sha256": "57554b738593a324734dd36108fcc165c28f92158a7a8abddca8495a22b54f20",
+      "embedded": true
+    },
+    {
+      "path": "baseline/npm-test-tools.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/npm-test-tools.stderr",
+      "bytes": 66175,
+      "sha256": "251e8e99cdd421d877010d0d82c0cfc2617b3f9bee941f59a83814b99cfe8cdf",
+      "embedded": true
+    },
+    {
+      "path": "baseline/npm-test-tools.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/npm-test-tools.stdout",
+      "bytes": 6740,
+      "sha256": "1763fb7f514c75468ffe55e5ffa5d4cf4eb7034cf78460bb17d52cd8082d5c58",
+      "embedded": true
+    },
+    {
+      "path": "baseline/package/build.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/package/build.log",
+      "bytes": 1395202,
+      "sha256": "f40a14415fac57c58745aa57abe08567d67dee1c42f06fa7518ad763eb651d8a",
+      "embedded": true
+    },
+    {
+      "path": "baseline/package/export.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/package/export.json",
+      "bytes": 18235,
+      "sha256": "9cd39986c81eb4541733f3173f71227f2fa20fb310b5a7eb18e388c9f6635cad",
+      "embedded": true
+    },
+    {
+      "path": "baseline/package/normal-dependencies.txt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/package/normal-dependencies.txt",
+      "bytes": 30332,
+      "sha256": "5d4e56f699b32b97a015b1bb2966453b46d4ee7d556a1fc4fedae01119757cb7",
+      "embedded": true
+    },
+    {
+      "path": "baseline/package/player/data/audio/08b4d5af1f19e43c1c228d7c6ca243e8d2362f27f336f87a347cb697f6ebca28.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/package/player/data/audio/08b4d5af1f19e43c1c228d7c6ca243e8d2362f27f336f87a347cb697f6ebca28.json",
+      "bytes": 1096,
+      "sha256": "59363a80bbac59c6f139695407f2e76c31ed47b4345b03177801b01640480139",
+      "embedded": false
+    },
+    {
+      "path": "baseline/package/player/data/audio/1e53cd57bfecb7115ad888e9d40f01c6d957b7130bd6f8975a2d16100d7eda46.ipcm",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/package/player/data/audio/1e53cd57bfecb7115ad888e9d40f01c6d957b7130bd6f8975a2d16100d7eda46.ipcm",
+      "bytes": 691200,
+      "sha256": "1e53cd57bfecb7115ad888e9d40f01c6d957b7130bd6f8975a2d16100d7eda46",
+      "embedded": false
+    },
+    {
+      "path": "baseline/package/player/data/audio/2b67780f0ec6ce10736909aa8ec0a3b386d6b308382b7eaf33d40a5a28977718.ipcm",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/package/player/data/audio/2b67780f0ec6ce10736909aa8ec0a3b386d6b308382b7eaf33d40a5a28977718.ipcm",
+      "bytes": 8777144,
+      "sha256": "2b67780f0ec6ce10736909aa8ec0a3b386d6b308382b7eaf33d40a5a28977718",
+      "embedded": false
+    },
+    {
+      "path": "baseline/package/player/data/audio/2e05653f8752033823f84b711926070f2d4d237aef0087105be217b401c89637.ipcm",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/package/player/data/audio/2e05653f8752033823f84b711926070f2d4d237aef0087105be217b401c89637.ipcm",
+      "bytes": 345600,
+      "sha256": "2e05653f8752033823f84b711926070f2d4d237aef0087105be217b401c89637",
+      "embedded": false
+    },
+    {
+      "path": "baseline/package/player/data/audio/384ae95c87bd2678c8b4b80f85bca02c73035338461b423f514e25fc891f9778.ipcm",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/package/player/data/audio/384ae95c87bd2678c8b4b80f85bca02c73035338461b423f514e25fc891f9778.ipcm",
+      "bytes": 576000,
+      "sha256": "384ae95c87bd2678c8b4b80f85bca02c73035338461b423f514e25fc891f9778",
+      "embedded": false
+    },
+    {
+      "path": "baseline/package/player/data/audio/3d3e537168e5bf96036e6625c0b5d55b12cf122a4715f7e8d77baf937edc8c58.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/package/player/data/audio/3d3e537168e5bf96036e6625c0b5d55b12cf122a4715f7e8d77baf937edc8c58.json",
+      "bytes": 561,
+      "sha256": "fd7c43cb6347a021fcfe215fa66bbd817620ff596a04bc8b32259202352921ea",
+      "embedded": false
+    },
+    {
+      "path": "baseline/package/player/data/audio/4ecb37a4cf20667d8d7922971a3b609c1898cb988fb96bc0a3857546f3123c4e.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/package/player/data/audio/4ecb37a4cf20667d8d7922971a3b609c1898cb988fb96bc0a3857546f3123c4e.json",
+      "bytes": 963,
+      "sha256": "d9ca5bd9b8d52ced2826915913857e90baea981bcdfe6d9ace42e9105929fdd2",
+      "embedded": false
+    },
+    {
+      "path": "baseline/package/player/data/audio/4f31a36d777d5ce2702b9a5237742cc8a69efa73d7067afae35dff713cbb935f.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/package/player/data/audio/4f31a36d777d5ce2702b9a5237742cc8a69efa73d7067afae35dff713cbb935f.json",
+      "bytes": 9341,
+      "sha256": "8d841a107aff6df0511e0e9dfdf8c6d36cf01928d91dd82e415b26858f58cc96",
+      "embedded": false
+    },
+    {
+      "path": "baseline/package/player/data/audio/6c94df51cc76f31375178021c1fec7775a5e448cba6bde2d1120f9efa6a32c56.ipcm",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/package/player/data/audio/6c94df51cc76f31375178021c1fec7775a5e448cba6bde2d1120f9efa6a32c56.ipcm",
+      "bytes": 138240,
+      "sha256": "6c94df51cc76f31375178021c1fec7775a5e448cba6bde2d1120f9efa6a32c56",
+      "embedded": false
+    },
+    {
+      "path": "baseline/package/player/data/audio/b63a98f27758a1bb7f2a4ba44f4fb8d263230bf401520116b87e6946cdf56117.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/package/player/data/audio/b63a98f27758a1bb7f2a4ba44f4fb8d263230bf401520116b87e6946cdf56117.json",
+      "bytes": 764,
+      "sha256": "d5748ced504a28a21d72eaf9c0b26c3fee6ff900c07ea491c06b79c4c5680642",
+      "embedded": false
+    },
+    {
+      "path": "baseline/package/player/data/clips.bin",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/package/player/data/clips.bin",
+      "bytes": 252,
+      "sha256": "1047a8c04273bb4b8157d4c933e93de4aab1128b7891d0e195431722f369d865",
+      "embedded": false
+    },
+    {
+      "path": "baseline/package/player/data/empty-input.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/package/player/data/empty-input.json",
+      "bytes": 103,
+      "sha256": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+      "embedded": false
+    },
+    {
+      "path": "baseline/package/player/data/fonts/0e1cd7265c7a2fa6109d995205dd8e070723bb824fe28daa8299ba1105063a1f.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/package/player/data/fonts/0e1cd7265c7a2fa6109d995205dd8e070723bb824fe28daa8299ba1105063a1f.json",
+      "bytes": 323,
+      "sha256": "0538183b4a25a91d05296686e8092634f8c572c4c1dc34329c4685843c7661e1",
+      "embedded": false
+    },
+    {
+      "path": "baseline/package/player/data/fonts/3127f0b873387ee37e2040135a06e9e9c05030f509eb63689529becf28b50384.ifont",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/package/player/data/fonts/3127f0b873387ee37e2040135a06e9e9c05030f509eb63689529becf28b50384.ifont",
+      "bytes": 310300,
+      "sha256": "48804b712c66bb0ce00b2cc3272c7be18171810a3bb0555e3d247544951e0fdc",
+      "embedded": false
+    },
+    {
+      "path": "baseline/package/player/data/fonts/74f2395f9b27e4c4ff06183b1baed5684ce4a090490bd00f42637547cca5da0f.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/package/player/data/fonts/74f2395f9b27e4c4ff06183b1baed5684ce4a090490bd00f42637547cca5da0f.json",
+      "bytes": 317,
+      "sha256": "76b2977309e2485a6007bcb9c6e75df3a2e161dc576ebbf6be00f6b8b961d0f0",
+      "embedded": false
+    },
+    {
+      "path": "baseline/package/player/data/fonts/9ec258961c8800c709f05586b6fca8a47061f3f776ac088bb87fbb2a462c116e.ifont",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/package/player/data/fonts/9ec258961c8800c709f05586b6fca8a47061f3f776ac088bb87fbb2a462c116e.ifont",
+      "bytes": 13812,
+      "sha256": "db12e66306387bf4fdcf4b6be1fc31eed9f136e60211061e65cc97ba71500311",
+      "embedded": false
+    },
+    {
+      "path": "baseline/package/player/data/fonts/ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56.ifont",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/package/player/data/fonts/ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56.ifont",
+      "bytes": 765788,
+      "sha256": "8bd20a742cc19c0fe65b106d983ea1ed816c4cd5ca1c3d50bdc4d05aeb5f8e7a",
+      "embedded": false
+    },
+    {
+      "path": "baseline/package/player/data/fonts/efbee025bcb27036123566525a911cd346bbe425cceb413eb800661df6b65767.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/package/player/data/fonts/efbee025bcb27036123566525a911cd346bbe425cceb413eb800661df6b65767.json",
+      "bytes": 318,
+      "sha256": "ce4cd118624295e30ed4514c80bfad49c379702ead14327faf7ff92184d6034a",
+      "embedded": false
+    },
+    {
+      "path": "baseline/package/player/data/input-actions.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/package/player/data/input-actions.json",
+      "bytes": 859,
+      "sha256": "aa13d11e49bbd03a2bfb59cc64b60701f83e5b1b4985f4272c12b4640dd12bdf",
+      "embedded": false
+    },
+    {
+      "path": "baseline/package/player/data/models/018d021c673a74b618fc3516d8ab4e64b32a88f6c8323d0d84395e684d811c13.incmodel",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/package/player/data/models/018d021c673a74b618fc3516d8ab4e64b32a88f6c8323d0d84395e684d811c13.incmodel",
+      "bytes": 25810,
+      "sha256": "509cf7c24253b675ed0a3d36ae344d35272050107a97c4aeae4db79417d132e7",
+      "embedded": false
+    },
+    {
+      "path": "baseline/package/player/data/models/1649bb952607a07a912661374fa6a8c104a261d625b339a5aa2e096f52970bec.incmodel",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/package/player/data/models/1649bb952607a07a912661374fa6a8c104a261d625b339a5aa2e096f52970bec.incmodel",
+      "bytes": 18726133,
+      "sha256": "b32c0ae9a0305abd7610713aa77a270e320090bbb31be1792a47f857ec939f99",
+      "embedded": false
+    },
+    {
+      "path": "baseline/package/player/data/models/b85f1046e4d28277bd6bb792cdcff4dc070268bb95b3b8040b697bbf7f631262.incmodel",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/package/player/data/models/b85f1046e4d28277bd6bb792cdcff4dc070268bb95b3b8040b697bbf7f631262.incmodel",
+      "bytes": 181633,
+      "sha256": "80dbf175a19dfda0db4c8e5c1992657fd435b6778d0b49d056755d088563e778",
+      "embedded": false
+    },
+    {
+      "path": "baseline/package/player/data/models/da2588e81cf9f61d9b06dec86cbf644e5322cdc48594af5c9ac4e9aa08a6e1ad.incmodel",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/package/player/data/models/da2588e81cf9f61d9b06dec86cbf644e5322cdc48594af5c9ac4e9aa08a6e1ad.incmodel",
+      "bytes": 207725,
+      "sha256": "a20e33175acb4af55ddad2168307ce3e0c02a23127566cac769e6f290bf799bf",
+      "embedded": false
+    },
+    {
+      "path": "baseline/package/player/data/models/ec9f2569b551d61c9552dd311c3190e9dd262c96b8823e1f3c3c04819811bf99.incmodel",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/package/player/data/models/ec9f2569b551d61c9552dd311c3190e9dd262c96b8823e1f3c3c04819811bf99.incmodel",
+      "bytes": 2832033,
+      "sha256": "88e2f2c56975f6bde0c0e7c131e870bf783fb86384a27d55b20fd40d40d77621",
+      "embedded": false
+    },
+    {
+      "path": "baseline/package/player/data/package.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/package/player/data/package.json",
+      "bytes": 479,
+      "sha256": "aa59400b3bd2059bf6a34251c1f3096fba45ecfcf6b90a7835bb00a8b37d6060",
+      "embedded": false
+    },
+    {
+      "path": "baseline/package/player/data/textures/17da802ffd07a79a3041b9ba748180e8eccde82c6461eb24ce092cb378e94333.ktx2",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/package/player/data/textures/17da802ffd07a79a3041b9ba748180e8eccde82c6461eb24ce092cb378e94333.ktx2",
+      "bytes": 699516,
+      "sha256": "17da802ffd07a79a3041b9ba748180e8eccde82c6461eb24ce092cb378e94333",
+      "embedded": false
+    },
+    {
+      "path": "baseline/package/player/data/textures/5c2d2703c28f3deb6e566781de8833f45f442888602c7a72872b3ea7f5b141c8.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/package/player/data/textures/5c2d2703c28f3deb6e566781de8833f45f442888602c7a72872b3ea7f5b141c8.json",
+      "bytes": 413,
+      "sha256": "f0bd2e231b9cc1839811dd7faf3a748bb2a41df3e95e84e45c727b5be5a5d840",
+      "embedded": false
+    },
+    {
+      "path": "baseline/package/player/data/world.scene",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/package/player/data/world.scene",
+      "bytes": 1058647,
+      "sha256": "2d1ec2682e03748ce06adc9a048e6c81f82cb2358c4b979a0133849bab6a16f4",
+      "embedded": false
+    },
+    {
+      "path": "baseline/package/player/incant_game_player",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/package/player/incant_game_player",
+      "bytes": 12720640,
+      "sha256": "3849f731ede909c611272b23575fde0c119dab5f3b897a550d1f5ff38394d884",
+      "embedded": false
+    },
+    {
+      "path": "baseline/package/project-build.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/package/project-build.json",
+      "bytes": 5292,
+      "sha256": "e51a3c6475c08a34ffea595828cfcd41efaeb31fb06de3a42091490821963b7c",
+      "embedded": true
+    },
+    {
+      "path": "baseline/package/symbols/behavior.js.map",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/package/symbols/behavior.js.map",
+      "bytes": 38929,
+      "sha256": "06b1371b49cc9cff20157cd52be4f50bc568e5e1bae3640ac39f7bad0a5cdbff",
+      "embedded": false
+    },
+    {
+      "path": "baseline/package/symbols/incant_game_player.dSYM/Contents/Info.plist",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/package/symbols/incant_game_player.dSYM/Contents/Info.plist",
+      "bytes": 664,
+      "sha256": "d5a2d3a08ca3544145635df99a3a4ed05269369d9573a15acf804303c0c5883d",
+      "embedded": false
+    },
+    {
+      "path": "baseline/package/symbols/incant_game_player.dSYM/Contents/Resources/DWARF/incant_game_player-f567354d4ef2e44e",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/package/symbols/incant_game_player.dSYM/Contents/Resources/DWARF/incant_game_player-f567354d4ef2e44e",
+      "bytes": 248347355,
+      "sha256": "9549f3bf4f8e34f1d642811edb1037bdfb3b6bae0201a77a007709f18eeebe05",
+      "embedded": false
+    },
+    {
+      "path": "baseline/package/symbols/incant_game_player.dSYM/Contents/Resources/Relocations/aarch64/incant_game_player-f567354d4ef2e44e.yml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/package/symbols/incant_game_player.dSYM/Contents/Resources/Relocations/aarch64/incant_game_player-f567354d4ef2e44e.yml",
+      "bytes": 3292339,
+      "sha256": "6b61a9a6c047b2d34f4ecb523b22b29c174ea633398ca66775754925ea1b4faf",
+      "embedded": false
+    },
+    {
+      "path": "baseline/package/symbols/script-symbols.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/package/symbols/script-symbols.json",
+      "bytes": 1359,
+      "sha256": "0e7e8b8a73cc48a79c98952c162ac98a7d6b5ec684363ecf34fd1212d743f01e",
+      "embedded": false
+    },
+    {
+      "path": "baseline/post-build-source.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/post-build-source.json",
+      "bytes": 374,
+      "sha256": "3691bc846533f3cdd480539dd0a743ea53dfbd3d87259637b8c94746bfa15dc7",
+      "embedded": true
+    },
+    {
+      "path": "baseline/prepare.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/prepare.py",
+      "bytes": 4364,
+      "sha256": "1c4fd46b9551c8a46e5b360d9db146d85d4e3c9c6d1a2e1fef67618fa74704ba",
+      "embedded": true
+    },
+    {
+      "path": "baseline/prepared.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/prepared.json",
+      "bytes": 1280,
+      "sha256": "7557a40d2e0f71a4565ead9dfbe6340f000c0a391a72768ba324e20a51749cd1",
+      "embedded": true
+    },
+    {
+      "path": "baseline/public-reopen.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/public-reopen.json",
+      "bytes": 466,
+      "sha256": "6d299240e7978cecf1234294581ddd7863bc53e4fd9c392c02671baee1045af4",
+      "embedded": true
+    },
+    {
+      "path": "baseline/public-reopen.rpc.jsonl.gz",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/public-reopen.rpc.jsonl.gz",
+      "bytes": 125460,
+      "sha256": "2ed1fb54af71c699ed468b5f6066b204f36f5f6fd747c9976a63705620e05ca3",
+      "embedded": true
+    },
+    {
+      "path": "baseline/public-reopen.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/public-reopen.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true
+    },
+    {
+      "path": "baseline/public-reopen.stdout.gz",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/public-reopen.stdout.gz",
+      "bytes": 125940,
+      "sha256": "005df83c574dddac081e91b947cb9f32bda5905133661d3a8f0695e074d2a7bc",
+      "embedded": true
+    },
+    {
+      "path": "baseline/public-source.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/public-source.json",
+      "bytes": 467,
+      "sha256": "155b9dd292b425a791aee154a7f543d7dc6101b227da6a1e824f57aa9b2e76de",
+      "embedded": true
+    },
+    {
+      "path": "baseline/public-source.rpc.jsonl.gz",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/public-source.rpc.jsonl.gz",
+      "bytes": 1440202,
+      "sha256": "5851eaaa02d7ffcf310eae31d381de8c3286b4dabeb83f7d91ea0352df740f06",
+      "embedded": true
+    },
+    {
+      "path": "baseline/public-source.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/public-source.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true
+    },
+    {
+      "path": "baseline/public-source.stdout.gz",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/public-source.stdout.gz",
+      "bytes": 1439776,
+      "sha256": "72e2c2e9d23f12e40c1ab31a219505266c2c2c49be5704b5ffb771b3bff04ad2",
+      "embedded": true
+    },
+    {
+      "path": "baseline/run.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/run.py",
+      "bytes": 1941,
+      "sha256": "e52f415b495da1fdf781c4a628889f343af0a4fd5b966f0bd10d51d0ed7e58d5",
+      "embedded": true
+    },
+    {
+      "path": "baseline/semantic-equivalence.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-bulk-row-metadata-003/semantic-equivalence.json",
+      "bytes": 1069,
+      "sha256": "ed2d88d83ccb8a4404e77cc0b04c3526831df7c418235c8ed4befbacfc2a2270",
+      "embedded": true
+    },
+    {
+      "path": "candidate/authoring/.incant/cache/audio/08b4d5af1f19e43c1c228d7c6ca243e8d2362f27f336f87a347cb697f6ebca28.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant/cache/audio/08b4d5af1f19e43c1c228d7c6ca243e8d2362f27f336f87a347cb697f6ebca28.json",
+      "bytes": 1096,
+      "sha256": "59363a80bbac59c6f139695407f2e76c31ed47b4345b03177801b01640480139",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/.incant/cache/audio/1e53cd57bfecb7115ad888e9d40f01c6d957b7130bd6f8975a2d16100d7eda46.ipcm",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant/cache/audio/1e53cd57bfecb7115ad888e9d40f01c6d957b7130bd6f8975a2d16100d7eda46.ipcm",
+      "bytes": 691200,
+      "sha256": "1e53cd57bfecb7115ad888e9d40f01c6d957b7130bd6f8975a2d16100d7eda46",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/.incant/cache/audio/2b67780f0ec6ce10736909aa8ec0a3b386d6b308382b7eaf33d40a5a28977718.ipcm",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant/cache/audio/2b67780f0ec6ce10736909aa8ec0a3b386d6b308382b7eaf33d40a5a28977718.ipcm",
+      "bytes": 8777144,
+      "sha256": "2b67780f0ec6ce10736909aa8ec0a3b386d6b308382b7eaf33d40a5a28977718",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/.incant/cache/audio/2e05653f8752033823f84b711926070f2d4d237aef0087105be217b401c89637.ipcm",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant/cache/audio/2e05653f8752033823f84b711926070f2d4d237aef0087105be217b401c89637.ipcm",
+      "bytes": 345600,
+      "sha256": "2e05653f8752033823f84b711926070f2d4d237aef0087105be217b401c89637",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/.incant/cache/audio/384ae95c87bd2678c8b4b80f85bca02c73035338461b423f514e25fc891f9778.ipcm",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant/cache/audio/384ae95c87bd2678c8b4b80f85bca02c73035338461b423f514e25fc891f9778.ipcm",
+      "bytes": 576000,
+      "sha256": "384ae95c87bd2678c8b4b80f85bca02c73035338461b423f514e25fc891f9778",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/.incant/cache/audio/3d3e537168e5bf96036e6625c0b5d55b12cf122a4715f7e8d77baf937edc8c58.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant/cache/audio/3d3e537168e5bf96036e6625c0b5d55b12cf122a4715f7e8d77baf937edc8c58.json",
+      "bytes": 561,
+      "sha256": "fd7c43cb6347a021fcfe215fa66bbd817620ff596a04bc8b32259202352921ea",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/.incant/cache/audio/4ecb37a4cf20667d8d7922971a3b609c1898cb988fb96bc0a3857546f3123c4e.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant/cache/audio/4ecb37a4cf20667d8d7922971a3b609c1898cb988fb96bc0a3857546f3123c4e.json",
+      "bytes": 963,
+      "sha256": "d9ca5bd9b8d52ced2826915913857e90baea981bcdfe6d9ace42e9105929fdd2",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/.incant/cache/audio/4f31a36d777d5ce2702b9a5237742cc8a69efa73d7067afae35dff713cbb935f.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant/cache/audio/4f31a36d777d5ce2702b9a5237742cc8a69efa73d7067afae35dff713cbb935f.json",
+      "bytes": 9341,
+      "sha256": "8d841a107aff6df0511e0e9dfdf8c6d36cf01928d91dd82e415b26858f58cc96",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/.incant/cache/audio/6c94df51cc76f31375178021c1fec7775a5e448cba6bde2d1120f9efa6a32c56.ipcm",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant/cache/audio/6c94df51cc76f31375178021c1fec7775a5e448cba6bde2d1120f9efa6a32c56.ipcm",
+      "bytes": 138240,
+      "sha256": "6c94df51cc76f31375178021c1fec7775a5e448cba6bde2d1120f9efa6a32c56",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/.incant/cache/audio/b63a98f27758a1bb7f2a4ba44f4fb8d263230bf401520116b87e6946cdf56117.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant/cache/audio/b63a98f27758a1bb7f2a4ba44f4fb8d263230bf401520116b87e6946cdf56117.json",
+      "bytes": 764,
+      "sha256": "d5748ced504a28a21d72eaf9c0b26c3fee6ff900c07ea491c06b79c4c5680642",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/.incant/cache/fonts/0e1cd7265c7a2fa6109d995205dd8e070723bb824fe28daa8299ba1105063a1f.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant/cache/fonts/0e1cd7265c7a2fa6109d995205dd8e070723bb824fe28daa8299ba1105063a1f.json",
+      "bytes": 323,
+      "sha256": "0538183b4a25a91d05296686e8092634f8c572c4c1dc34329c4685843c7661e1",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/.incant/cache/fonts/3127f0b873387ee37e2040135a06e9e9c05030f509eb63689529becf28b50384.ifont",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant/cache/fonts/3127f0b873387ee37e2040135a06e9e9c05030f509eb63689529becf28b50384.ifont",
+      "bytes": 310300,
+      "sha256": "48804b712c66bb0ce00b2cc3272c7be18171810a3bb0555e3d247544951e0fdc",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/.incant/cache/fonts/74f2395f9b27e4c4ff06183b1baed5684ce4a090490bd00f42637547cca5da0f.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant/cache/fonts/74f2395f9b27e4c4ff06183b1baed5684ce4a090490bd00f42637547cca5da0f.json",
+      "bytes": 317,
+      "sha256": "76b2977309e2485a6007bcb9c6e75df3a2e161dc576ebbf6be00f6b8b961d0f0",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/.incant/cache/fonts/9ec258961c8800c709f05586b6fca8a47061f3f776ac088bb87fbb2a462c116e.ifont",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant/cache/fonts/9ec258961c8800c709f05586b6fca8a47061f3f776ac088bb87fbb2a462c116e.ifont",
+      "bytes": 13812,
+      "sha256": "db12e66306387bf4fdcf4b6be1fc31eed9f136e60211061e65cc97ba71500311",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/.incant/cache/fonts/ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56.ifont",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant/cache/fonts/ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56.ifont",
+      "bytes": 765788,
+      "sha256": "8bd20a742cc19c0fe65b106d983ea1ed816c4cd5ca1c3d50bdc4d05aeb5f8e7a",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/.incant/cache/fonts/efbee025bcb27036123566525a911cd346bbe425cceb413eb800661df6b65767.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant/cache/fonts/efbee025bcb27036123566525a911cd346bbe425cceb413eb800661df6b65767.json",
+      "bytes": 318,
+      "sha256": "ce4cd118624295e30ed4514c80bfad49c379702ead14327faf7ff92184d6034a",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/.incant/cache/models/018d021c673a74b618fc3516d8ab4e64b32a88f6c8323d0d84395e684d811c13.incmodel",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant/cache/models/018d021c673a74b618fc3516d8ab4e64b32a88f6c8323d0d84395e684d811c13.incmodel",
+      "bytes": 25810,
+      "sha256": "509cf7c24253b675ed0a3d36ae344d35272050107a97c4aeae4db79417d132e7",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/.incant/cache/models/1649bb952607a07a912661374fa6a8c104a261d625b339a5aa2e096f52970bec.incmodel",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant/cache/models/1649bb952607a07a912661374fa6a8c104a261d625b339a5aa2e096f52970bec.incmodel",
+      "bytes": 18726133,
+      "sha256": "b32c0ae9a0305abd7610713aa77a270e320090bbb31be1792a47f857ec939f99",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/.incant/cache/models/b85f1046e4d28277bd6bb792cdcff4dc070268bb95b3b8040b697bbf7f631262.incmodel",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant/cache/models/b85f1046e4d28277bd6bb792cdcff4dc070268bb95b3b8040b697bbf7f631262.incmodel",
+      "bytes": 181633,
+      "sha256": "80dbf175a19dfda0db4c8e5c1992657fd435b6778d0b49d056755d088563e778",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/.incant/cache/models/da2588e81cf9f61d9b06dec86cbf644e5322cdc48594af5c9ac4e9aa08a6e1ad.incmodel",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant/cache/models/da2588e81cf9f61d9b06dec86cbf644e5322cdc48594af5c9ac4e9aa08a6e1ad.incmodel",
+      "bytes": 207725,
+      "sha256": "a20e33175acb4af55ddad2168307ce3e0c02a23127566cac769e6f290bf799bf",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/.incant/cache/models/ec9f2569b551d61c9552dd311c3190e9dd262c96b8823e1f3c3c04819811bf99.incmodel",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant/cache/models/ec9f2569b551d61c9552dd311c3190e9dd262c96b8823e1f3c3c04819811bf99.incmodel",
+      "bytes": 2832033,
+      "sha256": "88e2f2c56975f6bde0c0e7c131e870bf783fb86384a27d55b20fd40d40d77621",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/.incant/cache/textures/17da802ffd07a79a3041b9ba748180e8eccde82c6461eb24ce092cb378e94333.ktx2",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant/cache/textures/17da802ffd07a79a3041b9ba748180e8eccde82c6461eb24ce092cb378e94333.ktx2",
+      "bytes": 699516,
+      "sha256": "17da802ffd07a79a3041b9ba748180e8eccde82c6461eb24ce092cb378e94333",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/.incant/cache/textures/5c2d2703c28f3deb6e566781de8833f45f442888602c7a72872b3ea7f5b141c8.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant/cache/textures/5c2d2703c28f3deb6e566781de8833f45f442888602c7a72872b3ea7f5b141c8.json",
+      "bytes": 413,
+      "sha256": "f0bd2e231b9cc1839811dd7faf3a748bb2a41df3e95e84e45c727b5be5a5d840",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/.incant-source-transactions/01M4W2ZS8HBYETF98R514TCYW8.previous",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant-source-transactions/01M4W2ZS8HBYETF98R514TCYW8.previous",
+      "bytes": 16096,
+      "sha256": "8d5f5feec2235f1718235901c6073f7425acf971a4e087755a0b3833ecb79698",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/.incant-source-transactions/01M4W2ZT8FH3JJ1V2SCAC2XWA9.old-receipt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant-source-transactions/01M4W2ZT8FH3JJ1V2SCAC2XWA9.old-receipt",
+      "bytes": 26,
+      "sha256": "c7f20dcb63fc1a69d53cce013f3eb603c86c8ec9440fa0e559ce6107484ae387",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/.incant-source-transactions/01M4W2ZT8FH3JJ1V2SCAC2XWA9.previous",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant-source-transactions/01M4W2ZT8FH3JJ1V2SCAC2XWA9.previous",
+      "bytes": 2509,
+      "sha256": "861e425066d0d7668451876c8c8cf0a930e8724c9cda8f5ffbcd99f8501ee38e",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/.incant-source-transactions/01M4W2ZV7JG48C67P7SSFQ8MAC.old-receipt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant-source-transactions/01M4W2ZV7JG48C67P7SSFQ8MAC.old-receipt",
+      "bytes": 26,
+      "sha256": "1b8d419b188fb9d79c431d6515954d04662b10cf4f160c92b04496373be7b6d7",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/.incant-source-transactions/01M4W2ZV7JG48C67P7SSFQ8MAC.previous",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant-source-transactions/01M4W2ZV7JG48C67P7SSFQ8MAC.previous",
+      "bytes": 3513,
+      "sha256": "7285e9009633052ba86ee0996c87f58097eb47fdaf0a73df10f42597b0119f1a",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/.incant-source-transactions/01M4W2ZW1Y3GVNSM224C67FEV3.old-receipt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant-source-transactions/01M4W2ZW1Y3GVNSM224C67FEV3.old-receipt",
+      "bytes": 26,
+      "sha256": "2c27848882b54a85bcac3c53513734eb49601d24d4a2d2b195e58d39208ed8c1",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/.incant-source-transactions/01M4W2ZW1Y3GVNSM224C67FEV3.previous",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant-source-transactions/01M4W2ZW1Y3GVNSM224C67FEV3.previous",
+      "bytes": 16574,
+      "sha256": "f471293cf6a3b6a355f0f2c8ec6406bf5f3942f438411121b2e63ae6e6f31095",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/.incant-source-transactions/01M4W2ZWZ9232C2ERBWYBR5Y04.old-receipt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant-source-transactions/01M4W2ZWZ9232C2ERBWYBR5Y04.old-receipt",
+      "bytes": 26,
+      "sha256": "322a1c67f12efe894bc4351b30ce697f89831d5834304c6c014b4900e518cf96",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/.incant-source-transactions/01M4W2ZWZ9232C2ERBWYBR5Y04.previous",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant-source-transactions/01M4W2ZWZ9232C2ERBWYBR5Y04.previous",
+      "bytes": 16096,
+      "sha256": "8d5f5feec2235f1718235901c6073f7425acf971a4e087755a0b3833ecb79698",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/.incant-source-transactions/01M4W2ZXRN2TA8HSNZV6B6R2WQ.old-receipt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant-source-transactions/01M4W2ZXRN2TA8HSNZV6B6R2WQ.old-receipt",
+      "bytes": 26,
+      "sha256": "5bdf65bfcc5fee806848d94a4dd6369a8c9b34f7ba82f7738fed5de8aa36e62b",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/.incant-source-transactions/01M4W2ZXRN2TA8HSNZV6B6R2WQ.previous",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant-source-transactions/01M4W2ZXRN2TA8HSNZV6B6R2WQ.previous",
+      "bytes": 2509,
+      "sha256": "861e425066d0d7668451876c8c8cf0a930e8724c9cda8f5ffbcd99f8501ee38e",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/.incant-source-transactions/lock",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant-source-transactions/lock",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/.incant-source-transactions/receipt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant-source-transactions/receipt",
+      "bytes": 26,
+      "sha256": "a7bb96b21ebdcf753989cd95ac49e02361d8494d381432dc124dea281293423f",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/art/canyon.bin",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/canyon.bin",
+      "bytes": 3161612,
+      "sha256": "c32b0431a835c4c998cd69ff850291e2ed888ca0fe84e0907d1afebeba90e08d",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/art/canyon.gltf",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/canyon.gltf",
+      "bytes": 22404,
+      "sha256": "a8622cbd4caea047abd781309fc3869f5207117815ad65631c5e52d317ce30f7",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/art/cliff_albedo.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/cliff_albedo.png",
+      "bytes": 388767,
+      "sha256": "d1fed013a536eb47c40252b5e5f8375f4209509ed51ed7741950eb365f917069",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/art/cliff_normal.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/cliff_normal.png",
+      "bytes": 453616,
+      "sha256": "db93eb916ad971a8ee32ce3a5985d1c88115d113932ac7a358dc9702c7084939",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/art/core_albedo.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/core_albedo.png",
+      "bytes": 6691,
+      "sha256": "b1c535ceafd2c64e03e79c3e46eaa63cab18df359bbf77a70292af7d7e68946e",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/art/core_emissive.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/core_emissive.png",
+      "bytes": 8040,
+      "sha256": "42576b50d661af3f3940eeadc4217122470263695dcb0a7ce9509c515b9d97d1",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/art/cue_hurt.wav",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/cue_hurt.wav",
+      "bytes": 34604,
+      "sha256": "209bf03bf0d9eeedf13d67a9bf5e526b8b9d76b90350c116a07b304d6b2212d9",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/art/cue_lost.wav",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/cue_lost.wav",
+      "bytes": 144044,
+      "sha256": "d5757fbfa8f6b4e3e427c0b2748c9343011088ea520715bc91a176ddfa3ac465",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/art/cue_pickup.wav",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/cue_pickup.wav",
+      "bytes": 86444,
+      "sha256": "a9cfe5207be237b6976cdafb2944b0f71e63c1a73c7f7608f629ee96bbbcd0c9",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/art/cue_won.wav",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/cue_won.wav",
+      "bytes": 172844,
+      "sha256": "8b17713a334cb6d830310985b31cbb3c6c7653922e0c03ce121552765a6541e0",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/art/far_albedo.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/far_albedo.png",
+      "bytes": 7178,
+      "sha256": "1f09709ceb8101b85a6ba8b39f4734688624c75ebf4415d69208ad5081b2c902",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/art/floor_albedo.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/floor_albedo.png",
+      "bytes": 842112,
+      "sha256": "81445089016eba8e5d992f5d058890a75d06486f5468542df5eededd2e4c3c87",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/art/manifest.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/manifest.json",
+      "bytes": 3722,
+      "sha256": "19d87aca92ee147526a7eb1cfdcc648e6bbe949a37a127a61f3687a695632956",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/art/mesa_loop.wav",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/mesa_loop.wav",
+      "bytes": 4388616,
+      "sha256": "4f80337e2eef1ec9b414ae8959435fd114a6d77bb85b10022aef7f3abb968816",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/art/mite.bin",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/mite.bin",
+      "bytes": 44724,
+      "sha256": "2809da2175266acf004be462557404623f727e84c4400fc91363d37c2d9220e7",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/art/mite.gltf",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/mite.gltf",
+      "bytes": 5676,
+      "sha256": "62d807da1b4623e69670e467ef045386df1dc83c999aa1bdb45abf5814c868e2",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/art/mite_albedo.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/mite_albedo.png",
+      "bytes": 7592,
+      "sha256": "d3e231c3435475dd201652dc7e50ab835b623ed50042c6d14eba088193c65fde",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/art/mite_emissive.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/mite_emissive.png",
+      "bytes": 7495,
+      "sha256": "5298667c8f706a5a4418ae08bd1e93d943e5a382d36b40730991bf2d43befe76",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/art/pad_albedo.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/pad_albedo.png",
+      "bytes": 63444,
+      "sha256": "d0cfa2eeaf175365e390491051d05c7203e0b6dc2afc8b7fd950f927a1a3f002",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/art/rock_albedo.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/rock_albedo.png",
+      "bytes": 59674,
+      "sha256": "c6ea897e8c3811c4ce737d0dabd2d0b85aa4018a21e97aa8a8be414895ff9f6f",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/art/sample.bin",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/sample.bin",
+      "bytes": 9428,
+      "sha256": "5f17bd5753223c313f622778e8eb6da801e93fe90ec85128c845a17b92c599fc",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/art/sample.gltf",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/sample.gltf",
+      "bytes": 4325,
+      "sha256": "6eda3386082556270d7dd567d02fda5f7e2808792705786c8729d892078179ef",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/art/sky.bin",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/sky.bin",
+      "bytes": 66848,
+      "sha256": "5908df68041666952ab3808fbcd5578b960595cc7a5258d0bd4b41c83ea6d27f",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/art/sky.gltf",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/sky.gltf",
+      "bytes": 1887,
+      "sha256": "d752767b74d4bc39329dbd022c314bd3298c4529c3b5a325f8bcf29d03168e08",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/art/sky_dome.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/sky_dome.png",
+      "bytes": 148023,
+      "sha256": "dea2f93735ff70b2e6cf543f4bcdfdb9324e4cb72a31abe3cfdd5e0c047d69c0",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/art/sky_environment.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/sky_environment.png",
+      "bytes": 59757,
+      "sha256": "8bf279ee439137e9e1da9d1dc1f1868477b4f398e607a127524dc0d209571d82",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/art/surveyor.bin",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/surveyor.bin",
+      "bytes": 48372,
+      "sha256": "bfef4a6f7af144a221a86ae9977df320942ff1fcb252ee1f7d30ae9e28d1da5f",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/art/surveyor.gltf",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/surveyor.gltf",
+      "bytes": 9517,
+      "sha256": "8633af82a9e2e247c8c1509ef30f1f41e6866687b492c8329361fdec8d084003",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/art/top_albedo.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/top_albedo.png",
+      "bytes": 229296,
+      "sha256": "0456e5dd8c177da4f1296428356cba8d94815e69568342086def5e88cf107d8a",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/art/top_normal.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/top_normal.png",
+      "bytes": 121528,
+      "sha256": "5e9171d91392549a8e07b852273b0de5aab1a8c398ce1121712ff1e344ffd5ab",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/art/valley.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/valley.png",
+      "bytes": 10020,
+      "sha256": "c866ba77b019320be6fea2c8f4d5d988664f9816c20b98a8c1ef007dfb57d93e",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/core.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/core.json",
+      "bytes": 9579385,
+      "sha256": "027621691da3043e25cd30a02c76a8fb92f1a4464448c3c6c7d04e6f8b38c30b",
+      "embedded": true
+    },
+    {
+      "path": "candidate/authoring/fonts/CoreSampleSC-Regular.ttf",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/fonts/CoreSampleSC-Regular.ttf",
+      "bytes": 13764,
+      "sha256": "9ec258961c8800c709f05586b6fca8a47061f3f776ac088bb87fbb2a462c116e",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/fonts/Inter-Regular.ttf",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/fonts/Inter-Regular.ttf",
+      "bytes": 310252,
+      "sha256": "3127f0b873387ee37e2040135a06e9e9c05030f509eb63689529becf28b50384",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/fonts/NotoSansArabic.ttf",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/fonts/NotoSansArabic.ttf",
+      "bytes": 765740,
+      "sha256": "ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/gameplay.ts",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/gameplay.ts",
+      "bytes": 16574,
+      "sha256": "f471293cf6a3b6a355f0f2c8ec6406bf5f3942f438411121b2e63ae6e6f31095",
+      "embedded": true
+    },
+    {
+      "path": "candidate/authoring/source.journal.jsonl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/source.journal.jsonl",
+      "bytes": 99023236,
+      "sha256": "b7d34540a973adf96c65cec922270085fe1c29e777f53c4247e31e58021478eb",
+      "embedded": false
+    },
+    {
+      "path": "candidate/authoring/stress.ts",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/stress.ts",
+      "bytes": 3513,
+      "sha256": "7285e9009633052ba86ee0996c87f58097eb47fdaf0a73df10f42597b0119f1a",
+      "embedded": true
+    },
+    {
+      "path": "candidate/command-00-stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/command-00-stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true
+    },
+    {
+      "path": "candidate/command-00-stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/command-00-stdout.log",
+      "bytes": 77,
+      "sha256": "1dc5ff25a027f5c0a04ac183e96b6665181272c327130fb0663c5c1be8aad81d",
+      "embedded": true
+    },
+    {
+      "path": "candidate/command-01-stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/command-01-stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true
+    },
+    {
+      "path": "candidate/command-01-stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/command-01-stdout.log",
+      "bytes": 192,
+      "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "embedded": true
+    },
+    {
+      "path": "candidate/command-02-stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/command-02-stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true
+    },
+    {
+      "path": "candidate/command-02-stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/command-02-stdout.log",
+      "bytes": 67,
+      "sha256": "b22adee5ac5a93ade5d52f11392360e1c1a95ef2add2bd03365e896e8f1688e1",
+      "embedded": true
+    },
+    {
+      "path": "candidate/command-03-stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/command-03-stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true
+    },
+    {
+      "path": "candidate/command-03-stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/command-03-stdout.log",
+      "bytes": 30332,
+      "sha256": "5d4e56f699b32b97a015b1bb2966453b46d4ee7d556a1fc4fedae01119757cb7",
+      "embedded": true
+    },
+    {
+      "path": "candidate/command-04-stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/command-04-stderr.log",
+      "bytes": 1395202,
+      "sha256": "52cf5748b4ddbf55a42d4fbc947cdb89dcda1c1f941e48f8087cd5a49218d182",
+      "embedded": true
+    },
+    {
+      "path": "candidate/command-04-stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/command-04-stdout.log",
+      "bytes": 33299756,
+      "sha256": "3076e92af1837473c4ab87824bc7099e50c5cc851f13f207229ad54d7904d64a",
+      "embedded": true
+    },
+    {
+      "path": "candidate/command-05-stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/command-05-stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true
+    },
+    {
+      "path": "candidate/command-05-stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/command-05-stdout.log",
+      "bytes": 1822864,
+      "sha256": "7a5e440058b142c9a51d42e82fff8bf17198fc56b39527989140dd95f13f84fe",
+      "embedded": true
+    },
+    {
+      "path": "candidate/command-06-stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/command-06-stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true
+    },
+    {
+      "path": "candidate/command-06-stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/command-06-stdout.log",
+      "bytes": 2226,
+      "sha256": "a6de4ceddefb4527c5fe986636466a29773397d03f4503d56c3061501f176806",
+      "embedded": true
+    },
+    {
+      "path": "candidate/commands.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/commands.json",
+      "bytes": 5202,
+      "sha256": "933ba30358426fbb16f27b40b0626960285064f024eaa50d45349e89456679a0",
+      "embedded": true
+    },
+    {
+      "path": "candidate/export-result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/export-result.json",
+      "bytes": 268,
+      "sha256": "36bc2d5a8168c33bbc6dd22bbe53afe9ddf21054e195e75fa192f8e998b87823",
+      "embedded": true
+    },
+    {
+      "path": "candidate/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/freeze.json",
+      "bytes": 3095953,
+      "sha256": "7c60e652f6f54784b0c7410c62555fae57848bed7edc523d34dc2586900b4bf8",
+      "embedded": true
+    },
+    {
+      "path": "candidate/functional-win/command.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/functional-win/command.json",
+      "bytes": 5891,
+      "sha256": "cbc2968d409fdcc7694252cc2b45b555f82afc7978e779c3d280ff5a4ac84994",
+      "embedded": true
+    },
+    {
+      "path": "candidate/functional-win/input.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/functional-win/input.json",
+      "bytes": 27753,
+      "sha256": "4fbfffad568d1b7b8eae3b7b9041579fce6f0e8e67c83a66f76c9f78a1c5fcbf",
+      "embedded": true
+    },
+    {
+      "path": "candidate/functional-win/observe.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/functional-win/observe.json",
+      "bytes": 2893,
+      "sha256": "36915362c461c0772414c2b97aa80d522b6ada851e94e0ca718057d700e1f89b",
+      "embedded": true
+    },
+    {
+      "path": "candidate/functional-win/output.pcm",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/functional-win/output.pcm",
+      "bytes": 13798400,
+      "sha256": "ccabf2c68b6388ac554ac3efb5609ddf6b4a45d1a3f316891d5f344094e99ee3",
+      "embedded": false
+    },
+    {
+      "path": "candidate/functional-win/stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/functional-win/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true
+    },
+    {
+      "path": "candidate/functional-win/stdout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/functional-win/stdout.json",
+      "bytes": 8455,
+      "sha256": "37ccafc52a22a341c7776961e5171f48c988638224445395fe94db55da2f4279",
+      "embedded": true
+    },
+    {
+      "path": "candidate/functional.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/functional.py",
+      "bytes": 2282,
+      "sha256": "0cc87d16026369802aa55be156581dc90280799532dda78a291b54736ca2a496",
+      "embedded": true
+    },
+    {
+      "path": "candidate/package/build.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/package/build.log",
+      "bytes": 1395202,
+      "sha256": "52cf5748b4ddbf55a42d4fbc947cdb89dcda1c1f941e48f8087cd5a49218d182",
+      "embedded": true
+    },
+    {
+      "path": "candidate/package/export.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/package/export.json",
+      "bytes": 18235,
+      "sha256": "fd8ed824274a8211f60c9ac36197949215cb9cc2556d6eafde5f1c908a7d1ff9",
+      "embedded": true
+    },
+    {
+      "path": "candidate/package/normal-dependencies.txt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/package/normal-dependencies.txt",
+      "bytes": 30332,
+      "sha256": "5d4e56f699b32b97a015b1bb2966453b46d4ee7d556a1fc4fedae01119757cb7",
+      "embedded": true
+    },
+    {
+      "path": "candidate/package/player/data/audio/08b4d5af1f19e43c1c228d7c6ca243e8d2362f27f336f87a347cb697f6ebca28.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/package/player/data/audio/08b4d5af1f19e43c1c228d7c6ca243e8d2362f27f336f87a347cb697f6ebca28.json",
+      "bytes": 1096,
+      "sha256": "59363a80bbac59c6f139695407f2e76c31ed47b4345b03177801b01640480139",
+      "embedded": false
+    },
+    {
+      "path": "candidate/package/player/data/audio/1e53cd57bfecb7115ad888e9d40f01c6d957b7130bd6f8975a2d16100d7eda46.ipcm",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/package/player/data/audio/1e53cd57bfecb7115ad888e9d40f01c6d957b7130bd6f8975a2d16100d7eda46.ipcm",
+      "bytes": 691200,
+      "sha256": "1e53cd57bfecb7115ad888e9d40f01c6d957b7130bd6f8975a2d16100d7eda46",
+      "embedded": false
+    },
+    {
+      "path": "candidate/package/player/data/audio/2b67780f0ec6ce10736909aa8ec0a3b386d6b308382b7eaf33d40a5a28977718.ipcm",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/package/player/data/audio/2b67780f0ec6ce10736909aa8ec0a3b386d6b308382b7eaf33d40a5a28977718.ipcm",
+      "bytes": 8777144,
+      "sha256": "2b67780f0ec6ce10736909aa8ec0a3b386d6b308382b7eaf33d40a5a28977718",
+      "embedded": false
+    },
+    {
+      "path": "candidate/package/player/data/audio/2e05653f8752033823f84b711926070f2d4d237aef0087105be217b401c89637.ipcm",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/package/player/data/audio/2e05653f8752033823f84b711926070f2d4d237aef0087105be217b401c89637.ipcm",
+      "bytes": 345600,
+      "sha256": "2e05653f8752033823f84b711926070f2d4d237aef0087105be217b401c89637",
+      "embedded": false
+    },
+    {
+      "path": "candidate/package/player/data/audio/384ae95c87bd2678c8b4b80f85bca02c73035338461b423f514e25fc891f9778.ipcm",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/package/player/data/audio/384ae95c87bd2678c8b4b80f85bca02c73035338461b423f514e25fc891f9778.ipcm",
+      "bytes": 576000,
+      "sha256": "384ae95c87bd2678c8b4b80f85bca02c73035338461b423f514e25fc891f9778",
+      "embedded": false
+    },
+    {
+      "path": "candidate/package/player/data/audio/3d3e537168e5bf96036e6625c0b5d55b12cf122a4715f7e8d77baf937edc8c58.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/package/player/data/audio/3d3e537168e5bf96036e6625c0b5d55b12cf122a4715f7e8d77baf937edc8c58.json",
+      "bytes": 561,
+      "sha256": "fd7c43cb6347a021fcfe215fa66bbd817620ff596a04bc8b32259202352921ea",
+      "embedded": false
+    },
+    {
+      "path": "candidate/package/player/data/audio/4ecb37a4cf20667d8d7922971a3b609c1898cb988fb96bc0a3857546f3123c4e.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/package/player/data/audio/4ecb37a4cf20667d8d7922971a3b609c1898cb988fb96bc0a3857546f3123c4e.json",
+      "bytes": 963,
+      "sha256": "d9ca5bd9b8d52ced2826915913857e90baea981bcdfe6d9ace42e9105929fdd2",
+      "embedded": false
+    },
+    {
+      "path": "candidate/package/player/data/audio/4f31a36d777d5ce2702b9a5237742cc8a69efa73d7067afae35dff713cbb935f.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/package/player/data/audio/4f31a36d777d5ce2702b9a5237742cc8a69efa73d7067afae35dff713cbb935f.json",
+      "bytes": 9341,
+      "sha256": "8d841a107aff6df0511e0e9dfdf8c6d36cf01928d91dd82e415b26858f58cc96",
+      "embedded": false
+    },
+    {
+      "path": "candidate/package/player/data/audio/6c94df51cc76f31375178021c1fec7775a5e448cba6bde2d1120f9efa6a32c56.ipcm",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/package/player/data/audio/6c94df51cc76f31375178021c1fec7775a5e448cba6bde2d1120f9efa6a32c56.ipcm",
+      "bytes": 138240,
+      "sha256": "6c94df51cc76f31375178021c1fec7775a5e448cba6bde2d1120f9efa6a32c56",
+      "embedded": false
+    },
+    {
+      "path": "candidate/package/player/data/audio/b63a98f27758a1bb7f2a4ba44f4fb8d263230bf401520116b87e6946cdf56117.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/package/player/data/audio/b63a98f27758a1bb7f2a4ba44f4fb8d263230bf401520116b87e6946cdf56117.json",
+      "bytes": 764,
+      "sha256": "d5748ced504a28a21d72eaf9c0b26c3fee6ff900c07ea491c06b79c4c5680642",
+      "embedded": false
+    },
+    {
+      "path": "candidate/package/player/data/clips.bin",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/package/player/data/clips.bin",
+      "bytes": 252,
+      "sha256": "1047a8c04273bb4b8157d4c933e93de4aab1128b7891d0e195431722f369d865",
+      "embedded": false
+    },
+    {
+      "path": "candidate/package/player/data/empty-input.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/package/player/data/empty-input.json",
+      "bytes": 103,
+      "sha256": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+      "embedded": false
+    },
+    {
+      "path": "candidate/package/player/data/fonts/0e1cd7265c7a2fa6109d995205dd8e070723bb824fe28daa8299ba1105063a1f.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/package/player/data/fonts/0e1cd7265c7a2fa6109d995205dd8e070723bb824fe28daa8299ba1105063a1f.json",
+      "bytes": 323,
+      "sha256": "0538183b4a25a91d05296686e8092634f8c572c4c1dc34329c4685843c7661e1",
+      "embedded": false
+    },
+    {
+      "path": "candidate/package/player/data/fonts/3127f0b873387ee37e2040135a06e9e9c05030f509eb63689529becf28b50384.ifont",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/package/player/data/fonts/3127f0b873387ee37e2040135a06e9e9c05030f509eb63689529becf28b50384.ifont",
+      "bytes": 310300,
+      "sha256": "48804b712c66bb0ce00b2cc3272c7be18171810a3bb0555e3d247544951e0fdc",
+      "embedded": false
+    },
+    {
+      "path": "candidate/package/player/data/fonts/74f2395f9b27e4c4ff06183b1baed5684ce4a090490bd00f42637547cca5da0f.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/package/player/data/fonts/74f2395f9b27e4c4ff06183b1baed5684ce4a090490bd00f42637547cca5da0f.json",
+      "bytes": 317,
+      "sha256": "76b2977309e2485a6007bcb9c6e75df3a2e161dc576ebbf6be00f6b8b961d0f0",
+      "embedded": false
+    },
+    {
+      "path": "candidate/package/player/data/fonts/9ec258961c8800c709f05586b6fca8a47061f3f776ac088bb87fbb2a462c116e.ifont",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/package/player/data/fonts/9ec258961c8800c709f05586b6fca8a47061f3f776ac088bb87fbb2a462c116e.ifont",
+      "bytes": 13812,
+      "sha256": "db12e66306387bf4fdcf4b6be1fc31eed9f136e60211061e65cc97ba71500311",
+      "embedded": false
+    },
+    {
+      "path": "candidate/package/player/data/fonts/ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56.ifont",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/package/player/data/fonts/ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56.ifont",
+      "bytes": 765788,
+      "sha256": "8bd20a742cc19c0fe65b106d983ea1ed816c4cd5ca1c3d50bdc4d05aeb5f8e7a",
+      "embedded": false
+    },
+    {
+      "path": "candidate/package/player/data/fonts/efbee025bcb27036123566525a911cd346bbe425cceb413eb800661df6b65767.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/package/player/data/fonts/efbee025bcb27036123566525a911cd346bbe425cceb413eb800661df6b65767.json",
+      "bytes": 318,
+      "sha256": "ce4cd118624295e30ed4514c80bfad49c379702ead14327faf7ff92184d6034a",
+      "embedded": false
+    },
+    {
+      "path": "candidate/package/player/data/input-actions.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/package/player/data/input-actions.json",
+      "bytes": 859,
+      "sha256": "aa13d11e49bbd03a2bfb59cc64b60701f83e5b1b4985f4272c12b4640dd12bdf",
+      "embedded": false
+    },
+    {
+      "path": "candidate/package/player/data/models/018d021c673a74b618fc3516d8ab4e64b32a88f6c8323d0d84395e684d811c13.incmodel",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/package/player/data/models/018d021c673a74b618fc3516d8ab4e64b32a88f6c8323d0d84395e684d811c13.incmodel",
+      "bytes": 25810,
+      "sha256": "509cf7c24253b675ed0a3d36ae344d35272050107a97c4aeae4db79417d132e7",
+      "embedded": false
+    },
+    {
+      "path": "candidate/package/player/data/models/1649bb952607a07a912661374fa6a8c104a261d625b339a5aa2e096f52970bec.incmodel",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/package/player/data/models/1649bb952607a07a912661374fa6a8c104a261d625b339a5aa2e096f52970bec.incmodel",
+      "bytes": 18726133,
+      "sha256": "b32c0ae9a0305abd7610713aa77a270e320090bbb31be1792a47f857ec939f99",
+      "embedded": false
+    },
+    {
+      "path": "candidate/package/player/data/models/b85f1046e4d28277bd6bb792cdcff4dc070268bb95b3b8040b697bbf7f631262.incmodel",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/package/player/data/models/b85f1046e4d28277bd6bb792cdcff4dc070268bb95b3b8040b697bbf7f631262.incmodel",
+      "bytes": 181633,
+      "sha256": "80dbf175a19dfda0db4c8e5c1992657fd435b6778d0b49d056755d088563e778",
+      "embedded": false
+    },
+    {
+      "path": "candidate/package/player/data/models/da2588e81cf9f61d9b06dec86cbf644e5322cdc48594af5c9ac4e9aa08a6e1ad.incmodel",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/package/player/data/models/da2588e81cf9f61d9b06dec86cbf644e5322cdc48594af5c9ac4e9aa08a6e1ad.incmodel",
+      "bytes": 207725,
+      "sha256": "a20e33175acb4af55ddad2168307ce3e0c02a23127566cac769e6f290bf799bf",
+      "embedded": false
+    },
+    {
+      "path": "candidate/package/player/data/models/ec9f2569b551d61c9552dd311c3190e9dd262c96b8823e1f3c3c04819811bf99.incmodel",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/package/player/data/models/ec9f2569b551d61c9552dd311c3190e9dd262c96b8823e1f3c3c04819811bf99.incmodel",
+      "bytes": 2832033,
+      "sha256": "88e2f2c56975f6bde0c0e7c131e870bf783fb86384a27d55b20fd40d40d77621",
+      "embedded": false
+    },
+    {
+      "path": "candidate/package/player/data/package.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/package/player/data/package.json",
+      "bytes": 479,
+      "sha256": "aa59400b3bd2059bf6a34251c1f3096fba45ecfcf6b90a7835bb00a8b37d6060",
+      "embedded": false
+    },
+    {
+      "path": "candidate/package/player/data/textures/17da802ffd07a79a3041b9ba748180e8eccde82c6461eb24ce092cb378e94333.ktx2",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/package/player/data/textures/17da802ffd07a79a3041b9ba748180e8eccde82c6461eb24ce092cb378e94333.ktx2",
+      "bytes": 699516,
+      "sha256": "17da802ffd07a79a3041b9ba748180e8eccde82c6461eb24ce092cb378e94333",
+      "embedded": false
+    },
+    {
+      "path": "candidate/package/player/data/textures/5c2d2703c28f3deb6e566781de8833f45f442888602c7a72872b3ea7f5b141c8.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/package/player/data/textures/5c2d2703c28f3deb6e566781de8833f45f442888602c7a72872b3ea7f5b141c8.json",
+      "bytes": 413,
+      "sha256": "f0bd2e231b9cc1839811dd7faf3a748bb2a41df3e95e84e45c727b5be5a5d840",
+      "embedded": false
+    },
+    {
+      "path": "candidate/package/player/data/world.scene",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/package/player/data/world.scene",
+      "bytes": 1058647,
+      "sha256": "2d1ec2682e03748ce06adc9a048e6c81f82cb2358c4b979a0133849bab6a16f4",
+      "embedded": false
+    },
+    {
+      "path": "candidate/package/player/incant_game_player",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/package/player/incant_game_player",
+      "bytes": 12720640,
+      "sha256": "a2794edcc1e7b21db3291eebb76cb2cf923290cc18005f91b023fe4de27fa361",
+      "embedded": false
+    },
+    {
+      "path": "candidate/package/project-build.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/package/project-build.json",
+      "bytes": 5292,
+      "sha256": "cdfc8822807ebb152ac4adc07e451e0858e82fd00747c8e2ba595c43c43bc080",
+      "embedded": true
+    },
+    {
+      "path": "candidate/package/symbols/behavior.js.map",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/package/symbols/behavior.js.map",
+      "bytes": 38929,
+      "sha256": "06b1371b49cc9cff20157cd52be4f50bc568e5e1bae3640ac39f7bad0a5cdbff",
+      "embedded": false
+    },
+    {
+      "path": "candidate/package/symbols/incant_game_player.dSYM/Contents/Info.plist",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/package/symbols/incant_game_player.dSYM/Contents/Info.plist",
+      "bytes": 664,
+      "sha256": "d5a2d3a08ca3544145635df99a3a4ed05269369d9573a15acf804303c0c5883d",
+      "embedded": false
+    },
+    {
+      "path": "candidate/package/symbols/incant_game_player.dSYM/Contents/Resources/DWARF/incant_game_player-f567354d4ef2e44e",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/package/symbols/incant_game_player.dSYM/Contents/Resources/DWARF/incant_game_player-f567354d4ef2e44e",
+      "bytes": 248416955,
+      "sha256": "b9b449fa4cb87d056109aaebda69d95f41eccb4d060ee7d6255f9eff970ef3a2",
+      "embedded": false
+    },
+    {
+      "path": "candidate/package/symbols/incant_game_player.dSYM/Contents/Resources/Relocations/aarch64/incant_game_player-f567354d4ef2e44e.yml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/package/symbols/incant_game_player.dSYM/Contents/Resources/Relocations/aarch64/incant_game_player-f567354d4ef2e44e.yml",
+      "bytes": 3292233,
+      "sha256": "9b86259ba1a8396d4948073daebb403ca53b8cbe62bbff999eb55b081bd32f1d",
+      "embedded": false
+    },
+    {
+      "path": "candidate/package/symbols/script-symbols.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/package/symbols/script-symbols.json",
+      "bytes": 1359,
+      "sha256": "9fb7724e143ef508417acee456ce027698f5bdd4d18adb33f86fce59c1f9b940",
+      "embedded": false
+    },
+    {
+      "path": "candidate/post-build-source.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/post-build-source.json",
+      "bytes": 428,
+      "sha256": "766d8d09698d2202633bee1849d309fa02fa5b0a6880bf8b80d2d7b10e676185",
+      "embedded": true
+    },
+    {
+      "path": "candidate/prepared-input-reference.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/prepared-input-reference.json",
+      "bytes": 246,
+      "sha256": "b30d8fde783842773ee305c5c5ed75f2b93523a262604afeda2e0bd86bbfd1cb",
+      "embedded": true
+    },
+    {
+      "path": "candidate/run.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/run.py",
+      "bytes": 1941,
+      "sha256": "e52f415b495da1fdf781c4a628889f343af0a4fd5b966f0bd10d51d0ed7e58d5",
+      "embedded": true
+    },
+    {
+      "path": "candidate/supervisor.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/supervisor.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true
+    },
+    {
+      "path": "candidate/supervisor.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/supervisor.stdout",
+      "bytes": 199,
+      "sha256": "f9a05bf808010262a5f0f68cad5b1c18278d1ddd98e0dcb27401242acae6fae3",
+      "embedded": true
+    },
+    {
+      "path": "pair/baseline0/command.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-pair-001/baseline0/command.json",
+      "bytes": 1448,
+      "sha256": "a98f8b40f17f8b649e0738253cfdbc2c86530284a1f13b0dd4a2cbe72aa3f71e",
+      "embedded": true
+    },
+    {
+      "path": "pair/baseline0/input.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-pair-001/baseline0/input.json",
+      "bytes": 27753,
+      "sha256": "4fbfffad568d1b7b8eae3b7b9041579fce6f0e8e67c83a66f76c9f78a1c5fcbf",
+      "embedded": true
+    },
+    {
+      "path": "pair/baseline0/measurement.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-pair-001/baseline0/measurement.json",
+      "bytes": 11674,
+      "sha256": "adca334c234b62848181609b2cffc02ee4e916a0e2924707c90e3ea34bca59a9",
+      "embedded": true
+    },
+    {
+      "path": "pair/baseline0/observe.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-pair-001/baseline0/observe.json",
+      "bytes": 2893,
+      "sha256": "36915362c461c0772414c2b97aa80d522b6ada851e94e0ca718057d700e1f89b",
+      "embedded": true
+    },
+    {
+      "path": "pair/baseline0/output.pcm",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-pair-001/baseline0/output.pcm",
+      "bytes": 13798400,
+      "sha256": "ccabf2c68b6388ac554ac3efb5609ddf6b4a45d1a3f316891d5f344094e99ee3",
+      "embedded": false
+    },
+    {
+      "path": "pair/baseline0/stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-pair-001/baseline0/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true
+    },
+    {
+      "path": "pair/baseline0/stdout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-pair-001/baseline0/stdout.json",
+      "bytes": 537579,
+      "sha256": "49d338a313cb558d289d64c4fb8cd94879176ccefff6ece78849430d0f6b22e2",
+      "embedded": true
+    },
+    {
+      "path": "pair/baseline1/command.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-pair-001/baseline1/command.json",
+      "bytes": 1446,
+      "sha256": "a11fb110f145420e4a5614126b42e378922df634f5263b13fe60647f7101a835",
+      "embedded": true
+    },
+    {
+      "path": "pair/baseline1/input.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-pair-001/baseline1/input.json",
+      "bytes": 27753,
+      "sha256": "4fbfffad568d1b7b8eae3b7b9041579fce6f0e8e67c83a66f76c9f78a1c5fcbf",
+      "embedded": true
+    },
+    {
+      "path": "pair/baseline1/measurement.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-pair-001/baseline1/measurement.json",
+      "bytes": 11674,
+      "sha256": "5a8406dd678781f5e290f0eb8869cac01a031c2aff93fa5a88c4131017473178",
+      "embedded": true
+    },
+    {
+      "path": "pair/baseline1/observe.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-pair-001/baseline1/observe.json",
+      "bytes": 2893,
+      "sha256": "36915362c461c0772414c2b97aa80d522b6ada851e94e0ca718057d700e1f89b",
+      "embedded": true
+    },
+    {
+      "path": "pair/baseline1/output.pcm",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-pair-001/baseline1/output.pcm",
+      "bytes": 13798400,
+      "sha256": "ccabf2c68b6388ac554ac3efb5609ddf6b4a45d1a3f316891d5f344094e99ee3",
+      "embedded": false
+    },
+    {
+      "path": "pair/baseline1/stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-pair-001/baseline1/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true
+    },
+    {
+      "path": "pair/baseline1/stdout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-pair-001/baseline1/stdout.json",
+      "bytes": 537589,
+      "sha256": "a957137c785103e2b10418143a8281fce475bae478974c5491d3bba72eaced2b",
+      "embedded": true
+    },
+    {
+      "path": "pair/baseline2/command.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-pair-001/baseline2/command.json",
+      "bytes": 1452,
+      "sha256": "20a23a30a95d63b869877af72e7adcc6e488b652571913075a0233d2f9052a22",
+      "embedded": true
+    },
+    {
+      "path": "pair/baseline2/input.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-pair-001/baseline2/input.json",
+      "bytes": 27753,
+      "sha256": "4fbfffad568d1b7b8eae3b7b9041579fce6f0e8e67c83a66f76c9f78a1c5fcbf",
+      "embedded": true
+    },
+    {
+      "path": "pair/baseline2/measurement.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-pair-001/baseline2/measurement.json",
+      "bytes": 11674,
+      "sha256": "513e7d85655871d232fd8e604df491c2e6af7de2871a73388189d15575fc4031",
+      "embedded": true
+    },
+    {
+      "path": "pair/baseline2/observe.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-pair-001/baseline2/observe.json",
+      "bytes": 2893,
+      "sha256": "36915362c461c0772414c2b97aa80d522b6ada851e94e0ca718057d700e1f89b",
+      "embedded": true
+    },
+    {
+      "path": "pair/baseline2/output.pcm",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-pair-001/baseline2/output.pcm",
+      "bytes": 13798400,
+      "sha256": "ccabf2c68b6388ac554ac3efb5609ddf6b4a45d1a3f316891d5f344094e99ee3",
+      "embedded": false
+    },
+    {
+      "path": "pair/baseline2/stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-pair-001/baseline2/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true
+    },
+    {
+      "path": "pair/baseline2/stdout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-pair-001/baseline2/stdout.json",
+      "bytes": 537606,
+      "sha256": "c652515a20dd93df85289a293521343e37a030ec8c5a1a6a9ad52619e5c37e4b",
+      "embedded": true
+    },
+    {
+      "path": "pair/candidate0/command.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-pair-001/candidate0/command.json",
+      "bytes": 1484,
+      "sha256": "20cc87d1ca051c8f12fca87009a8704cf66d153e63ec2cef410ec2f1a86a4cee",
+      "embedded": true
+    },
+    {
+      "path": "pair/candidate0/input.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-pair-001/candidate0/input.json",
+      "bytes": 27753,
+      "sha256": "4fbfffad568d1b7b8eae3b7b9041579fce6f0e8e67c83a66f76c9f78a1c5fcbf",
+      "embedded": true
+    },
+    {
+      "path": "pair/candidate0/measurement.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-pair-001/candidate0/measurement.json",
+      "bytes": 11674,
+      "sha256": "c06067b2388df68e9cb8eef11d0deb053e7a3a6c6d9f1634a8008870e285fdb4",
+      "embedded": true
+    },
+    {
+      "path": "pair/candidate0/observe.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-pair-001/candidate0/observe.json",
+      "bytes": 2893,
+      "sha256": "36915362c461c0772414c2b97aa80d522b6ada851e94e0ca718057d700e1f89b",
+      "embedded": true
+    },
+    {
+      "path": "pair/candidate0/output.pcm",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-pair-001/candidate0/output.pcm",
+      "bytes": 13798400,
+      "sha256": "ccabf2c68b6388ac554ac3efb5609ddf6b4a45d1a3f316891d5f344094e99ee3",
+      "embedded": false
+    },
+    {
+      "path": "pair/candidate0/stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-pair-001/candidate0/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true
+    },
+    {
+      "path": "pair/candidate0/stdout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-pair-001/candidate0/stdout.json",
+      "bytes": 537574,
+      "sha256": "b314e7c4bed521b6b90b9ee994675e631d381f5a323611e168ea83547b907588",
+      "embedded": true
+    },
+    {
+      "path": "pair/candidate1/command.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-pair-001/candidate1/command.json",
+      "bytes": 1480,
+      "sha256": "18be0e1d0850ce049a7ae55cd2c848e91c624a8ae1e879c2787a8e0dac58273f",
+      "embedded": true
+    },
+    {
+      "path": "pair/candidate1/input.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-pair-001/candidate1/input.json",
+      "bytes": 27753,
+      "sha256": "4fbfffad568d1b7b8eae3b7b9041579fce6f0e8e67c83a66f76c9f78a1c5fcbf",
+      "embedded": true
+    },
+    {
+      "path": "pair/candidate1/measurement.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-pair-001/candidate1/measurement.json",
+      "bytes": 11674,
+      "sha256": "38becf19fa0ddebfd45ba439d85d7c17b8ed121e708daecf7855001aefd7db38",
+      "embedded": true
+    },
+    {
+      "path": "pair/candidate1/observe.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-pair-001/candidate1/observe.json",
+      "bytes": 2893,
+      "sha256": "36915362c461c0772414c2b97aa80d522b6ada851e94e0ca718057d700e1f89b",
+      "embedded": true
+    },
+    {
+      "path": "pair/candidate1/output.pcm",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-pair-001/candidate1/output.pcm",
+      "bytes": 13798400,
+      "sha256": "ccabf2c68b6388ac554ac3efb5609ddf6b4a45d1a3f316891d5f344094e99ee3",
+      "embedded": false
+    },
+    {
+      "path": "pair/candidate1/stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-pair-001/candidate1/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true
+    },
+    {
+      "path": "pair/candidate1/stdout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-pair-001/candidate1/stdout.json",
+      "bytes": 537578,
+      "sha256": "843fce974d18251b0b911d7751f8f5632428a05719dea932a422c797ab53508a",
+      "embedded": true
+    },
+    {
+      "path": "pair/candidate2/command.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-pair-001/candidate2/command.json",
+      "bytes": 1490,
+      "sha256": "3ae3bc88bf1f501394712f62e5f5d175b4b6a6fb2dd8ce9a5ee7082aac9e8153",
+      "embedded": true
+    },
+    {
+      "path": "pair/candidate2/input.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-pair-001/candidate2/input.json",
+      "bytes": 27753,
+      "sha256": "4fbfffad568d1b7b8eae3b7b9041579fce6f0e8e67c83a66f76c9f78a1c5fcbf",
+      "embedded": true
+    },
+    {
+      "path": "pair/candidate2/measurement.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-pair-001/candidate2/measurement.json",
+      "bytes": 11674,
+      "sha256": "1373705e3a6377f23b97ec45ecfebc88506b53217b5a364574e0638a5711b3a7",
+      "embedded": true
+    },
+    {
+      "path": "pair/candidate2/observe.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-pair-001/candidate2/observe.json",
+      "bytes": 2893,
+      "sha256": "36915362c461c0772414c2b97aa80d522b6ada851e94e0ca718057d700e1f89b",
+      "embedded": true
+    },
+    {
+      "path": "pair/candidate2/output.pcm",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-pair-001/candidate2/output.pcm",
+      "bytes": 13798400,
+      "sha256": "ccabf2c68b6388ac554ac3efb5609ddf6b4a45d1a3f316891d5f344094e99ee3",
+      "embedded": false
+    },
+    {
+      "path": "pair/candidate2/stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-pair-001/candidate2/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true
+    },
+    {
+      "path": "pair/candidate2/stdout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-pair-001/candidate2/stdout.json",
+      "bytes": 537607,
+      "sha256": "e42ef07d4cfc3395bc4f127532189350f51bcaf68027d6c4155b382590fdb1dc",
+      "embedded": true
+    },
+    {
+      "path": "pair/completed.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-pair-001/completed.json",
+      "bytes": 214,
+      "sha256": "2cfdc77d01498917ffef4074fc9856b4957c8f899efb83d42903b33127349e54",
+      "embedded": true
+    },
+    {
+      "path": "pair/measure.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-pair-001/measure.py",
+      "bytes": 5165,
+      "sha256": "c4eed2e3f9e8063017ad028bc35cc31c0d357b3618003ab4f34365c6b53ff96e",
+      "embedded": true
+    },
+    {
+      "path": "pair/plan.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-pair-001/plan.json",
+      "bytes": 2521,
+      "sha256": "d3e1016f30c68f1d7ddf8508264fb414de307150f4853f436489cefcb84e8d67",
+      "embedded": true
+    },
+    {
+      "path": "pair/pre-execution.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-pair-001/pre-execution.json",
+      "bytes": 34416,
+      "sha256": "943ff0ca60ca849188ec7d4235d47bc1bde1a79b032223c9ef50fe202adb0b9c",
+      "embedded": true
+    },
+    {
+      "path": "pair/quiet.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-pair-001/quiet.json",
+      "bytes": 736,
+      "sha256": "4066431c07d7fa01f4740909af36481bfd923e4572d745a991e464c22e888160",
+      "embedded": true
+    },
+    {
+      "path": "pair/results.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-pair-001/results.json",
+      "bytes": 6929,
+      "sha256": "e2323a39872d6e8c29b1f7b661af60e5629561cde7467807195f3727706d744e",
+      "embedded": true
+    },
+    {
+      "path": "pair/runner.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-pair-001/runner.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true
+    },
+    {
+      "path": "pair/runner.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-pair-001/runner.stdout",
+      "bytes": 3129,
+      "sha256": "fd901fb7cbb9126c0336c8d7a32156063856f1e320972ef116558df418a86db5",
+      "embedded": true
+    },
+    {
+      "path": "cpu001/binaries/deterministic-lib/incant_runtime-b78626f570c94089",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-001/binaries/deterministic-lib/incant_runtime-b78626f570c94089",
+      "bytes": 13901200,
+      "sha256": "00f209d0298921c949a14b681508f7b48b422041e744f61c341f21a54cf0bba7",
+      "embedded": false
+    },
+    {
+      "path": "cpu001/binaries/deterministic-lib/incant_script-142ea1b496f386b0",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-001/binaries/deterministic-lib/incant_script-142ea1b496f386b0",
+      "bytes": 20163664,
+      "sha256": "2c82865042906e3dcded2485f078e353b65ace4ae52b4884f639e8d56de539eb",
+      "embedded": false
+    },
+    {
+      "path": "cpu001/binaries/deterministic-project/project_bindings-3d9ca1177e3ebff8",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-001/binaries/deterministic-project/project_bindings-3d9ca1177e3ebff8",
+      "bytes": 18243120,
+      "sha256": "17a47383ea690169b7cdfe0b5379bc214a1e71751bf150dd46d69d2bce92ed48",
+      "embedded": false
+    },
+    {
+      "path": "cpu001/binaries/fast-lib/incant_runtime-1c004b60f78a02eb",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-001/binaries/fast-lib/incant_runtime-1c004b60f78a02eb",
+      "bytes": 13658544,
+      "sha256": "cde02890fff54c6d7e32a53e63d231f355c2120b410270f16939a492a196876e",
+      "embedded": false
+    },
+    {
+      "path": "cpu001/binaries/fast-lib/incant_script-1a5c74f1f30add2a",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-001/binaries/fast-lib/incant_script-1a5c74f1f30add2a",
+      "bytes": 19828640,
+      "sha256": "4ae22985a2ca1d5a7716e55a5429f8a1916460648948efcc253ab70ef7dee87e",
+      "embedded": false
+    },
+    {
+      "path": "cpu001/binaries/fast-project/project_bindings-9602e26d94033658",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-001/binaries/fast-project/project_bindings-9602e26d94033658",
+      "bytes": 17980128,
+      "sha256": "a92f36170141cb0645daa214c712d58be35d7307383b8fcec49eb5e3e99dcf87",
+      "embedded": false
+    },
+    {
+      "path": "cpu001/deterministic-clippy.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-001/deterministic-clippy.json",
+      "bytes": 1157,
+      "sha256": "c0f42824fe513b61541420b7755d323a63c57b3de7783bbca107f3960bf1c16d",
+      "embedded": true
+    },
+    {
+      "path": "cpu001/deterministic-clippy.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-001/deterministic-clippy.stderr",
+      "bytes": 1097,
+      "sha256": "59da3c7c0958bcdcd9113547b709bf48d7b5556a0a2095798dda8aac2c20de21",
+      "embedded": true
+    },
+    {
+      "path": "cpu001/deterministic-clippy.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-001/deterministic-clippy.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true
+    },
+    {
+      "path": "cpu001/deterministic-lib.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-001/deterministic-lib.json",
+      "bytes": 1787,
+      "sha256": "8058a7625b422a2a39fe3a2e898151e7e719d8cd0178f622596f2878fb2b944a",
+      "embedded": true
+    },
+    {
+      "path": "cpu001/deterministic-lib.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-001/deterministic-lib.stderr",
+      "bytes": 1409,
+      "sha256": "e5ee285d09e16b44790b0740f1f3ebbf06af4e95658d9f034d7953d680fb0970",
+      "embedded": true
+    },
+    {
+      "path": "cpu001/deterministic-lib.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-001/deterministic-lib.stdout",
+      "bytes": 16981,
+      "sha256": "118079868e4da94a26139e2fbd26fde41857eecc710b7928fdab6f6ffd2b8a82",
+      "embedded": true
+    },
+    {
+      "path": "cpu001/deterministic-project.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-001/deterministic-project.json",
+      "bytes": 1484,
+      "sha256": "b8639a98016f0aa68cf440a05d56c38977ae77597b3f29f4e728ecff4d387827",
+      "embedded": true
+    },
+    {
+      "path": "cpu001/deterministic-project.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-001/deterministic-project.stderr",
+      "bytes": 347,
+      "sha256": "aec67ec1c13e0e213655575a6fb0196b957367d2674d58576f216b10e34f6eac",
+      "embedded": true
+    },
+    {
+      "path": "cpu001/deterministic-project.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-001/deterministic-project.stdout",
+      "bytes": 1559,
+      "sha256": "d45621e2f558a61eb24d779610194925e3aa78f4506c473600ad88e5ac6d4a6d",
+      "embedded": true
+    },
+    {
+      "path": "cpu001/diff.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-001/diff.json",
+      "bytes": 775,
+      "sha256": "25ccad1d113fe14823ee3456f225e2a9f088eea6f08da2daf89e9441263f694c",
+      "embedded": true
+    },
+    {
+      "path": "cpu001/diff.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-001/diff.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true
+    },
+    {
+      "path": "cpu001/diff.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-001/diff.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true
+    },
+    {
+      "path": "cpu001/fast-clippy.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-001/fast-clippy.json",
+      "bytes": 1151,
+      "sha256": "e863d4428be2794fb8c9f7a34286c54718d6da15b7549fc53d68433a694e0e14",
+      "embedded": true
+    },
+    {
+      "path": "cpu001/fast-clippy.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-001/fast-clippy.stderr",
+      "bytes": 1097,
+      "sha256": "103f202f4d78f84cd51930a00f1047ab33a1fb9fd1fd47aa2c51721502d330f7",
+      "embedded": true
+    },
+    {
+      "path": "cpu001/fast-clippy.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-001/fast-clippy.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true
+    },
+    {
+      "path": "cpu001/fast-lib.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-001/fast-lib.json",
+      "bytes": 1763,
+      "sha256": "7198f2c4c572c547543f022dcb844e22a93ee66e4002202744f6386299bfbd38",
+      "embedded": true
+    },
+    {
+      "path": "cpu001/fast-lib.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-001/fast-lib.stderr",
+      "bytes": 1409,
+      "sha256": "1ac3b37bf0f897cee4dc364cf52e95b71d87b7c1d1f2f5c2d51f49984e72bafb",
+      "embedded": true
+    },
+    {
+      "path": "cpu001/fast-lib.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-001/fast-lib.stdout",
+      "bytes": 16981,
+      "sha256": "62e1e22fe8c6ba81b3f7fa2fb2d74c62d4fd22852c678d458510966d9b43e8aa",
+      "embedded": true
+    },
+    {
+      "path": "cpu001/fast-project.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-001/fast-project.json",
+      "bytes": 1469,
+      "sha256": "d544d5ed02a4b1d918775fc005aedcbfae9489d1624aff57ed4414ea528fd576",
+      "embedded": true
+    },
+    {
+      "path": "cpu001/fast-project.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-001/fast-project.stderr",
+      "bytes": 347,
+      "sha256": "24b1d052e935c5781b0c99683789f6e23169545b2adb3c9f29c73b0097a5451a",
+      "embedded": true
+    },
+    {
+      "path": "cpu001/fast-project.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-001/fast-project.stdout",
+      "bytes": 1559,
+      "sha256": "0b98ca3394738ccd9b8a1458bcaa2821eff6093ceb8b470cb18d4db615cfe75f",
+      "embedded": true
+    },
+    {
+      "path": "cpu001/fmt.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-001/fmt.json",
+      "bytes": 807,
+      "sha256": "535817dabc468d176489118bac69fa59ce3d5f0b189c3444dec958fb1f8fa73e",
+      "embedded": true
+    },
+    {
+      "path": "cpu001/fmt.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-001/fmt.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true
+    },
+    {
+      "path": "cpu001/fmt.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-001/fmt.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true
+    },
+    {
+      "path": "cpu001/release.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-001/release.json",
+      "bytes": 204,
+      "sha256": "fefabdc38a0d9dec3a6a1b9fbd13893a163f1487b2b756151ba3c07760b46356",
+      "embedded": true
+    },
+    {
+      "path": "cpu001/run.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-001/run.py",
+      "bytes": 2896,
+      "sha256": "30e4b5e63c0e279667933e9a1b8850e8dcd207b7cf1fe7fa92bcb2726c79ae5e",
+      "embedded": true
+    },
+    {
+      "path": "cpu001/source-001/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-001/source-001/freeze.json",
+      "bytes": 489122,
+      "sha256": "d5c515136d3bfe8ddab70bfeeaf11b2494efafc24b40567555e09819c8951cb6",
+      "embedded": true
+    },
+    {
+      "path": "cpu001/source-001/src/crates/incant_runtime/src/columns/tests.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-001/source-001/src/crates/incant_runtime/src/columns/tests.rs",
+      "bytes": 6077,
+      "sha256": "441bd771c1e27c45b5fe99653164af3897692c3c087c8482fcc5f8591398fac1",
+      "embedded": true
+    },
+    {
+      "path": "cpu001/source-001/src/crates/incant_runtime/src/columns/validation_tests.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-001/source-001/src/crates/incant_runtime/src/columns/validation_tests.rs",
+      "bytes": 6032,
+      "sha256": "98c249ebbd5cfdc40e5f9e733b2e41d54e1abfbd3ed4c435c0c3693f23b7ee8a",
+      "embedded": true
+    },
+    {
+      "path": "cpu001/source-001/src/crates/incant_runtime/src/columns.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-001/source-001/src/crates/incant_runtime/src/columns.rs",
+      "bytes": 11787,
+      "sha256": "faadfb9d001b7492f8f2ac766533eef4997bfe5b24739ed90b8a2b3fba83816f",
+      "embedded": true
+    },
+    {
+      "path": "cpu001/source-001/src/crates/incant_runtime/src/world.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-001/source-001/src/crates/incant_runtime/src/world.rs",
+      "bytes": 34483,
+      "sha256": "111882ad24b86a67526f84d52da9c8faa72c83e90d58be611704597e660a08ad",
+      "embedded": true
+    },
+    {
+      "path": "cpu002/binaries/deterministic-tests/animation-89863e45fe23b69c",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/deterministic-tests/animation-89863e45fe23b69c",
+      "bytes": 14093768,
+      "sha256": "91800141b8f587a1e6e9359baa49b72a9052b971c076b9da836fdf2983565d59",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/deterministic-tests/animation_graph-52d7c945732a7cde",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/deterministic-tests/animation_graph-52d7c945732a7cde",
+      "bytes": 14098256,
+      "sha256": "1f58ef895404f99a5d30ded1940628512b6649152fcdc7c6f5a95bf46bf816f7",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/deterministic-tests/animation_tree-3156c1d970876703",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/deterministic-tests/animation_tree-3156c1d970876703",
+      "bytes": 1159200,
+      "sha256": "af153d56c2e887557055c372c49f511aa86d1af2b0b7fb855524629be8788e06",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/deterministic-tests/animation_tree_playback-2d55d60c522adb38",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/deterministic-tests/animation_tree_playback-2d55d60c522adb38",
+      "bytes": 13894856,
+      "sha256": "d3c190af6ea4e4dc384e61eecb93a03f4b371236eb116aa88ceafeddeea41a74",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/deterministic-tests/animations-591e091521f51e01",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/deterministic-tests/animations-591e091521f51e01",
+      "bytes": 18836312,
+      "sha256": "859f64e2a9a0a06bb5ae54f37d98e8f1a6be35daf3d21491e9f188a88a361be2",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/deterministic-tests/audio-3cb17e7bd2a39a2e",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/deterministic-tests/audio-3cb17e7bd2a39a2e",
+      "bytes": 8824440,
+      "sha256": "a05ef656118e8025dc98d468d636ca8fea5c4e1b176d420932eeae426c16229a",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/deterministic-tests/audio_controls-5576b68b4acb2db8",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/deterministic-tests/audio_controls-5576b68b4acb2db8",
+      "bytes": 12001632,
+      "sha256": "9ad9439addeb1b82c5de3ad6f88c36b0ecff9f70c16806703fb48332d6c0a8e3",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/deterministic-tests/audio_controls-f8e8c4a65d6ec706",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/deterministic-tests/audio_controls-f8e8c4a65d6ec706",
+      "bytes": 8826624,
+      "sha256": "cf77afc9bad88f8799fc9bdb6170cdd2e55716f9d7a2d7dd2b2f79f4097ab129",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/deterministic-tests/bindings_static-aaf5dc10e5e5a8ef",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/deterministic-tests/bindings_static-aaf5dc10e5e5a8ef",
+      "bytes": 11988208,
+      "sha256": "5ee046ecb624afe1ad234e7b802be851c73533b36154ce2078970093eeb78996",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/deterministic-tests/columns-b53cf624db6d1f99",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/deterministic-tests/columns-b53cf624db6d1f99",
+      "bytes": 13326648,
+      "sha256": "7e697ac916d5ae19277e1a4550ef7247c88a03e8a7bbced8b53bf3404f702765",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/deterministic-tests/entity_identity-c75a0be9ad8bd058",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/deterministic-tests/entity_identity-c75a0be9ad8bd058",
+      "bytes": 13818896,
+      "sha256": "efe363219dda6bafb90746970a3cc649357edfd7a801954080474d9eab2baa8d",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/deterministic-tests/flipbook-5cb79b1d037e71f1",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/deterministic-tests/flipbook-5cb79b1d037e71f1",
+      "bytes": 13846840,
+      "sha256": "8d5f42c52c6012b54342e4746ab0436a26469edb9147885c7ad717c71fa1a849",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/deterministic-tests/flipbook_snapshot-79b2d145eaf2e546",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/deterministic-tests/flipbook_snapshot-79b2d145eaf2e546",
+      "bytes": 13460720,
+      "sha256": "43c5bbb031ec85fad6309d3e8e764e15a191ddc882def605283db16b78e02360",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/deterministic-tests/flipbooks-2a9ded921c973c06",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/deterministic-tests/flipbooks-2a9ded921c973c06",
+      "bytes": 17351016,
+      "sha256": "6174bd7023e7e8730fd91dea9205a57f047da56d82149172962c6fe5176f61bd",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/deterministic-tests/hud-7992523469df6abe",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/deterministic-tests/hud-7992523469df6abe",
+      "bytes": 12036136,
+      "sha256": "273520c586d4135fd675b84b283629e7b75b9daed6b7fd427f4e1f196e6e4ca3",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/deterministic-tests/hud-ae3acc1a75e27ada",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/deterministic-tests/hud-ae3acc1a75e27ada",
+      "bytes": 8370360,
+      "sha256": "b96fa89256cb5dbd56ade216e45ddde052db156dd24e0589dfa0d12751e1a403",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/deterministic-tests/ik-544f4fce8d129082",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/deterministic-tests/ik-544f4fce8d129082",
+      "bytes": 13909808,
+      "sha256": "b1044fb233ea787f55b6fe132a19b7addecc9801c1fad57d02c74b008271a60a",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/deterministic-tests/incant_runtime-b78626f570c94089",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/deterministic-tests/incant_runtime-b78626f570c94089",
+      "bytes": 13901200,
+      "sha256": "7a9063dcb3ac8e0a37632ba177dd5d946125f018bddf6df911110a9774b80fbc",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/deterministic-tests/incant_script-142ea1b496f386b0",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/deterministic-tests/incant_script-142ea1b496f386b0",
+      "bytes": 20144160,
+      "sha256": "41c04ed56d58ae8fd63aaad587ceb7238a131877c0c5016eae41b0ef797898bd",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/deterministic-tests/localization-08542eb89e2200cf",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/deterministic-tests/localization-08542eb89e2200cf",
+      "bytes": 15307248,
+      "sha256": "32559968e7567f91c0ad37f6502a7523b44ee0de994d61aca6d50be1141195e4",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/deterministic-tests/navigation-dcd8497a3ed25a8a",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/deterministic-tests/navigation-dcd8497a3ed25a8a",
+      "bytes": 14135528,
+      "sha256": "79a81482fcdb8ecb71acf49a10288cc88f26379098086d220be474c3342438fd",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/deterministic-tests/navigation_queries-9c53937065c84753",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/deterministic-tests/navigation_queries-9c53937065c84753",
+      "bytes": 14185248,
+      "sha256": "f08538f6d42b9aa1aae7e73d42579389bb74d182d2e6bb49fb657a5ba638aec1",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/deterministic-tests/navigation_snapshots-b2498c6518c958c4",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/deterministic-tests/navigation_snapshots-b2498c6518c958c4",
+      "bytes": 8510408,
+      "sha256": "470828061b5bf5fb8dbb4a243f0bb23bb29671d1eec2ea2fd36d7ff7433127a1",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/deterministic-tests/numeric_boundaries-c18012a673a37bf0",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/deterministic-tests/numeric_boundaries-c18012a673a37bf0",
+      "bytes": 13562976,
+      "sha256": "dcb176f845eebfc4a57b1343b63b00db145ed89061f7527a4272159a1c59f466",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/deterministic-tests/physics-6a408a24b837fee4",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/deterministic-tests/physics-6a408a24b837fee4",
+      "bytes": 14028408,
+      "sha256": "a359bdb3b8b07fff14e8d92de3a0e75ad36aee3f0ac8cdfce0b4f86bf677d120",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/deterministic-tests/physics_2d-7c56a2ec74e315cc",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/deterministic-tests/physics_2d-7c56a2ec74e315cc",
+      "bytes": 14024232,
+      "sha256": "082f99d332ccb7d3a5114eb11fb4442c74c1c93f5423a9a67e13acb8d95ae194",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/deterministic-tests/physics_queries_2d-bb8d87b5420ccb6e",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/deterministic-tests/physics_queries_2d-bb8d87b5420ccb6e",
+      "bytes": 12974256,
+      "sha256": "58965c9e6d258886b76903fd4ffe5b2853bff2a87e6f83faa177010ec3e1d15d",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/deterministic-tests/physics_variant-097779789695f874",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/deterministic-tests/physics_variant-097779789695f874",
+      "bytes": 13117744,
+      "sha256": "a316ef66ef1660487d13a2d42ea1a278d21a3360e465e00e06f5bb2033f42f65",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/deterministic-tests/profile-b6ed3fc1501c151c",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/deterministic-tests/profile-b6ed3fc1501c151c",
+      "bytes": 1026984,
+      "sha256": "6029c2f3f5f530e9314de319fa5e71403c4dc1e2c1cd0e1557c3ec9bc4bf516e",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/deterministic-tests/project_bindings-3d9ca1177e3ebff8",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/deterministic-tests/project_bindings-3d9ca1177e3ebff8",
+      "bytes": 18243248,
+      "sha256": "a41e1c942864bb9a2bfd18b28827761949c06098849cb56b34483b08b28aa1ed",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/deterministic-tests/queries-9802a3e1a8ab5e02",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/deterministic-tests/queries-9802a3e1a8ab5e02",
+      "bytes": 12865688,
+      "sha256": "db6409eda2d21d7e6a78e4c245705d4fd42a0fd7536823b6e27e151270bd4227",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/deterministic-tests/retained_saves-ab44641794d27f22",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/deterministic-tests/retained_saves-ab44641794d27f22",
+      "bytes": 14092128,
+      "sha256": "a03648be0c7e6fd1acb20b79ef1f92d228e7376e3411659dee3b84d552efc108",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/deterministic-tests/saves-2c8152f6b2285f82",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/deterministic-tests/saves-2c8152f6b2285f82",
+      "bytes": 13893288,
+      "sha256": "d20ed0071942b64b41697ab8993866853679129424def84905152351f19dbc06",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/deterministic-tests/scenes-232ad0c62e70141a",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/deterministic-tests/scenes-232ad0c62e70141a",
+      "bytes": 13142808,
+      "sha256": "2ba39905761ba83d37f2e4a7543f7a49055c57291d9a2b251b8171b90ba7f341",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/deterministic-tests/spatial-54a693a7e4a2c1df",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/deterministic-tests/spatial-54a693a7e4a2c1df",
+      "bytes": 13969864,
+      "sha256": "87ea675247efa1dac5f5cab884b2daee5488903c53ff436cec653ef8e2c59433",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/deterministic-tests/spatial-577595cc0e9626d8",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/deterministic-tests/spatial-577595cc0e9626d8",
+      "bytes": 12098888,
+      "sha256": "43c65a452cba3e35dc3c70418cdc37bbb764780eb0186098390c7e202a9deb69",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/deterministic-tests/sprites-fb64381ca63d06da",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/deterministic-tests/sprites-fb64381ca63d06da",
+      "bytes": 8766312,
+      "sha256": "b29dd5aba06b65bb834a7a9db2cf3e8e8ac68a929c95dee1b9200a47e74e9f24",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/deterministic-tests/steering_queries-6b413ff3da2e9204",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/deterministic-tests/steering_queries-6b413ff3da2e9204",
+      "bytes": 7612000,
+      "sha256": "7a47edb7166fd5eb60d76144a65dda4957f04d5673f2ca64f525d411a0d9b0d0",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/deterministic-tests/structural-7ff12ae8c220b2d7",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/deterministic-tests/structural-7ff12ae8c220b2d7",
+      "bytes": 13349160,
+      "sha256": "309af053cb51874cb61d0088b1e1826e2c992448eb885bc03d322df0784cf809",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/deterministic-tests/text-dee0ea00d5e5a0a6",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/deterministic-tests/text-dee0ea00d5e5a0a6",
+      "bytes": 13892776,
+      "sha256": "ef326609408f8bfc9371d2fd6fec38c8d52341026ae8185d6298e53e62d0daff",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/deterministic-tests/tilemaps-1cc0ce509ae74bd5",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/deterministic-tests/tilemaps-1cc0ce509ae74bd5",
+      "bytes": 13912296,
+      "sha256": "bb6a4c304f444d435661496dd5f18d568b77408e01b54c3b9d1655860c93b036",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/deterministic-tests/ui-7b2a3211def091a5",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/deterministic-tests/ui-7b2a3211def091a5",
+      "bytes": 13915984,
+      "sha256": "dcf777af794cddabd6f5ae12a59542d6e9c6a4e7efdcb904277fb94c4729fd93",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/fast-tests/animation-64af222ed60a94c3",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/fast-tests/animation-64af222ed60a94c3",
+      "bytes": 13860024,
+      "sha256": "e0878a910acec279ec4e3b5372416f01273e652d6dd49140dffc39436233533c",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/fast-tests/animation_graph-a34331d499cc4552",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/fast-tests/animation_graph-a34331d499cc4552",
+      "bytes": 13880688,
+      "sha256": "83566e0a54946f208dbfaac4cf0164d720f3bb43d3c073bef661505c1fcebd9e",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/fast-tests/animation_tree-3e5baeb3820f9e47",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/fast-tests/animation_tree-3e5baeb3820f9e47",
+      "bytes": 1159200,
+      "sha256": "559d1821b8d196d8155b7791c12262feaed61895661ae77708c53e1ab4d7b61d",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/fast-tests/animation_tree_playback-c6f4930c305f2bf8",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/fast-tests/animation_tree_playback-c6f4930c305f2bf8",
+      "bytes": 13665144,
+      "sha256": "80850a9f0cbd8a3661a395a77adcf0cbe7a6fb2f66b84e97b142669d07f0fe23",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/fast-tests/animations-3458e676d35aeb95",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/fast-tests/animations-3458e676d35aeb95",
+      "bytes": 18522280,
+      "sha256": "82c007474bdfd63f549f4b5b4ac5b2ab8fda9723290c5e36b8452e88895a63e0",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/fast-tests/audio-7fb3fdab2d3437ec",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/fast-tests/audio-7fb3fdab2d3437ec",
+      "bytes": 8632664,
+      "sha256": "e18ff6e7e81b286298ff39834379c4e4810865accdd8dcfe935c17fb7f0027b6",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/fast-tests/audio_controls-041f79d6280a3077",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/fast-tests/audio_controls-041f79d6280a3077",
+      "bytes": 11777840,
+      "sha256": "af5d15f308bda85dc914100703946c415f463aaee88e2861be46065a445b90f6",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/fast-tests/audio_controls-73cd11264613e9ee",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/fast-tests/audio_controls-73cd11264613e9ee",
+      "bytes": 8634960,
+      "sha256": "1f48392ffce1de317981d26509590df0b3ec0ca3a9691320459bccead208d7d4",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/fast-tests/bindings_static-c6d2d853bcd4bbfc",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/fast-tests/bindings_static-c6d2d853bcd4bbfc",
+      "bytes": 11746912,
+      "sha256": "e89298e3bc35cc8a70e88704dadabc412af741f257da8509f95fb6196a299373",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/fast-tests/columns-84e72d0fae73173f",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/fast-tests/columns-84e72d0fae73173f",
+      "bytes": 13097064,
+      "sha256": "c2aa3c3efbe92fae88897300d75247ec47f7e69a98127fff58577697e45265c6",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/fast-tests/entity_identity-43280d5397214446",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/fast-tests/entity_identity-43280d5397214446",
+      "bytes": 13589280,
+      "sha256": "7093ab87985217773044ad49821d77f5b4ecaf4468acfcad0e9eae1e4d018c52",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/fast-tests/flipbook-8c4c475154ad9f71",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/fast-tests/flipbook-8c4c475154ad9f71",
+      "bytes": 13600936,
+      "sha256": "f69913624eeddc53b723046abcefeffe4572c7cb9526f2ba13cb46e82b76b664",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/fast-tests/flipbook_snapshot-fe874c3f908ce641",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/fast-tests/flipbook_snapshot-fe874c3f908ce641",
+      "bytes": 13231536,
+      "sha256": "63ed0cb7222424c2026808f3bcde39828126cb90e66913879aff42c922c44383",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/fast-tests/flipbooks-58c05df2ce1ab24a",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/fast-tests/flipbooks-58c05df2ce1ab24a",
+      "bytes": 17086648,
+      "sha256": "1330af2a0116bcacab462c04727e8392eb93232612dd7e3019232a494b4634ae",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/fast-tests/hud-477398c14600f81b",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/fast-tests/hud-477398c14600f81b",
+      "bytes": 11812840,
+      "sha256": "9ff5591bbe6a74b3731427376898e98efd729aed99b0b2ff246142dae26e650a",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/fast-tests/hud-b03382c60fd47565",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/fast-tests/hud-b03382c60fd47565",
+      "bytes": 8178952,
+      "sha256": "63d525463836eacdd3fd5f04c5cf9f686f1b5289d4bd3a949428c4b31efa7f60",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/fast-tests/ik-1587f4445d33a359",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/fast-tests/ik-1587f4445d33a359",
+      "bytes": 13680416,
+      "sha256": "805b622611f8a7dd210e68d03acffaf4fc09e4efc8af4f392eef9cb3cf8f3271",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/fast-tests/incant_runtime-1c004b60f78a02eb",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/fast-tests/incant_runtime-1c004b60f78a02eb",
+      "bytes": 13658544,
+      "sha256": "321f13aa32391c41be57891f471d5d047e77e60b2e7b3f3169ae3dc2cb06433a",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/fast-tests/incant_script-1a5c74f1f30add2a",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/fast-tests/incant_script-1a5c74f1f30add2a",
+      "bytes": 19828256,
+      "sha256": "beb0e09d27aeb612d67950c7188827528de3cb696e408885ac4e4cf638f5cb69",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/fast-tests/localization-625942ca15d4af61",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/fast-tests/localization-625942ca15d4af61",
+      "bytes": 15047664,
+      "sha256": "f895f04ea2574f7a8808d9b3de3cb0847c3844b9daa1bde9ecd3be3280962503",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/fast-tests/navigation-45f67689d3df7305",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/fast-tests/navigation-45f67689d3df7305",
+      "bytes": 13906248,
+      "sha256": "da44b4a730966bf1c5496014d71aaf5cb2dd59a0769d4c981b8a1bba01a19a97",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/fast-tests/navigation_queries-554d1bf5bf371467",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/fast-tests/navigation_queries-554d1bf5bf371467",
+      "bytes": 13941920,
+      "sha256": "51187a80d833688085d4da155c467af2a0b258905d64a2b481750f07d6258bbf",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/fast-tests/navigation_snapshots-b872a06d7dbc81f9",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/fast-tests/navigation_snapshots-b872a06d7dbc81f9",
+      "bytes": 8318824,
+      "sha256": "ca6c2c4eee9cf8836571758825dcf89cb7f19c8844eccf3e752a998d4592c250",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/fast-tests/numeric_boundaries-84b792b896aae47b",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/fast-tests/numeric_boundaries-84b792b896aae47b",
+      "bytes": 13333696,
+      "sha256": "8529b2018d77c766fb34651aa0469daf3e4cc0ca7c8981a4a35da9498b005022",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/fast-tests/physics-e513afa2cf04b0bb",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/fast-tests/physics-e513afa2cf04b0bb",
+      "bytes": 13798936,
+      "sha256": "6cd3f4f74b7c123c121afc3d93f639c3d182988c807c6a08700ec8c0ee8d0f5e",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/fast-tests/physics_2d-27834ae550172fb1",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/fast-tests/physics_2d-27834ae550172fb1",
+      "bytes": 13794472,
+      "sha256": "c23df27ff8a11cfe845aa3ead153e7e6775972e808b8571215893a941e5e6a5c",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/fast-tests/physics_queries_2d-303b2f41219618ee",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/fast-tests/physics_queries_2d-303b2f41219618ee",
+      "bytes": 12730144,
+      "sha256": "40ecaeaafdc41fb112addb382a6b84c0b05769add7e08078212589d71cc5de8a",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/fast-tests/physics_variant-c8dcb5cfa85c37d4",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/fast-tests/physics_variant-c8dcb5cfa85c37d4",
+      "bytes": 12903504,
+      "sha256": "1c63f7995fa27f2fdf4ac2c5a63fd3358b8b81c6b4f8c9ccf581730e0fb849fe",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/fast-tests/profile-8d18e239ea2ab3df",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/fast-tests/profile-8d18e239ea2ab3df",
+      "bytes": 1026984,
+      "sha256": "7783be6df958815af292a12474417a146bfe95e28b156d64d4137f30c2b6ccbe",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/fast-tests/project_bindings-9602e26d94033658",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/fast-tests/project_bindings-9602e26d94033658",
+      "bytes": 17980256,
+      "sha256": "9af168ab9d8248a2843ee9a4a5e48b7f39435337024d66fd3b04cae881ba583c",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/fast-tests/queries-1fc1bc980824a5a1",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/fast-tests/queries-1fc1bc980824a5a1",
+      "bytes": 12621864,
+      "sha256": "9a7dd179d7b82edb3fc48c5fb517317fc0a56ab447fa833dac9b00b77c2f8b4f",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/fast-tests/retained_saves-9e08742fee31c4e7",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/fast-tests/retained_saves-9e08742fee31c4e7",
+      "bytes": 13862592,
+      "sha256": "7af1c9c3065ff8976c5a5eee018e40eeb74e36016f055d5c4a14761a3a9783d0",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/fast-tests/saves-7a9c2b496201d14e",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/fast-tests/saves-7a9c2b496201d14e",
+      "bytes": 13663800,
+      "sha256": "dedb20a275127372abf98b427139ffe2dbe32fe91d4abf7ec27d8e35665808cf",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/fast-tests/scenes-fa5bb061417fdc1f",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/fast-tests/scenes-fa5bb061417fdc1f",
+      "bytes": 12912696,
+      "sha256": "f85159c49c1141be44adc683ac25d80f15f4ad574904c1e5dbaff59078a0fe89",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/fast-tests/spatial-40c6492cd42b9704",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/fast-tests/spatial-40c6492cd42b9704",
+      "bytes": 11858696,
+      "sha256": "227c058dcefd8917957e7fc3683ca7f007bae6509b6f7b1994a816bd9ed323e7",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/fast-tests/spatial-c52feddf0577f1b6",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/fast-tests/spatial-c52feddf0577f1b6",
+      "bytes": 13740392,
+      "sha256": "ecaf4f11540027280a576c4d03ce3c86f5f3edf193f20cb937b65281ae12eb74",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/fast-tests/sprites-43ab8564e8dbf5d9",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/fast-tests/sprites-43ab8564e8dbf5d9",
+      "bytes": 8574584,
+      "sha256": "2ae5969d3ca7f62033c8f3140d88ca4b7bedf4671fac1746aafb2d9fb65c1b03",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/fast-tests/steering_queries-5a233401ce0f9c83",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/fast-tests/steering_queries-5a233401ce0f9c83",
+      "bytes": 7438688,
+      "sha256": "8b1bb8c9f527cb2f209138ce9786b83a3a10801addc3c03cf9cb5af967a94b47",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/fast-tests/structural-387ba8e9cee2f7db",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/fast-tests/structural-387ba8e9cee2f7db",
+      "bytes": 13119528,
+      "sha256": "4a581ef49d09007d43880bf99aa464a456cb641a731583e6e7948b2c1e5a76ea",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/fast-tests/text-07ed3b7ba50eb6a9",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/fast-tests/text-07ed3b7ba50eb6a9",
+      "bytes": 13663288,
+      "sha256": "1d1f35e0cdad0f4cef25a9e88b45657e4ca689e6c8aac70121443f84fee73ea0",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/fast-tests/tilemaps-125e0be02b51a2c3",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/fast-tests/tilemaps-125e0be02b51a2c3",
+      "bytes": 13682824,
+      "sha256": "507a70b193fba71904afb1ff376176b1776434ac97ff891d6d9c9f30ff00f9c2",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/binaries/fast-tests/ui-a01ef8f692ef35fc",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/binaries/fast-tests/ui-a01ef8f692ef35fc",
+      "bytes": 13686544,
+      "sha256": "23877b986b488c11ebea305d07b44aba97bc3e8e018b39669291fb75829bf60c",
+      "embedded": false
+    },
+    {
+      "path": "cpu002/deterministic-clippy.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/deterministic-clippy.json",
+      "bytes": 1157,
+      "sha256": "4d7213ec3af318a2ba6e32e073d9367fa7a22446b36f09dc48c322def03b1181",
+      "embedded": true
+    },
+    {
+      "path": "cpu002/deterministic-clippy.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/deterministic-clippy.stderr",
+      "bytes": 313,
+      "sha256": "ca9f2386b9a9eaa6afeb851d487d5a8887d92fd51f34f2a586d2fdd16b913334",
+      "embedded": true
+    },
+    {
+      "path": "cpu002/deterministic-clippy.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/deterministic-clippy.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true
+    },
+    {
+      "path": "cpu002/deterministic-tests.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/deterministic-tests.json",
+      "bytes": 15119,
+      "sha256": "44396213654a2136a964602e6cab4b5357e14c597498d966ea3dc271eb12947a",
+      "embedded": true
+    },
+    {
+      "path": "cpu002/deterministic-tests.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/deterministic-tests.stderr",
+      "bytes": 6719,
+      "sha256": "3369a8f6f2622fc39ac4312d7c122adcdc4c0af37ae663dfef1ecce62c0cfffc",
+      "embedded": true
+    },
+    {
+      "path": "cpu002/deterministic-tests.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/deterministic-tests.stdout",
+      "bytes": 45588,
+      "sha256": "bc46704b039a72a8307f585bbdf04ef6faa61ac1e3188e2e27267871692845c4",
+      "embedded": true
+    },
+    {
+      "path": "cpu002/diff.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/diff.json",
+      "bytes": 775,
+      "sha256": "5552e2f72c40eea34bd65afd28091e9ccbdb2589f07d8abd629d2a830254ea87",
+      "embedded": true
+    },
+    {
+      "path": "cpu002/diff.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/diff.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true
+    },
+    {
+      "path": "cpu002/diff.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/diff.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true
+    },
+    {
+      "path": "cpu002/fast-clippy.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/fast-clippy.json",
+      "bytes": 1151,
+      "sha256": "314e7e24203c406db012d79de66bcb9c453353eed56ee56e43df4ead43cda90b",
+      "embedded": true
+    },
+    {
+      "path": "cpu002/fast-clippy.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/fast-clippy.stderr",
+      "bytes": 313,
+      "sha256": "66ff025741a7bf61e8ed16fccc849231b3f769182f6a6c91cd6683538750e5d9",
+      "embedded": true
+    },
+    {
+      "path": "cpu002/fast-clippy.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/fast-clippy.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true
+    },
+    {
+      "path": "cpu002/fast-tests.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/fast-tests.json",
+      "bytes": 14735,
+      "sha256": "27a6ef5c77486c8d681e44543b9b231512b99cb40de6c23dc2f0e4aacc73c53f",
+      "embedded": true
+    },
+    {
+      "path": "cpu002/fast-tests.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/fast-tests.stderr",
+      "bytes": 6719,
+      "sha256": "aea1b9d1193377487f58d7dc97c1729aa3d6148c2cb3fa0d05454dd9feb26fd7",
+      "embedded": true
+    },
+    {
+      "path": "cpu002/fast-tests.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/fast-tests.stdout",
+      "bytes": 45588,
+      "sha256": "6906ab57b0885d79442217456ac0265bf780b8fd1466c50b364d955b6e71c83f",
+      "embedded": true
+    },
+    {
+      "path": "cpu002/fmt.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/fmt.json",
+      "bytes": 807,
+      "sha256": "633757a0158fea9c668bc1fcffe40df79934785e9ef36b5cab8549462c89d9ce",
+      "embedded": true
+    },
+    {
+      "path": "cpu002/fmt.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/fmt.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true
+    },
+    {
+      "path": "cpu002/fmt.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/fmt.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true
+    },
+    {
+      "path": "cpu002/native-lean.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/native-lean.json",
+      "bytes": 993,
+      "sha256": "a440d0dee9f4331d7e730437c6c9899c0e0e9d79c462ee7fa1caf9b586479988",
+      "embedded": true
+    },
+    {
+      "path": "cpu002/native-lean.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/native-lean.stderr",
+      "bytes": 609,
+      "sha256": "a6411f085a3216f36c0771e2b79a20e83b503ad14c6ec7e1d01c114319e3d975",
+      "embedded": true
+    },
+    {
+      "path": "cpu002/native-lean.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/native-lean.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true
+    },
+    {
+      "path": "cpu002/release.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/release.json",
+      "bytes": 204,
+      "sha256": "c6a5b847f883aa034d6a074f0412bfc7cde07437b4817887b282155644028730",
+      "embedded": true
+    },
+    {
+      "path": "cpu002/run.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/run.py",
+      "bytes": 3235,
+      "sha256": "14a485926495ee2fa267d5c0026668424bb22f70dab52fd970f2c6c5dc60402b",
+      "embedded": true
+    },
+    {
+      "path": "cpu002/source-002/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/source-002/freeze.json",
+      "bytes": 489379,
+      "sha256": "16cd46bf2ea578d414c96292d9b6fc3d30056c9a410e8ec63acd38ba6dcf01ef",
+      "embedded": true
+    },
+    {
+      "path": "cpu002/source-002/src/crates/incant_runtime/src/columns/tests.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/source-002/src/crates/incant_runtime/src/columns/tests.rs",
+      "bytes": 6077,
+      "sha256": "441bd771c1e27c45b5fe99653164af3897692c3c087c8482fcc5f8591398fac1",
+      "embedded": true
+    },
+    {
+      "path": "cpu002/source-002/src/crates/incant_runtime/src/columns/validation_tests.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/source-002/src/crates/incant_runtime/src/columns/validation_tests.rs",
+      "bytes": 6032,
+      "sha256": "98c249ebbd5cfdc40e5f9e733b2e41d54e1abfbd3ed4c435c0c3693f23b7ee8a",
+      "embedded": true
+    },
+    {
+      "path": "cpu002/source-002/src/crates/incant_runtime/src/columns.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/source-002/src/crates/incant_runtime/src/columns.rs",
+      "bytes": 11787,
+      "sha256": "faadfb9d001b7492f8f2ac766533eef4997bfe5b24739ed90b8a2b3fba83816f",
+      "embedded": true
+    },
+    {
+      "path": "cpu002/source-002/src/crates/incant_runtime/src/world.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/source-002/src/crates/incant_runtime/src/world.rs",
+      "bytes": 35100,
+      "sha256": "022b782570ca1ae9e588c01aa45598dd8cc43055fa842e19a11439842193b7a2",
+      "embedded": true
+    },
+    {
+      "path": "cpu002/source-002/src/crates/incant_runtime/tests/entity_identity.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/source-002/src/crates/incant_runtime/tests/entity_identity.rs",
+      "bytes": 3182,
+      "sha256": "8ffe2f25db7455270c1d644cb5b721788dfe5bb49f3268db981eaec341c2f8c4",
+      "embedded": true
+    },
+    {
+      "path": "cpu002/source-002/src/crates/incant_script/src/bindings.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/source-002/src/crates/incant_script/src/bindings.rs",
+      "bytes": 13477,
+      "sha256": "de74c4be541b87be809946e84ea4d594db528005501307c6f39889c9af6a311b",
+      "embedded": true
+    },
+    {
+      "path": "cpu002/wasm-runtime.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/wasm-runtime.json",
+      "bytes": 996,
+      "sha256": "e281e60ff9938e70d6cea1b774ab60a983659cfff29dc6e1fa66395cf40582d9",
+      "embedded": true
+    },
+    {
+      "path": "cpu002/wasm-runtime.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/wasm-runtime.stderr",
+      "bytes": 970,
+      "sha256": "dfc1931d47b94ac37e6ac0ae3d241201b052f0fe3104b8c16cab8f75cf339183",
+      "embedded": true
+    },
+    {
+      "path": "cpu002/wasm-runtime.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/numeric-loan-prepared-globals-002/wasm-runtime.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "embedded": true
+    },
+    {
+      "path": "reference/core-prepared.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-shipping-002/prepared.json",
+      "bytes": 159997,
+      "sha256": "22c0678926de9c2f2162ac2b6deac4b26be4b6b666a08bffe12d597831606cfe",
+      "embedded": true
+    },
+    {
+      "path": "reference/shipping-inputs.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-script-stress-001/fast-stress-002/shipping-inputs.json",
+      "bytes": 943,
+      "sha256": "39008276b6de9285bb8368519c784e4ce330207de337c7d3eba4b2df86f97e00",
+      "embedded": true
+    },
+    {
+      "path": "reference/baseline-package.json",
+      "bytes": 642,
+      "sha256": "5a62d3a987c88b5376dfa3b9931820650d7e630e132d778ab7bc19d2dd832df5",
+      "embedded": true,
+      "git": "051e0de7f26c6f38c470765ae86b8bc415d19fcc:package.json"
+    },
+    {
+      "path": "reference/candidate-package.json",
+      "bytes": 865,
+      "sha256": "bb8e7500fecc2e50fdf50716823a65ca4ff6b8cd742be881db7155b65ab21012",
+      "embedded": true,
+      "git": "03bc4b987f3e553249846c4cfce991793d4d2c48:package.json"
+    },
+    {
+      "path": "review/numeric-loan-prepared-globals-source-independent-20261014.json",
+      "original": "/Users/andreyyurlov/.codex/incant-reviews/numeric-loan-prepared-globals-source-independent-20261014.json",
+      "bytes": 2639,
+      "sha256": "ec00f99da88b0537a8925ca8fe51effe11394dd2e581152a31447f7cd5dbd8ed",
+      "embedded": true
+    },
+    {
+      "path": "review/entity-identity-token-check-source-independent-20261014.json",
+      "original": "/Users/andreyyurlov/.codex/incant-reviews/entity-identity-token-check-source-independent-20261014.json",
+      "bytes": 1803,
+      "sha256": "ccc303d80987895f276b5d79c3bc1f8edfcac07e01e96663937f23c4f1f31478",
+      "embedded": true
+    },
+    {
+      "path": "review/numeric-loan-prepared-globals-cpu-independent-20261014.json",
+      "original": "/Users/andreyyurlov/.codex/incant-reviews/numeric-loan-prepared-globals-cpu-independent-20261014.json",
+      "bytes": 7059,
+      "sha256": "e50ffd326c55109fc559da9b4ecfe8289c72283ff285be1e0c5148dea26acb21",
+      "embedded": true
+    },
+    {
+      "path": "review/numeric-loan-format-initial.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-reviews/numeric-loan-format-initial.stdout",
+      "bytes": 509,
+      "sha256": "48f6f09685c1ec994061d415b11f712852508dc3f2ac9e0c2c9bff37c6cbadd9",
+      "embedded": true
+    },
+    {
+      "path": "current/composition.json",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/numeric-loan-main262-001/composition.json",
+      "bytes": 3509,
+      "sha256": "611e0cb7537d80336ea9cf55e39ed1e12c37be2d7c28e1e1f46dce0b808daec8",
+      "embedded": true
+    },
+    {
+      "path": "current/verify.py",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/numeric-loan-main262-001/verify.py",
+      "bytes": 2005,
+      "sha256": "a850bd6cf3c7bc24721380c4013a1bace481e9469afa628c448cc1f0f978a414",
+      "embedded": true
+    }
+  ],
+  "archive_sha256": "c17c6318492a32e14c9c475dc3ee891fa60bf1daf27499b97a71f726bd53375b",
+  "audit_files": {
+    "docs/spikes/evidence/mac-core-fast10k/build.py": "dd0f39b906ac843618afd63191aa63164872d87db475d2fb375cc28d28a2f19a",
+    "docs/spikes/evidence/mac-core-fast10k/metrics.py": "d412dc02bf80cc58b2d6c7a9807cec67e30931fd891ea48a4a1527be586005be",
+    "docs/spikes/evidence/mac-core-fast10k/verify.py": "32e411e82dba2f5d5cc4a1dd2e3af0b40bc40a3b73e6ad4f397375393a071455",
+    "docs/spikes/evidence/numeric-loan-main262/collect.py": "26e553d8820b8572e792011f2bcee328884017d577ad0bb14b715baa429a7044",
+    "docs/spikes/evidence/numeric-loan-main262/cpu.py": "992738d0f4a5e8453234d170029dce96a10da39adc17cd3ad32bfa8ce9c7a5ec",
+    "docs/spikes/evidence/numeric-loan-main262/verify.py": "a47a016148474bc995f3967409614d53349b813870dd093e4ca3b688afadbe53"
+  },
+  "scope": "Reviewed numeric hierarchy cleanup and opaque entity lifetime checks; actual unchanged-workload CPU-only Mac shipping, all 2ms gates failed; no FPS or full phase claim."
+}
