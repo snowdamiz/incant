@@ -52,40 +52,6 @@ impl Options {
         }
     }
 }
-#[cfg(test)]
-mod options_tests {
-    use super::*;
-
-    #[test]
-    fn outer_dispatch_and_parser_accept_both_probe_modes() {
-        for (flag, textures) in [("--play-probe", false), ("--texture-probe", true)] {
-            assert!(Options::accepts_mode(OsStr::new(flag)));
-            let options = Options::from_probe_args(
-                [flag, "receipt.json", "00000000000000000000000002"]
-                    .map(OsString::from)
-                    .into_iter(),
-            )
-            .expect("recognized probe mode");
-            assert_eq!(options.textures, textures);
-            assert_eq!(options.output, PathBuf::from("receipt.json"));
-            assert_eq!(options.entity, "00000000000000000000000002");
-        }
-    }
-
-    #[test]
-    fn unknown_modes_are_not_dispatched_as_probes() {
-        for flag in ["", "--unknown-probe", "--texture-probe-extra"] {
-            assert!(!Options::accepts_mode(OsStr::new(flag)));
-        }
-        assert!(Options::from_probe_args(std::iter::empty()).is_none());
-    }
-
-    #[test]
-    #[should_panic(expected = "expected --play-probe or --texture-probe")]
-    fn explicit_probe_parser_refuses_unknown_mode() {
-        Options::from_probe_args([OsString::from("--unknown-probe")].into_iter());
-    }
-}
 fn require(value: bool, message: &str) -> Result<(), String> {
     value.then_some(()).ok_or_else(|| message.to_string())
 }
@@ -319,4 +285,39 @@ pub fn start(app: tauri::AppHandle, editor: Arc<Editor>, options: Options) {
         }
         app.exit(if result.is_ok() { 0 } else { 1 });
     });
+}
+
+#[cfg(test)]
+mod options_tests {
+    use super::*;
+
+    #[test]
+    fn outer_dispatch_and_parser_accept_both_probe_modes() {
+        for (flag, textures) in [("--play-probe", false), ("--texture-probe", true)] {
+            assert!(Options::accepts_mode(OsStr::new(flag)));
+            let options = Options::from_probe_args(
+                [flag, "receipt.json", "00000000000000000000000002"]
+                    .map(OsString::from)
+                    .into_iter(),
+            )
+            .expect("recognized probe mode");
+            assert_eq!(options.textures, textures);
+            assert_eq!(options.output, PathBuf::from("receipt.json"));
+            assert_eq!(options.entity, "00000000000000000000000002");
+        }
+    }
+
+    #[test]
+    fn unknown_modes_are_not_dispatched_as_probes() {
+        for flag in ["", "--unknown-probe", "--texture-probe-extra"] {
+            assert!(!Options::accepts_mode(OsStr::new(flag)));
+        }
+        assert!(Options::from_probe_args(std::iter::empty()).is_none());
+    }
+
+    #[test]
+    #[should_panic(expected = "expected --play-probe or --texture-probe")]
+    fn explicit_probe_parser_refuses_unknown_mode() {
+        Options::from_probe_args([OsString::from("--unknown-probe")].into_iter());
+    }
 }
