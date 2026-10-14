@@ -272,15 +272,51 @@ fn scene_msaa_queued_resize_clear_refusal_and_explicit_one_sample_routes() {
 #[test]
 #[ignore = "requires an explicitly granted native GPU; validates real resolve timing"]
 fn scene_resolve_timestamp_is_real_after_text_and_absent_for_one_sample() {
-    use crate::timing::GpuPass;
+    use crate::timing::{GpuPass, GpuTimingError, GpuTimingStats};
     let instance = wgpu::Instance::default();
-    let renderer = crate::test_support::checked(
-        pollster::block_on(Renderer::new_with_scene_msaa_and_gpu_timing(
-            &instance, None, 4,
-        ))
-        .unwrap(),
+    let ordinary = crate::test_support::checked(
+        pollster::block_on(Renderer::new_with_scene_msaa(&instance, None, 4)).unwrap(),
     );
+    let adapter = ordinary.adapter.get_info();
+    let supported = ordinary
+        .adapter
+        .features()
+        .contains(wgpu::Features::TIMESTAMP_QUERY);
+    let timed = pollster::block_on(Renderer::new_with_scene_msaa_and_gpu_timing(
+        &instance, None, 4,
+    ));
+    let renderer = if supported {
+        let timed = crate::test_support::checked(timed.unwrap());
+        assert_eq!(timed.adapter.get_info(), adapter);
+        drop(ordinary);
+        timed
+    } else {
+        let error = match timed {
+            Ok(_) => panic!("timestamp construction succeeded without TIMESTAMP_QUERY"),
+            Err(error) => error,
+        };
+        assert_eq!(
+            error.downcast_ref::<GpuTimingError>(),
+            Some(&GpuTimingError::Unsupported)
+        );
+        ordinary
+    };
     let mut input = fixture::mixed(1.);
+    if !supported {
+        // Ordinary 4x still draws; unsupported instrumentation does not alter
+        // sampling policy or fabricate an interval/performance result.
+        fixture::draw(&renderer, &input, [160, 96], None);
+        assert_eq!(
+            renderer.gpu_timing_stats().unwrap(),
+            GpuTimingStats::default()
+        );
+        assert!(renderer.take_gpu_timing().unwrap().is_none());
+        renderer.check_device().unwrap();
+        eprintln!(
+            "MSAA timing: typed Unsupported on {adapter:?}; ordinary4x completed; no interval claim"
+        );
+        return;
+    }
     for (pixel_grid, expected_resolve) in [(false, true), (true, false)] {
         *input.nodes.iter_mut().find(|n| n.camera.is_some()).unwrap() = fixture::camera(pixel_grid);
         fixture::draw(&renderer, &input, [160, 96], None);
