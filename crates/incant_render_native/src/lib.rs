@@ -6,12 +6,16 @@ mod animation;
 mod binding;
 mod tilemap;
 pub use tilemap::TilemapAtlasBinding;
+mod texture_refresh;
 mod update;
 use glam::DMat4;
 use incant_assets_runtime::RuntimeAsset;
 use incant_render_data::SceneInput;
 use incant_runtime::{SpatialView, StableId, WorldIdentity};
 use std::{collections::BTreeMap, path::Path, sync::Arc};
+pub use texture_refresh::{
+    PreparedTextureRefresh, StagedTextureRefresh, TextureRefreshReceipt, TextureRefreshTicket,
+};
 use thiserror::Error;
 
 /// Published decoded vertex/index/mip/raw-font payload, excluding metadata/allocator/GPU
@@ -19,7 +23,8 @@ use thiserror::Error;
 /// rejecting. Retained prior adapters also contribute to process peak memory.
 pub const MAX_PAYLOAD_BYTES: usize = 256 * 1024 * 1024;
 
-/// Explicit cooked cache directories. Reads occur only during `load`.
+/// Explicit cooked cache directories for initial binding. Later texture reads
+/// require a separate host-issued catalog ticket and cold preparation.
 pub struct VisualCaches<'a> {
     pub models: &'a Path,
     pub textures: &'a Path,
@@ -69,6 +74,8 @@ pub enum NativeRenderError {
     EnvironmentUsage,
     #[error("native sprite {entity:?} has invalid texture usage, region or atlas frame")]
     Sprite { entity: StableId },
+    #[error("texture refresh refused: {0}")]
+    TextureRefresh(&'static str),
 }
 #[derive(Debug, Error)]
 pub enum SyncError<E> {
@@ -84,8 +91,9 @@ pub enum UpdateKind {
     Rebuilt,
 }
 
-/// Attached to exactly one world, with immutable startup assets and an explicitly
-/// selected camera. Configuration and topology rebuilds publish atomically;
+/// Attached to exactly one world, with a sealed catalog and an explicitly
+/// selected camera. Host-issued texture tickets can replace existing versions;
+/// configuration and topology rebuilds publish atomically;
 /// unchanged metadata retains every String/Arc/Vec allocation between frames.
 /// Sprite bindings resolve checked atlas metadata at configuration changes; no
 /// diagnostic cubes are synthesized by this adapter. Selection is
@@ -107,6 +115,7 @@ struct NumericUndo {
 pub struct NativeRenderInput {
     identity: WorldIdentity,
     assets: BTreeMap<StableId, Arc<RuntimeAsset>>,
+    asset_generation: u64,
     input: SceneInput,
     slots: Vec<Option<usize>>,
     undo: Vec<NumericUndo>,
@@ -182,6 +191,7 @@ impl NativeRenderInput {
         Ok(Self {
             identity: view.identity().clone(),
             assets,
+            asset_generation: 0,
             input: prepared.input,
             slots: prepared.slots,
             undo: prepared.undo,

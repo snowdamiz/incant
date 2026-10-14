@@ -4,12 +4,20 @@
 use incant_audio_runtime::{ClipBinding, MAX_SCENE_CLIPS};
 use incant_input::InputActions;
 use incant_render_game::NativeRenderSettings;
+pub use incant_render_game::{
+    PreparedHostTextureRefresh, PreparedTextureRefresh, TextureRefreshTicket,
+};
 use incant_runtime::{CookedScene, StableId};
 use incant_script::{CompiledScript, ScriptError};
 use serde::Deserialize;
 use std::{collections::BTreeSet, path::Path};
 mod control;
-pub use control::{PlayError, PlayMode, PlaySession};
+mod texture_refresh;
+pub use control::{
+    PlayError, PlayMode, PlaySession, ReadyTexturePublication, TexturePublicationRefusal,
+    TexturePublishAttempt,
+};
+pub use texture_refresh::TextureRefreshBasis;
 
 #[derive(Default, Deserialize)]
 #[serde(default, deny_unknown_fields)]

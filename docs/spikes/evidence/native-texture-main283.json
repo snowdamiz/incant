@@ -1,0 +1,246 @@
+{
+  "format": "incant-native-texture-main283-integration",
+  "version": 1,
+  "base": "1b8cb73cb24b550f6984f675d49b25305271f748",
+  "executed_source": "eafc1e79845ddb490468bdc630344e041ac08585",
+  "producer": "af201c5b3848b9f064ea6fcb298a1b8b210fe289",
+  "source_intake": {
+    "at": "2026-10-14T13:28:47.816910+00:00",
+    "producer": "af201c5b3848b9f064ea6fcb298a1b8b210fe289",
+    "producer_base": "dfac86cb17e9a1dd71d63207d779b3836e7ad6ae",
+    "integration_head": "eafc1e79845ddb490468bdc630344e041ac08585",
+    "all23producer_paths_byte_exact": [
+      {
+        "path": "crates/incant_game_runtime/src/host_update.rs",
+        "sha256": "f1a968c27bcba68899312e17bb463a9b379ad420d252017b4cbc00cf12b19f6a"
+      },
+      {
+        "path": "crates/incant_game_runtime/src/hosted.rs",
+        "sha256": "8ecf71ae538c8c0aa1404597c6c01c432fcd20d69d67965183a3b90bd15b955f"
+      },
+      {
+        "path": "crates/incant_game_runtime/src/lib.rs",
+        "sha256": "9f27cd89fc215c559e32eab39ebf9d898934fcb858edad3d582c41c424e25b38"
+      },
+      {
+        "path": "crates/incant_play/src/control.rs",
+        "sha256": "23e64a4e5a7746072d7045ed681612dd8710d4dd22b79e70a628b4572547c95a"
+      },
+      {
+        "path": "crates/incant_play/src/lib.rs",
+        "sha256": "074f0fe4b7fb3a3ddfc1bd2d918aa5eb809176138dd302365ab1d277eac901e7"
+      },
+      {
+        "path": "crates/incant_play/src/texture_refresh.rs",
+        "sha256": "11581eb50ec121398ca416c168d6dfe72a71d61735c4263f4827b77b19e80877"
+      },
+      {
+        "path": "crates/incant_play/tests/texture_refresh.rs",
+        "sha256": "7cd6856cf7ea80ecbe85e7512da0af1dc2e142793a079b746298330fefd098f8"
+      },
+      {
+        "path": "crates/incant_render/src/lib.rs",
+        "sha256": "c0280da83392854bed38cf8f017e336c4bcd9effeff6d3f22ee1183287c1d1c8"
+      },
+      {
+        "path": "crates/incant_render_game/src/lib.rs",
+        "sha256": "5a1cfa7c71de14df1fecd721081ff6f397e54872d5e5cb2963a919b08ecd7bfd"
+      },
+      {
+        "path": "crates/incant_render_game/src/texture_refresh.rs",
+        "sha256": "4a13fcef0149607bb64a3cd10ca1120cd214e22499fa104475a25fd223154141"
+      },
+      {
+        "path": "crates/incant_render_gpu_host/src/lib.rs",
+        "sha256": "db5055952fd79804e50caf78b4f8c2e9adfb4dd6a35888e17873580ae7d161c4"
+      },
+      {
+        "path": "crates/incant_render_gpu_host/tests/game.rs",
+        "sha256": "b7930c7eb8e667853680d35c17774696108c15d7325df2d69f1347da1b73e42c"
+      },
+      {
+        "path": "crates/incant_render_gpu_host/tests/game/texture_refresh.rs",
+        "sha256": "d51370d5175169e0fb81da87843816c975fa029e68978789a7d55f7ec3ccb7e3"
+      },
+      {
+        "path": "crates/incant_render_native/src/lib.rs",
+        "sha256": "9d9aa6f3cb3d0a8866c02261cdf8298d962791f4ec616c8c392f3ab8437010dd"
+      },
+      {
+        "path": "crates/incant_render_native/src/texture_refresh.rs",
+        "sha256": "8a41f63a7ba2a82bf5cf6372e2564c07d1a4fe8dc29fca647ef4872d1fa0eba3"
+      },
+      {
+        "path": "crates/incant_render_native/tests/animation/ik.rs",
+        "sha256": "bd3ae61611ca378e97e2e660fe801849aeafcf25d59f0fd69092b2dc5938ce81"
+      },
+      {
+        "path": "crates/incant_render_native/tests/common/allocations.rs",
+        "sha256": "36de01584e32d3240d1e227701ddb38c9a3c04c4300937ea96c034edff0f9aa0"
+      },
+      {
+        "path": "crates/incant_render_native/tests/texture_refresh.rs",
+        "sha256": "820ae1f583d591e2b9d5ba17009f4ffbaaf71d08633f0989cd484bf7eedf57e9"
+      },
+      {
+        "path": "editor/app/src/main.rs",
+        "sha256": "7d7aeb42a90d342c01edabbad34e27b64f42a50f4241523a41a7e636b22645d5"
+      },
+      {
+        "path": "editor/app/src/play/mod.rs",
+        "sha256": "3ce1116cfa6dcbca572c0b8be952518d27f4821a97f087a9aceda94e81efee76"
+      },
+      {
+        "path": "editor/app/src/play/texture_refresh.rs",
+        "sha256": "71ce08c9947bea6b155c060553cae354400fa76861f5d2d8bc0e059153540dd0"
+      },
+      {
+        "path": "editor/app/src/play/worker.rs",
+        "sha256": "4947c1f581532571ffa42c2ae6f11c2aa11d2ce4866178a2de70d306853b784d"
+      },
+      {
+        "path": "editor/app/src/source_watch.rs",
+        "sha256": "dd9959bbaa57ede915d3ccfc48c1a01ab231199191185c989cf4782631950d9b"
+      }
+    ],
+    "remaining_composition_differences": [
+      ".github/workflows/development.yml",
+      "STATUS.md",
+      "crates/incant_game_player/Cargo.toml",
+      "crates/incant_profile/Cargo.toml",
+      "crates/incant_profile/src/diagnostic.rs",
+      "crates/incant_profile/src/diagnostic/storage.rs",
+      "crates/incant_profile/src/diagnostic/tests.rs",
+      "crates/incant_profile/src/enabled.rs",
+      "crates/incant_profile/src/frame.rs",
+      "crates/incant_profile/src/lib.rs",
+      "crates/incant_profile/src/model.rs",
+      "crates/incant_runtime/Cargo.toml",
+      "crates/incant_runtime/src/columns.rs",
+      "crates/incant_runtime/src/world.rs",
+      "crates/incant_script/Cargo.toml",
+      "crates/incant_script/src/attribution_tests.rs",
+      "crates/incant_script/src/lib.rs",
+      "docs/adr/0014-ci.md",
+      "docs/spikes/core-script-attribution.md",
+      "docs/spikes/evidence/core-script-attribution/manifest.json",
+      "docs/spikes/evidence/core-script-attribution/observations.json",
+      "docs/spikes/evidence/core-script-attribution/verify.py",
+      "docs/spikes/evidence/development-sparse-checkout.json",
+      "docs/spikes/evidence/ordered-numeric-query-main279.json",
+      "docs/spikes/evidence/ordered-numeric-query-shipping/manifest.json",
+      "docs/spikes/evidence/ordered-numeric-query-shipping/records.json.gz",
+      "docs/spikes/evidence/ordered-numeric-query-shipping/verify.py",
+      "docs/spikes/evidence/release-checkpoint-36.json",
+      "docs/spikes/ordered-numeric-query.md",
+      "docs/spikes/release-checkpoint-36.md",
+      "tools/probes/core-script-attribution/README.md",
+      "tools/probes/core-script-attribution/analyze.py",
+      "tools/probes/core-script-attribution/build.py",
+      "tools/probes/core-script-attribution/collect.py",
+      "tools/probes/core-script-attribution/common.py",
+      "tools/probes/core-script-attribution/test_protocol.py",
+      "tools/tests/test_mac_performance.py"
+    ],
+    "fmt": "pass",
+    "status": "Source review accepted; current-composition runtime feature closure and focused verification pending. No source-equivalence claim about unrelated diagnostic hooks or omitted files."
+  },
+  "checks": [
+    {
+      "argv": [
+        "tools/cargo",
+        "test",
+        "-p",
+        "incant_play",
+        "-p",
+        "incant_render_native",
+        "--test",
+        "texture_refresh",
+        "--profile",
+        "ci",
+        "--locked",
+        "--offline",
+        "--target",
+        "aarch64-apple-darwin",
+        "--target-dir",
+        "/private/tmp/incant-agent-font-target",
+        "--message-format=json",
+        "--",
+        "--test-threads=2"
+      ],
+      "source": "eafc1e79845ddb490468bdc630344e041ac08585",
+      "started": "2026-10-14T13:41:46.229390+00:00",
+      "exit": 0,
+      "error": null,
+      "reaped": true,
+      "seconds": 46.57616316599888,
+      "minimum_free_bytes": 10537717760,
+      "log_sha256": "da65400f483d27adfcbfccfed7ab8c88476f763778d669530a9f259ff9ee01de",
+      "test_executables": [
+        {
+          "copy": "0-texture_refresh-604b867d70f8fae2",
+          "sha256": "ee92e900e47d82a541714d094958d0c0108e2d790ab294ad49f484d93cff06e0",
+          "size": 17592160
+        },
+        {
+          "copy": "0-texture_refresh-d47f553b837acb05",
+          "sha256": "397e5e9cf714695d8fb9e6ee84b9954a4717abf9789af794c7f17685064fec3e",
+          "size": 32114176
+        }
+      ]
+    },
+    {
+      "argv": [
+        "tools/cargo",
+        "test",
+        "-p",
+        "incant_editor",
+        "--bin",
+        "incant_editor",
+        "--profile",
+        "ci",
+        "--locked",
+        "--offline",
+        "--target",
+        "aarch64-apple-darwin",
+        "--target-dir",
+        "/private/tmp/incant-agent-font-target",
+        "--message-format=json",
+        "play::texture_refresh::tests::",
+        "--",
+        "--test-threads=2",
+        "--show-output"
+      ],
+      "source": "eafc1e79845ddb490468bdc630344e041ac08585",
+      "started": "2026-10-14T13:42:32.933630+00:00",
+      "exit": 0,
+      "error": null,
+      "reaped": true,
+      "seconds": 59.725874459021725,
+      "minimum_free_bytes": 10482331648,
+      "log_sha256": "957d295528128ce15c49485e26ac7adb772fa4b48677388fa58a7376ee9cc5cf",
+      "test_executables": [
+        {
+          "copy": "1-incant_editor-a6aca3313b0af008",
+          "sha256": "b25c8cbfb970d73112c2f3810ff8e613de2e6c2305c7fc173a090adc33739b12",
+          "size": 56992064
+        }
+      ]
+    }
+  ],
+  "observable_passes": {
+    "play_texture": 5,
+    "native_texture": 6,
+    "editor_publication": 5
+  },
+  "records": {
+    "path": "docs/spikes/evidence/native-texture-main283-records.json.gz",
+    "sha256": "1a567fa323ebd02a1f6f7388b1d095c812e559e2d95afa13ba1a8f33d6b6e2e1"
+  },
+  "limits": [
+    "Two focused CPU commands ran on the actual main283 composition.",
+    "Producer source007/008/010 qualification stays attributed to those exact sources.",
+    "No repeated GPU, native window, shipping performance or phase-gate claim.",
+    "Only documentation and evidence changed after executed_source."
+  ]
+}

@@ -1,6 +1,18 @@
 # Implementation status
 
-## Full-Core script attribution — diagnostic qualified
+## Native Play texture refresh — locally integrated
+
+Existing texture content can be reimported while native Play continues, without
+restarting its scripts or simulation. Preparation occurs outside the authoring
+lock; final publication rejects stale revisions, changed sessions and incompatible
+catalogs while retaining the prior live resources. The producer passed scoped
+CPU checks and an actual Metal control that changed red pixels to blue without
+restarting the game. Current main283 composition separately passes 11 texture
+controls and five editor publication controls. Native-window import/Undo/Redo
+and broader asset refresh remain open; this does not establish performance or a
+phase gate. [Scope and evidence](docs/spikes/native-texture-refresh.md).
+
+## Full-Core script attribution — merged through PR283
 
 A default-off profiler now correlates the whole script tick, its callback sources
 and native numeric work by frame. One fresh private shipping build and its full
@@ -11,6 +23,13 @@ generation-owned graph cache is being investigated separately; no optimization o
 shipping saving is claimed here. The ordinary 2 ms gate remains unmet and normal
 performance readers reject the instrumented report.
 [Source, actual results and replay](docs/spikes/core-script-attribution.md).
+
+PR283 also preserves all development checks while omitting archived review
+evidence from that job’s checkout. Its exact-head hosted run passed in 177 seconds,
+with a four-second checkout; the previous run had spent over nine minutes
+fetching archives. This is one observed run, not a general speed guarantee.
+The merged tree matches the reviewed and tested head.
+
 
 ## Release checkpoint36 — promoted
 
@@ -61,7 +80,8 @@ Four actual RPC protocol processes pass; root separately passes the complete
 Mac renderer helper on the retained historical application executable. This
 does not relabel the binary as current whole-runtime source. Checkpoint35's
 Linux and Windows failures are retained; both failed at the second edit. The
-repair is now being tested in frozen checkpoint36; release has not advanced. PR280 merged
+repair subsequently passed frozen checkpoint36 and release advanced to its exact
+tested tree, as recorded above. PR280 merged
 after exact-head fast SUCCESS and matching tree verification. No new build,
 shipping timing, visual approval or phase gate is included.
 [Cause, scope and replay](docs/spikes/render-smoke-revision.md).

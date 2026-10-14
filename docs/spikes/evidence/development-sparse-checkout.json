@@ -150,7 +150,143 @@
   "scope": "Only development.yml checkout selection; every development command and all release workflows/contexts unchanged",
   "limitations": [
     "Local shared-object checkout does not measure GitHub network transfer or checkout speed.",
-    "No hosted speedup is established until the successor runs.",
+    "One hosted successor has a four-second checkout and177-second fulljob. This is an observed run, not a controlled paired measurement or universal future duration guarantee.",
     "Archived evidence remains in Git and full release checkouts."
-  ]
+  ],
+  "hosted_successor": {
+    "at": "2026-10-14T13:22:46.943648+00:00",
+    "run": 38569605569,
+    "job": 115871559782,
+    "head": "a56e303c33700a744981cb61af34727624fe012e",
+    "conclusion": "success",
+    "started_at": "2026-10-14T13:11:42Z",
+    "completed_at": "2026-10-14T13:14:39Z",
+    "steps": [
+      {
+        "name": "Set up job",
+        "conclusion": "success",
+        "started_at": "2026-10-14T13:11:42Z",
+        "completed_at": "2026-10-14T13:11:43Z"
+      },
+      {
+        "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+        "conclusion": "success",
+        "started_at": "2026-10-14T13:11:43Z",
+        "completed_at": "2026-10-14T13:11:47Z"
+      },
+      {
+        "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+        "conclusion": "success",
+        "started_at": "2026-10-14T13:11:47Z",
+        "completed_at": "2026-10-14T13:11:47Z"
+      },
+      {
+        "name": "Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+        "conclusion": "success",
+        "started_at": "2026-10-14T13:11:47Z",
+        "completed_at": "2026-10-14T13:11:48Z"
+      },
+      {
+        "name": "Run ./.github/actions/npm-cache",
+        "conclusion": "success",
+        "started_at": "2026-10-14T13:11:48Z",
+        "completed_at": "2026-10-14T13:11:52Z"
+      },
+      {
+        "name": "Run npm ci",
+        "conclusion": "success",
+        "started_at": "2026-10-14T13:11:52Z",
+        "completed_at": "2026-10-14T13:12:03Z"
+      },
+      {
+        "name": "Run python3 tools/generate_conventions.py --check",
+        "conclusion": "success",
+        "started_at": "2026-10-14T13:12:03Z",
+        "completed_at": "2026-10-14T13:12:04Z"
+      },
+      {
+        "name": "Run npm run test:tools",
+        "conclusion": "success",
+        "started_at": "2026-10-14T13:12:04Z",
+        "completed_at": "2026-10-14T13:13:01Z"
+      },
+      {
+        "name": "Run cargo fmt --all --check",
+        "conclusion": "success",
+        "started_at": "2026-10-14T13:13:01Z",
+        "completed_at": "2026-10-14T13:13:05Z"
+      },
+      {
+        "name": "Run node tools/build_bridge.mjs --check",
+        "conclusion": "success",
+        "started_at": "2026-10-14T13:13:05Z",
+        "completed_at": "2026-10-14T13:13:05Z"
+      },
+      {
+        "name": "Run node tools/generate_sdk.mjs --check",
+        "conclusion": "success",
+        "started_at": "2026-10-14T13:13:05Z",
+        "completed_at": "2026-10-14T13:13:05Z"
+      },
+      {
+        "name": "Run node_modules/.bin/tsc -p sdk/ts/tsconfig.json",
+        "conclusion": "success",
+        "started_at": "2026-10-14T13:13:05Z",
+        "completed_at": "2026-10-14T13:13:06Z"
+      },
+      {
+        "name": "Run npm run build --workspace editor/ui",
+        "conclusion": "success",
+        "started_at": "2026-10-14T13:13:06Z",
+        "completed_at": "2026-10-14T13:13:17Z"
+      },
+      {
+        "name": "Run npm run test --workspace editor/ui",
+        "conclusion": "success",
+        "started_at": "2026-10-14T13:13:17Z",
+        "completed_at": "2026-10-14T13:14:36Z"
+      },
+      {
+        "name": "Run git diff --exit-code",
+        "conclusion": "success",
+        "started_at": "2026-10-14T13:14:36Z",
+        "completed_at": "2026-10-14T13:14:36Z"
+      },
+      {
+        "name": "Post Run ./.github/actions/npm-cache",
+        "conclusion": "success",
+        "started_at": "2026-10-14T13:14:36Z",
+        "completed_at": "2026-10-14T13:14:36Z"
+      },
+      {
+        "name": "Post Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+        "conclusion": "success",
+        "started_at": "2026-10-14T13:14:36Z",
+        "completed_at": "2026-10-14T13:14:36Z"
+      },
+      {
+        "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+        "conclusion": "success",
+        "started_at": "2026-10-14T13:14:36Z",
+        "completed_at": "2026-10-14T13:14:36Z"
+      },
+      {
+        "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+        "conclusion": "success",
+        "started_at": "2026-10-14T13:14:36Z",
+        "completed_at": "2026-10-14T13:14:37Z"
+      },
+      {
+        "name": "Complete job",
+        "conclusion": "success",
+        "started_at": "2026-10-14T13:14:37Z",
+        "completed_at": "2026-10-14T13:14:37Z"
+      }
+    ]
+  },
+  "original_run_terminal": {
+    "conclusion": "cancelled",
+    "updated_at": "2026-10-14T13:11:40Z",
+    "cause": "Superseded by the sparse-checkout successor; no source-test failure established."
+  }
 }
