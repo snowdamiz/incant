@@ -3,6 +3,7 @@ use serde_json::{Value, json};
 use std::{
     fs,
     io::{BufRead, BufReader, Write},
+    path::Path,
     process::{Child, Command, Stdio},
 };
 
@@ -35,6 +36,27 @@ fn request(child: &mut Child, output: &mut impl BufRead, method: &str, params: V
     let mut line = String::new();
     output.read_line(&mut line).unwrap();
     serde_json::from_str(&line).unwrap()
+}
+
+fn rpc(cli: &str, path: &Path, journal: &Path) -> (RpcChild, BufReader<std::process::ChildStdout>) {
+    let mut child = RpcChild(
+        Command::new(cli)
+            .arg("rpc")
+            .arg(path)
+            .arg("--journal")
+            .arg(journal)
+            .stdin(Stdio::piped())
+            .stdout(Stdio::piped())
+            .stderr(Stdio::inherit())
+            .spawn()
+            .unwrap(),
+    );
+    let output = BufReader::new(child.stdout.take().unwrap());
+    (child, output)
+}
+fn stop(mut child: RpcChild) {
+    child.stdin.take();
+    assert!(child.wait().unwrap().success());
 }
 
 #[test]
@@ -72,19 +94,7 @@ fn cli_and_rpc_preview_are_read_only_and_commands_use_normal_shared_history() {
     assert_eq!(fs::read_to_string(&path).unwrap(), original);
     assert_eq!(fs::read_dir(dir.path()).unwrap().count(), 1);
 
-    let mut child = RpcChild(
-        Command::new(cli)
-            .arg("rpc")
-            .arg(&path)
-            .arg("--journal")
-            .arg(&journal)
-            .stdin(Stdio::piped())
-            .stdout(Stdio::piped())
-            .stderr(Stdio::inherit())
-            .spawn()
-            .unwrap(),
-    );
-    let mut output = BufReader::new(child.stdout.take().unwrap());
+    let (mut child, mut output) = rpc(cli, &path, &journal);
     let preview = request(
         &mut child,
         &mut output,
@@ -95,7 +105,10 @@ fn cli_and_rpc_preview_are_read_only_and_commands_use_normal_shared_history() {
     let schemas = request(&mut child, &mut output, "schema.list", json!({}));
     assert!(schemas["result"]["EnginePinReview"].is_object());
     assert!(schemas["result"]["EngineCompatibility"].is_object());
+    // Separate Windows readers must wait until the RPC owner releases its lock.
+    stop(child);
     let before = fs::read(&journal).unwrap();
+    (child, output) = rpc(cli, &path, &journal);
     for params in [
         json!({}),
         json!({"expected_revision":1}),
@@ -106,8 +119,20 @@ fn cli_and_rpc_preview_are_read_only_and_commands_use_normal_shared_history() {
                 .get("error")
                 .is_some()
         );
+        stop(child);
         assert_eq!(fs::read(&journal).unwrap(), before);
+        (child, output) = rpc(cli, &path, &journal);
     }
+    // Establish that the restarted child loaded the original before changing it.
+    assert_eq!(
+        request(
+            &mut child,
+            &mut output,
+            "project.engine_compatibility",
+            json!({})
+        )["result"]["declaration"],
+        "legacy_unpinned"
+    );
     let mut external = p.clone();
     external.name = "External".into();
     fs::write(&path, external.canonical_text().unwrap()).unwrap();
@@ -125,8 +150,10 @@ fn cli_and_rpc_preview_are_read_only_and_commands_use_normal_shared_history() {
         fs::read_to_string(&path).unwrap(),
         external.canonical_text().unwrap()
     );
+    stop(child);
     assert_eq!(fs::read(&journal).unwrap(), before);
     fs::write(&path, &original).unwrap();
+    (child, output) = rpc(cli, &path, &journal);
     let result = request(
         &mut child,
         &mut output,
@@ -150,8 +177,7 @@ fn cli_and_rpc_preview_are_read_only_and_commands_use_normal_shared_history() {
         )["result"]["declaration"],
         "legacy_unpinned"
     );
-    child.stdin.take();
-    assert!(child.wait().unwrap().success());
+    stop(child);
     assert_eq!(fs::read_to_string(&path).unwrap(), original);
 
     let fresh_path = dir.path().join("fresh.incant.json");

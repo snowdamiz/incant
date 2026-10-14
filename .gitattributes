@@ -52,3 +52,10 @@ third_party/rapier3d/src/dynamics/rigid_body.rs whitespace=-blank-at-eol
 
 # Preserve exact reviewed 0069 oracle diff context, including blank context lines.
 docs/spikes/evidence/core0069-ui-oracle-correction/source.patch -text whitespace=-blank-at-eol
+
+# Preserve the blank context lines in the exact isolated QuickJS diagnostic patches.
+tools/probes/quickjs-malloc-state/core.patch -text whitespace=-blank-at-eol
+tools/probes/quickjs-malloc-state/sys.patch -text whitespace=-blank-at-eol
+# Retain published rquickjs/QuickJS sources and generated bindings byte-for-byte.
+third_party/rquickjs-core/** -text whitespace=-blank-at-eol,-blank-at-eof,cr-at-eol
+third_party/rquickjs-sys/** -text whitespace=-blank-at-eol,-blank-at-eof,cr-at-eol

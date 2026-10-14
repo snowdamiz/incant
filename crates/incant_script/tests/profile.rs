@@ -1,5 +1,5 @@
 #![cfg(all(feature = "profile", feature = "compiler"))]
-use incant_profile::Capture;
+use incant_profile::{Capture, HeapMode};
 use incant_runtime::{CookedEntity, CookedScene, NativeWorld, StableId};
 use incant_script::{CompiledScript, ScriptBindings, ScriptHost, ScriptInstance};
 use incant_types::Transform;
@@ -7,6 +7,11 @@ use sha2::{Digest, Sha256};
 use std::collections::BTreeMap;
 #[test]
 fn actual_source_groups_have_numeric_identity_with_heap_and_rollback_observations() {
+    for mode in [HeapMode::Maintained, HeapMode::Detailed] {
+        check_mode(mode);
+    }
+}
+fn check_mode(mode: HeapMode) {
     let id = |n: u128| StableId(n.to_be_bytes());
     let initial = CookedScene::new(
         id(99),
@@ -53,7 +58,7 @@ fn actual_source_groups_have_numeric_identity_with_heap_and_rollback_observation
         CompiledScript::compile_project("private-user-filename.cjs", &code, bindings).unwrap();
     let mut world = NativeWorld::new(initial);
     let mut host = ScriptHost::for_world(code, &world).unwrap();
-    let capture = Capture::start().unwrap();
+    let capture = Capture::start_with_heap_mode(mode).unwrap();
     incant_profile::frame(|| host.tick(&mut world, 1. / 60.)).unwrap();
     let successful = capture.report();
     let tick = &successful.frame_wall.phases[incant_profile::Phase::ScriptTick as usize];
@@ -86,8 +91,18 @@ fn actual_source_groups_have_numeric_identity_with_heap_and_rollback_observation
     assert_eq!(report.scripts[1].source, Some(id(20).0));
     assert!(report.scripts.iter().all(|s| s.totals.calls == 2));
     assert_eq!(report.quickjs_heap.samples, 2);
-    assert!(report.quickjs_heap.latest.used_bytes > 0);
-    assert!(report.quickjs_heap.latest.allocated_bytes < 32 * 1024 * 1024);
+    assert_eq!(report.quickjs_heap.invalid_samples, 0);
+    assert_eq!(report.quickjs_heap.mode, mode);
+    let latest = report.quickjs_heap.latest.unwrap();
+    assert!(latest.allocated_bytes > 0 && latest.allocated_bytes < 32 * 1024 * 1024);
+    assert_eq!(latest.limit_bytes, 32 * 1024 * 1024);
+    assert_eq!(
+        latest.estimated_used_bytes.is_some(),
+        mode == HeapMode::Detailed
+    );
+    if let Some(used) = latest.estimated_used_bytes {
+        assert!(used > 0);
+    }
     let serialized = serde_json::to_string(&report).unwrap();
     assert!(!serialized.contains("private gameplay"));
     assert!(!serialized.contains("private-user-filename"));

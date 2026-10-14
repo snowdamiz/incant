@@ -1,0 +1,351 @@
+--- a/quickjs/quickjs.c
++++ b/quickjs/quickjs.c
+@@ -7569,6 +7569,16 @@
+         /* should track JSBigInt usage */
+         break;
+     }
++}
++
++/* Incant additive accessor: no allocation, scan, GC, or state change.
++   Caller must exclusively own the runtime, as for JS_ComputeMemoryUsage. */
++void JS_GetMallocState(JSRuntime *rt, size_t *allocated_bytes,
++                       size_t *allocation_count, size_t *limit_bytes)
++{
++    *allocated_bytes = rt->malloc_state.malloc_size;
++    *allocation_count = rt->malloc_state.malloc_count;
++    *limit_bytes = rt->malloc_state.malloc_limit;
+ }
+ 
+ void JS_ComputeMemoryUsage(JSRuntime *rt, JSMemoryUsage *s)
+--- a/quickjs/quickjs.h
++++ b/quickjs/quickjs.h
+@@ -603,6 +603,9 @@
+     int64_t binary_object_count, binary_object_size;
+ } JSMemoryUsage;
+ 
++/* Logical allocator counters only; not semantic used heap or continuous peak. */
++JS_EXTERN void JS_GetMallocState(JSRuntime *rt, size_t *allocated_bytes,
++                                size_t *allocation_count, size_t *limit_bytes);
+ JS_EXTERN void JS_ComputeMemoryUsage(JSRuntime *rt, JSMemoryUsage *s);
+ JS_EXTERN void JS_DumpMemoryUsage(FILE *fp, const JSMemoryUsage *s, JSRuntime *rt);
+ 
+--- a/src/bindings/aarch64-apple-darwin.rs
++++ b/src/bindings/aarch64-apple-darwin.rs
+@@ -2333,3 +2333,13 @@
+ pub const JS_ATOM_Symbol_asyncDispose: _bindgen_ty_2 = 241;
+ pub const JS_ATOM_END: _bindgen_ty_2 = 242;
+ pub type _bindgen_ty_2 = ::core::ffi::c_uint;
++
++// Incant additive declaration matching quickjs.h; no private layout dependency.
++unsafe extern "C" {
++    pub fn JS_GetMallocState(
++        rt: *mut JSRuntime,
++        allocated_bytes: *mut size_t,
++        allocation_count: *mut size_t,
++        limit_bytes: *mut size_t,
++    );
++}
+--- a/src/bindings/aarch64-pc-windows-msvc.rs
++++ b/src/bindings/aarch64-pc-windows-msvc.rs
+@@ -2332,3 +2332,13 @@
+ pub const JS_ATOM_Symbol_asyncDispose: _bindgen_ty_2 = 241;
+ pub const JS_ATOM_END: _bindgen_ty_2 = 242;
+ pub type _bindgen_ty_2 = ::core::ffi::c_int;
++
++// Incant additive declaration matching quickjs.h; no private layout dependency.
++unsafe extern "C" {
++    pub fn JS_GetMallocState(
++        rt: *mut JSRuntime,
++        allocated_bytes: *mut size_t,
++        allocation_count: *mut size_t,
++        limit_bytes: *mut size_t,
++    );
++}
+--- a/src/bindings/aarch64-unknown-linux-gnu.rs
++++ b/src/bindings/aarch64-unknown-linux-gnu.rs
+@@ -2332,3 +2332,13 @@
+ pub const JS_ATOM_Symbol_asyncDispose: _bindgen_ty_4 = 241;
+ pub const JS_ATOM_END: _bindgen_ty_4 = 242;
+ pub type _bindgen_ty_4 = ::core::ffi::c_uint;
++
++// Incant additive declaration matching quickjs.h; no private layout dependency.
++unsafe extern "C" {
++    pub fn JS_GetMallocState(
++        rt: *mut JSRuntime,
++        allocated_bytes: *mut size_t,
++        allocation_count: *mut size_t,
++        limit_bytes: *mut size_t,
++    );
++}
+--- a/src/bindings/aarch64-unknown-linux-musl.rs
++++ b/src/bindings/aarch64-unknown-linux-musl.rs
+@@ -2332,3 +2332,13 @@
+ pub const JS_ATOM_Symbol_asyncDispose: _bindgen_ty_4 = 241;
+ pub const JS_ATOM_END: _bindgen_ty_4 = 242;
+ pub type _bindgen_ty_4 = ::core::ffi::c_uint;
++
++// Incant additive declaration matching quickjs.h; no private layout dependency.
++unsafe extern "C" {
++    pub fn JS_GetMallocState(
++        rt: *mut JSRuntime,
++        allocated_bytes: *mut size_t,
++        allocation_count: *mut size_t,
++        limit_bytes: *mut size_t,
++    );
++}
+--- a/src/bindings/armv7-unknown-linux-gnueabi.rs
++++ b/src/bindings/armv7-unknown-linux-gnueabi.rs
+@@ -2301,3 +2301,13 @@
+ pub const JS_ATOM_Symbol_asyncDispose: _bindgen_ty_4 = 241;
+ pub const JS_ATOM_END: _bindgen_ty_4 = 242;
+ pub type _bindgen_ty_4 = ::core::ffi::c_uint;
++
++// Incant additive declaration matching quickjs.h; no private layout dependency.
++unsafe extern "C" {
++    pub fn JS_GetMallocState(
++        rt: *mut JSRuntime,
++        allocated_bytes: *mut size_t,
++        allocation_count: *mut size_t,
++        limit_bytes: *mut size_t,
++    );
++}
+--- a/src/bindings/armv7-unknown-linux-gnueabihf.rs
++++ b/src/bindings/armv7-unknown-linux-gnueabihf.rs
+@@ -2301,3 +2301,13 @@
+ pub const JS_ATOM_Symbol_asyncDispose: _bindgen_ty_4 = 241;
+ pub const JS_ATOM_END: _bindgen_ty_4 = 242;
+ pub type _bindgen_ty_4 = ::core::ffi::c_uint;
++
++// Incant additive declaration matching quickjs.h; no private layout dependency.
++unsafe extern "C" {
++    pub fn JS_GetMallocState(
++        rt: *mut JSRuntime,
++        allocated_bytes: *mut size_t,
++        allocation_count: *mut size_t,
++        limit_bytes: *mut size_t,
++    );
++}
+--- a/src/bindings/i686-unknown-linux-gnu.rs
++++ b/src/bindings/i686-unknown-linux-gnu.rs
+@@ -2301,3 +2301,13 @@
+ pub const JS_ATOM_Symbol_asyncDispose: _bindgen_ty_4 = 241;
+ pub const JS_ATOM_END: _bindgen_ty_4 = 242;
+ pub type _bindgen_ty_4 = ::core::ffi::c_uint;
++
++// Incant additive declaration matching quickjs.h; no private layout dependency.
++unsafe extern "C" {
++    pub fn JS_GetMallocState(
++        rt: *mut JSRuntime,
++        allocated_bytes: *mut size_t,
++        allocation_count: *mut size_t,
++        limit_bytes: *mut size_t,
++    );
++}
+--- a/src/bindings/loongarch64-unknown-linux-gnu.rs
++++ b/src/bindings/loongarch64-unknown-linux-gnu.rs
+@@ -2332,3 +2332,13 @@
+ pub const JS_ATOM_Symbol_asyncDispose: _bindgen_ty_4 = 241;
+ pub const JS_ATOM_END: _bindgen_ty_4 = 242;
+ pub type _bindgen_ty_4 = ::core::ffi::c_uint;
++
++// Incant additive declaration matching quickjs.h; no private layout dependency.
++unsafe extern "C" {
++    pub fn JS_GetMallocState(
++        rt: *mut JSRuntime,
++        allocated_bytes: *mut size_t,
++        allocation_count: *mut size_t,
++        limit_bytes: *mut size_t,
++    );
++}
+--- a/src/bindings/loongarch64-unknown-linux-musl.rs
++++ b/src/bindings/loongarch64-unknown-linux-musl.rs
+@@ -2332,3 +2332,13 @@
+ pub const JS_ATOM_Symbol_asyncDispose: _bindgen_ty_4 = 241;
+ pub const JS_ATOM_END: _bindgen_ty_4 = 242;
+ pub type _bindgen_ty_4 = ::core::ffi::c_uint;
++
++// Incant additive declaration matching quickjs.h; no private layout dependency.
++unsafe extern "C" {
++    pub fn JS_GetMallocState(
++        rt: *mut JSRuntime,
++        allocated_bytes: *mut size_t,
++        allocation_count: *mut size_t,
++        limit_bytes: *mut size_t,
++    );
++}
+--- a/src/bindings/powerpc64-unknown-linux-gnu.rs
++++ b/src/bindings/powerpc64-unknown-linux-gnu.rs
+@@ -2332,3 +2332,13 @@
+ pub const JS_ATOM_Symbol_asyncDispose: _bindgen_ty_4 = 241;
+ pub const JS_ATOM_END: _bindgen_ty_4 = 242;
+ pub type _bindgen_ty_4 = ::core::ffi::c_uint;
++
++// Incant additive declaration matching quickjs.h; no private layout dependency.
++unsafe extern "C" {
++    pub fn JS_GetMallocState(
++        rt: *mut JSRuntime,
++        allocated_bytes: *mut size_t,
++        allocation_count: *mut size_t,
++        limit_bytes: *mut size_t,
++    );
++}
+--- a/src/bindings/riscv64a23-unknown-linux-gnu.rs
++++ b/src/bindings/riscv64a23-unknown-linux-gnu.rs
+@@ -2332,3 +2332,13 @@
+ pub const JS_ATOM_Symbol_asyncDispose: _bindgen_ty_4 = 241;
+ pub const JS_ATOM_END: _bindgen_ty_4 = 242;
+ pub type _bindgen_ty_4 = ::core::ffi::c_uint;
++
++// Incant additive declaration matching quickjs.h; no private layout dependency.
++unsafe extern "C" {
++    pub fn JS_GetMallocState(
++        rt: *mut JSRuntime,
++        allocated_bytes: *mut size_t,
++        allocation_count: *mut size_t,
++        limit_bytes: *mut size_t,
++    );
++}
+--- a/src/bindings/riscv64gc-unknown-linux-gnu.rs
++++ b/src/bindings/riscv64gc-unknown-linux-gnu.rs
+@@ -2332,3 +2332,13 @@
+ pub const JS_ATOM_Symbol_asyncDispose: _bindgen_ty_4 = 241;
+ pub const JS_ATOM_END: _bindgen_ty_4 = 242;
+ pub type _bindgen_ty_4 = ::core::ffi::c_uint;
++
++// Incant additive declaration matching quickjs.h; no private layout dependency.
++unsafe extern "C" {
++    pub fn JS_GetMallocState(
++        rt: *mut JSRuntime,
++        allocated_bytes: *mut size_t,
++        allocation_count: *mut size_t,
++        limit_bytes: *mut size_t,
++    );
++}
+--- a/src/bindings/wasm32-unknown-unknown.rs
++++ b/src/bindings/wasm32-unknown-unknown.rs
+@@ -2301,3 +2301,13 @@
+ pub const JS_ATOM_Symbol_asyncDispose: _bindgen_ty_2 = 241;
+ pub const JS_ATOM_END: _bindgen_ty_2 = 242;
+ pub type _bindgen_ty_2 = ::core::ffi::c_uint;
++
++// Incant additive declaration matching quickjs.h; no private layout dependency.
++unsafe extern "C" {
++    pub fn JS_GetMallocState(
++        rt: *mut JSRuntime,
++        allocated_bytes: *mut size_t,
++        allocation_count: *mut size_t,
++        limit_bytes: *mut size_t,
++    );
++}
+--- a/src/bindings/wasm32-wasip1.rs
++++ b/src/bindings/wasm32-wasip1.rs
+@@ -2301,3 +2301,13 @@
+ pub const JS_ATOM_Symbol_asyncDispose: _bindgen_ty_2 = 241;
+ pub const JS_ATOM_END: _bindgen_ty_2 = 242;
+ pub type _bindgen_ty_2 = ::core::ffi::c_uint;
++
++// Incant additive declaration matching quickjs.h; no private layout dependency.
++unsafe extern "C" {
++    pub fn JS_GetMallocState(
++        rt: *mut JSRuntime,
++        allocated_bytes: *mut size_t,
++        allocation_count: *mut size_t,
++        limit_bytes: *mut size_t,
++    );
++}
+--- a/src/bindings/wasm32-wasip2.rs
++++ b/src/bindings/wasm32-wasip2.rs
+@@ -2301,3 +2301,13 @@
+ pub const JS_ATOM_Symbol_asyncDispose: _bindgen_ty_2 = 241;
+ pub const JS_ATOM_END: _bindgen_ty_2 = 242;
+ pub type _bindgen_ty_2 = ::core::ffi::c_uint;
++
++// Incant additive declaration matching quickjs.h; no private layout dependency.
++unsafe extern "C" {
++    pub fn JS_GetMallocState(
++        rt: *mut JSRuntime,
++        allocated_bytes: *mut size_t,
++        allocation_count: *mut size_t,
++        limit_bytes: *mut size_t,
++    );
++}
+--- a/src/bindings/x86_64-apple-darwin.rs
++++ b/src/bindings/x86_64-apple-darwin.rs
+@@ -2333,3 +2333,13 @@
+ pub const JS_ATOM_Symbol_asyncDispose: _bindgen_ty_2 = 241;
+ pub const JS_ATOM_END: _bindgen_ty_2 = 242;
+ pub type _bindgen_ty_2 = ::core::ffi::c_uint;
++
++// Incant additive declaration matching quickjs.h; no private layout dependency.
++unsafe extern "C" {
++    pub fn JS_GetMallocState(
++        rt: *mut JSRuntime,
++        allocated_bytes: *mut size_t,
++        allocation_count: *mut size_t,
++        limit_bytes: *mut size_t,
++    );
++}
+--- a/src/bindings/x86_64-pc-windows-gnu.rs
++++ b/src/bindings/x86_64-pc-windows-gnu.rs
+@@ -2332,3 +2332,13 @@
+ pub const JS_ATOM_Symbol_asyncDispose: _bindgen_ty_2 = 241;
+ pub const JS_ATOM_END: _bindgen_ty_2 = 242;
+ pub type _bindgen_ty_2 = ::core::ffi::c_uint;
++
++// Incant additive declaration matching quickjs.h; no private layout dependency.
++unsafe extern "C" {
++    pub fn JS_GetMallocState(
++        rt: *mut JSRuntime,
++        allocated_bytes: *mut size_t,
++        allocation_count: *mut size_t,
++        limit_bytes: *mut size_t,
++    );
++}
+--- a/src/bindings/x86_64-pc-windows-msvc.rs
++++ b/src/bindings/x86_64-pc-windows-msvc.rs
+@@ -2332,3 +2332,13 @@
+ pub const JS_ATOM_Symbol_asyncDispose: _bindgen_ty_2 = 241;
+ pub const JS_ATOM_END: _bindgen_ty_2 = 242;
+ pub type _bindgen_ty_2 = ::core::ffi::c_int;
++
++// Incant additive declaration matching quickjs.h; no private layout dependency.
++unsafe extern "C" {
++    pub fn JS_GetMallocState(
++        rt: *mut JSRuntime,
++        allocated_bytes: *mut size_t,
++        allocation_count: *mut size_t,
++        limit_bytes: *mut size_t,
++    );
++}
+--- a/src/bindings/x86_64-unknown-linux-gnu.rs
++++ b/src/bindings/x86_64-unknown-linux-gnu.rs
+@@ -2332,3 +2332,13 @@
+ pub const JS_ATOM_Symbol_asyncDispose: _bindgen_ty_4 = 241;
+ pub const JS_ATOM_END: _bindgen_ty_4 = 242;
+ pub type _bindgen_ty_4 = ::core::ffi::c_uint;
++
++// Incant additive declaration matching quickjs.h; no private layout dependency.
++unsafe extern "C" {
++    pub fn JS_GetMallocState(
++        rt: *mut JSRuntime,
++        allocated_bytes: *mut size_t,
++        allocation_count: *mut size_t,
++        limit_bytes: *mut size_t,
++    );
++}
+--- a/src/bindings/x86_64-unknown-linux-musl.rs
++++ b/src/bindings/x86_64-unknown-linux-musl.rs
+@@ -2332,3 +2332,13 @@
+ pub const JS_ATOM_Symbol_asyncDispose: _bindgen_ty_4 = 241;
+ pub const JS_ATOM_END: _bindgen_ty_4 = 242;
+ pub type _bindgen_ty_4 = ::core::ffi::c_uint;
++
++// Incant additive declaration matching quickjs.h; no private layout dependency.
++unsafe extern "C" {
++    pub fn JS_GetMallocState(
++        rt: *mut JSRuntime,
++        allocated_bytes: *mut size_t,
++        allocation_count: *mut size_t,
++        limit_bytes: *mut size_t,
++    );
++}

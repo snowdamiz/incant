@@ -1,0 +1,33 @@
+{
+  "time_utc": "2026-10-14T07:14:11.457746+00:00",
+  "reviewer": "root/astra",
+  "head": "2d0e941efb5a57f1c8afdcf5c12f39a76859540a",
+  "source": "8690db174f95194ac6665a89081f2f712119343d",
+  "base": "0bc6823ace3dd88fea436b4954e7f081fd35c6e7",
+  "manifest_sha256": "effd5175b1c2b5ad1990ce3f91dd3c7cb70252d635988def436603bc62338a89",
+  "reviewed": [
+    "full verifier and current scope document",
+    "initial command/prefab union previously reviewed",
+    "exact Windows command test successor through183f and live RPC test8690db",
+    "final packaging delta c2a055 to2d0e941",
+    "full portable/current/original/binary verification executed successfully"
+  ],
+  "execution": {
+    "command": "python3 docs/spikes/evidence/project-pin-main273/verify.py --verify-only --current --originals --local-binaries",
+    "exit": 0,
+    "terminal_chunk": "7cd2f9",
+    "current_records": 212,
+    "current_inputs": 3559,
+    "current_binary_copies": 42,
+    "producer_records": 124,
+    "producer_inputs": 3542,
+    "producer_binary_copies": 25
+  },
+  "decision": "accept reviewed scoped implementation for publication and merge after required exact-head fast SUCCESS",
+  "limits": [
+    "host-only unpinned-to-exact-current metadata migration; no application endpoint or older-format conversion",
+    "Windows locking repairs executed on Mac only; hosted Windows validation pending",
+    "no phase or release approval",
+    "checkpoint33 remains frozen and failed until its workflows terminate"
+  ]
+}
