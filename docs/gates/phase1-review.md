@@ -21,11 +21,13 @@ device execution is deferred; hosted build and release checks remain required.
   the rendered result and measure the complete shipping game. Private finite
   visibility and native interop experiments are not merged features or accepted
   appearance/performance results.
-- Extend live asset refresh beyond existing textures. The actual Mac editor
-  [texture workflow](../spikes/native-window-texture-workflow.md) now passes while
-  preserving the running world and scripts. Compatible static-model replacement
-  is the next slice; animation, topology and baked navigation dependencies require
-  their own admission rules.
+- Extend live asset refresh beyond the verified existing-texture and
+  [compatible static-model workflows](../spikes/native-static-model-refresh.md).
+  Both preserve the running world and scripts on this Mac. Animation, changed
+  topology and baked navigation dependencies require their own admission rules.
+- Add and qualify geometric antialiasing for the ordinary editor viewport. The
+  reported diagnostic cube has jagged silhouettes on its current single-sample,
+  full-resolution route; this is separate from temporal reconstruction defects.
 - Complete off-frame shader/pipeline preparation and cache coverage for the final
   renderer configuration. The existing optional cooked families and Vulkan cache
   do not establish every backend, permutation or frame-time requirement.
