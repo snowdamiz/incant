@@ -1,0 +1,5 @@
+Incant required GPU backend: Metal; actual adapter: AdapterInfo { name: "Apple M5 Pro", vendor: 0, device: 0, device_type: IntegratedGpu, device_pci_bus_id: "", driver: "", driver_info: "", backend: Metal, subgroup_min_size: 4, subgroup_max_size: 64, transient_saves_memory: true }
+
+thread 'upscaling::system::device_tests::actual_output_reconstruction_rejects_bad_history_and_never_retains_overlay' (10432074) panicked at crates/incant_render/src/upscaling/device_tests.rs:303:17:
+mode7 attachment1: [0.27514648, 0.22521973, 0.17529297, 1.0] != [0.27539892856072434, 0.22539892781566628, 0.17539892707060822, 1.0]
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace

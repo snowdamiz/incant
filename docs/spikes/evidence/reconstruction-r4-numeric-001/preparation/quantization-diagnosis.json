@@ -1,0 +1,96 @@
+{
+  "source": "72b1ba8ec351e86d66a90c401e0a75a530633616",
+  "mode": 7,
+  "ideal_history": 0.35079785414121645,
+  "history_rne": 0.350830078125,
+  "rows": [
+    {
+      "overlay": 0.10000000149011612,
+      "unquantized": 0.27539892856072434,
+      "rne_two_stage": 0.275390625,
+      "independent_first_half_bits": [
+        13724,
+        13725
+      ],
+      "independent_first_half_values": [
+        0.3505859375,
+        0.350830078125
+      ],
+      "composition_before_final": [
+        0.2752929702401161,
+        0.2754150405526161
+      ],
+      "final_half_bits": [
+        13415,
+        13417
+      ],
+      "final_values": [
+        0.275146484375,
+        0.275634765625
+      ],
+      "observed": 0.275146484375,
+      "inside": true,
+      "below_excluded": 0.27490234375,
+      "above_excluded": 0.27587890625
+    },
+    {
+      "overlay": 0.05000000074505806,
+      "unquantized": 0.22539892781566628,
+      "rne_two_stage": 0.2254638671875,
+      "independent_first_half_bits": [
+        13724,
+        13725
+      ],
+      "independent_first_half_values": [
+        0.3505859375,
+        0.350830078125
+      ],
+      "composition_before_final": [
+        0.22529296949505806,
+        0.22541503980755806
+      ],
+      "final_half_bits": [
+        13109,
+        13111
+      ],
+      "final_values": [
+        0.2252197265625,
+        0.2254638671875
+      ],
+      "observed": 0.2252197265625,
+      "inside": true,
+      "below_excluded": 0.22509765625,
+      "above_excluded": 0.2255859375
+    },
+    {
+      "overlay": 0.0,
+      "unquantized": 0.17539892707060822,
+      "rne_two_stage": 0.1754150390625,
+      "independent_first_half_bits": [
+        13724,
+        13725
+      ],
+      "independent_first_half_values": [
+        0.3505859375,
+        0.350830078125
+      ],
+      "composition_before_final": [
+        0.17529296875,
+        0.1754150390625
+      ],
+      "final_half_bits": [
+        12699,
+        12702
+      ],
+      "final_values": [
+        0.1751708984375,
+        0.175537109375
+      ],
+      "observed": 0.17529296875,
+      "inside": true,
+      "below_excluded": 0.175048828125,
+      "above_excluded": 0.1756591796875
+    }
+  ],
+  "description": "Propagate existing first-pass admissible representable half values, then the unchanged final one-half-step+2^-18 arithmetic bound at maximum endpoint. RNE rounds bounds only to locate adjacent representable endpoints; no observed value determines any bound. This is not a claim that Metal implements RNE."
+}

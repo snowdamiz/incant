@@ -1,0 +1,43 @@
+{
+  "source": "72b1ba8ec351e86d66a90c401e0a75a530633616",
+  "cpu_packet": "e95325938a6ddf9c6b343f633dfd97189ca8ef0c",
+  "binaries": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/reconstruction-r4-cpu-001/binaries-002/default",
+      "sha256": "103027db6cba5333af940fba57f29678b339680ea0a757ab39fff140c7155ebc",
+      "bytes": 32410480,
+      "mode": "0755"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/reconstruction-r4-cpu-001/binaries-004/cooked-native",
+      "sha256": "7a629aca2ff959ece83b79019f88857ae45c59f72965cd870329cdbb1911f506",
+      "bytes": 33481664,
+      "mode": "0755"
+    }
+  ],
+  "submissions": 62,
+  "maps": 62,
+  "attempts": 4,
+  "max_extent": [
+    16,
+    16
+  ],
+  "timeout_each": 90,
+  "images": 0,
+  "builds": 0,
+  "retries": 0,
+  "identities": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/reconstruction-r4-cpu-001/source-005/freeze.json",
+      "sha256": "19f6b7c35f40802868d6617cf325bfaf9cfbf1fe842e549bf1926836e78477ee"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/reconstruction-r4-source-root-20261014.json",
+      "sha256": "72827a79883c97643dc3799c4cc8a275f00ec06004ef38f5946d64d6113c7c90"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/reconstruction-r4-cpu-root-20261014.json",
+      "sha256": "039445ec36ad91d00efaed128aca9332c132fce589dc39481520bc095dbae21a"
+    }
+  ]
+}

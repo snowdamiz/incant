@@ -1,0 +1,28 @@
+
+running 1 test
+test upscaling::system::device_tests::actual_output_reconstruction_rejects_bad_history_and_never_retains_overlay ... upscaling adapter: AdapterInfo { name: "Apple M5 Pro", vendor: 0, device: 0, device_type: IntegratedGpu, device_pci_bus_id: "", driver: "", driver_info: "", backend: Metal, subgroup_min_size: 4, subgroup_max_size: 64, transient_saves_memory: true }
+upscaling mode0 attachment0: [0.35058594, 0.35058594, 0.35058594, 1.0]
+upscaling mode0 attachment1: [0.35058594, 0.35058594, 0.35058594, 1.0]
+upscaling mode1 attachment0: [0.35058594, 0.35058594, 0.35058594, 1.0]
+upscaling mode1 attachment1: [0.35058594, 0.35058594, 0.35058594, 1.0]
+upscaling mode2 attachment0: [0.5, 0.5, 0.5, 1.0]
+upscaling mode2 attachment1: [0.5, 0.5, 0.5, 1.0]
+upscaling mode3 attachment0: [0.5, 0.5, 0.5, 1.0]
+upscaling mode3 attachment1: [0.5, 0.5, 0.5, 1.0]
+upscaling mode4 attachment0: [0.0, 0.0, 0.0, 0.0]
+upscaling mode4 attachment1: [0.0, 0.0, 0.0, 0.0]
+upscaling mode5 attachment0: [0.19995117, 0.099975586, 0.0, 0.5]
+upscaling mode5 attachment1: [0.19995117, 0.099975586, 0.0, 0.5]
+upscaling mode6 attachment0: [0.5, 0.5, 0.5, 1.0]
+upscaling mode6 attachment1: [0.5, 0.5, 0.5, 1.0]
+upscaling mode7 attachment0: [0.35058594, 0.35058594, 0.35058594, 1.0]
+upscaling mode7 attachment1: [0.27514648, 0.22521973, 0.17529297, 1.0]
+FAILED
+
+failures:
+
+failures:
+    upscaling::system::device_tests::actual_output_reconstruction_rejects_bad_history_and_never_retains_overlay
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 204 filtered out; finished in 0.82s
+

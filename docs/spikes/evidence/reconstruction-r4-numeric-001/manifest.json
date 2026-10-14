@@ -1,0 +1,111 @@
+{
+  "version": 1,
+  "source": "72b1ba8ec351e86d66a90c401e0a75a530633616",
+  "cpu_packet": "e95325938a6ddf9c6b343f633dfd97189ca8ef0c",
+  "result": "rejected; first ordinary WGSL child failed, no later child executed",
+  "attempts": 1,
+  "charged_submissions": 19,
+  "charged_maps": 19,
+  "observed_submissions": 8,
+  "observed_maps": 8,
+  "observed_count_basis": "Frozen test has one queue submission/map per mode. Logs reach mode7 attachment1 after its readback, then assertion fails. No next iteration. Full19 attempt remains charged.",
+  "images": 0,
+  "records": [
+    {
+      "path": "debits.jsonl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/reconstruction-r4-numeric-001/debits.jsonl",
+      "sha256": "edead806f692e5971ba4002e8dca041bcd6b6b68e1d79df7ee50dfa5084dde09",
+      "bytes": 91
+    },
+    {
+      "path": "grant.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/reconstruction-r4-numeric-001/grant.json",
+      "sha256": "16bcdc23277f21ccba1c84fe546677331ba3281522c11403a7087e35b2582ea4",
+      "bytes": 788
+    },
+    {
+      "path": "ledger.jsonl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/reconstruction-r4-numeric-001/ledger.jsonl",
+      "sha256": "eddbbaf3f6329387f0a1d551553486b4b1978ee784880a5f83c310914c24a2a4",
+      "bytes": 1497
+    },
+    {
+      "path": "ordinary-default/stderr.txt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/reconstruction-r4-numeric-001/ordinary-default/stderr.txt",
+      "sha256": "23d985f55b0cb23c24082e2b27f3f6d5958ba093822f53ae34142484bbb2e7c8",
+      "bytes": 693
+    },
+    {
+      "path": "ordinary-default/stdout.txt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/reconstruction-r4-numeric-001/ordinary-default/stdout.txt",
+      "sha256": "ce6a8ceed244f36c31696687f223cc28765d8542b8b6a44b0a265300131508cf",
+      "bytes": 1581
+    },
+    {
+      "path": "preparation/check.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/reconstruction-r4-numeric-001/preparation/check.json",
+      "sha256": "5dc693f6eeb19f4232cb623224d1ff9b34c2930f1b9973671f1a63eac2887574",
+      "bytes": 1425
+    },
+    {
+      "path": "preparation/controls.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/reconstruction-r4-numeric-001/preparation/controls.json",
+      "sha256": "9a9ba85680235643e108d2fa6cef8fd80ec5f5837f0fbb0037a264cbc59b2d4b",
+      "bytes": 122
+    },
+    {
+      "path": "preparation/lifecycle.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/reconstruction-r4-numeric-001/preparation/lifecycle.py",
+      "sha256": "b9e12895389a046e1c0a0bd4c43f01a215505c793be4106b31fafc18aa2aff34",
+      "bytes": 27171
+    },
+    {
+      "path": "preparation/plan.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/reconstruction-r4-numeric-001/preparation/plan.json",
+      "sha256": "5dc693f6eeb19f4232cb623224d1ff9b34c2930f1b9973671f1a63eac2887574",
+      "bytes": 1425
+    },
+    {
+      "path": "preparation/quantization-diagnosis.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/reconstruction-r4-numeric-001/preparation/quantization-diagnosis.json",
+      "sha256": "ff207e052f9d01911610e23793b6b3c4b10cef7717326e7867449bca5ada9eb3",
+      "bytes": 2514
+    },
+    {
+      "path": "preparation/reviewed_judge.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/reconstruction-r4-numeric-001/preparation/reviewed_judge.py",
+      "sha256": "d89272e66a039d43911a58a04447056ccab26822a3a005429c5edf5c0221cf13",
+      "bytes": 14578
+    },
+    {
+      "path": "preparation/run.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/reconstruction-r4-numeric-001/preparation/run.py",
+      "sha256": "22f17d766cc7bf2b4e9cd6ac5968b03b16e438827c1cc8b69464a037aa3bbae5",
+      "bytes": 8451
+    },
+    {
+      "path": "release.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/reconstruction-r4-numeric-001/release.json",
+      "sha256": "14b35738ecb1d03fc634010ba88817590c3a42cf0e32b75192bf76427e63ab63",
+      "bytes": 2458
+    },
+    {
+      "path": "supervisor-terminal.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/reconstruction-r4-numeric-001/supervisor-terminal.json",
+      "sha256": "b3f16d85a124cc0026c9d3b6d7313e0c86cde08b4d54c364129105b063665eaa",
+      "bytes": 150
+    },
+    {
+      "path": "supervisor.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/reconstruction-r4-numeric-001/supervisor.log",
+      "sha256": "a00afcc01a89d81a00e76b0a89472ce51a94befc7fcb549b422a71cbe27ca249",
+      "bytes": 2690
+    },
+    {
+      "path": "supervisor.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/reconstruction-r4-numeric-001/supervisor.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  ]
+}
