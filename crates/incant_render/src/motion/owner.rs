@@ -41,11 +41,29 @@ pub struct MotionFrame {
     valid_previous: bool,
     bypassed: bool,
     phase: Option<u32>,
+    #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+    sampling: crate::metalfx::halton_experiment::Sequence,
 }
 impl MotionFrame {
     /// Present only for temporal accumulation; phase is internal-pixel jitter.
     pub fn jitter_phase(&self) -> Option<u32> {
         self.phase
+    }
+    #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+    pub(crate) fn experimental_jitter(&self) -> Option<([f32; 2], [f32; 2])> {
+        use crate::metalfx::halton_experiment::Sequence;
+        if self.sampling != Sequence::Halton32 {
+            return None;
+        }
+        let phase = self.phase?;
+        let current = self.sampling.sample(phase);
+        let previous = if self.has_previous() {
+            self.sampling
+                .sample((phase + self.sampling.period() - 1) % self.sampling.period())
+        } else {
+            current
+        };
+        Some((current, previous))
     }
     pub fn sequence(&self) -> u64 {
         self.sequence
@@ -70,6 +88,8 @@ pub(super) struct History {
     owner: Arc<()>,
     last: Option<Accepted>,
     cut: bool,
+    #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+    sampling: crate::metalfx::halton_experiment::Sequence,
 }
 struct Accepted {
     frame: MotionFrame,
@@ -88,10 +108,22 @@ impl Default for History {
             owner: Arc::new(()),
             last: None,
             cut: false,
+            #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+            sampling: Default::default(),
         }
     }
 }
 impl History {
+    #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+    pub(crate) fn set_experimental_sampling(
+        &mut self,
+        sequence: crate::metalfx::halton_experiment::Sequence,
+    ) {
+        if self.sampling != sequence {
+            self.sampling = sequence;
+            self.invalidate();
+        }
+    }
     pub fn invalidate(&mut self) {
         self.cut = true;
     }
@@ -137,6 +169,8 @@ impl History {
                 valid_previous,
                 bypassed,
                 phase: None,
+                #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+                sampling: self.sampling,
             },
             matrix,
             previous: if valid_previous {
@@ -161,6 +195,10 @@ impl History {
             true,
         )?;
         if !pending.frame.bypassed {
+            #[cfg(not(all(test, feature = "native-metalfx", target_os = "macos")))]
+            let period = 8;
+            #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+            let period = self.sampling.period();
             let phase = if pending.frame.has_previous() {
                 (self
                     .last
@@ -168,12 +206,16 @@ impl History {
                     .and_then(|a| a.frame.phase)
                     .ok_or(MotionError::Topology)?
                     + 1)
-                    % 8
+                    % period
             } else {
                 0
             };
             let mut camera = camera;
             camera.jitter = crate::temporal::jitter::ndc(phase, rect);
+            #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+            if self.sampling == crate::metalfx::halton_experiment::Sequence::Halton32 {
+                camera.jitter = self.sampling.ndc(phase, rect);
+            }
             pending.matrix = camera
                 .matrix(rect[2] / rect[3])
                 .map_err(|_| MotionError::Projection)?;
@@ -248,4 +290,107 @@ fn switching_jitter_modes_resets_only_the_candidate_until_accept() {
     let native = h.prepare_temporal(extent, camera, rect).unwrap();
     assert!(!native.frame.has_previous());
     assert_eq!(native.frame.jitter_phase(), Some(0));
+}
+
+#[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+#[test]
+fn metalfx_halton_phase_motion_cut_and_abandoned_candidates_are_correlated() {
+    use crate::metalfx::halton_experiment::Sequence;
+    let camera = CameraView::preview();
+    let rect = [0., 0., 480., 270.];
+    let extent = Extent::new([960, 540], [480, 270], rect, camera);
+    let mut h = History::default();
+    h.set_experimental_sampling(Sequence::Halton32);
+    for frame in 1..=56 {
+        if frame == 25 {
+            h.invalidate();
+        }
+        let mut view = camera;
+        // Real camera motion begins at the same frame as the image fixture.
+        if frame >= 17 {
+            view.eye.x += (frame - 16) as f32 * 0.05;
+        }
+        let pending = h.prepare_temporal(extent.clone(), view, rect).unwrap();
+        let phase = if frame < 25 { frame - 1 } else { frame - 25 } % 32;
+        let previous = frame != 1 && frame != 25;
+        assert_eq!(pending.frame.jitter_phase(), Some(phase));
+        assert_eq!(pending.frame.has_previous(), previous);
+        assert_eq!(pending.frame.epoch(), if frame < 25 { 1 } else { 2 });
+        let (sample, old_sample) = pending.frame.experimental_jitter().unwrap();
+        assert_eq!(sample, Sequence::Halton32.sample(phase));
+        assert_eq!(
+            old_sample,
+            Sequence::Halton32.sample(if previous { (phase + 31) % 32 } else { phase })
+        );
+        let mut expected = view;
+        expected.jitter = Sequence::Halton32.ndc(phase, rect);
+        assert_eq!(pending.matrix, expected.matrix(rect[2] / rect[3]).unwrap());
+        if previous {
+            assert_eq!(pending.previous, h.last.as_ref().unwrap().matrix);
+        } else {
+            assert_eq!(pending.previous, pending.matrix);
+        }
+        // Dropping a candidate cannot advance sampling or publish a new matrix.
+        let retained = h
+            .frame()
+            .map(|f| (f.sequence(), f.epoch(), f.jitter_phase()));
+        let abandoned = h.prepare_temporal(extent.clone(), view, rect).unwrap();
+        assert_eq!(abandoned.matrix, pending.matrix);
+        drop(abandoned);
+        assert_eq!(
+            h.frame()
+                .map(|f| (f.sequence(), f.epoch(), f.jitter_phase())),
+            retained
+        );
+        h.accept(pending);
+    }
+    assert_eq!(h.frame().unwrap().jitter_phase(), Some(31));
+    let old = h.frame().unwrap();
+    h.set_experimental_sampling(Sequence::Halton32);
+    assert!(
+        h.prepare_temporal(extent.clone(), camera, rect)
+            .unwrap()
+            .frame
+            .has_previous()
+    );
+    h.set_experimental_sampling(Sequence::Incant8);
+    assert_eq!(h.frame().unwrap().sequence(), old.sequence());
+    let p = h.prepare_temporal(extent.clone(), camera, rect).unwrap();
+    assert!(!p.frame.has_previous());
+    assert_eq!(p.frame.epoch(), old.epoch() + 1);
+    assert_eq!(p.frame.jitter_phase(), Some(0));
+    assert!(p.frame.experimental_jitter().is_none());
+    h.accept(p);
+    h.set_experimental_sampling(Sequence::Halton32);
+    let p = h
+        .prepare_temporal(
+            Extent::new([1280, 720], [640, 360], [0., 0., 640., 360.], camera),
+            camera,
+            [0., 0., 640., 360.],
+        )
+        .unwrap();
+    assert!(!p.frame.has_previous());
+    assert_eq!(p.frame.jitter_phase(), Some(0));
+}
+
+#[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+#[test]
+fn metalfx_halton_static_reprojection_is_previous_minus_current_pixel_displacement() {
+    use crate::metalfx::halton_experiment::Sequence;
+    let camera = CameraView::preview();
+    let rect = [0., 0., 480., 270.];
+    let extent = Extent::new([960, 540], [480, 270], rect, camera);
+    let mut h = History::default();
+    h.set_experimental_sampling(Sequence::Halton32);
+    let point = Vec4::new(0., 0., 0., 1.);
+    for _ in 0..33 {
+        let p = h.prepare_temporal(extent.clone(), camera, rect).unwrap();
+        let (now, old) = p.frame.experimental_jitter().unwrap();
+        let motion = reproject(p.matrix * point, p.previous * point).unwrap();
+        for axis in 0..2 {
+            assert!((motion[axis] * rect[axis + 2] - (old[axis] - now[axis])).abs() < 0.0001);
+        }
+        h.accept(p);
+    }
+    assert_eq!(h.frame().unwrap().jitter_phase(), Some(0));
 }

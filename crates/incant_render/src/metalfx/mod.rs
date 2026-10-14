@@ -2,6 +2,8 @@
 //! the spatial fallback; this feature does not implement the built-in upscaler.
 #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
 pub(crate) mod diagnostic;
+#[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+pub(crate) mod halton_experiment;
 #[cfg(any(feature = "native-metalfx", test))]
 mod lifecycle;
 #[cfg(all(feature = "native-metalfx", target_os = "macos"))]

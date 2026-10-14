@@ -257,6 +257,12 @@ impl Owner {
                 p.has_previous,
                 p.plan.ok_or(MetalFxError::Interop)?.dimensions(),
             );
+        #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+        if let Some((current, previous)) = frame.experimental_jitter() {
+            p.jitter = current;
+            p.previous_jitter = previous;
+            return Ok(());
+        }
         p.jitter = crate::temporal::jitter::SAMPLES[phase as usize];
         p.previous_jitter = if p.has_previous {
             crate::temporal::jitter::SAMPLES[(phase as usize + 7) % 8]

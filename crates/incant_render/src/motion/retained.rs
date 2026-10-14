@@ -75,6 +75,10 @@ pub(crate) struct TemporalSurfaces {
     pub slot: usize,
 }
 impl Prepared {
+    #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+    pub(crate) fn experimental_jitter(&self) -> Option<[f32; 2]> {
+        self.history.frame.experimental_jitter().map(|p| p.0)
+    }
     pub fn temporal_input(&self, rect: [f32; 4]) -> TemporalInput {
         TemporalInput {
             frame: self.history.frame.clone(),
@@ -314,6 +318,13 @@ impl MotionState {
         self.history
             .frame()
             .map(|frame| self.provenance.view(frame))
+    }
+    #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+    pub(crate) fn set_experimental_sampling(
+        &mut self,
+        sequence: crate::metalfx::halton_experiment::Sequence,
+    ) {
+        self.history.set_experimental_sampling(sequence);
     }
     pub fn invalidate(&mut self) {
         self.history.invalidate();

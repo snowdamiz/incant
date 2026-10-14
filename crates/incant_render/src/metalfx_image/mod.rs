@@ -87,7 +87,23 @@ fn actual_full_half_three_quarter_material_images_and_motion() {
 fn actual_opaque_background_reactive_policy_images_and_motion() {
     run(true);
 }
+#[test]
+#[ignore = "coordinated Mac GPU only: 168 scene submits, 15 readbacks/maps, 112 native encodes"]
+fn actual_opaque_halton32_matched_images_and_motion() {
+    run_mode(true, true);
+}
 fn run(opaque: bool) {
+    run_mode(opaque, false);
+}
+fn run_mode(opaque: bool, sampling: bool) {
+    use crate::metalfx::halton_experiment::Sequence;
+    assert!(!sampling || opaque);
+    let frames_per_arm = if sampling { 56 } else { 32 };
+    let captures = if sampling {
+        [1, 16, 24, 25, 56]
+    } else {
+        CAPTURES
+    };
     let root =
         std::env::var_os("INCANT_METALFX_IMAGE_OUTPUT").expect("explicit create-only output");
     let mut output = capture::Output::new(root.into());
@@ -144,7 +160,9 @@ fn run(opaque: bool) {
     let texture = capture::texture(&renderer);
     let view = texture.create_view(&Default::default());
     let mut arms = Vec::new();
-    let configuration = if opaque {
+    let configuration = if sampling {
+        [("full", 16), ("mfx50-incant8", 8), ("mfx50-halton32", 8)]
+    } else if opaque {
         [("full", 16), ("mfx50-reactive1", 8), ("mfx50-reactive0", 8)]
     } else {
         [("full", 16), ("mfx50", 8), ("mfx75", 12)]
@@ -166,7 +184,16 @@ fn run(opaque: bool) {
                 retained
                     .set_metalfx_experiment_domain(crate::metalfx::opaque_experiment::Domain {
                         background: crate::metalfx::opaque_experiment::BACKGROUND,
-                        stable_background: name == "mfx50-reactive0",
+                        stable_background: sampling || name == "mfx50-reactive0",
+                    })
+                    .unwrap();
+            }
+            if sampling {
+                retained
+                    .set_metalfx_experiment_sampling(if name == "mfx50-halton32" {
+                        Sequence::Halton32
+                    } else {
+                        Sequence::Incant8
                     })
                     .unwrap();
             }
@@ -199,7 +226,12 @@ fn run(opaque: bool) {
     let mut rows = Vec::new();
     let (mut submits, mut maps, mut native, mut buffers) = (0, 0, 0, 0);
     for (name, scale, mut retained) in arms {
-        for frame in 1..=32 {
+        let sequence = if name == "mfx50-halton32" {
+            Sequence::Halton32
+        } else {
+            Sequence::Incant8
+        };
+        for frame in 1..=frames_per_arm {
             stage.pose(&mut input, frame);
             let input_binding = stage.bindings(&input);
             if name == "full" {
@@ -246,15 +278,28 @@ fn run(opaque: bool) {
                 assert_eq!(m.sequence(), u64::from(frame));
                 assert_eq!(m.has_previous(), frame != 1 && frame != 25);
                 assert!(!m.bypassed());
-                let phase = (frame - 1) % 8;
+                let since_reset = if frame < 25 { frame - 1 } else { frame - 25 };
+                let phase = since_reset % sequence.period();
                 assert_eq!(m.jitter_phase(), Some(phase));
                 assert_eq!(m.epoch(), if frame < 25 { 1 } else { 2 });
+                if sampling && raw_probe.is_some() {
+                    let snapshot = retained
+                        .metalfx_diagnostic()
+                        .expect("accepted native observation");
+                    assert_eq!(snapshot.sequence, u64::from(frame));
+                    assert_eq!(snapshot.reset, frame == 1 || frame == 25);
+                    let getters = snapshot.native_settings.expect("actual native getters");
+                    assert_eq!(&getters[..3], &[1., 1., 1.]);
+                    assert_eq!(&getters[3..5], &sequence.sample(phase));
+                    assert_eq!(&getters[5..7], &extent.map(|v| v as f32));
+                    assert_eq!(&getters[7..], &[f32::from(u8::from(snapshot.reset)), 0.]);
+                }
                 json!({"sequence":m.sequence(),"epoch":m.epoch(),"previous":m.has_previous(),
-                    "content":extent,"jitter_phase":phase,"jitter_internal_pixels":crate::temporal::jitter::SAMPLES[phase as usize]})
+                    "content":extent,"jitter_phase":phase,"jitter_internal_pixels":sequence.sample(phase),"sampling":format!("{sequence:?}")})
             };
             rows.push(json!({"arm":name,"frame":frame,"input":input_binding,"motion":motion,
                 "selection":format!("{:?}",retained.metalfx_selection()),"output":[WIDTH,HEIGHT],"cut":frame==25}));
-            if CAPTURES.contains(&frame) {
+            if captures.contains(&frame) {
                 let pixels = if scale != 16 && matches!(frame, 16 | 24) {
                     if let Some(probe) = &mut raw_probe {
                         probe.read(
@@ -280,7 +325,12 @@ fn run(opaque: bool) {
             }
         }
     }
-    assert_eq!((submits, maps, native, buffers), (111, 15, 64, 239));
+    let expected = if sampling {
+        (183, 15, 112, 407)
+    } else {
+        (111, 15, 64, 239)
+    };
+    assert_eq!((submits, maps, native, buffers), expected);
     let raw_diagnostic = raw_probe.map(|probe| {
         assert_eq!(probe.records.len(), 4);
         json!({"mode":"vendor-guard-readback-v1","frames":[16,24],"records":probe.records,
@@ -293,15 +343,23 @@ fn run(opaque: bool) {
         "excluded":["BLEND card","sprites","world text","bloom","portable upscaling shaders"],
         "output_format":"RGBA8 sRGB final display; alpha is final composition, not vendor coverage",
         "budget":{"queue_submits":submits,"maps":maps,"native_raw_encodes":native,"explicit_command_buffers":buffers,
-            "vendor_internal_work_counted":false,"frames_per_arm":32,"captures":15,"width":WIDTH,"height":HEIGHT},
+            "vendor_internal_work_counted":false,"frames_per_arm":frames_per_arm,"captures":15,"width":WIDTH,"height":HEIGHT},
         "frames":rows,"files":output.files});
     if opaque {
         report["opaque_experiment"] = json!({"background_scene_linear":crate::metalfx::opaque_experiment::BACKGROUND,
-        "arms":["full","mfx50-reactive1","mfx50-reactive0"],"jitter":"unchanged 8 phases","full_background":"before tone mapping",
+        "arms":configuration.map(|v|v.0),"jitter":if sampling { "matched Incant8 versus centered Halton32 (bases2/3,index1..32)" } else { "unchanged 8 phases" },"full_background":"before tone mapping",
         "mask_semantics":"original transparent guard counterfactual, not actual opaque selection","public_mode":false});
+    }
+    if sampling {
+        report["sampling_experiment"] = json!({"first_index":1,"halton_bases":[2,3],"periods":[8,32],
+            "centered":true,"units":"internal pixels, positive right/down", "cut_frame":25,
+            "cut_restarts_phase":0,"full_cycle_after_cut":[25,56],"static16":"partial32 history only",
+            "reactive_background":0,"mip_policy":"unchanged implicit material textureSample",
+            "captures":captures,"appearance_acceptance":false});
     }
     output.write("report.json", &serde_json::to_vec_pretty(&report).unwrap());
     println!(
-        "MetalFX image fixture: 96 scene frames; 111 submits; 15 maps; 64 native encodes; 239 command buffers; 15 images; appearance unreviewed"
+        "MetalFX image fixture: {} scene frames; {submits} submits; {maps} maps; {native} native encodes; {buffers} command buffers; 15 images; appearance unreviewed",
+        frames_per_arm * 3
     );
 }

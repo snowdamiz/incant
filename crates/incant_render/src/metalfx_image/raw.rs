@@ -204,7 +204,12 @@ impl Probe {
         assert!(
             matches!(
                 arm,
-                "mfx50" | "mfx75" | "mfx50-reactive1" | "mfx50-reactive0"
+                "mfx50"
+                    | "mfx75"
+                    | "mfx50-reactive1"
+                    | "mfx50-reactive0"
+                    | "mfx50-incant8"
+                    | "mfx50-halton32"
             ) && matches!(frame, 16 | 24)
         );
         assert!(self.records.len() < 4);
@@ -215,9 +220,14 @@ impl Probe {
             .native_settings
             .expect("actual native getters after encode");
         assert_eq!(&settings[..3], &[1., 1., 1.]);
+        let sequence = if arm == "mfx50-halton32" {
+            crate::metalfx::halton_experiment::Sequence::Halton32
+        } else {
+            crate::metalfx::halton_experiment::Sequence::Incant8
+        };
         assert_eq!(
             &settings[3..5],
-            &crate::temporal::jitter::SAMPLES[((frame - 1) % 8) as usize]
+            &sequence.sample((frame - 1) % sequence.period())
         );
         assert_eq!(&settings[5..7], &snapshot.content().map(|x| x as f32));
         assert_eq!(&settings[7..], &[0., 0.]);

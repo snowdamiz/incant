@@ -251,6 +251,20 @@ impl RetainedScene {
             .set_domain(domain)
     }
     #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+    pub(crate) fn set_metalfx_experiment_sampling(
+        &mut self,
+        sequence: crate::metalfx::halton_experiment::Sequence,
+    ) -> std::result::Result<(), crate::metalfx::MetalFxError> {
+        if self.temporal.is_some() || self.metalfx.is_none() {
+            return Err(crate::metalfx::MetalFxError::Disabled);
+        }
+        self.motion
+            .as_mut()
+            .ok_or(crate::metalfx::MetalFxError::Disabled)?
+            .set_experimental_sampling(sequence);
+        Ok(())
+    }
+    #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
     pub(crate) fn enable_metalfx_diagnostic(&mut self) {
         self.metalfx
             .as_mut()
@@ -579,6 +593,16 @@ impl RetainedScene {
             .transpose()?;
         if let Some(phase) = motion_pending.as_ref().and_then(|p| p.jitter_phase()) {
             self.staging.camera.jitter = crate::temporal::jitter::ndc(phase, plan.rect);
+            #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+            if let Some(jitter) = motion_pending
+                .as_ref()
+                .and_then(|p| p.experimental_jitter())
+            {
+                self.staging.camera.jitter = [
+                    2. * jitter[0] / plan.rect[2],
+                    -2. * jitter[1] / plan.rect[3],
+                ];
+            }
             self.staging.camera.jitter_guard = crate::temporal::jitter::guard(plan.rect);
         }
         #[cfg(feature = "native-metalfx")]
