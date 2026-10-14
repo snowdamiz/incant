@@ -241,12 +241,21 @@ fn hdr_values_survive_until_tone_mapping_and_transfer_runs_once() {
 #[ignore = "requires a native GPU; run by all desktop workflows"]
 fn output_composes_display_colors_and_reuses_bounded_resize_targets() {
     let renderer = crate::test_support::checked(Renderer::headless().unwrap());
-    let first = renderer.frames.get(&renderer.device, 96, 64).unwrap();
+    let first = renderer
+        .frames
+        .get(&renderer.device, 96, 64, crate::SceneMsaa::One)
+        .unwrap();
     assert!(Arc::ptr_eq(
         &first,
-        &renderer.frames.get(&renderer.device, 96, 64).unwrap()
+        &renderer
+            .frames
+            .get(&renderer.device, 96, 64, crate::SceneMsaa::One)
+            .unwrap()
     ));
-    let resized = renderer.frames.get(&renderer.device, 80, 60).unwrap();
+    let resized = renderer
+        .frames
+        .get(&renderer.device, 80, 60, crate::SceneMsaa::One)
+        .unwrap();
     assert!(!Arc::ptr_eq(&first, &resized));
     // Both encoded versions remain alive after the cache resizes.
     let empty = renderer
@@ -295,15 +304,25 @@ fn output_composes_display_colors_and_reuses_bounded_resize_targets() {
     }
     let error = renderer
         .frames
-        .get(&renderer.device, 8192, 8192)
+        .get(&renderer.device, 8192, 8192, crate::SceneMsaa::One)
         .err()
         .unwrap();
     assert!(matches!(
         error.downcast_ref::<ResourceError>(),
         Some(ResourceError::RenderTargetSize)
     ));
-    assert!(renderer.frames.get(&renderer.device, 0, 64).is_err());
-    assert!(renderer.frames.get(&renderer.device, 8193, 16).is_err());
+    assert!(
+        renderer
+            .frames
+            .get(&renderer.device, 0, 64, crate::SceneMsaa::One)
+            .is_err()
+    );
+    assert!(
+        renderer
+            .frames
+            .get(&renderer.device, 8193, 16, crate::SceneMsaa::One)
+            .is_err()
+    );
     let error = OutputPass::validate(wgpu::TextureFormat::Rgba16Float).unwrap_err();
     assert!(matches!(
         error.downcast_ref::<ResourceError>(),
