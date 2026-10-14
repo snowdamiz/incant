@@ -1,5 +1,27 @@
 # Implementation status
 
+## Full-Core script attribution — diagnostic qualified
+
+A default-off profiler now correlates the whole script tick, its callback sources
+and native numeric work by frame. One fresh private shipping build and its full
+2,156-tick functional and diagnostic runs preserve exact gameplay and PCM. The
+same-frame tail points to the authored navigation refresh cadence, while source
+inspection finds repeated construction of immutable path-search adjacency. A
+generation-owned graph cache is being investigated separately; no optimization or
+shipping saving is claimed here. The ordinary 2 ms gate remains unmet and normal
+performance readers reject the instrumented report.
+[Source, actual results and replay](docs/spikes/core-script-attribution.md).
+
+## Release checkpoint36 — promoted
+
+All 23 required contexts and eight exact-candidate push workflows passed. PR263
+now advances release to the exact tested main281 tree, including the repaired
+desktop smoke revision, project Save/engine-pin UI, prefab authoring and the
+reviewed runtime/profiling integrations. Failed checkpoints remain retained.
+Later main282+ work stays outside this release baseline. This is comprehensive
+integration evidence, not phase approval or a rendering/performance pass.
+[Exact identities and checks](docs/spikes/release-checkpoint-36.md).
+
 ## Ordered-query experiment — measured and rejected
 
 The ordered native ECS query candidate passes scoped correctness tests and
@@ -12,10 +34,9 @@ original failures, raw histograms, exact inputs and executable identities remain
 replayable. [Negative result and evidence](docs/spikes/ordered-numeric-query.md).
 
 Checkpoint35 finished with 21 required contexts successful and both desktop
-contexts failed at the smoke helper's stale second-edit revision. Checkpoint36
-now freezes exact main281, including the reviewed helper repair, in the same
-release PR. All 23 required contexts and eight exact-head workflows must succeed
-before promotion. Release remains checkpoint30; no phase gate is approved.
+contexts failed at the smoke helper's stale second-edit revision. The successor
+checkpoint36 now passed every required context and promoted exact main281 as
+recorded above. No phase gate is approved.
 
 ## Main278 Loan shipping measurement — budget remains open
 
