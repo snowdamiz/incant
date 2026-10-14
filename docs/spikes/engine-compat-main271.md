@@ -68,5 +68,6 @@ python3 docs/spikes/evidence/engine-compat-main271/verify.py --current
 
 Optional `--originals --local-binaries` also verifies retained external raw files
 and copied executables. The portable replay checks both original and current Git
-source identities without relabeling producer binaries. Final independent review
-and the exact-head hosted fast check remain pending before publication.
+source identities without relabeling producer binaries. Final independent source and evidence review is accepted in the retained
+[review receipt](evidence/engine-compat-main271/review.json). Publication still
+requires the exact-head hosted fast check.

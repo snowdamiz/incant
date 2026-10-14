@@ -9,8 +9,8 @@ reviews now compose with linked prefab authoring. Current source passes 96
 document/command cases, two live headless cases and two cooked native controls,
 strict four-package lint and all nine qualification commands. The actual joined
 headless binary regenerated all 74 schemas. Prior producer failures and distinct
-source generations remain retained. Independent final review and publication are
-pending. File migration, backup/recovery application and editor UI remain open;
+source generations remain retained. Independent final source/evidence review is
+accepted; publication awaits its exact-head hosted fast check. File migration, backup/recovery application and editor UI remain open;
 no phase or release gate is claimed. [Current composition](docs/spikes/engine-compat-main271.md).
 
 ## Linked prefab authoring — qualified main270 composition
