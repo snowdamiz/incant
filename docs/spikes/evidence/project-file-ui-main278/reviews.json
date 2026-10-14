@@ -1,0 +1,16 @@
+{
+  "source": "d803cc2cc15d399bdf61cbf5743f5db81712f64b",
+  "root_bridge_shared_unknown_review": {
+    "reviewer": "/root/ui_handoff_runner",
+    "result": "No actionable bugs; excludes reviewer-authored announcement correction",
+    "source_paths_hash": "7d20a6dc3cb85b7c01aaad166078cd7f8df2612fa17c4124050dabce73b85e67"
+  },
+  "announcement_review": {
+    "reviewer": "/root",
+    "result": "Accepted generation-bound revocation, pending/visible cancellation on scope replacement and unmount; old callbacks cannot clear newer messages; observable controls reviewed."
+  },
+  "pixel_review": {
+    "reviewer": "/root",
+    "result": "Accepted bounded Save/project menu/pin dialog states in browser r6 and actual native Mac. r7 differs in one transient retired dialog capture; all state/flow/a11y reports match."
+  }
+}

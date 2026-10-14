@@ -1,0 +1,137 @@
+{
+  "a": "r4",
+  "b": "r5",
+  "png_identical": 31,
+  "png_different": [],
+  "measured_differences": [],
+  "new_in_b": [
+    "apply-rejected-desktop",
+    "save-rejected-desktop"
+  ],
+  "pngs": {
+    "applied-desktop-dialog.png": {
+      "a": "f20ef9d856d45684dbc1d723f3dcbe9c3a8ac950d5eb12a7fec9271b7c0813a2",
+      "b": "f20ef9d856d45684dbc1d723f3dcbe9c3a8ac950d5eb12a7fec9271b7c0813a2"
+    },
+    "applied-narrow-dialog.png": {
+      "a": "6da242eac9a4c2a00392c2597d94751c4f41deaea928baa8ab83e46327b562f0",
+      "b": "6da242eac9a4c2a00392c2597d94751c4f41deaea928baa8ab83e46327b562f0"
+    },
+    "apply-failed-desktop-dialog.png": {
+      "a": "44a369c266291644966927f69f505d970a44e4637d8b502279cca027cea84728",
+      "b": "44a369c266291644966927f69f505d970a44e4637d8b502279cca027cea84728"
+    },
+    "applying-desktop-dialog.png": {
+      "a": "10ff187587fd2f1ebeee6d23ac99632b3ad8da022d3da24e87aa57c7e0be8eeb",
+      "b": "10ff187587fd2f1ebeee6d23ac99632b3ad8da022d3da24e87aa57c7e0be8eeb"
+    },
+    "dialog-keyboard-focus-desktop-dialog.png": {
+      "a": "a0354a1261e594d16c1db090efff64b6dc59fa7d64a91c4b8046f99508b65d5d",
+      "b": "a0354a1261e594d16c1db090efff64b6dc59fa7d64a91c4b8046f99508b65d5d"
+    },
+    "menu-desktop-titlebar.png": {
+      "a": "ae95d70d782f22ee76f63beac3987ebffa9c6520586d259d4aaf3bcd235c3e4e",
+      "b": "ae95d70d782f22ee76f63beac3987ebffa9c6520586d259d4aaf3bcd235c3e4e"
+    },
+    "menu-keyboard-desktop-titlebar.png": {
+      "a": "02dbc811e8cb59e8d800ccec05242580a35cac5ad2ad886a8a6a2c8fbb07f089",
+      "b": "02dbc811e8cb59e8d800ccec05242580a35cac5ad2ad886a8a6a2c8fbb07f089"
+    },
+    "menu-long-name-narrow-titlebar.png": {
+      "a": "419b2f789c60f83f3888a716e9e4b7c419e4cbe6fbc166fbc94de2eb0ed42d68",
+      "b": "419b2f789c60f83f3888a716e9e4b7c419e4cbe6fbc166fbc94de2eb0ed42d68"
+    },
+    "menu-narrow-titlebar.png": {
+      "a": "2edca430055a43995b9fbd721da28c08a0a54c1eff0854ac3a594b9756b44bb5",
+      "b": "2edca430055a43995b9fbd721da28c08a0a54c1eff0854ac3a594b9756b44bb5"
+    },
+    "menu-unavailable-desktop-titlebar.png": {
+      "a": "85bf42cbdf4e5946e82458e3525bb7a8aabdf3c715a2c532df48a7f1a57fe419",
+      "b": "85bf42cbdf4e5946e82458e3525bb7a8aabdf3c715a2c532df48a7f1a57fe419"
+    },
+    "nothing-to-save-desktop-statusbar.png": {
+      "a": "7b312c6de95a06f46443adfbe87660759d9f725cb74863e42670eb03ee9842e6",
+      "b": "7b312c6de95a06f46443adfbe87660759d9f725cb74863e42670eb03ee9842e6"
+    },
+    "retired-desktop-dialog.png": {
+      "a": "18bff37ebc5c47c75ec166a0b4847489284de6377a196e61b2866a3fced02975",
+      "b": "18bff37ebc5c47c75ec166a0b4847489284de6377a196e61b2866a3fced02975"
+    },
+    "retired-desktop-window.png": {
+      "a": "531217ee21e2375abf180c1994a5566ddfebe83526cbcab0679b0b9381d9e115",
+      "b": "531217ee21e2375abf180c1994a5566ddfebe83526cbcab0679b0b9381d9e115"
+    },
+    "review-desktop-dialog.png": {
+      "a": "2af61d10d9f487e89efa30792102eb32c7f73a7296c55d27cfb07d83415d4508",
+      "b": "2af61d10d9f487e89efa30792102eb32c7f73a7296c55d27cfb07d83415d4508"
+    },
+    "review-desktop-window.png": {
+      "a": "ff1df3f47f7d875bd85b75ad2e2edcd54cd65b819c833279f9f5e1382dedae96",
+      "b": "ff1df3f47f7d875bd85b75ad2e2edcd54cd65b819c833279f9f5e1382dedae96"
+    },
+    "review-details-desktop-dialog.png": {
+      "a": "4024af5350183ff1fd0e6a9db3aef44766839bdf87bd1bf07ac0d9bf6c529b5b",
+      "b": "4024af5350183ff1fd0e6a9db3aef44766839bdf87bd1bf07ac0d9bf6c529b5b"
+    },
+    "review-details-narrow-dialog.png": {
+      "a": "25744374af2d7d4db2def61a8d0626b48e680e5f2e87d3798da751207979847b",
+      "b": "25744374af2d7d4db2def61a8d0626b48e680e5f2e87d3798da751207979847b"
+    },
+    "review-narrow-dialog.png": {
+      "a": "46838f458c30612935c9d8676159dfdf329eee9658b9e391e49d00e15b169ecc",
+      "b": "46838f458c30612935c9d8676159dfdf329eee9658b9e391e49d00e15b169ecc"
+    },
+    "review-narrow-window.png": {
+      "a": "6b046bd7b4c2a2f2793b2c887b50f3c9efd66790a5d62f21a388ec9b24c7f391",
+      "b": "6b046bd7b4c2a2f2793b2c887b50f3c9efd66790a5d62f21a388ec9b24c7f391"
+    },
+    "review-refused-pinned-desktop-dialog.png": {
+      "a": "5eb140bece040d66c3c85f9acd4da95e92be721449aafc119acb4489e4adac10",
+      "b": "5eb140bece040d66c3c85f9acd4da95e92be721449aafc119acb4489e4adac10"
+    },
+    "review-refused-unsaved-desktop-dialog.png": {
+      "a": "5ecaa47d55accb770ac9001c3374d116908bdb8459784b0417bd3ed0857a5365",
+      "b": "5ecaa47d55accb770ac9001c3374d116908bdb8459784b0417bd3ed0857a5365"
+    },
+    "review-refused-unsaved-narrow-dialog.png": {
+      "a": "b2293f4f70e037451502a4a1fcb5fb0725248cf899a926328d2bcb850976b31d",
+      "b": "b2293f4f70e037451502a4a1fcb5fb0725248cf899a926328d2bcb850976b31d"
+    },
+    "review-requesting-desktop-dialog.png": {
+      "a": "eb83b1b2a2245eae2574f2ef6bf8ca99ba0cac7260512ddcd996cc227dad1cf3",
+      "b": "eb83b1b2a2245eae2574f2ef6bf8ca99ba0cac7260512ddcd996cc227dad1cf3"
+    },
+    "save-failed-desktop-window.png": {
+      "a": "1946e36e70df7a22d4f927d41ebd123918ff53b4ad0c106f0e54ca55417cb459",
+      "b": "1946e36e70df7a22d4f927d41ebd123918ff53b4ad0c106f0e54ca55417cb459"
+    },
+    "save-failed-narrow-window.png": {
+      "a": "d962fb2c9579ee7c723b2ab696c6aeaab861bb23c582d0b67653ff2fd523e180",
+      "b": "d962fb2c9579ee7c723b2ab696c6aeaab861bb23c582d0b67653ff2fd523e180"
+    },
+    "saved-desktop-window.png": {
+      "a": "cba5c07dbe33deae3d6d9bd31a802e39843a7ab9527a92514cb16108c2763eff",
+      "b": "cba5c07dbe33deae3d6d9bd31a802e39843a7ab9527a92514cb16108c2763eff"
+    },
+    "saved-narrow-window.png": {
+      "a": "01742276fb68c0492b0c884897956b4246760bba0b6936f7796e19299f9e92b9",
+      "b": "01742276fb68c0492b0c884897956b4246760bba0b6936f7796e19299f9e92b9"
+    },
+    "saving-desktop-titlebar.png": {
+      "a": "e7b52050dac428fff4d18a1401811948844a5acaf9a651f782d4d9dd5a71178b",
+      "b": "e7b52050dac428fff4d18a1401811948844a5acaf9a651f782d4d9dd5a71178b"
+    },
+    "saving-narrow-titlebar.png": {
+      "a": "798067f350190daede5306b1be66c290f154afaf95e318ee7e0ef183c42a8f80",
+      "b": "798067f350190daede5306b1be66c290f154afaf95e318ee7e0ef183c42a8f80"
+    },
+    "stale-desktop-dialog.png": {
+      "a": "1f5e6677c2a6eb3d0c3617ad344c220550741a83fd5f2f75a7fc108072b2d7c1",
+      "b": "1f5e6677c2a6eb3d0c3617ad344c220550741a83fd5f2f75a7fc108072b2d7c1"
+    },
+    "stale-narrow-dialog.png": {
+      "a": "b18effa9c28384b9dd1f2f557e239201780951b1dee1c1ce692000b648610236",
+      "b": "b18effa9c28384b9dd1f2f557e239201780951b1dee1c1ce692000b648610236"
+    }
+  }
+}

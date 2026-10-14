@@ -3,6 +3,7 @@ import type { Capability } from '../bridge/contract';
 import type { IconName } from '../icons/Icon';
 import { Icon } from '../icons/Icon';
 import { useShell } from '../shell/ShellContext';
+import { ProjectTitle } from './ProjectMenu';
 import { ProviderChip } from './ProviderChip';
 
 export interface PanelVisibility {
@@ -72,13 +73,7 @@ export function Titlebar({
       <div className="titlebar__start">
         <div className="titlebar__identity">
           <img className="titlebar__logo" src="./icon.svg" alt="Incant" width={16} height={16} />
-          <h1
-            className={`titlebar__project${connection?.status === 'ready' ? '' : ' is-pending'}`}
-            title={project}
-          >
-            {connection?.status === 'ready' ? <span className="visually-hidden">Project: </span> : null}
-            {project}
-          </h1>
+          <ProjectTitle name={project} ready={connection?.status === 'ready'} />
           {scene ? (
             <span className="titlebar__scene" title={scene.title}>
               <span className="titlebar__slash" aria-hidden="true">

@@ -1,0 +1,19 @@
+# 0077 — Idle intake for root correctness integration
+
+The owned Claude ACP runner is stopped cleanly (exit 130). No replacement session was launched after root requested takeover. UI source is uncommitted on `handoff/0077-project-file-ui`, HEAD `8feae09b`. The source hash/patch and artifact inventory are in `evidence/idle-freeze/`. This is an intake snapshot, not final corrected acceptance or a phase gate.
+
+Claude authored the editor UI design, layout, implementation and rendered review. The launcher confirmed Opus 5.5, thinking `max` and the director-authorized `bypassPermissions` before both the initial prompt and resumed correction prompt. Original failed/interrupted logs and the prior result are preserved. `result.md` is the earlier r4 result and contains stale claims about the current rejection logic and unchanged bridge files; preserve it as historical evidence and use this intake for the current state.
+
+Root/Astra owns the separate four-file bridge overlay committed as `806e467f`; its bytes match that commit exactly. `evidence/root-bridge-overlay/` preserves the patch, file hashes, original source HEAD, committed source and root's accepted independent review hash. Do not attribute this production bridge patch to Claude. The producer checkout is now on other work; use the commit and manifest rather than its changing filesystem.
+
+The current UI still uses a Shell-local `RejectedRequest` symbol/subtype (`src/shell/requests.ts`, `ShellContext.tsx`) and `wasRejected` in `src/projectFile/model.ts`. It correctly treats structured Shell promise rejection as unknown, but has not yet consumed the shared `BridgeResult.outcomeUnknown` field from resolved NativeBridge failures. Root will replace that local path with the shared marker, retain actual code/message, add the resolved-marked/unmarked-refusal coverage, and rerun focused/full validation. The stale snapshot-revision comments were already corrected to the History-mark fallback.
+
+Latest retained focused log: `evidence/runs/run7-projectfile-shell.txt.gz`, 2 files / 30 tests passed. The retained whole UI log reports 47 files / 965 tests passed and the frontend build/typecheck passed at their earlier checkpoint; those logs do not establish final acceptance after the pending shared-marker adaptation. Stage-specific logs and exact hashes remain in the freeze manifest. No new frontend tests, build, native execution or performance sample was run by the supervisor during intake.
+
+Latest actual rendered set is r5: 30 capture states (33 PNG files), 5 keyboard/pointer flows, zero axe violations, page errors, external requests, capture-step errors or flow errors. The complete r5 report is `evidence/browser-report-r5.json`; every r5 PNG is preserved in `screenshots/`. `evidence/r4-r5-comparison.json` records all 31 existing PNGs byte-identical and unchanged measured text, with two new structured-rejection states. Claude reviewed the r4 visual states and r5 comparison before interruption. These are scripted host fixture visuals, not native persistence evidence.
+
+The shared-marker consumer will change some existing failure-state wording when an invoked native request rejects; refresh only the affected states after the correctness fix. The capture tool can run a bounded set via `--only=<keys> --no-flows` after checking `quiet.json`, with no dependency installation or native build.
+
+Process check found none of recorded owned PIDs 18654/18669/18677 or task-specific source/capture processes live. `capture.mjs` writes its report only after closing its owned browser and HTTP server. Tracked diff and each new UI source whitespace check passed. No files were staged, committed, pushed, published or merged. Root is now free to change the frozen UI logic; compare hashes before intake if needed.
+
+Built-by: astra

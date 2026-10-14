@@ -1,0 +1,126 @@
+{
+  "status": "prepared_for_root_final_review_and_checks",
+  "claude_ui_base_commit": "e824206a200230ef0e4fe3bada2123f06b0baf0f",
+  "claude_ui_base_patch": "evidence/idle-freeze/claude-ui-source.patch",
+  "root_bridge_original_commit": "806e467f775286d07887234a99da20590f4a4c26",
+  "root_bridge_replay_commit": "a5e862d692b66aaf0afe0bf113eb97ead1d0265e",
+  "root_bridge_patch": "evidence/root-bridge-overlay/root-owned.patch",
+  "root_ui_correction_author": "astra",
+  "root_ui_corrected_paths": [
+    "editor/ui/src/components/ProjectFile.test.tsx",
+    "editor/ui/src/projectFile/ProjectFileContext.tsx",
+    "editor/ui/src/projectFile/model.ts",
+    "editor/ui/src/shell/ShellContext.test.tsx",
+    "editor/ui/src/shell/ShellContext.tsx",
+    "editor/ui/src/shell/requests.ts"
+  ],
+  "root_ui_patch_sha256": "56c2dd208aaf6726512f6cb5ec9e2f91e4cb08f2bf1f3a5ec767f8cbc2c585b7",
+  "current_ui_fingerprint": "d3cbe982842bf93fc5c1f25226f6ddcff0aa1c1b8277cf43d541dd7ae53fc554",
+  "current_ui_files": [
+    {
+      "path": "editor/ui/src/App.tsx",
+      "sha256": "ded22d851c6decb6ec6b7de5013a22e60cc4d7c1b257a468d9a40d60f6a04d2d",
+      "bytes": 19581
+    },
+    {
+      "path": "editor/ui/src/bridge/resolve.ts",
+      "sha256": "a97cf68108e645f1de272bc50f95b72499458e18c96689e8b35ba90705af4c88",
+      "bytes": 3595
+    },
+    {
+      "path": "editor/ui/src/components/PinDialog.tsx",
+      "sha256": "2cb83dfb198b29f2275e8efe4258cf015020118f9b1a2be48031b51bdcf049e2",
+      "bytes": 12942
+    },
+    {
+      "path": "editor/ui/src/components/ProjectFile.test.tsx",
+      "sha256": "a36344095d2e956c09640b1367d5d7f0dee56053ebe37ec5b71188517b74d7b1",
+      "bytes": 43661
+    },
+    {
+      "path": "editor/ui/src/components/ProjectMenu.tsx",
+      "sha256": "da47327f7392c23af1962c2978162d7ad54ab3c42f823417f93cabfa33c24f98",
+      "bytes": 3442
+    },
+    {
+      "path": "editor/ui/src/components/ShortcutsDialog.test.tsx",
+      "sha256": "9d626126810b56f9113044f208cc7fbe49849fbe5627ff2780375a82d55f2dd9",
+      "bytes": 6364
+    },
+    {
+      "path": "editor/ui/src/components/ShortcutsDialog.tsx",
+      "sha256": "356d7fa749e92f81c72f59cc30c1306c5a5b07a5adb09e72549b9462071174b4",
+      "bytes": 12652
+    },
+    {
+      "path": "editor/ui/src/components/Titlebar.tsx",
+      "sha256": "9f623be6f6c51ad25df64d55dddadfb6cc4fdbaeece314f754a1ba7f2f409a09",
+      "bytes": 9323
+    },
+    {
+      "path": "editor/ui/src/icons/Icon.tsx",
+      "sha256": "c91b7a898fe4f1d18cd38b888af21a3c80cd7cf4e90918c56f3d7d86a252676a",
+      "bytes": 6588
+    },
+    {
+      "path": "editor/ui/src/projectFile/ProjectFileContext.tsx",
+      "sha256": "66e4c3a7f702d619d795116494b2fd00934ed3f46161de37d1b1335a40a8b880",
+      "bytes": 14050
+    },
+    {
+      "path": "editor/ui/src/projectFile/model.ts",
+      "sha256": "fe113bf687493f96457cc83a379c9537097dbfe8de4a2a0784281639bc369f00",
+      "bytes": 6411
+    },
+    {
+      "path": "editor/ui/src/shell/ShellContext.test.tsx",
+      "sha256": "9760cde1336ae33ea0c2229736f8e0611896dce01febd65ac837204e69018d1d",
+      "bytes": 9308
+    },
+    {
+      "path": "editor/ui/src/shell/ShellContext.tsx",
+      "sha256": "d2be7d7de26e0d57c780c9120e0f93d42cc73a3b21dac71b5528ad20278c833c",
+      "bytes": 11301
+    },
+    {
+      "path": "editor/ui/src/shell/requests.ts",
+      "sha256": "0963c4930e160d58f4bb65b7bcef501023b6c9b72caf4dbbabf0941f4547b72f",
+      "bytes": 1290
+    },
+    {
+      "path": "editor/ui/src/styles/dialogs.css",
+      "sha256": "55c929ab7d24ce90f23bb6b66b72cd99e4700a298a6955c77daa6e130fe5b125",
+      "bytes": 10952
+    },
+    {
+      "path": "editor/ui/src/styles/shell.css",
+      "sha256": "bfee74f3ff2889027367c1d341fe50d3be4aaf54dd741e58b23db9c756ebb38f",
+      "bytes": 17317
+    }
+  ],
+  "root_bridge_files": [
+    {
+      "path": "editor/bridge/contract.ts",
+      "sha256": "f69e8fe3cbd4649ec665711d6ad2c2135e004985619a388f070004fcedfe8b65",
+      "bytes": 20727
+    },
+    {
+      "path": "editor/bridge/native.ts",
+      "sha256": "d799508a78615ad3b71d7b1aab7f59d18d44f27273642814aa9d108be6bd5b4d",
+      "bytes": 70461
+    },
+    {
+      "path": "editor/bridge/native.generated.js",
+      "sha256": "458dc7327f6db38c84f0a054b933f9411e9ff42c9494b82c3ec18afa47dedb52",
+      "bytes": 76631
+    },
+    {
+      "path": "editor/bridge/native.project-file.test.ts",
+      "sha256": "1b78b8bc231098743da40ab65eb505e082e1c5fbfc7a3fed4895cc5e56671708",
+      "bytes": 6265
+    }
+  ],
+  "current_scope_fingerprint": "0bb5174fdc455d6a9960614a597f76b375a61d9bf861b97fcf599e816773566b",
+  "latest_local_qualification": "Focused Shell/project-file tests: 2 files / 34 passed; UI typecheck passed; whitespace passed. Root owns full-suite/build/capture/final source review after announcement delta.",
+  "historical_result": "result.md is the historical Claude r4 packet; intake.md is the stopped-session snapshot; integration-intake.md is the current source/ownership intake."
+}

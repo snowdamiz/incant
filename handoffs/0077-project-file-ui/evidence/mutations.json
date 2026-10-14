@@ -1,0 +1,109 @@
+{
+  "baseline": {
+    "exit": 0,
+    "failed": [],
+    "summary": [
+      "Test Files  2 passed (2)",
+      "Tests  30 passed (30)"
+    ]
+  },
+  "mutations": [
+    {
+      "name": "save-scope-guard",
+      "file": "src/projectFile/ProjectFileContext.tsx",
+      "exit": 1,
+      "failed": [
+        "drops a Save answer when another project opens while it is pending",
+        "drops a Save receipt or refusal when the host connection is replaced while it is pending"
+      ],
+      "summary": [
+        "Test Files  1 failed | 1 passed (2)",
+        "Tests  2 failed | 28 passed (30)"
+      ],
+      "restored_sha256": "c7f93ce5c6b5f944bff37b5db6428ae79177d16b97bb622add8b1439f94fff31"
+    },
+    {
+      "name": "apply-scope-guard",
+      "file": "src/projectFile/ProjectFileContext.tsx",
+      "exit": 1,
+      "failed": [
+        "does not report, in the project open now, a pin answered after its dialog closed"
+      ],
+      "summary": [
+        "Test Files  1 failed | 1 passed (2)",
+        "Tests  1 failed | 29 passed (30)"
+      ],
+      "restored_sha256": "c7f93ce5c6b5f944bff37b5db6428ae79177d16b97bb622add8b1439f94fff31"
+    },
+    {
+      "name": "review-scope-guard",
+      "file": "src/projectFile/ProjectFileContext.tsx",
+      "exit": 0,
+      "failed": [],
+      "summary": [
+        "Test Files  2 passed (2)",
+        "Tests  30 passed (30)"
+      ],
+      "restored_sha256": "c7f93ce5c6b5f944bff37b5db6428ae79177d16b97bb622add8b1439f94fff31"
+    },
+    {
+      "name": "release-slot-on-scope-change",
+      "file": "src/projectFile/ProjectFileContext.tsx",
+      "exit": 1,
+      "failed": [
+        "drops a Save answer when another project opens while it is pending",
+        "drops a Save receipt or refusal when the host connection is replaced while it is pending",
+        "shows a pin still in flight for a project that is no longer open as unknown, never as the open one\u2019s"
+      ],
+      "summary": [
+        "Test Files  1 failed | 1 passed (2)",
+        "Tests  3 failed | 27 passed (30)"
+      ],
+      "restored_sha256": "c7f93ce5c6b5f944bff37b5db6428ae79177d16b97bb622add8b1439f94fff31"
+    },
+    {
+      "name": "shell-request-catch",
+      "file": "src/shell/ShellContext.tsx",
+      "exit": 1,
+      "failed": [
+        "Save: an unknown result in the rejection\u2019s own words and code, and the request slot freed",
+        "a structured transport rejection keeps its code and message, and never says the pin was not applied",
+        "resolves a rejected bridge request as a failure marked rejected, keeping the thrown code and message",
+        "review and pin: leave their pending state with a failure, never a success"
+      ],
+      "summary": [
+        "Test Files  2 failed (2)",
+        "Tests  4 failed | 26 passed (30)"
+      ],
+      "restored_sha256": "ce50ac1a286629ea7fa62fccabf8878782e44575488647cb04d3d257f5c55bea"
+    },
+    {
+      "name": "rejected-marker",
+      "file": "src/projectFile/model.ts",
+      "exit": 1,
+      "failed": [
+        "Save: an unknown result in the rejection\u2019s own words and code, and the request slot freed",
+        "a host\u2019s resolved refusal stays definite, even with the editor\u2019s own rejection code",
+        "a structured transport rejection keeps its code and message, and never says the pin was not applied"
+      ],
+      "summary": [
+        "Test Files  1 failed | 1 passed (2)",
+        "Tests  3 failed | 27 passed (30)"
+      ],
+      "restored_sha256": "6b5f8ca6522d7b2d17206f6ecd5179f4a5ceac840b54caf4e433d6ccae321ec1"
+    },
+    {
+      "name": "stale-latch",
+      "file": "src/projectFile/ProjectFileContext.tsx",
+      "exit": 1,
+      "failed": [
+        "retires a review the project has moved past and asks for a fresh one, never reusing the old ID"
+      ],
+      "summary": [
+        "Test Files  1 failed | 1 passed (2)",
+        "Tests  1 failed | 29 passed (30)"
+      ],
+      "restored_sha256": "c7f93ce5c6b5f944bff37b5db6428ae79177d16b97bb622add8b1439f94fff31"
+    }
+  ]
+}

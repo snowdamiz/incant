@@ -1,0 +1,30 @@
+{
+  "author": "astra",
+  "owner": "root",
+  "purpose": "Root-owned local bridge outcome metadata overlay for the Claude editor UI consumer; no Rust IPC or schema change.",
+  "source_checkout": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+  "source_head": "38c0178a60ae9021a1c16787bfba39a8249aabcb",
+  "target_head": "8feae09bf96b393601180ce9005456a9ae63cbc6",
+  "qualification": "Root reports committed overlay after accepted independent review; exact four files verified against commit 806e467f. Root retains its check evidence and integration ownership.",
+  "files": [
+    {
+      "path": "editor/bridge/contract.ts",
+      "sha256": "f69e8fe3cbd4649ec665711d6ad2c2135e004985619a388f070004fcedfe8b65"
+    },
+    {
+      "path": "editor/bridge/native.ts",
+      "sha256": "d799508a78615ad3b71d7b1aab7f59d18d44f27273642814aa9d108be6bd5b4d"
+    },
+    {
+      "path": "editor/bridge/native.generated.js",
+      "sha256": "458dc7327f6db38c84f0a054b933f9411e9ff42c9494b82c3ec18afa47dedb52"
+    },
+    {
+      "path": "editor/bridge/native.project-file.test.ts",
+      "sha256": "1b78b8bc231098743da40ab65eb505e082e1c5fbfc7a3fed4895cc5e56671708"
+    }
+  ],
+  "patch_sha256": "1f1ed3964e57f36c434b87bf921e8777d4106b6668f228cb8ecfcf2df70b9955",
+  "committed_source": "806e467f775286d07887234a99da20590f4a4c26",
+  "accepted_independent_review_sha256": "a54d5642e504dbb0be1dcfb8f5fe1eb583ffa53783224288b3ce5a9c06fa5bc7"
+}

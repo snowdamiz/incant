@@ -1,0 +1,4 @@
+
+> @incant/editor-ui@0.0.1 typecheck
+> tsc -b --noEmit
+

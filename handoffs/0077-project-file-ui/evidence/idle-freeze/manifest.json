@@ -1,0 +1,206 @@
+{
+  "status": "idle_for_root_correctness_intake",
+  "head": "8feae09bf96b393601180ce9005456a9ae63cbc6",
+  "branch": "handoff/0077-project-file-ui",
+  "ui_source_sha256": "33191b1ab9e43f5e25990885a69a1b39ef140a88a06897419fb08ca35c67ae3f",
+  "ui_patch_sha256": "84f46258c5d67914fb578af1c0abfee9b54147b0cc5ef5840e3505f071a803ad",
+  "ui_source": [
+    {
+      "path": "editor/ui/src/App.tsx",
+      "sha256": "ded22d851c6decb6ec6b7de5013a22e60cc4d7c1b257a468d9a40d60f6a04d2d",
+      "bytes": 19581,
+      "author": "claude"
+    },
+    {
+      "path": "editor/ui/src/bridge/resolve.ts",
+      "sha256": "a97cf68108e645f1de272bc50f95b72499458e18c96689e8b35ba90705af4c88",
+      "bytes": 3595,
+      "author": "claude"
+    },
+    {
+      "path": "editor/ui/src/components/PinDialog.tsx",
+      "sha256": "2cb83dfb198b29f2275e8efe4258cf015020118f9b1a2be48031b51bdcf049e2",
+      "bytes": 12942,
+      "author": "claude"
+    },
+    {
+      "path": "editor/ui/src/components/ProjectFile.test.tsx",
+      "sha256": "3f350810eef2d4faae04faa20bd7f627b797bda889a95dc973ab054da55b9080",
+      "bytes": 42380,
+      "author": "claude"
+    },
+    {
+      "path": "editor/ui/src/components/ProjectMenu.tsx",
+      "sha256": "da47327f7392c23af1962c2978162d7ad54ab3c42f823417f93cabfa33c24f98",
+      "bytes": 3442,
+      "author": "claude"
+    },
+    {
+      "path": "editor/ui/src/components/ShortcutsDialog.test.tsx",
+      "sha256": "9d626126810b56f9113044f208cc7fbe49849fbe5627ff2780375a82d55f2dd9",
+      "bytes": 6364,
+      "author": "claude"
+    },
+    {
+      "path": "editor/ui/src/components/ShortcutsDialog.tsx",
+      "sha256": "356d7fa749e92f81c72f59cc30c1306c5a5b07a5adb09e72549b9462071174b4",
+      "bytes": 12652,
+      "author": "claude"
+    },
+    {
+      "path": "editor/ui/src/components/Titlebar.tsx",
+      "sha256": "9f623be6f6c51ad25df64d55dddadfb6cc4fdbaeece314f754a1ba7f2f409a09",
+      "bytes": 9323,
+      "author": "claude"
+    },
+    {
+      "path": "editor/ui/src/icons/Icon.tsx",
+      "sha256": "c91b7a898fe4f1d18cd38b888af21a3c80cd7cf4e90918c56f3d7d86a252676a",
+      "bytes": 6588,
+      "author": "claude"
+    },
+    {
+      "path": "editor/ui/src/projectFile/ProjectFileContext.tsx",
+      "sha256": "c7f93ce5c6b5f944bff37b5db6428ae79177d16b97bb622add8b1439f94fff31",
+      "bytes": 13323,
+      "author": "claude"
+    },
+    {
+      "path": "editor/ui/src/projectFile/model.ts",
+      "sha256": "6b5f8ca6522d7b2d17206f6ecd5179f4a5ceac840b54caf4e433d6ccae321ec1",
+      "bytes": 6445,
+      "author": "claude"
+    },
+    {
+      "path": "editor/ui/src/shell/ShellContext.test.tsx",
+      "sha256": "17070ffb821eadeec859e4b071250ac885739ce3f1b43eee857bd967f1e7dce5",
+      "bytes": 6792,
+      "author": "claude"
+    },
+    {
+      "path": "editor/ui/src/shell/ShellContext.tsx",
+      "sha256": "ce50ac1a286629ea7fa62fccabf8878782e44575488647cb04d3d257f5c55bea",
+      "bytes": 10152,
+      "author": "claude"
+    },
+    {
+      "path": "editor/ui/src/shell/requests.ts",
+      "sha256": "bcf4f88058e10ed4ddb14dcfa4978933afc559e8f509643921d1a2f53bc41743",
+      "bytes": 1863,
+      "author": "claude"
+    },
+    {
+      "path": "editor/ui/src/styles/dialogs.css",
+      "sha256": "55c929ab7d24ce90f23bb6b66b72cd99e4700a298a6955c77daa6e130fe5b125",
+      "bytes": 10952,
+      "author": "claude"
+    },
+    {
+      "path": "editor/ui/src/styles/shell.css",
+      "sha256": "bfee74f3ff2889027367c1d341fe50d3be4aaf54dd741e58b23db9c756ebb38f",
+      "bytes": 17317,
+      "author": "claude"
+    }
+  ],
+  "root_overlay_commit": "806e467f775286d07887234a99da20590f4a4c26",
+  "root_overlay_paths": [
+    "editor/bridge/contract.ts",
+    "editor/bridge/native.ts",
+    "editor/bridge/native.generated.js",
+    "editor/bridge/native.project-file.test.ts"
+  ],
+  "routing": {
+    "model": "Opus 5.5",
+    "thinking": "max",
+    "permission_mode": "bypassPermissions",
+    "launch_and_resume_confirmed_before_prompt": true,
+    "runner_sessions": [
+      57145,
+      48345
+    ],
+    "runner_exit_codes": [
+      130,
+      130
+    ],
+    "replacement_session_launched": false
+  },
+  "processes": {
+    "recorded_owned_pids": [
+      18654,
+      18669,
+      18677
+    ],
+    "matching_live_processes": [],
+    "capture_report_written_after_browser_and_http_server_close": true
+  },
+  "captures": {
+    "set": "r5",
+    "captures": 30,
+    "png_files": 33,
+    "flows": 5,
+    "axe_violations": 0,
+    "page_errors": 0,
+    "external_requests": 0,
+    "step_errors": 0,
+    "flow_errors": 0,
+    "data": "deterministic project file fixture (tools/fake-host.js + real native.generated.js); not live, not native WebKit, no file written"
+  },
+  "logs": [
+    {
+      "path": "handoffs/0077-project-file-ui/evidence/runs/run7-projectfile-shell.txt.gz",
+      "sha256": "9f43d9bb51571098bca7ffda6ddbff801530da3622bc3c09bf592158f23fb63b",
+      "raw_sha256": "f13f479609e9f3bb9faa735004ac4e34392355b9b0ff91e58a16520529d98792",
+      "summary": [
+        "Test Files  2 passed (2)",
+        "Tests  30 passed (30)"
+      ]
+    },
+    {
+      "path": "handoffs/0077-project-file-ui/evidence/runs/rev1-typecheck.txt.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "summary": []
+    },
+    {
+      "path": "handoffs/0077-project-file-ui/evidence/runs/rev1-tests.txt.gz",
+      "sha256": "5a44e5fdb352bdcf5f440343de1113b985bc656d7a59ad88faec6ba9fdcf742a",
+      "raw_sha256": "9b516f05cc0bab531e9a7bafb6f904f64ac1124ddc28521c78d004c49ab951bf",
+      "summary": [
+        "Test Files  47 passed (47)",
+        "Tests  965 passed (965)"
+      ]
+    },
+    {
+      "path": "handoffs/0077-project-file-ui/evidence/runs/rev1-build.txt.gz",
+      "sha256": "e50c6e0f0adb8ff0ffe663ad9320996dd36d204b79ee095d85b5bcd244e5976c",
+      "raw_sha256": "f3863a3d3ec185e5a04338e0e45d15738a1d00be46e9c6af8e4268da0b272003",
+      "summary": [
+        "\u2713 built in 100ms"
+      ]
+    },
+    {
+      "path": "handoffs/0077-project-file-ui/evidence/runs/rev1-mutations.txt.gz",
+      "sha256": "e349fe6e6e977c2e5a0afacb23511d2687afac4715f6bbeb369621264b90a8fe",
+      "raw_sha256": "5c9fe65d4fccbeb83f948b83351ccf029bfb0d5f6aa26a8514cf0c6ea4d26769",
+      "summary": [
+        "save-scope-guard: exit=1 failed=2",
+        "apply-scope-guard: exit=1 failed=1",
+        "review-scope-guard: exit=0 failed=0",
+        "release-slot-on-scope-change: exit=1 failed=3",
+        "shell-request-catch: exit=1 failed=3",
+        "stale-latch: exit=1 failed=1"
+      ]
+    }
+  ],
+  "remaining_correctness": [
+    "Replace Shell-only rejected-result symbol/subtype with shared BridgeResult.outcomeUnknown metadata.",
+    "Set outcomeUnknown=true for Shell catches and consume it for project-file failures, retaining actual error code/message.",
+    "Add/adjust marked resolved failure and unmarked authoritative refusal regressions; rerun focused/full validation.",
+    "Refresh only visible failure states whose output changes when shared metadata is consumed."
+  ],
+  "limitations": [
+    "result.md is the historical r4 packet and has stale final-state and unchanged-bridge claims; use intake.md for current state.",
+    "The retained full-suite 965-pass log does not establish final acceptance after the latest metadata correction.",
+    "Browser fixture evidence does not establish native file persistence or native WebKit behavior."
+  ]
+}

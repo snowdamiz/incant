@@ -1,0 +1,416 @@
+diff --git a/editor/ui/src/components/ProjectFile.test.tsx b/editor/ui/src/components/ProjectFile.test.tsx
+index 63ff9659dfa7860e4d146d097847cdf7ab05c86e..8c6bfb06831897d0ddd1678be2751031202e0ae5 100644
+--- a/editor/ui/src/components/ProjectFile.test.tsx
++++ b/editor/ui/src/components/ProjectFile.test.tsx
+@@ -1,6 +1,6 @@
+ import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
+ import axe from 'axe-core';
+-import { describe, expect, it } from 'vitest';
++import { describe, expect, it, vi } from 'vitest';
+ import type { EngineRead, Invoke } from '../../../bridge/native';
+ import { NativeBridge } from '../../../bridge/native';
+ import { App } from '../App';
+@@ -79,7 +79,7 @@ const settle = () => act(async () => { await new Promise((done) => setTimeout(do
+ interface FileCall {
+   readonly request: Record<string, unknown>;
+   /** Answers as the host does: the response and the read that follows it. */
+-  answer(response: unknown, next?: EngineRead): Promise<void>;
++  answer(response: unknown, next?: EngineRead, settleAnswer?: boolean): Promise<void>;
+   /** Fails as the host does: Tauri rejects with the command's error text. */
+   refuse(error: unknown): Promise<void>;
+ }
+@@ -94,10 +94,10 @@ async function createHost(read: EngineRead, platform: 'macos' | 'windows' = 'mac
+     return new Promise<T>((resolve, reject) => {
+       files.push({
+         request: args?.request as Record<string, unknown>,
+-        answer: async (response, next = current) => {
++        answer: async (response, next = current, settleAnswer = true) => {
+           current = next;
+           resolve({ response, snapshot: next } as T);
+-          await settle();
++          if (settleAnswer) await settle();
+         },
+         refuse: async (error) => {
+           reject(error);
+@@ -330,7 +330,7 @@ describe('failed saves', () => {
+     await files[0]!.refuse('The project file changed outside the editor.');
+     const region = screen.getByRole('region', { name: 'Project status' });
+     const alert = within(region).getByRole('alert');
+-    expect(alert.textContent).toContain('Save failed. The project file changed outside the editor.');
++    expect(alert.textContent).toContain('Save result unknown. The project file changed outside the editor.');
+     expect(alert.textContent).toContain('engine.request');
+     expect(message()).not.toMatch(/Saved/);
+ 
+@@ -356,7 +356,7 @@ describe('failed saves', () => {
+     // The production bridge refuses a receipt for a revision it did not send.
+     await files[0]!.answer(savedAt(9, true));
+     const alert = within(screen.getByRole('region', { name: 'Project status' })).getByRole('alert');
+-    expect(alert.textContent).toContain('Save failed. Invalid project file response.');
++    expect(alert.textContent).toContain('Save result unknown. Invalid project file response.');
+     expect(message()).not.toMatch(/Saved/);
+   });
+ 
+@@ -509,7 +509,7 @@ describe('engine pin review', () => {
+     const dialog = pinDialog();
+     const refusal = within(dialog).getByRole('alert');
+     expect(refusal.textContent).toBe(
+-      'The review could not be prepared. engine pin review applies only to a legacy project without an engine declarationengine.request',
++      'No review was returned. engine pin review applies only to a legacy project without an engine declarationengine.request',
+     );
+     expect(describedBy(dialog)).toBe(refusal.textContent);
+     expect(within(dialog).queryByRole('button', { name: 'Pin' })).toBeNull();
+@@ -522,7 +522,7 @@ describe('engine pin review', () => {
+     fireEvent.click(footer('Pin'));
+     await files[2]!.refuse('document revision conflict: expected 3, current 4');
+     expect(within(dialog).getByRole('alert').textContent).toBe(
+-      'The engine pin was not applied. document revision conflict: expected 3, current 4engine.requestA new review is needed to try again.',
++      'Engine pin result unknown. document revision conflict: expected 3, current 4engine.requestA new review is needed to try again.',
+     );
+     expect(within(dialog).queryByRole('button', { name: 'Pin' })).toBeNull();
+     expect(document.activeElement).toBe(footer('Close'));
+@@ -542,7 +542,7 @@ describe('engine pin review', () => {
+     await waitFor(() => expect(message()).toBe('The engine pin is being applied.'));
+     await files[1]!.refuse('project source conflict');
+     const alert = within(screen.getByRole('region', { name: 'Project status' })).getByRole('alert');
+-    expect(alert.textContent).toContain('The engine pin was not applied. project source conflict');
++    expect(alert.textContent).toContain('Engine pin result unknown. project source conflict');
+ 
+     choose(/^Pin engine version/);
+     await files[2]!.answer(reviewAt(3));
+@@ -577,6 +577,33 @@ describe('engine pin review', () => {
+ });
+ 
+ describe('answers that arrive after another project opened', () => {
++  it.each(['queued', 'visible'] as const)('retires a %s Save success announcement when another project opens', async (phase) => {
++    vi.useFakeTimers();
++    let view: ReturnType<typeof render> | undefined;
++    try {
++      const host = await openEditor();
++      view = host.view;
++      press({ metaKey: true });
++      // Own the async act boundary here: the helper's real-clock settling wrapper must
++      // not remain open while this test advances its fake announcement clock.
++      await act(async () => { await host.files[0]!.answer(savedAt(3, true), undefined, false); });
++      if (phase === 'visible') {
++        await act(async () => { await vi.advanceTimersByTimeAsync(30); });
++        expect(message()).toBe('Saved revision 3 to the project file.');
++      } else {
++        expect(message()).toBe('');
++      }
++      await host.publish(lighthouse());
++      expect(screen.getByRole('button', { name: /^Project: Lighthouse/ })).not.toBeNull();
++      await act(async () => { await vi.advanceTimersByTimeAsync(100); });
++      expect(message()).toBe('');
++      expect(screen.queryByRole('region', { name: 'Project status' })).toBeNull();
++    } finally {
++      view?.unmount();
++      vi.useRealTimers();
++    }
++  });
++
+   it('drops a Save answer when another project opens while it is pending', async () => {
+     const { files, publish } = await openEditor();
+     press({ metaKey: true });
+diff --git a/editor/ui/src/projectFile/ProjectFileContext.tsx b/editor/ui/src/projectFile/ProjectFileContext.tsx
+index b8d382cca95311fdfe623d7a5cbd7739cd35cd44..784f0fca27d6d72c283fd1027421fd0cfa00944b 100644
+--- a/editor/ui/src/projectFile/ProjectFileContext.tsx
++++ b/editor/ui/src/projectFile/ProjectFileContext.tsx
+@@ -95,7 +95,7 @@ interface Run {
+  * before it writes.
+  */
+ export function ProjectFileProvider({ children }: { children: ReactNode }) {
+-  const { bridge, snapshot, capabilities, request, announce } = useShell();
++  const { bridge, snapshot, capabilities, request, announce: shellAnnounce } = useShell();
+   const unavailable = fileUnavailable(bridge, snapshot, capabilities);
+   const openProject = useMemo(() => openProjectOf(snapshot), [snapshot]);
+ 
+@@ -110,6 +110,24 @@ export function ProjectFileProvider({ children }: { children: ReactNode }) {
+   // The dialog's current request. Closing it or asking again retires an earlier answer.
+   const ticket = useRef(0);
+   const opener = useRef<HTMLElement | null>(null);
++  const mounted = useRef(false);
++  // Shell supersedes every earlier message, so only our latest revocation can be live.
++  const revokeAnnouncement = useRef<(() => void) | null>(null);
++  const announce = useCallback((text: string) => {
++    if (!mounted.current) return;
++    revokeAnnouncement.current?.();
++    revokeAnnouncement.current = shellAnnounce(text);
++  }, [shellAnnounce]);
++
++  useLayoutEffect(() => {
++    mounted.current = true;
++    return () => {
++      mounted.current = false;
++      running.current = null;
++      revokeAnnouncement.current?.();
++      revokeAnnouncement.current = null;
++    };
++  }, []);
+ 
+   // Observed on every publish, which comes before the bridge resolves the request it
+   // answers, so a late answer is always compared with the project open by then.
+@@ -120,6 +138,8 @@ export function ProjectFileProvider({ children }: { children: ReactNode }) {
+       if (seen.bridge === bridge && (project === null || project === seen.project)) return;
+       const next: Scope = { bridge, project: project ?? (seen.bridge === bridge ? seen.project : null) };
+       scopeRef.current = next;
++      revokeAnnouncement.current?.();
++      revokeAnnouncement.current = null;
+       // The newly open project has no request of its own yet, and no earlier failure.
+       running.current = null;
+       setBusy(null);
+@@ -142,7 +162,7 @@ export function ProjectFileProvider({ children }: { children: ReactNode }) {
+     setBusy(null);
+   };
+   /** An answer belongs to the scope it was requested in, or to nothing shown now. */
+-  const belongs = (run: Run) => run.scope === scopeRef.current;
++  const belongs = (run: Run) => mounted.current && run.scope === scopeRef.current;
+ 
+   const save = useCallback(async () => {
+     if (unavailable !== null) {
+diff --git a/editor/ui/src/projectFile/model.ts b/editor/ui/src/projectFile/model.ts
+index 3713d6cd5a5b96218d202a7d105eb42ea758d6c3..3ed322a420181037833b1a0c3e7d94a7c72ab0ad 100644
+--- a/editor/ui/src/projectFile/model.ts
++++ b/editor/ui/src/projectFile/model.ts
+@@ -9,7 +9,6 @@ import type { CapabilitySet } from '../bridge/resolve';
+ import { unavailableMessage } from '../bridge/resolve';
+ import { projectState } from '../shell/projectState';
+ import type { RequestResult } from '../shell/requests';
+-import { wasRejected } from '../shell/requests';
+ 
+ export type PinReview = Extract<ProjectFileResponse, { readonly operation: 'review_pin' }>['review'];
+ export type SaveReceipt = Extract<ProjectFileResponse, { readonly operation: 'save' }>['receipt'];
+@@ -94,13 +93,13 @@ export interface FileFailure {
+ 
+ /**
+  * A failed request as shown, its code and message exactly as they came. Unknown exactly
+- * when `Shell.request` caught a rejected promise, whatever was thrown; a host's own
+- * failure answer is definite, whatever its code.
++ * when the bridge or Shell could not verify completion after dispatch. Error text
++ * and codes never establish whether a write committed.
+  */
+ export const requestFailure = (result: Extract<RequestResult, { readonly ok: false }>): FileFailure => ({
+   message: result.error.message,
+   code: result.error.code,
+-  unknown: wasRejected(result),
++  unknown: result.outcomeUnknown === true,
+ });
+ 
+ /** A success that arrived without its typed receipt is not reported as a success. */
+diff --git a/editor/ui/src/shell/ShellContext.test.tsx b/editor/ui/src/shell/ShellContext.test.tsx
+index d490758b61d8eb74a91a0cb01950f78a740c8491..fcd96541e368177eb793dda260f07f563d0b7344 100644
+--- a/editor/ui/src/shell/ShellContext.test.tsx
++++ b/editor/ui/src/shell/ShellContext.test.tsx
+@@ -1,5 +1,5 @@
+ import { act, render, waitFor } from '@testing-library/react';
+-import { describe, expect, it } from 'vitest';
++import { describe, expect, it, vi } from 'vitest';
+ import { NativeBridge } from '../../../bridge/native';
+ import type { BridgeResult, EditorBridge } from '../bridge/contract';
+ import { createFixtureBridge } from '../bridge/fixture';
+@@ -9,7 +9,6 @@ import type { EngineRead } from '../../../bridge/native';
+ import projectSchema from '../../../../schemas/Project.schema.json';
+ import { ShellProvider, capabilityOf, useShell } from './ShellContext';
+ import type { RequestResult } from './requests';
+-import { wasRejected } from './requests';
+ 
+ describe('shell snapshot', () => {
+   it('updates native budget capabilities after loading and preserves the authored cap', async () => {
+@@ -96,6 +95,63 @@ describe('shell snapshot', () => {
+     expect(capabilityOf({ type: 'window.close' })).toBe('window.close');
+   });
+ 
++  it('an old revocation cannot erase a newer queued or visible announcement', () => {
++    vi.useFakeTimers();
++    let view: ReturnType<typeof render> | undefined;
++    try {
++      let shell!: Shell;
++      function Panel() { shell = useShell(); return <div role="status">{shell.message}</div>; }
++      view = render(<ShellProvider bridge={null}><Panel /></ShellProvider>);
++      let revokeOld!: () => void;
++      act(() => { revokeOld = shell.announce('Earlier result'); });
++      act(() => { vi.advanceTimersByTime(10); });
++      act(() => {
++        shell.announce('New unrelated result');
++        revokeOld();
++      });
++      // The earlier queued message never appears, even before the newer one is due.
++      act(() => { vi.advanceTimersByTime(20); });
++      expect(view.getByRole('status').textContent).toBe('');
++      act(() => { vi.advanceTimersByTime(10); });
++      expect(view.getByRole('status').textContent).toBe('New unrelated result');
++      act(() => { revokeOld(); });
++      expect(view.getByRole('status').textContent).toBe('New unrelated result');
++    } finally {
++      view?.unmount();
++      vi.useRealTimers();
++    }
++  });
++
++  it('revokes its own queued and visible messages and cancels superseded and unmounted timers', () => {
++    vi.useFakeTimers();
++    let view: ReturnType<typeof render> | undefined;
++    try {
++      let shell!: Shell;
++      function Panel() { shell = useShell(); return <div role="status">{shell.message}</div>; }
++      view = render(<ShellProvider bridge={null}><Panel /></ShellProvider>);
++      let revoke!: () => void;
++      act(() => { revoke = shell.announce('Never shown'); revoke(); });
++      act(() => { vi.advanceTimersByTime(30); });
++      expect(view.getByRole('status').textContent).toBe('');
++      act(() => { revoke = shell.announce('Visible result'); });
++      act(() => { vi.advanceTimersByTime(30); });
++      expect(view.getByRole('status').textContent).toBe('Visible result');
++      act(() => { revoke(); });
++      expect(view.getByRole('status').textContent).toBe('');
++
++      act(() => { shell.announce('Older result'); vi.advanceTimersByTime(4000); });
++      act(() => { shell.announce('Longer-lived result'); });
++      // The older message's expiry must not clear its replacement.
++      act(() => { vi.advanceTimersByTime(4050); });
++      expect(view.getByRole('status').textContent).toBe('Longer-lived result');
++      view.unmount();
++      expect(vi.getTimerCount()).toBe(0);
++    } finally {
++      view?.unmount();
++      vi.useRealTimers();
++    }
++  });
++
+   it('resolves a rejected bridge request as a failure marked rejected, keeping the thrown code and message', async () => {
+     // TEST DOUBLE: a bridge whose request promise rejects instead of resolving to a result,
+     // and finally resolves to a host failure carrying the editor's own rejection code.
+@@ -130,8 +186,8 @@ describe('shell snapshot', () => {
+       { code: 'host.closed', message: 'The editor process exited.' },
+       { code: 'request.rejected', message: 'A host refusal.' },
+     ]);
+-    // Only a caught rejection is marked, whatever its code; a host's answer never is.
+-    expect(results.map(wasRejected)).toEqual([true, true, false]);
++    // Codes cannot establish whether completion arrived; the local marker does.
++    expect(results.map((result) => !result.ok && result.outcomeUnknown === true)).toEqual([true, true, false]);
+     await waitFor(() => expect(shell.message).toBe('window.close failed: The request ended without a result.'));
+   });
+ });
+diff --git a/editor/ui/src/shell/ShellContext.tsx b/editor/ui/src/shell/ShellContext.tsx
+index 81f202d49e557e6ae3771331fb718b74f9e4bd44..e6e16ed9c75fd59f2f419a9858972c9d4404b544 100644
+--- a/editor/ui/src/shell/ShellContext.tsx
++++ b/editor/ui/src/shell/ShellContext.tsx
+@@ -1,4 +1,4 @@
+-import { createContext, useCallback, useContext, useMemo, useRef, useState, useSyncExternalStore } from 'react';
++import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react';
+ import type { ReactNode } from 'react';
+ import type {
+   BridgeResult,
+@@ -41,7 +41,8 @@ export interface Shell {
+   readonly dockTab: DockTab;
+   readonly setDockTab: (tab: DockTab) => void;
+   readonly message: string;
+-  readonly announce: (message: string) => void;
++  /** Revoke only this announcement; revoking a superseded one leaves the newer message alone. */
++  readonly announce: (message: string) => () => void;
+   /** Checks the capability, dispatches, and announces any failure. Resolves true on success. */
+   readonly run: (command: EditorCommand) => Promise<boolean>;
+   /** Like `run`, but returns the bridge's result so a caller can show the exact error inline. */
+@@ -49,8 +50,8 @@ export interface Shell {
+   readonly ask: (request: HostRequest) => Promise<boolean>;
+   /**
+    * Like `ask`, but returns the host's result so a caller can show the exact error inline.
+-   * Always resolves: a rejected bridge request becomes a failure marked as rejected, so a
+-   * caller can tell "no result arrived" from a host's refusal (shell/requests.ts).
++   * Always resolves: a rejected bridge request carries outcomeUnknown. The same marker
++   * is preserved when the native bridge cannot verify a file completion receipt.
+    */
+   readonly request: (request: HostRequest, options?: RequestOptions) => Promise<RequestResult>;
+   readonly explainUnavailable: (capability: Capability) => void;
+@@ -147,14 +148,43 @@ export function ShellProvider({ bridge, children }: { bridge: EditorBridge | nul
+     setPanels((current) => ({ ...current, [panel]: !current[panel] }));
+   }, []);
+   const [message, setMessage] = useState('');
++  const announcementGeneration = useRef(0);
++  const enqueueTimer = useRef<number | undefined>(undefined);
+   const clearTimer = useRef<number | undefined>(undefined);
+ 
+   const announce = useCallback((text: string) => {
++    const generation = ++announcementGeneration.current;
++    window.clearTimeout(enqueueTimer.current);
+     window.clearTimeout(clearTimer.current);
+     // Clear first so repeating the same message is announced again.
+     setMessage('');
+-    window.setTimeout(() => setMessage(text), 30);
+-    clearTimer.current = window.setTimeout(() => setMessage(''), 8000);
++    enqueueTimer.current = window.setTimeout(() => {
++      if (announcementGeneration.current !== generation) return;
++      enqueueTimer.current = undefined;
++      setMessage(text);
++    }, 30);
++    clearTimer.current = window.setTimeout(() => {
++      if (announcementGeneration.current !== generation) return;
++      clearTimer.current = undefined;
++      setMessage('');
++    }, 8000);
++    return () => {
++      if (announcementGeneration.current !== generation) return;
++      ++announcementGeneration.current;
++      window.clearTimeout(enqueueTimer.current);
++      window.clearTimeout(clearTimer.current);
++      enqueueTimer.current = undefined;
++      clearTimer.current = undefined;
++      setMessage('');
++    };
++  }, []);
++
++  useEffect(() => () => {
++    ++announcementGeneration.current;
++    window.clearTimeout(enqueueTimer.current);
++    window.clearTimeout(clearTimer.current);
++    enqueueTimer.current = undefined;
++    clearTimer.current = undefined;
+   }, []);
+ 
+   const explainUnavailable = useCallback(
+diff --git a/editor/ui/src/shell/requests.ts b/editor/ui/src/shell/requests.ts
+index 1aeaf338faa1aec52e57b9833bed63963f86f8a2..733dbc62cae6efefef8ed694bf2d3642c7d985f1 100644
+--- a/editor/ui/src/shell/requests.ts
++++ b/editor/ui/src/shell/requests.ts
+@@ -1,4 +1,4 @@
+-import type { BridgeError, BridgeResult } from '../bridge/contract';
++import type { BridgeResult } from '../bridge/contract';
+ 
+ /**
+  * The editor's own code for a host request whose promise rejected with no code of its own.
+@@ -7,31 +7,17 @@ import type { BridgeError, BridgeResult } from '../bridge/contract';
+  */
+ export const REQUEST_REJECTED = 'request.rejected';
+ 
+-/**
+- * Marks a failure the editor made itself, in `Shell.request`'s catch, for a request whose
+- * promise rejected. A symbol, so no host answer, IPC payload or code can carry it.
+- */
+-const REJECTED: unique symbol = Symbol('request rejected');
++/** The bridge's local result, including uncertainty after a dispatched operation. */
++export type RequestResult = BridgeResult;
+ 
+-/** A request whose promise rejected: the error as thrown, and no result from the host. */
+-export interface RejectedRequest {
+-  readonly ok: false;
+-  readonly error: BridgeError;
+-  readonly [REJECTED]: true;
+-}
+-
+-/** What `Shell.request` resolves to: the bridge's own result, or a rejected request. */
+-export type RequestResult = BridgeResult | RejectedRequest;
++export type RejectedRequest = Extract<BridgeResult, { readonly ok: false }> & { readonly outcomeUnknown: true };
+ 
+ /** The failure for a rejected request: the thrown error's own code and message when it has them, else its text. */
+ export function rejectedRequest(error: unknown): RejectedRequest {
+   if (typeof error === 'object' && error !== null) {
+     const { code, message } = error as { readonly code?: unknown; readonly message?: unknown };
+-    if (typeof code === 'string' && typeof message === 'string') return { ok: false, error: { code, message }, [REJECTED]: true };
++    if (typeof code === 'string' && typeof message === 'string') return { ok: false, error: { code, message }, outcomeUnknown: true };
+   }
+   const detail = typeof error === 'string' ? error : error instanceof Error ? error.message : '';
+-  return { ok: false, error: { code: REQUEST_REJECTED, message: detail.trim() || 'The request ended without a result.' }, [REJECTED]: true };
++  return { ok: false, error: { code: REQUEST_REJECTED, message: detail.trim() || 'The request ended without a result.' }, outcomeUnknown: true };
+ }
+-
+-/** True only for a failure `Shell.request` made from a rejected promise, never from a host's answer. */
+-export const wasRejected = (result: RequestResult): result is RejectedRequest => REJECTED in result;

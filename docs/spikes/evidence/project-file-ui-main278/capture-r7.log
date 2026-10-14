@@ -1,0 +1,36 @@
+menu-desktop: ok axe=0 errors=0
+menu-narrow: ok axe=0 errors=0
+menu-keyboard-desktop: ok axe=0 errors=0
+menu-unavailable-desktop: ok axe=0 errors=0
+menu-long-name-narrow: ok axe=0 errors=0
+saving-desktop: ok axe=0 errors=0
+saving-narrow: ok axe=0 errors=0
+saved-desktop: ok axe=0 errors=0
+saved-narrow: ok axe=0 errors=0
+nothing-to-save-desktop: ok axe=0 errors=0
+save-failed-desktop: ok axe=0 errors=0
+save-failed-narrow: ok axe=0 errors=0
+review-requesting-desktop: ok axe=0 errors=0
+review-desktop: ok axe=0 errors=0
+review-narrow: ok axe=0 errors=0
+review-details-desktop: ok axe=0 errors=0
+review-details-narrow: ok axe=0 errors=0
+review-refused-unsaved-desktop: ok axe=0 errors=0
+review-refused-unsaved-narrow: ok axe=0 errors=0
+review-refused-pinned-desktop: ok axe=0 errors=0
+applying-desktop: ok axe=0 errors=0
+applied-desktop: ok axe=0 errors=0
+applied-narrow: ok axe=0 errors=0
+apply-failed-desktop: ok axe=0 errors=0
+stale-desktop: ok axe=0 errors=0
+stale-narrow: ok axe=0 errors=0
+retired-desktop: ok axe=0 errors=0
+save-rejected-desktop: ok axe=0 errors=0
+apply-rejected-desktop: ok axe=0 errors=0
+dialog-keyboard-focus-desktop: ok axe=0 errors=0
+flow save-from-text-field: ok
+flow keyboard-pin: ok
+flow duplicate-save: ok
+flow drag-areas: ok
+flow escape-returns-focus: ok
+Wrote 30 captures and 5 flows to /Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/artifacts/0077-project-file-ui/root-r7

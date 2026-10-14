@@ -1689,7 +1689,13 @@ class NativeBridge {
             };
         } catch (error) {
             await this.start();
-            return failure(error);
+            // A rejected invocation or an unverifiable receipt is not proof that the
+            // file stayed unchanged. The host can commit before the reply/read fails.
+            // Keep its exact error, refresh state, and never repeat the write here.
+            return {
+                ...failure(error),
+                outcomeUnknown: true
+            };
         } finally{
             this.pending = false;
         }
