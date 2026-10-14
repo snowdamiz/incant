@@ -106,11 +106,20 @@ spanning 2.11–2.16 ms. Every candidate remains above 2 ms; the last pair has t
 same whole-player CPU frame-p95 interval, and baselines declined through the
 sequence. The cache adds retained graph storage. It is not adopted for this
 budget effort; all results and exact gameplay/audio parity remain recorded.
-Following the director's instruction, development moves on to other engine
-work without further profiling or optimization branches for this threshold.
+The director's 2026-10-14 clarification allows periodic, bounded reassessment of
+the script-time target while other engine work continues. The navigation-cache
+candidate remains unadopted; this does not reopen the unchanged experiment.
 The existing plan gate stays unmet; this is not evidence that sub-2 ms is
 impossible or that the full rendered game misses its frame budget.
 [Outcome and replay](docs/spikes/navigation-search-cache-outcome.md).
+
+Last reassessment: 2026-10-14, the recorded navigation-cache and ordered-query
+comparisons still provide no new adoption case. Next: use the next available
+subagent slot for a bounded review of a distinct remaining cost, then revisit
+after relevant engine changes or every few hours of active development. Record
+the hypothesis and a stop condition before new measurements; preserve matched
+shipping inputs and gameplay/audio parity. A source review is not a performance
+result. Other implementation lanes continue throughout.
 
 ## Native Play texture refresh — merged through PR284
 
