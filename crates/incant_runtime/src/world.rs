@@ -661,11 +661,22 @@ impl NativeWorld {
     pub(crate) fn publish_numeric_globals(&mut self) {
         self.world
             .resource_scope(|world, hierarchy: Mut<Hierarchy>| {
-                let mut query = world.query::<&mut Global>();
+                let mut query = world.query::<(Entity, &mut Global)>();
+                let mut values =
+                    query.iter_many_mut(world, hierarchy.nodes.iter().map(|&(entity, _)| entity));
+                assert_eq!(
+                    hierarchy.nodes.len(),
+                    hierarchy.globals.len(),
+                    "fixed topology"
+                );
                 for (index, &(entity, _)) in hierarchy.nodes.iter().enumerate() {
-                    query.get_mut(world, entity).expect("fixed topology").0 =
-                        hierarchy.globals[index];
+                    // iter_many skips missing/nonmatching entities. Check the
+                    // returned identity before pairing it with indexed scratch.
+                    let (found, mut destination) = values.fetch_next().expect("fixed topology");
+                    assert_eq!(found, entity, "fixed topology");
+                    destination.0 = hierarchy.globals[index];
                 }
+                assert!(values.fetch_next().is_none(), "fixed topology");
             });
     }
 
@@ -683,6 +694,7 @@ impl NativeWorld {
         self.world
             .resource_scope(|world, mut hierarchy: Mut<Hierarchy>| {
                 let mut query = world.query::<(
+                    Entity,
                     &Identity,
                     &Local,
                     Option<&Motion>,
@@ -691,10 +703,15 @@ impl NativeWorld {
                     Option<&Spin2D>,
                     Option<&Binding2D>,
                 )>();
-                for index in 0..hierarchy.nodes.len() {
-                    let (entity, parent) = hierarchy.nodes[index];
-                    let (id, local, motion, spin, binding, spin2d, binding2d) =
-                        query.get(world, entity).expect("fixed topology");
+                let Hierarchy { nodes, globals } = &mut *hierarchy;
+                assert_eq!(nodes.len(), globals.len(), "fixed topology");
+                // One scoped fetch initialization, retaining parent-first
+                // validation/error order and no state across world mutations.
+                let mut values = query.iter_many(world, nodes.iter().map(|&(entity, _)| entity));
+                for (index, &(entity, parent)) in nodes.iter().enumerate() {
+                    let (found, id, local, motion, spin, binding, spin2d, binding2d) =
+                        values.next().expect("fixed topology");
+                    assert_eq!(found, entity, "fixed topology");
                     let velocity = motion.map(|v| &v.0);
                     validate_components(id.0, &local.0, velocity)?;
                     if ui.contains_key(&id.0)
@@ -753,18 +770,16 @@ impl NativeWorld {
                     let value = if numeric_publication {
                         // Preserve refresh_globals' arithmetic, including root
                         // identity multiplication and signed-zero behavior.
-                        parent.map_or(DMat4::IDENTITY, |parent| hierarchy.globals[parent])
-                            * local_matrix
+                        parent.map_or(DMat4::IDENTITY, |parent| globals[parent]) * local_matrix
                     } else {
-                        parent.map_or(local_matrix, |parent| {
-                            hierarchy.globals[parent] * local_matrix
-                        })
+                        parent.map_or(local_matrix, |parent| globals[parent] * local_matrix)
                     };
                     if !value.is_finite() {
                         return Err(SceneError::Component(id.0));
                     }
-                    hierarchy.globals[index] = value;
+                    globals[index] = value;
                 }
+                assert!(values.next().is_none(), "fixed topology");
                 Ok(())
             })
     }

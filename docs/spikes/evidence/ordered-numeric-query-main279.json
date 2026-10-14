@@ -1,0 +1,625 @@
+{
+  "schema": "incant-ordered-numeric-query-cpu-v1",
+  "base": "e2207d9b897eb770aa0486a724879eb95305ff9c",
+  "branch": "codex/ordered-numeric-query-main279",
+  "source_freeze": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/source-001/freeze.json",
+    "sha256": "3a9a67e7944ab4c4959e8f8e9a4e389c8e12a78169c4fc2f531cce108cfd83d3",
+    "bytes": 812
+  },
+  "source_files": [
+    {
+      "path": "crates/incant_runtime/src/columns/validation_tests.rs",
+      "sha256": "6432d705a82b345e2cc1d5f4a54c905264e6995d8f37767225e8b95fca089af0",
+      "bytes": 12051
+    },
+    {
+      "path": "crates/incant_runtime/src/world.rs",
+      "sha256": "7ddfdea3ebc8f1d7140ab4a593f1c4dda047ba0ec526dbee93dfdba4ade99c7c",
+      "bytes": 36135
+    }
+  ],
+  "all_build_inputs": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/source-001/inputs.json",
+    "sha256": "351cf491fbb5ca100cee7ac212363d0c1825e033c7fff7e7b65f0e2aca37edf7",
+    "bytes": 694555
+  },
+  "build_inputs_count": 3922,
+  "patch": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/source-001/patch.diff",
+    "sha256": "38413cb44f3d0e2ca21d037e0339fcc9282d3bb8d12af8b030d0ec06428e3816",
+    "bytes": 10931
+  },
+  "source_change": "Scoped ordered Bevy iter_many validation and iter_many_mut publication, with exact Entity/count correspondence. No retained queries/pointers, new unsafe code, matrix cache, allocation, source-script edits, or admission changes.",
+  "coverage": [
+    "Three new observable controls: parent-first failure despite table-order disagreement; bitwise scalar publication after reparent/component move/despawn+ID reuse; skipped required query component cannot shift indexed publication.",
+    "Existing runtime/script library rollback, revocation, arithmetic, changed-observer and panic-unwind controls in both modes.",
+    "Selected integration targets numeric_boundaries,columns,physics,physics_2d,ui,animation in both modes."
+  ],
+  "per_mode": {
+    "passed": 265,
+    "ignored": 1,
+    "ignored_scope": "Existing ScriptHost phase diagnostic; not executed or relabeled as timing."
+  },
+  "checks": [
+    {
+      "name": "physics-deterministic-tests",
+      "generation": "003",
+      "argv": [
+        "/opt/homebrew/bin/rustup",
+        "run",
+        "1.99.0",
+        "cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--target",
+        "aarch64-apple-darwin",
+        "--profile",
+        "ci",
+        "-j",
+        "2",
+        "-p",
+        "incant_runtime",
+        "-p",
+        "incant_script",
+        "--no-default-features",
+        "--features",
+        "incant_runtime/physics-deterministic,incant_runtime/profile,incant_runtime/native-checkpoints,incant_script/physics-deterministic,incant_script/profile,incant_script/native-checkpoints,incant_script/compiler",
+        "--lib",
+        "--message-format=json-render-diagnostics"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds_not_benchmark": 54.322080916987034,
+      "passed": 210,
+      "failed": 0,
+      "ignored": 1,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualification-003/physics-deterministic-tests.stdout",
+        "sha256": "10a1441a1b6a52a6ffd016c3dc10beb05dec5a3681c1fae70dc2457b54c351af",
+        "bytes": 231162
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualification-003/physics-deterministic-tests.stderr",
+        "sha256": "557c5dc6bec5b945474367d448d8175fa318b907e3adc5ab19cb15c514587f98",
+        "bytes": 1790
+      },
+      "results": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualification-003/results.json",
+        "sha256": "0cd74f7162a89c38273605249a23a0d116202eb081ec39368bf7bd67d72b0708",
+        "bytes": 11943
+      },
+      "plan": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualification-003/plan.json",
+        "sha256": "0e97d79a53bbc1e2a371ccf7967002dfc81b1628ce7570bc82385f7a25cec06b",
+        "bytes": 5278
+      },
+      "managed_return_after_cleanup": true
+    },
+    {
+      "name": "physics-deterministic-clippy",
+      "generation": "003",
+      "argv": [
+        "/opt/homebrew/bin/rustup",
+        "run",
+        "1.99.0",
+        "cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--target",
+        "aarch64-apple-darwin",
+        "--profile",
+        "ci",
+        "-j",
+        "2",
+        "-p",
+        "incant_runtime",
+        "-p",
+        "incant_script",
+        "--no-default-features",
+        "--features",
+        "incant_runtime/physics-deterministic,incant_runtime/profile,incant_runtime/native-checkpoints,incant_script/physics-deterministic,incant_script/profile,incant_script/native-checkpoints,incant_script/compiler",
+        "--all-targets",
+        "--message-format=json-render-diagnostics",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds_not_benchmark": 7.539472958014812,
+      "passed": 0,
+      "failed": 0,
+      "ignored": 0,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualification-003/physics-deterministic-clippy.stdout",
+        "sha256": "913e3a4cb05801a3ed47f8ac23183ee189e8860164b932ee5dcbbddfd7e6ef7c",
+        "bytes": 233344
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualification-003/physics-deterministic-clippy.stderr",
+        "sha256": "e98eefc01fa680e74cf2dc69eb870e7141ef4d84619e61be763471fe0a57598b",
+        "bytes": 1520
+      },
+      "results": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualification-003/results.json",
+        "sha256": "0cd74f7162a89c38273605249a23a0d116202eb081ec39368bf7bd67d72b0708",
+        "bytes": 11943
+      },
+      "plan": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualification-003/plan.json",
+        "sha256": "0e97d79a53bbc1e2a371ccf7967002dfc81b1628ce7570bc82385f7a25cec06b",
+        "bytes": 5278
+      },
+      "managed_return_after_cleanup": true
+    },
+    {
+      "name": "physics-fast-simd8-tests",
+      "generation": "003",
+      "argv": [
+        "/opt/homebrew/bin/rustup",
+        "run",
+        "1.99.0",
+        "cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--target",
+        "aarch64-apple-darwin",
+        "--profile",
+        "ci",
+        "-j",
+        "2",
+        "-p",
+        "incant_runtime",
+        "-p",
+        "incant_script",
+        "--no-default-features",
+        "--features",
+        "incant_runtime/physics-fast-simd8,incant_runtime/profile,incant_runtime/native-checkpoints,incant_script/physics-fast-simd8,incant_script/profile,incant_script/native-checkpoints,incant_script/compiler",
+        "--lib",
+        "--message-format=json-render-diagnostics"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds_not_benchmark": 51.22837516697473,
+      "passed": 210,
+      "failed": 0,
+      "ignored": 1,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualification-003/physics-fast-simd8-tests.stdout",
+        "sha256": "2d29bbab85715f55e196cf429539b046147296edd7c17a4eb9bb6fbae7dc55d8",
+        "bytes": 230899
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualification-003/physics-fast-simd8-tests.stderr",
+        "sha256": "76e240e71d2c9619a7e8c432d894ccabe60563ccc76ee697eae33de851e9c938",
+        "bytes": 1367
+      },
+      "results": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualification-003/results.json",
+        "sha256": "0cd74f7162a89c38273605249a23a0d116202eb081ec39368bf7bd67d72b0708",
+        "bytes": 11943
+      },
+      "plan": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualification-003/plan.json",
+        "sha256": "0e97d79a53bbc1e2a371ccf7967002dfc81b1628ce7570bc82385f7a25cec06b",
+        "bytes": 5278
+      },
+      "managed_return_after_cleanup": true
+    },
+    {
+      "name": "physics-fast-simd8-clippy",
+      "generation": "003",
+      "argv": [
+        "/opt/homebrew/bin/rustup",
+        "run",
+        "1.99.0",
+        "cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--target",
+        "aarch64-apple-darwin",
+        "--profile",
+        "ci",
+        "-j",
+        "2",
+        "-p",
+        "incant_runtime",
+        "-p",
+        "incant_script",
+        "--no-default-features",
+        "--features",
+        "incant_runtime/physics-fast-simd8,incant_runtime/profile,incant_runtime/native-checkpoints,incant_script/physics-fast-simd8,incant_script/profile,incant_script/native-checkpoints,incant_script/compiler",
+        "--all-targets",
+        "--message-format=json-render-diagnostics",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds_not_benchmark": 7.002472832973581,
+      "passed": 0,
+      "failed": 0,
+      "ignored": 0,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualification-003/physics-fast-simd8-clippy.stdout",
+        "sha256": "2a034f89cdf5aba12230508aa4dd494efbb35e8862c3924e0c793a2bdd76cd4f",
+        "bytes": 232945
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualification-003/physics-fast-simd8-clippy.stderr",
+        "sha256": "aa51b22313a55dab28eb834bd5e355fd470d69a107af74bec1215b5a4067c0c6",
+        "bytes": 1244
+      },
+      "results": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualification-003/results.json",
+        "sha256": "0cd74f7162a89c38273605249a23a0d116202eb081ec39368bf7bd67d72b0708",
+        "bytes": 11943
+      },
+      "plan": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualification-003/plan.json",
+        "sha256": "0e97d79a53bbc1e2a371ccf7967002dfc81b1628ce7570bc82385f7a25cec06b",
+        "bytes": 5278
+      },
+      "managed_return_after_cleanup": true
+    },
+    {
+      "name": "fmt",
+      "generation": "003",
+      "argv": [
+        "/opt/homebrew/bin/rustup",
+        "run",
+        "1.99.0",
+        "cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds_not_benchmark": 1.4102852500218432,
+      "passed": 0,
+      "failed": 0,
+      "ignored": 0,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualification-003/fmt.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualification-003/fmt.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "results": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualification-003/results.json",
+        "sha256": "0cd74f7162a89c38273605249a23a0d116202eb081ec39368bf7bd67d72b0708",
+        "bytes": 11943
+      },
+      "plan": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualification-003/plan.json",
+        "sha256": "0e97d79a53bbc1e2a371ccf7967002dfc81b1628ce7570bc82385f7a25cec06b",
+        "bytes": 5278
+      },
+      "managed_return_after_cleanup": true
+    },
+    {
+      "name": "diff",
+      "generation": "003",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds_not_benchmark": 0.02877554201404564,
+      "passed": 0,
+      "failed": 0,
+      "ignored": 0,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualification-003/diff.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualification-003/diff.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "results": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualification-003/results.json",
+        "sha256": "0cd74f7162a89c38273605249a23a0d116202eb081ec39368bf7bd67d72b0708",
+        "bytes": 11943
+      },
+      "plan": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualification-003/plan.json",
+        "sha256": "0e97d79a53bbc1e2a371ccf7967002dfc81b1628ce7570bc82385f7a25cec06b",
+        "bytes": 5278
+      },
+      "managed_return_after_cleanup": true
+    },
+    {
+      "name": "physics-deterministic-runtime-integration",
+      "generation": "004",
+      "argv": [
+        "/opt/homebrew/bin/rustup",
+        "run",
+        "1.99.0",
+        "cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--target",
+        "aarch64-apple-darwin",
+        "--profile",
+        "ci",
+        "-j",
+        "2",
+        "-p",
+        "incant_runtime",
+        "--no-default-features",
+        "--features",
+        "physics-deterministic,profile,native-checkpoints",
+        "--message-format=json-render-diagnostics",
+        "--test",
+        "numeric_boundaries",
+        "--test",
+        "columns",
+        "--test",
+        "physics",
+        "--test",
+        "physics_2d",
+        "--test",
+        "ui",
+        "--test",
+        "animation"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds_not_benchmark": 40.72178275001352,
+      "passed": 55,
+      "failed": 0,
+      "ignored": 0,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualification-004/physics-deterministic-runtime-integration.stdout",
+        "sha256": "b1c45a00dd02f555c2ce34369af02ebf2fae8635a183e04544f2b00a5ec6e7fd",
+        "bytes": 209799
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualification-004/physics-deterministic-runtime-integration.stderr",
+        "sha256": "6495ba4b238dae5f6b3afcdf87c69b20e7fed5fe18f59652ab3481a6aaa4e36c",
+        "bytes": 1737
+      },
+      "results": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualification-004/results.json",
+        "sha256": "02eaa9853c5e94c57612c88333c03b9f3dad5345caa4d003fa7f1ee88cc469d7",
+        "bytes": 22787
+      },
+      "plan": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualification-004/plan.json",
+        "sha256": "424c42d920aacc327b1bbeb9a786944b150d13f7011390a32728b4e86c97b9b3",
+        "bytes": 3464
+      },
+      "managed_return_after_cleanup": true
+    },
+    {
+      "name": "physics-fast-simd8-runtime-integration",
+      "generation": "004",
+      "argv": [
+        "/opt/homebrew/bin/rustup",
+        "run",
+        "1.99.0",
+        "cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--target",
+        "aarch64-apple-darwin",
+        "--profile",
+        "ci",
+        "-j",
+        "2",
+        "-p",
+        "incant_runtime",
+        "--no-default-features",
+        "--features",
+        "physics-fast-simd8,profile,native-checkpoints",
+        "--message-format=json-render-diagnostics",
+        "--test",
+        "numeric_boundaries",
+        "--test",
+        "columns",
+        "--test",
+        "physics",
+        "--test",
+        "physics_2d",
+        "--test",
+        "ui",
+        "--test",
+        "animation"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds_not_benchmark": 40.88712895801291,
+      "passed": 55,
+      "failed": 0,
+      "ignored": 0,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualification-004/physics-fast-simd8-runtime-integration.stdout",
+        "sha256": "6e467d9fd0d55043f1f675287bac058edc15b86b2a039410740200e382fd6bab",
+        "bytes": 209532
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualification-004/physics-fast-simd8-runtime-integration.stderr",
+        "sha256": "7c8b601a60fc9f039abd2e26c0b692662cff33756ee6d87465c835b6da526e37",
+        "bytes": 1737
+      },
+      "results": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualification-004/results.json",
+        "sha256": "02eaa9853c5e94c57612c88333c03b9f3dad5345caa4d003fa7f1ee88cc469d7",
+        "bytes": 22787
+      },
+      "plan": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualification-004/plan.json",
+        "sha256": "424c42d920aacc327b1bbeb9a786944b150d13f7011390a32728b4e86c97b9b3",
+        "bytes": 3464
+      },
+      "managed_return_after_cleanup": true
+    }
+  ],
+  "copied_executables": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualification-003/binaries/physics-deterministic-tests/incant_runtime-51093167998e6e1d",
+      "sha256": "f3239dbde59e419d844066152d6e6701f738dae22c2d7e1140c13c798b334acf",
+      "bytes": 16227408
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualification-003/binaries/physics-deterministic-tests/incant_script-7dbce1918cb1c6a6",
+      "sha256": "fc7a4dcb6dc1c824289f7ebb62863550ce3f7442a2c1f55c3a7819b186b3f1fb",
+      "bytes": 22434048
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualification-003/binaries/physics-fast-simd8-tests/incant_runtime-14ed8c32ca20d456",
+      "sha256": "49dbe6effb55cfdadaeec3d4d3bca11332eed03ed304b74f192c8046e1fd213e",
+      "bytes": 15852736
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualification-003/binaries/physics-fast-simd8-tests/incant_script-9c626a0e1f0e9d27",
+      "sha256": "6594d6a3a330e8303a87688c08c763a2317b93927d8140d5d1599107965c5a78",
+      "bytes": 22013040
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualification-004/binaries/physics-deterministic-runtime-integration/numeric_boundaries-733cf51a3b24b56a",
+      "sha256": "c3349ea06fe9be32c0053261dd7bd2ce35bbbd775294dfbfb288f25f7ff59b38",
+      "bytes": 14092080
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualification-004/binaries/physics-deterministic-runtime-integration/physics-6ebe200f979b29c8",
+      "sha256": "aab872b91324e5f6393a28f1b58257f841d5200c912752dcd16e262a0f5d8229",
+      "bytes": 14577336
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualification-004/binaries/physics-deterministic-runtime-integration/ui-3c38d689511e1afb",
+      "sha256": "745011f34d48d0e64babe39df5fb89d7708b229901939c55624e2d7ede33736d",
+      "bytes": 14462064
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualification-004/binaries/physics-deterministic-runtime-integration/columns-b4f9bd0eb3f8ae90",
+      "sha256": "4afab25dea24cb31ca512b0f801ea9dc91c190035b272435e0f4837b9d10a061",
+      "bytes": 13872872
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualification-004/binaries/physics-deterministic-runtime-integration/physics_2d-bf2e206bad62f258",
+      "sha256": "67ea79b0473d5c83eb73ec3013319530fe317fe78830fe84cc445d56e34eeacd",
+      "bytes": 14568152
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualification-004/binaries/physics-deterministic-runtime-integration/animation-2b93ee2a61a6ad78",
+      "sha256": "006fa2d31d3d32df07fa44c70d29edd16d326ece7fe8d7522cf0a8b7bb876317",
+      "bytes": 14659048
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualification-004/binaries/physics-fast-simd8-runtime-integration/numeric_boundaries-e9fcd7095ea2d924",
+      "sha256": "f1e9a343342c50fc8f02d67cf67cacda8cc641d135654b8c9b99896fbef55cf6",
+      "bytes": 13844704
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualification-004/binaries/physics-fast-simd8-runtime-integration/physics-ef51959b9e792a95",
+      "sha256": "a5207b9867e09126bb54c5e1a7834b1e8e6b1a25bf2e6cd0482894aee8ecdafc",
+      "bytes": 14330744
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualification-004/binaries/physics-fast-simd8-runtime-integration/ui-a7ca91860b8fe876",
+      "sha256": "44ac9668a7b9b0c1934c5cdef92f84a60dd56ac8ba602b68e2165ce5c583004c",
+      "bytes": 14198624
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualification-004/binaries/physics-fast-simd8-runtime-integration/columns-090927db79ce0014",
+      "sha256": "84d484b311118fb0eb5c54556fa4dabce118f09d90b4a8f32a0b5f7990c71b8d",
+      "bytes": 13609192
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualification-004/binaries/physics-fast-simd8-runtime-integration/physics_2d-01333bb7508494b1",
+      "sha256": "a5dec270862fbf41d2b2f85171d592334ee9f42ad3392be99143dfa8f9fb4793",
+      "bytes": 14304632
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualification-004/binaries/physics-fast-simd8-runtime-integration/animation-ab64acfa9195212f",
+      "sha256": "60cfd09132d677dd4323464b8f3a22bf7d2e32692a996605dd9125232ae8272b",
+      "bytes": 14391192
+    }
+  ],
+  "executables_count": 16,
+  "history": [
+    {
+      "attempt": "qualification-001",
+      "kind": "Prelaunch FileNotFoundError: cargo absent from inherited PATH; no compiler launched.",
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/supervisor.stderr",
+        "sha256": "e3301c6301d00e6dc73aad621481f5cce02f48365df4a35ed4baae08620e5f44",
+        "bytes": 1807
+      },
+      "terminal": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualification-001/terminal.json",
+        "sha256": "bf00ad30e0f5da82ba44a99d5f2558a67878baa0706a8644b933e1c4de184737",
+        "bytes": 223
+      }
+    },
+    {
+      "attempt": "qualification-002",
+      "kind": "Cargo launcher exited101 before rustc -vV: rustc absent from inherited PATH; no source compiled. Corrected runner explicitly binds Rust1.99 toolchain PATH/RUSTC/RUSTDOC.",
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualification-002/physics-deterministic-tests.stderr",
+        "sha256": "235382520425c4841a699c405e75ba1b581db26e68d7ff626656e0302cd25dec",
+        "bytes": 115
+      },
+      "supervisor_stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/supervisor-002.stderr",
+        "sha256": "a4ef4b85d1aa6a7ca4acca82e434e55e34a8da49ce87e4f13dd8b90560b19ddb",
+        "bytes": 379
+      },
+      "terminal": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualification-002/terminal.json",
+        "sha256": "38021b86041c9e95fdd4163c847e2ca15b0aba5514b07618984752850d9ad39c",
+        "bytes": 223
+      }
+    }
+  ],
+  "runners": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualify.py",
+      "sha256": "715399b024e8b397c59a7b7fbc6228c1acecf2309abde44541e1e61868dbb666",
+      "bytes": 3826
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualify-002.py",
+      "sha256": "d733b8fa47bb88173f50dede2a7445412ff5b9b3776ceb9cccbfb510465bb476",
+      "bytes": 3861
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualify-003.py",
+      "sha256": "89d5cd9c24c3773a7dba0a3f4c59935cfd527f03699e38f455e62b72ad05b6ec",
+      "bytes": 4086
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/qualify-004.py",
+      "sha256": "90aff6fa3fe23b1f824e224b7df2a066fc1642fd0747421d43366afd78564410",
+      "bytes": 3998
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/native_process.py",
+      "sha256": "58dd2a8231d7f9d1e42070fc85425461e06a43f279fa5e7f8e57b4a40c3a3aa4",
+      "bytes": 19307
+    }
+  ],
+  "release": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/ordered-numeric-query-main279-001/release.json",
+    "sha256": "39c1516b2951d42ad32fab3130ccbf68c636aa4b2661a878539ed87522ff0be9",
+    "bytes": 406
+  },
+  "limits": [
+    "Correctness qualification only. No benchmark, shipping rerun, timing gain, 2ms gate or5% acceptance.",
+    "253us validation/76us cleanup historical measurements identify a region, not the removable query overhead fraction.",
+    "Prepared hierarchy method is also used by integration/solved-physics paths; existing relevant integration controls were executed.",
+    "No push or PR; root owns source review/integration and future fixed-protocol timing."
+  ]
+}

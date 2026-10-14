@@ -172,3 +172,149 @@ fn validation_after_new_writes_publishes_the_new_complete_hierarchy() {
     }
     assert_eq!(global_bits(&checked), global_bits(&reference));
 }
+
+// Topology order deliberately disagrees with Transform-only/Velocity table
+// order. A table-order validation would report child 1 before parent 3.
+fn reordered_world() -> NativeWorld {
+    NativeWorld::new(
+        CookedScene::new(
+            id(0),
+            60,
+            (1..=3)
+                .map(|n| CookedEntity {
+                    id: id(n),
+                    parent: match n {
+                        1 => Some(id(3)),
+                        2 => Some(id(1)),
+                        _ => None,
+                    },
+                    transform: Transform {
+                        translation: [f64::from(n), -0., f64::MIN_POSITIVE],
+                        rotation: [0., 0., 0.6, 0.8],
+                        scale: [-1., 2., 0.5],
+                    },
+                    velocity: (n != 1).then_some(Velocity { linear: [0.; 3] }),
+                })
+                .collect(),
+        )
+        .unwrap(),
+    )
+}
+
+#[test]
+fn invalid_numeric_rows_keep_parent_first_error_order_and_restoration() {
+    let mut native = reordered_world();
+    let before = native.snapshot();
+    let bits = global_bits(&native);
+    native.with_numeric_columns(|columns| {
+        let mut storage_order = Vec::new();
+        columns.for_each_chunk(|chunk| storage_order.extend_from_slice(chunk.ids));
+        assert!(
+            storage_order.iter().position(|&n| n == id(1)).unwrap()
+                < storage_order.iter().position(|&n| n == id(3)).unwrap()
+        );
+        write(columns, id(1), 0, f64::NAN);
+        write(columns, id(3), 3, 2.); // Invalid parent quaternion.
+        assert_eq!(
+            columns.validate(),
+            Err(crate::SceneError::Component(id(3)).into())
+        );
+        assert_eq!(global_bits(columns.owner), bits);
+        write(columns, id(3), 3, 0.);
+        assert_eq!(
+            columns.validate(),
+            Err(crate::SceneError::Component(id(1)).into())
+        );
+        write(columns, id(1), 0, 1.);
+        columns.validate().unwrap();
+    });
+    assert_eq!(native.snapshot(), before);
+    assert_eq!(global_bits(&native), bits);
+}
+
+#[test]
+fn ordered_validation_matches_scalar_publication_after_structural_changes() {
+    use crate::{FrameCommands, StructuralCommand};
+
+    let mut checked = reordered_world();
+    let mut reference = reordered_world();
+    let original = checked.entity_identity(id(2)).unwrap();
+    for round in 0..4 {
+        for (native, validate) in [(&mut checked, true), (&mut reference, false)] {
+            let mut commands = FrameCommands::default();
+            match round {
+                1 => {
+                    commands
+                        .push(StructuralCommand::SetParent {
+                            entity: id(2),
+                            parent: Some(id(3)),
+                        })
+                        .unwrap();
+                    commands
+                        .push(StructuralCommand::SetVelocity {
+                            entity: id(1),
+                            velocity: Some(Velocity { linear: [0.; 3] }),
+                        })
+                        .unwrap();
+                }
+                2 => commands.push(StructuralCommand::Despawn(id(2))).unwrap(),
+                3 => commands
+                    .push(StructuralCommand::Spawn(CookedEntity {
+                        id: id(2),
+                        parent: Some(id(1)),
+                        transform: Transform::default(),
+                        velocity: None,
+                    }))
+                    .unwrap(),
+                _ => (),
+            }
+            native.apply(&mut commands).unwrap();
+            native.with_numeric_columns(|columns| {
+                columns.for_each_chunk(|chunk| {
+                    for (row, entity) in chunk.ids.iter().enumerate() {
+                        let transform =
+                            &mut chunk.transforms[row * TRANSFORM_STRIDE..][..TRANSFORM_STRIDE];
+                        transform[0] = f64::from(entity.0[0]) + f64::from(round) * 0.125;
+                        transform[1] = -0.;
+                        transform[2] = -f64::MIN_POSITIVE;
+                    }
+                });
+                if validate {
+                    columns.validate().unwrap();
+                }
+            });
+        }
+        // The reference still uses the original per-entity get_mut refresh,
+        // independently of the ordered preparation and publication path.
+        assert_eq!(global_bits(&checked), global_bits(&reference));
+        assert_eq!(checked.snapshot(), reference.snapshot());
+        assert_eq!(
+            checked.save_bytes().unwrap(),
+            reference.save_bytes().unwrap()
+        );
+    }
+    assert!(!checked.matches_entity_identity(id(2), original));
+    assert_ne!(checked.entity_identity(id(2)).unwrap(), original);
+}
+
+#[test]
+fn missing_query_component_cannot_shift_hierarchy_correspondence() {
+    use crate::world::Global;
+
+    let mut native = reordered_world();
+    let child = native.entities[&id(1)];
+    let descendant = native.entities[&id(2)];
+    let before = native.world.get::<Global>(descendant).unwrap().0;
+    // Private corruption controls: normal structural commands always preserve
+    // these mandatory components. QueryMany must not silently skip this row.
+    let local = native.world.entity_mut(child).take::<Local>().unwrap();
+    assert!(catch_unwind(AssertUnwindSafe(|| native.prepare_numeric_globals())).is_err());
+    assert_eq!(native.world.get::<Global>(descendant).unwrap().0, before);
+    native.world.entity_mut(child).insert(local);
+    native.world.get_mut::<Local>(child).unwrap().0.translation[0] = 29.;
+    native.prepare_numeric_globals().unwrap();
+    native.world.entity_mut(child).remove::<Global>();
+    assert!(catch_unwind(AssertUnwindSafe(|| native.publish_numeric_globals())).is_err());
+    // In particular, the child's scratch must not be assigned to its descendant.
+    assert_eq!(native.world.get::<Global>(descendant).unwrap().0, before);
+}
