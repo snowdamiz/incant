@@ -1,5 +1,18 @@
 # Implementation status
 
+
+## Engine compatibility and pin review — qualified main271 composition
+
+New projects declare the exact engine version; legacy unpinned v1 projects keep
+its absence. Bounded SemVer validation, atomic pin commands and read-only CLI/RPC
+reviews now compose with linked prefab authoring. Current source passes 96
+document/command cases, two live headless cases and two cooked native controls,
+strict four-package lint and all nine qualification commands. The actual joined
+headless binary regenerated all 74 schemas. Prior producer failures and distinct
+source generations remain retained. Independent final source/evidence review is
+accepted; publication awaits its exact-head hosted fast check. File migration, backup/recovery application and editor UI remain open;
+no phase or release gate is claimed. [Current composition](docs/spikes/engine-compat-main271.md).
+
 ## Linked prefab authoring — qualified main270 composition
 
 The fixed-topology backend materializes ordinary entities through atomic
@@ -9,7 +22,7 @@ preserved byte-exact on main270. Current qualification passes 87 document/comman
 cases, one live RPC save/reopen/undo/redo case and one cooked NativeWorld case
 with 60 steps, plus strict four-package lint and SDK/fmt/conventions checks.
 All nine commands and final independent source/evidence review passed.
-Publication awaits its required hosted fast check; nested/topology edits and editor UI remain open.
+PR271 merged after its exact-head hosted fast SUCCESS; nested/topology edits and editor UI remain open.
 [Composition and evidence](docs/spikes/prefab-main270.md).
 
 ## Windows TypeScript deadline — one actual observation passed; timeout retained
@@ -553,7 +566,7 @@ performance gate is claimed. [Scope and evidence](docs/spikes/wasm-c-parallel.md
 
 ## Development and release overview — 2026-10-14
 
-The reviewed main270 baseline includes the measured numeric-loan optimization,
+The reviewed main271 baseline includes linked prefab authoring, the measured numeric-loan optimization,
 Core sample/diagnostic tooling, profiler distributions, the Mac runner, Apple/Android host bindings, desktop
 haptics, the retained mobile Rust host, supported
 persisted native game checkpoints, and the opt-in cooked renderer families and
