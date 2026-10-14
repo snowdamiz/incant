@@ -1,0 +1,249 @@
+{
+  "schema": "incant-r5-execution-independent-review-v1",
+  "at": "2026-10-14T03:15:54.880129+00:00",
+  "scope": "Independent nonvisual process/source/PNG identity audit; appearance verdict belongs to Claude",
+  "accepted_execution_integrity": true,
+  "claude_appearance": "REJECTED",
+  "result_head": "062d8aed5705efed840880c1a79de7481bf9cc4f",
+  "packet_head": "792bf05694831d06ad73405fbf54e8f5613d06ca",
+  "production": "8c39fd6adbf95d470388867de4d305756b05913c",
+  "release": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/release.json",
+    "sha256": "2a3abbff5d6d54a2366448ccea0fd89d4eca617d869926c31a134364116e26a3"
+  },
+  "acp": {
+    "supervisor_handle": 32015,
+    "record": {
+      "pid": 80346,
+      "pgid": 80346,
+      "exit": 0,
+      "timed_out": false,
+      "interrupted_by": [],
+      "reaped": true,
+      "group_empty_after": true,
+      "seconds": 140.447,
+      "argv": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "tools/handoff/main.py",
+        "run",
+        "0073-upscaling-review",
+        "--permission-mode",
+        "auto"
+      ],
+      "auto_memory_environment": {
+        "CLAUDE_CODE_DISABLE_AUTO_MEMORY": "1"
+      },
+      "wall_elapsed_seconds": 140.46202778816223,
+      "monotonic_elapsed_seconds": 140.46203004100244,
+      "watchdog": [],
+      "stdout_sha256": "9490a34b81dc4925dc0a608e99d0f02957317ba09ed33339433f202a29efa3c4",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "verified_settings": "Opus 5.5; thinking: max",
+    "auto_memory_disabled": true
+  },
+  "gpu_children": 9,
+  "queue_submissions": 840,
+  "maps": 442,
+  "pngs": 15,
+  "successful_current_png_tool_reads": 15,
+  "tools": {
+    "Bash": 9,
+    "Read": 15,
+    "Write": 1
+  },
+  "protected_inputs": 555,
+  "authorized_changed": [
+    "handoffs/0073-upscaling-review/result.md"
+  ],
+  "production_and_execution_packet_unchanged": true,
+  "builds": 0,
+  "actual_runner_invocations": 1,
+  "numeric_or_gpu_retries": 0,
+  "prelaunch_failure": "Shell /dev/fd/3 and head -c 0 errors before runner launch; following ls showed only grant.json and pgrep no runner, before sole actual invocation; exact tool results retained",
+  "postrun_summary_failure": "Output summarizer treated numeric adapter string as a dict and raised AttributeError after accepted release. Raw release and nine child records independently replayed; no rerun.",
+  "report_qualification": "Six PNGs are byte-identical to R4. This proves output identity in these captures, not the report suggestion that every contributing code path was unchanged.",
+  "image_hash_comparison": [
+    {
+      "path": "stationary/artifacts/stationary-full.png",
+      "r5_sha256": "992c5543b4f9bbdf6fd703eb764e143f7649836452df28aaac6f1dfc2debceb9",
+      "r4_sha256": "992c5543b4f9bbdf6fd703eb764e143f7649836452df28aaac6f1dfc2debceb9",
+      "identical": true
+    },
+    {
+      "path": "stationary/artifacts/stationary-drs50.png",
+      "r5_sha256": "724fa644d3561ff00aa2301fd40ab6b49c4111b0376df5469028ef6265cb40e0",
+      "r4_sha256": "724fa644d3561ff00aa2301fd40ab6b49c4111b0376df5469028ef6265cb40e0",
+      "identical": true
+    },
+    {
+      "path": "stationary/artifacts/stationary-up50.png",
+      "r5_sha256": "cb0845ba05535cf1361303c2964754957c1e50bd1cb0bd4a7d1de70ce207673d",
+      "r4_sha256": "e1156008fb51eba1c35d58875c6ee98e2f334ce41816f350fff8e23f4568c503",
+      "identical": false
+    },
+    {
+      "path": "stationary/artifacts/stationary-own50.png",
+      "r5_sha256": "57b53ca3e195254f4eca9947899b62c823e35240b1a0f072a9d339b83098e7d8",
+      "r4_sha256": "57b53ca3e195254f4eca9947899b62c823e35240b1a0f072a9d339b83098e7d8",
+      "identical": true
+    },
+    {
+      "path": "stationary/artifacts/stationary-phases.png",
+      "r5_sha256": "bdfeb4dba501be1ce69d30b894346573482bbc60b1ed16c6ccb48ab0afb4f245",
+      "r4_sha256": "bdfeb4dba501be1ce69d30b894346573482bbc60b1ed16c6ccb48ab0afb4f245",
+      "identical": true
+    },
+    {
+      "path": "stationary/artifacts/stationary-detail.png",
+      "r5_sha256": "7faa5c49161902abf471d397da6d73c29fbc2e4ad5c5a1f330ead74dfbb89958",
+      "r4_sha256": "37d599a0079a7bb5ec081a032590b329a9b7247c8071b70d05d18153abeb980d",
+      "identical": false
+    },
+    {
+      "path": "motion/artifacts/motion-full.png",
+      "r5_sha256": "9eeb1222becd6f4d2cec7afa88343ccb528ea9f6e27246cb3410a42bade35b52",
+      "r4_sha256": "9eeb1222becd6f4d2cec7afa88343ccb528ea9f6e27246cb3410a42bade35b52",
+      "identical": true
+    },
+    {
+      "path": "motion/artifacts/motion-up50.png",
+      "r5_sha256": "026ca0d3770089c5349f3f0f46288477815ab76687aaa9ed4a6a8164fa14513c",
+      "r4_sha256": "af438cfc7cb898c8bc832774d335461146af2ad3dd910c099212e5609113a5eb",
+      "identical": false
+    },
+    {
+      "path": "motion/artifacts/motion-own50.png",
+      "r5_sha256": "811708696e68e1a4bb3f424131fab62758386622281b59dc618bfa2c2053f355",
+      "r4_sha256": "8c035e2ca9de3d3b243548ca420d3505cb22d5cb3f4d17fc20ed8eba2414077d",
+      "identical": false
+    },
+    {
+      "path": "motion/artifacts/motion-detail.png",
+      "r5_sha256": "76fc6eed0596ee7a0848201fc8fbfb79b1e5611f82f78a6be82e1b0bfffb1f36",
+      "r4_sha256": "ff40c93f2030b9501d351fafa3003621ce18de98ba78214e26657281a3b682fc",
+      "identical": false
+    },
+    {
+      "path": "transitions/artifacts/transitions-full.png",
+      "r5_sha256": "1be9b9308bb1d404291ec976f0ff1b0c6b3853d3effa0bb2a36fe15270e0f88e",
+      "r4_sha256": "1be9b9308bb1d404291ec976f0ff1b0c6b3853d3effa0bb2a36fe15270e0f88e",
+      "identical": true
+    },
+    {
+      "path": "transitions/artifacts/transitions-strip.png",
+      "r5_sha256": "ed6c4cde640e451525792122feed4feed04276f5865f4b581f8cc161bd9ad118",
+      "r4_sha256": "20ac066c4b979e17432fc12abc1c0127dff3a1ea5829a1ac2aba5a8af47813d8",
+      "identical": false
+    },
+    {
+      "path": "c7_disocclusion/artifacts/c7-detail.png",
+      "r5_sha256": "d4f33691f8c13c418bcdc907b913274d96ce518872ad1c63bffc580f462509b3",
+      "r4_sha256": "57a437a0a2923fde2521fe217adced45dabe060ef28bf4ed2a4720ef8bf58882",
+      "identical": false
+    },
+    {
+      "path": "c7_disocclusion/artifacts/c7-own-moving.png",
+      "r5_sha256": "2c63710c000dd4987db21aaa15635e7f8ed04a30bcd1f66b20a7729c64073d4c",
+      "r4_sha256": "a0251bb9cd9a326e848f91696b47c1bb6a1cd3cebcce8260641f24a3ee507e2a",
+      "identical": false
+    },
+    {
+      "path": "p1_crossing/artifacts/p1-detail.png",
+      "r5_sha256": "12b3313ce9295efb9fb86b59aaad2eb6083598098f9f1f9576060603368132fe",
+      "r4_sha256": "5f9a22f3e61c0d975b56df652f6bb5d1fe23bf0fe29919cc90d62e969c9036e1",
+      "identical": false
+    }
+  ],
+  "records": [
+    {
+      "path": "acp-terminal.json",
+      "sha256": "724de472dca9f1606a80cd1d104fb000c598f017952c2f9c884487b4b82d78a3",
+      "bytes": 675
+    },
+    {
+      "path": "acp.log",
+      "sha256": "9490a34b81dc4925dc0a608e99d0f02957317ba09ed33339433f202a29efa3c4",
+      "bytes": 3808
+    },
+    {
+      "path": "acp-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "before.json",
+      "sha256": "a33f9f35e54ca52cb501b1d8b81e5d374a2101cb68726a743b78c30f83aaa9e7",
+      "bytes": 104204
+    },
+    {
+      "path": "parent-brief-before.md",
+      "sha256": "0e433ef07796f53d2199e1e89ec70ac6949f6c0bd5da1e4ec89a89d97f37c6e4",
+      "bytes": 2907
+    },
+    {
+      "path": "child-brief-before.md",
+      "sha256": "0e433ef07796f53d2199e1e89ec70ac6949f6c0bd5da1e4ec89a89d97f37c6e4",
+      "bytes": 2907
+    },
+    {
+      "path": "prompt.md",
+      "sha256": "94266e1308a9178c38292715545eff5aefcbfc0c49f6b68544b1dfa9a259ce97",
+      "bytes": 3995
+    },
+    {
+      "path": "supervise.py",
+      "sha256": "181942e1f36e2f2f0f5072dab861d05443f15b549d5c8aca7831242dea9eff22",
+      "bytes": 3134
+    },
+    {
+      "path": "tool-metadata.json",
+      "sha256": "181cefdd13ebd204637ea9145c6ebbb1063f54b61d27eaba1b4b4b2bf8f05340",
+      "bytes": 28079
+    },
+    {
+      "path": "audit_execution.py",
+      "sha256": "46ce071325d26ada82e579ac99d5b58bcf0eb356470d9bf73d407dbadda900e0",
+      "bytes": 4808
+    },
+    {
+      "path": "execution-audit.json",
+      "sha256": "9e53852476f158f71aac6f77b0d44cf25093b1070fbb2863fb351f41690cdf6a",
+      "bytes": 18317
+    },
+    {
+      "path": "image-hash-comparison.json",
+      "sha256": "7e260d498202d96d4129f07bfb523f6836eba48b2ee7c57ef4cbab09ac9d874f",
+      "bytes": 3846
+    },
+    {
+      "path": "release.json",
+      "sha256": "2a3abbff5d6d54a2366448ccea0fd89d4eca617d869926c31a134364116e26a3",
+      "bytes": 38013
+    },
+    {
+      "path": "ledger.jsonl",
+      "sha256": "fe1c423751e4714a8b0fe5874664cabf82ff0448a8089d48e5237f3c87408797",
+      "bytes": 25094
+    },
+    {
+      "path": "debits.jsonl",
+      "sha256": "2e21785554dfa45f7e119b2cd2f6bfb6b6ac320d450d58b5adfa0efc5e6a338a",
+      "bytes": 3037
+    }
+  ],
+  "claude_result_files": [
+    {
+      "path": "handoffs/0073-upscaling-review/r5_quality/execution-result.md",
+      "sha256": "cbd749741ac248d099d925af8b39f9dfa5b8b44136cdae120db35bfd1f3dac98"
+    },
+    {
+      "path": "handoffs/0073-upscaling-review/r5_quality/execution-result.json",
+      "sha256": "f4a6ee3c7d4563a824c647d65106f055bb799169f4b81b778e52d8852470726d"
+    },
+    {
+      "path": "handoffs/0073-upscaling-review/result.md",
+      "sha256": "f40f2ded59907226e3f7f3a1c2e7d725add0faa541306d59f2f2082b0ac94b4e"
+    }
+  ]
+}

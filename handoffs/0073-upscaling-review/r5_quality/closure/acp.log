@@ -1,0 +1,31 @@
+Resumed the latest ACP session scoped to this handoff worktree.
+Claude session verified: Opus 5.5; thinking: max
+Claude session permission mode: auto
+Identities match the grant. Running the single granted command now.The shell redirect failed before launch (evidence dir untouched, no process), so the runner never started. Running the single granted command now, plainly.Accepted and released. Reading the retained release record for per-child detail.All nine children accepted (4 numeric then 5 quality), released. Now inspecting all 15 R5 PNGs.Numeric: all four strict GPU tests passed. Writing the execution result and pointer now.I ran the granted R5 execution once and inspected all 15 images. The numeric tests pass, but **R5 appearance is rejected**: it looks no better than R4 in any of the areas it was meant to fix. Results are committed as **`062d8aed5705efed840880c1a79de7481bf9cc4f`**.
+
+**Execution:**
+- Runner, plan and grant hashes matched the grant before launch.
+- My first command broke on a bad shell redirect before the runner started; the evidence folder still held only `grant.json` and no process ran. Nothing was debited and the GPU wasn't touched.
+- The single real run then completed and was released at 03:11:00Z with nothing left running.
+- All nine children ran on Apple M5 Pro (Metal), in order, with none timing out. The four numeric tests ran first and each reported `1 passed; 0 failed`: ordinary and owner, default and cooked-native. The five quality groups followed and were all accepted.
+- Usage matched the grant: 840 submissions, 442 maps and 15 PNGs, with no builds or retries.
+- Release record: `/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/release.json`, sha256 `2a3abbff5d6d54a2366448ccea0fd89d4eca617d869926c31a134364116e26a3`.
+
+**What the images show:**
+
+| Area | Verdict | Details |
+|---|---|---|
+| Stationary OWN | Preserved | Byte-identical to R4: wires continuous and stable across all phases, card detail close to FULL. |
+| Ordinary UP, stationary | Still fails | Same card-stripe moiré, one surviving wire, dotted diagonal and jagged pole as R4. The bytes differ slightly but the picture doesn't. |
+| Moving UP/OWN | Still fails | Same aliasing around the moving cube, broken posts and same error maps. Nothing suggests the new motion slack let in more history. |
+| First 4/16 frame and post-cut | Still fails | The blocky dark band is at most marginally weaker. The post-cut moiré is unchanged, and recovery at full scale is still fast. |
+| Disocclusion | Unchanged | Still no ghost trails. |
+| Overlays | Pass | Sprites, world text, the BLEND card and physical UI are crisp and unchanged. |
+| P1 | Unresolved | Unchanged; still only grey 8/16 at one stop. |
+
+Six of the 15 images are byte-identical to R4 (FULL, DRS, stationary OWN, phases, motion FULL, transitions FULL). I re-read them anyway.
+
+So the three R5 changes didn't hit the real causes, and the hypotheses behind them aren't supported by these pixels. Historical C7 and C9 stay open under their original definitions, as does P1. GPU001 case 3 is still recorded as a historical failed attempt that numeric-002 later passed. The numeric passes show the shaders compute what they should; they don't show the result looks right.
+
+The full report is in `r5_quality/execution-result.md` and `.json`. I also added a short pointer section at the top of `result.md`, leaving its earlier content intact below. Only those three files were committed, with Built-by: claude; the dirty brief and untracked inputs weren't staged. Model was Claude Opus 5.5 at max thinking effort, with auto-memory off. I made no repairs, reruns, builds or extra images.
+Review: git diff --no-index handoffs/0073-upscaling-review .worktrees/0073-upscaling-review/handoffs/0073-upscaling-review

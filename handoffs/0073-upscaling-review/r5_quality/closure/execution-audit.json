@@ -1,0 +1,396 @@
+{
+  "scope": "Execution integrity only; pixel judgment remains Claude-owned",
+  "release_sha256": "2a3abbff5d6d54a2366448ccea0fd89d4eca617d869926c31a134364116e26a3",
+  "plan_sha256": "4713388422e1f2ea36a7893060d41159d10c3dc3fde07712644fae19ce3c5a2f",
+  "runner_sha256": "f2ba4c9695cc276b0ce7fcf2faff967ad7f1b52ca5967735ad7ce4078849d72f",
+  "grant_sha256": "e981286ac185d5d4ea5d58b99de4f4c9555bc207fcae6f1f217e609c075a98f8",
+  "binary_sha256": [
+    "f4123f827f5696d496bbc6b1fe785c697d02f2af775cee6941ad4d0a8d65c9bf",
+    "f74086ba2577a7a930110c30c168df662fd88cc0719627323301dbc2e614440e",
+    "2bb892db69d724166727e0beeae495124c659664d0d0e81da0d1e73c1b3cb315"
+  ],
+  "groups": [
+    "ordinary-default",
+    "owner-default",
+    "ordinary-cooked",
+    "owner-cooked",
+    "stationary",
+    "motion",
+    "transitions",
+    "c7_disocclusion",
+    "p1_crossing"
+  ],
+  "queue_submissions": 840,
+  "maps": 442,
+  "pngs": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/stationary/artifacts/stationary-full.png",
+      "sha256": "992c5543b4f9bbdf6fd703eb764e143f7649836452df28aaac6f1dfc2debceb9",
+      "bytes": 84389,
+      "width": 960,
+      "height": 540,
+      "reported_rgba_sha256": "4c69efe238a452d096301faf24ca013877bf0f0430f83ccf1147502e51da6e01"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/stationary/artifacts/stationary-drs50.png",
+      "sha256": "724fa644d3561ff00aa2301fd40ab6b49c4111b0376df5469028ef6265cb40e0",
+      "bytes": 40131,
+      "width": 960,
+      "height": 540,
+      "reported_rgba_sha256": "6611c41fa62f782b4d96080e6d43f481d41a54c01a8d93e870367b9786d8464e"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/stationary/artifacts/stationary-up50.png",
+      "sha256": "cb0845ba05535cf1361303c2964754957c1e50bd1cb0bd4a7d1de70ce207673d",
+      "bytes": 99863,
+      "width": 960,
+      "height": 540,
+      "reported_rgba_sha256": "8b1b5f15d13a42a433c1062d2dff5adb92d54016ad8591ed263e32d3d2bbdc62"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/stationary/artifacts/stationary-own50.png",
+      "sha256": "57b53ca3e195254f4eca9947899b62c823e35240b1a0f072a9d339b83098e7d8",
+      "bytes": 98742,
+      "width": 960,
+      "height": 540,
+      "reported_rgba_sha256": "70af5324896b4cd19cec5ab53fc9c37b5487d0ded6d0984cf830dba6c5658bb5"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/stationary/artifacts/stationary-phases.png",
+      "sha256": "bdfeb4dba501be1ce69d30b894346573482bbc60b1ed16c6ccb48ab0afb4f245",
+      "bytes": 14137,
+      "width": 960,
+      "height": 540,
+      "reported_rgba_sha256": "2850b29d1593834b86a54657ba55fc8bdd19101b98128c3fd2b1aea2fdb2bdaa"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/stationary/artifacts/stationary-detail.png",
+      "sha256": "7faa5c49161902abf471d397da6d73c29fbc2e4ad5c5a1f330ead74dfbb89958",
+      "bytes": 50489,
+      "width": 960,
+      "height": 540,
+      "reported_rgba_sha256": "618ebef09172b7aea6a25931bdc0ad4e59c9315959d91656d7233a93ba135cc7"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/motion/artifacts/motion-full.png",
+      "sha256": "9eeb1222becd6f4d2cec7afa88343ccb528ea9f6e27246cb3410a42bade35b52",
+      "bytes": 77464,
+      "width": 960,
+      "height": 540,
+      "reported_rgba_sha256": "47c3bee7ff948ae7f41fc903cad53d085ed58405e9fc40a44e7e5d3213ebac05"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/motion/artifacts/motion-up50.png",
+      "sha256": "026ca0d3770089c5349f3f0f46288477815ab76687aaa9ed4a6a8164fa14513c",
+      "bytes": 87305,
+      "width": 960,
+      "height": 540,
+      "reported_rgba_sha256": "d6a14295c136d8246ade39d180836775867e3c635d8f2d998da7ea88e15544b0"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/motion/artifacts/motion-own50.png",
+      "sha256": "811708696e68e1a4bb3f424131fab62758386622281b59dc618bfa2c2053f355",
+      "bytes": 87287,
+      "width": 960,
+      "height": 540,
+      "reported_rgba_sha256": "cdf8bb75b907bc5ed510ce0233e3d96cdc2e6c71a2074fd5c952840e4dda2469"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/motion/artifacts/motion-detail.png",
+      "sha256": "76fc6eed0596ee7a0848201fc8fbfb79b1e5611f82f78a6be82e1b0bfffb1f36",
+      "bytes": 119344,
+      "width": 960,
+      "height": 540,
+      "reported_rgba_sha256": "78241d5cd14bf681dfcf047e0e1456352cfaac5edb925cd40452ec0b775425ce"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/transitions/artifacts/transitions-full.png",
+      "sha256": "1be9b9308bb1d404291ec976f0ff1b0c6b3853d3effa0bb2a36fe15270e0f88e",
+      "bytes": 72999,
+      "width": 960,
+      "height": 540,
+      "reported_rgba_sha256": "49d0f741bc50634f0b15c9ff88d5fbefef146630db83a034bd77581d9964f6bb"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/transitions/artifacts/transitions-strip.png",
+      "sha256": "ed6c4cde640e451525792122feed4feed04276f5865f4b581f8cc161bd9ad118",
+      "bytes": 138133,
+      "width": 960,
+      "height": 540,
+      "reported_rgba_sha256": "83ffe9f8bdc95d8dd49a84e8d74aa6094c842d9c55b0fb129d9c9cbf77023e6c"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/c7_disocclusion/artifacts/c7-detail.png",
+      "sha256": "d4f33691f8c13c418bcdc907b913274d96ce518872ad1c63bffc580f462509b3",
+      "bytes": 85019,
+      "width": 960,
+      "height": 540,
+      "reported_rgba_sha256": "aad1b91f1688485404e5ffa2c4c925e5c1a5de9b12e80a765840208e6d1092d7"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/c7_disocclusion/artifacts/c7-own-moving.png",
+      "sha256": "2c63710c000dd4987db21aaa15635e7f8ed04a30bcd1f66b20a7729c64073d4c",
+      "bytes": 272549,
+      "width": 960,
+      "height": 540,
+      "reported_rgba_sha256": "04f0db8098c31e268b9951dc780ee9b9f1848fe8fa4218be4bfbe6a2bae3524f"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/p1_crossing/artifacts/p1-detail.png",
+      "sha256": "12b3313ce9295efb9fb86b59aaad2eb6083598098f9f1f9576060603368132fe",
+      "bytes": 238018,
+      "width": 960,
+      "height": 540,
+      "reported_rgba_sha256": "f30c619425d2dc9a8c2507804a525fe292261151df2640393797b26d0dcd07ab"
+    }
+  ],
+  "adapter": {
+    "backend": "Metal",
+    "device": 0,
+    "device_type": "IntegratedGpu",
+    "driver": "",
+    "driver_info": "",
+    "max_texture_dimension_2d": 8192,
+    "name": "Apple M5 Pro",
+    "vendor": 0
+  },
+  "all_children_reaped": true,
+  "global_lock_available": true,
+  "files": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/c7_disocclusion/artifacts/c7-detail.png",
+      "bytes": 85019,
+      "sha256": "d4f33691f8c13c418bcdc907b913274d96ce518872ad1c63bffc580f462509b3"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/c7_disocclusion/artifacts/c7-own-moving.png",
+      "bytes": 272549,
+      "sha256": "2c63710c000dd4987db21aaa15635e7f8ed04a30bcd1f66b20a7729c64073d4c"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/c7_disocclusion/artifacts/events.jsonl",
+      "bytes": 39102,
+      "sha256": "195222166b899e8b62453300b68d41130abb079b8e5e70596488edacf6b838b9"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/c7_disocclusion/artifacts/report.json",
+      "bytes": 34403,
+      "sha256": "1418452fe7fc0edccb9406bc4af4b76707f86bf9567afe13d4bcbd1b89fe5354"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/c7_disocclusion/stderr.txt",
+      "bytes": 282,
+      "sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/c7_disocclusion/stdout.txt",
+      "bytes": 140,
+      "sha256": "de92a552196394e65844d2c7897f189810667e983272e892c2a26adfaf80e6eb"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/debits.jsonl",
+      "bytes": 3037,
+      "sha256": "2e21785554dfa45f7e119b2cd2f6bfb6b6ac320d450d58b5adfa0efc5e6a338a"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/grant.json",
+      "bytes": 1488,
+      "sha256": "e981286ac185d5d4ea5d58b99de4f4c9555bc207fcae6f1f217e609c075a98f8"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/ledger.jsonl",
+      "bytes": 25094,
+      "sha256": "fe1c423751e4714a8b0fe5874664cabf82ff0448a8089d48e5237f3c87408797"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/motion/artifacts/events.jsonl",
+      "bytes": 20818,
+      "sha256": "85dd5d4aa302eb00600d81b23452d4225ec496279ddd75bd610191cba16028be"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/motion/artifacts/motion-detail.png",
+      "bytes": 119344,
+      "sha256": "76fc6eed0596ee7a0848201fc8fbfb79b1e5611f82f78a6be82e1b0bfffb1f36"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/motion/artifacts/motion-full.png",
+      "bytes": 77464,
+      "sha256": "9eeb1222becd6f4d2cec7afa88343ccb528ea9f6e27246cb3410a42bade35b52"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/motion/artifacts/motion-own50.png",
+      "bytes": 87287,
+      "sha256": "811708696e68e1a4bb3f424131fab62758386622281b59dc618bfa2c2053f355"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/motion/artifacts/motion-up50.png",
+      "bytes": 87305,
+      "sha256": "026ca0d3770089c5349f3f0f46288477815ab76687aaa9ed4a6a8164fa14513c"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/motion/artifacts/report.json",
+      "bytes": 19410,
+      "sha256": "044872d017898ff99a15f99194b072b247070c9c9b78d7dd5b8ed3b087a8ccf5"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/motion/stderr.txt",
+      "bytes": 282,
+      "sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/motion/stdout.txt",
+      "bytes": 131,
+      "sha256": "3b081f90cd213dc202b2a1c60e3e9e87810881dc56be724d9f8cb48dbb29d2bd"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/ordinary-cooked/stderr.txt",
+      "bytes": 282,
+      "sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/ordinary-cooked/stdout.txt",
+      "bytes": 2654,
+      "sha256": "1f901f20974d9435c3e2101a721fb56eb2294315ddeccf24c935f2b91cbfddbd"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/ordinary-default/stderr.txt",
+      "bytes": 282,
+      "sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/ordinary-default/stdout.txt",
+      "bytes": 2654,
+      "sha256": "fc0726ca2bfcfe62684527eba64a16e9ec65c4c337e200241450ce90f342a4b9"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/owner-cooked/stderr.txt",
+      "bytes": 282,
+      "sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/owner-cooked/stdout.txt",
+      "bytes": 2476,
+      "sha256": "f6c38e39853b48ae7b9a216efacc495ab4600a02d4c1056827599dce619ead79"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/owner-default/stderr.txt",
+      "bytes": 282,
+      "sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/owner-default/stdout.txt",
+      "bytes": 2476,
+      "sha256": "e57e3e2e0991ccb124f14b7100e5c888fa50128f960c1a1270122a48db981e6e"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/p1_crossing/artifacts/events.jsonl",
+      "bytes": 45985,
+      "sha256": "1e1079535cf9cbe2ae58ad2ca8d7b5bc964f10dd06a4ed7357e347df3ed59403"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/p1_crossing/artifacts/p1-detail.png",
+      "bytes": 238018,
+      "sha256": "12b3313ce9295efb9fb86b59aaad2eb6083598098f9f1f9576060603368132fe"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/p1_crossing/artifacts/report.json",
+      "bytes": 43363,
+      "sha256": "54c56dbbe9656b6a99274396b9412fc0f28592778e31336ad8def7c48bd24e0f"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/p1_crossing/stderr.txt",
+      "bytes": 282,
+      "sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/p1_crossing/stdout.txt",
+      "bytes": 136,
+      "sha256": "fcdb4bcc788bd8c0f35ded229e77cca32cf6827c9496b3c2059e44287c73220e"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/release.json",
+      "bytes": 38013,
+      "sha256": "2a3abbff5d6d54a2366448ccea0fd89d4eca617d869926c31a134364116e26a3"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/stationary/artifacts/events.jsonl",
+      "bytes": 24988,
+      "sha256": "f77e7709036b815f3f814fbffe0a6f048933494c0b6874ea42bcdb8e05a1df4e"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/stationary/artifacts/report.json",
+      "bytes": 28729,
+      "sha256": "524db3c3115b476901a034bce57b250aeec4db99b850b58fd11268b138622a57"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/stationary/artifacts/stationary-detail.png",
+      "bytes": 50489,
+      "sha256": "7faa5c49161902abf471d397da6d73c29fbc2e4ad5c5a1f330ead74dfbb89958"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/stationary/artifacts/stationary-drs50.png",
+      "bytes": 40131,
+      "sha256": "724fa644d3561ff00aa2301fd40ab6b49c4111b0376df5469028ef6265cb40e0"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/stationary/artifacts/stationary-full.png",
+      "bytes": 84389,
+      "sha256": "992c5543b4f9bbdf6fd703eb764e143f7649836452df28aaac6f1dfc2debceb9"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/stationary/artifacts/stationary-own50.png",
+      "bytes": 98742,
+      "sha256": "57b53ca3e195254f4eca9947899b62c823e35240b1a0f072a9d339b83098e7d8"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/stationary/artifacts/stationary-phases.png",
+      "bytes": 14137,
+      "sha256": "bdfeb4dba501be1ce69d30b894346573482bbc60b1ed16c6ccb48ab0afb4f245"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/stationary/artifacts/stationary-up50.png",
+      "bytes": 99863,
+      "sha256": "cb0845ba05535cf1361303c2964754957c1e50bd1cb0bd4a7d1de70ce207673d"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/stationary/stderr.txt",
+      "bytes": 282,
+      "sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/stationary/stdout.txt",
+      "bytes": 135,
+      "sha256": "880b3c390d16211347d625df98b0435a3108147a794bf547f8f5e68b0e82abeb"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/transitions/artifacts/events.jsonl",
+      "bytes": 49091,
+      "sha256": "ded5b705018ee49f2343325204c33a917e6961f12c657257b0aebf628fb335c5"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/transitions/artifacts/report.json",
+      "bytes": 82812,
+      "sha256": "3557d94779ec0529ceb2470712fc3a10b19fcd220fa152603e105691fc759a2f"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/transitions/artifacts/transitions-full.png",
+      "bytes": 72999,
+      "sha256": "1be9b9308bb1d404291ec976f0ff1b0c6b3853d3effa0bb2a36fe15270e0f88e"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/transitions/artifacts/transitions-strip.png",
+      "bytes": 138133,
+      "sha256": "ed6c4cde640e451525792122feed4feed04276f5865f4b581f8cc161bd9ad118"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/transitions/stderr.txt",
+      "bytes": 282,
+      "sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/transitions/stdout.txt",
+      "bytes": 136,
+      "sha256": "ddc5460bf6da7b619004e07ed25a6f9d94f95d39765ff0b3a7d9beb5642bc1be"
+    }
+  ]
+}
