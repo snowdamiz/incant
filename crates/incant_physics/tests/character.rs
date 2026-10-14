@@ -60,7 +60,7 @@ fn scene() -> (Project, CharacterQuery, String) {
 }
 fn runtime(p: &Project) -> PhysicsRuntime {
     let mut r = PhysicsRuntime::default();
-    r.sync(PreparedPhysics::new(p).unwrap());
+    r.sync(PreparedPhysics::new(p).unwrap()).unwrap();
     r
 }
 
