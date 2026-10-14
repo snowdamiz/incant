@@ -84,10 +84,10 @@ def build(plan_path, output, scratch_parent):
                     '--features', ','.join(FEATURES), '--target', TARGET]
             graph = ordinary.execute([cargo, 'tree', *args, '-e', 'normal', '--prefix', 'none',
                                       '--format', '{p}|{f}'], env=env).stdout
+            (output / 'normal-dependencies.txt').write_text(graph)
             graph_change = graph_delta(graph, baseline_graph.decode())
             names = ordinary.normal_dependencies(graph)
             require(not selected_graph_errors(graph, 'fast', TARGET), 'Fast4 graph differs')
-            (output / 'normal-dependencies.txt').write_text(graph)
             argv = [cargo, 'build', *args, '--bin', ordinary.NAME, '--profile', 'shipping',
                     '--target-dir', target, '-j2', '--config', 'profile.shipping.split-debuginfo="packed"',
                     '--message-format=json', '-vv']

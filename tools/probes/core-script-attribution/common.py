@@ -87,8 +87,7 @@ def graph_identity(text):
         name, version, flags = match.groups()
         key = (name, version)
         item = tuple(sorted(filter(None, flags.split(','))))
-        require(key not in result or result[key] == item, 'Conflicting graph units')
-        result[key] = item
+        result.setdefault(key, set()).add(item)
     return result
 
 
@@ -96,13 +95,18 @@ def graph_delta(actual, baseline):
     actual, baseline = graph_identity(actual), graph_identity(baseline)
     require(actual.keys() == baseline.keys(), 'Normal dependency closure changed')
     changes = {}
-    for key, flags in actual.items():
+    for key, rows in actual.items():
         name, version = key
-        wanted = set(baseline[key]) | ({DIAGNOSTIC} if name in EXTRA else set())
-        require(set(flags) == wanted, 'Additional normal graph difference: ' + name)
+        # Cargo may report distinct host/target feature rows for one version.
+        # Preserve those rows; unioning them would hide a missing unit.
+        wanted = {tuple(sorted(set(flags) | ({DIAGNOSTIC} if name in EXTRA else set())))
+                  for flags in baseline[key]}
+        require(rows == wanted, 'Additional normal graph difference: ' + name)
         if name in EXTRA:
             require(name not in changes, 'Multiple diagnostic crate versions')
-            changes[name] = {'version': version, 'before': list(baseline[key]), 'after': list(flags)}
+            changes[name] = {'version': version,
+                             'before': [list(flags) for flags in sorted(baseline[key])],
+                             'after': [list(flags) for flags in sorted(rows)]}
     require(changes.keys() == EXTRA, 'Missing diagnostic feature recipients')
     return changes
 
