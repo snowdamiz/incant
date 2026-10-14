@@ -32,11 +32,17 @@ fn pin_review_and_history_preserve_linked_prefab_overrides() {
         Some(0),
     )
     .unwrap();
-    assert_eq!(bus.project().canonical_text().unwrap(), review.candidate_text);
+    assert_eq!(
+        bus.project().canonical_text().unwrap(),
+        review.candidate_text
+    );
     bus.undo().unwrap();
     assert_eq!(bus.project().canonical_text().unwrap(), before);
     bus.redo().unwrap();
-    assert_eq!(bus.project().canonical_text().unwrap(), review.candidate_text);
+    assert_eq!(
+        bus.project().canonical_text().unwrap(),
+        review.candidate_text
+    );
     bus.execute(
         vec![Command::RevertPrefabComponent {
             scene_id: fixture.scene.clone(),
@@ -49,7 +55,17 @@ fn pin_review_and_history_preserve_linked_prefab_overrides() {
     )
     .unwrap();
     let entity = &bus.project().scenes[&fixture.scene].entities[&root];
-    assert_eq!(entity.components["Velocity"]["linear"], serde_json::json!([1, 0, 0]));
-    assert!(!entity.prefab.as_ref().unwrap().overrides.contains("Velocity"));
+    assert_eq!(
+        entity.components["Velocity"]["linear"],
+        serde_json::json!([1, 0, 0])
+    );
+    assert!(
+        !entity
+            .prefab
+            .as_ref()
+            .unwrap()
+            .overrides
+            .contains("Velocity")
+    );
     assert_eq!(bus.project().engine_version, candidate.engine_version);
 }
