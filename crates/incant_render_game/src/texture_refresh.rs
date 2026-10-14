@@ -25,7 +25,10 @@ impl TextureRefreshConsumer for CpuInputObserver {
     }
     fn publish_textures(&mut self, _: &mut ()) {}
 }
-pub struct PreparedHostTextureRefresh<C: TextureRefreshConsumer> {
+/// One cold allocation keeps typed requests/refusals small. Its owner remains
+/// outside the publication lock, including during consumer unwind.
+pub struct PreparedHostTextureRefresh<C: TextureRefreshConsumer>(Box<PreparedHostData<C>>);
+struct PreparedHostData<C: TextureRefreshConsumer> {
     native: StagedTextureRefresh,
     consumer: Option<C::Prepared>,
 }
@@ -64,10 +67,9 @@ impl<C: TextureRefreshConsumer> SceneHostUpdate for NativeRenderHost<C> {
                                 .map_err(RenderHostError::Consumer)?,
                         )
                     };
-                    Ok::<_, RenderHostError<C::Error>>(PreparedHostTextureRefresh {
-                        native,
-                        consumer,
-                    })
+                    Ok::<_, RenderHostError<C::Error>>(PreparedHostTextureRefresh(Box::new(
+                        PreparedHostData { native, consumer },
+                    )))
                 })();
                 match result {
                     Ok(prepared) => TextureRefreshReply::Prepared(prepared),
@@ -75,6 +77,7 @@ impl<C: TextureRefreshConsumer> SceneHostUpdate for NativeRenderHost<C> {
                 }
             }
             TextureRefreshOperation::Publish(prepared) => {
+                let prepared = &mut *prepared.0;
                 let view = match world.spatial_view() {
                     Ok(view) => view,
                     Err(error) => {

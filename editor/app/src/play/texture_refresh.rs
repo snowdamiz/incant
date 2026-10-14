@@ -1,6 +1,9 @@
 //! One cold revision-checked authoring coordinator and one opaque staged ticket.
 use super::*;
 use crate::ConsoleEvent;
+#[cfg(test)]
+#[path = "../../../../crates/incant_render_native/tests/common/allocations.rs"]
+mod allocation_counter;
 
 pub(super) struct Pending<T> {
     serial: u64,
@@ -318,6 +321,39 @@ mod tests {
         assert!(service.status.try_lock().is_ok());
         assert!(bus.try_lock().is_ok());
         assert_eq!(bus.lock().unwrap().bus_mut().unwrap().revision(), 0);
+    }
+    #[test]
+    fn successful_publication_guards_and_panic_boundary_allocate_or_dispose_nothing() {
+        let bus = Mutex::new(project::LoadState::Ready(Box::new(
+            CommandBus::new(Project::empty("Refresh")).unwrap(),
+        )));
+        let (service, _) = Service::new();
+        service
+            .edit(|s| {
+                s.phase = "running";
+                Ok(())
+            })
+            .unwrap();
+        let mut current = Arc::new([1_u8; 16]);
+        let mut prepared = Arc::new([2_u8; 16]);
+        let (result, allocations) = allocation_counter::record(|| {
+            publish_at_revision(&bus, &service, 0, 0, || {
+                std::mem::swap(&mut current, &mut prepared);
+                Ok(())
+            })
+        });
+        result.unwrap();
+        assert_eq!(allocations, 0);
+        assert_eq!((*current, *prepared), ([2; 16], [1; 16]));
+        let (result, allocations, disposals) = allocation_counter::record_lifecycle(|| {
+            publish_at_revision(&bus, &service, 0, 0, || {
+                std::mem::swap(&mut current, &mut prepared);
+                Ok(())
+            })
+        });
+        result.unwrap();
+        assert_eq!((allocations, disposals), (0, 0));
+        assert_eq!((*current, *prepared), ([1; 16], [2; 16]));
     }
     #[test]
     fn a_native_publication_panic_releases_unpoisoned_editor_locks_before_retirement() {
