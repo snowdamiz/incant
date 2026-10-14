@@ -1,5 +1,21 @@
 # Implementation status
 
+## Host-bound project pin migration — current-main qualification
+
+The main273 composition preserves linked-prefab authoring and adds the reviewed
+host-only exact-current legacy pin, original-byte backups, recovery and undo/redo.
+The initial composition passed 129 source/doc/cmd/headless cases and nine checks.
+A test-only successor preserves journal assertions under Windows locking; 19
+focused Mac controls pass, with four overlapping final-generation controls and
+strict lint. A later live-RPC test successor also passes its focused control and
+strict headless lint after closing each child before journal byte comparisons.
+The original hosted Windows failure, local cache failure and test
+lint failure remain retained. Final independent packet review is accepted; scoped publication awaits the
+exact-head hosted fast check.
+No CLI/RPC/editor route or older-format conversion is exposed; checkpoint33
+remains failed and frozen while its other workflows finish.
+[Current composition and evidence](docs/spikes/project-pin-main273.md).
+
 ## QuickJS allocation getter — diagnostic-only main272 intake
 
 The isolated Apple arm64 getter has 32 historical same-lock parity observations
@@ -7,7 +23,7 @@ and a deliberately failing wrong-count control. Twelve imported tool/evidence
 paths remain producer-exact; current lock/source/replay checks pass without a
 native rerun. The retained patch-context whitespace failure is resolved by two
 exact-path packaging exceptions. Independent current-main review is accepted;
-publication awaits its exact-head hosted fast check. No production dependency, profiler mode, performance or gate changes
+PR273 merged after its exact-head hosted fast SUCCESS. No production dependency, profiler mode, performance or gate changes
 are included. [Current scope](docs/spikes/quickjs-getter-main272.md).
 
 ## Engine compatibility and pin review — qualified main271 composition
@@ -88,8 +104,10 @@ exact-head fast SUCCESS, following the merged synchronization test repair. [Evid
 
 Checkpoint33 freezes candidate `b3eb0a98` on the existing PR263, exact main272
 tree `1c9687fc`, for its regularly scheduled comprehensive qualification.
-All 23 required contexts and eight exact-head workflows must succeed; checks
-are running and release30 remains unchanged. The substantive new main includes
+All 23 required contexts and eight exact-head workflows must succeed. The Windows
+desktop job failed two engine-pin test snapshots that read the journal while its
+bus still holds the exclusive lock (Windows error33). Remaining jobs are running;
+the candidate stays frozen and release30 remains unchanged. The substantive new main includes
 prefab authoring, engine pin review and bounded compiler-phase observation.
 This is not a claimed repair of checkpoint32's unexplained Windows timeout.
 
