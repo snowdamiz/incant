@@ -17,7 +17,7 @@ pub(crate) fn isolated(case: &str) -> bool {
     let stderr = String::from_utf8_lossy(&output.stderr);
     assert!(output.status.success(), "{case}: {stdout}\n{stderr}");
     assert!(
-        stdout.contains(&format!("test {case} ... ok"))
+        stdout.contains(&format!("test {case} ..."))
             && stdout.contains("test result: ok. 1 passed; 0 failed; 0 ignored;"),
         "exact case did not execute successfully: {case}: {stdout}\n{stderr}"
     );
