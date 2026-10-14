@@ -1,0 +1,83 @@
+{
+  "source": "0885bab3c033da215f86b5533ed3dff3a866da47",
+  "external_root": "/Users/andreyyurlov/.codex/incant-evidence/metalfx-main289-002",
+  "archive_sha256": "0b36dff8c33838db7b0dc3bfcb3c352e95628a1e863621e43e564ae3f14c82ea",
+  "records": [
+    {
+      "path": "freeze.json",
+      "bytes": 6114,
+      "sha256": "2f35b7002bd2890dde5c7340cbf02bbfdbadb905fe6ed2346044d2fed86f1eaa"
+    },
+    {
+      "path": "source-inventory.json",
+      "bytes": 806503,
+      "sha256": "ed6cb62041024cc64c6e1deba4f635b1a44c9f2d40784c3c74d01f890ea69362"
+    },
+    {
+      "path": "plan-001.json",
+      "bytes": 1784,
+      "sha256": "c097bc4c6fdb7bbd87ae5c9a13e9a0ef9a82823a7dc883193dba369e691aa167"
+    },
+    {
+      "path": "review.json",
+      "bytes": 493,
+      "sha256": "d4d0a2e59ce7e21864b77ed4530ab4ed4c5d82a107ba7921e8a1b648fde75e02"
+    },
+    {
+      "path": "qualify-001.py",
+      "bytes": 4919,
+      "sha256": "28eb8fc618da0f5625f1b04ea21a19adc151352e1c0ee3ab42bc6f59e1dedaf6"
+    },
+    {
+      "path": "native_process.py",
+      "bytes": 19307,
+      "sha256": "58dd2a8231d7f9d1e42070fc85425461e06a43f279fa5e7f8e57b4a40c3a3aa4"
+    },
+    {
+      "path": "qualify-001/environment.json",
+      "bytes": 1276,
+      "sha256": "97087c8935f554c20b92cddf4f290ff8eb902a9b2890c93118dd7dd7ef4e77ce"
+    },
+    {
+      "path": "qualify-001/incant_render-list.txt",
+      "bytes": 22565,
+      "sha256": "36b8878bf2c8cfe3b0d3385cfc9d4f381931860dfc8e0702b8d8de1880b91d07"
+    },
+    {
+      "path": "qualify-001/incant_render_gpu_host-list.txt",
+      "bytes": 476,
+      "sha256": "74e1dc9d1a72bcc2f3f515fe95d8b2c434d911432adf45e16dda987435d258c6"
+    },
+    {
+      "path": "qualify-001/joined-native-clippy.stderr",
+      "bytes": 677,
+      "sha256": "b5802c53c3c6c8ea6ce2631ef8a6f8a475457e295750c3ca2ae1f004e7d8337c"
+    },
+    {
+      "path": "qualify-001/joined-native-clippy.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "qualify-001/joined-native-lib.stderr",
+      "bytes": 955,
+      "sha256": "6341c79de876c466925b63ce27177257dbe72055786028fe1aa1d1bf27dd2605"
+    },
+    {
+      "path": "qualify-001/joined-native-lib.stdout",
+      "bytes": 368584,
+      "sha256": "3f4f2a8342e5957867ebd4a6ad3f338e938e1a88b62e26f3a5c90d55f7ffed23"
+    },
+    {
+      "path": "qualify-001/result.json",
+      "bytes": 3971,
+      "sha256": "80bbe1390c178920a6d72377649ffeb93981082d08db588e912399ad037a5b72"
+    },
+    {
+      "path": "qualify-001/rustc.txt",
+      "bytes": 192,
+      "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909"
+    }
+  ],
+  "claim": "CPU composition only; appearance failed in separately retained actual image capture; default-off"
+}

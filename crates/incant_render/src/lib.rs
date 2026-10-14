@@ -27,6 +27,11 @@ mod output;
 mod pipeline_cache;
 mod pixel_grid;
 pub use pipeline_cache::{CacheRead, CacheWrite, PipelineCacheReport};
+pub mod metalfx;
+#[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+extern crate self as incant_render;
+#[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+mod metalfx_image;
 mod preview_environment;
 pub mod resolution;
 mod resource_error;
@@ -111,6 +116,10 @@ pub struct Renderer {
     graph: graph::FrameGraph,
     motion: Option<motion::MotionSystem>,
     temporal: Option<temporal::TemporalSystem>,
+    #[cfg(feature = "native-metalfx")]
+    metalfx: Option<metalfx::System>,
+    #[cfg(feature = "native-metalfx")]
+    metalfx_admission: Option<std::result::Result<[f32; 2], metalfx::Fallback>>,
 }
 impl Renderer {
     pub async fn new(
@@ -220,6 +229,10 @@ impl Renderer {
             graph,
             motion: None,
             temporal: None,
+            #[cfg(feature = "native-metalfx")]
+            metalfx: None,
+            #[cfg(feature = "native-metalfx")]
+            metalfx_admission: None,
         })
     }
     pub fn headless() -> Result<Self> {

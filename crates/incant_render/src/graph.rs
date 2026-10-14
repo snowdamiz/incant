@@ -2,10 +2,14 @@
 //!
 //! Preparation owns all handles; this world never borrows a scene or renderer.
 //! Encoding is serial on one command encoder. The caller owns queue submission.
+#[cfg(feature = "native-metalfx")]
+mod native;
 use crate::{
     ResourceError, Result, diagnostic_draw::DiagnosticDraw, models::ModelDraw, output::OutputDraw,
 };
 use bevy_ecs::{prelude::*, schedule::SingleThreadedExecutor};
+#[cfg(feature = "native-metalfx")]
+pub(crate) use native::Commands;
 use std::sync::Mutex;
 #[cfg(test)]
 #[path = "../tests/frame_graph/mod.rs"]
