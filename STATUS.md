@@ -9,9 +9,10 @@ The three cached script p95 intervals are 4.400001–4.410000,
 5.430001–5.440000, 5.400001–5.410000 and 5.370001–5.380000 ms.
 All three 5% comparison metrics pass; the 2 ms script requirement fails every
 candidate. The original old-emitter 2,400-second compile timeout remains a
-historical failure, not a runnable baseline. This docs-only packet is under
-independent final review; no new build or measurement was performed during its
-audit. Main260 contains the accepted static/cache implementation; release30 is
+historical failure, not a runnable baseline. Independent final packet review
+is accepted; publication awaits the exact-head PR check. No new build or
+measurement was performed during its audit. QuickJS allocated/used heap peaks
+increase with cached metadata, so no total-memory improvement is claimed. Main260 contains the accepted static/cache implementation; release30 is
 unchanged. No display/GPU/full-phase claim. [Evidence](docs/spikes/mac-core-fast10k.md).
 
 ## Script startup data and immutable metadata caches — joined CPU checks pass

@@ -29,7 +29,10 @@ recomputed independently. No initial frames are excluded.
 
 Requested Rust allocation peaks are 76,880,695 / 76,880,695 / 76,880,663 bytes for
 the baseline and 76,880,503 bytes for each candidate. These are allocator-requested
-process peaks, not RSS or GPU memory. Every recorded comparison passes all three
+process peaks, not RSS or GPU memory. QuickJS heap peaks increase in every pair:
+allocated bytes rise from 3,918,064 to 5,364,384 and used bytes from 2,573,274 to
+3,962,281 as the candidate retains metadata. This is a memory tradeoff, not a
+claim of total memory improvement. Every recorded comparison passes all three
 5% checks (script p95, CPU frame p95 and requested allocation peak); each still
 reports `script_2ms_p95: fail`, `passed: false`, `phase_gate_passed: false`.
 Per-source totals are retained but are neither per-source p95 nor the aggregate
@@ -109,6 +112,7 @@ on producer worktrees remaining on those sources. The historical freeze's
 assumptions that these receipts were the same file and that observation output
 preserved input ordering were corrected; neither changed engine evidence.
 
-Independent final packet review is pending. Mobile/other-device measurements
+Independent [final packet review](evidence/mac-core-fast10k/review.json) accepts
+the source/build/functional/math scope and full external/Git replay. Mobile/other-device measurements
 remain deferred; this result leaves the Mac script budget failed and the
 separate display/GPU, hitch, memory-total and human phase decisions open.
