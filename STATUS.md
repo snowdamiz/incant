@@ -1,5 +1,13 @@
 # Implementation status
 
+The private Apple native adapter now has a bounded C ABI, UIKit callback source,
+real-device audio ownership and a shared lifecycle-aware touch router. Both Mac
+player configurations pass 40 CPU cases and strict Clippy; Swift source typechecks.
+Independent source review found one rejected-open output mismatch, now corrected
+with a regression test. Final packet review/integration are pending. No mobile
+app execution or appearance is claimed; other-device testing is deferred under
+the director's Mac-only gate instruction. [Scope](docs/spikes/mobile-native-platform.md).
+
 The private retained mobile Rust host now passes seven focused lifecycle controls
 and all 28 player library tests, three strict Clippy configurations, the runtime
 dependency/manifest guards and iOS library compilation. It reuses one cooked native
