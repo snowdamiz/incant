@@ -77,7 +77,8 @@ def main():
     (out / 'Cargo.toml').write_text('''[package]
 name = "incant-native-presentation-observer-probe"
 version = "0.1.0"
-edition = "2024"
+# Match the injected HAL's edition for the exact collector CPU model too.
+edition = "2021"
 [workspace]
 [features]
 default = []
