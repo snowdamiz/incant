@@ -183,6 +183,10 @@ pub(super) struct Reference {
     pub(super) output: wgpu::TextureView,
 }
 impl Reference {
+    pub(super) fn diagnostic_state(&self, frame: u32) -> [&wgpu::TextureView; 3] {
+        let now = frame as usize % 2;
+        [&self.masks, &self.history[now], &self.locks[now]]
+    }
     pub(super) fn new(r: &Renderer) -> Self {
         use Kind::*;
         use wgpu::TextureFormat::{R32Float, Rgba8Unorm, Rgba16Float, Rgba32Float, Rgba32Uint};

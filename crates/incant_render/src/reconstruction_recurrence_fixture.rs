@@ -332,15 +332,26 @@ struct Plane {
     offset: u64,
 }
 fn planes() -> [Plane; 8] {
+    capture_planes(false)
+}
+fn capture_planes(reference_state: bool) -> [Plane; 8] {
     let mut offset = 0;
     std::array::from_fn(|i| {
-        let rect: [u32; 4] = match i {
-            0 | 1 => [0, 0, 960, 540],
-            2..=4 => [592, 128, 208, 208],
-            5 | 6 => [294, 62, 108, 108],
-            _ => [0, 0, 480, 270],
+        let rect: [u32; 4] = match (reference_state, i) {
+            (true, 2) => [294, 62, 108, 108],
+            (true, 4) => [0, 48, 800, 300],
+            (_, i) => match i {
+                0 | 1 => [0, 0, 960, 540],
+                2..=4 => [592, 128, 208, 208],
+                5 | 6 => [294, 62, 108, 108],
+                _ => [0, 0, 480, 270],
+            },
         };
-        let bpp = [8, 8, 4, 4, 8, 8, 16, 4][i];
+        let bpp = if reference_state && i == 3 {
+            8
+        } else {
+            [8, 8, 4, 4, 8, 8, 16, 4][i]
+        };
         let stride = (rect[2] * bpp).div_ceil(256) * 256;
         let p = Plane {
             rect,
@@ -416,6 +427,21 @@ fn recurrence_fixture_layout_and_display_controls() {
     assert_eq!(p[1].offset, 4_147_200);
     let total = p[7].offset + u64::from(p[7].stride * p[7].rect[3]);
     assert!(total < 11 * 1024 * 1024);
+    let reference = capture_planes(true);
+    assert_eq!(reference[2].rect, [294, 62, 108, 108]);
+    assert_eq!(reference[3].bpp, 8);
+    assert_eq!(reference[4].rect, [0, 48, 800, 300]);
+    for pair in reference.windows(2) {
+        assert_eq!(
+            pair[0].offset + u64::from(pair[0].stride * pair[0].rect[3]),
+            pair[1].offset
+        );
+        assert_eq!(pair[0].stride % 256, 0);
+    }
+    assert!(
+        reference[7].offset + u64::from(reference[7].stride * reference[7].rect[3])
+            < 13 * 1024 * 1024
+    );
     assert_eq!(2 * 960 * 540 * (8 + 4 + 4 + 8), 24_883_200);
     assert_eq!(display([0.; 4]), [20, 21, 25, 255]);
     assert_eq!(display([0., 0., 0., 1.]), [0, 0, 0, 255]);
@@ -431,6 +457,11 @@ fn actual_scene_recurrence_comparison() {
     assert_eq!(renderer.adapter.get_info().backend, wgpu::Backend::Metal);
     let external =
         std::env::var("INCANT_RECURRENCE_ABLATION").as_deref() == Ok("external-reference");
+    let reference_state = match std::env::var("INCANT_REFERENCE_STATE").as_deref() {
+        Err(std::env::VarError::NotPresent) => false,
+        Ok("capture") if external => true,
+        other => panic!("unknown diagnostic state capture: {other:?}"),
+    };
     let halton32 = match std::env::var("INCANT_REFERENCE_JITTER").as_deref() {
         Err(std::env::VarError::NotPresent) | Ok("incant8") => false,
         Ok("halton32") if external => true,
@@ -457,7 +488,7 @@ fn actual_scene_recurrence_comparison() {
         };
     let experiment = Experiment::new(&renderer, ablation, cubic, lock, nearest, coarse);
     let (_target, view) = review_target(&renderer);
-    let layout = planes();
+    let layout = capture_planes(reference_state);
     let total = layout[7].offset + u64::from(layout[7].stride * layout[7].rect[3]);
     let read = renderer.device.create_buffer(&wgpu::BufferDescriptor {
         label: Some("Bounded experiment packed raw planes"),
@@ -563,7 +594,7 @@ fn actual_scene_recurrence_comparison() {
             let candidate_view = reference
                 .as_ref()
                 .map_or(&destination.views[0], |v| &v.output);
-            let views = [
+            let mut views = [
                 candidate_view,
                 &history[0],
                 &destination.views[1],
@@ -573,6 +604,10 @@ fn actual_scene_recurrence_comparison() {
                 &motion,
                 &depth,
             ];
+            if reference_state {
+                let internal = reference.as_ref().unwrap().diagnostic_state(frame);
+                views[2..5].copy_from_slice(&internal);
+            }
             for (i, (v, p)) in views.iter().zip(layout).enumerate() {
                 let mut copy = v.texture().as_image_copy();
                 copy.origin = wgpu::Origin3d {
@@ -620,26 +655,39 @@ fn actual_scene_recurrence_comparison() {
                 let p = layout[i];
                 &bytes[p.offset as usize..p.offset as usize + (p.stride * p.rect[3]) as usize]
             };
-            for sample in data(3).as_chunks::<4>().0 {
-                let remaining = half(u16::from_le_bytes([sample[2], sample[3]]));
-                assert!((0.0..=7.0).contains(&remaining) && remaining == remaining.floor());
-                nonzero_lock_samples += usize::from(remaining > 0.0);
+            if !reference_state {
+                for sample in data(3).as_chunks::<4>().0 {
+                    let remaining = half(u16::from_le_bytes([sample[2], sample[3]]));
+                    assert!((0.0..=7.0).contains(&remaining) && remaining == remaining.floor());
+                    nonzero_lock_samples += usize::from(remaining > 0.0);
+                }
             }
             let label = if moving { "moving" } else { "stationary" };
             let mut files = Vec::new();
-            for (i, name) in [
-                "candidate",
-                "baseline",
-                "depth",
-                "evidence",
-                "recurrence",
-                "current",
-                "motion",
-                "native-depth",
-            ]
-            .into_iter()
-            .enumerate()
-            {
+            let names = if reference_state {
+                [
+                    "candidate",
+                    "baseline",
+                    "reference-masks",
+                    "reference-history",
+                    "reference-locks",
+                    "current",
+                    "motion",
+                    "native-depth",
+                ]
+            } else {
+                [
+                    "candidate",
+                    "baseline",
+                    "depth",
+                    "evidence",
+                    "recurrence",
+                    "current",
+                    "motion",
+                    "native-depth",
+                ]
+            };
+            for (i, name) in names.into_iter().enumerate() {
                 let p = layout[i];
                 let name = format!("{label}-{frame:02}-{name}.bin");
                 std::fs::write(out.join(&name), data(i)).unwrap();
@@ -718,7 +766,7 @@ fn actual_scene_recurrence_comparison() {
             "input_adapter": "Incant jittered previous-current UV to unjittered current-previous; opposite jitter convention; invalid vectors zeroed",
             "settings": "fixed exposure 1, max accumulation 24, thin locks and shading detector enabled, no sharpening; sequence recorded in diagnostic_jitter",
             "cold_equality_required": false,
-            "auxiliary_planes": "Incant recurrence path; NOT external reference state",
+            "auxiliary_planes": if reference_state { "reference masks RGBA8, history RGB+age RGBA16, locks life+luma+shading+alpha RGBA16; exact crop/stride per plane" } else { "Incant recurrence path; NOT external reference state" },
             "limits": "Test-only external reference. No production adoption, invalid-motion/alpha conformance, performance or memory admission claim."
         });
         report["scope"] = json!(
@@ -734,6 +782,13 @@ fn actual_scene_recurrence_comparison() {
         "four_recent_fresh_luminances"
     });
     report["nonzero_lock_samples"] = json!(nonzero_lock_samples);
+    report["reference_state_captured"] = json!(reference_state);
+    report["recurrence_state_captured"] = json!(!reference_state);
+    if reference_state {
+        report["four_channel_history_semantics"] =
+            json!("reference lock life, tracked luma, shading change, resolved alpha");
+        report["nonzero_lock_samples"] = Value::Null;
+    }
     report["history_filter"] = json!(if cubic {
         "bounded_signed_cubic_diagnostic"
     } else {

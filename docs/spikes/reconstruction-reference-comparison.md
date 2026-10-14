@@ -99,3 +99,39 @@ still fails Incant's premultiplied-domain expectations and is not adopted.
 identities, phase counts, PNG identity checks and observations. This is private
 algorithm investigation; it establishes no current-main, final-display, shipping
 performance, phase or release result.
+
+## Reference history observation
+
+007 changes only test readback: three otherwise unused Incant auxiliary planes
+are replaced by reference masks, history RGB plus sample count, and locks (life,
+tracked luminance, shading change and alpha). Formats, crop extents and strides
+are recorded explicitly. The six reference shaders and configuration are exact
+to 005. All 640 shared raw input/output planes are byte-identical to 005; the
+observer did not alter either reconstructed output on this run.
+
+The source freeze is
+`5f2277b6c93b1c4f31f316698174fb0ebc580246cf3767194e87cc6dcadaa50d`;
+the immediate executable is
+`88308436e6f2690675c98d0c940f9886fe2947d830abf90b9e6a0ff6d5571f59`.
+Build, two CPU controls, strict lint and the 128-frame Metal run pass. All owned
+processes are terminal and reaped. The run retains 256 submissions, 128 maps,
+18 PNGs and 1,471,938,560 raw bytes. Its packed readback is 11,499,520 bytes.
+This is diagnostic allocation, not shipping memory admission.
+
+The bounded analysis hashes all 384 new state planes, projects four authored
+chart regions into the camera and samples a three-pixel grid. The stationary
+line region reaches history count 24 with no shading-change or disocclusion
+mask at frames 32 and 64. During camera motion, the sampled line region has
+zero disocclusion at frames 15–32, but its shading-change mean repeatedly
+spikes (0.550 at frame 15, 0.717 at 19, 0.655 at 23, 0.718 at 27, 0.650 at 31).
+History count falls to roughly four to eight samples. The cropped history and
+mask planes no longer cover this region at frame 64; missing observations are
+explicitly null. These are sampled observations, not whole-scene quality metrics.
+
+The evidence points to repeated shading rejection as one source of unstable
+accumulation. It does not yet prove that rejection is false: this moving fixture
+also contains a moving shadow caster. A camera-only control with the caster held
+stationary is needed before changing that logic. No threshold is tuned here and
+no visual repair is claimed. `state-observations.json`, `analyze_state.py`,
+`observer-equivalence.json` and `verify_observer.py` in the 007 evidence directory
+retain the raw-analysis and matched-observer receipts.
