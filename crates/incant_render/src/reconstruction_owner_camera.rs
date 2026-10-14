@@ -4,6 +4,10 @@ use glam::{Mat4, Vec2, Vec3};
 use wgpu::util::DeviceExt;
 #[path = "reconstruction_owner_camera_controls.rs"]
 mod controls;
+#[path = "reconstruction_owner_coverage.rs"]
+mod coverage;
+#[path = "reconstruction_owner_coverage_controls.rs"]
+mod coverage_controls;
 #[path = "reconstruction_owner_cubic_controls.rs"]
 mod cubic_controls;
 #[path = "reconstruction_owner_footprint_controls.rs"]
@@ -71,7 +75,11 @@ impl Kernel {
     }
 }
 fn shader() -> String {
-    shader_with_options(3, Kernel::selected(), History::selected())
+    coverage::Coverage::selected().assemble(shader_with_options(
+        3,
+        Kernel::selected(),
+        History::selected(),
+    ))
 }
 fn shader_with_radius(radius: i32) -> String {
     shader_with_kernel(radius, Kernel::Point)
@@ -290,7 +298,13 @@ struct Experiment {
 }
 impl Experiment {
     fn new(renderer: &Renderer) -> Self {
-        Self::with_options(renderer, 3, Kernel::selected(), History::selected())
+        Self::with_coverage(
+            renderer,
+            3,
+            Kernel::selected(),
+            History::selected(),
+            coverage::Coverage::selected(),
+        )
     }
     fn with_radius(renderer: &Renderer, radius: i32) -> Self {
         Self::with_kernel(renderer, radius, Kernel::Point)
@@ -299,6 +313,15 @@ impl Experiment {
         Self::with_options(renderer, radius, kernel, History::Tent)
     }
     fn with_options(renderer: &Renderer, radius: i32, kernel: Kernel, history: History) -> Self {
+        Self::with_coverage(renderer, radius, kernel, history, coverage::Coverage::Alpha)
+    }
+    fn with_coverage(
+        renderer: &Renderer,
+        radius: i32,
+        kernel: Kernel,
+        history: History,
+        coverage: coverage::Coverage,
+    ) -> Self {
         let d = &renderer.device;
         let mut entries = crate::upscaling::system::owner_layout_entries();
         entries.push(wgpu::BindGroupLayoutEntry {
@@ -317,7 +340,11 @@ impl Experiment {
         });
         let module = d.create_shader_module(wgpu::ShaderModuleDescriptor {
             label: Some("Test camera owner shader"),
-            source: wgpu::ShaderSource::Wgsl(shader_with_options(radius, kernel, history).into()),
+            source: wgpu::ShaderSource::Wgsl(
+                coverage
+                    .assemble(shader_with_options(radius, kernel, history))
+                    .into(),
+            ),
         });
         let pipeline_layout = d.create_pipeline_layout(&wgpu::PipelineLayoutDescriptor {
             label: None,
@@ -643,7 +670,7 @@ fn actual_scene_owner_camera_gather() {
                 .iter()
                 .map(|n| n.world.to_cols_array())
                 .collect();
-            rows.push(json!({"case":label,"frame":frame,"jitter":jitter,"jitter_phase":(frame-1)%phases,"node_world_matrices":poses,"changes":header,"previous_matrix":old_matrix.to_cols_array(),"current_matrix":current_matrix.to_cols_array(),"candidate_range":color_range(data(0)),"planes":files}));
+            rows.push(json!({"case":label,"frame":frame,"jitter":jitter,"jitter_phase":(frame-1)%phases,"node_world_matrices":poses,"semantic_nodes":coverage::labeled_nodes(&stage,&input),"changes":header,"previous_matrix":old_matrix.to_cols_array(),"current_matrix":current_matrix.to_cols_array(),"candidate_range":color_range(data(0)),"planes":files}));
             std::fs::write(
                 out.join("progress.json"),
                 serde_json::to_vec_pretty(
@@ -659,7 +686,7 @@ fn actual_scene_owner_camera_gather() {
         }
     }
     assert_eq!((submits, maps), (256, 128));
-    let report = json!({"schema":"incant-owner-camera-diagnostic-v1","adapter":describe(&renderer),"output":SIZE,"source":[480,270],"submissions":submits,"maps":maps,"frames":rows,"images":images,"kernel":Kernel::selected().name(),"history_filter":History::selected().name(),"motion":motion.name(),"sampling":sampling.name(),"jitter_phase_count":phases,"shader_sha256":hex(shader().as_bytes()),"raw_bytes":total*128,"scope":"Test-only radius3 (7x7) forward gather of static single-owner fractional coverage; selected stationary or small camera motion, internal LOD footprint, unchanged history age8. Halton32 changes sequence and count, not a sample-count theorem. No production, arbitrary motion, timing or visual acceptance."});
+    let report = json!({"schema":"incant-owner-camera-diagnostic-v1","adapter":describe(&renderer),"output":SIZE,"source":[480,270],"submissions":submits,"maps":maps,"frames":rows,"images":images,"kernel":Kernel::selected().name(),"history_filter":History::selected().name(),"coverage":coverage::Coverage::selected().name(),"motion":motion.name(),"sampling":sampling.name(),"jitter_phase_count":phases,"shader_sha256":hex(shader().as_bytes()),"raw_bytes":total*128,"scope":"Test-only radius3 (7x7) forward gather of static single-owner fractional coverage; selected stationary or small camera motion, internal LOD footprint, unchanged history age8. Halton32 changes sequence and count, not a sample-count theorem. No production, arbitrary motion, timing or visual acceptance."});
     std::fs::write(
         out.join("report.json"),
         serde_json::to_vec_pretty(&report).unwrap(),

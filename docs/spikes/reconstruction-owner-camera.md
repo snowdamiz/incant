@@ -356,3 +356,69 @@ Comparison reports (external bounded evidence):
   SHA-256 `50a5030de7c48c41d7fade1165b30fc70975816a33df907e3164e3ed8c714d84`.
 - `~/.codex/incant-evidence/reconstruction-owner-pan-comparison-001/stdout-v2.json`,
   SHA-256 `a47172345b7742fd9d872367b4a0e8220e740158aeffeefdfbbe9dc66b90af79`.
+
+### Explicit coverage provenance (019–022)
+
+The stationary failure is now reproduced and repaired in the opt-in diagnostic.
+At [199,123], three positive surface samples and six clear samples produce
+fresh alpha about 0.9999993646. Storing that in binary16 rounds alpha to 1,
+which the old resolver mistook for proved opaque coverage and discarded on the
+next clear phase. No eight-frame expiry caused that loss.
+
+The new test-only `provenance` mode carries partial-coverage provenance in reserved
+record bit 17, independent of rounded alpha. Positive current/history contributions
+propagate it; ordinary opaque reuse refuses it. Static and bounded camera history
+can retain a flagged alpha-1 record, while unflagged fractional records refuse.
+Owner, depth, changed-object, global-reset and age-8 guards are unchanged. The
+flag does not establish independent samples, geometric area or a single layer.
+Default `alpha` assembly and production shader/ABI bytes remain unchanged.
+The harness now also reports unique semantic entity roles with matrices.
+
+Generation 019 passed CPU checks but failed three feedback-oracle rows. Its
+first stored RGB was one adjacent half below the ideal value; the following
+expected value incorrectly ignored that actual preceding attachment. The
+corrected oracle computes each conditional one-step expectation from the captured
+prior color/mass and independent fresh mass. The existing half tolerance is not
+widened, and it is explicitly not an independent whole-chain radiance proof.
+Generation 020 passed all 68 coverage rows but failed strict lint on an allocating
+ID comparison. Generation 021 changes only that lookup to direct typed equality;
+7 CPU checks, all 68 coverage rows, the 14 unchanged legacy-alpha classifier
+rows, strict all-target lint and the 128-frame stationary capture pass. Generation
+022 reuses the exact binary/source, changing only the existing motion option to
+pan, and passes its 128-frame capture. All native processes are reaped.
+
+The independent comparisons bind every input plane, camera/jitter schedule,
+2,048 raw planes (3.112 GB) and 72 PNGs per pair. Every candidate color is finite
+and premultiplied, and all 32 post-cut disappearance-region frames are clear.
+The first pan comparison refused a metadata spelling mismatch (`pan` versus the
+reported `pan-after-frame14`) before streaming any plane; the corrected verifier
+retains that failure and performs exactly one raw scan. No numerical threshold
+or rendering source changed to satisfy the verifier.
+
+Stationary height-3.5 continuity improves from 1,072/4,288 positive sampled
+center-frames to 4,288/4,288. The former [199,123] loss now carries flagged
+history with age 1 after the next clear phase. During camera motion, both old
+and new versions already have all 3,365 projected wire samples positive, but
+the early severe attenuation is reduced: mean alpha at frame 15 changes from
+0.003035 to 0.509157. Sampled age remains bounded at 7, without extending retention.
+These are continuity/brightness observations, not sharpness or motion-quality
+acceptance. Root inspected actual frame 16 and 64 pixels: the horizontal wire
+is restored, but sphere/pole/depth-edge aliasing remains. **This is a diagnostic
+correctness improvement, not an accepted production reconstruction algorithm.**
+
+Exact 021/022 source freeze:
+`f912d1cea15921a512b7a524a4319a1cad792ee80e00b28f916c3fbb519eef88`;
+binary `375313cbab9cc6142381fbc32b8a692d2f4ae9d0fc463f4af3b7e334414872ff`.
+External retained evidence lives under `~/.codex/incant-evidence/`:
+
+- `reconstruction-owner-camera-019` through `-022`: original controls, logs,
+  source snapshots, raw attachments and scene images, including both failures.
+- `reconstruction-owner-coverage-comparison-001/stdout.json`, SHA-256
+  `117fb5db20686f9206a5cf8f5aabe2309f6d53a94a47888f1591707379f9bc3a`.
+- `reconstruction-owner-coverage-pan-comparison-001/stdout-v2.json`, SHA-256
+  `3ba685c86f3e100da5fdf48ff8341e062876ea1d6577d2aa358c69cc0dfa54ba`.
+
+Older captures lack semantic labels, so cross-generation authored role identity
+is not inferred from random entity IDs; exact input planes and matrix multisets
+bind those comparisons. No rendering timing, broader motion, silhouette proof,
+production enablement or phase gate is claimed.
