@@ -57,7 +57,10 @@ After offline Cargo metadata reconciles each copied lock, `check_lock.py` refuse
 any dependency identity absent from the root lock except the named diagnostic
 package and local rquickjs-sys copy. Baseline and candidate locks must be identical.
 Use identical pinned Rust 1.99, explicit aarch64-apple-darwin, CI profile, -j2,
-RAYON_NUM_THREADS=2 and a separate task target. Retain actual compiler/version/CC
+RAYON_NUM_THREADS=2 and a fresh, distinct target directory for EACH variant. Local path patches with
+identical package identities can otherwise reuse an earlier variant artifact.
+Check the build output quickjs.c against that variant, require distinct binary
+hashes, and retain the wrong-store failure. Retain actual compiler/version/CC
 identity, argv, process outcomes, immediate executable copies and every prepared
 source hash. The CI profile is not a shipping-performance qualification.
 
