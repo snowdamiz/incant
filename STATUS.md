@@ -1,5 +1,12 @@
 # Implementation status
 
+The current phase remains **Phase 1: Core engine**. The
+[Phase 1 review ledger](docs/gates/phase1-review.md) maps each exit requirement to
+its recorded evidence and remaining qualification. Main287 includes the actual
+native texture workflow; release checkpoint37 contains the tested main285 tree.
+Rendering quality and full rendered-game performance remain open. The entries
+below preserve earlier scoped results and superseded integration snapshots.
+
 ## Native Play texture workflow — actual Mac verified
 
 The real editor import/history handlers, source watcher and native surface now
