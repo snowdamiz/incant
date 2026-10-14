@@ -53,11 +53,11 @@ def counts(data):
 
 x = archive(D, m, m['evidence_root'])
 obj = lambda n: json.loads(x[n])
-freezes = {g: obj('freeze-'+g+'.json') for g in ['001','002','003','004','005']}
+freezes = {g: obj('freeze-'+g+'.json') for g in ['001','002','003','004','005','006']}
 for f in freezes.values():
     assert len(f['rows']) == 3559
     git_rows(f['source'], f['rows'])
-f = freezes['005']; assert f['source'] == m['source']
+f = freezes['006']; assert f['source'] == m['source']
 if a.current:
     for q in f['rows']: assert h((R/q['path']).read_bytes()) == q['sha256'], q['path']
 for ref in [m['base'], freezes['001']['source']]:
@@ -66,11 +66,13 @@ def changed(left,right):
     l = {q['path']:q['sha256'] for q in freezes[left]['rows']}
     return {q['path'] for q in freezes[right]['rows'] if q['sha256'] != l[q['path']]}
 assert changed('001','005') == {'crates/incant_cmd/src/journal.rs','crates/incant_cmd/src/project_file_tests.rs','crates/incant_cmd/tests/engine_version.rs'}
+assert changed('005','006') == {'crates/incant_headless/tests/engine_version.rs'}
 assert changed('004','005') == {'crates/incant_cmd/tests/engine_version.rs'}
-patch = subprocess.check_output(['git','diff',freezes['001']['source'],m['source'],'--',*sorted(changed('001','005'))],cwd=R)
+patch = subprocess.check_output(['git','diff',freezes['001']['source'],freezes['005']['source'],'--',*sorted(changed('001','005'))],cwd=R)
 assert patch == x['windows-test-repair.patch']
+assert subprocess.check_output(['git','diff',freezes['005']['source'],m['source'],'--','crates/incant_headless/tests/engine_version.rs'],cwd=R) == x['headless-test-repair.patch']
 scope = obj('source-relevance-final.json')
-assert scope['final_source'] == m['source'] and scope['producer'] == m['producer']
+assert scope['final_source'] == freezes['005']['source'] and scope['producer'] == m['producer']
 assert len(scope['final_owned']) == 12
 for key, rev in [('producer_sha256',m['producer']),('final_sha256',m['source'])]:
     git_rows(rev,scope['final_owned'],key)
@@ -85,7 +87,8 @@ for result, runner, generation, names, exits in [
  ('results.json','run.py','001',['source-doc-cmd','headless','clippy','schema','sdk-fresh','sdk-types','fmt','conventions','diff'],[0]*9),
  ('results-003.json','run-003.py','003',['engine-version-003'],[101]),
  ('results-004.json','run-004.py','004',['cache-invalidate-004','engine-version-004','project-file-004','clippy-004'],[0,0,0,101]),
- ('results-005.json','run-005.py','005',['engine-version-005','clippy-005','fmt-005','conventions-005','diff-005'],[0]*5)]:
+ ('results-005.json','run-005.py','005',['engine-version-005','clippy-005','fmt-005','conventions-005','diff-005'],[0]*5),
+ ('results-006.json','run-006.py','006',['headless-006','clippy-006','fmt-006','conventions-006','diff-006'],[0]*5)]:
     checks = obj(result); assert [q['name'] for q in checks] == names
     assert [q['exit_code'] for q in checks] == exits
     for c in checks:
@@ -99,6 +102,7 @@ assert counts(x['source-doc-cmd.stdout']) == [127,0,0]
 assert counts(x['headless.stdout']) == [2,0,0]
 assert counts(x['engine-version-004.stdout']) == counts(x['engine-version-005.stdout']) == [4,0,0]
 assert counts(x['project-file-004.stdout']) == [15,0,0]
+assert counts(x['headless-006.stdout']) == [1,0,0]
 assert b'could not find `prefab` in `incant_doc`' in x['engine-version-003.stderr']
 assert b'variable does not need to be mutable' in x['clippy-004.stderr']
 clean = obj('cache-invalidate-004.json')
@@ -121,7 +125,7 @@ assert h((PD/'collect.py').read_bytes()) == pm['collector_sha256']
 y = archive(PD,pm,m['producer_evidence_root']); load = lambda n:json.loads(y[n])
 assert len(pm['final_inputs']) == 3542; git_rows(m['producer'],pm['final_inputs'])
 final = {q['path']:q['sha256'] for q in f['rows']}
-assert {q['path'] for q in pm['final_inputs'] if q['sha256'] != final[q['path']]} == {q['path'] for q in scope['final_producer_differences']}
+assert {q['path'] for q in pm['final_inputs'] if q['sha256'] != final[q['path']]} == {q['path'] for q in scope['final_producer_differences']} | {'crates/incant_headless/tests/engine_version.rs'}
 for generation in ['source-001','source-002','source-003']:
     pf = load(generation+'/freeze.json')
     for q in pf['files']: assert h(y[generation+'/inputs/'+q['path']]) == q['sha256']
@@ -151,5 +155,5 @@ if a.local_binaries:
     for q in pm['binaries']:
         path = Path(q['path']); assert h(path.read_bytes()) == q['sha256'] and path.stat().st_mode & 0o111
 print(json.dumps({'verified':True,'current_records':m['records'],'current_inputs':3559,'current_001_cases':129,
-    'affected_004_cases':19,'affected_005_cases':4,'current_binary_copies':len(binaries),'producer_records':pm['records'],
+    'affected_004_cases':19,'affected_005_cases':4,'affected_006_cases':1,'current_binary_copies':len(binaries),'producer_records':pm['records'],
     'producer_inputs':3542,'producer_copies':len(pm['binaries']),'windows_execution_of_repair':False}))

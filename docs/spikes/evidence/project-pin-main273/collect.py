@@ -15,7 +15,7 @@ for p in sorted(E.rglob('*')):
     b=p.read_bytes();digest=h(b);records.append({'path':str(p.relative_to(E)),'sha256':digest,'bytes':len(b)})
     payloads[digest]=base64.b64encode(b).decode()
 raw=gzip.compress(dump({'records':records,'payloads':payloads}),mtime=0);(D/'records.json.gz').write_bytes(raw)
-f=json.loads((E/'freeze-005.json').read_bytes())
+f=json.loads((E/'freeze-006.json').read_bytes())
 m={'version':1,'source':f['source'],'base':f['base'],'producer':f['producer'],'archive_sha256':h(raw),
    'records':len(records),'payloads':len(payloads),'verifier_sha256':h((D/'verify.py').read_bytes()),
    'collector_sha256':h(Path(__file__).read_bytes()),'evidence_root':str(E),
@@ -23,5 +23,5 @@ m={'version':1,'source':f['source'],'base':f['base'],'producer':f['producer'],'a
    'producer_manifest_sha256':h((D.parent/'project-pin-migration/manifest.json').read_bytes()),
    'producer_review_sha256':h((E/'producer-review.json').read_bytes()),
    'windows_source_review_sha256':h((E/'windows-source-review.json').read_bytes()),
-   'scope':'Host-only legacy-unpinned exact-current file migration plus preserved prefab authoring. Source001:129 cases/nine successful checks. Test-only successor004:19 affected cases;005:four overlapping cases and strict lint. Retained Windows failure; no current Windows execution or release/phase acceptance.'}
+   'scope':'Host-only legacy-unpinned exact-current file migration plus preserved prefab authoring. Source001:129 cases/nine successful checks. Test-only successor004:19 affected cases;005:four overlapping cases and strict lint.006:one headless case and strict lint. Retained Windows failure; no current Windows execution or release/phase acceptance.'}
 (D/'manifest.json').write_bytes(dump(m));print(json.dumps({'manifest_sha256':h(dump(m)),'records':len(records),'payloads':len(payloads)}))

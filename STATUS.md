@@ -7,7 +7,9 @@ host-only exact-current legacy pin, original-byte backups, recovery and undo/red
 The initial composition passed 129 source/doc/cmd/headless cases and nine checks.
 A test-only successor preserves journal assertions under Windows locking; 19
 focused Mac controls pass, with four overlapping final-generation controls and
-strict lint. The original hosted Windows failure, local cache failure and test
+strict lint. A later live-RPC test successor also passes its focused control and
+strict headless lint after closing each child before journal byte comparisons.
+The original hosted Windows failure, local cache failure and test
 lint failure remain retained. Final independent packet review is pending.
 No CLI/RPC/editor route or older-format conversion is exposed; checkpoint33
 remains failed and frozen while its other workflows finish.

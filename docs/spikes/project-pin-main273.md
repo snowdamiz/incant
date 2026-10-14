@@ -53,10 +53,20 @@ the four overlapping integration cases, strict command-package Clippy, formattin
 conventions and diff. Forty current executable copies cover these recorded
 attempts. All managed children were reaped and the font target released.
 
+The final headless test audit found the same separate-reader issue while the RPC
+child held its journal. Source006 `8690db174f95194ac6665a89081f2f712119343d`
+closes stdin and requires a successful child exit before every journal byte
+comparison, then restarts with the same project and journal. A readiness request
+ensures the live child loaded the original before the external-file mutation.
+All existing refusal, file, command and undo observations remain. This is another
+test-only successor: its one live-RPC test, strict headless all-target Clippy,
+formatting, conventions and diff checks pass. Two immediately copied executables
+bring the current retained total to 42. No broad suite was rerun or relabeled.
+
 The producer packet is unchanged: 124 lossless records, 77 payloads, 3,542 input
 identities and 25 executable copies; its 87 passing cases and earlier real Abort
 encoding failure remain explicitly producer-scoped. Current composition freezes
-bind 3,559 inputs. The final ten producer-input exceptions include the three
+bind 3,559 inputs. The final eleven producer-input exceptions include the four
 reviewed test-only successor paths. The archive also preserves the unsuccessful
 local cache and lint attempts. No tests from an earlier generation are relabeled
 as a new execution.
