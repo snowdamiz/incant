@@ -1,4 +1,4 @@
-use rquickjs::{ArrayBuffer, Context, Function, Runtime, Value};
+use rquickjs::{ArrayBuffer, CatchResultExt, Context, Function, Runtime, Value};
 use std::{path::Path, time::Instant};
 
 fn semantics(root: &Path) -> Result<(), Box<dyn std::error::Error>> {
@@ -8,11 +8,15 @@ fn semantics(root: &Path) -> Result<(), Box<dyn std::error::Error>> {
     let source = std::fs::read(root.join("semantics.js"))?;
     let rows = context.with(|ctx| -> rquickjs::Result<String> {
         let integer = Value::new_int(ctx.clone(), 7);
-        let float = Value::new_float(ctx.clone(), 7.0);
+        // JS_NewFloat64 canonicalizes integral 7.0 to an int tag.
+        let float = Value::new_float(ctx.clone(), 7.5);
         assert!(integer.is_int() && float.is_float());
         ctx.globals().set("tagInt", integer)?;
         ctx.globals().set("tagFloat", float)?;
-        ctx.eval(source)
+        ctx.eval(source).catch(&ctx).map_err(|error| {
+            eprintln!("semantics failure: {error}");
+            rquickjs::Error::Exception
+        })
     })?;
     let rows: serde_json::Value = serde_json::from_str(&rows)?;
     assert_eq!(rows.as_array().unwrap().len(), 58);
