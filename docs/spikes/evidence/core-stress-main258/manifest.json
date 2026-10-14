@@ -1,0 +1,129 @@
+{
+  "format": "incant-core-stress-main258",
+  "version": 1,
+  "base": "7c65ef261e9638182412d4273cb3eb519d6140b9",
+  "source": "1e58cea44d371cebbc74096a8236b5968d02f0f8",
+  "producer": "86b0a38e42e67b1291097dfb305253c2eacff642",
+  "raw_root": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-stress-main258",
+  "archive_sha256": "962f174fcecf67ee2d8d2931171778fbf80593952ec9caa88b44127b4f6a0031",
+  "records": [
+    {
+      "path": "ancestry.json",
+      "bytes": 260,
+      "sha256": "3dde36d04c72b53272814548b7f7e2660bb6ad0abf30bf18258368fabcad1d47"
+    },
+    {
+      "path": "conventions.json",
+      "bytes": 473,
+      "sha256": "7f6058442178ca523e74b366148874db5c9417f22219b7e3415dfabd8991f2f5"
+    },
+    {
+      "path": "conventions.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "initial-identity-refusal.json",
+      "bytes": 387,
+      "sha256": "af665ecbffd1126a8cfd1387b12160f746d92e7782b55a9a726dba5813406391"
+    },
+    {
+      "path": "inputs.json",
+      "bytes": 8658,
+      "sha256": "ef5c612d873ece28f129ca5a59801ede36b0b45fc5f331836848e26a04187293"
+    },
+    {
+      "path": "node-bulk.json",
+      "bytes": 450,
+      "sha256": "f943f53c9fa82ef2ace88761f4d3eb5a45fe51905cc2b26121de22447dffcec0"
+    },
+    {
+      "path": "node-bulk.log",
+      "bytes": 107,
+      "sha256": "fa7a53b2d8a4e0bbe92a5043e1fd1ec3548389f311661c280804bff8aa73295c"
+    },
+    {
+      "path": "node-dependency-setup.json",
+      "bytes": 460,
+      "sha256": "8f5fbe59014caef89fed2bdb44355d23a9ce87de0fa14282055e1674d329815f"
+    },
+    {
+      "path": "node-dependency-setup.log",
+      "bytes": 143,
+      "sha256": "1ec873b133447fdaf11fd7241cf1973f89f65edaa92984dcd18fdd699847a0b3"
+    },
+    {
+      "path": "producer-evidence.json",
+      "bytes": 512,
+      "sha256": "bb71b165829f89af70b541e175e76694402c9866688d1862c297ead3bbe3d010"
+    },
+    {
+      "path": "producer-evidence.log",
+      "bytes": 90,
+      "sha256": "97e92392fdc718d91a59d360ba0d8c2b74ef139c257c336aac38de82018c8370"
+    },
+    {
+      "path": "python10.json",
+      "bytes": 543,
+      "sha256": "899fcced0f45656881e335fdc0010a89bea52939371de544ca7b3dd95484a60d"
+    },
+    {
+      "path": "python10.log",
+      "bytes": 1432,
+      "sha256": "44d7c666f3d2cfb227ed2c9825d5c38095e332efe3a5855fd4d1c2f85fbce659"
+    },
+    {
+      "path": "result.json",
+      "bytes": 3993,
+      "sha256": "2cae788b113b5b780c82c5d6b6b18441bef69e5d9c98fb332724411e3e7e43c9"
+    },
+    {
+      "path": "run.py",
+      "bytes": 2657,
+      "sha256": "8b4f509bebc2bb2891fda1e78f50655a67c994aa2b6da0ff6196bce6ae7820c4"
+    },
+    {
+      "path": "sdk-relevance.patch",
+      "bytes": 2458,
+      "sha256": "1e4e87959dc9535da0f73f92276c13501877df255e2c66e73a7697fa05ba4b52"
+    },
+    {
+      "path": "source-diff.json",
+      "bytes": 493,
+      "sha256": "7323955a4c534b12c1ed30dd799c923fbf9daf725ea6f831544e233503af8215"
+    },
+    {
+      "path": "source-diff.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "source-map.json",
+      "bytes": 4684,
+      "sha256": "eeef1cc1b1c7617bb738e2f7d5a5843409de1572a17b9150f17065cbad0dc140"
+    },
+    {
+      "path": "source.diff",
+      "bytes": 44751,
+      "sha256": "af34316b196cb12f8d002d0b64397266015d8679fb7cee8b34c179902ee8c057"
+    },
+    {
+      "path": "typescript.json",
+      "bytes": 478,
+      "sha256": "b1ff68476151ae1654d77e11031f60396a1eb9b656020dee14cbf01acfb68d2a"
+    },
+    {
+      "path": "typescript.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "reviews": [
+    {
+      "file": "core-script-stress-root-20261014.json",
+      "sha256": "1efa0cbe928fe0db5d2a17764e6861954f31ff269f885db8c0e10714611e30e2"
+    }
+  ],
+  "review_status": "current-main independent final review pending",
+  "scope": "Current Python/TypeScript/Node helper qualification only. Producer historical native correctness not rerun; shipping performance remains separate."
+}
