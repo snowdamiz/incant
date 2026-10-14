@@ -1,5 +1,14 @@
 # Implementation status
 
+## QuickJS allocation getter — diagnostic-only main272 intake
+
+The isolated Apple arm64 getter has 32 historical same-lock parity observations
+and a deliberately failing wrong-count control. Twelve imported tool/evidence
+paths remain producer-exact; current lock/source/replay checks pass without a
+native rerun. The retained patch-context whitespace failure is resolved by two
+exact-path packaging exceptions. Final current-main review and publication are
+pending. No production dependency, profiler mode, performance or gate changes
+are included. [Current scope](docs/spikes/quickjs-getter-main272.md).
 
 ## Engine compatibility and pin review — qualified main271 composition
 
@@ -10,7 +19,8 @@ document/command cases, two live headless cases and two cooked native controls,
 strict four-package lint and all nine qualification commands. The actual joined
 headless binary regenerated all 74 schemas. Prior producer failures and distinct
 source generations remain retained. Independent final source/evidence review is
-accepted; publication awaits its exact-head hosted fast check. File migration, backup/recovery application and editor UI remain open;
+accepted; PR272 merged after its exact-head hosted fast SUCCESS. File migration,
+backup/recovery application and editor UI remain open;
 no phase or release gate is claimed. [Current composition](docs/spikes/engine-compat-main271.md).
 
 ## Linked prefab authoring — qualified main270 composition
@@ -74,18 +84,21 @@ source97834, not a Core10k, startup, FPS or phase gate. Independent raw evidence
 review and current helper Python/TypeScript checks pass. PR267 merged after its
 exact-head fast SUCCESS, following the merged synchronization test repair. [Evidence](docs/spikes/wasm-typescript-cost.md).
 
-## Checkpoint32 — frozen main268; checkpoint31 failure retained
+## Checkpoint33 — frozen main272; prior failures retained
 
-The frozen main262 candidate failed macOS workspace Clippy because three existing
-physics tests ignored fallible synchronization results. A source-reviewed repair
-asserts those calls succeed and passes affected package Clippy/tests. PR266
-merged after its exact-head fast SUCCESS. Checkpoint31 finished with 22 required
-SUCCESS and one FAILURE; every original job is retained. The same PR263 now
-freezes checkpoint32 candidate `e4faac52`, exact main268 tree `17054960`. All
-23 contexts and eight comprehensive workflows remain required. Its Windows
-desktop deadline failure is retained. Every original workflow is now terminal:
-22 required contexts succeeded and the Windows context failed.
-Release30 is unchanged; no successor success or promotion is claimed. [Repair evidence](docs/spikes/physics-sync-result.md).
+Checkpoint33 freezes candidate `b3eb0a98` on the existing PR263, exact main272
+tree `1c9687fc`, for its regularly scheduled comprehensive qualification.
+All 23 required contexts and eight exact-head workflows must succeed; checks
+are running and release30 remains unchanged. The substantive new main includes
+prefab authoring, engine pin review and bounded compiler-phase observation.
+This is not a claimed repair of checkpoint32's unexplained Windows timeout.
+
+Checkpoint31 finished with 22 required SUCCESS and one macOS Clippy FAILURE;
+PR266 separately repaired the three fallible test calls. Checkpoint32 finished
+with 22 required SUCCESS and one Windows deadline FAILURE. Every original job
+and the separate passing Windows observation remain retained. No promotion is
+claimed. [Prior repair evidence](docs/spikes/physics-sync-result.md) and
+[Windows observation](docs/spikes/evidence/typescript-cook-windows/manifest.json).
 
 ## Director routing clarification — editor UI only
 
@@ -107,7 +120,7 @@ comparison checks pass, while all three 2 ms gates still fail. Full nonprofile
 reports and PCM match; QuickJS heap peaks are unchanged. Portable raw evidence is
 retained with independent final integration acceptance. PR264 merged after its
 exact-head fast SUCCESS; main264 includes the prior Core sample and AOT packets.
-Release30 is unchanged while checkpoint32 tests its frozen main268 tree. No phase/FPS/GPU claim.
+Release30 is unchanged while checkpoint33 tests its frozen main272 tree. No phase/FPS/GPU claim.
 [Evidence](docs/spikes/numeric-loan-main262.md).
 
 ## Core row metadata — actual shipping improves, 2 ms still failed
@@ -250,9 +263,9 @@ shipping Core/10k results are recorded above. Presentation timing remains open.
 Checkpoint30 is promoted through PR232: release `71bdd2e7` has the exact tested
 main252 tree `393eb78c`. All 23 required contexts and all eight push workflows
 succeeded; independent review, merge parents, author trailer and post-merge tree
-are verified. Later main253–268 persisted-session/mobile/haptics/profiler/workload/cache and
-diagnostic work remains outside that tested release. Checkpoint32 is active on
-frozen main268 as described above. This promotion does not approve a phase or distribution gate.
+are verified. Later main253–272 persisted-session/mobile/haptics/profiler/workload/cache,
+diagnostic and authoring work remains outside that tested release. Checkpoint33
+is active on frozen main272 as described above. This promotion does not approve a phase or distribution gate.
 [Portable evidence](docs/spikes/evidence/release-checkpoint-30/manifest.json).
 
 Typed ephemeral haptics now have a qualified main254 composition: both physics
@@ -566,7 +579,8 @@ performance gate is claimed. [Scope and evidence](docs/spikes/wasm-c-parallel.md
 
 ## Development and release overview — 2026-10-14
 
-The reviewed main271 baseline includes linked prefab authoring, the measured numeric-loan optimization,
+The reviewed main272 baseline includes linked prefab authoring and engine pin review,
+the measured numeric-loan optimization,
 Core sample/diagnostic tooling, profiler distributions, the Mac runner, Apple/Android host bindings, desktop
 haptics, the retained mobile Rust host, supported
 persisted native game checkpoints, and the opt-in cooked renderer families and
@@ -594,11 +608,12 @@ conformance hit its configured deadline. Main243 contains the reviewed macOS
 timeout repair. Checkpoint28 then froze main246 (`42e13e75`) at `be3422f8` on
 PR232 and finished with 13 required successes, nine failures and one skipped
 comparison. The reviewed isolated-lock and ordinary-owner Default repairs are
-merged in PR248. Checkpoint29 finished unpromoted with 22 required successes and the original Linux source-store lock failure. Checkpoint30 promoted exact reviewed main252 (`c1988638`, tree `393eb78c`) through PR232 after all 23 exact-head required contexts and eight workflows succeeded. Release is `71bdd2e7`; its parents, trailer and exact tested tree are verified. Later main253–270 work is outside that release. Checkpoint31 and checkpoint32
+merged in PR248. Checkpoint29 finished unpromoted with 22 required successes and the original Linux source-store lock failure. Checkpoint30 promoted exact reviewed main252 (`c1988638`, tree `393eb78c`) through PR232 after all 23 exact-head required contexts and eight workflows succeeded. Release is `71bdd2e7`; its parents, trailer and exact tested tree are verified. Later main253–272 work is outside that release. Checkpoint31 and checkpoint32
 are terminal and unpromoted, each with 22 required successes and one retained
-failure. Checkpoint32 candidate `e4faac52` remains frozen while the one-shot
-main270 Windows compiler-phase diagnostic has passed once; its result cannot
-substitute for the failed required context.
+failure. Checkpoint33 candidate `b3eb0a98` now freezes exact main272 tree
+`1c9687fc` for scheduled qualification. The one-shot main270 Windows compiler-phase
+diagnostic passed once; its result cannot substitute for checkpoint32's failed
+required context and no timeout repair is claimed.
 PR242 merged the private primitive-world composition; PR244/245 added native
 capture and outer in-memory checkpoints, PR246 added opaque ECS/world ownership,
 and PR247 added headless native session checkpoints. PR249 adds opt-in in-memory

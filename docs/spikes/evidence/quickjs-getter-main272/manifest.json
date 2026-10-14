@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "source": "f50ad9faf7acab670b64ef2085961bbaed1b4b5e",
+  "base": "62a3d09ff7d8ae7282c57bc49620950650337b7c",
+  "archive_sha256": "dde8e8428a73244d2f54b5914eb7a95c83a183fdd477530a4414abffa215b9c0",
+  "records": 25,
+  "payloads": 22,
+  "verifier_sha256": "b271b3e9fd638919c1d7677715364d6d0ccf214b22c7ad3d50ad6321d8bb40b8",
+  "producer_review_sha256": "862c8924f873e3a22e14fdec6c11c56a5f18f45477c8ea28d2d60a879c321389",
+  "scope": "Diagnostic tools only. Seven initial source checks include one expected invalid-lock refusal and one retained patch-context whitespace failure; exact-path packaging repair passes the eighth check. No current native execution, production adoption, timing or gate claim."
+}
