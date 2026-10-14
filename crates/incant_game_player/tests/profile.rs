@@ -67,7 +67,7 @@ fn profiler_reports_real_native_phases_and_preserves_default_gameplay_pcm() {
             String::from_utf8_lossy(&result.stderr)
         );
         let mut report: Value = serde_json::from_slice(&result.stdout).unwrap();
-        if mode.is_some() {
+        if let Some(heap_mode) = mode {
             // Retain the actual child stdout for protocol-consumer qualification.
             // This CI-profile fixture is not shipping/10k-entity performance proof.
             println!(
@@ -114,11 +114,11 @@ fn profiler_reports_real_native_phases_and_preserves_default_gameplay_pcm() {
             assert_eq!(profile["completed_frames"], 3);
             assert_eq!(profile["failed_frames"], 0);
             assert_eq!(profile["quickjs_heap"]["samples"], 3);
-            assert_eq!(profile["quickjs_heap"]["mode"], mode.unwrap());
+            assert_eq!(profile["quickjs_heap"]["mode"], heap_mode);
             assert_eq!(profile["quickjs_heap"]["invalid_samples"], 0);
             assert_eq!(
                 profile["quickjs_heap"]["latest"]["estimated_used_bytes"].is_null(),
-                mode == Some("maintained")
+                heap_mode == "maintained"
             );
             assert_eq!(profile["rust_allocations"]["installed"], true);
             assert_eq!(profile["tracy_process_transport"], false);
