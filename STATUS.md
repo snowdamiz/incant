@@ -31,6 +31,17 @@ The fresh full native replay above completes with zero reported overruns; it
 verifies successful composition, not a live recovery event or audible output
 quality. [Cause and qualification](docs/spikes/device-audio-xrun.md).
 
+## 2D native-window diagnosis — CPU-qualified plumbing
+
+The fresh Pearl Cove package passes its win, hazard-loss and wall-collision CPU
+routes, including exact HUD, flipbook and PCM checks. Two actual native-window
+attempts timed out; changing computer-use interaction alone did not resolve it.
+A default-off bounded log now records focus, suspension, size, surface outcomes
+and simulation progress without changing frame admission. Ordinary and observer
+player configurations pass 90 and 113 overlapping tests, with both strict lints.
+The new diagnostic shipping build and actual route diagnosis remain separate.
+[Source, retained timeouts and qualification](docs/spikes/native-window-eligibility.md).
+
 ## Repeated navigation-start cost — diagnostic complete
 
 A default-off observer now measures initial and repeated navigation starts in
