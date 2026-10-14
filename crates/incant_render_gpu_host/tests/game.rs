@@ -24,6 +24,8 @@ use std::{
     time::Duration,
 };
 type Game = HostedOfflineGameSession<NativeRenderHost<GpuRenderConsumer<Targets>>>;
+#[path = "game/model_refresh.rs"]
+mod model_refresh;
 #[path = "game/texture_refresh.rs"]
 mod texture_refresh;
 const FORMAT: wgpu::TextureFormat = wgpu::TextureFormat::Rgba8UnormSrgb;
