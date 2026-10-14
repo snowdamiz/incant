@@ -29,7 +29,7 @@ Per-present block allocation/native copying,
 Arc and mutex operations have observation overhead. Missing callback, zero,
 invalid, discard, abandoned and overflow states remain separate.
 
-## Separate native creation observer (source-only milestone)
+## Separate native creation observer (CPU-qualified foundation)
 
 The default-off macOS `diagnostic-compilation` feature adds a device-owned
 observer and hooks around the actual source/binary library and render/mesh/compute
@@ -39,5 +39,9 @@ anomaly counts rather than silently fabricating valid zero-duration samples.
 It changes no native options, cache/permutation policy, resource return values,
 normal scheduling or default feature graph. See
 `docs/spikes/native-compilation-observer.md` for exact scope and bounds.
-This new seam is authored only: its CPU controls and actual hardware behavior
-are not yet qualified. Existing presentation qualification does not cover it.
+The original source-only status is superseded by source
+`dda197ae907a5d34e7c7a69a4041e1ec4f45aee2`: 19 exact collector controls and
+actual HAL/host feature-on/off compilation plus strict lint passed. No native
+creation API or GPU execution follows from that result. Host integration and
+actual hardware observations remain pending; existing presentation evidence
+does not qualify compilation timing.

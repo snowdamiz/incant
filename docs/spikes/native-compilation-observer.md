@@ -1,7 +1,8 @@
-# Native Metal creation observation: source milestone
+# Native Metal creation observation: CPU qualification
 
 This private, default-off source milestone adds `diagnostic-compilation` only to
-the pinned Metal HAL. It has not been compiled or exercised on a GPU. Native
+the pinned Metal HAL. Its source003 CPU qualification passed; no native creation
+API or GPU was exercised. Native
 player/renderer feature forwarding, cold binding and final sidecar output are
 still pending; no public exporter or default feature selection changes here.
 The existing presentation and audio evidence is unchanged.
@@ -60,11 +61,11 @@ scope refusal, immutable entry context, exact-once result/error propagation,
 unwinding, bounded overflow, pending snapshots, destruction/recreation,
 saturation, handle lifetime, backward completion preserving native error, valid
 zero duration, backward entry/snapshot retention, anomalies without retained rows
-anomaly-counter saturation and identity exhaustion. They are authored only, not passing evidence.
+anomaly-counter saturation and identity exhaustion. They passed in the exact copied collector under edition2021.
 Source milestone `052e032e1eb543e3c177603651d1f7b3d5560d36` and its
 13-test freeze are retained; this successor fixes its saturating-clock ambiguity.
-The native call-site correspondence still needs independent source review and
-an actual feature-on CPU compile/lint. Subsequent hardware qualification must
+The native call-site correspondence received independent source review; actual
+feature-on/off HAL compilation and strict lint passed. Subsequent hardware qualification must
 retain the original shader options and errors rather than use mocks as proof.
 
 The next host step is to bind immediately after device creation and before the
@@ -81,3 +82,25 @@ attempt executed these controls. Both failures are retained externally. The
 compiler successor explicitly borrows NSString, records every pinned stage, and
 uses checked compare-exchange identity allocation without the deprecated atomic
 API. No native call, option, return value or scheduling behavior changes.
+
+## Retained CPU qualification
+
+Source `dda197ae907a5d34e7c7a69a4041e1ec4f45aee2` passed 19 pure controls,
+host/test strict Clippy, and explicit actual-HAL feature-on and feature-off strict
+Clippy under Rust1.99, arm64, edition2021, the CI profile, locked/offline,
+jobs2/Rayon2. The copied test executable is SHA256
+`1262318b5c9911ff9a88d9280c08b1a0e53b0676ccef2e0f2878a2533e4b68e5`.
+The native hooks compile against the real pinned Metal API, but no device,
+native creation method, window, GPU or listener was executed. The exact fixture
+model executes the same collector/tests bytes without adding upstream example
+or dev dependencies to the engine.
+
+The [compact receipt](evidence/native-compilation-observer/cpu-qualification.json)
+binds all three source generations, the two retained failures, the successful
+commands/logs, compiler feature rows and copied test artifact. External originals
+remain at its recorded evidence root. All 80 registry package identities match
+the producing engine lock. The final supervisor returned0 and reaped every
+managed child; the shared build target was released. These are CPU correctness
+and compilation results, not complete-game shader-stall evidence. Player feature
+forwarding, cold catalog binding, host sidecar and actual live observation remain
+pending.
