@@ -6,6 +6,8 @@ mod haptics;
 mod ime;
 mod input;
 mod pointer;
+#[cfg(feature = "diagnostic-pointer-input")]
+mod pointer_trace;
 mod probe;
 mod surface;
 mod termination;
@@ -85,6 +87,8 @@ struct Options {
     stop_after: Option<u64>,
     probe: bool,
     relative_pointer: Option<pointer::Sensitivity>,
+    #[cfg(feature = "diagnostic-pointer-input")]
+    pointer_trace: bool,
 }
 impl Options {
     fn parse(args: &[String]) -> session::Result<Self> {
@@ -111,6 +115,18 @@ impl Options {
             relative_pointer = Some(pointer::Sensitivity::new(scale.parse()?)?);
             rest = tail;
         }
+        #[cfg(feature = "diagnostic-pointer-input")]
+        let pointer_trace = if let [flag, tail @ ..] = rest
+            && flag == "--pointer-trace"
+        {
+            if relative_pointer.is_none() {
+                return Err("pointer trace requires explicit relative-pointer option".into());
+            }
+            rest = tail;
+            true
+        } else {
+            false
+        };
         let stop_after = match rest {
             [] => None,
             [flag, n] if flag == "--stop-after" => {
@@ -146,6 +162,8 @@ impl Options {
             stop_after: if probe { Some(40) } else { stop_after },
             probe,
             relative_pointer,
+            #[cfg(feature = "diagnostic-pointer-input")]
+            pointer_trace,
         })
     }
 }
@@ -233,7 +251,26 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
     if options.probe {
         window.set_focus();
     }
+    #[cfg(feature = "diagnostic-pointer-input")]
+    let mut pointer_trace = options.pointer_trace.then(pointer_trace::Trace::new);
     let code = event_loop.run_return(|event, _, flow| {
+        #[cfg(feature = "diagnostic-pointer-input")]
+        let observation = pointer_trace.as_ref().map(|trace| {
+            trace.begin(
+                &event,
+                window.id(),
+                pointer.trace_state(Some([
+                    focused,
+                    suspended,
+                    platform_suspended,
+                    window.is_minimized(),
+                    surface.has_supported_size(),
+                    ui_input.awaiting_surface(),
+                    window.is_focused(),
+                    termination.requested(),
+                ])),
+            )
+        });
         termination.event(|exit| {
             let pointer_eligible = focused
                 && !suspended
@@ -603,11 +640,35 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                 clock.deadline()
             })
         };
+        #[cfg(feature = "diagnostic-pointer-input")]
+        if let (Some(trace), Some(observation)) = (&mut pointer_trace, observation) {
+            trace.end(
+                observation,
+                pointer.trace_state(Some([
+                    focused,
+                    suspended,
+                    platform_suspended,
+                    window.is_minimized(),
+                    surface.has_supported_size(),
+                    ui_input.awaiting_surface(),
+                    window.is_focused(),
+                    termination.requested(),
+                ])),
+            );
+        }
     });
     surface.cancel();
-    termination.finish(code, || {
+    #[cfg(feature = "diagnostic-pointer-input")]
+    let cleanup_before = pointer.trace_state(None);
+    #[cfg(feature = "diagnostic-pointer-input")]
+    let mut cursor_cleanup_ok = None;
+    let completion = termination.finish(code, || {
         // Both cleanup families are attempted, even if cursor release fails.
         let pointer_cleanup = pointer.release();
+        #[cfg(feature = "diagnostic-pointer-input")]
+        {
+            cursor_cleanup_ok = Some(pointer_cleanup.is_ok());
+        }
         let haptic_cleanup = gamepads.pause_haptics();
         pointer_cleanup?;
         haptic_cleanup?;
@@ -617,7 +678,20 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                 .map_err(Error::Ime)?;
         }
         Ok(())
-    })?;
+    });
+    #[cfg(feature = "diagnostic-pointer-input")]
+    if let Some(trace) = &mut pointer_trace {
+        trace.cleanup(
+            cleanup_before,
+            pointer.trace_state(None),
+            completion.is_ok(),
+            cursor_cleanup_ok,
+        );
+        // Observation failures cannot replace the original game/cleanup result.
+        // A missing or truncated diagnostic line makes the probe inconclusive.
+        let _ = trace.write(&mut std::io::stderr().lock());
+    }
+    completion?;
     if let Some(probe) = &probe {
         probe.validate()?;
     }
@@ -749,6 +823,36 @@ mod tests {
         ] {
             assert!(Options::parse(&args(bad)).is_err(), "{bad:?}");
         }
+    }
+    #[cfg(feature = "diagnostic-pointer-input")]
+    #[test]
+    fn diagnostic_trace_requires_explicit_host_capture_option() {
+        assert!(!Options::parse(&args(&[])).unwrap().pointer_trace);
+        assert!(Options::parse(&args(&["--pointer-trace"])).is_err());
+        let parsed = Options::parse(&args(&[
+            "--relative-pointer",
+            "1",
+            "--pointer-trace",
+            "--stop-after",
+            "20",
+        ]))
+        .unwrap();
+        assert!(parsed.pointer_trace);
+        assert_eq!(parsed.stop_after, Some(20));
+        assert!(
+            Options::parse(&args(&[
+                "--relative-pointer",
+                "1",
+                "--pointer-trace",
+                "--pointer-trace"
+            ]))
+            .is_err()
+        );
+    }
+    #[cfg(not(feature = "diagnostic-pointer-input"))]
+    #[test]
+    fn ordinary_build_rejects_private_trace_option() {
+        assert!(Options::parse(&args(&["--relative-pointer", "1", "--pointer-trace"])).is_err());
     }
     #[test]
     fn explicit_font_cache_and_tick_bound_parse_in_fixed_order() {

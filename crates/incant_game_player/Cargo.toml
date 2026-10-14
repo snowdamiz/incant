@@ -29,6 +29,8 @@ render-input = ["dep:incant_render_game", "dep:incant_render_native", "dep:incan
 render-gpu = ["render-input", "dep:incant_render_gpu_host", "dep:incant_render", "dep:thiserror"]
 
 native-window = ["render-gpu", "incant_game_runtime/device", "dep:tao", "dep:pollster", "dep:gilrs"]
+# Private observation experiment; absent from normal/exported player graphs.
+diagnostic-pointer-input = ["native-window"]
 
 # Select one physics kernel for the entire process, including build/test hosts.
 physics-deterministic = [

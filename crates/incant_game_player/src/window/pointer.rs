@@ -205,6 +205,14 @@ impl<C: Cursor> Pointer<C> {
             "captured": self.captured,
         })
     }
+    #[cfg(feature = "diagnostic-pointer-input")]
+    pub(super) fn trace_state(&self, context: Option<[bool; 8]>) -> super::pointer_trace::State {
+        super::pointer_trace::State::new(
+            context,
+            [self.captured, self.release_required, self.rearm_release],
+            [self.captures, self.releases, self.raw_events],
+        )
+    }
 }
 impl<C: Cursor> Drop for Pointer<C> {
     fn drop(&mut self) {

@@ -68,6 +68,62 @@ fn default_and_inactive_mode_never_acquire_or_observe_global_motion() {
         assert!(backend.0.borrow().calls.is_empty());
     }
 }
+#[cfg(feature = "diagnostic-pointer-input")]
+#[test]
+fn trace_snapshots_do_not_change_dispatch_input_cleanup_or_typed_failure() {
+    fn drive(
+        observe: bool,
+    ) -> (
+        serde_json::Value,
+        Vec<InputEvent>,
+        Vec<(bool, bool)>,
+        String,
+    ) {
+        let (mut pointer, backend) = owner(Some(2.));
+        let mut input = PendingInput::new();
+        let context = [true, false, false, false, true, false, true, false];
+        for operation in 0..5 {
+            let before = observe.then(|| pointer.trace_state(Some(context)));
+            match operation {
+                0 => {
+                    assert_eq!(press(&mut pointer, true).delivery, Delivery::Consume);
+                }
+                1 => {
+                    assert_eq!(release(&mut pointer).delivery, Delivery::Consume);
+                }
+                2 => {
+                    pointer.motion([1.25, -2.], true, &mut input).unwrap();
+                }
+                3 => {
+                    assert_eq!(press(&mut pointer, true).delivery, Delivery::Gameplay);
+                }
+                _ => {
+                    assert_eq!(pointer.escape().unwrap().delivery, Delivery::Consume);
+                }
+            }
+            if before.is_some() {
+                let _ = pointer.trace_state(Some(context));
+            }
+        }
+        backend.0.borrow_mut().fail_grab = true;
+        let before = observe.then(|| pointer.trace_state(Some(context)));
+        let failure = pointer
+            .button(MouseButton::Left, ElementState::Pressed, true)
+            .unwrap_err();
+        assert!(matches!(failure, Error::PointerCapture(_)));
+        if before.is_some() {
+            let _ = pointer.trace_state(Some(context));
+        }
+        let calls = backend.0.borrow().calls.clone();
+        (
+            pointer.report(),
+            input.events().to_vec(),
+            calls,
+            failure.to_string(),
+        )
+    }
+    assert_eq!(drive(false), drive(true));
+}
 #[test]
 #[allow(deprecated)] // Tao requires the legacy modifiers field when constructing this event.
 fn explicit_click_consumes_only_its_release_and_captured_mouse_bypasses_ui() {
