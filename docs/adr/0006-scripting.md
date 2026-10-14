@@ -57,20 +57,24 @@ Shipped native builds translate modules to C with wasm2c and compile them into
 the signed binary on every native platform (decision 20). This needs no executable
 memory at runtime, so it is the iOS route, and using it everywhere keeps one
 shipped code path. Wasmtime with JIT and hot reload serves the editor and
-development builds; browsers run native WebAssembly. Each target still needs
-proof, which the Phase 1 gate requires on all four reference devices. Wasmtime's
+development builds; browsers run native WebAssembly. Existing target builds remain required. Under the director's 2026-10-13 decision,
+the Phase 1 device gate requires actual execution only on this Mac; other-device
+execution is deferred, nonblocking follow-up. Wasmtime's
 ordinary serialized AOT loader is not evidence of an iOS-compatible static
 link/signing path, which is why it is not the shipped route. Deterministic Wasm also requires canonical floating-point/NaN behavior,
 stable iteration and deterministic imports; disabling relaxed SIMD alone is not
 sufficient. Static Hermes/typed-TS-to-Wasm remains a Phase 1 spike, not an adopted runtime.
 Decision 18 fixes the adoption rule: adopt it for shipped builds only if it passes
 100 percent of the SDK conformance suite, runs at least twice as fast as bytecode
-on the script benchmark on both reference phones, needs no JIT on iOS, adds under
-5 MB to the mobile binary and has an upstream release line with security fixes.
+on the matched shipping-profile script benchmark on this Mac, needs no JIT on iOS,
+adds under 5 MB to the mobile binary and has an upstream release line with security
+fixes. The iOS architecture/size clauses use build/inspection evidence; reference-
+phone speed comparisons are deferred and do not block the decision.
 Otherwise TypeScript stays on bytecode. Record the outcome here at the Phase 1 gate.
 
-The script gate is 2 ms/frame at p95 for 10,000 scripted entities on iPhone 13
-and Pixel 6 in the shipping profile. Desktop benchmarks do not pass it. Deadlines
+The script gate is 2 ms/frame at p95 for 10,000 scripted entities on this Mac
+in the shipping profile, recording model/OS and a matched baseline. Phone
+measurements are deferred, nonblocking follow-up and are not inferred from Mac results. Deadlines
 and memory limits remain denial-of-service safeguards, not a proof against VM
 vulnerabilities. See the [migration review](../spikes/performance-plan-v4-review.md).
 
@@ -84,4 +88,5 @@ zero-copy access or complete SDK conformance. The first
 executes a trusted build-linked module in a compiler-free macOS shipping player.
 It has bounded fuel, C-contained traps and numeric/structural rejection tests;
 MSVC, other-platform execution, full exports/SDK coverage, deterministic
-arithmetic and the device gates remain open.
+arithmetic remain separate requirements. Historical other-device gaps are
+deferred, nonblocking follow-up under the 2026-10-13 policy; they are not passed.

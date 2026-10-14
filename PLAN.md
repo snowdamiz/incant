@@ -4,6 +4,7 @@ Engine name: **Incant** (decided 2026-10-08; the shortlist it was chosen from is
 Launch game: **Driftwake** (decided 2026-10-10).
 
 Plan author: Claude, for Andrey Yurlov. Date: 2026-10-08. Revision 2 (same day): renamed engine, added agent-first execution model and Claude ACP visual handoff. Revision 3 (2026-10-09): filled the networking and online-services gaps: transport and service rows in 2.1 and 2.2, Phase 6 rewritten, Sections 6.8 and 6.10, additions to Phases 5, 7, 8 and 9, risks, metrics, budget, open decisions 10 to 17, and network entries in Appendices A to C. The same revision filled engine gaps (navigation, 2D, text and localization, lighting for runtime-assembled content, gameplay analytics, Steam Deck and video playback, editor versioning, haptics), recorded the decided stack rows (Rapier, Loro, canonical JSON, React) and the dispositions of open decisions 1 to 9, and re-baselined the timeline at the top of Section 5. Revision 4 (2026-10-10): added script and shader performance requirements: a bulk query API for scripts, build-time script bytecode, a per-frame script budget enforced on the reference phones, and offline shader compilation with pipeline caching and pre-warming. The same revision adopted the performance architecture by director instruction: a native runtime data path separate from authoring (2.6), WebAssembly modules as a native-speed script tier, physics determinism as a per-project mode, temporal upscaling with dynamic resolution and native backend interop, a shipping build profile, per-PR performance gates, browser-native scripts on the web, per-scene CRDT documents at 100,000-entity scale, a Physics workstream (6.14), a competitive benchmark against Unity and Godot, and open decisions 18 and 19. ADRs 0002, 0003, 0006 and 0008 were updated to match in revision 5. Revision 5 (2026-10-10): resolved every open decision by director instruction, so Section 12 is now a decision record followed by the human-owned actions that remain; corrected the physics determinism description against Rapier 0.36's feature contract and the CRDT benchmark summary; chose wasm2c for shipped WebAssembly modules; and added the business model (1.4), Driftwake pricing, marketing and support (7.6), external reviews, license auditing and a community role. Revision 6 (2026-10-10): removed name clearance and package reservations, moved store accounts and signing certificates from Phase 0 to Phase 5 store uploads, and replaced reference-phone purchases with hosted real devices in AWS Device Farm. Revision 7 (2026-10-10): removed calendar windows, phase durations, the timeline chart and the ship-date target by director instruction; phases advance only through their exit gates. Revision 8 (2026-10-10): made outside services local-first by director instruction: development, CI and integration tests run every third-party service the plan depends on as a local container or in-process substitute, and hosted services are used only where a gate needs the real one (Section 2.7).
+Revision 9 (2026-10-13): the director makes actual desktop testing on the available Mac the only device qualification required for development and phase gates. Mobile and other-device execution/performance comparisons are deferred, nonblocking follow-up; hosted CI, build checks and non-device release obligations remain required.
 Scope: from the engine foundation to Driftwake live on three stores and Engine 1.0 released. The plan sets no calendar dates; exit gates alone mark progress.
 
 ---
@@ -70,6 +71,28 @@ possible, using containers such as Docker. Development, CI and integration tests
 use local substitutes; hosted services are reserved for what cannot be reproduced
 locally (Section 2.7). Cloud and identity accounts are therefore needed only when
 a gate requires the real service. This changes the plan; it does not approve any gate.
+
+
+Director decision, 2026-10-13: “Ensure that only desktop testing on this mac is
+required for the gate. We will test on mobile devices and other sometime later,
+dont make it a requirement for the gate. Keep developing.” Actual execution and
+performance measurements on the available local Mac are the device evidence for
+development and phase gates. Record its model, chip, OS, build profile and matched
+baseline; retain the numerical and observable acceptance criteria. Another Mac
+model, Windows/Linux machine, mobile phone, tablet, Steam Deck or hosted device
+is not a prerequisite. Test mobile quality tiers on this Mac where applicable;
+this does not establish mobile hardware behavior.
+
+This supersedes device-execution prerequisites throughout this plan and its ADRs,
+including reference-phone benchmarks and decisions 18/19. Mobile and other-device
+functional, visual, performance, thermal, power and network-transition evidence
+remain explicitly deferred, nonblocking follow-up. Do not label those checks
+passed, infer their results from this Mac or remove platform implementations.
+Existing hosted CI/build matrices, every required exact-head release context,
+correctness/security tests, shipping-profile measurement requirements and
+non-device release obligations stay in force. Distribution signing, store
+certification, legal/account obligations and director phase approval are not
+waived. A Mac result or this policy change alone does not complete a gate.
 
 ---
 
@@ -250,15 +273,15 @@ Every third-party service in this plan is developed and tested against a local s
 | Steam, Apple and Google player sign-in | Local fakes of the Steam ticket API and Apple/Google OpenID Connect behind the player service's provider boundary | Real platform sign-in in each store's sandbox |
 | Store-native cloud saves, achievements and purchase hooks | A file-backed implementation of the platform-services abstraction; StoreKit configuration files for Apple purchase flows | Store-specific behavior in each store's sandbox, then store review |
 | TURN and STUN for WebRTC | coturn container | Carrier-grade NAT on real cellular networks |
-| Network conditions | Container network shaping (latency, jitter, loss, NAT) driven by the Section 6.8 latency profiles | The Phase 6 cellular and Wi-Fi-to-cellular gate on real phones |
-| AWS Device Farm phones | iOS simulator and Android emulator for functional runs | Every performance, shader-hitch and device gate; simulators never count |
+| Network conditions | Container network shaping (latency, jitter, loss, NAT) driven by the Section 6.8 latency profiles | Phase 6 gates use modeled transitions on the actual local Mac; real cellular and Wi-Fi-to-cellular phone execution is deferred, nonblocking follow-up |
+| AWS Device Farm phones | iOS simulator and Android emulator for functional runs | Deferred mobile execution/performance follow-up; not a development or phase-gate prerequisite. Mac gates use actual local Mac execution, not simulator evidence |
 | OpenAI (in-engine agent) | A recorded-response replay server for protocol and tool-loop tests; an optional local OpenAI-compatible model server for smoke runs | Live agent evaluations, which measure the real provider |
 
 Rules:
 - Code may depend on a hosted-only API only through a boundary that has a local substitute in this table. A new outside dependency adds its row before code relies on it.
 - Local substitutes are open source under licenses the dependency allowlist accepts, and run without accounts, tokens or telemetry.
 - Development, CI, staging and engine users' self-hosted deployments run the same service images (Section 6.10). AWS-specific code is limited to deployment in `services/deploy/` and thin adapters behind those boundaries.
-- Results from the local stack are labeled as local. They prove behavior against the protocol, not the hosted service, and never satisfy a gate that names real devices, a real provider, a store or a production region.
+- Results from the local stack are labeled as local. They prove behavior against the protocol, not the hosted service, and never establish a real-device, live-provider, store or production-region result. Other-device results are deferred under revision 9; non-device hosted-service and distribution obligations remain.
 
 ---
 
@@ -415,7 +438,7 @@ The agents do the building. Humans direct, review, and do what agents cannot.
 - Weekly the director reviews the handoff log, eval results, and friction logs, and resolves any routing disputes.
 - Agents never self-approve a routing exception. Ambiguity defaults to the split pattern.
 - Both agents dogfood the product. Astra and Claude build Driftwake content through the in-engine agent wherever possible, which is what the provenance metric measures.
-- Agent-first execution runs around the clock and parallelizes by crate; phases advance as fast as their exit gates pass, not on a calendar. Hosted device testing, store review and human-owned actions are the external dependencies agents cannot shorten.
+- Agent-first execution runs around the clock and parallelizes by crate; phases advance as fast as their exit gates pass, not on a calendar. Store review and required human-owned actions are external dependencies agents cannot shorten; additional hosted device testing is deferred and does not block current gates.
 
 ---
 
@@ -428,6 +451,10 @@ Work began on 2026-10-08. Phases overlap where their dependencies allow. Each ph
 | 0 | 2026-10-08 | Spikes done; gate open: staffing, nightly history, live revocation, director approval |
 | 1 | 2026-10-08 | In progress |
 | 2 to 9 | — | Not started |
+
+Device references in phase deliverables describe retained platform features or
+deferred follow-up under revision 9. Only actual testing on this Mac is required
+as device evidence; existing hosted CI and non-device delivery obligations remain.
 
 ### Phase 0: Foundation
 
@@ -445,7 +472,7 @@ Deliverables:
 - Director, part-time graphics reviewer, and contract arrangements in place for Phases 0 and 1.
 
 Exit gate:
-- All six spikes pass with written results.
+- All six spikes pass with written results on the available Mac and their applicable hosted CI checks; additional device execution is deferred under revision 9.
 - Spike 6 round-trips a handoff end to end with no credentials written to disk.
 - Spike 4 succeeds on at least 14 of 20 tasks without human help.
 - CI produces a runnable artifact for every target nightly.
@@ -478,9 +505,9 @@ Deliverables:
 - Script bytecode: the cook step precompiles every script to QuickJS bytecode, so shipped builds and headless runs parse no TypeScript or JavaScript at startup. Bytecode is tied to the runtime version, produced only by the cook step, and covered by the package's content hashes. The runtime never loads bytecode from project files, mods or the network, because QuickJS does not verify bytecode. Source maps are kept for crash symbolication.
 - Runtime data path (Section 2.6): cooked binary scenes, the native ECS world, direct component access for scripts, the per-frame command buffer, world snapshots for observation, and binary saves. The existing document-backed play session migrates to it.
 - WebAssembly modules: a module host with the same capability model, bulk query views and command buffer as TypeScript; a Rust SDK generated from the schema registry; Wasmtime with JIT and hot reload in the editor and development builds; shipped builds on every native platform translate modules to C with wasm2c, the approach Firefox uses to sandbox libraries, and compile them into the signed binary, which is the only route on iOS. Relaxed SIMD is disabled in rollback projects to keep arithmetic deterministic.
-- Spike: ahead-of-time compilation of typed TypeScript, with Static Hermes as the first candidate and a TypeScript-subset-to-WebAssembly compiler as the alternative. Adopt only if it passes the SDK conformance suite and beats bytecode by a measured margin on the reference phones (decision 18).
+- Spike: ahead-of-time compilation of typed TypeScript, with Static Hermes as the first candidate and a TypeScript-subset-to-WebAssembly compiler as the alternative. Adopt only if it passes the SDK conformance suite and beats bytecode by a measured margin on this Mac (decision 18); phone comparisons are deferred.
 - Profiler: Tracy integration with CPU zones per system and script, GPU timestamp queries, memory and allocation tracking, and on-device capture over the network from phones.
-- Shipping build profile for the runtime: fat link-time optimization, one codegen unit, abort on panic, symbols split for crash reporting. All device performance gates are measured with this profile.
+- Shipping build profile for the runtime: fat link-time optimization, one codegen unit, abort on panic, symbols split for crash reporting. Gate performance is measured on this Mac with this profile; later other-device comparisons use the same profile.
 - Headless runner: run a project for N seconds on the runtime world, capture frames, logs and state snapshots, exit with a status.
 - Input: keyboard, mouse, gamepad, touch with gesture recognition; haptics (gamepad rumble and mobile haptic feedback) through one API.
 - Save system: serialize game state to a versioned format.
@@ -489,12 +516,12 @@ Deliverables:
 - Localization: string tables as typed document assets with per-locale values, plural, select and gender rules (an ICU MessageFormat subset), fallback chains, locale-aware number and date formatting through ICU4X, runtime locale switching, a pseudo-localization mode and missing-string reports. The editor UI ships in English at 1.0 and reuses the same string tables for its own localization in 1.1.
 
 Exit gate:
-- A "Core Sample" test game (third-person character on a terrain with enemies, pickups, UI, music) runs at 60 fps on an M1 MacBook Air, a mid-range Windows laptop, an iPhone 13, and a Pixel 6, written entirely in TypeScript against the SDK with no editor.
+- A "Core Sample" test game (third-person character on a terrain with enemies, pickups, UI, music) runs at 60 fps on this Mac, written entirely in TypeScript against the SDK with no editor. Record actual hardware/OS and shipping profile; the previously named reference devices are deferred comparison targets.
 - Headless runner used in CI to play Core Sample and assert on game state.
-- Core Sample's enemies navigate by navmesh, its UI passes pseudo-localization and renders one right-to-left and one CJK locale correctly, and a 2D sample scene (tilemap, sprites, 2D physics) runs on the same four devices.
-- On the iPhone 13 and the Pixel 6, Core Sample's scripts stay within 2 ms per frame at p95 with ten thousand scripted entities, and no gameplay frame exceeds twice the frame budget because of shader or pipeline compilation. Desktop measurements do not count toward this gate.
+- Core Sample's enemies navigate by navmesh, its UI passes pseudo-localization and renders one right-to-left and one CJK locale correctly, and a 2D sample scene (tilemap, sprites, 2D physics) runs on this Mac; other-device runs are deferred.
+- On this Mac, Core Sample's scripts stay within 2 ms per frame at p95 with ten thousand scripted entities, and no gameplay frame exceeds twice the frame budget because of shader or pipeline compilation. Measure the shipping profile against a matched Mac baseline; this is the current gate, with phone measurements deferred.
 - Core Sample runs on the runtime data path: the shipped binary passes the dependency test, and its scripts never serialize world state per tick.
-- A WebAssembly gameplay module runs on all four devices, compiled ahead of time on the iPhone, and its per-frame cost on both phones is recorded against the same system written in TypeScript.
+- A shipped native WebAssembly gameplay module runs through wasm2c on this Mac, and its per-frame cost is recorded against the same system written in TypeScript. Existing target builds and iOS no-JIT architecture remain required; device execution on the other targets is deferred.
 
 ### Phase 2: Editor and document model (overlaps Phase 1)
 
@@ -518,7 +545,7 @@ Deliverables:
 Exit gate:
 - Core Sample can be rebuilt from an empty project using only the editor in under four hours by someone who has never seen the code.
 - Every editor action is a command on the bus (verified by a test that disables direct document mutation and runs the UI test suite).
-- On a 100,000-entity scene, the editor applies an edit in under 100 ms and keeps the viewport at 60 fps on the M1 MacBook Air.
+- On a 100,000-entity scene, the editor applies an edit in under 100 ms and keeps the viewport at 60 fps on this Mac, with its actual model/OS recorded.
 - Undo/redo passes a fuzz test of ten thousand random command sequences with document equality checks.
 - The 2D platformer template is rebuilt from an empty project through the editor alone and plays with tilemap collision, sprite animation and a following camera.
 
@@ -587,7 +614,7 @@ Deliverables:
 
 Exit gate:
 - Core Sample ships to TestFlight, Google Play internal testing, and a private Steam app, from CI, with no manual steps beyond pressing a button.
-- Cold start under three seconds on an iPhone 13 and under five seconds on a Pixel 6.
+- Cold start under three seconds on this Mac in the shipping profile. The iPhone 13 three-second and Pixel 6 five-second comparisons are deferred, nonblocking follow-up.
 
 ### Phase 6: Networking and online services
 
@@ -630,12 +657,12 @@ Deliverables, editor and agent:
 Editor collaboration: real-time multi-user editing of a project (the CRDT document over this transport through a collaboration relay) is Engine 1.1 scope. Engine 1.0 ships single-user cloud sync (Phase 2) and journal-based session sharing.
 
 Exit gate:
-- Core Sample runs four-player co-op across desktop and mobile with 150 ms simulated latency and feels acceptable to a playtest group.
+- Core Sample runs four-player co-op on this Mac with 150 ms simulated latency and feels acceptable to a playtest group. Real desktop/mobile cross-device play is deferred; the shared platform implementations remain in scope.
 - Desync detection catches all seeded determinism bugs in a test suite.
-- A client on cellular behind carrier NAT joins by room code through the relay, backgrounds the app for 60 seconds, returns, and is still in the run; the same holds for a Wi-Fi to cellular switch.
+- On this Mac, a client under the local network profiles joins by room code through the relay, survives the modeled 60-second suspension and network transition, and rejoins the run. Actual cellular/carrier-NAT, phone backgrounding and Wi-Fi-to-cellular execution are deferred; modeled tests do not establish those device results.
 - A current-version client and a previous-version client complete a session together; a client two versions behind is refused with the forced-update flow.
 - Sessions, relay and player services pass a load test at twice the Phase 8 projected launch concurrency in one region, and a self-hosting run from the documentation on a clean machine works without any Incant credentials.
-- Determinism CI passes on all four reference device classes, or the plan records which architecture classes rollback cross-play is limited to.
+- Mac determinism tests and the existing hosted determinism CI pass; record the architecture classes actually covered and keep unsupported cross-architecture rollback disabled. Additional reference-device comparisons are deferred and do not block the gate.
 
 ### Phase 7: Driftwake vertical slice (overlaps 5 and 6)
 
@@ -667,7 +694,7 @@ Engine deliverables:
 - Public beta with a thousand invited users. Telemetry opt-in. Weekly releases.
 - Engine repository and documentation go public under MIT OR Apache-2.0 with the beta; Incant Cloud opens to beta users; Discord and GitHub Discussions open with the community lead in place.
 - Engine 1.0 release candidate.
-- Competitive benchmark: Core Sample reimplemented in Unity and Godot by the same team, measured on every reference device for frame time, cold start, memory and build size. Target: Incant within 10 percent or better on each. Publication is subject to each engine's license terms on benchmarks, reviewed by a human.
+- Competitive benchmark: Core Sample reimplemented in Unity and Godot by the same team, measured on this Mac for frame time, cold start, memory and build size. Target: Incant within 10 percent or better on the matched Mac workloads; other-device comparisons are deferred. Publication is subject to each engine's license terms on benchmarks, reviewed by a human.
 - Live-service readiness: load test at twice projected launch concurrency in every launch region, runbooks, status page, alerting, a backup restore drill, a staffed on-call rotation, and cross-version compatibility (current and previous client) tested in CI.
 - Release channels (stable, beta, nightly), a signed editor updater (Tauri updater with a human-held signing key; offline installers stay available), per-project runtime pinning so a shipped game bundles the runtime it was tested with, and a support policy: each 1.x stable receives fixes for twelve months.
 
@@ -709,6 +736,10 @@ Browser mode, the 2D pipeline, screen-space GI and hardware ray tracing all stay
 
 Each workstream lists its human owner (the reviewer accountable for it), its first milestone, its key design choices, and its tests. Build execution for every workstream follows Section 4: Astra in Codex builds, and anything matching the visual rule in 4.2 is handed to Claude 5.5 over ACP.
 
+Workstream device test lists retain planned coverage. Under revision 9, execution
+on mobile or other devices is deferred, nonblocking follow-up; use this Mac for
+current device gates and preserve existing automated hosted checks.
+
 ### 6.1 Document model and command bus
 - Owner: engine lead.
 - First milestone: Phase 0 Spike 2.
@@ -724,8 +755,8 @@ Each workstream lists its human owner (the reviewer accountable for it), its fir
 ### 6.3 Scripting
 - Owner: scripting engineer.
 - First milestone: Phase 0 Spike 3.
-- Choices: QuickJS for portability and sandboxing; V8 optional on desktop. TS compiled with a bundled SWC, then to QuickJS bytecode at cook time. Bindings generated from the schema registry so the SDK never drifts. Hot reload preserves entity state where types match. A bulk query API over typed-array component views is the default for per-tick logic, so script cost scales with systems rather than entities. Scripts get a per-frame time budget of 2 ms at p95 on the reference phones, shown in the profiler and enforced in CI. Scripts access the runtime world directly (Section 2.6), never through the command bus. WebAssembly modules, Rust first, are the native-speed tier: JIT and hot reload in the editor, ahead-of-time native code at export. Web builds run TypeScript in the browser's JavaScript engine. Ahead-of-time TypeScript is a Phase 1 spike (decision 18).
-- Tests: SDK conformance suite, sandbox escape tests, hot reload state preservation tests, bytecode tamper and version-mismatch tests, and performance tests with ten thousand scripted entities measured on the iPhone 13 and the Pixel 6 against the per-frame budget. Desktop benchmarks are informative only. Phase 0 measured one thousand entities on an Apple M5 Pro. The same conformance suite runs against the QuickJS, browser and WebAssembly hosts; module build sandbox tests confirm that disallowed build scripts and procedural macros are refused.
+- Choices: QuickJS for portability and sandboxing; V8 optional on desktop. TS compiled with a bundled SWC, then to QuickJS bytecode at cook time. Bindings generated from the schema registry so the SDK never drifts. Hot reload preserves entity state where types match. A bulk query API over typed-array component views is the default for per-tick logic, so script cost scales with systems rather than entities. Scripts get a per-frame gate budget of 2 ms at p95 on this Mac in the shipping profile, shown in the profiler; phone enforcement is deferred. Existing hosted CI remains required. Scripts access the runtime world directly (Section 2.6), never through the command bus. WebAssembly modules, Rust first, are the native-speed tier: JIT and hot reload in the editor, ahead-of-time native code at export. Web builds run TypeScript in the browser's JavaScript engine. Ahead-of-time TypeScript is a Phase 1 spike (decision 18).
+- Tests: SDK conformance suite, sandbox escape tests, hot reload state preservation tests, bytecode tamper and version-mismatch tests, and performance tests with ten thousand scripted entities measured on this Mac against the per-frame budget. Phone comparisons are deferred and are not prerequisites. Phase 0 measured one thousand entities on an Apple M5 Pro. The same conformance suite runs against the QuickJS, browser and WebAssembly hosts; module build sandbox tests confirm that disallowed build scripts and procedural macros are refused.
 
 ### 6.4 Editor
 - Owner: editor lead.
@@ -812,7 +843,7 @@ Tests: service integration and chaos tests (simulated region loss, Postgres fail
 
 ### 6.12 2D
 - Owner: rendering lead, with the editor lead for tools.
-- First milestone: Phase 1 sprite, tilemap and 2D physics sample on all four reference devices.
+- First milestone: Phase 1 sprite, tilemap and 2D physics sample on this Mac; other reference-device execution is deferred.
 - Choices: sprites, atlases, nine-slice, sorting layers and tilemaps in `incant_2d` on the shared render graph; Rapier 2D behind the ADR 0003 physics boundary; pixel-perfect camera; autotile rules in the Phase 2 editor; 2D lights in Phase 4. Out of scope for 1.0: skeletal 2D animation, isometric and hex tilemaps.
 - Tests: golden images for sprite sorting and pixel-perfect rendering, atlas packing property tests, tilemap collision tests, 2D physics determinism, the 2D platformer template exit gate.
 
@@ -826,8 +857,8 @@ Tests: service integration and chaos tests (simulated region loss, Postgres fail
 - Owner: core engine engineer.
 - First milestone: Phase 1 per-project determinism variants with Core Sample on the fast variant.
 - Choices: Rapier 3D and 2D behind the Rust-owned boundary (ADR 0003). Both native variants enable the multithreaded solver, which Rapier guarantees bit-identical to its serial path. The fast variant uses hardware math and adds 8-lane SIMD where the target benefits; the deterministic variant uses `enhanced-determinism`, which forces software math and 4-lane SIMD, and is selected by projects that need rollback or exact cross-platform replays. Stable entity IDs cross the boundary, so a backend change does not touch scripts or documents.
-- Driftwake-scale benchmark, completed before Phase 6 starts: destructible props, five hundred dynamic bodies, four characters and enemy crowds on the mobile and desktop tiers, comparing Rapier fast, Rapier deterministic and Jolt through a maintained C shim. The result updates ADR 0003; the backend changes only on measured evidence (decision 19).
-- Tests: determinism tests per variant, cross-platform checksum comparison for the deterministic variant, per-step budgets on the reference phones, and the benchmark scenes in nightly CI.
+- Driftwake-scale benchmark, completed before Phase 6 starts: destructible props, five hundred dynamic bodies, four characters and enemy crowds on this Mac using the mobile and desktop workload tiers, comparing Rapier fast, Rapier deterministic and Jolt through a maintained C shim. Other-device comparisons are deferred. The result updates ADR 0003; the backend changes only on measured evidence (decision 19).
+- Tests: determinism tests per variant, cross-platform checksum comparison for the deterministic variant, per-step budgets on this Mac, and the benchmark scenes in existing CI. Reference-phone step budgets remain deferred follow-up.
 
 ---
 
@@ -882,10 +913,10 @@ A 3D co-op action roguelite exercises everything: 3D rendering on mobile and des
 ## 8. Quality, testing, and release engineering
 
 - **Development and release CI (director decision, 2026-10-11):** run all applicable locally feasible tests and review before merging development PRs into `main`; require the fast hosted development check. Approximately every three hours, freeze a snapshot of `main` on `codex/release-candidate` and open one PR to `release`. Comprehensive CI gates that exact candidate, including: build all crates, unit tests, schema validation, TS SDK conformance, the runtime dependency test, service and multi-client integration tests against the Section 2.7 local stack on Linux runners, and a dependency license check (cargo-deny and an npm license checker against an allowlist) that regenerates THIRD_PARTY_NOTICES.md.
-- **Performance gates on release checkpoints containing runtime changes:** a Core Sample run in the shipping profile on a reference desktop and a reference phone, failing on frame-time, script-time or memory regressions over 5 percent, with Tracy captures attached to the PR.
-- **Comprehensive release checkpoints and nightly device/soak work:** checkpoints include full target builds, golden-image rendering tests, headless play-test suite on Core Sample and Driftwake, agent eval harness, device farm smoke tests, performance budgets, four-client network soak with bots under the latency profiles on the local stack, determinism checksum comparison across reference device classes, script time budget and shader-hitch checks on the reference phones. These run on hosted real devices in AWS Device Farm, using the reference models or the nearest available ones; Incant buys no phones.
+- **Performance gates on release checkpoints containing runtime changes:** a Core Sample run in the shipping profile on this Mac, failing on frame-time, script-time or memory regressions over 5 percent against a matched Mac baseline, with Tracy captures attached to the PR. Other-device comparisons are deferred, nonblocking follow-up; compile-only or mock results do not replace actual Mac measurements.
+- **Comprehensive release checkpoints and deferred device work:** preserve every configured hosted workflow, full target build, required check context and existing automated test, including hosted Metal/Vulkan/Dx12 numerical checks. Core Sample/Driftwake play tests, agent evals, service soak, determinism and security obligations remain. Current device performance/script/shader-hitch gate evidence comes from this Mac. Additional real-phone/device-farm smoke, performance and cross-device comparisons are deferred follow-up, not gate prerequisites; no existing hosted check is removed or converted to a skip.
 - **Weekly:** store-submission dry run on one platform in rotation, security dependency audit, crash report triage, service load test in one region, backup restore check.
-- **Checkpoint integration:** keep the candidate frozen while checks run; fix failures in `main`, then advance the candidate and rerun all affected validation. Merge into `release` only when every required check passes. A checkpoint is a tested integration baseline, not distribution publication or phase-gate approval. Missing reference-phone, service, performance and live-evaluation evidence remains open; changing CI cadence does not waive it. See [ADR 0014](docs/adr/0014-ci.md).
+- **Checkpoint integration:** keep the candidate frozen while checks run; fix failures in `main`, then advance the candidate and rerun all affected validation. Merge into `release` only when every required check passes. A checkpoint is a tested integration baseline, not distribution publication or phase-gate approval. Missing other-device evidence is deferred, nonblocking follow-up under revision 9. Required Mac performance, service and live-evaluation evidence remains open where not established; changing CI cadence does not waive those obligations. See [ADR 0014](docs/adr/0014-ci.md).
 - **Release trains:** engine beta releases every two weeks during Phase 8; game builds to internal QA daily.
 - **Bug priority:** P0 (data loss, crash on launch, credential exposure), P1 (blocks a workflow), P2 (workaround exists), P3 (cosmetic). P0 and P1 block releases.
 - **Telemetry:** opt-in only. Never includes project content, prompts, or credentials. Includes crash stacks, feature usage counts, agent turn success/failure (not content). Gameplay analytics for a shipped game is a separate, consent-gated service (Section 6.10) that the game developer enables; it never flows into engine telemetry.
@@ -904,7 +935,7 @@ A 3D co-op action roguelite exercises everything: 3D rendering on mobile and des
 | CRDT performance on large scenes | Medium | High | Per-scene CRDT documents loaded lazily; 100,000-entity responsiveness in the Phase 2 gate; per-subtree documents as the fallback |
 | Agent quality plateaus below usable | Medium | Fatal | Eval harness from Phase 0, skills to constrain the problem, approval modes, invest in tool ergonomics over prompts |
 | Mobile performance | Medium | High | Mobile rendering engineer from day one, device farm, budgets in CI |
-| Interpreted scripts exceed the frame budget on phones | High | High | Runtime data path without per-tick serialization, bulk query API, build-time bytecode, WebAssembly modules compiled ahead of time for hot code, a 2 ms per-frame script budget enforced on the reference phones |
+| Interpreted scripts exceed the frame budget on phones | High | High | Runtime data path without per-tick serialization, bulk query API, build-time bytecode, WebAssembly modules compiled ahead of time for hot code, a 2 ms per-frame script gate budget measured on this Mac; phone comparisons deferred |
 | Script hosts diverge in behavior (QuickJS, browser JavaScript, WebAssembly) | Medium | Medium | One SDK surface generated from the schema registry; one conformance suite run against every host; deterministic math in the SDK |
 | Compiling Rust modules runs untrusted code on the user's machine | Medium | High | Offline sandboxed builds, vetted vendored dependencies, no build scripts or procedural macros outside the allowlist, red-team coverage |
 | Native backend interop erodes portability | Medium | Medium | Every interop pass has a portable fallback that golden-image tests cover on all backends |
@@ -939,11 +970,11 @@ Tracked continuously from Phase 1 and reviewed at every phase review.
 - Agent eval pass rate per model (target 80% core, 70% content).
 - Time-to-playable-prototype for a new user (target under fifteen minutes).
 - Agent provenance share in Driftwake (target 60%).
-- Frame time per tier per reference device (targets: 16.6 ms desktop, 16.6 ms mobile high, 33 ms mobile low).
-- Script time per frame on the reference phones (target: 2 ms at p95 in Core Sample and in Driftwake combat).
+- Frame time per tier on this Mac (targets: 16.6 ms desktop, 16.6 ms mobile high, 33 ms mobile low). Other-device results stay separate deferred comparisons; Mac mobile-tier results are not phone measurements.
+- Script time per frame on this Mac (target: 2 ms at p95 in Core Sample and in Driftwake combat); reference-phone comparisons deferred.
 - Gameplay frames over twice budget caused by shader or pipeline compilation (target: zero; compilation happens on load screens).
-- Competitive benchmark against Unity and Godot on Core Sample equivalents: frame time, cold start, memory and build size per reference device (target: within 10 percent or better).
-- Editor responsiveness on a 100,000-entity scene (target: edits under 100 ms, viewport at 60 fps on the M1 MacBook Air).
+- Competitive benchmark against Unity and Godot on Core Sample equivalents: frame time, cold start, memory and build size on this Mac (target: within 10 percent or better); other-device comparisons deferred.
+- Editor responsiveness on a 100,000-entity scene (target: edits under 100 ms, viewport at 60 fps on this Mac, with the actual model/OS recorded).
 - Cold start per platform.
 - Build size per platform (targets: under 150 MB mobile base, under 500 MB desktop base).
 - Crash-free sessions (target 99.5% in beta).
@@ -1008,8 +1039,8 @@ Networking and online services:
 
 Performance:
 
-18. **Ahead-of-time compiled TypeScript (rule):** adopt it for shipped builds only if the Phase 1 spike passes 100 percent of the SDK conformance suite, runs at least twice as fast as bytecode on the script benchmark on both reference phones, needs no JIT on iOS, adds under 5 MB to the mobile binary, and has an upstream release line with security fixes. Otherwise TypeScript stays on bytecode and WebAssembly modules remain the native-speed tier. The outcome is recorded in ADR 0006 at the Phase 1 gate.
-19. **Physics backend (rule):** keep Rapier unless the Section 6.14 benchmark shows Jolt at least 1.5 times faster in p95 step time on both reference phones at Driftwake scale and a maintained C shim builds for all six targets. If both hold, switch behind the physics boundary before Phase 6. The outcome is recorded in ADR 0003.
+18. **Ahead-of-time compiled TypeScript (rule):** adopt it for shipped builds only if the Phase 1 spike passes 100 percent of the SDK conformance suite, runs at least twice as fast as bytecode on the matched shipping-profile script benchmark on this Mac, needs no JIT on iOS, adds under 5 MB to the mobile binary, and has an upstream release line with security fixes. The iOS architecture and binary-size clauses use build/inspection evidence, not required phone execution. Reference-phone speed comparisons are deferred and do not block this adoption decision. Otherwise TypeScript stays on bytecode and WebAssembly modules remain the native-speed tier. The outcome is recorded in ADR 0006 at the Phase 1 gate.
+19. **Physics backend (rule):** keep Rapier unless the Section 6.14 benchmark shows Jolt at least 1.5 times faster in p95 step time on this Mac at Driftwake scale in the shipping profile and a maintained C shim builds for all six targets. Reference-phone comparisons are deferred and do not block this adoption decision. If both hold, switch behind the physics boundary before Phase 6. The outcome is recorded in ADR 0003.
 20. **Shipped WebAssembly path:** wasm2c translation compiled into the signed binary on every native platform; Wasmtime with JIT in the editor and development builds; native WebAssembly in browsers (ADR 0006).
 
 Product, business and operations:
