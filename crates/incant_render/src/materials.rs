@@ -84,6 +84,38 @@ pub(crate) fn layout_entries() -> Vec<wgpu::BindGroupLayoutEntry> {
     entries
 }
 impl MaterialSystem {
+    // Test-only replacement of OPAQUE pipelines, before the candidate arm begins.
+    // Existing MASK/BLEND/shadow/motion sampling remains byte-for-byte unchanged.
+    #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+    pub(crate) fn experiment_opaque_mip_bias(
+        &mut self,
+        device: &wgpu::Device,
+        environment: &wgpu::BindGroupLayout,
+        lighting: &wgpu::BindGroupLayout,
+    ) {
+        let module = device.create_shader_module(wgpu::ShaderModuleDescriptor {
+            label: Some("Private opaque chart mip-bias experiment"),
+            source: wgpu::ShaderSource::Wgsl(crate::metalfx_image::mip_experiment::source().into()),
+        });
+        let shader = crate::shader::Stages {
+            vertex: module.clone(),
+            fragment: module,
+            vertex_entry: "vertex",
+            fragment_entry: "fragment",
+        };
+        for (key, pipeline) in &mut self.pipelines {
+            if key.alpha == AlphaMode::Opaque {
+                *pipeline = crate::material_pipeline::build(
+                    device,
+                    &shader,
+                    *key,
+                    &[&self.globals, &self.layout, environment, lighting],
+                    None,
+                );
+            }
+        }
+    }
+
     pub fn new(
         device: &wgpu::Device,
         queue: &wgpu::Queue,

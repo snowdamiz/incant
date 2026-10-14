@@ -5,6 +5,7 @@ mod geometry;
 #[path = "../../tests/materials/mod.rs"]
 #[allow(dead_code)] // Reuse the existing whole fixture; its other public helpers are unrelated.
 mod materials;
+pub(crate) mod mip_experiment;
 mod raw;
 mod scene;
 use crate::{
@@ -122,14 +123,28 @@ fn actual_opaque_background_reactive_policy_images_and_motion() {
 #[test]
 #[ignore = "coordinated Mac GPU only: 168 scene submits, 15 readbacks/maps, 112 native encodes"]
 fn actual_opaque_halton32_matched_images_and_motion() {
-    run_mode(true, true);
+    run_mode(true, true, false);
+}
+#[test]
+#[ignore = "coordinated Mac GPU only: 168 scene submits, 15 readbacks/maps, 112 native encodes"]
+fn actual_opaque_halton32_mip_bias_images_and_motion() {
+    run_mode(true, true, true);
 }
 fn run(opaque: bool) {
-    run_mode(opaque, false);
+    run_mode(opaque, false, false);
 }
-fn run_mode(opaque: bool, sampling: bool) {
+fn run_mode(opaque: bool, sampling: bool, mip_bias: bool) {
     use crate::metalfx::halton_experiment::Sequence;
     assert!(!sampling || opaque);
+    assert!(!mip_bias || (opaque && sampling));
+    assert!(
+        !mip_bias || !cfg!(feature = "cooked-materials"),
+        "matched mip experiment requires ordinary WGSL in both arms"
+    );
+    assert!(
+        !mip_bias || !raw::requested(),
+        "this image experiment has no raw probe arm mapping"
+    );
     let frames_per_arm = if sampling { 56 } else { 32 };
     let captures = if sampling {
         [1, 16, 24, 25, 56]
@@ -153,6 +168,19 @@ fn run_mode(opaque: bool, sampling: bool) {
             .iter()
             .all(|n| !n.diagnostic && n.sprite.is_none() && n.tilemap.is_none())
     );
+    if mip_bias {
+        for mesh in input.nodes.iter().filter_map(|node| node.mesh.as_ref()) {
+            let incant_assets_runtime::RuntimeAssetData::Model(model) = mesh.source.data() else {
+                panic!("opaque model fixture required");
+            };
+            assert!(
+                model
+                    .materials
+                    .iter()
+                    .all(|m| m.alpha_mode == incant_assets_runtime::AlphaMode::Opaque)
+            );
+        }
+    }
     let mut renderer = crate::test_support::checked(Renderer::headless().unwrap());
     assert_eq!(renderer.adapter.get_info().backend, wgpu::Backend::Metal);
     if opaque {
@@ -192,7 +220,13 @@ fn run_mode(opaque: bool, sampling: bool) {
     let texture = capture::texture(&renderer);
     let view = texture.create_view(&Default::default());
     let mut arms = Vec::new();
-    let configuration = if sampling {
+    let configuration = if mip_bias {
+        [
+            ("full", 16),
+            ("mfx50-halton32-bias0", 8),
+            ("mfx50-halton32-bias-2", 8),
+        ]
+    } else if sampling {
         [("full", 16), ("mfx50-incant8", 8), ("mfx50-halton32", 8)]
     } else if opaque {
         [("full", 16), ("mfx50-reactive1", 8), ("mfx50-reactive0", 8)]
@@ -222,7 +256,7 @@ fn run_mode(opaque: bool, sampling: bool) {
             }
             if sampling {
                 retained
-                    .set_metalfx_experiment_sampling(if name == "mfx50-halton32" {
+                    .set_metalfx_experiment_sampling(if mip_bias || name == "mfx50-halton32" {
                         Sequence::Halton32
                     } else {
                         Sequence::Incant8
@@ -258,7 +292,19 @@ fn run_mode(opaque: bool, sampling: bool) {
     let mut rows = Vec::new();
     let (mut submits, mut maps, mut native, mut buffers) = (0, 0, 0, 0);
     for (name, scale, mut retained) in arms {
-        let sequence = if name == "mfx50-halton32" {
+        if name == "mfx50-halton32-bias-2" {
+            let scope = renderer
+                .device
+                .push_error_scope(wgpu::ErrorFilter::Validation);
+            renderer.materials.experiment_opaque_mip_bias(
+                &renderer.device,
+                &renderer.environments.layout,
+                &renderer.lighting.layout,
+            );
+            assert!(pollster::block_on(scope.pop()).is_none());
+            output.write("opaque-mip-bias.wgsl", mip_experiment::source().as_bytes());
+        }
+        let sequence = if mip_bias || name == "mfx50-halton32" {
             Sequence::Halton32
         } else {
             Sequence::Incant8
@@ -397,6 +443,20 @@ fn run_mode(opaque: bool, sampling: bool) {
             "cut_restarts_phase":0,"full_cycle_after_cut":[25,56],"static16":"partial32 history only",
             "reactive_background":0,"mip_policy":"unchanged implicit material textureSample",
             "captures":captures,"appearance_acceptance":false});
+    }
+    if mip_bias {
+        report["opaque_experiment"]["jitter"] =
+            json!("centered Halton32 unchanged in both half-resolution arms");
+        report["sampling_experiment"]["periods"] = json!([32, 32]);
+        report["sampling_experiment"]["mip_policy"] = json!(
+            "Matched implicit sampling versus -2 base/emissive bias in OPAQUE color pipelines only. Other material channels, MASK/BLEND, motion, shadows, geometry, reset and reconstruction unchanged."
+        );
+        report["mip_experiment"] = json!({"baseline_bias":0,"candidate_bias":-2,"full_reference_bias":0,
+            "reference":"https://developer.apple.com/videos/play/wwdc2022/10103/",
+            "hypothesis":"chart detail only; no missing-geometric-sample repair claim",
+            "required_review":["static chart detail","moving chart flicker/moire","post-cut chart detail","thin-wire negative control"],
+            "limits":["Five isolated captures cannot establish absence of temporal flicker.","The actual chart exercises textured base color, not textured emissive."],
+            "production_adoption":false,"appearance_acceptance":false});
     }
     output.write("report.json", &serde_json::to_vec_pretty(&report).unwrap());
     println!(
