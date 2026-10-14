@@ -76,7 +76,7 @@ impl TextureRefreshBasis {
         }
         if normalized(project)? != self.normalized {
             return Err(invalid(
-                "live asset refresh supports compatible existing texture/static-model content only; the running game retains its prior complete catalog",
+                "live asset refresh supports compatible existing texture/model content only; the running game retains its prior complete catalog",
             ));
         }
         let mut references = self.references.clone();

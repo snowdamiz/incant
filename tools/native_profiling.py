@@ -12,7 +12,7 @@ TRACY = {'enable', 'manual-lifetime', 'ondemand', 'only-localhost'}
 
 def features(mode, route):
     require(mode in MODES, 'Unknown native profiling mode')
-    require(mode is None or route == 'headless', 'Profiling export requires headless mode')
+    require(route in ('headless', 'window'), 'Unknown native export route')
     return [] if mode is None else ['profile-tracy' if mode == 'tracy' else 'profile']
 
 

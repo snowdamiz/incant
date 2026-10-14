@@ -1,11 +1,15 @@
 //! Optional desktop window host. Existing cooked data, embedded script, native
 //! game session and retained GPU consumer remain the sole simulation path.
+#[cfg(feature = "profile")]
+mod cadence;
 pub(crate) mod clock;
+mod devices;
 mod gamepad;
 mod haptics;
 mod ime;
 mod input;
 mod probe;
+mod replay;
 mod surface;
 mod termination;
 mod ui_input;
@@ -76,11 +80,13 @@ struct Options {
     actions: String,
     render: NativeRenderSettings,
     stop_after: Option<u64>,
+    recording: Option<String>,
+    observations: Option<String>,
     probe: bool,
 }
 impl Options {
     fn parse(args: &[String]) -> session::Result<Self> {
-        const USAGE: &str = "expected --window SCENE AUDIO_CACHE CLIPS ACTIONS MODEL_CACHE TEXTURE_CACHE CAMERA_HEX [--font-cache FONT_CACHE] [--stop-after TICKS]";
+        const USAGE: &str = "expected --window SCENE AUDIO_CACHE CLIPS ACTIONS MODEL_CACHE TEXTURE_CACHE CAMERA_HEX [--font-cache FONT_CACHE] [--stop-after TICKS] [--input-recording FILE] [--observe PLAN]";
         let probe = args.last().is_some_and(|arg| arg == "--lifecycle-probe");
         let args = if probe { &args[..args.len() - 1] } else { args };
         if args.len() < 7 {
@@ -96,17 +102,33 @@ impl Options {
             text = Some(incant_render_game::TextSettings::new(path.into()));
             rest = tail;
         }
-        let stop_after = match rest {
-            [] => None,
-            [flag, n] if flag == "--stop-after" => {
-                let n = n.parse()?;
-                if !(1..=36000).contains(&n) {
-                    return Err("window tick bound1..36000".into());
+        let mut stop_after = None;
+        let mut recording = None;
+        let mut observations = None;
+        while let [flag, value, tail @ ..] = rest {
+            match flag.as_str() {
+                "--stop-after" if stop_after.is_none() => {
+                    let n = value.parse()?;
+                    if !(1..=36000).contains(&n) {
+                        return Err("window tick bound1..36000".into());
+                    }
+                    stop_after = Some(n);
                 }
-                Some(n)
+                "--input-recording" if recording.is_none() => recording = Some(value.clone()),
+                "--observe" if observations.is_none() => observations = Some(value.clone()),
+                _ => return Err(USAGE.into()),
             }
-            _ => return Err(USAGE.into()),
-        };
+            rest = tail;
+        }
+        if !rest.is_empty() {
+            return Err(USAGE.into());
+        }
+        if (recording.is_some() || observations.is_some()) && (probe || stop_after.is_none()) {
+            return Err(
+                "recording/observation requires --stop-after and conflicts with lifecycle probe"
+                    .into(),
+            );
+        }
         let hex = &args[6];
         if hex.len() != 32 || !hex.bytes().all(|b| b.is_ascii_hexdigit()) {
             return Err("CAMERA_HEX must contain exactly32 hexadecimal digits".into());
@@ -129,6 +151,8 @@ impl Options {
                 consumer: (),
             },
             stop_after: if probe { Some(40) } else { stop_after },
+            recording,
+            observations,
             probe,
         })
     }
@@ -143,6 +167,29 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
         return Err(Error::UiUnsupported.into());
     }
     let rate = scene.tick_rate();
+    let replay = options
+        .recording
+        .as_deref()
+        .map(|path| -> session::Result<_> {
+            Ok(replay::Replay::parse(
+                std::str::from_utf8(&bounded(path, incant_input::MAX_RECORDING_BYTES)?)?,
+                rate,
+                options.stop_after,
+            )?)
+        })
+        .transpose()?;
+    let mut observations = options
+        .observations
+        .as_deref()
+        .map(|path| -> session::Result<_> {
+            Ok(crate::observe::Plan::parse(
+                &bounded(path, crate::observe::MAX_PLAN_BYTES)?,
+                options
+                    .stop_after
+                    .ok_or("observation requires host step bound")?,
+            )?)
+        })
+        .transpose()?;
     let actions = serde_json::from_slice(&bounded(&options.actions, 256 * 1024)?)?;
     input::validate_actions(&actions)?;
     let clips = startup::clips(&options.cache, &options.clips)?;
@@ -167,7 +214,7 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
         })
         .transpose()?
         .map(UiSettings::new);
-    let mut gamepads = gamepad::Gamepads::new()?;
+    let mut gamepads = devices::Devices::new(replay.is_none())?;
     let (mut surface, renderer, targets) = SurfaceState::new(Arc::clone(&window))?;
     let seed = GameSeed::new(scene, script, actions, clips)?;
     let render_settings = |targets, ui| NativeRenderSettings {
@@ -187,6 +234,9 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
         render_settings(targets, ui_settings),
     )?;
     game.poll_device()?;
+    if let Some(plan) = &mut observations {
+        plan.observe_at(0, game.world()?, game.input()?)?;
+    }
     let mut initial_frame = true;
     let mut generation = 1u64;
     let mut host_steps = 0u64;
@@ -213,6 +263,8 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
     let mut termination = termination::Termination::default();
     let mut last_audio_poll = Instant::now();
     let mut probe = options.probe.then(probe::Probe::new);
+    #[cfg(feature = "profile")]
+    let mut cadence = cadence::Cadence::new();
     if options.probe {
         window.set_focus();
     }
@@ -226,6 +278,8 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                         *exit = true;
                     }
                     WindowEvent::Resized(_) | WindowEvent::ScaleFactorChanged { .. } => {
+                        #[cfg(feature = "profile")]
+                        cadence.interrupt();
                         if has_ui {
                             ui_input.layout_pending(game.host()?.ui(), &mut input)?;
                             ui_resize = true;
@@ -234,6 +288,10 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                         redraw_pending = true;
                     }
                     WindowEvent::Focused(value) => {
+                        #[cfg(feature = "profile")]
+                        if !value {
+                            cadence.interrupt();
+                        }
                         if !value && !suspended {
                             gamepads.pause_haptics()?;
                             game.set_suspended(true)?;
@@ -246,6 +304,8 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                         gamepads.discard_pending();
                     }
                     WindowEvent::Suspended => {
+                        #[cfg(feature = "profile")]
+                        cadence.interrupt();
                         gamepads.pause_haptics()?;
                         platform_suspended = true;
                         if has_ui {
@@ -260,7 +320,9 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                         surface.invalidate();
                         redraw_pending = true;
                     }
-                    ref event if ui_input.accepts_delivery(focused, suspended) => {
+                    ref event
+                        if replay.is_none() && ui_input.accepts_delivery(focused, suspended) =>
+                    {
                         // InputEvent uses logical pixels; query this window's current scale per event.
                         if has_ui {
                             ui_input.window(
@@ -297,6 +359,8 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                         && surface.has_supported_size();
                     let active = focused && presentable;
                     if has_ui && ui_resize && presentable {
+                        #[cfg(feature = "profile")]
+                        cadence.interrupt();
                         if now < retry {
                             return Ok(());
                         }
@@ -339,6 +403,8 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                     // UI surface wait preserves releases alongside queued presses.
                     gamepads.poll(&mut input, ui_input.accepts_delivery(active, suspended))?;
                     if !active {
+                        #[cfg(feature = "profile")]
+                        cadence.interrupt();
                         if ui_input.awaiting_surface() {
                             input.reset_focus(focused);
                             ui_input.reset_focus();
@@ -386,6 +452,8 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                         }
                     } else if now >= retry {
                         if initial_frame {
+                            #[cfg(feature = "profile")]
+                            cadence.interrupt();
                             if !surface.reserve(&renderer)? {
                                 retry = now + Duration::from_millis(50);
                                 clock.reset(now);
@@ -407,7 +475,13 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                         }
                         let due = if suspended { 1 } else { clock.due(now) };
                         for _ in 0..due {
+                            // Includes surface acquisition, input/UI preparation and
+                            // normal haptics. This is CPU host time, not scanout.
+                            #[cfg(feature = "profile")]
+                            let host_started = cadence.begin();
                             if !surface.reserve(&renderer)? {
+                                #[cfg(feature = "profile")]
+                                cadence.interrupt();
                                 if !suspended {
                                     gamepads.pause_haptics()?;
                                     game.set_suspended(true)?;
@@ -443,10 +517,23 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                             if game.supports_haptics()? {
                                 game.set_haptic_capabilities(gamepads.haptic_capabilities())?;
                             }
-                            let events = controls.filter(input.events())?;
+                            // Read by accepted host step, not simulation tick or
+                            // redraw count. No native input mixes into a recording.
+                            let packet = match &replay {
+                                Some(replay) => replay.events(host_steps)?,
+                                None => input.events(),
+                            };
+                            let events = controls.filter(packet)?;
                             crate::profile::frame(|| -> session::Result<()> {
                                 let result = if has_ui {
-                                    game.tick_with_ui(events, ui_input.receipts())
+                                    game.tick_with_ui(
+                                        events,
+                                        if replay.is_some() {
+                                            &[]
+                                        } else {
+                                            ui_input.receipts()
+                                        },
+                                    )
                                 } else {
                                     game.tick(events)
                                 };
@@ -464,10 +551,18 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                             ui_input.presented(game.host()?.ui(), &mut input)?;
                             redraw_pending = false;
                             host_steps = host_steps.checked_add(1).ok_or("host step exhausted")?;
+                            if let Some(plan) = &mut observations {
+                                plan.observe_at(host_steps, game.world()?, game.input()?)?;
+                            }
                             let restart = game.take_session_request()?.is_some();
                             let haptics = game.take_haptics()?;
                             if restart {
                                 gamepads.pause_haptics()?;
+                                #[cfg(feature = "profile")]
+                                {
+                                    cadence.finish(host_started);
+                                    cadence.interrupt();
+                                }
                                 let _profile =
                                     incant_profile::scope(incant_profile::Phase::Restart);
                                 let next = generation
@@ -507,6 +602,8 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                             }
                             if !restart {
                                 gamepads.haptics(&haptics)?;
+                                #[cfg(feature = "profile")]
+                                cadence.finish(host_started);
                             }
                             if options.stop_after.is_some_and(|n| host_steps >= n) {
                                 *exit = true;
@@ -520,7 +617,8 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                 _ => {}
             }
             if has_ui && !*exit {
-                let active = focused
+                let active = replay.is_none()
+                    && focused
                     && !platform_suspended
                     && !window.is_minimized()
                     && surface.has_supported_size()
@@ -559,6 +657,18 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
         probe.validate()?;
     }
     let mut report = serde_json::json!({"mode":"native-window","tick":game.world()?.tick(),"accepted_frames":game.host()?.consumer().accepted_frames(),"presentation_refreshes":presentation_refreshes,"adapter":renderer.adapter_name,"backend":format!("{:?}",renderer.adapter.get_info().backend),"on_screen":true,"dropped_wall_ticks":clock.dropped.to_string(),"surface_reconfigurations":surface.reconfigurations,"surface_recreations":surface.recreations,"surface_skipped":surface.skipped,"discarded_stale_text_events":ui_input.stale_text_events(),"lifecycle_probe":probe.as_ref().map(|p|p.report())});
+    #[cfg(feature = "profile")]
+    cadence.append(&mut report);
+    report["host_steps"] = host_steps.into();
+    if let Some(replay) = &replay {
+        report["input_recording"] = serde_json::json!({"sha256":replay.sha256,
+            "requested_host_steps":options.stop_after,"accepted_host_steps":host_steps,
+            "completed":options.stop_after == Some(host_steps),"source":"recorded-physical-input",
+            "physical_devices":false,"native_focus_and_surface_required":true});
+    }
+    if let Some(plan) = observations {
+        report["observations"] = serde_json::to_value(plan.finish(game.world()?)?)?;
+    }
     if generation > 1 {
         report["session"] = serde_json::json!({"generation":generation,"host_tick":host_steps,
             "simulation_tick":game.world()?.tick(),"accepted_frames":host_steps+presentation_refreshes});
@@ -673,6 +783,45 @@ mod tests {
             &["--font-cache", "a", "--font-cache", "b"],
         ] {
             assert!(Options::parse(&args(bad)).is_err(), "{bad:?}");
+        }
+    }
+    #[test]
+    fn recording_and_observation_are_explicit_bounded_non_probe_modes() {
+        let parsed = Options::parse(&args(&[
+            "--input-recording",
+            "route.json",
+            "--stop-after",
+            "100",
+            "--observe",
+            "checks.json",
+        ]))
+        .unwrap();
+        assert_eq!(parsed.recording.as_deref(), Some("route.json"));
+        assert_eq!(parsed.observations.as_deref(), Some("checks.json"));
+        assert_eq!(parsed.stop_after, Some(100));
+        for tail in [
+            vec!["--input-recording", "route.json"],
+            vec!["--observe", "checks.json"],
+            vec!["--stop-after", "10", "--input-recording"],
+            vec![
+                "--stop-after",
+                "10",
+                "--input-recording",
+                "a",
+                "--input-recording",
+                "b",
+            ],
+            vec!["--stop-after", "10", "--observe", "a", "--observe", "b"],
+            vec!["--stop-after", "10", "--stop-after", "20"],
+            vec![
+                "--stop-after",
+                "10",
+                "--input-recording",
+                "a",
+                "--lifecycle-probe",
+            ],
+        ] {
+            assert!(Options::parse(&args(&tail)).is_err(), "{tail:?}");
         }
     }
 }

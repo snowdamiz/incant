@@ -1,0 +1,139 @@
+{
+  "format": "incant-profiled-window-export-evidence-v1",
+  "shipping_source": "ceda3a948768bc2b2e3d6a3c6e2dd218b73107a7",
+  "lifecycle_source": "9f27327d55f3dfe9c747116a2dce8312d475741c",
+  "archive_sha256": "4869b8ba626db66dfcaacb63df07b09a2a3e63e09bec23325c34ba356839bd30",
+  "records": [
+    {
+      "path": "export-plan.json",
+      "bytes": 1756,
+      "sha256": "c974eb1a4dd093c6055f30156ef323713cf6f98112e77defd579c055318dac8e"
+    },
+    {
+      "path": "run-export.py",
+      "bytes": 5233,
+      "sha256": "ad78daa5602b33dc8a9edaa851d01ac76351324df597e2fc12f4906f6f842e42"
+    },
+    {
+      "path": "result.json",
+      "bytes": 1116,
+      "sha256": "e1827ee3307cac5e1cda1fad04adbc53b678c7a11edd28ab15c1f8ab44a0f207"
+    },
+    {
+      "path": "source-freeze.json",
+      "bytes": 992412,
+      "sha256": "bf52ddca642c8ab2a0ad6c6dc4bc827291e29a85ee839fa8caa6f60c8fd750cf"
+    },
+    {
+      "path": "children.json",
+      "bytes": 4603,
+      "sha256": "d69b7363e9bb13c8dc001446ef638d9dca2464bf6ca6f165245d5c5d407afc91"
+    },
+    {
+      "path": "export.log",
+      "bytes": 3680,
+      "sha256": "bf6b43ee175d0d65e9b520743c4f4e6e52c787cf4a5912df751fa5f6648b21a6"
+    },
+    {
+      "path": "package/export.json",
+      "bytes": 19833,
+      "sha256": "d17c3fe4d21a42f6139603a22d91d00155e2ce31b7844ad1978538c9bef44190"
+    },
+    {
+      "path": "supervision-scope-correction.json",
+      "bytes": 928,
+      "sha256": "7897e8d4d1e0239eb7392520ced721513111b59a6aebebc92533f439291c577d"
+    },
+    {
+      "path": "window-001/plan.json",
+      "bytes": 7084,
+      "sha256": "687834fa060ba7461c794a12b32d92688ee1b9f7ca7e48da30c620f6e548a835"
+    },
+    {
+      "path": "window-001/run.py",
+      "bytes": 2539,
+      "sha256": "94134b644902d5b05ded0cc0d2f2806a6e6183bf6bcc86c93b30404320d5a189"
+    },
+    {
+      "path": "window-001/result.json",
+      "bytes": 737,
+      "sha256": "80ae52c148f4818eb283937161a7eae072cdac216bd777df43996cf8e58be775"
+    },
+    {
+      "path": "window-001/stdout.log",
+      "bytes": 570210,
+      "sha256": "4eed268ab2174ab483a1eb64a332f9d45e310a765d23c2353089ae5ffcb47f27"
+    },
+    {
+      "path": "window-001/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "window-001/analysis-correction.json",
+      "bytes": 1265,
+      "sha256": "5f5d741882cc9fea8d7470ce0804a64a596efd9895c4ab51951ce28f58e8c244"
+    },
+    {
+      "path": "reviews/profiled-window-export-runtime-20261014.json",
+      "bytes": 1763,
+      "sha256": "e031c9a6674fd2b0d30c9749c802142a81d483bd8fd437f6664eec3dec3492ee"
+    },
+    {
+      "path": "reviews/core-window-export-supervision-runtime-20261014.json",
+      "bytes": 8518,
+      "sha256": "9b0c39eee035ccfca3b595cb5565ea9454481d624b073934668a34bcf71ebd8a"
+    },
+    {
+      "path": "reviews/core-window001-correction-runtime-20261014.json",
+      "bytes": 1706,
+      "sha256": "c30024937ce4a4387c1f6074a5ba2d7d66145e2da8b9e2ea54a3524f204d68e6"
+    },
+    {
+      "path": "lifecycle/final-receipt.json",
+      "bytes": 4370,
+      "sha256": "d640bbdffd5e8634e72f4d2020cf57af10f9c86b0605c43aca8d1b535423b28e"
+    },
+    {
+      "path": "lifecycle/source-001/freeze.json",
+      "bytes": 1899,
+      "sha256": "c8f5fa332da35e895cbac4fa78ac6c77a92d43c3c7ccbaff0b254230583bdb29"
+    },
+    {
+      "path": "lifecycle/qualify-001/result.json",
+      "bytes": 1897,
+      "sha256": "1006eece117fa510c5e18c14139cfbeae1954e9d423db0d8607bd9f5c0711ed4"
+    },
+    {
+      "path": "lifecycle/qualify-001/0.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "lifecycle/qualify-001/0.stderr",
+      "bytes": 2304,
+      "sha256": "9255bda8a049b3a1270a91467b670eda49185a84462dcf73866992f5529ab749"
+    },
+    {
+      "path": "lifecycle/qualify-001/1.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "lifecycle/qualify-001/1.stderr",
+      "bytes": 14749,
+      "sha256": "fed6cb5aa2d5a5adab8956779376ed448d642ee4870ab6f6194df46d847db431"
+    },
+    {
+      "path": "source/ui.rs",
+      "bytes": 10997,
+      "sha256": "12c57a930d79bbdaf9728f8274c5e4b9df5b30d7c2d0392beb25064461ac404c"
+    }
+  ],
+  "limits": [
+    "Shipping source predates lifecycle repair.",
+    "Original window harness failed on an incorrect13-widget assumption; data-only correction and independent review retained.",
+    "No screenshot, displayed-frame or performance acceptance.",
+    "Binary/authoring payloads remain local; hashes bind them."
+  ]
+}

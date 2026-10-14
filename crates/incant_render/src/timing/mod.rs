@@ -8,7 +8,7 @@ pub(crate) use recorder::{Capture, PassQueries};
 use serde::Serialize;
 
 pub const GPU_TIMING_CAPACITY: usize = 3;
-pub const GPU_PASS_COUNT: usize = 7;
+pub const GPU_PASS_COUNT: usize = 8;
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize)]
 pub enum GpuPass {
     InitializeScene,
@@ -17,6 +17,7 @@ pub enum GpuPass {
     Models,
     Sprites,
     Text,
+    SceneResolve,
     Display,
 }
 impl GpuPass {
@@ -27,6 +28,7 @@ impl GpuPass {
         Self::Models,
         Self::Sprites,
         Self::Text,
+        Self::SceneResolve,
         Self::Display,
     ];
     pub(crate) fn index(self) -> usize {
@@ -48,6 +50,7 @@ pub struct GpuFrameTiming {
     /// Counts overlap/gaps once; does not attribute uninstrumented work or
     /// presentation. Models spans its real motion, opaque, fixed resolve/copy,
     /// overlay-depth and transparent subpasses with one first/last query pair.
+    /// SceneResolve is a separate real pass after all world draws, absent at1x.
     pub frame: GpuSpan,
     /// Indexed in `GpuPass::ALL` order. Absent passes are None, never fake zeros.
     pub passes: [Option<GpuSpan>; GPU_PASS_COUNT],

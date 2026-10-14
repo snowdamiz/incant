@@ -45,7 +45,7 @@ pub(crate) fn build(
             stencil: Default::default(),
             bias: Default::default(),
         }),
-        multisample: Default::default(),
+        multisample: key.samples.state(),
         fragment: Some(wgpu::FragmentState {
             module: &shader.fragment,
             entry_point: Some(shader.fragment_entry),

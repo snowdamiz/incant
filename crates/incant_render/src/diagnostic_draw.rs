@@ -18,10 +18,15 @@ impl DiagnosticDraw {
         rect: [f32; 4],
     ) -> Result<Self> {
         let vertices = crate::vertices(&scene.diagnostics, scene.camera.matrix(rect[2] / rect[3])?);
+        let pipeline = renderer
+            .diagnostic_pipelines
+            .get(targets.samples.index())
+            .cloned()
+            .ok_or(crate::ResourceError::UnpreparedPipeline("diagnostic MSAA"))?;
         Ok(Self {
             targets,
             rect,
-            pipeline: renderer.diagnostic_pipeline.clone(),
+            pipeline,
             vertices: renderer
                 .device
                 .create_buffer_init(&wgpu::util::BufferInitDescriptor {

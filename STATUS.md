@@ -3,13 +3,71 @@
 The current phase remains **Phase 1: Core engine**. The
 [Phase 1 review ledger](docs/gates/phase1-review.md) maps each exit requirement to
 its recorded evidence and remaining qualification. The actual native texture and
-compatible static-model workflows are verified on this Mac; release checkpoint37
-contains the tested main285 tree. Rendering quality and full rendered-game
-performance remain open. The default editor cube also has visibly jagged
-silhouettes; its full-resolution diagnostic route currently has no geometric
-antialiasing. This is a separate viewport defect, not a rendering-quality pass
-or proof of the low-resolution reconstruction cause. The entries
+compatible static-model workflows are verified on this Mac; release checkpoint38
+contains the tested main290 tree. Rendering quality and full rendered-game
+performance remain open. The reported jagged editor cube now has explicit 4x
+geometry antialiasing, verified in the actual Mac editor and isolated Metal
+controls. This fixes the ordinary viewport route; low-resolution reconstruction
+still has separate appearance defects. The entries
 below preserve earlier scoped results and superseded integration snapshots.
+
+## Compatible animation refresh — CPU and Metal verified
+
+Native Play now admits compatible clip key changes without replacing the live
+world, script VM or animation clock. Skeletons, animated geometry, clip bindings
+and durations stay fixed; incompatible root-motion and baked-navigation changes
+remain refused. Existing import, Undo/Redo and atomic catalog publication paths
+are reused. Sixty-six scoped CPU controls and strict lint pass. An actual Metal
+control verifies changed deformation at the same clock, exact old pixels after
+refusal, fresh motion history and continued playback/script state. Initial test
+fixture failures and their narrow corrections remain recorded. The actual
+animated editor-window workflow and performance remain unverified.
+[Contract and retained evidence](docs/spikes/animated-model-refresh.md).
+
+## Native shipping-window replay — actual gameplay verified
+
+A fresh source-free shipping player now consumes bounded physical recordings in
+its actual Metal window. The complete 2,156-step Core10k route passes all eight
+checks and exactly matches 17 selected headless entity states while rendering
+its models and HUD. Focus and surface pauses retain normal eligibility; recorded
+input uses accepted host steps, remains isolated from real controllers/haptics,
+and does not rewind on a session restart. Recorded UI and viewport changes remain
+explicitly unsupported. Eighty-five CPU controls, strict lint and independent
+source review pass. This qualifies gameplay parity; displayed-frame timing and
+phase performance gates remain open. [Scope, export and actual run](docs/spikes/native-window-replay.md).
+
+## Ordinary editor antialiasing — actual Mac verified
+
+The ordinary viewport resolves four geometric samples in linear HDR after all
+world draws. Cube edges now have intermediate coverage instead of the previous
+hard stair steps. Default and cooked shaders agree, and mixed materials, sprites,
+world text, resize and retained-frame ownership controls pass on this Mac.
+Pixel-grid and temporal/native retained paths keep their explicit 1x policy.
+Unsupported capabilities fail explicitly; SSAO with 4x requires a future depth
+resolve and is refused. The extra cold pipelines and attachment memory are
+documented, with no startup, frame-time or broader reconstruction-quality claim.
+[Source, actual review and retained failures](docs/spikes/editor-scene-msaa.md).
+
+## Native host timing — shipping window exercised
+
+Optional profiling now includes surface acquisition, input/UI preparation and
+haptic dispatch in a separate host-frame observation. Consecutive accepted-frame
+intervals break across pauses, resize, surface deferral and session replacement.
+These are CPU completion timestamps, not GPU completion, displayed FPS or a
+performance pass. Eighty CPU controls, strict lint, profile-off compilation and
+independent source review pass. A fresh shipping Core package has now executed
+600 ticks in an actual Metal window with its authored models and HUD, without
+a failed runtime frame or skipped surface. The harness's incorrect text-widget
+count and corrected source-based interpretation are both retained. Visual review,
+displayed-frame timing and representative active-gameplay qualification remain
+open. [Export, actual run and limitations](docs/spikes/profiled-window-export.md).
+[Boundaries and replay](docs/spikes/native-window-cadence.md).
+
+Release checkpoint38 promoted exact main290 after all 23 required contexts and
+eight frozen-candidate workflows succeeded. It includes the verified asset
+workflows and default-off MetalFX foundation. Later editor antialiasing and
+profiled shipping-window exports remain outside this tested release baseline.
+Main development continues independently. [Promotion and exact checks](docs/spikes/release-checkpoint-38.md).
 
 ## Prepared MetalFX interop — correctness verified, appearance failed
 
@@ -27,8 +85,10 @@ reworked; runtime correctness does not establish visual acceptance.
 
 Native Play accepts bounded geometry, material-factor and image-content
 reimports for existing static models with unchanged bindings, scene structure
-and import settings. Animated/skinned models, changed scene or material-binding structure and models
-used by baked navigation remain refused. Preparation stays outside the authoring lock;
+and import settings. That workflow's scope excluded animated/skinned models;
+compatible animation content is now separately qualified above. Changed scene or
+material-binding structure and models used by baked navigation remain refused.
+Preparation stays outside the authoring lock;
 final publication preserves the running world/VM and atomically retains the old
 catalog on refusal.
 
@@ -75,11 +135,23 @@ spanning 2.11–2.16 ms. Every candidate remains above 2 ms; the last pair has t
 same whole-player CPU frame-p95 interval, and baselines declined through the
 sequence. The cache adds retained graph storage. It is not adopted for this
 budget effort; all results and exact gameplay/audio parity remain recorded.
-Following the director's instruction, development moves on to other engine
-work without further profiling or optimization branches for this threshold.
+The director's 2026-10-14 clarification allows periodic, bounded reassessment of
+the script-time target while other engine work continues. The navigation-cache
+candidate remains unadopted; this does not reopen the unchanged experiment.
 The existing plan gate stays unmet; this is not evidence that sub-2 ms is
 impossible or that the full rendered game misses its frame budget.
 [Outcome and replay](docs/spikes/navigation-search-cache-outcome.md).
+
+Last reassessment: 2026-10-14, a bounded source review identified repeated
+nearest-surface scans between accepted navigation shortcut segments. The prior
+endpoint lookup could supply the next segment's identical start polygon within
+the same immutable query. This is distinct from the rejected graph cache and
+ordered-query candidates; its actual cost has not been measured. Next useful
+step: measure those repeated scans on the same full-Core frames before choosing
+an implementation. Revisit after relevant engine changes or every few hours of
+active development, with a distinct hypothesis and stop condition. Preserve
+matched shipping inputs, work limits, rollback and gameplay/audio parity. Other
+implementation lanes continue throughout.
 
 ## Native Play texture refresh — merged through PR284
 

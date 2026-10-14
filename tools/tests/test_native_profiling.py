@@ -31,20 +31,26 @@ def messages(root, mode):
 
 
 class Profiling(unittest.TestCase):
-    def test_only_explicit_headless_option_admits_features_before_io(self):
-        self.assertEqual(audit.features(None, 'window'), [])
-        self.assertEqual(audit.features('summary', 'headless'), ['profile'])
-        self.assertEqual(audit.features('tracy', 'headless'), ['profile-tracy'])
-        for mode, route in [('unknown', 'headless'), ('summary', 'window'), ('tracy', 'window')]:
+    def test_explicit_headless_and_window_options_preserve_feature_admission(self):
+        for route in ('headless', 'window'):
+            self.assertEqual(audit.features(None, route), [])
+            self.assertEqual(audit.features('summary', route), ['profile'])
+            self.assertEqual(audit.features('tracy', route), ['profile-tracy'])
+        for mode, route in [('unknown', 'headless'), ('summary', 'unknown'), (None, 'unknown')]:
             with self.subTest(mode=mode, route=route), self.assertRaises(ValueError):
                 export_native.export(Path('/never-read'), Path('/never-created'), mode=route, profiling=mode)
+            with self.subTest(mode=mode, route=route), self.assertRaises(ValueError):
+                audit.features(mode, route)
 
     def test_cli_preserves_explicit_option_without_project_mutation(self):
-        with patch.object(sys, 'argv', ['export_native.py', 'source', 'output', '--profiling', 'tracy']), \
+        with patch.object(sys, 'argv', ['export_native.py', 'source', 'output', '--mode', 'window',
+                                     '--profiling', 'tracy', '--ui-viewport', '640x480']), \
                 patch.object(sys, 'stdout', io.StringIO()), \
                 patch.object(export_native, 'export', return_value={'target': 'cpu', 'player_sha256': 'hash'}) as call:
             export_native.main()
         self.assertEqual(call.call_args.kwargs['profiling'], 'tracy')
+        self.assertEqual(call.call_args.args[4], 'window')
+        self.assertEqual(call.call_args.kwargs['ui_viewport'], '640x480')
 
     def test_environment_override_refuses_before_project_io_but_defaults_unchanged(self):
         for key in ('TRACY_CLIENT_LIB', 'TRACY_CLIENT_LIB_PATH', 'TRACY_CLIENT_STATIC', 'TRACY_CLIENT_SYS_CXXFLAGS',
