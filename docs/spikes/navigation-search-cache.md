@@ -37,6 +37,13 @@ well as their existing geometry. This is additional persistent storage in
 exchange for removing repeated query allocation/construction; it is not a new
 global memory ceiling or a zero-memory optimization. The runtime still admits
 at most eight active navmeshes with its existing aggregate polygon/detail bounds.
+The conservative array bound for eight distinct active graphs is therefore
+192 MiB, not 24 MiB in total. A complete staged replacement can coexist with the
+eight old graphs (384 MiB conservative arrays across both generations, plus
+metadata and construction cursors). Arbitrarily retained public snapshots can
+keep additional old generations alive; the bound is per distinct graph, and
+shared clones do not multiply its arrays. No total live-snapshot memory cap is
+introduced or claimed here.
 
 The original main281 search is retained under `cfg(test)` as
 `search/uncached.rs`; only its shared Edge/Route definitions, explanatory header
