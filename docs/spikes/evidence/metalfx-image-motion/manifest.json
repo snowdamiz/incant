@@ -1,0 +1,530 @@
+{
+  "schema": 1,
+  "source_commit": "dcc208ac3868e669064e840aa00aa50e4b3c3b2b",
+  "fixture_commit": "884ed99f7f2fe6ff5b139515fc4dacfc23f81b91",
+  "production_parent": "34deeff467195b3727593d6fc814547d575c09c1",
+  "external_root": "/Users/andreyyurlov/.codex/incant-evidence/metalfx-image-motion-001",
+  "archive_sha256": "a86bfccb6c004a62e73c01fba3482b2d5b11e72bb7dd1647838d6a3afff56905",
+  "verifier_sha256": "4e7f94ef77659050fbe2eca304e5bdf014a71bc3ae61cd37c5fc5335352ec3b5",
+  "records": [
+    {
+      "path": "cpu-receipt-002.json",
+      "bytes": 1784,
+      "sha256": "d06a913ae123ec6c8d946f805048de397c325465015062ce31b69b0e627a7e1a"
+    },
+    {
+      "path": "curation.json",
+      "bytes": 1920,
+      "sha256": "60436eda1a6a3c9b5247a799d21740c9723f42c23900b31028210546db82e8dc"
+    },
+    {
+      "path": "gpu-001/launch.json",
+      "bytes": 882,
+      "sha256": "84a90c068d5073b28b7abcdcc556c546dff3515fed8676a2fa6e4de6d16eb41b"
+    },
+    {
+      "path": "gpu-001/result.json",
+      "bytes": 9492,
+      "sha256": "bb46541a8cd05201dafab5ff52da1b0ce6dbb5033a522f5e82442bc58d106b06"
+    },
+    {
+      "path": "gpu-001/scene/fixture/.incant/cache/models/3bacdf866333f33cb3a3936f7b0fe9bb41289d51aeee95a1aad5d362e17d83f1.incmodel",
+      "bytes": 1114,
+      "sha256": "0eb7071e9a82757ada7ce3eadbb495b0ced8bb307a27b951bc9196bfff545714"
+    },
+    {
+      "path": "gpu-001/scene/fixture/.incant/cache/models/83cf07ff40c6dd7324ccad2df5c1087d8cc6809205507ccb0e3b4aa929dc668a.incmodel",
+      "bytes": 89083,
+      "sha256": "ab3c4c8ce45af3369af2beee1068ae96a229468c82fa1e63d534f4130dd493de"
+    },
+    {
+      "path": "gpu-001/scene/fixture/.incant/cache/models/b613f080d3aaa5506bff6a2e0e87ce0b82206f6efabc98df9c78791a80e8ce40.incmodel",
+      "bytes": 962,
+      "sha256": "c1e741702980c80823082330e04aaf866dc19950d34b648a560af5e48f418bb5"
+    },
+    {
+      "path": "gpu-001/scene/fixture/.incant/cache/models/fb4d80ab68520dabf87774d8fbcb156b952128bf8ac310e881d5f5bbe6fe9f1d.incmodel",
+      "bytes": 132542,
+      "sha256": "34d1947f8f1b624d3f6640d2a91f9a630b926a1ed8fc838d80cb40436613d615"
+    },
+    {
+      "path": "gpu-001/scene/fixture/.incant/cache/textures/2aa63f2737e786c6fbedc7c9c72b8d0c9e4c5ff5a84efba91894e5d8fc3f9e5b.ktx2",
+      "bytes": 284,
+      "sha256": "2aa63f2737e786c6fbedc7c9c72b8d0c9e4c5ff5a84efba91894e5d8fc3f9e5b"
+    },
+    {
+      "path": "gpu-001/scene/fixture/.incant/cache/textures/623a99e2c46b5784af30a8d6b60ad79bbb0f48699c7b60f20d190ed3cb3e0458.json",
+      "bytes": 311,
+      "sha256": "0bd531bcf176b3aacc865c82976af3fb8f9711656d339bdbefab1b9c58f95293"
+    },
+    {
+      "path": "gpu-001/scene/fixture/environment.png",
+      "bytes": 72,
+      "sha256": "b213ca17c82b1684a915cccd763b635f5007350c812e1410cc3daf8dd433c313"
+    },
+    {
+      "path": "gpu-001/scene/fixture/mover.bin",
+      "bytes": 864,
+      "sha256": "525eff882a5dbc9d94fd76f00780201b888790282075c86e63d7ea17c1545920"
+    },
+    {
+      "path": "gpu-001/scene/fixture/mover.gltf",
+      "bytes": 699,
+      "sha256": "c2eaf420429f9fe75f47f2529de1e22ba615669803a443fcd827e6ebf46efe58"
+    },
+    {
+      "path": "gpu-001/scene/fixture/project.json",
+      "bytes": 5813,
+      "sha256": "b0622379cfc18fb5ac7a1a0c4898dd11de6c13feef59677b96fca3b0f933bf29"
+    },
+    {
+      "path": "gpu-001/scene/fixture/quad.bin",
+      "bytes": 177408,
+      "sha256": "4e6b64095303549b9f7446d2a393ba25528bfbf9e42cc32ef7276da24111d155"
+    },
+    {
+      "path": "gpu-001/scene/fixture/quad.gltf",
+      "bytes": 639,
+      "sha256": "7680403a661a4b49db2bdbf38774ce1933b3b4c9559bfb7d54597fc4244b72ec"
+    },
+    {
+      "path": "gpu-001/scene/fixture/sign.bin",
+      "bytes": 192,
+      "sha256": "f6b71c92a754b0d0d9fef506554f177cc46a4af768023f682363fb7e60607b13"
+    },
+    {
+      "path": "gpu-001/scene/fixture/sign.gltf",
+      "bytes": 907,
+      "sha256": "4764d7d8a5935f37b09404ec26d2b0e9b66a2601edae3a1da0199d7c8de0ca88"
+    },
+    {
+      "path": "gpu-001/scene/fixture/sign.png",
+      "bytes": 784,
+      "sha256": "c57ee1f5869f078936c23be99f811355b153a76b9390e1c4a1b629a6cb74b181"
+    },
+    {
+      "path": "gpu-001/scene/full-01.png",
+      "bytes": 68951,
+      "sha256": "b799479108020f5ea7aef99c8fbc59fb10503ddcf456726be278dc478d780f61"
+    },
+    {
+      "path": "gpu-001/scene/full-01.rgba8",
+      "bytes": 2073600,
+      "sha256": "ef0a5c5311d7d1ff47559e32a57ef0cfc7123e17896df2edce95378fa1c66b6e"
+    },
+    {
+      "path": "gpu-001/scene/full-16.png",
+      "bytes": 68951,
+      "sha256": "b799479108020f5ea7aef99c8fbc59fb10503ddcf456726be278dc478d780f61"
+    },
+    {
+      "path": "gpu-001/scene/full-16.rgba8",
+      "bytes": 2073600,
+      "sha256": "ef0a5c5311d7d1ff47559e32a57ef0cfc7123e17896df2edce95378fa1c66b6e"
+    },
+    {
+      "path": "gpu-001/scene/full-24.png",
+      "bytes": 68692,
+      "sha256": "40c7571dff9349ff2b68a260ee48ec977d11bf8c5a14c711519e04878989aed4"
+    },
+    {
+      "path": "gpu-001/scene/full-24.rgba8",
+      "bytes": 2073600,
+      "sha256": "d0e9bebfd223396d79e81a43041243d37cec9c9e95abcd57243f5ace034901a6"
+    },
+    {
+      "path": "gpu-001/scene/full-25.png",
+      "bytes": 71981,
+      "sha256": "d6d665ed8475cb60e73bebd32df74bcaee2f8d87066266c6d1709d00b4a1fd3e"
+    },
+    {
+      "path": "gpu-001/scene/full-25.rgba8",
+      "bytes": 2073600,
+      "sha256": "1c444a02bb0d57f6b0f1a15c15d0f0eebf87c9026363cfb7493b713327e16c69"
+    },
+    {
+      "path": "gpu-001/scene/full-32.png",
+      "bytes": 74277,
+      "sha256": "377fe5bda9ecf81902d177301cd579dde8141ed90033d86d7571ef09763e5ced"
+    },
+    {
+      "path": "gpu-001/scene/full-32.rgba8",
+      "bytes": 2073600,
+      "sha256": "20fb4fb73ef1c4fe3384ffc53c33129b2084850c8dcb55467c02dfb90fe8166a"
+    },
+    {
+      "path": "gpu-001/scene/mfx50-01.png",
+      "bytes": 68270,
+      "sha256": "64c015a7d0a1f6f6aa0fddeb8114c2bf236d455014d64c567f60983df25d0297"
+    },
+    {
+      "path": "gpu-001/scene/mfx50-01.rgba8",
+      "bytes": 2073600,
+      "sha256": "430fdf7263620721f138372f46a7b26fee0aeb907c8e078b5bfeffd658beffb6"
+    },
+    {
+      "path": "gpu-001/scene/mfx50-16.png",
+      "bytes": 69892,
+      "sha256": "59a8f54684fe863843c55a2dad37fdce6714c1f96ca88c85abfaeec88eb45a19"
+    },
+    {
+      "path": "gpu-001/scene/mfx50-16.rgba8",
+      "bytes": 2073600,
+      "sha256": "fb21a5614c7c0c6cf137c8daa62dcfeb5f57b98580f216b5eef372f5488c2993"
+    },
+    {
+      "path": "gpu-001/scene/mfx50-24.png",
+      "bytes": 70153,
+      "sha256": "b61c99f08bb142d485af8fd8dd7aab1e3f6d1083caf669b03530654cc9baf873"
+    },
+    {
+      "path": "gpu-001/scene/mfx50-24.rgba8",
+      "bytes": 2073600,
+      "sha256": "c28b71541485c376e644a0e03337a92764470679adae6335c82478165b5713a9"
+    },
+    {
+      "path": "gpu-001/scene/mfx50-25.png",
+      "bytes": 70951,
+      "sha256": "f85f58fafdbbc2352ec47bef9e884f8e9c5e299601bf056dd0a2535a45425b9a"
+    },
+    {
+      "path": "gpu-001/scene/mfx50-25.rgba8",
+      "bytes": 2073600,
+      "sha256": "3b0d337f73c4abd470ee8352b67f9bda96c898f943b5f5fc851129fa97bef47b"
+    },
+    {
+      "path": "gpu-001/scene/mfx50-32.png",
+      "bytes": 74433,
+      "sha256": "6bfea063a5bda2e9a9babeb1c89ca3092df95b104ec5634687cd1191c6ca6870"
+    },
+    {
+      "path": "gpu-001/scene/mfx50-32.rgba8",
+      "bytes": 2073600,
+      "sha256": "2817dd7463338aebe066b413ea0eea9fadd64690d3526ea63fdb471290e76ee8"
+    },
+    {
+      "path": "gpu-001/scene/mfx75-01.png",
+      "bytes": 78530,
+      "sha256": "e27af32381d142ef8d0fa94268e69fe7d4fc9237c0cdb68393650e209b48158e"
+    },
+    {
+      "path": "gpu-001/scene/mfx75-01.rgba8",
+      "bytes": 2073600,
+      "sha256": "794cff7359117fd7ed47949085229b1424262dc9ec2a02371b6ba96da1d6e40d"
+    },
+    {
+      "path": "gpu-001/scene/mfx75-16.png",
+      "bytes": 79929,
+      "sha256": "df0509f3a837c309fcbe43aa0a8e197a3827d22ef4a2a5eab3e320c9c221a1a0"
+    },
+    {
+      "path": "gpu-001/scene/mfx75-16.rgba8",
+      "bytes": 2073600,
+      "sha256": "76a60f35538c9661dffd673b53eb1f1d824837f8d314e870e572585bb0f31a2b"
+    },
+    {
+      "path": "gpu-001/scene/mfx75-24.png",
+      "bytes": 81874,
+      "sha256": "118ce8576246d87a6143e69d13a705a77f3abfb8a201c92242508205ef5fa119"
+    },
+    {
+      "path": "gpu-001/scene/mfx75-24.rgba8",
+      "bytes": 2073600,
+      "sha256": "37e9bc451654be38daa2c736606b43e4aa10c68bf3f54bf948876308dccc8c70"
+    },
+    {
+      "path": "gpu-001/scene/mfx75-25.png",
+      "bytes": 79876,
+      "sha256": "db56038c87b85366ec3a768df9db3aaa3ef14aa9b81e2c7e93b7ffe2f96a87b9"
+    },
+    {
+      "path": "gpu-001/scene/mfx75-25.rgba8",
+      "bytes": 2073600,
+      "sha256": "a8aefa43e8fbb0fbf22dece6d30d73b58633e329bf52df650c58909a0c7a2918"
+    },
+    {
+      "path": "gpu-001/scene/mfx75-32.png",
+      "bytes": 85856,
+      "sha256": "5fc752599745f673edfcec23f15931989343209f32eefef9f4a98cd9e7b34925"
+    },
+    {
+      "path": "gpu-001/scene/mfx75-32.rgba8",
+      "bytes": 2073600,
+      "sha256": "629bdf28096d3f34e6edd584544020bf95459eb5328adcb80e13e732273b0460"
+    },
+    {
+      "path": "gpu-001/scene/report.json",
+      "bytes": 582481,
+      "sha256": "a2e075743afd89dc07a3bc15cb70068d2d18dd2114f516973013f08ad64e8ef8"
+    },
+    {
+      "path": "gpu-001/stderr.log",
+      "bytes": 282,
+      "sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef"
+    },
+    {
+      "path": "gpu-001/stdout.log",
+      "bytes": 334,
+      "sha256": "a0e2f98e27a566b5c12667011d66995a5fc58d00dad3b20ecf39c480a28978ff"
+    },
+    {
+      "path": "gpu-plan.json",
+      "bytes": 2409,
+      "sha256": "b990bbc80735199d8c402c28dc40fa2b398da6d00ff3bb8b38d6e8bc1b8129ea"
+    },
+    {
+      "path": "gpu-proposal.json",
+      "bytes": 534,
+      "sha256": "822edd52904bacae9b72574bcef13020b19f0e117f7286769fe72d0e9985255d"
+    },
+    {
+      "path": "native_process.py",
+      "bytes": 19307,
+      "sha256": "58dd2a8231d7f9d1e42070fc85425461e06a43f279fa5e7f8e57b4a40c3a3aa4"
+    },
+    {
+      "path": "original-stage.rs",
+      "bytes": 75254,
+      "sha256": "8c641a261565e201192c7e12fb1e9d69afde5c1604e70d6b6b7e09e06869f209"
+    },
+    {
+      "path": "packaging/attempt-001.json",
+      "bytes": 233,
+      "sha256": "ea389c2e74ce978807204348dbd6fdcaf01b4835529da0cb93ff4519f90b05e2"
+    },
+    {
+      "path": "packaging/verify-001.py",
+      "bytes": 11680,
+      "sha256": "4d65dcc0b7a4dfba0519344c89e3d2a2a4181167f628bb27bf3f8f2c0f3fb84a"
+    },
+    {
+      "path": "plan-001.json",
+      "bytes": 1641,
+      "sha256": "57394351942d2c0a686036aa1101863e0b3bbac078402101a06b82d3a0f79d1f"
+    },
+    {
+      "path": "plan-002.json",
+      "bytes": 1641,
+      "sha256": "55cdfd58e5aaa74751df2219661cd500dbd441ada24d44991dcb4b552f78518d"
+    },
+    {
+      "path": "qualify-001/environment.json",
+      "bytes": 1276,
+      "sha256": "97087c8935f554c20b92cddf4f290ff8eb902a9b2890c93118dd7dd7ef4e77ce"
+    },
+    {
+      "path": "qualify-001/image-cpu.stderr",
+      "bytes": 2088,
+      "sha256": "82e3eb893098dab4ae6acb2762ddfa8219b72bc90dbecddae99237290edc39dc"
+    },
+    {
+      "path": "qualify-001/image-cpu.stdout",
+      "bytes": 317409,
+      "sha256": "58a54080724c612a358d6565cf21d8dbf84199076e6a0c5e04d0ac90d27b6a9f"
+    },
+    {
+      "path": "qualify-001/result.json",
+      "bytes": 1306,
+      "sha256": "c10aa65596ba1e07a281ae2a7fecde90886addf31d1421c552fb512654537870"
+    },
+    {
+      "path": "qualify-001/rustc.txt",
+      "bytes": 192,
+      "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909"
+    },
+    {
+      "path": "qualify-001.py",
+      "bytes": 5150,
+      "sha256": "31be351e08ddc2a2c9e418ffc831a1a3bf73ed82bfd7d499716f5af8c97c0a17"
+    },
+    {
+      "path": "qualify-002/binary-list.txt",
+      "bytes": 22565,
+      "sha256": "36b8878bf2c8cfe3b0d3385cfc9d4f381931860dfc8e0702b8d8de1880b91d07"
+    },
+    {
+      "path": "qualify-002/environment.json",
+      "bytes": 1276,
+      "sha256": "97087c8935f554c20b92cddf4f290ff8eb902a9b2890c93118dd7dd7ef4e77ce"
+    },
+    {
+      "path": "qualify-002/image-cpu.stderr",
+      "bytes": 319,
+      "sha256": "423879f054c8773000018f49a0df0809b67b9e2cfba5be0aa2593df01ab463fd"
+    },
+    {
+      "path": "qualify-002/image-cpu.stdout",
+      "bytes": 314849,
+      "sha256": "b58172b8ef5147e396915410a9eee54ad57c4647ba4b5452ef12dde0de5aa1c7"
+    },
+    {
+      "path": "qualify-002/native-clippy.stderr",
+      "bytes": 2070,
+      "sha256": "de6d6bdb610d6f3d0d3fe21f7414e82db1b0dc3d8f4d475ea7cac57c5d020720"
+    },
+    {
+      "path": "qualify-002/native-clippy.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "qualify-002/result.json",
+      "bytes": 2887,
+      "sha256": "cda7bae8fefb2ba6ad8a6b6f9fd8a2449f01e9d409878dde01cb660775e9ac9e"
+    },
+    {
+      "path": "qualify-002/rustc.txt",
+      "bytes": 192,
+      "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909"
+    },
+    {
+      "path": "qualify-002.py",
+      "bytes": 5150,
+      "sha256": "7905c94860613a31434c6e5d0bd131c9ca4aa9a5402c3129767d97b1b2261000"
+    },
+    {
+      "path": "reviews/root-pixels.json",
+      "bytes": 4021,
+      "sha256": "17dde2f892e79e13195402fb895f2f2b2fe3f9fd293ba2a46b839eff37116ec1"
+    },
+    {
+      "path": "reviews/source-pixels.json",
+      "bytes": 5320,
+      "sha256": "e42762e4064d4eb24c14959d3f33876663ae90469ed03d58a64f47ffeed5436b"
+    },
+    {
+      "path": "root-gpu-grant-001.json",
+      "bytes": 640,
+      "sha256": "00a0642dc57ecfe9674fbcf01b2f368267df624fdda80939cac40a9e046cc7cb"
+    },
+    {
+      "path": "run-gpu.py",
+      "bytes": 9442,
+      "sha256": "5eca148681f553a7cfb1cc856ba7e381839a0803d0127fc9adbf3b72655dd18a"
+    },
+    {
+      "path": "source-001/freeze.json",
+      "bytes": 1636,
+      "sha256": "3d35f57ac750f569347bc158160a73189aecdb366c144d2636dc7deb963b77e4"
+    },
+    {
+      "path": "source-001/inputs/crates/incant_render/src/lib.rs",
+      "bytes": 22384,
+      "sha256": "b6bfe409413798957f1efb816fdb23b81438078e3b08cc7342f87313c210707d"
+    },
+    {
+      "path": "source-001/inputs/crates/incant_render/src/metalfx_image/capture.rs",
+      "bytes": 5747,
+      "sha256": "f52b8cc90f49d50f5863b2e313df3eb06957d094bc3669244b0a33028be1df4c"
+    },
+    {
+      "path": "source-001/inputs/crates/incant_render/src/metalfx_image/geometry.rs",
+      "bytes": 7381,
+      "sha256": "def0623e81a0a9f4a7549158cb08e8d260741236b77dfafea6fd9fef232e935f"
+    },
+    {
+      "path": "source-001/inputs/crates/incant_render/src/metalfx_image/mod.rs",
+      "bytes": 9413,
+      "sha256": "defc0cbc64c35ea7bdd306fc6c71317d79c6527c2c5e9a49c977170c450b6530"
+    },
+    {
+      "path": "source-001/inputs/crates/incant_render/src/metalfx_image/scene.rs",
+      "bytes": 8921,
+      "sha256": "a394675567c9c0feff989842c32ea87c4daf291ea0b1283cd56e343b6a192eb7"
+    },
+    {
+      "path": "source-001/inputs/docs/spikes/metalfx-image-motion.md",
+      "bytes": 3821,
+      "sha256": "a94f67e5282d3829d4f0ebfff021c971c514cd5ea178af6f650030ed39072adc"
+    },
+    {
+      "path": "source-001/source-inventory.json",
+      "bytes": 677546,
+      "sha256": "5b0b0e08ed24cb5a6503d52eff3599974fb18cd8800e3d195fbbfede2f3322e6"
+    },
+    {
+      "path": "source-001/source.patch",
+      "bytes": 37839,
+      "sha256": "9aafd7469ad3da1f1feff0f010d707ffb82c9034cb667b1594c3e2a51ced04bd"
+    },
+    {
+      "path": "source-002/freeze.json",
+      "bytes": 1752,
+      "sha256": "fbebc3449e0607acd1002fc338a678e4626ef245243ca1beeb96d853d8bd6e73"
+    },
+    {
+      "path": "source-002/inputs/crates/incant_render/src/lib.rs",
+      "bytes": 22487,
+      "sha256": "b2ba7cf3f57ca2267de0f2ae5bcaafb090f23adbebc94779b709cb19c62b23bd"
+    },
+    {
+      "path": "source-002/inputs/crates/incant_render/src/metalfx_image/capture.rs",
+      "bytes": 5747,
+      "sha256": "f52b8cc90f49d50f5863b2e313df3eb06957d094bc3669244b0a33028be1df4c"
+    },
+    {
+      "path": "source-002/inputs/crates/incant_render/src/metalfx_image/geometry.rs",
+      "bytes": 7381,
+      "sha256": "def0623e81a0a9f4a7549158cb08e8d260741236b77dfafea6fd9fef232e935f"
+    },
+    {
+      "path": "source-002/inputs/crates/incant_render/src/metalfx_image/mod.rs",
+      "bytes": 9413,
+      "sha256": "defc0cbc64c35ea7bdd306fc6c71317d79c6527c2c5e9a49c977170c450b6530"
+    },
+    {
+      "path": "source-002/inputs/crates/incant_render/src/metalfx_image/scene.rs",
+      "bytes": 8921,
+      "sha256": "a394675567c9c0feff989842c32ea87c4daf291ea0b1283cd56e343b6a192eb7"
+    },
+    {
+      "path": "source-002/inputs/docs/spikes/metalfx-image-motion.md",
+      "bytes": 3821,
+      "sha256": "a94f67e5282d3829d4f0ebfff021c971c514cd5ea178af6f650030ed39072adc"
+    },
+    {
+      "path": "source-002/source-inventory.json",
+      "bytes": 677546,
+      "sha256": "729b367ffc71a5d658afed396bb2aa785d9e76e07927cbcb3e4e230d60857ffb"
+    },
+    {
+      "path": "source-002/successor.patch",
+      "bytes": 550,
+      "sha256": "fa0890e948d7d559521c407b63e368c303139d5bacfd6c89273ac7c6ca09eb9d"
+    }
+  ],
+  "binaries": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/metalfx-image-motion-001/qualify-002/binaries/image-cpu/incant_render-d6613f72917735a1",
+      "bytes": 33215344,
+      "sha256": "edfe4e5b798e8296951f296e5ff8db8aa7678fd39b7f6f0bf628ee9a6669fc79",
+      "features": [
+        "default",
+        "native-metalfx",
+        "physics-deterministic"
+      ],
+      "target": {
+        "kind": [
+          "lib"
+        ],
+        "crate_types": [
+          "lib"
+        ],
+        "name": "incant_render",
+        "src_path": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_render/src/lib.rs",
+        "edition": "2024",
+        "doc": true,
+        "doctest": true,
+        "test": true
+      }
+    }
+  ],
+  "historical_failure": "source001 compileE0432; self-crate import alias missing in lib test; no GPU or test assertion executed in that attempt",
+  "execution": "source002 two CPU commands + one96-frame GPU child; all runtime assertions pass",
+  "appearance_acceptance": false,
+  "performance_acceptance": false,
+  "built_in_upscaler_acceptance": false,
+  "default_enabled": false,
+  "review": "All15 images assessed; appearance FAIL. Original pixels/raw, root and producer critiques retained. No raw vendor readback yet.",
+  "packaging_note": "First offline verifier expected compiler diagnostic in stderr; JSON compiler output is stdout. Original verifier and failed outcome retained; no evidence or runtime change."
+}

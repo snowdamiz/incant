@@ -2,7 +2,13 @@
 //! each accepted sync, submitted immediately, then presented. No authoring path.
 //! Screen-space UI is admitted before any target is consumed and drawn over the
 //! finished world frame in the same target (incant_render `ui` contract).
+#[cfg(feature = "native-metalfx")]
+mod metalfx;
+#[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+mod metalfx_tests;
 mod motion;
+#[cfg(feature = "native-metalfx")]
+pub use metalfx::{MetalFxSettings, MetalFxSetup, MetalFxTargets};
 pub use motion::{MotionReset, MotionTargets};
 mod resolution;
 mod resolution_mailbox;
@@ -38,6 +44,10 @@ pub trait TargetProvider {
     }
     /// Explicit opt-in plus monotonic trusted camera-cut epoch. Simulation ticks
     /// and arbitrary clock discontinuities never implicitly select history.
+    #[cfg(feature = "native-metalfx")]
+    fn metalfx(&self) -> Option<crate::MetalFxSetup> {
+        None
+    }
     fn motion_epoch(&self) -> Option<u64> {
         None
     }
@@ -66,6 +76,8 @@ struct Live<P> {
     completion: Option<resolution::Completion>,
     resolution_config: Option<ResolutionConfig>,
     motion_epoch: Option<u64>,
+    #[cfg(feature = "native-metalfx")]
+    metalfx: Option<crate::MetalFxSetup>,
 }
 /// Owns the actual GPU bindings plus its target provider. NativeRenderHost owns
 /// the sole CPU adapter and calls this consumer inside every mandatory sync.
@@ -92,6 +104,10 @@ impl<P: TargetProvider> GpuRenderConsumer<P> {
         self.live
             .as_ref()
             .and_then(|live| live.scene.resolution_frame())
+    }
+    #[cfg(feature = "native-metalfx")]
+    pub fn metalfx_selection(&self) -> Option<incant_render::metalfx::Selection> {
+        self.live.as_ref().and_then(|l| l.scene.metalfx_selection())
     }
     pub fn motion_frame(&self) -> Option<incant_render::motion::MotionFrame> {
         self.live
@@ -129,9 +145,24 @@ impl<P: TargetProvider> RenderInputConsumer for GpuRenderConsumer<P> {
             .map_err(GpuHostError::Render)?;
         scene.set_dynamic_resolution(config)?;
         let motion_epoch = settings.targets.motion_epoch();
-        if motion_epoch.is_some() {
+        #[cfg(feature = "native-metalfx")]
+        let metalfx = settings.targets.metalfx();
+        #[cfg(feature = "native-metalfx")]
+        let ordinary_motion = metalfx.is_none();
+        #[cfg(not(feature = "native-metalfx"))]
+        let ordinary_motion = true;
+        if motion_epoch.is_some() && ordinary_motion {
             scene
                 .enable_motion_history(&settings.renderer)
+                .map_err(GpuHostError::Render)?;
+        }
+        #[cfg(feature = "native-metalfx")]
+        if let Some(setup) = metalfx {
+            scene
+                .enable_metalfx(&settings.renderer, setup.preference, setup.config)
+                .map_err(GpuHostError::Render)?;
+            scene
+                .prepare_metalfx_extent(&settings.renderer, setup.output_extent)
                 .map_err(GpuHostError::Render)?;
         }
         let mut layer = settings.renderer.ui_layer();
@@ -152,6 +183,8 @@ impl<P: TargetProvider> RenderInputConsumer for GpuRenderConsumer<P> {
                 completion: config.map(|_| resolution::Completion::default()),
                 resolution_config: config,
                 motion_epoch,
+                #[cfg(feature = "native-metalfx")]
+                metalfx,
             }),
             frames: 0,
         })
@@ -223,11 +256,24 @@ impl<P: TargetProvider> RenderInputConsumer for GpuRenderConsumer<P> {
             // Replacement has fresh timing ownership. Outstanding old callbacks
             // are retained in the bounded slot and discarded by the new owner.
             scene.set_dynamic_resolution(live.resolution_config)?;
-            if motion_epoch.is_some() {
+            #[cfg(feature = "native-metalfx")]
+            let ordinary_motion = live.metalfx.is_none();
+            #[cfg(not(feature = "native-metalfx"))]
+            let ordinary_motion = true;
+            if motion_epoch.is_some() && ordinary_motion {
                 scene
                     .enable_motion_history(&self.renderer)
                     .map_err(GpuHostError::Render)?;
             }
+        }
+        #[cfg(feature = "native-metalfx")]
+        if let (Some(scene), Some(setup)) = (&mut replacement, live.metalfx) {
+            scene
+                .enable_metalfx(&self.renderer, setup.preference, setup.config)
+                .map_err(GpuHostError::Render)?;
+            // Automatic topology replacement occurs during presentation. It
+            // cannot synchronously prewarm: prefer falls back; require refuses
+            // fail-closed. Required-native topology must be staged beforehand.
         }
         let frame = live
             .targets
@@ -264,6 +310,8 @@ impl<P: TargetProvider> RenderInputConsumer for GpuRenderConsumer<P> {
 pub struct PreparedGpuTextures {
     scene: RetainedScene,
     motion_epoch: Option<u64>,
+    #[cfg(feature = "native-metalfx")]
+    metalfx: Option<MetalFxSetup>,
 }
 impl<P: TargetProvider> TextureRefreshConsumer for GpuRenderConsumer<P> {
     type Prepared = PreparedGpuTextures;
@@ -279,19 +327,42 @@ impl<P: TargetProvider> TextureRefreshConsumer for GpuRenderConsumer<P> {
             .prepare_retained(input, camera)
             .map_err(GpuHostError::Render)?;
         scene.set_dynamic_resolution(live.resolution_config)?;
-        if live.motion_epoch.is_some() {
+        #[cfg(feature = "native-metalfx")]
+        let ordinary_motion = live.metalfx.is_none();
+        #[cfg(not(feature = "native-metalfx"))]
+        let ordinary_motion = true;
+        if live.motion_epoch.is_some() && ordinary_motion {
             scene
                 .enable_motion_history(&self.renderer)
+                .map_err(GpuHostError::Render)?;
+        }
+        #[cfg(feature = "native-metalfx")]
+        if let Some(setup) = live.metalfx {
+            scene
+                .enable_metalfx(&self.renderer, setup.preference, setup.config)
+                .map_err(GpuHostError::Render)?;
+            scene
+                .prepare_metalfx_extent(&self.renderer, setup.output_extent)
                 .map_err(GpuHostError::Render)?;
         }
         self.renderer.check_device().map_err(GpuHostError::Render)?;
         Ok(PreparedGpuTextures {
             scene,
             motion_epoch: live.motion_epoch,
+            #[cfg(feature = "native-metalfx")]
+            metalfx: live.metalfx,
         })
     }
     fn validate_textures(&self, prepared: &Self::Prepared) -> Result<(), Self::Error> {
         let live = self.live.as_ref().ok_or(GpuHostError::Failed)?;
+        #[cfg(feature = "native-metalfx")]
+        if prepared.metalfx != live.metalfx {
+            return Err(GpuHostError::Render(Box::new(
+                incant_render::metalfx::MetalFxError::Unavailable(
+                    incant_render::metalfx::Fallback::UnpreparedExtent,
+                ),
+            )));
+        }
         if prepared.motion_epoch != live.motion_epoch
             || prepared.motion_epoch != live.targets.motion_epoch()
         {
