@@ -1,7 +1,7 @@
 //! Probe-only copies of native playback and a real committed-refusal/recovery.
 use super::*;
+use incant_doc::Animation;
 use incant_runtime::AnimationState;
-use incant_types::Animation;
 use serde::Serialize;
 
 #[derive(Clone, Debug, PartialEq, Serialize)]
