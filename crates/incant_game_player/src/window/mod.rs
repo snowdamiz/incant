@@ -1,5 +1,7 @@
 //! Optional desktop window host. Existing cooked data, embedded script, native
 //! game session and retained GPU consumer remain the sole simulation path.
+#[cfg(feature = "profile")]
+mod cadence;
 pub(crate) mod clock;
 mod gamepad;
 mod haptics;
@@ -213,6 +215,8 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
     let mut termination = termination::Termination::default();
     let mut last_audio_poll = Instant::now();
     let mut probe = options.probe.then(probe::Probe::new);
+    #[cfg(feature = "profile")]
+    let mut cadence = cadence::Cadence::new();
     if options.probe {
         window.set_focus();
     }
@@ -226,6 +230,8 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                         *exit = true;
                     }
                     WindowEvent::Resized(_) | WindowEvent::ScaleFactorChanged { .. } => {
+                        #[cfg(feature = "profile")]
+                        cadence.interrupt();
                         if has_ui {
                             ui_input.layout_pending(game.host()?.ui(), &mut input)?;
                             ui_resize = true;
@@ -234,6 +240,10 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                         redraw_pending = true;
                     }
                     WindowEvent::Focused(value) => {
+                        #[cfg(feature = "profile")]
+                        if !value {
+                            cadence.interrupt();
+                        }
                         if !value && !suspended {
                             gamepads.pause_haptics()?;
                             game.set_suspended(true)?;
@@ -246,6 +256,8 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                         gamepads.discard_pending();
                     }
                     WindowEvent::Suspended => {
+                        #[cfg(feature = "profile")]
+                        cadence.interrupt();
                         gamepads.pause_haptics()?;
                         platform_suspended = true;
                         if has_ui {
@@ -297,6 +309,8 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                         && surface.has_supported_size();
                     let active = focused && presentable;
                     if has_ui && ui_resize && presentable {
+                        #[cfg(feature = "profile")]
+                        cadence.interrupt();
                         if now < retry {
                             return Ok(());
                         }
@@ -339,6 +353,8 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                     // UI surface wait preserves releases alongside queued presses.
                     gamepads.poll(&mut input, ui_input.accepts_delivery(active, suspended))?;
                     if !active {
+                        #[cfg(feature = "profile")]
+                        cadence.interrupt();
                         if ui_input.awaiting_surface() {
                             input.reset_focus(focused);
                             ui_input.reset_focus();
@@ -386,6 +402,8 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                         }
                     } else if now >= retry {
                         if initial_frame {
+                            #[cfg(feature = "profile")]
+                            cadence.interrupt();
                             if !surface.reserve(&renderer)? {
                                 retry = now + Duration::from_millis(50);
                                 clock.reset(now);
@@ -407,7 +425,13 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                         }
                         let due = if suspended { 1 } else { clock.due(now) };
                         for _ in 0..due {
+                            // Includes surface acquisition, input/UI preparation and
+                            // normal haptics. This is CPU host time, not scanout.
+                            #[cfg(feature = "profile")]
+                            let host_started = cadence.begin();
                             if !surface.reserve(&renderer)? {
+                                #[cfg(feature = "profile")]
+                                cadence.interrupt();
                                 if !suspended {
                                     gamepads.pause_haptics()?;
                                     game.set_suspended(true)?;
@@ -468,6 +492,11 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                             let haptics = game.take_haptics()?;
                             if restart {
                                 gamepads.pause_haptics()?;
+                                #[cfg(feature = "profile")]
+                                {
+                                    cadence.finish(host_started);
+                                    cadence.interrupt();
+                                }
                                 let _profile =
                                     incant_profile::scope(incant_profile::Phase::Restart);
                                 let next = generation
@@ -507,6 +536,8 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                             }
                             if !restart {
                                 gamepads.haptics(&haptics)?;
+                                #[cfg(feature = "profile")]
+                                cadence.finish(host_started);
                             }
                             if options.stop_after.is_some_and(|n| host_steps >= n) {
                                 *exit = true;
@@ -559,6 +590,8 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
         probe.validate()?;
     }
     let mut report = serde_json::json!({"mode":"native-window","tick":game.world()?.tick(),"accepted_frames":game.host()?.consumer().accepted_frames(),"presentation_refreshes":presentation_refreshes,"adapter":renderer.adapter_name,"backend":format!("{:?}",renderer.adapter.get_info().backend),"on_screen":true,"dropped_wall_ticks":clock.dropped.to_string(),"surface_reconfigurations":surface.reconfigurations,"surface_recreations":surface.recreations,"surface_skipped":surface.skipped,"discarded_stale_text_events":ui_input.stale_text_events(),"lifecycle_probe":probe.as_ref().map(|p|p.report())});
+    #[cfg(feature = "profile")]
+    cadence.append(&mut report);
     if generation > 1 {
         report["session"] = serde_json::json!({"generation":generation,"host_tick":host_steps,
             "simulation_tick":game.world()?.tick(),"accepted_frames":host_steps+presentation_refreshes});
