@@ -297,7 +297,7 @@ def execute(args):
                             and baseline['recordings_sha256'] == digest(args.recordings / 'recordings.json'),
                             'Exact same-package CPU baseline required')
                 env = {k: v for k, v in os.environ.items() if k in ('HOME', 'USER', 'LOGNAME', 'LANG', 'LC_ALL')}
-                env.update(PATH=str(player.parent), TMPDIR=str(output))
+                env.update(PATH=str(player.parent), TMPDIR=str(output), RAYON_NUM_THREADS='2')
                 for row in manifest['cases']:
                     if args.stage == 'window' and row['name'] != args.case:
                         continue
