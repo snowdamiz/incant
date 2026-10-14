@@ -311,6 +311,18 @@ impl NativeWorld {
         })
     }
 
+    /// Check an already captured entity lifetime without searching the stable-ID
+    /// index. Both the ECS world and entity generation must still match, and the
+    /// live component must carry the requested ID. Reparenting or moving between
+    /// archetypes preserves the token; despawn/reuse and restore invalidate it.
+    pub fn matches_entity_identity(&self, id: StableId, token: crate::EntityIdentity) -> bool {
+        token.world == self.world.id()
+            && self
+                .world
+                .get::<Identity>(token.entity)
+                .is_some_and(|identity| identity.0 == id)
+    }
+
     pub(crate) fn install_spatial(&mut self, id: StableId, node: Option<crate::CookedSpatial>) {
         if self.world.get::<crate::CookedSpatial>(self.entities[&id]) == node.as_ref() {
             return;
@@ -548,7 +560,7 @@ impl NativeWorld {
             // Solver advancement cannot be undone. If candidate hierarchy
             // publication fails, the ECS/clock stay unchanged and this world is
             // terminal. NativeSession also closes access to the failed session.
-            if let Err(error) = self.prepare_candidate_globals(Some(dt), true) {
+            if let Err(error) = self.prepare_candidate_globals(Some(dt), true, false) {
                 self.physics_failed = true;
                 return Err(error.into());
             }
@@ -635,13 +647,33 @@ impl NativeWorld {
     /// publishing derived state. A failed pass may overwrite scratch entries;
     /// every later pass fills them parent-first before reading them again.
     pub(crate) fn prepare_globals(&mut self, step: Option<f64>) -> Result<(), SceneError> {
-        self.prepare_candidate_globals(step, false)
+        self.prepare_candidate_globals(step, false, false)
+    }
+
+    /// Validate a foreign numeric loan while preparing the exact matrices that
+    /// its normal scope cleanup would publish. No derived component is changed.
+    pub(crate) fn prepare_numeric_globals(&mut self) -> Result<(), SceneError> {
+        self.prepare_candidate_globals(None, false, true)
+    }
+
+    /// Only NumericColumns may publish this scratch: it holds the world
+    /// exclusively and invalidates its successful preparation on every visit.
+    pub(crate) fn publish_numeric_globals(&mut self) {
+        self.world
+            .resource_scope(|world, hierarchy: Mut<Hierarchy>| {
+                let mut query = world.query::<&mut Global>();
+                for (index, &(entity, _)) in hierarchy.nodes.iter().enumerate() {
+                    query.get_mut(world, entity).expect("fixed topology").0 =
+                        hierarchy.globals[index];
+                }
+            });
     }
 
     fn prepare_candidate_globals(
         &mut self,
         step: Option<f64>,
         solved: bool,
+        numeric_publication: bool,
     ) -> Result<(), SceneError> {
         let ui = &self.ui;
         let physics = &self.physics;
@@ -718,9 +750,16 @@ impl NativeWorld {
                     } else {
                         matrix(&local.0)
                     };
-                    let value = parent.map_or(local_matrix, |parent| {
-                        hierarchy.globals[parent] * local_matrix
-                    });
+                    let value = if numeric_publication {
+                        // Preserve refresh_globals' arithmetic, including root
+                        // identity multiplication and signed-zero behavior.
+                        parent.map_or(DMat4::IDENTITY, |parent| hierarchy.globals[parent])
+                            * local_matrix
+                    } else {
+                        parent.map_or(local_matrix, |parent| {
+                            hierarchy.globals[parent] * local_matrix
+                        })
+                    };
                     if !value.is_finite() {
                         return Err(SceneError::Component(id.0));
                     }

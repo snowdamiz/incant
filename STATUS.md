@@ -1,5 +1,57 @@
 # Implementation status
 
+## Core tick diagnostics — candidate evidence only
+
+The retained standalone QuickJS/Bevy probe compares six loop variants and safe
+identity access using 6,600 raw intervals and three negative controls. Independent
+source, raw archive, binary and percentile replay passes on the main267 intake.
+It changes no engine or authored workload, and adopts no candidate. The fixed-order
+CI-profile experiment has no quiet-window guarantee; actual Core shipping remains
+above the 2 ms script gate. [Scope](docs/spikes/core-tick-cost-diagnostics.md) and
+[independent acceptance](docs/spikes/evidence/core-tick-cost-intake/review.json).
+
+## Matched Wasm/TypeScript workload — bounded historical shipping evidence
+
+Two shipping backends completed the same 1,024-entity/3,600-tick workload with
+all-row functional parity and exact silent PCM. Across three quiet pairs,
+TypeScript script p95 was 0.140001–0.160000 ms and Wasm static-module p95 was
+0.080001–0.090000 ms. These are descriptive different-phase measurements on
+source97834, not a Core10k, startup, FPS or phase gate. Independent raw evidence
+review and current helper Python/TypeScript checks pass. PR267 merged after its
+exact-head fast SUCCESS, following the merged synchronization test repair. [Evidence](docs/spikes/wasm-typescript-cost.md).
+
+## Checkpoint31 — retained strict Clippy failure and scoped repair
+
+The frozen main262 candidate failed macOS workspace Clippy because three existing
+physics tests ignored fallible synchronization results. A source-reviewed repair
+asserts those calls succeed and passes affected package Clippy/tests. PR266
+merged after its exact-head fast SUCCESS; the original failed job remains retained, and remaining candidate jobs continue on
+the exact frozen head. No release promotion or comprehensive rerun success is
+claimed. [Repair evidence](docs/spikes/physics-sync-result.md).
+
+## Director routing clarification — editor UI only
+
+Claude Opus 5.5 with explicitly verified Max is the default for editor UI design,
+layout, styling and rendered-pixel review. Astra/root and subagents own all other
+work, including rendering algorithms, graphics/runtime correctness and non-editor
+visuals. Astra may also take over any unresolved Claude work, including editor UI,
+without asking again. Preserve prior attempts, provenance and acceptance/evidence
+requirements. This changes ownership, not phase-gate approval.
+
+## Numeric-loan engine optimization — matched shipping improves, 2 ms still failed
+
+PR264 merged the main262 composition preserving the six reviewed numeric hierarchy and
+opaque entity-token changes. Source002 passes 466 runtime/script tests in each
+physics mode, both strict lint runs and lean native/wasm checks. All 3,874 executed
+build inputs match the current composition. Actual unchanged-workload Core
+shipping script p95 improves to 2.250001–2.370000 ms across three pairs; all 5%
+comparison checks pass, while all three 2 ms gates still fail. Full nonprofile
+reports and PCM match; QuickJS heap peaks are unchanged. Portable raw evidence is
+retained with independent final integration acceptance. PR264 merged after its
+exact-head fast SUCCESS; main264 includes the prior Core sample and AOT packets.
+Release30 is unchanged while checkpoint31 tests its frozen main262 tree. No phase/FPS/GPU claim.
+[Evidence](docs/spikes/numeric-loan-main262.md).
+
 ## Core row metadata — actual shipping improves, 2 ms still failed
 
 The sample now caches immutable row indices/base coordinates while taking fresh
@@ -8,8 +60,8 @@ Core win reports and PCM; all three paired script p95 intervals improve to
 2.800001–3.080000 ms, but every 2 ms script gate still fails. This is a new
 script identity with unchanged engine/runtime data, not another engine-only
 comparison. QuickJS heap peaks increase. Current-main source/Node/TypeScript
-controls pass; independent final packet review is accepted and publication
-awaits the exact-head fast check. No FPS/GPU/phase
+controls pass; independent final packet review was accepted and PR262 merged
+after its exact-head fast SUCCESS. No FPS/GPU/phase
 claim. [Evidence](docs/spikes/core-bulk-row-metadata.md).
 
 ## TypeScript AOT spike — language controls retained, adoption open
@@ -20,7 +72,8 @@ The actual NativeBehavior frontend cook passes. Static Hermes source and future
 compiler inputs are pinned, but no native compiler/host was built. All complete
 SDK, matched shipping performance, iOS no-JIT/size and security-release adoption
 conditions remain open. No production host or dependency changed. Independent
-source/final review is accepted; publication is pending. [Evidence](docs/spikes/typescript-aot.md).
+source/final review was accepted and PR262 merged after its exact-head fast
+SUCCESS. [Evidence](docs/spikes/typescript-aot.md).
 
 ## Core 10k Mac shipping — cache improvement measured, 2 ms script gate failed
 
@@ -218,8 +271,11 @@ The director authorized Phase 1 with remaining Phase 0 items deferred, sensible
 engineering progress without repeated advancement questions, and agent merges
 after scoped review and passing checks. These authorizations do not approve a
 phase gate. Section 12 decisions are settled. Current computer use and screen
-capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
-visual work, and Astra owns correctness and integration.
+capture are authorized. Claude Opus 5.5 with explicitly verified Max effort owns
+editor UI design, layout, styling and pixel review by default. Astra/root and
+subagents own all other work, including rendering and non-editor visuals, and may
+take over unresolved Claude editor UI work without another routing approval.
+Prior attempts and the same acceptance/evidence requirements remain in force.
 
 ## Private primitive world — current-main qualification complete
 

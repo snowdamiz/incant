@@ -1,0 +1,16 @@
+{
+  "at": "2026-10-14T03:13:21.912944+00:00",
+  "head": "f0ce00811ff30b836aaa606379656b4b20f028c3",
+  "accepted": true,
+  "manifest_sha256": "0edc507d7f15cf7a2a6d559a201ef4a38915420f09d254d92bf664fbbace59a3",
+  "archive_sha256": "c17c6318492a32e14c9c475dc3ee891fa60bf1daf27499b97a71f726bd53375b",
+  "audit_stdout_sha256": "791de2cb84791891325cbe3feb959d9ae74390793f6435c2ce94e31829d121ac",
+  "review": [
+    "Read final scope and all verifier/CPU audit source; current six production/test paths match reviewed03bc",
+    "Full independent portable/external/Git-source replay passed,508records131payloads,12negativecontrols",
+    "Actual CPU466cases/mode and source00284binaries preserved; originalgeneration188cases/mode separate",
+    "Same74authoredfiles and data/compiler/profile; six complete raw histogram/PCM runs reconstruct exactresults",
+    "Every candidate2ms gateFAIL preserved; all three5% metrics pass; noGPU/FPS/totalmemory/phaseclaim"
+  ],
+  "phase_gate_passed": false
+}

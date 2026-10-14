@@ -1,0 +1,1202 @@
+{
+  "schema": 1,
+  "base": "03bc4b987f3e553249846c4cfce991793d4d2c48",
+  "scope": "standalone diagnostic only; no production source change or shipping performance gate",
+  "archive_sha256": "71b4b4412cd38387509f4e04132b5892aa34f548fad088cc42b745ae6f85f922",
+  "records": [
+    {
+      "name": "prepared-001/Cargo.lock",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-001/Cargo.lock",
+      "sha256": "e8b06cba61eb910d0e47dd3238642286b276a5afe0eb11e336f397074c2873dd",
+      "bytes": 253026,
+      "external": false
+    },
+    {
+      "name": "prepared-001/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-001/Cargo.toml",
+      "sha256": "91f67e3198470f470191a1ca798a7789899b45223a5db314375fcc676aa5d027",
+      "bytes": 289,
+      "external": false
+    },
+    {
+      "name": "prepared-001/baseline.js",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-001/baseline.js",
+      "sha256": "eee6e52ebf90b8e15a7410ed34b04373257df3a8a8dbb6390d8f01b277d9cbc6",
+      "bytes": 6145,
+      "external": false
+    },
+    {
+      "name": "prepared-001/baseline.ts",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-001/baseline.ts",
+      "sha256": "7285e9009633052ba86ee0996c87f58097eb47fdaf0a73df10f42597b0119f1a",
+      "bytes": 3513,
+      "external": false
+    },
+    {
+      "name": "prepared-001/count.js",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-001/count.js",
+      "sha256": "6b686e6a637d0e25353c672a94f4f597633fae6aaf6d6340f700275562473396",
+      "bytes": 6160,
+      "external": false
+    },
+    {
+      "name": "prepared-001/count.ts",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-001/count.ts",
+      "sha256": "7fb694f93aaf702dbeba881cd128dc8f0ae59b2f11bbad2f16705e893e2518c0",
+      "bytes": 3530,
+      "external": false
+    },
+    {
+      "name": "prepared-001/cursor.js",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-001/cursor.js",
+      "sha256": "bb19af2f0fa7015e0a95d221b0ec1bf85a90f155f5772aa7d01670435e956f3f",
+      "bytes": 6162,
+      "external": false
+    },
+    {
+      "name": "prepared-001/cursor.ts",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-001/cursor.ts",
+      "sha256": "3073b6302b5d2e1d8af847c53a7913e6f2a24b4e49932f16c3b2cf9f5b0f8d2d",
+      "bytes": 3532,
+      "external": false
+    },
+    {
+      "name": "prepared-001/length.js",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-001/length.js",
+      "sha256": "fdc79598e501f8870e07cdde3d137c7ad79ab48f67241499ca88231f95e4a05d",
+      "bytes": 6177,
+      "external": false
+    },
+    {
+      "name": "prepared-001/length.ts",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-001/length.ts",
+      "sha256": "f88bd2efd90d422962aef3b4e717f31ae18ed617e429d699421be63f502cde8c",
+      "bytes": 3547,
+      "external": false
+    },
+    {
+      "name": "prepared-001/locals.js",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-001/locals.js",
+      "sha256": "89b1ac8fa301dac984e28b82adfc728a52be4a6d633a187baf398ec091787cfa",
+      "bytes": 6294,
+      "external": false
+    },
+    {
+      "name": "prepared-001/locals.ts",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-001/locals.ts",
+      "sha256": "1fe054839371c75f6828dee17262213cf06f82714cb80fb2053ad65960e9efe6",
+      "bytes": 3699,
+      "external": false
+    },
+    {
+      "name": "prepared-001/nanY.js",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-001/nanY.js",
+      "sha256": "22eb44863fd176d21d18f36daca42e7ffc83eade8e4a0106781beb4fbbb3e67b",
+      "bytes": 6131,
+      "external": false
+    },
+    {
+      "name": "prepared-001/nanY.ts",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-001/nanY.ts",
+      "sha256": "19676a39fb1f43170721d8d065f172664c9dc91365816dbe95c16327f30c86ab",
+      "bytes": 3499,
+      "external": false
+    },
+    {
+      "name": "prepared-001/nanZ.js",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-001/nanZ.js",
+      "sha256": "7abb76253807838a24fa59b4ce700f86d3db9ef8a04c44b8b63e81fc7465a360",
+      "bytes": 6131,
+      "external": false
+    },
+    {
+      "name": "prepared-001/nanZ.ts",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-001/nanZ.ts",
+      "sha256": "0038430e6c5b238dd7fc3a09653b3d9abd06eb5ce2e29a08b3e8f00cb79ac5e8",
+      "bytes": 3499,
+      "external": false
+    },
+    {
+      "name": "prepared-001/omitted.js",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-001/omitted.js",
+      "sha256": "91dcca17107b17be15b4ef5b537c8bfda03898e8379172fde0d1815dabaf6f7f",
+      "bytes": 6132,
+      "external": false
+    },
+    {
+      "name": "prepared-001/omitted.ts",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-001/omitted.ts",
+      "sha256": "3e0dc5734b04831ade785ecdb2c69bc6fd7ea5cdfb9757d142debc3db1ea6f39",
+      "bytes": 3500,
+      "external": false
+    },
+    {
+      "name": "prepared-001/soa.js",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-001/soa.js",
+      "sha256": "f0f502bec19445a0ba726398a16737e5ddea1760545804bdf3b1ba4dccbc005f",
+      "bytes": 6291,
+      "external": false
+    },
+    {
+      "name": "prepared-001/soa.ts",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-001/soa.ts",
+      "sha256": "aec8979f6f2bdfdece7da417910f274c3855d7becc0e216ae250f1b730d63dd6",
+      "bytes": 3702,
+      "external": false
+    },
+    {
+      "name": "prepared-001/source.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-001/source.json",
+      "sha256": "eb666233cac6a674836d4eb83841c61be425351dffa865f53a397764b9aaa442",
+      "bytes": 2326,
+      "external": false
+    },
+    {
+      "name": "prepared-001/src/main.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-001/src/main.rs",
+      "sha256": "e2cf70b3b7816a101bfc8ff16240067f9326c64fc72f4413af0a78bbaabaf707",
+      "bytes": 5748,
+      "external": false
+    },
+    {
+      "name": "prepared-002/Cargo.lock",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-002/Cargo.lock",
+      "sha256": "ec09d26a2caf8d7df9189e17af48b233cd1a5b68d64e4188e7b9b40bfddf47a6",
+      "bytes": 25704,
+      "external": false
+    },
+    {
+      "name": "prepared-002/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-002/Cargo.toml",
+      "sha256": "91f67e3198470f470191a1ca798a7789899b45223a5db314375fcc676aa5d027",
+      "bytes": 289,
+      "external": false
+    },
+    {
+      "name": "prepared-002/baseline.js",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-002/baseline.js",
+      "sha256": "eee6e52ebf90b8e15a7410ed34b04373257df3a8a8dbb6390d8f01b277d9cbc6",
+      "bytes": 6145,
+      "external": false
+    },
+    {
+      "name": "prepared-002/baseline.ts",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-002/baseline.ts",
+      "sha256": "7285e9009633052ba86ee0996c87f58097eb47fdaf0a73df10f42597b0119f1a",
+      "bytes": 3513,
+      "external": false
+    },
+    {
+      "name": "prepared-002/count.js",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-002/count.js",
+      "sha256": "6b686e6a637d0e25353c672a94f4f597633fae6aaf6d6340f700275562473396",
+      "bytes": 6160,
+      "external": false
+    },
+    {
+      "name": "prepared-002/count.ts",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-002/count.ts",
+      "sha256": "7fb694f93aaf702dbeba881cd128dc8f0ae59b2f11bbad2f16705e893e2518c0",
+      "bytes": 3530,
+      "external": false
+    },
+    {
+      "name": "prepared-002/cursor.js",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-002/cursor.js",
+      "sha256": "bb19af2f0fa7015e0a95d221b0ec1bf85a90f155f5772aa7d01670435e956f3f",
+      "bytes": 6162,
+      "external": false
+    },
+    {
+      "name": "prepared-002/cursor.ts",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-002/cursor.ts",
+      "sha256": "3073b6302b5d2e1d8af847c53a7913e6f2a24b4e49932f16c3b2cf9f5b0f8d2d",
+      "bytes": 3532,
+      "external": false
+    },
+    {
+      "name": "prepared-002/length.js",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-002/length.js",
+      "sha256": "fdc79598e501f8870e07cdde3d137c7ad79ab48f67241499ca88231f95e4a05d",
+      "bytes": 6177,
+      "external": false
+    },
+    {
+      "name": "prepared-002/length.ts",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-002/length.ts",
+      "sha256": "f88bd2efd90d422962aef3b4e717f31ae18ed617e429d699421be63f502cde8c",
+      "bytes": 3547,
+      "external": false
+    },
+    {
+      "name": "prepared-002/locals.js",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-002/locals.js",
+      "sha256": "89b1ac8fa301dac984e28b82adfc728a52be4a6d633a187baf398ec091787cfa",
+      "bytes": 6294,
+      "external": false
+    },
+    {
+      "name": "prepared-002/locals.ts",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-002/locals.ts",
+      "sha256": "1fe054839371c75f6828dee17262213cf06f82714cb80fb2053ad65960e9efe6",
+      "bytes": 3699,
+      "external": false
+    },
+    {
+      "name": "prepared-002/nanY.js",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-002/nanY.js",
+      "sha256": "22eb44863fd176d21d18f36daca42e7ffc83eade8e4a0106781beb4fbbb3e67b",
+      "bytes": 6131,
+      "external": false
+    },
+    {
+      "name": "prepared-002/nanY.ts",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-002/nanY.ts",
+      "sha256": "19676a39fb1f43170721d8d065f172664c9dc91365816dbe95c16327f30c86ab",
+      "bytes": 3499,
+      "external": false
+    },
+    {
+      "name": "prepared-002/nanZ.js",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-002/nanZ.js",
+      "sha256": "7abb76253807838a24fa59b4ce700f86d3db9ef8a04c44b8b63e81fc7465a360",
+      "bytes": 6131,
+      "external": false
+    },
+    {
+      "name": "prepared-002/nanZ.ts",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-002/nanZ.ts",
+      "sha256": "0038430e6c5b238dd7fc3a09653b3d9abd06eb5ce2e29a08b3e8f00cb79ac5e8",
+      "bytes": 3499,
+      "external": false
+    },
+    {
+      "name": "prepared-002/omitted.js",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-002/omitted.js",
+      "sha256": "91dcca17107b17be15b4ef5b537c8bfda03898e8379172fde0d1815dabaf6f7f",
+      "bytes": 6132,
+      "external": false
+    },
+    {
+      "name": "prepared-002/omitted.ts",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-002/omitted.ts",
+      "sha256": "3e0dc5734b04831ade785ecdb2c69bc6fd7ea5cdfb9757d142debc3db1ea6f39",
+      "bytes": 3500,
+      "external": false
+    },
+    {
+      "name": "prepared-002/soa.js",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-002/soa.js",
+      "sha256": "f0f502bec19445a0ba726398a16737e5ddea1760545804bdf3b1ba4dccbc005f",
+      "bytes": 6291,
+      "external": false
+    },
+    {
+      "name": "prepared-002/soa.ts",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-002/soa.ts",
+      "sha256": "aec8979f6f2bdfdece7da417910f274c3855d7becc0e216ae250f1b730d63dd6",
+      "bytes": 3702,
+      "external": false
+    },
+    {
+      "name": "prepared-002/source.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-002/source.json",
+      "sha256": "eb666233cac6a674836d4eb83841c61be425351dffa865f53a397764b9aaa442",
+      "bytes": 2326,
+      "external": false
+    },
+    {
+      "name": "prepared-002/src/main.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-002/src/main.rs",
+      "sha256": "e2cf70b3b7816a101bfc8ff16240067f9326c64fc72f4413af0a78bbaabaf707",
+      "bytes": 5748,
+      "external": false
+    },
+    {
+      "name": "prepared-003/Cargo.lock",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-003/Cargo.lock",
+      "sha256": "48068f8810e383a9503656bb2b2f9e77e6f30091055904c7c3fd4a235afe00d2",
+      "bytes": 25706,
+      "external": false
+    },
+    {
+      "name": "prepared-003/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-003/Cargo.toml",
+      "sha256": "07894047a01b80d2aeb2756907b90a40a371fbe4ba7184fb3940d9566c4883fa",
+      "bytes": 289,
+      "external": false
+    },
+    {
+      "name": "prepared-003/baseline.js",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-003/baseline.js",
+      "sha256": "eee6e52ebf90b8e15a7410ed34b04373257df3a8a8dbb6390d8f01b277d9cbc6",
+      "bytes": 6145,
+      "external": false
+    },
+    {
+      "name": "prepared-003/baseline.ts",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-003/baseline.ts",
+      "sha256": "7285e9009633052ba86ee0996c87f58097eb47fdaf0a73df10f42597b0119f1a",
+      "bytes": 3513,
+      "external": false
+    },
+    {
+      "name": "prepared-003/count.js",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-003/count.js",
+      "sha256": "6b686e6a637d0e25353c672a94f4f597633fae6aaf6d6340f700275562473396",
+      "bytes": 6160,
+      "external": false
+    },
+    {
+      "name": "prepared-003/count.ts",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-003/count.ts",
+      "sha256": "7fb694f93aaf702dbeba881cd128dc8f0ae59b2f11bbad2f16705e893e2518c0",
+      "bytes": 3530,
+      "external": false
+    },
+    {
+      "name": "prepared-003/cursor.js",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-003/cursor.js",
+      "sha256": "bb19af2f0fa7015e0a95d221b0ec1bf85a90f155f5772aa7d01670435e956f3f",
+      "bytes": 6162,
+      "external": false
+    },
+    {
+      "name": "prepared-003/cursor.ts",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-003/cursor.ts",
+      "sha256": "3073b6302b5d2e1d8af847c53a7913e6f2a24b4e49932f16c3b2cf9f5b0f8d2d",
+      "bytes": 3532,
+      "external": false
+    },
+    {
+      "name": "prepared-003/length.js",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-003/length.js",
+      "sha256": "fdc79598e501f8870e07cdde3d137c7ad79ab48f67241499ca88231f95e4a05d",
+      "bytes": 6177,
+      "external": false
+    },
+    {
+      "name": "prepared-003/length.ts",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-003/length.ts",
+      "sha256": "f88bd2efd90d422962aef3b4e717f31ae18ed617e429d699421be63f502cde8c",
+      "bytes": 3547,
+      "external": false
+    },
+    {
+      "name": "prepared-003/locals.js",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-003/locals.js",
+      "sha256": "89b1ac8fa301dac984e28b82adfc728a52be4a6d633a187baf398ec091787cfa",
+      "bytes": 6294,
+      "external": false
+    },
+    {
+      "name": "prepared-003/locals.ts",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-003/locals.ts",
+      "sha256": "1fe054839371c75f6828dee17262213cf06f82714cb80fb2053ad65960e9efe6",
+      "bytes": 3699,
+      "external": false
+    },
+    {
+      "name": "prepared-003/nanY.js",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-003/nanY.js",
+      "sha256": "22eb44863fd176d21d18f36daca42e7ffc83eade8e4a0106781beb4fbbb3e67b",
+      "bytes": 6131,
+      "external": false
+    },
+    {
+      "name": "prepared-003/nanY.ts",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-003/nanY.ts",
+      "sha256": "19676a39fb1f43170721d8d065f172664c9dc91365816dbe95c16327f30c86ab",
+      "bytes": 3499,
+      "external": false
+    },
+    {
+      "name": "prepared-003/nanZ.js",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-003/nanZ.js",
+      "sha256": "7abb76253807838a24fa59b4ce700f86d3db9ef8a04c44b8b63e81fc7465a360",
+      "bytes": 6131,
+      "external": false
+    },
+    {
+      "name": "prepared-003/nanZ.ts",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-003/nanZ.ts",
+      "sha256": "0038430e6c5b238dd7fc3a09653b3d9abd06eb5ce2e29a08b3e8f00cb79ac5e8",
+      "bytes": 3499,
+      "external": false
+    },
+    {
+      "name": "prepared-003/omitted.js",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-003/omitted.js",
+      "sha256": "91dcca17107b17be15b4ef5b537c8bfda03898e8379172fde0d1815dabaf6f7f",
+      "bytes": 6132,
+      "external": false
+    },
+    {
+      "name": "prepared-003/omitted.ts",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-003/omitted.ts",
+      "sha256": "3e0dc5734b04831ade785ecdb2c69bc6fd7ea5cdfb9757d142debc3db1ea6f39",
+      "bytes": 3500,
+      "external": false
+    },
+    {
+      "name": "prepared-003/soa.js",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-003/soa.js",
+      "sha256": "f0f502bec19445a0ba726398a16737e5ddea1760545804bdf3b1ba4dccbc005f",
+      "bytes": 6291,
+      "external": false
+    },
+    {
+      "name": "prepared-003/soa.ts",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-003/soa.ts",
+      "sha256": "aec8979f6f2bdfdece7da417910f274c3855d7becc0e216ae250f1b730d63dd6",
+      "bytes": 3702,
+      "external": false
+    },
+    {
+      "name": "prepared-003/source.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-003/source.json",
+      "sha256": "eb666233cac6a674836d4eb83841c61be425351dffa865f53a397764b9aaa442",
+      "bytes": 2326,
+      "external": false
+    },
+    {
+      "name": "prepared-003/src/main.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/prepared-003/src/main.rs",
+      "sha256": "e2cf70b3b7816a101bfc8ff16240067f9326c64fc72f4413af0a78bbaabaf707",
+      "bytes": 5748,
+      "external": false
+    },
+    {
+      "name": "run-001/build.active.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-001/build.active.json",
+      "sha256": "817bf7bbe8117aa5ebcda94b5e1a776f22e4cb15af2fee39c656fe5df6443b65",
+      "bytes": 624,
+      "external": false
+    },
+    {
+      "name": "run-001/build.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-001/build.json",
+      "sha256": "0a8dee98d8895c11dd43cd505196f451e7e9b5bb712413644d3cc48e7a669fb6",
+      "bytes": 1109,
+      "external": false
+    },
+    {
+      "name": "run-001/build.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-001/build.stderr",
+      "sha256": "d8c774d9e14e28f97259b386618c9e6a499dc7d09ce91c8dd8f3ec098e8f0b7d",
+      "bytes": 280,
+      "external": false
+    },
+    {
+      "name": "run-001/build.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-001/build.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "external": false
+    },
+    {
+      "name": "run-001/lock.active.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-001/lock.active.json",
+      "sha256": "2db73ea086720c3bdbc9bf0f4e0a1ceb95dc37382d1eb2f55357949fecf59397",
+      "bytes": 578,
+      "external": false
+    },
+    {
+      "name": "run-001/lock.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-001/lock.json",
+      "sha256": "8339943561527bafb6422ec6bce344c0cac6ee218a3db7d8a673bab046db12f6",
+      "bytes": 1060,
+      "external": false
+    },
+    {
+      "name": "run-001/lock.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-001/lock.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "external": false
+    },
+    {
+      "name": "run-001/lock.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-001/lock.stdout",
+      "sha256": "663a3b9e9efe351c5a98318df41c5763826753b6dde342ef741e6805baa200ac",
+      "bytes": 2119,
+      "external": false
+    },
+    {
+      "name": "run-001/node-version.active.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-001/node-version.active.json",
+      "sha256": "33d6af9de143f8c707c67535099bb272b4a4c6a0a9e5c05ffe7a408f5b2a9e0f",
+      "bytes": 472,
+      "external": false
+    },
+    {
+      "name": "run-001/node-version.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-001/node-version.json",
+      "sha256": "c16eca8dd8bfa8d937e18dd71151c41d8a784b3e171ca128b9de53c1c4bf3b23",
+      "bytes": 967,
+      "external": false
+    },
+    {
+      "name": "run-001/node-version.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-001/node-version.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "external": false
+    },
+    {
+      "name": "run-001/node-version.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-001/node-version.stdout",
+      "sha256": "33e26f35db6e57ce0c486ddc815fe966867e4f649e418eaf323f75f4720eb8e9",
+      "bytes": 9,
+      "external": false
+    },
+    {
+      "name": "run-001/prepare.active.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-001/prepare.active.json",
+      "sha256": "2cf1757024f38afaf40e7cc676c04f13a5c25ec3e752e14f36b776e80b36ed0e",
+      "bytes": 639,
+      "external": false
+    },
+    {
+      "name": "run-001/prepare.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-001/prepare.json",
+      "sha256": "1a03f5494849b31150f362e1341d4054561aec5e2b756b38db4c12a716828533",
+      "bytes": 1126,
+      "external": false
+    },
+    {
+      "name": "run-001/prepare.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-001/prepare.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "external": false
+    },
+    {
+      "name": "run-001/prepare.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-001/prepare.stdout",
+      "sha256": "0629f10d42549900ab61826955394a67aef1d98ac9fc8da582b227eb6aed5e50",
+      "bytes": 191,
+      "external": false
+    },
+    {
+      "name": "run-001/prepared-freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-001/prepared-freeze.json",
+      "sha256": "5ba47f73571cfecfcc3e807d622edad6d7f305f5d9f1942b4169152ceecfc4b8",
+      "bytes": 5136,
+      "external": false
+    },
+    {
+      "name": "run-001/rustc-version.active.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-001/rustc-version.active.json",
+      "sha256": "f003fe747c3890472c65adc54527bc85f35029401098397783632e0fba1353c4",
+      "bytes": 430,
+      "external": false
+    },
+    {
+      "name": "run-001/rustc-version.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-001/rustc-version.json",
+      "sha256": "4ed5a8e4d0eb2515c1a3637fc5f99a18cb4aca64bc111a52d351a69fd55e62cd",
+      "bytes": 929,
+      "external": false
+    },
+    {
+      "name": "run-001/rustc-version.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-001/rustc-version.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "external": false
+    },
+    {
+      "name": "run-001/rustc-version.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-001/rustc-version.stdout",
+      "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "bytes": 192,
+      "external": false
+    },
+    {
+      "name": "run-002/lock.active.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-002/lock.active.json",
+      "sha256": "5b4e071362be8fd210cc6a6d8f88e766050984c6268115557236c66ce90f31e6",
+      "bytes": 561,
+      "external": false
+    },
+    {
+      "name": "run-002/lock.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-002/lock.json",
+      "sha256": "1803b4061f014a22a4d6bc4473d3e6aa27011703a4c0fab120b1b4c18f29d5d4",
+      "bytes": 1047,
+      "external": false
+    },
+    {
+      "name": "run-002/lock.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-002/lock.stderr",
+      "sha256": "d019df02ce98bc4fc2feea903df496626ce53d0dd3bd15605fa17af2de44e109",
+      "bytes": 132,
+      "external": false
+    },
+    {
+      "name": "run-002/lock.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-002/lock.stdout",
+      "sha256": "563ea0611b6f9968fc6aadb100e1e08512ec9d4117e6fec45a1063469cd3d9b8",
+      "bytes": 519048,
+      "external": false
+    },
+    {
+      "name": "run-002/node-version.active.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-002/node-version.active.json",
+      "sha256": "fa1ddb0725438840b3f33f47d5b0500f56e2cdac356d43640e456493a1f060f5",
+      "bytes": 472,
+      "external": false
+    },
+    {
+      "name": "run-002/node-version.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-002/node-version.json",
+      "sha256": "7884ea93b13cc8a384fd4926694cdf776654d5d4e2008d0dc1ee772349eee698",
+      "bytes": 967,
+      "external": false
+    },
+    {
+      "name": "run-002/node-version.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-002/node-version.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "external": false
+    },
+    {
+      "name": "run-002/node-version.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-002/node-version.stdout",
+      "sha256": "33e26f35db6e57ce0c486ddc815fe966867e4f649e418eaf323f75f4720eb8e9",
+      "bytes": 9,
+      "external": false
+    },
+    {
+      "name": "run-002/prepare.active.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-002/prepare.active.json",
+      "sha256": "ed0330ed1da9fb742298181b03b7f539da50ef24afbd916a012e9c3cb093b6c4",
+      "bytes": 639,
+      "external": false
+    },
+    {
+      "name": "run-002/prepare.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-002/prepare.json",
+      "sha256": "8549de99cd43516f207723afc0d24d2779c3283c4ce4c8d775605aa2645f5bee",
+      "bytes": 1126,
+      "external": false
+    },
+    {
+      "name": "run-002/prepare.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-002/prepare.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "external": false
+    },
+    {
+      "name": "run-002/prepare.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-002/prepare.stdout",
+      "sha256": "d0bbc7702d1378f97e9a298a2cd938f9295c96ffc5ceb204c755398317fc5a66",
+      "bytes": 191,
+      "external": false
+    },
+    {
+      "name": "run-002/rustc-version.active.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-002/rustc-version.active.json",
+      "sha256": "b6f5d10acb7e4c509a20adb5419d75e4368d1bf9258fade58783c3367fd81130",
+      "bytes": 430,
+      "external": false
+    },
+    {
+      "name": "run-002/rustc-version.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-002/rustc-version.json",
+      "sha256": "a45e1f61a2fbda5185136a6caf390a7726ca5fc077df5552ee4feb8c53180055",
+      "bytes": 929,
+      "external": false
+    },
+    {
+      "name": "run-002/rustc-version.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-002/rustc-version.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "external": false
+    },
+    {
+      "name": "run-002/rustc-version.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-002/rustc-version.stdout",
+      "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "bytes": 192,
+      "external": false
+    },
+    {
+      "name": "run-002.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-002.py",
+      "sha256": "03c3811faec2d9737e82d1fde0cc0aa1bc25e932ed933aeb3d308270b01f5ee2",
+      "bytes": 4421,
+      "external": false
+    },
+    {
+      "name": "run-003/binary.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-003/binary.json",
+      "sha256": "4521929665cb75319d66246547d8ac45a85356aa2ff78e4519cb79e8623b4b53",
+      "bytes": 449,
+      "external": false
+    },
+    {
+      "name": "run-003/build.active.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-003/build.active.json",
+      "sha256": "98215c0b1e2763f4baf0c3cb886c5438932e86914fe5bef91fdc40bc969eb852",
+      "bytes": 624,
+      "external": false
+    },
+    {
+      "name": "run-003/build.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-003/build.json",
+      "sha256": "fa59903234027e8f43d6c2cb89eb904c0256f38f90655d7fedaa02c73d051e9f",
+      "bytes": 1108,
+      "external": false
+    },
+    {
+      "name": "run-003/build.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-003/build.stderr",
+      "sha256": "fbb1c24fe346700776705570be28f8c685225a0b9cf2ab111ee631cbdbe0d5fa",
+      "bytes": 2238,
+      "external": false
+    },
+    {
+      "name": "run-003/build.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-003/build.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "external": false
+    },
+    {
+      "name": "run-003/clippy.active.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-003/clippy.active.json",
+      "sha256": "baed538a33c674999a8ba387dbb6279027dfd37b885a1bd411ac7f811a35bd1c",
+      "bytes": 683,
+      "external": false
+    },
+    {
+      "name": "run-003/clippy.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-003/clippy.json",
+      "sha256": "cf95b0475f4f9fd33d7f01a47f90d964b1b1f2f32d7c1321b60cc48350f474c1",
+      "bytes": 1169,
+      "external": false
+    },
+    {
+      "name": "run-003/clippy.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-003/clippy.stderr",
+      "sha256": "bba17e3abfbd535a1e712da90d05ca4e7dadb23c3be65c2656fbb66e552c64a7",
+      "bytes": 1478,
+      "external": false
+    },
+    {
+      "name": "run-003/clippy.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-003/clippy.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "external": false
+    },
+    {
+      "name": "run-003/diagnostic.active.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-003/diagnostic.active.json",
+      "sha256": "a88e0407bda73423230700613b3818e7f9aec8f9ab8dbf7f60b7ebf2b090d26d",
+      "bytes": 551,
+      "external": false
+    },
+    {
+      "name": "run-003/diagnostic.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-003/diagnostic.json",
+      "sha256": "d3ab283f407c843774a5dd99dc4ae41ebcc887c0c159e837b63ac3e6a74035e2",
+      "bytes": 1046,
+      "external": false
+    },
+    {
+      "name": "run-003/diagnostic.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-003/diagnostic.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "external": false
+    },
+    {
+      "name": "run-003/diagnostic.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-003/diagnostic.stdout",
+      "sha256": "4e2ac34b28eb66d6baa479a43e1c01b8c7a021f6bf037634b495d7c4041d27c1",
+      "bytes": 44152,
+      "external": false
+    },
+    {
+      "name": "run-003/incant-core-tick-diagnostic",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-003/incant-core-tick-diagnostic",
+      "sha256": "727003785ebd571ee327fa21818c88034d7b88cd89044917840cea1840b0f16e",
+      "bytes": 2520896,
+      "external": true
+    },
+    {
+      "name": "run-003/lock.active.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-003/lock.active.json",
+      "sha256": "0e48281e921be369fa39613c379f8fd8d808dcf95fa72e9e571f45851e8995ef",
+      "bytes": 561,
+      "external": false
+    },
+    {
+      "name": "run-003/lock.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-003/lock.json",
+      "sha256": "8d28ddfc9bff4553be164dc1bc8c6a21da743d8dd694d548c5dd084395c786ba",
+      "bytes": 1045,
+      "external": false
+    },
+    {
+      "name": "run-003/lock.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-003/lock.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "external": false
+    },
+    {
+      "name": "run-003/lock.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-003/lock.stdout",
+      "sha256": "5e9e32e69266965c66008dfd0fca96f3a19f51b2f410419771d8e0e0a2ca4406",
+      "bytes": 518199,
+      "external": false
+    },
+    {
+      "name": "run-003/node-version.active.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-003/node-version.active.json",
+      "sha256": "f7a3b07a24f8fa7824f1a1b870b631712707559b0a0913cf720f1870ebed0a10",
+      "bytes": 472,
+      "external": false
+    },
+    {
+      "name": "run-003/node-version.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-003/node-version.json",
+      "sha256": "d592534dcac770834106047cecc8970c9144e30334b588f6ad103b0f44d22c02",
+      "bytes": 967,
+      "external": false
+    },
+    {
+      "name": "run-003/node-version.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-003/node-version.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "external": false
+    },
+    {
+      "name": "run-003/node-version.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-003/node-version.stdout",
+      "sha256": "33e26f35db6e57ce0c486ddc815fe966867e4f649e418eaf323f75f4720eb8e9",
+      "bytes": 9,
+      "external": false
+    },
+    {
+      "name": "run-003/prepare.active.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-003/prepare.active.json",
+      "sha256": "e4fb1bd6e1874aa8f0a19a335f88e0f9adf441805559234192d41f887925de43",
+      "bytes": 639,
+      "external": false
+    },
+    {
+      "name": "run-003/prepare.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-003/prepare.json",
+      "sha256": "02ba061ecf357d6e39bdd82ca9bfb16944d44266fdbed5774a710bc0ec36e6e6",
+      "bytes": 1126,
+      "external": false
+    },
+    {
+      "name": "run-003/prepare.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-003/prepare.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "external": false
+    },
+    {
+      "name": "run-003/prepare.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-003/prepare.stdout",
+      "sha256": "3addaa5b93af7138f6d6f2b0e829e427f4d23bb08affa3d825bb0b0b644a2374",
+      "bytes": 191,
+      "external": false
+    },
+    {
+      "name": "run-003/prepared-freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-003/prepared-freeze.json",
+      "sha256": "61105fe1a7eef7e4d0f14b8c659b84c6732cc1723b86baad43c1218cc7799e6e",
+      "bytes": 5135,
+      "external": false
+    },
+    {
+      "name": "run-003/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-003/result.json",
+      "sha256": "cae3a1ba9154b513cd1d1d8b927e2eedc7a7dc5d8b7b17037770054986f0f79b",
+      "bytes": 8431,
+      "external": false
+    },
+    {
+      "name": "run-003/rustc-version.active.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-003/rustc-version.active.json",
+      "sha256": "8384c4d0ff983c348ff5e7d3eca194a30c5220ef4eea23080d844b05af8c64eb",
+      "bytes": 430,
+      "external": false
+    },
+    {
+      "name": "run-003/rustc-version.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-003/rustc-version.json",
+      "sha256": "72d94840575b2e5e12605d04c33843615dfe42ea25fb6f99c42ec60f6a5eb07d",
+      "bytes": 929,
+      "external": false
+    },
+    {
+      "name": "run-003/rustc-version.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-003/rustc-version.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "external": false
+    },
+    {
+      "name": "run-003/rustc-version.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-003/rustc-version.stdout",
+      "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "bytes": 192,
+      "external": false
+    },
+    {
+      "name": "run-003/summary.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-003/summary.json",
+      "sha256": "f9512854b8cecb4fd52f223c89cb4bcfe4c3323334a1b4c6823e5cf7c6600567",
+      "bytes": 5637,
+      "external": false
+    },
+    {
+      "name": "run-003.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run-003.py",
+      "sha256": "848c44915ca52024863e5c831455057d49cd9da2a561d41c21c9a32248484f31",
+      "bytes": 4421,
+      "external": false
+    },
+    {
+      "name": "run.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/run.py",
+      "sha256": "5e4acb1bc875ac98213fa28300c41b4cad2f711fcb0dc325a4a1756033957411",
+      "bytes": 4433,
+      "external": false
+    },
+    {
+      "name": "source-001/files/Cargo.lock",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/source-001/files/Cargo.lock",
+      "sha256": "e8b06cba61eb910d0e47dd3238642286b276a5afe0eb11e336f397074c2873dd",
+      "bytes": 253026,
+      "external": false
+    },
+    {
+      "name": "source-001/files/rust-toolchain.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/source-001/files/rust-toolchain.toml",
+      "sha256": "c6e63d9832830b858d930007e4fd1fc3f4a3ca1d287483b08077b7f0267ca124",
+      "bytes": 100,
+      "external": false
+    },
+    {
+      "name": "source-001/files/samples/core/stress.ts",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/source-001/files/samples/core/stress.ts",
+      "sha256": "7285e9009633052ba86ee0996c87f58097eb47fdaf0a73df10f42597b0119f1a",
+      "bytes": 3513,
+      "external": false
+    },
+    {
+      "name": "source-001/files/tools/probes/core-tick-cost/README.md",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/source-001/files/tools/probes/core-tick-cost/README.md",
+      "sha256": "30dc90af2f3feac66852bce8dfb191b1b5ec275e29fd9067841fae78560fd570",
+      "bytes": 2364,
+      "external": false
+    },
+    {
+      "name": "source-001/files/tools/probes/core-tick-cost/fixture.js",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/source-001/files/tools/probes/core-tick-cost/fixture.js",
+      "sha256": "9b871c0035954dfa7eef76e674e7acb74dd19f8d0d8f0b629a6df7097beab9f2",
+      "bytes": 2511,
+      "external": false
+    },
+    {
+      "name": "source-001/files/tools/probes/core-tick-cost/main.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/source-001/files/tools/probes/core-tick-cost/main.rs",
+      "sha256": "149d589dd92e6b6b9a17d51022539dc462d67509d69b372681b64d0f514e46db",
+      "bytes": 5568,
+      "external": false
+    },
+    {
+      "name": "source-001/files/tools/probes/core-tick-cost/prepare.mjs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/source-001/files/tools/probes/core-tick-cost/prepare.mjs",
+      "sha256": "0a490e01d5cf585db43368589a9d613c4ad1ddf4e78aadf9d18491a2925e2491",
+      "bytes": 4552,
+      "external": false
+    },
+    {
+      "name": "source-001/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/source-001/freeze.json",
+      "sha256": "f3eee7d96c2615183c7f118c19fb473dba84f9d6c0305239f3f70bb726ce9a87",
+      "bytes": 1382,
+      "external": false
+    },
+    {
+      "name": "source-002/files/Cargo.lock",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/source-002/files/Cargo.lock",
+      "sha256": "e8b06cba61eb910d0e47dd3238642286b276a5afe0eb11e336f397074c2873dd",
+      "bytes": 253026,
+      "external": false
+    },
+    {
+      "name": "source-002/files/rust-toolchain.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/source-002/files/rust-toolchain.toml",
+      "sha256": "c6e63d9832830b858d930007e4fd1fc3f4a3ca1d287483b08077b7f0267ca124",
+      "bytes": 100,
+      "external": false
+    },
+    {
+      "name": "source-002/files/samples/core/stress.ts",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/source-002/files/samples/core/stress.ts",
+      "sha256": "7285e9009633052ba86ee0996c87f58097eb47fdaf0a73df10f42597b0119f1a",
+      "bytes": 3513,
+      "external": false
+    },
+    {
+      "name": "source-002/files/tools/probes/core-tick-cost/README.md",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/source-002/files/tools/probes/core-tick-cost/README.md",
+      "sha256": "ff647632b0c105ff06e9268c5c8c7ee8fd92067985e1528d559f1d830b269aad",
+      "bytes": 2467,
+      "external": false
+    },
+    {
+      "name": "source-002/files/tools/probes/core-tick-cost/fixture.js",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/source-002/files/tools/probes/core-tick-cost/fixture.js",
+      "sha256": "92a3e0ab4043b53e181c001ac1591786fe659b183ee1ac30572f42010dd081c8",
+      "bytes": 2615,
+      "external": false
+    },
+    {
+      "name": "source-002/files/tools/probes/core-tick-cost/main.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/source-002/files/tools/probes/core-tick-cost/main.rs",
+      "sha256": "e2cf70b3b7816a101bfc8ff16240067f9326c64fc72f4413af0a78bbaabaf707",
+      "bytes": 5748,
+      "external": false
+    },
+    {
+      "name": "source-002/files/tools/probes/core-tick-cost/prepare.mjs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/source-002/files/tools/probes/core-tick-cost/prepare.mjs",
+      "sha256": "0e2aba29d0b69ae327fdb7faa5d6e85cab65792e21f64f31a85ee7e83389513b",
+      "bytes": 4860,
+      "external": false
+    },
+    {
+      "name": "source-002/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/source-002/freeze.json",
+      "sha256": "cf5e6f98d8549e36ad39775ce44e954c83aa5d6f891bf2153b5542235e6d7743",
+      "bytes": 1515,
+      "external": false
+    },
+    {
+      "name": "source-003/files/Cargo.lock",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/source-003/files/Cargo.lock",
+      "sha256": "e8b06cba61eb910d0e47dd3238642286b276a5afe0eb11e336f397074c2873dd",
+      "bytes": 253026,
+      "external": false
+    },
+    {
+      "name": "source-003/files/rust-toolchain.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/source-003/files/rust-toolchain.toml",
+      "sha256": "c6e63d9832830b858d930007e4fd1fc3f4a3ca1d287483b08077b7f0267ca124",
+      "bytes": 100,
+      "external": false
+    },
+    {
+      "name": "source-003/files/samples/core/stress.ts",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/source-003/files/samples/core/stress.ts",
+      "sha256": "7285e9009633052ba86ee0996c87f58097eb47fdaf0a73df10f42597b0119f1a",
+      "bytes": 3513,
+      "external": false
+    },
+    {
+      "name": "source-003/files/tools/probes/core-tick-cost/README.md",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/source-003/files/tools/probes/core-tick-cost/README.md",
+      "sha256": "ff647632b0c105ff06e9268c5c8c7ee8fd92067985e1528d559f1d830b269aad",
+      "bytes": 2467,
+      "external": false
+    },
+    {
+      "name": "source-003/files/tools/probes/core-tick-cost/fixture.js",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/source-003/files/tools/probes/core-tick-cost/fixture.js",
+      "sha256": "92a3e0ab4043b53e181c001ac1591786fe659b183ee1ac30572f42010dd081c8",
+      "bytes": 2615,
+      "external": false
+    },
+    {
+      "name": "source-003/files/tools/probes/core-tick-cost/main.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/source-003/files/tools/probes/core-tick-cost/main.rs",
+      "sha256": "e2cf70b3b7816a101bfc8ff16240067f9326c64fc72f4413af0a78bbaabaf707",
+      "bytes": 5748,
+      "external": false
+    },
+    {
+      "name": "source-003/files/tools/probes/core-tick-cost/prepare.mjs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/source-003/files/tools/probes/core-tick-cost/prepare.mjs",
+      "sha256": "9aea20fba421047e7df950e52e0d15c8f4b9afb5f37a11c9fbe85a1e2f2ad6da",
+      "bytes": 4860,
+      "external": false
+    },
+    {
+      "name": "source-003/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-tick-cost-001/source-003/freeze.json",
+      "sha256": "7ecf8d8ebe7847cd692ce4b32398da7e35b7a1ccf62d04f8df8cb6f345285b10",
+      "bytes": 1564,
+      "external": false
+    },
+    {
+      "name": "reviews/core-tick-cost-source001-independent-20261014.json",
+      "original": "/Users/andreyyurlov/.codex/incant-reviews/core-tick-cost-source001-independent-20261014.json",
+      "sha256": "11c8c10b115bf7894fa2ac9f87370511feb28c3305fbae89d58c7f889ccfc343",
+      "bytes": 2320,
+      "external": false
+    },
+    {
+      "name": "reviews/core-tick-cost-source002-independent-20261014.json",
+      "original": "/Users/andreyyurlov/.codex/incant-reviews/core-tick-cost-source002-independent-20261014.json",
+      "sha256": "05c756edc3048697047937f86d7a21fca2d7e09cc83c3d454795c897a74a3e5d",
+      "bytes": 2802,
+      "external": false
+    },
+    {
+      "name": "reviews/core-tick-cost-source003-independent-20261014.json",
+      "original": "/Users/andreyyurlov/.codex/incant-reviews/core-tick-cost-source003-independent-20261014.json",
+      "sha256": "bbc93065c43575eedf632b1d41d687a83afefaa2eb3508a19150971f7c60c9dd",
+      "bytes": 885,
+      "external": false
+    }
+  ],
+  "current_sources": [
+    {
+      "path": "tools/probes/core-tick-cost/README.md",
+      "sha256": "ff647632b0c105ff06e9268c5c8c7ee8fd92067985e1528d559f1d830b269aad",
+      "bytes": 2467
+    },
+    {
+      "path": "tools/probes/core-tick-cost/fixture.js",
+      "sha256": "92a3e0ab4043b53e181c001ac1591786fe659b183ee1ac30572f42010dd081c8",
+      "bytes": 2615
+    },
+    {
+      "path": "tools/probes/core-tick-cost/main.rs",
+      "sha256": "e2cf70b3b7816a101bfc8ff16240067f9326c64fc72f4413af0a78bbaabaf707",
+      "bytes": 5748
+    },
+    {
+      "path": "tools/probes/core-tick-cost/prepare.mjs",
+      "sha256": "9aea20fba421047e7df950e52e0d15c8f4b9afb5f37a11c9fbe85a1e2f2ad6da",
+      "bytes": 4860
+    },
+    {
+      "path": "docs/spikes/core-tick-cost-diagnostics.md",
+      "sha256": "bda36ffb05d270e49e7241d3e362450012fc47dc2b30f0e6b7e2ac21cf8e7f6c",
+      "bytes": 4474
+    },
+    {
+      "path": "docs/spikes/evidence/core-tick-cost/verify.py",
+      "sha256": "c656cc7e2e31fea66980d11816f4a3579c39364789e1e581777490105d7322c0",
+      "bytes": 4738
+    }
+  ]
+}

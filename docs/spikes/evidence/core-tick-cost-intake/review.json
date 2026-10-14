@@ -1,0 +1,38 @@
+{
+  "status": "accepted",
+  "at": "2026-10-14T03:46:57.475764+00:00",
+  "reviewer": "astra independent integration review",
+  "producer": "a9017726fc9932d2fe029409db288ce0124c263e",
+  "manifest_sha256": "aff9489e707316026277d81e991b76bea547d7f4df335f1bca18d74f9369969f",
+  "archive_sha256": "71b4b4412cd38387509f4e04132b5892aa34f548fad088cc42b745ae6f85f922",
+  "findings": [],
+  "verified": {
+    "records": 166,
+    "payloads": 94,
+    "source_rows": 7,
+    "prepared_rows": 22,
+    "commands": 7,
+    "binary_sha256": "727003785ebd571ee327fa21818c88034d7b88cd89044917840cea1840b0f16e",
+    "raw_samples": 6600,
+    "negative_variants": [
+      "omitted",
+      "nanY",
+      "nanZ"
+    ]
+  },
+  "source_review": [
+    "Read complete Rust fixture, JS scalar oracle, exact-string source preparation, supervisor, portable verifier and scope documentation.",
+    "All three writes and both actual checksum reads preserved in generated candidate variants. Finite sentinel checks reject NaN and actual omitted writes. Untimed stride/ID/membership controls are separate from measured calls.",
+    "Synthetic Bevy proof checks world identity, entity generation and exact live u32 component; includes query preparation every measured batch. It does not prove Incant host performance or permit skipping identity checks."
+  ],
+  "limits": [
+    "Single fixed-order CI-profile standalone diagnostic, no quiet-window guarantee; no shipping or same-baseline engine gain claim.",
+    "Raw 6600 intervals and three negative controls replayed without executing binaries. Existing 2 ms actual Core shipping gate remains failed.",
+    "Source001 NaN-oracle finding and two lock/setup failures remain historical; final source003 logging pin matches engine lock."
+  ],
+  "current_main": "9800bd0c652de439ad985830b8c7ae0bcdd36fa6",
+  "composition": "a8a21d48ae1afc5420876b92c14709802c098742",
+  "source_equality": "All eight producer paths byte-exact; all seven frozen source003 inputs exact current composition; no crates/sdk/vendor/engine manifest/lock delta.",
+  "independent_raw_audit_sha256": "bb7e2dea592ae8701abb33992a271129ddc33c2cc5c3af9ce96212d473a1cff3",
+  "review_execution": "Producer read-only verifier --external --originals and separate independent original/archive/Git/interval replay passed. No new build, Node, Rust, GPU or measurement execution."
+}

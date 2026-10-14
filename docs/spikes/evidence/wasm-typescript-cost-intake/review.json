@@ -1,0 +1,110 @@
+{
+  "status": "ACCEPTED",
+  "source": "97834ab3282e0afb8b80820caf19394c929cf821",
+  "packet": "5d9715f9b50387c8937acfd18486eb8b227e2efa",
+  "manifest_sha256": "10728d8c8b4efa34d8050d963453e57097f78632065f86bb70a58371880da787",
+  "archive_sha256": "8cb67d3e8a4ce3621b71383ccdb8e8462502b8fba13b12c1805c1255d5d5b154",
+  "records": 617,
+  "payloads": 297,
+  "nonembedded_records": 55,
+  "quiet_protocol_and_helper_identities_verified": true,
+  "actual_executable_paths_verified": true,
+  "independent_p95_replay": [
+    {
+      "run": "typescript0",
+      "phase_intervals": {
+        "player.frame": {
+          "lower": 180001,
+          "upper": 190000
+        },
+        "script.tick": {
+          "lower": 140001,
+          "upper": 150000
+        }
+      }
+    },
+    {
+      "run": "wasm0",
+      "phase_intervals": {
+        "player.frame": {
+          "lower": 130001,
+          "upper": 140000
+        },
+        "script.static_module": {
+          "lower": 80001,
+          "upper": 90000
+        }
+      }
+    },
+    {
+      "run": "wasm1",
+      "phase_intervals": {
+        "player.frame": {
+          "lower": 120001,
+          "upper": 130000
+        },
+        "script.static_module": {
+          "lower": 80001,
+          "upper": 90000
+        }
+      }
+    },
+    {
+      "run": "typescript1",
+      "phase_intervals": {
+        "player.frame": {
+          "lower": 200001,
+          "upper": 210000
+        },
+        "script.tick": {
+          "lower": 150001,
+          "upper": 160000
+        }
+      }
+    },
+    {
+      "run": "typescript2",
+      "phase_intervals": {
+        "player.frame": {
+          "lower": 180001,
+          "upper": 190000
+        },
+        "script.tick": {
+          "lower": 140001,
+          "upper": 150000
+        }
+      }
+    },
+    {
+      "run": "wasm2",
+      "phase_intervals": {
+        "player.frame": {
+          "lower": 120001,
+          "upper": 130000
+        },
+        "script.static_module": {
+          "lower": 80001,
+          "upper": 90000
+        }
+      }
+    }
+  ],
+  "producer_verifier_exit": 0,
+  "producer_verifier_stdout_sha256": "ceecea0d7cd735edf154f9b296b25896ce4d125700561a3efe72e76426275714",
+  "reviewed": [
+    "Public authoring transactions and exact backend registration delta",
+    "Phase selection and unchanged default TypeScript baseline policy",
+    "Bounded native process/RPC cleanup and lifecycle controls",
+    "Exact guest/SDK/capture identities and shipping flags/dependency graphs",
+    "All-row observed parity, silent PCM, all included frames and rational interval endpoints",
+    "Archive originals, embedded bytes and both immutable Git source generations"
+  ],
+  "findings": [],
+  "limits": [
+    "Historical source97834; no fresh current-main shipping execution",
+    "Descriptive cross-backend comparison, no same-baseline5percent or2ms gate result",
+    "No startup/Core10k/FPS/GPU/mobile/phase claim",
+    "Low-power mode unavailable; three pairs are not statistical confidence intervals"
+  ],
+  "replay": "audit.py is read-only; no builds, players or measurements executed"
+}

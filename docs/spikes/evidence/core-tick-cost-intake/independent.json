@@ -1,0 +1,221 @@
+{
+  "passed": true,
+  "producer": "a9017726fc9932d2fe029409db288ce0124c263e",
+  "manifest_sha256": "aff9489e707316026277d81e991b76bea547d7f4df335f1bca18d74f9369969f",
+  "archive_sha256": "71b4b4412cd38387509f4e04132b5892aa34f548fad088cc42b745ae6f85f922",
+  "records": 166,
+  "payloads": 94,
+  "source_rows": 7,
+  "prepared_rows": 22,
+  "commands": 7,
+  "binary_sha256": "727003785ebd571ee327fa21818c88034d7b88cd89044917840cea1840b0f16e",
+  "raw_samples": 6600,
+  "negative_variants": [
+    "omitted",
+    "nanY",
+    "nanZ"
+  ],
+  "computed": [
+    {
+      "kind": "loop",
+      "variant": "baseline",
+      "phase": null,
+      "foreign": null,
+      "method": null,
+      "samples": 500,
+      "mean_ns": 1104138.07,
+      "median_ns": 1082125.0,
+      "p95_ns": 1229208
+    },
+    {
+      "kind": "loop",
+      "variant": "count",
+      "phase": null,
+      "foreign": null,
+      "method": null,
+      "samples": 500,
+      "mean_ns": 1066744.564,
+      "median_ns": 1042458.5,
+      "p95_ns": 1204750
+    },
+    {
+      "kind": "loop",
+      "variant": "length",
+      "phase": null,
+      "foreign": null,
+      "method": null,
+      "samples": 500,
+      "mean_ns": 1066506.154,
+      "median_ns": 1036791.5,
+      "p95_ns": 1201416
+    },
+    {
+      "kind": "loop",
+      "variant": "cursor",
+      "phase": null,
+      "foreign": null,
+      "method": null,
+      "samples": 500,
+      "mean_ns": 996407.826,
+      "median_ns": 967146.0,
+      "p95_ns": 1143833
+    },
+    {
+      "kind": "loop",
+      "variant": "soa",
+      "phase": null,
+      "foreign": null,
+      "method": null,
+      "samples": 500,
+      "mean_ns": 1094711.918,
+      "median_ns": 1072416.5,
+      "p95_ns": 1234791
+    },
+    {
+      "kind": "loop",
+      "variant": "locals",
+      "phase": null,
+      "foreign": null,
+      "method": null,
+      "samples": 500,
+      "mean_ns": 997014.602,
+      "median_ns": 968625.5,
+      "p95_ns": 1143458
+    },
+    {
+      "kind": "identity",
+      "variant": null,
+      "phase": 0,
+      "foreign": false,
+      "method": "direct",
+      "samples": 300,
+      "mean_ns": 52497.77333333333,
+      "median_ns": 53083.0,
+      "p95_ns": 56167
+    },
+    {
+      "kind": "identity",
+      "variant": null,
+      "phase": 0,
+      "foreign": false,
+      "method": "query",
+      "samples": 300,
+      "mean_ns": 32057.95,
+      "median_ns": 31583.0,
+      "p95_ns": 34875
+    },
+    {
+      "kind": "identity",
+      "variant": null,
+      "phase": 0,
+      "foreign": true,
+      "method": "direct",
+      "samples": 300,
+      "mean_ns": 7016.12,
+      "median_ns": 6958.0,
+      "p95_ns": 7042
+    },
+    {
+      "kind": "identity",
+      "variant": null,
+      "phase": 0,
+      "foreign": true,
+      "method": "query",
+      "samples": 300,
+      "mean_ns": 6072.873333333333,
+      "median_ns": 5959.0,
+      "p95_ns": 6250
+    },
+    {
+      "kind": "identity",
+      "variant": null,
+      "phase": 1,
+      "foreign": false,
+      "method": "direct",
+      "samples": 300,
+      "mean_ns": 51365.58,
+      "median_ns": 50000.0,
+      "p95_ns": 53500
+    },
+    {
+      "kind": "identity",
+      "variant": null,
+      "phase": 1,
+      "foreign": false,
+      "method": "query",
+      "samples": 300,
+      "mean_ns": 32822.1,
+      "median_ns": 32792.0,
+      "p95_ns": 36291
+    },
+    {
+      "kind": "identity",
+      "variant": null,
+      "phase": 1,
+      "foreign": true,
+      "method": "direct",
+      "samples": 300,
+      "mean_ns": 7027.363333333334,
+      "median_ns": 6959.0,
+      "p95_ns": 7042
+    },
+    {
+      "kind": "identity",
+      "variant": null,
+      "phase": 1,
+      "foreign": true,
+      "method": "query",
+      "samples": 300,
+      "mean_ns": 6029.856666666667,
+      "median_ns": 6000.0,
+      "p95_ns": 6125
+    },
+    {
+      "kind": "identity",
+      "variant": null,
+      "phase": 2,
+      "foreign": false,
+      "method": "direct",
+      "samples": 300,
+      "mean_ns": 6831.23,
+      "median_ns": 6875.0,
+      "p95_ns": 7042
+    },
+    {
+      "kind": "identity",
+      "variant": null,
+      "phase": 2,
+      "foreign": false,
+      "method": "query",
+      "samples": 300,
+      "mean_ns": 6044.7733333333335,
+      "median_ns": 6000.0,
+      "p95_ns": 6125
+    },
+    {
+      "kind": "identity",
+      "variant": null,
+      "phase": 2,
+      "foreign": true,
+      "method": "direct",
+      "samples": 300,
+      "mean_ns": 7020.28,
+      "median_ns": 6917.0,
+      "p95_ns": 7042
+    },
+    {
+      "kind": "identity",
+      "variant": null,
+      "phase": 2,
+      "foreign": true,
+      "method": "query",
+      "samples": 300,
+      "mean_ns": 5883.183333333333,
+      "median_ns": 5875.0,
+      "p95_ns": 6000
+    }
+  ],
+  "current_main_base": "9800bd0c652de439ad985830b8c7ae0bcdd36fa6",
+  "current_composition": "a8a21d48",
+  "execution": "Read-only independent record/Git/original audit; no diagnostic/compiler rerun."
+}

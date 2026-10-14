@@ -14,7 +14,7 @@ Scope: from the engine foundation to Driftwake live on three stores and Engine 1
 1. Section 1 defines the product, the principles that must not be violated, and what "done" means.
 2. Section 2 is the technical architecture: stack, repo layout, and the data model everything hangs on.
 3. Section 3 covers accounts, login, and the OpenAI integration requirement in detail.
-4. Section 4 is the execution model and team: which AI agents build what, the hard rule that routes visual work to Claude 5.5 over ACP, and the small human team around them.
+4. Section 4 is the execution model and team: which AI agents build what, the default editor UI route to Claude 5.5 over ACP and the director-authorized takeover, and the small human team around them.
 5. Section 5 lists the phases with their deliverables and exit gates.
 6. Section 6 details each engineering workstream.
 7. Section 7 is the game production plan.
@@ -60,6 +60,16 @@ certificates, so no Apple developer account is needed for them.
 Director decision, 2026-10-10: use Claude Opus 5.5 with thinking explicitly set
 to Max for all visual handoffs. Verify model and effort on every new or resumed
 ACP session; do not inherit Default or substitute another level.
+
+Director clarification, 2026-10-13: the original visual-routing rule means editor
+UI design, layout, styling and rendered-pixel review. Claude Opus 5.5 with
+explicitly verified Max remains the default for that work. Astra/root and its
+subagents own everything else, including rendering algorithms, graphics/runtime
+correctness and non-editor visuals. Astra may also directly take over anything
+Claude is failing to resolve, including editor UI work, without asking again.
+Retain prior attempts, identify the takeover and preserve acceptance and evidence
+requirements. Other routing exceptions still require the director. This does not
+approve a phase gate.
 
 Director decision, 2026-10-10: remove calendar target dates, phase durations and
 the ship-date target. Agents build far faster than a human-paced calendar, so
@@ -111,7 +121,7 @@ A single application that is a 3D/2D modeling tool, a game engine, and an editor
 5. **Bring-your-own-model.** The user connects their own OpenAI account. We never proxy model calls through our servers by default, and we never store their keys or tokens server-side.
 6. **Dogfood everything.** The launch game is built in the engine, by the team, with the agent. Anything the game needs that the engine lacks is an engine bug.
 7. **Rust core, TypeScript gameplay, WebAssembly for hot code, web editor chrome.** Chosen for safety, portability, performance, and LLM fluency. TypeScript is the default for gameplay logic; sandboxed WebAssembly modules, written in Rust first, carry performance-critical gameplay code at native speed on every target, including iOS where JIT compilation is banned. Revisit only with strong evidence.
-8. **Agent-first build with a hard routing rule.** The engine and game are built primarily by Astra running in OpenAI Codex. Any visual work is handed off to Claude 5.5 over ACP (Agent Client Protocol) using the director's already logged-in Claude account. Section 4 defines "visual" precisely. This is a build-time arrangement; the engine's end users still bring their own OpenAI account (Section 3), and the shipped engine never embeds the director's credentials.
+8. **Agent-first build with a default routing rule.** The engine and game are built primarily by Astra running in OpenAI Codex. Editor UI design, layout, styling and pixel review default to Claude 5.5 over ACP (Agent Client Protocol) using the director's already logged-in Claude account. Astra/root and its subagents own all other work; Section 4 defines the boundary. This is a build-time arrangement; the engine's end users still bring their own OpenAI account (Section 3), and the shipped engine never embeds the director's credentials.
 9. **Outside services run locally first.** Every third-party service the engine, its online services or the build depends on has a local substitute, run as a container (Docker or a compatible runtime) or in-process, so development and CI need no cloud, identity or store account. Hosted services are used only for what cannot run locally: real phones, store review, production hosting and live provider evaluations (Section 2.7).
 
 ### 1.3 Definition of done
@@ -357,49 +367,52 @@ This plan is executed primarily by AI coding agents under human direction. Two a
 
 | Actor | Runs in | Account used | Owns |
 |---|---|---|---|
-| **Astra** | OpenAI Codex (cloud tasks and the Codex CLI) | Andrey's OpenAI account | Everything that is not visual: architecture, Rust crates, document model, command bus, scripting runtime and TS SDK, physics, audio, animation runtime, networking, asset pipeline, platform and export, backend services, CI, tests, eval graders, documentation text, Driftwake gameplay and systems code. Also integrates every Claude handoff and opens all PRs. |
-| **Claude Opus 5.5, Max thinking** | Claude Code, reached over ACP (Agent Client Protocol) | Andrey's already logged-in Claude account. No API key, nothing stored in the repo or CI | All visual work as defined in 4.2: editor UI and UX design and implementation, viewport and gizmo visuals, look-dev, shader and material appearance, VFX, lighting tuning, golden-image and screenshot review, art direction, Driftwake art, HUD, trailer and store art, diagrams and site design. |
+| **Astra/root and subagents** | OpenAI Codex (cloud tasks and the Codex CLI) | Andrey's OpenAI account | All work other than the default editor UI handoff: architecture, rendering algorithms and quality, runtime, game art and UI, tools, platforms, tests, documentation and integration. May also take over unresolved Claude editor UI work under 4.2. |
+| **Claude Opus 5.5, Max thinking** | Claude Code, reached over ACP (Agent Client Protocol) | Andrey's already logged-in Claude account. No API key, nothing stored in the repo or CI | Editor UI design, layout, styling and rendered-pixel review by default, as defined in 4.2. |
 | **Andrey** (director) | | | Priorities, phase gate approvals, routing tie-breaks, and anything requiring a human: store and developer accounts, signing keys, payments, legal, age ratings. |
 
 The build-time agents are separate from the in-engine agent that end users talk to. End users connect their own OpenAI account (Section 3). The engine, the templates, and the shipped game must never contain or depend on the director's Codex or Claude sessions.
 
-### 4.2 Routing rule: what counts as visual work
+### 4.2 Routing rule: editor UI and all other work
 
-A task is handed to Claude if any of these is true:
+The default Claude route covers editor UI design, layout, styling and pixel
+review: panels, inspectors, chat/history presentation, themes, icons, editor
+controls, onboarding and accessibility appearance. Mixed editor UI tasks split
+correctness from appearance: Astra implements data, commands and behavior;
+Claude handles the editor UI design and visual review.
 
-1. Acceptance can only be judged by looking at rendered pixels or a laid-out screen.
-2. The deliverable is a design: layout, color, typography, iconography, motion, or composition.
-3. The task is reviewing screenshots, golden images, playtest footage, or art.
-4. The task is look-dev: materials, lighting, post-processing, VFX, or shaders judged by appearance rather than by math or performance.
+Astra/root and its subagents own everything else, including rendering algorithms,
+graphics/runtime correctness, shader and material appearance, temporal quality,
+lighting, VFX, game art and HUD, screenshots, diagrams and site design. A task
+does not require a Claude handoff merely because it is visual or its acceptance
+requires rendered pixels. Editor UI controls over a renderer can be split from
+the underlying rendering implementation and output review.
 
-Everything else stays with Astra. Astra owns correctness, performance, architecture, and data. Claude owns appearance and judgment-by-eye. When a task has both parts it is split: Astra implements, Claude reviews the result visually and returns either approval or concrete diffs.
+The director also authorizes Astra to directly take over anything Claude is
+failing to resolve, including editor UI implementation and pixel review. Record
+the unresolved work and takeover, preserve earlier results, and apply the same
+correctness, rendered-evidence and acceptance requirements. This standing
+authorization needs no additional routing approval.
 
-| Area | Astra (Codex) | Claude 5.5 (ACP) |
+| Area | Astra/root and subagents | Claude Opus 5.5, Max through ACP (default) |
 |---|---|---|
-| Editor | Panel data binding, IPC bridge, command wiring, schema-driven inspector logic, undo and history mechanics | Panel layouts, inspector visual design, chat UI, history UI, gizmo visuals, icons, themes, empty states, onboarding flow design, accessibility visual checks |
-| Rendering | Render graph, culling, GPU buffers, shader compiler, tier system, performance budgets | Tonemapping, bloom, TAA and GI quality judgment, golden image approval, visual regression triage, reference scenes |
-| Shaders and materials | WGSL codegen, graph compiler, node evaluation | Node library appearance, default material library, sample materials, look-dev |
-| Content tools | Geometry graph evaluator, mesh ops, retopo, UV, LOD algorithms | Graph editor UI, default presets, the two-day environment exit test in Phase 4 |
-| Animation and VFX | Playback, blend trees, IK solvers, particle simulation | Animation feel review, effect authoring, particle look |
-| In-engine agent | Agent loop, tools, providers, skills, eval graders | Vision-check graders and their reference images, chat UI, inline diff presentation |
-| Platforms | Export pipeline, store packaging, device farm, crash reporting | Store screenshots, icons, splash screens, platform UI conformance review |
-| Driftwake | Gameplay scripts, netcode, save, progression, procedural generation logic | Art bible, HUD and menus, level visual dressing, lighting, VFX, trailer, store art |
-| Networking | Transport, replication, prediction and rollback, services, protocol versioning, load and soak tests | Network simulation panel, connection quality indicators, lobby, invite, rejoin and forced-update screens, desync inspector layout |
-| 2D | Atlas packing, tilemap data and autotile evaluation, 2D physics, sorting | Sprite and tilemap editor UI, 2D lighting look, template art |
-| Text and localization | Shaping, bidi, string tables, locale data, IME bridge | Font fallback and right-to-left layout review, localization panel design, pseudo-localization visual check |
-| Navigation | Navmesh generation, pathfinding, steering | Navmesh and path debug visualization design |
-| Docs and marketing | Reference and tutorial text, API docs | Diagrams, screenshots, site design, video |
+| Editor | Data binding, IPC, commands, schema logic, undo, history mechanics; unresolved Claude work after takeover | Editor UI design, layout, styling and rendered-pixel review |
+| Rendering and content | Render graph, shaders, materials, lighting, post-processing, performance, output quality, animation, VFX, geometry and content algorithms | Editor panels and controls for these systems |
+| Game, platform and services | Gameplay, game UI/HUD/art, exports, platform visuals, networking, agents, physics, audio and all runtime work | Editor UI for authoring and inspecting these systems |
+| Documentation and marketing | Text, diagrams, screenshots, site design, trailers and store art | Editor UI handoff documentation |
 
-If routing is ambiguous, Astra asks the director in the task thread and defaults to the split pattern in the meantime.
+For ambiguity outside these assignments and the standing takeover authorization,
+Astra asks the director in the task thread. Settled ownership and an authorized
+takeover do not require another approval.
 
 ### 4.3 Handoff protocol (Astra to Claude over ACP)
 
 1. **Packet.** Astra writes a self-contained handoff packet to `handoffs/<id>/brief.md`: goal, acceptance criteria, relevant file paths, build and run commands, the headless-runner command that captures screenshots, reference images, constraints (performance budgets, target platforms, tiers), and exactly what to return.
-2. **Session.** Astra runs `tools/handoff run <id>`. The tool opens an ACP session to Claude Code through the Claude Code ACP adapter. The session inherits the director's logged-in Claude account. No API key or token is written anywhere.
+2. **Session.** Astra runs `python3 tools/handoff/main.py run <id>` and explicitly verifies Claude Opus 5.5 and Max thinking before every new or resumed prompt. The tool opens an ACP session to Claude Code through the Claude Code ACP adapter. The session inherits the director's logged-in Claude account. No API key or token is written anywhere.
 3. **Work.** Claude works in a git worktree on branch `handoff/<id>`, runs the visual regression suite, and writes `handoffs/<id>/result.md` with before and after screenshots, rationale, and open questions.
 4. **Integration.** Astra reviews the result, merges the worktree, opens the PR, and runs full CI. Once the scoped work is complete, reviewed, and its required checks pass, Astra merges the PR into main under the director’s standing authorization. Every commit carries a trailer `Built-by: astra` or `Built-by: claude` so provenance covers engine development as well as game content.
 5. **Fallback.** If ACP or the Claude account is unavailable, the packet stays in `handoffs/` and the director runs Claude Code on it manually. Packets are written so that this always works.
-6. **Batching.** Non-urgent visual tasks are batched per sprint to respect subscription limits. Blocking ones go immediately.
+6. **Batching.** Non-urgent editor UI tasks are batched per sprint to respect subscription limits. Blocking ones go immediately.
 
 Repository files that make this work:
 
@@ -423,7 +436,7 @@ The agents do the building. Humans direct, review, and do what agents cannot.
 | Role | Phases 0–1 | Phases 2–6 | Phases 7–9 | Notes |
 |---|---|---|---|---|
 | Director, product, architecture approvals | 1 | 1 | 1 | Andrey |
-| Senior graphics reviewer | 0.5 | 1 | 1 | Reviews rendering PRs and Claude look-dev results; part-time through Phase 1 |
+| Senior graphics reviewer | 0.5 | 1 | 1 | Reviews rendering PRs and retained look-dev results; part-time through Phase 1 |
 | Platform and release engineer | 0 | 1 | 1 | Store accounts, signing, certification, device lab ownership |
 | Game designer | 0 | 1 | 2 | Owns Driftwake's design document and playtests |
 | QA and device lab | 0 | 1 | 2 | Physical devices, store-submission dry runs |
@@ -436,8 +449,8 @@ The agents do the building. Humans direct, review, and do what agents cannot.
 
 - Every PR is agent-authored and agent-merged into main after review and passing required checks. No separate merge confirmation is needed. The director approves every phase gate; a PR merge does not approve a gate.
 - Weekly the director reviews the handoff log, eval results, and friction logs, and resolves any routing disputes.
-- Agents never self-approve a routing exception. Ambiguity defaults to the split pattern.
-- Both agents dogfood the product. Astra and Claude build Driftwake content through the in-engine agent wherever possible, which is what the provenance metric measures.
+- Agents never invent routing exceptions. The director has already authorized Astra takeover of unresolved Claude work, including visuals (4.2); applying that exception needs no further approval. Other routing ambiguity goes to the director.
+- Both agents dogfood the product. Astra/root and subagents build Driftwake content through the in-engine agent wherever possible, which is what the provenance metric measures.
 - Agent-first execution runs around the clock and parallelizes by crate; phases advance as fast as their exit gates pass, not on a calendar. Store review and required human-owned actions are external dependencies agents cannot shorten; additional hosted device testing is deferred and does not block current gates.
 
 ---
@@ -590,7 +603,7 @@ Deliverables:
 Exit gate:
 - A technical artist builds a complete environment (terrain, twenty props, five materials, lighting, VFX) in two days using only the engine, with at least half the props from the geometry graph or generation.
 - Agent eval extended with fifty content tasks, pass rate at or above 70%.
-- A room graph of ten templates assembled at runtime shows no visible lighting seams in Claude's review at mobile and desktop tiers.
+- A room graph of ten templates assembled at runtime shows no visible lighting seams in rendered-pixel review at the applicable device tiers.
 
 ### Phase 5: Platforms and export
 
@@ -734,7 +747,7 @@ Browser mode, the 2D pipeline, screen-space GI and hardware ray tracing all stay
 
 ## 6. Workstream detail
 
-Each workstream lists its human owner (the reviewer accountable for it), its first milestone, its key design choices, and its tests. Build execution for every workstream follows Section 4: Astra in Codex builds, and anything matching the visual rule in 4.2 is handed to Claude 5.5 over ACP.
+Each workstream lists its human owner (the reviewer accountable for it), its first milestone, its key design choices, and its tests. Build execution for every workstream follows Section 4: Astra in Codex builds, and editor UI design, layout, styling and pixel review default to Claude Opus 5.5/Max over ACP, subject to the director-authorized takeover. Astra/root and subagents own all other work.
 
 Workstream device test lists retain planned coverage. Under revision 9, execution
 on mobile or other devices is deferred, nonblocking follow-up; use this Mac for
@@ -905,7 +918,7 @@ A 3D co-op action roguelite exercises everything: 3D rendering on mobile and des
 
 - **Pricing (decision 21).** Desktop: premium at 19.99 USD on Steam, with a free demo. Mobile: free download with one non-consumable full-game unlock at 9.99 USD after the first biome. No ads, consumables, loot boxes or battle pass. Post-launch content patches are free. Purchases are per store; saves sync across stores through the player service, purchases do not.
 - **Repository.** Driftwake moves to its own private repository at the start of pre-production; Core Sample stays public in the engine repository.
-- **Marketing (decision 23).** Steam page with wishlists by the end of Phase 7; devlog and engine case-study posts from Phase 7; playable demo in a Steam Next Fest during Phase 8; trailer, press kit and store art in Phase 9, with visual assets routed to Claude per Section 4.2. Wishlists are tracked weekly from the page launch.
+- **Marketing (decision 23).** Steam page with wishlists by the end of Phase 7; devlog and engine case-study posts from Phase 7; playable demo in a Steam Next Fest during Phase 8; trailer, press kit and store art in Phase 9, with visual assets owned by Astra/root and subagents per Section 4.2. Wishlists are tracked weekly from the page launch.
 - **Support and community (decision 24).** Engine: GitHub issues and Discussions plus a Discord server from the Phase 8 beta, triaged by agents with the community lead accountable. Driftwake: an in-game bug reporter that attaches logs only with consent and never personal data, a support address answered within two business days, and store review responses. The community lead moderates every channel.
 
 ---
@@ -947,10 +960,10 @@ A 3D co-op action roguelite exercises everything: 3D rendering on mobile and des
 | Store rejection for AI-generated content policies | Low | Medium | Track platform policies, attach provenance and licensing to all assets |
 | Prompt injection via shared projects or templates | Medium | High | Data labeling, sandboxed scripts, no shell access, red-team pass before each release |
 | Team burnout building engine and game simultaneously | High | High | Separate teams, gate-driven progress with no calendar deadlines, no death marches |
-| ACP adapter or Claude account limits stall visual work | Medium | Medium | Handoff packets are self-contained so the director can run Claude Code manually; batch non-urgent visual tasks per sprint |
+| ACP adapter or Claude account limits stall editor UI work | Medium | Medium | Handoff packets are self-contained so the director can run Claude Code manually; batch non-urgent editor UI tasks; Astra may take over unresolved work under the standing authorization |
 | Codex outages or task limits stall the primary builder | Medium | Medium | Codex CLI fallback on the director's machine; work queue lives in the repo so any agent session can resume it |
 | Two agents drift on conventions and style | High | Medium | Both instruction files generated from one conventions source; CI lint; Astra integrates every handoff and owns the final PR |
-| Routing ambiguity causes rework | Medium | Low | Default to the split pattern; director tie-breaks weekly |
+| Routing ambiguity causes rework | Medium | Low | Use the editor UI boundary in 4.2; director resolves remaining ambiguity |
 | Director becomes the bottleneck for approvals | High | Medium | Approval modes per risk level; agents merge completed PRs after review and passing checks; gates and routing disputes need the director |
 | Cross-architecture determinism (x86 versus ARM) breaks rollback cross-play | High | Medium | Driftwake defaults to host-authoritative with prediction; rollback cross-play gated on determinism CI across the four reference device classes; deterministic math and RNG in the TS SDK |
 | Mobile networks (carrier NAT, IPv6-only, backgrounding, Wi-Fi to cellular switches) drop sessions | High | High | Relay by default on cellular, dual-stack services, QUIC connection migration, rejoin grace period, network-transition tests on the device farm |
@@ -1171,9 +1184,9 @@ Component (examples)
 - **Eval harness:** the automated suite that measures agent success on scripted tasks.
 - **Tier:** a rendering quality level (mobile, desktop, desktop-high).
 - **BYO model:** bring-your-own model, where the user supplies their own provider account.
-- **Astra:** the agent running in OpenAI Codex that builds everything non-visual and integrates all work.
-- **ACP:** Agent Client Protocol, the open protocol for talking to coding agents such as Claude Code from another tool. Used to hand visual work to Claude 5.5.
-- **Handoff packet:** a self-contained folder describing one visual task for Claude, plus the result it returns.
+- **Astra:** the agent running in OpenAI Codex that, with its subagents, owns all work except the default editor UI handoff and integrates all work.
+- **ACP:** Agent Client Protocol, the open protocol for talking to coding agents such as Claude Code from another tool. Used for editor UI handoffs to Claude Opus 5.5 with explicit Max.
+- **Handoff packet:** a self-contained folder describing one editor UI task for Claude, plus the result it returns.
 - **Director:** the human (Andrey) who sets priorities, approves gates and breaks routing ties. Agents merge completed PRs under the director’s standing authorization.
 - **Relay:** a server that forwards game traffic between players who cannot connect directly, hiding their addresses from each other.
 - **Host-authoritative:** one player's client runs the authoritative simulation and the others predict and reconcile. Server-authoritative is the same code running on a dedicated server.
