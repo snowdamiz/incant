@@ -1,0 +1,57 @@
+Resumed the latest ACP session scoped to this handoff worktree.
+Claude session verified: Opus 5.5; thinking: max
+Claude session permission mode: auto
+Writing the grant template, delta patch, pixel-review checklist and result now.The R4 appearance review packet is ready but has not been run. It is committed as **`316654898924644347d56b910c30e8f07f69feb3`**, containing only my new files under `r4_quality/`. Nothing was built, run on a GPU, captured or rendered, and no R4 pixels exist yet. It took about 5 minutes of the 15.
+
+**Fixture compatibility:**
+- The existing fixture (`650316a2…`) is reused byte for byte in `r4_quality/review/` and needs no changes.
+- The one accessor it relies on that R4 touched nearby, `MotionFrame::jitter_phase()` (fixture lines 523, 568, 601), still exists in 825ff, and the schedule is still eight phases.
+- R4 did rename a different `jitter_phase` (on `Prepared`) to `jitter_offset`, but the fixture never calls that one.
+- The other crates the fixture uses, the Cargo files, `resolution/` and `upscaling/mod.rs` are unchanged from 76be, where this fixture last ran.
+- This comes from reading the source only; root's isolated build is the first real compile.
+
+**Execution copy:**
+- `runner.py` is the 76be runner with only six metadata edits:
+  - fixture path;
+  - production `72b1ba8e…` plus build source `825ff047…`;
+  - freeze hash;
+  - new evidence directory;
+  - build receipt must name 825ff;
+  - verified file count 2839, matching the freeze.
+- No assertion, limit, environment, lifecycle or artifact check changed.
+- `plan.json` waits for a binary, with the build, binary and receipt entries left empty, so the runner refuses to execute until root supplies them. `grant-template.json` is a template only; a fresh root grant is still needed.
+
+**Limits and per-group counts** (unchanged):
+
+| Group | Scenes | UI | Readbacks/maps | Submissions | PNGs |
+|---|---|---|---|---|---|
+| stationary | 50 | 18 | 50 | 118 | 6 |
+| motion | 44 | 0 | 44 | 88 | 4 |
+| transitions | 106 | 0 | 106 | 212 | 2 |
+| c7_disocclusion | 82 | 0 | 82 | 164 | 2 |
+| p1_crossing | 98 | 0 | 98 | 196 | 1 |
+| **Total** | **380** | **18** | **380** | **778** | **15** |
+
+The run is also capped at 5 child processes, 960×540 images and 90 s per child. Groups run in this order, it stops at the first failure, and it does no retries or builds.
+
+**Self-check:** `selfcheck.py` passes 17/17 without touching the runner's run branch. It refuses an unbuilt plan, a grant without a binary, a claimed-ready plan with no receipts, a 16th PNG, the old 76be source, a retry and a dropped group. The only runner command I ran was its check mode, which reported no grant and no GPU authority.
+
+**Pixel review:** `review-checklist.md` covers the later run:
+- look at all 15 PNGs and compare FULL, DRS, ordinary UP and OWN;
+- judge whether reduced resolution is usable rather than requiring it to match full resolution;
+- quote the C7, C9 and P1 thresholds unchanged and keep them separate from the rendered measurements, with no new thresholds;
+- failure is an acceptable outcome.
+
+All earlier failures remain open:
+- overall reconstruction;
+- texture detail;
+- thin geometry;
+- silhouettes;
+- the DRS wipe;
+- C7, C9 and P1;
+- `visual_a5ae3179` and GPU001 case 3.
+
+Old retained images were not used as R4 results. Still pending are the isolated build with lint and test-listing receipts, the root grant, the GPU run and my review of the pixels.
+
+The full report is in `r4_quality/result.md` and `result.json`, recording Opus 5.5 at max thinking effort as root verified through ACP. I left the top-level `result.md` untouched as the packet requires. Root's `brief.md`, `inputs/`, `production-freeze.json` and the other untracked files are unchanged and uncommitted.
+Review: git diff --no-index handoffs/0073-upscaling-review .worktrees/0073-upscaling-review/handoffs/0073-upscaling-review

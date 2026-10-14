@@ -1,0 +1,227 @@
+[
+  {
+    "timestamp": "2026-10-14T01:48:27.438Z",
+    "id": "toolu_017yZDMBDccQKLydivzwH7My",
+    "name": "Bash",
+    "input": {
+      "command": "date '+%T'; python3 -c \"import time;print(time.monotonic())\"; git log --oneline -1; git status --short | head; ls -la handoffs/0073-upscaling-review/r4_quality/ handoffs/0073-upscaling-review/r4_quality/inputs 2>&1 | head -40; B=/Users/andreyyurlov/.codex/worktrees/owner-quality-repair/incant; for c in 72b1ba8ec351e86d66a90c401e0a75a530633616 cae2bffcdef061d3e1505b7f78a2d9888b582e61 825ff047284e84252d00f786a7b14cb6ecb44293; do echo \"$c base:$(git -C $B cat-file -t $c 2>&1) here:$(git cat-file -t $c 2>&1)\"; done",
+      "description": "Check time, state, r4_quality inputs and commit availability"
+    }
+  },
+  {
+    "timestamp": "2026-10-14T01:48:35.121Z",
+    "id": "toolu_01HoUQzfr76Rdgnmei2Hf8Zt",
+    "name": "Bash",
+    "input": {
+      "command": "cd /Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review/handoffs/0073-upscaling-review && cat r4_quality/inputs/manifest.json; python3 -I -B -c \"\nimport json;d=json.load(open('r4_quality/production-freeze.json'));print(type(d).__name__, list(d)[:20] if isinstance(d,dict) else len(d))\nfor k,v in (d.items() if isinstance(d,dict) else []):\n    if not isinstance(v,(list,dict)): print(' ',k,'=',str(v)[:120])\n    else: print(' ',k,type(v).__name__,len(v))\"; ls owner_output_quality owner_quality/review 2>&1 | head -40; shasum -a 256 owner_quality/review/upscaling_owner_review.rs",
+      "description": "Read inputs manifest, freeze structure, prior packet listing and fixture hash"
+    }
+  },
+  {
+    "timestamp": "2026-10-14T01:48:38.040Z",
+    "id": "toolu_0184WaBJG4xKzk6mnBVYuJCK",
+    "name": "Bash",
+    "input": {
+      "command": "python3 -I -B -c \"\nimport json;d=json.load(open('r4_quality/production-freeze.json'));print(d['fixture']);print(d['build_input_roots']);print(d['files'][0])\"; ls -la owner_output_quality/execution | head -30; wc -l owner_quality/review/upscaling_owner_review.rs",
+      "description": "Read freeze fixture note and the prior execution packet listing"
+    }
+  },
+  {
+    "timestamp": "2026-10-14T01:48:40.592Z",
+    "id": "toolu_01Hn3vF8mj9vpbT4Vtxdi8eP",
+    "name": "Bash",
+    "input": {
+      "command": "cd /Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review/handoffs/0073-upscaling-review/owner_output_quality/execution && cat README.md plan.json grant-template.json controls-receipt.json; cat protocol-delta.patch | head -50",
+      "description": "Read the prior execution README, plan, grant template and receipt"
+    }
+  },
+  {
+    "timestamp": "2026-10-14T01:48:46.939Z",
+    "id": "toolu_01PzttVDirYS1q1q1zVHwPMa",
+    "name": "Bash",
+    "input": {
+      "command": "date +%T; sed -n 1,60p runner.py; grep -n \"PRODUCTION\\|FREEZE\\|source_commit\\|production_equivalent\\|825\\|SOURCE\\|def main\\|argv\\|'run'\\|--run\\|selfcheck\\|LIFECYCLE\" runner.py | sed -n 1,60p",
+      "description": "Read the runner's constants and key checks"
+    }
+  },
+  {
+    "timestamp": "2026-10-14T01:48:52.052Z",
+    "id": "toolu_01Pc1GF3QKm2yjgAakSsJwK7",
+    "name": "Bash",
+    "input": {
+      "command": "sed -n 60,160p runner.py",
+      "description": "Read the runner's plan/build/grant validation"
+    }
+  },
+  {
+    "timestamp": "2026-10-14T01:49:08.057Z",
+    "id": "toolu_01EtZY5fJt7sn9iJHr75hvzD",
+    "name": "Bash",
+    "input": {
+      "command": "cd /Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review/handoffs/0073-upscaling-review && date +%T; python3 -I -B -c \"\nimport json;q=json.load(open('owner_quality/plan.json'));print(list(q));print(json.dumps(q['build'])[:900]);print({g:q['groups'][g]['budget'] for g in q['groups']})\"; grep -n \"^use \\|^    use \\|incant_[a-z_]*::\" owner_quality/review/upscaling_owner_review.rs | sed 's/^\\([0-9]*\\):.*\\(incant_[a-z_]*::[A-Za-z0-9_:{}, ]*\\).*/\\1 \\2/' | sort -u -k2 | head -60",
+      "description": "Read quality plan build/budget and fixture imports"
+    }
+  },
+  {
+    "timestamp": "2026-10-14T01:49:13.481Z",
+    "id": "toolu_01CZhkVth7XvQ2en6tjGnxUa",
+    "name": "Bash",
+    "input": {
+      "command": "sed -n 31,52p owner_quality/review/upscaling_owner_review.rs; grep -o \"\\(Renderer\\|RenderScene\\|UpscaleConfig\\|UpscaleMode\\|ResolutionScale\\|FrameSettings\\|[A-Z][A-Za-z]*Config\\)::[a-z_]*\" owner_quality/review/upscaling_owner_review.rs | sort | uniq -c | head -40; grep -o \"renderer\\.[a-z_]*(\" owner_quality/review/upscaling_owner_review.rs | sort | uniq -c",
+      "description": "Extract the fixture's engine API surface"
+    }
+  },
+  {
+    "timestamp": "2026-10-14T01:49:24.424Z",
+    "id": "toolu_01YCnwdSMea6rvbbov158wSx",
+    "name": "Bash",
+    "input": {
+      "command": "B=/Users/andreyyurlov/.codex/worktrees/owner-quality-repair/incant; date +%T; git -C $B diff --stat 76be9608e99bf089fcb1e0908827330f70c28ac1 825ff047284e84252d00f786a7b14cb6ecb44293 -- crates/incant_assets crates/incant_doc crates/incant_text crates/incant_render_data crates/incant_render_authoring crates/incant_types | tail -3; git -C $B diff 76be9608e99bf089fcb1e0908827330f70c28ac1 825ff047284e84252d00f786a7b14cb6ecb44293 -- crates/incant_render/src | grep -E \"^[-+][^-+].*\\bpub (fn|struct|enum|mod|use|const|type|trait)\\b\" | head -30; echo ---; git -C $B diff --stat 76be9608e99bf089fcb1e0908827330f70c28ac1 825ff047284e84252d00f786a7b14cb6ecb44293 -- crates/incant_render/Cargo.toml crates/incant_render/tests Cargo.toml Cargo.lock | tail -3; git -C $B diff --stat 72b1ba8ec351e86d66a90c401e0a75a530633616 825ff047284e84252d00f786a7b14cb6ecb44293 | tail -6",
+      "description": "Compare public APIs between the prior fixture base and candidate 825ff"
+    }
+  },
+  {
+    "timestamp": "2026-10-14T01:49:34.428Z",
+    "id": "toolu_01CTCpNCEta4yVPNNeVA9iNN",
+    "name": "Bash",
+    "input": {
+      "command": "B=/Users/andreyyurlov/.codex/worktrees/owner-quality-repair/incant; grep -n \"jitter_phase\\|jitter_offset\\|\\.resolve(\\|historical(\\|::current(\\|Oracle\\|kernel\" owner_quality/review/upscaling_owner_review.rs | head; git -C $B diff 76be9608e99bf089fcb1e0908827330f70c28ac1 825ff047284e84252d00f786a7b14cb6ecb44293 -- crates/incant_render/src | grep -E \"^\\+\\+\\+ |^[-+][^-+].*\\bpub (fn|struct|enum|mod|use|const|type|trait)\\b\" | grep -B1 \"pub \" | grep \"^+++\" ; python3 -I -B -c \"\nimport json;q=json.load(open('owner_quality/plan.json'));print(json.dumps(q['fixture'])[:400]);print(json.dumps(q['api'])[:700])\"; date +%T",
+      "description": "Confirm the fixture avoids changed APIs and read the plan API record"
+    }
+  },
+  {
+    "timestamp": "2026-10-14T01:49:43.912Z",
+    "id": "toolu_019HgSKMhoe8ncdeQVAKYLXn",
+    "name": "Bash",
+    "input": {
+      "command": "B=/Users/andreyyurlov/.codex/worktrees/owner-quality-repair/incant; sed -n 515,526p owner_quality/review/upscaling_owner_review.rs; sed -n 560,572p owner_quality/review/upscaling_owner_review.rs; sed -n 596,603p owner_quality/review/upscaling_owner_review.rs; git -C $B show 825ff047284e84252d00f786a7b14cb6ecb44293:crates/incant_render/src/motion/retained.rs | grep -n -B3 -A8 \"pub fn jitter_offset\"; git -C $B show 76be9608e99bf089fcb1e0908827330f70c28ac1:crates/incant_render/src/motion/retained.rs | grep -n -B3 -A6 \"pub fn jitter_phase\"",
+      "description": "Inspect fixture phase use and the old/new motion API"
+    }
+  },
+  {
+    "timestamp": "2026-10-14T01:49:50.536Z",
+    "id": "toolu_01PEuZndVBEmyU6tePQgmwTm",
+    "name": "Bash",
+    "input": {
+      "command": "B=/Users/andreyyurlov/.codex/worktrees/owner-quality-repair/incant; for c in 76be9608e99bf089fcb1e0908827330f70c28ac1 825ff047284e84252d00f786a7b14cb6ecb44293; do echo \"== $c\"; git -C $B show \"$c:crates/incant_render/src/motion/owner.rs\" | grep -n \"pub fn jitter_phase\\|pub fn jitter_offset\\|pub fn has_previous\\|pub fn camera_static\\|pub fn sequence\\|pub fn epoch\\|pub fn same_owner\\|pub fn bypassed\\|pub fn internal_size\\|pub struct MotionFrame\"; git -C $B show \"$c:crates/incant_render/src/upscaling/mod.rs\" 2>/dev/null | grep -n \"pub fn motion\\|pub fn output_size\\|pub struct UpscaleFrame\\|pub use\" | head -8; done; date +%T",
+      "description": "Check MotionFrame and UpscaleFrame accessors in both commits"
+    }
+  },
+  {
+    "timestamp": "2026-10-14T01:49:54.737Z",
+    "id": "toolu_01YPk5huSvon7bVPp9KBL2wA",
+    "name": "Bash",
+    "input": {
+      "command": "B=/Users/andreyyurlov/.codex/worktrees/owner-quality-repair/incant; for c in 76be9608e99bf089fcb1e0908827330f70c28ac1 825ff047284e84252d00f786a7b14cb6ecb44293; do echo \"== $c\"; git -C $B show \"${c}:crates/incant_render/src/motion/owner.rs\" | grep -n \"pub fn jitter_phase\\|pub fn jitter_offset\\|pub fn has_previous\\|pub fn camera_static\\|pub fn sequence\\|pub fn epoch\\|pub fn same_owner\\|pub fn bypassed\\|pub fn internal_size\\|pub struct MotionFrame\"; done; git -C $B show \"825ff047284e84252d00f786a7b14cb6ecb44293:crates/incant_render/src/motion/owner.rs\" | grep -n -A6 \"pub fn jitter_phase\"; date +%T",
+      "description": "Check MotionFrame accessors in both commits"
+    }
+  },
+  {
+    "timestamp": "2026-10-14T01:50:04.316Z",
+    "id": "toolu_01V9Lv7RHjrWveFVkpJXGWet",
+    "name": "Bash",
+    "input": {
+      "command": "B=/Users/andreyyurlov/.codex/worktrees/owner-quality-repair/incant; git -C $B diff --stat 76be9608e99bf089fcb1e0908827330f70c28ac1 825ff047284e84252d00f786a7b14cb6ecb44293 -- crates/incant_render/src crates/incant_shader_cook | cat; date +%T",
+      "description": "List files changed between 76be and the candidate"
+    }
+  },
+  {
+    "timestamp": "2026-10-14T01:50:14.412Z",
+    "id": "toolu_01AdU1jfJ3V2N1inog5brsuB",
+    "name": "Bash",
+    "input": {
+      "command": "B=/Users/andreyyurlov/.codex/worktrees/owner-quality-repair/incant; grep -n \"671105024\\|OUTPUT_PIXEL\\|stride\\|admit\\|history_mass\\|jitter_guard\\|lod\\b\\|SAMPLES\" owner_quality/review/upscaling_owner_review.rs | head -8; git -C $B diff 76be9608e99bf089fcb1e0908827330f70c28ac1 825ff047284e84252d00f786a7b14cb6ecb44293 -- crates/incant_render/src/motion/owner.rs crates/incant_render/src/lib.rs | grep \"^[-+][^-+]\" | head -24; git -C $B diff --quiet 825ff047284e84252d00f786a7b14cb6ecb44293 72b1ba8ec351e86d66a90c401e0a75a530633616 -- crates/incant_render/src/motion/owner.rs crates/incant_render/src/retained.rs crates/incant_render/src/lib.rs && echo \"public API files equal in 72b1 and 825ff\"; date +%T",
+      "description": "Check fixture numeric couplings and MotionFrame diff"
+    }
+  },
+  {
+    "timestamp": "2026-10-14T01:50:34.175Z",
+    "id": "toolu_01NoAs8yiyrnqpTbQoc2PetE",
+    "name": "Bash",
+    "input": {
+      "command": "cd /Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review/handoffs/0073-upscaling-review/owner_output_quality/execution && sed -n 335,360p runner.py; grep -n \"2835\\|PRODUCTION\\b\" runner.py | head; date +%T",
+      "description": "Read the runner main branch"
+    }
+  },
+  {
+    "timestamp": "2026-10-14T01:50:54.667Z",
+    "id": "toolu_012kLCF5RX1PEq7ETy3rdgSg",
+    "name": "Bash",
+    "input": {
+      "command": "cd /Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review/handoffs/0073-upscaling-review && mkdir -p r4_quality/review r4_quality/execution && cp owner_quality/review/upscaling_owner_review.rs r4_quality/review/upscaling_owner_review.rs && python3 -I -B - <<'EOF'\nimport hashlib, json, pathlib\nH = pathlib.Path.cwd()\nold = (H / \"owner_output_quality/execution/runner.py\").read_text()\nfreeze = H / \"r4_quality/production-freeze.json\"\nfsha = hashlib.sha256(freeze.read_bytes()).hexdigest()\nsubs = [\n    (\"FIXTURE = PACKET / 'review/upscaling_owner_review.rs'\\n\", \"FIXTURE = HERE.parents[1] / 'review/upscaling_owner_review.rs'\\n\"),\n    (\"PRODUCTION = '76be9608e99bf089fcb1e0908827330f70c28ac1'\\n\",\n     \"PRODUCTION = '72b1ba8ec351e86d66a90c401e0a75a530633616'\\nSOURCE = '825ff047284e84252d00f786a7b14cb6ecb44293'\\n\"),\n    (\"PRODUCTION_FREEZE_SHA = '54c13c01c4b1de1c4de42f80ba01b026cf53c3752b4d365af058a4c6048d2361'\\n\", f\"PRODUCTION_FREEZE_SHA = '{fsha}'\\n\"),\n    (\"E = Path.home() / '.codex/incant-evidence/0073-owner-output-quality-gpu-001'\\n\", \"E = Path.home() / '.codex/incant-evidence/0073-r4-quality-gpu-001'\\n\"),\n    (\"            and build['source_commit'] == PRODUCTION\\n\", \"            and build['source_commit'] == SOURCE\\n\"),\n    (\"and build['verified_production_files'] == 2835 and\", \"and build['verified_production_files'] == 2839 and\"),\n]\nnew = old\nfor a, b in subs:\n    assert new.count(a) == 1, a\n    new = new.replace(a, b)\n(H / \"r4_quality/execution/runner.py\").write_text(new)\nq = json.loads((H / \"owner_quality/plan.json\").read_text())\norder = [\"stationary\", \"motion\", \"transitions\", \"c7_disocclusion\", \"p1_crossing\"]\ntotal = {k: 0 for k in q[\"groups\"][order[0]][\"budget\"]}\nfor g in order:\n    for k, v in q[\"groups\"][g][\"budget\"].items():\n        total[k] += v\nbudget = {\"processes\": 5, **total, \"maximum_extent\": [960, 540], \"timeout_seconds_each\": 90, \"builds\": 0, \"retries\": 0}\nident = lambda p: {\"path\": str(p), \"sha256\": hashlib.sha256(p.read_bytes()).hexdigest()}\nplan = {\n    \"schema\": \"incant-owner-quality-execution-v1\",\n    \"state\": \"AWAITING_ROOT_BINARY\",\n    \"producer\": \"72b1ba8ec351e86d66a90c401e0a75a530633616\",\n    \"evidence_dir\": str(pathlib.Path.home() / \".codex/incant-evidence/0073-r4-quality-gpu-001\"),\n    \"groups\": order,\n    \"budget\": budget,\n    \"environment\": {\"PATH\": \"/usr/bin:/bin:/usr/sbin:/sbin\", \"TMPDIR\": \"<fresh evidence root>/tmp/<group>\",\n                    \"INCANT_EXPECT_GPU_BACKEND\": \"Metal\", \"RUST_BACKTRACE\": \"0\",\n                    \"INCANT_0073_OWNER_REVIEW_OUT\": \"<fresh evidence root>/<group>/artifacts\"},\n    \"quality_plan\": ident(H / \"owner_quality/plan.json\"),\n    \"fixture\": ident(H / \"r4_quality/review/upscaling_owner_review.rs\"),\n    \"production_freeze\": ident(freeze),\n    \"build\": None, \"enumeration\": None, \"build_review\": None, \"binary\": None,\n}\n(H / \"r4_quality/execution/plan.json\").write_text(json.dumps(plan, indent=2) + \"\\n\")\nprint(fsha, budget)\nEOF\ncd r4_quality/execution && python3 -I -B runner.py check \"$PWD/plan.json\"; echo rc=$?; date +%T",
+      "description": "Create the fixture copy, adapted runner and unbuilt plan; run the CPU check branch"
+    }
+  },
+  {
+    "timestamp": "2026-10-14T01:51:35.904Z",
+    "id": "toolu_0198hfAPcLPUVjC7XitfT7ae",
+    "name": "Bash",
+    "input": {
+      "command": "cat > selfcheck.py <<'EOF'\n#!/usr/bin/env python3\n\"\"\"0073 r4_quality: CPU-only guard/source self-check of the adapted execution copy.\nNever calls the runner's run branch, Cargo, a GPU or an image tool. Read-only git on the\ncandidate checkout; mutated plans go only to /tmp/incant-0073-r4-quality-* scratch.\n\n    python3 -I -B handoffs/0073-upscaling-review/r4_quality/execution/selfcheck.py \\\\\n        --checkout /Users/andreyyurlov/.codex/worktrees/owner-quality-repair/incant\n\"\"\"\nimport argparse, copy, difflib, hashlib, importlib.util, json, pathlib, subprocess, sys, tempfile\nsys.dont_write_bytecode = True\nHERE = pathlib.Path(__file__).resolve().parent\nPKT = HERE.parents[1]\nOLD = \"76be9608e99bf089fcb1e0908827330f70c28ac1\"\nSOURCE = \"825ff047284e84252d00f786a7b14cb6ecb44293\"\nPRODUCTION = \"72b1ba8ec351e86d66a90c401e0a75a530633616\"\nCHECKS = []\n\n\ndef check(name, ok, detail=None):\n    CHECKS.append({\"check\": name, \"ok\": bool(ok), \"detail\": detail})\n\n\ndef sha(p):\n    return hashlib.sha256(pathlib.Path(p).read_bytes()).hexdigest()\n\n\ndef main():\n    ap = argparse.ArgumentParser(); ap.add_argument(\"--checkout\", required=True); a = ap.parse_args()\n    git = lambda *args: subprocess.run([\"git\", \"-C\", a.checkout, *args], capture_output=True, text=True)\n    fixture, old_fixture = PKT / \"r4_quality/review/upscaling_owner_review.rs\", PKT / \"owner_quality/review/upscaling_owner_review.rs\"\n    check(\"fixture copy is byte-identical to the reviewed 650316a fixture\",\n          fixture.read_bytes() == old_fixture.read_bytes() and sha(fixture) == \"650316a21f30bfb4f7cbe8c99b67f9b5be269b51eb62b4d017b519bd5130d997\")\n    old_runner = (PKT / \"owner_output_quality/execution/runner.py\").read_text().splitlines()\n    new_runner = (HERE / \"runner.py\").read_text().splitlines()\n    delta = [l for l in difflib.unified_diff(old_runner, new_runner, lineterm=\"\", n=0) if l[:1] in \"+-\" and l[:3] not in (\"---\", \"+++\")]\n    allowed = {\"-FIXTURE = PACKET / 'review/upscaling_owner_review.rs'\", \"+FIXTURE = HERE.parents[1] / 'review/upscaling_owner_review.rs'\",\n               \"-PRODUCTION = '76be9608e99bf089fcb1e0908827330f70c28ac1'\", \"+PRODUCTION = '72b1ba8ec351e86d66a90c401e0a75a530633616'\",\n               \"+SOURCE = '825ff047284e84252d00f786a7b14cb6ecb44293'\",\n               \"-PRODUCTION_FREEZE_SHA = '54c13c01c4b1de1c4de42f80ba01b026cf53c3752b4d365af058a4c6048d2361'\",\n               f\"+PRODUCTION_FREEZE_SHA = '{sha(PKT / 'r4_quality/production-freeze.json')}'\",\n               \"-E = Path.home() / '.codex/incant-evidence/0073-owner-output-quality-gpu-001'\",\n               \"+E = Path.home() / '.codex/incant-evidence/0073-r4-quality-gpu-001'\",\n               \"-            and build['source_commit'] == PRODUCTION\", \"+            and build['source_commit'] == SOURCE\"}\n    count_old = \"            and build['verified_production_files'] == 2835 and build['gpu_executions'] == 0,\"\n    allowed |= {\"-\" + count_old, \"+\" + count_old.replace(\"2835\", \"2839\")}\n    check(\"runner differs from the 76be execution copy only in source/path/hash metadata\", set(delta) == allowed and len(delta) == 13, delta)\n    spec = importlib.util.spec_from_file_location(\"r4_runner\", HERE / \"runner.py\")\n    r = importlib.util.module_from_spec(spec); spec.loader.exec_module(r)   # loads the reviewed lifecycle only\n    check(\"lifecycle helper is the reviewed b9e12895 file\", sha(r.LIFECYCLE) == r.LIFECYCLE_SHA == \"b9e12895389a046e1c0a0bd4c43f01a215505c793be4106b31fafc18aa2aff34\")\n    plan_path = HERE / \"plan.json\"\n    plan, q = r.read_plan(plan_path, allow_unbuilt=True)\n    groups = {g: q[\"groups\"][g][\"budget\"] for g in r.ORDER}\n    check(\"five ordered groups, primary first\", plan[\"groups\"] == r.ORDER == [\"stationary\", \"motion\", \"transitions\", \"c7_disocclusion\", \"p1_crossing\"])\n    b = plan[\"budget\"]\n    check(\"exact maximums: 5 children, 380 scenes + 18 UI + 380 readbacks = 778 submissions, 380 maps, 15 PNGs 960x540, 90 s, 0 builds/retries\",\n          (b[\"processes\"], b[\"scene_submissions\"], b[\"ui_submissions\"], b[\"readback_submissions\"], b[\"queue_submissions\"],\n           b[\"readback_maps\"], b[\"rendered_frames\"], b[\"pngs\"], b[\"maximum_extent\"], b[\"timeout_seconds_each\"], b[\"builds\"], b[\"retries\"])\n          == (5, 380, 18, 380, 778, 380, 380, 15, [960, 540], 90, 0, 0)\n          and b[\"scene_submissions\"] + b[\"ui_submissions\"] + b[\"readback_submissions\"] == 778, groups)\n    def refused(fn):\n        try:\n            fn(); return None\n        except r.life.Refused as e:\n            return str(e)\n    check(\"unbuilt plan cannot execute (fail closed)\", (refused(lambda: r.read_plan(plan_path, allow_unbuilt=False)) or \"\").endswith(\"unbuilt preparation cannot execute\"))\n    check(\"no grant path without a frozen binary\", (refused(lambda: r.grant(plan_path, plan)) or \"\").endswith(\"binary not frozen\"))\n    with tempfile.TemporaryDirectory(prefix=\"incant-0073-r4-quality-\", dir=\"/tmp\") as tmp:\n        def mutated(change):\n            m = copy.deepcopy(plan); change(m)\n            p = pathlib.Path(tmp) / \"plan.json\"; p.write_text(json.dumps(m))\n            return refused(lambda: r.read_plan(p, allow_unbuilt=True))\n        check(\"mutation: claimed frozen state without build/binary receipts refuses\", mutated(lambda m: m.update(state=\"FROZEN_READY_FOR_ROOT_GRANT\")) is not None)\n        check(\"mutation: a 16th PNG refuses\", mutated(lambda m: m[\"budget\"].update(pngs=16)) is not None)\n        check(\"mutation: the old 76be producer refuses\", mutated(lambda m: m.update(producer=OLD)) is not None)\n        check(\"mutation: a retry refuses\", mutated(lambda m: m[\"budget\"].update(retries=1)) is not None)\n        check(\"mutation: dropping p1_crossing refuses\", mutated(lambda m: m.update(groups=m[\"groups\"][:4])) is not None)\n    fz = json.loads((PKT / \"r4_quality/production-freeze.json\").read_text())\n    check(\"freeze binds candidate 825ff to production-equivalent 72b1 with 2839 files\",\n          fz[\"source_commit\"] == SOURCE and fz[\"production_equivalent\"] == PRODUCTION and len(fz[\"files\"]) == 2839)\n    # API compatibility of the fixture against the candidate (read-only Git objects).\n    owner = git(\"show\", f\"{SOURCE}:crates/incant_render/src/motion/owner.rs\").stdout\n    check(\"candidate keeps MotionFrame::jitter_phase -> Option<u32> (fixture lines 523/568/601)\", \"pub fn jitter_phase(&self) -> Option<u32> {\\n        self.phase\" in owner)\n    used = [\"has_previous\", \"camera_static\", \"sequence\", \"epoch\", \"same_owner\", \"bypassed\", \"internal_size\"]\n    check(\"candidate keeps every other MotionFrame accessor the fixture uses\", all(f\"pub fn {n}(\" in owner for n in used))\n    unchanged = [\"crates/incant_render/src/upscaling/mod.rs\", \"crates/incant_render/src/resolution\", \"crates/incant_render/Cargo.toml\",\n                 \"crates/incant_render/tests\", \"crates/incant_assets\", \"crates/incant_doc\", \"crates/incant_text\",\n                 \"crates/incant_render_data\", \"crates/incant_render_authoring\", \"crates/incant_types\", \"Cargo.toml\", \"Cargo.lock\"]\n    same = git(\"diff\", \"--quiet\", OLD, SOURCE, \"--\", *unchanged).returncode == 0\n    check(\"fixture-facing crates, Cargo files, resolution and upscaling API module unchanged 76be -> 825ff\", same, unchanged)\n    pubs = [l for l in git(\"diff\", OLD, SOURCE, \"--\", \"crates/incant_render/src\").stdout.splitlines()\n            if l[:1] in \"+-\" and l[:3] not in (\"+++\", \"---\") and \"pub fn\" in l and \"pub(crate)\" not in l]\n    check(\"changed pub fns are unused by the fixture (Prepared::jitter_offset, evidence/kernel test oracles)\",\n          all(not any(n in fixture.read_text() for n in (\"jitter_offset\", \"historical(\", \".resolve(\")) for _ in [0]) and len(pubs) == 6, pubs)\n    head = git(\"rev-parse\", \"HEAD\").stdout.strip()\n    out = {\"scope\": \"CPU-only preparation self-check; no build, run branch, GPU, capture or image\",\n           \"candidate\": SOURCE, \"production\": PRODUCTION, \"checkout_head_observed\": head,\n           \"runner_sha256\": sha(HERE / \"runner.py\"), \"plan_sha256\": sha(plan_path), \"per_group\": groups,\n           \"checks\": CHECKS, \"all_checks_pass\": all(c[\"ok\"] for c in CHECKS)}\n    (HERE / \"selfcheck.json\").write_text(json.dumps(out, indent=1, sort_keys=True) + \"\\n\")\n    print(f\"checks={len(CHECKS)} failed={sum(not c['ok'] for c in CHECKS)}\")\n    for c in CHECKS:\n        if not c[\"ok\"]:\n            print(\"FAILED\", c)\n    return 0 if out[\"all_checks_pass\"] else 1\n\n\nif __name__ == \"__main__\":\n    sys.exit(main())\nEOF\npython3 -I -B selfcheck.py --checkout /Users/andreyyurlov/.codex/worktrees/owner-quality-repair/incant; echo rc=$?; date +%T",
+      "description": "Write and run the CPU-only guard/source self-check"
+    }
+  },
+  {
+    "timestamp": "2026-10-14T01:51:42.457Z",
+    "id": "toolu_011B1z7aLCSiR6UV5sEkAUAG",
+    "name": "Bash",
+    "input": {
+      "command": "cd /Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review/handoffs/0073-upscaling-review && python3 -I -B -c \"\nimport json;s=json.load(open('r4_quality/execution/selfcheck.json'));print(s['checkout_head_observed'],s['runner_sha256'],s['plan_sha256'])\nq=json.load(open('owner_quality/plan.json'))\nprint(json.dumps(q['outcome_rules'])[:1800]);print('HIST',json.dumps(q['historical'])[:1500]);print('LIM',json.dumps(q['limits'])[:900])\"; date +%T",
+      "description": "Read selfcheck hashes and the quality plan's outcome rules and limits"
+    }
+  },
+  {
+    "timestamp": "2026-10-14T01:51:48.114Z",
+    "id": "toolu_01WGp1G89EmrG6SSe3HrS1JL",
+    "name": "Bash",
+    "input": {
+      "command": "python3 -I -B -c \"\nimport json;q=json.load(open('owner_quality/plan.json'));h=q['historical'];print([k for k in h]);print(json.dumps(h.get('p1_original_cpu_gate', h.get('p1')))[:700])\"; grep -m3 -n -i \"status\\|verdict\\|overall\" owner_output_quality/result.md | cut -c1-400; date +%T",
+      "description": "Read P1 history and the prior result status"
+    }
+  },
+  {
+    "timestamp": "2026-10-14T01:51:55.752Z",
+    "id": "toolu_015J9Q9v9TM9DD9EmBmfpVho",
+    "name": "Bash",
+    "input": {
+      "command": "python3 -I -B - <<'EOF'\nimport difflib, hashlib, json, pathlib\nH = pathlib.Path.cwd(); X = H / \"r4_quality/execution\"\nsha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()\nplan = json.loads((X / \"plan.json\").read_text())\ngrant = {\"schema\": \"incant-owner-quality-grant-v1\", \"authority\": \"root\", \"holder\": \"Claude0073 Opus5.5 Max\",\n         \"issued_at\": \"<ROOT_UTC_TIME>\", \"plan_sha256\": \"<sha256 of the FROZEN_READY_FOR_ROOT_GRANT plan root writes after the isolated build>\",\n         \"runner_sha256\": sha(X / \"runner.py\"),\n         \"lifecycle_sha256\": \"b9e12895389a046e1c0a0bd4c43f01a215505c793be4106b31fafc18aa2aff34\",\n         \"binary_sha256\": \"<root's isolated build of 825ff + fixture 650316a>\",\n         \"evidence_dir\": plan[\"evidence_dir\"], \"groups\": plan[\"groups\"], \"budget\": plan[\"budget\"],\n         \"predecessor_release_path\": \"<root chooses latest actual release>\",\n         \"predecessor_release_sha256\": \"<root pins verified latest release>\"}\n(X / \"grant-template.json\").write_text(json.dumps(grant, indent=2) + \"\\n\")\nold = (H / \"owner_output_quality/execution/runner.py\").read_text().splitlines(True)\nnew = (X / \"runner.py\").read_text().splitlines(True)\n(X / \"protocol-delta.patch\").write_text(\"\".join(difflib.unified_diff(old, new, \"owner_output_quality/execution/runner.py\", \"r4_quality/execution/runner.py\")))\nprint(sha(X / \"grant-template.json\"), sha(X / \"protocol-delta.patch\"))\nEOF\ndate +%T",
+      "description": "Write the grant template and the protocol delta patch"
+    }
+  },
+  {
+    "timestamp": "2026-10-14T01:52:12.686Z",
+    "id": "toolu_01C4X7cQxYYFhR1f1y9vjMou",
+    "name": "Write",
+    "input": {
+      "file_path": "/Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review/handoffs/0073-upscaling-review/r4_quality/review-checklist.md",
+      "content": "# R4 pixel review checklist (for the later granted run only)\n\nThis checklist is for Claude Opus 5.5 with thinking explicitly Max, verified through ACP. Use it only after root grants and the bounded runner has run.\n\nThe numbers in `report.json` never decide quality. No threshold below is new; each is quoted unchanged from `owner_quality/plan.json`. Candid failure is an allowed outcome.\n\n## Before looking\n\n1. Check the run's contract outcome before inspecting any image:\n   - every group finished primary-first;\n   - no process failed;\n   - every image is a PNG of at most 960\u00d7540;\n   - the image set is exactly the 15 planned PNGs.\n\n   Then read all 15 current PNGs in full: 6 stationary, 4 motion, 2 transitions, 2 c7_disocclusion and 1 p1_crossing.\n2. **Do not use older images:**\n   - Retained images from earlier runs (`a5ae3179`, `owner_quality`, `owner_quality_repair`, `owner_output_quality`) are context only.\n   - Never label them R4 results.\n   - Never use them as R4 references.\n\n## What to judge, together, per image\n\n3. **Compare all four modes in each comparison:** FULL, DRS (fixed 8/16), ordinary UP and OWN.\n   - Judge whether the reduced-resolution UP and OWN are a usable reconstruction relative to DRS. Do not require identity with FULL.\n   - State plainly where FULL is still visibly better.\n4. **Texture and fine detail:**\n   - Is checker and text texture detail sharper than nearest-neighbour DRS without moir\u00e9?\n   - Does the negative internal LOD bias add shimmer or aliasing in moving or current-only regions?\n5. **Thin geometry:**\n   - Check the wires and thin features for phase-dependent gaps, breaks or flicker.\n   - The eight jitter offsets stratify each axis only, so a gap at some angles is an expected, reportable limitation, not a pass.\n6. **Silhouettes and edges:**\n   - Look for stair-stepping, halos and ghost trails behind moving edges.\n   - Look for over-blur from strict motion coherence falling back to current-only.\n7. **Overlays:**\n   - Sprites, mixed-script world text, the BLEND card and physical UI must stay crisp at output resolution.\n   - They must show no sanitation artefacts. The previous accepted state is the baseline, so any regression is a failure.\n8. **Stability and transitions:**\n   - Check for a DRS wipe or transition pop across scale changes.\n   - Shadow-cascade stability under DRS is newly targeted by the DRS-stable guard. Shadow comparison is still limited to the fixture's views, so say what can and cannot be seen.\n\n## Historical gates: quoted, never closed by these observations\n\n9. **C7 (unchanged):** \"a square moving 3 px/frame over a static textured background; beyond 2 frames of motion behind the trailing edge, the mean absolute difference per column from a never-moved converged reference is at most 0.06\".\n   - The rendered `report.json` value compares 0.06 with mean 8-bit sRGB code differences / 255 against a never-occluded, same-chronology reference.\n   - That value is a rendered-output observation, not a pass or fail.\n   - The linear CPU-model failure (0.0918) stays recorded.\n10. **C9 (unchanged):** third 16 \u2265 0.75, fourth 16 \u2265 0.9, first 4 vs last 12 \u2265 0.9.\n    - The rendered values use the luminance standard deviation of sRGB codes per chart region against a finite matched-cycle reference (frames 17\u201324). That is an observation only.\n    - Convergence is not demonstrated.\n    - The model failures (0.683/0.869 and 0.741/0.943) stay recorded.\n11. **P1:** unresolved.\n    - The fixture covers grey 8/16 only, at one stop.\n    - The CPU model's worst residuals stay recorded: clear 8/16 0.349, clear 16/16 0.221, grey 8/16 0.296, grey 16/16 0.063.\n    - Do not claim P1 closure.\n\n## Verdict\n\n12. Write separate verdicts:\n    - stationary;\n    - motion and disocclusion;\n    - transitions and DRS;\n    - overlays;\n    - overall.\n\n    Cite image file names and the exact regions. Do not average a failure away.\n13. All historical failures remain open unless the evidence defined for that gate exists:\n    - `visual_a5ae3179`;\n    - GPU001 case 3;\n    - C7, C9 and P1;\n    - texture detail and thin geometry;\n    - silhouettes;\n    - the DRS wipe.\n\n    Pixel inspection can show improvement; it cannot pass a gate whose metric is defined differently.\n"
+    }
+  },
+  {
+    "timestamp": "2026-10-14T01:52:25.576Z",
+    "id": "toolu_01ESdVKEF49DK3yivTzsvaH2",
+    "name": "Bash",
+    "input": {
+      "command": "B=/Users/andreyyurlov/.codex/worktrees/owner-quality-repair/incant; python3 -I -B - \"$B\" <<'EOF'\nimport hashlib, json, pathlib, subprocess, sys\nB = sys.argv[1]; H = pathlib.Path.cwd(); R = H / \"r4_quality\"\nsha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()\nblob = lambda c, p: subprocess.run([\"git\", \"-C\", B, \"rev-parse\", f\"{c}:{p}\"], capture_output=True, text=True).stdout.strip()\nSRC, OLD = \"825ff047284e84252d00f786a7b14cb6ecb44293\", \"76be9608e99bf089fcb1e0908827330f70c28ac1\"\napi = {p: {\"76be\": blob(OLD, p), \"825ff\": blob(SRC, p)} for p in [\n    \"crates/incant_render/src/motion/owner.rs\", \"crates/incant_render/src/upscaling/mod.rs\",\n    \"crates/incant_render/src/resolution/mod.rs\", \"crates/incant_render/Cargo.toml\", \"Cargo.lock\"]}\ncompat = {\"fixture\": {\"path\": \"r4_quality/review/upscaling_owner_review.rs\", \"sha256\": sha(R / \"review/upscaling_owner_review.rs\"),\n                      \"byte_identical_to\": \"owner_quality/review/upscaling_owner_review.rs\"},\n          \"candidate\": SRC, \"production_equivalent\": \"72b1ba8ec351e86d66a90c401e0a75a530633616\",\n          \"verdict\": \"compatible by source inspection; fixture reused byte-for-byte; no fixture adaptation required; not compiled\",\n          \"blob_pins\": api,\n          \"evidence\": [\"MotionFrame::jitter_phase -> Option<u32> retained (fixture lines 523, 568, 601); still 8 phases\",\n                       \"fixture-facing crates, Cargo.toml/Cargo.lock, resolution and upscaling/mod.rs unchanged 76be -> 825ff\",\n                       \"the only changed public fns (Prepared::jitter_offset replacing Prepared::jitter_phase; evidence/kernel test oracles) are not used by the fixture\",\n                       \"R4 behaviour changes (estimator, LOD bias, split jitter offsets, DRS guard) change pixels, not the fixture's API or contract assertions (phase index, history, epochs, internal sizes)\"],\n          \"unverified\": \"only root's isolated build and clippy can confirm compilation\"}\n(R / \"review/compatibility.json\").write_text(json.dumps(compat, indent=1, sort_keys=True) + \"\\n\")\nfor k, v in api.items(): print(k, v[\"76be\"] == v[\"825ff\"])\nEOF\ndate +%T",
+      "description": "Write the compatibility record with blob pins"
+    }
+  },
+  {
+    "timestamp": "2026-10-14T01:52:59.011Z",
+    "id": "toolu_01KBAnGD3SGPbGQ757URkSi7",
+    "name": "Write",
+    "input": {
+      "file_path": "/Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review/handoffs/0073-upscaling-review/r4_quality/result.md",
+      "content": "# 0073 R4 appearance preparation: result\n\n**Status: PREPARED, NOT EXECUTED.** The packet is ready for a later root build and grant. Nothing was built, run on a GPU, captured or rendered, and no R4 pixel has been reviewed. Still pending:\n- a fresh isolated build of candidate 825ff with fixture 650316a;\n- a root grant;\n- the bounded execution;\n- my pixel review.\n\nThis turn passes no gate and accepts no appearance. All earlier quality failures remain open: overall reconstruction rejected, texture/fine detail, phase-dependent thin geometry, silhouettes, the DRS wipe, C7, C9, P1, `visual_a5ae3179` and GPU001 case 3.\n\n**Model:** Claude Opus 5.5 (`claude-opus-5-5`), thinking effort max; per the packet, root verified both through ACP. Auto-memory is off; no memory or preferences were read or written.\n\n**Turn bound:** 15 minutes, started 21:48:28 local (monotonic 122744.87).\n\n## Immutable inputs\n\n| Input | Identity |\n|---|---|\n| Candidate build source | `825ff047284e84252d00f786a7b14cb6ecb44293` (checkout HEAD observed read-only: same) |\n| Production equivalent | `72b1ba8ec351e86d66a90c401e0a75a530633616` (test-only correction `cae2bffc\u2026`) |\n| `r4_quality/production-freeze.json` (root-provided, read-only) | sha256 `9e36e8c3a8d7253a3619a85f8cb8e3e313c663bb37c9f15dab5946528c164f62`; 2839 files; `source_commit` 825ff; `production_equivalent` 72b1 |\n| Fixture `upscaling_owner_review.rs` | sha256 `650316a21f30bfb4f7cbe8c99b67f9b5be269b51eb62b4d017b519bd5130d997`, reused byte for byte in `review/` |\n| Quality plan `owner_quality/plan.json` | `ff0f0f488faa3f6d4d6cc1321d5c4e87c35cbb4160130dddd050697bb824dbc4` (unchanged) |\n| Lifecycle `owner/owner_runner.py` | `b9e12895389a046e1c0a0bd4c43f01a215505c793be4106b31fafc18aa2aff34` (unchanged) |\n| Previous execution runner (76be) | `owner_output_quality/execution/runner.py` |\n\n## 1. Compatibility (`review/compatibility.json`, `execution/selfcheck.json`)\n\n**Verdict:** compatible by source inspection. The fixture is reused unchanged and needs no adaptation. It has not been compiled.\n\n**Evidence:**\n- **Accessors the fixture uses:** `MotionFrame::jitter_phase() -> Option<u32>` (fixture lines 523, 568 and 601) and every other `MotionFrame` accessor the fixture calls are present at 825ff. The jitter schedule still has eight phases.\n- **Changed public functions are unused:** `Prepared::jitter_phase` became `jitter_offset`, plus the evidence and kernel test oracles. The fixture uses none of them.\n- **Unchanged from 76be (the previous run's base) to 825ff:**\n  - `upscaling/mod.rs` (`UpscaleConfig`, `UpscaleFrame`);\n  - `resolution/`;\n  - `incant_render/Cargo.toml` and its `tests/`;\n  - the workspace `Cargo.toml` and `Cargo.lock`;\n  - `incant_assets`, `incant_doc`, `incant_text`, `incant_render_data`, `incant_render_authoring` and `incant_types`.\n- **Behaviour changes affect pixels only:** the estimator, LOD bias, split jitter offsets and DRS guard change pixels. They do not change the API, phase indices, history, epochs or internal sizes that the fixture asserts.\n\n## 2. Preparation plan (`execution/`)\n\n- **`runner.py`** (sha256 `2a991b3abde5fb2b5e5ddcc28eac6187f88e0f5fa4b1c7dbe235eae112b8af6c`) is the 76be execution runner with only source, path and hash metadata changed (`protocol-delta.patch`):\n  - the fixture path points to `r4_quality/review/`;\n  - `PRODUCTION` is 72b1 and a new `SOURCE` is 825ff;\n  - the freeze sha is updated;\n  - the evidence directory is `0073-r4-quality-gpu-001`;\n  - the build receipt must name `SOURCE`;\n  - the verified-file count is 2839, matching the freeze.\n\n  No assertion, budget, environment, lifecycle or artifact check changed.\n- **`plan.json`** (sha256 `e019cd7fb3ea6a2bf4315125a2c0806650a6141cc82e4e00237e6c44cc39b760`) is in state `AWAITING_ROOT_BINARY`, with build, enumeration, build-review and binary all `null`. No grant, build or binary is invented, and an unbuilt plan cannot execute.\n- **`grant-template.json`** is a template only: root fills in the issue time, the frozen plan sha and the binary sha. A fresh root grant is required.\n\n## 3. Exact maximums and per-group counts\n\n| Group (primary-first order) | Scenes | UI | Readbacks | Maps | Queue submissions | PNGs |\n|---|---|---|---|---|---|---|\n| stationary | 50 | 18 | 50 | 50 | 118 | 6 |\n| motion | 44 | 0 | 44 | 44 | 88 | 4 |\n| transitions | 106 | 0 | 106 | 106 | 212 | 2 |\n| c7_disocclusion | 82 | 0 | 82 | 82 | 164 | 2 |\n| p1_crossing | 98 | 0 | 98 | 98 | 196 | 1 |\n| **Total** | **380** | **18** | **380** | **380** | **778** | **15** |\n\nFurther limits: 5 child processes, PNGs at most 960\u00d7540, 90 s per child, stop at the first failure, and no retries, extra probes, images or builds.\n\n**CPU-only self-check:** `execution/selfcheck.py` \u2192 `selfcheck.json`, 17/17 pass. It never takes the run branch. It verifies:\n- the fixture identity;\n- the runner diff, which must equal exactly the six metadata substitutions;\n- the lifecycle sha;\n- the plan through the runner's own `read_plan`;\n- the exact maximums and five-group order;\n- the freeze binding;\n- the API pins.\n\nIts fail-closed checks all refuse:\n- an unbuilt plan;\n- a grant without a frozen binary;\n- a mutated frozen state without receipts;\n- a 16th PNG;\n- the old producer;\n- a retry;\n- a dropped group.\n\nThe only runner invocation was `runner.py check`, which reported \"grant absent; no GPU authority\".\n\n## 4. Pixel review\n\n`review-checklist.md` covers the later granted run:\n- all 15 PNGs;\n- FULL, DRS, ordinary UP and OWN, compared for usable reduced-resolution quality rather than identity with FULL;\n- detail, thin features, overlays and stability judged together;\n- the C7, C9 and P1 thresholds quoted unchanged and kept separate from the sRGB and finite-reference observations.\n\nThere are no new thresholds, and failure is an allowed outcome.\n\n## Changed paths and commands\n\n**New files (only these are committed):**\n- `r4_quality/result.md`\n- `r4_quality/review-checklist.md`\n- `r4_quality/review/upscaling_owner_review.rs` (copy) and `review/compatibility.json`\n- `r4_quality/execution/runner.py`, `plan.json`, `grant-template.json`, `protocol-delta.patch`, `selfcheck.py` and `selfcheck.json`\n\n**Read-only and not committed:** root's `r4_quality/brief.md`, `inputs/` and `production-freeze.json`. The brief, every old packet, the top-level `result.md` and all untracked files are preserved.\n\n```sh\ncd handoffs/0073-upscaling-review/r4_quality/execution\npython3 -I -B runner.py check \"$PWD/plan.json\"   # AWAITING_ROOT_BINARY; grant absent; no GPU authority\npython3 -I -B selfcheck.py --checkout /Users/andreyyurlov/.codex/worktrees/owner-quality-repair/incant   # checks=17 failed=0\n```\n\n**Scratch:** `/tmp/incant-0073-r4-quality-*` (mutated plans), deleted automatically.\n\n## Missing evidence: explicitly pending\n\n- There is no build, clippy or enumeration receipt, so the runner refuses to execute.\n- There is no GPU execution, adapter record, report, PNG or timing.\n- There is no R4 appearance judgment. Older retained images were not used as R4 results.\n- Cooked-temporal and native MetalFX paths are not covered (default WGSL path only).\n- There is no phone, performance or memory claim.\n\n**Screenshots:** none.\n"
+    }
+  },
+  {
+    "timestamp": "2026-10-14T01:53:11.452Z",
+    "id": "toolu_01VnCDSTciCpYLeTJ6Fctj2v",
+    "name": "Bash",
+    "input": {
+      "command": "date +%T && python3 -I -B - <<'EOF'\nimport hashlib, json, pathlib\nR = pathlib.Path.cwd() / \"r4_quality\"\nsha = lambda p: hashlib.sha256((R / p).read_bytes()).hexdigest()\ns = json.loads((R / \"execution/selfcheck.json\").read_text())\nout = {\"schema\": \"incant-0073-r4-quality-preparation-v1\", \"status\": \"PREPARED_NOT_EXECUTED\",\n       \"model\": \"claude-opus-5-5\", \"thinking_effort\": \"max\",\n       \"candidate\": \"825ff047284e84252d00f786a7b14cb6ecb44293\", \"production_equivalent\": \"72b1ba8ec351e86d66a90c401e0a75a530633616\",\n       \"files\": {p: sha(p) for p in [\"review/upscaling_owner_review.rs\", \"review/compatibility.json\", \"review-checklist.md\",\n                                      \"execution/runner.py\", \"execution/plan.json\", \"execution/grant-template.json\",\n                                      \"execution/protocol-delta.patch\", \"execution/selfcheck.py\", \"execution/selfcheck.json\",\n                                      \"production-freeze.json\"]},\n       \"selfcheck\": {\"checks\": len(s[\"checks\"]), \"all_pass\": s[\"all_checks_pass\"]}, \"per_group\": s[\"per_group\"],\n       \"maximums\": {\"processes\": 5, \"scene_submissions\": 380, \"ui_submissions\": 18, \"readback_submissions\": 380,\n                    \"queue_submissions\": 778, \"readback_maps\": 380, \"pngs\": 15, \"maximum_extent\": [960, 540],\n                    \"timeout_seconds_each\": 90, \"retries\": 0, \"builds\": 0},\n       \"pending\": [\"isolated build + clippy + enumeration receipts\", \"root grant\", \"bounded GPU execution\", \"Claude pixel review of 15 PNGs\"],\n       \"gpu_executions\": 0, \"images\": 0, \"builds\": 0, \"appearance\": \"not assessed\"}\n(R / \"result.json\").write_text(json.dumps(out, indent=1, sort_keys=True) + \"\\n\")\nprint(out[\"selfcheck\"])\nEOF\ncd /Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review && Q=handoffs/0073-upscaling-review/r4_quality && git add $Q/result.md $Q/result.json $Q/review-checklist.md $Q/review/upscaling_owner_review.rs $Q/review/compatibility.json $Q/execution/runner.py $Q/execution/plan.json $Q/execution/grant-template.json $Q/execution/protocol-delta.patch $Q/execution/selfcheck.py $Q/execution/selfcheck.json && git diff --cached --name-only && git commit -q -m \"Prepare the R4 appearance review packet (not executed)\n\nReuse fixture 650316a byte for byte, confirm its API against candidate\n825ff, add a metadata-only execution copy of the 76be runner with an\nunbuilt plan, a grant template, a CPU-only self-check (17/17) and the\npixel review checklist. No build, GPU run, capture or appearance review.\n\nBuilt-by: claude\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\" && git log --oneline -1 && git rev-parse HEAD && git status --short && date +%T; python3 -c \"import time;print(time.monotonic())\"",
+      "description": "Write result.json and commit only the newly authored packet files"
+    }
+  }
+]

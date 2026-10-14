@@ -1,0 +1,147 @@
+{
+  "scope": "Independent CPU/source review of R4 appearance preparation only; no build, GPU, new images or appearance acceptance",
+  "verdict": "accepted for root build/protocol review",
+  "claude_commit": "316654898924644347d56b910c30e8f07f69feb3",
+  "production_source": "72b1ba8ec351e86d66a90c401e0a75a530633616",
+  "candidate": "825ff047284e84252d00f786a7b14cb6ecb44293",
+  "source_inputs_verified": 2839,
+  "files": [
+    {
+      "path": "brief.md",
+      "sha256": "272f530e459f9b04fc0b9e9d169fa32ab509ce2132d9ed7fe168af4a76019362",
+      "bytes": 5005
+    },
+    {
+      "path": "execution/grant-template.json",
+      "sha256": "1b55e78d6b9fce9357d3edbc94d3b037911a56e1e8bb91ae166107b3aecb6258",
+      "bytes": 1185
+    },
+    {
+      "path": "execution/plan.json",
+      "sha256": "e019cd7fb3ea6a2bf4315125a2c0806650a6141cc82e4e00237e6c44cc39b760",
+      "bytes": 1888
+    },
+    {
+      "path": "execution/protocol-delta.patch",
+      "sha256": "c1ca9a875468a7896851f2c0d95d5fb41310f330602e1d95218b42a456e1cd2c",
+      "bytes": 2134
+    },
+    {
+      "path": "execution/runner.py",
+      "sha256": "2a991b3abde5fb2b5e5ddcc28eac6187f88e0f5fa4b1c7dbe235eae112b8af6c",
+      "bytes": 20063
+    },
+    {
+      "path": "execution/selfcheck.json",
+      "sha256": "098a586a823dbe26bbc48cfc86891cdbf42bb87b0ad3fbe89c1710f6073c1677",
+      "bytes": 6478
+    },
+    {
+      "path": "execution/selfcheck.py",
+      "sha256": "c732a3c63c5da1f7abffd92ee233cda957fe1c0f8298d6e77ff04763ae9553f4",
+      "bytes": 8362
+    },
+    {
+      "path": "inputs/manifest.json",
+      "sha256": "270aa61f5b517c8424945b787744044e8623fe5b43886be8956c61b733314894",
+      "bytes": 1073
+    },
+    {
+      "path": "inputs/reconstruction-r4-attachment-reference.md",
+      "sha256": "0b6de8ef8b89083b9d61f82a0cd1097a2fd853f8776fc6061b02442ae1d4cdb8",
+      "bytes": 3823
+    },
+    {
+      "path": "inputs/reconstruction-r4-cpu.md",
+      "sha256": "663333d7952f1f4f68f47d05d5b83c95de0a57cceea09ac00766737eab2d643f",
+      "bytes": 6129
+    },
+    {
+      "path": "inputs/reconstruction-r4-numeric-002.md",
+      "sha256": "0c3b2123eae106eed5594b366559195f91a516db96d6b12407311bfa5d97b1bc",
+      "bytes": 4489
+    },
+    {
+      "path": "production-freeze.json",
+      "sha256": "9e36e8c3a8d7253a3619a85f8cb8e3e313c663bb37c9f15dab5946528c164f62",
+      "bytes": 513904
+    },
+    {
+      "path": "result.json",
+      "sha256": "971391cbb38189ef946682705ea2707d2be48bee25e852be469efca2f7343594",
+      "bytes": 2859
+    },
+    {
+      "path": "result.md",
+      "sha256": "c848527fb4ce1539e2c6e64dc4125c88c9c831f8a853df1ca853594a11c61d23",
+      "bytes": 7177
+    },
+    {
+      "path": "review/compatibility.json",
+      "sha256": "99036d37d2cdd264c636da29c6a2faa8cd823dc80f77c14a9b42ca70ba08478a",
+      "bytes": 1923
+    },
+    {
+      "path": "review/upscaling_owner_review.rs",
+      "sha256": "650316a21f30bfb4f7cbe8c99b67f9b5be269b51eb62b4d017b519bd5130d997",
+      "bytes": 115249
+    },
+    {
+      "path": "review-checklist.md",
+      "sha256": "469494e786fc493bb2772b651ea1a0b1ee7e94a27d6c8401550998e2928f912e",
+      "bytes": 4251
+    }
+  ],
+  "selfcheck": {
+    "exit": 0,
+    "controls": 17,
+    "stdout_sha256": "582f62ffad90fbab19a81ee36eb1492e570e540c98b1c3fd735dfff049d22736"
+  },
+  "runner_check": {
+    "exit": 0,
+    "stdout_sha256": "d4c19542f9c8f63697d1235172f468f48368c70b4da392d347011400d7aef69d",
+    "unbuilt_plan": true,
+    "build_binary_grant_present": false
+  },
+  "model": "Opus 5.5",
+  "effort": "max",
+  "verified_before_prompt": true,
+  "session_id": "88296197-2b09-41fa-b481-9f8ae415e266",
+  "terminal": {
+    "pid": 47045,
+    "pgid": 47045,
+    "exit": 0,
+    "timed_out": false,
+    "interrupted_by": [],
+    "reaped": true,
+    "group_empty_after": true,
+    "seconds": 307.636,
+    "argv": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "tools/handoff/main.py",
+      "run",
+      "0073-upscaling-review",
+      "--permission-mode",
+      "auto"
+    ],
+    "auto_memory_environment": {
+      "CLAUDE_CODE_DISABLE_AUTO_MEMORY": "1"
+    },
+    "wall_elapsed_seconds": 307.6469030380249,
+    "monotonic_elapsed_seconds": 307.6444669170014,
+    "watchdog": [],
+    "stdout_sha256": "9bb61f8c6f56d65640e991d27f674297a52d8f953e3c4763da1ef4325ab8fc7f",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "protected_tracked": 365,
+  "protected_untracked": 9,
+  "tool_metadata_sha256": "cb7064697b5b60b1e129b7e0c95125d4b175031faa2a08e17759bed321b94ed2",
+  "scope_review": "All25 observed tool calls were read-only source inspection, scoped new packet writes/commit or CPU Python checks. No compiler, device command, image read, memory or preference operation. Prior protected inputs are byte-identical.",
+  "qualifications": [
+    "Fixture is byte-identical650316a and has source-compatible APIs; compiler confirmation remains pending.",
+    "Legacy quality-plan source pins are historical; new execution plan requires candidate825ff build and2839file freeze. Budget/criteria/lifecycle are unchanged.",
+    "GPU001 case3 is retained historical failed evidence; later corrected numeric002 passed. The checklist statement that historical GPU001 case3 remains open must not be interpreted as an unresolved tested kernel defect. Appearance gates are still open.",
+    "If any future group fails, stop execution and scope any review to available outputs; a full five-group verdict cannot be asserted from a partial run.",
+    "C7/C9 rendered sRGB observations cannot close differently defined historical gates; P1 fixture remains one scale/background/stop."
+  ]
+}
