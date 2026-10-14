@@ -8,6 +8,9 @@ pub(super) struct Output {
     /// world text drawn over `composite`. Per frame; never history.
     pub overlay_depth: wgpu::TextureView,
     pub record: Option<[wgpu::TextureView; 2]>,
+    /// RG16Float (effective sample mass, integer age) per history slot, written
+    /// only by the portable ordinary resolve together with colour and depth.
+    pub evidence: [wgpu::TextureView; 2],
 }
 pub(super) struct Overlay {
     pub size: [u32; 2],
@@ -42,7 +45,7 @@ impl Output {
     pub fn bytes(&self) -> u64 {
         u64::from(self.size[0])
             * u64::from(self.size[1])
-            * if self.record.is_some() { 52 } else { 36 }
+            * if self.record.is_some() { 60 } else { 44 }
     }
     pub fn prepare(
         d: &wgpu::Device,
@@ -67,6 +70,14 @@ impl Output {
             }),
             color: std::array::from_fn(|_| {
                 make(d, size, crate::frame::HDR_FORMAT, "Output temporal HDR")
+            }),
+            evidence: std::array::from_fn(|_| {
+                make(
+                    d,
+                    size,
+                    wgpu::TextureFormat::Rg16Float,
+                    "Output temporal evidence mass and age",
+                )
             }),
             depth: std::array::from_fn(|_| {
                 make(

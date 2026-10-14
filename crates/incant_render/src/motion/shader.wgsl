@@ -1,5 +1,6 @@
 // Top-left normalized opaque-surface motion; temporal projections include jitter.
-struct Frame { current:mat4x4f, previous:mat4x4f, rect:vec4f }
+// lod.x: MASK texture LOD bias, equal to the internal material draw's (0 off-plan).
+struct Frame { current:mat4x4f, previous:mat4x4f, rect:vec4f, lod:vec4f }
 struct Material { base:vec4f, emissive_roughness:vec4f, factors:vec4f, flags:vec4u }
 @group(0) @binding(0) var<uniform> frame:Frame;
 @group(1) @binding(0) var<uniform> material:Material;
@@ -23,7 +24,7 @@ struct Output {
 }
 fn mask(in:Output) {
     // Match canonical MASK UV sampling, multiplier, cutoff and derivative order.
-    let base=material.base*textureSample(base_map,base_sampler,in.uv);
+    let base=material.base*textureSampleBias(base_map,base_sampler,in.uv,frame.lod.x);
     if material.flags.x==1u && base.a<material.factors.w { discard; }
 }
 @fragment fn depth_only(in:Output) {mask(in);}

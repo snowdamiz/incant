@@ -32,7 +32,7 @@ fn texture(binding: u32, depth: bool) -> wgpu::BindGroupLayoutEntry {
 pub(super) fn validate(kind: Kind) -> Result<(), &'static str> {
     use wgpu::{VertexFormat as F, VertexStepMode as S};
     if matches!(kind, Kind::Motion | Kind::Depth | Kind::MotionOwner) {
-        if crate::motion::system::frame_entry() != uniform(144, wgpu::ShaderStages::VERTEX_FRAGMENT)
+        if crate::motion::system::frame_entry() != uniform(160, wgpu::ShaderStages::VERTEX_FRAGMENT)
         {
             return Err("motion frame layout");
         }
@@ -84,8 +84,8 @@ pub(super) fn validate(kind: Kind) -> Result<(), &'static str> {
         let (actual, size, count) = match kind {
             Kind::Resolve => (crate::temporal::system::layout_entries(false), 64, 4),
             Kind::Copy => (crate::temporal::system::layout_entries(true), 64, 1),
-            Kind::UpscaleOwner => (crate::upscaling::system::owner_layout_entries(), 96, 7),
-            Kind::Upscale => (crate::upscaling::system::layout_entries(5), 96, 5),
+            Kind::UpscaleOwner => (crate::upscaling::system::owner_layout_entries(), 96, 8),
+            Kind::Upscale => (crate::upscaling::system::layout_entries(6), 96, 6),
             Kind::Composite => (crate::upscaling::system::layout_entries(2), 96, 2),
             #[cfg(feature = "native-metalfx")]
             Kind::MetalFxPack | Kind::MetalFxNormalize => {
@@ -105,7 +105,7 @@ pub(super) fn validate(kind: Kind) -> Result<(), &'static str> {
             let mut e = vec![uniform(size, wgpu::ShaderStages::FRAGMENT)];
             e.extend((1..=count).map(|i| {
                 let mut entry = texture(i, i == 3);
-                if kind == Kind::UpscaleOwner && matches!(i, 6 | 7) {
+                if kind == Kind::UpscaleOwner && matches!(i, 7 | 8) {
                     entry.ty = wgpu::BindingType::Texture {
                         sample_type: wgpu::TextureSampleType::Uint,
                         view_dimension: wgpu::TextureViewDimension::D2,
@@ -116,7 +116,7 @@ pub(super) fn validate(kind: Kind) -> Result<(), &'static str> {
             }));
             if kind == Kind::UpscaleOwner {
                 e.push(wgpu::BindGroupLayoutEntry {
-                    binding: 8,
+                    binding: 9,
                     ..uniform(12_528, wgpu::ShaderStages::FRAGMENT)
                 });
             }

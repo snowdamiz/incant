@@ -34,10 +34,10 @@ impl Kind {
     pub fn contract(self) -> &'static str {
         match self {
             Self::MotionOwner => {
-                "incant-temporal-motion-owner-v1;naga=29.0.4;wgpu=29.0.4;frame144-vf,material64-f,5textures-samplers;mrt=rgba32f-r32u;owner=uint-loc12-offset68-flat3;msl=2.4,pulls15-14-13-12,strides48-48-112-80,lengths1,frame0,material1;hlsl=6.0,b0-b1,sampler-t5,special-b2;spv=1.0,no-y-flip;bounds=restrict;loops=bounded"
+                "incant-temporal-motion-owner-v2;naga=29.0.4;wgpu=29.0.4;frame160-vf,material64-f,5textures-samplers;mrt=rgba32f-r32u;owner=uint-loc12-offset68-flat3;msl=2.4,pulls15-14-13-12,strides48-48-112-80,lengths1,frame0,material1;hlsl=6.0,b0-b1,sampler-t5,special-b2;spv=1.0,no-y-flip;bounds=restrict;loops=bounded"
             }
             Self::Depth => {
-                "incant-temporal-depth-v1;naga=29.0.4;wgpu=29.0.4;frame144-v,material64-f,5textures-samplers;msl=2.4,pulls15-14-13-12,strides48-48-112-80,lengths1,frame0,material1;hlsl=6.0,b0-b1,sampler-t5,special-b2;spv=1.0,no-y-flip;bounds=restrict;loops=bounded"
+                "incant-temporal-depth-v2;naga=29.0.4;wgpu=29.0.4;frame160-v,material64-f,5textures-samplers;msl=2.4,pulls15-14-13-12,strides48-48-112-80,lengths1,frame0,material1;hlsl=6.0,b0-b1,sampler-t5,special-b2;spv=1.0,no-y-flip;bounds=restrict;loops=bounded"
             }
             Self::MetalFxPack => {
                 "incant-metalfx-pack-v1;naga=29.0.4;wgpu=29.0.4;frame96-f,textures3,mrt4;msl=2.4;hlsl=6.0,special-b1;spv=1.0,no-y-flip;bounds=restrict;loops=bounded"
@@ -46,7 +46,7 @@ impl Kind {
                 "incant-metalfx-normalize-v1;naga=29.0.4;wgpu=29.0.4;frame96-f,textures3,mrt2;msl=2.4;hlsl=6.0,special-b1;spv=1.0,no-y-flip;bounds=restrict;loops=bounded"
             }
             Self::Motion => {
-                "incant-temporal-motion-v1;naga=29.0.4;wgpu=29.0.4;frame144-vf,material64-f,5textures-samplers;msl=2.4,pulls15-14-13-12,strides48-48-112-80,lengths1,frame0,material1;hlsl=6.0,b0-b1,sampler-t5,special-b2;spv=1.0,no-y-flip;bounds=restrict;loops=bounded"
+                "incant-temporal-motion-v2;naga=29.0.4;wgpu=29.0.4;frame160-vf,material64-f,5textures-samplers;msl=2.4,pulls15-14-13-12,strides48-48-112-80,lengths1,frame0,material1;hlsl=6.0,b0-b1,sampler-t5,special-b2;spv=1.0,no-y-flip;bounds=restrict;loops=bounded"
             }
             Self::Resolve => {
                 "incant-temporal-resolve-v1;naga=29.0.4;wgpu=29.0.4;frame64-f,textures4,mrt1;msl=2.4;hlsl=6.0,special-b1;spv=1.0,no-y-flip;bounds=restrict;loops=bounded"
@@ -55,10 +55,10 @@ impl Kind {
                 "incant-temporal-copy-v2;naga=29.0.4;wgpu=29.0.4;frame64-f@1,textures1@0,mrt1;msl=2.4;hlsl=6.0,special-b1;spv=1.0,no-y-flip;bounds=restrict;loops=bounded"
             }
             Self::UpscaleOwner => {
-                "incant-temporal-upscale-owner-v1;naga=29.0.4;wgpu=29.0.4;frame96-f,changes12528-f,5float-depth+2uint-textures,mrt=rgba16f-r32f-rg32u;msl=2.4,frame0,changes1;hlsl=6.0,b0-b1,special-b2;spv=1.0,no-y-flip;bounds=restrict;loops=bounded"
+                "incant-temporal-upscale-owner-v2;naga=29.0.4;wgpu=29.0.4;frame96-f,changes12528-f,6float-depth+2uint-textures,mrt=rgba16f-r32f-rg32u-rg16f;msl=2.4,frame0,changes1;hlsl=6.0,b0-b1,special-b2;spv=1.0,no-y-flip;bounds=restrict;loops=bounded"
             }
             Self::Upscale => {
-                "incant-temporal-upscale-v1;naga=29.0.4;wgpu=29.0.4;frame96-f,textures5,mrt2;msl=2.4;hlsl=6.0,special-b1;spv=1.0,no-y-flip;bounds=restrict;loops=bounded"
+                "incant-temporal-upscale-v2;naga=29.0.4;wgpu=29.0.4;frame96-f,textures6,mrt3;msl=2.4;hlsl=6.0,special-b1;spv=1.0,no-y-flip;bounds=restrict;loops=bounded"
             }
             Self::Composite => {
                 "incant-temporal-composite-v1;naga=29.0.4;wgpu=29.0.4;frame96-f,textures2,mrt1;msl=2.4;hlsl=6.0,special-b1;spv=1.0,no-y-flip;bounds=restrict;loops=bounded"
@@ -78,13 +78,13 @@ impl Kind {
                 209, 115, 118, 137, 112, 213, 84, 222, 124, 208, 129, 96, 117, 181,
             ],
             Self::MotionOwner => [
-                102, 9, 205, 235, 39, 74, 200, 74, 255, 222, 133, 196, 199, 126, 142, 116, 65, 223,
-                251, 183, 72, 224, 124, 45, 112, 156, 179, 170, 141, 96, 109, 0,
-            ],
+                162, 101, 152, 121, 205, 89, 105, 134, 51, 210, 143, 93, 183, 248, 164, 240,
+                134, 56, 47, 38, 14, 230, 145, 29, 227, 18, 165, 178, 209, 12, 66, 219,
+            ], // Claude 0073 r4 MASK LOD bias
             Self::Motion | Self::Depth => [
-                30, 190, 25, 208, 56, 144, 101, 74, 214, 210, 50, 136, 31, 151, 182, 253, 29, 74,
-                10, 195, 201, 189, 178, 150, 17, 209, 183, 33, 168, 48, 71, 123,
-            ],
+                230, 75, 74, 28, 192, 227, 147, 199, 82, 237, 222, 186, 138, 247, 146, 181,
+                157, 185, 202, 195, 206, 41, 145, 249, 255, 199, 241, 126, 30, 33, 100, 208,
+            ], // Claude 0073 r4 MASK LOD bias
             Self::Resolve => [
                 225, 175, 83, 86, 90, 41, 159, 106, 3, 161, 58, 62, 224, 90, 3, 123, 84, 14, 36,
                 203, 43, 11, 237, 5, 76, 238, 184, 210, 212, 132, 235, 241,
@@ -94,13 +94,13 @@ impl Kind {
                 215, 243, 186, 96, 58, 160, 76, 135, 91, 164, 141, 235, 36, 139,
             ],
             Self::UpscaleOwner => [
-                27, 85, 27, 146, 191, 29, 9, 129, 89, 255, 19, 72, 60, 81, 19, 109, 50, 4, 181, 5,
-                234, 254, 126, 203, 122, 233, 142, 128, 187, 32, 162, 128,
-            ], // Claude 0073 anchor-only changed-owner admission
+                196, 143, 100, 141, 101, 180, 10, 123, 203, 93, 196, 76, 56, 137, 133, 255,
+                121, 85, 90, 116, 173, 34, 246, 123, 64, 132, 199, 18, 238, 232, 32, 3,
+            ], // Claude 0073 r4 evidence estimator, full-support provenance
             Self::Upscale => [
-                247, 139, 204, 170, 171, 214, 166, 247, 251, 91, 6, 168, 46, 114, 232, 168, 64,
-                131, 247, 97, 183, 38, 176, 190, 80, 80, 97, 40, 216, 116, 8, 246,
-            ],
+                156, 81, 85, 37, 233, 70, 163, 20, 168, 70, 215, 15, 97, 67, 241, 183,
+                34, 19, 130, 97, 137, 190, 180, 171, 181, 156, 6, 186, 20, 189, 40, 54,
+            ], // Claude 0073 r4 evidence estimator
             Self::Composite => [
                 129, 207, 231, 197, 156, 114, 85, 211, 53, 86, 189, 212, 33, 103, 207, 218, 245,
                 203, 31, 62, 204, 242, 36, 180, 61, 83, 155, 186, 117, 165, 155, 55,

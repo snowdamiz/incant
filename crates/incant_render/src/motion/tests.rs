@@ -325,7 +325,7 @@ fn upscaling_keeps_exact_prior_matrix_and_jitter_through_internal_only_scale_cha
             assert_eq!(pending.frame.jitter_phase(), Some(step as u32));
             if let Some((old_matrix, old_rect, old_phase)) = previous {
                 assert_eq!(pending.previous, old_matrix);
-                let j = crate::temporal::jitter::SAMPLES[old_phase];
+                let j = crate::temporal::jitter::offset(old_phase as u32, true);
                 assert_eq!(
                     pending.previous_jitter_uv,
                     [j[0] / old_rect[2], j[1] / old_rect[3]]
@@ -336,7 +336,7 @@ fn upscaling_keeps_exact_prior_matrix_and_jitter_through_internal_only_scale_cha
                 let a = pending.matrix * p;
                 let b = pending.previous * p;
                 let m = reproject(a, b).unwrap();
-                let cur = crate::temporal::jitter::SAMPLES[step];
+                let cur = crate::temporal::jitter::offset(step as u32, true);
                 let delta = glam::Vec2::from([m[0], m[1]])
                     + glam::Vec2::new(cur[0] / plan.rect[2], cur[1] / plan.rect[3])
                     - glam::Vec2::from(pending.previous_jitter_uv);

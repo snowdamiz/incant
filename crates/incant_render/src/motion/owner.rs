@@ -58,6 +58,8 @@ pub struct MotionFrame {
     bypassed: bool,
     phase: Option<u32>,
     camera_static: bool,
+    /// Output-upscaled history: jitter phases index `UPSCALE_SAMPLES`.
+    upscaled: bool,
 }
 impl MotionFrame {
     /// Exact camera, shading-eye and source/output framing equality against the
@@ -67,6 +69,11 @@ impl MotionFrame {
         self.camera_static
     }
     /// Present only for temporal accumulation; phase is internal-pixel jitter.
+    /// Internal-pixel jitter of this frame's phase in its sequence.
+    pub(crate) fn jitter_offset(&self) -> Option<[f32; 2]> {
+        self.phase
+            .map(|p| crate::temporal::jitter::offset(p, self.upscaled))
+    }
     pub fn jitter_phase(&self) -> Option<u32> {
         self.phase
     }
@@ -166,6 +173,7 @@ impl History {
                 bypassed,
                 phase: None,
                 camera_static: false,
+                upscaled: extent.output_rect.is_some(),
             },
             matrix,
             previous_jitter_uv: [0.; 2],
@@ -215,7 +223,7 @@ impl History {
             && let Some(phase) = old.frame.phase
         {
             let rect = old.extent.rect.map(f32::from_bits);
-            let jitter = crate::temporal::jitter::SAMPLES[phase as usize];
+            let jitter = crate::temporal::jitter::offset(phase, old.extent.output_rect.is_some());
             pending.previous_jitter_uv = [jitter[0] / rect[2], jitter[1] / rect[3]];
         }
         if !pending.frame.bypassed {
@@ -231,7 +239,10 @@ impl History {
                 0
             };
             let mut camera = camera;
-            camera.jitter = crate::temporal::jitter::ndc(phase, rect);
+            camera.jitter = crate::temporal::jitter::ndc_offset(
+                crate::temporal::jitter::offset(phase, pending.frame.upscaled),
+                rect,
+            );
             pending.matrix = camera
                 .matrix(rect[2] / rect[3])
                 .map_err(|_| MotionError::Projection)?;

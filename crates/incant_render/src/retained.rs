@@ -598,9 +598,16 @@ impl RetainedScene {
                 )
             })
             .transpose()?;
-        if let Some(phase) = motion_pending.as_ref().and_then(|p| p.jitter_phase()) {
-            self.staging.camera.jitter = crate::temporal::jitter::ndc(phase, plan.rect);
-            self.staging.camera.jitter_guard = crate::temporal::jitter::guard(plan.rect);
+        if let Some(offset) = motion_pending.as_ref().and_then(|p| p.jitter_offset()) {
+            self.staging.camera.jitter = crate::temporal::jitter::ndc_offset(offset, plan.rect);
+            // Upscaled frames use the DRS-stable guard so a scale change never refits
+            // shadow cascades; unscaled frames keep the exact internal guard.
+            // (`output_mapping` is not a pixel rect, so the plan's output rect is used.)
+            self.staging.camera.jitter_guard =
+                match upscale_pending.as_ref().and_then(|p| p.output_rect()) {
+                    Some(output) => crate::temporal::jitter::drs_guard(output),
+                    None => crate::temporal::jitter::guard(plan.rect),
+                };
         }
         let commands = renderer.draw_scene_scaled(
             &self.staging,
@@ -644,6 +651,12 @@ impl RetainedScene {
         }
         if let (Some(temporal), Some(pending)) = (&mut self.temporal, temporal_pending) {
             temporal.accept(pending);
+        }
+        #[cfg(feature = "native-metalfx")]
+        if let (Some(up), Some(native)) = (upscale_pending.as_mut(), native_pending.as_ref())
+            && native.native()
+        {
+            up.mark_native();
         }
         if let (Some(owner), Some(pending)) = (&mut self.upscaling, upscale_pending) {
             owner.accept(pending);

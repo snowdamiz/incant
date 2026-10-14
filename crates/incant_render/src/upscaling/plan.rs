@@ -6,9 +6,10 @@ use super::UpscaleError;
 /// queued work.
 pub const MAX_UPSCALE_TRANSITION_BYTES: u64 =
     128 * crate::motion::MAX_MOTION_PIXELS + 2 * crate::motion::MAX_MOTION_INSTANCE_BYTES + 16384;
-/// Per output pixel: two RGBA16F colors and two R32F depths of history, the RGBA16F
-/// composite and the Depth32F output overlay depth (36 bytes).
-pub(super) const OUTPUT_PIXEL_BYTES: u64 = 36;
+/// Per output pixel: two RGBA16F colors, two R32F depths and two RG16F evidence
+/// (mass, age) of history, the RGBA16F composite and the Depth32F output overlay
+/// depth (44 bytes).
+pub(super) const OUTPUT_PIXEL_BYTES: u64 = 44;
 pub(super) const MAX_OUTPUT_BYTES: u64 = OUTPUT_PIXEL_BYTES * crate::motion::MAX_MOTION_PIXELS;
 pub(super) const MAX_OVERLAY_BYTES: u64 = 8 * crate::motion::MAX_MOTION_PIXELS;
 #[derive(Clone, Copy, Debug)]

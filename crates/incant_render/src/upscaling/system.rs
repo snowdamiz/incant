@@ -51,8 +51,10 @@ pub(crate) fn layout_entries(count: u32) -> Vec<wgpu::BindGroupLayoutEntry> {
     entries
 }
 pub(crate) fn owner_layout_entries() -> Vec<wgpu::BindGroupLayoutEntry> {
-    let mut entries = layout_entries(5);
-    entries.extend((6..=7).map(|binding| wgpu::BindGroupLayoutEntry {
+    // 1-6 as the ordinary resolve (6 = previous RG16F evidence), 7 owner IDs,
+    // 8 previous records, 9 the owner-change uniform.
+    let mut entries = layout_entries(6);
+    entries.extend((7..=8).map(|binding| wgpu::BindGroupLayoutEntry {
         binding,
         visibility: wgpu::ShaderStages::FRAGMENT,
         ty: wgpu::BindingType::Texture {
@@ -63,7 +65,7 @@ pub(crate) fn owner_layout_entries() -> Vec<wgpu::BindGroupLayoutEntry> {
         count: None,
     }));
     entries.push(wgpu::BindGroupLayoutEntry {
-        binding: 8,
+        binding: 9,
         visibility: wgpu::ShaderStages::FRAGMENT,
         ty: wgpu::BindingType::Buffer {
             ty: wgpu::BufferBindingType::Uniform,
@@ -136,6 +138,14 @@ fn pipeline(
     if kind == crate::temporal_shader::Kind::UpscaleOwner {
         targets.push(color(wgpu::TextureFormat::Rg32Uint));
     }
+    // RG16Float evidence (mass, age) last: MRT 8+4+4 = 16 bytes ordinary,
+    // 8+4+8+4 = 24 bytes owner.
+    if matches!(
+        kind,
+        crate::temporal_shader::Kind::Upscale | crate::temporal_shader::Kind::UpscaleOwner
+    ) {
+        targets.push(color(wgpu::TextureFormat::Rg16Float));
+    }
     Ok(d.create_render_pipeline(&wgpu::RenderPipelineDescriptor {
         label: Some("Output temporal reconstruction"),
         layout: Some(&layout),
@@ -166,8 +176,8 @@ fn group(
     changes: Option<&wgpu::Buffer>,
 ) -> wgpu::BindGroup {
     let count = 1 + textures.len() + usize::from(changes.is_some());
-    assert!(count <= 9);
-    let entries: [wgpu::BindGroupEntry<'_>; 9] = std::array::from_fn(|i| {
+    assert!(count <= 10);
+    let entries: [wgpu::BindGroupEntry<'_>; 10] = std::array::from_fn(|i| {
         if i == 0 || i >= count {
             wgpu::BindGroupEntry {
                 binding: 0,
@@ -180,7 +190,7 @@ fn group(
             }
         } else {
             wgpu::BindGroupEntry {
-                binding: 8,
+                binding: textures.len() as u32 + 1,
                 resource: changes.expect("owner upload").as_entire_binding(),
             }
         }
@@ -193,7 +203,7 @@ fn group(
 }
 impl System {
     fn new(d: &wgpu::Device, backend: wgpu::Backend, owner: bool) -> Result<Self> {
-        let resolve_layout = layout(d, 5);
+        let resolve_layout = layout(d, 6);
         let composite_layout = layout(d, 2);
         Ok(Self {
             owner: owner.then(|| OwnerSystem::new(d, backend)).transpose()?,
@@ -242,7 +252,15 @@ impl System {
                 c.absolute_depth,
                 c.reactive_threshold,
             ],
-            reactive: [c.reactive_strength, p.history_mass, 0., 0.],
+            // y: global mass (owner program only); z: source-rect area density for
+            // stored evidence; w: previous evidence written by this program for the
+            // accepted slot of this output allocation.
+            reactive: [
+                c.reactive_strength,
+                p.history_mass,
+                p.density,
+                f32::from(u8::from(p.evidence_valid)),
+            ],
             jitter: [
                 p.input.jitter[0],
                 p.input.jitter[1],
@@ -273,6 +291,7 @@ impl System {
             depth,
             &output.color[1 - slot],
             &output.depth[1 - slot],
+            &output.evidence[1 - slot],
             current,
             current,
         ];
@@ -282,11 +301,11 @@ impl System {
                 .as_ref()
                 .expect("owner pipelines admitted before retained opt-in");
             let records = output.record.as_ref().expect("owner output admitted");
-            textures[5] = owner;
-            textures[6] = &records[1 - slot];
-            (&system.layout, &system.resolve, Some(changes), 7)
+            textures[6] = owner;
+            textures[7] = &records[1 - slot];
+            (&system.layout, &system.resolve, Some(changes), 8)
         } else {
-            (&self.resolve_layout, &self.resolve, None, 5)
+            (&self.resolve_layout, &self.resolve, None, 6)
         };
         Some(Draw {
             resolve: group(d, layout, &uniform, &textures[..count], changes),
@@ -300,6 +319,7 @@ impl System {
             resolve_pipeline: pipeline.clone(),
             composite_pipeline: self.composite.clone(),
             record: output.record.as_ref().map(|r| r[slot].clone()),
+            evidence: output.evidence[slot].clone(),
             color: output.color[slot].clone(),
             depth: output.depth[slot].clone(),
             target: output.composite.clone(),
@@ -313,6 +333,8 @@ pub(crate) struct Draw {
     resolve_pipeline: wgpu::RenderPipeline,
     composite_pipeline: wgpu::RenderPipeline,
     record: Option<wgpu::TextureView>,
+    /// RG16Float (mass, age) written by both resolve programs.
+    evidence: wgpu::TextureView,
     color: wgpu::TextureView,
     depth: wgpu::TextureView,
     target: wgpu::TextureView,
@@ -335,12 +357,21 @@ impl Draw {
         e: &mut wgpu::CommandEncoder,
         t: Option<wgpu::RenderPassTimestampWrites<'_>>,
     ) {
-        let attachments = [
-            attachment(&self.color),
-            attachment(&self.depth),
-            self.record.as_ref().and_then(attachment),
-        ];
-        let count = if self.record.is_some() { 3 } else { 2 };
+        let attachments = match &self.record {
+            Some(record) => [
+                attachment(&self.color),
+                attachment(&self.depth),
+                attachment(record),
+                attachment(&self.evidence),
+            ],
+            None => [
+                attachment(&self.color),
+                attachment(&self.depth),
+                attachment(&self.evidence),
+                None,
+            ],
+        };
+        let count = if self.record.is_some() { 4 } else { 3 };
         let mut pass = e.begin_render_pass(&wgpu::RenderPassDescriptor {
             label: Some("Reconstruct output HDR and depth"),
             color_attachments: &attachments[..count],
@@ -391,13 +422,18 @@ impl Renderer {
         let usage = wgpu::TextureUsages::RENDER_ATTACHMENT
             | wgpu::TextureUsages::TEXTURE_BINDING
             | wgpu::TextureUsages::COPY_SRC;
-        if !self
-            .adapter
-            .get_texture_format_features(wgpu::TextureFormat::R32Float)
-            .allowed_usages
-            .contains(usage)
-        {
-            return Err(UpscaleError::Format.into());
+        for format in [
+            wgpu::TextureFormat::R32Float,
+            wgpu::TextureFormat::Rg16Float,
+        ] {
+            if !self
+                .adapter
+                .get_texture_format_features(format)
+                .allowed_usages
+                .contains(usage)
+            {
+                return Err(UpscaleError::Format.into());
+            }
         }
         let owner = self.motion.as_ref().is_some_and(|m| m.owner_enabled());
         if owner {

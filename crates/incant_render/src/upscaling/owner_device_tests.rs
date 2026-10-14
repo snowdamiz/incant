@@ -296,11 +296,13 @@ fn draw(
     color: &wgpu::TextureView,
     depth: &wgpu::TextureView,
     record: Option<&wgpu::TextureView>,
+    evidence: &wgpu::TextureView,
 ) {
     let mut attachments = vec![attachment(color), attachment(depth)];
     if let Some(record) = record {
         attachments.push(attachment(record));
     }
+    attachments.push(attachment(evidence));
     let mut pass = e.begin_render_pass(&wgpu::RenderPassDescriptor {
         label: Some("Actual owner history numerical resolve"),
         color_attachments: &attachments,
@@ -380,6 +382,10 @@ fn actual_owner_history_obeys_provenance_and_preserves_ordinary_fallback() {
     let color = texture(d, crate::frame::HDR_FORMAT, usage);
     let depth = texture(d, wgpu::TextureFormat::R32Float, usage);
     let record = texture(d, wgpu::TextureFormat::Rg32Uint, usage);
+    // Both resolve programs write RG16Float (mass, age) last.
+    let evidence = texture(d, wgpu::TextureFormat::Rg16Float, usage).create_view(&Default::default());
+    let baseline_evidence =
+        texture(d, wgpu::TextureFormat::Rg16Float, usage).create_view(&Default::default());
     let baseline_color = texture(d, crate::frame::HDR_FORMAT, usage);
     let baseline_depth = texture(d, wgpu::TextureFormat::R32Float, usage);
     let baseline_record = texture(d, wgpu::TextureFormat::Rg32Uint, usage);
@@ -405,6 +411,13 @@ fn actual_owner_history_obeys_provenance_and_preserves_ordinary_fallback() {
         let motion = upload(d, q, wgpu::TextureFormat::Rgba32Float, &c.motion);
         let previous = upload(d, q, wgpu::TextureFormat::Rgba32Float, &c.old);
         let previous_depth = upload(d, q, wgpu::TextureFormat::R32Float, &c.old_depth);
+        // Previous evidence: mass 9 (= h/(1-h) at ratio 1), age 0, for every texel.
+        let previous_evidence = upload(
+            d,
+            q,
+            wgpu::TextureFormat::Rgba32Float,
+            &vec![[9_f32, 0., 0., 0.]; (N * N) as usize],
+        );
         let owners = upload(d, q, wgpu::TextureFormat::R32Uint, &c.owners);
         let records = upload(d, q, wgpu::TextureFormat::Rg32Uint, &c.records);
         let frame = d.create_buffer_init(&wgpu::util::BufferInitDescriptor {
@@ -423,6 +436,7 @@ fn actual_owner_history_obeys_provenance_and_preserves_ordinary_fallback() {
             &current_depth,
             &previous,
             &previous_depth,
+            &previous_evidence,
         ];
         let mut owner_textures = textures.to_vec();
         owner_textures.extend([&owners, &records]);
@@ -461,6 +475,7 @@ fn actual_owner_history_obeys_provenance_and_preserves_ordinary_fallback() {
             &color_view,
             &depth_view,
             Some(&record_view),
+            &evidence,
         );
         owner_renders += 1;
         if let Some(fresh) = &current_only_bindings {
@@ -471,6 +486,7 @@ fn actual_owner_history_obeys_provenance_and_preserves_ordinary_fallback() {
                 &baseline_color_view,
                 &baseline_depth_view,
                 Some(&baseline_record_view),
+                &baseline_evidence,
             );
             current_only_renders += 1;
         }
@@ -482,6 +498,7 @@ fn actual_owner_history_obeys_provenance_and_preserves_ordinary_fallback() {
                 &baseline_color_view,
                 &baseline_depth_view,
                 None,
+                &baseline_evidence,
             );
             baseline_renders += 1;
         }

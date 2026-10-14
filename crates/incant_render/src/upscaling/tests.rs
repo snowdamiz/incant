@@ -89,10 +89,10 @@ fn all_owned_old_and_candidate_resources_are_admitted_before_allocation() {
     )
     .unwrap();
     let p = Plan::new([2048, 2048], [0., 0., 2048., 2048.], &frame).unwrap();
-    // The output-resolution overlay depth (4 B/output pixel) is charged for old and
-    // candidate outputs under the unchanged ceiling: a full-scale 2048^2 candidate
-    // after a maximal old set now exceeds it by exactly 2 * 4 * 2^22 bytes, while a
-    // fresh one, a 1923^2 full-scale one and a 2048^2 output at 8/16 still fit.
+    // Output overlay depth (4 B) and the two RG16F evidence slots (8 B) per output
+    // pixel are charged for old and candidate outputs under the unchanged ceiling:
+    // after a maximal old set the largest admitted squares are 1694^2 at full scale
+    // and 1939^2 at 8/16 (ceil source extents); a fresh 2048^2 still fits.
     assert_eq!(
         p.preflight(
             8192,
@@ -104,9 +104,11 @@ fn all_owned_old_and_candidate_resources_are_admitted_before_allocation() {
     );
     p.preflight(8192, 0, 0, 0).unwrap();
     for (size, half, fits) in [
-        (1923, false, true),
-        (1924, false, false),
-        (2048, true, true),
+        (1694, false, true),
+        (1695, false, false),
+        (1939, true, true),
+        (1940, true, false),
+        (2048, true, false),
     ] {
         let frame = crate::resolution::FramePlan::new(
             [size, size],
@@ -124,7 +126,7 @@ fn all_owned_old_and_candidate_resources_are_admitted_before_allocation() {
         );
         assert_eq!(got.is_ok(), fits, "{size} half={half}");
     }
-    assert_eq!(MAX_OUTPUT_BYTES, 36 * 4 * 1024 * 1024);
+    assert_eq!(MAX_OUTPUT_BYTES, 44 * 4 * 1024 * 1024);
     assert_eq!(MAX_UPSCALE_TRANSITION_BYTES, 640 * 1024 * 1024 + 16384);
     for (o, a, m) in [
         (MAX_OUTPUT_BYTES + 1, 0, 0),

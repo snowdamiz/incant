@@ -151,11 +151,12 @@ pub(super) fn validate(m: &naga::Module, info: &naga::valid::ModuleInfo) -> Resu
                     && fields(
                         m,
                         g.ty,
-                        96,
+                        112,
                         &[
                             ("view_projection", 0, 0),
                             ("eye", 64, 1),
                             ("environment", 80, 1),
+                            ("lod", 96, 1),
                         ],
                     )
             }

@@ -378,6 +378,8 @@ impl Renderer {
                 format: frame::HDR_FORMAT,
                 rect: scene_rect,
             },
+            // Internal opaque/MASK footprint matches the output grid; 0 without a plan.
+            upscaling.map_or(0., upscaling::Pending::lod_bias),
         )?;
         let overlay = upscaling.and_then(|p| p.overlay());
         // Portable upscaling draws current-only BLEND models at output resolution

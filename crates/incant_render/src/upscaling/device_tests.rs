@@ -72,6 +72,10 @@ fn actual_output_reconstruction_rejects_bad_history_and_never_retains_overlay() 
     let color = make(crate::frame::HDR_FORMAT, 8, usage);
     let color_view = color.create_view(&Default::default());
     let depth = make(wgpu::TextureFormat::R32Float, 8, usage).create_view(&Default::default());
+    // RG16Float (mass, age) attachment of the ordinary resolve (binding 6 reads the
+    // previous slot below).
+    let evidence =
+        make(wgpu::TextureFormat::Rg16Float, 8, usage).create_view(&Default::default());
     let composite = make(crate::frame::HDR_FORMAT, 8, usage);
     let composite_view = composite.create_view(&Default::default());
     let read = d.create_buffer(&wgpu::BufferDescriptor {
@@ -137,6 +141,8 @@ fn actual_output_reconstruction_rejects_bad_history_and_never_retains_overlay() 
             depths[3 * 8 + 4][0] = 10.;
         }
         let old_depth = source(&depths, 8);
+        // Previous evidence: mass 1, age 0 (an integer age below the retirement bound).
+        let old_evidence = source(&vec![[1., 0., 0., 0.]; 64], 8);
         let over = if mode == 7 {
             [0.1, 0.05, 0., 0.5]
         } else {
@@ -181,7 +187,7 @@ fn actual_output_reconstruction_rejects_bad_history_and_never_retains_overlay() 
                 d,
                 &system.resolve_layout,
                 &uniform,
-                &[&current, &motion, &current_depth, &old, &old_depth],
+                &[&current, &motion, &current_depth, &old, &old_depth, &old_evidence],
                 None,
             ),
             composite: group(
@@ -194,6 +200,7 @@ fn actual_output_reconstruction_rejects_bad_history_and_never_retains_overlay() 
             resolve_pipeline: system.resolve.clone(),
             composite_pipeline: system.composite.clone(),
             record: None,
+            evidence: evidence.clone(),
             color: color_view.clone(),
             depth: depth.clone(),
             target: composite_view.clone(),

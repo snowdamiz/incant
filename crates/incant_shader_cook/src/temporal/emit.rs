@@ -98,7 +98,7 @@ pub(super) fn emit(
                 if g.space == naga::AddressSpace::Uniform {
                     target.buffer = Some(
                         if (motion && b.group == 1)
-                            || (kind == Kind::UpscaleOwner && b.binding == 8)
+                            || (kind == Kind::UpscaleOwner && b.binding == 9)
                         {
                             1
                         } else {
@@ -213,7 +213,7 @@ pub(super) fn emit(
                     .ok_or(CookError::Contract("temporal emitted binding"))?;
                 let target = if g.space == naga::AddressSpace::Uniform {
                     bind(u32::from(
-                        (motion && b.group == 1) || (kind == Kind::UpscaleOwner && b.binding == 8),
+                        (motion && b.group == 1) || (kind == Kind::UpscaleOwner && b.binding == 9),
                     ))
                 } else if motion && b.binding == 2 {
                     hlsl::BindTarget {

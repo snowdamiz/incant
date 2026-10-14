@@ -3,7 +3,7 @@ use super::{MotionError, plan};
 pub const MAX_OWNER_TARGET_BYTES: u64 = 4 * plan::MAX_MOTION_PIXELS;
 pub const MAX_OWNER_RECORD_BYTES: u64 = 16 * plan::MAX_MOTION_PIXELS;
 /// Output history color/depth pairs, composite and output-resolution overlay depth.
-const OUTPUT_STRIDE: u64 = 36;
+const OUTPUT_STRIDE: u64 = 44;
 #[derive(Clone, Copy, PartialEq, Eq)]
 pub(crate) struct Cache {
     pub size: [u32; 2],
@@ -160,28 +160,28 @@ mod tests {
                 [2048, 2048],
                 [2048, 2048],
                 [2048, 2048],
-                503_332_864,
+                Some(536_887_296),
             ),
             (
                 [1920, 1920],
                 [2048, 2048],
                 [2048, 2048],
                 [2048, 2048],
-                606_552_064,
+                Some(640_106_496),
             ),
             (
                 [2560, 1440],
                 [1920, 1080],
                 [2560, 1440],
                 [1920, 1080],
-                641_114_112,
+                None,
             ),
             (
                 [1280, 800],
                 [1280, 720],
                 [2560, 1600],
                 [2560, 1440],
-                655_654_912,
+                None,
             ),
         ] {
             assert_eq!(
@@ -193,7 +193,7 @@ mod tests {
                     Some(prior_output),
                     8192
                 )
-                .unwrap(),
+                .ok(),
                 expected
             );
         }
@@ -210,7 +210,7 @@ mod tests {
         );
         assert_eq!(
             admit_records([2048, 1920], None, [2048, 1920], None, None, 8192).unwrap(),
-            480_264_192
+            511_721_472
         );
         let size = [3, 5];
         let off = Some(Cache { size, owner: false });
@@ -225,7 +225,7 @@ mod tests {
                 8192
             )
             .unwrap(),
-            1080
+            1320
         );
         assert_eq!(
             flagged_component(off, on, 16, true, MAX_OWNER_RECORD_BYTES, 8192).unwrap(),
@@ -240,7 +240,7 @@ mod tests {
         let reduced = [1920, 1920];
         assert_eq!(
             admit(full, Some(full), Some(full), Some(full), Some(full), 8192).unwrap(),
-            72 * 4194304 + 2 * plan::MAX_MOTION_INSTANCE_BYTES + 16384
+            80 * 4194304 + 2 * plan::MAX_MOTION_INSTANCE_BYTES + 16384
         );
         assert!(
             admit(

@@ -9,12 +9,17 @@ struct Frame {
     matrix: [[f32; 4]; 4],
     eye: [f32; 4],
     environment: [f32; 4],
+    /// x: texture LOD bias for material and MASK samples. Internal opaque/MASK
+    /// draws under an upscale plan use log2(source / output) (negative at reduced
+    /// scale) so their footprint matches the output grid; every other draw is 0.
+    lod: [f32; 4],
 }
 const _: () = {
-    assert!(size_of::<Frame>() == 96);
+    assert!(size_of::<Frame>() == 112);
     assert!(std::mem::offset_of!(Frame, matrix) == 0);
     assert!(std::mem::offset_of!(Frame, eye) == 64);
     assert!(std::mem::offset_of!(Frame, environment) == 80);
+    assert!(std::mem::offset_of!(Frame, lod) == 96);
 };
 impl Renderer {
     fn model_camera_group(&self, frame: Frame) -> wgpu::BindGroup {
@@ -66,6 +71,7 @@ impl Renderer {
                 environment.rotation.sin(),
                 crate::environment::MAX_SPECULAR_LOD,
             ],
+            lod: [0.; 4],
         };
         let (lighting, grid) = self.lighting.prepare_output(
             &self.device,
@@ -87,6 +93,7 @@ impl Renderer {
         &self,
         scene: &RenderScene,
         target: ModelTarget,
+        lod_bias: f32,
     ) -> Result<Option<ModelDraw>> {
         if scene.batches.is_empty() {
             return Ok(None);
@@ -107,6 +114,8 @@ impl Renderer {
                 environment.rotation.sin(),
                 crate::environment::MAX_SPECULAR_LOD,
             ],
+            // Opaque and MASK draws at the internal extent; BLEND uses its own 0-bias frame.
+            lod: [lod_bias, 0., 0., 0.],
         };
         let camera_group = |frame: Frame| self.model_camera_group(frame);
         let bind_group = camera_group(frame);
@@ -117,6 +126,8 @@ impl Renderer {
                     .unjittered()
                     .matrix(target.rect[2] / target.rect[3])?
                     .to_cols_array_2d(),
+                // BLEND is current-only: never negatively biased.
+                lod: [0.; 4],
                 ..frame
             }))
         } else {

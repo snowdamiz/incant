@@ -40,7 +40,7 @@ pub(crate) fn frame_entry() -> wgpu::BindGroupLayoutEntry {
         ty: wgpu::BindingType::Buffer {
             ty: wgpu::BufferBindingType::Uniform,
             has_dynamic_offset: false,
-            min_binding_size: wgpu::BufferSize::new(144),
+            min_binding_size: wgpu::BufferSize::new(160),
         },
         count: None,
     }

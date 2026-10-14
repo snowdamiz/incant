@@ -119,14 +119,14 @@ fn uniform(
         return Err(CookError::Contract("temporal uniform type"));
     };
     require(
-        members.len() == names.len() && *span == if motion { 144 } else { names.len() as u32 * 16 },
+        members.len() == names.len() && *span == if motion { 160 } else { names.len() as u32 * 16 },
         "temporal uniform span",
     )?;
     for (i, (member, name)) in members.iter().zip(names).enumerate() {
         let matrix = motion && i < 2;
         require(
             member.name.as_deref() == Some(*name)
-                && member.offset == if motion { i as u32 * 64 } else { i as u32 * 16 },
+                && member.offset == if motion { [0, 64, 128, 144][i] } else { i as u32 * 16 },
             "temporal uniform member",
         )?;
         require(
@@ -271,8 +271,15 @@ pub(super) fn validate(kind: Kind, m: &naga::Module, info: &naga::valid::ModuleI
                 Io::Float(0, 4, false),
                 Io::Float(1, 1, false),
                 Io::Uint(2, 2, false),
+                Io::Float(3, 2, false),
             ]
-        } else if matches!(kind, Kind::Upscale | Kind::MetalFxNormalize) {
+        } else if kind == Kind::Upscale {
+            vec![
+                Io::Float(0, 4, false),
+                Io::Float(1, 1, false),
+                Io::Float(2, 2, false),
+            ]
+        } else if kind == Kind::MetalFxNormalize {
             vec![Io::Float(0, 4, false), Io::Float(1, 1, false)]
         } else if kind == Kind::MetalFxPack {
             vec![
@@ -304,8 +311,8 @@ pub(super) fn validate(kind: Kind, m: &naga::Module, info: &naga::valid::ModuleI
         Kind::Motion | Kind::Depth | Kind::MotionOwner => 4,
         Kind::Resolve => 5,
         Kind::Copy => 2,
-        Kind::Upscale => 6,
-        Kind::UpscaleOwner => 9,
+        Kind::Upscale => 7,
+        Kind::UpscaleOwner => 10,
         Kind::Composite => 3,
         Kind::MetalFxPack | Kind::MetalFxNormalize => 4,
     };
@@ -329,7 +336,7 @@ pub(super) fn validate(kind: Kind, m: &naga::Module, info: &naga::valid::ModuleI
             } else {
                 match kind {
                     Kind::Motion | Kind::Depth | Kind::MotionOwner => {
-                        &["current", "previous", "rect"]
+                        &["current", "previous", "rect", "lod"]
                     }
                     Kind::Resolve | Kind::Copy => &["rect", "depth", "options", "reactive"],
                     Kind::Upscale
@@ -342,7 +349,7 @@ pub(super) fn validate(kind: Kind, m: &naga::Module, info: &naga::valid::ModuleI
                 }
             };
             uniform(m, g.ty, names, frame && motion, material)?;
-        } else if kind == Kind::UpscaleOwner && b.group == 0 && b.binding == 8 {
+        } else if kind == Kind::UpscaleOwner && b.group == 0 && b.binding == 9 {
             require(
                 g.space == AddressSpace::Uniform,
                 "owner changes uniform space",
@@ -370,7 +377,7 @@ pub(super) fn validate(kind: Kind, m: &naga::Module, info: &naga::valid::ModuleI
                 ImageClass::Depth { multi: false }
             } else {
                 ImageClass::Sampled {
-                    kind: if kind == Kind::UpscaleOwner && matches!(b.binding, 6 | 7) {
+                    kind: if kind == Kind::UpscaleOwner && matches!(b.binding, 7 | 8) {
                         ScalarKind::Uint
                     } else {
                         ScalarKind::Float
@@ -551,8 +558,8 @@ mod history_owner_tests {
             source.replace("@location(2) record:vec2u", "@location(3) record:vec2u"),
             source.replace("array<vec4u,782>", "array<vec4u,783>"),
             source.replace("header:vec4u, words:", "header:vec4u, extra:vec4u, words:"),
-            source.replace("@binding(8)", "@binding(9)"),
-            format!("{source}\n@group(0) @binding(9) var extra:texture_2d<u32>;"),
+            source.replace("@binding(9)", "@binding(10)"),
+            format!("{source}\n@group(0) @binding(10) var extra:texture_2d<u32>;"),
         ] {
             assert_ne!(changed, source, "negative control must change source");
             assert!(!accepts(&changed));

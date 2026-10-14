@@ -138,7 +138,9 @@ fn fixed_programs_preserve_interfaces_robust_accesses_and_native_binding_maps() 
                     "[[buffer(1)]]",
                     "[[texture(5)]]",
                     "[[texture(6)]]",
+                    "[[texture(7)]]",
                     "[[color(2)]]",
+                    "[[color(3)]]",
                     "uint2",
                 ],
                 (Kind::UpscaleOwner, Backend::Dx12, Stage::Fragment) => &[
@@ -146,17 +148,21 @@ fn fixed_programs_preserve_interfaces_robust_accesses_and_native_binding_maps() 
                     "register(b1)",
                     "register(t5)",
                     "register(t6)",
+                    "register(t7)",
                     "SV_Target2",
+                    "SV_Target3",
                     "uint2",
                 ],
                 (Kind::Upscale, Backend::Metal, Stage::Fragment) => &[
                     "[[color(0)]]",
                     "[[color(1)]]",
+                    "[[color(2)]]",
                     "[[texture(4)]]",
+                    "[[texture(5)]]",
                     "get_width",
                 ],
                 (Kind::Upscale, Backend::Dx12, Stage::Fragment) => {
-                    &["SV_Target0", "SV_Target1", "register(t4)", ".Load("]
+                    &["SV_Target0", "SV_Target1", "SV_Target2", "register(t5)", ".Load("]
                 }
                 (_, Backend::Metal, Stage::Fragment) => &["[[texture(0)]]", "get_width"],
                 (_, Backend::Dx12, Stage::Fragment) => &["register(t0)", ".Load("],

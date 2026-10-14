@@ -1,5 +1,6 @@
 // Core metallic-roughness equations; preview lighting is separate frame data.
-struct Frame { view_projection: mat4x4f, eye:vec4f, environment:vec4f }
+// lod.x: material/MASK texture LOD bias (internal upscale opaque draws only).
+struct Frame { view_projection: mat4x4f, eye:vec4f, environment:vec4f, lod:vec4f }
 struct Material { base:vec4f, emissive_roughness:vec4f, factors:vec4f, flags:vec4u }
 @group(0) @binding(0) var<uniform> frame:Frame;
 @group(1) @binding(0) var<uniform> material:Material;
@@ -36,11 +37,11 @@ fn environment_direction(d:vec3f) -> vec3f {
 }
 @fragment fn fragment(in:VertexOut,@builtin(front_facing) front:bool) -> @location(0) vec4f {
     // Derivative-based samples are evaluated uniformly before alpha discard.
-    let base=material.base*textureSample(base_map,base_sampler,in.uv);
-    let mr=textureSample(mr_map,mr_sampler,in.uv);
-    let normal_sample=textureSample(normal_map,normal_sampler,in.uv).xyz*2.0-1.0;
-    let occlusion=1.0+material.factors.z*(textureSample(occlusion_map,occlusion_sampler,in.uv).r-1.0);
-    let emissive=material.emissive_roughness.xyz*textureSample(emissive_map,emissive_sampler,in.uv).xyz;
+    let base=material.base*textureSampleBias(base_map,base_sampler,in.uv,frame.lod.x);
+    let mr=textureSampleBias(mr_map,mr_sampler,in.uv,frame.lod.x);
+    let normal_sample=textureSampleBias(normal_map,normal_sampler,in.uv,frame.lod.x).xyz*2.0-1.0;
+    let occlusion=1.0+material.factors.z*(textureSampleBias(occlusion_map,occlusion_sampler,in.uv,frame.lod.x).r-1.0);
+    let emissive=material.emissive_roughness.xyz*textureSampleBias(emissive_map,emissive_sampler,in.uv,frame.lod.x).xyz;
     if material.flags.x==1u && base.a<material.factors.w { discard; }
     // Texture normals perturb shading, never the geometric shadow-bias position.
     var surface_normal=unit(in.normal);
