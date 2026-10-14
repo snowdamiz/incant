@@ -1,17 +1,17 @@
 # Implementation status
 
 
-## Engine compatibility and pin review — backend slice
+## Engine compatibility and pin review — qualified main271 composition
 
 New projects declare the exact engine version; legacy unpinned v1 projects keep
-their canonical bytes. Bounded SemVer requirements are enforced at load and
-cook, explicit pin commands retain atomic history/undo/replay, and read-only
-CLI/RPC reviews bind source/revision/candidate digests. 80 document/command tests,
-a live headless control, exact cooked-byte/native continuation, strict lint and
-generated TypeScript/schema checks pass. The two compile failures are retained.
-Project-file migration, create-only backup and crash-recovery application remain
-separate pending work; this does not complete the Phase 2 migration requirement.
-[Scope and follow-up ordering](docs/spikes/project-engine-compatibility.md).
+its absence. Bounded SemVer validation, atomic pin commands and read-only CLI/RPC
+reviews now compose with linked prefab authoring. Current source passes 96
+document/command cases, two live headless cases and two cooked native controls,
+strict four-package lint and all nine qualification commands. The actual joined
+headless binary regenerated all 74 schemas. Prior producer failures and distinct
+source generations remain retained. Independent final review and publication are
+pending. File migration, backup/recovery application and editor UI remain open;
+no phase or release gate is claimed. [Current composition](docs/spikes/engine-compat-main271.md).
 
 ## Linked prefab authoring — qualified main270 composition
 
@@ -566,7 +566,7 @@ performance gate is claimed. [Scope and evidence](docs/spikes/wasm-c-parallel.md
 
 ## Development and release overview — 2026-10-14
 
-The reviewed main270 baseline includes the measured numeric-loan optimization,
+The reviewed main271 baseline includes linked prefab authoring, the measured numeric-loan optimization,
 Core sample/diagnostic tooling, profiler distributions, the Mac runner, Apple/Android host bindings, desktop
 haptics, the retained mobile Rust host, supported
 persisted native game checkpoints, and the opt-in cooked renderer families and
