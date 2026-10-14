@@ -24,6 +24,8 @@ use std::{
     time::Duration,
 };
 type Game = HostedOfflineGameSession<NativeRenderHost<GpuRenderConsumer<Targets>>>;
+#[path = "game/animated_refresh.rs"]
+mod animated_refresh;
 #[path = "game/model_refresh.rs"]
 mod model_refresh;
 #[path = "game/texture_refresh.rs"]

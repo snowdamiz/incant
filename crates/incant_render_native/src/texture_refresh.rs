@@ -87,8 +87,9 @@ impl TextureRefreshTicket {
     ) -> Result<PreparedTextureRefresh, NativeRenderError> {
         self.prepare_catalog(references, texture_cache, None, budget)
     }
-    /// Additive trusted-host admission for compatible existing static models
-    /// and textures. All cache IO/decoding remains outside publication locks.
+    /// Trusted-host admission for compatible existing model/texture content.
+    /// Animated clips retain pose layout and exact runtime duration bindings.
+    /// All cache IO/decoding remains outside publication locks.
     pub fn prepare_visuals(
         self,
         references: &[VisualAssetRef],

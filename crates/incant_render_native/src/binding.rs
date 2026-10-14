@@ -79,7 +79,16 @@ pub(crate) fn prepare(
                 if !matches!(source.data(), RuntimeAssetData::Model(_)) {
                     return Err(NativeRenderError::MissingAsset(mesh.mesh));
                 }
-                super::animation::validate(node.id, source, decl.animation.as_deref())?;
+                // NativeWorld owns the original immutable reference, also
+                // checked by its spatial declaration validator. Startup load
+                // verifies those exact bytes; sealed compatible publications
+                // retain this clip identity through later structural rebuilds.
+                let original = view
+                    .assets()
+                    .binary_search_by_key(&mesh.mesh, |a| a.id)
+                    .map(|i| &view.assets()[i].fingerprint)
+                    .map_err(|_| NativeRenderError::MissingAsset(mesh.mesh))?;
+                super::animation::validate(node.id, source, original, decl.animation.as_deref())?;
                 super::animation::validate_ik(node.id, source, decl.ik.as_deref())?;
                 super::animation::validate_root(node.id, source, decl.root_motion.as_deref())?;
                 Ok::<_, NativeRenderError>(MeshInput {
