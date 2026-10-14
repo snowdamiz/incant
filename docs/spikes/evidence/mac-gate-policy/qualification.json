@@ -1,0 +1,12 @@
+{
+  "source_commit": "d201f1be463bb27b790ea225b2eedf04702d864c",
+  "base": "7c746ebec7e5553bf34c2643ab4c952a1a433db7",
+  "source_patch_sha256": "1cdcf855051196d5971d3d56cdac8f6a3d1e59deea07c175c5d199252e606537",
+  "root_review_sha256": "4ab1f3a13d11c436fd2b459b1008b9641593e74e8154ee07a90e7058c88527de",
+  "claims": "Policy/documents only. No gates approved, no measurement fabricated. Hosted CI/workflow/check requirements and non-device obligations retained.",
+  "checks": [
+    "generator --check passed",
+    "git diff --check passed",
+    "source diff exactly eight documentation paths"
+  ]
+}
