@@ -1,0 +1,40 @@
+{
+  "at": "2026-10-14T02:47:22.750151+00:00",
+  "head": "e7be0fa5596a3229b4d8e6b7c7e002ba231c1e10",
+  "manifest_sha256": "764bf74fabaacff57463f74bbd107cdbc0d5b635667207f97a7585579f1f98df",
+  "replay_exit": 0,
+  "stdout_sha256": "367413b500b5ff8999b0175fda1d8582c51849bf0720e3224c23a36b8e48a164",
+  "scope": "ScopedCPU/cook packet accepted after exactsourcepatchreview, independentproducerreceipt and full originals/binaries replay; R5unassessed, noGPUorappearanceapproval.",
+  "result": {
+    "records": 58,
+    "payloads": 42,
+    "build_inputs": 2839,
+    "changed_paths": 7,
+    "unchanged_wgsl": 19,
+    "changed_wgsl": 2,
+    "checks": 8,
+    "retained_failed_checks": 1,
+    "cpu": {
+      "default": [
+        167,
+        0,
+        43,
+        0,
+        0
+      ],
+      "cooker": 34,
+      "cooked-native": [
+        182,
+        0,
+        44,
+        0,
+        0
+      ]
+    },
+    "executable_copies": 10,
+    "gpu_executed": false,
+    "appearance": "R4 remains rejected; R5 unassessed",
+    "source": "8c39fd6adbf95d470388867de4d305756b05913c"
+  },
+  "gate_approved": false
+}
