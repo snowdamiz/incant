@@ -210,7 +210,7 @@ def measure(package, output, ticks, recording=None, observe=None, baseline=None)
     environment = {'PATH': str(player.parent), 'TMPDIR': str(output)}
     started = time.time_ns()
     receipt = {'argv': argv, 'cwd': str(player.parent), 'environment': environment,
-               'started_ns': started, 'exit': None}
+               'started_ns': started, 'load_average_before': os.getloadavg(), 'exit': None}
     try:
         with (output / 'stdout.json').open('xb') as stdout, (output / 'stderr.log').open('xb') as stderr:
             result = native_process.run(argv, cwd=player.parent, env=environment,
@@ -240,6 +240,7 @@ def measure(package, output, ticks, recording=None, observe=None, baseline=None)
         raise
     finally:
         receipt['ended_ns'] = time.time_ns()
+        receipt['load_average_after'] = os.getloadavg()
         for name in ('stdout.json', 'stderr.log'):
             if (output / name).exists():
                 receipt[name + '_sha256'] = digest(read(output / name, 16 * 1024**2))
