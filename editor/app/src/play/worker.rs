@@ -319,24 +319,25 @@ impl Worker {
                 self.textures.cancel(token, generation);
             }
             #[cfg(feature = "play-probe")]
-            Request::ObserveTexture {
+            Request::ObserveAsset {
                 generation,
                 asset,
+                kind,
                 fingerprint,
                 reply,
             } => {
                 let result = (|| {
                     if generation != current {
-                        return Err("Texture probe belongs to an old Play generation".into());
+                        return Err("Asset probe belongs to an old Play generation".into());
                     }
                     let game = self.game.as_ref().ok_or("Start Play first")?;
                     let world = game.world().map_err(|e| e.to_string())?;
                     let consumer = game
                         .consumer()
                         .map_err(|e| e.to_string())?
-                        .ok_or("Texture probe requires the spatial GPU consumer")?;
+                        .ok_or("Asset probe requires the spatial GPU consumer")?;
                     let ticket = game.texture_refresh_ticket().map_err(|e| e.to_string())?;
-                    Ok(super::probe::textures::Observation {
+                    Ok(super::probe::asset_workflow::Observation {
                         identity: world
                             .spatial_view()
                             .map_err(|e| e.to_string())?
@@ -344,15 +345,11 @@ impl Worker {
                             .clone(),
                         tick: world.tick(),
                         frames: consumer.accepted_frames(),
-                        recipe_matches: ticket.matches_recipe(
-                            asset,
-                            incant_runtime::VisualAssetKind::Texture,
-                            &fingerprint,
-                        ),
+                        recipe_matches: ticket.matches_recipe(asset, kind, &fingerprint),
                         adapter: format!("{:?}", self.renderer.adapter.get_info()),
                     })
                 })();
-                reply.send(result).map_err(|_| "Texture probe stopped")?;
+                reply.send(result).map_err(|_| "Asset probe stopped")?;
             }
         }
         self.status()
