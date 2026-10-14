@@ -1,0 +1,14 @@
+{
+  "at": "2026-10-14T01:48:49.613388+00:00",
+  "decision": "accepted scoped integration, ready required fast PR check and merge",
+  "final": "031a7173ac865a99964e12538926e02ca64ccd71",
+  "executed_source": "40433f104a35e59c2ac1017be6092fcf44c0958f",
+  "manifest_sha256": "47172e4396f25fe8b5a5f6fcb12e295cb3dccc414daaa4a2b1721bb01ba267b4",
+  "review": [
+    "Independent full grouped replay --verify-only --originals --local-binaries passes all16currentcommands and4producer archives",
+    "3885 frozen inputs,12 Rust paths,167 cases perphysicsmode,6currentcopies,strictlint/lean/wasm/dependency/format/conventions checks",
+    "Finaldelta fromexecutedsource changes only evidence/docs/STATUS, verified noimplementation/build/toolsdelta",
+    "Original Core historical baseline preserved including5percentinconclusive repeat; nofast10kcachetiming/60fpsclaim"
+  ],
+  "known_current_followup": "Original unoptimized10kexport timedout2400s, separately retained; static-onlyshippingbaseline32373 nowbuilding"
+}

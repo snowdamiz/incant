@@ -10,6 +10,7 @@ mod audio_commands;
 mod bindings;
 #[cfg(feature = "compiler")]
 mod bindings_embed;
+mod bindings_static;
 mod budget;
 mod checkpoint;
 mod commands;
@@ -40,6 +41,7 @@ pub use artifact::{EmbeddedScript, ScriptMetadata};
 pub use bindings::{
     MAX_SCRIPT_INSTANCES, MAX_SCRIPT_SOURCES, ScriptBindings, ScriptInstance, ScriptValue,
 };
+pub use bindings_static::{EmbeddedScriptInstance, EmbeddedScriptValue};
 pub use checkpoint::{CheckpointError, MAX_CHECKPOINT_BYTES, PendingSessionCheckpoint};
 #[cfg(feature = "native-checkpoints")]
 pub use checkpoint::{MAX_PERSISTED_SESSION_BYTES, NativeSessionCheckpoint};
@@ -140,6 +142,7 @@ pub struct ScriptHost {
     persistent_opt_in: Vec<bool>,
     persistent: std::rc::Rc<std::cell::RefCell<persistence::Store>>,
     project: Option<bindings::BoundProject>,
+    chunk_ids: loan::IdCache,
     context: Context,
     _runtime: Runtime,
     _compiled: CompiledScript,
@@ -234,6 +237,7 @@ impl ScriptHost {
             persistent_opt_in,
             persistent: Default::default(),
             project,
+            chunk_ids: Default::default(),
             context,
             _runtime: runtime,
             _compiled: compiled,
@@ -367,14 +371,14 @@ impl ScriptHost {
                     return Err(ScriptError::ScriptBindings);
                 }
                 for (index, group) in project.groups.iter_mut().enumerate() {
-                    let instances = group
+                    let (instances, ids) = group
                         .snapshot(&ctx, &freeze, world, &mut retired)
                         .map_err(diagnostics::allocation)?;
                     let scope = schedule::Scope::Source(group.source);
                     if instances.is_empty() {
                         schedule.cancel_scope(scope);
                     } else {
-                        groups.push((index, scope, instances, group.ids()));
+                        groups.push((index, scope, instances, ids));
                     }
                 }
             } else {
@@ -451,7 +455,7 @@ impl ScriptHost {
                         )
                     })?;
                     let mut loan = loan::Loan::new(columns)?;
-                    let chunks = match loan.expose(&ctx) {
+                    let chunks = match loan.expose(&ctx, &freeze, &mut self.chunk_ids) {
                         Ok(chunks) => chunks,
                         Err(error) => {
                             // Prototype setters can run while metadata is installed.
@@ -648,6 +652,9 @@ fn bytecode_context(runtime: &Runtime, allow_source: bool) -> Result<Context, Sc
 mod structural_tests;
 #[cfg(all(test, feature = "compiler"))]
 mod tests;
+
+#[cfg(all(test, feature = "compiler"))]
+mod loan_id_tests;
 
 #[cfg(all(test, feature = "compiler"))]
 mod input_tests;

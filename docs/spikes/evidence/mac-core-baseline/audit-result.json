@@ -1,0 +1,100 @@
+{
+  "passed": true,
+  "records": 278,
+  "payloads": 61,
+  "external_checked": true,
+  "git_source_rows": 4724,
+  "mutation_controls": 8,
+  "build": {
+    "codegen_units_verified": 4,
+    "target_feature_artifacts": 11,
+    "runtime_data_files": 28
+  },
+  "runs": [
+    {
+      "run": 0,
+      "metrics": {
+        "player.frame.p95_wall_ns": {
+          "lower": 1070001,
+          "upper": 1080000
+        },
+        "script.tick.p95_wall_ns": {
+          "lower": 840001,
+          "upper": 850000
+        },
+        "rust.process_peak_requested_bytes": {
+          "lower": 59540056,
+          "upper": 59540056
+        }
+      },
+      "comparison": null
+    },
+    {
+      "run": 1,
+      "metrics": {
+        "player.frame.p95_wall_ns": {
+          "lower": 1040001,
+          "upper": 1050000
+        },
+        "script.tick.p95_wall_ns": {
+          "lower": 820001,
+          "upper": 830000
+        },
+        "rust.process_peak_requested_bytes": {
+          "lower": 59540056,
+          "upper": 59540056
+        }
+      },
+      "comparison": {
+        "regression_limit_percent": 5,
+        "metrics": {
+          "player.frame.p95_wall_ns": "pass",
+          "script.tick.p95_wall_ns": "pass",
+          "rust.process_peak_requested_bytes": "pass"
+        },
+        "script_2ms_p95": "pass",
+        "passed": true,
+        "phase_gate_passed": false
+      }
+    },
+    {
+      "run": 2,
+      "metrics": {
+        "player.frame.p95_wall_ns": {
+          "lower": 1060001,
+          "upper": 1070000
+        },
+        "script.tick.p95_wall_ns": {
+          "lower": 880001,
+          "upper": 890000
+        },
+        "rust.process_peak_requested_bytes": {
+          "lower": 59540056,
+          "upper": 59540056
+        }
+      },
+      "comparison": {
+        "regression_limit_percent": 5,
+        "metrics": {
+          "player.frame.p95_wall_ns": "pass",
+          "script.tick.p95_wall_ns": "inconclusive",
+          "rust.process_peak_requested_bytes": "pass"
+        },
+        "script_2ms_p95": "pass",
+        "passed": false,
+        "phase_gate_passed": false
+      }
+    }
+  ],
+  "machine": {
+    "model": "Mac17,9",
+    "chip": "Apple M5 Pro",
+    "memory_bytes": "51539607552",
+    "physical_cpus": "15",
+    "os_build": "26A434",
+    "os_version": "27.0.1",
+    "architecture": "arm64",
+    "power_source": "AC Power",
+    "low_power_mode": null
+  }
+}
