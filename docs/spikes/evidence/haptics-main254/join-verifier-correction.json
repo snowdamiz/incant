@@ -1,0 +1,5 @@
+{
+  "first_join_replay": "failed at producer exception-count assertion",
+  "cause": "The current3844-input inventory includes PLAN.md and AGENTS.md, while producer3839-source inventory does not. The first join verifier incorrectly expected those two new documentation exceptions in both inventories.",
+  "correction": "Current freeze permits exactly the two reviewed document hashes; producer source comparison still requires exactly four mobile exceptions and explicitly excludes documentation paths. No production/archive/test changes."
+}

@@ -9,8 +9,8 @@
   "records": 33,
   "verifier": {
     "path": "docs/spikes/evidence/haptics-main254/verify.py",
-    "bytes": 8238,
-    "sha256": "570252533ad4479de0fb0c1d28badbb6a11efbf6cd0cdb7d6ecbceb6aba279c0"
+    "bytes": 9469,
+    "sha256": "8d898b70a105102a98b9eb304047d1a2b15b13ec10db59c11aa29efd6111a06c"
   },
   "qualification": {
     "path": "docs/spikes/evidence/haptics-main254/qualification.json",
@@ -39,11 +39,25 @@
       "path": "docs/spikes/evidence/haptics-main254/producer-review.json",
       "bytes": 3486,
       "sha256": "3ccf517aad5d9c4dc1142597e76e63fa1cae9aab9ac47ca83d72c9f74c16f636"
+    },
+    {
+      "path": "docs/spikes/evidence/haptics-main254/current-main254-review.json",
+      "bytes": 995,
+      "sha256": "709b79086b82a431168cae6471710fd86b79b2fe96fefd09e42e9a7a9a6f75cd"
     }
   ],
   "current_player_cases_per_mode": 85,
   "successful_commands": 18,
   "retained_harness_failures": 2,
   "current_binary_copies": 2,
-  "final_current_main_review": "pending independent review"
+  "final_current_main_review": "main254 accepted; main255 documentation-only join pending",
+  "main255_join": {
+    "path": "docs/spikes/evidence/haptics-main254/main255-join.json",
+    "bytes": 3551,
+    "sha256": "95f64a042123d9f6f34b164a8d4df975e5d11ae05b2a7f1966113399e343f3a2"
+  },
+  "prior_packet": {
+    "commit": "f173deab",
+    "manifest_sha256": "caff808d00c78e66617885af2dc97267cb8e727d7ef8d433ca188e1650e1b992"
+  }
 }

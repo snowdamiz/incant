@@ -26,6 +26,23 @@ def checked(row):
     return b
 checked(M['verifier'])
 Q = json.loads(checked(M['qualification']))
+J = json.loads(checked(M['main255_join']))
+assert J['base'] == '7c746ebec7e5553bf34c2643ab4c952a1a433db7'
+assert J['main'] == '96e8a9daba83a8536bb2b4d3eebb0d8997a6cb13'
+assert J['input_exceptions'] == ['AGENTS.md', 'PLAN.md']
+assert J['production_build_tool_changes'] == [] and len(J['paths']) == 13
+assert git('diff', '--name-only', J['base'], J['main']).decode().splitlines() == [r['path'] for r in J['paths']]
+for row in J['paths']:
+    path = row['path']
+    assert path.endswith('.md') or path.startswith('docs/spikes/evidence/')
+    assert h(git('show', J['main'] + ':' + path)) == row['new_sha256']
+    if row['old_sha256'] is not None:
+        assert h(git('show', J['base'] + ':' + path)) == row['old_sha256']
+    if path != 'STATUS.md':
+        assert h((R / path).read_bytes()) == row['new_sha256']
+assert [r['path'] for r in J['paths'] if r['in_frozen_inputs']] == J['input_exceptions']
+doc_exceptions = {r['path']: r['new_sha256'] for r in J['paths'] if r['in_frozen_inputs']}
+subprocess.run(['git', 'merge-base', '--is-ancestor', J['main'], 'HEAD'], cwd=R, check=True)
 for row in M['producer_files'] + M['reviews']:
     checked(row)
 raw = {}
@@ -59,7 +76,7 @@ def blob(ref, path):
     return b
 try:
     for path, digest in freeze.items():
-        assert h((R / path).read_bytes()) == digest, path
+        assert h((R / path).read_bytes()) == doc_exceptions.get(path, digest), path
         assert h(blob(Q['tested_source'], path)) == digest, path
     assert len(S['owned_exact']) == 27
     for row in S['owned_exact']:
@@ -88,6 +105,7 @@ try:
         if h((R / row['path']).read_bytes()) != row['sha256']:
             actual_exceptions.append(row['path'])
     assert set(actual_exceptions) == expected_exceptions
+    assert not set(doc_exceptions) & {r["path"] for r in context["source_files"]}
 finally:
     proc.stdin.close(); proc.stdout.close(); assert proc.wait() == 0
 result = read('result.json')
@@ -141,4 +159,4 @@ argv = ['python3', str(R / 'docs/spikes/evidence/native-haptics/collect.py'), '-
 if a.local_binaries:
     argv.append('--local-binaries')
 subprocess.run(argv, cwd=R, check=True)
-print(json.dumps({'verified': True, 'source_inputs': len(freeze), 'owned_exact': 27, 'producer_inputs': 3839, 'accepted_mobile_exceptions': 4, 'current_player_cases_per_mode': 85, 'successful_commands': 18, 'historical_harness_failures': 2, 'exact_graphs': 3, 'records': len(raw), 'producer_executions_not_relabelled': True}))
+print(json.dumps({'verified': True, 'source_inputs': len(freeze), 'owned_exact': 27, 'producer_inputs': 3839, 'accepted_mobile_exceptions': 4, 'reviewed_documentation_exceptions': 2, 'current_player_cases_per_mode': 85, 'successful_commands': 18, 'historical_harness_failures': 2, 'exact_graphs': 3, 'records': len(raw), 'producer_executions_not_relabelled': True}))

@@ -40,7 +40,11 @@ identities. It is not relabeled as current-main execution or added to current
 counts as unique coverage. The current packet replays all original producer
 assertions and separately checks the joined player behavior.
 
-Independent final current-main review is pending. No actual haptic delivery,
+Independent final main254 review is accepted. The later main255 join contains
+13 reviewed policy/promotion documentation paths and changes only AGENTS.md and
+PLAN.md among frozen inputs. Their original/new Git hashes are explicit; all
+implementation/build/tool inputs, archives and executions stay unchanged. Final
+documentation-join review is pending. No actual haptic delivery,
 mobile support, platform appearance, device timing or phase approval is claimed.
 
 Read-only verification (no builds or executable launch):
