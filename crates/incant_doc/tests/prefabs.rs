@@ -61,7 +61,9 @@ fn legacy_v1_bytes_stay_identical_and_old_reader_refuses_new_fields() {
     );
     assert!(!text.contains("prefab"));
     let (linked, _, _) = fixture();
-    let v = serde_json::to_value(&linked).unwrap();
+    let mut v = serde_json::to_value(&linked).unwrap();
+    // Isolate the prefab refusal from the independently tested engine declaration.
+    v.as_object_mut().unwrap().remove("engine_version");
     assert!(
         serde_json::from_value::<legacy::Project>(v.clone())
             .unwrap_err()
