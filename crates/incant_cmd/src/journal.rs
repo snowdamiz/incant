@@ -156,6 +156,11 @@ pub(super) fn digest(
     Ok(format!("{:x}", Sha256::digest(bytes)))
 }
 impl Journal {
+    #[cfg(test)]
+    pub(super) fn test_file(&mut self) -> &mut File {
+        &mut self.file
+    }
+
     pub(super) fn open(
         path: &Path,
         initial: Project,

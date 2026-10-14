@@ -4,7 +4,7 @@ use super::*;
 use base64::Engine as _;
 use std::{
     fs,
-    io::Write,
+    io::{Read, Seek, SeekFrom, Write},
     path::{Path, PathBuf},
     process::Command as Process,
 };
@@ -30,6 +30,18 @@ fn setup(root: &Path, operation: &str) -> (u64, Vec<u8>) {
         bus.undo().unwrap();
     }
     (bus.revision(), fs::read(path(root)).unwrap())
+}
+// Observe bytes through the handle that owns the Windows byte-range lock.
+// Restoring its cursor keeps later journal operations unchanged.
+fn journal_bytes(bus: &mut CommandBus) -> Vec<u8> {
+    let file = bus.journal.as_mut().unwrap().test_file();
+    let position = file.stream_position().unwrap();
+    file.seek(SeekFrom::Start(0)).unwrap();
+    let mut bytes = Vec::new();
+    let result = file.read_to_end(&mut bytes);
+    file.seek(SeekFrom::Start(position)).unwrap();
+    result.unwrap();
+    bytes
 }
 fn pin(bus: &mut CommandBus) -> Result<(), CommandError> {
     let review = bus.review_project_file_pin()?;
@@ -178,7 +190,7 @@ fn stale_revision_bytes_and_same_byte_replacement_refuse_without_file_or_history
             }
         }
         let before = fs::read(path(root)).unwrap();
-        let journal = fs::read(root.join("game.journal")).unwrap();
+        let journal = journal_bytes(&mut bus);
         let revision = bus.revision();
         assert!(
             bus.apply_project_file_pin(&review.review_id, Actor::user("u"))
@@ -186,7 +198,7 @@ fn stale_revision_bytes_and_same_byte_replacement_refuse_without_file_or_history
         );
         assert_eq!(bus.revision(), revision);
         assert_eq!(fs::read(path(root)).unwrap(), before);
-        assert_eq!(fs::read(root.join("game.journal")).unwrap(), journal);
+        assert_eq!(journal_bytes(&mut bus), journal);
         assert!(
             !root
                 .join(".incant-source-transactions/project.pending")
@@ -259,10 +271,10 @@ fn real_partial_write_error_rolls_back_and_ambiguous_durability_blocks_until_reo
             if phase == "commit" {
                 assert_abort_checkpoint(root);
             }
-            let bus = CommandBus::open_project_file(path(root))
+            let mut bus = CommandBus::open_project_file(path(root))
                 .unwrap_or_else(|e| panic!("{operation}/{phase}: {e}"));
             if phase.ends_with("commit") {
-                assert_abort_checkpoint(root);
+                assert_abort_bytes(&journal_bytes(&mut bus));
             }
             assert_eq!(bus.revision(), revision);
             assert_eq!(fs::read(path(root)).unwrap(), original);
@@ -368,13 +380,10 @@ fn journal_limit_and_unavailable_capability_refuse_before_backup() {
     setup(root, "apply");
     let mut bus = CommandBus::open_project_file(path(root)).unwrap();
     let review = bus.review_project_file_pin().unwrap();
-    let journal_path = root.join("game.journal");
-    let original_len = fs::metadata(&journal_path).unwrap().len();
-    // Sparse file capacity control, no 256 MiB allocation/read required.
-    let file = fs::OpenOptions::new()
-        .write(true)
-        .open(&journal_path)
-        .unwrap();
+    let file = bus.journal.as_mut().unwrap().test_file();
+    let original_len = file.metadata().unwrap().len();
+    // Use the lock-owning handle for this sparse capacity control; no 256 MiB
+    // allocation/read or second Windows writer is required.
     file.set_len(journal::MAX_PROJECT_JOURNAL_BYTES as u64)
         .unwrap();
     assert!(
@@ -393,7 +402,12 @@ fn journal_limit_and_unavailable_capability_refuse_before_backup() {
             .map(Result::unwrap)
             .any(|e| e.file_name().to_string_lossy().ends_with(".backup"))
     );
-    file.set_len(original_len).unwrap();
+    bus.journal
+        .as_mut()
+        .unwrap()
+        .test_file()
+        .set_len(original_len)
+        .unwrap();
 }
 #[cfg(unix)]
 #[test]
@@ -561,21 +575,25 @@ fn unlink_then_recreate_same_bytes_retires_a_review_without_mutation() {
     let dir = tempfile::tempdir().unwrap();
     let root = dir.path();
     let (_, original) = setup(root, "apply");
+    let before = artifact_inventory(root);
     let mut bus = CommandBus::open_project_file(path(root)).unwrap();
     let review = bus.review_project_file_pin().unwrap();
     fs::remove_file(path(root)).unwrap();
     fs::write(path(root), &original).unwrap();
-    let before = artifact_inventory(root);
     assert!(
         bus.apply_project_file_pin(&review.review_id, Actor::user("u"))
             .is_err()
     );
     assert_eq!(bus.revision(), 0);
+    drop(bus);
     assert_eq!(artifact_inventory(root), before);
 }
 
 fn assert_abort_checkpoint(root: &Path) {
-    let entries: Vec<journal::Entry> = fs::read_to_string(root.join("game.journal"))
+    assert_abort_bytes(&fs::read(root.join("game.journal")).unwrap());
+}
+fn assert_abort_bytes(bytes: &[u8]) {
+    let entries: Vec<journal::Entry> = std::str::from_utf8(bytes)
         .unwrap()
         .lines()
         .map(|line| serde_json::from_str(line).unwrap())
