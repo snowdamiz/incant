@@ -2,13 +2,21 @@
 //! charging for them can steer a route toward arbitrary tile-row boundaries.
 use crate::{NavigationError, NavigationMesh, invalid, limit};
 use glam::Vec3;
+mod prepared;
+pub(crate) use prepared::PreparedSearch;
+#[cfg(test)]
+mod tests;
+#[cfg(test)]
+mod uncached;
 use std::{cmp::Ordering, collections::BinaryHeap};
 
 #[derive(Clone, Copy)]
+#[cfg_attr(test, derive(Debug, PartialEq, Eq))]
 pub(crate) enum Edge {
     Portal { from: usize, edge: usize },
     Link { index: usize, reversed: bool },
 }
+#[cfg_attr(test, derive(Debug, PartialEq, Eq))]
 pub(crate) struct Route {
     pub corridor: Vec<usize>,
     pub edges: Vec<Edge>,
@@ -62,58 +70,33 @@ impl NavigationMesh {
                 visited: 1,
             }));
         }
-        if self.portals.iter().map(Vec::len).sum::<usize>() > 262_144 {
+        if self.search.over_limit() {
             return Err(limit("navigation exceeds 262144 directed portal states"));
         }
         let end = Vec3::from_array(end);
-        let mut states = vec![State {
+        let start = State {
             poly: first,
             at: Vec3::from_array(start),
             edge: None,
             enter: Vec3::from_array(start),
             traversal_cost: 0.,
-        }];
-        let mut outgoing = vec![vec![]; self.polygons.len()];
-        for (from, portals) in self.portals.iter().enumerate() {
-            for (edge, p) in portals.iter().enumerate() {
-                outgoing[from].push(states.len());
-                states.push(State {
-                    poly: p.to,
-                    at: (Vec3::from_array(p.a) + Vec3::from_array(p.b)) * 0.5,
-                    edge: Some(Edge::Portal { from, edge }),
-                    enter: (Vec3::from_array(p.a) + Vec3::from_array(p.b)) * 0.5,
-                    traversal_cost: 0.,
-                });
+        };
+        // Index zero remains the query's virtual start; all cached indices retain
+        // the old portal/link enumeration and therefore identical heap ties.
+        let state = |index| {
+            if index == 0 {
+                &start
+            } else {
+                self.search.state(index)
             }
-        }
-        for (index, link) in self.links.iter().enumerate() {
-            for reversed in [false, true] {
-                if reversed && !link.bidirectional {
-                    continue;
-                }
-                let (from, to, enter, at) = if reversed {
-                    (link.last, link.first, link.end, link.start)
-                } else {
-                    (link.first, link.last, link.start, link.end)
-                };
-                outgoing[from].push(states.len());
-                let enter = Vec3::from_array(enter);
-                let at = Vec3::from_array(at);
-                states.push(State {
-                    poly: to,
-                    at,
-                    enter,
-                    traversal_cost: enter.distance(at) + link.extra_cost,
-                    edge: Some(Edge::Link { index, reversed }),
-                });
-            }
-        }
-        let mut costs = vec![f32::INFINITY; states.len()];
-        let mut previous = vec![None; states.len()];
+        };
+        let state_count = self.search.len() + 1;
+        let mut costs = vec![f32::INFINITY; state_count];
+        let mut previous = vec![None; state_count];
         let mut queue = BinaryHeap::new();
         costs[0] = 0.;
         queue.push(Entry {
-            f: states[0].at.distance(end),
+            f: state(0).at.distance(end),
             g: 0.,
             index: 0,
         });
@@ -126,7 +109,7 @@ impl NavigationMesh {
                 return Err(limit("path search visit budget"));
             }
             visited += 1;
-            let current = &states[index];
+            let current = state(index);
             if current.poly == last {
                 // The heuristic is the exact final in-polygon segment here, so
                 // the first settled entry into the goal polygon is optimal.
@@ -134,9 +117,9 @@ impl NavigationMesh {
                 let mut edges = vec![];
                 let mut cursor = index;
                 while cursor != 0 {
-                    corridor.push(states[cursor].poly);
+                    corridor.push(state(cursor).poly);
                     edges.push(
-                        states[cursor]
+                        state(cursor)
                             .edge
                             .ok_or_else(|| invalid("missing portal entry"))?,
                     );
@@ -154,14 +137,13 @@ impl NavigationMesh {
                     visited,
                 }));
             }
-            for &next in &outgoing[current.poly] {
-                let cost =
-                    g + current.at.distance(states[next].enter) + states[next].traversal_cost;
+            for &next in self.search.outgoing(current.poly) {
+                let cost = g + current.at.distance(state(next).enter) + state(next).traversal_cost;
                 if cost < costs[next] {
                     costs[next] = cost;
                     previous[next] = Some(index);
                     queue.push(Entry {
-                        f: cost + states[next].at.distance(end),
+                        f: cost + state(next).at.distance(end),
                         g: cost,
                         index: next,
                     });

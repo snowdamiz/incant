@@ -25,6 +25,7 @@ pub struct NavigationMesh {
     generation: u64,
     authored_links: Vec<OffMeshLink>,
     pub(crate) links: Vec<crate::links::ResolvedLink>,
+    pub(crate) search: Arc<crate::search::PreparedSearch>,
 }
 #[derive(Debug, Clone, PartialEq, Eq, Serialize)]
 pub struct RebuildReport {
@@ -189,9 +190,11 @@ impl NavigationMesh {
             generation: report.generation,
             authored_links,
             links: vec![],
+            search: Arc::default(),
         };
         next.links = next.resolve_links(&next.authored_links)?;
         report.active_links = next.links.len();
+        next.search = Arc::new(crate::search::PreparedSearch::new(&next));
         *self = next;
         Ok(report)
     }

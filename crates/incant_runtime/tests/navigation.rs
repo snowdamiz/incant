@@ -172,6 +172,8 @@ fn source_free_roundtrip_paths_and_unchanged_ticks_retain_generations() {
 fn moving_obstacle_reuses_unaffected_tiles_and_queries_refuse_uncommitted_poses() {
     let mut world = NativeWorld::new(scene());
     let old = world.navigation_report(id(1)).unwrap().clone();
+    let snapshot = world.navigation_snapshot().unwrap();
+    let old_path = snapshot.navigation_path(id(1), &path()).unwrap();
     shift(&mut world, 3, [0., 1.5, 4.]);
     assert!(world.navigation_path(id(1), &path()).is_err());
     apply(&mut world, vec![]).unwrap();
@@ -183,8 +185,10 @@ fn moving_obstacle_reuses_unaffected_tiles_and_queries_refuse_uncommitted_poses(
         report.rebuilt.len() + report.reused.len(),
         old.rebuilt.len()
     );
-    let path = world.navigation_path(id(1), &path()).unwrap().unwrap();
-    assert_eq!(path.points.len(), 2);
+    let current = world.navigation_path(id(1), &path()).unwrap().unwrap();
+    assert_eq!(current.points.len(), 2);
+    assert_eq!(snapshot.navigation_path(id(1), &path()).unwrap(), old_path);
+    assert!(current.generation > old_path.unwrap().generation);
 }
 #[test]
 fn structural_and_numeric_failures_do_not_publish_or_consume_the_queue() {
@@ -513,6 +517,7 @@ fn off_mesh_links_roundtrip_binary_identity_and_disable_without_stale_paths() {
         .unwrap()
         .to_bytes();
     let mut world = NativeWorld::from_bytes(&bytes).unwrap();
+    let snapshot = world.navigation_snapshot().unwrap();
     let linked = world.navigation_path(id(1), &path()).unwrap().unwrap();
     assert_eq!(linked.traversals.len(), 1);
     assert_eq!(linked.traversals[0].link_id, "00000000000000000000000001");
@@ -526,6 +531,10 @@ fn off_mesh_links_roundtrip_binary_identity_and_disable_without_stale_paths() {
     )
     .unwrap();
     assert!(world.navigation_path(id(1), &path()).unwrap().is_none());
+    assert_eq!(
+        snapshot.navigation_path(id(1), &path()).unwrap(),
+        Some(linked)
+    );
 }
 
 #[test]

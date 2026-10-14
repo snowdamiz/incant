@@ -187,6 +187,7 @@ mod tests {
             ],
             vec![crate::build::Portal { to: 1, a, b: c }],
         ];
+        mesh.search = std::sync::Arc::new(crate::search::PreparedSearch::new(&mesh));
         let mut count = 0;
         for ix in 0..21 {
             for iz in 0..21 {
@@ -255,6 +256,7 @@ mod tests {
             vec![crate::build::Portal { to: 1, a, b }],
             vec![crate::build::Portal { to: 0, a: b, b: a }],
         ];
+        mesh.search = std::sync::Arc::new(crate::search::PreparedSearch::new(&mesh));
         for (start, end) in [
             ([4.7, 0., 1.7], [4.71, 0., 1.7]),
             ([4.71, 0., 1.7], [4.7, 0., 1.7]),
