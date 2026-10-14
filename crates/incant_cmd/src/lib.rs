@@ -1,5 +1,6 @@
 //! The only mutable owner of an editor document. GUI, scripts and AI share commands.
 mod engine_version;
+mod project_file;
 pub use engine_version::{EnginePinReview, EngineReviewError, MAX_ENGINE_REVIEW_BYTES};
 mod journal;
 mod localization;
@@ -11,6 +12,7 @@ use incant_doc::{
 pub use incant_source::{SourceError, SourceVersion};
 pub use journal::Journal;
 pub use localization::{PreparedTranslations, TranslationImportResult};
+pub use project_file::ProjectPinReview;
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
@@ -176,6 +178,8 @@ pub struct Transaction {
     pub after: Project,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub source_edit: Option<incant_source::SourceEdit>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub project_edit: Option<incant_source::ProjectEdit>,
 }
 #[derive(Debug, Error)]
 pub enum CommandError {
@@ -207,6 +211,8 @@ pub struct CommandBus {
     redo: Vec<Transaction>,
     journal: Option<Journal>,
     sources: Option<incant_source::SourceStore>,
+    project_file: Option<incant_source::OpenedProject>,
+    project_review: Option<project_file::PendingReview>,
     replaying: bool,
 }
 impl CommandBus {
@@ -219,6 +225,8 @@ impl CommandBus {
             redo: vec![],
             journal: None,
             sources: None,
+            project_file: None,
+            project_review: None,
             replaying: false,
         })
     }
@@ -232,6 +240,8 @@ impl CommandBus {
             redo: vec![],
             journal: None,
             sources: None,
+            project_file: None,
+            project_review: None,
             replaying: false,
         })
     }
@@ -248,6 +258,8 @@ impl CommandBus {
             redo: vec![],
             journal: None,
             sources: None,
+            project_file: None,
+            project_review: None,
             replaying: false,
         })
     }
@@ -317,6 +329,7 @@ impl CommandBus {
         let source_edit = self.prepare_source_edit(&commands, &after, expected_revision)?;
         let transaction = Transaction {
             source_edit,
+            project_edit: None,
             id,
             description: description.into(),
             actor,
@@ -335,6 +348,7 @@ impl CommandBus {
                 transaction: Box::new(transaction.clone()),
             },
             transaction.source_edit.as_ref(),
+            transaction.project_edit.as_ref(),
             next.as_ref(),
         )?;
         self.project = transaction.after.clone();
@@ -358,11 +372,16 @@ impl CommandBus {
             .source_edit
             .as_ref()
             .map(incant_source::SourceEdit::reversed);
+        let project_edit = tx
+            .project_edit
+            .as_ref()
+            .map(incant_source::ProjectEdit::reversed);
         self.record(
             journal::Change::Undo {
                 transaction_id: id.clone(),
             },
             edit.as_ref(),
+            project_edit.as_ref(),
             next.as_ref(),
         )?;
         self.project = project;
@@ -380,11 +399,13 @@ impl CommandBus {
         let project = tx.after.clone();
         let next = self.stage(&project)?;
         let edit = tx.source_edit.clone();
+        let project_edit = tx.project_edit.clone();
         self.record(
             journal::Change::Redo {
                 transaction_id: id.clone(),
             },
             edit.as_ref(),
+            project_edit.as_ref(),
             next.as_ref(),
         )?;
         self.project = project;
@@ -421,6 +442,7 @@ impl CommandBus {
         let transaction = Transaction {
             id,
             source_edit: None,
+            project_edit: None,
             description: "Merge remote document".into(),
             actor,
             commands: vec![],
@@ -634,3 +656,6 @@ fn apply(
 
 #[cfg(test)]
 mod source_protocol_tests;
+
+#[cfg(test)]
+mod project_file_tests;

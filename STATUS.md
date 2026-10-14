@@ -1,5 +1,15 @@
 # Implementation status
 
+## Host-bound engine-pin file protocol — application binding pending
+
+The host-only opened-project capability now supports exact-current legacy pin,
+create-only original-byte backup, durable journal/file recovery and undo/redo.
+Independent filesystem/journal source reviews and 87 source/command tests pass,
+including real subprocess crash/write-error controls; strict lint and lean checks
+pass. One real redo Abort snapshot mismatch was diagnosed and repaired with exact
+durable CRDT-byte reuse; its failed attempt remains retained. No CLI/RPC/editor
+endpoint or older-format conversion is exposed. [Scope and evidence](docs/spikes/project-pin-migration.md).
+
 
 ## Engine compatibility and pin review — backend slice
 
@@ -9,8 +19,8 @@ cook, explicit pin commands retain atomic history/undo/replay, and read-only
 CLI/RPC reviews bind source/revision/candidate digests. 80 document/command tests,
 a live headless control, exact cooked-byte/native continuation, strict lint and
 generated TypeScript/schema checks pass. The two compile failures are retained.
-Project-file migration, create-only backup and crash-recovery application remain
-separate pending work; this does not complete the Phase 2 migration requirement.
+The host-bound backup/recovery follow-up is qualified separately above; its
+application binding remains pending. This does not complete the Phase 2 migration requirement.
 [Scope and follow-up ordering](docs/spikes/project-engine-compatibility.md).
 
 ## Native script phase diagnostic — one bounded CPU test

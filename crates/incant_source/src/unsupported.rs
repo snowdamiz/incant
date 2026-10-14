@@ -23,6 +23,9 @@ impl Dir {
     pub fn open(&self, _: &str) -> io::Result<File> {
         unavailable()
     }
+    pub fn open_rw(&self, _: &str) -> io::Result<File> {
+        unavailable()
+    }
     pub fn create(&self, _: &str) -> io::Result<File> {
         unavailable()
     }

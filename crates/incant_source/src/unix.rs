@@ -40,6 +40,15 @@ impl Dir {
         )?
         .into())
     }
+    pub fn open_rw(&self, name: &str) -> io::Result<File> {
+        Ok(fs::openat(
+            &self.0,
+            name,
+            OFlags::RDWR | OFlags::NOFOLLOW | OFlags::NONBLOCK | OFlags::CLOEXEC,
+            Mode::empty(),
+        )?
+        .into())
+    }
     pub fn create(&self, name: &str) -> io::Result<File> {
         Ok(fs::openat(
             &self.0,

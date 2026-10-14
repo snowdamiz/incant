@@ -77,6 +77,14 @@ impl Dir {
             .custom_flags(FILE_FLAG_OPEN_REPARSE_POINT)
             .open(self.path.join(name))
     }
+    pub fn open_rw(&self, name: &str) -> io::Result<File> {
+        OpenOptions::new()
+            .read(true)
+            .write(true)
+            .share_mode(FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE)
+            .custom_flags(FILE_FLAG_OPEN_REPARSE_POINT | FILE_FLAG_WRITE_THROUGH)
+            .open(self.path.join(name))
+    }
     pub fn create(&self, name: &str) -> io::Result<File> {
         OpenOptions::new()
             .read(true)
