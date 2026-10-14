@@ -1,5 +1,15 @@
 # Implementation status
 
+## Core tick diagnostics — candidate evidence only
+
+The retained standalone QuickJS/Bevy probe compares six loop variants and safe
+identity access using 6,600 raw intervals and three negative controls. Independent
+source, raw archive, binary and percentile replay passes on the main267 intake.
+It changes no engine or authored workload, and adopts no candidate. The fixed-order
+CI-profile experiment has no quiet-window guarantee; actual Core shipping remains
+above the 2 ms script gate. [Scope](docs/spikes/core-tick-cost-diagnostics.md) and
+[independent acceptance](docs/spikes/evidence/core-tick-cost-intake/review.json).
+
 ## Matched Wasm/TypeScript workload — bounded historical shipping evidence
 
 Two shipping backends completed the same 1,024-entity/3,600-tick workload with
@@ -7,8 +17,8 @@ all-row functional parity and exact silent PCM. Across three quiet pairs,
 TypeScript script p95 was 0.140001–0.160000 ms and Wasm static-module p95 was
 0.080001–0.090000 ms. These are descriptive different-phase measurements on
 source97834, not a Core10k, startup, FPS or phase gate. Independent raw evidence
-review and current helper Python/TypeScript checks pass; current-main intake is
-qualified after the merged synchronization test repair. [Evidence](docs/spikes/wasm-typescript-cost.md).
+review and current helper Python/TypeScript checks pass. PR267 merged after its
+exact-head fast SUCCESS, following the merged synchronization test repair. [Evidence](docs/spikes/wasm-typescript-cost.md).
 
 ## Checkpoint31 — retained strict Clippy failure and scoped repair
 
