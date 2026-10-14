@@ -244,7 +244,7 @@ impl RetainedScene {
     pub(crate) fn set_metalfx_experiment_domain(
         &mut self,
         domain: crate::metalfx::opaque_experiment::Domain,
-    ) -> Result<(), crate::metalfx::MetalFxError> {
+    ) -> std::result::Result<(), crate::metalfx::MetalFxError> {
         self.metalfx
             .as_mut()
             .ok_or(crate::metalfx::MetalFxError::Disabled)?
