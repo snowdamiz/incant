@@ -4,6 +4,9 @@
 use incant_audio_runtime::{ClipBinding, MAX_SCENE_CLIPS};
 use incant_input::InputActions;
 use incant_render_game::NativeRenderSettings;
+pub use incant_render_game::{
+    PreparedHostTextureRefresh, PreparedTextureRefresh, TextureRefreshTicket,
+};
 use incant_runtime::{CookedScene, StableId};
 use incant_script::{CompiledScript, ScriptError};
 use serde::Deserialize;

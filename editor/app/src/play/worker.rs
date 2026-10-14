@@ -13,7 +13,7 @@ use std::{
 };
 
 type Game = PlaySession<DeviceBackend, GpuRenderConsumer<Targets>>;
-type TextureCandidate = incant_render_game::PreparedHostTextureRefresh<GpuRenderConsumer<Targets>>;
+type TextureCandidate = incant_play::PreparedHostTextureRefresh<GpuRenderConsumer<Targets>>;
 pub struct Worker {
     service: Arc<Service>,
     rx: mpsc::Receiver<Message>,

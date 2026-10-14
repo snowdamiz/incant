@@ -117,12 +117,12 @@ enum Request {
     Action(Action),
     TextureTicket {
         generation: u32,
-        reply: mpsc::Sender<Result<incant_render_game::TextureRefreshTicket, String>>,
+        reply: mpsc::Sender<Result<incant_play::TextureRefreshTicket, String>>,
     },
     StageTextures {
         generation: u32,
         revision: u64,
-        prepared: incant_render_game::PreparedTextureRefresh,
+        prepared: incant_play::PreparedTextureRefresh,
     },
     PublishTextures {
         generation: u32,
@@ -339,7 +339,7 @@ fn execute(editor: &Editor, command: Action) -> Result<Value, String> {
         s.source_revision = None;
         Ok(s.generation)
     })?;
-    let result = (|| {
+    let result: Result<Value, String> = (|| {
         let root = editor.asset_root.as_deref().ok_or(UNSAVED_PROJECT)?;
         let document = {
             let load = editor.bus.lock().map_err(|_| "Engine lock failed")?;

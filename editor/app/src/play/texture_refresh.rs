@@ -235,9 +235,9 @@ mod tests {
     use std::sync::atomic::AtomicUsize;
     #[test]
     fn an_edit_between_prepare_and_commit_refuses_without_publication_or_locked_disposal() {
-        let bus = Arc::new(Mutex::new(project::LoadState::Ready(
+        let bus = Arc::new(Mutex::new(project::LoadState::Ready(Box::new(
             CommandBus::new(Project::empty("Refresh")).unwrap(),
-        )));
+        ))));
         let revision = 0;
         let (service, _) = Service::new();
         service
@@ -290,9 +290,9 @@ mod tests {
     }
     #[test]
     fn a_session_change_between_prepare_and_commit_refuses_before_the_swap() {
-        let bus = Mutex::new(project::LoadState::Ready(
+        let bus = Mutex::new(project::LoadState::Ready(Box::new(
             CommandBus::new(Project::empty("Refresh")).unwrap(),
-        ));
+        )));
         let (service, _) = Service::new();
         service
             .edit(|s| {
