@@ -72,7 +72,7 @@ fn capture_correlates_exact_tick_and_rejects_missing_nested_and_retired_traces()
     assert!(r.source_ns.iter().sum::<u64>() <= r.regions_ns[Region::Callbacks as usize]);
     assert!(r.numeric_ns[0] <= r.regions_ns[Region::Validation as usize]);
     assert!(r.numeric_ns[1] + r.numeric_ns[2] <= r.regions_ns[Region::ScopeCleanup as usize]);
-    let encoded = serde_json::to_value(&r).unwrap();
+    let encoded = serde_json::to_value(r).unwrap();
     assert_eq!(
         encoded["source_ns"].as_array().unwrap().len(),
         crate::MAX_SOURCES
