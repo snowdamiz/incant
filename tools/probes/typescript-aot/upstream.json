@@ -1,0 +1,84 @@
+{
+  "version": 1,
+  "observed_utc": "2026-10-14",
+  "static_hermes": {
+    "repository": "https://github.com/facebook/hermes",
+    "branch": "static_h",
+    "commit": "1d2fc48c021fbda8eb14478379112ed67bed8f0f",
+    "license": "MIT",
+    "built": false,
+    "security_policy": "https://github.com/facebook/hermes/security/policy",
+    "release_security_status": "Unresolved for this static_h revision. The Meta reporting channel is not a supported-release commitment. General repository releases are not assumed to qualify static_h."
+  },
+  "assemblyscript": {
+    "repository": "https://github.com/AssemblyScript/assemblyscript",
+    "tag": "v0.28.20",
+    "commit": "b6bda05c29c9eb7d07d7f6cb2703508483b30493",
+    "npm": "0.28.20",
+    "license": "Apache-2.0",
+    "security_policy": "https://github.com/AssemblyScript/assemblyscript/security/policy",
+    "release_security_status": "Versioned releases observed; no SECURITY.md detected on the repository policy page. This alone neither establishes nor disproves security maintenance."
+  },
+  "documents": [
+    {
+      "path": "upstream/hermes/API/hermes/CompileJS.h",
+      "url": "https://github.com/facebook/hermes/blob/1d2fc48c021fbda8eb14478379112ed67bed8f0f/API/hermes/CompileJS.h",
+      "sha256": "d1de3a9804eacadea089790f004d9b6cba843b36234ac564a624372f4a96cbc2"
+    },
+    {
+      "path": "upstream/hermes/API/hermes/hermes.h",
+      "url": "https://github.com/facebook/hermes/blob/1d2fc48c021fbda8eb14478379112ed67bed8f0f/API/hermes/hermes.h",
+      "sha256": "4c50981c18cc3b0399532a6b5e1e0735f34c81761514bef3b4e4ffa363a851ce"
+    },
+    {
+      "path": "upstream/hermes/CMakeLists.txt",
+      "url": "https://github.com/facebook/hermes/blob/1d2fc48c021fbda8eb14478379112ed67bed8f0f/CMakeLists.txt",
+      "sha256": "75bc37a90889b976b01528c6a389196ecff15bcf6af71eddc74936c03e08e1f7"
+    },
+    {
+      "path": "upstream/hermes/LICENSE",
+      "url": "https://github.com/facebook/hermes/blob/1d2fc48c021fbda8eb14478379112ed67bed8f0f/LICENSE",
+      "sha256": "da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93"
+    },
+    {
+      "path": "upstream/hermes/README.md",
+      "url": "https://github.com/facebook/hermes/blob/1d2fc48c021fbda8eb14478379112ed67bed8f0f/README.md",
+      "sha256": "64a7dbce19a64c89a9c3a563cd6a2fa3fd0192b82a0496655d018294561f7680"
+    },
+    {
+      "path": "upstream/hermes/doc/BuildingAndRunning.md",
+      "url": "https://github.com/facebook/hermes/blob/1d2fc48c021fbda8eb14478379112ed67bed8f0f/doc/BuildingAndRunning.md",
+      "sha256": "075b5331199bba1c4979414c4309df0e9db4a53b20f5248b8c7f3b928ed68bc9"
+    },
+    {
+      "path": "upstream/hermes/doc/blog/2024-12-19-static-hermes-update-dec-2024.md",
+      "url": "https://github.com/facebook/hermes/blob/1d2fc48c021fbda8eb14478379112ed67bed8f0f/doc/blog/2024-12-19-static-hermes-update-dec-2024.md",
+      "sha256": "ae849190d84ecce629115f5f1c583afc74024865aa2fd7daca481b0941348322"
+    },
+    {
+      "path": "upstream/hermes/include/hermes/VM/JSTypedArray.h",
+      "url": "https://github.com/facebook/hermes/blob/1d2fc48c021fbda8eb14478379112ed67bed8f0f/include/hermes/VM/JSTypedArray.h",
+      "sha256": "c756b190a3eb5f7edf4d0f4d86295ae215496aae56ec14f068ddca1e85e5eee1"
+    },
+    {
+      "path": "upstream/hermes/include/hermes/VM/static_h.h",
+      "url": "https://github.com/facebook/hermes/blob/1d2fc48c021fbda8eb14478379112ed67bed8f0f/include/hermes/VM/static_h.h",
+      "sha256": "fafffcd691e05e1ca73ffc1f63ec7b748cd2b99fffabce98a037864a8327c9c8"
+    },
+    {
+      "path": "upstream/hermes/tools/shermes/CMakeLists.txt",
+      "url": "https://github.com/facebook/hermes/blob/1d2fc48c021fbda8eb14478379112ed67bed8f0f/tools/shermes/CMakeLists.txt",
+      "sha256": "ff67dcb12c2fcc791b8bfe8ae94a511975004ef2ff2d5dfdb4ac4226f1548da1"
+    },
+    {
+      "path": "upstream/hermes/tools/shermes/compile.cpp",
+      "url": "https://github.com/facebook/hermes/blob/1d2fc48c021fbda8eb14478379112ed67bed8f0f/tools/shermes/compile.cpp",
+      "sha256": "3d899cf9e99c550e7549b13449c63b2dfe1a0a20e9b045610c705f7632925a27"
+    },
+    {
+      "path": "upstream/hermes/tools/shermes/shermes.cpp",
+      "url": "https://github.com/facebook/hermes/blob/1d2fc48c021fbda8eb14478379112ed67bed8f0f/tools/shermes/shermes.cpp",
+      "sha256": "80f97ebc29d72cef62b4bb3e3b92a1c5fc97ed7801b1b09d089247f359d1976f"
+    }
+  ]
+}

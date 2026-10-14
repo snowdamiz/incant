@@ -1,5 +1,15 @@
 # Implementation status
 
+## TypeScript AOT spike — language controls retained, adoption open
+
+Pinned AssemblyScript 0.28.20 rejects five current TypeScript language fixtures;
+a separate 9,999-row arithmetic kernel compiles and matches selected values.
+The actual NativeBehavior frontend cook passes. Static Hermes source and future
+compiler inputs are pinned, but no native compiler/host was built. All complete
+SDK, matched shipping performance, iOS no-JIT/size and security-release adoption
+conditions remain open. No production host or dependency changed. Independent
+source/final review is pending. [Evidence](docs/spikes/typescript-aot.md).
+
 ## Core 10k Mac shipping — cache improvement measured, 2 ms script gate failed
 
 Actual paired fast-mode shipping runs complete the 2,156-tick Core win with
@@ -10,7 +20,7 @@ The three cached script p95 intervals are 4.400001–4.410000,
 All three 5% comparison metrics pass; the 2 ms script requirement fails every
 candidate. The original old-emitter 2,400-second compile timeout remains a
 historical failure, not a runnable baseline. Independent final packet review
-is accepted; publication awaits the exact-head PR check. No new build or
+is accepted and PR261 merged after exact-head fast SUCCESS. No new build or
 measurement was performed during its audit. QuickJS allocated/used heap peaks
 increase with cached metadata, so no total-memory improvement is claimed. Main260 contains the accepted static/cache implementation; release30 is
 unchanged. No display/GPU/full-phase claim. [Evidence](docs/spikes/mac-core-fast10k.md).
