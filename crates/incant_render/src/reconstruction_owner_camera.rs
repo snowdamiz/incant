@@ -4,8 +4,12 @@ use glam::{Mat4, Vec2, Vec3};
 use wgpu::util::DeviceExt;
 #[path = "reconstruction_owner_camera_controls.rs"]
 mod controls;
+#[path = "reconstruction_owner_cubic_controls.rs"]
+mod cubic_controls;
 #[path = "reconstruction_owner_footprint_controls.rs"]
 mod footprint_controls;
+#[path = "reconstruction_owner_output_controls.rs"]
+mod output_controls;
 #[path = "reconstruction_owner_camera_support.rs"]
 mod support;
 
@@ -27,6 +31,27 @@ enum Kernel {
     Point,
     Footprint,
 }
+#[derive(Clone, Copy)]
+enum History {
+    Tent,
+    Cubic,
+}
+impl History {
+    fn name(self) -> &'static str {
+        match self {
+            Self::Tent => "tent",
+            Self::Cubic => "clamped-cubic-color-positive-mass",
+        }
+    }
+    fn selected() -> Self {
+        match std::env::var("INCANT_OWNER_CAMERA_HISTORY").as_deref() {
+            Err(std::env::VarError::NotPresent) | Ok("tent") => Self::Tent,
+            Ok("cubic") => Self::Cubic,
+            Ok(other) => panic!("unknown diagnostic history filter: {other}"),
+            Err(error) => panic!("invalid diagnostic history filter: {error}"),
+        }
+    }
+}
 impl Kernel {
     fn name(self) -> &'static str {
         match self {
@@ -44,17 +69,52 @@ impl Kernel {
     }
 }
 fn shader() -> String {
-    shader_with_kernel(3, Kernel::selected())
+    shader_with_options(3, Kernel::selected(), History::selected())
 }
 fn shader_with_radius(radius: i32) -> String {
     shader_with_kernel(radius, Kernel::Point)
 }
 fn shader_with_kernel(radius: i32, kernel: Kernel) -> String {
+    shader_with_options(radius, kernel, History::Tent)
+}
+fn shader_with_options(radius: i32, kernel: Kernel, history: History) -> String {
     assert!([2, 3].contains(&radius));
     let original = include_str!("upscaling/resolve_owner.wgsl");
     let entry = "@fragment fn resolve(@builtin(position) position:vec4f)";
     assert_eq!(original.matches(entry).count(), 1);
     let mut owner = original.replace(entry, "fn original_resolve(position:vec4f)");
+    // Diagnostic correctness successor: full alpha and one depth layer are
+    // independent facts. A rounded opaque mixture must not enter the path for
+    // genuine fractional coverage. The production source remains untouched.
+    for (before, after) in [
+        (
+            "valid:bool, single:bool, surface:bool, changed:bool,",
+            "valid:bool, single:bool, opaque:bool, surface:bool, changed:bool,",
+        ),
+        (
+            "Evidence(vec4f(0.0),0.0,true,true,false,false,",
+            "Evidence(vec4f(0.0),0.0,true,true,true,false,false,",
+        ),
+        (
+            "if v.a<1.0 || z<=0.0 {e.single=false;}",
+            "if v.a<1.0 || z<=0.0 {e.single=false;e.opaque=false;}",
+        ),
+        (
+            "if !e.surface {e.single=false; return e;}",
+            "if !e.surface {e.single=false;e.opaque=false;return e;}",
+        ),
+        (
+            "if e.single {result.color.a=1.0;}",
+            "if e.opaque {result.color.a=1.0;}",
+        ),
+        (
+            "if e.single && c.a==1.0 {result.color.a=1.0;}",
+            "if e.opaque && c.a==1.0 {result.color.a=1.0;}",
+        ),
+    ] {
+        assert_eq!(owner.matches(before).count(), 1, "opacity splice: {before}");
+        owner = owner.replace(before, after);
+    }
     let footprint = match kernel {
         Kernel::Point => "",
         Kernel::Footprint => {
@@ -67,12 +127,40 @@ fn shader_with_kernel(radius: i32, kernel: Kernel) -> String {
     if !footprint.is_empty() {
         parts.push(footprint.to_owned());
     }
-    parts.push(
-        include_str!("upscaling/owner_camera_experiment.wgsl").replace(
-            "const CAMERA_RADIUS:i32=3;",
-            &format!("const CAMERA_RADIUS:i32={radius};"),
-        ),
+    let mut camera = include_str!("upscaling/owner_camera_experiment.wgsl").replace(
+        "const CAMERA_RADIUS:i32=3;",
+        &format!("const CAMERA_RADIUS:i32={radius};"),
     );
+    let opacity_guard = "if e.single || (changes.header.y&1u)!=0u";
+    assert_eq!(camera.matches(opacity_guard).count(), 1);
+    camera = camera.replace(opacity_guard, "if e.opaque || (changes.header.y&1u)!=0u");
+    if let History::Cubic = history {
+        // Keep the baseline helper byte-exact; each splice is a bounded,
+        // test-only estimator replacement with an explicit source guard.
+        for (before, after) in [
+            (
+                "var nearest=frame.depth.y+1.0; var selected=0u;",
+                "var nearest=frame.depth.y+1.0; var selected=0u; var selected_old=vec2i(0); var selected_projection=vec2f(0.0);",
+            ),
+            (
+                "nearest=v.position.z;selected=v.owner;",
+                "nearest=v.position.z;selected=v.owner;selected_old=center+vec2i(x,y);selected_projection=v.position.xy;",
+            ),
+            (
+                "result.color=clean((numerator/mass*weight+e.sum)/total);",
+                "var history_color=numerator/mass;\n    let cubic=cubic_history(p,selected_old,selected_projection,selected,nearest,e);\n    if cubic.ok {history_color=cubic.color;age=max(age,cubic.age);}\n    result.color=clean((history_color*weight+e.sum)/total);",
+            ),
+        ] {
+            assert_eq!(camera.matches(before).count(), 1, "cubic splice: {before}");
+            camera = camera.replace(before, after);
+        }
+        parts.push(include_str!("upscaling/owner_history_cubic_experiment.wgsl").to_owned());
+    }
+    // Canonicalize only the final attachment value, after every blend. Cleaning
+    // intermediate f32 values cannot detect alpha that underflows at storage.
+    assert_eq!(camera.matches(entry).count(), 1);
+    parts.push(camera.replace(entry, "fn experiment_resolve(position:vec4f)"));
+    parts.push(include_str!("upscaling/owner_output_half_experiment.wgsl").to_owned());
     parts.join("\n")
 }
 #[repr(C)]
@@ -103,13 +191,17 @@ fn project(matrix: Mat4, world: Vec3) -> (Vec2, f32) {
 fn owner_camera_shader_and_projection_controls() {
     for radius in [2, 3] {
         for kernel in [Kernel::Point, Kernel::Footprint] {
-            let module = naga::front::wgsl::parse_str(&shader_with_kernel(radius, kernel)).unwrap();
-            naga::valid::Validator::new(
-                naga::valid::ValidationFlags::all(),
-                naga::valid::Capabilities::all(),
-            )
-            .validate(&module)
-            .unwrap();
+            for history in [History::Tent, History::Cubic] {
+                let module =
+                    naga::front::wgsl::parse_str(&shader_with_options(radius, kernel, history))
+                        .unwrap();
+                naga::valid::Validator::new(
+                    naga::valid::ValidationFlags::all(),
+                    naga::valid::Capabilities::all(),
+                )
+                .validate(&module)
+                .unwrap();
+            }
         }
     }
     let stage = Stage::new(true);
@@ -196,12 +288,15 @@ struct Experiment {
 }
 impl Experiment {
     fn new(renderer: &Renderer) -> Self {
-        Self::with_kernel(renderer, 3, Kernel::selected())
+        Self::with_options(renderer, 3, Kernel::selected(), History::selected())
     }
     fn with_radius(renderer: &Renderer, radius: i32) -> Self {
         Self::with_kernel(renderer, radius, Kernel::Point)
     }
     fn with_kernel(renderer: &Renderer, radius: i32, kernel: Kernel) -> Self {
+        Self::with_options(renderer, radius, kernel, History::Tent)
+    }
+    fn with_options(renderer: &Renderer, radius: i32, kernel: Kernel, history: History) -> Self {
         let d = &renderer.device;
         let mut entries = crate::upscaling::system::owner_layout_entries();
         entries.push(wgpu::BindGroupLayoutEntry {
@@ -220,7 +315,7 @@ impl Experiment {
         });
         let module = d.create_shader_module(wgpu::ShaderModuleDescriptor {
             label: Some("Test camera owner shader"),
-            source: wgpu::ShaderSource::Wgsl(shader_with_kernel(radius, kernel).into()),
+            source: wgpu::ShaderSource::Wgsl(shader_with_options(radius, kernel, history).into()),
         });
         let pipeline_layout = d.create_pipeline_layout(&wgpu::PipelineLayoutDescriptor {
             label: None,
@@ -552,7 +647,7 @@ fn actual_scene_owner_camera_gather() {
         }
     }
     assert_eq!((submits, maps), (256, 128));
-    let report = json!({"schema":"incant-owner-camera-diagnostic-v1","adapter":describe(&renderer),"output":SIZE,"source":[480,270],"submissions":submits,"maps":maps,"frames":rows,"images":images,"kernel":Kernel::selected().name(),"shader_sha256":hex(shader().as_bytes()),"raw_bytes":total*128,"scope":"Test-only radius3 (7x7) forward gather of static single-owner fractional coverage; fixed projection and small camera motion, internal LOD footprint. No production, arbitrary motion, timing or visual acceptance."});
+    let report = json!({"schema":"incant-owner-camera-diagnostic-v1","adapter":describe(&renderer),"output":SIZE,"source":[480,270],"submissions":submits,"maps":maps,"frames":rows,"images":images,"kernel":Kernel::selected().name(),"history_filter":History::selected().name(),"shader_sha256":hex(shader().as_bytes()),"raw_bytes":total*128,"scope":"Test-only radius3 (7x7) forward gather of static single-owner fractional coverage; fixed projection and small camera motion, internal LOD footprint. No production, arbitrary motion, timing or visual acceptance."});
     std::fs::write(
         out.join("report.json"),
         serde_json::to_vec_pretty(&report).unwrap(),

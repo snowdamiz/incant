@@ -193,3 +193,115 @@ frame 64 shows smeared thin detail during camera motion, and sphere silhouettes
 remain stepped. **Not visually accepted and not adopted.** Static sampling,
 repeated history resampling and depth-layer admission need separate diagnosis;
 these observations do not establish which mechanism dominates each artifact.
+
+
+## Opacity and history-filter successor — rejected quality candidate
+
+A bounded inspection of generation 006 found a correctness defect independent
+of the footprint kernel. At stationary frame 14, pixel (512, 282), all current
+contributors have alpha 1 and the same combined stage owner, but depths span
+approximately 7.73 to 13.66. The single-depth predicate is false, so the former
+canonicalization does not force alpha 1; the stored half-float alpha is 0.9995117.
+That numerical residue can accidentally qualify as fractional coverage later.
+The stage owner represents the floor, cube, sphere, posts and wires together;
+owner identity is not a proof of one depth layer.
+
+The next test-assembly-only guard separates current opaque coverage from a
+single depth layer. It canonicalizes proved full alpha and refuses the camera
+fractional-history path for fully opaque current mixtures. Production shader
+source is unchanged. Actual mixed-depth controls must pass before comparison.
+
+Separately, the candidate history filter reconstructs color with normalized
+Catmull-Rom at one coherent old-grid query. Positive tent evidence mass remains
+separate. Every nonzero signed contributor and central clamp contributor must
+prove exact unchanged ownership, positive valid evidence, age, compatible depth,
+current occlusion and the same projected translation within 1/256 output pixel.
+Only canonical zero color/record/depth/evidence can participate as empty history.
+Missing support causes whole-filter fallback. The full 4x4 footprint must lie
+inside the old image and can extend beyond the radius-3 positive search. The
+central 2x2 range limits overshoot, followed by premultiplied-alpha cleanup.
+This is an estimator change, not a signed numerator divided by positive mass.
+
+The comparison will use the same guarded source and executable for Tent and
+Cubic, keeping the point kernel, eight jitter phases and age limit unchanged.
+It targets history diffusion only. Static sample coverage and opaque mixed-depth
+silhouette reconstruction remain separate, unresolved work.
+
+
+Generations 007–009 implement this separation and paired color-filter test.
+Generation 007 passed the three CPU and 23 paired actual Metal controls, but
+strict Clippy rejected a constant assertion in the new test. Generation 008
+reads the test's actual input depths instead; CPU controls, the 23 paired cases,
+fourteen refusal cases, strict all-target Clippy and the 128-frame Tent scene
+pass. Generation 009 uses the same binary and sources with only the history
+selection changed to Cubic; its refusal cases and 128-frame scene complete.
+
+The strict paired comparison rejects generation 009: camera frame 62, pixel
+(165,119), stores RGBA16 bits `[5,4,4,0]`, violating canonical transparent color.
+A separate, explicitly failed-contract diagnostic verifies 128 matching frame
+identities, 512 unchanged input/baseline planes, 2,048 raw-plane hashes and 56
+PNG hashes. The cold frames match and both eviction ROIs remain clear. Cubic
+reduces the observed diagonal alpha-profile spread during motion, but changes
+profile mass and peaks too; spread alone is not a quality verdict. Actual pixel
+review finds materially less wire blur but continuing static jaggies and opaque
+mixed-depth silhouette aliasing. No visual acceptance or production adoption.
+
+## Half-precision output correction — diagnostic only
+
+Cleaning a positive f32 alpha before attachment conversion does not guarantee
+canonical RGBA16 output. Generation 010 adds two paired tiny-alpha regressions:
+all four variants fail on actual Metal, including the value which the CPU
+round-to-nearest reference places at the smallest positive half subnormal.
+Generation 011 tries a final `pack2x16float`/`unpack2x16float` round trip. It fixes
+the zero-midpoint case but still fails both surviving-subnormal variants. Both
+failed generations and complete raw controls remain retained.
+
+This is not proof of a particular Metal optimization. The pinned Naga 29.0.4
+MSL writer implements those built-ins through native half casts. The
+[WGSL conversion rules](https://www.w3.org/TR/WGSL/#floating-point-conversion)
+allow either adjacent representable result; packing/unpacking can also flush
+subnormals under the specification's floating-point rules. Assuming one CPU
+rounding policy for those separate conversions was insufficient.
+
+Generation 012 instead computes the final alpha's binary16 round-to-nearest,
+ties-to-even representative with integer significand rounding and expresses it
+exactly as f32. Zero quantized alpha clears RGBA; other metadata is unchanged.
+No intermediate current/history color or evidence mass is quantized. A zero
+color can therefore retain nonzero metadata, which the cubic path conservatively
+refuses as noncanonical empty history. That is an explicit retained behavior.
+
+Generation 012 passes three CPU controls, all 25 paired Metal cases, fourteen
+refusal cases, strict all-target Clippy and the 128-frame Cubic scene. The tiny
+positive control now stores alpha bits 1, while the underflow control stores
+exact zero RGBA. Every scene frame reports zero negative-color pixels and zero
+nonzero-color/zero-alpha pixels. Its source freeze is
+`aa6390864cd3cc127b10018edb4531c414524720642b96a890629d84540edf38`.
+Root inspected actual frames 14, 24 and 64: the correction retains the sharper
+moving wires, but static sampling and opaque depth-edge problems still prevent
+visual acceptance. Independent attachment-boundary controls and a bounded raw
+comparison remain additional qualification work, not a reason to claim adoption.
+
+The final-store boundary now also has an independent 107-case actual GPU probe
+(`output_controls::actual_owner_output_precision`): runtime RGBA32 inputs,
+paired RGBA16 and RGBA32 outputs, one draw/submission/map, exact half-crate
+round-to-nearest/ties-to-even expected bits, and separate input/helper/final
+alpha observations. Generation 013 failed shader validation before drawing
+because the probe used the reserved WGSL field name `diagnostic`. Generation 014
+renames that probe field to `observed`; build, 3 CPU controls, all 107 actual
+precision cases and strict all-target renderer Clippy pass. Six GPU diagnostics
+remain explicitly ignored in the ordinary CPU inventory. The 014 source freeze
+is `c49de212e764de37fd2d8d422c9bb50f45b8319f1320cbb2e65ed381a5b03b0c`;
+the complete native outputs are retained under
+`~/.codex/incant-evidence/reconstruction-owner-camera-014`. No scene algorithm
+changed after 012, so this probe does not relabel or replace the 012 scene run.
+
+The independently checked 009-to-012 comparison binds all 128 identities, 512
+unchanged input/baseline planes, 2,048 raw planes (3.112 GB), and 56 PNGs. The
+changed-owner disappearance region stays exactly zero. The old frame-62 PMA
+counterexample is preserved; 012 has no reported zero-alpha/nonzero-color
+violations. Cold RGB is byte-identical but 3,191 cold alpha pixels differ by at
+most one half ULP (0.00048828125). All 128 feedback outputs differ, so this is
+not described as a one-pixel correction. The bounded comparison is retained at
+`~/.codex/incant-evidence/reconstruction-owner-output-comparison-001/stdout.json`,
+SHA-256 `de4246e5c9fdf254f6f25fdd5de80149d451d19cfb206fdf294fbbfb26cdc203`.
+Root's rendered-pixel review still rejects the candidate's remaining aliasing.
