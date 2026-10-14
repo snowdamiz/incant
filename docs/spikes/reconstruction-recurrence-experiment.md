@@ -141,3 +141,22 @@ result is rejected for adoption. In particular, lifting the mixed-support
 refusal alone does not repair the temporal color decision, and completely clear
 current support still cannot recover an intermittently sampled thin surface.
 No production shader, allocation, admission cap or gate changed.
+
+## Coarse shading transfer experiment
+
+Run 010 replaces the experimental four-luminance history with a spatial RGB
+mean and luminance standard deviation over a separable seven-tap binomial
+kernel. It carries the old fine residual onto the current coarse mean and
+rectifies against the union of the current color box and mean plus/minus one
+standard deviation. Geometric admission and sample mass stay unchanged. This
+tests a different signal decomposition; the deviation box is a heuristic, not a
+statistical confidence bound or a shading-change proof. No external shader code
+was copied.
+
+Build, CPU controls, strict Clippy and the 48-frame Metal scene all pass on frozen
+source `46559d64444354e1a919f18c82dc5b8fdb9bd7f6a53b9bdfb0e6fdd4669fe720`.
+Root inspected moving frames 8/24 and stationary frame 24. Broad stripe bands
+remain conspicuous even while stationary, and shadow trailing and thin-line
+failure remain. The result is rejected. A current spatial mean can itself alias;
+transferring it directly into the history is not sufficient to distinguish
+lighting changes from sampling changes. No production adoption is proposed.

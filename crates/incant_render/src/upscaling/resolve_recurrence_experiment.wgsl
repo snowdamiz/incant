@@ -7,6 +7,9 @@ override diagnostic_bounded_lock: bool = false;
 // Conventional nearest-surface guidance is a heuristic for mixed coverage,
 // not a proof that every contributing color follows one surface.
 override diagnostic_nearest_surface: bool = false;
+// Alternative signal experiment: carry local low-frequency RGB separately from
+// fine detail. Its standard-deviation box is a heuristic, not sample evidence.
+override diagnostic_coarse_shading: bool = false;
 @group(0) @binding(1) var current:texture_2d<f32>;
 @group(0) @binding(2) var motion:texture_2d<f32>;
 @group(0) @binding(3) var current_depth:texture_depth_2d;
@@ -136,6 +139,28 @@ fn diagnostic_cubic(old:vec2f,expected:f32,fallback:vec4f)->vec4f {
     if !(w>0.0) || !finite4(n/w) {return fallback;}
     return clamp(n/w,minimum,maximum);
 }
+fn binomial7(i:i32)->f32 {
+    switch abs(i) {case 0:{return 20.0;}case 1:{return 15.0;}case 2:{return 6.0;}default:{return 1.0;}}
+}
+// The separable [1,6,15,20,15,6,1] kernel has an exact Nyquist zero.
+// Only compatible covered geometry contributes; this is a shading statistic,
+// never extra color sample mass. Alpha and geometric admission are unchanged.
+fn coarse_signature(p:vec2f,expected:f32)->vec4f {
+    let c=vec2i(floor(source_position(p)));
+    var sum=vec3f(0.0);var square=0.0;var mass=0.0;
+    for(var y=-3;y<=3;y++) {for(var x=-3;x<=3;x++) {
+        let t=c+vec2i(x,y);
+        if any(t<lo(frame.source)) || any(t>hi(frame.source)) {continue;}
+        let v=textureLoad(current,t,0);
+        if !admitted(v) || v.a<1.0 || !compatible(linear_depth(textureLoad(current_depth,t,0)),expected) {continue;}
+        let w=binomial7(x)*binomial7(y);
+        let rgb=clean(v).rgb;let l=recurrence_luma(rgb);
+        sum+=rgb*w;square+=l*l*w;mass+=w;
+    }}
+    if !(mass>0.0) {return vec4f(-1.0);}
+    let mean=sum/mass;let l=recurrence_luma(mean);
+    return vec4f(mean,sqrt(max(square/mass-l*l,0.0)));
+}
 @fragment fn resolve(@builtin(position) position:vec4f)->Resolved {
     var result=Resolved(vec4f(0.0),0.0,vec2f(0.0),vec4f(-1.0));
     let p=position.xy;
@@ -153,6 +178,7 @@ fn diagnostic_cubic(old:vec2f,expected:f32,fallback:vec4f)->vec4f {
     if e.opaque {result.color.a=1.0;}
     result.depth=e.nearest;
     result.recurrence=vec4f(recurrence_luma(fresh.rgb),-1.0,-1.0,-1.0);
+    if diagnostic_coarse_shading {result.recurrence=coarse_signature(p,e.nearest);}
     result.evidence=vec2f(min(e.mass,evidence_cap()),0.0);
     if frame.depth.w<0.5 {return result;}
     let m=textureLoad(motion,e.anchor,0);
@@ -191,7 +217,7 @@ fn diagnostic_cubic(old:vec2f,expected:f32,fallback:vec4f)->vec4f {
     var history=numerator/mass;
     if diagnostic_cubic_history {history=diagnostic_cubic(old,expected,history);}
     let recurrence=recurrence_quantize(select(vec4f(-1.0),recurrence_sum/mass,recurrence_ok));
-    result.recurrence=vec4f(recurrence_luma(fresh.rgb),recurrence.xyz);
+    if !diagnostic_coarse_shading {result.recurrence=vec4f(recurrence_luma(fresh.rgb),recurrence.xyz);}
     // The clamp box is exactly the contributing (single-surface) support.
     var minimum=fresh;var maximum=fresh;
     let c=vec2i(floor(source_position(p)));
@@ -206,7 +232,17 @@ fn diagnostic_cubic(old:vec2f,expected:f32,fallback:vec4f)->vec4f {
     // support's range is consistent evidence and keeps its mass, so high-contrast
     // texture keeps accumulating; history outside it loses mass as before.
     var clamped=clamp(history,minimum,maximum);
-    if diagnostic_disable_color_rectification || recurrence_retains(history.rgb,fresh.rgb,minimum.rgb,maximum.rgb,recurrence) {clamped=history;}
+    if diagnostic_disable_color_rectification || (!diagnostic_coarse_shading && recurrence_retains(history.rgb,fresh.rgb,minimum.rgb,maximum.rgb,recurrence)) {clamped=history;}
+    if diagnostic_coarse_shading && all(recurrence_ok) && all(result.recurrence>=vec4f(0.0)) {
+        // Transfer fine residual around the reprojected coarse mean to the new
+        // mean. Real low-frequency shading updates immediately, instead of
+        // requiring a reversal in a short sequence of aliased fine samples.
+        let signature=result.recurrence;
+        let shifted=max(history.rgb+signature.rgb-recurrence.rgb,vec3f(0.0));
+        let lower=min(minimum.rgb,max(signature.rgb-vec3f(signature.a),vec3f(0.0)));
+        let upper=max(maximum.rgb,signature.rgb+vec3f(signature.a));
+        clamped=vec4f(clamp(shifted,lower,upper),clamped.a);
+    }
     var next_remaining=0.0;
     if diagnostic_bounded_lock {
         let lock=recurrence_lock(history.rgb,fresh.rgb,minimum.rgb,maximum.rgb,recurrence,remaining);
