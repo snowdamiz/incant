@@ -38,6 +38,7 @@ pub(crate) struct PipelineKey {
     pub alpha: AlphaMode,
     pub double_sided: bool,
     pub mirrored: bool,
+    pub samples: crate::SceneMsaa,
 }
 pub(crate) struct MaterialSystem {
     pub globals: wgpu::BindGroupLayout,
@@ -91,6 +92,7 @@ impl MaterialSystem {
         lighting: &wgpu::BindGroupLayout,
         backend: wgpu::Backend,
         cache: Option<&wgpu::PipelineCache>,
+        scene_msaa: crate::SceneMsaa,
     ) -> Result<Self> {
         let globals = device.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
             label: Some("Material frame"),
@@ -136,25 +138,28 @@ impl MaterialSystem {
         );
         let shader = crate::material_pipeline::shader(device, backend)?;
         let mut pipelines = HashMap::new();
-        for alpha in [AlphaMode::Opaque, AlphaMode::Mask, AlphaMode::Blend] {
-            for double_sided in [false, true] {
-                for mirrored in [false, true] {
-                    let key = PipelineKey {
-                        format: crate::frame::HDR_FORMAT,
-                        alpha,
-                        double_sided,
-                        mirrored,
-                    };
-                    pipelines.insert(
-                        key,
-                        crate::material_pipeline::build(
-                            device,
-                            &shader,
+        for &samples in scene_msaa.catalog() {
+            for alpha in [AlphaMode::Opaque, AlphaMode::Mask, AlphaMode::Blend] {
+                for double_sided in [false, true] {
+                    for mirrored in [false, true] {
+                        let key = PipelineKey {
+                            format: crate::frame::HDR_FORMAT,
+                            alpha,
+                            double_sided,
+                            mirrored,
+                            samples,
+                        };
+                        pipelines.insert(
                             key,
-                            &[&globals, &layout, environment, lighting],
-                            cache,
-                        ),
-                    );
+                            crate::material_pipeline::build(
+                                device,
+                                &shader,
+                                key,
+                                &[&globals, &layout, environment, lighting],
+                                cache,
+                            ),
+                        );
+                    }
                 }
             }
         }

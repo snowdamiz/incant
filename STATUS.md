@@ -5,11 +5,23 @@ The current phase remains **Phase 1: Core engine**. The
 its recorded evidence and remaining qualification. The actual native texture and
 compatible static-model workflows are verified on this Mac; release checkpoint37
 contains the tested main285 tree. Rendering quality and full rendered-game
-performance remain open. The default editor cube also has visibly jagged
-silhouettes; its full-resolution diagnostic route currently has no geometric
-antialiasing. This is a separate viewport defect, not a rendering-quality pass
-or proof of the low-resolution reconstruction cause. The entries
+performance remain open. The reported jagged editor cube now has explicit 4x
+geometry antialiasing, verified in the actual Mac editor and isolated Metal
+controls. This fixes the ordinary viewport route; low-resolution reconstruction
+still has separate appearance defects. The entries
 below preserve earlier scoped results and superseded integration snapshots.
+
+## Ordinary editor antialiasing — actual Mac verified
+
+The ordinary viewport resolves four geometric samples in linear HDR after all
+world draws. Cube edges now have intermediate coverage instead of the previous
+hard stair steps. Default and cooked shaders agree, and mixed materials, sprites,
+world text, resize and retained-frame ownership controls pass on this Mac.
+Pixel-grid and temporal/native retained paths keep their explicit 1x policy.
+Unsupported capabilities fail explicitly; SSAO with 4x requires a future depth
+resolve and is refused. The extra cold pipelines and attachment memory are
+documented, with no startup, frame-time or broader reconstruction-quality claim.
+[Source, actual review and retained failures](docs/spikes/editor-scene-msaa.md).
 
 ## Native host timing — shipping window exercised
 

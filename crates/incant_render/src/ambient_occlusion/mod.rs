@@ -41,6 +41,7 @@ impl crate::Renderer {
         &mut self,
         settings: AmbientOcclusion,
     ) -> crate::Result<()> {
+        self.scene_msaa.validate_ao(true)?;
         settings.validate()?;
         if cfg!(all(
             feature = "cooked-materials",

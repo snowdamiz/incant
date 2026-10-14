@@ -1,6 +1,7 @@
 # Phase 1 review ledger
 
-Updated against main290 (`91f0ce464f97795f2114f03fc0f43d06008a082e`).
+Updated against main293 (`1f3628a23886aae6c3f0ede699fd287c3dd481d4`) and the
+locally qualified ordinary-editor antialiasing change.
 Phase 1 remains open; this ledger records evidence and remaining work, not director
 approval. [PLAN.md](../../PLAN.md#phase-1-core-engine) defines the requirements.
 Only actual testing on the available Mac is required as device evidence. Other
@@ -26,9 +27,10 @@ device execution is deferred; hosted build and release checks remain required.
   [compatible static-model workflows](../spikes/native-static-model-refresh.md).
   Both preserve the running world and scripts on this Mac. Animation, changed scene/material-binding
   structure and baked navigation dependencies require their own admission rules.
-- Add and qualify geometric antialiasing for the ordinary editor viewport. The
-  reported diagnostic cube has jagged silhouettes on its current single-sample,
-  full-resolution route; this is separate from temporal reconstruction defects.
+- Preserve the now-qualified [ordinary-editor 4x antialiasing](../spikes/editor-scene-msaa.md).
+  Actual Mac editor review and default/cooked Metal controls verify the reported
+  cube-edge fix. This does not qualify temporal reconstruction or frame budgets;
+  additional cold pipelines and memory remain explicit costs.
 - Complete off-frame shader/pipeline preparation and cache coverage for the final
   renderer configuration. The existing optional cooked families and Vulkan cache
   do not establish every backend, permutation or frame-time requirement.
