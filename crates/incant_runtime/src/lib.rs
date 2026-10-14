@@ -38,6 +38,7 @@ mod commands;
 mod flipbook;
 mod flipbook_binary;
 mod hierarchy;
+mod matrix_basis;
 mod navigation;
 mod navigation_binary;
 mod navigation_runtime;

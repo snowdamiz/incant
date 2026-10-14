@@ -682,6 +682,9 @@ impl NativeWorld {
         let roots = &self.root_steps;
         self.world
             .resource_scope(|world, mut hierarchy: Mut<Hierarchy>| {
+                // Scratch is local to this pass, with no entity/epoch lifetime.
+                // All existing validations still run before every matrix hit.
+                let mut basis = crate::matrix_basis::MatrixBasisCache::default();
                 let mut query = world.query::<(
                     &Identity,
                     &Local,
@@ -747,6 +750,8 @@ impl NativeWorld {
                         let mut candidate = local.0.clone();
                         advance_translation(&mut candidate, velocity, step);
                         matrix(&candidate)
+                    } else if numeric_publication {
+                        basis.matrix(&local.0)
                     } else {
                         matrix(&local.0)
                     };
