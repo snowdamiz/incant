@@ -1,7 +1,9 @@
 # Native drawable presentation observer: CPU-qualified probe
 
-This private, default-off probe passed its bounded CPU qualification. It has no
-native window, callback-delivery or timestamp evidence.
+This historical private, default-off seam probe passed its bounded CPU
+qualification. That probe has no native-window or timestamp evidence. The later
+[native-player integration](native-player-presentations.md) retains genuine
+partial callback delivery and incomplete live qualification separately.
 It targets one missing observation: when the exact drawable already acquired by
 wgpu actually reached the display. It changes no pacing, rendering, FIFO policy,
 command buffer scheduling or workload. It is separate from the private MetalFX

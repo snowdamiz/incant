@@ -1,10 +1,13 @@
-# Native player drawable observation — source candidate
+# Native player drawable observation — partial live qualification
 
 This default-off source candidate joins the CPU-qualified HAL seam and main297's
 native replay host to main298. The main298 join adds the reviewed animation
 consumer source and its distinct dev-only pollster lock edge; it changes no
-presentation-observer bytes. CPU qualification passed; no native-window capture
-has run. It supplies no display-rate or performance verdict. The probe qualification and all earlier failures remain in
+presentation-observer bytes. CPU and private shipping-build qualification passed.
+The second actual window attempt delivered 1,415 positive drawable timestamps,
+but failed on an audio backend notification before replay completion. The first
+window attempt timed out with no sidecar records. Neither is a complete replay or
+display-rate/performance verdict. The probe qualification and earlier failures remain in
 [native-presentation-observer.md](native-presentation-observer.md).
 
 The trusted native host opts in with `native-presentations` on macOS and both
@@ -77,10 +80,9 @@ versus commit identity, restart/focus/resize/retry generations, bounded metadata
 all acquisition-refusal counters, create-only output, early/error reporting,
 output cap, error precedence and CLI/package authority.
 
-Only after source/CPU review may a separately bounded actual replay establish
-whether callbacks deliver enough timestamp coverage. The first live result is
-coverage evidence, not an FPS gate, uncapped GPU throughput, or an uninstrumented
-shipping performance result.
+Actual replay remains separately bounded and reviewed. The first live result
+below establishes partial callback delivery, not an FPS gate, uncapped GPU
+throughput, or an uninstrumented shipping performance result.
 
 ## CPU qualification, 2026-10-14
 
@@ -109,3 +111,82 @@ Its immutable source freeze, plans, results, dependency graphs, compiler message
 binary copies and original failures remain adjacent. Final result SHA256:
 `e611b72b6f108096fc2914b00e489c00e532e4b462777658615e9d0c83bde9b9`.
 The later documentation commit changes no qualified production source.
+
+## Private shipping and live outcomes, 2026-10-14
+
+Source `1ff68940d0dae14176d54a219d2d719039409e99` produced copied executable
+`cc3b316b08d633c0be04144c32b1eb54a8402aaae0e5492e1543c832f55df5e0`.
+Rust 1.99, arm64, fast4 physics, optimization3/fatLTO/abort/one codegen unit and
+normal window/profile selections were retained. The three observer feature
+additions were verified against actual compiler artifacts. The public exporter
+was not broadened: a private adapter reused its cook/build/package helpers and
+labeled this package ineligible for distribution or performance gates.
+
+All 4,507 tracked compiler/helper inputs and 74 authored inputs were bound.
+All 28 cooked files (35,365,370 bytes), compiler output, bytecode and hardening
+payload matched the retained Core baseline. The honest build ID changed to
+`d1eac86337b09f1b65e531800bd5227125b272d668ca7f46a7f746806ecd76ce`.
+After deleting the owned scratch target, the one offline startup tick matched
+the full baseline report and PCM bytes. That proves offline startup parity,
+not live audio-device quality. Build002 completed all 22 managed children in
+511.736 seconds. Build001 failed before Cargo because the frozen PATH omitted
+the Homebrew rustup shim; its logs and empty scratch remain. The successor
+changed only PATH/tool admission and retained the cumulative stage deadline.
+
+Both actual windows used the same app executable, data and 2,156-step physical
+recording, a 4,096-row capacity, 120-second child deadline, 150-second stage,
+6GiB free-space floor, 4MiB stream caps and 32MiB sidecar cap. Native input was
+not blended into replay. Root performed only application activation through CUA;
+a concurrent CPU export and one one-second process sample add observer/load
+limitations. No performance comparison was attempted.
+
+| Attempt | Actual outcome | Callback evidence |
+| --- | --- | --- |
+| window001 | Timeout at 120.013s after Raise/title-bar activation; owned process reaped | Precreated sidecar, stdout and stderr empty; no timestamp or completion evidence |
+| window002 | Finder Open on the already-owned app; audio backend error at 66.477s; owned process reaped | 1,444 accepted host steps, 1,445 acquired rows; 1,415 positive timestamps, 28 zero timestamps and 2 missing callbacks |
+
+The second sidecar finalized on error after its bounded one-second drain, with
+two callbacks still pending. It has zero invalid timestamps, collector overflow,
+protocol errors, abandoned or explicitly discarded rows, and no host metadata
+loss. Six focus boundaries and four segments remain visible. One initial row
+reported zero. Gameplay segments cover steps1–18, 19–33 and34–1444. One adjacent
+positive timestamp pair is equal; it is retained and flagged, not repaired or
+silently removed. There is no drawable-ID reversal. The external analyzer lists
+1,407 strictly positive intervals only between adjacent acquired rows in the
+same segment. This limited subset is not a complete cadence distribution: gaps,
+zero/missing callbacks, initial/final intervals, focus changes and unfinished
+gameplay preclude a complete-run p95 claim. No percentile is calculated.
+
+The exact error was `Audio(Backend("A buffer underrun or overrun occurred."))`.
+Pinned [CPAL 0.18.2](https://docs.rs/cpal/0.18.2/cpal/enum.ErrorKind.html#variant.Xrun)
+classifies this notification as `Xrun`. Its CoreAudio overload listener does not
+stop the stream; the vendored Kira manager also leaves Xrun streams running.
+The existing engine `SceneAudio::check_device` makes every queued device event
+terminal, so it ended this session. The trace does not prove audible continuity
+or identify the cause of the overrun. A separately reviewed typed audio-policy
+fix is outside this producer; no source/assertion was changed to pass the run.
+
+The observer foundation has real partial callback evidence. Complete replay,
+glitch-free output, complete display cadence and final-game shader-hitch
+qualification remain open. Pipeline/shader object prewarming alone cannot prove
+absence of later driver compilation. This packet makes no such claim.
+
+## Portable read-only replay
+
+`evidence/native-player-presentations/` retains plans, source copies, actual
+compiler logs, successful CPU/build receipts, all failed generations, raw
+callback rows, CUA interventions and process-sample evidence. Native executables,
+cooked payload and startup PCM remain external and hash-bound; the large dSYM
+is retained externally and recorded by the build receipt. The verifier does not
+extract files or execute any archived code or native program:
+
+```sh
+python3 -B docs/spikes/evidence/native-player-presentations/verify.py
+python3 -B docs/spikes/evidence/native-player-presentations/verify.py --originals --binaries --git-source .
+```
+
+Default replay verifies recorded identities and replays source/build/partial
+callback correspondence. The optional flags verify original retained files,
+external binary/data/PCM bytes and exact qualified Git source objects. It keeps
+both live attempts failed. There is no full live observation report or live PCM
+parity to verify.
