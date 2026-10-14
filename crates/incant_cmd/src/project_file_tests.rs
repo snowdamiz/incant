@@ -570,6 +570,9 @@ fn incomplete_initial_journal_is_refused_without_truncation_or_backup() {
         assert_eq!(artifact_inventory(root), before);
     }
 }
+// Windows keeps a deleted file pending while the review pins its handle.
+// The rename/recreate identity control above remains cross-platform.
+#[cfg(unix)]
 #[test]
 fn unlink_then_recreate_same_bytes_retires_a_review_without_mutation() {
     let dir = tempfile::tempdir().unwrap();
