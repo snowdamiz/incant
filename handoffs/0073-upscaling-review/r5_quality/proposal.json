@@ -1,0 +1,255 @@
+{
+  "schema": "incant-r5-numerical-quality-proposal-v1",
+  "state": "NOT_EXECUTABLE_NO_GPU_GRANT_QUALITY_BINARY_NOT_BUILT",
+  "source": "8c39fd6adbf95d470388867de4d305756b05913c",
+  "candidate_packet": "e7be0fa5596a3229b4d8e6b7c7e002ba231c1e10",
+  "claude_patch": "51deb3848801f46c78ea85ca65fc330c5f60b758",
+  "cpu_freeze": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/reconstruction-r5-cpu-001/source-002/freeze.json",
+    "sha256": "d615ab15dfc3ae10ec0bd060b9df2d473854cdae093c98514b28ebee93e37407"
+  },
+  "cpu_release": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/reconstruction-r5-cpu-001/attempt-002/release.json",
+    "sha256": "9267694bddab242ec70adb348ed3cf69ac1be3bb787ed0de04b17bbdd8b84d42"
+  },
+  "numeric_binaries": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/reconstruction-r5-cpu-001/attempt-002/binaries/default/incant_render-bf4961fb357f91a4",
+      "sha256": "f4123f827f5696d496bbc6b1fe785c697d02f2af775cee6941ad4d0a8d65c9bf",
+      "bytes": 32412464,
+      "mode": "0555"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/reconstruction-r5-cpu-001/attempt-002/binaries/cooked-native/incant_render-288759d68012f619",
+      "sha256": "f74086ba2577a7a930110c30c168df662fd88cc0719627323301dbc2e614440e",
+      "bytes": 33930640,
+      "mode": "0555"
+    }
+  ],
+  "numeric_order": [
+    {
+      "name": "ordinary-default",
+      "binary_index": 0,
+      "test": "upscaling::system::device_tests::actual_output_reconstruction_rejects_bad_history_and_never_retains_overlay",
+      "queue_submissions": 19,
+      "maps": 19,
+      "maximum_extent": [
+        16,
+        16
+      ],
+      "images": 0
+    },
+    {
+      "name": "owner-default",
+      "binary_index": 0,
+      "test": "upscaling::system::owner_device_tests::actual_owner_history_obeys_provenance_and_preserves_ordinary_fallback",
+      "queue_submissions": 12,
+      "maps": 12,
+      "maximum_extent": [
+        16,
+        16
+      ],
+      "images": 0
+    },
+    {
+      "name": "ordinary-cooked",
+      "binary_index": 1,
+      "test": "upscaling::system::device_tests::actual_output_reconstruction_rejects_bad_history_and_never_retains_overlay",
+      "queue_submissions": 19,
+      "maps": 19,
+      "maximum_extent": [
+        16,
+        16
+      ],
+      "images": 0
+    },
+    {
+      "name": "owner-cooked",
+      "binary_index": 1,
+      "test": "upscaling::system::owner_device_tests::actual_owner_history_obeys_provenance_and_preserves_ordinary_fallback",
+      "queue_submissions": 12,
+      "maps": 12,
+      "maximum_extent": [
+        16,
+        16
+      ],
+      "images": 0
+    }
+  ],
+  "numeric_markers": {
+    "ordinary": "all19 modes, both attachment0 and1, exact ordered38 rows; one test passed; actual Metal adapter",
+    "owner": "all12 ordered cases; current-only case3 whole-plane equality; baselines7/8; exact final12submissions/12maps marker"
+  },
+  "quality_fixture": {
+    "path": "/Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review/handoffs/0073-upscaling-review/r5_quality/review/upscaling_owner_review.rs",
+    "sha256": "650316a21f30bfb4f7cbe8c99b67f9b5be269b51eb62b4d017b519bd5130d997"
+  },
+  "quality_plan": {
+    "path": "/Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review/handoffs/0073-upscaling-review/owner_quality/plan.json",
+    "sha256": "ff0f0f488faa3f6d4d6cc1321d5c4e87c35cbb4160130dddd050697bb824dbc4"
+  },
+  "quality_groups": [
+    {
+      "name": "stationary",
+      "budget": {
+        "scene_submissions": 50,
+        "ui_submissions": 18,
+        "readback_submissions": 50,
+        "readback_maps": 50,
+        "queue_submissions": 118,
+        "rendered_frames": 50,
+        "pngs": 6
+      },
+      "pngs": [
+        "stationary-full.png",
+        "stationary-drs50.png",
+        "stationary-up50.png",
+        "stationary-own50.png",
+        "stationary-phases.png",
+        "stationary-detail.png"
+      ]
+    },
+    {
+      "name": "motion",
+      "budget": {
+        "scene_submissions": 44,
+        "ui_submissions": 0,
+        "readback_submissions": 44,
+        "readback_maps": 44,
+        "queue_submissions": 88,
+        "rendered_frames": 44,
+        "pngs": 4
+      },
+      "pngs": [
+        "motion-full.png",
+        "motion-up50.png",
+        "motion-own50.png",
+        "motion-detail.png"
+      ]
+    },
+    {
+      "name": "transitions",
+      "budget": {
+        "scene_submissions": 106,
+        "ui_submissions": 0,
+        "readback_submissions": 106,
+        "readback_maps": 106,
+        "queue_submissions": 212,
+        "rendered_frames": 106,
+        "pngs": 2
+      },
+      "pngs": [
+        "transitions-full.png",
+        "transitions-strip.png"
+      ]
+    },
+    {
+      "name": "c7_disocclusion",
+      "budget": {
+        "scene_submissions": 82,
+        "ui_submissions": 0,
+        "readback_submissions": 82,
+        "readback_maps": 82,
+        "queue_submissions": 164,
+        "rendered_frames": 82,
+        "pngs": 2
+      },
+      "pngs": [
+        "c7-detail.png",
+        "c7-own-moving.png"
+      ]
+    },
+    {
+      "name": "p1_crossing",
+      "budget": {
+        "scene_submissions": 98,
+        "ui_submissions": 0,
+        "readback_submissions": 98,
+        "readback_maps": 98,
+        "queue_submissions": 196,
+        "rendered_frames": 98,
+        "pngs": 1
+      },
+      "pngs": [
+        "p1-detail.png"
+      ]
+    }
+  ],
+  "quality_binary": null,
+  "quality_build": {
+    "allowed_now": false,
+    "single_injected_path": "crates/incant_render/tests/upscaling_owner_review.rs",
+    "compile": [
+      "./tools/cargo",
+      "test",
+      "--locked",
+      "--offline",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_render",
+      "--test",
+      "upscaling_owner_review",
+      "--no-run",
+      "--message-format=json-render-diagnostics"
+    ],
+    "strict_clippy": [
+      "./tools/cargo",
+      "clippy",
+      "--locked",
+      "--offline",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_render",
+      "--test",
+      "upscaling_owner_review",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "enumerate": "copied frozen binary --list --ignored; no test body runs",
+    "profile": "ci",
+    "features": [
+      "default",
+      "physics-deterministic"
+    ],
+    "targets": "coordinate one exclusive CPU target/slot before build"
+  },
+  "maximum_budget": {
+    "children": 9,
+    "numeric_children": 4,
+    "quality_children": 5,
+    "queue_submissions": 840,
+    "maps": 442,
+    "pngs": 15,
+    "maximum_extent": [
+      960,
+      540
+    ],
+    "timeout_seconds_per_child": 90,
+    "child_time_upper_bound_seconds": 810,
+    "retries": 0,
+    "execution_builds": 0
+  },
+  "order_contract": "all4 numeric invocations must pass before stationary,motion,transitions,c7_disocclusion,p1_crossing; first execution/contract failure stops every later child; no repair/retry",
+  "routing": {
+    "capture_and_all15_pixel_review": "Claude Opus 5.5 through existing0073 ACP, Max explicitly verified beforeprompt, auto-memory disabled",
+    "nonvisual_audit": "Astra checks identities/processes/counts/PNG hashes only"
+  },
+  "unchanged_contracts": [
+    "exact24-frame8-jitter schedule",
+    "sameFULL/DRS/ordinaryUP/ownerUP scenes",
+    "sameoriginal historicalthresholds",
+    "same strict numeric tolerances and half-interval derivation",
+    "same original C7/C9/P1 definition mismatches: report observations without closing differently defined gates"
+  ],
+  "root_actions_needed_before_gpu": [
+    "independent CPU packet review",
+    "grant one future CPU fixture build slot and capture frozen binary/build receipt/list identities",
+    "review exact runner/ready plan and CPU guard controls",
+    "issue fresh exclusive GPU lease bound to final binaries/runner/plan and actual predecessor release"
+  ]
+}
