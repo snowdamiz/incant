@@ -1,0 +1,165 @@
+{
+ "files": [
+  {
+   "added": 9,
+   "base_blob": "d9db6665cc2a206834bbb0d90bbfa888f935bcb8",
+   "base_sha256": "0537dd58409e0dfd485e09633b41091cb461e09f4859f6217147fdabb840d601",
+   "changed": true,
+   "path": "crates/incant_render/src/motion/attachment.rs",
+   "proposed_blob": "6e58e37255c46a4f69a1e28c0a60eb8ecfa96a40",
+   "proposed_sha256": "c6d0ae3264480d8cedb42662b36e943aac1ec0748d9a1954e323b4ad20885e37",
+   "removed": 9
+  },
+  {
+   "added": 13,
+   "base_blob": "84c04651696f12e2661e254b09388e5bf60b965a",
+   "base_sha256": "54f2383d75c9ba9b5952aba8862485eeca0437c4d24824694bedcd9424f35e53",
+   "changed": true,
+   "path": "crates/incant_render/src/motion/owner.rs",
+   "proposed_blob": "73f9188476d77a0d270183919e9a8a2e89d2511c",
+   "proposed_sha256": "98c4c43efd28b56ab29efbd661124c91b8f1e41045f520bf87813fd8c29373d2",
+   "removed": 2
+  },
+  {
+   "added": 3,
+   "base_blob": "16c3b41fb461314be19b780780ef7dc3a66fa4c3",
+   "base_sha256": "400eb57b3d067eaa3cdf3d2e0c216a4868d09947d61c49dca62e909f0a394d00",
+   "changed": true,
+   "path": "crates/incant_render/src/motion/retained.rs",
+   "proposed_blob": "30a7cb12ba4525446d6d18730c79d87b07029113",
+   "proposed_sha256": "14878c5aba3a8863c5897aff008c0f90b647ce537c64f649a920cef24de4a56a",
+   "removed": 4
+  },
+  {
+   "added": 2,
+   "base_blob": "19752889ed8606570a51e105e63cedc6089d569b",
+   "base_sha256": "5c123128b7f534267750463ea0e34663cac19f58e05f0f563b563554c9224f81",
+   "changed": true,
+   "path": "crates/incant_render/src/motion/tests.rs",
+   "proposed_blob": "80dff08e3090a2242dd72a90019a1f49bd264dcc",
+   "proposed_sha256": "015ccc81d4fa6303776078a7ecee68976ed2192db94959b2821bfdd5be79f05f",
+   "removed": 2
+  },
+  {
+   "added": 8,
+   "base_blob": "76c6e26c4eb4d88ffb6e4e841c40c5261b800f6d",
+   "base_sha256": "7b3ddefbef62fb24e93122ce9f8cd52c1b9b7f61d2a48f1a4c5a4a8f8cdffa39",
+   "changed": true,
+   "path": "crates/incant_render/src/retained.rs",
+   "proposed_blob": "2dab7bcbf4dc13363c0b6d558a8d6843a0dc790d",
+   "proposed_sha256": "af138afbbb4aa33a67fd23eaa42cd1153df4358d24205fc12455feeff5c0e1b1",
+   "removed": 2
+  },
+  {
+   "added": 25,
+   "base_blob": "28ed7fde7ddeb692eed25e14337e55ebab8d4c1d",
+   "base_sha256": "41d80973344b080d3608d1306dba7d7a08a3b2746fb737d22e30e5f9b496a4dd",
+   "changed": true,
+   "path": "crates/incant_render/src/temporal/jitter.rs",
+   "proposed_blob": "9e994f3be22a7eb1bfe12e88d9afde1f8aad9ed8",
+   "proposed_sha256": "b57bfd504d8511ba9445db25eafa04f21acb9ad28de7c94211cfbe30ddec39ce",
+   "removed": 2
+  },
+  {
+   "added": 8,
+   "base_blob": "0b142dbc55dffe9c2125e768cb103e0637291c0c",
+   "base_sha256": "5665df3ad9395fed273e1057c31acef2fe482fdc77edf7ce743804a00c99257e",
+   "changed": true,
+   "path": "crates/incant_render/src/upscaling/device_tests.rs",
+   "proposed_blob": "e3278b798d0db395be6f7a3ed33b86c7d5a7f92c",
+   "proposed_sha256": "505ecca4e930eb307c2ebca6228262ca8b645389dc4e95343327fff2e6b8cfb2",
+   "removed": 1
+  },
+  {
+   "added": 45,
+   "base_blob": "18484b3ab10d7c51f78b68db067612b73de7b228",
+   "base_sha256": "65c64e6c1510f56fe8fd3d999fa45229d61165d70677d4f28531bcaed14107b8",
+   "changed": true,
+   "path": "crates/incant_render/src/upscaling/owner.rs",
+   "proposed_blob": "2164824c66edee5dbf45ec268307ab2670176f11",
+   "proposed_sha256": "078f8d4b852be5967a4712e2b91a76e75404bd0ce15fcaa2bdf36381b21164cd",
+   "removed": 1
+  },
+  {
+   "added": 17,
+   "base_blob": "70824a1e1fde3cd0d1b5a73db0462008dbe1d402",
+   "base_sha256": "40d3f0465934ca0dd252d57953c7e41457dfbfdbab6c87070ea20af99f9347dc",
+   "changed": true,
+   "path": "crates/incant_render/src/upscaling/owner_device_tests.rs",
+   "proposed_blob": "f9fb45045d017a0a2990fabe07adea8e54daaefd",
+   "proposed_sha256": "3b80226ed13602ebb699fc71ebb0663a31d51d0029cdd53fcccb23c3fe5f2dbc",
+   "removed": 0
+  },
+  {
+   "added": 4,
+   "base_blob": "f202ef11628d53e640f1d1867b07a167b936144f",
+   "base_sha256": "f87cf1506ab43ffbe99d5dc95cc6aab2d2d3ed9816230a08e4d066c528741f7a",
+   "changed": true,
+   "path": "crates/incant_render/src/upscaling/plan.rs",
+   "proposed_blob": "f3afcea628955db1d85b2a5b5263dfdefa667743",
+   "proposed_sha256": "a5eb8c9f79192a66e3332861ed14c778f3a8ac9d53a98892fc16009d0adf2b77",
+   "removed": 3
+  },
+  {
+   "added": 101,
+   "base_blob": "70c33d23ef18fac6b8c4ac3d7c25e0b18abdc132",
+   "base_sha256": "296fe89066865c4feff4d486506d762a4955a8351aa3f83aa0eff72ba375fc03",
+   "changed": true,
+   "path": "crates/incant_render/src/upscaling/resolve.wgsl",
+   "proposed_blob": "3c5fc127024b35dadeb2822d200dbad66114b719",
+   "proposed_sha256": "54200022c47e839895a6d54bd1028d056335f1548c31234e3645cae12b97354b",
+   "removed": 82
+  },
+  {
+   "added": 171,
+   "base_blob": "94b217799af6d03e69ae4e1fe50c821b09c10a5a",
+   "base_sha256": "23c094e20e62bba3da35fca373457024cfe5405c2be042802493bbfc1cea4c9f",
+   "changed": true,
+   "path": "crates/incant_render/src/upscaling/resolve_owner.wgsl",
+   "proposed_blob": "599e9b8b2e7a35db36c9f1892ef59efa663d4f8e",
+   "proposed_sha256": "5fd8449669559e154b740b53e33fec9035277147089878fe7e99219a0509c3aa",
+   "removed": 164
+  },
+  {
+   "added": 61,
+   "base_blob": "cc36c0d63fe9e5ba46621f13f512b8d64fdb12fd",
+   "base_sha256": "2b06ec041bc75e2f0b32a1ea2a20acdfc556e8e5bee155026d99b401a82fdd82",
+   "changed": true,
+   "path": "crates/incant_render/src/upscaling/system.rs",
+   "proposed_blob": "a53ec4f87e7bc9655ae396cf1e55f0e86385fbb0",
+   "proposed_sha256": "31ff953d7c1fbea0533faea3c4b00c801c0fc0bd5627fc7c597db70579703b50",
+   "removed": 25
+  },
+  {
+   "added": 12,
+   "base_blob": "372596a85a61c2edcc2b39674b26ce7e0148ad54",
+   "base_sha256": "19bd758883610efcec537bb1ce41db05f5e08efe39fcc5358841c8d16a02f094",
+   "changed": true,
+   "path": "crates/incant_render/src/upscaling/targets.rs",
+   "proposed_blob": "bc3748bdaabc5fba880be74430b6fedf6b6f2cf1",
+   "proposed_sha256": "8f4f3c5a244d86f07580829e24705bc6f1f6896855bf894b34e068f9d82d72a6",
+   "removed": 1
+  },
+  {
+   "added": 10,
+   "base_blob": "97266ec1e94277cc914fd3313c1c77763ba06b4d",
+   "base_sha256": "d3d63038937fb444caa96fe9c7fb2d8c273c121fecf57a8ded2967d38d9f4eac",
+   "changed": true,
+   "path": "crates/incant_render/src/upscaling/tests.rs",
+   "proposed_blob": "e805b60db650eb2a453e9dd595e03d9d5006e60d",
+   "proposed_sha256": "7b5daed21b62aa5c8e162a40cb735c18f038279597845029868e515eb7a3e84a",
+   "removed": 8
+  }
+ ],
+ "git_apply_cached_check_against_76be": true,
+ "git_apply_stderr": "",
+ "patch": {
+  "bytes": 65882,
+  "files": 15,
+  "path": "reconstruction_r4.patch",
+  "sha256": "8d5550a6ab0d026d3c322ef500d770276e947f7aed98fa10b3a5c753607facae"
+ },
+ "production": "76be9608e99bf089fcb1e0908827330f70c28ac1",
+ "python_reapply_reproduces_proposed_files": true,
+ "scope": "patch construction and applicability only; no build, test or GPU"
+}

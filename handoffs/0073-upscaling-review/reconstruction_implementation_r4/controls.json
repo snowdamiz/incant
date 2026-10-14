@@ -1,0 +1,115 @@
+{
+ "all_checks_pass": true,
+ "checks": [
+  {
+   "check": "quarter -> full: associated mass 396 x 1/16 = 24.75 (both programs)",
+   "detail": 24.75,
+   "ok": true
+  },
+  {
+   "check": "mutation: restoring the per-tap current cap gives 6.1875 and is detected",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "associated H = 396/416 = 0.951923...",
+   "detail": 0.9519230769230769,
+   "ok": true
+  },
+  {
+   "check": "mutation: per-tap cap 99 changes H to 99/119 and is detected",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "full -> quarter: 50 x 16 = 800 then capped once to 396",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "outer HDR green at another depth makes support ambiguous: no reusable history",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "its current colour is kept, not erased",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "mutation: checking only the inner 2x2 would admit history (detected)",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "red + clear at equal weight is (0.5,0,0,0.5)",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "zero-mass bright tap contributes nothing to H",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "partial no-surface history ages 1..8 and is refused at 8 (independent of reaction)",
+   "detail": [
+    1.0,
+    2.0,
+    3.0,
+    4.0,
+    5.0,
+    6.0,
+    7.0,
+    8.0,
+    null
+   ],
+   "ok": true
+  },
+  {
+   "check": "mutation: a non-incrementing age would persist forever (detected)",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "primary-owner surface evidence resets age; another owner's does not",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "non-integer or out-of-range age refuses",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "nonfinite or negative mass refuses",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "invalid origin (native frame, new allocation) refuses",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "changed secondary rejects at 2^-20",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "eight distinct offsets per axis, zero mean",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "a 0.05-px 45-degree line can miss all 8 samples (axis stratification only)",
+   "detail": [
+    0.0,
+    0.015625,
+    0.03125
+   ],
+   "ok": true
+  }
+ ],
+ "scope": "transcription of resolve.wgsl and resolve_owner.wgsl rules; not a render or gate"
+}
