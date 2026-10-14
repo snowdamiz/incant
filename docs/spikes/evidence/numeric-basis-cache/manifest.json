@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "source_commit": "66c5d14761caf61f5d2e3be90313bc5dc27bf715",
+  "base_commit": "03bc4b987f3e553249846c4cfce991793d4d2c48",
+  "archive_sha256": "c9d8bcca4c2cec1785e5f6ea41c11eb74961e647d0d5cc7ec4a98b435de211d6",
+  "records": 73,
+  "portable_payloads": 69,
+  "source_freeze": "source-002/freeze.json",
+  "scope": "Scoped native correctness and lint; no performance benefit or shipping acceptance yet",
+  "checks": 10,
+  "new_tests_per_mode": 5,
+  "inherited_column_tests_per_mode": 7,
+  "modes": [
+    "physics-deterministic",
+    "physics-fast-simd8"
+  ],
+  "limits": [
+    "No shipping comparison, GPU, full runtime suite or gate result.",
+    "Four immediate executable copies are external hash-bound bytes; logs/source are portable.",
+    "Source001 has a test closure mutability omission caught before compilation; source002 fixes only that binding.",
+    "The cache is per-call fixed stack storage, not saved state; all validation and parent/root multiplication remain unchanged.",
+    "Cursor/inspector candidates from the failed combined experiment are excluded."
+  ]
+}
