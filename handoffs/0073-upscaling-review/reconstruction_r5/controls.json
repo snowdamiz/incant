@@ -52,12 +52,21 @@
    "ok": true
   },
   {
-   "check": "8-phase aliasing residual amplitude: R5 0.036 vs 825ff 0.079 (contrast 0.5) and 0.152 (contrast 1)",
+   "check": "exact recurrence: k 0.9375 / 0.875 / 1; pre-add W 15 / 7 / 36; current fractions 1/16, 1/8, 1/37",
    "detail": [
-    0.0358,
-    0.079,
-    0.1522
+    14.99999999990783,
+    6.9999999999999964,
+    36.00000000000001
    ],
+   "ok": true
+  },
+  {
+   "check": "linearized constant-reaction model (not measured aliasing): 8-phase transfer amplitude R5 vs 825ff",
+   "detail": {
+    "825ff_contrast_0.5_W15": 0.084,
+    "825ff_contrast_1_W7": 0.172,
+    "r5_W36": 0.0358
+   },
    "ok": true
   },
   {
@@ -71,12 +80,12 @@
    "ok": true
   },
   {
-   "check": "perspective dolly spread 0.04 px at r=2 is admitted (slack 0.125 px)",
+   "check": "synthetic 0.04 px motion spread at r=2 is admitted by the empirical slack 0.125 px",
    "detail": null,
    "ok": true
   },
   {
-   "check": "mutation: 1/256 px refuses that same motion (detected)",
+   "check": "mutation: 1/256 px refuses that same synthetic spread (detected)",
    "detail": null,
    "ok": true
   },
@@ -106,7 +115,7 @@
    "ok": true
   },
   {
-   "check": "floor derivation: -log2(sqrt(8 samples per texel)) = -1.5",
+   "check": "-1.5 is recorded as an empirical visual candidate, not a proven band limit",
    "detail": null,
    "ok": true
   }

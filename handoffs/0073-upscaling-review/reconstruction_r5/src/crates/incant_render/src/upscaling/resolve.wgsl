@@ -78,10 +78,11 @@ fn current_evidence(p:vec2f)->Evidence {
 // and whose previous depth is compatible with the anchor's (the existing depth
 // tolerance, not widened). Otherwise the pixel keeps its current evidence but
 // reuses no history.
-// The slack is one step of the upscale jitter lattice (1/16 internal pixel) in
-// output pixels: accumulated positions are resolved only to that step, so smaller
-// disagreement is below the history's positional resolution. (1/256 output pixel
-// rejected nearly all perspective motion and left moving content current-only.)
+// The slack, 1/16 internal pixel in output pixels, is an empirical visual
+// candidate: 1/256 output pixel left nearly all perspective motion current-only in
+// the R4 images. It is not a positional-quantization bound (jitter positions do not
+// quantize reconstructed history) and not a same-motion proof: distinct same-depth
+// surfaces moving by less than the slack can share one history. Pixels pending.
 fn motion_slack()->f32 {return frame.output.z/frame.source.z/16.0;}
 fn motion_support_coherent(p:vec2f,a:vec4f)->bool {
     let c=vec2i(floor(source_position(p)));

@@ -35,9 +35,16 @@ def equilibrium(m, r, history, fresh, lo, hi, old_rule=False, frames=400):
     return w
 
 
+def effective(c, r, k):
+    """Pre-add effective history weight W = min(C, cap) * k used by the blend."""
+    return min(c, cap(r)) * k
+
+
 def residual(w, m=1.0, phases=8):
-    """Amplitude of a phase-periodic (8-phase) error left by exponential accumulation with
-    per-frame fraction a = m/(w+m): |a / (1 - (1-a) e^{i 2pi/8})|."""
+    """Constant-reaction LINEARIZED scalar model only (not measured aliasing, not the full
+    nonlinear shader): transfer amplitude of an 8-phase periodic input through the recursion
+    y' = (W*y + m*x)/(W + m), i.e. current fraction a = m/(W + m) with W the PRE-ADD weight:
+    |a / (1 - (1-a) e^{i 2pi/8})|."""
     a = m / (w + m)
     return abs(a / (1 - (1 - a) * cmath.exp(2j * math.pi / phases)))
 
@@ -85,9 +92,15 @@ def main():
     check("mutation: 825ff rule at |H - fresh| = 0.5 holds mass at 16, not 36 (detected)", abs(w_old - 16.0) < 1e-6, w_old)
     w_full = equilibrium(m, r, history=0.0, fresh=1.0, lo=0.0, hi=1.0, old_rule=True)
     check("825ff rule at full contrast |H - fresh| = 1 holds mass at 8 (one jitter cycle)", abs(w_full - 8.0) < 1e-6, w_full)
-    check("8-phase aliasing residual amplitude: R5 0.036 vs 825ff 0.079 (contrast 0.5) and 0.152 (contrast 1)",
-          residual(w_new) < 0.04 and residual(w_old) > 2 * residual(w_new) and residual(w_full) > 4 * residual(w_new),
-          [round(residual(w_new), 4), round(residual(w_old), 4), round(residual(w_full), 4)])
+    k_half, k_full = 1 - STRENGTH * 0.5 / THRESHOLD, 1 - STRENGTH * 1.0 / THRESHOLD
+    W_new, W_half, W_full = effective(w_new, r, 1.0), effective(w_old, r, k_half), effective(w_full, r, k_full)
+    check("exact recurrence: k 0.9375 / 0.875 / 1; pre-add W 15 / 7 / 36; current fractions 1/16, 1/8, 1/37",
+          k_half == 0.9375 and k_full == 0.875 and abs(W_half - 15) < 1e-6 and abs(W_full - 7) < 1e-6
+          and abs(W_new - 36) < 1e-9 and abs(m / (W_half + m) - 1 / 16) < 1e-9
+          and abs(m / (W_full + m) - 1 / 8) < 1e-9 and abs(m / (W_new + m) - 1 / 37) < 1e-9, [W_half, W_full, W_new])
+    amps = [round(residual(W_new), 4), round(residual(W_half), 4), round(residual(W_full), 4)]
+    check("linearized constant-reaction model (not measured aliasing): 8-phase transfer amplitude R5 vs 825ff",
+          residual(W_new) < residual(W_half) < residual(W_full), {"r5_W36": amps[0], "825ff_contrast_0.5_W15": amps[1], "825ff_contrast_1_W7": amps[2]})
     lo, hi = 0.0, 0.2
     rx = reaction(1.0, 0.1, lo, hi)
     check("true change (history 1.0 outside current range [0, 0.2]) still reacts: reaction 0.2, clamp to 0.2",
@@ -95,9 +108,9 @@ def main():
     check("reaction 0 cannot keep out-of-range stale colour: the clamp bounds it every frame",
           min(max(5.0, 0.0), 0.3) == 0.3)
     # 2. Coherence slack.
-    dolly = [0.0, 0.02, 0.04, 0.03, 0.01, 0.0, 0.02, 0.04, 0.03]       # output px, perspective spread
-    check("perspective dolly spread 0.04 px at r=2 is admitted (slack 0.125 px)", coherent(dolly, 2.0))
-    check("mutation: 1/256 px refuses that same motion (detected)", not coherent(dolly, 2.0, old=True))
+    spread = [0.0, 0.02, 0.04, 0.03, 0.01, 0.0, 0.02, 0.04, 0.03]      # SYNTHETIC output-px spread, not a projection
+    check("synthetic 0.04 px motion spread at r=2 is admitted by the empirical slack 0.125 px", coherent(spread, 2.0))
+    check("mutation: 1/256 px refuses that same synthetic spread (detected)", not coherent(spread, 2.0, old=True))
     check("independent coplanar mover (0.1 UV x 1920 = 192 px) still refused", not coherent([0.0] * 8 + [0.1 * 1920], 2.0))
     check("boundary: a difference equal to the slack is refused (>=)", not coherent([0.125], 2.0) and coherent([0.1249], 2.0))
     check("slack scales with the ratio: 1/16 px at r=1, 1/4 px at r=4", slack(1.0) == 0.0625 and slack(4.0) == 0.25)
@@ -106,7 +119,8 @@ def main():
           and lod_bias(4, old=True) == -2.0 and abs(lod_bias(5, old=True) + 1.678) < 1e-3)
     check("bias unchanged at 6/16..16/16 (8/16 stays -1, 16/16 stays 0)",
           all(lod_bias(n) == lod_bias(n, old=True) for n in range(6, 17)) and lod_bias(8) == -1.0 and lod_bias(16) == 0.0)
-    check("floor derivation: -log2(sqrt(8 samples per texel)) = -1.5", abs(-math.log2(math.sqrt(8)) + 1.5) < 1e-12)
+    check("-1.5 is recorded as an empirical visual candidate, not a proven band limit",
+          "empirical" in jit and "sqrt(8)" not in jit)
     out = {"scope": "scalar transcriptions of the R5 src mirrors; not a render, compile or appearance claim",
            "config": {"history_weight": H_W, "reactive_threshold": THRESHOLD, "reactive_strength": STRENGTH},
            "checks": CHECKS, "all_checks_pass": all(c["ok"] for c in CHECKS)}

@@ -30,7 +30,13 @@
  },
  "controls": {
   "all_pass": true,
-  "checks": 21
+  "checks": 22
+ },
+ "correction": {
+  "lod_floor": "empirical visual candidate, not a proven band limit",
+  "motion_slack": "empirical visual candidate; not positional quantization or same-motion proof; synthetic spread",
+  "reaction_model": "constant-reaction linearized: W=min(C,cap)*k; W 15/7/36, fractions 1/16, 1/8, 1/37; amplitudes 0.084/0.172/0.036",
+  "supersedes": "329bfc6a rationale where conflicting"
  },
  "gpu_executions": 0,
  "images_created": 0,
@@ -53,7 +59,7 @@
   ],
   "git_apply_check_against_825ff_copies": true,
   "path": "repair.patch",
-  "sha256": "f0987c43aafe19b7f334dd6e86a8799efa7cf0ee40273ef35f7170be03830b7b"
+  "sha256": "8e226ad36180561868b899b54188fabfa2a4bcf692bc0ec43df5e7b1e6bc8253"
  },
  "pending": [
   "compile/clippy/fmt",
@@ -69,12 +75,12 @@
  "trusted_pins": {
   "Upscale": {
    "baseline_pin": "de4df804c0fd93fd13c849575cbf4c4fc6184baa9988adb21c535273cfd1d3a3",
-   "candidate_pin": "5fd02204accb895f32f09be638f5ac1d9629bbc524b75591cbc6880b746c139e",
+   "candidate_pin": "ac7ecdf49b844713e1b35666cbea8bf7a4789edba3b12a1dd1787e88d5845e5d",
    "pin_matches_candidate_source": true
   },
   "UpscaleOwner": {
    "baseline_pin": "0897bfd2ed5e8f8b8f9fc0b99d3e2c528fb29e677635e188da835405ffedeb81",
-   "candidate_pin": "d293a2fc0c4857a997222b5989309d1c936da041c511ea2b08b6a9595fec4933",
+   "candidate_pin": "81eb48402b9d1c92b3b64b92bbae833cb711348152654377d21f3ba5c34645da",
    "pin_matches_candidate_source": true
   }
  }

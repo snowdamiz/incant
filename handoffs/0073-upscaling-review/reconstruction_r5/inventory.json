@@ -30,7 +30,7 @@
   },
   {
    "baseline_sha256": "02ff2b3b5123fbcc797bf435d09875b85ad7b0f2f0c250a036052eb52ef4b25f",
-   "candidate_sha256": "8e592195ea58eb7e31ec6ca2ef453380aa4e8475c7b11851e1884f5eabf3967b",
+   "candidate_sha256": "145604f142bc0221426a16ec49af9c5420f7c70348095306447dd571cb6acfff",
    "changed": true,
    "path": "crates/incant_render/src/temporal/jitter.rs"
   },
@@ -48,19 +48,19 @@
   },
   {
    "baseline_sha256": "a0853f1c934a3e68fa5a69904c4308e53176ae75d32af9bd1065236fdef43607",
-   "candidate_sha256": "e84d02d4ce0e219eecfc6aedff6e78627f4be0122c7f3990280637cb4d9a4614",
+   "candidate_sha256": "75b6efc304de77c20d965503dab83e16460b6f8067a68f6fda039675adb755c1",
    "changed": true,
    "path": "crates/incant_render/src/upscaling/resolve.wgsl"
   },
   {
    "baseline_sha256": "dc43ac2aea2c057cead64cb97bef1fb2429b8eadde52c20a5605e4d7487a51fe",
-   "candidate_sha256": "98274ccb4f6a564c5cff5e0bed7de2af300dcce13f19e3a51ccfb49941fdf7c2",
+   "candidate_sha256": "24bd8a123b9ec66e6e6ce4c4ece4f34df66d3eb673b3a66b10ef5fff2fcf916c",
    "changed": true,
    "path": "crates/incant_render/src/upscaling/resolve_owner.wgsl"
   },
   {
    "baseline_sha256": "ceb8d5c1e73a170158af54c94873def1e1346da00c7230c0025d1a1741c5b216",
-   "candidate_sha256": "49a005167b09fad41c6f406402cab5fe59f5c3f4476b1cf364f1768e31a58051",
+   "candidate_sha256": "eb7c0717f129e65910ee58f41414bb317f6a7751d8c73c3156fa4d1bfee4fe9e",
    "changed": true,
    "path": "crates/incant_shader_cook/src/temporal/mod.rs"
   }
@@ -75,19 +75,19 @@
   "crates/incant_render/src/upscaling/resolve_owner.wgsl",
   "crates/incant_shader_cook/src/temporal/mod.rs"
  ],
- "patch_sha256": "f0987c43aafe19b7f334dd6e86a8799efa7cf0ee40273ef35f7170be03830b7b",
+ "patch_sha256": "8e226ad36180561868b899b54188fabfa2a4bcf692bc0ec43df5e7b1e6bc8253",
  "production": "72b1ba8ec351e86d66a90c401e0a75a530633616",
  "scope": "source identity and patch applicability only; no build, cook, GPU or image",
  "source_commit": "825ff047284e84252d00f786a7b14cb6ecb44293",
  "trusted_pins": {
   "Upscale": {
    "baseline_pin": "de4df804c0fd93fd13c849575cbf4c4fc6184baa9988adb21c535273cfd1d3a3",
-   "candidate_pin": "5fd02204accb895f32f09be638f5ac1d9629bbc524b75591cbc6880b746c139e",
+   "candidate_pin": "ac7ecdf49b844713e1b35666cbea8bf7a4789edba3b12a1dd1787e88d5845e5d",
    "pin_matches_candidate_source": true
   },
   "UpscaleOwner": {
    "baseline_pin": "0897bfd2ed5e8f8b8f9fc0b99d3e2c528fb29e677635e188da835405ffedeb81",
-   "candidate_pin": "d293a2fc0c4857a997222b5989309d1c936da041c511ea2b08b6a9595fec4933",
+   "candidate_pin": "81eb48402b9d1c92b3b64b92bbae833cb711348152654377d21f3ba5c34645da",
    "pin_matches_candidate_source": true
   }
  }

@@ -12,9 +12,31 @@
 - Candidate: `825ff047284e84252d00f786a7b14cb6ecb44293` (production-equivalent `72b1ba8ec351e86d66a90c401e0a75a530633616`).
 - Every mirror's baseline copy was checked against `baseline.json` and the 825ff Git object by `inventory.py`.
 
-**Patch:** `repair.patch`, sha256 `f0987c43aafe19b7f334dd6e86a8799efa7cf0ee40273ef35f7170be03830b7b`, 7 files.
+**Patch:** `repair.patch`, sha256 `8e226ad36180561868b899b54188fabfa2a4bcf692bc0ec43df5e7b1e6bc8253`, 7 files.
 - It passes `git apply --check` against the exact 825ff copies in `/tmp/incant-0073-r5-*`.
 - Applying it reproduces the `src/` mirrors byte for byte (`inventory.json`).
+
+## Narrow review correction (supersedes the rationale below where they conflict)
+
+- **LOD floor −1.5:** an *empirical visual candidate* chosen after the R4 4/16 artefacts. It is not a proven alias-free or optimal band limit. Eight correlated jitter positions imply no sampling theorem, so the earlier √8-per-axis argument is withdrawn from the source comments, controls and rationale.
+- **Motion slack r/16:** also an *empirical visual candidate*.
+  - It is not a positional-quantization bound, because jitter positions do not quantize reconstructed history.
+  - It is not a same-motion proof: distinct same-depth surfaces moving by less than the slack can share one history.
+  - The 0.04-px spread in the controls is **synthetic**, not a projected dolly.
+- **Reaction model:** the controls use a **constant-reaction linearized scalar model**, not measured aliasing or the full nonlinear shader.
+  - The pre-add effective history is `W = min(C, cap)·k`.
+  - At |H−fresh| = 0.5: k = 0.9375, C = 16, W = 15, current fraction 1/16, 8-phase transfer amplitude 0.084.
+  - At contrast 1: k = 0.875, C = 8, W = 7, fraction 1/8, amplitude 0.172.
+  - R5 cap: C = 36, k = 1, W = 36, fraction 1/37, amplitude 0.036.
+  - The earlier figures (0.079 and 0.152) used C in place of W and are corrected.
+- **Still open, not repaired:**
+  - ordinary-UP thin lines over clear support;
+  - current-only reconstruction at low scale (4/16 entry, post-cut).
+- **No pixel acceptance:** the R4 FAIL stands.
+- **Hashes:**
+  - patch `8e226ad36180561868b899b54188fabfa2a4bcf692bc0ec43df5e7b1e6bc8253`;
+  - Upscale pin `ac7ecdf49b844713e1b35666cbea8bf7a4789edba3b12a1dd1787e88d5845e5d`;
+  - UpscaleOwner pin `81eb48402b9d1c92b3b64b92bbae833cb711348152654377d21f3ba5c34645da`.
 
 ## What the R4 pixels showed, and what each change addresses
 
@@ -101,8 +123,8 @@ So the defect lies in that shared branch's accumulation, not in the estimator's 
 
 | Program | 825ff | R5 |
 |---|---|---|
-| Upscale | `de4df804…d3a3` | `5fd02204accb895f32f09be638f5ac1d9629bbc524b75591cbc6880b746c139e` |
-| UpscaleOwner | `0897bfd2…eb81` | `d293a2fc0c4857a997222b5989309d1c936da041c511ea2b08b6a9595fec4933` |
+| Upscale | `de4df804…d3a3` | `ac7ecdf49b844713e1b35666cbea8bf7a4789edba3b12a1dd1787e88d5845e5d` |
+| UpscaleOwner | `0897bfd2…eb81` | `81eb48402b9d1c92b3b64b92bbae833cb711348152654377d21f3ba5c34645da` |
 
 Both are written in the existing rustfmt layout, and both match the mirrors.
 
@@ -130,7 +152,7 @@ Both are written in the existing rustfmt layout, and both match the mirrors.
 ```sh
 cd handoffs/0073-upscaling-review/reconstruction_r5
 python3 -I -B inventory.py --checkout /Users/andreyyurlov/.codex/worktrees/owner-quality-repair/incant   # patch applies; pins match
-python3 -I -B controls.py --out controls.json                                                              # checks=21 failed=0
+python3 -I -B controls.py --out controls.json                                                              # checks=22 failed=0
 ```
 
 ## Limits
