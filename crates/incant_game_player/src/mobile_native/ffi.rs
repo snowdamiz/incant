@@ -142,12 +142,15 @@ pub unsafe extern "C" fn incant_apple_open_v1(
     logical_height: f32,
     output: *mut u64,
 ) -> i32 {
-    if layer.is_null() || package.is_null() || output.is_null() || !(1..=4096).contains(&length) {
+    if output.is_null() {
         return INVALID;
     }
-    // SAFETY: the bounded writable output and readable path are caller-owned.
+    // SAFETY: the bounded writable output is caller-owned, including on failure.
     unsafe {
         output.write(0);
+    }
+    if layer.is_null() || package.is_null() || !(1..=4096).contains(&length) {
+        return INVALID;
     }
     // SAFETY: pthread_main_np has no preconditions on Apple platforms.
     if unsafe { pthread_main_np() } == 0 {
@@ -311,6 +314,25 @@ mod tests {
         assert_eq!(slot.get(10), Err(STALE));
         slot.close(10).unwrap();
         assert_eq!(slot.get(11), Ok(&mut 3));
+    }
+    #[test]
+    fn failed_open_clears_valid_output_before_rejecting_arguments() {
+        let mut handle = 42;
+        // SAFETY: output is writable; null resource pointers are rejected before use.
+        let status = unsafe {
+            incant_apple_open_v1(
+                std::ptr::null_mut(),
+                std::ptr::null(),
+                0,
+                0,
+                0,
+                0.,
+                0.,
+                &mut handle,
+            )
+        };
+        assert_eq!(status, INVALID);
+        assert_eq!(handle, 0);
     }
     #[test]
     fn ffi_admission_and_reentrancy_do_not_acquire_native_resources() {
