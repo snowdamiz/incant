@@ -4087,6 +4087,7 @@ dependencies = [
  "jni 0.22.4",
  "ndk",
  "ndk-context",
+ "parking_lot",
  "pollster",
  "serde",
  "serde_json",

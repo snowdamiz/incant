@@ -95,6 +95,7 @@ gilrs = { version = "=0.11.2", optional = true }
 incant_cook = { path = "../incant_cook", default-features = false, features = ["script"] }
 
 [dev-dependencies]
+parking_lot = "=0.12.5"
 incant_render_data.workspace = true
 incant_script = { workspace = true, features = ["compiler"] }
 incant_types.workspace = true

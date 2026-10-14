@@ -3,7 +3,7 @@ use serde::Serialize;
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize)]
 #[serde(rename_all = "snake_case")]
-pub(super) enum Role {
+pub(in crate::window) enum Role {
     Initial,
     Background,
     UiResize,
@@ -11,7 +11,7 @@ pub(super) enum Role {
 }
 #[derive(Clone, Copy, Debug, Serialize)]
 #[repr(u8)]
-pub(super) enum Boundary {
+pub(in crate::window) enum Boundary {
     Start,
     Focus,
     Suspend,
@@ -26,7 +26,7 @@ pub(super) enum Boundary {
 }
 #[derive(Clone, Copy, Debug)]
 #[repr(u8)]
-pub(super) enum Failure {
+pub(in crate::window) enum Failure {
     Timeout,
     Occluded,
     Outdated,
@@ -39,7 +39,7 @@ pub(super) enum Failure {
 }
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize)]
 #[serde(rename_all = "snake_case")]
-pub(super) enum Status {
+pub(in crate::window) enum Status {
     Open,
     Deferred,
     RefreshCompleted,
