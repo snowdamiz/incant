@@ -53,16 +53,16 @@ export default {
     for (const chunk of context.chunks) {
       const { values, sentinelRow } = rowsFor(chunk.ids, owned);
       const transforms = chunk.transforms, stride = chunk.transformStride;
-      for (let index = 0; index < values.length; index += 4) {
-        const offset = values[index] * stride;
-        transforms[offset] = values[index + 1] + phase;
-        transforms[offset + 1] = values[index + 2];
-        transforms[offset + 2] = values[index + 3] - phase;
+      for (let index = 0, length = values.length; index < length;) {
+        const offset = values[index++] * stride;
+        transforms[offset] = values[index++] + phase;
+        transforms[offset + 1] = values[index++];
+        transforms[offset + 2] = values[index++] - phase;
         // Read back every actual write; the checksum must detect an omitted write.
         checksumX += transforms[offset];
         checksumZ += transforms[offset + 2];
-        count++;
       }
+      count += values.length / 4;
       if (sentinelRow !== undefined) { sentinel = chunk; sentinelOffset = sentinelRow * stride; }
     }
     if (count !== COUNT || !sentinel) throw Error('Core stress bulk coverage is incomplete');

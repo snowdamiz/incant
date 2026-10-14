@@ -63,11 +63,22 @@ for (const invalid of ['few', 'ordinal', 'duplicate', 'extra-prop', 'missing-row
   if (invalid === 'missing-row') c.chunks[0].ids = Object.freeze(c.chunks[0].ids.map((v, i) => i === 10 ? 'not-owned' : v));
   assert.throws(() => load().update(c), /Core stress/);
 }
-// An omitted actual write must fail the checksum observable, even with count intact.
-const broken = source.replace('transforms[offset] = values[index + 1] + phase;', '/* omitted x write */');
-assert.notEqual(broken, source);
-const c = context(2); load(broken).update(c);
-assert.ok(Math.abs(read(c, id(0))[1] - sentinel(2)[1]) > 1);
+// Every omitted column fails row validation; x/z also fail the actual-readback
+// checksum, even with cursor advancement and coverage count intact.
+for (const [statement, column] of [
+  ['transforms[offset] = values[index++] + phase;', 0],
+  ['transforms[offset + 1] = values[index++];', 1],
+  ['transforms[offset + 2] = values[index++] - phase;', 2],
+]) {
+  // Keep cursor advancement and coverage count intact: only the actual write
+  // disappears. Readback checks must not substitute the intended value.
+  const broken = source.replace(statement, 'index++; /* omitted write */');
+  assert.notEqual(broken, source);
+  const c = context(2); load(broken).update(c);
+  assert.equal(read(c, id(0))[0], 9999);
+  assert.notEqual(read(c, id(1))[column], expected(2, 1)[column]);
+  if (column !== 1) assert.ok(Math.abs(read(c, id(0))[column === 0 ? 1 : 2] - sentinel(2)[column === 0 ? 1 : 2]) > 1);
+}
 
 // A new valid attachment snapshot may keep the same world rows but change the
 // owned ordinal mapping. Cached metadata must not preserve the old assignments.
@@ -82,4 +93,4 @@ changed.instances[1].props.ordinal = 97;
 const beforeRejected = changed.chunks.map(chunk => Buffer.from(chunk.transforms.buffer).toString('hex'));
 assert.throws(() => behavior.update(changed), /Core stress membership/);
 assert.deepEqual(changed.chunks.map(chunk => Buffer.from(chunk.transforms.buffer).toString('hex')), beforeRejected);
-console.log('Core stress controls passed: all 9999 rows/four phases, replaced row and attachment snapshots, detached old views, changed stride, five refusals and omitted-write mutation.');
+console.log('Core stress controls passed: all 9999 rows/four phases, replaced row and attachment snapshots, detached old views, changed stride, five refusals and three omitted-write mutations.');
