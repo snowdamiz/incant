@@ -30,14 +30,18 @@ fn explicit_pin_is_atomic_reversible_provenanced_and_replayed() {
     assert_ne!(before, after);
     assert_eq!(bus.revision(), 1);
     drop(bus);
-    let mut bus = CommandBus::persistent(&path, project).unwrap();
+    let mut bus = CommandBus::persistent(&path, project.clone()).unwrap();
     assert_eq!(bus.project().canonical_text().unwrap(), after);
     bus.undo().unwrap();
     assert_eq!(bus.project().canonical_text().unwrap(), before);
     bus.redo().unwrap();
     assert_eq!(bus.project().canonical_text().unwrap(), after);
-    let stable = std::fs::read(&path).unwrap();
     let revision = bus.revision();
+    // Windows enforces the live journal's exclusive lock for separate readers.
+    drop(bus);
+    let stable = std::fs::read(&path).unwrap();
+    let mut bus = CommandBus::persistent(&path, project.clone()).unwrap();
+    assert_eq!(bus.revision(), revision);
     for commands in [
         vec![Command::SetEngineVersion {
             requirement: EngineRequirement::parse(">=99.0.0").unwrap(),
@@ -61,12 +65,17 @@ fn explicit_pin_is_atomic_reversible_provenanced_and_replayed() {
         );
         assert_eq!(bus.revision(), revision);
         assert_eq!(bus.project().canonical_text().unwrap(), after);
+        drop(bus);
         assert_eq!(std::fs::read(&path).unwrap(), stable);
+        bus = CommandBus::persistent(&path, project.clone()).unwrap();
+        assert_eq!(bus.revision(), revision);
+        assert_eq!(bus.project().canonical_text().unwrap(), after);
     }
     assert!(matches!(
         bus.execute(vec![command], Actor::user("test"), "Stale", Some(0)),
         Err(CommandError::Conflict { .. })
     ));
+    drop(bus);
     assert_eq!(std::fs::read(&path).unwrap(), stable);
 }
 
@@ -76,8 +85,10 @@ fn review_binds_exact_source_identity_revision_and_candidate_without_writing() {
     let journal = dir.path().join("history.jsonl");
     let project = legacy();
     let source = format!(" {}\n", project.canonical_text().unwrap());
-    let mut bus = CommandBus::persistent(&journal, project).unwrap();
+    let bus = CommandBus::persistent(&journal, project.clone()).unwrap();
+    drop(bus);
     let old_journal = std::fs::read(&journal).unwrap();
+    let mut bus = CommandBus::persistent(&journal, project.clone()).unwrap();
     let plan = bus.review_engine_pin(&source, 0).unwrap();
     assert_eq!(
         plan.source_sha256,
@@ -93,8 +104,12 @@ fn review_binds_exact_source_identity_revision_and_candidate_without_writing() {
     assert!(!plan.file_migration_supported);
     assert_eq!(bus.revision(), 0);
     assert!(bus.history().is_empty());
+    drop(bus);
     assert_eq!(std::fs::read(&journal).unwrap(), old_journal);
     assert_eq!(std::fs::read_dir(dir.path()).unwrap().count(), 1);
+    let mut bus = CommandBus::persistent(&journal, project).unwrap();
+    assert_eq!(bus.revision(), 0);
+    assert!(bus.history().is_empty());
     let mut changed = bus.project().clone();
     changed.name = "Concurrent external edit".into();
     assert!(matches!(
