@@ -10,7 +10,8 @@ focused Mac controls pass, with four overlapping final-generation controls and
 strict lint. A later live-RPC test successor also passes its focused control and
 strict headless lint after closing each child before journal byte comparisons.
 The original hosted Windows failure, local cache failure and test
-lint failure remain retained. Final independent packet review is pending.
+lint failure remain retained. Final independent packet review is accepted; scoped publication awaits the
+exact-head hosted fast check.
 No CLI/RPC/editor route or older-format conversion is exposed; checkpoint33
 remains failed and frozen while its other workflows finish.
 [Current composition and evidence](docs/spikes/project-pin-main273.md).

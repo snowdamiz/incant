@@ -76,7 +76,9 @@ as a new execution.
 Root accepted producer source/execution (`47051d83…`). Independent successor
 source review (`813206f3…`) accepted the owned-handle observations and ordinary
 bus lifecycle, with the subsequently added Unix restriction required. Final
-current-main packet review is pending; there is no PR or merge claim yet.
+current-main packet review is accepted. The retained [root receipt](evidence/project-pin-main273/root-review.json)
+is SHA256 `9109f459f31d6d7b8712751c0913a4e5864a9dc0aab1bf9efd2ee61d6604d6e1`.
+Publication still requires the exact-head hosted fast check.
 
 Checkpoint33 stays failed and frozen until all original workflows finish. Local
 Mac success does not claim repaired Windows execution. A later reviewed main
