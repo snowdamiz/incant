@@ -1,0 +1,1480 @@
+{
+  "format": "incant-native-window-animated-model-workflow-v1",
+  "created_utc": "2026-10-14T20:52:47.090883+00:00",
+  "sources": {
+    "001": "d40b0594068d5e2bc3f73201a0d2474b2eaea94a",
+    "002": "d2add5f1c6feb612cab8d758785ef83eb914263c"
+  },
+  "base_main298": "1ebd80a43c95c49d7416ccef0906e696a1f7fdda",
+  "source_commits": [
+    "21550052d4c2c9ab01afa82e64b1b9164f268d80",
+    "d2add5f1c6feb612cab8d758785ef83eb914263c"
+  ],
+  "main298_merge": "d40b0594068d5e2bc3f73201a0d2474b2eaea94a",
+  "changed_paths": [
+    "editor/app/src/play/mod.rs",
+    "editor/app/src/play/probe.rs",
+    "editor/app/src/play/probe/asset_workflow.rs",
+    "editor/app/src/play/probe/asset_workflow/animation.rs",
+    "editor/app/src/play/probe/asset_workflow/kind.rs",
+    "editor/app/src/play/worker.rs",
+    "tools/native_editor_animation.py",
+    "tools/probes/native-editor-textures.py",
+    "tools/tests/test_native_editor_textures.py"
+  ],
+  "final_source_files": [
+    {
+      "path": "editor/app/src/play/mod.rs",
+      "bytes": 12484,
+      "sha256": "13db1dad0001474a97bc92abd9e84066db08ab30f57cde692fa200617fb21547"
+    },
+    {
+      "path": "editor/app/src/play/probe.rs",
+      "bytes": 12169,
+      "sha256": "a183f70c7a3f87d8e6d7ad294df1616bce459227451a2d271b2f6fe3109d7ff2"
+    },
+    {
+      "path": "editor/app/src/play/probe/asset_workflow.rs",
+      "bytes": 22268,
+      "sha256": "86fc38187373a17ee3434bddd665bf8ea50932dddf715de515e3e00f32e26658"
+    },
+    {
+      "path": "editor/app/src/play/probe/asset_workflow/animation.rs",
+      "bytes": 9078,
+      "sha256": "efb51262ba460014a7dc056626fc9c47cd2d92fcfcd40a8897aa969cfb772652"
+    },
+    {
+      "path": "editor/app/src/play/probe/asset_workflow/kind.rs",
+      "bytes": 4879,
+      "sha256": "27f80eea7f1f44074a43e6272abe49da6fb821d40ad1911bcef8cd77fc888713"
+    },
+    {
+      "path": "editor/app/src/play/worker.rs",
+      "bytes": 25565,
+      "sha256": "48c2a09f82554f24ccb9ea356b100194f1b14037df649ac1b51b9db56d9cf6f8"
+    },
+    {
+      "path": "tools/native_editor_animation.py",
+      "bytes": 5478,
+      "sha256": "aba9d5ae9dfb873f01c94ae9f93a4ebdf33319cea1176edcacd5690d2fa869e5"
+    },
+    {
+      "path": "tools/probes/native-editor-textures.py",
+      "bytes": 18947,
+      "sha256": "13be601c30abee7cc7685969d74772c38fdb91bc697274b973e549ca5d1fd15d"
+    },
+    {
+      "path": "tools/tests/test_native_editor_textures.py",
+      "bytes": 13289,
+      "sha256": "99c8be3607f00c8b0b97771e543ecf34698190e30b72208056728d58fda4bd30"
+    }
+  ],
+  "git_input_inventory": [
+    {
+      "path": "Cargo.lock",
+      "bytes": 253073,
+      "sha256": "50a436695a80cac1b795bd4700dd4b67e7b356873df90eb66f7a3613879413f0"
+    },
+    {
+      "path": "Cargo.toml",
+      "bytes": 3887,
+      "sha256": "c9020614708894acf9e8f5cc0b139f4d9f675259ae7c878fea560459e1fadf2c"
+    },
+    {
+      "path": "editor/app/Cargo.toml",
+      "bytes": 2946,
+      "sha256": "4731cbe089090f287ed0917514acd37f89d72a76181bf24fd8e50b988de2129d"
+    },
+    {
+      "path": "editor/app/build.rs",
+      "bytes": 273,
+      "sha256": "91972b075bb04cb7e43bf48cb5d7395479845f47d8b2135f05b7961549e57f1c"
+    },
+    {
+      "path": "editor/app/src/main.rs",
+      "bytes": 19937,
+      "sha256": "f9ad0054187271a57a5eb5668f899861a281437b79a158b5d930479013ff20bc"
+    },
+    {
+      "path": "editor/app/src/play/mod.rs",
+      "bytes": 12484,
+      "sha256": "13db1dad0001474a97bc92abd9e84066db08ab30f57cde692fa200617fb21547"
+    },
+    {
+      "path": "editor/app/src/play/probe.rs",
+      "bytes": 12169,
+      "sha256": "a183f70c7a3f87d8e6d7ad294df1616bce459227451a2d271b2f6fe3109d7ff2"
+    },
+    {
+      "path": "editor/app/src/play/probe/asset_workflow.rs",
+      "bytes": 22268,
+      "sha256": "86fc38187373a17ee3434bddd665bf8ea50932dddf715de515e3e00f32e26658"
+    },
+    {
+      "path": "editor/app/src/play/probe/asset_workflow/animation.rs",
+      "bytes": 9078,
+      "sha256": "efb51262ba460014a7dc056626fc9c47cd2d92fcfcd40a8897aa969cfb772652"
+    },
+    {
+      "path": "editor/app/src/play/probe/asset_workflow/kind.rs",
+      "bytes": 4879,
+      "sha256": "27f80eea7f1f44074a43e6272abe49da6fb821d40ad1911bcef8cd77fc888713"
+    },
+    {
+      "path": "editor/app/src/play/worker.rs",
+      "bytes": 25565,
+      "sha256": "48c2a09f82554f24ccb9ea356b100194f1b14037df649ac1b51b9db56d9cf6f8"
+    },
+    {
+      "path": "editor/app/tauri.conf.json",
+      "bytes": 658,
+      "sha256": "35f2df700599fcfd9d976ddf79282011d82d4bf3527135ebd58f7c47c9a9ab35"
+    },
+    {
+      "path": "rust-toolchain.toml",
+      "bytes": 100,
+      "sha256": "c6e63d9832830b858d930007e4fd1fc3f4a3ca1d287483b08077b7f0267ca124"
+    },
+    {
+      "path": "tools/cargo",
+      "bytes": 179,
+      "sha256": "9aef98d613601b0c374c1d0499afb39d710cbf5002faba537f21be9c11ff72e3"
+    },
+    {
+      "path": "tools/native_editor_animation.py",
+      "bytes": 5478,
+      "sha256": "aba9d5ae9dfb873f01c94ae9f93a4ebdf33319cea1176edcacd5690d2fa869e5"
+    },
+    {
+      "path": "tools/native_process.py",
+      "bytes": 19307,
+      "sha256": "58dd2a8231d7f9d1e42070fc85425461e06a43f279fa5e7f8e57b4a40c3a3aa4"
+    },
+    {
+      "path": "tools/probes/native-editor-textures.py",
+      "bytes": 18947,
+      "sha256": "13be601c30abee7cc7685969d74772c38fdb91bc697274b973e549ca5d1fd15d"
+    },
+    {
+      "path": "tools/tests/test_native_editor_textures.py",
+      "bytes": 13289,
+      "sha256": "99c8be3607f00c8b0b97771e543ecf34698190e30b72208056728d58fda4bd30"
+    },
+    {
+      "path": "editor/ui/DESIGN.md",
+      "bytes": 31338,
+      "sha256": "47596dc4ab5e780d518c2d78868ae36d8506297462da8eea40fb23044ba45233"
+    },
+    {
+      "path": "editor/ui/NATIVE_VIEWPORT.md",
+      "bytes": 6165,
+      "sha256": "1f721e44a0624c374df37268075744266721e2c584068dcf49b9cc3e913cecb3"
+    },
+    {
+      "path": "editor/ui/TITLEBAR.md",
+      "bytes": 5724,
+      "sha256": "9cb9c6b18496791dc76a5b43100ab8b4c7ac78c29f643c2611df32eb44b63c11"
+    },
+    {
+      "path": "editor/ui/brand/Incant.icns",
+      "bytes": 150800,
+      "sha256": "7caf36224bb365064ad4975d37dedc1a3a9925e3beea916c0c3aa7d17ac5d185"
+    },
+    {
+      "path": "editor/ui/brand/README.md",
+      "bytes": 2301,
+      "sha256": "4ed81cf5b24ddd107bcebf45f2b14f1c773e82bfc9296d783e9243f7d12fc4d4"
+    },
+    {
+      "path": "editor/ui/brand/icon-macos.svg",
+      "bytes": 1921,
+      "sha256": "efe40e30a30f2878710c189199997305e25de295729ebffa7a5d667efc2725c8"
+    },
+    {
+      "path": "editor/ui/brand/wisp-mascot.svg",
+      "bytes": 1613,
+      "sha256": "42eeba29307123e42e6a80e4ad14323824fb0cc29f6059d8ebeca7c1c5df2a11"
+    },
+    {
+      "path": "editor/ui/index.html",
+      "bytes": 898,
+      "sha256": "6df57245c0cb384da34043403e78c0a5befb6239e6c5cbd75a33a72d419c22cf"
+    },
+    {
+      "path": "editor/ui/package.json",
+      "bytes": 1112,
+      "sha256": "5cc3668910849eeda979f9e6f7a73abfdc3a530952422b4dbba87f24e7687e25"
+    },
+    {
+      "path": "editor/ui/public/icon.png",
+      "bytes": 7144,
+      "sha256": "7525176384661738c92475b9cf88ae00d05a42ce1cc63f63afcf81e0c63b8e6e"
+    },
+    {
+      "path": "editor/ui/public/icon.svg",
+      "bytes": 1588,
+      "sha256": "52cc3f9a2f248fa5c791f976a67482f31d107552f2f27a62f072451eb07c4fb5"
+    },
+    {
+      "path": "editor/ui/scripts/account-evidence.mjs",
+      "bytes": 6604,
+      "sha256": "c436d91f45d453c5148599d0e42c3bfd4fa8e1c2019420681af537ffa37cb86f"
+    },
+    {
+      "path": "editor/ui/scripts/evidence.mjs",
+      "bytes": 19254,
+      "sha256": "0241e33818b11aecbb98190cd2f1f5abc9c527ee12c8044af9d4e2c92b344bdb"
+    },
+    {
+      "path": "editor/ui/scripts/render-icon.mjs",
+      "bytes": 1377,
+      "sha256": "325c6df0e94dd458f8dd959d6c2a4615911f1994abf0d3b1d0ee20be169d99e7"
+    },
+    {
+      "path": "editor/ui/scripts/render-macos-icon.mjs",
+      "bytes": 2154,
+      "sha256": "7a8b61e8c3c9df7ecb14e7cace92a8b20fc736eb086f63453be503c1ba27ed87"
+    },
+    {
+      "path": "editor/ui/src/App.test.tsx",
+      "bytes": 26743,
+      "sha256": "a8206085337dc457511d8623f3e23e2e0faa684a7c8f74c039973dfa5311e378"
+    },
+    {
+      "path": "editor/ui/src/App.tsx",
+      "bytes": 19581,
+      "sha256": "ded22d851c6decb6ec6b7de5013a22e60cc4d7c1b257a468d9a40d60f6a04d2d"
+    },
+    {
+      "path": "editor/ui/src/ProjectStates.test.tsx",
+      "bytes": 11221,
+      "sha256": "2c4ee1581af8ca050f8a791b861e75ed7d740599c676c43526a12be07bd80972"
+    },
+    {
+      "path": "editor/ui/src/assets/AssetsContext.tsx",
+      "bytes": 11599,
+      "sha256": "d37f1699ab9cd6d050bd1cfb5c67356a9857ae15a8c45cf567cfc8d70a514e6a"
+    },
+    {
+      "path": "editor/ui/src/assets/library.ts",
+      "bytes": 2924,
+      "sha256": "b6eb06c93bf6ff44b9df3c9b5d336d6c1a4019c19dc631600a62ffc6a826a51a"
+    },
+    {
+      "path": "editor/ui/src/assets/paths.test.ts",
+      "bytes": 4052,
+      "sha256": "d91a3cc884689a87fc2e8ec6cb1a9b1a3d96ddb6f779a51ce5a382ed19c07a95"
+    },
+    {
+      "path": "editor/ui/src/assets/paths.ts",
+      "bytes": 4880,
+      "sha256": "7fb58eead6cca9de6e6d0c99df3d6ba781a0db7927f5e4148ef92ae9a753f653"
+    },
+    {
+      "path": "editor/ui/src/assets/requests.test.ts",
+      "bytes": 1748,
+      "sha256": "70961e6ea1bd33c9c3280a373b919bd4253b6e5a650a5e97f7fa39e5f0bcab5a"
+    },
+    {
+      "path": "editor/ui/src/bridge/contract.ts",
+      "bytes": 110,
+      "sha256": "ef28659c411fa3335644d60e817993bfe4287520600f07b7f6d68d43acaacbfc"
+    },
+    {
+      "path": "editor/ui/src/bridge/fixture.ts",
+      "bytes": 38579,
+      "sha256": "bf4e267cdd957d5c40b9fed55bd7484dea808078bd326f064c786466d99137ed"
+    },
+    {
+      "path": "editor/ui/src/bridge/provider.ts",
+      "bytes": 1973,
+      "sha256": "4dc4c26f9177ef6ebb443f7cb95c4fa3b7a623b3e3c081e85e2b0db0f5be9a4e"
+    },
+    {
+      "path": "editor/ui/src/bridge/providerFixture.ts",
+      "bytes": 6721,
+      "sha256": "01845de3da42938103d539d39eed636a2263bb9ce3ae831e113e4fe94f05d553"
+    },
+    {
+      "path": "editor/ui/src/bridge/resolve.test.ts",
+      "bytes": 3183,
+      "sha256": "6fdc5194eea2a76c3f3c3ca06dad78521b75cd024fd75fe0190c33ca644e79cb"
+    },
+    {
+      "path": "editor/ui/src/bridge/resolve.ts",
+      "bytes": 3595,
+      "sha256": "a97cf68108e645f1de272bc50f95b72499458e18c96689e8b35ba90705af4c88"
+    },
+    {
+      "path": "editor/ui/src/components/AccountDialog.test.tsx",
+      "bytes": 24855,
+      "sha256": "27ff840e900503809d448ce9c62dce3176850ae33845a63e784066222ce4dd0a"
+    },
+    {
+      "path": "editor/ui/src/components/AccountDialog.tsx",
+      "bytes": 16322,
+      "sha256": "01337c2004949f2030fbef3d66faaff761675c8b780ca79d7793a4024e36a0dc"
+    },
+    {
+      "path": "editor/ui/src/components/AgentPanel.test.tsx",
+      "bytes": 8313,
+      "sha256": "5cfd248c7f94a45984ac5f3ee81ef818b39e3ce5b5c5036b6d4bf266d3d2d6d9"
+    },
+    {
+      "path": "editor/ui/src/components/AgentPanel.tsx",
+      "bytes": 30639,
+      "sha256": "513e583bd0bac0a5415ded100d3d5a1447adaaf0fe2e340804d53a83bd70dcb9"
+    },
+    {
+      "path": "editor/ui/src/components/BottomDock.tsx",
+      "bytes": 3316,
+      "sha256": "d162fe6fa607937d08c9485179eed8a9037662e002efdbc5f675b23b6fd8dd8f"
+    },
+    {
+      "path": "editor/ui/src/components/Clipboard.test.tsx",
+      "bytes": 3552,
+      "sha256": "106fd4a3dbbbbb321ad9753b0b4ff826b6be98553259c2605ee7cffab5361e50"
+    },
+    {
+      "path": "editor/ui/src/components/Dock.test.tsx",
+      "bytes": 3560,
+      "sha256": "5000890bc168399b01517bf6143a226872389215130318059aa0feb618fc245a"
+    },
+    {
+      "path": "editor/ui/src/components/DockPaging.test.tsx",
+      "bytes": 11361,
+      "sha256": "6b1dc5b03a81980172f844cad9145c67463ee91c1b780a23b0274f41e21e5d39"
+    },
+    {
+      "path": "editor/ui/src/components/HierarchyMenu.test.tsx",
+      "bytes": 4051,
+      "sha256": "7f0d38de9b894c54d435aafed96c0d6da794c8a3ecdc577e23ac62ac8fa29393"
+    },
+    {
+      "path": "editor/ui/src/components/HierarchyPanel.tsx",
+      "bytes": 22013,
+      "sha256": "273ce35e64f96cda87be64660742063ccbd42bbf1fb23cd686456a6ba70a373d"
+    },
+    {
+      "path": "editor/ui/src/components/MatchCount.tsx",
+      "bytes": 639,
+      "sha256": "246a69fd09a9b8b52b936f9677d41dfccacfb464db71c197b20baa55f93705a1"
+    },
+    {
+      "path": "editor/ui/src/components/Menu.test.tsx",
+      "bytes": 4215,
+      "sha256": "e458376609c9d7ba9a2bd60ea1c0021b8f03e4e7d3cf22f2320299f887c26b83"
+    },
+    {
+      "path": "editor/ui/src/components/Menu.tsx",
+      "bytes": 5840,
+      "sha256": "bd0bcb87c3f7d514aef2a943ab39f70aa7f6cd4bf6c8364c0358d76f8c230f34"
+    },
+    {
+      "path": "editor/ui/src/components/PinDialog.tsx",
+      "bytes": 12942,
+      "sha256": "2cb83dfb198b29f2275e8efe4258cf015020118f9b1a2be48031b51bdcf049e2"
+    },
+    {
+      "path": "editor/ui/src/components/ProblemsList.test.tsx",
+      "bytes": 5899,
+      "sha256": "39d469b550984f44984019895e331740afb452f877fbaf39d841c1b161699ff8"
+    },
+    {
+      "path": "editor/ui/src/components/ProjectFile.test.tsx",
+      "bytes": 43661,
+      "sha256": "a36344095d2e956c09640b1367d5d7f0dee56053ebe37ec5b71188517b74d7b1"
+    },
+    {
+      "path": "editor/ui/src/components/ProjectMenu.tsx",
+      "bytes": 3442,
+      "sha256": "da47327f7392c23af1962c2978162d7ad54ab3c42f823417f93cabfa33c24f98"
+    },
+    {
+      "path": "editor/ui/src/components/ProviderChip.tsx",
+      "bytes": 1561,
+      "sha256": "b89293af5995ce799496ae2f2c501f92fe2bc4707a82df4a0f80143d09cbfbb3"
+    },
+    {
+      "path": "editor/ui/src/components/ShortcutsDialog.test.tsx",
+      "bytes": 6364,
+      "sha256": "9d626126810b56f9113044f208cc7fbe49849fbe5627ff2780375a82d55f2dd9"
+    },
+    {
+      "path": "editor/ui/src/components/ShortcutsDialog.tsx",
+      "bytes": 12652,
+      "sha256": "356d7fa749e92f81c72f59cc30c1306c5a5b07a5adb09e72549b9462071174b4"
+    },
+    {
+      "path": "editor/ui/src/components/Splitter.test.tsx",
+      "bytes": 9110,
+      "sha256": "71b91f3e95a9fc01317fa94c2502299dd696818e57c65ffcd70837800493cd9a"
+    },
+    {
+      "path": "editor/ui/src/components/Splitter.tsx",
+      "bytes": 3607,
+      "sha256": "76d1fa85e08bca4867d07b836426b7aba180347727e702f4e0d623c282040a9c"
+    },
+    {
+      "path": "editor/ui/src/components/StateView.tsx",
+      "bytes": 2702,
+      "sha256": "9581431a9a7951cb9c190ff97ceff7ee259cfc28f9609a603afa8f9a96a3c2e9"
+    },
+    {
+      "path": "editor/ui/src/components/ThrottledFrames.test.tsx",
+      "bytes": 4435,
+      "sha256": "2d0f154c4a29b4886b6efe7a3f913f2d1d27525c281f4ca20053ff3f6207d3ce"
+    },
+    {
+      "path": "editor/ui/src/components/Titlebar.tsx",
+      "bytes": 9323,
+      "sha256": "9f623be6f6c51ad25df64d55dddadfb6cc4fdbaeece314f754a1ba7f2f409a09"
+    },
+    {
+      "path": "editor/ui/src/components/ViewportPanel.tsx",
+      "bytes": 6270,
+      "sha256": "fd068f09fc58fab2ec413fe8445bde1dedaa88f123cf45063851e845c12432da"
+    },
+    {
+      "path": "editor/ui/src/components/Windowing.test.tsx",
+      "bytes": 19096,
+      "sha256": "e5420ccb90b5f6be6376a1df130374997adbb54439b3090612ec88d6c993a353"
+    },
+    {
+      "path": "editor/ui/src/components/agent/AgentAllowance.test.tsx",
+      "bytes": 33162,
+      "sha256": "a6382fc48530e9c45bd82fa3fdcd397a2cb64e0e7b95baa637d295282147aa38"
+    },
+    {
+      "path": "editor/ui/src/components/agent/AgentAllowance.tsx",
+      "bytes": 11044,
+      "sha256": "0ad3dde7fc4b2771d82ffea02a9973a779e32e58b44a2357ac6c848105de8f3b"
+    },
+    {
+      "path": "editor/ui/src/components/agent/AgentApprovalReadiness.test.tsx",
+      "bytes": 17209,
+      "sha256": "a485650bb6dc2c433e67fe305a13acde16bf7940beefce9d24132fdf6d7c3a8c"
+    },
+    {
+      "path": "editor/ui/src/components/agent/AgentComposer.tsx",
+      "bytes": 5837,
+      "sha256": "56d6729c1d308105fd52fd0764970c0f1e38a3ed1eeefbf4afa10d59c9d3e686"
+    },
+    {
+      "path": "editor/ui/src/components/agent/AgentSession.test.tsx",
+      "bytes": 36586,
+      "sha256": "70f9af936a8843805ade95f801bcf9e8afff019cb33d25099e5cb39580cdeefe"
+    },
+    {
+      "path": "editor/ui/src/components/agent/AgentTranscript.tsx",
+      "bytes": 7166,
+      "sha256": "ebb95b180fe6e98705947cb479f124456853a50c81d2f6a3aa070295715b45d3"
+    },
+    {
+      "path": "editor/ui/src/components/agent/AgentTurn.tsx",
+      "bytes": 13528,
+      "sha256": "11dea25254933a0d7a0b52126a97e28ee6c04061dc3d128ad4669744fcc068ee"
+    },
+    {
+      "path": "editor/ui/src/components/agent/agentMemory.ts",
+      "bytes": 4511,
+      "sha256": "bb8e5bf14010722a128c2294088d7efe17b712ef9a62b7e6e46d67f961bbf4a8"
+    },
+    {
+      "path": "editor/ui/src/components/agent/agentPhase.ts",
+      "bytes": 2667,
+      "sha256": "148dccd105f3376ba0c17cc2d721a144d0e536d5642e692a93a7247b528957a8"
+    },
+    {
+      "path": "editor/ui/src/components/agent/agentText.test.ts",
+      "bytes": 12409,
+      "sha256": "7161eecd883830c89cbd260ba0eeffa6b58e08724caeef4db9d460d57c279d67"
+    },
+    {
+      "path": "editor/ui/src/components/agent/agentText.ts",
+      "bytes": 18361,
+      "sha256": "5cc237bdc3598ce676900e3796c1e266d8f8ab71c35e80febea3109543c06677"
+    },
+    {
+      "path": "editor/ui/src/components/agent/tokenAllowance.test.ts",
+      "bytes": 5783,
+      "sha256": "04f49169a830f94191bc396d2df8f56fc1662ff5dcf232e037680609761d24bb"
+    },
+    {
+      "path": "editor/ui/src/components/agent/tokenAllowance.ts",
+      "bytes": 7273,
+      "sha256": "fb4473b3c3f031b48facc9c48382a8a8ab866e820bf4e7a534bc159eaf5f2d7c"
+    },
+    {
+      "path": "editor/ui/src/components/assets/AssetBrowser.tsx",
+      "bytes": 15414,
+      "sha256": "05a7b6c973088e5c97c1b2911b67fd4be8b8510198125f63636e59f038707407"
+    },
+    {
+      "path": "editor/ui/src/components/assets/AssetInspector.tsx",
+      "bytes": 22990,
+      "sha256": "84402ea4a6f80ce8f9d13bc777fd29eb1887b2bd320fe9a6f925f583a0e02de7"
+    },
+    {
+      "path": "editor/ui/src/components/assets/Assets.test.tsx",
+      "bytes": 36133,
+      "sha256": "859758465e51c316013d2fcf4e5f6be97a84ba047b4cbdc35877833e8b3b89ba"
+    },
+    {
+      "path": "editor/ui/src/components/breakAfterSlashes.tsx",
+      "bytes": 540,
+      "sha256": "17fbf33530a4c2a361feecc3d208bc78213704f6002a936bff926f8908d94d31"
+    },
+    {
+      "path": "editor/ui/src/components/dock/ConsoleView.tsx",
+      "bytes": 3927,
+      "sha256": "60842e0a5c4f9acf725cd5041492671471cb39b908383b8b594a545c470e9cb7"
+    },
+    {
+      "path": "editor/ui/src/components/dock/HistoryView.tsx",
+      "bytes": 5978,
+      "sha256": "7e6fd85a920ccaed44376088f112d048c5d8b1d91d5b6ab184148050f102d97c"
+    },
+    {
+      "path": "editor/ui/src/components/dock/ProblemsView.tsx",
+      "bytes": 10770,
+      "sha256": "2efa821959231837d6cab69fb75d705ff1b934cf10bfb01eabcb7a0045763487"
+    },
+    {
+      "path": "editor/ui/src/components/dock/paging.test.tsx",
+      "bytes": 2942,
+      "sha256": "88061394f08e619eef17ce608846316b33828317ef3a090b85fb9e023527a212"
+    },
+    {
+      "path": "editor/ui/src/components/dock/paging.tsx",
+      "bytes": 5959,
+      "sha256": "7e5be807104d8ae7c6c2f3eb5b5b3248e89f4b84b26f263527eb7a812b5f349c"
+    },
+    {
+      "path": "editor/ui/src/components/dock/time.ts",
+      "bytes": 379,
+      "sha256": "ec7bdb2aa597695a8aea1ad775574a634ee1acecfb2fc6c011b7936da2408da9"
+    },
+    {
+      "path": "editor/ui/src/components/inspector/CameraFields.test.tsx",
+      "bytes": 17491,
+      "sha256": "b871d8a0c2e4fd8c8d9d1e728cc65849aaff51204310fe3fb50a502e74cf2a2e"
+    },
+    {
+      "path": "editor/ui/src/components/inspector/CompoundParts.test.tsx",
+      "bytes": 19212,
+      "sha256": "6023d3f650f4c73c4f28a47437cfe9ca9e3428ad681549e9ea08ff5dc12e37a6"
+    },
+    {
+      "path": "editor/ui/src/components/inspector/DiagnosticReveal.test.tsx",
+      "bytes": 13785,
+      "sha256": "88996121b07a3337f5a109a33375fc2236a75092ddfe9bde07e083a3665b569f"
+    },
+    {
+      "path": "editor/ui/src/components/inspector/FieldView.test.tsx",
+      "bytes": 6245,
+      "sha256": "9ebd7905bfb344c951be4b1680d5ec1dbb9f6c3906a04dfd8c712c4df7af43ed"
+    },
+    {
+      "path": "editor/ui/src/components/inspector/FieldView.tsx",
+      "bytes": 36351,
+      "sha256": "2bffd60b85ac78bbda2f4a31fd4b2d11b271aa736e94d2f28052150c4f7bd87b"
+    },
+    {
+      "path": "editor/ui/src/components/inspector/IdentityHeader.tsx",
+      "bytes": 1436,
+      "sha256": "155f0c47d25bc519acaf99f369ca4355a9b50d0e1967b63737659261d7a94613"
+    },
+    {
+      "path": "editor/ui/src/components/inspector/InspectorPanel.tsx",
+      "bytes": 13762,
+      "sha256": "edbae66c6a0833f43d37b5f7e6f9bf101950b70fe4a1c11930a2a6a21f31ea8c"
+    },
+    {
+      "path": "editor/ui/src/components/inspector/ObjectList.tsx",
+      "bytes": 22497,
+      "sha256": "9a23636e7ed6d80bbf566bc54f03e6580cadcacbf0dc015df6f9377509bc6c97"
+    },
+    {
+      "path": "editor/ui/src/components/inspector/PhysicsFields.test.tsx",
+      "bytes": 21964,
+      "sha256": "e55ad51e4ac84fa47b4a5e2cb0e1564f5bfa522f49f5d0ca581f638ccb6599ee"
+    },
+    {
+      "path": "editor/ui/src/components/inspector/PixelCameraFields.test.tsx",
+      "bytes": 10768,
+      "sha256": "8e5ece126bfb507c76228c4f841375f2e541a5c2790420f74909045816382551"
+    },
+    {
+      "path": "editor/ui/src/components/inspector/ValueLists.test.tsx",
+      "bytes": 2170,
+      "sha256": "c00090a5e0c757414cf1cf7912f26926e6651ed8f2788bf6b8ec9bdc6590d72f"
+    },
+    {
+      "path": "editor/ui/src/components/inspector/ValueLists.tsx",
+      "bytes": 20509,
+      "sha256": "d1131a92ad5536a1c881602ccc1df6ce69837f5a4cb37de316944e18398c5632"
+    },
+    {
+      "path": "editor/ui/src/components/inspector/format.ts",
+      "bytes": 3734,
+      "sha256": "387a66e30a14e6d9e5832c8dcd814966161664b04199bf6afb4804f7248c9467"
+    },
+    {
+      "path": "editor/ui/src/components/inspector/presentation.ts",
+      "bytes": 20320,
+      "sha256": "954ecba7f36d21ae2a114c1ce79b6efd86fbb6dac75f7d9f0b70f7b8fa8815a8"
+    },
+    {
+      "path": "editor/ui/src/components/inspector/reveal.tsx",
+      "bytes": 3117,
+      "sha256": "b0c263de8172b7a2ea45d14e580382c3f7e963745ea0534be38c3af9b4eb3bd8"
+    },
+    {
+      "path": "editor/ui/src/components/play/Play.test.tsx",
+      "bytes": 39749,
+      "sha256": "4f9a638c32b418154c7ea23cb68432ed728f2df29c500f2740f270bf54b42853"
+    },
+    {
+      "path": "editor/ui/src/components/play/PlayControls.tsx",
+      "bytes": 11369,
+      "sha256": "ef43596b85ff4cd00ad3e8b3e6b873869d990a9cbeb0ec2103b18d8e7d7ee48a"
+    },
+    {
+      "path": "editor/ui/src/components/play/RuntimeSection.tsx",
+      "bytes": 5679,
+      "sha256": "f9c3e49972a0844fec68150ae281d40ba4a756223c84dc0686b8f3456204daa4"
+    },
+    {
+      "path": "editor/ui/src/hierarchy/tree.test.ts",
+      "bytes": 4506,
+      "sha256": "f490f3dbedbe1996123dab76f067ffb80f4218fb6e62ed834bb6b7745e60e255"
+    },
+    {
+      "path": "editor/ui/src/hierarchy/tree.ts",
+      "bytes": 6658,
+      "sha256": "60ea78fc2a44f82658399e648d0877ea22583fadffa67fe7476c83a0c457aca4"
+    },
+    {
+      "path": "editor/ui/src/icons/Icon.tsx",
+      "bytes": 6588,
+      "sha256": "c91b7a898fe4f1d18cd38b888af21a3c80cd7cf4e90918c56f3d7d86a252676a"
+    },
+    {
+      "path": "editor/ui/src/icons/WispMark.tsx",
+      "bytes": 1690,
+      "sha256": "2e51dd3ad243886aaeb57a6f6da56cdfdd96b15672adb5624e6f8194903baee4"
+    },
+    {
+      "path": "editor/ui/src/main.tsx",
+      "bytes": 1076,
+      "sha256": "a8ecdcea31aa71fa4a5c3431df10ceec087c17811ebfa84b0dc6cf82e5feed6b"
+    },
+    {
+      "path": "editor/ui/src/play/PlayContext.tsx",
+      "bytes": 16709,
+      "sha256": "e22c903870f127b8b37b2b8b8d90829c3da51fd61ba2763812338e2f080b4147"
+    },
+    {
+      "path": "editor/ui/src/play/input.test.ts",
+      "bytes": 14250,
+      "sha256": "aa60a299d4b0d51a666c5142387be868a62cbe6b6ed9f10b6a39766e928021c3"
+    },
+    {
+      "path": "editor/ui/src/play/input.ts",
+      "bytes": 13023,
+      "sha256": "045e374df91f2e424456960834ef78cfc1e5c223fa4c4f34f8fbd11ac2167da9"
+    },
+    {
+      "path": "editor/ui/src/play/keys.test.ts",
+      "bytes": 940,
+      "sha256": "1580416e34ea4eee307d22191026ad41fee846a456a74e9b019c9018230b02ef"
+    },
+    {
+      "path": "editor/ui/src/play/keys.ts",
+      "bytes": 2249,
+      "sha256": "f229676b230eae6cc10764e33f14fb189f1a0a9725c5a89c6e8ab7365a75bb23"
+    },
+    {
+      "path": "editor/ui/src/play/model.test.ts",
+      "bytes": 7514,
+      "sha256": "69c759c54a94f262592afa0983ea8e0d33e286f2c8fa6261c7d1531bca11f38b"
+    },
+    {
+      "path": "editor/ui/src/play/model.ts",
+      "bytes": 8626,
+      "sha256": "0478e3baf047f4c8817fca9893bf3c5ea543e64d74f644443e325c0cb400eabc"
+    },
+    {
+      "path": "editor/ui/src/play/useGameCapture.ts",
+      "bytes": 7925,
+      "sha256": "b8efe3fa82a2d5ddd48fd75dae27f43f90b25dd252b803346bfe549dd77c4d15"
+    },
+    {
+      "path": "editor/ui/src/projectFile/ProjectFileContext.tsx",
+      "bytes": 14050,
+      "sha256": "66e4c3a7f702d619d795116494b2fd00934ed3f46161de37d1b1335a40a8b880"
+    },
+    {
+      "path": "editor/ui/src/projectFile/model.ts",
+      "bytes": 6411,
+      "sha256": "fe113bf687493f96457cc83a379c9537097dbfe8de4a2a0784281639bc369f00"
+    },
+    {
+      "path": "editor/ui/src/shell/ShellContext.test.tsx",
+      "bytes": 9308,
+      "sha256": "9760cde1336ae33ea0c2229736f8e0611896dce01febd65ac837204e69018d1d"
+    },
+    {
+      "path": "editor/ui/src/shell/ShellContext.tsx",
+      "bytes": 11301,
+      "sha256": "d2be7d7de26e0d57c780c9120e0f93d42cc73a3b21dac71b5528ad20278c833c"
+    },
+    {
+      "path": "editor/ui/src/shell/clipboard.ts",
+      "bytes": 1232,
+      "sha256": "c065212640f832a1ce2c80d19fb8d37fdb3dab5fc220f3a7078c254e1476eb11"
+    },
+    {
+      "path": "editor/ui/src/shell/inputModality.ts",
+      "bytes": 2893,
+      "sha256": "52141cac2e47014ddd5be92c7bd2568f030076a5bc23a08afa08af0f4a459db2"
+    },
+    {
+      "path": "editor/ui/src/shell/layout.test.ts",
+      "bytes": 1252,
+      "sha256": "7afdd3a33b3d48567f2aef3fbd597c4722d5d51bda96a0c489a6b94d2a018fe1"
+    },
+    {
+      "path": "editor/ui/src/shell/layout.ts",
+      "bytes": 2332,
+      "sha256": "6aeacc3a85fcbb8cf7175e286a9007254da6702ec83961b0e35f58fafe6f8338"
+    },
+    {
+      "path": "editor/ui/src/shell/projectState.ts",
+      "bytes": 1264,
+      "sha256": "fe8cc54d8fade6638e06f2e9185a25f4f6595ebd1a5e4944b156473add4f29cc"
+    },
+    {
+      "path": "editor/ui/src/shell/regions.ts",
+      "bytes": 1379,
+      "sha256": "d69a9c6a3da1a7ef673bcccbaaca6cd4fd9763cffeb90ab843dd877cbb4e04f9"
+    },
+    {
+      "path": "editor/ui/src/shell/requests.ts",
+      "bytes": 1289,
+      "sha256": "8b3d19807e664109cf1946ef35d07d9969c8c593042cc443bc3ac39210e97617"
+    },
+    {
+      "path": "editor/ui/src/shell/windowing.test.tsx",
+      "bytes": 5066,
+      "sha256": "9e37c6079eeb241c7ba843389e21c4545b581c89c273173b8c9538e1bc79cad9"
+    },
+    {
+      "path": "editor/ui/src/shell/windowing.ts",
+      "bytes": 5956,
+      "sha256": "a1f4202a6d43486e9f6d374546d25349b2931993373b08bc06e746c34fae2c5b"
+    },
+    {
+      "path": "editor/ui/src/styles/agent.css",
+      "bytes": 21494,
+      "sha256": "a5d8982ee6179e63460e242123ca1abe0373fe7dfcf4fe92cfd7deac1b5b5ad4"
+    },
+    {
+      "path": "editor/ui/src/styles/assets.css",
+      "bytes": 14246,
+      "sha256": "de6e3840a5ecc284ed2d0451b116ce701c7c3c00f1084e4e563c8750ce253763"
+    },
+    {
+      "path": "editor/ui/src/styles/base.css",
+      "bytes": 11531,
+      "sha256": "b32bebc91578e88b00caa17b048a1d41758363eeec940f302065d545e4b02062"
+    },
+    {
+      "path": "editor/ui/src/styles/dialogs.css",
+      "bytes": 10952,
+      "sha256": "55c929ab7d24ce90f23bb6b66b72cd99e4700a298a6955c77daa6e130fe5b125"
+    },
+    {
+      "path": "editor/ui/src/styles/dock.css",
+      "bytes": 10722,
+      "sha256": "97b1a1b70405084b1dcf7f03f6a767d3110fb4df57e83ac33299e8176da0a144"
+    },
+    {
+      "path": "editor/ui/src/styles/hierarchy.css",
+      "bytes": 3525,
+      "sha256": "d43617a682b2b279b9db486b8938e7104f62ac36ffb7629083bfaaaea334992f"
+    },
+    {
+      "path": "editor/ui/src/styles/inspector.css",
+      "bytes": 28680,
+      "sha256": "7ba2fdc0ee24ee6862797c5f4ec11468ac9c2a2b28ecb20c454830ec44bdf6eb"
+    },
+    {
+      "path": "editor/ui/src/styles/play.css",
+      "bytes": 4711,
+      "sha256": "2d7e550e57faef71affb44a71383d7542e25a287748c7b0a0994042d5bd8216a"
+    },
+    {
+      "path": "editor/ui/src/styles/shell.css",
+      "bytes": 17317,
+      "sha256": "bfee74f3ff2889027367c1d341fe50d3be4aaf54dd741e58b23db9c756ebb38f"
+    },
+    {
+      "path": "editor/ui/src/styles/tokens.css",
+      "bytes": 4936,
+      "sha256": "bd55bca42daf193344ce369e61f98e62cee4422caa4de4754254b76cf570d598"
+    },
+    {
+      "path": "editor/ui/src/styles/tokens.test.ts",
+      "bytes": 4023,
+      "sha256": "3d09343e2c88480bbf29ae03a8ada6b753d35f9f58ae936d7b5a7135740c1227"
+    },
+    {
+      "path": "editor/ui/src/test/cameraInspector.tsx",
+      "bytes": 4192,
+      "sha256": "ac1e71940995ace5187ac6b4008075e0e47066cb04fa57b05734d14728f446df"
+    },
+    {
+      "path": "editor/ui/src/test/nativePlayDouble.ts",
+      "bytes": 21710,
+      "sha256": "73638cae6fc8888965bc065d1a44817e41ed8349ccd4432f9880f08b6f95d0c2"
+    },
+    {
+      "path": "editor/ui/src/test/setup.ts",
+      "bytes": 559,
+      "sha256": "732408e95a00a7f8efccc5d248528edc8101c8f3cbba72b52a2e3daf161e7866"
+    },
+    {
+      "path": "editor/ui/tsconfig.app.json",
+      "bytes": 828,
+      "sha256": "702050cd2017ff8bde5c453b02bf3c55cd09d6bb98be28a472e84c72f0b08631"
+    },
+    {
+      "path": "editor/ui/tsconfig.json",
+      "bytes": 189,
+      "sha256": "c4d5a8eb8abf1c0a5afe10e02db4d546a7fa45bc6c0416492adac6fc44f65713"
+    },
+    {
+      "path": "editor/ui/tsconfig.node.json",
+      "bytes": 384,
+      "sha256": "4e1c3bba8becdb54591c858ee46f4e4fbd85f59ef15cc4e6498d7f4a1cfcbc67"
+    },
+    {
+      "path": "editor/ui/tsconfig.test.json",
+      "bytes": 729,
+      "sha256": "a7e683e98d6309ea6b3a0e7792a204442b58399783f342e711204c6f3069466b"
+    },
+    {
+      "path": "editor/ui/vite.config.ts",
+      "bytes": 443,
+      "sha256": "c50fca7f4f847ff733b08e1df129ee4828f8ca5f0241ad837ba85c9a5f60cf20"
+    },
+    {
+      "path": "editor/ui/vitest.config.ts",
+      "bytes": 292,
+      "sha256": "d3c44231f12597c7581bf921d9fee70e5a38965370d2ba915a8054ced2ef9b1e"
+    },
+    {
+      "path": "package-lock.json",
+      "bytes": 134157,
+      "sha256": "cbea068b7d9182270271319a7a77d24805b9c9c66ed5e9eb3e188d60e5337c60"
+    },
+    {
+      "path": "package.json",
+      "bytes": 865,
+      "sha256": "bb8e7500fecc2e50fdf50716823a65ca4ff6b8cd742be881db7155b65ab21012"
+    }
+  ],
+  "source_scope": "Nine final opt-in probe/runner paths; selected compiler/config/frontend inputs bound at immutable source. No whole-runtime equivalence claim for later integration.",
+  "frontend": "Actual source001 npm build, reused with identical145 tracked inputs and19 output hashes after source002 import-only correction; assets retained externally.",
+  "accepted_cpu_coverage": {
+    "Python_source001": 13,
+    "Play_source002": 23,
+    "CLI_importer_native_processes": 4,
+    "strict_editor_all_target_Clippy": true
+  },
+  "actual_window": {
+    "attempt": "001",
+    "source": "d2add5f1c6feb612cab8d758785ef83eb914263c",
+    "session": 2423,
+    "owned_pid": 33370,
+    "managed_children_reaped": 6,
+    "stages": 6,
+    "recovered_revision": 8,
+    "paused_tick": 3,
+    "final_tick": 4,
+    "play_generation": 1
+  },
+  "original_failure": "CPU001 stopped at E0432 before any Rust test ran. CPU002 corrects one import to an existing type reexport; original raw failure retained.",
+  "outcome_scope": {
+    "actual_animated_editor_window": true,
+    "real_handler_watcher_history_paths": true,
+    "typed_animation_world_VM_continuation": true,
+    "pixel_capture": false,
+    "GUI_import_history_click_coverage": false,
+    "appearance_acceptance": false,
+    "performance_or_phase_gate": false
+  },
+  "CUA_closeout": "Root Finder Open occurred after owned app success/reap and opened an excluded incidental default instance. Root closed it and observed no matching probe/player processes. No owned animated pixels observed.",
+  "resource_scope": "Existing FONT explicit arm64 CI target; Rust1.99 locked/offline jobs2/Rayon2. Recorded net target growth is not a peak or aggregate GPU memory bound. Cooperative app/sequence deadlines retain mandatory cleanup.",
+  "external_artifacts": [
+    {
+      "kind": "editor-play-cpu",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/binaries/0-incant_editor-source002",
+      "bytes": 57923936,
+      "sha256": "89427b994940e4bfc9b62429d6d44f2f2216641e26f46ca4a9e397007eea020a"
+    },
+    {
+      "kind": "editor-and-headless-build",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/binaries/1-incant_headless-source002",
+      "bytes": 62159792,
+      "sha256": "ab5491bf903102aaedaa0c00b6bc9ef0581f506a7247ee7ce39137d5f38aacc1"
+    },
+    {
+      "kind": "editor-and-headless-build",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/binaries/1-incant_editor-source002",
+      "bytes": 72837072,
+      "sha256": "0095081df176442c3161d6339c02546053490aa9c6e8f5bd3c71b1d0ac28244c"
+    },
+    {
+      "kind": "unique app bundle executable",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/binaries/Incant Animated Model Workflow Probe.app/Contents/MacOS/incant-editor-probe",
+      "bytes": 72837072,
+      "sha256": "0095081df176442c3161d6339c02546053490aa9c6e8f5bd3c71b1d0ac28244c"
+    },
+    {
+      "kind": "unique app bundle plist",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/binaries/Incant Animated Model Workflow Probe.app/Contents/Info.plist",
+      "bytes": 725,
+      "sha256": "c91965d5d827157c20666f41e419c8d4997a4a4b2d4889a38e0300c7c3ef8eaf"
+    },
+    {
+      "kind": "genuine source001 frontend",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/frontend-source001/assets/index-4A6FDmvL.css",
+      "bytes": 92165,
+      "sha256": "0b2651dea4a0592aa4867227eebf24fe82a9566d3556cf7f748f24e2bf5277dc"
+    },
+    {
+      "kind": "genuine source001 frontend",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/frontend-source001/assets/index-W90srANs.js",
+      "bytes": 485008,
+      "sha256": "5151789c45e2ca84dc45acd2ce4a4aad1eb6d2392a6d9da10da004a879c2214a"
+    },
+    {
+      "kind": "genuine source001 frontend",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/frontend-source001/assets/index-W90srANs.js.map",
+      "bytes": 2026158,
+      "sha256": "3c9f2c07ab1915b5db80a1e2c529a445cb80ced4f5db39b9e2bb2e7f5eb4d471"
+    },
+    {
+      "kind": "genuine source001 frontend",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/frontend-source001/assets/inter-cyrillic-ext-wght-normal-BOeWTOD4.woff2",
+      "bytes": 25960,
+      "sha256": "ca157063339ac4ad418f214f3abfed119b0798ab4d377386ce5c9e5a7a435ebd"
+    },
+    {
+      "kind": "genuine source001 frontend",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/frontend-source001/assets/inter-cyrillic-wght-normal-DqGufNeO.woff2",
+      "bytes": 18748,
+      "sha256": "71d5ee93cc1e9f1d520a3a8b66456de18c7879d8df09d57fcd2eaff75fef0075"
+    },
+    {
+      "kind": "genuine source001 frontend",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/frontend-source001/assets/inter-greek-ext-wght-normal-DlzME5K_.woff2",
+      "bytes": 11232,
+      "sha256": "6e9e020a25f9b56d418f2c085b1d3c09725a4da23fe693a5b463064606732190"
+    },
+    {
+      "kind": "genuine source001 frontend",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/frontend-source001/assets/inter-greek-wght-normal-CkhJZR-_.woff2",
+      "bytes": 18996,
+      "sha256": "1be3448e292fbf05ffe176fe1e43f135013d50b1e7d324ad1a558f623d3bb6f6"
+    },
+    {
+      "kind": "genuine source001 frontend",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/frontend-source001/assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2",
+      "bytes": 85068,
+      "sha256": "34b9c504cab7a73e37b746343a449132e56cf7b5481af2cb81dc74dcff25c956"
+    },
+    {
+      "kind": "genuine source001 frontend",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/frontend-source001/assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+      "bytes": 48256,
+      "sha256": "3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62"
+    },
+    {
+      "kind": "genuine source001 frontend",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/frontend-source001/assets/inter-vietnamese-wght-normal-CBcvBZtf.woff2",
+      "bytes": 10252,
+      "sha256": "5c66f9e07e90c6d4ac4922cc68d60de26c17b1858e677fb5e603fce3952b3ff2"
+    },
+    {
+      "kind": "genuine source001 frontend",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/frontend-source001/assets/jetbrains-mono-cyrillic-ext-wght-normal-EocZY2iu.woff2",
+      "bytes": 2028,
+      "sha256": "593ccd6fe36e299e151aeae4521be9bfe83ac487d96d7cdb44f50be4a04041c7"
+    },
+    {
+      "kind": "genuine source001 frontend",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/frontend-source001/assets/jetbrains-mono-cyrillic-wght-normal-D73BlboJ.woff2",
+      "bytes": 12108,
+      "sha256": "d274604c40757f98f07df623a8b8fb5194508a6fa4f5413a7a107f09e3b7452a"
+    },
+    {
+      "kind": "genuine source001 frontend",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/frontend-source001/assets/jetbrains-mono-greek-wght-normal-Bw9x6K1M.woff2",
+      "bytes": 9004,
+      "sha256": "ee863198077f3093ffa81c072581cc4bd608a04e60a8a9c0b846396ce4f14109"
+    },
+    {
+      "kind": "genuine source001 frontend",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/frontend-source001/assets/jetbrains-mono-latin-ext-wght-normal-DBQx-q_a.woff2",
+      "bytes": 15196,
+      "sha256": "79bfdab9ba467e26eea4122e6f2567e188dd8a09a8c730d501fc487c4ab99c6e"
+    },
+    {
+      "kind": "genuine source001 frontend",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/frontend-source001/assets/jetbrains-mono-latin-wght-normal-B9CIFXIH.woff2",
+      "bytes": 40404,
+      "sha256": "18be452724bfdc236c074ca94a249a7f41a86752c7d04ab258ce9ed5651f6a7e"
+    },
+    {
+      "kind": "genuine source001 frontend",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/frontend-source001/assets/jetbrains-mono-vietnamese-wght-normal-Bt-aOZkq.woff2",
+      "bytes": 7504,
+      "sha256": "2288795da89dd97e648954b96e22b4501bd85dfc453264460b252f888b582ca2"
+    },
+    {
+      "kind": "genuine source001 frontend",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/frontend-source001/icon.png",
+      "bytes": 7144,
+      "sha256": "7525176384661738c92475b9cf88ae00d05a42ce1cc63f63afcf81e0c63b8e6e"
+    },
+    {
+      "kind": "genuine source001 frontend",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/frontend-source001/icon.svg",
+      "bytes": 1588,
+      "sha256": "52cc3f9a2f248fa5c791f976a67482f31d107552f2f27a62f072451eb07c4fb5"
+    },
+    {
+      "kind": "genuine source001 frontend",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/frontend-source001/index.html",
+      "bytes": 998,
+      "sha256": "7c99d98278e80b791c4a0586f8f1d8f29be9f1f63f127f3c9213a69eedbfd70a"
+    }
+  ],
+  "archive_bytes": 541057,
+  "archive_decoded_bytes": 3986796,
+  "archive_sha256": "e9d8edacac67bfdb1614e270b6b903826888db0f108414ad1403920191ac4d6d",
+  "records": [
+    {
+      "name": "bundle/Info.plist",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/binaries/Incant Animated Model Workflow Probe.app/Contents/Info.plist",
+      "bytes": 725,
+      "sha256": "c91965d5d827157c20666f41e419c8d4997a4a4b2d4889a38e0300c7c3ef8eaf"
+    },
+    {
+      "name": "cpu-launch-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/cpu-launch-001.json",
+      "bytes": 5240,
+      "sha256": "06fdc4701da45a5095a281a930da36ef4c6ea1db62f8b7da51335c210b39bdb5"
+    },
+    {
+      "name": "cpu-launch-002.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/cpu-launch-002.json",
+      "bytes": 5049,
+      "sha256": "d54cf00d0f5b77e11160c545fe850af37e8c6a486c8f8aa23541ca5c77c65d32"
+    },
+    {
+      "name": "cpu-proposal-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/cpu-proposal-001.json",
+      "bytes": 5264,
+      "sha256": "675e8837cccf7860af0587851d0121fb6b50d9c379f5f168846722c2c8a3c695"
+    },
+    {
+      "name": "cpu-proposal-002.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/cpu-proposal-002.json",
+      "bytes": 5727,
+      "sha256": "b6bf7d64b786238fd2535af57f983884b953e8d5e793b7ff2343255baf8d079d"
+    },
+    {
+      "name": "cpu-source001-0.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/cpu-source001-0.raw.log",
+      "bytes": 1551,
+      "sha256": "8ae61aa943407530314f570254562abb1d6fb24eb530f9ab93be10f9d5ed3b82"
+    },
+    {
+      "name": "cpu-source001-1.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/cpu-source001-1.raw.log",
+      "bytes": 759022,
+      "sha256": "b9268065c6e9217d0485fa6046bc8e39247d8a0c55fc428dd8edfac538d6ad3c"
+    },
+    {
+      "name": "cpu-source001-results.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/cpu-source001-results.json",
+      "bytes": 9660,
+      "sha256": "f976fede77c02de8516238e8faed8df2567e9b82881f746492474cc4085225b6"
+    },
+    {
+      "name": "cpu-source002-0.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/cpu-source002-0.raw.log",
+      "bytes": 755552,
+      "sha256": "715549708e316a55da36747da969c198f1f3cf9fdb83018d308e3945bb9e2063"
+    },
+    {
+      "name": "cpu-source002-1.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/cpu-source002-1.raw.log",
+      "bytes": 872006,
+      "sha256": "5ebad26ccfcec2de5a614f4746f974207e3d7949050be0327e2a0dbf48211fd2"
+    },
+    {
+      "name": "cpu-source002-2.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/cpu-source002-2.raw.log",
+      "bytes": 10572,
+      "sha256": "8938fc6e7d1a0a270a18a8b3eab9aa6ada15a8dde9640260638c9bbd6d9cde88"
+    },
+    {
+      "name": "cpu-source002-3.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/cpu-source002-3.raw.log",
+      "bytes": 1773,
+      "sha256": "fe484b55ae280cbad9716f6aab75a0100edd193ddaa2bdd12547a8ead203c0cd"
+    },
+    {
+      "name": "cpu-source002-results.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/cpu-source002-results.json",
+      "bytes": 10334,
+      "sha256": "79bf50e393e7f6e67242acc201fe7d9fbd3d5be8937e43d524a51ed490a0c8cc"
+    },
+    {
+      "name": "cpu-supervisor-001.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/cpu-supervisor-001.py",
+      "bytes": 11066,
+      "sha256": "edd1a7a91021aaf157efd820783edf8df2544343c5887ecdc397cda8cde25a66"
+    },
+    {
+      "name": "cpu-supervisor-002.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/cpu-supervisor-002.py",
+      "bytes": 11122,
+      "sha256": "24c5d7caa9f6ab9ae14e1380c68325d6416120ecf9b1090a34f6939c49a17538"
+    },
+    {
+      "name": "fixture-import-001/duration.gltf",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/fixture-import-001/duration.gltf",
+      "bytes": 1863,
+      "sha256": "6a7151200e24b1db2bf3e6ecdfa5f39b0bbae4b4bfb6578176d440e2f94dc871"
+    },
+    {
+      "name": "fixture-import-001/keys.gltf",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/fixture-import-001/keys.gltf",
+      "bytes": 1863,
+      "sha256": "44c945a9bf07f92b49c9db7bc522a07cfcbb52492174b7deb9d8736f5e415a49"
+    },
+    {
+      "name": "fixture-import-001/original.gltf",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/fixture-import-001/original.gltf",
+      "bytes": 1842,
+      "sha256": "1729d80c6b3ffdc6fb64f81729d275e6afb49292b60158a1017bab1995b9b226"
+    },
+    {
+      "name": "fixture-import-001/processes.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/fixture-import-001/processes.json",
+      "bytes": 3370,
+      "sha256": "a8ec3d2e9153711c84660d73aacb3c5fce4f7e248f9235f3b285f0e843982c44"
+    },
+    {
+      "name": "fixture-import-001/project.journal.jsonl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/fixture-import-001/project.journal.jsonl",
+      "bytes": 30900,
+      "sha256": "bf5f5793e8e8c8cf806e4d10c70a84cf07cc46b36e960ec51b4aa88e567d07ec"
+    },
+    {
+      "name": "fixture-import-001/project.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/fixture-import-001/project.json",
+      "bytes": 600,
+      "sha256": "7b4b17f9788b37bfb05ab39b1492eededf8c92be04a1f2792b32a01e2d605cd0"
+    },
+    {
+      "name": "fixture-import-001/refresh.gltf",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/fixture-import-001/refresh.gltf",
+      "bytes": 1863,
+      "sha256": "6a7151200e24b1db2bf3e6ecdfa5f39b0bbae4b4bfb6578176d440e2f94dc871"
+    },
+    {
+      "name": "fixture-import-001/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/fixture-import-001/result.json",
+      "bytes": 2363,
+      "sha256": "363de8a150e5f2fd02af72556fec447fa6b593fffe54388b483649f969144de5"
+    },
+    {
+      "name": "fixture-import-control-001.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/fixture-import-control-001.py",
+      "bytes": 2586,
+      "sha256": "c66a32a1cf4fd75631f57cce0f25b584ad4ab8ab83f5686641997f76d018bc16"
+    },
+    {
+      "name": "frontend-source001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/frontend-source001.json",
+      "bytes": 6867,
+      "sha256": "719a8e8fe5e2b08847acbdfc413894c5d0820d8965c190d1687687d8cecc9b6f"
+    },
+    {
+      "name": "lease-baseline.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/lease-baseline.json",
+      "bytes": 196,
+      "sha256": "54b83317cd41f48e918f0844886c4e8018d1d9e4eab1b9f48d3ee4c23f606ebd"
+    },
+    {
+      "name": "non-native-source001-0.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/non-native-source001-0.raw.log",
+      "bytes": 2446,
+      "sha256": "ed748efbf3e8283456f38fed3cd5e090c5c29d4fa027ffc56f5009591480fe01"
+    },
+    {
+      "name": "non-native-source001-1.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/non-native-source001-1.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "non-native-source001-2.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/non-native-source001-2.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "non-native-source001-3.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/non-native-source001-3.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "non-native-source001-results.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/non-native-source001-results.json",
+      "bytes": 2388,
+      "sha256": "ba57e943defd40202921d66718400f392d51d34e57bad6e99fb0d1379d765b03"
+    },
+    {
+      "name": "root-cua-closeout-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/root-cua-closeout-001.json",
+      "bytes": 1093,
+      "sha256": "16430de8feaad90ffc56bf64e25bf4460d9890ebd09e50d9e6e75887d6c666fd"
+    },
+    {
+      "name": "source-001/files/editor/app/src/play/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/source-001/files/editor/app/src/play/mod.rs",
+      "bytes": 12484,
+      "sha256": "13db1dad0001474a97bc92abd9e84066db08ab30f57cde692fa200617fb21547"
+    },
+    {
+      "name": "source-001/files/editor/app/src/play/probe.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/source-001/files/editor/app/src/play/probe.rs",
+      "bytes": 12169,
+      "sha256": "a183f70c7a3f87d8e6d7ad294df1616bce459227451a2d271b2f6fe3109d7ff2"
+    },
+    {
+      "name": "source-001/files/editor/app/src/play/probe/asset_workflow.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/source-001/files/editor/app/src/play/probe/asset_workflow.rs",
+      "bytes": 22268,
+      "sha256": "86fc38187373a17ee3434bddd665bf8ea50932dddf715de515e3e00f32e26658"
+    },
+    {
+      "name": "source-001/files/editor/app/src/play/probe/asset_workflow/animation.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/source-001/files/editor/app/src/play/probe/asset_workflow/animation.rs",
+      "bytes": 9080,
+      "sha256": "dd103a7a7a33b85ab7fcfe692bd91be125c0392c9ee219bcfd33a2146be23fc6"
+    },
+    {
+      "name": "source-001/files/editor/app/src/play/probe/asset_workflow/kind.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/source-001/files/editor/app/src/play/probe/asset_workflow/kind.rs",
+      "bytes": 4879,
+      "sha256": "27f80eea7f1f44074a43e6272abe49da6fb821d40ad1911bcef8cd77fc888713"
+    },
+    {
+      "name": "source-001/files/editor/app/src/play/worker.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/source-001/files/editor/app/src/play/worker.rs",
+      "bytes": 25565,
+      "sha256": "48c2a09f82554f24ccb9ea356b100194f1b14037df649ac1b51b9db56d9cf6f8"
+    },
+    {
+      "name": "source-001/files/tools/native_editor_animation.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/source-001/files/tools/native_editor_animation.py",
+      "bytes": 5478,
+      "sha256": "aba9d5ae9dfb873f01c94ae9f93a4ebdf33319cea1176edcacd5690d2fa869e5"
+    },
+    {
+      "name": "source-001/files/tools/probes/native-editor-textures.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/source-001/files/tools/probes/native-editor-textures.py",
+      "bytes": 18947,
+      "sha256": "13be601c30abee7cc7685969d74772c38fdb91bc697274b973e549ca5d1fd15d"
+    },
+    {
+      "name": "source-001/files/tools/tests/test_native_editor_textures.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/source-001/files/tools/tests/test_native_editor_textures.py",
+      "bytes": 13289,
+      "sha256": "99c8be3607f00c8b0b97771e543ecf34698190e30b72208056728d58fda4bd30"
+    },
+    {
+      "name": "source-001/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/source-001/freeze.json",
+      "bytes": 31611,
+      "sha256": "5ebac3092178345d2e3119f349a88df8a3f42e9cd3085e6626039b363568f93a"
+    },
+    {
+      "name": "source-002/files/editor/app/src/play/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/source-002/files/editor/app/src/play/mod.rs",
+      "bytes": 12484,
+      "sha256": "13db1dad0001474a97bc92abd9e84066db08ab30f57cde692fa200617fb21547"
+    },
+    {
+      "name": "source-002/files/editor/app/src/play/probe.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/source-002/files/editor/app/src/play/probe.rs",
+      "bytes": 12169,
+      "sha256": "a183f70c7a3f87d8e6d7ad294df1616bce459227451a2d271b2f6fe3109d7ff2"
+    },
+    {
+      "name": "source-002/files/editor/app/src/play/probe/asset_workflow.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/source-002/files/editor/app/src/play/probe/asset_workflow.rs",
+      "bytes": 22268,
+      "sha256": "86fc38187373a17ee3434bddd665bf8ea50932dddf715de515e3e00f32e26658"
+    },
+    {
+      "name": "source-002/files/editor/app/src/play/probe/asset_workflow/animation.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/source-002/files/editor/app/src/play/probe/asset_workflow/animation.rs",
+      "bytes": 9078,
+      "sha256": "efb51262ba460014a7dc056626fc9c47cd2d92fcfcd40a8897aa969cfb772652"
+    },
+    {
+      "name": "source-002/files/editor/app/src/play/probe/asset_workflow/kind.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/source-002/files/editor/app/src/play/probe/asset_workflow/kind.rs",
+      "bytes": 4879,
+      "sha256": "27f80eea7f1f44074a43e6272abe49da6fb821d40ad1911bcef8cd77fc888713"
+    },
+    {
+      "name": "source-002/files/editor/app/src/play/worker.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/source-002/files/editor/app/src/play/worker.rs",
+      "bytes": 25565,
+      "sha256": "48c2a09f82554f24ccb9ea356b100194f1b14037df649ac1b51b9db56d9cf6f8"
+    },
+    {
+      "name": "source-002/files/tools/native_editor_animation.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/source-002/files/tools/native_editor_animation.py",
+      "bytes": 5478,
+      "sha256": "aba9d5ae9dfb873f01c94ae9f93a4ebdf33319cea1176edcacd5690d2fa869e5"
+    },
+    {
+      "name": "source-002/files/tools/probes/native-editor-textures.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/source-002/files/tools/probes/native-editor-textures.py",
+      "bytes": 18947,
+      "sha256": "13be601c30abee7cc7685969d74772c38fdb91bc697274b973e549ca5d1fd15d"
+    },
+    {
+      "name": "source-002/files/tools/tests/test_native_editor_textures.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/source-002/files/tools/tests/test_native_editor_textures.py",
+      "bytes": 13289,
+      "sha256": "99c8be3607f00c8b0b97771e543ecf34698190e30b72208056728d58fda4bd30"
+    },
+    {
+      "name": "source-002/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/source-002/freeze.json",
+      "bytes": 31777,
+      "sha256": "825cf040ff1482437db88967c482949bb59e6df1ae58cc3dc855baa968d5b5b7"
+    },
+    {
+      "name": "window-001/animated-model-workflow.fixture.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/window-001/animated-model-workflow.fixture.json",
+      "bytes": 118,
+      "sha256": "cc7df2b2bcfda2b7e534adfc9aec44a024bf36bfc50076e37f2963305c27dfd3"
+    },
+    {
+      "name": "window-001/fixture.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/window-001/fixture.json",
+      "bytes": 490,
+      "sha256": "30de06f4d652940ec792ae3001c895b962fed7a06f85bf74249130296f29f28b"
+    },
+    {
+      "name": "window-001/move.ts",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/window-001/move.ts",
+      "bytes": 377,
+      "sha256": "2a5fee2b337d10c656398f19204fe77de9566423b66ce6d0c403031c94b87858"
+    },
+    {
+      "name": "window-001/native-window.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/window-001/native-window.json",
+      "bytes": 13569,
+      "sha256": "e13df77d21649b476fe6d5673940903b28b8f646b2c3a2fe3b7adf0215bd4905"
+    },
+    {
+      "name": "window-001/processes.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/window-001/processes.json",
+      "bytes": 9362,
+      "sha256": "cb825b0e1a14a531630d441036d0438ee6d21ae4d3d25432855493fdb21dfc3a"
+    },
+    {
+      "name": "window-001/project.journal.jsonl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/window-001/project.journal.jsonl",
+      "bytes": 85720,
+      "sha256": "e32aad4d3e400ffdc650e3c2d6cd966f64db26178e30b56fe1ccdca9556bafc3"
+    },
+    {
+      "name": "window-001/project.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/window-001/project.json",
+      "bytes": 2384,
+      "sha256": "70be17d0cebe76f72558a83e24d2058a7a6917f964dbb26bc26dfeb90ecd6c46"
+    },
+    {
+      "name": "window-001/refresh-incompatible.gltf",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/window-001/refresh-incompatible.gltf",
+      "bytes": 1863,
+      "sha256": "6a7151200e24b1db2bf3e6ecdfa5f39b0bbae4b4bfb6578176d440e2f94dc871"
+    },
+    {
+      "name": "window-001/refresh-replacement.gltf",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/window-001/refresh-replacement.gltf",
+      "bytes": 1863,
+      "sha256": "44c945a9bf07f92b49c9db7bc522a07cfcbb52492174b7deb9d8736f5e415a49"
+    },
+    {
+      "name": "window-001/refresh.gltf",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/window-001/refresh.gltf",
+      "bytes": 1863,
+      "sha256": "44c945a9bf07f92b49c9db7bc522a07cfcbb52492174b7deb9d8736f5e415a49"
+    },
+    {
+      "name": "window-001/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/window-001/result.json",
+      "bytes": 15004,
+      "sha256": "66475ac663b91894bbcbac74c6d09179212b000b3b63a2d33864181042a53177"
+    },
+    {
+      "name": "window-launch-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/window-launch-001.json",
+      "bytes": 8335,
+      "sha256": "93f3863d2b43a4b1e7406c4c2ead120f67c1cb9c9bc79b0ff11f238d770f6852"
+    },
+    {
+      "name": "window-owned-live-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/window-owned-live-001.json",
+      "bytes": 749,
+      "sha256": "206f844ec7f4d32e539b6636668cd6f0e9f1b1333eaa6cff1722810388f3f835"
+    },
+    {
+      "name": "window-supervisor-001-result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/window-supervisor-001-result.json",
+      "bytes": 1468,
+      "sha256": "56e3e498f87382c083ec5640c5a1394324bfc44bbd8989db5090aac0ab7fc613"
+    },
+    {
+      "name": "window-supervisor-001.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/window-supervisor-001.py",
+      "bytes": 7163,
+      "sha256": "3b9d9d5da50d27e59296df24506cb5c8702f9fc1df81161d53dbfe96b2fea6a7"
+    },
+    {
+      "name": "window-supervisor-001.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/window-supervisor-001.raw.log",
+      "bytes": 135,
+      "sha256": "6fdd862d9e5c8e939fdda0bbc4bc3b2a441649672a96d63fcd062f1660060aa1"
+    }
+  ]
+}

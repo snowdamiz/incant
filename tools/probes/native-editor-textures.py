@@ -24,6 +24,7 @@ import zlib
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / 'tools'))
 import native_process
+import native_editor_animation
 
 ENTITY = '00000000000000000000000002'
 SCRIPT = '00000000000000000000000001'
@@ -169,9 +170,11 @@ def model(replacement=False):
 
 
 def fixture(kind):
-    require(kind in ('texture', 'model'), 'Known asset fixture kind required')
+    require(kind in ('texture', 'model', 'animated-model'), 'Known asset fixture kind required')
     if kind == 'texture':
         return 'refresh.png', 'refresh-blue.png', png([255, 0, 0, 255]), png([0, 0, 255, 255])
+    if kind == 'animated-model':
+        return 'refresh.gltf', 'refresh-replacement.gltf', native_editor_animation.gltf(), native_editor_animation.gltf(True)
     return 'refresh.gltf', 'refresh-replacement.gltf', model(), model(True)
 
 
@@ -206,7 +209,7 @@ def execution_deadline(seconds):
 
 
 def validate_proof(proof, kind='texture'):
-    require(kind in ('texture', 'model'), 'Known proof asset kind required')
+    require(kind in ('texture', 'model', 'animated-model'), 'Known proof asset kind required')
     require(proof.get('asset_kind', 'texture') == kind, 'Matching asset-kind proof required')
     require(proof.get('passed') is True and proof.get('platform') == 'macos', 'Actual Mac app proof required')
     for field in ('world_identity_unchanged', 'module_counter_continued', 'actual_window_presentations',
@@ -225,7 +228,8 @@ def validate_proof(proof, kind='texture'):
             and counter.get('expected_delta') == 2*(tick+1)
             and counter.get('observed_delta') == counter['expected_delta'], 'Observable module-state continuation')
     stages = proof.get('stages', [])
-    require([s.get('stage') for s in stages] == (STAGES if kind == 'texture' else MODEL_STAGES), 'Exact user workflow stages')
+    expected_stages = {'texture':STAGES, 'model':MODEL_STAGES, 'animated-model':native_editor_animation.STAGES}[kind]
+    require([s.get('stage') for s in stages] == expected_stages, 'Exact user workflow stages')
     require(all(s.get('recipe_matches') is True and s.get('tick') == proof['paused_tick'] for s in stages),
             'Accepted paused catalog/world')
     frames = [s.get('frames') for s in stages]
@@ -239,9 +243,12 @@ def validate_proof(proof, kind='texture'):
     revisions = [s.get('history', {}).get('revision') for s in stages]
     require(all(type(r) is int for r in revisions), 'Committed revision identities')
     first = revisions[0]
-    require(revisions == [first, first+1, first+2, first+3, first+3, first+3],
-            'Source/history commits and refusal preservation')
-    require(proof.get('malformed_source_refusal', {}).get('code') == 'asset.import', 'Structured import refusal')
+    if kind == 'animated-model':
+        native_editor_animation.validate(proof, require)
+    else:
+        require(revisions == [first, first+1, first+2, first+3, first+3, first+3],
+                'Source/history commits and refusal preservation')
+        require(proof.get('malformed_source_refusal', {}).get('code') == 'asset.import', 'Structured import refusal')
     return proof
 
 
@@ -264,7 +271,7 @@ def main(argv=None):
     parser.add_argument('output', type=Path)
     parser.add_argument('--editor', type=Path, required=True)
     parser.add_argument('--headless', type=Path, required=True)
-    parser.add_argument('--asset-kind', choices=('texture', 'model'), default='texture')
+    parser.add_argument('--asset-kind', choices=('texture', 'model', 'animated-model'), default='texture')
     args = parser.parse_args(argv)
     source_name, replacement_name, original_bytes, replacement_bytes = fixture(args.asset_kind)
     output = args.output.resolve()
@@ -314,9 +321,13 @@ def main(argv=None):
             require(rpc('project.save', {'expected_revision':authored['revision']})['saved'], 'Fixture save')
             (output/source_name).write_bytes(original_bytes)
             (output/replacement_name).write_bytes(replacement_bytes)
+            if args.asset_kind == 'animated-model':
+                (output/'refresh-incompatible.gltf').write_bytes(native_editor_animation.gltf(True, True))
             write(f'{args.asset_kind}-workflow.fixture.json', {'format':f'incant-native-{args.asset_kind}-workflow',
                   'version':1, 'project_id':initial['project']['id']})
             before = {name:digest(output/name) for name in ('project.json', 'move.ts', replacement_name)}
+            if args.asset_kind == 'animated-model':
+                before['refresh-incompatible.gltf'] = digest(output/'refresh-incompatible.gltf')
             write('fixture.json', {'source_revision':authored['revision'], 'inputs':before,
                   'journal_bytes_before':journal.stat().st_size, 'fixture_authored_through_cmd':True})
             receipt = output/'native-window.json'

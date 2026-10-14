@@ -324,6 +324,7 @@ impl Worker {
                 asset,
                 kind,
                 fingerprint,
+                animation_entity,
                 reply,
             } => {
                 let result = (|| {
@@ -347,6 +348,14 @@ impl Worker {
                         frames: consumer.accepted_frames(),
                         recipe_matches: ticket.matches_recipe(asset, kind, &fingerprint),
                         adapter: format!("{:?}", self.renderer.adapter.get_info()),
+                        animation: animation_entity
+                            .map(|entity| {
+                                world
+                                    .animation_state(entity)
+                                    .map(super::probe::asset_workflow::AnimationObservation::from)
+                                    .ok_or("Asset probe animation entity is absent".to_string())
+                            })
+                            .transpose()?,
                     })
                 })();
                 reply.send(result).map_err(|_| "Asset probe stopped")?;
