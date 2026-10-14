@@ -84,7 +84,15 @@ pub(super) fn publish_at_revision<T>(
     // session change cannot slip between the last generation check and swap.
     // Only already-prepared handles move here. The returned retirement owner is
     // disposed by the caller after this guard has been released.
-    publish()
+    // Native panic remains terminal for Play, but must not poison the editor's
+    // authoring/status mutexes. The borrowed callback owns no prepared handles.
+    let outcome = std::panic::catch_unwind(std::panic::AssertUnwindSafe(publish));
+    drop(play);
+    drop(state);
+    match outcome {
+        Ok(result) => result,
+        Err(payload) => std::panic::resume_unwind(payload),
+    }
 }
 struct Refreshing(Arc<Service>);
 impl Drop for Refreshing {
@@ -310,6 +318,72 @@ mod tests {
         assert!(service.status.try_lock().is_ok());
         assert!(bus.try_lock().is_ok());
         assert_eq!(bus.lock().unwrap().bus_mut().unwrap().revision(), 0);
+    }
+    #[test]
+    fn a_native_publication_panic_releases_unpoisoned_editor_locks_before_retirement() {
+        use std::panic::{AssertUnwindSafe, catch_unwind};
+        let bus = Arc::new(Mutex::new(project::LoadState::Ready(Box::new(
+            CommandBus::new(Project::empty("Refresh")).unwrap(),
+        ))));
+        let (service, _) = Service::new();
+        service
+            .edit(|s| {
+                s.phase = "running";
+                Ok(())
+            })
+            .unwrap();
+        struct Candidate {
+            bus: Arc<Mutex<project::LoadState>>,
+            service: Arc<Service>,
+            unlocked: Arc<AtomicBool>,
+        }
+        impl Drop for Candidate {
+            fn drop(&mut self) {
+                self.unlocked.store(
+                    self.bus.try_lock().is_ok() && self.service.status.try_lock().is_ok(),
+                    Ordering::SeqCst,
+                );
+            }
+        }
+        let unlocked = Arc::new(AtomicBool::new(false));
+        let candidate = Candidate {
+            bus: bus.clone(),
+            service: service.clone(),
+            unlocked: unlocked.clone(),
+        };
+        assert!(
+            catch_unwind(AssertUnwindSafe(|| publish_at_revision(
+                &bus,
+                &service,
+                0,
+                0,
+                || -> Result<(), String> {
+                    let _borrow = &candidate;
+                    panic!("native publication control");
+                }
+            )))
+            .is_err()
+        );
+        assert!(!unlocked.load(Ordering::SeqCst));
+        drop(candidate);
+        assert!(unlocked.load(Ordering::SeqCst));
+        bus.lock()
+            .unwrap()
+            .bus_mut()
+            .unwrap()
+            .execute(
+                vec![Command::SetMemory {
+                    section: "control".into(),
+                    text: "still usable".into(),
+                }],
+                Actor::user("test"),
+                "edit after native panic",
+                Some(0),
+            )
+            .unwrap();
+        assert_eq!(bus.lock().unwrap().bus_mut().unwrap().revision(), 1);
+        service.failed(0, "native panic".into());
+        assert_eq!(service.snapshot().unwrap().phase, "error");
     }
     #[test]
     fn one_pending_candidate_replacement_cancellation_and_foreign_tokens_are_observable() {

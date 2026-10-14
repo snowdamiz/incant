@@ -26,10 +26,7 @@ impl<'a, B: Backend, H: SceneHostUpdate> PreparedHostUpdate<'a, B, H> {
     /// composite after the caller's publication lock has unwound.
     pub fn update(&mut self, request: &mut H::Request) -> Result<H::Reply, GameError<H::Error>> {
         let live = self.live.as_mut().expect("owned host lease");
-        let world = match live.native.world() {
-            Ok(world) => world,
-            Err(error) => return Err(error.into()),
-        };
+        let world = live.native.world()?;
         self.preserve = false;
         let reply = live.host.0.update(world, request);
         self.preserve = true;
