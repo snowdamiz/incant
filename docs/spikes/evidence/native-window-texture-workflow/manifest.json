@@ -1,0 +1,1102 @@
+{
+  "format": "incant-native-window-texture-workflow-v1",
+  "created_utc": "2026-10-14T16:11:10.140299+00:00",
+  "executed_source": "897912be9b51a1856bfd804cb90bc487ae696643",
+  "executed_base_main284": "9db293541ea7bd0ba03089a395c934c3bf2e2264",
+  "main285_composition": {
+    "base": "1eca995cb36d9f9cada732dce7d52447569e63ac",
+    "source_intake_head": "d106b5d01258280dfca8ce0d657f943da548d2fa",
+    "delta_paths": [
+      "STATUS.md",
+      "docs/spikes/evidence/navigation-search-cache-shipping/manifest.json",
+      "docs/spikes/evidence/navigation-search-cache-shipping/records.json.gz",
+      "docs/spikes/evidence/navigation-search-cache-shipping/verify.py",
+      "docs/spikes/navigation-search-cache-outcome.md"
+    ],
+    "meaning": "Docs-only source-relevance composition, not a new native execution. Exact intake details retained in review/main285-source-composition.json."
+  },
+  "source_records": [
+    {
+      "path": "editor/app/src/main.rs",
+      "sha256": "c57351a7fa9045dfccc3d7f3ef16f3012c6e0cd9f914239a7027c09dfbe3d876",
+      "bytes": 19918
+    },
+    {
+      "path": "editor/app/src/play/mod.rs",
+      "sha256": "7f02cbec9e9acba64e753f6defb15bd38daf2defb973368daf0b2c56d1fd8352",
+      "bytes": 12373
+    },
+    {
+      "path": "editor/app/src/play/probe.rs",
+      "sha256": "96c8c5a262dde9a787c04c3c8fc6e963fa67bbce5d53643c2342b380e9961dad",
+      "bytes": 11182
+    },
+    {
+      "path": "editor/app/src/play/probe/textures.rs",
+      "sha256": "6fae7671e8cf1e96ef4475e99533653c1bf6678e18285de0f8da3813ec7a1a1d",
+      "bytes": 20193
+    },
+    {
+      "path": "editor/app/src/play/worker.rs",
+      "sha256": "cb57dfc3b82af72c3ccc3fd21ff51f4260e08944ed73951a12016d023ead988c",
+      "bytes": 25193
+    },
+    {
+      "path": "tools/probes/native-editor-textures.py",
+      "sha256": "37387f082ec0b3d2f8fadd31cb27942a29a9cacbdda0d0ec3d85ba05d2965e30",
+      "bytes": 15916
+    },
+    {
+      "path": "tools/tests/test_native_editor_textures.py",
+      "sha256": "8487c4a34239c39fe804bdc3de07009322601a57ab2ee45b68157e2e0608f449",
+      "bytes": 7323
+    }
+  ],
+  "archive_sha256": "f376a5b61aaf8b0d3184926a813c4d0c1b5173c9da9dd99325df6f90919b5ce3",
+  "archive_bytes": 647692,
+  "records": [
+    {
+      "name": "build-proposal-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/build-proposal-001.json",
+      "sha256": "d4f1470d4837411af69ee9ae47cb95991adb1a8d9557634ed5ef3891ee7d2113",
+      "bytes": 4566
+    },
+    {
+      "name": "build-proposal-002.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/build-proposal-002.json",
+      "sha256": "8aaddf652917e17269b18843981cda269a5a3ab6f107bbc2dd7101737b84061e",
+      "bytes": 4799
+    },
+    {
+      "name": "build-proposal-003.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/build-proposal-003.json",
+      "sha256": "7bb5595f2d521ea2a78c42cc50b6452d9aee57b1473508864cd4502dcade0d95",
+      "bytes": 4296
+    },
+    {
+      "name": "build-proposal-004.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/build-proposal-004.json",
+      "sha256": "bab8eecd84a071d53714977666432f4ca7b8b2dec9e76bdf0cb153d0e6482664",
+      "bytes": 5059
+    },
+    {
+      "name": "build-proposal-005.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/build-proposal-005.json",
+      "sha256": "d6ede36a1814c3e36137cf52b0e5d31e3bf47a0384b4237f52e196f03b7de9fe",
+      "bytes": 4649
+    },
+    {
+      "name": "build-proposal-006-draft.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/build-proposal-006-draft.json",
+      "sha256": "11f905bd72e8232abbf83c7a0334f17c7c667fdf9bb420d38bcc46dde34f2643",
+      "bytes": 4668
+    },
+    {
+      "name": "build-proposal-006.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/build-proposal-006.json",
+      "sha256": "c9d35037beb97fdc7bbe3098fa47dad2717f74f2a03c464df7a6529c837ea0bf",
+      "bytes": 4800
+    },
+    {
+      "name": "cpu-launch-002.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/cpu-launch-002.json",
+      "sha256": "99e20f85bbe60f1adc236883a1d89959b5cd778bae369de03d21ff24983b2785",
+      "bytes": 5115
+    },
+    {
+      "name": "cpu-launch-003.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/cpu-launch-003.json",
+      "sha256": "02ec8c61284f8dd32dd4e4dfdc9338bf3f7659cb4d3c4716120efa04dbcb7fdd",
+      "bytes": 4469
+    },
+    {
+      "name": "cpu-launch-004.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/cpu-launch-004.json",
+      "sha256": "bc95cf0e9a4d35022068cad8b39a163c7462fe7903e3c0a3df3ca377fb458b26",
+      "bytes": 4707
+    },
+    {
+      "name": "cpu-launch-005.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/cpu-launch-005.json",
+      "sha256": "e065a7983e627dc333a462c9b04e33543295f63a95c66319de6aa408cd9307db",
+      "bytes": 4430
+    },
+    {
+      "name": "cpu-launch-006.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/cpu-launch-006.json",
+      "sha256": "a31e16c8a3ab263d6239188f074ff9ccaaf153c81dff816242168869a715b6a1",
+      "bytes": 4430
+    },
+    {
+      "name": "cpu-source002-0.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/cpu-source002-0.raw.log",
+      "sha256": "4f76a29dd13d69b9ca5c81e5c09210116d1cc231625b920560fb9b0838b1c2fa",
+      "bytes": 1263
+    },
+    {
+      "name": "cpu-source002-1.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/cpu-source002-1.raw.log",
+      "sha256": "2153141df340a056ee97728a47eebea56888f3918fbf669f1fcd0fc22a12b59b",
+      "bytes": 1551
+    },
+    {
+      "name": "cpu-source002-2.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/cpu-source002-2.raw.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "name": "cpu-source002-3.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/cpu-source002-3.raw.log",
+      "sha256": "e0871e73dfd2f238f1093caaf8748f6037765242e84293eeb00fab06da8962bd",
+      "bytes": 876123
+    },
+    {
+      "name": "cpu-source002-results.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/cpu-source002-results.json",
+      "sha256": "70b56a71deaa9c9c4474caffa15fd24baa7dbffd203d0b40fee28a4b8bbbf74d",
+      "bytes": 7252
+    },
+    {
+      "name": "cpu-source003-0.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/cpu-source003-0.raw.log",
+      "sha256": "e16c80e0f8c52e45d082fd43c2a5a867f4251b70fa31f994bd5d3c8d383e8d6f",
+      "bytes": 868630
+    },
+    {
+      "name": "cpu-source003-1.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/cpu-source003-1.raw.log",
+      "sha256": "fccb5c46949e3421324cf6282243efcd0260b4bd5a5f81386eac61168254e1d7",
+      "bytes": 758612
+    },
+    {
+      "name": "cpu-source003-2.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/cpu-source003-2.raw.log",
+      "sha256": "aedd93a2c5fde0cf9125987ea0544642ed416f7793e415a034398eaa15ec3814",
+      "bytes": 10476
+    },
+    {
+      "name": "cpu-source003-results.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/cpu-source003-results.json",
+      "sha256": "1de491a4357d69efe82f1164fcd6d6554e49232739920da604b0f7cd3da9049b",
+      "bytes": 6920
+    },
+    {
+      "name": "cpu-source004-0.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/cpu-source004-0.raw.log",
+      "sha256": "ccb7035a77193e5fd15c17b942a810edf9575f8cf244b4df203445e4c14e2a0c",
+      "bytes": 1448
+    },
+    {
+      "name": "cpu-source004-1.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/cpu-source004-1.raw.log",
+      "sha256": "1fb6e838f814160ddb75e246ad44d333f8807f1f9863a465687c5887e06d1033",
+      "bytes": 755604
+    },
+    {
+      "name": "cpu-source004-2.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/cpu-source004-2.raw.log",
+      "sha256": "fc32eb0840693f1ad8aed9bb02559f5b5fad7570898a58ce37850d4eb7db9d8d",
+      "bytes": 757478
+    },
+    {
+      "name": "cpu-source004-3.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/cpu-source004-3.raw.log",
+      "sha256": "63ffe52978c6c11a742c18929ff15d171183dbb9e8ac38446424b1e12665b2fc",
+      "bytes": 11831
+    },
+    {
+      "name": "cpu-source004-results.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/cpu-source004-results.json",
+      "sha256": "a6e65f4812f110674faa147470a6336c9aac0d9c94b2e942600c6ad7ca8a9d49",
+      "bytes": 5982
+    },
+    {
+      "name": "cpu-source005-0.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/cpu-source005-0.raw.log",
+      "sha256": "812e84338385f9f6c8a3e9cffc83790ca89b60e060f53d684a4daa559c414cd9",
+      "bytes": 752770
+    },
+    {
+      "name": "cpu-source005-1.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/cpu-source005-1.raw.log",
+      "sha256": "62712e87ee8fd619e4199897dcac288a826141b8de273290d379fd568d8c9568",
+      "bytes": 757478
+    },
+    {
+      "name": "cpu-source005-2.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/cpu-source005-2.raw.log",
+      "sha256": "25594f5dc03a4872975b55ec9f338cbc17c0314fc6be39483b3532bccca2e825",
+      "bytes": 7637
+    },
+    {
+      "name": "cpu-source005-results.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/cpu-source005-results.json",
+      "sha256": "e633934ad0061c49fd1c119bdc234dba3693678d9e46bd6fc54b0a8d3c9c1f8e",
+      "bytes": 5162
+    },
+    {
+      "name": "cpu-source006-0.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/cpu-source006-0.raw.log",
+      "sha256": "d1945ce478dcaf00969222d32f1928e056ffa0a98adcff0b5d0be7d1f4cd530b",
+      "bytes": 755604
+    },
+    {
+      "name": "cpu-source006-1.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/cpu-source006-1.raw.log",
+      "sha256": "8bd063efa9d32db4ceb127630bfc207f783f6bd72bd3f1c42fdbd53a46ae98bf",
+      "bytes": 757974
+    },
+    {
+      "name": "cpu-source006-2.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/cpu-source006-2.raw.log",
+      "sha256": "745481321009dd823798f1174ff9f077c707a0a96ac22ed24f32650227316df2",
+      "bytes": 10449
+    },
+    {
+      "name": "cpu-source006-results.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/cpu-source006-results.json",
+      "sha256": "7d3f561b4f9f5954dfa68e6094280c76021957dbf0ce268d2cbff8aa6a5d85a4",
+      "bytes": 5163
+    },
+    {
+      "name": "cpu-supervisor-003.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/cpu-supervisor-003.py",
+      "sha256": "6260ffd3a6f6ca9828a15d0086f34221de51f09fad14ff3a88d380251843b4bc",
+      "bytes": 8008
+    },
+    {
+      "name": "cpu-supervisor-004.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/cpu-supervisor-004.py",
+      "sha256": "2c04062a325d6862cf4a8d56e20bf2cc25915915c5d44bdd278c337d12c27caf",
+      "bytes": 8057
+    },
+    {
+      "name": "cpu-supervisor-005.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/cpu-supervisor-005.py",
+      "sha256": "2c17f4cad84f43f64ed5c1d59b2de24e302388bbf622f7f1ccd95560e8b6d251",
+      "bytes": 8057
+    },
+    {
+      "name": "cpu-supervisor-006.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/cpu-supervisor-006.py",
+      "sha256": "2073ad20eaed80fd540d03217b08a20c257702d29a4b683840b8261199b7d3ed",
+      "bytes": 8057
+    },
+    {
+      "name": "cpu-supervisor.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/cpu-supervisor.py",
+      "sha256": "cc3f28a3bcf1958dba4661f30e84b070b4236a814858aad0e9d3020dd7277157",
+      "bytes": 7889
+    },
+    {
+      "name": "current-receipt-source006.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/current-receipt-source006.json",
+      "sha256": "a028765edd699773e3fe277eca7e1c0435c443401d9bf52285711fc9bc6438ff",
+      "bytes": 2449
+    },
+    {
+      "name": "main284-main285-source-closure.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/main284-main285-source-closure.json",
+      "sha256": "e524346c111084b2e9ffbbe20c3abc9094fbce4d129e308f1c00ecd03b9d6954",
+      "bytes": 1052
+    },
+    {
+      "name": "review/independent-source006-window004.json",
+      "original": "/Users/andreyyurlov/.codex/incant-reviews/native-window-texture-source006-window004-independent-20261014.json",
+      "sha256": "fcbe32ca61b8536c813cb1796d155d25e8ac5e58caef60653918b257ed92919d",
+      "bytes": 5178
+    },
+    {
+      "name": "review/main285-source-composition.json",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-texture-workflow-main285/source-composition.json",
+      "sha256": "9fc4cd5d9683f4695b2722cdbd5119ecac4d9d891c004b3ce883bd785f7378a7",
+      "bytes": 2052
+    },
+    {
+      "name": "source-001/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/source-001/freeze.json",
+      "sha256": "ff42600a3893376fca168a96f6d162fe41f42db1526fdc5f62013e0bea27c9e2",
+      "bytes": 1526
+    },
+    {
+      "name": "source-002/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/source-002/freeze.json",
+      "sha256": "b638e9b57ae091860473930ebb39560478ff14dad324b30d60a1406788774a44",
+      "bytes": 1646
+    },
+    {
+      "name": "source-003/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/source-003/freeze.json",
+      "sha256": "8120a47dd316be9fe074da7d109089931a17eed27b7ec34f1033281c7e65b899",
+      "bytes": 1562
+    },
+    {
+      "name": "source-004/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/source-004/freeze.json",
+      "sha256": "a43b8caf12b504acee6373f8018dfacb0f25fea20a49a928f90b0a0debc984d9",
+      "bytes": 1755
+    },
+    {
+      "name": "source-005/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/source-005/freeze.json",
+      "sha256": "0384d58c840d7be7e73247afdc26000fff7c23794243cfd99e85c59a68085113",
+      "bytes": 1691
+    },
+    {
+      "name": "source-006/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/source-006/freeze.json",
+      "sha256": "d2b8e1dd39572074b2316c07d26f1c169a92e9f7e588fa02f85ccf0ab90c00a8",
+      "bytes": 1796
+    },
+    {
+      "name": "source-006/inputs/editor/app/src/main.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/source-006/inputs/editor/app/src/main.rs",
+      "sha256": "c57351a7fa9045dfccc3d7f3ef16f3012c6e0cd9f914239a7027c09dfbe3d876",
+      "bytes": 19918
+    },
+    {
+      "name": "source-006/inputs/editor/app/src/play/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/source-006/inputs/editor/app/src/play/mod.rs",
+      "sha256": "7f02cbec9e9acba64e753f6defb15bd38daf2defb973368daf0b2c56d1fd8352",
+      "bytes": 12373
+    },
+    {
+      "name": "source-006/inputs/editor/app/src/play/probe.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/source-006/inputs/editor/app/src/play/probe.rs",
+      "sha256": "96c8c5a262dde9a787c04c3c8fc6e963fa67bbce5d53643c2342b380e9961dad",
+      "bytes": 11182
+    },
+    {
+      "name": "source-006/inputs/editor/app/src/play/probe/textures.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/source-006/inputs/editor/app/src/play/probe/textures.rs",
+      "sha256": "6fae7671e8cf1e96ef4475e99533653c1bf6678e18285de0f8da3813ec7a1a1d",
+      "bytes": 20193
+    },
+    {
+      "name": "source-006/inputs/editor/app/src/play/worker.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/source-006/inputs/editor/app/src/play/worker.rs",
+      "sha256": "cb57dfc3b82af72c3ccc3fd21ff51f4260e08944ed73951a12016d023ead988c",
+      "bytes": 25193
+    },
+    {
+      "name": "source-006/inputs/tools/probes/native-editor-textures.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/source-006/inputs/tools/probes/native-editor-textures.py",
+      "sha256": "37387f082ec0b3d2f8fadd31cb27942a29a9cacbdda0d0ec3d85ba05d2965e30",
+      "bytes": 15916
+    },
+    {
+      "name": "source-006/inputs/tools/tests/test_native_editor_textures.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/source-006/inputs/tools/tests/test_native_editor_textures.py",
+      "sha256": "8487c4a34239c39fe804bdc3de07009322601a57ab2ee45b68157e2e0608f449",
+      "bytes": 7323
+    },
+    {
+      "name": "window-001-failure-supplement.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-001-failure-supplement.json",
+      "sha256": "281550512b953af8cc3002ea8fa06d82b2af642882549b4c9dcf4aea23b8c297",
+      "bytes": 853
+    },
+    {
+      "name": "window-001/.incant-source-transactions/01M4XFXKXAAJ3YC3GQ26R1AK74.old-receipt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-001/.incant-source-transactions/01M4XFXKXAAJ3YC3GQ26R1AK74.old-receipt",
+      "sha256": "12241709b9395b06f8f946ef5c8aabf0d8ad25f8a096e1d0b911a847e2243d39",
+      "bytes": 26
+    },
+    {
+      "name": "window-001/.incant-source-transactions/01M4XFXKXAAJ3YC3GQ26R1AK74.project.backup",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-001/.incant-source-transactions/01M4XFXKXAAJ3YC3GQ26R1AK74.project.backup",
+      "sha256": "83a0513d6721b605545394bfc2dc523b9ec19548b45d6b7b9a00206ac1ec917d",
+      "bytes": 352
+    },
+    {
+      "name": "window-001/.incant-source-transactions/01M4XFXKXAAJ3YC3GQ26R1AK74.project.previous",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-001/.incant-source-transactions/01M4XFXKXAAJ3YC3GQ26R1AK74.project.previous",
+      "sha256": "83a0513d6721b605545394bfc2dc523b9ec19548b45d6b7b9a00206ac1ec917d",
+      "bytes": 352
+    },
+    {
+      "name": "window-001/.incant-source-transactions/lock",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-001/.incant-source-transactions/lock",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "name": "window-001/.incant-source-transactions/receipt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-001/.incant-source-transactions/receipt",
+      "sha256": "4bbef752e2d38bcad0b589c6980311d3ea64a97fe0cd383d829c8b8d8b4a0a7d",
+      "bytes": 26
+    },
+    {
+      "name": "window-001/fixture.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-001/fixture.json",
+      "sha256": "f445c75ea38810b57ceb436b6fe83830e4d0bbe1dba85e16e67bbe26020813fb",
+      "bytes": 381
+    },
+    {
+      "name": "window-001/move.ts",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-001/move.ts",
+      "sha256": "2a5fee2b337d10c656398f19204fe77de9566423b66ce6d0c403031c94b87858",
+      "bytes": 377
+    },
+    {
+      "name": "window-001/processes.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-001/processes.json",
+      "sha256": "a29cb0992d560bb88c125ca4669a6d4382eda84b1ad43b28269864f69b3377d7",
+      "bytes": 6855
+    },
+    {
+      "name": "window-001/project.journal.jsonl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-001/project.journal.jsonl",
+      "sha256": "6b6dd7d5c53f24936dd7d71961d924f2c5fb236a3975d4784aee0b713b01c54c",
+      "bytes": 23763
+    },
+    {
+      "name": "window-001/project.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-001/project.json",
+      "sha256": "19beacfacbf9764c0e94c6827b6cf29e12b81dc5845239ee01e525725c5ac217",
+      "bytes": 2384
+    },
+    {
+      "name": "window-001/refresh-blue.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-001/refresh-blue.png",
+      "sha256": "6a34118ba2e0bf5da5ab14cb63b121e2e8b2987a876668a9b2f9c30e1357470b",
+      "bytes": 70
+    },
+    {
+      "name": "window-001/refresh.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-001/refresh.png",
+      "sha256": "4ff6ab670a58c14270e034e2090d9a432caa263a14e0a25785386b0c12f880b5",
+      "bytes": 70
+    },
+    {
+      "name": "window-001/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-001/result.json",
+      "sha256": "a4248da1898e9856a1a8f719c67e78589f9afaf8a20fb3bb20ff634c552c5782",
+      "bytes": 707
+    },
+    {
+      "name": "window-001/texture-workflow.fixture.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-001/texture-workflow.fixture.json",
+      "sha256": "f63212828b925713ae74f26401153add7297d782472e8e7255a64461c9b3507e",
+      "bytes": 111
+    },
+    {
+      "name": "window-002-failure-supplement.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-002-failure-supplement.json",
+      "sha256": "59be1ebad88661d7871112b7825cd98287c015675874fa770738c5b63eb0369c",
+      "bytes": 1659
+    },
+    {
+      "name": "window-002/.incant-source-transactions/01M4XGVG1MHFQQFGBQ1P5J7K8T.old-receipt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-002/.incant-source-transactions/01M4XGVG1MHFQQFGBQ1P5J7K8T.old-receipt",
+      "sha256": "9c64425310add844d980d77f01104dcccd4528f0755aed92eca5779333b72421",
+      "bytes": 26
+    },
+    {
+      "name": "window-002/.incant-source-transactions/01M4XGVG1MHFQQFGBQ1P5J7K8T.project.backup",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-002/.incant-source-transactions/01M4XGVG1MHFQQFGBQ1P5J7K8T.project.backup",
+      "sha256": "19ad9d55b19b326595aecc2f3f124af6cd0f22c96bd275daa08d875a31f85ca5",
+      "bytes": 352
+    },
+    {
+      "name": "window-002/.incant-source-transactions/01M4XGVG1MHFQQFGBQ1P5J7K8T.project.previous",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-002/.incant-source-transactions/01M4XGVG1MHFQQFGBQ1P5J7K8T.project.previous",
+      "sha256": "19ad9d55b19b326595aecc2f3f124af6cd0f22c96bd275daa08d875a31f85ca5",
+      "bytes": 352
+    },
+    {
+      "name": "window-002/.incant-source-transactions/lock",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-002/.incant-source-transactions/lock",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "name": "window-002/.incant-source-transactions/receipt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-002/.incant-source-transactions/receipt",
+      "sha256": "29e9e6bd11be6d6fb296c60736f0f19b9e35a1ab5d3374f8df70e3332bf62eda",
+      "bytes": 26
+    },
+    {
+      "name": "window-002/.incant/cache/textures/5f839687ff6ab9c0af64636b0584390e472eff9929fccb54ebfa28ce00e32f41.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-002/.incant/cache/textures/5f839687ff6ab9c0af64636b0584390e472eff9929fccb54ebfa28ce00e32f41.json",
+      "sha256": "8365eaa0608f3b480ddebdccb8ffc2d7514691e2b2b63265f404aadba6f581be",
+      "bytes": 401
+    },
+    {
+      "name": "window-002/.incant/cache/textures/c047856bccce88fe4230f25b67e2a8030132db19cf7c0d85a36c43ce9b9a0880.ktx2",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-002/.incant/cache/textures/c047856bccce88fe4230f25b67e2a8030132db19cf7c0d85a36c43ce9b9a0880.ktx2",
+      "sha256": "c047856bccce88fe4230f25b67e2a8030132db19cf7c0d85a36c43ce9b9a0880",
+      "bytes": 252
+    },
+    {
+      "name": "window-002/fixture.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-002/fixture.json",
+      "sha256": "edde58ee244b3aa727b13f109602e256ad46953166cf5d33fa910a6040c01c62",
+      "bytes": 381
+    },
+    {
+      "name": "window-002/move.ts",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-002/move.ts",
+      "sha256": "2a5fee2b337d10c656398f19204fe77de9566423b66ce6d0c403031c94b87858",
+      "bytes": 377
+    },
+    {
+      "name": "window-002/native-window.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-002/native-window.json",
+      "sha256": "15bbd9c990fef810d81cbeef0a77f34f79edcec3fc717540623ec3f7cd6a72b0",
+      "bytes": 62
+    },
+    {
+      "name": "window-002/processes.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-002/processes.json",
+      "sha256": "56c9922da274083d729b286ecfebf03c0f45dfaa6ccb87c32e622c9c96021ffc",
+      "bytes": 6514
+    },
+    {
+      "name": "window-002/project.journal.jsonl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-002/project.journal.jsonl",
+      "sha256": "a6605588acb9554edfc129368c9ba3e698316d7b6c128a88efea364e6e65590e",
+      "bytes": 42285
+    },
+    {
+      "name": "window-002/project.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-002/project.json",
+      "sha256": "daa6d1d166f1e51137002057c2b128762a8dc49779828aef735c18a02ed74867",
+      "bytes": 2384
+    },
+    {
+      "name": "window-002/refresh-blue.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-002/refresh-blue.png",
+      "sha256": "6a34118ba2e0bf5da5ab14cb63b121e2e8b2987a876668a9b2f9c30e1357470b",
+      "bytes": 70
+    },
+    {
+      "name": "window-002/refresh.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-002/refresh.png",
+      "sha256": "4ff6ab670a58c14270e034e2090d9a432caa263a14e0a25785386b0c12f880b5",
+      "bytes": 70
+    },
+    {
+      "name": "window-002/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-002/result.json",
+      "sha256": "4bc548f0a2e9da82c70c76ad196d6ab4d0e07733d8db2bbfe0e2f58ed711f36b",
+      "bytes": 837
+    },
+    {
+      "name": "window-002/texture-workflow.fixture.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-002/texture-workflow.fixture.json",
+      "sha256": "0aa9f75806ae03dcb81abc412c563496e523b0a8af8d03fbe09ca627b2d0c37f",
+      "bytes": 111
+    },
+    {
+      "name": "window-003-cua-supplement.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-003-cua-supplement.json",
+      "sha256": "23ed185fbf193a181e852ed441d21a901618290a2391cfde8c1a8e2ea775e991",
+      "bytes": 1486
+    },
+    {
+      "name": "window-003-failure-supplement.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-003-failure-supplement.json",
+      "sha256": "2331b6677390122fd0ab33d8a770a03959fb29017ac9287206b7c6bc8b1e7f75",
+      "bytes": 2701
+    },
+    {
+      "name": "window-003/.incant-source-transactions/01M4XHJSXRK9PT082DE6K9S4B7.old-receipt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-003/.incant-source-transactions/01M4XHJSXRK9PT082DE6K9S4B7.old-receipt",
+      "sha256": "e688846ef21671cb7dfe259bf4951ecf0b15c583283ab89126aed16a55c0c588",
+      "bytes": 26
+    },
+    {
+      "name": "window-003/.incant-source-transactions/01M4XHJSXRK9PT082DE6K9S4B7.project.backup",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-003/.incant-source-transactions/01M4XHJSXRK9PT082DE6K9S4B7.project.backup",
+      "sha256": "55b151d09458c1b3bc8ab12552d20fc04532caefa1b638da0a95664492e8042a",
+      "bytes": 352
+    },
+    {
+      "name": "window-003/.incant-source-transactions/01M4XHJSXRK9PT082DE6K9S4B7.project.previous",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-003/.incant-source-transactions/01M4XHJSXRK9PT082DE6K9S4B7.project.previous",
+      "sha256": "55b151d09458c1b3bc8ab12552d20fc04532caefa1b638da0a95664492e8042a",
+      "bytes": 352
+    },
+    {
+      "name": "window-003/.incant-source-transactions/lock",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-003/.incant-source-transactions/lock",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "name": "window-003/.incant-source-transactions/receipt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-003/.incant-source-transactions/receipt",
+      "sha256": "6c2fe015aa442a8dafae38c6514ea27bf8912d482b6f114d14bef9a4de562a14",
+      "bytes": 26
+    },
+    {
+      "name": "window-003/.incant/cache/textures/5f839687ff6ab9c0af64636b0584390e472eff9929fccb54ebfa28ce00e32f41.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-003/.incant/cache/textures/5f839687ff6ab9c0af64636b0584390e472eff9929fccb54ebfa28ce00e32f41.json",
+      "sha256": "8365eaa0608f3b480ddebdccb8ffc2d7514691e2b2b63265f404aadba6f581be",
+      "bytes": 401
+    },
+    {
+      "name": "window-003/.incant/cache/textures/c047856bccce88fe4230f25b67e2a8030132db19cf7c0d85a36c43ce9b9a0880.ktx2",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-003/.incant/cache/textures/c047856bccce88fe4230f25b67e2a8030132db19cf7c0d85a36c43ce9b9a0880.ktx2",
+      "sha256": "c047856bccce88fe4230f25b67e2a8030132db19cf7c0d85a36c43ce9b9a0880",
+      "bytes": 252
+    },
+    {
+      "name": "window-003/fixture.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-003/fixture.json",
+      "sha256": "f828b21cadb4c2939fad8a6a0b25bb03b5bd5beeaf6a12a122ce29f9e5c62b44",
+      "bytes": 381
+    },
+    {
+      "name": "window-003/move.ts",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-003/move.ts",
+      "sha256": "2a5fee2b337d10c656398f19204fe77de9566423b66ce6d0c403031c94b87858",
+      "bytes": 377
+    },
+    {
+      "name": "window-003/native-window.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-003/native-window.json",
+      "sha256": "880b49d6175184f9b73f12f2271da7f2263c144d33a8ad2004aa07e7cb51a2af",
+      "bytes": 679
+    },
+    {
+      "name": "window-003/processes.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-003/processes.json",
+      "sha256": "393c3a8eca9178db7c12af90ab12f985e399b8ac3c70cf91085750c518fce9b0",
+      "bytes": 6553
+    },
+    {
+      "name": "window-003/project.journal.jsonl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-003/project.journal.jsonl",
+      "sha256": "b9365c43bb85ae140ca417ae7308b74f36c3bc05c089adc6fc8228a396b2b047",
+      "bytes": 42017
+    },
+    {
+      "name": "window-003/project.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-003/project.json",
+      "sha256": "9f1103f16552f8cb162bfc8cfa705ff9953788f29c79536dba615d7d8eb4a2bc",
+      "bytes": 2384
+    },
+    {
+      "name": "window-003/refresh-blue.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-003/refresh-blue.png",
+      "sha256": "6a34118ba2e0bf5da5ab14cb63b121e2e8b2987a876668a9b2f9c30e1357470b",
+      "bytes": 70
+    },
+    {
+      "name": "window-003/refresh.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-003/refresh.png",
+      "sha256": "4ff6ab670a58c14270e034e2090d9a432caa263a14e0a25785386b0c12f880b5",
+      "bytes": 70
+    },
+    {
+      "name": "window-003/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-003/result.json",
+      "sha256": "aad63e16e0a0291812318f7f5c5cf67c4992fbb0ea763a2b87e0d18e72f4d1ee",
+      "bytes": 876
+    },
+    {
+      "name": "window-003/texture-workflow.fixture.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-003/texture-workflow.fixture.json",
+      "sha256": "2824adc934524d8f6d8157c269612f63ff8a1ea5e8cc161ab599bd519dfcc1e4",
+      "bytes": 111
+    },
+    {
+      "name": "window-004/.incant-source-transactions/01M4XJAF385V8MS1QC1PQSS59R.old-receipt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-004/.incant-source-transactions/01M4XJAF385V8MS1QC1PQSS59R.old-receipt",
+      "sha256": "74bc06d4bc6f4f96ab60a9712c2d8aff1882876463a5eb09f7a0ecd4ebe441d7",
+      "bytes": 26
+    },
+    {
+      "name": "window-004/.incant-source-transactions/01M4XJAF385V8MS1QC1PQSS59R.project.backup",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-004/.incant-source-transactions/01M4XJAF385V8MS1QC1PQSS59R.project.backup",
+      "sha256": "4a52db29c8ea0cf1ab4dc334a5a535cfc13404a5a0504341af86d7091708c34f",
+      "bytes": 352
+    },
+    {
+      "name": "window-004/.incant-source-transactions/01M4XJAF385V8MS1QC1PQSS59R.project.previous",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-004/.incant-source-transactions/01M4XJAF385V8MS1QC1PQSS59R.project.previous",
+      "sha256": "4a52db29c8ea0cf1ab4dc334a5a535cfc13404a5a0504341af86d7091708c34f",
+      "bytes": 352
+    },
+    {
+      "name": "window-004/.incant-source-transactions/lock",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-004/.incant-source-transactions/lock",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "name": "window-004/.incant-source-transactions/receipt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-004/.incant-source-transactions/receipt",
+      "sha256": "e08fe6f404923f3015a616bd32aa06ba0fff34c0c78cbd6839318d16ff61ee38",
+      "bytes": 26
+    },
+    {
+      "name": "window-004/.incant/cache/textures/5f839687ff6ab9c0af64636b0584390e472eff9929fccb54ebfa28ce00e32f41.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-004/.incant/cache/textures/5f839687ff6ab9c0af64636b0584390e472eff9929fccb54ebfa28ce00e32f41.json",
+      "sha256": "8365eaa0608f3b480ddebdccb8ffc2d7514691e2b2b63265f404aadba6f581be",
+      "bytes": 401
+    },
+    {
+      "name": "window-004/.incant/cache/textures/766230f69d46eae25f742df98c9d95ca3e34e7af85f69ff07a2fbf7c30c46421.ktx2",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-004/.incant/cache/textures/766230f69d46eae25f742df98c9d95ca3e34e7af85f69ff07a2fbf7c30c46421.ktx2",
+      "sha256": "766230f69d46eae25f742df98c9d95ca3e34e7af85f69ff07a2fbf7c30c46421",
+      "bytes": 252
+    },
+    {
+      "name": "window-004/.incant/cache/textures/9ce91255983ebf12120c5467781d35a043565ea55a04f55157e9f304d8af7df5.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-004/.incant/cache/textures/9ce91255983ebf12120c5467781d35a043565ea55a04f55157e9f304d8af7df5.json",
+      "sha256": "7878e19ebb16d5b199c31cc2aecd42d06dd8f4cc327150cf4d64642eb6bf05d2",
+      "bytes": 401
+    },
+    {
+      "name": "window-004/.incant/cache/textures/c047856bccce88fe4230f25b67e2a8030132db19cf7c0d85a36c43ce9b9a0880.ktx2",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-004/.incant/cache/textures/c047856bccce88fe4230f25b67e2a8030132db19cf7c0d85a36c43ce9b9a0880.ktx2",
+      "sha256": "c047856bccce88fe4230f25b67e2a8030132db19cf7c0d85a36c43ce9b9a0880",
+      "bytes": 252
+    },
+    {
+      "name": "window-004/fixture.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-004/fixture.json",
+      "sha256": "f69255d90442298fb1054ca0a2d7759b9cfcd64d20b25cb2cb865bfedf710527",
+      "bytes": 381
+    },
+    {
+      "name": "window-004/move.ts",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-004/move.ts",
+      "sha256": "2a5fee2b337d10c656398f19204fe77de9566423b66ce6d0c403031c94b87858",
+      "bytes": 377
+    },
+    {
+      "name": "window-004/native-window.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-004/native-window.json",
+      "sha256": "7624fa214705b1d5917b9ccf38e577b71fb6c285d4bcc0cdeae83629fcc30d73",
+      "bytes": 9795
+    },
+    {
+      "name": "window-004/processes.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-004/processes.json",
+      "sha256": "b6bed819a10350c2ea0a039f29f44e023be00b220930a424245ccc87a716f5ae",
+      "bytes": 9373
+    },
+    {
+      "name": "window-004/project.journal.jsonl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-004/project.journal.jsonl",
+      "sha256": "1ca886d5b44630ed9763a723d657afb191919bed66d374c7afc837f37ae53797",
+      "bytes": 66910
+    },
+    {
+      "name": "window-004/project.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-004/project.json",
+      "sha256": "b1e19bbb42b037a489a702dd214ad1f745339e6d5bc5e2416dcf01a1b0610f73",
+      "bytes": 2384
+    },
+    {
+      "name": "window-004/refresh-blue.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-004/refresh-blue.png",
+      "sha256": "6a34118ba2e0bf5da5ab14cb63b121e2e8b2987a876668a9b2f9c30e1357470b",
+      "bytes": 70
+    },
+    {
+      "name": "window-004/refresh.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-004/refresh.png",
+      "sha256": "6a34118ba2e0bf5da5ab14cb63b121e2e8b2987a876668a9b2f9c30e1357470b",
+      "bytes": 70
+    },
+    {
+      "name": "window-004/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-004/result.json",
+      "sha256": "2bb4c8a84317d7ef8969179b790782a8a4a01de0ebf4d71a3fd095d824f3d01e",
+      "bytes": 10924
+    },
+    {
+      "name": "window-004/root-cua-actions.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-004/root-cua-actions.json",
+      "sha256": "afd448298fea24fa5ef78a7880f24848f8487a1e3d908a50cf33c07694051c8d",
+      "bytes": 2285
+    },
+    {
+      "name": "window-004/texture-workflow.fixture.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-004/texture-workflow.fixture.json",
+      "sha256": "9db3f5eb72fa00728fc30a29dcba6cfffff0f26cbeca92bc2dd86119d0f2e797",
+      "bytes": 111
+    },
+    {
+      "name": "window-launch-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-launch-001.json",
+      "sha256": "ebacad1f16a7bc2489ec58400d586c538d1d89ff47a2bc5e737be34f0208e4e2",
+      "bytes": 7424
+    },
+    {
+      "name": "window-launch-002.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-launch-002.json",
+      "sha256": "d04fad8d550dbaf02bee490812a7a3779e336232ccfaed2fd6b73d5bbda82857",
+      "bytes": 8422
+    },
+    {
+      "name": "window-launch-003.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-launch-003.json",
+      "sha256": "e5024812c8e374b655b56143f2c3cd1e7c6cfc81ec5ac1aeaa718c417e01108d",
+      "bytes": 10373
+    },
+    {
+      "name": "window-launch-004.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-launch-004.json",
+      "sha256": "3fab32dbc78c058230202b795f897242c3fbfeb39bc29016afcbcc0baae28f54",
+      "bytes": 12330
+    },
+    {
+      "name": "window-owned-live-004.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-owned-live-004.json",
+      "sha256": "8c9e4027dd3e9e87d59b944b1255a95d7d402daa02d72175be33d1a04aa59ee6",
+      "bytes": 715
+    },
+    {
+      "name": "window-supervisor-004-result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-supervisor-004-result.json",
+      "sha256": "2166b44a59ee66da831dfcb7712a1ec088a5aa2787915c5870ea80901be06cef",
+      "bytes": 1434
+    },
+    {
+      "name": "window-supervisor-004.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-supervisor-004.py",
+      "sha256": "b8b348562c8171965f4c64991df2ad0a6653de4d8e6db0f1a77d4afdcb4a2b75",
+      "bytes": 6507
+    },
+    {
+      "name": "window-supervisor-004.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/window-supervisor-004.raw.log",
+      "sha256": "a417463b5c2d20499a71506d06908b1c3b528926886488a2b9a6baca22876ab7",
+      "bytes": 133
+    }
+  ],
+  "retained_artifacts": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/binaries/incant_headless-source003",
+      "sha256": "ff8c4365346b2b85cc2285ac53a8167f6e7989e551dc9d4af87df87acaf68b88",
+      "bytes": 62122800,
+      "producing_source": "1d0f95e97b1b7b5482d3057d5d04d34658fbe193",
+      "kind": "retained executable"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/binaries/incant_editor-source003",
+      "sha256": "2a3aeb6ada6db2dabbd70fb1500f92d7f17e38bc8b5e552cb84cdebd5adf521d",
+      "bytes": 72668592,
+      "producing_source": "1d0f95e97b1b7b5482d3057d5d04d34658fbe193",
+      "kind": "retained executable"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/binaries/incant_editor-source004",
+      "sha256": "7b1f8a280d65bdc7d1a5f6599ed8275f009f66d8627933d93f134de4a085bb90",
+      "bytes": 72683264,
+      "producing_source": "344901e4ed6d30be102b67d7992e44291f799536",
+      "kind": "retained executable"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/binaries/incant_editor-source005",
+      "sha256": "bd4f717e5bf4d687db84443250bf14989601aadf5bc7be61ccf8c7fcc1b48afb",
+      "bytes": 72683264,
+      "producing_source": "cb084f2a2a955797348e49d296239a98c769d026",
+      "kind": "retained executable"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/binaries/incant_editor-source006",
+      "sha256": "d7383ce27acb0d90e2872f6e8a1caa9b2b0780e86222df2ca581f5d8c620a4f3",
+      "bytes": 72685904,
+      "producing_source": "897912be9b51a1856bfd804cb90bc487ae696643",
+      "kind": "retained executable"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/binaries/Incant Texture Workflow Probe.app/Contents/MacOS/incant_editor",
+      "sha256": "d7383ce27acb0d90e2872f6e8a1caa9b2b0780e86222df2ca581f5d8c620a4f3",
+      "bytes": 72685904,
+      "producing_source": "897912be9b51a1856bfd804cb90bc487ae696643",
+      "kind": "same-byte local app wrapper executable"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/binaries/Incant Texture Workflow Probe.app/Contents/Info.plist",
+      "sha256": "cc5d26a294ee1add7666cd1a1401cfb61fe739bb341a5af1f57cd3780478db49",
+      "bytes": 730,
+      "kind": "minimal unique bundle identity"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/frontend-dist-source002/assets/index-4A6FDmvL.css",
+      "sha256": "0b2651dea4a0592aa4867227eebf24fe82a9566d3556cf7f748f24e2bf5277dc",
+      "bytes": 92165,
+      "producing_source": "3ab736cc1d29c7229fdc5fbb3392df0b1ed8343e",
+      "kind": "genuine retained frontend"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/frontend-dist-source002/assets/index-W90srANs.js",
+      "sha256": "5151789c45e2ca84dc45acd2ce4a4aad1eb6d2392a6d9da10da004a879c2214a",
+      "bytes": 485008,
+      "producing_source": "3ab736cc1d29c7229fdc5fbb3392df0b1ed8343e",
+      "kind": "genuine retained frontend"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/frontend-dist-source002/assets/index-W90srANs.js.map",
+      "sha256": "3c9f2c07ab1915b5db80a1e2c529a445cb80ced4f5db39b9e2bb2e7f5eb4d471",
+      "bytes": 2026158,
+      "producing_source": "3ab736cc1d29c7229fdc5fbb3392df0b1ed8343e",
+      "kind": "genuine retained frontend"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/frontend-dist-source002/assets/inter-cyrillic-ext-wght-normal-BOeWTOD4.woff2",
+      "sha256": "ca157063339ac4ad418f214f3abfed119b0798ab4d377386ce5c9e5a7a435ebd",
+      "bytes": 25960,
+      "producing_source": "3ab736cc1d29c7229fdc5fbb3392df0b1ed8343e",
+      "kind": "genuine retained frontend"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/frontend-dist-source002/assets/inter-cyrillic-wght-normal-DqGufNeO.woff2",
+      "sha256": "71d5ee93cc1e9f1d520a3a8b66456de18c7879d8df09d57fcd2eaff75fef0075",
+      "bytes": 18748,
+      "producing_source": "3ab736cc1d29c7229fdc5fbb3392df0b1ed8343e",
+      "kind": "genuine retained frontend"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/frontend-dist-source002/assets/inter-greek-ext-wght-normal-DlzME5K_.woff2",
+      "sha256": "6e9e020a25f9b56d418f2c085b1d3c09725a4da23fe693a5b463064606732190",
+      "bytes": 11232,
+      "producing_source": "3ab736cc1d29c7229fdc5fbb3392df0b1ed8343e",
+      "kind": "genuine retained frontend"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/frontend-dist-source002/assets/inter-greek-wght-normal-CkhJZR-_.woff2",
+      "sha256": "1be3448e292fbf05ffe176fe1e43f135013d50b1e7d324ad1a558f623d3bb6f6",
+      "bytes": 18996,
+      "producing_source": "3ab736cc1d29c7229fdc5fbb3392df0b1ed8343e",
+      "kind": "genuine retained frontend"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/frontend-dist-source002/assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2",
+      "sha256": "34b9c504cab7a73e37b746343a449132e56cf7b5481af2cb81dc74dcff25c956",
+      "bytes": 85068,
+      "producing_source": "3ab736cc1d29c7229fdc5fbb3392df0b1ed8343e",
+      "kind": "genuine retained frontend"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/frontend-dist-source002/assets/inter-latin-wght-normal-Dx4kXJAl.woff2",
+      "sha256": "3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62",
+      "bytes": 48256,
+      "producing_source": "3ab736cc1d29c7229fdc5fbb3392df0b1ed8343e",
+      "kind": "genuine retained frontend"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/frontend-dist-source002/assets/inter-vietnamese-wght-normal-CBcvBZtf.woff2",
+      "sha256": "5c66f9e07e90c6d4ac4922cc68d60de26c17b1858e677fb5e603fce3952b3ff2",
+      "bytes": 10252,
+      "producing_source": "3ab736cc1d29c7229fdc5fbb3392df0b1ed8343e",
+      "kind": "genuine retained frontend"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/frontend-dist-source002/assets/jetbrains-mono-cyrillic-ext-wght-normal-EocZY2iu.woff2",
+      "sha256": "593ccd6fe36e299e151aeae4521be9bfe83ac487d96d7cdb44f50be4a04041c7",
+      "bytes": 2028,
+      "producing_source": "3ab736cc1d29c7229fdc5fbb3392df0b1ed8343e",
+      "kind": "genuine retained frontend"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/frontend-dist-source002/assets/jetbrains-mono-cyrillic-wght-normal-D73BlboJ.woff2",
+      "sha256": "d274604c40757f98f07df623a8b8fb5194508a6fa4f5413a7a107f09e3b7452a",
+      "bytes": 12108,
+      "producing_source": "3ab736cc1d29c7229fdc5fbb3392df0b1ed8343e",
+      "kind": "genuine retained frontend"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/frontend-dist-source002/assets/jetbrains-mono-greek-wght-normal-Bw9x6K1M.woff2",
+      "sha256": "ee863198077f3093ffa81c072581cc4bd608a04e60a8a9c0b846396ce4f14109",
+      "bytes": 9004,
+      "producing_source": "3ab736cc1d29c7229fdc5fbb3392df0b1ed8343e",
+      "kind": "genuine retained frontend"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/frontend-dist-source002/assets/jetbrains-mono-latin-ext-wght-normal-DBQx-q_a.woff2",
+      "sha256": "79bfdab9ba467e26eea4122e6f2567e188dd8a09a8c730d501fc487c4ab99c6e",
+      "bytes": 15196,
+      "producing_source": "3ab736cc1d29c7229fdc5fbb3392df0b1ed8343e",
+      "kind": "genuine retained frontend"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/frontend-dist-source002/assets/jetbrains-mono-latin-wght-normal-B9CIFXIH.woff2",
+      "sha256": "18be452724bfdc236c074ca94a249a7f41a86752c7d04ab258ce9ed5651f6a7e",
+      "bytes": 40404,
+      "producing_source": "3ab736cc1d29c7229fdc5fbb3392df0b1ed8343e",
+      "kind": "genuine retained frontend"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/frontend-dist-source002/assets/jetbrains-mono-vietnamese-wght-normal-Bt-aOZkq.woff2",
+      "sha256": "2288795da89dd97e648954b96e22b4501bd85dfc453264460b252f888b582ca2",
+      "bytes": 7504,
+      "producing_source": "3ab736cc1d29c7229fdc5fbb3392df0b1ed8343e",
+      "kind": "genuine retained frontend"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/frontend-dist-source002/icon.png",
+      "sha256": "7525176384661738c92475b9cf88ae00d05a42ce1cc63f63afcf81e0c63b8e6e",
+      "bytes": 7144,
+      "producing_source": "3ab736cc1d29c7229fdc5fbb3392df0b1ed8343e",
+      "kind": "genuine retained frontend"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/frontend-dist-source002/icon.svg",
+      "sha256": "52cc3f9a2f248fa5c791f976a67482f31d107552f2f27a62f072451eb07c4fb5",
+      "bytes": 1588,
+      "producing_source": "3ab736cc1d29c7229fdc5fbb3392df0b1ed8343e",
+      "kind": "genuine retained frontend"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-texture-workflow-001/frontend-dist-source002/index.html",
+      "sha256": "7c99d98278e80b791c4a0586f8f1d8f29be9f1f63f127f3c9213a69eedbfd70a",
+      "bytes": 998,
+      "producing_source": "3ab736cc1d29c7229fdc5fbb3392df0b1ed8343e",
+      "kind": "genuine retained frontend"
+    }
+  ],
+  "source_commits": [
+    "bed300113f5362dd2054fdacca74f88a63aba07e",
+    "3ab736cc1d29c7229fdc5fbb3392df0b1ed8343e",
+    "1d0f95e97b1b7b5482d3057d5d04d34658fbe193",
+    "344901e4ed6d30be102b67d7992e44291f799536",
+    "cb084f2a2a955797348e49d296239a98c769d026",
+    "897912be9b51a1856bfd804cb90bc487ae696643"
+  ],
+  "actual_result": {
+    "attempt": "window-004",
+    "root_exec_session": 99500,
+    "outer_exit": 0,
+    "managed_children": 6,
+    "paused_tick": 3,
+    "final_tick": 4,
+    "module_delta": 8,
+    "recovered_revision": 6,
+    "stage_frames": [
+      9,
+      146,
+      151,
+      247,
+      296,
+      326
+    ],
+    "activation": "Normal Finder Open exact bundle while owned7779 live; source/deadlines/eligibility unchanged"
+  },
+  "qualification": {
+    "editor_cpu_controls": 20,
+    "editor_strict_scoped_clippy": "pass",
+    "python_controls": 8,
+    "genuine_frontend_bridge_source": "source002",
+    "copied_headless_source": "source003",
+    "independent_source_window_review_sha256": "fcbe32ca61b8536c813cb1796d155d25e8ac5e58caef60653918b257ed92919d"
+  },
+  "limitations": [
+    "Real backend handlers/watcher/native presentation proof; no import/history asset GUI-click coverage.",
+    "No numerical texture pixel capture/appearance/performance/phase gate claim; prior numerical GPU evidence remains separate.",
+    "Root CUA default instance screenshots3050/7870 excluded and closed.",
+    "Source001 unexecuted; source002 compile/source004 lint and window001..003 failures retained. Original window001 stream captures unavailable.",
+    "Old headless/frontend artifacts remain labeled with producing source; no redundant rebuild or relabeling.",
+    "Current-receipt-source006.json is a historical hold snapshot before successful window004, preserved unchanged.",
+    "Cooperative execution deadline permits mandatory cleanup/blocked filesystem work to finish later."
+  ]
+}
