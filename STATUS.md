@@ -1,17 +1,26 @@
 # Implementation status
 
+## Director routing clarification — editor UI only
+
+Claude Opus 5.5 with explicitly verified Max is the default for editor UI design,
+layout, styling and rendered-pixel review. Astra/root and subagents own all other
+work, including rendering algorithms, graphics/runtime correctness and non-editor
+visuals. Astra may also take over any unresolved Claude work, including editor UI,
+without asking again. Preserve prior attempts, provenance and acceptance/evidence
+requirements. This changes ownership, not phase-gate approval.
+
 ## Numeric-loan engine optimization — matched shipping improves, 2 ms still failed
 
-A private main262 composition preserves the six reviewed numeric hierarchy and
+PR264 merged the main262 composition preserving the six reviewed numeric hierarchy and
 opaque entity-token changes. Source002 passes 466 runtime/script tests in each
 physics mode, both strict lint runs and lean native/wasm checks. All 3,874 executed
 build inputs match the current composition. Actual unchanged-workload Core
 shipping script p95 improves to 2.250001–2.370000 ms across three pairs; all 5%
 comparison checks pass, while all three 2 ms gates still fail. Full nonprofile
 reports and PCM match; QuickJS heap peaks are unchanged. Portable raw evidence is
-prepared and final integration review is independently accepted; publication
-awaits its exact-head fast check. Main262 includes the prior
-Core sample and AOT packets; release30 is unchanged. No phase/FPS/GPU claim.
+retained with independent final integration acceptance. PR264 merged after its
+exact-head fast SUCCESS; main264 includes the prior Core sample and AOT packets.
+Release30 is unchanged while checkpoint31 tests its frozen main262 tree. No phase/FPS/GPU claim.
 [Evidence](docs/spikes/numeric-loan-main262.md).
 
 ## Core row metadata — actual shipping improves, 2 ms still failed
@@ -233,8 +242,11 @@ The director authorized Phase 1 with remaining Phase 0 items deferred, sensible
 engineering progress without repeated advancement questions, and agent merges
 after scoped review and passing checks. These authorizations do not approve a
 phase gate. Section 12 decisions are settled. Current computer use and screen
-capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
-visual work, and Astra owns correctness and integration.
+capture are authorized. Claude Opus 5.5 with explicitly verified Max effort owns
+editor UI design, layout, styling and pixel review by default. Astra/root and
+subagents own all other work, including rendering and non-editor visuals, and may
+take over unresolved Claude editor UI work without another routing approval.
+Prior attempts and the same acceptance/evidence requirements remain in force.
 
 ## Private primitive world — current-main qualification complete
 
