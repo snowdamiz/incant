@@ -502,8 +502,15 @@ impl<H: SceneHost> HostedOfflineGameSession<H> {
 
 #[cfg(all(feature = "device", not(target_arch = "wasm32")))]
 impl<H: SceneHost> HostedGameSession<incant_audio_runtime::DeviceBackend, H> {
-    /// Poll real device errors. Any reported or discarded error is terminal.
+    /// Poll real device errors. Typed xruns are counted; other or discarded
+    /// errors remain terminal.
     pub fn poll_device(&mut self) -> Result<(), H::Error> {
         self.core.poll_device()
+    }
+
+    pub fn device_audio_diagnostics(
+        &self,
+    ) -> Result<incant_audio_runtime::DeviceAudioDiagnostics, H::Error> {
+        self.core.device_audio_diagnostics()
     }
 }

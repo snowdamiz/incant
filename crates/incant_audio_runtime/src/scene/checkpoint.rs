@@ -167,6 +167,8 @@ impl PendingAudioCheckpoint {
             .collect::<BTreeMap<_, _>>();
         let mut candidate = SceneAudio {
             mixer: None,
+            #[cfg(all(feature = "device", not(target_arch = "wasm32")))]
+            device_diagnostics: Default::default(),
             clips,
             buses,
             sources: BTreeMap::new(),

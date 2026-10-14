@@ -660,6 +660,11 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
     #[cfg(feature = "profile")]
     cadence.append(&mut report);
     report["host_steps"] = host_steps.into();
+    report["audio_device"] = serde_json::json!({
+        "scope":"current-session-owner",
+        "diagnostics":game.device_audio_diagnostics()?,
+        "glitch_free_output_verified":false
+    });
     if let Some(replay) = &replay {
         report["input_recording"] = serde_json::json!({"sha256":replay.sha256,
             "requested_host_steps":options.stop_after,"accepted_host_steps":host_steps,
