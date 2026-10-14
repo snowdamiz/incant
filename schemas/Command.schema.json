@@ -83,6 +83,12 @@
         }
       ]
     },
+    "EngineRequirement": {
+      "description": "SemVer requirement text, preserved exactly rather than silently normalized.\nBuild metadata is not an engine identity: SemVer matching ignores it.",
+      "maxLength": 256,
+      "minLength": 1,
+      "type": "string"
+    },
     "Entity": {
       "additionalProperties": false,
       "properties": {
@@ -876,6 +882,24 @@
   },
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "oneOf": [
+    {
+      "additionalProperties": false,
+      "description": "Explicitly declare a compatible engine range. Loading never adds this field.",
+      "properties": {
+        "op": {
+          "const": "set_engine_version",
+          "type": "string"
+        },
+        "requirement": {
+          "$ref": "#/$defs/EngineRequirement"
+        }
+      },
+      "required": [
+        "op",
+        "requirement"
+      ],
+      "type": "object"
+    },
     {
       "additionalProperties": false,
       "properties": {

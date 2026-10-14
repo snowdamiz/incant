@@ -1,5 +1,18 @@
 # Implementation status
 
+
+## Engine compatibility and pin review — backend slice
+
+New projects declare the exact engine version; legacy unpinned v1 projects keep
+their canonical bytes. Bounded SemVer requirements are enforced at load and
+cook, explicit pin commands retain atomic history/undo/replay, and read-only
+CLI/RPC reviews bind source/revision/candidate digests. 80 document/command tests,
+a live headless control, exact cooked-byte/native continuation, strict lint and
+generated TypeScript/schema checks pass. The two compile failures are retained.
+Project-file migration, create-only backup and crash-recovery application remain
+separate pending work; this does not complete the Phase 2 migration requirement.
+[Scope and follow-up ordering](docs/spikes/project-engine-compatibility.md).
+
 ## Linked prefab authoring — qualified main270 composition
 
 The fixed-topology backend materializes ordinary entities through atomic
@@ -9,7 +22,7 @@ preserved byte-exact on main270. Current qualification passes 87 document/comman
 cases, one live RPC save/reopen/undo/redo case and one cooked NativeWorld case
 with 60 steps, plus strict four-package lint and SDK/fmt/conventions checks.
 All nine commands and final independent source/evidence review passed.
-Publication awaits its required hosted fast check; nested/topology edits and editor UI remain open.
+PR271 merged after its exact-head hosted fast SUCCESS; nested/topology edits and editor UI remain open.
 [Composition and evidence](docs/spikes/prefab-main270.md).
 
 ## Windows TypeScript deadline — one actual observation passed; timeout retained

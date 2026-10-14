@@ -1,0 +1,50 @@
+{
+  "$defs": {
+    "EngineDeclaration": {
+      "enum": [
+        "legacy_unpinned",
+        "compatible"
+      ],
+      "type": "string"
+    },
+    "EngineRequirement": {
+      "description": "SemVer requirement text, preserved exactly rather than silently normalized.\nBuild metadata is not an engine identity: SemVer matching ignores it.",
+      "maxLength": 256,
+      "minLength": 1,
+      "type": "string"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "A report for an already validated project, not permission to migrate a file.",
+  "properties": {
+    "current_engine": {
+      "type": "string"
+    },
+    "declaration": {
+      "$ref": "#/$defs/EngineDeclaration"
+    },
+    "required_engine": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/EngineRequirement"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "schema_version": {
+      "format": "uint32",
+      "minimum": 0,
+      "type": "integer"
+    }
+  },
+  "required": [
+    "current_engine",
+    "schema_version",
+    "declaration"
+  ],
+  "title": "EngineCompatibility",
+  "type": "object"
+}

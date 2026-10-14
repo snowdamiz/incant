@@ -6,6 +6,7 @@ mod audio;
 mod camera;
 #[cfg(feature = "crdt")]
 mod crdt;
+mod engine_version;
 mod lights;
 mod navigation;
 mod physics;
@@ -16,6 +17,10 @@ mod ui;
 pub use agent_budget::{AgentBudgetSettings, DEFAULT_AGENT_TOKEN_CAP, MAX_AGENT_TOKEN_CAP};
 #[cfg(feature = "crdt")]
 pub use crdt::CollaborativeDocument;
+pub use engine_version::{
+    ENGINE_VERSION, EngineCompatibility, EngineDeclaration, EngineRequirement, EngineVersionError,
+    MAX_ENGINE_COMPARATORS, MAX_ENGINE_REQUIREMENT_BYTES,
+};
 pub use incant_2d::atlas::{AtlasLayout, SpriteAtlas};
 pub use incant_2d::{
     SpriteFlipbook, SpriteMode, SpriteRegion, SpriteRenderer, SpriteSampling, Tilemap, TilemapLayer,
@@ -49,6 +54,8 @@ pub fn new_id() -> Id {
 pub struct Project {
     pub id: Id,
     pub schema_version: u32,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub engine_version: Option<EngineRequirement>,
     pub name: String,
     pub scenes: BTreeMap<Id, Scene>,
     pub assets: BTreeMap<Id, Asset>,
@@ -176,6 +183,19 @@ impl<'a> ValidatedProject<'a> {
     }
 }
 impl Project {
+    pub fn engine_compatibility(&self) -> Result<EngineCompatibility, DocumentError> {
+        self.validate()?;
+        Ok(EngineCompatibility {
+            current_engine: ENGINE_VERSION.into(),
+            schema_version: self.schema_version,
+            required_engine: self.engine_version.clone(),
+            declaration: if self.engine_version.is_some() {
+                EngineDeclaration::Compatible
+            } else {
+                EngineDeclaration::LegacyUnpinned
+            },
+        })
+    }
     pub fn validated(&self) -> Result<ValidatedProject<'_>, DocumentError> {
         self.validate()?;
         Ok(ValidatedProject(self))
@@ -184,6 +204,7 @@ impl Project {
         Self {
             id: new_id(),
             schema_version: SCHEMA_VERSION,
+            engine_version: Some(EngineRequirement::exact_current()),
             name: name.into(),
             scenes: BTreeMap::new(),
             assets: BTreeMap::new(),
@@ -280,6 +301,11 @@ impl Project {
         }
         if self.schema_version != SCHEMA_VERSION {
             issue("/schema_version".into(), "unsupported schema version");
+        }
+        if let Some(requirement) = &self.engine_version
+            && let Err(error) = requirement.require_current()
+        {
+            issue("/engine_version".into(), &error.to_string());
         }
         if self.name.trim().is_empty() {
             issue("/name".into(), "name cannot be empty");
@@ -777,6 +803,10 @@ pub fn schema_registry() -> BTreeMap<String, Value> {
         (
             "PrefabLink".into(),
             json!(schemars::schema_for!(PrefabLink)),
+        ),
+        (
+            "EngineCompatibility".into(),
+            json!(schemars::schema_for!(EngineCompatibility)),
         ),
         (
             "SpriteAtlas".into(),

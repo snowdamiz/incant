@@ -43,6 +43,8 @@ fn fixture() -> (Project, Id, Id) {
 #[test]
 fn legacy_v1_bytes_stay_identical_and_old_reader_refuses_new_fields() {
     let mut old = Project::empty("Legacy");
+    // This fixture represents input written before engine declarations existed.
+    old.engine_version = None;
     let mut scene = Scene::new("World");
     let e = Entity::new("Entity");
     scene.entities.insert(e.id.clone(), e);
