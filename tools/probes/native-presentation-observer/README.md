@@ -7,10 +7,7 @@ engine dependency graph or normal player. See
 
 `prepare.py` verifies the exact cached `wgpu-hal` 29.0.4 registry archive and
 creates a separate standalone source package. Its manifest records every original
-and patched HAL file. HAL is a private workspace member for direct library lint;
-its example/test-only dependency tables are omitted after verifying all other
-manifest values remain exact. No upstream example/window graph is admitted.
-The three-file patch adds a default-off macOS observer;
+and patched HAL file. The three-file patch adds a default-off macOS observer;
 three new Rust files implement its collector, native callback and CPU controls.
 `host.rs` provides the callable bridge from an existing `wgpu::Surface`.
 
