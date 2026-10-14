@@ -140,6 +140,7 @@ enum Request {
         asset: incant_runtime::StableId,
         kind: incant_runtime::VisualAssetKind,
         fingerprint: String,
+        animation_entity: Option<incant_runtime::StableId>,
         reply: mpsc::Sender<Result<probe::asset_workflow::Observation, String>>,
     },
 }
