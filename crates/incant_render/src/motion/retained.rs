@@ -94,9 +94,11 @@ impl Prepared {
         }
     }
     pub fn upscale_input(&self, rect: [f32; 4]) -> crate::upscaling::Input {
-        let jitter = self.history.frame.jitter_offset().map_or([0.; 2], |j| {
-            [j[0] / rect[2], j[1] / rect[3]]
-        });
+        let jitter = self
+            .history
+            .frame
+            .jitter_offset()
+            .map_or([0.; 2], |j| [j[0] / rect[2], j[1] / rect[3]]);
         crate::upscaling::Input {
             frame: self.history.frame.clone(),
             rect,

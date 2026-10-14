@@ -126,7 +126,12 @@ fn uniform(
         let matrix = motion && i < 2;
         require(
             member.name.as_deref() == Some(*name)
-                && member.offset == if motion { [0, 64, 128, 144][i] } else { i as u32 * 16 },
+                && member.offset
+                    == if motion {
+                        [0, 64, 128, 144][i]
+                    } else {
+                        i as u32 * 16
+                    },
             "temporal uniform member",
         )?;
         require(

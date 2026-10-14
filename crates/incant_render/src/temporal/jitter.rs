@@ -49,5 +49,10 @@ pub(crate) const MIN_SIXTEENTHS: f32 = 4.;
 /// constant across DRS steps: the shadow cascade fit (and its texel quantization)
 /// then depends only on the camera and the output rect, not on the internal scale.
 pub(crate) fn drs_guard(output: [f32; 4]) -> [f32; 2] {
-    guard([0., 0., output[2] * MIN_SIXTEENTHS / 16., output[3] * MIN_SIXTEENTHS / 16.])
+    guard([
+        0.,
+        0.,
+        output[2] * MIN_SIXTEENTHS / 16.,
+        output[3] * MIN_SIXTEENTHS / 16.,
+    ])
 }

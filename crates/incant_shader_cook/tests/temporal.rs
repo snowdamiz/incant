@@ -161,9 +161,13 @@ fn fixed_programs_preserve_interfaces_robust_accesses_and_native_binding_maps() 
                     "[[texture(5)]]",
                     "get_width",
                 ],
-                (Kind::Upscale, Backend::Dx12, Stage::Fragment) => {
-                    &["SV_Target0", "SV_Target1", "SV_Target2", "register(t5)", ".Load("]
-                }
+                (Kind::Upscale, Backend::Dx12, Stage::Fragment) => &[
+                    "SV_Target0",
+                    "SV_Target1",
+                    "SV_Target2",
+                    "register(t5)",
+                    ".Load(",
+                ],
                 (_, Backend::Metal, Stage::Fragment) => &["[[texture(0)]]", "get_width"],
                 (_, Backend::Dx12, Stage::Fragment) => &["register(t0)", ".Load("],
                 _ => &[],
