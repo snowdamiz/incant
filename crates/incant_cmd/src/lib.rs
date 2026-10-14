@@ -1,4 +1,6 @@
 //! The only mutable owner of an editor document. GUI, scripts and AI share commands.
+mod engine_version;
+pub use engine_version::{EnginePinReview, EngineReviewError, MAX_ENGINE_REVIEW_BYTES};
 mod journal;
 mod localization;
 mod sources;
@@ -18,6 +20,10 @@ use thiserror::Error;
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(tag = "op", rename_all = "snake_case", deny_unknown_fields)]
 pub enum Command {
+    /// Explicitly declare a compatible engine range. Loading never adds this field.
+    SetEngineVersion {
+        requirement: incant_doc::EngineRequirement,
+    },
     CreateScene {
         scene: Scene,
     },
@@ -173,6 +179,8 @@ pub struct Transaction {
 }
 #[derive(Debug, Error)]
 pub enum CommandError {
+    #[error(transparent)]
+    EngineReview(#[from] EngineReviewError),
     #[error(transparent)]
     Source(#[from] SourceError),
     #[error(transparent)]
@@ -607,6 +615,9 @@ fn apply(
         }
         Command::SetInputActions { actions } => {
             project.settings.input_actions = actions.clone();
+        }
+        Command::SetEngineVersion { requirement } => {
+            project.engine_version = Some(requirement.clone());
         }
         Command::SetPhysicsMode { mode } => {
             project.settings.physics_mode = *mode;

@@ -1,5 +1,18 @@
 # Implementation status
 
+
+## Engine compatibility and pin review — backend slice
+
+New projects declare the exact engine version; legacy unpinned v1 projects keep
+their canonical bytes. Bounded SemVer requirements are enforced at load and
+cook, explicit pin commands retain atomic history/undo/replay, and read-only
+CLI/RPC reviews bind source/revision/candidate digests. 80 document/command tests,
+a live headless control, exact cooked-byte/native continuation, strict lint and
+generated TypeScript/schema checks pass. The two compile failures are retained.
+Project-file migration, create-only backup and crash-recovery application remain
+separate pending work; this does not complete the Phase 2 migration requirement.
+[Scope and follow-up ordering](docs/spikes/project-engine-compatibility.md).
+
 ## Native script phase diagnostic — one bounded CPU test
 
 The real ScriptHost diagnostic checks all 9,999 transform rows after each of 128

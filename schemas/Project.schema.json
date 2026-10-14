@@ -83,6 +83,12 @@
         }
       ]
     },
+    "EngineRequirement": {
+      "description": "SemVer requirement text, preserved exactly rather than silently normalized.\nBuild metadata is not an engine identity: SemVer matching ignores it.",
+      "maxLength": 256,
+      "minLength": 1,
+      "type": "string"
+    },
     "Entity": {
       "additionalProperties": false,
       "properties": {
@@ -782,6 +788,16 @@
         "$ref": "#/$defs/Asset"
       },
       "type": "object"
+    },
+    "engine_version": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/EngineRequirement"
+        },
+        {
+          "type": "null"
+        }
+      ]
     },
     "id": {
       "type": "string"
