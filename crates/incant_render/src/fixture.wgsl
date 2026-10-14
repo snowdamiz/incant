@@ -1,5 +1,5 @@
 // Diagnostic geometry for Phase 0 surface validation. Look-dev belongs to Claude.
-struct VertexOut { @builtin(position) position: vec4f, @location(0) intensity: f32 }
+struct VertexOut { @builtin(position) position: vec4f, @location(0) @interpolate(perspective, centroid) intensity: f32 }
 @vertex fn vertex(@location(0) position: vec4f, @location(1) normal: vec3f) -> VertexOut {
     var out: VertexOut;
     out.position = position;

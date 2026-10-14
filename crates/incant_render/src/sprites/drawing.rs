@@ -37,7 +37,11 @@ impl SpriteSystem {
         });
         Ok(Some(SpriteDraw {
             scene: Arc::clone(sprites),
-            pipeline: self.pipeline.clone(),
+            pipeline: self
+                .pipelines
+                .get(target.samples.index())
+                .cloned()
+                .ok_or(crate::ResourceError::UnpreparedPipeline("sprite MSAA"))?,
             globals,
             _uniform: uniform,
             color: target.color,

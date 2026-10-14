@@ -41,7 +41,9 @@ fn io(
                 interpolation,
                 sampling,
             } if interpolation.is_none_or(|i| i == naga::Interpolation::Perspective)
-                && sampling.is_none_or(|s| s == naga::Sampling::Center) =>
+                && sampling.is_none_or(|s| {
+                    matches!(s, naga::Sampling::Center | naga::Sampling::Centroid)
+                }) =>
             {
                 Some(*location)
             }

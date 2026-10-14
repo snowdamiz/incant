@@ -187,7 +187,7 @@ pub(crate) struct TextSystem {
     nodes: wgpu::BindGroupLayout,
     atlas: wgpu::BindGroupLayout,
     sampler: wgpu::Sampler,
-    pipeline: wgpu::RenderPipeline,
+    pipelines: Vec<wgpu::RenderPipeline>,
     cache: Mutex<Cache>,
     atlas_uploads: AtomicU64,
     glyph_uploads: AtomicU64,
@@ -246,6 +246,7 @@ impl TextSystem {
         device: &wgpu::Device,
         backend: wgpu::Backend,
         cache: Option<&wgpu::PipelineCache>,
+        scene_msaa: crate::SceneMsaa,
     ) -> Result<Self> {
         let frame = device.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
             label: Some("Text frame camera and color"),
@@ -265,13 +266,19 @@ impl TextSystem {
             min_filter: wgpu::FilterMode::Linear,
             ..Default::default()
         });
-        let pipeline = drawing::pipeline(device, [&frame, &nodes, &atlas], backend, cache)?;
+        let pipelines = scene_msaa
+            .catalog()
+            .iter()
+            .map(|&samples| {
+                drawing::pipeline(device, [&frame, &nodes, &atlas], backend, cache, samples)
+            })
+            .collect::<Result<Vec<_>>>()?;
         Ok(Self {
             frame,
             nodes,
             atlas,
             sampler,
-            pipeline,
+            pipelines,
             cache: Mutex::default(),
             atlas_uploads: AtomicU64::new(0),
             glyph_uploads: AtomicU64::new(0),

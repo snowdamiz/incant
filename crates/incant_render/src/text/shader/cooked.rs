@@ -10,7 +10,7 @@ use crate::{
 include!(concat!(env!("OUT_DIR"), "/text-shaders/manifest.rs"));
 const BUNDLE: Bundle = Bundle {
     contract: MANIFEST_CONTRACT,
-    expected: "incant-text-v1;naga=29.0.4;wgpu=29.0.4;msl=2.4,pull15i,stride32,sizes2,frame0,node1;spv=1.0,no-y-flip;hlsl=6.0,frame-b0,node-b1,texture-t0,sampler-indices-t1,special-b2;bounds=restrict;loops=bounded",
+    expected: "incant-text-v2;interpolation=centroid;naga=29.0.4;wgpu=29.0.4;msl=2.4,pull15i,stride32,sizes2,frame0,node1;spv=1.0,no-y-flip;hlsl=6.0,frame-b0,node-b1,texture-t0,sampler-indices-t1,special-b2;bounds=restrict;loops=bounded",
     source: SOURCE_HASH,
     producer: PRODUCER_HASH,
     artifacts: &ARTIFACTS,

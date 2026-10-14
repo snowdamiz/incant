@@ -38,6 +38,9 @@ mod resource_error;
 #[cfg(test)]
 mod retained_alloc;
 mod scene;
+mod scene_draw;
+mod scene_msaa;
+pub use scene_msaa::{SceneMsaa, SceneMsaaError};
 mod shader;
 mod shadows;
 mod sprites;
@@ -100,7 +103,8 @@ pub struct Renderer {
     pub adapter_name: String,
     /// Startup-only persistence result; a supplied cache is not a measured hit.
     pub pipeline_cache_report: PipelineCacheReport,
-    diagnostic_pipeline: wgpu::RenderPipeline,
+    diagnostic_pipelines: Vec<wgpu::RenderPipeline>,
+    scene_msaa: SceneMsaa,
     models: Mutex<models::ModelCache>,
     materials: materials::MaterialSystem,
     ambient_occlusion: Option<ambient_occlusion::System>,
@@ -126,7 +130,7 @@ impl Renderer {
         instance: &wgpu::Instance,
         surface: Option<&wgpu::Surface<'_>>,
     ) -> Result<Self> {
-        Self::new_configured(instance, surface, false).await
+        Self::new_configured(instance, surface, false, SceneMsaa::One).await
     }
     /// Explicit opt-in to bounded, asynchronous native GPU timestamp collection.
     /// Unsupported adapters fail rather than silently substituting CPU timings.
@@ -135,12 +139,13 @@ impl Renderer {
         instance: &wgpu::Instance,
         surface: Option<&wgpu::Surface<'_>>,
     ) -> Result<Self> {
-        Self::new_configured(instance, surface, true).await
+        Self::new_configured(instance, surface, true, SceneMsaa::One).await
     }
     async fn new_configured(
         instance: &wgpu::Instance,
         surface: Option<&wgpu::Surface<'_>>,
         gpu_timing: bool,
+        scene_msaa: SceneMsaa,
     ) -> Result<Self> {
         let adapter = instance
             .request_adapter(&wgpu::RequestAdapterOptions {
@@ -149,6 +154,12 @@ impl Renderer {
                 force_fallback_adapter: false,
             })
             .await?;
+        // Refuse unsupported attachment/resolve capabilities before requesting
+        // a device or allocating any renderer textures/pipelines.
+        scene_msaa.validate_formats(
+            adapter.get_texture_format_features(frame::HDR_FORMAT),
+            adapter.get_texture_format_features(wgpu::TextureFormat::Depth32Float),
+        )?;
         let adapter_name = adapter.get_info().name;
         let (device, queue) = adapter
             .request_device(&wgpu::DeviceDescriptor {
@@ -178,6 +189,7 @@ impl Renderer {
             &lighting.layout,
             adapter.get_info().backend,
             cache,
+            scene_msaa,
         )?;
         let shadows = shadows::ShadowSystem::new(
             &device,
@@ -185,15 +197,23 @@ impl Renderer {
             adapter.get_info().backend,
             cache,
         )?;
-        let diagnostic_pipeline = Self::pipeline(
-            &device,
-            frame::HDR_FORMAT,
-            adapter.get_info().backend,
-            cache,
-        )?;
+        let diagnostic_pipelines = scene_msaa
+            .catalog()
+            .iter()
+            .map(|&samples| {
+                Self::pipeline(
+                    &device,
+                    frame::HDR_FORMAT,
+                    adapter.get_info().backend,
+                    cache,
+                    samples,
+                )
+            })
+            .collect::<Result<Vec<_>>>()?;
         let output = output::OutputPass::new(&device, adapter.get_info().backend, cache)?;
-        let sprites = sprites::SpriteSystem::new(&device, adapter.get_info().backend, cache)?;
-        let text = text::TextSystem::new(&device, adapter.get_info().backend, cache)?;
+        let sprites =
+            sprites::SpriteSystem::new(&device, adapter.get_info().backend, cache, scene_msaa)?;
+        let text = text::TextSystem::new(&device, adapter.get_info().backend, cache, scene_msaa)?;
         let ui = ui::UiSystem::new(&device, &queue, adapter.get_info().backend, cache)?;
         let graph = if gpu_timing {
             graph::FrameGraph::with_timings(&device, &queue)?
@@ -216,7 +236,8 @@ impl Renderer {
             adapter,
             adapter_name,
             pipeline_cache_report: cache_session.finish(),
-            diagnostic_pipeline,
+            diagnostic_pipelines,
+            scene_msaa,
             models: Mutex::new(HashMap::new()),
             materials,
             ambient_occlusion: None,
@@ -241,7 +262,8 @@ impl Renderer {
     }
     /// Poll callbacks without waiting, then consume at most one completed sample.
     /// Covers the scene graph through display conversion, excluding later UI,
-    /// presentation, uploads, CPU work, and GPU readback/resolve overhead.
+    /// presentation, uploads, CPU work, GPU readback and timestamp-query resolve.
+    /// Includes scene color resolve when multisampling is selected.
     pub fn take_gpu_timing(&self) -> Result<Option<timing::GpuFrameTiming>> {
         self.check_device()?;
         Ok(self.graph.take_timing()?)
@@ -271,6 +293,7 @@ impl Renderer {
         format: wgpu::TextureFormat,
         backend: wgpu::Backend,
         cache: Option<&wgpu::PipelineCache>,
+        samples: SceneMsaa,
     ) -> Result<wgpu::RenderPipeline> {
         let shader = geometry_shader::stages(device, backend, geometry_shader::Kind::Diagnostic)?;
         let layout = device.create_pipeline_layout(&wgpu::PipelineLayoutDescriptor {
@@ -299,7 +322,7 @@ impl Renderer {
                     stencil: Default::default(),
                     bias: Default::default(),
                 }),
-                multisample: Default::default(),
+                multisample: samples.state(),
                 fragment: Some(wgpu::FragmentState {
                     module: &shader.fragment,
                     entry_point: Some(shader.fragment_entry),
@@ -313,157 +336,6 @@ impl Renderer {
                 multiview_mask: None,
                 cache,
             }),
-        )
-    }
-    pub fn draw_scene(
-        &self,
-        scene: &RenderScene,
-        view: &wgpu::TextureView,
-        format: wgpu::TextureFormat,
-        width: u32,
-        height: u32,
-        viewport: Option<Viewport>,
-    ) -> Result<wgpu::CommandBuffer> {
-        self.draw_scene_scaled(
-            scene,
-            RetainedTarget {
-                view,
-                format,
-                width,
-                height,
-                viewport,
-            },
-            resolution::ResolutionScale::FULL,
-            None,
-            None,
-        )
-    }
-    fn draw_scene_scaled(
-        &self,
-        scene: &RenderScene,
-        target: RetainedTarget<'_>,
-        scale: resolution::ResolutionScale,
-        mut motion: Option<motion::MotionDraw>,
-        temporal: Option<&temporal::Pending>,
-    ) -> Result<wgpu::CommandBuffer> {
-        let RetainedTarget {
-            view,
-            format,
-            width,
-            height,
-            viewport,
-        } = target;
-        self.check_device()?;
-        output::OutputPass::validate(format)?;
-        frame::FrameCache::validate(&self.device, width, height)?;
-        if viewport.is_some_and(|v| v.corner_radii.iter().any(|r| !r.is_finite() || *r < 0.)) {
-            return Err("invalid viewport corner radius".into());
-        }
-        let plan = resolution::FramePlan::new(
-            [width, height],
-            viewport
-                .map(|v| v.rect)
-                .unwrap_or([0., 0., width as f32, height as f32]),
-            scene.camera.pixel_resolution,
-            scale,
-        )?;
-        let frame_size = plan.size;
-        let scene_rect = plan.rect;
-        let attachments = self
-            .frames
-            .get(&self.device, frame_size[0], frame_size[1])?;
-        let diagnostics =
-            diagnostic_draw::DiagnosticDraw::prepare(self, scene, attachments.clone(), scene_rect)?;
-        let models = self.prepare_models(
-            scene,
-            models::ModelTarget {
-                color: attachments.color.clone(),
-                depth: attachments.depth.clone(),
-                format: frame::HDR_FORMAT,
-                rect: scene_rect,
-            },
-        )?;
-        let sprites = self.sprites.prepare(
-            &self.device,
-            scene,
-            models::ModelTarget {
-                color: attachments.color.clone(),
-                depth: attachments.depth.clone(),
-                format: frame::HDR_FORMAT,
-                rect: scene_rect,
-            },
-        )?;
-        let text = self.text.prepare(
-            &self.device,
-            scene,
-            models::ModelTarget {
-                color: attachments.color.clone(),
-                depth: attachments.depth.clone(),
-                format: frame::HDR_FORMAT,
-                rect: scene_rect,
-            },
-        )?;
-        let overlays = models.as_ref().is_some_and(|m| m.has_transparent())
-            || sprites.as_ref().is_some_and(|s| s.has_passes())
-            || text.as_ref().is_some_and(|t| t.has_passes());
-        if temporal.is_some_and(|p| p.active()) && overlays {
-            motion
-                .as_mut()
-                .expect("temporal motion draw")
-                .set_overlay_depth(attachments.depth.clone());
-        }
-        let temporal = temporal.and_then(|pending| {
-            self.temporal.as_ref().and_then(|system| {
-                system.prepare(&self.device, pending, &attachments.color, scene.camera)
-            })
-        });
-        let bloom_system = self
-            .bloom
-            .as_ref()
-            .filter(|b| scene.camera.pixel_resolution.is_none() && b.config.intensity > 0.);
-        let bloom = bloom_system
-            .map(|system| {
-                system.prepare(
-                    &self.device,
-                    &attachments.color,
-                    [width, height],
-                    &plan,
-                    scale,
-                )
-            })
-            .transpose()?;
-        let output = if let Some((draw, system)) = bloom.as_ref().zip(bloom_system) {
-            system.output.prepare_optional_bloom(
-                &self.device,
-                &attachments.color,
-                view,
-                format,
-                viewport,
-                plan.output_mapping,
-                Some((&draw.result, system.config.intensity, [width, height])),
-            )?
-        } else {
-            self.output.prepare(
-                &self.device,
-                &attachments.color,
-                view,
-                format,
-                viewport,
-                plan.output_mapping,
-            )?
-        };
-        self.graph.encode(
-            &self.device,
-            graph::PreparedFrame {
-                diagnostics,
-                models,
-                motion,
-                temporal,
-                sprites,
-                text,
-                bloom,
-                output,
-            },
         )
     }
     /// Renderer-lifetime text texture/quad upload counts, for retention checks.
