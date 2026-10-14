@@ -332,7 +332,7 @@ struct Plane {
     offset: u64,
 }
 fn planes() -> [Plane; 8] {
-    capture_planes(false)
+    capture_planes(false, false)
 }
 fn pose(stage: &Stage, input: &mut SceneInput, step: u32, camera_only: bool) {
     stage.pose(input, if camera_only { 1 } else { step });
@@ -378,10 +378,13 @@ fn recurrence_input_bandwidth_override_is_scoped_and_thread_local() {
     }
     assert_eq!(diagnostic_lod_bias(-1.), -1.);
 }
-fn capture_planes(reference_state: bool) -> [Plane; 8] {
+fn capture_planes(reference_state: bool, thin_region: bool) -> [Plane; 8] {
+    assert!(!thin_region || reference_state);
     let mut offset = 0;
     std::array::from_fn(|i| {
         let rect: [u32; 4] = match (reference_state, i) {
+            (true, 2 | 5 | 6) if thin_region => [0, 0, 220, 120],
+            (true, 3) if thin_region => [0, 0, 440, 240],
             (true, 2) => [294, 62, 108, 108],
             (true, 4) => [0, 48, 800, 300],
             (_, i) => match i {
@@ -471,7 +474,7 @@ fn recurrence_fixture_layout_and_display_controls() {
     assert_eq!(p[1].offset, 4_147_200);
     let total = p[7].offset + u64::from(p[7].stride * p[7].rect[3]);
     assert!(total < 11 * 1024 * 1024);
-    let reference = capture_planes(true);
+    let reference = capture_planes(true, false);
     assert_eq!(reference[2].rect, [294, 62, 108, 108]);
     assert_eq!(reference[3].bpp, 8);
     assert_eq!(reference[4].rect, [0, 48, 800, 300]);
@@ -486,6 +489,24 @@ fn recurrence_fixture_layout_and_display_controls() {
         reference[7].offset + u64::from(reference[7].stride * reference[7].rect[3])
             < 13 * 1024 * 1024
     );
+    let thin = capture_planes(true, true);
+    for (i, plane) in thin.iter().enumerate() {
+        let extent = if matches!(i, 0 | 1 | 3 | 4) {
+            OUTPUT
+        } else {
+            SOURCE
+        };
+        assert!(plane.rect[0] + plane.rect[2] <= extent[0]);
+        assert!(plane.rect[1] + plane.rect[3] <= extent[1]);
+        assert_eq!(plane.stride % 256, 0);
+        if let Some(next) = thin.get(i + 1) {
+            assert_eq!(
+                plane.offset + u64::from(plane.stride * plane.rect[3]),
+                next.offset
+            );
+        }
+    }
+    assert!(thin[7].offset + u64::from(thin[7].stride * thin[7].rect[3]) < 14 * 1024 * 1024);
     assert_eq!(2 * 960 * 540 * (8 + 4 + 4 + 8), 24_883_200);
     assert_eq!(display([0.; 4]), [20, 21, 25, 255]);
     assert_eq!(display([0., 0., 0., 1.]), [0, 0, 0, 255]);
@@ -523,6 +544,11 @@ fn actual_scene_recurrence_comparison() {
         Ok("capture") if external => true,
         other => panic!("unknown diagnostic state capture: {other:?}"),
     };
+    let thin_region = match std::env::var("INCANT_REFERENCE_REGION").as_deref() {
+        Err(std::env::VarError::NotPresent) | Ok("chart") => false,
+        Ok("thin") if reference_state => true,
+        other => panic!("unknown diagnostic observation region: {other:?}"),
+    };
     let halton32 = match std::env::var("INCANT_REFERENCE_JITTER").as_deref() {
         Err(std::env::VarError::NotPresent) | Ok("incant8") => false,
         Ok("halton32") if external => true,
@@ -549,7 +575,7 @@ fn actual_scene_recurrence_comparison() {
         };
     let experiment = Experiment::new(&renderer, ablation, cubic, lock, nearest, coarse);
     let (_target, view) = review_target(&renderer);
-    let layout = capture_planes(reference_state);
+    let layout = capture_planes(reference_state, thin_region);
     let total = layout[7].offset + u64::from(layout[7].stride * layout[7].rect[3]);
     let read = renderer.device.create_buffer(&wgpu::BufferDescriptor {
         label: Some("Bounded experiment packed raw planes"),
@@ -865,6 +891,11 @@ fn actual_scene_recurrence_comparison() {
     });
     report["nonzero_lock_samples"] = json!(nonzero_lock_samples);
     report["reference_state_captured"] = json!(reference_state);
+    report["reference_observation_region"] = json!(if thin_region {
+        "thin_geometry"
+    } else {
+        "chart"
+    });
     report["diagnostic_material_footprint"] = json!(if internal_footprint {
         "internal raster footprint; zero texture LOD bias, test-only input bandwidth control"
     } else {

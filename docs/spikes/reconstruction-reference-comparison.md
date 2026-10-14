@@ -231,3 +231,43 @@ The 011 evidence directory retains `comparison.json`, `channel-comparison.json`
 and `diagonal-depth-observation.json`, in addition to the exact shader derivative,
 raw outputs and execution records. No shipping memory/performance, final-display
 quality or gate claim is made.
+
+## Thin-feature history observation
+
+012 changes only the diagnostic readback crop for reference masks/history and
+current color/motion to cover the thin geometry. It restores the unchanged
+upstream accumulation shader and keeps the 010 camera-only, internal-footprint
+and eight-phase inputs. All 512 common candidate/baseline/lock/depth planes match
+010 exactly. Readback therefore does not change the observed output.
+
+Freeze `db6cef92a2b59b90b1556787dcf2a90c07615896e1cbc224fa9fd49678bd83b3`
+and executable
+`348bb68c57d00cc8856e8f0079ba0ca4d1ed485c294a7569902d1a2d72a06c29`
+pass build, four CPU controls, strict lint and 128 actual Metal frames. The packed
+readback is 12,395,520 bytes; the run retains 1,586,626,560 raw bytes. Its 256
+submissions and 128 maps finish with the process group cleaned and reaped.
+
+The bounded analysis follows 200 projected diagonal positions in seven selected
+frames. Between 18 and 29 have an entirely black current 3×3 RGB neighborhood.
+Every such sample produces RGB below 0.00001, while most have nonzero reprojected
+history. For example, stationary frame 14 at output pixel (202,144) has historical
+bilinear RGB maximum 0.0350952, prior lock 0.839844, zero disocclusion, and an empty
+current neighborhood. The current lock is zero and output RGB is 0.000000953674.
+This is consistent with the shader: an all-zero neighborhood has zero variance,
+so multiplying its clipping extents by a lock cannot preserve the old feature;
+its luminance comparison also breaks the lock. A bigger extent multiplier cannot
+repair that case.
+
+Moving frames add a distinct problem: many empty neighborhoods also lack valid
+dilated motion and report disocclusion. Thus bypassing color clipping alone would
+not establish safe reprojection or removal of vanished geometry. The next repair
+must distinguish unavailable raster samples from genuinely changed surfaces and
+retain correct motion/coverage ownership; arbitrary lock-strength tuning would
+not supply that information. The analysis uses bilinear history as an observation,
+whereas the actual color shader uses five-tap Catmull-Rom; it does not claim a
+bit-exact CPU reconstruction or an analytic coverage oracle.
+
+`reconstruction-reference-gpu-012/analyze_thin.py` and `thin-observations.json`
+retain the data bindings, sampled observations and limitations. The latter hashes
+to `d3f961494cfcad7633a5f67c3793045a8111930810f004ef0ffff5022f44a75d`.
+No production algorithm change or visual acceptance is included.
