@@ -74,11 +74,16 @@ fn current_evidence(p:vec2f)->Evidence {
 }
 // Single-motion proof. One depth does not prove one motion: coplanar samples may
 // move independently. Every contributing current sample must carry valid motion
-// whose reprojection agrees with the anchor's within MOTION_SLACK output pixels
-// (the static proof's existing bound) and whose previous depth is compatible with
-// the anchor's (the existing depth tolerance, not widened). Otherwise the pixel
-// keeps its current evidence but reuses no history.
-const MOTION_SLACK:f32=1.0/256.0;
+// whose reprojection agrees with the anchor's within motion_slack() output pixels
+// and whose previous depth is compatible with the anchor's (the existing depth
+// tolerance, not widened). Otherwise the pixel keeps its current evidence but
+// reuses no history.
+// The slack, 1/16 internal pixel in output pixels, is an empirical visual
+// candidate: 1/256 output pixel left nearly all perspective motion current-only in
+// the R4 images. It is not a positional-quantization bound (jitter positions do not
+// quantize reconstructed history) and not a same-motion proof: distinct same-depth
+// surfaces moving by less than the slack can share one history. Pixels pending.
+fn motion_slack()->f32 {return frame.output.z/frame.source.z/16.0;}
 fn motion_support_coherent(p:vec2f,a:vec4f)->bool {
     let c=vec2i(floor(source_position(p)));
     let za=linear_depth(a.z);
@@ -87,7 +92,7 @@ fn motion_support_coherent(p:vec2f,a:vec4f)->bool {
         if any(t<lo(frame.source)) || any(t>hi(frame.source)) || !(kernel_weight(p,t)>0.0) {continue;}
         let m=textureLoad(motion,t,0);
         if !finite4(m) || m.w<0.5 || !compatible(linear_depth(m.z),za) {return false;}
-        if any(abs(m.xy-a.xy)*frame.output.zw>=vec2f(MOTION_SLACK)) {return false;}
+        if any(abs(m.xy-a.xy)*frame.output.zw>=vec2f(motion_slack())) {return false;}
     }}
     return true;
 }
@@ -136,12 +141,17 @@ fn motion_support_coherent(p:vec2f,a:vec4f)->bool {
         let v=textureLoad(current,t,0);
         if admitted(v) {minimum=min(minimum,clean(v));maximum=max(maximum,clean(v));}
     }}
-    let change=abs(history.rgb-fresh.rgb);
+    // Reaction measures how far the clamp must move the history, not its distance
+    // from this frame's single (aliased) estimate: history inside the contributing
+    // support's range is consistent evidence and keeps its mass, so high-contrast
+    // texture keeps accumulating; history outside it loses mass as before.
+    let clamped=clamp(history,minimum,maximum);
+    let change=abs(history.rgb-clamped.rgb);
     let reaction=clamp(max(change.x,max(change.y,change.z))/frame.options.w,0.0,1.0);
     // Density and reaction scale the associated history mass; the clamp is a
     // biased correction and adds no sample weight.
     let w=min(mass*max(frame.reactive.z,0.0),evidence_cap())*(1.0-frame.reactive.x*reaction);
-    history=clamp(history,minimum,maximum);
+    history=clamped;
     let total=w+e.mass;
     if !(total>0.0) {return result;}
     result.color=clean((history*w+e.sum)/total);

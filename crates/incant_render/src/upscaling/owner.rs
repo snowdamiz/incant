@@ -283,12 +283,16 @@ impl Pending {
     }
     /// Texture LOD bias for internal opaque/MASK draws: log2(source / output),
     /// negative at reduced scale, so the internal texture footprint matches the
-    /// output grid that history accumulates. 0 without a portable plan (default
-    /// and fixed-TAA paths) and never positive.
+    /// output grid that history accumulates, floored at `jitter::MIN_LOD_BIAS`.
+    /// 0 without a portable plan (default and fixed-TAA paths) and never positive.
     pub(crate) fn lod_bias(&self) -> f32 {
         self.plan.map_or(0., |p| {
             let b = (p.source_rect[2] / p.rect[2]).log2();
-            if b.is_finite() { b.min(0.) } else { 0. }
+            if b.is_finite() {
+                b.clamp(crate::temporal::jitter::MIN_LOD_BIAS, 0.)
+            } else {
+                0.
+            }
         })
     }
     /// The physical output rect of the portable plan (the DRS-stable guard's base).

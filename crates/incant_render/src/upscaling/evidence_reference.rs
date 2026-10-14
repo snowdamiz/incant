@@ -343,7 +343,9 @@ impl Input<'_> {
                 || m[3] < 0.5
                 || !self.compatible(self.z(m[2]), expected)
                 || (0..2).any(|i| {
-                    (f64::from(m[i]) - f64::from(motion[i])).abs() * output[i + 2] >= 1. / 256.
+                    // R5: one jitter-lattice step (1/16 internal pixel) in output pixels.
+                    (f64::from(m[i]) - f64::from(motion[i])).abs() * output[i + 2]
+                        >= output[2] / f64::from(self.frame.source[2]) / 16.
                 })
         }) {
             return result;
@@ -396,15 +398,7 @@ impl Input<'_> {
                 .sum::<f64>()
                 / c
         });
-        let reaction = history[..3]
-            .iter()
-            .zip(&result.color)
-            .map(|(a, b)| (a - b).abs())
-            .fold(0., f64::max)
-            / f64::from(self.frame.options[3]);
-        let w = (c * f64::from(self.frame.reactive[2]).max(0.)).min(cap)
-            * (1. - f64::from(self.frame.reactive[0]) * reaction.clamp(0., 1.));
-        result.color = oracle::color(std::array::from_fn(|i| {
+        let clamped: [f64; 4] = std::array::from_fn(|i| {
             let minimum = admitted
                 .iter()
                 .map(|t| clean(self.current[t.at])[i])
@@ -413,8 +407,19 @@ impl Input<'_> {
                 .iter()
                 .map(|t| clean(self.current[t.at])[i])
                 .fold(result.color[i], f64::max);
-            (history[i].clamp(minimum, maximum) * w + sum[i]) / (w + mass)
-        }));
+            history[i].clamp(minimum, maximum)
+        });
+        // R5: reaction is the clamp displacement, as in both resolve programs.
+        let reaction = history[..3]
+            .iter()
+            .zip(&clamped)
+            .map(|(a, b)| (a - b).abs())
+            .fold(0., f64::max)
+            / f64::from(self.frame.options[3]);
+        let w = (c * f64::from(self.frame.reactive[2]).max(0.)).min(cap)
+            * (1. - f64::from(self.frame.reactive[0]) * reaction.clamp(0., 1.));
+        result.color =
+            oracle::color(std::array::from_fn(|i| (clamped[i] * w + sum[i]) / (w + mass)));
         result.evidence = [(w + mass).min(cap), 0.];
         if let Some(r) = record {
             result.record = r.encode();

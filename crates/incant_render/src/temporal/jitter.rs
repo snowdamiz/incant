@@ -43,6 +43,11 @@ pub(crate) fn guard(rect: [f32; 4]) -> [f32; 2] {
 }
 /// Smallest admitted DRS scale, in sixteenths (`ResolutionScale::new` admits 4..=16).
 pub(crate) const MIN_SIXTEENTHS: f32 = 4.;
+/// Most negative texture LOD bias for internal draws under upscaling. An empirical
+/// visual candidate chosen after the R4 4/16 entry artefacts, not a proven
+/// alias-free or optimal band limit (eight correlated jitter positions imply no
+/// sampling theorem). It binds only below scale 0.354 (4/16, 5/16); pixels pending.
+pub(crate) const MIN_LOD_BIAS: f32 = -1.5;
 /// DRS-stable guard for an upscaled frame: the guard of the smallest admitted
 /// internal rect (4/16 of the physical output rect). Internal rects are exactly
 /// output * n/16, so it bounds `guard(rect)` at every admitted scale, and it stays

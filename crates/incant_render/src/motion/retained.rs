@@ -508,11 +508,11 @@ impl MotionState {
             0
         };
         // Internal MASK coverage uses the same bias as the internal material draw
-        // (Pending::lod_bias: log2(source / output), never positive).
+        // (Pending::lod_bias: log2(source / output), floored at MIN_LOD_BIAS, never positive).
         let bias = upscale_rect
             .map(|r| (plan.rect[2] / r[2]).log2())
             .filter(|b| b.is_finite())
-            .map_or(0., |b| b.min(0.));
+            .map_or(0., |b| b.clamp(crate::temporal::jitter::MIN_LOD_BIAS, 0.));
         let uniform = Frame {
             current: history.matrix.to_cols_array_2d(),
             previous: history.previous.to_cols_array_2d(),
