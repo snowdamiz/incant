@@ -1,7 +1,9 @@
 # Native player drawable observation — source candidate
 
-This default-off source candidate joins the CPU-qualified HAL seam to main297's
-native replay host. It has not been built or run. It supplies no display-rate or
+This default-off source candidate joins the CPU-qualified HAL seam and main297's
+native replay host to main298. The main298 join adds the reviewed animation
+consumer source and its distinct dev-only pollster lock edge; it changes no
+presentation-observer bytes. It has not been built or run. It supplies no display-rate or
 performance verdict. The probe qualification and all earlier failures remain in
 [native-presentation-observer.md](native-presentation-observer.md).
 
