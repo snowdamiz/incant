@@ -1,4 +1,5 @@
 #[path = "common/allocations.rs"]
+#[allow(dead_code)] // Shared helper also exposes record(), unused by this lifecycle control.
 mod allocations;
 #[path = "common/model_refresh.rs"]
 mod fixture;
