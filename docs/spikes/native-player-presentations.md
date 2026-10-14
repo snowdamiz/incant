@@ -171,6 +171,15 @@ glitch-free output, complete display cadence and final-game shader-hitch
 qualification remain open. Pipeline/shader object prewarming alone cannot prove
 absence of later driver compilation. This packet makes no such claim.
 
+## Later observer/audio composition
+
+A fresh build with the separately reviewed typed-Xrun policy subsequently
+completed all 2,156 replay steps. Its retained zero/equal callback timestamps
+still prevent complete display timing acceptance. See
+[native-presentation-audio.md](native-presentation-audio.md) for the distinct
+source, artifact, full gameplay parity and limited callback result. The two
+failed attempts above remain unchanged historical outcomes.
+
 ## Portable read-only replay
 
 `evidence/native-player-presentations/` retains plans, source copies, actual
