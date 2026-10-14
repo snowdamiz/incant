@@ -559,7 +559,11 @@ mod tests {
             serde_json::from_slice(&std::fs::read(&path).unwrap()).unwrap();
         manifest["compilation-output"] = "not-authority.json".into();
         std::fs::write(&path, serde_json::to_vec(&manifest).unwrap()).unwrap();
-        let plain = expand(args(dir.path(), &["--window"])).unwrap();
-        assert!(!plain.iter().any(|v| v.contains("compilation")));
+        let error = expand(args(dir.path(), &["--window"])).unwrap_err();
+        assert!(
+            error
+                .to_string()
+                .contains("unknown field `compilation-output`")
+        );
     }
 }
