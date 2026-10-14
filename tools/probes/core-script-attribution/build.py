@@ -13,8 +13,8 @@ import shutil
 import tempfile
 import time
 
-from common import (ROOT, TARGET, FEATURES, authored, checked_file, compiler_features,
-                    graph_delta, load, plan, source_check)
+from common import (ROOT, TARGET, NAV_FEATURES, authored, checked_file, compiler_features,
+                    graph_delta, graph_identity, load, plan, source_check)
 import export_native as ordinary
 import native_process
 import native_profiling
@@ -26,6 +26,7 @@ from shipping_symbols import package
 
 def build(plan_path, output, scratch_parent):
     data, plan_hash = plan(plan_path)
+    features = data['features']
     source = source_check(data)
     project = authored(data)
     baseline = Path(data['baseline_package']).absolute()
@@ -39,8 +40,8 @@ def build(plan_path, output, scratch_parent):
     require(base['physics_mode'] == 'fast' and base['program'] is None
             and base['target'] == TARGET and base_info['tick_rate'] == 60, 'Baseline mode differs')
     require(physics_export.project_mode(read(project, 64 * 1024**2)) == 'fast', 'Core mode changed')
-    expected_features = physics_export.cargo_features('fast', FEATURES)
-    require(expected_features == FEATURES, 'Fast4 capability selection changed')
+    expected_features = physics_export.cargo_features('fast', features)
+    require(expected_features == features, 'Fast4 capability selection changed')
     native_profiling.environment('summary', os.environ)
     for name, value in os.environ.items():
         if (name in ('RUSTFLAGS', 'CARGO_ENCODED_RUSTFLAGS', 'RUSTC', 'RUSTC_WRAPPER',
@@ -81,11 +82,11 @@ def build(plan_path, output, scratch_parent):
             storage = Path(temporary).resolve()
             target = storage / 'target'
             args = ['--locked', '--offline', '--no-default-features', '-p', ordinary.NAME,
-                    '--features', ','.join(FEATURES), '--target', TARGET]
+                    '--features', ','.join(features), '--target', TARGET]
             graph = ordinary.execute([cargo, 'tree', *args, '-e', 'normal', '--prefix', 'none',
                                       '--format', '{p}|{f}'], env=env).stdout
             (output / 'normal-dependencies.txt').write_text(graph)
-            graph_change = graph_delta(graph, baseline_graph.decode())
+            graph_change = graph_delta(graph, baseline_graph.decode(), features)
             names = ordinary.normal_dependencies(graph)
             require(not selected_graph_errors(graph, 'fast', TARGET), 'Fast4 graph differs')
             argv = [cargo, 'build', *args, '--bin', ordinary.NAME, '--profile', 'shipping',
@@ -104,7 +105,12 @@ def build(plan_path, output, scratch_parent):
             flags = ordinary.verify_codegen(read(output / 'build.log', 64 * 1024**2).decode(), TARGET, 'packed')
             require(flags == base['codegen'], 'Shipping codegen differs from baseline')
             messages = ordinary.cargo_messages(output / 'cargo.jsonl')
-            actual_features = compiler_features(messages, target, base['profiling']['compiler']['features'])
+            baseline_features = dict(base['profiling']['compiler']['features'])
+            if features == NAV_FEATURES:
+                nav = [rows for (name, _), rows in graph_identity(baseline_graph.decode()).items() if name == 'incant_nav']
+                require(len(nav) == 1 and len(nav[0]) == 1, 'Ambiguous baseline navigation features')
+                baseline_features['incant_nav'] = list(next(iter(nav[0])))
+            actual_features = compiler_features(messages, target, baseline_features, features)
             physics = validate_artifacts(messages, 'fast', target_dir=target, target=TARGET, profile='shipping')
             require(physics['features'] == base['physics']['features'], 'Fast4 compiler units differ')
             executables = [m for m in messages if m.get('reason') == 'compiler-artifact'

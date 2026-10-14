@@ -26,12 +26,18 @@ pub struct NavigationPath {
 }
 impl NavigationMesh {
     pub fn find_path(&self, q: &PathRequest) -> Result<Option<NavigationPath>, NavigationError> {
+        #[cfg(feature = "diagnostic-navigation")]
+        let observation = incant_profile::diagnostic::navigation::Span::start(
+            incant_profile::diagnostic::navigation::Region::PathQuery,
+        );
         let mut result = self.corridor_path(q)?;
         if let Some(path) = &mut result
             && path.traversals.is_empty()
         {
             self.shortcut(path, q.max_visited);
         }
+        #[cfg(feature = "diagnostic-navigation")]
+        observation.finish(result.is_some());
         Ok(result)
     }
     fn corridor_path(&self, q: &PathRequest) -> Result<Option<NavigationPath>, NavigationError> {

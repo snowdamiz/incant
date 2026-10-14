@@ -5,7 +5,11 @@ edition.workspace = true
 rust-version.workspace = true
 publish.workspace = true
 
+[features]
+diagnostic-navigation = ["dep:incant_profile", "incant_profile/diagnostic-navigation"]
+
 [dependencies]
+incant_profile = { workspace = true, optional = true }
 serde.workspace = true
 schemars.workspace = true
 thiserror.workspace = true
