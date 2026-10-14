@@ -1,5 +1,14 @@
 # Implementation status
 
+## Checkpoint31 — retained strict Clippy failure and scoped repair
+
+The frozen main262 candidate failed macOS workspace Clippy because three existing
+physics tests ignored fallible synchronization results. A source-reviewed repair
+now asserts those calls succeed and passes affected package Clippy/tests; the
+original failed job remains retained, and remaining candidate jobs continue on
+the exact frozen head. No release promotion or comprehensive rerun success is
+claimed. [Repair evidence](docs/spikes/physics-sync-result.md).
+
 ## Director routing clarification — editor UI only
 
 Claude Opus 5.5 with explicitly verified Max is the default for editor UI design,
