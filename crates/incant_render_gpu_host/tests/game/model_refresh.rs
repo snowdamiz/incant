@@ -238,7 +238,7 @@ fn source(game: &ModelGame) -> &Arc<incant_assets_runtime::RuntimeAsset> {
         .unwrap()
         .source
 }
-fn colored(bytes: &[u8], channel: usize, region: std::ops::Range<usize>) -> usize {
+pub(super) fn colored(bytes: &[u8], channel: usize, region: std::ops::Range<usize>) -> usize {
     bytes
         .as_chunks::<4>()
         .0
@@ -257,7 +257,7 @@ fn colored(bytes: &[u8], channel: usize, region: std::ops::Range<usize>) -> usiz
         })
         .count()
 }
-fn retain_pixels(output: &Path, name: &str, bytes: &[u8]) {
+pub(super) fn retain_pixels(output: &Path, name: &str, bytes: &[u8]) {
     use std::io::Write;
     assert_eq!(bytes.len(), 160 * 96 * 4);
     let mut minimum = [u8::MAX; 4];

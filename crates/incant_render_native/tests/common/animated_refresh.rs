@@ -13,6 +13,7 @@ use std::{fs, path::Path};
 pub enum Change {
     Original,
     Keys,
+    KeysOnly,
     NonRootRotation,
     Duration,
     ClipOrder,
@@ -76,7 +77,7 @@ pub fn model(root: &Path, change: Change) -> VisualAssetRef {
     fs::write(root.join("rig.png"), RED).unwrap();
     match change {
         Change::Original => {}
-        Change::Keys => {
+        Change::Keys | Change::KeysOnly => {
             let times = append(root, &mut document, "SCALAR", 3, &[0., 0.5, 2.]);
             document["accessors"][times]["min"] = json!([0]);
             document["accessors"][times]["max"] = json!([2]);
@@ -89,9 +90,11 @@ pub fn model(root: &Path, change: Change) -> VisualAssetRef {
             );
             document["animations"][0]["samplers"][0]["input"] = json!(times);
             document["animations"][0]["samplers"][0]["output"] = json!(values);
-            document["materials"][0]["pbrMetallicRoughness"]["baseColorFactor"] =
-                json!([0.2, 0.4, 0.6, 1]);
-            fs::write(root.join("rig.png"), DARK).unwrap();
+            if matches!(change, Change::Keys) {
+                document["materials"][0]["pbrMetallicRoughness"]["baseColorFactor"] =
+                    json!([0.2, 0.4, 0.6, 1]);
+                fs::write(root.join("rig.png"), DARK).unwrap();
+            }
         }
         Change::NonRootRotation => {
             let output = document["animations"][1]["samplers"][0]["output"]
