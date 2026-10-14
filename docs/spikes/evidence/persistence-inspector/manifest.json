@@ -1,0 +1,470 @@
+{
+  "schema": "incant-persistence-inspector-evidence-v1",
+  "source_commit": "9b0a819d99541a0acc2f0f2431ffdeed69528aa6",
+  "archive_sha256": "786c95061d5d65ea70ffdd901262811b229a2a4fbcc6d8d8d5f4dcacd17aaaba",
+  "records": [
+    {
+      "name": "checks-001/binaries/deterministic/animations-591e091521f51e01",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/checks-001/binaries/deterministic/animations-591e091521f51e01",
+      "sha256": "df9a2eabf32ba96addcee734cb0432f40a1084c5073656588da501063b6c22f5",
+      "bytes": 18836312,
+      "external": true
+    },
+    {
+      "name": "checks-001/binaries/deterministic/audio_controls-5576b68b4acb2db8",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/checks-001/binaries/deterministic/audio_controls-5576b68b4acb2db8",
+      "sha256": "9adb628c08e237f71374d8af8fd3429b61145f3d05313890f5f1035cbe812915",
+      "bytes": 12001632,
+      "external": true
+    },
+    {
+      "name": "checks-001/binaries/deterministic/bindings_static-aaf5dc10e5e5a8ef",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/checks-001/binaries/deterministic/bindings_static-aaf5dc10e5e5a8ef",
+      "sha256": "7a27f747401d0cc7c9be488a61568e1abe21785e768ef51caa468fff1a33ef21",
+      "bytes": 11988208,
+      "external": true
+    },
+    {
+      "name": "checks-001/binaries/deterministic/flipbooks-2a9ded921c973c06",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/checks-001/binaries/deterministic/flipbooks-2a9ded921c973c06",
+      "sha256": "1c0f8f8c6eacab85cda7f696ce76dd9710948b4e57bcbf5dbbda1e0cd053b67d",
+      "bytes": 17351016,
+      "external": true
+    },
+    {
+      "name": "checks-001/binaries/deterministic/hud-7992523469df6abe",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/checks-001/binaries/deterministic/hud-7992523469df6abe",
+      "sha256": "e4b6141732ed806f2895d1d4bb86b9e84908f1f21131f68039ae04080def8053",
+      "bytes": 12036136,
+      "external": true
+    },
+    {
+      "name": "checks-001/binaries/deterministic/incant_script-142ea1b496f386b0",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/checks-001/binaries/deterministic/incant_script-142ea1b496f386b0",
+      "sha256": "bf1b946b55070d89a708429dedc7f01fc40f3654e582bfeb61b9b20b26c6af78",
+      "bytes": 20159728,
+      "external": true
+    },
+    {
+      "name": "checks-001/binaries/deterministic/profile-b6ed3fc1501c151c",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/checks-001/binaries/deterministic/profile-b6ed3fc1501c151c",
+      "sha256": "6029c2f3f5f530e9314de319fa5e71403c4dc1e2c1cd0e1557c3ec9bc4bf516e",
+      "bytes": 1026984,
+      "external": true
+    },
+    {
+      "name": "checks-001/binaries/deterministic/project_bindings-3d9ca1177e3ebff8",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/checks-001/binaries/deterministic/project_bindings-3d9ca1177e3ebff8",
+      "sha256": "8decf6769bc9c131766be5d9fb14cc8b3dfd62f1f890183e95518c4920ab6649",
+      "bytes": 18243248,
+      "external": true
+    },
+    {
+      "name": "checks-001/binaries/deterministic/spatial-577595cc0e9626d8",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/checks-001/binaries/deterministic/spatial-577595cc0e9626d8",
+      "sha256": "e12e321a86122f1b99a642dcf02e95bb6aff284b6955b8be7cc001f1f554e2ef",
+      "bytes": 12098888,
+      "external": true
+    },
+    {
+      "name": "checks-001/binaries/fast8/animations-3458e676d35aeb95",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/checks-001/binaries/fast8/animations-3458e676d35aeb95",
+      "sha256": "2fa82a259d13591beadd72d979c69af9ab47671c2532addc0486888d1c40f2c4",
+      "bytes": 18522280,
+      "external": true
+    },
+    {
+      "name": "checks-001/binaries/fast8/audio_controls-041f79d6280a3077",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/checks-001/binaries/fast8/audio_controls-041f79d6280a3077",
+      "sha256": "6b3adcd3fd032372190cb718df8a4d012b8a37a0d157f4ddef4147fd0e446b5d",
+      "bytes": 11777840,
+      "external": true
+    },
+    {
+      "name": "checks-001/binaries/fast8/bindings_static-c6d2d853bcd4bbfc",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/checks-001/binaries/fast8/bindings_static-c6d2d853bcd4bbfc",
+      "sha256": "49cb6b343fe96450f0076050fa262510381389d9ea53f8ee1c24b50ed2de0e46",
+      "bytes": 11746912,
+      "external": true
+    },
+    {
+      "name": "checks-001/binaries/fast8/flipbooks-58c05df2ce1ab24a",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/checks-001/binaries/fast8/flipbooks-58c05df2ce1ab24a",
+      "sha256": "603dac5d4b38d0b49434bc16940b1198205dcda6f4256378bdd2a76daaf7be7e",
+      "bytes": 17086648,
+      "external": true
+    },
+    {
+      "name": "checks-001/binaries/fast8/hud-477398c14600f81b",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/checks-001/binaries/fast8/hud-477398c14600f81b",
+      "sha256": "203ea1eddb20e516b1b5a8d86e267547e7853aa3348f27fff667e166b255bb59",
+      "bytes": 11812840,
+      "external": true
+    },
+    {
+      "name": "checks-001/binaries/fast8/incant_script-1a5c74f1f30add2a",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/checks-001/binaries/fast8/incant_script-1a5c74f1f30add2a",
+      "sha256": "a4a3efb79473989bb93ad488a3d9393f3d1b8690762649721f23794d61f94a37",
+      "bytes": 19843840,
+      "external": true
+    },
+    {
+      "name": "checks-001/binaries/fast8/profile-8d18e239ea2ab3df",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/checks-001/binaries/fast8/profile-8d18e239ea2ab3df",
+      "sha256": "7783be6df958815af292a12474417a146bfe95e28b156d64d4137f30c2b6ccbe",
+      "bytes": 1026984,
+      "external": true
+    },
+    {
+      "name": "checks-001/binaries/fast8/project_bindings-9602e26d94033658",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/checks-001/binaries/fast8/project_bindings-9602e26d94033658",
+      "sha256": "9b6f79854cd6f15f206c6fb7dc2ec1320df1191e32f7a75036fe8cc9c72f240a",
+      "bytes": 17980256,
+      "external": true
+    },
+    {
+      "name": "checks-001/binaries/fast8/spatial-40c6492cd42b9704",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/checks-001/binaries/fast8/spatial-40c6492cd42b9704",
+      "sha256": "9861a656ca40ef767956b5525484a2777eb145ef2fbec0f5a055c870fad3bf53",
+      "bytes": 11858696,
+      "external": true
+    },
+    {
+      "name": "checks-001/binaries/focused/incant_script-142ea1b496f386b0",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/checks-001/binaries/focused/incant_script-142ea1b496f386b0",
+      "sha256": "bf1b946b55070d89a708429dedc7f01fc40f3654e582bfeb61b9b20b26c6af78",
+      "bytes": 20159728,
+      "external": true
+    },
+    {
+      "name": "checks-001/clippy-deterministic.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/checks-001/clippy-deterministic.json",
+      "sha256": "7ada95cb6c90a2e36dfab561beac55f5a333769f88b942d9c51891550560f894",
+      "bytes": 1282,
+      "external": false
+    },
+    {
+      "name": "checks-001/clippy-deterministic.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/checks-001/clippy-deterministic.stderr",
+      "sha256": "73b3624bb831ed31bbe172c76820b00d1d8799f399da8661ab19303fe02b83dd",
+      "bytes": 6136,
+      "external": false
+    },
+    {
+      "name": "checks-001/clippy-deterministic.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/checks-001/clippy-deterministic.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "external": false
+    },
+    {
+      "name": "checks-001/clippy-fast8.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/checks-001/clippy-fast8.json",
+      "sha256": "0f45fbd8cbfc9ee7c179e3c82cedc6eceefc58a8ea98a66d6d36d8a76565a39c",
+      "bytes": 1255,
+      "external": false
+    },
+    {
+      "name": "checks-001/clippy-fast8.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/checks-001/clippy-fast8.stderr",
+      "sha256": "c2fa404871ffb4add3b7331996e06b89f25e7c32dcf8530e89e0373f902e47e4",
+      "bytes": 1219,
+      "external": false
+    },
+    {
+      "name": "checks-001/clippy-fast8.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/checks-001/clippy-fast8.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "external": false
+    },
+    {
+      "name": "checks-001/conventions.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/checks-001/conventions.json",
+      "sha256": "23e833b5d57822579dbeaeb919f44c87ea0089d6422fa953d27f97f2fe55bbbd",
+      "bytes": 996,
+      "external": false
+    },
+    {
+      "name": "checks-001/conventions.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/checks-001/conventions.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "external": false
+    },
+    {
+      "name": "checks-001/conventions.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/checks-001/conventions.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "external": false
+    },
+    {
+      "name": "checks-001/deterministic.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/checks-001/deterministic.json",
+      "sha256": "422804dfdaf88fc35330bb8536092c142120687424c234453578bf742126c556",
+      "bytes": 6252,
+      "external": false
+    },
+    {
+      "name": "checks-001/deterministic.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/checks-001/deterministic.stderr",
+      "sha256": "21a3dfeea26a52bd0a7668db3e7da88155fa3e59336670b55c2e9797af408e73",
+      "bytes": 1566,
+      "external": false
+    },
+    {
+      "name": "checks-001/deterministic.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/checks-001/deterministic.stdout",
+      "sha256": "34a52ccdc670050f8a0cd98add5db1babbbdff5a3c5fc36d6c7a9e17c781cb29",
+      "bytes": 21312,
+      "external": false
+    },
+    {
+      "name": "checks-001/diff.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/checks-001/diff.json",
+      "sha256": "41510494d94d170d99fe8050d408c558b6633b417fa7917c13efaf1c1f4d9664",
+      "bytes": 946,
+      "external": false
+    },
+    {
+      "name": "checks-001/diff.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/checks-001/diff.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "external": false
+    },
+    {
+      "name": "checks-001/diff.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/checks-001/diff.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "external": false
+    },
+    {
+      "name": "checks-001/fast8.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/checks-001/fast8.json",
+      "sha256": "02c7c734bcb85e9710efe78ea9a292f253836933a3537bea097c30d9bd19c6f4",
+      "bytes": 6081,
+      "external": false
+    },
+    {
+      "name": "checks-001/fast8.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/checks-001/fast8.stderr",
+      "sha256": "7307840be0c76cfdca79645f4861f27e86da3f59da30275e3f4e5139021b3083",
+      "bytes": 2612,
+      "external": false
+    },
+    {
+      "name": "checks-001/fast8.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/checks-001/fast8.stdout",
+      "sha256": "da0a0aae7eae16193cd7219efe255356dbf36b240200a341beec4782574ce388",
+      "bytes": 21312,
+      "external": false
+    },
+    {
+      "name": "checks-001/fmt.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/checks-001/fmt.json",
+      "sha256": "5706f3d64d9ed6eacd2284b9258f054d579f751e5ce5b6ded696daf60f935b12",
+      "bytes": 993,
+      "external": false
+    },
+    {
+      "name": "checks-001/fmt.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/checks-001/fmt.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "external": false
+    },
+    {
+      "name": "checks-001/fmt.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/checks-001/fmt.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "external": false
+    },
+    {
+      "name": "checks-001/focused.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/checks-001/focused.json",
+      "sha256": "27f1277d93a21463a78984e41e8eb15afc3f19daf469e9cc4ba3025366e8c640",
+      "bytes": 1803,
+      "external": false
+    },
+    {
+      "name": "checks-001/focused.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/checks-001/focused.stderr",
+      "sha256": "88a8dcff6af74330790adbe8d98f68ac32852b02fc8619b703ffbafd778ccf06",
+      "bytes": 7509,
+      "external": false
+    },
+    {
+      "name": "checks-001/focused.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/checks-001/focused.stdout",
+      "sha256": "f31e19f5c246c38f30d8e3f6063047ee70926feddc26da3fbe52b0be0945b8cb",
+      "bytes": 951,
+      "external": false
+    },
+    {
+      "name": "checks-001/inputs.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/checks-001/inputs.json",
+      "sha256": "6142b1507c7f186856d06a88c85c54d85e98279752eb94962afdbbd290a5bcb6",
+      "bytes": 589495,
+      "external": false
+    },
+    {
+      "name": "checks-001/processes.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/checks-001/processes.json",
+      "sha256": "c66f7cc8ac5d4d9b9df05353424aa5c53d634643059d7100d38e0e106aa97b99",
+      "bytes": 240,
+      "external": false
+    },
+    {
+      "name": "checks-001/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/checks-001/result.json",
+      "sha256": "e6b65c77df5d4c2343cf3c7bc872d44334f12f7ab12410dc9d336a9a75aa4fc7",
+      "bytes": 22899,
+      "external": false
+    },
+    {
+      "name": "checks-001/toolchain.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/checks-001/toolchain.json",
+      "sha256": "4d24b1bc8bce4a24d36c62fd0da80f401919c829340f01d8cf574c45ed9f0b2d",
+      "bytes": 962,
+      "external": false
+    },
+    {
+      "name": "checks-001/toolchain.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/checks-001/toolchain.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "external": false
+    },
+    {
+      "name": "checks-001/toolchain.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/checks-001/toolchain.stdout",
+      "sha256": "1f88eaf7fe1aaec83184752cf4c944cd22f00184136ff36a3e4c318cc60ef566",
+      "bytes": 36,
+      "external": false
+    },
+    {
+      "name": "collect.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/collect.py",
+      "sha256": "a564ccc7ecf14fbd5c05e83e29f564319ce1a1d04b123bb41cb7902d1fe31195",
+      "bytes": 1825,
+      "external": false
+    },
+    {
+      "name": "run-001.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/run-001.py",
+      "sha256": "b515500ac37c57a13278590f6e06ef66f8dab35781d6cd6bc8eed06740d3d05d",
+      "bytes": 4187,
+      "external": false
+    },
+    {
+      "name": "source-001/files/Cargo.lock",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/source-001/files/Cargo.lock",
+      "sha256": "e8b06cba61eb910d0e47dd3238642286b276a5afe0eb11e336f397074c2873dd",
+      "bytes": 253026,
+      "external": false
+    },
+    {
+      "name": "source-001/files/crates/incant_script/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/source-001/files/crates/incant_script/Cargo.toml",
+      "sha256": "2412fe2fdb7a2078ead70b3aeb12f85a15048445166ca6b318eccf156dc91c00",
+      "bytes": 2773,
+      "external": false
+    },
+    {
+      "name": "source-001/files/crates/incant_script/src/bindings.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/source-001/files/crates/incant_script/src/bindings.rs",
+      "sha256": "de74c4be541b87be809946e84ea4d594db528005501307c6f39889c9af6a311b",
+      "bytes": 13477,
+      "external": false
+    },
+    {
+      "name": "source-001/files/crates/incant_script/src/compiled.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/source-001/files/crates/incant_script/src/compiled.rs",
+      "sha256": "9357e2c8ad48ea609a81328d04d358285d8d643095b00490c039c35e39def853",
+      "bytes": 3651,
+      "external": false
+    },
+    {
+      "name": "source-001/files/crates/incant_script/src/harden.js",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/source-001/files/crates/incant_script/src/harden.js",
+      "sha256": "cfa910dc3aca433963803c4fe253d1c469c2570156e1d33817ce06a56a01c324",
+      "bytes": 4341,
+      "external": false
+    },
+    {
+      "name": "source-001/files/crates/incant_script/src/persistence/inspector_tests.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/source-001/files/crates/incant_script/src/persistence/inspector_tests.rs",
+      "sha256": "ec8c550d42f07de55bc02796f26c8518c2413d315036433ef4deabd35f7b9ee4",
+      "bytes": 7459,
+      "external": false
+    },
+    {
+      "name": "source-001/files/crates/incant_script/src/persistence/tests.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/source-001/files/crates/incant_script/src/persistence/tests.rs",
+      "sha256": "6117d0cae13807aa7a3d28ee1b7c6ed8f672bca16b8385dbbf6766a59a966ec4",
+      "bytes": 4566,
+      "external": false
+    },
+    {
+      "name": "source-001/files/crates/incant_script/src/persistence/value.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/source-001/files/crates/incant_script/src/persistence/value.rs",
+      "sha256": "cb3eed3acbaa2b28962fdc9800d120a51125218c49246edc77c5274cfc413b2a",
+      "bytes": 3411,
+      "external": false
+    },
+    {
+      "name": "source-001/files/crates/incant_script/src/persistence.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/source-001/files/crates/incant_script/src/persistence.rs",
+      "sha256": "ab537ea41626c84d1a27f3b8097664c289bf8db0be501f89b9511cc364bd0350",
+      "bytes": 10650,
+      "external": false
+    },
+    {
+      "name": "source-001/files/docs/spikes/persistence-inspector-private-arrays.md",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/source-001/files/docs/spikes/persistence-inspector-private-arrays.md",
+      "sha256": "80f01284fccff7e76afb92eeb14fc2c2f7b524c53d3a007c68abcca62f2d822b",
+      "bytes": 1806,
+      "external": false
+    },
+    {
+      "name": "source-001/files/rust-toolchain.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/source-001/files/rust-toolchain.toml",
+      "sha256": "c6e63d9832830b858d930007e4fd1fc3f4a3ca1d287483b08077b7f0267ca124",
+      "bytes": 100,
+      "external": false
+    },
+    {
+      "name": "source-001/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/persistence-inspector-001/source-001/freeze.json",
+      "sha256": "9ce7a1061ab3792c056264e11bc96c387076119539fc49d66cf4244497475aa1",
+      "bytes": 2492,
+      "external": false
+    },
+    {
+      "name": "source-review.json",
+      "original": "/Users/andreyyurlov/.codex/incant-reviews/persistence-inspector-source-root-20261014.json",
+      "sha256": "01a4637537547fc3960c01b84dc18458f58eadce3d026a16ec547a975089ffcc",
+      "bytes": 999,
+      "external": false
+    }
+  ],
+  "current_sources": [
+    {
+      "path": "crates/incant_script/src/harden.js",
+      "sha256": "cfa910dc3aca433963803c4fe253d1c469c2570156e1d33817ce06a56a01c324"
+    },
+    {
+      "path": "crates/incant_script/src/persistence.rs",
+      "sha256": "ab537ea41626c84d1a27f3b8097664c289bf8db0be501f89b9511cc364bd0350"
+    },
+    {
+      "path": "crates/incant_script/src/persistence/inspector_tests.rs",
+      "sha256": "ec8c550d42f07de55bc02796f26c8518c2413d315036433ef4deabd35f7b9ee4"
+    }
+  ],
+  "scope": "Focused persistence and both native script mode regressions, no shipping timing or GPU"
+}
