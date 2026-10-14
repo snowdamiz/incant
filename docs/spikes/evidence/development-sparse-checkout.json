@@ -1,0 +1,156 @@
+{
+  "at": "2026-10-14T13:10:00.919909+00:00",
+  "inventory": {
+    "at": "2026-10-14T13:07:45.686252+00:00",
+    "source": "b3305de17ea8febbd10a16855da429cf0d5d9b88",
+    "clone": "shared local object database; no network checkout duration claim",
+    "patterns": [
+      "/*",
+      "!/docs/spikes/evidence/",
+      "!/handoffs/"
+    ],
+    "included_files": 5304,
+    "excluded_files": 16074,
+    "full_tree_bytes": 1482935878,
+    "kept_tree_bytes": 53332238,
+    "excluded_tree_bytes": 1429603640,
+    "selected_action_source": "https://raw.githubusercontent.com/actions/checkout/11d5960a326750d5838078e36cf38b85af677262/src/git-source-provider.ts",
+    "action_behavior": "sparseCheckout without explicit filter selects blob:none; applies non-cone sparse patterns before checkout",
+    "checks": "same development commands; release workflows unchanged"
+  },
+  "local_results": [
+    {
+      "command": [
+        "npm",
+        "ci"
+      ],
+      "exit": 0,
+      "error": null,
+      "seconds": 2.4461602910014335,
+      "log_sha256": "149612121232049911e03773b11c0118fe0b1c0185b0d9b440d8fb9712000cec"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "error": null,
+      "seconds": 0.03833645899430849,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "test:tools"
+      ],
+      "exit": 0,
+      "error": null,
+      "seconds": 32.67361174998223,
+      "log_sha256": "f6f2a41c9cef4faf98a55b2f360ca67bef7371a4d56e12f8f64174b71e4b73f7"
+    },
+    {
+      "command": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--check"
+      ],
+      "exit": 0,
+      "error": null,
+      "seconds": 1.4077963339805137,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "node",
+        "tools/build_bridge.mjs",
+        "--check"
+      ],
+      "exit": 0,
+      "error": null,
+      "seconds": 0.04218508399208076,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "node",
+        "tools/generate_sdk.mjs",
+        "--check"
+      ],
+      "exit": 0,
+      "error": null,
+      "seconds": 0.04232883299118839,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "node_modules/.bin/tsc",
+        "-p",
+        "sdk/ts/tsconfig.json"
+      ],
+      "exit": 0,
+      "error": null,
+      "seconds": 0.21525295899482444,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "build",
+        "--workspace",
+        "editor/ui"
+      ],
+      "exit": 0,
+      "error": null,
+      "seconds": 3.2951657920202706,
+      "log_sha256": "774d04b9c45f18aad5c8b7f3b1684b9c23e4effe31c898ef169f0ed01216c1a0"
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "test",
+        "--workspace",
+        "editor/ui"
+      ],
+      "exit": 0,
+      "error": null,
+      "seconds": 7.366747208987363,
+      "log_sha256": "16489ffa7352cbc04d6bd3a26dd9f64ee90041496c3a677501fb328e8813871b"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--exit-code"
+      ],
+      "exit": 0,
+      "error": null,
+      "seconds": 0.016778958990471438,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "ui_tests": {
+    "files": 47,
+    "tests": 973,
+    "passed": true
+  },
+  "hosted_observation": {
+    "run": 38568025573,
+    "job": 115865625505,
+    "head": "b3305de17ea8febbd10a16855da429cf0d5d9b88",
+    "checkout_started_at": "2026-10-14T12:58:58Z",
+    "still_in_progress_after_minutes": 9,
+    "conclusion": "pending; not a failed check or measured improvement"
+  },
+  "scope": "Only development.yml checkout selection; every development command and all release workflows/contexts unchanged",
+  "limitations": [
+    "Local shared-object checkout does not measure GitHub network transfer or checkout speed.",
+    "No hosted speedup is established until the successor runs.",
+    "Archived evidence remains in Git and full release checkouts."
+  ]
+}
