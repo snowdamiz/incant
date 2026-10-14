@@ -212,7 +212,7 @@ impl Stage {
 /// The original Stage's pan/mover functions, with this experiment's explicit
 /// stationary interval and one cut. No renderer-specific pose adjustment.
 pub(super) fn poses(frame: u32) -> (DMat4, DMat4) {
-    assert!((1..=32).contains(&frame));
+    assert!((1..=56).contains(&frame));
     let camera_step = if frame <= 16 {
         1
     } else if frame <= 24 {

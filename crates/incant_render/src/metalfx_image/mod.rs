@@ -78,6 +78,38 @@ fn shared_stage_uses_opaque_cooked_assets_and_stable_semantic_bindings() {
     );
 }
 #[test]
+fn halton_full_pose_chronology_admits_56_and_refuses_outside_before_mutation() {
+    let stage = scene::Stage::new();
+    let mut input = stage.input();
+    for frame in 1..=56 {
+        stage.pose(&mut input, frame);
+        let binding = stage.bindings(&input);
+        let nodes = binding["nodes"].as_array().unwrap();
+        let camera = nodes.iter().find(|n| n["role"] == "camera").unwrap();
+        let mover = nodes.iter().find(|n| n["role"] == "mover").unwrap();
+        let camera_x = if frame <= 16 {
+            0.
+        } else if frame <= 24 {
+            f64::from(frame - 16) * 0.05
+        } else {
+            f64::from(frame + 4) * 0.05
+        };
+        let mover_x = 2.02 + f64::from(frame.saturating_sub(16)) * 0.12;
+        assert_eq!(camera["world"][12].as_f64().unwrap(), camera_x);
+        assert!((mover["world"][12].as_f64().unwrap() - mover_x).abs() < 1e-12);
+    }
+    let before = stage.bindings(&input);
+    for invalid in [0, 57, u32::MAX] {
+        assert!(
+            std::panic::catch_unwind(std::panic::AssertUnwindSafe(
+                || stage.pose(&mut input, invalid)
+            ))
+            .is_err()
+        );
+        assert_eq!(stage.bindings(&input), before);
+    }
+}
+#[test]
 #[ignore = "coordinated Mac GPU only: 96 scene submits, 15 readbacks/maps, 15 images"]
 fn actual_full_half_three_quarter_material_images_and_motion() {
     run(false);
