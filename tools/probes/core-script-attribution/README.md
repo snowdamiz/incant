@@ -72,3 +72,25 @@ eight final control outcomes are recorded with the external source freeze.
 The Rust observer's earlier focused qualification is separate; see
 `docs/spikes/core-script-attribution.md` and its external receipt. The normal
 shipping 2 ms failures remain unchanged.
+
+
+## Optional navigation-start attribution
+
+A separate explicit `diagnostic-navigation` selection now adds bounded path-query,
+initial shortcut-start and repeated shortcut-start aggregates to the same frame.
+It implies the four existing diagnostic receivers and adds `incant_nav`; the
+private builder admits this exact five-crate feature table, checks actual target
+compiler units and rejects any other graph change. Normal exporters are unchanged.
+The private collector requires diagnostic schema2 only for this plan selection;
+original schema1 attribution remains supported explicitly. No new build or player
+execution is established by this source change.
+
+Navigation duration is inside callback time, and lookup duration is inside the
+query. Initial start excludes the corridor's endpoint scans. Failed counts include
+errors and absent results; an optional shortcut may fail while the original path
+survives. Per-frame repeated-start time can be subtracted from that same whole
+ScriptTick solely as a hypothetical zero-cost feasibility calculation. The
+resulting rows are ranked after subtraction; marginal percentiles are never
+subtracted. Zero repeated calls or a still-over-budget hypothetical p95 stops the
+hypothesis. A plausible saving justifies separate correctness and matched shipping
+work; the instrumented result never passes the existing gate.

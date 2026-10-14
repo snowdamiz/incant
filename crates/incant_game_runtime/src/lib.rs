@@ -233,8 +233,13 @@ where
 #[cfg(all(feature = "device", not(target_arch = "wasm32")))]
 impl GameSession<incant_audio_runtime::DeviceBackend> {
     /// Poll CPAL device errors separately from generic decoder errors. Reported
-    /// or discarded errors destroy the session; device observation is asynchronous.
+    /// xruns are counted; other or discarded errors destroy the session.
+    /// Device observation is asynchronous.
     pub fn poll_device(&mut self) -> Result<()> {
         self.core.poll_device()
+    }
+
+    pub fn device_audio_diagnostics(&self) -> Result<incant_audio_runtime::DeviceAudioDiagnostics> {
+        self.core.device_audio_diagnostics()
     }
 }

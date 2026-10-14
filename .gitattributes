@@ -69,3 +69,8 @@ handoffs/0077-project-file-ui/evidence/root-ui-corrections/root-ui-corrections.p
 handoffs/0077-project-file-ui/evidence/announcement-fix/focused-run2.txt -text whitespace=-blank-at-eof
 handoffs/0077-project-file-ui/evidence/announcement-fix/typecheck-run1.txt -text whitespace=-blank-at-eof
 docs/spikes/evidence/project-file-ui-main278/full-final-main278.log -text whitespace=-blank-at-eof
+
+# Preserve pinned wgpu-hal archive bytes and unified-diff blank context lines.
+third_party/wgpu-hal/** -text
+third_party/wgpu-hal/README.md whitespace=-blank-at-eof
+third_party/wgpu-hal/INCANT_PATCH.diff whitespace=-blank-at-eol

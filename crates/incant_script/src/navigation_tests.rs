@@ -14,6 +14,34 @@ fn host(body: &str) -> ScriptHost {
 fn world() -> NativeWorld {
     NativeWorld::new(scene())
 }
+#[cfg(feature = "diagnostic-navigation")]
+#[test]
+fn diagnostic_navigation_observes_real_queries_without_changing_results() {
+    let mut world = world();
+    let original = world.navigation_path(id(1), &path()).unwrap();
+    let mut script = host(
+        r#"
+        const p=navigation.findPath(owner,mesh);
+        if(p.points.length<=2)throw Error('missing detour');
+        if(navigation.findPath(owner,{...mesh,start:[200,0,0]})!==null)throw Error('snap miss');
+    "#,
+    );
+    let capture = incant_profile::Capture::start().unwrap();
+    incant_profile::frame(|| script.tick(&mut world, 1. / 60.)).unwrap();
+    assert_eq!(world.navigation_path(id(1), &path()).unwrap(), original);
+    let report = capture.report();
+    let d = report.script_phase_diagnostic;
+    assert!(d.complete);
+    assert_eq!(d.schema, 2);
+    let row = &d.rows[0];
+    assert_eq!(row.navigation.calls[0], 2);
+    assert_eq!(row.navigation.failed[0], 1);
+    assert_eq!(row.navigation.calls[1], 1);
+    assert!(row.navigation.ns[1] + row.navigation.ns[2] <= row.navigation.ns[0]);
+    assert!(row.navigation.ns[0] <= row.source_ns.iter().sum::<u64>());
+    // The observer reports the actual repeated-start count; this small fixture
+    // is not evidence of savings in the full Core workload.
+}
 #[test]
 fn mesh_detour_grid_cost_misses_owned_values_and_movement_are_observable() {
     let mut world = world();

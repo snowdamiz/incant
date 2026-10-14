@@ -418,6 +418,17 @@ where
 
 #[cfg(all(feature = "device", not(target_arch = "wasm32")))]
 impl<H: Hook> Core<incant_audio_runtime::DeviceBackend, H> {
+    pub fn device_audio_diagnostics(
+        &self,
+    ) -> Result<incant_audio_runtime::DeviceAudioDiagnostics, H::Error> {
+        Ok(self
+            .live
+            .as_ref()
+            .ok_or(GameError::Failed)?
+            .audio
+            .device_audio_diagnostics())
+    }
+
     pub fn poll_device(&mut self) -> Result<(), H::Error> {
         let mut live = self.live.take().ok_or(GameError::Failed)?;
         live.audio.check_device()?;

@@ -23,7 +23,7 @@ fn refusal(args: &[&str]) -> String {
 }
 
 #[test]
-fn window_observation_refuses_before_startup_but_headless_keeps_observation_route() {
+fn unbounded_window_observation_refuses_before_startup_but_headless_keeps_observation_route() {
     let window = refusal(&[
         "--window",
         "missing-scene",
@@ -36,7 +36,10 @@ fn window_observation_refuses_before_startup_but_headless_keeps_observation_rout
         "--observe",
         PLAN,
     ]);
-    assert!(window.contains("expected --window SCENE"), "{window}");
+    assert!(
+        window.contains("recording/observation requires --stop-after"),
+        "{window}"
+    );
     let headless = refusal(&[
         "missing-scene",
         "missing-cache",

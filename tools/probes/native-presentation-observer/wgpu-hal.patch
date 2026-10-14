@@ -1,0 +1,98 @@
+--- a/Cargo.toml
++++ b/Cargo.toml
+@@ -50,6 +50,8 @@
+ ignored = ["cfg_aliases"]
+ 
+ [features]
++# Incant private diagnostic only; off in all normal feature graphs.
++diagnostic-presentations = ["objc2-metal?/objc2-core-foundation"]
+ device_lost_panic = []
+ dx12 = [
+     "dep:arrayvec",
+--- a/src/metal/mod.rs
++++ b/src/metal/mod.rs
+@@ -25,6 +25,10 @@
+ mod library_from_metallib;
+ mod surface;
+ mod time;
++#[cfg(all(feature = "diagnostic-presentations", target_os = "macos"))]
++pub mod presentation;
++#[cfg(all(feature = "diagnostic-presentations", target_os = "macos"))]
++mod presentation_native;
+ 
+ use alloc::{
+     string::{String, ToString as _},
+@@ -503,6 +507,8 @@
+ }
+ 
+ pub struct Surface {
++    #[cfg(all(feature = "diagnostic-presentations", target_os = "macos"))]
++    presentation_observation: Mutex<Option<presentation::Observation>>,
+     render_layer: Mutex<Retained<CAMetalLayer>>,
+     swapchain_format: RwLock<Option<wgt::TextureFormat>>,
+     extent: RwLock<wgt::Extent3d>,
+@@ -513,6 +519,8 @@
+ 
+ #[derive(Debug)]
+ pub struct SurfaceTexture {
++    #[cfg(all(feature = "diagnostic-presentations", target_os = "macos"))]
++    presentation: Option<presentation::Ticket>,
+     texture: Texture,
+     // Useful for UI-intensive applications that are sensitive to
+     // window resizing.
+@@ -610,6 +618,11 @@
+             // because we immediately commit this buffer.
+             let command_buffer = self.shared.raw.commandBuffer().unwrap();
+             command_buffer.setLabel(Some(ns_string!("(wgpu internal) Present")));
++
++            #[cfg(all(feature = "diagnostic-presentations", target_os = "macos"))]
++            if let Some(ticket) = &texture.presentation {
++                presentation_native::attach(ticket, &texture.drawable);
++            }
+ 
+             // https://developer.apple.com/documentation/quartzcore/cametallayer/1478157-presentswithtransaction?language=objc
+             if !texture.present_with_transaction {
+--- a/src/metal/surface.rs
++++ b/src/metal/surface.rs
+@@ -18,6 +18,8 @@
+     pub fn new(layer: Retained<CAMetalLayer>) -> Self {
+         Self {
+             render_layer: Mutex::new(layer),
++            #[cfg(all(feature = "diagnostic-presentations", target_os = "macos"))]
++            presentation_observation: Mutex::new(None),
+             swapchain_format: RwLock::new(None),
+             extent: RwLock::new(wgt::Extent3d::default()),
+         }
+@@ -157,6 +159,8 @@
+             }
+         }
+ 
++        #[cfg(all(feature = "diagnostic-presentations", target_os = "macos"))]
++        let observation = self.presentation_observation.lock().clone();
+         let (drawable, texture) = match autoreleasepool(|_| {
+             render_layer
+                 .nextDrawable()
+@@ -169,6 +173,11 @@
+         let swapchain_format = self.swapchain_format.read().unwrap();
+         let extent = self.extent.read();
+         let suf_texture = super::SurfaceTexture {
++            #[cfg(all(feature = "diagnostic-presentations", target_os = "macos"))]
++            presentation: observation.and_then(|o| {
++                use objc2_metal::MTLDrawable;
++                o.acquire(drawable.drawableID() as u64)
++            }),
+             texture: super::Texture {
+                 raw: texture,
+                 format: swapchain_format,
+@@ -191,5 +200,10 @@
+         })
+     }
+ 
+-    unsafe fn discard_texture(&self, _texture: super::SurfaceTexture) {}
++    unsafe fn discard_texture(&self, _texture: super::SurfaceTexture) {
++        #[cfg(all(feature = "diagnostic-presentations", target_os = "macos"))]
++        if let Some(ticket) = &_texture.presentation {
++            ticket.discard();
++        }
++    }
+ }

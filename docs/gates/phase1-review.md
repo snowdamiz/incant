@@ -1,7 +1,7 @@
 # Phase 1 review ledger
 
-Updated against main298 and the qualified animated-editor source
-`d2add5f1c6feb612cab8d758785ef83eb914263c`. Release checkpoint38 tested the
+Updated against main300 and navigation diagnostic source
+`73c1d493acb619b30c3b90e54776eccd6e2f6d90`. Release checkpoint38 tested the
 earlier main290 tree.
 Phase 1 remains open; this ledger records evidence and remaining work, not director
 approval. [PLAN.md](../../PLAN.md#phase-1-core-engine) defines the requirements.
@@ -42,6 +42,11 @@ device execution is deferred; hosted build and release checks remain required.
 - Finish and qualify remaining deliverables against the complete native sample.
   The [TypeScript AOT spike](../spikes/typescript-aot.md) remains an adoption
   experiment; its language controls are not a measured replacement for QuickJS.
+
+The new [repeated-start attribution](../spikes/navigation-start-attribution.md)
+also rejects that specific scan-only hypothesis for reaching 2 ms: its hypothetical
+same-frame zero-cost p95 is still 2.544041 ms. The reusable observer is default off;
+no navigation optimization or new shipping performance result is adopted.
 
 The real-mouse capture check is pending the director's availability and is not
 blocking these lanes. Broader editor, agent, content, export, multiplayer, game

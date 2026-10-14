@@ -1,0 +1,33 @@
+{
+  "format": "incant-device-audio-xrun-cpu-v1",
+  "scope": "CPU policy/real offline mixer tests, composed runtime regressions, native device compilation/lint; no live audio device/GPU/performance proof",
+  "source": {
+    "commit": "c926d6238416e0d7b9259e318972d1ac2915fc66",
+    "base": "6dd277685096595ea4f9b7c5a8834dc1c8f28544",
+    "files": {
+      "crates/incant_audio_runtime/src/lib.rs": "f9d6d81845ec6f7761be4dd962087fedd58e664a28928e785a172b5478e63e8a",
+      "crates/incant_audio_runtime/src/scene.rs": "0fb1950080b2e2eae9b1f0e955052b7c849eaea32ebb2507b2ac84b6158c4cb2",
+      "crates/incant_audio_runtime/src/scene/checkpoint.rs": "5706a3e7f116550aba06bb7b20fb2008012d59d01f177b4b716e620c84fabc66",
+      "crates/incant_audio_runtime/src/scene/device.rs": "1bc18043c700cc4d548f7580a23a6d0028fce925063bffe3d4c3fcfa2fc1c972",
+      "crates/incant_audio_runtime/src/scene/device/tests.rs": "a87d99e1416389f735a91220da21817ea92d9f72ff5704d10b05bb4d86d7c723",
+      "crates/incant_game_player/src/window/mod.rs": "3ca55d5c2045296c9df1b29a2edc40d391826f4503dac11aaa4e70fcf701df28",
+      "crates/incant_game_runtime/src/core.rs": "0249c44a3b350879a78c709060d5dc484093ceac1db08f5525beb725c2dce375",
+      "crates/incant_game_runtime/src/hosted.rs": "75ab15f46c76d459faef987a46cd4b2f208ded8e5707ae11d9ab4e351beaf42d",
+      "crates/incant_game_runtime/src/lib.rs": "54a3580547cdb6c6aa693dc1b981b1a804ce6163c35391baa9da3af0aaa27f22"
+    }
+  },
+  "test_counts": {
+    "0": 39,
+    "1": 35
+  },
+  "archive": {
+    "file": "records.json.gz",
+    "sha256": "c4413ec99ac903a3cf0b9f6c13d25d71a936eb171f26319fa0cf9192fc001986",
+    "expanded_bytes": 1317228,
+    "records": 9
+  },
+  "independent_review_sha256": "23eb002ee0ebf92496acbeadcbc9ac7c61fbce4f84ec6973277f40e061c42b73",
+  "trigger_partial_window_sha256": "1067fac1828c305b402a88a37667fa63b28603a886befaafeef4af0c2aad7e18",
+  "actual_device_continuity_verified": false,
+  "phase_gate_passed": false
+}
