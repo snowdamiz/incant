@@ -54,3 +54,4 @@ serde_json.workspace = true
 tempfile = "3"
 incant_ui.workspace = true
 png = "0.18"
+pollster = "0.4"

@@ -6,24 +6,18 @@ use incant_runtime::NativeAnimation;
 pub(crate) fn validate(
     entity: StableId,
     source: &RuntimeAsset,
+    original_fingerprint: &[u8; 32],
     definition: Option<&NativeAnimation>,
 ) -> Result<(), NativeRenderError> {
     let Some(definition) = definition else {
         return Ok(()); // Animated models without playback use their authored rest pose.
     };
     let invalid = |reason| NativeRenderError::Animation { entity, reason };
-    let fingerprint = source.info().fingerprint.as_bytes();
-    const HEX: &[u8; 16] = b"0123456789abcdef";
-    if fingerprint.len() != 64
-        || definition
-            .mesh_fingerprint
-            .iter()
-            .enumerate()
-            .any(|(i, b)| {
-                fingerprint[2 * i] != HEX[usize::from(b >> 4)]
-                    || fingerprint[2 * i + 1] != HEX[usize::from(b & 15)]
-            })
-    {
+    // The sealed catalog initially loads these exact world-reference bytes.
+    // Later compatible clip publication changes the private visual version,
+    // while the world's playback/graph definitions and clocks stay unchanged.
+    // Only the checked model-refresh ticket can establish that new version.
+    if definition.mesh_fingerprint != *original_fingerprint {
         return Err(invalid("model fingerprint differs from native clip table"));
     }
     let RuntimeAssetData::Model(model) = source.data() else {
