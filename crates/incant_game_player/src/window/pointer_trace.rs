@@ -157,6 +157,7 @@ impl Trace {
                             MouseButton::Right => 1,
                             MouseButton::Middle => 2,
                             MouseButton::Other(n) => u32::from(*n) + 3,
+                            _ => u32::from(u16::MAX) + 4,
                         };
                         Some(Mark::new(Kind::WindowButton, button * 2 + pressed(*state)))
                     }

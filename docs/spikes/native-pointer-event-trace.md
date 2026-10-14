@@ -39,7 +39,8 @@ Bits8..10 are captured, release-required and matching rearm release pending.
 Bit11 says context bits0..7 were observed; final cleanup omits that context
 rather than inventing false focus. Counts are captures, releases and delivered
 raw-motion events. A window-button detail is `2*button+pressed`, with left0,
-right1, middle2, other=n+3. Device buttons preserve Tao's numeric ID with the
+right1, middle2, other=n+3, and an unknown future button=65539 (outside the
+Other(u16) domain). Device buttons preserve Tao's numeric ID with the
 same pressed bit. Key detail uses anonymous0, Escape1, Tab2, F3 with pressed bit.
 Cleanup records aggregate completion independently from cursor cleanup success.
 
@@ -48,6 +49,11 @@ filtering, device/window event distinction, redaction/exact numeric bits, error
 cleanup observation, bounded output, explicit option refusal and equality of
 input events/backend calls/typed failures with and without snapshots. These are
 not yet executed and do not replace the pending actual diagnostic child.
+
+The first qualification stopped at compilation: Tao's non-exhaustive
+MouseButton enum required a wildcard in the diagnostic observer. Source002
+adds only the unknown-button sentinel above; the original failed001 log remains
+retained, and input dispatch is unchanged.
 
 The trace can discriminate no Tao raw event from an event rejected by host
 eligibility, and show which intended clicks/Escape/focus transitions arrived.
