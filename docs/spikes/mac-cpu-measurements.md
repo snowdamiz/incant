@@ -44,5 +44,10 @@ are discarded. Other-device execution is deferred under PLAN revision 9.
 Eight focused Python controls verify quantile boundaries, invalid/missing samples,
 baseline identity and retained-report mismatches, conservative regression
 decisions and non-Mac refusal. They are synthetic policy checks, not performance
-results. Actual machine identity collection succeeds locally. A new shipping
-execution with version 2 remains pending composition with the profiler change.
+results. Actual machine identity collection succeeds locally. The runner also
+parses the actual version 2 output of the profiler's one-entity, three-tick CI
+fixture and recomputes its histogram intervals. This verifies interoperability,
+not speed. [Retained qualification](evidence/mac-cpu-runner/manifest.json) binds
+the reviewed source, eight tests, machine identity and raw CLI report. Its
+adjacent verifier checks those records without rerunning captured commands.
+A new shipping execution remains pending composition with the profiler change.

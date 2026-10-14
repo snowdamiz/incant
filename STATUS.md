@@ -8,6 +8,14 @@ Required hosted CI/build checks, actual-success release promotion, Mac shipping-
 profile measurements and non-device release/human obligations remain in force.
 No phase is approved by this policy update. [Plan](PLAN.md).
 
+The Mac CPU measurement runner has independent source acceptance, eight passing
+policy tests and a successful parse of the actual version 2 profiler CLI output.
+It binds shipping codegen, player/data/script identities, this Mac's configuration
+and matched baselines, retaining uncertainty around the 5% comparison threshold.
+That CLI fixture is one entity and three ticks in the CI profile; shipping Core
+Sample/10,000-entity measurements and presentation timing remain open.
+[Scope and evidence](docs/spikes/mac-cpu-measurements.md).
+
 Checkpoint30 is promoted through PR232: release `71bdd2e7` has the exact tested
 main252 tree `393eb78c`. All 23 required contexts and all eight push workflows
 succeeded; independent review, merge parents, author trailer and post-merge tree
