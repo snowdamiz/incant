@@ -42,15 +42,21 @@ Revision 8 makes outside services local-first: develop and test against the
 local containers or in-process substitutes in PLAN.md section 2.7, use hosted
 services only where a gate needs the real one, and label local results as local.
 
-Astra owns nonvisual implementation and integration. Claude Opus 5.5 through ACP,
-with thinking explicitly set to Max for every new or resumed session, owns
-visual design, layouts, styling, look-dev, rendered-pixel review, screenshots,
-diagrams and game art. Mixed tasks split correctness from appearance. Do not
-substitute another model or effort level silently. Verify both settings through
-ACP before prompting; a default effort setting is insufficient. If ACP is
-unavailable, leave a self-contained
-packet in handoffs/<id>/brief.md for manual Claude execution. Never self-approve a
-routing exception. Build-time accounts must never become runtime dependencies.
+Astra/root and its subagents own all work except the default editor UI handoff:
+rendering algorithms, graphics/runtime correctness, non-editor visuals, game art,
+HUD, look-dev, screenshots, diagrams, implementation and integration. Claude Opus
+5.5 through ACP, with thinking explicitly set to Max for every new or resumed
+session, owns editor UI design, layout, styling and rendered-pixel review by
+default. Mixed editor UI tasks split correctness from appearance. Verify both
+model and effort through ACP before prompting; a default effort setting is
+insufficient. Do not substitute another model or effort level silently. If ACP is
+unavailable, leave a self-contained packet in handoffs/<id>/brief.md for manual
+Claude execution. The director's 2026-10-13 clarification limits default Claude
+routing to editor UI and authorizes Astra to take over any work Claude is failing
+to resolve, including editor UI implementation and pixel review. Apply that
+standing authorization without asking again; retain prior attempts, identify the
+takeover, and preserve acceptance and evidence standards. Do not invent other
+routing exceptions. Build-time accounts must never become runtime dependencies.
 
 Use Rust 2024, cargo fmt, cargo clippy, typed errors, and tests of observable
 behavior. Avoid unnecessary unsafe code. Pin dependency resolutions. Keep files

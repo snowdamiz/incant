@@ -1,8 +1,10 @@
 # Astra workflow
 
-Route visual work with `python3 tools/handoff/main.py run <id>`. Prepare a packet
+By default, route editor UI design, layout, styling and pixel review with `python3 tools/handoff/main.py run <id>`. Prepare a packet
 with scope, acceptance criteria, paths, commands, performance constraints and
-expected result. Review returned diffs, run all applicable locally feasible checks,
+expected result. When applying the director-authorized takeover above, record the
+unresolved Claude work and continue directly under the same acceptance criteria.
+Review returned diffs, run all applicable locally feasible checks,
 then prepare the PR when a remote exists. Merge completed PRs into main after their required checks
 pass; resolve conflicts and verify the integrated result without asking for another
 merge confirmation. Preserve author trailers. Do not approve a phase gate.
