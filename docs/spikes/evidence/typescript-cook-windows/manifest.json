@@ -1,0 +1,9 @@
+{
+  "source": "ed3999b02d2a747dee93d278a2c1c50d43f275b7",
+  "evidence_root": "/Users/andreyyurlov/.codex/incant-integration-evidence/typescript-cook-phases",
+  "records": 16,
+  "archive_sha256": "bb3db3b880de37b5ba2a07c96dc3b68a07e24fbc75d91c4b1ea988420acbae3d",
+  "verifier_sha256": "19e5fb06b7627e8afb1e86b0dcdbe268caf50f4a6682a4dccfd90aca40e4608f",
+  "workflow_sha256": "5e6069b7207afc2328674790e122d0141367ca5ddbc3767eb86510a5fe99bbb1",
+  "scope": "Single actual Windows phase observation only. Original checkpoint32 timeout is retained and unexplained; no retry, deadline change, repair or release claim."
+}

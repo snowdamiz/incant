@@ -1,6 +1,7 @@
 //! The only mutable owner of an editor document. GUI, scripts and AI share commands.
 mod journal;
 mod localization;
+mod prefab;
 mod sources;
 use incant_doc::{
     Asset, CollaborativeDocument, DocumentError, Entity, Id, Origin, Project, Provenance, Scene,
@@ -18,6 +19,41 @@ use thiserror::Error;
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(tag = "op", rename_all = "snake_case", deny_unknown_fields)]
 pub enum Command {
+    CreatePrefab {
+        scene_id: Id,
+        root_entity_id: Id,
+        prefab_id: Id,
+        name: String,
+        /// Exact source entity -> fresh prototype node identity map.
+        nodes: std::collections::BTreeMap<Id, Id>,
+    },
+    InstantiatePrefab {
+        source: Id,
+        scene_id: Id,
+        parent: Option<Id>,
+        /// Exact prototype node -> fresh instance entity identity map.
+        entities: std::collections::BTreeMap<Id, Id>,
+    },
+    UpdatePrefab {
+        prefab: incant_doc::Prefab,
+    },
+    RevertPrefabComponent {
+        scene_id: Id,
+        entity_id: Id,
+        component: String,
+    },
+    DetachPrefab {
+        scene_id: Id,
+        root_entity_id: Id,
+    },
+    DeletePrefabInstance {
+        scene_id: Id,
+        root_entity_id: Id,
+    },
+    DeletePrefab {
+        prefab_id: Id,
+    },
+
     CreateScene {
         scene: Scene,
     },
@@ -174,6 +210,8 @@ pub struct Transaction {
 #[derive(Debug, Error)]
 pub enum CommandError {
     #[error(transparent)]
+    Prefab(#[from] incant_doc::prefab::PrefabError),
+    #[error(transparent)]
     Source(#[from] SourceError),
     #[error(transparent)]
     Document(#[from] DocumentError),
@@ -301,9 +339,11 @@ impl CommandBus {
         }
         let id = new_id();
         let provenance = actor.provenance(&id)?;
+        prefab::preflight(&commands)?;
+        let mut prefab_budget = prefab::Budget::default();
         let mut after = self.project.clone();
         for command in &commands {
-            apply(&mut after, command, &provenance)?;
+            apply(&mut after, command, &provenance, &mut prefab_budget)?;
         }
         after.validate()?;
         let source_edit = self.prepare_source_edit(&commands, &after, expected_revision)?;
@@ -481,8 +521,87 @@ fn apply(
     project: &mut Project,
     command: &Command,
     provenance: &Provenance,
+    prefab_budget: &mut prefab::Budget,
 ) -> Result<(), CommandError> {
     match command {
+        Command::CreatePrefab {
+            scene_id,
+            root_entity_id,
+            prefab_id,
+            name,
+            nodes,
+        } => {
+            prefab::create(
+                project,
+                scene_id,
+                root_entity_id,
+                prefab_id,
+                name,
+                nodes,
+                provenance,
+                prefab_budget,
+            )?;
+        }
+        Command::InstantiatePrefab {
+            source,
+            scene_id,
+            parent,
+            entities,
+        } => {
+            prefab::instantiate(
+                project,
+                source,
+                scene_id,
+                entities,
+                parent,
+                provenance,
+                prefab_budget,
+            )?;
+        }
+        Command::UpdatePrefab { prefab } => {
+            prefab::update(project, prefab, provenance, prefab_budget)?
+        }
+        Command::RevertPrefabComponent {
+            scene_id,
+            entity_id,
+            component,
+        } => {
+            prefab::revert(
+                project,
+                scene_id,
+                entity_id,
+                component,
+                provenance,
+                prefab_budget,
+            )?;
+        }
+        Command::DetachPrefab {
+            scene_id,
+            root_entity_id,
+        } => {
+            prefab::detach_or_delete(
+                project,
+                scene_id,
+                root_entity_id,
+                false,
+                provenance,
+                prefab_budget,
+            )?;
+        }
+        Command::DeletePrefabInstance {
+            scene_id,
+            root_entity_id,
+        } => {
+            prefab::detach_or_delete(
+                project,
+                scene_id,
+                root_entity_id,
+                true,
+                provenance,
+                prefab_budget,
+            )?;
+        }
+        Command::DeletePrefab { prefab_id } => prefab::delete(project, prefab_id, prefab_budget)?,
         Command::UpsertAsset { asset } => {
             project.assets.insert(asset.id.clone(), asset.clone());
         }
@@ -503,6 +622,11 @@ fn apply(
             if project.scenes.contains_key(&scene.id) {
                 return Err(CommandError::Invalid("scene already exists".into()));
             }
+            if scene.entities.values().any(|e| e.prefab.is_some()) {
+                return Err(CommandError::Invalid(
+                    "create linked entities with InstantiatePrefab".into(),
+                ));
+            }
             let mut scene = scene.clone();
             for entity in scene.entities.values_mut() {
                 entity.provenance = Some(provenance.clone());
@@ -513,6 +637,7 @@ fn apply(
             scene_mut(project, scene_id)?.program = program.clone();
         }
         Command::DeleteScene { scene_id } => {
+            prefab_budget.remove_scene(scene_mut(project, scene_id)?)?;
             if project.scenes.remove(scene_id).is_none() {
                 return Err(CommandError::Invalid("scene does not exist".into()));
             }
@@ -521,6 +646,11 @@ fn apply(
             let scene = scene_mut(project, scene_id)?;
             if scene.entities.contains_key(&entity.id) {
                 return Err(CommandError::Invalid("entity already exists".into()));
+            }
+            if entity.prefab.is_some() {
+                return Err(CommandError::Invalid(
+                    "create linked entities with InstantiatePrefab".into(),
+                ));
             }
             let mut entity = entity.clone();
             entity.provenance = Some(provenance.clone());
@@ -540,6 +670,15 @@ fn apply(
                     "reparent or delete children before deleting their parent".into(),
                 ));
             }
+            if scene
+                .entities
+                .get(entity_id)
+                .is_some_and(|e| e.prefab.is_some())
+            {
+                return Err(CommandError::Invalid(
+                    "detach or delete the complete prefab instance".into(),
+                ));
+            }
             if scene.entities.remove(entity_id).is_none() {
                 return Err(CommandError::Invalid("entity does not exist".into()));
             }
@@ -550,6 +689,11 @@ fn apply(
             name,
         } => {
             let entity = entity_mut(project, scene_id, entity_id)?;
+            if entity.prefab.is_some() {
+                return Err(CommandError::Invalid(
+                    "detach before renaming a linked entity".into(),
+                ));
+            }
             entity.name = name.clone();
             entity.provenance = Some(provenance.clone());
         }
@@ -559,6 +703,12 @@ fn apply(
             parent,
         } => {
             let entity = entity_mut(project, scene_id, entity_id)?;
+            if entity.prefab.as_ref().is_some_and(|l| l.root != entity.id) {
+                return Err(CommandError::Invalid(
+                    "detach before reparenting a linked child".into(),
+                ));
+            }
+            prefab_budget.edit(entity)?;
             entity.parent = parent.clone();
             entity.provenance = Some(provenance.clone());
         }
@@ -569,6 +719,10 @@ fn apply(
             value,
         } => {
             let entity = entity_mut(project, scene_id, entity_id)?;
+            prefab_budget.override_value(entity, component, Some(value))?;
+            if let Some(link) = &mut entity.prefab {
+                link.overrides.insert(component.clone());
+            }
             entity.components.insert(component.clone(), value.clone());
             entity.provenance = Some(provenance.clone());
         }
@@ -578,6 +732,10 @@ fn apply(
             component,
         } => {
             let entity = entity_mut(project, scene_id, entity_id)?;
+            prefab_budget.override_value(entity, component, None)?;
+            if let Some(link) = &mut entity.prefab {
+                link.overrides.insert(component.clone());
+            }
             if entity.components.remove(component).is_none() {
                 return Err(CommandError::Invalid("component does not exist".into()));
             }

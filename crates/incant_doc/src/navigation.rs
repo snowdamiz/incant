@@ -49,10 +49,15 @@ pub(crate) fn validate(value: &serde_json::Value) -> Result<(), String> {
     Ok(())
 }
 pub(crate) fn validate_graph(project: &Project) -> Result<(), String> {
+    validate_scenes(project.scenes.values())
+}
+pub(crate) fn validate_scenes<'a>(
+    scenes: impl Iterator<Item = &'a crate::Scene>,
+) -> Result<(), String> {
     let mut count = 0;
     let mut grids = 0;
     let mut grid_cells = 0;
-    for scene in project.scenes.values() {
+    for scene in scenes {
         for entity in scene.entities.values() {
             if let Some(value) = entity.components.get("NavigationGrid") {
                 let grid: incant_nav::NavigationGrid =

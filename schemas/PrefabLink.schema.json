@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "node": {
+      "type": "string"
+    },
+    "overrides": {
+      "description": "Whole-component overrides. A listed but absent component is removed.",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 64,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "root": {
+      "type": "string"
+    },
+    "source": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "source",
+    "root",
+    "node"
+  ],
+  "title": "PrefabLink",
+  "type": "object"
+}

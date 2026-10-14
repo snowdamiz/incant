@@ -66,3 +66,27 @@ A passing invocation is one diagnostic observation, not a release substitute or
 proof that the historical timeout is fixed. Windows execution remains pending.
 Checkpoint32 stays frozen until its original workflows finish; release remains
 unchanged and all 23 required checks still require actual SUCCESS for promotion.
+
+
+## Actual Windows observation on main270
+
+The single authorized workflow run [38516305407](https://github.com/snowdamiz/incant/actions/runs/38516305407)
+completed successfully on exact merge `ed3999b02d2a747dee93d278a2c1c50d43f275b7`.
+The selected test passed once with zero failures/ignored cases. The successful
+Node cook's parent observation was 2.442570 seconds; its eight fixed child phases
+ended at 1.982913 seconds in the child's separate epoch. Compiler-ready was
+1.035031 seconds and typecheck-done 1.941074 seconds. The test's expected
+deleted-source refusal also executed (0.783991 parent seconds, three phases).
+Do not subtract the different parent/child epochs as a startup measurement.
+
+The workflow built in 19m13s and the job ran 05:22:47–05:43:40 UTC on 2026-10-14.
+These are this diagnostic's durations, not a performance comparison. The first
+dispatch API request rejected a raw commit SHA as an unsupported ref before any
+run existed; the corrected branch addressing created exactly one run and its
+actual source was checked. There was no test or workflow retry.
+
+[Portable raw API, job log, artifact and verifier](evidence/typescript-cook-windows/manifest.json)
+retain the observation. Replay with `python3 docs/spikes/evidence/typescript-cook-windows/verify.py`
+(and optionally `--originals`). Checkpoint32's original eight-second timeout remains
+failed and unexplained. This passing observation is neither a timeout repair nor
+a replacement for any of the 23 release requirements.

@@ -10,6 +10,8 @@ mod lights;
 mod navigation;
 mod physics;
 mod physics_2d;
+pub mod prefab;
+pub use prefab::{Prefab, PrefabLink, PrefabNode};
 mod ui;
 pub use agent_budget::{AgentBudgetSettings, DEFAULT_AGENT_TOKEN_CAP, MAX_AGENT_TOKEN_CAP};
 #[cfg(feature = "crdt")]
@@ -55,6 +57,9 @@ pub struct Project {
     pub string_tables: BTreeMap<Id, StringTable>,
     pub settings: ProjectSettings,
     pub memory: BTreeMap<String, String>,
+    #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
+    #[schemars(length(max = 256))]
+    pub prefabs: BTreeMap<Id, Prefab>,
 }
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(deny_unknown_fields)]
@@ -95,6 +100,8 @@ pub struct Entity {
     pub parent: Option<Id>,
     pub components: BTreeMap<String, Value>,
     pub provenance: Option<Provenance>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub prefab: Option<PrefabLink>,
 }
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(deny_unknown_fields)]
@@ -190,6 +197,7 @@ impl Project {
                 agent_budget: AgentBudgetSettings::default(),
             },
             memory: BTreeMap::new(),
+            prefabs: BTreeMap::new(),
         }
     }
     pub fn from_text(text: &str) -> Result<Self, DocumentError> {
@@ -226,6 +234,12 @@ impl Project {
         }
     }
     pub fn diagnostics(&self) -> Vec<Diagnostic> {
+        if let Err(error) = prefab::check_budget(self) {
+            return vec![Diagnostic {
+                path: "/prefabs".into(),
+                message: error.to_string(),
+            }];
+        }
         let mut errors = vec![];
         let mut ids = BTreeSet::new();
         let mut issue = |path: String, message: &str| {
@@ -257,6 +271,12 @@ impl Project {
         }
         for id in self.string_tables.keys() {
             check_id(id, format!("/string_tables/{id}/id"));
+        }
+        for (id, prefab) in &self.prefabs {
+            check_id(id, format!("/prefabs/{id}/id"));
+            for node in prefab.nodes.keys() {
+                check_id(node, format!("/prefabs/{id}/nodes/{node}"));
+            }
         }
         if self.schema_version != SCHEMA_VERSION {
             issue("/schema_version".into(), "unsupported schema version");
@@ -331,173 +351,7 @@ impl Project {
             }
         }
         for (sid, scene) in &self.scenes {
-            let path = format!("/scenes/{sid}");
-            if sid != &scene.id {
-                issue(format!("{path}/id"), "map key and ID differ");
-            }
-            if scene.name.trim().is_empty() {
-                issue(format!("{path}/name"), "name cannot be empty");
-            }
-            if let Some(SceneProgram::Wasm { module }) = &scene.program {
-                if self
-                    .assets
-                    .get(module)
-                    .is_none_or(|asset| asset.kind != "wasm")
-                {
-                    issue(
-                        format!("{path}/program/module"),
-                        "scene program requires an existing wasm asset",
-                    );
-                }
-                if scene
-                    .entities
-                    .values()
-                    .any(|entity| entity.components.contains_key("Script"))
-                {
-                    issue(
-                        format!("{path}/program"),
-                        "Wasm scene programs cannot mix with per-entity TypeScript scripts",
-                    );
-                }
-            }
-            if let Err(message) = ui::validate_scene(scene) {
-                issue(format!("{path}/entities"), &message);
-            }
-            for (eid, entity) in &scene.entities {
-                let path = format!("{path}/entities/{eid}");
-                if eid != &entity.id {
-                    issue(format!("{path}/id"), "map key and ID differ");
-                }
-                if entity.name.trim().is_empty() {
-                    issue(format!("{path}/name"), "name cannot be empty");
-                }
-                let mut seen = BTreeSet::from([eid.as_str()]);
-                let mut parent = entity.parent.as_deref();
-                while let Some(id) = parent {
-                    if !seen.insert(id) {
-                        issue(format!("{path}/parent"), "hierarchy cycle");
-                        break;
-                    }
-                    let Some(p) = scene.entities.get(id) else {
-                        issue(format!("{path}/parent"), "parent is not in this scene");
-                        break;
-                    };
-                    parent = p.parent.as_deref();
-                }
-                if let Some(prov) = &entity.provenance {
-                    if ulid::Ulid::from_string(&prov.transaction).is_err() {
-                        issue(
-                            format!("{path}/provenance/transaction"),
-                            "invalid transaction ULID",
-                        );
-                    }
-                    if prov.actor.trim().is_empty() {
-                        issue(format!("{path}/provenance/actor"), "actor cannot be empty");
-                    }
-                    if prov.origin == Origin::Agent
-                        && (prov.model.as_ref().is_none_or(|s| s.is_empty())
-                            || prov.conversation_id.as_ref().is_none_or(|s| s.is_empty()))
-                    {
-                        issue(
-                            format!("{path}/provenance"),
-                            "agent requires model and conversation ID",
-                        );
-                    }
-                }
-                if let Err(message) = animation_graph::validate(entity) {
-                    issue(format!("{path}/components/AnimationGraph"), &message);
-                }
-                if let Err(message) = animation_root_motion::validate(entity, self) {
-                    issue(format!("{path}/components/AnimationRootMotion"), &message);
-                }
-                if entity.components.contains_key("AnimationIk")
-                    && !entity.components.contains_key("Animation")
-                {
-                    issue(
-                        format!("{path}/components/AnimationIk"),
-                        "AnimationIk requires Animation and MeshRenderer",
-                    );
-                }
-                if entity.components.contains_key("Animation")
-                    && (!entity.components.contains_key("MeshRenderer")
-                        || entity.components.contains_key("SpriteRenderer")
-                        || entity.components.contains_key("Tilemap"))
-                {
-                    issue(
-                        format!("{path}/components/Animation"),
-                        "Animation requires MeshRenderer without SpriteRenderer or Tilemap",
-                    );
-                }
-                if let Some(flipbook) = entity.components.get("SpriteFlipbook") {
-                    let checked = (|| -> Result<(), String> {
-                        let flipbook: SpriteFlipbook =
-                            serde_json::from_value(flipbook.clone()).map_err(|e| e.to_string())?;
-                        let sprite = entity
-                            .components
-                            .get("SpriteRenderer")
-                            .ok_or("SpriteFlipbook requires SpriteRenderer")?;
-                        let sprite: SpriteRenderer =
-                            serde_json::from_value(sprite.clone()).map_err(|e| e.to_string())?;
-                        flipbook.validate(&sprite).map_err(|e| e.to_string())
-                    })();
-                    if let Err(message) = checked {
-                        issue(format!("{path}/components/SpriteFlipbook"), &message);
-                    }
-                }
-                if entity.components.contains_key("SpriteRenderer") {
-                    if !entity.components.contains_key("Transform") {
-                        issue(
-                            format!("{path}/components"),
-                            "a sprite requires a Transform",
-                        );
-                    }
-                    if entity.components.contains_key("MeshRenderer") {
-                        issue(
-                            format!("{path}/components"),
-                            "sprite and mesh rendering require separate entities",
-                        );
-                    }
-                }
-                if entity.components.contains_key("Tilemap") {
-                    if !entity.components.contains_key("Transform") {
-                        issue(
-                            format!("{path}/components"),
-                            "a tilemap requires a Transform",
-                        );
-                    }
-                    if entity.components.contains_key("MeshRenderer")
-                        || entity.components.contains_key("SpriteRenderer")
-                    {
-                        issue(
-                            format!("{path}/components"),
-                            "tilemap, sprite and mesh rendering require separate entities",
-                        );
-                    }
-                }
-                if let Err(message) = physics_2d::validate_entity(entity) {
-                    issue(format!("{path}/components"), &message);
-                }
-                if let Err(message) = physics::validate_entity(entity) {
-                    issue(format!("{path}/components"), &message);
-                }
-                for (kind, value) in &entity.components {
-                    let path = format!("{path}/components/{kind}");
-                    if let Err(message) = validate_component(kind, value, self) {
-                        issue(path, &message);
-                    }
-                }
-                if ["DirectionalLight", "PointLight", "SpotLight"]
-                    .iter()
-                    .filter(|kind| entity.components.contains_key(**kind))
-                    .count()
-                    > 1
-                {
-                    issue(
-                        format!("{path}/components"),
-                        "an entity can contain only one punctual light",
-                    );
-                }
-            }
+            self.scene_diagnostics(sid, scene, &format!("/scenes/{sid}"), &mut issue);
         }
         if self
             .scenes
@@ -518,7 +372,184 @@ impl Project {
         if let Err(message) = audio::validate_graph(self) {
             issue("/scenes".into(), &message);
         }
+        if let Err(message) = prefab::validate(self) {
+            issue("/prefabs".into(), &message.to_string());
+        }
         errors
+    }
+    pub(crate) fn scene_diagnostics(
+        &self,
+        sid: &str,
+        scene: &Scene,
+        path: &str,
+        issue: &mut impl FnMut(String, &str),
+    ) {
+        if sid != scene.id {
+            issue(format!("{path}/id"), "map key and ID differ");
+        }
+        if scene.name.trim().is_empty() {
+            issue(format!("{path}/name"), "name cannot be empty");
+        }
+        if let Some(SceneProgram::Wasm { module }) = &scene.program {
+            if self
+                .assets
+                .get(module)
+                .is_none_or(|asset| asset.kind != "wasm")
+            {
+                issue(
+                    format!("{path}/program/module"),
+                    "scene program requires an existing wasm asset",
+                );
+            }
+            if scene
+                .entities
+                .values()
+                .any(|entity| entity.components.contains_key("Script"))
+            {
+                issue(
+                    format!("{path}/program"),
+                    "Wasm scene programs cannot mix with per-entity TypeScript scripts",
+                );
+            }
+        }
+        if let Err(message) = ui::validate_scene(scene) {
+            issue(format!("{path}/entities"), &message);
+        }
+        for (eid, entity) in &scene.entities {
+            let path = format!("{path}/entities/{eid}");
+            if eid != &entity.id {
+                issue(format!("{path}/id"), "map key and ID differ");
+            }
+            if entity.name.trim().is_empty() {
+                issue(format!("{path}/name"), "name cannot be empty");
+            }
+            let mut seen = BTreeSet::from([eid.as_str()]);
+            let mut parent = entity.parent.as_deref();
+            while let Some(id) = parent {
+                if !seen.insert(id) {
+                    issue(format!("{path}/parent"), "hierarchy cycle");
+                    break;
+                }
+                let Some(p) = scene.entities.get(id) else {
+                    issue(format!("{path}/parent"), "parent is not in this scene");
+                    break;
+                };
+                parent = p.parent.as_deref();
+            }
+            if let Some(prov) = &entity.provenance {
+                if ulid::Ulid::from_string(&prov.transaction).is_err() {
+                    issue(
+                        format!("{path}/provenance/transaction"),
+                        "invalid transaction ULID",
+                    );
+                }
+                if prov.actor.trim().is_empty() {
+                    issue(format!("{path}/provenance/actor"), "actor cannot be empty");
+                }
+                if prov.origin == Origin::Agent
+                    && (prov.model.as_ref().is_none_or(|s| s.is_empty())
+                        || prov.conversation_id.as_ref().is_none_or(|s| s.is_empty()))
+                {
+                    issue(
+                        format!("{path}/provenance"),
+                        "agent requires model and conversation ID",
+                    );
+                }
+            }
+            if let Err(message) = animation_graph::validate(entity) {
+                issue(format!("{path}/components/AnimationGraph"), &message);
+            }
+            if let Err(message) = animation_root_motion::validate(entity, self) {
+                issue(format!("{path}/components/AnimationRootMotion"), &message);
+            }
+            if entity.components.contains_key("AnimationIk")
+                && !entity.components.contains_key("Animation")
+            {
+                issue(
+                    format!("{path}/components/AnimationIk"),
+                    "AnimationIk requires Animation and MeshRenderer",
+                );
+            }
+            if entity.components.contains_key("Animation")
+                && (!entity.components.contains_key("MeshRenderer")
+                    || entity.components.contains_key("SpriteRenderer")
+                    || entity.components.contains_key("Tilemap"))
+            {
+                issue(
+                    format!("{path}/components/Animation"),
+                    "Animation requires MeshRenderer without SpriteRenderer or Tilemap",
+                );
+            }
+            if let Some(flipbook) = entity.components.get("SpriteFlipbook") {
+                let checked = (|| -> Result<(), String> {
+                    let flipbook: SpriteFlipbook =
+                        serde_json::from_value(flipbook.clone()).map_err(|e| e.to_string())?;
+                    let sprite = entity
+                        .components
+                        .get("SpriteRenderer")
+                        .ok_or("SpriteFlipbook requires SpriteRenderer")?;
+                    let sprite: SpriteRenderer =
+                        serde_json::from_value(sprite.clone()).map_err(|e| e.to_string())?;
+                    flipbook.validate(&sprite).map_err(|e| e.to_string())
+                })();
+                if let Err(message) = checked {
+                    issue(format!("{path}/components/SpriteFlipbook"), &message);
+                }
+            }
+            if entity.components.contains_key("SpriteRenderer") {
+                if !entity.components.contains_key("Transform") {
+                    issue(
+                        format!("{path}/components"),
+                        "a sprite requires a Transform",
+                    );
+                }
+                if entity.components.contains_key("MeshRenderer") {
+                    issue(
+                        format!("{path}/components"),
+                        "sprite and mesh rendering require separate entities",
+                    );
+                }
+            }
+            if entity.components.contains_key("Tilemap") {
+                if !entity.components.contains_key("Transform") {
+                    issue(
+                        format!("{path}/components"),
+                        "a tilemap requires a Transform",
+                    );
+                }
+                if entity.components.contains_key("MeshRenderer")
+                    || entity.components.contains_key("SpriteRenderer")
+                {
+                    issue(
+                        format!("{path}/components"),
+                        "tilemap, sprite and mesh rendering require separate entities",
+                    );
+                }
+            }
+            if let Err(message) = physics_2d::validate_entity(entity) {
+                issue(format!("{path}/components"), &message);
+            }
+            if let Err(message) = physics::validate_entity(entity) {
+                issue(format!("{path}/components"), &message);
+            }
+            for (kind, value) in &entity.components {
+                let path = format!("{path}/components/{kind}");
+                if let Err(message) = validate_component(kind, value, self) {
+                    issue(path, &message);
+                }
+            }
+            if ["DirectionalLight", "PointLight", "SpotLight"]
+                .iter()
+                .filter(|kind| entity.components.contains_key(**kind))
+                .count()
+                > 1
+            {
+                issue(
+                    format!("{path}/components"),
+                    "an entity can contain only one punctual light",
+                );
+            }
+        }
     }
 }
 
@@ -529,6 +560,40 @@ pub fn safe_relative_path(path: &str) -> bool {
         && path
             .split('/')
             .all(|s| !s.is_empty() && s != ".." && s != ".")
+}
+pub(crate) fn is_component_kind(kind: &str) -> bool {
+    matches!(
+        kind,
+        "NavigationMesh"
+            | "NavigationGrid"
+            | "AudioBus"
+            | "AudioSource"
+            | "AudioListener"
+            | "RigidBody"
+            | "Collider"
+            | "AngularVelocity"
+            | "RigidBody2D"
+            | "Collider2D"
+            | "AngularVelocity2D"
+            | "DirectionalLight"
+            | "PointLight"
+            | "SpotLight"
+            | "Transform"
+            | "Velocity"
+            | "Script"
+            | "Tilemap"
+            | "UiNode"
+            | "Text"
+            | "AnimationIk"
+            | "AnimationGraph"
+            | "Animation"
+            | "AnimationRootMotion"
+            | "SpriteFlipbook"
+            | "SpriteRenderer"
+            | "MeshRenderer"
+            | "EnvironmentLight"
+            | "Camera"
+    )
 }
 fn validate_component(kind: &str, value: &Value, project: &Project) -> Result<(), String> {
     fn decode<T: serde::de::DeserializeOwned>(v: &Value) -> Result<T, String> {
@@ -708,6 +773,11 @@ fn validate_component(kind: &str, value: &Value, project: &Project) -> Result<()
 pub fn schema_registry() -> BTreeMap<String, Value> {
     let mut registry = BTreeMap::from([
         ("Project".into(), json!(schemars::schema_for!(Project))),
+        ("Prefab".into(), json!(schemars::schema_for!(Prefab))),
+        (
+            "PrefabLink".into(),
+            json!(schemars::schema_for!(PrefabLink)),
+        ),
         (
             "SpriteAtlas".into(),
             json!(schemars::schema_for!(SpriteAtlas)),
@@ -846,6 +916,7 @@ impl Entity {
             parent: None,
             components: BTreeMap::new(),
             provenance: None,
+            prefab: None,
         }
     }
 }

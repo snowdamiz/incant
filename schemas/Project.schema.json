@@ -102,6 +102,16 @@
             "null"
           ]
         },
+        "prefab": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PrefabLink"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
         "provenance": {
           "anyOf": [
             {
@@ -586,6 +596,95 @@
       ],
       "type": "string"
     },
+    "Prefab": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "nodes": {
+          "additionalProperties": {
+            "$ref": "#/$defs/PrefabNode"
+          },
+          "type": "object"
+        },
+        "provenance": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Provenance"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "root": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "root",
+        "nodes"
+      ],
+      "type": "object"
+    },
+    "PrefabLink": {
+      "additionalProperties": false,
+      "properties": {
+        "node": {
+          "type": "string"
+        },
+        "overrides": {
+          "description": "Whole-component overrides. A listed but absent component is removed.",
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 64,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "root": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "source",
+        "root",
+        "node"
+      ],
+      "type": "object"
+    },
+    "PrefabNode": {
+      "additionalProperties": false,
+      "properties": {
+        "components": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "name": {
+          "type": "string"
+        },
+        "parent": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "components"
+      ],
+      "type": "object"
+    },
     "ProjectSettings": {
       "additionalProperties": false,
       "properties": {
@@ -794,6 +893,12 @@
     },
     "name": {
       "type": "string"
+    },
+    "prefabs": {
+      "additionalProperties": {
+        "$ref": "#/$defs/Prefab"
+      },
+      "type": "object"
     },
     "scenes": {
       "additionalProperties": {

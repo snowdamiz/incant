@@ -60,10 +60,15 @@ fn valid_gain(gain: f32) -> bool {
     (-80. ..=24.).contains(&gain)
 }
 pub(crate) fn validate_graph(project: &Project) -> Result<(), String> {
+    validate_entities(project.scenes.values().flat_map(|s| s.entities.values()))
+}
+pub(crate) fn validate_entities<'a>(
+    entities: impl Iterator<Item = &'a crate::Entity>,
+) -> Result<(), String> {
     let mut buses = BTreeMap::new();
     let mut sources = Vec::new();
     let mut listeners = 0;
-    for entity in project.scenes.values().flat_map(|s| s.entities.values()) {
+    for entity in entities {
         if let Some(value) = entity.components.get("AudioBus") {
             if entity.components.contains_key("AudioSource")
                 || entity.components.contains_key("AudioListener")

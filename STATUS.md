@@ -1,16 +1,32 @@
 # Implementation status
 
-## Windows TypeScript deadline — bounded observation, no timeout fix claim
+## Linked prefab authoring — qualified main270 composition
 
-Main269 includes the source-scoped script phase diagnostic. Checkpoint32's frozen
+The fixed-topology backend materializes ordinary entities through atomic
+`incant_cmd` transactions, with explicit identity maps, whole-component overrides,
+revert, prototype value updates, detach and deletion. The accepted producer is
+preserved byte-exact on main270. Current qualification passes 87 document/command
+cases, one live RPC save/reopen/undo/redo case and one cooked NativeWorld case
+with 60 steps, plus strict four-package lint and SDK/fmt/conventions checks.
+All nine commands and final independent source/evidence review passed.
+Publication awaits its required hosted fast check; nested/topology edits and editor UI remain open.
+[Composition and evidence](docs/spikes/prefab-main270.md).
+
+## Windows TypeScript deadline — one actual observation passed; timeout retained
+
+Main270 includes the source-scoped script phase diagnostic and bounded cook observer. Checkpoint32's frozen
 Windows desktop job failed the unchanged authored fallback test at its existing
 eight-second compiler deadline; the original failed job and prior passing Windows
 log remain retained. A reviewed eight-phase observer now preserves sanitized
 bounded evidence after child cleanup, including no first phase. Ten current local
 checks pass (23 Node controls and six Rust cases, strict lint and policy checks).
-The exact Windows diagnostic is authorized once after this scoped PR's fast check
-and merge; it has no retry or deadline override. A successful diagnostic will not
-promote the failed candidate or establish a timeout repair. [Scope and evidence](docs/spikes/typescript-cook-phases.md).
+PR270 merged after its exact-head fast SUCCESS. Its one Windows diagnostic
+passed the exact selected test on main270: the successful cook took 2.442570 s
+and the expected deleted-source refusal took 0.783991 s. All eight successful
+phases and both raw observations are retained, with no retry or deadline
+override. The original timeout is still unexplained; this observation neither
+clears the failed context nor establishes a repair.
+[Actual Windows receipt](docs/spikes/evidence/typescript-cook-windows/manifest.json). [Scope and evidence](docs/spikes/typescript-cook-phases.md).
 
 ## Native script phase diagnostic — one bounded CPU test
 
@@ -54,7 +70,8 @@ merged after its exact-head fast SUCCESS. Checkpoint31 finished with 22 required
 SUCCESS and one FAILURE; every original job is retained. The same PR263 now
 freezes checkpoint32 candidate `e4faac52`, exact main268 tree `17054960`. All
 23 contexts and eight comprehensive workflows remain required. Its Windows
-desktop deadline failure is retained while the remaining original jobs finish.
+desktop deadline failure is retained. Every original workflow is now terminal:
+22 required contexts succeeded and the Windows context failed.
 Release30 is unchanged; no successor success or promotion is claimed. [Repair evidence](docs/spikes/physics-sync-result.md).
 
 ## Director routing clarification — editor UI only
@@ -534,9 +551,10 @@ unification also affects other cc build consumers in the selected host graph.
 Windows candidate execution and timing remain pending; no Windows speedup or
 performance gate is claimed. [Scope and evidence](docs/spikes/wasm-c-parallel.md).
 
-## Development and release overview — 2026-10-13
+## Development and release overview — 2026-10-14
 
-The reviewed main258 baseline includes profiler distributions, the Mac runner, Apple/Android host bindings, desktop
+The reviewed main270 baseline includes the measured numeric-loan optimization,
+Core sample/diagnostic tooling, profiler distributions, the Mac runner, Apple/Android host bindings, desktop
 haptics, the retained mobile Rust host, supported
 persisted native game checkpoints, and the opt-in cooked renderer families and
 Vulkan cache lifecycle, dynamic resolution, numerical retained motion, CPU/GPU
@@ -563,7 +581,11 @@ conformance hit its configured deadline. Main243 contains the reviewed macOS
 timeout repair. Checkpoint28 then froze main246 (`42e13e75`) at `be3422f8` on
 PR232 and finished with 13 required successes, nine failures and one skipped
 comparison. The reviewed isolated-lock and ordinary-owner Default repairs are
-merged in PR248. Checkpoint29 finished unpromoted with 22 required successes and the original Linux source-store lock failure. Checkpoint30 promoted exact reviewed main252 (`c1988638`, tree `393eb78c`) through PR232 after all 23 exact-head required contexts and eight workflows succeeded. Release is `71bdd2e7`; its parents, trailer and exact tested tree are verified. Later main253–257 work is outside that release, and no checkpoint is currently active.
+merged in PR248. Checkpoint29 finished unpromoted with 22 required successes and the original Linux source-store lock failure. Checkpoint30 promoted exact reviewed main252 (`c1988638`, tree `393eb78c`) through PR232 after all 23 exact-head required contexts and eight workflows succeeded. Release is `71bdd2e7`; its parents, trailer and exact tested tree are verified. Later main253–270 work is outside that release. Checkpoint31 and checkpoint32
+are terminal and unpromoted, each with 22 required successes and one retained
+failure. Checkpoint32 candidate `e4faac52` remains frozen while the one-shot
+main270 Windows compiler-phase diagnostic has passed once; its result cannot
+substitute for the failed required context.
 PR242 merged the private primitive-world composition; PR244/245 added native
 capture and outer in-memory checkpoints, PR246 added opaque ECS/world ownership,
 and PR247 added headless native session checkpoints. PR249 adds opt-in in-memory
@@ -578,8 +600,8 @@ macOS command journal assertion failed. The hosted error was not printed, so the
 inherited-lock cause remains inferred from a controlled local reproduction.
 PR225's test-only isolation preserves production locking and authorization.
 Earlier checkpoint21/22 portability and optional-query failures remain retained.
-Main227 onward stays outside the currently promoted release; no device, performance or phase gate follows
-from promotion. [Previous checkpoint20](docs/spikes/release-checkpoint-20.md) remains
+At checkpoint24, main227 onward remained outside that release; Release30 now
+selects main252. Neither promotion establishes a performance or phase gate. [Previous checkpoint20](docs/spikes/release-checkpoint-20.md) remains
 historical evidence for selected main205.
 
 Failed checkpoints15–19 remain historical and unpromoted. In particular, checkpoint17
@@ -2416,7 +2438,7 @@ desktop input routing and inspector presentation remain Claude handoff 0044 work
 not a completed Play UI, pixel review, phone/performance or phase gate.
 [Evidence](docs/spikes/native-editor-play.md).
 
-## Current integration and parallel work
+## Historical main89 integration and parallel work
 
 The closed retained-state / native SDK / shared Play-startup union passes 837
 ordinary and 75 serialized GPU tests, full Clippy, 536 UI tests and the fresh

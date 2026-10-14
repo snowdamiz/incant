@@ -1,0 +1,105 @@
+{
+  "$defs": {
+    "Origin": {
+      "enum": [
+        "user",
+        "agent",
+        "script",
+        "import"
+      ],
+      "type": "string"
+    },
+    "PrefabNode": {
+      "additionalProperties": false,
+      "properties": {
+        "components": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "name": {
+          "type": "string"
+        },
+        "parent": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "components"
+      ],
+      "type": "object"
+    },
+    "Provenance": {
+      "additionalProperties": false,
+      "properties": {
+        "actor": {
+          "type": "string"
+        },
+        "conversation_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "model": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "origin": {
+          "$ref": "#/$defs/Origin"
+        },
+        "transaction": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "origin",
+        "actor",
+        "transaction"
+      ],
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "nodes": {
+      "additionalProperties": {
+        "$ref": "#/$defs/PrefabNode"
+      },
+      "type": "object"
+    },
+    "provenance": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Provenance"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "root": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "root",
+    "nodes"
+  ],
+  "title": "Prefab",
+  "type": "object"
+}
