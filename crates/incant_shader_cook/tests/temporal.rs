@@ -51,7 +51,7 @@ fn fixed_programs_preserve_interfaces_robust_accesses_and_native_binding_maps() 
         Kind::UpscaleOwner,
         Kind::Composite,
     ] {
-        let b = cook(kind, &source(kind)).unwrap();
+        let b = cook(kind, &source(kind)).unwrap_or_else(|error| panic!("{kind:?}: {error:?}"));
         assert_eq!(b.artifacts.len(), 6);
         assert_eq!(b, cook(kind, &source(kind)).unwrap());
         for a in &b.artifacts {
@@ -107,12 +107,18 @@ fn fixed_programs_preserve_interfaces_robust_accesses_and_native_binding_maps() 
                     "register(t0)",
                     "register(t5, space0)",
                 ],
-                (Kind::Depth, Backend::Metal, Stage::Fragment) => {
-                    &["[[buffer(1)]]", "[[texture(0)]]", "[[sampler(0)]]"]
-                }
-                (Kind::Depth, Backend::Dx12, Stage::Fragment) => {
-                    &["register(b1)", "register(t0)", "register(t5, space0)"]
-                }
+                (Kind::Depth, Backend::Metal, Stage::Fragment) => &[
+                    "[[buffer(0)]]",
+                    "[[buffer(1)]]",
+                    "[[texture(0)]]",
+                    "[[sampler(0)]]",
+                ],
+                (Kind::Depth, Backend::Dx12, Stage::Fragment) => &[
+                    "register(b0)",
+                    "register(b1)",
+                    "register(t0)",
+                    "register(t5, space0)",
+                ],
                 (Kind::MetalFxPack, Backend::Metal, Stage::Fragment) => &[
                     "[[color(0)]]",
                     "[[color(1)]]",

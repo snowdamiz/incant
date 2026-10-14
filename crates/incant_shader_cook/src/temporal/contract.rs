@@ -298,7 +298,8 @@ pub(super) fn validate(kind: Kind, m: &naga::Module, info: &naga::valid::ModuleI
         };
         require(outputs == expected, "temporal outputs/MRT")?;
         for (h, g) in m.global_variables.iter() {
-            let expected = (!vertex && !(depth_only && g.binding.is_some_and(|b| b.group == 0)))
+            // MASK samples the frame LOD bias even in the depth-only fragment.
+            let expected = !vertex
                 || (vertex
                     && motion
                     && g.binding
@@ -445,6 +446,28 @@ mod tests {
             "@binding(3)",
             "@binding(4)",
         );
+    }
+    #[test]
+    fn depth_mask_requires_the_fragment_frame_lod_binding() {
+        let source = include_str!("../../../incant_render/src/motion/shader.wgsl");
+        let module = naga::front::wgsl::parse_str(source).unwrap();
+        let info = naga::valid::Validator::new(
+            naga::valid::ValidationFlags::all(),
+            naga::valid::Capabilities::empty(),
+        )
+        .validate(&module)
+        .unwrap();
+        for kind in [Kind::Motion, Kind::Depth] {
+            validate(kind, &module, &info).unwrap();
+            // Constant LOD is valid WGSL but removes the depth-only fragment's
+            // frame read, breaking the exact material/depth sampling contract.
+            refuses_valid_change(
+                kind,
+                source,
+                "textureSampleBias(base_map,base_sampler,in.uv,frame.lod.x)",
+                "textureSampleBias(base_map,base_sampler,in.uv,0.0)",
+            );
+        }
     }
     #[test]
     fn structurally_valid_ir_changes_are_refused_independently_of_source_hash() {
