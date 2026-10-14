@@ -1,5 +1,16 @@
 # Implementation status
 
+## Static script binding emission — CPU qualification, cache union pending
+
+The trusted emitter now generates borrowed constant property tables and one
+bounded startup conversion. The unchanged catalog validator preserves identity
+and finite f64 bits; dependencies and bytecode authority stay unchanged. Source
+review is accepted; 156 current CPU cases, strict lint, native/wasm lean builds
+and a real generated 10,000-row Rust consumer pass. The first standalone
+consumer-driver dependency-path failure is retained. Final packet review and
+current cache composition are pending; no shipping build/runtime speedup is
+claimed. [Evidence](docs/spikes/script-bindings-static.md).
+
 ## Core 10k-script input — native correctness, measurement pending
 
 A public-command extension preserves the original Core controller/assets and adds
@@ -11,7 +22,7 @@ journal-reopen failure. Fresh fast shipping measurements remain pending; no
 GPU/60 fps or appearance gate is claimed. Current main258 qualification passes
 ten Python controls, strict TypeScript and Node bulk/mutation controls against
 the current SDK; the original archive and all external payloads replay unchanged.
-Independent current-main final review is accepted; publication awaits the exact-head fast check. [Producer evidence](docs/spikes/core-script-stress.md) and [composition](docs/spikes/core-stress-main258.md).
+Independent current-main final review is accepted; PR259 merged after its exact-head fast SUCCESS. [Producer evidence](docs/spikes/core-script-stress.md) and [composition](docs/spikes/core-stress-main258.md).
 
 ## Per-frame CPU distributions — scoped Mac controls pass
 
@@ -53,8 +64,8 @@ Sample/10,000-entity measurements and presentation timing remain open.
 Checkpoint30 is promoted through PR232: release `71bdd2e7` has the exact tested
 main252 tree `393eb78c`. All 23 required contexts and all eight push workflows
 succeeded; independent review, merge parents, author trailer and post-merge tree
-are verified. Later main253–258 persisted-session/mobile/haptics/profiler work remains outside
-that tested release. No checkpoint is currently active; main258 is the latest
+are verified. Later main253–259 persisted-session/mobile/haptics/profiler/workload work remains outside
+that tested release. No checkpoint is currently active; main259 is the latest
 integration. This promotion does not approve a phase or distribution gate.
 [Portable evidence](docs/spikes/evidence/release-checkpoint-30/manifest.json).
 

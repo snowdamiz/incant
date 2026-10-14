@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "base": "64d536d5388349da07ce44f78c24b2ef3663e104",
+  "source": "3c81bbe6763f78c10c7d13d08975f2ffeff7caa3",
+  "records": 55,
+  "payloads": 51,
+  "inputs": 3881,
+  "archive": {
+    "path": "docs/spikes/evidence/script-bindings-static/records.json.gz",
+    "bytes": 687078,
+    "sha256": "c4031f0eb6cec9b8d99a7fd389c1de5534662fd0eb64019ff26d8f4b98f98484"
+  },
+  "verifier": {
+    "path": "docs/spikes/evidence/script-bindings-static/verify.py",
+    "bytes": 5826,
+    "sha256": "0efe52f88657d6a6e5d7a14c60f917b0720c40474b0f2bd86816fad4d3ef9429"
+  },
+  "successful_commands": 14,
+  "historical_failed_commands": 1,
+  "distinct_cpu_cases": 156,
+  "copied_binaries": 4,
+  "reviews": [
+    {
+      "path": "docs/spikes/evidence/script-bindings-static/script-bindings-static-source-root-20261014.json",
+      "bytes": 1740,
+      "sha256": "da87ad51651106f88880c9db4964fd502d8aad6913974ed9b34d48f510d6f500"
+    },
+    {
+      "path": "docs/spikes/evidence/script-bindings-static/script-bindings-static-source-independent-20261013.json",
+      "bytes": 21981,
+      "sha256": "11ebe7d1b2bd3ee12f5e4ef2ff6d1a4030d60e3b1413f8485eecfa9ff924af2e"
+    }
+  ]
+}

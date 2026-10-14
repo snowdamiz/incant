@@ -1,0 +1,39 @@
+{
+  "at": "2026-10-14T01:36:55.649269+00:00",
+  "decision": "scoped source accepted; evidence packet and joined validation pending",
+  "source": "3c81bbe6763f78c10c7d13d08975f2ffeff7caa3",
+  "freeze_sha256": "8bdbb4952e33cfeabff38fd783101eb51412aabe1e3a0a4bb90a33b600076d24",
+  "files": [
+    {
+      "path": "crates/incant_script/src/bindings.rs",
+      "sha256": "93c516680411dfd7870602eee6e03bf1cff1852e594c0a79cb5f592e546c5508"
+    },
+    {
+      "path": "crates/incant_script/src/bindings_embed.rs",
+      "sha256": "2cfca679df92a5deb701b36fcca8a53cf07bdef5f003f51e4b94e5553deb8f95"
+    },
+    {
+      "path": "crates/incant_script/src/bindings_embed/tests.rs",
+      "sha256": "542cda713cc70b6ea945b020cc7c63cf69896c131321e019395b2f35c65c88cd"
+    },
+    {
+      "path": "crates/incant_script/src/bindings_static.rs",
+      "sha256": "bb9ddc45906c002ff10c368836cbe5abe15a7edc66a4c053cd44d43fb69c8bff"
+    },
+    {
+      "path": "crates/incant_script/src/lib.rs",
+      "sha256": "bb48e764b6e9057641749d6b119e2a76e7adabc8b49775a6cae717a397421f00"
+    },
+    {
+      "path": "crates/incant_script/tests/bindings_static.rs",
+      "sha256": "8ce34a4f53bf69a736c37487e49d59e5205cca1c558e07d6fc26f44badc0337b"
+    }
+  ],
+  "review": [
+    "Borrowed static slices replace generated per-row runtime constructor code",
+    "Prevalidation charges shared existing node/byte/depth budget and refuses duplicate or unsorted keys before owned allocation",
+    "NumberBits and fingerprint preserve exact finite f64 including signed zero",
+    "Calls unchanged canonical ScriptBindings::new and does not change bytecode authority or runtime dependencies",
+    "Reviewed bounded shape/identity refusals and real-host property behavior controls"
+  ]
+}
