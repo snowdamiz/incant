@@ -294,7 +294,7 @@ impl BoundProject {
             .groups
             .iter()
             .flat_map(|g| g.instances.iter())
-            .filter(|(id, identity, _)| world.entity_identity(*id) == Some(*identity))
+            .filter(|(id, identity, _)| world.matches_entity_identity(*id, *identity))
             .map(|v| v.0)
             .collect();
         ids.sort_unstable();
@@ -313,7 +313,7 @@ impl BoundGroup {
         // even between script ticks, cannot reconnect it to a new ECS lifetime.
         let previous_len = self.instances.len();
         self.instances.retain(|(id, identity, _)| {
-            let live = world.entity_identity(*id) == Some(*identity);
+            let live = world.matches_entity_identity(*id, *identity);
             if !live {
                 retired.push(crate::persistence::Key {
                     scope: crate::schedule::Scope::Source(self.source),

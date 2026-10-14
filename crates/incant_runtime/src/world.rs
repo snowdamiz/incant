@@ -311,6 +311,18 @@ impl NativeWorld {
         })
     }
 
+    /// Check an already captured entity lifetime without searching the stable-ID
+    /// index. Both the ECS world and entity generation must still match, and the
+    /// live component must carry the requested ID. Reparenting or moving between
+    /// archetypes preserves the token; despawn/reuse and restore invalidate it.
+    pub fn matches_entity_identity(&self, id: StableId, token: crate::EntityIdentity) -> bool {
+        token.world == self.world.id()
+            && self
+                .world
+                .get::<Identity>(token.entity)
+                .is_some_and(|identity| identity.0 == id)
+    }
+
     pub(crate) fn install_spatial(&mut self, id: StableId, node: Option<crate::CookedSpatial>) {
         if self.world.get::<crate::CookedSpatial>(self.entities[&id]) == node.as_ref() {
             return;
