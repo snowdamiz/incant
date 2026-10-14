@@ -133,7 +133,8 @@ def build(project, staging, storage, scene, camera, mode, wabt=None, profiling=N
     features = ','.join(physics_export.cargo_features(physics_mode,
                        ['project', 'native-window' if mode == 'window' else 'render-input'] + profile_features))
     from native_wasm import capture
-    module = capture(project, scene, storage, cargo, env, execute, wabt)
+    module = capture(project, scene, storage, cargo, env, execute, wabt,
+                     audit_translation=True)
     if module is not None:
         features += ',static-module'
     selected_graph = execute([cargo, 'tree', '--locked', '--no-default-features', '-p', NAME,
