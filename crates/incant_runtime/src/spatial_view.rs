@@ -74,6 +74,20 @@ impl<'a> SpatialView<'a> {
     pub fn assets(&self) -> &'a [VisualAssetRef] {
         &self.world.visual_assets
     }
+    /// Cold host admission only: these model recipes supplied baked simulation
+    /// navigation geometry and cannot be replaced by a visual-only refresh.
+    /// This walks committed declarations without rebuilding a navigation cache.
+    pub fn navigation_model_assets(&self) -> impl Iterator<Item = StableId> + 'a {
+        self.world.navigation.nodes.iter().flat_map(|node| {
+            node.mesh
+                .iter()
+                .flat_map(|mesh| mesh.sources.iter())
+                .filter_map(|source| match &source.geometry {
+                    crate::NativeNavigationGeometry::Mesh { asset, .. } => Some(asset.id),
+                    crate::NativeNavigationGeometry::Collider => None,
+                })
+        })
+    }
     pub fn nodes(&self) -> impl ExactSizeIterator<Item = SpatialNode<'a>> + 'a {
         let world = &self.world.world;
         world.resource::<Hierarchy>().nodes.iter().enumerate().map(

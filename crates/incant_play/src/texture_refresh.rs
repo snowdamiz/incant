@@ -12,9 +12,13 @@ pub struct TextureRefreshBasis {
 fn normalized(project: &incant_doc::Project) -> Result<String, StartupError> {
     project.validate().map_err(native)?;
     let mut project = project.clone();
-    // All other project data, paths, names, settings and texture interpretation
+    // All other project data, paths, names, settings and asset interpretation
     // remain exact. Revisions/history live on the command bus, not in this basis.
-    for asset in project.assets.values_mut().filter(|a| a.kind == "texture") {
+    for asset in project
+        .assets
+        .values_mut()
+        .filter(|a| matches!(a.kind.as_str(), "texture" | "model"))
+    {
         asset.sha256 = "0".repeat(64);
     }
     project.canonical_text().map_err(native)
@@ -26,7 +30,6 @@ impl TextureRefreshBasis {
     ) -> Result<Self, StartupError> {
         let interpretations = references
             .iter()
-            .filter(|r| r.kind == VisualAssetKind::Texture)
             .map(|r| {
                 let label = ulid::Ulid::from_bytes(r.id.0).to_string();
                 (
@@ -73,18 +76,15 @@ impl TextureRefreshBasis {
         }
         if normalized(project)? != self.normalized {
             return Err(invalid(
-                "live texture refresh supports existing texture content only; the running game retains its prior complete catalog",
+                "live asset refresh supports compatible existing texture/static-model content only; the running game retains its prior complete catalog",
             ));
         }
         let mut references = self.references.clone();
-        for reference in references
-            .iter_mut()
-            .filter(|r| r.kind == VisualAssetKind::Texture)
-        {
+        for reference in &mut references {
             let asset = project
                 .assets
                 .get(&ulid::Ulid::from_bytes(reference.id.0).to_string())
-                .ok_or_else(|| invalid("texture asset removed"))?;
+                .ok_or_else(|| invalid("visual asset removed"))?;
             for (byte, pair) in reference
                 .fingerprint
                 .iter_mut()
@@ -93,7 +93,7 @@ impl TextureRefreshBasis {
                 let digit = |v: u8| {
                     char::from(v)
                         .to_digit(16)
-                        .ok_or_else(|| invalid("invalid texture fingerprint"))
+                        .ok_or_else(|| invalid("invalid visual asset fingerprint"))
                 };
                 *byte = ((digit(pair[0])? << 4) | digit(pair[1])?) as u8;
             }
@@ -107,8 +107,20 @@ impl TextureRefreshBasis {
         } else {
             root.join(".incant/cache/textures")
         };
+        let models = if references.iter().any(|r| r.kind == VisualAssetKind::Model) {
+            incant_assets::project_cache_directory(root, incant_assets::CacheKind::Models)
+                .map_err(native)?
+        } else {
+            root.join(".incant/cache/models")
+        };
         ticket
-            .prepare(&references, &cache)
+            .prepare_visuals(
+                &references,
+                incant_render_game::VisualCaches {
+                    models: &models,
+                    textures: &cache,
+                },
+            )
             .map(Some)
             .map_err(native)
     }

@@ -6,6 +6,7 @@ mod animation;
 mod binding;
 mod tilemap;
 pub use tilemap::TilemapAtlasBinding;
+mod model_refresh;
 mod texture_refresh;
 mod update;
 use glam::DMat4;
