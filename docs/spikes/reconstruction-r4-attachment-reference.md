@@ -47,7 +47,9 @@ correction before this refresh. The earlier full suites apply to the unchanged
 fixture and interval math; the final focused runs cover the only later helper delta.
 Fresh full test executables were compiled and copied for a separately authorized
 numerical device run. Both CPU runners reaped every child and released the target.
-The original failed device attempt remains unchanged and no retry has run.
+At that CPU correction checkpoint no retry had run. The subsequent separately
+authorized [numeric002 run](reconstruction-r4-numeric-002.md) passed all four
+fixture invocations. The original failed device attempt remains unchanged.
 
 All production sources and all 21 WGSL files remain equal to `72b1ba8e`.
 The existing 19-case ordinary fixture changes only its composite comparison;

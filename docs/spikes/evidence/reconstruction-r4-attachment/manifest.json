@@ -1,0 +1,42 @@
+{
+  "source": "cae2bffcdef061d3e1505b7f78a2d9888b582e61",
+  "production": "72b1ba8ec351e86d66a90c401e0a75a530633616",
+  "archive_sha256": "5ff3e2948d20e3e6ed8ee8fcb93fa16cd208eee7d231f9af3c614ad8d7d03129",
+  "result": {
+    "records": 69,
+    "payloads": 58,
+    "build_inputs": 2467,
+    "test_only_paths": 4,
+    "production_wgsl_unchanged": 21,
+    "cpu": {
+      "default-001": [
+        166,
+        0,
+        43
+      ],
+      "cooked-native-001": [
+        181,
+        0,
+        44
+      ],
+      "default-002": [
+        5,
+        0,
+        0
+      ],
+      "cooked-native-002": [
+        5,
+        0,
+        0
+      ]
+    },
+    "executable_copies": 4,
+    "gpu_children": 4,
+    "submissions": 62,
+    "maps": 62,
+    "images": 0,
+    "adapter": "AdapterInfo { name: \"Apple M5 Pro\", vendor: 0, device: 0, device_type: IntegratedGpu, device_pci_bus_id: \"\", driver: \"\", driver_info: \"\", backend: Metal, subgroup_min_size: 4, subgroup_max_size: 64, transient_saves_memory: true }",
+    "appearance": "not assessed",
+    "timing": "not assessed"
+  }
+}

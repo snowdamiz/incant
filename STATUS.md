@@ -16,6 +16,16 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Private R4 reconstruction — numerical qualification, quality still open
+
+The [R4 attachment correction and bounded Metal tests](docs/spikes/reconstruction-r4-numeric-002.md)
+passed ordinary19 + owner12 cases in each default/cooked configuration (62 queue
+submissions/maps). Production shaders are unchanged; a test-only oracle now
+propagates the actual intermediate attachment format, with signed-zero and
+adjacent-outside CPU controls. The original failed attempt is preserved. No
+appearance, performance or full retained-scene acceptance follows; existing
+texture/thin-geometry/DRS and C7/C9/P1 quality failures remain open.
+
 ## Private accepted temporal owner foundation — CPU qualified
 
 The [owner/change provenance foundation](docs/spikes/temporal-owner-provenance-verification.md)
