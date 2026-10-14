@@ -4,17 +4,19 @@
 
 The opt-in profiler now reports bounded per-frame phase wall histograms and
 conservative p95 intervals, including aggregate `script.tick`. Seventeen explicit
-native CI-profile CPU cases, a dedicated allocation control, strict lint and a real
-three-tick CLI protocol check pass. Missing/failed/overflow samples refuse p95;
-default dependencies remain empty. Shipping 10,000-entity Mac measurements and the
-60 fps/GPU/hitch gates remain separate. [Contract and evidence](docs/spikes/native-profile-distributions.md).
+native CI-profile CPU cases, a dedicated allocation control and eight runner tests
+pass on actual main257, including the real three-tick CLI report. All 24 current
+checks pass; final integration review is pending. Missing/failed/overflow samples
+refuse p95; default dependencies remain empty. Shipping 10,000-entity Mac
+measurements and the 60 fps/GPU/hitch gates remain separate.
+[Current evidence](docs/spikes/profile-distributions-main257.md).
 
 The optional Apple and Android native hosts now have a qualified main256
 composition with haptics and persisted checkpoints. Both numerical modes pass
 148 player/game CPU cases (103 player +45 game), and all 44 current checks pass,
 including strict lint and iOS/Android compilation. The shared clock-module
 correction preserves its implementation and the initial duplicate-module lint
-failure. Final integration review is independently accepted; publication awaits its exact-head fast check. GPU/device audio, phone launches,
+failure. Final integration review is independently accepted and PR257 merged after its exact-head fast SUCCESS. GPU/device audio, phone launches,
 exported apps, mobile haptics/IME and performance remain separate, with other-
 device testing deferred and nonblocking. [Scope](docs/spikes/mobile-platforms-main256.md).
 
@@ -37,8 +39,8 @@ Sample/10,000-entity measurements and presentation timing remain open.
 Checkpoint30 is promoted through PR232: release `71bdd2e7` has the exact tested
 main252 tree `393eb78c`. All 23 required contexts and all eight push workflows
 succeeded; independent review, merge parents, author trailer and post-merge tree
-are verified. Later main253–256 persisted-session/mobile/haptics work remains outside
-that tested release. No checkpoint is currently active; main256 is the latest
+are verified. Later main253–257 persisted-session/mobile/haptics work remains outside
+that tested release. No checkpoint is currently active; main257 is the latest
 integration. This promotion does not approve a phase or distribution gate.
 [Portable evidence](docs/spikes/evidence/release-checkpoint-30/manifest.json).
 

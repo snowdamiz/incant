@@ -1,0 +1,19 @@
+{
+  "reviewer": "astra/root",
+  "source": "c295f56d4ef83436f384c66ed83cd046bb433da1",
+  "packet": "f57232fe9cf030c1c59096028db1995b08953f43",
+  "manifest_sha256": "9620f7251c8878f977bcaeaab547a6a0d993c7b5759fda69465ed42c2b268bc2",
+  "accepted": true,
+  "review": [
+    "Read source001 frame collector, capture/scoping changes, generation fence, quantiles and failure/overlap controls; read final CLI/test additions",
+    "Replayed portable83records/52payloads/17sources/14commands and11local binary identities",
+    "Actual three-tick stdout SHA84119e9ff3294ab18e116add3f05c04d17bc3ee16ec2bf0c19caab159fe91172 parsed by independently reviewed Mac runner97c0e197",
+    "Confirmed source001/002 production equality and default dependency graph retained"
+  ],
+  "verification": "17 CPU test cases, dedicated no-hot-allocation process,4strictClippy scopes,summary wasm compile,fmt/conventions/whitespace pass; archive receipts inspected/replayed",
+  "limits": [
+    "CI profile one-entity three-tick report proves protocol integration only",
+    "No shipping measurement or 10k Core Sample gate",
+    "No display/GPU/appearance validation"
+  ]
+}
