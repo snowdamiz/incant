@@ -9,6 +9,9 @@ use incant_render_game::{
 use incant_runtime::NativeWorld;
 use incant_ui::UiEvent;
 use std::{path::Path, sync::Arc};
+mod game;
+pub mod touch;
+use game::Game;
 
 #[derive(Debug, thiserror::Error)]
 pub enum MobileHostError<E: std::error::Error + 'static> {
@@ -47,11 +50,11 @@ pub struct TickReceipt {
     pub stereo_frames: usize,
 }
 
-/// One native world, VM, render/UI owner and offline mixer across callbacks.
+/// One native world, VM, render/UI owner and mixer across callbacks.
 /// Methods require exclusive access on the platform's game thread. Construction
 /// loads only cooked data and the trusted program linked into this build.
 pub struct MobileSession<C: RenderInputConsumer> {
-    game: Option<HostedOfflineGameSession<NativeRenderHost<C>>>,
+    game: Option<Game<C>>,
     owner: Arc<()>,
     epoch: u64,
     active: bool,
@@ -95,17 +98,56 @@ impl<C: RenderInputConsumer> MobileSession<C> {
             },
         )?;
         game.set_suspended(true)?;
-        Ok(Self {
+        Ok(Self::owned(Game::Offline(Box::new(game))))
+    }
+
+    /// Starts the real platform audio backend suspended. No PCM buffer is
+    /// returned: `next_output_frames` is zero and `tick` accepts an empty slice.
+    /// Audio already submitted to an OS device cannot be rolled back on a late
+    /// GPU failure. Device availability is checked, never silently simulated.
+    #[cfg(feature = "mobile-device")]
+    pub fn open_device(
+        package: &Path,
+        ui_viewport: Option<[f32; 2]>,
+        consumer: C::Settings,
+    ) -> Result<Self, C> {
+        if ui_viewport.is_some_and(|v| !valid_viewport(v)) {
+            return Err(MobileHostError::Settings("logical viewport"));
+        }
+        let package =
+            crate::package::hosted(package, ui_viewport).map_err(MobileHostError::Startup)?;
+        let s = package.settings;
+        let mut game = incant_game_runtime::HostedGameSession::new_suspended(
+            package.scene,
+            crate::program::load(None).map_err(MobileHostError::Startup)?,
+            package.actions,
+            package.clips,
+            incant_audio_runtime::AudioManagerSettings::default(),
+            NativeRenderSettings {
+                model_cache: s.model_cache,
+                texture_cache: s.texture_cache,
+                camera: s.camera,
+                text: s.text,
+                ui: s.ui,
+                consumer,
+            },
+        )?;
+        game.poll_device()?;
+        Ok(Self::owned(Game::Device(Box::new(game))))
+    }
+
+    fn owned(game: Game<C>) -> Self {
+        Self {
             game: Some(game),
             owner: Arc::new(()),
             epoch: 0,
             active: false,
             neutralize: true,
             physical: Vec::with_capacity(MAX_EVENTS_PER_TICK),
-        })
+        }
     }
 
-    fn ready(&self) -> Result<&HostedOfflineGameSession<NativeRenderHost<C>>, C> {
+    fn ready(&self) -> Result<&Game<C>, C> {
         self.game
             .as_ref()
             .filter(|g| !g.is_failed())
