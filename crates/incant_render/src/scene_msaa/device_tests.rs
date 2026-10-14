@@ -32,6 +32,40 @@ fn count(pixels: &[u8], channel: usize) -> usize {
         .count()
 }
 #[test]
+#[ignore = "requires an explicitly granted native GPU; isolated cube pixels require separate review"]
+fn ordinary_editor_cube_silhouette_records_one_and_four_sample_pixels() {
+    let four = renderer();
+    let one = crate::test_support::checked(Renderer::headless().unwrap());
+    let input = fixture::cube();
+    let mut previous = None;
+    for (name, renderer) in [("cube-one", &one), ("cube-four", &four)] {
+        let pixels = fixture::draw(renderer, &input, [320, 240], None);
+        fixture::record(name, renderer, &pixels, [320, 240]);
+        hdr_output::save(name, &pixels, 320, 240);
+        let changed = pixels
+            .as_chunks::<4>()
+            .0
+            .iter()
+            .filter(|p| **p != [20, 21, 25, 255])
+            .count();
+        assert!(
+            changed > 1000 && changed < 320 * 240 / 2,
+            "isolated cube must visibly occupy a bounded useful area"
+        );
+        assert_eq!(&pixels[..4], &[20, 21, 25, 255]);
+        assert!(pixels.as_chunks::<4>().0.iter().all(|p| p[3] == 255));
+        if let Some(one) = &previous {
+            assert_ne!(
+                &pixels, one,
+                "diagonal fixture did not exercise sample coverage"
+            );
+        } else {
+            previous = Some(pixels);
+        }
+        renderer.check_device().unwrap();
+    }
+}
+#[test]
 #[ignore = "requires an explicitly granted native GPU; numerical fixture only"]
 fn four_sample_world_draws_resolve_after_models_sprites_and_text_with_depth() {
     let renderer = renderer();

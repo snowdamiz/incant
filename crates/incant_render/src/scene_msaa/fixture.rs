@@ -43,6 +43,30 @@ pub(super) fn camera(pixel_grid: bool) -> SceneNode {
     });
     camera
 }
+/// Isolated ordinary-editor diagnostic cube, large enough to inspect its
+/// silhouette separately from small mixed-pass correctness fixtures.
+pub(super) fn cube() -> SceneInput {
+    let mut camera = camera(false);
+    camera.world = DMat4::from_translation(DVec3::new(0., 0., 4.));
+    camera.camera.as_mut().unwrap().projection = incant_types::CameraProjection::Perspective {};
+    camera.camera.as_mut().unwrap().fov_degrees = 50.;
+    SceneInput {
+        nodes: vec![
+            camera,
+            node(
+                "cube",
+                DMat4::from_scale_rotation_translation(
+                    DVec3::splat(1.5),
+                    DQuat::from_euler(glam::EulerRot::YXZ, 0.45, -0.25, 0.12),
+                    DVec3::ZERO,
+                ),
+                true,
+            ),
+        ],
+        text: None,
+        environment: None,
+    }
+}
 /// Three separate primitive/material draws: opaque, MASK and BLEND.
 /// All non-visual source files disappear before the returned input is rendered.
 pub(super) fn mixed(mask_alpha: f32) -> SceneInput {
@@ -225,12 +249,30 @@ pub(super) fn record(case: &str, renderer: &crate::Renderer, pixels: &[u8], size
     std::fs::create_dir_all(directory).unwrap();
     assert_eq!(pixels.len(), (size[0] * size[1] * 4) as usize);
     let info = renderer.adapter.get_info();
+    let changed: Vec<_> = pixels
+        .as_chunks::<4>()
+        .0
+        .iter()
+        .enumerate()
+        .filter_map(|(i, p)| {
+            (*p != [20, 21, 25, 255]).then_some([i as u32 % size[0], i as u32 / size[0]])
+        })
+        .collect();
+    let bounds = (!changed.is_empty()).then(|| {
+        [
+            changed.iter().map(|p| p[0]).min().unwrap(),
+            changed.iter().map(|p| p[1]).min().unwrap(),
+            changed.iter().map(|p| p[0]).max().unwrap() + 1,
+            changed.iter().map(|p| p[1]).max().unwrap() + 1,
+        ]
+    });
     let receipt = serde_json::json!({"case":case,"size":size,"rgba_bytes":pixels.len(),
         "rgba_sha256":format!("{:x}",Sha256::digest(pixels)),"raw_file":format!("{case}.rgba"),
         "configured_scene_samples":renderer.scene_sample_count(),"backend":format!("{:?}",info.backend),"adapter":info.name,
         "cooked_geometry":cfg!(feature="cooked-geometry"),"cooked_materials":cfg!(feature="cooked-materials"),
         "cooked_sprites":cfg!(feature="cooked-sprites"),"cooked_text":cfg!(feature="cooked-text"),
         "normalization":"row-major RGBA8 sRGB display output, row padding removed",
+        "changed_from_clear_pixels":changed.len(),"changed_from_clear_bounds_exclusive":bounds,
         "scope":"numerical fixture pixels; no appearance/device/performance acceptance"});
     for (suffix, bytes) in [
         ("rgba", pixels.to_vec()),
