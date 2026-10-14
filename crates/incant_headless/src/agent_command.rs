@@ -2,7 +2,7 @@
 #[cfg(test)]
 mod tests;
 
-use crate::{Result, native_play, print, read_project, save};
+use crate::{Result, native_play, print, read_project, save_derived};
 use incant_agent::{
     Agent, AgentError, ApprovalMode, Budget, EngineHost, ProjectHost, TurnReport,
     ledger::{Ledger, LedgerError, MAX_TOKEN_CAP},
@@ -109,7 +109,7 @@ pub(super) fn run(options: Options) -> Result<()> {
                 |text| eprint!("{text}"),
             )
         },
-        save,
+        save_derived,
     )?;
     print(receipt)
 }
@@ -141,7 +141,10 @@ fn execute(
     // Journal replay enforces the genesis project identity. Acquire accounting
     // ownership first so a predecessor cannot finish after our journal read.
     let ledger = open(&initial.id)?;
-    let bus = CommandBus::persistent_with_sources(&journal, initial, &root)?;
+    let bus = CommandBus::open_project_file_with_journal(&options.project, &journal)?;
+    if bus.project().id != initial.id {
+        return Err("opened project identity changed".into());
+    }
     // The journal may contain user cap edits/Undo; the input is only its genesis.
     let project_cap = bus.project().settings.agent_budget.max_tokens;
     let restored = ledger.snapshot(project_cap)?;

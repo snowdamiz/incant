@@ -63,13 +63,14 @@ pub struct OpenedProject {
     root: Dir,
     leaf: String,
     journal_leaf: String,
+    journal_root: Dir,
     journal_path: PathBuf,
     journal_identity: (u64, u64),
     // The bus owns the locked writer; this duplicate also pins the actual node
     // if that writer is replaced while handling an ambiguous I/O failure.
     _journal_node: File,
     binding: Option<String>,
-    expected: Option<Arc<File>>,
+    expected: Option<ProjectSnapshot>,
 }
 fn leaf(path: &Path) -> Result<String, SourceError> {
     let name = path
@@ -135,6 +136,11 @@ impl OpenedProject {
     /// Lock the derived journal before parsing the project (which may be absent
     /// after displacement). Neither project data nor command data supplies paths.
     pub fn lock(path: &Path) -> Result<(Self, File), SourceError> {
+        Self::lock_with_journal(path, &path.with_extension("journal"))
+    }
+    /// Both paths come from the host, never command/project data. A separate
+    /// pinned directory preserves existing custom-journal and source bindings.
+    pub fn lock_with_journal(path: &Path, journal: &Path) -> Result<(Self, File), SourceError> {
         if !SUPPORTED {
             return Err(SourceError::Unavailable);
         }
@@ -144,30 +150,41 @@ impl OpenedProject {
             .unwrap_or(Path::new("."));
         let root = Dir::root(parent)?;
         let document_leaf = leaf(path)?;
-        let journal_path = path.with_extension("journal");
-        let journal_leaf = leaf(&journal_path)?;
-        if document_leaf.eq_ignore_ascii_case(&journal_leaf) {
+        let journal_parent = journal
+            .parent()
+            .filter(|p| !p.as_os_str().is_empty())
+            .unwrap_or(Path::new("."));
+        let journal_root = Dir::root(journal_parent)?;
+        let journal_leaf = leaf(journal)?;
+        let project_path = std::fs::canonicalize(parent)?.join(&document_leaf);
+        let journal_path = std::fs::canonicalize(journal_parent)?.join(&journal_leaf);
+        if project_path
+            .to_string_lossy()
+            .eq_ignore_ascii_case(&journal_path.to_string_lossy())
+        {
             return Err(SourceError::Invalid("project aliases journal".into()));
         }
-        let file = match root.create(&journal_leaf) {
+        let file = match journal_root.create(&journal_leaf) {
             Ok(file) => {
                 file.sync_all()?;
-                root.sync()?;
+                journal_root.sync()?;
                 file
             }
-            Err(e) if e.kind() == io::ErrorKind::AlreadyExists => root.open_rw(&journal_leaf)?,
+            Err(e) if e.kind() == io::ErrorKind::AlreadyExists => {
+                journal_root.open_rw(&journal_leaf)?
+            }
             Err(e) => return Err(e.into()),
         };
         platform::regular(&file)?;
         file.try_lock()
             .map_err(|e| SourceError::Io(io::Error::other(e)))?;
         let journal_identity = platform::identity(&file)?;
-        let journal_path = std::fs::canonicalize(parent)?.join(&journal_leaf);
         Ok((
             Self {
                 root,
                 leaf: document_leaf,
                 journal_leaf,
+                journal_root,
                 journal_path,
                 journal_identity,
                 _journal_node: file.try_clone()?,
@@ -190,7 +207,7 @@ impl OpenedProject {
         Ok(store)
     }
     fn verify_journal(&self) -> Result<(), SourceError> {
-        let file = self.root.open(&self.journal_leaf)?;
+        let file = self.journal_root.open(&self.journal_leaf)?;
         platform::regular(&file)?;
         if platform::identity(&file)? != self.journal_identity {
             return Err(SourceError::Conflict);
@@ -202,7 +219,7 @@ impl OpenedProject {
         read(&self.root, &self.leaf)
     }
     pub fn admit_snapshot(&mut self, snapshot: &ProjectSnapshot) {
-        self.expected = Some(Arc::clone(&snapshot.node));
+        self.expected = Some(snapshot.clone());
     }
     pub fn admit_result(
         &mut self,
@@ -214,24 +231,26 @@ impl OpenedProject {
         } else {
             pending.original
         };
-        self.expected = Some(Arc::clone(
-            pending
-                .held
-                .iter()
-                .find(|file| platform::identity(file).ok() == Some(identity))
-                .ok_or(SourceError::RecoveryRequired)?,
-        ));
+        self.expected = Some(ProjectSnapshot {
+            text: if committed {
+                pending.edit.after.clone()
+            } else {
+                pending.edit.before.clone()
+            },
+            identity,
+            node: Arc::clone(
+                pending
+                    .held
+                    .iter()
+                    .find(|file| platform::identity(file).ok() == Some(identity))
+                    .ok_or(SourceError::RecoveryRequired)?,
+            ),
+        });
         Ok(())
     }
     pub fn read_admitted(&self) -> Result<ProjectSnapshot, SourceError> {
         let snapshot = self.read()?.ok_or(SourceError::Conflict)?;
-        if self
-            .expected
-            .as_ref()
-            .map(|file| platform::identity(file))
-            .transpose()?
-            != Some(snapshot.identity)
-        {
+        if self.expected.as_ref() != Some(&snapshot) {
             return Err(SourceError::Conflict);
         }
         Ok(snapshot)

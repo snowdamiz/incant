@@ -131,6 +131,12 @@ impl CommandBus {
             if edit.is_some() {
                 return Err(CommandError::Invalid("mixed file edits".into()));
             }
+            if matches!(
+                change,
+                journal::Change::Undo { .. } | journal::Change::Redo { .. }
+            ) {
+                return self.record_checkpoint_history(change, project_edit, next);
+            }
             return self.record_project(change, project_edit, next);
         }
         let Some(edit) = edit else {
