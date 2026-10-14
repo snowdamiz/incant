@@ -8,7 +8,7 @@ No Cargo, naga, cook, GPU, render or image was run. No visual acceptance is impl
 
 - **Model:** Claude Opus 5.5 (`claude-opus-5-5`), thinking effort max. Per the packet, root verified both through ACP before prompting. Auto-memory is off; no memory was read or written.
 - **Base:** exact production `76be9608e99bf089fcb1e0908827330f70c28ac1`. The source copies continue the immutable R3 `e3bc4cd2` copies.
-- **Patch:** `reconstruction_r4.patch`, 20 files, sha256 `d7e2bd273406cd4c8ef2b33f53cdecf1ea22b18a3345d18a691fdf3c863fee74`. It passes the Python re-apply and `git apply --cached --check` against 76be (`patch_check.json`).
+- **Patch:** `reconstruction_r4.patch`, 21 files, sha256 `ce666f0c03686fd44b7fd3c24e0579112256060c63c70145a63b814bf041529e`. It passes the Python re-apply and `git apply --cached --check` against 76be (`patch_check.json`).
 - **Unchanged:** every old packet, the briefs, the top-level `result.md` and the three owner-attachment files.
 
 ## 1. Corrections applied
@@ -84,6 +84,8 @@ No Cargo, naga, cook, GPU, render or image was run. No visual acceptance is impl
   - contract strings become `incant-temporal-upscale-v2` (`textures6,mrt3`) and `incant-temporal-upscale-owner-v2` (`6float-depth+2uint-textures,mrt=…-rg16f`);
   - the source pins are updated.
 - `tests/temporal.rs`: emitted-token expectations add texture 5 / color 2 (UP) and texture 7 / color 3 (OWN).
+- `contract.rs` negative controls: the OWN mutations now move the changes uniform from 9 to 10 and add an extra binding at 10, so each still exercises its intended refusal rather than a collision.
+- Render-side `incant_render/src/temporal_shader/cooked.rs`: the expected contract strings are the two v2 strings.
 - Host check: `incant_render/src/temporal_shader/cooked/host.rs` expects the matching layouts (UP 6 textures; OWN 8 textures with uint at 7 and 8, and a uniform at 9).
 
 **Hash inventory** (`inventory.py` / `inventory.json`). Hashes are sha256 of the cooker composition `common.wgsl + "\n" + program`, and every pin equals the packet source:
@@ -170,7 +172,7 @@ These are scalar transcriptions of the shader rules, each with a negative (mutat
 python3 -I -B handoffs/0073-upscaling-review/reconstruction_implementation_r4/controls.py \
     --out handoffs/0073-upscaling-review/reconstruction_implementation_r4/controls.json          # checks=29 failed=0
 python3 -I -B handoffs/0073-upscaling-review/reconstruction_implementation_r4/patch_check.py \
-    --out handoffs/0073-upscaling-review/reconstruction_implementation_r4/patch_check.json       # 20 files, applies to 76be
+    --out handoffs/0073-upscaling-review/reconstruction_implementation_r4/patch_check.json       # 21 files, applies to 76be
 python3 -I -B handoffs/0073-upscaling-review/reconstruction_implementation_r4/inventory.py \
     --base /Users/andreyyurlov/.codex/worktrees/owner-quality-repair/incant \
     --out handoffs/0073-upscaling-review/reconstruction_implementation_r4/inventory.json         # all pins match

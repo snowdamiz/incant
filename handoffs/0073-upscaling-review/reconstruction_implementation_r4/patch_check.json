@@ -61,6 +61,16 @@
    "removed": 2
   },
   {
+   "added": 2,
+   "base_blob": "23b5cb578996ec4b11d11d108882dc3046f50f2c",
+   "base_sha256": "8f5617e22add52dc12c3964d1d6cd1269985dcff9c1d4696c3e581e206f29a67",
+   "changed": true,
+   "path": "crates/incant_render/src/temporal_shader/cooked.rs",
+   "proposed_blob": "821fc2e3c20a1fc2fa3064ee976849520a63034a",
+   "proposed_sha256": "e3c3c2a46ac5da8a8247841b36b3ebdf785bc9c7b0849d4247bdd16fa1cdc496",
+   "removed": 2
+  },
+  {
    "added": 4,
    "base_blob": "7b26def3be36da478888230ff6837d9a593d3314",
    "base_sha256": "81536a000ae50de240f833d8c5a218ad31c1d617d6cc0d94038ea398b6a2b231",
@@ -161,14 +171,14 @@
    "removed": 8
   },
   {
-   "added": 12,
+   "added": 14,
    "base_blob": "6f01e1fddba1fe100dc3be4ea28aee93499bf492",
    "base_sha256": "24fa46bc7e33fd54572f83ab8ecfbb0ee5fcaca54501afb382de9b879ae57e9f",
    "changed": true,
    "path": "crates/incant_shader_cook/src/temporal/contract.rs",
-   "proposed_blob": "641b4360d1b401b1e3ed1ad04155795d4c64dd53",
-   "proposed_sha256": "559285d72e6485ee4ebeefea214637e6b2f0650378146c113b50125887d4c5dd",
-   "removed": 5
+   "proposed_blob": "24fc495c56b8e77b19962683b2d3972bbb748247",
+   "proposed_sha256": "bae2cac1671a90438fb01be8e5b1603e0ef5b14aa9ac3ac2d94f7b87c7513509",
+   "removed": 7
   },
   {
    "added": 2,
@@ -204,10 +214,10 @@
  "git_apply_cached_check_against_76be": true,
  "git_apply_stderr": "",
  "patch": {
-  "bytes": 79785,
-  "files": 20,
+  "bytes": 82089,
+  "files": 21,
   "path": "reconstruction_r4.patch",
-  "sha256": "d7e2bd273406cd4c8ef2b33f53cdecf1ea22b18a3345d18a691fdf3c863fee74"
+  "sha256": "ce666f0c03686fd44b7fd3c24e0579112256060c63c70145a63b814bf041529e"
  },
  "production": "76be9608e99bf089fcb1e0908827330f70c28ac1",
  "python_reapply_reproduces_proposed_files": true,

@@ -558,8 +558,8 @@ mod history_owner_tests {
             source.replace("@location(2) record:vec2u", "@location(3) record:vec2u"),
             source.replace("array<vec4u,782>", "array<vec4u,783>"),
             source.replace("header:vec4u, words:", "header:vec4u, extra:vec4u, words:"),
-            source.replace("@binding(8)", "@binding(9)"),
-            format!("{source}\n@group(0) @binding(9) var extra:texture_2d<u32>;"),
+            source.replace("@binding(9)", "@binding(10)"),
+            format!("{source}\n@group(0) @binding(10) var extra:texture_2d<u32>;"),
         ] {
             assert_ne!(changed, source, "negative control must change source");
             assert!(!accepts(&changed));

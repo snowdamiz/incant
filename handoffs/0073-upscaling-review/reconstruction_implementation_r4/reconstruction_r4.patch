@@ -248,6 +248,28 @@ index 28ed7fde7dde..9e994f3be22a 100644
  }
  /// Conservative receiver/cluster guard includes all phases (at most half pixel).
  pub(crate) fn guard(rect: [f32; 4]) -> [f32; 2] {
+diff --git a/crates/incant_render/src/temporal_shader/cooked.rs b/crates/incant_render/src/temporal_shader/cooked.rs
+index 23b5cb578996..821fc2e3c20a 100644
+--- a/crates/incant_render/src/temporal_shader/cooked.rs
++++ b/crates/incant_render/src/temporal_shader/cooked.rs
+@@ -59,7 +59,7 @@
+     include!(concat!(env!("OUT_DIR"), "/temporal-upscale/manifest.rs"));
+     pub(super) const BUNDLE: Bundle = Bundle {
+         contract: MANIFEST_CONTRACT,
+-        expected: "incant-temporal-upscale-v1;naga=29.0.4;wgpu=29.0.4;frame96-f,textures5,mrt2;msl=2.4;hlsl=6.0,special-b1;spv=1.0,no-y-flip;bounds=restrict;loops=bounded",
++        expected: "incant-temporal-upscale-v2;naga=29.0.4;wgpu=29.0.4;frame96-f,textures6,mrt3;msl=2.4;hlsl=6.0,special-b1;spv=1.0,no-y-flip;bounds=restrict;loops=bounded",
+         source: SOURCE_HASH,
+         producer: PRODUCER_HASH,
+         artifacts: &ARTIFACTS,
+@@ -73,7 +73,7 @@
+     ));
+     pub(super) const BUNDLE: Bundle = Bundle {
+         contract: MANIFEST_CONTRACT,
+-        expected: "incant-temporal-upscale-owner-v1;naga=29.0.4;wgpu=29.0.4;frame96-f,changes12528-f,5float-depth+2uint-textures,mrt=rgba16f-r32f-rg32u;msl=2.4,frame0,changes1;hlsl=6.0,b0-b1,special-b2;spv=1.0,no-y-flip;bounds=restrict;loops=bounded",
++        expected: "incant-temporal-upscale-owner-v2;naga=29.0.4;wgpu=29.0.4;frame96-f,changes12528-f,6float-depth+2uint-textures,mrt=rgba16f-r32f-rg32u-rg16f;msl=2.4,frame0,changes1;hlsl=6.0,b0-b1,special-b2;spv=1.0,no-y-flip;bounds=restrict;loops=bounded",
+         source: SOURCE_HASH,
+         producer: PRODUCER_HASH,
+         artifacts: &ARTIFACTS,
 diff --git a/crates/incant_render/src/temporal_shader/cooked/host.rs b/crates/incant_render/src/temporal_shader/cooked/host.rs
 index 7b26def3be36..0e0cd3da047d 100644
 --- a/crates/incant_render/src/temporal_shader/cooked/host.rs
@@ -1463,7 +1485,7 @@ index 97266ec1e942..e805b60db650 100644
      for (o, a, m) in [
          (MAX_OUTPUT_BYTES + 1, 0, 0),
 diff --git a/crates/incant_shader_cook/src/temporal/contract.rs b/crates/incant_shader_cook/src/temporal/contract.rs
-index 6f01e1fddba1..641b4360d1b4 100644
+index 6f01e1fddba1..24fc495c56b8 100644
 --- a/crates/incant_shader_cook/src/temporal/contract.rs
 +++ b/crates/incant_shader_cook/src/temporal/contract.rs
 @@ -271,8 +271,15 @@
@@ -1512,6 +1534,17 @@ index 6f01e1fddba1..641b4360d1b4 100644
                          ScalarKind::Uint
                      } else {
                          ScalarKind::Float
+@@ -551,8 +558,8 @@
+             source.replace("@location(2) record:vec2u", "@location(3) record:vec2u"),
+             source.replace("array<vec4u,782>", "array<vec4u,783>"),
+             source.replace("header:vec4u, words:", "header:vec4u, extra:vec4u, words:"),
+-            source.replace("@binding(8)", "@binding(9)"),
+-            format!("{source}\n@group(0) @binding(9) var extra:texture_2d<u32>;"),
++            source.replace("@binding(9)", "@binding(10)"),
++            format!("{source}\n@group(0) @binding(10) var extra:texture_2d<u32>;"),
+         ] {
+             assert_ne!(changed, source, "negative control must change source");
+             assert!(!accepts(&changed));
 diff --git a/crates/incant_shader_cook/src/temporal/emit.rs b/crates/incant_shader_cook/src/temporal/emit.rs
 index 7cc849db7064..93aa060d4d3e 100644
 --- a/crates/incant_shader_cook/src/temporal/emit.rs
