@@ -23,8 +23,8 @@ device execution is deferred; hosted build and release checks remain required.
   appearance/performance results.
 - Extend live asset refresh beyond the verified existing-texture and
   [compatible static-model workflows](../spikes/native-static-model-refresh.md).
-  Both preserve the running world and scripts on this Mac. Animation, changed
-  topology and baked navigation dependencies require their own admission rules.
+  Both preserve the running world and scripts on this Mac. Animation, changed scene/material-binding
+  structure and baked navigation dependencies require their own admission rules.
 - Add and qualify geometric antialiasing for the ordinary editor viewport. The
   reported diagnostic cube has jagged silhouettes on its current single-sample,
   full-resolution route; this is separate from temporal reconstruction defects.

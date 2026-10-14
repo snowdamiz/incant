@@ -15,8 +15,8 @@ below preserve earlier scoped results and superseded integration snapshots.
 
 Native Play accepts bounded geometry, material-factor and image-content
 reimports for existing static models with unchanged bindings, scene structure
-and import settings. Animated/skinned models, changed topology and models used
-by baked navigation remain refused. Preparation stays outside the authoring lock;
+and import settings. Animated/skinned models, changed scene or material-binding structure and models
+used by baked navigation remain refused. Preparation stays outside the authoring lock;
 final publication preserves the running world/VM and atomically retains the old
 catalog on refusal.
 
