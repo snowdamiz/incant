@@ -1,5 +1,17 @@
 # Implementation status
 
+## CI renderer smoke revision repair — local qualification
+
+The renderer helper now carries its first command revision into the reopened
+second RPC session and retains structured failures, including an absent native
+code field. All render/geometry assertions remain. Nine Python controls and
+four actual RPC protocol processes pass; root separately passes the complete
+Mac renderer helper on the retained historical application executable. This
+does not relabel the binary as current whole-runtime source. Checkpoint35's
+Linux failure is retained; hosted repair execution is pending. No new build,
+shipping timing, visual approval or phase gate is included.
+[Cause, scope and replay](docs/spikes/render-smoke-revision.md).
+
 ## Native script undo capacity reuse — source qualified
 
 ScriptHost now reuses exact-size native ID/numeric undo storage across matching

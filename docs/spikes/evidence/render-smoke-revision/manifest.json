@@ -1,0 +1,198 @@
+{
+  "source": "0862232f767ef67ffa9bff64f999373b3956925f",
+  "base": "0b57cc37db409cd228a7332aa42e2c9dad02ac2e",
+  "archive_sha256": "56355415c1cd95e7b98b080da564684d91bc31c0fefd94a1e564c3a0edfe3805",
+  "records": [
+    {
+      "original": "/Users/andreyyurlov/.codex/worktrees/cooked-native-scripts/incant/tools/platforms/render-check.py",
+      "sha256": "df306687a6c4d51d245ea3fd08c883fff553094919b15b2055a62d315065447f",
+      "bytes": 10133,
+      "role": "source"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/worktrees/cooked-native-scripts/incant/tools/tests/test_render_geometry.py",
+      "sha256": "83227357837eedd88f078cf3a6b815cc6fac473904e398f67e7f88de77806422",
+      "bytes": 7747,
+      "role": "source"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/render-smoke-revision-001/preflight.json",
+      "sha256": "4ad4cff9970068cbab3206f83e5ec68a20943eb3f58910aad4ecd7251c503ffc",
+      "bytes": 1456,
+      "role": "producer-check"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/render-smoke-revision-001/result.json",
+      "sha256": "1fdecb157870af8b84ca1af5313c61225e4f4ace827126923c3b786747d25235",
+      "bytes": 1711,
+      "role": "producer-check"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/render-smoke-revision-001/python-tests-001.log",
+      "sha256": "e7868349f80d90e9674de9c2df12e50a116d24331e4cdf921e14d11d317a3981",
+      "bytes": 107,
+      "role": "producer-check"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/render-smoke-revision-001/rpc-control.py",
+      "sha256": "a7ee5590fedaafc20236101f0578b65283db37f2bac53a8b94a4ca490c1121c0",
+      "bytes": 4061,
+      "role": "producer-check"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/render-smoke-revision-001/rpc-control-001.log",
+      "sha256": "ae7517a1c51a81860d5404e758a5d2d818f37e73bbbb75c1b2bb500f2f683677",
+      "bytes": 545,
+      "role": "producer-check"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/render-smoke-revision-001/diff-check.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "role": "producer-check"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/render-smoke-revision-001/rpc-001/call-1.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "role": "raw-rpc-control"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/render-smoke-revision-001/rpc-001/call-1.stdout",
+      "sha256": "2b3cc6e08ba66b4df5f477cc6f71a0fa4263568ec1c3e414dc940eb4f396130d",
+      "bytes": 63,
+      "role": "raw-rpc-control"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/render-smoke-revision-001/rpc-001/call-2.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "role": "raw-rpc-control"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/render-smoke-revision-001/rpc-001/call-2.stdout",
+      "sha256": "7787c233ac1aa36f207daef5b552c59ac619e3664e19d38149f202bd4841973e",
+      "bytes": 1275,
+      "role": "raw-rpc-control"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/render-smoke-revision-001/rpc-001/call-3.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "role": "raw-rpc-control"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/render-smoke-revision-001/rpc-001/call-3.stdout",
+      "sha256": "dc41dd4b288f4c98e1a992e7b08c1f15b5c3293a3d378e388b37127cb7fa2ee5",
+      "bytes": 1252,
+      "role": "raw-rpc-control"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/render-smoke-revision-001/rpc-001/call-4.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "role": "raw-rpc-control"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/render-smoke-revision-001/rpc-001/call-4.stdout",
+      "sha256": "04b65440ab3b69ac741a012757763a04ee22f4689c2bfb91d1cdf76cc5c05713",
+      "bytes": 1079,
+      "role": "raw-rpc-control"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/render-smoke-revision-001/rpc-001/ledger.json",
+      "sha256": "a17e601554a17288971ad34b7b8ebb19bbf73ab996265adfdb4fa96324d4c085",
+      "bytes": 3264,
+      "role": "raw-rpc-control"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/render-smoke-revision-001/rpc-001/result.json",
+      "sha256": "5c77b308263dd4a228d2973f424b70d4ebd95e232256f41ff121869ebc2b487f",
+      "bytes": 591,
+      "role": "raw-rpc-control"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/render-smoke-revision-001/checkpoint35-render-failure-excerpt.log",
+      "sha256": "d8ba4de4d778acc296cae81b19c48085e1fcf32564aad362c443a5580057e1b5",
+      "bytes": 2053,
+      "role": "historical-hosted-linux-failure"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/render-smoke-revision-root-001/launch.json",
+      "sha256": "e49bb19ae8d63b9dde54b898f18f71878e7da391b0f1f4023d0477e26abd284c",
+      "bytes": 861,
+      "role": "root-independent-mac-check"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/render-smoke-revision-root-001/0.json",
+      "sha256": "1b87dde48048a40f35bac08d7c5ad9129a357dfbcdcc1ddca24f0ef2a3cb3687",
+      "bytes": 112,
+      "role": "root-independent-mac-check"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/render-smoke-revision-root-001/1.json",
+      "sha256": "d4e6928cc85a8c40aaeb3c5b46c5dd630bc16278ab2f6b79dc3679b6dc720d2b",
+      "bytes": 112,
+      "role": "root-independent-mac-check"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/render-smoke-revision-root-001/0.log",
+      "sha256": "628588ea8bc57a0a5fd4116d498089ae7c4fab1cedbf6d4ebf56a0cb9ead0174",
+      "bytes": 1114,
+      "role": "root-independent-mac-check"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/render-smoke-revision-root-001/1.log",
+      "sha256": "22b9dd91b74c5a7ff02810b4913d27daea82bbd91ea598b122b44f05bbeb4ee8",
+      "bytes": 1763,
+      "role": "root-independent-mac-check"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/render-smoke-revision-root-001/render/report.json",
+      "sha256": "7c656acedecf4c07f27d66684ad783b686f0a9ae8b482e160d86248385cbe203",
+      "bytes": 2014,
+      "role": "root-independent-mac-check"
+    }
+  ],
+  "native_binary_qualification": {
+    "binary": "/Users/andreyyurlov/.codex/incant-integration-evidence/project-application-main275/binaries/headless-incant_headless",
+    "binary_sha256": "b6c19fef570f817e30d6c0f73e982eff941e10840480a653d9e625b079df8f71",
+    "producing_source": "fad9a71f47594de0d22836d58203503222f3e55b",
+    "producing_receipt": "/Users/andreyyurlov/.codex/incant-integration-evidence/project-application-main275/headless.json",
+    "producing_receipt_sha256": "2afd61c4c296ad7b41c2b89287609f0b9629c0bed118d0d3ae43f7076c5f205c",
+    "producing_source_freeze_sha256": "51356ea5b9f5cd2ee26fc92eefca18b1e0191ceb2cb4b211a9a055ae995ced11",
+    "current_base": "0b57cc37db409cd228a7332aa42e2c9dad02ac2e",
+    "label": "historical main275 application CI-profile executable; not current main278 source exact",
+    "rpc_authoring_source_relevance": "headless and source production files exact; command delta only test modules and cfg(test) isolation declaration; Cargo/lock/toolchain exact",
+    "relevance_delta_paths": [
+      "crates/incant_cmd/src/agent_budget_replay_tests.rs",
+      "crates/incant_cmd/src/lib.rs",
+      "crates/incant_cmd/src/project_checkpoint_tests.rs",
+      "crates/incant_cmd/src/project_file_tests.rs",
+      "crates/incant_cmd/src/source_protocol_tests.rs",
+      "crates/incant_cmd/src/test_isolation.rs"
+    ],
+    "no_runtime_or_render_relevance_claim": true,
+    "scope": "init,command.execute,project.save,project.read only; no screenshots, play, GPU, builds, or performance"
+  },
+  "producer_python_tests": 9,
+  "producer_python_command": [
+    "python3",
+    "-B",
+    "-m",
+    "unittest",
+    "tools.tests.test_render_geometry",
+    "tools.tests.test_ci_profile"
+  ],
+  "producer_native_protocol_processes": 4,
+  "producer_native_scope": "init,edit-save0to1,reopen-edit-save1to2,stale0refusal+readrevision2; no render/GPU/build/perf",
+  "root_full_mac_helper": {
+    "source": "0862232f767ef67ffa9bff64f999373b3956925f",
+    "exit_code": 0,
+    "historical_binary": true,
+    "render_assertions_unchanged": true,
+    "not_current_whole_runtime_qualification": true
+  },
+  "hosted_linux_repair_pending": true,
+  "performance_or_phase_gate": false
+}
