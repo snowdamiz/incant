@@ -11,14 +11,19 @@ antialiasing. This is a separate viewport defect, not a rendering-quality pass
 or proof of the low-resolution reconstruction cause. The entries
 below preserve earlier scoped results and superseded integration snapshots.
 
-## Native host timing — CPU qualified
+## Native host timing — shipping window exercised
 
 Optional profiling now includes surface acquisition, input/UI preparation and
 haptic dispatch in a separate host-frame observation. Consecutive accepted-frame
 intervals break across pauses, resize, surface deferral and session replacement.
 These are CPU completion timestamps, not GPU completion, displayed FPS or a
 performance pass. Eighty CPU controls, strict lint, profile-off compilation and
-independent source review pass; actual-window shipping measurement remains open.
+independent source review pass. A fresh shipping Core package has now executed
+600 ticks in an actual Metal window with its authored models and HUD, without
+a failed runtime frame or skipped surface. The harness's incorrect text-widget
+count and corrected source-based interpretation are both retained. Visual review,
+displayed-frame timing and representative active-gameplay qualification remain
+open. [Export, actual run and limitations](docs/spikes/profiled-window-export.md).
 [Boundaries and replay](docs/spikes/native-window-cadence.md).
 
 Release checkpoint38 is frozen at main290 with the verified asset workflows and
