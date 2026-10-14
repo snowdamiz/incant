@@ -1,5 +1,17 @@
 # Implementation status
 
+## Native Play texture refresh — locally integrated
+
+Existing texture content can be reimported while native Play continues, without
+restarting its scripts or simulation. Preparation occurs outside the authoring
+lock; final publication rejects stale revisions, changed sessions and incompatible
+catalogs while retaining the prior live resources. The producer passed scoped
+CPU checks and an actual Metal control that changed red pixels to blue without
+restarting the game. Current main283 composition separately passes 11 texture
+controls and five editor publication controls. Native-window import/Undo/Redo
+and broader asset refresh remain open; this does not establish performance or a
+phase gate. [Scope and evidence](docs/spikes/native-texture-refresh.md).
+
 ## Full-Core script attribution — merged through PR283
 
 A default-off profiler now correlates the whole script tick, its callback sources

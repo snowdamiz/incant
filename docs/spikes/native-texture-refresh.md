@@ -3,7 +3,11 @@
 Implemented on main281 `dfac86cb17e9a1dd71d63207d779b3836e7ad6ae` through
 source010 `af201c5b3848b9f064ea6fcb298a1b8b210fe289`. This slice refreshes
 content for existing texture IDs with unchanged kind, usage, bindings and scene
-topology. It keeps the running VM, native world, target provider and frame history.
+topology. It keeps the running VM, native world, target provider and presentation
+counters. Source review confirms that the replacement GPU scene starts fresh
+motion and resolution history; its first redraw has no previous motion frame.
+The current consumer does not enable temporal color reconstruction. The GPU
+control below did not separately qualify a positive motion-history reset.
 New assets, changed usage/topology and other asset kinds remain unsupported.
 
 The editor observes committed revisions through its read, mutation/history and
@@ -70,6 +74,20 @@ differences; this packet does not claim runtime-wide equality. All 23 curated
 texture/editor paths match composition `eafc1e79845ddb490468bdc630344e041ac08585`.
 Root accepted two focused CPU composition checks; they were not executed in
 this producer receipt. No repeated GPU run is recorded for that composition.
+
+Root subsequently executed both commands on exact composition
+`eafc1e79845ddb490468bdc630344e041ac08585`: five Play texture tests, six native
+texture tests and five editor publication tests passed. They cover real cooked
+texture replacement, stale/foreign authority, incompatible usage/topology,
+late refusal, allocation-free initialized publication, retirement outside locks,
+and publication panic without poisoning authoring locks. The commands took
+46.58 and 59.73 seconds including compilation, not runtime performance timings.
+Both supervisors reaped their children; minimum sampled free storage remained
+above 10.48 GB. Only docs/evidence changed afterward.
+[Current composition receipt and raw logs](evidence/native-texture-main283.json)
+preserves exact commands, source hashes and executable identities separately from
+the original producer packet. Formatting, diff whitespace and full offline
+producer replay also pass. Hosted development checks and merge are pending.
 
 Replay without native execution:
 
