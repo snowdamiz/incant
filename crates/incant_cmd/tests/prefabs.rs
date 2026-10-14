@@ -113,7 +113,8 @@ fn invalid_commands_roll_back_document_crdt_history_revision_and_journal() {
     let ar = a[&node].clone();
     let dir = tempfile::tempdir().unwrap();
     let journal = dir.path().join("journal");
-    f.bus = CommandBus::persistent(&journal, f.bus.project().clone()).unwrap();
+    let initial = f.bus.project().clone();
+    f.bus = CommandBus::persistent(&journal, initial.clone()).unwrap();
     let mut bad = f.bus.project().prefabs[&f.prefab].clone();
     bad.nodes.remove(&node);
     let mut alias = a.clone();
@@ -162,8 +163,17 @@ fn invalid_commands_roll_back_document_crdt_history_revision_and_journal() {
         let before = f.bus.project().clone();
         let crdt = f.bus.export_crdt().unwrap();
         let revision = f.bus.revision();
+        let history = f.bus.history().to_vec();
+        let count = history.len();
+        // Windows enforces the journal lock for reads as well. No ephemeral
+        // project-file review is involved in this ordinary command fixture.
+        drop(f.bus);
         let log = std::fs::read(&journal).unwrap();
-        let count = f.bus.history().len();
+        f.bus = CommandBus::persistent(&journal, initial.clone()).unwrap();
+        assert_eq!(f.bus.project(), &before);
+        assert_eq!(f.bus.export_crdt().unwrap(), crdt);
+        assert_eq!(f.bus.revision(), revision);
+        assert_eq!(f.bus.history(), history);
         assert!(
             f.run(vec![
                 Command::SetMemory {
@@ -178,7 +188,14 @@ fn invalid_commands_roll_back_document_crdt_history_revision_and_journal() {
         assert_eq!(f.bus.export_crdt().unwrap(), crdt);
         assert_eq!(f.bus.revision(), revision);
         assert_eq!(f.bus.history().len(), count);
+        assert_eq!(f.bus.history(), history);
+        drop(f.bus);
         assert_eq!(std::fs::read(&journal).unwrap(), log);
+        f.bus = CommandBus::persistent(&journal, initial.clone()).unwrap();
+        assert_eq!(f.bus.project(), &before);
+        assert_eq!(f.bus.export_crdt().unwrap(), crdt);
+        assert_eq!(f.bus.revision(), revision);
+        assert_eq!(f.bus.history(), history);
     }
 }
 #[test]

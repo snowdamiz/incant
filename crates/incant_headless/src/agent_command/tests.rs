@@ -78,7 +78,7 @@ impl Fixture {
             self.options(limit),
             |id| self.open(id),
             worker(behavior, tokens, calls, None),
-            save,
+            save_derived,
         )
     }
     fn bus(&self) -> CommandBus {
@@ -266,7 +266,7 @@ fn zero_and_exhausted_allowances_refuse_before_constructing_a_provider() {
                 constructed.fetch_add(1, Ordering::SeqCst);
                 panic!("ineligible invocation reached provider setup")
             },
-            save,
+            save_derived,
         )
         .err()
         .unwrap();
@@ -334,7 +334,7 @@ fn journal_cap_is_read_after_accounting_ownership_before_provider_setup() {
             fixture.open(id)
         },
         worker(Behavior::Success, 11, count.clone(), None),
-        save,
+        save_derived,
     )
     .err()
     .unwrap();
@@ -432,7 +432,7 @@ fn provider_setup_failure_has_zero_new_work_and_keeps_previous_charges() {
                 |_| {},
             )
         },
-        save,
+        save_derived,
     )
     .err()
     .unwrap();
@@ -467,7 +467,7 @@ fn panic_or_inconsistent_receipt_retains_the_entire_effective_reservation() {
                 work.budget.used_tokens = 0; // An actual work result cannot refund its measured usage.
                 work
             },
-            save,
+            save_derived,
         )
         .err()
         .unwrap();
@@ -547,7 +547,7 @@ fn existing_ledger_owner_refuses_admission_and_live_provider_keeps_exclusive_own
             options,
             |id| Ledger::open_in(&state, id),
             worker(Behavior::Success, 11, count, Some(inspect)),
-            save,
+            save_derived,
         )
         .unwrap()
     });

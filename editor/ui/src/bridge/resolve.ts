@@ -49,6 +49,7 @@ export function readCapabilities(advertised: readonly string[]): CapabilitySet {
 }
 
 const CAPABILITY_LABELS: Record<Capability, string> = {
+  'project.file': 'Project file operations',
   'entity.rename': 'Rename',
   'entity.delete': 'Delete',
   'asset.import': 'Import assets',

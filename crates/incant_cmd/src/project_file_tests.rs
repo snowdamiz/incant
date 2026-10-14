@@ -61,8 +61,12 @@ pub(super) fn journal_failure(
     bytes: &[u8],
 ) -> std::io::Result<()> {
     let phase = match action {
-        journal::Action::ProjectPrepare { .. } => "prepare",
-        journal::Action::ProjectCommit { .. } => "commit",
+        journal::Action::ProjectPrepare { .. } | journal::Action::CheckpointPrepare { .. } => {
+            "prepare"
+        }
+        journal::Action::ProjectCommit { .. } | journal::Action::CheckpointCommit { .. } => {
+            "commit"
+        }
         _ => return Ok(()),
     };
     let crash = std::env::var("INCANT_PROJECT_PROTOCOL_CRASH").ok();
@@ -118,6 +122,11 @@ fn crash_child() {
 }
 #[test]
 fn pin_undo_redo_preserve_exact_file_and_reopen_history() {
+    if crate::test_isolation::isolated(
+        "project_file_tests::pin_undo_redo_preserve_exact_file_and_reopen_history",
+    ) {
+        return;
+    }
     let dir = tempfile::tempdir().unwrap();
     let root = dir.path();
     let (_, original) = setup(root, "apply");
@@ -161,6 +170,11 @@ fn pin_undo_redo_preserve_exact_file_and_reopen_history() {
 }
 #[test]
 fn stale_revision_bytes_and_same_byte_replacement_refuse_without_file_or_history_effects() {
+    if crate::test_isolation::isolated(
+        "project_file_tests::stale_revision_bytes_and_same_byte_replacement_refuse_without_file_or_history_effects",
+    ) {
+        return;
+    }
     for change in ["revision", "bytes", "identity"] {
         let dir = tempfile::tempdir().unwrap();
         let root = dir.path();
@@ -208,6 +222,11 @@ fn stale_revision_bytes_and_same_byte_replacement_refuse_without_file_or_history
 }
 #[test]
 fn process_restart_at_every_project_boundary_reconciles_apply_undo_redo() {
+    if crate::test_isolation::isolated(
+        "project_file_tests::process_restart_at_every_project_boundary_reconciles_apply_undo_redo",
+    ) {
+        return;
+    }
     for operation in ["apply", "undo", "redo"] {
         for phase in [
             "marker",
@@ -256,6 +275,11 @@ fn process_restart_at_every_project_boundary_reconciles_apply_undo_redo() {
 }
 #[test]
 fn real_partial_write_error_rolls_back_and_ambiguous_durability_blocks_until_reopen() {
+    if crate::test_isolation::isolated(
+        "project_file_tests::real_partial_write_error_rolls_back_and_ambiguous_durability_blocks_until_reopen",
+    ) {
+        return;
+    }
     for operation in ["apply", "undo", "redo"] {
         for phase in ["prepare", "commit", "poison_prepare", "poison_commit"] {
             let dir = tempfile::tempdir().unwrap();
@@ -284,6 +308,11 @@ fn real_partial_write_error_rolls_back_and_ambiguous_durability_blocks_until_reo
 }
 #[test]
 fn absent_document_recovers_but_foreign_nodes_are_never_overwritten() {
+    if crate::test_isolation::isolated(
+        "project_file_tests::absent_document_recovers_but_foreign_nodes_are_never_overwritten",
+    ) {
+        return;
+    }
     for phase in ["displaced", "installed", "commit"] {
         let dir = tempfile::tempdir().unwrap();
         let root = dir.path();
@@ -312,6 +341,11 @@ fn absent_document_recovers_but_foreign_nodes_are_never_overwritten() {
 }
 #[test]
 fn journal_and_marker_corruption_do_not_grant_recovery_authority() {
+    if crate::test_isolation::isolated(
+        "project_file_tests::journal_and_marker_corruption_do_not_grant_recovery_authority",
+    ) {
+        return;
+    }
     for kind in [
         "future",
         "identity",
@@ -373,6 +407,11 @@ fn journal_and_marker_corruption_do_not_grant_recovery_authority() {
 }
 #[test]
 fn journal_limit_and_unavailable_capability_refuse_before_backup() {
+    if crate::test_isolation::isolated(
+        "project_file_tests::journal_limit_and_unavailable_capability_refuse_before_backup",
+    ) {
+        return;
+    }
     let mut memory = CommandBus::new(initial()).unwrap();
     assert!(memory.review_project_file_pin().is_err());
     let dir = tempfile::tempdir().unwrap();
@@ -412,6 +451,11 @@ fn journal_limit_and_unavailable_capability_refuse_before_backup() {
 #[cfg(unix)]
 #[test]
 fn symlink_hardlink_and_journal_alias_refuse_without_touching_targets() {
+    if crate::test_isolation::isolated(
+        "project_file_tests::symlink_hardlink_and_journal_alias_refuse_without_touching_targets",
+    ) {
+        return;
+    }
     use std::os::unix::fs::symlink;
     for mode in [
         "project_symlink",
@@ -444,6 +488,11 @@ fn symlink_hardlink_and_journal_alias_refuse_without_touching_targets() {
 
 #[test]
 fn create_only_backup_failure_never_advances_project_history_or_journal() {
+    if crate::test_isolation::isolated(
+        "project_file_tests::create_only_backup_failure_never_advances_project_history_or_journal",
+    ) {
+        return;
+    }
     let operation_id = "01ARZ3NDEKTSV4RRFFQ69G5FAV";
     for operation in ["apply", "undo", "redo"] {
         let dir = tempfile::tempdir().unwrap();
@@ -472,6 +521,11 @@ fn create_only_backup_failure_never_advances_project_history_or_journal() {
 }
 #[test]
 fn project_transaction_cannot_smuggle_unrelated_edits_or_explicit_repins() {
+    if crate::test_isolation::isolated(
+        "project_file_tests::project_transaction_cannot_smuggle_unrelated_edits_or_explicit_repins",
+    ) {
+        return;
+    }
     let dir = tempfile::tempdir().unwrap();
     setup(dir.path(), "apply");
     let mut bus = CommandBus::open_project_file(path(dir.path())).unwrap();
@@ -515,6 +569,11 @@ fn artifact_inventory(root: &Path) -> Vec<(PathBuf, Vec<u8>)> {
 }
 #[test]
 fn unmatched_prepared_operation_never_retires_a_structurally_valid_foreign_marker() {
+    if crate::test_isolation::isolated(
+        "project_file_tests::unmatched_prepared_operation_never_retires_a_structurally_valid_foreign_marker",
+    ) {
+        return;
+    }
     let dir = tempfile::tempdir().unwrap();
     let root = dir.path();
     setup(root, "apply");
@@ -555,6 +614,11 @@ fn unmatched_prepared_operation_never_retires_a_structurally_valid_foreign_marke
 }
 #[test]
 fn incomplete_initial_journal_is_refused_without_truncation_or_backup() {
+    if crate::test_isolation::isolated(
+        "project_file_tests::incomplete_initial_journal_is_refused_without_truncation_or_backup",
+    ) {
+        return;
+    }
     for partial in [
         b"{".as_slice(),
         b"{\"version\":999",
@@ -575,6 +639,11 @@ fn incomplete_initial_journal_is_refused_without_truncation_or_backup() {
 #[cfg(unix)]
 #[test]
 fn unlink_then_recreate_same_bytes_retires_a_review_without_mutation() {
+    if crate::test_isolation::isolated(
+        "project_file_tests::unlink_then_recreate_same_bytes_retires_a_review_without_mutation",
+    ) {
+        return;
+    }
     let dir = tempfile::tempdir().unwrap();
     let root = dir.path();
     let (_, original) = setup(root, "apply");
@@ -606,13 +675,21 @@ fn assert_abort_bytes(bytes: &[u8]) {
     };
     assert!(matches!(
         prepare.action,
-        journal::Action::ProjectPrepare { .. }
+        journal::Action::ProjectPrepare { .. } | journal::Action::CheckpointPrepare { .. }
     ));
-    assert!(matches!(abort.action, journal::Action::ProjectAbort { .. }));
+    assert!(matches!(
+        abort.action,
+        journal::Action::ProjectAbort { .. } | journal::Action::CheckpointAbort { .. }
+    ));
     assert_eq!(abort.crdt, before.crdt);
 }
 #[test]
 fn same_projection_different_causal_snapshot_cannot_replace_abort_checkpoint() {
+    if crate::test_isolation::isolated(
+        "project_file_tests::same_projection_different_causal_snapshot_cannot_replace_abort_checkpoint",
+    ) {
+        return;
+    }
     let dir = tempfile::tempdir().unwrap();
     let root = dir.path();
     setup(root, "apply");

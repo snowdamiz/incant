@@ -96,13 +96,11 @@ pub fn start(
 
 pub fn open(path: Option<&Path>) -> Result<CommandBus, LoadError> {
     if let Some(path) = path {
-        let project = Project::from_text(&std::fs::read_to_string(path)?)?;
-        Ok(CommandBus::persistent_with_sources(
+        // Host-selected paths only. Recovery holds the historical journal before
+        // attempting a normal document read (the node may be displaced).
+        Ok(CommandBus::open_project_file_with_journal(
+            path,
             path.with_extension("journal.jsonl"),
-            project,
-            path.parent()
-                .filter(|p| !p.as_os_str().is_empty())
-                .unwrap_or(Path::new(".")),
         )?)
     } else {
         let mut project = Project::empty("Incant Surface Spike");
@@ -186,9 +184,9 @@ mod tests {
     fn open_validates_files_and_restores_shared_command_history() {
         let temp = tempfile::tempdir().unwrap();
         let path = temp.path().join("test.incant.json");
-        assert!(matches!(open(Some(&path)), Err(LoadError::Io(_))));
+        assert!(matches!(open(Some(&path)), Err(LoadError::Journal(_))));
         std::fs::write(&path, "{}").unwrap();
-        assert!(matches!(open(Some(&path)), Err(LoadError::Document(_))));
+        assert!(matches!(open(Some(&path)), Err(LoadError::Journal(_))));
         let project = Project::empty("Recovered");
         std::fs::write(&path, project.canonical_text().unwrap()).unwrap();
         let mut bus = open(Some(&path)).unwrap();
@@ -208,5 +206,50 @@ mod tests {
         assert_eq!(recovered.history().len(), 1);
         recovered.undo().unwrap();
         assert!(recovered.project().scenes.is_empty());
+    }
+}
+
+#[cfg(test)]
+mod file_tests {
+    use super::*;
+    use incant_cmd::{Actor, ProjectFileRequest};
+    #[test]
+    fn opened_editor_bus_shares_file_pin_history_and_save_authority() {
+        let dir = tempfile::tempdir().unwrap();
+        let path = dir.path().join("editor.incant.json");
+        let mut p = Project::empty("Editor");
+        p.engine_version = None;
+        let bytes = p.canonical_text().unwrap();
+        std::fs::write(&path, &bytes).unwrap();
+        let mut bus = open(Some(&path)).unwrap();
+        let incant_cmd::ProjectFileResponse::ReviewPin { review } = bus
+            .project_file_request(
+                ProjectFileRequest::ReviewPin {
+                    expected_revision: 0,
+                },
+                Actor::user("editor"),
+            )
+            .unwrap()
+        else {
+            panic!("review")
+        };
+        bus.project_file_request(
+            ProjectFileRequest::ApplyPin {
+                expected_revision: 0,
+                review_id: review.review_id,
+            },
+            Actor::user("editor"),
+        )
+        .unwrap();
+        bus.undo().unwrap();
+        assert_eq!(std::fs::read_to_string(&path).unwrap(), bytes);
+        bus.redo().unwrap();
+        bus.save_project_file(bus.revision(), Actor::user("editor"))
+            .unwrap();
+        drop(bus);
+        let bus = open(Some(&path)).unwrap();
+        assert_eq!(bus.revision(), 3);
+        assert!(path.with_extension("journal.jsonl").exists());
+        assert!(!path.with_extension("journal").exists());
     }
 }

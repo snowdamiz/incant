@@ -76,7 +76,7 @@ fn live_headless_prefab_commands_schema_save_and_journal_reopen() {
                 },
             ],
         ),
-        json!({"method":"project.save"}),
+        json!({"method":"project.save","params":{"expected_revision":2}}),
     ];
     let result = rpc(dir.path(), calls);
     assert!(ok(&result[0]).get("Prefab").is_some());

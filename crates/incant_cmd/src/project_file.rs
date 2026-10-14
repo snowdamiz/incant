@@ -1,4 +1,4 @@
-//! Host-bound exact-current pinning. No application RPC/CLI endpoint is wired.
+//! Host-bound exact-current pinning and checked application bootstrap.
 //! The only file capability is constructed from the host's opened project path.
 use super::*;
 use incant_source::{OpenedProject, ProjectEdit, ProjectSnapshot};
@@ -56,7 +56,16 @@ impl CommandBus {
     /// Trusted host API, not a deserializable path tool. Opens the derived journal
     /// before normal document parsing, including a crash with no document node.
     pub fn open_project_file(path: impl AsRef<Path>) -> Result<Self, CommandError> {
-        let (mut opened, mut file) = OpenedProject::lock(path.as_ref())?;
+        Self::open_project_file_with_journal(path.as_ref(), path.as_ref().with_extension("journal"))
+    }
+    /// Explicit trusted host selection preserves historical `.journal.jsonl` and
+    /// custom journals. Neither argument is accepted from an RPC/project payload.
+    pub fn open_project_file_with_journal(
+        path: impl AsRef<Path>,
+        journal: impl AsRef<Path>,
+    ) -> Result<Self, CommandError> {
+        let (mut opened, mut file) =
+            OpenedProject::lock_with_journal(path.as_ref(), journal.as_ref())?;
         let mut bytes = Vec::new();
         Read::by_ref(&mut file)
             .take((journal::MAX_PROJECT_JOURNAL_BYTES + 1) as u64)
@@ -226,21 +235,32 @@ impl CommandBus {
     ) -> Result<(), CommandError> {
         let current = self.export_crdt()?;
         let desired = next.ok_or(SourceError::Unavailable)?.export()?;
-        let store = self.sources.as_ref().ok_or(SourceError::Unavailable)?;
-        let file = self.project_file.as_mut().ok_or(SourceError::Unavailable)?;
-        let snapshot = file.read_admitted()?;
-        if snapshot.text != edit.before {
-            return Err(SourceError::Conflict.into());
-        }
         let operation = operation_id();
         let prepare = Action::ProjectPrepare {
             operation: operation.clone(),
             edit: edit.clone(),
             change,
         };
+        self.publish_project(prepare, edit, &operation, &current, &desired, false)
+    }
+    pub(super) fn publish_project(
+        &mut self,
+        prepare: Action,
+        edit: &ProjectEdit,
+        operation: &str,
+        current: &[u8],
+        desired: &[u8],
+        checkpoint: bool,
+    ) -> Result<(), CommandError> {
+        let store = self.sources.as_ref().ok_or(SourceError::Unavailable)?;
+        let file = self.project_file.as_mut().ok_or(SourceError::Unavailable)?;
+        let snapshot = file.read_admitted()?;
+        if snapshot.text != edit.before {
+            return Err(SourceError::Conflict.into());
+        }
         let journal = self.journal.as_mut().ok_or(SourceError::Unavailable)?;
-        journal.admit_project(&prepare, &operation, &current, &desired)?;
-        let pending = match file.begin(store, &operation, edit, &snapshot) {
+        journal.admit_project(&prepare, operation, current, desired)?;
+        let pending = match file.begin(store, operation, edit, &snapshot) {
             Ok(pending) => pending,
             Err(e) => {
                 store
@@ -250,46 +270,58 @@ impl CommandBus {
             }
         };
         crash("marker");
-        if let Err(e) = journal.append(prepare, &desired) {
+        if let Err(e) = journal.append(prepare, desired) {
             if journal.poisoned {
                 return Err(SourceError::RecoveryRequired.into());
             }
-            file.finish(store, &operation, edit, false)
+            file.finish(store, operation, edit, false)
                 .map_err(|_| SourceError::RecoveryRequired)?;
             return Err(e);
         }
         crash("prepare");
         let installed = file
-            .displace(store, &operation, edit)
+            .displace(store, operation, edit)
             .and_then(|()| {
                 crash("displaced");
-                file.publish(store, &operation, edit)
+                file.publish(store, operation, edit)
             })
             .map_err(CommandError::from);
         crash("installed");
         let committed = installed.and_then(|()| {
             journal.append(
-                Action::ProjectCommit {
-                    operation: operation.clone(),
+                if checkpoint {
+                    Action::CheckpointCommit {
+                        operation: operation.into(),
+                    }
+                } else {
+                    Action::ProjectCommit {
+                        operation: operation.into(),
+                    }
                 },
-                &desired,
+                desired,
             )
         });
         if let Err(e) = committed {
             if journal.poisoned {
                 return Err(SourceError::RecoveryRequired.into());
             }
-            file.rollback(store, &operation, edit)
+            file.rollback(store, operation, edit)
                 .map_err(|_| SourceError::RecoveryRequired)?;
             journal
                 .append(
-                    Action::ProjectAbort {
-                        operation: operation.clone(),
+                    if checkpoint {
+                        Action::CheckpointAbort {
+                            operation: operation.into(),
+                        }
+                    } else {
+                        Action::ProjectAbort {
+                            operation: operation.into(),
+                        }
                     },
-                    &current,
+                    current,
                 )
                 .map_err(|_| SourceError::RecoveryRequired)?;
-            file.finish(store, &operation, edit, false)
+            file.finish(store, operation, edit, false)
                 .map_err(|_| SourceError::RecoveryRequired)?;
             return Err(e);
         }
@@ -297,7 +329,7 @@ impl CommandBus {
         file.admit_result(&pending, true)?;
         // A durable Commit advances logical state even if cleanup fails. The
         // pending marker then blocks all subsequent edits until reopen recovery.
-        let _ = file.finish(store, &operation, edit, true);
+        let _ = file.finish(store, operation, edit, true);
         crash("finish");
         Ok(())
     }
@@ -314,8 +346,14 @@ impl CommandBus {
                 file.rollback(store, &pending.operation, &pending.edit)
                     .map_err(|_| SourceError::RecoveryRequired)?;
                 self.journal.as_mut().expect("journal").append(
-                    Action::ProjectAbort {
-                        operation: pending.operation.clone(),
+                    if record.as_ref().is_some_and(|r| r.checkpoint) {
+                        Action::CheckpointAbort {
+                            operation: pending.operation.clone(),
+                        }
+                    } else {
+                        Action::ProjectAbort {
+                            operation: pending.operation.clone(),
+                        }
                     },
                     &current,
                 )?;
@@ -334,7 +372,7 @@ impl CommandBus {
     }
 }
 fn check_recovery_join(
-    bus: &CommandBus,
+    _bus: &CommandBus,
     pending: Option<&incant_source::ProjectPending>,
     last: Option<&ProjectRecord>,
 ) -> Result<(), CommandError> {
@@ -350,11 +388,11 @@ fn check_recovery_join(
             }
             Ok(())
         }
-        (Some(p), _) => {
-            // Marker-before-Prepare may only describe the current logical state.
-            if Project::from_text(&p.edit.before)? != bus.project {
-                return Err(SourceError::RecoveryRequired.into());
-            }
+        (Some(_), _) => {
+            // The caller already joined the preimage to the complete journal's
+            // checkpoint set. It can lag logical state after ordinary edits.
+            // Without Prepare, verify the original node and only retire marker;
+            // neither staged bytes nor a claimed future state are installed.
             Ok(())
         }
         _ => Ok(()),
@@ -367,7 +405,7 @@ fn crash(_phase: &str) {
     }
 }
 
-fn operation_id() -> Id {
+pub(super) fn operation_id() -> Id {
     #[cfg(test)]
     if let Ok(id) = std::env::var("INCANT_PROJECT_TEST_OPERATION_ID") {
         return id;

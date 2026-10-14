@@ -119,6 +119,11 @@ fn child(root: &Path, operation: &str) -> Process {
 }
 #[test]
 fn actual_process_death_at_every_journal_boundary_recovers_apply_undo_and_redo() {
+    if crate::test_isolation::isolated(
+        "source_protocol_tests::actual_process_death_at_every_journal_boundary_recovers_apply_undo_and_redo",
+    ) {
+        return;
+    }
     for operation in ["apply", "undo", "redo"] {
         for phase in [
             "marker",
@@ -171,6 +176,11 @@ fn actual_process_death_at_every_journal_boundary_recovers_apply_undo_and_redo()
 }
 #[test]
 fn actual_partial_write_errors_abort_without_document_or_disk_prefix_changes() {
+    if crate::test_isolation::isolated(
+        "source_protocol_tests::actual_partial_write_errors_abort_without_document_or_disk_prefix_changes",
+    ) {
+        return;
+    }
     for operation in ["apply", "undo", "redo"] {
         for phase in ["prepare", "commit"] {
             let dir = tempfile::tempdir().unwrap();
@@ -191,6 +201,11 @@ fn actual_partial_write_errors_abort_without_document_or_disk_prefix_changes() {
 
 #[test]
 fn unresolved_file_effect_requires_its_bound_store_and_preserves_foreign_changes() {
+    if crate::test_isolation::isolated(
+        "source_protocol_tests::unresolved_file_effect_requires_its_bound_store_and_preserves_foreign_changes",
+    ) {
+        return;
+    }
     for foreign in [false, true] {
         let dir = tempfile::tempdir().unwrap();
         setup(dir.path(), "apply");

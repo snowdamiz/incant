@@ -1,4 +1,4 @@
-//! Host-selected project reads only; no file migration, backup or save path.
+//! Standalone preview stays read-only; shared application file schemas carry no path.
 use crate::Result;
 use incant_cmd::{CommandBus, MAX_ENGINE_REVIEW_BYTES};
 use incant_doc::Project;
@@ -10,6 +10,20 @@ use std::{fs::File, io::Read, path::Path};
 #[serde(deny_unknown_fields)]
 struct ReviewRequest {
     expected_revision: u64,
+}
+
+#[derive(Deserialize)]
+#[serde(deny_unknown_fields)]
+pub(super) struct SaveRequest {
+    #[serde(default, deserialize_with = "supplied_revision")]
+    pub expected_revision: Option<u64>,
+}
+
+// Missing means the legacy host-local save request; a supplied null or non-u64 is invalid.
+fn supplied_revision<'de, D: serde::Deserializer<'de>>(
+    deserializer: D,
+) -> std::result::Result<Option<u64>, D::Error> {
+    u64::deserialize(deserializer).map(Some)
 }
 
 fn source(path: &Path) -> Result<String> {
@@ -48,5 +62,6 @@ pub(super) fn schemas() -> std::collections::BTreeMap<String, Value> {
         "EnginePinReview".into(),
         serde_json::json!(schemars::schema_for!(incant_cmd::EnginePinReview)),
     );
+    schemas.extend(incant_cmd::project_file_schemas());
     schemas
 }
