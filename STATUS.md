@@ -1,14 +1,30 @@
 # Implementation status
 
+## Core 10k Mac shipping — cache improvement measured, 2 ms script gate failed
+
+Actual paired fast-mode shipping runs complete the 2,156-tick Core win with
+10,000 bound attachments, matching PCM and sampled stress/sentinel observations.
+The three cached script p95 intervals are 4.400001–4.410000,
+4.830001–4.840000 and 4.560001–4.570000 ms, versus baseline
+5.430001–5.440000, 5.400001–5.410000 and 5.370001–5.380000 ms.
+All three 5% comparison metrics pass; the 2 ms script requirement fails every
+candidate. The original old-emitter 2,400-second compile timeout remains a
+historical failure, not a runnable baseline. Independent final packet review
+is accepted; publication awaits the exact-head PR check. No new build or
+measurement was performed during its audit. QuickJS allocated/used heap peaks
+increase with cached metadata, so no total-memory improvement is claimed. Main260 contains the accepted static/cache implementation; release30 is
+unchanged. No display/GPU/full-phase claim. [Evidence](docs/spikes/mac-core-fast10k.md).
+
 ## Script startup data and immutable metadata caches — joined CPU checks pass
 
-The current main259 composition preserves the three reviewed changes: constant
+PR260 merged the main259 composition after its exact-head fast SUCCESS. It preserves the three reviewed changes: constant
 binding tables, immutable attachment snapshots and immutable bulk-query row IDs.
 Both numerical modes pass 167 CPU cases and strict all-target lint; compiler-free
 native/wasm and dependency checks pass. All 3,885 frozen inputs remain exact and
 six immediate binaries are retained. Final integration review is independently
-accepted; publication awaits the exact-head PR check; the historical Core measurements below do not measure this union. No
-shipping build/runtime speedup or performance gate is claimed.
+accepted. The matched fast10k shipping measurements above apply to executed
+source031a; the earlier original Core reference below is separate. The script
+budget remains failed and no full performance gate is claimed.
 [Current evidence](docs/spikes/script-caches-main259.md).
 
 ## Bulk-query row-label cache — CPU correctness verified
@@ -37,7 +53,7 @@ retirement/reuse, prior snapshot immutability, capability revocation and fresh-V
 restore are covered. No shipping speedup or 10k gate is claimed.
 [Evidence](docs/spikes/script-instance-cache.md).
 
-## Static script binding emission — CPU qualification, cache union pending
+## Static script binding emission — CPU qualification and merged cache union
 
 The trusted emitter now generates borrowed constant property tables and one
 bounded startup conversion. The unchanged catalog validator preserves identity
@@ -48,15 +64,15 @@ consumer-driver dependency-path failure is retained. Final producer review is
 accepted; the joined cache qualification is recorded above. No shipping build/runtime speedup is
 claimed. [Evidence](docs/spikes/script-bindings-static.md).
 
-## Core 10k-script input — native correctness, measurement pending
+## Core 10k-script input — native correctness and scoped measurements
 
 A public-command extension preserves the original Core controller/assets and adds
 9,999 invisible typed-bulk attachments under a second source. Ten helper controls
 and 65 actual retained-engine ticks pass: 28 numeric checks, all 46 original
 entity readbacks and matching logs/PCM. Public undo/redo/reopen and separate
 fast-mode settings-only preparation are retained, including the initial slow
-journal-reopen failure. Fresh fast shipping measurements remain pending; no
-GPU/60 fps or appearance gate is claimed. Current main258 qualification passes
+journal-reopen failure. The fast shipping measurements above now preserve an actual failed 2 ms script
+gate; no GPU/60 fps or appearance gate is claimed. Current main258 qualification passes
 ten Python controls, strict TypeScript and Node bulk/mutation controls against
 the current SDK; the original archive and all external payloads replay unchanged.
 Independent current-main final review is accepted; PR259 merged after its exact-head fast SUCCESS. [Producer evidence](docs/spikes/core-script-stress.md) and [composition](docs/spikes/core-stress-main258.md).
@@ -94,15 +110,15 @@ The Mac CPU measurement runner has independent source acceptance, eight passing
 policy tests and a successful parse of the actual version 2 profiler CLI output.
 It binds shipping codegen, player/data/script identities, this Mac's configuration
 and matched baselines, retaining uncertainty around the 5% comparison threshold.
-That CLI fixture is one entity and three ticks in the CI profile; shipping Core
-Sample/10,000-entity measurements and presentation timing remain open.
+That CLI fixture is one entity and three ticks in the CI profile; the separate
+shipping Core/10k results are recorded above. Presentation timing remains open.
 [Scope and evidence](docs/spikes/mac-cpu-measurements.md).
 
 Checkpoint30 is promoted through PR232: release `71bdd2e7` has the exact tested
 main252 tree `393eb78c`. All 23 required contexts and all eight push workflows
 succeeded; independent review, merge parents, author trailer and post-merge tree
-are verified. Later main253–259 persisted-session/mobile/haptics/profiler/workload work remains outside
-that tested release. No checkpoint is currently active; main259 is the latest
+are verified. Later main253–260 persisted-session/mobile/haptics/profiler/workload/cache work remains outside
+that tested release. No checkpoint is currently active; main260 is the latest
 integration. This promotion does not approve a phase or distribution gate.
 [Portable evidence](docs/spikes/evidence/release-checkpoint-30/manifest.json).
 
