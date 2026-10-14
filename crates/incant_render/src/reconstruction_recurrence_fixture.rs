@@ -364,6 +364,20 @@ fn recurrence_camera_only_pose_keeps_every_other_node_fixed() {
     assert_eq!(input.nodes[mover].world, mover_world(64));
     assert_ne!(input.nodes[mover].world, mover_world(1));
 }
+#[test]
+fn recurrence_input_bandwidth_override_is_scoped_and_thread_local() {
+    use crate::temporal::jitter::{DiagnosticInternalFootprint, diagnostic_lod_bias};
+    assert_eq!(diagnostic_lod_bias(-1.), -1.);
+    {
+        let _guard = DiagnosticInternalFootprint::begin();
+        assert_eq!(diagnostic_lod_bias(-1.), 0.);
+        assert_eq!(diagnostic_lod_bias(0.), 0.);
+        std::thread::spawn(|| assert_eq!(diagnostic_lod_bias(-1.), -1.))
+            .join()
+            .unwrap();
+    }
+    assert_eq!(diagnostic_lod_bias(-1.), -1.);
+}
 fn capture_planes(reference_state: bool) -> [Plane; 8] {
     let mut offset = 0;
     std::array::from_fn(|i| {
@@ -487,6 +501,13 @@ fn actual_scene_recurrence_comparison() {
     assert_eq!(renderer.adapter.get_info().backend, wgpu::Backend::Metal);
     let external =
         std::env::var("INCANT_RECURRENCE_ABLATION").as_deref() == Ok("external-reference");
+    let internal_footprint = match std::env::var("INCANT_REFERENCE_FOOTPRINT").as_deref() {
+        Err(std::env::VarError::NotPresent) | Ok("output") => false,
+        Ok("internal") if external => true,
+        other => panic!("unknown diagnostic footprint: {other:?}"),
+    };
+    let _footprint_guard =
+        internal_footprint.then(crate::temporal::jitter::DiagnosticInternalFootprint::begin);
     let camera_only = match std::env::var("INCANT_REFERENCE_MOTION").as_deref() {
         Err(std::env::VarError::NotPresent) | Ok("combined") => false,
         Ok("camera-only") if external => true,
@@ -829,6 +850,11 @@ fn actual_scene_recurrence_comparison() {
     });
     report["nonzero_lock_samples"] = json!(nonzero_lock_samples);
     report["reference_state_captured"] = json!(reference_state);
+    report["diagnostic_material_footprint"] = json!(if internal_footprint {
+        "internal raster footprint; zero texture LOD bias, test-only input bandwidth control"
+    } else {
+        "output-grid texture footprint; ordinary negative bias"
+    });
     report["diagnostic_motion"] = json!(if camera_only {
         "camera pans after frame 14; mover and every other node held at frame 1"
     } else {

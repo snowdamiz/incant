@@ -56,6 +56,32 @@ pub(crate) fn phase_count(_upscaled: bool) -> u32 {
 #[cfg(test)]
 thread_local! {
     static DIAGNOSTIC_HALTON_32: std::cell::Cell<bool> = const { std::cell::Cell::new(false) };
+    static DIAGNOSTIC_INTERNAL_FOOTPRINT: std::cell::Cell<bool> = const { std::cell::Cell::new(false) };
+}
+/// Test-only input bandwidth control. Both material color and MASK motion
+/// coverage must use the same footprint. This is not a shipping quality setting.
+#[cfg(test)]
+pub(crate) fn diagnostic_lod_bias(ordinary: f32) -> f32 {
+    if DIAGNOSTIC_INTERNAL_FOOTPRINT.get() {
+        0.
+    } else {
+        ordinary
+    }
+}
+#[cfg(test)]
+pub(crate) struct DiagnosticInternalFootprint(std::marker::PhantomData<std::rc::Rc<()>>);
+#[cfg(test)]
+impl DiagnosticInternalFootprint {
+    pub(crate) fn begin() -> Self {
+        assert!(!DIAGNOSTIC_INTERNAL_FOOTPRINT.replace(true));
+        Self(std::marker::PhantomData)
+    }
+}
+#[cfg(test)]
+impl Drop for DiagnosticInternalFootprint {
+    fn drop(&mut self) {
+        DIAGNOSTIC_INTERNAL_FOOTPRINT.set(false);
+    }
 }
 #[cfg(test)]
 pub(crate) struct DiagnosticHalton32;

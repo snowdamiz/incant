@@ -164,3 +164,35 @@ matched raw identities, observations and inspection. The output-grid texture
 LOD bias admits frequencies above the internal grid's Nyquist limit; the next
 input-bandwidth control will isolate that deliberate undersampling from history
 rejection, without treating a blurrier input as proof of better reconstruction.
+
+## Input-bandwidth control
+
+010 repeats the camera-only sequence with a test-only texture LOD bias of zero,
+so material color and MASK motion coverage both use the internal pixel footprint.
+Production keeps its existing output-footprint bias. The thread-local override
+has a non-Send scoped guard; controls check restoration and other-thread isolation.
+No external shader, temporal setting, exposure or geometry changes. All 256 raw
+motion/depth planes match 009 byte for byte.
+
+The source freeze is
+`cfba9b272df7773efd9aa18643f2de85b3a84d50cc8f0dc660419fb873d6bce6`;
+the executable is
+`d2966827e31c6eb0b3f5532352cbf030c7b02a5989bbb49ffab532324b39f11c`.
+Build, four CPU controls, strict lint and the 128-frame Metal run pass. The scene
+retains 256 submissions, 128 maps, 18 PNGs and 1,471,938,560 raw bytes. All owned
+processes are terminal and reaped. The bounded state analysis also completed.
+
+At frames 15, 19, 23, 27 and 31, the sampled line region's shading-change mean
+falls from 0.55–0.72 to zero. History count builds steadily and reaches 24 by
+frame 27. Root inspected camera-only frame 24: broad line-chart moire is greatly
+reduced, while the chart loses unresolved stripe detail and the thin diagonals
+remain broken. This isolates input aliasing as a cause of repeated shading
+rejection in this region. It does not establish a universal texture policy or
+prove that filtering away detail improves reconstruction.
+
+`reconstruction-reference-gpu-010/bandwidth-comparison.json` binds the source,
+binary, reports, sampled observations, matched motion/depth and visual review.
+This is a partial diagnostic result on the private comparison branch. No
+production change, complete visual acceptance, shipping performance result or
+phase-gate acceptance is claimed. Geometry coverage and stable detail recovery
+remain unresolved.
