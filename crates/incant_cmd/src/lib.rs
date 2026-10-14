@@ -1,7 +1,11 @@
 //! The only mutable owner of an editor document. GUI, scripts and AI share commands.
 mod engine_version;
+mod project_checkpoint;
 mod project_file;
 pub use engine_version::{EnginePinReview, EngineReviewError, MAX_ENGINE_REVIEW_BYTES};
+pub use project_checkpoint::{
+    ProjectFileRequest, ProjectFileResponse, ProjectSaveReceipt, project_file_schemas,
+};
 mod journal;
 mod localization;
 mod prefab;
@@ -817,3 +821,6 @@ mod source_protocol_tests;
 
 #[cfg(test)]
 mod project_file_tests;
+
+#[cfg(test)]
+mod project_checkpoint_tests;

@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "The application shares this closed request with RPC and native IPC. No path,\ncandidate text, backup, command or actor can be supplied through this boundary.",
+  "oneOf": [
+    {
+      "additionalProperties": false,
+      "properties": {
+        "expected_revision": {
+          "format": "uint64",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "operation": {
+          "const": "review_pin",
+          "type": "string"
+        }
+      },
+      "required": [
+        "operation",
+        "expected_revision"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": false,
+      "properties": {
+        "expected_revision": {
+          "format": "uint64",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "operation": {
+          "const": "apply_pin",
+          "type": "string"
+        },
+        "review_id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "operation",
+        "expected_revision",
+        "review_id"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": false,
+      "properties": {
+        "expected_revision": {
+          "format": "uint64",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "operation": {
+          "const": "save",
+          "type": "string"
+        }
+      },
+      "required": [
+        "operation",
+        "expected_revision"
+      ],
+      "type": "object"
+    }
+  ],
+  "title": "ProjectFileRequest"
+}

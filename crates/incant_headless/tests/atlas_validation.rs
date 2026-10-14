@@ -54,8 +54,7 @@ fn cli_reports_human_import_errors_and_structured_source_free_sprite_diagnostics
     let texture = imported["asset"]["id"].as_str().unwrap();
     let path = root.join("game.incant.json");
     let journal = path.with_extension("journal.jsonl");
-    let document = Project::from_text(&fs::read_to_string(&path).unwrap()).unwrap();
-    let mut bus = CommandBus::persistent(&journal, document).unwrap();
+    let mut bus = CommandBus::open_project_file_with_journal(&path, &journal).unwrap();
     let mut scene = Scene::new("Sprites");
     let sid = scene.id.clone();
     let mut sprite = Entity::new("Stable frame");
@@ -76,7 +75,8 @@ fn cli_reports_human_import_errors_and_structured_source_free_sprite_diagnostics
         None,
     )
     .unwrap();
-    fs::write(&path, bus.project().canonical_text().unwrap()).unwrap();
+    bus.save_project_file(bus.revision(), Actor::user("cli-test"))
+        .unwrap();
     drop(bus);
     let before = fs::read(&path).unwrap();
     let before_journal = fs::read(&journal).unwrap();
@@ -110,7 +110,7 @@ fn cli_reports_human_import_errors_and_structured_source_free_sprite_diagnostics
     let document = Project::from_text(&fs::read_to_string(&path).unwrap()).unwrap();
     let mut bad_sprite = document.scenes[&sid].entities[&eid].components["SpriteRenderer"].clone();
     bad_sprite["region"] = json!({"frame":"00000000000000000000000003"});
-    let mut bus = CommandBus::persistent(&journal, document).unwrap();
+    let mut bus = CommandBus::open_project_file_with_journal(&path, &journal).unwrap();
     bus.execute(
         vec![Edit::SetComponent {
             scene_id: sid,
@@ -123,7 +123,8 @@ fn cli_reports_human_import_errors_and_structured_source_free_sprite_diagnostics
         None,
     )
     .unwrap();
-    fs::write(&path, bus.project().canonical_text().unwrap()).unwrap();
+    bus.save_project_file(bus.revision(), Actor::user("cli-test"))
+        .unwrap();
     drop(bus);
     let failed = cli(root, &["validate", "game.incant.json"]);
     assert!(!failed.status.success());

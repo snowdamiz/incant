@@ -1,5 +1,5 @@
 //! Translation exchange keeps file IO in the CLI and project edits in incant_cmd.
-use crate::{Result, print, read_project, save};
+use crate::{Result, print, read_project};
 use incant_cmd::{Actor, CommandBus, PreparedTranslations};
 use std::{
     fs,
@@ -36,16 +36,12 @@ pub(super) fn import(project: &Path, input: &Path) -> Result<()> {
         return Err("XLIFF exceeds 32 MiB".into());
     }
     let document = String::from_utf8(bytes)?;
-    let mut bus = CommandBus::persistent_with_sources(
+    let mut bus = CommandBus::open_project_file_with_journal(
+        project,
         project.with_extension("journal.jsonl"),
-        read_project(project)?,
-        project
-            .parent()
-            .filter(|p| !p.as_os_str().is_empty())
-            .unwrap_or(Path::new(".")),
     )?;
     let prepared = PreparedTranslations::prepare(&bus, &document)?;
     let result = prepared.commit(&mut bus, Actor::import("xliff"))?;
-    save(project, &bus.project().canonical_text()?)?;
+    bus.save_project_file(bus.revision(), Actor::user("cli"))?;
     print(serde_json::to_value(result)?)
 }

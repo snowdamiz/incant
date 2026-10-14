@@ -21,6 +21,21 @@ _export(exports, {
         return snapshotFromEngine;
     }
 });
+const fileId = (value)=>typeof value === 'string' && /^[0-7][0-9A-HJKMNP-TV-Z]{25}$/.test(value);
+const fileHash = (value)=>typeof value === 'string' && /^[0-9a-f]{64}$/.test(value);
+function projectFileResponse(raw, operation, revision) {
+    if (!record(raw) || raw.operation !== operation) return;
+    if (operation === 'review_pin') {
+        const r = raw.review;
+        if (!record(r) || !fileId(r.review_id) || r.expected_revision !== revision || !fileHash(r.source_sha256) || !fileHash(r.candidate_sha256) || typeof r.candidate_text !== 'string' || new TextEncoder().encode(r.candidate_text).length > 32 * 1024 * 1024 || !record(r.command) || r.command.op !== 'set_engine_version' || typeof r.command.requirement !== 'string' || !/^=[0-9]+\.[0-9]+\.[0-9]+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?$/.test(r.command.requirement)) return;
+    } else if (operation === 'apply_pin') {
+        if (!fileId(raw.transaction_id) || raw.revision !== revision + 1) return;
+    } else if (operation === 'save') {
+        const r = raw.receipt;
+        if (!record(r) || r.revision !== revision || typeof r.changed !== 'boolean' || !fileHash(r.source_sha256) || !fileHash(r.candidate_sha256)) return;
+    } else return;
+    return raw;
+}
 function isReady(read) {
     return read.status === undefined || read.status === "ready";
 }
@@ -777,10 +792,15 @@ class NativeBridge {
         "window.close"
     ];
     get capabilities() {
-        return this.read && projectAgentBudget(this.read).status === 'ready' ? [
+        return [
             ...this.nativeCapabilities,
-            'agent.budget.set'
-        ] : this.nativeCapabilities;
+            ...this.read && projectAgentBudget(this.read).status === 'ready' ? [
+                'agent.budget.set'
+            ] : [],
+            ...this.read?.project_file?.available === true ? [
+                'project.file'
+            ] : []
+        ];
     }
     label = "Native engine";
     isFixture = false;
@@ -1635,7 +1655,47 @@ class NativeBridge {
             }
         }
     }
+    async requestProjectFile(request) {
+        if (!this.read || this.pending) return failure('Wait for the current engine operation.');
+        if (this.read.project_file?.available !== true) return failure('Open a saved project to use file operations.');
+        const keys = request.type === 'project.pin.apply' ? [
+            'type',
+            'reviewId'
+        ] : [
+            'type'
+        ];
+        if (Object.keys(request).some((key)=>!keys.includes(key)) || request.type === 'project.pin.apply' && !fileId(request.reviewId)) return failure('Invalid project file request.');
+        const previous = this.read;
+        const operation = request.type === 'project.pin.review' ? 'review_pin' : request.type === 'project.pin.apply' ? 'apply_pin' : 'save';
+        this.pending = true;
+        ++this.refreshId;
+        try {
+            const result = await this.invoke('engine_project_file', {
+                request: {
+                    operation,
+                    expected_revision: previous.revision,
+                    ...request.type === 'project.pin.apply' ? {
+                        review_id: request.reviewId
+                    } : {}
+                }
+            });
+            const response = projectFileResponse(result.response, operation, previous.revision);
+            const read = result.snapshot;
+            if (!response || !isReady(read) || !count(read.revision) || read.project.id !== previous.project.id || read.revision < previous.revision + (operation === 'apply_pin' ? 1 : 0)) throw 'Invalid project file response.';
+            this.publish(read);
+            return {
+                ok: true,
+                projectFile: freeze(response)
+            };
+        } catch (error) {
+            await this.start();
+            return failure(error);
+        } finally{
+            this.pending = false;
+        }
+    }
     async request(request) {
+        if (request.type === 'project.pin.review' || request.type === 'project.pin.apply' || request.type === 'project.save') return this.requestProjectFile(request);
         if (request.type === 'agent.send' || request.type === 'agent.cancel' || request.type === 'agent.approve') return this.requestAgent(request);
         if (request.type === 'play.start' || request.type === 'play.pause' || request.type === 'play.resume' || request.type === 'play.step' || request.type === 'play.stop' || request.type === 'play.inspect' || request.type === 'play.input') return this.requestPlay(request);
         if (request.type === "provider.connect" || request.type === "provider.cancel" || request.type === "provider.disconnect" || request.type === "provider.switch") {

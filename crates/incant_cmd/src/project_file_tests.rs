@@ -61,8 +61,12 @@ pub(super) fn journal_failure(
     bytes: &[u8],
 ) -> std::io::Result<()> {
     let phase = match action {
-        journal::Action::ProjectPrepare { .. } => "prepare",
-        journal::Action::ProjectCommit { .. } => "commit",
+        journal::Action::ProjectPrepare { .. } | journal::Action::CheckpointPrepare { .. } => {
+            "prepare"
+        }
+        journal::Action::ProjectCommit { .. } | journal::Action::CheckpointCommit { .. } => {
+            "commit"
+        }
         _ => return Ok(()),
     };
     let crash = std::env::var("INCANT_PROJECT_PROTOCOL_CRASH").ok();
@@ -606,9 +610,12 @@ fn assert_abort_bytes(bytes: &[u8]) {
     };
     assert!(matches!(
         prepare.action,
-        journal::Action::ProjectPrepare { .. }
+        journal::Action::ProjectPrepare { .. } | journal::Action::CheckpointPrepare { .. }
     ));
-    assert!(matches!(abort.action, journal::Action::ProjectAbort { .. }));
+    assert!(matches!(
+        abort.action,
+        journal::Action::ProjectAbort { .. } | journal::Action::CheckpointAbort { .. }
+    ));
     assert_eq!(abort.crdt, before.crdt);
 }
 #[test]

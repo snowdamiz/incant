@@ -1,5 +1,19 @@
 # Implementation status
 
+## Project-file application binding — qualified private main274 producer
+
+One host-opened bus now owns editor/CLI/RPC pin review/apply and version-four
+checkpoint save, preserving command revision/history, causal journal identity,
+legacy/custom journal locations and recovery before project parse. Legacy RPC
+`project.save` accepts omitted revision through the same capability; the new
+closed route requires it. No caller paths or replacement project text are accepted.
+150 scoped Rust tests, 189 bridge tests, strict lint, normal bundle/SDK generation
+and checks pass. All 74 old schemas remain exact; four new schemas and 19 built
+editor assets are retained. Three historical failures are preserved. This branch
+is based on actual main274, not the later main275 profiler union. Intake/hosted
+checks remain pending; no new editor UI, older-format conversion, GPU, performance
+or phase-gate claim. [Source and evidence](docs/spikes/project-file-application.md).
+
 ## Maintained QuickJS profiling — qualified main274 composition
 
 The reviewed producer now composes with main274 without a runtime source seam.
@@ -7,7 +21,7 @@ Thirteen current commands pass: profile off/summary, script/player fixtures in
 both physics modes, strict lint, 21 metric controls, ten probe-lock controls and
 vendor/dependency/static checks. Thirteen current executable copies and the
 unchanged 3,325-record producer packet are retained. Final integration review is
-accepted; scoped publication awaits the exact-head hosted fast check. Reports distinguish maintained allocation counters from
+accepted; PR275 merged after exact-head hosted fast SUCCESS. Reports distinguish maintained allocation counters from
 explicit detailed scans and refuse mismatched instrumentation comparisons.
 No shipping speedup, continuous heap peak, 2ms gate or phase claim is made.
 [Current composition and limits](docs/spikes/quickjs-profile-main274.md).
@@ -25,7 +39,7 @@ The original hosted Windows failure, local cache failure and test
 lint failure remain retained. Final independent packet review is accepted;
 PR274 merged after its exact-head hosted fast SUCCESS.
 No CLI/RPC/editor route or older-format conversion is exposed; checkpoint33
-remains failed and frozen while its other workflows finish.
+is terminal and failed; checkpoint34 now qualifies reviewed main275.
 [Current composition and evidence](docs/spikes/project-pin-main273.md).
 
 ## QuickJS allocation getter — diagnostic-only main272 intake

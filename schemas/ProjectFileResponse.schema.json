@@ -1,0 +1,1629 @@
+{
+  "$defs": {
+    "ActionGesture": {
+      "enum": [
+        "tap",
+        "long_press",
+        "swipe"
+      ],
+      "type": "string"
+    },
+    "AgentBudgetSettings": {
+      "additionalProperties": false,
+      "description": "User-authored token allowance for this project. Consumption is stored outside\nthe project; zero disables new agent turns.",
+      "properties": {
+        "max_tokens": {
+          "format": "uint64",
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "max_tokens"
+      ],
+      "type": "object"
+    },
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "import_settings": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AssetImportSettings"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "kind": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "sha256": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "path",
+        "kind",
+        "sha256"
+      ],
+      "type": "object"
+    },
+    "AssetImportSettings": {
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "const": "texture",
+              "type": "string"
+            },
+            "usage": {
+              "$ref": "#/$defs/TextureUsage"
+            }
+          },
+          "required": [
+            "type",
+            "usage"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "Command": {
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "nodes": {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "description": "Exact source entity -> fresh prototype node identity map.",
+              "type": "object"
+            },
+            "op": {
+              "const": "create_prefab",
+              "type": "string"
+            },
+            "prefab_id": {
+              "type": "string"
+            },
+            "root_entity_id": {
+              "type": "string"
+            },
+            "scene_id": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "op",
+            "scene_id",
+            "root_entity_id",
+            "prefab_id",
+            "name",
+            "nodes"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "entities": {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "description": "Exact prototype node -> fresh instance entity identity map.",
+              "type": "object"
+            },
+            "op": {
+              "const": "instantiate_prefab",
+              "type": "string"
+            },
+            "parent": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "scene_id": {
+              "type": "string"
+            },
+            "source": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "op",
+            "source",
+            "scene_id",
+            "entities"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "op": {
+              "const": "update_prefab",
+              "type": "string"
+            },
+            "prefab": {
+              "$ref": "#/$defs/Prefab"
+            }
+          },
+          "required": [
+            "op",
+            "prefab"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "component": {
+              "type": "string"
+            },
+            "entity_id": {
+              "type": "string"
+            },
+            "op": {
+              "const": "revert_prefab_component",
+              "type": "string"
+            },
+            "scene_id": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "op",
+            "scene_id",
+            "entity_id",
+            "component"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "op": {
+              "const": "detach_prefab",
+              "type": "string"
+            },
+            "root_entity_id": {
+              "type": "string"
+            },
+            "scene_id": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "op",
+            "scene_id",
+            "root_entity_id"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "op": {
+              "const": "delete_prefab_instance",
+              "type": "string"
+            },
+            "root_entity_id": {
+              "type": "string"
+            },
+            "scene_id": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "op",
+            "scene_id",
+            "root_entity_id"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "op": {
+              "const": "delete_prefab",
+              "type": "string"
+            },
+            "prefab_id": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "op",
+            "prefab_id"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "description": "Explicitly declare a compatible engine range. Loading never adds this field.",
+          "properties": {
+            "op": {
+              "const": "set_engine_version",
+              "type": "string"
+            },
+            "requirement": {
+              "$ref": "#/$defs/EngineRequirement"
+            }
+          },
+          "required": [
+            "op",
+            "requirement"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "op": {
+              "const": "create_scene",
+              "type": "string"
+            },
+            "scene": {
+              "$ref": "#/$defs/Scene"
+            }
+          },
+          "required": [
+            "op",
+            "scene"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "op": {
+              "const": "set_scene_program",
+              "type": "string"
+            },
+            "program": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/SceneProgram"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "scene_id": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "op",
+            "scene_id"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "op": {
+              "const": "delete_scene",
+              "type": "string"
+            },
+            "scene_id": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "op",
+            "scene_id"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "entity": {
+              "$ref": "#/$defs/Entity"
+            },
+            "op": {
+              "const": "create_entity",
+              "type": "string"
+            },
+            "scene_id": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "op",
+            "scene_id",
+            "entity"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "entity_id": {
+              "type": "string"
+            },
+            "op": {
+              "const": "delete_entity",
+              "type": "string"
+            },
+            "scene_id": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "op",
+            "scene_id",
+            "entity_id"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "entity_id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "op": {
+              "const": "rename_entity",
+              "type": "string"
+            },
+            "scene_id": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "op",
+            "scene_id",
+            "entity_id",
+            "name"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "entity_id": {
+              "type": "string"
+            },
+            "op": {
+              "const": "reparent_entity",
+              "type": "string"
+            },
+            "parent": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "scene_id": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "op",
+            "scene_id",
+            "entity_id"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "component": {
+              "type": "string"
+            },
+            "entity_id": {
+              "type": "string"
+            },
+            "op": {
+              "const": "set_component",
+              "type": "string"
+            },
+            "scene_id": {
+              "type": "string"
+            },
+            "value": true
+          },
+          "required": [
+            "op",
+            "scene_id",
+            "entity_id",
+            "component",
+            "value"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "component": {
+              "type": "string"
+            },
+            "entity_id": {
+              "type": "string"
+            },
+            "op": {
+              "const": "remove_component",
+              "type": "string"
+            },
+            "scene_id": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "op",
+            "scene_id",
+            "entity_id",
+            "component"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "description": "Register or update an imported asset without changing its stable identity.",
+          "properties": {
+            "asset": {
+              "$ref": "#/$defs/Asset"
+            },
+            "op": {
+              "const": "upsert_asset",
+              "type": "string"
+            }
+          },
+          "required": [
+            "op",
+            "asset"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "asset_id": {
+              "type": "string"
+            },
+            "op": {
+              "const": "remove_asset",
+              "type": "string"
+            }
+          },
+          "required": [
+            "op",
+            "asset_id"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "description": "Register or update script metadata; source files are not read or written.",
+          "properties": {
+            "op": {
+              "const": "upsert_script",
+              "type": "string"
+            },
+            "script": {
+              "$ref": "#/$defs/ScriptSource"
+            }
+          },
+          "required": [
+            "op",
+            "script"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "description": "Remove script metadata; the final project must have no dangling references.",
+          "properties": {
+            "op": {
+              "const": "remove_script",
+              "type": "string"
+            },
+            "script_id": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "op",
+            "script_id"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "description": "Write one registered source through the persistent, file-aware transaction.",
+          "properties": {
+            "expected_source": {
+              "$ref": "#/$defs/SourceVersion"
+            },
+            "op": {
+              "const": "write_script",
+              "type": "string"
+            },
+            "script_id": {
+              "type": "string"
+            },
+            "source": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "op",
+            "script_id",
+            "expected_source",
+            "source"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "op": {
+              "const": "set_memory",
+              "type": "string"
+            },
+            "section": {
+              "type": "string"
+            },
+            "text": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "op",
+            "section",
+            "text"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "description": "Replace a typed translation table through the shared undoable transaction.",
+          "properties": {
+            "op": {
+              "const": "upsert_string_table",
+              "type": "string"
+            },
+            "table": {
+              "$ref": "#/$defs/StringTable"
+            }
+          },
+          "required": [
+            "op",
+            "table"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "op": {
+              "const": "remove_string_table",
+              "type": "string"
+            },
+            "table_id": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "op",
+            "table_id"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "op": {
+              "const": "set_locale",
+              "type": "string"
+            },
+            "settings": {
+              "$ref": "#/$defs/LocaleSettings"
+            }
+          },
+          "required": [
+            "op",
+            "settings"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "description": "Replace named gameplay bindings through the same undoable transaction.",
+          "properties": {
+            "actions": {
+              "additionalProperties": {
+                "$ref": "#/$defs/InputAction"
+              },
+              "type": "object"
+            },
+            "op": {
+              "const": "set_input_actions",
+              "type": "string"
+            }
+          },
+          "required": [
+            "op",
+            "actions"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "description": "Select the separately compiled solver family for the next Play/export.\nExisting simulation processes keep their original immutable kernel.",
+          "properties": {
+            "mode": {
+              "$ref": "#/$defs/PhysicsMode"
+            },
+            "op": {
+              "const": "set_physics_mode",
+              "type": "string"
+            }
+          },
+          "required": [
+            "op",
+            "mode"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "description": "Replace the project token allowance. Only user-origin transactions may\nissue this command, including when the allowance would remain unchanged.",
+          "properties": {
+            "op": {
+              "const": "set_agent_budget",
+              "type": "string"
+            },
+            "settings": {
+              "$ref": "#/$defs/AgentBudgetSettings"
+            }
+          },
+          "required": [
+            "op",
+            "settings"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "EngineRequirement": {
+      "description": "SemVer requirement text, preserved exactly rather than silently normalized.\nBuild metadata is not an engine identity: SemVer matching ignores it.",
+      "maxLength": 256,
+      "minLength": 1,
+      "type": "string"
+    },
+    "Entity": {
+      "additionalProperties": false,
+      "properties": {
+        "components": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "parent": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "prefab": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PrefabLink"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "provenance": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Provenance"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "components"
+      ],
+      "type": "object"
+    },
+    "GamepadAxis": {
+      "enum": [
+        "left_x",
+        "left_y",
+        "right_x",
+        "right_y"
+      ],
+      "type": "string"
+    },
+    "GamepadButton": {
+      "enum": [
+        "south",
+        "east",
+        "west",
+        "north",
+        "left_shoulder",
+        "right_shoulder",
+        "left_trigger",
+        "right_trigger",
+        "select",
+        "start",
+        "guide",
+        "left_stick",
+        "right_stick",
+        "dpad_up",
+        "dpad_down",
+        "dpad_left",
+        "dpad_right"
+      ],
+      "type": "string"
+    },
+    "InputAction": {
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "bindings": {
+              "items": {
+                "$ref": "#/$defs/InputBinding"
+              },
+              "maxItems": 16,
+              "type": "array"
+            },
+            "kind": {
+              "const": "button",
+              "type": "string"
+            },
+            "threshold": {
+              "default": 0.5,
+              "format": "double",
+              "type": "number"
+            }
+          },
+          "required": [
+            "kind",
+            "bindings"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "bindings": {
+              "items": {
+                "$ref": "#/$defs/InputBinding"
+              },
+              "maxItems": 16,
+              "type": "array"
+            },
+            "dead_zone": {
+              "default": 0.15,
+              "format": "double",
+              "type": "number"
+            },
+            "kind": {
+              "const": "axis1",
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind",
+            "bindings"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "bindings": {
+              "items": {
+                "$ref": "#/$defs/InputBinding"
+              },
+              "maxItems": 16,
+              "type": "array"
+            },
+            "dead_zone": {
+              "default": 0.15,
+              "format": "double",
+              "type": "number"
+            },
+            "kind": {
+              "const": "axis2",
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind",
+            "bindings"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "InputBinding": {
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "code": {
+              "$ref": "#/$defs/KeyCode"
+            },
+            "scale": {
+              "default": [
+                1.0,
+                0.0
+              ],
+              "items": {
+                "format": "double",
+                "type": "number"
+              },
+              "maxItems": 2,
+              "minItems": 2,
+              "type": "array"
+            },
+            "type": {
+              "const": "key",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "code"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "button": {
+              "$ref": "#/$defs/MouseButton"
+            },
+            "scale": {
+              "default": [
+                1.0,
+                0.0
+              ],
+              "items": {
+                "format": "double",
+                "type": "number"
+              },
+              "maxItems": 2,
+              "minItems": 2,
+              "type": "array"
+            },
+            "type": {
+              "const": "mouse_button",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "button"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "button": {
+              "$ref": "#/$defs/GamepadButton"
+            },
+            "id": {
+              "format": "uint32",
+              "minimum": 0,
+              "type": "integer"
+            },
+            "scale": {
+              "default": [
+                1.0,
+                0.0
+              ],
+              "items": {
+                "format": "double",
+                "type": "number"
+              },
+              "maxItems": 2,
+              "minItems": 2,
+              "type": "array"
+            },
+            "type": {
+              "const": "gamepad_button",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "id",
+            "button"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "axis": {
+              "$ref": "#/$defs/GamepadAxis"
+            },
+            "id": {
+              "format": "uint32",
+              "minimum": 0,
+              "type": "integer"
+            },
+            "scale": {
+              "default": [
+                1.0,
+                0.0
+              ],
+              "items": {
+                "format": "double",
+                "type": "number"
+              },
+              "maxItems": 2,
+              "minItems": 2,
+              "type": "array"
+            },
+            "type": {
+              "const": "gamepad_axis",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "id",
+            "axis"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "format": "uint32",
+              "minimum": 0,
+              "type": "integer"
+            },
+            "invert_y": {
+              "default": false,
+              "type": "boolean"
+            },
+            "stick": {
+              "$ref": "#/$defs/Stick"
+            },
+            "type": {
+              "const": "gamepad_stick",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "id",
+            "stick"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "gesture": {
+              "$ref": "#/$defs/ActionGesture"
+            },
+            "scale": {
+              "default": [
+                1.0,
+                0.0
+              ],
+              "items": {
+                "format": "double",
+                "type": "number"
+              },
+              "maxItems": 2,
+              "minItems": 2,
+              "type": "array"
+            },
+            "type": {
+              "const": "gesture",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "gesture"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "KeyCode": {
+      "description": "Physical key positions. Text entry and IME composition are separate concerns.",
+      "enum": [
+        "KeyA",
+        "KeyB",
+        "KeyC",
+        "KeyD",
+        "KeyE",
+        "KeyF",
+        "KeyG",
+        "KeyH",
+        "KeyI",
+        "KeyJ",
+        "KeyK",
+        "KeyL",
+        "KeyM",
+        "KeyN",
+        "KeyO",
+        "KeyP",
+        "KeyQ",
+        "KeyR",
+        "KeyS",
+        "KeyT",
+        "KeyU",
+        "KeyV",
+        "KeyW",
+        "KeyX",
+        "KeyY",
+        "KeyZ",
+        "Digit0",
+        "Digit1",
+        "Digit2",
+        "Digit3",
+        "Digit4",
+        "Digit5",
+        "Digit6",
+        "Digit7",
+        "Digit8",
+        "Digit9",
+        "ArrowUp",
+        "ArrowDown",
+        "ArrowLeft",
+        "ArrowRight",
+        "Space",
+        "Enter",
+        "Escape",
+        "Tab",
+        "Backspace",
+        "Delete",
+        "Insert",
+        "Home",
+        "End",
+        "PageUp",
+        "PageDown",
+        "ShiftLeft",
+        "ShiftRight",
+        "ControlLeft",
+        "ControlRight",
+        "AltLeft",
+        "AltRight",
+        "MetaLeft",
+        "MetaRight",
+        "CapsLock",
+        "NumLock",
+        "ScrollLock",
+        "Pause",
+        "PrintScreen",
+        "ContextMenu",
+        "Backquote",
+        "Minus",
+        "Equal",
+        "BracketLeft",
+        "BracketRight",
+        "Backslash",
+        "Semicolon",
+        "Quote",
+        "Comma",
+        "Period",
+        "Slash",
+        "Numpad0",
+        "Numpad1",
+        "Numpad2",
+        "Numpad3",
+        "Numpad4",
+        "Numpad5",
+        "Numpad6",
+        "Numpad7",
+        "Numpad8",
+        "Numpad9",
+        "NumpadAdd",
+        "NumpadSubtract",
+        "NumpadMultiply",
+        "NumpadDivide",
+        "NumpadDecimal",
+        "NumpadEnter",
+        "F1",
+        "F2",
+        "F3",
+        "F4",
+        "F5",
+        "F6",
+        "F7",
+        "F8",
+        "F9",
+        "F10",
+        "F11",
+        "F12"
+      ],
+      "type": "string"
+    },
+    "LocaleSettings": {
+      "additionalProperties": false,
+      "properties": {
+        "fallbacks": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "locale": {
+          "type": "string"
+        },
+        "pseudo": {
+          "default": false,
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "locale"
+      ],
+      "type": "object"
+    },
+    "MouseButton": {
+      "enum": [
+        "left",
+        "right",
+        "middle",
+        "back",
+        "forward"
+      ],
+      "type": "string"
+    },
+    "Origin": {
+      "enum": [
+        "user",
+        "agent",
+        "script",
+        "import"
+      ],
+      "type": "string"
+    },
+    "PhysicsMode": {
+      "description": "Authoring choice for a separately built simulation process. Fast mode does\nnot promise bit-identical results across hardware or solver variants.",
+      "enum": [
+        "fast",
+        "deterministic"
+      ],
+      "type": "string"
+    },
+    "Prefab": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "nodes": {
+          "additionalProperties": {
+            "$ref": "#/$defs/PrefabNode"
+          },
+          "type": "object"
+        },
+        "provenance": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Provenance"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "root": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "root",
+        "nodes"
+      ],
+      "type": "object"
+    },
+    "PrefabLink": {
+      "additionalProperties": false,
+      "properties": {
+        "node": {
+          "type": "string"
+        },
+        "overrides": {
+          "description": "Whole-component overrides. A listed but absent component is removed.",
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 64,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "root": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "source",
+        "root",
+        "node"
+      ],
+      "type": "object"
+    },
+    "PrefabNode": {
+      "additionalProperties": false,
+      "properties": {
+        "components": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "name": {
+          "type": "string"
+        },
+        "parent": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "components"
+      ],
+      "type": "object"
+    },
+    "ProjectPinReview": {
+      "description": "Returned review data is not a file capability. A bus retains one matching\nreview internally; arbitrary IDs or deserialized contents grant no authority.",
+      "properties": {
+        "candidate_sha256": {
+          "type": "string"
+        },
+        "candidate_text": {
+          "type": "string"
+        },
+        "command": {
+          "$ref": "#/$defs/Command"
+        },
+        "expected_revision": {
+          "format": "uint64",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "review_id": {
+          "type": "string"
+        },
+        "source_sha256": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "review_id",
+        "expected_revision",
+        "source_sha256",
+        "candidate_sha256",
+        "candidate_text",
+        "command"
+      ],
+      "type": "object"
+    },
+    "ProjectSaveReceipt": {
+      "properties": {
+        "candidate_sha256": {
+          "type": "string"
+        },
+        "changed": {
+          "type": "boolean"
+        },
+        "revision": {
+          "format": "uint64",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "source_sha256": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "revision",
+        "changed",
+        "source_sha256",
+        "candidate_sha256"
+      ],
+      "type": "object"
+    },
+    "Provenance": {
+      "additionalProperties": false,
+      "properties": {
+        "actor": {
+          "type": "string"
+        },
+        "conversation_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "model": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "origin": {
+          "$ref": "#/$defs/Origin"
+        },
+        "transaction": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "origin",
+        "actor",
+        "transaction"
+      ],
+      "type": "object"
+    },
+    "Scene": {
+      "additionalProperties": false,
+      "properties": {
+        "entities": {
+          "additionalProperties": {
+            "$ref": "#/$defs/Entity"
+          },
+          "type": "object"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "program": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SceneProgram"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "entities"
+      ],
+      "type": "object"
+    },
+    "SceneProgram": {
+      "description": "One scene-wide native module; absent preserves authored TypeScript behavior.",
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "wasm",
+              "type": "string"
+            },
+            "module": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind",
+            "module"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "ScriptSource": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "path"
+      ],
+      "type": "object"
+    },
+    "SourceVersion": {
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "state": {
+              "const": "missing",
+              "type": "string"
+            }
+          },
+          "required": [
+            "state"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "state": {
+              "const": "present",
+              "type": "string"
+            }
+          },
+          "required": [
+            "state",
+            "sha256"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "Stick": {
+      "enum": [
+        "left",
+        "right"
+      ],
+      "type": "string"
+    },
+    "StringTable": {
+      "additionalProperties": false,
+      "description": "A typed document asset. Message keys remain stable when translations change.",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "messages": {
+          "additionalProperties": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object"
+          },
+          "description": "Stable key -> canonical BCP-47 locale -> complete message pattern.",
+          "type": "object"
+        },
+        "name": {
+          "type": "string"
+        },
+        "source_locale": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "source_locale",
+        "messages"
+      ],
+      "type": "object"
+    },
+    "TextureUsage": {
+      "enum": [
+        "color",
+        "linear",
+        "normal"
+      ],
+      "type": "string"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "properties": {
+        "operation": {
+          "const": "review_pin",
+          "type": "string"
+        },
+        "review": {
+          "$ref": "#/$defs/ProjectPinReview"
+        }
+      },
+      "required": [
+        "operation",
+        "review"
+      ],
+      "type": "object"
+    },
+    {
+      "properties": {
+        "operation": {
+          "const": "apply_pin",
+          "type": "string"
+        },
+        "revision": {
+          "format": "uint64",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "transaction_id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "operation",
+        "transaction_id",
+        "revision"
+      ],
+      "type": "object"
+    },
+    {
+      "properties": {
+        "operation": {
+          "const": "save",
+          "type": "string"
+        },
+        "receipt": {
+          "$ref": "#/$defs/ProjectSaveReceipt"
+        }
+      },
+      "required": [
+        "operation",
+        "receipt"
+      ],
+      "type": "object"
+    }
+  ],
+  "title": "ProjectFileResponse"
+}

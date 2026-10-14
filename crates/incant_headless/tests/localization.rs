@@ -160,11 +160,7 @@ fn xliff_cli_publishes_new_exports_and_imports_through_durable_shared_history() 
     );
     assert_eq!(fs::read(&journal).unwrap(), before);
     assert_eq!(fs::read(&path).unwrap(), project_before);
-    let mut bus = incant_cmd::CommandBus::persistent(
-        &journal,
-        Project::from_text(&fs::read_to_string(&path).unwrap()).unwrap(),
-    )
-    .unwrap();
+    let mut bus = incant_cmd::CommandBus::open_project_file_with_journal(&path, &journal).unwrap();
     assert_eq!(bus.history()[0].actor.origin, incant_doc::Origin::Import);
     bus.undo().unwrap();
     assert_eq!(bus.project(), &p);

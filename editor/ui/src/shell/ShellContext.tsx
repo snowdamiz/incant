@@ -63,9 +63,13 @@ const NO_CAPABILITIES = readCapabilities([]);
 const noopSubscribe = () => () => undefined;
 const nullSnapshot = () => null;
 
-/** Play operations share one capability; the others are their own capability. */
+/** Play and project-file operations each share their host capability. */
 export function capabilityOf(request: HostRequest): Capability {
   switch (request.type) {
+    case 'project.pin.review':
+    case 'project.pin.apply':
+    case 'project.save':
+      return 'project.file';
     case 'play.start':
     case 'play.pause':
     case 'play.resume':
