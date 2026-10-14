@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "source_head": "e266e95059158a39a9e1252ae05cd92015b9c8e3",
+  "review": "source-only independent review; no build, test, window or timing execution",
+  "decision": "accepted scoped host cadence instrumentation",
+  "rows": [
+    {
+      "path": "crates/incant_game_player/src/window/cadence.rs",
+      "sha256": "f9526a37a5065439c3b302cc8c73e4775b30f6b324a7475217333552e5a595b0"
+    },
+    {
+      "path": "crates/incant_game_player/src/window/mod.rs",
+      "sha256": "0f5326118b3d2acf5bc1423b8bce6e297bdcda1443c47990972e4dd482fdb8d9"
+    },
+    {
+      "path": "docs/spikes/native-window-cadence.md",
+      "sha256": "22c4ecd10a0565c7b1ce04b7a7fa05412dc3392fd17b02d67b206d62f39afacf"
+    }
+  ],
+  "findings_closed": [
+    "Resize/ScaleFactorChanged now interrupts every window before UI-specific handling.",
+    "Restart-triggering accepted tick ends after successful pause_haptics; replacement excluded and documented."
+  ],
+  "observations": [
+    "Feature-off omits hooks/module; inactive capture allocates no histogram/timestamp.",
+    "Fixed 10001 counters per histogram, overflow/saturation retained; nearest-rank p95 returns null above supported range.",
+    "Normal and restart successful samples have an explicit haptic endpoint; failures do not publish a sample.",
+    "Focus, suspend, inactive, deferred reserve and startup interrupt interval continuity.",
+    "CPU monotonic host completion is not GPU completion, scanout, FPS or performance-gate evidence."
+  ],
+  "remaining_findings": []
+}

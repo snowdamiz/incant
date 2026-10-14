@@ -1,0 +1,14 @@
+{
+  "source_parent": "e266e95059158a39a9e1252ae05cd92015b9c8e3",
+  "review": "source-only CI successor; no reviewer execution",
+  "decision": "accepted",
+  "path": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/.github/workflows/ci.yml",
+  "sha256": "6d37069e70f44d00cfd3a9b8a6b2c9387d8cc664f5ea27f871bf4ae32da21f4f",
+  "patch_sha256": "868daa0c45f58f80b3eebdfc42f0ef039e493d6f338e61dcca026906deabc7c4",
+  "scope": [
+    "Existing native-window strict all-target Clippy adds profile feature.",
+    "Existing unprofiled native-window all-target tests retained.",
+    "Added native-window,profile lib tests use same non-doc condition, locked CI profile and jobs2.",
+    "No GPU/ignored/window invocation added; no feature default or source behavior change."
+  ]
+}
