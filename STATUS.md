@@ -11,24 +11,25 @@ controls. This fixes the ordinary viewport route; low-resolution reconstruction
 still has separate appearance defects. The entries
 below preserve earlier scoped results and superseded integration snapshots.
 
-## Native presentation observer — partial live evidence
+## Native presentation observer — complete gameplay replay verified
 
-A default-off Mac observer records callbacks from the actual submitted drawable,
-with separate zero, missing, invalid and discarded outcomes. The private shipping
-build passed; an actual replay produced 1,415 positive timestamps before the
-audio notification ended it at step 1,444. The timeout and incomplete run remain
-failed. Integration with the merged audio fix passes 231 focused tests and strict
-lint. A fresh complete native replay, displayed-frame timing and shader-stall
-qualification remain open. [Observer and retained evidence](docs/spikes/native-player-presentations.md).
+The default-off Metal observer and typed audio-overrun fix now complete the full
+2,156-step Core replay on this Mac. All eight gameplay checks and 17 observed
+entities match the offline baseline. The actual drawable sidecar retains 2,149
+positive timestamps, eight zero outcomes and one equal adjacent pair, with no
+missing callbacks. These limitations prevent a complete displayed-frame timing
+verdict. The earlier timeout and 1,444-step failure remain recorded; shader-stall
+qualification and full rendered-game performance remain open.
+[Fresh build and complete replay](docs/spikes/native-presentation-audio.md).
 
 ## Device audio overrun handling — merged main303
 
-An actual Mac game replay exposed a typed audio overrun notification terminating
-the entire session after 1,444 steps. The audio host now counts these notifications
-without replacing the stream or mixer; device failures and lost error reports
-remain fatal. Seventy-four scoped CPU tests and strict native-device/window lint
-pass, including exact nonzero PCM continuation. A fresh full native replay and
-actual output-quality evidence remain outstanding. [Cause and qualification](docs/spikes/device-audio-xrun.md).
+The audio host now counts typed overrun notifications without replacing the
+stream or mixer; device failures and lost error reports remain fatal. Seventy-four
+scoped CPU tests and strict lint pass, including exact nonzero PCM continuation.
+The fresh full native replay above completes with zero reported overruns; it
+verifies successful composition, not a live recovery event or audible output
+quality. [Cause and qualification](docs/spikes/device-audio-xrun.md).
 
 ## Repeated navigation-start cost — diagnostic complete
 
