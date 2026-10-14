@@ -1,7 +1,7 @@
 # Phase 1 review ledger
 
-Updated against main297 and the qualified compatible-animation source
-`cb494bb2b6bb065e7f37569efe11f11adb788f97`. Release checkpoint38 tested the
+Updated against main298 and the qualified animated-editor source
+`d2add5f1c6feb612cab8d758785ef83eb914263c`. Release checkpoint38 tested the
 earlier main290 tree.
 Phase 1 remains open; this ledger records evidence and remaining work, not director
 approval. [PLAN.md](../../PLAN.md#phase-1-core-engine) defines the requirements.
@@ -27,8 +27,9 @@ device execution is deferred; hosted build and release checks remain required.
 - Extend live asset refresh beyond the verified existing-texture and
   [compatible static-model workflows](../spikes/native-static-model-refresh.md).
   Both preserve the running world and scripts on this Mac. Compatible animation
-  keys now have [CPU and numerical Metal qualification](../spikes/animated-model-refresh.md);
-  their actual editor-window workflow remains open. Changed skeleton/geometry,
+  keys now have [CPU and numerical Metal qualification](../spikes/animated-model-refresh.md)
+  and an [actual editor-window workflow](../spikes/native-window-animated-model-workflow.md)
+  covering import, watcher, history, committed refusal and recovery. Changed skeleton/geometry,
   scene/material-binding structure and baked navigation dependencies require
   their own admission rules.
 - Preserve the now-qualified [ordinary-editor 4x antialiasing](../spikes/editor-scene-msaa.md).

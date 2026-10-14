@@ -19,7 +19,7 @@ command, import, watcher, and history handlers. A persistent module counter dete
 a VM reset; the animation clock is also checked against the authored start and
 native tick, then checked again after one normal Step.
 
-| Actual Window001 stage | Authoring revision | Presented frames | Live recipe |
+| Actual Window001 stage | Authoring revision | Accepted renderer frames | Live recipe |
 | --- | ---: | ---: | --- |
 | Manual original import | 3 | 9 | original |
 | Watch compatible keys | 4 | 155 | keys |
@@ -36,6 +36,8 @@ The refusal retained its actual console event, including “animation clip bindi
 or duration table changed”; no native error code was invented. Reopening the real
 journal recovered revision 8 and the compatible recipe. All six owned children
 exited successfully and were reaped.
+Frame counts come from the existing renderer acceptance counter, not native
+display callbacks or a displayed-FPS measurement.
 
 Final source is `d2add5f1c6feb612cab8d758785ef83eb914263c`, joined with main298
 `1ebd80a43c95c49d7416ccef0906e696a1f7fdda`. Source001 CPU compilation failed on an

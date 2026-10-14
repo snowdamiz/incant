@@ -2,8 +2,8 @@
 
 The current phase remains **Phase 1: Core engine**. The
 [Phase 1 review ledger](docs/gates/phase1-review.md) maps each exit requirement to
-its recorded evidence and remaining qualification. The actual native texture and
-compatible static-model workflows are verified on this Mac; release checkpoint38
+its recorded evidence and remaining qualification. The actual native texture,
+compatible static-model and compatible-animation workflows are verified on this Mac; release checkpoint38
 contains the tested main290 tree. Rendering quality and full rendered-game
 performance remain open. The reported jagged editor cube now has explicit 4x
 geometry antialiasing, verified in the actual Mac editor and isolated Metal
@@ -21,8 +21,17 @@ are reused. Sixty-six scoped CPU controls and strict lint pass. An actual Metal
 control verifies changed deformation at the same clock, exact old pixels after
 refusal, fresh motion history and continued playback/script state. Initial test
 fixture failures and their narrow corrections remain recorded. The actual
-animated editor-window workflow and performance remain unverified.
+animated editor-window workflow is now verified below; performance remains open.
 [Contract and retained evidence](docs/spikes/animated-model-refresh.md).
+
+The actual Mac editor also passes import, watched key changes, Undo/Redo,
+committed incompatible-duration refusal, and compatible recovery. All six stages
+retain the paused animation snapshot, world and script module; one normal Step
+advances the same clock and persistent script counter. Journal reopening restores
+revision 8. Thirteen Python controls, 23 Play CPU tests and strict lint pass.
+This is actual app-handler evidence, with the earlier numerical Metal pixels
+remaining separate; no GUI-click, animated pixel, performance or phase-gate
+claim. [Native workflow and retained evidence](docs/spikes/native-window-animated-model-workflow.md).
 
 ## Native shipping-window replay — actual gameplay verified
 
