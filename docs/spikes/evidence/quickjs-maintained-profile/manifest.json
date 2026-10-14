@@ -1,0 +1,47 @@
+{
+  "schema": "incant-quickjs-maintained-profile-v1",
+  "source": "1b20ad5a9a772d334cb03a4ee1572627813454fa",
+  "source_generations": [
+    "9c4ba9f731f2d1148be23cbad4d69ac99250f00a",
+    "9de22976b7dc1d845919d5792f4967080602af5e",
+    "1b20ad5a9a772d334cb03a4ee1572627813454fa"
+  ],
+  "base": "62a3d09ff7d8ae7282c57bc49620950650337b7c",
+  "scope": "Additive maintained QuickJS counters under the existing runtime guard; opt-in profiling v3 with explicit sampled logical counters and optional detailed estimated used-size.",
+  "archive_sha256": "2ee2ca99bc444f0771deb1c4e9e59f99cf2b604f686a2f1d46d9eea6c76a2d99",
+  "records": 3325,
+  "payloads": 615,
+  "commands": 43,
+  "success_commands": 39,
+  "retained_failed_commands": [
+    {
+      "generation": "execution-001",
+      "name": "profile-disabled",
+      "exit_code": 101
+    },
+    {
+      "generation": "execution-002",
+      "name": "core-malloc-parity",
+      "exit_code": 101
+    },
+    {
+      "generation": "execution-003",
+      "name": "prepared-lock-reconcile",
+      "exit_code": 101
+    },
+    {
+      "generation": "execution-005",
+      "name": "strict-physics-deterministic",
+      "exit_code": 101
+    }
+  ],
+  "copied_executables": 54,
+  "external_scope": "Immediate executable copies and compiled native objects/archives remain external and hash-bound. Embedded sources/logs/receipts are deduplicated losslessly. --external rehashes retained originals; --git-source binds reviewed source copies to immutable producer Git objects.",
+  "limitations": [
+    "Mac Apple arm64 CI correctness only; no shipping timing or performance/gate acceptance.",
+    "All20 bundled ABI declarations source-audited; only available native/browser checks executed. No mobile/device claim.",
+    "Per-VM tick-end samples are logical allocator counters, not continuous peaks, semantic live heap, reserved arena bytes or RSS.",
+    "Prepared core tests retain a separate offline lock and test-only manifest overlays. Root lock never changes during qualification.",
+    "Historical compile/invocation/dev-cache/test-lint failures retained. No failed command is relabeled passing."
+  ]
+}
