@@ -24,6 +24,7 @@ import time
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / 'tools'))
 import native_process
+from native_package import ulid_hex
 
 ORDER = ('keyboard-win', 'urchin-loss', 'shore-and-cliff')
 TICKS = (781, 201, 221)
@@ -110,7 +111,7 @@ def recordings(path):
 def package(path, manifest, selected=None):
     receipt = json.loads((path / 'export.json').read_text())
     require(receipt['format'] == 'incant-native-export' and type(receipt['version']) is int and receipt['version'] == 1
-            and receipt['mode'] == 'window' and receipt['camera'] == manifest['camera']
+            and receipt['mode'] == 'window' and receipt['camera'] == ulid_hex(manifest['camera'])
             and receipt['startup_source_parsing'] is False and receipt['build_storage_removed_before_startup'] is True,
             'Reviewed ordinary source-free window export required')
     player = path / 'player' / ('incant_game_player.exe' if os.name == 'nt' else 'incant_game_player')
@@ -159,6 +160,12 @@ def check_cpu(row, report, manifest):
     require(ui['viewport'] == [640, 360] and ui['widgets'] == 3 and type(ui['glyphs']) is int and ui['glyphs'] > 0
             and ui['sources'][manifest['hud_status']] == status and ui['sources'][manifest['hud_prompt']] == '',
             'Actual canonical live Pearl Cove HUD')
+    frames = {tuple(r['id']): r for r in report['flipbooks']}
+    for owner, frame in ((manifest['player'], {'keyboard-win': 2, 'urchin-loss': 1, 'shore-and-cliff': 0}[row['name']]),
+                         (manifest['boat'], int(row['name'] == 'keyboard-win'))):
+        state = frames[tuple(bytes.fromhex(ulid_hex(owner)))]
+        require(type(state['frame']) is int and state['frame'] == frame and state['playing'] is False,
+                'Actual authored actor/boat state flipbooks')
 
 
 def check_window(row, report, baseline, manifest):
