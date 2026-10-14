@@ -243,6 +243,11 @@ impl Renderer {
     /// The owning renderer installs the callback once, shared by all consumers.
     pub fn check_device(&self) -> Result<()> {
         self.device.poll(wgpu::PollType::Poll)?;
+        self.check_device_status()
+    }
+    /// Observe an already-delivered terminal flag without polling the device or
+    /// driving callbacks. Cold final publication uses this after preflight.
+    pub fn check_device_status(&self) -> Result<()> {
         if self.device_lost.load(std::sync::atomic::Ordering::Acquire) {
             return Err(ResourceError::DeviceLost.into());
         }

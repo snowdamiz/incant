@@ -337,6 +337,8 @@ impl ScriptHost {
         dt: f64,
         input: &incant_input::InputRuntime,
     ) -> Result<(), ScriptError> {
+        #[cfg(feature = "diagnostic-script-phases")]
+        let mut attribution = incant_profile::diagnostic::Frame::start();
         let _profile = incant_profile::scope(incant_profile::Phase::ScriptTick);
         #[cfg(all(test, feature = "profile", feature = "compiler"))]
         tick_probe::mark(tick_probe::Region::Enter);
@@ -354,6 +356,8 @@ impl ScriptHost {
         self.synchronous.reset();
         #[cfg(all(test, feature = "profile", feature = "compiler"))]
         tick_probe::mark(tick_probe::Region::InitialChecks);
+        #[cfg(feature = "diagnostic-script-phases")]
+        incant_profile::diagnostic::mark(incant_profile::diagnostic::Region::Snapshots);
         let result = self.context.with(|ctx| {
             self.flipbooks.capture(world)?;
             let flipbooks = self.flipbooks.expose(&ctx).map_err(|error| {
@@ -365,6 +369,8 @@ impl ScriptHost {
             })?;
             #[cfg(all(test, feature = "profile", feature = "compiler"))]
             tick_probe::mark(tick_probe::Region::Snapshots);
+            #[cfg(feature = "diagnostic-script-phases")]
+            incant_profile::diagnostic::mark(incant_profile::diagnostic::Region::GroupSetup);
             let freeze = self
                 .freeze
                 .clone()
@@ -429,6 +435,8 @@ impl ScriptHost {
                 .collect::<Result<Vec<_>, _>>()?;
             #[cfg(all(test, feature = "profile", feature = "compiler"))]
             tick_probe::mark(tick_probe::Region::GroupSetup);
+            #[cfg(feature = "diagnostic-script-phases")]
+            incant_profile::diagnostic::mark(incant_profile::diagnostic::Region::ApiSetup);
             let clock = timers::clock(&ctx, &schedule).map_err(|error| {
                 diagnostics::javascript(&ctx, error, "script clock", &self.deadline)
             })?;
@@ -450,6 +458,8 @@ impl ScriptHost {
             // Input publication/command construction must fit the script budget
             // before any ECS table is borrowed or its numeric views are created.
             diagnostics::check_deadline(&self.deadline)?;
+            #[cfg(feature = "diagnostic-script-phases")]
+            incant_profile::diagnostic::mark(incant_profile::diagnostic::Region::Capabilities);
             world
                 .with_numeric_physics(|columns, capability| {
                     let queries =
@@ -470,9 +480,17 @@ impl ScriptHost {
                     })?;
                     #[cfg(all(test, feature = "profile", feature = "compiler"))]
                     tick_probe::mark(tick_probe::Region::Capabilities);
+                    #[cfg(feature = "diagnostic-script-phases")]
+                    incant_profile::diagnostic::mark(
+                        incant_profile::diagnostic::Region::UndoCapture,
+                    );
                     let mut loan = loan::Loan::new(columns, &mut self.loan_scratch)?;
                     #[cfg(all(test, feature = "profile", feature = "compiler"))]
                     tick_probe::mark(tick_probe::Region::UndoCapture);
+                    #[cfg(feature = "diagnostic-script-phases")]
+                    incant_profile::diagnostic::mark(
+                        incant_profile::diagnostic::Region::ViewExposure,
+                    );
                     let chunks = match loan.expose(&ctx, &freeze, &mut self.chunk_ids) {
                         Ok(chunks) => chunks,
                         Err(error) => {
@@ -489,6 +507,8 @@ impl ScriptHost {
                     };
                     #[cfg(all(test, feature = "profile", feature = "compiler"))]
                     tick_probe::mark(tick_probe::Region::ViewExposure);
+                    #[cfg(feature = "diagnostic-script-phases")]
+                    incant_profile::diagnostic::mark(incant_profile::diagnostic::Region::Callbacks);
                     commands.activate();
                     queries.activate();
                     logs.activate();
@@ -500,6 +520,12 @@ impl ScriptHost {
                             schedule::Scope::Global => None,
                             schedule::Scope::Source(id) => Some(id.0),
                         });
+                        #[cfg(feature = "diagnostic-script-phases")]
+                        let callback_attribution =
+                            incant_profile::diagnostic::Span::callback(match scope {
+                                schedule::Scope::Global => None,
+                                schedule::Scope::Source(id) => Some(id.0),
+                            });
                         let called = function.call::<_, Value>((
                             rquickjs::function::Flat((
                                 chunks.clone(),
@@ -521,6 +547,8 @@ impl ScriptHost {
                             state_api,
                             hud.clone(),
                         ));
+                        #[cfg(feature = "diagnostic-script-phases")]
+                        drop(callback_attribution);
                         drop(source_profile);
                         timers.revoke();
                         persistent.revoke();
@@ -559,6 +587,10 @@ impl ScriptHost {
                     }
                     #[cfg(all(test, feature = "profile", feature = "compiler"))]
                     tick_probe::mark(tick_probe::Region::Callbacks);
+                    #[cfg(feature = "diagnostic-script-phases")]
+                    incant_profile::diagnostic::mark(
+                        incant_profile::diagnostic::Region::RevokeChecks,
+                    );
                     commands.revoke();
                     queries.revoke();
                     timers.revoke();
@@ -574,15 +606,27 @@ impl ScriptHost {
                     queries.check()?;
                     #[cfg(all(test, feature = "profile", feature = "compiler"))]
                     tick_probe::mark(tick_probe::Region::RevokeChecks);
+                    #[cfg(feature = "diagnostic-script-phases")]
+                    incant_profile::diagnostic::mark(
+                        incant_profile::diagnostic::Region::Validation,
+                    );
                     loan.validate_numeric()?;
                     #[cfg(all(test, feature = "profile", feature = "compiler"))]
                     tick_probe::mark(tick_probe::Region::NumericValidation);
+                    #[cfg(feature = "diagnostic-script-phases")]
+                    incant_profile::diagnostic::mark(
+                        incant_profile::diagnostic::Region::TransactionStage,
+                    );
                     let (commands, request, haptics) = commands.take()?;
                     schedule.apply(timers.take()?)?;
                     let logs = logs.take()?;
                     let changes = persistent.take()?;
                     #[cfg(all(test, feature = "profile", feature = "compiler"))]
                     tick_probe::mark(tick_probe::Region::TransactionStage);
+                    #[cfg(feature = "diagnostic-script-phases")]
+                    incant_profile::diagnostic::mark(
+                        incant_profile::diagnostic::Region::ScopeCleanup,
+                    );
                     Ok((
                         loan.finish(),
                         commands,
@@ -601,6 +645,8 @@ impl ScriptHost {
         // No JS value or raw column pointer crosses this sync point. Apply is
         // native host work, after the script CPU/deferred-work checks; its time
         // is separate from the JS execution budget, not a claimed phone budget.
+        #[cfg(feature = "diagnostic-script-phases")]
+        incant_profile::diagnostic::mark(incant_profile::diagnostic::Region::Publication);
         let result = result.and_then(
             |(undo, mut commands, request, haptics, schedule, logs, changes)| {
                 let _profile = incant_profile::scope(incant_profile::Phase::ScriptApply);
@@ -618,12 +664,16 @@ impl ScriptHost {
         }
         #[cfg(all(test, feature = "profile", feature = "compiler"))]
         tick_probe::mark(tick_probe::Region::Publication);
+        #[cfg(feature = "diagnostic-script-phases")]
+        incant_profile::diagnostic::mark(incant_profile::diagnostic::Region::HeapObservation);
         // After all JS/context loans close; outside the guest CPU budget.
         #[cfg(feature = "profile")]
         heap_profile::observe(&self._runtime);
 
         #[cfg(all(test, feature = "profile", feature = "compiler"))]
         tick_probe::mark(tick_probe::Region::HeapTelemetry);
+        #[cfg(feature = "diagnostic-script-phases")]
+        attribution.finish(result.is_ok());
         result
     }
 }
@@ -710,3 +760,6 @@ mod restart_request_tests;
 
 #[cfg(all(test, feature = "compiler"))]
 mod haptic_tests;
+
+#[cfg(all(test, feature = "compiler", feature = "diagnostic-script-phases"))]
+mod attribution_tests;
