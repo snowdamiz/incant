@@ -1,0 +1,19 @@
+{
+  "accepted": true,
+  "at": "2026-10-14T00:26:23.743399+00:00",
+  "source": "d0dd8a7d02b05c05b05ff0db6197bbaef883e7c6",
+  "packet": "8b1d3e14",
+  "manifest_sha256": "8e06936c7706eb3c2bd0cbdfe577e87175750fe09b504682ce8313bd165cce0b",
+  "scope": "All17 paths source-reviewed. Android window ownership, JNI Application lifetime, serialized callbacks, nonwrapping IDs and bounded epoch touch behavior accepted. Catalog-bound mismatch corrected with512/513 controls. Portable packet replay plus source002/003/004 byte freezes, actual logs/counts and3binary copies checked.",
+  "evidence": {
+    "retained_records": 131,
+    "commands": 19,
+    "mac_debug_player_tests": 38,
+    "overlapping_lifecycle_tests": 5,
+    "exporter_policy_tests": 7,
+    "locked_package_identities_unchanged": 968,
+    "android_api26_check": true,
+    "java_compile": true
+  },
+  "limits": "Mac executions are implicit host/debug deterministic evidence, not shipping or fast-mode proof. Android target compile only. Full authored APK linking/export, device/GPU/audio/appearance/performance unexecuted; mobile testing deferred nonblocking. Current-main composition still required."
+}

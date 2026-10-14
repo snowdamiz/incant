@@ -1,0 +1,73 @@
+{
+  "main": "d0b371d454951543fab7822e739149e35b5b5364",
+  "source": "a928652ad67a714c9709cfb12db813a0f3163378",
+  "reviewed_haptics": "ca29134b8e86d5e3943ecec93764ef54772854c3",
+  "apple_packet": "1ab47d139484478acbe7af5855823ad1caedd22c",
+  "android_packet": "8b1d3e140e09f4e1db36e2ba2c86f812cc1892b1",
+  "changed_inputs": [
+    "Cargo.lock",
+    "crates/incant_game_player/Cargo.toml",
+    "crates/incant_game_player/include/incant_apple.h",
+    "crates/incant_game_player/src/lib.rs",
+    "crates/incant_game_player/src/mobile_android.rs",
+    "crates/incant_game_player/src/mobile_android/host.rs",
+    "crates/incant_game_player/src/mobile_android/jni.rs",
+    "crates/incant_game_player/src/mobile_android/lifecycle.rs",
+    "crates/incant_game_player/src/mobile_android/surface.rs",
+    "crates/incant_game_player/src/mobile_host.rs",
+    "crates/incant_game_player/src/mobile_host/game.rs",
+    "crates/incant_game_player/src/mobile_host/touch.rs",
+    "crates/incant_game_player/src/mobile_host/touch/tests.rs",
+    "crates/incant_game_player/src/mobile_native.rs",
+    "crates/incant_game_player/src/mobile_native/ffi.rs",
+    "crates/incant_game_player/src/mobile_native/surface.rs",
+    "crates/incant_game_player/src/window/mod.rs",
+    "crates/incant_game_runtime/src/hosted.rs",
+    "crates/incant_game_runtime/tests/hosting.rs",
+    "platforms/android-player/AndroidManifest.xml",
+    "platforms/android-player/src/dev/incant/player/MainActivity.java",
+    "platforms/android-player/src/dev/incant/player/NativeBridge.java",
+    "platforms/android-player/src/dev/incant/player/PackageFiles.java",
+    "platforms/ios-player/GameView.swift",
+    "platforms/ios-player/main.swift",
+    "tools/android_host.py",
+    "tools/export_android_host.py",
+    "tools/probes/mobile-native-platform/collect.py",
+    "tools/tests/test_android_host.py"
+  ],
+  "successful_commands": 44,
+  "cases": [
+    {
+      "mode": "deterministic",
+      "features": "incant_game_player/physics-deterministic,incant_game_player/mobile-apple,incant_game_player/mobile-android,incant_game_player/mobile-ffi,incant_game_player/native-window,incant_game_player/native-checkpoints,incant_game_player/static-module,incant_game_runtime/ui,incant_game_runtime/static-module",
+      "harnesses": 15,
+      "counts": [
+        148,
+        0,
+        0
+      ],
+      "packages": {
+        "incant_game_player": 103,
+        "incant_game_runtime": 45
+      },
+      "player": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-platforms-main256/final-002/binaries/deterministic/incant_game_player"
+    },
+    {
+      "mode": "fast-simd8",
+      "features": "incant_game_player/physics-fast-simd8,incant_game_player/mobile-apple,incant_game_player/mobile-android,incant_game_player/mobile-ffi,incant_game_player/native-window,incant_game_player/native-checkpoints,incant_game_player/static-module,incant_game_runtime/ui,incant_game_runtime/static-module",
+      "harnesses": 15,
+      "counts": [
+        148,
+        0,
+        0
+      ],
+      "packages": {
+        "incant_game_player": 103,
+        "incant_game_runtime": 45
+      },
+      "player": "/Users/andreyyurlov/.codex/incant-integration-evidence/mobile-platforms-main256/final-002/binaries/fast-simd8/incant_game_player"
+    }
+  ],
+  "scope": "Actual current Mac CPU and cross-platform compiler qualification; no GPU, phone, physical audio/motor, exported app or performance evidence. Original Swift/Java compiler receipts are producer-scoped and their owned inputs remain exact. Current composed native Rust is freshly qualified. Optional native platform features remain off by default.",
+  "review": "Source and clock join independently accepted; final current-main evidence review pending."
+}
