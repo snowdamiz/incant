@@ -40,7 +40,46 @@ the game. A logging error never replaces an existing game/window error.
 
 The enabled observer performs native queries, serialization and filesystem I/O;
 its execution is diagnostic, not a timing or display gate. By default it adds no
-native query, world read, serialization or file I/O. Source and CPU controls are
-being qualified; no diagnostic shipping export or actual diagnostic window has
-run yet. Original timeout receipts, CUA scope and exact package identities remain
-under the retained `native-window-planar-001` evidence directory.
+native query, world read, serialization or file I/O.
+
+Source `ed16a31f` passed 90 ordinary native-window library tests and 113
+presentation/profile library tests, plus both strict all-target Clippy checks.
+These configurations overlap; they are not 203 distinct controls. Each executed
+all eight diagnostic controls, including exclusive destination admission, finite
+event-storm output, actual completed-file observations, a child exiting without
+Rust Drop, CLI default-off behavior and original-error precedence. Ten Python
+sample/runner controls, scoped formatting, generated conventions and diff checks
+also passed. CPU test executables and raw Cargo output are retained by hash.
+
+The [compact packet](evidence/native-window-eligibility/manifest.json) separates
+the finalized CPU qualification from the original main300-based `1dff662b`
+shipping package (`b21a15ff`). Its three CPU routes and both actual window
+timeouts use that exact historical player; they are not executions of the new
+diagnostic source. The first export attempt's merged-stderr supervisor error is
+retained alongside the corrected public export; the compiler succeeded in both.
+The two failed window attempts retain their empty streams and observed group
+cleanup, including the original exceptional-return ledger limitation. Root's four
+actual tool images have a scoped receipt, not a checked-in PNG archive.
+
+Against main304 `709e1a41`, the implementation delta is six code/tool paths:
+package CLI admission, window integration, the logger and its tests, and the
+planar runner and its tests. Remaining compiled/toolchain/sample inputs match;
+the root vendor-test formatting correction is already identical. Intake must
+preserve main304's newer STATUS and presentation documentation. The packet's
+docs-only successor does not change the producing `ed16a31f` checkout.
+
+Replay without devices or process execution:
+
+```sh
+python3 docs/spikes/evidence/native-window-eligibility/verify.py
+# Optional retained originals/binary hashes and integrated source closure:
+python3 docs/spikes/evidence/native-window-eligibility/verify.py \
+  --originals --binaries --git-source HEAD --source-root .
+```
+
+This intake establishes diagnostic plumbing and the historical CPU behavior.
+The separately granted fresh diagnostic-source export is outside these finalized
+results. No actual eligibility-log window has run at this intake, no complete
+native route passed, and no FPS, audio-quality or phase gate is claimed. Source,
+raw outcomes and exact identities remain under the retained
+`native-window-planar-001` evidence directory.

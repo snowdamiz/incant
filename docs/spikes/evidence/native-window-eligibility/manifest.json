@@ -1,0 +1,1250 @@
+{
+  "format": "incant-native-window-eligibility-evidence-v1",
+  "captured_utc": "2026-10-14T22:15:13.385066+00:00",
+  "eligibility_source": "ed16a31fb4c107eb4364186f105de3f2dc717492",
+  "planar_source": "1dff662b778b31d81a64a8f5bbae61b580af714b",
+  "comparison_main304": "709e1a413bf85a7000ee4897edc72b40e58dd743",
+  "source_delta_paths": [
+    "crates/incant_game_player/src/package.rs",
+    "crates/incant_game_player/src/window/mod.rs",
+    "crates/incant_game_player/src/window/state_log.rs",
+    "crates/incant_game_player/src/window/state_log/tests.rs",
+    "tools/probes/planar-window.py",
+    "tools/tests/test_planar_window.py"
+  ],
+  "curated_source_commits": [
+    "49767385",
+    "a7381fa9aa5cb593e9ed985f73d3ec3c5c5ef151",
+    "1dff662b778b31d81a64a8f5bbae61b580af714b",
+    "ed16a31fb4c107eb4364186f105de3f2dc717492"
+  ],
+  "composition": "Curate the six code/tool paths. Preserve main304 STATUS and newer presentation documentation/evidence; private ancestry is not an integration instruction.",
+  "provenance": "Original source1dff package b21/main300-based routes and timeouts are historical relative to eligibility ed16. CPU ed16 composes root observer/audio9719 and exact root e967 test-format expression; the latter is already main304-identical.",
+  "archive_sha256": "46fb2748cc7703f127a39338139d02193f196f071db885fba13d740fbd0639fc",
+  "records": [
+    {
+      "name": "author-001/author.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/author-001/author.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "author-001/author.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/author-001/author.stdout.raw.log",
+      "bytes": 242,
+      "sha256": "1c4c7ce2099185efde9d3872f77c8893d9117cf26aa1765ef933a67831148620"
+    },
+    {
+      "name": "author-001/authoring/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/author-001/authoring/result.json",
+      "bytes": 6042,
+      "sha256": "71955b728c8705d825783e98022611ea61fe974974c51f98c18472ec4fac472d"
+    },
+    {
+      "name": "author-001/processes.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/author-001/processes.json",
+      "bytes": 965,
+      "sha256": "0401939ed169df68f5710809ccf3fb1d8bc4b227d12b1fedcc98a1458a73e9d0"
+    },
+    {
+      "name": "author-001/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/author-001/result.json",
+      "bytes": 169,
+      "sha256": "392d945f0e307a982f0717ad82a28cbebe22f8ebc8ee7bfd842bcbbb5a3ceca0"
+    },
+    {
+      "name": "baseline-001/closeout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/baseline-001/closeout.json",
+      "bytes": 2065,
+      "sha256": "6efde77ec678fe90a316124453ab020410f664618311774189fc9d8613d1a4f3"
+    },
+    {
+      "name": "baseline-001/keyboard-win.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/baseline-001/keyboard-win.json",
+      "bytes": 6650,
+      "sha256": "05aa40709f038bef92fefefaeab398dd1a5adccfaec444106651df930db248dd"
+    },
+    {
+      "name": "baseline-001/keyboard-win.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/baseline-001/keyboard-win.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "baseline-001/keyboard-win.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/baseline-001/keyboard-win.stdout.raw.log",
+      "bytes": 3215,
+      "sha256": "9cb5b3cf0adfed1fbfc80f68b0b188a4265c4ab5fdc3328393a9d405fb42b3cb"
+    },
+    {
+      "name": "baseline-001/processes.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/baseline-001/processes.json",
+      "bytes": 3886,
+      "sha256": "31c42616d368f8ba0493b74aea1db75ab02a76d73a372faa9ae57ee6e0d1bb7a"
+    },
+    {
+      "name": "baseline-001/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/baseline-001/result.json",
+      "bytes": 1729,
+      "sha256": "ae0b816490f586b2be3866837ea7a07b52e0403d1bdc3976aa5f591965cb875e"
+    },
+    {
+      "name": "baseline-001/shore-and-cliff.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/baseline-001/shore-and-cliff.json",
+      "bytes": 6508,
+      "sha256": "8e694733ed2fb9e71c005cc8bfb3b2392156236ddb0d9f1ee4dd3789a0f1e2d8"
+    },
+    {
+      "name": "baseline-001/shore-and-cliff.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/baseline-001/shore-and-cliff.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "baseline-001/shore-and-cliff.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/baseline-001/shore-and-cliff.stdout.raw.log",
+      "bytes": 2900,
+      "sha256": "a9b931363f29cc26f5ce0fc27ff489b20d8a739a2b471d14ed60a51810b368d9"
+    },
+    {
+      "name": "baseline-001/urchin-loss.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/baseline-001/urchin-loss.json",
+      "bytes": 7097,
+      "sha256": "596e023b1bd5063ff20e6a142461370afe2de76e3cbbb8e88bf2320c9ca076f9"
+    },
+    {
+      "name": "baseline-001/urchin-loss.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/baseline-001/urchin-loss.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "baseline-001/urchin-loss.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/baseline-001/urchin-loss.stdout.raw.log",
+      "bytes": 3215,
+      "sha256": "0ca9035715491b2cf7a0c1eee480f7332b281c34f7f67abea2fac190d89404a3"
+    },
+    {
+      "name": "eligibility-cpu-001/closeout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/eligibility-cpu-001/closeout.json",
+      "bytes": 601,
+      "sha256": "138ba8dbf5c55e7a5ff1224502e98957e88e62c85bac6f10f8473e499453a338"
+    },
+    {
+      "name": "eligibility-cpu-001/cpu-launch-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/eligibility-cpu-001/cpu-launch-001.json",
+      "bytes": 6689,
+      "sha256": "fe788bd260c441e5342b401d84d771596a5ac27161165f88933e132c1ea447ac"
+    },
+    {
+      "name": "eligibility-cpu-001/cpu-source001-0.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/eligibility-cpu-001/cpu-source001-0.raw.log",
+      "bytes": 509609,
+      "sha256": "4529d2a91e4e57bd73715ad9f1cf413676b7b6cedf058741c487576e2f8ac817"
+    },
+    {
+      "name": "eligibility-cpu-001/cpu-source001-1.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/eligibility-cpu-001/cpu-source001-1.raw.log",
+      "bytes": 10291,
+      "sha256": "a4ee708b8c1c178d8d3585414229b72c6b847d1dc35d0c52f7d293b493611fc3"
+    },
+    {
+      "name": "eligibility-cpu-001/cpu-source001-2.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/eligibility-cpu-001/cpu-source001-2.raw.log",
+      "bytes": 510867,
+      "sha256": "5c629b82c030d0c3721ddde30db33ac3680190044ec137c136029dff65cfc1ed"
+    },
+    {
+      "name": "eligibility-cpu-001/cpu-source001-3.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/eligibility-cpu-001/cpu-source001-3.raw.log",
+      "bytes": 9401,
+      "sha256": "7ffd2e58779728c4b4392304775b291b4e08f59f55ad774fedb12e5f6956f066"
+    },
+    {
+      "name": "eligibility-cpu-001/cpu-source001-results.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/eligibility-cpu-001/cpu-source001-results.json",
+      "bytes": 9281,
+      "sha256": "f5700aba21c653785b8f240899f93d8e6777397afeaea0c6825ed18327cdc6db"
+    },
+    {
+      "name": "eligibility-cpu-001/process-snapshot-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/eligibility-cpu-001/process-snapshot-001.json",
+      "bytes": 656,
+      "sha256": "d614adda78e6ce2d3ef941725b7be05b29957dae579e8a1e4d1577ba44e0fe15"
+    },
+    {
+      "name": "eligibility-cpu-grant-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/eligibility-cpu-grant-001.json",
+      "bytes": 547,
+      "sha256": "d94c59928c8f1cacca80f9b26bf041adcc6351a1e602534bbe82cde578d54272"
+    },
+    {
+      "name": "eligibility-cpu-proposal-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/eligibility-cpu-proposal-001.json",
+      "bytes": 8127,
+      "sha256": "6f5f62085ce78c6960ac809fb054bedfa82b83a2f7c75c253dc68ca49ea234a4"
+    },
+    {
+      "name": "eligibility-cpu-supervisor-001.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/eligibility-cpu-supervisor-001.py",
+      "bytes": 10010,
+      "sha256": "834f101eb197d03c33eaff59752782ab1fa757fd74ee27ed5025b86f81f6219d"
+    },
+    {
+      "name": "eligibility-export-source-001/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/eligibility-export-source-001/freeze.json",
+      "bytes": 10859,
+      "sha256": "39ef7450755e9aecbda8086e359b6a5cd2bd29e96ee160d1f4d2e86ed44dc168"
+    },
+    {
+      "name": "eligibility-source-001/files/Cargo.lock",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/eligibility-source-001/files/Cargo.lock",
+      "bytes": 253004,
+      "sha256": "f4f59ea0f900edf56cc21847ca79b09df77e998e7382b52d7d9c563772d8ae7c"
+    },
+    {
+      "name": "eligibility-source-001/files/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/eligibility-source-001/files/Cargo.toml",
+      "bytes": 3956,
+      "sha256": "163606d4b9886c5d0f9bb6a4b67fca4823523b4024f17a689dc9bab719c314a7"
+    },
+    {
+      "name": "eligibility-source-001/files/crates/incant_game_player/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/eligibility-source-001/files/crates/incant_game_player/Cargo.toml",
+      "bytes": 5623,
+      "sha256": "ef4d494145e05cbde1dad9c4a0c93d43f0cca21b4451a5a7d2056cb79c5c620e"
+    },
+    {
+      "name": "eligibility-source-001/files/crates/incant_game_player/src/package.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/eligibility-source-001/files/crates/incant_game_player/src/package.rs",
+      "bytes": 17012,
+      "sha256": "cb0de8d849d7797df4a3dc8d76f5cd25ea2b934c752671a8d2d919a6762a0ff6"
+    },
+    {
+      "name": "eligibility-source-001/files/crates/incant_game_player/src/window/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/eligibility-source-001/files/crates/incant_game_player/src/window/mod.rs",
+      "bytes": 49721,
+      "sha256": "3a282e986e2cd31ec5fb195b3d85ac10359d6673356cafd8c6684aec49ac185f"
+    },
+    {
+      "name": "eligibility-source-001/files/crates/incant_game_player/src/window/state_log.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/eligibility-source-001/files/crates/incant_game_player/src/window/state_log.rs",
+      "bytes": 8880,
+      "sha256": "c7bb800b3a775bbf0ba23a0d4b9bcca48f7774a8a95ec55ce2ea31b33f8463a8"
+    },
+    {
+      "name": "eligibility-source-001/files/crates/incant_game_player/src/window/state_log/tests.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/eligibility-source-001/files/crates/incant_game_player/src/window/state_log/tests.rs",
+      "bytes": 8434,
+      "sha256": "9f94b24a9e553c564de2db6a29ab33f5225f071a121d434b096d25a5035eb24c"
+    },
+    {
+      "name": "eligibility-source-001/files/docs/spikes/native-window-eligibility.md",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/eligibility-source-001/files/docs/spikes/native-window-eligibility.md",
+      "bytes": 3096,
+      "sha256": "76a15b7fcb49f41460a8cab8fb1614e886d1848d8f89a10f136507b60a403608"
+    },
+    {
+      "name": "eligibility-source-001/files/rust-toolchain.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/eligibility-source-001/files/rust-toolchain.toml",
+      "bytes": 100,
+      "sha256": "c6e63d9832830b858d930007e4fd1fc3f4a3ca1d287483b08077b7f0267ca124"
+    },
+    {
+      "name": "eligibility-source-001/files/third_party/wgpu-hal/src/metal/presentation_tests.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/eligibility-source-001/files/third_party/wgpu-hal/src/metal/presentation_tests.rs",
+      "bytes": 7928,
+      "sha256": "755625f969f527ab6feccb2299feb17cec0c29ab8775bd9090fc76a693c10904"
+    },
+    {
+      "name": "eligibility-source-001/files/tools/cargo",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/eligibility-source-001/files/tools/cargo",
+      "bytes": 179,
+      "sha256": "9aef98d613601b0c374c1d0499afb39d710cbf5002faba537f21be9c11ff72e3"
+    },
+    {
+      "name": "eligibility-source-001/files/tools/native_process.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/eligibility-source-001/files/tools/native_process.py",
+      "bytes": 19307,
+      "sha256": "58dd2a8231d7f9d1e42070fc85425461e06a43f279fa5e7f8e57b4a40c3a3aa4"
+    },
+    {
+      "name": "eligibility-source-001/files/tools/probes/planar-window.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/eligibility-source-001/files/tools/probes/planar-window.py",
+      "bytes": 20103,
+      "sha256": "66f56c3bd2ba43accde20263218c992155907c27eaaee5e35397597412b79fff"
+    },
+    {
+      "name": "eligibility-source-001/files/tools/tests/test_planar_window.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/eligibility-source-001/files/tools/tests/test_planar_window.py",
+      "bytes": 7747,
+      "sha256": "f88ba362bce53ea554afa7f8325a7e9f0889b3aa983870c4a2aa63dec1c30528"
+    },
+    {
+      "name": "eligibility-source-001/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/eligibility-source-001/freeze.json",
+      "bytes": 5186,
+      "sha256": "6109768006ace9f39522ae96c9518e060b18961ef28a9d1d8dc43482edb1fb20"
+    },
+    {
+      "name": "export-001/call-000.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-001/call-000.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "export-001/call-000.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-001/call-000.stdout.raw.log",
+      "bytes": 9,
+      "sha256": "33e26f35db6e57ce0c486ddc815fe966867e4f649e418eaf323f75f4720eb8e9"
+    },
+    {
+      "name": "export-001/call-001.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-001/call-001.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "export-001/call-001.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-001/call-001.stdout.raw.log",
+      "bytes": 192,
+      "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909"
+    },
+    {
+      "name": "export-001/call-002.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-001/call-002.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "export-001/call-002.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-001/call-002.stdout.raw.log",
+      "bytes": 5,
+      "sha256": "7b01c549928398a045692f24bcac7803b348524cdd76f21265b02984b2ba556a"
+    },
+    {
+      "name": "export-001/call-003.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-001/call-003.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "export-001/call-003.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-001/call-003.stdout.raw.log",
+      "bytes": 99,
+      "sha256": "7da0fd6d11521838939c36a6c45bfaeb893ecd0f8db281f9093f2c93af465ed1"
+    },
+    {
+      "name": "export-001/call-004.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-001/call-004.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "export-001/call-004.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-001/call-004.stdout.raw.log",
+      "bytes": 77,
+      "sha256": "1dc5ff25a027f5c0a04ac183e96b6665181272c327130fb0663c5c1be8aad81d"
+    },
+    {
+      "name": "export-001/call-005.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-001/call-005.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "export-001/call-005.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-001/call-005.stdout.raw.log",
+      "bytes": 192,
+      "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909"
+    },
+    {
+      "name": "export-001/call-006.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-001/call-006.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "export-001/call-006.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-001/call-006.stdout.raw.log",
+      "bytes": 67,
+      "sha256": "b22adee5ac5a93ade5d52f11392360e1c1a95ef2add2bd03365e896e8f1688e1"
+    },
+    {
+      "name": "export-001/call-007.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-001/call-007.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "export-001/call-007.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-001/call-007.stdout.raw.log",
+      "bytes": 54029,
+      "sha256": "d4f8cc068940d1dd052f6047c342d4e18b5c4f3eee7fa3c19c6ed8690b735305"
+    },
+    {
+      "name": "export-001/call-009.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-001/call-009.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "export-001/call-010.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-001/call-010.stdout.raw.log",
+      "bytes": 12508,
+      "sha256": "a20ee42b7ee2b05adb4d8e1ad511662563921ada20c7be78241d71e9073ba9fc"
+    },
+    {
+      "name": "export-001/closeout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-001/closeout.json",
+      "bytes": 750,
+      "sha256": "c7d1cc37fe963bbb502241c69d3e22450480bb6e317be57da00d6a900cc3b046"
+    },
+    {
+      "name": "export-001/export.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-001/export.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "export-001/export.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-001/export.stdout.raw.log",
+      "bytes": 65,
+      "sha256": "7cfab82218a0bd3ac33c5c9d0dc02f29b8472a210d1f4b1e4c44df380c69edfd"
+    },
+    {
+      "name": "export-001/launch.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-001/launch.json",
+      "bytes": 4396,
+      "sha256": "6b1dd09c3bddd07a6f041f5c4ade83b3cd3bdc0a68a7225a08772bb7f49c4fdd"
+    },
+    {
+      "name": "export-001/managed-calls.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-001/managed-calls.json",
+      "bytes": 10281,
+      "sha256": "b986604b4832eaaedfb68450e76fee294b63355272c4e831d946a5fe28e535b3"
+    },
+    {
+      "name": "export-001/process-snapshot-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-001/process-snapshot-001.json",
+      "bytes": 1002,
+      "sha256": "8016c02db6df9893106fceb4654cc249683c8262415ea87c26d5e5fa3a6c2348"
+    },
+    {
+      "name": "export-001/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-001/result.json",
+      "bytes": 1019,
+      "sha256": "1a7c45ab949970b003302420fc3e07aab9b21aec4aeab47ed75ac4f8a9cc5d28"
+    },
+    {
+      "name": "export-001/storage.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-001/storage.json",
+      "bytes": 57949,
+      "sha256": "b341605d7f958f06ca4d8b918b9b6366a39ebc590b7b44a31f4ea2bc8ac1cbcf"
+    },
+    {
+      "name": "export-002/call-000.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-002/call-000.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "export-002/call-000.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-002/call-000.stdout.raw.log",
+      "bytes": 9,
+      "sha256": "33e26f35db6e57ce0c486ddc815fe966867e4f649e418eaf323f75f4720eb8e9"
+    },
+    {
+      "name": "export-002/call-001.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-002/call-001.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "export-002/call-001.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-002/call-001.stdout.raw.log",
+      "bytes": 192,
+      "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909"
+    },
+    {
+      "name": "export-002/call-002.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-002/call-002.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "export-002/call-002.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-002/call-002.stdout.raw.log",
+      "bytes": 5,
+      "sha256": "7b01c549928398a045692f24bcac7803b348524cdd76f21265b02984b2ba556a"
+    },
+    {
+      "name": "export-002/call-003.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-002/call-003.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "export-002/call-003.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-002/call-003.stdout.raw.log",
+      "bytes": 99,
+      "sha256": "7da0fd6d11521838939c36a6c45bfaeb893ecd0f8db281f9093f2c93af465ed1"
+    },
+    {
+      "name": "export-002/call-004.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-002/call-004.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "export-002/call-004.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-002/call-004.stdout.raw.log",
+      "bytes": 77,
+      "sha256": "1dc5ff25a027f5c0a04ac183e96b6665181272c327130fb0663c5c1be8aad81d"
+    },
+    {
+      "name": "export-002/call-005.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-002/call-005.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "export-002/call-005.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-002/call-005.stdout.raw.log",
+      "bytes": 192,
+      "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909"
+    },
+    {
+      "name": "export-002/call-006.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-002/call-006.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "export-002/call-006.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-002/call-006.stdout.raw.log",
+      "bytes": 67,
+      "sha256": "b22adee5ac5a93ade5d52f11392360e1c1a95ef2add2bd03365e896e8f1688e1"
+    },
+    {
+      "name": "export-002/call-007.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-002/call-007.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "export-002/call-007.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-002/call-007.stdout.raw.log",
+      "bytes": 54029,
+      "sha256": "d4f8cc068940d1dd052f6047c342d4e18b5c4f3eee7fa3c19c6ed8690b735305"
+    },
+    {
+      "name": "export-002/call-009.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-002/call-009.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "export-002/call-010.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-002/call-010.stdout.raw.log",
+      "bytes": 12508,
+      "sha256": "16d562778cecab62744e6514cc43fa8d4131eb7de570b7c930e9db7db98d9707"
+    },
+    {
+      "name": "export-002/call-011.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-002/call-011.stdout.raw.log",
+      "bytes": 26384,
+      "sha256": "6827462cfa82df59dc580fdd3cbbadb1e0de6ae68a5b70da09505e6b4557cb97"
+    },
+    {
+      "name": "export-002/call-012.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-002/call-012.stdout.raw.log",
+      "bytes": 224,
+      "sha256": "74295113c124fd31b73a3bc54922a619f714fef7e75bdc517d74c6b0674d9568"
+    },
+    {
+      "name": "export-002/call-013.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-002/call-013.stdout.raw.log",
+      "bytes": 261,
+      "sha256": "db7b285527abe6238766adcc05e136b290bdb48554396af72ab4b8b430c33be3"
+    },
+    {
+      "name": "export-002/call-014.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-002/call-014.stdout.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "export-002/call-015.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-002/call-015.stdout.raw.log",
+      "bytes": 194,
+      "sha256": "959bab6e2e29dbaf4e548237f020910884890b608df8b8d6843bfca129425fb0"
+    },
+    {
+      "name": "export-002/call-016.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-002/call-016.stdout.raw.log",
+      "bytes": 7960,
+      "sha256": "84d25384e6dad65079e79183367ab191e5ba8a9a4b86a666bb96e04fa242e421"
+    },
+    {
+      "name": "export-002/call-017.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-002/call-017.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "export-002/call-017.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-002/call-017.stdout.raw.log",
+      "bytes": 2043,
+      "sha256": "5ac5f202daaa3d2a668e2b9238d6e8aa01afded99759fb1df4331cfff7f6c80a"
+    },
+    {
+      "name": "export-002/closeout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-002/closeout.json",
+      "bytes": 3520,
+      "sha256": "bf56285d618ca480c7dc1c46854f169e3f09367603606d6a93b0843d64ecdd74"
+    },
+    {
+      "name": "export-002/export.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-002/export.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "export-002/export.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-002/export.stdout.raw.log",
+      "bytes": 130,
+      "sha256": "c7b37d689f4d82b1b0987bf510b6f10a41e0163119160ab75a17538bfcdacad2"
+    },
+    {
+      "name": "export-002/launch.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-002/launch.json",
+      "bytes": 4396,
+      "sha256": "597168b2a911ac956499590da2cc6b09a7d2f0c44a698936d8c2569c8a717410"
+    },
+    {
+      "name": "export-002/managed-calls.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-002/managed-calls.json",
+      "bytes": 16110,
+      "sha256": "25268351e0f56a7413dbe8cf2f7fb0c537a2e6be20ce636730bd432e87c10495"
+    },
+    {
+      "name": "export-002/process-snapshot-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-002/process-snapshot-001.json",
+      "bytes": 850,
+      "sha256": "96e3e2055e3f77e09f132a60e4432588b34d24645430dab1e4b40b99cac6a53f"
+    },
+    {
+      "name": "export-002/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-002/result.json",
+      "bytes": 1131,
+      "sha256": "a98dfba8f35ff08f13cffbdd3ebff1466904ccb719142266961161e1bd8677af"
+    },
+    {
+      "name": "export-002/storage.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-002/storage.json",
+      "bytes": 54433,
+      "sha256": "b4d7fad7059b3bb2334570784be2626c49bde4309e7388c4ca56572d04ee4c57"
+    },
+    {
+      "name": "export-supervisor-001.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-supervisor-001.py",
+      "bytes": 12753,
+      "sha256": "fcc5d452a9e0960e78d8df27919cb4f57b83593ddee88c6dac88a194c424fa4b"
+    },
+    {
+      "name": "export-supervisor-002.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-supervisor-002.py",
+      "bytes": 13357,
+      "sha256": "2a71f6d82ac8e2b4c84acaf1ce2899b4453d36cbe3e6a20112f3ae98ea5f4e00"
+    },
+    {
+      "name": "export-supervisor-controls-003.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-supervisor-controls-003.json",
+      "bytes": 861,
+      "sha256": "814b40e78aa3cc63c7bd3985113868a1cd2cee94ec4fea282b51c0eb89ee3b18"
+    },
+    {
+      "name": "export-tool-identities-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/export-tool-identities-001.json",
+      "bytes": 2070,
+      "sha256": "b8b83c4d344e86f833ee50075dd25a0990f473ea31f7dd542e0491281cbd5e6a"
+    },
+    {
+      "name": "headless-relevance-002.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/headless-relevance-002.json",
+      "bytes": 803,
+      "sha256": "d13975bcdf2f731b57f2ecfe985d7fa16f4aa00ee9b2bee01d5544fcb0301a1b"
+    },
+    {
+      "name": "proposal-003.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/proposal-003.json",
+      "bytes": 14979,
+      "sha256": "6442be5fe1512e6e143729f21cce0a02f75af563dca693662cbccedf5bd92e25"
+    },
+    {
+      "name": "proposal-004.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/proposal-004.json",
+      "bytes": 16299,
+      "sha256": "f99e0298864f39176f8d5f409ef2093ce8d308e7343639ec429b0cede33f6e63"
+    },
+    {
+      "name": "python-eligibility-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/python-eligibility-001.json",
+      "bytes": 543,
+      "sha256": "0535753922e5b3cc850abf3fda3e19b6e44050c321c3d28cb4a4193b0fb369c6"
+    },
+    {
+      "name": "python-eligibility-001.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/python-eligibility-001.raw.log",
+      "bytes": 1672,
+      "sha256": "fd37ebc672f4a968c3616e4ef7efd29a998aa264198b0644ada128a4c0cbc958"
+    },
+    {
+      "name": "python-source001-result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/python-source001-result.json",
+      "bytes": 570,
+      "sha256": "da1dda3d0201db4843d014d07476aff447c731d00e9c298e66329965b7d52ebb"
+    },
+    {
+      "name": "python-source001.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/python-source001.raw.log",
+      "bytes": 914,
+      "sha256": "bb43119e8ea748b53638ff5dec016e9aba7878aec725ad25604de837c99cf452"
+    },
+    {
+      "name": "python-source002-result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/python-source002-result.json",
+      "bytes": 603,
+      "sha256": "0599ce00568ccd1d96dd20a27ba20db6813c184291a925c6ca6f1764bcaf53ea"
+    },
+    {
+      "name": "python-source002.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/python-source002.raw.log",
+      "bytes": 914,
+      "sha256": "d8ea1ddc89caf9e2939c92f8bada4fc9274bdb2a525c0097b9a231e56667c60b"
+    },
+    {
+      "name": "python-source003-result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/python-source003-result.json",
+      "bytes": 670,
+      "sha256": "af8522b591a91f7cab0b3ffd946d20fdab6c628bf9fffa5ee029f0bd5da0343f"
+    },
+    {
+      "name": "python-source003.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/python-source003.raw.log",
+      "bytes": 1672,
+      "sha256": "61b54f37057268c4dbc0f8a512838a385d22b8e8c47a402457412efea5bf31c1"
+    },
+    {
+      "name": "python-source004-result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/python-source004-result.json",
+      "bytes": 630,
+      "sha256": "5753c0d02b9b27c1d26e2746113464a5920a4eceaad9fa9dc5203055f18ac518"
+    },
+    {
+      "name": "python-source004.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/python-source004.raw.log",
+      "bytes": 1672,
+      "sha256": "5bd3e7d6ad6876c1ca0b92ffcff5ec6c7765f55e5ce9df91652b0b535e05a73d"
+    },
+    {
+      "name": "python-source005-result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/python-source005-result.json",
+      "bytes": 687,
+      "sha256": "0c00205fa2b9d82d88d9f90c080541b870dc211eec21ccce1b4509802d176360"
+    },
+    {
+      "name": "python-source005.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/python-source005.raw.log",
+      "bytes": 1672,
+      "sha256": "d71b384f8e513813638b32ec413c6451485a032bdf550fc8d26eb80a337409e2"
+    },
+    {
+      "name": "recordings-source001/keyboard-win-input.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/recordings-source001/keyboard-win-input.json",
+      "bytes": 5397,
+      "sha256": "3bee29c5cdf91b7bf634bc10d8d56c285b112f13f2822dff09c43dea0a3165e8"
+    },
+    {
+      "name": "recordings-source001/keyboard-win-observe.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/recordings-source001/keyboard-win-observe.json",
+      "bytes": 1030,
+      "sha256": "d12487a03d2b6bf3f0be99799e3dea3c1f0a75fe772e524df462b5bf47b8e7c3"
+    },
+    {
+      "name": "recordings-source001/recordings.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/recordings-source001/recordings.json",
+      "bytes": 2697,
+      "sha256": "0ae18c7b9b43dff992f075095e3ee25c8443de8fced944712c7e8b708edfc169"
+    },
+    {
+      "name": "recordings-source001/shore-and-cliff-input.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/recordings-source001/shore-and-cliff-input.json",
+      "bytes": 1437,
+      "sha256": "3d3786d42625b62f5fcc25f9e835f02d202b5c817744bd35327fd28ca1a75e72"
+    },
+    {
+      "name": "recordings-source001/shore-and-cliff-observe.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/recordings-source001/shore-and-cliff-observe.json",
+      "bytes": 747,
+      "sha256": "3f7684a71736561cf1ad9f70a3cc46b6276f78212f7e088afef3190761f9d7bf"
+    },
+    {
+      "name": "recordings-source001/urchin-loss-input.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/recordings-source001/urchin-loss-input.json",
+      "bytes": 1438,
+      "sha256": "e5ff76fe8ece978d2a80b13179a0b69f226e25cae62c96c7f0842447799ba00b"
+    },
+    {
+      "name": "recordings-source001/urchin-loss-observe.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/recordings-source001/urchin-loss-observe.json",
+      "bytes": 1027,
+      "sha256": "da8e16e1ad955e4e35ba168667d4ac884d2704163331ba4d0213d3aebd2759a5"
+    },
+    {
+      "name": "shipping-002/export.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/shipping-002/export.json",
+      "bytes": 15817,
+      "sha256": "9881ffcbc966bfb60adfebdbb61d51e851d80fb842e8d720b1e8b9baa21b8123"
+    },
+    {
+      "name": "source-002/files/tools/probes/planar-window.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/source-002/files/tools/probes/planar-window.py",
+      "bytes": 19438,
+      "sha256": "a6c1dc173ecaedee7832ca1cb2a4e623580cc2f863e6ba7760074e96cbc5ae1d"
+    },
+    {
+      "name": "source-002/files/tools/tests/test_planar_window.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/source-002/files/tools/tests/test_planar_window.py",
+      "bytes": 7747,
+      "sha256": "f88ba362bce53ea554afa7f8325a7e9f0889b3aa983870c4a2aa63dec1c30528"
+    },
+    {
+      "name": "source-002/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/source-002/freeze.json",
+      "bytes": 9429,
+      "sha256": "1387a43386ae93762459f5e0c5950f627bb39e0f80e4b28c4992f82d975c9d06"
+    },
+    {
+      "name": "test_export_supervisor_002.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/test_export_supervisor_002.py",
+      "bytes": 5770,
+      "sha256": "d5f907922be788ebd5113b879e7b503974e1d55912beb739a5e3c4d76aa6baad"
+    },
+    {
+      "name": "window-bundle-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/window-bundle-001.json",
+      "bytes": 1070,
+      "sha256": "3021840e6af4bbbe08e3c866efcae4337be7202ce2548051415112a79550d0bd"
+    },
+    {
+      "name": "window-keyboard-win-001/closeout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/window-keyboard-win-001/closeout.json",
+      "bytes": 1385,
+      "sha256": "626b2fad010356fde3b5dd8a07bc157a5f9b6b867a51bf2672068ef7031e1f77"
+    },
+    {
+      "name": "window-keyboard-win-001/keyboard-win.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/window-keyboard-win-001/keyboard-win.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "window-keyboard-win-001/keyboard-win.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/window-keyboard-win-001/keyboard-win.stdout.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "window-keyboard-win-001/owned-live.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/window-keyboard-win-001/owned-live.json",
+      "bytes": 713,
+      "sha256": "d571d9618a6a90ead7dc8e0f716d4f270acb743b774c35419582a2609973a7fd"
+    },
+    {
+      "name": "window-keyboard-win-001/processes.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/window-keyboard-win-001/processes.json",
+      "bytes": 1753,
+      "sha256": "b028889cb07c2c7ef3f4849090032150c3f6fce35e7751c4580c5bef2b4fb71b"
+    },
+    {
+      "name": "window-keyboard-win-001/readiness.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/window-keyboard-win-001/readiness.json",
+      "bytes": 846,
+      "sha256": "aab9c4b5a5560f29912e2ee70a1143c437cdc3f5bbcd5f6afb712a898cc98f30"
+    },
+    {
+      "name": "window-keyboard-win-001/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/window-keyboard-win-001/result.json",
+      "bytes": 726,
+      "sha256": "54c64ca78cfe4bbeb04a166852c03f388a0ba0fac79e360ce52c2c18e47430fd"
+    },
+    {
+      "name": "window-keyboard-win-001/root-cua-observation.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/window-keyboard-win-001/root-cua-observation.json",
+      "bytes": 1674,
+      "sha256": "aa2921584823d899a0dafa3ae8ae00d380903e79f71244aead8932a8997f3d56"
+    },
+    {
+      "name": "window-keyboard-win-002/closeout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/window-keyboard-win-002/closeout.json",
+      "bytes": 1414,
+      "sha256": "638fa5890505bf526fdf34dab68753e28f316a511ae4ba842132b86408170c97"
+    },
+    {
+      "name": "window-keyboard-win-002/keyboard-win.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/window-keyboard-win-002/keyboard-win.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "window-keyboard-win-002/keyboard-win.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/window-keyboard-win-002/keyboard-win.stdout.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "window-keyboard-win-002/owned-live.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/window-keyboard-win-002/owned-live.json",
+      "bytes": 713,
+      "sha256": "3c2e1e72870869a5b63b8fa745866af2958d3fd917d46cb7e78b6dab11c5fbc8"
+    },
+    {
+      "name": "window-keyboard-win-002/processes.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/window-keyboard-win-002/processes.json",
+      "bytes": 1753,
+      "sha256": "0bc124a52a7cd53709d4b2f0d2d6fff1847007c4b7e5fb084f27ff087776b022"
+    },
+    {
+      "name": "window-keyboard-win-002/readiness.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/window-keyboard-win-002/readiness.json",
+      "bytes": 846,
+      "sha256": "ddd804be93995d94a7ce98216aea9285d67d294644766c5c5fd2d2c49a0f20f6"
+    },
+    {
+      "name": "window-keyboard-win-002/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/window-keyboard-win-002/result.json",
+      "bytes": 726,
+      "sha256": "54c64ca78cfe4bbeb04a166852c03f388a0ba0fac79e360ce52c2c18e47430fd"
+    },
+    {
+      "name": "window-launch-001.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/window-launch-001.py",
+      "bytes": 2379,
+      "sha256": "2d9ad79f10cb0d03c3e2727cfaa8ff3caf6e724cb93f0d8c45042f7f0c52a1ea"
+    },
+    {
+      "name": "window-launch-002.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/window-launch-002.py",
+      "bytes": 2379,
+      "sha256": "8cadbb9fd9bbd5f98b6de6067044aaf9bf0bb3e0f48cd59052b725e1347a7339"
+    },
+    {
+      "name": "window-proposal-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/window-proposal-001.json",
+      "bytes": 10250,
+      "sha256": "59ad95141fdba71360dc6ee05f86985d6c6973eae0309556f5ea733c2399ee9b"
+    },
+    {
+      "name": "window-proposal-002.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/window-proposal-002.json",
+      "bytes": 11191,
+      "sha256": "828bdc6a71a2ae14afe758fc57de4bd184531ec8581d9fb87701129f31ad62a9"
+    }
+  ],
+  "git_input_inventory": [
+    {
+      "path": "Cargo.lock",
+      "bytes": 253004,
+      "sha256": "f4f59ea0f900edf56cc21847ca79b09df77e998e7382b52d7d9c563772d8ae7c"
+    },
+    {
+      "path": "Cargo.toml",
+      "bytes": 3956,
+      "sha256": "163606d4b9886c5d0f9bb6a4b67fca4823523b4024f17a689dc9bab719c314a7"
+    },
+    {
+      "path": "crates/incant_game_player/Cargo.toml",
+      "bytes": 5623,
+      "sha256": "ef4d494145e05cbde1dad9c4a0c93d43f0cca21b4451a5a7d2056cb79c5c620e"
+    },
+    {
+      "path": "crates/incant_game_player/build.rs",
+      "bytes": 2080,
+      "sha256": "753fbb393cc5aa760b966de3ec1905bea1d80ea15a0ed0ee2aea95c86b4e06f2"
+    },
+    {
+      "path": "crates/incant_game_player/src/package.rs",
+      "bytes": 17012,
+      "sha256": "cb0de8d849d7797df4a3dc8d76f5cd25ea2b934c752671a8d2d919a6762a0ff6"
+    },
+    {
+      "path": "crates/incant_game_player/src/window/mod.rs",
+      "bytes": 49721,
+      "sha256": "3a282e986e2cd31ec5fb195b3d85ac10359d6673356cafd8c6684aec49ac185f"
+    },
+    {
+      "path": "crates/incant_game_player/src/window/replay.rs",
+      "bytes": 4819,
+      "sha256": "a6d60da583165dd371f2390498f74d097839b90887a974e4bedcc559c9c490c7"
+    },
+    {
+      "path": "crates/incant_game_player/src/window/state_log.rs",
+      "bytes": 8880,
+      "sha256": "c7bb800b3a775bbf0ba23a0d4b9bcca48f7774a8a95ec55ce2ea31b33f8463a8"
+    },
+    {
+      "path": "crates/incant_game_player/src/window/state_log/tests.rs",
+      "bytes": 8434,
+      "sha256": "9f94b24a9e553c564de2db6a29ab33f5225f071a121d434b096d25a5035eb24c"
+    },
+    {
+      "path": "rust-toolchain.toml",
+      "bytes": 100,
+      "sha256": "c6e63d9832830b858d930007e4fd1fc3f4a3ca1d287483b08077b7f0267ca124"
+    },
+    {
+      "path": "samples/planar/art/__init__.py",
+      "bytes": 248,
+      "sha256": "82a491df9a1371f760b6d9551c4b26678ae8588798d6b724abd97a84af580755"
+    },
+    {
+      "path": "samples/planar/art/build.py",
+      "bytes": 3790,
+      "sha256": "ea207f847dbc18f6ae206dcadf13f7821845dc23f20e719db5f7438be106877d"
+    },
+    {
+      "path": "samples/planar/art/cove.py",
+      "bytes": 5936,
+      "sha256": "9ff47f9426bffd6ddcee3e358acdafc5b8865dd7a34e18e5806713585622a863"
+    },
+    {
+      "path": "samples/planar/art/image.py",
+      "bytes": 3820,
+      "sha256": "596050fdf9dcebbbb2f98e5e05878379f0933d4971062907e62f278274dd660f"
+    },
+    {
+      "path": "samples/planar/art/palette.py",
+      "bytes": 1797,
+      "sha256": "9691087cd0f02d20da7adc3b28f6d0e304b6b61562f4ceb094ccf4b1a4d075ec"
+    },
+    {
+      "path": "samples/planar/art/sprites.py",
+      "bytes": 7976,
+      "sha256": "30a7ce51f9614cb6d30870c444def3f20b3ddd6a1dddff20a46b189aa8797b6a"
+    },
+    {
+      "path": "samples/planar/art/terrain.py",
+      "bytes": 15060,
+      "sha256": "887d0af18cc77f9b4ef2398fb9f65f4eb4b55633000189876fa4a4d299fd1ed7"
+    },
+    {
+      "path": "samples/planar/export_verify.py",
+      "bytes": 6065,
+      "sha256": "f31cf4669fb7acef283b9e02ba0505ef492a8abb0c0d32488fd555291b86ed2a"
+    },
+    {
+      "path": "samples/planar/gameplay.ts",
+      "bytes": 10849,
+      "sha256": "3aa27cdc2e0e3002e4d8251d0ab3cd0004875bfb0da02c3afbb222b3b9b6b7b8"
+    },
+    {
+      "path": "samples/planar/hud.py",
+      "bytes": 4496,
+      "sha256": "ca7f7e4a900fc33b8f31c4b500dd378a5682786713455ee436a7e44023dea4c8"
+    },
+    {
+      "path": "samples/planar/playtest.py",
+      "bytes": 6802,
+      "sha256": "7d85f49e5199f1d8eeff86ccc013fe2937780188b188bfa99882fa6e4957a90c"
+    },
+    {
+      "path": "samples/planar/presentation.py",
+      "bytes": 9179,
+      "sha256": "5b4e15cb52a5e403e89498802657d5f6551f771b08fb828b955d3328e0da0f71"
+    },
+    {
+      "path": "samples/planar/scene.py",
+      "bytes": 13277,
+      "sha256": "2f8a1c9a1377ead5bf81924d64fc91edea8cc192b450587f695743ddd5fc88de"
+    },
+    {
+      "path": "samples/planar/verify.py",
+      "bytes": 12674,
+      "sha256": "3651445947a44419fd1934519f4374484f071e55610c1ccf2c874ce0795796f4"
+    },
+    {
+      "path": "third_party/wgpu-hal/src/metal/presentation_tests.rs",
+      "bytes": 7928,
+      "sha256": "755625f969f527ab6feccb2299feb17cec0c29ab8775bd9090fc76a693c10904"
+    },
+    {
+      "path": "tools/cargo",
+      "bytes": 179,
+      "sha256": "9aef98d613601b0c374c1d0499afb39d710cbf5002faba537f21be9c11ff72e3"
+    },
+    {
+      "path": "tools/export_native.py",
+      "bytes": 17061,
+      "sha256": "c5d9ff99df93472e425a239111bcdc58087e05068b190cae22b1552487332bc8"
+    },
+    {
+      "path": "tools/native_package.py",
+      "bytes": 8385,
+      "sha256": "0362128f683f835e31674ad2f024f54f35d7401ebdb6eb0b51d791e14578413b"
+    },
+    {
+      "path": "tools/native_process.py",
+      "bytes": 19307,
+      "sha256": "58dd2a8231d7f9d1e42070fc85425461e06a43f279fa5e7f8e57b4a40c3a3aa4"
+    },
+    {
+      "path": "tools/probes/planar-window.py",
+      "bytes": 20103,
+      "sha256": "66f56c3bd2ba43accde20263218c992155907c27eaaee5e35397597412b79fff"
+    },
+    {
+      "path": "tools/probes/script-source-transactions.py",
+      "bytes": 6155,
+      "sha256": "78cd059dda61456f6a66a48151d3e5ccce7e7c812163b2b269f34ee1b0ca700b"
+    },
+    {
+      "path": "tools/tests/test_planar_window.py",
+      "bytes": 7747,
+      "sha256": "f88ba362bce53ea554afa7f8325a7e9f0889b3aa983870c4a2aa63dec1c30528"
+    }
+  ],
+  "retained_binary_inputs": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/eligibility-cpu-001/binaries/0-incant_game_player-source001",
+      "bytes": 34649424,
+      "sha256": "aca34f63fd612c1e8e84ad93aeb7c18c6b024fa5f1d08795f6f1fcd3dae8adc3"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/eligibility-cpu-001/binaries/2-incant_game_player-source001",
+      "bytes": 34883360,
+      "sha256": "a38cf7dcaddf72e61db04e53248ca248106a9c970675a6522a27e2fe57026589"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/shipping-002/player/incant_game_player",
+      "bytes": 13534080,
+      "sha256": "b21a15ffd8c38fe59da8d18d2c1a78dd9921dbbeb861739a009ab2f291846b5c"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-animation-workflow-001/binaries/1-incant_headless-source002",
+      "bytes": 62159792,
+      "sha256": "ab5491bf903102aaedaa0c00b6bc9ef0581f506a7247ee7ce39137d5f38aacc1"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/baseline-001/keyboard-win.pcm",
+      "bytes": 4998400,
+      "sha256": "e4e5fd98e48750169a99f60cd7a2be2fdd5a3a46bf347efdfbb87133311678ae"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/baseline-001/shore-and-cliff.pcm",
+      "bytes": 1414400,
+      "sha256": "8bfbb9fc38065ae388c978b226588588899e20a3c0c5f636a6a6afdac72e4ebb"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/baseline-001/urchin-loss.pcm",
+      "bytes": 1286400,
+      "sha256": "8fd7fe4a0a5691ab3e4eacb1cfeb66428c1914a3cb084c8a0d53dd21846bdb4d"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/shipping-002/player/data/clips.bin",
+      "bytes": 12,
+      "sha256": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/shipping-002/player/data/empty-input.json",
+      "bytes": 103,
+      "sha256": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/shipping-002/player/data/fonts/3127f0b873387ee37e2040135a06e9e9c05030f509eb63689529becf28b50384.ifont",
+      "bytes": 310300,
+      "sha256": "48804b712c66bb0ce00b2cc3272c7be18171810a3bb0555e3d247544951e0fdc"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/shipping-002/player/data/fonts/74f2395f9b27e4c4ff06183b1baed5684ce4a090490bd00f42637547cca5da0f.json",
+      "bytes": 317,
+      "sha256": "76b2977309e2485a6007bcb9c6e75df3a2e161dc576ebbf6be00f6b8b961d0f0"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/shipping-002/player/data/input-actions.json",
+      "bytes": 805,
+      "sha256": "617123f0cd018451a23ddc8e096249208484867db707e9041e76af832f1e1624"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/shipping-002/player/data/package.json",
+      "bytes": 479,
+      "sha256": "3fc14b4332adc9d419d671e271dd12e5fa33b70297fe844df691bca8488e5fc3"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/shipping-002/player/data/textures/122f66de7e10580a78ad5ab1e62a0ec78160dd9d63de90044e4135824977dc9b.json",
+      "bytes": 8048,
+      "sha256": "7b9e665144dedd1dd71fedd36e99ff6ca68863a827eb87588fd403e6812a5a0b"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/shipping-002/player/data/textures/615703c8f498271b604c202a36dc115ae39062ec72c25be6f743c6be3e604079.ktx2",
+      "bytes": 164020,
+      "sha256": "615703c8f498271b604c202a36dc115ae39062ec72c25be6f743c6be3e604079"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/shipping-002/player/data/textures/ca7474ab217451d31f28d49082d0995859ed2374d10e441d1b0d4eae7bc53f2a.ktx2",
+      "bytes": 164020,
+      "sha256": "ca7474ab217451d31f28d49082d0995859ed2374d10e441d1b0d4eae7bc53f2a"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/shipping-002/player/data/world.scene",
+      "bytes": 15854,
+      "sha256": "01b0f3ae502ec2968e6b20af91f316ee2231958d7db8fd08e5ad2e14d62b9db8"
+    }
+  ],
+  "CPU_test_artifacts": [
+    {
+      "kind": "ordinary CPU library",
+      "source_sha": "ed16a31fb4c107eb4364186f105de3f2dc717492",
+      "original": "/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/incant_game_player-66bafb3057019268",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/eligibility-cpu-001/binaries/0-incant_game_player-source001",
+      "bytes": 34649424,
+      "sha256": "aca34f63fd612c1e8e84ad93aeb7c18c6b024fa5f1d08795f6f1fcd3dae8adc3"
+    },
+    {
+      "kind": "presentation-profile CPU library",
+      "source_sha": "ed16a31fb4c107eb4364186f105de3f2dc717492",
+      "original": "/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/incant_game_player-11130d8c62017840",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-window-planar-001/eligibility-cpu-001/binaries/2-incant_game_player-source001",
+      "bytes": 34883360,
+      "sha256": "a38cf7dcaddf72e61db04e53248ca248106a9c970675a6522a27e2fe57026589"
+    }
+  ],
+  "historical_shipping_player_sha256": "b21a15ffd8c38fe59da8d18d2c1a78dd9921dbbeb861739a009ab2f291846b5c",
+  "results": {
+    "ordinary_CPU": 90,
+    "presentation_profile_CPU": 113,
+    "strict_all_target_lints": 2,
+    "diagnostic_controls_per_configuration": 8,
+    "counts_overlap": true,
+    "Python_controls": 10,
+    "same_package_CPU_routes": [
+      781,
+      201,
+      221
+    ],
+    "actual_window_timeouts_seconds": [
+      90,
+      90
+    ],
+    "observer_window_unrun_at_this_intake": true
+  },
+  "scope": {
+    "full_native_route_verified": false,
+    "diagnostic_window_run": false,
+    "performance_gate_passed": false,
+    "filesystem_pixel_archive": false
+  },
+  "held_successor": "One new shipping export from ed16 has a separately granted execution packet. It is not part of these finalized CPU/original-window results and supplies no diagnostic window claim here.",
+  "replay": "python3 docs/spikes/evidence/native-window-eligibility/verify.py [--originals] [--binaries] [--git-source COMMIT --source-root CHECKOUT]"
+}
