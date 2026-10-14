@@ -22,7 +22,7 @@ The producer's historical 65-tick native proof retains 28 numerical observations
 timeout/cancelled redundant authoring attempt. It remains tied to its original
 engine binary. The new helper prepares the fast-mode input; shipping execution,
 Mac performance and presentation gates are separate work. Independent current-main
-final review is pending; publication requires the exact-head fast check.
+final review is accepted; publication requires the exact-head fast check.
 
 ```sh
 python3 docs/spikes/evidence/core-stress-main258/verify.py --verify-only

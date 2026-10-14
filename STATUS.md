@@ -11,7 +11,7 @@ journal-reopen failure. Fresh fast shipping measurements remain pending; no
 GPU/60 fps or appearance gate is claimed. Current main258 qualification passes
 ten Python controls, strict TypeScript and Node bulk/mutation controls against
 the current SDK; the original archive and all external payloads replay unchanged.
-Independent current-main final review is pending. [Producer evidence](docs/spikes/core-script-stress.md) and [composition](docs/spikes/core-stress-main258.md).
+Independent current-main final review is accepted; publication awaits the exact-head fast check. [Producer evidence](docs/spikes/core-script-stress.md) and [composition](docs/spikes/core-stress-main258.md).
 
 ## Per-frame CPU distributions — scoped Mac controls pass
 

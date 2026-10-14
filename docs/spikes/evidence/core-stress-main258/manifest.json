@@ -122,8 +122,12 @@
     {
       "file": "core-script-stress-root-20261014.json",
       "sha256": "1efa0cbe928fe0db5d2a17764e6861954f31ff269f885db8c0e10714611e30e2"
+    },
+    {
+      "file": "core-stress-main258-root-20261014.json",
+      "sha256": "4589a9109b7f45bd5fda346762b624792902cb3da68925f81a4b6d36d4920b3d"
     }
   ],
-  "review_status": "current-main independent final review pending",
+  "review_status": "current-main independent final review accepted; publication requires exact-head fast SUCCESS",
   "scope": "Current Python/TypeScript/Node helper qualification only. Producer historical native correctness not rerun; shipping performance remains separate."
 }
