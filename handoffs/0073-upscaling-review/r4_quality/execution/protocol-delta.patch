@@ -1,0 +1,34 @@
+--- owner_output_quality/execution/runner.py
++++ r4_quality/execution/runner.py
+@@ -27,11 +27,12 @@
+ spec.loader.exec_module(life)
+ QUALITY = PACKET / 'plan.json'
+ QUALITY_SHA = 'ff0f0f488faa3f6d4d6cc1321d5c4e87c35cbb4160130dddd050697bb824dbc4'
+-FIXTURE = PACKET / 'review/upscaling_owner_review.rs'
++FIXTURE = HERE.parents[1] / 'review/upscaling_owner_review.rs'
+ FIXTURE_SHA = '650316a21f30bfb4f7cbe8c99b67f9b5be269b51eb62b4d017b519bd5130d997'
+-PRODUCTION = '76be9608e99bf089fcb1e0908827330f70c28ac1'
+-PRODUCTION_FREEZE_SHA = '54c13c01c4b1de1c4de42f80ba01b026cf53c3752b4d365af058a4c6048d2361'
+-E = Path.home() / '.codex/incant-evidence/0073-owner-output-quality-gpu-001'
++PRODUCTION = '72b1ba8ec351e86d66a90c401e0a75a530633616'
++SOURCE = '825ff047284e84252d00f786a7b14cb6ecb44293'
++PRODUCTION_FREEZE_SHA = '9e36e8c3a8d7253a3619a85f8cb8e3e313c663bb37c9f15dab5946528c164f62'
++E = Path.home() / '.codex/incant-evidence/0073-r4-quality-gpu-001'
+ GLOBAL_LOCK = E.parent / 'native-gpu.lock'
+ ORDER = ['stationary', 'motion', 'transitions', 'c7_disocclusion', 'p1_crossing']
+ SELECTIONS = [ORDER]
+@@ -117,12 +118,12 @@
+     row = data['binary']
+     build = json_file(data['build']['path'])
+     require(build['schema'] == 'incant-owner-quality-build-v1'
+-            and build['source_commit'] == PRODUCTION
++            and build['source_commit'] == SOURCE
+             and build['production_freeze_sha256'] == PRODUCTION_FREEZE_SHA
+             and build['fixture_sha256'] == FIXTURE_SHA and build['plan_sha256'] == QUALITY_SHA
+             and build['features'] == ['default', 'physics-deterministic']
+             and build['executable'] == row['path'] and build['executable_sha256'] == row['sha256']
+-            and build['verified_production_files'] == 2835 and build['gpu_executions'] == 0,
++            and build['verified_production_files'] == 2839 and build['gpu_executions'] == 0,
+             'actual build/source/default-feature binding')
+     require([r['name'] for r in build['checks']] == ['build', 'clippy', 'listing']
+             and all(r['exit_code'] == 0 for r in build['checks']), 'three successful build checks')

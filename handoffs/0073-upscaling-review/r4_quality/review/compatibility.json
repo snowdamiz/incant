@@ -1,0 +1,39 @@
+{
+ "blob_pins": {
+  "Cargo.lock": {
+   "76be": "b78f80e82b5646d64d639ce9b790054f3bbcddbc",
+   "825ff": "b78f80e82b5646d64d639ce9b790054f3bbcddbc"
+  },
+  "crates/incant_render/Cargo.toml": {
+   "76be": "3806ab7c89ca8b2626f4eb963d6d06b6eaaafb13",
+   "825ff": "3806ab7c89ca8b2626f4eb963d6d06b6eaaafb13"
+  },
+  "crates/incant_render/src/motion/owner.rs": {
+   "76be": "84c04651696f12e2661e254b09388e5bf60b965a",
+   "825ff": "73f9188476d77a0d270183919e9a8a2e89d2511c"
+  },
+  "crates/incant_render/src/resolution/mod.rs": {
+   "76be": "1e228b5721a9796005047ae011341dc37404622d",
+   "825ff": "1e228b5721a9796005047ae011341dc37404622d"
+  },
+  "crates/incant_render/src/upscaling/mod.rs": {
+   "76be": "ccd36ace38e91e9be41b1c151a95fa1e53313397",
+   "825ff": "ccd36ace38e91e9be41b1c151a95fa1e53313397"
+  }
+ },
+ "candidate": "825ff047284e84252d00f786a7b14cb6ecb44293",
+ "evidence": [
+  "MotionFrame::jitter_phase -> Option<u32> retained (fixture lines 523, 568, 601); still 8 phases",
+  "fixture-facing crates, Cargo.toml/Cargo.lock, resolution and upscaling/mod.rs unchanged 76be -> 825ff",
+  "the only changed public fns (Prepared::jitter_offset replacing Prepared::jitter_phase; evidence/kernel test oracles) are not used by the fixture",
+  "R4 behaviour changes (estimator, LOD bias, split jitter offsets, DRS guard) change pixels, not the fixture's API or contract assertions (phase index, history, epochs, internal sizes)"
+ ],
+ "fixture": {
+  "byte_identical_to": "owner_quality/review/upscaling_owner_review.rs",
+  "path": "r4_quality/review/upscaling_owner_review.rs",
+  "sha256": "650316a21f30bfb4f7cbe8c99b67f9b5be269b51eb62b4d017b519bd5130d997"
+ },
+ "production_equivalent": "72b1ba8ec351e86d66a90c401e0a75a530633616",
+ "unverified": "only root's isolated build and clippy can confirm compilation",
+ "verdict": "compatible by source inspection; fixture reused byte-for-byte; no fixture adaptation required; not compiled"
+}

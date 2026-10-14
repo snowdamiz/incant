@@ -1,0 +1,97 @@
+{
+ "appearance": "not assessed",
+ "builds": 0,
+ "candidate": "825ff047284e84252d00f786a7b14cb6ecb44293",
+ "files": {
+  "execution/grant-template.json": "1b55e78d6b9fce9357d3edbc94d3b037911a56e1e8bb91ae166107b3aecb6258",
+  "execution/plan.json": "e019cd7fb3ea6a2bf4315125a2c0806650a6141cc82e4e00237e6c44cc39b760",
+  "execution/protocol-delta.patch": "c1ca9a875468a7896851f2c0d95d5fb41310f330602e1d95218b42a456e1cd2c",
+  "execution/runner.py": "2a991b3abde5fb2b5e5ddcc28eac6187f88e0f5fa4b1c7dbe235eae112b8af6c",
+  "execution/selfcheck.json": "098a586a823dbe26bbc48cfc86891cdbf42bb87b0ad3fbe89c1710f6073c1677",
+  "execution/selfcheck.py": "c732a3c63c5da1f7abffd92ee233cda957fe1c0f8298d6e77ff04763ae9553f4",
+  "production-freeze.json": "9e36e8c3a8d7253a3619a85f8cb8e3e313c663bb37c9f15dab5946528c164f62",
+  "review-checklist.md": "469494e786fc493bb2772b651ea1a0b1ee7e94a27d6c8401550998e2928f912e",
+  "review/compatibility.json": "99036d37d2cdd264c636da29c6a2faa8cd823dc80f77c14a9b42ca70ba08478a",
+  "review/upscaling_owner_review.rs": "650316a21f30bfb4f7cbe8c99b67f9b5be269b51eb62b4d017b519bd5130d997"
+ },
+ "gpu_executions": 0,
+ "images": 0,
+ "maximums": {
+  "builds": 0,
+  "maximum_extent": [
+   960,
+   540
+  ],
+  "pngs": 15,
+  "processes": 5,
+  "queue_submissions": 778,
+  "readback_maps": 380,
+  "readback_submissions": 380,
+  "retries": 0,
+  "scene_submissions": 380,
+  "timeout_seconds_each": 90,
+  "ui_submissions": 18
+ },
+ "model": "claude-opus-5-5",
+ "pending": [
+  "isolated build + clippy + enumeration receipts",
+  "root grant",
+  "bounded GPU execution",
+  "Claude pixel review of 15 PNGs"
+ ],
+ "per_group": {
+  "c7_disocclusion": {
+   "pngs": 2,
+   "queue_submissions": 164,
+   "readback_maps": 82,
+   "readback_submissions": 82,
+   "rendered_frames": 82,
+   "scene_submissions": 82,
+   "ui_submissions": 0
+  },
+  "motion": {
+   "pngs": 4,
+   "queue_submissions": 88,
+   "readback_maps": 44,
+   "readback_submissions": 44,
+   "rendered_frames": 44,
+   "scene_submissions": 44,
+   "ui_submissions": 0
+  },
+  "p1_crossing": {
+   "pngs": 1,
+   "queue_submissions": 196,
+   "readback_maps": 98,
+   "readback_submissions": 98,
+   "rendered_frames": 98,
+   "scene_submissions": 98,
+   "ui_submissions": 0
+  },
+  "stationary": {
+   "pngs": 6,
+   "queue_submissions": 118,
+   "readback_maps": 50,
+   "readback_submissions": 50,
+   "rendered_frames": 50,
+   "scene_submissions": 50,
+   "ui_submissions": 18
+  },
+  "transitions": {
+   "pngs": 2,
+   "queue_submissions": 212,
+   "readback_maps": 106,
+   "readback_submissions": 106,
+   "rendered_frames": 106,
+   "scene_submissions": 106,
+   "ui_submissions": 0
+  }
+ },
+ "production_equivalent": "72b1ba8ec351e86d66a90c401e0a75a530633616",
+ "schema": "incant-0073-r4-quality-preparation-v1",
+ "selfcheck": {
+  "all_pass": true,
+  "checks": 17
+ },
+ "status": "PREPARED_NOT_EXECUTED",
+ "thinking_effort": "max"
+}

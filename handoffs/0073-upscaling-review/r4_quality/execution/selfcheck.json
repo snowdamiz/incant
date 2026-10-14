@@ -1,0 +1,223 @@
+{
+ "all_checks_pass": true,
+ "candidate": "825ff047284e84252d00f786a7b14cb6ecb44293",
+ "checkout_head_observed": "825ff047284e84252d00f786a7b14cb6ecb44293",
+ "checks": [
+  {
+   "check": "fixture copy is byte-identical to the reviewed 650316a fixture",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "runner differs from the 76be execution copy only in source/path/hash metadata",
+   "detail": [
+    "-FIXTURE = PACKET / 'review/upscaling_owner_review.rs'",
+    "+FIXTURE = HERE.parents[1] / 'review/upscaling_owner_review.rs'",
+    "-PRODUCTION = '76be9608e99bf089fcb1e0908827330f70c28ac1'",
+    "-PRODUCTION_FREEZE_SHA = '54c13c01c4b1de1c4de42f80ba01b026cf53c3752b4d365af058a4c6048d2361'",
+    "-E = Path.home() / '.codex/incant-evidence/0073-owner-output-quality-gpu-001'",
+    "+PRODUCTION = '72b1ba8ec351e86d66a90c401e0a75a530633616'",
+    "+SOURCE = '825ff047284e84252d00f786a7b14cb6ecb44293'",
+    "+PRODUCTION_FREEZE_SHA = '9e36e8c3a8d7253a3619a85f8cb8e3e313c663bb37c9f15dab5946528c164f62'",
+    "+E = Path.home() / '.codex/incant-evidence/0073-r4-quality-gpu-001'",
+    "-            and build['source_commit'] == PRODUCTION",
+    "+            and build['source_commit'] == SOURCE",
+    "-            and build['verified_production_files'] == 2835 and build['gpu_executions'] == 0,",
+    "+            and build['verified_production_files'] == 2839 and build['gpu_executions'] == 0,"
+   ],
+   "ok": true
+  },
+  {
+   "check": "lifecycle helper is the reviewed b9e12895 file",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "five ordered groups, primary first",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "exact maximums: 5 children, 380 scenes + 18 UI + 380 readbacks = 778 submissions, 380 maps, 15 PNGs 960x540, 90 s, 0 builds/retries",
+   "detail": {
+    "c7_disocclusion": {
+     "pngs": 2,
+     "queue_submissions": 164,
+     "readback_maps": 82,
+     "readback_submissions": 82,
+     "rendered_frames": 82,
+     "scene_submissions": 82,
+     "ui_submissions": 0
+    },
+    "motion": {
+     "pngs": 4,
+     "queue_submissions": 88,
+     "readback_maps": 44,
+     "readback_submissions": 44,
+     "rendered_frames": 44,
+     "scene_submissions": 44,
+     "ui_submissions": 0
+    },
+    "p1_crossing": {
+     "pngs": 1,
+     "queue_submissions": 196,
+     "readback_maps": 98,
+     "readback_submissions": 98,
+     "rendered_frames": 98,
+     "scene_submissions": 98,
+     "ui_submissions": 0
+    },
+    "stationary": {
+     "pngs": 6,
+     "queue_submissions": 118,
+     "readback_maps": 50,
+     "readback_submissions": 50,
+     "rendered_frames": 50,
+     "scene_submissions": 50,
+     "ui_submissions": 18
+    },
+    "transitions": {
+     "pngs": 2,
+     "queue_submissions": 212,
+     "readback_maps": 106,
+     "readback_submissions": 106,
+     "rendered_frames": 106,
+     "scene_submissions": 106,
+     "ui_submissions": 0
+    }
+   },
+   "ok": true
+  },
+  {
+   "check": "unbuilt plan cannot execute (fail closed)",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "no grant path without a frozen binary",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "mutation: claimed frozen state without build/binary receipts refuses",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "mutation: a 16th PNG refuses",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "mutation: the old 76be producer refuses",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "mutation: a retry refuses",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "mutation: dropping p1_crossing refuses",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "freeze binds candidate 825ff to production-equivalent 72b1 with 2839 files",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "candidate keeps MotionFrame::jitter_phase -> Option<u32> (fixture lines 523/568/601)",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "candidate keeps every other MotionFrame accessor the fixture uses",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "fixture-facing crates, Cargo files, resolution and upscaling API module unchanged 76be -> 825ff",
+   "detail": [
+    "crates/incant_render/src/upscaling/mod.rs",
+    "crates/incant_render/src/resolution",
+    "crates/incant_render/Cargo.toml",
+    "crates/incant_render/tests",
+    "crates/incant_assets",
+    "crates/incant_doc",
+    "crates/incant_text",
+    "crates/incant_render_data",
+    "crates/incant_render_authoring",
+    "crates/incant_types",
+    "Cargo.toml",
+    "Cargo.lock"
+   ],
+   "ok": true
+  },
+  {
+   "check": "changed pub fns are unused by the fixture (Prepared::jitter_offset, evidence/kernel test oracles)",
+   "detail": [
+    "-    pub fn jitter_phase(&self) -> Option<u32> {",
+    "+    pub fn jitter_offset(&self) -> Option<[f32; 2]> {",
+    "+    pub fn resolve(&self, pixel: [u32; 2]) -> Result {",
+    "-    pub fn new(size: [u32; 2], rect: [f32; 4], n: u8, phase: usize) -> Option<Self> {",
+    "+    pub fn historical(size: [u32; 2], rect: [f32; 4], n: u8, phase: usize) -> Option<Self> {",
+    "+    pub fn current(size: [u32; 2], rect: [f32; 4], n: u8, phase: usize) -> Option<Self> {"
+   ],
+   "ok": true
+  }
+ ],
+ "per_group": {
+  "c7_disocclusion": {
+   "pngs": 2,
+   "queue_submissions": 164,
+   "readback_maps": 82,
+   "readback_submissions": 82,
+   "rendered_frames": 82,
+   "scene_submissions": 82,
+   "ui_submissions": 0
+  },
+  "motion": {
+   "pngs": 4,
+   "queue_submissions": 88,
+   "readback_maps": 44,
+   "readback_submissions": 44,
+   "rendered_frames": 44,
+   "scene_submissions": 44,
+   "ui_submissions": 0
+  },
+  "p1_crossing": {
+   "pngs": 1,
+   "queue_submissions": 196,
+   "readback_maps": 98,
+   "readback_submissions": 98,
+   "rendered_frames": 98,
+   "scene_submissions": 98,
+   "ui_submissions": 0
+  },
+  "stationary": {
+   "pngs": 6,
+   "queue_submissions": 118,
+   "readback_maps": 50,
+   "readback_submissions": 50,
+   "rendered_frames": 50,
+   "scene_submissions": 50,
+   "ui_submissions": 18
+  },
+  "transitions": {
+   "pngs": 2,
+   "queue_submissions": 212,
+   "readback_maps": 106,
+   "readback_submissions": 106,
+   "rendered_frames": 106,
+   "scene_submissions": 106,
+   "ui_submissions": 0
+  }
+ },
+ "plan_sha256": "e019cd7fb3ea6a2bf4315125a2c0806650a6141cc82e4e00237e6c44cc39b760",
+ "production": "72b1ba8ec351e86d66a90c401e0a75a530633616",
+ "runner_sha256": "2a991b3abde5fb2b5e5ddcc28eac6187f88e0f5fa4b1c7dbe235eae112b8af6c",
+ "scope": "CPU-only preparation self-check; no build, run branch, GPU, capture or image"
+}
