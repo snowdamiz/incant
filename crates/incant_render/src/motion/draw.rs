@@ -9,7 +9,15 @@ pub(super) struct Draw {
     pub pipeline: wgpu::RenderPipeline,
     pub depth_pipeline: wgpu::RenderPipeline,
 }
+#[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+#[derive(Clone)]
+pub(crate) struct DiagnosticOwner {
+    _targets: Arc<Targets>,
+}
+
 pub(crate) struct MotionDraw {
+    #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+    pub(crate) diagnostic_frame: [f32; 36],
     pub(super) targets: Arc<Targets>,
     pub(super) slot: usize,
     pub(super) rect: [f32; 4],
@@ -19,6 +27,12 @@ pub(crate) struct MotionDraw {
     pub(super) draws: Vec<Draw>,
 }
 impl MotionDraw {
+    #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+    pub(crate) fn diagnostic_owner(&self) -> DiagnosticOwner {
+        DiagnosticOwner {
+            _targets: Arc::clone(&self.targets),
+        }
+    }
     #[cfg(feature = "native-metalfx")]
     pub(crate) fn native_views(&self) -> (&wgpu::TextureView, &wgpu::TextureView) {
         (&self.targets.motion, &self.targets.depth[self.slot])

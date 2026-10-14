@@ -37,6 +37,13 @@ impl FrameCache {
             return Ok(Arc::clone(frame));
         }
         let create = |label, format, usage| {
+            #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+            let usage = usage
+                | if format == HDR_FORMAT {
+                    wgpu::TextureUsages::COPY_SRC
+                } else {
+                    wgpu::TextureUsages::empty()
+                };
             device
                 .create_texture(&wgpu::TextureDescriptor {
                     label: Some(label),

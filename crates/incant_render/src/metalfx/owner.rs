@@ -16,6 +16,10 @@ struct Prepared {
 }
 
 pub(crate) struct Owner {
+    #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+    diagnostic_enabled: bool,
+    #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+    diagnostic: Option<super::diagnostic::Snapshot>,
     preference: Preference,
     range: Result<[f32; 2], Fallback>,
     config: Config,
@@ -31,6 +35,10 @@ pub(crate) struct Owner {
     _thread: PhantomData<Rc<()>>,
 }
 pub(crate) struct Pending {
+    #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+    pub(super) diagnostic_enabled: bool,
+    #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+    pub(super) diagnostic: Option<super::diagnostic::Snapshot>,
     pub selection: Selection,
     pub(super) plan: Option<Plan>,
     pub(super) targets: Option<Arc<Targets>>,
@@ -53,6 +61,10 @@ impl Owner {
         config.validate()?;
         preference.select(range.err())?;
         Ok(Self {
+            #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+            diagnostic_enabled: false,
+            #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+            diagnostic: None,
             preference,
             range,
             config,
@@ -190,6 +202,10 @@ impl Owner {
             }
         }
         Ok(Pending {
+            #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+            diagnostic_enabled: self.diagnostic_enabled,
+            #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+            diagnostic: None,
             selection,
             plan,
             targets,
@@ -244,13 +260,18 @@ impl Owner {
                 .try_borrow_mut()
                 .map_err(|_| MetalFxError::Interop)?;
             let plan = p.plan.ok_or(MetalFxError::Interop)?;
-            scaler.encode(
+            let encoded = scaler.encode(
                 device,
                 &p.targets.as_ref().ok_or(MetalFxError::Interop)?.textures,
                 [plan.source[2], plan.source[3]],
                 p.jitter,
                 p.reset,
-            )
+            )?;
+            #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+            if let Some(snapshot) = &mut p.diagnostic {
+                snapshot.native_settings = Some(scaler.diagnostic_settings());
+            }
+            Ok(encoded)
         }
         #[cfg(not(target_os = "macos"))]
         {
@@ -258,7 +279,19 @@ impl Owner {
             Err(MetalFxError::Unavailable(Fallback::Backend))
         }
     }
+    #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+    pub(crate) fn enable_diagnostic(&mut self) {
+        self.diagnostic_enabled = true;
+    }
+    #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+    pub(crate) fn diagnostic(&self) -> Option<&super::diagnostic::Snapshot> {
+        self.diagnostic.as_ref()
+    }
     pub fn accept(&mut self, p: Pending) {
+        #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+        {
+            self.diagnostic = p.diagnostic.clone();
+        }
         if p.native() {
             self.history
                 .accept(p.sequence, p.plan.expect("native plan").dimensions());
@@ -281,6 +314,10 @@ impl Owner {
     }
 }
 impl Pending {
+    #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+    pub(super) fn diagnostic_identity(&self) -> (u64, bool) {
+        (self.sequence, self.reset)
+    }
     pub fn native(&self) -> bool {
         self.selection == Selection::MetalFx
     }

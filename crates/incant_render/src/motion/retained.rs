@@ -495,6 +495,8 @@ impl MotionState {
         }
         Ok((
             Some(MotionDraw {
+                #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+                diagnostic_frame: bytemuck::cast(uniform),
                 targets: Arc::clone(&targets),
                 slot,
                 rect: plan.rect,

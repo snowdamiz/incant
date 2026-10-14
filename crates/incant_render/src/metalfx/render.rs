@@ -49,6 +49,10 @@ impl Renderer {
                 &motion,
                 scene.camera,
             )?;
+        #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+        {
+            pending.diagnostic = draw.diagnostic.clone();
+        }
         let native_plan = pending.plan.ok_or(MetalFxError::Interop)?;
         let output = self.output.prepare(
             &self.device,

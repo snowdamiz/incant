@@ -1,5 +1,7 @@
 //! Explicit, default-off Mac MetalFX temporal scaling. The ordinary renderer is
 //! the spatial fallback; this feature does not implement the built-in upscaler.
+#[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+pub(crate) mod diagnostic;
 #[cfg(any(feature = "native-metalfx", test))]
 mod lifecycle;
 #[cfg(all(feature = "native-metalfx", target_os = "macos"))]

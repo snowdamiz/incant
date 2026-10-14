@@ -93,6 +93,24 @@ impl Scaler {
             })
         }
     }
+    #[cfg(test)]
+    pub(super) fn diagnostic_settings(&self) -> [f32; 9] {
+        // SAFETY: read-only getters on this thread-owned scaler after encode;
+        // these values do not imply completion of the submitted GPU commands.
+        unsafe {
+            [
+                self.raw.preExposure(),
+                self.raw.motionVectorScaleX(),
+                self.raw.motionVectorScaleY(),
+                self.raw.jitterOffsetX(),
+                self.raw.jitterOffsetY(),
+                self.raw.inputContentWidth() as f32,
+                self.raw.inputContentHeight() as f32,
+                f32::from(u8::from(self.raw.reset())),
+                f32::from(u8::from(self.raw.isDepthReversed())),
+            ]
+        }
+    }
     pub fn encode(
         &mut self,
         device: &wgpu::Device,

@@ -5,6 +5,7 @@ mod geometry;
 #[path = "../../tests/materials/mod.rs"]
 #[allow(dead_code)] // Reuse the existing whole fixture; its other public helpers are unrelated.
 mod materials;
+mod raw;
 mod scene;
 use crate::{
     Renderer, RetainedTarget,
@@ -103,6 +104,7 @@ fn actual_full_half_three_quarter_material_images_and_motion() {
         renderer.metalfx_admission.is_some_and(|r| r.is_ok()),
         "native support required"
     );
+    let mut raw_probe = raw::requested().then(|| raw::Probe::new(&renderer, &mut output));
     let texture = capture::texture(&renderer);
     let view = texture.create_view(&Default::default());
     let mut arms = Vec::new();
@@ -119,6 +121,9 @@ fn actual_full_half_three_quarter_material_images_and_motion() {
                     },
                 )
                 .unwrap();
+            if raw_probe.is_some() {
+                retained.enable_metalfx_diagnostic();
+            }
             let scale = crate::resolution::ResolutionScale::new(sixteenths).unwrap();
             retained
                 .set_dynamic_resolution(Some(crate::resolution::ResolutionConfig {
@@ -201,7 +206,24 @@ fn actual_full_half_three_quarter_material_images_and_motion() {
             rows.push(json!({"arm":name,"frame":frame,"input":input_binding,"motion":motion,
                 "selection":format!("{:?}",retained.metalfx_selection()),"output":[WIDTH,HEIGHT],"cut":frame==25}));
             if CAPTURES.contains(&frame) {
-                let pixels = capture::read(&renderer, &texture);
+                let pixels = if scale != 16 && matches!(frame, 16 | 24) {
+                    if let Some(probe) = &mut raw_probe {
+                        probe.read(
+                            &renderer,
+                            &texture,
+                            retained
+                                .metalfx_diagnostic()
+                                .expect("accepted native snapshot"),
+                            name,
+                            frame,
+                            &mut output,
+                        )
+                    } else {
+                        capture::read(&renderer, &texture)
+                    }
+                } else {
+                    capture::read(&renderer, &texture)
+                };
                 submits += 1;
                 maps += 1;
                 buffers += 1;
@@ -210,7 +232,13 @@ fn actual_full_half_three_quarter_material_images_and_motion() {
         }
     }
     assert_eq!((submits, maps, native, buffers), (111, 15, 64, 239));
-    let report = json!({"schema":1,"purpose":"observations only, no visual or performance acceptance",
+    let raw_diagnostic = raw_probe.map(|probe| {
+        assert_eq!(probe.records.len(), 4);
+        json!({"mode":"vendor-guard-readback-v1","frames":[16,24],"records":probe.records,
+            "mask_passes":4,"timestamp_queries":0,"extra_submissions":0,"extra_maps":0,
+            "max_map_bytes":25*1024*1024,"raw_byte_order":"little endian","appearance_acceptance":false})
+    });
+    let report = json!({"schema":1,"raw_diagnostic":raw_diagnostic,"purpose":"observations only, no visual or performance acceptance",
         "adapter":format!("{:?}",renderer.adapter.get_info()),"native_admission":format!("{:?}",renderer.metalfx_admission),
         "scene_source":"6cf4660a71a30767e2f4e09749e44ab1678d2a53 opaque Stage subset",
         "excluded":["BLEND card","sprites","world text","bloom","portable upscaling shaders"],

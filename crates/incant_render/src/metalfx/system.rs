@@ -18,6 +18,8 @@ pub(crate) struct System {
     normalize: wgpu::RenderPipeline,
 }
 pub(crate) struct Draw {
+    #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+    pub(super) diagnostic: Option<super::diagnostic::Snapshot>,
     targets: Arc<Targets>,
     pack: wgpu::BindGroup,
     normalize: wgpu::BindGroup,
@@ -194,6 +196,10 @@ impl System {
     ) -> Result<Draw, MetalFxError> {
         let plan = p.plan.ok_or(MetalFxError::Interop)?;
         let targets = Arc::clone(p.targets.as_ref().ok_or(MetalFxError::Interop)?);
+        #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+        let motion_observation = p
+            .diagnostic_enabled
+            .then(|| (motion.diagnostic_frame, motion.diagnostic_owner()));
         let (motion, depth) = motion.native_views();
         let f = Frame {
             source: plan.source.map(|x| x as f32),
@@ -243,6 +249,21 @@ impl System {
             })
         };
         Ok(Draw {
+            #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+            diagnostic: motion_observation.map(|(motion_frame, motion_owner)| {
+                super::diagnostic::Snapshot::new(
+                    Arc::clone(&targets),
+                    bytemuck::cast(f),
+                    motion_frame,
+                    [
+                        current.texture().clone(),
+                        motion.texture().clone(),
+                        depth.texture().clone(),
+                    ],
+                    motion_owner,
+                    p.diagnostic_identity(),
+                )
+            }),
             pack: group([current, motion, depth]),
             normalize: group([current, &targets.views[4], depth]),
             targets,

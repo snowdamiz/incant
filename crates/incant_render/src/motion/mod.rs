@@ -12,6 +12,8 @@ mod targets;
 #[cfg(test)]
 mod tests;
 
+#[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+pub(crate) use draw::DiagnosticOwner;
 pub(crate) use draw::MotionDraw;
 pub use owner::MotionFrame;
 pub use plan::{MAX_MOTION_INSTANCE_BYTES, MAX_MOTION_PIXELS, MAX_MOTION_TARGET_BYTES};

@@ -46,6 +46,11 @@ impl Targets {
                         wgpu::TextureUsages::STORAGE_BINDING
                     } else {
                         wgpu::TextureUsages::empty()
+                    }
+                    | if cfg!(all(test, feature = "native-metalfx", target_os = "macos")) {
+                        wgpu::TextureUsages::COPY_SRC
+                    } else {
+                        wgpu::TextureUsages::empty()
                     },
                 view_formats: &[],
             })
@@ -64,7 +69,12 @@ impl Targets {
                 dimension: wgpu::TextureDimension::D2,
                 format: crate::frame::HDR_FORMAT,
                 usage: wgpu::TextureUsages::RENDER_ATTACHMENT
-                    | wgpu::TextureUsages::TEXTURE_BINDING,
+                    | wgpu::TextureUsages::TEXTURE_BINDING
+                    | if cfg!(all(test, feature = "native-metalfx", target_os = "macos")) {
+                        wgpu::TextureUsages::COPY_SRC
+                    } else {
+                        wgpu::TextureUsages::empty()
+                    },
                 view_formats: &[],
             })
             .create_view(&Default::default());

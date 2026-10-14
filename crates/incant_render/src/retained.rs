@@ -240,6 +240,18 @@ impl RetainedScene {
             motion.invalidate();
         }
     }
+    #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+    pub(crate) fn enable_metalfx_diagnostic(&mut self) {
+        self.metalfx
+            .as_mut()
+            .expect("native observer requires native owner")
+            .enable_diagnostic();
+    }
+    #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+    pub(crate) fn metalfx_diagnostic(&self) -> Option<&crate::metalfx::diagnostic::Snapshot> {
+        self.metalfx.as_ref()?.diagnostic()
+    }
+
     /// Borrow accepted placement changes. Candidate staging and failed frames
     /// never publish here; IDs are scoped to the returned frame owner/epoch.
     pub fn motion_changes(&self) -> Option<crate::motion::MotionChanges<'_>> {
