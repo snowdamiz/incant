@@ -1,0 +1,67 @@
+{
+  "schema": "incant-owner-quality-execution-v1",
+  "state": "FROZEN_READY_FOR_ROOT_GRANT",
+  "producer": "72b1ba8ec351e86d66a90c401e0a75a530633616",
+  "evidence_dir": "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001",
+  "groups": [
+    "stationary",
+    "motion",
+    "transitions",
+    "c7_disocclusion",
+    "p1_crossing"
+  ],
+  "budget": {
+    "processes": 5,
+    "scene_submissions": 380,
+    "ui_submissions": 18,
+    "readback_submissions": 380,
+    "readback_maps": 380,
+    "queue_submissions": 778,
+    "rendered_frames": 380,
+    "pngs": 15,
+    "maximum_extent": [
+      960,
+      540
+    ],
+    "timeout_seconds_each": 90,
+    "builds": 0,
+    "retries": 0
+  },
+  "environment": {
+    "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+    "TMPDIR": "<fresh evidence root>/tmp/<group>",
+    "INCANT_EXPECT_GPU_BACKEND": "Metal",
+    "RUST_BACKTRACE": "0",
+    "INCANT_0073_OWNER_REVIEW_OUT": "<fresh evidence root>/<group>/artifacts"
+  },
+  "quality_plan": {
+    "path": "/Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review/handoffs/0073-upscaling-review/owner_quality/plan.json",
+    "sha256": "ff0f0f488faa3f6d4d6cc1321d5c4e87c35cbb4160130dddd050697bb824dbc4"
+  },
+  "fixture": {
+    "path": "/Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review/handoffs/0073-upscaling-review/r4_quality/review/upscaling_owner_review.rs",
+    "sha256": "650316a21f30bfb4f7cbe8c99b67f9b5be269b51eb62b4d017b519bd5130d997"
+  },
+  "production_freeze": {
+    "path": "/Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review/handoffs/0073-upscaling-review/r4_quality/production-freeze.json",
+    "sha256": "9e36e8c3a8d7253a3619a85f8cb8e3e313c663bb37c9f15dab5946528c164f62"
+  },
+  "build": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/r4-quality-build-001/receipt.json",
+    "sha256": "78206ab459a446fb428774caddde3e82316b4f48a7d20828853ca209fc214818"
+  },
+  "enumeration": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/r4-quality-build-001/listing.log",
+    "sha256": "a0472f0502ae15b73b4b98c8206066562e23f14ec2a949fd37deaf961a26b97d"
+  },
+  "build_review": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/r4-quality-build-001/source-build-audit.json",
+    "sha256": "57d15429dea98d5df2a239aa8f150135c9d1bfe086a9fc13baa23afd9583669c"
+  },
+  "binary": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/r4-quality-build-001/upscaling_owner_review",
+    "sha256": "9c3a458c3a14f524e594dfdb4e03d5d42c02c91ecd8aca4cd3493248aad0fa59",
+    "bytes": 18363240,
+    "mode": "0555"
+  }
+}

@@ -1,0 +1,11 @@
+# R4 unchanged appearance fixture: CPU build closure
+
+This packet compiles the unchanged Claude fixture `650316a21f30bfb4f7cbe8c99b67f9b5be269b51eb62b4d017b519bd5130d997` against accepted source `825ff047284e84252d00f786a7b14cb6ecb44293`, whose production is `72b1ba8ec351e86d66a90c401e0a75a530633616`. All 2,839 frozen build inputs match both immutable Git objects and the live checkout. The sole temporary test-file injection was removed, and the candidate is clean.
+
+The root-authorized CPU build uses the existing guarded protocol's stricter `-j1` commands within the granted `-j2` ceiling, on `/Users/andreyyurlov/.codex/incant-gpu-timestamps-target`. Build, fixture-only strict Clippy, and the copied executable's `--list --ignored` all passed. No ignored test was executed. Supervisor 17461 exited 0 and was reaped; all three child process groups are empty. The CPU target is released.
+
+The executable is retained outside the target at `/Users/andreyyurlov/.codex/incant-evidence/r4-quality-build-001/upscaling_owner_review`, mode 0555, 18,363,240 bytes, SHA-256 `9c3a458c3a14f524e594dfdb4e03d5d42c02c91ecd8aca4cd3493248aad0fa59`. Actual compiler metadata selects only `default` and `physics-deterministic` for both library and test target. No cooked or native MetalFX path is claimed by this fixture build.
+
+`../execution/plan-ready.json` binds this binary, exact build receipt, enumeration, source freeze, and unchanged runner. The original unbuilt plan is preserved. The existing 14 CPU-only refusal/artifact/process controls passed (handle 19512 exited 0 and was reaped), and the runner's read-only check passed with no GPU authority. The control test differs from the prior reviewed controls only by reading `plan-ready.json` instead of `plan.json`.
+
+A fresh root GPU grant is still required. The proposed scope remains exactly five ordered children, at most 778 queue submissions, 380 maps, and 15 PNGs at 960×540, 90 seconds per child, stop on first failure, no retries or builds. No GPU, image capture or pixel review occurred during this build closure. All prior quality failures remain preserved; tiny numerical success and compilation do not establish appearance acceptance. C7/C9 observations use the established rendered-output units and cannot close differently defined historical gates; P1 coverage remains limited to its authored fixture.

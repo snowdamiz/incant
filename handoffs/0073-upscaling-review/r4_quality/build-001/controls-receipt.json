@@ -1,0 +1,16 @@
+{
+  "scope": "CPU-only guard/artifact/process lifecycle controls; no renderer launched",
+  "handle": 19512,
+  "exit_code": 0,
+  "reaped": true,
+  "controls": 14,
+  "runner_sha256": "2a991b3abde5fb2b5e5ddcc28eac6187f88e0f5fa4b1c7dbe235eae112b8af6c",
+  "plan_sha256": "9792295b1f625820029c4a43f31d4f4afe88d1d589c03dbc2fb5fa6f220fc3ba",
+  "test_source_sha256": "78330b27bcaed36d256aaeff5138935d58ade8255540a0d831977b91f5195b12",
+  "controls_log_sha256": "13041058bfb61cd27330ad939332746a0b15f5b077b842cad0c9612d8f72fc82",
+  "plan_check": {
+    "exit_code": 0,
+    "log_sha256": "5a7518f17b28c97b93344cbbe35deec7ce83f124b1a27ff21ce4a6b25c716443"
+  },
+  "gpu_executions": 0
+}

@@ -1,0 +1,36 @@
+{
+  "reason": "compiler-artifact",
+  "package_id": "path+file:///Users/andreyyurlov/.codex/worktrees/owner-quality-repair/incant/crates/incant_render#0.0.1",
+  "manifest_path": "/Users/andreyyurlov/.codex/worktrees/owner-quality-repair/incant/crates/incant_render/Cargo.toml",
+  "target": {
+    "kind": [
+      "lib"
+    ],
+    "crate_types": [
+      "lib"
+    ],
+    "name": "incant_render",
+    "src_path": "/Users/andreyyurlov/.codex/worktrees/owner-quality-repair/incant/crates/incant_render/src/lib.rs",
+    "edition": "2024",
+    "doc": true,
+    "doctest": true,
+    "test": true
+  },
+  "profile": {
+    "opt_level": "1",
+    "debuginfo": 0,
+    "debug_assertions": false,
+    "overflow_checks": false,
+    "test": false
+  },
+  "features": [
+    "default",
+    "physics-deterministic"
+  ],
+  "filenames": [
+    "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/ci/deps/libincant_render-acc3d1929421bfc9.rlib",
+    "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/ci/deps/libincant_render-acc3d1929421bfc9.rmeta"
+  ],
+  "executable": null,
+  "fresh": false
+}

@@ -1,0 +1,43 @@
+{
+  "scope": "Astra build/source binding audit; CPU-only; no appearance or GPU acceptance",
+  "at": "2026-10-14T02:02:48.951384+00:00",
+  "source": "825ff047284e84252d00f786a7b14cb6ecb44293",
+  "production": "72b1ba8ec351e86d66a90c401e0a75a530633616",
+  "exact_git_and_live_inputs": 2839,
+  "source_unchanged": true,
+  "fixture_removed": true,
+  "features": [
+    "default",
+    "physics-deterministic"
+  ],
+  "checks": [
+    "build",
+    "clippy",
+    "listing"
+  ],
+  "all_reaped": true,
+  "test_names": [
+    "c7_disocclusion",
+    "motion",
+    "p1_crossing",
+    "stationary",
+    "transitions"
+  ],
+  "binary": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/r4-quality-build-001/upscaling_owner_review",
+    "sha256": "9c3a458c3a14f524e594dfdb4e03d5d42c02c91ecd8aca4cd3493248aad0fa59",
+    "bytes": 18363240,
+    "mode": "0555"
+  },
+  "inputs": {
+    "receipt.json": "78206ab459a446fb428774caddde3e82316b4f48a7d20828853ca209fc214818",
+    "release.json": "50c0512c97cc779daa2b7c459e658b5ade76da986da0b7ec4437f77b56d6f005",
+    "production-freeze.json": "9e36e8c3a8d7253a3619a85f8cb8e3e313c663bb37c9f15dab5946528c164f62",
+    "artifact.json": "cd7237c5acd4554b1eb4395a9bbc370ce155d5575588dd9b8fd554c0d0babde0",
+    "library-artifact.json": "21c00d857342f28ba13aa1a629913da18789227f5f309f6ce60c8870f573fd03",
+    "build.py": "2f1156ea3b797cfb21070ecf4e327536c3748f2ec5ffbfe278888f1d7a1ccd31",
+    "fixture.rs": "650316a21f30bfb4f7cbe8c99b67f9b5be269b51eb62b4d017b519bd5130d997",
+    "plan.json": "ff0f0f488faa3f6d4d6cc1321d5c4e87c35cbb4160130dddd050697bb824dbc4"
+  },
+  "gpu_executions": 0
+}

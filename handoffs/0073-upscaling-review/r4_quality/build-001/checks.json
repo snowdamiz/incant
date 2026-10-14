@@ -1,0 +1,68 @@
+[
+  {
+    "name": "build",
+    "argv": [
+      "./tools/cargo",
+      "test",
+      "--locked",
+      "--offline",
+      "--profile",
+      "ci",
+      "-j1",
+      "-p",
+      "incant_render",
+      "--test",
+      "upscaling_owner_review",
+      "--no-run",
+      "--message-format=json-render-diagnostics"
+    ],
+    "exit_code": 0,
+    "seconds": 10.412,
+    "pid": 52538,
+    "reaped": true,
+    "group_empty": true,
+    "error": null,
+    "log_sha256": "d5b1d832aa6306f57e3d8e843b1b08235938166ed88e4176e154d8fa306b1bf2"
+  },
+  {
+    "name": "clippy",
+    "argv": [
+      "./tools/cargo",
+      "clippy",
+      "--locked",
+      "--offline",
+      "--profile",
+      "ci",
+      "-j1",
+      "-p",
+      "incant_render",
+      "--test",
+      "upscaling_owner_review",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "seconds": 1.694,
+    "pid": 52577,
+    "reaped": true,
+    "group_empty": true,
+    "error": null,
+    "log_sha256": "99ea3a16c49f0a7987ce7cbaa7f3a4219c5936bb60d52684e23f1c752bc57e6d"
+  },
+  {
+    "name": "listing",
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-evidence/r4-quality-build-001/upscaling_owner_review",
+      "--list",
+      "--ignored"
+    ],
+    "exit_code": 0,
+    "seconds": 0.235,
+    "pid": 52587,
+    "reaped": true,
+    "group_empty": true,
+    "error": null,
+    "log_sha256": "a0472f0502ae15b73b4b98c8206066562e23f14ec2a949fd37deaf961a26b97d"
+  }
+]

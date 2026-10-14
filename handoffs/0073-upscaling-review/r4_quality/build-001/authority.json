@@ -1,0 +1,18 @@
+{
+  "authority": "root collaboration task",
+  "scope": "CPU fixture build, scoped Clippy, ignored-name enumeration only",
+  "source": "825ff047284e84252d00f786a7b14cb6ecb44293",
+  "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+  "jobs": 1,
+  "granted_ceiling": 2,
+  "gpu_executions": 0,
+  "started": "2026-10-14T02:01:15.335977+00:00",
+  "environment": {
+    "HOME": "/Users/andreyyurlov",
+    "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+    "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+    "CARGO_BUILD_JOBS": "1",
+    "CARGO_NET_OFFLINE": "true",
+    "LC_ALL": "C"
+  }
+}
