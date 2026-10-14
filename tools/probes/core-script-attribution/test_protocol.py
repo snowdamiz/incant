@@ -94,6 +94,53 @@ class Protocol(unittest.TestCase):
             with self.assertRaises(ValueError):
                 graph_delta(wrong, base)
 
+    def test_graph_preserves_duplicate_package_version_feature_rows(self):
+        receivers = [f'{name} v0.0.1|{flags}' for name in sorted(EXTRA)
+                     for flags in ('profile', 'profile,retained')]
+        units = ['indexmap v2.14.2|default,std', 'indexmap v2.14.2|std']
+        baseline = '\n'.join(receivers + units)
+        actual = '\n'.join([row + ',' + DIAGNOSTIC for row in receivers] + units)
+        change = graph_delta(actual, baseline)
+        self.assertEqual(set(change), EXTRA)
+        for name in EXTRA:
+            self.assertEqual(change[name]['before'], [['profile'], ['profile', 'retained']])
+            self.assertEqual(change[name]['after'],
+                             [[DIAGNOSTIC, 'profile'], [DIAGNOSTIC, 'profile', 'retained']])
+        # Repeated edges to the same exact unit do not add a distinct unit.
+        self.assertEqual(graph_delta(actual + '\n' + units[0] + ' (*)', baseline), change)
+
+    def test_graph_refuses_merged_missing_or_extra_nonreceiver_units(self):
+        receivers = [f'{name} v0.0.1|profile' for name in sorted(EXTRA)]
+        units = ['indexmap v2.14.2|default,std', 'indexmap v2.14.2|std']
+        baseline = '\n'.join(receivers + units)
+        changed = [row + ',' + DIAGNOSTIC for row in receivers]
+        for wrong in (
+            [units[0]],  # A union would conceal the lost std-only unit.
+            [units[1]],
+            units + ['indexmap v2.14.2|default,std,new'],
+            [units[0] + ',' + DIAGNOSTIC, units[1]],
+        ):
+            with self.assertRaises(ValueError):
+                graph_delta('\n'.join(changed + wrong), baseline)
+
+    def test_graph_requires_diagnostic_on_every_row_of_exact_four_receivers(self):
+        units = ['indexmap v2.14.2|default,std', 'indexmap v2.14.2|std']
+        rows = [f'{name} v0.0.1|{flags}' for name in sorted(EXTRA)
+                for flags in ('profile', 'profile,retained')]
+        baseline = '\n'.join(rows + units)
+        changed = [row + ',' + DIAGNOSTIC for row in rows]
+        for index in range(len(rows)):
+            for mode in ('missing_row', 'missing_flag', 'extra_row'):
+                wrong = list(changed)
+                if mode == 'missing_row':
+                    del wrong[index]
+                elif mode == 'missing_flag':
+                    wrong[index] = rows[index]
+                else:
+                    wrong.append(changed[index] + ',new')
+                with self.subTest(index=index, mode=mode), self.assertRaises(ValueError):
+                    graph_delta('\n'.join(wrong + units), baseline)
+
     def test_compiler_requires_both_target_units_and_no_extra_runtime_features(self):
         root = Path('/private/diagnostic-fixture')
         baseline = {name: ['profile'] for name in EXTRA}
