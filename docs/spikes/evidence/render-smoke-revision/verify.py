@@ -44,11 +44,20 @@ def main():
     assert report['imported_models']['source_independent'] and report['imported_models']['reimport_changes_pixels']
     assert report['visual_review'] is False and report['native_window_composition_review'] is False
     assert 'Ran 9 tests' in record('/python-tests-001.log').decode() and '\nOK\n' in record('/python-tests-001.log').decode()
+    assert manifest['combined_test_breakdown']['producer']['modules'] == {'tools.tests.test_render_geometry': 6, 'tools.tests.test_ci_profile': 3}
+    assert manifest['combined_test_breakdown']['root_focused']['total'] == 6
+    assert 'Ran 6 tests' in record('/render-smoke-revision-root-001/0.log').decode()
+    for row in manifest['combined_test_breakdown']['producer']['bound_profile_inputs']:
+        assert hashlib.sha256(payloads[row['sha256']]).hexdigest() == row['sha256']
+        assert row['source'] == manifest['source']
+    supplement = manifest['source_relevance_supplement']
+    assert supplement['original_preflight_preserved'] is True and supplement['additional_change_test_only'] is True
+    assert len(supplement['expanded_delta_paths']) == 7 and supplement['additional_path'] == 'crates/incant_cmd/tests/prefabs.rs'
     assert manifest['hosted_linux_repair_pending'] is True and manifest['performance_or_phase_gate'] is False
     if args.binary:
         q = manifest['native_binary_qualification']
         assert hashlib.sha256(Path(q['binary']).read_bytes()).hexdigest() == q['binary_sha256']
-    print(json.dumps({'verified': True, 'python_tests': 9, 'actual_rpc_processes': 4, 'root_historical_mac_renderer_smoke': 'pass', 'hosted_linux_repair': 'pending', 'performance_or_phase_gate': False}))
+    print(json.dumps({'verified': True, 'producer_python_tests': 9, 'producer_geometry_tests': 6, 'producer_profile_tests': 3, 'root_geometry_tests': 6, 'actual_rpc_processes': 4, 'root_historical_mac_renderer_smoke': 'pass', 'hosted_linux_repair': 'pending', 'performance_or_phase_gate': False}))
 
 
 if __name__ == '__main__':
