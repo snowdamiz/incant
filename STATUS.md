@@ -1,5 +1,18 @@
 # Implementation status
 
+## Numeric-loan engine optimization — matched shipping improves, 2 ms still failed
+
+A private main262 composition preserves the six reviewed numeric hierarchy and
+opaque entity-token changes. Source002 passes 466 runtime/script tests in each
+physics mode, both strict lint runs and lean native/wasm checks. All 3,874 executed
+build inputs match the current composition. Actual unchanged-workload Core
+shipping script p95 improves to 2.250001–2.370000 ms across three pairs; all 5%
+comparison checks pass, while all three 2 ms gates still fail. Full nonprofile
+reports and PCM match; QuickJS heap peaks are unchanged. Portable raw evidence is
+prepared and final integration review is pending. Main262 includes the prior
+Core sample and AOT packets; release30 is unchanged. No phase/FPS/GPU claim.
+[Evidence](docs/spikes/numeric-loan-main262.md).
+
 ## Core row metadata — actual shipping improves, 2 ms still failed
 
 The sample now caches immutable row indices/base coordinates while taking fresh
@@ -8,8 +21,8 @@ Core win reports and PCM; all three paired script p95 intervals improve to
 2.800001–3.080000 ms, but every 2 ms script gate still fails. This is a new
 script identity with unchanged engine/runtime data, not another engine-only
 comparison. QuickJS heap peaks increase. Current-main source/Node/TypeScript
-controls pass; independent final packet review is accepted and publication
-awaits the exact-head fast check. No FPS/GPU/phase
+controls pass; independent final packet review was accepted and PR262 merged
+after its exact-head fast SUCCESS. No FPS/GPU/phase
 claim. [Evidence](docs/spikes/core-bulk-row-metadata.md).
 
 ## TypeScript AOT spike — language controls retained, adoption open
@@ -20,7 +33,8 @@ The actual NativeBehavior frontend cook passes. Static Hermes source and future
 compiler inputs are pinned, but no native compiler/host was built. All complete
 SDK, matched shipping performance, iOS no-JIT/size and security-release adoption
 conditions remain open. No production host or dependency changed. Independent
-source/final review is accepted; publication is pending. [Evidence](docs/spikes/typescript-aot.md).
+source/final review was accepted and PR262 merged after its exact-head fast
+SUCCESS. [Evidence](docs/spikes/typescript-aot.md).
 
 ## Core 10k Mac shipping — cache improvement measured, 2 ms script gate failed
 
