@@ -1,4 +1,127 @@
 use super::*;
+
+#[test]
+fn texture_publication_retires_intervening_ik_owner_after_the_lock() {
+    let (dir, scene, definition) = prepare();
+    let cook_texture = |value: u8| {
+        let path = dir.path().join("refresh.png");
+        let mut encoder = png::Encoder::new(std::fs::File::create(&path).unwrap(), 1, 1);
+        encoder.set_color(png::ColorType::Rgba);
+        encoder.set_depth(png::BitDepth::Eight);
+        encoder
+            .write_header()
+            .unwrap()
+            .write_image_data(&[value, 0, 0, 255])
+            .unwrap();
+        let key = incant_assets::cook_texture(
+            dir.path(),
+            Path::new("refresh.png"),
+            &dir.path().join("textures"),
+            incant_assets_runtime::TextureUsage::Color,
+        )
+        .unwrap()
+        .metadata
+        .fingerprint;
+        VisualAssetRef {
+            id: id(91),
+            kind: VisualAssetKind::Texture,
+            fingerprint: std::array::from_fn(|i| {
+                u8::from_str_radix(&key[2 * i..2 * i + 2], 16).unwrap()
+            }),
+        }
+    };
+    let mut references = scene.visual_assets().to_vec();
+    references.push(cook_texture(255));
+    let mut nodes = scene.spatial().to_vec();
+    let mesh = nodes.iter_mut().find(|n| n.entity == id(1)).unwrap();
+    mesh.ik = Some(Arc::new(NativeIk {
+        mesh_fingerprint: definition.mesh_fingerprint,
+        initial: Arc::from([AnimationIkSample {
+            id: id(9),
+            chain: [0, 1, 2],
+            target: [11., 1., 0.],
+            pole: [10., 1., 0.],
+            weight: 1.,
+        }]),
+    }));
+    mesh.environment = Some(NativeEnvironmentLight {
+        texture: id(91),
+        intensity: 1.,
+        rotation_degrees: 0.,
+    });
+    let scene = scene.with_spatial(references.clone(), nodes).unwrap();
+    let mut world = NativeWorld::new(scene);
+    let mut input = load(&dir, &world).unwrap();
+    let move_ik = |world: &mut NativeWorld, weight| {
+        world
+            .apply(&mut queue([StructuralCommand::ControlIk {
+                entity: id(1),
+                control: IkControl {
+                    constraint: id(9),
+                    target: [12., 0.5, 0.],
+                    pole: [10., 1., 0.],
+                    weight,
+                },
+            }]))
+            .unwrap();
+    };
+    move_ik(&mut world, 0.75);
+    input
+        .try_sync(&world.spatial_view().unwrap(), |_, _, _| Ok::<_, ()>(()))
+        .unwrap();
+    let staged_ik = Arc::downgrade(binding(&input, 1).animation_ik.as_ref().unwrap());
+    let old_texture = input.input().environment.as_ref().unwrap().source.clone();
+    let old_version = old_texture.version_id();
+    references[1] = cook_texture(100);
+    let prepared = input
+        .texture_refresh_ticket()
+        .prepare(&references, &dir.path().join("textures"))
+        .unwrap();
+    let staged = input
+        .stage_texture_refresh(&world.spatial_view().unwrap(), prepared)
+        .unwrap();
+    move_ik(&mut world, 0.25);
+    // The second sync clears the numeric rollback buffer's intermediate owner.
+    for _ in 0..2 {
+        input
+            .try_sync(&world.spatial_view().unwrap(), |_, _, _| Ok::<_, ()>(()))
+            .unwrap();
+    }
+    assert_eq!(staged_ik.strong_count(), 1);
+    let current = binding(&input, 1).animation_ik.as_ref().unwrap().clone();
+    let view = world.spatial_view().unwrap();
+    let (result, allocations, disposals) = allocation_counter::record_lifecycle(|| {
+        input.try_publish_textures(&view, staged, || {
+            // Weak does not keep the payload alive. The displaced staged owner
+            // must still exist throughout this final publication callback.
+            assert_eq!(staged_ik.upgrade().unwrap()[0].weight, 0.75);
+            Ok::<_, ()>(())
+        })
+    });
+    let (publication, _) = result.unwrap();
+    assert_eq!((allocations, disposals), (0, 0));
+    assert!(Arc::ptr_eq(
+        binding(&input, 1).animation_ik.as_ref().unwrap(),
+        &current
+    ));
+    assert_eq!(staged_ik.upgrade().unwrap()[0].weight, 0.75);
+    assert_ne!(
+        input
+            .input()
+            .environment
+            .as_ref()
+            .unwrap()
+            .source
+            .version_id(),
+        old_texture.version_id()
+    );
+    drop(publication);
+    assert!(staged_ik.upgrade().is_none());
+    assert_eq!(current[0].weight, 0.25);
+    assert_eq!(old_texture.version_id(), old_version);
+    assert!(matches!(old_texture.data(), RuntimeAssetData::Texture(_)));
+}
+
 #[test]
 fn cold_motion_and_rejected_consumer_keep_exact_ik_owner_payload() {
     let (dir, scene, definition) = prepare();

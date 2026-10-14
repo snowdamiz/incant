@@ -6,6 +6,7 @@ mod logs;
 pub mod probe;
 #[cfg(test)]
 mod tests;
+mod texture_refresh;
 mod worker;
 use crate::{Editor, project};
 use incant_input::InputEvent;
@@ -17,6 +18,7 @@ use std::sync::{
     atomic::{AtomicBool, Ordering},
     mpsc,
 };
+pub use texture_refresh::schedule_refresh;
 pub use worker::Worker;
 
 const UNSAVED_PROJECT: &str = "Open a saved project to run Play";
@@ -93,6 +95,10 @@ pub struct Service {
     tx: mpsc::SyncSender<Message>,
     status: Mutex<State>,
     loading: AtomicBool,
+    basis: Mutex<Option<(u32, Arc<incant_play::TextureRefreshBasis>)>>,
+    refreshing: AtomicBool,
+    refresh_attempt: Mutex<Option<(u32, u64)>>,
+    refresh_event: AtomicBool,
 }
 struct State {
     status: Status,
@@ -109,6 +115,25 @@ enum Request {
         prepared: Box<PreparedPlay>,
     },
     Action(Action),
+    TextureTicket {
+        generation: u32,
+        reply: mpsc::Sender<Result<incant_render_game::TextureRefreshTicket, String>>,
+    },
+    StageTextures {
+        generation: u32,
+        revision: u64,
+        prepared: incant_render_game::PreparedTextureRefresh,
+    },
+    PublishTextures {
+        generation: u32,
+        revision: u64,
+        token: u64,
+        bus: Arc<Mutex<project::LoadState>>,
+    },
+    CancelTextures {
+        generation: u32,
+        token: u64,
+    },
 }
 impl Service {
     pub fn new() -> (Arc<Self>, mpsc::Receiver<Message>) {
@@ -117,6 +142,10 @@ impl Service {
             Arc::new(Self {
                 tx,
                 loading: AtomicBool::new(false),
+                basis: Mutex::new(None),
+                refreshing: AtomicBool::new(false),
+                refresh_attempt: Mutex::new(None),
+                refresh_event: AtomicBool::new(false),
                 status: Mutex::new(State {
                     status: Status {
                         generation: 0,
@@ -144,6 +173,9 @@ impl Service {
             .lock()
             .map(|s| s.status.clone())
             .map_err(|_| "Play state is unavailable".into())
+    }
+    pub fn take_refresh_event(&self) -> bool {
+        self.refresh_event.swap(false, Ordering::AcqRel)
     }
     fn edit<T>(
         &self,
@@ -323,6 +355,10 @@ fn execute(editor: &Editor, command: Action) -> Result<Value, String> {
             incant_script::CompiledScript::compile("exports.default={update(){}};")
         })
         .map_err(|e| e.to_string())?;
+        let basis = Arc::new(
+            incant_play::TextureRefreshBasis::capture(&document, prepared.cooked.visual_assets())
+                .map_err(|e| e.to_string())?,
+        );
         drop(document);
         {
             let load = editor.bus.lock().map_err(|_| "Engine lock failed")?;
@@ -331,11 +367,22 @@ fn execute(editor: &Editor, command: Action) -> Result<Value, String> {
                 return Err("Project changed during Play startup; retry".into());
             }
         }
-        editor.play.call(Request::Load {
+        let result = editor.play.call(Request::Load {
             generation: next,
             revision: expected_revision,
             prepared: Box::new(prepared),
-        })
+        })?;
+        *editor
+            .play
+            .basis
+            .lock()
+            .map_err(|_| "Play authoring basis is unavailable")? = Some((next, basis));
+        *editor
+            .play
+            .refresh_attempt
+            .lock()
+            .map_err(|_| "Play refresh state is unavailable")? = Some((next, expected_revision));
+        Ok(result)
     })();
     if let Err(error) = &result {
         editor.play.failed(next, error.clone());

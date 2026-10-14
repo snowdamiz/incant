@@ -35,6 +35,47 @@ pub enum PlayError {
     #[error("Native Play failed: {0}")]
     Native(#[source] Box<dyn Error>),
 }
+/// Refused candidates remain owned until the caller leaves its publication lock.
+pub enum TexturePublishAttempt<C: incant_render_game::TextureRefreshConsumer> {
+    Published(incant_render_game::TexturePublication<C>),
+    Refused {
+        error: PlayError,
+        candidate: incant_render_game::PreparedHostTextureRefresh<C>,
+    },
+}
+pub struct TexturePublicationRefusal<C: incant_render_game::TextureRefreshConsumer> {
+    pub error: PlayError,
+    pub candidate: incant_render_game::PreparedHostTextureRefresh<C>,
+}
+pub struct ReadyTexturePublication<'a, B: Backend, C: incant_render_game::TextureRefreshConsumer> {
+    host: incant_game_runtime::PreparedHostUpdate<'a, B, NativeRenderHost<C>>,
+    candidate: Option<incant_render_game::PreparedHostTextureRefresh<C>>,
+}
+impl<B: Backend, C: incant_render_game::TextureRefreshConsumer> ReadyTexturePublication<'_, B, C> {
+    pub fn publish(&mut self) -> TexturePublishAttempt<C> {
+        let request = incant_render_game::TextureRefreshOperation::Publish(
+            self.candidate.take().expect("single publication"),
+        );
+        match self.host.update(request) {
+            Ok(incant_render_game::TextureRefreshReply::Published(publication)) => {
+                TexturePublishAttempt::Published(publication)
+            }
+            Ok(incant_render_game::TextureRefreshReply::Refused { error, candidate }) => {
+                TexturePublishAttempt::Refused {
+                    error: native(error),
+                    candidate,
+                }
+            }
+            Err((error, incant_render_game::TextureRefreshOperation::Publish(candidate))) => {
+                TexturePublishAttempt::Refused {
+                    error: native(error),
+                    candidate,
+                }
+            }
+            _ => unreachable!("typed native publication reply"),
+        }
+    }
+}
 type Result<T> = std::result::Result<T, PlayError>;
 fn native(error: impl Error + 'static) -> PlayError {
     PlayError::Native(Box::new(error))
@@ -206,6 +247,84 @@ where
         match self.ready()? {
             Game::Plain(_) => Ok(None),
             Game::Spatial(g) => Ok(Some(g.host().map_err(native)?.consumer())),
+        }
+    }
+    pub fn texture_refresh_ticket(&self) -> Result<incant_render_game::TextureRefreshTicket> {
+        match self.ready()? {
+            Game::Spatial(g) => Ok(g.host().map_err(native)?.texture_refresh_ticket()),
+            Game::Plain(_) => Err(native(
+                incant_game_runtime::GameError::<std::convert::Infallible>::SpatialHost,
+            )),
+        }
+    }
+    pub fn prepare_texture_refresh(
+        &mut self,
+        request: incant_render_game::PreparedTextureRefresh,
+    ) -> Result<incant_render_game::PreparedHostTextureRefresh<C>>
+    where
+        C: incant_render_game::TextureRefreshConsumer,
+    {
+        match self.ready_mut()? {
+            Game::Spatial(g) => match g
+                .update_host(incant_render_game::TextureRefreshOperation::Prepare(
+                    request,
+                ))
+                .map_err(native)?
+            {
+                incant_render_game::TextureRefreshReply::Prepared(prepared) => Ok(prepared),
+                incant_render_game::TextureRefreshReply::PreparationRefused(error) => {
+                    Err(native(error))
+                }
+                _ => unreachable!("native prepare reply"),
+            },
+            Game::Plain(_) => Err(native(
+                incant_game_runtime::GameError::<std::convert::Infallible>::SpatialHost,
+            )),
+        }
+    }
+    pub fn publish_texture_refresh(
+        &mut self,
+        request: incant_render_game::PreparedHostTextureRefresh<C>,
+    ) -> Result<TexturePublishAttempt<C>>
+    where
+        C: incant_render_game::TextureRefreshConsumer,
+    {
+        match self.prepare_texture_publication(request) {
+            Ok(mut ready) => Ok(ready.publish()),
+            Err(TexturePublicationRefusal { error, candidate }) => {
+                Ok(TexturePublishAttempt::Refused { error, candidate })
+            }
+        }
+    }
+    /// Establish game/world readiness and retain all owners before an external
+    /// final lock. Every early refusal returns the complete candidate intact.
+    pub fn prepare_texture_publication(
+        &mut self,
+        candidate: incant_render_game::PreparedHostTextureRefresh<C>,
+    ) -> std::result::Result<ReadyTexturePublication<'_, B, C>, TexturePublicationRefusal<C>>
+    where
+        C: incant_render_game::TextureRefreshConsumer,
+    {
+        if let Err(error) = self.ready() {
+            return Err(TexturePublicationRefusal { error, candidate });
+        }
+        match self.game.as_mut().expect("checked game") {
+            Game::Spatial(g) => match g.prepare_host_update() {
+                Ok(host) => Ok(ReadyTexturePublication {
+                    host,
+                    candidate: Some(candidate),
+                }),
+                Err(error) => Err(TexturePublicationRefusal {
+                    error: native(error),
+                    candidate,
+                }),
+            },
+            Game::Plain(_) => Err(TexturePublicationRefusal {
+                error: native(
+                    incant_game_runtime::GameError::<std::convert::Infallible>::SpatialHost,
+                ),
+                candidate,
+            }),
         }
     }
     pub fn input(&self) -> Result<&InputFrame> {

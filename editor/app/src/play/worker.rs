@@ -13,6 +13,7 @@ use std::{
 };
 
 type Game = PlaySession<DeviceBackend, GpuRenderConsumer<Targets>>;
+type TextureCandidate = incant_render_game::PreparedHostTextureRefresh<GpuRenderConsumer<Targets>>;
 pub struct Worker {
     service: Arc<Service>,
     rx: mpsc::Receiver<Message>,
@@ -24,6 +25,7 @@ pub struct Worker {
     step: Option<mpsc::Sender<Result<Value, String>>>,
     clock: Clock,
     held: bool,
+    textures: super::texture_refresh::Pending<TextureCandidate>,
 }
 #[derive(Debug, thiserror::Error)]
 #[error("Native Play frame reservation is unavailable")]
@@ -77,6 +79,7 @@ impl Worker {
             step: None,
             clock: Clock::new(Instant::now()),
             held: true,
+            textures: Default::default(),
         }
     }
     pub fn active(&self) -> bool {
@@ -142,6 +145,7 @@ impl Worker {
                     return Err("Play startup was cancelled".into());
                 }
                 let scene = prepared.scene.clone();
+                self.textures.clear();
                 let game = Game::new(
                     *prepared,
                     AudioManagerSettings::default(),
@@ -175,6 +179,7 @@ impl Worker {
                     return Err("Play session changed; refresh and retry".into());
                 }
                 if matches!(action, Action::Stop { .. }) {
+                    self.textures.clear();
                     let next = current.checked_add(1).ok_or("Play generation exhausted")?;
                     self.game = None;
                     self.slot.borrow_mut().take();
@@ -247,6 +252,71 @@ impl Worker {
                 }
                 self.publish()?;
             }
+            Request::TextureTicket { generation, reply } => {
+                let result = if generation == current {
+                    self.game
+                        .as_ref()
+                        .ok_or("Start Play first".to_owned())
+                        .and_then(|game| game.texture_refresh_ticket().map_err(|e| e.to_string()))
+                } else {
+                    Err("Play session changed before texture preparation".into())
+                };
+                reply
+                    .send(result)
+                    .map_err(|_| "Texture preparation worker stopped")?;
+            }
+            Request::StageTextures {
+                generation,
+                revision,
+                prepared,
+            } => {
+                if generation != current {
+                    return Err("Play session changed before texture staging".into());
+                }
+                let game = self.game.as_mut().ok_or("Start Play first")?;
+                let token = self.textures.stage(generation, revision, || {
+                    game.prepare_texture_refresh(prepared)
+                        .map_err(|e| e.to_string())
+                })?;
+                return Ok(json!({"textureTicket":token}));
+            }
+            Request::PublishTextures {
+                generation,
+                revision,
+                token,
+                bus,
+            } => {
+                if generation != current {
+                    return Err("Play session changed before texture publication".into());
+                }
+                let prepared = self.textures.take(token, generation, revision)?;
+                let game = self.game.as_mut().ok_or("Start Play first")?;
+                let mut ready = game
+                    .prepare_texture_publication(prepared)
+                    .map_err(|refusal| {
+                        let message = refusal.error.to_string();
+                        drop(refusal.candidate); // Before acquiring the bus lock.
+                        message
+                    })?;
+                let attempt = super::texture_refresh::publish_at_revision(&bus, revision, || {
+                    Ok(ready.publish())
+                })?;
+                drop(ready); // Restore readiness/retire a failed composite after unlocking.
+                let publication = match attempt {
+                    incant_play::TexturePublishAttempt::Published(publication) => publication,
+                    incant_play::TexturePublishAttempt::Refused { error, candidate } => {
+                        drop(candidate); // Refusal also disposes resources after unlocking.
+                        return Err(error.to_string());
+                    }
+                };
+                let receipt = publication.receipt();
+                drop(publication); // Retirement occurs after the short bus guard.
+                return Ok(json!({"generation":generation,"revision":revision,
+                    "assetGeneration":receipt.generation,"changed":receipt.changed}));
+            }
+            Request::CancelTextures { generation, token } => {
+                self.textures.cancel(token, generation);
+            }
         }
         self.status()
     }
@@ -301,6 +371,7 @@ impl Worker {
         }
     }
     pub fn fail(&mut self, error: String) {
+        self.textures.clear();
         self.game = None;
         self.slot.borrow_mut().take();
         self.input.clear();

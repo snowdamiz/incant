@@ -9,7 +9,12 @@ use incant_script::{CompiledScript, ScriptError};
 use serde::Deserialize;
 use std::{collections::BTreeSet, path::Path};
 mod control;
-pub use control::{PlayError, PlayMode, PlaySession};
+mod texture_refresh;
+pub use control::{
+    PlayError, PlayMode, PlaySession, ReadyTexturePublication, TexturePublicationRefusal,
+    TexturePublishAttempt,
+};
+pub use texture_refresh::TextureRefreshBasis;
 
 #[derive(Default, Deserialize)]
 #[serde(default, deny_unknown_fields)]
