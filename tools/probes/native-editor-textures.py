@@ -6,6 +6,7 @@ The runner creates one fresh fixture; project text is authored through RPC/Cmd.
 Only its binary PNG sources are changed by the app's opt-in texture probe.
 """
 import argparse
+import base64
 from contextlib import contextmanager
 import hashlib
 import json
@@ -47,6 +48,23 @@ def require(condition, message):
 
 def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def failure_record(error):
+    """Preserve timeout captures after the managed owner finishes cleanup."""
+    record = {'error':repr(error)}
+    if isinstance(error, subprocess.TimeoutExpired):
+        record['reaped'] = True
+        record['timeout_capture_scope'] = getattr(error, 'capture_scope', 'managed-run-final-output')
+        for name, value in (('stdout', error.output), ('stderr', error.stderr)):
+            record[name + '_capture_available'] = value is not None
+            if value is not None:
+                raw = value.encode('utf-8') if isinstance(value, str) else value
+                record[name] = raw.decode('utf-8', errors='replace')
+                record[name + '_base64'] = base64.b64encode(raw).decode('ascii')
+                record[name + '_bytes'] = len(raw)
+                record[name + '_sha256'] = hashlib.sha256(raw).hexdigest()
+    return record
 
 
 def rpc_process(argv, data, timeout, cancel):
@@ -107,6 +125,11 @@ def rpc_process(argv, data, timeout, cancel):
             # Both protocol streams closed; only a short bounded leader-exit tail
             # remains. wait() keeps group identity pinned and always reaps it.
             returncode = child.wait(timeout=min(1, max(0.001, deadline-time.monotonic())))
+        except subprocess.TimeoutExpired as error:
+            error.output = bytes(captures['stdout'])
+            error.stderr = bytes(captures['stderr'])
+            error.capture_scope = 'rpc-received-prefix-before-cleanup'
+            raise
         finally:
             child.close()
             for thread in threads:
@@ -231,7 +254,7 @@ def main(argv=None):
                         rpc_process(entry['argv'], data, entry['timeout_seconds'], check))
                     entry.update(exit_code=native.returncode, stdout=native.stdout, stderr=native.stderr, reaped=True)
                 except BaseException as error:
-                    entry.update(error=repr(error))
+                    entry.update(failure_record(error))
                     raise
                 finally:
                     write('processes.json', ledger)
