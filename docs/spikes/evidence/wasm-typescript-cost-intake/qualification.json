@@ -1,0 +1,121 @@
+{
+  "source_head": "eec95517a756a317f398b587c628738cdbfca06b",
+  "producer": "5d9715f9b50387c8937acfd18486eb8b227e2efa",
+  "executed_source": "97834ab3282e0afb8b80820caf19394c929cf821",
+  "current_main": "f7db94263b07fc25ae175632217e924d65cb76d1",
+  "owned_paths": [
+    {
+      "path": "docs/spikes/wasm-typescript-cost.md",
+      "sha256": "e158b3b1b05c284af54a2295492b3bafaed3ab8530547338debc792835b02553"
+    },
+    {
+      "path": "tools/mac_performance.py",
+      "sha256": "8ba317dcf8cd49ffc9e0a1ec2f1c95fb71a67fc943b361b8ccfb768e39bef80f"
+    },
+    {
+      "path": "tools/probes/wasm-ts-cost/behavior.rs",
+      "sha256": "953fe51722ba430dd43cafa095580196180165c39f52161521e56eee799d1bc8"
+    },
+    {
+      "path": "tools/probes/wasm-ts-cost/behavior.ts",
+      "sha256": "b412fd4d84f1f1ded57a979d695af71d466f657363bfc81b688af8acada0d183"
+    },
+    {
+      "path": "tools/probes/wasm-ts-cost/cost_rpc.py",
+      "sha256": "c6c776c6c13d4805c1285a1c1d9f6bc686b0be0823636594f20f8f7ca66487f9"
+    },
+    {
+      "path": "tools/probes/wasm-ts-cost/cost_workload.py",
+      "sha256": "b7420561a5bd8eebc7b0d5cac8aeabbe1b149ca5fb72bf98e038abdcc63e4e09"
+    },
+    {
+      "path": "tools/probes/wasm-ts-cost/export.py",
+      "sha256": "e61b3f96aa020bda6c16a3be869bc38cc209f6a10fdf7933dcdf2b372a75ca09"
+    },
+    {
+      "path": "tools/probes/wasm-ts-cost/measure.py",
+      "sha256": "5c9bf7ad5f409c78c5b5b6cd1c6d7110dbcf35f7f3aa1d461e7869140f539b4e"
+    },
+    {
+      "path": "tools/probes/wasm-ts-cost/prepare.py",
+      "sha256": "28236860c1594366ea2dc24c697db204606f1f8395f0ae0e7c06d9673002e93a"
+    },
+    {
+      "path": "tools/probes/wasm-ts-cost/tsconfig.json",
+      "sha256": "d7b08f94527799fbfe81d5f7b70622b08b84402c2d16172b201cbf1907f6a475"
+    },
+    {
+      "path": "tools/tests/test_mac_performance.py",
+      "sha256": "d6af8a69ecfd7cdf74d02668e155bd596b77cfa2089e60a99c61b7914e07e397"
+    },
+    {
+      "path": "tools/tests/test_wasm_ts_cost.py",
+      "sha256": "e3bc3ff686c3ab7c115e4c8cba4f709a90d447d8fc2b5185c232daf9dbb37320"
+    },
+    {
+      "path": "docs/spikes/evidence/wasm-typescript-cost/artifacts.json.gz",
+      "sha256": "8cb67d3e8a4ce3621b71383ccdb8e8462502b8fba13b12c1805c1255d5d5b154"
+    },
+    {
+      "path": "docs/spikes/evidence/wasm-typescript-cost/build.py",
+      "sha256": "9098f483a015f6ebb3ffa5f1ea2d9db30cded2224f7b13fa7026658cddd3ce4c"
+    },
+    {
+      "path": "docs/spikes/evidence/wasm-typescript-cost/collect.py",
+      "sha256": "0df92654f3291c91ed90f95b9f0149a893226cbbf94711e4e842fb473a916452"
+    },
+    {
+      "path": "docs/spikes/evidence/wasm-typescript-cost/manifest.json",
+      "sha256": "10728d8c8b4efa34d8050d963453e57097f78632065f86bb70a58371880da787"
+    },
+    {
+      "path": "docs/spikes/evidence/wasm-typescript-cost/oracle.py",
+      "sha256": "60a1c3f00966a21e4927f33e29e375fafe7cb4c1815c42e495baa4bcf2e299cb"
+    },
+    {
+      "path": "docs/spikes/evidence/wasm-typescript-cost/prepare.py",
+      "sha256": "c7e336975064ed88ed1ab2f4aac309167dc200ef8aeb162ea150bbe382908e4e"
+    },
+    {
+      "path": "docs/spikes/evidence/wasm-typescript-cost/runs.py",
+      "sha256": "daa31f4109fd225e13c097f63cb4dfe60e0ccbea95f88ad1f8175e7f958b6160"
+    },
+    {
+      "path": "docs/spikes/evidence/wasm-typescript-cost/verify.py",
+      "sha256": "350db712e980621596c5af43f6baf1a33aec60e4e10806d58c1165ec5816603d"
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "tools.tests.test_wasm_ts_cost",
+        "tools.tests.test_mac_performance"
+      ],
+      "exit": 0,
+      "log": "python.log",
+      "sha256": "be161809b9d5a83e4dae410f0433b64ecb74ad1cb052509794af7d947947b2bb",
+      "cases": 21
+    },
+    {
+      "argv": [
+        "node",
+        "node_modules/typescript/bin/tsc",
+        "-p",
+        "tools/probes/wasm-ts-cost/tsconfig.json"
+      ],
+      "exit": 0,
+      "log": "typescript.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "review_sha256": "fa0dea239a86fa34c12497b9805c4bd310947e85aa5d7834e92c56421ae77d00",
+  "scope": "Exact producer helper/evidence curation on current main; original runtime/shipping execution remains source97834; no fresh player/build/measurement.",
+  "current_main_join": {
+    "main": "f55bcbbc8aa72c9c5b3c93ec1b678452a7351b57",
+    "head": "8555da5c3c9a1dffa26c44233887245768c7c2ff",
+    "scope": "Main266 adds three expected-success test assertions and repair evidence. All current helper paths remain exact; no engine/SDK/vendor/manifests/lock delta in this intake."
+  }
+}

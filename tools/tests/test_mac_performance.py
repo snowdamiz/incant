@@ -35,6 +35,35 @@ def measurement():
 
 
 class MacPerformance(unittest.TestCase):
+    def test_static_phase_requires_wasm_and_distinct_complete_histogram(self):
+        subject.phase_selection('script.tick', None)
+        subject.phase_selection('script.static_module', {'kind': 'wasm'})
+        for phase, program in [('script.tick', {'kind': 'wasm'}), ('script.static_module', None),
+                               ('script.unknown', None), ('script.tick', {'kind': 'unknown'})]:
+            with self.subTest(phase=phase, program=program), self.assertRaises(ValueError):
+                subject.phase_selection(phase, program)
+        data = report()
+        with self.assertRaisesRegex(ValueError, 'Missing'):
+            subject.metrics(data, 100, script_phase='script.static_module')
+        data['profile']['frame_wall']['phases'][1]['name'] = 'script.static_module'
+        self.assertIn('script.static_module.p95_wall_ns', subject.metrics(data, 100, script_phase='script.static_module'))
+        data['profile']['frame_wall']['phases'][1]['missing_frames'] = 1
+        with self.assertRaisesRegex(ValueError, 'Incomplete'):
+            subject.metrics(data, 100, script_phase='script.static_module')
+
+    def test_cross_phase_comparison_never_becomes_ts_regression_acceptance(self):
+        baseline = measurement(); current = copy.deepcopy(baseline)
+        current['match']['script_phase'] = 'script.static_module'
+        current['script_phase'] = 'script.static_module'
+        with self.assertRaisesRegex(ValueError, 'differs'): subject.comparison(current, baseline)
+        with self.assertRaisesRegex(ValueError, 'TypeScript regression'):
+            subject.comparison(current, current)
+
+    def test_report_phase_cannot_disagree_with_match_identity(self):
+        current = measurement(); current['script_phase'] = 'script.static_module'
+        with self.assertRaisesRegex(ValueError, 'phase disagrees'):
+            subject.comparison(current, current)
+
     def test_actual_nearest_rank_and_conservative_interval(self):
         data = row('script.tick')
         data['counts'][100] = 94
