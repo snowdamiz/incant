@@ -1,3 +1,6 @@
+//! Historical pre-R4 design model, retained as such. Its width-only density and
+//! pre-density cap are NOT the current shader contract; evidence_reference covers
+//! associated per-texel mass, area density, finite retirement and actual bindings.
 //! Design-only scalar confidence accumulation. Callers supply admitted history;
 //! dynamic disocclusion/ownership admission is deliberately not modeled here.
 use super::{

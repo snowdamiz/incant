@@ -461,6 +461,10 @@ const _: () = assert!(
 );
 
 #[cfg(test)]
+#[path = "evidence_reference.rs"]
+mod evidence_reference;
+
+#[cfg(test)]
 #[path = "device_tests.rs"]
 mod device_tests;
 

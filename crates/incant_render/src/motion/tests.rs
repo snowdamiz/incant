@@ -182,7 +182,7 @@ fn portable_motion_shader_validates_and_uses_canonical_mask_contract() {
     let canonical = include_str!("../model_material.wgsl");
     for line in [
         "struct Material { base:vec4f, emissive_roughness:vec4f, factors:vec4f, flags:vec4u }",
-        "let base=material.base*textureSample(base_map,base_sampler,in.uv);",
+        "let base=material.base*textureSampleBias(base_map,base_sampler,in.uv,frame.lod.x);",
         "if material.flags.x==1u && base.a<material.factors.w { discard; }",
     ] {
         assert!(canonical.contains(line));

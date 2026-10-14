@@ -1,4 +1,5 @@
-//! Design-only f64 reconstruction oracle. This module is cfg(test), with no
+//! Test-only f64 support geometry. Historical callers explicitly select the old
+//! fixed-resolution lattice; R4 callers select its new split lattice. There is no
 //! production/history admission, resource, LOD or shader connection.
 use super::{Plan, oracle};
 
@@ -23,14 +24,25 @@ pub(super) struct Kernel {
     pub norm: f64,
 }
 impl Kernel {
-    pub fn new(size: [u32; 2], rect: [f32; 4], n: u8, phase: usize) -> Option<Self> {
+    pub fn historical(size: [u32; 2], rect: [f32; 4], n: u8, phase: usize) -> Option<Self> {
+        Self::with_offset(size, rect, n, crate::temporal::jitter::SAMPLES[phase % 8])
+    }
+    pub fn current(size: [u32; 2], rect: [f32; 4], n: u8, phase: usize) -> Option<Self> {
+        Self::with_offset(
+            size,
+            rect,
+            n,
+            crate::temporal::jitter::UPSCALE_SAMPLES[phase % 8],
+        )
+    }
+    fn with_offset(size: [u32; 2], rect: [f32; 4], n: u8, offset: [f32; 2]) -> Option<Self> {
         let scale = crate::resolution::ResolutionScale::new(n).ok()?;
         let frame = crate::resolution::FramePlan::new(size, rect, None, scale).ok()?;
         let plan = Plan::new(size, rect, &frame).ok()?;
         plan.preflight(8192, 0, 0, 0).ok()?;
         let source = plan.source_rect.map(f64::from);
         let output = plan.rect.map(f64::from);
-        let offset = crate::temporal::jitter::SAMPLES[phase % 8].map(f64::from);
+        let offset = offset.map(f64::from);
         let jitter = std::array::from_fn(|i| offset[i] / source[i + 2]);
         let ratio = output[2] / source[2];
         let rho = 0.35 + 0.325 * (ratio - 2.).max(0.);

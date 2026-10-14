@@ -1,4 +1,4 @@
-//! Actual fixed shader execution, raw scalar readback only. No image encoding.
+//! Actual R4 shader execution, raw scalar readback only. No image encoding.
 use super::*;
 fn half(bits: u16) -> f32 {
     let sign = if bits & 0x8000 != 0 { -1. } else { 1. };
@@ -71,16 +71,17 @@ fn actual_output_reconstruction_rejects_bad_history_and_never_retains_overlay() 
         | wgpu::TextureUsages::COPY_SRC;
     let color = make(crate::frame::HDR_FORMAT, 8, usage);
     let color_view = color.create_view(&Default::default());
-    let depth = make(wgpu::TextureFormat::R32Float, 8, usage).create_view(&Default::default());
+    let depth_texture = make(wgpu::TextureFormat::R32Float, 8, usage);
+    let depth = depth_texture.create_view(&Default::default());
     // RG16Float (mass, age) attachment of the ordinary resolve (binding 6 reads the
     // previous slot below).
-    let evidence =
-        make(wgpu::TextureFormat::Rg16Float, 8, usage).create_view(&Default::default());
+    let evidence_texture = make(wgpu::TextureFormat::Rg16Float, 8, usage);
+    let evidence = evidence_texture.create_view(&Default::default());
     let composite = make(crate::frame::HDR_FORMAT, 8, usage);
     let composite_view = composite.create_view(&Default::default());
     let read = d.create_buffer(&wgpu::BufferDescriptor {
         label: Some("Output and immutable history scalar rows"),
-        size: 4096,
+        size: 8192,
         usage: wgpu::BufferUsages::COPY_DST | wgpu::BufferUsages::MAP_READ,
         mapped_at_creation: false,
     });
@@ -120,7 +121,8 @@ fn actual_output_reconstruction_rejects_bad_history_and_never_retains_overlay() 
             old_values[3 * 8 + 4] = [f32::NAN, 0., 0., 1.];
         }
         let old = source(&old_values, 8);
-        let current = source(&current, 4);
+        let current_values = current;
+        let current = source(&current_values, 4);
         let movement = if mode == 3 {
             2.
         } else if mode == 15 {
@@ -130,7 +132,8 @@ fn actual_output_reconstruction_rejects_bad_history_and_never_retains_overlay() 
         } else {
             0.
         };
-        let motion = source(&vec![[movement, 0., 0.5, 1.]; 16], 4);
+        let motion_values = vec![[movement, 0., 0.5, 1.]; 16];
+        let motion = source(&motion_values, 4);
         let z = if mode == 1 {
             50.05
         } else {
@@ -142,7 +145,8 @@ fn actual_output_reconstruction_rejects_bad_history_and_never_retains_overlay() 
         }
         let old_depth = source(&depths, 8);
         // Previous evidence: mass 1, age 0 (an integer age below the retirement bound).
-        let old_evidence = source(&vec![[1., 0., 0., 0.]; 64], 8);
+        let evidence_values = vec![[1., 0., 0., 0.]; 64];
+        let old_evidence = source(&evidence_values, 8);
         let over = if mode == 7 {
             [0.1, 0.05, 0., 0.5]
         } else {
@@ -167,8 +171,8 @@ fn actual_output_reconstruction_rejects_bad_history_and_never_retains_overlay() 
                 f32::from(u8::from(mode != 12 && mode < 16)),
             ],
             options: [0.5, 0.001, 0.001, 1.],
-            // Steady history evidence h / (1 - h) = 1 keeps the fixed weight 0.5.
-            reactive: [f32::from(u8::from(mode == 6)), 1., 0., 0.],
+            // Equal previous/current area, accepted previous evidence attachment.
+            reactive: [f32::from(u8::from(mode == 6)), 1., 1., 1.],
             jitter: if mode == 16 {
                 [0.125, -0.125, 0., 0.]
             } else if mode == 17 {
@@ -177,6 +181,19 @@ fn actual_output_reconstruction_rejects_bad_history_and_never_retains_overlay() 
                 [0.; 4]
             },
         };
+        let expected = evidence_reference::Input {
+            frame: &frame,
+            source_size: 4,
+            output_size: 8,
+            current: &current_values,
+            motion: &motion_values,
+            native_depth: 0.5,
+            old: &old_values,
+            old_depth: &depths.iter().map(|v| v[0]).collect::<Vec<_>>(),
+            old_evidence: &evidence_values,
+            owner: None,
+        }
+        .resolve([3, 3]);
         let uniform = d.create_buffer_init(&wgpu::util::BufferInitDescriptor {
             label: None,
             contents: bytemuck::bytes_of(&frame),
@@ -187,7 +204,14 @@ fn actual_output_reconstruction_rejects_bad_history_and_never_retains_overlay() 
                 d,
                 &system.resolve_layout,
                 &uniform,
-                &[&current, &motion, &current_depth, &old, &old_depth, &old_evidence],
+                &[
+                    &current,
+                    &motion,
+                    &current_depth,
+                    &old,
+                    &old_depth,
+                    &old_evidence,
+                ],
                 None,
             ),
             composite: group(
@@ -221,7 +245,10 @@ fn actual_output_reconstruction_rejects_bad_history_and_never_retains_overlay() 
         }));
         draw.resolve(&mut e, None);
         draw.composite(&mut e, None);
-        for (i, t) in [&color, &composite].into_iter().enumerate() {
+        for (i, t) in [&color, &composite, &depth_texture, &evidence_texture]
+            .into_iter()
+            .enumerate()
+        {
             e.copy_texture_to_buffer(
                 t.as_image_copy(),
                 wgpu::TexelCopyBufferInfo {
@@ -252,14 +279,7 @@ fn actual_output_reconstruction_rejects_bad_history_and_never_retains_overlay() 
             .unwrap()
             .unwrap();
         let mapped = read.slice(..).get_mapped_range();
-        let history = match mode {
-            0 | 1 | 7 | 14 | 15 => [0.375, 0.375, 0.375, 1.],
-            4 | 9 => [0.; 4],
-            5 => [0.2, 0.1, 0., 0.5],
-            8 => [0., 0.5, 0.5, 1.],
-            13 => [2., 0.5, 100., 1.],
-            _ => [0.5, 0.5, 0.5, 1.],
-        };
+        let history = expected.color;
         let over = if mode >= 16 {
             [0.0625, 0., 0., 0.5]
         } else {
@@ -267,7 +287,7 @@ fn actual_output_reconstruction_rejects_bad_history_and_never_retains_overlay() 
         };
         for (index, expected) in [
             history,
-            std::array::from_fn(|i| over[i] + history[i] * (1. - over[3])),
+            std::array::from_fn(|i| f64::from(over[i]) + history[i] * (1. - f64::from(over[3]))),
         ]
         .into_iter()
         .enumerate()
@@ -281,7 +301,7 @@ fn actual_output_reconstruction_rejects_bad_history_and_never_retains_overlay() 
             println!("upscaling mode{mode} attachment{index}: {actual:?}");
             for (a, b) in actual.into_iter().zip(expected) {
                 assert!(
-                    (a - b).abs() < 0.001,
+                    (f64::from(a) - b).abs() <= evidence_reference::half_bound(b),
                     "mode{mode} attachment{index}: {actual:?} != {expected:?}"
                 );
             }
@@ -290,6 +310,23 @@ fn actual_output_reconstruction_rejects_bad_history_and_never_retains_overlay() 
                     .iter()
                     .all(|&b| b == 0),
                 "outside output viewport must be clear"
+            );
+        }
+        let pixel = 3 * 256 + 3 * 4;
+        let actual_depth =
+            f32::from_le_bytes(mapped[4096 + pixel..4100 + pixel].try_into().unwrap());
+        assert!(
+            (f64::from(actual_depth) - expected.depth).abs()
+                <= expected.depth.abs() * 2_f64.powi(-20)
+        );
+        for channel in 0..2 {
+            let offset = 6144 + pixel + channel * 2;
+            let value = half(u16::from_le_bytes(
+                mapped[offset..offset + 2].try_into().unwrap(),
+            ));
+            assert!(
+                (f64::from(value) - expected.evidence[channel]).abs()
+                    <= evidence_reference::half_bound(expected.evidence[channel])
             );
         }
         drop(mapped);

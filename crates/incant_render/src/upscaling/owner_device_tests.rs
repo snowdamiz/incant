@@ -1,6 +1,6 @@
-//! Corrected C5 owner-history controls. Delegated numeric execution only.
+//! R4 owner-history controls with independent f64 support/evidence expectations. Delegated numeric execution only.
 //! Exactly 12 encoders/submissions/maps: each includes one real Depth32 fixture,
-//! one owner resolve, a current-only reference in case 3, optional original
+//! one owner resolve, a current-only reference in case 3, ordinary R4
 //! baseline resolves in cases 7/8, and all readbacks.
 //! No renderer frame, image, extra readback submission, retry, or appearance gate.
 use super::*;
@@ -48,9 +48,7 @@ fn half(bits: u16) -> f32 {
 #[derive(Debug)]
 struct Probe {
     pixel: [u32; 2],
-    color: [f32; 4],
-    depth: f32,
-    record: [u32; 2],
+    expected: evidence_reference::Result,
 }
 struct Case {
     frame: Frame,
@@ -58,6 +56,7 @@ struct Case {
     motion: Vec<[f32; 4]>,
     old: Vec<[f32; 4]>,
     old_depth: Vec<f32>,
+    old_evidence: Vec<[f32; 4]>,
     owners: Vec<u32>,
     records: Vec<[u32; 2]>,
     changes: [u32; 3132],
@@ -65,6 +64,26 @@ struct Case {
     probes: Vec<Probe>,
     baseline: bool,
     current_only_reference: bool,
+}
+impl Case {
+    fn reference(&self) -> evidence_reference::Input<'_> {
+        evidence_reference::Input {
+            frame: &self.frame,
+            source_size: N as usize,
+            output_size: N as usize,
+            current: &self.current,
+            motion: &self.motion,
+            native_depth: self.depth,
+            old: &self.old,
+            old_depth: &self.old_depth,
+            old_evidence: &self.old_evidence,
+            owner: Some(evidence_reference::Owners {
+                ids: &self.owners,
+                records: &self.records,
+                changes: &self.changes,
+            }),
+        }
+    }
 }
 fn fixture(case: u32) -> Case {
     assert!((1..=12).contains(&case));
@@ -80,14 +99,16 @@ fn fixture(case: u32) -> Case {
             output: [1., 1., 14., 14.],
             depth: [0.1, 100., f32::from(u8::from(orthographic)), 1.],
             options: [0.9, 0.001, 0.001, 1.],
-            // Steady history evidence h / (1 - h) = 9 keeps the fixed weight 0.9.
-            reactive: [0., 9., 0., 0.],
+            // Same area, accepted evidence origin. Mass is per texel, not a
+            // prescribed fixed blend fraction.
+            reactive: [0., 9., 1., 1.],
             jitter: [0.; 4],
         },
         current: vec![rgba(0.25); (N * N) as usize],
         motion: vec![[0., 0., 0.5, 1.]; (N * N) as usize],
         old: vec![rgba(0.75); (N * N) as usize],
         old_depth: vec![z; (N * N) as usize],
+        old_evidence: vec![[9., 0., 0., 0.]; (N * N) as usize],
         owners: vec![5; (N * N) as usize],
         records: vec![[PRESENT | 5, 0]; (N * N) as usize],
         changes: [0; 3132],
@@ -96,55 +117,36 @@ fn fixture(case: u32) -> Case {
         baseline: case == 7 || case == 8,
         current_only_reference: case == 3,
     };
-    c.changes[1] = 1; // camera_static, no global change
+    c.changes[1] = 1;
     c.changes[2] = 100_000;
-    let mut color = rgba(0.25);
-    let mut record = [PRESENT | 5, 0];
+    let mut pixels = vec![CENTER];
     match case {
-        1 => c.frame.depth[3] = 0., // Fresh, with all outside texels checked below.
-        2 => {
-            // Static history may have a different anchor; no clamp is allowed.
-            c.records.fill([PRESENT | 7, 5]);
-            color = rgba(0.25 * 0.1 + 0.75 * 0.9);
-            record[1] = 7;
-        }
+        1 => c.frame.depth[3] = 0.,
+        2 => c.records.fill([PRESENT | 7, 5]), // Carried primary 7, absent age advances.
         3 => {
             c.current.fill(rgba(0.));
             c.old.fill(rgba(0.45));
             c.records.fill([PRESENT | 5, 7]);
-            // Algebraically zero support at CENTER can become 2^-20 under
-            // reciprocal/FMA coordinate lowering. Either fresh reconstruction
-            // must reject the old .45 color carried by changed secondary 7.
+            // The archived bilinear exact-zero fixture is preserved in fd5. In
+            // R4 this Gaussian tap is positive. Compare tight fresh reconstruction
+            // and the entire history-disabled reference; stale .45 is forbidden.
             c.owners[at([9, 8])] = 7;
             c.current[at([9, 8])] = rgba(0.5);
             c.changes[0] = classes(&[7]);
             c.changes[4] = 1 << 7;
-            color = rgba(0.);
-            // This distant probe cannot gain owner 7 through reconstruction;
-            // it also rejects a missing/misread changed-owner table.
-            c.probes.push(Probe {
-                pixel: [3, 3],
-                color,
-                depth: z,
-                record,
-            });
+            pixels.push([3, 3]);
         }
         4 | 5 => {
-            let mask = classes(&[5, 7, 9]);
-            c.records.fill([PRESENT | 5, PRESENT | mask]);
+            c.records.fill([PRESENT | 5, PRESENT | classes(&[5, 7, 9])]);
             if case == 4 {
                 c.changes[0] = classes(&[7]);
                 c.changes[4] = 1 << 7;
-            } else {
-                color = rgba(0.25 * 0.1 + 0.75 * 0.9);
-                record[1] = PRESENT | mask;
             }
         }
         6 => {
-            c.changes[1] = 0; // Ordinary reprojection requires an anchor match.
+            c.changes[1] = 0;
             c.records.fill([PRESENT | 9, 0]);
             c.old_depth.fill(z + 0.00025);
-            // Depth is tolerance-close; rejection is solely ownership.
         }
         7 | 8 => {
             c.changes[1] = if case == 7 { 3 } else { 0 };
@@ -154,25 +156,19 @@ fn fixture(case: u32) -> Case {
                     c.old[at([x, y])] = rgba(if (x + y) % 2 == 0 { 0.25 } else { 32. });
                 }
             }
-            // Case7 catches accidentally snapping fallback reprojection to P:
-            // displacement is nonzero but smaller than the persistence threshold.
             let delta = if case == 7 {
                 [3. / 1024., 0.]
             } else {
                 [0.25, 0.5]
             };
             c.motion.fill([delta[0] / 14., delta[1] / 14., 0.5, 1.]);
-            // Exact full color/depth bytes are compared with the original Upscale.
         }
         9 => {
             c.changes[1] = 0;
             c.current.fill(rgba(0.));
             c.old.fill(rgba(1.));
-            // A clamp-only owner contributes even though the 2x2 support is {5}.
             c.current[at([7, 8])] = rgba(0.5);
             c.owners[at([7, 8])] = 7;
-            color = rgba(0.45);
-            record[1] = 7;
         }
         10 => {
             c.changes[1] = 0;
@@ -181,49 +177,29 @@ fn fixture(case: u32) -> Case {
             c.motion.fill([0.25 / 14., 0.5 / 14., 0.5, 1.]);
             c.old.fill(rgba(0.5));
             c.old[at([9, 8])] = rgba(0.9);
-            c.records[at([9, 8])] = [PRESENT | 5, 7]; // weight .125 must reject
+            c.records[at([9, 8])] = [PRESENT | 5, 7];
             c.records[at([8, 9])] = [PRESENT | 5, 9];
             c.current[at([7, 8])] = rgba(0.);
             c.current[at([8, 7])] = rgba(1.);
-            // Accepted weights .375+.375+.125 = .875, all color .5. The bad
-            // .9 tap must not affect either the renormalized color or the record.
-            color = rgba(0.25 * 0.1 + 0.5 * 0.9);
-            record[1] = 9;
         }
         11 => {
-            // Independent tiles in one render; no additional passes/submissions.
             for (p, word) in [([3, 3], 0), ([11, 3], 100_001), ([6, 3], 5 | (1 << 20))] {
                 c.owners[at(p)] = word;
-                c.probes.push(Probe {
-                    pixel: p,
-                    color: rgba(0.25),
-                    depth: z,
-                    record: [0; 2],
-                });
+                pixels.push(p);
             }
             c.current[at([3, 11])] = [0.125, 0.125, 0.125, 0.5];
-            c.probes.push(Probe {
-                pixel: [3, 11],
-                color: [0.125, 0.125, 0.125, 0.5],
-                depth: 0.,
-                record: [0; 2],
-            });
+            pixels.push([3, 11]);
             c.records[at([11, 11])] = [PRESENT, 7];
-            c.probes.push(Probe {
-                pixel: [11, 11],
-                color: rgba(0.25),
-                depth: z,
-                record: [PRESENT | 5, 0],
-            });
-            // Reserved anchor bits must not alias to 5 either.
+            pixels.push([11, 11]);
             c.records[at([8, 11])] = [PRESENT | 5 | (1 << 20), 0];
-            c.probes.push(Probe {
-                pixel: [8, 11],
-                color: rgba(0.25),
-                depth: z,
-                record: [PRESENT | 5, 0],
-            });
-            color = rgba(0.25 * 0.1 + 0.75 * 0.9);
+            pixels.push([8, 11]);
+            // Three existing unused tiles add retirement, carried identity and
+            // malformed-age observation without another pass, submit or map.
+            for (p, age) in [([3, 7], 7.), ([7, 7], 6.), ([11, 7], 1.5)] {
+                c.records[at(p)] = [PRESENT | 7, 5];
+                c.old_evidence[at(p)][1] = age;
+                pixels.push(p);
+            }
         }
         12 => {
             c.depth = 1.;
@@ -231,16 +207,16 @@ fn fixture(case: u32) -> Case {
         }
         _ => unreachable!(),
     }
-    if !c.baseline && !c.current_only_reference && case != 12 {
-        c.probes.push(Probe {
-            pixel: CENTER,
-            color,
-            depth: z,
-            record,
-        });
-    }
+    c.probes = pixels
+        .into_iter()
+        .map(|pixel| Probe {
+            pixel,
+            expected: c.reference().resolve(pixel),
+        })
+        .collect();
     c
 }
+
 fn texture(
     d: &wgpu::Device,
     format: wgpu::TextureFormat,
@@ -312,7 +288,7 @@ fn draw(
     pass.set_bind_group(0, bindings, &[]);
     pass.draw(0..3, 0..1);
 }
-fn read_pixel(bytes: &[u8], p: [u32; 2]) -> ([f32; 4], f32, [u32; 2]) {
+fn read_pixel(bytes: &[u8], p: [u32; 2]) -> ([f32; 4], f32, [u32; 2], [f32; 2]) {
     let offset = (p[1] as u64 * ROW + p[0] as u64 * 8) as usize;
     let color = std::array::from_fn(|c| {
         half(u16::from_le_bytes(
@@ -327,7 +303,11 @@ fn read_pixel(bytes: &[u8], p: [u32; 2]) -> ([f32; 4], f32, [u32; 2]) {
         let at = 2 * PLANE as usize + offset + 4 * c;
         u32::from_le_bytes(bytes[at..at + 4].try_into().unwrap())
     });
-    (color, depth, record)
+    let evidence = std::array::from_fn(|c| {
+        let at = (3 * PLANE + p[1] as u64 * ROW + p[0] as u64 * 4) as usize + 2 * c;
+        half(u16::from_le_bytes(bytes[at..at + 2].try_into().unwrap()))
+    });
+    (color, depth, record, evidence)
 }
 #[test]
 fn owner_history_fixture_has_exact_budget_and_independent_counterexamples() {
@@ -353,16 +333,16 @@ fn owner_history_fixture_has_exact_budget_and_independent_counterexamples() {
         assert!(canonical(good));
     }
     assert_eq!(cases[2].owners[at([9, 8])], 7);
-    assert_eq!(cases[2].probes[0].color, rgba(0.));
-    assert_eq!(cases[2].probes[0].pixel, [3, 3]);
+    assert_eq!(cases[2].probes[1].expected.color, [0., 0., 0., 1.]);
+    assert_eq!(cases[2].probes[1].pixel, [3, 3]);
     assert!((cases[6].motion[0][0] * 14.) < 1. / 256.);
     assert!(cases[6].motion[0][0] > 0.);
-    assert_eq!(cases[8].probes[0].record, [PRESENT | 5, 7]);
+    assert_eq!(cases[8].probes[0].expected.record, [PRESENT | 5, 7]);
     let renormalized = (0.375 * 0.5 + 0.375 * 0.5 + 0.125 * 0.5) / 0.875;
     assert_eq!(renormalized, 0.5);
     assert!((0.375 * 0.5 + 0.125 * 0.9 + 0.375 * 0.5 + 0.125 * 0.5) > renormalized);
-    assert_eq!(cases[9].probes[0].record, [PRESENT | 5, 9]);
-    assert_eq!(cases[10].probes.len(), 7);
+    assert_eq!(cases[9].probes[0].expected.record, [PRESENT | 5, 9]);
+    assert_eq!(cases[10].probes.len(), 10);
 }
 #[test]
 #[ignore = "requires delegated GPU numerical execution; no images or appearance acceptance"]
@@ -383,9 +363,10 @@ fn actual_owner_history_obeys_provenance_and_preserves_ordinary_fallback() {
     let depth = texture(d, wgpu::TextureFormat::R32Float, usage);
     let record = texture(d, wgpu::TextureFormat::Rg32Uint, usage);
     // Both resolve programs write RG16Float (mass, age) last.
-    let evidence = texture(d, wgpu::TextureFormat::Rg16Float, usage).create_view(&Default::default());
-    let baseline_evidence =
-        texture(d, wgpu::TextureFormat::Rg16Float, usage).create_view(&Default::default());
+    let evidence_texture = texture(d, wgpu::TextureFormat::Rg16Float, usage);
+    let evidence = evidence_texture.create_view(&Default::default());
+    let baseline_evidence_texture = texture(d, wgpu::TextureFormat::Rg16Float, usage);
+    let baseline_evidence = baseline_evidence_texture.create_view(&Default::default());
     let baseline_color = texture(d, crate::frame::HDR_FORMAT, usage);
     let baseline_depth = texture(d, wgpu::TextureFormat::R32Float, usage);
     let baseline_record = texture(d, wgpu::TextureFormat::Rg32Uint, usage);
@@ -399,7 +380,7 @@ fn actual_owner_history_obeys_provenance_and_preserves_ordinary_fallback() {
     let baseline_record_view = baseline_record.create_view(&Default::default());
     let read = d.create_buffer(&wgpu::BufferDescriptor {
         label: Some("Batched owner history scalar readback"),
-        size: PLANE * 6,
+        size: PLANE * 8,
         usage: wgpu::BufferUsages::COPY_DST | wgpu::BufferUsages::MAP_READ,
         mapped_at_creation: false,
     });
@@ -411,13 +392,8 @@ fn actual_owner_history_obeys_provenance_and_preserves_ordinary_fallback() {
         let motion = upload(d, q, wgpu::TextureFormat::Rgba32Float, &c.motion);
         let previous = upload(d, q, wgpu::TextureFormat::Rgba32Float, &c.old);
         let previous_depth = upload(d, q, wgpu::TextureFormat::R32Float, &c.old_depth);
-        // Previous evidence: mass 9 (= h/(1-h) at ratio 1), age 0, for every texel.
-        let previous_evidence = upload(
-            d,
-            q,
-            wgpu::TextureFormat::Rgba32Float,
-            &vec![[9_f32, 0., 0., 0.]; (N * N) as usize],
-        );
+        // Previous mass 9; case 11 additionally exercises valid/retired/malformed ages.
+        let previous_evidence = upload(d, q, wgpu::TextureFormat::Rgba32Float, &c.old_evidence);
         let owners = upload(d, q, wgpu::TextureFormat::R32Uint, &c.owners);
         let records = upload(d, q, wgpu::TextureFormat::Rg32Uint, &c.records);
         let frame = d.create_buffer_init(&wgpu::util::BufferInitDescriptor {
@@ -502,14 +478,23 @@ fn actual_owner_history_obeys_provenance_and_preserves_ordinary_fallback() {
             );
             baseline_renders += 1;
         }
-        let mut copies = vec![&color, &depth, &record];
+        let mut copies = vec![
+            (0, &color),
+            (1, &depth),
+            (2, &record),
+            (3, &evidence_texture),
+        ];
         if c.baseline || c.current_only_reference {
-            copies.extend([&baseline_color, &baseline_depth]);
+            copies.extend([
+                (4, &baseline_color),
+                (5, &baseline_depth),
+                (7, &baseline_evidence_texture),
+            ]);
         }
         if c.current_only_reference {
-            copies.push(&baseline_record);
+            copies.push((6, &baseline_record));
         }
-        for (i, texture) in copies.into_iter().enumerate() {
+        for (i, texture) in copies {
             e.copy_texture_to_buffer(
                 texture.as_image_copy(),
                 wgpu::TexelCopyBufferInfo {
@@ -544,10 +529,16 @@ fn actual_owner_history_obeys_provenance_and_preserves_ordinary_fallback() {
         let bytes = read.slice(..).get_mapped_range();
         for y in 0..N {
             for x in 0..N {
-                let (color, depth, record) = read_pixel(&bytes, [x, y]);
+                let (color, depth, record, evidence) = read_pixel(&bytes, [x, y]);
                 assert!(
                     color.iter().all(|v| v.is_finite() && *v >= 0.) && color[3] <= 1.,
                     "case {case} ({x},{y}) color {color:?}"
+                );
+                assert!(evidence[0].is_finite() && (0. ..=65504.).contains(&evidence[0]));
+                assert!(
+                    evidence[1].is_finite()
+                        && (0. ..8.).contains(&evidence[1])
+                        && evidence[1] == evidence[1].floor()
                 );
                 assert!(depth.is_finite() && (0. ..=100.).contains(&depth));
                 assert!(
@@ -556,48 +547,56 @@ fn actual_owner_history_obeys_provenance_and_preserves_ordinary_fallback() {
                 );
                 if x == 0 || y == 0 || x == N - 1 || y == N - 1 || case == 12 {
                     assert_eq!(
-                        (color, depth, record),
-                        ([0.; 4], 0., [0; 2]),
+                        (color, depth, record, evidence),
+                        ([0.; 4], 0., [0; 2], [0.; 2]),
                         "case {case} clear/outside ({x},{y})"
                     );
                 }
             }
         }
         for probe in &c.probes {
-            let (color, depth, record) = read_pixel(&bytes, probe.pixel);
-            for (actual, expected) in color.into_iter().zip(probe.color) {
+            let (color, depth, record, evidence) = read_pixel(&bytes, probe.pixel);
+            for (actual, expected) in color.into_iter().zip(probe.expected.color) {
                 assert!(
-                    (actual - expected).abs() <= 0.001,
+                    (f64::from(actual) - expected).abs()
+                        <= evidence_reference::half_bound(expected),
                     "case {case} probe {probe:?}: {color:?}"
                 );
             }
             assert!(
-                (depth - probe.depth).abs() <= 0.0001,
+                (f64::from(depth) - probe.expected.depth).abs()
+                    <= probe.expected.depth.abs() * 2_f64.powi(-20),
                 "case {case} probe {probe:?}: {depth}"
             );
-            assert_eq!(record, probe.record, "case {case} probe {probe:?}");
+            assert_eq!(record, probe.expected.record, "case {case} probe {probe:?}");
+            for (actual, expected) in evidence.into_iter().zip(probe.expected.evidence) {
+                assert!(
+                    (f64::from(actual) - expected).abs()
+                        <= evidence_reference::half_bound(expected),
+                    "case {case} evidence {evidence:?} expected {:?}",
+                    probe.expected.evidence
+                );
+            }
         }
         if c.current_only_reference {
-            let (color, _, record) = read_pixel(&bytes, CENTER);
-            // Strict divide gives zero; reciprocal/FMA gives fresh 2^-21.
-            // Allow at most twice that analytically derived contribution. The
-            // full byte comparison below independently forbids history reuse.
-            assert!(
-                color[..3]
-                    .iter()
-                    .all(|v| (0. ..=2_f32.powi(-20)).contains(v))
-            );
+            let (color, _, record, _) = read_pixel(&bytes, CENTER);
+            // Independent Gaussian support gives ~0.0079; the archived bilinear
+            // 2^-20 bound does not describe R4. The .405 stale contribution still
+            // fails both this bound and the exact history-disabled comparison.
+            let fresh = 0.5 * (-1_f64 / (2. * 0.35_f64.powi(2))).exp()
+                / (1. + 2. * (-1_f64 / (2. * 0.35_f64.powi(2))).exp()).powi(2);
+            assert!(color[..3].iter().all(|&v| (f64::from(v)-fresh).abs() <= evidence_reference::half_bound(fresh)));
             assert_eq!(color[3], 1.);
-            assert!(record == [PRESENT | 5, 0] || record == [PRESENT | 5, 7]);
+            assert_eq!(record, [PRESENT | 5, 7]);
         }
         if c.baseline || c.current_only_reference {
-            for (plane, bpp) in [(0, 8), (1, 4), (2, 8)] {
+            for (plane, bpp) in [(0, 8), (1, 4), (2, 8), (3, 4)] {
                 if plane == 2 && !c.current_only_reference {
                     continue;
                 }
                 for y in 0..N as usize {
                     let begin = plane * PLANE as usize + y * ROW as usize;
-                    let original = (plane + 3) * PLANE as usize + y * ROW as usize;
+                    let original = (plane + 4) * PLANE as usize + y * ROW as usize;
                     assert_eq!(
                         &bytes[begin..begin + N as usize * bpp],
                         &bytes[original..original + N as usize * bpp],

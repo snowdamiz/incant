@@ -1,3 +1,5 @@
+//! Historical design-model controls using the original fixed jitter lattice.
+//! Their bounds remain unchanged; they do not qualify the R4 shader or appearance.
 use super::{
     UpscaleConfig,
     confidence_oracle::{History, cap},
@@ -14,14 +16,14 @@ fn config() -> UpscaleConfig {
     }
 }
 fn kernel(n: u8, phase: usize) -> Kernel {
-    Kernel::new([128, 128], [0., 0., 128., 128.], n, phase).unwrap()
+    Kernel::historical([128, 128], [0., 0., 128., 128.], n, phase).unwrap()
 }
 #[test]
 fn true_sample_positions_invert_mapping_for_every_scale_and_phase() {
     for rect in [[0., 0., 65., 33.], [3.25, 5.5, 65., 33.]] {
         for n in 4..=16 {
             for phase in 0..8 {
-                let k = Kernel::new([71, 41], rect, n, phase).unwrap();
+                let k = Kernel::historical([71, 41], rect, n, phase).unwrap();
                 for point in [[10.5, 10.5], [33.5, 20.5], [64.5, 32.5]] {
                     for t in k.taps(point).unwrap().into_iter().flatten() {
                         let back = oracle::source(t.position, k.output, k.source, k.jitter);
@@ -39,7 +41,7 @@ fn true_sample_positions_invert_mapping_for_every_scale_and_phase() {
         ([65, 33], [0., 0., 65., 33.], 3),
         ([65, 33], [0., 0., f32::NAN, 33.], 8),
     ] {
-        assert!(Kernel::new(size, rect, n, 0).is_none());
+        assert!(Kernel::historical(size, rect, n, 0).is_none());
     }
     assert!(kernel(8, 0).taps([f64::NAN, 1.5]).is_none());
     assert!(kernel(8, 0).taps([-0.5, 1.5]).is_none());
@@ -91,7 +93,7 @@ fn clipped_fractional_views_skip_unique_samples_and_renormalize_constants() {
     let rect = [3.25, 5.5, 65., 33.];
     for n in 4..=16 {
         for phase in 0..8 {
-            let k = Kernel::new([71, 41], rect, n, phase).unwrap();
+            let k = Kernel::historical([71, 41], rect, n, phase).unwrap();
             for p in [[3.5, 5.5], [68.5 - 1., 37.5], [33.5, 20.5]] {
                 let taps = k.taps(p).unwrap();
                 let active: Vec<_> = taps.into_iter().flatten().collect();
@@ -115,7 +117,7 @@ fn clipped_fractional_views_skip_unique_samples_and_renormalize_constants() {
         }
     }
     // Clipped mass is not normalized to an invented full frame's confidence.
-    let k = Kernel::new([71, 41], rect, 8, 0).unwrap();
+    let k = Kernel::historical([71, 41], rect, 8, 0).unwrap();
     let edge = k.evidence([3.5, 5.5], |_| [1.; 4]).unwrap();
     let complete = kernel(8, 0).evidence([3.5, 5.5], |_| [1.; 4]).unwrap();
     assert!(edge.mass < complete.mass);

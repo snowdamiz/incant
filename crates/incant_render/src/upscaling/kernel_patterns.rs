@@ -1,3 +1,5 @@
+//! Historical design-model controls using the original fixed jitter lattice.
+//! Their bounds remain unchanged; they do not qualify the R4 shader or appearance.
 //! Static scalar texture experiment. Analytic bilinear texels; no material LOD,
 //! dynamic history admission, camera motion, tonemap or appearance inference.
 use super::{UpscaleConfig, confidence_oracle::History, kernel_oracle::Kernel};
@@ -46,7 +48,8 @@ fn static_periodic_inputs_reach_phase_periodic_state_and_beat_bilinear_detail_co
                     let mut old = 0.;
                     let mut previous_cycle = [0.; 8];
                     for tick in 0..48 {
-                        let k = Kernel::new([128, 128], [0., 0., 128., 128.], n, tick).unwrap();
+                        let k =
+                            Kernel::historical([128, 128], [0., 0., 128., 128.], n, tick).unwrap();
                         let f = |p| sample(p, width);
                         let before = h.color[0];
                         h = h.step(k.evidence(p, f).unwrap(), k, c, false).unwrap();
@@ -100,7 +103,7 @@ fn capped_static_cycle_is_an_affine_contraction_with_an_exact_periodic_limit() {
                 let mut b = 0.;
                 let max = cap(f64::from(c.history_weight), 16. / f64::from(n)).unwrap();
                 for phase in 0..8 {
-                    let k = Kernel::new([128, 128], [0., 0., 128., 128.], n, phase).unwrap();
+                    let k = Kernel::historical([128, 128], [0., 0., 128., 128.], n, phase).unwrap();
                     let e = k.evidence(point, |p| sample(p, width)).unwrap();
                     let factor = max / (max + e.mass);
                     a *= factor;
@@ -120,7 +123,7 @@ fn capped_static_cycle_is_an_affine_contraction_with_an_exact_periodic_limit() {
                     ..History::default()
                 };
                 for phase in 0..8 {
-                    let k = Kernel::new([128, 128], [0., 0., 128., 128.], n, phase).unwrap();
+                    let k = Kernel::historical([128, 128], [0., 0., 128., 128.], n, phase).unwrap();
                     let e = k.evidence(point, |p| sample(p, width)).unwrap();
                     h = h.step(e, k, c, false).unwrap();
                     perturbed = perturbed.step(e, k, c, false).unwrap();
@@ -151,7 +154,8 @@ fn static_texture_scale_changes_report_recovery_without_resetting_color() {
                     let sign = if sample(p, width)[0] == 1. { 1. } else { -1. };
                     let mut h = History::default();
                     for tick in 0..48 {
-                        let k = Kernel::new([128, 128], [0., 0., 128., 128.], from, tick).unwrap();
+                        let k = Kernel::historical([128, 128], [0., 0., 128., 128.], from, tick)
+                            .unwrap();
                         h = h
                             .step(k.evidence(p, |p| sample(p, width)).unwrap(), k, c, false)
                             .unwrap();
@@ -160,7 +164,8 @@ fn static_texture_scale_changes_report_recovery_without_resetting_color() {
                     unscaled[0] += sign * h.color[0] / 128.;
                     let mut control = h;
                     for tick in 0..8 {
-                        let k = Kernel::new([128, 128], [0., 0., 128., 128.], to, tick).unwrap();
+                        let k =
+                            Kernel::historical([128, 128], [0., 0., 128., 128.], to, tick).unwrap();
                         let e = k.evidence(p, |p| sample(p, width)).unwrap();
                         // Explicit negative control omits only density reweighting.
                         control.source_width = k.source[2];
