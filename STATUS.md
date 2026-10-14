@@ -19,7 +19,7 @@ The actual NativeBehavior frontend cook passes. Static Hermes source and future
 compiler inputs are pinned, but no native compiler/host was built. All complete
 SDK, matched shipping performance, iOS no-JIT/size and security-release adoption
 conditions remain open. No production host or dependency changed. Independent
-source/final review is pending. [Evidence](docs/spikes/typescript-aot.md).
+source/final review is accepted; publication is pending. [Evidence](docs/spikes/typescript-aot.md).
 
 ## Core 10k Mac shipping — cache improvement measured, 2 ms script gate failed
 

@@ -111,5 +111,5 @@ python3 -m unittest discover -s tools/probes/typescript-aot -p 'test_*.py'
 
 The verifier performs no compiler execution. The external option additionally
 checks retained original files; portable replay needs only the repository.
-Independent source/final review is pending. This packet changes no production
+Independent [source/final review](evidence/typescript-aot/review.json) is accepted. This packet changes no production
 runtime and approves no phase gate.
