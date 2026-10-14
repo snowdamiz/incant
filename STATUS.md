@@ -6,8 +6,8 @@ The isolated Apple arm64 getter has 32 historical same-lock parity observations
 and a deliberately failing wrong-count control. Twelve imported tool/evidence
 paths remain producer-exact; current lock/source/replay checks pass without a
 native rerun. The retained patch-context whitespace failure is resolved by two
-exact-path packaging exceptions. Final current-main review and publication are
-pending. No production dependency, profiler mode, performance or gate changes
+exact-path packaging exceptions. Independent current-main review is accepted;
+publication awaits its exact-head hosted fast check. No production dependency, profiler mode, performance or gate changes
 are included. [Current scope](docs/spikes/quickjs-getter-main272.md).
 
 ## Engine compatibility and pin review — qualified main271 composition

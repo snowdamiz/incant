@@ -47,7 +47,9 @@ python3 docs/spikes/evidence/quickjs-getter-main272/verify.py --current --extern
 The wrapper passes with 25 current records and 22 payloads, plus the unchanged
 929-record/444-payload producer archive. The original final independent receipt
 `862c8924f873e3a22e14fdec6c11c56a5f18f45477c8ea28d2d60a879c321389`
-is retained byte-exact. Current composition awaits independent final review.
+is retained byte-exact. Current composition independently passed final review
+`95643840bc749ce4d9d94df9922b2498186bcf79c61386de72fc1bb3b4de4e8b`;
+publication awaits its exact-head hosted fast check.
 
 Checkpoint33 remains separately frozen at `b3eb0a98`, exact main272 tree
 `1c9687fc`; all 23 required contexts and eight comprehensive workflows must
