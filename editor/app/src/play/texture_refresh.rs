@@ -143,7 +143,7 @@ pub fn schedule_refresh(editor: Arc<Editor>, revision: u64) {
             if let Ok(mut console) = editor.console.lock() {
                 console.push(ConsoleEvent::new(
                     "error",
-                    format!("Native Play texture refresh: {message}"),
+                    format!("Native Play asset refresh: {message}"),
                 ));
             }
             editor.play.refresh_event.store(true, Ordering::Release);
@@ -231,7 +231,7 @@ fn refresh(editor: &Editor, generation: u32, revision: u64) -> Result<(), String
     {
         console.push(ConsoleEvent::new(
             "info",
-            format!("Native Play texture refresh accepted: {receipt}"),
+            format!("Native Play asset refresh accepted: {receipt}"),
         ));
     }
     editor.play.refresh_event.store(true, Ordering::Release);
