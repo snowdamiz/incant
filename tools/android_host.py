@@ -67,6 +67,9 @@ def index_files(data):
         require(re.fullmatch(r'[a-zA-Z0-9_-]+(?:/[a-zA-Z0-9_-]+){0,3}(?:\.[a-zA-Z0-9_-]+)?', name),
                 'Android asset path unsupported')
         payload = read(path, 128 * 1024**2)
+        # Java boundedLine excludes the newline and accepts exactly 512 ASCII chars.
+        require(64 + 2 + len(str(len(payload))) + len(name) <= 512,
+                'Android asset catalog line exceeds 512 characters')
         total += len(payload)
         require(total <= MAX_PACKAGE and len(rows) < 8192, 'Android package exceeds bounds')
         rows.append((name, payload))

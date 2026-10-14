@@ -54,6 +54,18 @@ class AndroidHost(unittest.TestCase):
             with patch.object(android_host,'MAX_PACKAGE',1), self.assertRaisesRegex(ValueError,'bounds'):
                 android_host.index_files(root)
 
+    def test_catalog_line_matches_java_exact_boundary_and_long_path_refusal(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp).resolve(); (root/'package.json').write_text('{}')
+            parent = root / ('a' * 220); parent.mkdir()
+            boundary = parent / ('b' * 224); boundary.write_bytes(b'x')
+            rows = android_host.index_files(root)
+            name, payload = next(row for row in rows if row[0] != 'package.json')
+            self.assertEqual(64 + 2 + len(str(len(payload))) + len(name), 512)
+            boundary.rename(parent / ('b' * 225))
+            with self.assertRaisesRegex(ValueError, 'catalog line exceeds 512'):
+                android_host.index_files(root)
+
     def test_selected_graph_refuses_context_competitors_and_missing_real_backend(self):
         names=['incant_game_player','incant_script','ndk','ndk-context','jni','cpal','wgpu','incant_render_gpu_host']
         graph='\n'.join(name+' v1.0.0|' for name in names)+'\n'
