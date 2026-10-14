@@ -1,5 +1,6 @@
 """Receipt refusal and real harmless subprocess lifecycle controls, not a native gate."""
 import copy
+import base64
 import importlib.util
 import os
 from pathlib import Path
@@ -123,9 +124,24 @@ class ManagedProtocolControls(unittest.TestCase):
             self.assertEqual(writes.stat().st_size,size)
 
     def test_protocol_timeout_cleans_child_and_retains_refusal(self):
-        with self.assertRaises(subprocess.TimeoutExpired):
-            probe.rpc_process([sys.executable,'-c','import sys,time; sys.stdin.read(); time.sleep(60)'],
-                              'request\n', 0.1, lambda:None)
+        code = "import sys,time; sys.stdin.read(); print('before timeout',flush=True); print('diagnostic',file=sys.stderr,flush=True); time.sleep(60)"
+        with self.assertRaises(subprocess.TimeoutExpired) as caught:
+            probe.rpc_process([sys.executable,'-c',code],
+                              'request\n', 0.5, lambda:None)
+        record = probe.failure_record(caught.exception)
+        self.assertTrue(record['reaped'])
+        self.assertEqual(record['timeout_capture_scope'], 'rpc-received-prefix-before-cleanup')
+        self.assertEqual(base64.b64decode(record['stdout_base64']), b'before timeout\n')
+        self.assertEqual(base64.b64decode(record['stderr_base64']), b'diagnostic\n')
+
+    def test_timeout_capture_is_lossless_and_missing_capture_explicit(self):
+        error = subprocess.TimeoutExpired(['harmless'], 1, output=b'bad UTF-8: \xff\n')
+        record = probe.failure_record(error)
+        self.assertEqual(base64.b64decode(record['stdout_base64']), error.output)
+        self.assertEqual(record['stdout_bytes'], len(error.output))
+        self.assertTrue(record['stdout_capture_available'])
+        self.assertFalse(record['stderr_capture_available'])
+        self.assertNotIn('stderr', record)
 
 
 if __name__ == '__main__':
