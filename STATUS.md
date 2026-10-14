@@ -1,5 +1,14 @@
 # Implementation status
 
+## Script attachment cache — scoped CPU correctness
+
+Unchanged authored attachment groups reuse one frozen instance array and paired
+ID authorization list while every entity lifetime is still checked each tick.
+Thirty-five distinct scoped native cases and strict all-target Clippy pass;
+retirement/reuse, prior snapshot immutability, capability revocation and fresh-VM
+restore are covered. No shipping speedup or 10k gate is claimed.
+[Evidence](docs/spikes/script-instance-cache.md).
+
 ## Static script binding emission — CPU qualification, cache union pending
 
 The trusted emitter now generates borrowed constant property tables and one

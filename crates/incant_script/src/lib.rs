@@ -369,14 +369,14 @@ impl ScriptHost {
                     return Err(ScriptError::ScriptBindings);
                 }
                 for (index, group) in project.groups.iter_mut().enumerate() {
-                    let instances = group
+                    let (instances, ids) = group
                         .snapshot(&ctx, &freeze, world, &mut retired)
                         .map_err(diagnostics::allocation)?;
                     let scope = schedule::Scope::Source(group.source);
                     if instances.is_empty() {
                         schedule.cancel_scope(scope);
                     } else {
-                        groups.push((index, scope, instances, group.ids()));
+                        groups.push((index, scope, instances, ids));
                     }
                 }
             } else {
