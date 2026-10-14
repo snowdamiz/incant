@@ -288,18 +288,18 @@ impl Snapshot {
                     if !t.is_finite() || t <= 0.0 {
                         return Err(Error::Incomplete);
                     }
-                    if let Some(p) = previous {
-                        if let Outcome::Presented(old) = self.rows[p].outcome {
-                            let seconds = t - old;
-                            if !seconds.is_finite() || seconds <= 0.0 {
-                                return Err(Error::Order);
-                            }
-                            result.push(Interval {
-                                from: p,
-                                to: i,
-                                seconds,
-                            });
+                    if let Some(p) = previous
+                        && let Outcome::Presented(old) = self.rows[p].outcome
+                    {
+                        let seconds = t - old;
+                        if !seconds.is_finite() || seconds <= 0.0 {
+                            return Err(Error::Order);
                         }
+                        result.push(Interval {
+                            from: p,
+                            to: i,
+                            seconds,
+                        });
                     }
                     previous = Some(i);
                 }
