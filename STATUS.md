@@ -1,15 +1,26 @@
 # Implementation status
 
+## Linked prefab authoring — current-main composition pending
+
+A fixed-topology linked-prefab backend materializes ordinary entities through
+atomic `incant_cmd` transactions. Explicit identity maps, component overrides,
+revert, prototype updates, detach and deletion retain validation and undo/replay.
+87 document/command CPU cases, a live headless save/reopen case, a cooked native
+consumer case and scoped strict all-target Clippy pass. Published schemas and SDK
+types are regenerated. The producer source and lossless evidence passed independent
+review. Current-main composition is being qualified; nested/topology edits and editor UI remain open.
+[Scope and limitations](docs/spikes/prefab-authoring.md).
+
 ## Windows TypeScript deadline — bounded observation, no timeout fix claim
 
-Main269 includes the source-scoped script phase diagnostic. Checkpoint32's frozen
+Main270 includes the source-scoped script phase diagnostic and bounded cook observer. Checkpoint32's frozen
 Windows desktop job failed the unchanged authored fallback test at its existing
 eight-second compiler deadline; the original failed job and prior passing Windows
 log remain retained. A reviewed eight-phase observer now preserves sanitized
 bounded evidence after child cleanup, including no first phase. Ten current local
 checks pass (23 Node controls and six Rust cases, strict lint and policy checks).
-The exact Windows diagnostic is authorized once after this scoped PR's fast check
-and merge; it has no retry or deadline override. A successful diagnostic will not
+PR270 merged after its exact-head fast SUCCESS. Its one Windows diagnostic is
+running on that exact merge; it has no retry or deadline override. A successful diagnostic will not
 promote the failed candidate or establish a timeout repair. [Scope and evidence](docs/spikes/typescript-cook-phases.md).
 
 ## Native script phase diagnostic — one bounded CPU test
@@ -54,7 +65,8 @@ merged after its exact-head fast SUCCESS. Checkpoint31 finished with 22 required
 SUCCESS and one FAILURE; every original job is retained. The same PR263 now
 freezes checkpoint32 candidate `e4faac52`, exact main268 tree `17054960`. All
 23 contexts and eight comprehensive workflows remain required. Its Windows
-desktop deadline failure is retained while the remaining original jobs finish.
+desktop deadline failure is retained. Every original workflow is now terminal:
+22 required contexts succeeded and the Windows context failed.
 Release30 is unchanged; no successor success or promotion is claimed. [Repair evidence](docs/spikes/physics-sync-result.md).
 
 ## Director routing clarification — editor UI only
