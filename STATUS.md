@@ -6,8 +6,8 @@ The current main259 composition preserves the three reviewed changes: constant
 binding tables, immutable attachment snapshots and immutable bulk-query row IDs.
 Both numerical modes pass 167 CPU cases and strict all-target lint; compiler-free
 native/wasm and dependency checks pass. All 3,885 frozen inputs remain exact and
-six immediate binaries are retained. Final integration review and PR checks are
-pending; the historical Core measurements below do not measure this union. No
+six immediate binaries are retained. Final integration review is independently
+accepted; publication awaits the exact-head PR check; the historical Core measurements below do not measure this union. No
 shipping build/runtime speedup or performance gate is claimed.
 [Current evidence](docs/spikes/script-caches-main259.md).
 

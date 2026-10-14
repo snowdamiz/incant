@@ -72,5 +72,5 @@ python3 docs/spikes/evidence/script-caches-main259/verify.py --verify-only
 `--originals --local-binaries` additionally verifies all retained current and
 producer raw files and local executable copies. The grouped verifier validates
 current source identity; producer verifiers preserve their own source generation
-and do not infer a current performance run. Source review is accepted; final
-integration evidence review and required exact-head PR checks remain pending.
+and do not infer a current performance run. Source and final integration evidence reviews are independently accepted.
+Publication awaits the required exact-head PR check.

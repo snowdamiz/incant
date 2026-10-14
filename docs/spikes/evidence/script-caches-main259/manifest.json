@@ -34,6 +34,11 @@
       "path": "docs/spikes/evidence/script-caches-main259/script-chunk-id-cache-final-independent-20261013.json",
       "bytes": 11251,
       "sha256": "6c809a6aae9ce2ff889184619b10231a6bbeb5e250cd3c8b94a28f72257bc7c2"
+    },
+    {
+      "path": "docs/spikes/evidence/script-caches-main259/script-caches-main259-final-root-20261014.json",
+      "bytes": 1007,
+      "sha256": "be0d2a4d4806f079eaae568ba48bdcde6183b0ceb121d62b93900be9f46c63e2"
     }
   ],
   "producer_files": [
