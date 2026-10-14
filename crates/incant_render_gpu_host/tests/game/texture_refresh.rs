@@ -197,7 +197,9 @@ fn sprite_source(game: &RefreshGame) -> &Arc<incant_assets_runtime::RuntimeAsset
 }
 fn dominant(bytes: &[u8], channel: usize) -> usize {
     bytes
-        .chunks_exact(4)
+        .as_chunks::<4>()
+        .0
+        .iter()
         .filter(|p| p[channel] > 150 && p[2 - channel] < 50 && p[3] > 200)
         .count()
 }
