@@ -1,0 +1,453 @@
+{
+  "binaries": [
+    {
+      "bytes": 1289392,
+      "features": [],
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/navigation-search-cache-main281-001/qualify-001/nav-tests/binaries/steering_plaza-7809573f6dff1fe0",
+      "sha256": "d69e33356b369c3810ef16978cfbe5fa53ec2ac1b0eb374abfb40c32b2978b8b"
+    },
+    {
+      "bytes": 1186856,
+      "features": [],
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/navigation-search-cache-main281-001/qualify-001/nav-tests/binaries/steering-511fea906d9291a1",
+      "sha256": "03fc9e0c0753b7074228fac847a13475d891ccc28115f8d5ca3708b6ac906576"
+    },
+    {
+      "bytes": 1052288,
+      "features": [],
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/navigation-search-cache-main281-001/qualify-001/nav-tests/binaries/rasterization-3abe2c730eec9d10",
+      "sha256": "e86836d4013cea661630f2187a152a6011122d040172096d2436c38b0f55da27"
+    },
+    {
+      "bytes": 1578424,
+      "features": [],
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/navigation-search-cache-main281-001/qualify-001/nav-tests/binaries/incant_nav-be8f58923d25f2ec",
+      "sha256": "144a427879555c0998e531e576d47d4b10fde53ca8cd7a471882ec090a15e22c"
+    },
+    {
+      "bytes": 1474296,
+      "features": [],
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/navigation-search-cache-main281-001/qualify-001/nav-tests/binaries/navigation-584f5871625672c6",
+      "sha256": "6e9a8c40db2acd65bcf043876e679b190ed18080aac0e8c4865ba88e1a9c72ac"
+    },
+    {
+      "bytes": 1410200,
+      "features": [],
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/navigation-search-cache-main281-001/qualify-001/nav-tests/binaries/links-66c960c742b03695",
+      "sha256": "2d5ce9583fec31e8384db3011b64d5e297de1db9ce7fece59a8979cb6cb5c643"
+    },
+    {
+      "bytes": 1528272,
+      "features": [],
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/navigation-search-cache-main281-001/qualify-001/nav-tests/binaries/native_steering-a46f7040a1369224",
+      "sha256": "d95286ecfadb84fd3ccb6646358ce2e94f2b7d736714cadaad9adb1274ed45ca"
+    },
+    {
+      "bytes": 1070904,
+      "features": [],
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/navigation-search-cache-main281-001/qualify-001/nav-tests/binaries/grid-b61eb20e7ba96df7",
+      "sha256": "1b9b9a0598955ad59097095ede2ef9f9bf646ca75f15b3733e079ed9e5128318"
+    },
+    {
+      "bytes": 14247752,
+      "features": [
+        "default",
+        "physics-deterministic"
+      ],
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/navigation-search-cache-main281-001/qualify-001/runtime-det/binaries/navigation-fe38011d6d2c7d0c",
+      "sha256": "cadc332fcb403cb4893387583f880fd5b4d452b903d2b5682a90050eb25e2dce"
+    },
+    {
+      "bytes": 13897480,
+      "features": [],
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/navigation-search-cache-main281-001/qualify-001/runtime-fast4/binaries/navigation-9dc09e0c157035c1",
+      "sha256": "94e86c8484ec5efb9aa67e06550752f786a7524a12e14218c6a71419a6dda184"
+    }
+  ],
+  "commands": [
+    {
+      "elapsed_seconds": 14.16305829101475,
+      "exit": 0,
+      "failed": 0,
+      "ignored": 0,
+      "name": "nav-tests",
+      "passed": 35,
+      "terminal_reaped": true
+    },
+    {
+      "elapsed_seconds": 35.91013320800266,
+      "exit": 0,
+      "failed": 0,
+      "ignored": 0,
+      "name": "runtime-det",
+      "passed": 14,
+      "terminal_reaped": true
+    },
+    {
+      "elapsed_seconds": 35.06055895800819,
+      "exit": 0,
+      "failed": 0,
+      "ignored": 0,
+      "name": "runtime-fast4",
+      "passed": 14,
+      "terminal_reaped": true
+    },
+    {
+      "elapsed_seconds": 3.0823830410081428,
+      "exit": 0,
+      "failed": 0,
+      "ignored": 0,
+      "name": "nav-clippy",
+      "passed": 0,
+      "terminal_reaped": true
+    },
+    {
+      "elapsed_seconds": 3.8794881670037284,
+      "exit": 0,
+      "failed": 0,
+      "ignored": 0,
+      "name": "runtime-det-clippy",
+      "passed": 0,
+      "terminal_reaped": true
+    },
+    {
+      "elapsed_seconds": 3.4992657080001663,
+      "exit": 0,
+      "failed": 0,
+      "ignored": 0,
+      "name": "runtime-fast4-clippy",
+      "passed": 0,
+      "terminal_reaped": true
+    }
+  ],
+  "compiler_features": {
+    "runtime-det": [
+      {
+        "features": [
+          "alloc",
+          "dim2",
+          "downcast-rs",
+          "ena",
+          "enhanced-determinism",
+          "f32",
+          "hashbrown",
+          "indexmap",
+          "parallel",
+          "rayon",
+          "required-features",
+          "slab",
+          "smallvec",
+          "spade",
+          "std"
+        ],
+        "name": "parry2d"
+      },
+      {
+        "features": [
+          "alloc",
+          "dim3",
+          "downcast-rs",
+          "ena",
+          "enhanced-determinism",
+          "f32",
+          "hashbrown",
+          "indexmap",
+          "parallel",
+          "rayon",
+          "required-features",
+          "rstar",
+          "slab",
+          "smallvec",
+          "std"
+        ],
+        "name": "parry3d"
+      },
+      {
+        "features": [
+          "alloc",
+          "default",
+          "dim3",
+          "enhanced-determinism",
+          "f32",
+          "parallel",
+          "std"
+        ],
+        "name": "rapier3d"
+      },
+      {
+        "features": [
+          "alloc",
+          "block-solver",
+          "default",
+          "dim2",
+          "enhanced-determinism",
+          "f32",
+          "parallel",
+          "std"
+        ],
+        "name": "rapier2d"
+      },
+      {
+        "features": [
+          "default",
+          "physics-deterministic"
+        ],
+        "name": "incant_runtime"
+      }
+    ],
+    "runtime-fast4": [
+      {
+        "features": [
+          "alloc",
+          "dim2",
+          "downcast-rs",
+          "ena",
+          "f32",
+          "hashbrown",
+          "parallel",
+          "rayon",
+          "required-features",
+          "slab",
+          "smallvec",
+          "spade",
+          "std"
+        ],
+        "name": "parry2d"
+      },
+      {
+        "features": [
+          "alloc",
+          "dim3",
+          "downcast-rs",
+          "ena",
+          "f32",
+          "hashbrown",
+          "parallel",
+          "rayon",
+          "required-features",
+          "rstar",
+          "slab",
+          "smallvec",
+          "std"
+        ],
+        "name": "parry3d"
+      },
+      {
+        "features": [
+          "alloc",
+          "default",
+          "dim3",
+          "f32",
+          "parallel",
+          "std"
+        ],
+        "name": "rapier3d"
+      },
+      {
+        "features": [
+          "alloc",
+          "block-solver",
+          "default",
+          "dim2",
+          "f32",
+          "parallel",
+          "std"
+        ],
+        "name": "rapier2d"
+      },
+      {
+        "features": [],
+        "name": "incant_runtime"
+      }
+    ]
+  },
+  "format": "incant-navigation-search-cache-qualification",
+  "implementation": "4c1220e8514502f6dc7249481270905a5e00948c",
+  "limits": [
+    "CI correctness only; no navigation microprobe or shipping comparison",
+    "Raw logs and ten immediate native binaries remain external",
+    "Source001 and docs-only source002 are separately frozen",
+    "Target growth is a periodically observed cancellation bound, not an OS quota"
+  ],
+  "native_target_released": true,
+  "performance_improvement": null,
+  "player_execution": false,
+  "records": {
+    "qualification-plan-002.json": {
+      "bytes": 2589,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/navigation-search-cache-main281-001/qualification-plan-002.json",
+      "sha256": "8790aa913a352aa78400ff6f75849d5355275eee9a30c969f71aa6cd249ce319"
+    },
+    "qualification-plan.json": {
+      "bytes": 2582,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/navigation-search-cache-main281-001/qualification-plan.json",
+      "sha256": "0cf4a2f9742fff60fcea7b27236da3bc3a9434e6f820ce74d4af39d900e0eedc"
+    },
+    "qualify-001.py": {
+      "bytes": 6617,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/navigation-search-cache-main281-001/qualify-001.py",
+      "sha256": "8ffe4deefdf7ca0f4f888e9e9d7d2ce1909a03cc480dada6809e9b5cca0c5510"
+    },
+    "qualify-001/nav-clippy/compiler-artifacts.json": {
+      "bytes": 71399,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/navigation-search-cache-main281-001/qualify-001/nav-clippy/compiler-artifacts.json",
+      "sha256": "f70286a232fd8bbb2fd9b2ff8fecb9d3ea6340c07fba567a28266e0348e27b98"
+    },
+    "qualify-001/nav-clippy/receipt.json": {
+      "bytes": 933,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/navigation-search-cache-main281-001/qualify-001/nav-clippy/receipt.json",
+      "sha256": "502413fe51ec6bc93f2faa68c8706b7e556efad6c0da4ba43c8e6e35dc85913d"
+    },
+    "qualify-001/nav-clippy/stderr.log": {
+      "bytes": 710,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/navigation-search-cache-main281-001/qualify-001/nav-clippy/stderr.log",
+      "sha256": "bf931280b5c4105dca57f58810facec0c579afbceb8130832bd8f27127978510"
+    },
+    "qualify-001/nav-clippy/stdout.log": {
+      "bytes": 60397,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/navigation-search-cache-main281-001/qualify-001/nav-clippy/stdout.log",
+      "sha256": "cb1eb797b43f8db2e7756ab1964970601c2b928dfab5d276482d62c5acda92da"
+    },
+    "qualify-001/nav-tests/compiler-artifacts.json": {
+      "bytes": 77096,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/navigation-search-cache-main281-001/qualify-001/nav-tests/compiler-artifacts.json",
+      "sha256": "f5127f194e995984f001f282f4fe06d129589140f12bf9677e441a5d3723505a"
+    },
+    "qualify-001/nav-tests/receipt.json": {
+      "bytes": 4384,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/navigation-search-cache-main281-001/qualify-001/nav-tests/receipt.json",
+      "sha256": "bee6450f7529cd773df84ccb3f1a7cb0c00e8b3f0d219e8527a14c9aa9d5dfac"
+    },
+    "qualify-001/nav-tests/stderr.log": {
+      "bytes": 2149,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/navigation-search-cache-main281-001/qualify-001/nav-tests/stderr.log",
+      "sha256": "6d51d80fb84cffbce9514722ece83992f8249b476ece5528f2b0532e7bb3f2c5"
+    },
+    "qualify-001/nav-tests/stdout.log": {
+      "bytes": 69753,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/navigation-search-cache-main281-001/qualify-001/nav-tests/stdout.log",
+      "sha256": "dac29b186d0c107739477042559a150ee6191ea89801737ac2459f1983728538"
+    },
+    "qualify-001/result.json": {
+      "bytes": 12420,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/navigation-search-cache-main281-001/qualify-001/result.json",
+      "sha256": "0769c618913913d116fe652ce7d31941c52d7cce0d46856c2449a1fd9de96193"
+    },
+    "qualify-001/runtime-det-clippy/compiler-artifacts.json": {
+      "bytes": 219634,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/navigation-search-cache-main281-001/qualify-001/runtime-det-clippy/compiler-artifacts.json",
+      "sha256": "62ec8ebcfadb10750954ed7cf87548dc149cc6fe34885f5f13089054f7df9414"
+    },
+    "qualify-001/runtime-det-clippy/receipt.json": {
+      "bytes": 959,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/navigation-search-cache-main281-001/qualify-001/runtime-det-clippy/receipt.json",
+      "sha256": "2acbc687de073d136367097a7252c2262679e9bc4564a152f18063b9218a2b85"
+    },
+    "qualify-001/runtime-det-clippy/stderr.log": {
+      "bytes": 1478,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/navigation-search-cache-main281-001/qualify-001/runtime-det-clippy/stderr.log",
+      "sha256": "6696a2701769257ea0fb10a9526bcbdb9ee55f26a448566867ddbb3142bcf623"
+    },
+    "qualify-001/runtime-det-clippy/stdout.log": {
+      "bytes": 180523,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/navigation-search-cache-main281-001/qualify-001/runtime-det-clippy/stdout.log",
+      "sha256": "fc8697c32179be37035ee5e96bdb112c873f7fec21a807ee674e72c0f81bd2c3"
+    },
+    "qualify-001/runtime-det/compiler-artifacts.json": {
+      "bytes": 239328,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/navigation-search-cache-main281-001/qualify-001/runtime-det/compiler-artifacts.json",
+      "sha256": "9f30ca77c76451416536c59e9b8287f227a7cd56144eb5c6ebded7dd79b18a57"
+    },
+    "qualify-001/runtime-det/receipt.json": {
+      "bytes": 1403,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/navigation-search-cache-main281-001/qualify-001/runtime-det/receipt.json",
+      "sha256": "b39fff899c3235edf7abebb1004ad19cf2664f05a5ce42ceb212836b365ca09c"
+    },
+    "qualify-001/runtime-det/stderr.log": {
+      "bytes": 1375,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/navigation-search-cache-main281-001/qualify-001/runtime-det/stderr.log",
+      "sha256": "37d4a1582b523ee4d27d3eea35d1c2f004fd6fbd8a4dd6053dabd3dde9f55ac8"
+    },
+    "qualify-001/runtime-det/stdout.log": {
+      "bytes": 200455,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/navigation-search-cache-main281-001/qualify-001/runtime-det/stdout.log",
+      "sha256": "4a570117742f965ce0236e8d2f4ba7330c2f647bc4cdaa2879fa398e6a59c85d"
+    },
+    "qualify-001/runtime-fast4-clippy/compiler-artifacts.json": {
+      "bytes": 219038,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/navigation-search-cache-main281-001/qualify-001/runtime-fast4-clippy/compiler-artifacts.json",
+      "sha256": "b82136b9d925f710e9f28726e880576e4712d3136260896f51881bf5c8382595"
+    },
+    "qualify-001/runtime-fast4-clippy/receipt.json": {
+      "bytes": 989,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/navigation-search-cache-main281-001/qualify-001/runtime-fast4-clippy/receipt.json",
+      "sha256": "57e5da8fdd202ba66e6eb8afc4b94c8c6d811de43e562fd60350d5a4a47552ea"
+    },
+    "qualify-001/runtime-fast4-clippy/stderr.log": {
+      "bytes": 970,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/navigation-search-cache-main281-001/qualify-001/runtime-fast4-clippy/stderr.log",
+      "sha256": "bd5e43db32c461ad0ca388bdad866d567ba10091bb809ae2359dc49d0030abf5"
+    },
+    "qualify-001/runtime-fast4-clippy/stdout.log": {
+      "bytes": 180122,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/navigation-search-cache-main281-001/qualify-001/runtime-fast4-clippy/stdout.log",
+      "sha256": "64fb6f857dd5adc55c2d814d063afebc506ff6ca9354ea450448639583fdae21"
+    },
+    "qualify-001/runtime-fast4/compiler-artifacts.json": {
+      "bytes": 238738,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/navigation-search-cache-main281-001/qualify-001/runtime-fast4/compiler-artifacts.json",
+      "sha256": "d4663d420d2f7623bf95271c0793427f076d6d7e2c75efb6596245d9e07dbb36"
+    },
+    "qualify-001/runtime-fast4/receipt.json": {
+      "bytes": 1376,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/navigation-search-cache-main281-001/qualify-001/runtime-fast4/receipt.json",
+      "sha256": "7bf9e530139a494555af2a8c4b93b480fa545c420ef386f5db5f1a4ba2a08e3b"
+    },
+    "qualify-001/runtime-fast4/stderr.log": {
+      "bytes": 1125,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/navigation-search-cache-main281-001/qualify-001/runtime-fast4/stderr.log",
+      "sha256": "c38d3d54a1081fed51f136a8e6c15c90290678e98ed0156e1268333831cc73f0"
+    },
+    "qualify-001/runtime-fast4/stdout.log": {
+      "bytes": 200060,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/navigation-search-cache-main281-001/qualify-001/runtime-fast4/stdout.log",
+      "sha256": "733f3a8424870364eb82f9b24e987d4ce7b463f529ceba874a37d638360b29b3"
+    },
+    "source-001/freeze.json": {
+      "bytes": 1753,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/navigation-search-cache-main281-001/source-001/freeze.json",
+      "sha256": "4d5eeafc85ad1fa581cf2c0d69673b8b82635abdd1d1ed00394e2e434e6af33e"
+    },
+    "source-002/closure.json": {
+      "bytes": 541784,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/navigation-search-cache-main281-001/source-002/closure.json",
+      "sha256": "5dbe2f8d41871c37be8ecc99fb97516e40731ffa8cf8ab0efd370d58b8d3488b"
+    },
+    "source-002/freeze.json": {
+      "bytes": 2001,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/navigation-search-cache-main281-001/source-002/freeze.json",
+      "sha256": "9490477aa358917a9c6032588746ba01f1d56f61070b156bb99dbeb99faf27ec"
+    },
+    "source-002/source.patch": {
+      "bytes": 33847,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/navigation-search-cache-main281-001/source-002/source.patch",
+      "sha256": "c9aa405227cc98e30a6a4394addab55a1025974e10d7e2b6769955724169486b"
+    }
+  },
+  "shipping": false,
+  "source": "f2ff2841119e125ca3bcac19f3e1edbd51c88549",
+  "source_freeze_sha256": "9490477aa358917a9c6032588746ba01f1d56f61070b156bb99dbeb99faf27ec",
+  "source_unchanged": true,
+  "storage": {
+    "final_free_bytes": 12961816576,
+    "final_target_bytes": 6623965184,
+    "initial_target_bytes": 6303916032,
+    "lowest_observed_free_bytes": 12962066432,
+    "maximum_observed_target_bytes": 6600556544
+  },
+  "supervisor_handle": 68523,
+  "terminal_reaped": true,
+  "timing": false,
+  "total_passed": 63,
+  "version": 1
+}

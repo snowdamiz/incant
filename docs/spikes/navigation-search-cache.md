@@ -58,10 +58,37 @@ native runtime navigation tests now retain snapshots across tile and link edits.
 Two manually assembled private precision fixtures explicitly prepare their graph.
 
 No native test/build, navigation microprobe or shipping comparison has executed
-for this candidate at the initial source freeze. Proposed focused qualification
+for this candidate at the initial source freeze. Its proposed focused qualification
 is serial Rust 1.99, arm64, CI, locked/offline, jobs 2/Rayon 2: full incant_nav
 tests; native runtime navigation tests in deterministic and ordinary fast4 modes;
 strict incant_nav all-target and runtime navigation Clippy; formatting/diff. Any
 later microprobe is diagnostic only. Full-Core shipping evaluation must keep all
 2,156 ticks, authored script cadence/enemy counts, numeric validation/rollback and
 six publication-spike frames under the unchanged whole-tick protocol.
+
+## Completed focused qualification
+
+Implementation `4c1220e8514502f6dc7249481270905a5e00948c` and the subsequent
+docs-only retention clarification `f2ff2841119e125ca3bcac19f3e1edbd51c88549`
+are preserved. Frozen source002 SHA256
+`9490477aa358917a9c6032588746ba01f1d56f61070b156bb99dbeb99faf27ec`
+binds eight changed paths and 4,356 tracked compiler/source inputs. The retained
+old search method is text-identical to the parent after only method-name,
+visibility and whitespace normalization.
+
+The six authorized serial commands passed without a repair: 35 incant_nav tests,
+14 native runtime navigation tests in deterministic mode, 14 in ordinary fast4
+mode, incant_nav all-target strict Clippy, and the runtime navigation target's
+strict Clippy in both modes. There were zero failed or ignored cases. Actual
+compiler records show enhanced-determinism only in the deterministic arm and
+no SIMD8 in the ordinary fast arm. All used Rust 1.99, arm64, CI, locked/offline,
+jobs 2/Rayon 2 through the pinned repository Cargo wrapper.
+
+[The qualification manifest](evidence/navigation-search-cache/manifest.json)
+binds 32 external records and ten immediate test-executable copies. Supervisor
+68523 exited zero and was reaped; source and full input hashes still matched.
+The target and slot were released. Target allocation grew 320,049,152 bytes;
+free space remained above 12.96 GB, within the 2 GiB observed growth / 6 GiB free
+guards. Those periodic cancellation checks are not an OS storage quota.
+No player, shipping build, navigation microprobe or timing comparison ran.
+The cache's memory/performance tradeoff therefore remains unmeasured.
