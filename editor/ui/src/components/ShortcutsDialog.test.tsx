@@ -63,6 +63,7 @@ describe('keyboard shortcuts dialog', () => {
     expect(combos(row(dialog, 'Redo'))).toEqual(['⇧⌘Z']);
     expect(combos(row(dialog, 'Show or hide the hierarchy'))).toEqual(['⌥⌘1']);
     expect(combos(row(dialog, 'Keyboard shortcuts'))).toEqual(['?', '⌘/']);
+    expect(combos(row(dialog, 'Save the project'))).toEqual(['⌘S']);
     expect(row(dialog, 'Redo').querySelector('.shortcuts__keys')?.textContent).toContain('Shift Command Z');
     // One table of sections, no cards: each section caption heads its rows.
     expect([...dialog.querySelectorAll('.shortcuts__section th')].map((th) => th.textContent)).toEqual([
@@ -81,6 +82,7 @@ describe('keyboard shortcuts dialog', () => {
     const { dialog } = open('windows');
     expect(combos(row(dialog, 'Undo'))).toEqual(['Ctrl+Z']);
     expect(combos(row(dialog, 'Redo'))).toEqual(['Ctrl+Y', 'Ctrl+Shift+Z']);
+    expect(combos(row(dialog, 'Save the project'))).toEqual(['Ctrl+S']);
     expect(combos(row(dialog, 'Send the message'))).toEqual(['Ctrl+Enter']);
   });
 

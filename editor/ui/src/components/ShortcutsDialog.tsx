@@ -38,6 +38,7 @@ export const SHORTCUT_GROUPS: readonly ShortcutGroup[] = [
       { action: 'Previous panel', keys: [['Shift', 'F6']] },
       { action: 'Undo', keys: [['Mod', 'Z']] },
       { action: 'Redo', keys: [['Shift', 'Mod', 'Z']], other: [['Ctrl', 'Y'], ['Ctrl', 'Shift', 'Z']] },
+      { action: 'Save the project', keys: [['Mod', 'S']] },
       { action: 'Keyboard shortcuts', keys: [['?'], ['Mod', '/']] },
       { action: 'Close a dialog or menu', keys: [['Esc']] },
     ],

@@ -130,6 +130,59 @@ html.native-viewport .panel--viewport {
   font-weight: var(--weight-medium);
 }
 
+/* An open project's name is also its file menu's button: quiet until hovered, like the
+   Play target button, with the name in its usual weight and place after the logo. The
+   button truncates the name itself, so its focus ring is never clipped. */
+.titlebar__project--menu {
+  display: flex;
+  overflow: visible;
+}
+
+/* No percentage max-width: it would resolve against the heading's width, which already
+   counts the negative margin, and clip the name by that margin. min-width lets it shrink. */
+.titlebar__project-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+  height: 24px;
+  margin-left: -5px;
+  padding: 0 4px 0 5px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  letter-spacing: inherit;
+  cursor: pointer;
+  transition: background var(--duration-fast);
+}
+
+.titlebar__project-button:hover,
+.titlebar__project-button[aria-expanded='true'] {
+  background: var(--color-bg-hover);
+}
+
+.titlebar__project-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.titlebar__project-mark {
+  flex: none;
+  color: var(--color-text-subtle);
+}
+
+.titlebar__project-chevron {
+  transform: rotate(90deg);
+}
+
+/* The project file menu is fixed below its button; this wrapper only marks it as not a
+   drag area and takes no room in the row. */
+.titlebar__menu {
+  display: contents;
+}
+
 /* "Project / Scene": the open scene, quieter than the project. */
 .titlebar__scene {
   flex: 0 1 auto;
@@ -326,6 +379,21 @@ html.native-viewport .panel--viewport {
 .notice__code {
   margin-left: auto;
   color: var(--color-text-muted);
+}
+
+.notice__text {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* Dismiss keeps the trailing edge, after the code when there is one. */
+.notice__dismiss {
+  flex: none;
+  margin: -2px -8px -2px auto;
+}
+
+.notice__code + .notice__dismiss {
+  margin-left: 0;
 }
 
 /* ---- Workspace: panels joined edge to edge ---- */

@@ -12,6 +12,8 @@ import type {
 import type { CapabilitySet } from '../bridge/resolve';
 import { readCapabilities, unavailableMessage } from '../bridge/resolve';
 import type { PanelVisibility } from '../components/Titlebar';
+import type { RequestResult } from './requests';
+import { rejectedRequest } from './requests';
 
 export type DockTab = 'problems' | 'console' | 'history';
 
@@ -45,8 +47,12 @@ export interface Shell {
   /** Like `run`, but returns the bridge's result so a caller can show the exact error inline. */
   readonly dispatch: (command: EditorCommand) => Promise<BridgeResult>;
   readonly ask: (request: HostRequest) => Promise<boolean>;
-  /** Like `ask`, but returns the host's result so a caller can show the exact error inline. */
-  readonly request: (request: HostRequest, options?: RequestOptions) => Promise<BridgeResult>;
+  /**
+   * Like `ask`, but returns the host's result so a caller can show the exact error inline.
+   * Always resolves: a rejected bridge request becomes a failure marked as rejected, so a
+   * caller can tell "no result arrived" from a host's refusal (shell/requests.ts).
+   */
+  readonly request: (request: HostRequest, options?: RequestOptions) => Promise<RequestResult>;
   readonly explainUnavailable: (capability: Capability) => void;
   /** The ChatGPT account dialog. `from` regains focus when it closes. */
   readonly accountOpen: boolean;
@@ -172,14 +178,21 @@ export function ShellProvider({ bridge, children }: { bridge: EditorBridge | nul
   const run = useCallback(async (command: EditorCommand) => (await dispatch(command)).ok, [dispatch]);
 
   const request = useCallback(
-    async (hostRequest: HostRequest, options?: RequestOptions): Promise<BridgeResult> => {
+    async (hostRequest: HostRequest, options?: RequestOptions): Promise<RequestResult> => {
       const capability = capabilityOf(hostRequest);
       if (!bridge || !capabilities.has(capability)) {
         const message = unavailableMessage(capability, bridge);
         if (!options?.quiet) announce(message);
         return { ok: false, error: { code: 'unsupported', message } };
       }
-      const result = await bridge.request(hostRequest);
+      let result: RequestResult;
+      try {
+        result = await bridge.request(hostRequest);
+      } catch (error) {
+        // A rejection is not a result: the caller gets a failure it can show, never a
+        // pending state that cannot end, and nothing is claimed about what the host did.
+        result = rejectedRequest(error);
+      }
       if (!result.ok && !options?.quiet) announce(`${hostRequest.type} failed: ${result.error.message}`);
       return result;
     },
