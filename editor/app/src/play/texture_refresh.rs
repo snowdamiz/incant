@@ -336,6 +336,20 @@ mod tests {
             .unwrap();
         let mut current = Arc::new([1_u8; 16]);
         let mut prepared = Arc::new([2_u8; 16]);
+        // Real Play startup reads this same authoring mutex before loading the
+        // game (execute's document snapshot and revision recheck). Isolate its
+        // platform initialization rather than attribute it to publication.
+        let ((), first_lock_allocations) = allocation_counter::record(|| drop(bus.lock().unwrap()));
+        let ((), second_lock_allocations) =
+            allocation_counter::record(|| drop(bus.lock().unwrap()));
+        let (caught, catch_allocations) =
+            allocation_counter::record(|| std::panic::catch_unwind(|| ()));
+        caught.unwrap();
+        eprintln!(
+            "authoring-lock setup: first={first_lock_allocations} second={second_lock_allocations}; empty catch={catch_allocations}"
+        );
+        assert!(first_lock_allocations <= 1);
+        assert_eq!((second_lock_allocations, catch_allocations), (0, 0));
         let (result, allocations) = allocation_counter::record(|| {
             publish_at_revision(&bus, &service, 0, 0, || {
                 std::mem::swap(&mut current, &mut prepared);
