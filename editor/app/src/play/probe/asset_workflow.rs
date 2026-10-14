@@ -16,9 +16,15 @@ use std::{
 };
 use tauri::Manager;
 
-const SOURCE: &str = "refresh.png";
-const BLUE: &str = "refresh-blue.png";
-const SPRITE: &str = "00000000000000000000000004";
+mod kind;
+pub(super) use kind::Kind;
+const ENTITY: &str = "00000000000000000000000004";
+
+#[derive(Clone, Copy)]
+struct ObservedAsset {
+    id: StableId,
+    kind: incant_runtime::VisualAssetKind,
+}
 const CAMERA: &str = "00000000000000000000000003";
 
 pub(in crate::play) struct Observation {
@@ -35,53 +41,53 @@ struct Fixture {
     version: u32,
     project_id: String,
 }
-fn owned_fixture(root: &Path, document: &Value) -> Result<(), String> {
-    for name in ["texture-workflow.fixture.json", SOURCE, BLUE] {
+fn owned_fixture(root: &Path, document: &Value, kind: Kind) -> Result<(), String> {
+    for name in [kind.fixture(), kind.source(), kind.replacement()] {
         let metadata = fs::symlink_metadata(root.join(name)).map_err(|e| e.to_string())?;
         require(
             metadata.is_file() && !metadata.file_type().is_symlink() && metadata.len() <= 65536,
-            "texture probe requires its bounded regular fixture files",
+            "asset probe requires its bounded regular fixture files",
         )?;
     }
-    let fixture: Fixture = serde_json::from_slice(
-        &fs::read(root.join("texture-workflow.fixture.json")).map_err(|e| e.to_string())?,
-    )
-    .map_err(|e| e.to_string())?;
+    let fixture: Fixture =
+        serde_json::from_slice(&fs::read(root.join(kind.fixture())).map_err(|e| e.to_string())?)
+            .map_err(|e| e.to_string())?;
     require(
-        fixture.format == "incant-native-texture-workflow"
+        fixture.format == kind.format()
             && fixture.version == 1
             && document["id"].as_str() == Some(fixture.project_id.as_str())
             && document["assets"].as_object().is_some_and(|a| a.is_empty()),
-        "texture probe requires a fresh matching fixture project",
+        "asset probe requires a fresh matching fixture project",
     )
 }
 fn observe(
     editor: &Editor,
     generation: u32,
-    asset: StableId,
+    asset: ObservedAsset,
     fingerprint: &str,
 ) -> Result<Observation, String> {
     let (reply, result) = mpsc::channel();
-    editor.play.call(Request::ObserveTexture {
+    editor.play.call(Request::ObserveAsset {
         generation,
-        asset,
+        asset: asset.id,
+        kind: asset.kind,
         fingerprint: fingerprint.into(),
         reply,
     })?;
     result
         .recv_timeout(Duration::from_secs(20))
-        .map_err(|_| "texture observer deadline")?
+        .map_err(|_| "asset observer deadline")?
 }
 fn stable(observed: &Observation, baseline: &Observation) -> Result<(), String> {
     require(
         observed.identity == baseline.identity && observed.tick == baseline.tick,
-        "texture workflow replaced or advanced the paused native world",
+        "asset workflow replaced or advanced the paused native world",
     )
 }
 fn catalog_frame(
     editor: &Editor,
     generation: u32,
-    asset: StableId,
+    asset: ObservedAsset,
     fingerprint: &str,
     baseline: Option<&Observation>,
 ) -> Result<Observation, String> {
@@ -91,7 +97,7 @@ fn catalog_frame(
         let status = editor.play.snapshot()?;
         require(
             status.generation == generation && status.phase == "paused",
-            "Play session changed during texture workflow",
+            "Play session changed during asset workflow",
         )?;
         let observed = observe(editor, generation, asset, fingerprint)?;
         if let Some(baseline) = baseline {
@@ -117,7 +123,7 @@ fn asset_fingerprint(editor: &Editor, asset: &str) -> Result<String, String> {
     project(editor)?.0["assets"][asset]["sha256"]
         .as_str()
         .map(str::to_owned)
-        .ok_or("texture fingerprint absent".into())
+        .ok_or("asset fingerprint absent".into())
 }
 fn history(editor: &Editor) -> Result<Value, String> {
     let state = editor.bus.lock().map_err(|_| "project lock")?;
@@ -130,14 +136,14 @@ fn history(editor: &Editor) -> Result<Value, String> {
         json!({"id":t.id, "description":t.description, "actor":t.actor})).collect::<Vec<_>>()}),
     )
 }
-fn wait_source(editor: &Editor, failed: bool) -> Result<(), String> {
+fn wait_source(editor: &Editor, kind: Kind, failed: bool) -> Result<(), String> {
     let deadline = Instant::now() + Duration::from_secs(20);
     loop {
         let diagnostics = editor
             .source_diagnostics
             .lock()
             .map_err(|_| "source diagnostics lock")?;
-        let present = diagnostics.iter().any(|d| d.source == SOURCE);
+        let present = diagnostics.iter().any(|d| d.source == kind.source());
         drop(diagnostics);
         if present == failed {
             return Ok(());
@@ -172,6 +178,7 @@ pub(super) fn run(
     app: &tauri::AppHandle,
     editor: &Editor,
     options: &Options,
+    kind: Kind,
 ) -> Result<Value, String> {
     let window = app.get_window("main").ok_or("main window absent")?;
     window.set_focus().map_err(|e| e.to_string())?;
@@ -183,22 +190,22 @@ pub(super) fn run(
             .map_err(|_| "viewport lock")?
             .is_none()
     {
-        require(Instant::now() < deadline, "texture app startup deadline")?;
+        require(Instant::now() < deadline, "asset app startup deadline")?;
         thread::sleep(Duration::from_millis(20));
     }
     let root = editor
         .asset_root
         .as_ref()
-        .ok_or("texture probe requires saved fixture")?;
+        .ok_or("asset probe requires saved fixture")?;
     let before = project(editor)?;
-    owned_fixture(root, &before.0)?;
-    let blue = fs::read(root.join(BLUE)).map_err(|e| e.to_string())?;
+    owned_fixture(root, &before.0, kind)?;
+    let blue = fs::read(root.join(kind.replacement())).map_err(|e| e.to_string())?;
     let imported = tauri::async_runtime::block_on(assets::engine_import(
         app.state::<Arc<Editor>>(),
         app.clone(),
         vec![incant_import::ImportRequest {
-            source: SOURCE.into(),
-            texture_usage: Some(incant_assets::TextureUsage::Color),
+            source: kind.source().into(),
+            texture_usage: kind.texture_usage(),
         }],
         before.1,
     ))
@@ -216,28 +223,27 @@ pub(super) fn run(
         .ok_or("import assets absent")?;
     let asset = assets
         .iter()
-        .find(|(_, a)| a["path"] == SOURCE)
+        .find(|(_, a)| a["path"] == kind.source())
         .map(|(id, _)| id.clone())
-        .ok_or("imported texture absent")?;
-    let stable_asset = StableId(
-        asset
-            .parse::<ulid::Ulid>()
-            .map_err(|e| e.to_string())?
-            .to_bytes(),
-    );
+        .ok_or("imported asset absent")?;
+    let stable_asset = ObservedAsset {
+        kind: kind.visual_kind(),
+        id: StableId(
+            asset
+                .parse::<ulid::Ulid>()
+                .map_err(|e| e.to_string())?
+                .to_bytes(),
+        ),
+    };
     let scene = before.0["scenes"]
         .as_object()
         .and_then(|s| (s.len() == 1).then(|| s.keys().next().unwrap().clone()))
         .ok_or("fixture requires one scene")?;
-    let command = serde_json::from_value::<incant_cmd::Command>(json!({"op":"create_entity","scene_id":scene,"entity":{
-        "id":SPRITE,"name":"Refresh sprite","parent":null,"provenance":null,"components":{
-            "Transform":{"translation":[0,0,-2],"rotation":[0,0,0,1],"scale":[1,1,1]},
-            "SpriteRenderer":{"texture":asset,"region":[0,0,1,1],"size":[1,1],"pivot":[0.5,0.5],"tint":[1,1,1,1],"sampling":"nearest","mode":{"kind":"simple"}}
-        }}})).map_err(|e| e.to_string())?;
+    let command = kind.entity_command(&scene, ENTITY, &asset)?;
     let bound = tauri::async_runtime::block_on(crate::engine_execute(
         app.state::<Arc<Editor>>(),
         vec![command],
-        "Bind native texture workflow sprite".into(),
+        "Bind native asset workflow entity".into(),
         revision,
     ))?;
     let revision = bound["revision"]
@@ -300,11 +306,11 @@ pub(super) fn run(
             entity: options.entity.clone(),
         },
     )?;
-    let mut stages = vec![point("manual_import_red", &baseline, &red, initial_history)];
+    let mut stages = vec![point(kind.stage(0), &baseline, &red, initial_history)];
     // Let the real watcher establish its baseline before the controlled source edit.
     thread::sleep(Duration::from_millis(1500));
     let red_document = project(editor)?.0;
-    fs::write(root.join(SOURCE), &blue).map_err(|e| e.to_string())?;
+    fs::write(root.join(kind.source()), &blue).map_err(|e| e.to_string())?;
     let deadline = Instant::now() + Duration::from_secs(20);
     let blue_fingerprint = loop {
         let value = asset_fingerprint(editor, &asset)?;
@@ -334,7 +340,7 @@ pub(super) fn run(
         "source watcher did not use one real import transaction",
     )?;
     stages.push(point(
-        "watched_blue",
+        kind.stage(1),
         &blue_frame,
         &blue_fingerprint,
         watched_history,
@@ -344,10 +350,10 @@ pub(super) fn run(
         tauri::async_runtime::block_on(crate::engine_history(app.state::<Arc<Editor>>(), false))?;
     require(
         undone["project"] == red_document,
-        "Undo did not restore the red authored catalog",
+        "Undo did not restore the original authored catalog",
     )?;
     let undo_frame = catalog_frame(editor, generation, stable_asset, &red, Some(&baseline))?;
-    stages.push(point("undo_red", &undo_frame, &red, history(editor)?));
+    stages.push(point(kind.stage(2), &undo_frame, &red, history(editor)?));
     // This outlasts two watcher polls plus debounce; Undo must not be overwritten.
     thread::sleep(Duration::from_millis(1500));
     require(
@@ -359,7 +365,7 @@ pub(super) fn run(
         tauri::async_runtime::block_on(crate::engine_history(app.state::<Arc<Editor>>(), true))?;
     require(
         redone["project"] == blue_document,
-        "Redo did not restore the blue authored catalog",
+        "Redo did not restore the replacement authored catalog",
     )?;
     let redo_frame = catalog_frame(
         editor,
@@ -369,23 +375,23 @@ pub(super) fn run(
         Some(&baseline),
     )?;
     stages.push(point(
-        "redo_blue",
+        kind.stage(3),
         &redo_frame,
         &blue_fingerprint,
         history(editor)?,
     ));
     let before_bad = project(editor)?;
     fs::write(
-        root.join(SOURCE),
-        b"invalid PNG owned by the texture workflow fixture",
+        root.join(kind.source()),
+        b"invalid source owned by the native asset workflow fixture",
     )
     .map_err(|e| e.to_string())?;
     let refusal = match tauri::async_runtime::block_on(assets::engine_import(
         app.state::<Arc<Editor>>(),
         app.clone(),
         vec![incant_import::ImportRequest {
-            source: SOURCE.into(),
-            texture_usage: Some(incant_assets::TextureUsage::Color),
+            source: kind.source().into(),
+            texture_usage: kind.texture_usage(),
         }],
         before_bad.1,
     )) {
@@ -396,7 +402,7 @@ pub(super) fn run(
         refusal["code"] == "asset.import",
         "manual refusal lost its structured import diagnostic",
     )?;
-    wait_source(editor, true)?;
+    wait_source(editor, kind, true)?;
     require(
         project(editor)? == before_bad,
         "bad source changed project/revision/history",
@@ -409,13 +415,13 @@ pub(super) fn run(
         Some(&baseline),
     )?;
     stages.push(point(
-        "malformed_source_retained_blue",
+        kind.stage(4),
         &retained,
         &blue_fingerprint,
         history(editor)?,
     ));
-    fs::write(root.join(SOURCE), &blue).map_err(|e| e.to_string())?;
-    wait_source(editor, false)?;
+    fs::write(root.join(kind.source()), &blue).map_err(|e| e.to_string())?;
+    wait_source(editor, kind, false)?;
     require(
         project(editor)? == before_bad,
         "identical source recovery appended a transaction",
@@ -428,7 +434,7 @@ pub(super) fn run(
         Some(&baseline),
     )?;
     stages.push(point(
-        "source_recovered_blue",
+        kind.stage(5),
         &recovered,
         &blue_fingerprint,
         history(editor)?,
@@ -491,7 +497,7 @@ pub(super) fn run(
         "stopped world remained observable",
     )?;
     Ok(
-        json!({"passed":true,"platform":std::env::consts::OS,"adapter":baseline.adapter,
+        json!({"passed":true,"asset_kind":kind.label(),"platform":std::env::consts::OS,"adapter":baseline.adapter,
         "play_generation":generation,"paused_tick":baseline.tick,"final_tick":final_observation.tick,
         "world_identity_unchanged":true,"module_counter_continued":true,"actual_window_presentations":true,
         "vm_counter":{"before_translation":before_translation,"observed_delta":observed_delta,"expected_delta":expected_delta},

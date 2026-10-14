@@ -1,7 +1,7 @@
 //! Opt-in numerical acceptance over the actual editor worker/window. This is not
 //! a rendered-pixel or physical-device performance review. The lifecycle mode
-//! makes no project mutations; the texture mode uses real editor command paths.
-pub(super) mod textures;
+//! makes no project mutations; the asset modes use real editor command paths.
+pub(super) mod asset_workflow;
 use super::{Action, StartOptions, Status, execute};
 use crate::{Editor, project};
 use serde_json::{Value, json};
@@ -18,18 +18,25 @@ use tauri::Manager;
 pub struct Options {
     output: PathBuf,
     entity: String,
-    textures: bool,
+    mode: Mode,
+}
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+enum Mode {
+    Lifecycle,
+    Texture,
+    Model,
 }
 impl Options {
-    fn texture_mode(flag: &OsStr) -> Option<bool> {
+    fn mode(flag: &OsStr) -> Option<Mode> {
         match flag.to_str() {
-            Some("--play-probe") => Some(false),
-            Some("--texture-probe") => Some(true),
+            Some("--play-probe") => Some(Mode::Lifecycle),
+            Some("--texture-probe") => Some(Mode::Texture),
+            Some("--model-probe") => Some(Mode::Model),
             _ => None,
         }
     }
     pub fn accepts_mode(flag: &OsStr) -> bool {
-        Self::texture_mode(flag).is_some()
+        Self::mode(flag).is_some()
     }
     pub fn from_args() -> Option<Self> {
         Self::from_probe_args(std::env::args_os().skip(2))
@@ -38,7 +45,7 @@ impl Options {
         match args.next() {
             None => None,
             Some(flag) if Self::accepts_mode(&flag) => Some(Self {
-                textures: Self::texture_mode(&flag).expect("accepted probe mode"),
+                mode: Self::mode(&flag).expect("accepted probe mode"),
                 output: args.next().expect("probe output path").into(),
                 entity: args
                     .next()
@@ -47,7 +54,7 @@ impl Options {
                     .expect("UTF-8 entity"),
             }),
             _ => panic!(
-                "expected --play-probe or --texture-probe OUTPUT ENTITY after the project path"
+                "expected --play-probe, --texture-probe or --model-probe OUTPUT ENTITY after the project path"
             ),
         }
     }
@@ -266,10 +273,14 @@ pub fn start(app: tauri::AppHandle, editor: Arc<Editor>, options: Options) {
                 .create_new(true)
                 .open(&options.output)
                 .map_err(|e| e.to_string())?;
-            let result = if options.textures {
-                textures::run(&app, &editor, &options)
-            } else {
-                run(&app, &editor, &options)
+            let result = match options.mode {
+                Mode::Lifecycle => run(&app, &editor, &options),
+                Mode::Texture => {
+                    asset_workflow::run(&app, &editor, &options, asset_workflow::Kind::Texture)
+                }
+                Mode::Model => {
+                    asset_workflow::run(&app, &editor, &options, asset_workflow::Kind::Model)
+                }
             };
             let report = match &result {
                 Ok(value) => value.clone(),
@@ -301,8 +312,12 @@ mod options_tests {
     use super::*;
 
     #[test]
-    fn outer_dispatch_and_parser_accept_both_probe_modes() {
-        for (flag, textures) in [("--play-probe", false), ("--texture-probe", true)] {
+    fn outer_dispatch_and_parser_accept_all_probe_modes() {
+        for (flag, mode) in [
+            ("--play-probe", Mode::Lifecycle),
+            ("--texture-probe", Mode::Texture),
+            ("--model-probe", Mode::Model),
+        ] {
             assert!(Options::accepts_mode(OsStr::new(flag)));
             let options = Options::from_probe_args(
                 [flag, "receipt.json", "00000000000000000000000002"]
@@ -310,7 +325,7 @@ mod options_tests {
                     .into_iter(),
             )
             .expect("recognized probe mode");
-            assert_eq!(options.textures, textures);
+            assert_eq!(options.mode, mode);
             assert_eq!(options.output, PathBuf::from("receipt.json"));
             assert_eq!(options.entity, "00000000000000000000000002");
         }
@@ -318,14 +333,19 @@ mod options_tests {
 
     #[test]
     fn unknown_modes_are_not_dispatched_as_probes() {
-        for flag in ["", "--unknown-probe", "--texture-probe-extra"] {
+        for flag in [
+            "",
+            "--unknown-probe",
+            "--texture-probe-extra",
+            "--model-probe-extra",
+        ] {
             assert!(!Options::accepts_mode(OsStr::new(flag)));
         }
         assert!(Options::from_probe_args(std::iter::empty()).is_none());
     }
 
     #[test]
-    #[should_panic(expected = "expected --play-probe or --texture-probe")]
+    #[should_panic(expected = "expected --play-probe, --texture-probe or --model-probe")]
     fn explicit_probe_parser_refuses_unknown_mode() {
         Options::from_probe_args([OsString::from("--unknown-probe")].into_iter());
     }

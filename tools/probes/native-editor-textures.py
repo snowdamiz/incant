@@ -3,7 +3,7 @@
 
 Build a genuine custom-protocol,play-probe editor and matching headless first.
 The runner creates one fresh fixture; project text is authored through RPC/Cmd.
-Only its binary PNG sources are changed by the app's opt-in texture probe.
+Only its owned PNG/glTF sources are changed by the app's opt-in asset probe.
 """
 import argparse
 import base64
@@ -30,6 +30,8 @@ SCRIPT = '00000000000000000000000001'
 CAMERA = '00000000000000000000000003'
 STAGES = ['manual_import_red', 'watched_blue', 'undo_red', 'redo_blue',
           'malformed_source_retained_blue', 'source_recovered_blue']
+MODEL_STAGES = ['manual_import_original', 'watched_replacement', 'undo_original', 'redo_replacement',
+                'malformed_source_retained_replacement', 'source_recovered_replacement']
 SOURCE = ("import type { NativeBehavior } from '@incant/runtime/native';\n"
           "let updates = 0;\n"
           "export default { update({ instances, chunks }) {\n"
@@ -145,6 +147,34 @@ def png(rgba):
             + chunk(b'IDAT', zlib.compress(bytes([0, *rgba]))) + chunk(b'IEND', b''))
 
 
+def model(replacement=False):
+    """Self-contained static glTF: stable scene/bindings, different vertices/material."""
+    points = ([[-0.3, -0.7, 0], [0.9, -0.7, 0], [0.3, 0.3, 0]] if replacement else
+              [[-0.7, -0.5, 0], [0.7, -0.5, 0], [0, 0.7, 0]])
+    data = struct.pack('<9f', *(value for point in points for value in point))
+    color = [0, 0, 1] if replacement else [1, 0, 0]
+    document = {
+        'asset': {'version':'2.0'},
+        'buffers': [{'byteLength':len(data), 'uri':'data:application/octet-stream;base64,' + base64.b64encode(data).decode('ascii')}],
+        'bufferViews': [{'buffer':0, 'byteLength':len(data)}],
+        'accessors': [{'bufferView':0, 'componentType':5126, 'count':3, 'type':'VEC3',
+                       'min':[min(p[a] for p in points) for a in range(3)],
+                       'max':[max(p[a] for p in points) for a in range(3)]}],
+        'materials': [{'pbrMetallicRoughness':{'baseColorFactor':color+[1], 'metallicFactor':0, 'roughnessFactor':0.8},
+                       'emissiveFactor':color, 'doubleSided':True}],
+        'meshes':[{'primitives':[{'attributes':{'POSITION':0}, 'material':0}]}],
+        'nodes':[{'mesh':0}], 'scenes':[{'nodes':[0]}], 'scene':0,
+    }
+    return (json.dumps(document, separators=(',', ':')) + '\n').encode('utf-8')
+
+
+def fixture(kind):
+    require(kind in ('texture', 'model'), 'Known asset fixture kind required')
+    if kind == 'texture':
+        return 'refresh.png', 'refresh-blue.png', png([255, 0, 0, 255]), png([0, 0, 255, 255])
+    return 'refresh.gltf', 'refresh-replacement.gltf', model(), model(True)
+
+
 @contextmanager
 def execution_deadline(seconds):
     """Latch cancellation; native_process closes owned groups before propagating.
@@ -164,7 +194,7 @@ def execution_deadline(seconds):
         if cancelled:
             raise RuntimeError(f'Cancelled by signal {cancelled[0]}')
         if time.monotonic() >= end:
-            raise TimeoutError('Native-window texture execution deadline')
+            raise TimeoutError('Native-window asset execution deadline')
 
     for signum in (signal.SIGTERM, signal.SIGINT):
         previous[signum] = signal.signal(signum, latch)
@@ -175,7 +205,9 @@ def execution_deadline(seconds):
             signal.signal(signum, handler)
 
 
-def validate_proof(proof):
+def validate_proof(proof, kind='texture'):
+    require(kind in ('texture', 'model'), 'Known proof asset kind required')
+    require(proof.get('asset_kind', 'texture') == kind, 'Matching asset-kind proof required')
     require(proof.get('passed') is True and proof.get('platform') == 'macos', 'Actual Mac app proof required')
     for field in ('world_identity_unchanged', 'module_counter_continued', 'actual_window_presentations',
                   'manual_import_execute_history_handlers', 'real_source_watcher', 'undo_not_overwritten',
@@ -193,7 +225,7 @@ def validate_proof(proof):
             and counter.get('expected_delta') == 2*(tick+1)
             and counter.get('observed_delta') == counter['expected_delta'], 'Observable module-state continuation')
     stages = proof.get('stages', [])
-    require([s.get('stage') for s in stages] == STAGES, 'Exact user workflow stages')
+    require([s.get('stage') for s in stages] == (STAGES if kind == 'texture' else MODEL_STAGES), 'Exact user workflow stages')
     require(all(s.get('recipe_matches') is True and s.get('tick') == proof['paused_tick'] for s in stages),
             'Accepted paused catalog/world')
     frames = [s.get('frames') for s in stages]
@@ -203,7 +235,7 @@ def validate_proof(proof):
     require(all(isinstance(h, str) and len(h) == 64 and all(c in '0123456789abcdef' for c in h) for h in hashes),
             'Cooked recipe identities')
     require(hashes[0] == hashes[2] and hashes[1] == hashes[3] == hashes[4] == hashes[5]
-            and hashes[0] != hashes[1], 'Red/blue/Undo/Redo catalog selection')
+            and hashes[0] != hashes[1], 'Original/replacement/Undo/Redo catalog selection')
     revisions = [s.get('history', {}).get('revision') for s in stages]
     require(all(type(r) is int for r in revisions), 'Committed revision identities')
     first = revisions[0]
@@ -232,13 +264,15 @@ def main(argv=None):
     parser.add_argument('output', type=Path)
     parser.add_argument('--editor', type=Path, required=True)
     parser.add_argument('--headless', type=Path, required=True)
+    parser.add_argument('--asset-kind', choices=('texture', 'model'), default='texture')
     args = parser.parse_args(argv)
+    source_name, replacement_name, original_bytes, replacement_bytes = fixture(args.asset_kind)
     output = args.output.resolve()
     editor, headless = args.editor.resolve(strict=True), args.headless.resolve(strict=True)
     output.mkdir(parents=True, exist_ok=False)
     project, journal = output/'project.json', output/'project.journal.jsonl'
     ledger = []
-    result = {'passed': False, 'editor_sha256': digest(editor), 'headless_sha256': digest(headless),
+    result = {'passed': False, 'asset_kind':args.asset_kind, 'editor_sha256': digest(editor), 'headless_sha256': digest(headless),
               'pixel_capture': False, 'appearance_review': False, 'performance_or_phase_gate': False}
     def write(name, value):
         (output/name).write_text(json.dumps(value, indent=2) + '\n')
@@ -275,26 +309,26 @@ def main(argv=None):
             require(len(initial['project']['scenes']) == 1, 'One fresh fixture scene required')
             scene = next(iter(initial['project']['scenes']))
             authored = rpc('command.execute', {'expected_revision':initial['revision'],
-                'description':'Author actual native texture workflow fixture', 'commands':author_commands(scene)})
+                'description':'Author actual native asset workflow fixture', 'commands':author_commands(scene)})
             require(authored['revision'] == initial['revision'] + 1, 'Fixture authoring transaction')
             require(rpc('project.save', {'expected_revision':authored['revision']})['saved'], 'Fixture save')
-            (output/'refresh.png').write_bytes(png([255, 0, 0, 255]))
-            (output/'refresh-blue.png').write_bytes(png([0, 0, 255, 255]))
-            write('texture-workflow.fixture.json', {'format':'incant-native-texture-workflow',
+            (output/source_name).write_bytes(original_bytes)
+            (output/replacement_name).write_bytes(replacement_bytes)
+            write(f'{args.asset_kind}-workflow.fixture.json', {'format':f'incant-native-{args.asset_kind}-workflow',
                   'version':1, 'project_id':initial['project']['id']})
-            before = {name:digest(output/name) for name in ('project.json', 'move.ts', 'refresh-blue.png')}
+            before = {name:digest(output/name) for name in ('project.json', 'move.ts', replacement_name)}
             write('fixture.json', {'source_revision':authored['revision'], 'inputs':before,
                   'journal_bytes_before':journal.stat().st_size, 'fixture_authored_through_cmd':True})
             receipt = output/'native-window.json'
-            run([editor, project, '--texture-probe', receipt, ENTITY], bound=120)
+            run([editor, project, f'--{args.asset_kind}-probe', receipt, ENTITY], bound=120)
             check()
-            proof = validate_proof(json.loads(receipt.read_text()))
+            proof = validate_proof(json.loads(receipt.read_text()), args.asset_kind)
             require(before == {name:digest(output/name) for name in before}, 'Unrelated fixture/checkpoint sources changed')
-            require((output/'refresh.png').read_bytes() == (output/'refresh-blue.png').read_bytes(), 'Source recovery bytes')
+            require((output/source_name).read_bytes() == (output/replacement_name).read_bytes(), 'Source recovery bytes')
             recovered = rpc('project.read')
             last = proof['stages'][-1]
             require(recovered['revision'] == last['history']['revision'], 'Durable app journal revision recovery')
-            asset = next(a for a in recovered['project']['assets'].values() if a['path'] == 'refresh.png')
+            asset = next(a for a in recovered['project']['assets'].values() if a['path'] == source_name)
             require(asset['sha256'] == last['accepted_fingerprint'], 'Durable accepted recipe recovery')
             require(journal.stat().st_size > json.loads((output/'fixture.json').read_text())['journal_bytes_before'], 'Real app journal was not extended')
             result.update(passed=True, window=proof, recovered_revision=recovered['revision'],
