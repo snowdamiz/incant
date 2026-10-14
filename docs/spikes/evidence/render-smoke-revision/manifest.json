@@ -1,7 +1,7 @@
 {
   "source": "0862232f767ef67ffa9bff64f999373b3956925f",
   "base": "0b57cc37db409cd228a7332aa42e2c9dad02ac2e",
-  "archive_sha256": "56355415c1cd95e7b98b080da564684d91bc31c0fefd94a1e564c3a0edfe3805",
+  "archive_sha256": "c8e476ee5ff33806d9c375b4387052bfb9a9061ecbfde4097b8f287456a26434",
   "records": [
     {
       "original": "/Users/andreyyurlov/.codex/worktrees/cooked-native-scripts/incant/tools/platforms/render-check.py",
@@ -152,6 +152,38 @@
       "sha256": "7c656acedecf4c07f27d66684ad783b686f0a9ae8b482e160d86248385cbe203",
       "bytes": 2014,
       "role": "root-independent-mac-check"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/worktrees/cooked-native-scripts/incant/tools/tests/test_ci_profile.py",
+      "sha256": "7110c8bc03acd250742431001f8c2858ecb81aec6074f4f28a91743d7274c7ef",
+      "bytes": 2867,
+      "role": "combined-profile-test-input",
+      "source": "0862232f767ef67ffa9bff64f999373b3956925f",
+      "path": "tools/tests/test_ci_profile.py"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/worktrees/cooked-native-scripts/incant/Cargo.toml",
+      "sha256": "c9020614708894acf9e8f5cc0b139f4d9f675259ae7c878fea560459e1fadf2c",
+      "bytes": 3887,
+      "role": "combined-profile-test-input",
+      "source": "0862232f767ef67ffa9bff64f999373b3956925f",
+      "path": "Cargo.toml"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/worktrees/cooked-native-scripts/incant/.github/workflows/ci.yml",
+      "sha256": "189ff6e8dc3d95f7baf883d3396f91c0bc2ad548f233521014f8145a27e1b668",
+      "bytes": 18203,
+      "role": "combined-profile-test-input",
+      "source": "0862232f767ef67ffa9bff64f999373b3956925f",
+      "path": ".github/workflows/ci.yml"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/worktrees/cooked-native-scripts/incant/.github/workflows/desktop.yml",
+      "sha256": "365a82c9c73275f91a8cf8379f9ef300389de67989ac0852ff3a7665109a12a0",
+      "bytes": 14958,
+      "role": "combined-profile-test-input",
+      "source": "0862232f767ef67ffa9bff64f999373b3956925f",
+      "path": ".github/workflows/desktop.yml"
     }
   ],
   "native_binary_qualification": {
@@ -194,5 +226,69 @@
     "not_current_whole_runtime_qualification": true
   },
   "hosted_linux_repair_pending": true,
-  "performance_or_phase_gate": false
+  "performance_or_phase_gate": false,
+  "combined_test_breakdown": {
+    "producer": {
+      "modules": {
+        "tools.tests.test_render_geometry": 6,
+        "tools.tests.test_ci_profile": 3
+      },
+      "total": 9,
+      "bound_profile_inputs": [
+        {
+          "path": "tools/tests/test_ci_profile.py",
+          "source": "0862232f767ef67ffa9bff64f999373b3956925f",
+          "sha256": "7110c8bc03acd250742431001f8c2858ecb81aec6074f4f28a91743d7274c7ef"
+        },
+        {
+          "path": "Cargo.toml",
+          "source": "0862232f767ef67ffa9bff64f999373b3956925f",
+          "sha256": "c9020614708894acf9e8f5cc0b139f4d9f675259ae7c878fea560459e1fadf2c"
+        },
+        {
+          "path": ".github/workflows/ci.yml",
+          "source": "0862232f767ef67ffa9bff64f999373b3956925f",
+          "sha256": "189ff6e8dc3d95f7baf883d3396f91c0bc2ad548f233521014f8145a27e1b668"
+        },
+        {
+          "path": ".github/workflows/desktop.yml",
+          "source": "0862232f767ef67ffa9bff64f999373b3956925f",
+          "sha256": "365a82c9c73275f91a8cf8379f9ef300389de67989ac0852ff3a7665109a12a0"
+        }
+      ]
+    },
+    "root_focused": {
+      "command": [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/tests",
+        "-p",
+        "test_render_geometry.py",
+        "-v"
+      ],
+      "module": "tools.tests.test_render_geometry",
+      "total": 6
+    }
+  },
+  "source_relevance_supplement": {
+    "original_preflight_preserved": true,
+    "original_query_scope": "headless/src,cmd/src,source/src,Cargo/lock/toolchain",
+    "expanded_query_scope": "complete headless,cmd,source crates plus Cargo/lock/toolchain",
+    "expanded_delta_paths": [
+      "crates/incant_cmd/src/agent_budget_replay_tests.rs",
+      "crates/incant_cmd/src/lib.rs",
+      "crates/incant_cmd/src/project_checkpoint_tests.rs",
+      "crates/incant_cmd/src/project_file_tests.rs",
+      "crates/incant_cmd/src/source_protocol_tests.rs",
+      "crates/incant_cmd/src/test_isolation.rs",
+      "crates/incant_cmd/tests/prefabs.rs"
+    ],
+    "additional_path": "crates/incant_cmd/tests/prefabs.rs",
+    "additional_change_test_only": true,
+    "production_source_claim_unchanged": true
+  }
 }

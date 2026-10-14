@@ -15,7 +15,10 @@ whether its code field was present. Native RPC currently supplies a message
 without a code; the helper does not invent one. All PNG, imported-model counters,
 source-removal/reimport and hierarchy-versus-flattened assertions remain.
 
-Nine focused Python controls pass, including the actual main/edit call chain
+The producer combined command ran nine Python controls: six methods from
+tools.tests.test_render_geometry and three from tools.tests.test_ci_profile.
+The profile-test file, Cargo profiles and both CI workflow inputs are frozen to
+source 0862232f. The controls include the actual main/edit call chain
 with synthetic PNG transport, revision chaining, explicit custom journal use,
 malformed receipts, error preservation and all existing model counters. Mocked
 transport does not count as a renderer or hardware gate.
@@ -25,14 +28,18 @@ main275 application CI-profile executable, SHA256
 `b6c19fef570f817e30d6c0f73e982eff941e10840480a653d9e625b079df8f71`.
 Its producing receipt and source relevance are recorded: headless/source
 production and Cargo/lock/toolchain match the current branch; the command delta
-contains only test isolation. It is not the current whole-runtime executable.
+contains only test isolation. The original preflight queried src directories;
+the supplemental complete-crate delta also records the test-only
+crates/incant_cmd/tests/prefabs.rs change, seven paths in total. The original
+preflight remains unchanged. This is not the current whole-runtime executable.
 Four processes initialized two entities, committed/saved revision 1, reopened
 and committed/saved revision 2, then refused expected 0 while project.read kept
 revision 2 and exact project bytes. The native error was `document revision
 conflict: expected 0, current 2`, with no code field. No renderer, GPU, build or
 performance execution occurred in this producer control.
 
-Root separately executed the complete helper once on that same historical Mac
+Root separately ran the six geometry methods with a focused discover command,
+then executed the complete helper once on that same historical Mac
 binary and accepted the source. All unchanged PNG/geometry, hierarchy equality,
 model import, source removal and reimport assertions passed. The retained launch
 binds helper source 0862232f and its exact hash; both root commands exited 0 and
