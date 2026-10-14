@@ -14,6 +14,8 @@ pub(crate) struct RawRow {
     pub regions_ns: [u64; REGIONS.len()],
     pub numeric_ns: [u64; NUMERIC_REGIONS.len()],
     pub numeric_calls: [u16; NUMERIC_REGIONS.len()],
+    #[cfg(feature = "diagnostic-navigation")]
+    pub navigation: super::navigation::Counters,
     pub source_ns: [u64; MAX_SOURCES],
     pub source_calls: [u16; MAX_SOURCES],
     pub trace_ns: u64,
@@ -30,6 +32,8 @@ impl RawRow {
             regions_ns: [0; REGIONS.len()],
             numeric_ns: [0; NUMERIC_REGIONS.len()],
             numeric_calls: [0; NUMERIC_REGIONS.len()],
+            #[cfg(feature = "diagnostic-navigation")]
+            navigation: Default::default(),
             source_ns: [0; MAX_SOURCES],
             source_calls: [0; MAX_SOURCES],
             trace_ns: 0,
@@ -57,6 +61,8 @@ pub struct Row {
     pub regions_ns: [u64; REGIONS.len()],
     pub numeric_ns: [u64; NUMERIC_REGIONS.len()],
     pub numeric_calls: [u16; NUMERIC_REGIONS.len()],
+    #[cfg(feature = "diagnostic-navigation")]
+    pub navigation: super::navigation::Counters,
     /// Slots join the existing report's exact source identities.
     #[serde(serialize_with = "serialize_array")]
     pub source_ns: [u64; MAX_SOURCES],
@@ -76,6 +82,8 @@ pub struct Report {
     pub complete: bool,
     pub regions: [&'static str; REGIONS.len()],
     pub numeric_regions: [&'static str; NUMERIC_REGIONS.len()],
+    #[cfg(feature = "diagnostic-navigation")]
+    pub navigation_regions: [&'static str; 3],
     pub interpretation: &'static str,
     pub rows: Vec<Row>,
 }
@@ -148,7 +156,11 @@ impl Storage {
         Report {
             diagnostic_only: true,
             eligible_for_performance_gate: false,
-            schema: 1,
+            schema: if cfg!(feature = "diagnostic-navigation") {
+                2
+            } else {
+                1
+            },
             max_rows: MAX_FRAMES,
             raw_row_bytes: std::mem::size_of::<RawRow>(),
             raw_storage_bound_bytes: MAX_FRAMES * std::mem::size_of::<RawRow>(),
@@ -160,7 +172,13 @@ impl Storage {
                 && self.attempted == self.rows.len() as u64,
             regions: REGIONS,
             numeric_regions: NUMERIC_REGIONS,
-            interpretation: "Major regions partition trace_ns. Callback and numeric spans are nested, not additive. whole_tick_ns is the existing ScriptTick scope in this same frame. Instrumentation and residual overhead remain included; no gate or speedup inference.",
+            #[cfg(feature = "diagnostic-navigation")]
+            navigation_regions: super::navigation::REGIONS,
+            interpretation: if cfg!(feature = "diagnostic-navigation") {
+                "Major regions partition trace_ns. Navigation queries are nested in source callbacks; initial/repeated_start lookup spans are nested in queries. They are never additive exclusive time. Initial_start excludes corridor endpoint scans; failed means an error/absent observed result, not necessarily a failed optional shortcut. whole_tick_ns is the existing ScriptTick in this same frame. Instrumentation stays included; no gate or speedup inference."
+            } else {
+                "Major regions partition trace_ns. Callback and numeric spans are nested, not additive. whole_tick_ns is the existing ScriptTick scope in this same frame. Instrumentation and residual overhead remain included; no gate or speedup inference."
+            },
             rows: self
                 .rows
                 .iter()
@@ -176,6 +194,8 @@ impl Storage {
                     regions_ns: r.regions_ns,
                     numeric_ns: r.numeric_ns,
                     numeric_calls: r.numeric_calls,
+                    #[cfg(feature = "diagnostic-navigation")]
+                    navigation: r.navigation.clone(),
                     source_ns: r.source_ns,
                     source_calls: r.source_calls,
                 })

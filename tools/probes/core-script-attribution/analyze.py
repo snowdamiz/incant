@@ -15,7 +15,7 @@ def vector(value, size, name, maximum=2**64 - 1):
     return value
 
 
-def analyze(report, expected_sources):
+def analyze(report, expected_sources, navigation=False):
     p = report['profile']
     require(type(p['version']) is int and p['version'] == 4, 'Only diagnostic v4 is admitted')
     require(report['tick'] == TICKS and p['completed_frames'] == TICKS and p['failed_frames'] == 0
@@ -32,7 +32,7 @@ def analyze(report, expected_sources):
                        ('allocation_count', 'sampled_peak_allocation_count')]:
         require(integer(heap[peak], peak) >= integer(heap['latest'][name], name), 'Invalid heap peak')
     d = p['script_phase_diagnostic']
-    require(integer(d['schema'], 'diagnostic schema') == 1 and d['diagnostic_only'] is True
+    require(integer(d['schema'], 'diagnostic schema') == (2 if navigation else 1) and d['diagnostic_only'] is True
             and d['eligible_for_performance_gate'] is False and d['complete'] is True,
             'Incomplete or non-diagnostic attribution')
     require(d['max_rows'] == 4096 and 0 < integer(d['raw_row_bytes'], 'row size') <= 1024
@@ -107,7 +107,7 @@ def analyze(report, expected_sources):
                     'validation': sum(r['regions_ns'][9] - r['numeric_ns'][0] for r in selected),
                     'scope_cleanup': sum(r['regions_ns'][11] - sum(r['numeric_ns'][1:]) for r in selected),
                     'trace_minus_whole': sum(r['trace_ns'] - r['whole_tick_ns'] for r in selected)}}
-    return {'format': 'incant-script-attribution-observation', 'version': 1,
+    result = {'format': 'incant-script-attribution-observation', 'version': 1,
             'diagnostic_only': True, 'eligible_for_performance_gate': False,
             'histogram_reconstructed': True, 'instrumented_whole_p95_interval_ns': bounds,
             'regions': REGIONS, 'numeric_regions': NUMERIC,
@@ -119,3 +119,8 @@ def analyze(report, expected_sources):
                 'Residuals retain observer bookkeeping and uninstrumented work',
                 'No timing subtraction between independent marginal quantiles',
                 'One fixed instrumented route identifies candidates, not an optimization gain']}
+
+    if navigation:
+        from navigation_analysis import analyze_navigation
+        result['navigation'] = analyze_navigation(d)
+    return result

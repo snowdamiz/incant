@@ -8,6 +8,7 @@ publish.workspace = true
 [features]
 profile = ["incant_profile/summary"]
 diagnostic-script-phases = ["profile", "incant_profile/diagnostic-script-phases"]
+diagnostic-navigation = ["diagnostic-script-phases", "incant_profile/diagnostic-navigation", "incant_nav/diagnostic-navigation"]
 default = ["physics-deterministic"]
 
 # Select one physics kernel for the entire process, including build/test hosts.
