@@ -4,7 +4,7 @@ Upstream crates.io archive SHA256:
 `97ace1c17727311c22a46e4e3faf56ea6de81af99dcc839bdfb54857b94d448d`.
 All 84 published files, MIT/Apache-2.0 licenses and original dependency
 constraints are retained. `INCANT_UPSTREAM.json` records every upstream byte
-hash; `INCANT_PATCH.diff` is the full six-file delta, including new files.
+hash; `INCANT_PATCH.diff` is the complete current delta, including new files.
 No upstream edition, platform dependencies or feature defaults change.
 
 The default-off macOS `diagnostic-presentations` feature adds a surface binding,
@@ -28,3 +28,14 @@ failure; full replay/display coverage and performance acceptance remain open.
 Per-present block allocation/native copying,
 Arc and mutex operations have observation overhead. Missing callback, zero,
 invalid, discard, abandoned and overflow states remain separate.
+
+## Separate native creation observer (source-only milestone)
+
+The default-off macOS `diagnostic-compilation` feature adds a device-owned
+observer and hooks around the actual source/binary library and render/mesh/compute
+pipeline creation calls. Cumulative counts do not decrement on destruction.
+It changes no native options, cache/permutation policy, resource return values,
+normal scheduling or default feature graph. See
+`docs/spikes/native-compilation-observer.md` for exact scope and bounds.
+This new seam is authored only: its CPU controls and actual hardware behavior
+are not yet qualified. Existing presentation qualification does not cover it.

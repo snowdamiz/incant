@@ -20,15 +20,19 @@ end of the VS buffer table.
 #[allow(deprecated)]
 mod adapter;
 mod command;
+#[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
+pub mod compilation;
+#[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
+mod compilation_native;
 mod conv;
 mod device;
 mod library_from_metallib;
-mod surface;
-mod time;
 #[cfg(all(feature = "diagnostic-presentations", target_os = "macos"))]
 pub mod presentation;
 #[cfg(all(feature = "diagnostic-presentations", target_os = "macos"))]
 mod presentation_native;
+mod surface;
+mod time;
 
 use alloc::{
     string::{String, ToString as _},
@@ -501,6 +505,8 @@ pub struct QueueShared {
 }
 
 pub struct Device {
+    #[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
+    compilation_observer: compilation::Observer,
     shared: Arc<AdapterShared>,
     features: wgt::Features,
     counters: Arc<wgt::HalCounters>,
