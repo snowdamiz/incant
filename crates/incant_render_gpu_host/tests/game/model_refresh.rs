@@ -249,10 +249,55 @@ fn colored(bytes: &[u8], channel: usize, region: std::ops::Range<usize>) -> usiz
         })
         .count()
 }
+fn retain_pixels(output: &Path, name: &str, bytes: &[u8]) {
+    use std::io::Write;
+    assert_eq!(bytes.len(), 160 * 96 * 4);
+    let mut minimum = [u8::MAX; 4];
+    let mut maximum = [0u8; 4];
+    let mut dominant = [0usize; 3];
+    for pixel in bytes.as_chunks::<4>().0 {
+        for channel in 0..4 {
+            minimum[channel] = minimum[channel].min(pixel[channel]);
+            maximum[channel] = maximum[channel].max(pixel[channel]);
+        }
+        for channel in 0..3 {
+            if pixel[channel] > 40
+                && (0..3)
+                    .filter(|&c| c != channel)
+                    .all(|c| i16::from(pixel[channel]) - i16::from(pixel[c]) > 25)
+            {
+                dominant[channel] += 1;
+            }
+        }
+    }
+    let summary = json!({"stage":name,"width":160,"height":96,"format":"RGBA8-sRGB",
+        "bytes":bytes.len(),"minimum_rgba":minimum,"maximum_rgba":maximum,
+        "dominant_rgb_counts":dominant,"dominant_definition":"channel>40 and exceeds each other RGB channel by>25",
+        "strict_red":colored(bytes,0,0..160),"strict_blue":colored(bytes,2,0..160),
+        "strict_left_blue":colored(bytes,2,0..70),"strict_right_blue":colored(bytes,2,100..160)});
+    for (extension, data) in [
+        ("rgba", bytes.to_vec()),
+        ("json", serde_json::to_vec_pretty(&summary).unwrap()),
+    ] {
+        let mut file = fs::OpenOptions::new()
+            .write(true)
+            .create_new(true)
+            .open(output.join(format!("{name}.{extension}")))
+            .unwrap();
+        file.write_all(&data).unwrap();
+    }
+    eprintln!("model-refresh retained pixels: {summary}");
+}
 
 #[test]
 #[ignore = "requires a native GPU; run explicitly after resource grant"]
 fn compatible_static_model_rebuilds_bounds_geometry_material_images_and_retains_rejected_pixels() {
+    let pixel_output = std::path::PathBuf::from(
+        std::env::var_os("INCANT_MODEL_REFRESH_PIXELS")
+            .expect("set INCANT_MODEL_REFRESH_PIXELS to a fresh owned absolute output directory"),
+    );
+    assert!(pixel_output.is_absolute());
+    fs::create_dir(&pixel_output).unwrap();
     let root = tempfile::tempdir().unwrap();
     let first = model(root.path(), false);
     let next = model(root.path(), true);
@@ -271,10 +316,8 @@ fn compatible_static_model_rebuilds_bounds_geometry_material_images_and_retains_
     let old_version = old.version_id();
     game.refresh_host().unwrap();
     let red = pixels(&probe);
+    retain_pixels(&pixel_output, "initial", &red);
     let old_red = colored(&red, 0, 0..160);
-    assert!(old_red >= 80);
-    assert_eq!(colored(&red, 0, 100..160), 0); // Second instance starts outside the view.
-    assert_eq!(colored(&red, 2, 0..160), 0);
     let mut refused = TextureRefreshOperation::Publish(stage(&mut game, next, root.path()));
     policy_changed.store(true, Ordering::SeqCst);
     let mut ready = game.prepare_host_update().unwrap();
@@ -294,7 +337,8 @@ fn compatible_static_model_rebuilds_bounds_geometry_material_images_and_retains_
     assert_eq!(source(&game).version_id(), old_version);
     policy_changed.store(false, Ordering::SeqCst);
     game.refresh_host().unwrap();
-    assert_eq!(pixels(&probe), red); // Rejected candidate leaves the complete old pixels.
+    let rejected_pixels = pixels(&probe);
+    retain_pixels(&pixel_output, "rejected_retained", &rejected_pixels);
     let candidate = stage(&mut game, next, root.path());
     root.close().unwrap(); // Only this owned temporary source/cache; owners are already staged.
     game.tick(&[]).unwrap();
@@ -340,8 +384,15 @@ fn compatible_static_model_rebuilds_bounds_geometry_material_images_and_retains_
     assert_ne!(before.images[0].levels, after.images[0].levels);
     game.refresh_host().unwrap();
     let blue = pixels(&probe);
+    retain_pixels(&pixel_output, "replacement", &blue);
     let left = colored(&blue, 2, 0..70);
     let right = colored(&blue, 2, 100..160);
+    // Keep the original thresholds; retain both initial/replacement buffers
+    // before numerical assertions so a failure can diagnose the classifier.
+    assert!(old_red >= 80);
+    assert_eq!(colored(&red, 0, 100..160), 0); // Second instance starts outside the view.
+    assert_eq!(colored(&red, 2, 0..160), 0);
+    assert_eq!(rejected_pixels, red); // Rejected candidate leaves the complete old pixels.
     assert!(
         left >= 500 && right >= 500,
         "new geometry and formerly offscreen instance must both draw"
