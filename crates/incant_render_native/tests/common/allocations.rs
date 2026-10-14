@@ -3,7 +3,11 @@ use std::{
     cell::Cell,
 };
 struct Count;
-thread_local! {static ENABLED:Cell<bool>=const{Cell::new(false)};static ALLOCS:Cell<usize>=const{Cell::new(0)};}
+thread_local! {
+    static ENABLED:Cell<bool>=const{Cell::new(false)};
+    static ALLOCS:Cell<usize>=const{Cell::new(0)};
+    static DEALLOCS:Cell<usize>=const{Cell::new(0)};
+}
 fn allocation() {
     if ENABLED.try_with(Cell::get).unwrap_or(false) {
         let _ = ALLOCS.try_with(|n| n.set(n.get() + 1));
@@ -25,6 +29,9 @@ unsafe impl GlobalAlloc for Count {
         unsafe { System.realloc(p, layout, size) }
     }
     unsafe fn dealloc(&self, p: *mut u8, layout: Layout) {
+        if ENABLED.try_with(Cell::get).unwrap_or(false) {
+            let _ = DEALLOCS.try_with(|n| n.set(n.get() + 1));
+        }
         unsafe { System.dealloc(p, layout) }
     }
 }
@@ -38,10 +45,16 @@ impl Drop for Recording {
 }
 
 pub fn record<T>(call: impl FnOnce() -> T) -> (T, usize) {
+    let (value, allocations, _) = record_lifecycle(call);
+    (value, allocations)
+}
+
+pub fn record_lifecycle<T>(call: impl FnOnce() -> T) -> (T, usize, usize) {
     ALLOCS.set(0);
+    DEALLOCS.set(0);
     ENABLED.set(true);
     let guard = Recording;
     let value = call();
     drop(guard);
-    (value, ALLOCS.get())
+    (value, ALLOCS.get(), DEALLOCS.get())
 }

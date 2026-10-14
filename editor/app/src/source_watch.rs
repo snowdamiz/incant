@@ -101,7 +101,12 @@ fn cycle(
     }
 }
 
-fn publish(editor: &Editor, app: &tauri::AppHandle, watcher: &SourceWatcher, report: WatchReport) {
+fn publish(
+    editor: &Arc<Editor>,
+    app: &tauri::AppHandle,
+    watcher: &SourceWatcher,
+    report: WatchReport,
+) {
     let imported = report
         .imports
         .iter()
@@ -128,6 +133,7 @@ fn publish(editor: &Editor, app: &tauri::AppHandle, watcher: &SourceWatcher, rep
         }
     }
     if imported != 0 {
+        crate::play::schedule_refresh(editor.clone(), report.revision);
         log(
             editor,
             "info",

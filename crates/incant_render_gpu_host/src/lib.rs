@@ -10,6 +10,7 @@ use incant_render::resolution::{ResolutionConfig, ResolutionError, ResolutionFra
 use incant_render::{Renderer, RetainedScene, RetainedTarget, SceneStats, UiLayer, UiStats};
 use incant_render_data::{SceneInput, UiInput};
 use incant_render_game::RenderInputConsumer;
+use incant_render_game::TextureRefreshConsumer;
 use incant_render_native::UpdateKind;
 pub use resolution::ResolutionTargets;
 use std::time::Instant;
@@ -256,5 +257,58 @@ impl<P: TargetProvider> RenderInputConsumer for GpuRenderConsumer<P> {
         self.live = Some(live);
         self.frames = next;
         Ok(())
+    }
+}
+
+/// Opaque resources prepared without taking a target or drawing.
+pub struct PreparedGpuTextures {
+    scene: RetainedScene,
+    motion_epoch: Option<u64>,
+}
+impl<P: TargetProvider> TextureRefreshConsumer for GpuRenderConsumer<P> {
+    type Prepared = PreparedGpuTextures;
+    fn prepare_textures(
+        &self,
+        input: &SceneInput,
+        camera: &str,
+    ) -> Result<Self::Prepared, Self::Error> {
+        let live = self.live.as_ref().ok_or(GpuHostError::Failed)?;
+        self.renderer.check_device().map_err(GpuHostError::Render)?;
+        let mut scene = self
+            .renderer
+            .prepare_retained(input, camera)
+            .map_err(GpuHostError::Render)?;
+        scene.set_dynamic_resolution(live.resolution_config)?;
+        if live.motion_epoch.is_some() {
+            scene
+                .enable_motion_history(&self.renderer)
+                .map_err(GpuHostError::Render)?;
+        }
+        self.renderer.check_device().map_err(GpuHostError::Render)?;
+        Ok(PreparedGpuTextures {
+            scene,
+            motion_epoch: live.motion_epoch,
+        })
+    }
+    fn validate_textures(&self, prepared: &Self::Prepared) -> Result<(), Self::Error> {
+        let live = self.live.as_ref().ok_or(GpuHostError::Failed)?;
+        if prepared.motion_epoch != live.motion_epoch
+            || prepared.motion_epoch != live.targets.motion_epoch()
+        {
+            return Err(GpuHostError::Render(Box::new(
+                incant_render::motion::MotionError::Sequence,
+            )));
+        }
+        self.renderer
+            .check_device_status()
+            .map_err(GpuHostError::Render)
+    }
+    fn publish_textures(&mut self, mut prepared: Self::Prepared) -> Self::Prepared {
+        // Retired handles escape for disposal after the final publication lock.
+        std::mem::swap(
+            &mut self.live.as_mut().expect("validated live consumer").scene,
+            &mut prepared.scene,
+        );
+        prepared
     }
 }
