@@ -1,85 +1,107 @@
-# Native-window eligibility diagnostics
+# Pearl Cove native-window qualification
 
-Pearl Cove's fresh shipping package passes the existing 781-step win, 201-step
-urchin-loss and 221-step shore/cliff CPU routes. All eleven observation checks,
-canonical HUD strings, actor flipbooks and 7,699,200 bytes of retained PCM pass.
-This does not establish native-window route completion or presentation timing.
+This packet combines the eligibility plumbing, CPU qualification and actual
+win-window proof while preserving the earlier failures. Pearl Cove uses its existing authored tile/sprite,
+physics, HUD and recorded physical keyboard-event semantics. No art, gameplay,
+input policy, focus rule, route padding or deadline was changed for this proof.
 
-Two actual 781-step window attempts reached their unchanged 90-second child
-deadline without a final report. The first included root's normal Finder/AX
-activation and viewport interaction; the second had no CUA interaction. Both
-owned process groups were reaped and package/recording inputs stayed unchanged.
-Root's first attempt separately captured crisp Cove/tile/sprite/HUD tool images
-and a visible player position change. Those tool images were not exported as
-filesystem PNGs, and do not establish a complete win, animation, focus sequence
-or performance pass. Direct execution of the bundle binary, rather than a
-LaunchServices-originated process, remains a hypothesis requiring evidence.
+The first main300-based shipping player, `b21a15ff`, passed the existing 781-step
+win, 201-step urchin loss and 221-step shore/cliff CPU routes, with eleven total
+observation checks. Two actual win-window attempts then hit their unchanged
+90-second child deadlines. One included scoped root CUA interaction and four
+actual tool images; the other had no CUA interaction. Both were reaped, with no
+final report. The first images established crisp authored tiles/sprites/HUD and
+a visible player position change, not route completion or sustained focus.
 
-The optional trusted CLI `--window-state-log FILE` adds read-only eligibility
-snapshots to an explicitly bounded native window. It requires `--stop-after
-1..36000`, refuses the lifecycle probe and creates its destination exclusively
-before opening devices. Neither package data nor a scene supplies this path.
-Existing files and final symlinks are refused; parent directories are trusted
-host storage. The planar runner's opt-in flag writes `eligibility.jsonl` inside
-its fresh output and retains the log hash even when the child times out.
+A fresh public shipping export from `ed16a31f` added the default-off bounded
+eligibility observer and included the already reviewed observer/audio source
+composition. Its player is `4a43581a`; all ten runtime-data files match the old
+package exactly. The new package independently passed all three CPU routes.
+Every logical report and all 7,699,200 bytes of PCM match the historical package.
+This is correctness parity, not a timing comparison or a single-change causal
+experiment. The exporter removed its own private target before the inherent
+one-tick CPU startup. No existing compiler target was reused for shipping.
 
-The log records cached focus alongside Tao's `Window::is_focused()` query,
-platform and simulation suspension, minimization, supported physical dimensions,
-surface reservation outcomes/counters and pending retry time, session generation,
-host steps, world tick and monotonic elapsed time. A native window focus query
-does not independently prove application foreground activation. No automatic
-focus, background simulation, replay event, pause rule or deadline is changed.
+The first diagnostic win-window's native child completed normally: Metal on
+Apple M5 Pro, 781 host steps/ticks, 782 accepted frames, one presentation refresh,
+four exact CPU-matching observations, and the completed recorded-input hash.
+The runner still failed because it incorrectly required three native widgets.
+Its original refusal, raw report, empty stderr and completed eligibility log are
+retained without rewriting the outcome.
 
-Snapshots coalesce transitions within 250 ms and otherwise emit a one-second
-heartbeat. Cumulative focus-event and coalesced-sample counts make that loss of
-fine event ordering explicit. The file contains at most 512 records and 512 KiB,
-including its header and a terminal truncation record when capacity is reached.
-Completed unbuffered writes survive process exit/timeout; this is not a power-loss
-durability guarantee. Normal exit adds a final host-step record after stopping
-the game. A logging error never replaces an existing game/window error.
+The source contract explains the mismatch precisely. CPU reporting counts the
+three authored logical nodes: Root, STATUS and PROMPT. Native `UiInput` excludes
+Root/Container and includes the two text-bearing labels, including the empty
+prompt. The tool-only successor `1bee623b` requires exactly two native widgets
+with a strict integer type, keeps the CPU expectation at three, and retains the
+frame, replay, observation and positive integer glyph-submission assertions.
+Eleven Python controls pass, including missing/extra/root-count and malformed
+widget/glyph refusals. The retained raw report passes the repaired oracle in an
+offline replay; that replay is not a fresh native execution.
 
-The enabled observer performs native queries, serialization and filesystem I/O;
-its execution is diagnostic, not a timing or display gate. By default it adds no
-native query, world read, serialization or file I/O.
+The first diagnostic log has 16 records / 8,145 bytes. It observed initial
+unfocused/suspended tick zero at 1.079 seconds, then one focus-gained event by
+1.333 seconds and tick 11. Subsequent snapshots remained focused and resumed,
+with supported 640×480 size and ready surface reservations, through the final
+781-step record at 14.152 seconds. There were no focus-lost events, surface
+deferrals/skips or truncation. Forty-nine rapid observations were coalesced, so
+the log does not preserve every event's fine ordering. Root performed no CUA
+interaction during this child; activation and progress were autonomous. Tao's
+native focus query does not independently establish NSApplication foreground.
 
-Source `ed16a31f` passed 90 ordinary native-window library tests and 113
+The earlier timeouts remain historical failures. The fresh binary/source
+composition and this successful eligibility trajectory do not identify a sole
+cause for those failures. No auto-focus or background simulation was added.
+
+The fresh repaired-runner window passed: native child and runner both exited
+zero and were reaped. It completed 781 host steps/ticks and 782 accepted frames,
+with exact same-package CPU observations and the original recorded-input hash.
+The log retained 49 records / 26,237 bytes. Focus was lost at step 772; snapshots
+showed the world remaining at 772 while normally suspended. Root's normal
+Finder Open restored cached eligibility at 45.473 seconds, and the remaining
+nine steps completed by the final 45.609-second record. One surface deferral and
+one skipped surface attempt remain in the report. These are diagnostic elapsed
+times with an intentional foreground interruption, not performance measurements.
+
+Root captured three actual 640×512 tool images of the live owned window. They
+show readable progress HUD, player positions at different locations, and the
+sailing-home outcome with the player at the boat/dock and collected pickups
+absent. Root's limited review found crisp intentional pixel-art edges, readable
+HUD separation and no observed holes, missing textures or obvious tile seams
+in those three stills. This is not continuous-motion or audible-quality review.
+The tool images remain in the root conversation, with their receipt in this
+packet; no disk PNGs are invented. The 201/221 loss and shore/cliff routes remain
+CPU-qualified only; they were not run in a native window here.
+
+Source `ed16a31f` also passed 90 ordinary native-window library tests and 113
 presentation/profile library tests, plus both strict all-target Clippy checks.
-These configurations overlap; they are not 203 distinct controls. Each executed
-all eight diagnostic controls, including exclusive destination admission, finite
-event-storm output, actual completed-file observations, a child exiting without
-Rust Drop, CLI default-off behavior and original-error precedence. Ten Python
-sample/runner controls, scoped formatting, generated conventions and diff checks
-also passed. CPU test executables and raw Cargo output are retained by hash.
+Those configurations overlap and are not 203 distinct controls. Each executed
+the eight observer controls, including exclusive admission, finite output,
+actual file observations and a child exiting without Rust Drop. The earlier
+data-only oracle corrections and first export supervisor's merged-stderr failure
+remain in the archive; neither compiler success nor later success rewrites them.
 
-The [compact packet](evidence/native-window-eligibility/manifest.json) separates
-the finalized CPU qualification from the original main300-based `1dff662b`
-shipping package (`b21a15ff`). Its three CPU routes and both actual window
-timeouts use that exact historical player; they are not executions of the new
-diagnostic source. The first export attempt's merged-stderr supervisor error is
-retained alongside the corrected public export; the compiler succeeded in both.
-The two failed window attempts retain their empty streams and observed group
-cleanup, including the original exceptional-return ledger limitation. Root's four
-actual tool images have a scoped receipt, not a checked-in PNG archive.
+The default-off trusted CLI `--window-state-log FILE` requires `--stop-after
+1..36000`, refuses lifecycle-probe mode and exclusively creates its destination
+before devices. A scene/package cannot choose the path. Existing files and final
+symlinks are refused; parent storage is trusted. Enabled snapshots add native
+queries, serialization and filesystem I/O, coalesce within 250 ms, otherwise use
+a one-second heartbeat, and stop at 512 records / 512 KiB. Completed writes
+survive process timeout; this is not a power-loss durability guarantee. Default
+operation adds no native query, world read, serialization or file I/O.
 
-Against main304 `709e1a41`, the implementation delta is six code/tool paths:
-package CLI admission, window integration, the logger and its tests, and the
-planar runner and its tests. Remaining compiled/toolchain/sample inputs match;
-the root vendor-test formatting correction is already identical. Intake must
-preserve main304's newer STATUS and presentation documentation. The packet's
-docs-only successor does not change the producing `ed16a31f` checkout.
-
-Replay without devices or process execution:
+The [manifest](evidence/native-window-eligibility/manifest.json) binds the raw
+receipts, source copies, commands, retained binary/PCM hashes and root image
+scope. Replay performs no player, build, device or authoring operation:
 
 ```sh
 python3 docs/spikes/evidence/native-window-eligibility/verify.py
-# Optional retained originals/binary hashes and integrated source closure:
 python3 docs/spikes/evidence/native-window-eligibility/verify.py \
   --originals --binaries --git-source HEAD --source-root .
 ```
 
-This intake establishes diagnostic plumbing and the historical CPU behavior.
-The separately granted fresh diagnostic-source export is outside these finalized
-results. No actual eligibility-log window has run at this intake, no complete
-native route passed, and no FPS, audio-quality or phase gate is claimed. Source,
-raw outcomes and exact identities remain under the retained
-`native-window-planar-001` evidence directory.
+Counts and native submission receipts do not prove exact final text or rendered
+appearance. Actual root tool images, if captured while the owned child is live,
+remain separately scoped. No FPS, performance budget, glitch-free audio, other
+device or phase-gate claim follows. Recorded physical input does not prove live
+keyboard handling, and this slice adds no localization/RTL/CJK qualification.
