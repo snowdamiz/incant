@@ -21,6 +21,16 @@ from export_native import verify_codegen, ui_startup_options
 WIDTH = 10_000
 MAX_NS = 100_000_000
 PHASES = ('player.frame', 'script.tick')
+SCRIPT_PHASES = ('script.tick', 'script.static_module')
+
+
+def phase_selection(script_phase, program):
+    require(script_phase in SCRIPT_PHASES, 'Unknown script timing phase')
+    require(program is None or isinstance(program, dict) and program.get('kind') == 'wasm',
+            'Unknown exported program kind')
+    wasm = program is not None
+    require(wasm == (script_phase == 'script.static_module'),
+            'Script timing phase differs from actual exported program kind')
 
 
 def digest(data):
@@ -74,7 +84,9 @@ def interval(row, frames):
     raise ValueError('Empty histogram')
 
 
-def metrics(report, ticks):
+def metrics(report, ticks, *, script_phase='script.tick'):
+    require(script_phase in SCRIPT_PHASES, 'Unknown script timing phase')
+    phases = ('player.frame', script_phase)
     integer(ticks, 'ticks', 1)
     require(report['tick'] == ticks, 'Player did not finish requested ticks')
     p = report['profile']
@@ -92,8 +104,8 @@ def metrics(report, ticks):
     rows = frame['phases']
     require(isinstance(rows, list) and len({r['name'] for r in rows}) == len(rows), 'Duplicate phase rows')
     by_name = {row['name']: row for row in rows}
-    require(all(name in by_name for name in PHASES), 'Missing required frame phase')
-    values = {name + '.p95_wall_ns': interval(by_name[name], ticks) for name in PHASES}
+    require(all(name in by_name for name in phases), 'Missing required frame phase')
+    values = {name + '.p95_wall_ns': interval(by_name[name], ticks) for name in phases}
     allocations = p['rust_allocations']
     require(allocations['installed'] is True and allocations['saturated'] is False,
             'Unavailable or saturated allocation counter')
@@ -105,7 +117,12 @@ def metrics(report, ticks):
 def comparison(current, baseline):
     require(current['format'] == baseline['format'] == 'incant-mac-cpu-measurement'
             and current['version'] == baseline['version'] == 1, 'Unknown measurement format')
+    for item in (current, baseline):
+        require(item.get('script_phase', 'script.tick') == item['match'].get('script_phase', 'script.tick'),
+                'Measurement phase disagrees with its identity')
     require(current['match'] == baseline['match'], 'Baseline machine, workload or build configuration differs')
+    require(current['match'].get('script_phase', 'script.tick') == 'script.tick',
+            'The TypeScript regression policy does not compare static-module phases')
     result = {}
     for name, value in current['metrics'].items():
         prior = baseline['metrics'][name]
@@ -133,7 +150,8 @@ def load_baseline(path):
     baseline = json.loads(read(path, 16 * 1024**2))
     raw = read(path.parent / 'stdout.json', 16 * 1024**2)
     require(digest(raw) == baseline['profile_report_sha256'], 'Baseline raw report identity differs')
-    require(metrics(json.loads(raw), baseline['match']['ticks']) == baseline['metrics'],
+    require(metrics(json.loads(raw), baseline['match']['ticks'],
+                    script_phase=baseline['match'].get('script_phase', 'script.tick')) == baseline['metrics'],
             'Baseline metrics differ from actual retained profile')
     return baseline
 
@@ -175,10 +193,13 @@ def package_inputs(package):
                               'program': build_info['program']}, rate
 
 
-def measure(package, output, ticks, recording=None, observe=None, baseline=None):
+def measure(package, output, ticks, recording=None, observe=None, baseline=None, *, script_phase='script.tick'):
     machine = mac_identity()
     package = package.absolute()
     player, exported, identities, rate = package_inputs(package)
+    phase_selection(script_phase, identities['program'])
+    require(baseline is None or script_phase == 'script.tick',
+            'Static-module timing has no TypeScript regression baseline policy')
     ui_options = ui_startup_options('headless', exported.get('startup_ui_viewport'))
     integer(ticks, 'ticks', 100)
     require(ticks <= 300 * rate, 'Measurement is limited to 300 simulated seconds')
@@ -196,6 +217,9 @@ def measure(package, output, ticks, recording=None, observe=None, baseline=None)
              'ui_options': ui_options,
              'data': identities['data'], 'ticks': ticks, 'tick_rate': rate,
              'inputs': {name: digest(data) for name, data in inputs.items()}, 'protocol': 1}
+    # Preserve the existing default-phase baseline identity. Absence means script.tick.
+    if script_phase != 'script.tick':
+        match['script_phase'] = script_phase
     prior = load_baseline(baseline.absolute()) if baseline else None
     if prior is not None:
         require(prior.get('match') == match, 'Baseline machine, workload or build configuration differs')
@@ -220,11 +244,11 @@ def measure(package, output, ticks, recording=None, observe=None, baseline=None)
         report = json.loads(read(output / 'stdout.json', 16 * 1024**2))
         require(not read(output / 'stderr.log', 1024**2), 'Unexpected player diagnostics')
         require('observe' not in inputs or report['observations']['passed'] is True, 'Game observation failed')
-        values = metrics(report, ticks)
+        values = metrics(report, ticks, script_phase=script_phase)
         require(package_inputs(package)[2] == identities, 'Package changed during execution')
         require(mac_identity() == machine, 'Mac configuration changed during execution')
         result = {'format': 'incant-mac-cpu-measurement', 'version': 1, 'match': match,
-                  'identities': identities, 'metrics': values,
+                  'identities': identities, 'metrics': values, 'script_phase': script_phase,
                   'profile_report_sha256': digest(read(output / 'stdout.json', 16 * 1024**2)),
                   'phase_gate_passed': False,
                   'limits': ['CPU simulation timing; no display fps, GPU time or shader-stall qualification',
@@ -255,6 +279,7 @@ if __name__ == '__main__':
     parser.add_argument('--input-recording', type=Path)
     parser.add_argument('--observe', type=Path)
     parser.add_argument('--baseline', type=Path)
+    parser.add_argument('--script-phase', choices=SCRIPT_PHASES, default='script.tick')
     args = parser.parse_args()
-    measured = measure(args.package, args.output, args.ticks, args.input_recording, args.observe, args.baseline)
+    measured = measure(args.package, args.output, args.ticks, args.input_recording, args.observe, args.baseline, script_phase=args.script_phase)
     print(json.dumps({'measurement': str(args.output / 'measurement.json'), 'comparison': measured['comparison']}))
