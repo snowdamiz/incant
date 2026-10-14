@@ -49,6 +49,13 @@ def build(plan_path, output, scratch_parent):
             require(not value, 'Unexpected compiler override: ' + name)
     compiler_bin = Path(data['toolchain_bin']).absolute()
     rustc, cargo = compiler_bin / 'rustc', compiler_bin / 'cargo'
+    node, _ = checked_file(data['node'], 256 * 1024**2)
+    require(node.name == 'node' and node.resolve(strict=True) == node and os.access(node, os.X_OK),
+            'Expected the reviewed real Node executable')
+    require(not os.environ.get('NODE_OPTIONS') and not os.environ.get('NODE_PATH'),
+            'Unexpected Node injection environment')
+    node_version = ordinary.execute([node, '--version'], timeout=10).stdout.strip()
+    require(node_version == data['node']['version'] == 'v24.21.0', 'Node version differs')
     compiler = ordinary.execute([rustc, '-vV']).stdout
     require(compiler == base['compiler'] and re.search(r'^release: 1\.99\.0$', compiler, re.M)
             and re.search(r'^host: aarch64-apple-darwin$', compiler, re.M), 'Compiler differs')
@@ -65,9 +72,10 @@ def build(plan_path, output, scratch_parent):
     write_json(output / 'attempt.json', state)
     env = {k: v for k, v in os.environ.items()
            if not k.startswith(('INCANT_', 'CARGO_', 'RUSTUP_', 'RAYON_'))}
-    env.update(PATH=str(compiler_bin) + os.pathsep + os.environ.get('PATH', ''),
+    env.update(PATH=os.pathsep.join((str(compiler_bin), str(node.parent), os.environ.get('PATH', ''))),
                INCANT_NATIVE_PROJECT=str(project), RAYON_NUM_THREADS='2', CARGO_BUILD_JOBS='2',
                CARGO_NET_OFFLINE='true')
+    require(shutil.which('node', path=env['PATH']) == str(node), 'Cook would select another Node')
     try:
         with tempfile.TemporaryDirectory(prefix='incant-script-attribution-', dir=scratch_parent) as temporary:
             storage = Path(temporary).resolve()
@@ -86,7 +94,8 @@ def build(plan_path, output, scratch_parent):
             write_json(output / 'command.json', {'argv': list(map(str, argv)), 'cwd': str(ROOT),
                        'timeout_seconds': 2400, 'target': str(target), 'source': source,
                        'environment': {'RAYON_NUM_THREADS': '2', 'CARGO_BUILD_JOBS': '2',
-                                       'CARGO_NET_OFFLINE': 'true', 'INCANT_NATIVE_PROJECT': str(project)}})
+                                       'CARGO_NET_OFFLINE': 'true', 'INCANT_NATIVE_PROJECT': str(project),
+                                       'PATH': env['PATH']}, 'node': data['node']})
             with (output / 'cargo.jsonl').open('xb') as out, (output / 'build.log').open('xb') as err:
                 result = native_process.run(list(map(str, argv)), cwd=ROOT, env=env,
                                             stdout=out, stderr=err, timeout=2400)
@@ -151,6 +160,7 @@ def build(plan_path, output, scratch_parent):
                       'diagnostic_only': True, 'eligible_for_distribution': False,
                       'eligible_for_performance_gate': False, 'profile_version': 4,
                       'plan_sha256': plan_hash, 'source': source, 'compiler': compiler,
+                      'node': data['node'], 'node_version_observed': node_version,
                       'target': TARGET, 'features': actual_features, 'graph_delta': graph_change,
                       'codegen': flags, 'physics': physics, 'normal_dependencies': names,
                       'player_sha256': sha256(read(player, 256 * 1024**2)), 'data': packaged,
@@ -162,6 +172,7 @@ def build(plan_path, output, scratch_parent):
                                  'No player startup, functional execution or timing by this builder']}
         require(not storage.exists(), 'Owned temporary target not retired')
         require(authored(data) == project and source_check(data) == source, 'Inputs changed during build')
+        checked_file(data['node'], 256 * 1024**2)
         report['build_storage_removed'] = True
         artifact_paths = [output / name for name in ('cargo.jsonl', 'build.log', 'normal-dependencies.txt', 'project-build.json')]
         artifact_paths += sorted((output / 'producer').iterdir())
