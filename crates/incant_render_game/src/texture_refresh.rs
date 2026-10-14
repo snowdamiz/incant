@@ -1,10 +1,10 @@
 use super::*;
 use incant_game_runtime::SceneHostUpdate;
-use incant_render_native::{StagedTextureRefresh, TextureRefreshPublication};
+use incant_render_native::StagedTextureRefresh;
 
 /// Separate trusted capability. Preparation has no published effects; validation
-/// is read-only. Publication only moves prepared handles and returns retired
-/// handles for destruction after the caller releases its publication lock.
+/// is read-only. Publication swaps through caller-owned prepared storage, which
+/// retains retired handles on success and unwind until after unlocking.
 pub trait TextureRefreshConsumer: RenderInputConsumer {
     type Prepared;
     fn prepare_textures(
@@ -13,7 +13,7 @@ pub trait TextureRefreshConsumer: RenderInputConsumer {
         camera: &str,
     ) -> Result<Self::Prepared, Self::Error>;
     fn validate_textures(&self, prepared: &Self::Prepared) -> Result<(), Self::Error>;
-    fn publish_textures(&mut self, prepared: Self::Prepared) -> Self::Prepared;
+    fn publish_textures(&mut self, prepared: &mut Self::Prepared);
 }
 impl TextureRefreshConsumer for CpuInputObserver {
     type Prepared = ();
@@ -23,32 +23,20 @@ impl TextureRefreshConsumer for CpuInputObserver {
     fn validate_textures(&self, _: &()) -> Result<(), Infallible> {
         Ok(())
     }
-    fn publish_textures(&mut self, (): ()) {}
+    fn publish_textures(&mut self, _: &mut ()) {}
 }
 pub struct PreparedHostTextureRefresh<C: TextureRefreshConsumer> {
     native: StagedTextureRefresh,
     consumer: Option<C::Prepared>,
 }
-pub struct TexturePublication<C: TextureRefreshConsumer> {
-    native: TextureRefreshPublication,
-    _retired_consumer: Option<C::Prepared>,
-}
-impl<C: TextureRefreshConsumer> TexturePublication<C> {
-    pub fn receipt(&self) -> TextureRefreshReceipt {
-        self.native.receipt
-    }
-}
 pub enum TextureRefreshOperation<C: TextureRefreshConsumer> {
-    Prepare(PreparedTextureRefresh),
+    Prepare(Option<PreparedTextureRefresh>),
     Publish(PreparedHostTextureRefresh<C>),
 }
 pub enum TextureRefreshReply<C: TextureRefreshConsumer> {
     Prepared(PreparedHostTextureRefresh<C>),
-    Published(TexturePublication<C>),
-    Refused {
-        error: RenderHostError<C::Error>,
-        candidate: PreparedHostTextureRefresh<C>,
-    },
+    Published(TextureRefreshReceipt),
+    Refused(RenderHostError<C::Error>),
     PreparationRefused(RenderHostError<C::Error>),
 }
 impl<C: RenderInputConsumer> NativeRenderHost<C> {
@@ -59,9 +47,10 @@ impl<C: RenderInputConsumer> NativeRenderHost<C> {
 impl<C: TextureRefreshConsumer> SceneHostUpdate for NativeRenderHost<C> {
     type Request = TextureRefreshOperation<C>;
     type Reply = TextureRefreshReply<C>;
-    fn update(&mut self, world: &NativeWorld, request: Self::Request) -> Self::Reply {
+    fn update(&mut self, world: &NativeWorld, request: &mut Self::Request) -> Self::Reply {
         match request {
             TextureRefreshOperation::Prepare(prepared) => {
+                let prepared = prepared.take().expect("single cold preparation");
                 let result = (|| {
                     let native = self
                         .input
@@ -89,10 +78,7 @@ impl<C: TextureRefreshConsumer> SceneHostUpdate for NativeRenderHost<C> {
                 let view = match world.spatial_view() {
                     Ok(view) => view,
                     Err(error) => {
-                        return TextureRefreshReply::Refused {
-                            error: error.into(),
-                            candidate: prepared,
-                        };
+                        return TextureRefreshReply::Refused(error.into());
                     }
                 };
                 let validation = (|| {
@@ -116,21 +102,21 @@ impl<C: TextureRefreshConsumer> SceneHostUpdate for NativeRenderHost<C> {
                 if let Err(error) = validation {
                     // Keep rejected resources owned until the caller releases its
                     // final authority lock; no GPU/large CPU disposal happens here.
-                    return TextureRefreshReply::Refused {
-                        error,
-                        candidate: prepared,
-                    };
+                    return TextureRefreshReply::Refused(error);
                 }
                 let consumer = &mut self.consumer;
-                let result = self.input.try_publish_textures(&view, prepared.native, || {
-                    let candidate = prepared.consumer.expect("changed texture candidate");
-                    Ok::<_, Infallible>(consumer.publish_textures(candidate))
-                });
+                let result = self
+                    .input
+                    .try_publish_textures(&view, &mut prepared.native, || {
+                        let candidate = prepared
+                            .consumer
+                            .as_mut()
+                            .expect("changed texture candidate");
+                        consumer.publish_textures(candidate);
+                        Ok::<_, Infallible>(())
+                    });
                 match result {
-                    Ok((native, retired)) => TextureRefreshReply::Published(TexturePublication {
-                        native,
-                        _retired_consumer: retired,
-                    }),
+                    Ok(receipt) => TextureRefreshReply::Published(receipt),
                     // Same exclusive host/world borrow, with no mutation between
                     // authority validation and the infallible publication move.
                     Err(SyncError::Native(_)) => unreachable!("validated texture publication"),

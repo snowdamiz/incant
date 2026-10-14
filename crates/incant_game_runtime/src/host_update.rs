@@ -21,17 +21,14 @@ impl<'a, B: Backend, H: SceneHostUpdate> PreparedHostUpdate<'a, B, H> {
             preserve: true,
         }
     }
-    /// Typed replies carry their own refusals and retired owners. A failed world
-    /// check returns the original request intact. Native panic poisons the lease;
-    /// its outer Drop destroys the composite after the caller's lock unwinds.
-    pub fn update(
-        &mut self,
-        request: H::Request,
-    ) -> Result<H::Reply, (GameError<H::Error>, H::Request)> {
+    /// Request/retirement storage remains with the caller on every refusal and
+    /// unwind. Native panic poisons the lease; its outer Drop destroys the
+    /// composite after the caller's publication lock has unwound.
+    pub fn update(&mut self, request: &mut H::Request) -> Result<H::Reply, GameError<H::Error>> {
         let live = self.live.as_mut().expect("owned host lease");
         let world = match live.native.world() {
             Ok(world) => world,
-            Err(error) => return Err((error.into(), request)),
+            Err(error) => return Err(error.into()),
         };
         self.preserve = false;
         let reply = live.host.0.update(world, request);

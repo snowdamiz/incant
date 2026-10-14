@@ -58,7 +58,9 @@ impl<T> Pending<T> {
 }
 pub(super) fn publish_at_revision<T>(
     bus: &Mutex<project::LoadState>,
+    service: &Service,
     revision: u64,
+    generation: u32,
     publish: impl FnOnce() -> Result<T, String>,
 ) -> Result<T, String> {
     let state = bus.lock().map_err(|_| "Project lock is unavailable")?;
@@ -69,6 +71,17 @@ pub(super) fn publish_at_revision<T>(
                 .into(),
         );
     }
+    let play = service
+        .status
+        .lock()
+        .map_err(|_| "Play state is unavailable")?;
+    if play.status.generation != generation || !matches!(play.status.phase, "running" | "paused") {
+        drop(play);
+        drop(state);
+        return Err("Play session changed while texture resources were prepared; prior live catalog retained".into());
+    }
+    // Both short guards remain held until publication returns: an asynchronous
+    // session change cannot slip between the last generation check and swap.
     // Only already-prepared handles move here. The returned retirement owner is
     // disposed by the caller after this guard has been released.
     publish()
@@ -226,6 +239,13 @@ mod tests {
             Project::empty("Refresh"),
         ))));
         let revision = 0;
+        let (service, _) = Service::new();
+        service
+            .edit(|s| {
+                s.phase = "running";
+                Ok(())
+            })
+            .unwrap();
         bus.lock()
             .unwrap()
             .bus_mut()
@@ -258,7 +278,7 @@ mod tests {
             disposed: disposed_unlocked.clone(),
         };
         assert!(
-            publish_at_revision(&bus, revision, move || {
+            publish_at_revision(&bus, &service, revision, 0, move || {
                 publication_flag.store(true, Ordering::SeqCst);
                 Ok(candidate)
             })
@@ -267,6 +287,29 @@ mod tests {
         assert!(!published.load(Ordering::SeqCst));
         assert!(disposed_unlocked.load(Ordering::SeqCst));
         assert_eq!(bus.lock().unwrap().bus_mut().unwrap().revision(), 1);
+    }
+    #[test]
+    fn a_session_change_between_prepare_and_commit_refuses_before_the_swap() {
+        let bus = Mutex::new(project::LoadState::Ready(CommandBus::new(Project::empty(
+            "Refresh",
+        ))));
+        let (service, _) = Service::new();
+        service
+            .edit(|s| {
+                s.phase = "running";
+                s.generation = 1;
+                Ok(())
+            })
+            .unwrap();
+        assert!(
+            publish_at_revision(&bus, &service, 0, 0, || -> Result<(), String> {
+                panic!("stale generation must not publish")
+            })
+            .is_err()
+        );
+        assert!(service.status.try_lock().is_ok());
+        assert!(bus.try_lock().is_ok());
+        assert_eq!(bus.lock().unwrap().bus_mut().unwrap().revision(), 0);
     }
     #[test]
     fn one_pending_candidate_replacement_cancellation_and_foreign_tokens_are_observable() {

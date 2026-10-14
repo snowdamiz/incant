@@ -303,12 +303,11 @@ impl<P: TargetProvider> TextureRefreshConsumer for GpuRenderConsumer<P> {
             .check_device_status()
             .map_err(GpuHostError::Render)
     }
-    fn publish_textures(&mut self, mut prepared: Self::Prepared) -> Self::Prepared {
-        // Retired handles escape for disposal after the final publication lock.
+    fn publish_textures(&mut self, prepared: &mut Self::Prepared) {
+        // The outer caller owns this retirement storage throughout the lock.
         std::mem::swap(
             &mut self.live.as_mut().expect("validated live consumer").scene,
             &mut prepared.scene,
         );
-        prepared
     }
 }

@@ -74,14 +74,14 @@ pub trait SceneHost: Sized {
 
 /// Optional trusted host-only admission, never a script capability or mutable
 /// host escape. The associated request must carry its own authority checks.
-/// Typed replies carry refusals and retain any rejected publication candidate;
+/// Borrowed requests retain rejected candidates and retired publication owners;
 /// implementations stage before publication and do not advance simulation,
 /// audio or acquire a draw target.
 /// An unwind destroys the composite, as for other native host operations.
 pub trait SceneHostUpdate: SceneHost {
     type Request;
     type Reply;
-    fn update(&mut self, world: &NativeWorld, request: Self::Request) -> Self::Reply;
+    fn update(&mut self, world: &NativeWorld, request: &mut Self::Request) -> Self::Reply;
 }
 
 /// Explicit scene host + native simulation and backend-driven audio. Each accepted
@@ -233,12 +233,12 @@ where
     pub fn host(&self) -> Result<&H, H::Error> {
         Ok(&self.core.ready()?.host.0)
     }
-    pub fn update_host(&mut self, request: H::Request) -> Result<H::Reply, H::Error>
+    pub fn update_host(&mut self, mut request: H::Request) -> Result<H::Reply, H::Error>
     where
         H: SceneHostUpdate,
     {
         let mut prepared = self.prepare_host_update()?;
-        prepared.update(request).map_err(|(error, _request)| error)
+        prepared.update(&mut request)
     }
     /// Establish readiness before an external publication lock. No request is
     /// consumed here, and a failed readiness check preserves every live owner.

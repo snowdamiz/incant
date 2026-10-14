@@ -17,8 +17,8 @@ use incant_runtime::{NativeWorld, RuntimeError, StableId};
 pub use recorded_ui::{RecordedUiError, tick_recorded_ui, validate_ui_recording};
 use std::{convert::Infallible, path::PathBuf, sync::Arc};
 pub use texture_refresh::{
-    PreparedHostTextureRefresh, TexturePublication, TextureRefreshConsumer,
-    TextureRefreshOperation, TextureRefreshReply,
+    PreparedHostTextureRefresh, TextureRefreshConsumer, TextureRefreshOperation,
+    TextureRefreshReply,
 };
 use thiserror::Error;
 pub use ui::UiSettings;
