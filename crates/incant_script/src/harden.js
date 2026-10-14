@@ -33,11 +33,10 @@ export const persistentShape = (() => {
     const Invalid = TypeError;
     const descriptor = Object.getOwnPropertyDescriptor;
     const prototype = Object.getPrototypeOf;
-    const define = Object.defineProperty;
+    const setPrototype = Object.setPrototypeOf;
     const isArray = Array.isArray;
     const objectPrototype = Object.prototype;
     const arrayPrototype = Array.prototype;
-    const append = (array, index, value) => define(array, index, { value, enumerable: true });
     return (value, remaining) => {
         const array = isArray(value);
         const proto = prototype(value);
@@ -46,7 +45,10 @@ export const persistentShape = (() => {
         const keys = ownKeys(value);
         if (keys.length > remaining + (array ? 1 : 0))
             throw new Invalid('persistent state node limit');
-        const result = [];
+        // Only native parsing sees these temporary rows. A null prototype makes
+        // indexed writes immune to guest-installed Array.prototype setters.
+        // Public state.get observations still use their original frozen shapes.
+        const result = setPrototype([], null);
         if (array) {
             const length = descriptor(value, 'length');
             if (!length || !hasOwn(length, 'value') || keys.length !== length.value + 1)
@@ -55,7 +57,7 @@ export const persistentShape = (() => {
                 const d = descriptor(value, text(i));
                 if (!d || !hasOwn(d, 'value') || !d.enumerable)
                     throw new Invalid('persistent state accessor/sparse array');
-                append(result, i, d.value);
+                result[i] = d.value;
             }
         } else {
             for (let i = 0; i < keys.length; i++) {
@@ -63,10 +65,8 @@ export const persistentShape = (() => {
                 const d = descriptor(value, key);
                 if (typeof key !== 'string' || !d || !hasOwn(d, 'value') || !d.enumerable)
                     throw new Invalid('persistent state requires enumerable string data properties');
-                const row = [];
-                append(row, 0, key);
-                append(row, 1, d.value);
-                append(result, i, row);
+                // Literal elements define own slots without inherited setters.
+                result[i] = [key, d.value];
             }
         }
         return result;

@@ -246,4 +246,6 @@ impl Drop for TickState {
 }
 
 #[cfg(all(test, feature = "compiler"))]
+mod inspector_tests;
+#[cfg(all(test, feature = "compiler"))]
 mod tests;
