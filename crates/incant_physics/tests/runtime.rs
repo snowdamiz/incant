@@ -103,7 +103,9 @@ fn gravity_contact_sleep_and_document_echo_preserve_exact_solver_state() {
         synced.step(1. / 60.).unwrap();
         assert_eq!(direct.states(), synced.states());
         echo(&mut project, &scene, &synced);
-        synced.sync(PreparedPhysics::new(&project).unwrap());
+        synced
+            .sync(PreparedPhysics::new(&project).unwrap())
+            .unwrap();
     }
     let state = &synced.states()[&body];
     assert!((state.translation[1] - 0.5).abs() < 0.02, "{state:?}");

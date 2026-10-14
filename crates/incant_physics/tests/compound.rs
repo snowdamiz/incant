@@ -173,7 +173,9 @@ fn dynamic_compound_contacts_and_reordering_preserve_solver_state() {
             .as_array_mut()
             .unwrap()
             .reverse();
-        reordered.sync(PreparedPhysics::new(&project).unwrap());
+        reordered
+            .sync(PreparedPhysics::new(&project).unwrap())
+            .unwrap();
     }
     let state = &reordered.states()[&eid];
     assert!((state.translation[1] - 0.3).abs() < 0.02, "{state:?}");
