@@ -15,8 +15,8 @@
   },
   "verifier": {
     "path": "docs/spikes/evidence/profile-distributions-main257/verify.py",
-    "bytes": 6076,
-    "sha256": "db79d581125dbb39fefeed845cfd828a06a75f96c943a14c95904c61b2ed657f"
+    "bytes": 6727,
+    "sha256": "ad3af099ae7ac6d8f6426a10425003b5ab0d56d19868a77a7fa4ebb809801a39"
   },
   "reviews": [
     {
@@ -66,5 +66,10 @@
       "bytes": 1700,
       "sha256": "29d297adb68a30532ff07b8739bf54990036f66ce89273b11d4bc6fbc8b828ed"
     }
-  ]
+  ],
+  "cli_child_binding": {
+    "path": "docs/spikes/evidence/profile-distributions-main257/cli-child-binding.json",
+    "bytes": 918,
+    "sha256": "4544e819dc03a56f37768cdfaf7be2d05b850bae534f04c46fe850a0c4054c46"
+  }
 }

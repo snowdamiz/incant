@@ -352,7 +352,8 @@ performance gate is claimed. [Scope and evidence](docs/spikes/wasm-c-parallel.md
 
 ## Development and release overview — 2026-10-13
 
-The reviewed main254 baseline includes the retained mobile Rust host, supported
+The reviewed main257 baseline includes Apple/Android host bindings, desktop
+haptics, the retained mobile Rust host, supported
 persisted native game checkpoints, and the opt-in cooked renderer families and
 Vulkan cache lifecycle, dynamic resolution, numerical retained motion, CPU/GPU
 profiling scopes and joined inert physics owner boundaries. Each lane retains its own
@@ -378,7 +379,7 @@ conformance hit its configured deadline. Main243 contains the reviewed macOS
 timeout repair. Checkpoint28 then froze main246 (`42e13e75`) at `be3422f8` on
 PR232 and finished with 13 required successes, nine failures and one skipped
 comparison. The reviewed isolated-lock and ordinary-owner Default repairs are
-merged in PR248. Checkpoint29 finished unpromoted with 22 required successes and the original Linux source-store lock failure. Checkpoint30 now freezes reviewed main252 (`c1988638`) at candidate `721eddac`, including the reviewed source-lock isolation from PR251, on the same PR232. All 23 exact-head required contexts must actually succeed; no previous success substitutes for them. Release remains `2a9d72ea`.
+merged in PR248. Checkpoint29 finished unpromoted with 22 required successes and the original Linux source-store lock failure. Checkpoint30 promoted exact reviewed main252 (`c1988638`, tree `393eb78c`) through PR232 after all 23 exact-head required contexts and eight workflows succeeded. Release is `71bdd2e7`; its parents, trailer and exact tested tree are verified. Later main253–257 work is outside that release, and no checkpoint is currently active.
 PR242 merged the private primitive-world composition; PR244/245 added native
 capture and outer in-memory checkpoints, PR246 added opaque ECS/world ownership,
 and PR247 added headless native session checkpoints. PR249 adds opt-in in-memory

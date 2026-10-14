@@ -57,6 +57,14 @@ for b in result['binaries']:
  else:raise AssertionError(stage)
  if a.local_binaries:
   path=Path(b['path']);assert h(path.read_bytes())==b['sha256'] and path.stat().st_size==b['bytes'] and path.stat().st_mode&0o111
+binding=json.loads(checked(M['cli_child_binding']))
+assert h(raw[binding['runner_record']])==binding['runner_sha256']
+cli_binary=next(b for b in result['binaries'] if b['stage']=='player' and not b['artifact']['profile']['test'])
+assert binding['target_path']==cli_binary['artifact']['executable'] and binding['copied_binary_path']==cli_binary['path'] and binding['expected_sha256']==cli_binary['sha256']
+runner_lines=raw['run.py'].decode().splitlines()
+assert len(binding['assertion_lines'])==2
+for n in binding['assertion_lines']:
+ assert runner_lines[n-1].strip()=="if cli:assert h(Path(cli['artifact']['executable']).read_bytes())==cli['sha256']"
 cli=read('player-report.json');assert cli['profile']['version']==2
 assert cli['profile']['frame_wall']['attempted_frames']==cli['profile']['frame_wall']['successful_frames']==3
 lines=[line.split(b'=',1)[1]+b'\n' for c in result['commands'] if c['name'].startswith('test-player') for line in raw[Path(c['log']).name].splitlines() if line.startswith(b'CLI_PROFILE_REPORT=')];assert lines==[raw['player-report.json']]

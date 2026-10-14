@@ -15,8 +15,11 @@ passed. The eight Mac runner policy tests passed, and the runner parsed the
 current actual CLI report. Three strict lint scopes, summary-enabled wasm
 compilation, the empty default normal-dependency graph, formatting and conventions
 passed. Eleven executables were copied immediately. The CLI test uses its compiled
-child path; that exact child's bytes were checked against the immediate copy
-before and after execution, before any subsequent build could replace the file.
+child path. The retained runner asserted its target bytes equal the immediate
+copy before and after each player harness, before subsequent builds. The expected
+hash/path and successful runner result are retained; individual observed
+before/after values and child-open-time hashes were not separately serialized.
+The explicit child-binding receipt records this evidence boundary.
 
 This is CI-profile correctness evidence on the Mac, with one entity and three
 CLI ticks. It is not a shipping benchmark, 10,000-entity scene, performance-gate
