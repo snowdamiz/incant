@@ -142,6 +142,7 @@ pub struct ScriptHost {
     persistent_opt_in: Vec<bool>,
     persistent: std::rc::Rc<std::cell::RefCell<persistence::Store>>,
     project: Option<bindings::BoundProject>,
+    chunk_ids: loan::IdCache,
     context: Context,
     _runtime: Runtime,
     _compiled: CompiledScript,
@@ -236,6 +237,7 @@ impl ScriptHost {
             persistent_opt_in,
             persistent: Default::default(),
             project,
+            chunk_ids: Default::default(),
             context,
             _runtime: runtime,
             _compiled: compiled,
@@ -453,7 +455,7 @@ impl ScriptHost {
                         )
                     })?;
                     let mut loan = loan::Loan::new(columns)?;
-                    let chunks = match loan.expose(&ctx) {
+                    let chunks = match loan.expose(&ctx, &freeze, &mut self.chunk_ids) {
                         Ok(chunks) => chunks,
                         Err(error) => {
                             // Prototype setters can run while metadata is installed.
@@ -650,6 +652,9 @@ fn bytecode_context(runtime: &Runtime, allow_source: bool) -> Result<Context, Sc
 mod structural_tests;
 #[cfg(all(test, feature = "compiler"))]
 mod tests;
+
+#[cfg(all(test, feature = "compiler"))]
+mod loan_id_tests;
 
 #[cfg(all(test, feature = "compiler"))]
 mod input_tests;

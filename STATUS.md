@@ -1,5 +1,14 @@
 # Implementation status
 
+## Bulk-query row-label cache — CPU correctness verified
+
+Immutable ordered row IDs now reuse frozen metadata arrays while numeric views
+remain fresh and revocable. Structural edits and retained history have explicit
+regressions; all 150 script library/project cases and strict all-target Clippy
+pass in each numerical mode. Current-main integration and matched shipping
+timing remain separate; no performance gate is claimed.
+[Scope and evidence](docs/spikes/script-chunk-id-cache.md).
+
 ## Original Core Mac shipping CPU reference — scoped evidence
 
 Three actual M5 Pro shipping runs complete the deterministic 46-entity Core win
