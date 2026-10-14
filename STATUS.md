@@ -1,5 +1,15 @@
 # Implementation status
 
+## Matched Wasm/TypeScript workload — bounded historical shipping evidence
+
+Two shipping backends completed the same 1,024-entity/3,600-tick workload with
+all-row functional parity and exact silent PCM. Across three quiet pairs,
+TypeScript script p95 was 0.140001–0.160000 ms and Wasm static-module p95 was
+0.080001–0.090000 ms. These are descriptive different-phase measurements on
+source97834, not a Core10k, startup, FPS or phase gate. Independent raw evidence
+review and current helper Python/TypeScript checks pass; serial intake follows
+the reviewed synchronization test repair. [Evidence](docs/spikes/wasm-typescript-cost.md).
+
 ## Director routing clarification — editor UI only
 
 Claude Opus 5.5 with explicitly verified Max is the default for editor UI design,

@@ -203,3 +203,23 @@ by the helper corrections. It verified all 1,024 IDs and transforms in both
 projects, the sole intended attachment/program delta, 11 retained input files,
 and public transaction undo/redo/reopen. No native guest tick or performance
 sample was executed during preparation.
+
+## Current-main intake
+
+The complete producer packet and measurement/tooling changes were independently
+accepted after read-only external and immutable-Git replay. The retained
+[review](evidence/wasm-typescript-cost-intake/review.json) verifies 617 records,
+297 payloads, eight functional runs and all six raw p95 reports. An independent
+archive replay also binds the quiet plan, helper hashes and actual player paths.
+The earlier producer wording about pending final review is historical.
+
+Current-main curation preserves all 20 producer paths before this appended
+closeout and changes no engine, SDK, vendor, lock, dependency or workflow. The
+21 focused Python controls and strict TypeScript check pass on the composed
+checkout. The measured players remain built from `97834ab3`; main now contains
+later Core/numeric-loan work, so the old measurements are not current-main timing.
+No new compiler, player or measurement was run for this intake.
+
+```sh
+python3 docs/spikes/evidence/wasm-typescript-cost-intake/verify.py --external --git-source
+```
