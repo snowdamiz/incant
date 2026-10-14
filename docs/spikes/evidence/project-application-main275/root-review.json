@@ -1,0 +1,32 @@
+{
+  "reviewer": "root",
+  "source": "df4850c4d031db808c48020960fde6a259074eb9",
+  "status": "accepted-for-fast-gate-publication",
+  "manifest_sha256": "910edf90636718d61add80bdb46b3a00970a9461d73b7e16edf2cbec059fa09e",
+  "replay": {
+    "session": 86323,
+    "terminal_exit": 0,
+    "terminal_chunk": "52b4dc",
+    "current_records": 225,
+    "current_checks": 19,
+    "current_initial_rust_cases": 150,
+    "overlapping_successor_cases": 39,
+    "bridge_cases": 189,
+    "current_binaries_verified": 37,
+    "producer_records": 517,
+    "producer_binaries_verified": 80,
+    "original_raw_files_verified": true,
+    "current_inputs_verified": true
+  },
+  "review": [
+    "Previous source and prefab reviews remain applicable; final commit changes evidence and status only",
+    "Read-only verifier and original producer materialization inspected and executed independently",
+    "No production changes in test isolation successor; exact original protocol bodies verified",
+    "Report distinguishes initial/successor source generations, retained supervisor failure, and actual hosted Linux/Windows failures"
+  ],
+  "limits": [
+    "No UI appearance or shipping performance claim",
+    "Hosted test repairs still require checkpoint validation",
+    "Release and phase gates remain open"
+  ]
+}

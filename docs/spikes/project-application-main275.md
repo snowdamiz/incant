@@ -72,7 +72,7 @@ All five successor commands passed: the 29 library and ten prefab cases with
 normal parent-harness parallelism, strict all-target command lint and static
 checks. Two further binaries were copied immediately (37 current copies total).
 All supervisors and descendants are reaped; the target is released. Final
-independent packet review remains pending.
+independent packet review is accepted in [the retained root receipt](evidence/project-application-main275/root-review.json).
 The 29 unit and ten prefab cases overlap the original suite; they are not 39 new
 behaviors. Prior bundle, headless and editor executions remain tied to `fad9a71f`,
 whose production implementation is unchanged by this test-only successor.
@@ -94,5 +94,5 @@ python3 docs/spikes/evidence/project-application-main275/verify.py --verify-only
 Add `--originals --local-binaries` on the evidence host to rehash retained raw
 files and immediate copies. Neither verifier compiles or executes native tests.
 No GPU, rendered editor appearance, shipping performance, phase completion or
-release promotion is claimed. Final independent composition review and the
-exact-head required fast check precede publication.
+release promotion is claimed. Final independent composition review is accepted; the exact-head required fast
+check must succeed before merge. Hosted repair execution remains pending.

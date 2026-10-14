@@ -12,7 +12,8 @@ prefab journal owner before byte snapshots, preserving every production lock and
 rollback assertion. Checkpoint34's actual Linux WouldBlock and Windows error33
 failures remain retained; future hosted repair validation is pending. One local
 supervisor schema-inventory error is retained, with corrected exact comparison.
-Final integration review and the required fast gate precede publication. No new
+Final independent integration review is accepted; exact-head required fast CI
+precedes merge. No new
 editor UI controls, older-format conversion, GPU, performance or phase claim.
 [Current composition and evidence](docs/spikes/project-application-main275.md).
 
