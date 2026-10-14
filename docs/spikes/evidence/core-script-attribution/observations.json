@@ -1,0 +1,218 @@
+{
+  "all_frames": {
+    "callback_nested_totals_ns": {
+      "0": 461903727,
+      "1": 1971581080
+    },
+    "count": 2156,
+    "numeric_nested_totals_ns": [
+      422001762,
+      883451,
+      116786971
+    ],
+    "region_totals_ns": [
+      1288879,
+      22158708,
+      65694234,
+      24338607,
+      7294577,
+      26114132,
+      11246002,
+      2435773244,
+      331456,
+      422102657,
+      222403,
+      130271745,
+      25137703,
+      1234121
+    ],
+    "residual_totals_ns": {
+      "callback_region": 2288437,
+      "scope_cleanup": 12601323,
+      "trace_minus_whole": 703584,
+      "validation": 100895
+    },
+    "trace_total_ns": 3173208468,
+    "whole_tick_total_ns": 3172504884
+  },
+  "diagnostic_only": true,
+  "eligible_for_performance_gate": false,
+  "format": "incant-script-attribution-results",
+  "limits": [
+    "Modulo correlation is not a measured findPath duration or exclusive navigation attribution",
+    "Nested durations remain inside their major region; no marginal quantile subtraction",
+    "All 2156 frames, including startup and six large publications, remain included",
+    "One instrumented process supplies observations, not a normal shipping performance verdict"
+  ],
+  "numeric_regions": [
+    "prepare",
+    "change_ticks",
+    "publish_globals"
+  ],
+  "regions": [
+    "initial_checks",
+    "snapshots",
+    "group_setup",
+    "api_setup",
+    "capabilities",
+    "undo_capture",
+    "view_exposure",
+    "callbacks",
+    "revoke_checks",
+    "validation",
+    "transaction_stage",
+    "scope_cleanup",
+    "publication",
+    "heap_observation"
+  ],
+  "same_frame_tail": {
+    "callback_nested_totals_ns": {
+      "0": 104278499,
+      "1": 102234001
+    },
+    "count": 108,
+    "numeric_nested_totals_ns": [
+      21106665,
+      45458,
+      5880919
+    ],
+    "region_totals_ns": [
+      62831,
+      1309871,
+      3771173,
+      1240705,
+      357833,
+      1361632,
+      1184747,
+      206630665,
+      16292,
+      21112001,
+      11793,
+      6594793,
+      20613744,
+      43544
+    ],
+    "residual_totals_ns": {
+      "callback_region": 118165,
+      "scope_cleanup": 668416,
+      "trace_minus_whole": 37167,
+      "validation": 5336
+    },
+    "trace_total_ns": 264311624,
+    "whole_tick_total_ns": 264274457
+  },
+  "six_largest_tail_publications": [
+    {
+      "callback_ns": [
+        1447917,
+        4508083
+      ],
+      "frame": 1,
+      "publication_ns": 3409125,
+      "whole_tick_ns": 11091541
+    },
+    {
+      "callback_ns": [
+        141708,
+        924292
+      ],
+      "frame": 508,
+      "publication_ns": 3312542,
+      "whole_tick_ns": 4705000
+    },
+    {
+      "callback_ns": [
+        200917,
+        965291
+      ],
+      "frame": 2066,
+      "publication_ns": 3192208,
+      "whole_tick_ns": 4688292
+    },
+    {
+      "callback_ns": [
+        205792,
+        897875
+      ],
+      "frame": 1842,
+      "publication_ns": 3189750,
+      "whole_tick_ns": 4627750
+    },
+    {
+      "callback_ns": [
+        185541,
+        905917
+      ],
+      "frame": 127,
+      "publication_ns": 3171042,
+      "whole_tick_ns": 4592125
+    },
+    {
+      "callback_ns": [
+        210291,
+        932667
+      ],
+      "frame": 1266,
+      "publication_ns": 3159292,
+      "whole_tick_ns": 4650250
+    }
+  ],
+  "six_publications_total_ns": 19433959,
+  "sources": [
+    {
+      "slot": 0,
+      "source": [
+        1,
+        102,
+        114,
+        192,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "slot": 1,
+      "source": [
+        1,
+        102,
+        114,
+        192,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        2
+      ]
+    }
+  ],
+  "tail_on_authored_refresh_phases": 102,
+  "tail_tick_modulo_15_counts": {
+    "1": 37,
+    "11": 1,
+    "12": 1,
+    "13": 1,
+    "2": 47,
+    "3": 18,
+    "4": 1,
+    "6": 1,
+    "7": 1
+  },
+  "version": 1
+}

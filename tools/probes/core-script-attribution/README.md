@@ -1,9 +1,11 @@
 # Private correlated ScriptTick diagnostic
 
-This is a source-only private adapter for the reviewed default-off attribution
-feature. No private shipping build, full-Core diagnostic player or timing run has
-been authorized or executed as part of this source preparation. It changes no
-public exporter or ordinary v3 measurement consumer.
+This private adapter serves the reviewed default-off attribution feature. The
+initial source-only proposal was later granted one fresh build and separate
+functional/diagnostic children; their complete results and preserved first build
+failure are in `docs/spikes/core-script-attribution.md`. It changes no public
+exporter or ordinary v3 measurement consumer. Those executions do not authorize
+another run or establish a performance improvement.
 
 `build.py PLAN OUTPUT SCRATCH_PARENT` admits only the original fast4,
 `project,render-input,profile` graph plus `diagnostic-script-phases` on the exact
@@ -14,7 +16,7 @@ Actual codegen must remain Rust 1.99 arm64, opt3/fat-LTO/abort/one CGU and packe
 symbols, with no source compiler, checkpoints or SIMD8 in the runtime. A fresh,
 create-only owned temporary target is removed after its outputs are copied. The
 builder does not launch a player. Expected scratch use is about the prior 3.24 GiB;
-actual available space must be reviewed before a future build.
+actual available space must be reviewed before every separately granted build.
 
 The host-owned plan binds the clean source commit/inventory, toolchain, original
 74 authored files, baseline exporter receipt/graph/producer, functional report,
@@ -66,7 +68,7 @@ stay included. No 2 ms, 5%, speedup, gate or distribution approval is emitted.
 `test_protocol.py` contains data-only correspondence/refusal controls for the
 collector, exact feature admission and complete input inventories. The original
 four controls passed before adding the final Node/inventory binding; final
-control outcomes are recorded with the external source freeze.
+eight final control outcomes are recorded with the external source freeze.
 The Rust observer's earlier focused qualification is separate; see
 `docs/spikes/core-script-attribution.md` and its external receipt. The normal
 shipping 2 ms failures remain unchanged.

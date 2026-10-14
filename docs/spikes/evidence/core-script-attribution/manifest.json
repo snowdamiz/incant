@@ -1,0 +1,260 @@
+{
+  "base_main281": "dfac86cb17e9a1dd71d63207d779b3836e7ad6ae",
+  "baseline_logical_sha256": "37ccafc52a22a341c7776961e5171f48c988638224445395fe94db55da2f4279",
+  "baseline_pcm_sha256": "ccabf2c68b6388ac554ac3efb5609ddf6b4a45d1a3f316891d5f344094e99ee3",
+  "diagnostic_only": true,
+  "eligible_for_distribution": false,
+  "eligible_for_performance_gate": false,
+  "expected_sources": [
+    [
+      1,
+      102,
+      114,
+      192,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1
+    ],
+    [
+      1,
+      102,
+      114,
+      192,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      2
+    ]
+  ],
+  "external_files": {
+    "adapter-controls-003/result.json": {
+      "bytes": 583,
+      "sha256": "2ab1df01cdcf4a2b921e3ba6127a6a7c6cfc1fd6c5f983c69090f807f814839b"
+    },
+    "adapter-controls-003/stderr.log": {
+      "bytes": 1324,
+      "sha256": "ef10cb17ff6c1d397386d4de10dc8cbad4342756c726df18d98d5bbed8d1a458"
+    },
+    "adapter-controls-003/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "adapter-source-002/freeze.json": {
+      "bytes": 3430,
+      "sha256": "032403b9d7961adde2ca6085acc8efb5e6387fde1820e4c679430d2c68d0b7ce"
+    },
+    "adapter-source-002/proposed-plan.json": {
+      "bytes": 6793,
+      "sha256": "73da32bfca8681556bed2ba0f94fb96d289304db25197444b71d4e99e12a694e"
+    },
+    "adapter-source-003/freeze.json": {
+      "bytes": 3659,
+      "sha256": "a31e72e0417bb1d9a78cb4937a99b57f66bb7822b140038ed6d496f989f4cc68"
+    },
+    "adapter-source-003/proposed-plan.json": {
+      "bytes": 7170,
+      "sha256": "c5d0d013b1bf5d22e45e78a1a7e7bd89198e4fd4a35c29cf6694ada3694e367d"
+    },
+    "adapter-source-003/source-manifest.json": {
+      "bytes": 550361,
+      "sha256": "795db74787f54bcf18321700661df8a393c98a77498a01d105ff1b17cf45fab1"
+    },
+    "private-build-001/attempt.json": {
+      "bytes": 563,
+      "sha256": "61d33b36f7ff0d78668bac6ecaba4a461b9ee1a88f25b7ef6ef1476bce5cfecf"
+    },
+    "private-build-002-audit.json": {
+      "bytes": 10942,
+      "sha256": "c088502ebeb7354b399a8aa8695948ef12b9a3d5caf961d7eab1dc25d434a40d"
+    },
+    "private-build-002/diagnostic-build.json": {
+      "bytes": 14912,
+      "sha256": "b83b86be37699b987004cd935a2c9dc0c52ebbb34511ff0c16dec2bcf7c9c8fb"
+    },
+    "private-build-supervision-001/result.json": {
+      "bytes": 1321,
+      "sha256": "0b8f03cf941b2d406687a681f1a9e9095ea46dbe770b92f8b91fa5d2f3bf9a89"
+    },
+    "private-build-supervision-001/stderr.log": {
+      "bytes": 1275,
+      "sha256": "3752366c97486424241b3c06d6347969832306adc4115fab9beac6f1cb374eca"
+    },
+    "private-build-supervision-001/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "private-build-supervision-002/result.json": {
+      "bytes": 1323,
+      "sha256": "b8c73f48146c4b6c4a4653625e682f80da2870ecc1db984ef0fc5aed98c3861b"
+    },
+    "private-build-supervision-002/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "private-build-supervision-002/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "private-diagnostic-001/attribution.json": {
+      "bytes": 251744,
+      "sha256": "4a7a9befd7b9900bb38d46314f02dd68442af872354c53df00648fd6e523c396"
+    },
+    "private-diagnostic-001/input.json": {
+      "bytes": 27753,
+      "sha256": "4fbfffad568d1b7b8eae3b7b9041579fce6f0e8e67c83a66f76c9f78a1c5fcbf"
+    },
+    "private-diagnostic-001/observe.json": {
+      "bytes": 2893,
+      "sha256": "36915362c461c0772414c2b97aa80d522b6ada851e94e0ca718057d700e1f89b"
+    },
+    "private-diagnostic-001/result.json": {
+      "bytes": 2765,
+      "sha256": "a84f486caa64d98a37cee2e5a1e0c35facf1c1df8a288f06ea8a4a275f6649ae"
+    },
+    "private-diagnostic-001/stdout.json": {
+      "bytes": 1788250,
+      "sha256": "0ed06164a449ea09e6d759925688c9c1c384ce3086064c93cfcf46838aa6fa4e"
+    },
+    "private-diagnostic-supervision-001/result.json": {
+      "bytes": 1846,
+      "sha256": "d2ba1a363f1cc33cc6a4e2ea7c78c35353b5afae637ffd42221637ec1d52b36d"
+    },
+    "private-functional-001/input.json": {
+      "bytes": 27753,
+      "sha256": "4fbfffad568d1b7b8eae3b7b9041579fce6f0e8e67c83a66f76c9f78a1c5fcbf"
+    },
+    "private-functional-001/observe.json": {
+      "bytes": 2893,
+      "sha256": "36915362c461c0772414c2b97aa80d522b6ada851e94e0ca718057d700e1f89b"
+    },
+    "private-functional-001/result.json": {
+      "bytes": 2736,
+      "sha256": "33ad24307708470f6b7e55918958f0a8a7a24f1cef4b1c24423360ac6158c574"
+    },
+    "private-functional-001/stdout.json": {
+      "bytes": 8455,
+      "sha256": "37ccafc52a22a341c7776961e5171f48c988638224445395fe94db55da2f4279"
+    },
+    "private-functional-supervision-001/result.json": {
+      "bytes": 1275,
+      "sha256": "12a868e0ec5342150747270306176ee55f39d48820ea80bf1a1ac14266b4b876"
+    },
+    "qualification-final.json": {
+      "bytes": 52437,
+      "sha256": "19bc1d7649a8291f76d23b7cf91b645e55addf02364a47a400c70dcb00b70162"
+    },
+    "source-004/freeze.json": {
+      "bytes": 3714,
+      "sha256": "72e706b1037316c23497f114d82794baf70510c4a637c296f78ce7c21a1b498c"
+    }
+  },
+  "external_root": "/Users/andreyyurlov/.codex/incant-evidence/core-script-attribution-main281-001",
+  "format": "incant-script-attribution-evidence",
+  "limits": [
+    "Raw arrays, PCM and binaries remain external; this compact packet is not a self-contained raw archive",
+    "Replay validates retained data and optionally build payload hashes, never launches a native player or build",
+    "Quiet-lane status is parent attestation; machine/load snapshots do not prove all user apps idle",
+    "Historical proposal authorization/executed fields are intentionally unchanged; actual stages are separately authorized in supervision receipts",
+    "No optimizer is implemented and no diagnostic result replaces normal shipping gates"
+  ],
+  "local_files": {
+    "observations.json": {
+      "bytes": 4030,
+      "sha256": "24294aa6aa9c60e8ccb6a683f028f7b21d44aaf7550add25de68ef761a61bec6"
+    },
+    "verify.py": {
+      "bytes": 5467,
+      "sha256": "4be9aad70dd774ce085fba4d43a668c48928eb816b993cbd14c4345fb8194e75"
+    }
+  },
+  "native_execution": {
+    "all_terminal_reaped": true,
+    "diagnostic_children": 1,
+    "fresh_builds_completed": 1,
+    "functional_children": 1,
+    "precompile_failures_retained": 1,
+    "retries_per_approved_stage": 0,
+    "ticks_each": 2156
+  },
+  "source_commit": "3ed059957b1cb9bcd407a488e8394bda4af8083e",
+  "source_files": {
+    "tools/export_native.py": {
+      "bytes": 16861,
+      "sha256": "b29b2c9befa358bbd1cf31d76a61ea945f30ec0b886a4a01a51c76897831ff01"
+    },
+    "tools/mac_performance.py": {
+      "bytes": 21261,
+      "sha256": "64f8256fecfc01bcbc9bd97fcab2c64d9578944a1a6032ccacb9ef547679322b"
+    },
+    "tools/native_fonts.py": {
+      "bytes": 1936,
+      "sha256": "36ec65e17f4fe5be7614b902d19b16143b7c3c093119b8c35fd794c23fe50ebc"
+    },
+    "tools/native_package.py": {
+      "bytes": 8385,
+      "sha256": "0362128f683f835e31674ad2f024f54f35d7401ebdb6eb0b51d791e14578413b"
+    },
+    "tools/native_process.py": {
+      "bytes": 19307,
+      "sha256": "58dd2a8231d7f9d1e42070fc85425461e06a43f279fa5e7f8e57b4a40c3a3aa4"
+    },
+    "tools/native_profiling.py": {
+      "bytes": 5159,
+      "sha256": "04b455e44a4252e8d7e12fc15b87e4b5a297950d643a0eac03d879b7a46f65a5"
+    },
+    "tools/native_wasm.py": {
+      "bytes": 3437,
+      "sha256": "2a8c07efe96e52d0dd1b2e61dcaca3ba4926e10ed88cecb738b0711def7fbe6a"
+    },
+    "tools/physics_export.py": {
+      "bytes": 1336,
+      "sha256": "f7cd497ba58f0b5fba22fd1115829615238f27f51939ae7c17f9637c152c3000"
+    },
+    "tools/physics_features.py": {
+      "bytes": 16334,
+      "sha256": "a7f686eda85340cf48421478b7cdc193204518af307069922a179104d7046523"
+    },
+    "tools/probes/core-script-attribution/analyze.py": {
+      "bytes": 8141,
+      "sha256": "b7321b742db065ca7130f6f539fb579a2070b498deac92bdc525392ecdbb465f"
+    },
+    "tools/probes/core-script-attribution/common.py": {
+      "bytes": 8434,
+      "sha256": "8d1e752b4838b7a676172bbb21373fe08b89eeda6dfe8fb85c35a35468fef52a"
+    },
+    "tools/shipping.py": {
+      "bytes": 13796,
+      "sha256": "38346ddb4c4a94683d94509be3809eb39b279fe232bb129b55a4beb637c2a6e7"
+    },
+    "tools/shipping_symbols.py": {
+      "bytes": 10318,
+      "sha256": "de7d4b0c5523a7b2d281ce8713acb899997726c1144199e7ea8d7bd8ea3dc856"
+    },
+    "tools/wasm2c.py": {
+      "bytes": 6841,
+      "sha256": "82df8e43c53be9d6640005ff1c058d64266b7447ceb902a6faddc554d07a2eff"
+    },
+    "tools/wasm_abi.py": {
+      "bytes": 951,
+      "sha256": "2ff5f456d53e3a1ea240a13b0ae7ab0b0c4b5b6e5b7d53d3101c75e4c6db2f0b"
+    }
+  },
+  "version": 1
+}
