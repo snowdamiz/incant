@@ -153,7 +153,12 @@ fn a_changed_native_binding_after_staging_refuses_before_consumer_publication() 
             prepared(&input, root.path(), &[next]),
         )
         .unwrap();
-    let mut declaration = world.spatial_view().unwrap().nodes()[0]
+    let mut declaration = world
+        .spatial_view()
+        .unwrap()
+        .nodes()
+        .find(|node| node.id == id(1))
+        .unwrap()
         .declaration
         .unwrap()
         .clone();

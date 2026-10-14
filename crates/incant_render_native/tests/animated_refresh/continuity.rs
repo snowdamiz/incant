@@ -169,7 +169,12 @@ fn compatible_refresh_keeps_crossfade_state_and_original_authority_through_struc
         Err(NativeRenderError::Asset { .. })
     ));
     fs::write(old_cache, saved).unwrap();
-    let mut declaration = world.spatial_view().unwrap().nodes()[0]
+    let mut declaration = world
+        .spatial_view()
+        .unwrap()
+        .nodes()
+        .find(|node| node.id == id(1))
+        .unwrap()
         .declaration
         .unwrap()
         .clone();
