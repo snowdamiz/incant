@@ -37,7 +37,7 @@ class NavigationProtocol(unittest.TestCase):
 
     def test_missing_invalid_or_uncontained_navigation_is_refused(self):
         original, sources = navigation_report()
-        for key, value in [('calls', [1, 2, 0]), ('calls', [1, 1, 64]),
+        for key, value in [('calls', [1, 2, 0]), ('calls', [1, 1, 65]),
                            ('failed', [3, 0, 0]), ('ns', [30, 20, 20]),
                            ('ns', [51, 10, 10]), ('calls', [0, 0, 0]),
                            ('ns', [True, 0, 0]), ('failed', [0, 0, 65536])]:
@@ -58,6 +58,14 @@ class NavigationProtocol(unittest.TestCase):
         d['rows'][0]['whole_tick_ns'] = 2_400_000
         d['rows'][0]['source_ns'] = [2_400_000]
         self.assertTrue(analyze_navigation(d)['stop_hypothesis'])
+
+    def test_final_start_before_attempt65_refusal_is_still_observable(self):
+        raw, sources = navigation_report()
+        row = raw['profile']['script_phase_diagnostic']['rows'][0]
+        row['navigation'] = {'ns': [30, 10, 10], 'calls': [1, 1, 64], 'failed': [0, 0, 0]}
+        analyze(raw, sources, navigation=True)
+        row['navigation']['calls'][2] = 65
+        with self.assertRaises(ValueError): analyze(raw, sources, navigation=True)
 
     def test_zero_repeated_calls_stop_even_if_instrumented_tick_is_fast(self):
         raw, _ = navigation_report()

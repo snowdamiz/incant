@@ -26,7 +26,8 @@ def analyze_navigation(diagnostic):
         failed = vector(nav['failed'], 65535)
         require(all(f <= n for f, n in zip(failed, calls)), 'Failures exceed calls')
         require(all(n != 0 or t == 0 for n, t in zip(calls, ns)), 'Time without calls')
-        require(calls[1] <= calls[0] and calls[2] <= 63*calls[1], 'Lookup/query coverage')
+        # A final start lookup happens before the inner attempt65 refusal.
+        require(calls[1] <= calls[0] and calls[2] <= 64*calls[1], 'Lookup/query coverage')
         require(ns[1]+ns[2] <= ns[0] <= sum(row['source_ns'])
                 and ns[0] <= row['whole_tick_ns'], 'Navigation exceeds enclosing scope')
         for key in totals:

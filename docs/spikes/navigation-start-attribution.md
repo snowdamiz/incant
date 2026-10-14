@@ -40,8 +40,13 @@ or gate result; instrumentation remains in the measurement. Zero repeated calls
 or insufficient hypothetical savings stops this candidate. A plausible result
 only motivates separately reviewed correctness work and matched shipping runs.
 
-Fifteen data-only adapter controls pass, including original schema admission,
+Sixteen data-only adapter controls pass, including original schema admission,
 exact feature additions, actual compiler recipients, same-frame subtraction,
 containment, missing observations and the stop condition. Rust observer controls,
 an actual ScriptHost detour/miss control, feature-off checks and strict lint are
 authored but not yet run. No performance improvement or phase gate is claimed.
+
+Independent review caught an initial analyzer bound that missed the final start
+lookup before the sixty-fifth shortcut attempt refuses. The analyzer now retains
+that legitimate observation; a positive boundary and negative successor control
+cover it. The navigation algorithm and its attempt cap are unchanged.
