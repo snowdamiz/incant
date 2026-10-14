@@ -1,0 +1,91 @@
+{
+ "all_checks_pass": true,
+ "checks": [
+  {
+   "check": "red + clear at equal weight reconstructs (0.5,0,0,0.5)",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "alpha-zero residual is canonical clear with its weight",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "malformed current tap gains no weight and refuses history",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "outside-rect taps excluded; tiny positive in-rect tap kept",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "zero-mass bright tap contributes nothing to history colour",
+   "detail": [
+    0.0,
+    0.0,
+    0.0,
+    0.8
+   ],
+   "ok": true
+  },
+  {
+   "check": "nonfinite stored mass rejects that tap's numerator and weight",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "non-integer age refuses history",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "age >= 8 refuses history",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "invalid evidence origin (native frame, new allocation, cut) refuses history",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "ordinary program stores no no-surface history: retirement is immediate",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "next history numerator after a black start is black (no prior colour stored)",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "area density (2015, 1003) 16->8",
+   "detail": 4.0,
+   "ok": true
+  },
+  {
+   "check": "area density (1003, 2015) 8->12",
+   "detail": 0.4444444444444444,
+   "ok": true
+  },
+  {
+   "check": "area density (1921, 1081) 12->16",
+   "detail": 0.5625,
+   "ok": true
+  },
+  {
+   "check": "8/16 -> 16/16 converts 36 units to 9 then adds the new mass, capped",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "clamp changes history colour without adding mass",
+   "detail": null,
+   "ok": true
+  }
+ ],
+ "scope": "transcription of resolve.wgsl (ordinary) only; owner program unchanged in this partial"
+}
