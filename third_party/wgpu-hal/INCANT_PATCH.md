@@ -16,10 +16,15 @@ The standalone precursor's ten pure collector tests, actual host API compile,
 strict host/HAL lint and feature-off check passed (see
 `docs/spikes/native-presentation-observer.md`). The player integration extends
 Context with a host attempt ID (still <=64 bytes/row) and adds a shutdown-only
-pending scan; those extensions and the player are not yet CPU-qualified. A new
-pure control covers immutable attempt identity and pending delivery states.
+pending scan. At the original integration milestone those extensions and the
+player were not yet CPU-qualified; that historical status is superseded by
+qualified source `8dbc74c4191f1e793e3e593ee68bdae28665e3ae` and the retained
+CPU/build/partial-live packet in `docs/spikes/native-player-presentations.md`.
+The pure control covers immutable attempt identity and pending delivery states.
 
-No actual callback, timestamp, native player, display coverage or performance
-claim follows from CPU qualification. Per-present block allocation/native copying,
+No actual callback or timestamp claim follows from CPU qualification alone.
+The separately retained live attempt delivered partial callbacks before an audio
+failure; full replay/display coverage and performance acceptance remain open.
+Per-present block allocation/native copying,
 Arc and mutex operations have observation overhead. Missing callback, zero,
 invalid, discard, abandoned and overflow states remain separate.
