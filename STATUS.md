@@ -16,6 +16,16 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Private R5 reconstruction candidate — CPU and cooker only
+
+The [scoped R5 candidate](docs/spikes/reconstruction-r5-cpu.md) passed 167 default
+and 182 overlapping cooked/native renderer CPU tests, 34 cooker tests, both strict
+Clippy configurations and wasm compilation. The original fmt failure is retained.
+Its empirical reaction/motion/LOD policies have no R5 GPU or appearance evidence;
+ordinary-UP thin-clear geometry and low-scale fresh reconstruction remain open.
+The R4 rejected visual result is unchanged. No default enablement, publication,
+performance or full-quality acceptance follows.
+
 ## Private R4 reconstruction — numerical qualification, quality still open
 
 The [R4 attachment correction and bounded Metal tests](docs/spikes/reconstruction-r4-numeric-002.md)

@@ -1,0 +1,39 @@
+{
+  "source": "8c39fd6adbf95d470388867de4d305756b05913c",
+  "claude_import": "268f3b57228ab7bef47511103d0c97c2af057d56",
+  "claude_packet": "51deb3848801f46c78ea85ca65fc330c5f60b758",
+  "base": "825ff047284e84252d00f786a7b14cb6ecb44293",
+  "source_freeze_sha256": "d615ab15dfc3ae10ec0bd060b9df2d473854cdae093c98514b28ebee93e37407",
+  "archive_sha256": "d277512ea785533c2b56fb546cb089604c1b93eff1cad30938745711d0d17197",
+  "result": {
+    "records": 58,
+    "payloads": 42,
+    "build_inputs": 2839,
+    "changed_paths": 7,
+    "unchanged_wgsl": 19,
+    "changed_wgsl": 2,
+    "checks": 8,
+    "retained_failed_checks": 1,
+    "cpu": {
+      "default": [
+        167,
+        0,
+        43,
+        0,
+        0
+      ],
+      "cooker": 34,
+      "cooked-native": [
+        182,
+        0,
+        44,
+        0,
+        0
+      ]
+    },
+    "executable_copies": 10,
+    "gpu_executed": false,
+    "appearance": "R4 remains rejected; R5 unassessed",
+    "source": "8c39fd6adbf95d470388867de4d305756b05913c"
+  }
+}
