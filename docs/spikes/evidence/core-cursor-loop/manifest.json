@@ -1,0 +1,155 @@
+{
+  "schema": "incant-core-cursor-loop-evidence-v1",
+  "source_commit": "0978f65418e24f897e2abad726129e3f97951222",
+  "base_commit": "a9017726fc9932d2fe029409db288ce0124c263e",
+  "archive_sha256": "44fcaac7f961641ddea2b4046c161fb78595fd60ea726d32c939bee3fa8e5b62",
+  "records": [
+    {
+      "name": "checks-001/diff.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-cursor-loop-001/checks-001/diff.json",
+      "sha256": "d3846073793ec3ce8f049094fcca4509b78382edc3d8dc00335cbd309a81f850",
+      "bytes": 689
+    },
+    {
+      "name": "checks-001/diff.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-cursor-loop-001/checks-001/diff.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "name": "checks-001/diff.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-cursor-loop-001/checks-001/diff.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "name": "checks-001/inputs.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-cursor-loop-001/checks-001/inputs.json",
+      "sha256": "d96185624209168ef522b8a82ec43884b246320e0a437ee586eaaf8eb21a8cde",
+      "bytes": 1446
+    },
+    {
+      "name": "checks-001/node-version.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-cursor-loop-001/checks-001/node-version.json",
+      "sha256": "99bb00af4709a102e60367e9d45b0878dac96618b1aeba240fc3ad7ff0b084d2",
+      "bytes": 781
+    },
+    {
+      "name": "checks-001/node-version.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-cursor-loop-001/checks-001/node-version.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "name": "checks-001/node-version.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-cursor-loop-001/checks-001/node-version.stdout",
+      "sha256": "33e26f35db6e57ce0c486ddc815fe966867e4f649e418eaf323f75f4720eb8e9",
+      "bytes": 9
+    },
+    {
+      "name": "checks-001/python-helpers.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-cursor-loop-001/checks-001/python-helpers.json",
+      "sha256": "b28cd3b18b71c64d5789b34886393ff635ebcbfc8634812c26904aa063bab519",
+      "bytes": 814
+    },
+    {
+      "name": "checks-001/python-helpers.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-cursor-loop-001/checks-001/python-helpers.stderr",
+      "sha256": "354ebdfa47cc7f7237b943bd500581dd4b80b225e0ccbba2d30f041842b78d7a",
+      "bytes": 1432
+    },
+    {
+      "name": "checks-001/python-helpers.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-cursor-loop-001/checks-001/python-helpers.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "name": "checks-001/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-cursor-loop-001/checks-001/result.json",
+      "sha256": "ca3adbbce3545e7d57f042ceb500cae9f81601cbb3f474451cf664b7977ac70c",
+      "bytes": 4654
+    },
+    {
+      "name": "checks-001/stress.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-cursor-loop-001/checks-001/stress.json",
+      "sha256": "13e1dc4cba3e4a204bd8bf2000c0b0475421bf448545224043990fcd098f6c81",
+      "bytes": 784
+    },
+    {
+      "name": "checks-001/stress.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-cursor-loop-001/checks-001/stress.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "name": "checks-001/stress.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-cursor-loop-001/checks-001/stress.stdout",
+      "sha256": "f72b0ba538d6e73124da2a0cf56927bd020b0a5e799d31f0c180d31e7c321a1a",
+      "bytes": 180
+    },
+    {
+      "name": "checks-001/strict-typescript.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-cursor-loop-001/checks-001/strict-typescript.json",
+      "sha256": "f242792b4c99b0932461bb3806731dbaefe97582248e179ffecf906761b6f75a",
+      "bytes": 862
+    },
+    {
+      "name": "checks-001/strict-typescript.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-cursor-loop-001/checks-001/strict-typescript.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "name": "checks-001/strict-typescript.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-cursor-loop-001/checks-001/strict-typescript.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "name": "run.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-cursor-loop-001/run.py",
+      "sha256": "04323e81a774ed6978cea535f649f7856060f7d0dab70962ca7c50de1659f33a",
+      "bytes": 2444
+    },
+    {
+      "name": "source-001/files/samples/core/stress.ts",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-cursor-loop-001/source-001/files/samples/core/stress.ts",
+      "sha256": "3073b6302b5d2e1d8af847c53a7913e6f2a24b4e49932f16c3b2cf9f5b0f8d2d",
+      "bytes": 3532
+    },
+    {
+      "name": "source-001/files/samples/core/stress_test.mjs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-cursor-loop-001/source-001/files/samples/core/stress_test.mjs",
+      "sha256": "f61fccd8313f0d975661ddee9a9fe6c81a184d69a55d2b605664ea4842684adb",
+      "bytes": 5516
+    },
+    {
+      "name": "source-001/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-cursor-loop-001/source-001/freeze.json",
+      "sha256": "d93ab63d0dd583016728a80d07e6b80d3bc137fcd6870f544613c6b530e0bed5",
+      "bytes": 525
+    },
+    {
+      "name": "review.json",
+      "original": "/Users/andreyyurlov/.codex/incant-reviews/core-cursor-loop-source-independent-20261014.json",
+      "sha256": "e6aea675bfaf6800e7a79a31441023eec11f7c9c88f18ac83f69d375762633ad",
+      "bytes": 1588
+    }
+  ],
+  "sources": [
+    {
+      "path": "samples/core/stress.ts",
+      "sha256": "3073b6302b5d2e1d8af847c53a7913e6f2a24b4e49932f16c3b2cf9f5b0f8d2d"
+    },
+    {
+      "path": "samples/core/stress_test.mjs",
+      "sha256": "f61fccd8313f0d975661ddee9a9fe6c81a184d69a55d2b605664ea4842684adb"
+    }
+  ],
+  "limits": [
+    "Node/TypeScript/source controls only",
+    "No native shipping run or matched timing",
+    "2 ms Core gate remains failed on previous engine/source"
+  ]
+}
