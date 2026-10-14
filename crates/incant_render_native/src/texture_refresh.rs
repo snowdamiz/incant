@@ -19,6 +19,7 @@ pub struct PreparedTextureRefresh {
     assets: BTreeMap<StableId, Arc<RuntimeAsset>>,
     payload_bytes: usize,
     changed: usize,
+    changed_models: Vec<StableId>,
 }
 /// Fully allocated CPU candidate. Final publication only checks authority and
 /// copies current accepted numeric poses into this existing storage.
@@ -65,7 +66,7 @@ impl TextureRefreshTicket {
                 )
         })
     }
-    /// A complete, sorted catalog is required. Models must remain byte-identical;
+    /// Texture-only compatibility entry point. Models remain byte-identical;
     /// texture IDs and interpreted usage must remain unchanged. Readers validate
     /// actual cooked bytes, including every atlas binding during final admission.
     /// Published payload is bounded; staging plus retained old versions is extra.
@@ -84,6 +85,32 @@ impl TextureRefreshTicket {
         texture_cache: &Path,
         budget: usize,
     ) -> Result<PreparedTextureRefresh, NativeRenderError> {
+        self.prepare_catalog(references, texture_cache, None, budget)
+    }
+    /// Additive trusted-host admission for compatible existing static models
+    /// and textures. All cache IO/decoding remains outside publication locks.
+    pub fn prepare_visuals(
+        self,
+        references: &[VisualAssetRef],
+        caches: VisualCaches<'_>,
+    ) -> Result<PreparedTextureRefresh, NativeRenderError> {
+        self.prepare_visuals_with_budget(references, caches, MAX_PAYLOAD_BYTES)
+    }
+    pub fn prepare_visuals_with_budget(
+        self,
+        references: &[VisualAssetRef],
+        caches: VisualCaches<'_>,
+        budget: usize,
+    ) -> Result<PreparedTextureRefresh, NativeRenderError> {
+        self.prepare_catalog(references, caches.textures, Some(caches.models), budget)
+    }
+    fn prepare_catalog(
+        self,
+        references: &[VisualAssetRef],
+        texture_cache: &Path,
+        model_cache: Option<&Path>,
+        budget: usize,
+    ) -> Result<PreparedTextureRefresh, NativeRenderError> {
         if budget > MAX_PAYLOAD_BYTES || self.retained_text_bytes > budget {
             return Err(NativeRenderError::PayloadLimit);
         }
@@ -95,6 +122,7 @@ impl TextureRefreshTicket {
         let mut assets = BTreeMap::new();
         let mut payload_bytes = self.retained_text_bytes;
         let mut changed = 0;
+        let mut changed_models = Vec::new();
         for reference in references {
             let old = self
                 .assets
@@ -103,6 +131,27 @@ impl TextureRefreshTicket {
             let same = old.info().fingerprint == fingerprint(&reference.fingerprint);
             let next = match (reference.kind, old.data()) {
                 (VisualAssetKind::Model, RuntimeAssetData::Model(_)) if same => Arc::clone(old),
+                (VisualAssetKind::Model, RuntimeAssetData::Model(old_model)) => {
+                    let cache = model_cache
+                        .ok_or_else(|| refused("only existing texture content may change"))?;
+                    let generation = self
+                        .generation
+                        .checked_add(1)
+                        .ok_or_else(|| refused("catalog generation exhausted"))?;
+                    let asset = RuntimeAsset::load_visual(reference, generation, cache).map_err(
+                        |source| NativeRenderError::Asset {
+                            asset: reference.id,
+                            source,
+                        },
+                    )?;
+                    let RuntimeAssetData::Model(next_model) = asset.data() else {
+                        return Err(refused("model payload kind changed"));
+                    };
+                    super::model_refresh::validate(old_model, next_model)?;
+                    changed_models.push(reference.id);
+                    changed += 1;
+                    Arc::new(asset)
+                }
                 (VisualAssetKind::Texture, RuntimeAssetData::Texture(_)) if same => Arc::clone(old),
                 (VisualAssetKind::Texture, RuntimeAssetData::Texture(_)) => {
                     let generation = self
@@ -133,6 +182,7 @@ impl TextureRefreshTicket {
             assets,
             payload_bytes,
             changed,
+            changed_models,
         })
     }
 }
@@ -185,6 +235,7 @@ impl NativeRenderInput {
         prepared: PreparedTextureRefresh,
     ) -> Result<StagedTextureRefresh, NativeRenderError> {
         self.validate_refresh(view, &prepared.ticket)?;
+        Self::validate_model_dependencies(view, &prepared)?;
         let generation = if prepared.changed == 0 {
             self.asset_generation
         } else {
@@ -212,6 +263,25 @@ impl NativeRenderInput {
             return Err(refused("texture publication ticket was already used"));
         }
         self.validate_refresh(view, &staged.prepared.ticket)
+            .and_then(|_| Self::validate_model_dependencies(view, &staged.prepared))
+    }
+    fn validate_model_dependencies(
+        view: &SpatialView<'_>,
+        prepared: &PreparedTextureRefresh,
+    ) -> Result<(), NativeRenderError> {
+        // IDs were appended while walking the strictly sorted complete catalog.
+        // Final validation remains allocation-free and visits navigation sources
+        // once, rather than scanning all sources separately for every model.
+        if !prepared.changed_models.is_empty()
+            && view
+                .navigation_model_assets()
+                .any(|id| prepared.changed_models.binary_search(&id).is_ok())
+        {
+            return Err(refused(
+                "model supplies baked navigation geometry; live refresh is unsupported",
+            ));
+        }
+        Ok(())
     }
     /// Final cold operation. No allocation/source IO occurs on the success path;
     /// the callback must publish an already-prepared consumer without GPU work.

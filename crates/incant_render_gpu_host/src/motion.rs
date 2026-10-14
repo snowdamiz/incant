@@ -48,6 +48,10 @@ impl<P: TargetProvider> TargetProvider for MotionTargets<P> {
     fn resolution_config(&self) -> Option<ResolutionConfig> {
         self.inner.resolution_config()
     }
+    #[cfg(feature = "native-metalfx")]
+    fn metalfx(&self) -> Option<crate::MetalFxSetup> {
+        self.inner.metalfx()
+    }
     fn motion_epoch(&self) -> Option<u64> {
         Some(self.epoch.load(Ordering::Acquire))
     }

@@ -134,6 +134,14 @@ enum Request {
         generation: u32,
         token: u64,
     },
+    #[cfg(feature = "play-probe")]
+    ObserveAsset {
+        generation: u32,
+        asset: incant_runtime::StableId,
+        kind: incant_runtime::VisualAssetKind,
+        fingerprint: String,
+        reply: mpsc::Sender<Result<probe::asset_workflow::Observation, String>>,
+    },
 }
 impl Service {
     pub fn new() -> (Arc<Self>, mpsc::Receiver<Message>) {
