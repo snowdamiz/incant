@@ -62,7 +62,49 @@ fn profiler_reports_real_native_phases_and_preserves_default_gameplay_pcm() {
         );
         let mut report: Value = serde_json::from_slice(&result.stdout).unwrap();
         if profile {
+            // Retain the actual child stdout for protocol-consumer qualification.
+            // This CI-profile fixture is not shipping/10k-entity performance proof.
+            println!(
+                "CLI_PROFILE_REPORT={}",
+                String::from_utf8_lossy(&result.stdout).trim()
+            );
             let profile = report.as_object_mut().unwrap().remove("profile").unwrap();
+            assert_eq!(profile["version"], 2);
+            assert_eq!(profile["frame_wall"]["version"], 1);
+            assert_eq!(profile["frame_wall"]["attempted_frames"], 3);
+            assert_eq!(profile["frame_wall"]["successful_frames"], 3);
+            assert_eq!(profile["frame_wall"]["invalid_frames"], 0);
+            for name in ["player.frame", "script.tick"] {
+                let row = profile["frame_wall"]["phases"]
+                    .as_array()
+                    .unwrap()
+                    .iter()
+                    .find(|r| r["name"] == name)
+                    .unwrap();
+                assert_eq!(row["samples"], 3);
+                assert_eq!(row["missing_frames"], 0);
+                assert_eq!(row["invalid_frames"], 0);
+                assert_eq!(row["overflow_samples"], 0);
+                assert_eq!(
+                    row["counts"]
+                        .as_array()
+                        .unwrap()
+                        .iter()
+                        .map(|n| n.as_u64().unwrap())
+                        .sum::<u64>(),
+                    3
+                );
+                let max = profile["zones"]
+                    .as_array()
+                    .unwrap()
+                    .iter()
+                    .find(|r| r["name"] == name)
+                    .unwrap()["totals"]["max_wall_ns"]
+                    .as_u64()
+                    .unwrap();
+                assert!(row["p95_lower_ns"].as_u64().unwrap() <= max);
+                assert!(row["p95_upper_ns"].as_u64().unwrap() >= max);
+            }
             assert_eq!(profile["completed_frames"], 3);
             assert_eq!(profile["failed_frames"], 0);
             assert_eq!(profile["quickjs_heap"]["samples"], 3);

@@ -131,3 +131,50 @@ fn heap_metrics_are_vm_samples_and_rust_requested_sizes_are_separate() {
     assert_eq!(report.quickjs_heap.peak_used_bytes, 17);
     assert!(report.rust_allocations.installed);
 }
+
+#[test]
+fn guarded_frames_track_success_failure_unwind_and_capture_generation() {
+    let _lock = lock();
+    let capture = Capture::start().unwrap();
+    frame(|| {
+        let _tick = scope(Phase::ScriptTick);
+        Ok::<_, ()>(())
+    })
+    .unwrap();
+    let report = capture.report();
+    assert_eq!(report.version, 2);
+    assert_eq!(report.frame_wall.successful_frames, 1);
+    assert_eq!(
+        report.frame_wall.phases[Phase::ScriptTick as usize].samples,
+        1
+    );
+    assert!(
+        report.frame_wall.phases[Phase::ScriptTick as usize]
+            .p95_upper_ns
+            .is_some()
+    );
+    assert!(
+        std::panic::catch_unwind(|| frame(|| -> Result<(), ()> { panic!("frame unwind") }))
+            .is_err()
+    );
+    let report = capture.report();
+    assert_eq!(report.failed_frames, 1);
+    assert_eq!(report.frame_wall.failed_frames, 1);
+    assert!(
+        report
+            .frame_wall
+            .phases
+            .iter()
+            .all(|r| r.p95_upper_ns.is_none())
+    );
+    let mut replacement = None;
+    frame(|| {
+        drop(capture);
+        replacement = Some(Capture::start().unwrap());
+        Ok::<_, ()>(())
+    })
+    .unwrap();
+    let report = replacement.unwrap().report();
+    assert_eq!(report.frame_wall.attempted_frames, 0);
+    assert_eq!(report.completed_frames, 0);
+}

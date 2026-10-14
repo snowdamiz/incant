@@ -54,11 +54,33 @@ fn actual_source_groups_have_numeric_identity_with_heap_and_rollback_observation
     let mut world = NativeWorld::new(initial);
     let mut host = ScriptHost::for_world(code, &world).unwrap();
     let capture = Capture::start().unwrap();
-    host.tick(&mut world, 1. / 60.).unwrap();
+    incant_profile::frame(|| host.tick(&mut world, 1. / 60.)).unwrap();
+    let successful = capture.report();
+    let tick = &successful.frame_wall.phases[incant_profile::Phase::ScriptTick as usize];
+    assert_eq!(tick.samples, 1);
+    assert_eq!(tick.missing_frames, 0);
+    assert_eq!(tick.invalid_frames, 0);
+    assert!(tick.p95_upper_ns.is_some());
+    assert_eq!(
+        successful
+            .scripts
+            .iter()
+            .map(|s| s.totals.calls)
+            .sum::<u64>(),
+        2
+    );
     let before = world.inspect(id(1)).unwrap().transform;
-    assert!(host.tick(&mut world, 1. / 60.).is_err());
+    assert!(incant_profile::frame(|| host.tick(&mut world, 1. / 60.)).is_err());
     assert_eq!(world.inspect(id(1)).unwrap().transform, before);
     let report = capture.report();
+    assert_eq!(report.frame_wall.failed_frames, 1);
+    assert!(
+        report
+            .frame_wall
+            .phases
+            .iter()
+            .all(|row| row.p95_upper_ns.is_none())
+    );
     assert_eq!(report.scripts.len(), 2);
     assert_eq!(report.scripts[0].source, Some(id(10).0));
     assert_eq!(report.scripts[1].source, Some(id(20).0));

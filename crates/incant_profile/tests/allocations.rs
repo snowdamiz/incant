@@ -38,6 +38,14 @@ fn main() {
         let _zone = script_scope(Some([0; 16]));
         let _system = scope(Phase::Integrate);
     }
+    for _ in 0..1000 {
+        frame(|| {
+            let _zone = scope(Phase::ScriptTick);
+            let _source = script_scope(Some([0; 16]));
+            Ok::<_, ()>(())
+        })
+        .unwrap();
+    }
     let after = capture.allocations();
     assert_eq!(after.allocations, before.allocations);
     assert_eq!(after.reallocations, before.reallocations);

@@ -94,6 +94,7 @@ impl Phase {
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Error {
     Disabled,
+    Storage,
     Busy,
     Sequence,
     ClockUnavailable,
@@ -107,6 +108,7 @@ impl std::fmt::Display for Error {
         f.write_str(match self {
             Self::UnsupportedRoute => "profiling is unavailable for the requested player route",
             Self::Options => "duplicate profiling option",
+            Self::Storage => "profile histogram storage unavailable",
             Self::Disabled => "CPU profiling requires the profile build feature",
             Self::Busy => "a process profile capture is already active",
             Self::Sequence => "profile capture sequence exhausted",
@@ -175,6 +177,7 @@ pub struct SourceReport {
 #[cfg_attr(feature = "summary", derive(serde::Serialize))]
 pub struct Report {
     pub version: u32,
+    pub frame_wall: crate::FrameWallReport,
     pub scope: &'static str,
     pub generation: u64,
     pub zones: Vec<PhaseReport>,

@@ -1,5 +1,15 @@
 # Implementation status
 
+## Per-frame CPU distributions — scoped Mac controls pass
+
+The opt-in profiler now reports bounded per-frame phase wall histograms and
+conservative p95 intervals, including aggregate `script.tick`. Seventeen explicit
+native CI-profile CPU cases, a dedicated allocation control, strict lint and a real
+three-tick CLI protocol check pass. Missing/failed/overflow samples refuse p95;
+default dependencies remain empty. Shipping 10,000-entity Mac measurements and the
+60 fps/GPU/hitch gates remain separate. [Contract and evidence](docs/spikes/native-profile-distributions.md).
+
+
 Director policy, 2026-10-13: actual desktop testing on this Mac is the only
 device qualification required for development and phase gates. Mobile and other-
 device execution/performance comparisons are deferred, nonblocking follow-up;
