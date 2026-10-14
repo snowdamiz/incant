@@ -1,7 +1,6 @@
 #[cfg(test)]
 mod context_tests;
 use incant_cmd::{Actor, Command};
-use incant_doc::schema_registry;
 use incant_render::{Renderer, Viewport, wgpu};
 use serde::Serialize;
 use serde_json::{Value, json};
@@ -20,6 +19,7 @@ mod assets;
 mod menu;
 mod play;
 mod project;
+mod project_file;
 mod provider;
 mod render_scene;
 mod source_watch;
@@ -70,7 +70,7 @@ fn engine_read(state: tauri::State<'_, Arc<Editor>>) -> Result<Value, String> {
         }
     };
     Ok(
-        json!({"status":"ready","project":bus.project(),"revision":bus.revision(),"can_redo":bus.can_redo(),"applied":bus.history().len(),"history":bus.history().iter().chain(bus.redo_history()).map(|tx|json!({"id":tx.id,"description":tx.description,"actor":tx.actor})).collect::<Vec<_>>(),"schemas":schema_registry(),"agent_budget":{"available":true},"play_start":play::start_availability(state.asset_root.is_some()),"console":state.console.lock().map_err(|_|"console lock failed")?.clone(),"viewport_error":state.viewport_error.lock().map_err(|_|"viewport lock failed")?.clone(),"source_diagnostics": state.source_diagnostics.lock().map_err(|_|"source diagnostics lock failed")?.clone(),"asset_import": if state.asset_root.is_some() {json!({"available":true})}else{json!({"available":false,"reason":"Open a saved project to import assets."})}}),
+        json!({"status":"ready","project":bus.project(),"revision":bus.revision(),"can_redo":bus.can_redo(),"applied":bus.history().len(),"history":bus.history().iter().chain(bus.redo_history()).map(|tx|json!({"id":tx.id,"description":tx.description,"actor":tx.actor})).collect::<Vec<_>>(),"schemas":project_file::schemas(),"project_file":{"available":bus.has_project_file()},"agent_budget":{"available":true},"play_start":play::start_availability(state.asset_root.is_some()),"console":state.console.lock().map_err(|_|"console lock failed")?.clone(),"viewport_error":state.viewport_error.lock().map_err(|_|"viewport lock failed")?.clone(),"source_diagnostics": state.source_diagnostics.lock().map_err(|_|"source diagnostics lock failed")?.clone(),"asset_import": if state.asset_root.is_some() {json!({"available":true})}else{json!({"available":false,"reason":"Open a saved project to import assets."})}}),
     )
 }
 #[tauri::command]
@@ -183,6 +183,7 @@ fn main() {
             engine_execute,
             engine_script_read,
             engine_history,
+            project_file::engine_project_file,
             agent::engine_agent_read,
             agent::engine_agent_start,
             agent::engine_agent_cancel,

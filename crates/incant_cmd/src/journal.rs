@@ -49,6 +49,19 @@ pub(super) enum Action {
         edit: incant_source::ProjectEdit,
         change: Change,
     },
+    CheckpointPrepare {
+        operation: Id,
+        edit: incant_source::ProjectEdit,
+        revision: u64,
+        actor: Actor,
+        change: Option<Change>,
+    },
+    CheckpointCommit {
+        operation: Id,
+    },
+    CheckpointAbort {
+        operation: Id,
+    },
     ProjectCommit {
         operation: Id,
     },
@@ -234,18 +247,23 @@ impl Journal {
         if !self.bounded || self.poisoned {
             return Err(SourceError::RecoveryRequired.into());
         }
+        let checkpoint = matches!(prepare, Action::CheckpointPrepare { .. });
+        let version = if checkpoint { 4 } else { 3 };
         let size = |action: &Action, crdt: &[u8]| -> Result<usize, CommandError> {
-            let crdt = if matches!(action, Action::ProjectAbort { .. }) {
+            let crdt = if matches!(
+                action,
+                Action::ProjectAbort { .. } | Action::CheckpointAbort { .. }
+            ) {
                 self.checkpoint
                     .clone()
                     .ok_or(SourceError::RecoveryRequired)?
             } else {
                 STANDARD.encode(crdt)
             };
-            let digest = digest(3, self.sequence, &self.previous, action, &crdt)?;
+            let digest = digest(version, self.sequence, &self.previous, action, &crdt)?;
             // Sequence width may grow at Commit; reserve twenty decimal digits.
             let entry = Entry {
-                version: 3,
+                version,
                 sequence: u64::MAX,
                 previous: self.previous.clone(),
                 action: action.clone(),
@@ -257,14 +275,26 @@ impl Journal {
         let required = size(prepare, desired)?
             .checked_add(
                 size(
-                    &Action::ProjectCommit {
-                        operation: operation.into(),
+                    &if checkpoint {
+                        Action::CheckpointCommit {
+                            operation: operation.into(),
+                        }
+                    } else {
+                        Action::ProjectCommit {
+                            operation: operation.into(),
+                        }
                     },
                     desired,
                 )?
                 .max(size(
-                    &Action::ProjectAbort {
-                        operation: operation.into(),
+                    &if checkpoint {
+                        Action::CheckpointAbort {
+                            operation: operation.into(),
+                        }
+                    } else {
+                        Action::ProjectAbort {
+                            operation: operation.into(),
+                        }
                     },
                     current,
                 )?),
@@ -279,6 +309,11 @@ impl Journal {
         }
         Ok(())
     }
+    pub(super) fn checkpoint_bytes(&self) -> Result<Vec<u8>, CommandError> {
+        STANDARD
+            .decode(self.checkpoint.as_ref().ok_or(SourceError::Unavailable)?)
+            .map_err(|_| CommandError::Corrupt("invalid durable checkpoint".into()))
+    }
     pub(super) fn finish_read(&mut self, complete: usize, len: usize) -> Result<(), CommandError> {
         if complete < len {
             self.file.set_len(complete as u64)?;
@@ -291,7 +326,10 @@ impl Journal {
         if self.poisoned {
             return Err(SourceError::RecoveryRequired.into());
         }
-        let crdt = if matches!(action, Action::ProjectAbort { .. }) {
+        let crdt = if matches!(
+            action,
+            Action::ProjectAbort { .. } | Action::CheckpointAbort { .. }
+        ) {
             self.checkpoint
                 .clone()
                 .ok_or(SourceError::RecoveryRequired)?
@@ -300,9 +338,21 @@ impl Journal {
         };
         let logical = !matches!(
             action,
-            Action::Prepare { .. } | Action::ProjectPrepare { .. }
+            Action::Prepare { .. }
+                | Action::ProjectPrepare { .. }
+                | Action::CheckpointPrepare { .. }
         );
         let version = if matches!(
+            action,
+            Action::CheckpointPrepare { .. }
+                | Action::CheckpointCommit { .. }
+                | Action::CheckpointAbort { .. }
+        ) {
+            if !self.bounded {
+                return Err(SourceError::Unavailable.into());
+            }
+            4
+        } else if matches!(
             action,
             Action::ProjectPrepare { .. }
                 | Action::ProjectCommit { .. }

@@ -1,4 +1,4 @@
-use crate::{Result, print, read_project, save};
+use crate::{Result, print, read_project};
 use incant_assets::TextureUsage;
 use incant_cmd::{Actor, CommandBus};
 use incant_import::{ImportRequest, ImportSnapshot};
@@ -37,17 +37,16 @@ pub fn import(
             None => None,
         },
     };
-    let mut bus = CommandBus::persistent_with_sources(
+    let mut bus = CommandBus::open_project_file_with_journal(
+        project,
         project.with_extension("journal.jsonl"),
-        read_project(project)?,
-        root,
     )?;
     let prepared = ImportSnapshot::capture(&bus).prepare(root, cache, &[request])?;
     let outcome = &prepared.outcomes()[0];
     let actor = Actor::import(&outcome.asset.kind);
     let description = format!("Import {}", outcome.asset.name);
     let committed = prepared.commit(&mut bus, actor, description)?;
-    save(project, &bus.project().canonical_text()?)?;
+    bus.save_project_file(bus.revision(), Actor::user("cli"))?;
     let mut response = serde_json::to_value(&committed.imports[0])?;
     response["revision"] = serde_json::json!(committed.revision);
     print(response)

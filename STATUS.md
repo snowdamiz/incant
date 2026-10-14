@@ -1,5 +1,19 @@
 # Implementation status
 
+## Project-file application binding — qualified private main274 producer
+
+One host-opened bus now owns editor/CLI/RPC pin review/apply and version-four
+checkpoint save, preserving command revision/history, causal journal identity,
+legacy/custom journal locations and recovery before project parse. Legacy RPC
+`project.save` accepts omitted revision through the same capability; the new
+closed route requires it. No caller paths or replacement project text are accepted.
+150 scoped Rust tests, 189 bridge tests, strict lint, normal bundle/SDK generation
+and checks pass. All 74 old schemas remain exact; four new schemas and 19 built
+editor assets are retained. Three historical failures are preserved. This branch
+is based on actual main274, not the later main275 profiler union. Intake/hosted
+checks remain pending; no new editor UI, older-format conversion, GPU, performance
+or phase-gate claim. [Source and evidence](docs/spikes/project-file-application.md).
+
 ## Host-bound project pin migration — current-main qualification
 
 The main273 composition preserves linked-prefab authoring and adds the reviewed

@@ -127,7 +127,7 @@ fn opened_and_reviewed_nodes_stay_alive_after_unlink_until_authority_retires() {
     fs::remove_file(root.join("game.incant")).unwrap();
     assert_eq!(snapshot.node.metadata().unwrap().nlink(), 0);
     assert_eq!(
-        platform::identity(opened.expected.as_ref().unwrap()).unwrap(),
+        platform::identity(&opened.expected.as_ref().unwrap().node).unwrap(),
         original
     );
     fs::write(root.join("game.incant"), "before").unwrap();
@@ -139,6 +139,7 @@ fn opened_and_reviewed_nodes_stay_alive_after_unlink_until_authority_retires() {
             .expected
             .as_ref()
             .unwrap()
+            .node
             .metadata()
             .unwrap()
             .nlink(),

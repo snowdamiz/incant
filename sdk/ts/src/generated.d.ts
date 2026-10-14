@@ -449,6 +449,82 @@ export namespace ProjectSchema {
 }
 export type Project = ProjectSchema.Root;
 
+export namespace ProjectFileRequestSchema {
+  export type Root = ({ "expected_revision": number; "operation": "review_pin" }) | ({ "expected_revision": number; "operation": "apply_pin"; "review_id": string }) | ({ "expected_revision": number; "operation": "save" });
+}
+export type ProjectFileRequest = ProjectFileRequestSchema.Root;
+
+export namespace ProjectFileResponseSchema {
+  export type ActionGesture = "tap" | "long_press" | "swipe";
+  export type AgentBudgetSettings = { "max_tokens": number };
+  export type Asset = { "id": string; "import_settings"?: (AssetImportSettings) | (null); "kind": string; "name": string; "path": string; "sha256": string };
+  export type AssetImportSettings = ({ "type": "texture"; "usage": TextureUsage });
+  export type Command = ({ "name": string; "nodes": { [key: string]: string }; "op": "create_prefab"; "prefab_id": string; "root_entity_id": string; "scene_id": string }) | ({ "entities": { [key: string]: string }; "op": "instantiate_prefab"; "parent"?: string | null; "scene_id": string; "source": string }) | ({ "op": "update_prefab"; "prefab": Prefab }) | ({ "component": string; "entity_id": string; "op": "revert_prefab_component"; "scene_id": string }) | ({ "op": "detach_prefab"; "root_entity_id": string; "scene_id": string }) | ({ "op": "delete_prefab_instance"; "root_entity_id": string; "scene_id": string }) | ({ "op": "delete_prefab"; "prefab_id": string }) | ({ "op": "set_engine_version"; "requirement": EngineRequirement }) | ({ "op": "create_scene"; "scene": Scene }) | ({ "op": "set_scene_program"; "program"?: (SceneProgram) | (null); "scene_id": string }) | ({ "op": "delete_scene"; "scene_id": string }) | ({ "entity": Entity; "op": "create_entity"; "scene_id": string }) | ({ "entity_id": string; "op": "delete_entity"; "scene_id": string }) | ({ "entity_id": string; "name": string; "op": "rename_entity"; "scene_id": string }) | ({ "entity_id": string; "op": "reparent_entity"; "parent"?: string | null; "scene_id": string }) | ({ "component": string; "entity_id": string; "op": "set_component"; "scene_id": string; "value": unknown }) | ({ "component": string; "entity_id": string; "op": "remove_component"; "scene_id": string }) | ({ "asset": Asset; "op": "upsert_asset" }) | ({ "asset_id": string; "op": "remove_asset" }) | ({ "op": "upsert_script"; "script": ScriptSource }) | ({ "op": "remove_script"; "script_id": string }) | ({ "expected_source": SourceVersion; "op": "write_script"; "script_id": string; "source": string }) | ({ "op": "set_memory"; "section": string; "text": string }) | ({ "op": "upsert_string_table"; "table": StringTable }) | ({ "op": "remove_string_table"; "table_id": string }) | ({ "op": "set_locale"; "settings": LocaleSettings }) | ({ "actions": { [key: string]: InputAction }; "op": "set_input_actions" }) | ({ "mode": PhysicsMode; "op": "set_physics_mode" }) | ({ "op": "set_agent_budget"; "settings": AgentBudgetSettings });
+  export type EngineRequirement = string;
+  export type Entity = { "components": { [key: string]: unknown }; "id": string; "name": string; "parent"?: string | null; "prefab"?: (PrefabLink) | (null); "provenance"?: (Provenance) | (null) };
+  export type GamepadAxis = "left_x" | "left_y" | "right_x" | "right_y";
+  export type GamepadButton = "south" | "east" | "west" | "north" | "left_shoulder" | "right_shoulder" | "left_trigger" | "right_trigger" | "select" | "start" | "guide" | "left_stick" | "right_stick" | "dpad_up" | "dpad_down" | "dpad_left" | "dpad_right";
+  export type InputAction = ({ "bindings": Array<InputBinding>; "kind": "button"; "threshold"?: number }) | ({ "bindings": Array<InputBinding>; "dead_zone"?: number; "kind": "axis1" }) | ({ "bindings": Array<InputBinding>; "dead_zone"?: number; "kind": "axis2" });
+  export type InputBinding = ({ "code": KeyCode; "scale"?: [number, number]; "type": "key" }) | ({ "button": MouseButton; "scale"?: [number, number]; "type": "mouse_button" }) | ({ "button": GamepadButton; "id": number; "scale"?: [number, number]; "type": "gamepad_button" }) | ({ "axis": GamepadAxis; "id": number; "scale"?: [number, number]; "type": "gamepad_axis" }) | ({ "id": number; "invert_y"?: boolean; "stick": Stick; "type": "gamepad_stick" }) | ({ "gesture": ActionGesture; "scale"?: [number, number]; "type": "gesture" });
+  export type KeyCode = "KeyA" | "KeyB" | "KeyC" | "KeyD" | "KeyE" | "KeyF" | "KeyG" | "KeyH" | "KeyI" | "KeyJ" | "KeyK" | "KeyL" | "KeyM" | "KeyN" | "KeyO" | "KeyP" | "KeyQ" | "KeyR" | "KeyS" | "KeyT" | "KeyU" | "KeyV" | "KeyW" | "KeyX" | "KeyY" | "KeyZ" | "Digit0" | "Digit1" | "Digit2" | "Digit3" | "Digit4" | "Digit5" | "Digit6" | "Digit7" | "Digit8" | "Digit9" | "ArrowUp" | "ArrowDown" | "ArrowLeft" | "ArrowRight" | "Space" | "Enter" | "Escape" | "Tab" | "Backspace" | "Delete" | "Insert" | "Home" | "End" | "PageUp" | "PageDown" | "ShiftLeft" | "ShiftRight" | "ControlLeft" | "ControlRight" | "AltLeft" | "AltRight" | "MetaLeft" | "MetaRight" | "CapsLock" | "NumLock" | "ScrollLock" | "Pause" | "PrintScreen" | "ContextMenu" | "Backquote" | "Minus" | "Equal" | "BracketLeft" | "BracketRight" | "Backslash" | "Semicolon" | "Quote" | "Comma" | "Period" | "Slash" | "Numpad0" | "Numpad1" | "Numpad2" | "Numpad3" | "Numpad4" | "Numpad5" | "Numpad6" | "Numpad7" | "Numpad8" | "Numpad9" | "NumpadAdd" | "NumpadSubtract" | "NumpadMultiply" | "NumpadDivide" | "NumpadDecimal" | "NumpadEnter" | "F1" | "F2" | "F3" | "F4" | "F5" | "F6" | "F7" | "F8" | "F9" | "F10" | "F11" | "F12";
+  export type LocaleSettings = { "fallbacks"?: Array<string>; "locale": string; "pseudo"?: boolean };
+  export type MouseButton = "left" | "right" | "middle" | "back" | "forward";
+  export type Origin = "user" | "agent" | "script" | "import";
+  export type PhysicsMode = "fast" | "deterministic";
+  export type Prefab = { "id": string; "name": string; "nodes": { [key: string]: PrefabNode }; "provenance"?: (Provenance) | (null); "root": string };
+  export type PrefabLink = { "node": string; "overrides"?: Array<string>; "root": string; "source": string };
+  export type PrefabNode = { "components": { [key: string]: unknown }; "name": string; "parent"?: string | null };
+  export type ProjectPinReview = { "candidate_sha256": string; "candidate_text": string; "command": Command; "expected_revision": number; "review_id": string; "source_sha256": string };
+  export type ProjectSaveReceipt = { "candidate_sha256": string; "changed": boolean; "revision": number; "source_sha256": string };
+  export type Provenance = { "actor": string; "conversation_id"?: string | null; "model"?: string | null; "origin": Origin; "transaction": string };
+  export type Scene = { "entities": { [key: string]: Entity }; "id": string; "name": string; "program"?: (SceneProgram) | (null) };
+  export type SceneProgram = ({ "kind": "wasm"; "module": string });
+  export type ScriptSource = { "id": string; "name": string; "path": string };
+  export type SourceVersion = ({ "state": "missing" }) | ({ "sha256": string; "state": "present" });
+  export type Stick = "left" | "right";
+  export type StringTable = { "id": string; "messages": { [key: string]: { [key: string]: string } }; "name": string; "source_locale": string };
+  export type TextureUsage = "color" | "linear" | "normal";
+  export type Root = ({ "operation": "review_pin"; "review": ProjectPinReview }) | ({ "operation": "apply_pin"; "revision": number; "transaction_id": string }) | ({ "operation": "save"; "receipt": ProjectSaveReceipt });
+}
+export type ProjectFileResponse = ProjectFileResponseSchema.Root;
+
+export namespace ProjectPinReviewSchema {
+  export type ActionGesture = "tap" | "long_press" | "swipe";
+  export type AgentBudgetSettings = { "max_tokens": number };
+  export type Asset = { "id": string; "import_settings"?: (AssetImportSettings) | (null); "kind": string; "name": string; "path": string; "sha256": string };
+  export type AssetImportSettings = ({ "type": "texture"; "usage": TextureUsage });
+  export type Command = ({ "name": string; "nodes": { [key: string]: string }; "op": "create_prefab"; "prefab_id": string; "root_entity_id": string; "scene_id": string }) | ({ "entities": { [key: string]: string }; "op": "instantiate_prefab"; "parent"?: string | null; "scene_id": string; "source": string }) | ({ "op": "update_prefab"; "prefab": Prefab }) | ({ "component": string; "entity_id": string; "op": "revert_prefab_component"; "scene_id": string }) | ({ "op": "detach_prefab"; "root_entity_id": string; "scene_id": string }) | ({ "op": "delete_prefab_instance"; "root_entity_id": string; "scene_id": string }) | ({ "op": "delete_prefab"; "prefab_id": string }) | ({ "op": "set_engine_version"; "requirement": EngineRequirement }) | ({ "op": "create_scene"; "scene": Scene }) | ({ "op": "set_scene_program"; "program"?: (SceneProgram) | (null); "scene_id": string }) | ({ "op": "delete_scene"; "scene_id": string }) | ({ "entity": Entity; "op": "create_entity"; "scene_id": string }) | ({ "entity_id": string; "op": "delete_entity"; "scene_id": string }) | ({ "entity_id": string; "name": string; "op": "rename_entity"; "scene_id": string }) | ({ "entity_id": string; "op": "reparent_entity"; "parent"?: string | null; "scene_id": string }) | ({ "component": string; "entity_id": string; "op": "set_component"; "scene_id": string; "value": unknown }) | ({ "component": string; "entity_id": string; "op": "remove_component"; "scene_id": string }) | ({ "asset": Asset; "op": "upsert_asset" }) | ({ "asset_id": string; "op": "remove_asset" }) | ({ "op": "upsert_script"; "script": ScriptSource }) | ({ "op": "remove_script"; "script_id": string }) | ({ "expected_source": SourceVersion; "op": "write_script"; "script_id": string; "source": string }) | ({ "op": "set_memory"; "section": string; "text": string }) | ({ "op": "upsert_string_table"; "table": StringTable }) | ({ "op": "remove_string_table"; "table_id": string }) | ({ "op": "set_locale"; "settings": LocaleSettings }) | ({ "actions": { [key: string]: InputAction }; "op": "set_input_actions" }) | ({ "mode": PhysicsMode; "op": "set_physics_mode" }) | ({ "op": "set_agent_budget"; "settings": AgentBudgetSettings });
+  export type EngineRequirement = string;
+  export type Entity = { "components": { [key: string]: unknown }; "id": string; "name": string; "parent"?: string | null; "prefab"?: (PrefabLink) | (null); "provenance"?: (Provenance) | (null) };
+  export type GamepadAxis = "left_x" | "left_y" | "right_x" | "right_y";
+  export type GamepadButton = "south" | "east" | "west" | "north" | "left_shoulder" | "right_shoulder" | "left_trigger" | "right_trigger" | "select" | "start" | "guide" | "left_stick" | "right_stick" | "dpad_up" | "dpad_down" | "dpad_left" | "dpad_right";
+  export type InputAction = ({ "bindings": Array<InputBinding>; "kind": "button"; "threshold"?: number }) | ({ "bindings": Array<InputBinding>; "dead_zone"?: number; "kind": "axis1" }) | ({ "bindings": Array<InputBinding>; "dead_zone"?: number; "kind": "axis2" });
+  export type InputBinding = ({ "code": KeyCode; "scale"?: [number, number]; "type": "key" }) | ({ "button": MouseButton; "scale"?: [number, number]; "type": "mouse_button" }) | ({ "button": GamepadButton; "id": number; "scale"?: [number, number]; "type": "gamepad_button" }) | ({ "axis": GamepadAxis; "id": number; "scale"?: [number, number]; "type": "gamepad_axis" }) | ({ "id": number; "invert_y"?: boolean; "stick": Stick; "type": "gamepad_stick" }) | ({ "gesture": ActionGesture; "scale"?: [number, number]; "type": "gesture" });
+  export type KeyCode = "KeyA" | "KeyB" | "KeyC" | "KeyD" | "KeyE" | "KeyF" | "KeyG" | "KeyH" | "KeyI" | "KeyJ" | "KeyK" | "KeyL" | "KeyM" | "KeyN" | "KeyO" | "KeyP" | "KeyQ" | "KeyR" | "KeyS" | "KeyT" | "KeyU" | "KeyV" | "KeyW" | "KeyX" | "KeyY" | "KeyZ" | "Digit0" | "Digit1" | "Digit2" | "Digit3" | "Digit4" | "Digit5" | "Digit6" | "Digit7" | "Digit8" | "Digit9" | "ArrowUp" | "ArrowDown" | "ArrowLeft" | "ArrowRight" | "Space" | "Enter" | "Escape" | "Tab" | "Backspace" | "Delete" | "Insert" | "Home" | "End" | "PageUp" | "PageDown" | "ShiftLeft" | "ShiftRight" | "ControlLeft" | "ControlRight" | "AltLeft" | "AltRight" | "MetaLeft" | "MetaRight" | "CapsLock" | "NumLock" | "ScrollLock" | "Pause" | "PrintScreen" | "ContextMenu" | "Backquote" | "Minus" | "Equal" | "BracketLeft" | "BracketRight" | "Backslash" | "Semicolon" | "Quote" | "Comma" | "Period" | "Slash" | "Numpad0" | "Numpad1" | "Numpad2" | "Numpad3" | "Numpad4" | "Numpad5" | "Numpad6" | "Numpad7" | "Numpad8" | "Numpad9" | "NumpadAdd" | "NumpadSubtract" | "NumpadMultiply" | "NumpadDivide" | "NumpadDecimal" | "NumpadEnter" | "F1" | "F2" | "F3" | "F4" | "F5" | "F6" | "F7" | "F8" | "F9" | "F10" | "F11" | "F12";
+  export type LocaleSettings = { "fallbacks"?: Array<string>; "locale": string; "pseudo"?: boolean };
+  export type MouseButton = "left" | "right" | "middle" | "back" | "forward";
+  export type Origin = "user" | "agent" | "script" | "import";
+  export type PhysicsMode = "fast" | "deterministic";
+  export type Prefab = { "id": string; "name": string; "nodes": { [key: string]: PrefabNode }; "provenance"?: (Provenance) | (null); "root": string };
+  export type PrefabLink = { "node": string; "overrides"?: Array<string>; "root": string; "source": string };
+  export type PrefabNode = { "components": { [key: string]: unknown }; "name": string; "parent"?: string | null };
+  export type Provenance = { "actor": string; "conversation_id"?: string | null; "model"?: string | null; "origin": Origin; "transaction": string };
+  export type Scene = { "entities": { [key: string]: Entity }; "id": string; "name": string; "program"?: (SceneProgram) | (null) };
+  export type SceneProgram = ({ "kind": "wasm"; "module": string });
+  export type ScriptSource = { "id": string; "name": string; "path": string };
+  export type SourceVersion = ({ "state": "missing" }) | ({ "sha256": string; "state": "present" });
+  export type Stick = "left" | "right";
+  export type StringTable = { "id": string; "messages": { [key: string]: { [key: string]: string } }; "name": string; "source_locale": string };
+  export type TextureUsage = "color" | "linear" | "normal";
+  export type Root = { "candidate_sha256": string; "candidate_text": string; "command": Command; "expected_revision": number; "review_id": string; "source_sha256": string };
+}
+export type ProjectPinReview = ProjectPinReviewSchema.Root;
+
+export namespace ProjectSaveReceiptSchema {
+  export type Root = { "candidate_sha256": string; "changed": boolean; "revision": number; "source_sha256": string };
+}
+export type ProjectSaveReceipt = ProjectSaveReceiptSchema.Root;
+
 export namespace RigidBodySchema {
   export type BodyMotion = "fixed" | "dynamic" | "kinematic";
   export type Root = { "angular_damping": number; "can_sleep": boolean; "ccd": boolean; "gravity_scale": number; "linear_damping": number; "motion": BodyMotion };

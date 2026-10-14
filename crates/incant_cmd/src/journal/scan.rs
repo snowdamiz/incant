@@ -13,8 +13,14 @@ pub(crate) struct ProjectRecord {
     pub operation: Id,
     pub edit: incant_source::ProjectEdit,
     pub status: ProjectStatus,
+    pub checkpoint: bool,
 }
 enum Pending {
+    Checkpoint {
+        operation: Id,
+        change: Option<Change>,
+        crdt: String,
+    },
     Source {
         operation: Id,
         change: Change,
@@ -115,8 +121,8 @@ pub(crate) fn replay(
             return Err(corrupt("journal record exceeds limit"));
         }
         let entry: Entry = serde_json::from_slice(line).map_err(|e| corrupt(&e.to_string()))?;
-        if !matches!(entry.version, 1..=3)
-            || (!bounded && entry.version == 3)
+        if !matches!(entry.version, 1..=4)
+            || (!bounded && entry.version >= 3)
             || entry.sequence != journal.sequence
             || entry.previous != journal.previous
             || entry.digest
@@ -133,7 +139,7 @@ pub(crate) fn replay(
         let mut logical = true;
         let committed = matches!(
             entry.action,
-            Action::Commit { .. } | Action::ProjectCommit { .. }
+            Action::Commit { .. } | Action::ProjectCommit { .. } | Action::CheckpointCommit { .. }
         );
         match entry.action {
             Action::Initialize { project } => {
@@ -212,6 +218,7 @@ pub(crate) fn replay(
                     operation: operation.clone(),
                     edit,
                     status: ProjectStatus::Prepared,
+                    checkpoint: false,
                 });
                 pending = Some(Pending::Project {
                     operation,
@@ -219,6 +226,78 @@ pub(crate) fn replay(
                     crdt: entry.crdt.clone(),
                 });
                 logical = false;
+            }
+            Action::CheckpointPrepare {
+                operation,
+                edit,
+                revision,
+                actor,
+                change,
+            } => {
+                if entry.version != 4
+                    || journal.sequence == 0
+                    || pending.is_some()
+                    || ulid::Ulid::from_string(&operation)
+                        .map(|id| id.to_string())
+                        .ok()
+                        .as_ref()
+                        != Some(&operation)
+                    || !checkpoints.contains(&project_digest(&Project::from_text(&edit.before)?)?)
+                {
+                    return Err(corrupt("invalid checkpoint prepare"));
+                }
+                super::super::project_checkpoint::validate_prepare(
+                    &bus, &edit, &change, revision, &actor, &operation,
+                )?;
+                let desired = STANDARD
+                    .decode(&entry.crdt)
+                    .map_err(|_| corrupt("invalid checkpoint CRDT"))?;
+                if CollaborativeDocument::from_export(&desired)?.project()?
+                    != Project::from_text(&edit.after)?
+                    || (change.is_none() && journal.checkpoint.as_ref() != Some(&entry.crdt))
+                {
+                    return Err(corrupt("checkpoint causal state mismatch"));
+                }
+                last_project = Some(ProjectRecord {
+                    operation: operation.clone(),
+                    edit,
+                    status: ProjectStatus::Prepared,
+                    checkpoint: true,
+                });
+                pending = Some(Pending::Checkpoint {
+                    operation,
+                    change,
+                    crdt: entry.crdt.clone(),
+                });
+                logical = false;
+            }
+            Action::CheckpointCommit { operation } | Action::CheckpointAbort { operation } => {
+                let Some(Pending::Checkpoint {
+                    operation: prepared,
+                    change,
+                    crdt,
+                }) = pending.take()
+                else {
+                    return Err(corrupt("checkpoint terminal without prepare"));
+                };
+                if entry.version != 4 || operation != prepared {
+                    return Err(corrupt("checkpoint operation mismatch"));
+                }
+                if committed {
+                    if entry.crdt != crdt {
+                        return Err(corrupt("checkpoint commit causal mismatch"));
+                    }
+                    if let Some(change) = change {
+                        replay_change(&mut bus, change, &initial.id)?;
+                    }
+                } else if journal.checkpoint.as_ref() != Some(&entry.crdt) {
+                    return Err(corrupt("checkpoint abort causal mismatch"));
+                }
+                last_project.as_mut().expect("prepared checkpoint").status = if committed {
+                    ProjectStatus::Committed
+                } else {
+                    ProjectStatus::Aborted
+                };
             }
             Action::Commit { operation } | Action::Abort { operation } => {
                 let Some(Pending::Source {
