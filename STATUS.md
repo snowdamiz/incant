@@ -1,15 +1,16 @@
 # Implementation status
 
-## Linked prefab authoring — current-main composition pending
+## Linked prefab authoring — qualified main270 composition
 
-A fixed-topology linked-prefab backend materializes ordinary entities through
-atomic `incant_cmd` transactions. Explicit identity maps, component overrides,
-revert, prototype updates, detach and deletion retain validation and undo/replay.
-87 document/command CPU cases, a live headless save/reopen case, a cooked native
-consumer case and scoped strict all-target Clippy pass. Published schemas and SDK
-types are regenerated. The producer source and lossless evidence passed independent
-review. Current-main composition is being qualified; nested/topology edits and editor UI remain open.
-[Scope and limitations](docs/spikes/prefab-authoring.md).
+The fixed-topology backend materializes ordinary entities through atomic
+`incant_cmd` transactions, with explicit identity maps, whole-component overrides,
+revert, prototype value updates, detach and deletion. The accepted producer is
+preserved byte-exact on main270. Current qualification passes 87 document/command
+cases, one live RPC save/reopen/undo/redo case and one cooked NativeWorld case
+with 60 steps, plus strict four-package lint and SDK/fmt/conventions checks.
+All nine commands passed. Final current-main independent review and publication
+are pending; nested/topology edits and editor UI remain open.
+[Composition and evidence](docs/spikes/prefab-main270.md).
 
 ## Windows TypeScript deadline — bounded observation, no timeout fix claim
 
@@ -546,9 +547,10 @@ unification also affects other cc build consumers in the selected host graph.
 Windows candidate execution and timing remain pending; no Windows speedup or
 performance gate is claimed. [Scope and evidence](docs/spikes/wasm-c-parallel.md).
 
-## Development and release overview — 2026-10-13
+## Development and release overview — 2026-10-14
 
-The reviewed main258 baseline includes profiler distributions, the Mac runner, Apple/Android host bindings, desktop
+The reviewed main270 baseline includes the measured numeric-loan optimization,
+Core sample/diagnostic tooling, profiler distributions, the Mac runner, Apple/Android host bindings, desktop
 haptics, the retained mobile Rust host, supported
 persisted native game checkpoints, and the opt-in cooked renderer families and
 Vulkan cache lifecycle, dynamic resolution, numerical retained motion, CPU/GPU
@@ -575,7 +577,11 @@ conformance hit its configured deadline. Main243 contains the reviewed macOS
 timeout repair. Checkpoint28 then froze main246 (`42e13e75`) at `be3422f8` on
 PR232 and finished with 13 required successes, nine failures and one skipped
 comparison. The reviewed isolated-lock and ordinary-owner Default repairs are
-merged in PR248. Checkpoint29 finished unpromoted with 22 required successes and the original Linux source-store lock failure. Checkpoint30 promoted exact reviewed main252 (`c1988638`, tree `393eb78c`) through PR232 after all 23 exact-head required contexts and eight workflows succeeded. Release is `71bdd2e7`; its parents, trailer and exact tested tree are verified. Later main253–257 work is outside that release, and no checkpoint is currently active.
+merged in PR248. Checkpoint29 finished unpromoted with 22 required successes and the original Linux source-store lock failure. Checkpoint30 promoted exact reviewed main252 (`c1988638`, tree `393eb78c`) through PR232 after all 23 exact-head required contexts and eight workflows succeeded. Release is `71bdd2e7`; its parents, trailer and exact tested tree are verified. Later main253–270 work is outside that release. Checkpoint31 and checkpoint32
+are terminal and unpromoted, each with 22 required successes and one retained
+failure. Checkpoint32 candidate `e4faac52` remains frozen while the one-shot
+main270 Windows compiler-phase diagnostic supplies evidence; its result cannot
+substitute for the failed required context.
 PR242 merged the private primitive-world composition; PR244/245 added native
 capture and outer in-memory checkpoints, PR246 added opaque ECS/world ownership,
 and PR247 added headless native session checkpoints. PR249 adds opt-in in-memory
@@ -590,8 +596,8 @@ macOS command journal assertion failed. The hosted error was not printed, so the
 inherited-lock cause remains inferred from a controlled local reproduction.
 PR225's test-only isolation preserves production locking and authorization.
 Earlier checkpoint21/22 portability and optional-query failures remain retained.
-Main227 onward stays outside the currently promoted release; no device, performance or phase gate follows
-from promotion. [Previous checkpoint20](docs/spikes/release-checkpoint-20.md) remains
+At checkpoint24, main227 onward remained outside that release; Release30 now
+selects main252. Neither promotion establishes a performance or phase gate. [Previous checkpoint20](docs/spikes/release-checkpoint-20.md) remains
 historical evidence for selected main205.
 
 Failed checkpoints15–19 remain historical and unpromoted. In particular, checkpoint17
@@ -2428,7 +2434,7 @@ desktop input routing and inspector presentation remain Claude handoff 0044 work
 not a completed Play UI, pixel review, phone/performance or phase gate.
 [Evidence](docs/spikes/native-editor-play.md).
 
-## Current integration and parallel work
+## Historical main89 integration and parallel work
 
 The closed retained-state / native SDK / shared Play-startup union passes 837
 ordinary and 75 serialized GPU tests, full Clippy, 536 UI tests and the fresh

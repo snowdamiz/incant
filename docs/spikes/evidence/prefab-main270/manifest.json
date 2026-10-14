@@ -1,0 +1,15 @@
+{
+  "archive_sha256": "80279a361efd7c755a7b96960da924caa8a54033c1fee38da89fb732479ab6b3",
+  "base": "ed3999b02d2a747dee93d278a2c1c50d43f275b7",
+  "evidence_root": "/Users/andreyyurlov/.codex/incant-integration-evidence/prefab-main270",
+  "payloads": 36,
+  "producer": "f707e1eb6333a5f103b6dd6f33c83c11ad11cb1c",
+  "producer_evidence_root": "/Users/andreyyurlov/.codex/incant-evidence/prefab-authoring-001",
+  "producer_manifest_sha256": "fb004550d045af17f3f6cd25789b781ed8699e0b042a41952903566050967aa4",
+  "producer_review_sha256": "10138a8e9fe1de1d9094afc3a6718eb2b30c530fd25447180e9cedfc667bdb62",
+  "records": 47,
+  "scope": "Reviewed fixed-topology authoring backend on actual main270; 89 current deterministic CPU cases, nine successful checks. No GUI, alternate physics, rendering, performance, or phase gate claim.",
+  "source": "71890c3c36e97272aa9b8678de633d42272b5e63",
+  "verifier_sha256": "b55658f229065b505d88694ad95b4c679c827a909f7e471596bdbc9c04a936fb",
+  "version": 1
+}
