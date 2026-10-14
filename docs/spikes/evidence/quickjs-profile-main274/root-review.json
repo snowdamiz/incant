@@ -1,0 +1,36 @@
+{
+  "at": "2026-10-14T07:37:43.333427+00:00",
+  "reviewer": "astra root",
+  "head": "d4e2b4dbe4e6aaf83d4d99d6cc6efec8df96b4c1",
+  "source": "d46db9c9cd792b84c12a5b53fdba73dd20bb186d",
+  "base": "b2475341baca4144f66cb5805a6c5b66baf27176",
+  "manifest_sha256": "38280c06fd17fa62856fa433a4049e8b7aa7d7483d573501b503f93b78b284fa",
+  "review": [
+    "prior production source and producer final receipt retained",
+    "418 incoming paths independently hashed; only additive .gitattributes differs",
+    "current collect.py and verify.py fully read, source/command/result/binary joins checked",
+    "current docs and STATUS reviewed, limitations explicit"
+  ],
+  "replay": {
+    "command": "python3 docs/spikes/evidence/quickjs-profile-main274/verify.py --current --originals --local-binaries",
+    "session": 81157,
+    "terminal_chunk": "8a3ac1",
+    "exit_code": 0,
+    "records": 66,
+    "inputs": 3984,
+    "checks": 13,
+    "rust_cases": 17,
+    "python_controls": 31,
+    "copies": 13,
+    "producer_records": 3325,
+    "producer_copies": 54
+  },
+  "decision": "Accept scoped current-main production profiler intake for PR publication and merge after actual exact-head fast SUCCESS",
+  "limits": [
+    "no shipping measurement",
+    "no guest-loop optimization claim",
+    "no 2ms or 5percent gate success",
+    "no phase approval",
+    "prior failures retained"
+  ]
+}

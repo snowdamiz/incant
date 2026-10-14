@@ -6,8 +6,8 @@ The reviewed producer now composes with main274 without a runtime source seam.
 Thirteen current commands pass: profile off/summary, script/player fixtures in
 both physics modes, strict lint, 21 metric controls, ten probe-lock controls and
 vendor/dependency/static checks. Thirteen current executable copies and the
-unchanged 3,325-record producer packet are retained. Final integration review and
-publication are pending. Reports distinguish maintained allocation counters from
+unchanged 3,325-record producer packet are retained. Final integration review is
+accepted; scoped publication awaits the exact-head hosted fast check. Reports distinguish maintained allocation counters from
 explicit detailed scans and refuse mismatched instrumentation comparisons.
 No shipping speedup, continuous heap peak, 2ms gate or phase claim is made.
 [Current composition and limits](docs/spikes/quickjs-profile-main274.md).

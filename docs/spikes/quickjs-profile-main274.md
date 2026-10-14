@@ -22,7 +22,9 @@ the current archive, SHA256
 `0637a7747f030ec4f4bc0f58a4853cf62c3f2115ba82eba2e392d6bb16d9f9dc`.
 The original producer report's pending-integration wording describes that earlier
 checkpoint; its immutable archive and execution generations remain unchanged.
-Current final packet review and publication are pending.
+Current final packet review is accepted: retained `root-review.json`, SHA256
+`0ca80b41a0175fff97b185707f25c51b15827977391e3fc4e69fa6644f6c728a`.
+Scoped publication awaits the exact-head hosted fast check.
 
 ## Actual current checks
 
