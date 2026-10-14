@@ -1,6 +1,6 @@
 //! Optional desktop window host. Existing cooked data, embedded script, native
 //! game session and retained GPU consumer remain the sole simulation path.
-mod clock;
+pub(crate) mod clock;
 mod gamepad;
 mod haptics;
 mod ime;

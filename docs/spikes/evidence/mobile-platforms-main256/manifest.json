@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "source": "a928652ad67a714c9709cfb12db813a0f3163378",
+  "records": 107,
+  "payloads": 85,
+  "archive": {
+    "path": "docs/spikes/evidence/mobile-platforms-main256/records.json.gz",
+    "bytes": 896725,
+    "sha256": "d0eaf74bbcbada1731d79685cd61522193be04766fc2df77251ba4b9a71a7e53"
+  },
+  "verifier": {
+    "path": "docs/spikes/evidence/mobile-platforms-main256/verify.py",
+    "bytes": 10126,
+    "sha256": "9887ef71946cd483f4d445949302800e7fcb95545dd326546b0e8dfb01188d70"
+  },
+  "qualification": {
+    "path": "docs/spikes/evidence/mobile-platforms-main256/qualification.json",
+    "bytes": 3776,
+    "sha256": "e5c5f4ef223243d5dc6abd931bb569bdc3a2c9165b4d328fe6d046e75f87919c"
+  },
+  "producer_files": [
+    {
+      "path": "tools/probes/mobile-native-platform/collect.py",
+      "bytes": 7516,
+      "sha256": "302b6f0e5e545e4e86fed41f52bf00973dd21e06f164d3b9d8b3bc070dfbebfd"
+    },
+    {
+      "path": "docs/spikes/evidence/mobile-native-platform/manifest.json",
+      "bytes": 588,
+      "sha256": "8e3fcdc5fa285342743c720e9e4004c2f741b03e451f73180b166a0e93f32434"
+    },
+    {
+      "path": "docs/spikes/evidence/mobile-native-platform/records.json.gz",
+      "bytes": 1526501,
+      "sha256": "ada995d70c8677aca599d76ad342274149ae7187b1db39d08c07b32e2f9a031c"
+    },
+    {
+      "path": "docs/spikes/evidence/android-device-host/manifest.json",
+      "bytes": 29052,
+      "sha256": "8e06936c7706eb3c2bd0cbdfe577e87175750fe09b504682ce8313bd165cce0b"
+    },
+    {
+      "path": "docs/spikes/evidence/android-device-host/artifacts.json.gz",
+      "bytes": 1316423,
+      "sha256": "e28985fabc4d899e2a4da1e0022ec774f506647824903d390d9ebdf2284f7e65"
+    },
+    {
+      "path": "docs/spikes/evidence/android-device-host/verify.py",
+      "bytes": 2120,
+      "sha256": "d55d7b59df48beb79932f0f131a831407fcdbbb7e9f76daf86357f87ec62ce2b"
+    }
+  ],
+  "reviews": [
+    {
+      "path": "docs/spikes/evidence/mobile-platforms-main256/mobile-platforms-union-source-root-20261013.json",
+      "bytes": 605,
+      "sha256": "d60183875cb318091c68a826b88cd4a9aa0a2670d30c37d676b51ce9c3502899"
+    },
+    {
+      "path": "docs/spikes/evidence/mobile-platforms-main256/mobile-clock-composition-root-20261013.json",
+      "bytes": 600,
+      "sha256": "d0227f09e1590cf149957ec6721e3bbf751d618c3a87f93e84fdf31c703579ae"
+    },
+    {
+      "path": "docs/spikes/evidence/mobile-platforms-main256/mobile-apple-platform-final-independent-20261013.json",
+      "bytes": 2206,
+      "sha256": "1570b751aea08fce0ff4a8df451e05c8d9490c3ddb7c866245cada33df9f2ff1"
+    },
+    {
+      "path": "docs/spikes/evidence/mobile-platforms-main256/android-device-host-root-20261013.json",
+      "bytes": 1157,
+      "sha256": "35e3d13b9b3c3a1c763623736b7321bbaf361035b449425807ca7052a7049291"
+    },
+    {
+      "path": "docs/spikes/evidence/mobile-platforms-main256/mobile-platforms-main256-final-root-20261013.json",
+      "bytes": 1220,
+      "sha256": "f65506dd74cc4c8bedf904b58b0840026621ae33430ba0087eef2ed6875389b9"
+    }
+  ]
+}

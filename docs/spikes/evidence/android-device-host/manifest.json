@@ -1,0 +1,857 @@
+{
+  "format": "incant-android-device-host-evidence",
+  "version": 1,
+  "source_commit": "d0dd8a7d02b05c05b05ff0db6197bbaef883e7c6",
+  "shared_mobile_commit": "34d84332cb288b7542e2264def874c45d91fdb50",
+  "archive_sha256": "e28985fabc4d899e2a4da1e0022ec774f506647824903d390d9ebdf2284f7e65",
+  "sources": [
+    {
+      "path": "Cargo.lock",
+      "sha256": "e8b06cba61eb910d0e47dd3238642286b276a5afe0eb11e336f397074c2873dd"
+    },
+    {
+      "path": "STATUS.md",
+      "sha256": "97ac3912c3e40c77f59d70256869b75a6b35f2d469e45f775a14f2df5ffec235"
+    },
+    {
+      "path": "crates/incant_game_player/Cargo.toml",
+      "sha256": "b427d8759fc02fd3066ba143302dce28a901f353452da3bb07ee053371f0a4dd"
+    },
+    {
+      "path": "crates/incant_game_player/src/lib.rs",
+      "sha256": "b9c8db4d5f1563b10d490989ac5e618bb34d6e7c25aaafc8f3876a59b6fdfe8d"
+    },
+    {
+      "path": "crates/incant_game_player/src/mobile_android.rs",
+      "sha256": "34f1301de29d917fdf6e2bd55a8cb9e6cac9532bbcf65dee87bf5b1d7ef0cd05"
+    },
+    {
+      "path": "crates/incant_game_player/src/mobile_android/host.rs",
+      "sha256": "69ce2f832978a090e25098c074ec592552d6322bb4db8cb6a96b4e6685a64e11"
+    },
+    {
+      "path": "crates/incant_game_player/src/mobile_android/jni.rs",
+      "sha256": "cb8d7e1d775576bece62afaf1f37bdcd5d9c41ef00c6cfe6f920e45d40be39c1"
+    },
+    {
+      "path": "crates/incant_game_player/src/mobile_android/lifecycle.rs",
+      "sha256": "7adeb71b17a531496e0a62357165485be21ca088f7407bca94d066151ffe57c6"
+    },
+    {
+      "path": "crates/incant_game_player/src/mobile_android/surface.rs",
+      "sha256": "052a0707035aa4a5d434242fb4e3f37b55f268f9384feb721cba1bc82a509a51"
+    },
+    {
+      "path": "docs/spikes/android-device-host.md",
+      "sha256": "1b09e213862c0ab943b67cff78873b98e12b8c106ac13b28741b2259508f3512"
+    },
+    {
+      "path": "platforms/android-player/AndroidManifest.xml",
+      "sha256": "751a386382e93ad4cd1f4af18862f4e60ea2acbb9cb339d7e60f99638f0148d5"
+    },
+    {
+      "path": "platforms/android-player/src/dev/incant/player/MainActivity.java",
+      "sha256": "a88b0e8d66804aceebb117725b89a13c05759798e1fc601172bc291f584a683f"
+    },
+    {
+      "path": "platforms/android-player/src/dev/incant/player/NativeBridge.java",
+      "sha256": "308fa4601772fe5ce2ed1fe553c69ae60ca98f94b370d3e66e082c7b099dfc1a"
+    },
+    {
+      "path": "platforms/android-player/src/dev/incant/player/PackageFiles.java",
+      "sha256": "6d7f7a6f5e65efcb86b5dd5f85e605edc74a21490c453bdd8cb69a14f8f0c659"
+    },
+    {
+      "path": "tools/android_host.py",
+      "sha256": "19bd446bab63aa66089047d65ec16fb9d3cc70a39c4d94cbeb81cb98a5af6d48"
+    },
+    {
+      "path": "tools/export_android_host.py",
+      "sha256": "c7de890b7105c002155f0246698ee760ae2adac4766cdb220c787718ca5208ce"
+    },
+    {
+      "path": "tools/tests/test_android_host.py",
+      "sha256": "20614a01dd5a8d81197f9d1e7f3f7c2acec0b8441b2cb81f457671692015a56c"
+    }
+  ],
+  "records": [
+    {
+      "path": "android-001.json",
+      "bytes": 2914,
+      "sha256": "2cdcc3498e5d6733bac5f9266158c52a14b8f1a0a5f1af0a2c32fccec83d14cd"
+    },
+    {
+      "path": "android-001.stderr",
+      "bytes": 20356,
+      "sha256": "c540c9f97b3d19e8d7eb6a6089be5bc4f2a4ca4e5f6031074b9097bbf453d140"
+    },
+    {
+      "path": "android-001.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "android-002.json",
+      "bytes": 2913,
+      "sha256": "f3bbe1a78c3460e89abe7a28b212b6ba847f97df8ee20282043219f7e95d93af"
+    },
+    {
+      "path": "android-002.stderr",
+      "bytes": 199,
+      "sha256": "c8629b557ef777b869f3d65e276c595748894fa618746d675505d5e3c9bdd7a8"
+    },
+    {
+      "path": "android-002.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "clippy-android-002.json",
+      "bytes": 2950,
+      "sha256": "2080f0ca8ac0d485562f51775884b9aee15828c3f3b9153a7dd156454ec6dec9"
+    },
+    {
+      "path": "clippy-android-002.stderr",
+      "bytes": 3007,
+      "sha256": "0601127b932ec8f5598eb5f6729615ee5dae238af5095b1fe2bb49e972bcb664"
+    },
+    {
+      "path": "clippy-android-002.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "clippy-mac-002.json",
+      "bytes": 2919,
+      "sha256": "e32c2a2211e660703b2e589d8228b1f60c81b5883add7e37e1d7f7e21ff33416"
+    },
+    {
+      "path": "clippy-mac-002.stderr",
+      "bytes": 5682,
+      "sha256": "dcf13b6b5be50a827793799c03c31d68f68b3bdf50712a866a99f1caebfbc787"
+    },
+    {
+      "path": "clippy-mac-002.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "collect.py",
+      "bytes": 3653,
+      "sha256": "f552e58e771c6c0c011ce5220eb2fa40424a34b821acba751e467b5bfb553c49"
+    },
+    {
+      "path": "conventions-003.json",
+      "bytes": 2744,
+      "sha256": "f0804c95e57ce8c8728914081c0a558758a98d8f7ae82e2358932af768da0bb2"
+    },
+    {
+      "path": "conventions-003.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "conventions-003.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "cpu-001.json",
+      "bytes": 2891,
+      "sha256": "d34ef488def8601a9faa71cbce5d6972340f108c2c6b078183fc304ae189d2b3"
+    },
+    {
+      "path": "cpu-001.stderr",
+      "bytes": 5599,
+      "sha256": "c60f9c1e2fbd068ddcde24dc17b6e7dcab13e0104fbd60d7c1ba8dadec1bd184"
+    },
+    {
+      "path": "cpu-001.stdout",
+      "bytes": 416,
+      "sha256": "c8c49e9092ef323da8b385d8d7fde1cdff4c48d9df0f526a6c15a0ed017ffe1b"
+    },
+    {
+      "path": "cpu-002.json",
+      "bytes": 2891,
+      "sha256": "0b568c195832e44c601e863445872a41861f871e89137571926a9c13e5eb7a25"
+    },
+    {
+      "path": "cpu-002.stderr",
+      "bytes": 736,
+      "sha256": "bc3d53d32136170ccaaf8098957aa732c2bb0eb7b600d33653ef0398b5bf6228"
+    },
+    {
+      "path": "cpu-002.stdout",
+      "bytes": 628,
+      "sha256": "b832e8ad41b1cc1ded1e9bc5b3c6acaf86cec4de4a50640a45b6020f2c2baa72"
+    },
+    {
+      "path": "diff-003.json",
+      "bytes": 2712,
+      "sha256": "38973268ee145c634ee131581b70aae4593ec404ec2174c0a7ac96b20acce79e"
+    },
+    {
+      "path": "diff-003.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "diff-003.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "diff-004.json",
+      "bytes": 2714,
+      "sha256": "8ffadde44052f307e0724193ae4237bede8d30bcb50cf53ffa14a7aadeb1e44d"
+    },
+    {
+      "path": "diff-004.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "diff-004.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "fmt-002.json",
+      "bytes": 2737,
+      "sha256": "e7b2ef486caea43cd9824f8201e9738b740e5f144f68f43ca8b21871ccd4dd9a"
+    },
+    {
+      "path": "fmt-002.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "fmt-002.stdout",
+      "bytes": 578,
+      "sha256": "e5dc415fa3d18a13c1d87ec67c295ea97d7dc9038559adbbaa5a907ded9a790a"
+    },
+    {
+      "path": "fmt-003.json",
+      "bytes": 2737,
+      "sha256": "b2c3b67b1e820c3c1905ce69d4c5edcdd7142f75d503ed2fec5f2d5a4151889e"
+    },
+    {
+      "path": "fmt-003.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "fmt-003.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "graph-android-003.json",
+      "bytes": 2973,
+      "sha256": "5c6d815edc7fa90214912cbb567265b8555eaac635bdd74688ee5c8d39d9ba29"
+    },
+    {
+      "path": "graph-android-003.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "graph-android-003.stdout",
+      "bytes": 40002,
+      "sha256": "7c90903f03486e96f2fc417f5033cab356854ad0d60568e0c96e3988da09a2d1"
+    },
+    {
+      "path": "helpers-002.json",
+      "bytes": 2753,
+      "sha256": "e3b210c017f8cc555e1559fa82233b881f2666d067de80b1de0dfc18ee378485"
+    },
+    {
+      "path": "helpers-002.stderr",
+      "bytes": 104,
+      "sha256": "65378dcad145da2497120819bebfc3c46534dce9714ce064b3d809a56654aca2"
+    },
+    {
+      "path": "helpers-002.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "helpers-004.json",
+      "bytes": 2754,
+      "sha256": "c04843d2201861bdec800fd2e41b0ece87cc272ff4476a6f15eaf2303ac352d4"
+    },
+    {
+      "path": "helpers-004.stderr",
+      "bytes": 105,
+      "sha256": "670a39115e7523a8984e4842e16547cb2094b03fad392b037b4b9dc8b2656e62"
+    },
+    {
+      "path": "helpers-004.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "java-001-invocation-failure.txt",
+      "bytes": 569,
+      "sha256": "109e6f1b071bd4afa13b9dcabb15bf7af8b04022156b7d22a8d861c10a765463"
+    },
+    {
+      "path": "java-002.json",
+      "bytes": 3374,
+      "sha256": "1b758e0b5e3c1dac20abc5b64cc6d7c92029e7641dea283bd90a98cef6455dbd"
+    },
+    {
+      "path": "java-002.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "java-002.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "java-003.json",
+      "bytes": 3375,
+      "sha256": "00db113823602ed3f710b2647cd9e591a372878bc8c99f0393e89d087668b061"
+    },
+    {
+      "path": "java-003.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "java-003.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "java-classes/dev/incant/player/MainActivity.class",
+      "bytes": 8106,
+      "sha256": "9ed8ba059fa24ade778c8a84c3c413d439dc6bd813aed04aec2639baf6133693"
+    },
+    {
+      "path": "java-classes/dev/incant/player/NativeBridge.class",
+      "bytes": 605,
+      "sha256": "07c5b60ecc5a94a5eb20555989dc96c4695dcf9f2581a53b495ff8ca6ccc3adb"
+    },
+    {
+      "path": "java-classes/dev/incant/player/PackageFiles.class",
+      "bytes": 4998,
+      "sha256": "704cfbc741120327c75131245586107bcc4616fb4bf753d46af0d9f04abbad8a"
+    },
+    {
+      "path": "lean-003.json",
+      "bytes": 2819,
+      "sha256": "e62275f73136079c50a339ada7ede6c595affbd92335ef54e7df9ce7fa68ae1c"
+    },
+    {
+      "path": "lean-003.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "lean-003.stdout",
+      "bytes": 103,
+      "sha256": "a8d4e9e185259ebc7ef7bb32ad17a0553f9f54fd50aea4c3d4e3baff1d002be7"
+    },
+    {
+      "path": "mac-library-002.json",
+      "bytes": 2866,
+      "sha256": "07fe8bc7d3ab609c1bff43048ad2d6b4496b35c5df869c6d2ec2a0af183a484b"
+    },
+    {
+      "path": "mac-library-002.stderr",
+      "bytes": 609,
+      "sha256": "6cea6ab9e2e621a3c57590f3d4d16c0af7488d65b36414643ed08ef32fcbaa88"
+    },
+    {
+      "path": "mac-library-002.stdout",
+      "bytes": 3790,
+      "sha256": "b8e4272c714e2511e6d80c2c1a55bdb73ca9fe23e58f061fc372f7b3045119c1"
+    },
+    {
+      "path": "metadata-001.json",
+      "bytes": 2754,
+      "sha256": "9ef40ed0b12b88e351b8272d157cf8225d1b66f512a7fdd1751f6a67a0ddba70"
+    },
+    {
+      "path": "metadata-001.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "metadata-001.stdout",
+      "bytes": 4935002,
+      "sha256": "cfbb73a1b4dc4943e6407a3d92e7c3cc0f0a5798860c7fdc1aa75d82c0175dcb"
+    },
+    {
+      "path": "run-002.py",
+      "bytes": 3653,
+      "sha256": "ff6abb9ae7113c09729c0a629d1ed5eeeb7b026aea7653d41d71e92de28ebdd6"
+    },
+    {
+      "path": "run-004.py",
+      "bytes": 2063,
+      "sha256": "590f41faa2d8c0afa7f41430cd1d661d2b8529fbb775d503fcdfd93f70b5531e"
+    },
+    {
+      "path": "run-final.py",
+      "bytes": 2472,
+      "sha256": "eae542c66930f939992c9994b604391c81aff58858f06304a555bdb2c4e4d077"
+    },
+    {
+      "path": "run-guards.py",
+      "bytes": 2485,
+      "sha256": "86fbeee4fe1ceb48ad70ea00ccb5e152fed8cdb03783e7297878e256b62759e9"
+    },
+    {
+      "path": "run.py",
+      "bytes": 3406,
+      "sha256": "1c11e8792fef499d1c55a2026e04b5a24e973e22f0d2127aac2123bb9bee7d56"
+    },
+    {
+      "path": "source-001/Cargo.lock",
+      "bytes": 253026,
+      "sha256": "e8b06cba61eb910d0e47dd3238642286b276a5afe0eb11e336f397074c2873dd"
+    },
+    {
+      "path": "source-001/crates/incant_game_player/Cargo.toml",
+      "bytes": 5096,
+      "sha256": "b427d8759fc02fd3066ba143302dce28a901f353452da3bb07ee053371f0a4dd"
+    },
+    {
+      "path": "source-001/crates/incant_game_player/src/lib.rs",
+      "bytes": 10324,
+      "sha256": "67bcf87f126caf26abbd920cb1c2a13ffff0506b1554bdfc6f69f28035e2089e"
+    },
+    {
+      "path": "source-001/crates/incant_game_player/src/mobile_android/host.rs",
+      "bytes": 8728,
+      "sha256": "55c6c5ed0c20a74987ca41343330ce524f02608c50bda1130aadd07e32acde1c"
+    },
+    {
+      "path": "source-001/crates/incant_game_player/src/mobile_android/jni.rs",
+      "bytes": 9486,
+      "sha256": "ab4b0619a5aaf451cb67033be9e13d4e0eadfda45eb07fc731e578f5ce6183ce"
+    },
+    {
+      "path": "source-001/crates/incant_game_player/src/mobile_android/lifecycle.rs",
+      "bytes": 5629,
+      "sha256": "3f395d219cb9cb610c9db6d15f9b06c8a177bda744aedf80df4895343c27bb44"
+    },
+    {
+      "path": "source-001/crates/incant_game_player/src/mobile_android/surface.rs",
+      "bytes": 7685,
+      "sha256": "b85a59b791a43b3ae87c068107e13ac6a378d581dbff63744e8cb0e2aadcfcba"
+    },
+    {
+      "path": "source-001/crates/incant_game_player/src/mobile_android.rs",
+      "bytes": 261,
+      "sha256": "34f1301de29d917fdf6e2bd55a8cb9e6cac9532bbcf65dee87bf5b1d7ef0cd05"
+    },
+    {
+      "path": "source-001/freeze.json",
+      "bytes": 2022,
+      "sha256": "d56122cf0bb6c6f9a3985d9b8355601d39643e91ef35a806df42979bfcceb414"
+    },
+    {
+      "path": "source-001/platforms/android-player/AndroidManifest.xml",
+      "bytes": 815,
+      "sha256": "72c118493bf52f788ae2617a32a05ef9dbfe7bdfa7e0fd468902968cf5bb7471"
+    },
+    {
+      "path": "source-001/platforms/android-player/src/dev/incant/player/MainActivity.java",
+      "bytes": 8117,
+      "sha256": "a88b0e8d66804aceebb117725b89a13c05759798e1fc601172bc291f584a683f"
+    },
+    {
+      "path": "source-001/platforms/android-player/src/dev/incant/player/NativeBridge.java",
+      "bytes": 859,
+      "sha256": "308fa4601772fe5ce2ed1fe553c69ae60ca98f94b370d3e66e082c7b099dfc1a"
+    },
+    {
+      "path": "source-001/platforms/android-player/src/dev/incant/player/PackageFiles.java",
+      "bytes": 3350,
+      "sha256": "fdf2cc123ca0e4c0220afa12a3b5fa83ca0c86b5dfd38b82449e2dcfcdee30d4"
+    },
+    {
+      "path": "source-002/Cargo.lock",
+      "bytes": 253026,
+      "sha256": "e8b06cba61eb910d0e47dd3238642286b276a5afe0eb11e336f397074c2873dd"
+    },
+    {
+      "path": "source-002/crates/incant_game_player/Cargo.toml",
+      "bytes": 5096,
+      "sha256": "b427d8759fc02fd3066ba143302dce28a901f353452da3bb07ee053371f0a4dd"
+    },
+    {
+      "path": "source-002/crates/incant_game_player/src/lib.rs",
+      "bytes": 10324,
+      "sha256": "67bcf87f126caf26abbd920cb1c2a13ffff0506b1554bdfc6f69f28035e2089e"
+    },
+    {
+      "path": "source-002/crates/incant_game_player/src/mobile_android/host.rs",
+      "bytes": 8181,
+      "sha256": "69ce2f832978a090e25098c074ec592552d6322bb4db8cb6a96b4e6685a64e11"
+    },
+    {
+      "path": "source-002/crates/incant_game_player/src/mobile_android/jni.rs",
+      "bytes": 9628,
+      "sha256": "cb8d7e1d775576bece62afaf1f37bdcd5d9c41ef00c6cfe6f920e45d40be39c1"
+    },
+    {
+      "path": "source-002/crates/incant_game_player/src/mobile_android/lifecycle.rs",
+      "bytes": 7578,
+      "sha256": "7adeb71b17a531496e0a62357165485be21ca088f7407bca94d066151ffe57c6"
+    },
+    {
+      "path": "source-002/crates/incant_game_player/src/mobile_android/surface.rs",
+      "bytes": 7491,
+      "sha256": "052a0707035aa4a5d434242fb4e3f37b55f268f9384feb721cba1bc82a509a51"
+    },
+    {
+      "path": "source-002/crates/incant_game_player/src/mobile_android.rs",
+      "bytes": 261,
+      "sha256": "34f1301de29d917fdf6e2bd55a8cb9e6cac9532bbcf65dee87bf5b1d7ef0cd05"
+    },
+    {
+      "path": "source-002/freeze.json",
+      "bytes": 2445,
+      "sha256": "ca166d9e22f7d985f86e23ac9685deb5489e0157ad6ba452184d77256edafbfc"
+    },
+    {
+      "path": "source-002/platforms/android-player/AndroidManifest.xml",
+      "bytes": 865,
+      "sha256": "751a386382e93ad4cd1f4af18862f4e60ea2acbb9cb339d7e60f99638f0148d5"
+    },
+    {
+      "path": "source-002/platforms/android-player/src/dev/incant/player/MainActivity.java",
+      "bytes": 8117,
+      "sha256": "a88b0e8d66804aceebb117725b89a13c05759798e1fc601172bc291f584a683f"
+    },
+    {
+      "path": "source-002/platforms/android-player/src/dev/incant/player/NativeBridge.java",
+      "bytes": 859,
+      "sha256": "308fa4601772fe5ce2ed1fe553c69ae60ca98f94b370d3e66e082c7b099dfc1a"
+    },
+    {
+      "path": "source-002/platforms/android-player/src/dev/incant/player/PackageFiles.java",
+      "bytes": 3793,
+      "sha256": "6d7f7a6f5e65efcb86b5dd5f85e605edc74a21490c453bdd8cb69a14f8f0c659"
+    },
+    {
+      "path": "source-002/tools/android_host.py",
+      "bytes": 3373,
+      "sha256": "954954da9c4bd9e1478c81648aecbe2f3fda29637b9e0d946ab292dd3c873ed7"
+    },
+    {
+      "path": "source-002/tools/export_android_host.py",
+      "bytes": 9985,
+      "sha256": "c7de890b7105c002155f0246698ee760ae2adac4766cdb220c787718ca5208ce"
+    },
+    {
+      "path": "source-002/tools/tests/test_android_host.py",
+      "bytes": 4358,
+      "sha256": "d6e10ae0421bbcb6a1b8d91899afc938475657cfe91e3e990732ba28a9f0e55f"
+    },
+    {
+      "path": "source-003/Cargo.lock",
+      "bytes": 253026,
+      "sha256": "e8b06cba61eb910d0e47dd3238642286b276a5afe0eb11e336f397074c2873dd"
+    },
+    {
+      "path": "source-003/crates/incant_game_player/Cargo.toml",
+      "bytes": 5096,
+      "sha256": "b427d8759fc02fd3066ba143302dce28a901f353452da3bb07ee053371f0a4dd"
+    },
+    {
+      "path": "source-003/crates/incant_game_player/src/lib.rs",
+      "bytes": 10324,
+      "sha256": "b9c8db4d5f1563b10d490989ac5e618bb34d6e7c25aaafc8f3876a59b6fdfe8d"
+    },
+    {
+      "path": "source-003/crates/incant_game_player/src/mobile_android/host.rs",
+      "bytes": 8181,
+      "sha256": "69ce2f832978a090e25098c074ec592552d6322bb4db8cb6a96b4e6685a64e11"
+    },
+    {
+      "path": "source-003/crates/incant_game_player/src/mobile_android/jni.rs",
+      "bytes": 9628,
+      "sha256": "cb8d7e1d775576bece62afaf1f37bdcd5d9c41ef00c6cfe6f920e45d40be39c1"
+    },
+    {
+      "path": "source-003/crates/incant_game_player/src/mobile_android/lifecycle.rs",
+      "bytes": 7578,
+      "sha256": "7adeb71b17a531496e0a62357165485be21ca088f7407bca94d066151ffe57c6"
+    },
+    {
+      "path": "source-003/crates/incant_game_player/src/mobile_android/surface.rs",
+      "bytes": 7491,
+      "sha256": "052a0707035aa4a5d434242fb4e3f37b55f268f9384feb721cba1bc82a509a51"
+    },
+    {
+      "path": "source-003/crates/incant_game_player/src/mobile_android.rs",
+      "bytes": 261,
+      "sha256": "34f1301de29d917fdf6e2bd55a8cb9e6cac9532bbcf65dee87bf5b1d7ef0cd05"
+    },
+    {
+      "path": "source-003/docs/spikes/android-device-host.md",
+      "bytes": 5103,
+      "sha256": "4bb456ee3fe029f941f5ca734f3725fcf21ae27db07eaf8f4ab3c41ba9d2f4e8"
+    },
+    {
+      "path": "source-003/freeze.json",
+      "bytes": 2593,
+      "sha256": "3e58fac9acbda69db37370ac6950a8a108a7e111f92e683715b2c2425dc1e3e5"
+    },
+    {
+      "path": "source-003/platforms/android-player/AndroidManifest.xml",
+      "bytes": 865,
+      "sha256": "751a386382e93ad4cd1f4af18862f4e60ea2acbb9cb339d7e60f99638f0148d5"
+    },
+    {
+      "path": "source-003/platforms/android-player/src/dev/incant/player/MainActivity.java",
+      "bytes": 8117,
+      "sha256": "a88b0e8d66804aceebb117725b89a13c05759798e1fc601172bc291f584a683f"
+    },
+    {
+      "path": "source-003/platforms/android-player/src/dev/incant/player/NativeBridge.java",
+      "bytes": 859,
+      "sha256": "308fa4601772fe5ce2ed1fe553c69ae60ca98f94b370d3e66e082c7b099dfc1a"
+    },
+    {
+      "path": "source-003/platforms/android-player/src/dev/incant/player/PackageFiles.java",
+      "bytes": 3793,
+      "sha256": "6d7f7a6f5e65efcb86b5dd5f85e605edc74a21490c453bdd8cb69a14f8f0c659"
+    },
+    {
+      "path": "source-003/tools/android_host.py",
+      "bytes": 3373,
+      "sha256": "954954da9c4bd9e1478c81648aecbe2f3fda29637b9e0d946ab292dd3c873ed7"
+    },
+    {
+      "path": "source-003/tools/export_android_host.py",
+      "bytes": 9985,
+      "sha256": "c7de890b7105c002155f0246698ee760ae2adac4766cdb220c787718ca5208ce"
+    },
+    {
+      "path": "source-003/tools/tests/test_android_host.py",
+      "bytes": 4358,
+      "sha256": "d6e10ae0421bbcb6a1b8d91899afc938475657cfe91e3e990732ba28a9f0e55f"
+    },
+    {
+      "path": "source-004/Cargo.lock",
+      "bytes": 253026,
+      "sha256": "e8b06cba61eb910d0e47dd3238642286b276a5afe0eb11e336f397074c2873dd"
+    },
+    {
+      "path": "source-004/STATUS.md",
+      "bytes": 209384,
+      "sha256": "97ac3912c3e40c77f59d70256869b75a6b35f2d469e45f775a14f2df5ffec235"
+    },
+    {
+      "path": "source-004/crates/incant_game_player/Cargo.toml",
+      "bytes": 5096,
+      "sha256": "b427d8759fc02fd3066ba143302dce28a901f353452da3bb07ee053371f0a4dd"
+    },
+    {
+      "path": "source-004/crates/incant_game_player/src/lib.rs",
+      "bytes": 10324,
+      "sha256": "b9c8db4d5f1563b10d490989ac5e618bb34d6e7c25aaafc8f3876a59b6fdfe8d"
+    },
+    {
+      "path": "source-004/crates/incant_game_player/src/mobile_android/host.rs",
+      "bytes": 8181,
+      "sha256": "69ce2f832978a090e25098c074ec592552d6322bb4db8cb6a96b4e6685a64e11"
+    },
+    {
+      "path": "source-004/crates/incant_game_player/src/mobile_android/jni.rs",
+      "bytes": 9628,
+      "sha256": "cb8d7e1d775576bece62afaf1f37bdcd5d9c41ef00c6cfe6f920e45d40be39c1"
+    },
+    {
+      "path": "source-004/crates/incant_game_player/src/mobile_android/lifecycle.rs",
+      "bytes": 7578,
+      "sha256": "7adeb71b17a531496e0a62357165485be21ca088f7407bca94d066151ffe57c6"
+    },
+    {
+      "path": "source-004/crates/incant_game_player/src/mobile_android/surface.rs",
+      "bytes": 7491,
+      "sha256": "052a0707035aa4a5d434242fb4e3f37b55f268f9384feb721cba1bc82a509a51"
+    },
+    {
+      "path": "source-004/crates/incant_game_player/src/mobile_android.rs",
+      "bytes": 261,
+      "sha256": "34f1301de29d917fdf6e2bd55a8cb9e6cac9532bbcf65dee87bf5b1d7ef0cd05"
+    },
+    {
+      "path": "source-004/docs/spikes/android-device-host.md",
+      "bytes": 5385,
+      "sha256": "1b09e213862c0ab943b67cff78873b98e12b8c106ac13b28741b2259508f3512"
+    },
+    {
+      "path": "source-004/freeze.json",
+      "bytes": 2725,
+      "sha256": "7da3bee1fb39a3be93ffd47e0607895fca4a0f880592e41d432f611c9a867a83"
+    },
+    {
+      "path": "source-004/platforms/android-player/AndroidManifest.xml",
+      "bytes": 865,
+      "sha256": "751a386382e93ad4cd1f4af18862f4e60ea2acbb9cb339d7e60f99638f0148d5"
+    },
+    {
+      "path": "source-004/platforms/android-player/src/dev/incant/player/MainActivity.java",
+      "bytes": 8117,
+      "sha256": "a88b0e8d66804aceebb117725b89a13c05759798e1fc601172bc291f584a683f"
+    },
+    {
+      "path": "source-004/platforms/android-player/src/dev/incant/player/NativeBridge.java",
+      "bytes": 859,
+      "sha256": "308fa4601772fe5ce2ed1fe553c69ae60ca98f94b370d3e66e082c7b099dfc1a"
+    },
+    {
+      "path": "source-004/platforms/android-player/src/dev/incant/player/PackageFiles.java",
+      "bytes": 3793,
+      "sha256": "6d7f7a6f5e65efcb86b5dd5f85e605edc74a21490c453bdd8cb69a14f8f0c659"
+    },
+    {
+      "path": "source-004/tools/android_host.py",
+      "bytes": 3595,
+      "sha256": "19bd446bab63aa66089047d65ec16fb9d3cc70a39c4d94cbeb81cb98a5af6d48"
+    },
+    {
+      "path": "source-004/tools/export_android_host.py",
+      "bytes": 9985,
+      "sha256": "c7de890b7105c002155f0246698ee760ae2adac4766cdb220c787718ca5208ce"
+    },
+    {
+      "path": "source-004/tools/tests/test_android_host.py",
+      "bytes": 5089,
+      "sha256": "20614a01dd5a8d81197f9d1e7f3f7c2acec0b8441b2cb81f457671692015a56c"
+    }
+  ],
+  "commands": [
+    {
+      "receipt": "android-001.json",
+      "exit_code": 101
+    },
+    {
+      "receipt": "android-002.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "clippy-android-002.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "clippy-mac-002.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "conventions-003.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "cpu-001.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "cpu-002.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "diff-003.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "diff-004.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "fmt-002.json",
+      "exit_code": 1
+    },
+    {
+      "receipt": "fmt-003.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "graph-android-003.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "helpers-002.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "helpers-004.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "java-002.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "java-003.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "lean-003.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "mac-library-002.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "metadata-001.json",
+      "exit_code": 0
+    }
+  ],
+  "binaries": [
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/debug/deps/incant_game_player-939d71ec41a5393d",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/android-device-host-001/binaries-001/incant_game_player-939d71ec41a5393d",
+      "sha256": "920a33ba75f0e7578041878e7904f88501d8bf487c02812b1a35845f9467dfe4",
+      "executed_log": "cpu-001.stderr",
+      "bytes": 121907328,
+      "mode": "0o755"
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/debug/deps/incant_game_player-939d71ec41a5393d",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/android-device-host-001/binaries-002/incant_game_player-939d71ec41a5393d",
+      "sha256": "a676ebecc36995c65217ec899a86568988c1efa4e8bc00e5e861225e748a8382",
+      "executed_log": "cpu-002.stderr",
+      "bytes": 121922512,
+      "mode": "0o755"
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/debug/deps/incant_game_player-939d71ec41a5393d",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/android-device-host-001/binaries-mac-002/incant_game_player-939d71ec41a5393d",
+      "sha256": "a676ebecc36995c65217ec899a86568988c1efa4e8bc00e5e861225e748a8382",
+      "executed_log": "mac-library-002.stderr",
+      "bytes": 121922512,
+      "mode": "0o755"
+    }
+  ],
+  "results": {
+    "mac_library": 38,
+    "focused_lifecycle": 5,
+    "helper_policy": 7,
+    "mac_clippy": true,
+    "android_api26_check": true,
+    "android_clippy": true,
+    "java_compile": true,
+    "locked_identities_unchanged": 968
+  },
+  "qualifications": [
+    "CPU counts overlap: focused five are included in Mac38. Source001 three controls are historical.",
+    "Source002 executed Rust and Java; source003 changes only lib.rs module order plus documentation. Source004 aligns exporter catalog line bound and adds its seventh policy test; native Rust unchanged.",
+    "Initial Android JNI signature compile failure and fmt-order failure retained; first invalid javac invocation separately retained as text.",
+    "Java class files retained from successful java-003; initial java-002 classes not separately retained.",
+    "Full shipping APK helper/link not executed. No Android launch/GPU/physical audio/appearance/performance evidence.",
+    "Mobile/other-device execution deferred nonblocking under current director gate.",
+    "Process-lifetime JNI Application context is intentional; no ndk-context release on Activity teardown."
+  ]
+}

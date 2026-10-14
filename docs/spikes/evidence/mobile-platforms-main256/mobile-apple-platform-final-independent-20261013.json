@@ -1,0 +1,46 @@
+{
+  "at": "2026-10-14T00:26:57.688883+00:00",
+  "verdict": "accepted scoped source and CPU/compiler evidence; no remaining actionable source finding",
+  "source": "ab738f41781689b008b0572ce6ca07f78a0788e3",
+  "packet": "1ab47d139484478acbe7af5855823ad1caedd22c",
+  "reviewed_prior": {
+    "path": "/Users/andreyyurlov/.codex/incant-reviews/mobile-apple-abi-source-independent-20261013.json",
+    "sha256": "89329d38b7a6d973b80170ff6c2c8901d5ac316bd84a08ccc305c60a19603d2e"
+  },
+  "closed_finding": "valid output is zeroed before rejecting other open arguments; actual no-resource control observes42->0 and INVALID",
+  "source_delta": "only FFI admission ordering plus one test after reviewed e65a512d",
+  "verified": {
+    "source_inputs": 3719,
+    "lossless_records": 43,
+    "commands": 31,
+    "historical_failures": 2,
+    "copied_binaries": 7,
+    "final_player_per_mode": 40,
+    "initial_hosting_tests": 11,
+    "collector_replay_exit": 0
+  },
+  "artifacts": [
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/docs/spikes/evidence/mobile-native-platform/manifest.json",
+      "sha256": "8e3fcdc5fa285342743c720e9e4004c2f741b03e451f73180b166a0e93f32434"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/docs/spikes/evidence/mobile-native-platform/records.json.gz",
+      "sha256": "ada995d70c8677aca599d76ad342274149ae7187b1db39d08c07b32e2f9a031c"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/tools/probes/mobile-native-platform/collect.py",
+      "sha256": "302b6f0e5e545e4e86fed41f52bf00973dd21e06f164d3b9d8b3bc070dfbebfd"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/mobile-apple-platform-final-audit-20261013.log",
+      "sha256": "2302c8d78a4a3aa87acc48a3c11472293b148ef06b0af833e1eaa42c0ad9d503"
+    }
+  ],
+  "limits": [
+    "No reviewer builds or GPU",
+    "CPU/compiler and Swift6 typecheck evidence only; no physical audio/app execution",
+    "one main-thread retained host; new scene while occupied receives BUSY",
+    "IME and export/app packaging remain unimplemented here; Mac-only current gate scope retained"
+  ]
+}

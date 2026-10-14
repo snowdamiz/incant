@@ -1,5 +1,14 @@
 # Implementation status
 
+The optional Apple and Android native hosts now have a qualified main256
+composition with haptics and persisted checkpoints. Both numerical modes pass
+148 player/game CPU cases (103 player +45 game), and all 44 current checks pass,
+including strict lint and iOS/Android compilation. The shared clock-module
+correction preserves its implementation and the initial duplicate-module lint
+failure. Final integration review is independently accepted; publication awaits its exact-head fast check. GPU/device audio, phone launches,
+exported apps, mobile haptics/IME and performance remain separate, with other-
+device testing deferred and nonblocking. [Scope](docs/spikes/mobile-platforms-main256.md).
+
 Director policy, 2026-10-13: actual desktop testing on this Mac is the only
 device qualification required for development and phase gates. Mobile and other-
 device execution/performance comparisons are deferred, nonblocking follow-up;
@@ -11,8 +20,8 @@ No phase is approved by this policy update. [Plan](PLAN.md).
 Checkpoint30 is promoted through PR232: release `71bdd2e7` has the exact tested
 main252 tree `393eb78c`. All 23 required contexts and all eight push workflows
 succeeded; independent review, merge parents, author trailer and post-merge tree
-are verified. Later main253/254 persisted-session/mobile work remains outside
-that tested release. No checkpoint is currently active; main255 is the latest
+are verified. Later main253–256 persisted-session/mobile/haptics work remains outside
+that tested release. No checkpoint is currently active; main256 is the latest
 integration. This promotion does not approve a phase or distribution gate.
 [Portable evidence](docs/spikes/evidence/release-checkpoint-30/manifest.json).
 
@@ -21,15 +30,15 @@ modes pass 85 player CPU cases with native-window, mobile-host/FFI, native
 checkpoints and the linked static fixture together. Both strict lint runs and
 three selected graph comparisons pass; 18 successful commands and two SDK-driver
 setup failures are retained. All 27 owned producer paths remain exact. Final
-main254 review is accepted; the main255 documentation-only join is independently accepted. Publication awaits the required exact-head fast check. Physical motor/mobile actuator execution and
+main254 review and the main255 documentation-only join are independently accepted. PR256 merged after its exact-head fast SUCCESS. Physical motor/mobile actuator execution and
 performance remain untested. [Evidence](docs/spikes/haptics-main254.md).
 
 The retained mobile Rust host is composed on actual main253 with its accepted
 producer implementation unchanged. Fresh current-source tests pass 31 mobile+FFI
 library cases and 34 native-checkpoint player cases in each numerical mode,
 including matched fresh CLI continuation; all 26 commands pass. Independent
-current-main final review is accepted and PR254 merged after its exact-head fast SUCCESS. Platform surface, touch/IME, device audio
-and phone performance remain separate. [Scope](docs/spikes/mobile-host-main253.md).
+current-main final review is accepted and PR254 merged after its exact-head fast SUCCESS. The later grouped platform composition adds surface, touch and device-audio
+source; IME, actual device execution and phone performance remain separate. [Scope](docs/spikes/mobile-host-main253.md).
 
 The default-off persisted native game path has passing joined CPU qualification:
 267 script/game/player cases in each numerical mode, including separate-process

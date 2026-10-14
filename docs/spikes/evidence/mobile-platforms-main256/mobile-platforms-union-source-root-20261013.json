@@ -1,0 +1,11 @@
+{
+  "accepted_source": true,
+  "source": "d0777898cd60b20197fa72cb02b7a81c94c73721",
+  "source_map_sha256": "5af9d603368dbad780f1b3c7fd354dedf19e64e170c02a0a29db8479c8921df8",
+  "at": "2026-10-14T00:33:16.762782+00:00",
+  "scope": "28production/toolpaths verified in Git and checkout;26 exactly acceptedApple/Android,2hostedseams manuallyreviewed preserve haptics with new suspended constructor+test. No production edits outside reviewedunion. Currentcompositionexecution stillpending.",
+  "seams": [
+    "crates/incant_game_runtime/src/hosted.rs",
+    "crates/incant_game_runtime/tests/hosting.rs"
+  ]
+}
