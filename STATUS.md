@@ -5,7 +5,7 @@ composition with haptics and persisted checkpoints. Both numerical modes pass
 148 player/game CPU cases (103 player +45 game), and all 44 current checks pass,
 including strict lint and iOS/Android compilation. The shared clock-module
 correction preserves its implementation and the initial duplicate-module lint
-failure. Final integration review is pending. GPU/device audio, phone launches,
+failure. Final integration review is independently accepted; publication awaits its exact-head fast check. GPU/device audio, phone launches,
 exported apps, mobile haptics/IME and performance remain separate, with other-
 device testing deferred and nonblocking. [Scope](docs/spikes/mobile-platforms-main256.md).
 

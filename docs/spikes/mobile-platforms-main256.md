@@ -3,7 +3,7 @@
 The opt-in Apple and Android hosts are composed with the main256 haptics and
 persisted-checkpoint player. Tested source is `a928652ad67a714c9709cfb12db813a0f3163378`.
 The exact actual-main256 tree equals the reviewed haptics branch used as its base.
-Final integration review is pending; this packet does not claim device execution.
+Final integration review is independently accepted; publication requires the exact-head fast check. This packet does not claim device execution.
 
 ## Composition
 

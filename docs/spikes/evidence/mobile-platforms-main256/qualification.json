@@ -69,5 +69,5 @@
     }
   ],
   "scope": "Actual current Mac CPU and cross-platform compiler qualification; no GPU, phone, physical audio/motor, exported app or performance evidence. Original Swift/Java compiler receipts are producer-scoped and their owned inputs remain exact. Current composed native Rust is freshly qualified. Optional native platform features remain off by default.",
-  "review": "Source and clock join independently accepted; final current-main evidence review pending."
+  "review": "Final current-main source/execution packet independently accepted; exact-head fast check required before main merge."
 }

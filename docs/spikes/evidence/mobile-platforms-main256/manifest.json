@@ -15,8 +15,8 @@
   },
   "qualification": {
     "path": "docs/spikes/evidence/mobile-platforms-main256/qualification.json",
-    "bytes": 3749,
-    "sha256": "c8d05109d27026aa5543c49b6d5200a78df9454a005b428a7a4982452227f42b"
+    "bytes": 3776,
+    "sha256": "e5c5f4ef223243d5dc6abd931bb569bdc3a2c9165b4d328fe6d046e75f87919c"
   },
   "producer_files": [
     {
@@ -70,6 +70,11 @@
       "path": "docs/spikes/evidence/mobile-platforms-main256/android-device-host-root-20261013.json",
       "bytes": 1157,
       "sha256": "35e3d13b9b3c3a1c763623736b7321bbaf361035b449425807ca7052a7049291"
+    },
+    {
+      "path": "docs/spikes/evidence/mobile-platforms-main256/mobile-platforms-main256-final-root-20261013.json",
+      "bytes": 1220,
+      "sha256": "f65506dd74cc4c8bedf904b58b0840026621ae33430ba0087eef2ed6875389b9"
     }
   ]
 }
