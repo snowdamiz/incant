@@ -3,9 +3,11 @@
 import argparse
 import hashlib
 import json
+import re
 import shutil
 import subprocess
 import tarfile
+import tomllib
 from pathlib import Path
 
 if not __debug__:
@@ -28,6 +30,29 @@ def inventory(root):
         if p.is_file():
             result[p.relative_to(root).as_posix()] = sha(p)
     return result
+
+
+def library_manifest(path):
+    """Exclude upstream example/test-only graphs, never normal/build inputs."""
+    text = path.read_text()
+    before = tomllib.loads(text)
+    omitted, kept = [], []
+    for block in re.split(r'(?m)(?=^\[[^\n]+\]\s*$)', text):
+        header = block.splitlines()[0] if block else ''
+        if header.startswith('[dev-dependencies.') or (
+                header.startswith('[target.') and '.dev-dependencies.' in header):
+            omitted.append(header)
+        else:
+            kept.append(block)
+    result = ''.join(kept)
+    expected = dict(before)
+    expected.pop('dev-dependencies', None)
+    expected['target'] = {name: {k: v for k, v in value.items() if k != 'dev-dependencies'}
+                          for name, value in before['target'].items()}
+    expected['target'] = {name: value for name, value in expected['target'].items() if value}
+    assert tomllib.loads(result) == expected
+    path.write_text(result)
+    return omitted
 
 
 def main():
@@ -64,6 +89,7 @@ def main():
     r = subprocess.run(['patch', '--batch', '--fuzz=0', '-p1', '-i', str(HERE / 'wgpu-hal.patch')], cwd=copied, capture_output=True, timeout=10, check=True)
     (out / 'patch.stdout').write_bytes(r.stdout)
     (out / 'patch.stderr').write_bytes(r.stderr)
+    omitted = library_manifest(copied / 'Cargo.toml')
     for name in ADDED:
         target = copied / 'src/metal' / name
         assert not target.exists()
@@ -80,6 +106,8 @@ version = "0.1.0"
 # Match the injected HAL's edition for the exact collector CPU model too.
 edition = "2021"
 [workspace]
+members = ["wgpu-hal"]
+default-members = ["."]
 [features]
 default = []
 observer = ["wgpu-hal/diagnostic-presentations"]
@@ -95,6 +123,7 @@ opt-level = 1
 ''')
     record = {'diagnostic_only': True, 'built': False, 'root_lock_sha256': sha(ROOT / 'Cargo.lock'),
               'archive_sha256': sha(archive), 'upstream': before, 'patched': after,
+              'upstream_dev_tables_omitted_for_library_qualification': omitted,
               'owned_sources': inventory(HERE), 'root': str(ROOT), 'prepared': str(out)}
     (out / 'manifest.json').write_text(json.dumps(record, indent=2) + '\n')
     print(json.dumps({'prepared': str(out), 'source_only': True}))
