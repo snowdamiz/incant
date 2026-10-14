@@ -1,0 +1,48 @@
+{
+  "format": "incant-independent-evidence-review",
+  "version": 1,
+  "reviewer": "astra /root/native_wasm_export",
+  "reviewed_at": "2026-10-14T01:17:34.037757+00:00",
+  "status": "accepted-scoped-execution-evidence",
+  "executed_source": "bff83af61807435926b10d77b5a04718a464aae5",
+  "scope": [
+    "Root completed Mac shipping deterministic original Core baseline; raw build/run source identities and metrics independently recomputed.",
+    "No new player/compiler/GPU execution; no independent re-review of reviewer-authored profiler source, whose root acceptance is retained."
+  ],
+  "packet_manifest_sha256": "134b7cc3a5ba95bb7319ae11dcadc2edacc237c0f5365818483652dd44ddfad4",
+  "archive_sha256": "464615f6df17f02c0a2ed59f0f6d72267ba9503abca00ad1518f00baaa44d2a0",
+  "audit_result_sha256": "ed634d36521a14cce946b0b29ed5fb83be224f7c0aed23943972c768c800cb3a",
+  "audit_files": {
+    "build.py": "d1b46a6da07be370d1552b2f8f48696509ccaad3d3a22dbb0314ee79ee1f49b1",
+    "collect.py": "0207438fa206c6dac396e62e39e048a10be16112529fae19be19f321586923b2",
+    "metrics.py": "bceec9a46b2bca5c22d518d6f054dd01eeb85aa34b722d1792f5876a7aa5f8d7",
+    "verify.py": "755b00a10d5b7d4db93cac824f56a09f7c96971749556d5578f80720fd27f345"
+  },
+  "commands": [
+    "python3 docs/spikes/evidence/mac-core-baseline/verify.py --external --git-source",
+    "python3 docs/spikes/evidence/mac-core-baseline/verify.py"
+  ],
+  "verification": {
+    "passed": true,
+    "records": 278,
+    "payloads": 61,
+    "external_checked": true,
+    "git_source_rows": 4724,
+    "mutation_controls": 8,
+    "build": {
+      "codegen_units_verified": 4,
+      "target_feature_artifacts": 11,
+      "runtime_data_files": 28
+    }
+  },
+  "source_generation": "001 and002 freezes identical;001 build101 missing pinned Node dependencies;002 seven exporter commands0 and four retained player runs0.",
+  "findings": [],
+  "limits": [
+    "Run2 script 5percent repeatability comparison remains inconclusive, not pass.",
+    "46 entities, one controller, deterministic only; no fast10k, display/GPU, physical audio or full phase claim.",
+    "Load context and Mac identity are runner observations; low-power mode unknown and raw sysctl/pmset output absent.",
+    "Node setup exit recorded, separate raw npm log absent.",
+    "185 external records retain bytes outside portable archive; portable mode alone does not rehash those files.",
+    "Three all-frame samples with no warmup exclusion; requested Rust memory is not RSS or total device memory."
+  ]
+}

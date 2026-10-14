@@ -1,5 +1,13 @@
 # Implementation status
 
+## Original Core Mac shipping CPU reference — scoped evidence
+
+Three actual M5 Pro shipping runs complete the deterministic 46-entity Core win
+with script p95 intervals 0.820001–0.890000 ms and identical reports/PCM. One
+same-binary 5% script comparison remains inconclusive. Independent raw-histogram,
+compiler/source and external-file verification is retained; this is not the fast
+10k, display/GPU or phase gate. [Evidence](docs/spikes/mac-core-baseline.md).
+
 ## Script attachment cache — scoped CPU correctness
 
 Unchanged authored attachment groups reuse one frozen instance array and paired
