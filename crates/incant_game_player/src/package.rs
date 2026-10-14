@@ -71,6 +71,8 @@ pub fn expand(args: Vec<String>) -> Result<Vec<String>> {
                 | "--input-recording"
                 | "--stop-after"
                 | "--ui-viewport"
+                | "--presentation-output"
+                | "--presentation-capacity"
         ) || options.contains_key(key)
         {
             return Err("unknown or duplicate native package option".into());
@@ -88,10 +90,16 @@ pub fn expand(args: Vec<String>) -> Result<Vec<String>> {
     let clips = path(root, "clips.bin")?;
     let actions = path(root, "input-actions.json")?;
     if window {
-        if options
-            .keys()
-            .any(|key| !matches!(*key, "--stop-after" | "--input-recording" | "--observe"))
-        {
+        if options.keys().any(|key| {
+            !matches!(
+                *key,
+                "--stop-after"
+                    | "--input-recording"
+                    | "--observe"
+                    | "--presentation-output"
+                    | "--presentation-capacity"
+            )
+        }) {
             return Err("window package options conflict with offline options".into());
         }
         if (options.contains_key("--input-recording") || options.contains_key("--observe"))
@@ -111,12 +119,23 @@ pub fn expand(args: Vec<String>) -> Result<Vec<String>> {
             "--font-cache".into(),
             path(root, "fonts")?,
         ];
-        for key in ["--stop-after", "--input-recording", "--observe"] {
+        for key in [
+            "--stop-after",
+            "--input-recording",
+            "--observe",
+            "--presentation-output",
+            "--presentation-capacity",
+        ] {
             if let Some(value) = options.remove(key) {
                 result.extend([key.into(), value]);
             }
         }
         return Ok(result);
+    }
+    if options.contains_key("--presentation-output")
+        || options.contains_key("--presentation-capacity")
+    {
+        return Err("presentation capture requires --window".into());
     }
     if options.contains_key("--stop-after") {
         return Err("--stop-after requires --window".into());
@@ -241,6 +260,58 @@ mod tests {
             tail.iter().map(|s| (*s).into()).collect(),
         ]
         .concat()
+    }
+    #[test]
+    fn presentation_destination_is_only_an_explicit_window_argument() {
+        let dir = fixture();
+        let expanded = expand(args(
+            dir.path(),
+            &[
+                "--window",
+                "--stop-after",
+                "6",
+                "--presentation-output",
+                "trusted.json",
+                "--presentation-capacity",
+                "8",
+            ],
+        ))
+        .unwrap();
+        assert_eq!(
+            &expanded[10..],
+            [
+                "--stop-after",
+                "6",
+                "--presentation-output",
+                "trusted.json",
+                "--presentation-capacity",
+                "8"
+            ]
+        );
+        assert!(
+            expand(args(
+                dir.path(),
+                &[
+                    "--ticks",
+                    "6",
+                    "--output",
+                    "sound.pcm",
+                    "--presentation-output",
+                    "not-allowed.json"
+                ]
+            ))
+            .is_err()
+        );
+        let mut manifest: serde_json::Value =
+            serde_json::from_slice(&std::fs::read(dir.path().join("package.json")).unwrap())
+                .unwrap();
+        manifest["presentation_output"] = "project-controlled.json".into();
+        std::fs::write(
+            dir.path().join("package.json"),
+            serde_json::to_vec(&manifest).unwrap(),
+        )
+        .unwrap();
+        assert!(expand(args(dir.path(), &["--window", "--stop-after", "6"])).is_err());
     }
     #[test]
     fn offline_and_window_expand_to_existing_hosts() {

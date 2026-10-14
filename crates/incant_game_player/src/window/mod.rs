@@ -8,7 +8,11 @@ mod gamepad;
 mod haptics;
 mod ime;
 mod input;
+#[cfg(all(feature = "native-presentations", target_os = "macos"))]
+mod presentations;
 mod probe;
+#[cfg(all(feature = "native-presentations", target_os = "macos"))]
+use presentations::{Boundary, Role, Status};
 mod replay;
 mod surface;
 mod termination;
@@ -34,6 +38,9 @@ use tao::{
 type Game = HostedGameSession<DeviceBackend, NativeRenderHost<GpuRenderConsumer<SurfaceTargets>>>;
 #[derive(Debug, thiserror::Error)]
 pub enum Error {
+    #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+    #[error("native presentation observation failed: {0}")]
+    Presentation(String),
     #[error("native rendering failed: {0}")]
     Render(#[source] Box<dyn std::error::Error + Send + Sync>),
     #[error("native surface creation failed: {0}")]
@@ -74,6 +81,8 @@ pub enum Error {
     UiUnsupported,
 }
 struct Options {
+    #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+    capture: Option<(String, usize)>,
     scene: String,
     cache: String,
     clips: String,
@@ -105,6 +114,8 @@ impl Options {
         let mut stop_after = None;
         let mut recording = None;
         let mut observations = None;
+        let mut presentation_output = None;
+        let mut presentation_capacity = None;
         while let [flag, value, tail @ ..] = rest {
             match flag.as_str() {
                 "--stop-after" if stop_after.is_none() => {
@@ -116,6 +127,12 @@ impl Options {
                 }
                 "--input-recording" if recording.is_none() => recording = Some(value.clone()),
                 "--observe" if observations.is_none() => observations = Some(value.clone()),
+                "--presentation-output" if presentation_output.is_none() => {
+                    presentation_output = Some(value.clone())
+                }
+                "--presentation-capacity" if presentation_capacity.is_none() => {
+                    presentation_capacity = Some(value.parse::<usize>()?)
+                }
                 _ => return Err(USAGE.into()),
             }
             rest = tail;
@@ -129,6 +146,20 @@ impl Options {
                     .into(),
             );
         }
+        if presentation_output.is_some() || presentation_capacity.is_some() {
+            if !cfg!(all(feature = "native-presentations", target_os = "macos")) {
+                return Err("presentation capture requires native-presentations on macOS".into());
+            }
+            if probe
+                || stop_after.is_none()
+                || presentation_output.as_ref().is_none_or(|p| {
+                    p.is_empty() || p.len() > 4096 || p.chars().any(char::is_control)
+                })
+                || presentation_capacity.is_none_or(|n| !(1..=36_000).contains(&n))
+            {
+                return Err("presentation capture needs bounded --stop-after, --presentation-output and --presentation-capacity1..36000; no lifecycle probe".into());
+            }
+        }
         let hex = &args[6];
         if hex.len() != 32 || !hex.bytes().all(|b| b.is_ascii_hexdigit()) {
             return Err("CAMERA_HEX must contain exactly32 hexadecimal digits".into());
@@ -138,6 +169,8 @@ impl Options {
             *v = u8::from_str_radix(&hex[i * 2..i * 2 + 2], 16)?;
         }
         Ok(Self {
+            #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+            capture: presentation_output.zip(presentation_capacity),
             scene: args[0].clone(),
             cache: args[1].clone(),
             clips: args[2].clone(),
@@ -159,6 +192,20 @@ impl Options {
 }
 pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
     let options = Options::parse(args)?;
+    #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+    let capture = options
+        .capture
+        .as_ref()
+        .map(|(path, capacity)| {
+            presentations::Capture::new(
+                path,
+                *capacity,
+                options
+                    .stop_after
+                    .ok_or("presentation capture lacks host bound")?,
+            )
+        })
+        .transpose()?;
     let scene = CookedScene::from_bytes(&bounded(&options.scene, 128 * 1024 * 1024)?)?;
     let has_ui = scene.has_ui();
     // Refuse before opening a window, audio backend or GPU. The rendering lane
@@ -216,6 +263,10 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
         .map(UiSettings::new);
     let mut gamepads = devices::Devices::new(replay.is_none())?;
     let (mut surface, renderer, targets) = SurfaceState::new(Arc::clone(&window))?;
+    #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+    if let Some(capture) = capture {
+        surface.install_capture(capture)?;
+    }
     let seed = GameSeed::new(scene, script, actions, clips)?;
     let render_settings = |targets, ui| NativeRenderSettings {
         ui,
@@ -278,6 +329,8 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                         *exit = true;
                     }
                     WindowEvent::Resized(_) | WindowEvent::ScaleFactorChanged { .. } => {
+                        #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+                        surface.presentation_boundary(Boundary::Resize);
                         #[cfg(feature = "profile")]
                         cadence.interrupt();
                         if has_ui {
@@ -288,6 +341,8 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                         redraw_pending = true;
                     }
                     WindowEvent::Focused(value) => {
+                        #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+                        surface.presentation_boundary(Boundary::Focus);
                         #[cfg(feature = "profile")]
                         if !value {
                             cadence.interrupt();
@@ -304,6 +359,8 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                         gamepads.discard_pending();
                     }
                     WindowEvent::Suspended => {
+                        #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+                        surface.presentation_boundary(Boundary::Suspend);
                         #[cfg(feature = "profile")]
                         cadence.interrupt();
                         gamepads.pause_haptics()?;
@@ -316,6 +373,8 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                         surface.invalidate();
                     }
                     WindowEvent::Resumed => {
+                        #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+                        surface.presentation_boundary(Boundary::Resume);
                         platform_suspended = false;
                         surface.invalidate();
                         redraw_pending = true;
@@ -364,7 +423,11 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                         if now < retry {
                             return Ok(());
                         }
-                        if !surface.reserve(&renderer)? {
+                        if !{
+                            #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+                            surface.presentation_attempt(Role::UiResize, generation, host_steps);
+                            surface.reserve(&renderer)?
+                        } {
                             if !suspended {
                                 gamepads.pause_haptics()?;
                                 game.set_suspended(true)?;
@@ -394,6 +457,8 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                         if !consumed {
                             return Err(Error::Reservation.into());
                         }
+                        #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+                        surface.presentation_complete(Status::RefreshCompleted);
                         ui_input.presented(game.host()?.ui(), &mut input)?;
                         ui_resize = false;
                         redraw_pending = false;
@@ -403,6 +468,10 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                     // UI surface wait preserves releases alongside queued presses.
                     gamepads.poll(&mut input, ui_input.accepts_delivery(active, suspended))?;
                     if !active {
+                        #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+                        if !suspended {
+                            surface.presentation_boundary(Boundary::Inactive);
+                        }
                         #[cfg(feature = "profile")]
                         cadence.interrupt();
                         if ui_input.awaiting_surface() {
@@ -421,11 +490,19 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                         clock.reset(now);
                         // Background resize/redraw presents committed state once;
                         // it cannot unpause input, the VM, physics or audio.
-                        if clock::claim_retry(&mut retry, now)
-                            && redraw_pending
-                            && presentable
-                            && surface.reserve(&renderer)?
-                        {
+                        if clock::claim_retry(&mut retry, now) && redraw_pending && presentable && {
+                            #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+                            surface.presentation_attempt(
+                                if initial_frame {
+                                    Role::Initial
+                                } else {
+                                    Role::Background
+                                },
+                                generation,
+                                host_steps,
+                            );
+                            surface.reserve(&renderer)?
+                        } {
                             let result = crate::profile::presentation(|| -> session::Result<()> {
                                 if has_ui {
                                     ui_relayouts += fit_ui(
@@ -445,6 +522,8 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                             if !consumed {
                                 return Err(Error::Reservation.into());
                             }
+                            #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+                            surface.presentation_complete(Status::RefreshCompleted);
                             ui_input.presented(game.host()?.ui(), &mut input)?;
                             redraw_pending = false;
                             presentation_refreshes += 1;
@@ -454,7 +533,11 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                         if initial_frame {
                             #[cfg(feature = "profile")]
                             cadence.interrupt();
-                            if !surface.reserve(&renderer)? {
+                            if !{
+                                #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+                                surface.presentation_attempt(Role::Initial, generation, host_steps);
+                                surface.reserve(&renderer)?
+                            } {
                                 retry = now + Duration::from_millis(50);
                                 clock.reset(now);
                                 return Ok(());
@@ -466,6 +549,8 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                             if !consumed {
                                 return Err(Error::Reservation.into());
                             }
+                            #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+                            surface.presentation_complete(Status::RefreshCompleted);
                             ui_input.presented(game.host()?.ui(), &mut input)?;
                             presentation_refreshes += 1;
                             redraw_pending = false;
@@ -479,7 +564,15 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                             // normal haptics. This is CPU host time, not scanout.
                             #[cfg(feature = "profile")]
                             let host_started = cadence.begin();
-                            if !surface.reserve(&renderer)? {
+                            if !{
+                                #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+                                surface.presentation_attempt(
+                                    Role::Gameplay,
+                                    generation,
+                                    host_steps + 1,
+                                );
+                                surface.reserve(&renderer)?
+                            } {
                                 #[cfg(feature = "profile")]
                                 cadence.interrupt();
                                 if !suspended {
@@ -551,6 +644,8 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                             ui_input.presented(game.host()?.ui(), &mut input)?;
                             redraw_pending = false;
                             host_steps = host_steps.checked_add(1).ok_or("host step exhausted")?;
+                            #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+                            surface.presentation_complete(Status::HostCommitted);
                             if let Some(plan) = &mut observations {
                                 plan.observe_at(host_steps, game.world()?, game.input()?)?;
                             }
@@ -594,6 +689,8 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                                     render_settings(surface.replacement_targets()?, ui),
                                 )?;
                                 generation = next;
+                                #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+                                surface.presentation_boundary(Boundary::Restart);
                                 suspended = true;
                                 initial_frame = true;
                                 redraw_pending = true;
@@ -644,53 +741,63 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
         };
     });
     surface.cancel();
-    termination.finish(code, || {
-        gamepads.pause_haptics()?;
-        if has_ui && let Some((serial, enabled)) = ui_input.text_session(None, false)? {
-            window
-                .set_text_input_session(serial, enabled)
-                .map_err(Error::Ime)?;
+    let result = (|| -> session::Result<serde_json::Value> {
+        termination.finish(code, || {
+            gamepads.pause_haptics()?;
+            if has_ui && let Some((serial, enabled)) = ui_input.text_session(None, false)? {
+                window
+                    .set_text_input_session(serial, enabled)
+                    .map_err(Error::Ime)?;
+            }
+            Ok(())
+        })?;
+        if let Some(probe) = &probe {
+            probe.validate()?;
         }
-        Ok(())
-    })?;
-    if let Some(probe) = &probe {
-        probe.validate()?;
-    }
-    let mut report = serde_json::json!({"mode":"native-window","tick":game.world()?.tick(),"accepted_frames":game.host()?.consumer().accepted_frames(),"presentation_refreshes":presentation_refreshes,"adapter":renderer.adapter_name,"backend":format!("{:?}",renderer.adapter.get_info().backend),"on_screen":true,"dropped_wall_ticks":clock.dropped.to_string(),"surface_reconfigurations":surface.reconfigurations,"surface_recreations":surface.recreations,"surface_skipped":surface.skipped,"discarded_stale_text_events":ui_input.stale_text_events(),"lifecycle_probe":probe.as_ref().map(|p|p.report())});
-    #[cfg(feature = "profile")]
-    cadence.append(&mut report);
-    report["host_steps"] = host_steps.into();
-    report["audio_device"] = serde_json::json!({
-        "scope":"current-session-owner",
-        "diagnostics":game.device_audio_diagnostics()?,
-        "glitch_free_output_verified":false
-    });
-    if let Some(replay) = &replay {
-        report["input_recording"] = serde_json::json!({"sha256":replay.sha256,
+        let mut report = serde_json::json!({"mode":"native-window","tick":game.world()?.tick(),"accepted_frames":game.host()?.consumer().accepted_frames(),"presentation_refreshes":presentation_refreshes,"adapter":renderer.adapter_name,"backend":format!("{:?}",renderer.adapter.get_info().backend),"on_screen":true,"dropped_wall_ticks":clock.dropped.to_string(),"surface_reconfigurations":surface.reconfigurations,"surface_recreations":surface.recreations,"surface_skipped":surface.skipped,"discarded_stale_text_events":ui_input.stale_text_events(),"lifecycle_probe":probe.as_ref().map(|p|p.report())});
+        #[cfg(feature = "profile")]
+        cadence.append(&mut report);
+        report["host_steps"] = host_steps.into();
+        report["audio_device"] = serde_json::json!({
+            "scope":"current-session-owner",
+            "diagnostics":game.device_audio_diagnostics()?,
+            "glitch_free_output_verified":false
+        });
+        if let Some(replay) = &replay {
+            report["input_recording"] = serde_json::json!({"sha256":replay.sha256,
             "requested_host_steps":options.stop_after,"accepted_host_steps":host_steps,
             "completed":options.stop_after == Some(host_steps),"source":"recorded-physical-input",
             "physical_devices":false,"native_focus_and_surface_required":true});
-    }
-    if let Some(plan) = observations {
-        report["observations"] = serde_json::to_value(plan.finish(game.world()?)?)?;
-    }
-    if generation > 1 {
-        report["session"] = serde_json::json!({"generation":generation,"host_tick":host_steps,
+        }
+        if let Some(plan) = observations {
+            report["observations"] = serde_json::to_value(plan.finish(game.world()?)?)?;
+        }
+        if generation > 1 {
+            report["session"] = serde_json::json!({"generation":generation,"host_tick":host_steps,
             "simulation_tick":game.world()?.tick(),"accepted_frames":host_steps+presentation_refreshes});
+        }
+        if let Some(ui) = game.host()?.ui_input() {
+            let stats = game.host()?.consumer().ui_stats();
+            let uploads = renderer.ui_uploads();
+            report["ui"] = serde_json::json!({
+                "viewport":ui.viewport,"scale_factor":window.scale_factor(),
+                "widgets":ui.widgets.len(),"relayouts":ui_relayouts,
+                "focus":game.host()?.ui().and_then(|ui|ui.focus()).map(|f|ulid::Ulid::from_bytes(f.widget().0).to_string()),
+                "glyph_quads":stats.map(|s|s.glyph_quads),"quads":stats.map(|s|s.quads),"gpu_bytes":stats.map(|s|s.gpu_bytes),
+                "uploads":{"atlas_textures":uploads.atlas_textures,"atlas_bytes":uploads.atlas_bytes,"quad_buffers":uploads.quad_buffers,"quad_bytes":uploads.quad_bytes,"frame_writes":uploads.frame_writes}
+            });
+        }
+        Ok(report)
+    })();
+    drop(game); // stop audio before the bounded, off-gameplay callback drain
+    #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+    {
+        let observed = surface.finish_capture(host_steps, generation, code, &result);
+        // A sidecar error never replaces the original gameplay/window failure.
+        presentations::preserve_result(result, observed)
     }
-    if let Some(ui) = game.host()?.ui_input() {
-        let stats = game.host()?.consumer().ui_stats();
-        let uploads = renderer.ui_uploads();
-        report["ui"] = serde_json::json!({
-            "viewport":ui.viewport,"scale_factor":window.scale_factor(),
-            "widgets":ui.widgets.len(),"relayouts":ui_relayouts,
-            "focus":game.host()?.ui().and_then(|ui|ui.focus()).map(|f|ulid::Ulid::from_bytes(f.widget().0).to_string()),
-            "glyph_quads":stats.map(|s|s.glyph_quads),"quads":stats.map(|s|s.quads),"gpu_bytes":stats.map(|s|s.gpu_bytes),
-            "uploads":{"atlas_textures":uploads.atlas_textures,"atlas_bytes":uploads.atlas_bytes,"quad_buffers":uploads.quad_buffers,"quad_bytes":uploads.quad_bytes,"frame_writes":uploads.frame_writes}
-        });
-    }
-    drop(game); // stop device audio before returning/closing the native surface
-    Ok(report)
+    #[cfg(not(all(feature = "native-presentations", target_os = "macos")))]
+    result
 }
 
 /// Layout uses the dimensions of the reserved frame. Window dimensions can
@@ -749,6 +856,54 @@ mod tests {
         .chain(tail)
         .map(|s| (*s).to_owned())
         .collect()
+    }
+    #[test]
+    fn presentation_capture_requires_explicit_host_bounds_and_platform_feature() {
+        for tail in [
+            vec!["--presentation-output", "capture.json"],
+            vec!["--stop-after", "6", "--presentation-output", "capture.json"],
+            vec!["--stop-after", "6", "--presentation-capacity", "8"],
+            vec![
+                "--stop-after",
+                "6",
+                "--presentation-output",
+                "capture.json",
+                "--presentation-capacity",
+                "0",
+            ],
+            vec![
+                "--stop-after",
+                "6",
+                "--presentation-output",
+                "capture.json",
+                "--presentation-capacity",
+                "36001",
+            ],
+            vec![
+                "--stop-after",
+                "6",
+                "--presentation-output",
+                "capture.json",
+                "--presentation-output",
+                "other",
+                "--presentation-capacity",
+                "8",
+            ],
+        ] {
+            assert!(Options::parse(&args(&tail)).is_err());
+        }
+        let full = args(&[
+            "--stop-after",
+            "6",
+            "--presentation-output",
+            "capture.json",
+            "--presentation-capacity",
+            "8",
+        ]);
+        assert_eq!(
+            Options::parse(&full).is_ok(),
+            cfg!(all(feature = "native-presentations", target_os = "macos"))
+        );
     }
     #[test]
     fn physical_surface_and_pointer_coordinates_share_exact_logical_scale() {

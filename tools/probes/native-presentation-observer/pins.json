@@ -1,0 +1,10 @@
+{
+  "package": "wgpu-hal",
+  "version": "29.0.4",
+  "registry_checksum": "97ace1c17727311c22a46e4e3faf56ea6de81af99dcc839bdfb54857b94d448d",
+  "preimages": {
+    "Cargo.toml": "184e8fded62c0f94b3c85adefcc872b619345b28fd85783b78cf4289a9e6e30b",
+    "src/metal/mod.rs": "daed7a2d7c1cd7b9431b3009b5b7feb2ca8e45648ffd7eb0185c46cfcbeb2ada",
+    "src/metal/surface.rs": "748c5349bb68319d433ed2d7c2c27055e632f27196acfdfa857b279d8ed7bae2"
+  }
+}

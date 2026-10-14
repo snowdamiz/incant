@@ -11,7 +11,17 @@ controls. This fixes the ordinary viewport route; low-resolution reconstruction
 still has separate appearance defects. The entries
 below preserve earlier scoped results and superseded integration snapshots.
 
-## Device audio overrun handling — CPU verified
+## Native presentation observer — partial live evidence
+
+A default-off Mac observer records callbacks from the actual submitted drawable,
+with separate zero, missing, invalid and discarded outcomes. The private shipping
+build passed; an actual replay produced 1,415 positive timestamps before the
+audio notification ended it at step 1,444. The timeout and incomplete run remain
+failed. Integration with the merged audio fix passes 231 focused tests and strict
+lint. A fresh complete native replay, displayed-frame timing and shader-stall
+qualification remain open. [Observer and retained evidence](docs/spikes/native-player-presentations.md).
+
+## Device audio overrun handling — merged main303
 
 An actual Mac game replay exposed a typed audio overrun notification terminating
 the entire session after 1,444 steps. The audio host now counts these notifications
