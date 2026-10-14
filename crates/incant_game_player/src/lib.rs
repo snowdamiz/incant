@@ -7,6 +7,8 @@ mod checkpoint;
 mod gpu;
 #[cfg(feature = "mobile-ffi")]
 pub mod mobile;
+#[cfg(feature = "mobile-android")]
+mod mobile_android;
 #[cfg(feature = "mobile-host")]
 pub mod mobile_host;
 #[cfg(all(feature = "mobile-apple", target_vendor = "apple"))]

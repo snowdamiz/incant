@@ -1,5 +1,15 @@
 # Implementation status
 
+An opt-in Android API26 Vulkan/AAudio host now has retained Surface/VM ownership,
+checked JNI IDs, bounded touch delivery and Java lifecycle/audio-focus handling.
+Focused source/compile qualification passes 38 Mac CPU player cases, strict Mac
+and ARM64 Android Clippy, Android target checking, Java compilation and six
+export-policy controls. The distinct unsigned APK exporter is implemented but
+its full shipping link/package execution is not yet qualified. Independent
+source review is pending; mobile/device execution is deferred and nonblocking,
+with no physical audio, appearance or performance claim.
+[Scope](docs/spikes/android-device-host.md).
+
 The private Apple native adapter now has a bounded C ABI, UIKit callback source,
 real-device audio ownership and a shared lifecycle-aware touch router. Both Mac
 player configurations pass 40 CPU cases and strict Clippy; Swift source typechecks.
