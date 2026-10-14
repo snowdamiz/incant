@@ -3042,3 +3042,13 @@ independent source correction and final producer evidence are accepted; the
 joined main252 world/session/player composition remains separately reviewed. Historical CCD premise
 and fixture failures are retained. See
 [contract and evidence](docs/spikes/physics-native-persisted.md).
+
+### Maintained QuickJS observation runner — source controls
+
+The explicit maintained/detailed measurement seam and fixed D0/M0/M1/D1/D2/M2
+supervisor are implemented with strict raw mode identity, mode-specific anchors,
+and owned-process cancellation. [Runner scope](docs/spikes/quickjs-maintained-profile-runner.md)
+preserves the unchanged approved plan and all-frame 2 ms/5% interpretation.
+The fresh current-main shipping build, three functional controls, historical
+unprofiled parity/oracle, quiet acknowledgments and six timing processes remain
+unexecuted by this work. No performance or phase gate is claimed.
