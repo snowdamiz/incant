@@ -439,10 +439,14 @@ pub(super) fn run(
             .as_f64()
             .ok_or("fixture mover coordinate absent")
     };
+    let before_translation = x(&at_pause)?;
+    let observed_delta = x(&stepped)? - before_translation;
+    let expected_delta = 2. * (baseline.tick + 1) as f64;
     require(
         stepped["tick"].as_u64() == Some(baseline.tick + 1)
-            && (x(&stepped)? - x(&at_pause)? - 2.).abs() < 1e-9,
-        "same VM did not continue on the next step",
+            && (before_translation - (baseline.tick * (baseline.tick + 1)) as f64).abs() < 1e-9
+            && (observed_delta - expected_delta).abs() < 1e-9,
+        "module update counter did not continue on the next step",
     )?;
     let final_observation = observe(editor, generation, stable_asset, &blue_fingerprint)?;
     require(
@@ -461,7 +465,8 @@ pub(super) fn run(
     Ok(
         json!({"passed":true,"platform":std::env::consts::OS,"adapter":baseline.adapter,
         "play_generation":generation,"paused_tick":baseline.tick,"final_tick":final_observation.tick,
-        "world_identity_unchanged":true,"same_vm_continued":true,"actual_window_presentations":true,
+        "world_identity_unchanged":true,"module_counter_continued":true,"actual_window_presentations":true,
+        "vm_counter":{"before_translation":before_translation,"observed_delta":observed_delta,"expected_delta":expected_delta},
         "manual_import_execute_history_handlers":true,"real_source_watcher":true,"undo_not_overwritten":true,
         "malformed_source_refusal":refusal,"source_recovery":true,"stale_generation_refused":true,
         "stop_releases_world":true,"stages":stages,"pixel_capture":false,"appearance_review":false,

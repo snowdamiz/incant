@@ -30,10 +30,12 @@ CAMERA = '00000000000000000000000003'
 STAGES = ['manual_import_red', 'watched_blue', 'undo_red', 'redo_blue',
           'malformed_source_retained_blue', 'source_recovered_blue']
 SOURCE = ("import type { NativeBehavior } from '@incant/runtime/native';\n"
+          "let updates = 0;\n"
           "export default { update({ instances, chunks }) {\n"
+          "  updates += 1;\n"
           "  for (const chunk of chunks) for (let i=0;i<chunk.ids.length;i++) {\n"
           "    if (instances.some(instance => instance.entity === chunk.ids[i]))\n"
-          "      chunk.transforms[i*chunk.transformStride]+=2;\n"
+          "      chunk.transforms[i*chunk.transformStride]+=2*updates;\n"
           "  }\n"
           "} } satisfies NativeBehavior;\n")
 
@@ -152,7 +154,7 @@ def execution_deadline(seconds):
 
 def validate_proof(proof):
     require(proof.get('passed') is True and proof.get('platform') == 'macos', 'Actual Mac app proof required')
-    for field in ('world_identity_unchanged', 'same_vm_continued', 'actual_window_presentations',
+    for field in ('world_identity_unchanged', 'module_counter_continued', 'actual_window_presentations',
                   'manual_import_execute_history_handlers', 'real_source_watcher', 'undo_not_overwritten',
                   'source_recovery', 'stale_generation_refused', 'stop_releases_world'):
         require(proof.get(field) is True, 'Missing observable control: ' + field)
@@ -162,6 +164,11 @@ def validate_proof(proof):
     require(type(proof.get('play_generation')) is int and proof['play_generation'] > 0, 'Play generation identity')
     require(type(proof.get('paused_tick')) is int and type(proof.get('final_tick')) is int
             and proof['final_tick'] == proof['paused_tick'] + 1, 'One continuing VM tick')
+    counter = proof.get('vm_counter', {})
+    tick = proof['paused_tick']
+    require(counter.get('before_translation') == tick*(tick+1)
+            and counter.get('expected_delta') == 2*(tick+1)
+            and counter.get('observed_delta') == counter['expected_delta'], 'Observable module-state continuation')
     stages = proof.get('stages', [])
     require([s.get('stage') for s in stages] == STAGES, 'Exact user workflow stages')
     require(all(s.get('recipe_matches') is True and s.get('tick') == proof['paused_tick'] for s in stages),

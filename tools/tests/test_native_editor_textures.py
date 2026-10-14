@@ -25,9 +25,10 @@ def proof():
                        'history':{'revision':3+min(i,3)}})
     return dict(passed=True, platform='macos', adapter='AdapterInfo { backend: Metal }',
                 play_generation=2, paused_tick=4, final_tick=5, stages=stages,
+                vm_counter={'before_translation':20, 'observed_delta':10, 'expected_delta':10},
                 malformed_source_refusal={'code':'asset.import'}, pixel_capture=False,
                 appearance_review=False, performance_or_phase_gate=False,
-                **{k:True for k in ('world_identity_unchanged', 'same_vm_continued',
+                **{k:True for k in ('world_identity_unchanged', 'module_counter_continued',
                     'actual_window_presentations', 'manual_import_execute_history_handlers',
                     'real_source_watcher', 'undo_not_overwritten', 'source_recovery',
                     'stale_generation_refused', 'stop_releases_world')})
@@ -45,6 +46,7 @@ class ReceiptControls(unittest.TestCase):
             lambda p:p['stages'][3].update(tick=5),
             lambda p:p['stages'][4].update(frames=13),
             lambda p:p.update(world_identity_unchanged=False),
+            lambda p:p['vm_counter'].update(observed_delta=2),
         ):
             value = proof()
             edit(value)
