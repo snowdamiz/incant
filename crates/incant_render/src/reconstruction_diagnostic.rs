@@ -2037,5 +2037,7 @@ mod recurrence_fixture;
 #[path = "reconstruction_reference.rs"]
 mod reference_fixture;
 
+#[path = "reconstruction_owner_camera.rs"]
+mod owner_camera;
 #[path = "reconstruction_recurrence_controls.rs"]
 mod recurrence_controls;

@@ -304,7 +304,7 @@ fn display(hdr: [f32; 4]) -> [u8; 4] {
     result[3] = 255;
     result
 }
-fn png(out: &Path, name: &str, raw: &[u8], stride: usize) -> Value {
+pub(super) fn png(out: &Path, name: &str, raw: &[u8], stride: usize) -> Value {
     let mut pixels = Vec::with_capacity((OUTPUT[0] * OUTPUT[1] * 4) as usize);
     for row in raw.chunks_exact(stride) {
         for p in row[..OUTPUT[0] as usize * 8].as_chunks::<8>().0 {
@@ -334,7 +334,7 @@ struct Plane {
 fn planes() -> [Plane; 8] {
     capture_planes(false, false)
 }
-fn pose(stage: &Stage, input: &mut SceneInput, step: u32, camera_only: bool) {
+pub(super) fn pose(stage: &Stage, input: &mut SceneInput, step: u32, camera_only: bool) {
     stage.pose(input, if camera_only { 1 } else { step });
     if camera_only {
         let camera = node(input, &stage.camera);
@@ -344,7 +344,7 @@ fn pose(stage: &Stage, input: &mut SceneInput, step: u32, camera_only: bool) {
 // Diagnostic invalidation control: move the original opaque stage beyond the
 // far plane while leaving all other bindings and poses intact. This removes
 // its thin wires together with the ground; it is not an isolated wire removal.
-fn evict_stage(stage: &Stage, input: &mut SceneInput, frame: u32) {
+pub(super) fn evict_stage(stage: &Stage, input: &mut SceneInput, frame: u32) {
     if frame <= 32 {
         return;
     }
@@ -477,7 +477,7 @@ fn cold_delta(candidate: &[u8], baseline: &[u8]) -> u16 {
     }
     maximum
 }
-fn color_range(raw: &[u8]) -> Value {
+pub(super) fn color_range(raw: &[u8]) -> Value {
     let mut low = [f32::INFINITY; 4];
     let mut high = [f32::NEG_INFINITY; 4];
     let mut negative_rgb = 0;
