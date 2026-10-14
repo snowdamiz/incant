@@ -67,6 +67,13 @@ fn project(editor: &Editor) -> Result<(Value, u64, usize), String> {
     ))
 }
 fn wait(editor: &Editor, condition: impl Fn(&Status) -> bool) -> Result<Status, String> {
+    wait_observed(editor, condition, |_| "native Play probe deadline".into())
+}
+fn wait_observed(
+    editor: &Editor,
+    condition: impl Fn(&Status) -> bool,
+    deadline_failure: impl Fn(&Status) -> String,
+) -> Result<Status, String> {
     let deadline = Instant::now() + Duration::from_secs(20);
     loop {
         let state = editor.play.snapshot()?;
@@ -76,7 +83,9 @@ fn wait(editor: &Editor, condition: impl Fn(&Status) -> bool) -> Result<Status, 
         if condition(&state) {
             return Ok(state);
         }
-        require(Instant::now() < deadline, "native Play probe deadline")?;
+        if Instant::now() >= deadline {
+            return Err(deadline_failure(&state));
+        }
         thread::sleep(Duration::from_millis(10));
     }
 }

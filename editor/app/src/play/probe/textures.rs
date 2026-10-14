@@ -1,5 +1,5 @@
 //! Actual app/import/watch/history convergence. No surface pixel capture or design review.
-use super::{Options, project, require, wait};
+use super::{Options, project, require, wait_observed};
 use crate::{
     Editor, assets,
     play::{Action, Request, StartOptions, execute},
@@ -153,6 +153,20 @@ fn point(name: &str, observation: &Observation, fingerprint: &str, history: Valu
     json!({"stage":name,"tick":observation.tick,"frames":observation.frames,
         "accepted_fingerprint":fingerprint,"recipe_matches":observation.recipe_matches,"history":history})
 }
+fn initial_play_ready(status: &super::Status) -> bool {
+    status.spatial && status.tick >= 2 && status.presented_frames >= 2
+}
+fn startup_deadline(
+    status: &super::Status,
+    window: Value,
+    viewport: Value,
+    render_error: Value,
+) -> String {
+    json!({"stage":"initial_live_play", "error":"native Play probe deadline",
+        "last_play_status":status, "window":window, "viewport":viewport,
+        "viewport_error":render_error})
+    .to_string()
+}
 
 pub(super) fn run(
     app: &tauri::AppHandle,
@@ -250,8 +264,22 @@ pub(super) fn run(
             },
         },
     )?;
-    let running = wait(editor, |s| {
-        s.spatial && s.tick >= 2 && s.presented_frames >= 2
+    let running = wait_observed(editor, initial_play_ready, |status| {
+        let window = json!({
+            "focused":window.is_focused().map_err(|e| e.to_string()),
+            "visible":window.is_visible().map_err(|e| e.to_string()),
+            "minimized":window.is_minimized().map_err(|e| e.to_string()),
+            "physical_size":window.inner_size().map(|s| json!({"width":s.width,"height":s.height})).map_err(|e|e.to_string()),
+        });
+        let viewport = match editor.viewport.lock() {
+            Ok(value) => json!(value.map(|v| json!({"rect":v.rect,"corner_radii":v.corner_radii}))),
+            Err(error) => json!({"error":error.to_string()}),
+        };
+        let render_error = match editor.viewport_error.lock() {
+            Ok(value) => json!(*value),
+            Err(error) => json!({"error":error.to_string()}),
+        };
+        startup_deadline(status, window, viewport, render_error)
     })?;
     execute(
         editor,
@@ -472,4 +500,55 @@ pub(super) fn run(
         "stop_releases_world":true,"stages":stages,"pixel_capture":false,"appearance_review":false,
         "performance_or_phase_gate":false}),
     )
+}
+
+#[cfg(test)]
+mod startup_diagnostic_tests {
+    use super::*;
+
+    #[test]
+    fn initial_wait_requires_spatial_ticks_and_actual_frames() {
+        let (service, _) = crate::play::Service::new();
+        let mut status = service.snapshot().unwrap();
+        status.spatial = true;
+        status.tick = 2;
+        status.presented_frames = 2;
+        assert!(initial_play_ready(&status));
+        status.spatial = false;
+        assert!(!initial_play_ready(&status));
+        status.spatial = true;
+        status.tick = 0;
+        assert!(!initial_play_ready(&status));
+        status.tick = 2;
+        status.presented_frames = 0;
+        assert!(!initial_play_ready(&status));
+    }
+
+    #[test]
+    fn failed_startup_retains_last_status_and_native_eligibility_without_claiming_pass() {
+        let (service, _) = crate::play::Service::new();
+        let mut status = service.snapshot().unwrap();
+        status.phase = "running";
+        status.spatial = true;
+        status.tick = 0;
+        status.presented_frames = 7;
+        status.suspended = true;
+        let window =
+            json!({"focused":{"Ok":false},"physical_size":{"Ok":{"width":1440,"height":900}}});
+        let viewport = json!({"rect":[0,0,1200,800]});
+        let diagnostic: Value = serde_json::from_str(&startup_deadline(
+            &status,
+            window.clone(),
+            viewport.clone(),
+            Value::Null,
+        ))
+        .unwrap();
+        assert_eq!(diagnostic["stage"], "initial_live_play");
+        assert_eq!(diagnostic["last_play_status"]["tick"], 0);
+        assert_eq!(diagnostic["last_play_status"]["presentedFrames"], 7);
+        assert_eq!(diagnostic["last_play_status"]["suspended"], true);
+        assert_eq!(diagnostic["window"], window);
+        assert_eq!(diagnostic["viewport"], viewport);
+        assert!(diagnostic.get("passed").is_none());
+    }
 }
