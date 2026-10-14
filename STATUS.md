@@ -11,6 +11,15 @@ controls. This fixes the ordinary viewport route; low-resolution reconstruction
 still has separate appearance defects. The entries
 below preserve earlier scoped results and superseded integration snapshots.
 
+## GPU profiler — unavailable counter pairs refused
+
+The profiler now rejects an individual unwritten pair and failed counter
+sentinels instead of reporting false zero or enormous durations. Eleven targeted
+CPU controls and strict lint pass. Two bounded Metal diagnostics retain the
+missing second-pass timestamps even though their numerical output is exact;
+the observation cause and complete GPU timing remain open.
+[Decoder correction and retained observations](docs/spikes/gpu-timestamp-invalid-counters.md).
+
 ## Native presentation observer — complete gameplay replay verified
 
 The default-off Metal observer and typed audio-overrun fix now complete the full
