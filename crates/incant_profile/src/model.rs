@@ -170,7 +170,7 @@ pub struct Report {
     pub dropped_source_samples: u64,
     pub completed_frames: u64,
     pub failed_frames: u64,
-    pub quickjs_heap: QuickJsHeap,
+    pub quickjs_heap: crate::QuickJsHeap,
     pub rust_allocations: Allocations,
     pub tracy_process_transport: bool,
 }
