@@ -1,3 +1,17 @@
+# 0073 latest: R5 numeric + quality execution (pointer)
+
+- **Result:** `r5_quality/execution-result.md` and `.json`.
+- **Model and settings:** Claude Opus 5.5 (`claude-opus-5-5`), thinking effort max, auto-memory disabled.
+- **Run:** one granted run of nine children, accepted and released. Release: `/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/release.json`, sha256 `2a3abbff5d6d54a2366448ccea0fd89d4eca617d869926c31a134364116e26a3`.
+- **Numeric:** all four strict GPU tests passed.
+- **Appearance: REJECTED.**
+  - No practical visual change from R4 in ordinary-UP moiré and thin lines, in moving UP/OWN aliasing, or at the 4/16 entry and post-cut frames.
+  - Stationary OWN, clean disocclusion and the overlays are preserved.
+- **Images:** all 15 PNGs were read.
+- **Still open:** every historical gate (C7, C9, P1). No performance claim.
+
+---
+
 # 0073 result — output upscaling numeric execution, visual review and repair design
 
 ## Implementation 4 (current): owner attachment substrate within the existing memory admission

@@ -1,0 +1,236 @@
+{
+ "accepted_execution": true,
+ "auto_memory": "disabled",
+ "budget": {
+  "builds": 0,
+  "maximum_extent": [
+   960,
+   540
+  ],
+  "numeric_submissions": 62,
+  "pngs": 15,
+  "processes": 9,
+  "queue_submissions": 840,
+  "readback_maps": 442,
+  "readback_submissions": 380,
+  "rendered_frames": 380,
+  "retries": 0,
+  "scene_submissions": 380,
+  "timeout_seconds_each": 90,
+  "ui_submissions": 18
+ },
+ "builds": 0,
+ "children": [
+  {
+   "accepted": true,
+   "group": "ordinary-default",
+   "kind": "numeric",
+   "pid": 80611,
+   "timed_out": false
+  },
+  {
+   "accepted": true,
+   "group": "owner-default",
+   "kind": "numeric",
+   "pid": 80616,
+   "timed_out": false
+  },
+  {
+   "accepted": true,
+   "group": "ordinary-cooked",
+   "kind": "numeric",
+   "pid": 80619,
+   "timed_out": false
+  },
+  {
+   "accepted": true,
+   "group": "owner-cooked",
+   "kind": "numeric",
+   "pid": 80628,
+   "timed_out": false
+  },
+  {
+   "accepted": true,
+   "group": "stationary",
+   "kind": "quality",
+   "pid": 80631,
+   "timed_out": false
+  },
+  {
+   "accepted": true,
+   "group": "motion",
+   "kind": "quality",
+   "pid": 80637,
+   "timed_out": false
+  },
+  {
+   "accepted": true,
+   "group": "transitions",
+   "kind": "quality",
+   "pid": 80639,
+   "timed_out": false
+  },
+  {
+   "accepted": true,
+   "group": "c7_disocclusion",
+   "kind": "quality",
+   "pid": 80643,
+   "timed_out": false
+  },
+  {
+   "accepted": true,
+   "group": "p1_crossing",
+   "kind": "quality",
+   "pid": 80645,
+   "timed_out": false
+  }
+ ],
+ "debits_sha256": "2e21785554dfa45f7e119b2cd2f6bfb6b6ac320d450d58b5adfa0efc5e6a338a",
+ "extra_images": 0,
+ "gpu001_case3": "retained historical failed attempt; numeric-002 later passed",
+ "grant_sha256": "e981286ac185d5d4ea5d58b99de4f4c9555bc207fcae6f1f217e609c075a98f8",
+ "historical_open": [
+  "C7 linear-model",
+  "C9 convergence",
+  "P1 (grey 8/16, one stop)",
+  "DRS wipe",
+  "thin geometry",
+  "moving detail"
+ ],
+ "identical_to_r4": [
+  "stationary-full",
+  "stationary-drs50",
+  "stationary-own50",
+  "stationary-phases",
+  "motion-full",
+  "transitions-full"
+ ],
+ "images_read": [
+  {
+   "height": 540,
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/stationary/artifacts/stationary-full.png",
+   "sha256": "992c5543b4f9bbdf6fd703eb764e143f7649836452df28aaac6f1dfc2debceb9",
+   "width": 960
+  },
+  {
+   "height": 540,
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/stationary/artifacts/stationary-drs50.png",
+   "sha256": "724fa644d3561ff00aa2301fd40ab6b49c4111b0376df5469028ef6265cb40e0",
+   "width": 960
+  },
+  {
+   "height": 540,
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/stationary/artifacts/stationary-up50.png",
+   "sha256": "cb0845ba05535cf1361303c2964754957c1e50bd1cb0bd4a7d1de70ce207673d",
+   "width": 960
+  },
+  {
+   "height": 540,
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/stationary/artifacts/stationary-own50.png",
+   "sha256": "57b53ca3e195254f4eca9947899b62c823e35240b1a0f072a9d339b83098e7d8",
+   "width": 960
+  },
+  {
+   "height": 540,
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/stationary/artifacts/stationary-phases.png",
+   "sha256": "bdfeb4dba501be1ce69d30b894346573482bbc60b1ed16c6ccb48ab0afb4f245",
+   "width": 960
+  },
+  {
+   "height": 540,
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/stationary/artifacts/stationary-detail.png",
+   "sha256": "7faa5c49161902abf471d397da6d73c29fbc2e4ad5c5a1f330ead74dfbb89958",
+   "width": 960
+  },
+  {
+   "height": 540,
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/motion/artifacts/motion-full.png",
+   "sha256": "9eeb1222becd6f4d2cec7afa88343ccb528ea9f6e27246cb3410a42bade35b52",
+   "width": 960
+  },
+  {
+   "height": 540,
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/motion/artifacts/motion-up50.png",
+   "sha256": "026ca0d3770089c5349f3f0f46288477815ab76687aaa9ed4a6a8164fa14513c",
+   "width": 960
+  },
+  {
+   "height": 540,
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/motion/artifacts/motion-own50.png",
+   "sha256": "811708696e68e1a4bb3f424131fab62758386622281b59dc618bfa2c2053f355",
+   "width": 960
+  },
+  {
+   "height": 540,
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/motion/artifacts/motion-detail.png",
+   "sha256": "76fc6eed0596ee7a0848201fc8fbfb79b1e5611f82f78a6be82e1b0bfffb1f36",
+   "width": 960
+  },
+  {
+   "height": 540,
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/transitions/artifacts/transitions-full.png",
+   "sha256": "1be9b9308bb1d404291ec976f0ff1b0c6b3853d3effa0bb2a36fe15270e0f88e",
+   "width": 960
+  },
+  {
+   "height": 540,
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/transitions/artifacts/transitions-strip.png",
+   "sha256": "ed6c4cde640e451525792122feed4feed04276f5865f4b581f8cc161bd9ad118",
+   "width": 960
+  },
+  {
+   "height": 540,
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/c7_disocclusion/artifacts/c7-detail.png",
+   "sha256": "d4f33691f8c13c418bcdc907b913274d96ce518872ad1c63bffc580f462509b3",
+   "width": 960
+  },
+  {
+   "height": 540,
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/c7_disocclusion/artifacts/c7-own-moving.png",
+   "sha256": "2c63710c000dd4987db21aaa15635e7f8ed04a30bcd1f66b20a7729c64073d4c",
+   "width": 960
+  },
+  {
+   "height": 540,
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/p1_crossing/artifacts/p1-detail.png",
+   "sha256": "12b3313ce9295efb9fb86b59aaad2eb6083598098f9f1f9576060603368132fe",
+   "width": 960
+  }
+ ],
+ "ledger_sha256": "fe1c423751e4714a8b0fe5874664cabf82ff0448a8089d48e5237f3c87408797",
+ "model": "claude-opus-5-5",
+ "numeric_results": {
+  "ordinary-cooked": "test result: ok. 1 passed; 0 failed",
+  "ordinary-default": "test result: ok. 1 passed; 0 failed",
+  "owner-cooked": "test result: ok. 1 passed; 0 failed",
+  "owner-default": "test result: ok. 1 passed; 0 failed"
+ },
+ "owned_processes_after": [],
+ "plan_sha256": "4713388422e1f2ea36a7893060d41159d10c3dc3fde07712644fae19ce3c5a2f",
+ "pre_launch_shell_error": "first command failed at an invalid /dev/fd/3 redirect before the runner started; evidence held only grant.json; no debit or GPU use",
+ "predecessor": {
+  "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r4-quality-gpu-001/release.json",
+  "sha256": "7d6422441d1bd71d26a79d33f9fe493265a142bdfa80c2c41da36ed03d70149f"
+ },
+ "process_groups_alive_after": [],
+ "release": {
+  "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-r5-numeric-quality-gpu-001/release.json",
+  "sha256": "2a3abbff5d6d54a2366448ccea0fd89d4eca617d869926c31a134364116e26a3"
+ },
+ "released": true,
+ "released_at": "2026-10-14T03:11:00.930963+00:00",
+ "retries": 0,
+ "runner_sha256": "f2ba4c9695cc276b0ce7fcf2faff967ad7f1b52ca5967735ad7ce4078849d72f",
+ "schema": "incant-0073-r5-quality-execution-result-v1",
+ "thinking_effort": "max",
+ "verdicts": {
+  "disocclusion": "unchanged (no ghosting)",
+  "drs_transitions": "FAIL; 4/16 entry band at most marginally reduced; post-cut unchanged",
+  "moving_up_own": "FAIL, no visible change",
+  "ordinary_up_stationary": "FAIL, no visible change",
+  "overall": "REJECTED",
+  "overlays": "PASS, preserved",
+  "p1": "unchanged, unresolved",
+  "stationary_own": "preserved (identical to R4)"
+ }
+}
