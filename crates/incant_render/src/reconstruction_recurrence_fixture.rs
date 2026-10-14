@@ -91,7 +91,7 @@ pub(super) struct Experiment {
     pipeline: wgpu::RenderPipeline,
 }
 impl Experiment {
-    pub(super) fn new(renderer: &Renderer) -> Self {
+    pub(super) fn new(renderer: &Renderer, unclipped_ablation: bool, cubic_ablation: bool) -> Self {
         let d = &renderer.device;
         assert!(d.limits().max_color_attachments >= 4);
         assert!(d.limits().max_color_attachment_bytes_per_sample >= 24);
@@ -165,7 +165,19 @@ impl Experiment {
             fragment: Some(wgpu::FragmentState {
                 module: &shader,
                 entry_point: Some("resolve"),
-                compilation_options: Default::default(),
+                compilation_options: wgpu::PipelineCompilationOptions {
+                    constants: &[
+                        (
+                            "diagnostic_disable_color_rectification",
+                            f64::from(u8::from(unclipped_ablation)),
+                        ),
+                        (
+                            "diagnostic_cubic_history",
+                            f64::from(u8::from(cubic_ablation)),
+                        ),
+                    ],
+                    ..Default::default()
+                },
                 targets: &targets,
             }),
             multiview_mask: None,
@@ -364,7 +376,13 @@ fn actual_scene_recurrence_comparison() {
     std::fs::create_dir(&out).expect("fresh experimental output directory");
     let renderer = owner_renderer();
     assert_eq!(renderer.adapter.get_info().backend, wgpu::Backend::Metal);
-    let experiment = Experiment::new(&renderer);
+    let (ablation, cubic) = match std::env::var("INCANT_RECURRENCE_ABLATION").as_deref() {
+        Err(std::env::VarError::NotPresent) | Ok("recurrence") => (false, false),
+        Ok("unclipped") => (true, false),
+        Ok("unclipped-cubic") => (true, true),
+        other => panic!("unknown recurrence experiment mode: {other:?}"),
+    };
+    let experiment = Experiment::new(&renderer, ablation, cubic);
     let (_target, view) = review_target(&renderer);
     let layout = planes();
     let total = layout[7].offset + u64::from(layout[7].stride * layout[7].rect[3]);
@@ -569,6 +587,17 @@ fn actual_scene_recurrence_comparison() {
     }
     assert_eq!((submissions, maps, images.len()), (96, 48, 10));
     let report = json!({"schema":"incant-recurrence-experiment-v1","adapter":describe(&renderer),"output":OUTPUT,"source":SOURCE,"configuration":policy(),"submissions":submissions,"maps":maps,"experimental_resolves":48,"history_initialization_passes":2,"extra_history_bytes":24_883_200,"readback_bytes":total,"raw_bytes":total*48,"frames":rows,"images":images,"shader_sha256":hex(SHADER.as_bytes()),"tone_map_sha256":hex(include_bytes!("tone_map.wgsl")),"output_shader_sha256":hex(include_bytes!("output.wgsl")),"scope":"Test-only ordinary recurrence over actual UP scene inputs; CPU tone conversion excludes current-only overlays and is not exact production display. No performance or appearance acceptance."});
+    let mut report = report;
+    report["rectification"] = json!(if ablation {
+        "disabled_for_diagnosis_only"
+    } else {
+        "recurrence_candidate"
+    });
+    report["history_filter"] = json!(if cubic {
+        "bounded_signed_cubic_diagnostic"
+    } else {
+        "positive_bilinear_mass"
+    });
     std::fs::write(
         out.join("report.json"),
         serde_json::to_vec_pretty(&report).unwrap(),

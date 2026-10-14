@@ -1,4 +1,8 @@
 // TEST-ONLY derivative of resolve.wgsl at 72e5d626. No production pipeline references this.
+// Deliberately unsafe diagnostic ablation: isolates rectification from the
+// geometric admission and reprojection kernel. Never a shipping setting.
+override diagnostic_disable_color_rectification: bool = false;
+override diagnostic_cubic_history: bool = false;
 @group(0) @binding(1) var current:texture_2d<f32>;
 @group(0) @binding(2) var motion:texture_2d<f32>;
 @group(0) @binding(3) var current_depth:texture_depth_2d;
@@ -98,6 +102,35 @@ fn motion_support_coherent(p:vec2f,a:vec4f)->bool {
     }}
     return true;
 }
+// A second diagnostic ablation only. Interpolate numerator and mass with the
+// Catmull-Rom polynomial to expose blur caused by positive bilinear reprojection.
+// Every nonzero tap must have admitted opaque geometry. The signed denominator
+// must be positive; clamp reconstructed color to the admitted support range.
+// This is not positive sample evidence and is NOT adopted by the production path.
+fn cubic_weights(t:f32)->vec4f {
+    let t2=t*t;let t3=t2*t;
+    return vec4f(-0.5*t+t2-0.5*t3,1.0-2.5*t2+1.5*t3,
+        0.5*t+2.0*t2-1.5*t3,-0.5*t2+0.5*t3);
+}
+fn diagnostic_cubic(old:vec2f,expected:f32,fallback:vec4f)->vec4f {
+    let q=old-vec2f(0.5);let base=vec2i(floor(q));
+    let wx=cubic_weights(fract(q.x));let wy=cubic_weights(fract(q.y));
+    var n=vec4f(0.0);var w=0.0;
+    var minimum=vec4f(65504.0);var maximum=vec4f(0.0);
+    for(var y=0;y<4;y++) {for(var x=0;x<4;x++) {
+        let k=wx[x]*wy[y];if k==0.0 {continue;}
+        let tap=base+vec2i(x-1,y-1);
+        if any(tap<lo(frame.output)) || any(tap>hi(frame.output)) {return fallback;}
+        let c=textureLoad(previous_color,tap,0);
+        let z=textureLoad(previous_depth,tap,0).x;
+        let s=stored_evidence(textureLoad(previous_evidence,tap,0));
+        if !admitted(c) || c.a<1.0 || !compatible(z,expected) || !(s.x>0.0) {return fallback;}
+        minimum=min(minimum,c);maximum=max(maximum,c);
+        n+=clean(c)*(k*s.x);w+=k*s.x;
+    }}
+    if !(w>0.0) || !finite4(n/w) {return fallback;}
+    return clamp(n/w,minimum,maximum);
+}
 @fragment fn resolve(@builtin(position) position:vec4f)->Resolved {
     var result=Resolved(vec4f(0.0),0.0,vec2f(0.0),vec4f(-1.0));
     let p=position.xy;
@@ -148,6 +181,7 @@ fn motion_support_coherent(p:vec2f,a:vec4f)->bool {
     }}
     if !(mass>0.0) {return result;}
     var history=numerator/mass;
+    if diagnostic_cubic_history {history=diagnostic_cubic(old,expected,history);}
     let recurrence=recurrence_quantize(select(vec4f(-1.0),recurrence_sum/mass,recurrence_ok));
     result.recurrence=vec4f(recurrence_luma(fresh.rgb),recurrence.xyz);
     // The clamp box is exactly the contributing (single-surface) support.
@@ -164,7 +198,7 @@ fn motion_support_coherent(p:vec2f,a:vec4f)->bool {
     // support's range is consistent evidence and keeps its mass, so high-contrast
     // texture keeps accumulating; history outside it loses mass as before.
     var clamped=clamp(history,minimum,maximum);
-    if recurrence_retains(history.rgb,fresh.rgb,minimum.rgb,maximum.rgb,recurrence) {clamped=history;}
+    if diagnostic_disable_color_rectification || recurrence_retains(history.rgb,fresh.rgb,minimum.rgb,maximum.rgb,recurrence) {clamped=history;}
     let change=abs(history.rgb-clamped.rgb);
     let reaction=clamp(max(change.x,max(change.y,change.z))/frame.options.w,0.0,1.0);
     // Density and reaction scale the associated history mass; the clamp is a

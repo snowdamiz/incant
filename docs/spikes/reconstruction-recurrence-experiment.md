@@ -77,3 +77,19 @@ pixel in production. The documented large overlapping transition would exceed
 the unchanged 671,105,024-byte admission cap. No cap increase or production
 allocation is proposed. Host resets, atomic publication, moving/occlusion
 controls and complete rendered review would all be required for adoption.
+
+## Rectification and interpolation ablations
+
+Runs 005 and 006 each completed the same 48-frame Metal scene, CPU controls and
+bounded readbacks with frozen sources. Run 005 disables color rectification only;
+run 006 additionally replaces admitted history interpolation with a support-bounded
+signed Catmull–Rom numerator/mass interpolation. Any invalid cubic tap falls back
+to the original bilinear history. The signed filter is explicitly not positive
+sample evidence. Neither mode is reachable by a production pipeline.
+
+Unclipped history materially reduces moving stripe aliasing but leaves an obvious
+trail from the moving cube's shadow. The sharper interpolation changes that image
+only modestly and does not remove the trail or broken thin lines. Root inspected
+the actual PNGs; there is no quality acceptance. Run 006 strict all-target Clippy
+passes. The next experiment targets bounded temporal retention, preserving the
+unclipped shadow failure as a counterexample rather than adopting either ablation.
