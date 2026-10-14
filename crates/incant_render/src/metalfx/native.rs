@@ -16,6 +16,8 @@ pub(super) struct Scaler {
     raw: Retained<ProtocolObject<dyn MTLFXTemporalScaler>>,
     pub size: [u32; 2],
     usage: [MTLTextureUsage; 5],
+    #[cfg(test)]
+    pub(super) reset_observation: Option<[bool; 3]>,
     _thread: PhantomData<Rc<()>>,
 }
 pub(super) fn range(device: &wgpu::Device) -> Result<[f32; 2], Fallback> {
@@ -89,6 +91,8 @@ impl Scaler {
                 raw,
                 size,
                 usage,
+                #[cfg(test)]
+                reset_observation: None,
                 _thread: PhantomData,
             })
         }
@@ -199,7 +203,20 @@ impl Scaler {
                     Retained::as_ptr(&self.raw).cast_mut().cast::<AnyObject>(),
                     objc2::ffi::OBJC_ASSOCIATION_RETAIN,
                 );
+                // Supported getters distinguish the supplied value from any
+                // encoder mutation. Neither read is a GPU completion signal.
+                #[cfg(test)]
+                let before_reset = self.raw.reset();
+                #[cfg(test)]
+                assert_eq!(
+                    before_reset, reset,
+                    "native reset immediately before encode"
+                );
                 self.raw.encodeToCommandBuffer(cb);
+                #[cfg(test)]
+                {
+                    self.reset_observation = Some([reset, before_reset, self.raw.reset()]);
+                }
                 Ok(())
             })
         }?;

@@ -296,6 +296,7 @@ impl Owner {
             #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
             if let Some(snapshot) = &mut p.diagnostic {
                 snapshot.native_settings = Some(scaler.diagnostic_settings());
+                snapshot.native_reset = scaler.reset_observation;
             }
             Ok(encoded)
         }

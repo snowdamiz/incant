@@ -404,6 +404,7 @@ impl Probe {
         );
         self.records.push(json!({"arm":arm,"frame":frame,"planes":records,"map_bytes":bytes,"map_count":1,"timestamp_query_count":0,
             "mask_counts":mask_counts.as_slice(),"frame_values":snapshot.frame.as_slice(),"motion_frame_values":snapshot.motion_frame.as_slice(),
+            "native_reset":snapshot.native_reset,"native_reset_order":["supplied","before_encode","after_encode"],
             "native_getters":settings,"native_getters_order":["preExposure","motionScaleX","motionScaleY","jitterX","jitterY","contentWidth","contentHeight","reset","depthReversed"],
             "completion":"specific queue submission poll and successful full-range map callback, not timing"}));
         pixels

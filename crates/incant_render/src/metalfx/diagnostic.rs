@@ -15,6 +15,9 @@ pub(crate) struct Snapshot {
     /// Actual native getters after encoding: pre-exposure, motion scales XY,
     /// jitter XY, content WH, reset, reversed depth. Not GPU completion data.
     pub native_settings: Option<[f32; 9]>,
+    /// Supplied reset, getter immediately before encode, getter immediately after.
+    /// Post-encode mutation is observed, never assumed to prove a reset or completion.
+    pub native_reset: Option<[bool; 3]>,
 }
 pub(crate) struct Plane {
     pub name: &'static str,
@@ -95,6 +98,7 @@ impl Snapshot {
             sequence: identity.0,
             reset: identity.1,
             native_settings: None,
+            native_reset: None,
         }
     }
     pub fn content(&self) -> [u32; 2] {

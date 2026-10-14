@@ -314,7 +314,7 @@ fn run_mode(opaque: bool, sampling: bool) {
                 let phase = since_reset % sequence.period();
                 assert_eq!(m.jitter_phase(), Some(phase));
                 assert_eq!(m.epoch(), if frame < 25 { 1 } else { 2 });
-                if sampling && raw_probe.is_some() {
+                let native_reset = if sampling && raw_probe.is_some() {
                     let snapshot = retained
                         .metalfx_diagnostic()
                         .expect("accepted native observation");
@@ -324,10 +324,19 @@ fn run_mode(opaque: bool, sampling: bool) {
                     assert_eq!(&getters[..3], &[1., 1., 1.]);
                     assert_eq!(&getters[3..5], &sequence.sample(phase));
                     assert_eq!(&getters[5..7], &extent.map(|v| v as f32));
-                    assert_eq!(&getters[7..], &[f32::from(u8::from(snapshot.reset)), 0.]);
-                }
+                    let reset = snapshot
+                        .native_reset
+                        .expect("actual reset setter/getter chronology");
+                    assert_eq!(reset[0], snapshot.reset);
+                    assert_eq!(reset[1], snapshot.reset);
+                    assert_eq!(getters[7], f32::from(u8::from(reset[2])));
+                    assert_eq!(getters[8], 0.);
+                    Some(reset)
+                } else {
+                    None
+                };
                 json!({"sequence":m.sequence(),"epoch":m.epoch(),"previous":m.has_previous(),
-                    "content":extent,"jitter_phase":phase,"jitter_internal_pixels":sequence.sample(phase),"sampling":format!("{sequence:?}")})
+                    "content":extent,"jitter_phase":phase,"jitter_internal_pixels":sequence.sample(phase),"sampling":format!("{sequence:?}"),"native_reset":native_reset})
             };
             rows.push(json!({"arm":name,"frame":frame,"input":input_binding,"motion":motion,
                 "selection":format!("{:?}",retained.metalfx_selection()),"output":[WIDTH,HEIGHT],"cut":frame==25}));
