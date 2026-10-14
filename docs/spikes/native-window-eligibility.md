@@ -61,7 +61,7 @@ showed the world remaining at 772 while normally suspended. Root's normal
 Finder Open restored cached eligibility at 45.473 seconds, and the remaining
 nine steps completed by the final 45.609-second record. One surface deferral and
 one skipped surface attempt remain in the report. These are diagnostic elapsed
-times with an intentional foreground interruption, not performance measurements.
+times with an observed foreground interruption, not performance measurements.
 
 Root captured three actual 640×512 tool images of the live owned window. They
 show readable progress HUD, player positions at different locations, and the
@@ -101,7 +101,7 @@ python3 docs/spikes/evidence/native-window-eligibility/verify.py \
 ```
 
 Counts and native submission receipts do not prove exact final text or rendered
-appearance. Actual root tool images, if captured while the owned child is live,
+appearance. The actual root tool images captured while the owned child was live
 remain separately scoped. No FPS, performance budget, glitch-free audio, other
 device or phase-gate claim follows. Recorded physical input does not prove live
 keyboard handling, and this slice adds no localization/RTL/CJK qualification.

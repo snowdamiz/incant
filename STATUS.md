@@ -31,16 +31,22 @@ The fresh full native replay above completes with zero reported overruns; it
 verifies successful composition, not a live recovery event or audible output
 quality. [Cause and qualification](docs/spikes/device-audio-xrun.md).
 
-## 2D native-window diagnosis — CPU-qualified plumbing
+## 2D native sample — complete Mac win route verified
 
-The fresh Pearl Cove package passes its win, hazard-loss and wall-collision CPU
-routes, including exact HUD, flipbook and PCM checks. Two actual native-window
-attempts timed out; changing computer-use interaction alone did not resolve it.
-A default-off bounded log now records focus, suspension, size, surface outcomes
-and simulation progress without changing frame admission. Ordinary and observer
-player configurations pass 90 and 113 overlapping tests, with both strict lints.
-The new diagnostic shipping build and actual route diagnosis remain separate.
-[Source, retained timeouts and qualification](docs/spikes/native-window-eligibility.md).
+A fresh Pearl Cove shipping package passes all three CPU routes and completes
+its 781-step win route in an actual Metal window on this Mac, with exact offline
+gameplay parity. Three actual window captures show the tilemap, moving player,
+pickups and readable HUD progressing to the boat with all three pearls.
+The window pauses normally on focus loss and finishes after normal activation;
+that interruption and one surface deferral remain recorded, so this is not a
+frame-time result. Audible quality and continuous-motion review remain separate.
+
+The two earlier timeouts and a later harness refusal remain retained. That
+refusal counted the logical layout root as a drawn widget; the corrected check
+requires exactly two native labels while the CPU tree still requires three
+widgets. Eleven Python controls pass. The default-off eligibility log changes
+no frame-admission policy. [Fresh export, failed attempts, corrected check and
+actual window proof](docs/spikes/native-window-eligibility.md).
 
 ## Repeated navigation-start cost — diagnostic complete
 
