@@ -35,3 +35,8 @@ impl Capture {
         unreachable!("disabled capture cannot be constructed")
     }
 }
+
+#[inline(always)]
+pub fn frame<T, E>(run: impl FnOnce() -> Result<T, E>) -> Result<T, E> {
+    run()
+}
