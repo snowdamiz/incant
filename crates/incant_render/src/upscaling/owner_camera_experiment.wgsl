@@ -1,6 +1,7 @@
 // Test-only forward gather of unchanged, single-owner partial coverage. This is
 // deliberately bounded to nearby old texels, not a general reprojection solver.
 // Matrices are UNJITTERED; old depth belongs to the old resolved pixel center.
+const CAMERA_RADIUS:i32=3;
 struct CameraPair { previous_inverse:mat4x4f, current_matrix:mat4x4f }
 @group(0) @binding(10) var<uniform> cameras:CameraPair;
 fn camera_project(p:vec2f,z:f32)->vec4f {
@@ -55,17 +56,19 @@ fn camera_tap(t:vec2i,p:vec2f,e:Evidence)->CameraTap {
     }
     if frame.depth.w<0.5 || (changes.header.y&2u)!=0u || e.changed {return result;}
     if e.owners.over || e.owners.b!=0u {return result;}
-    // At most 25 old centers. An absent/out-of-window candidate is current-only.
+    // At most (2R+1)^2 old centers. Full tent support for pure translation
+    // requires each output-pixel displacement magnitude <= R. Beyond that the
+    // bounded gather can retain only a partial partition or no history.
     // This is a small-motion diagnostic, not a claim of arbitrary camera support.
     let center=vec2i(p);
     var nearest=frame.depth.y+1.0; var selected=0u;
-    for(var y=-2;y<=2;y++) {for(var x=-2;x<=2;x++) {
+    for(var y=-CAMERA_RADIUS;y<=CAMERA_RADIUS;y++) {for(var x=-CAMERA_RADIUS;x<=CAMERA_RADIUS;x++) {
         let v=camera_tap(center+vec2i(x,y),p,e);
         if v.mass>0.0 && v.position.z<nearest {nearest=v.position.z;selected=v.owner;}
     }}
     if selected==0u || (e.surface && e.owners.a!=selected) {return result;}
     var numerator=vec4f(0.0); var mass=0.0; var age=0.0;
-    for(var y=-2;y<=2;y++) {for(var x=-2;x<=2;x++) {
+    for(var y=-CAMERA_RADIUS;y<=CAMERA_RADIUS;y++) {for(var x=-CAMERA_RADIUS;x<=CAMERA_RADIUS;x++) {
         let v=camera_tap(center+vec2i(x,y),p,e);
         if v.mass>0.0 && v.owner==selected && compatible(v.position.z,nearest) {
             numerator+=v.color*v.mass;mass+=v.mass;age=max(age,v.age);

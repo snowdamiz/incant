@@ -1,9 +1,9 @@
 //! Small actual-shader refusals independent of the moving scene's caster flag.
 use super::*;
-const N: u32 = 16;
-const PRESENT: u32 = 1 << 31;
-const PLANE: u64 = 256 * N as u64;
-fn upload<T: bytemuck::Pod>(q: &wgpu::Queue, view: &wgpu::TextureView, values: &[T]) {
+pub(super) const N: u32 = 16;
+pub(super) const PRESENT: u32 = 1 << 31;
+pub(super) const PLANE: u64 = 256 * N as u64;
+pub(super) fn upload<T: bytemuck::Pod>(q: &wgpu::Queue, view: &wgpu::TextureView, values: &[T]) {
     assert_eq!(values.len(), (N * N) as usize);
     q.write_texture(
         view.texture().as_image_copy(),
@@ -20,7 +20,7 @@ fn upload<T: bytemuck::Pod>(q: &wgpu::Queue, view: &wgpu::TextureView, values: &
         },
     );
 }
-fn texture(d: &wgpu::Device, format: wgpu::TextureFormat) -> wgpu::TextureView {
+pub(super) fn texture(d: &wgpu::Device, format: wgpu::TextureFormat) -> wgpu::TextureView {
     d.create_texture(&wgpu::TextureDescriptor {
         label: Some("Camera gather small refusal input"),
         size: wgpu::Extent3d {

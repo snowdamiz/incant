@@ -4,6 +4,8 @@ use glam::{Mat4, Vec2, Vec3};
 use wgpu::util::DeviceExt;
 #[path = "reconstruction_owner_camera_controls.rs"]
 mod controls;
+#[path = "reconstruction_owner_camera_support.rs"]
+mod support;
 
 const FORMATS: [wgpu::TextureFormat; 4] = [
     wgpu::TextureFormat::Rgba16Float,
@@ -19,13 +21,20 @@ struct Plane {
     offset: u64,
 }
 fn shader() -> String {
+    shader_with_radius(3)
+}
+fn shader_with_radius(radius: i32) -> String {
+    assert!([2, 3].contains(&radius));
     let original = include_str!("upscaling/resolve_owner.wgsl");
     let entry = "@fragment fn resolve(@builtin(position) position:vec4f)";
     assert_eq!(original.matches(entry).count(), 1);
     [
         include_str!("upscaling/common.wgsl").to_owned(),
         original.replace(entry, "fn original_resolve(position:vec4f)"),
-        include_str!("upscaling/owner_camera_experiment.wgsl").to_owned(),
+        include_str!("upscaling/owner_camera_experiment.wgsl").replace(
+            "const CAMERA_RADIUS:i32=3;",
+            &format!("const CAMERA_RADIUS:i32={radius};"),
+        ),
     ]
     .join("\n")
 }
@@ -55,13 +64,15 @@ fn project(matrix: Mat4, world: Vec3) -> (Vec2, f32) {
 }
 #[test]
 fn owner_camera_shader_and_projection_controls() {
-    let module = naga::front::wgsl::parse_str(&shader()).unwrap();
-    naga::valid::Validator::new(
-        naga::valid::ValidationFlags::all(),
-        naga::valid::Capabilities::all(),
-    )
-    .validate(&module)
-    .unwrap();
+    for radius in [2, 3] {
+        let module = naga::front::wgsl::parse_str(&shader_with_radius(radius)).unwrap();
+        naga::valid::Validator::new(
+            naga::valid::ValidationFlags::all(),
+            naga::valid::Capabilities::all(),
+        )
+        .validate(&module)
+        .unwrap();
+    }
     let stage = Stage::new(true);
     let mut input = stage.input();
     stage.pose(&mut input, 1);
@@ -146,6 +157,9 @@ struct Experiment {
 }
 impl Experiment {
     fn new(renderer: &Renderer) -> Self {
+        Self::with_radius(renderer, 3)
+    }
+    fn with_radius(renderer: &Renderer, radius: i32) -> Self {
         let d = &renderer.device;
         let mut entries = crate::upscaling::system::owner_layout_entries();
         entries.push(wgpu::BindGroupLayoutEntry {
@@ -164,7 +178,7 @@ impl Experiment {
         });
         let module = d.create_shader_module(wgpu::ShaderModuleDescriptor {
             label: Some("Test camera owner shader"),
-            source: wgpu::ShaderSource::Wgsl(shader().into()),
+            source: wgpu::ShaderSource::Wgsl(shader_with_radius(radius).into()),
         });
         let pipeline_layout = d.create_pipeline_layout(&wgpu::PipelineLayoutDescriptor {
             label: None,
@@ -496,7 +510,7 @@ fn actual_scene_owner_camera_gather() {
         }
     }
     assert_eq!((submits, maps), (256, 128));
-    let report = json!({"schema":"incant-owner-camera-diagnostic-v1","adapter":describe(&renderer),"output":SIZE,"source":[480,270],"submissions":submits,"maps":maps,"frames":rows,"images":images,"shader_sha256":hex(shader().as_bytes()),"raw_bytes":total*128,"scope":"Test-only 5x5 forward gather of static single-owner fractional coverage; fixed projection and small camera motion, internal LOD footprint. No production, arbitrary motion, timing or visual acceptance."});
+    let report = json!({"schema":"incant-owner-camera-diagnostic-v1","adapter":describe(&renderer),"output":SIZE,"source":[480,270],"submissions":submits,"maps":maps,"frames":rows,"images":images,"shader_sha256":hex(shader().as_bytes()),"raw_bytes":total*128,"scope":"Test-only radius3 (7x7) forward gather of static single-owner fractional coverage; fixed projection and small camera motion, internal LOD footprint. No production, arbitrary motion, timing or visual acceptance."});
     std::fs::write(
         out.join("report.json"),
         serde_json::to_vec_pretty(&report).unwrap(),
