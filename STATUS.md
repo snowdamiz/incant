@@ -1,5 +1,14 @@
 # Implementation status
 
+## Per-frame CPU distributions — scoped Mac controls pass
+
+The opt-in profiler now reports bounded per-frame phase wall histograms and
+conservative p95 intervals, including aggregate `script.tick`. Seventeen explicit
+native CI-profile CPU cases, a dedicated allocation control, strict lint and a real
+three-tick CLI protocol check pass. Missing/failed/overflow samples refuse p95;
+default dependencies remain empty. Shipping 10,000-entity Mac measurements and the
+60 fps/GPU/hitch gates remain separate. [Contract and evidence](docs/spikes/native-profile-distributions.md).
+
 The optional Apple and Android native hosts now have a qualified main256
 composition with haptics and persisted checkpoints. Both numerical modes pass
 148 player/game CPU cases (103 player +45 game), and all 44 current checks pass,

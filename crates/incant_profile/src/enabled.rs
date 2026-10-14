@@ -23,6 +23,7 @@ struct State {
     frames: [u64; 2],
     heap: QuickJsHeap,
     tracy: bool,
+    distribution: crate::frame::Frames,
 }
 impl State {
     const fn new() -> Self {
@@ -51,6 +52,7 @@ impl State {
                 peak_allocated_bytes: 0,
             },
             tracy: false,
+            distribution: crate::frame::Frames::empty(),
         }
     }
 }
@@ -105,6 +107,7 @@ impl Capture {
         *s = State {
             generation,
             tracy,
+            distribution: crate::frame::Frames::allocated()?,
             ..State::new()
         };
         #[cfg(all(feature = "tracy", any(unix, windows)))]
@@ -128,7 +131,8 @@ impl Capture {
         let s = state();
         let allocations = crate::allocation::since(self.allocation_start);
         Report {
-            version: 1,
+            version: 2,
+            frame_wall: s.distribution.report(),
             scope: "process; inclusive wall and current-thread CPU zones; allocation counters are requested Rust sizes, not RSS",
             generation: self.generation,
             zones: Phase::ALL
@@ -174,6 +178,7 @@ struct Started {
     generation: u64,
     phase: Phase,
     source: Option<usize>,
+    frame: Option<u64>,
     wall: Instant,
     cpu: Option<Duration>,
     _thread: PhantomData<Rc<()>>,
@@ -183,15 +188,15 @@ struct Started {
 pub struct Scope(Option<Started>);
 #[inline]
 pub fn scope(phase: Phase) -> Scope {
-    begin(phase, None)
+    begin(phase, None, None)
 }
 #[inline]
 pub fn script_scope(source: Option<[u8; 16]>) -> Scope {
-    begin(Phase::ScriptSource, Some(source))
+    begin(Phase::ScriptSource, Some(source), None)
 }
-fn begin(phase: Phase, source: Option<Option<[u8; 16]>>) -> Scope {
+fn begin(phase: Phase, source: Option<Option<[u8; 16]>>, expected: Option<u64>) -> Scope {
     let generation = ACTIVE.load(Ordering::Acquire);
-    if generation == 0 {
+    if generation == 0 || expected.is_some_and(|expected| expected != generation) {
         return Scope(None);
     }
     let mut s = state();
@@ -218,11 +223,13 @@ fn begin(phase: Phase, source: Option<Option<[u8; 16]>>) -> Scope {
     } else {
         None
     };
+    let frame = s.distribution.begin_scope(phase);
     drop(s);
     Scope(Some(Started {
         generation,
         phase,
         source: slot,
+        frame,
         wall: Instant::now(),
         cpu: cpu(),
         _thread: PhantomData,
@@ -245,6 +252,8 @@ impl Drop for Scope {
         if ACTIVE.load(Ordering::Acquire) != start.generation {
             return;
         }
+        s.distribution
+            .end_scope(start.frame, start.phase, wall, std::thread::panicking());
         let update = |t: &mut Totals| {
             t.calls = t.calls.saturating_add(1);
             t.wall_ns = t.wall_ns.saturating_add(wall);
@@ -301,5 +310,65 @@ pub fn frame_outcome(success: bool) {
     #[cfg(all(feature = "tracy", any(unix, windows)))]
     if s.tracy {
         crate::tracy::frame(crate::allocation::snapshot());
+    }
+}
+
+/// Measure one synchronous simulation attempt. Failure and unwind invalidate
+/// quantiles; event-loop waits and presentation-only refreshes stay outside.
+#[inline]
+pub fn frame<T, E>(run: impl FnOnce() -> Result<T, E>) -> Result<T, E> {
+    let mut guard = FrameGuard::begin();
+    let result = run();
+    guard.success = result.is_ok();
+    result
+}
+struct FrameGuard {
+    generation: u64,
+    id: Option<u64>,
+    scope: Option<Scope>,
+    success: bool,
+}
+impl FrameGuard {
+    fn begin() -> Self {
+        let generation = ACTIVE.load(Ordering::Acquire);
+        let mut guard = Self {
+            generation,
+            id: None,
+            scope: None,
+            success: false,
+        };
+        if generation == 0 {
+            return guard;
+        }
+        let mut s = state();
+        if ACTIVE.load(Ordering::Acquire) != generation {
+            guard.generation = 0;
+            return guard;
+        }
+        guard.id = s.distribution.begin();
+        drop(s);
+        if guard.id.is_some() {
+            guard.scope = Some(begin(Phase::Frame, None, Some(generation)));
+        }
+        guard
+    }
+}
+impl Drop for FrameGuard {
+    fn drop(&mut self) {
+        drop(self.scope.take());
+        if self.generation == 0 {
+            return;
+        }
+        let mut s = state();
+        if ACTIVE.load(Ordering::Acquire) != self.generation {
+            return;
+        }
+        s.distribution.finish(self.id, self.success);
+        let i = usize::from(!self.success);
+        s.frames[i] = s.frames[i].saturating_add(1);
+        #[cfg(all(feature = "tracy", any(unix, windows)))]
+        if s.tracy {
+            crate::tracy::frame(crate::allocation::snapshot());
+        }
     }
 }
