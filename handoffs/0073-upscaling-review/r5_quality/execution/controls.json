@@ -55,9 +55,11 @@
       "bytes": 4043
     },
     {
-      "path": "protocol-delta.patch",
-      "sha256": "1678ea62f883ca5713e85b258e327f2950663ba6c5ba6840f51d014338a8de63",
-      "bytes": 19510
+      "path": "protocol-delta.patch.gz",
+      "sha256": "ea0edd916437edbf210164131bc206ebf6a5487f83b621032925c27c332e4117",
+      "bytes": 6365,
+      "decoded_sha256": "1678ea62f883ca5713e85b258e327f2950663ba6c5ba6840f51d014338a8de63",
+      "decoded_bytes": 19510
     }
   ],
   "grant": "absent; template invalid until root fills authority fields",

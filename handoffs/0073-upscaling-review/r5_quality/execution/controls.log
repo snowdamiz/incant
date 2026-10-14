@@ -1,0 +1,22 @@
+test_adapter_key_cross_kind (__main__.Controls.test_adapter_key_cross_kind) ... ok
+test_adapter_mismatch_stops_at_quality_motion (__main__.Controls.test_adapter_mismatch_stops_at_quality_motion) ... ok
+test_base_exception_reaps_and_retains (__main__.Controls.test_base_exception_reaps_and_retains) ... ok
+test_binary_mode_and_hash_refusals (__main__.Controls.test_binary_mode_and_hash_refusals) ... ok
+test_busy_global_lock_prevents_debit (__main__.Controls.test_busy_global_lock_prevents_debit) ... ok
+test_exact_artifact_metadata_and_mutations (__main__.Controls.test_exact_artifact_metadata_and_mutations) ... ok
+test_first_failure_stops_before_second_debit (__main__.Controls.test_first_failure_stops_before_second_debit) ... ok
+test_fourth_numeric_failure_prevents_every_quality_child (__main__.Controls.test_fourth_numeric_failure_prevents_every_quality_child) ... ok
+test_grant_mutations_refused (__main__.Controls.test_grant_mutations_refused) ... ok
+test_nine_actual_cpu_children_release_and_no_retry (__main__.Controls.test_nine_actual_cpu_children_release_and_no_retry) ... ok
+test_no_grant_no_side_effect (__main__.Controls.test_no_grant_no_side_effect) ... ok
+test_numeric_marker_and_exact_sequence_refusals (__main__.Controls.test_numeric_marker_and_exact_sequence_refusals) ... ok
+test_plan_mutations_refused (__main__.Controls.test_plan_mutations_refused) ... ok
+test_png_bounds_crc_and_extra_files (__main__.Controls.test_png_bounds_crc_and_extra_files) ... ok
+test_real_frozen_plan_readonly (__main__.Controls.test_real_frozen_plan_readonly) ... ok
+test_signal_reaps_actual_child (__main__.Controls.test_signal_reaps_actual_child) ... ok
+test_timeout_reaps_actual_child (__main__.Controls.test_timeout_reaps_actual_child) ... ok
+
+----------------------------------------------------------------------
+Ran 17 tests in 3.302s
+
+OK
