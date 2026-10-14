@@ -67,7 +67,7 @@ slot and source review first. Example preparation (paths intentionally explicit)
 ```sh
 python3 tools/probes/quickjs-f64-store/prepare.py /absolute/cached/rquickjs-sys-0.14.0 /fresh/probe
 /pinned/node tools/probes/quickjs-f64-store/prepare.mjs /fresh/probe/callback
-./tools/cargo metadata --offline --no-deps --format-version 1 --manifest-path /fresh/probe/baseline/Cargo.toml
+./tools/cargo metadata --offline --format-version 1 --manifest-path /fresh/probe/baseline/Cargo.toml
 python3 tools/probes/quickjs-f64-store/check_lock.py Cargo.lock /fresh/probe/baseline/Cargo.lock
 ```
 
