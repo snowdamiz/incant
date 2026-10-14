@@ -4,6 +4,8 @@
 mod frame_model;
 mod heap_model;
 mod model;
+#[cfg(feature = "diagnostic-script-phases")]
+pub mod diagnostic;
 pub use frame_model::*;
 pub use heap_model::*;
 #[cfg(feature = "summary")]

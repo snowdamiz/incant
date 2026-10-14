@@ -230,6 +230,10 @@ impl Drop for NumericColumns<'_> {
         if !self.touched.iter().any(|touched| *touched) {
             return;
         }
+        #[cfg(feature = "diagnostic-script-phases")]
+        let attribution = incant_profile::diagnostic::Span::numeric(
+            incant_profile::diagnostic::NumericRegion::ChangeTicks,
+        );
         let world = &mut self.owner.world;
         let tick = world.change_tick();
         let components = [
@@ -251,6 +255,8 @@ impl Drop for NumericColumns<'_> {
                 }
             }
         }
+        #[cfg(feature = "diagnostic-script-phases")]
+        drop(attribution);
         if self.validated {
             self.owner.publish_numeric_globals();
         } else {

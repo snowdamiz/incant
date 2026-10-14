@@ -37,6 +37,12 @@ fn increment(value: &mut u64, saturated: &mut bool) {
     }
 }
 impl Frames {
+    #[cfg(feature = "diagnostic-script-phases")]
+    pub(crate) fn diagnostic_frame(&self) -> Option<u64> {
+        self.active.as_ref().and_then(|active| {
+            (active.thread == thread::current().id() && !active.collision).then_some(active.id)
+        })
+    }
     pub const fn empty() -> Self {
         const ZERO: Row = Row {
             samples: 0,

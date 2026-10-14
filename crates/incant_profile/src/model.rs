@@ -162,6 +162,8 @@ pub struct SourceReport {
 #[cfg_attr(feature = "summary", derive(serde::Serialize))]
 pub struct Report {
     pub version: u32,
+    #[cfg(feature = "diagnostic-script-phases")]
+    pub script_phase_diagnostic: crate::diagnostic::Report,
     pub frame_wall: crate::FrameWallReport,
     pub scope: &'static str,
     pub generation: u64,

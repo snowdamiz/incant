@@ -653,12 +653,20 @@ impl NativeWorld {
     /// Validate a foreign numeric loan while preparing the exact matrices that
     /// its normal scope cleanup would publish. No derived component is changed.
     pub(crate) fn prepare_numeric_globals(&mut self) -> Result<(), SceneError> {
+        #[cfg(feature = "diagnostic-script-phases")]
+        let _attribution = incant_profile::diagnostic::Span::numeric(
+            incant_profile::diagnostic::NumericRegion::Prepare,
+        );
         self.prepare_candidate_globals(None, false, true)
     }
 
     /// Only NumericColumns may publish this scratch: it holds the world
     /// exclusively and invalidates its successful preparation on every visit.
     pub(crate) fn publish_numeric_globals(&mut self) {
+        #[cfg(feature = "diagnostic-script-phases")]
+        let _attribution = incant_profile::diagnostic::Span::numeric(
+            incant_profile::diagnostic::NumericRegion::PublishGlobals,
+        );
         self.world
             .resource_scope(|world, hierarchy: Mut<Hierarchy>| {
                 let mut query = world.query::<&mut Global>();
