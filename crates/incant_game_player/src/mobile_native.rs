@@ -3,6 +3,7 @@
 #[path = "window/clock.rs"]
 #[allow(dead_code)] // The desktop retry helper is not used by display callbacks.
 mod clock;
+pub mod ffi;
 mod surface;
 use crate::mobile_host::touch::{NativeTouchInput, TouchError};
 use crate::mobile_host::{MobileHostError, MobileSession};
@@ -44,6 +45,11 @@ pub struct AppleMobileHost {
     delivering: bool,
     epoch: u64,
     input: NativeTouchInput,
+}
+impl Drop for AppleMobileHost {
+    fn drop(&mut self) {
+        self.close();
+    }
 }
 impl AppleMobileHost {
     /// Create on the platform view's owning thread. The host starts suspended.
