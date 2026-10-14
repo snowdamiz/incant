@@ -80,6 +80,14 @@ fn shared_stage_uses_opaque_cooked_assets_and_stable_semantic_bindings() {
 #[test]
 #[ignore = "coordinated Mac GPU only: 96 scene submits, 15 readbacks/maps, 15 images"]
 fn actual_full_half_three_quarter_material_images_and_motion() {
+    run(false);
+}
+#[test]
+#[ignore = "coordinated Mac GPU only: opaque domain, 96 scene submits, 15 readbacks/maps"]
+fn actual_opaque_background_reactive_policy_images_and_motion() {
+    run(true);
+}
+fn run(opaque: bool) {
     let root =
         std::env::var_os("INCANT_METALFX_IMAGE_OUTPUT").expect("explicit create-only output");
     let mut output = capture::Output::new(root.into());
@@ -99,16 +107,49 @@ fn actual_full_half_three_quarter_material_images_and_motion() {
     );
     let mut renderer = crate::test_support::checked(Renderer::headless().unwrap());
     assert_eq!(renderer.adapter.get_info().backend, wgpu::Backend::Metal);
-    pollster::block_on(renderer.enable_metalfx()).unwrap();
+    if opaque {
+        pollster::block_on(
+            renderer
+                .enable_opaque_metalfx_experiment(crate::metalfx::opaque_experiment::BACKGROUND),
+        )
+        .unwrap();
+    } else {
+        pollster::block_on(renderer.enable_metalfx()).unwrap();
+    }
     assert!(
         renderer.metalfx_admission.is_some_and(|r| r.is_ok()),
         "native support required"
     );
+    if opaque {
+        for (name, source) in [
+            (
+                "opaque-pack.wgsl",
+                crate::metalfx::opaque_experiment::source(false),
+            ),
+            (
+                "opaque-normalize.wgsl",
+                crate::metalfx::opaque_experiment::source(true),
+            ),
+            (
+                "opaque-full-output.wgsl",
+                crate::metalfx::opaque_experiment::output_source(
+                    crate::metalfx::opaque_experiment::BACKGROUND,
+                ),
+            ),
+        ] {
+            output.write(name, source.as_bytes());
+        }
+    }
     let mut raw_probe = raw::requested().then(|| raw::Probe::new(&renderer, &mut output));
     let texture = capture::texture(&renderer);
     let view = texture.create_view(&Default::default());
     let mut arms = Vec::new();
-    for (name, sixteenths) in [("full", 16), ("mfx50", 8), ("mfx75", 12)] {
+    let configuration = if opaque {
+        [("full", 16), ("mfx50-reactive1", 8), ("mfx50-reactive0", 8)]
+    } else {
+        [("full", 16), ("mfx50", 8), ("mfx75", 12)]
+    };
+    for (name, sixteenths) in configuration {
         let mut retained = renderer.prepare_retained(&input, &stage.camera).unwrap();
         if sixteenths != 16 {
             retained
@@ -121,6 +162,14 @@ fn actual_full_half_three_quarter_material_images_and_motion() {
                     },
                 )
                 .unwrap();
+            if opaque {
+                retained
+                    .set_metalfx_experiment_domain(crate::metalfx::opaque_experiment::Domain {
+                        background: crate::metalfx::opaque_experiment::BACKGROUND,
+                        stable_background: name == "mfx50-reactive0",
+                    })
+                    .unwrap();
+            }
             if raw_probe.is_some() {
                 retained.enable_metalfx_diagnostic();
             }
@@ -238,7 +287,7 @@ fn actual_full_half_three_quarter_material_images_and_motion() {
             "mask_passes":4,"timestamp_queries":0,"extra_submissions":0,"extra_maps":0,
             "max_map_bytes":25*1024*1024,"raw_byte_order":"little endian","appearance_acceptance":false})
     });
-    let report = json!({"schema":1,"raw_diagnostic":raw_diagnostic,"purpose":"observations only, no visual or performance acceptance",
+    let mut report = json!({"schema":1,"raw_diagnostic":raw_diagnostic,"purpose":"observations only, no visual or performance acceptance",
         "adapter":format!("{:?}",renderer.adapter.get_info()),"native_admission":format!("{:?}",renderer.metalfx_admission),
         "scene_source":"6cf4660a71a30767e2f4e09749e44ab1678d2a53 opaque Stage subset",
         "excluded":["BLEND card","sprites","world text","bloom","portable upscaling shaders"],
@@ -246,6 +295,11 @@ fn actual_full_half_three_quarter_material_images_and_motion() {
         "budget":{"queue_submits":submits,"maps":maps,"native_raw_encodes":native,"explicit_command_buffers":buffers,
             "vendor_internal_work_counted":false,"frames_per_arm":32,"captures":15,"width":WIDTH,"height":HEIGHT},
         "frames":rows,"files":output.files});
+    if opaque {
+        report["opaque_experiment"] = json!({"background_scene_linear":crate::metalfx::opaque_experiment::BACKGROUND,
+        "arms":["full","mfx50-reactive1","mfx50-reactive0"],"jitter":"unchanged 8 phases","full_background":"before tone mapping",
+        "mask_semantics":"original transparent guard counterfactual, not actual opaque selection","public_mode":false});
+    }
     output.write("report.json", &serde_json::to_vec_pretty(&report).unwrap());
     println!(
         "MetalFX image fixture: 96 scene frames; 111 submits; 15 maps; 64 native encodes; 239 command buffers; 15 images; appearance unreviewed"

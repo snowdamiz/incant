@@ -13,6 +13,8 @@ struct Frame {
 }
 const _: () = assert!(size_of::<Frame>() == 96);
 pub(crate) struct System {
+    #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+    opaque: bool,
     layout: wgpu::BindGroupLayout,
     pack: wgpu::RenderPipeline,
     normalize: wgpu::RenderPipeline,
@@ -39,6 +41,23 @@ fn source(normalize: bool) -> String {
     )
 }
 impl crate::Renderer {
+    #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+    pub(crate) async fn enable_opaque_metalfx_experiment(
+        &mut self,
+        background: [f32; 3],
+    ) -> crate::Result<()> {
+        self.enable_metalfx().await?;
+        if self.metalfx_admission.is_some_and(|v| v.is_ok()) {
+            self.metalfx = Some(System::with_source(
+                &self.device,
+                super::opaque_experiment::source,
+                true,
+            ));
+            self.output = crate::output::OutputPass::opaque_experiment(&self.device, background);
+        }
+        Ok(())
+    }
+
     /// Explicit startup-only compilation of fixed engine shaders. Native scaler
     /// compilation is synchronous and bounded to owner/extent preparation.
     pub async fn enable_metalfx(&mut self) -> crate::Result<()> {
@@ -102,6 +121,9 @@ impl crate::Renderer {
 }
 impl System {
     fn new(d: &wgpu::Device) -> Self {
+        Self::with_source(d, source, false)
+    }
+    fn with_source(d: &wgpu::Device, source: fn(bool) -> String, _opaque: bool) -> Self {
         let entries: [_; 4] = std::array::from_fn(|i| wgpu::BindGroupLayoutEntry {
             binding: i as u32,
             visibility: wgpu::ShaderStages::FRAGMENT,
@@ -124,6 +146,16 @@ impl System {
             },
             count: None,
         });
+        #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+        let entries = {
+            let mut entries = entries.to_vec();
+            if _opaque {
+                let mut extra = entries[2];
+                extra.binding = 4;
+                entries.push(extra);
+            }
+            entries
+        };
         let layout = d.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
             label: Some("MetalFX boundary"),
             entries: &entries,
@@ -181,6 +213,8 @@ impl System {
             })
         };
         Self {
+            #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+            opaque: _opaque,
             pack: pipeline(false),
             normalize: pipeline(true),
             layout,
@@ -219,33 +253,59 @@ impl System {
                 p.previous_jitter[1] / plan.source[3] as f32,
             ],
         };
+        #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+        let f = {
+            let mut f = f;
+            assert_eq!(
+                self.opaque,
+                p.domain.is_some(),
+                "explicit opaque pipeline/owner correspondence"
+            );
+            if let Some(domain) = p.domain {
+                f.reactive = domain.uniform();
+                f.depth[3] = f32::from(u8::from(p.domain_previous()));
+            }
+            f
+        };
         let frame = d.create_buffer_init(&wgpu::util::BufferInitDescriptor {
             label: Some("MetalFX exact coordinates"),
             contents: bytemuck::bytes_of(&f),
             usage: wgpu::BufferUsages::UNIFORM,
         });
         let group = |views: [&wgpu::TextureView; 3]| {
+            let entries = [
+                wgpu::BindGroupEntry {
+                    binding: 0,
+                    resource: frame.as_entire_binding(),
+                },
+                wgpu::BindGroupEntry {
+                    binding: 1,
+                    resource: wgpu::BindingResource::TextureView(views[0]),
+                },
+                wgpu::BindGroupEntry {
+                    binding: 2,
+                    resource: wgpu::BindingResource::TextureView(views[1]),
+                },
+                wgpu::BindGroupEntry {
+                    binding: 3,
+                    resource: wgpu::BindingResource::TextureView(views[2]),
+                },
+            ];
+            #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+            let entries = {
+                let mut entries = entries.to_vec();
+                if self.opaque {
+                    entries.push(wgpu::BindGroupEntry {
+                        binding: 4,
+                        resource: wgpu::BindingResource::TextureView(motion),
+                    });
+                }
+                entries
+            };
             d.create_bind_group(&wgpu::BindGroupDescriptor {
                 label: Some("MetalFX frame"),
                 layout: &self.layout,
-                entries: &[
-                    wgpu::BindGroupEntry {
-                        binding: 0,
-                        resource: frame.as_entire_binding(),
-                    },
-                    wgpu::BindGroupEntry {
-                        binding: 1,
-                        resource: wgpu::BindingResource::TextureView(views[0]),
-                    },
-                    wgpu::BindGroupEntry {
-                        binding: 2,
-                        resource: wgpu::BindingResource::TextureView(views[1]),
-                    },
-                    wgpu::BindGroupEntry {
-                        binding: 3,
-                        resource: wgpu::BindingResource::TextureView(views[2]),
-                    },
-                ],
+                entries: &entries,
             })
         };
         Ok(Draw {
@@ -390,3 +450,21 @@ mod tests {
 #[cfg(test)]
 #[path = "boundary_tests.rs"]
 mod boundary_tests;
+
+#[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+#[path = "opaque_boundary_tests.rs"]
+mod opaque_boundary_tests;
+
+#[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+#[test]
+fn original_transparent_shader_bytes_remain_exact() {
+    use sha2::{Digest, Sha256};
+    assert_eq!(
+        format!("{:x}", Sha256::digest(source(false))),
+        "6ec97c6b24fb89cb93d44969cdeba25c16b22e7bb23574f95c8fbe29746b0efb"
+    );
+    assert_eq!(
+        format!("{:x}", Sha256::digest(source(true))),
+        "ed24d096849a33c5d4c03ca2ada6f2b9281144367f6890206ef2bc65d5867b46"
+    );
+}

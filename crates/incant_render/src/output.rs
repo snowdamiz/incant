@@ -35,6 +35,33 @@ fn decode(byte: u8) -> f32 {
 }
 pub(crate) struct OutputPass(HashMap<wgpu::TextureFormat, wgpu::RenderPipeline>);
 impl OutputPass {
+    #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+    pub(crate) fn opaque_experiment(device: &wgpu::Device, background: [f32; 3]) -> Self {
+        let module = device.create_shader_module(wgpu::ShaderModuleDescriptor {
+            label: Some("Opaque scene experiment output"),
+            source: wgpu::ShaderSource::Wgsl(
+                crate::metalfx::opaque_experiment::output_source(background).into(),
+            ),
+        });
+        let stages = Stages {
+            vertex: module.clone(),
+            fragment: module,
+            vertex_entry: "vertex",
+            fragment_entry: "fragment",
+        };
+        Self(
+            [
+                wgpu::TextureFormat::Rgba8Unorm,
+                wgpu::TextureFormat::Rgba8UnormSrgb,
+                wgpu::TextureFormat::Bgra8Unorm,
+                wgpu::TextureFormat::Bgra8UnormSrgb,
+            ]
+            .into_iter()
+            .map(|format| (format, build(device, &stages, None, format, None)))
+            .collect(),
+        )
+    }
+
     pub(super) fn bloom(device: &wgpu::Device) -> Self {
         let module = device.create_shader_module(wgpu::ShaderModuleDescriptor {
             label: Some("Bloom HDR display transform"),

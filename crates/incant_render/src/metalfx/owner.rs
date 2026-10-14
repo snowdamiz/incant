@@ -17,6 +17,8 @@ struct Prepared {
 
 pub(crate) struct Owner {
     #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+    pub(super) domain: Option<super::opaque_experiment::Domain>,
+    #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
     diagnostic_enabled: bool,
     #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
     diagnostic: Option<super::diagnostic::Snapshot>,
@@ -35,6 +37,8 @@ pub(crate) struct Owner {
     _thread: PhantomData<Rc<()>>,
 }
 pub(crate) struct Pending {
+    #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+    pub(super) domain: Option<super::opaque_experiment::Domain>,
     #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
     pub(super) diagnostic_enabled: bool,
     #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
@@ -62,6 +66,8 @@ impl Owner {
         preference.select(range.err())?;
         Ok(Self {
             #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+            domain: None,
+            #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
             diagnostic_enabled: false,
             #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
             diagnostic: None,
@@ -79,6 +85,18 @@ impl Owner {
             accepted: None,
             _thread: PhantomData,
         })
+    }
+    #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+    pub(crate) fn set_domain(
+        &mut self,
+        domain: super::opaque_experiment::Domain,
+    ) -> Result<(), MetalFxError> {
+        domain.validate()?;
+        if self.domain != Some(domain) {
+            self.history.invalidate();
+            self.domain = Some(domain);
+        }
+        Ok(())
     }
     pub fn selection(&self) -> Option<Selection> {
         self.accepted
@@ -203,6 +221,8 @@ impl Owner {
         }
         Ok(Pending {
             #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+            domain: self.domain,
+            #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
             diagnostic_enabled: self.diagnostic_enabled,
             #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
             diagnostic: None,
@@ -315,6 +335,11 @@ impl Owner {
 }
 impl Pending {
     #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+    pub(super) fn domain_previous(&self) -> bool {
+        self.has_previous && !self.reset
+    }
+
+    #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
     pub(super) fn diagnostic_identity(&self) -> (u64, bool) {
         (self.sequence, self.reset)
     }
@@ -331,3 +356,54 @@ impl Pending {
 #[cfg(all(test, target_os = "macos"))]
 #[path = "prewarm_tests.rs"]
 mod prewarm_tests;
+
+#[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+#[test]
+fn opaque_domain_identity_resets_only_after_valid_change() {
+    use super::opaque_experiment::{BACKGROUND, Domain};
+    let mut owner = Owner::new(
+        Preference::RequireMetalFx,
+        Config {
+            relative_depth: 0.01,
+            absolute_depth: 0.001,
+        },
+        Ok([1., 4.]),
+    )
+    .unwrap();
+    let domain = Domain {
+        background: BACKGROUND,
+        stable_background: true,
+    };
+    let dimensions = [48, 48, 96, 96];
+    owner.history.accept(1, dimensions);
+    owner.set_domain(domain).unwrap();
+    assert!(owner.history.reset(2, true, dimensions));
+    owner.history.accept(2, dimensions);
+    owner.set_domain(domain).unwrap();
+    assert!(!owner.history.reset(3, true, dimensions));
+    assert!(owner.history.reset(3, false, dimensions)); // cut
+    assert!(owner.history.reset(4, true, dimensions)); // gap
+    assert!(owner.history.reset(3, true, [72, 72, 96, 96])); // extent
+    let invalid = Domain {
+        background: [f32::NAN, 0., 0.],
+        ..domain
+    };
+    assert!(owner.set_domain(invalid).is_err());
+    assert_eq!(owner.domain, Some(domain));
+    assert!(!owner.history.reset(3, true, dimensions));
+    owner
+        .set_domain(Domain {
+            stable_background: false,
+            ..domain
+        })
+        .unwrap();
+    assert!(owner.history.reset(3, true, dimensions));
+    owner.history.accept(3, dimensions);
+    owner
+        .set_domain(Domain {
+            background: [0.03, 0.03, 0.05],
+            stable_background: false,
+        })
+        .unwrap();
+    assert!(owner.history.reset(4, true, dimensions));
+}

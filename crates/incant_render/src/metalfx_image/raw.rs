@@ -201,7 +201,12 @@ impl Probe {
         frame: u32,
         output: &mut capture::Output,
     ) -> Vec<u8> {
-        assert!(matches!(arm, "mfx50" | "mfx75") && matches!(frame, 16 | 24));
+        assert!(
+            matches!(
+                arm,
+                "mfx50" | "mfx75" | "mfx50-reactive1" | "mfx50-reactive0"
+            ) && matches!(frame, 16 | 24)
+        );
         assert!(self.records.len() < 4);
         assert_eq!(snapshot.sequence, u64::from(frame));
         assert!(!snapshot.reset);

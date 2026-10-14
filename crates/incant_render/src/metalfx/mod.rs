@@ -6,6 +6,8 @@ pub(crate) mod diagnostic;
 mod lifecycle;
 #[cfg(all(feature = "native-metalfx", target_os = "macos"))]
 mod native;
+#[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+pub(crate) mod opaque_experiment;
 #[cfg(feature = "native-metalfx")]
 mod owner;
 mod plan;

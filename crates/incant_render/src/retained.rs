@@ -241,6 +241,16 @@ impl RetainedScene {
         }
     }
     #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
+    pub(crate) fn set_metalfx_experiment_domain(
+        &mut self,
+        domain: crate::metalfx::opaque_experiment::Domain,
+    ) -> Result<(), crate::metalfx::MetalFxError> {
+        self.metalfx
+            .as_mut()
+            .ok_or(crate::metalfx::MetalFxError::Disabled)?
+            .set_domain(domain)
+    }
+    #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
     pub(crate) fn enable_metalfx_diagnostic(&mut self) {
         self.metalfx
             .as_mut()
