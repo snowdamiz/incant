@@ -1,0 +1,23 @@
+{
+  "archive_sha256": "fefed3f3e8dd3775d8e523f0f3e1105086053ac8afb9d4bdc2eb1bbccc786f3d",
+  "argv": [
+    "python3",
+    "-B",
+    "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant/docs/spikes/evidence/quickjs-loan-main278/verify.py",
+    "--verify-only",
+    "--external"
+  ],
+  "cwd": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant",
+  "ended_utc": "2026-10-14T10:54:02.008094+00:00",
+  "engine_executions": 0,
+  "exit_code": 0,
+  "format": "incant-offline-portable-external-replay",
+  "manifest_sha256": "8eb7f8358c251886c9feff0fea49d7396aa87e9e2bce9ee1041a9cbce672448f",
+  "new_builds": 0,
+  "new_measurements": 0,
+  "started_utc": "2026-10-14T10:54:01.689696+00:00",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_sha256": "7c6b6a83fa9e087573844f760e50dbf93aa01a3c73a73629c827eefe827d5de1",
+  "verifier_sha256": "adeea510442551bb0ceb09a556e991c7b882d8df28561abec6d8ebed40d110e8",
+  "version": 1
+}

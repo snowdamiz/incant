@@ -1,0 +1,579 @@
+{
+  "all_2ms_budgets": "fail",
+  "anchors": {
+    "detailed": "D0",
+    "maintained": "M0"
+  },
+  "descriptive_detailed_minus_maintained_ns": {
+    "0": {
+      "lower": 50001,
+      "upper": 69999
+    },
+    "1": {
+      "lower": 100001,
+      "upper": 119999
+    },
+    "2": {
+      "lower": 1,
+      "upper": 19999
+    }
+  },
+  "execution_base_sha": "0b57cc37db409cd228a7332aa42e2c9dad02ac2e",
+  "execution_source_sha": "0b57cc37db409cd228a7332aa42e2c9dad02ac2e",
+  "format": "incant-loan-main278-derived-summary",
+  "functional_logical_and_exact_pcm_parity": true,
+  "functional_modes": [
+    "unprofiled",
+    "detailed",
+    "maintained"
+  ],
+  "identities": {
+    "build_log_sha256": "e99b5171b50a2e7981c3bfa556467880826270c9e2f1bcc056d52199d49b723b",
+    "data": {
+      "audio/08b4d5af1f19e43c1c228d7c6ca243e8d2362f27f336f87a347cb697f6ebca28.json": "59363a80bbac59c6f139695407f2e76c31ed47b4345b03177801b01640480139",
+      "audio/1e53cd57bfecb7115ad888e9d40f01c6d957b7130bd6f8975a2d16100d7eda46.ipcm": "1e53cd57bfecb7115ad888e9d40f01c6d957b7130bd6f8975a2d16100d7eda46",
+      "audio/2b67780f0ec6ce10736909aa8ec0a3b386d6b308382b7eaf33d40a5a28977718.ipcm": "2b67780f0ec6ce10736909aa8ec0a3b386d6b308382b7eaf33d40a5a28977718",
+      "audio/2e05653f8752033823f84b711926070f2d4d237aef0087105be217b401c89637.ipcm": "2e05653f8752033823f84b711926070f2d4d237aef0087105be217b401c89637",
+      "audio/384ae95c87bd2678c8b4b80f85bca02c73035338461b423f514e25fc891f9778.ipcm": "384ae95c87bd2678c8b4b80f85bca02c73035338461b423f514e25fc891f9778",
+      "audio/3d3e537168e5bf96036e6625c0b5d55b12cf122a4715f7e8d77baf937edc8c58.json": "fd7c43cb6347a021fcfe215fa66bbd817620ff596a04bc8b32259202352921ea",
+      "audio/4ecb37a4cf20667d8d7922971a3b609c1898cb988fb96bc0a3857546f3123c4e.json": "d9ca5bd9b8d52ced2826915913857e90baea981bcdfe6d9ace42e9105929fdd2",
+      "audio/4f31a36d777d5ce2702b9a5237742cc8a69efa73d7067afae35dff713cbb935f.json": "8d841a107aff6df0511e0e9dfdf8c6d36cf01928d91dd82e415b26858f58cc96",
+      "audio/6c94df51cc76f31375178021c1fec7775a5e448cba6bde2d1120f9efa6a32c56.ipcm": "6c94df51cc76f31375178021c1fec7775a5e448cba6bde2d1120f9efa6a32c56",
+      "audio/b63a98f27758a1bb7f2a4ba44f4fb8d263230bf401520116b87e6946cdf56117.json": "d5748ced504a28a21d72eaf9c0b26c3fee6ff900c07ea491c06b79c4c5680642",
+      "clips.bin": "1047a8c04273bb4b8157d4c933e93de4aab1128b7891d0e195431722f369d865",
+      "empty-input.json": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+      "fonts/0e1cd7265c7a2fa6109d995205dd8e070723bb824fe28daa8299ba1105063a1f.json": "0538183b4a25a91d05296686e8092634f8c572c4c1dc34329c4685843c7661e1",
+      "fonts/3127f0b873387ee37e2040135a06e9e9c05030f509eb63689529becf28b50384.ifont": "48804b712c66bb0ce00b2cc3272c7be18171810a3bb0555e3d247544951e0fdc",
+      "fonts/74f2395f9b27e4c4ff06183b1baed5684ce4a090490bd00f42637547cca5da0f.json": "76b2977309e2485a6007bcb9c6e75df3a2e161dc576ebbf6be00f6b8b961d0f0",
+      "fonts/9ec258961c8800c709f05586b6fca8a47061f3f776ac088bb87fbb2a462c116e.ifont": "db12e66306387bf4fdcf4b6be1fc31eed9f136e60211061e65cc97ba71500311",
+      "fonts/ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56.ifont": "8bd20a742cc19c0fe65b106d983ea1ed816c4cd5ca1c3d50bdc4d05aeb5f8e7a",
+      "fonts/efbee025bcb27036123566525a911cd346bbe425cceb413eb800661df6b65767.json": "ce4cd118624295e30ed4514c80bfad49c379702ead14327faf7ff92184d6034a",
+      "input-actions.json": "aa13d11e49bbd03a2bfb59cc64b60701f83e5b1b4985f4272c12b4640dd12bdf",
+      "models/018d021c673a74b618fc3516d8ab4e64b32a88f6c8323d0d84395e684d811c13.incmodel": "509cf7c24253b675ed0a3d36ae344d35272050107a97c4aeae4db79417d132e7",
+      "models/1649bb952607a07a912661374fa6a8c104a261d625b339a5aa2e096f52970bec.incmodel": "b32c0ae9a0305abd7610713aa77a270e320090bbb31be1792a47f857ec939f99",
+      "models/b85f1046e4d28277bd6bb792cdcff4dc070268bb95b3b8040b697bbf7f631262.incmodel": "80dbf175a19dfda0db4c8e5c1992657fd435b6778d0b49d056755d088563e778",
+      "models/da2588e81cf9f61d9b06dec86cbf644e5322cdc48594af5c9ac4e9aa08a6e1ad.incmodel": "a20e33175acb4af55ddad2168307ce3e0c02a23127566cac769e6f290bf799bf",
+      "models/ec9f2569b551d61c9552dd311c3190e9dd262c96b8823e1f3c3c04819811bf99.incmodel": "88e2f2c56975f6bde0c0e7c131e870bf783fb86384a27d55b20fd40d40d77621",
+      "package.json": "aa59400b3bd2059bf6a34251c1f3096fba45ecfcf6b90a7835bb00a8b37d6060",
+      "textures/17da802ffd07a79a3041b9ba748180e8eccde82c6461eb24ce092cb378e94333.ktx2": "17da802ffd07a79a3041b9ba748180e8eccde82c6461eb24ce092cb378e94333",
+      "textures/5c2d2703c28f3deb6e566781de8833f45f442888602c7a72872b3ea7f5b141c8.json": "f0bd2e231b9cc1839811dd7faf3a748bb2a41df3e95e84e45c727b5be5a5d840",
+      "world.scene": "2d1ec2682e03748ce06adc9a048e6c81f82cb2358c4b979a0133849bab6a16f4"
+    },
+    "export_sha256": "bbe4c115202626103873e9b1b2ac9daa510b677392868a27cc410afa50e00ec3",
+    "player_sha256": "21c23c9f8aae75a4cccb506af02925ceded760bf75b8449e25fcc17df8f02a02",
+    "program": null,
+    "script_source_sha256": "b223e8faa4ddc17c64809f333f81270e8e6e1676e2380fa1d55acfe445a1cc79"
+  },
+  "machine": {
+    "architecture": "arm64",
+    "chip": "Apple M5 Pro",
+    "low_power_mode": null,
+    "memory_bytes": "51539607552",
+    "model": "Mac17,9",
+    "os_build": "26A434",
+    "os_version": "27.0.1",
+    "physical_cpus": "15",
+    "power_source": "AC Power"
+  },
+  "order": [
+    "D0",
+    "M0",
+    "M1",
+    "D1",
+    "D2",
+    "M2"
+  ],
+  "phase_gate_passed": false,
+  "provenance": "Derived during offline packaging from retained fresh raw reports; not an execution receipt or new measurement",
+  "records": [
+    {
+      "callback_means": [
+        {
+          "source": [
+            1,
+            102,
+            114,
+            192,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "thread_cpu_mean_ns": [
+            473415448,
+            2156
+          ],
+          "wall_mean_ns": [
+            473535675,
+            2156
+          ]
+        },
+        {
+          "source": [
+            1,
+            102,
+            114,
+            192,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            2
+          ],
+          "thread_cpu_mean_ns": [
+            1983437296,
+            2156
+          ],
+          "wall_mean_ns": [
+            1983504727,
+            2156
+          ]
+        }
+      ],
+      "frame_p95_ns": {
+        "lower": 2990001,
+        "upper": 3000000
+      },
+      "heap_mode": "detailed",
+      "label": "D0",
+      "rust_process_peak_requested_bytes": 76881214,
+      "same_mode_stability": null,
+      "script_2ms_p95": "fail",
+      "script_p95_ns": {
+        "lower": 2180001,
+        "upper": 2190000
+      }
+    },
+    {
+      "callback_means": [
+        {
+          "source": [
+            1,
+            102,
+            114,
+            192,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "thread_cpu_mean_ns": [
+            474051293,
+            2156
+          ],
+          "wall_mean_ns": [
+            474285614,
+            2156
+          ]
+        },
+        {
+          "source": [
+            1,
+            102,
+            114,
+            192,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            2
+          ],
+          "thread_cpu_mean_ns": [
+            1991991079,
+            2156
+          ],
+          "wall_mean_ns": [
+            1994229618,
+            2156
+          ]
+        }
+      ],
+      "frame_p95_ns": {
+        "lower": 2990001,
+        "upper": 3000000
+      },
+      "heap_mode": "maintained",
+      "label": "M0",
+      "rust_process_peak_requested_bytes": 76881182,
+      "same_mode_stability": null,
+      "script_2ms_p95": "fail",
+      "script_p95_ns": {
+        "lower": 2120001,
+        "upper": 2130000
+      }
+    },
+    {
+      "callback_means": [
+        {
+          "source": [
+            1,
+            102,
+            114,
+            192,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "thread_cpu_mean_ns": [
+            466116037,
+            2156
+          ],
+          "wall_mean_ns": [
+            466121229,
+            2156
+          ]
+        },
+        {
+          "source": [
+            1,
+            102,
+            114,
+            192,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            2
+          ],
+          "thread_cpu_mean_ns": [
+            1937165695,
+            2156
+          ],
+          "wall_mean_ns": [
+            1937124696,
+            2156
+          ]
+        }
+      ],
+      "frame_p95_ns": {
+        "lower": 2900001,
+        "upper": 2910000
+      },
+      "heap_mode": "maintained",
+      "label": "M1",
+      "rust_process_peak_requested_bytes": 76881214,
+      "same_mode_stability": {
+        "metrics": {
+          "player.frame.p95_wall_ns": "pass",
+          "rust.process_peak_requested_bytes": "pass",
+          "script.tick.p95_wall_ns": "pass"
+        },
+        "passed": false,
+        "phase_gate_passed": false,
+        "regression_limit_percent": 5,
+        "script_2ms_p95": "fail"
+      },
+      "script_2ms_p95": "fail",
+      "script_p95_ns": {
+        "lower": 2080001,
+        "upper": 2090000
+      }
+    },
+    {
+      "callback_means": [
+        {
+          "source": [
+            1,
+            102,
+            114,
+            192,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "thread_cpu_mean_ns": [
+            474970924,
+            2156
+          ],
+          "wall_mean_ns": [
+            475054086,
+            2156
+          ]
+        },
+        {
+          "source": [
+            1,
+            102,
+            114,
+            192,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            2
+          ],
+          "thread_cpu_mean_ns": [
+            1992552535,
+            2156
+          ],
+          "wall_mean_ns": [
+            1992621080,
+            2156
+          ]
+        }
+      ],
+      "frame_p95_ns": {
+        "lower": 3010001,
+        "upper": 3020000
+      },
+      "heap_mode": "detailed",
+      "label": "D1",
+      "rust_process_peak_requested_bytes": 76881182,
+      "same_mode_stability": {
+        "metrics": {
+          "player.frame.p95_wall_ns": "pass",
+          "rust.process_peak_requested_bytes": "pass",
+          "script.tick.p95_wall_ns": "pass"
+        },
+        "passed": false,
+        "phase_gate_passed": false,
+        "regression_limit_percent": 5,
+        "script_2ms_p95": "fail"
+      },
+      "script_2ms_p95": "fail",
+      "script_p95_ns": {
+        "lower": 2190001,
+        "upper": 2200000
+      }
+    },
+    {
+      "callback_means": [
+        {
+          "source": [
+            1,
+            102,
+            114,
+            192,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "thread_cpu_mean_ns": [
+            473559544,
+            2156
+          ],
+          "wall_mean_ns": [
+            473669842,
+            2156
+          ]
+        },
+        {
+          "source": [
+            1,
+            102,
+            114,
+            192,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            2
+          ],
+          "thread_cpu_mean_ns": [
+            2021238857,
+            2156
+          ],
+          "wall_mean_ns": [
+            2021370959,
+            2156
+          ]
+        }
+      ],
+      "frame_p95_ns": {
+        "lower": 3000001,
+        "upper": 3010000
+      },
+      "heap_mode": "detailed",
+      "label": "D2",
+      "rust_process_peak_requested_bytes": 76881182,
+      "same_mode_stability": {
+        "metrics": {
+          "player.frame.p95_wall_ns": "pass",
+          "rust.process_peak_requested_bytes": "pass",
+          "script.tick.p95_wall_ns": "pass"
+        },
+        "passed": false,
+        "phase_gate_passed": false,
+        "regression_limit_percent": 5,
+        "script_2ms_p95": "fail"
+      },
+      "script_2ms_p95": "fail",
+      "script_p95_ns": {
+        "lower": 2210001,
+        "upper": 2220000
+      }
+    },
+    {
+      "callback_means": [
+        {
+          "source": [
+            1,
+            102,
+            114,
+            192,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "thread_cpu_mean_ns": [
+            477426684,
+            2156
+          ],
+          "wall_mean_ns": [
+            477848818,
+            2156
+          ]
+        },
+        {
+          "source": [
+            1,
+            102,
+            114,
+            192,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            2
+          ],
+          "thread_cpu_mean_ns": [
+            2041691313,
+            2156
+          ],
+          "wall_mean_ns": [
+            2043938054,
+            2156
+          ]
+        }
+      ],
+      "frame_p95_ns": {
+        "lower": 3170001,
+        "upper": 3180000
+      },
+      "heap_mode": "maintained",
+      "label": "M2",
+      "rust_process_peak_requested_bytes": 76881182,
+      "same_mode_stability": {
+        "metrics": {
+          "player.frame.p95_wall_ns": "regression",
+          "rust.process_peak_requested_bytes": "pass",
+          "script.tick.p95_wall_ns": "pass"
+        },
+        "passed": false,
+        "phase_gate_passed": false,
+        "regression_limit_percent": 5,
+        "script_2ms_p95": "fail"
+      },
+      "script_2ms_p95": "fail",
+      "script_p95_ns": {
+        "lower": 2200001,
+        "upper": 2210000
+      }
+    }
+  ],
+  "same_mode_frame_5percent": {
+    "D1": "pass",
+    "D2": "pass",
+    "M1": "pass",
+    "M2": "regression"
+  },
+  "same_mode_requested_memory_5percent": "pass",
+  "same_mode_script_5percent": "pass",
+  "saving_established": false,
+  "ticks_each": 2156,
+  "version": 1
+}
