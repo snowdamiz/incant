@@ -1,0 +1,347 @@
+[
+  {
+    "at": "2026-10-14T02:17:55.465Z",
+    "id": "toolu_01DZc2656CphZc9JwJR6tf3g",
+    "name": "Bash",
+    "input": {
+      "command": "cd /Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review/handoffs/0073-upscaling-review && date '+%T'; python3 -c \"import time;print(time.monotonic())\"; ls reconstruction_r5/ reconstruction_r5/baseline 2>&1 | head -20; python3 -I -B -c \"\nimport json;d=json.load(open('reconstruction_r5/baseline.json'));print({k:(v if not isinstance(v,(list,dict)) else (len(v) if isinstance(v,list) else list(v)[:8])) for k,v in d.items()})\"; find reconstruction_r5/baseline -type f | sed 's|reconstruction_r5/baseline/||' | head -40",
+      "description": "Record start time and inspect the R5 baseline packet"
+    },
+    "result": {
+      "is_error": false,
+      "content_types": [
+        "text"
+      ]
+    }
+  },
+  {
+    "at": "2026-10-14T02:18:00.120Z",
+    "id": "toolu_01RXohGhmqgBgyGCHywZyf7o",
+    "name": "Bash",
+    "input": {
+      "command": "cd /Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review/handoffs/0073-upscaling-review/reconstruction_r5/baseline/crates/incant_render/src && ls upscaling/; grep -rn \"reactive_strength\\|reaction_threshold\\|history_weight:\" upscaling/*.rs | grep -v \"_tests\\|device\" | head -12; grep -n \"options:\\s*\\[\\|options =\\|let options\\|reactive:\" upscaling/system.rs | head",
+      "description": "Find reactive strength and options defaults in the baseline"
+    },
+    "result": {
+      "is_error": false,
+      "content_types": [
+        "text"
+      ]
+    }
+  },
+  {
+    "at": "2026-10-14T02:18:04.271Z",
+    "id": "toolu_01WTSEZtTEYzdcZo4esz3X1V",
+    "name": "Bash",
+    "input": {
+      "command": "sed -n 245,265p upscaling/system.rs; grep -n \"reactive_strength\\|color_threshold\\|response\\|pub struct UpscaleConfig\" -A1 upscaling/mod.rs | head -30; grep -n \"REVIEW\\|UpscaleConfig {\" -A8 /Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review/handoffs/0073-upscaling-review/r4_quality/review/upscaling_owner_review.rs | head -14; date +%T",
+      "description": "Read options/reactive packing and the review config"
+    },
+    "result": {
+      "is_error": false,
+      "content_types": [
+        "text"
+      ]
+    }
+  },
+  {
+    "at": "2026-10-14T02:18:07.960Z",
+    "id": "toolu_01WHKh6268CMTNS6eQgbesgF",
+    "name": "Bash",
+    "input": {
+      "command": "grep -n \"const REVIEW\\|reactive_strength\\|reactive_threshold\\|history_weight\" /Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review/handoffs/0073-upscaling-review/r4_quality/review/upscaling_owner_review.rs | head -8; grep -rn \"reactive_threshold:\\|reactive_strength:\\|history_weight:\" /Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review/handoffs/0073-upscaling-review/reconstruction_r5/baseline/crates/incant_render/src/upscaling/mod.rs | head -6; date +%T",
+      "description": "Find the review fixture's upscale configuration values"
+    },
+    "result": {
+      "is_error": false,
+      "content_types": [
+        "text"
+      ]
+    }
+  },
+  {
+    "at": "2026-10-14T02:19:24.187Z",
+    "id": "toolu_01UbNnSQ8zuvfceTS5kMPLYU",
+    "name": "Bash",
+    "input": {
+      "command": "date +%T; grep -n \"return vec4\\|vec4f(motion\\|out.motion\\|@location(0)\\|previous_depth\\|prev.z\\|clip.z\\|\\.z/\" motion/shader.wgsl | head -12; grep -n \"fn linear_depth\\|fn compatible\" -A4 upscaling/common.wgsl",
+      "description": "Check what the motion pass stores in .z and how resolve linearizes it"
+    },
+    "result": {
+      "is_error": false,
+      "content_types": [
+        "text"
+      ]
+    }
+  },
+  {
+    "at": "2026-10-14T02:20:00.117Z",
+    "id": "toolu_01U26ApmQBmmkSt9LcnRrge6",
+    "name": "Bash",
+    "input": {
+      "command": "cd /Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review/handoffs/0073-upscaling-review/reconstruction_r5 && date +%T; for f in crates/incant_render/src/upscaling/resolve.wgsl crates/incant_render/src/upscaling/resolve_owner.wgsl crates/incant_render/src/upscaling/owner.rs crates/incant_render/src/motion/retained.rs crates/incant_render/src/temporal/jitter.rs crates/incant_shader_cook/src/temporal/mod.rs; do if [ -f baseline/$f ]; then echo \"base $f\"; else echo \"MISSING $f\"; fi; done; grep -n \"MOTION_SLACK\\|let change=\\|let reaction=\\|history=clamp\" baseline/crates/incant_render/src/upscaling/resolve.wgsl baseline/crates/incant_render/src/upscaling/resolve_owner.wgsl; grep -n \"lod_bias\\|min(0.)\\|b.min(0.)\" baseline/crates/incant_render/src/upscaling/owner.rs baseline/crates/incant_render/src/motion/retained.rs | head",
+      "description": "Locate exact edit sites in the 825ff baseline copies"
+    },
+    "result": {
+      "is_error": false,
+      "content_types": [
+        "text"
+      ]
+    }
+  },
+  {
+    "at": "2026-10-14T02:20:04.558Z",
+    "id": "toolu_01C4JbxWLnxxzSNZD9JtwFtc",
+    "name": "Bash",
+    "input": {
+      "command": "sed -n 136,146p baseline/crates/incant_render/src/upscaling/resolve.wgsl; sed -n 279,287p baseline/crates/incant_render/src/upscaling/resolve_owner.wgsl; sed -n 284,293p baseline/crates/incant_render/src/upscaling/owner.rs; sed -n 509,517p baseline/crates/incant_render/src/motion/retained.rs; grep -n \"MIN_SIXTEENTHS\" baseline/crates/incant_render/src/temporal/jitter.rs; python3 -I -B -c \"\nimport json;d=json.load(open('baseline.json'));fs=d['files'];print(type(fs).__name__, (fs[0] if isinstance(fs,list) else list(fs.items())[0]))\"; date +%T",
+      "description": "Read exact baseline lines to edit and manifest format"
+    },
+    "result": {
+      "is_error": false,
+      "content_types": [
+        "text"
+      ]
+    }
+  },
+  {
+    "at": "2026-10-14T02:20:24.217Z",
+    "id": "toolu_017JPuDnHeBXP5VfJ6eeTQxY",
+    "name": "Bash",
+    "input": {
+      "command": "sed -n 74,82p baseline/crates/incant_render/src/upscaling/resolve.wgsl; sed -n 97,105p baseline/crates/incant_render/src/upscaling/resolve_owner.wgsl; date +%T",
+      "description": "Read the coherence comment text for exact replacement"
+    },
+    "result": {
+      "is_error": false,
+      "content_types": [
+        "text"
+      ]
+    }
+  },
+  {
+    "at": "2026-10-14T02:20:41.010Z",
+    "id": "toolu_01Du4Eq6U4H5aR6TLEgoaBW9",
+    "name": "Bash",
+    "input": {
+      "command": "python3 -I -B - <<'EOF'\nimport hashlib, pathlib, shutil\nH = pathlib.Path.cwd()\nFILES = [\"crates/incant_render/src/upscaling/resolve.wgsl\", \"crates/incant_render/src/upscaling/resolve_owner.wgsl\",\n         \"crates/incant_render/src/upscaling/owner.rs\", \"crates/incant_render/src/motion/retained.rs\",\n         \"crates/incant_render/src/temporal/jitter.rs\", \"crates/incant_shader_cook/src/temporal/mod.rs\"]\nfor f in FILES:\n    (H / \"src\" / f).parent.mkdir(parents=True, exist_ok=True)\n    shutil.copyfile(H / \"baseline\" / f, H / \"src\" / f)\ndef sub(rel, old, new, n=1):\n    p = H / \"src\" / rel; t = p.read_text(); assert t.count(old) == n, (rel, old[:60], t.count(old)); p.write_text(t.replace(old, new))\nfor f in FILES[:2]:\n    sub(f, \"\"\"// whose reprojection agrees with the anchor's within MOTION_SLACK output pixels\n// (the static proof's existing bound) and whose previous depth is compatible with\n// the anchor's (the existing depth tolerance, not widened). Otherwise the pixel\n// keeps its current evidence but reuses no history.\nconst MOTION_SLACK:f32=1.0/256.0;\n\"\"\", \"\"\"// whose reprojection agrees with the anchor's within motion_slack() output pixels\n// and whose previous depth is compatible with the anchor's (the existing depth\n// tolerance, not widened). Otherwise the pixel keeps its current evidence but\n// reuses no history.\n// The slack is one step of the upscale jitter lattice (1/16 internal pixel) in\n// output pixels: accumulated positions are resolved only to that step, so smaller\n// disagreement is below the history's positional resolution. (1/256 output pixel\n// rejected nearly all perspective motion and left moving content current-only.)\nfn motion_slack()->f32 {return frame.output.z/frame.source.z/16.0;}\n\"\"\")\n    sub(f, \"        if any(abs(m.xy-a.xy)*frame.output.zw>=vec2f(MOTION_SLACK)) {return false;}\",\n           \"        if any(abs(m.xy-a.xy)*frame.output.zw>=vec2f(motion_slack())) {return false;}\")\n    sub(f, \"\"\"    let change=abs(history.rgb-fresh.rgb);\n    let reaction=clamp(max(change.x,max(change.y,change.z))/frame.options.w,0.0,1.0);\n\"\"\", \"\"\"    // Reaction measures how far the clamp must move the history, not its distance\n    // from this frame's single (aliased) estimate: history inside the contributing\n    // support's range is consistent evidence and keeps its mass, so high-contrast\n    // texture keeps accumulating; history outside it loses mass as before.\n    let clamped=clamp(history,minimum,maximum);\n    let change=abs(history.rgb-clamped.rgb);\n    let reaction=clamp(max(change.x,max(change.y,change.z))/frame.options.w,0.0,1.0);\n\"\"\")\n    sub(f, \"    history=clamp(history,minimum,maximum);\\n\", \"    history=clamped;\\n\")\nsub(FILES[4], \"pub(crate) const MIN_SIXTEENTHS: f32 = 4.;\\n\", \"\"\"pub(crate) const MIN_SIXTEENTHS: f32 = 4.;\n/// Most negative texture LOD bias for internal draws under upscaling. One\n/// eight-phase cycle supplies 8 sample positions per internal texel, i.e.\n/// sqrt(8) per axis, so sharpening beyond -log2(sqrt(8)) = -1.5 adds aliasing\n/// that accumulation cannot resolve. It binds only below scale 0.354 (4/16, 5/16).\npub(crate) const MIN_LOD_BIAS: f32 = -1.5;\n\"\"\")\nsub(FILES[2], \"\"\"    /// output grid that history accumulates. 0 without a portable plan (default\n    /// and fixed-TAA paths) and never positive.\"\"\", \"\"\"    /// output grid that history accumulates, floored at `jitter::MIN_LOD_BIAS`.\n    /// 0 without a portable plan (default and fixed-TAA paths) and never positive.\"\"\")\nsub(FILES[2], \"            if b.is_finite() { b.min(0.) } else { 0. }\",\n              \"            if b.is_finite() { b.clamp(crate::temporal::jitter::MIN_LOD_BIAS, 0.) } else { 0. }\")\nsub(FILES[3], \"        // (Pending::lod_bias: log2(source / output), never positive).\",\n              \"        // (Pending::lod_bias: log2(source / output), floored at MIN_LOD_BIAS, never positive).\")\nsub(FILES[3], \"            .map_or(0., |b| b.min(0.));\", \"            .map_or(0., |b| b.clamp(crate::temporal::jitter::MIN_LOD_BIAS, 0.));\")\ncommon = (H / \"baseline/crates/incant_render/src/upscaling/common.wgsl\").read_text()\ndef arr(d):\n    v = list(d); return \"[\\n                \" + \", \".join(map(str, v[:16])) + \",\\n                \" + \", \".join(map(str, v[16:])) + \",\\n            ]\"\nmod = (H / \"src\" / FILES[5]).read_text()\nfor kind, f in ((\"Upscale\", FILES[0]), (\"UpscaleOwner\", FILES[1])):\n    old = hashlib.sha256((common + \"\\n\" + (H / \"baseline\" / f).read_text()).encode()).digest()\n    new = hashlib.sha256((common + \"\\n\" + (H / \"src\" / f).read_text()).encode()).digest()\n    row = f\"            Self::{kind} => \" + arr(old) + \",\"\n    assert mod.count(row) == 1, kind\n    mod = mod.replace(row, f\"            Self::{kind} => \" + arr(new) + \",\")\n    print(kind, old.hex()[:16], \"->\", new.hex()[:16])\n(H / \"src\" / FILES[5]).write_text(mod)\nEOF\ndate +%T",
+      "description": "Create source mirrors and apply the three focused R5 changes and pins"
+    },
+    "result": {
+      "is_error": false,
+      "content_types": [
+        "text"
+      ]
+    }
+  },
+  {
+    "at": "2026-10-14T02:20:46.509Z",
+    "id": "toolu_01NWnCc6X9bGfpKsV6cSf4ae",
+    "name": "Bash",
+    "input": {
+      "command": "grep -n -A5 \"Self::Upscale =>\\|Self::UpscaleOwner =>\" baseline/crates/incant_shader_cook/src/temporal/mod.rs | sed -n 1,30p | grep -v \"incant-temporal\"; python3 -I -B -c \"\nimport hashlib\nc=open('baseline/crates/incant_render/src/upscaling/common.wgsl').read()\nfor f in ('resolve.wgsl','resolve_owner.wgsl'):\n    print(f, list(hashlib.sha256((c+'\\n'+open('baseline/crates/incant_render/src/upscaling/'+f).read()).encode()).digest())[:6])\"; date +%T",
+      "description": "Inspect the baseline pin row format"
+    },
+    "result": {
+      "is_error": false,
+      "content_types": [
+        "text"
+      ]
+    }
+  },
+  {
+    "at": "2026-10-14T02:20:57.342Z",
+    "id": "toolu_01J2xQAF4jfT7HDz4cfrc3WC",
+    "name": "Bash",
+    "input": {
+      "command": "python3 -I -B - <<'EOF'\nimport hashlib, pathlib, re\nH = pathlib.Path.cwd()\nFILES = {\"Upscale\": \"crates/incant_render/src/upscaling/resolve.wgsl\", \"UpscaleOwner\": \"crates/incant_render/src/upscaling/resolve_owner.wgsl\"}\nMOD = \"crates/incant_shader_cook/src/temporal/mod.rs\"\ncommon = (H / \"baseline/crates/incant_render/src/upscaling/common.wgsl\").read_text()\ndef pack(d):\n    lines, cur = [], \" \" * 16\n    for x in d:\n        item = f\"{x},\"\n        cand = cur + (\"\" if cur.strip() == \"\" else \" \") + item\n        if len(cand) > 100:\n            lines.append(cur); cur = \" \" * 16 + item\n        else:\n            cur = cand\n    lines.append(cur)\n    return \"[\\n\" + \"\\n\".join(lines) + \"\\n            ]\"\nmod = (H / \"src\" / MOD).read_text()\nfor kind, f in FILES.items():\n    old = hashlib.sha256((common + \"\\n\" + (H / \"baseline\" / f).read_text()).encode()).digest()\n    new = hashlib.sha256((common + \"\\n\" + (H / \"src\" / f).read_text()).encode()).digest()\n    row_old = f\"            Self::{kind} => \" + pack(old)\n    assert mod.count(row_old) == 1, (kind, \"packer does not reproduce the rustfmt row\")\n    mod = mod.replace(row_old, f\"            Self::{kind} => \" + pack(new))\n    print(kind, old.hex(), \"->\", new.hex())\n(H / \"src\" / MOD).write_text(mod)\nEOF\ndate +%T",
+      "description": "Update the two trusted pins in rustfmt layout"
+    },
+    "result": {
+      "is_error": false,
+      "content_types": [
+        "text"
+      ]
+    }
+  },
+  {
+    "at": "2026-10-14T02:21:19.959Z",
+    "id": "toolu_01CyLLrMmPCXhsrWwYZDf62D",
+    "name": "Bash",
+    "input": {
+      "command": "cat > inventory.py <<'EOF'\n#!/usr/bin/env python3\n\"\"\"0073 R5: build repair.patch (baseline -> src mirrors), check it applies to the exact\n825ff baseline copies in /tmp/incant-0073-r5-*, verify mirrors against the baseline\nmanifest and the candidate Git objects, and record the hash/ABI inventory. Read-only git.\n\n    python3 -I -B handoffs/0073-upscaling-review/reconstruction_r5/inventory.py \\\\\n        --checkout /Users/andreyyurlov/.codex/worktrees/owner-quality-repair/incant\n\"\"\"\nimport argparse, difflib, hashlib, json, pathlib, re, shutil, subprocess, sys, tempfile\nsys.dont_write_bytecode = True\nH = pathlib.Path(__file__).resolve().parent\nSOURCE = \"825ff047284e84252d00f786a7b14cb6ecb44293\"\nsha = lambda b: hashlib.sha256(b).hexdigest()\n\n\ndef main():\n    ap = argparse.ArgumentParser(); ap.add_argument(\"--checkout\", required=True); a = ap.parse_args()\n    manifest = {r[\"path\"]: r[\"sha256\"] for r in json.loads((H / \"baseline.json\").read_text())[\"files\"]}\n    src = sorted(str(p.relative_to(H / \"src\")) for p in (H / \"src\").rglob(\"*\") if p.is_file())\n    rows, patch = [], \"\"\n    for rel in src:\n        base = (H / \"baseline\" / rel).read_bytes()\n        blob = subprocess.run([\"git\", \"-C\", a.checkout, \"show\", f\"{SOURCE}:{rel}\"], capture_output=True).stdout\n        new = (H / \"src\" / rel).read_bytes()\n        assert sha(base) == manifest[rel] == sha(blob), rel           # baseline copy is the exact 825ff object\n        rows.append({\"path\": rel, \"baseline_sha256\": sha(base), \"candidate_sha256\": sha(new), \"changed\": base != new})\n        if base != new:\n            patch += f\"diff --git a/{rel} b/{rel}\\n\" + \"\".join(difflib.unified_diff(\n                base.decode().splitlines(True), new.decode().splitlines(True), f\"a/{rel}\", f\"b/{rel}\", n=3))\n    (H / \"repair.patch\").write_text(patch)\n    with tempfile.TemporaryDirectory(prefix=\"incant-0073-r5-\", dir=\"/tmp\") as tmp:\n        for rel in src:\n            d = pathlib.Path(tmp) / rel; d.parent.mkdir(parents=True, exist_ok=True); shutil.copy(H / \"baseline\" / rel, d)\n        chk = subprocess.run([\"git\", \"apply\", \"--check\", str(H / \"repair.patch\")], cwd=tmp, capture_output=True, text=True)\n        app = subprocess.run([\"git\", \"apply\", str(H / \"repair.patch\")], cwd=tmp, capture_output=True, text=True)\n        equal = all((pathlib.Path(tmp) / r).read_bytes() == (H / \"src\" / r).read_bytes() for r in src)\n    common = (H / \"baseline/crates/incant_render/src/upscaling/common.wgsl\").read_text()\n    mod = (H / \"src/crates/incant_shader_cook/src/temporal/mod.rs\").read_text()\n    pins = {}\n    for kind, f in ((\"Upscale\", \"resolve.wgsl\"), (\"UpscaleOwner\", \"resolve_owner.wgsl\")):\n        m = re.search(rf\"Self::{kind} => \\[([\\d,\\s]+)\\]\", mod)\n        pin = bytes(int(x) for x in m.group(1).replace(\"\\n\", \" \").split(\",\") if x.strip()).hex()\n        want = sha((common + \"\\n\" + (H / \"src/crates/incant_render/src/upscaling\" / f).read_text()).encode())\n        old = sha((common + \"\\n\" + (H / \"baseline/crates/incant_render/src/upscaling\" / f).read_text()).encode())\n        pins[kind] = {\"baseline_pin\": old, \"candidate_pin\": pin, \"pin_matches_candidate_source\": pin == want}\n    out = {\"source_commit\": SOURCE, \"production\": \"72b1ba8ec351e86d66a90c401e0a75a530633616\", \"files\": rows,\n           \"patch_sha256\": sha((H / \"repair.patch\").read_bytes()), \"patch_changed_files\": [r[\"path\"] for r in rows if r[\"changed\"]],\n           \"git_apply_check_against_825ff_copies\": chk.returncode == 0, \"applied_equals_mirrors\": app.returncode == 0 and equal,\n           \"trusted_pins\": pins,\n           \"abi\": {\"uniforms\": \"unchanged (Frame 96 B upscale, 112 B material, 160 B motion)\", \"bindings\": \"unchanged\",\n                   \"targets_and_memory\": \"unchanged; no new texture, pass, pipeline or allocation\",\n                   \"programs_changed\": [\"Upscale\", \"UpscaleOwner\"], \"programs_unchanged\": [\"Composite\", \"MetalFxPack\", \"MetalFxNormalize\",\n                   \"Motion\", \"Depth\", \"MotionOwner\", \"Material\", \"Resolve\", \"Copy\"],\n                   \"host_values\": \"lod bias floor -1.5 for internal material/MASK draws below 0.354 scale\"},\n           \"scope\": \"source identity and patch applicability only; no build, cook, GPU or image\"}\n    (H / \"inventory.json\").write_text(json.dumps(out, indent=1, sort_keys=True) + \"\\n\")\n    ok = out[\"git_apply_check_against_825ff_copies\"] and out[\"applied_equals_mirrors\"] and all(p[\"pin_matches_candidate_source\"] for p in pins.values())\n    print(out[\"patch_sha256\"], out[\"patch_changed_files\"], ok)\n    return 0 if ok else 1\n\n\nif __name__ == \"__main__\":\n    sys.exit(main())\nEOF\npython3 -I -B inventory.py --checkout /Users/andreyyurlov/.codex/worktrees/owner-quality-repair/incant; echo rc=$?; date +%T",
+      "description": "Write and run the patch builder and hash/ABI inventory"
+    },
+    "result": {
+      "is_error": false,
+      "content_types": [
+        "text"
+      ]
+    }
+  },
+  {
+    "at": "2026-10-14T02:21:28.408Z",
+    "id": "toolu_018iw6xkjN9JhKUKVJJYvyJt",
+    "name": "Bash",
+    "input": {
+      "command": "cd /Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review/handoffs/0073-upscaling-review/reconstruction_r5/baseline/crates/incant_render/src && grep -n \"reaction\\|256\\|SLACK\\|slack\\|lod_bias\\|MIN_LOD\" upscaling/evidence_reference.rs upscaling/evidence_tests.rs upscaling/attachment_reference.rs upscaling/attachment_reference_tests.rs upscaling/tests.rs upscaling/kernel_tests.rs motion/tests.rs temporal/tests.rs 2>/dev/null | head -12; B=/Users/andreyyurlov/.codex/worktrees/owner-quality-repair/incant; git -C $B grep -n \"lod_bias\\|MOTION_SLACK\\|1.0 / 256\\|1. / 256\" 825ff047284e84252d00f786a7b14cb6ecb44293 -- crates | grep -v \"\\.wgsl:\" | head -8; date +%T",
+      "description": "Check numeric oracles/tests that depend on the changed semantics"
+    },
+    "result": {
+      "is_error": false,
+      "content_types": [
+        "text"
+      ]
+    }
+  },
+  {
+    "at": "2026-10-14T02:21:37.804Z",
+    "id": "toolu_01CoeBwuTjZg8TgtRDhTeAk9",
+    "name": "Bash",
+    "input": {
+      "command": "sed -n 336,350p upscaling/evidence_reference.rs; sed -n 385,415p upscaling/evidence_reference.rs; grep -n \"fn ratio\\|let ratio\\|output\\[2\\] / \\|source\\[2\\]\\|fn motion_support_coherent\\|fn coherent\" upscaling/evidence_reference.rs | head -8; date +%T",
+      "description": "Read the cfg(test) reference's coherence and reaction code"
+    },
+    "result": {
+      "is_error": false,
+      "content_types": [
+        "text"
+      ]
+    }
+  },
+  {
+    "at": "2026-10-14T02:21:41.358Z",
+    "id": "toolu_01AmCEjAayXos2dwRp1YJPYf",
+    "name": "Bash",
+    "input": {
+      "command": "sed -n 415,430p upscaling/evidence_reference.rs; sed -n 300,312p upscaling/evidence_reference.rs | head -3; grep -n \"let output\\b\\|let output =\\|let source =\" upscaling/evidence_reference.rs | head -5; date +%T",
+      "description": "Read the rest of the reference update and its local names"
+    },
+    "result": {
+      "is_error": false,
+      "content_types": [
+        "text"
+      ]
+    }
+  },
+  {
+    "at": "2026-10-14T02:21:59.619Z",
+    "id": "toolu_01XEjpFzpPpY1kbdcEqrw8ZJ",
+    "name": "Bash",
+    "input": {
+      "command": "cd /Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review/handoffs/0073-upscaling-review/reconstruction_r5 && F=crates/incant_render/src/upscaling/evidence_reference.rs && cp baseline/$F src/$F && python3 -I -B - \"src/$F\" <<'EOF'\nimport pathlib, sys\np = pathlib.Path(sys.argv[1]); t = p.read_text()\ndef sub(old, new):\n    global t\n    assert t.count(old) == 1, old[:80]; t = t.replace(old, new)\nsub(\"\"\"                    (f64::from(m[i]) - f64::from(motion[i])).abs() * output[i + 2] >= 1. / 256.\n\"\"\", \"\"\"                    // R5: one jitter-lattice step (1/16 internal pixel) in output pixels.\n                    (f64::from(m[i]) - f64::from(motion[i])).abs() * output[i + 2]\n                        >= output[2] / f64::from(self.frame.source[2]) / 16.\n\"\"\")\nsub(\"\"\"        let reaction = history[..3]\n            .iter()\n            .zip(&result.color)\n            .map(|(a, b)| (a - b).abs())\n            .fold(0., f64::max)\n            / f64::from(self.frame.options[3]);\n        let w = (c * f64::from(self.frame.reactive[2]).max(0.)).min(cap)\n            * (1. - f64::from(self.frame.reactive[0]) * reaction.clamp(0., 1.));\n        result.color = oracle::color(std::array::from_fn(|i| {\n            let minimum = admitted\n                .iter()\n                .map(|t| clean(self.current[t.at])[i])\n                .fold(result.color[i], f64::min);\n            let maximum = admitted\n                .iter()\n                .map(|t| clean(self.current[t.at])[i])\n                .fold(result.color[i], f64::max);\n            (history[i].clamp(minimum, maximum) * w + sum[i]) / (w + mass)\n        }));\n\"\"\", \"\"\"        let clamped: [f64; 4] = std::array::from_fn(|i| {\n            let minimum = admitted\n                .iter()\n                .map(|t| clean(self.current[t.at])[i])\n                .fold(result.color[i], f64::min);\n            let maximum = admitted\n                .iter()\n                .map(|t| clean(self.current[t.at])[i])\n                .fold(result.color[i], f64::max);\n            history[i].clamp(minimum, maximum)\n        });\n        // R5: reaction is the clamp displacement, as in both resolve programs.\n        let reaction = history[..3]\n            .iter()\n            .zip(&clamped)\n            .map(|(a, b)| (a - b).abs())\n            .fold(0., f64::max)\n            / f64::from(self.frame.options[3]);\n        let w = (c * f64::from(self.frame.reactive[2]).max(0.)).min(cap)\n            * (1. - f64::from(self.frame.reactive[0]) * reaction.clamp(0., 1.));\n        result.color = oracle::color(std::array::from_fn(|i| (clamped[i] * w + sum[i]) / (w + mass)));\n\"\"\")\np.write_text(t)\nprint(\"reference synced\")\nEOF\npython3 -I -B inventory.py --checkout /Users/andreyyurlov/.codex/worktrees/owner-quality-repair/incant; date +%T",
+      "description": "Keep the cfg(test) evidence reference in sync with the shader change"
+    },
+    "result": {
+      "is_error": false,
+      "content_types": [
+        "text"
+      ]
+    }
+  },
+  {
+    "at": "2026-10-14T02:22:18.736Z",
+    "id": "toolu_01KeFHkEbNGjBVkns17sCRS1",
+    "name": "Bash",
+    "input": {
+      "command": "awk 'length > 100 {print FILENAME\": \"FNR\": \"length}' src/crates/incant_render/src/upscaling/evidence_reference.rs src/crates/incant_render/src/upscaling/owner.rs src/crates/incant_render/src/motion/retained.rs src/crates/incant_render/src/temporal/jitter.rs; date +%T",
+      "description": "Check Rust line widths against rustfmt's 100-column limit"
+    },
+    "result": {
+      "is_error": false,
+      "content_types": [
+        "text"
+      ]
+    }
+  },
+  {
+    "at": "2026-10-14T02:22:23.916Z",
+    "id": "toolu_016ZoQvB9NjzxvCUv7mVwykd",
+    "name": "Bash",
+    "input": {
+      "command": "python3 -I -B - <<'EOF'\nimport pathlib\np = pathlib.Path(\"src/crates/incant_render/src/upscaling/evidence_reference.rs\"); t = p.read_text()\nold = \"        result.color = oracle::color(std::array::from_fn(|i| (clamped[i] * w + sum[i]) / (w + mass)));\\n\"\nnew = \"        result.color =\\n            oracle::color(std::array::from_fn(|i| (clamped[i] * w + sum[i]) / (w + mass)));\\n\"\nassert t.count(old) == 1; p.write_text(t.replace(old, new))\np = pathlib.Path(\"src/crates/incant_render/src/upscaling/owner.rs\"); t = p.read_text()\nprint([l for l in t.splitlines() if \"MIN_LOD_BIAS\" in l])\nEOF\nawk 'length > 100 {print FILENAME\": \"FNR\": \"length}' src/crates/incant_render/src/upscaling/evidence_reference.rs; date +%T",
+      "description": "Wrap the over-long reference line in rustfmt style"
+    },
+    "result": {
+      "is_error": false,
+      "content_types": [
+        "text"
+      ]
+    }
+  },
+  {
+    "at": "2026-10-14T02:22:31.832Z",
+    "id": "toolu_01BCjUap7Jc8G7Moyjmxhont",
+    "name": "Bash",
+    "input": {
+      "command": "python3 -I -B - <<'EOF'\nimport pathlib\np = pathlib.Path(\"src/crates/incant_render/src/upscaling/owner.rs\"); t = p.read_text()\nold = \"            if b.is_finite() { b.clamp(crate::temporal::jitter::MIN_LOD_BIAS, 0.) } else { 0. }\\n\"\nnew = \"            if b.is_finite() {\\n                b.clamp(crate::temporal::jitter::MIN_LOD_BIAS, 0.)\\n            } else {\\n                0.\\n            }\\n\"\nassert t.count(old) == 1; p.write_text(t.replace(old, new)); print(\"ok\")\nEOF\ndate +%T",
+      "description": "Format the lod_bias if/else in rustfmt multi-line style"
+    },
+    "result": {
+      "is_error": false,
+      "content_types": [
+        "text"
+      ]
+    }
+  },
+  {
+    "at": "2026-10-14T02:23:00.765Z",
+    "id": "toolu_018b8HGi49rZWgkpwnuD2ZB1",
+    "name": "Bash",
+    "input": {
+      "command": "cat > controls.py <<'EOF'\n#!/usr/bin/env python3\n\"\"\"0073 R5 focused scalar/source controls. Standard library only; no renderer, Cargo,\nGPU or image. Each rule is transcribed from the src/ mirrors (checked textually) and has a\nmutation that restores the 825ff behaviour and must be detected.\n\n    python3 -I -B handoffs/0073-upscaling-review/reconstruction_r5/controls.py --out .../controls.json\n\"\"\"\nimport argparse, cmath, json, math, pathlib, sys\nsys.dont_write_bytecode = True\nH = pathlib.Path(__file__).resolve().parent\nCHECKS = []\n# Fixture REVIEW config (upscaling_owner_review.rs 650316a): h 0.9, threshold 4, strength 0.5.\nH_W, THRESHOLD, STRENGTH = 0.9, 4.0, 0.5\n\n\ndef check(name, ok, detail=None):\n    CHECKS.append({\"check\": name, \"ok\": bool(ok), \"detail\": detail})\n\n\ndef cap(r):\n    return H_W / (1 - H_W) * min(r * r, 4.0)\n\n\ndef reaction(history, fresh, lo, hi, old_rule=False):\n    \"\"\"R5: displacement the clamp applies; 825ff: distance to the single fresh estimate.\"\"\"\n    ref = fresh if old_rule else min(max(history, lo), hi)\n    return min(max(abs(history - ref) / THRESHOLD, 0.0), 1.0)\n\n\ndef equilibrium(m, r, history, fresh, lo, hi, old_rule=False, frames=400):\n    w = 0.0\n    for _ in range(frames):\n        k = (1 - STRENGTH * reaction(history, fresh, lo, hi, old_rule)) if w > 0 else 1.0\n        w = min(min(w, cap(r)) * k + m, cap(r))\n    return w\n\n\ndef residual(w, m=1.0, phases=8):\n    \"\"\"Amplitude of a phase-periodic (8-phase) error left by exponential accumulation with\n    per-frame fraction a = m/(w+m): |a / (1 - (1-a) e^{i 2pi/8})|.\"\"\"\n    a = m / (w + m)\n    return abs(a / (1 - (1 - a) * cmath.exp(2j * math.pi / phases)))\n\n\ndef slack(r, old=False):\n    return 1 / 256 if old else r / 16\n\n\ndef coherent(deltas_px, r, old=False):\n    return all(abs(d) < slack(r, old) for d in deltas_px)\n\n\ndef lod_bias(n16, old=False, floor=-1.5):\n    b = math.log2(n16 / 16)\n    return min(b, 0.0) if old else min(max(b, floor), 0.0)\n\n\ndef main():\n    ap = argparse.ArgumentParser(); ap.add_argument(\"--out\"); a = ap.parse_args()\n    up = (H / \"src/crates/incant_render/src/upscaling/resolve.wgsl\").read_text()\n    own = (H / \"src/crates/incant_render/src/upscaling/resolve_owner.wgsl\").read_text()\n    ref = (H / \"src/crates/incant_render/src/upscaling/evidence_reference.rs\").read_text()\n    host = (H / \"src/crates/incant_render/src/upscaling/owner.rs\").read_text()\n    mot = (H / \"src/crates/incant_render/src/motion/retained.rs\").read_text()\n    jit = (H / \"src/crates/incant_render/src/temporal/jitter.rs\").read_text()\n    # Source bindings: the transcribed rules are the ones in the mirrors.\n    for name, s in ((\"UP\", up), (\"OWN\", own)):\n        check(f\"{name}: reaction from clamp displacement, clamped history blended\",\n              \"let clamped=clamp(history,minimum,maximum);\\n    let change=abs(history.rgb-clamped.rgb);\" in s\n              and \"    history=clamped;\\n\" in s and \"abs(history.rgb-fresh.rgb)\" not in s)\n        check(f\"{name}: coherence slack is one jitter-lattice step r/16 output px\",\n              \"fn motion_slack()->f32 {return frame.output.z/frame.source.z/16.0;}\" in s\n              and \"vec2f(motion_slack())\" in s and \"MOTION_SLACK\" not in s)\n    check(\"OWN static proof unchanged (stationary OWN quality path keeps its 1/256 anchor test, no clamp)\",\n          \"all(abs(old-p)<vec2f(1.0/256.0))\" in own and \"let w=min(s.x,evidence_cap());\" in own)\n    check(\"cfg(test) evidence reference mirrors both shader changes\",\n          \".zip(&clamped)\" in ref and \"output[2] / f64::from(self.frame.source[2]) / 16.\" in ref and \"1. / 256.\" in ref)\n    check(\"material and MASK use the same floored bias\", \"pub(crate) const MIN_LOD_BIAS: f32 = -1.5;\" in jit\n          and \"b.clamp(crate::temporal::jitter::MIN_LOD_BIAS, 0.)\" in host and \"b.clamp(crate::temporal::jitter::MIN_LOD_BIAS, 0.)\" in mot)\n    # 1. Reaction: high-contrast texel whose history lies inside the current support range.\n    r, m = 2.0, 1.0\n    w_new = equilibrium(m, r, history=0.5, fresh=1.0, lo=0.0, hi=1.0)\n    w_old = equilibrium(m, r, history=0.5, fresh=1.0, lo=0.0, hi=1.0, old_rule=True)\n    check(\"stripes/checker texel (history inside range): R5 mass reaches the cap 36\", abs(w_new - 36.0) < 1e-9, w_new)\n    check(\"mutation: 825ff rule (|H - fresh| = 0.5) holds mass near 8/(0.5*0.125)... detected\", w_old < 20.0, w_old)\n    check(\"8-phase aliasing residual: R5 ~0.036 vs 825ff ~0.10+ (more than 2.5x lower)\",\n          residual(w_new) < 0.04 and residual(w_old) > 2.5 * residual(w_new), [round(residual(w_new), 4), round(residual(w_old), 4)])\n    lo, hi = 0.0, 0.2\n    rx = reaction(1.0, 0.1, lo, hi)\n    check(\"true change (history 1.0 outside current range [0, 0.2]) still reacts: reaction 0.2, clamp to 0.2\",\n          abs(rx - 0.2) < 1e-12 and min(max(1.0, lo), hi) == 0.2, rx)\n    check(\"reaction 0 cannot keep out-of-range stale colour: the clamp bounds it every frame\",\n          min(max(5.0, 0.0), 0.3) == 0.3)\n    # 2. Coherence slack.\n    dolly = [0.0, 0.02, 0.04, 0.03, 0.01, 0.0, 0.02, 0.04, 0.03]       # output px, perspective spread\n    check(\"perspective dolly spread 0.04 px at r=2 is admitted (slack 0.125 px)\", coherent(dolly, 2.0))\n    check(\"mutation: 1/256 px refuses that same motion (detected)\", not coherent(dolly, 2.0, old=True))\n    check(\"independent coplanar mover (0.1 UV x 1920 = 192 px) still refused\", not coherent([0.0] * 8 + [0.1 * 1920], 2.0))\n    check(\"boundary: a difference equal to the slack is refused (>=)\", not coherent([0.125], 2.0) and coherent([0.1249], 2.0))\n    check(\"slack scales with the ratio: 1/16 px at r=1, 1/4 px at r=4\", slack(1.0) == 0.0625 and slack(4.0) == 0.25)\n    # 3. LOD floor.\n    check(\"bias -1.5 at 4/16 (was -2) and 5/16 (was -1.678)\", lod_bias(4) == -1.5 and lod_bias(5) == -1.5\n          and lod_bias(4, old=True) == -2.0 and abs(lod_bias(5, old=True) + 1.678) < 1e-3)\n    check(\"bias unchanged at 6/16..16/16 (8/16 stays -1, 16/16 stays 0)\",\n          all(lod_bias(n) == lod_bias(n, old=True) for n in range(6, 17)) and lod_bias(8) == -1.0 and lod_bias(16) == 0.0)\n    check(\"floor derivation: -log2(sqrt(8 samples per texel)) = -1.5\", abs(-math.log2(math.sqrt(8)) + 1.5) < 1e-12)\n    out = {\"scope\": \"scalar transcriptions of the R5 src mirrors; not a render, compile or appearance claim\",\n           \"config\": {\"history_weight\": H_W, \"reactive_threshold\": THRESHOLD, \"reactive_strength\": STRENGTH},\n           \"checks\": CHECKS, \"all_checks_pass\": all(c[\"ok\"] for c in CHECKS)}\n    if a.out:\n        pathlib.Path(a.out).write_text(json.dumps(out, indent=1, sort_keys=True) + \"\\n\")\n    failed = [c for c in CHECKS if not c[\"ok\"]]\n    print(f\"checks={len(CHECKS)} failed={len(failed)}\")\n    for c in failed:\n        print(\"FAILED\", c)\n    return 1 if failed else 0\n\n\nif __name__ == \"__main__\":\n    sys.exit(main())\nEOF\npython3 -I -B controls.py --out controls.json; python3 -I -B -c \"\nimport json;d=json.load(open('controls.json'));[print(c['check'][:70],c['detail']) for c in d['checks'] if c['detail'] is not None]\"; date +%T",
+      "description": "Write and run the focused R5 scalar/source controls"
+    },
+    "result": {
+      "is_error": false,
+      "content_types": [
+        "text"
+      ]
+    }
+  },
+  {
+    "at": "2026-10-14T02:23:12.022Z",
+    "id": "toolu_01BmvJNUBrKC3oRbc2BpDPvJ",
+    "name": "Bash",
+    "input": {
+      "command": "python3 -I -B - <<'EOF'\nimport pathlib\np = pathlib.Path(\"controls.py\"); t = p.read_text()\nold1 = '''    check(\"mutation: 825ff rule (|H - fresh| = 0.5) holds mass near 8/(0.5*0.125)... detected\", w_old < 20.0, w_old)\n    check(\"8-phase aliasing residual: R5 ~0.036 vs 825ff ~0.10+ (more than 2.5x lower)\",\n          residual(w_new) < 0.04 and residual(w_old) > 2.5 * residual(w_new), [round(residual(w_new), 4), round(residual(w_old), 4)])'''\nnew1 = '''    check(\"mutation: 825ff rule at |H - fresh| = 0.5 holds mass at 16, not 36 (detected)\", abs(w_old - 16.0) < 1e-6, w_old)\n    w_full = equilibrium(m, r, history=0.0, fresh=1.0, lo=0.0, hi=1.0, old_rule=True)\n    check(\"825ff rule at full contrast |H - fresh| = 1 holds mass at 8 (one jitter cycle)\", abs(w_full - 8.0) < 1e-6, w_full)\n    check(\"8-phase aliasing residual amplitude: R5 0.036 vs 825ff 0.079 (contrast 0.5) and 0.152 (contrast 1)\",\n          residual(w_new) < 0.04 and residual(w_old) > 2 * residual(w_new) and residual(w_full) > 4 * residual(w_new),\n          [round(residual(w_new), 4), round(residual(w_old), 4), round(residual(w_full), 4)])'''\nassert t.count(old1) == 1; t = t.replace(old1, new1); p.write_text(t)\nEOF\npython3 -I -B controls.py --out controls.json; python3 -I -B inventory.py --checkout /Users/andreyyurlov/.codex/worktrees/owner-quality-repair/incant; date +%T; python3 -c \"import time;print(time.monotonic())\"",
+      "description": "Correct the residual control to the computed values and rebuild the inventory"
+    },
+    "result": {
+      "is_error": false,
+      "content_types": [
+        "text"
+      ]
+    }
+  },
+  {
+    "at": "2026-10-14T02:24:06.021Z",
+    "id": "toolu_017QvGNXTo1d6mikjCmvmh58",
+    "name": "Write",
+    "input": {
+      "file_path": "/Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review/handoffs/0073-upscaling-review/reconstruction_r5/result.md",
+      "content": "# 0073 R5 focused production repair: source and scalar controls\n\n**Status:** source patch complete, with scalar and source controls passing.\n- It is **compile-unverified, not cooked and not rendered.** No pixel, compiler or GPU result exists for R5, so no appearance claim is made.\n- Root and Astra review, compile and cook next. A separately granted bounded render must then judge the pixels.\n\n**Model:** Claude Opus 5.5 (`claude-opus-5-5`), thinking effort max; per the packet, root verified both through ACP before prompting. Auto-memory was disabled, and no memory or preferences were read or written.\n\n**Turn bound:** 20 minutes. I started at 22:17:56 local (monotonic 124512.51). The patch, controls and inventory were done by about 22:23.\n\n**Base:**\n- Candidate: `825ff047284e84252d00f786a7b14cb6ecb44293` (production-equivalent `72b1ba8ec351e86d66a90c401e0a75a530633616`).\n- Every mirror's baseline copy was checked against `baseline.json` and the 825ff Git object by `inventory.py`.\n\n**Patch:** `repair.patch`, sha256 `f0987c43aafe19b7f334dd6e86a8799efa7cf0ee40273ef35f7170be03830b7b`, 7 files.\n- It passes `git apply --check` against the exact 825ff copies in `/tmp/incant-0073-r5-*`.\n- Applying it reproduces the `src/` mirrors byte for byte (`inventory.json`).\n\n## What the R4 pixels showed, and what each change addresses\n\nEvidence is the R4 run `974ee69e`. Images are in `0073-r4-quality-gpu-001/*/artifacts/`.\n\n**Stationary OWN versus everything else:**\n- Stationary OWN, which uses the static branch (own-texel persistence, no clamp, no reactive mass loss), is close to FULL.\n- Stationary ordinary UP (`stationary-up50.png`, detail row 3 column 3) and *moving* UP and OWN (`motion-up50` / `motion-own50`, identical) show the same card-stripe moir\u00e9, noisy checker and broken posts.\n- Both of those use the shared ordinary branch.\n\nSo the defect lies in that shared branch's accumulation, not in the estimator's evidence. Three changes follow.\n\n### 1. Reaction now measures clamp displacement (both programs, ordinary branch)\n\n**Location:** `resolve.wgsl` and `resolve_owner.wgsl`.\n\n**Before (825ff):** `reaction = |H \u2212 fresh| / reactive_threshold`.\n- `fresh` is one frame's aliased estimate, so at high-contrast texture it differs from the history in every frame.\n- With the fixture config (h 0.9, threshold 4, strength 0.5), the history mass is held at 16 at contrast 0.5, and at 8 (one jitter cycle) at contrast 1, instead of the cap of 36.\n- The leftover 8-phase aliasing amplitude is 0.079 and 0.152 respectively, against 0.036 at the cap (controls 3\u20135).\n\n**After:** `clamped = clamp(H, box)` and `reaction = |H \u2212 clamped| / threshold`.\n- History inside the contributing support's range keeps its mass.\n- History outside that range still loses mass and is clamped: a history of 1.0 against the range [0, 0.2] gives reaction 0.2 and is clamped to 0.2.\n- Even with reaction 0, the clamp still removes out-of-range stale colour every frame.\n\n**Unchanged:**\n- the clamp itself;\n- density, cap and reaction ordering (`W\u2032 = min(C\u00b7density, cap)\u00b7(1 \u2212 s\u00b7reaction)`);\n- associated `N/C`;\n- the OWN static branch, which never used reaction;\n- the age and provenance rules.\n\n**Failures targeted:** UP stationary texture moir\u00e9, and moving texture noise wherever history is admitted.\n\n### 2. Motion-coherence slack is one jitter-lattice step (both programs)\n\n**Before:** `MOTION_SLACK = 1/256` output pixel, the R4 bound. It refused almost all perspective motion (dolly, rotation), so moving content fell back to current-only.\n\n**After:** `motion_slack() = (output/source)/16` output pixels, that is 1/16 internal pixel: 1/16 px at r=1, 1/8 at r=2, 1/4 at r=4. Accumulated history is positioned only to the 1/16-internal-pixel lattice of `UPSCALE_SAMPLES`, so smaller disagreement lies below the history's positional resolution.\n\n**Still enforced:**\n- every contributor needs valid motion;\n- previous-depth compatibility uses the unchanged tolerance;\n- the continuation-002 counterexample (an independently moving coplanar contributor, 192 px apart) is still refused;\n- a difference equal to the slack is refused.\n\n**Unchanged:** the OWN static proof keeps its 1/256 anchor test (controls 1, 7\u201311).\n\n**Failures targeted:** moving UP and OWN current-only aliasing, broken thin features and jagged silhouettes.\n\n### 3. The LOD bias is floored at \u22121.5 (host only)\n\n**Location:** `temporal/jitter.rs` (`MIN_LOD_BIAS`), `upscaling/owner.rs` (`Pending::lod_bias`) and `motion/retained.rs` (MASK bias). Both use the same floor.\n\n**Why \u22121.5:** one eight-phase cycle supplies 8 sample positions per internal texel, or \u221a8 per axis. Sharpening past \u2212log2(\u221a8) = \u22121.5 adds aliasing that accumulation cannot resolve.\n\n**Effect:**\n- It binds only at 4/16 (bias \u22122 \u2192 \u22121.5) and 5/16 (\u22121.678 \u2192 \u22121.5).\n- 6/16 to 16/16 are unchanged, including \u22121 at 8/16 and 0 at 16/16.\n- Output BLEND, depth re-raster, default and fixed TAA keep 0 (controls 12\u201314).\n\n**Failure targeted:** the first-frame 4/16 DRS entry artefact (partly).\n\n### Synced cfg(test) oracle\n\n`upscaling/evidence_reference.rs` is the f64 mirror of the shader that the evidence and device tests compare against. It now applies the same displacement reaction and the same r/16 slack.\n- This keeps the reference equal to the shader. It is not a weakened expectation.\n- Its static-proof 1/256 remains.\n- The independent cfg(test) quantization correction (`half_bound`) is untouched.\n\n## Inventory and ABI\n\n**Changed files** (sha256 in `inventory.json`):\n\n| File | Kind of change |\n|---|---|\n| `upscaling/resolve.wgsl`, `upscaling/resolve_owner.wgsl` | Shader |\n| `upscaling/evidence_reference.rs` | cfg(test) oracle |\n| `upscaling/owner.rs`, `motion/retained.rs`, `temporal/jitter.rs` | Host |\n| `incant_shader_cook/src/temporal/mod.rs` | Trusted pins |\n\n**Trusted pins** (common + \"\\n\" + program):\n\n| Program | 825ff | R5 |\n|---|---|---|\n| Upscale | `de4df804\u2026d3a3` | `5fd02204accb895f32f09be638f5ac1d9629bbc524b75591cbc6880b746c139e` |\n| UpscaleOwner | `0897bfd2\u2026eb81` | `d293a2fc0c4857a997222b5989309d1c936da041c511ea2b08b6a9595fec4933` |\n\nBoth are written in the existing rustfmt layout, and both match the mirrors.\n\n**ABI:** no uniform, binding, target, format, pass, pipeline or allocation changed. Memory cost is unchanged and the aggregate cap is unchanged. Contract strings are unchanged.\n\n**Unchanged programs:** Composite, MetalFX pack and normalize, Motion, Depth, MotionOwner, Material, Resolve and Copy.\n\n**Unchanged behaviour:** the output-space sprite, text, BLEND and UI route, fixture 650316a, the 15-image protocol, the 24-frame 8-phase schedule and all historical thresholds.\n\n## Not addressed: open questions for Astra and root\n\n1. **Ordinary UP thin lines over clear sky** (`stationary-phases.png` rows 1\u20132):\n   - UP stores no history when the 3\u00d73 support mixes one opaque surface with clear, because `single` requires every contributor to be opaque. Wires over clear sky therefore stay current-only and phase-dependent.\n   - A candidate extension: admit one-surface-plus-clear support, carry partial coverage with that surface's motion, and admit history taps with alpha below 1.\n   - That changes R4's \"ambiguous UP history unusable\" contract, so I did not change it unreviewed.\n   - **Question:** may UP reproject partial coverage with the single surface's motion when the remaining contributors are clear (alpha 0, no depth)?\n2. **The 4/16 entry and post-cut frames** (`transitions-strip.png`, frame 14; row 3 columns 3\u20134):\n   - With no usable history, the current-only Gaussian has \u03c1 = 0.35 + 0.325\u00b7(r\u22122), which is 1.0 output px at r=4, against a 4-px texel spacing. Reconstruction is then close to nearest-neighbour (blocky).\n   - Fixing it means changing \u03c1, or adding a display-only interpolation when no history is admitted. That touches the kernel oracle (`kernel_oracle.rs`, `kernel_tests.rs`) and the estimator contract (no stored prior), so it was not done.\n   - The \u22121.5 LOD floor only reduces the aliasing component.\n3. **Exponential persistence in the ordinary branch:** history whose colour stays inside the current range persists with exponential decay rather than finite age, as in 825ff. Out-of-range stale colour is clamped immediately. Finite age retirement applies only to OWN's no-surface static persistence, as before.\n\n## Commands\n\n```sh\ncd handoffs/0073-upscaling-review/reconstruction_r5\npython3 -I -B inventory.py --checkout /Users/andreyyurlov/.codex/worktrees/owner-quality-repair/incant   # patch applies; pins match\npython3 -I -B controls.py --out controls.json                                                              # checks=21 failed=0\n```\n\n## Limits\n\n- No Cargo, rustc, clippy, fmt, naga, cook, GPU, capture or image was run.\n- The Rust edits were hand-formatted to rustfmt style but not checked by rustfmt.\n- The scalar controls transcribe the rules. They cannot judge appearance.\n- All historical failures remain open: C7 and C9 (historical definitions), P1, the DRS wipe, UP thin lines and moving detail.\n- The R4 rejection stands until R5 pixels exist.\n- No screenshots were produced; the only images read were existing R4 artefacts.\n\n**Writes:** only new files in this packet: `src/`, `repair.patch`, `inventory.py/json`, `controls.py/json` and `result.md/json`. The baseline, `baseline.json`, the brief, the old packets and untracked inputs are untouched.\n"
+    },
+    "result": {
+      "is_error": false,
+      "content_types": [
+        "text"
+      ]
+    }
+  },
+  {
+    "at": "2026-10-14T02:24:18.661Z",
+    "id": "toolu_012xWV4BUKUrH9jCFxPQeEfY",
+    "name": "Bash",
+    "input": {
+      "command": "date +%T && python3 -I -B - <<'EOF'\nimport json, pathlib, hashlib\nH = pathlib.Path.cwd()\ninv = json.loads((H / \"inventory.json\").read_text()); ctl = json.loads((H / \"controls.json\").read_text())\nout = {\"schema\": \"incant-0073-r5-repair-v1\", \"status\": \"SOURCE_COMPLETE_COMPILE_UNVERIFIED\",\n       \"model\": \"claude-opus-5-5\", \"thinking_effort\": \"max\", \"auto_memory\": \"disabled\",\n       \"source_commit\": inv[\"source_commit\"], \"production\": inv[\"production\"],\n       \"patch\": {\"path\": \"repair.patch\", \"sha256\": inv[\"patch_sha256\"], \"files\": inv[\"patch_changed_files\"],\n                 \"git_apply_check_against_825ff_copies\": inv[\"git_apply_check_against_825ff_copies\"],\n                 \"applied_equals_mirrors\": inv[\"applied_equals_mirrors\"]},\n       \"trusted_pins\": inv[\"trusted_pins\"], \"abi\": inv[\"abi\"],\n       \"changes\": {\"reaction\": \"clamp displacement instead of distance to fresh (UP + OWN ordinary branch, cfg(test) reference synced)\",\n                   \"motion_slack\": \"(output/source)/16 output px instead of 1/256 (UP + OWN coherence, reference synced); OWN static 1/256 proof unchanged\",\n                   \"lod_bias_floor\": \"MIN_LOD_BIAS -1.5 for material and MASK (binds at 4/16, 5/16 only)\"},\n       \"controls\": {\"checks\": len(ctl[\"checks\"]), \"all_pass\": ctl[\"all_checks_pass\"]},\n       \"open_questions\": [\"UP one-surface-plus-clear partial-coverage history (thin lines over clear)\",\n                          \"current-only kernel width at r>=3 / display-only interpolation (4/16 entry, post-cut)\",\n                          \"ordinary-branch in-range persistence is exponential, not finite-age (unchanged from 825ff)\"],\n       \"pending\": [\"compile/clippy/fmt\", \"cook\", \"bounded GPU render\", \"Claude pixel review\"],\n       \"gpu_executions\": 0, \"builds\": 0, \"images_created\": 0, \"appearance\": \"not assessed\"}\n(H / \"result.json\").write_text(json.dumps(out, indent=1, sort_keys=True) + \"\\n\")\nprint(\"ok\")\nEOF\ncd /Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review && R=handoffs/0073-upscaling-review/reconstruction_r5 && git add $R/src $R/repair.patch $R/inventory.py $R/inventory.json $R/controls.py $R/controls.json $R/result.md $R/result.json && git diff --cached --name-only && git commit -q -m \"R5 focused repair: displacement reaction, lattice motion slack, LOD floor\n\nOrdinary-branch reaction now measures the clamp displacement, motion\ncoherence admits disagreement below one jitter-lattice step, and the\ninternal LOD bias is floored at -1.5; cfg(test) evidence reference and\ntrusted pins synced. Patch applies to 825ff; controls 21/21. Source\nonly: not compiled, cooked or rendered.\n\nBuilt-by: claude\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\" && git log --oneline -1 && git rev-parse HEAD && git status --short | head && date +%T; python3 -c \"import time;print(time.monotonic())\"",
+      "description": "Write result.json and commit only the new R5 outputs"
+    },
+    "result": {
+      "is_error": false,
+      "content_types": [
+        "text"
+      ]
+    }
+  }
+]

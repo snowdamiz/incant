@@ -1,0 +1,52 @@
+{
+  "schema": "incant-independent-source-review-v1",
+  "reviewed_at": "2026-10-14T02:35:25.785393+00:00",
+  "reviewer": "astra",
+  "status": "accepted_for_scoped_compile_and_cook_validation_only",
+  "first_producer": "329bfc6a5d368a03681e1ab5843590901f17815e",
+  "corrected_producer": "51deb3848801f46c78ea85ca65fc330c5f60b758",
+  "base": "825ff047284e84252d00f786a7b14cb6ecb44293",
+  "production_baseline": "72b1ba8ec351e86d66a90c401e0a75a530633616",
+  "patch_sha256": "8e226ad36180561868b899b54188fabfa2a4bcf692bc0ec43df5e7b1e6bc8253",
+  "inventory_sha256": "93915037d1c44a72b6d51c71631cbf37ece02512def021bf74129c69caaadd30",
+  "controls_sha256": "8289fe4594675137696619f74a82d68342db755b4ec9db7de6dc1eab95c5ad67",
+  "audit_sha256": "987448ce524357e3cd6225dcf1a242c087e34e8c8901ea5df38ef31958f8a98a",
+  "verified": {
+    "supplied_baseline_identities": 61,
+    "changed_paths": 7,
+    "scalar_controls": 22,
+    "protected_original_files": 499,
+    "exact_patch_apply": true,
+    "cooker_source_pins": true,
+    "correction_comments_only_outside_pins_and_controls": true,
+    "live_candidate_unchanged": true
+  },
+  "source_review": [
+    "Both ordinary resolve branches compute clamped RGBA before reaction; reactive attenuation uses max RGB clamp displacement and associated prior mass remains density-scaled then capped then attenuated. Current evidence sum and mass, current clear coverage, disocclusion, nonfinite rejection, alpha canonicalization and finite OWN absence retirement are unchanged.",
+    "The existing finite positive source/output plans admit the new r/16 scalar threshold; the f64 oracle mirrors its use on every positive current motion contributor and preserves previous-depth checks. This is an empirical bounded disagreement policy, not a same-surface proof.",
+    "The -1.5 LOD floor is identical in internal material and MASK motion draws. The default/fixed plan absence remains zero bias. No default WGSL, output overlay shader, new target, attachment, binding, uniform, pass, allocation ceiling or history transaction was changed.",
+    "The two trusted common-plus-program SHA256 values exactly match final source comments and bytes. No compiler or Naga/cooked validation was performed in this scope.",
+    "The independent replay reproduces controls/inventory/patch exactly. Corrected transfer controls use effective pre-add W=15/7/36 with fractions1/16,1/8,1/37. This is a constant-reaction scalar model, not nonlinear per-pixel evidence or measured aliasing."
+  ],
+  "qualifications": [
+    "The final report correction explicitly supersedes still-retained lower historical paragraphs containing invalid sqrt8, positional-quantization and old residual-amplitude claims. Those historical claims are not endorsed.",
+    "R5 does not yet repair ordinary UP thin geometry over clear support or low-scale current-only reconstruction at initial entry/post-cut. It is not the complete requested reconstruction repair.",
+    "The inference that perspective motion was rejected is not established by a per-pixel rejection readback; the supplied 0.04px spread is synthetic. Different same-depth surfaces within the new slack can still share history.",
+    "Memory allocation count and ABI are source-identical; no measured cost/performance claim is made.",
+    "No R5 build, cook, GPU execution, new image or appearance acceptance. R4 and earlier failed visual/numeric attempts remain preserved."
+  ],
+  "lifecycle": {
+    "both_acp_exits": 0,
+    "both_reaped": true,
+    "both_process_groups_empty": true,
+    "model_each_turn": "Opus 5.5",
+    "thinking_each_turn": "max",
+    "auto_memory_disabled": true,
+    "total_original_wall_seconds": 887.6490752696991,
+    "total_original_monotonic_seconds": 887.6502565419942,
+    "original_limit_seconds": 1200,
+    "second_turn_budget_not_reset": true,
+    "scope_deviations_found": []
+  },
+  "tool_audit": "Retained tool inputs and result types only; no hidden assistant reasoning. First turn23calls (22Bash,1Write), correction3Bash; no build/GPU/memory operations. Quick scalar/Python inventory and named temporary patch application only."
+}

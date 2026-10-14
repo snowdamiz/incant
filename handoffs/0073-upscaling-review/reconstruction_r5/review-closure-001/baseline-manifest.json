@@ -1,0 +1,313 @@
+{
+  "source_commit": "825ff047284e84252d00f786a7b14cb6ecb44293",
+  "production": "72b1ba8ec351e86d66a90c401e0a75a530633616",
+  "created_at": "2026-10-14T02:16:18.122661+00:00",
+  "scope": "Immutable review-source subset; baseline read-only, candidate checkout read-only; no build/GPU authority",
+  "files": [
+    {
+      "path": "crates/incant_render/src/frame.rs",
+      "bytes": 2700,
+      "sha256": "1db2c09f12ea6e60ca3d0e8aaba17314e6d0d9e4f76e11cc3e0a7bd524323e7e"
+    },
+    {
+      "path": "crates/incant_render/src/graph.rs",
+      "bytes": 17632,
+      "sha256": "36afa630dd146ac3708f1f05d919d4eadbb016d1b60bcef5f92adc8238f3642f"
+    },
+    {
+      "path": "crates/incant_render/src/lib.rs",
+      "bytes": 24960,
+      "sha256": "c197b93b33bcaf0808644c9805155003897b0e2519b23d8594ea2fd740d5fba1"
+    },
+    {
+      "path": "crates/incant_render/src/model_draw.rs",
+      "bytes": 12980,
+      "sha256": "df5f94f93601949bbaac6829b083c6c407af4b35c8e4a1d1017864195437e1cd"
+    },
+    {
+      "path": "crates/incant_render/src/model_material.wgsl",
+      "bytes": 4840,
+      "sha256": "28f28b27578ca4b4e5ea9aacb9f7901a5c97af570ab6521ad66d0eac0657efc3"
+    },
+    {
+      "path": "crates/incant_render/src/motion/attachment.rs",
+      "bytes": 9031,
+      "sha256": "70e12c7a59c0f1eb8ad007737d1b0f01e5e9c18e5fed9c5f75e494cba2269039"
+    },
+    {
+      "path": "crates/incant_render/src/motion/camera_history_tests.rs",
+      "bytes": 4366,
+      "sha256": "f33b2497e11b3ebacc8caa8647bf8246d9d69d364689122c245d11df43e72897"
+    },
+    {
+      "path": "crates/incant_render/src/motion/changes.rs",
+      "bytes": 5941,
+      "sha256": "411b46c505ccb53aac72d47bc9059163c9ea724722a944b09d8641d7af8ebca7"
+    },
+    {
+      "path": "crates/incant_render/src/motion/draw.rs",
+      "bytes": 5962,
+      "sha256": "7920e73fb8d5c9934e68d1664f50acb999663dd790d43853b463d6c4e525d507"
+    },
+    {
+      "path": "crates/incant_render/src/motion/mod.rs",
+      "bytes": 2165,
+      "sha256": "b9b2a2e0682763509d92a74c08ca953f68adf6eaa07311e16a15159d703c7f86"
+    },
+    {
+      "path": "crates/incant_render/src/motion/owner.rs",
+      "bytes": 9750,
+      "sha256": "98c4c43efd28b56ab29efbd661124c91b8f1e41045f520bf87813fd8c29373d2"
+    },
+    {
+      "path": "crates/incant_render/src/motion/owner.wgsl",
+      "bytes": 2474,
+      "sha256": "a2659879cd59698633d28f5db7f8a4f086382f260ee6911de312a5b2d10c42db"
+    },
+    {
+      "path": "crates/incant_render/src/motion/owner_system.rs",
+      "bytes": 6435,
+      "sha256": "334385be08ddd098c0a5b3a6c51a9a177c5d577d3fa0f7694064b750fdd955af"
+    },
+    {
+      "path": "crates/incant_render/src/motion/plan.rs",
+      "bytes": 1598,
+      "sha256": "8af0181ea6defab33bb4b5bfb1e09c83308e77b88552deee7eb0fe9fd36c9dd3"
+    },
+    {
+      "path": "crates/incant_render/src/motion/provenance.rs",
+      "bytes": 6344,
+      "sha256": "eabb3236395706d52289aef094e53c54f93230121ffed225d223ee5b6b86f681"
+    },
+    {
+      "path": "crates/incant_render/src/motion/provenance_tests.rs",
+      "bytes": 5920,
+      "sha256": "1e250ac47d3da6ebd618203096d8460a4341edd95475d706972df8e8c70d06a1"
+    },
+    {
+      "path": "crates/incant_render/src/motion/retained.rs",
+      "bytes": 29427,
+      "sha256": "89a51ae3fc238ecc908d8b5f5d2128effccc9f41dad2b8a462e59a2148c50d76"
+    },
+    {
+      "path": "crates/incant_render/src/motion/shader.wgsl",
+      "bytes": 2225,
+      "sha256": "e64b4a1cc0e393c752eddeba8af792b59db9cac3ce2991f9ffc7f17e1e2164d0"
+    },
+    {
+      "path": "crates/incant_render/src/motion/system.rs",
+      "bytes": 7333,
+      "sha256": "0f3795b849178fdcc5a18a413b9473f2b65bf202b45ddb3217bce9a3077a6621"
+    },
+    {
+      "path": "crates/incant_render/src/motion/targets.rs",
+      "bytes": 2343,
+      "sha256": "6ab47ca2a9a10d3aaf7f8ddb0e293ae3dd1e61cc03a736ec77e6c40ca4ae0d2f"
+    },
+    {
+      "path": "crates/incant_render/src/motion/tests.rs",
+      "bytes": 13876,
+      "sha256": "23e0b96231373b7220d5cc2d0634226c57ecc5c12af649fc3be8637e16480239"
+    },
+    {
+      "path": "crates/incant_render/src/retained.rs",
+      "bytes": 28369,
+      "sha256": "1d409d45194153d3558f36884f5440e679dc606c4903503d3ba0593dba0117c6"
+    },
+    {
+      "path": "crates/incant_render/src/temporal/config.rs",
+      "bytes": 1494,
+      "sha256": "4fb93739b80c5e1e923cb8d087919cca924151bb8b687ffbc53bb23254f777ee"
+    },
+    {
+      "path": "crates/incant_render/src/temporal/copy.wgsl",
+      "bytes": 1328,
+      "sha256": "096ee89ecb5c9112deea55935ac2da0bec4fd7f3ba603aa04c875ba48deb248b"
+    },
+    {
+      "path": "crates/incant_render/src/temporal/device_tests.rs",
+      "bytes": 12191,
+      "sha256": "007dca51a7f871d3c767bc89650a7bfe517a01640ab508455ca599578b6bfe5e"
+    },
+    {
+      "path": "crates/incant_render/src/temporal/jitter.rs",
+      "bytes": 2402,
+      "sha256": "02ff2b3b5123fbcc797bf435d09875b85ad7b0f2f0c250a036052eb52ef4b25f"
+    },
+    {
+      "path": "crates/incant_render/src/temporal/mod.rs",
+      "bytes": 1078,
+      "sha256": "a75c85dd72b7387ab14026172b4e0567f06055abe768a0a492beeed300816d40"
+    },
+    {
+      "path": "crates/incant_render/src/temporal/oracle.rs",
+      "bytes": 2418,
+      "sha256": "0f446195d816fb065e0d94e68315df7a2fc24a7e3d6f0faee8095330bdc03a5a"
+    },
+    {
+      "path": "crates/incant_render/src/temporal/owner.rs",
+      "bytes": 3298,
+      "sha256": "aafc0d329aa5ac85d46b5b728bd0efd8f938f969fdd9e48ded52227a23effe4a"
+    },
+    {
+      "path": "crates/incant_render/src/temporal/resolve.wgsl",
+      "bytes": 3480,
+      "sha256": "e1af53565a299f6a03a13a3ee05a037b540e24cb2b0bed054ceeb8d2d484ebf1"
+    },
+    {
+      "path": "crates/incant_render/src/temporal/system.rs",
+      "bytes": 11132,
+      "sha256": "504d9773eaa52a437abd32b57318fe7e78a060ee546a02bd6d9a20b591febaae"
+    },
+    {
+      "path": "crates/incant_render/src/temporal/targets.rs",
+      "bytes": 3159,
+      "sha256": "72736408b81cb92d38d1c0cb7e3ec0e76a8bd1c96859855f18b4f4521e739d53"
+    },
+    {
+      "path": "crates/incant_render/src/temporal/tests.rs",
+      "bytes": 11059,
+      "sha256": "7a96bac227826f250cf806fc616f713b3bb0ef96c85661d1fb9bcc88e7580680"
+    },
+    {
+      "path": "crates/incant_render/src/temporal_shader/cooked.rs",
+      "bytes": 8417,
+      "sha256": "fddf5916a1b017999cca9aa14a6f1f773849f5a7c2da5ee4f2a7b9788c5f1b71"
+    },
+    {
+      "path": "crates/incant_render/src/temporal_shader/cooked/host.rs",
+      "bytes": 5302,
+      "sha256": "fc4245ba0e59e4600b95aa079da1ecbd2f1af8fa85cf7526389020e0864f0c15"
+    },
+    {
+      "path": "crates/incant_render/src/upscaling/attachment_reference.rs",
+      "bytes": 3857,
+      "sha256": "813b0d1c91371e81f6c24456d46e7b56048a50b9695d564e4bdbaf35002cb501"
+    },
+    {
+      "path": "crates/incant_render/src/upscaling/attachment_reference_tests.rs",
+      "bytes": 4371,
+      "sha256": "14c2eea4f06e582dc48fb3c50623cdd2af2db91d986669d6e72cdada1b3e6ccc"
+    },
+    {
+      "path": "crates/incant_render/src/upscaling/common.wgsl",
+      "bytes": 2508,
+      "sha256": "e1c2e552e462a3e27ad6632324b3880ef0cb8f96ec2e1c346ec6205e0520c879"
+    },
+    {
+      "path": "crates/incant_render/src/upscaling/composite.wgsl",
+      "bytes": 965,
+      "sha256": "fd731718cce5b8dd949859515bf30bc57ee89002080f26b96cd50866057ec60d"
+    },
+    {
+      "path": "crates/incant_render/src/upscaling/confidence_oracle.rs",
+      "bytes": 2573,
+      "sha256": "d449eaaa2f96db1408b77fa1aee4a6318e26c2063dcb60ef876ff2af37de872e"
+    },
+    {
+      "path": "crates/incant_render/src/upscaling/device_tests.rs",
+      "bytes": 12537,
+      "sha256": "f9a368c4de20f60f4a77f13b61fca774fc140865519d4d5cdfb4c5544405e751"
+    },
+    {
+      "path": "crates/incant_render/src/upscaling/evidence_reference.rs",
+      "bytes": 15870,
+      "sha256": "9c90bbec40ce850aab73ae4228b59755cbc0aea11e8a2b99a07e7ba5342b6dc5"
+    },
+    {
+      "path": "crates/incant_render/src/upscaling/evidence_tests.rs",
+      "bytes": 9280,
+      "sha256": "7b9a7fdc9b3eeec2a66755d8041e0ba4bfd374aaf4eaaf3d0a1e5de8c19e3223"
+    },
+    {
+      "path": "crates/incant_render/src/upscaling/kernel_oracle.rs",
+      "bytes": 4930,
+      "sha256": "f2ec4a1be0d913a69ff6d7127019991a961a631a318d60efb9b64c02255f5349"
+    },
+    {
+      "path": "crates/incant_render/src/upscaling/kernel_patterns.rs",
+      "bytes": 8291,
+      "sha256": "9cb791e25cd1225ca8d33effadd756dda7605a62204b9e0939f2e4640252617e"
+    },
+    {
+      "path": "crates/incant_render/src/upscaling/kernel_tests.rs",
+      "bytes": 10272,
+      "sha256": "8662d93c91e1ae4d8246a50b35444f4da7336d2db040f8c7127b33894ad65e10"
+    },
+    {
+      "path": "crates/incant_render/src/upscaling/mod.rs",
+      "bytes": 1177,
+      "sha256": "f2f821de7c985aa32257f34fcd6d1afeebb8d773f13fa72660294308d4bd005a"
+    },
+    {
+      "path": "crates/incant_render/src/upscaling/oracle.rs",
+      "bytes": 2343,
+      "sha256": "71e9bffce8836e0aeb60d2a229164d945099a16f99e2d3a9b7debbb018ff0556"
+    },
+    {
+      "path": "crates/incant_render/src/upscaling/owner.rs",
+      "bytes": 12405,
+      "sha256": "f859e5cd069a5359b601eea361aed19726abd44d6b4308c53890a213ab93be56"
+    },
+    {
+      "path": "crates/incant_render/src/upscaling/owner_device_tests.rs",
+      "bytes": 24393,
+      "sha256": "50662f9e797ba9188252f5774aad3e7f314c0e33019ea15016ea043875b74808"
+    },
+    {
+      "path": "crates/incant_render/src/upscaling/plan.rs",
+      "bytes": 4286,
+      "sha256": "a5eb8c9f79192a66e3332861ed14c778f3a8ac9d53a98892fc16009d0adf2b77"
+    },
+    {
+      "path": "crates/incant_render/src/upscaling/resolve.wgsl",
+      "bytes": 8067,
+      "sha256": "a0853f1c934a3e68fa5a69904c4308e53176ae75d32af9bd1065236fdef43607"
+    },
+    {
+      "path": "crates/incant_render/src/upscaling/resolve_owner.wgsl",
+      "bytes": 15243,
+      "sha256": "dc43ac2aea2c057cead64cb97bef1fb2429b8eadde52c20a5605e4d7487a51fe"
+    },
+    {
+      "path": "crates/incant_render/src/upscaling/system.rs",
+      "bytes": 16404,
+      "sha256": "4b83154de365480d8169607b256570e88c6e754688e4f393243d3ce4ea6bb760"
+    },
+    {
+      "path": "crates/incant_render/src/upscaling/targets.rs",
+      "bytes": 3912,
+      "sha256": "8f4f3c5a244d86f07580829e24705bc6f1f6896855bf894b34e068f9d82d72a6"
+    },
+    {
+      "path": "crates/incant_render/src/upscaling/tests.rs",
+      "bytes": 10578,
+      "sha256": "7b5daed21b62aa5c8e162a40cb735c18f038279597845029868e515eb7a3e84a"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/geometry/material.rs",
+      "bytes": 9622,
+      "sha256": "6ad2455593be8db7b03e95eb36b22c7f0850155932138a57ed11883859805856"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/temporal/contract.rs",
+      "bytes": 22326,
+      "sha256": "4e4b1fd201f1f71f14696029c8cd42727fe70afa4328ad5e14739d659e69e2f7"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/temporal/emit.rs",
+      "bytes": 10467,
+      "sha256": "3b0c6ed0aebace7cc33515f8b7872d300495cdc325db8d85f8eae0ee57b05190"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/temporal/mod.rs",
+      "bytes": 8918,
+      "sha256": "ceb8d5c1e73a170158af54c94873def1e1346da00c7230c0025d1a1741c5b216"
+    },
+    {
+      "path": "crates/incant_shader_cook/tests/temporal.rs",
+      "bytes": 9178,
+      "sha256": "093b4cba4eaefb48584c05061873a5037391577d98a771eb837b0eef745d505e"
+    }
+  ]
+}

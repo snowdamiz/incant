@@ -1,0 +1,150 @@
+{
+  "review_receipt_sha256": "f1e7b0c6c99b208310d1eb5c60fc5580702088befbd0715cbffe19cf592c1423",
+  "records": [
+    {
+      "path": "README.md",
+      "bytes": 1630,
+      "sha256": "30b63760069662b8988d824a17f3b92869561a9d8b9053f871e5b87346874a7f"
+    },
+    {
+      "path": "audit.json",
+      "bytes": 5776,
+      "sha256": "987448ce524357e3cd6225dcf1a242c087e34e8c8901ea5df38ef31958f8a98a"
+    },
+    {
+      "path": "audit.py",
+      "bytes": 6837,
+      "sha256": "a4c86b84ee1639fd054611cb452b77c09b1e9856a61bba6961843241ca8ed751"
+    },
+    {
+      "path": "baseline-manifest.json",
+      "bytes": 11333,
+      "sha256": "69d6548f3fe584c0876bac480db932466ec5a42ca70fabf08c4647df8785a18c"
+    },
+    {
+      "path": "baseline-records.json.gz",
+      "bytes": 195221,
+      "sha256": "08b07388626f402b1414cd095b2bab43312d3d594bb49e29be730862b1c67378"
+    },
+    {
+      "path": "controls.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "controls.stdout",
+      "bytes": 19,
+      "sha256": "c309d3f7122c475a95deeee88635fda511516feecfdd7b9d804201a8b46bf598"
+    },
+    {
+      "path": "independent-review.json",
+      "bytes": 4117,
+      "sha256": "f1e7b0c6c99b208310d1eb5c60fc5580702088befbd0715cbffe19cf592c1423"
+    },
+    {
+      "path": "initial-packet-brief.md",
+      "bytes": 5810,
+      "sha256": "58e4d0cdb521eca8b9f2dd0df345eb00e039a1da1ebb0e82cfafed5a3cbe94ca"
+    },
+    {
+      "path": "inventory.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "inventory.stdout",
+      "bytes": 429,
+      "sha256": "36e8cc3a20906c257b6a1ee195a8dbfdb741f94ffae0c15a40a8d116cb168466"
+    },
+    {
+      "path": "supervision-001/acp-stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "supervision-001/acp-terminal.json",
+      "bytes": 673,
+      "sha256": "1c7babb767da176434bf2fd017b457957f360a5efca3e906db43c211901b82d4"
+    },
+    {
+      "path": "supervision-001/acp.log",
+      "bytes": 4747,
+      "sha256": "45bcd940404effb32f18fd07e2276033ce3b5ff160b51a2c20184ea510142bd6"
+    },
+    {
+      "path": "supervision-001/before.json",
+      "bytes": 93849,
+      "sha256": "7e15afc45b37e81e60fba08f4abf2e5846e7400cb5d04c136b0046a7c330b433"
+    },
+    {
+      "path": "supervision-001/child-brief-before.md",
+      "bytes": 5751,
+      "sha256": "fe502d34ec17d0e3421924b6d470910cb1a0395da0a1288a3a482eec1957f4fc"
+    },
+    {
+      "path": "supervision-001/parent-brief-before.md",
+      "bytes": 5751,
+      "sha256": "fe502d34ec17d0e3421924b6d470910cb1a0395da0a1288a3a482eec1957f4fc"
+    },
+    {
+      "path": "supervision-001/repair-brief.md",
+      "bytes": 5810,
+      "sha256": "58e4d0cdb521eca8b9f2dd0df345eb00e039a1da1ebb0e82cfafed5a3cbe94ca"
+    },
+    {
+      "path": "supervision-001/supervise.py",
+      "bytes": 3137,
+      "sha256": "ccf6fc0c8e4256d0ba6131a472e01f81c378d641e1deee558b45115ea55bcaf6"
+    },
+    {
+      "path": "supervision-001/tool-metadata.json",
+      "bytes": 50234,
+      "sha256": "5bf71b2d47f701822097b45f6bbb0e3d7175930f13064822ff9279b3d5572db3"
+    },
+    {
+      "path": "supervision-002/acp-stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "supervision-002/acp-terminal.json",
+      "bytes": 779,
+      "sha256": "2e249f4709b9491a71cd0ba3dba3f658e8062973937b5ac3f72824b89c9223c4"
+    },
+    {
+      "path": "supervision-002/acp.log",
+      "bytes": 3005,
+      "sha256": "cc24513f7eb18c1a63d9b0da10cfd3788821128cdbcf982cc01a3e3a027447be"
+    },
+    {
+      "path": "supervision-002/before.json",
+      "bytes": 96581,
+      "sha256": "ed288f11f359c793c9f845acd1a025ca1fb733ea88c8b78c8aab4449bbb42eb3"
+    },
+    {
+      "path": "supervision-002/child-brief-before.md",
+      "bytes": 5810,
+      "sha256": "58e4d0cdb521eca8b9f2dd0df345eb00e039a1da1ebb0e82cfafed5a3cbe94ca"
+    },
+    {
+      "path": "supervision-002/correction-brief.md",
+      "bytes": 2907,
+      "sha256": "0e433ef07796f53d2199e1e89ec70ac6949f6c0bd5da1e4ec89a89d97f37c6e4"
+    },
+    {
+      "path": "supervision-002/parent-brief-before.md",
+      "bytes": 5810,
+      "sha256": "58e4d0cdb521eca8b9f2dd0df345eb00e039a1da1ebb0e82cfafed5a3cbe94ca"
+    },
+    {
+      "path": "supervision-002/supervise.py",
+      "bytes": 3799,
+      "sha256": "7b5ce7469cf0efc69ee0ecc219459f88e1ccaead28698ad5d4a6ae0f3580d3bd"
+    },
+    {
+      "path": "supervision-002/tool-metadata.json",
+      "bytes": 12233,
+      "sha256": "1aba639895c95a3461377523b4d0ef21d17cfd17d8eb0f074840e160a54d3077"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+ "pid": 63262,
+ "pgid": 63262,
+ "exit": 0,
+ "timed_out": false,
+ "interrupted_by": [],
+ "reaped": true,
+ "group_empty_after": true,
+ "seconds": 62.724,
+ "total_original_wall_seconds": 887.6490752696991,
+ "total_original_monotonic_seconds": 887.6502565419942,
+ "argv": [
+  "/opt/homebrew/opt/python@3.14/bin/python3.14",
+  "tools/handoff/main.py",
+  "run",
+  "0073-upscaling-review",
+  "--permission-mode",
+  "auto"
+ ],
+ "auto_memory_environment": {
+  "CLAUDE_CODE_DISABLE_AUTO_MEMORY": "1"
+ },
+ "wall_elapsed_seconds": 62.73534798622131,
+ "monotonic_elapsed_seconds": 62.73715658400033,
+ "watchdog": [],
+ "stdout_sha256": "cc24513f7eb18c1a63d9b0da10cfd3788821128cdbcf982cc01a3e3a027447be",
+ "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

@@ -1,0 +1,170 @@
+{
+  "scope": "Independent source/scalar/ACP integrity only; no Rust compile, cook, GPU, pixel review or appearance acceptance",
+  "first_producer": "329bfc6a5d368a03681e1ab5843590901f17815e",
+  "final_producer": "51deb3848801f46c78ea85ca65fc330c5f60b758",
+  "base": "825ff047284e84252d00f786a7b14cb6ecb44293",
+  "baseline_files": 61,
+  "source_files": 7,
+  "scalar_checks": 22,
+  "control_results_exact": true,
+  "comment_only_correction": true,
+  "protected_original_files": 499,
+  "candidate_unchanged": true,
+  "turns": [
+    {
+      "turn": 1,
+      "terminal": {
+        "pid": 57783,
+        "pgid": 57783,
+        "exit": 0,
+        "timed_out": false,
+        "interrupted_by": [],
+        "reaped": true,
+        "group_empty_after": true,
+        "seconds": 489.892,
+        "argv": [
+          "/opt/homebrew/opt/python@3.14/bin/python3.14",
+          "tools/handoff/main.py",
+          "run",
+          "0073-upscaling-review",
+          "--permission-mode",
+          "auto"
+        ],
+        "auto_memory_environment": {
+          "CLAUDE_CODE_DISABLE_AUTO_MEMORY": "1"
+        },
+        "wall_elapsed_seconds": 489.9054591655731,
+        "monotonic_elapsed_seconds": 489.9048387090006,
+        "watchdog": [],
+        "stdout_sha256": "45bcd940404effb32f18fd07e2276033ce3b5ff160b51a2c20184ea510142bd6",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "supervisor_sha256": "ccf6fc0c8e4256d0ba6131a472e01f81c378d641e1deee558b45115ea55bcaf6",
+      "before_sha256": "7e15afc45b37e81e60fba08f4abf2e5846e7400cb5d04c136b0046a7c330b433",
+      "tool_metadata_sha256": "5bf71b2d47f701822097b45f6bbb0e3d7175930f13064822ff9279b3d5572db3",
+      "tools": {
+        "Bash": 22,
+        "Write": 1
+      }
+    },
+    {
+      "turn": 2,
+      "terminal": {
+        "pid": 63262,
+        "pgid": 63262,
+        "exit": 0,
+        "timed_out": false,
+        "interrupted_by": [],
+        "reaped": true,
+        "group_empty_after": true,
+        "seconds": 62.724,
+        "total_original_wall_seconds": 887.6490752696991,
+        "total_original_monotonic_seconds": 887.6502565419942,
+        "argv": [
+          "/opt/homebrew/opt/python@3.14/bin/python3.14",
+          "tools/handoff/main.py",
+          "run",
+          "0073-upscaling-review",
+          "--permission-mode",
+          "auto"
+        ],
+        "auto_memory_environment": {
+          "CLAUDE_CODE_DISABLE_AUTO_MEMORY": "1"
+        },
+        "wall_elapsed_seconds": 62.73534798622131,
+        "monotonic_elapsed_seconds": 62.73715658400033,
+        "watchdog": [],
+        "stdout_sha256": "cc24513f7eb18c1a63d9b0da10cfd3788821128cdbcf982cc01a3e3a027447be",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "supervisor_sha256": "7b5ce7469cf0efc69ee0ecc219459f88e1ccaead28698ad5d4a6ae0f3580d3bd",
+      "before_sha256": "ed288f11f359c793c9f845acd1a025ca1fb733ea88c8b78c8aab4449bbb42eb3",
+      "tool_metadata_sha256": "1aba639895c95a3461377523b4d0ef21d17cfd17d8eb0f074840e160a54d3077",
+      "tools": {
+        "Bash": 3
+      }
+    }
+  ],
+  "files": [
+    {
+      "path": "baseline.json",
+      "sha256": "69d6548f3fe584c0876bac480db932466ec5a42ca70fabf08c4647df8785a18c",
+      "bytes": 11333
+    },
+    {
+      "path": "brief.md",
+      "sha256": "58e4d0cdb521eca8b9f2dd0df345eb00e039a1da1ebb0e82cfafed5a3cbe94ca",
+      "bytes": 5810
+    },
+    {
+      "path": "controls.json",
+      "sha256": "8289fe4594675137696619f74a82d68342db755b4ec9db7de6dc1eab95c5ad67",
+      "bytes": 3270
+    },
+    {
+      "path": "controls.py",
+      "sha256": "6f596fc87ce9bd13ee72a3a379400c5161aa86419cec9e486fde2c9a9774dab4",
+      "bytes": 8110
+    },
+    {
+      "path": "inventory.json",
+      "sha256": "93915037d1c44a72b6d51c71631cbf37ece02512def021bf74129c69caaadd30",
+      "bytes": 3711
+    },
+    {
+      "path": "inventory.py",
+      "sha256": "cd793727e4fdfc4cdd3b30b0d0b9d8b89bd35761c5ddf3b59b7f16e6145f3b2f",
+      "bytes": 4550
+    },
+    {
+      "path": "repair.patch",
+      "sha256": "8e226ad36180561868b899b54188fabfa2a4bcf692bc0ec43df5e7b1e6bc8253",
+      "bytes": 13221
+    },
+    {
+      "path": "result.json",
+      "sha256": "bbd9a8a582329e51217ac7f9f4c3102e021dc52ccc3a45fa3a13475f7588ed24",
+      "bytes": 3214
+    },
+    {
+      "path": "result.md",
+      "sha256": "98741164d4d0b93c2f98c760166e20c4699cb398f87c74172635e582dfff20f4",
+      "bytes": 11183
+    },
+    {
+      "path": "src/crates/incant_render/src/motion/retained.rs",
+      "sha256": "08926fd1891dbce98d3fb9e6db900a2b22c4446a32d996ce6686416c37c2291c",
+      "bytes": 29493
+    },
+    {
+      "path": "src/crates/incant_render/src/temporal/jitter.rs",
+      "sha256": "145604f142bc0221426a16ec49af9c5420f7c70348095306447dd571cb6acfff",
+      "bytes": 2771
+    },
+    {
+      "path": "src/crates/incant_render/src/upscaling/evidence_reference.rs",
+      "sha256": "1809bdda8fd2cc6c204f83d88899f6e9b5f1b002c97782f876455e94b9105fe1",
+      "bytes": 16181
+    },
+    {
+      "path": "src/crates/incant_render/src/upscaling/owner.rs",
+      "sha256": "7666dfa13aa94b458aeae6711ae5a854702bb7fec7136ec1511c04b2f385ed7b",
+      "bytes": 12537
+    },
+    {
+      "path": "src/crates/incant_render/src/upscaling/resolve.wgsl",
+      "sha256": "75b6efc304de77c20d965503dab83e16460b6f8067a68f6fda039675adb755c1",
+      "bytes": 8831
+    },
+    {
+      "path": "src/crates/incant_render/src/upscaling/resolve_owner.wgsl",
+      "sha256": "24bd8a123b9ec66e6e6ce4c4ece4f34df66d3eb673b3a66b10ef5fff2fcf916c",
+      "bytes": 16007
+    },
+    {
+      "path": "src/crates/incant_shader_cook/src/temporal/mod.rs",
+      "sha256": "eb7c0717f129e65910ee58f41414bb317f6a7751d8c73c3156fa4d1bfee4fe9e",
+      "bytes": 8921
+    }
+  ]
+}
