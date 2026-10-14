@@ -22,6 +22,7 @@ WIDTH = 10_000
 MAX_NS = 100_000_000
 PHASES = ('player.frame', 'script.tick')
 SCRIPT_PHASES = ('script.tick', 'script.static_module')
+HEAP_MODES = ('maintained', 'detailed')
 
 
 def phase_selection(script_phase, program):
@@ -247,10 +248,22 @@ def package_inputs(package):
                               'program': build_info['program']}, rate
 
 
-def measure(package, output, ticks, recording=None, observe=None, baseline=None, *, script_phase='script.tick'):
+def measure(package, output, ticks, recording=None, observe=None, baseline=None, *,
+            script_phase='script.tick', heap_mode=None, process_timeout=600, cancel=None):
+    require(heap_mode is None or type(heap_mode) is str and heap_mode in HEAP_MODES,
+            'Unknown requested heap mode')
+    integer(process_timeout, 'process timeout', 1)
+    require(process_timeout <= 600, 'Process timeout exceeds 600 seconds')
+    require(cancel is None or callable(cancel), 'Cancellation check must be callable')
+    if cancel is not None:
+        cancel()
     machine = mac_identity()
+    if cancel is not None:
+        cancel()
     package = package.absolute()
     player, exported, identities, rate = package_inputs(package)
+    if cancel is not None:
+        cancel()
     phase_selection(script_phase, identities['program'])
     require(baseline is None or script_phase == 'script.tick',
             'Static-module timing has no TypeScript regression baseline policy')
@@ -284,27 +297,45 @@ def measure(package, output, ticks, recording=None, observe=None, baseline=None,
     for name, data in inputs.items():
         (output / (name + '.json')).write_bytes(data)
     argv = [str(player), '--package', str(player.parent / 'data'), '--ticks', str(ticks),
-            '--output', str(output / 'output.pcm'), '--profile', *ui_options]
+            '--output', str(output / 'output.pcm'), '--profile']
+    if heap_mode == 'detailed':
+        argv.append('--profile-heap-detail')
+    argv += ui_options
     for name, flag in [('input', '--input-recording'), ('observe', '--observe')]:
         if name in inputs:
             argv += [flag, str(output / (name + '.json'))]
     environment = {'PATH': str(player.parent), 'TMPDIR': str(output)}
     started = time.time_ns()
     receipt = {'argv': argv, 'cwd': str(player.parent), 'environment': environment,
-               'started_ns': started, 'load_average_before': os.getloadavg(), 'exit': None}
+               'started_ns': started, 'load_average_before': os.getloadavg(), 'exit': None,
+               'timeout_seconds': process_timeout}
+    if heap_mode is not None:
+        receipt['requested_heap_mode'] = heap_mode
     try:
         with (output / 'stdout.json').open('xb') as stdout, (output / 'stderr.log').open('xb') as stderr:
+            cancellation = {'cancel': cancel} if cancel is not None else {}
             result = native_process.run(argv, cwd=player.parent, env=environment,
-                                        stdout=stdout, stderr=stderr, timeout=600)
+                                        stdout=stdout, stderr=stderr, timeout=process_timeout, **cancellation)
+        if cancel is not None:
+            cancel()
         receipt['exit'] = result.returncode
         require(result.returncode == 0, 'Player failed; retained stdout/stderr contain diagnostics')
         report = json.loads(read(output / 'stdout.json', 16 * 1024**2))
         require(not read(output / 'stderr.log', 1024**2), 'Unexpected player diagnostics')
         require('observe' not in inputs or report['observations']['passed'] is True, 'Game observation failed')
+        instrumentation = profile_instrumentation(report)
+        if heap_mode is not None:
+            require(instrumentation['profile_version'] == 3
+                    and instrumentation['quickjs_heap_mode'] == heap_mode,
+                    'Returned heap instrumentation differs from requested mode')
         values = metrics(report, ticks, script_phase=script_phase)
         require(package_inputs(package)[2] == identities, 'Package changed during execution')
+        if cancel is not None:
+            cancel()
         require(mac_identity() == machine, 'Mac configuration changed during execution')
-        match['profile_instrumentation'] = profile_instrumentation(report)
+        if cancel is not None:
+            cancel()
+        match['profile_instrumentation'] = instrumentation
         result = {'format': 'incant-mac-cpu-measurement', 'version': 2, 'match': match,
                   'identities': identities, 'metrics': values, 'script_phase': script_phase,
                   'profile_report_sha256': digest(read(output / 'stdout.json', 16 * 1024**2)),
@@ -338,6 +369,11 @@ if __name__ == '__main__':
     parser.add_argument('--observe', type=Path)
     parser.add_argument('--baseline', type=Path)
     parser.add_argument('--script-phase', choices=SCRIPT_PHASES, default='script.tick')
+    parser.add_argument('--heap-mode', choices=HEAP_MODES,
+                        help='Require explicit profile v3 heap mode; omission preserves legacy ingestion')
+    parser.add_argument('--process-timeout', type=int, default=600)
     args = parser.parse_args()
-    measured = measure(args.package, args.output, args.ticks, args.input_recording, args.observe, args.baseline, script_phase=args.script_phase)
+    measured = measure(args.package, args.output, args.ticks, args.input_recording, args.observe, args.baseline,
+                       script_phase=args.script_phase, heap_mode=args.heap_mode,
+                       process_timeout=args.process_timeout)
     print(json.dumps({'measurement': str(args.output / 'measurement.json'), 'comparison': measured['comparison']}))

@@ -1,0 +1,104 @@
+{
+  "format": "incant-heap-observation-protocol-proposal",
+  "version": 1,
+  "status": "source-only; no build or timing authorized",
+  "accepted_producer": "717c48ba45c8d149d6a7106fc81b5767554f934e",
+  "implementation_source": "1b20ad5a9a772d334cb03a4ee1572627813454fa",
+  "accepted_base": "62a3d09ff7d8ae7282c57bc49620950650337b7c",
+  "candidate_source_rule": "Exact current-main profiler intake must be supplied, source/relevance frozen and independently reviewed before the one build. No guessed main/head or mutable branch reference. Both arms use that exact same resulting binary and package.",
+  "historical_anchor": {
+    "source": "03bc4b987f3e553249846c4cfce991793d4d2c48",
+    "player_sha256": "a2794edcc1e7b21db3291eebb76cb2cf923290cc18005f91b023fe4de27fa361",
+    "freeze": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/freeze.json",
+    "freeze_sha256": "7c60e652f6f54784b0c7410c62555fae57848bed7edc523d34dc2586900b4bf8",
+    "comparison": "Functional unchanged-workload anchor only; profilev2 timings remain historical. No schema bridge or cross-version5percent result."
+  },
+  "workload": {
+    "input_receipt": "/Users/andreyyurlov/.codex/incant-evidence/core-script-stress-001/fast-stress-002/shipping-inputs.json",
+    "input_receipt_sha256": "39008276b6de9285bb8368519c784e4ce330207de337c7d3eba4b2df86f97e00",
+    "project_sha256": "027621691da3043e25cd30a02c76a8fb92f1a4464448c3c6c7d04e6f8b38c30b",
+    "gameplay_sha256": "f471293cf6a3b6a355f0f2c8ec6406bf5f3942f438411121b2e63ae6e6f31095",
+    "stress_sha256": "7285e9009633052ba86ee0996c87f58097eb47fdaf0a73df10f42597b0119f1a",
+    "authoring_files": 74,
+    "scripted_entities": 10000,
+    "sources": 2,
+    "ticks": 2156,
+    "tick_rate": 60,
+    "physics_mode": "fast",
+    "input_sha256": "4fbfffad568d1b7b8eae3b7b9041579fce6f0e8e67c83a66f76c9f78a1c5fcbf",
+    "observe_sha256": "36915362c461c0772414c2b97aa80d522b6ada851e94e0ca718057d700e1f89b",
+    "ui_viewport": "640x480",
+    "sample_rate": 48000
+  },
+  "build": {
+    "count": 1,
+    "target": "aarch64-apple-darwin",
+    "profile": "shipping",
+    "rust": "1.99.0",
+    "jobs": 2,
+    "rayon_threads": 2,
+    "offline": true,
+    "locked": true,
+    "export_profiling": "summary",
+    "source_free_package": true,
+    "target_assignment": "Requires explicit lease and free-space review; no target allocated by this proposal."
+  },
+  "functional_controls": {
+    "historical_anchor": "Rehash and compare the existing full unprofiled report/PCM and existing Core-win/stress observations. Re-run old binary only if separately authorized; no reuse as current timing.",
+    "candidate_runs": [
+      "unprofiled",
+      "detailed",
+      "maintained"
+    ],
+    "each_ticks": 2156,
+    "required": "Identical full reports after removing only profile and exact PCM bytes/hash; preserve every failure; verify package/source before and after."
+  },
+  "timing": {
+    "order": [
+      "D0",
+      "M0",
+      "M1",
+      "D1",
+      "D2",
+      "M2"
+    ],
+    "fresh_processes": true,
+    "warmup_excluded": 0,
+    "samples_per_process": 2156,
+    "retries": 0,
+    "per_process_timeout_seconds": 45,
+    "whole_sequence_bound_seconds": 300,
+    "quiet_grant_required": true,
+    "D_argv_suffix": [
+      "--profile",
+      "--profile-heap-detail"
+    ],
+    "M_argv_suffix": [
+      "--profile"
+    ],
+    "mode_identity_must_match_request": true,
+    "instrumentation_version": {
+      "profile": 3,
+      "heap": 1,
+      "sampling": "script_tick_end_per_vm"
+    },
+    "baseline_selection": "M0, fixed before execution, never fastest/best-of; retained even if gate fails. D0 anchors detailed repetition context.",
+    "cross_mode_policy": "Descriptive difference between independently observed quantile intervals only. Never call strict comparison across modes or remove identity fields.",
+    "same_mode_repeat_policy": "Strict mac_performance comparison M1/M0, M2/M0 and D1/D0, D2/D0, labeled repeated-run stability rather than engine improvement."
+  },
+  "metrics": {
+    "script_phase": "script.tick",
+    "script_budget_ns": 2000000,
+    "regression_percent": 5,
+    "gate_scope": "Per-mode all-frame script.tick p95 includes host setup, callbacks, validation/cleanup/commit and the selected heap observation. No subtracting telemetry or callback means.",
+    "callback_context": "Existing ordered-source wall and threadCPU totals /2156; require exactly2source rows,2156calls each,0unwind/unavailableCPU. These are means, not callbackp95, and do not establish a guest-loop improvement.",
+    "heap": "2156VM observations,0invalid; detailed2156detail samples,maintained0; retained logical counter limits32MiB, estimates nullable only for maintained; maxima sampled only.",
+    "phase_gate_passed": false
+  },
+  "required_prelaunch": [
+    "Exact current-main candidate SHA and immutable export/tool/SDK/vendor/lock closure",
+    "Reviewed minimal explicit heap-mode runner seam; default comparison identity checks unchanged",
+    "Actual fresh player/package/compiler/features/artifacts, fresh cook buildID and raw functional parity",
+    "Final executable runner/plan hashes and all-lane quiet acknowledgments; no builds/GPU/heavyIO during timing"
+  ]
+}
