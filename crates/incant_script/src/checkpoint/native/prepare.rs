@@ -32,6 +32,9 @@ impl NativeSessionCheckpoint {
         allocations: &mut CheckpointAllocationBudget,
     ) -> Result<PendingSessionCheckpoint> {
         let host = host(current)?;
+        if !host.haptic_requests.is_empty() {
+            return Err(CheckpointError::Unsupported("pending haptic output"));
+        }
         if host.session_request.is_some() {
             return Err(CheckpointError::Unsupported(
                 "pending session restart request",

@@ -1,0 +1,57 @@
+{
+  "reviewer": "astra/runtime_review",
+  "reviewed_at": "2026-10-14T00:00:17.056968+00:00",
+  "verdict": "accepted scoped source and CPU evidence; no actionable findings",
+  "packet_head": "08abf8af1fa21f8b6660d1a0918bb9deebb35650",
+  "source_head": "44b9aead71fe83252445264adb597f51b984843b",
+  "source_freeze_sha256": "f5bd516f8e6348cd6368611971a5618938134383742d82a6a970f91b367c10df",
+  "manifest_sha256": "db1b684500796fa235075d5d60d5831e4ca31ef7049d81ef4dd57c82b865f36f",
+  "archive_sha256": "4cb520f9e96b9319448ab630ce87795830e4faa6571bf2cb592d1d0f1685e9ee",
+  "collector_sha256": "fb622657ad04ede374ebd6b591471abad2dbdc7acbf34743b2aa35d230b09b08",
+  "independent_audit": {
+    "argv": [
+      "python3",
+      "docs/spikes/evidence/native-haptics/collect.py",
+      "--verify-only",
+      "--local-binaries"
+    ],
+    "exit": 0,
+    "log_sha256": "cee3dee0e159284a859503f1802a9a796baeb292a92bf15fc31c7afce6bf8d71",
+    "integrity_receipt_sha256": "b50effde8a31e329ffb0b2ae798c05868e86fb0988c873a0b77a0173e78f0ab6",
+    "records": 266,
+    "payloads": 149,
+    "source_inputs": 3839,
+    "final_source_rows": 33,
+    "immediate_executable_copies": 46,
+    "commands": 31,
+    "successful": 28,
+    "historical_failures": 3,
+    "receipt_pids_currently_absent": true
+  },
+  "reviewed_contracts": [
+    "Typed finite/generation-sensitive current authority and fixed32 request storage; shared65536 command quota with active/caught/reentrant transaction refusal.",
+    "Source005 preserves historical pure structural post-parse BufferFull while mixed request families enforce the combined quota; actual mixed reentrant control rejects complete numeric prefix.",
+    "Requests publish only after script structural and composed audio/host acceptance; failed sessions cannot drain. Pending output prevents advancement or checkpoint replacement; suspension and restored authority are neutral.",
+    "Desktop slots/effects/creation attempts are bounded; validate entire batch before coalesced driver calls; reconnect/suspension generations invalidate; repeated cleanup retains stop error.",
+    "Static-module enabling explicitly refuses using the ordinary-cooked no-op fixture. Wasmtime compatibility is compile-only. SDK signatures match typed runtime variants.",
+    "Pinned Gilrs0.11.2 source and documented50ms quantization/process-lifetime worker semantics reviewed; no lock/manifest/dependency changes.",
+    "Read collector before execution; all originals independently matched archive; current3839 inputs matched recorded source; clean docs-only main253 ancestry preserved."
+  ],
+  "observed_counts": {
+    "script_library_final": 152,
+    "script_hosted": 20,
+    "game": 44,
+    "input": 29,
+    "window_input": 53,
+    "desktop_focused": 6,
+    "fast_script_focused": 10,
+    "fast_game_focused": 1
+  },
+  "limits": [
+    "Counts overlap across generations and subsets; not summed as unique tests.",
+    "No reviewer engine build or device/window/GPU execution. No physical actuator, driver delivery, mobile or reference-phone/performance acceptance.",
+    "Gilrs worker is process-lifetime, not joined on host drop; backend asynchronous channel allocations/delivery/timing are not bounded by engine request limits.",
+    "Static/development Wasm haptic execution parity and mobile actuator adapters remain unsupported.",
+    "Historical no-op-fixture trap, strict Clippy lint and pure structural diagnostic regression are preserved with their successful corrections."
+  ]
+}

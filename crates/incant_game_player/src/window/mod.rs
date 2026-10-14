@@ -2,6 +2,7 @@
 //! game session and retained GPU consumer remain the sole simulation path.
 mod clock;
 mod gamepad;
+mod haptics;
 mod ime;
 mod input;
 mod probe;
@@ -45,6 +46,12 @@ pub enum Error {
     InputCapability,
     #[error("native gamepad backend initialization failed")]
     GamepadBackend,
+    #[error("native gamepad haptic backend rejected the request")]
+    HapticBackend,
+    #[error("native gamepad haptic generation exhausted")]
+    HapticGeneration,
+    #[error(transparent)]
+    HapticRequest(#[from] incant_input::haptics::HapticError),
     #[error(transparent)]
     GamepadInput(#[from] incant_input::InputError),
     #[error("native pointer position must be finite and within one million pixels")]
@@ -228,6 +235,7 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                     }
                     WindowEvent::Focused(value) => {
                         if !value && !suspended {
+                            gamepads.pause_haptics()?;
                             game.set_suspended(true)?;
                             suspended = true;
                             clock.reset(Instant::now());
@@ -238,6 +246,7 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                         gamepads.discard_pending();
                     }
                     WindowEvent::Suspended => {
+                        gamepads.pause_haptics()?;
                         platform_suspended = true;
                         if has_ui {
                             input.reset_focus(false);
@@ -293,6 +302,7 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                         }
                         if !surface.reserve(&renderer)? {
                             if !suspended {
+                                gamepads.pause_haptics()?;
                                 game.set_suspended(true)?;
                                 suspended = true;
                                 ui_input.defer_surface();
@@ -335,6 +345,7 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                             gamepads.discard_pending();
                         }
                         if !suspended {
+                            gamepads.pause_haptics()?;
                             game.set_suspended(true)?;
                             suspended = true;
                             input.reset_focus(focused);
@@ -398,6 +409,7 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                         for _ in 0..due {
                             if !surface.reserve(&renderer)? {
                                 if !suspended {
+                                    gamepads.pause_haptics()?;
                                     game.set_suspended(true)?;
                                     suspended = true;
                                     if has_ui {
@@ -428,6 +440,9 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                                 ui_input.resume(&mut input, focused);
                                 gamepads.synchronize(&mut input)?;
                             }
+                            if game.supports_haptics()? {
+                                game.set_haptic_capabilities(gamepads.haptic_capabilities())?;
+                            }
                             let events = controls.filter(input.events())?;
                             crate::profile::frame(|| -> session::Result<()> {
                                 let result = if has_ui {
@@ -450,7 +465,9 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                             redraw_pending = false;
                             host_steps = host_steps.checked_add(1).ok_or("host step exhausted")?;
                             let restart = game.take_session_request()?.is_some();
+                            let haptics = game.take_haptics()?;
                             if restart {
+                                gamepads.pause_haptics()?;
                                 let _profile =
                                     incant_profile::scope(incant_profile::Phase::Restart);
                                 let next = generation
@@ -488,6 +505,9 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                                 ui_resize = false;
                                 clock.reset(now);
                             }
+                            if !restart {
+                                gamepads.haptics(&haptics)?;
+                            }
                             if options.stop_after.is_some_and(|n| host_steps >= n) {
                                 *exit = true;
                             }
@@ -514,6 +534,8 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
             Ok(())
         });
         *flow = if termination.requested() {
+            // Cleanup is attempted even after an earlier composed failure.
+            let _ = gamepads.pause_haptics();
             ControlFlow::Exit
         } else {
             ControlFlow::WaitUntil(if suspended {
@@ -525,6 +547,7 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
     });
     surface.cancel();
     termination.finish(code, || {
+        gamepads.pause_haptics()?;
         if has_ui && let Some((serial, enabled)) = ui_input.text_session(None, false)? {
             window
                 .set_text_input_session(serial, enabled)

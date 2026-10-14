@@ -632,3 +632,51 @@ fn restart_drops_previous_host_before_new_prepare_and_failure_is_terminal() {
         }
     }
 }
+
+#[test]
+fn haptics_publish_only_after_host_acceptance_and_suspend_clears_ephemeral_authority() {
+    use incant_input::haptics::{HapticCapabilities, HapticError};
+    let caps = HapticCapabilities::default().with_gamepad(0, 3).unwrap();
+    let script = || {
+        CompiledScript::compile("exports.default={update({commands}){const targets=commands.hapticCapabilities();if(targets.length)commands.playHaptic(targets[0],{kind:'rumble',strong:0.5,weak:1,durationMs:125})}}").unwrap()
+    };
+    for outcome in [Outcome::Accept, Outcome::Reject, Outcome::Panic] {
+        let mut session = HostedOfflineGameSession::<Host>::new(
+            spatial::scenes()[1].clone(),
+            script(),
+            InputActions::default(),
+            vec![],
+            44117,
+            HostSettings {
+                sync: outcome,
+                ..Default::default()
+            },
+        )
+        .unwrap();
+        session.set_haptic_capabilities(caps).unwrap();
+        let mut output = vec![0.; session.next_output_frames().unwrap() * 2];
+        let result = catch_unwind(AssertUnwindSafe(|| session.tick(&[], &mut output)));
+        if matches!(outcome, Outcome::Accept) {
+            result.unwrap().unwrap();
+            let tick = session.world().unwrap().tick();
+            assert!(matches!(
+                session.tick(&[], &mut output),
+                Err(GameError::Session(SessionError::Script(
+                    incant_script::ScriptError::Haptics(HapticError::Pending)
+                )))
+            ));
+            assert_eq!(session.world().unwrap().tick(), tick);
+            assert_eq!(session.take_haptics().unwrap().len(), 1);
+            session.tick(&[], &mut output).unwrap();
+            session.set_suspended(true).unwrap();
+            assert!(session.take_haptics().unwrap().is_empty());
+            session.set_suspended(false).unwrap();
+            let mut output = vec![0.; session.next_output_frames().unwrap() * 2];
+            session.tick(&[], &mut output).unwrap();
+            assert!(session.take_haptics().unwrap().is_empty());
+        } else {
+            assert!(!matches!(result, Ok(Ok(()))));
+            assert!(matches!(session.take_haptics(), Err(GameError::Failed)));
+        }
+    }
+}
