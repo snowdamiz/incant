@@ -69,3 +69,33 @@ evidence, not acceptance. The PNGs use a CPU transcription of Incant's display
 transform and exclude current-only overlays; they are not exact final display
 captures. The next controlled comparison changes only the diagnostic jitter
 sequence to match the reference's expected sample coverage at this scale.
+
+## Matched sample-sequence comparison
+
+005 and 006 extend each stationary/moving case to 64 frames. Both execute the
+same frozen test binary (`2c2b0fee2af07cc9e67a6c89a49e228590f2dd606ccccd811f6e2370a6295fad`)
+and source freeze (`b37ec9f2dc550eda54e71e72cac52f2949f93624481f0e54a8f84d42fe67dedf`).
+005 uses Incant's eight offsets; 006 uses the reference's 32-phase Halton(2,3)
+sequence with the sign conversion required by Incant's projection. The override
+is test-only, thread-local and guarded; CPU controls verify restoration, other
+thread isolation and phase wrapping. Production remains on its existing sequence.
+
+Each successful Metal run retains 128 frames, 256 submissions, 128 maps, 18 PNGs
+and 1,273,626,624 raw bytes. The 005 build, CPU controls and strict lint pass;
+006 explicitly reuses that copied binary without claiming another build. Both
+supervisors are terminal and all owned processes are reaped. The external six
+shaders, exposure, history limit and resource configuration are unchanged.
+
+Root inspected both stationary frame 64 outputs and moving frames 24/64. Changing
+sample coverage does not cure the breakup of thin geometry or the broad moving
+texture aliasing. This eliminates the proposed sequence-only repair; neither
+result is accepted. The 005/006 outputs respectively contain 1,073/1,169 negative
+RGB pixel observations and 48,043/49,081 nonzero-RGB observations at zero alpha;
+minimum RGB is -0.000691414/-0.004730225. These are counts across frames, not
+unique scene pixels. Raw signed values remain retained. The external reference
+still fails Incant's premultiplied-domain expectations and is not adopted.
+
+`reconstruction-reference-gpu-006/matched-jitter-summary.json` records the matched
+identities, phase counts, PNG identity checks and observations. This is private
+algorithm investigation; it establishes no current-main, final-display, shipping
+performance, phase or release result.

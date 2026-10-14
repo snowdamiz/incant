@@ -234,7 +234,7 @@ impl History {
                     .and_then(|a| a.frame.phase)
                     .ok_or(MotionError::Topology)?
                     + 1)
-                    % 8
+                    % crate::temporal::jitter::phase_count(pending.frame.upscaled)
             } else {
                 0
             };

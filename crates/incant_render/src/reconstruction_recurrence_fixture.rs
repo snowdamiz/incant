@@ -391,6 +391,26 @@ fn color_range(raw: &[u8]) -> Value {
 }
 #[test]
 fn recurrence_fixture_layout_and_display_controls() {
+    let ordinary = crate::temporal::jitter::offset(0, true);
+    {
+        let _guard = crate::temporal::jitter::DiagnosticHalton32::begin();
+        assert_eq!(crate::temporal::jitter::phase_count(true), 32);
+        assert_eq!(crate::temporal::jitter::phase_count(false), 8);
+        let first = crate::temporal::jitter::offset(0, true);
+        assert_eq!(first[0], 0.);
+        assert!((first[1] - 1. / 6.).abs() < 1e-7);
+        assert_ne!(crate::temporal::jitter::offset(8, true), first);
+        assert_eq!(crate::temporal::jitter::offset(32, true), first);
+        // A different host thread must never inherit this test's override.
+        assert_eq!(
+            std::thread::spawn(|| crate::temporal::jitter::phase_count(true))
+                .join()
+                .unwrap(),
+            8
+        );
+    }
+    assert_eq!(crate::temporal::jitter::phase_count(true), 8);
+    assert_eq!(crate::temporal::jitter::offset(0, true), ordinary);
     let p = planes();
     assert_eq!(p[0].stride, 7680);
     assert_eq!(p[1].offset, 4_147_200);
@@ -411,6 +431,17 @@ fn actual_scene_recurrence_comparison() {
     assert_eq!(renderer.adapter.get_info().backend, wgpu::Backend::Metal);
     let external =
         std::env::var("INCANT_RECURRENCE_ABLATION").as_deref() == Ok("external-reference");
+    let halton32 = match std::env::var("INCANT_REFERENCE_JITTER").as_deref() {
+        Err(std::env::VarError::NotPresent) | Ok("incant8") => false,
+        Ok("halton32") if external => true,
+        other => panic!("unknown diagnostic jitter: {other:?}"),
+    };
+    let _jitter_guard = halton32.then(crate::temporal::jitter::DiagnosticHalton32::begin);
+    let frame_count = match std::env::var("INCANT_REFERENCE_FRAMES").as_deref() {
+        Err(std::env::VarError::NotPresent) | Ok("24") => 24,
+        Ok("64") if external => 64,
+        other => panic!("unknown diagnostic frame count: {other:?}"),
+    };
     let (ablation, cubic, lock, nearest, coarse) =
         match std::env::var("INCANT_RECURRENCE_ABLATION").as_deref() {
             Err(std::env::VarError::NotPresent) | Ok("recurrence") => {
@@ -447,7 +478,7 @@ fn actual_scene_recurrence_comparison() {
         let mut scene = variant(&renderer, &input, &stage.camera, Some(HALF), Variant::Up);
         let slots: [Slot; 2] = std::array::from_fn(|_| Slot::new(&renderer.device, OUTPUT));
         let mut previous_jitter = [0_f32; 2];
-        for frame in 1..=24 {
+        for frame in 1..=frame_count {
             stage.pose(&mut input, if moving { frame } else { 1 });
             scene
                 .submit(
@@ -465,6 +496,10 @@ fn actual_scene_recurrence_comparison() {
             submissions += 1;
             let state = scene.upscale_frame().unwrap();
             let jitter = state.motion().jitter_offset().unwrap();
+            assert_eq!(
+                state.motion().jitter_phase(),
+                Some((frame - 1) % if halton32 { 32 } else { 8 })
+            );
             assert_eq!(state.motion().has_previous(), frame > 1);
             let history = scene
                 .upscaling
@@ -619,7 +654,8 @@ fn actual_scene_recurrence_comparison() {
             } else {
                 None
             };
-            let capture = frame == 8 || frame == 24 || (!moving && frame == 1);
+            let capture =
+                frame == 8 || frame == 24 || frame == 32 || frame == 64 || (!moving && frame == 1);
             if capture {
                 for (i, name) in ["candidate", "baseline"].into_iter().enumerate() {
                     images.push(png(
@@ -651,9 +687,23 @@ fn actual_scene_recurrence_comparison() {
             }
         }
     }
-    assert_eq!((submissions, maps, images.len()), (96, 48, 10));
+    assert_eq!(
+        (submissions, maps, images.len()),
+        (
+            frame_count * 4,
+            frame_count * 2,
+            if frame_count == 24 { 10 } else { 18 }
+        )
+    );
     let report = json!({"schema":"incant-recurrence-experiment-v1","adapter":describe(&renderer),"output":OUTPUT,"source":SOURCE,"configuration":policy(),"submissions":submissions,"maps":maps,"experimental_resolves":48,"history_initialization_passes":2,"extra_history_bytes":24_883_200,"readback_bytes":total,"raw_bytes":total*48,"frames":rows,"images":images,"shader_sha256":hex(SHADER.as_bytes()),"tone_map_sha256":hex(include_bytes!("tone_map.wgsl")),"output_shader_sha256":hex(include_bytes!("output.wgsl")),"scope":"Test-only ordinary recurrence over actual UP scene inputs; CPU tone conversion excludes current-only overlays and is not exact production display. No performance or appearance acceptance."});
     let mut report = report;
+    report["experimental_resolves"] = json!(frame_count * 2);
+    report["raw_bytes"] = json!(total * u64::from(frame_count) * 2);
+    report["diagnostic_jitter"] = json!(if halton32 {
+        "negative_halton_2_3_32"
+    } else {
+        "incant_stratified_8"
+    });
     report["rectification"] = json!(if ablation {
         "disabled_for_diagnosis_only"
     } else {
@@ -664,9 +714,9 @@ fn actual_scene_recurrence_comparison() {
             "upstream": "https://github.com/pmndrs/upscaler",
             "commit": "96184a6812bc5fd5e5fd7898257788a1663105a9",
             "algorithm_modified": false,
-            "dispatches": 48 * 7,
+            "dispatches": frame_count * 2 * 7,
             "input_adapter": "Incant jittered previous-current UV to unjittered current-previous; opposite jitter convention; invalid vectors zeroed",
-            "settings": "fixed exposure 1, max accumulation 24, thin locks and shading detector enabled, no sharpening, existing Incant eight-phase jitter",
+            "settings": "fixed exposure 1, max accumulation 24, thin locks and shading detector enabled, no sharpening; sequence recorded in diagnostic_jitter",
             "cold_equality_required": false,
             "auxiliary_planes": "Incant recurrence path; NOT external reference state",
             "limits": "Test-only external reference. No production adoption, invalid-motion/alpha conformance, performance or memory admission claim."
@@ -703,7 +753,10 @@ fn actual_scene_recurrence_comparison() {
         assert_eq!(nonzero_lock_samples, 0);
     }
     println!(
-        "RECURRENCE_EXPERIMENT frames=48 submissions=96 maps=48 resolves=48 pngs=10 adapter={:?}",
+        "RECURRENCE_EXPERIMENT frames={} submissions={submissions} maps={maps} resolves={} pngs={} adapter={:?}",
+        frame_count * 2,
+        frame_count * 2,
+        images.len(),
         renderer.adapter.get_info()
     );
 }

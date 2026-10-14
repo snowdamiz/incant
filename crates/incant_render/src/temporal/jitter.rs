@@ -26,8 +26,51 @@ pub(crate) const UPSCALE_SAMPLES: [[f32; 2]; 8] = [
     [0.1875, -0.0625],
 ];
 pub(crate) fn offset(phase: u32, upscaled: bool) -> [f32; 2] {
+    #[cfg(test)]
+    if upscaled && DIAGNOSTIC_HALTON_32.get() {
+        // Opposite sign to the external reference, matching Incant's projection
+        // convention. This override is reachable only in the ignored diagnostic.
+        let halton = |mut index: u32, base: u32| {
+            let mut value = 0.;
+            let mut fraction = 1. / base as f32;
+            while index > 0 {
+                value += (index % base) as f32 * fraction;
+                index /= base;
+                fraction /= base as f32;
+            }
+            value
+        };
+        let index = phase % 32 + 1;
+        return [0.5 - halton(index, 2), 0.5 - halton(index, 3)];
+    }
     let samples = if upscaled { &UPSCALE_SAMPLES } else { &SAMPLES };
     samples[phase as usize % samples.len()]
+}
+pub(crate) fn phase_count(_upscaled: bool) -> u32 {
+    #[cfg(test)]
+    if _upscaled && DIAGNOSTIC_HALTON_32.get() {
+        return 32;
+    }
+    8
+}
+#[cfg(test)]
+thread_local! {
+    static DIAGNOSTIC_HALTON_32: std::cell::Cell<bool> = const { std::cell::Cell::new(false) };
+}
+#[cfg(test)]
+pub(crate) struct DiagnosticHalton32;
+#[cfg(test)]
+impl DiagnosticHalton32 {
+    pub(crate) fn begin() -> Self {
+        assert!(!DIAGNOSTIC_HALTON_32.replace(true));
+        Self
+    }
+}
+#[cfg(test)]
+impl Drop for DiagnosticHalton32 {
+    fn drop(&mut self) {
+        DIAGNOSTIC_HALTON_32.set(false);
+    }
 }
 pub(crate) fn ndc_offset(p: [f32; 2], rect: [f32; 4]) -> [f32; 2] {
     [2. * p[0] / rect[2], -2. * p[1] / rect[3]]
