@@ -5,7 +5,9 @@ and checks retained opaque entity tokens directly. The current-main composition
 contains exactly the six reviewed Rust source/test paths from producer
 `03bc4b987f3e553249846c4cfce991793d4d2c48`. Independent source and CPU reviews are
 retained in the [portable packet](evidence/numeric-loan-main262/manifest.json).
-Final integrated publication review is pending.
+Final integrated review is independently accepted; publication requires the
+exact-head development check. The unchanged-tree ancestry merge preserves the
+reviewed original producer objects for Git-source replay.
 
 ## Correctness and current composition
 

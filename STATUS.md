@@ -9,7 +9,8 @@ build inputs match the current composition. Actual unchanged-workload Core
 shipping script p95 improves to 2.250001–2.370000 ms across three pairs; all 5%
 comparison checks pass, while all three 2 ms gates still fail. Full nonprofile
 reports and PCM match; QuickJS heap peaks are unchanged. Portable raw evidence is
-prepared and final integration review is pending. Main262 includes the prior
+prepared and final integration review is independently accepted; publication
+awaits its exact-head fast check. Main262 includes the prior
 Core sample and AOT packets; release30 is unchanged. No phase/FPS/GPU claim.
 [Evidence](docs/spikes/numeric-loan-main262.md).
 
