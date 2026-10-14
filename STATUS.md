@@ -1,6 +1,18 @@
 # Implementation status
 
-## Project Save and engine-pin UI — locally qualified main278 composition
+## CI renderer smoke revision repair — local qualification
+
+The renderer helper now carries its first command revision into the reopened
+second RPC session and retains structured failures, including an absent native
+code field. All render/geometry assertions remain. Nine Python controls and
+four actual RPC protocol processes pass; root separately passes the complete
+Mac renderer helper on the retained historical application executable. This
+does not relabel the binary as current whole-runtime source. Checkpoint35's
+Linux failure is retained; hosted repair execution is pending. No new build,
+shipping timing, visual approval or phase gate is included.
+[Cause, scope and replay](docs/spikes/render-smoke-revision.md).
+
+## Project Save and engine-pin UI — merged through PR279
 
 The native project menu now exposes Save/Command-S and host-issued engine-pin
 review/apply. Project changes retire stale results, and transport uncertainty
@@ -9,7 +21,8 @@ bounded design is retained with separately reviewed Astra correctness repairs.
 All 973 UI tests pass; 30 browser states and five flows report zero accessibility
 violations or errors. Actual Mac Tauri/WebKit checks verify save/reopen, a
 read-only legacy review, exact candidate bytes, backup and undo/redo. These
-changes are locally qualified and not yet merged. Older-format conversion and
+changes merged through PR279 after exact-head fast SUCCESS; the merged tree
+matches the tested tree. Older-format conversion and
 phase gates remain open. [Evidence](docs/spikes/project-file-ui-main278.md).
 
 ## Native script undo capacity reuse — source qualified
