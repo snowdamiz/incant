@@ -1,9 +1,10 @@
-# Correlated full-Core script attribution (source proposal)
+# Correlated full-Core script attribution (private diagnostic)
 
 This private diagnostic starts from main281
 `dfac86cb17e9a1dd71d63207d779b3836e7ad6ae`. Main282 changes documentation only.
-The rejected ordered-query implementation is absent. No native build, execution,
-timing, performance improvement, or gate result is claimed for this source.
+The rejected ordered-query implementation is absent. Focused CI qualification
+is recorded below. No private shipping build, full-Core diagnostic execution,
+timing, performance improvement, or gate result is claimed.
 
 The retained main278-player B0/B1/B2 runs from the ordered-query comparison have
 mean whole ScriptTick 1.4715–1.4805 ms, actual source callbacks 1.1255–1.1345 ms,
@@ -86,7 +87,8 @@ Authored controls cover exact same-frame duration correspondence, complete
 partition/nested containment, missing/nested/retired/foreign-thread traces,
 unwind, storage overflow and checked arithmetic. An actual ScriptHost control
 observes successful writes plus view detachment, then NaN refusal with complete
-numeric rollback and detached retained views. These controls have **not run**.
+numeric rollback and detached retained views. These observer controls passed the
+focused qualification below; the later private adapter is still source-only.
 
 ## Proposed qualification and one-process protocol
 
@@ -129,3 +131,38 @@ breaking), callback source identities, counts and residuals. This identifies a
 candidate cost center; it is not a 2 ms, 5%, speedup, or adoption test. Any later
 optimization needs correctness review and the original unmodified shipping gate
 protocol. The normal route keeps the failed 2 ms result until such evidence exists.
+
+## Focused observer qualification
+
+Reviewed source `e0569895` was followed by an explicit normal-reader refusal
+control (`20072ef5`), a test-only redundant-borrow correction (`60ff5538`), and
+formatter-only module ordering (`a4c4cc43`). The first strict Clippy failure and
+subsequent formatting failure remain retained; neither was a runtime failure.
+All production hook logic is unchanged from the reviewed source.
+
+Retained CI controls passed: 22 Python reader tests; 8 diagnostic profile unit
+tests; one actual ScriptHost success/NaN rollback/view-detachment test; ordinary
+profile 11 tests plus its dedicated allocation process; disabled profile 2 tests;
+ordinary runtime 27 and script 151 tests, with one pre-existing diagnostic ignored.
+Capture-owning tests ran single-threaded. Both feature-on/off strict all-target
+Clippy, final fmt and diff checks pass. Ordinary runtime/script controls were not
+repeated after the test-only borrow and module-order corrections.
+
+Actual target compiler records confirm normal player/script/runtime/profile
+units omit the diagnostic feature and the script runtime omits its source
+compiler and native checkpoints. This CI-only check selected SIMD8 explicitly;
+it is **not** shipping fast4 parity evidence. The private adapter instead requires
+the retained fast4 exporter selection and actual physics/codegen evidence.
+
+Final observer source freeze is
+`~/.codex/incant-evidence/core-script-attribution-main281-001/source-004/freeze.json`
+(SHA256 `72e706b1037316c23497f114d82794baf70510c4a637c296f78ce7c21a1b498c`).
+The compact qualification receipt is `qualification-final.json` in that directory's
+parent (SHA256 `19bc1d7649a8291f76d23b7cf91b645e55addf02364a47a400c70dcb00b70162`),
+binding 183 records and 13 immediate test-binary copies. Supervisors 26389 and
+19890 retained their initial failures; final 11499 exited zero and was reaped.
+The target and builder slot were released. No exporter or player was run.
+
+The next source-only adapter and its bounded two-stage proposal live in
+`tools/probes/core-script-attribution/README.md`. Its code does not expand the
+existing qualification or authorize a new execution.
