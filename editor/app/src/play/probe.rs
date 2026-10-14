@@ -1,5 +1,7 @@
 //! Opt-in numerical acceptance over the actual editor worker/window. This is not
-//! a rendered-pixel or physical-device performance review. No project mutations.
+//! a rendered-pixel or physical-device performance review. The lifecycle mode
+//! makes no project mutations; the texture mode uses real editor command paths.
+pub(super) mod textures;
 use super::{Action, StartOptions, Status, execute};
 use crate::{Editor, project};
 use serde_json::{Value, json};
@@ -15,13 +17,15 @@ use tauri::Manager;
 pub struct Options {
     output: PathBuf,
     entity: String,
+    textures: bool,
 }
 impl Options {
     pub fn from_args() -> Option<Self> {
         let mut args = std::env::args_os().skip(2);
         match args.next() {
             None => None,
-            Some(flag) if flag == "--play-probe" => Some(Self {
+            Some(flag) if flag == "--play-probe" || flag == "--texture-probe" => Some(Self {
+                textures: flag == "--texture-probe",
                 output: args.next().expect("probe output path").into(),
                 entity: args
                     .next()
@@ -29,7 +33,9 @@ impl Options {
                     .into_string()
                     .expect("UTF-8 entity"),
             }),
-            _ => panic!("expected --play-probe OUTPUT ENTITY after the project path"),
+            _ => panic!(
+                "expected --play-probe or --texture-probe OUTPUT ENTITY after the project path"
+            ),
         }
     }
 }
@@ -238,7 +244,11 @@ pub fn start(app: tauri::AppHandle, editor: Arc<Editor>, options: Options) {
                 .create_new(true)
                 .open(&options.output)
                 .map_err(|e| e.to_string())?;
-            let result = run(&app, &editor, &options);
+            let result = if options.textures {
+                textures::run(&app, &editor, &options)
+            } else {
+                run(&app, &editor, &options)
+            };
             let report = match &result {
                 Ok(value) => value.clone(),
                 Err(error) => json!({"passed":false,"error":error}),

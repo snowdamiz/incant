@@ -318,6 +318,42 @@ impl Worker {
             Request::CancelTextures { generation, token } => {
                 self.textures.cancel(token, generation);
             }
+            #[cfg(feature = "play-probe")]
+            Request::ObserveTexture {
+                generation,
+                asset,
+                fingerprint,
+                reply,
+            } => {
+                let result = (|| {
+                    if generation != current {
+                        return Err("Texture probe belongs to an old Play generation".into());
+                    }
+                    let game = self.game.as_ref().ok_or("Start Play first")?;
+                    let world = game.world().map_err(|e| e.to_string())?;
+                    let consumer = game
+                        .consumer()
+                        .map_err(|e| e.to_string())?
+                        .ok_or("Texture probe requires the spatial GPU consumer")?;
+                    let ticket = game.texture_refresh_ticket().map_err(|e| e.to_string())?;
+                    Ok(super::probe::textures::Observation {
+                        identity: world
+                            .spatial_view()
+                            .map_err(|e| e.to_string())?
+                            .identity()
+                            .clone(),
+                        tick: world.tick(),
+                        frames: consumer.accepted_frames(),
+                        recipe_matches: ticket.matches_recipe(
+                            asset,
+                            incant_runtime::VisualAssetKind::Texture,
+                            &fingerprint,
+                        ),
+                        adapter: format!("{:?}", self.renderer.adapter.get_info()),
+                    })
+                })();
+                reply.send(result).map_err(|_| "Texture probe stopped")?;
+            }
         }
         self.status()
     }
