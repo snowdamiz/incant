@@ -12,7 +12,8 @@ import shutil
 import sys
 
 from cost_workload import (HERE, TOOLS, COUNT, BATCH, SCRIPT, TICKS, owner, entity, recording,
-                    observation, json_hash, file_hash, read, require, run, validate_documents, write_json)
+                    observation, json_hash, file_hash, read, require, run, validate_documents, write_json,
+                    module_identity, actions)
 from cost_rpc import Session
 
 
@@ -59,8 +60,7 @@ def prepare(output, binary):
     initial = json.loads(read(base / 'project.json', 1024**2))
     require(len(initial['scenes']) == 1, 'Expected one initialized scene')
     scene = next(iter(initial['scenes']))
-    batches = [('Author matched input', [{'op': 'set_input_actions', 'actions': {
-        'right': {'kind': 'button', 'bindings': [{'type': 'key', 'code': 'ArrowRight'}]}}}])]
+    batches = [('Author matched input', [{'op': 'set_input_actions', 'actions': actions()}])]
     for start in range(0, COUNT, BATCH):
         batches.append((f'Author rows {start}..{start + BATCH - 1}', [
             {'op': 'create_entity', 'scene_id': scene, 'entity': entity(n)} for n in range(start, start + BATCH)]))
@@ -86,8 +86,7 @@ def prepare(output, binary):
     shutil.copy2(guest, output / 'wasm/behavior.wasm')
     wasm_project = output / 'wasm/project.json'
     imported = json.loads(run([binary, 'import', wasm_project, 'behavior.wasm'], output / 'import'))
-    require(imported['asset']['kind'] == 'wasm' and imported['asset']['sha256'] == file_hash(guest),
-            'Public import identity differs')
+    identity = module_identity(imported, file_hash(guest), compiled['sdk']['source_sha256']['sdk/abi/native-v1.json'])
     wasm = transact(binary, wasm_project, output / 'wasm-author', [('Select authored Wasm', [
         {'op': 'set_scene_program', 'scene_id': scene, 'program': {'kind': 'wasm', 'module': imported['asset']['id']}}])])
     validate_documents(ts, wasm)
@@ -95,11 +94,11 @@ def prepare(output, binary):
     for page in range(COUNT // BATCH):
         write_json(output / f'observe-{page}.json', observation(list(range(page * BATCH, (page + 1) * BATCH))))
     write_json(output / 'observe.json', observation([0, COUNT // 2, COUNT - 1], population=True))
-    paths = ['input.json', 'observe.json', *(f'observe-{i}.json' for i in range(4)),
+    paths = ['input.json', 'observe.json', 'import.stdout', *(f'observe-{i}.json' for i in range(4)),
              'typescript/project.json', 'typescript/behavior.ts', 'wasm/project.json', 'wasm/behavior.wasm']
     receipt = {'format': 'incant-wasm-ts-workload', 'version': 1, 'entities': COUNT, 'ticks': TICKS,
                'project_id': ts['id'], 'scene_id': scene, 'binary_sha256': file_hash(binary, 512 * 1024**2),
-               'files': {path: file_hash(output / path) for path in paths}, 'guest': compiled,
+               'files': {path: file_hash(output / path) for path in paths}, 'guest': compiled, 'module': identity,
                'source': {name: file_hash(HERE / name) for name in ('behavior.rs', 'behavior.ts')},
                'public_undo_redo_reopen': True, 'measured': False, 'source_root': str(HERE)}
     write_json(output / 'prepared.json', receipt)

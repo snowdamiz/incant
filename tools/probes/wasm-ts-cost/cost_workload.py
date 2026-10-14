@@ -10,10 +10,11 @@ TOOLS = HERE.parents[1]
 ROOT = TOOLS.parent
 sys.path.insert(0, str(TOOLS))
 import native_process
-from native_package import read, require, write_json
+from native_package import read, require, write_json, key
 
 COUNT, RATE, TICKS, BATCH = 1024, 60, 3600, 256
 ALPHABET = '0123456789ABCDEFGHJKMNPQRSTVWXYZ'
+CAPTURE_POLICY = 'incant-wasm-capture-v1-wabt-1.0.42-fixed-memory-meter-v1'
 
 
 def ident(number):
@@ -41,10 +42,34 @@ def json_hash(value):
     return digest(json.dumps(value, sort_keys=True, separators=(',', ':'), allow_nan=False).encode())
 
 
+def module_identity(imported, guest_sha256, registry_sha256):
+    """Bind the actual public capture; its fingerprint is not the original hash.
+
+    The pinned CapturedModule fingerprint includes policy, registry, original and
+    prepared bytes. This is an evidence check, not an alternate module importer.
+    """
+    asset, details = imported['asset'], imported['details']
+    require(asset['kind'] == 'wasm' and asset['path'] == 'behavior.wasm'
+            and details['input_sha256'] == guest_sha256
+            and details['registry_sha256'] == registry_sha256, 'Public import identity differs')
+    values = {name: key(details[name]) for name in
+              ('input_sha256', 'prepared_sha256', 'registry_sha256')}
+    fingerprint = digest('\0'.join((CAPTURE_POLICY, values['registry_sha256'],
+                                   values['input_sha256'], values['prepared_sha256'])).encode())
+    require(key(asset['sha256']) == fingerprint, 'Captured module fingerprint differs')
+    return {'fingerprint': fingerprint, **values}
+
+
 def entity(index):
     return {'id': owner(index), 'name': f'Matched mover {index}', 'parent': None,
             'provenance': None, 'components': {'Transform': {'translation': [index / 8, 0, 0],
             'rotation': [0, 0, 0, 1], 'scale': [1, 1, 1]}}}
+
+
+def actions():
+    # Explicit native serialized defaults; they do not change button semantics.
+    return {'right': {'kind': 'button', 'threshold': 0.5,
+                      'bindings': [{'type': 'key', 'code': 'ArrowRight', 'scale': [1, 0]}]}}
 
 
 def recording():
@@ -107,8 +132,7 @@ def validate_documents(ts, wasm):
             'Project/scene identities differ')
     require(ts['settings']['tick_rate'] == RATE
             and ts['settings'].get('physics_mode', 'deterministic') == 'deterministic'
-            and ts['settings']['input_actions'] == {'right': {'kind': 'button',
-                'bindings': [{'type': 'key', 'code': 'ArrowRight'}]}}, 'Fixed workload settings differ')
+            and ts['settings']['input_actions'] == actions(), 'Fixed workload settings differ')
     scene = next(iter(ts['scenes']))
     require(set(wasm['scenes']) == {scene}, 'Scene identity differs')
     for kind, document in [('typescript', ts), ('wasm', wasm)]:
@@ -146,7 +170,7 @@ def prepared(path):
     receipt = json.loads(read(path / 'prepared.json', 1024**2))
     require(receipt['format'] == 'incant-wasm-ts-workload' and receipt['version'] == 1
             and receipt['entities'] == COUNT and receipt['ticks'] == TICKS, 'Unknown workload')
-    expected = {'input.json', 'observe.json', *(f'observe-{i}.json' for i in range(4)),
+    expected = {'input.json', 'observe.json', 'import.stdout', *(f'observe-{i}.json' for i in range(4)),
                 'typescript/project.json', 'typescript/behavior.ts', 'wasm/project.json', 'wasm/behavior.wasm'}
     require(set(receipt['files']) == expected, 'Incomplete workload inventory')
     for name, sha in receipt['files'].items():
@@ -166,6 +190,11 @@ def prepared(path):
     require(receipt['scene_id'] == scene and receipt['project_id'] == ts['id']
             and ts['settings']['tick_rate'] == RATE, 'Prepared scene/rate differs')
     module = wasm['scenes'][scene]['program']['module']
-    require(wasm['assets'][module]['sha256'] == receipt['files']['wasm/behavior.wasm']
-            == receipt['guest']['wasm_sha256'], 'Guest module identity differs')
+    require(receipt['files']['wasm/behavior.wasm'] == receipt['guest']['wasm_sha256'],
+            'Guest original bytes differ')
+    imported = json.loads(read(path / 'import.stdout', 1024**2))
+    identity = module_identity(imported, receipt['guest']['wasm_sha256'],
+                               file_hash(ROOT / 'sdk/abi/native-v1.json'))
+    require(receipt['module'] == identity and wasm['assets'][module] == imported['asset'],
+            'Guest captured identity differs')
     return receipt

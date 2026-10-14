@@ -27,7 +27,7 @@ def documents():
     base = {'id': 'project', 'scenes': {'scene': {'entities': {
         common.owner(n): common.entity(n) for n in range(common.COUNT)}}},
         'assets': {}, 'scripts': {}, 'settings': {'tick_rate': 60, 'input_actions': {'right': {'kind': 'button',
-            'bindings': [{'type': 'key', 'code': 'ArrowRight'}]}}}}
+            'threshold': 0.5, 'bindings': [{'type': 'key', 'code': 'ArrowRight', 'scale': [1, 0]}]}}}}
     ts, wasm = copy.deepcopy(base), copy.deepcopy(base)
     ts['scripts'][common.SCRIPT] = {'id': common.SCRIPT, 'name': 'Matched transform system', 'path': 'behavior.ts'}
     ts['scenes']['scene']['entities'][common.owner(0)]['components']['Script'] = {'source': common.SCRIPT, 'props': {}}
@@ -57,9 +57,32 @@ class Workload(unittest.TestCase):
         self.assertEqual(common.position(0, 601)[2], 2)
         with self.assertRaises(ValueError): common.position(0, 3601)
 
+    def test_actual_import_separates_original_prepared_registry_and_fingerprint(self):
+        # Actual source002 public import, whose fingerprint differs from input.
+        value = {'asset': {'kind': 'wasm', 'path': 'behavior.wasm',
+                          'sha256': '9bb7244d1998610976d5221c10c052964624a2fcd3108588c5ab9d719a065816'},
+                 'details': {
+                     'input_sha256': 'bc82c38d74d52288c6475f39395f779c335c4f576747e3ebd15a2f87702df700',
+                     'prepared_sha256': '090eba6cc10b89152ea4161378e2f16a638fd5e23ee43f738dea589683eb2a43',
+                     'registry_sha256': '7a1d89e8b3f0e777fa713721376e36ae82ea9bae6311d588055b7a18740fd74d'}}
+        original, registry = (value['details'][k] for k in ('input_sha256', 'registry_sha256'))
+        identity = common.module_identity(value, original, registry)
+        self.assertNotEqual(identity['fingerprint'], original)
+        for section, field in (('asset', 'sha256'), ('details', 'input_sha256'),
+                               ('details', 'prepared_sha256'), ('details', 'registry_sha256')):
+            changed = copy.deepcopy(value); changed[section][field] = 'f' * 64
+            with self.subTest(field=field), self.assertRaises(ValueError):
+                common.module_identity(changed, original, registry)
+
     def test_only_exact_backend_registration_delta_admitted(self):
         ts, wasm = documents()
         self.assertEqual(common.validate_documents(ts, wasm), 'scene')
+        for change in (
+            lambda d: d['settings']['input_actions']['right'].__setitem__('threshold', 0.6),
+            lambda d: d['settings']['input_actions']['right']['bindings'][0].__setitem__('scale', [0, 1]),
+        ):
+            changed = copy.deepcopy(ts); change(changed)
+            with self.assertRaises(ValueError): common.validate_documents(changed, wasm)
         for mutate in (
             lambda d: d['scenes']['scene']['entities'].pop(common.owner(99)),
             lambda d: d['scenes']['scene']['entities'][common.owner(3)]['components']['Transform']['translation'].__setitem__(0, 9),

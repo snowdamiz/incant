@@ -2,9 +2,11 @@
 
 This helper prepares the numerical measurement required by PLAN Phase 1: a
 shipped wasm2c module's per-frame cost against the same TypeScript system on this
-Mac. Source and Python controls are implemented. Public authoring, guest compile,
-shipping export, actual player execution, and measurement remain pending the
-coordinated CPU/timing lease. Nothing here establishes a speedup or a phase gate.
+Mac. All 21 focused Python controls and strict TypeScript checking pass. Actual
+public authoring and trusted SDK guest compilation passed in `prepare-003`, with
+the earlier helper refusals retained below. Shipping export, actual player
+execution and measurement remain pending coordination. Nothing here establishes
+a speedup or a phase gate.
 
 The source001 producer started from main259 `64d536d5`; source002 composes
 actual main260 `64abee88` with the accepted engine caches. It changes no engine
@@ -99,7 +101,8 @@ python3 -m unittest discover -s tools/tests -p test_mac_performance.py -v
 
 Strict TypeScript checking is configured in `tools/probes/wasm-ts-cost/tsconfig.json`;
 its pinned Node22.23.3 compiler check is reported separately from the still-pending
-Rust guest and actual shipping execution.
+actual shipping execution. The trusted Rust SDK guest compiled with pinned
+Rust1.99.0 during preparation; neither compiler check measures runtime cost.
 
 The RPC helper retains raw requests, responses, partial malformed/EOF stdout and
 stderr. Constructor/operation failures close and reap the owned process group.
@@ -116,3 +119,24 @@ Source001 remains preserved. A source002 oracle correction uses the actual
 NativeLogs wire object (`entries: []`, `dropped: 0`) instead of an array; the
 actual-shape regression failed before the correction. This was a helper mismatch
 found by source inspection, not a failed native workload or engine result.
+
+Source002 public preparation subsequently compiled the real trusted SDK guest
+and imported it, then exposed a second helper mismatch: the asset's `sha256` is
+the captured policy/registry/input/prepared fingerprint, not the raw guest hash.
+That failed run remains retained. Source003 binds the original hash separately,
+recomputes the pinned capture fingerprint, retains the actual import receipt,
+and requires all four identities to match the eventual export. This changes no
+guest bytes, workload, engine behavior or measurement threshold.
+
+The next public run completed its transactions but source003's strict document
+oracle omitted serialized input defaults. Source004 explicitly authors/checks
+the native button threshold `0.5` and key scale `[1, 0]`; both prior actual
+projects already contained those values. The failed generation is preserved.
+
+The successful fresh `prepare-003` run used the immediately copied headless
+binary from source `297439d7`, explicitly built for `aarch64-apple-darwin` with
+the CI profile and deterministic physics. Native/build/SDK inputs were unchanged
+by the helper corrections. It verified all 1,024 IDs and transforms in both
+projects, the sole intended attachment/program delta, 11 retained input files,
+and public transaction undo/redo/reopen. No native guest tick or performance
+sample was executed during preparation.

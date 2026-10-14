@@ -29,7 +29,7 @@ def package_pair(inputs, packages):
         require(rate == RATE and exported['project_sha256'] == workload['files'][f'{kind}/project.json']
                 == receipt['project_sha256'][kind], 'Export project/rate differs')
         performance.phase_selection(PHASE[kind], identity['program'])
-        require(kind != 'wasm' or (identity['program']['input_sha256'] == workload['guest']['wasm_sha256']
+        require(kind != 'wasm' or (all(identity['program'].get(k) == v for k, v in workload['module'].items())
                 and identity['program']['translator'] == 'wasm2c-1.0.42'), 'Wasm module/translator differs')
         cooked = json.loads(read(package / 'project-build.json', 16 * 1024**2))
         require(cooked['project_id'] == workload['project_id'] and cooked['scene_id'] == workload['scene_id']
