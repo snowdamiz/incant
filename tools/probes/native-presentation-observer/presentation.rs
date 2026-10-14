@@ -288,8 +288,8 @@ impl Snapshot {
                     if !t.is_finite() || t <= 0.0 {
                         return Err(Error::Incomplete);
                     }
-                    if let Some(p) = previous
-                        && let Outcome::Presented(old) = self.rows[p].outcome
+                    if let Some((p, Outcome::Presented(old))) =
+                        previous.map(|p| (p, self.rows[p].outcome))
                     {
                         let seconds = t - old;
                         if !seconds.is_finite() || seconds <= 0.0 {
