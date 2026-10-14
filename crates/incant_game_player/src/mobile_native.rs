@@ -1,5 +1,8 @@
 //! Concrete Apple surface + device-audio host. Platform callbacks stay on the
 //! view's owning thread; gameplay uses the retained cooked-session owner.
+#[cfg(all(feature = "native-window", target_os = "macos"))]
+use crate::window::clock;
+#[cfg(not(all(feature = "native-window", target_os = "macos")))]
 #[path = "window/clock.rs"]
 #[allow(dead_code)] // The desktop retry helper is not used by display callbacks.
 mod clock;
