@@ -9,6 +9,8 @@ mod gpu;
 pub mod mobile;
 #[cfg(feature = "mobile-host")]
 pub mod mobile_host;
+#[cfg(all(feature = "mobile-apple", target_vendor = "apple"))]
+pub mod mobile_native;
 mod observe;
 mod package;
 mod pcm_output;

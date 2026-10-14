@@ -632,3 +632,64 @@ fn restart_drops_previous_host_before_new_prepare_and_failure_is_terminal() {
         }
     }
 }
+
+#[test]
+fn callback_host_starts_suspended_without_implicitly_granting_restart() {
+    let probe = Arc::new(Probe::default());
+    let scene = spatial::scenes()[1].clone();
+    let mut game = HostedGameSession::<Backend, Host>::new_suspended(
+        scene.clone(),
+        script(),
+        InputActions::default(),
+        vec![],
+        backend(probe.clone(), false),
+        HostSettings {
+            probe: probe.clone(),
+            ..Default::default()
+        },
+    )
+    .unwrap();
+    assert_eq!(probe.calls(), ["prepare", "backend-setup", "backend-start"]);
+    assert!(matches!(game.tick(&[]), Err(GameError::Suspended)));
+    assert_eq!(game.world().unwrap().tick(), 0);
+    assert!(game.host().unwrap().observed.is_empty());
+    game.set_suspended(false).unwrap();
+    game.tick(&[]).unwrap();
+    assert_eq!(game.host().unwrap().observed, [(1, 2.)]);
+    game.set_suspended(true).unwrap();
+    assert!(matches!(game.tick(&[]), Err(GameError::Suspended)));
+    assert_eq!(game.world().unwrap().tick(), 1);
+    let restart =
+        CompiledScript::compile("exports.default={update({commands}){commands.requestRestart();}}")
+            .unwrap();
+    let mut denied = HostedGameSession::<Backend, Host>::new_suspended(
+        scene.clone(),
+        restart.clone(),
+        InputActions::default(),
+        vec![],
+        backend(Arc::new(Probe::default()), false),
+        HostSettings::default(),
+    )
+    .unwrap();
+    denied.set_suspended(false).unwrap();
+    assert!(matches!(
+        denied.tick(&[]),
+        Err(GameError::Session(SessionError::Script(_)))
+    ));
+    assert!(denied.is_failed());
+    let seed = incant_game_runtime::GameSeed::new(scene, restart, InputActions::default(), vec![])
+        .unwrap();
+    let mut allowed = HostedGameSession::<Backend, Host>::from_seed_suspended(
+        &seed,
+        backend(Arc::new(Probe::default()), false),
+        HostSettings::default(),
+    )
+    .unwrap();
+    assert!(matches!(allowed.tick(&[]), Err(GameError::Suspended)));
+    allowed.set_suspended(false).unwrap();
+    allowed.tick(&[]).unwrap();
+    assert_eq!(
+        allowed.take_session_request().unwrap(),
+        Some(incant_script::SessionRequest::Restart)
+    );
+}
