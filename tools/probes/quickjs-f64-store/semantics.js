@@ -116,6 +116,30 @@
     require(a.length === 3 && a[1] === 7.5, 'conversion growth not respected');
     return inspect(a);
   });
+  for (const fixed of [false, true]) for (const offset of [0, 8])
+    record(`numeric-resize-${fixed ? 'fixed' : 'tracking'}-${offset}`, () => {
+      const b = new ArrayBuffer(32, { maxByteLength: 48 });
+      new Float64Array(b).set([111, 222, 333, 444]);
+      const a = fixed ? new Float64Array(b, offset, 2) : new Float64Array(b, offset);
+      // The fixed view is wholly OOB; the tracking view has one live element.
+      b.resize(offset + 8);
+      require(a.length === (fixed ? 0 : 1), 'partial shrink count');
+      a[0] = 7.5; a[1] = -7.5;
+      const partial = inspect(new Float64Array(b));
+      require(new Float64Array(b)[offset / 8] === (fixed ? (offset ? 222 : 111) : 7.5), 'partial shrink numeric store');
+      b.resize(0);
+      a[0] = -0; a[1] = NaN;
+      require(a.length === 0 && a[0] === undefined, 'fully OOB numeric store');
+      b.resize(32);
+      require(a.length === (fixed ? 2 : (32 - offset) / 8), 'regrow count');
+      require(new Float64Array(b).every(value => value === 0), 'OOB store survived regrow');
+      a[0] = -0; a[1] = tagInt;
+      const all = new Float64Array(b);
+      require(Object.is(all[offset / 8], -0) && all[offset / 8 + 1] === 7, 'regrown direct store');
+      for (let n = 0; n < all.length; n++) if (n !== offset / 8 && n !== offset / 8 + 1)
+        require(Object.is(all[n], 0), 'regrown store escaped view');
+      return { partial, final: inspect(all), viewLength: a.length };
+    });
   record('proxy', log => {
     const a = new Float64Array([111]);
     const proxy = new Proxy(a, { set(target, key, value) { log.push([key, scalar(value)]); return Reflect.set(target, key, value, target); } });

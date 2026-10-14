@@ -15,7 +15,7 @@ fn semantics(root: &Path) -> Result<(), Box<dyn std::error::Error>> {
         ctx.eval(source)
     })?;
     let rows: serde_json::Value = serde_json::from_str(&rows)?;
-    assert_eq!(rows.as_array().unwrap().len(), 54);
+    assert_eq!(rows.as_array().unwrap().len(), 58);
     // Match the real host's explicit ArrayBuffer detachment boundary with the
     // safe rquickjs owner. This is not an Incant loan/rollback integration test.
     context.with(|ctx| -> rquickjs::Result<()> {

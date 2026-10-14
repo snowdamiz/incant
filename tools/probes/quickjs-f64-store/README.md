@@ -42,11 +42,12 @@ It also checks fresh views, changed stride, reordered rows and replaced attachme
 metadata, plus three negative controls: omitted x store and NaN sentinel y/z.
 There is no sample or project mutation.
 
-`semantics.js` has 54 deterministic cases. It records bytes, Number observations,
+`semantics.js` has 58 deterministic cases (the original 54 plus four direct numeric resize cases). It records bytes, Number observations,
 errors and coercion/trap order, covering integer/float tags, signed zero, NaN,
 infinities, extreme/subnormal values, normal and invalid/property indexes,
 BigInt/Symbol errors, conversion hooks and getters, thrown/nonprimitive conversion,
-detached and immutable buffers, resize/detach during conversion, proxies,
+detached and immutable buffers, resize/detach during conversion, direct numeric
+stores after shrink-to-OOB/regrow on both fixed and tracking views with offsets, proxies,
 subclasses/offset views, other typed arrays and assignment-expression results.
 The Rust harness separately detaches an owned rquickjs ArrayBuffer and verifies
 that its retained view stays unusable. This is not a substitute for Incant's
@@ -73,7 +74,7 @@ python3 tools/probes/quickjs-f64-store/check_lock.py Cargo.lock /fresh/probe/bas
 Repeat lock preparation for candidate and wrong-store. Build each with the locked
 explicit CI configuration, run baseline and candidate with `callback --functional`
 under `tools/native_process.py` with a 120-second limit and compare the complete
-54-case semantic record, three negative-control records and successful stress
+58-case semantic record, three negative-control records and successful stress
 coverage. Run wrong-store once and retain its required nonzero assertion failure.
 No failed sample is silently retried. Any optional `--measure` invocation needs a
 separate bounded run plan: it records all 500 actual update intervals, including
