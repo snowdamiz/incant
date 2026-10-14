@@ -1,5 +1,73 @@
 # Implementation status
 
+## Main278 Loan shipping measurement — budget remains open
+
+The fresh main278 shipping export preserves all three functional modes, exact
+PCM, Core win/stress behavior and all 74 authoring files. Its one fixed six-run
+quiet sequence remains over the whole ScriptTick 2 ms p95 budget: maintained
+runs span 2.08–2.21 ms and detailed runs span 2.18–2.22 ms. All same-mode script
+and requested-memory stability checks pass, but the final maintained player-frame
+sample fails the 5% stability bound. No shipping saving is established. The
+portable packet retains all original failures and distinguishes CPU simulation
+from GPU/presentation qualification. An ordered native-query candidate is being
+qualified separately and has not been adopted.
+[Actual results and replay](docs/spikes/quickjs-loan-main278.md).
+
+## CI renderer smoke revision repair — merged through PR280
+
+The renderer helper now carries its first command revision into the reopened
+second RPC session and retains structured failures, including an absent native
+code field. All render/geometry assertions remain. Producer Python controls
+pass nine cases (six geometry plus three profile); root's focused run passes six.
+Four actual RPC protocol processes pass; root separately passes the complete
+Mac renderer helper on the retained historical application executable. This
+does not relabel the binary as current whole-runtime source. Checkpoint35's
+Linux failure is retained; hosted repair execution is pending. PR280 merged
+after exact-head fast SUCCESS and matching tree verification. No new build,
+shipping timing, visual approval or phase gate is included.
+[Cause, scope and replay](docs/spikes/render-smoke-revision.md).
+
+## Project Save and engine-pin UI — merged through PR279
+
+The native project menu now exposes Save/Command-S and host-issued engine-pin
+review/apply. Project changes retire stale results, and transport uncertainty
+never claims that a possibly committed write failed definitively. Claude's
+bounded design is retained with separately reviewed Astra correctness repairs.
+All 973 UI tests pass; 30 browser states and five flows report zero accessibility
+violations or errors. Actual Mac Tauri/WebKit checks verify save/reopen, a
+read-only legacy review, exact candidate bytes, backup and undo/redo. These
+changes merged through PR279 after exact-head fast SUCCESS; the merged tree
+matches the tested tree. Older-format conversion and
+phase gates remain open. [Evidence](docs/spikes/project-file-ui-main278.md).
+
+## Native script undo capacity reuse — source qualified
+
+ScriptHost now reuses exact-size native ID/numeric undo storage across matching
+ticks, recapturing every value and preserving fresh-view detachment, validation
+and full rollback. Shape changes evict unused tails; checkpoint/new hosts start
+empty. The 32 MiB bound remains numeric copies only; IDs/metadata/JS labels are
+additional, and scratch remains allocated while its host is idle. The five Rust
+paths have independent acceptance. Deterministic and four-lane fast each pass
+233 checks with one intentionally ignored CPU diagnostic, strict lint, and
+compiler-disabled profile off/on checks. The initial detached-DataView test
+failure is retained and corrected. No player/export/timing was executed for
+that source qualification; the separate main278 measurement above now retains
+the actual shipping result with its 2 ms gate still failed. Main277 intake preserves the reviewed
+source exactly, with full packet/binary replay and no Rust dependency seam.
+[Source, observable controls and replay](docs/spikes/quickjs-loan-capacity.md).
+
+## Maintained QuickJS shipping observation — budget still open
+
+One fresh shipping export on this Mac passes unprofiled, detailed and maintained
+functional parity, including exact PCM and the Core win/stress route. Six quiet
+measurements keep the whole ScriptTick p95 above the unchanged 2 ms budget:
+maintained runs span 2.08–2.11 ms; detailed runs span 2.20–2.24 ms. Every same-mode
+5% stability check passes; no cross-mode speedup or phase gate is claimed.
+The bounded runner and portable raw replay are independently reviewed. Execution
+remains exact main275-based source; this intake onto main276 does not relabel it.
+Rust-owned rollback buffer capacity reuse was subsequently merged in PR278;
+the separate main278 result above still establishes no shipping saving. [Results and replay](docs/spikes/quickjs-maintained-main275.md).
+
 ## Project-file application binding — qualified main275 composition
 
 The accepted application backend now composes with the merged maintained QuickJS
@@ -12,8 +80,9 @@ prefab journal owner before byte snapshots, preserving every production lock and
 rollback assertion. Checkpoint34's actual Linux WouldBlock and Windows error33
 failures remain retained; future hosted repair validation is pending. One local
 supervisor schema-inventory error is retained, with corrected exact comparison.
-Final independent integration review is accepted; exact-head required fast CI
-precedes merge. No new
+Final independent integration review is accepted; PR276 merged after exact-head
+hosted fast SUCCESS. Checkpoint35 is frozen at this composition; checkpoint34
+remains failed, including a GitHub internal error in the general job. No new
 editor UI controls, older-format conversion, GPU, performance or phase claim.
 [Current composition and evidence](docs/spikes/project-application-main275.md).
 

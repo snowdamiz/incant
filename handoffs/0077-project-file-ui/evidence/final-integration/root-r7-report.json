@@ -1,0 +1,3618 @@
+{
+  "set": "root-r7",
+  "generated": "2026-10-14T10:29:38.479Z",
+  "browser": "155.0.8059.40",
+  "data": "deterministic project file fixture (tools/fake-host.js + real native.generated.js); not live, not native WebKit, no file written",
+  "captures": [
+    {
+      "file": "menu-desktop",
+      "state": "menu",
+      "scenario": "saved",
+      "size": "desktop",
+      "width": 1440,
+      "height": 900,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollWidth": 1440,
+          "scrollHeight": 900,
+          "scrollX": 0,
+          "scrollY": 0
+        },
+        "titlebar": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 40
+        },
+        "projectButton": {
+          "x": 31,
+          "y": 8,
+          "width": 69,
+          "height": 24
+        },
+        "projectName": {
+          "x": 36,
+          "y": 10,
+          "width": 43,
+          "height": 20,
+          "truncated": false,
+          "text": "Harbor"
+        },
+        "projectButtonLabel": "Project: Harbor",
+        "menu": {
+          "x": 31,
+          "y": 36,
+          "width": 196,
+          "height": 64,
+          "inside": true,
+          "items": [
+            {
+              "text": "Save⌘S",
+              "disabled": null
+            },
+            {
+              "text": "Pin engine version…",
+              "disabled": null
+            }
+          ]
+        },
+        "dialog": null,
+        "notice": [],
+        "status": "",
+        "panels": [
+          {
+            "region": "hierarchy",
+            "x": 0,
+            "y": 40,
+            "width": 245,
+            "height": 832
+          },
+          {
+            "region": "viewport",
+            "x": 246,
+            "y": 40,
+            "width": 833,
+            "height": 588
+          },
+          {
+            "region": "dock",
+            "x": 246,
+            "y": 629,
+            "width": 833,
+            "height": 243
+          },
+          {
+            "region": "inspector",
+            "x": 1080,
+            "y": 40,
+            "width": 360,
+            "height": 730
+          },
+          {
+            "region": "agent",
+            "x": 1080,
+            "y": 770,
+            "width": 360,
+            "height": 102
+          }
+        ],
+        "active": {
+          "tag": "DIV",
+          "className": "menu__item",
+          "name": "Save⌘S",
+          "focusVisible": false
+        },
+        "imgInDialog": 0
+      },
+      "axe": [],
+      "calls": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "menu-narrow",
+      "state": "menu",
+      "scenario": "saved",
+      "size": "narrow",
+      "width": 1024,
+      "height": 680,
+      "measured": {
+        "window": {
+          "width": 1024,
+          "height": 680,
+          "scrollWidth": 1024,
+          "scrollHeight": 680,
+          "scrollX": 0,
+          "scrollY": 0
+        },
+        "titlebar": {
+          "x": 0,
+          "y": 0,
+          "width": 1024,
+          "height": 40
+        },
+        "projectButton": {
+          "x": 31,
+          "y": 8,
+          "width": 69,
+          "height": 24
+        },
+        "projectName": {
+          "x": 36,
+          "y": 10,
+          "width": 43,
+          "height": 20,
+          "truncated": false,
+          "text": "Harbor"
+        },
+        "projectButtonLabel": "Project: Harbor",
+        "menu": {
+          "x": 31,
+          "y": 36,
+          "width": 196,
+          "height": 64,
+          "inside": true,
+          "items": [
+            {
+              "text": "Save⌘S",
+              "disabled": null
+            },
+            {
+              "text": "Pin engine version…",
+              "disabled": null
+            }
+          ]
+        },
+        "dialog": null,
+        "notice": [],
+        "status": "",
+        "panels": [
+          {
+            "region": "hierarchy",
+            "x": 0,
+            "y": 40,
+            "width": 232,
+            "height": 612
+          },
+          {
+            "region": "viewport",
+            "x": 233,
+            "y": 40,
+            "width": 450,
+            "height": 427
+          },
+          {
+            "region": "dock",
+            "x": 233,
+            "y": 468,
+            "width": 450,
+            "height": 184
+          },
+          {
+            "region": "inspector",
+            "x": 684,
+            "y": 40,
+            "width": 340,
+            "height": 575
+          },
+          {
+            "region": "agent",
+            "x": 684,
+            "y": 615,
+            "width": 340,
+            "height": 37
+          }
+        ],
+        "active": {
+          "tag": "DIV",
+          "className": "menu__item",
+          "name": "Save⌘S",
+          "focusVisible": false
+        },
+        "imgInDialog": 0
+      },
+      "axe": [],
+      "calls": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "menu-keyboard-desktop",
+      "state": "menu-keyboard",
+      "scenario": "saved",
+      "size": "desktop",
+      "width": 1440,
+      "height": 900,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollWidth": 1440,
+          "scrollHeight": 900,
+          "scrollX": 0,
+          "scrollY": 0
+        },
+        "titlebar": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 40
+        },
+        "projectButton": {
+          "x": 31,
+          "y": 8,
+          "width": 69,
+          "height": 24
+        },
+        "projectName": {
+          "x": 36,
+          "y": 10,
+          "width": 43,
+          "height": 20,
+          "truncated": false,
+          "text": "Harbor"
+        },
+        "projectButtonLabel": "Project: Harbor",
+        "menu": {
+          "x": 31,
+          "y": 36,
+          "width": 196,
+          "height": 64,
+          "inside": true,
+          "items": [
+            {
+              "text": "Save⌘S",
+              "disabled": null
+            },
+            {
+              "text": "Pin engine version…",
+              "disabled": null
+            }
+          ]
+        },
+        "dialog": null,
+        "notice": [],
+        "status": "",
+        "panels": [
+          {
+            "region": "hierarchy",
+            "x": 0,
+            "y": 40,
+            "width": 245,
+            "height": 832
+          },
+          {
+            "region": "viewport",
+            "x": 246,
+            "y": 40,
+            "width": 833,
+            "height": 588
+          },
+          {
+            "region": "dock",
+            "x": 246,
+            "y": 629,
+            "width": 833,
+            "height": 243
+          },
+          {
+            "region": "inspector",
+            "x": 1080,
+            "y": 40,
+            "width": 360,
+            "height": 730
+          },
+          {
+            "region": "agent",
+            "x": 1080,
+            "y": 770,
+            "width": 360,
+            "height": 102
+          }
+        ],
+        "active": {
+          "tag": "DIV",
+          "className": "menu__item",
+          "name": "Save⌘S",
+          "focusVisible": true
+        },
+        "imgInDialog": 0
+      },
+      "axe": [],
+      "calls": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "menu-unavailable-desktop",
+      "state": "menu-unavailable",
+      "scenario": "older-host",
+      "size": "desktop",
+      "width": 1440,
+      "height": 900,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollWidth": 1440,
+          "scrollHeight": 900,
+          "scrollX": 0,
+          "scrollY": 0
+        },
+        "titlebar": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 40
+        },
+        "projectButton": {
+          "x": 31,
+          "y": 8,
+          "width": 69,
+          "height": 24
+        },
+        "projectName": {
+          "x": 36,
+          "y": 10,
+          "width": 43,
+          "height": 20,
+          "truncated": false,
+          "text": "Harbor"
+        },
+        "projectButtonLabel": "Project: Harbor",
+        "menu": {
+          "x": 31,
+          "y": 36,
+          "width": 196,
+          "height": 64,
+          "inside": true,
+          "items": [
+            {
+              "text": "Save⌘S, unavailable: Project file access is unavailable: the sample fixture is read-only.",
+              "disabled": "true"
+            },
+            {
+              "text": "Pin engine version…, unavailable: Project file access is unavailable: the sample fixture is read-only.",
+              "disabled": "true"
+            }
+          ]
+        },
+        "dialog": null,
+        "notice": [],
+        "status": "",
+        "panels": [
+          {
+            "region": "hierarchy",
+            "x": 0,
+            "y": 40,
+            "width": 245,
+            "height": 832
+          },
+          {
+            "region": "viewport",
+            "x": 246,
+            "y": 40,
+            "width": 833,
+            "height": 588
+          },
+          {
+            "region": "dock",
+            "x": 246,
+            "y": 629,
+            "width": 833,
+            "height": 243
+          },
+          {
+            "region": "inspector",
+            "x": 1080,
+            "y": 40,
+            "width": 360,
+            "height": 730
+          },
+          {
+            "region": "agent",
+            "x": 1080,
+            "y": 770,
+            "width": 360,
+            "height": 102
+          }
+        ],
+        "active": {
+          "tag": "DIV",
+          "className": "menu__item",
+          "name": "Save⌘S, unavailable: Project file access is unavailable: the",
+          "focusVisible": false
+        },
+        "imgInDialog": 0
+      },
+      "axe": [],
+      "calls": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "menu-long-name-narrow",
+      "state": "menu-long-name",
+      "scenario": "long-name",
+      "size": "narrow",
+      "width": 1024,
+      "height": 680,
+      "measured": {
+        "window": {
+          "width": 1024,
+          "height": 680,
+          "scrollWidth": 1024,
+          "scrollHeight": 680,
+          "scrollX": 0,
+          "scrollY": 0
+        },
+        "titlebar": {
+          "x": 0,
+          "y": 0,
+          "width": 1024,
+          "height": 40
+        },
+        "projectButton": {
+          "x": 31,
+          "y": 8,
+          "width": 250.7,
+          "height": 24
+        },
+        "projectName": {
+          "x": 36,
+          "y": 10,
+          "width": 224.7,
+          "height": 20,
+          "truncated": true,
+          "text": "Harbor district night market, revision with a very long working title"
+        },
+        "projectButtonLabel": "Project: Harbor district night market, revision with a very long working title",
+        "menu": {
+          "x": 31,
+          "y": 36,
+          "width": 196,
+          "height": 64,
+          "inside": true,
+          "items": [
+            {
+              "text": "Save⌘S",
+              "disabled": null
+            },
+            {
+              "text": "Pin engine version…",
+              "disabled": null
+            }
+          ]
+        },
+        "dialog": null,
+        "notice": [],
+        "status": "",
+        "panels": [
+          {
+            "region": "hierarchy",
+            "x": 0,
+            "y": 40,
+            "width": 232,
+            "height": 612
+          },
+          {
+            "region": "viewport",
+            "x": 233,
+            "y": 40,
+            "width": 450,
+            "height": 427
+          },
+          {
+            "region": "dock",
+            "x": 233,
+            "y": 468,
+            "width": 450,
+            "height": 184
+          },
+          {
+            "region": "inspector",
+            "x": 684,
+            "y": 40,
+            "width": 340,
+            "height": 575
+          },
+          {
+            "region": "agent",
+            "x": 684,
+            "y": 615,
+            "width": 340,
+            "height": 37
+          }
+        ],
+        "active": {
+          "tag": "DIV",
+          "className": "menu__item",
+          "name": "Save⌘S",
+          "focusVisible": false
+        },
+        "imgInDialog": 0
+      },
+      "axe": [],
+      "calls": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "saving-desktop",
+      "state": "saving",
+      "scenario": "slow-save",
+      "size": "desktop",
+      "width": 1440,
+      "height": 900,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollWidth": 1440,
+          "scrollHeight": 900,
+          "scrollX": 0,
+          "scrollY": 0
+        },
+        "titlebar": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 40
+        },
+        "projectButton": {
+          "x": 31,
+          "y": 8,
+          "width": 67,
+          "height": 24
+        },
+        "projectName": {
+          "x": 36,
+          "y": 10,
+          "width": 43,
+          "height": 20,
+          "truncated": false,
+          "text": "Harbor"
+        },
+        "projectButtonLabel": "Project: Harbor, saving",
+        "menu": null,
+        "dialog": null,
+        "notice": [],
+        "status": "",
+        "panels": [
+          {
+            "region": "hierarchy",
+            "x": 0,
+            "y": 40,
+            "width": 245,
+            "height": 832
+          },
+          {
+            "region": "viewport",
+            "x": 246,
+            "y": 40,
+            "width": 833,
+            "height": 588
+          },
+          {
+            "region": "dock",
+            "x": 246,
+            "y": 629,
+            "width": 833,
+            "height": 243
+          },
+          {
+            "region": "inspector",
+            "x": 1080,
+            "y": 40,
+            "width": 360,
+            "height": 730
+          },
+          {
+            "region": "agent",
+            "x": 1080,
+            "y": 770,
+            "width": 360,
+            "height": 102
+          }
+        ],
+        "active": {
+          "tag": "BODY",
+          "className": "",
+          "name": "Skip to hierarchyHarborSample data: Project file fixture: sc",
+          "focusVisible": false
+        },
+        "imgInDialog": 0
+      },
+      "axe": [],
+      "calls": [
+        {
+          "name": "engine_project_file",
+          "request": {
+            "operation": "save",
+            "expected_revision": 7
+          }
+        }
+      ],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "saving-narrow",
+      "state": "saving",
+      "scenario": "slow-save",
+      "size": "narrow",
+      "width": 1024,
+      "height": 680,
+      "measured": {
+        "window": {
+          "width": 1024,
+          "height": 680,
+          "scrollWidth": 1024,
+          "scrollHeight": 680,
+          "scrollX": 0,
+          "scrollY": 0
+        },
+        "titlebar": {
+          "x": 0,
+          "y": 0,
+          "width": 1024,
+          "height": 40
+        },
+        "projectButton": {
+          "x": 31,
+          "y": 8,
+          "width": 67,
+          "height": 24
+        },
+        "projectName": {
+          "x": 36,
+          "y": 10,
+          "width": 43,
+          "height": 20,
+          "truncated": false,
+          "text": "Harbor"
+        },
+        "projectButtonLabel": "Project: Harbor, saving",
+        "menu": null,
+        "dialog": null,
+        "notice": [],
+        "status": "",
+        "panels": [
+          {
+            "region": "hierarchy",
+            "x": 0,
+            "y": 40,
+            "width": 232,
+            "height": 612
+          },
+          {
+            "region": "viewport",
+            "x": 233,
+            "y": 40,
+            "width": 450,
+            "height": 427
+          },
+          {
+            "region": "dock",
+            "x": 233,
+            "y": 468,
+            "width": 450,
+            "height": 184
+          },
+          {
+            "region": "inspector",
+            "x": 684,
+            "y": 40,
+            "width": 340,
+            "height": 575
+          },
+          {
+            "region": "agent",
+            "x": 684,
+            "y": 615,
+            "width": 340,
+            "height": 37
+          }
+        ],
+        "active": {
+          "tag": "BODY",
+          "className": "",
+          "name": "Skip to hierarchyHarborSample data: Project file fixture: sc",
+          "focusVisible": false
+        },
+        "imgInDialog": 0
+      },
+      "axe": [],
+      "calls": [
+        {
+          "name": "engine_project_file",
+          "request": {
+            "operation": "save",
+            "expected_revision": 7
+          }
+        }
+      ],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "saved-desktop",
+      "state": "saved",
+      "scenario": "unsaved",
+      "size": "desktop",
+      "width": 1440,
+      "height": 900,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollWidth": 1440,
+          "scrollHeight": 900,
+          "scrollX": 0,
+          "scrollY": 0
+        },
+        "titlebar": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 40
+        },
+        "projectButton": {
+          "x": 31,
+          "y": 8,
+          "width": 69,
+          "height": 24
+        },
+        "projectName": {
+          "x": 36,
+          "y": 10,
+          "width": 43,
+          "height": 20,
+          "truncated": false,
+          "text": "Harbor"
+        },
+        "projectButtonLabel": "Project: Harbor",
+        "menu": null,
+        "dialog": null,
+        "notice": [],
+        "status": "Saved revision 7 to the project file.",
+        "panels": [
+          {
+            "region": "hierarchy",
+            "x": 0,
+            "y": 40,
+            "width": 245,
+            "height": 832
+          },
+          {
+            "region": "viewport",
+            "x": 246,
+            "y": 40,
+            "width": 833,
+            "height": 588
+          },
+          {
+            "region": "dock",
+            "x": 246,
+            "y": 629,
+            "width": 833,
+            "height": 243
+          },
+          {
+            "region": "inspector",
+            "x": 1080,
+            "y": 40,
+            "width": 360,
+            "height": 730
+          },
+          {
+            "region": "agent",
+            "x": 1080,
+            "y": 770,
+            "width": 360,
+            "height": 102
+          }
+        ],
+        "active": {
+          "tag": "BODY",
+          "className": "",
+          "name": "Skip to hierarchyHarborSample data: Project file fixture: sc",
+          "focusVisible": false
+        },
+        "imgInDialog": 0
+      },
+      "axe": [],
+      "calls": [
+        {
+          "name": "engine_project_file",
+          "request": {
+            "operation": "save",
+            "expected_revision": 7
+          }
+        }
+      ],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "saved-narrow",
+      "state": "saved",
+      "scenario": "unsaved",
+      "size": "narrow",
+      "width": 1024,
+      "height": 680,
+      "measured": {
+        "window": {
+          "width": 1024,
+          "height": 680,
+          "scrollWidth": 1024,
+          "scrollHeight": 680,
+          "scrollX": 0,
+          "scrollY": 0
+        },
+        "titlebar": {
+          "x": 0,
+          "y": 0,
+          "width": 1024,
+          "height": 40
+        },
+        "projectButton": {
+          "x": 31,
+          "y": 8,
+          "width": 69,
+          "height": 24
+        },
+        "projectName": {
+          "x": 36,
+          "y": 10,
+          "width": 43,
+          "height": 20,
+          "truncated": false,
+          "text": "Harbor"
+        },
+        "projectButtonLabel": "Project: Harbor",
+        "menu": null,
+        "dialog": null,
+        "notice": [],
+        "status": "Saved revision 7 to the project file.",
+        "panels": [
+          {
+            "region": "hierarchy",
+            "x": 0,
+            "y": 40,
+            "width": 232,
+            "height": 612
+          },
+          {
+            "region": "viewport",
+            "x": 233,
+            "y": 40,
+            "width": 450,
+            "height": 427
+          },
+          {
+            "region": "dock",
+            "x": 233,
+            "y": 468,
+            "width": 450,
+            "height": 184
+          },
+          {
+            "region": "inspector",
+            "x": 684,
+            "y": 40,
+            "width": 340,
+            "height": 575
+          },
+          {
+            "region": "agent",
+            "x": 684,
+            "y": 615,
+            "width": 340,
+            "height": 37
+          }
+        ],
+        "active": {
+          "tag": "BODY",
+          "className": "",
+          "name": "Skip to hierarchyHarborSample data: Project file fixture: sc",
+          "focusVisible": false
+        },
+        "imgInDialog": 0
+      },
+      "axe": [],
+      "calls": [
+        {
+          "name": "engine_project_file",
+          "request": {
+            "operation": "save",
+            "expected_revision": 7
+          }
+        }
+      ],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "nothing-to-save-desktop",
+      "state": "nothing-to-save",
+      "scenario": "saved",
+      "size": "desktop",
+      "width": 1440,
+      "height": 900,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollWidth": 1440,
+          "scrollHeight": 900,
+          "scrollX": 0,
+          "scrollY": 0
+        },
+        "titlebar": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 40
+        },
+        "projectButton": {
+          "x": 31,
+          "y": 8,
+          "width": 69,
+          "height": 24
+        },
+        "projectName": {
+          "x": 36,
+          "y": 10,
+          "width": 43,
+          "height": 20,
+          "truncated": false,
+          "text": "Harbor"
+        },
+        "projectButtonLabel": "Project: Harbor",
+        "menu": null,
+        "dialog": null,
+        "notice": [],
+        "status": "Nothing to save: the project file already matches revision 7.",
+        "panels": [
+          {
+            "region": "hierarchy",
+            "x": 0,
+            "y": 40,
+            "width": 245,
+            "height": 832
+          },
+          {
+            "region": "viewport",
+            "x": 246,
+            "y": 40,
+            "width": 833,
+            "height": 588
+          },
+          {
+            "region": "dock",
+            "x": 246,
+            "y": 629,
+            "width": 833,
+            "height": 243
+          },
+          {
+            "region": "inspector",
+            "x": 1080,
+            "y": 40,
+            "width": 360,
+            "height": 730
+          },
+          {
+            "region": "agent",
+            "x": 1080,
+            "y": 770,
+            "width": 360,
+            "height": 102
+          }
+        ],
+        "active": {
+          "tag": "BODY",
+          "className": "",
+          "name": "Skip to hierarchyHarborSample data: Project file fixture: sc",
+          "focusVisible": false
+        },
+        "imgInDialog": 0
+      },
+      "axe": [],
+      "calls": [
+        {
+          "name": "engine_project_file",
+          "request": {
+            "operation": "save",
+            "expected_revision": 7
+          }
+        }
+      ],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "save-failed-desktop",
+      "state": "save-failed",
+      "scenario": "save-fails",
+      "size": "desktop",
+      "width": 1440,
+      "height": 900,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollWidth": 1440,
+          "scrollHeight": 900,
+          "scrollX": 0,
+          "scrollY": 0
+        },
+        "titlebar": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 40
+        },
+        "projectButton": {
+          "x": 31,
+          "y": 8,
+          "width": 69,
+          "height": 24
+        },
+        "projectName": {
+          "x": 36,
+          "y": 10,
+          "width": 43,
+          "height": 20,
+          "truncated": false,
+          "text": "Harbor"
+        },
+        "projectButtonLabel": "Project: Harbor",
+        "menu": null,
+        "dialog": null,
+        "notice": [
+          "Save result unknown. script source changed; read it again before editingengine.requestDismiss"
+        ],
+        "status": "",
+        "panels": [
+          {
+            "region": "hierarchy",
+            "x": 0,
+            "y": 73,
+            "width": 245,
+            "height": 799
+          },
+          {
+            "region": "viewport",
+            "x": 246,
+            "y": 73,
+            "width": 833,
+            "height": 555
+          },
+          {
+            "region": "dock",
+            "x": 246,
+            "y": 629,
+            "width": 833,
+            "height": 243
+          },
+          {
+            "region": "inspector",
+            "x": 1080,
+            "y": 73,
+            "width": 360,
+            "height": 697
+          },
+          {
+            "region": "agent",
+            "x": 1080,
+            "y": 770,
+            "width": 360,
+            "height": 102
+          }
+        ],
+        "active": {
+          "tag": "BODY",
+          "className": "",
+          "name": "Skip to hierarchyHarborSample data: Project file fixture: sc",
+          "focusVisible": false
+        },
+        "imgInDialog": 0
+      },
+      "axe": [],
+      "calls": [
+        {
+          "name": "engine_project_file",
+          "request": {
+            "operation": "save",
+            "expected_revision": 7
+          }
+        }
+      ],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "save-failed-narrow",
+      "state": "save-failed",
+      "scenario": "save-fails",
+      "size": "narrow",
+      "width": 1024,
+      "height": 680,
+      "measured": {
+        "window": {
+          "width": 1024,
+          "height": 680,
+          "scrollWidth": 1024,
+          "scrollHeight": 680,
+          "scrollX": 0,
+          "scrollY": 0
+        },
+        "titlebar": {
+          "x": 0,
+          "y": 0,
+          "width": 1024,
+          "height": 40
+        },
+        "projectButton": {
+          "x": 31,
+          "y": 8,
+          "width": 69,
+          "height": 24
+        },
+        "projectName": {
+          "x": 36,
+          "y": 10,
+          "width": 43,
+          "height": 20,
+          "truncated": false,
+          "text": "Harbor"
+        },
+        "projectButtonLabel": "Project: Harbor",
+        "menu": null,
+        "dialog": null,
+        "notice": [
+          "Save result unknown. script source changed; read it again before editingengine.requestDismiss"
+        ],
+        "status": "",
+        "panels": [
+          {
+            "region": "hierarchy",
+            "x": 0,
+            "y": 73,
+            "width": 232,
+            "height": 579
+          },
+          {
+            "region": "viewport",
+            "x": 233,
+            "y": 73,
+            "width": 450,
+            "height": 394
+          },
+          {
+            "region": "dock",
+            "x": 233,
+            "y": 468,
+            "width": 450,
+            "height": 184
+          },
+          {
+            "region": "inspector",
+            "x": 684,
+            "y": 73,
+            "width": 340,
+            "height": 542
+          },
+          {
+            "region": "agent",
+            "x": 684,
+            "y": 615,
+            "width": 340,
+            "height": 37
+          }
+        ],
+        "active": {
+          "tag": "BODY",
+          "className": "",
+          "name": "Skip to hierarchyHarborSample data: Project file fixture: sc",
+          "focusVisible": false
+        },
+        "imgInDialog": 0
+      },
+      "axe": [],
+      "calls": [
+        {
+          "name": "engine_project_file",
+          "request": {
+            "operation": "save",
+            "expected_revision": 7
+          }
+        }
+      ],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "review-requesting-desktop",
+      "state": "review-requesting",
+      "scenario": "slow-review",
+      "size": "desktop",
+      "width": 1440,
+      "height": 900,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollWidth": 1440,
+          "scrollHeight": 900,
+          "scrollX": 0,
+          "scrollY": 0
+        },
+        "titlebar": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 40
+        },
+        "projectButton": {
+          "x": 31,
+          "y": 8,
+          "width": 67,
+          "height": 24
+        },
+        "projectName": {
+          "x": 36,
+          "y": 10,
+          "width": 43,
+          "height": 20,
+          "truncated": false,
+          "text": "Harbor"
+        },
+        "projectButtonLabel": "Project: Harbor, preparing an engine pin review",
+        "menu": null,
+        "dialog": {
+          "x": 480,
+          "y": 385,
+          "width": 480,
+          "height": 130,
+          "inside": true,
+          "scrolls": false,
+          "described": "Preparing the review…",
+          "buttons": [
+            {
+              "text": "Cancel",
+              "disabled": null
+            },
+            {
+              "text": "Pin",
+              "disabled": "true"
+            }
+          ]
+        },
+        "notice": [],
+        "status": "",
+        "panels": [
+          {
+            "region": "hierarchy",
+            "x": 0,
+            "y": 40,
+            "width": 245,
+            "height": 832
+          },
+          {
+            "region": "viewport",
+            "x": 246,
+            "y": 40,
+            "width": 833,
+            "height": 588
+          },
+          {
+            "region": "dock",
+            "x": 246,
+            "y": 629,
+            "width": 833,
+            "height": 243
+          },
+          {
+            "region": "inspector",
+            "x": 1080,
+            "y": 40,
+            "width": 360,
+            "height": 730
+          },
+          {
+            "region": "agent",
+            "x": 1080,
+            "y": 770,
+            "width": 360,
+            "height": 102
+          }
+        ],
+        "active": {
+          "tag": "BUTTON",
+          "className": "button",
+          "name": "Cancel",
+          "focusVisible": false
+        },
+        "imgInDialog": 0
+      },
+      "axe": [],
+      "calls": [
+        {
+          "name": "engine_project_file",
+          "request": {
+            "operation": "review_pin",
+            "expected_revision": 7
+          }
+        }
+      ],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "review-desktop",
+      "state": "review",
+      "scenario": "saved",
+      "size": "desktop",
+      "width": 1440,
+      "height": 900,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollWidth": 1440,
+          "scrollHeight": 900,
+          "scrollX": 0,
+          "scrollY": 0
+        },
+        "titlebar": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 40
+        },
+        "projectButton": {
+          "x": 31,
+          "y": 8,
+          "width": 69,
+          "height": 24
+        },
+        "projectName": {
+          "x": 36,
+          "y": 10,
+          "width": 43,
+          "height": 20,
+          "truncated": false,
+          "text": "Harbor"
+        },
+        "projectButtonLabel": "Project: Harbor",
+        "menu": null,
+        "dialog": {
+          "x": 480,
+          "y": 358,
+          "width": 480,
+          "height": 184,
+          "inside": true,
+          "scrolls": false,
+          "described": "Harbor will require engine =0.1.0.Reviewed at revision 7. The project file changes only when you pin.",
+          "buttons": [
+            {
+              "text": "Review details",
+              "disabled": null
+            },
+            {
+              "text": "Cancel",
+              "disabled": null
+            },
+            {
+              "text": "Pin",
+              "disabled": null
+            }
+          ]
+        },
+        "notice": [],
+        "status": "",
+        "panels": [
+          {
+            "region": "hierarchy",
+            "x": 0,
+            "y": 40,
+            "width": 245,
+            "height": 832
+          },
+          {
+            "region": "viewport",
+            "x": 246,
+            "y": 40,
+            "width": 833,
+            "height": 588
+          },
+          {
+            "region": "dock",
+            "x": 246,
+            "y": 629,
+            "width": 833,
+            "height": 243
+          },
+          {
+            "region": "inspector",
+            "x": 1080,
+            "y": 40,
+            "width": 360,
+            "height": 730
+          },
+          {
+            "region": "agent",
+            "x": 1080,
+            "y": 770,
+            "width": 360,
+            "height": 102
+          }
+        ],
+        "active": {
+          "tag": "BUTTON",
+          "className": "button",
+          "name": "Cancel",
+          "focusVisible": false
+        },
+        "imgInDialog": 0
+      },
+      "axe": [],
+      "calls": [
+        {
+          "name": "engine_project_file",
+          "request": {
+            "operation": "review_pin",
+            "expected_revision": 7
+          }
+        }
+      ],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "review-narrow",
+      "state": "review",
+      "scenario": "saved",
+      "size": "narrow",
+      "width": 1024,
+      "height": 680,
+      "measured": {
+        "window": {
+          "width": 1024,
+          "height": 680,
+          "scrollWidth": 1024,
+          "scrollHeight": 680,
+          "scrollX": 0,
+          "scrollY": 0
+        },
+        "titlebar": {
+          "x": 0,
+          "y": 0,
+          "width": 1024,
+          "height": 40
+        },
+        "projectButton": {
+          "x": 31,
+          "y": 8,
+          "width": 69,
+          "height": 24
+        },
+        "projectName": {
+          "x": 36,
+          "y": 10,
+          "width": 43,
+          "height": 20,
+          "truncated": false,
+          "text": "Harbor"
+        },
+        "projectButtonLabel": "Project: Harbor",
+        "menu": null,
+        "dialog": {
+          "x": 272,
+          "y": 248,
+          "width": 480,
+          "height": 184,
+          "inside": true,
+          "scrolls": false,
+          "described": "Harbor will require engine =0.1.0.Reviewed at revision 7. The project file changes only when you pin.",
+          "buttons": [
+            {
+              "text": "Review details",
+              "disabled": null
+            },
+            {
+              "text": "Cancel",
+              "disabled": null
+            },
+            {
+              "text": "Pin",
+              "disabled": null
+            }
+          ]
+        },
+        "notice": [],
+        "status": "",
+        "panels": [
+          {
+            "region": "hierarchy",
+            "x": 0,
+            "y": 40,
+            "width": 232,
+            "height": 612
+          },
+          {
+            "region": "viewport",
+            "x": 233,
+            "y": 40,
+            "width": 450,
+            "height": 427
+          },
+          {
+            "region": "dock",
+            "x": 233,
+            "y": 468,
+            "width": 450,
+            "height": 184
+          },
+          {
+            "region": "inspector",
+            "x": 684,
+            "y": 40,
+            "width": 340,
+            "height": 575
+          },
+          {
+            "region": "agent",
+            "x": 684,
+            "y": 615,
+            "width": 340,
+            "height": 37
+          }
+        ],
+        "active": {
+          "tag": "BUTTON",
+          "className": "button",
+          "name": "Cancel",
+          "focusVisible": false
+        },
+        "imgInDialog": 0
+      },
+      "axe": [],
+      "calls": [
+        {
+          "name": "engine_project_file",
+          "request": {
+            "operation": "review_pin",
+            "expected_revision": 7
+          }
+        }
+      ],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "review-details-desktop",
+      "state": "review-details",
+      "scenario": "saved",
+      "size": "desktop",
+      "width": 1440,
+      "height": 900,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollWidth": 1440,
+          "scrollHeight": 900,
+          "scrollX": 0,
+          "scrollY": 0
+        },
+        "titlebar": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 40
+        },
+        "projectButton": {
+          "x": 31,
+          "y": 8,
+          "width": 69,
+          "height": 24
+        },
+        "projectName": {
+          "x": 36,
+          "y": 10,
+          "width": 43,
+          "height": 20,
+          "truncated": false,
+          "text": "Harbor"
+        },
+        "projectButtonLabel": "Project: Harbor",
+        "menu": null,
+        "dialog": {
+          "x": 480,
+          "y": 170.5,
+          "width": 480,
+          "height": 559,
+          "inside": true,
+          "scrolls": false,
+          "described": "Harbor will require engine =0.1.0.Reviewed at revision 7. The project file changes only when you pin.",
+          "buttons": [
+            {
+              "text": "Review details",
+              "disabled": null
+            },
+            {
+              "text": "Show all 1.3 MB",
+              "disabled": null
+            },
+            {
+              "text": "Cancel",
+              "disabled": null
+            },
+            {
+              "text": "Pin",
+              "disabled": null
+            }
+          ]
+        },
+        "notice": [],
+        "status": "",
+        "panels": [
+          {
+            "region": "hierarchy",
+            "x": 0,
+            "y": 40,
+            "width": 245,
+            "height": 832
+          },
+          {
+            "region": "viewport",
+            "x": 246,
+            "y": 40,
+            "width": 833,
+            "height": 588
+          },
+          {
+            "region": "dock",
+            "x": 246,
+            "y": 629,
+            "width": 833,
+            "height": 243
+          },
+          {
+            "region": "inspector",
+            "x": 1080,
+            "y": 40,
+            "width": 360,
+            "height": 730
+          },
+          {
+            "region": "agent",
+            "x": 1080,
+            "y": 770,
+            "width": 360,
+            "height": 102
+          }
+        ],
+        "active": {
+          "tag": "BUTTON",
+          "className": "pin__disclosure",
+          "name": "Review details",
+          "focusVisible": false
+        },
+        "imgInDialog": 0
+      },
+      "axe": [],
+      "calls": [
+        {
+          "name": "engine_project_file",
+          "request": {
+            "operation": "review_pin",
+            "expected_revision": 7
+          }
+        }
+      ],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "review-details-narrow",
+      "state": "review-details",
+      "scenario": "saved",
+      "size": "narrow",
+      "width": 1024,
+      "height": 680,
+      "measured": {
+        "window": {
+          "width": 1024,
+          "height": 680,
+          "scrollWidth": 1024,
+          "scrollHeight": 680,
+          "scrollX": 0,
+          "scrollY": 0
+        },
+        "titlebar": {
+          "x": 0,
+          "y": 0,
+          "width": 1024,
+          "height": 40
+        },
+        "projectButton": {
+          "x": 31,
+          "y": 8,
+          "width": 69,
+          "height": 24
+        },
+        "projectName": {
+          "x": 36,
+          "y": 10,
+          "width": 43,
+          "height": 20,
+          "truncated": false,
+          "text": "Harbor"
+        },
+        "projectButtonLabel": "Project: Harbor",
+        "menu": null,
+        "dialog": {
+          "x": 272,
+          "y": 60.5,
+          "width": 480,
+          "height": 559,
+          "inside": true,
+          "scrolls": false,
+          "described": "Harbor will require engine =0.1.0.Reviewed at revision 7. The project file changes only when you pin.",
+          "buttons": [
+            {
+              "text": "Review details",
+              "disabled": null
+            },
+            {
+              "text": "Show all 1.3 MB",
+              "disabled": null
+            },
+            {
+              "text": "Cancel",
+              "disabled": null
+            },
+            {
+              "text": "Pin",
+              "disabled": null
+            }
+          ]
+        },
+        "notice": [],
+        "status": "",
+        "panels": [
+          {
+            "region": "hierarchy",
+            "x": 0,
+            "y": 40,
+            "width": 232,
+            "height": 612
+          },
+          {
+            "region": "viewport",
+            "x": 233,
+            "y": 40,
+            "width": 450,
+            "height": 427
+          },
+          {
+            "region": "dock",
+            "x": 233,
+            "y": 468,
+            "width": 450,
+            "height": 184
+          },
+          {
+            "region": "inspector",
+            "x": 684,
+            "y": 40,
+            "width": 340,
+            "height": 575
+          },
+          {
+            "region": "agent",
+            "x": 684,
+            "y": 615,
+            "width": 340,
+            "height": 37
+          }
+        ],
+        "active": {
+          "tag": "BUTTON",
+          "className": "pin__disclosure",
+          "name": "Review details",
+          "focusVisible": false
+        },
+        "imgInDialog": 0
+      },
+      "axe": [],
+      "calls": [
+        {
+          "name": "engine_project_file",
+          "request": {
+            "operation": "review_pin",
+            "expected_revision": 7
+          }
+        }
+      ],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "review-refused-unsaved-desktop",
+      "state": "review-refused-unsaved",
+      "scenario": "unsaved",
+      "size": "desktop",
+      "width": 1440,
+      "height": 900,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollWidth": 1440,
+          "scrollHeight": 900,
+          "scrollX": 0,
+          "scrollY": 0
+        },
+        "titlebar": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 40
+        },
+        "projectButton": {
+          "x": 31,
+          "y": 8,
+          "width": 69,
+          "height": 24
+        },
+        "projectName": {
+          "x": 36,
+          "y": 10,
+          "width": 43,
+          "height": 20,
+          "truncated": false,
+          "text": "Harbor"
+        },
+        "projectButtonLabel": "Project: Harbor",
+        "menu": null,
+        "dialog": {
+          "x": 480,
+          "y": 368.5,
+          "width": 480,
+          "height": 163,
+          "inside": true,
+          "scrolls": false,
+          "described": "No review was returned. source project differs from the currently opened document; reload or save explicitlyengine.request",
+          "buttons": [
+            {
+              "text": "Close",
+              "disabled": null
+            },
+            {
+              "text": "Review again",
+              "disabled": null
+            }
+          ]
+        },
+        "notice": [],
+        "status": "",
+        "panels": [
+          {
+            "region": "hierarchy",
+            "x": 0,
+            "y": 40,
+            "width": 245,
+            "height": 832
+          },
+          {
+            "region": "viewport",
+            "x": 246,
+            "y": 40,
+            "width": 833,
+            "height": 588
+          },
+          {
+            "region": "dock",
+            "x": 246,
+            "y": 629,
+            "width": 833,
+            "height": 243
+          },
+          {
+            "region": "inspector",
+            "x": 1080,
+            "y": 40,
+            "width": 360,
+            "height": 730
+          },
+          {
+            "region": "agent",
+            "x": 1080,
+            "y": 770,
+            "width": 360,
+            "height": 102
+          }
+        ],
+        "active": {
+          "tag": "BUTTON",
+          "className": "button",
+          "name": "Close",
+          "focusVisible": false
+        },
+        "imgInDialog": 0
+      },
+      "axe": [],
+      "calls": [
+        {
+          "name": "engine_project_file",
+          "request": {
+            "operation": "review_pin",
+            "expected_revision": 7
+          }
+        }
+      ],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "review-refused-unsaved-narrow",
+      "state": "review-refused-unsaved",
+      "scenario": "unsaved",
+      "size": "narrow",
+      "width": 1024,
+      "height": 680,
+      "measured": {
+        "window": {
+          "width": 1024,
+          "height": 680,
+          "scrollWidth": 1024,
+          "scrollHeight": 680,
+          "scrollX": 0,
+          "scrollY": 0
+        },
+        "titlebar": {
+          "x": 0,
+          "y": 0,
+          "width": 1024,
+          "height": 40
+        },
+        "projectButton": {
+          "x": 31,
+          "y": 8,
+          "width": 69,
+          "height": 24
+        },
+        "projectName": {
+          "x": 36,
+          "y": 10,
+          "width": 43,
+          "height": 20,
+          "truncated": false,
+          "text": "Harbor"
+        },
+        "projectButtonLabel": "Project: Harbor",
+        "menu": null,
+        "dialog": {
+          "x": 272,
+          "y": 258.5,
+          "width": 480,
+          "height": 163,
+          "inside": true,
+          "scrolls": false,
+          "described": "No review was returned. source project differs from the currently opened document; reload or save explicitlyengine.request",
+          "buttons": [
+            {
+              "text": "Close",
+              "disabled": null
+            },
+            {
+              "text": "Review again",
+              "disabled": null
+            }
+          ]
+        },
+        "notice": [],
+        "status": "",
+        "panels": [
+          {
+            "region": "hierarchy",
+            "x": 0,
+            "y": 40,
+            "width": 232,
+            "height": 612
+          },
+          {
+            "region": "viewport",
+            "x": 233,
+            "y": 40,
+            "width": 450,
+            "height": 427
+          },
+          {
+            "region": "dock",
+            "x": 233,
+            "y": 468,
+            "width": 450,
+            "height": 184
+          },
+          {
+            "region": "inspector",
+            "x": 684,
+            "y": 40,
+            "width": 340,
+            "height": 575
+          },
+          {
+            "region": "agent",
+            "x": 684,
+            "y": 615,
+            "width": 340,
+            "height": 37
+          }
+        ],
+        "active": {
+          "tag": "BUTTON",
+          "className": "button",
+          "name": "Close",
+          "focusVisible": false
+        },
+        "imgInDialog": 0
+      },
+      "axe": [],
+      "calls": [
+        {
+          "name": "engine_project_file",
+          "request": {
+            "operation": "review_pin",
+            "expected_revision": 7
+          }
+        }
+      ],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "review-refused-pinned-desktop",
+      "state": "review-refused-pinned",
+      "scenario": "pinned",
+      "size": "desktop",
+      "width": 1440,
+      "height": 900,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollWidth": 1440,
+          "scrollHeight": 900,
+          "scrollX": 0,
+          "scrollY": 0
+        },
+        "titlebar": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 40
+        },
+        "projectButton": {
+          "x": 31,
+          "y": 8,
+          "width": 69,
+          "height": 24
+        },
+        "projectName": {
+          "x": 36,
+          "y": 10,
+          "width": 43,
+          "height": 20,
+          "truncated": false,
+          "text": "Harbor"
+        },
+        "projectButtonLabel": "Project: Harbor",
+        "menu": null,
+        "dialog": {
+          "x": 480,
+          "y": 368.5,
+          "width": 480,
+          "height": 163,
+          "inside": true,
+          "scrolls": false,
+          "described": "No review was returned. engine pin review applies only to a legacy project without an engine declarationengine.request",
+          "buttons": [
+            {
+              "text": "Close",
+              "disabled": null
+            },
+            {
+              "text": "Review again",
+              "disabled": null
+            }
+          ]
+        },
+        "notice": [],
+        "status": "",
+        "panels": [
+          {
+            "region": "hierarchy",
+            "x": 0,
+            "y": 40,
+            "width": 245,
+            "height": 832
+          },
+          {
+            "region": "viewport",
+            "x": 246,
+            "y": 40,
+            "width": 833,
+            "height": 588
+          },
+          {
+            "region": "dock",
+            "x": 246,
+            "y": 629,
+            "width": 833,
+            "height": 243
+          },
+          {
+            "region": "inspector",
+            "x": 1080,
+            "y": 40,
+            "width": 360,
+            "height": 730
+          },
+          {
+            "region": "agent",
+            "x": 1080,
+            "y": 770,
+            "width": 360,
+            "height": 102
+          }
+        ],
+        "active": {
+          "tag": "BUTTON",
+          "className": "button",
+          "name": "Close",
+          "focusVisible": false
+        },
+        "imgInDialog": 0
+      },
+      "axe": [],
+      "calls": [
+        {
+          "name": "engine_project_file",
+          "request": {
+            "operation": "review_pin",
+            "expected_revision": 7
+          }
+        }
+      ],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "applying-desktop",
+      "state": "applying",
+      "scenario": "slow-apply",
+      "size": "desktop",
+      "width": 1440,
+      "height": 900,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollWidth": 1440,
+          "scrollHeight": 900,
+          "scrollX": 0,
+          "scrollY": 0
+        },
+        "titlebar": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 40
+        },
+        "projectButton": {
+          "x": 31,
+          "y": 8,
+          "width": 67,
+          "height": 24
+        },
+        "projectName": {
+          "x": 36,
+          "y": 10,
+          "width": 43,
+          "height": 20,
+          "truncated": false,
+          "text": "Harbor"
+        },
+        "projectButtonLabel": "Project: Harbor, pinning the engine version",
+        "menu": null,
+        "dialog": {
+          "x": 480,
+          "y": 358,
+          "width": 480,
+          "height": 184,
+          "inside": true,
+          "scrolls": false,
+          "described": "Harbor will require engine =0.1.0.Reviewed at revision 7. The project file changes only when you pin.",
+          "buttons": [
+            {
+              "text": "Review details",
+              "disabled": null
+            },
+            {
+              "text": "Close",
+              "disabled": null
+            },
+            {
+              "text": "Pinning…",
+              "disabled": "true"
+            }
+          ]
+        },
+        "notice": [],
+        "status": "",
+        "panels": [
+          {
+            "region": "hierarchy",
+            "x": 0,
+            "y": 40,
+            "width": 245,
+            "height": 832
+          },
+          {
+            "region": "viewport",
+            "x": 246,
+            "y": 40,
+            "width": 833,
+            "height": 588
+          },
+          {
+            "region": "dock",
+            "x": 246,
+            "y": 629,
+            "width": 833,
+            "height": 243
+          },
+          {
+            "region": "inspector",
+            "x": 1080,
+            "y": 40,
+            "width": 360,
+            "height": 730
+          },
+          {
+            "region": "agent",
+            "x": 1080,
+            "y": 770,
+            "width": 360,
+            "height": 102
+          }
+        ],
+        "active": {
+          "tag": "BUTTON",
+          "className": "button button--primary",
+          "name": "Pinning…",
+          "focusVisible": false
+        },
+        "imgInDialog": 0
+      },
+      "axe": [],
+      "calls": [
+        {
+          "name": "engine_project_file",
+          "request": {
+            "operation": "review_pin",
+            "expected_revision": 7
+          }
+        },
+        {
+          "name": "engine_project_file",
+          "request": {
+            "operation": "apply_pin",
+            "expected_revision": 7,
+            "review_id": "01M4WV34G80000000000000901"
+          }
+        }
+      ],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "applied-desktop",
+      "state": "applied",
+      "scenario": "saved",
+      "size": "desktop",
+      "width": 1440,
+      "height": 900,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollWidth": 1440,
+          "scrollHeight": 900,
+          "scrollX": 0,
+          "scrollY": 0
+        },
+        "titlebar": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 40
+        },
+        "projectButton": {
+          "x": 31,
+          "y": 8,
+          "width": 69,
+          "height": 24
+        },
+        "projectName": {
+          "x": 36,
+          "y": 10,
+          "width": 43,
+          "height": 20,
+          "truncated": false,
+          "text": "Harbor"
+        },
+        "projectButtonLabel": "Project: Harbor",
+        "menu": null,
+        "dialog": {
+          "x": 480,
+          "y": 384.5,
+          "width": 480,
+          "height": 131,
+          "inside": true,
+          "scrolls": false,
+          "described": "Pinned. Harbor now requires engine =0.1.0 (revision 8).",
+          "buttons": [
+            {
+              "text": "Close",
+              "disabled": null
+            }
+          ]
+        },
+        "notice": [],
+        "status": "",
+        "panels": [
+          {
+            "region": "hierarchy",
+            "x": 0,
+            "y": 40,
+            "width": 245,
+            "height": 832
+          },
+          {
+            "region": "viewport",
+            "x": 246,
+            "y": 40,
+            "width": 833,
+            "height": 588
+          },
+          {
+            "region": "dock",
+            "x": 246,
+            "y": 629,
+            "width": 833,
+            "height": 243
+          },
+          {
+            "region": "inspector",
+            "x": 1080,
+            "y": 40,
+            "width": 360,
+            "height": 730
+          },
+          {
+            "region": "agent",
+            "x": 1080,
+            "y": 770,
+            "width": 360,
+            "height": 102
+          }
+        ],
+        "active": {
+          "tag": "BUTTON",
+          "className": "button",
+          "name": "Close",
+          "focusVisible": false
+        },
+        "imgInDialog": 0
+      },
+      "axe": [],
+      "calls": [
+        {
+          "name": "engine_project_file",
+          "request": {
+            "operation": "review_pin",
+            "expected_revision": 7
+          }
+        },
+        {
+          "name": "engine_project_file",
+          "request": {
+            "operation": "apply_pin",
+            "expected_revision": 7,
+            "review_id": "01M4WV34G80000000000000901"
+          }
+        }
+      ],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "applied-narrow",
+      "state": "applied",
+      "scenario": "saved",
+      "size": "narrow",
+      "width": 1024,
+      "height": 680,
+      "measured": {
+        "window": {
+          "width": 1024,
+          "height": 680,
+          "scrollWidth": 1024,
+          "scrollHeight": 680,
+          "scrollX": 0,
+          "scrollY": 0
+        },
+        "titlebar": {
+          "x": 0,
+          "y": 0,
+          "width": 1024,
+          "height": 40
+        },
+        "projectButton": {
+          "x": 31,
+          "y": 8,
+          "width": 69,
+          "height": 24
+        },
+        "projectName": {
+          "x": 36,
+          "y": 10,
+          "width": 43,
+          "height": 20,
+          "truncated": false,
+          "text": "Harbor"
+        },
+        "projectButtonLabel": "Project: Harbor",
+        "menu": null,
+        "dialog": {
+          "x": 272,
+          "y": 274.5,
+          "width": 480,
+          "height": 131,
+          "inside": true,
+          "scrolls": false,
+          "described": "Pinned. Harbor now requires engine =0.1.0 (revision 8).",
+          "buttons": [
+            {
+              "text": "Close",
+              "disabled": null
+            }
+          ]
+        },
+        "notice": [],
+        "status": "",
+        "panels": [
+          {
+            "region": "hierarchy",
+            "x": 0,
+            "y": 40,
+            "width": 232,
+            "height": 612
+          },
+          {
+            "region": "viewport",
+            "x": 233,
+            "y": 40,
+            "width": 450,
+            "height": 427
+          },
+          {
+            "region": "dock",
+            "x": 233,
+            "y": 468,
+            "width": 450,
+            "height": 184
+          },
+          {
+            "region": "inspector",
+            "x": 684,
+            "y": 40,
+            "width": 340,
+            "height": 575
+          },
+          {
+            "region": "agent",
+            "x": 684,
+            "y": 615,
+            "width": 340,
+            "height": 37
+          }
+        ],
+        "active": {
+          "tag": "BUTTON",
+          "className": "button",
+          "name": "Close",
+          "focusVisible": false
+        },
+        "imgInDialog": 0
+      },
+      "axe": [],
+      "calls": [
+        {
+          "name": "engine_project_file",
+          "request": {
+            "operation": "review_pin",
+            "expected_revision": 7
+          }
+        },
+        {
+          "name": "engine_project_file",
+          "request": {
+            "operation": "apply_pin",
+            "expected_revision": 7,
+            "review_id": "01M4WV34G80000000000000901"
+          }
+        }
+      ],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "apply-failed-desktop",
+      "state": "apply-failed",
+      "scenario": "apply-fails",
+      "size": "desktop",
+      "width": 1440,
+      "height": 900,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollWidth": 1440,
+          "scrollHeight": 900,
+          "scrollX": 0,
+          "scrollY": 0
+        },
+        "titlebar": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 40
+        },
+        "projectButton": {
+          "x": 31,
+          "y": 8,
+          "width": 69,
+          "height": 24
+        },
+        "projectName": {
+          "x": 36,
+          "y": 10,
+          "width": 43,
+          "height": 20,
+          "truncated": false,
+          "text": "Harbor"
+        },
+        "projectButtonLabel": "Project: Harbor",
+        "menu": null,
+        "dialog": {
+          "x": 480,
+          "y": 316,
+          "width": 480,
+          "height": 268,
+          "inside": true,
+          "scrolls": false,
+          "described": "Harbor will require engine =0.1.0.Reviewed at revision 7. The project file changes only when you pin.",
+          "buttons": [
+            {
+              "text": "Review details",
+              "disabled": null
+            },
+            {
+              "text": "Close",
+              "disabled": null
+            },
+            {
+              "text": "Review again",
+              "disabled": null
+            }
+          ]
+        },
+        "notice": [],
+        "status": "",
+        "panels": [
+          {
+            "region": "hierarchy",
+            "x": 0,
+            "y": 40,
+            "width": 245,
+            "height": 832
+          },
+          {
+            "region": "viewport",
+            "x": 246,
+            "y": 40,
+            "width": 833,
+            "height": 588
+          },
+          {
+            "region": "dock",
+            "x": 246,
+            "y": 629,
+            "width": 833,
+            "height": 243
+          },
+          {
+            "region": "inspector",
+            "x": 1080,
+            "y": 40,
+            "width": 360,
+            "height": 730
+          },
+          {
+            "region": "agent",
+            "x": 1080,
+            "y": 770,
+            "width": 360,
+            "height": 102
+          }
+        ],
+        "active": {
+          "tag": "BUTTON",
+          "className": "button",
+          "name": "Close",
+          "focusVisible": false
+        },
+        "imgInDialog": 0
+      },
+      "axe": [],
+      "calls": [
+        {
+          "name": "engine_project_file",
+          "request": {
+            "operation": "review_pin",
+            "expected_revision": 7
+          }
+        },
+        {
+          "name": "engine_project_file",
+          "request": {
+            "operation": "apply_pin",
+            "expected_revision": 7,
+            "review_id": "01M4WV34G80000000000000901"
+          }
+        }
+      ],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "stale-desktop",
+      "state": "stale",
+      "scenario": "saved",
+      "size": "desktop",
+      "width": 1440,
+      "height": 900,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollWidth": 1440,
+          "scrollHeight": 900,
+          "scrollX": 0,
+          "scrollY": 0
+        },
+        "titlebar": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 40
+        },
+        "projectButton": {
+          "x": 31,
+          "y": 8,
+          "width": 69,
+          "height": 24
+        },
+        "projectName": {
+          "x": 36,
+          "y": 10,
+          "width": 43,
+          "height": 20,
+          "truncated": false,
+          "text": "Harbor"
+        },
+        "projectButtonLabel": "Project: Harbor",
+        "menu": null,
+        "dialog": {
+          "x": 480,
+          "y": 335,
+          "width": 480,
+          "height": 230,
+          "inside": true,
+          "scrolls": false,
+          "described": "Harbor will require engine =0.1.0.Reviewed at revision 7. The project file changes only when you pin.",
+          "buttons": [
+            {
+              "text": "Review details",
+              "disabled": null
+            },
+            {
+              "text": "Cancel",
+              "disabled": null
+            },
+            {
+              "text": "Review again",
+              "disabled": null
+            }
+          ]
+        },
+        "notice": [],
+        "status": "",
+        "panels": [
+          {
+            "region": "hierarchy",
+            "x": 0,
+            "y": 40,
+            "width": 245,
+            "height": 832
+          },
+          {
+            "region": "viewport",
+            "x": 246,
+            "y": 40,
+            "width": 833,
+            "height": 588
+          },
+          {
+            "region": "dock",
+            "x": 246,
+            "y": 629,
+            "width": 833,
+            "height": 243
+          },
+          {
+            "region": "inspector",
+            "x": 1080,
+            "y": 40,
+            "width": 360,
+            "height": 730
+          },
+          {
+            "region": "agent",
+            "x": 1080,
+            "y": 770,
+            "width": 360,
+            "height": 102
+          }
+        ],
+        "active": {
+          "tag": "BUTTON",
+          "className": "button",
+          "name": "Cancel",
+          "focusVisible": false
+        },
+        "imgInDialog": 0
+      },
+      "axe": [],
+      "calls": [
+        {
+          "name": "engine_project_file",
+          "request": {
+            "operation": "review_pin",
+            "expected_revision": 7
+          }
+        }
+      ],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "stale-narrow",
+      "state": "stale",
+      "scenario": "saved",
+      "size": "narrow",
+      "width": 1024,
+      "height": 680,
+      "measured": {
+        "window": {
+          "width": 1024,
+          "height": 680,
+          "scrollWidth": 1024,
+          "scrollHeight": 680,
+          "scrollX": 0,
+          "scrollY": 0
+        },
+        "titlebar": {
+          "x": 0,
+          "y": 0,
+          "width": 1024,
+          "height": 40
+        },
+        "projectButton": {
+          "x": 31,
+          "y": 8,
+          "width": 69,
+          "height": 24
+        },
+        "projectName": {
+          "x": 36,
+          "y": 10,
+          "width": 43,
+          "height": 20,
+          "truncated": false,
+          "text": "Harbor"
+        },
+        "projectButtonLabel": "Project: Harbor",
+        "menu": null,
+        "dialog": {
+          "x": 272,
+          "y": 225,
+          "width": 480,
+          "height": 230,
+          "inside": true,
+          "scrolls": false,
+          "described": "Harbor will require engine =0.1.0.Reviewed at revision 7. The project file changes only when you pin.",
+          "buttons": [
+            {
+              "text": "Review details",
+              "disabled": null
+            },
+            {
+              "text": "Cancel",
+              "disabled": null
+            },
+            {
+              "text": "Review again",
+              "disabled": null
+            }
+          ]
+        },
+        "notice": [],
+        "status": "",
+        "panels": [
+          {
+            "region": "hierarchy",
+            "x": 0,
+            "y": 40,
+            "width": 232,
+            "height": 612
+          },
+          {
+            "region": "viewport",
+            "x": 233,
+            "y": 40,
+            "width": 450,
+            "height": 427
+          },
+          {
+            "region": "dock",
+            "x": 233,
+            "y": 468,
+            "width": 450,
+            "height": 184
+          },
+          {
+            "region": "inspector",
+            "x": 684,
+            "y": 40,
+            "width": 340,
+            "height": 575
+          },
+          {
+            "region": "agent",
+            "x": 684,
+            "y": 615,
+            "width": 340,
+            "height": 37
+          }
+        ],
+        "active": {
+          "tag": "BUTTON",
+          "className": "button",
+          "name": "Cancel",
+          "focusVisible": false
+        },
+        "imgInDialog": 0
+      },
+      "axe": [],
+      "calls": [
+        {
+          "name": "engine_project_file",
+          "request": {
+            "operation": "review_pin",
+            "expected_revision": 7
+          }
+        }
+      ],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "retired-desktop",
+      "state": "retired",
+      "scenario": "slow-apply",
+      "size": "desktop",
+      "width": 1440,
+      "height": 900,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollWidth": 1440,
+          "scrollHeight": 900,
+          "scrollX": 0,
+          "scrollY": 0
+        },
+        "titlebar": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 40
+        },
+        "projectButton": {
+          "x": 31,
+          "y": 8,
+          "width": 94.9,
+          "height": 24
+        },
+        "projectName": {
+          "x": 36,
+          "y": 10,
+          "width": 68.9,
+          "height": 20,
+          "truncated": false,
+          "text": "Lighthouse"
+        },
+        "projectButtonLabel": "Project: Lighthouse",
+        "menu": null,
+        "dialog": {
+          "x": 480,
+          "y": 378,
+          "width": 480,
+          "height": 144,
+          "inside": true,
+          "scrolls": false,
+          "described": "Harbor is no longer the open project. Lighthouse is open now. Whether Harbor was pinned is not shown here. Review again before pinning.",
+          "buttons": [
+            {
+              "text": "Close",
+              "disabled": null
+            },
+            {
+              "text": "Review again",
+              "disabled": null
+            }
+          ]
+        },
+        "notice": [],
+        "status": "",
+        "panels": [
+          {
+            "region": "hierarchy",
+            "x": 0,
+            "y": 40,
+            "width": 245,
+            "height": 832
+          },
+          {
+            "region": "viewport",
+            "x": 246,
+            "y": 40,
+            "width": 833,
+            "height": 588
+          },
+          {
+            "region": "dock",
+            "x": 246,
+            "y": 629,
+            "width": 833,
+            "height": 243
+          },
+          {
+            "region": "inspector",
+            "x": 1080,
+            "y": 40,
+            "width": 360,
+            "height": 730
+          },
+          {
+            "region": "agent",
+            "x": 1080,
+            "y": 770,
+            "width": 360,
+            "height": 102
+          }
+        ],
+        "active": {
+          "tag": "BUTTON",
+          "className": "button",
+          "name": "Close",
+          "focusVisible": false
+        },
+        "imgInDialog": 0
+      },
+      "axe": [],
+      "calls": [
+        {
+          "name": "engine_project_file",
+          "request": {
+            "operation": "review_pin",
+            "expected_revision": 7
+          }
+        },
+        {
+          "name": "engine_project_file",
+          "request": {
+            "operation": "apply_pin",
+            "expected_revision": 7,
+            "review_id": "01M4WV34G80000000000000901"
+          }
+        }
+      ],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "save-rejected-desktop",
+      "state": "save-rejected",
+      "scenario": "save-rejected",
+      "size": "desktop",
+      "width": 1440,
+      "height": 900,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollWidth": 1440,
+          "scrollHeight": 900,
+          "scrollX": 0,
+          "scrollY": 0
+        },
+        "titlebar": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 40
+        },
+        "projectButton": {
+          "x": 31,
+          "y": 8,
+          "width": 69,
+          "height": 24
+        },
+        "projectName": {
+          "x": 36,
+          "y": 10,
+          "width": 43,
+          "height": 20,
+          "truncated": false,
+          "text": "Harbor"
+        },
+        "projectButtonLabel": "Project: Harbor",
+        "menu": null,
+        "dialog": null,
+        "notice": [
+          "Save result unknown. The editor process exited.host.closedDismiss"
+        ],
+        "status": "",
+        "panels": [
+          {
+            "region": "hierarchy",
+            "x": 0,
+            "y": 73,
+            "width": 245,
+            "height": 799
+          },
+          {
+            "region": "viewport",
+            "x": 246,
+            "y": 73,
+            "width": 833,
+            "height": 555
+          },
+          {
+            "region": "dock",
+            "x": 246,
+            "y": 629,
+            "width": 833,
+            "height": 243
+          },
+          {
+            "region": "inspector",
+            "x": 1080,
+            "y": 73,
+            "width": 360,
+            "height": 697
+          },
+          {
+            "region": "agent",
+            "x": 1080,
+            "y": 770,
+            "width": 360,
+            "height": 102
+          }
+        ],
+        "active": {
+          "tag": "BODY",
+          "className": "",
+          "name": "Skip to hierarchyHarborSample data: Project file fixture: sc",
+          "focusVisible": false
+        },
+        "imgInDialog": 0
+      },
+      "axe": [],
+      "calls": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "apply-rejected-desktop",
+      "state": "apply-rejected",
+      "scenario": "apply-rejected",
+      "size": "desktop",
+      "width": 1440,
+      "height": 900,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollWidth": 1440,
+          "scrollHeight": 900,
+          "scrollX": 0,
+          "scrollY": 0
+        },
+        "titlebar": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 40
+        },
+        "projectButton": {
+          "x": 31,
+          "y": 8,
+          "width": 69,
+          "height": 24
+        },
+        "projectName": {
+          "x": 36,
+          "y": 10,
+          "width": 43,
+          "height": 20,
+          "truncated": false,
+          "text": "Harbor"
+        },
+        "projectButtonLabel": "Project: Harbor",
+        "menu": null,
+        "dialog": {
+          "x": 480,
+          "y": 324.5,
+          "width": 480,
+          "height": 251,
+          "inside": true,
+          "scrolls": false,
+          "described": "Harbor will require engine =0.1.0.Reviewed at revision 7. The project file changes only when you pin.",
+          "buttons": [
+            {
+              "text": "Review details",
+              "disabled": null
+            },
+            {
+              "text": "Close",
+              "disabled": null
+            },
+            {
+              "text": "Review again",
+              "disabled": null
+            }
+          ]
+        },
+        "notice": [],
+        "status": "",
+        "panels": [
+          {
+            "region": "hierarchy",
+            "x": 0,
+            "y": 40,
+            "width": 245,
+            "height": 832
+          },
+          {
+            "region": "viewport",
+            "x": 246,
+            "y": 40,
+            "width": 833,
+            "height": 588
+          },
+          {
+            "region": "dock",
+            "x": 246,
+            "y": 629,
+            "width": 833,
+            "height": 243
+          },
+          {
+            "region": "inspector",
+            "x": 1080,
+            "y": 40,
+            "width": 360,
+            "height": 730
+          },
+          {
+            "region": "agent",
+            "x": 1080,
+            "y": 770,
+            "width": 360,
+            "height": 102
+          }
+        ],
+        "active": {
+          "tag": "BUTTON",
+          "className": "button",
+          "name": "Close",
+          "focusVisible": false
+        },
+        "imgInDialog": 0
+      },
+      "axe": [],
+      "calls": [
+        {
+          "name": "engine_project_file",
+          "request": {
+            "operation": "review_pin",
+            "expected_revision": 7
+          }
+        }
+      ],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "dialog-keyboard-focus-desktop",
+      "state": "dialog-keyboard-focus",
+      "scenario": "saved",
+      "size": "desktop",
+      "width": 1440,
+      "height": 900,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollWidth": 1440,
+          "scrollHeight": 900,
+          "scrollX": 0,
+          "scrollY": 0
+        },
+        "titlebar": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 40
+        },
+        "projectButton": {
+          "x": 31,
+          "y": 8,
+          "width": 69,
+          "height": 24
+        },
+        "projectName": {
+          "x": 36,
+          "y": 10,
+          "width": 43,
+          "height": 20,
+          "truncated": false,
+          "text": "Harbor"
+        },
+        "projectButtonLabel": "Project: Harbor",
+        "menu": null,
+        "dialog": {
+          "x": 480,
+          "y": 358,
+          "width": 480,
+          "height": 184,
+          "inside": true,
+          "scrolls": false,
+          "described": "Harbor will require engine =0.1.0.Reviewed at revision 7. The project file changes only when you pin.",
+          "buttons": [
+            {
+              "text": "Review details",
+              "disabled": null
+            },
+            {
+              "text": "Cancel",
+              "disabled": null
+            },
+            {
+              "text": "Pin",
+              "disabled": null
+            }
+          ]
+        },
+        "notice": [],
+        "status": "",
+        "panels": [
+          {
+            "region": "hierarchy",
+            "x": 0,
+            "y": 40,
+            "width": 245,
+            "height": 832
+          },
+          {
+            "region": "viewport",
+            "x": 246,
+            "y": 40,
+            "width": 833,
+            "height": 588
+          },
+          {
+            "region": "dock",
+            "x": 246,
+            "y": 629,
+            "width": 833,
+            "height": 243
+          },
+          {
+            "region": "inspector",
+            "x": 1080,
+            "y": 40,
+            "width": 360,
+            "height": 730
+          },
+          {
+            "region": "agent",
+            "x": 1080,
+            "y": 770,
+            "width": 360,
+            "height": 102
+          }
+        ],
+        "active": {
+          "tag": "BUTTON",
+          "className": "button button--primary",
+          "name": "Pin",
+          "focusVisible": true
+        },
+        "imgInDialog": 0
+      },
+      "axe": [],
+      "calls": [
+        {
+          "name": "engine_project_file",
+          "request": {
+            "operation": "review_pin",
+            "expected_revision": 7
+          }
+        }
+      ],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    }
+  ],
+  "flows": [
+    {
+      "name": "save-from-text-field",
+      "scenario": "unsaved",
+      "errors": [],
+      "requests": [],
+      "checks": {
+        "status": "Saved revision 7 to the project file.",
+        "filterValue": "lan",
+        "focus": {
+          "tag": "INPUT",
+          "className": "",
+          "text": "",
+          "label": null,
+          "focusVisible": true
+        }
+      },
+      "error": null,
+      "calls": [
+        {
+          "name": "engine_project_file",
+          "request": {
+            "operation": "save",
+            "expected_revision": 7
+          }
+        }
+      ]
+    },
+    {
+      "name": "keyboard-pin",
+      "scenario": "saved",
+      "errors": [],
+      "requests": [],
+      "checks": {
+        "start": {
+          "tag": "BUTTON",
+          "className": "titlebar__project-button",
+          "text": "Harbor",
+          "label": "Project: Harbor",
+          "focusVisible": true
+        },
+        "menuFocus": {
+          "tag": "DIV",
+          "className": "menu__item",
+          "text": "Save⌘S",
+          "label": null,
+          "focusVisible": true
+        },
+        "dialogFocus": {
+          "tag": "BUTTON",
+          "className": "button",
+          "text": "Cancel",
+          "label": null,
+          "focusVisible": true
+        },
+        "afterReviewFocus": {
+          "tag": "BUTTON",
+          "className": "button",
+          "text": "Cancel",
+          "label": null,
+          "focusVisible": true
+        },
+        "tabbedTo": {
+          "tag": "BUTTON",
+          "className": "button button--primary",
+          "text": "Pin",
+          "label": null,
+          "focusVisible": true
+        },
+        "afterPinFocus": {
+          "tag": "BUTTON",
+          "className": "button",
+          "text": "Close",
+          "label": null,
+          "focusVisible": true
+        },
+        "described": "Pinned. Harbor now requires engine =0.1.0 (revision 8).",
+        "dialogGone": true,
+        "returnedFocus": {
+          "tag": "BUTTON",
+          "className": "titlebar__project-button",
+          "text": "Harbor",
+          "label": "Project: Harbor",
+          "focusVisible": true
+        },
+        "history": [
+          "Rename Lantern",
+          "Raise Crate Stack and hang Lantern above it",
+          "Pin opened project to the current engine"
+        ]
+      },
+      "error": null,
+      "calls": [
+        {
+          "name": "engine_project_file",
+          "request": {
+            "operation": "review_pin",
+            "expected_revision": 7
+          }
+        },
+        {
+          "name": "engine_project_file",
+          "request": {
+            "operation": "apply_pin",
+            "expected_revision": 7,
+            "review_id": "01M4WV34G80000000000000901"
+          }
+        }
+      ]
+    },
+    {
+      "name": "duplicate-save",
+      "scenario": "slow-save",
+      "errors": [],
+      "requests": [],
+      "checks": {
+        "saveItem": {
+          "text": "Save⌘S, unavailable: The project is being saved.",
+          "disabled": "true"
+        },
+        "titleLabel": "Project: Harbor, saving"
+      },
+      "error": null,
+      "calls": [
+        {
+          "name": "engine_project_file",
+          "request": {
+            "operation": "save",
+            "expected_revision": 7
+          }
+        }
+      ]
+    },
+    {
+      "name": "drag-areas",
+      "scenario": "saved",
+      "errors": [],
+      "requests": [],
+      "checks": {
+        "afterButtonAndMenu": 0,
+        "afterSpacer": 1
+      },
+      "error": null,
+      "calls": [
+        {
+          "name": "engine_project_file",
+          "request": {
+            "operation": "save",
+            "expected_revision": 7
+          }
+        },
+        {
+          "name": "window_action",
+          "args": {
+            "action": "drag"
+          }
+        }
+      ]
+    },
+    {
+      "name": "escape-returns-focus",
+      "scenario": "saved",
+      "errors": [],
+      "requests": [],
+      "checks": {
+        "dialogGone": true,
+        "focus": {
+          "tag": "BUTTON",
+          "className": "titlebar__project-button",
+          "text": "Harbor",
+          "label": "Project: Harbor",
+          "focusVisible": true
+        }
+      },
+      "error": null,
+      "calls": [
+        {
+          "name": "engine_project_file",
+          "request": {
+            "operation": "review_pin",
+            "expected_revision": 7
+          }
+        }
+      ]
+    }
+  ]
+}

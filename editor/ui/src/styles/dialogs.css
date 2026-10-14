@@ -1,4 +1,4 @@
-/* Modal dialogs: keyboard shortcuts and the ChatGPT account. */
+/* Modal dialogs: keyboard shortcuts, the ChatGPT account and the engine pin review. */
 
 .scrim {
   position: fixed;
@@ -313,4 +313,253 @@ kbd.shortcuts__combo {
   color: var(--color-text-subtle);
   font-size: var(--text-xs);
   line-height: 17px;
+}
+
+/* ---- Engine pin review ---- */
+
+/* The review in two lines of words, the rest of it on request, then the decision. No
+   cards: the checksums and file text sit in the dialog's own column. */
+.dialog--pin {
+  width: min(480px, calc(100vw - 48px));
+}
+
+.pin {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding-top: var(--space-2);
+}
+
+.pin__summary {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.pin__lead {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  color: var(--color-text-soft);
+  line-height: var(--leading);
+  overflow-wrap: anywhere;
+}
+
+.pin__lead > .spinner {
+  margin-top: 5px;
+}
+
+.pin__done {
+  flex: none;
+  margin-top: 3px;
+  color: var(--color-success);
+}
+
+.pin__name {
+  color: var(--color-text);
+  font-weight: var(--weight-medium);
+}
+
+code.pin__value {
+  color: var(--color-text);
+}
+
+.pin__note {
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+  line-height: 17px;
+}
+
+/* "Review details": a quiet disclosure, as the agent's "Exact arguments". */
+.pin__details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.pin__disclosure {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 22px;
+  margin-left: -4px;
+  padding: 0 6px 0 4px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+  cursor: pointer;
+}
+
+.pin__disclosure:hover {
+  background: var(--color-bg-hover);
+  color: var(--color-text);
+}
+
+.pin__disclosure:focus-visible,
+.pin__disclosure[data-focus-visible] {
+  outline-offset: 0;
+}
+
+.pin__chevron {
+  color: var(--color-text-subtle);
+  transition: transform var(--duration-fast);
+}
+
+.pin__chevron.is-open {
+  transform: rotate(90deg);
+}
+
+.pin__detail-body {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+/* Labels in one column, values in the other, as in the Inspector. */
+.pin__facts {
+  align-self: stretch;
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: 4px var(--space-4);
+  margin: 0;
+  font-size: var(--text-xs);
+  line-height: 17px;
+}
+
+.pin__facts dt {
+  color: var(--color-text-muted);
+}
+
+.pin__facts dd {
+  margin: 0;
+  min-width: 0;
+  color: var(--color-text-soft);
+  overflow-wrap: anywhere;
+}
+
+.pin__hash {
+  word-break: break-all;
+}
+
+.pin__caption {
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+  line-height: 17px;
+}
+
+.pin__size {
+  margin-left: 6px;
+  color: var(--color-text-subtle);
+  font-variant-numeric: tabular-nums;
+}
+
+/* The file the host would write: bounded and scrolling, wrapped so it never widens the dialog. */
+.pin__text {
+  align-self: stretch;
+  max-height: 200px;
+  margin: calc(-1 * var(--space-2)) 0 0;
+  padding: 6px var(--space-3);
+  overflow: auto;
+  overscroll-behavior: contain;
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-well);
+  color: var(--color-text-soft);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  line-height: 16px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.pin__text:focus-visible,
+.pin__text[data-focus-visible] {
+  outline-offset: -2px;
+}
+
+.pin__more {
+  padding: 0;
+  border: 0;
+  border-radius: 3px;
+  background: none;
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+  line-height: 16px;
+  cursor: pointer;
+}
+
+.pin__more:hover {
+  color: var(--color-text);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.pin__more:focus-visible,
+.pin__more[data-focus-visible] {
+  outline-offset: 1px;
+}
+
+/* A refusal or an outdated review: the icon in its colour, the words in text colour. */
+.pin__problem {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  color: var(--color-text-soft);
+  font-size: var(--text-xs);
+  line-height: 17px;
+  overflow-wrap: anywhere;
+}
+
+.pin__problem strong {
+  color: var(--color-text);
+  font-weight: var(--weight-medium);
+}
+
+.pin__problem-icon {
+  flex: none;
+  margin-top: 1px;
+}
+
+.pin__problem--error .pin__problem-icon {
+  color: var(--color-danger);
+}
+
+.pin__problem--warning .pin__problem-icon {
+  color: var(--color-warning);
+}
+
+.pin__problem-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.pin__code {
+  color: var(--color-text-subtle);
+}
+
+.pin__hint {
+  color: var(--color-text-muted);
+}
+
+/* In a notice the sentence's own emphasis leads; a name inside it stays plain. */
+.pin__problem .pin__name {
+  color: inherit;
+  font-weight: inherit;
+}
+
+.pin__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.pin__spinner {
+  margin-left: -2px;
 }

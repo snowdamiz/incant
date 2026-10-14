@@ -1,0 +1,18 @@
+{
+  "assets": {},
+  "id": "01M4ESCTX5JN9PTTQ2P4QCC57K",
+  "memory": {},
+  "name": "Empty",
+  "scenes": {
+    "01M4ESCTX582A8HMVJRAZMDP20": {
+      "entities": {},
+      "id": "01M4ESCTX582A8HMVJRAZMDP20",
+      "name": "Main"
+    }
+  },
+  "schema_version": 1,
+  "scripts": {},
+  "settings": {
+    "tick_rate": 60
+  }
+}

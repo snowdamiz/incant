@@ -1,0 +1,6 @@
+{
+  "creation": "Retained qualified main275 headless init command; 2entities; engine0.0.1",
+  "before_sha256": "49f535d599ad0dc343d80ea1f3ed58e1ad75797795ac131cd69ddd34e64bab92",
+  "bundle_unsigned": true,
+  "purpose": "Scoped native WebKit save and pin-review UI; synthetic project, no live agent request"
+}

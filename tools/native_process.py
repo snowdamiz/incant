@@ -273,8 +273,12 @@ class _WindowsTree:
                     self.process.stdin.close()
 
 
-def _wait(tree, readers, command, timeout, deadline):
-    while not tree.exited():
+def _wait(tree, readers, command, timeout, deadline, cancel=None):
+    while True:
+        if cancel is not None:
+            cancel()
+        if tree.exited():
+            return
         for reader in readers:
             if reader.error is not None:
                 raise reader.error
@@ -356,7 +360,7 @@ class Interactive:
 
 
 def run(command, *, cwd=None, env=None, timeout=120, stdout=None, stderr=None,
-        text=True, encoding='utf-8'):
+        text=True, encoding='utf-8', cancel=None):
     """Run argv without a shell; default stdout/stderr are captured, stdin is EOF.
 
     Return CompletedProcess even for a nonzero command exit. TimeoutExpired
@@ -365,9 +369,15 @@ def run(command, *, cwd=None, env=None, timeout=120, stdout=None, stderr=None,
     failures are reported by the gated wrapper as a nonzero exit with diagnostic
     stderr. POSIX launch failures raise OSError. Kernel termination/reaping may
     exceed the execution timeout; returning with a live owned tree is forbidden.
+    Optional cancel() may raise before launch and during the managed wait. Signal
+    handlers should only latch cancellation, never raise during spawn or cleanup.
     """
+    if cancel is not None and not callable(cancel):
+        raise TypeError('cancel must be callable')
     command = _command(command)
     _timeout(timeout)
+    if cancel is not None:
+        cancel()
     deadline = time.monotonic() + timeout
     options = dict(cwd=cwd, env=env, stdout=subprocess.PIPE if stdout is None else stdout,
                    stderr=subprocess.PIPE if stderr is None else stderr, text=False)
@@ -375,13 +385,15 @@ def run(command, *, cwd=None, env=None, timeout=120, stdout=None, stderr=None,
     readers = []
     failure = None
     try:
+        if cancel is not None:
+            cancel()
         for stream in (tree.process.stdout, tree.process.stderr):
             if stream is not None:
                 reader = _Reader(stream)
                 readers.append(reader)
                 reader.thread.start()
         tree.release()
-        _wait(tree, readers, command, timeout, deadline)
+        _wait(tree, readers, command, timeout, deadline, cancel)
     except BaseException as error:
         failure = error
     finally:
@@ -400,6 +412,8 @@ def run(command, *, cwd=None, env=None, timeout=120, stdout=None, stderr=None,
         failure.output, failure.stderr = out, err
     if failure is not None:
         raise failure
+    if cancel is not None:
+        cancel()
     for reader in readers:
         if reader.error is not None:
             raise reader.error

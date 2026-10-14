@@ -71,3 +71,28 @@ it('rejects duplicate pending requests and refreshes actual host state after fai
   expect(calls).toBe(2);
   rejectFile('another refusal'); await next;
 });
+
+it.each(['invalid receipt', 'rejected reply'] as const)('does not infer rollback after a committed pin and %s', async (kind) => {
+  let current = read();
+  let writes = 0;
+  const original = {code:'transport.closed', message:'The reply channel closed.'};
+  const bridge = new NativeBridge(async <T>(name: string) => {
+    if (name === 'engine_read') return current as T;
+    expect(name).toBe('engine_project_file');
+    ++writes;
+    // The host committed, but the caller cannot verify its completion receipt.
+    current = {...read(), revision:1};
+    if (kind === 'rejected reply') throw original;
+    return {snapshot:current, response:{operation:'apply_pin', transaction_id:'invalid', revision:1}} as T;
+  });
+  await bridge.start();
+  const result = await bridge.request({type:'project.pin.apply', reviewId:review as Ulid});
+  expect(result).toEqual({ok:false, outcomeUnknown:true, error:kind === 'rejected reply' ? original : {code:'engine.request', message:'Invalid project file response.'}});
+  expect(writes).toBe(1);
+  expect(bridge.getSnapshot().connection).toMatchObject({status:'ready', project:{id:project}});
+  // An invalid caller request never reaches the host and has no uncertain write.
+  const invalid = await bridge.request({type:'project.pin.apply',reviewId:'invalid' as Ulid});
+  expect(invalid).toMatchObject({ok:false});
+  expect('outcomeUnknown' in invalid).toBe(false);
+  expect(writes).toBe(1);
+});

@@ -45,8 +45,20 @@ def edit(executable, project, commands, revision=0, journal=None):
                             input=''.join(json.dumps(item) + '\n' for item in requests),
                             text=True, capture_output=True, check=True, timeout=30)
     responses = [json.loads(line) for line in result.stdout.splitlines()]
-    if len(responses) != 2 or any('error' in response for response in responses):
-        raise ValueError('Renderer probe command transaction failed')
+    errors = [{'id': response.get('id'), 'error': response['error'],
+               'code_present': isinstance(response['error'], dict) and 'code' in response['error']}
+              for response in responses if isinstance(response, dict) and 'error' in response]
+    if len(responses) != 2 or errors or any(not isinstance(response, dict) for response in responses):
+        raise ValueError('Renderer probe command transaction failed: ' + json.dumps({
+            'response_count': len(responses), 'errors': errors}, sort_keys=True))
+    executed, saved = (response.get('result') for response in responses)
+    if ([response.get('id') for response in responses] != [1, 2]
+            or any(type(response.get('id')) is not int for response in responses)
+            or not isinstance(executed, dict) or not isinstance(saved, dict)
+            or type(executed.get('revision')) is not int or executed['revision'] < 0
+            or saved.get('saved') is not True):
+        raise ValueError('Renderer probe command transaction returned invalid edit/save receipts')
+    return executed['revision']
 
 
 def validate_model_geometry(geometry):
@@ -142,7 +154,7 @@ def main():
                 'component': 'Transform', 'value': {'translation': translation, 'rotation': rotation, 'scale': scale}}
     def reparent(parent_id):
         return {'op': 'reparent_entity', 'scene_id': scene['id'], 'entity_id': child, 'parent': parent_id}
-    edit(executable, project, [
+    revision = edit(executable, project, [
         transform(parent, [0.5, 0, 0], [0, 0, 1, 0], [2, 1, 1]),
         transform(child, [-1, 0, 0], [0, 0, 0, 1], [1, 1, 1]), reparent(parent)])
     def capture(name):
@@ -154,7 +166,7 @@ def main():
         return pixels
     hierarchy = capture('hierarchy.png')
     edit(executable, project, [
-        reparent(None), transform(child, [2.5, 0, 0], [0, 0, 1, 0], [2, 1, 1])])
+        reparent(None), transform(child, [2.5, 0, 0], [0, 0, 1, 0], [2, 1, 1])], revision)
     flattened = capture('flattened.png')
     if hierarchy != flattened or hierarchy == data:
         raise ValueError('Parented geometry did not match equivalent world-space geometry')

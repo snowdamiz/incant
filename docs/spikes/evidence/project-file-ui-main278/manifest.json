@@ -1,0 +1,33 @@
+{
+  "source": "d803cc2cc15d399bdf61cbf5743f5db81712f64b",
+  "files": {
+    "browser-report.json": "2aac8db43a7951641dd232347ebd4bdb9e89c115227853e2ed94f22bc13d7b80",
+    "build-final-main278.log": "3245505a9246f2c3a0bdcfca5ed7c3afcbcd0246b1bbb9d718ba1692282dac28",
+    "built.json": "50ee4f83d4850b16ee07bdaf0fff444c29a49cf23d49674eea55d8184361d712",
+    "capture-r7.log": "d6db1be425ab0de72b438eaecea31d917cdb9f1a66a96aa393f3e696cd1c0f84",
+    "fixture.json": "9570ece883de61dd5a16dfcbc5863c1b508d53a51ac4d80acfeb33a6065c7121",
+    "full-final-main278.log": "03085d1c57fef320b78aeb87dfddadf5e9caffc8b0304f80546860b421031452",
+    "launch.json": "79f54175f2f155c93508acb7fc18f39ad0377e58e8d66abfce55d31cc7c02804",
+    "launch.py": "871a813fbf458f537b3fde8c6f72901be9ab5f5fbf58ef9f9aca00906238613e",
+    "legacy-before.incant.json": "34d525b7bc48a01f88d6c0cb06998c2e31c8123f6917158f063748eb0b5e7e72",
+    "legacy-exit.json": "8321bc10d3f31e64542564d6998eb233a0b6ad1c35aeb380ddd4c75483c42022",
+    "legacy-launch.json": "dff7618e380e777a511c8b99849e8627829429fbadbc7f49915312444d340148",
+    "legacy-pinned.incant.json": "51ee8be666b079e27dc8cf3b1d94b6a974f44c8e5dbbe4fa232cad30ea3f21e6",
+    "legacy-redone.incant.json": "51ee8be666b079e27dc8cf3b1d94b6a974f44c8e5dbbe4fa232cad30ea3f21e6",
+    "legacy-undone.incant.json": "34d525b7bc48a01f88d6c0cb06998c2e31c8123f6917158f063748eb0b5e7e72",
+    "native-exit.json": "8321bc10d3f31e64542564d6998eb233a0b6ad1c35aeb380ddd4c75483c42022",
+    "native-initial.incant.json": "49f535d599ad0dc343d80ea1f3ed58e1ad75797795ac131cd69ddd34e64bab92",
+    "native-launch.json": "94326ef0446d7410c94e7e59f758d8a482961d957ab042fea96c2d2ee978e670",
+    "native-reopen-exit.json": "8321bc10d3f31e64542564d6998eb233a0b6ad1c35aeb380ddd4c75483c42022",
+    "native-reopen-launch.json": "94326ef0446d7410c94e7e59f758d8a482961d957ab042fea96c2d2ee978e670",
+    "reviews.json": "4884ef5becfbb629484367238b92ea1969deecf87a27b08270fefce13f4e2ff9",
+    "saved-revision1.incant.json": "34bba3f0bc9d4ce074f7f091f422bba7adc342f6aa59353324a180a66f4cdc47",
+    "verification.json": "8ecc6644526b010c2a286431db91023ebf56a7181ab44c40b541fcca620395c3"
+  },
+  "external_native_root": "/Users/andreyyurlov/.codex/incant-integration-evidence/project-file-ui-native-main278",
+  "external_binary": {
+    "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/project-file-ui-native-main278/incant_editor",
+    "sha256": "0be02172b4ce09e66adea8c82df407753b30d909c7cb676857bf577587b01966"
+  },
+  "claims": "Scoped UI functional/native qualification; no phase approval."
+}

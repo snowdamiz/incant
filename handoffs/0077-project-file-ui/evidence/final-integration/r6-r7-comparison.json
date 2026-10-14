@@ -1,0 +1,237 @@
+{
+  "producer_report": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/.worktrees/0077-project-file-ui/artifacts/0077-project-file-ui/root-r6/report.json",
+  "integration_report": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/artifacts/0077-project-file-ui/root-r7/report.json",
+  "r6_report_sha256": "da2e3a5161a032efd7b5abc580a3581f2668a191c11fab0e96fa7d2a637890c9",
+  "r7_report_sha256": "2aac8db43a7951641dd232347ebd4bdb9e89c115227853e2ed94f22bc13d7b80",
+  "raw_report_identical": false,
+  "ignored_report_identity_fields": [
+    "set",
+    "generated"
+  ],
+  "normalized_report_identical": true,
+  "report_differences": [],
+  "r6": {
+    "captures": 30,
+    "flows": 5,
+    "axe_violations": 0,
+    "page_errors": 0,
+    "external_requests": 0,
+    "step_errors": 0,
+    "flow_errors": 0
+  },
+  "r7": {
+    "captures": 30,
+    "flows": 5,
+    "axe_violations": 0,
+    "page_errors": 0,
+    "external_requests": 0,
+    "step_errors": 0,
+    "flow_errors": 0
+  },
+  "png_identical": 32,
+  "png_different": [
+    "retired-desktop-dialog.png"
+  ],
+  "images": [
+    {
+      "file": "applied-desktop-dialog.png",
+      "r6_sha256": "f20ef9d856d45684dbc1d723f3dcbe9c3a8ac950d5eb12a7fec9271b7c0813a2",
+      "r7_sha256": "f20ef9d856d45684dbc1d723f3dcbe9c3a8ac950d5eb12a7fec9271b7c0813a2",
+      "identical": true
+    },
+    {
+      "file": "applied-narrow-dialog.png",
+      "r6_sha256": "6da242eac9a4c2a00392c2597d94751c4f41deaea928baa8ab83e46327b562f0",
+      "r7_sha256": "6da242eac9a4c2a00392c2597d94751c4f41deaea928baa8ab83e46327b562f0",
+      "identical": true
+    },
+    {
+      "file": "apply-failed-desktop-dialog.png",
+      "r6_sha256": "21b688eea421b6e39393d089996be9362334aa962558ec79b14ea049b6393952",
+      "r7_sha256": "21b688eea421b6e39393d089996be9362334aa962558ec79b14ea049b6393952",
+      "identical": true
+    },
+    {
+      "file": "apply-rejected-desktop-dialog.png",
+      "r6_sha256": "f18974716114c81418ac3acc2f0c3f2b992e71a4fa52f9256a9a38c8173c9e84",
+      "r7_sha256": "f18974716114c81418ac3acc2f0c3f2b992e71a4fa52f9256a9a38c8173c9e84",
+      "identical": true
+    },
+    {
+      "file": "applying-desktop-dialog.png",
+      "r6_sha256": "10ff187587fd2f1ebeee6d23ac99632b3ad8da022d3da24e87aa57c7e0be8eeb",
+      "r7_sha256": "10ff187587fd2f1ebeee6d23ac99632b3ad8da022d3da24e87aa57c7e0be8eeb",
+      "identical": true
+    },
+    {
+      "file": "dialog-keyboard-focus-desktop-dialog.png",
+      "r6_sha256": "a0354a1261e594d16c1db090efff64b6dc59fa7d64a91c4b8046f99508b65d5d",
+      "r7_sha256": "a0354a1261e594d16c1db090efff64b6dc59fa7d64a91c4b8046f99508b65d5d",
+      "identical": true
+    },
+    {
+      "file": "menu-desktop-titlebar.png",
+      "r6_sha256": "ae95d70d782f22ee76f63beac3987ebffa9c6520586d259d4aaf3bcd235c3e4e",
+      "r7_sha256": "ae95d70d782f22ee76f63beac3987ebffa9c6520586d259d4aaf3bcd235c3e4e",
+      "identical": true
+    },
+    {
+      "file": "menu-keyboard-desktop-titlebar.png",
+      "r6_sha256": "02dbc811e8cb59e8d800ccec05242580a35cac5ad2ad886a8a6a2c8fbb07f089",
+      "r7_sha256": "02dbc811e8cb59e8d800ccec05242580a35cac5ad2ad886a8a6a2c8fbb07f089",
+      "identical": true
+    },
+    {
+      "file": "menu-long-name-narrow-titlebar.png",
+      "r6_sha256": "419b2f789c60f83f3888a716e9e4b7c419e4cbe6fbc166fbc94de2eb0ed42d68",
+      "r7_sha256": "419b2f789c60f83f3888a716e9e4b7c419e4cbe6fbc166fbc94de2eb0ed42d68",
+      "identical": true
+    },
+    {
+      "file": "menu-narrow-titlebar.png",
+      "r6_sha256": "2edca430055a43995b9fbd721da28c08a0a54c1eff0854ac3a594b9756b44bb5",
+      "r7_sha256": "2edca430055a43995b9fbd721da28c08a0a54c1eff0854ac3a594b9756b44bb5",
+      "identical": true
+    },
+    {
+      "file": "menu-unavailable-desktop-titlebar.png",
+      "r6_sha256": "85bf42cbdf4e5946e82458e3525bb7a8aabdf3c715a2c532df48a7f1a57fe419",
+      "r7_sha256": "85bf42cbdf4e5946e82458e3525bb7a8aabdf3c715a2c532df48a7f1a57fe419",
+      "identical": true
+    },
+    {
+      "file": "nothing-to-save-desktop-statusbar.png",
+      "r6_sha256": "7b312c6de95a06f46443adfbe87660759d9f725cb74863e42670eb03ee9842e6",
+      "r7_sha256": "7b312c6de95a06f46443adfbe87660759d9f725cb74863e42670eb03ee9842e6",
+      "identical": true
+    },
+    {
+      "file": "retired-desktop-dialog.png",
+      "r6_sha256": "18bff37ebc5c47c75ec166a0b4847489284de6377a196e61b2866a3fced02975",
+      "r7_sha256": "88dd5c6c8cd6b0e3e0dccd47ab6c57922a93c95bb856f4d1e2133e6943f59b7b",
+      "identical": false
+    },
+    {
+      "file": "retired-desktop-window.png",
+      "r6_sha256": "531217ee21e2375abf180c1994a5566ddfebe83526cbcab0679b0b9381d9e115",
+      "r7_sha256": "531217ee21e2375abf180c1994a5566ddfebe83526cbcab0679b0b9381d9e115",
+      "identical": true
+    },
+    {
+      "file": "review-desktop-dialog.png",
+      "r6_sha256": "2af61d10d9f487e89efa30792102eb32c7f73a7296c55d27cfb07d83415d4508",
+      "r7_sha256": "2af61d10d9f487e89efa30792102eb32c7f73a7296c55d27cfb07d83415d4508",
+      "identical": true
+    },
+    {
+      "file": "review-desktop-window.png",
+      "r6_sha256": "ff1df3f47f7d875bd85b75ad2e2edcd54cd65b819c833279f9f5e1382dedae96",
+      "r7_sha256": "ff1df3f47f7d875bd85b75ad2e2edcd54cd65b819c833279f9f5e1382dedae96",
+      "identical": true
+    },
+    {
+      "file": "review-details-desktop-dialog.png",
+      "r6_sha256": "4024af5350183ff1fd0e6a9db3aef44766839bdf87bd1bf07ac0d9bf6c529b5b",
+      "r7_sha256": "4024af5350183ff1fd0e6a9db3aef44766839bdf87bd1bf07ac0d9bf6c529b5b",
+      "identical": true
+    },
+    {
+      "file": "review-details-narrow-dialog.png",
+      "r6_sha256": "25744374af2d7d4db2def61a8d0626b48e680e5f2e87d3798da751207979847b",
+      "r7_sha256": "25744374af2d7d4db2def61a8d0626b48e680e5f2e87d3798da751207979847b",
+      "identical": true
+    },
+    {
+      "file": "review-narrow-dialog.png",
+      "r6_sha256": "46838f458c30612935c9d8676159dfdf329eee9658b9e391e49d00e15b169ecc",
+      "r7_sha256": "46838f458c30612935c9d8676159dfdf329eee9658b9e391e49d00e15b169ecc",
+      "identical": true
+    },
+    {
+      "file": "review-narrow-window.png",
+      "r6_sha256": "6b046bd7b4c2a2f2793b2c887b50f3c9efd66790a5d62f21a388ec9b24c7f391",
+      "r7_sha256": "6b046bd7b4c2a2f2793b2c887b50f3c9efd66790a5d62f21a388ec9b24c7f391",
+      "identical": true
+    },
+    {
+      "file": "review-refused-pinned-desktop-dialog.png",
+      "r6_sha256": "839aa4d3a53ac2005bc36814eb78db9dd805f237ffa9f14a3eb2b9f22cca8beb",
+      "r7_sha256": "839aa4d3a53ac2005bc36814eb78db9dd805f237ffa9f14a3eb2b9f22cca8beb",
+      "identical": true
+    },
+    {
+      "file": "review-refused-unsaved-desktop-dialog.png",
+      "r6_sha256": "4fc931669520a1a211550828db4945c698eacfefe321da8f2eaea173c8f73b82",
+      "r7_sha256": "4fc931669520a1a211550828db4945c698eacfefe321da8f2eaea173c8f73b82",
+      "identical": true
+    },
+    {
+      "file": "review-refused-unsaved-narrow-dialog.png",
+      "r6_sha256": "55b32486bdfd89ab46410519c1f9f21c88c0e5f46d2634da5199dfd48b717209",
+      "r7_sha256": "55b32486bdfd89ab46410519c1f9f21c88c0e5f46d2634da5199dfd48b717209",
+      "identical": true
+    },
+    {
+      "file": "review-requesting-desktop-dialog.png",
+      "r6_sha256": "eb83b1b2a2245eae2574f2ef6bf8ca99ba0cac7260512ddcd996cc227dad1cf3",
+      "r7_sha256": "eb83b1b2a2245eae2574f2ef6bf8ca99ba0cac7260512ddcd996cc227dad1cf3",
+      "identical": true
+    },
+    {
+      "file": "save-failed-desktop-window.png",
+      "r6_sha256": "930b2ff0a944c740dee5606371469f53da56207e33d72e6c87abaf2e1d429bdd",
+      "r7_sha256": "930b2ff0a944c740dee5606371469f53da56207e33d72e6c87abaf2e1d429bdd",
+      "identical": true
+    },
+    {
+      "file": "save-failed-narrow-window.png",
+      "r6_sha256": "6204285f277d44336ef7646ee9fe6c8c296270cf09cfabe490cd7d3a5019c4ca",
+      "r7_sha256": "6204285f277d44336ef7646ee9fe6c8c296270cf09cfabe490cd7d3a5019c4ca",
+      "identical": true
+    },
+    {
+      "file": "save-rejected-desktop-window.png",
+      "r6_sha256": "f990cc87534325593a1c057da0e18477f5261ccb51b1225744b8a5dac83d4160",
+      "r7_sha256": "f990cc87534325593a1c057da0e18477f5261ccb51b1225744b8a5dac83d4160",
+      "identical": true
+    },
+    {
+      "file": "saved-desktop-window.png",
+      "r6_sha256": "cba5c07dbe33deae3d6d9bd31a802e39843a7ab9527a92514cb16108c2763eff",
+      "r7_sha256": "cba5c07dbe33deae3d6d9bd31a802e39843a7ab9527a92514cb16108c2763eff",
+      "identical": true
+    },
+    {
+      "file": "saved-narrow-window.png",
+      "r6_sha256": "01742276fb68c0492b0c884897956b4246760bba0b6936f7796e19299f9e92b9",
+      "r7_sha256": "01742276fb68c0492b0c884897956b4246760bba0b6936f7796e19299f9e92b9",
+      "identical": true
+    },
+    {
+      "file": "saving-desktop-titlebar.png",
+      "r6_sha256": "e7b52050dac428fff4d18a1401811948844a5acaf9a651f782d4d9dd5a71178b",
+      "r7_sha256": "e7b52050dac428fff4d18a1401811948844a5acaf9a651f782d4d9dd5a71178b",
+      "identical": true
+    },
+    {
+      "file": "saving-narrow-titlebar.png",
+      "r6_sha256": "798067f350190daede5306b1be66c290f154afaf95e318ee7e0ef183c42a8f80",
+      "r7_sha256": "798067f350190daede5306b1be66c290f154afaf95e318ee7e0ef183c42a8f80",
+      "identical": true
+    },
+    {
+      "file": "stale-desktop-dialog.png",
+      "r6_sha256": "1f5e6677c2a6eb3d0c3617ad344c220550741a83fd5f2f75a7fc108072b2d7c1",
+      "r7_sha256": "1f5e6677c2a6eb3d0c3617ad344c220550741a83fd5f2f75a7fc108072b2d7c1",
+      "identical": true
+    },
+    {
+      "file": "stale-narrow-dialog.png",
+      "r6_sha256": "b18effa9c28384b9dd1f2f557e239201780951b1dee1c1ce692000b648610236",
+      "r7_sha256": "b18effa9c28384b9dd1f2f557e239201780951b1dee1c1ce692000b648610236",
+      "identical": true
+    }
+  ],
+  "capture_differences": [],
+  "flows_identical": true
+}
