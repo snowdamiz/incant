@@ -271,3 +271,63 @@ bit-exact CPU reconstruction or an analytic coverage oracle.
 retain the data bindings, sampled observations and limitations. The latter hashes
 to `d3f961494cfcad7633a5f67c3793045a8111930810f004ef0ffff5022f44a75d`.
 No production algorithm change or visual acceptance is included.
+
+## Protected-history derivative and disappearance rejection
+
+Read-only inspection of AMD's official FSR2 at
+[`1680d1edd5c034f88ebbbb793d8b88f8842cf804`](https://github.com/GPUOpen-Effects/FidelityFX-FSR2/blob/1680d1edd5c034f88ebbbb793d8b88f8842cf804/src/ffx-fsr2-api/shaders/ffx_fsr2_accumulate.h)
+shows a materially different rectification operation: its lock/instability
+contribution blends clamped and original history, rather than only multiplying
+clipping extents. Its lock verification also uses regional luminance. Six pinned
+headers and their Git/SHA256 identities are retained under
+`~/.codex/incant-evidence/official-fsr2-source-001`. They were not compiled or
+adopted, and the following small experiment is not a port of official FSR2.
+
+013 modifies the separate WebGPU reference only in an explicitly selected test
+mode. The existing regional shading-change signal verifies thin-feature locks;
+surviving locks blend original RGB and coverage history after clipping. Existing
+depth rejection, motion, decay and reactivity remain unchanged. All six original
+shaders are verified before the three exact substitutions; the derivative's
+actual shader hash is recorded in its report. Production remains unchanged.
+
+Freeze `df6f264c5fd947ef914328edffc859c448914b11859a51e9964310c36d0f668a`
+and executable
+`dd16d7b2052c4347cc1465478e26c8cf659d113325f6bfd25249228d3784516e`
+pass build, five CPU controls, strict lint and 128 actual Metal frames. All 512
+baseline/current-color/motion/depth planes match 012. At the previously observed
+frame-14 pixel (202,144), output RGB maximum rises from 0.000000954 to 0.072632;
+the new lock remains 0.919922. Across the same seven 200-position observations,
+the number of empty neighborhoods collapsing below RGB 0.00001 falls from
+18–29 per frame to 3–14. Root inspected the original and new stationary frame 64
+and the new moving frame 24: horizontal thin lines become visible, but diagonal
+gaps and motion breakup remain. The input-bandwidth blur control is still active;
+this does not establish a production texture policy or complete visual repair.
+`comparison.json` hashes to
+`aa9f57ed6db9ab41d61eefbf40f28d87876f02af22ba6ea16f7d8395ba7566de`.
+
+014 and 015 reuse that exact executable without another build, respectively
+with protected and original history. Both move the entire original opaque stage
+beyond view after frame 32; other node transforms and bindings remain unchanged.
+A CPU control proves the one-node change. This is a whole-stage disappearance
+control, including ground/shadows, not an isolated wire deletion. Each run again
+retains 128 frames, 256 submissions and 128 maps; their 512 input/baseline planes
+match. All three scene processes completed and their groups were cleaned/reaped.
+
+The derivative fails this control. In the former thin-geometry region
+`[0,48,440,130]`, stationary frame 33 retains 1,062 pixels above RGB 0.001 and a
+maximum 0.384033, while the original has none above 0.001. At frame 40 the
+derivative still retains 544 such pixels. Camera motion shows the same problem.
+Both references also retain stale alpha, already a known domain incompatibility.
+The replay script `reconstruction-reference-gpu-014/analyze_eviction.py` binds
+the raw observations; `eviction-comparison-replay.json` hashes to
+`ca91fa73c97d5bd8e94370b8aeaf59eccd1c2fd61d8c88e40302c24f14f08d23`.
+
+This derivative is rejected. Stronger history retention demonstrates the
+zero-variance failure, but regional shading alone cannot establish that an
+unsampled surface still exists. The next algorithm needs valid surface identity
+and camera/object motion before carrying partial coverage over missing samples.
+The private owner-history path already rejects changed identities, but currently
+permits missing-sample persistence only with a static camera; its moving path
+requires an opaque current surface. That structural restriction remains to be
+addressed, with disappearance and occlusion controls retained. No production,
+shipping, performance, phase or release acceptance follows from this experiment.

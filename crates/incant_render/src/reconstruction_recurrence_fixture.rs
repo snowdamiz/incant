@@ -341,6 +341,56 @@ fn pose(stage: &Stage, input: &mut SceneInput, step: u32, camera_only: bool) {
         input.nodes[camera].world = camera_world(step);
     }
 }
+// Diagnostic invalidation control: move the original opaque stage beyond the
+// far plane while leaving all other bindings and poses intact. This removes
+// its thin wires together with the ground; it is not an isolated wire removal.
+fn evict_stage(stage: &Stage, input: &mut SceneInput, frame: u32) {
+    if frame <= 32 {
+        return;
+    }
+    let id = &stage
+        .f
+        .project
+        .scenes
+        .values()
+        .next()
+        .unwrap()
+        .entities
+        .values()
+        .find(|entity| entity.name == "Quad")
+        .unwrap()
+        .id;
+    let index = node(input, id);
+    input.nodes[index].world = DMat4::from_translation(DVec3::new(10_000., 0., 0.));
+}
+#[test]
+fn recurrence_eviction_changes_only_stage_after_frame32() {
+    let stage = Stage::new(true);
+    let mut input = stage.input();
+    stage.pose(&mut input, 1);
+    let original: Vec<_> = input.nodes.iter().map(|n| n.world).collect();
+    evict_stage(&stage, &mut input, 32);
+    assert!(
+        input
+            .nodes
+            .iter()
+            .zip(&original)
+            .all(|(n, m)| n.world == *m)
+    );
+    evict_stage(&stage, &mut input, 33);
+    let changed: Vec<_> = input
+        .nodes
+        .iter()
+        .zip(&original)
+        .filter(|(n, m)| n.world != **m)
+        .collect();
+    assert_eq!(changed.len(), 1);
+    assert_eq!(changed[0].0.world.w_axis.x, 10_000.);
+    assert_eq!(
+        input.nodes[node(&input, &stage.camera)].world,
+        camera_world(1)
+    );
+}
 #[test]
 fn recurrence_camera_only_pose_keeps_every_other_node_fixed() {
     let stage = Stage::new(true);
@@ -527,6 +577,16 @@ fn actual_scene_recurrence_comparison() {
         Ok("locked") if external => true,
         other => panic!("unknown diagnostic coverage: {other:?}"),
     };
+    let protected_history = match std::env::var("INCANT_REFERENCE_HISTORY").as_deref() {
+        Err(std::env::VarError::NotPresent) | Ok("original") => false,
+        Ok("protected") if external && !locked_coverage => true,
+        other => panic!("unknown diagnostic history: {other:?}"),
+    };
+    let stage_eviction = match std::env::var("INCANT_REFERENCE_EVICTION").as_deref() {
+        Err(std::env::VarError::NotPresent) | Ok("none") => false,
+        Ok("stage-after-32") if external => true,
+        other => panic!("unknown diagnostic eviction: {other:?}"),
+    };
     let internal_footprint = match std::env::var("INCANT_REFERENCE_FOOTPRINT").as_deref() {
         Err(std::env::VarError::NotPresent) | Ok("output") => false,
         Ok("internal") if external => true,
@@ -590,8 +650,9 @@ fn actual_scene_recurrence_comparison() {
     let mut nonzero_lock_samples = 0usize;
     let mut accumulation_sha256 = None;
     for moving in [false, true] {
-        let reference =
-            external.then(|| super::reference_fixture::Reference::new(&renderer, locked_coverage));
+        let reference = external.then(|| {
+            super::reference_fixture::Reference::new(&renderer, locked_coverage, protected_history)
+        });
         if let Some(reference) = &reference {
             if let Some(previous) = &accumulation_sha256 {
                 assert_eq!(previous, &reference.accumulation_sha256);
@@ -611,6 +672,9 @@ fn actual_scene_recurrence_comparison() {
                 if moving { frame } else { 1 },
                 camera_only,
             );
+            if stage_eviction {
+                evict_stage(&stage, &mut input, frame);
+            }
             scene
                 .submit(
                     &renderer,
@@ -852,6 +916,7 @@ fn actual_scene_recurrence_comparison() {
     let report = json!({"schema":"incant-recurrence-experiment-v1","adapter":describe(&renderer),"output":OUTPUT,"source":SOURCE,"configuration":policy(),"submissions":submissions,"maps":maps,"experimental_resolves":48,"history_initialization_passes":2,"extra_history_bytes":24_883_200,"readback_bytes":total,"raw_bytes":total*48,"frames":rows,"images":images,"shader_sha256":hex(SHADER.as_bytes()),"tone_map_sha256":hex(include_bytes!("tone_map.wgsl")),"output_shader_sha256":hex(include_bytes!("output.wgsl")),"scope":"Test-only ordinary recurrence over actual UP scene inputs; CPU tone conversion excludes current-only overlays and is not exact production display. No performance or appearance acceptance."});
     let mut report = report;
     report["experimental_resolves"] = json!(frame_count * 2);
+    report["stage_eviction_after_frame"] = json!(stage_eviction.then_some(32));
     report["raw_bytes"] = json!(total * u64::from(frame_count) * 2);
     report["diagnostic_jitter"] = json!(if halton32 {
         "negative_halton_2_3_32"
@@ -867,9 +932,9 @@ fn actual_scene_recurrence_comparison() {
         report["external_reference"] = json!({
             "upstream": "https://github.com/pmndrs/upscaler",
             "commit": "96184a6812bc5fd5e5fd7898257788a1663105a9",
-            "algorithm_modified": locked_coverage,
+            "algorithm_modified": locked_coverage || protected_history,
             "accumulate_shader_sha256": accumulation_sha256,
-            "modification": if locked_coverage { "Test-only derivative: existing luminance lock also relaxes coverage rectification; no new thresholds. Not upstream behavior or production adoption." } else { "none" },
+            "modification": if protected_history { "Test-only derivative: regional shading verifies thin locks; surviving locks blend original RGB and coverage history after clipping. Motion/depth rejection, reactivity and decay remain. Not official FSR2, upstream behavior or production adoption." } else if locked_coverage { "Test-only derivative: existing luminance lock also relaxes coverage rectification; no new thresholds. Not upstream behavior or production adoption." } else { "none" },
             "dispatches": frame_count * 2 * 7,
             "input_adapter": "Incant jittered previous-current UV to unjittered current-previous; opposite jitter convention; invalid vectors zeroed",
             "settings": "fixed exposure 1, max accumulation 24, thin locks and shading detector enabled, no sharpening; sequence recorded in diagnostic_jitter",

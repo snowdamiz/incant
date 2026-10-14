@@ -188,7 +188,7 @@ impl Reference {
         let now = frame as usize % 2;
         [&self.masks, &self.history[now], &self.locks[now]]
     }
-    pub(super) fn new(r: &Renderer, locked_coverage: bool) -> Self {
+    pub(super) fn new(r: &Renderer, locked_coverage: bool, protected_history: bool) -> Self {
         use Kind::*;
         use wgpu::TextureFormat::{R32Float, Rgba8Unorm, Rgba16Float, Rgba32Float, Rgba32Uint};
         let d = &r.device;
@@ -271,7 +271,7 @@ impl Reference {
             // Deliberately separate experimental derivative: verify the original
             // first, then replace exactly one expression. The immutable external
             // files and the default comparison remain byte-for-byte unchanged.
-            let source =
+            let mut source =
                 if locked_coverage && name == "ACCUMULATE_SHADER" {
                     let original = "let alphaRelax = stillRelax / max(STILL_CLAMP_RELAX, 1.0e-6);";
                     assert_eq!(source.matches(original).count(), 1);
@@ -280,6 +280,30 @@ impl Reference {
                 } else {
                     source
                 };
+            if protected_history && name == "ACCUMULATE_SHADER" {
+                // Separate diagnostic, not an FSR2 port: a missing raster sample
+                // must not itself kill a thin-feature lock. Use the existing
+                // regional shading-change observation and blend trusted history
+                // after clipping, which remains meaningful at zero variance.
+                // Keep motion/depth rejection, reactivity and lock decay intact.
+                for (old, new) in [
+                    (
+                        "let lockShading = smoothstep(max(contrast, 1.0e-3), max(contrast, 1.0e-3) * 2.0, abs(curY - lockedLuma));",
+                        "let lockShading = shadingChange;",
+                    ),
+                    (
+                        "let rectifiedHistory = yCoCgToRgb(clippedYcc);",
+                        "let rectifiedHistory = mix(yCoCgToRgb(clippedYcc), history.rgb, lockLife);",
+                    ),
+                    (
+                        "let alphaRelax = stillRelax / max(STILL_CLAMP_RELAX, 1.0e-6);",
+                        "let alphaRelax = max(stillRelax / max(STILL_CLAMP_RELAX, 1.0e-6), lockLife);",
+                    ),
+                ] {
+                    assert_eq!(source.matches(old).count(), 1);
+                    source = source.replace(old, new);
+                }
+            }
             if name == "ACCUMULATE_SHADER" {
                 accumulation_sha256 = hex(source.as_bytes());
             }
