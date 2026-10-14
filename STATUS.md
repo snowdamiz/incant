@@ -1,5 +1,17 @@
 # Implementation status
 
+## Matched Wasm / TypeScript shipping cost — scoped Mac measurement
+
+The [1,024-entity matched numerical workload](docs/spikes/wasm-typescript-cost.md)
+now has two fresh source-bound shipping exports, eight all-row functional runs
+and six alternating timing runs on the actual M5 Pro Mac. Both backends preserve
+identical cooked data, numerical outputs and PCM. Script p95 intervals were
+0.140001–0.160 ms for TS and 0.080001–0.090 ms for wasm2c. Raw histograms,
+source/feature identities and earlier helper failures are retained in a portable
+packet with an independent replay verifier. Final packet/integration review is
+pending. This is not Core/10k, startup, GPU/FPS, mobile or phase-gate acceptance;
+the outstanding Core 2 ms work remains separate.
+
 ## Script startup data and immutable metadata caches — joined CPU checks pass
 
 The current main259 composition preserves the three reviewed changes: constant

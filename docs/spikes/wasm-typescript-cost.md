@@ -1,17 +1,79 @@
 # Matched shipped Wasm / TypeScript per-frame experiment
 
-This helper prepares the numerical measurement required by PLAN Phase 1: a
-shipped wasm2c module's per-frame cost against the same TypeScript system on this
-Mac. All 21 focused Python controls and strict TypeScript checking pass. Actual
-public authoring and trusted SDK guest compilation passed in `prepare-003`, with
-the earlier helper refusals retained below. Shipping export, actual player
-execution and measurement remain pending coordination. Nothing here establishes
-a speedup or a phase gate.
+Two fresh shipping exports, eight all-row functional runs and six alternating
+Mac timing runs passed for the same 1,024-entity numerical workload. The measured
+Wasm phase had a lower p95 interval than the TypeScript phase in each pair. This
+is a bounded per-frame comparison, not a general backend result or phase gate.
+All 21 focused Python controls and strict TypeScript checking also pass. Public
+authoring and trusted SDK guest compilation passed in `prepare-003`; earlier
+helper refusals remain retained below.
 
 The source001 producer started from main259 `64d536d5`; source002 composes
 actual main260 `64abee88` with the accepted engine caches. It changes no engine
 runtime, VM limits, profiler thresholds, gameplay content or backend decision.
 The other script-cache optimizations remain separately preserved and reviewed.
+
+## Actual shipping results
+
+Execution source was `97834ab3282e0afb8b80820caf19394c929cf821`, with the reviewed
+source005 helper and identical native/compiler/SDK/vendor input closure for both
+exports. The actual host reported **Mac17,9 / Apple M5 Pro**, 48 GiB memory,
+15 physical CPUs, macOS **27.0.1 (26A434)**, arm64 and AC power. Low-power mode
+was unavailable (`null`), not inferred as disabled. Rust was pinned 1.99.0;
+shipping used opt-level 3, one codegen unit, fat final LTO and deterministic
+physics. The guest was compiled by the trusted Rust SDK helper and translated
+with pinned wasm2c 1.0.42.
+
+All intervals are conservative nearest-rank p95 bounds, in **nanoseconds**,
+recomputed from 10,000 ns bins. Every one of the 3,600 requested frames is
+included. Ordering was TS0, Wasm0, Wasm1, TS1, TS2, Wasm2, during one coordinated
+quiet window; no compiler or task GPU workload ran concurrently.
+
+| Pair | TS `script.tick` | Wasm `script.static_module` | TS `player.frame` | Wasm `player.frame` |
+| --- | --- | --- | --- | --- |
+| 0 | [140001, 150000] | [80001, 90000] | [180001, 190000] | [130001, 140000] |
+| 1 | [150001, 160000] | [80001, 90000] | [200001, 210000] | [120001, 130000] |
+| 2 | [140001, 150000] | [80001, 90000] | [180001, 190000] | [120001, 130000] |
+
+Descriptive Wasm/TS p95 ratio bounds were approximately [0.53334, 0.642853],
+[0.500006, 0.599996], and [0.53334, 0.642853]. Exact rational endpoints are
+retained. Requested Rust allocation peaks were 4,370,216 bytes for TS and
+4,361,685 bytes for Wasm in every run; these are neither RSS nor GPU memory.
+The two phases include their respective bulk bridges and commit work. Three
+pairs do not establish a statistical confidence interval or host startup cost.
+
+Eight separate unprofiled players observed four 256-row pages per backend, for
+all 1,024 rows after 3,600 ticks each. Independent arithmetic, unchanged columns,
+world matrices, logs and full comparable reports matched. All fourteen players
+(functional plus timed) produced exactly 23,040,000 silent PCM bytes with SHA256
+`e4532117d2f1b8f0fd4a1c6f48ec086c5df6b4829a235648b179d5c9135cce8e`.
+The disposable project/script/module paths actually supplied to the exporters
+were removed before these runs, as were each exporter's private build trees.
+Original authored inputs remain separately retained as evidence.
+
+Player SHA256 identities:
+
+- TS: `2bb3d5cf620c1fb2b0e076a0d3d1a5349816ab6b8a575e1675b658978656a052`
+- Wasm: `725aabc6d0b578427988ea6973c6e992292961ec2380bc4be2ae70ba23bbb9bc`
+
+The [portable manifest](evidence/wasm-typescript-cost/manifest.json) binds all
+source generations, raw public RPC traces, failed preparations, compiler logs,
+features, functional reports and timing histograms. Its lossless deduplicated
+archive is about 3.6 MiB; tools/players/symbols, guest artifacts, redundant
+journals/cache and PCM remain explicitly hash-bound external files. Verification
+does not execute a compiler or player:
+
+```sh
+python3 docs/spikes/evidence/wasm-typescript-cost/verify.py
+python3 docs/spikes/evidence/wasm-typescript-cost/verify.py --external --git-source
+```
+
+The latter passed for 617 original records, 297 unique embedded payloads,
+41 source005 files and 7,763 immutable Git source rows across the headless and
+shipping generations. The independent verifier recomputes native row results,
+undo/redo/reopen transitions, actual target compiler flags/features, every p95
+interval and ratio; five malformed-report controls refuse. Source and protocol
+reviews are retained; final packet review remains separate.
 
 ## Fixed experiment
 
@@ -100,7 +162,7 @@ python3 -m unittest discover -s tools/tests -p test_mac_performance.py -v
 ```
 
 Strict TypeScript checking is configured in `tools/probes/wasm-ts-cost/tsconfig.json`;
-its pinned Node22.23.3 compiler check is reported separately from the still-pending
+its pinned Node22.23.3 compiler check is reported separately from the completed
 actual shipping execution. The trusted Rust SDK guest compiled with pinned
 Rust1.99.0 during preparation; neither compiler check measures runtime cost.
 
@@ -112,8 +174,9 @@ Incomplete outputs remain for diagnosis; each retry needs a fresh destination.
 
 Limits: no startup result, GPU/FPS, Core Sample, 10,000-entity, mobile/device or
 arbitrary workload result. No physical output, visual judgment or project-selected
-executable is involved. The source-only and Python-control results do not replace
-actual public tool, guest compiler, shipping or timing evidence.
+executable is involved. Neither this comparison nor its small-workload intervals
+satisfy the TypeScript 10k/Core 2 ms policy. The source and Python controls remain
+distinct from the actual public tool, guest compiler, shipping and timing evidence.
 
 Source001 remains preserved. A source002 oracle correction uses the actual
 NativeLogs wire object (`entries: []`, `dropped: 0`) instead of an array; the
