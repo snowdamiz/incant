@@ -2,10 +2,35 @@
 
 The current phase remains **Phase 1: Core engine**. The
 [Phase 1 review ledger](docs/gates/phase1-review.md) maps each exit requirement to
-its recorded evidence and remaining qualification. Main287 includes the actual
-native texture workflow; release checkpoint37 contains the tested main285 tree.
-Rendering quality and full rendered-game performance remain open. The entries
+its recorded evidence and remaining qualification. The actual native texture and
+compatible static-model workflows are verified on this Mac; release checkpoint37
+contains the tested main285 tree. Rendering quality and full rendered-game
+performance remain open. The default editor cube also has visibly jagged
+silhouettes; its full-resolution diagnostic route currently has no geometric
+antialiasing. This is a separate viewport defect, not a rendering-quality pass
+or proof of the low-resolution reconstruction cause. The entries
 below preserve earlier scoped results and superseded integration snapshots.
+
+## Compatible static-model refresh — actual Mac verified
+
+Native Play accepts bounded geometry, material-factor and image-content
+reimports for existing static models with unchanged bindings, scene structure
+and import settings. Animated/skinned models, changed scene or material-binding structure and models
+used by baked navigation remain refused. Preparation stays outside the authoring lock;
+final publication preserves the running world/VM and atomically retains the old
+catalog on refusal.
+
+The real editor workflow passes import, watched replacement, Undo/Redo,
+malformed-source retention, recovery and journal reopening. A separate Metal
+pixel control verifies changed geometry/material/image output and exact rejected
+pixel retention. Its initial color classifier incorrectly assumed bright red/blue
+would retain black secondary channels after the existing display transform;
+the original failures and raw diagnosis remain recorded. The corrected control
+passes without changing geometry or world/state assertions. The native workflow
+and final GPU test use separately identified executables; later changes are
+test-only. The extra default editor opened after the owned workflow exited is
+excluded from that evidence and was closed. No appearance, shipping performance
+or phase gate is claimed. [Scope and replay](docs/spikes/native-static-model-refresh.md).
 
 ## Native Play texture workflow — actual Mac verified
 

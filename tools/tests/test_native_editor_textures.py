@@ -2,10 +2,12 @@
 import copy
 import base64
 import importlib.util
+import json
 import os
 from pathlib import Path
 import signal
 import subprocess
+import struct
 import sys
 import tempfile
 import threading
@@ -18,13 +20,13 @@ probe = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(probe)
 
 
-def proof():
+def proof(kind='texture'):
     stages = []
-    for i, name in enumerate(probe.STAGES):
+    for i, name in enumerate(probe.STAGES if kind == 'texture' else probe.MODEL_STAGES):
         stages.append({'stage':name, 'tick':4, 'frames':10+i, 'recipe_matches':True,
                        'accepted_fingerprint':('a' if i in (0,2) else 'b')*64,
                        'history':{'revision':3+min(i,3)}})
-    return dict(passed=True, platform='macos', adapter='AdapterInfo { backend: Metal }',
+    return dict(passed=True, asset_kind=kind, platform='macos', adapter='AdapterInfo { backend: Metal }',
                 play_generation=2, paused_tick=4, final_tick=5, stages=stages,
                 vm_counter={'before_translation':20, 'observed_delta':10, 'expected_delta':10},
                 malformed_source_refusal={'code':'asset.import'}, pixel_capture=False,
@@ -39,6 +41,41 @@ class ReceiptControls(unittest.TestCase):
     def test_accepts_exact_scoped_stage_receipt(self):
         value = proof()
         self.assertIs(probe.validate_proof(value), value)
+
+    def test_model_proof_cannot_be_substituted_by_texture_or_unmarked_proof(self):
+        value = proof('model')
+        self.assertIs(probe.validate_proof(value, 'model'), value)
+        for candidate in (proof(), dict(value, asset_kind='texture'),
+                          dict(value, stages=proof()['stages'])):
+            with self.assertRaises(ValueError):
+                probe.validate_proof(candidate, 'model')
+        del value['asset_kind']
+        with self.assertRaises(ValueError):
+            probe.validate_proof(value, 'model')
+        # Existing archived texture receipts predate the explicit kind field.
+        legacy = proof()
+        del legacy['asset_kind']
+        self.assertIs(probe.validate_proof(legacy), legacy)
+
+    def test_model_fixture_changes_geometry_and_material_with_stable_bindings(self):
+        source, replacement, before, after = probe.fixture('model')
+        self.assertEqual((source, replacement), ('refresh.gltf', 'refresh-replacement.gltf'))
+        before, after = json.loads(before), json.loads(after)
+        for field in ('nodes', 'scenes', 'scene', 'meshes'):
+            self.assertEqual(before[field], after[field])
+        self.assertNotEqual(before['materials'], after['materials'])
+        positions = []
+        for document in (before, after):
+            data = base64.b64decode(document['buffers'][0]['uri'].split(',', 1)[1], validate=True)
+            self.assertEqual(len(data), document['buffers'][0]['byteLength'])
+            points = list(zip(*[iter(struct.unpack('<9f', data))]*3))
+            positions.append(points)
+            for axis in range(3):
+                self.assertAlmostEqual(min(p[axis] for p in points), document['accessors'][0]['min'][axis])
+                self.assertAlmostEqual(max(p[axis] for p in points), document['accessors'][0]['max'][axis])
+            self.assertNotIn('animations', document)
+            self.assertNotIn('skins', document)
+        self.assertNotEqual(*positions)
 
     def test_refuses_old_catalog_wrong_revision_tick_and_no_next_presentation(self):
         for edit in (

@@ -135,11 +135,12 @@ enum Request {
         token: u64,
     },
     #[cfg(feature = "play-probe")]
-    ObserveTexture {
+    ObserveAsset {
         generation: u32,
         asset: incant_runtime::StableId,
+        kind: incant_runtime::VisualAssetKind,
         fingerprint: String,
-        reply: mpsc::Sender<Result<probe::textures::Observation, String>>,
+        reply: mpsc::Sender<Result<probe::asset_workflow::Observation, String>>,
     },
 }
 impl Service {

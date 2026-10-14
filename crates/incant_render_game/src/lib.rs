@@ -7,11 +7,9 @@ use incant_game_runtime::SceneHost;
 use incant_render_data::SceneInput;
 pub use incant_render_data::UiInput;
 pub use incant_render_native::TextSettings;
-use incant_render_native::{
-    NativeRenderError, NativeRenderInput, SyncError, UpdateKind, VisualCaches,
-};
+use incant_render_native::{NativeRenderError, NativeRenderInput, SyncError, UpdateKind};
 pub use incant_render_native::{
-    PreparedTextureRefresh, TextureRefreshReceipt, TextureRefreshTicket,
+    PreparedTextureRefresh, TextureRefreshReceipt, TextureRefreshTicket, VisualCaches,
 };
 use incant_runtime::{NativeWorld, RuntimeError, StableId};
 pub use recorded_ui::{RecordedUiError, tick_recorded_ui, validate_ui_recording};
