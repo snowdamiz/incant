@@ -1,0 +1,1011 @@
+{
+  "source_commit": "074999b02484ffca8129cee6b3021649c9b3c6b2",
+  "base": "1eca995cb36d9f9cada732dce7d52447569e63ac",
+  "external_root": "/Users/andreyyurlov/.codex/incant-evidence/metalfx-main285-001",
+  "scope": "default-off prepared Mac MetalFX; bounded native correctness only",
+  "source_freeze_sha256": "5fe008e36bf021ff1d291fc478aeea031830b9aef418219322dec8f3a10c6d60",
+  "cpu_result_sha256": "07f07bb5291621198a30d12bbbdd13b393db4a5354d2dc67f6c7a97ca2657382",
+  "gpu_result_sha256": "c914fb49a33631eb55ef8a973aaf4c65dd06fae4a869f14006c95c662ddcb3c4",
+  "archive_sha256": "0e0967132e1cd74b6728ed8f47b397711ac09c8b98ea7e36cc35f8b7f8c7ef0e",
+  "verifier_sha256": "1d1680a9f52120372068b3d02c9f90d983cc282a24ebc58c0fb2c047c47e01c1",
+  "records": [
+    {
+      "path": "cpu-qualification-003.json",
+      "bytes": 1391,
+      "sha256": "6b90e588b6dbed24009a9424476ba74982e54a437d3c1bff6f18e15eed7a5513"
+    },
+    {
+      "path": "gpu-003/01/boundary/normalize.wgsl",
+      "bytes": 4578,
+      "sha256": "ed24d096849a33c5d4c03ca2ada6f2b9281144367f6890206ef2bc65d5867b46"
+    },
+    {
+      "path": "gpu-003/01/boundary/pack.wgsl",
+      "bytes": 4006,
+      "sha256": "6ec97c6b24fb89cb93d44969cdeba25c16b22e7bb23574f95c8fbe29746b0efb"
+    },
+    {
+      "path": "gpu-003/01/boundary/raw.bin",
+      "bytes": 87040,
+      "sha256": "872b6056c88c6f917ead07451a67a6f39edb612753b241ebc87adf060317db77"
+    },
+    {
+      "path": "gpu-003/01/boundary/report.json",
+      "bytes": 1087,
+      "sha256": "47b531074276f16b4f68dc3f10773ec557d5feebe827626fad373552fbc9ce9d"
+    },
+    {
+      "path": "gpu-003/01/stderr.log",
+      "bytes": 282,
+      "sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef"
+    },
+    {
+      "path": "gpu-003/01/stdout.log",
+      "bytes": 276,
+      "sha256": "6c26a93fe865c019d954f5d48a4723898ab6dd3bddf48718c3d9dda5747a30e5"
+    },
+    {
+      "path": "gpu-003/02/stderr.log",
+      "bytes": 282,
+      "sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef"
+    },
+    {
+      "path": "gpu-003/02/stdout.log",
+      "bytes": 275,
+      "sha256": "c5410e5527b3800afd185d6d1da6ba19d9cac60d167a493de2e15213d6126991"
+    },
+    {
+      "path": "gpu-003/03/stderr.log",
+      "bytes": 282,
+      "sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef"
+    },
+    {
+      "path": "gpu-003/03/stdout.log",
+      "bytes": 552,
+      "sha256": "4004f5d478494a94dbb0ab5e0415b14fbfdb8ec7b513cfc468ba6b89b4b39e31"
+    },
+    {
+      "path": "gpu-003/04/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "gpu-003/04/stdout.log",
+      "bytes": 287,
+      "sha256": "f887fc7fc59f652f3338e62025c0817bc191044720b05537352e260062ba0f41"
+    },
+    {
+      "path": "gpu-003/05/stderr.log",
+      "bytes": 282,
+      "sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef"
+    },
+    {
+      "path": "gpu-003/05/stdout.log",
+      "bytes": 606,
+      "sha256": "e80632ab90ea2c89a20407357af25792df9c2b00a38f8f84ee1787c203917bc9"
+    },
+    {
+      "path": "gpu-003/launch.json",
+      "bytes": 573,
+      "sha256": "83424b987bbf7dc399d2f3db4f23d4f33e805f5c7a54d9db2c539b9d6aebfa01"
+    },
+    {
+      "path": "gpu-003/result.json",
+      "bytes": 9485,
+      "sha256": "c914fb49a33631eb55ef8a973aaf4c65dd06fae4a869f14006c95c662ddcb3c4"
+    },
+    {
+      "path": "gpu-plan-003.json",
+      "bytes": 7796,
+      "sha256": "3fb93d4348cd06a0316b5a774f9ab677417cdfebe503a8f46dfa6c39ff456bb2"
+    },
+    {
+      "path": "gpu-plan-draft-003.json",
+      "bytes": 7337,
+      "sha256": "28c0ddd5c73cf9ea0da96bab1488f6787de10110676e373ed2d9a8c968bc4cec"
+    },
+    {
+      "path": "gpu-proposal-003.json",
+      "bytes": 2691,
+      "sha256": "4589a8672466f26a2475a7f8902a8c73247dd5b86a85998a4a3107a0d53921bc"
+    },
+    {
+      "path": "host-after-gpu-003.json",
+      "bytes": 279,
+      "sha256": "d017aa7c9982227d54c6176944dc8dffe04e94c86d4bac9f6397be61330729e4"
+    },
+    {
+      "path": "inventory-003/incant_render.list.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "inventory-003/incant_render.list.stdout",
+      "bytes": 5552,
+      "sha256": "aaa67719797ff7d6633a742784a1af53db6ea68d6c8255bfd5d72376270f6231"
+    },
+    {
+      "path": "inventory-003/incant_render_gpu_host.list.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "inventory-003/incant_render_gpu_host.list.stdout",
+      "bytes": 117,
+      "sha256": "05036b0808e613d97bf5a2111e0025a34682de078362f4c3497316c6f02fa5e6"
+    },
+    {
+      "path": "inventory-003.json",
+      "bytes": 2591,
+      "sha256": "1ceaf6a94386f403ff1bcddd6a260ee9f295a615178c4203516ea3de0aa7255d"
+    },
+    {
+      "path": "native_process.py",
+      "bytes": 19307,
+      "sha256": "58dd2a8231d7f9d1e42070fc85425461e06a43f279fa5e7f8e57b4a40c3a3aa4"
+    },
+    {
+      "path": "plan-001.json",
+      "bytes": 3550,
+      "sha256": "dd3de317008ccf561f47f4e664ff2c81c8e782293e6d4c12cce3c7d288b798e9"
+    },
+    {
+      "path": "plan-002.json",
+      "bytes": 3550,
+      "sha256": "c3fdc4b917aa360271d219467881be1342b696a174d0af1dc112be9a06c8f00e"
+    },
+    {
+      "path": "plan-003.json",
+      "bytes": 3550,
+      "sha256": "ac969e08089e931b7fa0f911d703a7d5c06783d5f313bbe7d6be0c967bc39a72"
+    },
+    {
+      "path": "qualify-001/cooked-native.stderr",
+      "bytes": 4107,
+      "sha256": "3b373c608b7d3603ea8cb96204f6345f500385ff460dff5d8d48dee454038421"
+    },
+    {
+      "path": "qualify-001/cooked-native.stdout",
+      "bytes": 289178,
+      "sha256": "0f239b0473becc7be02cca4e50da243bc9fcee319e3bfc0f61220e3d00ed60aa"
+    },
+    {
+      "path": "qualify-001/default-lib.stderr",
+      "bytes": 736,
+      "sha256": "e39f5ac43d7bed286ac972781369939484cbb62677297752bb1c8ad13c88d9d5"
+    },
+    {
+      "path": "qualify-001/default-lib.stdout",
+      "bytes": 367758,
+      "sha256": "065151905182a28c39d750905275bcc6ff6b71ef95083d3e7d1a5fab1b9c90e7"
+    },
+    {
+      "path": "qualify-001/environment.json",
+      "bytes": 1276,
+      "sha256": "97087c8935f554c20b92cddf4f290ff8eb902a9b2890c93118dd7dd7ef4e77ce"
+    },
+    {
+      "path": "qualify-001/native-clippy.stderr",
+      "bytes": 3442,
+      "sha256": "82498e490aef725ba618ee855abb851f6a976ac9b27a77b3975f5161b527e1a7"
+    },
+    {
+      "path": "qualify-001/native-clippy.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "qualify-001/native-lib.stderr",
+      "bytes": 4462,
+      "sha256": "cd37102e994d58136ee23d280c930f839db7d58f74887d92f81269012026eea8"
+    },
+    {
+      "path": "qualify-001/native-lib.stdout",
+      "bytes": 371391,
+      "sha256": "dad155a62f37a9a6d20241b5f69564db4e153e44825564a2f1d212d26b11ea88"
+    },
+    {
+      "path": "qualify-001/result.json",
+      "bytes": 6903,
+      "sha256": "b614f016432b7ac56c84c1283aea60115d3e1063cfbaf8908f5ce9d21f5b2425"
+    },
+    {
+      "path": "qualify-001/rustc.txt",
+      "bytes": 192,
+      "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909"
+    },
+    {
+      "path": "qualify-002.py",
+      "bytes": 4445,
+      "sha256": "c9f8e945e9b2a2c76a059c3dda6f4b4a6699027f5251d657cd3e281f7e30c31e"
+    },
+    {
+      "path": "qualify-003/cooked-native-clippy.stderr",
+      "bytes": 2477,
+      "sha256": "76b2af020d90154690c4ec624e4f63a9fea7b1947547c1193b0e35100bc0068c"
+    },
+    {
+      "path": "qualify-003/cooked-native-clippy.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "qualify-003/cooked-native.stderr",
+      "bytes": 2046,
+      "sha256": "057fdba9ab21af11b23a829df66c7525f541ea6f0bed36eb3c1ee43b2ea9525c"
+    },
+    {
+      "path": "qualify-003/cooked-native.stdout",
+      "bytes": 287176,
+      "sha256": "c7c9f341bbc453afc171be2bcc453c61de8945e55fd4855d5a78a985df86e049"
+    },
+    {
+      "path": "qualify-003/default-clippy.stderr",
+      "bytes": 458,
+      "sha256": "1676fd6d5800654d6c2e173744369ad137114d1e2548895a897cfff4fead593e"
+    },
+    {
+      "path": "qualify-003/default-clippy.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "qualify-003/default-lib.stderr",
+      "bytes": 607,
+      "sha256": "82cfac69310e6236ea9288e02d060518eb30d03c3c68de26e9e6bc5b0a201a81"
+    },
+    {
+      "path": "qualify-003/default-lib.stdout",
+      "bytes": 367753,
+      "sha256": "ad7b17522dfa1c8601c94034a53aa31c72dd24b047f5354fc858e4cdc460ea58"
+    },
+    {
+      "path": "qualify-003/environment.json",
+      "bytes": 1276,
+      "sha256": "97087c8935f554c20b92cddf4f290ff8eb902a9b2890c93118dd7dd7ef4e77ce"
+    },
+    {
+      "path": "qualify-003/native-clippy.stderr",
+      "bytes": 2568,
+      "sha256": "a3621a2e041cedd771cdb230563c931b6f0b6baac5fd6ab0889aaeed56804f74"
+    },
+    {
+      "path": "qualify-003/native-clippy.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "qualify-003/native-lib.stderr",
+      "bytes": 2846,
+      "sha256": "662a53b077df2812cf9ccb39b843a665de5510f6c77831bda818e11a43a74d2a"
+    },
+    {
+      "path": "qualify-003/native-lib.stdout",
+      "bytes": 369785,
+      "sha256": "6db9216146ece6ff001c70f1b0a7fcdbdb8e7a26840a4a7f17526f084cf0a73a"
+    },
+    {
+      "path": "qualify-003/result.json",
+      "bytes": 8325,
+      "sha256": "07f07bb5291621198a30d12bbbdd13b393db4a5354d2dc67f6c7a97ca2657382"
+    },
+    {
+      "path": "qualify-003/rustc.txt",
+      "bytes": 192,
+      "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909"
+    },
+    {
+      "path": "qualify-003.py",
+      "bytes": 4445,
+      "sha256": "e93c3e83a4ae8ad958263bfa0faad7e180a6b9ed8270bbc92df3165948ef8f5e"
+    },
+    {
+      "path": "qualify.py",
+      "bytes": 4445,
+      "sha256": "68aa19a55e0177f42a14b1f9f11b58fa64404e499b7c127c1479639cf5b8299c"
+    },
+    {
+      "path": "root-gpu-grant-003.json",
+      "bytes": 818,
+      "sha256": "b951c6a783b003a78c749dd9fa4ff1e104a929cc140f161f42b3a406f0f09348"
+    },
+    {
+      "path": "run-gpu-003.py",
+      "bytes": 9433,
+      "sha256": "b6a4d9bb62b005e5efad8a61ac8adddee96f29e34c5c92b00b5d03aa63531522"
+    },
+    {
+      "path": "source-001/freeze.json",
+      "bytes": 5158,
+      "sha256": "fdcbad477527acc414a0fce7f88f5f5e3c3f1dde421929b56fb309b4eea331a8"
+    },
+    {
+      "path": "source-001/inputs/Cargo.lock",
+      "bytes": 253060,
+      "sha256": "f9c91817c63b0a96da9baac16013daf95459d4556db4d3af6a981a6eca5ad2f9"
+    },
+    {
+      "path": "source-001/inputs/crates/incant_render/Cargo.toml",
+      "bytes": 3218,
+      "sha256": "2491dcc10be2c017cd82915bbe246ce0e6ad1402dd5d8114f844ec5677ca9997"
+    },
+    {
+      "path": "source-001/inputs/crates/incant_render/src/graph/native.rs",
+      "bytes": 4023,
+      "sha256": "53b2e5d47f059499d57ae3eff7f7d0b6ef7cdd0fbde20841b2595ad8b8a6aa88"
+    },
+    {
+      "path": "source-001/inputs/crates/incant_render/src/graph.rs",
+      "bytes": 15803,
+      "sha256": "77b9588db8774dba5ba98c29a0ad4cc08321e90c1cc082df07ace4fc5eef0763"
+    },
+    {
+      "path": "source-001/inputs/crates/incant_render/src/lib.rs",
+      "bytes": 22298,
+      "sha256": "71086f80fa95be637b8c7517ec537247045748b5bfa97d24e8e0eebd1548376c"
+    },
+    {
+      "path": "source-001/inputs/crates/incant_render/src/metalfx/alpha.wgsl",
+      "bytes": 936,
+      "sha256": "6caac78689a9b0a756d0ff3d3b69d55c64cc4df7dfd4bc9c9229a9ac46fb1752"
+    },
+    {
+      "path": "source-001/inputs/crates/incant_render/src/metalfx/boundary_tests.rs",
+      "bytes": 14339,
+      "sha256": "198c05d61c29edfc37d970112067bd0e00b0c9d621f3869026ae69d167424356"
+    },
+    {
+      "path": "source-001/inputs/crates/incant_render/src/metalfx/common.wgsl",
+      "bytes": 1774,
+      "sha256": "b491151d8c0c6f6dea3df77fac5054f2908c4dfb479d8977bc56d12ebf40091d"
+    },
+    {
+      "path": "source-001/inputs/crates/incant_render/src/metalfx/lifecycle.rs",
+      "bytes": 7375,
+      "sha256": "746d45a630fbb411fdec13cceed8c91be9c7a98b40b5915aa119e6f7102bebd9"
+    },
+    {
+      "path": "source-001/inputs/crates/incant_render/src/metalfx/mod.rs",
+      "bytes": 5503,
+      "sha256": "0462c49d5a81172ec453885ca7283eb9a25cc4e0656add6778ab4830e68f559a"
+    },
+    {
+      "path": "source-001/inputs/crates/incant_render/src/metalfx/native.rs",
+      "bytes": 10739,
+      "sha256": "825ffe55cee2a5fa553b830546f6670c644fa7c8b99dd30830706877a277b94b"
+    },
+    {
+      "path": "source-001/inputs/crates/incant_render/src/metalfx/normalize.wgsl",
+      "bytes": 1866,
+      "sha256": "245f531c16eb36234b02f689cda325c06446c7485f4cae9fa9d96e437935ba2b"
+    },
+    {
+      "path": "source-001/inputs/crates/incant_render/src/metalfx/owner.rs",
+      "bytes": 7156,
+      "sha256": "349b0b2988f53ba0166cd3e33fa00a0f810da98fd42696fcc85e4a0ae0831334"
+    },
+    {
+      "path": "source-001/inputs/crates/incant_render/src/metalfx/plan.rs",
+      "bytes": 5549,
+      "sha256": "366c602c55e9f667ffe78abde376ad2dab216e48908466782159bf1f52ba77ef"
+    },
+    {
+      "path": "source-001/inputs/crates/incant_render/src/metalfx/prepare.wgsl",
+      "bytes": 1105,
+      "sha256": "452887b49bb41def01b56cdfe11e336faae6de1965b2008d55b757f0ba9d1dc1"
+    },
+    {
+      "path": "source-001/inputs/crates/incant_render/src/metalfx/render.rs",
+      "bytes": 2778,
+      "sha256": "645e3bc1c4cbf22c8aa9c6fdf9b1f1b0e7259729fd4cb7f1649711c5422f6a7c"
+    },
+    {
+      "path": "source-001/inputs/crates/incant_render/src/metalfx/system.rs",
+      "bytes": 13086,
+      "sha256": "5d53297e21a3affdf99ca94c56d2f16ebb11d2e55ffa4b9ee5ecf1cf71c15ee1"
+    },
+    {
+      "path": "source-001/inputs/crates/incant_render/src/metalfx/targets.rs",
+      "bytes": 2846,
+      "sha256": "f935ea416f575bd366a4ec17831e2dfe23abb5da816482a8e77e75a604ec59e3"
+    },
+    {
+      "path": "source-001/inputs/crates/incant_render/src/metalfx_retained_tests.rs",
+      "bytes": 7209,
+      "sha256": "0bb1fb8f2dbb4d42e6df80b24c8af372c36579c7d194741fa6a908ad68c77d6f"
+    },
+    {
+      "path": "source-001/inputs/crates/incant_render/src/motion/draw.rs",
+      "bytes": 5032,
+      "sha256": "8472afd886bdfd6f277ab1b8924777e978f79a648793151a0547dad924d6d51e"
+    },
+    {
+      "path": "source-001/inputs/crates/incant_render/src/motion/owner.rs",
+      "bytes": 7750,
+      "sha256": "907cff7466008952159b58249c0281a32eee9fb3ba8495a2cbb790275f63f013"
+    },
+    {
+      "path": "source-001/inputs/crates/incant_render/src/retained.rs",
+      "bytes": 26165,
+      "sha256": "78c8c30590d602cfa701eb537314c56a294c7232b186ccfda624ffe2cc1b1757"
+    },
+    {
+      "path": "source-001/inputs/crates/incant_render_gpu_host/Cargo.toml",
+      "bytes": 2064,
+      "sha256": "30e81bad895768b6d841f8796b4303dfc509a57fe28296a11e5756fed56cd258"
+    },
+    {
+      "path": "source-001/inputs/crates/incant_render_gpu_host/src/lib.rs",
+      "bytes": 14591,
+      "sha256": "b8a8a0b181fc02aec9255885425b7b9e81f9b844517b14aa96aba5649922574f"
+    },
+    {
+      "path": "source-001/inputs/crates/incant_render_gpu_host/src/metalfx.rs",
+      "bytes": 1777,
+      "sha256": "6f91524f7a5cf3b968b7a9c46b2fb2a585a5c38eef249a8585c3be05af523dc4"
+    },
+    {
+      "path": "source-001/inputs/crates/incant_render_gpu_host/src/motion.rs",
+      "bytes": 2638,
+      "sha256": "938627f37464d14a5c09d1afa1dea826dea63099d1c42b69f95834014411435d"
+    },
+    {
+      "path": "source-001/inputs/crates/incant_render_gpu_host/src/resolution.rs",
+      "bytes": 3082,
+      "sha256": "61d06d727399d755f1348ad5b6681a49bdde5f9574b0d841ecec62b59fa8de05"
+    },
+    {
+      "path": "source-001/inputs/docs/spikes/metalfx-main285.md",
+      "bytes": 6300,
+      "sha256": "4fca304147ef37efc60b79caba8296152cbfe37fda7d2b8b1c959748904d08dd"
+    },
+    {
+      "path": "source-001/source-inventory.json",
+      "bytes": 676506,
+      "sha256": "1cbd49f1c6a1132e87b24f553ce039ff90168b3a7db8f22e705e69cc269b79a7"
+    },
+    {
+      "path": "source-001/tracked.patch",
+      "bytes": 22348,
+      "sha256": "27a5715a86c8c1b8cba21ba5df4695a41b03049becec87b8d8a62a54ee27b976"
+    },
+    {
+      "path": "source-002/delta.patch",
+      "bytes": 27947,
+      "sha256": "8479dbda0865fa8cd4bbe500ac7ba9fc39c7cda627b17c5878999b2d49aed8e8"
+    },
+    {
+      "path": "source-002/freeze.json",
+      "bytes": 5263,
+      "sha256": "37f10b478665b4da565d827bd37524671edc76445af69a043d47e5161fb63deb"
+    },
+    {
+      "path": "source-002/inputs/Cargo.lock",
+      "bytes": 253060,
+      "sha256": "f9c91817c63b0a96da9baac16013daf95459d4556db4d3af6a981a6eca5ad2f9"
+    },
+    {
+      "path": "source-002/inputs/crates/incant_render/Cargo.toml",
+      "bytes": 3218,
+      "sha256": "2491dcc10be2c017cd82915bbe246ce0e6ad1402dd5d8114f844ec5677ca9997"
+    },
+    {
+      "path": "source-002/inputs/crates/incant_render/src/graph/native.rs",
+      "bytes": 4023,
+      "sha256": "53b2e5d47f059499d57ae3eff7f7d0b6ef7cdd0fbde20841b2595ad8b8a6aa88"
+    },
+    {
+      "path": "source-002/inputs/crates/incant_render/src/graph.rs",
+      "bytes": 15803,
+      "sha256": "77b9588db8774dba5ba98c29a0ad4cc08321e90c1cc082df07ace4fc5eef0763"
+    },
+    {
+      "path": "source-002/inputs/crates/incant_render/src/lib.rs",
+      "bytes": 22298,
+      "sha256": "71086f80fa95be637b8c7517ec537247045748b5bfa97d24e8e0eebd1548376c"
+    },
+    {
+      "path": "source-002/inputs/crates/incant_render/src/metalfx/alpha.wgsl",
+      "bytes": 936,
+      "sha256": "6caac78689a9b0a756d0ff3d3b69d55c64cc4df7dfd4bc9c9229a9ac46fb1752"
+    },
+    {
+      "path": "source-002/inputs/crates/incant_render/src/metalfx/boundary_tests.rs",
+      "bytes": 14624,
+      "sha256": "4dc39fabd137113ee7d05c709be24ba131220362504ea8d533e5a9bfd9a66027"
+    },
+    {
+      "path": "source-002/inputs/crates/incant_render/src/metalfx/common.wgsl",
+      "bytes": 1774,
+      "sha256": "b491151d8c0c6f6dea3df77fac5054f2908c4dfb479d8977bc56d12ebf40091d"
+    },
+    {
+      "path": "source-002/inputs/crates/incant_render/src/metalfx/lifecycle.rs",
+      "bytes": 7392,
+      "sha256": "0885fc18468db9f02e1af74508b82b948679dcf78b4306056c53290078560046"
+    },
+    {
+      "path": "source-002/inputs/crates/incant_render/src/metalfx/mod.rs",
+      "bytes": 5565,
+      "sha256": "05ff060c06d62003bc91aa9fa23f172a60ad9fdba346ac512b1f8c87e512d2d3"
+    },
+    {
+      "path": "source-002/inputs/crates/incant_render/src/metalfx/native.rs",
+      "bytes": 10739,
+      "sha256": "825ffe55cee2a5fa553b830546f6670c644fa7c8b99dd30830706877a277b94b"
+    },
+    {
+      "path": "source-002/inputs/crates/incant_render/src/metalfx/normalize.wgsl",
+      "bytes": 1866,
+      "sha256": "245f531c16eb36234b02f689cda325c06446c7485f4cae9fa9d96e437935ba2b"
+    },
+    {
+      "path": "source-002/inputs/crates/incant_render/src/metalfx/owner.rs",
+      "bytes": 9685,
+      "sha256": "10a23157011062ef40f548ae707fe5b7ac3562aba8efbdf9785160705dce5f6d"
+    },
+    {
+      "path": "source-002/inputs/crates/incant_render/src/metalfx/plan.rs",
+      "bytes": 5549,
+      "sha256": "366c602c55e9f667ffe78abde376ad2dab216e48908466782159bf1f52ba77ef"
+    },
+    {
+      "path": "source-002/inputs/crates/incant_render/src/metalfx/prepare.wgsl",
+      "bytes": 1294,
+      "sha256": "aba8a2d1c1d6e82c965ba9c9cde80df9d639c34c4ef78dbea356873b0decd25f"
+    },
+    {
+      "path": "source-002/inputs/crates/incant_render/src/metalfx/render.rs",
+      "bytes": 2778,
+      "sha256": "645e3bc1c4cbf22c8aa9c6fdf9b1f1b0e7259729fd4cb7f1649711c5422f6a7c"
+    },
+    {
+      "path": "source-002/inputs/crates/incant_render/src/metalfx/system.rs",
+      "bytes": 13086,
+      "sha256": "5d53297e21a3affdf99ca94c56d2f16ebb11d2e55ffa4b9ee5ecf1cf71c15ee1"
+    },
+    {
+      "path": "source-002/inputs/crates/incant_render/src/metalfx/targets.rs",
+      "bytes": 2902,
+      "sha256": "1e08debb881f0f33eaacaecd84e9a974d649ba4873a405132bd6737ba92197bc"
+    },
+    {
+      "path": "source-002/inputs/crates/incant_render/src/metalfx_retained_tests.rs",
+      "bytes": 8106,
+      "sha256": "f876ad462d13c09bf3b62b83de0d90ea1fcfa02d2585c06c63e53fa9f7740a1f"
+    },
+    {
+      "path": "source-002/inputs/crates/incant_render/src/motion/draw.rs",
+      "bytes": 5032,
+      "sha256": "8472afd886bdfd6f277ab1b8924777e978f79a648793151a0547dad924d6d51e"
+    },
+    {
+      "path": "source-002/inputs/crates/incant_render/src/motion/owner.rs",
+      "bytes": 7750,
+      "sha256": "907cff7466008952159b58249c0281a32eee9fb3ba8495a2cbb790275f63f013"
+    },
+    {
+      "path": "source-002/inputs/crates/incant_render/src/retained.rs",
+      "bytes": 26770,
+      "sha256": "7aa23f370b1656d57e257627f160b6ac32ca86e2695b8bb6ffa0e88b2cfc7254"
+    },
+    {
+      "path": "source-002/inputs/crates/incant_render_gpu_host/Cargo.toml",
+      "bytes": 2064,
+      "sha256": "30e81bad895768b6d841f8796b4303dfc509a57fe28296a11e5756fed56cd258"
+    },
+    {
+      "path": "source-002/inputs/crates/incant_render_gpu_host/src/lib.rs",
+      "bytes": 15469,
+      "sha256": "1b8c875ab578d262c8be44cacce393abae99e14babdda0d63fe4d649ad2a0d29"
+    },
+    {
+      "path": "source-002/inputs/crates/incant_render_gpu_host/src/metalfx.rs",
+      "bytes": 2794,
+      "sha256": "846cff341d66017cb9aec3e7e550d0e1c2b27047137aa495695d903718d838cd"
+    },
+    {
+      "path": "source-002/inputs/crates/incant_render_gpu_host/src/motion.rs",
+      "bytes": 2551,
+      "sha256": "4e6deda2ceb12f3dc371ec4cdd06ead2a6a2d083e979bef1837e3ecadfeb3d6e"
+    },
+    {
+      "path": "source-002/inputs/crates/incant_render_gpu_host/src/resolution.rs",
+      "bytes": 2995,
+      "sha256": "60396c4e562dfed6c87c9b916496bfe913313d3e29d63de37718265e2dcb9417"
+    },
+    {
+      "path": "source-002/inputs/docs/spikes/metalfx-main285.md",
+      "bytes": 7341,
+      "sha256": "53d648d8b0ce2998bb8efbd249edf31f649453a625a866d58e5024c98aa2cba7"
+    },
+    {
+      "path": "source-002/source-inventory.json",
+      "bytes": 676506,
+      "sha256": "0f7446f9695352292cd46245f3bb2b304f857007e0704041b0ec9a58940d428a"
+    },
+    {
+      "path": "source-003/delta.patch",
+      "bytes": 8142,
+      "sha256": "a71f7698bf6babcfe2a5478df97857c582abd71aa9c7206fbca15bf7e3c55862"
+    },
+    {
+      "path": "source-003/freeze.json",
+      "bytes": 5954,
+      "sha256": "5fe008e36bf021ff1d291fc478aeea031830b9aef418219322dec8f3a10c6d60"
+    },
+    {
+      "path": "source-003/inputs/Cargo.lock",
+      "bytes": 253060,
+      "sha256": "f9c91817c63b0a96da9baac16013daf95459d4556db4d3af6a981a6eca5ad2f9"
+    },
+    {
+      "path": "source-003/inputs/crates/incant_render/Cargo.toml",
+      "bytes": 3218,
+      "sha256": "2491dcc10be2c017cd82915bbe246ce0e6ad1402dd5d8114f844ec5677ca9997"
+    },
+    {
+      "path": "source-003/inputs/crates/incant_render/src/graph/native.rs",
+      "bytes": 4023,
+      "sha256": "53b2e5d47f059499d57ae3eff7f7d0b6ef7cdd0fbde20841b2595ad8b8a6aa88"
+    },
+    {
+      "path": "source-003/inputs/crates/incant_render/src/graph.rs",
+      "bytes": 15803,
+      "sha256": "77b9588db8774dba5ba98c29a0ad4cc08321e90c1cc082df07ace4fc5eef0763"
+    },
+    {
+      "path": "source-003/inputs/crates/incant_render/src/lib.rs",
+      "bytes": 22298,
+      "sha256": "71086f80fa95be637b8c7517ec537247045748b5bfa97d24e8e0eebd1548376c"
+    },
+    {
+      "path": "source-003/inputs/crates/incant_render/src/metalfx/alpha.wgsl",
+      "bytes": 936,
+      "sha256": "6caac78689a9b0a756d0ff3d3b69d55c64cc4df7dfd4bc9c9229a9ac46fb1752"
+    },
+    {
+      "path": "source-003/inputs/crates/incant_render/src/metalfx/boundary_tests.rs",
+      "bytes": 14624,
+      "sha256": "4dc39fabd137113ee7d05c709be24ba131220362504ea8d533e5a9bfd9a66027"
+    },
+    {
+      "path": "source-003/inputs/crates/incant_render/src/metalfx/common.wgsl",
+      "bytes": 1774,
+      "sha256": "b491151d8c0c6f6dea3df77fac5054f2908c4dfb479d8977bc56d12ebf40091d"
+    },
+    {
+      "path": "source-003/inputs/crates/incant_render/src/metalfx/lifecycle.rs",
+      "bytes": 7392,
+      "sha256": "0885fc18468db9f02e1af74508b82b948679dcf78b4306056c53290078560046"
+    },
+    {
+      "path": "source-003/inputs/crates/incant_render/src/metalfx/mod.rs",
+      "bytes": 5565,
+      "sha256": "05ff060c06d62003bc91aa9fa23f172a60ad9fdba346ac512b1f8c87e512d2d3"
+    },
+    {
+      "path": "source-003/inputs/crates/incant_render/src/metalfx/native.rs",
+      "bytes": 10739,
+      "sha256": "825ffe55cee2a5fa553b830546f6670c644fa7c8b99dd30830706877a277b94b"
+    },
+    {
+      "path": "source-003/inputs/crates/incant_render/src/metalfx/normalize.wgsl",
+      "bytes": 1866,
+      "sha256": "245f531c16eb36234b02f689cda325c06446c7485f4cae9fa9d96e437935ba2b"
+    },
+    {
+      "path": "source-003/inputs/crates/incant_render/src/metalfx/owner.rs",
+      "bytes": 9773,
+      "sha256": "1a2ef4ee39268ecc8b252e4edde61a23b878d42cc91f3068bd462abfc5427f69"
+    },
+    {
+      "path": "source-003/inputs/crates/incant_render/src/metalfx/plan.rs",
+      "bytes": 5549,
+      "sha256": "366c602c55e9f667ffe78abde376ad2dab216e48908466782159bf1f52ba77ef"
+    },
+    {
+      "path": "source-003/inputs/crates/incant_render/src/metalfx/prepare.wgsl",
+      "bytes": 1294,
+      "sha256": "aba8a2d1c1d6e82c965ba9c9cde80df9d639c34c4ef78dbea356873b0decd25f"
+    },
+    {
+      "path": "source-003/inputs/crates/incant_render/src/metalfx/prewarm_tests.rs",
+      "bytes": 2749,
+      "sha256": "ad60bd7d02bb7396b158df4c47adff0e389f2254588ecdb15a6283aff4d7f2cb"
+    },
+    {
+      "path": "source-003/inputs/crates/incant_render/src/metalfx/render.rs",
+      "bytes": 2778,
+      "sha256": "645e3bc1c4cbf22c8aa9c6fdf9b1f1b0e7259729fd4cb7f1649711c5422f6a7c"
+    },
+    {
+      "path": "source-003/inputs/crates/incant_render/src/metalfx/system.rs",
+      "bytes": 13086,
+      "sha256": "5d53297e21a3affdf99ca94c56d2f16ebb11d2e55ffa4b9ee5ecf1cf71c15ee1"
+    },
+    {
+      "path": "source-003/inputs/crates/incant_render/src/metalfx/targets.rs",
+      "bytes": 2902,
+      "sha256": "1e08debb881f0f33eaacaecd84e9a974d649ba4873a405132bd6737ba92197bc"
+    },
+    {
+      "path": "source-003/inputs/crates/incant_render/src/metalfx_retained_tests.rs",
+      "bytes": 8106,
+      "sha256": "f876ad462d13c09bf3b62b83de0d90ea1fcfa02d2585c06c63e53fa9f7740a1f"
+    },
+    {
+      "path": "source-003/inputs/crates/incant_render/src/motion/draw.rs",
+      "bytes": 5032,
+      "sha256": "8472afd886bdfd6f277ab1b8924777e978f79a648793151a0547dad924d6d51e"
+    },
+    {
+      "path": "source-003/inputs/crates/incant_render/src/motion/owner.rs",
+      "bytes": 7750,
+      "sha256": "907cff7466008952159b58249c0281a32eee9fb3ba8495a2cbb790275f63f013"
+    },
+    {
+      "path": "source-003/inputs/crates/incant_render/src/retained.rs",
+      "bytes": 26770,
+      "sha256": "7aa23f370b1656d57e257627f160b6ac32ca86e2695b8bb6ffa0e88b2cfc7254"
+    },
+    {
+      "path": "source-003/inputs/crates/incant_render_gpu_host/Cargo.toml",
+      "bytes": 2064,
+      "sha256": "30e81bad895768b6d841f8796b4303dfc509a57fe28296a11e5756fed56cd258"
+    },
+    {
+      "path": "source-003/inputs/crates/incant_render_gpu_host/src/lib.rs",
+      "bytes": 15555,
+      "sha256": "c1bdecc1d47e9df11d5a5be1033faa522ab9f21b839c367195ef4124012268cd"
+    },
+    {
+      "path": "source-003/inputs/crates/incant_render_gpu_host/src/metalfx.rs",
+      "bytes": 2794,
+      "sha256": "846cff341d66017cb9aec3e7e550d0e1c2b27047137aa495695d903718d838cd"
+    },
+    {
+      "path": "source-003/inputs/crates/incant_render_gpu_host/src/metalfx_tests.rs",
+      "bytes": 4202,
+      "sha256": "2c713f5a01dbd7c657c8708182015373f8d0ebf1c18d307a4e1962b4b8d24e88"
+    },
+    {
+      "path": "source-003/inputs/crates/incant_render_gpu_host/src/motion.rs",
+      "bytes": 2551,
+      "sha256": "4e6deda2ceb12f3dc371ec4cdd06ead2a6a2d083e979bef1837e3ecadfeb3d6e"
+    },
+    {
+      "path": "source-003/inputs/crates/incant_render_gpu_host/src/resolution.rs",
+      "bytes": 2995,
+      "sha256": "60396c4e562dfed6c87c9b916496bfe913313d3e29d63de37718265e2dcb9417"
+    },
+    {
+      "path": "source-003/inputs/docs/spikes/metalfx-main285.md",
+      "bytes": 7341,
+      "sha256": "53d648d8b0ce2998bb8efbd249edf31f649453a625a866d58e5024c98aa2cba7"
+    },
+    {
+      "path": "source-003/source-inventory.json",
+      "bytes": 676855,
+      "sha256": "498c13bed42807f73ad686eae6fab3ace679e106d6e978da960c9cf15147e792"
+    }
+  ],
+  "binaries": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/metalfx-main285-001/qualify-001/binaries/native-lib/incant_render_gpu_host-e22bdb8b9059ee26",
+      "bytes": 1075304,
+      "sha256": "f7b24024a850f68f8392e944d18ba44cfe83c46c266c477c68e8da8bb96f7fe7",
+      "features": [
+        "default",
+        "native-metalfx",
+        "physics-deterministic"
+      ],
+      "target": {
+        "kind": [
+          "lib"
+        ],
+        "crate_types": [
+          "lib"
+        ],
+        "name": "incant_render_gpu_host",
+        "src_path": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_render_gpu_host/src/lib.rs",
+        "edition": "2024",
+        "doc": true,
+        "doctest": true,
+        "test": true
+      }
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/metalfx-main285-001/qualify-001/binaries/native-lib/incant_render-1ce88446cc4875f5",
+      "bytes": 32774128,
+      "sha256": "4fc57aa7a6f7a6e05b6e047f6add1142aa6cfbad6e48c221e99d4794438eb85c",
+      "features": [
+        "default",
+        "native-metalfx",
+        "physics-deterministic"
+      ],
+      "target": {
+        "kind": [
+          "lib"
+        ],
+        "crate_types": [
+          "lib"
+        ],
+        "name": "incant_render",
+        "src_path": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_render/src/lib.rs",
+        "edition": "2024",
+        "doc": true,
+        "doctest": true,
+        "test": true
+      }
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/metalfx-main285-001/qualify-001/binaries/default-lib/incant_render_gpu_host-c34a0a27aa27f089",
+      "bytes": 1075304,
+      "sha256": "6ef1616ead4171713468ae14ee82e01f9df8bccdeeb9f4137ca9f5f9dc58e39e",
+      "features": [
+        "default",
+        "physics-deterministic"
+      ],
+      "target": {
+        "kind": [
+          "lib"
+        ],
+        "crate_types": [
+          "lib"
+        ],
+        "name": "incant_render_gpu_host",
+        "src_path": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_render_gpu_host/src/lib.rs",
+        "edition": "2024",
+        "doc": true,
+        "doctest": true,
+        "test": true
+      }
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/metalfx-main285-001/qualify-001/binaries/default-lib/incant_render-7693e1061b6913d5",
+      "bytes": 32564304,
+      "sha256": "5926603e4ef89d2b1a7ac4bdef6bc42c18dc42f7e6b27886c9a25b61168e5af8",
+      "features": [
+        "default",
+        "physics-deterministic"
+      ],
+      "target": {
+        "kind": [
+          "lib"
+        ],
+        "crate_types": [
+          "lib"
+        ],
+        "name": "incant_render",
+        "src_path": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_render/src/lib.rs",
+        "edition": "2024",
+        "doc": true,
+        "doctest": true,
+        "test": true
+      }
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/metalfx-main285-001/qualify-003/binaries/native-lib/incant_render_gpu_host-e22bdb8b9059ee26",
+      "bytes": 8263032,
+      "sha256": "98cc9960b9643acb7572ac104af65b69ebc6206582770acae6f9c1376cda8221",
+      "features": [
+        "default",
+        "native-metalfx",
+        "physics-deterministic"
+      ],
+      "target": {
+        "kind": [
+          "lib"
+        ],
+        "crate_types": [
+          "lib"
+        ],
+        "name": "incant_render_gpu_host",
+        "src_path": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_render_gpu_host/src/lib.rs",
+        "edition": "2024",
+        "doc": true,
+        "doctest": true,
+        "test": true
+      }
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/metalfx-main285-001/qualify-003/binaries/native-lib/incant_render-1ce88446cc4875f5",
+      "bytes": 32820096,
+      "sha256": "00c248c07aab4a95fa4c085a1207fb23f6ad1f929b0a1189f9ee6eeb1ca256b3",
+      "features": [
+        "default",
+        "native-metalfx",
+        "physics-deterministic"
+      ],
+      "target": {
+        "kind": [
+          "lib"
+        ],
+        "crate_types": [
+          "lib"
+        ],
+        "name": "incant_render",
+        "src_path": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_render/src/lib.rs",
+        "edition": "2024",
+        "doc": true,
+        "doctest": true,
+        "test": true
+      }
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/metalfx-main285-001/qualify-003/binaries/default-lib/incant_render_gpu_host-c34a0a27aa27f089",
+      "bytes": 1075304,
+      "sha256": "1bcf3f68ef5c23ce2c3747d378444c428a08f8bb2e93fbff14d15dbef85b6d30",
+      "features": [
+        "default",
+        "physics-deterministic"
+      ],
+      "target": {
+        "kind": [
+          "lib"
+        ],
+        "crate_types": [
+          "lib"
+        ],
+        "name": "incant_render_gpu_host",
+        "src_path": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_render_gpu_host/src/lib.rs",
+        "edition": "2024",
+        "doc": true,
+        "doctest": true,
+        "test": true
+      }
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/metalfx-main285-001/qualify-003/binaries/default-lib/incant_render-7693e1061b6913d5",
+      "bytes": 32564304,
+      "sha256": "c581d463876c895b994da1555b0336460f68e59d18527158728ba8d525e4dd6d",
+      "features": [
+        "default",
+        "physics-deterministic"
+      ],
+      "target": {
+        "kind": [
+          "lib"
+        ],
+        "crate_types": [
+          "lib"
+        ],
+        "name": "incant_render",
+        "src_path": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_render/src/lib.rs",
+        "edition": "2024",
+        "doc": true,
+        "doctest": true,
+        "test": true
+      }
+    }
+  ],
+  "preserved_failures": [
+    "source001 native Clippy unused test-only budget observer"
+  ],
+  "unexecuted_source": [
+    "reviewed source002 preserved; test-only source003 was built instead"
+  ],
+  "limits": [
+    "No appearance/performance acceptance",
+    "Cooked native shader path explicitly unavailable",
+    "Vendor-private allocation/work not measured",
+    "Built-in temporal upscaling remains unfinished"
+  ],
+  "host": {
+    "observed_after_gpu_sequence": true,
+    "unix_time": 1791997452.293962,
+    "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+    "mac_version": [
+      "27.0.1",
+      [
+        "",
+        "",
+        ""
+      ],
+      "arm64"
+    ],
+    "machine": "arm64",
+    "performance_measurement": false
+  }
+}
