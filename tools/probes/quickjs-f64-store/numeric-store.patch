@@ -1,0 +1,24 @@
+--- a/quickjs/quickjs.c
++++ b/quickjs/quickjs.c
+@@ -19966,6 +19966,21 @@
+                     idx = JS_VALUE_GET_INT(sp[-2]);
+                     if (likely(JS_VALUE_GET_TAG(sp[-3]) == JS_TAG_OBJECT)) {
+                         p = JS_VALUE_GET_OBJ(sp[-3]);
++                        /* Diagnostic-only: numeric Float64 stores cannot run
++                           user conversion hooks. Every other case retains the
++                           original setter, including bounds/immutability failures. */
++                        if (p->class_id == JS_CLASS_FLOAT64_ARRAY &&
++                            JS_IsNumber(val) &&
++                            idx < (uint32_t)p->u.array.count &&
++                            !typed_array_is_immutable(p)) {
++                            double d = JS_VALUE_GET_TAG(val) == JS_TAG_INT
++                                ? (double)JS_VALUE_GET_INT(val)
++                                : JS_VALUE_GET_FLOAT64(val);
++                            p->u.array.u.double_ptr[idx] = d;
++                            JS_FreeValue(ctx, sp[-3]);
++                            sp -= 3;
++                            BREAK;
++                        }
+                         if (likely(p->class_id == JS_CLASS_ARRAY &&
+                                    idx < (uint32_t)p->u.array.count)) {
+                             set_value(ctx, &p->u.array.u.values[idx], val);
