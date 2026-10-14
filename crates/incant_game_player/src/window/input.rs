@@ -64,6 +64,23 @@ impl PendingInput {
         }
         Ok(())
     }
+    /// Coalesce only consecutive relative samples; never replace a delta with
+    /// the last sample or merge across a discrete event. Refusal is atomic.
+    pub(super) fn relative_motion(&mut self, delta: [f64; 2]) -> Result<(), Error> {
+        let valid = |v: [f64; 2]| v.iter().all(|n| n.is_finite() && n.abs() <= 1_000_000.);
+        if !valid(delta) {
+            return Err(Error::InputRange);
+        }
+        if let Some(InputEvent::PointerMotion { delta: previous }) = self.events.last_mut() {
+            let sum = [previous[0] + delta[0], previous[1] + delta[1]];
+            if !valid(sum) {
+                return Err(Error::InputRange);
+            }
+            *previous = sum;
+            return Ok(());
+        }
+        self.push(InputEvent::PointerMotion { delta })
+    }
     fn pointer(&mut self, position: PhysicalPosition<f64>, scale_factor: f64) -> Result<(), Error> {
         self.push(InputEvent::PointerPosition {
             position: logical_position(position, scale_factor)?,
