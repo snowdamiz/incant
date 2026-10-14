@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "source": "72b1ba8ec351e86d66a90c401e0a75a530633616",
+  "reviewer": "astra root",
+  "accept_for_scoped_device_numerical_qualification": true,
+  "files": {
+    "crates/incant_render/src/upscaling/evidence_reference.rs": "c37c281019b8db08eac07a76cc1b4b4b6ab8517e50df6c1fbb3924feddcc4b22",
+    "crates/incant_render/src/upscaling/evidence_tests.rs": "7b9a7fdc9b3eeec2a66755d8041e0ba4bfd374aaf4eaaf3d0a1e5de8c19e3223",
+    "crates/incant_render/src/upscaling/owner_device_tests.rs": "50662f9e797ba9188252f5774aad3e7f314c0e33019ea15016ea043875b74808",
+    "crates/incant_shader_cook/src/temporal/contract.rs": "4e4b1fd201f1f71f14696029c8cd42727fe70afa4328ad5e14739d659e69e2f7",
+    "crates/incant_shader_cook/src/temporal/mod.rs": "ceb8d5c1e73a170158af54c94873def1e1346da00c7230c0025d1a1741c5b216",
+    "crates/incant_render/src/temporal_shader/cooked.rs": "fddf5916a1b017999cca9aa14a6f1f773849f5a7c2da5ee4f2a7b9788c5f1b71"
+  },
+  "findings": [
+    "Independent f64 support and paired evidence reference includes analytic scalar counterexamples, limited explicitly to uniform depth fixtures.",
+    "Case3 retains exact history-disabled equality; new Gaussian fresh-color bound is analytically justified, archived bilinear result remains historical.",
+    "Depth MASK fragment reads frame LOD; cooker and consumer now match existing160B vertex+fragment binding, with negative control for removed read.",
+    "Half float tolerance is bounded by conversion precision; exact zero and owner identity remain exact."
+  ],
+  "limitations": [
+    "CPU packet verification pending",
+    "No visual approval or GPU correctness claim",
+    "No production shader changes by reviewer"
+  ],
+  "timestamp": "2026-10-14T01:08:10.491321+00:00"
+}

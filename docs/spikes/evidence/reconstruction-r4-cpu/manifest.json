@@ -1,0 +1,114 @@
+{
+  "version": 1,
+  "source": "72b1ba8ec351e86d66a90c401e0a75a530633616",
+  "base": "76be9608e99bf089fcb1e0908827330f70c28ac1",
+  "freeze_sha256": "19f6b7c35f40802868d6617cf325bfaf9cfbf1fe842e549bf1926836e78477ee",
+  "collector_sha256": "e0c6ccf6b43fd7a9e11bb0190527dccfd9b3e81ded95ab90cc33ac370f7d5c90",
+  "archive_sha256": "b68f8719bab3a0dc2d4f457777da32faf88d896b85223a5ac4e87d5bf827bf77",
+  "audit": {
+    "records": 335,
+    "payloads": 152,
+    "source_inputs": 2465,
+    "source_copies": 35,
+    "shaders": 21,
+    "checks": {
+      "default": {
+        "exit": 101,
+        "tests": [
+          160,
+          2,
+          43
+        ]
+      },
+      "default-002": {
+        "exit": 0,
+        "tests": [
+          162,
+          0,
+          43
+        ]
+      },
+      "cooker-002": {
+        "exit": 101,
+        "tests": [
+          28,
+          1,
+          0
+        ]
+      },
+      "cooker-003": {
+        "exit": 0,
+        "tests": [
+          34,
+          0,
+          0
+        ]
+      },
+      "cooked-native-003": {
+        "exit": 101,
+        "tests": [
+          176,
+          1,
+          44
+        ]
+      },
+      "cooked-native-004": {
+        "exit": 0,
+        "tests": [
+          177,
+          0,
+          44
+        ]
+      },
+      "clippy-004": {
+        "exit": 0,
+        "tests": null
+      },
+      "fmt-001": {
+        "exit": 1,
+        "tests": null
+      },
+      "fmt-005": {
+        "exit": 0,
+        "tests": null
+      },
+      "diff-005": {
+        "exit": 0,
+        "tests": null
+      }
+    },
+    "binaries": [
+      {
+        "original": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/ci/deps/incant_render-bf4961fb357f91a4",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/reconstruction-r4-cpu-001/binaries-002/default",
+        "sha256": "103027db6cba5333af940fba57f29678b339680ea0a757ab39fff140c7155ebc",
+        "bytes": 32410480,
+        "mode": "0o755",
+        "log_sha256": "8660f8050e1fee85adf04f1aa9b60cd5ec5c7ed9f2d73ccecb4ed5b6e26f4429"
+      },
+      {
+        "original": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/ci/deps/incant_render-288759d68012f619",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/reconstruction-r4-cpu-001/binaries-004/cooked-native",
+        "sha256": "7a629aca2ff959ece83b79019f88857ae45c59f72965cd870329cdbb1911f506",
+        "bytes": 33481664,
+        "mode": "0o755",
+        "log_sha256": "44ce2adf25decaf120c2f89a6fb1df4cbf5cfc9abcec474065d1a97e7e26e3c5"
+      }
+    ],
+    "default_relevance_delta": [
+      "crates/incant_render/src/temporal_shader/cooked.rs",
+      "crates/incant_shader_cook/src/temporal/contract.rs",
+      "crates/incant_shader_cook/src/temporal/mod.rs",
+      "crates/incant_shader_cook/tests/temporal.rs"
+    ],
+    "source": "72b1ba8ec351e86d66a90c401e0a75a530633616"
+  },
+  "scope": "CPU/source/cooker only; GPU and appearance unaccepted.",
+  "limits": [
+    "Default binary executed at source003; only excluded cooked paths changed afterward.",
+    "Cooker suite executed at source004; cooker source unchanged at final005.",
+    "All GPU tests ignored; no shader execution, pixels, performance or release claim.",
+    "Original freeze scope sentence predates later ABI-contract repairs; this packet binds both.",
+    "Historical shader/ABI/format failures retained; old quality failures remain open."
+  ]
+}

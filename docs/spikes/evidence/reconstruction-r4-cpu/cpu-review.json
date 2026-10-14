@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "source": "72b1ba8ec351e86d66a90c401e0a75a530633616",
+  "source_acceptance": "reconstruction-r4-source-root-20261014.json",
+  "manifest_sha256": "891a7d71de96cd8694b30ecbfe93379611cd2ea9c256cc220b08b27d61710f78",
+  "independent_replay": "--verify-only --originals --local-binaries passed",
+  "accepted_scope": "CPU qualification plus exact selected-source relevance only",
+  "next_grant": "Four ignored numerical fixture invocations, default+owner on WGSL and cooked-native, <=62 submissions/maps; stop on firstfailure, no screenshots/no visual acceptance",
+  "timestamp": "2026-10-14T01:09:39.549284+00:00"
+}
