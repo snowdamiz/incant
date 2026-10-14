@@ -37,7 +37,72 @@ def proof(kind='texture'):
                     'stale_generation_refused', 'stop_releases_world')})
 
 
+def animated_proof():
+    value = proof('model')
+    value['asset_kind'] = 'animated-model'
+    before = {'playback':{'clip':0,'seconds':.5+value['paused_tick']/60,'speed':1,'playing':True,'looping':True},
+              'completed':False,'transition':None}
+    after = copy.deepcopy(before)
+    after['playback']['seconds'] += 1/60
+    event = {'id':'owned-event','level':'error',
+             'message':'Native Play asset refresh: animation clip bindings or duration table changed'}
+    for i, (stage, name) in enumerate(zip(value['stages'],probe.native_editor_animation.STAGES)):
+        stage.update(stage=name,animation=copy.deepcopy(before),history={'revision':3+i})
+    value['stages'][4].update(authored_fingerprint='c'*64,refresh_error=event)
+    value.update(animation_continued=True,committed_incompatible_refused=True,
+        animation_step={'before':before,'after':after},incompatible_refresh_refusal={
+            'committed_revision':7,'authored_fingerprint':'c'*64,'accepted_fingerprint':'b'*64,
+            'event':event,'native_code_available':False})
+    del value['malformed_source_refusal']
+    return value
+
+
 class ReceiptControls(unittest.TestCase):
+    def test_animated_fixture_keeps_skin_geometry_and_bindings_while_changing_only_clip_keys(self):
+        documents = [json.loads(probe.native_editor_animation.gltf(*args))
+                     for args in ((),(True,),(True,True))]
+        for field in ('nodes','scenes','scene','skins','meshes','materials'):
+            self.assertTrue(all(d[field]==documents[0][field] for d in documents))
+        times=[]
+        geometry=[]
+        for d in documents:
+            raw=base64.b64decode(d['buffers'][0]['uri'].split(',',1)[1],validate=True)
+            self.assertEqual(len(raw),d['buffers'][0]['byteLength'])
+            def accessor(index,code,width):
+                a=d['accessors'][index];v=d['bufferViews'][a['bufferView']]
+                return struct.unpack_from('<'+code*(a['count']*width),raw,v['byteOffset'])
+            primitive=d['meshes'][0]['primitives'][0]
+            geometry.append(accessor(primitive['attributes']['POSITION'],'f',3))
+            self.assertEqual(accessor(primitive['attributes']['JOINTS_0'],'H',4),(0,)*12)
+            self.assertEqual(accessor(primitive['attributes']['WEIGHTS_0'],'f',4),(1,0,0,0)*3)
+            sampler=d['animations'][0]['samplers'][0]
+            times.append(accessor(sampler['input'],'f',1))
+            self.assertEqual(d['animations'][0]['channels'],documents[0]['animations'][0]['channels'])
+        self.assertEqual(geometry,[geometry[0]]*3)
+        self.assertEqual(times,[(0,2),(0,.5,2),(0,.5,3)])
+
+    def test_animated_receipt_requires_real_commit_refusal_recovery_and_exact_paused_state(self):
+        value=animated_proof()
+        self.assertIs(probe.validate_proof(value,'animated-model'),value)
+        for edit in (
+            lambda p:p['stages'][1]['animation']['playback'].update(seconds=0),
+            lambda p:p['stages'][4]['history'].update(revision=6),
+            lambda p:p['incompatible_refresh_refusal'].update(authored_fingerprint='b'*64),
+            lambda p:p['incompatible_refresh_refusal'].update(code='invented'),
+            lambda p:p['incompatible_refresh_refusal']['event'].update(level='info'),
+            lambda p:p['animation_step']['after']['playback'].update(seconds=.5),
+            lambda p:p['animation_step']['before']['playback'].update(clip=True),
+            lambda p:p.update(committed_incompatible_refused=False),
+        ):
+            candidate=copy.deepcopy(value);edit(candidate)
+            with self.assertRaises(ValueError):
+                probe.validate_proof(candidate,'animated-model')
+
+    def test_animated_mode_cannot_accept_static_or_texture_receipts(self):
+        for kind in ('model','texture'):
+            with self.assertRaises(ValueError):
+                probe.validate_proof(proof(kind),'animated-model')
+
     def test_accepts_exact_scoped_stage_receipt(self):
         value = proof()
         self.assertIs(probe.validate_proof(value), value)
