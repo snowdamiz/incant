@@ -34,5 +34,17 @@ histogram counters only, not the rest of the profiler or process.
 
 CPU controls cover waits, interrupted segments, empty capture, exact histogram
 boundaries, overflow, saturation and invalid clocks. Local source qualification
-and independent review are tracked separately from any future native-window
-shipping measurement. No actual-window or performance result is claimed here.
+at `e266e950` passes all 80 profiled native-window library tests, strict all-target
+Clippy and a separate unprofiled native-window library compile. These use pinned
+Rust 1.99 arm64, locked/offline CI profile and jobs/Rayon 2. The earlier passing
+source001 CPU checks did not catch a missing resize interruption for windows
+without UI. Independent source review caught it; source002 interrupts every
+resize directly and clarifies the restart endpoint before qualification.
+
+The [manifest](evidence/native-window-cadence/manifest.json) retains exact inputs,
+commands, raw logs and copied executable identity; the
+[review](evidence/native-window-cadence/review.json) binds the final source.
+Replay with `python3 docs/spikes/evidence/native-window-cadence/verify.py`.
+Checkpoint CI retains unprofiled window tests and adds profiled library controls;
+its scoped all-target lint includes the optional profile module.
+No actual-window timing, shipping performance or phase result is claimed here.

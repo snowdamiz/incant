@@ -1,6 +1,6 @@
 # Phase 1 review ledger
 
-Recorded against main287 (`bb131b9347dbfc6e1ea8e5763bc0fe29f6b5bccc`).
+Updated against main290 (`91f0ce464f97795f2114f03fc0f43d06008a082e`).
 Phase 1 remains open; this ledger records evidence and remaining work, not director
 approval. [PLAN.md](../../PLAN.md#phase-1-core-engine) defines the requirements.
 Only actual testing on the available Mac is required as device evidence. Other
@@ -18,9 +18,10 @@ device execution is deferred; hosted build and release checks remain required.
 ## Current implementation priorities
 
 - Finish portable temporal reconstruction and the Apple MetalFX path, then review
-  the rendered result and measure the complete shipping game. Private finite
-  visibility and native interop experiments are not merged features or accepted
-  appearance/performance results.
+  the rendered result and measure the complete shipping game. Finite visibility
+  remains a private experiment. The default-off MetalFX foundation is merged,
+  but its [material/motion comparison](../spikes/metalfx-image-motion.md) fails
+  appearance review. Neither route has accepted quality or performance evidence.
 - Extend live asset refresh beyond the verified existing-texture and
   [compatible static-model workflows](../spikes/native-static-model-refresh.md).
   Both preserve the running world and scripts on this Mac. Animation, changed scene/material-binding

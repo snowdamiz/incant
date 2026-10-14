@@ -11,6 +11,20 @@ antialiasing. This is a separate viewport defect, not a rendering-quality pass
 or proof of the low-resolution reconstruction cause. The entries
 below preserve earlier scoped results and superseded integration snapshots.
 
+## Native host timing — CPU qualified
+
+Optional profiling now includes surface acquisition, input/UI preparation and
+haptic dispatch in a separate host-frame observation. Consecutive accepted-frame
+intervals break across pauses, resize, surface deferral and session replacement.
+These are CPU completion timestamps, not GPU completion, displayed FPS or a
+performance pass. Eighty CPU controls, strict lint, profile-off compilation and
+independent source review pass; actual-window shipping measurement remains open.
+[Boundaries and replay](docs/spikes/native-window-cadence.md).
+
+Release checkpoint38 is frozen at main290 with the verified asset workflows and
+default-off MetalFX foundation. Comprehensive checks are pending; release remains
+at checkpoint37. Main development continues independently.
+
 ## Prepared MetalFX interop — correctness verified, appearance failed
 
 The default-off Mac path now has reviewed native queue ownership, bounded target
