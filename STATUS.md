@@ -11,6 +11,18 @@ controls. This fixes the ordinary viewport route; low-resolution reconstruction
 still has separate appearance defects. The entries
 below preserve earlier scoped results and superseded integration snapshots.
 
+## Repeated navigation-start cost — diagnostic complete
+
+A default-off observer now measures initial and repeated navigation starts in
+their actual script frame. Seventy-one Rust controls, sixteen adapter controls,
+strict lint and a fresh private shipping build pass. Two full Core10k children
+preserve exact gameplay and PCM. The 1,026 repeated scans cost 14.37 ms over all
+2,156 frames; even subtracting them completely from their own frames leaves a
+hypothetical p95 of 2.544041 ms. This specific route to the 2 ms target is closed
+without changing navigation. Other distinct hypotheses may be revisited
+periodically while development continues. This instrumented attribution is not
+a shipping speedup or gate pass. [Raw observations and replay](docs/spikes/navigation-start-attribution.md).
+
 ## Compatible animation refresh — CPU and Metal verified
 
 Native Play now admits compatible clip key changes without replacing the live

@@ -13,6 +13,17 @@ TARGET = 'aarch64-apple-darwin'
 DIAGNOSTIC = 'diagnostic-script-phases'
 EXTRA = {'incant_game_player', 'incant_script', 'incant_runtime', 'incant_profile'}
 FEATURES = ['project', 'render-input', 'profile', DIAGNOSTIC]
+NAVIGATION = 'diagnostic-navigation'
+NAV_FEATURES = ['project', 'render-input', 'profile', NAVIGATION]
+
+def additions(features):
+    require(features in (FEATURES, NAV_FEATURES), 'Unknown diagnostic selection')
+    result = {name: {DIAGNOSTIC} for name in EXTRA}
+    if features == NAV_FEATURES:
+        for flags in result.values(): flags.add(NAVIGATION)
+        result['incant_nav'] = {NAVIGATION}
+    return result
+
 TICKS = 2156
 SOURCE_ROOTS = ('crates/', 'third_party/', 'sdk/', 'tools/', '.cargo/')
 SOURCE_FILES = ('Cargo.toml', 'Cargo.lock', 'rust-toolchain.toml')
@@ -35,7 +46,7 @@ def plan(path):
     require(data['format'] == 'incant-script-attribution-private-plan' and data['version'] == 1,
             'Unsupported private diagnostic plan')
     require(data['target'] == TARGET and data['physics_mode'] == 'fast'
-            and data['features'] == FEATURES and data['ticks'] == TICKS
+            and data['features'] in (FEATURES, NAV_FEATURES) and data['ticks'] == TICKS
             and data['child_seconds'] == 45 and data['retry_count'] == 0
             and data['eligible_for_performance_gate'] is False, 'Diagnostic contract changed')
     return data, sha256(raw)
@@ -91,7 +102,8 @@ def graph_identity(text):
     return result
 
 
-def graph_delta(actual, baseline):
+def graph_delta(actual, baseline, features=FEATURES):
+    extra = additions(features)
     actual, baseline = graph_identity(actual), graph_identity(baseline)
     require(actual.keys() == baseline.keys(), 'Normal dependency closure changed')
     changes = {}
@@ -99,20 +111,22 @@ def graph_delta(actual, baseline):
         name, version = key
         # Cargo may report distinct host/target feature rows for one version.
         # Preserve those rows; unioning them would hide a missing unit.
-        wanted = {tuple(sorted(set(flags) | ({DIAGNOSTIC} if name in EXTRA else set())))
+        wanted = {tuple(sorted(set(flags) | extra.get(name, set())))
                   for flags in baseline[key]}
         require(rows == wanted, 'Additional normal graph difference: ' + name)
-        if name in EXTRA:
+        if name in extra:
             require(name not in changes, 'Multiple diagnostic crate versions')
             changes[name] = {'version': version,
                              'before': [list(flags) for flags in sorted(baseline[key])],
                              'after': [list(flags) for flags in sorted(rows)]}
-    require(changes.keys() == EXTRA, 'Missing diagnostic feature recipients')
+    require(changes.keys() == extra.keys(), 'Missing diagnostic feature recipients')
     return changes
 
 
-def compiler_features(messages, target_dir, baseline):
+def compiler_features(messages, target_dir, baseline, features=FEATURES):
     """Exact target flags; build-host units cannot stand in for runtime units."""
+    extra = additions(features)
+    require(set(baseline) >= extra.keys(), "Missing diagnostic compiler recipients")
     target = target_dir / TARGET / 'shipping'
     host = target_dir / 'shipping'
     names = set(baseline)
@@ -136,14 +150,14 @@ def compiler_features(messages, target_dir, baseline):
             kinds.add(row['target']['kind'][0])
         flags = set(row['features'])
         require(name not in found or found[name] == flags, 'Conflicting actual target flags')
-        wanted = set(baseline[name]) | ({DIAGNOSTIC} if name in EXTRA else set())
+        wanted = set(baseline[name]) | extra.get(name, set())
         require(flags == wanted, 'Unexpected target compiler features: ' + name)
         found[name] = flags
     require(found.keys() == names and kinds == {'lib', 'bin'}, 'Missing actual target units')
     require(not ({'compiler', 'native-checkpoints', 'physics-fast-simd8'} & found['incant_script']),
             'Unexpected runtime compiler/checkpoint/eight-lane feature')
     return {'features': {k: sorted(v) for k, v in found.items()},
-            'ignored_build_host': sorted(ignored), 'extra_feature': DIAGNOSTIC}
+            'ignored_build_host': sorted(ignored), 'extra_feature': features[-1]}
 
 
 def package_identity(directory):

@@ -4,6 +4,8 @@
 //! nested observations, never additional exclusive frame time. No guest values,
 //! native views, ECS handles, or pointers are retained. Normal builds omit this
 //! entire module and all call sites.
+#[cfg(feature = "diagnostic-navigation")]
+pub mod navigation;
 mod storage;
 #[cfg(test)]
 mod tests;
@@ -62,6 +64,20 @@ struct Active {
     visited: u16,
     callback: bool,
     numeric: u8,
+    #[cfg(feature = "diagnostic-navigation")]
+    navigation: u8,
+}
+impl Active {
+    fn navigation_idle(&self) -> bool {
+        #[cfg(feature = "diagnostic-navigation")]
+        {
+            self.navigation == 0
+        }
+        #[cfg(not(feature = "diagnostic-navigation"))]
+        {
+            true
+        }
+    }
 }
 thread_local! {
     static ACTIVE: RefCell<Option<Active>> = const { RefCell::new(None) };
@@ -110,6 +126,8 @@ impl Frame {
                 visited: 1,
                 callback: false,
                 numeric: 0,
+                #[cfg(feature = "diagnostic-navigation")]
+                navigation: 0,
             });
             true
         });
@@ -145,6 +163,7 @@ impl Drop for Frame {
             a.row.valid &= a.visited == (1 << REGIONS.len()) - 1
                 && !a.callback
                 && a.numeric == 0
+                && a.navigation_idle()
                 && a.row.whole_tick_calls == 1;
             Some(a.row)
         });
@@ -159,8 +178,10 @@ pub fn mark(region: Region) {
     ACTIVE.with_borrow_mut(|slot| {
         if let Some(a) = slot {
             let now = Instant::now();
-            a.row.valid &=
-                region as usize == a.region as usize + 1 && !a.callback && a.numeric == 0;
+            a.row.valid &= region as usize == a.region as usize + 1
+                && !a.callback
+                && a.numeric == 0
+                && a.navigation_idle();
             a.row.regions_ns[a.region as usize] = elapsed(a.previous, now, &mut a.row.valid);
             a.previous = now;
             a.region = region;
@@ -206,7 +227,8 @@ impl Span {
             };
             match kind {
                 Kind::Source(_) => {
-                    a.row.valid &= a.region == Region::Callbacks && !a.callback;
+                    a.row.valid &=
+                        a.region == Region::Callbacks && !a.callback && a.navigation_idle();
                     a.callback = true;
                 }
                 Kind::Numeric(n) => {
@@ -215,7 +237,8 @@ impl Span {
                         _ => Region::ScopeCleanup,
                     };
                     let bit = 1 << n as usize;
-                    a.row.valid &= a.region == expected && a.numeric & bit == 0;
+                    a.row.valid &=
+                        a.region == expected && a.numeric & bit == 0 && a.navigation_idle();
                     a.numeric |= bit;
                 }
             }
@@ -241,6 +264,7 @@ impl Drop for Span {
                 let ns = elapsed(start, now, &mut a.row.valid);
                 let (total, count) = match kind {
                     Kind::Source(index) => {
+                        a.row.valid &= a.navigation_idle();
                         a.callback = false;
                         (&mut a.row.source_ns[index], &mut a.row.source_calls[index])
                     }

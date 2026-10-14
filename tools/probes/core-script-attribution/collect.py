@@ -9,6 +9,7 @@ import time
 
 from common import ROOT, TICKS, checked_file, load, package_identity, plan, source_check
 from analyze import analyze
+from common import NAV_FEATURES
 import mac_performance
 import native_process
 from native_package import read, require, sha256, write_json
@@ -91,7 +92,7 @@ def collect(plan_path, package, output, stage, functional):
                     'Full historical logical result differs')
             require(read(audio, 128 * 1024**2) == pcm, 'PCM differs')
             if stage == 'diagnostic':
-                observation = analyze(actual, expected_sources)
+                observation = analyze(actual, expected_sources, navigation=data['features'] == NAV_FEATURES)
                 write_json(output / 'attribution.json', observation)
             else:
                 require('profile' not in actual, 'Unprofiled control emitted a capture')
