@@ -1,4 +1,4 @@
-use crate::{Error, HeapSample, Phase, Report};
+use crate::{Error, HeapMode, HeapSample, Phase, Report};
 #[derive(Default)]
 pub struct Scope;
 impl Drop for Scope {
@@ -18,7 +18,18 @@ pub fn enabled() -> bool {
     false
 }
 #[inline(always)]
-pub fn quickjs_heap(_: HeapSample) {}
+pub fn quickjs_observation() -> Option<HeapObservation> {
+    None
+}
+pub struct HeapObservation {
+    _private: (),
+}
+impl HeapObservation {
+    pub fn mode(&self) -> HeapMode {
+        HeapMode::Maintained
+    }
+    pub fn record(self, _: Option<HeapSample>) {}
+}
 #[inline(always)]
 pub fn frame_outcome(_: bool) {}
 pub struct Capture {
@@ -29,6 +40,12 @@ impl Capture {
         Err(Error::Disabled)
     }
     pub fn start_tracy_process() -> Result<Self, Error> {
+        Err(Error::TracyUnavailable)
+    }
+    pub fn start_with_heap_mode(_: HeapMode) -> Result<Self, Error> {
+        Err(Error::Disabled)
+    }
+    pub fn start_tracy_process_with_heap_mode(_: HeapMode) -> Result<Self, Error> {
         Err(Error::TracyUnavailable)
     }
     pub fn report(&self) -> Report {

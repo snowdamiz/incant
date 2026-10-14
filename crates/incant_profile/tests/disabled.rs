@@ -16,3 +16,12 @@ fn default_has_no_capture_clock_or_dynamic_state() {
         Err(Error::TracyUnavailable)
     ));
 }
+
+#[test]
+fn heap_observation_and_detail_mode_stay_disabled() {
+    assert!(incant_profile::quickjs_observation().is_none());
+    assert!(matches!(
+        incant_profile::Capture::start_with_heap_mode(incant_profile::HeapMode::Detailed),
+        Err(incant_profile::Error::Disabled)
+    ));
+}
