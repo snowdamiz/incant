@@ -1,0 +1,28 @@
+{
+  "reviewer": "astra-root",
+  "source": "71890c3c36e97272aa9b8678de633d42272b5e63",
+  "packet": "5e3d242865f5be6c1a83c680e280d366c8db1858",
+  "prefab_manifest_sha256": "d2a241b2488ebadd2e1f80e7a7b91493490a08b49316dd15597b242877a91c0c",
+  "verification": {
+    "session": 18168,
+    "exit_code": 0,
+    "current_records": 47,
+    "current_checks": 9,
+    "current_inputs": 3992,
+    "owned_exact": 29,
+    "producer_records": 277,
+    "producer_inputs": 3617,
+    "current_test_cases": 89,
+    "current_binary_copies": 30,
+    "producer_binary_copies": 37
+  },
+  "windows_reporting_review": {
+    "source": "ed3999b02d2a747dee93d278a2c1c50d43f275b7",
+    "run": 38516305407,
+    "verifier_exit": 0,
+    "successful_cook_us": 2442570,
+    "expected_refusal_us": 783991,
+    "original_checkpoint32_failure": "unexplained and retained"
+  },
+  "acceptance": "Scoped prefab backend and evidence/reporting accepted for exact-head fast-check PR and merge. No editor UI, migration, release promotion or phase acceptance."
+}

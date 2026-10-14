@@ -21,6 +21,7 @@ schemars = { workspace = true }
 incant_input.workspace = true
 incant_localization.workspace = true
 loro = { workspace = true, optional = true }
+semver = "=1.0.28"
 
 [target.'cfg(target_arch = "wasm32")'.dependencies]
 getrandom = { version = "0.3", features = ["wasm_js"] }

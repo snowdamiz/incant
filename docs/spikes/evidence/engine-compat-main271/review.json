@@ -1,0 +1,20 @@
+{
+  "reviewer": "astra root",
+  "date_utc": "2026-10-14T06:12:23.746871+00:00",
+  "status": "accepted-scoped-source-and-current-evidence",
+  "packet_commit": "21d7e4c52a79979d25ee10487cf792f3d782b659",
+  "source": "0a2a066583bd1a1a4f548f94b45f22df072ecbac",
+  "manifest_sha256": "4a754747909dfb7d2ab71bb5d28c46fb8c9915f091fb10dba3003422592b615e",
+  "verifier_sha256": "85e26106751254abb4d7bc6a9a0aa1ea01afa0e9b166f2c67c340090209ca61e",
+  "review": [
+    "Reviewed merged command/Project seams and new joined pin/override/undo/redo test; requested isolated old-reader fixture engine-field repair and verified narrow correction.",
+    "Actual generator patch only reorders SetEngineVersion after prefab variants; no JSON contract semantic change.",
+    "Read complete verifier and composition document; independently replayed --current --originals --local-binaries with exit0, terminal/reaped session32695.",
+    "Verified62 current records/4004 inputs/9checks/100cases/74schemas/36current executable copies; retained producer165records/3615inputs/33copies and original failures."
+  ],
+  "limitations": [
+    "No file migration/backup/recovery authority, editor UI or phase-gate acceptance.",
+    "No new GPU/shipping/alternate-physics results. Checkpoint32 Windows failure still unexplained."
+  ],
+  "publication": "Approved scoped PR and merge after exact-head required fast SUCCESS; Built-by trailer required."
+}

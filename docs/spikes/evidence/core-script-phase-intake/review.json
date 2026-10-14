@@ -1,0 +1,115 @@
+{
+  "at": "2026-10-14T04:42:50.212766+00:00",
+  "accepted_scope": "diagnostic-only source and CPU evidence; no production algorithm or shipping gate",
+  "source": "13b178c81998b6b74bb4db2b06b0fc343cea0eb0",
+  "packet": "1af5607314249f8d6656e1abbb1097b4e42de4aa",
+  "manifest_sha256": "f7bacfef1366beb70ff653d4640ef4562ab72dfbf4093774040467e6ced06511",
+  "records": 28,
+  "payloads": 27,
+  "binary": {
+    "original": "/Users/andreyyurlov/.codex/incant-core-tick-diagnostic-target/aarch64-apple-darwin/ci/deps/incant_script-34e846e97e83b814",
+    "copy": "/Users/andreyyurlov/.codex/incant-evidence/core-script-phase-001/frozen-binaries/run-001-0-incant_script-34e846e97e83b814",
+    "sha256": "3821ab6019a19453564f6e24484079bf3da34c0b56e04775e88db45432e78194",
+    "bytes": 19936368,
+    "mode": "0o755"
+  },
+  "supervisor_absent": true,
+  "source_cfg_stripping_exact": true,
+  "recomputed": {
+    "enter": {
+      "sum_ns": 47286,
+      "mean_ns": 369.421875,
+      "p95_ns": 625
+    },
+    "initial_checks": {
+      "sum_ns": 27245,
+      "mean_ns": 212.8515625,
+      "p95_ns": 333
+    },
+    "snapshots": {
+      "sum_ns": 1495005,
+      "mean_ns": 11679.7265625,
+      "p95_ns": 16042
+    },
+    "group_setup": {
+      "sum_ns": 7169633,
+      "mean_ns": 56012.7578125,
+      "p95_ns": 55291
+    },
+    "capabilities": {
+      "sum_ns": 1935245,
+      "mean_ns": 15119.1015625,
+      "p95_ns": 21000
+    },
+    "undo_capture": {
+      "sum_ns": 1768159,
+      "mean_ns": 13813.7421875,
+      "p95_ns": 15833
+    },
+    "view_exposure": {
+      "sum_ns": 1931215,
+      "mean_ns": 15087.6171875,
+      "p95_ns": 6375
+    },
+    "callbacks": {
+      "sum_ns": 145206458,
+      "mean_ns": 1134425.453125,
+      "p95_ns": 1196375
+    },
+    "revoke_checks": {
+      "sum_ns": 24161,
+      "mean_ns": 188.7578125,
+      "p95_ns": 292
+    },
+    "numeric_validation": {
+      "sum_ns": 32439797,
+      "mean_ns": 253435.9140625,
+      "p95_ns": 286583
+    },
+    "transaction_stage": {
+      "sum_ns": 30247,
+      "mean_ns": 236.3046875,
+      "p95_ns": 500
+    },
+    "scope_cleanup": {
+      "sum_ns": 9705955,
+      "mean_ns": 75827.7734375,
+      "p95_ns": 89250
+    },
+    "publication": {
+      "sum_ns": 121546,
+      "mean_ns": 949.578125,
+      "p95_ns": 1625
+    },
+    "heap_telemetry": {
+      "sum_ns": 13330589,
+      "mean_ns": 104145.2265625,
+      "p95_ns": 121708
+    }
+  },
+  "outer": {
+    "mean_ns": 1682079.6796875,
+    "p95_ns": 1766917,
+    "first_ns": 10240166
+  },
+  "limits": [
+    "CI profile, one unchanged stress source, no whole Core/controller/physics/UI/audio",
+    "No quiet guarantee, no p95 shipping threshold applied",
+    "One selected CPU test only; no strict Clippy/full-suite claim"
+  ],
+  "review": "ACCEPTED",
+  "findings": [],
+  "full_verifier": {
+    "path": "/Users/andreyyurlov/.codex/incant-reviews/core-script-phase-verify-20261014.json",
+    "sha256": "79384c64a9711d5f2147e8e11ea8d485aba464a02588ca5dc8e542c60234b960",
+    "exit_code": 0,
+    "reaped": true,
+    "git_inputs": 3876
+  },
+  "independent_audit": {
+    "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-script-phase-audit-001/independent-audit.json",
+    "sha256": "20247717f3f3deb3187a9394f9e39591ccd5357ba2b7deacad260c166b0f0010"
+  },
+  "reviewer": "astra / integrate_runtime_prs",
+  "scope": "Independent source and retained diagnostic CPU evidence; publication composition separate."
+}

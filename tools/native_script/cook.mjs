@@ -50,18 +50,22 @@ function typecheck(graph) {
 }
 
 /** Pure authoring transform after a bounded file snapshot. No project JS runs. */
-export async function cookNativeScript(root, entry) {
+export async function cookNativeScript(root, entry, phase = () => {}) {
   const graph = await snapshotGraph(root, entry);
-  return cookGraph(graph, false);
+  phase('snapshot_ready');
+  return cookGraph(graph, false, phase);
 }
 
 /** Source-keyed behaviors for the native authored attachment host. */
-export async function cookNativeProjectScripts(root, catalog) {
-  return cookGraph(await snapshotProjectGraph(root, catalog), true);
+export async function cookNativeProjectScripts(root, catalog, phase = () => {}) {
+  const graph = await snapshotProjectGraph(root, catalog);
+  phase('snapshot_ready');
+  return cookGraph(graph, true, phase);
 }
 
-async function cookGraph(graph, project) {
+async function cookGraph(graph, project, phase) {
   typecheck(graph);
+  phase('typecheck_done');
   const indexes = new Map(graph.modules.map((record, i) => [record.file, i]));
   const sources = [], sourcesContent = [], names = [], mappings = [];
   let code = '';
@@ -91,6 +95,7 @@ async function cookGraph(graph, project) {
     append(transformed.code.endsWith('\n') ? transformed.code : `${transformed.code}\n`);
     append('},\n');
   }
+  phase('transform_done');
   const dependencies = graph.modules.map(record => [...record.dependencies]
     .map(([name, file]) => [name, indexes.get(file)]));
   // Imports are static and local. Module factories run only inside the hardened
