@@ -1,0 +1,835 @@
+use super::{
+    MotionError, MotionFrame,
+    draw::{Draw, MotionDraw},
+    owner::{Extent, History, Pending},
+    plan,
+    provenance::{self, MotionChanges},
+    targets::Targets,
+};
+use crate::{
+    RenderScene, Renderer, Result, SceneInput,
+    models::{Batch, animation},
+};
+use glam::DMat4;
+use std::sync::Arc;
+use wgpu::util::DeviceExt;
+
+#[repr(C)]
+#[derive(Clone, Copy, bytemuck::Pod, bytemuck::Zeroable)]
+struct Previous {
+    world: [[f32; 4]; 4],
+    valid: f32,
+    owner_word: u32,
+    reserved: [u32; 2],
+}
+struct Rows {
+    slots: Vec<usize>,
+    owner_base: u32,
+    packed: Vec<Previous>,
+    buffer: wgpu::Buffer,
+}
+#[repr(C)]
+#[derive(Clone, Copy, bytemuck::Pod, bytemuck::Zeroable)]
+struct Frame {
+    current: [[f32; 4]; 4],
+    previous: [[f32; 4]; 4],
+    rect: [f32; 4],
+    /// x: MASK texture LOD bias; must equal the internal material draw's.
+    lod: [f32; 4],
+}
+const _: () = assert!(size_of::<Frame>() == 160 && std::mem::offset_of!(Frame, lod) == 144);
+const _: () = {
+    assert!(size_of::<Previous>() == 80);
+    assert!(std::mem::offset_of!(Previous, valid) == 64);
+    assert!(std::mem::offset_of!(Previous, owner_word) == 68);
+    assert!(std::mem::offset_of!(Previous, reserved) == 72);
+    assert!(size_of::<Frame>() == 160);
+};
+
+pub(crate) struct MotionState {
+    pub(super) history: History,
+    nodes: Vec<usize>,
+    worlds: Vec<DMat4>,
+    rows: Vec<Rows>,
+    provenance: provenance::State,
+    changes: Option<super::changes::State>,
+    pub(super) targets: Option<Arc<Targets>>,
+    slot: usize,
+    bytes: u64,
+    pub(crate) owner_attachment: bool,
+}
+pub(crate) struct Prepared {
+    history: Pending,
+    targets: Option<Arc<Targets>>,
+    slot: usize,
+    changes: Option<wgpu::Buffer>,
+}
+pub(crate) struct MotionView<'a> {
+    pub output: [u32; 2],
+    pub plan: &'a crate::resolution::FramePlan,
+    pub temporal: bool,
+    pub lights: &'a [crate::lighting::scene::Light],
+    pub upscale_rect: Option<[f32; 4]>,
+}
+pub(crate) struct TemporalInput {
+    pub frame: MotionFrame,
+    pub rect: [f32; 4],
+    pub surfaces: Option<TemporalSurfaces>,
+}
+pub(crate) struct TemporalSurfaces {
+    pub motion: wgpu::TextureView,
+    pub previous_depth: wgpu::TextureView,
+    pub slot: usize,
+}
+impl Prepared {
+    pub fn temporal_input(&self, rect: [f32; 4]) -> TemporalInput {
+        TemporalInput {
+            frame: self.history.frame.clone(),
+            rect,
+            surfaces: self.targets.as_ref().map(|targets| TemporalSurfaces {
+                motion: targets.motion.clone(),
+                previous_depth: targets.depth[1 - self.slot].clone(),
+                slot: self.slot,
+            }),
+        }
+    }
+    pub fn upscale_input(&self, rect: [f32; 4]) -> crate::upscaling::Input {
+        let jitter = self
+            .history
+            .frame
+            .jitter_offset()
+            .map_or([0.; 2], |j| [j[0] / rect[2], j[1] / rect[3]]);
+        crate::upscaling::Input {
+            frame: self.history.frame.clone(),
+            rect,
+            jitter,
+            previous_jitter: self.history.previous_jitter_uv,
+            owner: self
+                .targets
+                .as_ref()
+                .and_then(|t| t.owner.as_ref())
+                .zip(self.changes.as_ref())
+                .map(|(view, changes)| (view.clone(), changes.clone())),
+            surfaces: self
+                .targets
+                .as_ref()
+                .map(|t| (t.motion.clone(), t.depth[self.slot].clone())),
+        }
+    }
+    pub fn jitter_offset(&self) -> Option<[f32; 2]> {
+        self.history.frame.jitter_offset()
+    }
+}
+fn capacity(batch: &Batch) -> usize {
+    if batch.animated.is_some() {
+        1
+    } else {
+        batch.placements.len()
+    }
+}
+fn topology(live: &RenderScene, current: &RenderScene) -> std::result::Result<(), MotionError> {
+    if live.batches.len() != current.batches.len() {
+        return Err(MotionError::Topology);
+    }
+    for (a, b) in live.batches.iter().zip(&current.batches) {
+        if !Arc::ptr_eq(&a.model, &b.model)
+            || a.model._source.version_id() != b.model._source.version_id()
+            || a.primitive != b.primitive
+            || a.casts_shadows != b.casts_shadows
+            || a.mirrored != b.mirrored
+            || a.animated != b.animated
+            || a.placements.len() != b.placements.len()
+            || a.placements
+                .iter()
+                .zip(b.placements.iter())
+                .any(|(x, y)| x.node != y.node || x.local != y.local)
+            || a.vertices.as_ref().map(wgpu::Buffer::size)
+                != b.vertices.as_ref().map(wgpu::Buffer::size)
+        {
+            return Err(MotionError::Topology);
+        }
+    }
+    Ok(())
+}
+impl MotionState {
+    pub fn new(
+        renderer: &Renderer,
+        live: &RenderScene,
+        staging: &RenderScene,
+        old: Option<&Self>,
+        owner_attachment: bool,
+        light_capacity: usize,
+    ) -> Result<Self> {
+        super::admission()?;
+        if renderer.motion.is_none() {
+            return Err(MotionError::Disabled.into());
+        }
+        topology(live, staging)?;
+        if live.camera.pixel_resolution.is_some() {
+            return Ok(Self {
+                history: History::default(),
+                nodes: Vec::new(),
+                worlds: Vec::new(),
+                rows: Vec::new(),
+                provenance: provenance::State::new(0),
+                changes: None,
+                targets: None,
+                slot: 1,
+                bytes: size_of::<Self>() as u64,
+                owner_attachment,
+            });
+        }
+        let mut slots = 0usize;
+        // Both transition target headers/Arc controls and one prepared packet;
+        // opaque driver allocations and allocator padding are not logical payload.
+        let mut bytes = (size_of::<Self>()
+            + 2 * (size_of::<Targets>() + 2 * size_of::<usize>())
+            + size_of::<MotionDraw>()
+            + 2 * size_of::<usize>()) as u64;
+        plan::charge(
+            &mut bytes,
+            live.batches.len(),
+            size_of::<Rows>() + size_of::<Draw>(),
+        )?;
+        for batch in &live.batches {
+            let n = capacity(batch);
+            if n == 0 {
+                return Err(MotionError::Topology.into());
+            }
+            slots = slots
+                .checked_add(n)
+                .filter(|&n| n <= 2 * incant_render_data::MAX_INSTANCES)
+                .ok_or(MotionError::Capacity)?;
+            if (n as u64)
+                .checked_mul(size_of::<Previous>() as u64)
+                .is_none_or(|n| n > renderer.device.limits().max_buffer_size)
+            {
+                return Err(MotionError::Capacity.into());
+            }
+            // CPU packed row + GPU row + stable placement-to-node lookup.
+            plan::charge(
+                &mut bytes,
+                n,
+                2 * size_of::<Previous>() + size_of::<usize>(),
+            )?;
+        }
+        // Before allocating even the temporary node list, charge its worst case
+        // capacity and every previous entity transform (duplicates only reduce it).
+        plan::charge(&mut bytes, slots, size_of::<usize>() + size_of::<DMat4>())?;
+        plan::charge(&mut bytes, 1, size_of::<Frame>() * 4)?;
+        provenance::charge(&mut bytes, live.batches.len(), slots)?;
+        if owner_attachment {
+            super::changes::charge(&mut bytes, light_capacity)?;
+            if super::changes::UNIFORM_BYTES
+                > renderer.device.limits().max_uniform_buffer_binding_size
+            {
+                return Err(MotionError::Capacity.into());
+            }
+        }
+        plan::overlap(
+            old.map_or(0, |o| o.bytes),
+            bytes,
+            plan::MAX_MOTION_INSTANCE_BYTES,
+        )?;
+        let mut groups = Vec::with_capacity(live.batches.len());
+        for (batch_index, batch) in live.batches.iter().enumerate() {
+            let primitive = &batch.model.primitives[batch.primitive];
+            if batch.model.materials.materials[primitive.material].alpha
+                == incant_assets_runtime::AlphaMode::Blend
+            {
+                continue;
+            }
+            let key = if let Some(binding) = batch.animated {
+                let [instance, node, geometry] = animation::motion_owner_key(binding);
+                provenance::Key([1, instance, node, geometry])
+            } else {
+                // All allocations remain alive in the retained scenes, so exact
+                // shared allocation identity is safe to use only during grouping.
+                provenance::Key([
+                    0,
+                    batch.placements.as_ptr() as usize,
+                    batch.placements.len(),
+                    0,
+                ])
+            };
+            groups.push(provenance::Group {
+                key,
+                batch: batch_index,
+                count: capacity(batch),
+            });
+        }
+        let (owners, highest) = provenance::assign(&mut groups, live.batches.len())?;
+        let provenance = provenance::State::new(highest);
+        let mut nodes = Vec::with_capacity(slots);
+        for batch in &live.batches {
+            if let Some(binding) = batch.animated {
+                nodes.push(animation::motion_node(binding, &live.animations));
+            } else {
+                nodes.extend(batch.placements.iter().map(|p| p.node));
+            }
+        }
+        nodes.sort_unstable();
+        nodes.dedup();
+        let worlds = vec![DMat4::IDENTITY; nodes.len()];
+        let mut rows = Vec::with_capacity(live.batches.len());
+        for (batch, owner) in live.batches.iter().zip(owners) {
+            let count = capacity(batch);
+            let mut slots = Vec::with_capacity(count);
+            if let Some(binding) = batch.animated {
+                slots.push(
+                    nodes
+                        .binary_search(&animation::motion_node(binding, &live.animations))
+                        .unwrap(),
+                );
+            } else {
+                slots.extend(
+                    batch
+                        .placements
+                        .iter()
+                        .map(|p| nodes.binary_search(&p.node).unwrap()),
+                );
+            }
+            rows.push(Rows {
+                slots,
+                owner_base: owner.first,
+                packed: Vec::with_capacity(count),
+                buffer: renderer.device.create_buffer(&wgpu::BufferDescriptor {
+                    label: Some("Motion previous instance rows"),
+                    size: (count.max(1) * size_of::<Previous>()) as u64,
+                    usage: wgpu::BufferUsages::VERTEX | wgpu::BufferUsages::COPY_DST,
+                    mapped_at_creation: false,
+                }),
+            });
+        }
+        Ok(Self {
+            history: History::default(),
+            nodes,
+            worlds,
+            rows,
+            provenance,
+            changes: owner_attachment
+                .then(|| super::changes::State::new(&renderer.device, light_capacity)),
+            targets: None,
+            slot: 1,
+            bytes,
+            owner_attachment,
+        })
+    }
+    #[cfg(test)]
+    pub(crate) fn readback_view(&self) -> Option<wgpu::TextureView> {
+        self.targets.as_ref().map(|t| t.motion.clone())
+    }
+    #[cfg(test)]
+    pub(crate) fn owner_test_change_header(&self) -> Option<[u32; 4]> {
+        self.changes.as_ref().map(|state| state.test_header())
+    }
+    #[cfg(test)]
+    pub(crate) fn owner_test_views(
+        &self,
+    ) -> Option<(wgpu::TextureView, wgpu::TextureView, wgpu::TextureView)> {
+        let t = self.targets.as_ref()?;
+        Some((
+            t.owner.as_ref()?.clone(),
+            t.motion.clone(),
+            t.depth[self.slot].clone(),
+        ))
+    }
+    #[cfg(test)]
+    pub(crate) fn depth_test_view(&self) -> Option<wgpu::TextureView> {
+        self.targets.as_ref().map(|t| t.depth[self.slot].clone())
+    }
+    #[cfg(test)]
+    pub(crate) fn owner_test_id(&self, node: usize) -> Option<u32> {
+        self.rows.iter().find_map(|row| {
+            row.slots
+                .iter()
+                .position(|i| self.nodes[*i] == node)
+                .filter(|_| row.owner_base != 0)
+                .map(|i| row.owner_base + i as u32)
+        })
+    }
+    pub fn target_cache(&self) -> Option<super::attachment::Cache> {
+        self.targets.as_ref().map(|t| super::attachment::Cache {
+            size: t.size,
+            owner: t.owner.is_some(),
+        })
+    }
+    pub fn target_size(&self) -> Option<[u32; 2]> {
+        self.targets.as_ref().map(|t| t.size)
+    }
+    pub fn target_bytes(&self) -> u64 {
+        self.targets.as_ref().map_or(0, |t| t.bytes)
+    }
+    pub fn frame(&self) -> Option<MotionFrame> {
+        self.history.frame()
+    }
+    pub fn changes(&self) -> Option<MotionChanges<'_>> {
+        self.history
+            .frame()
+            .map(|frame| self.provenance.view(frame))
+    }
+    pub fn invalidate(&mut self) {
+        self.history.invalidate();
+    }
+    pub fn prepare(
+        &mut self,
+        renderer: &Renderer,
+        live: &RenderScene,
+        current: &RenderScene,
+        input: &SceneInput,
+        view: MotionView<'_>,
+    ) -> Result<(Option<MotionDraw>, Prepared)> {
+        let MotionView {
+            output,
+            plan,
+            temporal,
+            lights,
+            upscale_rect,
+        } = view;
+        topology(live, current)?;
+        let extent = Extent::new(output, plan.size, plan.rect, current.camera);
+        let extent = if let Some(rect) = upscale_rect {
+            extent.upscaled(rect)
+        } else {
+            extent
+        };
+        let history = if temporal {
+            self.history
+                .prepare_temporal(extent, current.camera, plan.rect)?
+        } else {
+            self.history
+                .prepare(extent, current.camera.matrix(plan.rect[2] / plan.rect[3])?)?
+        };
+        self.provenance.begin();
+        if history.frame.bypassed() {
+            return Ok((
+                None,
+                Prepared {
+                    history,
+                    targets: None,
+                    slot: 1,
+                    changes: None,
+                },
+            ));
+        }
+        // Preflight all target bytes before creating either a target or a packet.
+        let target_bytes =
+            plan::target_bytes(plan.size, renderer.device.limits().max_texture_dimension_2d)?;
+        plan::overlap(
+            self.targets.as_ref().map_or(0, |t| t.bytes),
+            target_bytes,
+            plan::MAX_MOTION_TARGET_BYTES,
+        )?;
+        let system = renderer.motion.as_ref().ok_or(MotionError::Disabled)?;
+        if self.owner_attachment {
+            if system.owner_pipelines.is_none() {
+                return Err(MotionError::OwnerDisabled.into());
+            }
+            super::attachment::admit(
+                plan.size,
+                self.target_size(),
+                None,
+                None,
+                None,
+                renderer.device.limits().max_texture_dimension_2d,
+            )?;
+        }
+        let valid = f32::from(u8::from(history.frame.has_previous()));
+        let mut caster_changed = false;
+        for (batch, rows) in current.batches.iter().zip(&mut self.rows) {
+            rows.packed.clear();
+            if let Some(binding) = batch.animated {
+                let node = animation::motion_node(binding, &current.animations);
+                let previous_entity = self.worlds[rows.slots[0]];
+                let current_entity = input.nodes[node].world;
+                let changed = valid == 0.
+                    || !provenance::same_matrix(previous_entity, current_entity)
+                    || !animation::motion_pose_unchanged(
+                        binding,
+                        &live.animations,
+                        &current.animations,
+                    );
+                caster_changed |= batch.casts_shadows && changed;
+                let owner_word = self.provenance.mark(rows.owner_base, changed);
+                if batch.count > 0 {
+                    let world = animation::motion_world(
+                        binding,
+                        &live.animations,
+                        self.worlds[rows.slots[0]],
+                    );
+                    rows.packed.push(Previous {
+                        world: world.to_cols_array_2d(),
+                        valid,
+                        owner_word,
+                        reserved: [0; 2],
+                    });
+                }
+            } else {
+                let changed = StaticPrevious {
+                    placements: &batch.placements,
+                    slots: &rows.slots,
+                    worlds: &self.worlds,
+                    owner_base: rows.owner_base,
+                }
+                .pack(
+                    input,
+                    batch.mirrored,
+                    valid,
+                    &mut self.provenance,
+                    &mut rows.packed,
+                )?;
+                caster_changed |= batch.casts_shadows && changed;
+            }
+            if rows.packed.len() != batch.count as usize {
+                return Err(MotionError::Topology.into());
+            }
+        }
+        if let Some(changes) = &mut self.changes {
+            changes.prepare(
+                &self.provenance,
+                history.frame.camera_static(),
+                caster_changed,
+                lights,
+            )?;
+        }
+        let targets = Targets::prepare(
+            &renderer.device,
+            plan.size,
+            self.targets.as_ref(),
+            self.owner_attachment,
+        )?;
+        let slot = if self
+            .targets
+            .as_ref()
+            .is_some_and(|t| Arc::ptr_eq(t, &targets))
+        {
+            1 - self.slot
+        } else {
+            0
+        };
+        // Internal MASK coverage uses the same bias as the internal material draw
+        // (Pending::lod_bias: log2(source / output), floored at MIN_LOD_BIAS, never positive).
+        let bias = upscale_rect
+            .map(|r| (plan.rect[2] / r[2]).log2())
+            .filter(|b| b.is_finite())
+            .map_or(0., |b| b.clamp(crate::temporal::jitter::MIN_LOD_BIAS, 0.));
+        let uniform = Frame {
+            current: history.matrix.to_cols_array_2d(),
+            previous: history.previous.to_cols_array_2d(),
+            rect: plan.rect,
+            lod: [bias, 0., 0., 0.],
+        };
+        let group = |uniform: Frame| {
+            let buffer = renderer
+                .device
+                .create_buffer_init(&wgpu::util::BufferInitDescriptor {
+                    label: Some("Motion frame"),
+                    contents: bytemuck::bytes_of(&uniform),
+                    usage: wgpu::BufferUsages::UNIFORM,
+                });
+            renderer
+                .device
+                .create_bind_group(&wgpu::BindGroupDescriptor {
+                    label: Some("Motion frame"),
+                    layout: &system.globals,
+                    entries: &[wgpu::BindGroupEntry {
+                        binding: 0,
+                        resource: buffer.as_entire_binding(),
+                    }],
+                })
+        };
+        let frame = group(uniform);
+        let overlay_frame = if temporal {
+            Some(group(Frame {
+                current: current
+                    .camera
+                    .unjittered()
+                    .matrix(plan.rect[2] / plan.rect[3])?
+                    .to_cols_array_2d(),
+                lod: [0.; 4],
+                ..uniform
+            }))
+        } else {
+            None
+        };
+        // Portable upscaling only: the same unjittered camera at the output aspect,
+        // drawn in the output viewport (sprites and world text use this matrix).
+        let output_frame = match upscale_rect.filter(|_| temporal) {
+            Some(rect) => Some((
+                group(Frame {
+                    current: current
+                        .camera
+                        .unjittered()
+                        .matrix(rect[2] / rect[3])?
+                        .to_cols_array_2d(),
+                    rect,
+                    lod: [0.; 4],
+                    ..uniform
+                }),
+                rect,
+            )),
+            None => None,
+        };
+        let mut draws = Vec::with_capacity(current.batches.len());
+        for ((batch, old), rows) in current.batches.iter().zip(&live.batches).zip(&self.rows) {
+            let primitive = &batch.model.primitives[batch.primitive];
+            let material = &batch.model.materials.materials[primitive.material];
+            if batch.count == 0 || material.alpha == incant_assets_runtime::AlphaMode::Blend {
+                continue;
+            }
+            draws.push(Draw {
+                batch: Arc::clone(batch),
+                previous_vertices: old.vertices.as_ref().unwrap_or(&primitive.vertices).clone(),
+                previous_instances: rows.buffer.clone(),
+                pipeline: if self.owner_attachment {
+                    system
+                        .owner_pipelines
+                        .as_ref()
+                        .ok_or(MotionError::OwnerDisabled)?
+                        [usize::from(batch.mirrored) + 2 * usize::from(material.double_sided)]
+                    .clone()
+                } else {
+                    system.pipeline(material.double_sided, batch.mirrored, false)
+                },
+                depth_pipeline: system.pipeline(material.double_sided, batch.mirrored, true),
+            });
+        }
+        Ok((
+            Some(MotionDraw {
+                targets: Arc::clone(&targets),
+                slot,
+                rect: plan.rect,
+                frame,
+                overlay_frame,
+                overlay_depth: None,
+                output_frame,
+                output_depth: None,
+                draws,
+            }),
+            Prepared {
+                history,
+                targets: Some(targets),
+                slot,
+                changes: self.changes.as_ref().map(|s| s.buffer.clone()),
+            },
+        ))
+    }
+    pub fn write(&self, queue: &wgpu::Queue, pending: &Prepared) {
+        if pending.history.frame.bypassed() {
+            return;
+        }
+        if let Some(changes) = &self.changes {
+            changes.write(queue);
+        }
+        for rows in &self.rows {
+            if !rows.packed.is_empty() {
+                queue.write_buffer(&rows.buffer, 0, bytemuck::cast_slice(&rows.packed));
+            }
+        }
+    }
+    pub fn accept(
+        &mut self,
+        pending: Prepared,
+        input: &SceneInput,
+        lights: &[crate::lighting::scene::Light],
+    ) {
+        for (&node, world) in self.nodes.iter().zip(&mut self.worlds) {
+            *world = input.nodes[node].world;
+        }
+        if let Some(changes) = &mut self.changes {
+            changes.accept(lights);
+        }
+        self.provenance.accept();
+        self.history.accept(pending.history);
+        self.targets = pending.targets;
+        self.slot = pending.slot;
+    }
+}
+
+struct StaticPrevious<'a> {
+    placements: &'a [crate::scene::Placement],
+    slots: &'a [usize],
+    worlds: &'a [DMat4],
+    owner_base: u32,
+}
+impl StaticPrevious<'_> {
+    fn pack(
+        &self,
+        input: &SceneInput,
+        mirrored: bool,
+        valid: f32,
+        provenance: &mut provenance::State,
+        out: &mut Vec<Previous>,
+    ) -> Result<bool> {
+        let mut any_changed = false;
+        for (index, (placement, &slot)) in self.placements.iter().zip(self.slots).enumerate() {
+            let current = input.nodes[placement.node].world * placement.local;
+            let old = self.worlds[slot] * placement.local;
+            let changed = valid == 0. || !provenance::same_matrix(old, current);
+            any_changed |= changed;
+            let owner_word = provenance.mark(
+                if self.owner_base == 0 {
+                    0
+                } else {
+                    self.owner_base + index as u32
+                },
+                changed,
+            );
+            let current_world = current.as_mat4();
+            let transform = crate::scene::Instance::new(current_world)?;
+            if (transform.normal[0][3] < 0.) != mirrored {
+                continue;
+            }
+            let previous = (self.worlds[slot] * placement.local).as_mat4();
+            out.push(Previous {
+                world: previous.to_cols_array_2d(),
+                valid,
+                owner_word,
+                reserved: [0; 2],
+            });
+        }
+        Ok(any_changed)
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn changed_caster_witness_includes_placements_not_emitted_by_this_batch() {
+        let input = SceneInput {
+            nodes: vec![incant_render_data::SceneNode {
+                id: "caster".into(),
+                world: DMat4::from_translation(glam::DVec3::X),
+                camera: None,
+                light: None,
+                mesh: None,
+                sprite: None,
+                tilemap: None,
+                diagnostic: false,
+            }],
+            ..Default::default()
+        };
+        let placements = [crate::scene::Placement {
+            node: 0,
+            local: DMat4::IDENTITY,
+        }];
+        let slots = [0];
+        let worlds = [DMat4::IDENTITY];
+        let mut rows = Vec::with_capacity(1);
+        let mut provenance = provenance::State::new(1);
+        let caster = StaticPrevious {
+            placements: &placements,
+            slots: &slots,
+            worlds: &worlds,
+            owner_base: 1,
+        };
+        assert!(
+            caster
+                .pack(&input, true, 1., &mut provenance, &mut rows)
+                .unwrap()
+        );
+        assert!(rows.is_empty(), "positive handedness emits no mirrored row");
+        let stable = [input.nodes[0].world];
+        let caster = StaticPrevious {
+            worlds: &stable,
+            ..caster
+        };
+        assert!(
+            !caster
+                .pack(&input, true, 1., &mut provenance, &mut rows)
+                .unwrap()
+        );
+    }
+    #[test]
+    fn previous_rows_follow_placement_identity_across_mirrored_packing_without_allocations() {
+        let node = |id: &str, world| incant_render_data::SceneNode {
+            id: id.into(),
+            world,
+            camera: None,
+            light: None,
+            mesh: None,
+            sprite: None,
+            tilemap: None,
+            diagnostic: false,
+        };
+        let input = SceneInput {
+            nodes: vec![
+                node("a", DMat4::from_scale(glam::DVec3::new(-1., 1., 1.))),
+                node("b", DMat4::IDENTITY),
+            ],
+            ..Default::default()
+        };
+        let placements = [
+            crate::scene::Placement {
+                node: 0,
+                local: DMat4::from_translation(glam::DVec3::X),
+            },
+            crate::scene::Placement {
+                node: 1,
+                local: DMat4::from_translation(glam::DVec3::Y),
+            },
+        ];
+        let worlds = [
+            DMat4::from_translation(glam::DVec3::new(10., 0., 0.)),
+            DMat4::from_scale(glam::DVec3::new(-2., 1., 1.)),
+        ];
+        let mut rows = Vec::with_capacity(2);
+        let mut provenance = provenance::State::new(2);
+        let allocations = crate::retained_alloc::measured(|| {
+            StaticPrevious {
+                placements: &placements,
+                slots: &[0, 1],
+                worlds: &worlds,
+                owner_base: 1,
+            }
+            .pack(&input, false, 1., &mut provenance, &mut rows)
+            .unwrap();
+            assert_eq!(rows[0].owner_word, 2 | provenance::CHANGED);
+            assert_eq!(rows[0].valid, 1.);
+            assert_eq!(rows[0].reserved, [0; 2]);
+            assert_eq!(rows.len(), 1);
+            assert_eq!(
+                rows[0].world,
+                (worlds[1] * placements[1].local)
+                    .as_mat4()
+                    .to_cols_array_2d()
+            );
+            rows.clear();
+            StaticPrevious {
+                placements: &placements,
+                slots: &[0, 1],
+                worlds: &worlds,
+                owner_base: 1,
+            }
+            .pack(&input, true, 1., &mut provenance, &mut rows)
+            .unwrap();
+            assert_eq!(rows[0].owner_word, 1 | provenance::CHANGED);
+            assert_eq!(rows[0].valid, 1.);
+            assert_eq!(rows[0].reserved, [0; 2]);
+            assert_eq!(rows.len(), 1);
+            assert_eq!(
+                rows[0].world,
+                (worlds[0] * placements[0].local)
+                    .as_mat4()
+                    .to_cols_array_2d()
+            );
+            rows.clear();
+            provenance.begin();
+            let accepted = [input.nodes[0].world, input.nodes[1].world];
+            StaticPrevious {
+                placements: &placements,
+                slots: &[0, 1],
+                worlds: &accepted,
+                owner_base: 1,
+            }
+            .pack(&input, true, 1., &mut provenance, &mut rows)
+            .unwrap();
+            assert_eq!(
+                rows[0].owner_word, 1,
+                "same placement after handedness change"
+            );
+        });
+        assert_eq!(allocations, 0);
+    }
+}

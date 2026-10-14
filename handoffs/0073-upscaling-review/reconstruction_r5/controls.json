@@ -1,0 +1,120 @@
+{
+ "all_checks_pass": true,
+ "checks": [
+  {
+   "check": "UP: reaction from clamp displacement, clamped history blended",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "UP: coherence slack is one jitter-lattice step r/16 output px",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "OWN: reaction from clamp displacement, clamped history blended",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "OWN: coherence slack is one jitter-lattice step r/16 output px",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "OWN static proof unchanged (stationary OWN quality path keeps its 1/256 anchor test, no clamp)",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "cfg(test) evidence reference mirrors both shader changes",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "material and MASK use the same floored bias",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "stripes/checker texel (history inside range): R5 mass reaches the cap 36",
+   "detail": 36.00000000000001,
+   "ok": true
+  },
+  {
+   "check": "mutation: 825ff rule at |H - fresh| = 0.5 holds mass at 16, not 36 (detected)",
+   "detail": 15.999999999901686,
+   "ok": true
+  },
+  {
+   "check": "825ff rule at full contrast |H - fresh| = 1 holds mass at 8 (one jitter cycle)",
+   "detail": 7.9999999999999964,
+   "ok": true
+  },
+  {
+   "check": "8-phase aliasing residual amplitude: R5 0.036 vs 825ff 0.079 (contrast 0.5) and 0.152 (contrast 1)",
+   "detail": [
+    0.0358,
+    0.079,
+    0.1522
+   ],
+   "ok": true
+  },
+  {
+   "check": "true change (history 1.0 outside current range [0, 0.2]) still reacts: reaction 0.2, clamp to 0.2",
+   "detail": 0.2,
+   "ok": true
+  },
+  {
+   "check": "reaction 0 cannot keep out-of-range stale colour: the clamp bounds it every frame",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "perspective dolly spread 0.04 px at r=2 is admitted (slack 0.125 px)",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "mutation: 1/256 px refuses that same motion (detected)",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "independent coplanar mover (0.1 UV x 1920 = 192 px) still refused",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "boundary: a difference equal to the slack is refused (>=)",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "slack scales with the ratio: 1/16 px at r=1, 1/4 px at r=4",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "bias -1.5 at 4/16 (was -2) and 5/16 (was -1.678)",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "bias unchanged at 6/16..16/16 (8/16 stays -1, 16/16 stays 0)",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "floor derivation: -log2(sqrt(8 samples per texel)) = -1.5",
+   "detail": null,
+   "ok": true
+  }
+ ],
+ "config": {
+  "history_weight": 0.9,
+  "reactive_strength": 0.5,
+  "reactive_threshold": 4.0
+ },
+ "scope": "scalar transcriptions of the R5 src mirrors; not a render, compile or appearance claim"
+}

@@ -1,0 +1,81 @@
+{
+ "abi": {
+  "bindings": "unchanged",
+  "host_values": "lod bias floor -1.5 for internal material/MASK draws below 0.354 scale",
+  "programs_changed": [
+   "Upscale",
+   "UpscaleOwner"
+  ],
+  "programs_unchanged": [
+   "Composite",
+   "MetalFxPack",
+   "MetalFxNormalize",
+   "Motion",
+   "Depth",
+   "MotionOwner",
+   "Material",
+   "Resolve",
+   "Copy"
+  ],
+  "targets_and_memory": "unchanged; no new texture, pass, pipeline or allocation",
+  "uniforms": "unchanged (Frame 96 B upscale, 112 B material, 160 B motion)"
+ },
+ "appearance": "not assessed",
+ "auto_memory": "disabled",
+ "builds": 0,
+ "changes": {
+  "lod_bias_floor": "MIN_LOD_BIAS -1.5 for material and MASK (binds at 4/16, 5/16 only)",
+  "motion_slack": "(output/source)/16 output px instead of 1/256 (UP + OWN coherence, reference synced); OWN static 1/256 proof unchanged",
+  "reaction": "clamp displacement instead of distance to fresh (UP + OWN ordinary branch, cfg(test) reference synced)"
+ },
+ "controls": {
+  "all_pass": true,
+  "checks": 21
+ },
+ "gpu_executions": 0,
+ "images_created": 0,
+ "model": "claude-opus-5-5",
+ "open_questions": [
+  "UP one-surface-plus-clear partial-coverage history (thin lines over clear)",
+  "current-only kernel width at r>=3 / display-only interpolation (4/16 entry, post-cut)",
+  "ordinary-branch in-range persistence is exponential, not finite-age (unchanged from 825ff)"
+ ],
+ "patch": {
+  "applied_equals_mirrors": true,
+  "files": [
+   "crates/incant_render/src/motion/retained.rs",
+   "crates/incant_render/src/temporal/jitter.rs",
+   "crates/incant_render/src/upscaling/evidence_reference.rs",
+   "crates/incant_render/src/upscaling/owner.rs",
+   "crates/incant_render/src/upscaling/resolve.wgsl",
+   "crates/incant_render/src/upscaling/resolve_owner.wgsl",
+   "crates/incant_shader_cook/src/temporal/mod.rs"
+  ],
+  "git_apply_check_against_825ff_copies": true,
+  "path": "repair.patch",
+  "sha256": "f0987c43aafe19b7f334dd6e86a8799efa7cf0ee40273ef35f7170be03830b7b"
+ },
+ "pending": [
+  "compile/clippy/fmt",
+  "cook",
+  "bounded GPU render",
+  "Claude pixel review"
+ ],
+ "production": "72b1ba8ec351e86d66a90c401e0a75a530633616",
+ "schema": "incant-0073-r5-repair-v1",
+ "source_commit": "825ff047284e84252d00f786a7b14cb6ecb44293",
+ "status": "SOURCE_COMPLETE_COMPILE_UNVERIFIED",
+ "thinking_effort": "max",
+ "trusted_pins": {
+  "Upscale": {
+   "baseline_pin": "de4df804c0fd93fd13c849575cbf4c4fc6184baa9988adb21c535273cfd1d3a3",
+   "candidate_pin": "5fd02204accb895f32f09be638f5ac1d9629bbc524b75591cbc6880b746c139e",
+   "pin_matches_candidate_source": true
+  },
+  "UpscaleOwner": {
+   "baseline_pin": "0897bfd2ed5e8f8b8f9fc0b99d3e2c528fb29e677635e188da835405ffedeb81",
+   "candidate_pin": "d293a2fc0c4857a997222b5989309d1c936da041c511ea2b08b6a9595fec4933",
+   "pin_matches_candidate_source": true
+  }
+ }
+}

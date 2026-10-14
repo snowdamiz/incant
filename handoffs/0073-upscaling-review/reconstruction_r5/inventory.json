@@ -1,0 +1,94 @@
+{
+ "abi": {
+  "bindings": "unchanged",
+  "host_values": "lod bias floor -1.5 for internal material/MASK draws below 0.354 scale",
+  "programs_changed": [
+   "Upscale",
+   "UpscaleOwner"
+  ],
+  "programs_unchanged": [
+   "Composite",
+   "MetalFxPack",
+   "MetalFxNormalize",
+   "Motion",
+   "Depth",
+   "MotionOwner",
+   "Material",
+   "Resolve",
+   "Copy"
+  ],
+  "targets_and_memory": "unchanged; no new texture, pass, pipeline or allocation",
+  "uniforms": "unchanged (Frame 96 B upscale, 112 B material, 160 B motion)"
+ },
+ "applied_equals_mirrors": true,
+ "files": [
+  {
+   "baseline_sha256": "89a51ae3fc238ecc908d8b5f5d2128effccc9f41dad2b8a462e59a2148c50d76",
+   "candidate_sha256": "08926fd1891dbce98d3fb9e6db900a2b22c4446a32d996ce6686416c37c2291c",
+   "changed": true,
+   "path": "crates/incant_render/src/motion/retained.rs"
+  },
+  {
+   "baseline_sha256": "02ff2b3b5123fbcc797bf435d09875b85ad7b0f2f0c250a036052eb52ef4b25f",
+   "candidate_sha256": "8e592195ea58eb7e31ec6ca2ef453380aa4e8475c7b11851e1884f5eabf3967b",
+   "changed": true,
+   "path": "crates/incant_render/src/temporal/jitter.rs"
+  },
+  {
+   "baseline_sha256": "9c90bbec40ce850aab73ae4228b59755cbc0aea11e8a2b99a07e7ba5342b6dc5",
+   "candidate_sha256": "1809bdda8fd2cc6c204f83d88899f6e9b5f1b002c97782f876455e94b9105fe1",
+   "changed": true,
+   "path": "crates/incant_render/src/upscaling/evidence_reference.rs"
+  },
+  {
+   "baseline_sha256": "f859e5cd069a5359b601eea361aed19726abd44d6b4308c53890a213ab93be56",
+   "candidate_sha256": "7666dfa13aa94b458aeae6711ae5a854702bb7fec7136ec1511c04b2f385ed7b",
+   "changed": true,
+   "path": "crates/incant_render/src/upscaling/owner.rs"
+  },
+  {
+   "baseline_sha256": "a0853f1c934a3e68fa5a69904c4308e53176ae75d32af9bd1065236fdef43607",
+   "candidate_sha256": "e84d02d4ce0e219eecfc6aedff6e78627f4be0122c7f3990280637cb4d9a4614",
+   "changed": true,
+   "path": "crates/incant_render/src/upscaling/resolve.wgsl"
+  },
+  {
+   "baseline_sha256": "dc43ac2aea2c057cead64cb97bef1fb2429b8eadde52c20a5605e4d7487a51fe",
+   "candidate_sha256": "98274ccb4f6a564c5cff5e0bed7de2af300dcce13f19e3a51ccfb49941fdf7c2",
+   "changed": true,
+   "path": "crates/incant_render/src/upscaling/resolve_owner.wgsl"
+  },
+  {
+   "baseline_sha256": "ceb8d5c1e73a170158af54c94873def1e1346da00c7230c0025d1a1741c5b216",
+   "candidate_sha256": "49a005167b09fad41c6f406402cab5fe59f5c3f4476b1cf364f1768e31a58051",
+   "changed": true,
+   "path": "crates/incant_shader_cook/src/temporal/mod.rs"
+  }
+ ],
+ "git_apply_check_against_825ff_copies": true,
+ "patch_changed_files": [
+  "crates/incant_render/src/motion/retained.rs",
+  "crates/incant_render/src/temporal/jitter.rs",
+  "crates/incant_render/src/upscaling/evidence_reference.rs",
+  "crates/incant_render/src/upscaling/owner.rs",
+  "crates/incant_render/src/upscaling/resolve.wgsl",
+  "crates/incant_render/src/upscaling/resolve_owner.wgsl",
+  "crates/incant_shader_cook/src/temporal/mod.rs"
+ ],
+ "patch_sha256": "f0987c43aafe19b7f334dd6e86a8799efa7cf0ee40273ef35f7170be03830b7b",
+ "production": "72b1ba8ec351e86d66a90c401e0a75a530633616",
+ "scope": "source identity and patch applicability only; no build, cook, GPU or image",
+ "source_commit": "825ff047284e84252d00f786a7b14cb6ecb44293",
+ "trusted_pins": {
+  "Upscale": {
+   "baseline_pin": "de4df804c0fd93fd13c849575cbf4c4fc6184baa9988adb21c535273cfd1d3a3",
+   "candidate_pin": "5fd02204accb895f32f09be638f5ac1d9629bbc524b75591cbc6880b746c139e",
+   "pin_matches_candidate_source": true
+  },
+  "UpscaleOwner": {
+   "baseline_pin": "0897bfd2ed5e8f8b8f9fc0b99d3e2c528fb29e677635e188da835405ffedeb81",
+   "candidate_pin": "d293a2fc0c4857a997222b5989309d1c936da041c511ea2b08b6a9595fec4933",
+   "pin_matches_candidate_source": true
+  }
+ }
+}
