@@ -122,6 +122,8 @@ def measure(inputs, packages, output):
                                                  script_phase=PHASE[kind])
         a, b = (measured[k] for k in KINDS)
         require(a['match']['machine'] == b['match']['machine'], 'Mac identity changed between tiers')
+        require(a['match']['profile_instrumentation'] == b['match']['profile_instrumentation'],
+                'Profiler instrumentation changed between tiers')
         for kind in KINDS:
             raw = json.loads(read(output / f'{repeat}-{kind}/stdout.json', 16 * 1024**2))
             expected = functional(raw, [0, COUNT // 2, COUNT - 1])

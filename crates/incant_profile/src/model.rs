@@ -133,21 +133,6 @@ pub struct Totals {
 }
 #[derive(Clone, Copy, Debug, Default)]
 #[cfg_attr(feature = "summary", derive(serde::Serialize))]
-pub struct HeapSample {
-    pub used_bytes: u64,
-    pub allocated_bytes: u64,
-    pub allocation_count: u64,
-}
-#[derive(Clone, Copy, Debug, Default)]
-#[cfg_attr(feature = "summary", derive(serde::Serialize))]
-pub struct QuickJsHeap {
-    pub samples: u64,
-    pub latest: HeapSample,
-    pub peak_used_bytes: u64,
-    pub peak_allocated_bytes: u64,
-}
-#[derive(Clone, Copy, Debug, Default)]
-#[cfg_attr(feature = "summary", derive(serde::Serialize))]
 pub struct Allocations {
     pub installed: bool,
     pub allocations: u64,

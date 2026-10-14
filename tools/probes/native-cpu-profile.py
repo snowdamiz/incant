@@ -252,7 +252,7 @@ def main():
         if flags:
             require(profile and profile['completed_frames'] == TICKS and profile['failed_frames'] == 0, 'Wrong profile frame counts')
             require(profile['tracy_process_transport'] is trace, 'Wrong transport state')
-            require(profile['quickjs_heap']['samples'] == TICKS and profile['quickjs_heap']['latest']['used_bytes'] > 0, 'Missing VM heap samples')
+            require(profile['quickjs_heap']['samples'] == TICKS and profile['quickjs_heap']['latest']['estimated_used_bytes'] > 0, 'Missing VM heap samples')
             require(profile['rust_allocations']['installed'] and not profile['rust_allocations']['saturated'], 'Missing Rust allocation counter')
             require(profile['dropped_source_samples'] == 0 and len(profile['scripts']) == 2, 'Wrong bounded source table')
             require(all(s['totals']['calls'] == TICKS for s in profile['scripts']), 'Wrong source-group count')
@@ -265,7 +265,7 @@ def main():
 
     for mode in ['summary', 'tracy']:
         run_player(mode + '-baseline', mode, [])
-        run_player(mode + '-summary', mode, ['--profile'])
+        run_player(mode + '-summary', mode, ['--profile', '--profile-heap-detail'])
     refusals = []
     for name, argv, diagnostic in [
         ('duplicate', [players['tracy'], '--profile', '--profile-tracy'], 'Error: Options\n'),
@@ -278,7 +278,7 @@ def main():
     write(failure_input, {'format': 'incant-input', 'version': 1, 'tick_rate': rate, 'start_tick': 0,
                          'ticks': 3, 'frames': [{'tick': 2, 'events': [{'type': 'key', 'code': 'F1', 'down': True}]}]})
     failed_diagnostic = None
-    for index, flags in enumerate([[], ['--profile']]):
+    for index, flags in enumerate([[], ['--profile', '--profile-heap-detail']]):
         pcm = out / f'failed-{index}.pcm'; player = players['summary']
         result = runner.run(f'refusal-guest-{index}', [player, '--package', player.parent / 'data', '--ticks', '3',
                             '--input-recording', failure_input, '--output', pcm, *flags])
@@ -300,7 +300,7 @@ def main():
         def start_receiver():
             nonlocal cap
             cap = children.enter_context(runner.child('capture', cap_argv))
-        run_player('tracy-captured', 'tracy', ['--profile-tracy'], trace=True, on_listener=start_receiver)
+        run_player('tracy-captured', 'tracy', ['--profile-tracy', '--profile-heap-detail'], trace=True, on_listener=start_receiver)
         require(cap is not None, 'No receiver launch against owned listener')
         cap.wait(timeout=30)
     result = runner.commands[-1]
@@ -313,7 +313,7 @@ def main():
     require(required <= {r['name'] for r in zones if int(r['counts']) > 0}, 'Missing actual captured zones')
     rows = list(csv.DictReader(io.StringIO(events['stdout'])))
     plots = {name: [float(r['value']) for r in rows if r['name'] == name and not r['src_file']]
-             for name in ['QuickJS used bytes','QuickJS allocated bytes','Rust requested live bytes','Rust allocation calls']}
+             for name in ['QuickJS sampled estimated used bytes','QuickJS sampled logical allocated bytes','Rust requested live bytes','Rust allocation calls']}
     require(all(values and all(math.isfinite(v) and v > 0 for v in values) for values in plots.values()), 'Missing/invalid actual plot samples')
     for mode in packages:
         require(inventory(proof / ('package-' + mode)) == packages[mode], 'Package changed during execution')

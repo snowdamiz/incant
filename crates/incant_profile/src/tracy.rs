@@ -44,9 +44,14 @@ pub fn begin(phase: Phase, source: Option<usize>) -> Option<Span> {
 }
 pub fn heap(value: HeapSample) {
     if let Some(c) = Client::running() {
-        c.plot(plot_name!("QuickJS used bytes"), value.used_bytes as f64);
+        if let Some(used) = value.estimated_used_bytes {
+            c.plot(
+                plot_name!("QuickJS sampled estimated used bytes"),
+                used as f64,
+            );
+        }
         c.plot(
-            plot_name!("QuickJS allocated bytes"),
+            plot_name!("QuickJS sampled logical allocated bytes"),
             value.allocated_bytes as f64,
         );
     }
