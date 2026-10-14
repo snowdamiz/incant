@@ -126,7 +126,7 @@ fn history(editor: &Editor) -> Result<Value, String> {
     };
     Ok(
         json!({"revision":bus.revision(), "applied":bus.history().len(),
-        "redo":bus.redo_history().len(), "transactions":bus.history().iter().map(|t|
+        "redo":bus.redo_history().count(), "transactions":bus.history().iter().map(|t|
         json!({"id":t.id, "description":t.description, "actor":t.actor})).collect::<Vec<_>>()}),
     )
 }
