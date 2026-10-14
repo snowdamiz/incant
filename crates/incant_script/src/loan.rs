@@ -2,8 +2,11 @@
 //! share one owner so detachment always precedes Rust access or scope release.
 use crate::ScriptError;
 use incant_runtime::{NativeWorld, NumericColumns, StableId, TRANSFORM_STRIDE, VELOCITY_STRIDE};
-use rquickjs::{Array, ArrayBuffer, Ctx, Object, TypedArray, Value, qjs};
+use rquickjs::{Array, ArrayBuffer, Ctx, Function, Object, TypedArray, Value, qjs};
 use std::{mem::size_of, ptr};
+
+mod ids;
+pub(crate) use ids::IdCache;
 
 const MAX_LOAN_BYTES: usize = 32 * 1024 * 1024;
 struct Buffer {
@@ -76,18 +79,17 @@ impl<'js, 'scope, 'world> Loan<'js, 'scope, 'world> {
         })
     }
 
-    pub fn expose(&mut self, ctx: &Ctx<'js>) -> rquickjs::Result<Array<'js>> {
+    pub fn expose(
+        &mut self,
+        ctx: &Ctx<'js>,
+        freeze: &Function<'js>,
+        ids: &mut IdCache,
+    ) -> rquickjs::Result<Array<'js>> {
+        ids.truncate(self.chunks.len());
         let chunks = Array::new(ctx.clone())?;
         for (index, chunk) in self.chunks.iter().enumerate() {
             let object = Object::new(ctx.clone())?;
-            object.set(
-                "ids",
-                chunk
-                    .ids
-                    .iter()
-                    .map(|id| ulid::Ulid::from_bytes(id.0).to_string())
-                    .collect::<Vec<_>>(),
-            )?;
+            object.set("ids", ids.get(ctx, freeze, index, &chunk.ids)?)?;
             object.set("transformStride", TRANSFORM_STRIDE)?;
             object.set("velocityStride", VELOCITY_STRIDE)?;
             object.set("transforms", view(ctx, &chunk.transforms, &mut self.roots)?)?;

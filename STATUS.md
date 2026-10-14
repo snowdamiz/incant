@@ -1,5 +1,14 @@
 # Implementation status
 
+## Bulk-query row-label cache — CPU correctness verified
+
+Immutable ordered row IDs now reuse frozen metadata arrays while numeric views
+remain fresh and revocable. Structural edits and retained history have explicit
+regressions; all 150 script library/project cases and strict all-target Clippy
+pass in each numerical mode. Current-main integration and matched shipping
+timing remain separate; no performance gate is claimed.
+[Scope and evidence](docs/spikes/script-chunk-id-cache.md).
+
 ## Per-frame CPU distributions — scoped Mac controls pass
 
 The opt-in profiler now reports bounded per-frame phase wall histograms and
