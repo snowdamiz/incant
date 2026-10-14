@@ -12,7 +12,7 @@ All nine commands passed. Final current-main independent review and publication
 are pending; nested/topology edits and editor UI remain open.
 [Composition and evidence](docs/spikes/prefab-main270.md).
 
-## Windows TypeScript deadline — bounded observation, no timeout fix claim
+## Windows TypeScript deadline — one actual observation passed; timeout retained
 
 Main270 includes the source-scoped script phase diagnostic and bounded cook observer. Checkpoint32's frozen
 Windows desktop job failed the unchanged authored fallback test at its existing
@@ -20,9 +20,13 @@ eight-second compiler deadline; the original failed job and prior passing Window
 log remain retained. A reviewed eight-phase observer now preserves sanitized
 bounded evidence after child cleanup, including no first phase. Ten current local
 checks pass (23 Node controls and six Rust cases, strict lint and policy checks).
-PR270 merged after its exact-head fast SUCCESS. Its one Windows diagnostic is
-running on that exact merge; it has no retry or deadline override. A successful diagnostic will not
-promote the failed candidate or establish a timeout repair. [Scope and evidence](docs/spikes/typescript-cook-phases.md).
+PR270 merged after its exact-head fast SUCCESS. Its one Windows diagnostic
+passed the exact selected test on main270: the successful cook took 2.442570 s
+and the expected deleted-source refusal took 0.783991 s. All eight successful
+phases and both raw observations are retained, with no retry or deadline
+override. The original timeout is still unexplained; this observation neither
+clears the failed context nor establishes a repair.
+[Actual Windows receipt](docs/spikes/evidence/typescript-cook-windows/manifest.json). [Scope and evidence](docs/spikes/typescript-cook-phases.md).
 
 ## Native script phase diagnostic — one bounded CPU test
 
@@ -580,7 +584,7 @@ comparison. The reviewed isolated-lock and ordinary-owner Default repairs are
 merged in PR248. Checkpoint29 finished unpromoted with 22 required successes and the original Linux source-store lock failure. Checkpoint30 promoted exact reviewed main252 (`c1988638`, tree `393eb78c`) through PR232 after all 23 exact-head required contexts and eight workflows succeeded. Release is `71bdd2e7`; its parents, trailer and exact tested tree are verified. Later main253–270 work is outside that release. Checkpoint31 and checkpoint32
 are terminal and unpromoted, each with 22 required successes and one retained
 failure. Checkpoint32 candidate `e4faac52` remains frozen while the one-shot
-main270 Windows compiler-phase diagnostic supplies evidence; its result cannot
+main270 Windows compiler-phase diagnostic has passed once; its result cannot
 substitute for the failed required context.
 PR242 merged the private primitive-world composition; PR244/245 added native
 capture and outer in-memory checkpoints, PR246 added opaque ECS/world ownership,
