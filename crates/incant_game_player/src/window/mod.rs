@@ -5,6 +5,7 @@ mod gamepad;
 mod haptics;
 mod ime;
 mod input;
+mod pointer;
 mod probe;
 mod surface;
 mod termination;
@@ -22,7 +23,7 @@ use std::{
 use surface::{SurfaceState, SurfaceTargets};
 use tao::{
     dpi::PhysicalSize,
-    event::{Event, WindowEvent},
+    event::{DeviceEvent, Event, WindowEvent},
     event_loop::{ControlFlow, EventLoop},
     platform::run_return::EventLoopExtRunReturn,
     window::WindowBuilder,
@@ -54,10 +55,16 @@ pub enum Error {
     HapticRequest(#[from] incant_input::haptics::HapticError),
     #[error(transparent)]
     GamepadInput(#[from] incant_input::InputError),
-    #[error("native pointer position must be finite and within one million pixels")]
+    #[error("native pointer coordinates and deltas must be finite and within one million units")]
     InputRange,
     #[error("native input scale factor must be a finite positive normal value")]
     InputScale,
+    #[error(
+        "relative pointer sensitivity must be finite and within 1/1024..1024 virtual pixels per raw unit"
+    )]
+    PointerSensitivity,
+    #[error("native cursor capture operation failed: {0}")]
+    PointerCapture(String),
     #[error("native input event capacity exceeded")]
     InputCapacity,
     #[error("native UI receipt count or text byte capacity exceeded")]
@@ -77,10 +84,11 @@ struct Options {
     render: NativeRenderSettings,
     stop_after: Option<u64>,
     probe: bool,
+    relative_pointer: Option<pointer::Sensitivity>,
 }
 impl Options {
     fn parse(args: &[String]) -> session::Result<Self> {
-        const USAGE: &str = "expected --window SCENE AUDIO_CACHE CLIPS ACTIONS MODEL_CACHE TEXTURE_CACHE CAMERA_HEX [--font-cache FONT_CACHE] [--stop-after TICKS]";
+        const USAGE: &str = "expected --window SCENE AUDIO_CACHE CLIPS ACTIONS MODEL_CACHE TEXTURE_CACHE CAMERA_HEX [--font-cache FONT_CACHE] [--relative-pointer SCALE] [--stop-after TICKS]";
         let probe = args.last().is_some_and(|arg| arg == "--lifecycle-probe");
         let args = if probe { &args[..args.len() - 1] } else { args };
         if args.len() < 7 {
@@ -94,6 +102,13 @@ impl Options {
             && flag == "--font-cache"
         {
             text = Some(incant_render_game::TextSettings::new(path.into()));
+            rest = tail;
+        }
+        let mut relative_pointer = None;
+        if let [flag, scale, tail @ ..] = rest
+            && flag == "--relative-pointer"
+        {
+            relative_pointer = Some(pointer::Sensitivity::new(scale.parse()?)?);
             rest = tail;
         }
         let stop_after = match rest {
@@ -130,6 +145,7 @@ impl Options {
             },
             stop_after: if probe { Some(40) } else { stop_after },
             probe,
+            relative_pointer,
         })
     }
 }
@@ -157,6 +173,7 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
             .with_maximizable(false)
             .build(&event_loop)?,
     );
+    let mut pointer = pointer::Pointer::new(Arc::clone(&window), options.relative_pointer);
     let initial_size = window.inner_size();
     let ui_settings = has_ui
         .then(|| {
@@ -218,14 +235,28 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
     }
     let code = event_loop.run_return(|event, _, flow| {
         termination.event(|exit| {
+            let pointer_eligible = focused
+                && !suspended
+                && !platform_suspended
+                && !window.is_minimized()
+                && surface.has_supported_size()
+                && !ui_input.awaiting_surface();
+            if !pointer_eligible && pointer.release()? {
+                input.reset_focus(focused);
+                ui_input.invalidate_pointer(game.host()?.ui(), &mut input)?;
+            }
             match event {
                 Event::WindowEvent {
                     window_id, event, ..
                 } if window_id == window.id() => match event {
                     WindowEvent::CloseRequested | WindowEvent::Destroyed => {
+                        pointer.release()?;
                         *exit = true;
                     }
                     WindowEvent::Resized(_) | WindowEvent::ScaleFactorChanged { .. } => {
+                        if pointer.release()? {
+                            input.reset_focus(focused);
+                        }
                         if has_ui {
                             ui_input.layout_pending(game.host()?.ui(), &mut input)?;
                             ui_resize = true;
@@ -234,6 +265,7 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                         redraw_pending = true;
                     }
                     WindowEvent::Focused(value) => {
+                        pointer.release()?;
                         if !value && !suspended {
                             gamepads.pause_haptics()?;
                             game.set_suspended(true)?;
@@ -246,6 +278,9 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                         gamepads.discard_pending();
                     }
                     WindowEvent::Suspended => {
+                        if pointer.release()? {
+                            input.reset_focus(false);
+                        }
                         gamepads.pause_haptics()?;
                         platform_suspended = true;
                         if has_ui {
@@ -260,24 +295,37 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                         surface.invalidate();
                         redraw_pending = true;
                     }
-                    ref event if ui_input.accepts_delivery(focused, suspended) => {
-                        // InputEvent uses logical pixels; query this window's current scale per event.
-                        if has_ui {
-                            ui_input.window(
-                                game.host()?.ui(),
-                                &mut input,
-                                event,
-                                window.scale_factor(),
-                            )?;
-                        } else {
-                            input.window(event, window.scale_factor())?;
+                    ref event => {
+                        let route = pointer.window(event, pointer_eligible)?;
+                        if route.reset {
+                            input.reset_focus(focused);
+                            ui_input.invalidate_pointer(game.host()?.ui(), &mut input)?;
+                        }
+                        if ui_input.accepts_delivery(focused, suspended) {
+                            match route.delivery {
+                                pointer::Delivery::Consume => {}
+                                pointer::Delivery::Gameplay => {
+                                    input.window(event, window.scale_factor())?
+                                }
+                                pointer::Delivery::Ordinary if has_ui => ui_input.window(
+                                    game.host()?.ui(),
+                                    &mut input,
+                                    event,
+                                    window.scale_factor(),
+                                )?,
+                                pointer::Delivery::Ordinary => {
+                                    input.window(event, window.scale_factor())?
+                                }
+                            }
                         }
                     }
-                    _ => {}
                 },
-                // Raw DeviceEvent::MouseMotion is deliberately not forwarded:
-                // InputRuntime already derives displacement from CursorMoved.
-                // A future captured-pointer mode must choose the raw stream.
+                Event::DeviceEvent {
+                    event: DeviceEvent::MouseMotion { delta, .. },
+                    ..
+                } => {
+                    pointer.motion([delta.0, delta.1], pointer_eligible, &mut input)?;
+                }
                 Event::RedrawRequested(id) if id == window.id() => {
                     redraw_pending = true;
                 }
@@ -302,6 +350,9 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                         }
                         if !surface.reserve(&renderer)? {
                             if !suspended {
+                                if pointer.release()? {
+                                    input.reset_focus(focused);
+                                }
                                 gamepads.pause_haptics()?;
                                 game.set_suspended(true)?;
                                 suspended = true;
@@ -339,6 +390,9 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                     // UI surface wait preserves releases alongside queued presses.
                     gamepads.poll(&mut input, ui_input.accepts_delivery(active, suspended))?;
                     if !active {
+                        if pointer.release()? {
+                            input.reset_focus(focused);
+                        }
                         if ui_input.awaiting_surface() {
                             input.reset_focus(focused);
                             ui_input.reset_focus();
@@ -409,6 +463,9 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                         for _ in 0..due {
                             if !surface.reserve(&renderer)? {
                                 if !suspended {
+                                    if pointer.release()? {
+                                        input.reset_focus(focused);
+                                    }
                                     gamepads.pause_haptics()?;
                                     game.set_suspended(true)?;
                                     suspended = true;
@@ -467,6 +524,7 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                             let restart = game.take_session_request()?.is_some();
                             let haptics = game.take_haptics()?;
                             if restart {
+                                pointer.release()?;
                                 gamepads.pause_haptics()?;
                                 let _profile =
                                     incant_profile::scope(incant_profile::Phase::Restart);
@@ -535,6 +593,7 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
         });
         *flow = if termination.requested() {
             // Cleanup is attempted even after an earlier composed failure.
+            let _ = pointer.release();
             let _ = gamepads.pause_haptics();
             ControlFlow::Exit
         } else {
@@ -547,7 +606,11 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
     });
     surface.cancel();
     termination.finish(code, || {
-        gamepads.pause_haptics()?;
+        // Both cleanup families are attempted, even if cursor release fails.
+        let pointer_cleanup = pointer.release();
+        let haptic_cleanup = gamepads.pause_haptics();
+        pointer_cleanup?;
+        haptic_cleanup?;
         if has_ui && let Some((serial, enabled)) = ui_input.text_session(None, false)? {
             window
                 .set_text_input_session(serial, enabled)
@@ -559,6 +622,9 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
         probe.validate()?;
     }
     let mut report = serde_json::json!({"mode":"native-window","tick":game.world()?.tick(),"accepted_frames":game.host()?.consumer().accepted_frames(),"presentation_refreshes":presentation_refreshes,"adapter":renderer.adapter_name,"backend":format!("{:?}",renderer.adapter.get_info().backend),"on_screen":true,"dropped_wall_ticks":clock.dropped.to_string(),"surface_reconfigurations":surface.reconfigurations,"surface_recreations":surface.recreations,"surface_skipped":surface.skipped,"discarded_stale_text_events":ui_input.stale_text_events(),"lifecycle_probe":probe.as_ref().map(|p|p.report())});
+    if options.relative_pointer.is_some() {
+        report["relative_pointer"] = pointer.report();
+    }
     if generation > 1 {
         report["session"] = serde_json::json!({"generation":generation,"host_tick":host_steps,
             "simulation_tick":game.world()?.tick(),"accepted_frames":host_steps+presentation_refreshes});
@@ -650,6 +716,38 @@ mod tests {
         }
         for scale in [0., -1., f64::NAN, f64::INFINITY, f64::MIN_POSITIVE / 2.] {
             assert!(super::logical_viewport([640, 480], scale).is_err());
+        }
+    }
+    #[test]
+    fn relative_pointer_is_explicit_bounded_and_preserves_legacy_options() {
+        assert!(
+            Options::parse(&args(&[]))
+                .unwrap()
+                .relative_pointer
+                .is_none()
+        );
+        let option = Options::parse(&args(&[
+            "--font-cache",
+            "fonts",
+            "--relative-pointer",
+            "0.5",
+            "--stop-after",
+            "3",
+        ]))
+        .unwrap();
+        assert!(option.relative_pointer.is_some());
+        assert_eq!(option.stop_after, Some(3));
+        for bad in [
+            &["--relative-pointer"][..],
+            &["--relative-pointer", "NaN"],
+            &["--relative-pointer", "inf"],
+            &["--relative-pointer", "0"],
+            &["--relative-pointer", "-1"],
+            &["--relative-pointer", "1025"],
+            &["--relative-pointer", "1", "--relative-pointer", "2"],
+            &["--stop-after", "3", "--relative-pointer", "1"],
+        ] {
+            assert!(Options::parse(&args(bad)).is_err(), "{bad:?}");
         }
     }
     #[test]
