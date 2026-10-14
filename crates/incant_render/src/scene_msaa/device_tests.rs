@@ -1,7 +1,7 @@
 //! Actual attachment/raster/ownership controls. Explicit GPU grant required;
 //! stored fixture pixels require separate appearance review.
 use super::{SceneMsaa, SceneMsaaError, fixture};
-use crate::{Renderer, RetainedTarget, SceneInput, Viewport, frame, hdr_output};
+use crate::{Renderer, RetainedTarget, SceneInput, Viewport, hdr_output};
 use glam::{DMat4, DQuat, DVec3};
 use std::{
     sync::Arc,
@@ -101,9 +101,12 @@ fn four_sample_world_draws_resolve_after_models_sprites_and_text_with_depth() {
 fn scene_msaa_queued_resize_clear_refusal_and_explicit_one_sample_routes() {
     let mut renderer = renderer();
     assert_eq!(renderer.scene_sample_count(), 4);
-    let ao =
-        pollster::block_on(renderer.enable_ambient_occlusion(crate::AmbientOcclusion::default()))
-            .unwrap_err();
+    let ao = pollster::block_on(renderer.enable_ambient_occlusion(crate::AmbientOcclusion {
+        radius: 1.,
+        bias: 0.01,
+        strength: 1.,
+    }))
+    .unwrap_err();
     assert_eq!(
         ao.downcast_ref::<SceneMsaaError>(),
         Some(&SceneMsaaError::AmbientOcclusion)
