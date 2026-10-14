@@ -136,7 +136,11 @@ fn game(root: &Path, reference: VisualAssetRef, epoch: Arc<AtomicUsize>) -> (Ani
     .unwrap()
     .with_spatial(vec![reference], vec![mesh, camera])
     .unwrap();
-    let renderer = Arc::new(models::checked(Renderer::headless().unwrap()));
+    let mut renderer = models::checked(Renderer::headless().unwrap());
+    // Retained motion history deliberately refuses an ordinary renderer until
+    // its finite motion pipeline set has been prepared at cold startup.
+    pollster::block_on(renderer.enable_motion_vectors()).unwrap();
+    let renderer = Arc::new(renderer);
     eprintln!(
         "animated-refresh adapter: {:?}",
         renderer.adapter.get_info()
