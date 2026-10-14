@@ -1,0 +1,77 @@
+--- a/src/runtime.rs
++++ b/src/runtime.rs
+@@ -51,5 +51,15 @@
+ #[cfg(feature = "parallel")]
+ pub type InterruptHandler = Box<dyn FnMut() -> bool + Send + 'static>;
+ 
++/// Exact current QuickJS logical allocation counters, not backing/RSS/used heap.
++/// Values are instantaneous observations; this does not track a continuous peak.
++#[derive(Clone, Copy, Debug, PartialEq, Eq)]
++pub struct MallocState {
++    pub allocated_bytes: usize,
++    pub allocation_count: usize,
++    /// Zero means unlimited, matching the pinned native API.
++    pub limit_bytes: usize,
++}
++
+ /// A struct with information about the runtimes memory usage.
+ pub type MemoryUsage = crate::qjs::JSMemoryUsage;
+--- a/src/runtime/base.rs
++++ b/src/runtime/base.rs
+@@ -196,6 +196,30 @@
+         }
+     }
+ 
++    /// Read maintained logical counters under exclusive runtime access.
++    /// Unlike memory_usage this does not enumerate objects or run any JS/GC.
++    pub fn malloc_state(&self) -> super::MallocState {
++        // SAFETY: the existing runtime lock grants exclusive access to this
++        // live runtime; the native getter writes only owned scalar outputs.
++        unsafe { self.inner.lock().malloc_state() }
++    }
++
++    /// Diagnostic parity observation, with one lock held across all three reads.
++    /// The full used-size scan is deliberately retained only in this method.
++    pub fn diagnostic_malloc_state_with_usage(
++        &self,
++    ) -> (super::MallocState, MemoryUsage, super::MallocState) {
++        let mut runtime = self.inner.lock();
++        // SAFETY: one guard owns the live runtime throughout; no guest callback
++        // or allocation occurs between the scalar reads and unchanged full scan.
++        unsafe {
++            let before = runtime.malloc_state();
++            let full = runtime.memory_usage();
++            let after = runtime.malloc_state();
++            (before, full, after)
++        }
++    }
++
+     /// Get memory usage stats
+     pub fn memory_usage(&self) -> MemoryUsage {
+         unsafe { self.inner.lock().memory_usage() }
+--- a/src/runtime/raw.rs
++++ b/src/runtime/raw.rs
+@@ -327,6 +327,23 @@
+         qjs::JS_RunGC(self.rt.as_ptr());
+     }
+ 
++    /// Caller holds the owning runtime lock. No private-layout cast is used.
++    pub unsafe fn malloc_state(&self) -> super::MallocState {
++        let mut bytes: qjs::size_t = 0;
++        let mut count: qjs::size_t = 0;
++        let mut limit: qjs::size_t = 0;
++        // SAFETY: caller owns this live runtime; all outputs are distinct,
++        // correctly aligned initialized locals for the duration of this call.
++        unsafe {
++            qjs::JS_GetMallocState(self.rt.as_ptr(), &mut bytes, &mut count, &mut limit);
++        }
++        super::MallocState {
++            allocated_bytes: bytes as usize,
++            allocation_count: count as usize,
++            limit_bytes: limit as usize,
++        }
++    }
++
+     /// Get memory usage stats
+     pub unsafe fn memory_usage(&mut self) -> qjs::JSMemoryUsage {
+         let mut stats = mem::MaybeUninit::uninit();
