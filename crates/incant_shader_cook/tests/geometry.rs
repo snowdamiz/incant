@@ -211,23 +211,23 @@ fn shader_math_and_family_are_in_artifact_identity() {
 
 #[test]
 fn world_centroid_and_single_sample_shadow_ui_contracts_cannot_be_exchanged() {
-    fn centroid(
-        module: &naga::Module,
-        ty: naga::Handle<naga::Type>,
-        binding: Option<&naga::Binding>,
-    ) -> bool {
-        match binding {
-            Some(naga::Binding::Location { sampling, .. }) => {
-                *sampling == Some(naga::Sampling::Centroid)
-            }
-            None => match &module.types[ty].inner {
-                naga::TypeInner::Struct { members, .. } => members
-                    .iter()
-                    .any(|m| centroid(module, m.ty, m.binding.as_ref())),
-                _ => false,
-            },
-            _ => false,
+    fn centroid_decoration(bytes: &[u8]) -> bool {
+        // Inspect actual SPIR-V OpDecorate(71), Centroid(16) operands. The
+        // pinned Naga reader's default Perspective interpolation overwrites
+        // Centroid with Center, so its round-trip IR cannot prove this trait.
+        let (chunks, tail) = bytes.as_chunks::<4>();
+        assert!(tail.is_empty());
+        let words: Vec<_> = chunks.iter().map(|w| u32::from_le_bytes(*w)).collect();
+        assert_eq!(words[0], 0x0723_0203);
+        let mut index = 5;
+        let mut found = false;
+        while index < words.len() {
+            let count = (words[index] >> 16) as usize;
+            assert!(count > 0 && index + count <= words.len());
+            found |= words[index] & 0xffff == 71 && count == 3 && words[index + 2] == 16;
+            index += count;
         }
+        found
     }
     for kind in [Kind::Diagnostic, Kind::Material, Kind::Sprite, Kind::Text] {
         let original = source(kind);
@@ -257,17 +257,8 @@ fn world_centroid_and_single_sample_shadow_ui_contracts_cannot_be_exchanged() {
             .filter(|a| a.stage == Stage::Fragment)
         {
             if artifact.backend == Backend::Vulkan {
-                let module = naga::front::spv::parse_u8_slice(
-                    &artifact.bytes,
-                    &naga::front::spv::Options::default(),
-                )
-                .unwrap();
                 assert!(
-                    module.entry_points[0]
-                        .function
-                        .arguments
-                        .iter()
-                        .any(|a| centroid(&module, a.ty, a.binding.as_ref())),
+                    centroid_decoration(&artifact.bytes),
                     "lost SPIR-V centroid decoration"
                 );
             } else {
