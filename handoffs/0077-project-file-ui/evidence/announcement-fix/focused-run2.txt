@@ -1,0 +1,20 @@
+
+> @incant/editor-ui@0.0.1 test
+> vitest run src/shell/ShellContext.test.tsx src/components/ProjectFile.test.tsx --no-file-parallelism
+
+
+ RUN  v5.0.3 /Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/.worktrees/0077-project-file-ui/editor/ui
+
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+ Test Files  2 passed (2)
+      Tests  34 passed (34)
+   Start at  06:23:08
+   Duration  3.54s (tests 76%, environment 12%, transform 7%, import 3%, setup 2%)
+
+    Isolate  2 workers spawned · ~257ms startup each (spawn + environment, per file)
+             at least ~257ms faster with isolate: false — reuses workers across files instead of one per file
+

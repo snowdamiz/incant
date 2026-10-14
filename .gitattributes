@@ -59,3 +59,12 @@ tools/probes/quickjs-malloc-state/sys.patch -text whitespace=-blank-at-eol
 # Retain published rquickjs/QuickJS sources and generated bindings byte-for-byte.
 third_party/rquickjs-core/** -text whitespace=-blank-at-eol,-blank-at-eof,cr-at-eol
 third_party/rquickjs-sys/** -text whitespace=-blank-at-eol,-blank-at-eof,cr-at-eol
+
+# Handoff 0077 retains exact source patches and original verification logs.
+handoffs/0077-project-file-ui/evidence/announcement-fix/announcement-fix.patch -text whitespace=-blank-at-eol
+handoffs/0077-project-file-ui/evidence/final-integration/final-astra-ui.patch -text whitespace=-blank-at-eol
+handoffs/0077-project-file-ui/evidence/idle-freeze/claude-ui-source.patch -text whitespace=-blank-at-eol
+handoffs/0077-project-file-ui/evidence/root-bridge-overlay/root-owned.patch -text whitespace=-blank-at-eol
+handoffs/0077-project-file-ui/evidence/root-ui-corrections/root-ui-corrections.patch -text whitespace=-blank-at-eol
+handoffs/0077-project-file-ui/evidence/announcement-fix/focused-run2.txt -text whitespace=-blank-at-eof
+handoffs/0077-project-file-ui/evidence/announcement-fix/typecheck-run1.txt -text whitespace=-blank-at-eof

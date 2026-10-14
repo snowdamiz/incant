@@ -1,0 +1,78 @@
+{
+  "assets": {},
+  "engine_version": "=0.0.1",
+  "id": "01M4WZY5Z468T97BGJ0HTQK9T8",
+  "memory": {},
+  "name": "Native Save Review",
+  "scenes": {
+    "01M4WZY5Z49Y5XV85YX6YNA57Q": {
+      "entities": {
+        "01M4WZY5Z4MJ6EDQ5K06P0E1KN": {
+          "components": {
+            "Transform": {
+              "rotation": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "translation": [
+                1.0,
+                0.0,
+                0.0
+              ]
+            }
+          },
+          "id": "01M4WZY5Z4MJ6EDQ5K06P0E1KN",
+          "name": "Saved through native UI",
+          "parent": null,
+          "provenance": {
+            "actor": "editor",
+            "conversation_id": null,
+            "model": null,
+            "origin": "user",
+            "transaction": "01M4X00JAZYJAMRNEEQPFQMCGF"
+          }
+        },
+        "01M4WZY5Z4ZCZC5E7NYNMQ3AW3": {
+          "components": {
+            "Transform": {
+              "rotation": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "translation": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            }
+          },
+          "id": "01M4WZY5Z4ZCZC5E7NYNMQ3AW3",
+          "name": "Entity 0",
+          "parent": null,
+          "provenance": null
+        }
+      },
+      "id": "01M4WZY5Z49Y5XV85YX6YNA57Q",
+      "name": "Main"
+    }
+  },
+  "schema_version": 1,
+  "scripts": {},
+  "settings": {
+    "tick_rate": 60
+  }
+}

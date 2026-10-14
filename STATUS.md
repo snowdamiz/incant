@@ -1,5 +1,17 @@
 # Implementation status
 
+## Project Save and engine-pin UI — locally qualified main278 composition
+
+The native project menu now exposes Save/Command-S and host-issued engine-pin
+review/apply. Project changes retire stale results, and transport uncertainty
+never claims that a possibly committed write failed definitively. Claude's
+bounded design is retained with separately reviewed Astra correctness repairs.
+All 973 UI tests pass; 30 browser states and five flows report zero accessibility
+violations or errors. Actual Mac Tauri/WebKit checks verify save/reopen, a
+read-only legacy review, exact candidate bytes, backup and undo/redo. These
+changes are locally qualified and not yet merged. Older-format conversion and
+phase gates remain open. [Evidence](docs/spikes/project-file-ui-main278.md).
+
 ## Native script undo capacity reuse — source qualified
 
 ScriptHost now reuses exact-size native ID/numeric undo storage across matching

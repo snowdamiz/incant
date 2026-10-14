@@ -1,0 +1,35 @@
+{
+  "source": "d803cc2cc15d399bdf61cbf5743f5db81712f64b",
+  "commands": [
+    [
+      "npm",
+      "run",
+      "build",
+      "--workspace",
+      "editor/ui"
+    ],
+    [
+      "tools/cargo",
+      "build",
+      "--locked",
+      "--offline",
+      "--profile",
+      "ci",
+      "--target",
+      "aarch64-apple-darwin",
+      "-j",
+      "2",
+      "-p",
+      "incant_editor",
+      "--features",
+      "custom-protocol"
+    ]
+  ],
+  "environment": {
+    "RUSTUP_TOOLCHAIN": "1.99.0",
+    "CARGO_TARGET_DIR": "/private/tmp/incant-agent-font-target",
+    "CARGO_BUILD_JOBS": "2",
+    "RAYON_NUM_THREADS": "2"
+  },
+  "started": "2026-10-14T10:38:01.201319+00:00"
+}
