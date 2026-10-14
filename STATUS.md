@@ -1,6 +1,20 @@
 # Implementation status
 
-## Native Play texture refresh — locally integrated
+## Navigation cache comparison — bounded optimization concluded
+
+The one fixed six-run shipping comparison found a small ScriptTick p95 reduction,
+from matched baseline intervals spanning 2.13–2.23 ms to candidate intervals
+spanning 2.11–2.16 ms. Every candidate remains above 2 ms; the last pair has the
+same whole-player CPU frame-p95 interval, and baselines declined through the
+sequence. The cache adds retained graph storage. It is not adopted for this
+budget effort; all results and exact gameplay/audio parity remain recorded.
+Following the director's instruction, development moves on to other engine
+work without further profiling or optimization branches for this threshold.
+The existing plan gate stays unmet; this is not evidence that sub-2 ms is
+impossible or that the full rendered game misses its frame budget.
+[Outcome and replay](docs/spikes/navigation-search-cache-outcome.md).
+
+## Native Play texture refresh — merged through PR284
 
 Existing texture content can be reimported while native Play continues, without
 restarting its scripts or simulation. Preparation occurs outside the authoring
@@ -18,9 +32,9 @@ A default-off profiler now correlates the whole script tick, its callback source
 and native numeric work by frame. One fresh private shipping build and its full
 2,156-tick functional and diagnostic runs preserve exact gameplay and PCM. The
 same-frame tail points to the authored navigation refresh cadence, while source
-inspection finds repeated construction of immutable path-search adjacency. A
-generation-owned graph cache is being investigated separately; no optimization or
-shipping saving is claimed here. The ordinary 2 ms gate remains unmet and normal
+inspection finds repeated construction of immutable path-search adjacency. The
+generation-owned graph cache was subsequently measured and not adopted, as
+recorded above. The ordinary 2 ms gate remains unmet and normal
 performance readers reject the instrumented report.
 [Source, actual results and replay](docs/spikes/core-script-attribution.md).
 
