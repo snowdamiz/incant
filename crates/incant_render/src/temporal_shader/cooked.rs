@@ -95,7 +95,7 @@ mod depth {
     include!(concat!(env!("OUT_DIR"), "/temporal-depth/manifest.rs"));
     pub(super) const BUNDLE: Bundle = Bundle {
         contract: MANIFEST_CONTRACT,
-        expected: "incant-temporal-depth-v2;naga=29.0.4;wgpu=29.0.4;frame160-v,material64-f,5textures-samplers;msl=2.4,pulls15-14-13-12,strides48-48-112-80,lengths1,frame0,material1;hlsl=6.0,b0-b1,sampler-t5,special-b2;spv=1.0,no-y-flip;bounds=restrict;loops=bounded",
+        expected: "incant-temporal-depth-v2;naga=29.0.4;wgpu=29.0.4;frame160-vf,material64-f,5textures-samplers;msl=2.4,pulls15-14-13-12,strides48-48-112-80,lengths1,frame0,material1;hlsl=6.0,b0-b1,sampler-t5,special-b2;spv=1.0,no-y-flip;bounds=restrict;loops=bounded",
         source: SOURCE_HASH,
         producer: PRODUCER_HASH,
         artifacts: &ARTIFACTS,
