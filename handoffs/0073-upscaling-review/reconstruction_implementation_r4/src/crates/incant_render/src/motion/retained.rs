@@ -34,13 +34,16 @@ struct Frame {
     current: [[f32; 4]; 4],
     previous: [[f32; 4]; 4],
     rect: [f32; 4],
+    /// x: MASK texture LOD bias; must equal the internal material draw's.
+    lod: [f32; 4],
 }
+const _: () = assert!(size_of::<Frame>() == 160 && std::mem::offset_of!(Frame, lod) == 144);
 const _: () = {
     assert!(size_of::<Previous>() == 80);
     assert!(std::mem::offset_of!(Previous, valid) == 64);
     assert!(std::mem::offset_of!(Previous, owner_word) == 68);
     assert!(std::mem::offset_of!(Previous, reserved) == 72);
-    assert!(size_of::<Frame>() == 144);
+    assert!(size_of::<Frame>() == 160);
 };
 
 pub(crate) struct MotionState {
@@ -502,10 +505,17 @@ impl MotionState {
         } else {
             0
         };
+        // Internal MASK coverage uses the same bias as the internal material draw
+        // (Pending::lod_bias: log2(source / output), never positive).
+        let bias = upscale_rect
+            .map(|r| (plan.rect[2] / r[2]).log2())
+            .filter(|b| b.is_finite())
+            .map_or(0., |b| b.min(0.));
         let uniform = Frame {
             current: history.matrix.to_cols_array_2d(),
             previous: history.previous.to_cols_array_2d(),
             rect: plan.rect,
+            lod: [bias, 0., 0., 0.],
         };
         let group = |uniform: Frame| {
             let buffer = renderer
@@ -534,6 +544,7 @@ impl MotionState {
                     .unjittered()
                     .matrix(plan.rect[2] / plan.rect[3])?
                     .to_cols_array_2d(),
+                lod: [0.; 4],
                 ..uniform
             }))
         } else {
@@ -550,6 +561,7 @@ impl MotionState {
                         .matrix(rect[2] / rect[3])?
                         .to_cols_array_2d(),
                     rect,
+                    lod: [0.; 4],
                     ..uniform
                 }),
                 rect,

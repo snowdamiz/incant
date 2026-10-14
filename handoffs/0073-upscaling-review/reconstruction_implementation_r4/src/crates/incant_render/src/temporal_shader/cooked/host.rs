@@ -32,7 +32,7 @@ fn texture(binding: u32, depth: bool) -> wgpu::BindGroupLayoutEntry {
 pub(super) fn validate(kind: Kind) -> Result<(), &'static str> {
     use wgpu::{VertexFormat as F, VertexStepMode as S};
     if matches!(kind, Kind::Motion | Kind::Depth | Kind::MotionOwner) {
-        if crate::motion::system::frame_entry() != uniform(144, wgpu::ShaderStages::VERTEX_FRAGMENT)
+        if crate::motion::system::frame_entry() != uniform(160, wgpu::ShaderStages::VERTEX_FRAGMENT)
         {
             return Err("motion frame layout");
         }

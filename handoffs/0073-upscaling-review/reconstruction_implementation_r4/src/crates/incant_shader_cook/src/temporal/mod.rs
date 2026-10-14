@@ -34,10 +34,10 @@ impl Kind {
     pub fn contract(self) -> &'static str {
         match self {
             Self::MotionOwner => {
-                "incant-temporal-motion-owner-v1;naga=29.0.4;wgpu=29.0.4;frame144-vf,material64-f,5textures-samplers;mrt=rgba32f-r32u;owner=uint-loc12-offset68-flat3;msl=2.4,pulls15-14-13-12,strides48-48-112-80,lengths1,frame0,material1;hlsl=6.0,b0-b1,sampler-t5,special-b2;spv=1.0,no-y-flip;bounds=restrict;loops=bounded"
+                "incant-temporal-motion-owner-v2;naga=29.0.4;wgpu=29.0.4;frame160-vf,material64-f,5textures-samplers;mrt=rgba32f-r32u;owner=uint-loc12-offset68-flat3;msl=2.4,pulls15-14-13-12,strides48-48-112-80,lengths1,frame0,material1;hlsl=6.0,b0-b1,sampler-t5,special-b2;spv=1.0,no-y-flip;bounds=restrict;loops=bounded"
             }
             Self::Depth => {
-                "incant-temporal-depth-v1;naga=29.0.4;wgpu=29.0.4;frame144-v,material64-f,5textures-samplers;msl=2.4,pulls15-14-13-12,strides48-48-112-80,lengths1,frame0,material1;hlsl=6.0,b0-b1,sampler-t5,special-b2;spv=1.0,no-y-flip;bounds=restrict;loops=bounded"
+                "incant-temporal-depth-v2;naga=29.0.4;wgpu=29.0.4;frame160-v,material64-f,5textures-samplers;msl=2.4,pulls15-14-13-12,strides48-48-112-80,lengths1,frame0,material1;hlsl=6.0,b0-b1,sampler-t5,special-b2;spv=1.0,no-y-flip;bounds=restrict;loops=bounded"
             }
             Self::MetalFxPack => {
                 "incant-metalfx-pack-v1;naga=29.0.4;wgpu=29.0.4;frame96-f,textures3,mrt4;msl=2.4;hlsl=6.0,special-b1;spv=1.0,no-y-flip;bounds=restrict;loops=bounded"
@@ -46,7 +46,7 @@ impl Kind {
                 "incant-metalfx-normalize-v1;naga=29.0.4;wgpu=29.0.4;frame96-f,textures3,mrt2;msl=2.4;hlsl=6.0,special-b1;spv=1.0,no-y-flip;bounds=restrict;loops=bounded"
             }
             Self::Motion => {
-                "incant-temporal-motion-v1;naga=29.0.4;wgpu=29.0.4;frame144-vf,material64-f,5textures-samplers;msl=2.4,pulls15-14-13-12,strides48-48-112-80,lengths1,frame0,material1;hlsl=6.0,b0-b1,sampler-t5,special-b2;spv=1.0,no-y-flip;bounds=restrict;loops=bounded"
+                "incant-temporal-motion-v2;naga=29.0.4;wgpu=29.0.4;frame160-vf,material64-f,5textures-samplers;msl=2.4,pulls15-14-13-12,strides48-48-112-80,lengths1,frame0,material1;hlsl=6.0,b0-b1,sampler-t5,special-b2;spv=1.0,no-y-flip;bounds=restrict;loops=bounded"
             }
             Self::Resolve => {
                 "incant-temporal-resolve-v1;naga=29.0.4;wgpu=29.0.4;frame64-f,textures4,mrt1;msl=2.4;hlsl=6.0,special-b1;spv=1.0,no-y-flip;bounds=restrict;loops=bounded"
@@ -78,13 +78,13 @@ impl Kind {
                 209, 115, 118, 137, 112, 213, 84, 222, 124, 208, 129, 96, 117, 181,
             ],
             Self::MotionOwner => [
-                102, 9, 205, 235, 39, 74, 200, 74, 255, 222, 133, 196, 199, 126, 142, 116, 65, 223,
-                251, 183, 72, 224, 124, 45, 112, 156, 179, 170, 141, 96, 109, 0,
-            ],
+                162, 101, 152, 121, 205, 89, 105, 134, 51, 210, 143, 93, 183, 248, 164, 240,
+                134, 56, 47, 38, 14, 230, 145, 29, 227, 18, 165, 178, 209, 12, 66, 219,
+            ], // Claude 0073 r4 MASK LOD bias
             Self::Motion | Self::Depth => [
-                30, 190, 25, 208, 56, 144, 101, 74, 214, 210, 50, 136, 31, 151, 182, 253, 29, 74,
-                10, 195, 201, 189, 178, 150, 17, 209, 183, 33, 168, 48, 71, 123,
-            ],
+                230, 75, 74, 28, 192, 227, 147, 199, 82, 237, 222, 186, 138, 247, 146, 181,
+                157, 185, 202, 195, 206, 41, 145, 249, 255, 199, 241, 126, 30, 33, 100, 208,
+            ], // Claude 0073 r4 MASK LOD bias
             Self::Resolve => [
                 225, 175, 83, 86, 90, 41, 159, 106, 3, 161, 58, 62, 224, 90, 3, 123, 84, 14, 36,
                 203, 43, 11, 237, 5, 76, 238, 184, 210, 212, 132, 235, 241,

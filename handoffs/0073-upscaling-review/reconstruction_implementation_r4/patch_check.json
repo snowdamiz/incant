@@ -1,6 +1,36 @@
 {
  "files": [
   {
+   "added": 2,
+   "base_blob": "2418a2e416b4330e2f22a068da3f7dab922ef22e",
+   "base_sha256": "7d2c2cd1f30218b86bd92f7a706e7b6ad1df1fd7a5c062189a7064b881b687f8",
+   "changed": true,
+   "path": "crates/incant_render/src/lib.rs",
+   "proposed_blob": "7e1bc62eabbc85ddb261c1111162fe2c51920229",
+   "proposed_sha256": "c197b93b33bcaf0808644c9805155003897b0e2519b23d8594ea2fd740d5fba1",
+   "removed": 0
+  },
+  {
+   "added": 12,
+   "base_blob": "d13eb092834e2e401909452dbe24eea646fa87c0",
+   "base_sha256": "2a5f12fa54b25ac4fc8a8868c1fca03e9fe5bce5e178073387f875f7040bab3d",
+   "changed": true,
+   "path": "crates/incant_render/src/model_draw.rs",
+   "proposed_blob": "2fdcac1ffa9ab8d049d128e9d7c4e31df762626a",
+   "proposed_sha256": "df5f94f93601949bbaac6829b083c6c407af4b35c8e4a1d1017864195437e1cd",
+   "removed": 1
+  },
+  {
+   "added": 7,
+   "base_blob": "f8a6d59f66b94add8d49e61f3768395057b9ae1d",
+   "base_sha256": "45018e9c6029af03553aa933438277589835edac1fb75fddcba2833568c51c2b",
+   "changed": true,
+   "path": "crates/incant_render/src/model_material.wgsl",
+   "proposed_blob": "5541bae7ddf168c052ffc20ec296065118e0075b",
+   "proposed_sha256": "28f28b27578ca4b4e5ea9aacb9f7901a5c97af570ab6521ad66d0eac0657efc3",
+   "removed": 6
+  },
+  {
    "added": 9,
    "base_blob": "d9db6665cc2a206834bbb0d90bbfa888f935bcb8",
    "base_sha256": "0537dd58409e0dfd485e09633b41091cb461e09f4859f6217147fdabb840d601",
@@ -22,13 +52,43 @@
   },
   {
    "added": 3,
+   "base_blob": "aa1baa3e50129cdfe2d89e63546988ef0b4f1d23",
+   "base_sha256": "6609cdeb274ac84affde85c4c77e8e7441dffbb748e07c2d709cb3aa8d606d00",
+   "changed": true,
+   "path": "crates/incant_render/src/motion/owner.wgsl",
+   "proposed_blob": "0e090fd58d15596a3744d79753342bdde01b1244",
+   "proposed_sha256": "a2659879cd59698633d28f5db7f8a4f086382f260ee6911de312a5b2d10c42db",
+   "removed": 2
+  },
+  {
+   "added": 17,
    "base_blob": "16c3b41fb461314be19b780780ef7dc3a66fa4c3",
    "base_sha256": "400eb57b3d067eaa3cdf3d2e0c216a4868d09947d61c49dca62e909f0a394d00",
    "changed": true,
    "path": "crates/incant_render/src/motion/retained.rs",
-   "proposed_blob": "30a7cb12ba4525446d6d18730c79d87b07029113",
-   "proposed_sha256": "14878c5aba3a8863c5897aff008c0f90b647ce537c64f649a920cef24de4a56a",
-   "removed": 4
+   "proposed_blob": "85f56424cff003638a2809850b06764d93787d34",
+   "proposed_sha256": "4aaa08bdc9806772fb535407171e8b66a0f2f8802c863764ca0b92360515a78d",
+   "removed": 6
+  },
+  {
+   "added": 3,
+   "base_blob": "99d40d6839a37fbb2e77bd522a4bdc6eeed4ffd4",
+   "base_sha256": "1ebe19d03890654ad6d232881f97b6fd1d4a0ac3c9bdb29611d1b721a830477b",
+   "changed": true,
+   "path": "crates/incant_render/src/motion/shader.wgsl",
+   "proposed_blob": "2ba89dbbac54cf3b64a00f2a66e17af22499e8e2",
+   "proposed_sha256": "e64b4a1cc0e393c752eddeba8af792b59db9cac3ce2991f9ffc7f17e1e2164d0",
+   "removed": 2
+  },
+  {
+   "added": 1,
+   "base_blob": "03d1043267a82e96840a9ef704e9d427a749d571",
+   "base_sha256": "9f901418e8b6c26a4ccdd4b3b51b51be98ccc74d3bc5910c0a84b94dff8481bd",
+   "changed": true,
+   "path": "crates/incant_render/src/motion/system.rs",
+   "proposed_blob": "25ae011a4d902e4d94446c44315d699c62c1d2c6",
+   "proposed_sha256": "0f3795b849178fdcc5a18a413b9473f2b65bf202b45ddb3217bce9a3077a6621",
+   "removed": 1
   },
   {
    "added": 2,
@@ -41,44 +101,44 @@
    "removed": 2
   },
   {
-   "added": 8,
+   "added": 16,
    "base_blob": "76c6e26c4eb4d88ffb6e4e841c40c5261b800f6d",
    "base_sha256": "7b3ddefbef62fb24e93122ce9f8cd52c1b9b7f61d2a48f1a4c5a4a8f8cdffa39",
    "changed": true,
    "path": "crates/incant_render/src/retained.rs",
-   "proposed_blob": "2dab7bcbf4dc13363c0b6d558a8d6843a0dc790d",
-   "proposed_sha256": "af138afbbb4aa33a67fd23eaa42cd1153df4358d24205fc12455feeff5c0e1b1",
-   "removed": 2
+   "proposed_blob": "334f7fb8baab6d79b64d43729158d9880de89e14",
+   "proposed_sha256": "1d409d45194153d3558f36884f5440e679dc606c4903503d3ba0593dba0117c6",
+   "removed": 3
   },
   {
-   "added": 25,
+   "added": 35,
    "base_blob": "28ed7fde7ddeb692eed25e14337e55ebab8d4c1d",
    "base_sha256": "41d80973344b080d3608d1306dba7d7a08a3b2746fb737d22e30e5f9b496a4dd",
    "changed": true,
    "path": "crates/incant_render/src/temporal/jitter.rs",
-   "proposed_blob": "9e994f3be22a7eb1bfe12e88d9afde1f8aad9ed8",
-   "proposed_sha256": "b57bfd504d8511ba9445db25eafa04f21acb9ad28de7c94211cfbe30ddec39ce",
+   "proposed_blob": "a1dd845bdad837aed846451e5336efda52bab823",
+   "proposed_sha256": "e292eea9dbef1a8f0d958e42c2f556df74a2943ed7d76d714ac065e8fe69793a",
    "removed": 2
   },
   {
-   "added": 2,
+   "added": 5,
    "base_blob": "23b5cb578996ec4b11d11d108882dc3046f50f2c",
    "base_sha256": "8f5617e22add52dc12c3964d1d6cd1269985dcff9c1d4696c3e581e206f29a67",
    "changed": true,
    "path": "crates/incant_render/src/temporal_shader/cooked.rs",
-   "proposed_blob": "821fc2e3c20a1fc2fa3064ee976849520a63034a",
-   "proposed_sha256": "e3c3c2a46ac5da8a8247841b36b3ebdf785bc9c7b0849d4247bdd16fa1cdc496",
-   "removed": 2
+   "proposed_blob": "12c16fe91c8e9543b58a17dbd3d52a8366e0ffca",
+   "proposed_sha256": "36ed4e4e680ac8111233e9f111b79787c88d1cff2473237969782620dfbb36e5",
+   "removed": 5
   },
   {
-   "added": 4,
+   "added": 5,
    "base_blob": "7b26def3be36da478888230ff6837d9a593d3314",
    "base_sha256": "81536a000ae50de240f833d8c5a218ad31c1d617d6cc0d94038ea398b6a2b231",
    "changed": true,
    "path": "crates/incant_render/src/temporal_shader/cooked/host.rs",
-   "proposed_blob": "0e0cd3da047df7002232e08373d9a2500d101f50",
-   "proposed_sha256": "1e50b6966444db099b902a925f7219b6485ab81b1c2b601a3cc25272c5e21eeb",
-   "removed": 4
+   "proposed_blob": "a09957586e6ee0754d905989fc3a4247bb25e399",
+   "proposed_sha256": "fc4245ba0e59e4600b95aa079da1ecbd2f1af8fa85cf7526389020e0864f0c15",
+   "removed": 5
   },
   {
    "added": 8,
@@ -91,13 +151,13 @@
    "removed": 1
   },
   {
-   "added": 45,
+   "added": 59,
    "base_blob": "18484b3ab10d7c51f78b68db067612b73de7b228",
    "base_sha256": "65c64e6c1510f56fe8fd3d999fa45229d61165d70677d4f28531bcaed14107b8",
    "changed": true,
    "path": "crates/incant_render/src/upscaling/owner.rs",
-   "proposed_blob": "2164824c66edee5dbf45ec268307ab2670176f11",
-   "proposed_sha256": "078f8d4b852be5967a4712e2b91a76e75404bd0ce15fcaa2bdf36381b21164cd",
+   "proposed_blob": "cd38dea6842c94aecf88182fadd71e66b60081ff",
+   "proposed_sha256": "f859e5cd069a5359b601eea361aed19726abd44d6b4308c53890a213ab93be56",
    "removed": 1
   },
   {
@@ -171,14 +231,24 @@
    "removed": 8
   },
   {
-   "added": 14,
+   "added": 2,
+   "base_blob": "4e5a2781899629a1128801154ffe80254c6659ee",
+   "base_sha256": "c83cca8d69cfdef9c9f24e2d1461e81c2bfcb78f1616f8b095a144fb3dfbadd9",
+   "changed": true,
+   "path": "crates/incant_shader_cook/src/geometry/material.rs",
+   "proposed_blob": "6e6d6097303048d555f55d1fdb98f00797338ad2",
+   "proposed_sha256": "6ad2455593be8db7b03e95eb36b22c7f0850155932138a57ed11883859805856",
+   "removed": 1
+  },
+  {
+   "added": 17,
    "base_blob": "6f01e1fddba1fe100dc3be4ea28aee93499bf492",
    "base_sha256": "24fa46bc7e33fd54572f83ab8ecfbb0ee5fcaca54501afb382de9b879ae57e9f",
    "changed": true,
    "path": "crates/incant_shader_cook/src/temporal/contract.rs",
-   "proposed_blob": "24fc495c56b8e77b19962683b2d3972bbb748247",
-   "proposed_sha256": "bae2cac1671a90438fb01be8e5b1603e0ef5b14aa9ac3ac2d94f7b87c7513509",
-   "removed": 7
+   "proposed_blob": "b4c038dfb09e8c087c73adce3d6d95e5422a9bfc",
+   "proposed_sha256": "ee00fcfef75b9ee97b89b37a213a240a1a746d0ce34f511af643b510186cd2cb",
+   "removed": 10
   },
   {
    "added": 2,
@@ -191,14 +261,14 @@
    "removed": 2
   },
   {
-   "added": 8,
+   "added": 17,
    "base_blob": "a87caaf31159c4dd80ad5a9f1e61f354c86ee1f4",
    "base_sha256": "5ef62a338bc73f7526ea2ffd81469e89fd49ebd2046b25aa5d6bd7325fb936c6",
    "changed": true,
    "path": "crates/incant_shader_cook/src/temporal/mod.rs",
-   "proposed_blob": "f59164791b93500f863327db861f2afcd3175eb7",
-   "proposed_sha256": "e4f691b3a13f27aab3f0c27d9ccde5fa26d8e3378e61b72e4c9947c51b25e182",
-   "removed": 8
+   "proposed_blob": "882eb3f4ba05a5cf42de30106847d8f332799989",
+   "proposed_sha256": "1992e76021dd155169adede92130f91018b0476eb3fa54ed6cdd9bb2c618e5e6",
+   "removed": 17
   },
   {
    "added": 7,
@@ -214,10 +284,10 @@
  "git_apply_cached_check_against_76be": true,
  "git_apply_stderr": "",
  "patch": {
-  "bytes": 82089,
-  "files": 21,
+  "bytes": 102728,
+  "files": 28,
   "path": "reconstruction_r4.patch",
-  "sha256": "ce666f0c03686fd44b7fd3c24e0579112256060c63c70145a63b814bf041529e"
+  "sha256": "c9a7f48d76ec72118721d45631833d1cb55c546d1322b76c6499fd88c606d35a"
  },
  "production": "76be9608e99bf089fcb1e0908827330f70c28ac1",
  "python_reapply_reproduces_proposed_files": true,

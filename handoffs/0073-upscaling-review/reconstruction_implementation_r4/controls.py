@@ -234,6 +234,21 @@ def main():
     clear_claim = evidence([(1.0, (0.0, 0.0, 0.0, 0.0), 4.0)])
     check("alpha-0 sample with a positive (malformed) depth is clear, not surface or primary evidence",
           clear_claim[4] == math.inf and not clear_claim[3])
+    # 9. Pending::lod_bias / motion frame lod: log2(source / output), never positive.
+    def lod_bias(source_w, output_w, mutate=False):
+        b = math.log2(output_w / source_w) if mutate else math.log2(source_w / output_w)
+        return min(b, 0.0) if math.isfinite(b) else 0.0
+    check("internal bias at 8/16 is -1 and at 4/16 is -2; full scale 0",
+          lod_bias(1280, 2560) == -1.0 and lod_bias(640, 2560) == -2.0 and lod_bias(2560, 2560) == 0.0)
+    check("mutation: the R3 prose sign log2(output/source) is clamped to 0, losing the correction (detected)",
+          lod_bias(1280, 2560, mutate=True) == 0.0 != lod_bias(1280, 2560))
+    # 10. jitter::drs_guard: bounds guard(rect) for every admitted n in 4..=16, constant across DRS.
+    for out in (2560.0, 1919.0):
+        g = 1 / (out * 4 / 16)
+        check(f"DRS guard {out}: covers every admitted scale and is scale-independent",
+              all(1 / (out * n / 16) <= g for n in range(4, 17)))
+    check("mutation: the internal guard changes between DRS steps 8/16 and 9/16 (detected)",
+          1 / (2560 * 8 / 16) != 1 / (2560 * 9 / 16))
     result = {"scope": "transcription of resolve.wgsl and resolve_owner.wgsl rules; not a render or gate",
               "checks": CHECKS, "all_checks_pass": all(c["ok"] for c in CHECKS)}
     if args.out:

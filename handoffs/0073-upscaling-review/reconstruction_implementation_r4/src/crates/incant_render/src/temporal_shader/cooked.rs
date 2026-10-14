@@ -12,7 +12,7 @@ mod motion {
     include!(concat!(env!("OUT_DIR"), "/temporal-motion/manifest.rs"));
     pub(super) const BUNDLE: Bundle = Bundle {
         contract: MANIFEST_CONTRACT,
-        expected: "incant-temporal-motion-v1;naga=29.0.4;wgpu=29.0.4;frame144-vf,material64-f,5textures-samplers;msl=2.4,pulls15-14-13-12,strides48-48-112-80,lengths1,frame0,material1;hlsl=6.0,b0-b1,sampler-t5,special-b2;spv=1.0,no-y-flip;bounds=restrict;loops=bounded",
+        expected: "incant-temporal-motion-v2;naga=29.0.4;wgpu=29.0.4;frame160-vf,material64-f,5textures-samplers;msl=2.4,pulls15-14-13-12,strides48-48-112-80,lengths1,frame0,material1;hlsl=6.0,b0-b1,sampler-t5,special-b2;spv=1.0,no-y-flip;bounds=restrict;loops=bounded",
         source: SOURCE_HASH,
         producer: PRODUCER_HASH,
         artifacts: &ARTIFACTS,
@@ -26,7 +26,7 @@ mod motion_owner {
     ));
     pub(super) const BUNDLE: Bundle = Bundle {
         contract: MANIFEST_CONTRACT,
-        expected: "incant-temporal-motion-owner-v1;naga=29.0.4;wgpu=29.0.4;frame144-vf,material64-f,5textures-samplers;mrt=rgba32f-r32u;owner=uint-loc12-offset68-flat3;msl=2.4,pulls15-14-13-12,strides48-48-112-80,lengths1,frame0,material1;hlsl=6.0,b0-b1,sampler-t5,special-b2;spv=1.0,no-y-flip;bounds=restrict;loops=bounded",
+        expected: "incant-temporal-motion-owner-v2;naga=29.0.4;wgpu=29.0.4;frame160-vf,material64-f,5textures-samplers;mrt=rgba32f-r32u;owner=uint-loc12-offset68-flat3;msl=2.4,pulls15-14-13-12,strides48-48-112-80,lengths1,frame0,material1;hlsl=6.0,b0-b1,sampler-t5,special-b2;spv=1.0,no-y-flip;bounds=restrict;loops=bounded",
         source: SOURCE_HASH,
         producer: PRODUCER_HASH,
         artifacts: &ARTIFACTS,
@@ -95,7 +95,7 @@ mod depth {
     include!(concat!(env!("OUT_DIR"), "/temporal-depth/manifest.rs"));
     pub(super) const BUNDLE: Bundle = Bundle {
         contract: MANIFEST_CONTRACT,
-        expected: "incant-temporal-depth-v1;naga=29.0.4;wgpu=29.0.4;frame144-v,material64-f,5textures-samplers;msl=2.4,pulls15-14-13-12,strides48-48-112-80,lengths1,frame0,material1;hlsl=6.0,b0-b1,sampler-t5,special-b2;spv=1.0,no-y-flip;bounds=restrict;loops=bounded",
+        expected: "incant-temporal-depth-v2;naga=29.0.4;wgpu=29.0.4;frame160-v,material64-f,5textures-samplers;msl=2.4,pulls15-14-13-12,strides48-48-112-80,lengths1,frame0,material1;hlsl=6.0,b0-b1,sampler-t5,special-b2;spv=1.0,no-y-flip;bounds=restrict;loops=bounded",
         source: SOURCE_HASH,
         producer: PRODUCER_HASH,
         artifacts: &ARTIFACTS,

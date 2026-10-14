@@ -36,6 +36,11 @@ def main():
         n = hashlib.sha256((new("upscaling/common.wgsl") + "\n" + new(rel)).encode()).hexdigest()
         rows[name] = {"old": o, "new": n, "changed": o != n, "pin": pins.get(name), "pin_matches_new": pins.get(name) == n}
         ok = ok and pins.get(name) == n
+    for name, rel in (("Depth", "motion/shader.wgsl"), ("MotionOwner", "motion/owner.wgsl")):
+        o = hashlib.sha256(old(rel).encode()).hexdigest(); n = hashlib.sha256(new(rel).encode()).hexdigest()
+        rows[name] = {"old": o, "new": n, "changed": o != n, "pin": pins.get(name), "pin_matches_new": pins.get(name) == n,
+                      "composition": "program alone (Motion and Depth share motion/shader.wgsl)"}
+        ok = ok and pins.get(name) == n
     out = {"base": BASE, "composition": "common.wgsl + \\n + program (cooker and include_str)",
            "programs": rows, "all_pins_match_packet_sources": ok,
            "scope": "source identity only; no cook, naga, build or GPU"}

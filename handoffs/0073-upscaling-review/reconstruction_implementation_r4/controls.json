@@ -263,6 +263,31 @@
    "check": "alpha-0 sample with a positive (malformed) depth is clear, not surface or primary evidence",
    "detail": null,
    "ok": true
+  },
+  {
+   "check": "internal bias at 8/16 is -1 and at 4/16 is -2; full scale 0",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "mutation: the R3 prose sign log2(output/source) is clamped to 0, losing the correction (detected)",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "DRS guard 2560.0: covers every admitted scale and is scale-independent",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "DRS guard 1919.0: covers every admitted scale and is scale-independent",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "mutation: the internal guard changes between DRS steps 8/16 and 9/16 (detected)",
+   "detail": null,
+   "ok": true
   }
  ],
  "scope": "transcription of resolve.wgsl and resolve_owner.wgsl rules; not a render or gate"

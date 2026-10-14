@@ -1,14 +1,19 @@
 # 0073 reconstruction implementation, r4: status and rationale
 
-**Status: PARTIAL candidate, compile-unverified, not accepted.** This turn completed the evidence estimator for both programs (UP and OWN), its host, transaction and validity rules, and the shader-cooker ABI and source pins. All corrections from the R4 packet and both supervised interrupts are applied (mass order, then continuation-002).
+**Status: PARTIAL candidate, compile-unverified, not accepted.** The code completed in source covers:
+- the evidence estimator for UP and OWN (all R4 corrections, the mass order and continuation-002), with its host, transaction and validity rules and the cooker ABI and pins;
+- the internal texture LOD/MASK bias (§1b);
+- the DRS-stable shadow guard (§1c).
 
-Not implemented: internal texture LOD/MASK agreement, the DRS shadow treatment, the oracle tests and the numeric expectations in the device tests. §6 lists each with its exact source path.
+**Remaining executable test gaps (§6):**
+- the kernel oracle still describes the fixed jitter lattice;
+- the GPU device-test numeric expectations are stale.
 
 No Cargo, naga, cook, GPU, render or image was run. No visual acceptance is implied.
 
 - **Model:** Claude Opus 5.5 (`claude-opus-5-5`), thinking effort max. Per the packet, root verified both through ACP before prompting. Auto-memory is off; no memory was read or written.
 - **Base:** exact production `76be9608e99bf089fcb1e0908827330f70c28ac1`. The source copies continue the immutable R3 `e3bc4cd2` copies.
-- **Patch:** `reconstruction_r4.patch`, 21 files, sha256 `ce666f0c03686fd44b7fd3c24e0579112256060c63c70145a63b814bf041529e`. It passes the Python re-apply and `git apply --cached --check` against 76be (`patch_check.json`).
+- **Patch:** `reconstruction_r4.patch`, 28 files, sha256 `c9a7f48d76ec72118721d45631833d1cb55c546d1322b76c6499fd88c606d35a`. It passes the Python re-apply and `git apply --cached --check` against 76be (`patch_check.json`).
 - **Unchanged:** every old packet, the briefs, the top-level `result.md` and the three owner-attachment files.
 
 ## 1. Corrections applied
@@ -40,6 +45,48 @@ No Cargo, naga, cook, GPU, render or image was run. No visual acceptance is impl
 6. **Alpha-0 claims:**
    - A sample counts as surface, anchor or primary evidence only when `a > 0` and depth > 0.
    - An alpha-0 sample with a positive (malformed) depth is clear. It is zero colour at full mass, with no owner and no age reset.
+
+## 1b. Internal texture LOD and MASK agreement (implemented, compile-unverified)
+
+**Bias:** `Pending::lod_bias()` returns `log2(source_rect.w / output_rect.w)`, clamped to ≤ 0 and set to 0 if nonfinite or without a portable plan. It is −1 at 8/16 and −2 at 4/16.
+
+**Material draw:**
+- `model_draw.rs` Frame grows from 96 to 112 B, with `lod` at offset 96 (asserts updated).
+- `prepare_models(…, lod_bias)` is called from `lib.rs` with `upscaling.map_or(0., Pending::lod_bias)`.
+- The opaque/MASK frame carries the bias. The jittered-TAA transparent camera and `prepare_transparent_output` (output-grid BLEND) carry 0.
+- `model_material.wgsl` uses `textureSampleBias(…, frame.lod.x)` for base, metallic-roughness, normal, occlusion and emissive.
+- The cooker field contract in `geometry/material.rs` is `112` with `("lod", 96, 1)`. The geometry source identity is digested at cook time (not hand-pinned).
+
+**Motion, depth and MotionOwner:**
+- The Frame grows from 144 to 160 B, with `lod` at 144 (`motion/retained.rs` asserts and `motion/system.rs` `min_binding_size`).
+- The internal frame uses the same bias, computed from `plan.rect / upscale_rect`. The overlay frame and the output frame (output depth re-raster, sprites, text) use 0.
+- `mask()` uses `textureSampleBias` in `motion/shader.wgsl` and `motion/owner.wgsl`.
+
+**Cooker and host contracts:**
+- The temporal contract has span 160, offsets `[0, 64, 128, 144]` and names `+lod`.
+- The contract strings `motion-v2`, `depth-v2` and `motion-owner-v2` use `frame160`, in both `mod.rs` and `cooked.rs`.
+- `cooked/host.rs` checks `frame_entry` against 160.
+- The Motion/Depth and MotionOwner pins equal the new sources (`inventory.json`).
+
+**Behaviour:** shape, cull, deformation and the alpha cutoff are unchanged. Only the mip selection moves.
+
+**Unchanged:** the default and fixed-TAA paths keep bias 0.
+
+**Limit:** a negative bias raises per-frame texture aliasing. Only accumulation can resolve it, so moving or disoccluded surfaces that fall back to current-only show more shimmer. This must be measured.
+
+## 1c. DRS-stable shadow guard (implemented, compile-unverified)
+
+**Guard:** `temporal/jitter.rs` adds `drs_guard(output) = guard(output · 4/16)`, using `MIN_SIXTEENTHS = 4`, the lowest scale `ResolutionScale::new` admits.
+- Internal rects are exactly `output·n/16`, so it bounds `guard(rect)` for every admitted n in 4..=16.
+- It is constant across DRS steps, so the cascade fit and its texel quantization no longer change with the scale.
+
+**Selection:** `retained.rs` uses `drs_guard` when the portable plan has an output rect (`Pending::output_rect`), and the exact internal guard otherwise. `output_mapping` was rejected because it is a UV mapping, not a pixel rect.
+
+**Unchanged:** camera, aspect and light selection.
+
+**Cost:** the fit expands by 4/output_w, for example 0.16 % at 2560. This is a measured bound, not a claim that clamping proves invariance.
+
+**Scope:** other DRS shading changes stay bounded only by the clamp. That includes internal-resolution light-grid clustering.
 
 ## 2. Estimator (both programs)
 
@@ -116,7 +163,10 @@ The full hashes are in `inventory.json`. `common.wgsl` is unchanged. These pins 
 - It gives 8 distinct offsets per axis with zero mean. That is axis stratification only: a 0.05-px 45° line can miss all 8 samples (control 7).
 - The fixed TAA `SAMPLES` and the default path are unchanged.
 
-## 4. Controls (`controls.py` → `controls.json`, 29/29 pass)
+## 4. Controls (`controls.py` → `controls.json`, 34/34 pass)
+
+- **LOD sign:** the bias is −1 at 8/16 and −2 at 4/16. The R3 prose-sign mutation is detected.
+- **DRS guard:** `drs_guard` covers n in 4..=16. The mutation (the internal guard changing between DRS steps) is detected.
 
 These are scalar transcriptions of the shader rules, each with a negative (mutation) control. Each mutation below is detected:
 
@@ -140,24 +190,8 @@ These are scalar transcriptions of the shader rules, each with a negative (mutat
 
 ## 6. Remaining gaps: exact source paths, not implemented
 
-1. **Internal texture LOD/MASK agreement:**
-   - **Bias:** `bias = log2(source/output)`, which is negative at reduced scale; 0 for output-grid BLEND, sprites, text, the depth re-raster and fixed TAA.
-   - **Material program:**
-     - `model_draw.rs` Frame grows from 96 to 112 B (`lod: vec4f`) and its size asserts change;
-     - `model_material.wgsl` uses `textureSampleBias` on its five samples (base, metallic-roughness, normal, occlusion, emissive);
-     - `lib.rs` `prepare_models` (its only caller) passes the bias from the upscale plan, and `prepare_transparent_output` passes 0;
-     - in the material cooker contract, `incant_shader_cook/src/geometry/material.rs` adds the field `("lod", 96, 1)` with size 112, and the geometry source pin changes;
-     - the shadow host validator must be re-checked.
-   - **Motion/depth and MotionOwner:**
-     - the Frame grows from 144 to 160 B with `lod` (`motion/system.rs` min size; `motion/retained.rs` Frame);
-     - `mask()` uses `textureSampleBias` in `motion/shader.wgsl` and `motion/owner.wgsl`;
-     - the overlay and output frames pass bias 0;
-     - the temporal contract's motion uniform names gain `lod`, and the Motion/Depth/MotionOwner pins change.
-   - **Until then:** sub-internal-texel texture detail stays limited by the internal sampling rate. No texture improvement is claimed.
-2. **DRS shadow treatment:**
-   - **Not implemented.** Today the UP and moving OWN branches clamp to the current 3×3 box on DRS frames. That clamp is a biased bound, not a shadow proof.
-   - OWN static persistence never runs on DRS frames, because the camera is not static.
-   - **Required:** either explicit history invalidation when the shadow filter footprint depends on the internal extent (a host flag on DRS-change frames, at the cost of the DRS wipe), or a proven source-independent bound for the admitted DRS range.
+1. **LOD/MASK and DRS guard:** implemented (§1b, §1c), but not compiled, cooked or rendered.
+2. **Other DRS shading:** apart from the shadow fit, DRS shading changes are bounded only by the clamp.
 3. **Oracle tests:** update `upscaling/kernel_oracle.rs`, `kernel_tests.rs` and `kernel_patterns.rs` to `UPSCALE_SAMPLES` with re-measured bounds. They still describe the fixed lattice.
 4. **Device tests:**
    - **Already updated** in `upscaling/device_tests.rs` and `owner_device_tests.rs`: binding layouts, the RG16F views and the extra attachment.
@@ -170,9 +204,9 @@ These are scalar transcriptions of the shader rules, each with a negative (mutat
 
 ```sh
 python3 -I -B handoffs/0073-upscaling-review/reconstruction_implementation_r4/controls.py \
-    --out handoffs/0073-upscaling-review/reconstruction_implementation_r4/controls.json          # checks=29 failed=0
+    --out handoffs/0073-upscaling-review/reconstruction_implementation_r4/controls.json          # checks=34 failed=0
 python3 -I -B handoffs/0073-upscaling-review/reconstruction_implementation_r4/patch_check.py \
-    --out handoffs/0073-upscaling-review/reconstruction_implementation_r4/patch_check.json       # 21 files, applies to 76be
+    --out handoffs/0073-upscaling-review/reconstruction_implementation_r4/patch_check.json       # 28 files, applies to 76be
 python3 -I -B handoffs/0073-upscaling-review/reconstruction_implementation_r4/inventory.py \
     --base /Users/andreyyurlov/.codex/worktrees/owner-quality-repair/incant \
     --out handoffs/0073-upscaling-review/reconstruction_implementation_r4/inventory.json         # all pins match

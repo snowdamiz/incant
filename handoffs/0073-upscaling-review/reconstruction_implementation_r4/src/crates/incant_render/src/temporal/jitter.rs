@@ -41,3 +41,13 @@ pub(crate) fn ndc(phase: u32, rect: [f32; 4]) -> [f32; 2] {
 pub(crate) fn guard(rect: [f32; 4]) -> [f32; 2] {
     [1. / rect[2], 1. / rect[3]]
 }
+/// Smallest admitted DRS scale, in sixteenths (`ResolutionScale::new` admits 4..=16).
+pub(crate) const MIN_SIXTEENTHS: f32 = 4.;
+/// DRS-stable guard for an upscaled frame: the guard of the smallest admitted
+/// internal rect (4/16 of the physical output rect). Internal rects are exactly
+/// output * n/16, so it bounds `guard(rect)` at every admitted scale, and it stays
+/// constant across DRS steps: the shadow cascade fit (and its texel quantization)
+/// then depends only on the camera and the output rect, not on the internal scale.
+pub(crate) fn drs_guard(output: [f32; 4]) -> [f32; 2] {
+    guard([0., 0., output[2] * MIN_SIXTEENTHS / 16., output[3] * MIN_SIXTEENTHS / 16.])
+}

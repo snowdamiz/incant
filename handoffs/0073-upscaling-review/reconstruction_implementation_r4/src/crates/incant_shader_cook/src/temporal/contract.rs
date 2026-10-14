@@ -119,14 +119,14 @@ fn uniform(
         return Err(CookError::Contract("temporal uniform type"));
     };
     require(
-        members.len() == names.len() && *span == if motion { 144 } else { names.len() as u32 * 16 },
+        members.len() == names.len() && *span == if motion { 160 } else { names.len() as u32 * 16 },
         "temporal uniform span",
     )?;
     for (i, (member, name)) in members.iter().zip(names).enumerate() {
         let matrix = motion && i < 2;
         require(
             member.name.as_deref() == Some(*name)
-                && member.offset == if motion { i as u32 * 64 } else { i as u32 * 16 },
+                && member.offset == if motion { [0, 64, 128, 144][i] } else { i as u32 * 16 },
             "temporal uniform member",
         )?;
         require(
@@ -336,7 +336,7 @@ pub(super) fn validate(kind: Kind, m: &naga::Module, info: &naga::valid::ModuleI
             } else {
                 match kind {
                     Kind::Motion | Kind::Depth | Kind::MotionOwner => {
-                        &["current", "previous", "rect"]
+                        &["current", "previous", "rect", "lod"]
                     }
                     Kind::Resolve | Kind::Copy => &["rect", "depth", "options", "reactive"],
                     Kind::Upscale

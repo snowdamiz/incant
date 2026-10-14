@@ -600,7 +600,14 @@ impl RetainedScene {
             .transpose()?;
         if let Some(offset) = motion_pending.as_ref().and_then(|p| p.jitter_offset()) {
             self.staging.camera.jitter = crate::temporal::jitter::ndc_offset(offset, plan.rect);
-            self.staging.camera.jitter_guard = crate::temporal::jitter::guard(plan.rect);
+            // Upscaled frames use the DRS-stable guard so a scale change never refits
+            // shadow cascades; unscaled frames keep the exact internal guard.
+            // (`output_mapping` is not a pixel rect, so the plan's output rect is used.)
+            self.staging.camera.jitter_guard =
+                match upscale_pending.as_ref().and_then(|p| p.output_rect()) {
+                    Some(output) => crate::temporal::jitter::drs_guard(output),
+                    None => crate::temporal::jitter::guard(plan.rect),
+                };
         }
         let commands = renderer.draw_scene_scaled(
             &self.staging,

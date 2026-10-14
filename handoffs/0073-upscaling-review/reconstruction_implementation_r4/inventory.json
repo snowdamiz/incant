@@ -10,6 +10,14 @@
    "pin": "81cfe7c59c7255d33556bdd42167cfdaf5cb1f3eccf224b43d539bba75a59b37",
    "pin_matches_new": true
   },
+  "Depth": {
+   "changed": true,
+   "composition": "program alone (Motion and Depth share motion/shader.wgsl)",
+   "new": "e64b4a1cc0e393c752eddeba8af792b59db9cac3ce2991f9ffc7f17e1e2164d0",
+   "old": "1ebe19d03890654ad6d232881f97b6fd1d4a0ac3c9bdb29611d1b721a830477b",
+   "pin": "e64b4a1cc0e393c752eddeba8af792b59db9cac3ce2991f9ffc7f17e1e2164d0",
+   "pin_matches_new": true
+  },
   "MetalFxNormalize": {
    "changed": false,
    "new": "0923e7ba4dc5afde03dc2ac144e5c0ac556cd173768970d554de7cd0816075b5",
@@ -22,6 +30,14 @@
    "new": "8f08b6e0f442e4968916a6ca4aa098a1c70baf4ee33a9c91908a4926391681f1",
    "old": "8f08b6e0f442e4968916a6ca4aa098a1c70baf4ee33a9c91908a4926391681f1",
    "pin": "8f08b6e0f442e4968916a6ca4aa098a1c70baf4ee33a9c91908a4926391681f1",
+   "pin_matches_new": true
+  },
+  "MotionOwner": {
+   "changed": true,
+   "composition": "program alone (Motion and Depth share motion/shader.wgsl)",
+   "new": "a2659879cd59698633d28f5db7f8a4f086382f260ee6911de312a5b2d10c42db",
+   "old": "6609cdeb274ac84affde85c4c77e8e7441dffbb748e07c2d709cb3aa8d606d00",
+   "pin": "a2659879cd59698633d28f5db7f8a4f086382f260ee6911de312a5b2d10c42db",
    "pin_matches_new": true
   },
   "Upscale": {
