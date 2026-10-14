@@ -100,9 +100,12 @@ jobs:
         run: cargo run -p incant_game_player --example macos_text_retirement --features native-window --profile ci --locked -j2
       - run: cargo test --workspace --profile ci --locked --features incant_audio_runtime/scene --timings
         if: (needs.classify.result != 'success' || needs.classify.outputs.scope != 'docs')
+      - name: Compile optional MetalFX and verify its CPU contracts
+        if: (needs.classify.result != 'success' || needs.classify.outputs.scope != 'docs')
+        run: cargo test -p incant_render -p incant_render_gpu_host --lib --features incant_render_gpu_host/native-metalfx --profile ci --locked -j2
       # Each GPU test owns a native device; serialize device lifetimes to avoid
       # hosted driver crashes when many renderer contexts initialize together.
-      # Keep the same workspace feature graph as the preceding test run; scoped
+      # Keep the same feature graph as the workspace test run above; scoped
       # package invocations otherwise rebuild the renderer dependencies.
       - name: Verify geometry, editor recovery and simulated frame capture
         if: (needs.classify.result != 'success' || needs.classify.outputs.scope != 'docs')
