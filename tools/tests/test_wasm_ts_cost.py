@@ -96,12 +96,14 @@ class Workload(unittest.TestCase):
         with self.assertRaises(ValueError): measure.ratio({'lower': 20, 'upper': 10}, {'lower': 1, 'upper': 2})
 
     def test_functional_requires_observed_rows_not_only_pass_boolean(self):
-        report = {'tick': common.TICKS, 'frames': 2880000, 'logs': [], 'sources': [], 'flipbooks': [],
+        report = {'tick': common.TICKS, 'frames': 2880000, 'logs': {'entries': [], 'dropped': 0}, 'sources': [], 'flipbooks': [],
                   'observations': {'tick_rate': 60, 'passed': True,
                     'entities': {common.owner(0): {'translation': common.position(0), 'parent': None, 'rotation': [0, 0, 0, 1],
                         'scale': [1, 1, 1], 'velocity': None, 'world_transform': [
                             [1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], common.position(0) + [1]]}}}}
         self.assertEqual(measure.functional(report, [0])['tick'], 3600)
+        bad_logs = copy.deepcopy(report); bad_logs['logs']['dropped'] = 1
+        with self.assertRaises(ValueError): measure.functional(bad_logs, [0])
         report['observations']['entities'][common.owner(0)]['translation'][0] += .1
         with self.assertRaises(ValueError): measure.functional(report, [0])
         report['observations']['entities'] = {}

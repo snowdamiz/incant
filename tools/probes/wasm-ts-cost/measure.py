@@ -58,7 +58,7 @@ def package_equivalence(left, right):
 def functional(report, indices):
     require(report['tick'] == TICKS and report['observations']['tick_rate'] == RATE
             and report['observations']['passed'] is True, 'Functional player observation failed')
-    require(report['frames'] == 48000 * TICKS // RATE and report['logs'] == []
+    require(report['frames'] == 48000 * TICKS // RATE and report['logs'] == {'entries': [], 'dropped': 0}
             and report['sources'] == [] and report['flipbooks'] == [], 'Unexpected audio/log/runtime output')
     entities = report['observations']['entities']
     require(set(entities) == {owner(n) for n in indices}, 'Observed membership differs')

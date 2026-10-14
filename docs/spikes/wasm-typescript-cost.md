@@ -6,7 +6,8 @@ Mac. Source and Python controls are implemented. Public authoring, guest compile
 shipping export, actual player execution, and measurement remain pending the
 coordinated CPU/timing lease. Nothing here establishes a speedup or a phase gate.
 
-The private producer starts from actual main259 `64d536d5`. It changes no engine
+The source001 producer started from main259 `64d536d5`; source002 composes
+actual main260 `64abee88` with the accepted engine caches. It changes no engine
 runtime, VM limits, profiler thresholds, gameplay content or backend decision.
 The other script-cache optimizations remain separately preserved and reviewed.
 
@@ -37,7 +38,10 @@ compiler, shipping codegen, deterministic physics and summary profiler. The
 normal exporter freshly cooks each project and removes private export build
 storage. The helper refuses unequal cooked `world.scene`, input-action or runtime
 package-data hashes. It also checks the Wasm input hash and pinned wasm2c 1.0.42
-identity. Each complete normal dependency graph is retained. The expected host
+identity. The cook manifest also always contains `script.source_sha256`: for a
+Wasm-only project this identifies the fixed empty QuickJS artifact, **not** the
+Wasm guest. Guest identity is checked against `program.input_sha256`, while the
+export retains its prepared/registry/translator identities. Each complete normal dependency graph is retained. The expected host
 feature delta is `static-module` on `incant_script` and `incant_game_player`; it
 necessarily brings the static Wasm runtime/C host. There is no claim the full
 backend dependency graphs are identical.
@@ -94,7 +98,8 @@ python3 -m unittest discover -s tools/tests -p test_mac_performance.py -v
 ```
 
 Strict TypeScript checking is configured in `tools/probes/wasm-ts-cost/tsconfig.json`;
-its compiler execution is pending the coordinated slot alongside the guest check.
+its pinned Node22.23.3 compiler check is reported separately from the still-pending
+Rust guest and actual shipping execution.
 
 The RPC helper retains raw requests, responses, partial malformed/EOF stdout and
 stderr. Constructor/operation failures close and reap the owned process group.
@@ -106,3 +111,8 @@ Limits: no startup result, GPU/FPS, Core Sample, 10,000-entity, mobile/device or
 arbitrary workload result. No physical output, visual judgment or project-selected
 executable is involved. The source-only and Python-control results do not replace
 actual public tool, guest compiler, shipping or timing evidence.
+
+Source001 remains preserved. A source002 oracle correction uses the actual
+NativeLogs wire object (`entries: []`, `dropped: 0`) instead of an array; the
+actual-shape regression failed before the correction. This was a helper mismatch
+found by source inspection, not a failed native workload or engine result.
