@@ -52,6 +52,9 @@ pub struct NumericColumns<'a> {
     owner: &'a mut NativeWorld,
     // One flag per table, not per entity. Tables cannot change during this loan.
     touched: Vec<bool>,
+    // A successful validation fills the hierarchy scratch with these exact
+    // numeric values. Any later mutable visit invalidates it before user code.
+    validated: bool,
 }
 
 impl NativeWorld {
@@ -129,6 +132,7 @@ impl NativeWorld {
         let mut columns = NumericColumns {
             owner: self,
             touched,
+            validated: false,
         };
         operation(&mut columns)
     }
@@ -141,7 +145,10 @@ impl NumericColumns<'_> {
     /// must before another native slice visit. On error, immediate writes remain
     /// available for the adapter to restore through fresh visits in this scope.
     pub fn validate(&mut self) -> Result<(), crate::RuntimeError> {
-        self.owner.prepare_globals(None).map_err(Into::into)
+        self.validated = false;
+        self.owner.prepare_numeric_globals()?;
+        self.validated = true;
+        Ok(())
     }
 
     /// Visit each nonempty Transform table once, including tables without
@@ -165,6 +172,7 @@ impl NumericColumns<'_> {
         &mut self,
         mut visit: impl FnMut(NumericChunk<'_>) -> Result<(), E>,
     ) -> Result<(), E> {
+        self.validated = false;
         let world = &mut self.owner.world;
         let (Some(identity_id), Some(local_id)) = (
             world.component_id::<Identity>(),
@@ -243,10 +251,17 @@ impl Drop for NumericColumns<'_> {
                 }
             }
         }
-        self.owner.refresh_globals();
+        if self.validated {
+            self.owner.publish_numeric_globals();
+        } else {
+            self.owner.refresh_globals();
+        }
         self.owner.world.increment_change_tick();
     }
 }
 
 #[cfg(test)]
 mod tests;
+
+#[cfg(test)]
+mod validation_tests;
