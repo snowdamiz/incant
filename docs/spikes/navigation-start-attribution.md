@@ -3,7 +3,9 @@
 This is a distinct, bounded follow-up to the unadopted navigation graph cache.
 It starts from main298. The implementation is diagnostic only; it does not cache
 lookups, change query order or relax any runtime or navigation work limit.
-Native qualification and full-Core measurements are still pending.
+Native qualification and the full-Core diagnostic are complete. The measured
+repeated scans are too small to justify pursuing this hypothesis for the 2 ms
+target; no navigation optimization is adopted.
 
 Each accepted nonfinal shortcut segment ends at an original path point. The next
 iteration repeats the nearest-surface lookup for exactly that point, with the
@@ -32,7 +34,7 @@ actual target compiler features, preserves real compatibility fingerprints and
 still requires exact authored inputs, bytecode, assets, logical output and PCM.
 The normal exporter and shipping measurement admission are unchanged.
 
-One prospective shipping diagnostic will retain all 2,156 frames, both script
+One fixed shipping diagnostic retains all 2,156 frames, both script
 sources and the ten-thousand-entity workload. Its only feasibility calculation
 subtracts each frame's measured repeated-start time from that same whole tick,
 then ranks the resulting rows. This hypothetical zero-cost p95 is not a speedup
@@ -42,11 +44,72 @@ only motivates separately reviewed correctness work and matched shipping runs.
 
 Sixteen data-only adapter controls pass, including original schema admission,
 exact feature additions, actual compiler recipients, same-frame subtraction,
-containment, missing observations and the stop condition. Rust observer controls,
-an actual ScriptHost detour/miss control, feature-off checks and strict lint are
-authored but not yet run. No performance improvement or phase gate is claimed.
+containment, missing observations and the stop condition. Seventy-one Rust
+controls pass across the observer, navigation, actual ScriptHost detour/miss and
+feature-off routes. Strict Clippy passes with and without the feature. These CPU
+tests use the ordinary deterministic/compiler graph; the separate shipping
+build below qualifies the fast4 runtime graph. No improvement or gate is claimed.
 
 Independent review caught an initial analyzer bound that missed the final start
 lookup before the sixty-fifth shortcut attempt refuses. The analyzer now retains
 that legitimate observation; a positive boundary and negative successor control
 cover it. The navigation algorithm and its attempt cap are unchanged.
+
+## Actual private shipping diagnostic
+
+Producing source is `73c1d493acb619b30c3b90e54776eccd6e2f6d90`, based on
+main298. Rust 1.99, arm64, fast4 physics, opt3/fat LTO/abort/one codegen unit
+were checked against actual compiler records. Only the five intended recipients
+gain diagnostic features; no runtime compiler, checkpoints or SIMD8 enters the
+player. All 74 original authored inputs and cooked data match the retained
+main278 baseline. Bytecode, hardening and source maps remain identical; the
+source-derived build ID changes honestly. The copied player's SHA256 is
+`e92fa3f4909527f40412116d4abbf6b7e804389d4dad7e88981a8e240c3875fb`.
+
+The fresh build completed in 357.68 seconds with at least 106,113,032,192 bytes
+of sampled free storage. An earlier supervisor design was rejected before
+execution because cancellation would not cover nested process groups. Its
+replacement supervises each managed child in process; all 13 child records show
+exit zero and reaping. No player ran during the build.
+
+One unprofiled functional child and one maintained diagnostic child then each
+executed the unchanged 2,156-tick Core10k recording. Both match the complete
+historical logical report and 13,798,400-byte PCM exactly. Both terminate and
+are reaped; there are no retries, warmup exclusions or discarded frames. The
+diagnostic preserves both callback sources, complete schema2 coverage and the
+normal histogram correspondence.
+
+Machine: Mac17,9, Apple M5 Pro, 15 physical CPUs, 51,539,607,552 bytes RAM,
+macOS 27.0.1 build 26A434, arm64, AC power. Low-power mode is unavailable, not
+assumed false. Coordinated native lanes were quiet during the two children;
+background system load is retained in their receipts.
+
+| Nested observation | Calls | Total time over all 2,156 frames |
+| --- | ---: | ---: |
+| Path queries | 414 | 197.088280 ms |
+| Initial shortcut starts | 338 | 6.016213 ms |
+| Repeated shortcut starts | 1,026 | 14.370827 ms |
+
+These durations overlap their enclosing callback and ScriptTick. They must not
+be added to those totals. No observed query or start failed.
+
+The instrumented whole-script p95 bucket is **2.580001–2.590000 ms**. Subtracting
+each frame's repeated-start duration from that same frame, then ranking all
+2,156 resulting values, gives **2.544041 ms**. Thus even the hypothetical
+zero-cost repeated scan remains over 2 ms. This is an attribution result with
+observer cost still present, not a matched optimization comparison or a new
+shipping performance result. The specific scan-only hypothesis is closed.
+The overall budget remains open to periodic, distinct investigations while
+other work continues.
+
+The [manifest](evidence/navigation-start-attribution/manifest.json),
+[retained records](evidence/navigation-start-attribution/records.json.gz), and
+[read-only replay](evidence/navigation-start-attribution/verify.py) bind the
+actual source, commands, compiler receipts, functional output and raw frames.
+Replay performs no build, gameplay or GPU work:
+
+```sh
+python3 -B docs/spikes/evidence/navigation-start-attribution/verify.py
+# Also check retained local originals, player, cooked data and PCM:
+python3 -B docs/spikes/evidence/navigation-start-attribution/verify.py --originals --binaries
+```
