@@ -1,0 +1,76 @@
+    Checking sha2 v0.10.9
+    Checking incant_types v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_types)
+    Checking nalgebra v0.35.0
+    Checking symphonia-core v0.6.1
+    Checking incant_2d v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_2d)
+    Checking mio v1.2.4
+    Checking socket2 v0.6.5
+    Checking symphonia-metadata v0.6.1
+    Checking tokio v1.53.2
+    Checking glamx v0.3.1
+    Checking incant_nav v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_nav)
+    Checking signature v2.2.0
+    Checking ff v0.13.1
+    Checking incant_localization v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_localization)
+    Checking group v0.13.0
+    Checking crypto-bigint v0.5.5
+    Checking icu_normalizer v2.3.0
+    Checking icu_properties v2.3.0
+    Checking elliptic-curve v0.13.8
+    Checking symphonia-common v0.6.1
+    Checking incant_input v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_input)
+    Checking parry3d v0.31.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/third_party/parry3d)
+    Checking idna_adapter v1.2.2
+    Checking parry2d v0.31.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/third_party/parry2d)
+    Checking incant_text v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_text)
+    Checking bevy_utils v0.19.1
+    Checking rapier2d v0.36.0 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/third_party/rapier2d)
+    Checking symphonia-format-riff v0.6.1
+    Checking meshopt v0.6.2
+    Checking ecdsa v0.16.9
+    Checking hyper v1.12.0
+    Checking incant_doc v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_doc)
+    Checking rapier3d v0.36.0 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/third_party/rapier3d)
+    Checking idna v1.1.0
+    Checking core-foundation v0.10.1
+    Checking security-framework-sys v2.17.0
+    Checking symphonia-codec-vorbis v0.6.1
+    Checking symphonia-format-ogg v0.6.1
+    Checking primeorder v0.13.6
+    Checking symphonia-codec-pcm v0.6.1
+    Checking tower v0.5.3
+    Checking bevy_ecs v0.19.1
+    Checking incant_physics_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_physics_runtime)
+    Checking hyper-util v0.1.21
+    Checking incant_assets_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_assets_runtime)
+    Checking symphonia v0.6.0
+    Checking security-framework v3.7.0
+    Checking gltf v1.4.1
+    Checking url v2.5.8
+    Checking incant_physics_2d_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_physics_2d_runtime)
+    Checking num-bigint-dig v0.8.6
+    Checking tokio-rustls v0.26.6
+    Checking incant_source v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_source)
+    Checking ed25519 v2.2.3
+    Checking dirs-sys v0.5.0
+    Checking serde_urlencoded v0.7.1
+    Checking incant_wasm_cook v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_wasm_cook)
+    Checking rsa v0.9.10
+    Checking ed25519-dalek v2.2.0
+    Checking incant_cmd v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_cmd)
+    Checking incant_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_runtime)
+    Checking hyper-rustls v0.27.10
+    Checking incant_assets v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_assets)
+    Checking tower-http v0.6.11
+    Checking rustls-platform-verifier v0.7.1
+    Checking p384 v0.13.1
+    Checking p256 v0.13.2
+    Checking reqwest v0.13.5
+    Checking jsonwebtoken v10.4.0
+    Checking incant_import v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_import)
+    Checking incant_observe v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_observe)
+    Checking dirs v6.0.0
+    Checking uuid v1.27.0
+    Checking open v5.4.4
+    Checking incant_agent v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_agent)
+    Finished `ci` profile [optimized] target(s) in 13.64s

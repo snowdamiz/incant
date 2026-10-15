@@ -1,0 +1,1061 @@
+{
+  "source": "8ddbd2899a0670a91ffd667698ffdb4887eab4d1",
+  "files": [
+    {
+      "path": "Cargo.lock",
+      "sha256": "fb318ee4416a22e2f998262c9b4f4e842d5caf6b2360dba15a0f480fe53ded03"
+    },
+    {
+      "path": "Cargo.toml",
+      "sha256": "163606d4b9886c5d0f9bb6a4b67fca4823523b4024f17a689dc9bab719c314a7"
+    },
+    {
+      "path": "crates/incant_render/Cargo.toml",
+      "sha256": "2f3894b5d59269fc163ee1d1cd575c9141084cefca888e7fe1970bae8bbb67f0"
+    },
+    {
+      "path": "crates/incant_render/build.rs",
+      "sha256": "f5941728810d93848651cbeb0695aa94b82b84b2b0bb4db404a1f63fc617e2ad"
+    },
+    {
+      "path": "crates/incant_render/examples/frame_benchmark.rs",
+      "sha256": "9267805d49484156da15bbcace614d600b1dade38a2f12a5a9b76cb0d1e7fdea"
+    },
+    {
+      "path": "crates/incant_render/examples/native_frames.rs",
+      "sha256": "c13992e190a05c46c85162340bc187c8e0b62f5b1608e639b74ccb84e8477f1a"
+    },
+    {
+      "path": "crates/incant_render/examples/native_frames/request.rs",
+      "sha256": "34b99db6eede76963dfff9133c94410730365c3e91cae0d69beab4be472e0118"
+    },
+    {
+      "path": "crates/incant_render/src/ambient_occlusion/ao.wgsl",
+      "sha256": "4aaa0cc0ed375555fb0069a974c79d7360337f3eebdebee43a87de58be94c6b6"
+    },
+    {
+      "path": "crates/incant_render/src/ambient_occlusion/device_tests.rs",
+      "sha256": "d3131532cdc6aceac3e8a4bc7cf806493e9fd46928f988b509a9d7cc55655cd6"
+    },
+    {
+      "path": "crates/incant_render/src/ambient_occlusion/draw.rs",
+      "sha256": "9bbcb185b562f9a49e80a16428db8d05214c9033cfa0c52a804e850e05ccf124"
+    },
+    {
+      "path": "crates/incant_render/src/ambient_occlusion/filter.wgsl",
+      "sha256": "6980525746bdc71e7bad3138786e29b40c4c03de00fa458c809a91bb29c84ed0"
+    },
+    {
+      "path": "crates/incant_render/src/ambient_occlusion/filter_device_tests.rs",
+      "sha256": "e31dd2936baf9db80fd520adf9f17f4d914324ba22531b9622e0ccf5098a0ada"
+    },
+    {
+      "path": "crates/incant_render/src/ambient_occlusion/math.rs",
+      "sha256": "f1503b625ad5555441fe39a9f324e0e9d3ae473626a84e7501ecfff47be9e584"
+    },
+    {
+      "path": "crates/incant_render/src/ambient_occlusion/mod.rs",
+      "sha256": "a5aeb658e3ee357d8ea0f01a217d4433cf0f2c6af3f5d7f4a88b78cb5cc661e6"
+    },
+    {
+      "path": "crates/incant_render/src/ambient_occlusion/pipelines.rs",
+      "sha256": "19d3c7bbaa3b612ac1a9cedcddafca52c0f951b0531ab4bbcd43cc29d7f50db5"
+    },
+    {
+      "path": "crates/incant_render/src/ambient_occlusion/prepass.wgsl",
+      "sha256": "f1b843db12c88666f5f47e38d99067386ea380b6e4fabfaab8852bb23aa24b22"
+    },
+    {
+      "path": "crates/incant_render/src/ambient_occlusion/quality_geometry.rs",
+      "sha256": "02ebb7b37af601239b31b376edae2e72fa81efd30cd464109d15e4215195df29"
+    },
+    {
+      "path": "crates/incant_render/src/ambient_occlusion/quality_metrics.rs",
+      "sha256": "88caaf9320cea79180f2747bcbb5b9eb96cba42a8bcb71940e99393b4a5b1d3c"
+    },
+    {
+      "path": "crates/incant_render/src/ambient_occlusion/quality_oracle.rs",
+      "sha256": "be5dc86c02027a1a530cb7df2df3be300b859a1a0b79c5f415d6e2490bf94f9b"
+    },
+    {
+      "path": "crates/incant_render/src/ambient_occlusion/quality_sphere.rs",
+      "sha256": "eb63b8e784a621fd0c43a07647191a7b50d74c969a6ffa56cd42274a08fd6b4c"
+    },
+    {
+      "path": "crates/incant_render/src/ambient_occlusion/quality_stripes.rs",
+      "sha256": "a9dd75a5480e14f1a3979d9db8e698f612ce3a96df1d671a7012c3936b2e70b4"
+    },
+    {
+      "path": "crates/incant_render/src/ambient_occlusion/quality_tests.rs",
+      "sha256": "0ae711accc64189bfdd40b4a54ff07f8fcd62d0f6cd11242a5d2224608aae2e7"
+    },
+    {
+      "path": "crates/incant_render/src/ambient_occlusion/raster.rs",
+      "sha256": "20434e09ad91f2b03b8384e026e0c1f2d02c1bbd26e418eec447c5f274f72abc"
+    },
+    {
+      "path": "crates/incant_render/src/ambient_occlusion/readback.rs",
+      "sha256": "ca5b0abccf6c63b1812d49ea3c6e91f609801346e0d4d85a0b9ef6fa68a0a3c3"
+    },
+    {
+      "path": "crates/incant_render/src/ambient_occlusion/targets.rs",
+      "sha256": "e56320eb4bb68b972d54239419ff572d6c02a31561a5a923518892547e1e42c2"
+    },
+    {
+      "path": "crates/incant_render/src/ambient_occlusion/tests.rs",
+      "sha256": "63b14628f0792591e9d3b138906b0efaad46f336d6fa36fbc660c6bc7e40aaf9"
+    },
+    {
+      "path": "crates/incant_render/src/animation_crossfade_tests.rs",
+      "sha256": "05677546247386972a58d432d53b89c2ccf02e0c3a805a6d2c6d380deb5468b4"
+    },
+    {
+      "path": "crates/incant_render/src/animation_grouped_tests.rs",
+      "sha256": "8191fe4d783ec6e8f50dc8bd4b5f3be24ec75a5318dcb7f2e5025be862c3e9fc"
+    },
+    {
+      "path": "crates/incant_render/src/animation_ik_tests.rs",
+      "sha256": "db0384fe2a18bfc996a3182a2ad11e8c2850639bc6c0568dc598f754fa7da8c2"
+    },
+    {
+      "path": "crates/incant_render/src/animation_tests.rs",
+      "sha256": "395d70f9e20bd7f0813c8346828e728a762ed08fa64cccad15700c064fd12872"
+    },
+    {
+      "path": "crates/incant_render/src/bloom/config.rs",
+      "sha256": "f5c4a9c3235ca5e92017c316de9a2d6ed2121ea88d31b1f2f9eab6e36020896a"
+    },
+    {
+      "path": "crates/incant_render/src/bloom/filter.wgsl",
+      "sha256": "b7072285a7127af2d20b72db50aa8cee5e414152aa20c3667a836cc55254dfc7"
+    },
+    {
+      "path": "crates/incant_render/src/bloom/mod.rs",
+      "sha256": "fa9ed4537f316180160beda9e598973ee096769e52480392cd7c4d3fefb5ba27"
+    },
+    {
+      "path": "crates/incant_render/src/bloom/output.wgsl",
+      "sha256": "d6fae2f7ff43524b9d6393e510d2d613a873a9aea9cebb0333a33583b5969e6a"
+    },
+    {
+      "path": "crates/incant_render/src/bloom/targets.rs",
+      "sha256": "cd3dd52cf1af771c07859c53f81db64b9bb2480ff96b57ac7b333735019bf86f"
+    },
+    {
+      "path": "crates/incant_render/src/bloom/tests.rs",
+      "sha256": "94f89e9420b6bcf3c44cde239b768fcc475f9a0ec0e6f01480521140024a2fa1"
+    },
+    {
+      "path": "crates/incant_render/src/bloom/tests/device.rs",
+      "sha256": "eb9de7403ce83dea945f37bdc671144989be698e538f7238f14335d2b4655724"
+    },
+    {
+      "path": "crates/incant_render/src/bloom/tests/output_space.rs",
+      "sha256": "5e0334b65280fdc717632e591c3784b9247411bacc98bc8aa78862948b02e1a2"
+    },
+    {
+      "path": "crates/incant_render/src/bloom/tests/reference.rs",
+      "sha256": "e98b8db260cf8161d36403be8bb0757513b79b24b0e0156041c6f0ff45513ac6"
+    },
+    {
+      "path": "crates/incant_render/src/camera.rs",
+      "sha256": "fa6783a5cad1d09d2112a2f257786b1c7fccd88752fa94b7bec178ed62c80188"
+    },
+    {
+      "path": "crates/incant_render/src/compilation.rs",
+      "sha256": "91d063f903a42c156afc69e0d95a2391e72e0e93fadd39ae379d38b808d5f8ce"
+    },
+    {
+      "path": "crates/incant_render/src/diagnostic_draw.rs",
+      "sha256": "264822656d8e0360151677d63d88237ddc0b51ad757f0cbbaeba70e85b8e0ba9"
+    },
+    {
+      "path": "crates/incant_render/src/environment/cube.rs",
+      "sha256": "5ed0c836e081673fbe334f957b19f47e8b0244d423b1cc8cd3de56e908a469ce"
+    },
+    {
+      "path": "crates/incant_render/src/environment/filter.rs",
+      "sha256": "9de46aa58c3edbad7d0e8cba61d4e2418c96c0d72c0fe6035056c2a3808ae591"
+    },
+    {
+      "path": "crates/incant_render/src/environment/mod.rs",
+      "sha256": "a2a950cd1af81e84fa2c0c616c54a876b9c53d8dd3eedd9f2091a246f21dd2e6"
+    },
+    {
+      "path": "crates/incant_render/src/environment/source.rs",
+      "sha256": "3c1e62da379399eeee7482201a8b13da353fcce4c4b3ff783721b7ce3a474ec0"
+    },
+    {
+      "path": "crates/incant_render/src/environment/tests.rs",
+      "sha256": "adb353ee9b0fb3c5a9bf0eae42517313d427c0a806b8385048ed8118bb68803d"
+    },
+    {
+      "path": "crates/incant_render/src/fixture.wgsl",
+      "sha256": "d6bf588021763f24e1052b929bf3168a9b4d93828473cddafbae0b0375c43136"
+    },
+    {
+      "path": "crates/incant_render/src/flipbook_tests.rs",
+      "sha256": "07bcda0a847148d1e6167b8e2c78d1c3f152a1483bfcfecb844e7f8407653041"
+    },
+    {
+      "path": "crates/incant_render/src/frame.rs",
+      "sha256": "bacc492a187fcc6b65ac110e40c9fb27ca5631e8bc5abcba0bc99a6446f0fec6"
+    },
+    {
+      "path": "crates/incant_render/src/geometry_shader.rs",
+      "sha256": "ff658bf24da9b38158dd6153eb54432da4467ef09648aa6c1ae448c662645587"
+    },
+    {
+      "path": "crates/incant_render/src/geometry_shader/cooked.rs",
+      "sha256": "256647b0a1741bacaadbdb07b74f3e70a5e718cf6bf07c27a826baa03e51a5e9"
+    },
+    {
+      "path": "crates/incant_render/src/graph.rs",
+      "sha256": "ede4daff4de8957956282d4cc0dd031b628db3c2a3acb9729c1cc291a2cb7770"
+    },
+    {
+      "path": "crates/incant_render/src/graph/native.rs",
+      "sha256": "53b2e5d47f059499d57ae3eff7f7d0b6ef7cdd0fbde20841b2595ad8b8a6aa88"
+    },
+    {
+      "path": "crates/incant_render/src/lib.rs",
+      "sha256": "d533f32a0b584a4c9e36d6349dac3b376238441bbcfba311e134e2ebe787afdb"
+    },
+    {
+      "path": "crates/incant_render/src/lighting/cooked.rs",
+      "sha256": "210004a5441bf8ee8b60ec6337d23cbf9fcead7d9341d2ee69073c6ebfa45d71"
+    },
+    {
+      "path": "crates/incant_render/src/lighting/grid.wgsl",
+      "sha256": "461606edf6d9cb4c89581ef30ccf3ae5570a1e1bc0142ffe4953e91dfc2c0439"
+    },
+    {
+      "path": "crates/incant_render/src/lighting/mod.rs",
+      "sha256": "9f83db6879449b32cc2741a5ca21207ddc652743e4013d6b0a94f111409806d6"
+    },
+    {
+      "path": "crates/incant_render/src/lighting/scene.rs",
+      "sha256": "93a9798faf1b44a67a5ed87bae826478f346d0eadeb48fbfc0f80c0c11da6a15"
+    },
+    {
+      "path": "crates/incant_render/src/lighting/shade.wgsl",
+      "sha256": "52757ae31c0e68c6480bec626ee81386b792fe06c803b0853f9c0a546667e2ad"
+    },
+    {
+      "path": "crates/incant_render/src/lighting/temporal_source.rs",
+      "sha256": "5245bd6a5f72ca39bbbad5fb5101358114cbd9f402344199114a7af598a1eb73"
+    },
+    {
+      "path": "crates/incant_render/src/material_pipeline.rs",
+      "sha256": "625dbb6e49a210401f6f2fe4795414e8bbde4219ba67acda26ef94d03fa16cd2"
+    },
+    {
+      "path": "crates/incant_render/src/material_shader.rs",
+      "sha256": "9da79e01c270b392a4b00a9637a48a9a018d6012269f45da520bbc50a8e5b4ed"
+    },
+    {
+      "path": "crates/incant_render/src/materials.rs",
+      "sha256": "774bdac11a757ef631f6fed8cc8c3e00e1f9fa4b765e5eeed3255e37ae9f5f34"
+    },
+    {
+      "path": "crates/incant_render/src/metalfx/alpha.wgsl",
+      "sha256": "6caac78689a9b0a756d0ff3d3b69d55c64cc4df7dfd4bc9c9229a9ac46fb1752"
+    },
+    {
+      "path": "crates/incant_render/src/metalfx/boundary_tests.rs",
+      "sha256": "4dc39fabd137113ee7d05c709be24ba131220362504ea8d533e5a9bfd9a66027"
+    },
+    {
+      "path": "crates/incant_render/src/metalfx/common.wgsl",
+      "sha256": "b491151d8c0c6f6dea3df77fac5054f2908c4dfb479d8977bc56d12ebf40091d"
+    },
+    {
+      "path": "crates/incant_render/src/metalfx/lifecycle.rs",
+      "sha256": "0885fc18468db9f02e1af74508b82b948679dcf78b4306056c53290078560046"
+    },
+    {
+      "path": "crates/incant_render/src/metalfx/mod.rs",
+      "sha256": "05ff060c06d62003bc91aa9fa23f172a60ad9fdba346ac512b1f8c87e512d2d3"
+    },
+    {
+      "path": "crates/incant_render/src/metalfx/native.rs",
+      "sha256": "825ffe55cee2a5fa553b830546f6670c644fa7c8b99dd30830706877a277b94b"
+    },
+    {
+      "path": "crates/incant_render/src/metalfx/normalize.wgsl",
+      "sha256": "245f531c16eb36234b02f689cda325c06446c7485f4cae9fa9d96e437935ba2b"
+    },
+    {
+      "path": "crates/incant_render/src/metalfx/owner.rs",
+      "sha256": "1a2ef4ee39268ecc8b252e4edde61a23b878d42cc91f3068bd462abfc5427f69"
+    },
+    {
+      "path": "crates/incant_render/src/metalfx/plan.rs",
+      "sha256": "366c602c55e9f667ffe78abde376ad2dab216e48908466782159bf1f52ba77ef"
+    },
+    {
+      "path": "crates/incant_render/src/metalfx/prepare.wgsl",
+      "sha256": "aba8a2d1c1d6e82c965ba9c9cde80df9d639c34c4ef78dbea356873b0decd25f"
+    },
+    {
+      "path": "crates/incant_render/src/metalfx/prewarm_tests.rs",
+      "sha256": "ad60bd7d02bb7396b158df4c47adff0e389f2254588ecdb15a6283aff4d7f2cb"
+    },
+    {
+      "path": "crates/incant_render/src/metalfx/render.rs",
+      "sha256": "44fa9cd16dd375f4f3fb0c1693a80f3d5b5823494068d6768747a266fbae4bd4"
+    },
+    {
+      "path": "crates/incant_render/src/metalfx/system.rs",
+      "sha256": "5d53297e21a3affdf99ca94c56d2f16ebb11d2e55ffa4b9ee5ecf1cf71c15ee1"
+    },
+    {
+      "path": "crates/incant_render/src/metalfx/targets.rs",
+      "sha256": "1e08debb881f0f33eaacaecd84e9a974d649ba4873a405132bd6737ba92197bc"
+    },
+    {
+      "path": "crates/incant_render/src/metalfx_image/capture.rs",
+      "sha256": "f52b8cc90f49d50f5863b2e313df3eb06957d094bc3669244b0a33028be1df4c"
+    },
+    {
+      "path": "crates/incant_render/src/metalfx_image/geometry.rs",
+      "sha256": "def0623e81a0a9f4a7549158cb08e8d260741236b77dfafea6fd9fef232e935f"
+    },
+    {
+      "path": "crates/incant_render/src/metalfx_image/mod.rs",
+      "sha256": "defc0cbc64c35ea7bdd306fc6c71317d79c6527c2c5e9a49c977170c450b6530"
+    },
+    {
+      "path": "crates/incant_render/src/metalfx_image/scene.rs",
+      "sha256": "a394675567c9c0feff989842c32ea87c4daf291ea0b1283cd56e343b6a192eb7"
+    },
+    {
+      "path": "crates/incant_render/src/metalfx_retained_tests.rs",
+      "sha256": "f876ad462d13c09bf3b62b83de0d90ea1fcfa02d2585c06c63e53fa9f7740a1f"
+    },
+    {
+      "path": "crates/incant_render/src/model_draw.rs",
+      "sha256": "5a8b56115192d37811ad70c835bd55b24ddd94c58d8866c3cccdeb7ba23ebbde"
+    },
+    {
+      "path": "crates/incant_render/src/model_material.wgsl",
+      "sha256": "48a7b04de1595ce889e19b3888023d5a7c15b43a71ba3e111ee844fb97042a63"
+    },
+    {
+      "path": "crates/incant_render/src/models.rs",
+      "sha256": "fae35d24eb5a9a3b36c5b49d2b47aed13230fc7b131cb05347f1a67f34773fb4"
+    },
+    {
+      "path": "crates/incant_render/src/models/animation.rs",
+      "sha256": "e81ead690374ffb6c30ae5d973b77d1da36865553e8ef8a605cc396d401f5a17"
+    },
+    {
+      "path": "crates/incant_render/src/motion/attachment.rs",
+      "sha256": "4d861ac34d6a68d0d17d069c473c49dc5cbef4ade93fb3a2869ae466303fd2f9"
+    },
+    {
+      "path": "crates/incant_render/src/motion/draw.rs",
+      "sha256": "8472afd886bdfd6f277ab1b8924777e978f79a648793151a0547dad924d6d51e"
+    },
+    {
+      "path": "crates/incant_render/src/motion/mod.rs",
+      "sha256": "c35ee977eb8c36dda8e40981bf83a0b316b8aaa2d422d720015dc0b450f210d2"
+    },
+    {
+      "path": "crates/incant_render/src/motion/owner.rs",
+      "sha256": "907cff7466008952159b58249c0281a32eee9fb3ba8495a2cbb790275f63f013"
+    },
+    {
+      "path": "crates/incant_render/src/motion/owner.wgsl",
+      "sha256": "6609cdeb274ac84affde85c4c77e8e7441dffbb748e07c2d709cb3aa8d606d00"
+    },
+    {
+      "path": "crates/incant_render/src/motion/owner_system.rs",
+      "sha256": "894c38e54643c1e036bfebca66467afd30fcd20a79ce00392e7fda61a09853c2"
+    },
+    {
+      "path": "crates/incant_render/src/motion/plan.rs",
+      "sha256": "8af0181ea6defab33bb4b5bfb1e09c83308e77b88552deee7eb0fe9fd36c9dd3"
+    },
+    {
+      "path": "crates/incant_render/src/motion/provenance.rs",
+      "sha256": "8c9cc56d37593c5f76da2456c79b4f63eea0d9a9bcf4b8f74c6994c9572780e6"
+    },
+    {
+      "path": "crates/incant_render/src/motion/provenance_tests.rs",
+      "sha256": "1e250ac47d3da6ebd618203096d8460a4341edd95475d706972df8e8c70d06a1"
+    },
+    {
+      "path": "crates/incant_render/src/motion/retained.rs",
+      "sha256": "e5f57062ac649a81e4585e9b5b9b83ccf4a643e715cd85b690e5853ad8c9852c"
+    },
+    {
+      "path": "crates/incant_render/src/motion/shader.wgsl",
+      "sha256": "1ebe19d03890654ad6d232881f97b6fd1d4a0ac3c9bdb29611d1b721a830477b"
+    },
+    {
+      "path": "crates/incant_render/src/motion/system.rs",
+      "sha256": "4804e193e4cc6c98ad7e267d14cc3553318d22dd4eebbd723e56b2b26d437761"
+    },
+    {
+      "path": "crates/incant_render/src/motion/targets.rs",
+      "sha256": "6ab47ca2a9a10d3aaf7f8ddb0e293ae3dd1e61cc03a736ec77e6c40ca4ae0d2f"
+    },
+    {
+      "path": "crates/incant_render/src/motion/tests.rs",
+      "sha256": "b753c5657a9522a2f996177cfd1b587bff6a4d3e224abdd71ee15fb5efa7f3b1"
+    },
+    {
+      "path": "crates/incant_render/src/motion_device_tests.rs",
+      "sha256": "44f86de845d637076ee097e1caf43074d77b8b302f3c0353dc1a7f891510c4c0"
+    },
+    {
+      "path": "crates/incant_render/src/motion_owner_device_tests.rs",
+      "sha256": "6d0183dc5a2f52491142d4e9cb47f0d0632a8cb0a21da41bcead03d84adc6282"
+    },
+    {
+      "path": "crates/incant_render/src/output.rs",
+      "sha256": "b7d1456a48e40e4a1b5a10a90c3a471fc6dcd14bb7f259cabaf4a70fb05d8730"
+    },
+    {
+      "path": "crates/incant_render/src/output.wgsl",
+      "sha256": "6ceefe2e706624f4fff93fab83fffc8e2938af514e3b2ce4e92a1389f11f6a8a"
+    },
+    {
+      "path": "crates/incant_render/src/output/cooked.rs",
+      "sha256": "ba0e1c585a2bfb2cd14a19d9a1a00aba7eac54c15057eeecfd52de9e94e58c50"
+    },
+    {
+      "path": "crates/incant_render/src/output/layout.rs",
+      "sha256": "609e17db021135c7f4ab49f4d74b782bb3aa2bfe32dee6548ee210133a46fc84"
+    },
+    {
+      "path": "crates/incant_render/src/pipeline_cache/mod.rs",
+      "sha256": "78d783b92936bbf40aa1678d221ae498fcd8bcaf06047d7b6e69dbd95522abf3"
+    },
+    {
+      "path": "crates/incant_render/src/pipeline_cache/private.rs",
+      "sha256": "43109fa34d2e268aaf1c657c4cf5a8954a9eb949020f0184d78b85d4ee9f880e"
+    },
+    {
+      "path": "crates/incant_render/src/pipeline_cache/private_tests.rs",
+      "sha256": "cd4cce64bff9d8c7eef10b894cd497175a6bd620e0ab89d06a417eeb03486a24"
+    },
+    {
+      "path": "crates/incant_render/src/pipeline_cache/store.rs",
+      "sha256": "375e2f3360ed0154fe0aaa192f162c4be6953fbe33d2e0985859e18337c5f912"
+    },
+    {
+      "path": "crates/incant_render/src/pipeline_cache/store_tests.rs",
+      "sha256": "2f58cf6a5ef012fe1d79666e92b1fd5fa9aaa481c8b03449e040130c58c7aad6"
+    },
+    {
+      "path": "crates/incant_render/src/pipeline_cache/tests.rs",
+      "sha256": "4fb977bfa678f3d80b2db6370973be57509459e684c15a8d9f0a6f6273994cdc"
+    },
+    {
+      "path": "crates/incant_render/src/pixel_grid.rs",
+      "sha256": "78a11f361043d5f2d5d14edf8d4d741e911e51d5f2e1fc847529779d48ecd735"
+    },
+    {
+      "path": "crates/incant_render/src/preview_environment.rs",
+      "sha256": "e576ec37d1b5e6795d9adacffe89280cf78543de4a730d28d30fea64ee3721ff"
+    },
+    {
+      "path": "crates/incant_render/src/resolution/controller.rs",
+      "sha256": "2dfb73c3b74de5026ebff6a9736dabe37f6219f1d0e9793b139e1a43e647d5e9"
+    },
+    {
+      "path": "crates/incant_render/src/resolution/mod.rs",
+      "sha256": "ba7f0d085bce16b188134b16ae09d4a67d7065bca02ed64d929deaa08f3b4247"
+    },
+    {
+      "path": "crates/incant_render/src/resolution/owner.rs",
+      "sha256": "a7c7d5d52554626aaa91ce6205f19811ed83b2223af2e48d13311930fdc2bb82"
+    },
+    {
+      "path": "crates/incant_render/src/resolution/plan.rs",
+      "sha256": "88b15839889c79bcb52a28b7cec6330d503df5e7c9a7ca7a03b3312ee71c0f6f"
+    },
+    {
+      "path": "crates/incant_render/src/resolution/tests.rs",
+      "sha256": "7bf23590dd8cfc4e9f7a865b13d2a988f5c14950bb2a776b33857950e527250b"
+    },
+    {
+      "path": "crates/incant_render/src/resource_error.rs",
+      "sha256": "0232bb0a38185330e43ad262046477696f5e02122ce6a18b088e88dbab7cc040"
+    },
+    {
+      "path": "crates/incant_render/src/retained.rs",
+      "sha256": "7aa23f370b1656d57e257627f160b6ac32ca86e2695b8bb6ffa0e88b2cfc7254"
+    },
+    {
+      "path": "crates/incant_render/src/retained_alloc.rs",
+      "sha256": "30193b83cecca45c1f4c248e5e305adbef498ddd5e9194dc38464a1b86d0d772"
+    },
+    {
+      "path": "crates/incant_render/src/retained_native_tests.rs",
+      "sha256": "8a7d4acd5e21e510dd911ea07f99270ee014d04d415080877f724b0de1bdb568"
+    },
+    {
+      "path": "crates/incant_render/src/retained_sprite_tests.rs",
+      "sha256": "4e7a6dc652567e820742efa411a21c5edb77dc9282bb73c6dcc9da9ba0bf2f5e"
+    },
+    {
+      "path": "crates/incant_render/src/retained_tests.rs",
+      "sha256": "9e8676d145ec42317f1abc52977835b68c2d9953cd8286789bb935adff0ca0c3"
+    },
+    {
+      "path": "crates/incant_render/src/retained_tilemap_tests.rs",
+      "sha256": "64031cb52e4eab55b90603af43c1661fc7d505a517ec0d48f726ddcf22da8050"
+    },
+    {
+      "path": "crates/incant_render/src/scene.rs",
+      "sha256": "bb7c13689a7145763feac1dd3623874a1b47557848421b9d33d312b11e126fff"
+    },
+    {
+      "path": "crates/incant_render/src/scene_draw.rs",
+      "sha256": "8c2124bf566092635dfe02e1e1a9e2fc60b26d698da179d58dff6cd6e70a2564"
+    },
+    {
+      "path": "crates/incant_render/src/scene_msaa.rs",
+      "sha256": "5bdeeba9a9e868e99a579dc5501bd50c118ee3b7bd8a8aca81bd9e14163a02bd"
+    },
+    {
+      "path": "crates/incant_render/src/scene_msaa/device_tests.rs",
+      "sha256": "8145666b1ae16682f8100a83cd987fead6cc58f2a18260bc806a456d7f1e7fbd"
+    },
+    {
+      "path": "crates/incant_render/src/scene_msaa/fixture.rs",
+      "sha256": "12f7b3a198471f6cd8a65ace79d891e5e104f00f41ab1498b10f65ae6a34f89f"
+    },
+    {
+      "path": "crates/incant_render/src/scene_msaa/tests.rs",
+      "sha256": "04d7e0c6fb667df12fcc70b23506485d13a085256ed21e431c2c57423755ed2e"
+    },
+    {
+      "path": "crates/incant_render/src/shader.rs",
+      "sha256": "9aeadf08eae040fb3d955cbf7d93b1e059add0fee17ebcfbe5356de133587dd5"
+    },
+    {
+      "path": "crates/incant_render/src/shader/native.rs",
+      "sha256": "17a8f454d1c58292331d668905ec84a40ca83a2809dd01f30b2dfeb7292897ec"
+    },
+    {
+      "path": "crates/incant_render/src/shadow_draw.rs",
+      "sha256": "b37dce15d82d41292f9593154df67726d1bf008aac6cd15cb8010c2d5a360275"
+    },
+    {
+      "path": "crates/incant_render/src/shadows/cascade.rs",
+      "sha256": "1a1eafe8f77759a008c5cb7c0aaaa8fc2b11320b23e7b57c16b4a22344ff2ce6"
+    },
+    {
+      "path": "crates/incant_render/src/shadows/caster.wgsl",
+      "sha256": "56d35a05cc78da000b7198eaa53d66e2febd929c36a6b3f3e8a53198f124de7f"
+    },
+    {
+      "path": "crates/incant_render/src/shadows/mod.rs",
+      "sha256": "29ec6d385418b3365daaec2458137c0f0115588ce24176b0f13cde48f7b0c828"
+    },
+    {
+      "path": "crates/incant_render/src/shadows/pipeline.rs",
+      "sha256": "40f1b33d6b36dcda2f6beed96e0f455bb944cd48e530d44231c6ebce8203efd8"
+    },
+    {
+      "path": "crates/incant_render/src/shadows/receiver_tests.rs",
+      "sha256": "3057f35985204031e015a2f040cf5845b679b1445b053035e918d0db5bf9ed79"
+    },
+    {
+      "path": "crates/incant_render/src/shadows/shade.wgsl",
+      "sha256": "3f5d22bcef70b70fb7fe089c9940d5a29e6296984f65a718fe96c7f8d22dd8d4"
+    },
+    {
+      "path": "crates/incant_render/src/sprites/drawing.rs",
+      "sha256": "d677bff42fb9046d800303e4668f7890b56aee3ae9676fcc578afeed1a3006c7"
+    },
+    {
+      "path": "crates/incant_render/src/sprites/geometry.rs",
+      "sha256": "df368b94770321355772fb38b74b7858db21b3a56eb85072be93431bb7906947"
+    },
+    {
+      "path": "crates/incant_render/src/sprites/mod.rs",
+      "sha256": "cf9249b0446d86b2728b29053d413c0b29b08f8f26ed0bf230e7a6f881d61f4a"
+    },
+    {
+      "path": "crates/incant_render/src/sprites/plans.rs",
+      "sha256": "b32fbead81b7a34c7d445acf6df7c51eee0fab3d486019b75c9c6cfa2a7e721d"
+    },
+    {
+      "path": "crates/incant_render/src/sprites/shader.rs",
+      "sha256": "845a52a5c0d935e246cd711d42bc9c5f6233d2038458febaf8aedb1915f0a0b0"
+    },
+    {
+      "path": "crates/incant_render/src/sprites/shader/cooked.rs",
+      "sha256": "95bd658b306e75b7f309047818b75110423e3da7de029c6a2187277f591b546b"
+    },
+    {
+      "path": "crates/incant_render/src/sprites/sprite.wgsl",
+      "sha256": "d679984ce15a957bac6b008f5f3276893e21e64df2de97b8212d6ace64fdd240"
+    },
+    {
+      "path": "crates/incant_render/src/sprites/texture.rs",
+      "sha256": "ac4065796da44e73ba45ca1dd0cadf1fd4bf2bbb2bc26c33ad44bc89412cf41d"
+    },
+    {
+      "path": "crates/incant_render/src/studio.rs",
+      "sha256": "0254305630c11f077ce8295b5e0b55321b3e1c475a8fffcc258fa00af45750b1"
+    },
+    {
+      "path": "crates/incant_render/src/temporal/config.rs",
+      "sha256": "4fb93739b80c5e1e923cb8d087919cca924151bb8b687ffbc53bb23254f777ee"
+    },
+    {
+      "path": "crates/incant_render/src/temporal/copy.wgsl",
+      "sha256": "096ee89ecb5c9112deea55935ac2da0bec4fd7f3ba603aa04c875ba48deb248b"
+    },
+    {
+      "path": "crates/incant_render/src/temporal/coverage.rs",
+      "sha256": "0488008c1fa6c039f9eb312637307ffdbacc57ca8fea63ffde6bafe4822a4963"
+    },
+    {
+      "path": "crates/incant_render/src/temporal/coverage_device.rs",
+      "sha256": "3d1d3e29b51a01f84569b5855a3b22a38b97bc89a232af551e4c028d37ae7db1"
+    },
+    {
+      "path": "crates/incant_render/src/temporal/coverage_tests.rs",
+      "sha256": "18f7c98156d22ef84a07902e9ff2b0cc9fa03eb062b8a8d425119dd59e663d2e"
+    },
+    {
+      "path": "crates/incant_render/src/temporal/device_tests.rs",
+      "sha256": "12ead9f939f230bc21fd9a10534f996b9930932198bb7dc162e6778e13ed26e0"
+    },
+    {
+      "path": "crates/incant_render/src/temporal/jitter.rs",
+      "sha256": "41d80973344b080d3608d1306dba7d7a08a3b2746fb737d22e30e5f9b496a4dd"
+    },
+    {
+      "path": "crates/incant_render/src/temporal/mod.rs",
+      "sha256": "1cb40151a8da19ba7c9dd03068333319eb5c639e4479441ddd260ec0e0173311"
+    },
+    {
+      "path": "crates/incant_render/src/temporal/oracle.rs",
+      "sha256": "818e83528162c0b2db1ffbdc046fb66bebe86a84d0d082912030eaa2b2b9216c"
+    },
+    {
+      "path": "crates/incant_render/src/temporal/owner.rs",
+      "sha256": "aafc0d329aa5ac85d46b5b728bd0efd8f938f969fdd9e48ded52227a23effe4a"
+    },
+    {
+      "path": "crates/incant_render/src/temporal/resolve.wgsl",
+      "sha256": "4e7f1ee503e05bc7f2c126ae83b059881fe90b99530507be5ea9f7f037b68bce"
+    },
+    {
+      "path": "crates/incant_render/src/temporal/system.rs",
+      "sha256": "6e7c612344b22383abebc516501c7455e043234c586a81afbfb68c3ce737605f"
+    },
+    {
+      "path": "crates/incant_render/src/temporal/targets.rs",
+      "sha256": "72736408b81cb92d38d1c0cb7e3ec0e76a8bd1c96859855f18b4f4521e739d53"
+    },
+    {
+      "path": "crates/incant_render/src/temporal/tests.rs",
+      "sha256": "5cc16417e84067ee7e88042433845187de6b363ce26130f4d0bc7c92b9a91292"
+    },
+    {
+      "path": "crates/incant_render/src/temporal_joined_tests.rs",
+      "sha256": "d3b432c2d3c5b59652968e6c628dce1643fc7aa85b9d32c982a342e384cf6790"
+    },
+    {
+      "path": "crates/incant_render/src/temporal_retained_tests.rs",
+      "sha256": "4ba973118a4c15fee00b56b92d5f0835f098ebda01669e82d6f72f9c678b7e11"
+    },
+    {
+      "path": "crates/incant_render/src/temporal_shader.rs",
+      "sha256": "726ffbc94bdcb93167540022247afe46c32b54094bee985d9fb0f84948a24e07"
+    },
+    {
+      "path": "crates/incant_render/src/temporal_shader/cooked.rs",
+      "sha256": "8ea1f42dda9a801f8e749bf51e1e3318cf086a0b892b2f1217a8401082bfddea"
+    },
+    {
+      "path": "crates/incant_render/src/temporal_shader/cooked/host.rs",
+      "sha256": "6f125245d004638937d0ca488c41d73ce2a9d8ae0b81d3d692e1df48d60053df"
+    },
+    {
+      "path": "crates/incant_render/src/text/drawing.rs",
+      "sha256": "fc5ec2e8704a86c24ded3a35fe9420cf3a53e50c5658db5d2b6fbb1cde724c9d"
+    },
+    {
+      "path": "crates/incant_render/src/text/geometry.rs",
+      "sha256": "6771378d16126429974a8b06925815da39fd9d891d89f198671b07a33649bd0e"
+    },
+    {
+      "path": "crates/incant_render/src/text/mod.rs",
+      "sha256": "9111c8b629834a489744740674519f6747ae8aa27f571e019164ef0fff848c9b"
+    },
+    {
+      "path": "crates/incant_render/src/text/shader.rs",
+      "sha256": "9bf581c552681e05a948b3189d3b89c1faf2ea97752cfe13ca89d8ab9cfe459c"
+    },
+    {
+      "path": "crates/incant_render/src/text/shader/cooked.rs",
+      "sha256": "2eecc92c8c6fd506f0ee0654f237df362a3d78b068d72b92dd5985b5940fc1f7"
+    },
+    {
+      "path": "crates/incant_render/src/text/text.wgsl",
+      "sha256": "bfc26ec82a902eadd850528186c06244b7ef63ec9285efefd41f642397b8c5f6"
+    },
+    {
+      "path": "crates/incant_render/src/text_draw_tests.rs",
+      "sha256": "be3af78992bf65f31a7ca376bd00493f4d0dddd06a92fe0bd665dad8d50e0b4f"
+    },
+    {
+      "path": "crates/incant_render/src/text_native_tests.rs",
+      "sha256": "2c37221f331984ecc05f756542aa214304c32c656944dfdd40adb48031f247d0"
+    },
+    {
+      "path": "crates/incant_render/src/text_retained_tests.rs",
+      "sha256": "ee6f4086482a315823a3c502dda53241c7771e6ca1b8eba91faae1b5353611b4"
+    },
+    {
+      "path": "crates/incant_render/src/text_tests.rs",
+      "sha256": "d8a0c8541ff1ea8964b77d1cc6a044712dcae1b2b403981d62f9a81bef3281bc"
+    },
+    {
+      "path": "crates/incant_render/src/timing/gpu_tests.rs",
+      "sha256": "8ea61d6b885a80f767d6c0edb7072e342b68dde7684c60ae94d549b34d4b6f58"
+    },
+    {
+      "path": "crates/incant_render/src/timing/mod.rs",
+      "sha256": "b6ad8a614d9b7d720315045a9c6d8bf7ce66b487d57740ee9d96ec3d51d9f064"
+    },
+    {
+      "path": "crates/incant_render/src/timing/pool.rs",
+      "sha256": "90888663b6070e6f0181315674fb6bcf4d74a624d40a010da2889fc1e7be5549"
+    },
+    {
+      "path": "crates/incant_render/src/timing/recorder.rs",
+      "sha256": "198af2295e5332dbb69302eb17fca381a0571a65c3f786e962912dc4040b90d8"
+    },
+    {
+      "path": "crates/incant_render/src/timing/tests.rs",
+      "sha256": "5386873ddf2d89d97228c8ce9d2cce74adbf06e3aa13070609c83dfbb00e7560"
+    },
+    {
+      "path": "crates/incant_render/src/tone_map.wgsl",
+      "sha256": "c5479279c8ebe1334cb672e0f3d5638604ba0c0b7c415d13d30e08aa62b79307"
+    },
+    {
+      "path": "crates/incant_render/src/typed_scene_tests.rs",
+      "sha256": "e4a419dafc6c3fe6b2ed517b738506bcdfee6341ead0a3454bb251dfbd7d241c"
+    },
+    {
+      "path": "crates/incant_render/src/ui/geometry.rs",
+      "sha256": "b3ad306af479782881ced21bdacdda893c068651d3b46a2e553bac7ac0302813"
+    },
+    {
+      "path": "crates/incant_render/src/ui/mod.rs",
+      "sha256": "d96bf934007daf6be7fbe8a4f7bf9a3497f420cd286e81814408648a74bfb1ce"
+    },
+    {
+      "path": "crates/incant_render/src/ui/shader.rs",
+      "sha256": "b5126f0be567125744898352c772e2e6842bb78d4749cc46372f90e566cca4ce"
+    },
+    {
+      "path": "crates/incant_render/src/ui/shader/cooked.rs",
+      "sha256": "d91ae311cacbee6662e3357da94f4c994b411173b5673b4f3d8fa3c87c6379d1"
+    },
+    {
+      "path": "crates/incant_render/src/ui/theme.rs",
+      "sha256": "bf4f842c03eccb389c4833f7abfee38574e270ad3c03ce70cbd1c5f51f9d4f24"
+    },
+    {
+      "path": "crates/incant_render/src/ui/ui.wgsl",
+      "sha256": "f67e4982b038833e87ed84861d5be3018f5f0d6587ff8da6faf8bfd840c33c39"
+    },
+    {
+      "path": "crates/incant_render/src/ui_draw_tests.rs",
+      "sha256": "9b51e6448f4203902baa6985fc79b7c2b3d8181ee1cab85394c9fdbac795ddf0"
+    },
+    {
+      "path": "crates/incant_render/src/ui_tests.rs",
+      "sha256": "1bbc216032eaefe9460ae1ebbe64d6b512d0423959e88dbd3734fabf48c2ca66"
+    },
+    {
+      "path": "crates/incant_render/src/version_tests.rs",
+      "sha256": "69c3aafff186c56ddfad7cd188332358ffa59a0bcb164b5a1da40367cb6fb847"
+    },
+    {
+      "path": "crates/incant_render/src/web_error.rs",
+      "sha256": "db7421e60b304e4fc97ec2ea076febb6b135a3a37f873ed5ea183ca68fe99581"
+    },
+    {
+      "path": "crates/incant_render/tests/cameras/mod.rs",
+      "sha256": "a1a4d9922e252ab8b41fbf0a5c6cc2dca0b91c1878eacf6fce924cd4632910e3"
+    },
+    {
+      "path": "crates/incant_render/tests/cameras/orthographic.rs",
+      "sha256": "fd1a66f75599ad1418ce50aeb8796cfd1a127b9e6e5b24059aab3e528c930cff"
+    },
+    {
+      "path": "crates/incant_render/tests/cameras/pixel_perfect.rs",
+      "sha256": "c918879645bf57a523b49630e1073c935852a375f3a9d815c01e0f991d5b66db"
+    },
+    {
+      "path": "crates/incant_render/tests/color_roles/mod.rs",
+      "sha256": "845afecb9f708cf506008d70aaf43360ab2ebb2c1fceceb91055377b91734af8"
+    },
+    {
+      "path": "crates/incant_render/tests/diagnostic_output/mod.rs",
+      "sha256": "af5285a75e6e4850f0e1f499cee2503683ee8acbe229b763148654b5bc48d262"
+    },
+    {
+      "path": "crates/incant_render/tests/environments/mod.rs",
+      "sha256": "5be334d3b1e4c0d465b8818dd770bf01e68c9b16f72bb53a8d92974406df608b"
+    },
+    {
+      "path": "crates/incant_render/tests/frame_graph/mod.rs",
+      "sha256": "26361a95e74cd2231ddaca35b69bd826e2fa386512f03f640c4a14024bca17e5"
+    },
+    {
+      "path": "crates/incant_render/tests/graph_ownership/mod.rs",
+      "sha256": "949e9726ab5a85b1192566c835e40d4c31fddaba4bcbcd0fda05b54691488140"
+    },
+    {
+      "path": "crates/incant_render/tests/hdr_output/mod.rs",
+      "sha256": "3baebd847b1197f1628572bad4d4c26a45f5e281909fc2045235a50ec1ecdc57"
+    },
+    {
+      "path": "crates/incant_render/tests/lighting_gpu/extended.rs",
+      "sha256": "5c8b90996223b69e1efe3c9325da321f8781e4c36a28d38729244f68407e2668"
+    },
+    {
+      "path": "crates/incant_render/tests/lighting_gpu/mod.rs",
+      "sha256": "32a25b62b5700883c3ef5d7d53d409d8ba3f6ef400e8b950c46c093a4f887167"
+    },
+    {
+      "path": "crates/incant_render/tests/lighting_gpu/readback.rs",
+      "sha256": "1547912a9107f299859ae6bf276fccdbc2044fd62aeef0a7b1bf1520493acd5d"
+    },
+    {
+      "path": "crates/incant_render/tests/lights/coverage.rs",
+      "sha256": "5acd80092f08cd1ad7c547f1eb2649fd4f0012ceee92a5ac21b607d9c586250e"
+    },
+    {
+      "path": "crates/incant_render/tests/lights/masks.rs",
+      "sha256": "ccf8fd74a8df73e7d378be550c16a0881f1f0a44ca03f7d617beb0f4f9a06c73"
+    },
+    {
+      "path": "crates/incant_render/tests/lights/mod.rs",
+      "sha256": "4684d454c9a8a7a314570375ab301803a36642e6ee77ee66cc0e7c5fe27fe94b"
+    },
+    {
+      "path": "crates/incant_render/tests/materials/mod.rs",
+      "sha256": "56822ae822f062d45ce92aaf7c6e207dd1aa4032eadb1f2be6bb40a89360d083"
+    },
+    {
+      "path": "crates/incant_render/tests/model_gpu.rs",
+      "sha256": "cba03a34f7ed1281067918c2b107ea696d1c9298ae0d1fbdbbfdc1c39eae10a4"
+    },
+    {
+      "path": "crates/incant_render/tests/persistent_cache.rs",
+      "sha256": "71488c6541ee20cf34b4196ed5b9595aed597c0e366a5c360307cf9c911b4c38"
+    },
+    {
+      "path": "crates/incant_render/tests/pipeline_warmup/mod.rs",
+      "sha256": "bbc29ece733cd225fe8ef5dfb1d28aeb4b42132ab84a7c3dd835e2dce6824690"
+    },
+    {
+      "path": "crates/incant_render/tests/shadows/coverage.rs",
+      "sha256": "3be147ba95034dd534142c44b68673b844a12fe7b14c3e41d0bc98ba1837a4a5"
+    },
+    {
+      "path": "crates/incant_render/tests/shadows/lookdev.rs",
+      "sha256": "bcde10e250e4ac8c7181985cfc8b44a348a1dd167fb6ac018363b3d8ef4849fa"
+    },
+    {
+      "path": "crates/incant_render/tests/shadows/mod.rs",
+      "sha256": "db895ca687d65cdbfb89e67044e5ae5edc73eca4133e87c8966a1e9e96f83ad1"
+    },
+    {
+      "path": "crates/incant_render/tests/shadows/normal_offset.rs",
+      "sha256": "eb92736b57fe16811a2f5378708429a6498761fa35606dfa8ef375c46c8d6f91"
+    },
+    {
+      "path": "crates/incant_render/tests/shadows/queued.rs",
+      "sha256": "222f910d0a5ea545141005e1cb2de104f44e1f42ef5f412299cd8321beaf1539"
+    },
+    {
+      "path": "crates/incant_render/tests/sprites/atlas.rs",
+      "sha256": "246ebeaa01df49650b1735749ea463cca54641f47c325c802b38a915069bbd30"
+    },
+    {
+      "path": "crates/incant_render/tests/sprites/mod.rs",
+      "sha256": "9936690080cbb4dc73bf0fcc76e3528e23f96454122535543d53264eef2d739c"
+    },
+    {
+      "path": "crates/incant_render/tests/sprites/ties.rs",
+      "sha256": "b09891f9fe7e3797e14938d826b7e330b76fb46af08fd2c59f8a7a8cbf704995"
+    },
+    {
+      "path": "crates/incant_render/tests/sprites/wide.rs",
+      "sha256": "8140849494caef81b7a0cee44d71632e09f27017f11981ea4e00a869796433fd"
+    },
+    {
+      "path": "crates/incant_render/tests/support/mod.rs",
+      "sha256": "7ee5ea9bfef92859bf7109e07158ab82cb8ce41b007959c8eb5aa34a9d6ac7e3"
+    },
+    {
+      "path": "crates/incant_render/tests/tangents/mod.rs",
+      "sha256": "95b1243282483a635aacf8d4d8601ce5b8786985614b207d51ba6340afee8b4f"
+    },
+    {
+      "path": "crates/incant_render/tests/timestamp_backend_probe.rs",
+      "sha256": "b1c41b384830e4495e06c119f47f4a86241c20984ca8bb78621e604dbde87141"
+    },
+    {
+      "path": "crates/incant_render/tests/web_error/mod.rs",
+      "sha256": "9ebb34798969531e02324e68b16df597bb9ec175ce39bd9f88f4153aeae06c73"
+    },
+    {
+      "path": "crates/incant_shader_cook/Cargo.toml",
+      "sha256": "f47e85ee095aa4824449f0dd7f73724531ac9b72b9cc2730dfec29bd90316ea4"
+    },
+    {
+      "path": "crates/incant_shader_cook/examples/output_bundle.rs",
+      "sha256": "567d7744d3bc31a9494296eb70a1952f43defe080848e97b1ee97bca351e550a"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/audit.rs",
+      "sha256": "58890af3ddfe3e465811bd4c2ff5222e2b5c2a904c38c50bbdddb12ff0218e91"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/compute/contract.rs",
+      "sha256": "54284da43034cdb37fdafafdd1665f6653de43c30094e1449d6a5aca8721e305"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/compute/emit.rs",
+      "sha256": "a776d81aa63cae81c1a0445a3ef17488062b96547a8e90bff36ca245c55bf06d"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/compute/mod.rs",
+      "sha256": "2b3fcdb1aab1bd6e73d57b510f553cb3ddf197e29da9634e95d2f38d0f30dc82"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/compute/spirv_workgroup.rs",
+      "sha256": "24e5e8cc68230e6109020c7c857ebd877ce570920819058d70bbb6d9b9bdba71"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/compute/static_workgroup.rs",
+      "sha256": "3ee6871d6e96e715caab123ddfc67235ed33d411ff5b94569d32126256e7508b"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/contract.rs",
+      "sha256": "c8956ae477c1e779cfe8ef5a6960a3950fff795849eb8d36bce917d1158c7515"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/emit.rs",
+      "sha256": "2da6ff21863ab62253c463449a592800f7a564d1b259c8b23f07030ca0aef596"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/geometry/contract.rs",
+      "sha256": "8ac67d104b8bebed09c5b5c76f01e5b576a75121a848dbbdf6e2215f17f78005"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/geometry/emit.rs",
+      "sha256": "945b61562075231d02b608be74a6d6093a13298b3462e2ead76744229510d351"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/geometry/interpolation.rs",
+      "sha256": "3849c0b6128dbbc2646ef6606a9a50ed4ce80096da8358a258c008a8f8a6d42d"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/geometry/material.rs",
+      "sha256": "c83cca8d69cfdef9c9f24e2d1461e81c2bfcb78f1616f8b095a144fb3dfbadd9"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/geometry/material_emit.rs",
+      "sha256": "976f76dfdc879dcf2d72af59673e7b5faeb0a28994dcdecdb6ec27403e7c4c72"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/geometry/mod.rs",
+      "sha256": "330d9b98bd779a890903df025de9c77d8c6c4433bf3a5558a3cfbc625a057049"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/geometry/sprite.rs",
+      "sha256": "f56d4ed2c90b070cefa9e395015bd2fcae6520f5142e59958b3aeff6564f404d"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/geometry/text.rs",
+      "sha256": "fc609717cf6a86a72dd07d0bb79d82fde25df64216e0d769f0214152120e089e"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/geometry/ui.rs",
+      "sha256": "7a5c0786befbc4a78f3b3d70f56ed552898e9c723315925b52d1e37526bcc933"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/lib.rs",
+      "sha256": "40a78caec5c819ca80be854800d872cd247ee544a358c71f9247bc7191cb89f4"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/manifest.rs",
+      "sha256": "49752d656c3897aaf76faa0b33e1a6245990a0d3b8ca15d0b92fee8bf51d4460"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/temporal/contract.rs",
+      "sha256": "5faf6575d0994356a404d1d5659248f596d239194546b7489bd01e907868a93e"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/temporal/emit.rs",
+      "sha256": "5a957910752f2f7708f569af31e71f6623a47a1e3f8f3cb71a9591924e74a87b"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/temporal/mod.rs",
+      "sha256": "de4bfef189a77cb9b655c98ea888101242db972bddac9ab2a9c776de76306866"
+    },
+    {
+      "path": "crates/incant_shader_cook/tests/audit.rs",
+      "sha256": "d234bcbf8c49e2ef834c6c9f34a8e71c0d50887f6778f1076dbc24a22301eba0"
+    },
+    {
+      "path": "crates/incant_shader_cook/tests/compute.rs",
+      "sha256": "6404b3abd52283e61ce604fda02deea95908449e1e6b0980d52337e2ca958580"
+    },
+    {
+      "path": "crates/incant_shader_cook/tests/fixtures/temporal-resolve-single-depth.wgsl",
+      "sha256": "e1af53565a299f6a03a13a3ee05a037b540e24cb2b0bed054ceeb8d2d484ebf1"
+    },
+    {
+      "path": "crates/incant_shader_cook/tests/geometry.rs",
+      "sha256": "3aec8143130f498e653be310c7a6d760accb5b56b1631f10602548368000ce18"
+    },
+    {
+      "path": "crates/incant_shader_cook/tests/material.rs",
+      "sha256": "f2b667d1f389cd992422313b6adb2eb46c389d954dc54432276cb8344988b69f"
+    },
+    {
+      "path": "crates/incant_shader_cook/tests/output.rs",
+      "sha256": "6de04d9ef95f1d11d4b1239258504b57e33d7bc071da54aa3e03c9c0d6fd9bcd"
+    },
+    {
+      "path": "crates/incant_shader_cook/tests/temporal.rs",
+      "sha256": "35e7bcbb518c612d0c095af8b26fe5e167ad755dcf1f954b17e5191ed7eb5ab0"
+    },
+    {
+      "path": "crates/incant_shader_cook/tests/text.rs",
+      "sha256": "7f50f4538d521fbeaad0b9a28aac42cce363644da18536b896fbf5ff3922b149"
+    },
+    {
+      "path": "crates/incant_shader_cook/tests/ui.rs",
+      "sha256": "2deb4c141220b03b90ba8946499ba78eaed00d211121737fe85c202773febb73"
+    },
+    {
+      "path": "tools/cargo",
+      "sha256": "9aef98d613601b0c374c1d0499afb39d710cbf5002faba537f21be9c11ff72e3"
+    },
+    {
+      "path": "tools/native_process.py",
+      "sha256": "58dd2a8231d7f9d1e42070fc85425461e06a43f279fa5e7f8e57b4a40c3a3aa4"
+    }
+  ]
+}
