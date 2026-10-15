@@ -1,0 +1,15 @@
+{
+  "format": "incant-host-stage-partial-manifest-v1",
+  "archive_sha256": "1cdabca058b01e10cb8d6dd228be25b499d93357c231697b123abaa789a5dfa1",
+  "archive_bytes": 87293,
+  "expanded_bytes": 786245,
+  "record_count": 22,
+  "source": "e93ac30a9cce9deadd4013ac5fa7abbc3e60a2ac",
+  "player_sha256": "45c5374583b7543af7e4b5d77a6776d79f7a5eeb3c945c9b640adf5b3a970ca6",
+  "host_analyzer_sha256": "3ca697d782bc2c39a97216df9d410123d7169f5c1eb344f29042493171d2fee7",
+  "status": "failed_partial_263_of_2156",
+  "native_launches_in_this_analysis": 0,
+  "performance_gate_passed": false,
+  "full_gameplay_parity": false,
+  "live_device_pcm_captured": false
+}
