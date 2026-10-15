@@ -137,7 +137,7 @@ fn main() {
 
 #[cfg(feature = "diagnostic-script-budget")]
 fn budget_allocation_controls() {
-    use diagnostic::{Frame, Region, Span, budget, mark};
+    use incant_profile::diagnostic::{Frame, Region, Span, budget, mark};
     let capture = Capture::start().unwrap();
     let before = capture.allocations();
     for _ in 0..1000 {
