@@ -1,4 +1,4 @@
-//! Ordinary same-scene copies. No new IDs, file authority, or runtime representation.
+//! Ordinary same-scene command preparation and copies; no file or runtime authority.
 mod references;
 
 use super::{CommandError, prefab::Budget};
