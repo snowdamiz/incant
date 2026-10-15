@@ -64,6 +64,19 @@ impl<'tick> Tick<'tick> {
     fn ready(&mut self) -> Result<()> {
         self.check(Ok(()))
     }
+    /// Request whole-session replacement after this complete tick is accepted.
+    /// Requires trusted host opt-in; ordinary hosts reject the request. Repeated
+    /// requests coalesce but each consumes the shared structural command quota.
+    pub fn request_restart(&mut self) -> Result<()> {
+        self.ready()?;
+        // SAFETY: scalar epoch only; no guest memory or native handles cross.
+        let result = unsafe { raw::incant_session_v1_request_restart(self.epoch) };
+        self.check(if result == 0 {
+            Ok(())
+        } else {
+            Err(Error::Failed)
+        })
+    }
     /// Up to 64 heterogeneous queries over the committed solvers. Results retain
     /// input order and borrow only result scratch, never the Tick or native data.
     pub fn query_physics<'a>(

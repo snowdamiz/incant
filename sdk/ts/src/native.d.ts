@@ -77,7 +77,8 @@ export interface NativeCommands {
    * Requires an explicitly restart-capable native host; unsupported hosts refuse
    * and poison the active tick. No arguments, coalesced within the shared command
    * quota. Publication waits for all source callbacks, world, audio and consumer
-   * acceptance. Does not reset this callback's state. Wasm parity is pending. */
+   * acceptance. Does not reset this callback's state. Build-linked and development
+   * Wasm expose the same request through the Rust SDK. */
   requestRestart(): void;
 
   /** Ordered existing-widget controls. Preserve role, fonts, layout and hierarchy.

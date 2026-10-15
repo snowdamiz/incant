@@ -104,6 +104,13 @@ impl DevModuleHost {
     pub fn is_failed(&self) -> bool {
         self.store.data().capability.is_failed()
     }
+    pub fn enable_restart_requests(&mut self) -> Result<(), ModuleError> {
+        Ok(self.store.data_mut().capability.enable_restart_requests()?)
+    }
+    /// Script acceptance only; defer consumption until composed acceptance.
+    pub fn take_restart_request(&mut self) -> Result<bool, ModuleError> {
+        Ok(self.store.data_mut().capability.take_restart_request()?)
+    }
     /// Bounded committed prefix; a failed instance exposes no live diagnostics.
     pub fn logs(&self) -> Result<&incant_wasm_runtime::NativeLogs, ModuleError> {
         Ok(self.store.data().capability.logs()?)

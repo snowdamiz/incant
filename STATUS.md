@@ -66,6 +66,11 @@ continuous motion, temporal reconstruction, translation quality, FPS and phase
 approval remain outside this result.
 [Images, exact sources and portable replay](docs/spikes/core-locale-sampled-captures.md).
 
+## Native Wasm restart — actual native hosts and player owner qualified
+
+Native Wasm restart requests now have an opt-in owner through build-linked wasm2c and development Wasmtime, retaining transaction/quota semantics and pending requests until consumption. Actual Rust guests prove fresh VM/world/input/output-clock reconstruction, terminal consumer refusal with audible PCM rollback, and the plain player restart owner. Scoped local `ci` qualification passed 29 native tests, three strict lints, 19 Python SDK controls and generated-contract checks; two earlier compile failures are retained. [Report](docs/spikes/native-wasm-restart.md). This does not establish a shipping player export, native window/device result, full SDK parity, performance or phase gate.
+
+
 ## Native explicit-state coroutines — CPU behavior and save/restore qualified
 
 Native TypeScript behaviors can now start deterministic cooperative tasks, wait
