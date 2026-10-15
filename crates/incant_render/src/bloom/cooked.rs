@@ -91,7 +91,7 @@ pub(super) fn filters(device: &wgpu::Device, backend: wgpu::Backend) -> Result<[
         upsample::BUNDLE.stages(device, backend).map_err(error)?,
     ])
 }
-pub(super) fn display(device: &wgpu::Device, backend: wgpu::Backend) -> Result<Stages> {
+pub(crate) fn display(device: &wgpu::Device, backend: wgpu::Backend) -> Result<Stages> {
     display::BUNDLE.stages(device, backend).map_err(error)
 }
 #[cfg(test)]
