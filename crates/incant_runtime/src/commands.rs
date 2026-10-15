@@ -14,6 +14,11 @@ pub const MAX_FRAME_COMMANDS: usize = 65_536;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum StructuralCommand {
+    /// Ordered color/intensity controls on an existing final punctual light.
+    ControlLight {
+        entity: StableId,
+        control: crate::LightControl,
+    },
     /// Update an existing widget declaration, preserving its role/fonts/layout.
     ControlUi {
         entity: StableId,
@@ -182,6 +187,7 @@ struct Staged {
     bindings_2d: BTreeMap<StableId, (Option<crate::CookedPhysics2D>, bool)>,
     audio: BTreeMap<StableId, Option<crate::CookedAudio>>,
     spatial: BTreeMap<StableId, Option<crate::CookedSpatial>>,
+    light_values: BTreeMap<StableId, crate::light_controls::LightValues>,
     topology_generation: u64,
     binding_generation: u64,
     flipbook_states: BTreeMap<StableId, crate::FlipbookState>,
@@ -309,6 +315,7 @@ impl NativeWorld {
                     | StructuralCommand::ControlIk { .. }
                     | StructuralCommand::ControlFlipbook { .. }
                     | StructuralCommand::ControlAudio { .. }
+                    | StructuralCommand::ControlLight { .. }
             )
         }) {
             let mut velocities = BTreeMap::new();
@@ -348,7 +355,8 @@ impl NativeWorld {
                     | StructuralCommand::ControlRootMotion { .. }
                     | StructuralCommand::ControlIk { .. }
                     | StructuralCommand::ControlFlipbook { .. }
-                    | StructuralCommand::ControlAudio { .. } => continue,
+                    | StructuralCommand::ControlAudio { .. }
+                    | StructuralCommand::ControlLight { .. } => continue,
                     _ => unreachable!(),
                 };
                 if !self.entities.contains_key(&id) {
@@ -445,6 +453,9 @@ impl NativeWorld {
             if !audio.is_empty() {
                 self.validate_audio_changes(&audio, &self.parents)?;
             }
+            let light_values = self.prepare_light_controls(commands, &BTreeMap::new(), |id| {
+                self.entities.contains_key(&id)
+            })?;
             let navigation = self.navigation.motion(
                 |id| self.world.get::<Global>(self.entities[&id]).unwrap().0,
                 |id| {
@@ -460,6 +471,7 @@ impl NativeWorld {
             for (id, node) in audio {
                 self.install_audio(id, node);
             }
+            self.install_light_controls(light_values);
             self.install_flipbook_states(playback);
             self.install_animation_states(animations);
             self.install_ik_states(ik);
@@ -527,6 +539,7 @@ impl NativeWorld {
             for (id, node) in staged.spatial {
                 self.install_spatial(id, node);
             }
+            self.install_light_controls(staged.light_values);
             self.install_flipbook_states(staged.flipbook_states);
             self.install_animation_states(staged.animation_states);
             self.install_ik_states(staged.ik_states);
@@ -689,7 +702,8 @@ impl NativeWorld {
                 | StructuralCommand::ControlRootMotion { .. }
                 | StructuralCommand::ControlIk { .. }
                 | StructuralCommand::ControlFlipbook { .. }
-                | StructuralCommand::ControlAudio { .. } => {}
+                | StructuralCommand::ControlAudio { .. }
+                | StructuralCommand::ControlLight { .. } => {}
                 StructuralCommand::SetParent { entity, parent } => {
                     *parents
                         .get_mut(entity)
@@ -782,6 +796,8 @@ impl NativeWorld {
         let audio = self.prepare_audio_controls(commands, audio, |id| parents.contains_key(&id))?;
         self.validate_audio_changes(&audio, &parents)?;
         let binding_generation = self.validate_spatial_changes(&spatial, &parents)?;
+        let light_values =
+            self.prepare_light_controls(commands, &spatial, |id| parents.contains_key(&id))?;
         let ik_states =
             self.prepare_ik_controls(commands, &spatial, |id| parents.contains_key(&id))?;
         let animation_states =
@@ -1118,6 +1134,7 @@ impl NativeWorld {
             spins_2d,
             audio,
             spatial,
+            light_values,
             topology_generation,
             binding_generation,
             flipbook_states,

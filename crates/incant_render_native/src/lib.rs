@@ -104,6 +104,7 @@ pub enum UpdateKind {
 /// the current simulation frame.
 #[derive(Clone)]
 struct NumericUndo {
+    light: Option<incant_render_data::LightValues>,
     world: DMat4,
     frame: u16,
     animation: Option<incant_runtime::AnimationSample>,

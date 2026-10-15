@@ -9,6 +9,13 @@ spec=importlib.util.spec_from_file_location('generator',ROOT/'tools/generate_was
 generator=importlib.util.module_from_spec(spec);spec.loader.exec_module(generator)
 class RegistryTests(unittest.TestCase):
     def setUp(self):self.data=json.loads(generator.REGISTRY.read_bytes())
+    def test_light_controls_append_without_changing_any_published_import(self):
+        import hashlib
+        self.assertEqual(hashlib.sha256(json.dumps(self.data['functions'][:62],sort_keys=True).encode()).hexdigest(), '5486081da93b52f8f837c50745ca87bd0adb55a8f882e6d1f9174d647b1541f1')
+        self.assertEqual([(f['namespace'],f['name'],f['opcode']) for f in self.data['functions'][62:]], [('incant_light_v1','command',62)])
+        self.assertEqual(self.data['records']['LightCommand'], [['entity','u8',16],['kind','u32'],['reserved','u32'],['values','f64',3]])
+        self.assertEqual(self.data['constants']['LIGHT_MAX_COMMANDS'], self.data['constants']['COMMANDS'])
+
     def test_all_committed_host_guest_and_c_artifacts_are_exact(self):
         for name,text in generator.outputs().items():self.assertEqual((ROOT/name).read_text(),text,name)
     def test_unknown_versions_namespaces_signatures_and_layouts_fail_closed(self):

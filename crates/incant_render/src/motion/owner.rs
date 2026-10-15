@@ -99,18 +99,28 @@ impl History {
         self.last.as_ref().map(|a| a.frame.clone())
     }
     pub fn prepare(&self, extent: Extent, matrix: Mat4) -> Result<Pending, MotionError> {
-        self.prepare_mode(extent, matrix, false)
+        self.prepare_with_reset(extent, matrix, false)
+    }
+    pub fn prepare_with_reset(
+        &self,
+        extent: Extent,
+        matrix: Mat4,
+        content_changed: bool,
+    ) -> Result<Pending, MotionError> {
+        self.prepare_mode(extent, matrix, false, content_changed)
     }
     fn prepare_mode(
         &self,
         extent: Extent,
         matrix: Mat4,
         temporal: bool,
+        content_changed: bool,
     ) -> Result<Pending, MotionError> {
         if !matrix.is_finite() || !matrix.inverse().is_finite() {
             return Err(MotionError::Projection);
         }
-        let reset = self.cut
+        let reset = content_changed
+            || self.cut
             || self.last.as_ref().is_none_or(|a| {
                 a.extent != extent || a.frame.bypassed || a.frame.phase.is_some() != temporal
             });
@@ -153,12 +163,23 @@ impl History {
         camera: CameraView,
         rect: [f32; 4],
     ) -> Result<Pending, MotionError> {
+        self.prepare_temporal_with_reset(extent, camera, rect, false)
+    }
+    /// Candidate-only cut; refusal does not alter the last accepted history.
+    pub fn prepare_temporal_with_reset(
+        &self,
+        extent: Extent,
+        camera: CameraView,
+        rect: [f32; 4],
+        content_changed: bool,
+    ) -> Result<Pending, MotionError> {
         let mut pending = self.prepare_mode(
             extent,
             camera
                 .matrix(rect[2] / rect[3])
                 .map_err(|_| MotionError::Projection)?,
             true,
+            content_changed,
         )?;
         if !pending.frame.bypassed {
             let phase = if pending.frame.has_previous() {

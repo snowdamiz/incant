@@ -315,6 +315,9 @@ impl NativeRenderInput {
             .zip(&mut staged.retired_ik)
         {
             next.world = current.world;
+            if let (Some(next), Some(current)) = (&mut next.light, &current.light) {
+                next.set_values(current.values());
+            }
             if let (Some(next), Some(current)) = (&mut next.mesh, &current.mesh) {
                 next.animation = current.animation;
                 next.animation_blend = current.animation_blend;

@@ -313,7 +313,11 @@ impl RetainedScene {
             }
             if node.id != binding.id
                 || node.camera != binding.camera
-                || node.light != binding.light
+                || !match (&node.light, &binding.light) {
+                    (Some(a), Some(b)) => a.same_binding(b),
+                    (None, None) => true,
+                    _ => false,
+                }
                 || node
                     .mesh
                     .as_ref()
@@ -452,6 +456,12 @@ impl RetainedScene {
             return Err(SceneError::Input("retained scene belongs to another renderer").into());
         }
         self.stage(input)?;
+        // Compare accepted values, never the immutable startup frame or failed scratch.
+        let lighting_changed = input
+            .nodes
+            .iter()
+            .zip(&self.bindings)
+            .any(|(node, binding)| node.light != binding.light);
         let resolution = self
             .resolution
             .as_ref()
@@ -537,6 +547,7 @@ impl RetainedScene {
                         output: [target.width, target.height],
                         plan: &plan,
                         temporal: self.temporal.is_some() || native_active,
+                        lighting_changed,
                     },
                 )
             })
@@ -627,6 +638,9 @@ impl RetainedScene {
             owner.accept(pending);
         }
         std::mem::swap(&mut self.live, &mut self.staging);
+        for (binding, node) in self.bindings.iter_mut().zip(&input.nodes) {
+            binding.light.clone_from(&node.light);
+        }
         if let (Some(motion), Some(pending)) = (&mut self.motion, motion_pending) {
             motion.accept(pending, input);
         }

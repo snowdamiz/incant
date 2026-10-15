@@ -361,3 +361,69 @@ fn catalog_ids_kinds_and_smaller_budget_refuse_without_replacing_assets() {
     );
     assert_eq!(versions(&input), before);
 }
+
+#[test]
+fn prepared_catalog_publication_carries_intervening_light_values_without_rebinding() {
+    let f = Fixture::new();
+    let mut world = f.world();
+    let mut node = world
+        .spatial_view()
+        .unwrap()
+        .nodes()
+        .find(|n| n.id == id(4))
+        .unwrap()
+        .declaration
+        .unwrap()
+        .clone();
+    node.point = Some(incant_types::PointLight {
+        color: [1.; 3],
+        intensity: 1.,
+        range: 3.,
+    });
+    world
+        .apply(&mut queue([StructuralCommand::SetSpatial {
+            entity: id(4),
+            spatial: Some(node),
+        }]))
+        .unwrap();
+    let mut input = f.load(&world);
+    let prepared = input
+        .texture_refresh_ticket()
+        .prepare(&f.next(), &f.root.path().join("textures"))
+        .unwrap();
+    let mut stage = input
+        .stage_texture_refresh(&world.spatial_view().unwrap(), prepared)
+        .unwrap();
+    world
+        .apply(&mut queue([StructuralCommand::ControlLight {
+            entity: id(4),
+            control: incant_runtime::LightControl::Intensity(123.),
+        }]))
+        .unwrap();
+    input
+        .try_sync(&world.spatial_view().unwrap(), |_, _, kind| {
+            assert_eq!(kind, incant_render_native::UpdateKind::Motion);
+            Ok::<_, ()>(())
+        })
+        .unwrap();
+    let before = input.binding_generation();
+    let (result, count) = allocations::record(|| {
+        input.try_publish_textures(&world.spatial_view().unwrap(), &mut stage, || {
+            Ok::<_, ()>(())
+        })
+    });
+    result.unwrap();
+    assert_eq!(count, 0);
+    assert_eq!(input.binding_generation(), before);
+    assert_eq!(
+        input
+            .input()
+            .nodes
+            .iter()
+            .find_map(|n| n.light.as_ref())
+            .unwrap()
+            .values()
+            .intensity,
+        123.
+    );
+}

@@ -89,6 +89,7 @@ fn main() {
         Path::new("src/animation_commands.rs").into(),
         Path::new("src/commands.rs").into(),
         Path::new("src/audio_commands.rs").into(),
+        Path::new("src/light_commands.rs").into(),
         Path::new("src/queries.rs").into(),
         Path::new("src/query_values.rs").into(),
         Path::new("src/query_values_2d.rs").into(),
