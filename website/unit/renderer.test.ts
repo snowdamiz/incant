@@ -4,7 +4,7 @@ import { createGlView } from '../src/gl/renderer.ts'
 
 type Failure = 'refused' | 'exception' | 'fragment' | 'link' | 'buffer'
 
-function fixture(t: TestContext, failure?: Failure, reducedMotion = false) {
+function fixture(t: TestContext, failure?: Failure, reducedMotion = false, renderer: string | null = 'Apple GPU') {
   const requested: WebGLContextAttributes[] = []
   const deletedShaders = new Set<object>()
   const deletedPrograms = new Set<object>()
@@ -18,6 +18,7 @@ function fixture(t: TestContext, failure?: Failure, reducedMotion = false) {
   let draws = 0
   let releases = 0
   let createdShaders = 0
+  let fallbacks = 0
   const document = {
     hidden: false,
     addEventListener: (name: string, callback: () => void) => documentEvents.set(name, callback),
@@ -30,7 +31,7 @@ function fixture(t: TestContext, failure?: Failure, reducedMotion = false) {
   }
   const gl = {
     VERTEX_SHADER: 1, FRAGMENT_SHADER: 2, COMPILE_STATUS: 3, LINK_STATUS: 4,
-    ARRAY_BUFFER: 5, STATIC_DRAW: 6, FLOAT: 7, TRIANGLES: 8,
+    ARRAY_BUFFER: 5, STATIC_DRAW: 6, FLOAT: 7, TRIANGLES: 8, RENDERER: 9,
     createShader: (type: number) => { createdShaders++; return { type } },
     shaderSource() {}, compileShader() {},
     getShaderParameter: (shader: { type: number }) => !(failure === 'fragment' && shader.type === 2),
@@ -49,7 +50,10 @@ function fixture(t: TestContext, failure?: Failure, reducedMotion = false) {
     deleteBuffer: (buffer: object) => deletedBuffers.add(buffer),
     viewport() {}, getUniformLocation: () => ({}), uniform1f() {}, uniform2f() {}, uniform3f() {}, uniform4f() {},
     drawArrays: () => { draws++ },
-    getExtension: () => ({ loseContext: () => { releases++ } }),
+    getParameter: () => renderer,
+    getExtension: (name: string) => name === 'WEBGL_lose_context'
+      ? { loseContext: () => { releases++ } }
+      : renderer === null ? null : { UNMASKED_RENDERER_WEBGL: 10 },
   }
   const canvas = {
     width: 300, height: 150,
@@ -93,6 +97,7 @@ function fixture(t: TestContext, failure?: Failure, reducedMotion = false) {
     return createGlView(canvas as unknown as HTMLCanvasElement, {
       fragment: 'fixture fragment', animate,
       frame: (time, dt, aspect) => { uniforms.push({ time, dt, aspect }); return {} },
+      onFallback: () => { fallbacks++ },
     })
   }
   function flush(now: number) {
@@ -103,9 +108,57 @@ function fixture(t: TestContext, failure?: Failure, reducedMotion = false) {
   return {
     create, flush, canvas, observers, frames, requested, deletedShaders, deletedPrograms, deletedBuffers,
     canvasEvents, documentEvents, mediaEvents, uniforms, document,
-    counts: () => ({ draws, releases, createdShaders }),
+    counts: () => ({ draws, releases, createdShaders, fallbacks }),
   }
 }
+
+for (const renderer of ['ANGLE (Google, Vulkan SwiftShader Device)', 'llvmpipe (LLVM 19)', 'softpipe', 'Microsoft Basic Render Driver']) {
+  test(`known software renderer ${renderer} is refused before expensive compilation`, (t) => {
+    const f = fixture(t, undefined, false, renderer)
+    assert.equal(f.create(), null)
+    assert.equal(f.counts().createdShaders, 0)
+    assert.equal(f.counts().releases, 1)
+    assert.equal(f.frames.size, 0)
+  })
+}
+
+test('a stalled visible frame retires optional animation once even with private renderer identity', (t) => {
+  const f = fixture(t, undefined, false, null)
+  const view = f.create()!
+  assert(view)
+  f.observers[0]!.visible(true)
+  f.flush(100)
+  f.flush(351)
+  assert.equal(f.counts().draws, 1)
+  assert.equal(f.counts().fallbacks, 1)
+  assert.equal(f.counts().releases, 1)
+  view.invalidate()
+  f.observers[0]!.visible(true)
+  f.flush(600)
+  view.destroy()
+  assert.equal(f.counts().fallbacks, 1)
+  assert.equal(f.frames.size, 0)
+})
+
+test('offscreen and hidden intervals do not count as slow visible rendering', (t) => {
+  const f = fixture(t)
+  const view = f.create()!
+  f.observers[0]!.visible(true)
+  f.flush(100)
+  f.observers[0]!.visible(false)
+  f.flush(200)
+  f.observers[0]!.visible(true)
+  f.flush(2000)
+  f.document.hidden = true
+  f.documentEvents.get('visibilitychange')!()
+  f.flush(2100)
+  f.document.hidden = false
+  f.documentEvents.get('visibilitychange')!()
+  f.flush(4000)
+  assert.equal(f.counts().fallbacks, 0)
+  assert.equal(f.counts().draws, 3)
+  view.destroy()
+})
 
 for (const failure of ['refused', 'exception'] as const) {
   test(`major-performance ${failure} reaches fallback before compilation or scheduling`, (t) => {

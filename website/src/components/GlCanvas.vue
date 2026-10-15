@@ -28,6 +28,7 @@ onMounted(() => {
     maxScale: props.maxScale,
     minScale: props.minScale,
     frame: (time, dt, aspect) => props.frame(time, dt, aspect),
+    onFallback: () => { supported.value = false },
   })
   supported.value = view !== null
 })

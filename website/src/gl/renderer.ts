@@ -17,6 +17,8 @@ export interface GlViewOptions {
   minScale?: number
   /** Called before each frame; return uniforms to upload. `time` is seconds of animated time. */
   frame: (time: number, dt: number, aspect: number) => Record<string, UniformValue>
+  /** Retire optional animation and reveal the authored fallback if it stalls. */
+  onFallback?: () => void
 }
 
 export interface GlView {
@@ -68,6 +70,18 @@ function admittedContext(canvas: HTMLCanvasElement): WebGL2RenderingContext | nu
 export function createGlView(canvas: HTMLCanvasElement, options: GlViewOptions): GlView | null {
   const gl = admittedContext(canvas)
   if (!gl) return null
+
+  // The context hint is implementation-defined: some browsers still admit a
+  // software renderer. Do not compile a large raymarcher on those known paths.
+  // This is local admission only; renderer identity is never retained or sent.
+  try {
+    const info = gl.getExtension('WEBGL_debug_renderer_info')
+    const renderer = info ? gl.getParameter(info.UNMASKED_RENDERER_WEBGL) : gl.getParameter(gl.RENDERER)
+    if (typeof renderer === 'string' && /swiftshader|llvmpipe|softpipe|software rasterizer|microsoft basic render/i.test(renderer)) {
+      releaseContext()
+      return null
+    }
+  } catch { /* Private renderer identity may be unavailable; use the frame watchdog. */ }
 
   let program: WebGLProgram | null = null
   let vertexBuffer: WebGLBuffer | null = null
@@ -202,6 +216,14 @@ export function createGlView(canvas: HTMLCanvasElement, options: GlViewOptions):
       }
       return
     }
+    // One badly stalled presentation is enough to retire this optional effect.
+    // Do not queue more heavy work while gradually reducing resolution over
+    // dozens of frames. Hidden/offscreen resumes reset lastNow in kick().
+    if (lastNow && now - lastNow > 250) {
+      destroy()
+      options.onFallback?.()
+      return
+    }
     const dt = lastNow ? Math.min((now - lastNow) / 1000, 0.1) : 0
     if (lastNow) adapt(now - lastNow)
     lastNow = now
@@ -223,7 +245,9 @@ export function createGlView(canvas: HTMLCanvasElement, options: GlViewOptions):
 
   const io = new IntersectionObserver(
     (entries) => {
-      visible = entries.some((e) => e.isIntersecting)
+      const nextVisible = entries.some((e) => e.isIntersecting)
+      if (nextVisible !== visible) lastNow = 0
+      visible = nextVisible
       if (visible) {
         pending = true
         kick()
@@ -239,7 +263,7 @@ export function createGlView(canvas: HTMLCanvasElement, options: GlViewOptions):
   })
   ro.observe(canvas)
 
-  const onVisibility = (): void => kick()
+  const onVisibility = (): void => { lastNow = 0; kick() }
   document.addEventListener('visibilitychange', onVisibility)
   const onMotion = (): void => {
     pending = true
@@ -263,27 +287,29 @@ export function createGlView(canvas: HTMLCanvasElement, options: GlViewOptions):
   canvas.addEventListener('webglcontextlost', onLost)
   canvas.addEventListener('webglcontextrestored', onRestored)
 
+  function destroy(): void {
+    if (destroyed || !gl) return
+    destroyed = true
+    if (raf) cancelAnimationFrame(raf)
+    io.disconnect()
+    ro.disconnect()
+    document.removeEventListener('visibilitychange', onVisibility)
+    reduced.removeEventListener('change', onMotion)
+    canvas.removeEventListener('webglcontextlost', onLost)
+    canvas.removeEventListener('webglcontextrestored', onRestored)
+    if (program) gl.deleteProgram(program)
+    if (vertexBuffer) gl.deleteBuffer(vertexBuffer)
+    program = null
+    vertexBuffer = null
+    releaseContext()
+  }
+
   return {
     invalidate() {
       if (destroyed) return
       pending = true
       kick()
     },
-    destroy() {
-      if (destroyed) return
-      destroyed = true
-      if (raf) cancelAnimationFrame(raf)
-      io.disconnect()
-      ro.disconnect()
-      document.removeEventListener('visibilitychange', onVisibility)
-      reduced.removeEventListener('change', onMotion)
-      canvas.removeEventListener('webglcontextlost', onLost)
-      canvas.removeEventListener('webglcontextrestored', onRestored)
-      if (program) gl.deleteProgram(program)
-      if (vertexBuffer) gl.deleteBuffer(vertexBuffer)
-      program = null
-      vertexBuffer = null
-      releaseContext()
-    },
+    destroy,
   }
 }

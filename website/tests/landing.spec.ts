@@ -42,6 +42,10 @@ async function renderScenes(page: Page, scope = 'body'): Promise<void> {
 }
 
 test.describe('landing page', () => {
+  // Emit failures when they happen, even if a later test reaches the job limit.
+  test.afterEach(({}, info) => {
+    for (const error of info.errors) console.error(`[failure] ${info.title}: ${(error.message ?? '').slice(0, 12_000)}`)
+  })
   for (const vp of viewports) {
     test(`composes at ${vp.name} without horizontal overflow`, async ({ page }) => {
       test.slow() // Scroll every scene before the existing full-page capture.
@@ -90,7 +94,7 @@ test.describe('landing page', () => {
     await settle(page)
     await renderScenes(page)
     expect(await page.locator('[data-gl-fallback]').count()).toBeGreaterThan(0)
-    await expect(page.getByRole('link', { name: 'View on GitHub', exact: true })).toBeVisible()
+    await expect(page.locator('#top').getByRole('link', { name: 'View on GitHub', exact: true })).toBeVisible()
     expect(errors).toEqual([])
   })
 
