@@ -49,6 +49,7 @@ fn nested_copy_preserves_sources_reparents_children_and_records_provenance() {
 fn actual_typed_audio_and_navigation_edges_remap_internal_only() {
     let mut f = Fixture::new();
     let clip = new_id();
+    let mesh = new_id();
     let script = new_id();
     let mut internal_source = Entity::new("Internal bus source");
     internal_source.parent = Some(f.root.clone());
@@ -90,10 +91,24 @@ fn actual_typed_audio_and_navigation_edges_remap_internal_only() {
                 path: "scripts/behavior.ts".into(),
             },
         },
+        Command::UpsertAsset {
+            asset: Asset {
+                id: mesh.clone(),
+                name: "Navigation mesh source".into(),
+                path: "assets/source.glb".into(),
+                kind: "model".into(),
+                sha256: "0".repeat(64),
+                import_settings: None,
+            },
+        },
         f.set(&f.outside, "AudioBus", json!({"gain_db":0})),
         f.set(&f.root, "AudioBus", json!({"parent":f.outside,"gain_db":0})),
         f.set(&f.child, "AudioBus", json!({"parent":f.root,"gain_db":0})),
-        f.set(&f.child, "Collider", json!(Collider::default())),
+        f.set(
+            &f.child,
+            "MeshRenderer",
+            json!({"mesh":mesh,"materials":[],"cast_shadows":true}),
+        ),
         f.set(
             &f.outside,
             "Transform",
@@ -111,7 +126,7 @@ fn actual_typed_audio_and_navigation_edges_remap_internal_only() {
             json!({"settings":{"min":[-10,-10,-10],"max":[10,10,10],
             "cell_size":0.25,"cell_height":0.25,"tile_cells":32,"agent_radius":0.25,
             "agent_height":1,"max_climb":0.25,"max_slope_degrees":45},
-            "sources":[{"entity":f.child,"geometry":"collider"},
+            "sources":[{"entity":f.child,"geometry":"mesh"},
                 {"entity":f.outside,"geometry":"collider"}]}),
         ),
         Command::CreateEntity {
