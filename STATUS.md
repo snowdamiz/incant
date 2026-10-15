@@ -13,6 +13,15 @@ controls. This fixes the ordinary viewport route; low-resolution reconstruction
 still has separate appearance defects. The entries
 below preserve earlier scoped results and superseded integration snapshots.
 
+Checkpoint46 is blocked by the Windows desktop starter test: the trusted Node
+cook hit its unchanged eight-second deadline after driver entry and before
+compiler dependencies were ready. This does not identify which dependency was
+slow. The [expanded loader observation](docs/spikes/typescript-loader-observation.md)
+separates TypeScript and SWC loading and runs the fallback and four scripted
+starters in the existing one-shot Windows diagnostic. Local controls pass;
+the Windows observation and a timeout repair remain pending. Release stays at
+checkpoint45, and no release requirement is bypassed.
+
 Checkpoint45 is promoted after every required context and all eight frozen-head
 workflows succeeded. The verified release tree equals main346. Checkpoints41–44
 remain failed historical batches; their reviewed main fixes passed the complete
