@@ -34,8 +34,10 @@ impl Restart {
             None => true,
             #[cfg(feature = "render-input")]
             Some(Settings::Cpu(_)) => true,
+            #[cfg(feature = "render-input")]
+            Some(Settings::Recording(_, _)) => false,
             #[cfg(feature = "render-gpu")]
-            Some(Settings::Gpu(_)) => false,
+            Some(Settings::Gpu(_) | Settings::RecordedGpu(_, _)) => false,
             #[cfg(not(feature = "render-input"))]
             Some(settings) => match *settings {},
         };
@@ -111,8 +113,12 @@ impl Restart {
                         .ok_or("missing startup host settings")?,
                 ),
             )?,
+            #[cfg(feature = "render-input")]
+            Player::Recording(_) => return Err("material recording restart is unsupported".into()),
             #[cfg(feature = "render-gpu")]
-            Player::Gpu(_) => return Err("offscreen GPU restart is unsupported".into()),
+            Player::Gpu(_) | Player::RecordedGpu(_) => {
+                return Err("offscreen GPU restart is unsupported".into());
+            }
         }
         self.input.replace_session();
         self.generation = next;

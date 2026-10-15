@@ -4,13 +4,17 @@ use crate::{FallbackCompiler, StartOptions};
 use incant_audio_runtime::ClipBinding;
 use incant_game_runtime::{HostedOfflineGameSession, OfflineGameSession};
 use incant_input::{InputActions, InputEvent, InputFrame, RecordedUiEvent};
-use incant_render_game::{NativeRenderHost, NativeRenderSettings};
+use incant_render_data::prewarm::{MaterialManifest, MaterialProfile, RecordingContext};
+use incant_render_game::{MaterialRecordingConsumer, NativeRenderHost, NativeRenderSettings};
 use incant_runtime::{CookedScene, NativeWorld};
 use incant_script::{NativeLogs, SessionProgram};
+use sha2::{Digest, Sha256};
 use std::path::Path;
 
 #[derive(Debug, thiserror::Error)]
 pub enum SessionError {
+    #[error("native material recording: {0}")]
+    Recording(&'static str),
     #[error("native play startup/runtime failure: {0}")]
     Native(#[source] Box<dyn std::error::Error>),
 }
@@ -33,9 +37,52 @@ impl Session {
         sample_rate: u32,
         fallback: FallbackCompiler,
     ) -> Result<Self> {
+        Self::new_configured(document, root, options, sample_rate, fallback, None)
+    }
+    pub fn new_recording_materials(
+        document: &incant_doc::Project,
+        root: &Path,
+        options: &StartOptions,
+        sample_rate: u32,
+        fallback: FallbackCompiler,
+        profile: MaterialProfile,
+        input_sha256: [u8; 32],
+    ) -> Result<Self> {
+        Self::new_configured(
+            document,
+            root,
+            options,
+            sample_rate,
+            fallback,
+            Some((profile, input_sha256)),
+        )
+    }
+    fn new_configured(
+        document: &incant_doc::Project,
+        root: &Path,
+        options: &StartOptions,
+        sample_rate: u32,
+        fallback: FallbackCompiler,
+        recording: Option<(MaterialProfile, [u8; 32])>,
+    ) -> Result<Self> {
         let prepared =
             incant_play::PreparedPlay::load(document, root, options, sample_rate, fallback)
                 .map_err(native)?;
+        let recording = recording
+            .map(|(profile, input_sha256)| {
+                Ok::<_, SessionError>(RecordingContext {
+                    scene: prepared.cooked.id().0,
+                    cooked_scene_sha256: Sha256::digest(prepared.cooked.to_bytes()).into(),
+                    profile,
+                    input_sha256,
+                    tick_rate: prepared.cooked.tick_rate(),
+                    script_sha256: prepared
+                        .code
+                        .artifact_sha256()
+                        .ok_or(SessionError::Recording("program has no artifact receipt"))?,
+                })
+            })
+            .transpose()?;
         let game = Game::new(
             prepared.cooked,
             prepared.code,
@@ -43,6 +90,7 @@ impl Session {
             prepared.clips,
             prepared.sample_rate,
             prepared.render,
+            recording,
         )?;
         Ok(Self {
             scene: prepared.scene,
@@ -50,6 +98,18 @@ impl Session {
             authored_scripts: prepared.authored_scripts,
             game,
         })
+    }
+    pub fn material_manifest(&self) -> Result<Option<MaterialManifest>> {
+        match &self.game {
+            Game::Recording(game) => Ok(Some(
+                game.host()
+                    .map_err(native)?
+                    .consumer()
+                    .manifest()
+                    .map_err(native)?,
+            )),
+            _ => Ok(None),
+        }
     }
     pub fn world(&self) -> Result<&NativeWorld> {
         self.game.world()
@@ -71,6 +131,9 @@ impl Session {
     }
     pub fn validate_ui_recording(&self, uses_ui: bool) -> Result<()> {
         match &self.game {
+            Game::Recording(game) => {
+                incant_render_game::validate_ui_recording(game, uses_ui).map_err(native)
+            }
             Game::Spatial(game) => {
                 incant_render_game::validate_ui_recording(game, uses_ui).map_err(native)
             }
@@ -93,20 +156,27 @@ impl Session {
             return self.tick(physical, output);
         }
         self.validate_ui_recording(true)?;
-        let Game::Spatial(game) = &mut self.game else {
-            unreachable!("UI admission checked");
-        };
-        incant_render_game::tick_recorded_ui(game, physical, records, viewport, output)
-            .map_err(native)
+        match &mut self.game {
+            Game::Spatial(game) => {
+                incant_render_game::tick_recorded_ui(game, physical, records, viewport, output)
+                    .map_err(native)
+            }
+            Game::Recording(game) => {
+                incant_render_game::tick_recorded_ui(game, physical, records, viewport, output)
+                    .map_err(native)
+            }
+            Game::Plain(_) => unreachable!("UI admission checked"),
+        }
     }
     pub fn is_spatial(&self) -> bool {
-        matches!(self.game, Game::Spatial(_))
+        matches!(self.game, Game::Spatial(_) | Game::Recording(_))
     }
 }
 
 enum Game {
     Plain(Box<OfflineGameSession>),
     Spatial(Box<HostedOfflineGameSession<NativeRenderHost>>),
+    Recording(Box<HostedOfflineGameSession<NativeRenderHost<MaterialRecordingConsumer>>>),
 }
 impl Game {
     fn new(
@@ -116,7 +186,31 @@ impl Game {
         clips: Vec<ClipBinding>,
         rate: u32,
         settings: Option<NativeRenderSettings>,
+        recording: Option<RecordingContext>,
     ) -> Result<Self> {
+        if let Some(context) = recording {
+            let settings = settings.ok_or(SessionError::Recording(
+                "recording requires a spatial camera host",
+            ))?;
+            return Ok(Self::Recording(Box::new(
+                HostedOfflineGameSession::new(
+                    scene,
+                    code,
+                    actions,
+                    clips,
+                    rate,
+                    NativeRenderSettings {
+                        consumer: context,
+                        camera: settings.camera,
+                        model_cache: settings.model_cache,
+                        texture_cache: settings.texture_cache,
+                        text: settings.text,
+                        ui: settings.ui,
+                    },
+                )
+                .map_err(native)?,
+            )));
+        }
         if let Some(settings) = settings {
             Ok(Self::Spatial(Box::new(
                 HostedOfflineGameSession::new(scene, code, actions, clips, rate, settings)
@@ -132,36 +226,42 @@ impl Game {
         match self {
             Self::Plain(g) => g.world().map_err(native),
             Self::Spatial(g) => g.world().map_err(native),
+            Self::Recording(g) => g.world().map_err(native),
         }
     }
     fn input(&self) -> Result<&InputFrame> {
         match self {
             Self::Plain(g) => g.input().map_err(native),
             Self::Spatial(g) => g.input().map_err(native),
+            Self::Recording(g) => g.input().map_err(native),
         }
     }
     fn logs(&self) -> Result<&NativeLogs> {
         match self {
             Self::Plain(g) => g.logs().map_err(native),
             Self::Spatial(g) => g.logs().map_err(native),
+            Self::Recording(g) => g.logs().map_err(native),
         }
     }
     fn next_frames(&self) -> Result<usize> {
         match self {
             Self::Plain(g) => g.next_output_frames().map_err(native),
             Self::Spatial(g) => g.next_output_frames().map_err(native),
+            Self::Recording(g) => g.next_output_frames().map_err(native),
         }
     }
     fn frames(&self) -> Result<u128> {
         match self {
             Self::Plain(g) => g.rendered_frames().map_err(native),
             Self::Spatial(g) => g.rendered_frames().map_err(native),
+            Self::Recording(g) => g.rendered_frames().map_err(native),
         }
     }
     fn tick(&mut self, input: &[InputEvent], output: &mut [f32]) -> Result<()> {
         match self {
             Self::Plain(g) => g.tick(input, output).map_err(native),
             Self::Spatial(g) => g.tick(input, output).map_err(native),
+            Self::Recording(g) => g.tick(input, output).map_err(native),
         }
     }
 }

@@ -18,6 +18,11 @@ impl Player {
             incant_render_game::tick_recorded_ui(game, physical, records, viewport, output)?;
             return Ok(());
         }
+        #[cfg(feature = "render-input")]
+        if let Self::Recording(game) = self {
+            incant_render_game::tick_recorded_ui(game, physical, records, viewport, output)?;
+            return Ok(());
+        }
         Err("UI input requires the existing CPU composed host".into())
     }
     pub fn validate_ui_recording(&self, uses_ui: bool) -> Result<()> {
@@ -26,6 +31,11 @@ impl Player {
         }
         #[cfg(feature = "render-input")]
         if let Self::Spatial(game) = self {
+            incant_render_game::validate_ui_recording(game, uses_ui)?;
+            return Ok(());
+        }
+        #[cfg(feature = "render-input")]
+        if let Self::Recording(game) = self {
             incant_render_game::validate_ui_recording(game, uses_ui)?;
             return Ok(());
         }

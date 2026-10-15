@@ -286,6 +286,7 @@ impl Renderer {
     /// Startup-only portable pipelines; no temporal owner or visual policy is
     /// enabled until the caller supplies a validated TemporalConfig separately.
     pub async fn enable_temporal_accumulation(&mut self) -> Result<()> {
+        self.materials.require_eager()?;
         crate::motion::admission()?;
         if self.temporal.is_some() {
             return Ok(());

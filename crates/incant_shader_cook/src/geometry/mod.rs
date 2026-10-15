@@ -108,15 +108,20 @@ pub fn cook(kind: Kind, source: &str) -> Result<Bundle> {
 
 /// Emit only a private build-generated manifest, with the family ABI identity.
 pub fn write_bundle(kind: Kind, bundle: &Bundle, directory: &Path) -> Result<()> {
+    write_contract_bundle(kind.contract(), bundle, directory)
+}
+pub(crate) fn write_contract_bundle(
+    contract: &str,
+    bundle: &Bundle,
+    directory: &Path,
+) -> Result<()> {
     if bundle.artifacts.len() != 6 {
         return Err(CookError::Contract("geometry artifact count"));
     }
     fs::create_dir_all(directory)?;
     let mut generated = format!(
         "const MANIFEST_CONTRACT: &str = {:?};\nconst SOURCE_HASH: [u8; 32] = {:?};\nconst PRODUCER_HASH: [u8; 32] = {:?};\nconst ARTIFACTS: [Artifact; 6] = [\n",
-        kind.contract(),
-        bundle.source_hash,
-        bundle.producer_hash,
+        contract, bundle.source_hash, bundle.producer_hash,
     );
     for artifact in &bundle.artifacts {
         let file = format!("{:?}-{:?}.shader", artifact.backend, artifact.stage);
@@ -128,7 +133,7 @@ pub fn write_bundle(kind: Kind, bundle: &Bundle, directory: &Path) -> Result<()>
     fs::write(directory.join("manifest.rs"), generated)?;
     crate::audit::write(
         directory,
-        kind.contract(),
+        contract,
         &bundle.source_hash,
         &bundle.producer_hash,
         bundle.artifacts.iter().map(|a| {

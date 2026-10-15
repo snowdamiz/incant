@@ -4,8 +4,8 @@ The current phase remains **Phase 1: Core engine**. The
 [Phase 1 review ledger](docs/gates/phase1-review.md) maps each exit requirement to
 its recorded evidence and remaining qualification. The actual native texture,
 compatible static-model and compatible-animation workflows are verified on this Mac;
-[release checkpoint45](docs/spikes/release-checkpoint-45.md) contains the tested
-main346 tree after all 23 required contexts and eight candidate workflows passed.
+[release checkpoint47](docs/spikes/release-checkpoint-47.md) contains the tested
+main359 tree after all 23 required contexts and eight candidate workflows passed.
 Later main changes remain outside that release baseline. Rendering quality and full rendered-game
 performance remain open. The reported jagged editor cube now has explicit 4x
 geometry antialiasing, verified in the actual Mac editor and isolated Metal
@@ -13,7 +13,7 @@ controls. This fixes the ordinary viewport route; low-resolution reconstruction
 still has separate appearance defects. The entries
 below preserve earlier scoped results and superseded integration snapshots.
 
-Checkpoint46 is blocked by the Windows desktop starter test: the trusted Node
+Checkpoint46 failed the Windows desktop starter test: the trusted Node
 cook hit its unchanged eight-second deadline after driver entry and before
 compiler dependencies were ready. This does not identify which dependency was
 slow. The [expanded loader observation](docs/spikes/typescript-loader-observation.md)
@@ -21,8 +21,9 @@ separates TypeScript and SWC loading and runs the fallback and four scripted
 starters in the existing one-shot Windows diagnostic. Its exact main355 run now
 passes all six controls, with five successful cooks taking 1.737–2.043 seconds
 and one expected refusal. The timeout did not reproduce; no repair is established.
-The retained checkpoint46 failure still blocks its promotion. Release stays at
-checkpoint45, and no release requirement is bypassed.
+The retained checkpoint46 failure was not promoted. Checkpoint47 subsequently
+passed the complete suite on main359 and is now the release baseline; the original
+timeout cause remains unestablished. No release requirement was bypassed.
 
 Checkpoint45 is promoted after every required context and all eight frozen-head
 workflows succeeded. The verified release tree equals main346. Checkpoints41–44
@@ -42,6 +43,51 @@ passes local tests and leaves production behavior unchanged. Both desktop jobs
 and Windows Wasm conformance passed on checkpoint44; that checkpoint's separate
 general failure prevented promotion.
 
+## Packaged-player frame capture — integrated CPU and Metal qualification
+
+The source-free CPU spatial player can now save selected accepted gameplay
+states as PNGs, including the HUD, without opening a desktop window. Capture
+reuses the running world and preserves its report, PCM and restart chronology.
+Bounded output uses create-only publication; incomplete runs retain partial
+evidence and never publish a complete manifest. The ordinary native-window
+build includes this optional CLI mode.
+
+The recorded-material composition passes 13 CPU controls, two strict lint
+configurations, native-window compilation and the same-source Metal rendering
+control. Earlier results and the original fixture failure remain retained.
+The later main365 join changes only DX12 diagnostic tests/tools and documentation;
+capture/player/render implementation bytes remain identical to the qualified
+composition. Core and locale image collection is next. This does not establish
+native presentation, temporal reconstruction quality or performance.
+[Usage and evidence](docs/spikes/native-player-frame-capture.md).
+
+## Opt-in DX12 pipeline libraries — local controls, native diagnostic pending
+
+A default-off native DX12 pipeline library now has conservative source/driver
+identity, bounded private Windows storage, exact descriptor keys and COM-owned
+input backing. Mac CPU controls and Windows GNU compile/lint checks pass. A
+separate manually invoked hosted diagnostic covers real Windows cache hits,
+filesystem/COM lifetime and exact rendered parity. Its first run stopped during
+compilation when the resource observer encountered a retired temporary directory;
+the observer repair passes ten portable controls. The next hosted run passes
+40 actual Windows CPU controls and four strict lints, then reaches native startup
+and exposes an invalid zero-hit seed assertion: identical material PSOs can be
+reused within the initial session. Its correction passes eleven portable controls;
+complete native reuse/lifetime/pixel qualification is still pending. Both failed
+attempts remain retained. Existing release checks are unchanged. This does not close the
+shader-stall gate or claim that HLSL compilation is avoided.
+[Scope and evidence](docs/spikes/dx12-pipeline-library.md).
+
+## macOS audio output changes — CPU qualified
+
+The player now preserves its mixer when the pinned macOS backend reports an
+already handled default-output reroute, instead of closing the game. Device loss,
+invalidated streams and lossy notification queues remain terminal. All 42 audio
+tests, strict device-enabled lint and a device-free build pass, with independent
+review. The original native replay failure remains retained; actual audible
+device-switch continuity and a fresh shipping player are not yet verified.
+[Behavior and evidence](docs/spikes/macos-audio-route.md).
+
 ## Explicit local-model transport — locally verified
 
 The headless agent can select a loopback streaming Responses server with
@@ -51,6 +97,27 @@ are untouched; approvals, durable budgets, command history and Undo remain share
 independent source review. These are synthetic HTTP results, not live-model
 compatibility or quality evidence. Editor selection and broader provider support
 remain open. [Scope and verification](docs/spikes/local-responses-provider.md).
+## Recorded model-material preparation — scoped CPU and Metal qualification
+
+The opt-in ModelMaterialV1 route now records actual CPU gameplay keys, admits a
+bounded content-bound level manifest, prewarms recorded keys and publishes missing
+keys from one owned worker while frames select an alpha/depth/coverage-preserving
+fallback. Eager preparation remains the default; unsupported effects refuse.
+On the main358 composition, 28 CPU controls, both strict ordinary/cooked lints and
+six offscreen Metal controls pass. All 30 ordinary/cooked image pairs are
+byte-identical; representative actual PNGs were reviewed. Source-free fresh
+processes exercise recording, changed mirror input, fallback and cold close.
+Seven earlier CPU failures remain retained. Native-window, arbitrary-scene,
+driver-stall and shipping performance gates remain open. Other-device execution
+remains deferred.
+The later DX12/audio composition at `00dc34c5` also passes 14 focused CPU checks,
+six correctly ignored GPU controls, two strict Mac lints and two Windows GNU
+renderer test-target strict Clippy stages. Six current-source Mac artifacts and
+actual feature records are retained; no Windows binary ran. Source comparison
+proves the later `c25c6f50` join changes only the Python storage observer/tests and
+docs. Original `11d4` GPU/pixel evidence and all cumulative charges stay intact;
+these integration checks add no GPU, native Windows or performance claim.
+[Contract, usage and portable evidence](docs/spikes/recorded-material-prewarm.md).
 
 ## Bounded agent response reads — locally verified
 
@@ -360,23 +427,21 @@ Chinese HUD, loss/restart text and resumed gameplay without the former crowding.
 Focus pauses and the missed final win capture remain explicit; full appearance
 and performance are separate. [Window sizing and evidence](docs/spikes/native-window-logical-size.md).
 
-The earlier Arabic shipping package passes loss, win and loss/restart/win CPU routes,
-with exact gameplay, localized HUD and PCM reset parity. Its complete 3,056-step
-Mac window run matches the CPU observations. A separate visual replay timed out
-after focus interruptions; five partial actual images show joined Arabic, damage,
-loss and restarted gameplay. The default Retina window was crowded at 320×240
-logical units. Arabic health-pip direction is now corrected in the sample's
-string table, with real localization/font-shaping regression coverage; normal-size
-appearance and native RTL health-order review remain open. Capture is allowed;
-actual native window checks currently require the Mac desktop to be unlocked.
-[CPU correction and limits](docs/spikes/core-rtl-health-direction.md).
-The [corrected Arabic export](docs/spikes/core-arabic-corrected-export.md) now
-passes fresh public shipping export and all three CPU routes at main342, including
-the health-label marks, full localized HUD/state and exact PCM concatenation.
-Its window-capable binary has not been launched in a native window. The latest
-separate pseudo attempt timed out at zero ticks while macOS was locked; that
-failure remains retained. These CPU results do not supply the missing locale pixels.
-The fresh CJK export/window is recorded above.
+The [corrected Arabic package](docs/spikes/core-arabic-corrected-window.md) now
+completes two full 3,056-step native Mac replays with exact same-package CPU
+observation parity. Actual normal-size images show readable joined Arabic,
+loss/restart text, restarted gameplay, and two filled health pips on the right
+with the empty pip on the left. Final winning pixels are still missing. A third
+capture attempt lost focus at step 13 and reached its original 120-second
+deadline; all owned processes were stopped and CUA reset. This does not pass the
+combined locale or performance gate.
+
+The locale launcher's former requirement for an optional macOS lock field
+caused false refusals. Its metadata-only preflight now requires explicit primary
+unlock, a unique completed console login for the calling user, and no
+contradictory secondary flag. Eight parser controls and the full 554-test Python
+suite (four skips) pass. This corrects admission; focus loss can still pause a
+running replay. Earlier Arabic, CJK and pseudo failures remain retained.
 
 Pseudo-localized authoring, a fresh shipping export and all three CPU gameplay
 routes now pass. Actual normal-size window images show readable expanded HUD and
@@ -421,9 +486,12 @@ gameplay and postcommit host stages in one monotonic clock. Its bounded analyzer
 keeps catch-up batches, missing stages and surface/focus boundaries explicit.
 Observer-enabled and ordinary CPU suites, strict lint and 18 analyzer controls
 pass. A fresh shipping build also passes its complete 2,156-tick CPU gameplay
-replay with exact logical and PCM parity. These new fields have not yet been
-exercised in a native window; no scheduling policy or performance gate changes.
-[Host-stage contract and CPU evidence](docs/spikes/native-presentation-host-stages.md).
+replay with exact logical and PCM parity. One later native run retains valid host
+stages for 263/2,156 steps, then loses focus and fails its unfinished observation
+after the window is closed. Its inactive tail stays outside frame statistics;
+active body/reservation outliers and incomplete callback coverage identify no
+specific source defect. No retry, scheduling change or performance-gate claim.
+[Host-stage contract and scoped live evidence](docs/spikes/native-presentation-host-stages.md).
 
 ## Device audio overrun handling — merged main303
 

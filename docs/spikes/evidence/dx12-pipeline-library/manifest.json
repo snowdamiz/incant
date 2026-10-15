@@ -1,0 +1,97 @@
+{
+  "format": "incant-dx12-pipeline-library-evidence-v1",
+  "scope": "Default-off native DX12 pipeline-library implementation. Mac portable controls and Windows GNU strict typechecks only; native Windows, GPU/cache-hit/pixel and performance controls unrun.",
+  "mac_test_source": "650583fc6e75988ff74294a3d38f41b54b17f59d",
+  "windows_compile_source": "8f27e2118282a7a9f69120c6ac2cc5f7199bd9b0",
+  "source_inventory_record": "source-005.json",
+  "source_inventory_files": 1602,
+  "record_count": 127,
+  "records_sha256": "0b5024c3470e207b6aab3ed4a284145820f32665ecd9e3a0a3f1ba8ce3dd8695",
+  "verifier_sha256": "4e3e7f3d0f621517f1ba12d919588ab05440d19b48061cbcf1c1c6e0d733f94c",
+  "binaries": [
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-core-tick-diagnostic-target/aarch64-apple-darwin/ci/deps/incant_render-47fe74c68c4ef1d8",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/dx12-pipeline-library-001/cpu-003/artifacts/0-incant_render",
+      "bytes": 33214768,
+      "sha256": "33f175a40e89b49a5ba769dc950f767c54f9fe718484e82935b50b6aeae04708",
+      "features": [
+        "default",
+        "dx12-pipeline-library",
+        "persistent-pipeline-cache",
+        "physics-deterministic"
+      ],
+      "kind": [
+        "lib"
+      ]
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-core-tick-diagnostic-target/aarch64-apple-darwin/ci/deps/incant_render-203839eb868e0676",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/dx12-pipeline-library-001/cpu-003/artifacts/2-incant_render",
+      "bytes": 34437568,
+      "sha256": "1bc73641c117438d54d390bf115876dee2f4d8699a663ad5d95567f6e892d44e",
+      "features": [
+        "cooked-bloom",
+        "cooked-clusters",
+        "cooked-geometry",
+        "cooked-materials",
+        "cooked-metalfx-boundary",
+        "cooked-native-shaders",
+        "cooked-output",
+        "cooked-sprites",
+        "cooked-ssao",
+        "cooked-temporal",
+        "cooked-text",
+        "cooked-ui",
+        "default",
+        "dx12-pipeline-library",
+        "persistent-pipeline-cache",
+        "physics-deterministic"
+      ],
+      "kind": [
+        "lib"
+      ]
+    }
+  ],
+  "external_metadata": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/dx12-pipeline-library-001/windows-source-metadata.json",
+      "sha256": "ef41f39fd3f1f00a3e0479cbbbf34a8e3ff6d0261e18c42a158d2fe785b33498",
+      "bytes": 3728824
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/dx12-pipeline-library-001/windows-source-metadata-002.json",
+      "sha256": "560b8ccb3415e4cbc79e2bf6079b0a0bb88eae87d43f2d808c3eafc26b79c735",
+      "bytes": 3729291
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/local-responses-provider-001/root-closeout.json",
+      "sha256": "da093e84b5665c90c4a14e936701d0795ccaf16e7d2cab80db2abf395fd7e34e",
+      "bytes": 606
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/windows-cross-compiler-001/tools.json",
+      "sha256": "2ac6b41422347ab64d8dc6c2903bfb21bad09e65a9c267dfbad1f38cbfe029da",
+      "bytes": 635
+    }
+  ],
+  "claims": {
+    "mac_test_executions": 46,
+    "mac_strict_all_target_lints": 2,
+    "ordinary_feature_off_compile": true,
+    "windows_gnu_strict_compile_lint_stages": 2,
+    "windows_native_execution": false,
+    "driver_cache_hit": false,
+    "native_pixels": false,
+    "performance": false,
+    "shader_stall_gate": false
+  },
+  "failures_retained": [
+    "CPU001 Cargo non-workspace package feature selection refused before Rust compilation",
+    "CPU002 non-workspace HAL unit test dev-dependencies refused before Rust compilation",
+    "CPU003 46 Mac test executions and lints passed, then Windows SID type inference failed",
+    "CPU004 redundant production Options Default update Clippy failure",
+    "CPU005 ordinary Windows strict library Clippy passed; full cooked test visibility and nonexistent Bloom Default failed"
+  ],
+  "resource_closeout_record": "cpu006-closeout.json",
+  "native_windows_followup": "Separate hosted proposal required; no unexecuted Windows test is counted as passing."
+}

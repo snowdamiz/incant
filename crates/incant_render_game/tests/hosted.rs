@@ -1,3 +1,5 @@
+#[path = "recording/hosted.rs"]
+mod material_recording;
 #[path = "../../incant_assets_runtime/tests/support/mod.rs"]
 mod pcm;
 #[path = "../../incant_runtime/tests/support/scene_format.rs"]

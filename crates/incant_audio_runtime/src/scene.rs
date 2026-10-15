@@ -374,9 +374,9 @@ impl SceneAudio<OfflineBackend> {
 
 #[cfg(all(feature = "device", not(target_arch = "wasm32")))]
 impl SceneAudio<crate::DeviceBackend> {
-    /// Observe the real CPAL queue. Typed xruns are counted without replacing
-    /// the mixer. Other errors, unavailable queues and discarded events remain
-    /// terminal. Absence of an observed error is not a liveness proof.
+    /// Observe the real CPAL queue. Typed xruns and macOS default-output reroutes
+    /// are counted without replacing the mixer. Other errors, unavailable queues
+    /// and discarded events remain terminal. No notification proves liveness.
     pub fn check_device(&mut self) -> Result<()> {
         let backend = self
             .mixer
