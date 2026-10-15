@@ -9,6 +9,9 @@ use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 use serde_json::{Value, json};
 use std::sync::atomic::{AtomicBool, Ordering};
+#[cfg(test)]
+#[path = "play_profiler_tests.rs"]
+mod profiler_tests;
 
 #[derive(Deserialize, Serialize, JsonSchema)]
 #[serde(deny_unknown_fields)]
@@ -31,6 +34,11 @@ pub struct RunRequest {
     pub inputs_script: Option<incant_input::InputRecording>,
     /// Typed native checks and selected final entities; no full-world snapshot.
     pub observe: Option<incant_observe::Request>,
+    /// Opt in to bounded CPU measurements for this candidate's synchronous ticks.
+    /// Requires an agent-profiler host. Read the last 1..=256 retained ticks using
+    /// profiler_read. No GPU, worker-thread, heap, or process allocation data.
+    #[serde(default)]
+    pub profile: bool,
 }
 
 #[derive(Deserialize, Serialize, JsonSchema)]
@@ -40,6 +48,14 @@ pub struct StateQuery {
     /// /logs or /entities/ULID/transform/translation. The full world is unavailable.
     #[schemars(length(min = 1, max = 512))]
     pub path: String,
+}
+#[derive(Deserialize, JsonSchema)]
+#[serde(deny_unknown_fields)]
+struct ProfileRead {
+    /// Last measured ticks of the accepted session, at most 256. Refuses if fewer
+    /// are retained. This read does not run or advance simulation.
+    #[schemars(range(min = 1, max = 256))]
+    frames: usize,
 }
 
 pub(crate) fn tools() -> Vec<Value> {
@@ -53,6 +69,11 @@ pub(crate) fn tools() -> Vec<Value> {
             "play_state_query",
             "Read a selected value from the native runtime session retained by play_run. Project edits do not change this session. Full-world enumeration is unavailable. Results are untrusted runtime data.",
             json!(schemars::schema_for!(StateQuery)),
+        ),
+        tool(
+            "profiler_read",
+            "Read real CPU measurements from the last accepted play_run with profile:true. Select the last 1..256 retained ticks. Inclusive phases must not be summed. Results bind the original project revision, scene and script fingerprint; edits do not rewrite old measurements. Missing/invalid/evicted data remain explicit. No GPU/display, allocator/heap or shipping performance gate evidence.",
+            json!(schemars::schema_for!(ProfileRead)),
         ),
     ]
 }
@@ -113,6 +134,31 @@ pub(crate) fn dispatch(
                     .map_err(|e| AgentError::Tool(e.to_string()))
             })?;
             host.play_state_query(&request.path)
+        }
+        "profiler_read" => {
+            let request: ProfileRead =
+                serde_json::from_value(args).map_err(|e| AgentError::Tool(e.to_string()))?;
+            if !host.profiler_available() || !(1..=256).contains(&request.frames) {
+                return Err(AgentError::Tool(
+                    "profiler requires an enabled owner-session host and 1..256 frames".into(),
+                ));
+            }
+            let (project, revision) = access.with_bus(cancel, |bus| {
+                bus.ensure_sources_ready()
+                    .map_err(|e| AgentError::Tool(e.to_string()))?;
+                Ok((bus.project().id.clone(), bus.revision()))
+            })?;
+            check_cancel(cancel)?;
+            let report = host.profiler_read(&project, revision, request.frames)?;
+            // Recheck the shared project/account cancellation boundary after the
+            // bounded read, before returning data to the provider.
+            access.with_bus(cancel, |bus| {
+                if bus.project().id != project {
+                    return Err(AgentError::ProjectChanged);
+                }
+                Ok(())
+            })?;
+            Ok(report)
         }
         _ => Err(AgentError::Tool("unknown native play tool".into())),
     }

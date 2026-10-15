@@ -13,6 +13,8 @@ wasmtime-host = ["incant_play/wasmtime-host"]
 play-probe = []
 # Explicit local live-provider acceptance, absent from normal builds.
 agent-probe = []
+# Explicit CPU-only agent profiling; each play request must also opt in.
+agent-profiler = ["incant_agent_native/agent-profiler"]
 custom-protocol = ["tauri/custom-protocol"]
 
 # Select one physics kernel for the entire process, including build/test hosts.

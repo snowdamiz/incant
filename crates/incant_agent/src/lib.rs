@@ -155,6 +155,14 @@ pub trait EngineHost {
     fn play_state_query(&mut self, _: &str) -> Result<Value, AgentError> {
         Err(AgentError::Tool("no native play host connected".into()))
     }
+    fn profiler_available(&self) -> bool {
+        false
+    }
+    fn profiler_read(&self, _: &str, _: u64, _: usize) -> Result<Value, AgentError> {
+        Err(AgentError::Tool(
+            "no owner-session profiler connected".into(),
+        ))
+    }
     fn project_files(&self) -> Option<&ProjectFiles> {
         None
     }
@@ -245,7 +253,9 @@ fn dispatch_cancellable(
         "script_read" | "script_write" => access.with_bus(cancel, |bus| {
             scripts::dispatch(bus, name, args, actor, cancel)
         }),
-        "play_run" | "play_state_query" => play::dispatch(access, perception, name, args, cancel),
+        "play_run" | "play_state_query" | "profiler_read" => {
+            play::dispatch(access, perception, name, args, cancel)
+        }
         "asset_list" | "asset_inspect" | "asset_import" => assets::dispatch(
             access,
             perception.project_files(),
@@ -414,6 +424,12 @@ impl Agent {
             || (access.is_shared() && !perception.shared_play_available())
         {
             tools.retain(|tool| tool["name"] != "play_run" && tool["name"] != "play_state_query");
+        }
+        if !perception.profiler_available()
+            || !perception.native_play_available()
+            || (access.is_shared() && !perception.shared_play_available())
+        {
+            tools.retain(|tool| tool["name"] != "profiler_read");
         }
         let mut report = TurnReport {
             steps: 0,

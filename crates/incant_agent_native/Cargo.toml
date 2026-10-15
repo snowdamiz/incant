@@ -7,6 +7,7 @@ publish.workspace = true
 
 [features]
 default = ["physics-deterministic"]
+agent-profiler = ["incant_profile/session", "incant_game_runtime/profile"]
 
 # Select one physics kernel for the entire process, including build/test hosts.
 physics-deterministic = [
@@ -39,6 +40,7 @@ physics-fast-simd8 = [
 ]
 
 [dependencies]
+incant_profile.workspace = true
 incant_agent.workspace = true
 incant_cmd.workspace = true
 incant_doc.workspace = true
