@@ -204,6 +204,8 @@ impl super::Device {
         };
 
         Ok(super::Device {
+            #[cfg(feature = "dx12-pipeline-library")]
+            pipeline_library: Default::default(),
             raw: raw.clone(),
             present_queue,
             idler: super::Idler { fence: idle_fence },
@@ -1490,6 +1492,11 @@ impl crate::Device for super::Device {
         Ok(super::PipelineLayout {
             shared: super::PipelineLayoutShared {
                 signature: Some(raw),
+                #[cfg(feature = "dx12-pipeline-library")]
+                signature_key: {
+                    use sha2::Digest;
+                    sha2::Sha256::digest(blob.as_slice()).into()
+                },
                 total_root_elements: parameters.len() as super::RootIndex,
                 special_constants,
                 root_constant_info,
@@ -2124,7 +2131,7 @@ impl crate::Device for super::Device {
                 stream_desc.mesh_shader = blob_ms.as_ref().unwrap().create_native_shader();
             }
         };
-        let raw: Direct3D12::ID3D12PipelineState =
+        let create = || -> Result<Direct3D12::ID3D12PipelineState, crate::PipelineError> {
             // If stream descriptors are available, use them as they are more flexible.
             if let Ok(device) = self.raw.cast::<Direct3D12::ID3D12Device2>() {
                 // Prefer stream descs where possible
@@ -2133,7 +2140,7 @@ impl crate::Device for super::Device {
                     profiling::scope!("ID3D12Device2::CreatePipelineState");
                     stream.create_pipeline_state(&device).map_err(|err| {
                         crate::PipelineError::Linkage(shader_stages, err.to_string())
-                    })?
+                    })
                 }
             } else {
                 unsafe {
@@ -2141,9 +2148,20 @@ impl crate::Device for super::Device {
                     let desc = stream_desc.to_graphics_pipeline_descriptor();
                     self.raw.CreateGraphicsPipelineState(&desc).map_err(|err| {
                         crate::PipelineError::Linkage(shader_stages, err.to_string())
-                    })?
+                    })
                 }
-            };
+            }
+        };
+        #[cfg(feature = "dx12-pipeline-library")]
+        let raw = match self.pipeline_library() {
+            Some(library) => unsafe {
+                library.render(&self.raw, &stream_desc, &desc.layout.shared.signature_key)
+            }
+            .map_err(|e| crate::PipelineError::Linkage(shader_stages, e.to_string()))?,
+            None => create()?,
+        };
+        #[cfg(not(feature = "dx12-pipeline-library"))]
+        let raw = create()?;
 
         if let Some(label) = desc.label {
             raw.set_name(label)?;
@@ -2174,24 +2192,33 @@ impl crate::Device for super::Device {
         let blob_cs =
             self.load_shader(&desc.stage, desc.layout, naga::ShaderStage::Compute, None)?;
 
-        let pair = {
-            profiling::scope!("ID3D12Device::CreateComputePipelineState");
-            unsafe {
-                self.raw.CreateComputePipelineState(
-                    &Direct3D12::D3D12_COMPUTE_PIPELINE_STATE_DESC {
-                        pRootSignature: borrow_optional_interface_temporarily(
-                            &desc.layout.shared.signature,
-                        ),
-                        CS: blob_cs.create_native_shader(),
-                        NodeMask: 0,
-                        CachedPSO: Direct3D12::D3D12_CACHED_PIPELINE_STATE::default(),
-                        Flags: Direct3D12::D3D12_PIPELINE_STATE_FLAG_NONE,
-                    },
-                )
-            }
+        let native_desc = Direct3D12::D3D12_COMPUTE_PIPELINE_STATE_DESC {
+            pRootSignature: unsafe {
+                borrow_optional_interface_temporarily(&desc.layout.shared.signature)
+            },
+            CS: blob_cs.create_native_shader(),
+            NodeMask: 0,
+            CachedPSO: Direct3D12::D3D12_CACHED_PIPELINE_STATE::default(),
+            Flags: Direct3D12::D3D12_PIPELINE_STATE_FLAG_NONE,
         };
-
-        let raw: Direct3D12::ID3D12PipelineState = pair.map_err(|err| {
+        let create = || {
+            profiling::scope!("ID3D12Device::CreateComputePipelineState");
+            unsafe { self.raw.CreateComputePipelineState(&native_desc) }
+        };
+        #[cfg(feature = "dx12-pipeline-library")]
+        let raw: Direct3D12::ID3D12PipelineState = match self.pipeline_library() {
+            Some(library) => unsafe {
+                library.compute(&self.raw, &native_desc, &desc.layout.shared.signature_key)
+            }
+            .map_err(|e| {
+                crate::PipelineError::Linkage(wgt::ShaderStages::COMPUTE, e.to_string())
+            })?,
+            None => create().map_err(|err| {
+                crate::PipelineError::Linkage(wgt::ShaderStages::COMPUTE, err.to_string())
+            })?,
+        };
+        #[cfg(not(feature = "dx12-pipeline-library"))]
+        let raw: Direct3D12::ID3D12PipelineState = create().map_err(|err| {
             crate::PipelineError::Linkage(wgt::ShaderStages::COMPUTE, err.to_string())
         })?;
 

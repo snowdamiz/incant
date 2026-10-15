@@ -1,6 +1,14 @@
 //! Driver caches are host-owned disposable data, never project content.
 //! Loading happens once per renderer. Saving happens only after successful
 //! explicit cold catalog preparation, never during submission or Drop.
+#[cfg(all(feature = "dx12-pipeline-library", target_os = "windows"))]
+pub(crate) mod dx12;
+#[cfg(all(feature = "dx12-pipeline-library", any(test, target_os = "windows")))]
+mod library_codec;
+#[cfg(all(feature = "dx12-pipeline-library", target_os = "windows"))]
+mod windows_private;
+#[cfg(all(feature = "dx12-pipeline-library", target_os = "windows"))]
+pub use dx12::{Dx12LibraryError, Dx12LibraryReport};
 #[cfg(all(
     feature = "persistent-pipeline-cache",
     unix,
@@ -37,6 +45,8 @@ pub struct PipelineCacheReport {
     pub write: CacheWrite,
     #[cfg(all(feature = "metal-binary-archives", target_os = "macos"))]
     pub metal: Option<MetalArchiveReport>,
+    #[cfg(all(feature = "dx12-pipeline-library", target_os = "windows"))]
+    pub dx12: Option<Dx12LibraryReport>,
 }
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub enum CacheRead {
@@ -57,6 +67,8 @@ pub enum CacheWrite {
     Io(std::io::ErrorKind),
 }
 pub(crate) struct Session {
+    #[cfg(all(feature = "dx12-pipeline-library", target_os = "windows"))]
+    dx12: Option<dx12::Session>,
     #[cfg(all(feature = "metal-binary-archives", target_os = "macos"))]
     metal: Option<metal::Session>,
     pub cache: Option<wgpu::PipelineCache>,
@@ -81,6 +93,24 @@ pub(crate) fn required_features(adapter: &wgpu::Adapter) -> wgpu::Features {
     }
 }
 impl Session {
+    #[cfg(all(feature = "dx12-pipeline-library", target_os = "windows"))]
+    pub fn with_dx12_library(
+        device: &wgpu::Device,
+        adapter: &wgpu::Adapter,
+        options: dx12::Options,
+    ) -> crate::Result<Self> {
+        if adapter.get_info().backend != wgpu::Backend::Dx12 {
+            if options.config.mode == wgpu_hal::dx12::pipeline_library::Mode::RequireHits {
+                return Err(Dx12LibraryError::Backend.into());
+            }
+            return Ok(Self::new(device, adapter));
+        }
+        let (dx12, read) = dx12::Session::configured(device, adapter, options)?;
+        let mut session = Self::inactive(read);
+        session.report.dx12 = Some(dx12.report());
+        session.dx12 = Some(dx12);
+        Ok(session)
+    }
     #[cfg(all(
         feature = "metal-binary-archives",
         feature = "native-compilation",
@@ -139,6 +169,8 @@ impl Session {
                 })
             };
             Self {
+                #[cfg(all(feature = "dx12-pipeline-library", target_os = "windows"))]
+                dx12: None,
                 #[cfg(all(feature = "metal-binary-archives", target_os = "macos"))]
                 metal: None,
                 cache: Some(cache),
@@ -147,6 +179,8 @@ impl Session {
                     write: CacheWrite::NotAttempted,
                     #[cfg(all(feature = "metal-binary-archives", target_os = "macos"))]
                     metal: None,
+                    #[cfg(all(feature = "dx12-pipeline-library", target_os = "windows"))]
+                    dx12: None,
                 },
                 store: Some(store),
             }
@@ -171,6 +205,8 @@ impl Session {
     }
     fn inactive(read: CacheRead) -> Self {
         Self {
+            #[cfg(all(feature = "dx12-pipeline-library", target_os = "windows"))]
+            dx12: None,
             #[cfg(all(feature = "metal-binary-archives", target_os = "macos"))]
             metal: None,
             cache: None,
@@ -179,6 +215,8 @@ impl Session {
                 write: CacheWrite::NotAttempted,
                 #[cfg(all(feature = "metal-binary-archives", target_os = "macos"))]
                 metal: None,
+                #[cfg(all(feature = "dx12-pipeline-library", target_os = "windows"))]
+                dx12: None,
             },
             #[cfg(all(
                 feature = "persistent-pipeline-cache",
@@ -192,6 +230,13 @@ impl Session {
     /// preparation errors also refuse persistence; retain this device cache for
     /// later optional catalogs, with no implicit flush on Drop.
     pub fn complete<T>(&mut self, candidate: crate::Result<T>) -> crate::Result<T> {
+        #[cfg(all(feature = "dx12-pipeline-library", target_os = "windows"))]
+        let candidate = candidate.and_then(|prepared| {
+            if let Some(dx12) = &self.dx12 {
+                dx12.check_strict_completion()?;
+            }
+            Ok(prepared)
+        });
         #[cfg(all(
             feature = "metal-binary-archives",
             feature = "native-compilation",
@@ -206,6 +251,11 @@ impl Session {
         complete(candidate, || self.persist())
     }
     fn persist(&mut self) {
+        #[cfg(all(feature = "dx12-pipeline-library", target_os = "windows"))]
+        if let Some(dx12) = &mut self.dx12 {
+            self.report.write = dx12.persist();
+            self.report.dx12 = Some(dx12.report());
+        }
         #[cfg(all(feature = "metal-binary-archives", target_os = "macos"))]
         if let Some(metal) = &mut self.metal {
             self.report.write = metal.persist();

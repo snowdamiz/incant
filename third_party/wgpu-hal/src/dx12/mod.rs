@@ -80,7 +80,11 @@ mod descriptor;
 mod device;
 mod device_creation;
 mod instance;
+#[cfg(feature = "dx12-pipeline-library")]
+mod library_key;
 mod pipeline_desc;
+#[cfg(feature = "dx12-pipeline-library")]
+pub mod pipeline_library;
 mod sampler;
 mod shader_compilation;
 mod suballocation;
@@ -745,6 +749,8 @@ unsafe impl Send for DeviceShared {}
 unsafe impl Sync for DeviceShared {}
 
 pub struct Device {
+    #[cfg(feature = "dx12-pipeline-library")]
+    pipeline_library: Mutex<alloc::sync::Weak<pipeline_library::Session>>,
     raw: Direct3D12::ID3D12Device,
     present_queue: Direct3D12::ID3D12CommandQueue,
     idler: Idler,
@@ -879,6 +885,8 @@ impl PassState {
             resolves: ArrayVec::new(),
             layout: PipelineLayoutShared {
                 signature: None,
+                #[cfg(feature = "dx12-pipeline-library")]
+                signature_key: [0; 32],
                 total_root_elements: 0,
                 special_constants: None,
                 root_constant_info: None,
@@ -1152,6 +1160,8 @@ struct DynamicStorageBufferOffsets {
 #[derive(Debug, Clone)]
 struct PipelineLayoutShared {
     signature: Option<Direct3D12::ID3D12RootSignature>,
+    #[cfg(feature = "dx12-pipeline-library")]
+    signature_key: [u8; 32],
     total_root_elements: RootIndex,
     special_constants: Option<PipelineLayoutSpecialConstants>,
     root_constant_info: Option<RootConstantInfo>,
