@@ -13,7 +13,7 @@ controls. This fixes the ordinary viewport route; low-resolution reconstruction
 still has separate appearance defects. The entries
 below preserve earlier scoped results and superseded integration snapshots.
 
-## Cooked bloom — complete twelve-family CPU catalog qualified
+## Cooked bloom — public shipping export and CPU startup qualified
 
 The trusted cooked-native selection now includes prefilter, downsample,
 upsample and display bloom programs, bringing the catalog to twelve families
@@ -22,11 +22,17 @@ device cache during cold preparation. Partial cooked-output builds still refuse
 bloom; project files cannot supply shader bytes and default exports stay unchanged.
 
 41 Python controls, 41 cooker tests, 209 renderer controls, 12 partial-bloom
-controls and strict lint pass. The exporter-shaped player was compiled only;
-its actual target output passed the complete 268,438-byte shader audit. Both prior
-native failures remain recorded. Public shipping export, player execution,
-driver/render parity, cache hits and the full shader-stall gate remain unproven.
+controls and strict lint pass. A separate fresh public arm64 shipping export at
+`340acb7c` passed the complete 268,438-byte shader audit and its inherent one-tick
+CPU startup with source parsing disabled. All 18 managed calls cleaned up, the
+private target was retired and source/compiler/authoring/package inputs rehashed
+unchanged. Both prior native test failures, the missing-package export refusal
+and offline dependency-cache failure remain recorded. No window or GPU was
+launched; driver/render parity, cache hits and the full shader-stall gate remain open.
 The original eight-family result below retains its producing-source scope.
+The public exporter now refuses missing or mismatched pinned script-compiler
+packages before launching build tools; 45 focused Python controls pass.
+[Early checkout diagnostics](docs/spikes/native-script-prerequisites.md).
 [Source, failures and portable evidence](docs/spikes/cooked-bloom.md).
 
 ## Optional pipeline caches — cold preparation qualified
@@ -41,6 +47,9 @@ Nineteen cache controls, feature-off checks and the combined cooked shader/cache
 suite pass locally, with strict lint. The Vulkan lifecycle harness was compiled
 but not executed on this Mac; actual driver persistence and shader-stall gates
 remain open. [Contract and evidence](docs/spikes/persistent-pipeline-cache.md).
+Checkpoint42 exposed an incompatible cooked-feature selection in its all-effects
+Vulkan cache test. The [workflow repair](docs/spikes/ci-renderer-catalog.md) keeps
+every lifecycle assertion; actual corrected hosted execution remains pending.
 
 ## Cooked native shader export — ordinary catalog qualified
 
@@ -57,6 +66,27 @@ Metal/DX12 caches and shader-stall qualification remain open. The prior fixture
 failure and storage-bound interruption remain recorded.
 [Selection and evidence](docs/spikes/shipping-cooked-shaders.md).
 
+## Agent profiler — ordinary editor CPU access qualified
+
+Ordinary editor builds expose CPU profiling for saved projects without a special
+build. An explicit `play_run(profile:true)` request records a disposable native
+session; `profiler_read` reads its last 1–256 measured ticks. Headless hosts still
+require explicit feature selection; public game/headless defaults are unchanged.
+Measurements belong to that accepted project/session and owning tick thread;
+other projects/threads and process-wide captures cannot leak into this report.
+Failed or cancelled replacement preserves the previous world and recording.
+Missing phases, invalid clocks, evictions and unavailable counters remain explicit.
+
+The producer passed 112 CPU tests plus its allocator control. The main333 join
+passed 120 agent/playbook and 20 native-host tests, strict enabled/disabled lint
+and editor compilation. The editor-only default selection subsequently passed
+25 real editor worker/owner controls and 23 feature-disabled controls, both strict
+lint modes and isolated feature-graph checks. Inactive-instrumentation overhead
+remains unmeasured; a bounded matched CPU comparison is proposed separately.
+GPU/display/heap/allocation measurements, live optimization quality and the full
+Phase 3 gate remain open. No shipping performance result is claimed.
+[Isolation, exact source and portable evidence](docs/spikes/agent-profiler.md).
+
 ## Agent playbooks — eighteen bundled workflows qualified
 
 All eighteen planned Markdown playbooks are discoverable through read-only agent
@@ -66,8 +96,8 @@ content cannot replace the catalogue, and reading guidance grants no execution
 or approval authority. Every drafted translation remains flagged for human review.
 
 118 agent CPU tests and strict lint pass, with independent content/source review.
-Live skill-following quality, missing profiler/export/runtime controls and the
-full Phase 3 evaluation gate remain open.
+Live skill-following quality, missing export/runtime controls and the full
+Phase 3 evaluation gate remain open.
 [Behaviour and retained evidence](docs/spikes/builtin-agent-skills.md).
 
 ## Agent editor visibility — per-turn wiring qualified

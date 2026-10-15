@@ -1,3 +1,5 @@
+#[cfg(all(test, feature = "agent-profiler"))]
+mod profiler_tests;
 #[cfg(test)]
 mod tests;
 use super::{Connection, Context, ContextKey};

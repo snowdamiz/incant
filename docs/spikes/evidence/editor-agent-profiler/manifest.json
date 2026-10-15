@@ -1,0 +1,104 @@
+{
+  "format": "incant-editor-agent-profiler-cpu",
+  "version": 1,
+  "source": "ce2889cebe8f07459374f0e31128d927b3c0deb9",
+  "base": "5768f92a42f97403c465580fce9c3b873c835eda",
+  "original_root": "/Users/andreyyurlov/.codex/incant-evidence/editor-agent-profiler-001",
+  "archive": {
+    "bytes": 581293,
+    "sha256": "bfc934c7a233f18456e45b139f07b5a4d40ce2cd2c5522b4b11982b07fc4b9d5",
+    "inflated_bytes": 3536684,
+    "records": 118
+  },
+  "bindings": {
+    "cpu-plan-001.json": "a18b2059db533409339225bc03282fec6cb38a9716858c9860e893013acdf48c",
+    "qualify-001.py": "ed4dd6d388cf4ecfd34a01ed5332bcd97b6328c7e1aa826d5bf4817fbfb42797",
+    "native_process.py": "58dd2a8231d7f9d1e42070fc85425461e06a43f279fa5e7f8e57b4a40c3a3aa4",
+    "root-cpu-grant-001.json": "6ea722bffe141e5e129eb31980c5154d567ef15dfef3c9d5360a5ac0cdc396d6",
+    "target-baseline.json": "77ca5591a52ead82583f2c9f067dabfa428ea1d246bb71c9bf284389e32ce8d1",
+    "root-source-review.json": "0e5fd0bbd85298eeff90437951d9f696115c520e50e1930325fc38da269fb7f3",
+    "inactive-overhead-proposal.md": "c4cebceca38a6b4585bdd528536119d2c47e032a16dad4f331ca40024dc1c338",
+    "inactive-overhead-proposal-002.md": "b9f6e644459a005b219db56ce9f50b267216261c2ced1e2dbfc51c83cf4e76ff",
+    "source-001/freeze.json": "fcc5797eaaf9388c4c67e3d1cd3169604149888dfdb09175f241e0c7489467f7",
+    "source-001/source.patch": "75eea5ffe76bb56d7514ffdb4f04b3a7fff4f4c3f0ad0b12065ac266eec7949f",
+    "cpu-001/environment.json": "2467205fdbc09f112efdf23ac1a5634aeaa9b39bebb4cd2915eb3ddee88fe2d3",
+    "cpu-001/result.json": "0ed0acc7bc08212fad1a9c643c92e38c6e31202cc52d366a883bc053fb44eeeb"
+  },
+  "copied_binaries": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/editor-agent-profiler-001/cpu-001/binaries/editor-default-worker-tests/incant_editor-142fab96f88e7982",
+      "sha256": "8388f7e1533323d00591ca7e6ee3f7926eabf5d490d490811454afea74f6a296",
+      "target": {
+        "kind": [
+          "bin"
+        ],
+        "crate_types": [
+          "bin"
+        ],
+        "name": "incant_editor",
+        "src_path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/editor/app/src/main.rs",
+        "edition": "2024",
+        "doc": true,
+        "doctest": false,
+        "test": true
+      },
+      "profile": {
+        "opt_level": "1",
+        "debuginfo": 0,
+        "debug_assertions": false,
+        "overflow_checks": false,
+        "test": true
+      },
+      "features": [
+        "agent-profiler",
+        "default",
+        "physics-deterministic"
+      ],
+      "bytes": 57421920
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/editor-agent-profiler-001/cpu-001/binaries/editor-disabled-worker-tests/incant_editor-0b498edd2edc7f32",
+      "sha256": "b4c660d04f51292576500aa79ccb89c71d6ef78c8b5dce17955922c666c55577",
+      "target": {
+        "kind": [
+          "bin"
+        ],
+        "crate_types": [
+          "bin"
+        ],
+        "name": "incant_editor",
+        "src_path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/editor/app/src/main.rs",
+        "edition": "2024",
+        "doc": true,
+        "doctest": false,
+        "test": true
+      },
+      "profile": {
+        "opt_level": "1",
+        "debuginfo": 0,
+        "debug_assertions": false,
+        "overflow_checks": false,
+        "test": true
+      },
+      "features": [
+        "physics-deterministic"
+      ],
+      "bytes": 57242192
+    }
+  ],
+  "scope": {
+    "ordinary_editor_default_enabled": true,
+    "actual_editor_worker_cpu_tests": true,
+    "local_provider_fixture": true,
+    "live_provider_or_ui": false,
+    "inactive_overhead_measured": false,
+    "native_window_or_gpu_execution": false,
+    "performance_gate": false
+  },
+  "limitations": [
+    "The 82 source rows and clean Git commit bind this CPU run; source does not mean every historical gate passed.",
+    "Executable bytes remain external; --binaries only rehashes retained copies, never executes.",
+    "Feature graph isolation covers selected invocations, not arbitrary Cargo workspace unification.",
+    "Default deterministic worker behavior passed; no timing experiment, GUI, capture or network/provider execution."
+  ]
+}

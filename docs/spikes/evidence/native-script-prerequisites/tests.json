@@ -1,0 +1,23 @@
+{
+  "at": "2026-10-15T04:42:41.521352+00:00",
+  "command": [
+    "python3",
+    "-m",
+    "unittest",
+    "tools.tests.test_native_script_prerequisites",
+    "tools.tests.test_native_export_wasm_routing",
+    "tools.tests.test_native_shaders",
+    "tools.tests.test_native_profiling",
+    "tools.tests.test_native_package",
+    "-v"
+  ],
+  "exit_code": 0,
+  "files": {
+    "tools/export_native.py": "1e9052e42f25ae2a2e666dd8292f1fd5fc91fd4c3be377d19c5e6d006d6beb0a",
+    "tools/native_script_prerequisites.py": "3ad1e674902868cdd36da86447407c643ed4fbcacc6e9612f22642337d5f62d2",
+    "tools/tests/test_native_script_prerequisites.py": "b311c58e77b6ee557c8ff59e3940d7cea38d4b485a6679ece465fa5129683e04"
+  },
+  "log_sha256": "77d812e3ac0370c3e033a0cb965c97030af31feb4fa47b9ca68d5f697887bf56",
+  "no_native_or_capture_execution": true,
+  "scope": "45 Python behavior controls including selected-scene compiler admission and public-build refusal before any child tool; no native compilation, package or player acceptance."
+}

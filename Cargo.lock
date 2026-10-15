@@ -3855,6 +3855,7 @@ dependencies = [
  "incant_input",
  "incant_observe",
  "incant_play",
+ "incant_profile",
  "incant_render",
  "incant_render_authoring",
  "incant_render_game",

@@ -6,13 +6,16 @@ rust-version.workspace = true
 publish.workspace = true
 
 [features]
-default = ["physics-deterministic"]
+default = ["physics-deterministic", "agent-profiler"]
 
 wasmtime-host = ["incant_play/wasmtime-host"]
 # Explicit local numerical native-window acceptance, absent from normal builds.
 play-probe = []
 # Explicit local live-provider acceptance, absent from normal builds.
 agent-probe = []
+# Available in ordinary editor builds; each CPU-only play request still opts in.
+# Public game and headless shipping feature selections are independent.
+agent-profiler = ["incant_agent_native/agent-profiler"]
 custom-protocol = ["tauri/custom-protocol"]
 
 # Select one physics kernel for the entire process, including build/test hosts.

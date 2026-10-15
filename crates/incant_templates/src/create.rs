@@ -51,21 +51,24 @@ fn destination(path: &Path) -> Result<PathBuf> {
     } else {
         std::env::current_dir()?.join(path)
     };
-    let mut prefix = PathBuf::new();
-    for component in path.components() {
-        if matches!(component, Component::ParentDir | Component::CurDir) {
+    if !path.is_absolute()
+        || path.file_name().is_none()
+        || path
+            .components()
+            .any(|component| matches!(component, Component::ParentDir | Component::CurDir))
+    {
+        return Err(TemplateError::Destination);
+    }
+    // Validate complete ancestors from the root down. A Windows Prefix and
+    // RootDir form one anchor: probing a bare verbatim prefix (`\\?\C:`) is
+    // not a directory lookup. Every normal ancestor still receives a no-follow
+    // metadata check before a descendant is inspected or created.
+    let ancestors: Vec<_> = path.ancestors().skip(1).collect();
+    for ancestor in ancestors.into_iter().rev() {
+        let metadata = fs::symlink_metadata(ancestor)?;
+        if metadata.file_type().is_symlink() || !metadata.is_dir() {
             return Err(TemplateError::Destination);
         }
-        prefix.push(component);
-        if prefix != path {
-            let metadata = fs::symlink_metadata(&prefix)?;
-            if metadata.file_type().is_symlink() || !metadata.is_dir() {
-                return Err(TemplateError::Destination);
-            }
-        }
-    }
-    if path.file_name().is_none() {
-        return Err(TemplateError::Destination);
     }
     match fs::symlink_metadata(&path) {
         Err(error) if error.kind() == std::io::ErrorKind::NotFound => {}

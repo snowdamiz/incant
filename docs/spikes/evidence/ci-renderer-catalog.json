@@ -1,0 +1,50 @@
+{
+  "base": "a72a76f3e51e1221ea8b6c3cbe9c976bffe74d68",
+  "qualification": "Workflow configuration and feature closure; no GPU/native run",
+  "tests": {
+    "argv": [
+      "python3",
+      "-m",
+      "unittest",
+      "tools.tests.test_ci_profile",
+      "tools.tests.test_ci_scope",
+      "tools.tests.test_workflow_jobs"
+    ],
+    "exit": 0,
+    "raw_sha256": "fa4b9318bedf18961ef99630e1b01ee971f7f04e66730108dfaa24fd85d62ac6"
+  },
+  "checks": [
+    {
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0
+    }
+  ],
+  "sources": {
+    ".github/workflows/ci.yml": "b3c42e0fd24bd9814b216d3078f97516d29a99f006e14c4dcf4293506f957f65",
+    ".github/workflows/desktop.yml": "19aa347abdf7eaa9b0be21b64e58b53a76a0f4e3508e8bce0882b1930b775f00",
+    "tools/tests/test_ci_profile.py": "910e8f874c21bee8d3ec9fbe727e5b9f95b4ad9c4ee6ad91e863b6b143735812"
+  },
+  "failure": {
+    "candidate": "6225d2f72c54aea7b7e320c4d60ccdca1710ee9c",
+    "run": 38681918072,
+    "job": 116248141970,
+    "error": "enable_bloom refused incomplete cooked-output; SSAO also intentionally refuses cooked-materials",
+    "retained_full_log_sha256": "66c7ec44d7cc94eb5f445f9347fa882e84af42f5f81f9c3afec9d0271aeaad3a"
+  },
+  "unmet": [
+    "Actual fresh hosted Vulkan lifecycle",
+    "Actual complete cooked-bloom native-backend execution"
+  ]
+}

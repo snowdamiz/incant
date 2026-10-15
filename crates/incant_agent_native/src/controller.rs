@@ -9,6 +9,7 @@ use incant_script::NativeLogs;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use std::{collections::BTreeMap, path::Path};
+mod profile;
 mod run;
 
 #[derive(Debug, thiserror::Error)]
@@ -25,6 +26,8 @@ pub enum Error {
     Decode(#[from] serde_json::Error),
     #[error(transparent)]
     Native(#[from] crate::SessionError),
+    #[error(transparent)]
+    Profile(#[from] incant_profile::Error),
 }
 type Result<T> = std::result::Result<T, Error>;
 
@@ -119,6 +122,7 @@ struct Live {
     session: Session,
     started_revision: u64,
     samples: Vec<f32>,
+    profile: Option<profile::Completed>,
 }
 impl Live {
     fn state(&self, observation: &Observation, selected: Vec<(String, StableId)>) -> Result<Value> {
@@ -201,6 +205,7 @@ impl Controller {
             session,
             started_revision: bus.revision(),
             samples: vec![0.; max_frames * 2],
+            profile: None,
         };
         let result = live.state(&Observation::default(), Vec::new())?;
         self.live = Some(live);

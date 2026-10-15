@@ -67,10 +67,12 @@ jobs:
       # Defaults above stay covered; this second run selects every reviewed
       # cooked family. Every GPU fixture asserts the actual native backend.
       - name: Verify opt-in cooked shaders on the required native backend
-        run: cargo test -p incant_render -p incant_render_gpu_host --all-targets --profile ci --locked -j2 --features incant_render/cooked-output,incant_render/cooked-geometry,incant_render/cooked-sprites,incant_render/cooked-ui,incant_render/cooked-text,incant_render/cooked-materials,incant_render/cooked-clusters,incant_render/cooked-temporal,incant_render/persistent-pipeline-cache -- --ignored --skip vulkan_catalog_cache_survives_fresh_processes_and_corruption --test-threads=1 --nocapture
+        run: cargo test -p incant_render -p incant_render_gpu_host --all-targets --profile ci --locked -j2 --features incant_render/cooked-native-shaders,incant_render/cooked-temporal,incant_render/persistent-pipeline-cache -- --ignored --skip vulkan_catalog_cache_survives_fresh_processes_and_corruption --test-threads=1 --nocapture
+      # This lifecycle includes SSAO, whose material path is currently uncooked.
+      # Keep every optional-pipeline assertion; cooked families run above.
       - name: Verify Vulkan cache across fresh processes and corruption
         if: runner.os == 'Linux'
-        run: cargo test -p incant_render --test persistent_cache --profile ci --locked -j2 --features incant_render/cooked-output,incant_render/cooked-geometry,incant_render/cooked-sprites,incant_render/cooked-ui,incant_render/cooked-text,incant_render/cooked-materials,incant_render/cooked-clusters,incant_render/cooked-temporal,incant_render/persistent-pipeline-cache -- --ignored --exact vulkan_catalog_cache_survives_fresh_processes_and_corruption --test-threads=1 --nocapture
+        run: cargo test -p incant_render --test persistent_cache --profile ci --locked -j2 --features incant_render/persistent-pipeline-cache -- --ignored --exact vulkan_catalog_cache_survives_fresh_processes_and_corruption --test-threads=1 --nocapture
       # Keep workspace feature unification from the release tests while building
       # only the editor, headless and cook tools used below.
       - run: cargo build --workspace --bin incant_editor --bin incant_headless --example cook_scene --profile ci --features incant_editor/custom-protocol,incant_audio_runtime/scene --locked --timings
