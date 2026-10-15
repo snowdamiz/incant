@@ -40,3 +40,22 @@ Replay is data-only:
 python3 docs/spikes/evidence/windows-template-destination/verify.py
 python3 docs/spikes/evidence/windows-template-destination/verify.py --originals --binaries --git-source 52468867
 ```
+
+## Checkpoint43: production repair confirmed; malformed fixture corrected
+
+Hosted Windows passed the canonical verbatim destination and the complete
+five-starter create/source/Undo/Redo/reopen tests. The seven-test template suite
+still failed its malformed-path fixture: chained `PathBuf::join` calls had
+removed the literal parent segment before validation. Rust documents that
+[appending to a verbatim Windows path normalizes `.` and `..`](https://doc.rust-lang.org/std/path/struct.PathBuf.html#method.push).
+The function therefore received a valid destination, not the intended refusal input.
+
+The fixture now appends native separator strings and components to `OsString`,
+constructs the path without joining, and asserts that `ParentDir` is present
+before checking the unchanged refusal. Production code is byte-identical.
+All seven Mac unit tests and strict all-target Clippy pass. Independent source
+review found no blocker. The corrected Windows fixture still needs the next
+hosted checkpoint; the failed checkpoint43 result remains recorded.
+
+Both bounded local processes exited successfully and were reaped. No GPU,
+window or capture was used. [Compact source, failure and qualification evidence](evidence/windows-parent-fixture.json).
