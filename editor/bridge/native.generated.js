@@ -1581,6 +1581,7 @@ class NativeBridge {
         // revision rejects the import at commit rather than locking the user out.
         const recoverBudget = budgetEdit || (command.type === 'history.undo' || command.type === 'history.redo') && projectAgentBudget(this.read).status !== 'unsupported';
         const previous = this.read;
+        let duplicateDispatched = false;
         // Subscribers run synchronously. Reserve the mutation before publishing its
         // admission barrier so a subscriber cannot start a second document write.
         if (importing) this.importing = true;
@@ -1642,6 +1643,7 @@ class NativeBridge {
                     }
                 };
                 if (command.type === 'entity.duplicate') {
+                    duplicateDispatched = true;
                     const response = await this.invoke('engine_duplicate_subtree', {
                         sceneId: scene.id,
                         entityId: command.entity,
@@ -1649,7 +1651,7 @@ class NativeBridge {
                     });
                     const receipt = response?.receipt;
                     read = response?.snapshot;
-                    if (!record(receipt) || receipt.project !== previous.project.id || !fileId(receipt.entity) || !fileId(receipt.transaction) || receipt.revision !== previous.revision + 1 || !record(read) || !isReady(read) || !record(read.project) || read.project.id !== previous.project.id || !count(read.revision) || read.revision < receipt.revision || this.read?.project.id !== previous.project.id || read.revision < this.read.revision) {
+                    if (!record(receipt) || receipt.project !== previous.project.id || !fileId(receipt.entity) || !fileId(receipt.transaction) || receipt.revision !== previous.revision + 1 || Object.values(previous.project.scenes).some((s)=>receipt.entity in s.entities) || !record(read) || !isReady(read) || !record(read.project) || read.project.id !== previous.project.id || !count(read.revision) || read.revision < receipt.revision || read.revision === receipt.revision && !read.project.scenes[scene.id]?.entities[receipt.entity] || this.read?.project.id !== previous.project.id || read.revision < this.read.revision) {
                         // IPC may have committed even if its completion cannot be verified.
                         await this.start();
                         return {
@@ -1699,7 +1701,13 @@ class NativeBridge {
             return result;
         } catch (error) {
             await this.start(recoverBudget);
-            return failure(recoverBudget && typeof error === 'string' ? undefined : error);
+            const result = failure(recoverBudget && typeof error === 'string' ? undefined : error);
+            // The host commits before reading its completion snapshot. A rejected
+            // invocation cannot establish rollback, so never invite a blind retry.
+            return duplicateDispatched ? {
+                ...result,
+                outcomeUnknown: true
+            } : result;
         } finally{
             if (importing) this.importing = false;
             else this.pending = false;
