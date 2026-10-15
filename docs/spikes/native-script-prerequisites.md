@@ -18,6 +18,6 @@ All 45 focused Python controls pass: prerequisite selection/refusal plus existin
 Wasm routing, cooked-shader, profiling and package controls. The public-build
 regression verifies failure before any child tool and without creating staging or
 output files. [Command, source hashes and result](evidence/native-script-prerequisites/tests.json)
-and [raw output](evidence/native-script-prerequisites/tests.log) retain the evidence.
+and [raw output](evidence/native-script-prerequisites/tests.txt) retain the evidence.
 No native build, driver, rendered result or performance gate is claimed by these
 controls; the complete cooked-export qualification remains separate.
