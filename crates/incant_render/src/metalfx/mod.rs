@@ -10,6 +10,16 @@ mod plan;
 #[cfg(feature = "native-metalfx")]
 mod render;
 #[cfg(feature = "native-metalfx")]
+mod shader;
+#[cfg(any(
+    test,
+    all(
+        feature = "native-metalfx",
+        not(all(feature = "cooked-metalfx-boundary", not(target_arch = "wasm32")))
+    )
+))]
+mod source;
+#[cfg(feature = "native-metalfx")]
 mod system;
 #[cfg(feature = "native-metalfx")]
 mod targets;
@@ -18,6 +28,17 @@ pub(crate) use owner::{Owner, Pending};
 pub use plan::MAX_METALFX_TRANSITION_BYTES;
 #[cfg(feature = "native-metalfx")]
 pub(crate) use system::{Draw, System};
+
+// A partial cooked renderer must not quietly parse either boundary program.
+// The dedicated feature also requires the complete cooked motion/history route.
+#[cfg(any(feature = "native-metalfx", test))]
+fn shader_admission() -> Result<(), Fallback> {
+    if cfg!(feature = "cooked-output") && !cfg!(feature = "cooked-metalfx-boundary") {
+        Err(Fallback::CookedShaders)
+    } else {
+        Ok(())
+    }
+}
 
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
 pub enum Preference {
@@ -96,6 +117,18 @@ impl Config {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn cooked_boundary_admission_requires_the_complete_family_without_enabling_vendor_policy() {
+        assert_eq!(Preference::default(), Preference::Spatial);
+        if cfg!(feature = "cooked-output") && !cfg!(feature = "cooked-metalfx-boundary") {
+            assert_eq!(shader_admission(), Err(Fallback::CookedShaders));
+        } else {
+            assert_eq!(shader_admission(), Ok(()));
+        }
+        if cfg!(feature = "cooked-metalfx-boundary") {
+            assert!(cfg!(feature = "cooked-temporal"));
+        }
+    }
     #[test]
     fn policy_refusals_do_not_claim_vendor_success() {
         for reason in [

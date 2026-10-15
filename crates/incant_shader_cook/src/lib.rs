@@ -8,6 +8,7 @@ mod contract;
 mod emit;
 pub mod geometry;
 mod manifest;
+pub mod metalfx_boundary;
 pub mod temporal;
 
 pub use manifest::write_bundle;

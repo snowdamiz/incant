@@ -11,6 +11,8 @@ pub enum ResourceError {
     CookedBloom(&'static str),
     #[error("cooked temporal shader contract refused: {0}")]
     CookedTemporal(&'static str),
+    #[error("cooked MetalFX boundary shader is unavailable: {0}")]
+    CookedMetalFxBoundary(&'static str),
     #[error("cooked output shader rejected: {0}")]
     CookedOutput(&'static str),
     #[error("cooked geometry shader rejected: {0}")]

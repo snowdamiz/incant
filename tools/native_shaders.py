@@ -12,7 +12,7 @@ from native_package import read, require, sha256
 ROOT = Path(__file__).resolve().parents[1]
 FEATURE = 'cooked-native-shaders'
 COOKED = {FEATURE, 'cooked-output', 'cooked-geometry', 'cooked-materials',
-          'cooked-sprites', 'cooked-ui', 'cooked-text', 'cooked-clusters', 'cooked-bloom', 'cooked-ssao', 'cooked-temporal'}
+          'cooked-sprites', 'cooked-ui', 'cooked-text', 'cooked-clusters', 'cooked-bloom', 'cooked-ssao', 'cooked-temporal', 'cooked-metalfx-boundary'}
 # Exact existing runtime ABI contracts, independently admitted by each selector.
 CONTRACTS = {
     'output': (
@@ -68,6 +68,8 @@ CONTRACTS = {
     'temporal-resolve': 'incant-temporal-resolve-v1;naga=29.0.4;wgpu=29.0.4;frame64-f,textures4,mrt1;msl=2.4;hlsl=6.0,special-b1;spv=1.0,no-y-flip;bounds=restrict;loops=bounded',
     'temporal-copy': 'incant-temporal-copy-v2;naga=29.0.4;wgpu=29.0.4;frame64-f@1,textures1@0,mrt1;msl=2.4;hlsl=6.0,special-b1;spv=1.0,no-y-flip;bounds=restrict;loops=bounded',
     'temporal-depth': 'incant-temporal-depth-v1;naga=29.0.4;wgpu=29.0.4;frame144-v,material64-f,5textures-samplers;msl=2.4,pulls15-14-13-12,strides48-48-112-80,lengths1,frame0,material1;hlsl=6.0,b0-b1,sampler-t5,special-b2;spv=1.0,no-y-flip;bounds=restrict;loops=bounded',
+    'metalfx-pack': 'incant-metalfx-pack-v1;naga=29.0.4;wgpu=29.0.4;frame96-f@0,textures2@1-2,depth@3;mrt=rgba16f-r32f-rg16f-r8;msl=2.4,b0,t0-t2;hlsl=6.0,b0,t0-t2,special-b1;spv=1.0,no-y-flip;bounds=restrict;loops=bounded',
+    'metalfx-normalize': 'incant-metalfx-normalize-v1;naga=29.0.4;wgpu=29.0.4;frame96-f@0,textures2@1-2,depth@3;mrt=rgba16f;msl=2.4,b0,t0-t2;hlsl=6.0,b0,t0-t2,special-b1;spv=1.0,no-y-flip;bounds=restrict;loops=bounded',
     'temporal-cluster': (
         'incant-cluster-v1;naga=29.0.4;wgpu=29.0.4;group64x1x1;shared=atomic4+128x4;'
         'msl=2.4,static-threadgroup,sizes4;spv=1.0,implicit-workgroup-layout;'
@@ -85,6 +87,8 @@ SOURCES = {
     'temporal-motion': ['motion/shader.wgsl'], 'temporal-depth': ['motion/shader.wgsl'],
     'temporal-motion-owner': ['motion/owner.wgsl'],
     'temporal-resolve': ['temporal/resolve.wgsl'], 'temporal-copy': ['temporal/copy.wgsl'],
+    'metalfx-pack': ['metalfx/common.wgsl', 'metalfx/alpha.wgsl', 'metalfx/prepare.wgsl'],
+    'metalfx-normalize': ['metalfx/common.wgsl', 'metalfx/alpha.wgsl', 'metalfx/normalize.wgsl'],
     'ssao-prepass': ['model_material.wgsl', 'ambient_occlusion/prepass.wgsl'],
     'ssao-forward': ['shadows/shade.wgsl', 'lighting/shade.wgsl', 'model_material.wgsl'],
     'ssao-sample': ['ambient_occlusion/ao.wgsl'],
@@ -98,6 +102,7 @@ DIRECTORIES = {'output': 'output-shaders', 'diagnostic': 'diagnostic-shaders',
     'bloom-prefilter': 'bloom-prefilter-shaders', 'bloom-downsample': 'bloom-downsample-shaders',
     'bloom-upsample': 'bloom-upsample-shaders', 'bloom-display': 'bloom-display-shaders',
     'temporal-cluster': 'temporal-cluster-shaders',
+    **{'metalfx-' + name: 'metalfx-' + name + '-shaders' for name in ('pack', 'normalize')},
     **{'temporal-' + name: 'temporal-' + name for name in ('motion', 'motion-owner', 'depth', 'resolve', 'copy')},
     **{'ssao-' + name: 'ssao-' + name + '-shaders' for name in ('prepass', 'forward', 'sample', 'horizontal', 'vertical')}}
 BACKENDS = {'Metal', 'Vulkan', 'Dx12'}
@@ -183,6 +188,9 @@ def _family(directory, family, root):
     elif family.startswith('temporal-') and family != 'temporal-cluster':
         producer_paths = ['src/temporal/' + name for name in ('mod.rs', 'contract.rs', 'emit.rs')]
         producer_paths += ['src/audit.rs', 'Cargo.toml']
+    elif family.startswith('metalfx-'):
+        producer_paths = ['src/metalfx_boundary/' + name for name in ('mod.rs', 'contract.rs', 'emit.rs')]
+        producer_paths += ['src/audit.rs', 'Cargo.toml', '../incant_render/src/metalfx/source.rs']
     elif family in ('cluster', 'temporal-cluster'):
         producer_paths = ['src/compute/' + name for name in ('mod.rs', 'contract.rs', 'emit.rs',
             'static_workgroup.rs', 'spirv_workgroup.rs')]
@@ -293,12 +301,12 @@ def audit(messages, mode, *, target_dir, target, profile, physics_mode, root=ROO
     output = Path(outputs[0])
     # Only the compiler-selected private OUT_DIR is read; no project/cache loader.
     families = {name: _family(output / directory, name, Path(root)) for name, directory in DIRECTORIES.items()}
-    require(sum(f['artifact_bytes'] for f in families.values()) <= 132 * 1024**2, 'Shader catalog exceeds bound')
+    require(sum(f['artifact_bytes'] for f in families.values()) <= 144 * 1024**2, 'Shader catalog exceeds bound')
     return {'mode': 'cooked', 'target': target, 'profile': profile,
         'compiler_features': {name: sorted(flags) for name, flags in found.items()},
         'ignored_build_host': sorted(ignored), 'families': families,
         'runtime_wgsl_in_selected_ordinary_catalog': False,
         'runtime_wgsl_in_selected_fixed_catalog': False,
-        'limits': ['Twenty-three fixed ordinary, bloom, SSAO and motion/temporal families; backend native compiler still runs during startup',
-            'Effects remain explicit cold opt-ins; separate native-metalfx shims and ordinary/web paths still use WGSL',
+        'limits': ['Twenty-five fixed ordinary, bloom, SSAO, motion/temporal and MetalFX boundary families; backend native compiler still runs during startup',
+            'Effects and vendor MetalFX remain explicit cold opt-ins; ordinary/web paths and test-only oracles still use WGSL',
             'No parser-symbol exclusion, driver cache hit, asynchronous fallback or shader-stall gate claim']}
