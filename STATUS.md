@@ -18,8 +18,10 @@ cook hit its unchanged eight-second deadline after driver entry and before
 compiler dependencies were ready. This does not identify which dependency was
 slow. The [expanded loader observation](docs/spikes/typescript-loader-observation.md)
 separates TypeScript and SWC loading and runs the fallback and four scripted
-starters in the existing one-shot Windows diagnostic. Local controls pass;
-the Windows observation and a timeout repair remain pending. Release stays at
+starters in the existing one-shot Windows diagnostic. Its exact main355 run now
+passes all six controls, with five successful cooks taking 1.737–2.043 seconds
+and one expected refusal. The timeout did not reproduce; no repair is established.
+The retained checkpoint46 failure still blocks its promotion. Release stays at
 checkpoint45, and no release requirement is bypassed.
 
 Checkpoint45 is promoted after every required context and all eight frozen-head

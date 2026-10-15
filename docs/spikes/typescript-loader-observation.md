@@ -36,7 +36,22 @@ explicit-feature commands. No source change or test tolerance was needed.
 The [portable evidence packet](evidence/typescript-loader-observation/manifest.json)
 retains the failed hosted log, source patch, local logs, command receipts and
 that qualification correction. Its verifier checks identities, actual counts,
-the five observations and the preserved eight-second deadline. The Windows
-one-shot run remains pending; even a passing run will be only one observation.
-Checkpoint46 remains failed until reviewed main work passes the complete frozen
-release candidate suite.
+the five observations and the preserved eight-second deadline.
+
+## Hosted Windows result
+
+The [one-shot run](https://github.com/snowdamiz/incant/actions/runs/38731354175)
+passed on exact main355 `6bce35d99091fa6acedd8215f4a508739e1ea090`. Both
+three-test harnesses passed. The five successful cooks reported parent elapsed
+times of 1,758,686, 1,825,158, 1,809,195, 2,042,886 and 1,737,134 microseconds;
+all completed the ten ordered milestones. The deleted-source control refused
+after input admission as expected. The [retained raw artifact and workflow
+result](evidence/typescript-loader-windows.json) preserve all six phase rows,
+the complete compiler/test log, exact source, toolchains and job steps.
+
+The timeout did not reproduce. Dependency loading completed between 0.745 and
+1.027 seconds after driver entry in these five successful children. This does
+not identify the cause of checkpoint46's earlier stall or establish a repair.
+The diagnostic runs the selected harnesses serially, rather than the complete
+desktop job. No retry or deadline change was made. Checkpoint46 remains failed;
+promotion requires all contexts on a complete frozen candidate to succeed.

@@ -33,8 +33,11 @@ device execution is deferred; hosted build and release checks remain required.
   Both preserve the running world and scripts on this Mac. Compatible animation
   keys now have [CPU and numerical Metal qualification](../spikes/animated-model-refresh.md)
   and an [actual editor-window workflow](../spikes/native-window-animated-model-workflow.md)
-  covering import, watcher, history, committed refusal and recovery. Changed skeleton/geometry,
-  scene/material-binding structure and baked navigation dependencies require
+  covering import, watcher, history, committed refusal and recovery.
+  [Model-local material table replacement](../spikes/live-material-binding-refresh.md)
+  now passes CPU and numerical Metal checks, including geometry-divergence
+  provenance for navigation and atomic publication. Its native-window workflow
+  remains unqualified. Changed skeleton/geometry and scene structure still need
   their own admission rules.
 - Preserve the now-qualified [ordinary-editor 4x antialiasing](../spikes/editor-scene-msaa.md).
   Actual Mac editor review and default/cooked Metal controls verify the reported
