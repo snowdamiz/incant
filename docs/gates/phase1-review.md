@@ -40,6 +40,10 @@ device execution is deferred; hosted build and release checks remain required.
 - Complete off-frame shader/pipeline preparation and cache coverage for the final
   renderer configuration. The existing optional cooked families and Vulkan cache
   do not establish every backend, permutation or frame-time requirement.
+  The [combined native observer replay](../spikes/native-compilation-live.md)
+  now records all 95 native creation calls outside gameplay on its complete Core
+  route. Deferred driver work, ambiguous display timestamps and uneven cadence
+  remain open; this observation does not establish the complete shader-stall gate.
 - Finish and qualify remaining deliverables against the complete native sample.
   The [TypeScript AOT spike](../spikes/typescript-aot.md) remains an adoption
   experiment; its language controls are not a measured replacement for QuickJS.
