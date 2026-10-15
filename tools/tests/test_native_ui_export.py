@@ -16,7 +16,7 @@ class UiExport(unittest.TestCase):
                 patch.object(export_native, 'export', return_value={'target': 'cpu', 'player_sha256': 'checked'}) as export:
             export_native.main()
         export.assert_called_once_with(Path('project'), Path('output'), None, None, 'headless',
-                                       wabt=Path('pinned-wabt'), ui_viewport='320x200', profiling=None)
+                                   wabt=Path('pinned-wabt'), ui_viewport='320x200', profiling=None, shaders=None)
 
     def test_unsupported_viewport_is_refused_before_any_project_or_output_io(self):
         for mode, viewport in [('unknown', '320x200'), ('window', '0x20'), ('window', '65537x1'),

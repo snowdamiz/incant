@@ -1,0 +1,1230 @@
+{
+  "format": "incant-shipping-cooked-shader-cpu-evidence",
+  "version": 1,
+  "source": "42b24f78dfcaf34a0bfce84252abc13429acbd87",
+  "base": "191a3b42333c42e90541cce150344c4aed79430c",
+  "evidence_root": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001",
+  "source_scope": "Changed source, build/audit inputs and unchanged refusal fixture; not a full transitive compiler-input snapshot. Frozen commit identifies remaining source.",
+  "archive_sha256": "ff4e9e021edb743813ce6bb9bbc4c2bb84fd36ad84ecdce58452f0a789154312",
+  "records": [
+    {
+      "key": "pure-preflight-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/pure-preflight-001.json",
+      "bytes": 1291,
+      "sha256": "812cb65bc23a7b81d6e827865c66be5d75ab7cb13d8ea9ea8c237966b17c4508"
+    },
+    {
+      "key": "source-001/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/freeze.json",
+      "bytes": 4624,
+      "sha256": "55aed9a24b44e2141d492d9dd367966c252e77a4bdd8e1fae8df2b0aadf8ce0b"
+    },
+    {
+      "key": "source-001/source.diff",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/source.diff",
+      "bytes": 52637,
+      "sha256": "98ddfd8dbebffe0ed99fc94bffc4d368c40ce2ac5c374600ae285e336b7e8f50"
+    },
+    {
+      "key": "cpu-001/failed-renderer-artifact.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-001/failed-renderer-artifact.json",
+      "bytes": 684,
+      "sha256": "a753199eec837df19e3ec3c4184e2f00555a6123c11a1ece406905b00adf2001"
+    },
+    {
+      "key": "cpu-003/actual-shaders.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/actual-shaders.json",
+      "bytes": 18705,
+      "sha256": "a6b86c58999c808799dadf406bace45c49a29354bd6d819914c57c17039e7985"
+    },
+    {
+      "key": "cpu-003/closeout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/closeout.json",
+      "bytes": 303,
+      "sha256": "2f28b6913bcc02d8e254cd6d5d35d4aecf870fb19b34198a41b6459cb3e6016f"
+    },
+    {
+      "key": "cpu-003/generated-receipt.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated-receipt.json",
+      "bytes": 22346,
+      "sha256": "0e85fa16642974c7f4291d7e12ae98b6cc24752eb274aebba6dc52a9d613ce0c"
+    },
+    {
+      "key": "cpu-proposal-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-proposal-001.json",
+      "bytes": 5786,
+      "sha256": "1f8150396302f2e822c22bcde5d3558293f1aea125131e5f9118df7be6530ec4"
+    },
+    {
+      "key": "cpu-supervisor-001.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-supervisor-001.py",
+      "bytes": 8787,
+      "sha256": "6b07db29bdf29db63149868242dc2e2d85bf5bcd02d3d4dafaa565293732a9fa"
+    },
+    {
+      "key": "root-cpu-grant-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/root-cpu-grant-001.json",
+      "bytes": 769,
+      "sha256": "1009abc9075c59bcf77552b4501aeb37c5e5663068bc139d39852d13f0c4a3b7"
+    },
+    {
+      "key": "cpu-001/results.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-001/results.json",
+      "bytes": 4380,
+      "sha256": "c2b51032576e3c33aa5c7f230feef6f129f851a01db68b70477ca86534a44007"
+    },
+    {
+      "key": "cpu-001/0.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-001/0.stderr.log",
+      "bytes": 2461,
+      "sha256": "01f85a12b47a9570cf6d1753382dc38d32b2890dce0add9f8253fab3eb3102d5"
+    },
+    {
+      "key": "cpu-001/0.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-001/0.stdout.log",
+      "bytes": 80055,
+      "sha256": "cb944caecde2645b0fd8078b3c37109867b08dddc624624b83cec718909917db"
+    },
+    {
+      "key": "cpu-001/1.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-001/1.stderr.log",
+      "bytes": 6553,
+      "sha256": "96648a626ed3ff765ff95ac2166adaf8f5339bcdeb3d9d5868d4be49ec9ef95e"
+    },
+    {
+      "key": "cpu-001/1.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-001/1.stdout.log",
+      "bytes": 396321,
+      "sha256": "ffb5ca6d4b902e39c2cadafb01f4da878acaca44416bf0f2b09fd2065139bf2f"
+    },
+    {
+      "key": "cpu-001/tool-0.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-001/tool-0.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "cpu-001/tool-0.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-001/tool-0.stdout.log",
+      "bytes": 36,
+      "sha256": "1f88eaf7fe1aaec83184752cf4c944cd22f00184136ff36a3e4c318cc60ef566"
+    },
+    {
+      "key": "cpu-001/tool-1.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-001/tool-1.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "cpu-001/tool-1.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-001/tool-1.stdout.log",
+      "bytes": 192,
+      "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909"
+    },
+    {
+      "key": "cpu-proposal-002.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-proposal-002.json",
+      "bytes": 6987,
+      "sha256": "11efe3437fb929cbe2b36ec8562fd5779722cfa9db319a5cd6591a02d68b7708"
+    },
+    {
+      "key": "cpu-supervisor-002.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-supervisor-002.py",
+      "bytes": 9685,
+      "sha256": "c33bfe72cd87513191333c39af07e21d635da1904f189ceb4268802d9f36283e"
+    },
+    {
+      "key": "root-cpu-grant-002.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/root-cpu-grant-002.json",
+      "bytes": 1577,
+      "sha256": "4feb5cfe1b5641621fa4dfe3582dd41bb5ccb6e619c7d5a2268c5275351b3b54"
+    },
+    {
+      "key": "cpu-002/results.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-002/results.json",
+      "bytes": 5433,
+      "sha256": "8272bea1a844eebd886fed615d925d44ab3fad8bf73c5169f0e4e36a3981d03a"
+    },
+    {
+      "key": "cpu-002/0.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-002/0.stderr.log",
+      "bytes": 2445,
+      "sha256": "801cb161481ea647014e53ac29b2ac9fc5789d6a92235c68f3ee9b6d02a1c6b8"
+    },
+    {
+      "key": "cpu-002/0.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-002/0.stdout.log",
+      "bytes": 395036,
+      "sha256": "824979f19ab7148d098a3111941830dd1d307ee240c0a93843b69f8de61ce9cf"
+    },
+    {
+      "key": "cpu-002/1.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-002/1.stderr.log",
+      "bytes": 7282,
+      "sha256": "855cbea746adfe722b6647df1b65f201a9f9bfb327bec481e2e81237ebaf8502"
+    },
+    {
+      "key": "cpu-002/1.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-002/1.stdout.log",
+      "bytes": 484493,
+      "sha256": "8dc18d815a6bb45318e2b791c29ee7bd19f4dd1a02f34dffbfc772e5acbf92ae"
+    },
+    {
+      "key": "cpu-002/tool-0.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-002/tool-0.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "cpu-002/tool-0.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-002/tool-0.stdout.log",
+      "bytes": 36,
+      "sha256": "1f88eaf7fe1aaec83184752cf4c944cd22f00184136ff36a3e4c318cc60ef566"
+    },
+    {
+      "key": "cpu-002/tool-1.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-002/tool-1.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "cpu-002/tool-1.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-002/tool-1.stdout.log",
+      "bytes": 192,
+      "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909"
+    },
+    {
+      "key": "cpu-proposal-003.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-proposal-003.json",
+      "bytes": 7154,
+      "sha256": "d226e97ea32de2c20c1a0a369d3123888e2edae256b4c1ee07c631f41b5c6d0c"
+    },
+    {
+      "key": "cpu-supervisor-003.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-supervisor-003.py",
+      "bytes": 9685,
+      "sha256": "3be2fd93da11c6c58ff26e2719c8d4bf6136dcbd73b7aa39c2c8de3269c8783b"
+    },
+    {
+      "key": "root-cpu-grant-003.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/root-cpu-grant-003.json",
+      "bytes": 553,
+      "sha256": "6db85b32e0196dbe3db22368065f6d3fdb4933f56f86ac611ff1acc6beb183c3"
+    },
+    {
+      "key": "cpu-003/results.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/results.json",
+      "bytes": 6607,
+      "sha256": "0bb810ea4590889dd912fe5446c2feaee023ad895598ab72120e1966dc42af1b"
+    },
+    {
+      "key": "cpu-003/0.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/0.stderr.log",
+      "bytes": 847,
+      "sha256": "3799d335879bcff6f4053488779c27f9f11773a5cbef2d1e432783478b8facf6"
+    },
+    {
+      "key": "cpu-003/0.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/0.stdout.log",
+      "bytes": 532415,
+      "sha256": "834f87ace62706c49f155e3f7558ff6612dad1716ad0ba8e72f0a9e8f6496589"
+    },
+    {
+      "key": "cpu-003/1.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/1.stderr.log",
+      "bytes": 16814,
+      "sha256": "a65dca410b332ecc43f477d3e7773b171dd945880e3f918afd321f1c74100aad"
+    },
+    {
+      "key": "cpu-003/1.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/1.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "cpu-003/3.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/3.stderr.log",
+      "bytes": 12785,
+      "sha256": "3fc31884e35aabf851244f91baca00bfcff97b08c1ee114c1201f15057c107b3"
+    },
+    {
+      "key": "cpu-003/3.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/3.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "cpu-003/tool-0.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/tool-0.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "cpu-003/tool-0.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/tool-0.stdout.log",
+      "bytes": 36,
+      "sha256": "1f88eaf7fe1aaec83184752cf4c944cd22f00184136ff36a3e4c318cc60ef566"
+    },
+    {
+      "key": "cpu-003/tool-1.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/tool-1.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "cpu-003/tool-1.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/tool-1.stdout.log",
+      "bytes": 192,
+      "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909"
+    },
+    {
+      "key": "pure-003/0.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/pure-003/0.raw.log",
+      "bytes": 118,
+      "sha256": "f30bc7f9775aeb81ee759566086b24a9800c60c9c58cc490477c8576804566f4"
+    },
+    {
+      "key": "pure-003/1.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/pure-003/1.raw.log",
+      "bytes": 101,
+      "sha256": "7d59a8fbca92ef540f42b6883247c3844892d23f501b6cf2621d0e535813fb81"
+    },
+    {
+      "key": "pure-003/2.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/pure-003/2.raw.log",
+      "bytes": 104,
+      "sha256": "d1a3bdcaa925bbf92cc120237c5ab1078f911832e5f3bbdd16fd82aab85d59fa"
+    },
+    {
+      "key": "pure-003/3.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/pure-003/3.raw.log",
+      "bytes": 100,
+      "sha256": "fe008aab760eb03ccac7578e2b84665b1b50b0d7f855b17a0c7a8d039435b658"
+    },
+    {
+      "key": "pure-003/4.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/pure-003/4.raw.log",
+      "bytes": 172,
+      "sha256": "df28ccd5a09a35da2ccc5ab90a3d83b2b81299c952cb9f14571a0d60d5ffb04c"
+    },
+    {
+      "key": "pure-003/results.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/pure-003/results.json",
+      "bytes": 1189,
+      "sha256": "744d2b39782a69cb4eec6dc741eb2cc1a3763a2d2e48da794c640d5dbb207c90"
+    },
+    {
+      "key": "cpu-003/generated/cluster-shaders/Dx12-Compute.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/cluster-shaders/Dx12-Compute.shader",
+      "bytes": 6998,
+      "sha256": "e7e4401e67edf5064c54cb843767dc2cdff8452c38ecc87dabc57fe6665598b3"
+    },
+    {
+      "key": "cpu-003/generated/cluster-shaders/Metal-Compute.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/cluster-shaders/Metal-Compute.shader",
+      "bytes": 7848,
+      "sha256": "1d501c9dabac36b7530eec4103e488da1a18e89649ffd4f05a74771e1be3b12d"
+    },
+    {
+      "key": "cpu-003/generated/cluster-shaders/Vulkan-Compute.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/cluster-shaders/Vulkan-Compute.shader",
+      "bytes": 9760,
+      "sha256": "b5b5e4eba86ec224ca04ecf97adb9ba2cfc62f3fe61ffaca5f5643dbe4ce0120"
+    },
+    {
+      "key": "cpu-003/generated/cluster-shaders/audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/cluster-shaders/audit.json",
+      "bytes": 1087,
+      "sha256": "fe426d4a0725d45bca3958805022b08908317c2197ed768e52e145873315a74b"
+    },
+    {
+      "key": "cpu-003/generated/cluster-shaders/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/cluster-shaders/manifest.rs",
+      "bytes": 1512,
+      "sha256": "e40175ed2b4c9401e5a39d7dda9a6f65725601e516f57042155c0e6cc8340705"
+    },
+    {
+      "key": "cpu-003/generated/diagnostic-shaders/Dx12-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/diagnostic-shaders/Dx12-Fragment.shader",
+      "bytes": 568,
+      "sha256": "0c3a600edd150f04dc05207241eba4b30b547ded8e24d688384071bcff151d1e"
+    },
+    {
+      "key": "cpu-003/generated/diagnostic-shaders/Dx12-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/diagnostic-shaders/Dx12-Vertex.shader",
+      "bytes": 782,
+      "sha256": "c410b57d2c4802d2f10c675277763251e6ce2226ff6e8c0811c66ba063b47802"
+    },
+    {
+      "key": "cpu-003/generated/diagnostic-shaders/Metal-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/diagnostic-shaders/Metal-Fragment.shader",
+      "bytes": 592,
+      "sha256": "2c2b1905b5b263d814f55c4804e819d7d06d85e162c803afc357fb740d7b14e9"
+    },
+    {
+      "key": "cpu-003/generated/diagnostic-shaders/Metal-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/diagnostic-shaders/Metal-Vertex.shader",
+      "bytes": 2458,
+      "sha256": "5d46b26e3466e577cb5801dfbd4a62ab9c3676ffca23eca213c7dbf38d599f13"
+    },
+    {
+      "key": "cpu-003/generated/diagnostic-shaders/Vulkan-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/diagnostic-shaders/Vulkan-Fragment.shader",
+      "bytes": 584,
+      "sha256": "7ab9df94307d2f11a301deec5ef9578785812c374f90411c8363a374f795fdb0"
+    },
+    {
+      "key": "cpu-003/generated/diagnostic-shaders/Vulkan-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/diagnostic-shaders/Vulkan-Vertex.shader",
+      "bytes": 1056,
+      "sha256": "f77968260948a6d1149f483b08e46f60289e5177fb27b47b762e498df1ff6770"
+    },
+    {
+      "key": "cpu-003/generated/diagnostic-shaders/audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/diagnostic-shaders/audit.json",
+      "bytes": 1545,
+      "sha256": "759abc4b60290f0dfa8b45463f6bec8b696439448ebe4295aa62cdb6d1e7e877"
+    },
+    {
+      "key": "cpu-003/generated/diagnostic-shaders/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/diagnostic-shaders/manifest.rs",
+      "bytes": 2300,
+      "sha256": "94150022772ec4104f32361f248e89648aa9204d5dccfe93d5acc6d11dd9590b"
+    },
+    {
+      "key": "cpu-003/generated/material-shaders/Dx12-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/material-shaders/Dx12-Fragment.shader",
+      "bytes": 19624,
+      "sha256": "6a724f651548caffbbb8f3193d5ba64c2a221b001ef694915cb9d33024184907"
+    },
+    {
+      "key": "cpu-003/generated/material-shaders/Dx12-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/material-shaders/Dx12-Vertex.shader",
+      "bytes": 1641,
+      "sha256": "80a01dfd891d3a082c925071aa2b01b4b8f9ddfbe814b76912728539c78decce"
+    },
+    {
+      "key": "cpu-003/generated/material-shaders/Metal-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/material-shaders/Metal-Fragment.shader",
+      "bytes": 20905,
+      "sha256": "86a31a65695fd0ab241c71a058e890b6a04157416eb848f6f6547dd916305614"
+    },
+    {
+      "key": "cpu-003/generated/material-shaders/Metal-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/material-shaders/Metal-Vertex.shader",
+      "bytes": 7023,
+      "sha256": "f7d0c7a5ce01269666131c4d762891c6457df9dd0c30b36b449d3e33183f71c5"
+    },
+    {
+      "key": "cpu-003/generated/material-shaders/Vulkan-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/material-shaders/Vulkan-Fragment.shader",
+      "bytes": 21936,
+      "sha256": "3f73bf9690c61c22581d02959fd66714e928d668aa2e95c9b8f96339ac1f5118"
+    },
+    {
+      "key": "cpu-003/generated/material-shaders/Vulkan-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/material-shaders/Vulkan-Vertex.shader",
+      "bytes": 2704,
+      "sha256": "46536a19ad53127013cfd23535d565ce7b7d234d38bceefd0f7e623cff82231b"
+    },
+    {
+      "key": "cpu-003/generated/material-shaders/audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/material-shaders/audit.json",
+      "bytes": 1581,
+      "sha256": "cd6ee34f229c4dfbac3bc8c193eb043ac423c686b617b8244035acb724cfb029"
+    },
+    {
+      "key": "cpu-003/generated/material-shaders/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/material-shaders/manifest.rs",
+      "bytes": 2335,
+      "sha256": "513a66b64fdb800356300d8cfa7a60a53ea085dedd0cec5ea3d096a9f4fdf736"
+    },
+    {
+      "key": "cpu-003/generated/output-shaders/Dx12-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/output-shaders/Dx12-Fragment.shader",
+      "bytes": 3698,
+      "sha256": "c321dde205b9c0b535a198b26f91db6f82035ce9b086c004d8fffe19a3ca011a"
+    },
+    {
+      "key": "cpu-003/generated/output-shaders/Dx12-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/output-shaders/Dx12-Vertex.shader",
+      "bytes": 611,
+      "sha256": "345dfc638d89a3d4ec6679f9cfeb0efdb083bf21394e5a8f3521a75d609e3d0a"
+    },
+    {
+      "key": "cpu-003/generated/output-shaders/Metal-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/output-shaders/Metal-Fragment.shader",
+      "bytes": 4275,
+      "sha256": "cc2a7197769ba09090757dc93a79ba67001b86ba6cd987545199450a2040410e"
+    },
+    {
+      "key": "cpu-003/generated/output-shaders/Metal-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/output-shaders/Metal-Vertex.shader",
+      "bytes": 508,
+      "sha256": "f1cee22e81317613980bed8fc8fd22efee923f1c565ee91d7c106c2b9565fe3e"
+    },
+    {
+      "key": "cpu-003/generated/output-shaders/Vulkan-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/output-shaders/Vulkan-Fragment.shader",
+      "bytes": 5388,
+      "sha256": "dacf90c0e06af8bf75fa034b59e8b85026cca4ac975a0d763a855683ff5ce260"
+    },
+    {
+      "key": "cpu-003/generated/output-shaders/Vulkan-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/output-shaders/Vulkan-Vertex.shader",
+      "bytes": 772,
+      "sha256": "ba4e456005e083e48d92667b61f8fc565713b71df5c3d48d971009461d1cedc6"
+    },
+    {
+      "key": "cpu-003/generated/output-shaders/audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/output-shaders/audit.json",
+      "bytes": 1556,
+      "sha256": "bb5b16fa53f8c4adf456b3adb53b24a97742efaaa21a6f10f2244ad94123bbb3"
+    },
+    {
+      "key": "cpu-003/generated/output-shaders/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/output-shaders/manifest.rs",
+      "bytes": 2330,
+      "sha256": "2f3b020eb151d096a109071db237788c29d732eea094df8d0fa2a6f70076188d"
+    },
+    {
+      "key": "cpu-003/generated/shadow-shaders/Dx12-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/shadow-shaders/Dx12-Fragment.shader",
+      "bytes": 1218,
+      "sha256": "d49df04215c40955e84a06db86335d85c386d440f347be34ad59da2a61012ec0"
+    },
+    {
+      "key": "cpu-003/generated/shadow-shaders/Dx12-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/shadow-shaders/Dx12-Vertex.shader",
+      "bytes": 901,
+      "sha256": "6d40410ce5b5e26f286f58f6676f1dda39cadb2f7d79acc94979d77c059c7daa"
+    },
+    {
+      "key": "cpu-003/generated/shadow-shaders/Metal-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/shadow-shaders/Metal-Fragment.shader",
+      "bytes": 979,
+      "sha256": "6af72e99f6832fa300acddd5488297f28b3c3cdb87e5084f901651f3b65e2e3e"
+    },
+    {
+      "key": "cpu-003/generated/shadow-shaders/Metal-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/shadow-shaders/Metal-Vertex.shader",
+      "bytes": 4398,
+      "sha256": "e606ea8a8c35fe9e88b2f25d1137dd5797f4475e1f882c39c3436f2bfae98d53"
+    },
+    {
+      "key": "cpu-003/generated/shadow-shaders/Vulkan-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/shadow-shaders/Vulkan-Fragment.shader",
+      "bytes": 1272,
+      "sha256": "83c4630d173f2ac7d6dc5c605df72a560ff36dc8a711e95e18ad0e9751aa6f8d"
+    },
+    {
+      "key": "cpu-003/generated/shadow-shaders/Vulkan-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/shadow-shaders/Vulkan-Vertex.shader",
+      "bytes": 1388,
+      "sha256": "820a4f89a100209f8a6141ec63bc399069a4f91f0ed44b339aaff509503af2e0"
+    },
+    {
+      "key": "cpu-003/generated/shadow-shaders/audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/shadow-shaders/audit.json",
+      "bytes": 1580,
+      "sha256": "21203d4b3d60be1039d1a8bfad5849814af9c08619d848ff5dccfa8e3620ab86"
+    },
+    {
+      "key": "cpu-003/generated/shadow-shaders/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/shadow-shaders/manifest.rs",
+      "bytes": 2339,
+      "sha256": "8f78630c39314976425ed293f590ad8d772a07a1ad1d586c3328c38aaf88d14d"
+    },
+    {
+      "key": "cpu-003/generated/sprite-shaders/Dx12-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/sprite-shaders/Dx12-Fragment.shader",
+      "bytes": 2369,
+      "sha256": "571066c323a38496d522e5c87100f12cfa35d9bae8949df171499aa0641115d9"
+    },
+    {
+      "key": "cpu-003/generated/sprite-shaders/Dx12-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/sprite-shaders/Dx12-Vertex.shader",
+      "bytes": 1564,
+      "sha256": "222da945cc7e1cee9230ac446edacb13d512fe8b6a4c45ce151f5ddb891c4ee4"
+    },
+    {
+      "key": "cpu-003/generated/sprite-shaders/Metal-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/sprite-shaders/Metal-Fragment.shader",
+      "bytes": 2568,
+      "sha256": "29cec7c6cc1866ebcb1014b8498878be93c395a6531947961ea5fe60cd35d737"
+    },
+    {
+      "key": "cpu-003/generated/sprite-shaders/Metal-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/sprite-shaders/Metal-Vertex.shader",
+      "bytes": 4961,
+      "sha256": "3c59ba8e408a24f82553ebb3da543581da37856f64608154cf52717ddae797bb"
+    },
+    {
+      "key": "cpu-003/generated/sprite-shaders/Vulkan-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/sprite-shaders/Vulkan-Fragment.shader",
+      "bytes": 3020,
+      "sha256": "8cadb6bea0ce7059b376cf4fb1a892bd68b0491f04da8ba5fc861ed265744312"
+    },
+    {
+      "key": "cpu-003/generated/sprite-shaders/Vulkan-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/sprite-shaders/Vulkan-Vertex.shader",
+      "bytes": 2488,
+      "sha256": "741e73b7d6c7fdb7326fc9f70c6ced68625f48088b6de3bad273178c14220aa4"
+    },
+    {
+      "key": "cpu-003/generated/sprite-shaders/audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/sprite-shaders/audit.json",
+      "bytes": 1592,
+      "sha256": "aac492bbd83ef5e29fc89245cb66790c5029ddb3d574914485d5c20b62486f5e"
+    },
+    {
+      "key": "cpu-003/generated/sprite-shaders/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/sprite-shaders/manifest.rs",
+      "bytes": 2370,
+      "sha256": "65a107d221e340f23e03989a37b060cbeeed7810f8a86c023e6b1c19bf2300c8"
+    },
+    {
+      "key": "cpu-003/generated/text-shaders/Dx12-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/text-shaders/Dx12-Fragment.shader",
+      "bytes": 3359,
+      "sha256": "e1a9ec8980ebd56ad2d8146df3da3a94a44c851e977164c03220f7641f71815a"
+    },
+    {
+      "key": "cpu-003/generated/text-shaders/Dx12-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/text-shaders/Dx12-Vertex.shader",
+      "bytes": 1716,
+      "sha256": "6389956da5951eb3e2018900319fb525e04cf7e1f762e1fa5cb14dffb8eef8e6"
+    },
+    {
+      "key": "cpu-003/generated/text-shaders/Metal-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/text-shaders/Metal-Fragment.shader",
+      "bytes": 3254,
+      "sha256": "69b05b3908e500a8df78d2a46485d10db977e841b74876c1127da9b8039981b0"
+    },
+    {
+      "key": "cpu-003/generated/text-shaders/Metal-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/text-shaders/Metal-Vertex.shader",
+      "bytes": 3013,
+      "sha256": "cfb142a1c7860db24efc48a8e9337fa5f4bf804fd0cbd3f799cb781f7e151a58"
+    },
+    {
+      "key": "cpu-003/generated/text-shaders/Vulkan-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/text-shaders/Vulkan-Fragment.shader",
+      "bytes": 3584,
+      "sha256": "8956586c59fb89ad08a0681a2da34c3db31643dded08625c3d2f59cced4676bc"
+    },
+    {
+      "key": "cpu-003/generated/text-shaders/Vulkan-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/text-shaders/Vulkan-Vertex.shader",
+      "bytes": 2268,
+      "sha256": "b19d058a451e64ef2b57760d1a9607c09a9ec593c0f1a885318daff45bbedd4a"
+    },
+    {
+      "key": "cpu-003/generated/text-shaders/audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/text-shaders/audit.json",
+      "bytes": 1604,
+      "sha256": "340a89a08b9fd280303f831868b6b62a1ad888a4b92c9da3fa08296dbc47c17e"
+    },
+    {
+      "key": "cpu-003/generated/text-shaders/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/text-shaders/manifest.rs",
+      "bytes": 2382,
+      "sha256": "17e86663ad35f26265f4edc146ee4fbbde499873d6d95e20e534edd6245aff1e"
+    },
+    {
+      "key": "cpu-003/generated/ui-shaders/Dx12-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/ui-shaders/Dx12-Fragment.shader",
+      "bytes": 5523,
+      "sha256": "0213acf7f14f2337c5d0007bb79846ea24d040d3726bfe0d4d8b051959f46d43"
+    },
+    {
+      "key": "cpu-003/generated/ui-shaders/Dx12-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/ui-shaders/Dx12-Vertex.shader",
+      "bytes": 3941,
+      "sha256": "d7bb2ed8d4664b4273a28473e407669c971793c5e1830cd651b88bcc02c0ecad"
+    },
+    {
+      "key": "cpu-003/generated/ui-shaders/Metal-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/ui-shaders/Metal-Fragment.shader",
+      "bytes": 5641,
+      "sha256": "eac6bb07ed249abd2dc3e9a04da6008ca27e8e77342f4169b6c76cb5828e8ea7"
+    },
+    {
+      "key": "cpu-003/generated/ui-shaders/Metal-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/ui-shaders/Metal-Vertex.shader",
+      "bytes": 7079,
+      "sha256": "12b8e29f1d86a07dcd51f4f537b4da0ccae89e42600707c01968f20f32dfc93c"
+    },
+    {
+      "key": "cpu-003/generated/ui-shaders/Vulkan-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/ui-shaders/Vulkan-Fragment.shader",
+      "bytes": 6464,
+      "sha256": "e9d8c3036792948d27676b8eb69aac55015b5154fa674c39bee3b26cb0321231"
+    },
+    {
+      "key": "cpu-003/generated/ui-shaders/Vulkan-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/ui-shaders/Vulkan-Vertex.shader",
+      "bytes": 5424,
+      "sha256": "928c7feed700898cbbdcac9419bc5a87749c55dd5973e0fe40cefc0fc6a78fc4"
+    },
+    {
+      "key": "cpu-003/generated/ui-shaders/audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/ui-shaders/audit.json",
+      "bytes": 1565,
+      "sha256": "5aaa93ef95d3e0653ace3ebe2d2a7db43d6e70e5a13b5b6fde5ac1daff3fdb41"
+    },
+    {
+      "key": "cpu-003/generated/ui-shaders/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/generated/ui-shaders/manifest.rs",
+      "bytes": 2339,
+      "sha256": "04bcc791c353b0d62e8275c8f6f7552e07af859507ccde1f782014a2d02ae1a0"
+    },
+    {
+      "key": "source/Cargo.lock",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/Cargo.lock",
+      "bytes": 253069,
+      "sha256": "c8a213b15ba0e35f30d14d5e14be57c3f9909506a6ac69eb3c5360ee2d89bf60",
+      "source_path": "Cargo.lock",
+      "code_input": true
+    },
+    {
+      "key": "source/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/Cargo.toml",
+      "bytes": 3956,
+      "sha256": "163606d4b9886c5d0f9bb6a4b67fca4823523b4024f17a689dc9bab719c314a7",
+      "source_path": "Cargo.toml",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_game_player/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/crates/incant_game_player/Cargo.toml",
+      "bytes": 6036,
+      "sha256": "1ce5ce27f26f6bfeb9890709ae3eeabd82bbaf650468f6b993ecba812dacdd3b",
+      "source_path": "crates/incant_game_player/Cargo.toml",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/crates/incant_render/Cargo.toml",
+      "bytes": 3668,
+      "sha256": "2f3894b5d59269fc163ee1d1cd575c9141084cefca888e7fe1970bae8bbb67f0",
+      "source_path": "crates/incant_render/Cargo.toml",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/build.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/crates/incant_render/build.rs",
+      "bytes": 7551,
+      "sha256": "f5941728810d93848651cbeb0695aa94b82b84b2b0bb4db404a1f63fc617e2ad",
+      "source_path": "crates/incant_render/build.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/fixture.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/crates/incant_render/src/fixture.wgsl",
+      "bytes": 563,
+      "sha256": "d6bf588021763f24e1052b929bf3168a9b4d93828473cddafbae0b0375c43136",
+      "source_path": "crates/incant_render/src/fixture.wgsl",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/lighting/grid.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/crates/incant_render/src/lighting/grid.wgsl",
+      "bytes": 2843,
+      "sha256": "461606edf6d9cb4c89581ef30ccf3ae5570a1e1bc0142ffe4953e91dfc2c0439",
+      "source_path": "crates/incant_render/src/lighting/grid.wgsl",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/lighting/shade.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/crates/incant_render/src/lighting/shade.wgsl",
+      "bytes": 3898,
+      "sha256": "52757ae31c0e68c6480bec626ee81386b792fe06c803b0853f9c0a546667e2ad",
+      "source_path": "crates/incant_render/src/lighting/shade.wgsl",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/model_material.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/crates/incant_render/src/model_material.wgsl",
+      "bytes": 4814,
+      "sha256": "48a7b04de1595ce889e19b3888023d5a7c15b43a71ba3e111ee844fb97042a63",
+      "source_path": "crates/incant_render/src/model_material.wgsl",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/output.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/crates/incant_render/src/output.wgsl",
+      "bytes": 2351,
+      "sha256": "6ceefe2e706624f4fff93fab83fffc8e2938af514e3b2ce4e92a1389f11f6a8a",
+      "source_path": "crates/incant_render/src/output.wgsl",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/retained_sprite_tests.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/crates/incant_render/src/retained_sprite_tests.rs",
+      "bytes": 11136,
+      "sha256": "4e7a6dc652567e820742efa411a21c5edb77dc9282bb73c6dcc9da9ba0bf2f5e",
+      "source_path": "crates/incant_render/src/retained_sprite_tests.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/shadows/caster.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/crates/incant_render/src/shadows/caster.wgsl",
+      "bytes": 846,
+      "sha256": "56d35a05cc78da000b7198eaa53d66e2febd929c36a6b3f3e8a53198f124de7f",
+      "source_path": "crates/incant_render/src/shadows/caster.wgsl",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/shadows/shade.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/crates/incant_render/src/shadows/shade.wgsl",
+      "bytes": 1495,
+      "sha256": "3f5d22bcef70b70fb7fe089c9940d5a29e6296984f65a718fe96c7f8d22dd8d4",
+      "source_path": "crates/incant_render/src/shadows/shade.wgsl",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/sprites/sprite.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/crates/incant_render/src/sprites/sprite.wgsl",
+      "bytes": 2513,
+      "sha256": "d679984ce15a957bac6b008f5f3276893e21e64df2de97b8212d6ace64fdd240",
+      "source_path": "crates/incant_render/src/sprites/sprite.wgsl",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/text/text.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/crates/incant_render/src/text/text.wgsl",
+      "bytes": 2428,
+      "sha256": "bfc26ec82a902eadd850528186c06244b7ef63ec9285efefd41f642397b8c5f6",
+      "source_path": "crates/incant_render/src/text/text.wgsl",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/tone_map.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/crates/incant_render/src/tone_map.wgsl",
+      "bytes": 4748,
+      "sha256": "c5479279c8ebe1334cb672e0f3d5638604ba0c0b7c415d13d30e08aa62b79307",
+      "source_path": "crates/incant_render/src/tone_map.wgsl",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/ui/ui.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/crates/incant_render/src/ui/ui.wgsl",
+      "bytes": 5172,
+      "sha256": "f67e4982b038833e87ed84861d5be3018f5f0d6587ff8da6faf8bfd840c33c39",
+      "source_path": "crates/incant_render/src/ui/ui.wgsl",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/crates/incant_shader_cook/Cargo.toml",
+      "bytes": 414,
+      "sha256": "f47e85ee095aa4824449f0dd7f73724531ac9b72b9cc2730dfec29bd90316ea4",
+      "source_path": "crates/incant_shader_cook/Cargo.toml",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/examples/output_bundle.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/crates/incant_shader_cook/examples/output_bundle.rs",
+      "bytes": 574,
+      "sha256": "567d7744d3bc31a9494296eb70a1952f43defe080848e97b1ee97bca351e550a",
+      "source_path": "crates/incant_shader_cook/examples/output_bundle.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/audit.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/crates/incant_shader_cook/src/audit.rs",
+      "bytes": 1509,
+      "sha256": "58890af3ddfe3e465811bd4c2ff5222e2b5c2a904c38c50bbdddb12ff0218e91",
+      "source_path": "crates/incant_shader_cook/src/audit.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/compute/contract.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/crates/incant_shader_cook/src/compute/contract.rs",
+      "bytes": 5083,
+      "sha256": "54284da43034cdb37fdafafdd1665f6653de43c30094e1449d6a5aca8721e305",
+      "source_path": "crates/incant_shader_cook/src/compute/contract.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/compute/emit.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/crates/incant_shader_cook/src/compute/emit.rs",
+      "bytes": 7452,
+      "sha256": "a776d81aa63cae81c1a0445a3ef17488062b96547a8e90bff36ca245c55bf06d",
+      "source_path": "crates/incant_shader_cook/src/compute/emit.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/compute/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/crates/incant_shader_cook/src/compute/mod.rs",
+      "bytes": 3312,
+      "sha256": "2b3fcdb1aab1bd6e73d57b510f553cb3ddf197e29da9634e95d2f38d0f30dc82",
+      "source_path": "crates/incant_shader_cook/src/compute/mod.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/compute/spirv_workgroup.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/crates/incant_shader_cook/src/compute/spirv_workgroup.rs",
+      "bytes": 5801,
+      "sha256": "24e5e8cc68230e6109020c7c857ebd877ce570920819058d70bbb6d9b9bdba71",
+      "source_path": "crates/incant_shader_cook/src/compute/spirv_workgroup.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/compute/static_workgroup.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/crates/incant_shader_cook/src/compute/static_workgroup.rs",
+      "bytes": 2842,
+      "sha256": "3ee6871d6e96e715caab123ddfc67235ed33d411ff5b94569d32126256e7508b",
+      "source_path": "crates/incant_shader_cook/src/compute/static_workgroup.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/contract.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/crates/incant_shader_cook/src/contract.rs",
+      "bytes": 4792,
+      "sha256": "c8956ae477c1e779cfe8ef5a6960a3950fff795849eb8d36bce917d1158c7515",
+      "source_path": "crates/incant_shader_cook/src/contract.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/emit.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/crates/incant_shader_cook/src/emit.rs",
+      "bytes": 6558,
+      "sha256": "2da6ff21863ab62253c463449a592800f7a564d1b259c8b23f07030ca0aef596",
+      "source_path": "crates/incant_shader_cook/src/emit.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/geometry/contract.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/crates/incant_shader_cook/src/geometry/contract.rs",
+      "bytes": 8645,
+      "sha256": "8ac67d104b8bebed09c5b5c76f01e5b576a75121a848dbbdf6e2215f17f78005",
+      "source_path": "crates/incant_shader_cook/src/geometry/contract.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/geometry/emit.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/crates/incant_shader_cook/src/geometry/emit.rs",
+      "bytes": 13559,
+      "sha256": "945b61562075231d02b608be74a6d6093a13298b3462e2ead76744229510d351",
+      "source_path": "crates/incant_shader_cook/src/geometry/emit.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/geometry/interpolation.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/crates/incant_shader_cook/src/geometry/interpolation.rs",
+      "bytes": 2234,
+      "sha256": "3849c0b6128dbbc2646ef6606a9a50ed4ce80096da8358a258c008a8f8a6d42d",
+      "source_path": "crates/incant_shader_cook/src/geometry/interpolation.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/geometry/material.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/crates/incant_shader_cook/src/geometry/material.rs",
+      "bytes": 9577,
+      "sha256": "c83cca8d69cfdef9c9f24e2d1461e81c2bfcb78f1616f8b095a144fb3dfbadd9",
+      "source_path": "crates/incant_shader_cook/src/geometry/material.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/geometry/material_emit.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/crates/incant_shader_cook/src/geometry/material_emit.rs",
+      "bytes": 8968,
+      "sha256": "976f76dfdc879dcf2d72af59673e7b5faeb0a28994dcdecdb6ec27403e7c4c72",
+      "source_path": "crates/incant_shader_cook/src/geometry/material_emit.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/geometry/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/crates/incant_shader_cook/src/geometry/mod.rs",
+      "bytes": 5850,
+      "sha256": "330d9b98bd779a890903df025de9c77d8c6c4433bf3a5558a3cfbc625a057049",
+      "source_path": "crates/incant_shader_cook/src/geometry/mod.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/geometry/sprite.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/crates/incant_shader_cook/src/geometry/sprite.rs",
+      "bytes": 6304,
+      "sha256": "f56d4ed2c90b070cefa9e395015bd2fcae6520f5142e59958b3aeff6564f404d",
+      "source_path": "crates/incant_shader_cook/src/geometry/sprite.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/geometry/text.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/crates/incant_shader_cook/src/geometry/text.rs",
+      "bytes": 5597,
+      "sha256": "fc609717cf6a86a72dd07d0bb79d82fde25df64216e0d769f0214152120e089e",
+      "source_path": "crates/incant_shader_cook/src/geometry/text.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/geometry/ui.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/crates/incant_shader_cook/src/geometry/ui.rs",
+      "bytes": 5479,
+      "sha256": "7a5c0786befbc4a78f3b3d70f56ed552898e9c723315925b52d1e37526bcc933",
+      "source_path": "crates/incant_shader_cook/src/geometry/ui.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/lib.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/crates/incant_shader_cook/src/lib.rs",
+      "bytes": 3426,
+      "sha256": "40a78caec5c819ca80be854800d872cd247ee544a358c71f9247bc7191cb89f4",
+      "source_path": "crates/incant_shader_cook/src/lib.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/crates/incant_shader_cook/src/manifest.rs",
+      "bytes": 1822,
+      "sha256": "49752d656c3897aaf76faa0b33e1a6245990a0d3b8ca15d0b92fee8bf51d4460",
+      "source_path": "crates/incant_shader_cook/src/manifest.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/temporal/contract.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/crates/incant_shader_cook/src/temporal/contract.rs",
+      "bytes": 16332,
+      "sha256": "5faf6575d0994356a404d1d5659248f596d239194546b7489bd01e907868a93e",
+      "source_path": "crates/incant_shader_cook/src/temporal/contract.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/temporal/emit.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/crates/incant_shader_cook/src/temporal/emit.rs",
+      "bytes": 10011,
+      "sha256": "5a957910752f2f7708f569af31e71f6623a47a1e3f8f3cb71a9591924e74a87b",
+      "source_path": "crates/incant_shader_cook/src/temporal/emit.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/temporal/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/crates/incant_shader_cook/src/temporal/mod.rs",
+      "bytes": 6137,
+      "sha256": "de4bfef189a77cb9b655c98ea888101242db972bddac9ab2a9c776de76306866",
+      "source_path": "crates/incant_shader_cook/src/temporal/mod.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/tests/audit.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/crates/incant_shader_cook/tests/audit.rs",
+      "bytes": 4470,
+      "sha256": "d234bcbf8c49e2ef834c6c9f34a8e71c0d50887f6778f1076dbc24a22301eba0",
+      "source_path": "crates/incant_shader_cook/tests/audit.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/tests/compute.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/crates/incant_shader_cook/tests/compute.rs",
+      "bytes": 7165,
+      "sha256": "6404b3abd52283e61ce604fda02deea95908449e1e6b0980d52337e2ca958580",
+      "source_path": "crates/incant_shader_cook/tests/compute.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/tests/fixtures/temporal-resolve-single-depth.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/crates/incant_shader_cook/tests/fixtures/temporal-resolve-single-depth.wgsl",
+      "bytes": 3480,
+      "sha256": "e1af53565a299f6a03a13a3ee05a037b540e24cb2b0bed054ceeb8d2d484ebf1",
+      "source_path": "crates/incant_shader_cook/tests/fixtures/temporal-resolve-single-depth.wgsl",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/tests/geometry.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/crates/incant_shader_cook/tests/geometry.rs",
+      "bytes": 13693,
+      "sha256": "3aec8143130f498e653be310c7a6d760accb5b56b1631f10602548368000ce18",
+      "source_path": "crates/incant_shader_cook/tests/geometry.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/tests/material.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/crates/incant_shader_cook/tests/material.rs",
+      "bytes": 4368,
+      "sha256": "f2b667d1f389cd992422313b6adb2eb46c389d954dc54432276cb8344988b69f",
+      "source_path": "crates/incant_shader_cook/tests/material.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/tests/output.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/crates/incant_shader_cook/tests/output.rs",
+      "bytes": 5582,
+      "sha256": "6de04d9ef95f1d11d4b1239258504b57e33d7bc071da54aa3e03c9c0d6fd9bcd",
+      "source_path": "crates/incant_shader_cook/tests/output.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/tests/temporal.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/crates/incant_shader_cook/tests/temporal.rs",
+      "bytes": 5877,
+      "sha256": "35e7bcbb518c612d0c095af8b26fe5e167ad755dcf1f954b17e5191ed7eb5ab0",
+      "source_path": "crates/incant_shader_cook/tests/temporal.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/tests/text.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/crates/incant_shader_cook/tests/text.rs",
+      "bytes": 2872,
+      "sha256": "7f50f4538d521fbeaad0b9a28aac42cce363644da18536b896fbf5ff3922b149",
+      "source_path": "crates/incant_shader_cook/tests/text.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/tests/ui.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/crates/incant_shader_cook/tests/ui.rs",
+      "bytes": 2759,
+      "sha256": "2deb4c141220b03b90ba8946499ba78eaed00d211121737fe85c202773febb73",
+      "source_path": "crates/incant_shader_cook/tests/ui.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/docs/spikes/shipping-cooked-shaders.md",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/docs/spikes/shipping-cooked-shaders.md",
+      "bytes": 3688,
+      "sha256": "2c54254e866fbf1db99fedc58f6cc66ff34023466a4846c470069c3b488aad28",
+      "source_path": "docs/spikes/shipping-cooked-shaders.md",
+      "code_input": false
+    },
+    {
+      "key": "source/rust-toolchain.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/rust-toolchain.toml",
+      "bytes": 100,
+      "sha256": "c6e63d9832830b858d930007e4fd1fc3f4a3ca1d287483b08077b7f0267ca124",
+      "source_path": "rust-toolchain.toml",
+      "code_input": true
+    },
+    {
+      "key": "source/tools/cargo",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/tools/cargo",
+      "bytes": 179,
+      "sha256": "9aef98d613601b0c374c1d0499afb39d710cbf5002faba537f21be9c11ff72e3",
+      "source_path": "tools/cargo",
+      "code_input": true
+    },
+    {
+      "key": "source/tools/export_native.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/tools/export_native.py",
+      "bytes": 17777,
+      "sha256": "15f506f20e78ccb69439485b87fbc2a3ecb0ce30c8b43f23aac75fbe29701d42",
+      "source_path": "tools/export_native.py",
+      "code_input": true
+    },
+    {
+      "key": "source/tools/native_package.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/tools/native_package.py",
+      "bytes": 8385,
+      "sha256": "0362128f683f835e31674ad2f024f54f35d7401ebdb6eb0b51d791e14578413b",
+      "source_path": "tools/native_package.py",
+      "code_input": true
+    },
+    {
+      "key": "source/tools/native_process.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/tools/native_process.py",
+      "bytes": 19307,
+      "sha256": "58dd2a8231d7f9d1e42070fc85425461e06a43f279fa5e7f8e57b4a40c3a3aa4",
+      "source_path": "tools/native_process.py",
+      "code_input": true
+    },
+    {
+      "key": "source/tools/native_profiling.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/tools/native_profiling.py",
+      "bytes": 5143,
+      "sha256": "54a472376e6134c5c05bc0c10e3733a317112fa8b3a41b47c01000ef5d2bebd2",
+      "source_path": "tools/native_profiling.py",
+      "code_input": true
+    },
+    {
+      "key": "source/tools/native_shaders.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/tools/native_shaders.py",
+      "bytes": 13296,
+      "sha256": "0973d2feb41e2efbe7c6b8091c9cc1e3d6e5189d0c8a88e0c383cc686993aa8c",
+      "source_path": "tools/native_shaders.py",
+      "code_input": true
+    },
+    {
+      "key": "source/tools/physics_export.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/tools/physics_export.py",
+      "bytes": 1336,
+      "sha256": "f7cd497ba58f0b5fba22fd1115829615238f27f51939ae7c17f9637c152c3000",
+      "source_path": "tools/physics_export.py",
+      "code_input": true
+    },
+    {
+      "key": "source/tools/physics_features.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/tools/physics_features.py",
+      "bytes": 16334,
+      "sha256": "a7f686eda85340cf48421478b7cdc193204518af307069922a179104d7046523",
+      "source_path": "tools/physics_features.py",
+      "code_input": true
+    },
+    {
+      "key": "source/tools/tests/test_native_shaders.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/tools/tests/test_native_shaders.py",
+      "bytes": 14060,
+      "sha256": "eb63d630bbb48ebbf3645e6b3623fd2ddef20b9e36ca35f98b2b55c7cb53ed07",
+      "source_path": "tools/tests/test_native_shaders.py",
+      "code_input": true
+    },
+    {
+      "key": "source/tools/tests/test_native_ui_export.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/source-001/files/tools/tests/test_native_ui_export.py",
+      "bytes": 1949,
+      "sha256": "57efd0d06c2f747fd599ac7efc1e798243fa749c2ff044bd147823c452bc9b59",
+      "source_path": "tools/tests/test_native_ui_export.py",
+      "code_input": true
+    }
+  ],
+  "binaries": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-001/artifacts/0-audit",
+      "bytes": 4813608,
+      "sha256": "cec2fc0fbe46e43c798e21de88ea6d3083a630a920bf3d7a06e1907fe6ef3c29",
+      "executed_as_player": false
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-001/artifacts/1-incant_render-failed",
+      "bytes": 32742560,
+      "sha256": "3912615680663b95a5fbe106805be5d8a65b6f147fcba01958d3de3f0642760a",
+      "executed_as_player": false
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-002/artifacts/0-incant_render",
+      "bytes": 33128960,
+      "sha256": "6a82388d1ee8f67bdd566f62a13a7f353dec5243a82e020ac93a0c8d7a7ddf9e",
+      "executed_as_player": false
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/shipping-cooked-shaders-001/cpu-003/artifacts/0-incant_game_player",
+      "bytes": 32976800,
+      "sha256": "90a85262ccc8fe0c70d3503739c6b626fe44c563a4725213107d1651ef24c5b8",
+      "executed_as_player": false
+    }
+  ],
+  "qualification": {
+    "python_passed": 39,
+    "cooker_passed": 36,
+    "renderer_passed": 188,
+    "renderer_ignored_gpu": 54,
+    "actual_families": 8,
+    "actual_artifacts": 45,
+    "actual_artifact_bytes": 198123,
+    "player": "compile-only CI arm64 fast physics",
+    "ordinary_feature_off": "cargo check passed",
+    "strict_clippy": "cooker/renderer/player all targets passed",
+    "native_player_runs": 0,
+    "gpu_window_capture": false,
+    "unrun": [
+      "public shipping export/package",
+      "selected-catalog GPU rendering",
+      "native shader driver creation",
+      "shader-stall/performance/phase gates"
+    ]
+  },
+  "preserved_failures": [
+    "Initial CLI mock lacked default shaders=None: transcript-derived observation, not raw log",
+    "CPU001 renderer deterministic fixtures compiled fast:185 pass/3 failure/54 ignored",
+    "CPU002 passed188 renderer controls, then cumulative2GiB target growth stop; separately authorized CPU003 cap4GiB retained original baseline"
+  ]
+}
