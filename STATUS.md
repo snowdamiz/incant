@@ -13,6 +13,35 @@ controls. This fixes the ordinary viewport route; low-resolution reconstruction
 still has separate appearance defects. The entries
 below preserve earlier scoped results and superseded integration snapshots.
 
+## Cooked bloom — complete twelve-family CPU catalog qualified
+
+The trusted cooked-native selection now includes prefilter, downsample,
+upsample and display bloom programs, bringing the catalog to twelve families
+and 69 artifact-bound shaders. All seven bloom pipelines receive the retained
+device cache during cold preparation. Partial cooked-output builds still refuse
+bloom; project files cannot supply shader bytes and default exports stay unchanged.
+
+41 Python controls, 41 cooker tests, 209 renderer controls, 12 partial-bloom
+controls and strict lint pass. The exporter-shaped player was compiled only;
+its actual target output passed the complete 268,438-byte shader audit. Both prior
+native failures remain recorded. Public shipping export, player execution,
+driver/render parity, cache hits and the full shader-stall gate remain unproven.
+The original eight-family result below retains its producing-source scope.
+[Source, failures and portable evidence](docs/spikes/cooked-bloom.md).
+
+## Optional pipeline caches — cold preparation qualified
+
+The renderer retains its Vulkan cache across explicit bloom, SSAO, motion and
+temporal preparation. Updated bytes are published only after successful
+validation; failed preparation and Drop preserve the previous complete file.
+No cache storage enters frame submission, and unsupported/default-off routes
+remain inert.
+
+Nineteen cache controls, feature-off checks and the combined cooked shader/cache
+suite pass locally, with strict lint. The Vulkan lifecycle harness was compiled
+but not executed on this Mac; actual driver persistence and shader-stall gates
+remain open. [Contract and evidence](docs/spikes/persistent-pipeline-cache.md).
+
 ## Cooked native shader export — ordinary catalog qualified
 
 The trusted native-window exporter can now select backend-cooked shaders for
@@ -27,6 +56,19 @@ full public export, target-driver rendering, optional effect coverage, persisten
 Metal/DX12 caches and shader-stall qualification remain open. The prior fixture
 failure and storage-bound interruption remain recorded.
 [Selection and evidence](docs/spikes/shipping-cooked-shaders.md).
+
+## Agent playbooks — eighteen bundled workflows qualified
+
+All eighteen planned Markdown playbooks are discoverable through read-only agent
+tools. Their workflows use current schemas, reversible authoring commands and
+native bulk scripting; missing host capabilities are reported explicitly. Project
+content cannot replace the catalogue, and reading guidance grants no execution
+or approval authority. Every drafted translation remains flagged for human review.
+
+118 agent CPU tests and strict lint pass, with independent content/source review.
+Live skill-following quality, missing profiler/export/runtime controls and the
+full Phase 3 evaluation gate remain open.
+[Behaviour and retained evidence](docs/spikes/builtin-agent-skills.md).
 
 ## Agent editor visibility — per-turn wiring qualified
 
@@ -880,8 +922,9 @@ satisfy those gates.
 The director authorized Phase 1 with remaining Phase 0 items deferred, sensible
 engineering progress without repeated advancement questions, and agent merges
 after scoped review and passing checks. These authorizations do not approve a
-phase gate. Section 12 decisions are settled. Current computer use and screen
-capture are authorized. Claude Opus 5.5 with explicitly verified Max effort owns
+phase gate. Section 12 decisions are settled. The director has paused local
+screen capture and computer use for every agent while development continues.
+Source work, CPU tests and hosted CI remain available. Claude Opus 5.5 with explicitly verified Max effort owns
 editor UI design, layout, styling and pixel review by default. Astra/root and
 subagents own all other work, including rendering and non-editor visuals, and may
 take over unresolved Claude editor UI work without another routing approval.

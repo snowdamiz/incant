@@ -1,5 +1,9 @@
 # Explicit cooked shaders in native-window exports
 
+This record qualifies the original eight-family selection at source `42b24f78`.
+The later [complete bloom extension](cooked-bloom.md) has separate source and
+qualification; its additional families are not covered by these results.
+
 `tools/export_native.py PROJECT OUTPUT --mode window --shaders cooked` selects
 existing fixed backend-cooked shaders through the trusted exporter. Omission
 retains the ordinary configuration. Unknown modes, headless selection and

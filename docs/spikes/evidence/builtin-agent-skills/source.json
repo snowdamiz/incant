@@ -1,0 +1,118 @@
+{
+  "source": "907bbaea51a9c129d6811eafd14090d45c58d1ad",
+  "base": "3434064f9c215700623d3667eb0e4416ef2d14eb",
+  "files": [
+    {
+      "path": "crates/incant_agent/src/conversation.rs",
+      "sha256": "6313fed6dd0d29471eadb15aabf3b74bc7ff4e65155c737419121e51b7390615"
+    },
+    {
+      "path": "crates/incant_agent/src/lib.rs",
+      "sha256": "a8c71669862cf819ee9b7a8ee621a23d080b85866d0a372849b6b44e11fc98d7"
+    },
+    {
+      "path": "crates/incant_agent/src/skills.rs",
+      "sha256": "dac4fd03e6d43feeca90d213ff278506988c7b81ee4db77edc92220f31b00e33"
+    },
+    {
+      "path": "crates/incant_agent/tests/skills.rs",
+      "sha256": "fdf9cd42b469e295ccb30d5f821183783905249fdeddab0035de1e8d344b9d53"
+    },
+    {
+      "path": "sdk/skills/README.md",
+      "sha256": "20a03c1ef75f2437340bab6f5289297da8376cc57b3e060862d1bd4f1f0e5699"
+    },
+    {
+      "path": "sdk/skills/camera-rigs.md",
+      "sha256": "0a48694c28d79b27152145b2af0bf651edf776d447599ba767bd92a9b1c9d9ed"
+    },
+    {
+      "path": "sdk/skills/checkpoints.md",
+      "sha256": "f12be061819c908877b479b18a404727459c8713c6eff351feae37356cbaaf0d"
+    },
+    {
+      "path": "sdk/skills/common.md",
+      "sha256": "88c071d1623bf91cf455fff63807e6d354b8d8f47b314f9da5ac4d00f8762f90"
+    },
+    {
+      "path": "sdk/skills/day-night.md",
+      "sha256": "0352ad8036ae9731b0f1396a519581e0cb189f85931c639a42aeb5c7e3113e49"
+    },
+    {
+      "path": "sdk/skills/dialogue.md",
+      "sha256": "967ec76e9983015f754fec8b8bb7758230b1a86a694ecd855c116d04ec4db951"
+    },
+    {
+      "path": "sdk/skills/first-person.md",
+      "sha256": "0ba2c2679c79a03e0e77374244028a7864542850ece73db54d6456bc29ecb13c"
+    },
+    {
+      "path": "sdk/skills/health-damage.md",
+      "sha256": "4654e3d4e7e06ae513f523d4ce45b16a05c5551b0faf7a3a86495e3b627bd961"
+    },
+    {
+      "path": "sdk/skills/inventory.md",
+      "sha256": "d9c9bae3070361d1ab5bfcc6d79b30a5801d22faacb461b2acd16a01032896f8"
+    },
+    {
+      "path": "sdk/skills/localize-project.md",
+      "sha256": "fbda81fe1883a7295c8a7923898a40ec17cb7a8bbbba78e5d5511860f29a1567"
+    },
+    {
+      "path": "sdk/skills/main-menu.md",
+      "sha256": "d7362e0fb0d3b04676e00f4d8493edfb974c3668825052abab4aa15ff169ca7d"
+    },
+    {
+      "path": "sdk/skills/mobile-touch.md",
+      "sha256": "85f820271a7eb00452ff6b7c1cf782f60a05ff9b23124997f2b6dd8ccc47b58f"
+    },
+    {
+      "path": "sdk/skills/platformer-2d.md",
+      "sha256": "fd9cb41223f43bf3f7ecb8811c92186589c2271ea00fd1661c28161b98e83490"
+    },
+    {
+      "path": "sdk/skills/profile-optimize.md",
+      "sha256": "23d6e69335b5a923801c2a08fb768999f9551b009449ec1a8be14b6b478f7e29"
+    },
+    {
+      "path": "sdk/skills/save-load.md",
+      "sha256": "a994438ec16755b851debead918b40677b1be63f42db143a177db254d25c7265"
+    },
+    {
+      "path": "sdk/skills/settings-menu.md",
+      "sha256": "bbcd0cc0e7175b1bbd2dff0bc74ca9c5eb1eb180e0c024d121e468384292a5bf"
+    },
+    {
+      "path": "sdk/skills/simple-ai.md",
+      "sha256": "ad87728b1bb010db760bd6bd8f301a717bf22cbd500ce0a81e8a1322c82c9095"
+    },
+    {
+      "path": "sdk/skills/spawners.md",
+      "sha256": "307db737835676da6ed53247327ef8d174d2f132c2932dc8427b3978c560a05b"
+    },
+    {
+      "path": "sdk/skills/third-person.md",
+      "sha256": "e5618ea25746b9ab08e6658b3cf856af7699a3580f3d4eaebb8f5e452bbe4904"
+    },
+    {
+      "path": "sdk/skills/top-down.md",
+      "sha256": "2c60e2fe74f4e6803af2dc571f57ccfc3d1c743c13afd3f5619591124bce762b"
+    },
+    {
+      "path": "Cargo.toml",
+      "sha256": "163606d4b9886c5d0f9bb6a4b67fca4823523b4024f17a689dc9bab719c314a7"
+    },
+    {
+      "path": "Cargo.lock",
+      "sha256": "bbcf1c6772c6f994cf1d0d827bd5e0c8268e4552d9128282af000e54736951c0"
+    },
+    {
+      "path": "tools/native_process.py",
+      "sha256": "58dd2a8231d7f9d1e42070fc85425461e06a43f279fa5e7f8e57b4a40c3a3aa4"
+    },
+    {
+      "path": "tools/cargo",
+      "sha256": "9aef98d613601b0c374c1d0499afb39d710cbf5002faba537f21be9c11ff72e3"
+    }
+  ]
+}

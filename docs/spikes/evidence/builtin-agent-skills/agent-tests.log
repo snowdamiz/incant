@@ -1,0 +1,198 @@
+   Compiling incant_agent v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_agent)
+    Finished `ci` profile [optimized] target(s) in 12.17s
+     Running unittests src/lib.rs (/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/incant_agent-a004c4749b78d79b)
+
+running 67 tests
+test accounts::fence_tests::account_aba_during_blocked_provider_refuses_entire_batch_after_charging_usage ... ok
+test accounts::fence_tests::account_change_while_approving_refuses_current_and_remaining_tools ... ok
+test accounts::fence_tests::api_key_replacement_invalidates_receipt_and_generation_never_wraps ... ok
+test accounts::fence_tests::auto_batch_rechecks_each_tool_and_preserves_earlier_committed_history ... ok
+test accounts::fence_tests::failed_credential_deletion_preserves_selection_but_durably_invalidates_turns ... ok
+test accounts::fence_tests::failed_provider_request_distinguishes_reserved_usage_from_measured_fence_errors ... ok
+test accounts::fence_tests::invalidation_failure_prevents_credential_mutation ... ok
+test accounts::fence_tests::legacy_metadata_receipts_survive_reads_but_reject_aba_and_reconnect ... ok
+test accounts::fence_tests::receipt_binds_registration_identity_and_rejects_invalid_selection ... ok
+test accounts::fence_tests::stale_receipt_refuses_before_provider_request_without_charging_tokens ... ok
+test accounts::tests::api_key_signout_deletes_locally_without_claiming_remote_revocation ... ok
+test accounts::tests::damaged_metadata_is_not_silently_replaced ... ok
+test accounts::tests::failed_local_signout_preserves_selected_account_for_retry ... ok
+test accounts::tests::invalid_spike_host_migrates_once_and_survives_new_store_instances ... ok
+test accounts::tests::oauth_signout_stays_signed_out_after_reopen_with_an_older_api_key ... ok
+test accounts::tests::registration_and_selection_persist_without_token_fields ... ok
+test auth::tests::callback_listener_ignores_stale_tabs_then_accepts_matching_attempt ... ok
+test auth::tests::cancelled_and_expired_attempts_stop_without_token_exchange ... ok
+test auth::tests::local_signout_cleans_missing_damaged_and_mismatched_records_without_network ... ok
+test auth::tests::local_signout_deletes_even_when_remote_revocation_fails ... ok
+test auth::tests::local_signout_never_reports_success_if_deletion_fails ... ok
+test auth::tests::registration_and_pkce_callback_validation ... ok
+test auth::tests::rejects_invalid_host_and_generates_unique_attempt_parameters ... ok
+test auth::tests::returning_registration_cannot_swap_client ... ok
+test context::tests::large_unicode_and_escaped_project_data_is_bounded_with_explicit_omissions ... ok
+test context::tests::recent_edits_follow_undo_and_do_not_include_retired_documents ... ok
+test context::tests::snapshot_is_read_only_and_supplies_complete_sampled_schemas ... ok
+test conversation::tests::history_evicts_whole_turns_and_retains_no_screenshot_pixels ... ok
+test conversation::tests::oversized_and_incomplete_context_is_explicit_without_unmatched_calls ... ok
+test credentials::tests::interrupted_refresh_keeps_original_credential_for_every_failed_write ... ok
+test credentials::tests::invalid_manifest_cannot_read_other_account_parts ... ok
+test credentials::tests::large_unicode_record_roundtrips_and_replacement_cleans_old_generation ... ok
+test ledger::tests::completed_charges_survive_reopen_and_new_allowances ... ok
+test ledger::tests::damaged_unknown_or_oversized_record_is_retained_without_reset ... ok
+test ledger::tests::different_projects_have_independent_locks_and_usage ... ok
+test ledger::tests::disabled_invalid_or_exhausted_caps_do_not_create_a_receipt ... ok
+test ledger::tests::exact_zero_completion_refunds_but_uncertain_receipts_remain_uncertain ... ok
+test ledger::tests::files_are_private_and_links_are_refused ... ok
+test ledger::tests::fresh_process_abrupt_exit_preserves_reservation ... ok
+test ledger::tests::inconsistent_receipt_never_refunds_the_reservation ... ok
+test ledger::tests::live_process_exclusion_then_completed_receipt_survives_exit ... ok
+test ledger::tests::owner_drop_releases_lock_while_an_inherited_description_stays_open ... ok
+test ledger::tests::project_identity_is_bounded_and_cannot_escape_directory ... ok
+test ledger::tests::receipt_release_unlocks_inherited_description_without_refunding_invalid_usage ... ok
+test ledger::tests::reservation_is_on_disk_before_lease_is_returned_and_drop_keeps_it ... ok
+test ledger::tests::subprocess_worker ... ok
+test ledger::tests::usage_over_the_requested_allowance_is_not_forgiven ... ok
+test local_credentials::tests::private_record_survives_reopen_and_is_replaced_atomically ... ok
+test local_credentials::tests::refuses_symlinks_and_publicly_readable_credentials ... ok
+test provider::tests::active_metadata_checks_never_resolve_or_refresh_credentials ... ok
+test provider::tests::api_key_catalog_and_inference_use_the_same_explicit_credential ... ok
+test provider::tests::api_key_unauthorized_is_terminal_and_server_text_is_redacted ... ok
+test provider::tests::lost_account_stops_before_sending_another_request ... ok
+test provider::tests::renewable_sessions_reload_tokens_and_retry_unauthorized_only_once ... ok
+test session::durable::tests::busy_start_and_restore_cannot_replace_active_budget_or_reserve ... ok
+test session::durable::tests::cancellation_before_reservation_invokes_no_job_and_spends_nothing ... ok
+test session::durable::tests::durable_admission_restores_raised_cap_and_settles_before_terminal_publication ... ok
+test session::durable::tests::exhausted_and_invalid_caps_do_not_start_or_reserve ... ok
+test session::durable::tests::idle_restore_is_version_stable_and_retains_recovered_uncertainty ... ok
+test session::durable::tests::over_cap_receipt_stays_charged_and_saturates_safely ... ok
+test session::durable::tests::panic_and_inconsistent_receipts_keep_full_reservation_on_reopen ... ok
+test session::durable::tests::provider_without_usage_keeps_conservative_receipt_and_uncertainty ... ok
+test session::durable::tests::racing_idle_restore_and_start_have_one_atomic_budget_choice ... ok
+test session::durable::tests::rejected_metadata_and_spawn_do_not_reserve ... ok
+test session::durable::tests::reservation_failure_invokes_no_job_and_reports_static_accounting_failure ... ok
+test session::durable::tests::settlement_failure_keeps_pending_receipt_and_never_publishes_success ... ok
+test session::tests::post_publication_worker_panic_recomputes_conservative_charged_delta ... ok
+
+test result: ok. 67 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.32s
+
+     Running tests/agent.rs (/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/agent-2703394888609951)
+
+running 8 tests
+test budget_blocks_before_network ... ok
+test denial_precedes_mutation_and_cancel_precedes_request ... ok
+test direct_route_completed_items_are_retained_until_terminal_success ... ok
+test incomplete_output_never_edits_and_consumed_tokens_remain_charged ... ok
+test response_stream_requires_terminal_success ... ok
+test tools_use_shared_bus_and_record_provenance ... ok
+test unknown_failure_redacts_provider_content_and_reserves_unknown_usage ... ok
+test unknown_tools_and_fabricated_screenshots_fail ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/assets.rs (/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/assets-f5a9808cc9556793)
+
+running 3 tests
+test agent_approval_and_cancellation_precede_import_and_unscoped_hosts_do_not_advertise_it ... ok
+test imported_assets_have_real_cooked_content_shared_history_and_paged_inspection ... ok
+test imports_require_host_access_current_revision_and_confined_valid_batches ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+
+     Running tests/camera.rs (/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/camera-96729d0554b0dde5)
+
+running 1 test
+test camera_selection_reaches_the_project_host_without_project_mutation ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/context.rs (/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/context-29a780aa48f914e8)
+
+running 2 tests
+test exclusive_and_shared_turns_receive_read_only_current_context ... ok
+test retained_conversation_refreshes_manual_edits_and_undo_without_promoting_project_instructions ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/editor_context.rs (/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/editor_context-4072dc46ee5f156a)
+
+running 2 tests
+test view_transport_is_closed_bounded_and_optional_for_existing_clients ... ok
+test visibility_is_fresh_untrusted_and_omitted_when_no_editor_observation_exists ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/scripts.rs (/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/scripts-f0d559beb6055169)
+
+running 5 tests
+test cancellation_after_approval_precedes_prepare_for_both_write_entrypoints ... ok
+test registration_and_removal_use_the_existing_patch_approval_boundary ... ok
+test script_metadata_is_exposed_by_the_shared_typed_patch_schema ... ok
+test source_content_tools_are_approved_journaled_and_untrusted ... ok
+test source_tools_refuse_source_independent_hosts_and_schema_has_no_path_capability ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.15s
+
+     Running tests/session.rs (/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/session-93b70e060d26c899)
+
+running 14 tests
+test account_fence_failure_after_measured_usage_does_not_mark_a_reservation ... ok
+test aggregate_approval_bytes_and_count_are_bounded_after_resolved_bodies_are_dropped ... ok
+test approvals_have_explicit_ids_and_discard_source_after_decision_or_cancel ... ok
+test cancelled_provider_stays_single_flight_and_late_usage_is_kept_without_late_output ... ok
+test competing_starts_have_exactly_one_worker_and_completion_releases_it ... ok
+test denial_is_explicit_and_cannot_be_replayed_over_a_later_approval ... ok
+test failure_accounting_carries_across_turns_and_raw_errors_never_enter_snapshots ... ok
+test history_report_and_request_metadata_are_bounded_and_idle_polls_are_empty ... ok
+test inconsistent_budget_or_panicking_jobs_exhaust_allowance_explicitly ... ok
+test oversized_and_deep_approval_payloads_refuse_without_unbounded_history ... ok
+test session_drop_wakes_approval_waiter_and_revokes_retained_handles ... ok
+test successful_over_budget_job_preserves_usage_and_fails_instead_of_completing ... ok
+test unicode_stream_limit_interrupts_without_partial_codepoints_or_false_success ... ok
+test unmeasured_provider_charges_are_explicit_without_overwriting_cancellation ... ok
+
+test result: ok. 14 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/session_agent.rs (/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/session_agent-d650686a54cca3cb)
+
+running 2 tests
+test real_agent_enforces_each_approval_mode_and_keeps_one_undoable_bus ... ok
+test real_provider_failure_is_charged_and_redacted ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/shared.rs (/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/shared-e20eef07e47ac547)
+
+running 11 tests
+test approval_can_edit_the_project_and_stale_agent_patch_does_not_overwrite_it ... ok
+test cancellation_during_approval_or_provider_response_never_applies_pending_edits ... ok
+test conversation_retains_completed_protocol_and_requeries_after_manual_edit ... ok
+test editor_edits_during_provider_wait_then_agent_requeries_and_commits_undoable_transaction ... ok
+test interrupted_conversation_retains_warning_and_committed_edit_without_unmatched_calls ... ok
+test loading_project_container_uses_one_bus_and_refuses_a_failed_reload ... ok
+test oversized_provider_context_is_refused_before_network_or_budget_charge ... ok
+test project_switch_and_poison_fail_closed_without_executing_provider_patch ... ok
+test shared_asset_and_script_tools_replay_and_undo_through_the_existing_journal ... ok
+test slow_hosts_receive_consistent_authoring_snapshots_without_locking_editor ... ok
+test unchecked_play_hosts_are_not_advertised_or_dispatched_for_shared_projects ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.15s
+
+     Running tests/skills.rs (/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/skills-c3c3ce513550a122)
+
+running 3 tests
+test all_eighteen_bundled_playbooks_are_discoverable_bounded_and_read_only ... ok
+test reading_guidance_does_not_bypass_the_following_mutation_approval ... ok
+test skill_lookup_never_accepts_paths_unknown_fields_or_execution_requests ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running unittests examples/credential_probe.rs (/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/examples/credential_probe-53299042fcc64acb)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests examples/provider_probe.rs (/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/examples/provider_probe-e20df9362e2803ac)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

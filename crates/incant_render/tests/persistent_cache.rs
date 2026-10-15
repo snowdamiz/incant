@@ -2,10 +2,11 @@
 #![cfg(all(unix, feature = "persistent-pipeline-cache"))]
 #![cfg_attr(not(target_os = "linux"), allow(dead_code))]
 
-use incant_render::{CacheRead, CacheWrite, Renderer, wgpu};
+use incant_render::{AmbientOcclusion, Bloom, CacheRead, CacheWrite, Renderer, wgpu};
 use std::{
     fs::{self, File, OpenOptions},
     io::{self, Read, Seek, SeekFrom, Write},
+    os::unix::fs::MetadataExt,
     path::{Path, PathBuf},
     process::{Child, Command, Stdio},
     time::{Duration, Instant},
@@ -75,7 +76,7 @@ fn initialize_catalog(stage: &str) {
         backends: wgpu::Backends::VULKAN,
         ..wgpu::InstanceDescriptor::new_without_display_handle()
     });
-    let renderer = pollster::block_on(Renderer::new(&instance, None))
+    let mut renderer = pollster::block_on(Renderer::new(&instance, None))
         .expect("requested real Vulkan Renderer must initialize");
     eprintln!("Adapter: {:?}", renderer.adapter.get_info());
     assert_eq!(renderer.adapter.get_info().backend, wgpu::Backend::Vulkan);
@@ -118,6 +119,91 @@ fn initialize_catalog(stage: &str) {
         "Vulkan catalog: 31 render + 1 compute; {:?}",
         renderer.pipeline_cache_report
     );
+    let cache = only_cache(&PathBuf::from(std::env::var_os("XDG_CACHE_HOME").unwrap()));
+    let initial_read = renderer.pipeline_cache_report.read.clone();
+    let bloom = Bloom {
+        threshold: 1.,
+        intensity: 0.5,
+        levels: 4,
+    };
+    let ao = AmbientOcclusion {
+        radius: 1.,
+        bias: 0.01,
+        strength: 0.75,
+    };
+    pollster::block_on(async {
+        renderer.enable_bloom(bloom).await.unwrap();
+        renderer.enable_ambient_occlusion(ao).await.unwrap();
+        renderer.enable_motion_vectors().await.unwrap();
+        renderer.enable_motion_owner().await.unwrap();
+        renderer.enable_temporal_accumulation().await.unwrap();
+    });
+    assert_eq!(renderer.pipeline_cache_report.read, initial_read);
+    assert!(matches!(
+        renderer.pipeline_cache_report.write,
+        CacheWrite::Stored { bytes: 1.. }
+    ));
+    renderer.check_device().unwrap();
+    let optional = instance.generate_report().unwrap();
+    // Original 31 + bloom 7 + SSAO 19 + motion 8 + owner 4 + temporal 2.
+    assert_eq!(optional.hub.render_pipelines.num_allocated, 71);
+    assert_eq!(optional.hub.compute_pipelines.num_allocated, 2);
+
+    let held_complete = File::open(&cache).unwrap();
+    let complete_identity = held_complete.metadata().unwrap();
+    let complete = fs::read(&cache).unwrap();
+    let last_report = renderer.pipeline_cache_report.clone();
+    assert!(pollster::block_on(renderer.enable_bloom(Bloom { levels: 0, ..bloom })).is_err());
+    assert!(
+        pollster::block_on(renderer.enable_ambient_occlusion(AmbientOcclusion {
+            radius: f32::NAN,
+            ..ao
+        }))
+        .is_err()
+    );
+    assert_eq!(
+        fs::read(&cache).unwrap(),
+        complete,
+        "refused preparation published bytes"
+    );
+    let after_refusal = fs::metadata(&cache).unwrap();
+    assert_eq!(
+        (after_refusal.dev(), after_refusal.ino()),
+        (complete_identity.dev(), complete_identity.ino()),
+        "refused preparation replaced the file even with identical bytes"
+    );
+    assert_eq!(renderer.pipeline_cache_report, last_report);
+    // Repeated cold configuration retains a bounded live catalog. These are
+    // live allocation counts, not cumulative compilation or cache-hit counters.
+    pollster::block_on(async {
+        renderer.enable_bloom(bloom).await.unwrap();
+        renderer.enable_ambient_occlusion(ao).await.unwrap();
+        renderer.enable_motion_vectors().await.unwrap();
+        renderer.enable_motion_owner().await.unwrap();
+        renderer.enable_temporal_accumulation().await.unwrap();
+    });
+    renderer.check_device().unwrap();
+    let repeated = instance.generate_report().unwrap();
+    assert_eq!(repeated.hub.render_pipelines.num_allocated, 71);
+    assert_eq!(repeated.hub.compute_pipelines.num_allocated, 2);
+    let held_before_drop = File::open(&cache).unwrap();
+    let drop_identity = held_before_drop.metadata().unwrap();
+    let before_drop = fs::read(&cache).unwrap();
+    drop(renderer);
+    assert_eq!(
+        fs::read(&cache).unwrap(),
+        before_drop,
+        "Drop performed a cache write"
+    );
+    let after_drop = fs::metadata(&cache).unwrap();
+    assert_eq!(
+        (after_drop.dev(), after_drop.ino()),
+        (drop_identity.dev(), drop_identity.ino()),
+        "Drop replaced the file even with identical bytes"
+    );
+    // Held descriptors prevent a retired inode from being reused during checks.
+    drop((held_complete, held_before_drop));
+    eprintln!("Optional Vulkan catalog: 71 render + 2 compute; no frame/driver-hit claim");
 }
 
 fn only_cache(cache_home: &Path) -> PathBuf {

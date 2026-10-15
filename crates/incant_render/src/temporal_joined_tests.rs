@@ -126,7 +126,11 @@ fn run(with_bloom: bool, with_ssao: bool) {
             intensity: 0.5,
             levels: 6,
         }));
-        if cfg!(all(feature = "cooked-output", not(target_arch = "wasm32"))) {
+        if cfg!(all(
+            feature = "cooked-output",
+            not(feature = "cooked-bloom"),
+            not(target_arch = "wasm32")
+        )) {
             assert_eq!(
                 enabled.unwrap_err().downcast_ref::<crate::BloomError>(),
                 Some(&crate::BloomError::CookedOutput)

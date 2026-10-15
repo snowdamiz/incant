@@ -1,0 +1,143 @@
+{
+  "format": "incant-optional-pipeline-cache-cpu",
+  "version": 1,
+  "base": "4315ab377e8aae3234aef7448b9e442b75d0433d",
+  "production_source": "02ad03fe036f2393a02b41d0a463a9b279d60a53",
+  "qualified_source": "9addba2d67526e3c6e768384dec1a907d5dd2a53",
+  "original_root": "/Users/andreyyurlov/.codex/incant-evidence/optional-pipeline-cache-001",
+  "archive": {
+    "path": "records.json.gz",
+    "bytes": 951686,
+    "inflated_bytes": 4264720,
+    "sha256": "60265feaf9b2ee2fa32062223a7f8186d9ddd2428a42bba438fb63fb19977d2a",
+    "records": 271
+  },
+  "bindings": {
+    "source-001/freeze.json": "7c303912a7026912d379a15246b7524a097bd2f289aa766f82a9dd7396219307",
+    "source-002/freeze.json": "e81cb2636873d59a85c18a6ae1de57e6c04086a723c8d892312b7ab538e64140",
+    "cpu-plan-001.json": "5491c1c4ac4293594d7764b4fbf5c44d77185afe8c399faa06de46c34a5d33b8",
+    "cpu-plan-002.json": "77809c106f61154079951e763a08e22eb57c9dfce20f197aaa0b84fd7ff602e2",
+    "cpu-plan-003.json": "6541de345183bfa251423a4d020f2126a27933d9589da5bfc634cb35146db465",
+    "qualify-001.py": "df9d639df803c0f3704c34e6feea2d72afbc0943d691bf9b045220afde03893c",
+    "qualify-002.py": "ef5ef42c1d72f2fd1d6f2954128ab82757ce1c0c0aae3598c2c13579b0b08615",
+    "qualify-003.py": "6c8e6d209ca233e9a5258683e63cf88eeaa70fedeba4b46c91cb6b6fc9ba2a5e",
+    "root-cpu-grant-003.json": "ad02a4e04e6b694f12aabab56d6229985f09e3039678c5bb33014c1ba9d4b216",
+    "target-baseline-003.json": "26bf41612fb071c1ec3308dff23c7e44641b414b13354ffebc8b0e3c2f5a480a",
+    "cpu-003/result.json": "8fd1ff3304157587eaa77519ed551c927e251a72ed640254c96f2182ac002536"
+  },
+  "copied_binaries": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/optional-pipeline-cache-001/cpu-003/binaries/cache-enabled-cpu/incant_render-29de9c351836d7d7",
+      "sha256": "d8cd68f3dd064abc7c0e601ca88688bdfe6607da5a82a69ca25bca33c75019d9",
+      "bytes": 33061648,
+      "stage": "cache-enabled-cpu",
+      "target": {
+        "kind": [
+          "lib"
+        ],
+        "crate_types": [
+          "lib"
+        ],
+        "name": "incant_render",
+        "src_path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/crates/incant_render/src/lib.rs",
+        "edition": "2024",
+        "doc": true,
+        "doctest": true,
+        "test": true
+      },
+      "profile": {
+        "opt_level": "1",
+        "debuginfo": 0,
+        "debug_assertions": false,
+        "overflow_checks": false,
+        "test": true
+      },
+      "features": [
+        "default",
+        "persistent-pipeline-cache",
+        "physics-deterministic"
+      ],
+      "executed": true
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/optional-pipeline-cache-001/cpu-003/binaries/cache-disabled-cpu/incant_render-a6d24868d22257d6",
+      "sha256": "f4b7b777f3f40ed0bf741f8e3f724490ab99680cc34fdaf6316d7e4dc11bc3ed",
+      "bytes": 32897904,
+      "stage": "cache-disabled-cpu",
+      "target": {
+        "kind": [
+          "lib"
+        ],
+        "crate_types": [
+          "lib"
+        ],
+        "name": "incant_render",
+        "src_path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/crates/incant_render/src/lib.rs",
+        "edition": "2024",
+        "doc": true,
+        "doctest": true,
+        "test": true
+      },
+      "profile": {
+        "opt_level": "1",
+        "debuginfo": 0,
+        "debug_assertions": false,
+        "overflow_checks": false,
+        "test": true
+      },
+      "features": [
+        "default",
+        "physics-deterministic"
+      ],
+      "executed": true
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/optional-pipeline-cache-001/cpu-003/binaries/vulkan-harness-compile-only/persistent_cache-3d0b9a8c9ad1f65e",
+      "sha256": "1fd9ac0e30c5426c17756e522d757d583f83a18e8a0240bfa8ce77c53e5a6c63",
+      "bytes": 1027024,
+      "stage": "vulkan-harness-compile-only",
+      "target": {
+        "kind": [
+          "test"
+        ],
+        "crate_types": [
+          "bin"
+        ],
+        "name": "persistent_cache",
+        "src_path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/crates/incant_render/tests/persistent_cache.rs",
+        "edition": "2024",
+        "doc": false,
+        "doctest": false,
+        "test": true
+      },
+      "profile": {
+        "opt_level": "1",
+        "debuginfo": 0,
+        "debug_assertions": false,
+        "overflow_checks": false,
+        "test": true
+      },
+      "features": [
+        "default",
+        "persistent-pipeline-cache",
+        "physics-deterministic"
+      ],
+      "executed": false
+    }
+  ],
+  "outcomes": {
+    "cpu001": "unexecuted initial proposal",
+    "cpu002": "unexecuted held-file-identity successor",
+    "cpu003": "all nine steps passed; nineteen cache-on/three overlapping off controls; Vulkan harness compile-only",
+    "vulkan_executed": false,
+    "window_or_capture": false,
+    "cache_hit_or_performance_claim": false
+  },
+  "limits": [
+    "CPU tests do not establish actual Vulkan cache use or driver execution.",
+    "Default verification reads archived records only. --originals/--binaries require retained external files; no executable or opaque driver bytes are archived.",
+    "Only source001 inputs differing from source002 are duplicated; both full source manifests bind their exact bytes and optional Git verification.",
+    "Mac build does not expose the ignored Linux test as an executable test case; the complete helper body is compiled only.",
+    "Object allocation counts in the unrun harness are live counts, not cumulative compilation counters."
+  ]
+}

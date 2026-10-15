@@ -12,8 +12,8 @@ native-compilation = ["dep:wgpu-hal", "wgpu-hal/diagnostic-compilation"]
 native-metalfx = ["dep:objc2", "dep:objc2-metal", "dep:objc2-metal-fx"]
 # Complete fixed motion/temporal route; no mixed native builtin fallback.
 cooked-temporal = ["cooked-materials", "cooked-sprites", "cooked-ui", "cooked-text", "cooked-clusters"]
-# Ordinary native-window catalog only; optional post/temporal routes stay refused.
-cooked-native-shaders = ["cooked-materials", "cooked-sprites", "cooked-ui", "cooked-text", "cooked-clusters"]
+# Ordinary native-window and complete bloom catalog; other optional routes stay separate.
+cooked-native-shaders = ["cooked-materials", "cooked-sprites", "cooked-ui", "cooked-text", "cooked-clusters", "cooked-bloom"]
 default = ["physics-deterministic"]
 
 # CPU-verified integration; actual backend/appearance acceptance is still pending.
@@ -27,6 +27,8 @@ cooked-ui = ["cooked-output"]
 cooked-text = ["cooked-output"]
 cooked-materials = ["cooked-geometry"]
 cooked-clusters = ["cooked-output"]
+# Complete filter + display family; partial cooked-output still refuses bloom.
+cooked-bloom = ["cooked-output"]
 # Diagnostic capture only; never enabled by a shipping/default feature.
 ssao-stage-readback = []
 
