@@ -29,8 +29,14 @@ pub(super) fn save(player: &mut Player) -> Result<Vec<u8>> {
         Player::Plain(game) => game.checkpoint(&mut b.payload, &mut b.planar, &mut b.spatial)?,
         #[cfg(feature = "render-input")]
         Player::Spatial(game) => game.checkpoint(&mut b.payload, &mut b.planar, &mut b.spatial)?,
+        #[cfg(feature = "render-input")]
+        Player::Recording(_) => {
+            return Err("material recording checkpoint saving is unsupported".into());
+        }
         #[cfg(feature = "render-gpu")]
-        Player::Gpu(_) => return Err("GPU checkpoint saving is unsupported".into()),
+        Player::Gpu(_) | Player::RecordedGpu(_) => {
+            return Err("GPU checkpoint saving is unsupported".into());
+        }
     };
     // Export has its own cumulative decode/validation/output accounting. It is
     // separate from capture, not a reset inside any partially completed stage.
@@ -67,8 +73,13 @@ pub(super) fn load(
             Settings::Cpu(settings) => Player::Spatial(Box::new(
                 HostedOfflineGameSession::from_checkpoint(pending, clips, settings)?,
             )),
+            Settings::Recording(_, _) => {
+                return Err("material recording checkpoint loading is unsupported".into());
+            }
             #[cfg(feature = "render-gpu")]
-            Settings::Gpu(_) => return Err("GPU checkpoint loading is unsupported".into()),
+            Settings::Gpu(_) | Settings::RecordedGpu(_, _) => {
+                return Err("GPU checkpoint loading is unsupported".into());
+            }
         });
     }
     #[cfg(not(feature = "render-input"))]

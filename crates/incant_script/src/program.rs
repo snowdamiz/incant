@@ -34,6 +34,29 @@ impl From<incant_wasm_runtime::ModuleExports> for SessionProgram {
     }
 }
 impl SessionProgram {
+    /// Cold data provenance for a prepared behavior. It never authorizes loading
+    /// executable bytes. Static modules lack a serialized artifact and refuse.
+    pub fn artifact_sha256(&self) -> Option<[u8; 32]> {
+        use sha2::{Digest, Sha256};
+        match self {
+            Self::Bytecode(script) => {
+                let metadata = script.metadata();
+                let mut hash = Sha256::new();
+                hash.update(b"Incant bytecode program provenance v1\0");
+                hash.update(metadata.bytecode_sha256);
+                hash.update(metadata.hardening_sha256);
+                hash.update([u8::from(metadata.bindings_sha256.is_some())]);
+                if let Some(bindings) = metadata.bindings_sha256 {
+                    hash.update(bindings);
+                }
+                Some(hash.finalize().into())
+            }
+            #[cfg(feature = "wasmtime-host")]
+            Self::DevelopmentWasm(bytes) => Some(Sha256::digest(bytes).into()),
+            #[cfg(feature = "static-module")]
+            Self::Static(_) => None,
+        }
+    }
     pub(crate) fn start(self, world: &NativeWorld) -> Result<SessionVm, SessionError> {
         match self {
             #[cfg(feature = "wasmtime-host")]

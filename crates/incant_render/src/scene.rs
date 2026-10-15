@@ -15,19 +15,10 @@ pub(crate) struct Instance {
 }
 impl Instance {
     pub(crate) fn new(world: Mat4) -> Result<Self, SceneError> {
-        let inverse = world.inverse();
-        if !world.is_finite() || !inverse.is_finite() {
-            return Err(SceneError::TransformRange);
-        }
-        let mut columns = inverse.transpose().to_cols_array_2d();
-        columns[0][3] = if world.as_dmat4().determinant() < 0. {
-            -1.
-        } else {
-            1.
-        };
+        let transform = incant_render_data::material_keys::PlacementTransform::new(world)?;
         Ok(Self {
-            world: world.to_cols_array_2d(),
-            normal: [columns[0], columns[1], columns[2]],
+            world: transform.world,
+            normal: transform.normal,
         })
     }
 }
