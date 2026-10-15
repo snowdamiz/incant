@@ -67,5 +67,6 @@ phases. [Phase 0](phase0-review.md) also retains its explicit deferred items.
 The [Arabic health-label correction](../spikes/core-rtl-health-direction.md) now
 passes actual Core localization and font-shaping regressions across damage,
 reset and repeated locale switches. The earlier native package is unchanged;
-normal-size Arabic appearance and the combined locale gate remain open while
-screen capture is paused.
+normal-size Arabic appearance and the combined locale gate remain open pending
+fresh native review. The director has allowed capture again; the retained
+focus-interrupted runs are not relabeled as complete.

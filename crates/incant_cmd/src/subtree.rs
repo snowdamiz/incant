@@ -1,4 +1,4 @@
-//! Ordinary same-scene copies. No new IDs, file authority, or runtime representation.
+//! Ordinary same-scene command preparation and copies; no file or runtime authority.
 mod references;
 
 use super::{CommandError, prefab::Budget};
@@ -7,6 +7,57 @@ use std::collections::{BTreeMap, BTreeSet};
 
 fn invalid(message: &str) -> CommandError {
     CommandError::Invalid(format!("duplicate subtree: {message}"))
+}
+
+/// Prepare ordinary command data without editing the document. The eventual
+/// execute still validates the exact subtree, fresh identities and revision.
+pub(super) fn prepare(
+    project: &Project,
+    scene_id: &str,
+    root: &str,
+) -> Result<(super::Command, Id), CommandError> {
+    let scene = project
+        .scenes
+        .get(scene_id)
+        .ok_or_else(|| invalid("scene absent"))?;
+    if !scene.entities.contains_key(root) {
+        return Err(invalid("source root absent"));
+    }
+    // One scene scan, then a bounded traversal; do not rescan all entities for
+    // each level of a deep subtree. This is authoring preparation, never a tick.
+    let mut children: BTreeMap<&str, Vec<&str>> = BTreeMap::new();
+    for (id, entity) in &scene.entities {
+        if let Some(parent) = entity.parent.as_deref() {
+            children.entry(parent).or_default().push(id);
+        }
+    }
+    let mut mapping = BTreeMap::new();
+    let mut pending = vec![root];
+    while let Some(id) = pending.pop() {
+        if mapping.contains_key(id) {
+            return Err(invalid("cyclic source hierarchy"));
+        }
+        if mapping.len() == incant_doc::prefab::MAX_PREFAB_NODES {
+            return Err(invalid("identity mapping requires 1..1024 nodes"));
+        }
+        mapping.insert(id.to_owned(), incant_doc::new_id());
+        if let Some(next) = children.get(id) {
+            // Bound the pending frontier as well as the eventual mapping.
+            if next.len() > incant_doc::prefab::MAX_PREFAB_NODES - mapping.len() - pending.len() {
+                return Err(invalid("identity mapping requires 1..1024 nodes"));
+            }
+            pending.extend(next.iter().copied());
+        }
+    }
+    let created = mapping[root].clone();
+    Ok((
+        super::Command::DuplicateSubtree {
+            scene_id: scene_id.into(),
+            root_entity_id: root.into(),
+            entities: mapping,
+        },
+        created,
+    ))
 }
 
 pub(super) fn duplicate(

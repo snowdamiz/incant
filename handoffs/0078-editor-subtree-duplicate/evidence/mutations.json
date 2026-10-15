@@ -1,0 +1,366 @@
+{
+  "baseline": {
+    "exit": 0,
+    "failed": [],
+    "total": 48,
+    "broken_suites": []
+  },
+  "mutations": [
+    {
+      "name": "held-key repeat guard",
+      "file": "editor/ui/src/components/HierarchyPanel.tsx",
+      "caught": true,
+      "exit": 1,
+      "failed": [
+        "HierarchyDuplicate.test.tsx > hierarchy duplicate sends one command while one runs: held keys repeat nothing, and another press or choice is refused"
+      ],
+      "total": 48,
+      "broken_suites": [],
+      "restored_sha256": "2c477184e20b153a56d2a5003cadea6f25dcc39dc7f09361fd45e0844b432166"
+    },
+    {
+      "name": "shortcut takes the key (preventDefault)",
+      "file": "editor/ui/src/components/HierarchyPanel.tsx",
+      "caught": true,
+      "exit": 1,
+      "failed": [
+        "HierarchyDuplicate.test.tsx > hierarchy duplicate duplicates the focused entity with \u2318D on macOS and selects, reveals and focuses the returned copy",
+        "HierarchyDuplicate.test.tsx > hierarchy duplicate uses Ctrl+D on Windows and Linux and leaves other combinations to the page",
+        "HierarchyDuplicate.test.tsx > hierarchy duplicate keeps the read-only sample fixture read-only and explains why",
+        "HierarchyDuplicate.test.tsx > hierarchy duplicate sends one command while one runs: held keys repeat nothing, and another press or choice is refused",
+        "HierarchyDuplicate.test.tsx > hierarchy duplicate does not duplicate a scene, and says why",
+        "HierarchyDuplicate.test.tsx > hierarchy duplicate through the native bridge leaves live Play inspection alone: no copy while a world exists, and Duplicate returns after Stop"
+      ],
+      "total": 48,
+      "broken_suites": [],
+      "restored_sha256": "2c477184e20b153a56d2a5003cadea6f25dcc39dc7f09361fd45e0844b432166"
+    },
+    {
+      "name": "platform-specific modifier",
+      "file": "editor/ui/src/hierarchy/duplicate.ts",
+      "caught": true,
+      "exit": 1,
+      "failed": [
+        "HierarchyDuplicate.test.tsx > duplicate shortcut leaves the other platform\u2019s modifier, Shift, Option and Alt alone",
+        "HierarchyDuplicate.test.tsx > hierarchy duplicate duplicates the focused entity with \u2318D on macOS and selects, reveals and focuses the returned copy",
+        "HierarchyDuplicate.test.tsx > hierarchy duplicate uses Ctrl+D on Windows and Linux and leaves other combinations to the page"
+      ],
+      "total": 48,
+      "broken_suites": [],
+      "restored_sha256": "13ee9cf75a26c1ceb25d6631b6aaee9e4384509486f51e18a73b9b6cf4cbd9cf"
+    },
+    {
+      "name": "same-task in-flight guard",
+      "file": "editor/ui/src/hierarchy/duplicate.ts",
+      "caught": true,
+      "exit": 1,
+      "failed": [
+        "HierarchyDuplicate.test.tsx > hierarchy duplicate sends one command for two presses in the same task, before the pending state renders"
+      ],
+      "total": 48,
+      "broken_suites": [],
+      "restored_sha256": "13ee9cf75a26c1ceb25d6631b6aaee9e4384509486f51e18a73b9b6cf4cbd9cf"
+    },
+    {
+      "name": "pending-state guard",
+      "file": "editor/ui/src/hierarchy/duplicate.ts",
+      "caught": true,
+      "exit": 1,
+      "failed": [
+        "HierarchyDuplicate.test.tsx > hierarchy duplicate sends one command while one runs: held keys repeat nothing, and another press or choice is refused"
+      ],
+      "total": 48,
+      "broken_suites": [],
+      "restored_sha256": "13ee9cf75a26c1ceb25d6631b6aaee9e4384509486f51e18a73b9b6cf4cbd9cf"
+    },
+    {
+      "name": "pending state rendered",
+      "file": "editor/ui/src/hierarchy/duplicate.ts",
+      "caught": true,
+      "exit": 1,
+      "failed": [
+        "HierarchyDuplicate.test.tsx > hierarchy duplicate duplicates the focused entity with \u2318D on macOS and selects, reveals and focuses the returned copy",
+        "HierarchyDuplicate.test.tsx > hierarchy duplicate sends one command while one runs: held keys repeat nothing, and another press or choice is refused"
+      ],
+      "total": 48,
+      "broken_suites": [],
+      "restored_sha256": "13ee9cf75a26c1ceb25d6631b6aaee9e4384509486f51e18a73b9b6cf4cbd9cf"
+    },
+    {
+      "name": "capability guard",
+      "file": "editor/ui/src/hierarchy/duplicate.ts",
+      "caught": true,
+      "exit": 1,
+      "failed": [
+        "HierarchyDuplicate.test.tsx > hierarchy duplicate keeps the read-only sample fixture read-only and explains why",
+        "HierarchyDuplicate.test.tsx > hierarchy duplicate treats a host that does not advertise entity.duplicate as unable to duplicate"
+      ],
+      "total": 48,
+      "broken_suites": [],
+      "restored_sha256": "13ee9cf75a26c1ceb25d6631b6aaee9e4384509486f51e18a73b9b6cf4cbd9cf"
+    },
+    {
+      "name": "scene guard",
+      "file": "editor/ui/src/hierarchy/duplicate.ts",
+      "caught": true,
+      "exit": 1,
+      "failed": [
+        "HierarchyDuplicate.test.tsx > hierarchy duplicate does not duplicate a scene, and says why"
+      ],
+      "total": 48,
+      "broken_suites": [],
+      "restored_sha256": "13ee9cf75a26c1ceb25d6631b6aaee9e4384509486f51e18a73b9b6cf4cbd9cf"
+    },
+    {
+      "name": "Play world guard",
+      "file": "editor/ui/src/hierarchy/duplicate.ts",
+      "caught": true,
+      "exit": 1,
+      "failed": [
+        "HierarchyDuplicate.test.tsx > hierarchy duplicate through the native bridge leaves live Play inspection alone: no copy while a world exists, and Duplicate returns after Stop"
+      ],
+      "total": 48,
+      "broken_suites": [],
+      "restored_sha256": "13ee9cf75a26c1ceb25d6631b6aaee9e4384509486f51e18a73b9b6cf4cbd9cf"
+    },
+    {
+      "name": "Play preparing guard",
+      "file": "editor/ui/src/hierarchy/duplicate.ts",
+      "caught": true,
+      "exit": 1,
+      "failed": [
+        "HierarchyDuplicate.test.tsx > hierarchy duplicate through the native bridge leaves live Play inspection alone: no copy while a world exists, and Duplicate returns after Stop"
+      ],
+      "total": 48,
+      "broken_suites": [],
+      "restored_sha256": "13ee9cf75a26c1ceb25d6631b6aaee9e4384509486f51e18a73b9b6cf4cbd9cf"
+    },
+    {
+      "name": "Play stopping guard",
+      "file": "editor/ui/src/hierarchy/duplicate.ts",
+      "caught": true,
+      "exit": 1,
+      "failed": [
+        "HierarchyDuplicate.test.tsx > hierarchy duplicate through the native bridge leaves live Play inspection alone: no copy while a world exists, and Duplicate returns after Stop"
+      ],
+      "total": 48,
+      "broken_suites": [],
+      "restored_sha256": "13ee9cf75a26c1ceb25d6631b6aaee9e4384509486f51e18a73b9b6cf4cbd9cf"
+    },
+    {
+      "name": "vanished-source pre-check",
+      "file": "editor/ui/src/hierarchy/duplicate.ts",
+      "caught": true,
+      "exit": 1,
+      "failed": [
+        "HierarchyDuplicate.test.tsx > hierarchy duplicate does not send a command for an entity that disappeared while its menu was open"
+      ],
+      "total": 48,
+      "broken_suites": [],
+      "restored_sha256": "13ee9cf75a26c1ceb25d6631b6aaee9e4384509486f51e18a73b9b6cf4cbd9cf"
+    },
+    {
+      "name": "success without a copy",
+      "file": "editor/ui/src/hierarchy/duplicate.ts",
+      "caught": true,
+      "exit": 1,
+      "failed": [
+        "HierarchyDuplicate.test.tsx > hierarchy duplicate never selects a copy after a success without the copy, even with a\u2026, says so, and frees Duplicate"
+      ],
+      "total": 48,
+      "broken_suites": [],
+      "restored_sha256": "13ee9cf75a26c1ceb25d6631b6aaee9e4384509486f51e18a73b9b6cf4cbd9cf"
+    },
+    {
+      "name": "bridge and project scope",
+      "file": "editor/ui/src/hierarchy/duplicate.ts",
+      "caught": true,
+      "exit": 1,
+      "failed": [
+        "HierarchyDuplicate.test.tsx > hierarchy duplicate does not select or announce a copy for a project that is no longer open",
+        "HierarchyDuplicate.test.tsx > hierarchy duplicate does not select or announce a copy for a bridge that was replaced"
+      ],
+      "total": 48,
+      "broken_suites": [],
+      "restored_sha256": "13ee9cf75a26c1ceb25d6631b6aaee9e4384509486f51e18a73b9b6cf4cbd9cf"
+    },
+    {
+      "name": "bridge scope only",
+      "file": "editor/ui/src/hierarchy/duplicate.ts",
+      "caught": true,
+      "exit": 1,
+      "failed": [
+        "HierarchyDuplicate.test.tsx > hierarchy duplicate does not select or announce a copy for a bridge that was replaced"
+      ],
+      "total": 48,
+      "broken_suites": [],
+      "restored_sha256": "13ee9cf75a26c1ceb25d6631b6aaee9e4384509486f51e18a73b9b6cf4cbd9cf"
+    },
+    {
+      "name": "copy present in the latest snapshot",
+      "file": "editor/ui/src/hierarchy/duplicate.ts",
+      "caught": true,
+      "exit": 1,
+      "failed": [
+        "HierarchyDuplicate.test.tsx > hierarchy duplicate never selects a copy after a copy that is not in the latest snapsh\u2026, says so, and frees Duplicate"
+      ],
+      "total": 48,
+      "broken_suites": [],
+      "restored_sha256": "13ee9cf75a26c1ceb25d6631b6aaee9e4384509486f51e18a73b9b6cf4cbd9cf"
+    },
+    {
+      "name": "selection moved on",
+      "file": "editor/ui/src/hierarchy/duplicate.ts",
+      "caught": true,
+      "exit": 1,
+      "failed": [
+        "HierarchyDuplicate.test.tsx > hierarchy duplicate leaves a selection made while the command ran, and keeps focus that left the tree"
+      ],
+      "total": 48,
+      "broken_suites": [],
+      "restored_sha256": "13ee9cf75a26c1ceb25d6631b6aaee9e4384509486f51e18a73b9b6cf4cbd9cf"
+    },
+    {
+      "name": "focus only if the tree had it",
+      "file": "editor/ui/src/hierarchy/duplicate.ts",
+      "caught": true,
+      "exit": 1,
+      "failed": [
+        "HierarchyDuplicate.test.tsx > hierarchy duplicate leaves a selection made while the command ran, and keeps focus that left the tree"
+      ],
+      "total": 48,
+      "broken_suites": [],
+      "restored_sha256": "13ee9cf75a26c1ceb25d6631b6aaee9e4384509486f51e18a73b9b6cf4cbd9cf"
+    },
+    {
+      "name": "focus moves to the copy",
+      "file": "editor/ui/src/hierarchy/duplicate.ts",
+      "caught": true,
+      "exit": 1,
+      "failed": [
+        "HierarchyDuplicate.test.tsx > hierarchy duplicate duplicates the focused entity with \u2318D on macOS and selects, reveals and focuses the returned copy",
+        "HierarchyDuplicate.test.tsx > hierarchy duplicate offers Duplicate after Rename in the context menu and duplicates through the command bus",
+        "HierarchyDuplicate.test.tsx > hierarchy duplicate copies a nested entity with its descendants under the same parent and selects the copied root",
+        "HierarchyDuplicate.test.tsx > hierarchy duplicate reveals and focuses a copy that lands far outside the mounted rows of a long list",
+        "HierarchyDuplicate.test.tsx > hierarchy duplicate selects exactly the returned entity when it is the first of two new same-named rows",
+        "HierarchyDuplicate.test.tsx > hierarchy duplicate selects exactly the returned entity when it is the last of two new same-named rows",
+        "HierarchyDuplicate.test.tsx > hierarchy duplicate sends one command while one runs: held keys repeat nothing, and another press or choice is refused",
+        "HierarchyDuplicate.test.tsx > hierarchy duplicate through the native bridge sends the scene, entity and revision, and selects the copy the host returns"
+      ],
+      "total": 48,
+      "broken_suites": [],
+      "restored_sha256": "13ee9cf75a26c1ceb25d6631b6aaee9e4384509486f51e18a73b9b6cf4cbd9cf"
+    },
+    {
+      "name": "asker unmounted",
+      "file": "editor/ui/src/hierarchy/duplicate.ts",
+      "caught": true,
+      "exit": 1,
+      "failed": [
+        "HierarchyDuplicate.test.tsx > hierarchy duplicate does nothing more when the hierarchy that asked is gone by the time the engine answers"
+      ],
+      "total": 48,
+      "broken_suites": [],
+      "restored_sha256": "13ee9cf75a26c1ceb25d6631b6aaee9e4384509486f51e18a73b9b6cf4cbd9cf"
+    },
+    {
+      "name": "menu item acts",
+      "file": "editor/ui/src/components/HierarchyPanel.tsx",
+      "caught": true,
+      "exit": 1,
+      "failed": [
+        "HierarchyDuplicate.test.tsx > hierarchy duplicate offers Duplicate after Rename in the context menu and duplicates through the command bus",
+        "HierarchyDuplicate.test.tsx > hierarchy duplicate writes the menu shortcut as Ctrl+D on Windows and Linux and opens the menu from the keyboard",
+        "HierarchyDuplicate.test.tsx > hierarchy duplicate does not send a command for an entity that disappeared while its menu was open"
+      ],
+      "total": 48,
+      "broken_suites": [],
+      "restored_sha256": "2c477184e20b153a56d2a5003cadea6f25dcc39dc7f09361fd45e0844b432166"
+    },
+    {
+      "name": "menu item explains",
+      "file": "editor/ui/src/components/HierarchyPanel.tsx",
+      "caught": true,
+      "exit": 1,
+      "failed": [
+        "HierarchyDuplicate.test.tsx > hierarchy duplicate keeps the read-only sample fixture read-only and explains why",
+        "HierarchyDuplicate.test.tsx > hierarchy duplicate treats a host that does not advertise entity.duplicate as unable to duplicate",
+        "HierarchyDuplicate.test.tsx > hierarchy duplicate sends one command while one runs: held keys repeat nothing, and another press or choice is refused",
+        "HierarchyDuplicate.test.tsx > hierarchy duplicate does not duplicate a scene, and says why",
+        "HierarchyDuplicate.test.tsx > hierarchy duplicate through the native bridge leaves live Play inspection alone: no copy while a world exists, and Duplicate returns after Stop"
+      ],
+      "total": 48,
+      "broken_suites": [],
+      "restored_sha256": "2c477184e20b153a56d2a5003cadea6f25dcc39dc7f09361fd45e0844b432166"
+    },
+    {
+      "name": "tree aria-busy",
+      "file": "editor/ui/src/components/HierarchyPanel.tsx",
+      "caught": true,
+      "exit": 1,
+      "failed": [
+        "HierarchyDuplicate.test.tsx > hierarchy duplicate duplicates the focused entity with \u2318D on macOS and selects, reveals and focuses the returned copy"
+      ],
+      "total": 48,
+      "broken_suites": [],
+      "restored_sha256": "2c477184e20b153a56d2a5003cadea6f25dcc39dc7f09361fd45e0844b432166"
+    },
+    {
+      "name": "rejected dispatch resolves",
+      "file": "editor/ui/src/shell/ShellContext.tsx",
+      "caught": true,
+      "exit": 1,
+      "failed": [
+        "HierarchyDuplicate.test.tsx > hierarchy duplicate never selects a copy after a rejected dispatch, says so, and frees Duplicate",
+        "ShellContext.test.tsx > shell snapshot resolves a rejected dispatch as an unknown result, and never calls an unverified completion a failure"
+      ],
+      "total": 48,
+      "broken_suites": [],
+      "restored_sha256": "ec11373a056a3262ce6799443109b3363c944354a201027fc2334328806e36f6"
+    },
+    {
+      "name": "unknown result not called a failure",
+      "file": "editor/ui/src/shell/ShellContext.tsx",
+      "caught": true,
+      "exit": 1,
+      "failed": [
+        "HierarchyDuplicate.test.tsx > hierarchy duplicate never selects a copy after an unverified completion, says so, and frees Duplicate",
+        "HierarchyDuplicate.test.tsx > hierarchy duplicate never selects a copy after a rejected dispatch, says so, and frees Duplicate",
+        "HierarchyDuplicate.test.tsx > hierarchy duplicate through the native bridge reports a completion the bridge cannot verify as unknown and keeps the selection",
+        "ShellContext.test.tsx > shell snapshot resolves a rejected dispatch as an unknown result, and never calls an unverified completion a failure"
+      ],
+      "total": 48,
+      "broken_suites": [],
+      "restored_sha256": "ec11373a056a3262ce6799443109b3363c944354a201027fc2334328806e36f6"
+    },
+    {
+      "name": "plain Duplicate failure label",
+      "file": "editor/ui/src/shell/ShellContext.tsx",
+      "caught": true,
+      "exit": 1,
+      "failed": [
+        "HierarchyDuplicate.test.tsx > hierarchy duplicate announces the refusal \"invalid command: duplicate subtree: detach linked instances explicitly before duplication\" in the host\u2019s words and keeps selection and focus on the source",
+        "HierarchyDuplicate.test.tsx > hierarchy duplicate announces the refusal \"invalid command: duplicate subtree: a subtree containing a singleton cannot be duplicated\" in the host\u2019s words and keeps selection and focus on the source",
+        "HierarchyDuplicate.test.tsx > hierarchy duplicate selects nothing when the source disappears and the engine refuses, and the copy when it succeeds",
+        "ShellContext.test.tsx > shell snapshot resolves a rejected dispatch as an unknown result, and never calls an unverified completion a failure"
+      ],
+      "total": 48,
+      "broken_suites": [],
+      "restored_sha256": "ec11373a056a3262ce6799443109b3363c944354a201027fc2334328806e36f6"
+    },
+    {
+      "name": "shortcut reference row",
+      "file": "editor/ui/src/components/ShortcutsDialog.tsx",
+      "caught": true,
+      "exit": 1,
+      "failed": [
+        "ShortcutsDialog.test.tsx > keyboard shortcuts dialog writes macOS keys as in its menus, with spoken names",
+        "ShortcutsDialog.test.tsx > keyboard shortcuts dialog writes Windows and Linux keys by name, with their own alternatives",
+        "ShortcutsDialog.test.tsx > keyboard shortcuts dialog filters by action, group or key, says when nothing matches, and clears with Escape before closing"
+      ],
+      "total": 48,
+      "broken_suites": [],
+      "restored_sha256": "5f1a9ae8d7c3a450236cfe3bf8fc0e08f541c88598493174014ddc59d8ce3181"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+SHA-256 of editor/ui/dist as served to capture set r2 (built 2026-10-15 02:05:36 from the product source committed in 2350a063 and unchanged in 71a46a8b), recorded before the final rebuild:
+87715c0f76c59b6ff10525a73c7480c65ce2501027d61af59d7bb2e96e0462d1  dist/index.html
+783787e533c3ceac1ef42940689f296be7bba81787d80b3b4cee6e22daf648da  dist/assets/index-BbVKXA5i.js
+0b2651dea4a0592aa4867227eebf24fe82a9566d3556cf7f748f24e2bf5277dc  dist/assets/index-4A6FDmvL.css
+
+The final rebuild at commit 71a46a8b (evidence/build.txt) produced the same three hashes.
