@@ -190,4 +190,49 @@ describe('shell snapshot', () => {
     expect(results.map((result) => !result.ok && result.outcomeUnknown === true)).toEqual([true, true, false]);
     await waitFor(() => expect(shell.message).toBe('window.close failed: The request ended without a result.'));
   });
+
+  it('resolves a rejected dispatch as an unknown result, and never calls an unverified completion a failure', async () => {
+    // TEST DOUBLE: a bridge whose dispatch rejects, reports an unverified completion, or refuses.
+    const answers: (() => Promise<BridgeResult>)[] = [
+      () => Promise.reject(new Error('IPC channel closed')),
+      () => Promise.resolve({ ok: false, outcomeUnknown: true, error: { code: 'engine.response', message: 'The duplicate result could not be verified.' } }),
+      () => Promise.resolve({ ok: false, error: { code: 'engine.request', message: 'invalid command: duplicate subtree: scene absent' } }),
+      () => Promise.reject({ code: 'host.closed', message: 'The editor process exited.' }),
+    ];
+    const bridge: EditorBridge = {
+      ...createFixtureBridge('sample'),
+      isFixture: false,
+      label: 'Test double',
+      capabilities: ['entity.duplicate', 'entity.rename'],
+      dispatch: () => answers.shift()!(),
+    };
+    let shell!: Shell;
+    function Panel() {
+      shell = useShell();
+      return null;
+    }
+    render(<ShellProvider bridge={bridge}><Panel /></ShellProvider>);
+    const entity = 'X' as never;
+    const said = async (result: Promise<BridgeResult>, expected: BridgeResult, message: string) => {
+      let value!: BridgeResult;
+      await act(async () => {
+        value = await result;
+      });
+      expect(value).toEqual(expected);
+      await waitFor(() => expect(shell.message).toBe(message));
+    };
+    await said(shell.dispatch({ type: 'entity.duplicate', entity }),
+      { ok: false, outcomeUnknown: true, error: { code: 'request.rejected', message: 'IPC channel closed' } },
+      'Duplicate result unknown: IPC channel closed');
+    await said(shell.dispatch({ type: 'entity.duplicate', entity }),
+      { ok: false, outcomeUnknown: true, error: { code: 'engine.response', message: 'The duplicate result could not be verified.' } },
+      'Duplicate result unknown: The duplicate result could not be verified.');
+    await said(shell.dispatch({ type: 'entity.duplicate', entity }),
+      { ok: false, error: { code: 'engine.request', message: 'invalid command: duplicate subtree: scene absent' } },
+      'Duplicate failed: invalid command: duplicate subtree: scene absent');
+    // Other commands keep their command name; a rejection is still not called a failure.
+    await said(shell.dispatch({ type: 'entity.rename', entity, name: 'Harbor' }),
+      { ok: false, outcomeUnknown: true, error: { code: 'host.closed', message: 'The editor process exited.' } },
+      'entity.rename result unknown: The editor process exited.');
+  });
 });

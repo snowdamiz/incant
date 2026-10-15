@@ -3,6 +3,7 @@ import type { KeyboardEvent, ReactNode } from 'react';
 import type { HierarchyTree, Ulid } from '../bridge/contract';
 import type { ProblemCounts, Row } from '../hierarchy/tree';
 import { defaultExpanded, indexProblems, treeKey, typeAhead, visibleRows } from '../hierarchy/tree';
+import { isDuplicateShortcut, useDuplicate } from '../hierarchy/duplicate';
 import { Icon, iconForKind } from '../icons/Icon';
 import { projectState, sameError } from '../shell/projectState';
 import { useShell } from '../shell/ShellContext';
@@ -230,6 +231,13 @@ function Tree({ tree }: { tree: HierarchyTree }) {
     }
   };
 
+  const duplicate = useDuplicate(tree, {
+    owned: () => listRef.current?.contains(document.activeElement) === true,
+    claim: (id) => {
+      pendingFocus.current = id;
+    },
+  });
+
   const toggle = (id: string, open: boolean) =>
     setExpanded((current) => {
       const next = new Set(current);
@@ -249,6 +257,12 @@ function Tree({ tree }: { tree: HierarchyTree }) {
     if (mod && event.key.toLowerCase() === 'f') {
       event.preventDefault();
       filterRef.current?.focus();
+      return;
+    }
+    if (isDuplicateShortcut(event, platform)) {
+      event.preventDefault();
+      // Held keys repeat: one press makes one copy.
+      if (!event.repeat && active !== null) duplicate.start(active);
       return;
     }
     if (event.key === 'F2' && active !== null) {
@@ -353,6 +367,7 @@ function Tree({ tree }: { tree: HierarchyTree }) {
           className="tree"
           role="tree"
           aria-labelledby="hierarchy-title"
+          aria-busy={duplicate.pending !== null || undefined}
           onKeyDown={onKeyDown}
         >
           <div className="tree__canvas" role="none" style={{ height: TOP + rows.length * ROW }}>
@@ -410,6 +425,14 @@ function Tree({ tree }: { tree: HierarchyTree }) {
               shortcut: 'F2',
               unavailable: capabilities.has('entity.rename') ? undefined : unavailableMessage('entity.rename', bridge),
               onSelect: () => beginRename(menu.id),
+            },
+            {
+              id: 'duplicate',
+              label: 'Duplicate',
+              icon: 'duplicate',
+              shortcut: comboText(['Mod', 'D'], platform),
+              unavailable: duplicate.blocked(menu.id) ?? undefined,
+              onSelect: () => duplicate.start(menu.id),
             },
             {
               id: 'copy-id',

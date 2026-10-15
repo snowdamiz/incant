@@ -35,7 +35,7 @@ describe('hierarchy context menu', () => {
     const { container } = render(<App resolution={{ kind: 'bridge', bridge }} />);
     fireEvent.contextMenu(row('Crate 01'), { clientX: 120, clientY: 300 });
     const menu = screen.getByRole('menu', { name: 'Actions for Crate 01' });
-    expect(within(menu).getAllByRole('menuitem').map((item) => item.querySelector('.menu__label')?.textContent)).toEqual(['Rename', 'Copy ID', 'Delete']);
+    expect(within(menu).getAllByRole('menuitem').map((item) => item.querySelector('.menu__label')?.textContent)).toEqual(['Rename', 'Duplicate', 'Copy ID', 'Delete']);
     expect(row('Crate 01').getAttribute('aria-selected')).toBe('true');
     expect(document.activeElement).toBe(within(menu).getAllByRole('menuitem')[0]);
     const results = await axe.run(container, { rules: { 'color-contrast': { enabled: false } } });
@@ -53,6 +53,8 @@ describe('hierarchy context menu', () => {
     act(() => crate.focus());
     fireEvent.keyDown(crate, { key: 'F10', shiftKey: true });
     const menu = screen.getByRole('menu', { name: 'Actions for Crate 02' });
+    fireEvent.keyDown(menu, { key: 'ArrowDown' });
+    expect(document.activeElement?.textContent).toContain('Duplicate');
     fireEvent.keyDown(menu, { key: 'ArrowDown' });
     expect(document.activeElement?.textContent).toContain('Copy ID');
     fireEvent.keyDown(menu, { key: 'Escape' });

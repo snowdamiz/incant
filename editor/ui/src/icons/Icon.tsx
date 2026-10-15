@@ -33,6 +33,7 @@ const PATHS = {
   restore: 'M5.5 3.5h7v7M3.5 5.5h7v7h-7z',
   lock: 'M4.5 7.5h7v5.5h-7zM6 7.5V5.75a2 2 0 014 0V7.5',
   copy: 'M5.5 5.5h7v7h-7zM3.5 10.5v-7h7',
+  duplicate: 'M3 10.5V3h7.5M5.5 5.5h8v8h-8zM9.5 8v3M8 9.5h3',
   collapseAll: 'M5 3l3 3 3-3M5 13l3-3 3 3',
   viewport: 'M2 3.5h12v9H2zM2 6h12',
   history: 'M3 8a5 5 0 105-5 5 5 0 00-4 2M3 3v2.5h2.5M8 5.5V8l2 1.5',

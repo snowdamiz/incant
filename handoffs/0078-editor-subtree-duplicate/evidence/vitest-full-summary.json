@@ -1,0 +1,506 @@
+{
+  "command": "node <checkout>/node_modules/vitest/vitest.mjs run --reporter=json (in editor/ui)",
+  "exit": "vitest full exit 0",
+  "raw_json_sha256": "be3b83d86611dd11c4f592930778829396307d17d6a0d527c712cb748c343f13",
+  "totals": {
+    "numTotalTestSuites": 162,
+    "numPassedTestSuites": 162,
+    "numFailedTestSuites": 0,
+    "numPendingTestSuites": 0,
+    "numTotalTests": 1016,
+    "numPassedTests": 1016,
+    "numFailedTests": 0,
+    "numPendingTests": 0,
+    "numTodoTests": 0
+  },
+  "success": true,
+  "files": [
+    {
+      "file": "editor/bridge/native.agent.test.ts",
+      "tests": 33,
+      "passed": 33
+    },
+    {
+      "file": "editor/bridge/native.budget.test.ts",
+      "tests": 51,
+      "passed": 51
+    },
+    {
+      "file": "editor/bridge/native.project-file.test.ts",
+      "tests": 6,
+      "passed": 6
+    },
+    {
+      "file": "editor/bridge/native.provider.test.ts",
+      "tests": 20,
+      "passed": 20
+    },
+    {
+      "file": "editor/bridge/native.test.ts",
+      "tests": 58,
+      "passed": 58
+    },
+    {
+      "file": "editor/bridge/play-logs.test.ts",
+      "tests": 30,
+      "passed": 30
+    },
+    {
+      "file": "editor/ui/src/App.test.tsx",
+      "tests": 37,
+      "passed": 37
+    },
+    {
+      "file": "editor/ui/src/ProjectStates.test.tsx",
+      "tests": 8,
+      "passed": 8
+    },
+    {
+      "file": "editor/ui/src/assets/paths.test.ts",
+      "tests": 8,
+      "passed": 8
+    },
+    {
+      "file": "editor/ui/src/assets/requests.test.ts",
+      "tests": 12,
+      "passed": 12
+    },
+    {
+      "file": "editor/ui/src/bridge/resolve.test.ts",
+      "tests": 17,
+      "passed": 17
+    },
+    {
+      "file": "editor/ui/src/components/AccountDialog.test.tsx",
+      "tests": 27,
+      "passed": 27
+    },
+    {
+      "file": "editor/ui/src/components/AgentPanel.test.tsx",
+      "tests": 6,
+      "passed": 6
+    },
+    {
+      "file": "editor/ui/src/components/Clipboard.test.tsx",
+      "tests": 4,
+      "passed": 4
+    },
+    {
+      "file": "editor/ui/src/components/Dock.test.tsx",
+      "tests": 4,
+      "passed": 4
+    },
+    {
+      "file": "editor/ui/src/components/DockPaging.test.tsx",
+      "tests": 6,
+      "passed": 6
+    },
+    {
+      "file": "editor/ui/src/components/HierarchyDuplicate.test.tsx",
+      "tests": 32,
+      "passed": 32
+    },
+    {
+      "file": "editor/ui/src/components/HierarchyMenu.test.tsx",
+      "tests": 3,
+      "passed": 3
+    },
+    {
+      "file": "editor/ui/src/components/Menu.test.tsx",
+      "tests": 8,
+      "passed": 8
+    },
+    {
+      "file": "editor/ui/src/components/ProblemsList.test.tsx",
+      "tests": 3,
+      "passed": 3
+    },
+    {
+      "file": "editor/ui/src/components/ProjectFile.test.tsx",
+      "tests": 28,
+      "passed": 28
+    },
+    {
+      "file": "editor/ui/src/components/ShortcutsDialog.test.tsx",
+      "tests": 6,
+      "passed": 6
+    },
+    {
+      "file": "editor/ui/src/components/Splitter.test.tsx",
+      "tests": 15,
+      "passed": 15
+    },
+    {
+      "file": "editor/ui/src/components/ThrottledFrames.test.tsx",
+      "tests": 2,
+      "passed": 2
+    },
+    {
+      "file": "editor/ui/src/components/Windowing.test.tsx",
+      "tests": 20,
+      "passed": 20
+    },
+    {
+      "file": "editor/ui/src/components/agent/AgentAllowance.test.tsx",
+      "tests": 35,
+      "passed": 35
+    },
+    {
+      "file": "editor/ui/src/components/agent/AgentApprovalReadiness.test.tsx",
+      "tests": 12,
+      "passed": 12
+    },
+    {
+      "file": "editor/ui/src/components/agent/AgentSession.test.tsx",
+      "tests": 34,
+      "passed": 34
+    },
+    {
+      "file": "editor/ui/src/components/agent/agentText.test.ts",
+      "tests": 31,
+      "passed": 31
+    },
+    {
+      "file": "editor/ui/src/components/agent/tokenAllowance.test.ts",
+      "tests": 42,
+      "passed": 42
+    },
+    {
+      "file": "editor/ui/src/components/assets/Assets.test.tsx",
+      "tests": 39,
+      "passed": 39
+    },
+    {
+      "file": "editor/ui/src/components/dock/paging.test.tsx",
+      "tests": 4,
+      "passed": 4
+    },
+    {
+      "file": "editor/ui/src/components/inspector/CameraFields.test.tsx",
+      "tests": 59,
+      "passed": 59
+    },
+    {
+      "file": "editor/ui/src/components/inspector/CompoundParts.test.tsx",
+      "tests": 13,
+      "passed": 13
+    },
+    {
+      "file": "editor/ui/src/components/inspector/DiagnosticReveal.test.tsx",
+      "tests": 15,
+      "passed": 15
+    },
+    {
+      "file": "editor/ui/src/components/inspector/FieldView.test.tsx",
+      "tests": 8,
+      "passed": 8
+    },
+    {
+      "file": "editor/ui/src/components/inspector/PhysicsFields.test.tsx",
+      "tests": 18,
+      "passed": 18
+    },
+    {
+      "file": "editor/ui/src/components/inspector/PixelCameraFields.test.tsx",
+      "tests": 35,
+      "passed": 35
+    },
+    {
+      "file": "editor/ui/src/components/inspector/ValueLists.test.tsx",
+      "tests": 1,
+      "passed": 1
+    },
+    {
+      "file": "editor/ui/src/components/play/Play.test.tsx",
+      "tests": 37,
+      "passed": 37
+    },
+    {
+      "file": "editor/ui/src/hierarchy/tree.test.ts",
+      "tests": 10,
+      "passed": 10
+    },
+    {
+      "file": "editor/ui/src/play/input.test.ts",
+      "tests": 18,
+      "passed": 18
+    },
+    {
+      "file": "editor/ui/src/play/keys.test.ts",
+      "tests": 2,
+      "passed": 2
+    },
+    {
+      "file": "editor/ui/src/play/model.test.ts",
+      "tests": 11,
+      "passed": 11
+    },
+    {
+      "file": "editor/ui/src/shell/ShellContext.test.tsx",
+      "tests": 7,
+      "passed": 7
+    },
+    {
+      "file": "editor/ui/src/shell/agentContext.test.ts",
+      "tests": 2,
+      "passed": 2
+    },
+    {
+      "file": "editor/ui/src/shell/layout.test.ts",
+      "tests": 4,
+      "passed": 4
+    },
+    {
+      "file": "editor/ui/src/shell/windowing.test.tsx",
+      "tests": 2,
+      "passed": 2
+    },
+    {
+      "file": "editor/ui/src/styles/tokens.test.ts",
+      "tests": 133,
+      "passed": 133
+    }
+  ],
+  "focused_tests": [
+    {
+      "file": "editor/ui/src/components/HierarchyDuplicate.test.tsx",
+      "test": "duplicate shortcut is \u2318D on macOS and Ctrl+D elsewhere, by layout letter or by the physical key without Latin letters",
+      "status": "passed"
+    },
+    {
+      "file": "editor/ui/src/components/HierarchyDuplicate.test.tsx",
+      "test": "duplicate shortcut leaves the other platform\u2019s modifier, Shift, Option and Alt alone",
+      "status": "passed"
+    },
+    {
+      "file": "editor/ui/src/components/HierarchyDuplicate.test.tsx",
+      "test": "hierarchy duplicate duplicates the focused entity with \u2318D on macOS and selects, reveals and focuses the returned copy",
+      "status": "passed"
+    },
+    {
+      "file": "editor/ui/src/components/HierarchyDuplicate.test.tsx",
+      "test": "hierarchy duplicate uses Ctrl+D on Windows and Linux and leaves other combinations to the page",
+      "status": "passed"
+    },
+    {
+      "file": "editor/ui/src/components/HierarchyDuplicate.test.tsx",
+      "test": "hierarchy duplicate offers Duplicate after Rename in the context menu and duplicates through the command bus",
+      "status": "passed"
+    },
+    {
+      "file": "editor/ui/src/components/HierarchyDuplicate.test.tsx",
+      "test": "hierarchy duplicate writes the menu shortcut as Ctrl+D on Windows and Linux and opens the menu from the keyboard",
+      "status": "passed"
+    },
+    {
+      "file": "editor/ui/src/components/HierarchyDuplicate.test.tsx",
+      "test": "hierarchy duplicate copies a nested entity with its descendants under the same parent and selects the copied root",
+      "status": "passed"
+    },
+    {
+      "file": "editor/ui/src/components/HierarchyDuplicate.test.tsx",
+      "test": "hierarchy duplicate reveals and focuses a copy that lands far outside the mounted rows of a long list",
+      "status": "passed"
+    },
+    {
+      "file": "editor/ui/src/components/HierarchyDuplicate.test.tsx",
+      "test": "hierarchy duplicate selects exactly the returned entity when it is the first of two new same-named rows",
+      "status": "passed"
+    },
+    {
+      "file": "editor/ui/src/components/HierarchyDuplicate.test.tsx",
+      "test": "hierarchy duplicate selects exactly the returned entity when it is the last of two new same-named rows",
+      "status": "passed"
+    },
+    {
+      "file": "editor/ui/src/components/HierarchyDuplicate.test.tsx",
+      "test": "hierarchy duplicate keeps the read-only sample fixture read-only and explains why",
+      "status": "passed"
+    },
+    {
+      "file": "editor/ui/src/components/HierarchyDuplicate.test.tsx",
+      "test": "hierarchy duplicate treats a host that does not advertise entity.duplicate as unable to duplicate",
+      "status": "passed"
+    },
+    {
+      "file": "editor/ui/src/components/HierarchyDuplicate.test.tsx",
+      "test": "hierarchy duplicate sends one command while one runs: held keys repeat nothing, and another press or choice is refused",
+      "status": "passed"
+    },
+    {
+      "file": "editor/ui/src/components/HierarchyDuplicate.test.tsx",
+      "test": "hierarchy duplicate sends one command for two presses in the same task, before the pending state renders",
+      "status": "passed"
+    },
+    {
+      "file": "editor/ui/src/components/HierarchyDuplicate.test.tsx",
+      "test": "hierarchy duplicate does nothing more when the hierarchy that asked is gone by the time the engine answers",
+      "status": "passed"
+    },
+    {
+      "file": "editor/ui/src/components/HierarchyDuplicate.test.tsx",
+      "test": "hierarchy duplicate announces the refusal \"invalid command: duplicate subtree: detach linked instances explicitly before duplication\" in the host\u2019s words and keeps selection and focus on the source",
+      "status": "passed"
+    },
+    {
+      "file": "editor/ui/src/components/HierarchyDuplicate.test.tsx",
+      "test": "hierarchy duplicate announces the refusal \"invalid command: duplicate subtree: a subtree containing a singleton cannot be duplicated\" in the host\u2019s words and keeps selection and focus on the source",
+      "status": "passed"
+    },
+    {
+      "file": "editor/ui/src/components/HierarchyDuplicate.test.tsx",
+      "test": "hierarchy duplicate never selects a copy after an unverified completion, says so, and frees Duplicate",
+      "status": "passed"
+    },
+    {
+      "file": "editor/ui/src/components/HierarchyDuplicate.test.tsx",
+      "test": "hierarchy duplicate never selects a copy after a success without the copy, even with a\u2026, says so, and frees Duplicate",
+      "status": "passed"
+    },
+    {
+      "file": "editor/ui/src/components/HierarchyDuplicate.test.tsx",
+      "test": "hierarchy duplicate never selects a copy after a rejected dispatch, says so, and frees Duplicate",
+      "status": "passed"
+    },
+    {
+      "file": "editor/ui/src/components/HierarchyDuplicate.test.tsx",
+      "test": "hierarchy duplicate never selects a copy after a copy that is not in the latest snapsh\u2026, says so, and frees Duplicate",
+      "status": "passed"
+    },
+    {
+      "file": "editor/ui/src/components/HierarchyDuplicate.test.tsx",
+      "test": "hierarchy duplicate does not send a command for an entity that disappeared while its menu was open",
+      "status": "passed"
+    },
+    {
+      "file": "editor/ui/src/components/HierarchyDuplicate.test.tsx",
+      "test": "hierarchy duplicate selects nothing when the source disappears and the engine refuses, and the copy when it succeeds",
+      "status": "passed"
+    },
+    {
+      "file": "editor/ui/src/components/HierarchyDuplicate.test.tsx",
+      "test": "hierarchy duplicate does not take \u2318D from typing, dialogs or other panels",
+      "status": "passed"
+    },
+    {
+      "file": "editor/ui/src/components/HierarchyDuplicate.test.tsx",
+      "test": "hierarchy duplicate does not duplicate a scene, and says why",
+      "status": "passed"
+    },
+    {
+      "file": "editor/ui/src/components/HierarchyDuplicate.test.tsx",
+      "test": "hierarchy duplicate does not select or announce a copy for a project that is no longer open",
+      "status": "passed"
+    },
+    {
+      "file": "editor/ui/src/components/HierarchyDuplicate.test.tsx",
+      "test": "hierarchy duplicate does not select or announce a copy for a bridge that was replaced",
+      "status": "passed"
+    },
+    {
+      "file": "editor/ui/src/components/HierarchyDuplicate.test.tsx",
+      "test": "hierarchy duplicate leaves a selection made while the command ran, and keeps focus that left the tree",
+      "status": "passed"
+    },
+    {
+      "file": "editor/ui/src/components/HierarchyDuplicate.test.tsx",
+      "test": "hierarchy duplicate through the native bridge sends the scene, entity and revision, and selects the copy the host returns",
+      "status": "passed"
+    },
+    {
+      "file": "editor/ui/src/components/HierarchyDuplicate.test.tsx",
+      "test": "hierarchy duplicate through the native bridge reports a completion the bridge cannot verify as unknown and keeps the selection",
+      "status": "passed"
+    },
+    {
+      "file": "editor/ui/src/components/HierarchyDuplicate.test.tsx",
+      "test": "hierarchy duplicate through the native bridge reads an older native host without entity_duplicate as unable to duplicate",
+      "status": "passed"
+    },
+    {
+      "file": "editor/ui/src/components/HierarchyDuplicate.test.tsx",
+      "test": "hierarchy duplicate through the native bridge leaves live Play inspection alone: no copy while a world exists, and Duplicate returns after Stop",
+      "status": "passed"
+    },
+    {
+      "file": "editor/ui/src/components/HierarchyMenu.test.tsx",
+      "test": "hierarchy context menu opens from the pointer, offers only existing actions, and deletes through the command bus",
+      "status": "passed"
+    },
+    {
+      "file": "editor/ui/src/components/HierarchyMenu.test.tsx",
+      "test": "hierarchy context menu opens from the keyboard, moves with arrows, starts a rename, and returns focus on Escape",
+      "status": "passed"
+    },
+    {
+      "file": "editor/ui/src/components/HierarchyMenu.test.tsx",
+      "test": "hierarchy context menu keeps unavailable actions focusable and explains them instead of acting",
+      "status": "passed"
+    },
+    {
+      "file": "editor/ui/src/components/ShortcutsDialog.test.tsx",
+      "test": "keyboard shortcuts dialog names shortcut cells with their section and action on macos, including after filtering",
+      "status": "passed"
+    },
+    {
+      "file": "editor/ui/src/components/ShortcutsDialog.test.tsx",
+      "test": "keyboard shortcuts dialog names shortcut cells with their section and action on windows, including after filtering",
+      "status": "passed"
+    },
+    {
+      "file": "editor/ui/src/components/ShortcutsDialog.test.tsx",
+      "test": "keyboard shortcuts dialog writes macOS keys as in its menus, with spoken names",
+      "status": "passed"
+    },
+    {
+      "file": "editor/ui/src/components/ShortcutsDialog.test.tsx",
+      "test": "keyboard shortcuts dialog writes Windows and Linux keys by name, with their own alternatives",
+      "status": "passed"
+    },
+    {
+      "file": "editor/ui/src/components/ShortcutsDialog.test.tsx",
+      "test": "keyboard shortcuts dialog filters by action, group or key, says when nothing matches, and clears with Escape before closing",
+      "status": "passed"
+    },
+    {
+      "file": "editor/ui/src/components/ShortcutsDialog.test.tsx",
+      "test": "keyboard shortcuts dialog names every key it shows",
+      "status": "passed"
+    },
+    {
+      "file": "editor/ui/src/shell/ShellContext.test.tsx",
+      "test": "shell snapshot updates native budget capabilities after loading and preserves the authored cap",
+      "status": "passed"
+    },
+    {
+      "file": "editor/ui/src/shell/ShellContext.test.tsx",
+      "test": "shell snapshot does not re-render authoring panels for Play status reads, and keeps Play status out of them",
+      "status": "passed"
+    },
+    {
+      "file": "editor/ui/src/shell/ShellContext.test.tsx",
+      "test": "shell snapshot checks Play operations against the play.control capability",
+      "status": "passed"
+    },
+    {
+      "file": "editor/ui/src/shell/ShellContext.test.tsx",
+      "test": "shell snapshot an old revocation cannot erase a newer queued or visible announcement",
+      "status": "passed"
+    },
+    {
+      "file": "editor/ui/src/shell/ShellContext.test.tsx",
+      "test": "shell snapshot revokes its own queued and visible messages and cancels superseded and unmounted timers",
+      "status": "passed"
+    },
+    {
+      "file": "editor/ui/src/shell/ShellContext.test.tsx",
+      "test": "shell snapshot resolves a rejected bridge request as a failure marked rejected, keeping the thrown code and message",
+      "status": "passed"
+    },
+    {
+      "file": "editor/ui/src/shell/ShellContext.test.tsx",
+      "test": "shell snapshot resolves a rejected dispatch as an unknown result, and never calls an unverified completion a failure",
+      "status": "passed"
+    }
+  ]
+}

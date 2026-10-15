@@ -1,0 +1,38 @@
+{
+  "commit": "71a46a8bf099d81c04e571f089ec6c52e84ca96d",
+  "parent": "2350a063f6e8968db9a87bfb114f241116e5d885",
+  "branch": "handoff/0078-editor-subtree-duplicate",
+  "tree": "4374b4d31acfc76bb3ca3acd1324ed1118c0857a",
+  "blobs": {
+    "editor/ui/src/hierarchy/duplicate.ts": "59328d51b3d46f45903f251782d34acc7f75be74",
+    "editor/ui/src/components/HierarchyPanel.tsx": "6730b547d1d29bb48452b4ac810b75998dced69a",
+    "editor/ui/src/shell/ShellContext.tsx": "3923e8aa712b57eef204d502ee70eb338b8efebc",
+    "editor/ui/src/components/ShortcutsDialog.tsx": "84a4ac5e5c519fc8fc96412607598207e13ea616",
+    "editor/ui/src/icons/Icon.tsx": "cb79a3c083f5511388786d49cb5d9e70918fa36c",
+    "editor/ui/DESIGN.md": "d331bf841497bba17230c83762ac9f22c64675f6",
+    "editor/ui/src/components/HierarchyDuplicate.test.tsx": "7c96df4e6d11c6d15a1f103aeb8636bb11ced1c2",
+    "editor/ui/src/components/HierarchyMenu.test.tsx": "2622ccfe10a8f2dd49d05b01f55e7e97d226aa1c",
+    "editor/ui/src/components/ShortcutsDialog.test.tsx": "6337ca31c921d5995b1707a7877f510bb448f72b",
+    "editor/ui/src/shell/ShellContext.test.tsx": "cc58eff5e96a3fdc05dff286f3266774dacfd9e6"
+  },
+  "brief_sha256": "d347575e2dbc20925484d56d599c0b83c07a6b45f86a64d682dfb94b1d022650",
+  "package_lock_sha256": {
+    "worktree": "cbea068b7d9182270271319a7a77d24805b9c9c66ed5e9eb3e188d60e5337c60",
+    "parent_checkout": "cbea068b7d9182270271319a7a77d24805b9c9c66ed5e9eb3e188d60e5337c60"
+  },
+  "tools": {
+    "node": "v22.23.3",
+    "typescript": "5.9.3",
+    "vitest": "5.0.3",
+    "vite": "8.3.4",
+    "react": "19.3.0",
+    "axe-core": "4.14.0",
+    "playwright-core": "1.64.0",
+    "chrome": "155.0.8059.40"
+  },
+  "machine": {
+    "model": "Mac17,9",
+    "macos": "27.0.1",
+    "build": "26A434"
+  }
+}

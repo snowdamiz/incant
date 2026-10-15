@@ -1,0 +1,1997 @@
+{
+  "set": "r2",
+  "generated": "2026-10-15T06:15:53.353Z",
+  "browser": "155.0.8059.40",
+  "data": "deterministic duplicate fixture (tools/fake-host.js or the 0044 Play double, plus the real native.generated.js); not live, not native WebKit, no command bus",
+  "captures": [
+    {
+      "file": "menu-desktop-hierarchy.png",
+      "state": "menu",
+      "scenario": "harbor",
+      "size": "desktop",
+      "width": 1440,
+      "height": 900,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "tree": {
+          "x": 0,
+          "y": 116,
+          "width": 245,
+          "height": 756,
+          "busy": null,
+          "scrollTop": 0,
+          "scrollBefore": null,
+          "mountedRows": 24,
+          "selected": [
+            {
+              "id": "01JA33RV00000000000000003H",
+              "name": "Player Character",
+              "level": "2",
+              "posinset": "2",
+              "setsize": "5",
+              "expanded": "true"
+            }
+          ]
+        },
+        "copy": null,
+        "menu": {
+          "x": 122,
+          "y": 300,
+          "width": 196,
+          "height": 120,
+          "inside": true,
+          "label": "Actions for Player Character",
+          "items": [
+            {
+              "label": "Rename",
+              "shortcut": "F2",
+              "disabled": null,
+              "title": null,
+              "focused": true
+            },
+            {
+              "label": "Duplicate",
+              "shortcut": "⌘D",
+              "disabled": null,
+              "title": null,
+              "focused": false
+            },
+            {
+              "label": "Copy ID",
+              "shortcut": null,
+              "disabled": null,
+              "title": null,
+              "focused": false
+            },
+            {
+              "label": "Delete",
+              "shortcut": "⌘⌫",
+              "disabled": null,
+              "title": null,
+              "focused": false
+            }
+          ]
+        },
+        "status": "",
+        "source": "Duplicate fixture: scripted host IPC, not live",
+        "inspector": "Player Character",
+        "active": {
+          "tag": "DIV",
+          "id": null,
+          "role": "menuitem",
+          "name": "RenameF2",
+          "focusVisible": false
+        },
+        "dialogRows": []
+      },
+      "axe": [],
+      "calls": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "menu-narrow-hierarchy.png",
+      "state": "menu",
+      "scenario": "harbor",
+      "size": "narrow",
+      "width": 1024,
+      "height": 680,
+      "measured": {
+        "window": {
+          "width": 1024,
+          "height": 680,
+          "scrollWidth": 1024,
+          "scrollHeight": 680
+        },
+        "tree": {
+          "x": 0,
+          "y": 116,
+          "width": 232,
+          "height": 536,
+          "busy": null,
+          "scrollTop": 0,
+          "scrollBefore": null,
+          "mountedRows": 24,
+          "selected": [
+            {
+              "id": "01JA33RV00000000000000003H",
+              "name": "Player Character",
+              "level": "2",
+              "posinset": "2",
+              "setsize": "5",
+              "expanded": "true"
+            }
+          ]
+        },
+        "copy": null,
+        "menu": {
+          "x": 116,
+          "y": 300,
+          "width": 196,
+          "height": 120,
+          "inside": true,
+          "label": "Actions for Player Character",
+          "items": [
+            {
+              "label": "Rename",
+              "shortcut": "F2",
+              "disabled": null,
+              "title": null,
+              "focused": true
+            },
+            {
+              "label": "Duplicate",
+              "shortcut": "⌘D",
+              "disabled": null,
+              "title": null,
+              "focused": false
+            },
+            {
+              "label": "Copy ID",
+              "shortcut": null,
+              "disabled": null,
+              "title": null,
+              "focused": false
+            },
+            {
+              "label": "Delete",
+              "shortcut": "⌘⌫",
+              "disabled": null,
+              "title": null,
+              "focused": false
+            }
+          ]
+        },
+        "status": "",
+        "source": "Duplicate fixture: scripted host IPC, not live",
+        "inspector": "Player Character",
+        "active": {
+          "tag": "DIV",
+          "id": null,
+          "role": "menuitem",
+          "name": "RenameF2",
+          "focusVisible": false
+        },
+        "dialogRows": []
+      },
+      "axe": [],
+      "calls": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "menu-keyboard-desktop-hierarchy.png",
+      "state": "menu-keyboard",
+      "scenario": "harbor",
+      "size": "desktop",
+      "width": 1440,
+      "height": 900,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "tree": {
+          "x": 0,
+          "y": 116,
+          "width": 245,
+          "height": 756,
+          "busy": null,
+          "scrollTop": 0,
+          "scrollBefore": null,
+          "mountedRows": 24,
+          "selected": [
+            {
+              "id": "01JA33RV00000000000000003N",
+              "name": "Map Camera",
+              "level": "3",
+              "posinset": "2",
+              "setsize": "4",
+              "expanded": null
+            }
+          ]
+        },
+        "copy": null,
+        "menu": {
+          "x": 36,
+          "y": 428,
+          "width": 196,
+          "height": 120,
+          "inside": true,
+          "label": "Actions for Map Camera",
+          "items": [
+            {
+              "label": "Rename",
+              "shortcut": "F2",
+              "disabled": null,
+              "title": null,
+              "focused": false
+            },
+            {
+              "label": "Duplicate",
+              "shortcut": "⌘D",
+              "disabled": null,
+              "title": null,
+              "focused": true
+            },
+            {
+              "label": "Copy ID",
+              "shortcut": null,
+              "disabled": null,
+              "title": null,
+              "focused": false
+            },
+            {
+              "label": "Delete",
+              "shortcut": "⌘⌫",
+              "disabled": null,
+              "title": null,
+              "focused": false
+            }
+          ]
+        },
+        "status": "",
+        "source": "Duplicate fixture: scripted host IPC, not live",
+        "inspector": "Map Camera",
+        "active": {
+          "tag": "DIV",
+          "id": null,
+          "role": "menuitem",
+          "name": "Duplicate⌘D",
+          "focusVisible": true
+        },
+        "dialogRows": []
+      },
+      "axe": [],
+      "calls": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "menu-windows-desktop-hierarchy.png",
+      "state": "menu-windows",
+      "scenario": "windows",
+      "size": "desktop",
+      "width": 1440,
+      "height": 900,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "tree": {
+          "x": 0,
+          "y": 116,
+          "width": 245,
+          "height": 756,
+          "busy": null,
+          "scrollTop": 0,
+          "scrollBefore": null,
+          "mountedRows": 24,
+          "selected": [
+            {
+              "id": "01JA33RV000000000000000045",
+              "name": "Crate Stack",
+              "level": "3",
+              "posinset": "1",
+              "setsize": "6",
+              "expanded": null
+            }
+          ]
+        },
+        "copy": null,
+        "menu": {
+          "x": 122,
+          "y": 636,
+          "width": 196,
+          "height": 120,
+          "inside": true,
+          "label": "Actions for Crate Stack",
+          "items": [
+            {
+              "label": "Rename",
+              "shortcut": "F2",
+              "disabled": null,
+              "title": null,
+              "focused": true
+            },
+            {
+              "label": "Duplicate",
+              "shortcut": "Ctrl+D",
+              "disabled": null,
+              "title": null,
+              "focused": false
+            },
+            {
+              "label": "Copy ID",
+              "shortcut": null,
+              "disabled": null,
+              "title": null,
+              "focused": false
+            },
+            {
+              "label": "Delete",
+              "shortcut": "Delete",
+              "disabled": null,
+              "title": null,
+              "focused": false
+            }
+          ]
+        },
+        "status": "",
+        "source": "Duplicate fixture: scripted host IPC, not live",
+        "inspector": "Crate Stack",
+        "active": {
+          "tag": "DIV",
+          "id": null,
+          "role": "menuitem",
+          "name": "RenameF2",
+          "focusVisible": false
+        },
+        "dialogRows": []
+      },
+      "axe": [],
+      "calls": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "copied-desktop-window.png",
+      "state": "copied",
+      "scenario": "harbor",
+      "size": "desktop",
+      "width": 1440,
+      "height": 900,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "tree": {
+          "x": 0,
+          "y": 116,
+          "width": 245,
+          "height": 756,
+          "busy": null,
+          "scrollTop": 0,
+          "scrollBefore": null,
+          "mountedRows": 25,
+          "selected": [
+            {
+              "id": "01M4ZCMCK80000000000000001",
+              "name": "Player Character",
+              "level": "2",
+              "posinset": "6",
+              "setsize": "6",
+              "expanded": "false"
+            }
+          ]
+        },
+        "copy": {
+          "id": "01M4ZCMCK80000000000000001",
+          "mounted": true,
+          "rect": {
+            "x": 8,
+            "y": 790,
+            "width": 229,
+            "height": 28
+          },
+          "withinTree": true
+        },
+        "menu": null,
+        "status": "Duplicated Player Character",
+        "source": "Duplicate fixture: scripted host IPC, not live",
+        "inspector": "Player Character",
+        "active": {
+          "tag": "DIV",
+          "id": "tree-row-01M4ZCMCK80000000000000001",
+          "role": "treeitem",
+          "name": "Player Character",
+          "focusVisible": false
+        },
+        "dialogRows": []
+      },
+      "axe": [],
+      "calls": [
+        {
+          "name": "engine_duplicate_subtree",
+          "args": {
+            "sceneId": "01JA33RV00000000000000003B",
+            "entityId": "01JA33RV00000000000000003H",
+            "expectedRevision": 7
+          }
+        }
+      ],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "copied-narrow-window.png",
+      "state": "copied",
+      "scenario": "harbor",
+      "size": "narrow",
+      "width": 1024,
+      "height": 680,
+      "measured": {
+        "window": {
+          "width": 1024,
+          "height": 680,
+          "scrollWidth": 1024,
+          "scrollHeight": 680
+        },
+        "tree": {
+          "x": 0,
+          "y": 116,
+          "width": 232,
+          "height": 536,
+          "busy": null,
+          "scrollTop": 170,
+          "scrollBefore": null,
+          "mountedRows": 25,
+          "selected": [
+            {
+              "id": "01M4ZCMCK80000000000000001",
+              "name": "Player Character",
+              "level": "2",
+              "posinset": "6",
+              "setsize": "6",
+              "expanded": "false"
+            }
+          ]
+        },
+        "copy": {
+          "id": "01M4ZCMCK80000000000000001",
+          "mounted": true,
+          "rect": {
+            "x": 8,
+            "y": 620,
+            "width": 216,
+            "height": 28
+          },
+          "withinTree": true
+        },
+        "menu": null,
+        "status": "Duplicated Player Character",
+        "source": "Duplicate fixture: scripted host IPC, not live",
+        "inspector": "Player Character",
+        "active": {
+          "tag": "DIV",
+          "id": "tree-row-01M4ZCMCK80000000000000001",
+          "role": "treeitem",
+          "name": "Player Character",
+          "focusVisible": false
+        },
+        "dialogRows": []
+      },
+      "axe": [],
+      "calls": [
+        {
+          "name": "engine_duplicate_subtree",
+          "args": {
+            "sceneId": "01JA33RV00000000000000003B",
+            "entityId": "01JA33RV00000000000000003H",
+            "expectedRevision": 7
+          }
+        }
+      ],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "copied-nested-desktop-hierarchy.png",
+      "state": "copied-nested",
+      "scenario": "harbor",
+      "size": "desktop",
+      "width": 1440,
+      "height": 900,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "tree": {
+          "x": 0,
+          "y": 116,
+          "width": 245,
+          "height": 756,
+          "busy": null,
+          "scrollTop": 0,
+          "scrollBefore": null,
+          "mountedRows": 25,
+          "selected": [
+            {
+              "id": "01M4ZCMCK80000000000000001",
+              "name": "Map Camera",
+              "level": "3",
+              "posinset": "5",
+              "setsize": "5",
+              "expanded": null
+            }
+          ]
+        },
+        "copy": {
+          "id": "01M4ZCMCK80000000000000001",
+          "mounted": true,
+          "rect": {
+            "x": 8,
+            "y": 482,
+            "width": 229,
+            "height": 28
+          },
+          "withinTree": true
+        },
+        "menu": null,
+        "status": "Duplicated Map Camera",
+        "source": "Duplicate fixture: scripted host IPC, not live",
+        "inspector": "Map Camera",
+        "active": {
+          "tag": "DIV",
+          "id": "tree-row-01M4ZCMCK80000000000000001",
+          "role": "treeitem",
+          "name": "Map Camera",
+          "focusVisible": false
+        },
+        "dialogRows": []
+      },
+      "axe": [],
+      "calls": [
+        {
+          "name": "engine_duplicate_subtree",
+          "args": {
+            "sceneId": "01JA33RV00000000000000003B",
+            "entityId": "01JA33RV00000000000000003N",
+            "expectedRevision": 7
+          }
+        }
+      ],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "copied-long-desktop-window.png",
+      "state": "copied-long",
+      "scenario": "long",
+      "size": "desktop",
+      "width": 1440,
+      "height": 900,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "tree": {
+          "x": 0,
+          "y": 116,
+          "width": 245,
+          "height": 756,
+          "busy": null,
+          "scrollTop": 16274,
+          "scrollBefore": 0,
+          "mountedRows": 37,
+          "selected": [
+            {
+              "id": "01M4ZCMCK80000000000000001",
+              "name": "Bollard 001",
+              "level": "3",
+              "posinset": "601",
+              "setsize": "601",
+              "expanded": null
+            }
+          ]
+        },
+        "copy": {
+          "id": "01M4ZCMCK80000000000000001",
+          "mounted": true,
+          "rect": {
+            "x": 8,
+            "y": 840,
+            "width": 229,
+            "height": 28
+          },
+          "withinTree": true
+        },
+        "menu": null,
+        "status": "Duplicated Bollard 001",
+        "source": "Duplicate fixture: scripted host IPC, not live",
+        "inspector": "Bollard 001",
+        "active": {
+          "tag": "DIV",
+          "id": "tree-row-01M4ZCMCK80000000000000001",
+          "role": "treeitem",
+          "name": "Bollard 001",
+          "focusVisible": true
+        },
+        "dialogRows": []
+      },
+      "axe": [],
+      "calls": [
+        {
+          "name": "engine_duplicate_subtree",
+          "args": {
+            "sceneId": "01JA33RV00000000000000003B",
+            "entityId": "01JA33RV0000000000000006TV",
+            "expectedRevision": 7
+          }
+        }
+      ],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "refused-singleton-desktop-window.png",
+      "state": "refused-singleton",
+      "scenario": "harbor",
+      "size": "desktop",
+      "width": 1440,
+      "height": 900,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "tree": {
+          "x": 0,
+          "y": 116,
+          "width": 245,
+          "height": 756,
+          "busy": null,
+          "scrollTop": 0,
+          "scrollBefore": null,
+          "mountedRows": 24,
+          "selected": [
+            {
+              "id": "01JA33RV00000000000000003C",
+              "name": "Environment",
+              "level": "2",
+              "posinset": "1",
+              "setsize": "5",
+              "expanded": "true"
+            }
+          ]
+        },
+        "copy": null,
+        "menu": null,
+        "status": "Duplicate failed: invalid command: duplicate subtree: a subtree containing a singleton cannot be duplicated",
+        "source": "Duplicate fixture: scripted host IPC, not live",
+        "inspector": "Environment",
+        "active": {
+          "tag": "DIV",
+          "id": "tree-row-01JA33RV00000000000000003C",
+          "role": "treeitem",
+          "name": "Environment",
+          "focusVisible": false
+        },
+        "dialogRows": []
+      },
+      "axe": [],
+      "calls": [
+        {
+          "name": "engine_duplicate_subtree",
+          "args": {
+            "sceneId": "01JA33RV00000000000000003B",
+            "entityId": "01JA33RV00000000000000003C",
+            "expectedRevision": 7
+          }
+        }
+      ],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "refused-linked-desktop-statusbar.png",
+      "state": "refused-linked",
+      "scenario": "harbor",
+      "size": "desktop",
+      "width": 1440,
+      "height": 900,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "tree": {
+          "x": 0,
+          "y": 116,
+          "width": 245,
+          "height": 756,
+          "busy": null,
+          "scrollTop": 0,
+          "scrollBefore": null,
+          "mountedRows": 24,
+          "selected": [
+            {
+              "id": "01JA33RV0000000000000006TS",
+              "name": "Lamp Post (prefab instance)",
+              "level": "3",
+              "posinset": "6",
+              "setsize": "6",
+              "expanded": null
+            }
+          ]
+        },
+        "copy": null,
+        "menu": null,
+        "status": "Duplicate failed: invalid command: duplicate subtree: detach linked instances explicitly before duplication",
+        "source": "Duplicate fixture: scripted host IPC, not live",
+        "inspector": "Lamp Post (prefab instance)",
+        "active": {
+          "tag": "DIV",
+          "id": "tree-row-01JA33RV0000000000000006TS",
+          "role": "treeitem",
+          "name": "Lamp Post (prefab instance)",
+          "focusVisible": false
+        },
+        "dialogRows": []
+      },
+      "axe": [],
+      "calls": [
+        {
+          "name": "engine_duplicate_subtree",
+          "args": {
+            "sceneId": "01JA33RV00000000000000003B",
+            "entityId": "01JA33RV0000000000000006TS",
+            "expectedRevision": 7
+          }
+        }
+      ],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "refused-references-desktop-statusbar.png",
+      "state": "refused-references",
+      "scenario": "harbor",
+      "size": "desktop",
+      "width": 1440,
+      "height": 900,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "tree": {
+          "x": 0,
+          "y": 116,
+          "width": 245,
+          "height": 756,
+          "busy": null,
+          "scrollTop": 0,
+          "scrollBefore": null,
+          "mountedRows": 24,
+          "selected": [
+            {
+              "id": "01JA33RV00000000000000004A",
+              "name": "Malformed Props",
+              "level": "3",
+              "posinset": "5",
+              "setsize": "6",
+              "expanded": null
+            }
+          ]
+        },
+        "copy": null,
+        "menu": null,
+        "status": "Duplicate failed: invalid command: duplicate subtree: component reference semantics are not registered",
+        "source": "Duplicate fixture: scripted host IPC, not live",
+        "inspector": "Malformed Props",
+        "active": {
+          "tag": "DIV",
+          "id": "tree-row-01JA33RV00000000000000004A",
+          "role": "treeitem",
+          "name": "Malformed Props",
+          "focusVisible": false
+        },
+        "dialogRows": []
+      },
+      "axe": [],
+      "calls": [
+        {
+          "name": "engine_duplicate_subtree",
+          "args": {
+            "sceneId": "01JA33RV00000000000000003B",
+            "entityId": "01JA33RV00000000000000004A",
+            "expectedRevision": 7
+          }
+        }
+      ],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "unknown-desktop-window.png",
+      "state": "unknown",
+      "scenario": "unverified",
+      "size": "desktop",
+      "width": 1440,
+      "height": 900,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "tree": {
+          "x": 0,
+          "y": 116,
+          "width": 245,
+          "height": 756,
+          "busy": null,
+          "scrollTop": 0,
+          "scrollBefore": null,
+          "mountedRows": 25,
+          "selected": [
+            {
+              "id": "01JA33RV000000000000000045",
+              "name": "Crate Stack",
+              "level": "3",
+              "posinset": "1",
+              "setsize": "7",
+              "expanded": null
+            }
+          ]
+        },
+        "copy": {
+          "id": "01M4ZCMCK80000000000000001",
+          "mounted": true,
+          "rect": {
+            "x": 8,
+            "y": 790,
+            "width": 229,
+            "height": 28
+          },
+          "withinTree": true
+        },
+        "menu": null,
+        "status": "Duplicate result unknown: The duplicate result could not be verified. Check the hierarchy before retrying.",
+        "source": "Duplicate fixture: scripted host IPC, not live",
+        "inspector": "Crate Stack",
+        "active": {
+          "tag": "DIV",
+          "id": "tree-row-01JA33RV000000000000000045",
+          "role": "treeitem",
+          "name": "Crate Stack",
+          "focusVisible": false
+        },
+        "dialogRows": []
+      },
+      "axe": [],
+      "calls": [
+        {
+          "name": "engine_duplicate_subtree",
+          "args": {
+            "sceneId": "01JA33RV00000000000000003B",
+            "entityId": "01JA33RV000000000000000045",
+            "expectedRevision": 7
+          }
+        }
+      ],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "pending-desktop-hierarchy.png",
+      "state": "pending",
+      "scenario": "slow",
+      "size": "desktop",
+      "width": 1440,
+      "height": 900,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "tree": {
+          "x": 0,
+          "y": 116,
+          "width": 245,
+          "height": 756,
+          "busy": "true",
+          "scrollTop": 0,
+          "scrollBefore": null,
+          "mountedRows": 24,
+          "selected": [
+            {
+              "id": "01JA33RV000000000000000045",
+              "name": "Crate Stack",
+              "level": "3",
+              "posinset": "1",
+              "setsize": "6",
+              "expanded": null
+            }
+          ]
+        },
+        "copy": null,
+        "menu": {
+          "x": 36,
+          "y": 652,
+          "width": 196,
+          "height": 120,
+          "inside": true,
+          "label": "Actions for Crate Stack",
+          "items": [
+            {
+              "label": "Rename",
+              "shortcut": "F2",
+              "disabled": null,
+              "title": null,
+              "focused": false
+            },
+            {
+              "label": "Duplicate",
+              "shortcut": "⌘D",
+              "disabled": "true",
+              "title": "Wait for the current duplicate to finish.",
+              "focused": true
+            },
+            {
+              "label": "Copy ID",
+              "shortcut": null,
+              "disabled": null,
+              "title": null,
+              "focused": false
+            },
+            {
+              "label": "Delete",
+              "shortcut": "⌘⌫",
+              "disabled": null,
+              "title": null,
+              "focused": false
+            }
+          ]
+        },
+        "status": "",
+        "source": "Duplicate fixture: scripted host IPC, not live",
+        "inspector": "Crate Stack",
+        "active": {
+          "tag": "DIV",
+          "id": null,
+          "role": "menuitem",
+          "name": "Duplicate⌘D, unavailable: Wait for the current duplicate to ",
+          "focusVisible": true
+        },
+        "dialogRows": []
+      },
+      "axe": [],
+      "calls": [
+        {
+          "name": "engine_duplicate_subtree",
+          "args": {
+            "sceneId": "01JA33RV00000000000000003B",
+            "entityId": "01JA33RV000000000000000045",
+            "expectedRevision": 7
+          }
+        }
+      ],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "older-host-desktop-hierarchy.png",
+      "state": "older-host",
+      "scenario": "older-host",
+      "size": "desktop",
+      "width": 1440,
+      "height": 900,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "tree": {
+          "x": 0,
+          "y": 116,
+          "width": 245,
+          "height": 756,
+          "busy": null,
+          "scrollTop": 0,
+          "scrollBefore": null,
+          "mountedRows": 24,
+          "selected": [
+            {
+              "id": "01JA33RV000000000000000045",
+              "name": "Crate Stack",
+              "level": "3",
+              "posinset": "1",
+              "setsize": "6",
+              "expanded": null
+            }
+          ]
+        },
+        "copy": null,
+        "menu": {
+          "x": 122,
+          "y": 636,
+          "width": 196,
+          "height": 120,
+          "inside": true,
+          "label": "Actions for Crate Stack",
+          "items": [
+            {
+              "label": "Rename",
+              "shortcut": "F2",
+              "disabled": null,
+              "title": null,
+              "focused": false
+            },
+            {
+              "label": "Duplicate",
+              "shortcut": "⌘D",
+              "disabled": "true",
+              "title": "Duplicate is unavailable: the sample fixture is read-only.",
+              "focused": true
+            },
+            {
+              "label": "Copy ID",
+              "shortcut": null,
+              "disabled": null,
+              "title": null,
+              "focused": false
+            },
+            {
+              "label": "Delete",
+              "shortcut": "⌘⌫",
+              "disabled": null,
+              "title": null,
+              "focused": false
+            }
+          ]
+        },
+        "status": "",
+        "source": "Duplicate fixture: scripted host IPC, not live",
+        "inspector": "Crate Stack",
+        "active": {
+          "tag": "DIV",
+          "id": null,
+          "role": "menuitem",
+          "name": "Duplicate⌘D, unavailable: Duplicate is unavailable: the samp",
+          "focusVisible": true
+        },
+        "dialogRows": []
+      },
+      "axe": [],
+      "calls": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "scene-desktop-hierarchy.png",
+      "state": "scene",
+      "scenario": "harbor",
+      "size": "desktop",
+      "width": 1440,
+      "height": 900,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "tree": {
+          "x": 0,
+          "y": 116,
+          "width": 245,
+          "height": 756,
+          "busy": null,
+          "scrollTop": 0,
+          "scrollBefore": null,
+          "mountedRows": 24,
+          "selected": [
+            {
+              "id": "01JA33RV00000000000000003B",
+              "name": "Harbor",
+              "level": "1",
+              "posinset": "1",
+              "setsize": "1",
+              "expanded": "true"
+            }
+          ]
+        },
+        "copy": null,
+        "menu": {
+          "x": 122,
+          "y": 132,
+          "width": 196,
+          "height": 120,
+          "inside": true,
+          "label": "Actions for Harbor",
+          "items": [
+            {
+              "label": "Rename",
+              "shortcut": "F2",
+              "disabled": null,
+              "title": null,
+              "focused": false
+            },
+            {
+              "label": "Duplicate",
+              "shortcut": "⌘D",
+              "disabled": "true",
+              "title": "Scenes cannot be duplicated.",
+              "focused": true
+            },
+            {
+              "label": "Copy ID",
+              "shortcut": null,
+              "disabled": null,
+              "title": null,
+              "focused": false
+            },
+            {
+              "label": "Delete",
+              "shortcut": "⌘⌫",
+              "disabled": null,
+              "title": null,
+              "focused": false
+            }
+          ]
+        },
+        "status": "",
+        "source": "Duplicate fixture: scripted host IPC, not live",
+        "inspector": "Harbor",
+        "active": {
+          "tag": "DIV",
+          "id": null,
+          "role": "menuitem",
+          "name": "Duplicate⌘D, unavailable: Scenes cannot be duplicated.",
+          "focusVisible": true
+        },
+        "dialogRows": []
+      },
+      "axe": [],
+      "calls": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "playing-desktop-window.png",
+      "state": "playing",
+      "scenario": "play",
+      "size": "desktop",
+      "width": 1440,
+      "height": 900,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "tree": {
+          "x": 0,
+          "y": 116,
+          "width": 245,
+          "height": 756,
+          "busy": null,
+          "scrollTop": 0,
+          "scrollBefore": null,
+          "mountedRows": 9,
+          "selected": [
+            {
+              "id": "01K7Q5ZT4M000000000000000Z",
+              "name": "Crate 01",
+              "level": "2",
+              "posinset": "3",
+              "setsize": "7",
+              "expanded": null
+            }
+          ]
+        },
+        "copy": null,
+        "menu": {
+          "x": 122,
+          "y": 244,
+          "width": 196,
+          "height": 120,
+          "inside": true,
+          "label": "Actions for Crate 01",
+          "items": [
+            {
+              "label": "Rename",
+              "shortcut": "F2",
+              "disabled": null,
+              "title": null,
+              "focused": false
+            },
+            {
+              "label": "Duplicate",
+              "shortcut": "⌘D",
+              "disabled": "true",
+              "title": "Stop Play to duplicate.",
+              "focused": true
+            },
+            {
+              "label": "Copy ID",
+              "shortcut": null,
+              "disabled": null,
+              "title": null,
+              "focused": false
+            },
+            {
+              "label": "Delete",
+              "shortcut": "⌘⌫",
+              "disabled": null,
+              "title": null,
+              "focused": false
+            }
+          ]
+        },
+        "status": "Stop Play to duplicate.",
+        "source": "Duplicate fixture: scripted host IPC, not live",
+        "inspector": "Crate 01",
+        "active": {
+          "tag": "DIV",
+          "id": null,
+          "role": "menuitem",
+          "name": "Duplicate⌘D, unavailable: Stop Play to duplicate.",
+          "focusVisible": true
+        },
+        "dialogRows": []
+      },
+      "axe": [],
+      "calls": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "history-desktop-window.png",
+      "state": "history",
+      "scenario": "harbor",
+      "size": "desktop",
+      "width": 1440,
+      "height": 900,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "tree": {
+          "x": 0,
+          "y": 116,
+          "width": 245,
+          "height": 756,
+          "busy": null,
+          "scrollTop": 0,
+          "scrollBefore": null,
+          "mountedRows": 25,
+          "selected": [
+            {
+              "id": "01M4ZCMCK80000000000000001",
+              "name": "Crate Stack",
+              "level": "3",
+              "posinset": "7",
+              "setsize": "7",
+              "expanded": null
+            }
+          ]
+        },
+        "copy": {
+          "id": "01M4ZCMCK80000000000000001",
+          "mounted": true,
+          "rect": {
+            "x": 8,
+            "y": 790,
+            "width": 229,
+            "height": 28
+          },
+          "withinTree": true
+        },
+        "menu": null,
+        "status": "Duplicated Crate Stack",
+        "source": "Duplicate fixture: scripted host IPC, not live",
+        "inspector": "Crate Stack",
+        "active": {
+          "tag": "BUTTON",
+          "id": "dock-tab-history",
+          "role": "tab",
+          "name": "History(1)",
+          "focusVisible": false
+        },
+        "dialogRows": []
+      },
+      "axe": [],
+      "calls": [
+        {
+          "name": "engine_duplicate_subtree",
+          "args": {
+            "sceneId": "01JA33RV00000000000000003B",
+            "entityId": "01JA33RV000000000000000045",
+            "expectedRevision": 7
+          }
+        }
+      ],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "menu-1x-desktop-hierarchy.png",
+      "state": "menu-1x",
+      "scenario": "harbor",
+      "size": "desktop",
+      "width": 1440,
+      "height": 900,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "tree": {
+          "x": 0,
+          "y": 116,
+          "width": 245,
+          "height": 756,
+          "busy": null,
+          "scrollTop": 0,
+          "scrollBefore": null,
+          "mountedRows": 24,
+          "selected": [
+            {
+              "id": "01JA33RV00000000000000003H",
+              "name": "Player Character",
+              "level": "2",
+              "posinset": "2",
+              "setsize": "5",
+              "expanded": "true"
+            }
+          ]
+        },
+        "copy": null,
+        "menu": {
+          "x": 122,
+          "y": 300,
+          "width": 196,
+          "height": 120,
+          "inside": true,
+          "label": "Actions for Player Character",
+          "items": [
+            {
+              "label": "Rename",
+              "shortcut": "F2",
+              "disabled": null,
+              "title": null,
+              "focused": true
+            },
+            {
+              "label": "Duplicate",
+              "shortcut": "⌘D",
+              "disabled": null,
+              "title": null,
+              "focused": false
+            },
+            {
+              "label": "Copy ID",
+              "shortcut": null,
+              "disabled": null,
+              "title": null,
+              "focused": false
+            },
+            {
+              "label": "Delete",
+              "shortcut": "⌘⌫",
+              "disabled": null,
+              "title": null,
+              "focused": false
+            }
+          ]
+        },
+        "status": "",
+        "source": "Duplicate fixture: scripted host IPC, not live",
+        "inspector": "Player Character",
+        "active": {
+          "tag": "DIV",
+          "id": null,
+          "role": "menuitem",
+          "name": "RenameF2",
+          "focusVisible": false
+        },
+        "dialogRows": []
+      },
+      "axe": [],
+      "calls": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "refused-singleton-status-narrow-statusbar.png",
+      "state": "refused-singleton-status",
+      "scenario": "harbor",
+      "size": "narrow",
+      "width": 1024,
+      "height": 680,
+      "measured": {
+        "window": {
+          "width": 1024,
+          "height": 680,
+          "scrollWidth": 1024,
+          "scrollHeight": 680
+        },
+        "tree": {
+          "x": 0,
+          "y": 116,
+          "width": 232,
+          "height": 536,
+          "busy": null,
+          "scrollTop": 0,
+          "scrollBefore": null,
+          "mountedRows": 24,
+          "selected": [
+            {
+              "id": "01JA33RV00000000000000003C",
+              "name": "Environment",
+              "level": "2",
+              "posinset": "1",
+              "setsize": "5",
+              "expanded": "true"
+            }
+          ]
+        },
+        "copy": null,
+        "menu": null,
+        "status": "Duplicate failed: invalid command: duplicate subtree: a subtree containing a singleton cannot be duplicated",
+        "source": "Duplicate fixture: scripted host IPC, not live",
+        "inspector": "Environment",
+        "active": {
+          "tag": "DIV",
+          "id": "tree-row-01JA33RV00000000000000003C",
+          "role": "treeitem",
+          "name": "Environment",
+          "focusVisible": false
+        },
+        "dialogRows": []
+      },
+      "axe": [],
+      "calls": [
+        {
+          "name": "engine_duplicate_subtree",
+          "args": {
+            "sceneId": "01JA33RV00000000000000003B",
+            "entityId": "01JA33RV00000000000000003C",
+            "expectedRevision": 7
+          }
+        }
+      ],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "shortcuts-desktop-dialog.png",
+      "state": "shortcuts",
+      "scenario": "harbor",
+      "size": "desktop",
+      "width": 1440,
+      "height": 900,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "tree": {
+          "x": 0,
+          "y": 116,
+          "width": 245,
+          "height": 756,
+          "busy": null,
+          "scrollTop": 0,
+          "scrollBefore": null,
+          "mountedRows": 24,
+          "selected": []
+        },
+        "copy": null,
+        "menu": null,
+        "status": "",
+        "source": "Duplicate fixture: scripted host IPC, not live",
+        "inspector": null,
+        "active": {
+          "tag": "INPUT",
+          "id": "shortcuts-filter",
+          "role": null,
+          "name": "",
+          "focusVisible": true
+        },
+        "dialogRows": [
+          "DuplicateCommand D⌘D"
+        ]
+      },
+      "axe": [],
+      "calls": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "shortcuts-windows-desktop-dialog.png",
+      "state": "shortcuts-windows",
+      "scenario": "windows",
+      "size": "desktop",
+      "width": 1440,
+      "height": 900,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "tree": {
+          "x": 0,
+          "y": 116,
+          "width": 245,
+          "height": 756,
+          "busy": null,
+          "scrollTop": 0,
+          "scrollBefore": null,
+          "mountedRows": 24,
+          "selected": []
+        },
+        "copy": null,
+        "menu": null,
+        "status": "",
+        "source": "Duplicate fixture: scripted host IPC, not live",
+        "inspector": null,
+        "active": {
+          "tag": "INPUT",
+          "id": "shortcuts-filter",
+          "role": null,
+          "name": "",
+          "focusVisible": true
+        },
+        "dialogRows": [
+          "DuplicateCtrl DCtrl+D"
+        ]
+      },
+      "axe": [],
+      "calls": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    }
+  ],
+  "flows": [
+    {
+      "name": "keyboard-duplicate-undo-redo",
+      "scenario": "harbor",
+      "errors": [],
+      "requests": [],
+      "checks": {
+        "start": {
+          "tag": "DIV",
+          "id": "tree-row-01JA33RV00000000000000003B",
+          "role": "treeitem",
+          "text": "Harbor",
+          "focusVisible": true
+        },
+        "source": {
+          "tag": "DIV",
+          "id": "tree-row-01JA33RV00000000000000003N",
+          "role": "treeitem",
+          "text": "Map Camera",
+          "focusVisible": true
+        },
+        "afterDuplicate": {
+          "focus": {
+            "tag": "DIV",
+            "id": "tree-row-01M4ZCMCK80000000000000001",
+            "role": "treeitem",
+            "text": "Map Camera",
+            "focusVisible": true
+          },
+          "measured": {
+            "window": {
+              "width": 1440,
+              "height": 900,
+              "scrollWidth": 1440,
+              "scrollHeight": 900
+            },
+            "tree": {
+              "x": 0,
+              "y": 116,
+              "width": 245,
+              "height": 756,
+              "busy": null,
+              "scrollTop": 0,
+              "scrollBefore": null,
+              "mountedRows": 25,
+              "selected": [
+                {
+                  "id": "01M4ZCMCK80000000000000001",
+                  "name": "Map Camera",
+                  "level": "3",
+                  "posinset": "5",
+                  "setsize": "5",
+                  "expanded": null
+                }
+              ]
+            },
+            "copy": {
+              "id": "01M4ZCMCK80000000000000001",
+              "mounted": true,
+              "rect": {
+                "x": 8,
+                "y": 482,
+                "width": 229,
+                "height": 28
+              },
+              "withinTree": true
+            },
+            "menu": null,
+            "status": "Duplicated Map Camera",
+            "source": "Duplicate fixture: scripted host IPC, not live",
+            "inspector": "Map Camera",
+            "active": {
+              "tag": "DIV",
+              "id": "tree-row-01M4ZCMCK80000000000000001",
+              "role": "treeitem",
+              "name": "Map Camera",
+              "focusVisible": true
+            },
+            "dialogRows": []
+          }
+        },
+        "afterUndo": {
+          "focus": {
+            "tag": "BODY",
+            "id": null,
+            "role": null,
+            "text": "Skip to hierarchyHarbor (duplicate fixture)/, HarborSample d",
+            "focusVisible": false
+          },
+          "measured": {
+            "window": {
+              "width": 1440,
+              "height": 900,
+              "scrollWidth": 1440,
+              "scrollHeight": 900
+            },
+            "tree": {
+              "x": 0,
+              "y": 116,
+              "width": 245,
+              "height": 756,
+              "busy": null,
+              "scrollTop": 0,
+              "scrollBefore": null,
+              "mountedRows": 24,
+              "selected": []
+            },
+            "copy": {
+              "id": "01M4ZCMCK80000000000000001",
+              "mounted": false,
+              "rect": null,
+              "withinTree": false
+            },
+            "menu": null,
+            "status": "Duplicated Map Camera",
+            "source": "Duplicate fixture: scripted host IPC, not live",
+            "inspector": null,
+            "active": {
+              "tag": "BODY",
+              "id": null,
+              "role": null,
+              "name": "Skip to hierarchyHarbor (duplicate fixture)/, HarborSample d",
+              "focusVisible": false
+            },
+            "dialogRows": []
+          },
+          "status": "Duplicated Map Camera"
+        },
+        "afterRedo": {
+          "focus": {
+            "tag": "BODY",
+            "id": null,
+            "role": null,
+            "text": "Skip to hierarchyHarbor (duplicate fixture)/, HarborSample d",
+            "focusVisible": false
+          },
+          "measured": {
+            "window": {
+              "width": 1440,
+              "height": 900,
+              "scrollWidth": 1440,
+              "scrollHeight": 900
+            },
+            "tree": {
+              "x": 0,
+              "y": 116,
+              "width": 245,
+              "height": 756,
+              "busy": null,
+              "scrollTop": 0,
+              "scrollBefore": null,
+              "mountedRows": 25,
+              "selected": [
+                {
+                  "id": "01M4ZCMCK80000000000000001",
+                  "name": "Map Camera",
+                  "level": "3",
+                  "posinset": "5",
+                  "setsize": "5",
+                  "expanded": null
+                }
+              ]
+            },
+            "copy": {
+              "id": "01M4ZCMCK80000000000000001",
+              "mounted": true,
+              "rect": {
+                "x": 8,
+                "y": 482,
+                "width": 229,
+                "height": 28
+              },
+              "withinTree": true
+            },
+            "menu": null,
+            "status": "Duplicated Map Camera",
+            "source": "Duplicate fixture: scripted host IPC, not live",
+            "inspector": "Map Camera",
+            "active": {
+              "tag": "BODY",
+              "id": null,
+              "role": null,
+              "name": "Skip to hierarchyHarbor (duplicate fixture)/, HarborSample d",
+              "focusVisible": false
+            },
+            "dialogRows": []
+          }
+        },
+        "history": [
+          "Duplicate subtree (user)"
+        ]
+      },
+      "error": null,
+      "calls": [
+        {
+          "name": "engine_duplicate_subtree",
+          "args": {
+            "sceneId": "01JA33RV00000000000000003B",
+            "entityId": "01JA33RV00000000000000003N",
+            "expectedRevision": 7
+          }
+        },
+        {
+          "name": "engine_history",
+          "args": {
+            "redo": false
+          }
+        },
+        {
+          "name": "engine_history",
+          "args": {
+            "redo": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "delete-focus-comparison",
+      "scenario": "harbor",
+      "errors": [],
+      "requests": [],
+      "checks": {
+        "source": {
+          "tag": "DIV",
+          "id": "tree-row-01JA33RV000000000000000046",
+          "role": "treeitem",
+          "text": "Rubble Pile",
+          "focusVisible": true
+        },
+        "afterDelete": {
+          "focus": {
+            "tag": "BODY",
+            "id": null,
+            "role": null,
+            "text": "Skip to hierarchyHarbor (duplicate fixture)/, HarborSample d",
+            "focusVisible": false
+          },
+          "history": [
+            "Delete entity"
+          ]
+        }
+      },
+      "error": null,
+      "calls": [
+        {
+          "name": "engine_execute",
+          "args": {
+            "commands": [
+              {
+                "op": "delete_entity",
+                "scene_id": "01JA33RV00000000000000003B",
+                "entity_id": "01JA33RV000000000000000046"
+              }
+            ],
+            "description": "Delete entity",
+            "expectedRevision": 7
+          }
+        }
+      ]
+    },
+    {
+      "name": "held-keys-and-second-press",
+      "scenario": "slow",
+      "errors": [],
+      "requests": [],
+      "checks": {
+        "afterHeld": {
+          "status": "",
+          "busy": "true"
+        },
+        "afterSecond": {
+          "status": "Wait for the current duplicate to finish.",
+          "rows": 24,
+          "selected": [
+            "Crate Stack"
+          ]
+        }
+      },
+      "error": null,
+      "calls": [
+        {
+          "name": "engine_duplicate_subtree",
+          "args": {
+            "sceneId": "01JA33RV00000000000000003B",
+            "entityId": "01JA33RV000000000000000045",
+            "expectedRevision": 7
+          }
+        }
+      ]
+    },
+    {
+      "name": "guards",
+      "scenario": "harbor",
+      "errors": [],
+      "requests": [],
+      "checks": {
+        "filter": {
+          "value": "cra",
+          "focus": {
+            "tag": "INPUT",
+            "id": "hierarchy-filter",
+            "role": null,
+            "text": "",
+            "focusVisible": true
+          }
+        },
+        "rename": {
+          "focus": {
+            "tag": "INPUT",
+            "id": null,
+            "role": null,
+            "text": "",
+            "focusVisible": true
+          },
+          "input": 1
+        },
+        "otherPanel": {
+          "focus": {
+            "tag": "SECTION",
+            "id": null,
+            "role": null,
+            "text": "ViewportErrorChoose cameraViewport render errorDuplicate fix",
+            "focusVisible": true
+          }
+        },
+        "dialog": {
+          "focus": {
+            "tag": "INPUT",
+            "id": "shortcuts-filter",
+            "role": null,
+            "text": "",
+            "focusVisible": true
+          }
+        },
+        "scene": {
+          "status": "Scenes cannot be duplicated.",
+          "focus": {
+            "tag": "DIV",
+            "id": "tree-row-01JA33RV00000000000000003B",
+            "role": "treeitem",
+            "text": "Harbor",
+            "focusVisible": false
+          }
+        }
+      },
+      "error": null,
+      "calls": []
+    },
+    {
+      "name": "live-play",
+      "scenario": "play",
+      "errors": [],
+      "requests": [],
+      "checks": {
+        "playing": {
+          "status": "Stop Play to duplicate.",
+          "selected": [
+            "Crate 01"
+          ],
+          "runtime": "Runtime",
+          "focus": {
+            "tag": "DIV",
+            "id": "tree-row-01K7Q5ZT4M000000000000000Z",
+            "role": "treeitem",
+            "text": "Crate 01",
+            "focusVisible": false
+          }
+        },
+        "afterStop": {
+          "disabled": null,
+          "title": null
+        }
+      },
+      "error": null,
+      "calls": []
+    }
+  ]
+}
