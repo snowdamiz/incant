@@ -106,8 +106,11 @@ The producer passed 112 CPU tests plus its allocator control. The main333 join
 passed 120 agent/playbook and 20 native-host tests, strict enabled/disabled lint
 and editor compilation. The editor-only default selection subsequently passed
 25 real editor worker/owner controls and 23 feature-disabled controls, both strict
-lint modes and isolated feature-graph checks. Inactive-instrumentation overhead
-remains unmeasured; a bounded matched CPU comparison is proposed separately.
+lint modes and isolated feature-graph checks. A fixed six-process CPU comparison of inactive hooks now passes its local
+5% p95/total overhead bound, with exact logical and PCM parity. Its timing
+artifacts retain their historical source identity; this is not a GUI or shipping
+performance result. The manual fixture is excluded from default CI selection.
+[Measurements and limitations](docs/spikes/editor-profiler-inactive-overhead.md).
 GPU/display/heap/allocation measurements, live optimization quality and the full
 Phase 3 gate remain open. No shipping performance result is claimed.
 [Isolation, exact source and portable evidence](docs/spikes/agent-profiler.md).

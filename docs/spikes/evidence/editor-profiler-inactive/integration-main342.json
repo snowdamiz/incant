@@ -1,0 +1,653 @@
+{
+  "schema": 1,
+  "scope": "Main342 composition: manual selector and pure controls only; no new full-Core or timing execution.",
+  "source": "9661f92e6e174018b302c8a392eef9a94e771c1a",
+  "tree": "e13295d8ba01f7ab068ccf6676abfabeb3243f71",
+  "main": "069bbe54dc529511138867dfd4fbe50507a38b6b",
+  "fixture_producing_source": "b329dec1d86b0c308172621f6c59fafce470223e",
+  "manual_gate_source": "77042e79726d7d8b0b3cf16053fd9ecc979dcb47",
+  "merge_conflicts": false,
+  "fixture_body_identical_to_producer": true,
+  "source_freeze": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/editor-profiler-inactive-001/integration-main342-001/source-001/freeze.json",
+    "bytes": 14990,
+    "sha256": "b2344fd5a288f8ceb8d94fdc8583dcc21fdb6d761fa5580b15842130715b0fca"
+  },
+  "plan": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/editor-profiler-inactive-001/integration-main342-001/cpu-plan-002.json",
+    "bytes": 6938,
+    "sha256": "e567529cde8fc4c544cf45318726c84d61bedca4a40deeebf448a5e26b7eab66"
+  },
+  "runner": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/editor-profiler-inactive-001/integration-main342-001/qualify-002.py",
+    "bytes": 9929,
+    "sha256": "9749d537e989b49db206165dcf0bb96356e1f3e09ea120db7aba161a98bf5559"
+  },
+  "retained_first_failure": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/editor-profiler-inactive-001/integration-main342-001/cpu-001/result.json",
+    "bytes": 1844,
+    "sha256": "b23bea56ea89a20b982fcd1a8d5e1cff60b3bd36f1f6a2e79633978589c2e9b5"
+  },
+  "result": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/editor-profiler-inactive-001/integration-main342-001/cpu-002/result.json",
+    "bytes": 19797,
+    "sha256": "d2869b8aa76c78084bfc3c849026311e9b8649a74d3c4e2fa39a28233847418e"
+  },
+  "external_input_drift": {
+    "unchanged_external_inputs": 283,
+    "total_external_inputs": 284,
+    "mismatches": [
+      {
+        "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/sdk/ts/src/native.d.ts",
+        "bytes": 28965,
+        "sha256": "85dcfa025f687c977484ac3b22f72c7e34567f723778e5c08cf15d11ac344518",
+        "current_sha256": "63d0766a3861a96cb16aa9b71308f9aaeab9d4cde87bcbac060c7e6648091955",
+        "current_bytes": 29553,
+        "historical_git_source": "b329dec1d86b0c308172621f6c59fafce470223e",
+        "repo_path": "sdk/ts/src/native.d.ts",
+        "historical_exact": true
+      }
+    ],
+    "reason": "Main342 gameplay light-control declarations changed a live SDK path after original measurement; historical source bytes retained and exact, current path intentionally refuses original optional external check."
+  },
+  "portable_replay": {
+    "records": 424,
+    "source_generations": 3,
+    "source_rows_each": 88,
+    "cpu_controls": 4,
+    "functional_routes": 2,
+    "timing_routes": 6,
+    "frames_each": 2156,
+    "all_fixed_pairs_within_local_5_percent": true,
+    "recorded_logical_pcm_parity": true,
+    "originals_verified": true,
+    "external_binaries_verified": true,
+    "external_inputs_verified": false,
+    "historical_git_source_verified": true,
+    "manual_gate_selector_commands": 11,
+    "manual_gate_pure_controls": 4,
+    "manual_gate_default_route_selected": false,
+    "shipping_gui_gate_or_zero_overhead_claim": false
+  },
+  "outcome": "success",
+  "elapsed_seconds": 90.14845983299892,
+  "target_growth_bytes": 503570,
+  "minimum_sampled_free_bytes": 73566191616,
+  "managed_call_active": false,
+  "commands": [
+    {
+      "name": "rust-version",
+      "argv": [
+        "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/rustc",
+        "--version",
+        "--verbose"
+      ],
+      "exit_code": 0,
+      "managed_returned_after_cleanup": true,
+      "elapsed_seconds": 0.05992829200113192,
+      "stdout_sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/editor-profiler-inactive-001/integration-main342-001/cpu-002/rust-version.stdout",
+        "bytes": 192,
+        "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/editor-profiler-inactive-001/integration-main342-001/cpu-002/rust-version.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "copied_binaries": []
+    },
+    {
+      "name": "portable-replay",
+      "argv": [
+        "python3",
+        "-B",
+        "docs/spikes/evidence/editor-profiler-inactive/verify.py",
+        "--originals",
+        "--binaries",
+        "--git-source"
+      ],
+      "exit_code": 0,
+      "managed_returned_after_cleanup": true,
+      "elapsed_seconds": 3.4267600830062293,
+      "stdout_sha256": "38070bab09ed3f856bc0c701f05adfe07af7e6b363fb02d53faac7ebdd770ac3",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/editor-profiler-inactive-001/integration-main342-001/cpu-002/portable-replay.stdout",
+        "bytes": 539,
+        "sha256": "38070bab09ed3f856bc0c701f05adfe07af7e6b363fb02d53faac7ebdd770ac3"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/editor-profiler-inactive-001/integration-main342-001/cpu-002/portable-replay.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "copied_binaries": []
+    },
+    {
+      "name": "default-ignored-exclusion",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "-p",
+        "incant_agent_native",
+        "--locked",
+        "--offline",
+        "--target",
+        "aarch64-apple-darwin",
+        "--profile",
+        "ci",
+        "-j",
+        "2",
+        "--tests",
+        "--message-format=json-render-diagnostics",
+        "--",
+        "--ignored",
+        "--exact",
+        "inactive_core_complete_route",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "managed_returned_after_cleanup": true,
+      "elapsed_seconds": 27.362014750018716,
+      "stdout_sha256": "100c1e21f901bec93ad4377722ffb59a77f8a0fc078dd1ec2cde3ac65e9a1b7b",
+      "stderr_sha256": "6d9092e2cbeea68146e8172e8f751bba1a0f9f634ee97913f26f8ed6b7abe5f4",
+      "test_summaries": [
+        {
+          "status": "ok",
+          "passed": "0",
+          "failed": "0",
+          "ignored": "0"
+        },
+        {
+          "status": "ok",
+          "passed": "0",
+          "failed": "0",
+          "ignored": "0"
+        },
+        {
+          "status": "ok",
+          "passed": "0",
+          "failed": "0",
+          "ignored": "0"
+        }
+      ],
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/editor-profiler-inactive-001/integration-main342-001/cpu-002/default-ignored-exclusion.stdout",
+        "bytes": 506163,
+        "sha256": "100c1e21f901bec93ad4377722ffb59a77f8a0fc078dd1ec2cde3ac65e9a1b7b"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/editor-profiler-inactive-001/integration-main342-001/cpu-002/default-ignored-exclusion.stderr",
+        "bytes": 2680,
+        "sha256": "6d9092e2cbeea68146e8172e8f751bba1a0f9f634ee97913f26f8ed6b7abe5f4"
+      },
+      "copied_binaries": [
+        {
+          "path": "/Users/andreyyurlov/.codex/incant-evidence/editor-profiler-inactive-001/integration-main342-001/cpu-002/binaries/default-ignored-exclusion/profiler-4d98e4466c277ee2",
+          "sha256": "c3a17402ca8755f0ace9afd6163651aaf19ed2b438b64093f98ac0021901d548",
+          "features": [
+            "default",
+            "physics-deterministic"
+          ],
+          "bytes": 42114952,
+          "target_name": "profiler"
+        },
+        {
+          "path": "/Users/andreyyurlov/.codex/incant-evidence/editor-profiler-inactive-001/integration-main342-001/cpu-002/binaries/default-ignored-exclusion/fallback-e26928327e618c79",
+          "sha256": "9dcbae57ff49eb5a96ce6929eedc9d8ab9aaff9863647bd46737e68a3ba7f23b",
+          "features": [
+            "default",
+            "physics-deterministic"
+          ],
+          "bytes": 26514408,
+          "target_name": "fallback"
+        },
+        {
+          "path": "/Users/andreyyurlov/.codex/incant-evidence/editor-profiler-inactive-001/integration-main342-001/cpu-002/binaries/default-ignored-exclusion/incant_agent_native-1a57c34effeb9c38",
+          "sha256": "e450d436b6f4649bf9f74d66cd12e755df27d94b03dd1131baeb90c386574475",
+          "features": [
+            "default",
+            "physics-deterministic"
+          ],
+          "bytes": 43193800,
+          "target_name": "incant_agent_native"
+        }
+      ]
+    },
+    {
+      "name": "profiler-ignored-exclusion",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "-p",
+        "incant_agent_native",
+        "--locked",
+        "--offline",
+        "--target",
+        "aarch64-apple-darwin",
+        "--profile",
+        "ci",
+        "-j",
+        "2",
+        "--tests",
+        "--features",
+        "agent-profiler",
+        "--message-format=json-render-diagnostics",
+        "--",
+        "--ignored",
+        "--exact",
+        "inactive_core_complete_route",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "managed_returned_after_cleanup": true,
+      "elapsed_seconds": 21.403668708982877,
+      "stdout_sha256": "6bc73e1e6868afb0c0f813e5394dceab3d4e8061c1315fe72953b6e30e4e07a9",
+      "stderr_sha256": "e9fd1556cfe74a14b33f710112f1eff02d735359cf59647e8cf8c16a92a6fa2d",
+      "test_summaries": [
+        {
+          "status": "ok",
+          "passed": "0",
+          "failed": "0",
+          "ignored": "0"
+        },
+        {
+          "status": "ok",
+          "passed": "0",
+          "failed": "0",
+          "ignored": "0"
+        },
+        {
+          "status": "ok",
+          "passed": "0",
+          "failed": "0",
+          "ignored": "0"
+        }
+      ],
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/editor-profiler-inactive-001/integration-main342-001/cpu-002/profiler-ignored-exclusion.stdout",
+        "bytes": 506284,
+        "sha256": "6bc73e1e6868afb0c0f813e5394dceab3d4e8061c1315fe72953b6e30e4e07a9"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/editor-profiler-inactive-001/integration-main342-001/cpu-002/profiler-ignored-exclusion.stderr",
+        "bytes": 1926,
+        "sha256": "e9fd1556cfe74a14b33f710112f1eff02d735359cf59647e8cf8c16a92a6fa2d"
+      },
+      "copied_binaries": [
+        {
+          "path": "/Users/andreyyurlov/.codex/incant-evidence/editor-profiler-inactive-001/integration-main342-001/cpu-002/binaries/profiler-ignored-exclusion/profiler-1e59d5fb8dc76fb3",
+          "sha256": "29e713b59844d6a76161341745558f4bbcf04977599c08ceabca89000da52ca7",
+          "features": [
+            "agent-profiler",
+            "default",
+            "physics-deterministic"
+          ],
+          "bytes": 42431320,
+          "target_name": "profiler"
+        },
+        {
+          "path": "/Users/andreyyurlov/.codex/incant-evidence/editor-profiler-inactive-001/integration-main342-001/cpu-002/binaries/profiler-ignored-exclusion/fallback-a2b09cf8d88794dd",
+          "sha256": "830d8f28948a96bfda178f0547360b8f36b72e4a358fa84833321962d71b82d8",
+          "features": [
+            "agent-profiler",
+            "default",
+            "physics-deterministic"
+          ],
+          "bytes": 26566312,
+          "target_name": "fallback"
+        },
+        {
+          "path": "/Users/andreyyurlov/.codex/incant-evidence/editor-profiler-inactive-001/integration-main342-001/cpu-002/binaries/profiler-ignored-exclusion/incant_agent_native-574bf8122bfd49e4",
+          "sha256": "28d3d97e1921363d17552f4ced11614c3f928ae28982fa6801a6c51aee572892",
+          "features": [
+            "agent-profiler",
+            "default",
+            "physics-deterministic"
+          ],
+          "bytes": 43271704,
+          "target_name": "incant_agent_native"
+        }
+      ]
+    },
+    {
+      "name": "off-manual-controls",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "-p",
+        "incant_agent_native",
+        "--locked",
+        "--offline",
+        "--target",
+        "aarch64-apple-darwin",
+        "--profile",
+        "ci",
+        "-j",
+        "2",
+        "--test",
+        "inactive_core",
+        "--features",
+        "diagnostic-inactive-profiler",
+        "--message-format=json-render-diagnostics",
+        "--",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "managed_returned_after_cleanup": true,
+      "elapsed_seconds": 2.497235124988947,
+      "stdout_sha256": "52054886f7a9a4ade8c18c60e65878071c7ffbb1908c2b53dc1f551c9c3622b9",
+      "stderr_sha256": "72ceb63b47bb7eef26a0a2010996d0d5e253f758b880a3c9496f91a38e84833d",
+      "test_summaries": [
+        {
+          "status": "ok",
+          "passed": "2",
+          "failed": "0",
+          "ignored": "1"
+        }
+      ],
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/editor-profiler-inactive-001/integration-main342-001/cpu-002/off-manual-controls.stdout",
+        "bytes": 504520,
+        "sha256": "52054886f7a9a4ade8c18c60e65878071c7ffbb1908c2b53dc1f551c9c3622b9"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/editor-profiler-inactive-001/integration-main342-001/cpu-002/off-manual-controls.stderr",
+        "bytes": 324,
+        "sha256": "72ceb63b47bb7eef26a0a2010996d0d5e253f758b880a3c9496f91a38e84833d"
+      },
+      "copied_binaries": [
+        {
+          "path": "/Users/andreyyurlov/.codex/incant-evidence/editor-profiler-inactive-001/integration-main342-001/cpu-002/binaries/off-manual-controls/inactive_core-4879ab9265541e10",
+          "sha256": "6757e63cfb4918887caf6a9f968bf08250d8d81680c34b703ec0af416b802ea1",
+          "features": [
+            "default",
+            "diagnostic-inactive-profiler",
+            "physics-deterministic"
+          ],
+          "bytes": 32741040,
+          "target_name": "inactive_core"
+        }
+      ]
+    },
+    {
+      "name": "on-manual-controls",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "-p",
+        "incant_agent_native",
+        "--locked",
+        "--offline",
+        "--target",
+        "aarch64-apple-darwin",
+        "--profile",
+        "ci",
+        "-j",
+        "2",
+        "--test",
+        "inactive_core",
+        "--features",
+        "diagnostic-inactive-profiler,agent-profiler",
+        "--message-format=json-render-diagnostics",
+        "--",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "managed_returned_after_cleanup": true,
+      "elapsed_seconds": 2.517997541988734,
+      "stdout_sha256": "dd01b8cacf82df9543c26de1bdf7741c1ad7dbf443833983d712d07d1b902ebc",
+      "stderr_sha256": "7c0a6674eabcf8f569c0dba9d75d436c161af513518388ad04748db67acc602b",
+      "test_summaries": [
+        {
+          "status": "ok",
+          "passed": "2",
+          "failed": "0",
+          "ignored": "1"
+        }
+      ],
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/editor-profiler-inactive-001/integration-main342-001/cpu-002/on-manual-controls.stdout",
+        "bytes": 504613,
+        "sha256": "dd01b8cacf82df9543c26de1bdf7741c1ad7dbf443833983d712d07d1b902ebc"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/editor-profiler-inactive-001/integration-main342-001/cpu-002/on-manual-controls.stderr",
+        "bytes": 324,
+        "sha256": "7c0a6674eabcf8f569c0dba9d75d436c161af513518388ad04748db67acc602b"
+      },
+      "copied_binaries": [
+        {
+          "path": "/Users/andreyyurlov/.codex/incant-evidence/editor-profiler-inactive-001/integration-main342-001/cpu-002/binaries/on-manual-controls/inactive_core-04f940c6f2a4d4b0",
+          "sha256": "d587233fdc84bccc15e92bfe0c5e831cb3ce1c447d9dc95e0b2fd2bd8b47c132",
+          "features": [
+            "agent-profiler",
+            "default",
+            "diagnostic-inactive-profiler",
+            "physics-deterministic"
+          ],
+          "bytes": 32794368,
+          "target_name": "inactive_core"
+        }
+      ]
+    },
+    {
+      "name": "explicit-ignored-list",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "-p",
+        "incant_agent_native",
+        "--locked",
+        "--offline",
+        "--target",
+        "aarch64-apple-darwin",
+        "--profile",
+        "ci",
+        "-j",
+        "2",
+        "--test",
+        "inactive_core",
+        "--features",
+        "diagnostic-inactive-profiler",
+        "--message-format=json-render-diagnostics",
+        "--",
+        "--ignored",
+        "--list"
+      ],
+      "exit_code": 0,
+      "managed_returned_after_cleanup": true,
+      "elapsed_seconds": 0.31488624998019077,
+      "stdout_sha256": "751a7219874232ad46bbe506c717adea38e9031f84fbf5c2f804443e81ed7fc9",
+      "stderr_sha256": "4961ac5bfc2943dccee04dfb7d852e2b06752bbb633513646f45c21b05ba856c",
+      "test_summaries": [],
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/editor-profiler-inactive-001/integration-main342-001/cpu-002/explicit-ignored-list.stdout",
+        "bytes": 504181,
+        "sha256": "751a7219874232ad46bbe506c717adea38e9031f84fbf5c2f804443e81ed7fc9"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/editor-profiler-inactive-001/integration-main342-001/cpu-002/explicit-ignored-list.stderr",
+        "bytes": 193,
+        "sha256": "4961ac5bfc2943dccee04dfb7d852e2b06752bbb633513646f45c21b05ba856c"
+      },
+      "copied_binaries": [
+        {
+          "path": "/Users/andreyyurlov/.codex/incant-evidence/editor-profiler-inactive-001/integration-main342-001/cpu-002/binaries/explicit-ignored-list/inactive_core-4879ab9265541e10",
+          "sha256": "6757e63cfb4918887caf6a9f968bf08250d8d81680c34b703ec0af416b802ea1",
+          "features": [
+            "default",
+            "diagnostic-inactive-profiler",
+            "physics-deterministic"
+          ],
+          "bytes": 32741040,
+          "target_name": "inactive_core"
+        }
+      ]
+    },
+    {
+      "name": "off-manual-lint",
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "-p",
+        "incant_agent_native",
+        "--locked",
+        "--offline",
+        "--target",
+        "aarch64-apple-darwin",
+        "--profile",
+        "ci",
+        "-j",
+        "2",
+        "--test",
+        "inactive_core",
+        "--features",
+        "diagnostic-inactive-profiler",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "managed_returned_after_cleanup": true,
+      "elapsed_seconds": 3.5744813329947647,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "0e1556f2f15b76a9dfc754cb30c8714af1903d6702a500b4c5e1ad367c072c64",
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/editor-profiler-inactive-001/integration-main342-001/cpu-002/off-manual-lint.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/editor-profiler-inactive-001/integration-main342-001/cpu-002/off-manual-lint.stderr",
+        "bytes": 2287,
+        "sha256": "0e1556f2f15b76a9dfc754cb30c8714af1903d6702a500b4c5e1ad367c072c64"
+      },
+      "copied_binaries": []
+    },
+    {
+      "name": "on-manual-lint",
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "-p",
+        "incant_agent_native",
+        "--locked",
+        "--offline",
+        "--target",
+        "aarch64-apple-darwin",
+        "--profile",
+        "ci",
+        "-j",
+        "2",
+        "--test",
+        "inactive_core",
+        "--features",
+        "diagnostic-inactive-profiler,agent-profiler",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "managed_returned_after_cleanup": true,
+      "elapsed_seconds": 2.4276180419838056,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "c4815b9c97fe5c7c3e49947883ff7d43f75f6b79b9d65551d8553894bc79e126",
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/editor-profiler-inactive-001/integration-main342-001/cpu-002/on-manual-lint.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/editor-profiler-inactive-001/integration-main342-001/cpu-002/on-manual-lint.stderr",
+        "bytes": 1533,
+        "sha256": "c4815b9c97fe5c7c3e49947883ff7d43f75f6b79b9d65551d8553894bc79e126"
+      },
+      "copied_binaries": []
+    },
+    {
+      "name": "fmt",
+      "argv": [
+        "./tools/cargo",
+        "fmt",
+        "-p",
+        "incant_agent_native",
+        "--",
+        "--check"
+      ],
+      "exit_code": 0,
+      "managed_returned_after_cleanup": true,
+      "elapsed_seconds": 0.09107512500486337,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/editor-profiler-inactive-001/integration-main342-001/cpu-002/fmt.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/editor-profiler-inactive-001/integration-main342-001/cpu-002/fmt.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "copied_binaries": []
+    },
+    {
+      "name": "conventions",
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "managed_returned_after_cleanup": true,
+      "elapsed_seconds": 0.0473246659967117,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/editor-profiler-inactive-001/integration-main342-001/cpu-002/conventions.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/editor-profiler-inactive-001/integration-main342-001/cpu-002/conventions.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "copied_binaries": []
+    },
+    {
+      "name": "diff",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "managed_returned_after_cleanup": true,
+      "elapsed_seconds": 0.061459791992092505,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/editor-profiler-inactive-001/integration-main342-001/cpu-002/diff.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/editor-profiler-inactive-001/integration-main342-001/cpu-002/diff.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "copied_binaries": []
+    }
+  ],
+  "limitations": [
+    "CPU CI-profile selector qualification is not shipping/GUI/performance evidence.",
+    "The historical portable archive remains424records and three88-input source generations; this compact composition receipt is separate, with full CPU logs/executables external.",
+    "Optional --external-inputs correctly refuses current SDK native.d.ts after light-control integration. All other208 current external inputs match; exact historical SDK is bound to b329 Git bytes.",
+    "No rerun of the complete Core fixture and no timing recomputation from composed-source artifacts."
+  ]
+}
