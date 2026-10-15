@@ -47,6 +47,7 @@ const _default = {
     },
     update ({ clock, coroutines, instances }) {
         if (clock.tick === 1) {
+            if (!coroutines) throw Error('native coroutine catalog unavailable');
             coroutines.start('main', 'pulse', 0, instances[0]?.entity);
         }
         return undefined;
