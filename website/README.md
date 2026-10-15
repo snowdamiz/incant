@@ -27,7 +27,14 @@ Browser screenshots from normal verification are saved in ignored
 `handoffs/0005-landing-page/screenshots/`. To deliberately regenerate that evidence,
 set `INCANT_EVIDENCE_DIR` to its absolute directory when running the tests.
 
-Fraunces, Inter and JetBrains Mono are self-hosted under the SIL Open Font License.
+Inter and JetBrains Mono are self-hosted under the SIL Open Font License.
+
+The hero, editor viewport, modeling viewport and closing band are live WebGL2 scenes
+(`src/gl/`): one full-screen fragment shader per canvas, written for the site. They
+render only while visible, lower their resolution when frames run long, draw a single
+still frame under `prefers-reduced-motion`, and show a static gradient without WebGL2.
+Playwright's bundled Chromium renders them in software, so the full suite is slower
+there than with an installed Chrome.
 Their license texts ship in `public/licenses/` alongside the production assets.
 
 ## Deployment
