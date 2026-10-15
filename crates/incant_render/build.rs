@@ -1,10 +1,15 @@
 #[cfg(feature = "cooked-bloom")]
 #[path = "src/bloom/source.rs"]
 mod bloom_source;
+#[cfg(feature = "metal-binary-archives")]
+#[path = "build/metal_archive_identity.rs"]
+mod metal_archive_identity;
 #[cfg(feature = "cooked-temporal")]
 #[path = "src/lighting/temporal_source.rs"]
 mod temporal_source;
 fn main() {
+    #[cfg(feature = "metal-binary-archives")]
+    metal_archive_identity::emit();
     #[cfg(feature = "cooked-temporal")]
     if std::env::var("CARGO_CFG_TARGET_ARCH").as_deref() != Ok("wasm32") {
         use incant_shader_cook::temporal::{self, Kind};

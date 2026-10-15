@@ -73,6 +73,12 @@ impl crate::Renderer {
             false,
             crate::SceneMsaa::One,
             Some(capture),
+            #[cfg(all(
+                feature = "metal-binary-archives",
+                feature = "native-compilation",
+                target_os = "macos"
+            ))]
+            wgpu_hal::metal::binary_archive::Mode::Capture,
         )
         .await
     }

@@ -24,10 +24,24 @@ mod hdr_output;
 mod lighting;
 mod material_pipeline;
 mod materials;
+#[cfg(all(
+    feature = "metal-binary-archives",
+    feature = "native-compilation",
+    target_os = "macos"
+))]
+mod metal_archive_diagnostic;
 mod models;
 mod output;
 mod pipeline_cache;
+#[cfg(all(
+    feature = "metal-binary-archives",
+    feature = "native-compilation",
+    target_os = "macos"
+))]
+pub use pipeline_cache::MetalArchiveDiagnosticError;
 mod pixel_grid;
+#[cfg(all(feature = "metal-binary-archives", target_os = "macos"))]
+pub use pipeline_cache::MetalArchiveReport;
 pub use pipeline_cache::{CacheRead, CacheWrite, PipelineCacheReport};
 pub mod metalfx;
 #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
@@ -141,6 +155,12 @@ impl Renderer {
             SceneMsaa::One,
             #[cfg(all(feature = "native-compilation", target_os = "macos"))]
             None,
+            #[cfg(all(
+                feature = "metal-binary-archives",
+                feature = "native-compilation",
+                target_os = "macos"
+            ))]
+            wgpu_hal::metal::binary_archive::Mode::Capture,
         )
         .await
     }
@@ -158,6 +178,12 @@ impl Renderer {
             SceneMsaa::One,
             #[cfg(all(feature = "native-compilation", target_os = "macos"))]
             None,
+            #[cfg(all(
+                feature = "metal-binary-archives",
+                feature = "native-compilation",
+                target_os = "macos"
+            ))]
+            wgpu_hal::metal::binary_archive::Mode::Capture,
         )
         .await
     }
@@ -169,6 +195,12 @@ impl Renderer {
         #[cfg(all(feature = "native-compilation", target_os = "macos"))] compilation: Option<
             &mut compilation::Capture,
         >,
+        #[cfg(all(
+            feature = "metal-binary-archives",
+            feature = "native-compilation",
+            target_os = "macos"
+        ))]
+        archive_mode: wgpu_hal::metal::binary_archive::Mode,
     ) -> Result<Self> {
         let adapter = instance
             .request_adapter(&wgpu::RequestAdapterOptions {
@@ -207,6 +239,24 @@ impl Renderer {
         // The renderer owns a finite pipeline catalog. Prepare it before any
         // caller can submit a frame; frame preparation only looks up handles.
         let validation = device.push_error_scope(wgpu::ErrorFilter::Validation);
+        #[cfg(all(
+            feature = "metal-binary-archives",
+            feature = "native-compilation",
+            target_os = "macos"
+        ))]
+        let mut cache_session = match archive_mode {
+            wgpu_hal::metal::binary_archive::Mode::Capture => {
+                pipeline_cache::Session::new(&device, &adapter)
+            }
+            wgpu_hal::metal::binary_archive::Mode::RequireHit => {
+                pipeline_cache::Session::require_hits(&device, &adapter)?
+            }
+        };
+        #[cfg(not(all(
+            feature = "metal-binary-archives",
+            feature = "native-compilation",
+            target_os = "macos"
+        )))]
         let mut cache_session = pipeline_cache::Session::new(&device, &adapter);
         let cache = cache_session.cache.as_ref();
         let environments = environment::EnvironmentSystem::new(&device, &queue);

@@ -20,6 +20,8 @@ end of the VS buffer table.
 #[allow(deprecated)]
 mod adapter;
 mod command;
+#[cfg(all(feature = "metal-binary-archives", target_os = "macos"))]
+pub mod binary_archive;
 #[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
 pub mod compilation;
 #[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
@@ -505,6 +507,8 @@ pub struct QueueShared {
 }
 
 pub struct Device {
+    #[cfg(all(feature = "metal-binary-archives", target_os = "macos"))]
+    binary_archive: Mutex<alloc::sync::Weak<binary_archive::Session>>,
     #[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
     compilation_observer: compilation::Observer,
     shared: Arc<AdapterShared>,
