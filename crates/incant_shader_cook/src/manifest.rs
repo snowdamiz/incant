@@ -21,5 +21,22 @@ pub fn write_bundle(bundle: &Bundle, directory: &Path) -> Result<()> {
     }
     generated.push_str("];\n");
     fs::write(directory.join("manifest.rs"), generated)?;
+    crate::audit::write(
+        directory,
+        CONTRACT,
+        &bundle.source_hash,
+        &bundle.producer_hash,
+        bundle.artifacts.iter().map(|a| {
+            (
+                a.backend,
+                match a.stage {
+                    crate::Stage::Vertex => "Vertex",
+                    crate::Stage::Fragment => "Fragment",
+                },
+                a.entry.as_str(),
+                a.bytes.as_slice(),
+            )
+        }),
+    )?;
     Ok(())
 }

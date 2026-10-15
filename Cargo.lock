@@ -4548,7 +4548,9 @@ name = "incant_shader_cook"
 version = "0.0.1"
 dependencies = [
  "naga",
+ "serde_json",
  "sha2 0.10.9",
+ "tempfile",
  "thiserror 2.0.21",
 ]
 
