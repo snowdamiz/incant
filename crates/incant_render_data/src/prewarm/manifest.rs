@@ -121,9 +121,11 @@ pub struct AdmittedMaterials {
 }
 impl AdmittedMaterials {
     pub fn keys(&self) -> impl Iterator<Item = MaterialKey> + '_ {
-        self.keys.iter().enumerate().filter_map(|(index, present)| {
-            present.then(|| MaterialKey::try_from(index as u8).expect("closed key array"))
-        })
+        self.keys
+            .iter()
+            .enumerate()
+            .filter(|(_, present)| **present)
+            .map(|(index, _)| MaterialKey::try_from(index as u8).expect("closed key array"))
     }
     pub fn profile(&self) -> MaterialProfile {
         self.profile
