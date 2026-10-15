@@ -10,6 +10,18 @@ use std::{
 };
 use wgpu_hal::dx12::pipeline_library::{Config, Mode, RenderPath};
 
+fn counts(c: &wgpu_hal::dx12::pipeline_library::Counts) -> serde_json::Value {
+    serde_json::json!({
+        "stream_hits": c.stream_hits, "classic_hits": c.classic_hits,
+        "compute_hits": c.compute_hits, "miss_or_mismatch": c.miss_or_mismatch,
+        "native_load_errors": c.native_load_errors, "fallback_attempts": c.fallback_attempts,
+        "stores": c.stores, "store_errors": c.store_errors,
+        "strict_refusals": c.strict_refusals, "serialization_errors": c.serialization_errors,
+        "disabled": c.disabled, "overflowed": c.overflowed,
+        "last_error": c.last_error.as_ref().map(|error| format!("{error:?}")),
+    })
+}
+
 #[test]
 #[ignore = "requires an explicit Windows DX12 device/storage lease and external supervisor"]
 fn dx12_library_native_stage() {
@@ -269,9 +281,15 @@ fn dx12_library_native_stage() {
         );
     }
     renderer.check_device().unwrap();
+    let native_identity = unsafe { renderer.device.as_hal::<crate::wgpu::hal::api::Dx12>() }
+        .unwrap()
+        .pipeline_library_identity()
+        .unwrap();
     let report = serde_json::json!({"stage":stage,"backend":"Dx12",
         "source":env!("INCANT_DX12_LIBRARY_SOURCE"), "adapter":format!("{:?}",renderer.adapter.get_info()),
+        "native_identity": native_identity,
         "cooked":cfg!(feature="cooked-native-shaders"), "rgba_sha256":format!("{:x}",Sha256::digest(&pixels)),
+        "counts_before": self::counts(counts), "counts_after": self::counts(&library.counts()),
         "initial_report":format!("{initial:?}"),"final_native":format!("{:?}",library.counts()),
         "scope":"native library membership and exact raw parity; no window/appearance/performance gate"});
     fs::write(

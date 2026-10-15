@@ -3,6 +3,8 @@
 //! Authored clustered lights; the full production render graph remains open.
 #[cfg(all(test, feature = "dx12-pipeline-library", target_os = "windows"))]
 extern crate alloc;
+#[cfg(all(test, feature = "dx12-pipeline-library", target_os = "windows"))]
+use pipeline_cache::native_key_control as pipeline_library_key;
 mod ambient_occlusion;
 pub use ambient_occlusion::{AmbientOcclusion, AmbientOcclusionError};
 #[cfg(feature = "ssao-stage-readback")]

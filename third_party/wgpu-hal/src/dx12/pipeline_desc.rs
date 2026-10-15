@@ -212,7 +212,7 @@ pub struct RenderPipelineStateStreamDesc<'a> {
 }
 
 impl RenderPipelineStateStreamDesc<'_> {
-    pub fn to_stream(&self) -> RenderPipelineStateStream<'_> {
+    pub(super) fn to_stream(&self) -> RenderPipelineStateStream<'_> {
         let mut stream = RenderPipelineStateStream::new();
 
         // Importantly here, the ID3D12RootSignature _itself_ is the pointer we're

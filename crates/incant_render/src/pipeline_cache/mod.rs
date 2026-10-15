@@ -10,9 +10,16 @@ mod library_codec;
 #[cfg(all(test, feature = "dx12-pipeline-library", target_os = "windows"))]
 #[path = "../../../../third_party/wgpu-hal/src/dx12/library_backing.rs"]
 mod native_backing_control;
+#[cfg(all(test, feature = "dx12-pipeline-library", target_os = "windows"))]
+#[path = "../../../../third_party/wgpu-hal/src/dx12/library_key.rs"]
+mod native_descriptor_control;
 #[cfg(all(test, feature = "dx12-pipeline-library"))]
 #[path = "../../../../third_party/wgpu-hal/src/pipeline_library_key.rs"]
-mod native_key_control;
+pub(crate) mod native_key_control;
+#[cfg(all(test, feature = "dx12-pipeline-library", target_os = "windows"))]
+mod pipeline_desc {
+    pub use wgpu_hal::dx12::pipeline_library::RenderPipelineStateStreamDesc;
+}
 #[cfg(all(feature = "dx12-pipeline-library", target_os = "windows"))]
 mod windows_private;
 #[cfg(all(feature = "dx12-pipeline-library", target_os = "windows"))]

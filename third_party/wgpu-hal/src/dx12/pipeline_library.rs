@@ -1,7 +1,10 @@
 //! Opt-in host-owned D3D12 pipeline libraries, not wgpu PipelineCache.
 //! No storage I/O here. The host admits native bytes and explicitly serializes
 //! after successful cold catalog preparation. All same-name loads are locked.
-use super::{library_backing, library_key, pipeline_desc::RenderPipelineStateStreamDesc};
+use super::{library_backing, library_key};
+// Type-only diagnostic seam: workspace tests include the exact native key
+// implementation against its real descriptor, rather than a copied stand-in.
+pub use super::pipeline_desc::RenderPipelineStateStreamDesc;
 use alloc::{format, string::String, sync::Arc, vec::Vec};
 use core::mem::size_of;
 use parking_lot::Mutex;

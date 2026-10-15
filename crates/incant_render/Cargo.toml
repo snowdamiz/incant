@@ -106,3 +106,5 @@ windows-sys = { version = "=0.61.2", optional = true, features = ["Win32_Foundat
 # Include the exact HAL COM-owner controls in this workspace test target.
 # Already resolved by the HAL; no new dependency version or native compiler.
 windows-core = "=0.62.2"
+# Exact native descriptor/key controls; same already-resolved Windows bindings.
+windows = { version = "=0.62.2", features = ["Win32_Graphics_Direct3D12", "Win32_Graphics_Dxgi_Common"] }
