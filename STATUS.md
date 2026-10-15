@@ -39,7 +39,9 @@ cooked-native modes each pass 30 cache CPU controls, strict renderer/HAL lint an
 fresh-process `RequireHit` reuse of 41 initial/temporal render plus two compute
 pipelines, with zero additions/fallback. All ten native controls pass, including
 changed/empty/disabled refusal and invalid-cache recovery. Earlier failures are
-retained. No frame, performance, all-effects or per-level/asynchronous-prewarm
+retained. CPU007/GPU003 repeat that scope on the main353 composition, including the
+complete cooked aggregate; unchanged HAL lints are reused with byte/feature proof.
+No frame, performance, all-effects or per-level/asynchronous-prewarm
 claim follows. [Scope and portable evidence](docs/spikes/metal-binary-archives.md).
 
 ## Cooked MetalFX boundary — numerical Metal parity qualified

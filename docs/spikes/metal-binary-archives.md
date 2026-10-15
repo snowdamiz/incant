@@ -96,7 +96,7 @@ corruption resilience require care. This experimental route remains default-off;
 no cache-hit rate, frame-time improvement, native performance gate, or broader
 Apple-device acceptance is claimed.
 
-## Retained qualification
+## Original retained qualification
 
 The tested source is `d3b185d0ffad6ac389b7faaf7e443fa027c5755f`, incorporating
 main351 (`1581ef89`) through `200f570f`. The only merge conflict retained both
@@ -144,3 +144,38 @@ AO, bloom, vendor effects, mesh/tile descriptors, all per-level recorded keys,
 asynchronous fallback, other Apple devices, reference phones and shader-stall
 performance remain separate work. The native parser allocation/intermediate
 serialization and external-service accounting limitations above remain in force.
+
+## Main353 composition qualification
+
+The joined source `505d05e988eacc5a7e65a5b503193e97c00745d0` incorporates main353
+`f5eaae45`, retaining both archive identity generation and the complete MetalFX
+boundary cooker. CPU007 rebuilt and copied the ordinary and complete cooked
+binaries; each passed 30 cache controls and strict renderer lint. Both CPU006 HAL
+lints were reused after comparing all 94 HAL files, lock/config/tool identities
+and each 131-node resolved dependency/feature graph. All 51 owned CPU-process
+identities were independently confirmed absent.
+
+GPU003 repeated all ten controls in fresh processes on the same Apple M5 Pro and
+OS. Ordinary and cooked catalog reuse each reported 41 render and two compute
+strict successes, with zero additions/fallback/publication. Changed, empty and
+disabled refusal and native-invalid recovery passed again. All ten native
+processes and their supervisor were independently confirmed absent. The cooked
+feature set includes `cooked-metalfx-boundary`; these archive tests still prepare
+only the initial and optional temporal catalog, so they make no MetalFX boundary
+or vendor-scaler execution claim.
+
+The [composition manifest](evidence/metal-binary-archives-main353/manifest.json)
+adds 143 exact data records and 16 external artifact hashes, binding the unchanged
+original packet instead of replacing its history. Its data-only verifier checks
+the source composition, reused HAL proof, actual terminal outcomes, native
+strict-hit/refusal counters, cumulative GPU budget and both independent cleanup
+reviews. Eleven controls include changed HAL features and an attempted budget
+reset. Run `python3 docs/spikes/evidence/metal-binary-archives-main353/verify.py`;
+the same optional `--external-root` hashes retained native files without running
+them. No native build or frame is part of evidence verification.
+
+The original target and aggregate account were reused without resetting earlier
+failures or resource charges. GPU003's 4.002848500-second phase receipt leaves
+170.512519958 seconds of the original native-control allowance; these are resource
+records, not performance measurements. The default-off policy, catalog scope,
+native-parser/external-service limitations and all unpassed gates remain unchanged.
