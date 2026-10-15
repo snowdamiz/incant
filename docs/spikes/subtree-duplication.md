@@ -1,9 +1,11 @@
 # Atomic ordinary subtree duplication
 
 Source preparation from main312 `a74473ea796b1ac1a476496f776a70307be1313c`.
-This is Phase 2 backend overlap. No editor UI, release gate, or executed test
-result is claimed by this initial source packet. Generated command schemas and
-SDK types remain pending the separately allocated CPU qualification.
+This is qualified Phase 2 backend overlap, with no editor UI or phase-gate claim.
+The final code and generated contracts are frozen at
+`25b038a126c0afeab3b0b215b57b051fa3035d2a`. The portable
+[receipt](evidence/subtree-duplication/manifest.json) retains the initial source,
+both failed attempts, their narrow repairs, and the successful CPU checks.
 
 `DuplicateSubtree { scene_id, root_entity_id, entities }` uses the shared
 `incant_cmd` transaction. `entities` is an explicit source-to-target ULID map;
@@ -78,7 +80,7 @@ require a new reference audit. This detects schema drift, not semantic meaning
 from a string type alone. The runtime remapper also refuses an unreviewed new
 component kind rather than guessing that it contains no entity edges.
 
-## Qualification prepared, not yet executed
+## Qualification
 
 Source controls cover nested copies and provenance; exact internal/external audio
 and navigation remapping; literal script/graph values and omitted defaults; all
@@ -96,9 +98,46 @@ or shipped-runtime representation is introduced. Source inventory found only
 the command dispatcher is exhaustive; source-write, agent-budget and prefab
 preflight consumers already have explicit fallback arms.
 
-Planned qualification uses pinned Rust 1.99, arm64 CI, locked/offline, jobs 2 and
-Rayon 2 under a separately granted target lease. Run command/doc regressions,
-the new headless and cook controls, strict scoped all-target lint, then generate
-the actual Rust Command/agent schemas and TypeScript SDK and check freshness.
-Retain the first failure and its producing source before any repair. No native
-window, GPU or performance run is needed for this slice.
+Pinned Rust 1.99, arm64 CI, locked/offline, jobs 2 and Rayon 2 qualification passed
+133 distinct Rust tests: 99 command, 28 document, four actual headless RPC, and
+two cook/native-world controls. Passing command/doc cases from earlier attempts
+were retained; only affected or previously unexecuted suites were resumed.
+Strict all-target Clippy for command/doc/headless/cook, workspace formatting,
+conventions, diff checks, generated SDK freshness and strict TypeScript consumer
+controls also passed. This is scoped CPU evidence, not a full-workspace CI result.
+
+The copied headless executable generated 78 schema files. Exactly five changed:
+Command, EnginePinReview, ProjectFileResponse, ProjectPinReview and agent-tools.
+All other generated schema bytes remained equal. The generated SDK exposes the
+same command; consumer controls reject an omitted map, numerical target IDs,
+implicit detachment and cross-scene destinations. Runtime validation remains
+responsible for exact subtree membership, valid ULIDs and bounds.
+
+Two failures remain in the evidence:
+
+- Source `2db6566d` compiled but its reference fixture placed a Collider under a
+  parent, violating the existing physics root restriction before copying. Source
+  `6053559e` changes that fixture to a valid mesh navigation source; the internal
+  and external reference assertions remain intact.
+- The live headless schema assertion then found that pinned Schemars ignored
+  `length(...)` on a map. Source `7422d13d` publishes explicit `minProperties: 1`
+  and `maxProperties: 1024`; the runtime checks and test assertion were unchanged.
+
+All managed children returned after cleanup. Cumulative supervisor execution was
+412.18 seconds; sampled target growth was 547,250,870 bytes and minimum sampled
+free storage was 89,226,092,544 bytes. The target lease was released after the
+final checks. No GPU, window, shipping performance or appearance run occurred.
+
+Replay without executing tests:
+
+```sh
+python3 -B docs/spikes/evidence/subtree-duplication/verify.py
+```
+
+`--originals`, `--binaries` and `--git-source` additionally check retained external
+receipts, copied executable bytes and immutable producing Git objects. The
+archive embeds 319 records, including all four source freezes, raw test outputs,
+the failed exported schema, actual generated contracts and resource receipts.
+The copied executables remain external. No STATUS or editor UI changes are part
+of this producer slice; final current-main integration remains the integrator's
+separate responsibility.
