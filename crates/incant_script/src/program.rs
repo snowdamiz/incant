@@ -73,6 +73,58 @@ impl SessionProgram {
         }
     }
 }
+#[cfg(all(test, feature = "compiler"))]
+mod provenance_tests {
+    use super::*;
+    #[test]
+    fn provenance_distinguishes_actual_bytecode_and_bound_props() {
+        use crate::{ScriptBindings, ScriptInstance, ScriptValue};
+        use incant_runtime::StableId;
+        use std::collections::BTreeMap;
+        let compile = |value| {
+            CompiledScript::compile(&format!(
+                "exports.default={{update({{log}}){{log.info({value})}}}}"
+            ))
+            .unwrap()
+        };
+        let a = SessionProgram::from(compile(1)).artifact_sha256().unwrap();
+        assert_eq!(
+            a,
+            SessionProgram::from(compile(1)).artifact_sha256().unwrap()
+        );
+        assert_ne!(
+            a,
+            SessionProgram::from(compile(2)).artifact_sha256().unwrap()
+        );
+        let bound = |value| {
+            let bindings = ScriptBindings::new(
+                [7; 32],
+                vec![StableId(101_u128.to_be_bytes())],
+                vec![ScriptInstance {
+                    entity: StableId(1_u128.to_be_bytes()),
+                    source: StableId(101_u128.to_be_bytes()),
+                    props: BTreeMap::from([("speed".into(), ScriptValue::Number(value))]),
+                }],
+            )
+            .unwrap();
+            CompiledScript::compile_project(
+                "bound-provenance",
+                "exports.default={sources:[]}",
+                bindings,
+            )
+            .unwrap()
+        };
+        let (one, two) = (bound(1.), bound(2.));
+        assert_eq!(
+            one.metadata().bytecode_sha256,
+            two.metadata().bytecode_sha256
+        );
+        assert_ne!(
+            SessionProgram::from(one).artifact_sha256(),
+            SessionProgram::from(two).artifact_sha256()
+        );
+    }
+}
 // One startup allocation keeps the session size independent of either VM's
 // private state. Tick dispatch creates no additional allocation or mutation path.
 pub(crate) enum SessionVm {

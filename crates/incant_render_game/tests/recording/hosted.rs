@@ -7,6 +7,8 @@ use incant_render_data::{
 use incant_render_game::{MaterialRecordingConsumer, NativeRenderHost, NativeRenderSettings};
 #[path = "animation.rs"]
 mod animation;
+#[path = "refresh.rs"]
+mod refresh;
 
 fn context() -> RecordingContext {
     RecordingContext {
