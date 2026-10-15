@@ -54,6 +54,8 @@ incant_audio_runtime = { workspace = true, features = ["scene"] }
 incant_assets = { path = "../incant_assets", default-features = false }
 incant_render = { path = "../incant_render", default-features = false }
 incant_render_authoring.workspace = true
+incant_render_data.workspace = true
+sha2.workspace = true
 base64 = "0.22"
 incant_render_game = { path = "../incant_render_game", default-features = false }
 incant_input.workspace = true
@@ -64,7 +66,6 @@ thiserror.workspace = true
 ulid.workspace = true
 
 [dev-dependencies]
-sha2.workspace = true
 tempfile = "3"
 
 [[test]]

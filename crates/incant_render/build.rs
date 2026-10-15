@@ -4,6 +4,12 @@ mod ambient_occlusion_source;
 #[cfg(feature = "cooked-bloom")]
 #[path = "src/bloom/source.rs"]
 mod bloom_source;
+#[cfg(feature = "dx12-pipeline-library")]
+#[path = "build/dx12_library_identity.rs"]
+mod dx12_library_identity;
+#[cfg(feature = "cooked-materials")]
+#[path = "src/material_prewarm/source.rs"]
+mod material_fallback_source;
 #[cfg(feature = "metal-binary-archives")]
 #[path = "build/metal_archive_identity.rs"]
 mod metal_archive_identity;
@@ -14,6 +20,25 @@ mod metalfx_source;
 #[path = "src/lighting/temporal_source.rs"]
 mod temporal_source;
 fn main() {
+    #[cfg(feature = "dx12-pipeline-library")]
+    dx12_library_identity::emit();
+    #[cfg(feature = "cooked-materials")]
+    if std::env::var("CARGO_CFG_TARGET_ARCH").as_deref() != Ok("wasm32") {
+        for path in [
+            "src/material_prewarm/source.rs",
+            "src/material_prewarm/fallback.wgsl",
+            "src/model_material.wgsl",
+        ] {
+            println!("cargo:rerun-if-changed={path}");
+        }
+        let source = material_fallback_source::fallback().expect("fixed pending material source");
+        let bundle = incant_shader_cook::material_fallback::cook(&source)
+            .expect("fixed pending material ABI");
+        let output = std::path::PathBuf::from(std::env::var_os("OUT_DIR").unwrap())
+            .join("material-fallback-shaders");
+        incant_shader_cook::material_fallback::write_bundle(&bundle, &output)
+            .expect("write pending material family");
+    }
     #[cfg(feature = "metal-binary-archives")]
     metal_archive_identity::emit();
     #[cfg(feature = "cooked-metalfx-boundary")]

@@ -34,6 +34,29 @@ impl From<incant_wasm_runtime::ModuleExports> for SessionProgram {
     }
 }
 impl SessionProgram {
+    /// Cold data provenance for a prepared behavior. It never authorizes loading
+    /// executable bytes. Static modules lack a serialized artifact and refuse.
+    pub fn artifact_sha256(&self) -> Option<[u8; 32]> {
+        use sha2::{Digest, Sha256};
+        match self {
+            Self::Bytecode(script) => {
+                let metadata = script.metadata();
+                let mut hash = Sha256::new();
+                hash.update(b"Incant bytecode program provenance v1\0");
+                hash.update(metadata.bytecode_sha256);
+                hash.update(metadata.hardening_sha256);
+                hash.update([u8::from(metadata.bindings_sha256.is_some())]);
+                if let Some(bindings) = metadata.bindings_sha256 {
+                    hash.update(bindings);
+                }
+                Some(hash.finalize().into())
+            }
+            #[cfg(feature = "wasmtime-host")]
+            Self::DevelopmentWasm(bytes) => Some(Sha256::digest(bytes).into()),
+            #[cfg(feature = "static-module")]
+            Self::Static(_) => None,
+        }
+    }
     pub(crate) fn start(self, world: &NativeWorld) -> Result<SessionVm, SessionError> {
         match self {
             #[cfg(feature = "wasmtime-host")]
@@ -48,6 +71,58 @@ impl SessionProgram {
                 incant_wasm_runtime::StaticModule::new(module)?,
             ))),
         }
+    }
+}
+#[cfg(all(test, feature = "compiler"))]
+mod provenance_tests {
+    use super::*;
+    #[test]
+    fn provenance_distinguishes_actual_bytecode_and_bound_props() {
+        use crate::{ScriptBindings, ScriptInstance, ScriptValue};
+        use incant_runtime::StableId;
+        use std::collections::BTreeMap;
+        let compile = |value| {
+            CompiledScript::compile(&format!(
+                "exports.default={{update({{log}}){{log.info({value})}}}}"
+            ))
+            .unwrap()
+        };
+        let a = SessionProgram::from(compile(1)).artifact_sha256().unwrap();
+        assert_eq!(
+            a,
+            SessionProgram::from(compile(1)).artifact_sha256().unwrap()
+        );
+        assert_ne!(
+            a,
+            SessionProgram::from(compile(2)).artifact_sha256().unwrap()
+        );
+        let bound = |value| {
+            let bindings = ScriptBindings::new(
+                [7; 32],
+                vec![StableId(101_u128.to_be_bytes())],
+                vec![ScriptInstance {
+                    entity: StableId(1_u128.to_be_bytes()),
+                    source: StableId(101_u128.to_be_bytes()),
+                    props: BTreeMap::from([("speed".into(), ScriptValue::Number(value))]),
+                }],
+            )
+            .unwrap();
+            CompiledScript::compile_project(
+                "bound-provenance",
+                "exports.default={sources:[]}",
+                bindings,
+            )
+            .unwrap()
+        };
+        let (one, two) = (bound(1.), bound(2.));
+        assert_eq!(
+            one.metadata().bytecode_sha256,
+            two.metadata().bytecode_sha256
+        );
+        assert_ne!(
+            SessionProgram::from(one).artifact_sha256(),
+            SessionProgram::from(two).artifact_sha256()
+        );
     }
 }
 // One startup allocation keeps the session size independent of either VM's

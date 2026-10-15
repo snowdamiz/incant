@@ -1,0 +1,13 @@
+{
+  "schema": 1,
+  "data_file": "records.json.gz",
+  "compressed_bytes": 5381670,
+  "uncompressed_bytes": 35577862,
+  "sha256": "097a232a826507b7fffa1e3a1c71d8dde420abd3dd4e5b405cfc1d54db99b802",
+  "record_count": 169,
+  "external_patch_input_count": 6,
+  "external_artifact_count": 6,
+  "historical_GPU_packet_sha256": "2bd228140bee06e6b223c74cedfdc790558f6fab7a3a0bfd008ca1aa57c1ebad",
+  "native_artifacts_and_large_git_patches_remain_external": true,
+  "external_root": "/Users/andreyyurlov/.codex/incant-evidence"
+}

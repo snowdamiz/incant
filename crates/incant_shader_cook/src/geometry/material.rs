@@ -50,6 +50,7 @@ pub(crate) enum Variant {
     Ordinary,
     Prepass,
     Occlusion,
+    Fallback,
 }
 pub(super) fn validate(m: &naga::Module, info: &naga::valid::ModuleInfo) -> Result<()> {
     validate_variant(Variant::Ordinary, m, info)
@@ -138,7 +139,7 @@ pub(crate) fn validate_variant(
             "material output interface",
         )?;
         for (handle, g) in m.global_variables.iter() {
-            let fragment_used = variant != Variant::Prepass
+            let fragment_used = !matches!(variant, Variant::Prepass | Variant::Fallback)
                 || g.binding.is_some_and(|b| b.group == 1 && b.binding <= 2);
             let frame = g.binding
                 == Some(naga::ResourceBinding {
@@ -156,7 +157,7 @@ pub(crate) fn validate_variant(
         m.global_variables.len()
             == match variant {
                 Variant::Ordinary => 23,
-                Variant::Prepass => 16,
+                Variant::Prepass | Variant::Fallback => 16,
                 Variant::Occlusion => 24,
             },
         "material resource count",
@@ -286,7 +287,7 @@ pub(crate) fn validate_variant(
     // an explicit engine uniform because passthrough has no Naga reflection.
     require(
         storage
-            == if variant == Variant::Prepass {
+            == if matches!(variant, Variant::Prepass | Variant::Fallback) {
                 vec![]
             } else {
                 vec![(3, 1), (3, 2), (3, 3)]

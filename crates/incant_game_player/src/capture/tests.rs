@@ -123,6 +123,42 @@ fn feature_and_route_admission_precede_output_or_package_setup() {
     }
 }
 
+#[cfg(feature = "frame-capture")]
+#[test]
+fn actual_player_rejects_material_modes_before_splitters_can_hide_them() {
+    let root = tempfile::tempdir().unwrap();
+    let frames = root.path().join("frames");
+    let material = root.path().join("material.json");
+    let sentinel = b"existing untrusted material data";
+    std::fs::write(&material, sentinel).unwrap();
+    let mut capture = flags("0", "640x480");
+    capture[1] = frames.to_str().unwrap().into();
+    for option in ["--record-materials", "--prewarm-materials"] {
+        for material_first in [false, true] {
+            let material_args = vec![option.into(), material.to_str().unwrap().into()];
+            let mut args = vec![
+                "--package".into(),
+                root.path().join("missing-package").to_str().unwrap().into(),
+            ];
+            let groups = if material_first {
+                [&material_args, &capture]
+            } else {
+                [&capture, &material_args]
+            };
+            args.extend(groups.into_iter().flatten().cloned());
+            let error = crate::run(args, |_| panic!("no completed report")).unwrap_err();
+            assert_eq!(
+                error.to_string(),
+                "selected-frame capture requires the offline bytecode CPU spatial route without checkpoints",
+                "{option}, material_first={material_first}"
+            );
+            assert!(!frames.exists());
+            assert_eq!(std::fs::read(&material).unwrap(), sentinel);
+            assert_eq!(std::fs::read_dir(root.path()).unwrap().count(), 1);
+        }
+    }
+}
+
 #[test]
 fn create_only_publication_retains_partial_and_latches_failures() {
     let root = tempfile::tempdir().unwrap();

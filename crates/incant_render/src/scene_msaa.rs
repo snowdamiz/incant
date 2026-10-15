@@ -130,6 +130,7 @@ impl crate::Renderer {
             surface,
             false,
             SceneMsaa::try_from(samples)?,
+            None,
             #[cfg(all(feature = "native-compilation", target_os = "macos"))]
             None,
             #[cfg(all(
@@ -138,6 +139,8 @@ impl crate::Renderer {
                 target_os = "macos"
             ))]
             wgpu_hal::metal::binary_archive::Mode::Capture,
+            #[cfg(all(feature = "dx12-pipeline-library", target_os = "windows"))]
+            Default::default(),
         )
         .await
     }
@@ -153,6 +156,7 @@ impl crate::Renderer {
             surface,
             true,
             SceneMsaa::try_from(samples)?,
+            None,
             #[cfg(all(feature = "native-compilation", target_os = "macos"))]
             None,
             #[cfg(all(
@@ -161,6 +165,8 @@ impl crate::Renderer {
                 target_os = "macos"
             ))]
             wgpu_hal::metal::binary_archive::Mode::Capture,
+            #[cfg(all(feature = "dx12-pipeline-library", target_os = "windows"))]
+            Default::default(),
         )
         .await
     }
@@ -171,6 +177,6 @@ impl crate::Renderer {
 #[cfg(test)]
 mod device_tests;
 #[cfg(test)]
-mod fixture;
+pub(crate) mod fixture;
 #[cfg(test)]
 mod tests;

@@ -12,6 +12,7 @@ mod capture;
 mod checkpoint;
 #[cfg(feature = "render-gpu")]
 mod gpu;
+mod materials;
 #[cfg(feature = "mobile-ffi")]
 pub mod mobile;
 #[cfg(feature = "mobile-android")]
@@ -75,6 +76,7 @@ fn run_owned(
 ) -> Result<(), Box<dyn std::error::Error>> {
     let (args, profile) = profile::split(args, standalone)?;
     let (args, capture_options) = capture::Options::split(args)?;
+    let (args, materials) = materials::Options::split(args)?;
     let (args, checkpoint) = checkpoint::Options::split(args)?;
     let args = package::expand(args)?;
     if args.as_slice() == ["--build-info"] {
@@ -148,11 +150,8 @@ fn run_owned(
     if spatial.is_none() && (!scene.spatial().is_empty() || !scene.visual_assets().is_empty()) {
         return Err("this game player has no spatial host".into());
     }
-    let replay = InputReplay::from_text(
-        std::str::from_utf8(&bounded(&args[3], incant_input::MAX_RECORDING_BYTES)?)?,
-        0,
-        scene.tick_rate(),
-    )?;
+    let input_bytes = bounded(&args[3], incant_input::MAX_RECORDING_BYTES)?;
+    let replay = InputReplay::from_text(std::str::from_utf8(&input_bytes)?, 0, scene.tick_rate())?;
     session::validate_ui_settings(&spatial, replay.has_ui())?;
     if ticks > replay.end_tick() {
         return Err("recording does not cover requested ticks".into());
@@ -166,6 +165,7 @@ fn run_owned(
             "selected-frame capture currently supports build-linked bytecode programs only".into(),
         );
     }
+    let spatial = materials.configure(spatial, &scene, &program, &input_bytes)?;
     let mut restart = restart::Restart::prepare(&scene, &program, &actions, &clips, &spatial)?;
     let mut game = if let Some(path) = &checkpoint.load {
         Player::from_checkpoint(
@@ -288,6 +288,7 @@ fn run_owned(
     if let Some(captures) = &captures {
         report["frame_capture"] = captures.report();
     }
+    let material_manifest = game.material_manifest()?;
     let save = if checkpoint.save.is_some() {
         if !passed {
             emit(&report.to_string());
@@ -297,9 +298,19 @@ fn run_owned(
     } else {
         None
     };
+    if let Some(closed) = game.finish_materials()? {
+        report["material_prewarm_close"] = closed;
+    }
+    if materials.record.is_some() && !passed {
+        emit(&report.to_string());
+        return Err("material manifest withheld: native observation assertions failed".into());
+    }
     pcm.publish(std::path::Path::new(&args[7]))?;
     if let (Some(path), Some(bytes)) = (&checkpoint.save, save) {
         checkpoint::publish(std::path::Path::new(path), &bytes)?;
+    }
+    if let Some(recording) = materials.publish(material_manifest.as_ref())? {
+        report["material_recording"] = recording;
     }
     #[cfg(feature = "frame-capture")]
     if passed && let Some(captures) = captures {

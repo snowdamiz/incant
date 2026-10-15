@@ -1,6 +1,7 @@
 //! Bounded offscreen proof target, never a surface or screenshot interface. The
 //! real retained GPU consumer submits every accepted tick; only first/final
 //! frames are read back for numerical evidence. No second renderer is created.
+mod recorded;
 use crate::session::{Result, input_report};
 use incant_assets_runtime::sha256;
 use incant_audio_runtime::ClipBinding;
@@ -11,6 +12,7 @@ use incant_render_game::{NativeRenderHost, NativeRenderSettings};
 use incant_render_gpu_host::{GpuRenderConsumer, GpuRenderSettings, RenderFrame, TargetProvider};
 use incant_runtime::CookedScene;
 use incant_script::SessionProgram;
+pub(crate) use recorded::Session as RecordedSession;
 use std::sync::{Arc, Mutex};
 use std::time::Duration;
 const WIDTH: u32 = 160;
