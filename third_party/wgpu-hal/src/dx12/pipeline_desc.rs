@@ -166,6 +166,20 @@ impl<'a> RenderPipelineStateStream<'a> {
         // of the stream. Other unsafety invariants are upheld by the caller.
         unsafe { device.CreatePipelineState(&stream_desc) }
     }
+
+    /// Same borrowed stream/bytecode validity contract as native creation.
+    #[cfg(feature = "dx12-pipeline-library")]
+    pub(super) unsafe fn load_pipeline_state(
+        &mut self,
+        library: &ID3D12PipelineLibrary1,
+        name: windows_core::PCWSTR,
+    ) -> windows::core::Result<ID3D12PipelineState> {
+        let descriptor = D3D12_PIPELINE_STATE_STREAM_DESC {
+            SizeInBytes: self.bytes.len(),
+            pPipelineStateSubobjectStream: self.bytes.as_mut_ptr().cast(),
+        };
+        unsafe { library.LoadPipeline(name, &descriptor) }
+    }
 }
 
 #[repr(C)]
@@ -198,7 +212,7 @@ pub struct RenderPipelineStateStreamDesc<'a> {
 }
 
 impl RenderPipelineStateStreamDesc<'_> {
-    pub fn to_stream(&self) -> RenderPipelineStateStream<'_> {
+    pub(super) fn to_stream(&self) -> RenderPipelineStateStream<'_> {
         let mut stream = RenderPipelineStateStream::new();
 
         // Importantly here, the ID3D12RootSignature _itself_ is the pointer we're
