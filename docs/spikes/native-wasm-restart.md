@@ -11,7 +11,7 @@ refuse requests unless that owner enables them. Calls use the current tick epoch
 share the structural-command quota, and coalesce into one pending request. A
 request does not interrupt its callback or replace the current world. Publication
 requires accepted script/world changes and, for composed sessions, audio and
-consumer acceptance. An accepted failure makes the session terminal and hides
+consumer acceptance. A rejected tick makes the session terminal and hides
 the request. An unconsumed request survives subsequent successful ticks until
 the owner takes it. Successful development reload preserves the owner's opt-in
 but clears pending requests and starts a new guest instance; it does not replay
@@ -25,7 +25,7 @@ before using the ordinary constructors. It creates a fresh VM and world identity
 and resets simulation, input and offline audio clocks. It does not copy live
 capabilities or replay earlier side effects. The ordinary plain and CPU-rendered
 player owners now retain Wasm seeds; their host-step/generation/output chronology
-continues across replacement. Recording and offscreen GPU owners remain refused.
+continues across replacement. Scene-recording and offscreen GPU owners remain refused.
 
 Local qualification on 2026-10-15 used the `ci` profile on
 `aarch64-apple-darwin`, Rust 1.99.0 and WABT 1.0.42. The tested producer is
