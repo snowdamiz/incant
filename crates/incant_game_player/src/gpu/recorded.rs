@@ -143,7 +143,7 @@ impl Session {
             cooked_scene_sha256: Sha256::digest(scene.to_bytes()).into(),
             ticks,
         };
-        let inner = HostedOfflineGameSession::new(
+        let inner: Game = HostedOfflineGameSession::new(
             scene,
             script,
             actions,
