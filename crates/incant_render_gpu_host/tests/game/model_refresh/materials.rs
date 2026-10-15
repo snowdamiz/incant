@@ -1,7 +1,6 @@
 //! Numerical existing-model material publication. No native-window/appearance gate.
 use super::*;
-#[path = "../../../../incant_render_native/tests/common/model_refresh.rs"]
-mod fixture;
+use crate::animated_refresh::fixture::images as fixture;
 #[path = "../../../../incant_render_native/tests/common/material_refresh.rs"]
 #[allow(dead_code)] // Shared writer also exposes reorder/default CPU-only cases.
 mod material_fixture;

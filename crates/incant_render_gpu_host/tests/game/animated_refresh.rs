@@ -2,7 +2,7 @@
 //! separately exercised by the CPU Play/import/Undo/Redo control.
 use super::*;
 #[path = "../../../incant_render_native/tests/common/animated_refresh.rs"]
-mod fixture;
+pub(super) mod fixture;
 use fixture::{Change, key, reference};
 use incant_assets_runtime::animation::AnimationPlayer;
 use incant_audio_runtime::{AudioManagerSettings, OfflineBackend};

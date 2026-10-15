@@ -1,7 +1,7 @@
 //! Real bounded glTF/skin/PNG inputs shared by native and Play controls.
 #![allow(dead_code)] // Each executable uses a different subset of this fixture.
 #[path = "model_refresh.rs"]
-mod images;
+pub(crate) mod images;
 #[path = "../../../incant_assets/tests/skeletal/fixture.rs"]
 mod skeletal;
 #[allow(unused_imports)] // Executables use different subsets of the shared fixture API.
