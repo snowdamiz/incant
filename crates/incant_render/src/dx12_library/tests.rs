@@ -138,6 +138,7 @@ fn dx12_library_native_stage() {
         None,
         false,
         SceneMsaa::One,
+        None,
         pipeline_cache::dx12::Options {
             config: Config {
                 mode: if strict {

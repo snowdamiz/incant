@@ -68,7 +68,7 @@ pub(crate) fn build(
 #[cfg(all(feature = "cooked-materials", not(target_arch = "wasm32")))]
 #[path = "material_shader.rs"]
 mod cooked;
-#[cfg(all(feature = "cooked-ssao", not(target_arch = "wasm32")))]
+#[cfg(all(feature = "cooked-materials", not(target_arch = "wasm32")))]
 pub(crate) use cooked::validate_host as validate_cooked_host;
 
 pub(crate) fn shader(

@@ -12,6 +12,7 @@ impl crate::Renderer {
             None,
             false,
             crate::SceneMsaa::One,
+            None,
             crate::pipeline_cache::dx12::Options {
                 config: wgpu_hal::dx12::pipeline_library::Config {
                     mode: wgpu_hal::dx12::pipeline_library::Mode::RequireHits,

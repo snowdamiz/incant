@@ -29,6 +29,7 @@ mod graph;
 mod hdr_output;
 mod lighting;
 mod material_pipeline;
+pub mod material_prewarm;
 mod materials;
 #[cfg(all(
     feature = "metal-binary-archives",
@@ -163,6 +164,7 @@ impl Renderer {
             surface,
             false,
             SceneMsaa::One,
+            None,
             #[cfg(all(feature = "native-compilation", target_os = "macos"))]
             None,
             #[cfg(all(
@@ -188,6 +190,7 @@ impl Renderer {
             surface,
             true,
             SceneMsaa::One,
+            None,
             #[cfg(all(feature = "native-compilation", target_os = "macos"))]
             None,
             #[cfg(all(
@@ -206,6 +209,7 @@ impl Renderer {
         surface: Option<&wgpu::Surface<'_>>,
         gpu_timing: bool,
         scene_msaa: SceneMsaa,
+        recorded_materials: Option<incant_render_data::prewarm::AdmittedMaterials>,
         #[cfg(all(feature = "native-compilation", target_os = "macos"))] compilation: Option<
             &mut compilation::Capture,
         >,
@@ -244,9 +248,12 @@ impl Renderer {
         // Attach before any renderer catalog work. The caller owns this handle,
         // so partial startup failures remain observable after this future returns.
         #[cfg(all(feature = "native-compilation", target_os = "macos"))]
-        let _compilation_scope = compilation
-            .map(|capture| capture.attach(&device))
-            .transpose()?;
+        let (_compilation_scope, compilation_observer) = if let Some(capture) = compilation {
+            let scope = capture.attach(&device)?;
+            (Some(scope), capture.observer())
+        } else {
+            (None, None)
+        };
         let device_lost = std::sync::Arc::new(std::sync::atomic::AtomicBool::new(false));
         let lost = std::sync::Arc::clone(&device_lost);
         device.set_device_lost_callback(move |_, _| {
@@ -290,7 +297,12 @@ impl Renderer {
             &lighting.layout,
             adapter.get_info().backend,
             cache,
-            scene_msaa,
+            materials::Preparation {
+                samples: scene_msaa,
+                recorded: recorded_materials,
+                #[cfg(all(feature = "native-compilation", target_os = "macos"))]
+                compilation: compilation_observer,
+            },
         )?;
         let shadows = shadows::ShadowSystem::new(
             &device,

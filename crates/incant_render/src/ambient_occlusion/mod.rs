@@ -46,6 +46,7 @@ impl crate::Renderer {
         &mut self,
         settings: AmbientOcclusion,
     ) -> crate::Result<()> {
+        self.materials.require_eager()?;
         self.scene_msaa.validate_ao(true)?;
         settings.validate()?;
         shader::admit()?;

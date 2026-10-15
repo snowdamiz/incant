@@ -13,6 +13,7 @@ impl crate::Renderer {
             false,
             crate::SceneMsaa::One,
             None,
+            None,
             wgpu_hal::metal::binary_archive::Mode::RequireHit,
         )
         .await

@@ -72,6 +72,20 @@ are untouched; approvals, durable budgets, command history and Undo remain share
 independent source review. These are synthetic HTTP results, not live-model
 compatibility or quality evidence. Editor selection and broader provider support
 remain open. [Scope and verification](docs/spikes/local-responses-provider.md).
+## Recorded model-material preparation — scoped CPU and Metal qualification
+
+The opt-in ModelMaterialV1 route now records actual CPU gameplay keys, admits a
+bounded content-bound level manifest, prewarms recorded keys and publishes missing
+keys from one owned worker while frames select an alpha/depth/coverage-preserving
+fallback. Eager preparation remains the default; unsupported effects refuse.
+On the main358 composition, 28 CPU controls, both strict ordinary/cooked lints and
+six offscreen Metal controls pass. All 30 ordinary/cooked image pairs are
+byte-identical; representative actual PNGs were reviewed. Source-free fresh
+processes exercise recording, changed mirror input, fallback and cold close.
+Seven earlier CPU failures remain retained. Native-window, arbitrary-scene,
+driver-stall and shipping performance gates remain open. Other-device execution
+remains deferred.
+[Contract, usage and portable evidence](docs/spikes/recorded-material-prewarm.md).
 
 ## Bounded agent response reads — locally verified
 
