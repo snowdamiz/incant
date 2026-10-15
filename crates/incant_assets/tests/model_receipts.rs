@@ -1,4 +1,5 @@
 #[path = "skeletal/fixture.rs"]
+#[allow(dead_code)] // The shared fixture also exposes a rewrite helper.
 mod fixture;
 use incant_assets_runtime::RuntimeAsset;
 use sha2::{Digest, Sha256};

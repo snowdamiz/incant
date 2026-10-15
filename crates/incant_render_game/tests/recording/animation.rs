@@ -2,7 +2,7 @@
 mod fixture;
 use incant_assets_runtime::RuntimeAsset;
 use incant_render_data::{MeshInput, SceneInput, SceneNode, prewarm::MaterialRecorder};
-use incant_types::{AnimationSample, Camera};
+use incant_types::AnimationSample;
 use std::{path::Path, sync::Arc};
 
 fn input(rigid: bool, mixed_skin: bool) -> (SceneInput, tempfile::TempDir) {
@@ -42,7 +42,7 @@ fn input(rigid: bool, mixed_skin: bool) -> (SceneInput, tempfile::TempDir) {
         animation_root: None,
     });
     let mut camera = node("camera");
-    camera.camera = Some(Camera::default());
+    camera.camera = Some(super::super::camera());
     (
         SceneInput {
             nodes: vec![model, camera],

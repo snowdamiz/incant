@@ -20,7 +20,7 @@ fn published_material_tables_update_keys_and_receipts_without_inventing_ticks() 
         cast_shadows: false,
     });
     let mut camera = CookedSpatial::empty(id(2));
-    camera.camera = Some(Default::default());
+    camera.camera = Some(super::super::camera());
     let world = NativeWorld::new(
         CookedScene::new(
             id(99),

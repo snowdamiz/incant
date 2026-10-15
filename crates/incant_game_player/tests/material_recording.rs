@@ -44,7 +44,12 @@ fn fixture(root: &Path) {
         cast_shadows: false,
     });
     let mut camera = CookedSpatial::empty(id(2));
-    camera.camera = Some(Camera::default());
+    camera.camera = Some(Camera {
+        near: 0.1,
+        far: 100.,
+        fov_degrees: 60.,
+        projection: incant_types::CameraProjection::Perspective {},
+    });
     let scene = CookedScene::new(
         id(99),
         60,
