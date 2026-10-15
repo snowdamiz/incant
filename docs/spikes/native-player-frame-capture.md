@@ -142,3 +142,9 @@ python3 docs/spikes/evidence/native-player-frame-capture-integration/verify.py
 python3 docs/spikes/evidence/native-player-frame-capture-integration/verify.py \
   --originals --binaries --git-source 7328884b
 ```
+
+The main365 integration preserves all capture, player and production renderer
+source from that qualified composition. Its additional code changes are confined
+to the independently checked DX12 library diagnostic assertion and Python probe.
+The saved-byte verifier was replayed against the original producing Git source;
+no additional native execution or broader qualification is inferred from the join.
