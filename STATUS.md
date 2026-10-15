@@ -31,6 +31,13 @@ verdict. The earlier timeout and 1,444-step failure remain recorded; shader-stal
 qualification and full rendered-game performance remain open.
 [Fresh build and complete replay](docs/spikes/native-presentation-audio.md).
 
+The separate default-off compilation observer now records native library and
+pipeline creation with immutable session, surface, host-step and phase context.
+Bounded CPU qualification passes for the collector, renderer binding and native
+host, with strict lint in enabled and ordinary modes. Its combined shipping build
+and live replay are still pending; these controls do not establish shader-stall
+or displayed-frame performance. [Implementation and retained failures](docs/spikes/native-compilation-observer.md).
+
 ## Device audio overrun handling — merged main303
 
 The audio host now counts typed overrun notifications without replacing the

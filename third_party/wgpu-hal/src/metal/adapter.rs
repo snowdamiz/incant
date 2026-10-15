@@ -96,6 +96,8 @@ impl crate::Adapter for super::Adapter {
 
         Ok(crate::OpenDevice {
             device: super::Device {
+                #[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
+                compilation_observer: Default::default(),
                 shared: Arc::clone(&self.shared),
                 features,
                 counters: Default::default(),

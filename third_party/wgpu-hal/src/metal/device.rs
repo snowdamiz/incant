@@ -24,6 +24,8 @@ use objc2_metal::{
     MTLVertexStepFunction,
 };
 
+#[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
+use super::compilation::{Kind as CompilationKind, Stage as CompilationStage};
 use super::{conv, PassthroughShader, ShaderModuleSource};
 use crate::{auxil::map_naga_stage, TlasInstance};
 
@@ -232,17 +234,35 @@ impl super::Device {
                     options.setPreserveInvariance(true);
                 }
 
-                let library = self
-                    .shared
-                    .device
-                    .newLibraryWithSource_options_error(
-                        &NSString::from_str(&source),
-                        Some(&options),
-                    )
-                    .map_err(|err| {
-                        log::debug!("Naga generated shader:\n{source}");
-                        crate::PipelineError::Linkage(stage_bit, format!("Metal: {err}"))
-                    })?;
+                let library = {
+                    let native_source = NSString::from_str(&source);
+                    #[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
+                    let observation = self.compilation_observer.begin(
+                        CompilationKind::NagaLibrary,
+                        match naga_stage {
+                            naga::ShaderStage::Vertex => CompilationStage::Vertex,
+                            naga::ShaderStage::Fragment => CompilationStage::Fragment,
+                            naga::ShaderStage::Compute => CompilationStage::Compute,
+                            naga::ShaderStage::Task => CompilationStage::Task,
+                            naga::ShaderStage::Mesh => CompilationStage::Mesh,
+                            naga::ShaderStage::RayGeneration => CompilationStage::RayGeneration,
+                            naga::ShaderStage::Miss => CompilationStage::Miss,
+                            naga::ShaderStage::AnyHit => CompilationStage::AnyHit,
+                            naga::ShaderStage::ClosestHit => CompilationStage::ClosestHit,
+                        },
+                    );
+                    let result = self
+                        .shared
+                        .device
+                        .newLibraryWithSource_options_error(&native_source, Some(&options));
+                    #[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
+                    observation.finish_native(&result);
+                    result
+                };
+                let library = library.map_err(|err| {
+                    log::debug!("Naga generated shader:\n{source}");
+                    crate::PipelineError::Linkage(stage_bit, format!("Metal: {err}"))
+                })?;
 
                 let ep_index = module
                     .entry_points
@@ -380,6 +400,8 @@ impl super::Device {
         let capabilities_query = super::CapabilitiesQuery::new(&raw);
         let shared = super::AdapterShared::new(raw, &capabilities_query);
         super::Device {
+            #[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
+            compilation_observer: Default::default(),
             shared: Arc::new(shared),
             features,
             counters: Default::default(),
@@ -1157,6 +1179,8 @@ impl crate::Device for super::Device {
                 let library = super::library_from_metallib::new_library_from_metallib_bytes(
                     &self.shared.device,
                     file,
+                    #[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
+                    &self.compilation_observer,
                 )
                 .map_err(|e| crate::ShaderError::Compilation(format!("Metallib: {e:?}")))?;
                 Ok(super::ShaderModule {
@@ -1175,9 +1199,20 @@ impl crate::Device for super::Device {
                 let options = MTLCompileOptions::new();
                 // Obtain the device from shared
                 let device = &self.shared.device;
-                let library = device
-                    .newLibraryWithSource_options_error(&NSString::from_str(source), Some(&options))
-                    .map_err(|e| crate::ShaderError::Compilation(format!("MSL: {e:?}")))?;
+                let library = {
+                    let native_source = NSString::from_str(source);
+                    #[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
+                    let observation = self
+                        .compilation_observer
+                        .begin(CompilationKind::MslLibrary, CompilationStage::Unspecified);
+                    let result =
+                        device.newLibraryWithSource_options_error(&native_source, Some(&options));
+                    #[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
+                    observation.finish_native(&result);
+                    result
+                };
+                let library =
+                    library.map_err(|e| crate::ShaderError::Compilation(format!("MSL: {e:?}")))?;
 
                 Ok(super::ShaderModule {
                     source: ShaderModuleSource::Passthrough(PassthroughShader {
@@ -1621,18 +1656,37 @@ impl crate::Device for super::Device {
 
             // Create the pipeline from descriptor
             let raw = match descriptor {
-                MetalGenericRenderPipelineDescriptor::Standard(d) => self
-                    .shared
-                    .device
-                    .newRenderPipelineStateWithDescriptor_error(&d),
-                MetalGenericRenderPipelineDescriptor::Mesh(d) => self
-                    .shared
-                    .device
-                    .newRenderPipelineStateWithMeshDescriptor_options_reflection_error(
-                        &d,
-                        MTLPipelineOption::empty(),
-                        None,
-                    ),
+                MetalGenericRenderPipelineDescriptor::Standard(d) => {
+                    #[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
+                    let observation = self.compilation_observer.begin(
+                        CompilationKind::RenderPipeline,
+                        CompilationStage::Unspecified,
+                    );
+                    let result = self
+                        .shared
+                        .device
+                        .newRenderPipelineStateWithDescriptor_error(&d);
+                    #[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
+                    observation.finish_native(&result);
+                    result
+                }
+                MetalGenericRenderPipelineDescriptor::Mesh(d) => {
+                    #[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
+                    let observation = self
+                        .compilation_observer
+                        .begin(CompilationKind::MeshPipeline, CompilationStage::Unspecified);
+                    let result = self
+                        .shared
+                        .device
+                        .newRenderPipelineStateWithMeshDescriptor_options_reflection_error(
+                            &d,
+                            MTLPipelineOption::empty(),
+                            None,
+                        );
+                    #[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
+                    observation.finish_native(&result);
+                    result
+                }
             }
             .map_err(|e| {
                 crate::PipelineError::Linkage(
@@ -1730,6 +1784,10 @@ impl crate::Device for super::Device {
                 descriptor.setLabel(Some(&NSString::from_str(name)));
             }
 
+            #[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
+            let observation = self
+                .compilation_observer
+                .begin(CompilationKind::ComputePipeline, CompilationStage::Compute);
             let raw = self
                 .shared
                 .device
@@ -1738,6 +1796,9 @@ impl crate::Device for super::Device {
                     MTLPipelineOption::empty(),
                     None,
                 );
+
+            #[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
+            observation.finish_native(&raw);
 
             let raw: Retained<ProtocolObject<dyn MTLComputePipelineState>> =
                 raw.map_err(|e: Retained<NSError>| {
