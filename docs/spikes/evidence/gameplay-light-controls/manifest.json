@@ -1,0 +1,1277 @@
+{
+  "schema": 1,
+  "source": "11c1856dbcca0078c3fc8bb080e8a40d4aa37967",
+  "production_source": "730928381f86f751dc5d8ff0b69a39245d0d300f",
+  "base": "c4b688f91965da4385fd4984aee2ff9062d13b46",
+  "external_root": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001",
+  "archive_sha256": "2d1017101e8ad31d8eb7120032a8c45beb4fadb76614a5dc309df95a9fbcb621",
+  "records": [
+    {
+      "key": "cpu-closeout-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-closeout-001.json",
+      "bytes": 3485,
+      "sha256": "d746cfbefb6712742f2deac0c7f326ee9838fdd3a3dd8729c5560069f9c55676"
+    },
+    {
+      "key": "cpu-plan-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-plan-001.json",
+      "bytes": 10212,
+      "sha256": "0af9d8035ddefacf2681de31326b025b9c01e497df9eae0280ffb20cceafda33"
+    },
+    {
+      "key": "cpu-plan-002.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-plan-002.json",
+      "bytes": 9962,
+      "sha256": "863fbba3c38d5422cb4f5dd18902db46b78e797fbc9774d2f16a8a1adab0123f"
+    },
+    {
+      "key": "cpu-plan-003.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-plan-003.json",
+      "bytes": 10561,
+      "sha256": "a1be30b7281a3a4d8e08ddd785adc0ef50a9ffbe9dabe782c8f53051c20c93a4"
+    },
+    {
+      "key": "cpu-plan-004.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-plan-004.json",
+      "bytes": 9657,
+      "sha256": "1226e12621a6e3f918ced7664ec293e703d89e9fed7fe00180ab79d6d266fe72"
+    },
+    {
+      "key": "cpu-supervisor-001.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-supervisor-001.py",
+      "bytes": 7307,
+      "sha256": "36ccebb00a0c6fdc1808ddbc11e84de54e7df84f846a3cf37b74db9599e764be"
+    },
+    {
+      "key": "cpu-supervisor-002.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-supervisor-002.py",
+      "bytes": 7502,
+      "sha256": "3051a1c4a90af4118abef6f65b9db06cbac0d4ce5c4698f642e44c1de8cf14a6"
+    },
+    {
+      "key": "cpu-supervisor-003.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-supervisor-003.py",
+      "bytes": 7502,
+      "sha256": "61c372ac993bb244b38498e858e07ad785f92562f3b07d4ff79d5d55e5901a64"
+    },
+    {
+      "key": "cpu-supervisor-004.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-supervisor-004.py",
+      "bytes": 7502,
+      "sha256": "cf707b4a8e7e11e1e2bbf6da6b30508280069eeeeaff429f5d134daffcc1ec45"
+    },
+    {
+      "key": "cpu001-diagnosis.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu001-diagnosis.json",
+      "bytes": 1627,
+      "sha256": "2cbf668c33eec88a3fda0d43884ba8fcb6d0c8fae7c42ce3a5c3ddce265c1329"
+    },
+    {
+      "key": "cpu002-fixture-audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu002-fixture-audit.json",
+      "bytes": 1949,
+      "sha256": "0f5a85a15277cb494ba98dd7c3414a7b8223ea08d3d466f1307c1b53d39099db"
+    },
+    {
+      "key": "cpu003-label-diagnosis.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu003-label-diagnosis.json",
+      "bytes": 2008,
+      "sha256": "8f9a6cea7a955a50543eb9499b4d564a9e7db331d85e015d356189494abd03a7"
+    },
+    {
+      "key": "final-closeout-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/final-closeout-001.json",
+      "bytes": 1789,
+      "sha256": "6e001815500b7f602af35f868f83d02a2ace92ef55ce0bec9cbdba2b4ec35651"
+    },
+    {
+      "key": "freeze-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/freeze-001.json",
+      "bytes": 22237,
+      "sha256": "1e9de8f42a5ada0437a12daa545202699a1b964406651a4d67a5385802af2a34"
+    },
+    {
+      "key": "freeze-002.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/freeze-002.json",
+      "bytes": 22478,
+      "sha256": "c98d642c3db7b74a7d8877405946c6d083c5a239eb92cda450bb4bc7a5a67039"
+    },
+    {
+      "key": "freeze-003.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/freeze-003.json",
+      "bytes": 22847,
+      "sha256": "a30b4fd039f83a0d1442a573a6eb9a1a52ac315fa4ca2c96ae730050053cf5f5"
+    },
+    {
+      "key": "freeze-004.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/freeze-004.json",
+      "bytes": 22550,
+      "sha256": "f39c471bb46895e141ead12bbdc8b856cdb253ff541f5fecb33e404a3e69a6eb"
+    },
+    {
+      "key": "gpu-feature-audit-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/gpu-feature-audit-001.json",
+      "bytes": 1781,
+      "sha256": "921d1457581aab97d01f8dbdc84c7744c4a091240c48c75dd1b4d593e1ea79fe"
+    },
+    {
+      "key": "gpu-proposal-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/gpu-proposal-001.json",
+      "bytes": 2744,
+      "sha256": "f372ff755421cf20b38654243b44416b86ff1fd89ddcb8fb4ec44489f074b822"
+    },
+    {
+      "key": "gpu-supervisor-001.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/gpu-supervisor-001.py",
+      "bytes": 4272,
+      "sha256": "9e9c84d59e5c52d59151b060f82a611845a556a67d1f1b21a20dd39394b5e44d"
+    },
+    {
+      "key": "prepare-guests-001.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/prepare-guests-001.py",
+      "bytes": 3079,
+      "sha256": "a45594e8f3bdfedee20c9ba9fafb33648c243878b5249b92756d64b6c90be874"
+    },
+    {
+      "key": "prepare-guests-002.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/prepare-guests-002.py",
+      "bytes": 3079,
+      "sha256": "e7f00aa973c882cb2275d2d32ea51a45678c88bd1d1d6c56b9c1d402bafec7ed"
+    },
+    {
+      "key": "prepare-guests-003.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/prepare-guests-003.py",
+      "bytes": 3079,
+      "sha256": "c1bf529b47ea4b4489506129865a1bdf33c2018e2be541d9968edd2dc4f10bf8"
+    },
+    {
+      "key": "prepare-guests-004.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/prepare-guests-004.py",
+      "bytes": 3079,
+      "sha256": "5473ca2dea9ba5733c2cb2ff54c5da3dd19dc374bcd57623ef67f3e091850772"
+    },
+    {
+      "key": "pure-00.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/pure-00.log",
+      "bytes": 119,
+      "sha256": "57af5f12caff8e10451e0f14260ccf311827954ec9d0163d37405b0192627da6"
+    },
+    {
+      "key": "pure-01.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/pure-01.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "pure-02.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/pure-02.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "pure-03.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/pure-03.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "pure-results-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/pure-results-001.json",
+      "bytes": 1250,
+      "sha256": "911d8a20451995afad7bbc39658c8cf5f89adf2434150b80a3042cbeb4496410"
+    },
+    {
+      "key": "source-only-status-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-only-status-001.json",
+      "bytes": 1667,
+      "sha256": "b8383a942f4c91a1e09de85798ac4ada20f93a85ea517a890d1b996bb7718855"
+    },
+    {
+      "key": "cpu-001/results.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-001/results.json",
+      "bytes": 4472,
+      "sha256": "9b61210499d820f07346d30089fef91e06eaa094d02c2684925b9d85227cd455"
+    },
+    {
+      "key": "cpu-001/0.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-001/0.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "cpu-001/0.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-001/0.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "cpu-001/1.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-001/1.stderr.log",
+      "bytes": 1726,
+      "sha256": "67925ca72db3762cf24d74863f80a0ed4c57296ffb0eaa74db724f539d22717f"
+    },
+    {
+      "key": "cpu-001/1.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-001/1.stdout.log",
+      "bytes": 190774,
+      "sha256": "7e86c4f3b149853ec242ce112a523437ad2f4beec986935064136d712a16aef7"
+    },
+    {
+      "key": "cpu-001/2.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-001/2.stderr.log",
+      "bytes": 2061,
+      "sha256": "3eedcafb2b4b077279c3ce3bc93ff7477437f45b8e6496e6d4d23c824c366bfd"
+    },
+    {
+      "key": "cpu-001/2.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-001/2.stdout.log",
+      "bytes": 208360,
+      "sha256": "ad4e70aa681cad8517187284d4a7042fbd33f312b6517bfc26fd40f8279d0cba"
+    },
+    {
+      "key": "cpu-002/results.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-002/results.json",
+      "bytes": 3413,
+      "sha256": "37f6f4f938bf487375c989e17b6b95eadb074492e79aa0c9d7b505639fc089a0"
+    },
+    {
+      "key": "cpu-002/0.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-002/0.stderr.log",
+      "bytes": 316,
+      "sha256": "20d13b6dc1ccfedb779f3af4cfb83a57915f08f976dd739791d29589d4066b77"
+    },
+    {
+      "key": "cpu-002/0.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-002/0.stdout.log",
+      "bytes": 207786,
+      "sha256": "fd22834957900aac5f13b677e1b8b849353da2e79e837818bd0648c527d0605f"
+    },
+    {
+      "key": "cpu-002/1.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-002/1.stderr.log",
+      "bytes": 2824,
+      "sha256": "af51d71c2006adf9412e0f88c566e4023044261cb4676a2a3af8f01aaaab9650"
+    },
+    {
+      "key": "cpu-002/1.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-002/1.stdout.log",
+      "bytes": 271171,
+      "sha256": "0141a6cc467b9676c879b6f58cf159912ec0ccd0450e2ce3d192a2742d313e1b"
+    },
+    {
+      "key": "cpu-003/results.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-003/results.json",
+      "bytes": 5248,
+      "sha256": "99d99976e880f1b115551e3269f951d95d22c7f9f864c905ab65e1ae028df857"
+    },
+    {
+      "key": "cpu-003/0.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-003/0.stderr.log",
+      "bytes": 457,
+      "sha256": "1baab27e2dd4145733bb71af58e83eec08795d17ea520ab80ff92780c7f78a76"
+    },
+    {
+      "key": "cpu-003/0.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-003/0.stdout.log",
+      "bytes": 190762,
+      "sha256": "6fca765fad8ef1af3b9c0ac5a0e7e658b3713521bdf6a72c534bd0ed05d00a76"
+    },
+    {
+      "key": "cpu-003/1.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-003/1.stderr.log",
+      "bytes": 316,
+      "sha256": "067d10e000c285b415d28ab12d70d4f353cbd685655217317fe4fe7ac9da53b9"
+    },
+    {
+      "key": "cpu-003/1.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-003/1.stdout.log",
+      "bytes": 207786,
+      "sha256": "d355540ea836e10bca9a6f7fde29b773a9310394dc6c496b516d344b76725623"
+    },
+    {
+      "key": "cpu-003/2.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-003/2.stderr.log",
+      "bytes": 416,
+      "sha256": "725b52b865edbbb94af0f91db8373591fb6a712d9e482b34de51345ee7df1a66"
+    },
+    {
+      "key": "cpu-003/2.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-003/2.stdout.log",
+      "bytes": 271121,
+      "sha256": "463c11f9869d5cb718ad161eeb43127142aa79703dd8760c39cd63e5b24dd47a"
+    },
+    {
+      "key": "cpu-004/results.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-004/results.json",
+      "bytes": 13479,
+      "sha256": "a4ef1b9de90dceeb6f697a60b866bcbf87db3658e8c4df3d51da0bb2682d151f"
+    },
+    {
+      "key": "cpu-004/0.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-004/0.stderr.log",
+      "bytes": 474,
+      "sha256": "d25f5e291d5ead1b9bfb6124f6f0aebd1d9c714d712d9fe0ab4223e679a248db"
+    },
+    {
+      "key": "cpu-004/0.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-004/0.stdout.log",
+      "bytes": 271296,
+      "sha256": "bdf113f7ebac1b5132e099768f31ed7803ed00fdb2f3884ab8edf1461be92ea9"
+    },
+    {
+      "key": "cpu-004/1.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-004/1.stderr.log",
+      "bytes": 701,
+      "sha256": "30ca53db75fd5a4f5c0f5e1f995a0e5e3fc5d4c275f1d6de2ad5aed6d0f1e5f1"
+    },
+    {
+      "key": "cpu-004/1.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-004/1.stdout.log",
+      "bytes": 196755,
+      "sha256": "53a7a06b4f78879e06ebcfb2787031c8e8b38ba4c11e5748d6f090f402ecd153"
+    },
+    {
+      "key": "cpu-004/2.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-004/2.stderr.log",
+      "bytes": 1309,
+      "sha256": "08cb3a5f08f9bb569e13e31ca828596989dc8445d53997c18bfdfc4c3800520d"
+    },
+    {
+      "key": "cpu-004/2.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-004/2.stdout.log",
+      "bytes": 75661,
+      "sha256": "6822ccc429ae2d211c7f3e1f2192e617a97ce15c42c997e55735990774bd14ef"
+    },
+    {
+      "key": "cpu-004/3.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-004/3.stderr.log",
+      "bytes": 3230,
+      "sha256": "ed6a04e8b72fd3526ac02ba0a519cade486be8da991c820871edcb46175032dd"
+    },
+    {
+      "key": "cpu-004/3.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-004/3.stdout.log",
+      "bytes": 315849,
+      "sha256": "82f678724ded99d643f6489c8dbfb0d352b9f7d00611d2059f780614b63c0e73"
+    },
+    {
+      "key": "cpu-004/4.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-004/4.stderr.log",
+      "bytes": 4377,
+      "sha256": "6dbcacb6be678efb2c99771be6daa9135fd23198aaa2967d954f393099f6eaf1"
+    },
+    {
+      "key": "cpu-004/4.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-004/4.stdout.log",
+      "bytes": 391986,
+      "sha256": "22a93f547687d93bfd159f3e57b2cc792197a0a3439a3dcb89155482e96c24e1"
+    },
+    {
+      "key": "cpu-004/5.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-004/5.stderr.log",
+      "bytes": 416,
+      "sha256": "ba22d68491b664d60adafd49ace52b4ad765956a46934816ebbb135d2041d431"
+    },
+    {
+      "key": "cpu-004/5.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-004/5.stdout.log",
+      "bytes": 43013,
+      "sha256": "2a77c748bc57e5ebd6edd6b62433c8d8c0ee4201fd96a6b3680624b66d8cdd15"
+    },
+    {
+      "key": "cpu-004/6.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-004/6.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "cpu-004/6.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-004/6.stdout.log",
+      "bytes": 273,
+      "sha256": "f0252acdab7c541365b51ae3937419a9b9194017d8580117f838d2297e472607"
+    },
+    {
+      "key": "cpu-004/7.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-004/7.stderr.log",
+      "bytes": 6923,
+      "sha256": "48457be5ed989b7805519759ed12cd9b2e68a934817fd8b5feefe3eafd5a5baa"
+    },
+    {
+      "key": "cpu-004/7.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-004/7.stdout.log",
+      "bytes": 355974,
+      "sha256": "5c6b3f4fc6201d98ed6e55e25c25ec97da5bca9be54d56ea91d5af1391ce3a57"
+    },
+    {
+      "key": "cpu-004/8.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-004/8.stderr.log",
+      "bytes": 6845,
+      "sha256": "80d257d0e7f883297cf2b8c8824f750d253c54bfbf8eda1583a717137e7e2828"
+    },
+    {
+      "key": "cpu-004/8.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-004/8.stdout.log",
+      "bytes": 326506,
+      "sha256": "e785bed5ca6c7d50f8c542b9446e5fc5229652917276d939c1939ffbbd11c90a"
+    },
+    {
+      "key": "gpu-001/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/gpu-001/result.json",
+      "bytes": 1620,
+      "sha256": "5da51d20fcd3764e74731cf00c9c7146b20f677f891d5a06c4569536ba121f34"
+    },
+    {
+      "key": "gpu-001/stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/gpu-001/stderr.log",
+      "bytes": 282,
+      "sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef"
+    },
+    {
+      "key": "gpu-001/stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/gpu-001/stdout.log",
+      "bytes": 236,
+      "sha256": "e39f07bfcec6a21d684462d8bbd94a6952bf259660ed524667e64dcded51972c"
+    },
+    {
+      "key": "cpu-004/guest-inputs/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-004/guest-inputs/result.json",
+      "bytes": 4624,
+      "sha256": "9eabe86f0a3b896dbe7996836e0aed9c0096fc43dc29d421c99dd8b06875a660"
+    },
+    {
+      "key": "cpu-004/guest-inputs/rust-sdk.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-004/guest-inputs/rust-sdk.json",
+      "bytes": 3949,
+      "sha256": "207290924df46f9dc1468bf6f90c697d9dcf9b8c9dcbacf4eee73b450a4d9dab"
+    },
+    {
+      "key": "cpu-004/guest-inputs/sdk-light-controls.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-004/guest-inputs/sdk-light-controls.rs",
+      "bytes": 1741,
+      "sha256": "02ecbb2b27c65dce5e76ffa772f74e52c2fa5be43443183038c1633d3e8d520c"
+    },
+    {
+      "key": "cpu-004/guest-inputs/bundle/manifest.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-004/guest-inputs/bundle/manifest.json",
+      "bytes": 2841,
+      "sha256": "710f40cfa22678ce9e0d03c546aac39f5faad17c2e2f3cb69226f88f7b62d303"
+    },
+    {
+      "key": "reviews/source-independent.json",
+      "original": "/Users/andreyyurlov/.codex/incant-reviews/gameplay-light-controls-independent-20261015.json",
+      "bytes": 11979,
+      "sha256": "b84ae58e1cdc6ffff88271b1f7a8601ce58c3b226c251eb8b4064c53dc754784"
+    },
+    {
+      "key": "source/Cargo.lock",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/Cargo.lock",
+      "bytes": 253292,
+      "sha256": "e3bcd53fda70fbeb66f44c0b0ef8f1d4955a4a543193f32a389805b4d6054b5f",
+      "source_path": "Cargo.lock",
+      "code_input": true
+    },
+    {
+      "key": "source/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/Cargo.toml",
+      "bytes": 3956,
+      "sha256": "163606d4b9886c5d0f9bb6a4b67fca4823523b4024f17a689dc9bab719c314a7",
+      "source_path": "Cargo.toml",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/crates/incant_render/Cargo.toml",
+      "bytes": 3803,
+      "sha256": "6a678e2c5053d6c93d916e8c1618b9048559c80eb3923cd9ebcc42de528bd17c",
+      "source_path": "crates/incant_render/Cargo.toml",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/motion/owner.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/crates/incant_render/src/motion/owner.rs",
+      "bytes": 8438,
+      "sha256": "38ebec9d92355494ecd4125d1a2b810c16f63b6af23950ee3f146e54284a58ce",
+      "source_path": "crates/incant_render/src/motion/owner.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/motion/retained.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/crates/incant_render/src/motion/retained.rs",
+      "bytes": 24102,
+      "sha256": "72444c59f335f8aa50b3817403263164cc8a6286ff331ef642d6de751c2fc63f",
+      "source_path": "crates/incant_render/src/motion/retained.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/motion/tests.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/crates/incant_render/src/motion/tests.rs",
+      "bytes": 11664,
+      "sha256": "d180c887241780b310ff2454d8d0243b09700123980e8cecb964f457f3c229d5",
+      "source_path": "crates/incant_render/src/motion/tests.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/retained.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/crates/incant_render/src/retained.rs",
+      "bytes": 27376,
+      "sha256": "07df6804b2ea7d6bb80c81130ab97c9161f5e91c277fe22cb78651f5c2e843e2",
+      "source_path": "crates/incant_render/src/retained.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/retained_tests.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/crates/incant_render/src/retained_tests.rs",
+      "bytes": 15229,
+      "sha256": "c8aaa2eb178db0feb5ea2ab1265ac7c94feb43226ca2f9d115d657db9327b1ae",
+      "source_path": "crates/incant_render/src/retained_tests.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render_data/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/crates/incant_render_data/Cargo.toml",
+      "bytes": 430,
+      "sha256": "13df30475404a851540fc2bfbc82e100a57a66666a6ad429cf2f3d860cb2b18f",
+      "source_path": "crates/incant_render_data/Cargo.toml",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render_data/src/lib.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/crates/incant_render_data/src/lib.rs",
+      "bytes": 9512,
+      "sha256": "85dd1ec8f09f6fbdff0a0eefedf1a24c2ba5be25d758f2356283002efe70bd1e",
+      "source_path": "crates/incant_render_data/src/lib.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render_native/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/crates/incant_render_native/Cargo.toml",
+      "bytes": 1149,
+      "sha256": "f08748483c6555dce55b94b39b0b533e2454a2e6f54351b8f6c7112ff70e1d9f",
+      "source_path": "crates/incant_render_native/Cargo.toml",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render_native/src/binding.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/crates/incant_render_native/src/binding.rs",
+      "bytes": 10315,
+      "sha256": "5e16897927075a0961c64a51aa1b556d592eee2d1c096642192b2aa01a246c8a",
+      "source_path": "crates/incant_render_native/src/binding.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render_native/src/lib.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/crates/incant_render_native/src/lib.rs",
+      "bytes": 9508,
+      "sha256": "5451d981b8d8b54694550c1cf7ea5cc1ca735b191e2e344f472f1194363ae656",
+      "source_path": "crates/incant_render_native/src/lib.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render_native/src/texture_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/crates/incant_render_native/src/texture_refresh.rs",
+      "bytes": 15155,
+      "sha256": "ed4768b2c5782d5bf32339614e66353eb7660251a230fed83df49a8b500b5b84",
+      "source_path": "crates/incant_render_native/src/texture_refresh.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render_native/src/update.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/crates/incant_render_native/src/update.rs",
+      "bytes": 8898,
+      "sha256": "5e12573360aa027910a5e9046d2342ae668b14a83f70cb390d53c4c59c50b92a",
+      "source_path": "crates/incant_render_native/src/update.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render_native/tests/light_controls.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/crates/incant_render_native/tests/light_controls.rs",
+      "bytes": 2558,
+      "sha256": "eb6a6c75827652b0f76cf8abcae0e6a3441930b0b1c42860cd199e26b69b97d0",
+      "source_path": "crates/incant_render_native/tests/light_controls.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render_native/tests/texture_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/crates/incant_render_native/tests/texture_refresh.rs",
+      "bytes": 13693,
+      "sha256": "0f7ebe9673c539885f2db78240b88e1d596a6ddf6741b14d5e67ea10a8b7b7f1",
+      "source_path": "crates/incant_render_native/tests/texture_refresh.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_runtime/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/crates/incant_runtime/Cargo.toml",
+      "bytes": 1813,
+      "sha256": "36d73e9a83671d028462a65ae6785c1b008327db7603028e3d4e884b598a3a7a",
+      "source_path": "crates/incant_runtime/Cargo.toml",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_runtime/src/commands.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/crates/incant_runtime/src/commands.rs",
+      "bytes": 51569,
+      "sha256": "1f637ac5b6ceb7a76ef61ae06962692d85815b05161568d6af986a6460a59262",
+      "source_path": "crates/incant_runtime/src/commands.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_runtime/src/lib.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/crates/incant_runtime/src/lib.rs",
+      "bytes": 5300,
+      "sha256": "c92f835261d225f03ef92cc28209fe7b7c94813acfdbbe040dd8c7235895c283",
+      "source_path": "crates/incant_runtime/src/lib.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_runtime/src/light_controls.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/crates/incant_runtime/src/light_controls.rs",
+      "bytes": 5791,
+      "sha256": "f78b60af791a6d1a51d77b00fea9b1e68db0e5d5f9aa3eb617f5c124bda234ec",
+      "source_path": "crates/incant_runtime/src/light_controls.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_runtime/tests/light_controls.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/crates/incant_runtime/tests/light_controls.rs",
+      "bytes": 4580,
+      "sha256": "e096d8a6e5b61fa2a9b0850c41d4a2b0b3ab6681ec304027563ac12e281bc30f",
+      "source_path": "crates/incant_runtime/tests/light_controls.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_runtime/tests/support/lights.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/crates/incant_runtime/tests/support/lights.rs",
+      "bytes": 1747,
+      "sha256": "905089004c8cdca65933ff9e85ef0ab20e7fbb33ac845148cf606849b099fb15",
+      "source_path": "crates/incant_runtime/tests/support/lights.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_script/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/crates/incant_script/Cargo.toml",
+      "bytes": 3090,
+      "sha256": "027351abea66546349416007cada02b2b211e69e59ef3e62c551d743730a09f8",
+      "source_path": "crates/incant_script/Cargo.toml",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_script/build.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/crates/incant_script/build.rs",
+      "bytes": 8703,
+      "sha256": "37ab2d1647327a75651e1ff17e6b0f94956268eecdddacd81eee070a964d8da7",
+      "source_path": "crates/incant_script/build.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_script/src/commands.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/crates/incant_script/src/commands.rs",
+      "bytes": 13575,
+      "sha256": "4dae26edd181c8cd61ce19248b430fede51af2bb33a208d4b589367eaf497561",
+      "source_path": "crates/incant_script/src/commands.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_script/src/lib.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/crates/incant_script/src/lib.rs",
+      "bytes": 33876,
+      "sha256": "ab627651b3395b1172d7645e1a4a2c5e4e0efafab624551ac4ff00191a8464cd",
+      "source_path": "crates/incant_script/src/lib.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_script/src/light_commands.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/crates/incant_script/src/light_commands.rs",
+      "bytes": 1158,
+      "sha256": "b914a5d5ddb29930f6a63982d621b6974cc541fe4128269a247232e1bac82bd2",
+      "source_path": "crates/incant_script/src/light_commands.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_script/src/light_tests.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/crates/incant_script/src/light_tests.rs",
+      "bytes": 4582,
+      "sha256": "e6bed232d22b12eb3afe8f5c16157e7b5fd625a7d36b2e2749a341b22a4d43bf",
+      "source_path": "crates/incant_script/src/light_tests.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_wasm_abi/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/crates/incant_wasm_abi/Cargo.toml",
+      "bytes": 140,
+      "sha256": "c821e714ebc5e14c782656595d9ebe14044edddfcd746d94f70c7f6127c3a1f2",
+      "source_path": "crates/incant_wasm_abi/Cargo.toml",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_wasm_abi/src/lib.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/crates/incant_wasm_abi/src/lib.rs",
+      "bytes": 275916,
+      "sha256": "2d32a09626b8a77d556e0b8601e6e7ba23106a66eb85cc6b847c7d60c2ccc8bf",
+      "source_path": "crates/incant_wasm_abi/src/lib.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_wasm_abi/src/light.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/crates/incant_wasm_abi/src/light.rs",
+      "bytes": 1859,
+      "sha256": "dd326e48913f6db08089dcbc0bf9bf0c23a4ac36f27d61693d5f6dce5b8fdba2",
+      "source_path": "crates/incant_wasm_abi/src/light.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_wasm_cook/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/crates/incant_wasm_cook/Cargo.toml",
+      "bytes": 534,
+      "sha256": "3dc14de47c0da7a4745069bbf5f13f49f0b938a621eaa899490bf09e3b0ffbeb",
+      "source_path": "crates/incant_wasm_cook/Cargo.toml",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_wasm_dev/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/crates/incant_wasm_dev/Cargo.toml",
+      "bytes": 3182,
+      "sha256": "1f34f1afd2286157652818bfd6cd8496c628db3a6283fd90d35c9aa24f4e268d",
+      "source_path": "crates/incant_wasm_dev/Cargo.toml",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_wasm_dev/src/generated.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/crates/incant_wasm_dev/src/generated.rs",
+      "bytes": 14551,
+      "sha256": "e81c1473e8089fcfe79ac7ed3bb17273b5fa9127fcaf17da4e26f9bbfecb9adf",
+      "source_path": "crates/incant_wasm_dev/src/generated.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_wasm_dev/tests/light_parity.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/crates/incant_wasm_dev/tests/light_parity.rs",
+      "bytes": 2665,
+      "sha256": "dfd73207346dbe73f38c44f510f1a69aec3c89077658ca46725473bd938d48a1",
+      "source_path": "crates/incant_wasm_dev/tests/light_parity.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_wasm_runtime/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/crates/incant_wasm_runtime/Cargo.toml",
+      "bytes": 1033,
+      "sha256": "4cd3c7888d57d7c20c600ed2f34efec21ee32bd9c0b2134828a25adfb160e265",
+      "source_path": "crates/incant_wasm_runtime/Cargo.toml",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_wasm_runtime/build.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/crates/incant_wasm_runtime/build.rs",
+      "bytes": 4376,
+      "sha256": "b752b73bf585df002c6ee0d2a8f42f49dfaa5c0733748c18f5a331fa0b102f1b",
+      "source_path": "crates/incant_wasm_runtime/build.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_wasm_runtime/c/generated.h",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/crates/incant_wasm_runtime/c/generated.h",
+      "bytes": 1404,
+      "sha256": "d1673466eb89ffb838f7e9f1106c54c3844820831046a295df3e4a1bd8f54ac1",
+      "source_path": "crates/incant_wasm_runtime/c/generated.h",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_wasm_runtime/c/generated.inc",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/crates/incant_wasm_runtime/c/generated.inc",
+      "bytes": 10591,
+      "sha256": "08c43bc0f0bf5806fe9033d03ccba731d6e5a10b559f12dcac9043661cdbd518",
+      "source_path": "crates/incant_wasm_runtime/c/generated.inc",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_wasm_runtime/src/capability.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/crates/incant_wasm_runtime/src/capability.rs",
+      "bytes": 61290,
+      "sha256": "acfe50a58e3cf189b4803608d8082eaae72e3e112a6494d8a6894826d8597d17",
+      "source_path": "crates/incant_wasm_runtime/src/capability.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_wasm_runtime/src/generated.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/crates/incant_wasm_runtime/src/generated.rs",
+      "bytes": 7711,
+      "sha256": "16e8387401ddb1062e4f31c14fa4c50b6a5f2b33ff76271f72d8756b3f5158b5",
+      "source_path": "crates/incant_wasm_runtime/src/generated.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_wasm_runtime/src/input_tags.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/crates/incant_wasm_runtime/src/input_tags.rs",
+      "bytes": 9300,
+      "sha256": "182fcf38b12772d447158e94b15591eaf84071317dccca594ebae2a17b72e757",
+      "source_path": "crates/incant_wasm_runtime/src/input_tags.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_wasm_runtime/tests/light_controls.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/crates/incant_wasm_runtime/tests/light_controls.rs",
+      "bytes": 4056,
+      "sha256": "95eb115214e49d52714b201f0ad3c747354d725c5cc4c9810a779fc394b005a1",
+      "source_path": "crates/incant_wasm_runtime/tests/light_controls.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/docs/spikes/gameplay-light-controls.md",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/docs/spikes/gameplay-light-controls.md",
+      "bytes": 3472,
+      "sha256": "ead446866e3ade6a04bec70221f14a933f1c3bea7999da96ca4a86e22478d4f6",
+      "source_path": "docs/spikes/gameplay-light-controls.md",
+      "code_input": false
+    },
+    {
+      "key": "source/rust-toolchain.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/rust-toolchain.toml",
+      "bytes": 100,
+      "sha256": "c6e63d9832830b858d930007e4fd1fc3f4a3ca1d287483b08077b7f0267ca124",
+      "source_path": "rust-toolchain.toml",
+      "code_input": true
+    },
+    {
+      "key": "source/sdk/abi/native-v1.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/sdk/abi/native-v1.json",
+      "bytes": 57360,
+      "sha256": "3c5951c45dbf1487c237a4cb30e5ad9130adf80f67f856e736d5a5c4ad6e32da",
+      "source_path": "sdk/abi/native-v1.json",
+      "code_input": true
+    },
+    {
+      "key": "source/sdk/rust/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/sdk/rust/Cargo.toml",
+      "bytes": 214,
+      "sha256": "aa2f29272f049a2e37fa993102356eae5f0947c5bcbb2ef11068d28c9695ed1c",
+      "source_path": "sdk/rust/Cargo.toml",
+      "code_input": true
+    },
+    {
+      "key": "source/sdk/rust/samples/light_controls.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/sdk/rust/samples/light_controls.rs",
+      "bytes": 1741,
+      "sha256": "02ecbb2b27c65dce5e76ffa772f74e52c2fa5be43443183038c1633d3e8d520c",
+      "source_path": "sdk/rust/samples/light_controls.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/sdk/rust/src/lib.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/sdk/rust/src/lib.rs",
+      "bytes": 4694,
+      "sha256": "fbfe76fdb89ef9186f8829d8547ace87e77a27ace807b026c36564c3d867faef",
+      "source_path": "sdk/rust/src/lib.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/sdk/rust/src/light.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/sdk/rust/src/light.rs",
+      "bytes": 943,
+      "sha256": "1c7ed84c43e7efd17102dbf123b1f65c884810498d5a2b3bc756ea7881e03982",
+      "source_path": "sdk/rust/src/light.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/sdk/rust/src/raw.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/sdk/rust/src/raw.rs",
+      "bytes": 26734,
+      "sha256": "728d25c9cb70e641235cbdf7d4d7e2b7c5380c39b89599827a4bb219cca6d68a",
+      "source_path": "sdk/rust/src/raw.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/sdk/rust/src/tick.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/sdk/rust/src/tick.rs",
+      "bytes": 32399,
+      "sha256": "5f3ca800f0d8c98791fbdf23335f78e2b83e539b11b8be1cb378026233839aab",
+      "source_path": "sdk/rust/src/tick.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/sdk/rust/src/tick/light.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/sdk/rust/src/tick/light.rs",
+      "bytes": 1861,
+      "sha256": "d4055d62be3571b41f47f137522fa74d5fcc9a0fe13ba6626e020b48346540a2",
+      "source_path": "sdk/rust/src/tick/light.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/sdk/ts/src/native.d.ts",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/sdk/ts/src/native.d.ts",
+      "bytes": 29553,
+      "sha256": "63d0766a3861a96cb16aa9b71308f9aaeab9d4cde87bcbac060c7e6648091955",
+      "source_path": "sdk/ts/src/native.d.ts",
+      "code_input": true
+    },
+    {
+      "key": "source/sdk/ts/tsconfig.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/sdk/ts/tsconfig.json",
+      "bytes": 213,
+      "sha256": "6dbb7aa4e8b02c14777410e51d06cab20f713fd7fcce9cccbcc8fccc92ba609a",
+      "source_path": "sdk/ts/tsconfig.json",
+      "code_input": true
+    },
+    {
+      "key": "source/sdk/ts/type-tests/lights.ts",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/sdk/ts/type-tests/lights.ts",
+      "bytes": 580,
+      "sha256": "dc9bb8e821ebef5056b605e078e162258540b78b014b66a6c62a830440dc487e",
+      "source_path": "sdk/ts/type-tests/lights.ts",
+      "code_input": true
+    },
+    {
+      "key": "source/tools/cargo",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/tools/cargo",
+      "bytes": 179,
+      "sha256": "9aef98d613601b0c374c1d0499afb39d710cbf5002faba537f21be9c11ff72e3",
+      "source_path": "tools/cargo",
+      "code_input": true
+    },
+    {
+      "key": "source/tools/generate_wasm_sdk.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/tools/generate_wasm_sdk.py",
+      "bytes": 13833,
+      "sha256": "75e098d11091de575fca9367f33bb099031c037ed71e55cec899adaf4d94bd8e",
+      "source_path": "tools/generate_wasm_sdk.py",
+      "code_input": true
+    },
+    {
+      "key": "source/tools/native_process.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/tools/native_process.py",
+      "bytes": 19307,
+      "sha256": "58dd2a8231d7f9d1e42070fc85425461e06a43f279fa5e7f8e57b4a40c3a3aa4",
+      "source_path": "tools/native_process.py",
+      "code_input": true
+    },
+    {
+      "key": "source/tools/probes/shipping-wasm2c.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/tools/probes/shipping-wasm2c.py",
+      "bytes": 34855,
+      "sha256": "14bbd9f965d052a1c4a7fa415179b5e464208e2e350f892ed289bae924d57a71",
+      "source_path": "tools/probes/shipping-wasm2c.py",
+      "code_input": true
+    },
+    {
+      "key": "source/tools/rust_guest.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/tools/rust_guest.py",
+      "bytes": 3888,
+      "sha256": "a01641b59eb8d39e9cd4de58d1a59e3aec97b19179ba52793623a42a725dd5cc",
+      "source_path": "tools/rust_guest.py",
+      "code_input": true
+    },
+    {
+      "key": "source/tools/tests/test_script_build_identity.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/tools/tests/test_script_build_identity.py",
+      "bytes": 2691,
+      "sha256": "efed58d6085591678ce2bb18277b6590d1c9ca055b821265da5487c0ef0aa46c",
+      "source_path": "tools/tests/test_script_build_identity.py",
+      "code_input": true
+    },
+    {
+      "key": "source/tools/tests/test_wasm_sdk.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/tools/tests/test_wasm_sdk.py",
+      "bytes": 19523,
+      "sha256": "a0ddfc8bcec6659b9bb4f90f33388f82e84d1887c7a0880a7162da1b5fbe524c",
+      "source_path": "tools/tests/test_wasm_sdk.py",
+      "code_input": true
+    },
+    {
+      "key": "source/tools/wasm2c.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/tools/wasm2c.py",
+      "bytes": 6841,
+      "sha256": "82df8e43c53be9d6640005ff1c058d64266b7447ceb902a6faddc554d07a2eff",
+      "source_path": "tools/wasm2c.py",
+      "code_input": true
+    },
+    {
+      "key": "source/tools/wasm_abi.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-004/tools/wasm_abi.py",
+      "bytes": 985,
+      "sha256": "0acde08f9e54e18ca3c1b72de04c4436812f08aea870192bd2c6cfa79d45d128",
+      "source_path": "tools/wasm_abi.py",
+      "code_input": true
+    },
+    {
+      "key": "prior-source-001/crates/incant_render/src/retained_tests.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-001/crates/incant_render/src/retained_tests.rs",
+      "bytes": 15181,
+      "sha256": "49bb0c0d7232bd2af66fcc3fb278700644e93c015272297715ec3a6a7826d9b7",
+      "historical_source": true
+    },
+    {
+      "key": "prior-source-001/crates/incant_render_native/tests/light_controls.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-001/crates/incant_render_native/tests/light_controls.rs",
+      "bytes": 3008,
+      "sha256": "c6e7fbbdfb6021894a0b8f8d54e889e3b6b4432c882c9df2cfdffbdbb310855a",
+      "historical_source": true
+    },
+    {
+      "key": "prior-source-001/crates/incant_render_native/tests/texture_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-001/crates/incant_render_native/tests/texture_refresh.rs",
+      "bytes": 13358,
+      "sha256": "3f494d8f255e93e23f7ed2005a966801376516772ea4893196a2a11ae53d9c61",
+      "historical_source": true
+    },
+    {
+      "key": "prior-source-001/crates/incant_runtime/tests/light_controls.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-001/crates/incant_runtime/tests/light_controls.rs",
+      "bytes": 4423,
+      "sha256": "bb3c265e38156e20baae9e2dec2ffa1f16419610f718cb93ee81dc03bc3a6db9",
+      "historical_source": true
+    },
+    {
+      "key": "prior-source-001/crates/incant_runtime/tests/support/lights.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-001/crates/incant_runtime/tests/support/lights.rs",
+      "bytes": 1695,
+      "sha256": "56d80d482c8ba4579e92b0759e8f54bc47402ff969d1828463272d2ed9a9d954",
+      "historical_source": true
+    },
+    {
+      "key": "prior-source-001/crates/incant_script/src/light_tests.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-001/crates/incant_script/src/light_tests.rs",
+      "bytes": 4226,
+      "sha256": "807b553d4198922ca322cd0746b081dc011b4216f14869feddd4a554bd2dcbcc",
+      "historical_source": true
+    },
+    {
+      "key": "prior-source-001/crates/incant_wasm_dev/tests/light_parity.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-001/crates/incant_wasm_dev/tests/light_parity.rs",
+      "bytes": 2606,
+      "sha256": "7fc61f8b518dcb6d78ae0e773b4e411828f6dc5b34df8ceda070dc4b66626f63",
+      "historical_source": true
+    },
+    {
+      "key": "prior-source-001/sdk/rust/samples/light_controls.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-001/sdk/rust/samples/light_controls.rs",
+      "bytes": 1058,
+      "sha256": "61079173a520ea491b100caab28779618a95b8e825d14698b1ad1adc794b2448",
+      "historical_source": true
+    },
+    {
+      "key": "prior-source-002/crates/incant_script/src/light_tests.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-002/crates/incant_script/src/light_tests.rs",
+      "bytes": 4400,
+      "sha256": "9ba696127ee6d9065872501e47f5140ea3418caad7233b9d6854d9a7cdbf6ddb",
+      "historical_source": true
+    },
+    {
+      "key": "prior-source-003/crates/incant_render_native/tests/light_controls.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-003/crates/incant_render_native/tests/light_controls.rs",
+      "bytes": 2552,
+      "sha256": "49dfc8c78a372d8f6c5d4b0216d35921a87449d38572c907fbb12bf95978b0aa",
+      "historical_source": true
+    },
+    {
+      "key": "prior-source-003/crates/incant_render_native/tests/texture_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/source-003/crates/incant_render_native/tests/texture_refresh.rs",
+      "bytes": 13437,
+      "sha256": "4af504daa1d1403a2a26f4db3d8ccba8382d644e10e22db30dc432f8937c6635",
+      "historical_source": true
+    }
+  ],
+  "external_artifacts": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-001/artifacts/1-light_controls-4117026e1b9c108a",
+      "bytes": 9010464,
+      "sha256": "b7e73dfb12313fbed0faaa5f9c2a88ba5a9eb04253cb9489d6665c1ec6ea3190"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-001/artifacts/1-incant_runtime-2d639a755c8c8043",
+      "bytes": 14107104,
+      "sha256": "75b1f0f44b923bfa89e1499f945fbaae5fe73227d3a18b289453040e1c5a1a47"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-001/failed-artifacts/incant_script-2612282e47a98929",
+      "bytes": 20153152,
+      "sha256": "4d27bc9e5109055bac730b79061abe5f6e56c69f57db8de3305cdbe6ea1cedc3",
+      "qualification": "failed/unrun historical artifact"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-002/artifacts/0-incant_script-2612282e47a98929",
+      "bytes": 20153152,
+      "sha256": "570abc7d7b4b1b19d7e6aed2b63d089b9c4a183822763cf9c8e47edf6bb873a4"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-002/failed-artifacts/light_controls-b7e44c621f735b2c",
+      "bytes": 11273264,
+      "sha256": "ce6a5cf9ac1a53fba2665143aea1835d085c3ab6f75c439f7fa35e9d3bd0ab75",
+      "qualification": "failed/unrun historical artifact"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-002/failed-artifacts/texture_refresh-9cdb907b8ebf6863",
+      "bytes": 17766880,
+      "sha256": "ef0d293e01872d87b86301c68cfef32f47dd58ad200773085aa2e08006328a1a",
+      "qualification": "failed/unrun historical artifact"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-003/artifacts/0-incant_runtime-2d639a755c8c8043",
+      "bytes": 14107104,
+      "sha256": "75b1f0f44b923bfa89e1499f945fbaae5fe73227d3a18b289453040e1c5a1a47"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-003/artifacts/0-light_controls-4117026e1b9c108a",
+      "bytes": 9035616,
+      "sha256": "e4e958799a7809b690483a98732732dc24f660cf9bbf20ae3fe156eb61e01ac6"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-003/artifacts/1-incant_script-2612282e47a98929",
+      "bytes": 20155472,
+      "sha256": "86557ade03872ce0f24361c427d99b96d5c8ecc106cdbe7ffc411cae5935f154"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-003/failed-artifacts/light_controls-b7e44c621f735b2c",
+      "bytes": 11273760,
+      "sha256": "246097bb0ef58c2a51a4885d6e3924498501dd636369c980a4181d963da4d451",
+      "qualification": "failed/unrun historical artifact"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-003/failed-artifacts/texture_refresh-9cdb907b8ebf6863",
+      "bytes": 17766880,
+      "sha256": "57521b2228fd070070f42824ed80973d9a6ce6d4af01699b598b9dad317a868f",
+      "qualification": "failed/unrun historical artifact"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-004/artifacts/0-light_controls-b7e44c621f735b2c",
+      "bytes": 11273760,
+      "sha256": "0c9307f5048ed83d588af1f96c53621268ad60bb1ff0746a2b31e56cf7450101"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-004/artifacts/0-texture_refresh-9cdb907b8ebf6863",
+      "bytes": 17766880,
+      "sha256": "d344ab0ca7ba88147f73740428d032852227711d4b8b2a75ca65771047335b68"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-004/artifacts/1-light_controls-20ede4687c5d5ab0",
+      "bytes": 10567648,
+      "sha256": "449078c030e6d7f3a2d03e3b1b448ca92021396b77a81731533445d5f86ee261"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-004/artifacts/2-incant_render_data-fdc944f7b152c5e2",
+      "bytes": 1027328,
+      "sha256": "e28f9026d04d40ff026151f8410ac5e7bad5b4fe8afbc06a7e4cb8fc7454fb13"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-004/artifacts/3-incant_render-a6d24868d22257d6",
+      "bytes": 32855216,
+      "sha256": "678f7e6c783f4c9927d00aaaf01d2d91e60b83229326aa0d94e79d48db6225e8"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-004/artifacts/5-incant_wasm_cook",
+      "bytes": 3479024,
+      "sha256": "5158b172edf851262d013858e5a396cf77e5d527d97b91a832326cf71eb97125"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-004/artifacts/7-light_parity-eb487700f5af55e9",
+      "bytes": 25241488,
+      "sha256": "86e26a8b46999c4b82686a8c2a3f8705b6f762ecbc991a66321f5347d7eddda2"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-004/guest-inputs/bundle/m0.original.wasm",
+      "bytes": 658966,
+      "sha256": "de34d996ca1354f925d3a03c3956209b23bb6a6b9d406e118c1c20ac38b5e235",
+      "qualification": "actual CPU SDK guest input/intermediate"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-004/guest-inputs/bundle/m0.wasm",
+      "bytes": 716829,
+      "sha256": "da8b07d9549669eca43eb1c6a69df1044072e2a124159296b97b051860b63c96",
+      "qualification": "actual CPU SDK guest input/intermediate"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-004/guest-inputs/bundle/m1.original.wasm",
+      "bytes": 659011,
+      "sha256": "d800e2a8ca4f5e729a43158c0cd30d3bd85f96cd9c665f50f6a408a2b0b84f1a",
+      "qualification": "actual CPU SDK guest input/intermediate"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-004/guest-inputs/bundle/m1.wasm",
+      "bytes": 717178,
+      "sha256": "9aaa404bab59fe258c93fdad6355c85fe4a7b429745120b938c1952aff7fc01f",
+      "qualification": "actual CPU SDK guest input/intermediate"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-004/guest-inputs/bundle/m2.original.wasm",
+      "bytes": 659097,
+      "sha256": "05916381735758f1d83111d9638fbfda10c149a4929554dd52c887595283dba1",
+      "qualification": "actual CPU SDK guest input/intermediate"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-004/guest-inputs/bundle/m2.wasm",
+      "bytes": 717600,
+      "sha256": "0f5114b673dbb7085663190265d2abbbd328071042cccf9c0f6b9f304e897285",
+      "qualification": "actual CPU SDK guest input/intermediate"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-004/guest-inputs/bundle/m3.original.wasm",
+      "bytes": 659104,
+      "sha256": "67312e6471c39c93d1c764cc2d9c821f45cdd0a16d8015edd35dac89ed39e84a",
+      "qualification": "actual CPU SDK guest input/intermediate"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-004/guest-inputs/bundle/m3.wasm",
+      "bytes": 717663,
+      "sha256": "e10361e6b75b28619e27c5d780a1d640dee6a63b00a44b6189f69dce8e5d0afc",
+      "qualification": "actual CPU SDK guest input/intermediate"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-004/guest-inputs/guests/rust-light-controls.wasm",
+      "bytes": 658966,
+      "sha256": "de34d996ca1354f925d3a03c3956209b23bb6a6b9d406e118c1c20ac38b5e235",
+      "qualification": "actual CPU SDK guest input/intermediate"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-004/guest-inputs/guests/rust-light-owner.wasm",
+      "bytes": 659104,
+      "sha256": "67312e6471c39c93d1c764cc2d9c821f45cdd0a16d8015edd35dac89ed39e84a",
+      "qualification": "actual CPU SDK guest input/intermediate"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-004/guest-inputs/guests/rust-light-range.wasm",
+      "bytes": 659097,
+      "sha256": "05916381735758f1d83111d9638fbfda10c149a4929554dd52c887595283dba1",
+      "qualification": "actual CPU SDK guest input/intermediate"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-004/guest-inputs/guests/rust-light-scratch.wasm",
+      "bytes": 659011,
+      "sha256": "d800e2a8ca4f5e729a43158c0cd30d3bd85f96cd9c665f50f6a408a2b0b84f1a",
+      "qualification": "actual CPU SDK guest input/intermediate"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-004/guest-inputs/guests/rust-sdk-libraries/libincant_module.rlib",
+      "bytes": 1101046,
+      "sha256": "fe17231dc1f1416f17d7348ac6219b9cc72c3aab4508e4ac73e75a03334a7668",
+      "qualification": "actual CPU SDK guest input/intermediate"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/gameplay-light-controls-001/cpu-004/guest-inputs/guests/rust-sdk-libraries/libincant_wasm_abi.rlib",
+      "bytes": 2087702,
+      "sha256": "48604a4cbb4595a5f2f136b0e6e9e3ffcc80e329de88a154d6ab0c97dbffbe1f",
+      "qualification": "actual CPU SDK guest input/intermediate"
+    }
+  ],
+  "source_scope": "66 exact frozen source/context inputs; immutable producing Git commit binds remaining tracked inputs. Evolving documentation is historical, not a live code-input assertion.",
+  "code_equivalence": [
+    "crates/incant_render/src/retained_tests.rs",
+    "crates/incant_render_native/tests/light_controls.rs",
+    "crates/incant_render_native/tests/texture_refresh.rs",
+    "crates/incant_runtime/tests/light_controls.rs",
+    "crates/incant_runtime/tests/support/lights.rs",
+    "crates/incant_script/src/light_tests.rs",
+    "crates/incant_wasm_dev/tests/light_parity.rs",
+    "sdk/rust/samples/light_controls.rs"
+  ],
+  "outcomes": {
+    "python": 20,
+    "rust_cpu_distinct": 32,
+    "rust_gpu_ignored_during_cpu": 6,
+    "metal_full_numerical": 1,
+    "retained_failed_cpu_attempts": 3,
+    "owned_groups_cleaned": 18
+  },
+  "limits": [
+    "Typed renderer pixel/history fixture and separate actual gameplay/SDK/save CPU controls; no integrated day/night application run.",
+    "No appearance, performance, shipping profile, full renderer allocation freedom or phase gate claim.",
+    "Existing directional active-count atlas cache may allocate at zero crossings; no new shadow capacity policy.",
+    "Native MetalFX compilation/lint only; no actual vendor temporal execution."
+  ]
+}

@@ -114,6 +114,52 @@ pub enum SceneLight {
     Point(PointLight),
     Spot(SpotLight),
 }
+/// Copy-only punctual-light values, independent of binding/resource identity.
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct LightValues {
+    pub color: [f64; 3],
+    pub intensity: f64,
+}
+impl SceneLight {
+    pub fn values(&self) -> LightValues {
+        match self {
+            Self::Directional(v) => LightValues {
+                color: v.color,
+                intensity: v.intensity,
+            },
+            Self::Point(v) => LightValues {
+                color: v.color,
+                intensity: v.intensity,
+            },
+            Self::Spot(v) => LightValues {
+                color: v.color,
+                intensity: v.intensity,
+            },
+        }
+    }
+    /// Typed data assignment only; consumers still validate complete input.
+    pub fn set_values(&mut self, values: LightValues) {
+        let (color, intensity) = match self {
+            Self::Directional(v) => (&mut v.color, &mut v.intensity),
+            Self::Point(v) => (&mut v.color, &mut v.intensity),
+            Self::Spot(v) => (&mut v.color, &mut v.intensity),
+        };
+        *color = values.color;
+        *intensity = values.intensity;
+    }
+    pub fn same_binding(&self, other: &Self) -> bool {
+        match (self, other) {
+            (Self::Directional(a), Self::Directional(b)) => a.shadows == b.shadows,
+            (Self::Point(a), Self::Point(b)) => a.range == b.range,
+            (Self::Spot(a), Self::Spot(b)) => {
+                a.range == b.range
+                    && a.inner_degrees == b.inner_degrees
+                    && a.outer_degrees == b.outer_degrees
+            }
+            _ => false,
+        }
+    }
+}
 pub struct MeshInput {
     pub source: Arc<RuntimeAsset>,
     pub cast_shadows: bool,
@@ -148,4 +194,51 @@ pub trait ScenePreparer {
     type Prepared;
     fn prepare_input(&self, input: &SceneInput) -> Result<Self::Prepared>;
     fn capture_prepared(&self, scene: &Self::Prepared, width: u32, height: u32) -> Result<Vec<u8>>;
+}
+
+#[cfg(test)]
+mod light_tests {
+    use super::*;
+    #[test]
+    fn numeric_light_values_preserve_only_compatible_structural_bindings() {
+        let a = SceneLight::Directional(DirectionalLight {
+            color: [1.; 3],
+            intensity: 1.,
+            shadows: Some(incant_types::DirectionalShadows { distance: 10. }),
+        });
+        let mut b = a.clone();
+        b.set_values(LightValues {
+            color: [0.2, 0.3, 0.4],
+            intensity: 0.,
+        });
+        assert!(a.same_binding(&b));
+        assert_ne!(a.values(), b.values());
+        if let SceneLight::Directional(v) = &mut b {
+            v.shadows = None;
+        }
+        assert!(!a.same_binding(&b));
+        let p = SceneLight::Point(PointLight {
+            color: [1.; 3],
+            intensity: 1.,
+            range: 2.,
+        });
+        assert!(!a.same_binding(&p));
+        let mut q = p.clone();
+        if let SceneLight::Point(v) = &mut q {
+            v.range = 3.;
+        }
+        assert!(!p.same_binding(&q));
+        let s = SceneLight::Spot(SpotLight {
+            color: [1.; 3],
+            intensity: 2.,
+            range: 3.,
+            inner_degrees: 10.,
+            outer_degrees: 20.,
+        });
+        let mut t = s.clone();
+        if let SceneLight::Spot(v) = &mut t {
+            v.inner_degrees = 9.;
+        }
+        assert!(!s.same_binding(&t));
+    }
 }

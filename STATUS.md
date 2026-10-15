@@ -22,6 +22,22 @@ that normalized away its own `..` input. The [fixture correction](docs/spikes/wi
 passes local tests and leaves production behavior unchanged; corrected Windows
 execution is pending.
 
+## Gameplay light controls — CPU and numerical Metal qualified
+
+Native gameplay, TypeScript and the Rust Wasm SDK can change existing directional,
+point and spot light color/intensity through atomic runtime batches. Invalid
+controls roll back numeric writes; saves retain accepted values. The render
+adapter preserves its accepted state on consumer refusal, and accepted changes
+invalidate temporal history before later unchanged frames resume it.
+
+32 distinct Rust CPU controls, 20 Python controls, strict lints/types/generated
+checks and an actual Metal pixel/history control pass. The main341 composition
+also passes three script controls and strict lint. The three fixture failures
+remain recorded. These are separate runtime/SDK and renderer proofs; an integrated
+day/night app, appearance and performance are unqualified. Crossing zero can
+still allocate a directional shadow atlas.
+[Contract and bound evidence](docs/spikes/gameplay-light-controls.md).
+
 ## Cooked bloom — public shipping export and CPU startup qualified
 
 The trusted cooked-native selection now includes prefilter, downsample,
