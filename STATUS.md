@@ -210,6 +210,13 @@ confirmed the desktop was locked; the editor was stopped and its project stayed
 unchanged. Actual native shortcut/menu, Undo/Redo and reopening checks remain
 pending an unlocked desktop. [Evidence and limits](docs/spikes/editor-subtree-duplicate.md).
 
+Focused-row removal now restores the hierarchy's keyboard entry point to a
+surviving row while preserving selection intent, other focus owners and
+project/bridge boundaries. All 1,040 UI tests, TypeScript and the production UI
+build pass; Delete and duplicate/Undo DOM controls include virtualized recovery.
+Actual native keyboard interaction remains pending the unlocked desktop.
+[Focus-recovery evidence](docs/spikes/editor-hierarchy-focus-recovery.md).
+
 ## Ordinary subtree duplication — command and persistence qualified
 
 The shared command bus can now copy a complete ordinary subtree with explicit,
