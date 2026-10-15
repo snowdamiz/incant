@@ -156,6 +156,24 @@ fn coroutine_proxy_reentrancy_poison_is_not_lost_and_other_failed_capabilities_s
         );
     }
 }
+
+#[test]
+fn coroutine_result_inspection_traps_cannot_hide_failure_or_run_the_next_task() {
+    let mut host = host(
+        "if(t.clock.tick===1){t.coroutines.start('a','step',null);t.coroutines.start('b','step',null)}",
+        "trace.push(task.id);t.chunks[0].transforms[0]=99;return new Proxy({kind:'done'},{ownKeys(){try{t.coroutines.start('bad','missing',null)}catch{}return ['kind']}})",
+    );
+    let mut world = world();
+    host.tick(&mut world, 0.25).unwrap();
+    let before = world.snapshot();
+    assert!(host.tick(&mut world, 0.25).is_err());
+    assert_eq!(world.snapshot(), before);
+    assert_eq!(host.schedule.tick, 1);
+    check(
+        &host,
+        "if(trace.join(',')!=='a')throw Error('continued after result trap');",
+    );
+}
 #[test]
 fn coroutine_routine_catalog_is_captured_and_task_free_program_has_no_tick_queue() {
     let source = "const behavior={coroutines:{step:{resume(t){t.chunks[0].transforms[0]++;return {kind:'done'}}}},update(t){if(t.clock.tick===1){behavior.coroutines.step.resume=()=>{throw Error('replacement')};t.coroutines.start('a','step',null)}}};exports.default=behavior;";

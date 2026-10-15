@@ -60,13 +60,17 @@ impl CompiledScript {
     pub(crate) fn harden<'js>(
         &self,
         ctx: &Ctx<'js>,
-    ) -> rquickjs::Result<(Function<'js>, Function<'js>)> {
+    ) -> rquickjs::Result<(Function<'js>, Function<'js>, Function<'js>)> {
         // SAFETY: compiler or the documented native-build trust crossing above
         // is the sole source. The fixed engine module precedes all guest code.
         let module = unsafe { Module::load(ctx.clone(), &self.hardening) }?;
         let (module, promise) = module.eval()?;
         promise.result::<()>().ok_or(rquickjs::Error::Unknown)??;
-        Ok((module.get("freeze")?, module.get("persistentWrapper")?))
+        Ok((
+            module.get("freeze")?,
+            module.get("persistentWrapper")?,
+            module.get("persistentShape")?,
+        ))
     }
 
     pub(crate) fn instantiate<'js>(
