@@ -13,6 +13,17 @@ controls. This fixes the ordinary viewport route; low-resolution reconstruction
 still has separate appearance defects. The entries
 below preserve earlier scoped results and superseded integration snapshots.
 
+Checkpoint46 is blocked by the Windows desktop starter test: the trusted Node
+cook hit its unchanged eight-second deadline after driver entry and before
+compiler dependencies were ready. This does not identify which dependency was
+slow. The [expanded loader observation](docs/spikes/typescript-loader-observation.md)
+separates TypeScript and SWC loading and runs the fallback and four scripted
+starters in the existing one-shot Windows diagnostic. Its exact main355 run now
+passes all six controls, with five successful cooks taking 1.737–2.043 seconds
+and one expected refusal. The timeout did not reproduce; no repair is established.
+The retained checkpoint46 failure still blocks its promotion. Release stays at
+checkpoint45, and no release requirement is bypassed.
+
 Checkpoint45 is promoted after every required context and all eight frozen-head
 workflows succeeded. The verified release tree equals main346. Checkpoints41–44
 remain failed historical batches; their reviewed main fixes passed the complete
@@ -31,6 +42,73 @@ passes local tests and leaves production behavior unchanged. Both desktop jobs
 and Windows Wasm conformance passed on checkpoint44; that checkpoint's separate
 general failure prevented promotion.
 
+## Explicit local-model transport — locally verified
+
+The headless agent can select a loopback streaming Responses server with
+`--local-endpoint`, using an optional separate local key. Saved OpenAI accounts
+are untouched; approvals, durable budgets, command history and Undo remain shared.
+37 focused provider/agent/CLI controls and strict all-target lint pass, with
+independent source review. These are synthetic HTTP results, not live-model
+compatibility or quality evidence. Editor selection and broader provider support
+remain open. [Scope and verification](docs/spikes/local-responses-provider.md).
+
+## Bounded agent response reads — locally verified
+
+The provider now enforces its response byte limit while reading each SSE line,
+including delimiters and comments. Oversized unterminated lines refuse before an
+unbounded line allocation. Nine provider and eight agent integration controls,
+plus strict all-target Clippy, pass. This uses synthetic local responses and
+preserves the requirement for terminal success before tool execution; no live
+provider or Phase 3 gate is claimed.
+[Source and verification](docs/spikes/provider-stream-bound.md).
+
+## Live model-local material updates — CPU and numerical Metal qualified
+
+Play now accepts complete model-local material tables and primitive material
+reassignments without replacing its world or script VM. Import, watch, Undo and
+Redo retain the same atomic publication checks. Material-only refreshes can retain
+baked navigation; any earlier accepted geometry divergence remains conservatively
+latched until Play restarts.
+
+37 runtime/Play controls, the GPU fixture control and strict lints pass. One actual
+Metal control verifies red→blue→green changes across 612 pixels, unchanged masks
+and alpha, exact rejected-update retention, and world/VM continuity. The final
+main355 composition changes only separately qualified compiler observation inputs
+outside the executed material producer; no rerun of that joined composition is
+claimed. Earlier fixture/lint/test failures remain retained. Native-window workflow,
+Blend appearance and performance remain unqualified.
+[Source and portable evidence](docs/spikes/live-material-binding-refresh.md).
+
+## Native Metal archives — scoped fresh-process reuse qualified
+
+The default-off native route supports render and compute archives with private
+host storage and explicit cold publication. On Apple M5 Pro, ordinary and complete
+cooked-native modes each pass 30 cache CPU controls, strict renderer/HAL lint and
+fresh-process `RequireHit` reuse of 41 initial/temporal render plus two compute
+pipelines, with zero additions/fallback. All ten native controls pass, including
+changed/empty/disabled refusal and invalid-cache recovery. Earlier failures are
+retained. CPU007/GPU003 repeat that scope on the main353 composition, including the
+complete cooked aggregate; unchanged HAL lints are reused with byte/feature proof.
+No frame, performance, all-effects or per-level/asynchronous-prewarm
+claim follows. [Scope and portable evidence](docs/spikes/metal-binary-archives.md).
+
+## Cooked MetalFX boundary — numerical Metal parity qualified
+
+The trusted aggregate now includes the two fixed pack/normalize programs:
+25 families and 144 artifacts. Complete-family admission preserves partial-mode
+refusals, unchanged equations and cache preparation. It does not enable the vendor
+scaler or change default quality policy. 54 cooker, 191 default/native-MetalFX,
+224 full cooked/cache and three admission controls pass, with both final feature
+guards, strict lint and 39 Python controls. The public player is compile-only;
+its actual feature graph leaves `native-metalfx` disabled.
+
+Two Apple M5 Pro / Metal children pass the existing 17-case boundary oracle;
+all five raw planes match exactly across 87,040 bytes per mode, with zero parity
+tolerance. Both initial CPU setup failures are preserved. No vendor scaler,
+player, window or capture ran, and no vendor appearance, public export, cache-hit,
+shader-stall or performance gate is claimed.
+[Source and portable evidence](docs/spikes/cooked-metalfx-boundary.md).
+
 ## Cooked motion/history — complete family and numerical Metal parity qualified
 
 The trusted cooked-native selection includes the fixed motion, integer-owner,
@@ -46,8 +124,8 @@ comparison failed an unsupported stationary-precision assumption; that failure
 is preserved alongside a reviewed Python-only replay of the same bytes. No
 renderer tolerance or existing analytical gate changed. The player was compiled
 only. This is neither reconstruction quality nor a full shipping export,
-cache-hit, shader-stall or performance qualification. MetalFX boundary shaders
-remain outside the cooked catalog.
+cache-hit, shader-stall or performance qualification. This 23-family snapshot
+preceded the separate MetalFX boundary result recorded above.
 [Source, correction and portable evidence](docs/spikes/cooked-temporal-export.md).
 
 ## Cooked SSAO — complete family and numerical Metal parity qualified

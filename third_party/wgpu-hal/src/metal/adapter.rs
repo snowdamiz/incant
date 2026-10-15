@@ -98,6 +98,8 @@ impl crate::Adapter for super::Adapter {
             device: super::Device {
                 #[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
                 compilation_observer: Default::default(),
+                #[cfg(all(feature = "metal-binary-archives", target_os = "macos"))]
+                binary_archive: Default::default(),
                 shared: Arc::clone(&self.shared),
                 features,
                 counters: Default::default(),

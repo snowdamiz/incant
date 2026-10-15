@@ -61,6 +61,9 @@ class NativeShaders(unittest.TestCase):
             elif family.startswith('temporal-') and family != 'temporal-cluster':
                 paths = ['src/temporal/' + n for n in ('mod.rs', 'contract.rs', 'emit.rs')]
                 paths += ['src/audit.rs', 'Cargo.toml']
+            elif family.startswith('metalfx-'):
+                paths = ['src/metalfx_boundary/' + n for n in ('mod.rs', 'contract.rs', 'emit.rs')]
+                paths += ['src/audit.rs', 'Cargo.toml', '../incant_render/src/metalfx/source.rs']
             elif family in ('cluster', 'temporal-cluster'):
                 paths = ['src/compute/' + n for n in ('mod.rs', 'contract.rs', 'emit.rs', 'static_workgroup.rs', 'spirv_workgroup.rs')]
                 paths += ['src/audit.rs', 'Cargo.toml']
@@ -125,7 +128,9 @@ class NativeShaders(unittest.TestCase):
                 ('temporal-resolve', 'temporal_shader/cooked.rs', 2),
                 ('temporal-copy', 'temporal_shader/cooked.rs', 3),
                 ('temporal-depth', 'temporal_shader/cooked.rs', 4),
-                ('temporal-cluster', 'lighting/cooked.rs', 0)]:
+                ('temporal-cluster', 'lighting/cooked.rs', 0),
+                ('metalfx-pack', 'metalfx/shader/cooked.rs', 0),
+                ('metalfx-normalize', 'metalfx/shader/cooked.rs', 1)]:
             source = (ROOT / 'crates/incant_render/src' / path).read_text()
             contracts = re.findall(r'(?:const CONTRACT: &str = |expected: )"([^"\n]+)"', source)
             self.assertEqual(shaders.CONTRACTS[family], contracts[index])
@@ -146,10 +151,10 @@ class NativeShaders(unittest.TestCase):
         with self.assertRaises(ValueError):
             shaders.target_admission('cooked', 'wasm32-unknown-unknown')
 
-    def test_complete_target_and_all_twenty_three_families_are_reported_without_publication(self):
+    def test_complete_target_and_all_twenty_five_families_are_reported_without_publication(self):
         result = self.audit()
         self.assertEqual(set(result['families']), set(shaders.DIRECTORIES))
-        self.assertEqual(sum(len(f['artifacts']) for f in result['families'].values()), 132)
+        self.assertEqual(sum(len(f['artifacts']) for f in result['families'].values()), 144)
         self.assertFalse(result['runtime_wgsl_in_selected_ordinary_catalog'])
         self.assertEqual(result['compiler_features']['incant_render'], sorted(shaders.COOKED))
         self.assertFalse((self.output / 'export.json').exists())
@@ -171,6 +176,28 @@ class NativeShaders(unittest.TestCase):
             path.write_bytes(data)
         self.messages[0]['features'].remove('cooked-temporal')
         with self.assertRaisesRegex(ValueError, 'Missing/extra actual cooked'): self.audit()
+
+    def test_both_boundary_programs_and_dedicated_feature_are_required(self):
+        for family in ['metalfx-pack', 'metalfx-normalize']:
+            path = self.output / shaders.DIRECTORIES[family] / 'audit.json'
+            original = path.read_bytes(); path.unlink()
+            with self.assertRaises(OSError): self.audit()
+            path.write_bytes(original)
+        self.messages[0]['features'].remove('cooked-metalfx-boundary')
+        with self.assertRaisesRegex(ValueError, 'Missing/extra actual cooked'): self.audit()
+
+    def test_boundary_source_and_kind_producer_and_stage_are_bound(self):
+        root = ROOT / 'crates/incant_render/src/metalfx'
+        for family, file in [('metalfx-pack', 'prepare.wgsl'), ('metalfx-normalize', 'normalize.wgsl')]:
+            self.assertEqual(shaders.source_bytes(family), b'\n'.join((root / n).read_bytes() for n in ('common.wgsl', 'alpha.wgsl', file)))
+        family = 'metalfx-pack'
+        original = copy.deepcopy(self.receipts[family])
+        for field, value in [('contract', shaders.CONTRACTS['metalfx-normalize']), ('source_sha256', 'a' * 64), ('producer_sha256', 'b' * 64)]:
+            self.receipts[family] = dict(original, **{field: value}); self.write(family)
+            with self.assertRaises(ValueError): self.audit()
+        self.receipts[family] = copy.deepcopy(original)
+        self.receipts[family]['artifacts'][-1] = copy.deepcopy(original['artifacts'][0]); self.write(family)
+        with self.assertRaises(ValueError): self.audit()
 
     def test_temporal_source_pins_and_cluster_guard_are_complete(self):
         self.assertEqual(shaders.source_bytes('temporal-motion'), shaders.source_bytes('temporal-depth'))

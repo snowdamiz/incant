@@ -6,17 +6,27 @@ use std::{
     thread,
 };
 
-struct Request {
-    head: String,
-    body: Vec<u8>,
+pub(super) struct Request {
+    pub(super) head: String,
+    pub(super) body: Vec<u8>,
 }
-fn server(replies: Vec<(u16, String)>) -> (String, thread::JoinHandle<Vec<Request>>) {
+pub(super) fn server(replies: Vec<(u16, String)>) -> (String, thread::JoinHandle<Vec<Request>>) {
+    server_with_headers(
+        replies
+            .into_iter()
+            .map(|(status, body)| (status, body, String::new()))
+            .collect(),
+    )
+}
+pub(super) fn server_with_headers(
+    replies: Vec<(u16, String, String)>,
+) -> (String, thread::JoinHandle<Vec<Request>>) {
     let listener = TcpListener::bind("127.0.0.1:0").unwrap();
     listener.set_nonblocking(true).unwrap();
     let url = format!("http://{}", listener.local_addr().unwrap());
     let worker = thread::spawn(move || {
         let mut requests = vec![];
-        for (status, body) in replies {
+        for (status, body, headers) in replies {
             let deadline = std::time::Instant::now() + Duration::from_secs(5);
             let (mut socket, _) = loop {
                 match listener.accept() {
@@ -68,7 +78,7 @@ fn server(replies: Vec<(u16, String)>) -> (String, thread::JoinHandle<Vec<Reques
             });
             write!(
                 socket,
-                "HTTP/1.1 {status} Test\r\nContent-Length: {}\r\nConnection: close\r\n\r\n{body}",
+                "HTTP/1.1 {status} Test\r\nContent-Length: {}\r\nConnection: close\r\n{headers}\r\n{body}",
                 body.len()
             )
             .unwrap();
@@ -77,7 +87,7 @@ fn server(replies: Vec<(u16, String)>) -> (String, thread::JoinHandle<Vec<Reques
     });
     (url, worker)
 }
-fn completion_event() -> String {
+pub(super) fn completion_event() -> String {
     format!(
         "data: {}\n\n",
         json!({"type":"response.completed","response":{"output":[{"type":"function_call","name":"doc_query","call_id":"test-call","arguments":"{\"path\":\"\"}"}],"usage":{"input_tokens":5,"output_tokens":4}}})
@@ -203,6 +213,8 @@ fn active_metadata_checks_never_resolve_or_refresh_credentials() {
         observed.fetch_add(1, Ordering::Relaxed);
         Err(AgentError::Provider("selection changed".into()))
     }));
+    let provider: Box<dyn Provider> = Box::new(provider);
+    assert_eq!(provider.model(), "fixture-model");
     for _ in 0..3 {
         assert!(matches!(
             provider.check_active(),
@@ -210,4 +222,67 @@ fn active_metadata_checks_never_resolve_or_refresh_credentials() {
         ));
     }
     assert_eq!(checks.load(Ordering::Relaxed), 3);
+}
+
+#[test]
+fn oversized_unterminated_line_stops_reading_at_the_stream_budget() {
+    let mut reader = std::io::Cursor::new(vec![b'x'; 4096]);
+    let mut emitted = String::new();
+    let error = read_stream_limited(&mut reader, &mut |text| emitted.push_str(text), 64)
+        .err()
+        .unwrap();
+    assert_eq!(
+        error.to_string(),
+        "provider: response stream limit exceeded"
+    );
+    assert_eq!(reader.position(), 65);
+    assert!(emitted.is_empty());
+}
+
+#[test]
+fn empty_lines_and_comment_delimiters_consume_the_same_response_budget() {
+    for bytes in [b"\n".repeat(4096), b": ping\r\n".repeat(512)] {
+        let mut reader = std::io::Cursor::new(bytes);
+        let error = read_stream_limited(&mut reader, &mut |_| panic!("no text event"), 64)
+            .err()
+            .unwrap();
+        assert_eq!(
+            error.to_string(),
+            "provider: response stream limit exceeded"
+        );
+        assert_eq!(reader.position(), 65);
+    }
+}
+
+#[test]
+fn exact_budget_preserves_crlf_multiline_data_and_utf8_terminal_output() {
+    let response = json!({"output":[{"type":"message","role":"assistant",
+        "content":[{"type":"output_text","text":"café 日本語"}]}],
+        "usage":{"input_tokens":2,"output_tokens":3}});
+    let event = format!(
+        "data: {{\"type\":\"response.completed\",\r\ndata: \"response\":{response}}}\r\n\r\n"
+    );
+    let complete = read_stream_limited(event.as_bytes(), &mut |_| {}, event.len()).unwrap();
+    assert_eq!(
+        complete.output,
+        response["output"].as_array().unwrap().clone()
+    );
+    assert_eq!(complete.usage.input_tokens, 2);
+    assert_eq!(complete.usage.output_tokens, 3);
+    assert!(
+        read_stream_limited(event.as_bytes(), &mut |_| {}, event.len() - 1)
+            .err()
+            .unwrap()
+            .to_string()
+            .contains("stream limit exceeded")
+    );
+}
+
+#[test]
+fn bounded_stream_refuses_invalid_utf8_without_echoing_response_bytes() {
+    let bytes = b"data: secret-provider-response-\xff\n\n";
+    let error = read_stream_limited(bytes.as_slice(), &mut |_| panic!("invalid text"), 128)
+        .err()
+        .unwrap();
+    assert_eq!(error.to_string(), "provider: invalid UTF-8 response stream");
 }

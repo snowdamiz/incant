@@ -48,7 +48,9 @@ fn inactive_sessions_stay_inert_across_success_failure_and_later_success() {
             session.report,
             PipelineCacheReport {
                 read,
-                write: CacheWrite::NotAttempted
+                write: CacheWrite::NotAttempted,
+                #[cfg(all(feature = "metal-binary-archives", target_os = "macos"))]
+                metal: None
             }
         );
     }

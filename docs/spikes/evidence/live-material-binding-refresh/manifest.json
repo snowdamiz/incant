@@ -1,0 +1,2155 @@
+{
+  "format": "incant-live-material-binding-refresh-v1",
+  "created_utc": "2026-10-15T12:13:56.434033+00:00",
+  "native_source": "8e5745bd38b829e71d8d3843905ed5731ef4c17b",
+  "production_source": "f2db3fe3d551b503bf71541de94044c0c5e2db40",
+  "final_composition_source": "3d4c0d195b69d7304c92b048c9a9c8e5f45d24cc",
+  "base_main354": "171ff8e0d1dce2bc1a19818075c7ce97636d8ddb",
+  "merged_main355": "6bce35d99091fa6acedd8215f4a508739e1ea090",
+  "CPU_sources": {
+    "1": "f2db3fe3d551b503bf71541de94044c0c5e2db40",
+    "2": "14cc7bda164f3d202fff8699ea04511bdb281762",
+    "3": "a2722aaffd519470d3ffb2ffad32df2d154071fd",
+    "4": "30da0b60252bb078ac753773b307a285b0dd00b3",
+    "5": "8e5745bd38b829e71d8d3843905ed5731ef4c17b"
+  },
+  "CPU_protocols": {
+    "1": {
+      "plan": "cpu-proposal-001.json",
+      "runner": "cpu-supervisor-001.py"
+    },
+    "2": {
+      "plan": "cpu-proposal-002.json",
+      "runner": "cpu-supervisor-002.py"
+    },
+    "3": {
+      "plan": "cpu-proposal-004.json",
+      "runner": "cpu-supervisor-004.py"
+    },
+    "4": {
+      "plan": "cpu-proposal-005.json",
+      "runner": "cpu-supervisor-005.py"
+    },
+    "5": {
+      "plan": "cpu-proposal-006.json",
+      "runner": "cpu-supervisor-006.py"
+    }
+  },
+  "archive_sha256": "bc7d0bfa9add6e1824a086b427e7412a3a1a48e3055b19e291b1e082b3e52bc7",
+  "archive_bytes": 1175028,
+  "archive_decoded_bytes": 6851450,
+  "records": [
+    {
+      "key": "cpu-001/0.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-001/0.stderr.log",
+      "bytes": 3134,
+      "sha256": "2185a646580cd3b2c19af4c56d085cb37529efe088c397cd14de4b2e36da984f"
+    },
+    {
+      "key": "cpu-001/0.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-001/0.stdout.log",
+      "bytes": 287613,
+      "sha256": "9c4ae2d47eef0ed6ce1cf0b66693e02ef8073bafe7b8494c45c31f39e8f8b143"
+    },
+    {
+      "key": "cpu-001/results.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-001/results.json",
+      "bytes": 3672,
+      "sha256": "24b5a2689eb7003e20c15d6754a2ecfe2e43a20197d2b3a54272f6dc27d2c8ab"
+    },
+    {
+      "key": "cpu-001/tool-0.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-001/tool-0.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "cpu-001/tool-0.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-001/tool-0.stdout.log",
+      "bytes": 36,
+      "sha256": "1f88eaf7fe1aaec83184752cf4c944cd22f00184136ff36a3e4c318cc60ef566"
+    },
+    {
+      "key": "cpu-001/tool-1.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-001/tool-1.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "cpu-001/tool-1.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-001/tool-1.stdout.log",
+      "bytes": 192,
+      "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909"
+    },
+    {
+      "key": "cpu-002/0.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-002/0.stderr.log",
+      "bytes": 689,
+      "sha256": "6bd9fcd56578693c833aaa6948ae765f3981869f6dc18060ce07ddd54bb2b1bb"
+    },
+    {
+      "key": "cpu-002/0.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-002/0.stdout.log",
+      "bytes": 288890,
+      "sha256": "6f1913ae2323b9372821b5097af5ea1d21dda1e38acd7c6283df4c99b16923cd"
+    },
+    {
+      "key": "cpu-002/1.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-002/1.stderr.log",
+      "bytes": 4127,
+      "sha256": "d8c3464561ea730b207d5dca80b9db9fafb9d50822d956698094f05dd5edbe8f"
+    },
+    {
+      "key": "cpu-002/1.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-002/1.stdout.log",
+      "bytes": 404158,
+      "sha256": "178f90c3280e7eeb8cdd96af82f6ecb8b4241a669ec80259fbf28e435eda29a9"
+    },
+    {
+      "key": "cpu-002/2.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-002/2.stderr.log",
+      "bytes": 4144,
+      "sha256": "5cf235af926d6d5dd7acea6a1f7d48d8f7771788c4e3d89754466229df5c552e"
+    },
+    {
+      "key": "cpu-002/2.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-002/2.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "cpu-002/results.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-002/results.json",
+      "bytes": 8827,
+      "sha256": "abd46679aefbc64dc6adb0ea414fbc351c8de96d68e4765507c48c9925000198"
+    },
+    {
+      "key": "cpu-002/tool-0.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-002/tool-0.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "cpu-002/tool-0.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-002/tool-0.stdout.log",
+      "bytes": 36,
+      "sha256": "1f88eaf7fe1aaec83184752cf4c944cd22f00184136ff36a3e4c318cc60ef566"
+    },
+    {
+      "key": "cpu-002/tool-1.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-002/tool-1.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "cpu-002/tool-1.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-002/tool-1.stdout.log",
+      "bytes": 192,
+      "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909"
+    },
+    {
+      "key": "cpu-003/0.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-003/0.stderr.log",
+      "bytes": 3211,
+      "sha256": "577b5ad0fa1be3ad3b4feb50e9bfa9868ee152ca6cda030392d0cf70de26419d"
+    },
+    {
+      "key": "cpu-003/0.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-003/0.stdout.log",
+      "bytes": 349792,
+      "sha256": "fbc93efe5352f1e34aadd0772599c8b061e65d732208e3ca7c6605e47e5c484b"
+    },
+    {
+      "key": "cpu-003/1.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-003/1.stderr.log",
+      "bytes": 4097,
+      "sha256": "733e7a1db680f9566bfe6c080506094ad16dc704d8c1734f447c371946a0a665"
+    },
+    {
+      "key": "cpu-003/1.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-003/1.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "cpu-003/results.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-003/results.json",
+      "bytes": 5282,
+      "sha256": "c718222cb1e08dcfc7ac0e7df02bdbd3aca93cb7d2b3f81b3d013a369f88781c"
+    },
+    {
+      "key": "cpu-003/tool-0.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-003/tool-0.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "cpu-003/tool-0.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-003/tool-0.stdout.log",
+      "bytes": 36,
+      "sha256": "1f88eaf7fe1aaec83184752cf4c944cd22f00184136ff36a3e4c318cc60ef566"
+    },
+    {
+      "key": "cpu-003/tool-1.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-003/tool-1.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "cpu-003/tool-1.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-003/tool-1.stdout.log",
+      "bytes": 192,
+      "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909"
+    },
+    {
+      "key": "cpu-004/0.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-004/0.stderr.log",
+      "bytes": 345,
+      "sha256": "ef5337b481221ae98345b76b9fac89e76bfaa0d2263d334aca21841aa77706a3"
+    },
+    {
+      "key": "cpu-004/0.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-004/0.stdout.log",
+      "bytes": 349764,
+      "sha256": "1f810d89221b1f68853090f86439cdda8465ae504661344c863a7b60541d4233"
+    },
+    {
+      "key": "cpu-004/1.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-004/1.stderr.log",
+      "bytes": 203,
+      "sha256": "9649862b1ccee4c196ae536b05fe4e2b0e7389c092577a811d228ef2b69a209c"
+    },
+    {
+      "key": "cpu-004/1.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-004/1.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "cpu-004/results.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-004/results.json",
+      "bytes": 5170,
+      "sha256": "dddc98fb160ac46201904c816134931f63c259e534b76807d99c293868c70971"
+    },
+    {
+      "key": "cpu-004/tool-0.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-004/tool-0.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "cpu-004/tool-0.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-004/tool-0.stdout.log",
+      "bytes": 36,
+      "sha256": "1f88eaf7fe1aaec83184752cf4c944cd22f00184136ff36a3e4c318cc60ef566"
+    },
+    {
+      "key": "cpu-004/tool-1.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-004/tool-1.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "cpu-004/tool-1.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-004/tool-1.stdout.log",
+      "bytes": 192,
+      "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909"
+    },
+    {
+      "key": "cpu-005/0.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-005/0.stderr.log",
+      "bytes": 345,
+      "sha256": "37fcac1f6c6c8f1650e76db9b8ea8b7ced06bb641f6cb10ded8dfb4254efd9d1"
+    },
+    {
+      "key": "cpu-005/0.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-005/0.stdout.log",
+      "bytes": 349764,
+      "sha256": "704ab56fd3444bd75d5c90d5813e05b6acbbc37c59c3f0cb13d8eb2ed27284c2"
+    },
+    {
+      "key": "cpu-005/1.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-005/1.stderr.log",
+      "bytes": 203,
+      "sha256": "9649862b1ccee4c196ae536b05fe4e2b0e7389c092577a811d228ef2b69a209c"
+    },
+    {
+      "key": "cpu-005/1.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-005/1.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "cpu-005/results.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-005/results.json",
+      "bytes": 5170,
+      "sha256": "2ad9c8d0518abc21c3878832a492fc0ccd72f8742163741d7ab9a248eda69f59"
+    },
+    {
+      "key": "cpu-005/tool-0.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-005/tool-0.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "cpu-005/tool-0.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-005/tool-0.stdout.log",
+      "bytes": 36,
+      "sha256": "1f88eaf7fe1aaec83184752cf4c944cd22f00184136ff36a3e4c318cc60ef566"
+    },
+    {
+      "key": "cpu-005/tool-1.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-005/tool-1.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "cpu-005/tool-1.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-005/tool-1.stdout.log",
+      "bytes": 192,
+      "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909"
+    },
+    {
+      "key": "cpu-proposal-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-proposal-001.json",
+      "bytes": 5571,
+      "sha256": "96b091243defa6ab8c291906610592055fefcb2016ca1ff62847f0ae5cfbc5c6"
+    },
+    {
+      "key": "cpu-proposal-002.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-proposal-002.json",
+      "bytes": 6929,
+      "sha256": "9b967d0262e0bd8f9cc388878c089f4297b90f991cad4dea9c9b52b806836957"
+    },
+    {
+      "key": "cpu-proposal-003.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-proposal-003.json",
+      "bytes": 6676,
+      "sha256": "10534a8cd2ce36994e2ef6e7ed4c979784889872e144b73ebd130532b757abb5"
+    },
+    {
+      "key": "cpu-proposal-004.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-proposal-004.json",
+      "bytes": 9697,
+      "sha256": "751f5758da13d70eee8e4dfe749c87d316814efeb5e69128cc2ba9388ceb5446"
+    },
+    {
+      "key": "cpu-proposal-005.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-proposal-005.json",
+      "bytes": 11476,
+      "sha256": "a3d591ad9063f988002d23727317391919f3a13820181a1fe75b4ea5960a0a06"
+    },
+    {
+      "key": "cpu-proposal-006.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-proposal-006.json",
+      "bytes": 13415,
+      "sha256": "b76b822467c86e3ede292c9a2debdeb2ebd5020bfbed0dc421faaddb02c5ee17"
+    },
+    {
+      "key": "cpu-supervisor-001.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-supervisor-001.py",
+      "bytes": 9275,
+      "sha256": "b01c2d8da600b422f5fc11625b1b1811bb0b26364be08abb675ee4e5b85fe7f5"
+    },
+    {
+      "key": "cpu-supervisor-002.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-supervisor-002.py",
+      "bytes": 10035,
+      "sha256": "7859e97235d648b26c832d54352d3344da3c000549a7e2a4cde2ff804f77f4a2"
+    },
+    {
+      "key": "cpu-supervisor-003.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-supervisor-003.py",
+      "bytes": 10218,
+      "sha256": "d1487b44e2f2c10ba6963dd6c5809bb2747f999789c3e314cc56aedc3ca75239"
+    },
+    {
+      "key": "cpu-supervisor-004.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-supervisor-004.py",
+      "bytes": 10216,
+      "sha256": "cd8fbaeddea478566bd1252ce576615a9e6259001ec9ae22d7346d5b46de50c1"
+    },
+    {
+      "key": "cpu-supervisor-005.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-supervisor-005.py",
+      "bytes": 10216,
+      "sha256": "3ae6905749407126ecddbdeb09b595e1dfeb83996c75762711f675db5c8d3044"
+    },
+    {
+      "key": "cpu-supervisor-006.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-supervisor-006.py",
+      "bytes": 10216,
+      "sha256": "ae1ff59d9837bfd8c32b762ab7121d537b3a49666b3c9d1bc74ed531d21e5b85"
+    },
+    {
+      "key": "cpu001-closeout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu001-closeout.json",
+      "bytes": 2529,
+      "sha256": "7fd7bf7797a721600d7c880b202875cbc732f32f2db36a0a1d47fba422facef1"
+    },
+    {
+      "key": "cpu002-closeout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu002-closeout.json",
+      "bytes": 4499,
+      "sha256": "5d3602a3b2929274026489f0519bae9081be23fa5cf59bad762319a9842e1378"
+    },
+    {
+      "key": "cpu003-closeout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu003-closeout.json",
+      "bytes": 1587,
+      "sha256": "1adf5c781384aebc6bf54175ae06478ad7444443e8a660eb286def43359598cb"
+    },
+    {
+      "key": "cpu003-copy-budget-and-observer-audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu003-copy-budget-and-observer-audit.json",
+      "bytes": 6896,
+      "sha256": "b537db73e414f30d381cc821f69bc859a9def351019aebe915350965abea5cae"
+    },
+    {
+      "key": "cpu003-main354-preflight.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu003-main354-preflight.json",
+      "bytes": 801,
+      "sha256": "64cff1275e01cc012d2a4d0b3cf1858bf0ac1a684bd477c8841c4ae0444e2589"
+    },
+    {
+      "key": "cpu004-closeout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu004-closeout.json",
+      "bytes": 2117,
+      "sha256": "6b3fa08acc65cd73765db797376ef2540e3aa935918e8b45f4874c476b78f320"
+    },
+    {
+      "key": "cpu005-closeout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu005-closeout.json",
+      "bytes": 1460,
+      "sha256": "ba22d8c15ee117d1abe0d85c2b5461c0558d91c31968683ff3141266d385df52"
+    },
+    {
+      "key": "dependencies/reviewed-cleanup-helper.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-supervisor-003.py",
+      "bytes": 14619,
+      "sha256": "6383f28793c8c651d4e212efeb18342766c18cd53ee9ef4f13635cda8ae3e0f8"
+    },
+    {
+      "key": "dependencies/root-loader-closeout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/typescript-loader-diagnostic/closeout.json",
+      "bytes": 689,
+      "sha256": "e464e8513f9d5771391e6d95f7dc1937b0b4aca69f3dd5eaefa3a2a51f6d7e4f"
+    },
+    {
+      "key": "gpu-001/pixels/initial.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/gpu-001/pixels/initial.json",
+      "bytes": 441,
+      "sha256": "44183c05645b2a0736937e33463f0d24e6109c6d1c6cd3f2550afc340f110b4e"
+    },
+    {
+      "key": "gpu-001/pixels/initial.rgba",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/gpu-001/pixels/initial.rgba",
+      "bytes": 61440,
+      "sha256": "b058f036179c36ce4cdc1cacb0de2fae3f9f3bccdd373e5a65df4e6881b354ed"
+    },
+    {
+      "key": "gpu-001/pixels/late_refusal.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/gpu-001/pixels/late_refusal.json",
+      "bytes": 446,
+      "sha256": "c8c4d155fc322a44cce4727d899bfa82549d95abcff15f64d92d09456f2d3134"
+    },
+    {
+      "key": "gpu-001/pixels/late_refusal.rgba",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/gpu-001/pixels/late_refusal.rgba",
+      "bytes": 61440,
+      "sha256": "b058f036179c36ce4cdc1cacb0de2fae3f9f3bccdd373e5a65df4e6881b354ed"
+    },
+    {
+      "key": "gpu-001/results.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/gpu-001/results.json",
+      "bytes": 2639,
+      "sha256": "9c708b8787b00b6bea0e2bedb11a342ac437eced26b3721b47e7534ccd626fc8"
+    },
+    {
+      "key": "gpu-001/stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/gpu-001/stderr.log",
+      "bytes": 2664,
+      "sha256": "96f6cd3196aebb8fac70bdeef75555bf045d7a833a13757b125a948da8671f69"
+    },
+    {
+      "key": "gpu-001/stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/gpu-001/stdout.log",
+      "bytes": 379,
+      "sha256": "3138d75229328e96ac2e2646696113d5cd90bb24f40ef5968a24c9a2939d689a"
+    },
+    {
+      "key": "gpu-002/pixels/continued.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/gpu-002/pixels/continued.json",
+      "bytes": 441,
+      "sha256": "0740a945be8e3ecbf4121c066126a18d4b3c01e13d32d25ba88420977fe81958"
+    },
+    {
+      "key": "gpu-002/pixels/continued.rgba",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/gpu-002/pixels/continued.rgba",
+      "bytes": 61440,
+      "sha256": "51b966fef40826ae177ecb7854e8b53193b0a0f81e3e9519627a2c86c06ff9bc"
+    },
+    {
+      "key": "gpu-002/pixels/initial.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/gpu-002/pixels/initial.json",
+      "bytes": 441,
+      "sha256": "44183c05645b2a0736937e33463f0d24e6109c6d1c6cd3f2550afc340f110b4e"
+    },
+    {
+      "key": "gpu-002/pixels/initial.rgba",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/gpu-002/pixels/initial.rgba",
+      "bytes": 61440,
+      "sha256": "b058f036179c36ce4cdc1cacb0de2fae3f9f3bccdd373e5a65df4e6881b354ed"
+    },
+    {
+      "key": "gpu-002/pixels/late_refusal.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/gpu-002/pixels/late_refusal.json",
+      "bytes": 446,
+      "sha256": "c8c4d155fc322a44cce4727d899bfa82549d95abcff15f64d92d09456f2d3134"
+    },
+    {
+      "key": "gpu-002/pixels/late_refusal.rgba",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/gpu-002/pixels/late_refusal.rgba",
+      "bytes": 61440,
+      "sha256": "b058f036179c36ce4cdc1cacb0de2fae3f9f3bccdd373e5a65df4e6881b354ed"
+    },
+    {
+      "key": "gpu-002/pixels/reassignment.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/gpu-002/pixels/reassignment.json",
+      "bytes": 448,
+      "sha256": "207cc064f4939a06ab243708a147e89d7440fe61ec7af7ae6e4ab96ac60229ef"
+    },
+    {
+      "key": "gpu-002/pixels/reassignment.rgba",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/gpu-002/pixels/reassignment.rgba",
+      "bytes": 61440,
+      "sha256": "ea546369170f2990063a4f347fe98a8dcb7663095b41f8c0cab2bd65d3c22683"
+    },
+    {
+      "key": "gpu-002/pixels/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/gpu-002/pixels/result.json",
+      "bytes": 392,
+      "sha256": "05335d161b3907d4864a23157b3b9ad6a094457bd1ae987e59ffb67f17daf225"
+    },
+    {
+      "key": "gpu-002/pixels/stale_retained.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/gpu-002/pixels/stale_retained.json",
+      "bytes": 446,
+      "sha256": "69a76d4e70c30185bd5ab410f39064f64e0264e37b5743d9afea0c5417ca7a75"
+    },
+    {
+      "key": "gpu-002/pixels/stale_retained.rgba",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/gpu-002/pixels/stale_retained.rgba",
+      "bytes": 61440,
+      "sha256": "de4fc1c6962429239bee63fc0d36806aa69101dd16a9d6ae409dbe7869ffb638"
+    },
+    {
+      "key": "gpu-002/pixels/table_replacement.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/gpu-002/pixels/table_replacement.json",
+      "bytes": 449,
+      "sha256": "447dd1da36ca7572784215f5704a63e48a8a8cb297936b261f8c51e029cca8c8"
+    },
+    {
+      "key": "gpu-002/pixels/table_replacement.rgba",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/gpu-002/pixels/table_replacement.rgba",
+      "bytes": 61440,
+      "sha256": "de4fc1c6962429239bee63fc0d36806aa69101dd16a9d6ae409dbe7869ffb638"
+    },
+    {
+      "key": "gpu-002/results.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/gpu-002/results.json",
+      "bytes": 5156,
+      "sha256": "49576233df361cb5598c88acefe68a5b69a885da7c486b80f4283f5eba82ded1"
+    },
+    {
+      "key": "gpu-002/stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/gpu-002/stderr.log",
+      "bytes": 2696,
+      "sha256": "7e992cbf3dc68eb38a3b993f868ad1360d96d4238464a87bc6f7654466a4080e"
+    },
+    {
+      "key": "gpu-002/stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/gpu-002/stdout.log",
+      "bytes": 235,
+      "sha256": "75ca1b4550689d4523cdce1e00a1f3e9c207dd099db9853f1c8b07c4868e578d"
+    },
+    {
+      "key": "gpu-comparator-controls-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/gpu-comparator-controls-001.json",
+      "bytes": 850,
+      "sha256": "dd216b22dc284ff5af259d7938fc68772b924c1eca6c53ceb2440d5aaff2047d"
+    },
+    {
+      "key": "gpu-proposal-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/gpu-proposal-001.json",
+      "bytes": 6829,
+      "sha256": "94a928cfb2d8fde7642e432432e499cd336df08cf32b2dcd709fcb2ff1e42bbe"
+    },
+    {
+      "key": "gpu-proposal-002.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/gpu-proposal-002.json",
+      "bytes": 10404,
+      "sha256": "2a6b4c1a5515f795291fb68ed799651070eede497fb9980841cd4009f58ae1e3"
+    },
+    {
+      "key": "gpu-supervisor-001.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/gpu-supervisor-001.py",
+      "bytes": 7881,
+      "sha256": "23639bc55a825bf2d819b56786646cc15eddf4aa2911808731f9190e2e24c2d6"
+    },
+    {
+      "key": "gpu-supervisor-002.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/gpu-supervisor-002.py",
+      "bytes": 9399,
+      "sha256": "9d1a7404fb052f46c8f70ba3ebafa9cb958263ed4a4e329f9d6ba6f162953745"
+    },
+    {
+      "key": "gpu001-closeout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/gpu001-closeout.json",
+      "bytes": 931,
+      "sha256": "849eef2d16ce3147ff0e88509981c4d1fe20397a158deb4497497e458b19b8ca"
+    },
+    {
+      "key": "gpu001-source-diagnosis.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/gpu001-source-diagnosis.json",
+      "bytes": 2334,
+      "sha256": "4b401bc9f1d5dac41482553369e405787f4cb117df4aa4dab431386b1c291719"
+    },
+    {
+      "key": "gpu002-closeout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/gpu002-closeout.json",
+      "bytes": 2522,
+      "sha256": "5fadcee78a74e406ec47f1b2312304e887c4d3cb123b5fdd4603d4d4934f6e34"
+    },
+    {
+      "key": "main354-composition.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/main354-composition.json",
+      "bytes": 8351,
+      "sha256": "375231fdd35b74795df918c97dcdaf02bc52c590fd13fa8a396436c68e050dcb"
+    },
+    {
+      "key": "main355-composition/joined/crates/incant_cook/src/typescript/phases.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/main355-composition/joined/crates/incant_cook/src/typescript/phases.rs",
+      "bytes": 4914,
+      "sha256": "7b6de8aebcdfcc55f6f161f5d04ac1239f762fa9d45d2d97dc45d7b7cee6d50f"
+    },
+    {
+      "key": "main355-composition/joined/tools/build_native_script.mjs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/main355-composition/joined/tools/build_native_script.mjs",
+      "bytes": 2036,
+      "sha256": "9b0db070bb92575ceb87418bfaacabfc4dbe5acb20bb35941c808fad0eb59fdb"
+    },
+    {
+      "key": "main355-composition/joined/tools/native_script/phases.mjs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/main355-composition/joined/tools/native_script/phases.mjs",
+      "bytes": 864,
+      "sha256": "0ce1f106a60eb567c9edfb7491e720d1d89a39cd60c88e683a9845a49853e166"
+    },
+    {
+      "key": "main355-composition/producing/crates/incant_cook/src/typescript/phases.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/main355-composition/producing/crates/incant_cook/src/typescript/phases.rs",
+      "bytes": 4034,
+      "sha256": "e45dd3eeec20ba6fe8184883a861febb0bb860738d3cae8491897e5730fb178c"
+    },
+    {
+      "key": "main355-composition/producing/tools/build_native_script.mjs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/main355-composition/producing/tools/build_native_script.mjs",
+      "bytes": 1840,
+      "sha256": "8df5a8522d850818f3eb1b4dccd9548bf49bed8058dfc8449dbcdc2418941f03"
+    },
+    {
+      "key": "main355-composition/producing/tools/native_script/phases.mjs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/main355-composition/producing/tools/native_script/phases.mjs",
+      "bytes": 831,
+      "sha256": "9497ed46c99dc8925361020d7651e3d3e32a4160d8daf9b572c30d6747dff0e4"
+    },
+    {
+      "key": "main355-composition/receipt.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/main355-composition/receipt.json",
+      "bytes": 4409,
+      "sha256": "5f795ed0c525861f188045fc8e85b71f3252db7b576a43d7a1a82eb47cc1c198"
+    },
+    {
+      "key": "root-cpu-grant-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/root-cpu-grant-001.json",
+      "bytes": 760,
+      "sha256": "1b6cceb15906b28731c1888ac22b507c4b2590d4c45c1df9efa3669263505426"
+    },
+    {
+      "key": "root-cpu002-review.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/root-cpu002-review.json",
+      "bytes": 499,
+      "sha256": "cba2879edd74f224b861160dac696a6d47b5ebe7a7dd960e3ae546d028bddf7b"
+    },
+    {
+      "key": "root-cpu004-review.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/root-cpu004-review.json",
+      "bytes": 579,
+      "sha256": "49a01a19678f373732b914798a1f383b789a806bf90e10d9d0cc6a966cc6fcb6"
+    },
+    {
+      "key": "root-cpu005-review.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/root-cpu005-review.json",
+      "bytes": 442,
+      "sha256": "c49a57410299c1f5bfd449bb1cdb29b19fa13ebd47b6743ff66af6967d1d37d3"
+    },
+    {
+      "key": "root-gpu-grant-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/root-gpu-grant-001.json",
+      "bytes": 673,
+      "sha256": "0adf3905afdf5579f96db830fe5bf3d6bde086bbf73048f624f40414c3d21f0d"
+    },
+    {
+      "key": "root-gpu002-review.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/root-gpu002-review.json",
+      "bytes": 558,
+      "sha256": "62421bb106c099162b37889ec0bb945d0501dca5af359d8aa97a7e78c2dad5fe"
+    },
+    {
+      "key": "source-001/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-001/freeze.json",
+      "bytes": 23551,
+      "sha256": "6fd8a3f646b6738c8f8d4be6128551195cee0bf15fcb3c09ecf27ac4aa6e4c4f"
+    },
+    {
+      "key": "source-001/source.diff",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-001/source.diff",
+      "bytes": 45323,
+      "sha256": "cf1b5c398f154b91d8d9d9100af57ecde23d6f8bbed2eb9c4ad4c7fa02cf7ff4"
+    },
+    {
+      "key": "source-002/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-002/freeze.json",
+      "bytes": 24092,
+      "sha256": "fa48233c9afc8a87950cd2877fc3d13b4f5f4f86a9cbbe5173cf1488bff0951c"
+    },
+    {
+      "key": "source-002/source.diff",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-002/source.diff",
+      "bytes": 48262,
+      "sha256": "4345a1a0dee6871504a80316e7a8cb8cd58077677555e80a6d8c26c3524d8560"
+    },
+    {
+      "key": "source-002/successor.diff",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-002/successor.diff",
+      "bytes": 4681,
+      "sha256": "63a6df48c0ae5057f230c36317d3c47a6d52cd882b2ccf7a8a934761c014e811"
+    },
+    {
+      "key": "source-003/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-003/freeze.json",
+      "bytes": 26756,
+      "sha256": "bf73125d10de3548edb1afe8968f2ab04e350f2faf9472b74d27cd9df2b4f740"
+    },
+    {
+      "key": "source-003/source.diff",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-003/source.diff",
+      "bytes": 62422,
+      "sha256": "eaf777dea78013195f0e6c6bf893b2ff933be951cf48cc6c18f83417d3623c90"
+    },
+    {
+      "key": "source-003/successor.diff",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-003/successor.diff",
+      "bytes": 14160,
+      "sha256": "3b807ac0a1e43169bcb53c239a43a6452642bc8b303bade7aeb3b126406e8be9"
+    },
+    {
+      "key": "source-004/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-004/freeze.json",
+      "bytes": 32096,
+      "sha256": "855eb3192b835d3329e27206f9ce785de7ba69cc6a1a2667f395452496de3a05"
+    },
+    {
+      "key": "source-004/source.diff",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-004/source.diff",
+      "bytes": 62422,
+      "sha256": "eaf777dea78013195f0e6c6bf893b2ff933be951cf48cc6c18f83417d3623c90"
+    },
+    {
+      "key": "source-005/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-005/freeze.json",
+      "bytes": 30700,
+      "sha256": "fd511a1c1dbdec1c73173a677cf6db10331f164c509cc1196980cdaa98fc95aa"
+    },
+    {
+      "key": "source-005/source.diff",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-005/source.diff",
+      "bytes": 63477,
+      "sha256": "a5e6b57bd131ae8190eb542df2f1e3ad32daafd33de70fc8aecd2d032888c1aa"
+    },
+    {
+      "key": "source-005/successor.diff",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-005/successor.diff",
+      "bytes": 2171,
+      "sha256": "fe1f42d6dcb422ddc101e498d334845fb35cd35d76d5bf197b52539edf6ab954"
+    },
+    {
+      "key": "source-006/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/freeze.json",
+      "bytes": 30598,
+      "sha256": "dee2b429aa73e29cd3cfef818790e932ed43fe613484c798c52c16a2a3017841"
+    },
+    {
+      "key": "source-006/source.diff",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/source.diff",
+      "bytes": 63454,
+      "sha256": "70419358a0810941508cf476f1d77d134e705ea03b41f759cdbdf26d2dd4cb8f"
+    },
+    {
+      "key": "source-006/successor.diff",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/successor.diff",
+      "bytes": 1123,
+      "sha256": "0ff4d2d1cb710a0ccc6fc76973f0ea8a659b51cdd76a915bce37ef5ae8b33822"
+    },
+    {
+      "key": "source-audit-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-audit-001.json",
+      "bytes": 2489,
+      "sha256": "4ed7262befdcb26b84b4002a893ac21ed464e5d55ea1ce20e054c92adfe5a10b"
+    },
+    {
+      "key": "source/current/.cargo/config.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/.cargo/config.toml",
+      "bytes": 385,
+      "sha256": "0d3b42ee7bc4ef237cb8af440c47e506dcc9cc8b24d49d3cd3d3fea76ae5caa1"
+    },
+    {
+      "key": "source/current/AGENTS.md",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/AGENTS.md",
+      "bytes": 6594,
+      "sha256": "48a48110f9676ab26fb90f8dd3cbffee5a7d8558f13a869c7089a0e39ac7b2ff"
+    },
+    {
+      "key": "source/current/Cargo.lock",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/Cargo.lock",
+      "bytes": 253308,
+      "sha256": "ffd8d6c9c3765625f2c2f87e52120074427ff705a73cc8ed9bae40e54c7341ba"
+    },
+    {
+      "key": "source/current/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/Cargo.toml",
+      "bytes": 3956,
+      "sha256": "163606d4b9886c5d0f9bb6a4b67fca4823523b4024f17a689dc9bab719c314a7"
+    },
+    {
+      "key": "source/current/PLAN.md",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/PLAN.md",
+      "bytes": 135340,
+      "sha256": "dc3a7369624c545bdedc28c53486679138fd546751e7b56916a622767ecb74a7"
+    },
+    {
+      "key": "source/current/crates/incant_assets/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_assets/Cargo.toml",
+      "bytes": 1559,
+      "sha256": "18b2a98512b7c6912c721bd56c27913a39a7f697007076c0455aa62580cce4dc"
+    },
+    {
+      "key": "source/current/crates/incant_assets/src/animation_cook.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_assets/src/animation_cook.rs",
+      "bytes": 3057,
+      "sha256": "0fe6ded425961b4edd7f1a4ef8024300689f6e092b3c90aec534415fc2e54e9d"
+    },
+    {
+      "key": "source/current/crates/incant_assets/src/atlas.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_assets/src/atlas.rs",
+      "bytes": 4751,
+      "sha256": "b1c0d011dd8b2c2d89feb3877de2fe4294f4187091fbf9a44e7c6b8bb0e84977"
+    },
+    {
+      "key": "source/current/crates/incant_assets/src/audio.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_assets/src/audio.rs",
+      "bytes": 397,
+      "sha256": "3c84774a32d0d6db3c59fe8439b9057791e0962e567aa95421a9eb7eab920611"
+    },
+    {
+      "key": "source/current/crates/incant_assets/src/audio_cook.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_assets/src/audio_cook.rs",
+      "bytes": 6562,
+      "sha256": "d5f1a4b0fcc06dd8e4827322badee29e2a67aeddd8e9237d835c1c2b148cfc6d"
+    },
+    {
+      "key": "source/current/crates/incant_assets/src/cache.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_assets/src/cache.rs",
+      "bytes": 5674,
+      "sha256": "464d7a00f0b95501655e36b5e5d602397527244d02fa362a3ba3808c522f26e8"
+    },
+    {
+      "key": "source/current/crates/incant_assets/src/cache_tests.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_assets/src/cache_tests.rs",
+      "bytes": 3380,
+      "sha256": "8422652c6a3591a14545450fb8451e7961e16cfe4061fc78c870c9fcde67439a"
+    },
+    {
+      "key": "source/current/crates/incant_assets/src/fbx/geometry.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_assets/src/fbx/geometry.rs",
+      "bytes": 5167,
+      "sha256": "2310b28ff2110a5ecc332f6470ab33e27b9dacd1f40482f05f40158786cbd178"
+    },
+    {
+      "key": "source/current/crates/incant_assets/src/fbx/materials.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_assets/src/fbx/materials.rs",
+      "bytes": 10982,
+      "sha256": "6a83e5ed09800d506d91b758cf6898420df6e8fafee3c7b700234b80a13168a4"
+    },
+    {
+      "key": "source/current/crates/incant_assets/src/fbx/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_assets/src/fbx/mod.rs",
+      "bytes": 8770,
+      "sha256": "b25e66a52c57c69f3c714c8eb123adee685e48bdeff8da52fbe2daf3e48eaa8d"
+    },
+    {
+      "key": "source/current/crates/incant_assets/src/fbx_browser.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_assets/src/fbx_browser.rs",
+      "bytes": 435,
+      "sha256": "6e61031de2d247750c11f1fde9f9ed2e57e110d848f9b45c6c72a4170b604164"
+    },
+    {
+      "key": "source/current/crates/incant_assets/src/font_cook.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_assets/src/font_cook.rs",
+      "bytes": 2330,
+      "sha256": "841798098a0707de4e4e41e5fe69849d6ab0319e6ace30baec08ed25ff25e92b"
+    },
+    {
+      "key": "source/current/crates/incant_assets/src/gltf_animation.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_assets/src/gltf_animation.rs",
+      "bytes": 13226,
+      "sha256": "54bf1078e658770186ca938a2322d834fbc74f16f394b98e903994cb7ef3e0d2"
+    },
+    {
+      "key": "source/current/crates/incant_assets/src/gltf_import.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_assets/src/gltf_import.rs",
+      "bytes": 12805,
+      "sha256": "2ddf54702cea88fc764800d8359f45956e5557a687929945659c63470c6ee388"
+    },
+    {
+      "key": "source/current/crates/incant_assets/src/ktx.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_assets/src/ktx.rs",
+      "bytes": 2922,
+      "sha256": "a9f4ca88a9972dbb561943cc917f26c3ecb09bef02a2d5e092c3ffb6c02e86dc"
+    },
+    {
+      "key": "source/current/crates/incant_assets/src/lib.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_assets/src/lib.rs",
+      "bytes": 3137,
+      "sha256": "27f914019f216a75509d134cceb63cd8a0f778c1e3bac92f1ae8e4c53a330c40"
+    },
+    {
+      "key": "source/current/crates/incant_assets/src/material.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_assets/src/material.rs",
+      "bytes": 384,
+      "sha256": "06ef4e7e0f10549dd4659e04341dd894d165485c0bfd7358999db88fa277909c"
+    },
+    {
+      "key": "source/current/crates/incant_assets/src/mesh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_assets/src/mesh.rs",
+      "bytes": 1858,
+      "sha256": "6d0afdb45b6995798b3e159a916ad054f3f2095e34538cdf51f297b62c2afa8e"
+    },
+    {
+      "key": "source/current/crates/incant_assets/src/model_textures.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_assets/src/model_textures.rs",
+      "bytes": 5221,
+      "sha256": "1e3191b6aa7a83b3c5ae5eef38b9822f3fb75260717e0bc150e8d2d7c268a51f"
+    },
+    {
+      "key": "source/current/crates/incant_assets/src/navigation.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_assets/src/navigation.rs",
+      "bytes": 3460,
+      "sha256": "ee2122c7ec4a89ea7345b98bbc9122f36c6d944c913442f8c23644b9509017e3"
+    },
+    {
+      "key": "source/current/crates/incant_assets/src/project_cache.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_assets/src/project_cache.rs",
+      "bytes": 1367,
+      "sha256": "e62c81dc6a5787f79f2b41700719e13cbb39f75e7dfb6ad166a253195361f790"
+    },
+    {
+      "key": "source/current/crates/incant_assets/src/runtime.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_assets/src/runtime.rs",
+      "bytes": 7413,
+      "sha256": "4bdf8b6e53567cdc908c8a138d068220eebf247a7b2b57b6da86b64e1818a78e"
+    },
+    {
+      "key": "source/current/crates/incant_assets/src/source.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_assets/src/source.rs",
+      "bytes": 6157,
+      "sha256": "3c4dcc6ba9bf18f63fc2b0317c5395494c9dbdd175b5d96e7bd971848f63a93b"
+    },
+    {
+      "key": "source/current/crates/incant_assets/src/tangents.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_assets/src/tangents.rs",
+      "bytes": 3774,
+      "sha256": "1fec5d52e5544f1f01e35933740bf0d74bfa6135e9d9a6dab53abe8267513ab8"
+    },
+    {
+      "key": "source/current/crates/incant_assets/src/texture.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_assets/src/texture.rs",
+      "bytes": 11159,
+      "sha256": "bd2b24191138aeb995230691b67769007269155014aeb10c0f3a9e764de33026"
+    },
+    {
+      "key": "source/current/crates/incant_assets/src/texture_cache.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_assets/src/texture_cache.rs",
+      "bytes": 3842,
+      "sha256": "61a400574494518062f795f6825171ab1d55afd42a2d33844c8329d04776511a"
+    },
+    {
+      "key": "source/current/crates/incant_assets_runtime/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_assets_runtime/Cargo.toml",
+      "bytes": 1039,
+      "sha256": "0e5dea47b7437deacda86f692cf51b97b95b438a274253bd54dfe1b6fab3e898"
+    },
+    {
+      "key": "source/current/crates/incant_assets_runtime/src/animation/binary.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_assets_runtime/src/animation/binary.rs",
+      "bytes": 5723,
+      "sha256": "2d4cdf6389116ceeac3dd77f2870deed82cec5d85c357b2ac678164e006b9727"
+    },
+    {
+      "key": "source/current/crates/incant_assets_runtime/src/animation/deform.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_assets_runtime/src/animation/deform.rs",
+      "bytes": 5338,
+      "sha256": "4d2a64e7a99de6c9f9e1bce6a391308ca4da639333e9f6438480346700793b97"
+    },
+    {
+      "key": "source/current/crates/incant_assets_runtime/src/animation/grouped.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_assets_runtime/src/animation/grouped.rs",
+      "bytes": 4064,
+      "sha256": "2f526dba4be905c2fa17471044b3a1dd19a5a7dfd9ab2b9225b6103fc485f369"
+    },
+    {
+      "key": "source/current/crates/incant_assets_runtime/src/animation/ik.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_assets_runtime/src/animation/ik.rs",
+      "bytes": 5394,
+      "sha256": "dfbc670f73663f4a3cda4a114f78ae3617125e5f451e6a7193d763ad3fbe4b6b"
+    },
+    {
+      "key": "source/current/crates/incant_assets_runtime/src/animation/ik_math.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_assets_runtime/src/animation/ik_math.rs",
+      "bytes": 5864,
+      "sha256": "75a2ae5cb770bad08dd81ccfb0a8802e7633a6a8ddb2d838f4e05b2a1d0e386f"
+    },
+    {
+      "key": "source/current/crates/incant_assets_runtime/src/animation/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_assets_runtime/src/animation/mod.rs",
+      "bytes": 16448,
+      "sha256": "b5c05e1b36bd37078e1595cb6b2bcf36cd6e19f32ea4b927e234afbf0e68a9ca"
+    },
+    {
+      "key": "source/current/crates/incant_assets_runtime/src/animation/pipeline.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_assets_runtime/src/animation/pipeline.rs",
+      "bytes": 2162,
+      "sha256": "35af23ceea2fb32890abb0b058bcb235e9d98d665f8a53d4ef63d695bb608739"
+    },
+    {
+      "key": "source/current/crates/incant_assets_runtime/src/animation/player.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_assets_runtime/src/animation/player.rs",
+      "bytes": 11694,
+      "sha256": "b06ca3fcc1b8cf510cdf0f447a234bd57dfe9df05f13e6deb722af0137260cf3"
+    },
+    {
+      "key": "source/current/crates/incant_assets_runtime/src/animation/root_catalog.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_assets_runtime/src/animation/root_catalog.rs",
+      "bytes": 4757,
+      "sha256": "4a88674751f40beb64064141862c16688dcbc188a99d43fa9ab282bf1fde86e5"
+    },
+    {
+      "key": "source/current/crates/incant_assets_runtime/src/animation/root_motion.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_assets_runtime/src/animation/root_motion.rs",
+      "bytes": 4631,
+      "sha256": "ffb192bf1fa8486b93b6f1acf7e231e92f50a0ae1c5a03083277c6de70ff96bf"
+    },
+    {
+      "key": "source/current/crates/incant_assets_runtime/src/animation/sampling.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_assets_runtime/src/animation/sampling.rs",
+      "bytes": 3161,
+      "sha256": "ef29d103a9c877eab237c539c8dbdf286f612c3430fce91b1e9f55e20e541c23"
+    },
+    {
+      "key": "source/current/crates/incant_assets_runtime/src/animation/weighted.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_assets_runtime/src/animation/weighted.rs",
+      "bytes": 5542,
+      "sha256": "d6b88839ce05293c7dfd8bbf648411b8b13964b09bdee44b80c88829bd295f99"
+    },
+    {
+      "key": "source/current/crates/incant_assets_runtime/src/audio.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_assets_runtime/src/audio.rs",
+      "bytes": 6494,
+      "sha256": "fb5c8532178fc959e122457aa9c29c9c7e6dce7f1c36a789606d15738d0c46ac"
+    },
+    {
+      "key": "source/current/crates/incant_assets_runtime/src/font.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_assets_runtime/src/font.rs",
+      "bytes": 5671,
+      "sha256": "db57e2eeaf154f6acc79ba1263f921b3217722a05f3b7fda86d777461597bff0"
+    },
+    {
+      "key": "source/current/crates/incant_assets_runtime/src/font_catalog.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_assets_runtime/src/font_catalog.rs",
+      "bytes": 2160,
+      "sha256": "6c528b0fdeb192e6a6fc281a7975e4ced76bb464879bb9e09c3e5c422effb077"
+    },
+    {
+      "key": "source/current/crates/incant_assets_runtime/src/ktx.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_assets_runtime/src/ktx.rs",
+      "bytes": 2733,
+      "sha256": "87d124d509dc9cd98cc49d0f5bcd7f5aca78c30ab89dcb954afec8407039ed35"
+    },
+    {
+      "key": "source/current/crates/incant_assets_runtime/src/lib.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_assets_runtime/src/lib.rs",
+      "bytes": 3034,
+      "sha256": "134479ad6625a3723c3238bffdcb04006df0a4497349c4bda4fe065b8dd93c92"
+    },
+    {
+      "key": "source/current/crates/incant_assets_runtime/src/material.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_assets_runtime/src/material.rs",
+      "bytes": 13845,
+      "sha256": "bc5bb33dbafbf4d9f509d63ca0ff1fe8e9a2d2648e1b22f7d38074ed29e21fc5"
+    },
+    {
+      "key": "source/current/crates/incant_assets_runtime/src/mesh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_assets_runtime/src/mesh.rs",
+      "bytes": 2838,
+      "sha256": "e0bb90ac0624d09d4446d0f7c2cfaa9775d9283849273f31a5d6d8444f33bc52"
+    },
+    {
+      "key": "source/current/crates/incant_assets_runtime/src/model.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_assets_runtime/src/model.rs",
+      "bytes": 6600,
+      "sha256": "846a1943f44ee7b491f8cf1346f52d05b5ea5c338d0b85e49252910fd933db0e"
+    },
+    {
+      "key": "source/current/crates/incant_assets_runtime/src/model_node.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_assets_runtime/src/model_node.rs",
+      "bytes": 1552,
+      "sha256": "b88bc3c45e3a1a1da61273fba6990d95d90e7254fc160e2baf183f0bb37f1118"
+    },
+    {
+      "key": "source/current/crates/incant_assets_runtime/src/model_textures.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_assets_runtime/src/model_textures.rs",
+      "bytes": 3506,
+      "sha256": "53d7de663fdc7865dfdd100ca3c9fde3d3230eb7b439984fb4bfb36b72f1644a"
+    },
+    {
+      "key": "source/current/crates/incant_assets_runtime/src/texture.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_assets_runtime/src/texture.rs",
+      "bytes": 5651,
+      "sha256": "b911fb28b4c4c897276dd78a551f1a01b7695d971431aa71c05e36b6129ddb97"
+    },
+    {
+      "key": "source/current/crates/incant_assets_runtime/src/texture_cache.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_assets_runtime/src/texture_cache.rs",
+      "bytes": 7982,
+      "sha256": "b902d63df8924088b89fa9281025a5c7476535cb384419adb95f13167fbdf2be"
+    },
+    {
+      "key": "source/current/crates/incant_assets_runtime/src/version.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_assets_runtime/src/version.rs",
+      "bytes": 8831,
+      "sha256": "1c8882c8f285910d95ad3b7c1d4c3e3ee67dbd3db4cf77f5120692eeab2ddbed"
+    },
+    {
+      "key": "source/current/crates/incant_cmd/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_cmd/Cargo.toml",
+      "bytes": 797,
+      "sha256": "92e4bbded4fdf960ab3f0e5c42741c476eede1cfa2bae2ff587726c4587dd569"
+    },
+    {
+      "key": "source/current/crates/incant_cmd/src/lib.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_cmd/src/lib.rs",
+      "bytes": 28474,
+      "sha256": "360eeba64137989add7c0d9d22f1ae19b8b6284a3bef7fc3615a93208db90132"
+    },
+    {
+      "key": "source/current/crates/incant_cook/src/navigation.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_cook/src/navigation.rs",
+      "bytes": 4450,
+      "sha256": "e0622989f1e8b79121b252940d285af176f5c6b7972dbee8947424a8a11a451b"
+    },
+    {
+      "key": "source/current/crates/incant_import/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_import/Cargo.toml",
+      "bytes": 954,
+      "sha256": "059fa6dc5e58a5cc4b8753130161e1043ef3d3781ed291a3cd8fcf8338cd3bc5"
+    },
+    {
+      "key": "source/current/crates/incant_import/src/lib.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_import/src/lib.rs",
+      "bytes": 15260,
+      "sha256": "47f53d2d20f8b9bf19f65c9d07de46067fcf398c940e2db9d19ab1a70123c726"
+    },
+    {
+      "key": "source/current/crates/incant_import/src/sprites.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_import/src/sprites.rs",
+      "bytes": 10672,
+      "sha256": "bde23f188360a5682667a392af94bfc730c80f56180b59a9da99f379c8b341b9"
+    },
+    {
+      "key": "source/current/crates/incant_import/src/tilemaps.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_import/src/tilemaps.rs",
+      "bytes": 3244,
+      "sha256": "fa122802ad057230d54dfa86f4f9b5b5a24c03ff7a006ad15630339aeedc92a6"
+    },
+    {
+      "key": "source/current/crates/incant_import/src/watch.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_import/src/watch.rs",
+      "bytes": 13145,
+      "sha256": "8ff2837e7c041fbac50c575c03f872bdec80ec6258d303cd88f60ef1415c7eea"
+    },
+    {
+      "key": "source/current/crates/incant_play/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_play/Cargo.toml",
+      "bytes": 2379,
+      "sha256": "0a2eaa1f27d2216dc724e37ecd9227a4e5fe49fe61614a2e0e62644cf6d83cba"
+    },
+    {
+      "key": "source/current/crates/incant_play/src/control.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_play/src/control.rs",
+      "bytes": 12364,
+      "sha256": "23e64a4e5a7746072d7045ed681612dd8710d4dd22b79e70a628b4572547c95a"
+    },
+    {
+      "key": "source/current/crates/incant_play/src/lib.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_play/src/lib.rs",
+      "bytes": 10917,
+      "sha256": "074f0fe4b7fb3a3ddfc1bd2d918aa5eb809176138dd302365ab1d277eac901e7"
+    },
+    {
+      "key": "source/current/crates/incant_play/src/texture_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_play/src/texture_refresh.rs",
+      "bytes": 4896,
+      "sha256": "0c7aad30e00ad9fbd4911c924c4d5b5bdd768fb0fd6f22f8455a3f6227a39aaa"
+    },
+    {
+      "key": "source/current/crates/incant_play/tests/animated_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_play/tests/animated_refresh.rs",
+      "bytes": 10779,
+      "sha256": "afd375bcbda8b05978e2120e6b2bc8ab470c1a01b9e8f619711d84df30f3e72d"
+    },
+    {
+      "key": "source/current/crates/incant_play/tests/animation.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_play/tests/animation.rs",
+      "bytes": 3807,
+      "sha256": "1d39149750130d47c88d30a28ba5381c27fd323530512d187206b065af350611"
+    },
+    {
+      "key": "source/current/crates/incant_play/tests/control.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_play/tests/control.rs",
+      "bytes": 7832,
+      "sha256": "2ff825a15065c4a2492e6a2c0aa9b54f8f1655c1c6a0679e2caa01cd93283870"
+    },
+    {
+      "key": "source/current/crates/incant_play/tests/model_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_play/tests/model_refresh.rs",
+      "bytes": 14039,
+      "sha256": "a4fd3d7aec496f5cce909e7712b0e37c4bd7c6ec24ab704b77b513274fd923e7"
+    },
+    {
+      "key": "source/current/crates/incant_play/tests/model_refresh/materials.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_play/tests/model_refresh/materials.rs",
+      "bytes": 7036,
+      "sha256": "710efb6e172578d4122814ac8b5eab566e6837bdf6e26a32db13b2dc4fae21dc"
+    },
+    {
+      "key": "source/current/crates/incant_play/tests/startup.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_play/tests/startup.rs",
+      "bytes": 9679,
+      "sha256": "1f59b8ae54dff9e9d18c2f01d9640a7f994ca3cef495b8b1b6773fa40a58495e"
+    },
+    {
+      "key": "source/current/crates/incant_play/tests/texture_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_play/tests/texture_refresh.rs",
+      "bytes": 19812,
+      "sha256": "7cd6856cf7ea80ecbe85e7512da0af1dc2e142793a079b746298330fefd098f8"
+    },
+    {
+      "key": "source/current/crates/incant_play/tests/wasm.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_play/tests/wasm.rs",
+      "bytes": 3208,
+      "sha256": "2f0570271515f967fc1aacd01033abc42352ad64aab46a3345788793d9fc5320"
+    },
+    {
+      "key": "source/current/crates/incant_render/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render/Cargo.toml",
+      "bytes": 4319,
+      "sha256": "cc29f6f8d8adf1e4909f57dbe24e6a23d33042d384c336dc2f5ac111dcd03bae"
+    },
+    {
+      "key": "source/current/crates/incant_render/build.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render/build.rs",
+      "bytes": 12538,
+      "sha256": "cd75afc69aa1d0732faa36e9ea88940af4d66e93df23716ba45860fb9f5536f1"
+    },
+    {
+      "key": "source/current/crates/incant_render/build/metal_archive_identity.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render/build/metal_archive_identity.rs",
+      "bytes": 4877,
+      "sha256": "8527c0e26d42060e9f646614d2bed4319ecbe85dd5da70bf3744619d7f2462c4"
+    },
+    {
+      "key": "source/current/crates/incant_render/src/compilation.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render/src/compilation.rs",
+      "bytes": 4967,
+      "sha256": "e701915b1e71e4f2adb642149b61512439d36e8696324fa0f84f1fdab61c51f1"
+    },
+    {
+      "key": "source/current/crates/incant_render/src/lib.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render/src/lib.rs",
+      "bytes": 21733,
+      "sha256": "768fdb899e1945de23c2c1e876f25032f99473b893787899b36fd82f80479cf5"
+    },
+    {
+      "key": "source/current/crates/incant_render/src/metal_archive_diagnostic.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render/src/metal_archive_diagnostic.rs",
+      "bytes": 773,
+      "sha256": "7b5706b94204ee68b945a4f24063f3e105199c6d12dcbe0be4f032122abb45d7"
+    },
+    {
+      "key": "source/current/crates/incant_render/src/pipeline_cache/darwin_acl.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render/src/pipeline_cache/darwin_acl.rs",
+      "bytes": 6865,
+      "sha256": "3ddff8f8faf73cd31a4e37c1719235cceda72e11dd8aefe32af6a5494ec14f94"
+    },
+    {
+      "key": "source/current/crates/incant_render/src/pipeline_cache/metal.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render/src/pipeline_cache/metal.rs",
+      "bytes": 8216,
+      "sha256": "ca9a5086b00dd111341d115631b0790ffae8dbf90e4dc60e73816fe8161b291c"
+    },
+    {
+      "key": "source/current/crates/incant_render/src/pipeline_cache/metal_diagnostic.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render/src/pipeline_cache/metal_diagnostic.rs",
+      "bytes": 7365,
+      "sha256": "db9519a39b2d67fded87d0dd31fc48eecc593b05fc4092a1b4b2999b12d10513"
+    },
+    {
+      "key": "source/current/crates/incant_render/src/pipeline_cache/metal_private.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render/src/pipeline_cache/metal_private.rs",
+      "bytes": 8565,
+      "sha256": "1f74716d5b31cb1ce09fc5e6567a755a1960f764b735edc25b7d740f43699488"
+    },
+    {
+      "key": "source/current/crates/incant_render/src/pipeline_cache/metal_tests.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render/src/pipeline_cache/metal_tests.rs",
+      "bytes": 6341,
+      "sha256": "bd28f5f174dc0742eb2f5cce64d70fc12a695a07b0d8d0f85c8fafddcfe2ac6f"
+    },
+    {
+      "key": "source/current/crates/incant_render/src/pipeline_cache/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render/src/pipeline_cache/mod.rs",
+      "bytes": 8941,
+      "sha256": "9f1ea5d5e074d47d2115ad4c7bf39419999f34a2a432f3f5f80fda40b37fd24e"
+    },
+    {
+      "key": "source/current/crates/incant_render/src/pipeline_cache/private_tests.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render/src/pipeline_cache/private_tests.rs",
+      "bytes": 9457,
+      "sha256": "fff472139d6827e28a322abaaf878508c3fbefe56020b7947e1b3a063e196b5d"
+    },
+    {
+      "key": "source/current/crates/incant_render/src/pipeline_cache/tests.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render/src/pipeline_cache/tests.rs",
+      "bytes": 1744,
+      "sha256": "2149f2560cf9fa445a8967bbf6109f2c19e3fc03d1c81e6795ef4ba651257bf3"
+    },
+    {
+      "key": "source/current/crates/incant_render/src/scene_msaa.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render/src/scene_msaa.rs",
+      "bytes": 5948,
+      "sha256": "d510058f0285756b331fc75a9022df9d7aaccb0d19063ca0bf5224851bdd748b"
+    },
+    {
+      "key": "source/current/crates/incant_render/tests/metal_archives.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render/tests/metal_archives.rs",
+      "bytes": 16131,
+      "sha256": "1eb21cb9b151b1211b29047361fc73371e1b76c673eb25537b16edbcff8ee510"
+    },
+    {
+      "key": "source/current/crates/incant_render/tests/support/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render/tests/support/mod.rs",
+      "bytes": 4012,
+      "sha256": "7ee5ea9bfef92859bf7109e07158ab82cb8ce41b007959c8eb5aa34a9d6ac7e3"
+    },
+    {
+      "key": "source/current/crates/incant_render_game/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render_game/Cargo.toml",
+      "bytes": 1766,
+      "sha256": "d7aa056ae7021fb5b8bc09f328c7bad75499f856be719bce9fba716041a63712"
+    },
+    {
+      "key": "source/current/crates/incant_render_game/src/lib.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render_game/src/lib.rs",
+      "bytes": 10452,
+      "sha256": "2942bf16946feee1be5e215be3237c139ed9ee3ce8d12034d194e8d9becd5d51"
+    },
+    {
+      "key": "source/current/crates/incant_render_game/src/recorded_ui.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render_game/src/recorded_ui.rs",
+      "bytes": 5126,
+      "sha256": "b84ed52bdf728025541cc59ba01e9248af81f0718eea7eaf498f2808a2f91d57"
+    },
+    {
+      "key": "source/current/crates/incant_render_game/src/texture_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render_game/src/texture_refresh.rs",
+      "bytes": 5912,
+      "sha256": "4a13fcef0149607bb64a3cd10ca1120cd214e22499fa104475a25fd223154141"
+    },
+    {
+      "key": "source/current/crates/incant_render_game/src/ui.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render_game/src/ui.rs",
+      "bytes": 10997,
+      "sha256": "12c57a930d79bbdaf9728f8274c5e4b9df5b30d7c2d0392beb25064461ac404c"
+    },
+    {
+      "key": "source/current/crates/incant_render_gpu_host/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render_gpu_host/Cargo.toml",
+      "bytes": 2081,
+      "sha256": "d08a5488361c509f0f71883ad2f1138cfe3478d44914cf1870af7efd646f9783"
+    },
+    {
+      "key": "source/current/crates/incant_render_gpu_host/src/lib.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render_gpu_host/src/lib.rs",
+      "bytes": 15555,
+      "sha256": "c1bdecc1d47e9df11d5a5be1033faa522ab9f21b839c367195ef4124012268cd"
+    },
+    {
+      "key": "source/current/crates/incant_render_gpu_host/src/metalfx.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render_gpu_host/src/metalfx.rs",
+      "bytes": 2794,
+      "sha256": "846cff341d66017cb9aec3e7e550d0e1c2b27047137aa495695d903718d838cd"
+    },
+    {
+      "key": "source/current/crates/incant_render_gpu_host/src/metalfx_tests.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render_gpu_host/src/metalfx_tests.rs",
+      "bytes": 4202,
+      "sha256": "2c713f5a01dbd7c657c8708182015373f8d0ebf1c18d307a4e1962b4b8d24e88"
+    },
+    {
+      "key": "source/current/crates/incant_render_gpu_host/src/motion.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render_gpu_host/src/motion.rs",
+      "bytes": 2551,
+      "sha256": "4e6deda2ceb12f3dc371ec4cdd06ead2a6a2d083e979bef1837e3ecadfeb3d6e"
+    },
+    {
+      "key": "source/current/crates/incant_render_gpu_host/src/resolution.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render_gpu_host/src/resolution.rs",
+      "bytes": 2995,
+      "sha256": "60396c4e562dfed6c87c9b916496bfe913313d3e29d63de37718265e2dcb9417"
+    },
+    {
+      "key": "source/current/crates/incant_render_gpu_host/src/resolution_mailbox.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render_gpu_host/src/resolution_mailbox.rs",
+      "bytes": 3562,
+      "sha256": "8c70921bc14c1791c7ceeb7b93c53cfffccb4afa2e3a8427ca6fe4036f1227e1"
+    },
+    {
+      "key": "source/current/crates/incant_render_gpu_host/tests/game.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render_gpu_host/tests/game.rs",
+      "bytes": 18042,
+      "sha256": "da83c969f28872590f8c76337242c55d0051cb21debe2666c58ed89ad9f1cbee"
+    },
+    {
+      "key": "source/current/crates/incant_render_gpu_host/tests/game/animated_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render_gpu_host/tests/game/animated_refresh.rs",
+      "bytes": 17705,
+      "sha256": "75a3e9521054db8cb140c250709dc050e7ae1890c84147fc67c09b689ecca198"
+    },
+    {
+      "key": "source/current/crates/incant_render_gpu_host/tests/game/model_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render_gpu_host/tests/game/model_refresh.rs",
+      "bytes": 17430,
+      "sha256": "0ae552d0c2321767e63e6ea8c2ebfa90053cf77c98292d47262e7ed309d9838b"
+    },
+    {
+      "key": "source/current/crates/incant_render_gpu_host/tests/game/model_refresh/materials.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render_gpu_host/tests/game/model_refresh/materials.rs",
+      "bytes": 10894,
+      "sha256": "9ef9c41b62b22ad2c827638bbfc8bac929d296e32dbb9fb8cd374a915f760c04"
+    },
+    {
+      "key": "source/current/crates/incant_render_gpu_host/tests/game/texture_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render_gpu_host/tests/game/texture_refresh.rs",
+      "bytes": 11700,
+      "sha256": "d51370d5175169e0fb81da87843816c975fa029e68978789a7d55f7ec3ccb7e3"
+    },
+    {
+      "key": "source/current/crates/incant_render_gpu_host/tests/ui.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render_gpu_host/tests/ui.rs",
+      "bytes": 19687,
+      "sha256": "7ebe885a261c7d6e366e1c3095be25494622ff108f67770d82934074e3e6dd54"
+    },
+    {
+      "key": "source/current/crates/incant_render_native/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render_native/Cargo.toml",
+      "bytes": 1149,
+      "sha256": "f08748483c6555dce55b94b39b0b533e2454a2e6f54351b8f6c7112ff70e1d9f"
+    },
+    {
+      "key": "source/current/crates/incant_render_native/src/animation.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render_native/src/animation.rs",
+      "bytes": 4091,
+      "sha256": "dc439d9c560d5088b9bbf726763c16ac224dc12e9d68b578aed146e774e2f042"
+    },
+    {
+      "key": "source/current/crates/incant_render_native/src/binding.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render_native/src/binding.rs",
+      "bytes": 10315,
+      "sha256": "5e16897927075a0961c64a51aa1b556d592eee2d1c096642192b2aa01a246c8a"
+    },
+    {
+      "key": "source/current/crates/incant_render_native/src/lib.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render_native/src/lib.rs",
+      "bytes": 9764,
+      "sha256": "ed4d28c0cb60a2f8972839a833227de317a86e58aa114fc44c58e4a5165afc87"
+    },
+    {
+      "key": "source/current/crates/incant_render_native/src/model_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render_native/src/model_refresh.rs",
+      "bytes": 5536,
+      "sha256": "065405a906cc0fe66d68c287229a9762ca91f473ea27eb69e791e698b6fb2114"
+    },
+    {
+      "key": "source/current/crates/incant_render_native/src/text.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render_native/src/text.rs",
+      "bytes": 6526,
+      "sha256": "b45a27516c0961e2160ebb025ea457c7ade0e94322056051d7c174eb34918b0a"
+    },
+    {
+      "key": "source/current/crates/incant_render_native/src/texture_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render_native/src/texture_refresh.rs",
+      "bytes": 16701,
+      "sha256": "b4bb7457913a100c7d467af35f96201a5cb5d9cca043d110ce1938f50815ca53"
+    },
+    {
+      "key": "source/current/crates/incant_render_native/src/tilemap.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render_native/src/tilemap.rs",
+      "bytes": 2531,
+      "sha256": "cb85ca7a988c2cd20ae6a594934a34d741cc23079b18c5970658d8fdf956c683"
+    },
+    {
+      "key": "source/current/crates/incant_render_native/src/update.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render_native/src/update.rs",
+      "bytes": 8898,
+      "sha256": "5e12573360aa027910a5e9046d2342ae668b14a83f70cb390d53c4c59c50b92a"
+    },
+    {
+      "key": "source/current/crates/incant_render_native/tests/allocations.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render_native/tests/allocations.rs",
+      "bytes": 2807,
+      "sha256": "b0e70a95558f3be55d8bce25141c07b588c8dd9734cca6136079362958418346"
+    },
+    {
+      "key": "source/current/crates/incant_render_native/tests/animated_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render_native/tests/animated_refresh.rs",
+      "bytes": 10723,
+      "sha256": "f17f678d115a37363f08503e9e59ca9d6c46361deba7336908c44fa7b6329517"
+    },
+    {
+      "key": "source/current/crates/incant_render_native/tests/animated_refresh/continuity.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render_native/tests/animated_refresh/continuity.rs",
+      "bytes": 9783,
+      "sha256": "e6e2161e2eb8f573b40e85216aeaed5de8324cb022869bf5abfe7bc0a165a69d"
+    },
+    {
+      "key": "source/current/crates/incant_render_native/tests/animated_refresh/refusals.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render_native/tests/animated_refresh/refusals.rs",
+      "bytes": 6863,
+      "sha256": "7445252048c00347d42f383c275080f8a5bfe809ff2cb3d8a909309fa6579453"
+    },
+    {
+      "key": "source/current/crates/incant_render_native/tests/animation.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render_native/tests/animation.rs",
+      "bytes": 15118,
+      "sha256": "25ef66220a464761fbc897a1f1eb655c027a782e76a7dddda8b9b14c8348f638"
+    },
+    {
+      "key": "source/current/crates/incant_render_native/tests/animation/crossfade.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render_native/tests/animation/crossfade.rs",
+      "bytes": 6562,
+      "sha256": "21b1613ee156151f3eff88415ea37e6cd546aeacfd41167e8504b85ab24430c6"
+    },
+    {
+      "key": "source/current/crates/incant_render_native/tests/animation/ik.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render_native/tests/animation/ik.rs",
+      "bytes": 10713,
+      "sha256": "bd3ae61611ca378e97e2e660fe801849aeafcf25d59f0fd69092b2dc5938ce81"
+    },
+    {
+      "key": "source/current/crates/incant_render_native/tests/animation/root_motion.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render_native/tests/animation/root_motion.rs",
+      "bytes": 5407,
+      "sha256": "216105c7c10ad6e63333cfccabfaf0ae7de5b9e0fe44ea11264f22f48640b71f"
+    },
+    {
+      "key": "source/current/crates/incant_render_native/tests/bindings.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render_native/tests/bindings.rs",
+      "bytes": 14003,
+      "sha256": "2382d85e6ce410323b276f071c66a1ddbf081cc535084596bfcf447c4640d23e"
+    },
+    {
+      "key": "source/current/crates/incant_render_native/tests/common/allocations.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render_native/tests/common/allocations.rs",
+      "bytes": 1823,
+      "sha256": "36de01584e32d3240d1e227701ddb38c9a3c04c4300937ea96c034edff0f9aa0"
+    },
+    {
+      "key": "source/current/crates/incant_render_native/tests/common/animated_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render_native/tests/common/animated_refresh.rs",
+      "bytes": 7830,
+      "sha256": "ee28e0af0fbd98e383a6224b54d7d27730629edd6aa3b83f84f8268d3777651f"
+    },
+    {
+      "key": "source/current/crates/incant_render_native/tests/common/material_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render_native/tests/common/material_refresh.rs",
+      "bytes": 4374,
+      "sha256": "ddd49a2a531141da07160da8c33fc7b5caf271209bde67cd0ec34565c392fad4"
+    },
+    {
+      "key": "source/current/crates/incant_render_native/tests/common/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render_native/tests/common/mod.rs",
+      "bytes": 2323,
+      "sha256": "0b7176c461243572703e61c6b8024fbb0f009e058a89345c4adfc72317bb3f3f"
+    },
+    {
+      "key": "source/current/crates/incant_render_native/tests/common/model_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render_native/tests/common/model_refresh.rs",
+      "bytes": 6459,
+      "sha256": "30d29c077d3f9e5009b5c470d2992c952a7a860d66645cf80db0316c65ea0ae5"
+    },
+    {
+      "key": "source/current/crates/incant_render_native/tests/common/text.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render_native/tests/common/text.rs",
+      "bytes": 1744,
+      "sha256": "b2c93432438fad8e866ccc1169f22d2ee0e5df38a3bd598ad5bb2704146c4f8e"
+    },
+    {
+      "key": "source/current/crates/incant_render_native/tests/flipbook.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render_native/tests/flipbook.rs",
+      "bytes": 9429,
+      "sha256": "c3168201cf7acae2d6037557b49f80c60ef1440808dd63f9388c46bcaa81c414"
+    },
+    {
+      "key": "source/current/crates/incant_render_native/tests/light_controls.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render_native/tests/light_controls.rs",
+      "bytes": 2558,
+      "sha256": "eb6a6c75827652b0f76cf8abcae0e6a3441930b0b1c42860cd199e26b69b97d0"
+    },
+    {
+      "key": "source/current/crates/incant_render_native/tests/model_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render_native/tests/model_refresh.rs",
+      "bytes": 13237,
+      "sha256": "373f68d0d503e264599fc7052c0b0060e38413bc743cb19b137f3737ab5ca7ec"
+    },
+    {
+      "key": "source/current/crates/incant_render_native/tests/model_refresh/material_navigation.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render_native/tests/model_refresh/material_navigation.rs",
+      "bytes": 6796,
+      "sha256": "27ef5f33486cb95b7b6adff5610ae21a8551c320d14c7a5781a0ab292f8c6583"
+    },
+    {
+      "key": "source/current/crates/incant_render_native/tests/model_refresh/materials.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render_native/tests/model_refresh/materials.rs",
+      "bytes": 7310,
+      "sha256": "b8a5b96215b8bd32a29ec1b4a2b236b221d7d3dc3c45f195e6aa0ae400627c60"
+    },
+    {
+      "key": "source/current/crates/incant_render_native/tests/retained.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render_native/tests/retained.rs",
+      "bytes": 8453,
+      "sha256": "8c72d139ecd57f17dbf5fafc9bb3d4cbcdc10e300cf5dfcec2e069386e881948"
+    },
+    {
+      "key": "source/current/crates/incant_render_native/tests/text_input.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render_native/tests/text_input.rs",
+      "bytes": 8459,
+      "sha256": "96a80695c9ddf5dac6a8773c5634cf3c0545647e91c75b015c06fbc619d9a36c"
+    },
+    {
+      "key": "source/current/crates/incant_render_native/tests/text_refusal.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render_native/tests/text_refusal.rs",
+      "bytes": 1247,
+      "sha256": "083fa44fc73f1800a7cf9f1709c7244459110e7e9e0302aa3a46952c2fb8170f"
+    },
+    {
+      "key": "source/current/crates/incant_render_native/tests/texture_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render_native/tests/texture_refresh.rs",
+      "bytes": 13693,
+      "sha256": "0f7ebe9673c539885f2db78240b88e1d596a6ddf6741b14d5e67ea10a8b7b7f1"
+    },
+    {
+      "key": "source/current/crates/incant_render_native/tests/tilemaps.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_render_native/tests/tilemaps.rs",
+      "bytes": 8019,
+      "sha256": "6a6dc966b9166adc2737117ec30ec74c2d3c08244aa1f49f540f03b07f50e629"
+    },
+    {
+      "key": "source/current/crates/incant_runtime/src/navigation.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_runtime/src/navigation.rs",
+      "bytes": 6304,
+      "sha256": "b35cd40cc5992706c9326b0ab5bbc59f9b8e2364cbd6ce4b700c68ea458aca2f"
+    },
+    {
+      "key": "source/current/crates/incant_runtime/src/navigation_runtime.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_runtime/src/navigation_runtime.rs",
+      "bytes": 17168,
+      "sha256": "9945df566a125c0216d8a55635eade907f49943df7454eb5a3a6c40e3a1544ee"
+    },
+    {
+      "key": "source/current/crates/incant_runtime/src/physics.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_runtime/src/physics.rs",
+      "bytes": 5400,
+      "sha256": "ba1f98eddeef3becebe82831ea45cf6de4f7462e8e24ca422e4e68f7152a397f"
+    },
+    {
+      "key": "source/current/crates/incant_runtime/src/spatial.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_runtime/src/spatial.rs",
+      "bytes": 10613,
+      "sha256": "89e4bb9b9b95ddb69522aee30fd94e2983e21adc486b60273c28e32f332f9ffc"
+    },
+    {
+      "key": "source/current/crates/incant_runtime/src/spatial_view.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/crates/incant_runtime/src/spatial_view.rs",
+      "bytes": 5682,
+      "sha256": "0ef2abf422419f8cf5e817dfeeda67350f8109dffb34e4f85159da3c8d2d4c27"
+    },
+    {
+      "key": "source/current/editor/app/src/play/texture_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/editor/app/src/play/texture_refresh.rs",
+      "bytes": 16540,
+      "sha256": "5de0926f4e34d39b56bb71fddbf96ce73d2d9de504300736be0dd6a64aee43ce"
+    },
+    {
+      "key": "source/current/rust-toolchain.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/rust-toolchain.toml",
+      "bytes": 100,
+      "sha256": "c6e63d9832830b858d930007e4fd1fc3f4a3ca1d287483b08077b7f0267ca124"
+    },
+    {
+      "key": "source/current/third_party/wgpu-hal/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/third_party/wgpu-hal/Cargo.toml",
+      "bytes": 11899,
+      "sha256": "11d006bc7a7b608c9a74a884e9975a046ef833085d2284deea13f2e3447e71ec"
+    },
+    {
+      "key": "source/current/third_party/wgpu-hal/src/metal/adapter.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/third_party/wgpu-hal/src/metal/adapter.rs",
+      "bytes": 71391,
+      "sha256": "12f51b552f5480eb1a8f73db40e9335bc923dbed7d7f7d0830d15fd847519c11"
+    },
+    {
+      "key": "source/current/third_party/wgpu-hal/src/metal/binary_archive.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/third_party/wgpu-hal/src/metal/binary_archive.rs",
+      "bytes": 10250,
+      "sha256": "0030c9caee45e52e4cd10f8449e312262947947c99d2ff088289d2024432250a"
+    },
+    {
+      "key": "source/current/third_party/wgpu-hal/src/metal/device.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/third_party/wgpu-hal/src/metal/device.rs",
+      "bytes": 94244,
+      "sha256": "27a2e07f91e0a7d81eb0b625e3fc174c488d73916d218dd512e8a6812b12f3b4"
+    },
+    {
+      "key": "source/current/third_party/wgpu-hal/src/metal/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/third_party/wgpu-hal/src/metal/mod.rs",
+      "bytes": 37881,
+      "sha256": "47067e72366e2ef9d0a57c9a0a21496c4840924c0db78e7d7cd38c2d4c9f305e"
+    },
+    {
+      "key": "source/current/tools/cargo",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/tools/cargo",
+      "bytes": 179,
+      "sha256": "9aef98d613601b0c374c1d0499afb39d710cbf5002faba537f21be9c11ff72e3"
+    },
+    {
+      "key": "source/current/tools/native_process.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-006/files/tools/native_process.py",
+      "bytes": 19307,
+      "sha256": "58dd2a8231d7f9d1e42070fc85425461e06a43f279fa5e7f8e57b4a40c3a3aa4"
+    },
+    {
+      "key": "source/history/0ada559bd0abd80dcae623474abcc744895e16e797eda54e2907d3c2d1e25706/crates/incant_render_native/tests/common/animated_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-002/files/crates/incant_render_native/tests/common/animated_refresh.rs",
+      "bytes": 7819,
+      "sha256": "0ada559bd0abd80dcae623474abcc744895e16e797eda54e2907d3c2d1e25706"
+    },
+    {
+      "key": "source/history/398df7c2b004e0d384e4e3e930cfb095b969c9959815b3239c57665743bf32fa/crates/incant_render_native/tests/animated_refresh/refusals.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-001/files/crates/incant_render_native/tests/animated_refresh/refusals.rs",
+      "bytes": 6828,
+      "sha256": "398df7c2b004e0d384e4e3e930cfb095b969c9959815b3239c57665743bf32fa"
+    },
+    {
+      "key": "source/history/48867503a174beac8fc782d16050fd29f7c21d7a9e6b6924bbcc73cd78e85168/crates/incant_render_native/tests/common/animated_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-001/files/crates/incant_render_native/tests/common/animated_refresh.rs",
+      "bytes": 7193,
+      "sha256": "48867503a174beac8fc782d16050fd29f7c21d7a9e6b6924bbcc73cd78e85168"
+    },
+    {
+      "key": "source/history/8201f42339421bd89f3ccdea779b4cab7a9a78367f7c51d207d0653d4d0cafe0/crates/incant_render_gpu_host/tests/game/model_refresh/materials.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-003/files/crates/incant_render_gpu_host/tests/game/model_refresh/materials.rs",
+      "bytes": 10942,
+      "sha256": "8201f42339421bd89f3ccdea779b4cab7a9a78367f7c51d207d0653d4d0cafe0"
+    },
+    {
+      "key": "source/history/b0f8e05bd52108d09f8d7f9a2756bfc23fa18aa555bd1f9d04b72c82f2c9d4f2/crates/incant_render_gpu_host/tests/game/model_refresh/materials.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-005/files/crates/incant_render_gpu_host/tests/game/model_refresh/materials.rs",
+      "bytes": 10911,
+      "sha256": "b0f8e05bd52108d09f8d7f9a2756bfc23fa18aa555bd1f9d04b72c82f2c9d4f2"
+    },
+    {
+      "key": "source/history/bb1058f77d551af30ff3d5426c6183fc26f2c72e86271612550f17e7abdcb26f/crates/incant_render_native/tests/common/material_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-001/files/crates/incant_render_native/tests/common/material_refresh.rs",
+      "bytes": 3407,
+      "sha256": "bb1058f77d551af30ff3d5426c6183fc26f2c72e86271612550f17e7abdcb26f"
+    },
+    {
+      "key": "source/history/bee85788cb2c7f28264d58fc18bb1a4af8c49773ca4a48f84a39b205c5f0d0d3/crates/incant_render_gpu_host/tests/game/animated_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-003/files/crates/incant_render_gpu_host/tests/game/animated_refresh.rs",
+      "bytes": 17694,
+      "sha256": "bee85788cb2c7f28264d58fc18bb1a4af8c49773ca4a48f84a39b205c5f0d0d3"
+    }
+  ],
+  "source_blobs": {
+    "0d3b42ee7bc4ef237cb8af440c47e506dcc9cc8b24d49d3cd3d3fea76ae5caa1": "source/current/.cargo/config.toml",
+    "48a48110f9676ab26fb90f8dd3cbffee5a7d8558f13a869c7089a0e39ac7b2ff": "source/current/AGENTS.md",
+    "ffd8d6c9c3765625f2c2f87e52120074427ff705a73cc8ed9bae40e54c7341ba": "source/current/Cargo.lock",
+    "163606d4b9886c5d0f9bb6a4b67fca4823523b4024f17a689dc9bab719c314a7": "source/current/Cargo.toml",
+    "dc3a7369624c545bdedc28c53486679138fd546751e7b56916a622767ecb74a7": "source/current/PLAN.md",
+    "18b2a98512b7c6912c721bd56c27913a39a7f697007076c0455aa62580cce4dc": "source/current/crates/incant_assets/Cargo.toml",
+    "0fe6ded425961b4edd7f1a4ef8024300689f6e092b3c90aec534415fc2e54e9d": "source/current/crates/incant_assets/src/animation_cook.rs",
+    "b1c0d011dd8b2c2d89feb3877de2fe4294f4187091fbf9a44e7c6b8bb0e84977": "source/current/crates/incant_assets/src/atlas.rs",
+    "3c84774a32d0d6db3c59fe8439b9057791e0962e567aa95421a9eb7eab920611": "source/current/crates/incant_assets/src/audio.rs",
+    "d5f1a4b0fcc06dd8e4827322badee29e2a67aeddd8e9237d835c1c2b148cfc6d": "source/current/crates/incant_assets/src/audio_cook.rs",
+    "464d7a00f0b95501655e36b5e5d602397527244d02fa362a3ba3808c522f26e8": "source/current/crates/incant_assets/src/cache.rs",
+    "8422652c6a3591a14545450fb8451e7961e16cfe4061fc78c870c9fcde67439a": "source/current/crates/incant_assets/src/cache_tests.rs",
+    "2310b28ff2110a5ecc332f6470ab33e27b9dacd1f40482f05f40158786cbd178": "source/current/crates/incant_assets/src/fbx/geometry.rs",
+    "6a83e5ed09800d506d91b758cf6898420df6e8fafee3c7b700234b80a13168a4": "source/current/crates/incant_assets/src/fbx/materials.rs",
+    "b25e66a52c57c69f3c714c8eb123adee685e48bdeff8da52fbe2daf3e48eaa8d": "source/current/crates/incant_assets/src/fbx/mod.rs",
+    "6e61031de2d247750c11f1fde9f9ed2e57e110d848f9b45c6c72a4170b604164": "source/current/crates/incant_assets/src/fbx_browser.rs",
+    "841798098a0707de4e4e41e5fe69849d6ab0319e6ace30baec08ed25ff25e92b": "source/current/crates/incant_assets/src/font_cook.rs",
+    "54bf1078e658770186ca938a2322d834fbc74f16f394b98e903994cb7ef3e0d2": "source/current/crates/incant_assets/src/gltf_animation.rs",
+    "2ddf54702cea88fc764800d8359f45956e5557a687929945659c63470c6ee388": "source/current/crates/incant_assets/src/gltf_import.rs",
+    "a9f4ca88a9972dbb561943cc917f26c3ecb09bef02a2d5e092c3ffb6c02e86dc": "source/current/crates/incant_assets/src/ktx.rs",
+    "27f914019f216a75509d134cceb63cd8a0f778c1e3bac92f1ae8e4c53a330c40": "source/current/crates/incant_assets/src/lib.rs",
+    "06ef4e7e0f10549dd4659e04341dd894d165485c0bfd7358999db88fa277909c": "source/current/crates/incant_assets/src/material.rs",
+    "6d0afdb45b6995798b3e159a916ad054f3f2095e34538cdf51f297b62c2afa8e": "source/current/crates/incant_assets/src/mesh.rs",
+    "1e3191b6aa7a83b3c5ae5eef38b9822f3fb75260717e0bc150e8d2d7c268a51f": "source/current/crates/incant_assets/src/model_textures.rs",
+    "ee2122c7ec4a89ea7345b98bbc9122f36c6d944c913442f8c23644b9509017e3": "source/current/crates/incant_assets/src/navigation.rs",
+    "e62c81dc6a5787f79f2b41700719e13cbb39f75e7dfb6ad166a253195361f790": "source/current/crates/incant_assets/src/project_cache.rs",
+    "4bdf8b6e53567cdc908c8a138d068220eebf247a7b2b57b6da86b64e1818a78e": "source/current/crates/incant_assets/src/runtime.rs",
+    "3c4dcc6ba9bf18f63fc2b0317c5395494c9dbdd175b5d96e7bd971848f63a93b": "source/current/crates/incant_assets/src/source.rs",
+    "1fec5d52e5544f1f01e35933740bf0d74bfa6135e9d9a6dab53abe8267513ab8": "source/current/crates/incant_assets/src/tangents.rs",
+    "bd2b24191138aeb995230691b67769007269155014aeb10c0f3a9e764de33026": "source/current/crates/incant_assets/src/texture.rs",
+    "61a400574494518062f795f6825171ab1d55afd42a2d33844c8329d04776511a": "source/current/crates/incant_assets/src/texture_cache.rs",
+    "0e5dea47b7437deacda86f692cf51b97b95b438a274253bd54dfe1b6fab3e898": "source/current/crates/incant_assets_runtime/Cargo.toml",
+    "2d4cdf6389116ceeac3dd77f2870deed82cec5d85c357b2ac678164e006b9727": "source/current/crates/incant_assets_runtime/src/animation/binary.rs",
+    "4d2a64e7a99de6c9f9e1bce6a391308ca4da639333e9f6438480346700793b97": "source/current/crates/incant_assets_runtime/src/animation/deform.rs",
+    "2f526dba4be905c2fa17471044b3a1dd19a5a7dfd9ab2b9225b6103fc485f369": "source/current/crates/incant_assets_runtime/src/animation/grouped.rs",
+    "dfbc670f73663f4a3cda4a114f78ae3617125e5f451e6a7193d763ad3fbe4b6b": "source/current/crates/incant_assets_runtime/src/animation/ik.rs",
+    "75a2ae5cb770bad08dd81ccfb0a8802e7633a6a8ddb2d838f4e05b2a1d0e386f": "source/current/crates/incant_assets_runtime/src/animation/ik_math.rs",
+    "b5c05e1b36bd37078e1595cb6b2bcf36cd6e19f32ea4b927e234afbf0e68a9ca": "source/current/crates/incant_assets_runtime/src/animation/mod.rs",
+    "35af23ceea2fb32890abb0b058bcb235e9d98d665f8a53d4ef63d695bb608739": "source/current/crates/incant_assets_runtime/src/animation/pipeline.rs",
+    "b06ca3fcc1b8cf510cdf0f447a234bd57dfe9df05f13e6deb722af0137260cf3": "source/current/crates/incant_assets_runtime/src/animation/player.rs",
+    "4a88674751f40beb64064141862c16688dcbc188a99d43fa9ab282bf1fde86e5": "source/current/crates/incant_assets_runtime/src/animation/root_catalog.rs",
+    "ffb192bf1fa8486b93b6f1acf7e231e92f50a0ae1c5a03083277c6de70ff96bf": "source/current/crates/incant_assets_runtime/src/animation/root_motion.rs",
+    "ef29d103a9c877eab237c539c8dbdf286f612c3430fce91b1e9f55e20e541c23": "source/current/crates/incant_assets_runtime/src/animation/sampling.rs",
+    "d6b88839ce05293c7dfd8bbf648411b8b13964b09bdee44b80c88829bd295f99": "source/current/crates/incant_assets_runtime/src/animation/weighted.rs",
+    "fb5c8532178fc959e122457aa9c29c9c7e6dce7f1c36a789606d15738d0c46ac": "source/current/crates/incant_assets_runtime/src/audio.rs",
+    "db57e2eeaf154f6acc79ba1263f921b3217722a05f3b7fda86d777461597bff0": "source/current/crates/incant_assets_runtime/src/font.rs",
+    "6c528b0fdeb192e6a6fc281a7975e4ced76bb464879bb9e09c3e5c422effb077": "source/current/crates/incant_assets_runtime/src/font_catalog.rs",
+    "87d124d509dc9cd98cc49d0f5bcd7f5aca78c30ab89dcb954afec8407039ed35": "source/current/crates/incant_assets_runtime/src/ktx.rs",
+    "134479ad6625a3723c3238bffdcb04006df0a4497349c4bda4fe065b8dd93c92": "source/current/crates/incant_assets_runtime/src/lib.rs",
+    "bc5bb33dbafbf4d9f509d63ca0ff1fe8e9a2d2648e1b22f7d38074ed29e21fc5": "source/current/crates/incant_assets_runtime/src/material.rs",
+    "e0bb90ac0624d09d4446d0f7c2cfaa9775d9283849273f31a5d6d8444f33bc52": "source/current/crates/incant_assets_runtime/src/mesh.rs",
+    "846a1943f44ee7b491f8cf1346f52d05b5ea5c338d0b85e49252910fd933db0e": "source/current/crates/incant_assets_runtime/src/model.rs",
+    "b88bc3c45e3a1a1da61273fba6990d95d90e7254fc160e2baf183f0bb37f1118": "source/current/crates/incant_assets_runtime/src/model_node.rs",
+    "53d7de663fdc7865dfdd100ca3c9fde3d3230eb7b439984fb4bfb36b72f1644a": "source/current/crates/incant_assets_runtime/src/model_textures.rs",
+    "b911fb28b4c4c897276dd78a551f1a01b7695d971431aa71c05e36b6129ddb97": "source/current/crates/incant_assets_runtime/src/texture.rs",
+    "b902d63df8924088b89fa9281025a5c7476535cb384419adb95f13167fbdf2be": "source/current/crates/incant_assets_runtime/src/texture_cache.rs",
+    "1c8882c8f285910d95ad3b7c1d4c3e3ee67dbd3db4cf77f5120692eeab2ddbed": "source/current/crates/incant_assets_runtime/src/version.rs",
+    "92e4bbded4fdf960ab3f0e5c42741c476eede1cfa2bae2ff587726c4587dd569": "source/current/crates/incant_cmd/Cargo.toml",
+    "360eeba64137989add7c0d9d22f1ae19b8b6284a3bef7fc3615a93208db90132": "source/current/crates/incant_cmd/src/lib.rs",
+    "e0622989f1e8b79121b252940d285af176f5c6b7972dbee8947424a8a11a451b": "source/current/crates/incant_cook/src/navigation.rs",
+    "059fa6dc5e58a5cc4b8753130161e1043ef3d3781ed291a3cd8fcf8338cd3bc5": "source/current/crates/incant_import/Cargo.toml",
+    "47f53d2d20f8b9bf19f65c9d07de46067fcf398c940e2db9d19ab1a70123c726": "source/current/crates/incant_import/src/lib.rs",
+    "bde23f188360a5682667a392af94bfc730c80f56180b59a9da99f379c8b341b9": "source/current/crates/incant_import/src/sprites.rs",
+    "fa122802ad057230d54dfa86f4f9b5b5a24c03ff7a006ad15630339aeedc92a6": "source/current/crates/incant_import/src/tilemaps.rs",
+    "8ff2837e7c041fbac50c575c03f872bdec80ec6258d303cd88f60ef1415c7eea": "source/current/crates/incant_import/src/watch.rs",
+    "0a2eaa1f27d2216dc724e37ecd9227a4e5fe49fe61614a2e0e62644cf6d83cba": "source/current/crates/incant_play/Cargo.toml",
+    "23e64a4e5a7746072d7045ed681612dd8710d4dd22b79e70a628b4572547c95a": "source/current/crates/incant_play/src/control.rs",
+    "074f0fe4b7fb3a3ddfc1bd2d918aa5eb809176138dd302365ab1d277eac901e7": "source/current/crates/incant_play/src/lib.rs",
+    "0c7aad30e00ad9fbd4911c924c4d5b5bdd768fb0fd6f22f8455a3f6227a39aaa": "source/current/crates/incant_play/src/texture_refresh.rs",
+    "afd375bcbda8b05978e2120e6b2bc8ab470c1a01b9e8f619711d84df30f3e72d": "source/current/crates/incant_play/tests/animated_refresh.rs",
+    "1d39149750130d47c88d30a28ba5381c27fd323530512d187206b065af350611": "source/current/crates/incant_play/tests/animation.rs",
+    "2ff825a15065c4a2492e6a2c0aa9b54f8f1655c1c6a0679e2caa01cd93283870": "source/current/crates/incant_play/tests/control.rs",
+    "a4fd3d7aec496f5cce909e7712b0e37c4bd7c6ec24ab704b77b513274fd923e7": "source/current/crates/incant_play/tests/model_refresh.rs",
+    "710efb6e172578d4122814ac8b5eab566e6837bdf6e26a32db13b2dc4fae21dc": "source/current/crates/incant_play/tests/model_refresh/materials.rs",
+    "1f59b8ae54dff9e9d18c2f01d9640a7f994ca3cef495b8b1b6773fa40a58495e": "source/current/crates/incant_play/tests/startup.rs",
+    "7cd6856cf7ea80ecbe85e7512da0af1dc2e142793a079b746298330fefd098f8": "source/current/crates/incant_play/tests/texture_refresh.rs",
+    "2f0570271515f967fc1aacd01033abc42352ad64aab46a3345788793d9fc5320": "source/current/crates/incant_play/tests/wasm.rs",
+    "cc29f6f8d8adf1e4909f57dbe24e6a23d33042d384c336dc2f5ac111dcd03bae": "source/current/crates/incant_render/Cargo.toml",
+    "cd75afc69aa1d0732faa36e9ea88940af4d66e93df23716ba45860fb9f5536f1": "source/current/crates/incant_render/build.rs",
+    "8527c0e26d42060e9f646614d2bed4319ecbe85dd5da70bf3744619d7f2462c4": "source/current/crates/incant_render/build/metal_archive_identity.rs",
+    "e701915b1e71e4f2adb642149b61512439d36e8696324fa0f84f1fdab61c51f1": "source/current/crates/incant_render/src/compilation.rs",
+    "768fdb899e1945de23c2c1e876f25032f99473b893787899b36fd82f80479cf5": "source/current/crates/incant_render/src/lib.rs",
+    "7b5706b94204ee68b945a4f24063f3e105199c6d12dcbe0be4f032122abb45d7": "source/current/crates/incant_render/src/metal_archive_diagnostic.rs",
+    "3ddff8f8faf73cd31a4e37c1719235cceda72e11dd8aefe32af6a5494ec14f94": "source/current/crates/incant_render/src/pipeline_cache/darwin_acl.rs",
+    "ca9a5086b00dd111341d115631b0790ffae8dbf90e4dc60e73816fe8161b291c": "source/current/crates/incant_render/src/pipeline_cache/metal.rs",
+    "db9519a39b2d67fded87d0dd31fc48eecc593b05fc4092a1b4b2999b12d10513": "source/current/crates/incant_render/src/pipeline_cache/metal_diagnostic.rs",
+    "1f74716d5b31cb1ce09fc5e6567a755a1960f764b735edc25b7d740f43699488": "source/current/crates/incant_render/src/pipeline_cache/metal_private.rs",
+    "bd28f5f174dc0742eb2f5cce64d70fc12a695a07b0d8d0f85c8fafddcfe2ac6f": "source/current/crates/incant_render/src/pipeline_cache/metal_tests.rs",
+    "9f1ea5d5e074d47d2115ad4c7bf39419999f34a2a432f3f5f80fda40b37fd24e": "source/current/crates/incant_render/src/pipeline_cache/mod.rs",
+    "fff472139d6827e28a322abaaf878508c3fbefe56020b7947e1b3a063e196b5d": "source/current/crates/incant_render/src/pipeline_cache/private_tests.rs",
+    "2149f2560cf9fa445a8967bbf6109f2c19e3fc03d1c81e6795ef4ba651257bf3": "source/current/crates/incant_render/src/pipeline_cache/tests.rs",
+    "d510058f0285756b331fc75a9022df9d7aaccb0d19063ca0bf5224851bdd748b": "source/current/crates/incant_render/src/scene_msaa.rs",
+    "1eb21cb9b151b1211b29047361fc73371e1b76c673eb25537b16edbcff8ee510": "source/current/crates/incant_render/tests/metal_archives.rs",
+    "7ee5ea9bfef92859bf7109e07158ab82cb8ce41b007959c8eb5aa34a9d6ac7e3": "source/current/crates/incant_render/tests/support/mod.rs",
+    "d7aa056ae7021fb5b8bc09f328c7bad75499f856be719bce9fba716041a63712": "source/current/crates/incant_render_game/Cargo.toml",
+    "2942bf16946feee1be5e215be3237c139ed9ee3ce8d12034d194e8d9becd5d51": "source/current/crates/incant_render_game/src/lib.rs",
+    "b84ed52bdf728025541cc59ba01e9248af81f0718eea7eaf498f2808a2f91d57": "source/current/crates/incant_render_game/src/recorded_ui.rs",
+    "4a13fcef0149607bb64a3cd10ca1120cd214e22499fa104475a25fd223154141": "source/current/crates/incant_render_game/src/texture_refresh.rs",
+    "12c57a930d79bbdaf9728f8274c5e4b9df5b30d7c2d0392beb25064461ac404c": "source/current/crates/incant_render_game/src/ui.rs",
+    "d08a5488361c509f0f71883ad2f1138cfe3478d44914cf1870af7efd646f9783": "source/current/crates/incant_render_gpu_host/Cargo.toml",
+    "c1bdecc1d47e9df11d5a5be1033faa522ab9f21b839c367195ef4124012268cd": "source/current/crates/incant_render_gpu_host/src/lib.rs",
+    "846cff341d66017cb9aec3e7e550d0e1c2b27047137aa495695d903718d838cd": "source/current/crates/incant_render_gpu_host/src/metalfx.rs",
+    "2c713f5a01dbd7c657c8708182015373f8d0ebf1c18d307a4e1962b4b8d24e88": "source/current/crates/incant_render_gpu_host/src/metalfx_tests.rs",
+    "4e6deda2ceb12f3dc371ec4cdd06ead2a6a2d083e979bef1837e3ecadfeb3d6e": "source/current/crates/incant_render_gpu_host/src/motion.rs",
+    "60396c4e562dfed6c87c9b916496bfe913313d3e29d63de37718265e2dcb9417": "source/current/crates/incant_render_gpu_host/src/resolution.rs",
+    "8c70921bc14c1791c7ceeb7b93c53cfffccb4afa2e3a8427ca6fe4036f1227e1": "source/current/crates/incant_render_gpu_host/src/resolution_mailbox.rs",
+    "da83c969f28872590f8c76337242c55d0051cb21debe2666c58ed89ad9f1cbee": "source/current/crates/incant_render_gpu_host/tests/game.rs",
+    "75a3e9521054db8cb140c250709dc050e7ae1890c84147fc67c09b689ecca198": "source/current/crates/incant_render_gpu_host/tests/game/animated_refresh.rs",
+    "0ae552d0c2321767e63e6ea8c2ebfa90053cf77c98292d47262e7ed309d9838b": "source/current/crates/incant_render_gpu_host/tests/game/model_refresh.rs",
+    "9ef9c41b62b22ad2c827638bbfc8bac929d296e32dbb9fb8cd374a915f760c04": "source/current/crates/incant_render_gpu_host/tests/game/model_refresh/materials.rs",
+    "d51370d5175169e0fb81da87843816c975fa029e68978789a7d55f7ec3ccb7e3": "source/current/crates/incant_render_gpu_host/tests/game/texture_refresh.rs",
+    "7ebe885a261c7d6e366e1c3095be25494622ff108f67770d82934074e3e6dd54": "source/current/crates/incant_render_gpu_host/tests/ui.rs",
+    "f08748483c6555dce55b94b39b0b533e2454a2e6f54351b8f6c7112ff70e1d9f": "source/current/crates/incant_render_native/Cargo.toml",
+    "dc439d9c560d5088b9bbf726763c16ac224dc12e9d68b578aed146e774e2f042": "source/current/crates/incant_render_native/src/animation.rs",
+    "5e16897927075a0961c64a51aa1b556d592eee2d1c096642192b2aa01a246c8a": "source/current/crates/incant_render_native/src/binding.rs",
+    "ed4d28c0cb60a2f8972839a833227de317a86e58aa114fc44c58e4a5165afc87": "source/current/crates/incant_render_native/src/lib.rs",
+    "065405a906cc0fe66d68c287229a9762ca91f473ea27eb69e791e698b6fb2114": "source/current/crates/incant_render_native/src/model_refresh.rs",
+    "b45a27516c0961e2160ebb025ea457c7ade0e94322056051d7c174eb34918b0a": "source/current/crates/incant_render_native/src/text.rs",
+    "b4bb7457913a100c7d467af35f96201a5cb5d9cca043d110ce1938f50815ca53": "source/current/crates/incant_render_native/src/texture_refresh.rs",
+    "cb85ca7a988c2cd20ae6a594934a34d741cc23079b18c5970658d8fdf956c683": "source/current/crates/incant_render_native/src/tilemap.rs",
+    "5e12573360aa027910a5e9046d2342ae668b14a83f70cb390d53c4c59c50b92a": "source/current/crates/incant_render_native/src/update.rs",
+    "b0e70a95558f3be55d8bce25141c07b588c8dd9734cca6136079362958418346": "source/current/crates/incant_render_native/tests/allocations.rs",
+    "f17f678d115a37363f08503e9e59ca9d6c46361deba7336908c44fa7b6329517": "source/current/crates/incant_render_native/tests/animated_refresh.rs",
+    "e6e2161e2eb8f573b40e85216aeaed5de8324cb022869bf5abfe7bc0a165a69d": "source/current/crates/incant_render_native/tests/animated_refresh/continuity.rs",
+    "7445252048c00347d42f383c275080f8a5bfe809ff2cb3d8a909309fa6579453": "source/current/crates/incant_render_native/tests/animated_refresh/refusals.rs",
+    "25ef66220a464761fbc897a1f1eb655c027a782e76a7dddda8b9b14c8348f638": "source/current/crates/incant_render_native/tests/animation.rs",
+    "21b1613ee156151f3eff88415ea37e6cd546aeacfd41167e8504b85ab24430c6": "source/current/crates/incant_render_native/tests/animation/crossfade.rs",
+    "bd3ae61611ca378e97e2e660fe801849aeafcf25d59f0fd69092b2dc5938ce81": "source/current/crates/incant_render_native/tests/animation/ik.rs",
+    "216105c7c10ad6e63333cfccabfaf0ae7de5b9e0fe44ea11264f22f48640b71f": "source/current/crates/incant_render_native/tests/animation/root_motion.rs",
+    "2382d85e6ce410323b276f071c66a1ddbf081cc535084596bfcf447c4640d23e": "source/current/crates/incant_render_native/tests/bindings.rs",
+    "36de01584e32d3240d1e227701ddb38c9a3c04c4300937ea96c034edff0f9aa0": "source/current/crates/incant_render_native/tests/common/allocations.rs",
+    "ee28e0af0fbd98e383a6224b54d7d27730629edd6aa3b83f84f8268d3777651f": "source/current/crates/incant_render_native/tests/common/animated_refresh.rs",
+    "ddd49a2a531141da07160da8c33fc7b5caf271209bde67cd0ec34565c392fad4": "source/current/crates/incant_render_native/tests/common/material_refresh.rs",
+    "0b7176c461243572703e61c6b8024fbb0f009e058a89345c4adfc72317bb3f3f": "source/current/crates/incant_render_native/tests/common/mod.rs",
+    "30d29c077d3f9e5009b5c470d2992c952a7a860d66645cf80db0316c65ea0ae5": "source/current/crates/incant_render_native/tests/common/model_refresh.rs",
+    "b2c93432438fad8e866ccc1169f22d2ee0e5df38a3bd598ad5bb2704146c4f8e": "source/current/crates/incant_render_native/tests/common/text.rs",
+    "c3168201cf7acae2d6037557b49f80c60ef1440808dd63f9388c46bcaa81c414": "source/current/crates/incant_render_native/tests/flipbook.rs",
+    "eb6a6c75827652b0f76cf8abcae0e6a3441930b0b1c42860cd199e26b69b97d0": "source/current/crates/incant_render_native/tests/light_controls.rs",
+    "373f68d0d503e264599fc7052c0b0060e38413bc743cb19b137f3737ab5ca7ec": "source/current/crates/incant_render_native/tests/model_refresh.rs",
+    "27ef5f33486cb95b7b6adff5610ae21a8551c320d14c7a5781a0ab292f8c6583": "source/current/crates/incant_render_native/tests/model_refresh/material_navigation.rs",
+    "b8a5b96215b8bd32a29ec1b4a2b236b221d7d3dc3c45f195e6aa0ae400627c60": "source/current/crates/incant_render_native/tests/model_refresh/materials.rs",
+    "8c72d139ecd57f17dbf5fafc9bb3d4cbcdc10e300cf5dfcec2e069386e881948": "source/current/crates/incant_render_native/tests/retained.rs",
+    "96a80695c9ddf5dac6a8773c5634cf3c0545647e91c75b015c06fbc619d9a36c": "source/current/crates/incant_render_native/tests/text_input.rs",
+    "083fa44fc73f1800a7cf9f1709c7244459110e7e9e0302aa3a46952c2fb8170f": "source/current/crates/incant_render_native/tests/text_refusal.rs",
+    "0f7ebe9673c539885f2db78240b88e1d596a6ddf6741b14d5e67ea10a8b7b7f1": "source/current/crates/incant_render_native/tests/texture_refresh.rs",
+    "6a6dc966b9166adc2737117ec30ec74c2d3c08244aa1f49f540f03b07f50e629": "source/current/crates/incant_render_native/tests/tilemaps.rs",
+    "b35cd40cc5992706c9326b0ab5bbc59f9b8e2364cbd6ce4b700c68ea458aca2f": "source/current/crates/incant_runtime/src/navigation.rs",
+    "9945df566a125c0216d8a55635eade907f49943df7454eb5a3a6c40e3a1544ee": "source/current/crates/incant_runtime/src/navigation_runtime.rs",
+    "ba1f98eddeef3becebe82831ea45cf6de4f7462e8e24ca422e4e68f7152a397f": "source/current/crates/incant_runtime/src/physics.rs",
+    "89e4bb9b9b95ddb69522aee30fd94e2983e21adc486b60273c28e32f332f9ffc": "source/current/crates/incant_runtime/src/spatial.rs",
+    "0ef2abf422419f8cf5e817dfeeda67350f8109dffb34e4f85159da3c8d2d4c27": "source/current/crates/incant_runtime/src/spatial_view.rs",
+    "5de0926f4e34d39b56bb71fddbf96ce73d2d9de504300736be0dd6a64aee43ce": "source/current/editor/app/src/play/texture_refresh.rs",
+    "c6e63d9832830b858d930007e4fd1fc3f4a3ca1d287483b08077b7f0267ca124": "source/current/rust-toolchain.toml",
+    "11d006bc7a7b608c9a74a884e9975a046ef833085d2284deea13f2e3447e71ec": "source/current/third_party/wgpu-hal/Cargo.toml",
+    "12f51b552f5480eb1a8f73db40e9335bc923dbed7d7f7d0830d15fd847519c11": "source/current/third_party/wgpu-hal/src/metal/adapter.rs",
+    "0030c9caee45e52e4cd10f8449e312262947947c99d2ff088289d2024432250a": "source/current/third_party/wgpu-hal/src/metal/binary_archive.rs",
+    "27a2e07f91e0a7d81eb0b625e3fc174c488d73916d218dd512e8a6812b12f3b4": "source/current/third_party/wgpu-hal/src/metal/device.rs",
+    "47067e72366e2ef9d0a57c9a0a21496c4840924c0db78e7d7cd38c2d4c9f305e": "source/current/third_party/wgpu-hal/src/metal/mod.rs",
+    "9aef98d613601b0c374c1d0499afb39d710cbf5002faba537f21be9c11ff72e3": "source/current/tools/cargo",
+    "58dd2a8231d7f9d1e42070fc85425461e06a43f279fa5e7f8e57b4a40c3a3aa4": "source/current/tools/native_process.py",
+    "398df7c2b004e0d384e4e3e930cfb095b969c9959815b3239c57665743bf32fa": "source/history/398df7c2b004e0d384e4e3e930cfb095b969c9959815b3239c57665743bf32fa/crates/incant_render_native/tests/animated_refresh/refusals.rs",
+    "48867503a174beac8fc782d16050fd29f7c21d7a9e6b6924bbcc73cd78e85168": "source/history/48867503a174beac8fc782d16050fd29f7c21d7a9e6b6924bbcc73cd78e85168/crates/incant_render_native/tests/common/animated_refresh.rs",
+    "bb1058f77d551af30ff3d5426c6183fc26f2c72e86271612550f17e7abdcb26f": "source/history/bb1058f77d551af30ff3d5426c6183fc26f2c72e86271612550f17e7abdcb26f/crates/incant_render_native/tests/common/material_refresh.rs",
+    "0ada559bd0abd80dcae623474abcc744895e16e797eda54e2907d3c2d1e25706": "source/history/0ada559bd0abd80dcae623474abcc744895e16e797eda54e2907d3c2d1e25706/crates/incant_render_native/tests/common/animated_refresh.rs",
+    "bee85788cb2c7f28264d58fc18bb1a4af8c49773ca4a48f84a39b205c5f0d0d3": "source/history/bee85788cb2c7f28264d58fc18bb1a4af8c49773ca4a48f84a39b205c5f0d0d3/crates/incant_render_gpu_host/tests/game/animated_refresh.rs",
+    "8201f42339421bd89f3ccdea779b4cab7a9a78367f7c51d207d0653d4d0cafe0": "source/history/8201f42339421bd89f3ccdea779b4cab7a9a78367f7c51d207d0653d4d0cafe0/crates/incant_render_gpu_host/tests/game/model_refresh/materials.rs",
+    "b0f8e05bd52108d09f8d7f9a2756bfc23fa18aa555bd1f9d04b72c82f2c9d4f2": "source/history/b0f8e05bd52108d09f8d7f9a2756bfc23fa18aa555bd1f9d04b72c82f2c9d4f2/crates/incant_render_gpu_host/tests/game/model_refresh/materials.rs"
+  },
+  "binaries": [
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-core-tick-diagnostic-target/aarch64-apple-darwin/ci/deps/texture_refresh-9cdb907b8ebf6863",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu001-failure-artifacts/texture_refresh",
+      "sha256": "33679227bf9838bbb8f77e32c889f0f04ff652ff59eef701664ad3f3dba1657d",
+      "bytes": 17769840,
+      "features": [
+        "default",
+        "physics-deterministic"
+      ]
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-core-tick-diagnostic-target/aarch64-apple-darwin/ci/deps/model_refresh-cb640e0317a6042b",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu001-failure-artifacts/model_refresh",
+      "sha256": "0480550d411cf4e752e7879522c5053e8860628ac40b1dea7867bfe093ccdeb1",
+      "bytes": 14266992,
+      "features": [
+        "default",
+        "physics-deterministic"
+      ]
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-core-tick-diagnostic-target/aarch64-apple-darwin/ci/deps/animated_refresh-72ad044ab93a6d56",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu001-failure-artifacts/animated_refresh",
+      "sha256": "d4650aa94adf5b0b089fd2a5528068310b7d19692e0ff5392d14666c7abd5950",
+      "bytes": 19432752,
+      "features": [
+        "default",
+        "physics-deterministic"
+      ]
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-core-tick-diagnostic-target/aarch64-apple-darwin/ci/deps/texture_refresh-9cdb907b8ebf6863",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-002/artifacts/0-texture_refresh",
+      "bytes": 17769840,
+      "sha256": "33679227bf9838bbb8f77e32c889f0f04ff652ff59eef701664ad3f3dba1657d",
+      "features": [
+        "default",
+        "physics-deterministic"
+      ],
+      "kind": [
+        "test"
+      ]
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-core-tick-diagnostic-target/aarch64-apple-darwin/ci/deps/animated_refresh-72ad044ab93a6d56",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-002/artifacts/0-animated_refresh",
+      "bytes": 19432752,
+      "sha256": "7a28cea5f55ad60bd6f622a10b5cc8f1b7e6ba9a31436f065d80d1762b187849",
+      "features": [
+        "default",
+        "physics-deterministic"
+      ],
+      "kind": [
+        "test"
+      ]
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-core-tick-diagnostic-target/aarch64-apple-darwin/ci/deps/model_refresh-cb640e0317a6042b",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-002/artifacts/0-model_refresh",
+      "bytes": 14267136,
+      "sha256": "d661f6e66425bce685a214d98e2ab673793d0411bc5056c4f03650b8e9c5166e",
+      "features": [
+        "default",
+        "physics-deterministic"
+      ],
+      "kind": [
+        "test"
+      ]
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-core-tick-diagnostic-target/aarch64-apple-darwin/ci/deps/texture_refresh-cf7fbd4ae66233db",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-002/artifacts/1-texture_refresh",
+      "bytes": 32207248,
+      "sha256": "3e0863e6460acaab13f79205c66d3c8622d17633673e938063a35124e35a3d86",
+      "features": [
+        "default",
+        "physics-deterministic"
+      ],
+      "kind": [
+        "test"
+      ]
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-core-tick-diagnostic-target/aarch64-apple-darwin/ci/deps/model_refresh-b294625135644776",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-002/artifacts/1-model_refresh",
+      "bytes": 38056960,
+      "sha256": "c16b7701a5ea61b7505d9f6195870a75b0e4aca2d81cc3bc13cebc65186119aa",
+      "features": [
+        "default",
+        "physics-deterministic"
+      ],
+      "kind": [
+        "test"
+      ]
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-core-tick-diagnostic-target/aarch64-apple-darwin/ci/deps/animated_refresh-fad95a0371a948ab",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-002/artifacts/1-animated_refresh",
+      "bytes": 37851168,
+      "sha256": "4c8a6ecc23d3435c8b135da86946e24baf65cb57a3a2d1eb60ec74d2e6f6a0f2",
+      "features": [
+        "default",
+        "physics-deterministic"
+      ],
+      "kind": [
+        "test"
+      ]
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-core-tick-diagnostic-target/aarch64-apple-darwin/ci/deps/game-579a33ace0499694",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-003/artifacts/0-game",
+      "bytes": 34063592,
+      "sha256": "22c350e32f973b07bb28dfa7c39116138c68dd16e359a6f930f27845e5aa4ee4",
+      "features": [
+        "default",
+        "physics-deterministic"
+      ],
+      "kind": [
+        "test"
+      ]
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-core-tick-diagnostic-target/aarch64-apple-darwin/ci/deps/game-579a33ace0499694",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-004/artifacts/0-game",
+      "bytes": 34063720,
+      "sha256": "9a5ff777b60e51ddd94733c4aa18af363835cc383daebf2de895e55fbf199f62",
+      "features": [
+        "default",
+        "physics-deterministic"
+      ],
+      "kind": [
+        "test"
+      ]
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-core-tick-diagnostic-target/aarch64-apple-darwin/ci/deps/game-579a33ace0499694",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/cpu-005/artifacts/0-game",
+      "bytes": 34063720,
+      "sha256": "124a8ae5934559054d45645db15d22ed152f70d628c43cbbcd9e58ddec3eaafa",
+      "features": [
+        "default",
+        "physics-deterministic"
+      ],
+      "kind": [
+        "test"
+      ]
+    }
+  ],
+  "evidence_root": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001",
+  "scope": [
+    "37 native/Play controls at14cc plus1 importer fixture at final8e5745 and applicable strict lints. Source-qualified tests are not relabeled as rerun on later composition.",
+    "Actual single Metal GPU control passes612 primary pixels/7accepted frames at unchanged publication clock; no native window/capture/appearance/performance gate.",
+    "CPU001 tangent guard, CPU003 duplicate module and GPU001 incorrect observer failures remain original failed receipts.",
+    "160 bounded source inventory is not full transitive compiler/toolchain identity. Explicit main355 source join has3 extra compiler/observation inputs, separately qualified main355; no new native execution claimed.",
+    "No executable bytes checked in;12 external copies total313245720B retained under explicit320MiB cumulative cap."
+  ],
+  "unbundled_ancestry_diffs": [
+    {
+      "key": "main355-composition/source.diff",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/main355-composition/source.diff",
+      "bytes": 420105,
+      "sha256": "9024e8e38fbbf1b28df7021350193703a0caee285df793ceb23ef533beead29e",
+      "reason": "Broad ancestry diff embeds unrelated already-reviewed evidence archives; hash retained, native changed inputs and source inventories remain bundled."
+    },
+    {
+      "key": "source-004/successor.diff",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/live-material-binding-refresh-001/source-004/successor.diff",
+      "bytes": 3519577,
+      "sha256": "aa6009a7c47b6a931b5c74ccbc3ce1dda6af6c0bbbac727e905e57a14857f4b6",
+      "reason": "Broad ancestry diff embeds unrelated already-reviewed evidence archives; hash retained, native changed inputs and source inventories remain bundled."
+    }
+  ]
+}

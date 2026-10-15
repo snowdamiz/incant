@@ -1,0 +1,3418 @@
+{
+  "format": "incant-cooked-metalfx-boundary-evidence-v1",
+  "native_source": "7aa8b9cedaea2dd9c13e6c6e11e82f091ab199b0",
+  "producing_parent_main": "1581ef891b3bf3614378a77201a2851fd711a654",
+  "evidence_root": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001",
+  "archive_sha256": "648e4739407d98318c570e1f35fc3eaac80a8958b820ed875ed97b364d1c05ff",
+  "source_scope": "185 frozen bounded build/audit/fixture inputs, including178 executable/tool inputs and7 historical markdown files; not a full transitive toolchain snapshot. Only code_input rows compare against final live/Git source; final prose and STATUS are later documentation changes.",
+  "qualification": {
+    "cooker_tests": 54,
+    "default_renderer_tests": 191,
+    "full_renderer_tests": 224,
+    "ignored_each": 62,
+    "partial_and_dedicated_admission_tests": 3,
+    "focused_final_guard_tests": 2,
+    "pure_controls": 39,
+    "comparator_refusal_controls": 4,
+    "lifecycle_controls": 3,
+    "catalog_families": 25,
+    "catalog_artifacts": 144,
+    "artifact_bytes": 632455,
+    "generated_files": 194,
+    "native_GPU_children": 2,
+    "boundary_cases_each": 17,
+    "raw_bytes_each": 87040,
+    "cross_mode_tolerance": 0,
+    "original_CPU_failures": [
+      "CPU001 missing Fallback import",
+      "CPU002 test-only assertions_on_constants lint"
+    ],
+    "player": "compile only; native-metalfx absent in actual public player graph",
+    "vendor_scaler_player_window_capture_runs": 0,
+    "appearance_performance_cache_hit_shipping_export_shader_stall_gate_claim": false
+  },
+  "binaries": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-001/artifacts/0-incant_shader_cook",
+      "bytes": 4648352,
+      "sha256": "94148bb34ac1ac3ab9445a43295296036836a1e88baaa341d060e5bec5374191",
+      "features": [],
+      "producing_attempt": 1
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-001/artifacts/0-output_bundle",
+      "bytes": 3805712,
+      "sha256": "604ee11e4e2f172b2529fb33d9f4878fc56a518a7609f2e12dc795211990a1ff",
+      "features": [],
+      "producing_attempt": 1
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-001/artifacts/0-ui",
+      "bytes": 4404352,
+      "sha256": "f5d7c2e0b7c306cbe3096b16a76be897853650ec16b97c828564674a39be12ef",
+      "features": [],
+      "producing_attempt": 1
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-001/artifacts/0-text",
+      "bytes": 4404856,
+      "sha256": "eb863785d42c2994fc020f90175fe96844a63d20981e4172760e1de6745c681e",
+      "features": [],
+      "producing_attempt": 1
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-001/artifacts/0-temporal",
+      "bytes": 5262760,
+      "sha256": "ac08347a66dd6e714dc914fda1517d6eb4499425fafd6b5dc87c6dfcb8792c11",
+      "features": [],
+      "producing_attempt": 1
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-001/artifacts/0-metalfx_boundary",
+      "bytes": 5225600,
+      "sha256": "bde473f9d917d3cfed3e11a7d2072cfd8544c800db201ff08ffee580fc7f156a",
+      "features": [],
+      "producing_attempt": 1
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-001/artifacts/0-material",
+      "bytes": 5252424,
+      "sha256": "5fb0f4855b79bd1b62168502be5c0fa68869223a1887a37341bd2ec4bd9a41cc",
+      "features": [],
+      "producing_attempt": 1
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-001/artifacts/0-output",
+      "bytes": 5046504,
+      "sha256": "55bbf9107978388345af4705ea19421ccc4dac6de42c1251b879ff1afd506c45",
+      "features": [],
+      "producing_attempt": 1
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-001/artifacts/0-compute",
+      "bytes": 5078824,
+      "sha256": "65b69b1438e9c89a0c6aac3e1c98981e555ce4d7e9b3b93ed9d05a17b6fb88a6",
+      "features": [],
+      "producing_attempt": 1
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-001/artifacts/0-geometry",
+      "bytes": 5232152,
+      "sha256": "20ca09df169239fcb4f532d8d40ff969e9eda4dc3a1bd0580d7c67d7626a91e5",
+      "features": [],
+      "producing_attempt": 1
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-001/artifacts/0-ambient_occlusion",
+      "bytes": 5447488,
+      "sha256": "7d9c21af5e7e87ffcabe68305a4872c316779a52c9c1d3d18747fb4d760e07d8",
+      "features": [],
+      "producing_attempt": 1
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-001/artifacts/0-audit",
+      "bytes": 4829704,
+      "sha256": "ca0432becdfa0983a8946958b3858a77fe03207554a9f0aba2d1e5a1a027395c",
+      "features": [],
+      "producing_attempt": 1
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-001/artifacts/0-bloom",
+      "bytes": 5284888,
+      "sha256": "8e544edf20403d690898eaae64b04cb282f581953fdf633a91a090c68ea3baf5",
+      "features": [],
+      "producing_attempt": 1
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-002/artifacts/0-incant_render",
+      "bytes": 33487888,
+      "sha256": "e13ee368285b5ac996f964685325e79bf93f790531418bff7148977ef5c1bb14",
+      "features": [
+        "default",
+        "native-metalfx",
+        "physics-deterministic"
+      ],
+      "producing_attempt": 2
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-002/artifacts/1-incant_render",
+      "bytes": 34684928,
+      "sha256": "018c378f460bce25ac6bbf29d7956ae5e9aff43caab0518a83d325ed0a2025b1",
+      "features": [
+        "cooked-bloom",
+        "cooked-clusters",
+        "cooked-geometry",
+        "cooked-materials",
+        "cooked-metalfx-boundary",
+        "cooked-native-shaders",
+        "cooked-output",
+        "cooked-sprites",
+        "cooked-ssao",
+        "cooked-temporal",
+        "cooked-text",
+        "cooked-ui",
+        "native-metalfx",
+        "persistent-pipeline-cache",
+        "physics-deterministic"
+      ],
+      "producing_attempt": 2
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/artifacts/0-incant_render",
+      "bytes": 33487888,
+      "sha256": "5d82c5fab0402c2064f7d6bee476306ac08b1e6c283d31a7dfbffdee166cfd0c",
+      "features": [
+        "default",
+        "native-metalfx",
+        "physics-deterministic"
+      ],
+      "producing_attempt": 3
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/artifacts/1-incant_render",
+      "bytes": 34684928,
+      "sha256": "d1f753bf3974560d266b918988cf991c3c1fdd868a433474449fa7eba15dd3d8",
+      "features": [
+        "cooked-bloom",
+        "cooked-clusters",
+        "cooked-geometry",
+        "cooked-materials",
+        "cooked-metalfx-boundary",
+        "cooked-native-shaders",
+        "cooked-output",
+        "cooked-sprites",
+        "cooked-ssao",
+        "cooked-temporal",
+        "cooked-text",
+        "cooked-ui",
+        "native-metalfx",
+        "persistent-pipeline-cache",
+        "physics-deterministic"
+      ],
+      "producing_attempt": 3
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/artifacts/4-incant_game_player",
+      "bytes": 33029936,
+      "sha256": "86329755925b267c40a758856e50c5d05e72a4a9606e360763d7a0102004f526",
+      "features": [
+        "cooked-native-shaders",
+        "native-window",
+        "profile",
+        "render-gpu",
+        "render-input"
+      ],
+      "producing_attempt": 3
+    }
+  ],
+  "records": [
+    {
+      "key": "compare-boundary.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/compare-boundary.py",
+      "bytes": 5006,
+      "sha256": "a7496b33721bc4bf69d5d1d5f2466924d0ec58eb6c7c108d9699942236bbe967"
+    },
+    {
+      "key": "compare-controls-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/compare-controls-001.log",
+      "bytes": 102,
+      "sha256": "3b0dbb90387b342ccecc50446a0fb5e4385d86a3f467e5b97d63f8924fc08aff"
+    },
+    {
+      "key": "compare-controls.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/compare-controls.py",
+      "bytes": 4795,
+      "sha256": "6b9d3b43ed26c0c9bf38471aa3d980037788084959215cc2c696e738c29d784d"
+    },
+    {
+      "key": "controls-001.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/controls-001.py",
+      "bytes": 2159,
+      "sha256": "086467863307aacfc3a6b89a14afea456548f9ba85929ec7a961d2b81cfa5ba1"
+    },
+    {
+      "key": "cpu-proposal-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-proposal-001.json",
+      "bytes": 9006,
+      "sha256": "d238627f334e9787adbb70afa3b73efe81700e79591f0408f9e310204094acee"
+    },
+    {
+      "key": "cpu-proposal-002.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-proposal-002.json",
+      "bytes": 9050,
+      "sha256": "1fe92f3c78cb5f21a356ae6000e55f1ee686495026c862f986335f8317617099"
+    },
+    {
+      "key": "cpu-proposal-003.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-proposal-003.json",
+      "bytes": 7612,
+      "sha256": "5b182a249ff0fc0b02c17e56835dd0cfb3ae75690202bcb7d7dd9f35b9217bd3"
+    },
+    {
+      "key": "cpu-supervisor-001.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-supervisor-001.py",
+      "bytes": 13648,
+      "sha256": "5fe97eda6ee361e712372c3b090e5b0a02b7c0a2fe3bbc0e330326d4f732ee56"
+    },
+    {
+      "key": "cpu-supervisor-002.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-supervisor-002.py",
+      "bytes": 14462,
+      "sha256": "14394cda10d0fc2d09a93a732db852a67c440c391eaa8869c776d4b64994da9a"
+    },
+    {
+      "key": "cpu-supervisor-003.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-supervisor-003.py",
+      "bytes": 14619,
+      "sha256": "6383f28793c8c651d4e212efeb18342766c18cd53ee9ef4f13635cda8ae3e0f8"
+    },
+    {
+      "key": "cpu001-closeout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu001-closeout.json",
+      "bytes": 762,
+      "sha256": "a32497aba2e09eba87625ecd55a437c3457abe67e0c047e5efccf612fc891d52"
+    },
+    {
+      "key": "cpu002-closeout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu002-closeout.json",
+      "bytes": 2369,
+      "sha256": "7c23308710cb26508cfa847f6bfbcac208209695ede80dc07210b8ee6a945b3a"
+    },
+    {
+      "key": "cpu003-closeout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu003-closeout.json",
+      "bytes": 3649,
+      "sha256": "7dc9cad9a734424b0b50df89c263359ba00dd1c29b5bfdd482ec678782366632"
+    },
+    {
+      "key": "gpu-proposal-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/gpu-proposal-001.json",
+      "bytes": 7049,
+      "sha256": "d854eae0e917bcf661b543880999887ce4f29e3f8c5f9c87e6de95b21ed03df6"
+    },
+    {
+      "key": "gpu-readiness-001-controls.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/gpu-readiness-001-controls.log",
+      "bytes": 102,
+      "sha256": "4a160235c0add54f7a5997815d0e01a072210439de4899c702c94dd3cd814662"
+    },
+    {
+      "key": "gpu-readiness-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/gpu-readiness-001.json",
+      "bytes": 770,
+      "sha256": "8fd90b99a3d8806b056d422a90b2d87ba41f5e9487cb38d346f9425fe590f192"
+    },
+    {
+      "key": "gpu-supervisor-001.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/gpu-supervisor-001.py",
+      "bytes": 8841,
+      "sha256": "e4289498d94987ae4887743469b8d1161e66be4ff11dfa76136d7895841cc6fd"
+    },
+    {
+      "key": "gpu001-closeout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/gpu001-closeout.json",
+      "bytes": 1640,
+      "sha256": "002f597a2245b663f090893929cd69282f0d7c3d2c43bfdfe58a62b03186e9f5"
+    },
+    {
+      "key": "harmless-controls-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/harmless-controls-001.log",
+      "bytes": 101,
+      "sha256": "2c37d50a88147ca2ebd5197d74ee37d462dab650d793512e849814c28d5a38f0"
+    },
+    {
+      "key": "pure-controls-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/pure-controls-001.log",
+      "bytes": 138,
+      "sha256": "f8602bef6a116a3a270b1827d1638361b65b056691219a57fc6f0ec3fad23665"
+    },
+    {
+      "key": "root-cpu-grant-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/root-cpu-grant-001.json",
+      "bytes": 572,
+      "sha256": "546c4ca84ce7e3f471b3ea85000aa7dc72976c5cc5feecc9448272e43e956994"
+    },
+    {
+      "key": "root-cpu-grant-002.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/root-cpu-grant-002.json",
+      "bytes": 650,
+      "sha256": "68a809024f70e6c3bd644d1711c7cec664c8afacdf923c4c5e049e593d2299e7"
+    },
+    {
+      "key": "root-cpu-grant-003.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/root-cpu-grant-003.json",
+      "bytes": 495,
+      "sha256": "5b67a34bb7f3d8dc60b69251149685a89b30c79178b50e57b9cf80fd45cc5080"
+    },
+    {
+      "key": "root-cpu-review-003.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/root-cpu-review-003.json",
+      "bytes": 342,
+      "sha256": "a8ebc3d303e4603fd13f78a613ed19d357934e4fcb3ecbb9ce5f3d3d4ad66608"
+    },
+    {
+      "key": "root-gpu-grant-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/root-gpu-grant-001.json",
+      "bytes": 533,
+      "sha256": "25b9b6fa975b6515f91c37f11baf73f2499404e0f9cf7136af170953614a27e6"
+    },
+    {
+      "key": "root-gpu-review-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/root-gpu-review-001.json",
+      "bytes": 725,
+      "sha256": "890f86bc8978ae2c646140fbd007759a176f70309de2cd1fcb8252dcad40cf3a"
+    },
+    {
+      "key": "source-review-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-review-001.json",
+      "bytes": 2351,
+      "sha256": "e424eb980596069b6ddefffbd778288b30fbf2facfbcdf4a42486c0e18b46b39"
+    },
+    {
+      "key": "source/AGENTS.md",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/AGENTS.md",
+      "bytes": 6594,
+      "sha256": "48a48110f9676ab26fb90f8dd3cbffee5a7d8558f13a869c7089a0e39ac7b2ff",
+      "source_path": "AGENTS.md",
+      "code_input": false
+    },
+    {
+      "key": "source/Cargo.lock",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/Cargo.lock",
+      "bytes": 253308,
+      "sha256": "ffd8d6c9c3765625f2c2f87e52120074427ff705a73cc8ed9bae40e54c7341ba",
+      "source_path": "Cargo.lock",
+      "code_input": true
+    },
+    {
+      "key": "source/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/Cargo.toml",
+      "bytes": 3956,
+      "sha256": "163606d4b9886c5d0f9bb6a4b67fca4823523b4024f17a689dc9bab719c314a7",
+      "source_path": "Cargo.toml",
+      "code_input": true
+    },
+    {
+      "key": "source/PLAN.md",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/PLAN.md",
+      "bytes": 135340,
+      "sha256": "dc3a7369624c545bdedc28c53486679138fd546751e7b56916a622767ecb74a7",
+      "source_path": "PLAN.md",
+      "code_input": false
+    },
+    {
+      "key": "source/STATUS.md",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/STATUS.md",
+      "bytes": 275906,
+      "sha256": "a066e917a9aeb87bd07a6cc067af6d675c79073e31541e15c2bf7db937aac75d",
+      "source_path": "STATUS.md",
+      "code_input": false
+    },
+    {
+      "key": "source/crates/incant_game_player/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_game_player/Cargo.toml",
+      "bytes": 6036,
+      "sha256": "1ce5ce27f26f6bfeb9890709ae3eeabd82bbaf650468f6b993ecba812dacdd3b",
+      "source_path": "crates/incant_game_player/Cargo.toml",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_game_player/build.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_game_player/build.rs",
+      "bytes": 2080,
+      "sha256": "753fbb393cc5aa760b966de3ec1905bea1d80ea15a0ed0ee2aea95c86b4e06f2",
+      "source_path": "crates/incant_game_player/build.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/Cargo.toml",
+      "bytes": 4091,
+      "sha256": "c50e0591632446fff28be13fae3b4d2abf5bbba5310006b847d38ae0821ccee8",
+      "source_path": "crates/incant_render/Cargo.toml",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/build.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/build.rs",
+      "bytes": 12342,
+      "sha256": "62d56d84d7fc28958028c0404dc119db61db3c22f83c35b0a9e980fea260a5ab",
+      "source_path": "crates/incant_render/build.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/ambient_occlusion/ao.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/ambient_occlusion/ao.wgsl",
+      "bytes": 3796,
+      "sha256": "4aaa0cc0ed375555fb0069a974c79d7360337f3eebdebee43a87de58be94c6b6",
+      "source_path": "crates/incant_render/src/ambient_occlusion/ao.wgsl",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/ambient_occlusion/cooked.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/ambient_occlusion/cooked.rs",
+      "bytes": 9376,
+      "sha256": "10608610c44e237b293976752260516de70bb39917c291514534884042a4c8ff",
+      "source_path": "crates/incant_render/src/ambient_occlusion/cooked.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/ambient_occlusion/device_tests.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/ambient_occlusion/device_tests.rs",
+      "bytes": 4142,
+      "sha256": "56e8d2d740891f98ff5cf2d7fb8cd7fc141fce8443ad650c640792b7fa8dab81",
+      "source_path": "crates/incant_render/src/ambient_occlusion/device_tests.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/ambient_occlusion/draw.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/ambient_occlusion/draw.rs",
+      "bytes": 8216,
+      "sha256": "9bbcb185b562f9a49e80a16428db8d05214c9033cfa0c52a804e850e05ccf124",
+      "source_path": "crates/incant_render/src/ambient_occlusion/draw.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/ambient_occlusion/filter.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/ambient_occlusion/filter.wgsl",
+      "bytes": 2299,
+      "sha256": "6980525746bdc71e7bad3138786e29b40c4c03de00fa458c809a91bb29c84ed0",
+      "source_path": "crates/incant_render/src/ambient_occlusion/filter.wgsl",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/ambient_occlusion/filter_device_tests.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/ambient_occlusion/filter_device_tests.rs",
+      "bytes": 29056,
+      "sha256": "e31dd2936baf9db80fd520adf9f17f4d914324ba22531b9622e0ccf5098a0ada",
+      "source_path": "crates/incant_render/src/ambient_occlusion/filter_device_tests.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/ambient_occlusion/math.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/ambient_occlusion/math.rs",
+      "bytes": 6306,
+      "sha256": "e10cd3c9f6c18b9670eefe641984f868eea70395d2d466f71cd8f28470f052aa",
+      "source_path": "crates/incant_render/src/ambient_occlusion/math.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/ambient_occlusion/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/ambient_occlusion/mod.rs",
+      "bytes": 2298,
+      "sha256": "8e422ab01cf043c451bb437e6492336468aa3cb547659dd160501e1843bb7264",
+      "source_path": "crates/incant_render/src/ambient_occlusion/mod.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/ambient_occlusion/pipelines.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/ambient_occlusion/pipelines.rs",
+      "bytes": 7056,
+      "sha256": "cd1ea38ef35857cd571f418ad1d1b4e6aac9cdbfb6ea2f58ca1d2511189f0c38",
+      "source_path": "crates/incant_render/src/ambient_occlusion/pipelines.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/ambient_occlusion/positive_device_tests/fixture.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/ambient_occlusion/positive_device_tests/fixture.rs",
+      "bytes": 7205,
+      "sha256": "87c1c1387e777fadacfd3fd63ab64c2e80a6923ed3290fc1664782d734aad591",
+      "source_path": "crates/incant_render/src/ambient_occlusion/positive_device_tests/fixture.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/ambient_occlusion/positive_device_tests/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/ambient_occlusion/positive_device_tests/mod.rs",
+      "bytes": 6044,
+      "sha256": "a7f1798006b28685f72a1d305172f7e72c830d4159bda7121b2327877c37ea1b",
+      "source_path": "crates/incant_render/src/ambient_occlusion/positive_device_tests/mod.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/ambient_occlusion/prepass.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/ambient_occlusion/prepass.wgsl",
+      "bytes": 490,
+      "sha256": "f1b843db12c88666f5f47e38d99067386ea380b6e4fabfaab8852bb23aa24b22",
+      "source_path": "crates/incant_render/src/ambient_occlusion/prepass.wgsl",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/ambient_occlusion/quality_geometry.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/ambient_occlusion/quality_geometry.rs",
+      "bytes": 5634,
+      "sha256": "02ebb7b37af601239b31b376edae2e72fa81efd30cd464109d15e4215195df29",
+      "source_path": "crates/incant_render/src/ambient_occlusion/quality_geometry.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/ambient_occlusion/quality_metrics.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/ambient_occlusion/quality_metrics.rs",
+      "bytes": 6154,
+      "sha256": "88caaf9320cea79180f2747bcbb5b9eb96cba42a8bcb71940e99393b4a5b1d3c",
+      "source_path": "crates/incant_render/src/ambient_occlusion/quality_metrics.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/ambient_occlusion/quality_oracle.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/ambient_occlusion/quality_oracle.rs",
+      "bytes": 6472,
+      "sha256": "be5dc86c02027a1a530cb7df2df3be300b859a1a0b79c5f415d6e2490bf94f9b",
+      "source_path": "crates/incant_render/src/ambient_occlusion/quality_oracle.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/ambient_occlusion/quality_sphere.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/ambient_occlusion/quality_sphere.rs",
+      "bytes": 4872,
+      "sha256": "eb63b8e784a621fd0c43a07647191a7b50d74c969a6ffa56cd42274a08fd6b4c",
+      "source_path": "crates/incant_render/src/ambient_occlusion/quality_sphere.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/ambient_occlusion/quality_stripes.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/ambient_occlusion/quality_stripes.rs",
+      "bytes": 2560,
+      "sha256": "a9dd75a5480e14f1a3979d9db8e698f612ce3a96df1d671a7012c3936b2e70b4",
+      "source_path": "crates/incant_render/src/ambient_occlusion/quality_stripes.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/ambient_occlusion/quality_tests.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/ambient_occlusion/quality_tests.rs",
+      "bytes": 7641,
+      "sha256": "0ae711accc64189bfdd40b4a54ff07f8fcd62d0f6cd11242a5d2224608aae2e7",
+      "source_path": "crates/incant_render/src/ambient_occlusion/quality_tests.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/ambient_occlusion/raster.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/ambient_occlusion/raster.rs",
+      "bytes": 2470,
+      "sha256": "20434e09ad91f2b03b8384e026e0c1f2d02c1bbd26e418eec447c5f274f72abc",
+      "source_path": "crates/incant_render/src/ambient_occlusion/raster.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/ambient_occlusion/readback.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/ambient_occlusion/readback.rs",
+      "bytes": 12281,
+      "sha256": "ca5b0abccf6c63b1812d49ea3c6e91f609801346e0d4d85a0b9ef6fa68a0a3c3",
+      "source_path": "crates/incant_render/src/ambient_occlusion/readback.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/ambient_occlusion/shader.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/ambient_occlusion/shader.rs",
+      "bytes": 4291,
+      "sha256": "93e291ce85193a0bca9ac99926431a7e44fc3dd1f9b774aa81110d72b8b2fe7f",
+      "source_path": "crates/incant_render/src/ambient_occlusion/shader.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/ambient_occlusion/source.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/ambient_occlusion/source.rs",
+      "bytes": 1006,
+      "sha256": "27ac10f4a7a810acb9e08c2b2ad182cee77efcb26e55749048732fb10983a142",
+      "source_path": "crates/incant_render/src/ambient_occlusion/source.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/ambient_occlusion/targets.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/ambient_occlusion/targets.rs",
+      "bytes": 2622,
+      "sha256": "e56320eb4bb68b972d54239419ff572d6c02a31561a5a923518892547e1e42c2",
+      "source_path": "crates/incant_render/src/ambient_occlusion/targets.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/ambient_occlusion/tests.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/ambient_occlusion/tests.rs",
+      "bytes": 12711,
+      "sha256": "63b14628f0792591e9d3b138906b0efaad46f336d6fa36fbc660c6bc7e40aaf9",
+      "source_path": "crates/incant_render/src/ambient_occlusion/tests.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/bloom/config.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/bloom/config.rs",
+      "bytes": 4215,
+      "sha256": "4a24fb8608f8d3128850b241bc4d81130273c22d0be9f077acb3095b68507dc8",
+      "source_path": "crates/incant_render/src/bloom/config.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/bloom/cooked.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/bloom/cooked.rs",
+      "bytes": 4971,
+      "sha256": "8ffb0e4b11f366c4c43dc481bd137024aeccb6ecc52625b99b0c1c1b6767a2f3",
+      "source_path": "crates/incant_render/src/bloom/cooked.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/bloom/filter.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/bloom/filter.wgsl",
+      "bytes": 3801,
+      "sha256": "b7072285a7127af2d20b72db50aa8cee5e414152aa20c3667a836cc55254dfc7",
+      "source_path": "crates/incant_render/src/bloom/filter.wgsl",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/bloom/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/bloom/mod.rs",
+      "bytes": 10958,
+      "sha256": "930de4ab923c0e6895edb274b222e5efe761672f2454fe0b7e1b421abbae4b7e",
+      "source_path": "crates/incant_render/src/bloom/mod.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/bloom/output.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/bloom/output.wgsl",
+      "bytes": 1289,
+      "sha256": "d6fae2f7ff43524b9d6393e510d2d613a873a9aea9cebb0333a33583b5969e6a",
+      "source_path": "crates/incant_render/src/bloom/output.wgsl",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/bloom/source.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/bloom/source.rs",
+      "bytes": 671,
+      "sha256": "c5f3cff34e8b4b4bdd8572cf808801a84e0b00f2c91dde81df44f2c6f0a3ce09",
+      "source_path": "crates/incant_render/src/bloom/source.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/bloom/tests.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/bloom/tests.rs",
+      "bytes": 7520,
+      "sha256": "3d686a0051e034e1277c017b6098e2be3af367379a6bc74de4d972bdcf1c3f0f",
+      "source_path": "crates/incant_render/src/bloom/tests.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/bloom/tests/device.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/bloom/tests/device.rs",
+      "bytes": 10233,
+      "sha256": "e4ef217219108da2835d82cb843d683478664778ae9c5950f10029ff83be907e",
+      "source_path": "crates/incant_render/src/bloom/tests/device.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/fixture.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/fixture.wgsl",
+      "bytes": 563,
+      "sha256": "d6bf588021763f24e1052b929bf3168a9b4d93828473cddafbae0b0375c43136",
+      "source_path": "crates/incant_render/src/fixture.wgsl",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/lib.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/lib.rs",
+      "bytes": 19953,
+      "sha256": "401068b3087961864cfa42dddc847d7cdf327e3b11e422e82337c691b085dda6",
+      "source_path": "crates/incant_render/src/lib.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/lighting/grid.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/lighting/grid.wgsl",
+      "bytes": 2843,
+      "sha256": "461606edf6d9cb4c89581ef30ccf3ae5570a1e1bc0142ffe4953e91dfc2c0439",
+      "source_path": "crates/incant_render/src/lighting/grid.wgsl",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/lighting/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/lighting/mod.rs",
+      "bytes": 20143,
+      "sha256": "9f83db6879449b32cc2741a5ca21207ddc652743e4013d6b0a94f111409806d6",
+      "source_path": "crates/incant_render/src/lighting/mod.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/lighting/shade.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/lighting/shade.wgsl",
+      "bytes": 3898,
+      "sha256": "52757ae31c0e68c6480bec626ee81386b792fe06c803b0853f9c0a546667e2ad",
+      "source_path": "crates/incant_render/src/lighting/shade.wgsl",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/lighting/temporal_source.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/lighting/temporal_source.rs",
+      "bytes": 800,
+      "sha256": "5245bd6a5f72ca39bbbad5fb5101358114cbd9f402344199114a7af598a1eb73",
+      "source_path": "crates/incant_render/src/lighting/temporal_source.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/material_pipeline.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/material_pipeline.rs",
+      "bytes": 3578,
+      "sha256": "d6ddd41a4aa4f96bfc2baee7c294bbd37bc78356cb919445ccd6a511b6d01f37",
+      "source_path": "crates/incant_render/src/material_pipeline.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/material_shader.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/material_shader.rs",
+      "bytes": 4263,
+      "sha256": "08e7ee43d33731f24bd98c34cc1b099da883df43cc152886e0ea2e903b2717a9",
+      "source_path": "crates/incant_render/src/material_shader.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/materials.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/materials.rs",
+      "bytes": 13870,
+      "sha256": "774bdac11a757ef631f6fed8cc8c3e00e1f9fa4b765e5eeed3255e37ae9f5f34",
+      "source_path": "crates/incant_render/src/materials.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/metalfx/alpha.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/metalfx/alpha.wgsl",
+      "bytes": 936,
+      "sha256": "6caac78689a9b0a756d0ff3d3b69d55c64cc4df7dfd4bc9c9229a9ac46fb1752",
+      "source_path": "crates/incant_render/src/metalfx/alpha.wgsl",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/metalfx/boundary_tests.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/metalfx/boundary_tests.rs",
+      "bytes": 14821,
+      "sha256": "6d9e2811f4b7a0f860ff5703c0b0317c86fd3ad6e77e0241d553c7be629c53bf",
+      "source_path": "crates/incant_render/src/metalfx/boundary_tests.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/metalfx/common.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/metalfx/common.wgsl",
+      "bytes": 1774,
+      "sha256": "b491151d8c0c6f6dea3df77fac5054f2908c4dfb479d8977bc56d12ebf40091d",
+      "source_path": "crates/incant_render/src/metalfx/common.wgsl",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/metalfx/lifecycle.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/metalfx/lifecycle.rs",
+      "bytes": 7392,
+      "sha256": "0885fc18468db9f02e1af74508b82b948679dcf78b4306056c53290078560046",
+      "source_path": "crates/incant_render/src/metalfx/lifecycle.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/metalfx/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/metalfx/mod.rs",
+      "bytes": 6777,
+      "sha256": "ce4f4cbd8121663a13b3098d8376e75f6fba340e38209f8f4f2793f4169197ce",
+      "source_path": "crates/incant_render/src/metalfx/mod.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/metalfx/native.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/metalfx/native.rs",
+      "bytes": 10739,
+      "sha256": "825ffe55cee2a5fa553b830546f6670c644fa7c8b99dd30830706877a277b94b",
+      "source_path": "crates/incant_render/src/metalfx/native.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/metalfx/normalize.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/metalfx/normalize.wgsl",
+      "bytes": 1866,
+      "sha256": "245f531c16eb36234b02f689cda325c06446c7485f4cae9fa9d96e437935ba2b",
+      "source_path": "crates/incant_render/src/metalfx/normalize.wgsl",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/metalfx/owner.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/metalfx/owner.rs",
+      "bytes": 9773,
+      "sha256": "1a2ef4ee39268ecc8b252e4edde61a23b878d42cc91f3068bd462abfc5427f69",
+      "source_path": "crates/incant_render/src/metalfx/owner.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/metalfx/plan.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/metalfx/plan.rs",
+      "bytes": 5549,
+      "sha256": "366c602c55e9f667ffe78abde376ad2dab216e48908466782159bf1f52ba77ef",
+      "source_path": "crates/incant_render/src/metalfx/plan.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/metalfx/prepare.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/metalfx/prepare.wgsl",
+      "bytes": 1294,
+      "sha256": "aba8a2d1c1d6e82c965ba9c9cde80df9d639c34c4ef78dbea356873b0decd25f",
+      "source_path": "crates/incant_render/src/metalfx/prepare.wgsl",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/metalfx/prewarm_tests.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/metalfx/prewarm_tests.rs",
+      "bytes": 2749,
+      "sha256": "ad60bd7d02bb7396b158df4c47adff0e389f2254588ecdb15a6283aff4d7f2cb",
+      "source_path": "crates/incant_render/src/metalfx/prewarm_tests.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/metalfx/render.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/metalfx/render.rs",
+      "bytes": 3100,
+      "sha256": "44fa9cd16dd375f4f3fb0c1693a80f3d5b5823494068d6768747a266fbae4bd4",
+      "source_path": "crates/incant_render/src/metalfx/render.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/metalfx/shader.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/metalfx/shader.rs",
+      "bytes": 1310,
+      "sha256": "f00624f907502a50b15ee31172e6b9d3e9253a83843ca39ff85dc6aeb50ed929",
+      "source_path": "crates/incant_render/src/metalfx/shader.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/metalfx/shader/cooked.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/metalfx/shader/cooked.rs",
+      "bytes": 4910,
+      "sha256": "8688ad579bd0b4851b33b9be4f69405b6fdead8cc4e9377faa2bd28c60f765b1",
+      "source_path": "crates/incant_render/src/metalfx/shader/cooked.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/metalfx/source.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/metalfx/source.rs",
+      "bytes": 966,
+      "sha256": "f6cab7a96313b676c08e00ebc6c0c66b8ef886fed16455b51a2d4294f93663d7",
+      "source_path": "crates/incant_render/src/metalfx/source.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/metalfx/system.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/metalfx/system.rs",
+      "bytes": 13533,
+      "sha256": "c21e501756b36fec3acf40bbf0060309ae6cdb8d7ea00970484f08d2bc7249de",
+      "source_path": "crates/incant_render/src/metalfx/system.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/metalfx/targets.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/metalfx/targets.rs",
+      "bytes": 2902,
+      "sha256": "1e08debb881f0f33eaacaecd84e9a974d649ba4873a405132bd6737ba92197bc",
+      "source_path": "crates/incant_render/src/metalfx/targets.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/model_material.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/model_material.wgsl",
+      "bytes": 4814,
+      "sha256": "48a7b04de1595ce889e19b3888023d5a7c15b43a71ba3e111ee844fb97042a63",
+      "source_path": "crates/incant_render/src/model_material.wgsl",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/motion/attachment.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/motion/attachment.rs",
+      "bytes": 3307,
+      "sha256": "4d861ac34d6a68d0d17d069c473c49dc5cbef4ade93fb3a2869ae466303fd2f9",
+      "source_path": "crates/incant_render/src/motion/attachment.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/motion/draw.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/motion/draw.rs",
+      "bytes": 5032,
+      "sha256": "8472afd886bdfd6f277ab1b8924777e978f79a648793151a0547dad924d6d51e",
+      "source_path": "crates/incant_render/src/motion/draw.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/motion/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/motion/mod.rs",
+      "bytes": 2081,
+      "sha256": "c35ee977eb8c36dda8e40981bf83a0b316b8aaa2d422d720015dc0b450f210d2",
+      "source_path": "crates/incant_render/src/motion/mod.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/motion/owner.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/motion/owner.rs",
+      "bytes": 8438,
+      "sha256": "38ebec9d92355494ecd4125d1a2b810c16f63b6af23950ee3f146e54284a58ce",
+      "source_path": "crates/incant_render/src/motion/owner.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/motion/owner.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/motion/owner.wgsl",
+      "bytes": 2362,
+      "sha256": "6609cdeb274ac84affde85c4c77e8e7441dffbb748e07c2d709cb3aa8d606d00",
+      "source_path": "crates/incant_render/src/motion/owner.wgsl",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/motion/owner_system.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/motion/owner_system.rs",
+      "bytes": 5944,
+      "sha256": "894c38e54643c1e036bfebca66467afd30fcd20a79ce00392e7fda61a09853c2",
+      "source_path": "crates/incant_render/src/motion/owner_system.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/motion/plan.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/motion/plan.rs",
+      "bytes": 1598,
+      "sha256": "8af0181ea6defab33bb4b5bfb1e09c83308e77b88552deee7eb0fe9fd36c9dd3",
+      "source_path": "crates/incant_render/src/motion/plan.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/motion/provenance.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/motion/provenance.rs",
+      "bytes": 6216,
+      "sha256": "8c9cc56d37593c5f76da2456c79b4f63eea0d9a9bcf4b8f74c6994c9572780e6",
+      "source_path": "crates/incant_render/src/motion/provenance.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/motion/provenance_tests.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/motion/provenance_tests.rs",
+      "bytes": 5920,
+      "sha256": "1e250ac47d3da6ebd618203096d8460a4341edd95475d706972df8e8c70d06a1",
+      "source_path": "crates/incant_render/src/motion/provenance_tests.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/motion/retained.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/motion/retained.rs",
+      "bytes": 24102,
+      "sha256": "72444c59f335f8aa50b3817403263164cc8a6286ff331ef642d6de751c2fc63f",
+      "source_path": "crates/incant_render/src/motion/retained.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/motion/shader.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/motion/shader.wgsl",
+      "bytes": 2113,
+      "sha256": "1ebe19d03890654ad6d232881f97b6fd1d4a0ac3c9bdb29611d1b721a830477b",
+      "source_path": "crates/incant_render/src/motion/shader.wgsl",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/motion/system.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/motion/system.rs",
+      "bytes": 7738,
+      "sha256": "4804e193e4cc6c98ad7e267d14cc3553318d22dd4eebbd723e56b2b26d437761",
+      "source_path": "crates/incant_render/src/motion/system.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/motion/targets.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/motion/targets.rs",
+      "bytes": 2343,
+      "sha256": "6ab47ca2a9a10d3aaf7f8ddb0e293ae3dd1e61cc03a736ec77e6c40ca4ae0d2f",
+      "source_path": "crates/incant_render/src/motion/targets.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/motion/tests.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/motion/tests.rs",
+      "bytes": 11664,
+      "sha256": "d180c887241780b310ff2454d8d0243b09700123980e8cecb964f457f3c229d5",
+      "source_path": "crates/incant_render/src/motion/tests.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/motion_device_tests.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/motion_device_tests.rs",
+      "bytes": 13891,
+      "sha256": "44f86de845d637076ee097e1caf43074d77b8b302f3c0353dc1a7f891510c4c0",
+      "source_path": "crates/incant_render/src/motion_device_tests.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/motion_owner_device_tests.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/motion_owner_device_tests.rs",
+      "bytes": 16923,
+      "sha256": "b45eb56569afc3f3ae066d7906181def8579f6a4f4a34230429fb1024e9d9a5f",
+      "source_path": "crates/incant_render/src/motion_owner_device_tests.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/output.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/output.rs",
+      "bytes": 10617,
+      "sha256": "ae9c3ab1a39af408a1b891acf6b357561c8deea8c975d36ce5667ad883a88be4",
+      "source_path": "crates/incant_render/src/output.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/output.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/output.wgsl",
+      "bytes": 2351,
+      "sha256": "6ceefe2e706624f4fff93fab83fffc8e2938af514e3b2ce4e92a1389f11f6a8a",
+      "source_path": "crates/incant_render/src/output.wgsl",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/output/layout.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/output/layout.rs",
+      "bytes": 3572,
+      "sha256": "120dcb6b3e3adf9e4bc426f8a6b08e74b4afa05e882fab5341b51fa08c705360",
+      "source_path": "crates/incant_render/src/output/layout.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/pipeline_cache/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/pipeline_cache/mod.rs",
+      "bytes": 6292,
+      "sha256": "78d783b92936bbf40aa1678d221ae498fcd8bcaf06047d7b6e69dbd95522abf3",
+      "source_path": "crates/incant_render/src/pipeline_cache/mod.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/pipeline_cache/private.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/pipeline_cache/private.rs",
+      "bytes": 5273,
+      "sha256": "43109fa34d2e268aaf1c657c4cf5a8954a9eb949020f0184d78b85d4ee9f880e",
+      "source_path": "crates/incant_render/src/pipeline_cache/private.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/pipeline_cache/private_tests.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/pipeline_cache/private_tests.rs",
+      "bytes": 8304,
+      "sha256": "cd4cce64bff9d8c7eef10b894cd497175a6bd620e0ab89d06a417eeb03486a24",
+      "source_path": "crates/incant_render/src/pipeline_cache/private_tests.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/pipeline_cache/store.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/pipeline_cache/store.rs",
+      "bytes": 3564,
+      "sha256": "375e2f3360ed0154fe0aaa192f162c4be6953fbe33d2e0985859e18337c5f912",
+      "source_path": "crates/incant_render/src/pipeline_cache/store.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/pipeline_cache/store_tests.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/pipeline_cache/store_tests.rs",
+      "bytes": 6332,
+      "sha256": "2f58cf6a5ef012fe1d79666e92b1fd5fa9aaa481c8b03449e040130c58c7aad6",
+      "source_path": "crates/incant_render/src/pipeline_cache/store_tests.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/pipeline_cache/tests.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/pipeline_cache/tests.rs",
+      "bytes": 1631,
+      "sha256": "4fb977bfa678f3d80b2db6370973be57509459e684c15a8d9f0a6f6273994cdc",
+      "source_path": "crates/incant_render/src/pipeline_cache/tests.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/resource_error.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/resource_error.rs",
+      "bytes": 3035,
+      "sha256": "ec6f09e990dc4056c4d2059a2da730a6741edb8c2fb2c6ada06f14af7d8039ff",
+      "source_path": "crates/incant_render/src/resource_error.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/shader.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/shader.rs",
+      "bytes": 345,
+      "sha256": "9aeadf08eae040fb3d955cbf7d93b1e059add0fee17ebcfbe5356de133587dd5",
+      "source_path": "crates/incant_render/src/shader.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/shader/native.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/shader/native.rs",
+      "bytes": 5148,
+      "sha256": "17a8f454d1c58292331d668905ec84a40ca83a2809dd01f30b2dfeb7292897ec",
+      "source_path": "crates/incant_render/src/shader/native.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/shadows/caster.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/shadows/caster.wgsl",
+      "bytes": 846,
+      "sha256": "56d35a05cc78da000b7198eaa53d66e2febd929c36a6b3f3e8a53198f124de7f",
+      "source_path": "crates/incant_render/src/shadows/caster.wgsl",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/shadows/shade.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/shadows/shade.wgsl",
+      "bytes": 1495,
+      "sha256": "3f5d22bcef70b70fb7fe089c9940d5a29e6296984f65a718fe96c7f8d22dd8d4",
+      "source_path": "crates/incant_render/src/shadows/shade.wgsl",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/sprites/sprite.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/sprites/sprite.wgsl",
+      "bytes": 2513,
+      "sha256": "d679984ce15a957bac6b008f5f3276893e21e64df2de97b8212d6ace64fdd240",
+      "source_path": "crates/incant_render/src/sprites/sprite.wgsl",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/temporal/config.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/temporal/config.rs",
+      "bytes": 1494,
+      "sha256": "4fb93739b80c5e1e923cb8d087919cca924151bb8b687ffbc53bb23254f777ee",
+      "source_path": "crates/incant_render/src/temporal/config.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/temporal/copy.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/temporal/copy.wgsl",
+      "bytes": 1328,
+      "sha256": "096ee89ecb5c9112deea55935ac2da0bec4fd7f3ba603aa04c875ba48deb248b",
+      "source_path": "crates/incant_render/src/temporal/copy.wgsl",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/temporal/coverage.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/temporal/coverage.rs",
+      "bytes": 8369,
+      "sha256": "0488008c1fa6c039f9eb312637307ffdbacc57ca8fea63ffde6bafe4822a4963",
+      "source_path": "crates/incant_render/src/temporal/coverage.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/temporal/coverage_device.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/temporal/coverage_device.rs",
+      "bytes": 13712,
+      "sha256": "3d1d3e29b51a01f84569b5855a3b22a38b97bc89a232af551e4c028d37ae7db1",
+      "source_path": "crates/incant_render/src/temporal/coverage_device.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/temporal/coverage_tests.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/temporal/coverage_tests.rs",
+      "bytes": 6087,
+      "sha256": "18f7c98156d22ef84a07902e9ff2b0cc9fa03eb062b8a8d425119dd59e663d2e",
+      "source_path": "crates/incant_render/src/temporal/coverage_tests.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/temporal/device_tests.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/temporal/device_tests.rs",
+      "bytes": 12896,
+      "sha256": "eece0222119bf3c8e2cea625a5a44848b76dd84f5f8b26fe9082df2eec6f96df",
+      "source_path": "crates/incant_render/src/temporal/device_tests.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/temporal/jitter.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/temporal/jitter.rs",
+      "bytes": 702,
+      "sha256": "41d80973344b080d3608d1306dba7d7a08a3b2746fb737d22e30e5f9b496a4dd",
+      "source_path": "crates/incant_render/src/temporal/jitter.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/temporal/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/temporal/mod.rs",
+      "bytes": 1138,
+      "sha256": "1cb40151a8da19ba7c9dd03068333319eb5c639e4479441ddd260ec0e0173311",
+      "source_path": "crates/incant_render/src/temporal/mod.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/temporal/oracle.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/temporal/oracle.rs",
+      "bytes": 2770,
+      "sha256": "818e83528162c0b2db1ffbdc046fb66bebe86a84d0d082912030eaa2b2b9216c",
+      "source_path": "crates/incant_render/src/temporal/oracle.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/temporal/owner.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/temporal/owner.rs",
+      "bytes": 3298,
+      "sha256": "aafc0d329aa5ac85d46b5b728bd0efd8f938f969fdd9e48ded52227a23effe4a",
+      "source_path": "crates/incant_render/src/temporal/owner.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/temporal/resolve.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/temporal/resolve.wgsl",
+      "bytes": 4630,
+      "sha256": "4e7f1ee503e05bc7f2c126ae83b059881fe90b99530507be5ea9f7f037b68bce",
+      "source_path": "crates/incant_render/src/temporal/resolve.wgsl",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/temporal/system.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/temporal/system.rs",
+      "bytes": 11554,
+      "sha256": "6e7c612344b22383abebc516501c7455e043234c586a81afbfb68c3ce737605f",
+      "source_path": "crates/incant_render/src/temporal/system.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/temporal/targets.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/temporal/targets.rs",
+      "bytes": 3159,
+      "sha256": "72736408b81cb92d38d1c0cb7e3ec0e76a8bd1c96859855f18b4f4521e739d53",
+      "source_path": "crates/incant_render/src/temporal/targets.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/temporal/tests.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/temporal/tests.rs",
+      "bytes": 11104,
+      "sha256": "5cc16417e84067ee7e88042433845187de6b363ce26130f4d0bc7c92b9a91292",
+      "source_path": "crates/incant_render/src/temporal/tests.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/temporal_joined_tests.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/temporal_joined_tests.rs",
+      "bytes": 12067,
+      "sha256": "5b056d49c758bcd451fe1b3fbf24fe7646dead817752e7d7cac86eee0cbe4d57",
+      "source_path": "crates/incant_render/src/temporal_joined_tests.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/temporal_parity.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/temporal_parity.rs",
+      "bytes": 5650,
+      "sha256": "72765afe2e3a5cf2a7d6b70dd2dd144a9fb6b707b636fe3524f5ebc392dfbf3e",
+      "source_path": "crates/incant_render/src/temporal_parity.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/temporal_shader.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/temporal_shader.rs",
+      "bytes": 1716,
+      "sha256": "726ffbc94bdcb93167540022247afe46c32b54094bee985d9fb0f84948a24e07",
+      "source_path": "crates/incant_render/src/temporal_shader.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/temporal_shader/cooked.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/temporal_shader/cooked.rs",
+      "bytes": 5237,
+      "sha256": "8ea1f42dda9a801f8e749bf51e1e3318cf086a0b892b2f1217a8401082bfddea",
+      "source_path": "crates/incant_render/src/temporal_shader/cooked.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/temporal_shader/cooked/host.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/temporal_shader/cooked/host.rs",
+      "bytes": 4188,
+      "sha256": "6f125245d004638937d0ca488c41d73ce2a9d8ae0b81d3d692e1df48d60053df",
+      "source_path": "crates/incant_render/src/temporal_shader/cooked/host.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/text/text.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/text/text.wgsl",
+      "bytes": 2428,
+      "sha256": "bfc26ec82a902eadd850528186c06244b7ef63ec9285efefd41f642397b8c5f6",
+      "source_path": "crates/incant_render/src/text/text.wgsl",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/tone_map.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/tone_map.wgsl",
+      "bytes": 4748,
+      "sha256": "c5479279c8ebe1334cb672e0f3d5638604ba0c0b7c415d13d30e08aa62b79307",
+      "source_path": "crates/incant_render/src/tone_map.wgsl",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/ui/ui.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/src/ui/ui.wgsl",
+      "bytes": 5172,
+      "sha256": "f67e4982b038833e87ed84861d5be3018f5f0d6587ff8da6faf8bfd840c33c39",
+      "source_path": "crates/incant_render/src/ui/ui.wgsl",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/tests/persistent_cache.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_render/tests/persistent_cache.rs",
+      "bytes": 11390,
+      "sha256": "71488c6541ee20cf34b4196ed5b9595aed597c0e366a5c360307cf9c911b4c38",
+      "source_path": "crates/incant_render/tests/persistent_cache.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_shader_cook/Cargo.toml",
+      "bytes": 414,
+      "sha256": "f47e85ee095aa4824449f0dd7f73724531ac9b72b9cc2730dfec29bd90316ea4",
+      "source_path": "crates/incant_shader_cook/Cargo.toml",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/examples/output_bundle.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_shader_cook/examples/output_bundle.rs",
+      "bytes": 574,
+      "sha256": "567d7744d3bc31a9494296eb70a1952f43defe080848e97b1ee97bca351e550a",
+      "source_path": "crates/incant_shader_cook/examples/output_bundle.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/ambient_occlusion/contract.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_shader_cook/src/ambient_occlusion/contract.rs",
+      "bytes": 9140,
+      "sha256": "267b3ed1c28a5c8319bee11392503c561de65d60b1f3629b073d742c0a33f272",
+      "source_path": "crates/incant_shader_cook/src/ambient_occlusion/contract.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/ambient_occlusion/emit.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_shader_cook/src/ambient_occlusion/emit.rs",
+      "bytes": 6988,
+      "sha256": "65b5f8f541d4465e9eeefbd6d5e7b9aee3697b969711c5e19af2d6f96ec1b8fb",
+      "source_path": "crates/incant_shader_cook/src/ambient_occlusion/emit.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/ambient_occlusion/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_shader_cook/src/ambient_occlusion/mod.rs",
+      "bytes": 8506,
+      "sha256": "94f66d863279dc47dd621937e43237f07248a4554cde2a20d5614ebb9e2496ed",
+      "source_path": "crates/incant_shader_cook/src/ambient_occlusion/mod.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/audit.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_shader_cook/src/audit.rs",
+      "bytes": 1509,
+      "sha256": "58890af3ddfe3e465811bd4c2ff5222e2b5c2a904c38c50bbdddb12ff0218e91",
+      "source_path": "crates/incant_shader_cook/src/audit.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/bloom/contract.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_shader_cook/src/bloom/contract.rs",
+      "bytes": 8804,
+      "sha256": "c7b6e85c1f6b43682e5900e9e5dc10ddc0c74f50517573942fc107802a8850a4",
+      "source_path": "crates/incant_shader_cook/src/bloom/contract.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/bloom/emit.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_shader_cook/src/bloom/emit.rs",
+      "bytes": 6838,
+      "sha256": "04b5a1d0cf2c7b2a59aeb363cee129df47cbdbb74fb0e794d5f0e8500c206ce0",
+      "source_path": "crates/incant_shader_cook/src/bloom/emit.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/bloom/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_shader_cook/src/bloom/mod.rs",
+      "bytes": 7138,
+      "sha256": "33758bdc53a8787a711a1f077ffe1fcbdbb9edd7e9ffe3d2f400eedad0b4ba7d",
+      "source_path": "crates/incant_shader_cook/src/bloom/mod.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/compute/contract.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_shader_cook/src/compute/contract.rs",
+      "bytes": 5083,
+      "sha256": "54284da43034cdb37fdafafdd1665f6653de43c30094e1449d6a5aca8721e305",
+      "source_path": "crates/incant_shader_cook/src/compute/contract.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/compute/emit.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_shader_cook/src/compute/emit.rs",
+      "bytes": 7452,
+      "sha256": "a776d81aa63cae81c1a0445a3ef17488062b96547a8e90bff36ca245c55bf06d",
+      "source_path": "crates/incant_shader_cook/src/compute/emit.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/compute/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_shader_cook/src/compute/mod.rs",
+      "bytes": 3312,
+      "sha256": "2b3fcdb1aab1bd6e73d57b510f553cb3ddf197e29da9634e95d2f38d0f30dc82",
+      "source_path": "crates/incant_shader_cook/src/compute/mod.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/compute/spirv_workgroup.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_shader_cook/src/compute/spirv_workgroup.rs",
+      "bytes": 5801,
+      "sha256": "24e5e8cc68230e6109020c7c857ebd877ce570920819058d70bbb6d9b9bdba71",
+      "source_path": "crates/incant_shader_cook/src/compute/spirv_workgroup.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/compute/static_workgroup.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_shader_cook/src/compute/static_workgroup.rs",
+      "bytes": 2842,
+      "sha256": "3ee6871d6e96e715caab123ddfc67235ed33d411ff5b94569d32126256e7508b",
+      "source_path": "crates/incant_shader_cook/src/compute/static_workgroup.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/contract.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_shader_cook/src/contract.rs",
+      "bytes": 4792,
+      "sha256": "c8956ae477c1e779cfe8ef5a6960a3950fff795849eb8d36bce917d1158c7515",
+      "source_path": "crates/incant_shader_cook/src/contract.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/emit.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_shader_cook/src/emit.rs",
+      "bytes": 6558,
+      "sha256": "2da6ff21863ab62253c463449a592800f7a564d1b259c8b23f07030ca0aef596",
+      "source_path": "crates/incant_shader_cook/src/emit.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/geometry/contract.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_shader_cook/src/geometry/contract.rs",
+      "bytes": 8645,
+      "sha256": "8ac67d104b8bebed09c5b5c76f01e5b576a75121a848dbbdf6e2215f17f78005",
+      "source_path": "crates/incant_shader_cook/src/geometry/contract.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/geometry/emit.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_shader_cook/src/geometry/emit.rs",
+      "bytes": 13559,
+      "sha256": "945b61562075231d02b608be74a6d6093a13298b3462e2ead76744229510d351",
+      "source_path": "crates/incant_shader_cook/src/geometry/emit.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/geometry/interpolation.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_shader_cook/src/geometry/interpolation.rs",
+      "bytes": 2234,
+      "sha256": "e5ce1e78597f4eacaf2b49d41c0be1b67786eb58a0ce7d79757a0ff777a9f051",
+      "source_path": "crates/incant_shader_cook/src/geometry/interpolation.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/geometry/material.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_shader_cook/src/geometry/material.rs",
+      "bytes": 10857,
+      "sha256": "414a9a977065854f53eb55346a804a57afb135d5b7a431f2ae1921cb5f432d06",
+      "source_path": "crates/incant_shader_cook/src/geometry/material.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/geometry/material_emit.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_shader_cook/src/geometry/material_emit.rs",
+      "bytes": 10198,
+      "sha256": "f59d0049c2d9046e3e74880d36711ec6391f767a77f80faed66c7bbc7b34cbf1",
+      "source_path": "crates/incant_shader_cook/src/geometry/material_emit.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/geometry/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_shader_cook/src/geometry/mod.rs",
+      "bytes": 6008,
+      "sha256": "594e8c38a0a3afa4a26cbea3dc5cc5141a18d0b77358b45fedba58ce56ee07fa",
+      "source_path": "crates/incant_shader_cook/src/geometry/mod.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/geometry/regression.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_shader_cook/src/geometry/regression.rs",
+      "bytes": 2126,
+      "sha256": "69ac0c2eb8276984710f74fc41adc2faff518050fc2f2695e84d322dbccbb710",
+      "source_path": "crates/incant_shader_cook/src/geometry/regression.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/geometry/sprite.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_shader_cook/src/geometry/sprite.rs",
+      "bytes": 6304,
+      "sha256": "f56d4ed2c90b070cefa9e395015bd2fcae6520f5142e59958b3aeff6564f404d",
+      "source_path": "crates/incant_shader_cook/src/geometry/sprite.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/geometry/text.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_shader_cook/src/geometry/text.rs",
+      "bytes": 5597,
+      "sha256": "fc609717cf6a86a72dd07d0bb79d82fde25df64216e0d769f0214152120e089e",
+      "source_path": "crates/incant_shader_cook/src/geometry/text.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/geometry/ui.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_shader_cook/src/geometry/ui.rs",
+      "bytes": 5479,
+      "sha256": "7a5c0786befbc4a78f3b3d70f56ed552898e9c723315925b52d1e37526bcc933",
+      "source_path": "crates/incant_shader_cook/src/geometry/ui.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/lib.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_shader_cook/src/lib.rs",
+      "bytes": 3494,
+      "sha256": "1a8e248354f6eb3827bd0efa884e25c26d8aaa10c33b8e98a1f67dc5fcd77c07",
+      "source_path": "crates/incant_shader_cook/src/lib.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_shader_cook/src/manifest.rs",
+      "bytes": 1822,
+      "sha256": "49752d656c3897aaf76faa0b33e1a6245990a0d3b8ca15d0b92fee8bf51d4460",
+      "source_path": "crates/incant_shader_cook/src/manifest.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/metalfx_boundary/contract.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_shader_cook/src/metalfx_boundary/contract.rs",
+      "bytes": 7472,
+      "sha256": "a4e1efd4115a1a4ff42348866440c394e0a7d9e4fb376f6f215b45998504eafe",
+      "source_path": "crates/incant_shader_cook/src/metalfx_boundary/contract.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/metalfx_boundary/emit.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_shader_cook/src/metalfx_boundary/emit.rs",
+      "bytes": 5749,
+      "sha256": "382d59463e1aff3610becce49bdaf3ffa86471b8c18d7417b73f2a10a1b01532",
+      "source_path": "crates/incant_shader_cook/src/metalfx_boundary/emit.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/metalfx_boundary/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_shader_cook/src/metalfx_boundary/mod.rs",
+      "bytes": 6223,
+      "sha256": "935eb30e55fb1e7edae7e24b02870a9b7ece9dd15570b2ca001f26f6e7ff3c21",
+      "source_path": "crates/incant_shader_cook/src/metalfx_boundary/mod.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/temporal/contract.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_shader_cook/src/temporal/contract.rs",
+      "bytes": 16332,
+      "sha256": "5faf6575d0994356a404d1d5659248f596d239194546b7489bd01e907868a93e",
+      "source_path": "crates/incant_shader_cook/src/temporal/contract.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/temporal/emit.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_shader_cook/src/temporal/emit.rs",
+      "bytes": 10011,
+      "sha256": "5a957910752f2f7708f569af31e71f6623a47a1e3f8f3cb71a9591924e74a87b",
+      "source_path": "crates/incant_shader_cook/src/temporal/emit.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/temporal/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_shader_cook/src/temporal/mod.rs",
+      "bytes": 7414,
+      "sha256": "639fc55bb5011a08c91c4ca43ebbe311491951a7cd88d1a28c17d2e68060db99",
+      "source_path": "crates/incant_shader_cook/src/temporal/mod.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/tests/ambient_occlusion.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_shader_cook/tests/ambient_occlusion.rs",
+      "bytes": 9811,
+      "sha256": "a5a371c947190ff45a7b0487203c8f7696ccd1bb065893faf976dc431edddf48",
+      "source_path": "crates/incant_shader_cook/tests/ambient_occlusion.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/tests/audit.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_shader_cook/tests/audit.rs",
+      "bytes": 4470,
+      "sha256": "d234bcbf8c49e2ef834c6c9f34a8e71c0d50887f6778f1076dbc24a22301eba0",
+      "source_path": "crates/incant_shader_cook/tests/audit.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/tests/bloom.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_shader_cook/tests/bloom.rs",
+      "bytes": 8141,
+      "sha256": "9c393791cef63c6d1742b7230280600a1f264d03f18d5ef11304d3d696cfa962",
+      "source_path": "crates/incant_shader_cook/tests/bloom.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/tests/compute.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_shader_cook/tests/compute.rs",
+      "bytes": 7165,
+      "sha256": "6404b3abd52283e61ce604fda02deea95908449e1e6b0980d52337e2ca958580",
+      "source_path": "crates/incant_shader_cook/tests/compute.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/tests/fixtures/material_emit_main346.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_shader_cook/tests/fixtures/material_emit_main346.rs",
+      "bytes": 8968,
+      "sha256": "976f76dfdc879dcf2d72af59673e7b5faeb0a28994dcdecdb6ec27403e7c4c72",
+      "source_path": "crates/incant_shader_cook/tests/fixtures/material_emit_main346.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/tests/fixtures/temporal-resolve-single-depth.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_shader_cook/tests/fixtures/temporal-resolve-single-depth.wgsl",
+      "bytes": 3480,
+      "sha256": "e1af53565a299f6a03a13a3ee05a037b540e24cb2b0bed054ceeb8d2d484ebf1",
+      "source_path": "crates/incant_shader_cook/tests/fixtures/temporal-resolve-single-depth.wgsl",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/tests/geometry.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_shader_cook/tests/geometry.rs",
+      "bytes": 13693,
+      "sha256": "3aec8143130f498e653be310c7a6d760accb5b56b1631f10602548368000ce18",
+      "source_path": "crates/incant_shader_cook/tests/geometry.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/tests/material.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_shader_cook/tests/material.rs",
+      "bytes": 4368,
+      "sha256": "f2b667d1f389cd992422313b6adb2eb46c389d954dc54432276cb8344988b69f",
+      "source_path": "crates/incant_shader_cook/tests/material.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/tests/metalfx_boundary.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_shader_cook/tests/metalfx_boundary.rs",
+      "bytes": 5510,
+      "sha256": "85625206937d70f243733ff5fe7fc9000b25a790cf7d46f97fa9542142097667",
+      "source_path": "crates/incant_shader_cook/tests/metalfx_boundary.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/tests/output.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_shader_cook/tests/output.rs",
+      "bytes": 5582,
+      "sha256": "6de04d9ef95f1d11d4b1239258504b57e33d7bc071da54aa3e03c9c0d6fd9bcd",
+      "source_path": "crates/incant_shader_cook/tests/output.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/tests/temporal.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_shader_cook/tests/temporal.rs",
+      "bytes": 8341,
+      "sha256": "5d5e4da65ddb4fea939271ea7a3f343a92a09fb3ff448313aca851c0b9930121",
+      "source_path": "crates/incant_shader_cook/tests/temporal.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/tests/text.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_shader_cook/tests/text.rs",
+      "bytes": 2872,
+      "sha256": "7f50f4538d521fbeaad0b9a28aac42cce363644da18536b896fbf5ff3922b149",
+      "source_path": "crates/incant_shader_cook/tests/text.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/tests/ui.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/crates/incant_shader_cook/tests/ui.rs",
+      "bytes": 2759,
+      "sha256": "2deb4c141220b03b90ba8946499ba78eaed00d211121737fe85c202773febb73",
+      "source_path": "crates/incant_shader_cook/tests/ui.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/docs/spikes/cooked-bloom.md",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/docs/spikes/cooked-bloom.md",
+      "bytes": 8690,
+      "sha256": "a1044d0538a6a7d1ce5ccfe0503940d75f893addec7a46b8db0e98e72d337b56",
+      "source_path": "docs/spikes/cooked-bloom.md",
+      "code_input": false
+    },
+    {
+      "key": "source/docs/spikes/cooked-metalfx-boundary.md",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/docs/spikes/cooked-metalfx-boundary.md",
+      "bytes": 2756,
+      "sha256": "4e7c32ca1d90a4e98182933e7cc4fcf5709be18fb3c3a4db23a0999273693ba0",
+      "source_path": "docs/spikes/cooked-metalfx-boundary.md",
+      "code_input": false
+    },
+    {
+      "key": "source/docs/spikes/cooked-temporal-export.md",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/docs/spikes/cooked-temporal-export.md",
+      "bytes": 6392,
+      "sha256": "ba13ea76a9d8fd8a9175ef34ea9fbe977e4706773f18aa3df52eb5820352e8de",
+      "source_path": "docs/spikes/cooked-temporal-export.md",
+      "code_input": false
+    },
+    {
+      "key": "source/docs/spikes/shipping-cooked-shaders.md",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/docs/spikes/shipping-cooked-shaders.md",
+      "bytes": 6414,
+      "sha256": "f2a5d851fae1010f6376b1012a960fbdc569487ec67893452ee5e8f6bc61352c",
+      "source_path": "docs/spikes/shipping-cooked-shaders.md",
+      "code_input": false
+    },
+    {
+      "key": "source/rust-toolchain.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/rust-toolchain.toml",
+      "bytes": 100,
+      "sha256": "c6e63d9832830b858d930007e4fd1fc3f4a3ca1d287483b08077b7f0267ca124",
+      "source_path": "rust-toolchain.toml",
+      "code_input": true
+    },
+    {
+      "key": "source/tools/cargo",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/tools/cargo",
+      "bytes": 179,
+      "sha256": "9aef98d613601b0c374c1d0499afb39d710cbf5002faba537f21be9c11ff72e3",
+      "source_path": "tools/cargo",
+      "code_input": true
+    },
+    {
+      "key": "source/tools/export_native.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/tools/export_native.py",
+      "bytes": 17884,
+      "sha256": "1e9052e42f25ae2a2e666dd8292f1fd5fc91fd4c3be377d19c5e6d006d6beb0a",
+      "source_path": "tools/export_native.py",
+      "code_input": true
+    },
+    {
+      "key": "source/tools/native_package.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/tools/native_package.py",
+      "bytes": 8385,
+      "sha256": "0362128f683f835e31674ad2f024f54f35d7401ebdb6eb0b51d791e14578413b",
+      "source_path": "tools/native_package.py",
+      "code_input": true
+    },
+    {
+      "key": "source/tools/native_process.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/tools/native_process.py",
+      "bytes": 19307,
+      "sha256": "58dd2a8231d7f9d1e42070fc85425461e06a43f279fa5e7f8e57b4a40c3a3aa4",
+      "source_path": "tools/native_process.py",
+      "code_input": true
+    },
+    {
+      "key": "source/tools/native_profiling.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/tools/native_profiling.py",
+      "bytes": 5143,
+      "sha256": "54a472376e6134c5c05bc0c10e3733a317112fa8b3a41b47c01000ef5d2bebd2",
+      "source_path": "tools/native_profiling.py",
+      "code_input": true
+    },
+    {
+      "key": "source/tools/native_shaders.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/tools/native_shaders.py",
+      "bytes": 21880,
+      "sha256": "8fad15ad1f464a90e1b2dc846d90f5a547b751515ffa0be166f5105b63853ec3",
+      "source_path": "tools/native_shaders.py",
+      "code_input": true
+    },
+    {
+      "key": "source/tools/physics_export.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/tools/physics_export.py",
+      "bytes": 1336,
+      "sha256": "f7cd497ba58f0b5fba22fd1115829615238f27f51939ae7c17f9637c152c3000",
+      "source_path": "tools/physics_export.py",
+      "code_input": true
+    },
+    {
+      "key": "source/tools/physics_features.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/tools/physics_features.py",
+      "bytes": 16334,
+      "sha256": "a7f686eda85340cf48421478b7cdc193204518af307069922a179104d7046523",
+      "source_path": "tools/physics_features.py",
+      "code_input": true
+    },
+    {
+      "key": "source/tools/temporal_parity.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/tools/temporal_parity.py",
+      "bytes": 8237,
+      "sha256": "2b5952cc763575e69129e9788809fa95afcc31602676e9d7ee197f4bdd6dd975",
+      "source_path": "tools/temporal_parity.py",
+      "code_input": true
+    },
+    {
+      "key": "source/tools/tests/test_native_shaders.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/tools/tests/test_native_shaders.py",
+      "bytes": 23474,
+      "sha256": "aa6fc16c0810378b9e744840c147c7334bd51b8e9adce53a33b0f55068ff4f13",
+      "source_path": "tools/tests/test_native_shaders.py",
+      "code_input": true
+    },
+    {
+      "key": "source/tools/tests/test_temporal_parity.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/files/tools/tests/test_temporal_parity.py",
+      "bytes": 8909,
+      "sha256": "69e5d9cc303b33e79b90fb9cabbfab6710f41c82ec06f27e5ce87a278ed24303",
+      "source_path": "tools/tests/test_temporal_parity.py",
+      "code_input": true
+    },
+    {
+      "key": "source-001/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-001/freeze.json",
+      "bytes": 34712,
+      "sha256": "9c6a37b44cdc8ba14737c4a89cb366ece24bbfb8a97f39953d997f97b6e08db6"
+    },
+    {
+      "key": "source-001/source.diff",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-001/source.diff",
+      "bytes": 65661,
+      "sha256": "1e25ccbf91c1e8fe4daab953cf55de0892e3b7c2a592fdb8493bcd302df1e56d"
+    },
+    {
+      "key": "source-001/files/crates/incant_render/src/metalfx/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-001/files/crates/incant_render/src/metalfx/mod.rs",
+      "bytes": 6740,
+      "sha256": "dafe0c3ef3449fe100a02e4ce7068b30542e39ddcacbfd1ad93395c4b4735655"
+    },
+    {
+      "key": "source-001/files/crates/incant_render/src/metalfx/system.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-001/files/crates/incant_render/src/metalfx/system.rs",
+      "bytes": 13523,
+      "sha256": "a1cfbcebfe0654d2f9b443dca0e9b840c9068ebdcd73dc3eca23eb658d99b411"
+    },
+    {
+      "key": "cpu-001/results.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-001/results.json",
+      "bytes": 10291,
+      "sha256": "14df6f51a7235f0c110e37aabe433a1769fef36228f1ffd6d94036870411db56"
+    },
+    {
+      "key": "cpu-001/0.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-001/0.stderr.log",
+      "bytes": 2036,
+      "sha256": "8fc1d6e08f65c0a622bfac9f930a55ba8193a8b66254a0067aba8fe5cff5fc88"
+    },
+    {
+      "key": "cpu-001/0.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-001/0.stdout.log",
+      "bytes": 84935,
+      "sha256": "05b64567a304345c6e195f26624d22206713a900a4e00ac3fcd585818983ad2b"
+    },
+    {
+      "key": "cpu-001/1.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-001/1.stderr.log",
+      "bytes": 569,
+      "sha256": "73b4d2adbdc4358962e31ebab6b55dcca61fb3e811c18d8ae48bf3014aa20c2d"
+    },
+    {
+      "key": "cpu-001/1.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-001/1.stdout.log",
+      "bytes": 333635,
+      "sha256": "e941b7b363b1157efefe49869a8086801dac642eec95d5f55188e7a3e5e8825c"
+    },
+    {
+      "key": "cpu-001/tool-0.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-001/tool-0.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "cpu-001/tool-0.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-001/tool-0.stdout.log",
+      "bytes": 36,
+      "sha256": "1f88eaf7fe1aaec83184752cf4c944cd22f00184136ff36a3e4c318cc60ef566"
+    },
+    {
+      "key": "cpu-001/tool-1.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-001/tool-1.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "cpu-001/tool-1.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-001/tool-1.stdout.log",
+      "bytes": 192,
+      "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909"
+    },
+    {
+      "key": "source-002/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-002/freeze.json",
+      "bytes": 35048,
+      "sha256": "4c7ad581acf97a7565321f6735808a972d63517d68c40d9a728bf948a146c373"
+    },
+    {
+      "key": "source-002/source.diff",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-002/source.diff",
+      "bytes": 65594,
+      "sha256": "fb8ba2245194fa68a2f4e81ce54fba684d73c9be467688f214b8eaf47cf30e44"
+    },
+    {
+      "key": "source-002/successor.diff",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-002/successor.diff",
+      "bytes": 462,
+      "sha256": "903c954dd3e1372bf45fc29eebbc10cd319aa85585d16bbfced306140282ab9b"
+    },
+    {
+      "key": "source-002/files/crates/incant_render/src/metalfx/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-002/files/crates/incant_render/src/metalfx/mod.rs",
+      "bytes": 6740,
+      "sha256": "dafe0c3ef3449fe100a02e4ce7068b30542e39ddcacbfd1ad93395c4b4735655"
+    },
+    {
+      "key": "cpu-002/results.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-002/results.json",
+      "bytes": 11012,
+      "sha256": "9f4b3de1c12050ad53faaecdad51fbcce9da487c3e5df5afd044e109f19392f2"
+    },
+    {
+      "key": "cpu-002/0.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-002/0.stderr.log",
+      "bytes": 344,
+      "sha256": "fdf0bb0eac27f1744d9557a1316dd0eb5dd0763316732b7a9b59017a22d21cc3"
+    },
+    {
+      "key": "cpu-002/0.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-002/0.stdout.log",
+      "bytes": 361638,
+      "sha256": "848245baf0a98eec91abda15f9806b8b97e45438452fb407e1b8dad8116d8987"
+    },
+    {
+      "key": "cpu-002/1.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-002/1.stderr.log",
+      "bytes": 482,
+      "sha256": "31947a10e19bb9d407f12532345888290766952f1640f482e532749a1d2f1cb8"
+    },
+    {
+      "key": "cpu-002/1.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-002/1.stdout.log",
+      "bytes": 401904,
+      "sha256": "3668243e28e5e241d5e107a614b395a1e74ee15139970518cbf0747a503baa76"
+    },
+    {
+      "key": "cpu-002/2.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-002/2.stderr.log",
+      "bytes": 344,
+      "sha256": "e4e2b616bc428155346844da1f52fe121263e0005658f03edbdc9a8f55eea3ff"
+    },
+    {
+      "key": "cpu-002/2.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-002/2.stdout.log",
+      "bytes": 367695,
+      "sha256": "ce4008b7e1002b804ea503e84207911166e81dea95651d6ef27f0a4289eadb0e"
+    },
+    {
+      "key": "cpu-002/3.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-002/3.stderr.log",
+      "bytes": 344,
+      "sha256": "a960bf5990c590c7d89325c63d2299a26db85e5b29bc8eb6f006c3fe60d334bf"
+    },
+    {
+      "key": "cpu-002/3.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-002/3.stdout.log",
+      "bytes": 367927,
+      "sha256": "3b5d640fac0e60fe494350d69c3b44319d9e2d8e22bca3dbed75d0c493fd9ffb"
+    },
+    {
+      "key": "cpu-002/4.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-002/4.stderr.log",
+      "bytes": 344,
+      "sha256": "d3930ed601340827aae798fd992d645c3901abc8921043895c0ecc90f5372109"
+    },
+    {
+      "key": "cpu-002/4.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-002/4.stdout.log",
+      "bytes": 367979,
+      "sha256": "50be3886f87e6a6d4e52e236052238000a2c641e1ad9f03e3e9291e5302397fd"
+    },
+    {
+      "key": "cpu-002/5.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-002/5.stderr.log",
+      "bytes": 1399,
+      "sha256": "f6cb2dc6712e481bbd95aab45cb1d2d2c0ed09c8138101677f96ccaee4bf0178"
+    },
+    {
+      "key": "cpu-002/5.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-002/5.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "cpu-002/tool-0.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-002/tool-0.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "cpu-002/tool-0.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-002/tool-0.stdout.log",
+      "bytes": 36,
+      "sha256": "1f88eaf7fe1aaec83184752cf4c944cd22f00184136ff36a3e4c318cc60ef566"
+    },
+    {
+      "key": "cpu-002/tool-1.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-002/tool-1.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "cpu-002/tool-1.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-002/tool-1.stdout.log",
+      "bytes": 192,
+      "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909"
+    },
+    {
+      "key": "source-003/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/freeze.json",
+      "bytes": 35047,
+      "sha256": "bceb090fce9bf24f653863aafe9f04184dc814c576db3387be040639bdecdfde"
+    },
+    {
+      "key": "source-003/source.diff",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/source.diff",
+      "bytes": 65633,
+      "sha256": "a08460d7030cfca935dfa49abf13e510a3951565ed617e431d25d98bc4140846"
+    },
+    {
+      "key": "source-003/successor.diff",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/source-003/successor.diff",
+      "bytes": 630,
+      "sha256": "c556ee2a288534c485558433f6394f7bbe69712f83b626f56995d7636c8a427f"
+    },
+    {
+      "key": "cpu-003/results.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/results.json",
+      "bytes": 61235,
+      "sha256": "c0ce23a54456dff49a69505178103c183bb1902827c686f315aaaf05c3d25e9b"
+    },
+    {
+      "key": "cpu-003/0.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/0.stderr.log",
+      "bytes": 344,
+      "sha256": "d6440e2d7d5ddfa85ee33e42ef12f503e0872d5ec292a408be17c1688f1036f2"
+    },
+    {
+      "key": "cpu-003/0.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/0.stdout.log",
+      "bytes": 331272,
+      "sha256": "94cb5cb5280fa813e5ba44ff30ce4536b8717907c3ded498f68eafd5b8677568"
+    },
+    {
+      "key": "cpu-003/1.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/1.stderr.log",
+      "bytes": 344,
+      "sha256": "c206765c73603f40c35e522a1c5b44fa33adddd1082a6dd8dec2ca3b21263c89"
+    },
+    {
+      "key": "cpu-003/1.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/1.stdout.log",
+      "bytes": 368160,
+      "sha256": "ad57524fafe68363cf2b7904c3fe9cb2672275bebe055347f3ff609f44e15c71"
+    },
+    {
+      "key": "cpu-003/2.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/2.stderr.log",
+      "bytes": 185,
+      "sha256": "17909f8f62fd45783019d056ffae2f91cb6190127d8035ad9962e5d490439636"
+    },
+    {
+      "key": "cpu-003/2.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/2.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "cpu-003/3.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/3.stderr.log",
+      "bytes": 8439,
+      "sha256": "725973da7125b730b2aca9067c7db1785bea2d5980769ac43cd378cde82617d5"
+    },
+    {
+      "key": "cpu-003/3.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/3.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "cpu-003/4.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/4.stderr.log",
+      "bytes": 607,
+      "sha256": "72e077cf0f6b3317e663b515aa0d3161059d0af50f424c189a8d29cc30e2b7fb"
+    },
+    {
+      "key": "cpu-003/4.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/4.stdout.log",
+      "bytes": 533384,
+      "sha256": "51993bbed30f4d56f2f6d530c0fed21db6b6aa3a86f7a29dcaafe4fbc4e8b9c8"
+    },
+    {
+      "key": "cpu-003/tool-0.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/tool-0.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "cpu-003/tool-0.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/tool-0.stdout.log",
+      "bytes": 36,
+      "sha256": "1f88eaf7fe1aaec83184752cf4c944cd22f00184136ff36a3e4c318cc60ef566"
+    },
+    {
+      "key": "cpu-003/tool-1.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/tool-1.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "cpu-003/tool-1.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/tool-1.stdout.log",
+      "bytes": 192,
+      "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909"
+    },
+    {
+      "key": "cpu-003/actual-shaders.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/actual-shaders.json",
+      "bytes": 57803,
+      "sha256": "f09bb964178e3b47cb4e06d886415cc311601a97205dbc0905a8089145d0d489"
+    },
+    {
+      "key": "generated/bloom-display-shaders/Dx12-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/bloom-display-shaders/Dx12-Fragment.shader",
+      "bytes": 5378,
+      "sha256": "ec5485690aeb897faec178bd701a890e37832928a1638001087a27419d88a0c3"
+    },
+    {
+      "key": "generated/bloom-display-shaders/Dx12-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/bloom-display-shaders/Dx12-Vertex.shader",
+      "bytes": 611,
+      "sha256": "b2c0403bd6f9c3727c16bcf3c8620a9188538b50e5e9222bdc9b8b7e98f208b5"
+    },
+    {
+      "key": "generated/bloom-display-shaders/Metal-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/bloom-display-shaders/Metal-Fragment.shader",
+      "bytes": 7864,
+      "sha256": "dd6cb3fff865721af52d511a16332e1c445e5d312f0b0bae8fded6e82030e90f"
+    },
+    {
+      "key": "generated/bloom-display-shaders/Metal-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/bloom-display-shaders/Metal-Vertex.shader",
+      "bytes": 508,
+      "sha256": "f1cee22e81317613980bed8fc8fd22efee923f1c565ee91d7c106c2b9565fe3e"
+    },
+    {
+      "key": "generated/bloom-display-shaders/Vulkan-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/bloom-display-shaders/Vulkan-Fragment.shader",
+      "bytes": 8144,
+      "sha256": "b33c2812747ee5bb145c3bd1f12db7e718dc6a177af1aa3b5366dc64d1c087c3"
+    },
+    {
+      "key": "generated/bloom-display-shaders/Vulkan-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/bloom-display-shaders/Vulkan-Vertex.shader",
+      "bytes": 772,
+      "sha256": "ba4e456005e083e48d92667b61f8fc565713b71df5c3d48d971009461d1cedc6"
+    },
+    {
+      "key": "generated/bloom-display-shaders/audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/bloom-display-shaders/audit.json",
+      "bytes": 1563,
+      "sha256": "058c64427d159ff201113ce265c933afcd94308cf1fe1ee587b97922b0f6531e"
+    },
+    {
+      "key": "generated/bloom-display-shaders/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/bloom-display-shaders/manifest.rs",
+      "bytes": 2329,
+      "sha256": "e33e01a65f015963381dd8162f4350c9ed9efba14e700336d8493f6b7862e2ef"
+    },
+    {
+      "key": "generated/bloom-downsample-shaders/Dx12-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/bloom-downsample-shaders/Dx12-Fragment.shader",
+      "bytes": 4531,
+      "sha256": "54557f34f9613aa3500cea0580c8a51a5eca5f4af562fc574605c90b66585f13"
+    },
+    {
+      "key": "generated/bloom-downsample-shaders/Dx12-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/bloom-downsample-shaders/Dx12-Vertex.shader",
+      "bytes": 611,
+      "sha256": "345dfc638d89a3d4ec6679f9cfeb0efdb083bf21394e5a8f3521a75d609e3d0a"
+    },
+    {
+      "key": "generated/bloom-downsample-shaders/Metal-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/bloom-downsample-shaders/Metal-Fragment.shader",
+      "bytes": 5766,
+      "sha256": "5fbf00391f8b291e8fc7a13603af03d67c3885dea6b845b2c548c01264f1c525"
+    },
+    {
+      "key": "generated/bloom-downsample-shaders/Metal-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/bloom-downsample-shaders/Metal-Vertex.shader",
+      "bytes": 508,
+      "sha256": "f1cee22e81317613980bed8fc8fd22efee923f1c565ee91d7c106c2b9565fe3e"
+    },
+    {
+      "key": "generated/bloom-downsample-shaders/Vulkan-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/bloom-downsample-shaders/Vulkan-Fragment.shader",
+      "bytes": 5736,
+      "sha256": "63f6b1b1f61deab64e65d454a92e82e761861c7ab63aef6ed8c8f2d7edbbd588"
+    },
+    {
+      "key": "generated/bloom-downsample-shaders/Vulkan-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/bloom-downsample-shaders/Vulkan-Vertex.shader",
+      "bytes": 772,
+      "sha256": "ba4e456005e083e48d92667b61f8fc565713b71df5c3d48d971009461d1cedc6"
+    },
+    {
+      "key": "generated/bloom-downsample-shaders/audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/bloom-downsample-shaders/audit.json",
+      "bytes": 1535,
+      "sha256": "7192ab5e358bf22ead19710f9701c6a6773fe301a0cb22eb98b1e5e2b2338331"
+    },
+    {
+      "key": "generated/bloom-downsample-shaders/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/bloom-downsample-shaders/manifest.rs",
+      "bytes": 2299,
+      "sha256": "6914d14333f411a8af956900d4de524b98fe1754347629457717f089370beb92"
+    },
+    {
+      "key": "generated/bloom-prefilter-shaders/Dx12-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/bloom-prefilter-shaders/Dx12-Fragment.shader",
+      "bytes": 4539,
+      "sha256": "78a25577699685f7514b11632936f42aab2c3346f08d22b9ef34c0e277a62643"
+    },
+    {
+      "key": "generated/bloom-prefilter-shaders/Dx12-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/bloom-prefilter-shaders/Dx12-Vertex.shader",
+      "bytes": 611,
+      "sha256": "345dfc638d89a3d4ec6679f9cfeb0efdb083bf21394e5a8f3521a75d609e3d0a"
+    },
+    {
+      "key": "generated/bloom-prefilter-shaders/Metal-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/bloom-prefilter-shaders/Metal-Fragment.shader",
+      "bytes": 5774,
+      "sha256": "c9bf933485b8de81bda9b9702d74d78e1cb26706d95384a728031ad15ca29746"
+    },
+    {
+      "key": "generated/bloom-prefilter-shaders/Metal-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/bloom-prefilter-shaders/Metal-Vertex.shader",
+      "bytes": 508,
+      "sha256": "f1cee22e81317613980bed8fc8fd22efee923f1c565ee91d7c106c2b9565fe3e"
+    },
+    {
+      "key": "generated/bloom-prefilter-shaders/Vulkan-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/bloom-prefilter-shaders/Vulkan-Fragment.shader",
+      "bytes": 5736,
+      "sha256": "4f1dbc99ae176e652bc92adc0dd67a0a070e85acbbc68589ce485fdc454db2e1"
+    },
+    {
+      "key": "generated/bloom-prefilter-shaders/Vulkan-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/bloom-prefilter-shaders/Vulkan-Vertex.shader",
+      "bytes": 772,
+      "sha256": "ba4e456005e083e48d92667b61f8fc565713b71df5c3d48d971009461d1cedc6"
+    },
+    {
+      "key": "generated/bloom-prefilter-shaders/audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/bloom-prefilter-shaders/audit.json",
+      "bytes": 1537,
+      "sha256": "006e49d2392c76bd6edbc18d07b77eba99c9c52f08eccc321afb1c9c65b4e12a"
+    },
+    {
+      "key": "generated/bloom-prefilter-shaders/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/bloom-prefilter-shaders/manifest.rs",
+      "bytes": 2307,
+      "sha256": "eaf617e597fbe2b5c50113b8b8cfce45382c75652d2cd6f583c919fb229dc024"
+    },
+    {
+      "key": "generated/bloom-upsample-shaders/Dx12-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/bloom-upsample-shaders/Dx12-Fragment.shader",
+      "bytes": 2032,
+      "sha256": "9366495fadb63f831db3bcd4e48a980d9f74f561bbc8c8fe7ac0748593fd67fa"
+    },
+    {
+      "key": "generated/bloom-upsample-shaders/Dx12-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/bloom-upsample-shaders/Dx12-Vertex.shader",
+      "bytes": 611,
+      "sha256": "345dfc638d89a3d4ec6679f9cfeb0efdb083bf21394e5a8f3521a75d609e3d0a"
+    },
+    {
+      "key": "generated/bloom-upsample-shaders/Metal-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/bloom-upsample-shaders/Metal-Fragment.shader",
+      "bytes": 3659,
+      "sha256": "e7a0452d06f5e8c6452ca8f628d83b22c5bbef56d72e5c6d870ff4a4a829a775"
+    },
+    {
+      "key": "generated/bloom-upsample-shaders/Metal-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/bloom-upsample-shaders/Metal-Vertex.shader",
+      "bytes": 508,
+      "sha256": "f1cee22e81317613980bed8fc8fd22efee923f1c565ee91d7c106c2b9565fe3e"
+    },
+    {
+      "key": "generated/bloom-upsample-shaders/Vulkan-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/bloom-upsample-shaders/Vulkan-Fragment.shader",
+      "bytes": 3592,
+      "sha256": "f059b1966db15eaf6ac863fdaf50ed4ff8c742add9792775a2aa98831237f9ad"
+    },
+    {
+      "key": "generated/bloom-upsample-shaders/Vulkan-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/bloom-upsample-shaders/Vulkan-Vertex.shader",
+      "bytes": 772,
+      "sha256": "ba4e456005e083e48d92667b61f8fc565713b71df5c3d48d971009461d1cedc6"
+    },
+    {
+      "key": "generated/bloom-upsample-shaders/audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/bloom-upsample-shaders/audit.json",
+      "bytes": 1527,
+      "sha256": "ff490031862e49a2d83ae1253d4e6f3b608fec95dc55eca89cf545f7fe968b57"
+    },
+    {
+      "key": "generated/bloom-upsample-shaders/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/bloom-upsample-shaders/manifest.rs",
+      "bytes": 2309,
+      "sha256": "50bed3ce64371d91478f8382df0ae78ea2f6304cc6bbf336562c8e8ddddd242a"
+    },
+    {
+      "key": "generated/cluster-shaders/Dx12-Compute.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/cluster-shaders/Dx12-Compute.shader",
+      "bytes": 6998,
+      "sha256": "e7e4401e67edf5064c54cb843767dc2cdff8452c38ecc87dabc57fe6665598b3"
+    },
+    {
+      "key": "generated/cluster-shaders/Metal-Compute.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/cluster-shaders/Metal-Compute.shader",
+      "bytes": 7848,
+      "sha256": "1d501c9dabac36b7530eec4103e488da1a18e89649ffd4f05a74771e1be3b12d"
+    },
+    {
+      "key": "generated/cluster-shaders/Vulkan-Compute.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/cluster-shaders/Vulkan-Compute.shader",
+      "bytes": 9760,
+      "sha256": "b5b5e4eba86ec224ca04ecf97adb9ba2cfc62f3fe61ffaca5f5643dbe4ce0120"
+    },
+    {
+      "key": "generated/cluster-shaders/audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/cluster-shaders/audit.json",
+      "bytes": 1087,
+      "sha256": "fe426d4a0725d45bca3958805022b08908317c2197ed768e52e145873315a74b"
+    },
+    {
+      "key": "generated/cluster-shaders/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/cluster-shaders/manifest.rs",
+      "bytes": 1512,
+      "sha256": "e40175ed2b4c9401e5a39d7dda9a6f65725601e516f57042155c0e6cc8340705"
+    },
+    {
+      "key": "generated/diagnostic-shaders/Dx12-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/diagnostic-shaders/Dx12-Fragment.shader",
+      "bytes": 568,
+      "sha256": "0c3a600edd150f04dc05207241eba4b30b547ded8e24d688384071bcff151d1e"
+    },
+    {
+      "key": "generated/diagnostic-shaders/Dx12-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/diagnostic-shaders/Dx12-Vertex.shader",
+      "bytes": 782,
+      "sha256": "c410b57d2c4802d2f10c675277763251e6ce2226ff6e8c0811c66ba063b47802"
+    },
+    {
+      "key": "generated/diagnostic-shaders/Metal-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/diagnostic-shaders/Metal-Fragment.shader",
+      "bytes": 592,
+      "sha256": "2c2b1905b5b263d814f55c4804e819d7d06d85e162c803afc357fb740d7b14e9"
+    },
+    {
+      "key": "generated/diagnostic-shaders/Metal-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/diagnostic-shaders/Metal-Vertex.shader",
+      "bytes": 2458,
+      "sha256": "5d46b26e3466e577cb5801dfbd4a62ab9c3676ffca23eca213c7dbf38d599f13"
+    },
+    {
+      "key": "generated/diagnostic-shaders/Vulkan-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/diagnostic-shaders/Vulkan-Fragment.shader",
+      "bytes": 584,
+      "sha256": "7ab9df94307d2f11a301deec5ef9578785812c374f90411c8363a374f795fdb0"
+    },
+    {
+      "key": "generated/diagnostic-shaders/Vulkan-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/diagnostic-shaders/Vulkan-Vertex.shader",
+      "bytes": 1056,
+      "sha256": "f77968260948a6d1149f483b08e46f60289e5177fb27b47b762e498df1ff6770"
+    },
+    {
+      "key": "generated/diagnostic-shaders/audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/diagnostic-shaders/audit.json",
+      "bytes": 1545,
+      "sha256": "32151c93023372bb58bde3f50b4792f9f30bbb970d8acd8a28e79cb0831249d4"
+    },
+    {
+      "key": "generated/diagnostic-shaders/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/diagnostic-shaders/manifest.rs",
+      "bytes": 2302,
+      "sha256": "40f0388d654ea67bc0c1041bc7ca16971590d77b68118505036f01c60bf376f0"
+    },
+    {
+      "key": "generated/material-shaders/Dx12-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/material-shaders/Dx12-Fragment.shader",
+      "bytes": 19624,
+      "sha256": "6a724f651548caffbbb8f3193d5ba64c2a221b001ef694915cb9d33024184907"
+    },
+    {
+      "key": "generated/material-shaders/Dx12-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/material-shaders/Dx12-Vertex.shader",
+      "bytes": 1641,
+      "sha256": "80a01dfd891d3a082c925071aa2b01b4b8f9ddfbe814b76912728539c78decce"
+    },
+    {
+      "key": "generated/material-shaders/Metal-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/material-shaders/Metal-Fragment.shader",
+      "bytes": 20905,
+      "sha256": "86a31a65695fd0ab241c71a058e890b6a04157416eb848f6f6547dd916305614"
+    },
+    {
+      "key": "generated/material-shaders/Metal-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/material-shaders/Metal-Vertex.shader",
+      "bytes": 7023,
+      "sha256": "f7d0c7a5ce01269666131c4d762891c6457df9dd0c30b36b449d3e33183f71c5"
+    },
+    {
+      "key": "generated/material-shaders/Vulkan-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/material-shaders/Vulkan-Fragment.shader",
+      "bytes": 21936,
+      "sha256": "3f73bf9690c61c22581d02959fd66714e928d668aa2e95c9b8f96339ac1f5118"
+    },
+    {
+      "key": "generated/material-shaders/Vulkan-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/material-shaders/Vulkan-Vertex.shader",
+      "bytes": 2704,
+      "sha256": "46536a19ad53127013cfd23535d565ce7b7d234d38bceefd0f7e623cff82231b"
+    },
+    {
+      "key": "generated/material-shaders/audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/material-shaders/audit.json",
+      "bytes": 1581,
+      "sha256": "8017439b6295ecbb134d2cd809f92b928061b3e4142ade4e0cc4c5661b70a995"
+    },
+    {
+      "key": "generated/material-shaders/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/material-shaders/manifest.rs",
+      "bytes": 2337,
+      "sha256": "648368f35f0add9460de943c773abc6f34143fbae878b13562411c7f794f6935"
+    },
+    {
+      "key": "generated/metalfx-normalize-shaders/Dx12-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/metalfx-normalize-shaders/Dx12-Fragment.shader",
+      "bytes": 12710,
+      "sha256": "b82b77db42f789ce0963cdd1576282b92d22751b673a5016ef2d3edd9849e36e"
+    },
+    {
+      "key": "generated/metalfx-normalize-shaders/Dx12-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/metalfx-normalize-shaders/Dx12-Vertex.shader",
+      "bytes": 387,
+      "sha256": "583b7e725eac5c4629cf429088ae04f7aa4aa0b29e7d5e583a95931bf0803406"
+    },
+    {
+      "key": "generated/metalfx-normalize-shaders/Metal-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/metalfx-normalize-shaders/Metal-Fragment.shader",
+      "bytes": 14236,
+      "sha256": "9bea6a49e7de85169bbb762001c11ac904a59c855ca5cbfa49750f90c2ef9f6b"
+    },
+    {
+      "key": "generated/metalfx-normalize-shaders/Metal-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/metalfx-normalize-shaders/Metal-Vertex.shader",
+      "bytes": 429,
+      "sha256": "1b23d254b80d443dad62ddd53aa061f8de91da741511a39f71e9fa0d7e957e40"
+    },
+    {
+      "key": "generated/metalfx-normalize-shaders/Vulkan-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/metalfx-normalize-shaders/Vulkan-Fragment.shader",
+      "bytes": 14460,
+      "sha256": "941698bdba283761ace77c9a5edf185222276825958fc5e8896755f731e8f775"
+    },
+    {
+      "key": "generated/metalfx-normalize-shaders/Vulkan-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/metalfx-normalize-shaders/Vulkan-Vertex.shader",
+      "bytes": 688,
+      "sha256": "7d095c4682631247bf861de0165111422ab36df3672b5a554a551035c398b418"
+    },
+    {
+      "key": "generated/metalfx-normalize-shaders/audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/metalfx-normalize-shaders/audit.json",
+      "bytes": 1577,
+      "sha256": "05a3588ffb92d5b294e6b2b810a4b3529cdf44452aaa9a64cd0c0b9bff724a0e"
+    },
+    {
+      "key": "generated/metalfx-normalize-shaders/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/metalfx-normalize-shaders/manifest.rs",
+      "bytes": 2348,
+      "sha256": "5ceac0f1d102eed270f1476f73e433db81c2b5f986eb27bb67d3683cbeea5240"
+    },
+    {
+      "key": "generated/metalfx-pack-shaders/Dx12-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/metalfx-pack-shaders/Dx12-Fragment.shader",
+      "bytes": 3748,
+      "sha256": "8732d89671a3847c9e0748abedd70e3bf8b1f8aed0c2b8c7761a4cf0997198ea"
+    },
+    {
+      "key": "generated/metalfx-pack-shaders/Dx12-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/metalfx-pack-shaders/Dx12-Vertex.shader",
+      "bytes": 387,
+      "sha256": "583b7e725eac5c4629cf429088ae04f7aa4aa0b29e7d5e583a95931bf0803406"
+    },
+    {
+      "key": "generated/metalfx-pack-shaders/Metal-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/metalfx-pack-shaders/Metal-Fragment.shader",
+      "bytes": 4913,
+      "sha256": "3b221aaa7984528b11f46d46cda3070d96c2730a51a624d649c02f6c2546065b"
+    },
+    {
+      "key": "generated/metalfx-pack-shaders/Metal-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/metalfx-pack-shaders/Metal-Vertex.shader",
+      "bytes": 429,
+      "sha256": "1b23d254b80d443dad62ddd53aa061f8de91da741511a39f71e9fa0d7e957e40"
+    },
+    {
+      "key": "generated/metalfx-pack-shaders/Vulkan-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/metalfx-pack-shaders/Vulkan-Fragment.shader",
+      "bytes": 6376,
+      "sha256": "6f083d58a282b987a7caf40a06b3399c0d216f53a8e7a98dbf6d62e74119e8d1"
+    },
+    {
+      "key": "generated/metalfx-pack-shaders/Vulkan-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/metalfx-pack-shaders/Vulkan-Vertex.shader",
+      "bytes": 688,
+      "sha256": "7d095c4682631247bf861de0165111422ab36df3672b5a554a551035c398b418"
+    },
+    {
+      "key": "generated/metalfx-pack-shaders/audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/metalfx-pack-shaders/audit.json",
+      "bytes": 1567,
+      "sha256": "826120df3d0420e32691ea324eb4ca4ef570392f5de2fc76ce5e638881f193b0"
+    },
+    {
+      "key": "generated/metalfx-pack-shaders/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/metalfx-pack-shaders/manifest.rs",
+      "bytes": 2339,
+      "sha256": "7a09eb7f9dddc5e431cf882c4054fb2678318c646e4552e0967c5f7481509c81"
+    },
+    {
+      "key": "generated/output-shaders/Dx12-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/output-shaders/Dx12-Fragment.shader",
+      "bytes": 3698,
+      "sha256": "c321dde205b9c0b535a198b26f91db6f82035ce9b086c004d8fffe19a3ca011a"
+    },
+    {
+      "key": "generated/output-shaders/Dx12-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/output-shaders/Dx12-Vertex.shader",
+      "bytes": 611,
+      "sha256": "345dfc638d89a3d4ec6679f9cfeb0efdb083bf21394e5a8f3521a75d609e3d0a"
+    },
+    {
+      "key": "generated/output-shaders/Metal-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/output-shaders/Metal-Fragment.shader",
+      "bytes": 4275,
+      "sha256": "cc2a7197769ba09090757dc93a79ba67001b86ba6cd987545199450a2040410e"
+    },
+    {
+      "key": "generated/output-shaders/Metal-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/output-shaders/Metal-Vertex.shader",
+      "bytes": 508,
+      "sha256": "f1cee22e81317613980bed8fc8fd22efee923f1c565ee91d7c106c2b9565fe3e"
+    },
+    {
+      "key": "generated/output-shaders/Vulkan-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/output-shaders/Vulkan-Fragment.shader",
+      "bytes": 5388,
+      "sha256": "dacf90c0e06af8bf75fa034b59e8b85026cca4ac975a0d763a855683ff5ce260"
+    },
+    {
+      "key": "generated/output-shaders/Vulkan-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/output-shaders/Vulkan-Vertex.shader",
+      "bytes": 772,
+      "sha256": "ba4e456005e083e48d92667b61f8fc565713b71df5c3d48d971009461d1cedc6"
+    },
+    {
+      "key": "generated/output-shaders/audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/output-shaders/audit.json",
+      "bytes": 1556,
+      "sha256": "09bd73828c6b4ef006ed85e60df4d57bf23031b7a980b28904eeb330f43c361e"
+    },
+    {
+      "key": "generated/output-shaders/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/output-shaders/manifest.rs",
+      "bytes": 2327,
+      "sha256": "dc5b51f0ff4cae67162cb40fd33c8cdc848edeca9429518e7b4c449cd0b8cff3"
+    },
+    {
+      "key": "generated/shadow-shaders/Dx12-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/shadow-shaders/Dx12-Fragment.shader",
+      "bytes": 1218,
+      "sha256": "d49df04215c40955e84a06db86335d85c386d440f347be34ad59da2a61012ec0"
+    },
+    {
+      "key": "generated/shadow-shaders/Dx12-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/shadow-shaders/Dx12-Vertex.shader",
+      "bytes": 901,
+      "sha256": "6d40410ce5b5e26f286f58f6676f1dda39cadb2f7d79acc94979d77c059c7daa"
+    },
+    {
+      "key": "generated/shadow-shaders/Metal-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/shadow-shaders/Metal-Fragment.shader",
+      "bytes": 979,
+      "sha256": "6af72e99f6832fa300acddd5488297f28b3c3cdb87e5084f901651f3b65e2e3e"
+    },
+    {
+      "key": "generated/shadow-shaders/Metal-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/shadow-shaders/Metal-Vertex.shader",
+      "bytes": 4398,
+      "sha256": "e606ea8a8c35fe9e88b2f25d1137dd5797f4475e1f882c39c3436f2bfae98d53"
+    },
+    {
+      "key": "generated/shadow-shaders/Vulkan-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/shadow-shaders/Vulkan-Fragment.shader",
+      "bytes": 1272,
+      "sha256": "83c4630d173f2ac7d6dc5c605df72a560ff36dc8a711e95e18ad0e9751aa6f8d"
+    },
+    {
+      "key": "generated/shadow-shaders/Vulkan-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/shadow-shaders/Vulkan-Vertex.shader",
+      "bytes": 1388,
+      "sha256": "820a4f89a100209f8a6141ec63bc399069a4f91f0ed44b339aaff509503af2e0"
+    },
+    {
+      "key": "generated/shadow-shaders/audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/shadow-shaders/audit.json",
+      "bytes": 1580,
+      "sha256": "85740949d124221cefd519e56418e05b564170a6b68257799a4a00ff59c581e7"
+    },
+    {
+      "key": "generated/shadow-shaders/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/shadow-shaders/manifest.rs",
+      "bytes": 2341,
+      "sha256": "64b6895416c2babc4111e830ffb55b502773d32e2a14ee53bf389c0a5659a747"
+    },
+    {
+      "key": "generated/sprite-shaders/Dx12-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/sprite-shaders/Dx12-Fragment.shader",
+      "bytes": 2369,
+      "sha256": "571066c323a38496d522e5c87100f12cfa35d9bae8949df171499aa0641115d9"
+    },
+    {
+      "key": "generated/sprite-shaders/Dx12-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/sprite-shaders/Dx12-Vertex.shader",
+      "bytes": 1564,
+      "sha256": "222da945cc7e1cee9230ac446edacb13d512fe8b6a4c45ce151f5ddb891c4ee4"
+    },
+    {
+      "key": "generated/sprite-shaders/Metal-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/sprite-shaders/Metal-Fragment.shader",
+      "bytes": 2568,
+      "sha256": "29cec7c6cc1866ebcb1014b8498878be93c395a6531947961ea5fe60cd35d737"
+    },
+    {
+      "key": "generated/sprite-shaders/Metal-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/sprite-shaders/Metal-Vertex.shader",
+      "bytes": 4961,
+      "sha256": "3c59ba8e408a24f82553ebb3da543581da37856f64608154cf52717ddae797bb"
+    },
+    {
+      "key": "generated/sprite-shaders/Vulkan-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/sprite-shaders/Vulkan-Fragment.shader",
+      "bytes": 3020,
+      "sha256": "8cadb6bea0ce7059b376cf4fb1a892bd68b0491f04da8ba5fc861ed265744312"
+    },
+    {
+      "key": "generated/sprite-shaders/Vulkan-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/sprite-shaders/Vulkan-Vertex.shader",
+      "bytes": 2488,
+      "sha256": "741e73b7d6c7fdb7326fc9f70c6ced68625f48088b6de3bad273178c14220aa4"
+    },
+    {
+      "key": "generated/sprite-shaders/audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/sprite-shaders/audit.json",
+      "bytes": 1592,
+      "sha256": "625813a9bc2e195a335174c9dbe0787a4f4d554e908b16ca6ecce8710122855f"
+    },
+    {
+      "key": "generated/sprite-shaders/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/sprite-shaders/manifest.rs",
+      "bytes": 2372,
+      "sha256": "c10a605820b6f52f9644ef8cb47af64271794900bda051e9ef0dfa28a68e7413"
+    },
+    {
+      "key": "generated/ssao-forward-shaders/Dx12-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/ssao-forward-shaders/Dx12-Fragment.shader",
+      "bytes": 19878,
+      "sha256": "436e451c01502b577a4224a91e2ec8522d3af62b05191cb547d40375f4b4fd4c"
+    },
+    {
+      "key": "generated/ssao-forward-shaders/Dx12-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/ssao-forward-shaders/Dx12-Vertex.shader",
+      "bytes": 1641,
+      "sha256": "80a01dfd891d3a082c925071aa2b01b4b8f9ddfbe814b76912728539c78decce"
+    },
+    {
+      "key": "generated/ssao-forward-shaders/Metal-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/ssao-forward-shaders/Metal-Fragment.shader",
+      "bytes": 21483,
+      "sha256": "3af1deb5fcc3947ef6c3bd250b9064261a0040b205c81de8cdebba78afe54f5c"
+    },
+    {
+      "key": "generated/ssao-forward-shaders/Metal-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/ssao-forward-shaders/Metal-Vertex.shader",
+      "bytes": 7023,
+      "sha256": "f7d0c7a5ce01269666131c4d762891c6457df9dd0c30b36b449d3e33183f71c5"
+    },
+    {
+      "key": "generated/ssao-forward-shaders/Vulkan-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/ssao-forward-shaders/Vulkan-Fragment.shader",
+      "bytes": 22420,
+      "sha256": "46ec760e241899a66e5eb32658d8e8223e63fd62f354ba314a27b7a2de589e05"
+    },
+    {
+      "key": "generated/ssao-forward-shaders/Vulkan-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/ssao-forward-shaders/Vulkan-Vertex.shader",
+      "bytes": 2704,
+      "sha256": "46536a19ad53127013cfd23535d565ce7b7d234d38bceefd0f7e623cff82231b"
+    },
+    {
+      "key": "generated/ssao-forward-shaders/audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/ssao-forward-shaders/audit.json",
+      "bytes": 1648,
+      "sha256": "bf037c0e51339370456ebf6110ec7b4645b7a03c17652b1c25c1466e5a699e5f"
+    },
+    {
+      "key": "generated/ssao-forward-shaders/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/ssao-forward-shaders/manifest.rs",
+      "bytes": 2386,
+      "sha256": "68fd2bffdb99276b85f020f9030eacf23a24c2426a378e694d12c13bb65f3594"
+    },
+    {
+      "key": "generated/ssao-horizontal-shaders/Dx12-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/ssao-horizontal-shaders/Dx12-Fragment.shader",
+      "bytes": 4112,
+      "sha256": "6652976066dd6270aca632f8841ffc58a339cfdf58ea0272893726cf639c28d6"
+    },
+    {
+      "key": "generated/ssao-horizontal-shaders/Dx12-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/ssao-horizontal-shaders/Dx12-Vertex.shader",
+      "bytes": 595,
+      "sha256": "ba3f19277ed49eacc036512cb4cc9b178c624d6205fe3438a0f44ed876c35157"
+    },
+    {
+      "key": "generated/ssao-horizontal-shaders/Metal-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/ssao-horizontal-shaders/Metal-Fragment.shader",
+      "bytes": 5893,
+      "sha256": "f2e5a1a44cad775085dd1e0685533e5a602190026a13ef820c3cc0c793de477a"
+    },
+    {
+      "key": "generated/ssao-horizontal-shaders/Metal-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/ssao-horizontal-shaders/Metal-Vertex.shader",
+      "bytes": 492,
+      "sha256": "db8ed7d73c363b3e5c8d6eb24a2727277c5b34d8d81335630eee607d1c0642e9"
+    },
+    {
+      "key": "generated/ssao-horizontal-shaders/Vulkan-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/ssao-horizontal-shaders/Vulkan-Fragment.shader",
+      "bytes": 6192,
+      "sha256": "5c0d62b853af0eb98305fe8ef4ce82db970ee5bbc57280b0ba4780f5a03273ed"
+    },
+    {
+      "key": "generated/ssao-horizontal-shaders/Vulkan-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/ssao-horizontal-shaders/Vulkan-Vertex.shader",
+      "bytes": 772,
+      "sha256": "ba4e456005e083e48d92667b61f8fc565713b71df5c3d48d971009461d1cedc6"
+    },
+    {
+      "key": "generated/ssao-horizontal-shaders/audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/ssao-horizontal-shaders/audit.json",
+      "bytes": 1574,
+      "sha256": "3f8ab6599a54d5839d020782a170369c36d8791d2a65221314ca4e3f9579443f"
+    },
+    {
+      "key": "generated/ssao-horizontal-shaders/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/ssao-horizontal-shaders/manifest.rs",
+      "bytes": 2327,
+      "sha256": "fdf21e9808683a73966152570cdaf4f7903131f0b031f560e874c9516f830146"
+    },
+    {
+      "key": "generated/ssao-prepass-shaders/Dx12-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/ssao-prepass-shaders/Dx12-Fragment.shader",
+      "bytes": 2241,
+      "sha256": "c46432810a808d98ec21b97ebd9bacaadd396257d78ec394d7c53bcc941fcc2d"
+    },
+    {
+      "key": "generated/ssao-prepass-shaders/Dx12-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/ssao-prepass-shaders/Dx12-Vertex.shader",
+      "bytes": 1641,
+      "sha256": "7d41d73dacc7f105ee755eec886ccc68a0066be01f429383e178e9421c21834e"
+    },
+    {
+      "key": "generated/ssao-prepass-shaders/Metal-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/ssao-prepass-shaders/Metal-Fragment.shader",
+      "bytes": 2102,
+      "sha256": "1280b407f41540951741fcea34f33fb42d6881fa0dbded875a884f678a4840c0"
+    },
+    {
+      "key": "generated/ssao-prepass-shaders/Metal-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/ssao-prepass-shaders/Metal-Vertex.shader",
+      "bytes": 7023,
+      "sha256": "f7d0c7a5ce01269666131c4d762891c6457df9dd0c30b36b449d3e33183f71c5"
+    },
+    {
+      "key": "generated/ssao-prepass-shaders/Vulkan-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/ssao-prepass-shaders/Vulkan-Fragment.shader",
+      "bytes": 2652,
+      "sha256": "6b3f17f34eaffc132009dbba965f725558dd2c0c4e309b1075e807c8620064a0"
+    },
+    {
+      "key": "generated/ssao-prepass-shaders/Vulkan-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/ssao-prepass-shaders/Vulkan-Vertex.shader",
+      "bytes": 2704,
+      "sha256": "694f222778812d3578afa111c71fbe2fb282a0447f52f9a607a1021af62f1b86"
+    },
+    {
+      "key": "generated/ssao-prepass-shaders/audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/ssao-prepass-shaders/audit.json",
+      "bytes": 1614,
+      "sha256": "089383b1f1ba886ea029c6b1aac9c19e53611070e239c933fce7fbed42941837"
+    },
+    {
+      "key": "generated/ssao-prepass-shaders/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/ssao-prepass-shaders/manifest.rs",
+      "bytes": 2369,
+      "sha256": "f3b282f094779c47671dc6d81fb937e50ca1bb0ba7ff4cdebbed92ec376f230e"
+    },
+    {
+      "key": "generated/ssao-sample-shaders/Dx12-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/ssao-sample-shaders/Dx12-Fragment.shader",
+      "bytes": 7835,
+      "sha256": "83e6f843bc2e8f0eeb3db315e20cd835b853f8c3d8d72eea40196b82873d956e"
+    },
+    {
+      "key": "generated/ssao-sample-shaders/Dx12-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/ssao-sample-shaders/Dx12-Vertex.shader",
+      "bytes": 1267,
+      "sha256": "cc5c063bdc642234ee27fdc793b15279506c096eef51874e0dfafceebd998489"
+    },
+    {
+      "key": "generated/ssao-sample-shaders/Metal-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/ssao-sample-shaders/Metal-Fragment.shader",
+      "bytes": 8674,
+      "sha256": "ddd481bb4e2ce20e05c5cd6e447c25d0bce03ebda6d1aea42dceb892a10cd53f"
+    },
+    {
+      "key": "generated/ssao-sample-shaders/Metal-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/ssao-sample-shaders/Metal-Vertex.shader",
+      "bytes": 741,
+      "sha256": "0afab20bb1e65145f93387cc6158cc5ebdbfe7733c316b54ea6b19d7e29a436c"
+    },
+    {
+      "key": "generated/ssao-sample-shaders/Vulkan-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/ssao-sample-shaders/Vulkan-Fragment.shader",
+      "bytes": 9332,
+      "sha256": "20c776bdc4b0fe345968accfbb2c6e1110538aeb6967f37429d9d648d090f077"
+    },
+    {
+      "key": "generated/ssao-sample-shaders/Vulkan-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/ssao-sample-shaders/Vulkan-Vertex.shader",
+      "bytes": 1196,
+      "sha256": "2648cc06a95ddb27b2a3c31d9947c6028604048e3a8de070390e68905a4f5d3f"
+    },
+    {
+      "key": "generated/ssao-sample-shaders/audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/ssao-sample-shaders/audit.json",
+      "bytes": 1551,
+      "sha256": "88142f14898dfca0b49c41ec7dcf4198c941ec0e5741490cd739bf4bb9bb9a35"
+    },
+    {
+      "key": "generated/ssao-sample-shaders/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/ssao-sample-shaders/manifest.rs",
+      "bytes": 2319,
+      "sha256": "16de93f1e19013b850f3b21e4de63c76237ae85e7df1325255fcc0de9a3a32ca"
+    },
+    {
+      "key": "generated/ssao-vertical-shaders/Dx12-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/ssao-vertical-shaders/Dx12-Fragment.shader",
+      "bytes": 4102,
+      "sha256": "7d7faa7ebef636a09fea7e1d897cf3c6c10d5e51075141cd2abd520981bf332d"
+    },
+    {
+      "key": "generated/ssao-vertical-shaders/Dx12-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/ssao-vertical-shaders/Dx12-Vertex.shader",
+      "bytes": 595,
+      "sha256": "ba3f19277ed49eacc036512cb4cc9b178c624d6205fe3438a0f44ed876c35157"
+    },
+    {
+      "key": "generated/ssao-vertical-shaders/Metal-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/ssao-vertical-shaders/Metal-Fragment.shader",
+      "bytes": 5883,
+      "sha256": "8c72f7be596f88cbdc8c066e74b227e214287612a869adef7463645f24b1d144"
+    },
+    {
+      "key": "generated/ssao-vertical-shaders/Metal-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/ssao-vertical-shaders/Metal-Vertex.shader",
+      "bytes": 492,
+      "sha256": "db8ed7d73c363b3e5c8d6eb24a2727277c5b34d8d81335630eee607d1c0642e9"
+    },
+    {
+      "key": "generated/ssao-vertical-shaders/Vulkan-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/ssao-vertical-shaders/Vulkan-Fragment.shader",
+      "bytes": 6192,
+      "sha256": "983e8611962cba9ae7462ec76507cd7d348037c01e1cedd0182f417712f8a1c7"
+    },
+    {
+      "key": "generated/ssao-vertical-shaders/Vulkan-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/ssao-vertical-shaders/Vulkan-Vertex.shader",
+      "bytes": 772,
+      "sha256": "ba4e456005e083e48d92667b61f8fc565713b71df5c3d48d971009461d1cedc6"
+    },
+    {
+      "key": "generated/ssao-vertical-shaders/audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/ssao-vertical-shaders/audit.json",
+      "bytes": 1566,
+      "sha256": "575826d2af0815de3525441b334f65974f71fba86588d3babd04cfb8ad8c9a1b"
+    },
+    {
+      "key": "generated/ssao-vertical-shaders/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/ssao-vertical-shaders/manifest.rs",
+      "bytes": 2318,
+      "sha256": "3cd6277a12ec78dfa62d39f5c0ae82076379671fcde3d55224b203d5dcb5cd5d"
+    },
+    {
+      "key": "generated/temporal-cluster-shaders/Dx12-Compute.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/temporal-cluster-shaders/Dx12-Compute.shader",
+      "bytes": 7058,
+      "sha256": "71d5f45542065554bc0b225fd6b20df34ad991557b22a7067e355442b77d2250"
+    },
+    {
+      "key": "generated/temporal-cluster-shaders/Metal-Compute.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/temporal-cluster-shaders/Metal-Compute.shader",
+      "bytes": 7923,
+      "sha256": "e3f269aeb1a609d497fdba38c5ebd5de2f0fd05189cac713c7a1564c1ebb5402"
+    },
+    {
+      "key": "generated/temporal-cluster-shaders/Vulkan-Compute.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/temporal-cluster-shaders/Vulkan-Compute.shader",
+      "bytes": 9864,
+      "sha256": "345a6943ddf0d0e2f86b23e8651493e72c5693a71ed4ed1085f912cc51d786d9"
+    },
+    {
+      "key": "generated/temporal-cluster-shaders/audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/temporal-cluster-shaders/audit.json",
+      "bytes": 1087,
+      "sha256": "39a47b2a8ed8b0bebaa195d62b1a61e8e01abd6745d1522ec02aa7c6c639b403"
+    },
+    {
+      "key": "generated/temporal-cluster-shaders/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/temporal-cluster-shaders/manifest.rs",
+      "bytes": 1513,
+      "sha256": "3f822ca4e2a8a651830be2d91fb610c3e43f54910d119982c98e0882b9981968"
+    },
+    {
+      "key": "generated/temporal-copy/Dx12-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/temporal-copy/Dx12-Fragment.shader",
+      "bytes": 3805,
+      "sha256": "5ee5c4eb31c13aba287473b222acdb78fd9d69fce62dde7a7e586c73f62c32bd"
+    },
+    {
+      "key": "generated/temporal-copy/Dx12-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/temporal-copy/Dx12-Vertex.shader",
+      "bytes": 387,
+      "sha256": "583b7e725eac5c4629cf429088ae04f7aa4aa0b29e7d5e583a95931bf0803406"
+    },
+    {
+      "key": "generated/temporal-copy/Metal-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/temporal-copy/Metal-Fragment.shader",
+      "bytes": 4583,
+      "sha256": "32f848a5693d443c3a6d5cce33c07b0ff7281daf772ffd5dd4c7b49579c19f44"
+    },
+    {
+      "key": "generated/temporal-copy/Metal-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/temporal-copy/Metal-Vertex.shader",
+      "bytes": 429,
+      "sha256": "1b23d254b80d443dad62ddd53aa061f8de91da741511a39f71e9fa0d7e957e40"
+    },
+    {
+      "key": "generated/temporal-copy/Vulkan-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/temporal-copy/Vulkan-Fragment.shader",
+      "bytes": 5152,
+      "sha256": "e138082b5b17ae23cacc0b8eb568f372d4cae13ef37156136b193f28ca291f6d"
+    },
+    {
+      "key": "generated/temporal-copy/Vulkan-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/temporal-copy/Vulkan-Vertex.shader",
+      "bytes": 688,
+      "sha256": "7d095c4682631247bf861de0165111422ab36df3672b5a554a551035c398b418"
+    },
+    {
+      "key": "generated/temporal-copy/audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/temporal-copy/audit.json",
+      "bytes": 1519,
+      "sha256": "0b8a7a306cb96a4b203a154386ad01d152f4ebde523fa98311d2e67af5b4f020"
+    },
+    {
+      "key": "generated/temporal-copy/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/temporal-copy/manifest.rs",
+      "bytes": 2282,
+      "sha256": "834d3affd215c6a77c8ec3eafb40cc2dddc41ec044a0efa7e88adfa42737d8b5"
+    },
+    {
+      "key": "generated/temporal-depth/Dx12-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/temporal-depth/Dx12-Fragment.shader",
+      "bytes": 1657,
+      "sha256": "9dbafe1b8c2b064105f38022242c94aaea0ff2ac25e7c5c95fc5e7a5ad37465d"
+    },
+    {
+      "key": "generated/temporal-depth/Dx12-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/temporal-depth/Dx12-Vertex.shader",
+      "bytes": 1390,
+      "sha256": "5796ffe09d7709a18860371b2a46756a58f0f57acaf2f9e9955b095729ae63a2"
+    },
+    {
+      "key": "generated/temporal-depth/Metal-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/temporal-depth/Metal-Fragment.shader",
+      "bytes": 1560,
+      "sha256": "690ccd400af8ddbcad386d75d6946c798e02fceccd4e613ed7428f592b5e81a1"
+    },
+    {
+      "key": "generated/temporal-depth/Metal-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/temporal-depth/Metal-Vertex.shader",
+      "bytes": 7573,
+      "sha256": "82bd7bcea6de19c1084379a9f25dffa0c7ba14a37e4c11e7706be41f0eebc962"
+    },
+    {
+      "key": "generated/temporal-depth/Vulkan-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/temporal-depth/Vulkan-Fragment.shader",
+      "bytes": 1884,
+      "sha256": "f89df296e25829e86f6d841690ed30ed4eb3258a93a38ecd4d08bcb03c1e33cb"
+    },
+    {
+      "key": "generated/temporal-depth/Vulkan-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/temporal-depth/Vulkan-Vertex.shader",
+      "bytes": 2304,
+      "sha256": "f6be7989b5a27a8ab65af4a46fe3fed81f3784e2e0418783adeaa80476aba837"
+    },
+    {
+      "key": "generated/temporal-depth/audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/temporal-depth/audit.json",
+      "bytes": 1635,
+      "sha256": "b881a0203acf6f24aeffbdfbeb4ac5af99deba7738df59c1f13ca8e55e2d66b3"
+    },
+    {
+      "key": "generated/temporal-depth/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/temporal-depth/manifest.rs",
+      "bytes": 2411,
+      "sha256": "40dd01504b8dcf9f0f8d59c8fdef5ef4469fbab773833ea15057dcf1ac668c50"
+    },
+    {
+      "key": "generated/temporal-motion/Dx12-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/temporal-motion/Dx12-Fragment.shader",
+      "bytes": 3307,
+      "sha256": "463b318167cf096655f0a83d87006ca1ab3f712b2815563d3b1c6120ca6cc051"
+    },
+    {
+      "key": "generated/temporal-motion/Dx12-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/temporal-motion/Dx12-Vertex.shader",
+      "bytes": 1390,
+      "sha256": "5796ffe09d7709a18860371b2a46756a58f0f57acaf2f9e9955b095729ae63a2"
+    },
+    {
+      "key": "generated/temporal-motion/Metal-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/temporal-motion/Metal-Fragment.shader",
+      "bytes": 3542,
+      "sha256": "caa0875f398511c5e3e4cf48d41939c3e45fc73b3ec68f676b1244a6d7def750"
+    },
+    {
+      "key": "generated/temporal-motion/Metal-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/temporal-motion/Metal-Vertex.shader",
+      "bytes": 7573,
+      "sha256": "82bd7bcea6de19c1084379a9f25dffa0c7ba14a37e4c11e7706be41f0eebc962"
+    },
+    {
+      "key": "generated/temporal-motion/Vulkan-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/temporal-motion/Vulkan-Fragment.shader",
+      "bytes": 4720,
+      "sha256": "c1d9a7afad75309bbd274dc78348dd1ab24862c893c67ee9beaa1056aad1e162"
+    },
+    {
+      "key": "generated/temporal-motion/Vulkan-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/temporal-motion/Vulkan-Vertex.shader",
+      "bytes": 2304,
+      "sha256": "f6be7989b5a27a8ab65af4a46fe3fed81f3784e2e0418783adeaa80476aba837"
+    },
+    {
+      "key": "generated/temporal-motion/audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/temporal-motion/audit.json",
+      "bytes": 1632,
+      "sha256": "ec15069486db8a25aef4175a984d82dd899bbb642a016f777b0a8e0c8b9f57c0"
+    },
+    {
+      "key": "generated/temporal-motion/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/temporal-motion/manifest.rs",
+      "bytes": 2407,
+      "sha256": "f26d7aa942101af6ac7dd5783a1527e7997d3a9a10922fea25752c37393579ec"
+    },
+    {
+      "key": "generated/temporal-motion-owner/Dx12-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/temporal-motion-owner/Dx12-Fragment.shader",
+      "bytes": 3802,
+      "sha256": "db8ab607e1aea4fc3af0f5612eaef289079d7c4b78d1e26725998369006fa3dc"
+    },
+    {
+      "key": "generated/temporal-motion-owner/Dx12-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/temporal-motion-owner/Dx12-Vertex.shader",
+      "bytes": 1525,
+      "sha256": "e9cacde802a2f399555deeec4e3a575de840913da717d0007268ed7a16360225"
+    },
+    {
+      "key": "generated/temporal-motion-owner/Metal-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/temporal-motion-owner/Metal-Fragment.shader",
+      "bytes": 3853,
+      "sha256": "bb4f5690341b3be21adaeae7a8bae6e82702ecb6b7ecae4900a245bd2e0aad50"
+    },
+    {
+      "key": "generated/temporal-motion-owner/Metal-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/temporal-motion-owner/Metal-Vertex.shader",
+      "bytes": 7746,
+      "sha256": "5780c65f054a8845a3db01c783621661a0dde78908995d5325b37bbf73baa563"
+    },
+    {
+      "key": "generated/temporal-motion-owner/Vulkan-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/temporal-motion-owner/Vulkan-Fragment.shader",
+      "bytes": 5128,
+      "sha256": "6e507a1ab5df7464da4bf0723a8570c8844af2b67815c622e1f611e455295bfe"
+    },
+    {
+      "key": "generated/temporal-motion-owner/Vulkan-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/temporal-motion-owner/Vulkan-Vertex.shader",
+      "bytes": 2552,
+      "sha256": "97414a3a7d633a6be5022a5dd07d1d19aef2476e2c2e0513b801e5e395d67c2b"
+    },
+    {
+      "key": "generated/temporal-motion-owner/audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/temporal-motion-owner/audit.json",
+      "bytes": 1687,
+      "sha256": "a1315eb32e2c29f073b99995108bce70e883976ef31069f50cc158396e9e9df8"
+    },
+    {
+      "key": "generated/temporal-motion-owner/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/temporal-motion-owner/manifest.rs",
+      "bytes": 2446,
+      "sha256": "2268c108fdac6f0c7f83cd571e83846f46fa6afc9d222e7bbcaccb8728c7c656"
+    },
+    {
+      "key": "generated/temporal-resolve/Dx12-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/temporal-resolve/Dx12-Fragment.shader",
+      "bytes": 12344,
+      "sha256": "bc55874f497470715a29efae70d20f89b9fb87c5dea96493a8b44a05265be0a0"
+    },
+    {
+      "key": "generated/temporal-resolve/Dx12-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/temporal-resolve/Dx12-Vertex.shader",
+      "bytes": 387,
+      "sha256": "583b7e725eac5c4629cf429088ae04f7aa4aa0b29e7d5e583a95931bf0803406"
+    },
+    {
+      "key": "generated/temporal-resolve/Metal-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/temporal-resolve/Metal-Fragment.shader",
+      "bytes": 14426,
+      "sha256": "722225dd46b112a3692747f413c7e670f70e994b28fce631be08489ea0103b61"
+    },
+    {
+      "key": "generated/temporal-resolve/Metal-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/temporal-resolve/Metal-Vertex.shader",
+      "bytes": 429,
+      "sha256": "1b23d254b80d443dad62ddd53aa061f8de91da741511a39f71e9fa0d7e957e40"
+    },
+    {
+      "key": "generated/temporal-resolve/Vulkan-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/temporal-resolve/Vulkan-Fragment.shader",
+      "bytes": 13944,
+      "sha256": "ea4a6becebddeba854da6344ea4e53a33390ae33a221decbea89f8552c49f8be"
+    },
+    {
+      "key": "generated/temporal-resolve/Vulkan-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/temporal-resolve/Vulkan-Vertex.shader",
+      "bytes": 688,
+      "sha256": "7d095c4682631247bf861de0165111422ab36df3672b5a554a551035c398b418"
+    },
+    {
+      "key": "generated/temporal-resolve/audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/temporal-resolve/audit.json",
+      "bytes": 1530,
+      "sha256": "a6280842461c4db138df0809618da6236b21bba9bb2d4137dbc950d5820913c4"
+    },
+    {
+      "key": "generated/temporal-resolve/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/temporal-resolve/manifest.rs",
+      "bytes": 2286,
+      "sha256": "3ebcdfb8936e9b2ec3e5ffdee8d5426ce4d8b29cf7ab6c8fb84de00937e2d9e6"
+    },
+    {
+      "key": "generated/text-shaders/Dx12-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/text-shaders/Dx12-Fragment.shader",
+      "bytes": 3359,
+      "sha256": "e1a9ec8980ebd56ad2d8146df3da3a94a44c851e977164c03220f7641f71815a"
+    },
+    {
+      "key": "generated/text-shaders/Dx12-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/text-shaders/Dx12-Vertex.shader",
+      "bytes": 1716,
+      "sha256": "6389956da5951eb3e2018900319fb525e04cf7e1f762e1fa5cb14dffb8eef8e6"
+    },
+    {
+      "key": "generated/text-shaders/Metal-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/text-shaders/Metal-Fragment.shader",
+      "bytes": 3254,
+      "sha256": "69b05b3908e500a8df78d2a46485d10db977e841b74876c1127da9b8039981b0"
+    },
+    {
+      "key": "generated/text-shaders/Metal-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/text-shaders/Metal-Vertex.shader",
+      "bytes": 3013,
+      "sha256": "cfb142a1c7860db24efc48a8e9337fa5f4bf804fd0cbd3f799cb781f7e151a58"
+    },
+    {
+      "key": "generated/text-shaders/Vulkan-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/text-shaders/Vulkan-Fragment.shader",
+      "bytes": 3584,
+      "sha256": "8956586c59fb89ad08a0681a2da34c3db31643dded08625c3d2f59cced4676bc"
+    },
+    {
+      "key": "generated/text-shaders/Vulkan-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/text-shaders/Vulkan-Vertex.shader",
+      "bytes": 2268,
+      "sha256": "b19d058a451e64ef2b57760d1a9607c09a9ec593c0f1a885318daff45bbedd4a"
+    },
+    {
+      "key": "generated/text-shaders/audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/text-shaders/audit.json",
+      "bytes": 1604,
+      "sha256": "3c0483f0ff4c1c2c29c7692a2b756373ea416982aedd8521266eea125bd308d7"
+    },
+    {
+      "key": "generated/text-shaders/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/text-shaders/manifest.rs",
+      "bytes": 2384,
+      "sha256": "cb4b5776d7c9c62cae306d4ee522cf4437d69a0f93280cd73653230e1fdedc74"
+    },
+    {
+      "key": "generated/ui-shaders/Dx12-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/ui-shaders/Dx12-Fragment.shader",
+      "bytes": 5523,
+      "sha256": "0213acf7f14f2337c5d0007bb79846ea24d040d3726bfe0d4d8b051959f46d43"
+    },
+    {
+      "key": "generated/ui-shaders/Dx12-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/ui-shaders/Dx12-Vertex.shader",
+      "bytes": 3941,
+      "sha256": "d7bb2ed8d4664b4273a28473e407669c971793c5e1830cd651b88bcc02c0ecad"
+    },
+    {
+      "key": "generated/ui-shaders/Metal-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/ui-shaders/Metal-Fragment.shader",
+      "bytes": 5641,
+      "sha256": "eac6bb07ed249abd2dc3e9a04da6008ca27e8e77342f4169b6c76cb5828e8ea7"
+    },
+    {
+      "key": "generated/ui-shaders/Metal-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/ui-shaders/Metal-Vertex.shader",
+      "bytes": 7079,
+      "sha256": "12b8e29f1d86a07dcd51f4f537b4da0ccae89e42600707c01968f20f32dfc93c"
+    },
+    {
+      "key": "generated/ui-shaders/Vulkan-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/ui-shaders/Vulkan-Fragment.shader",
+      "bytes": 6464,
+      "sha256": "e9d8c3036792948d27676b8eb69aac55015b5154fa674c39bee3b26cb0321231"
+    },
+    {
+      "key": "generated/ui-shaders/Vulkan-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/ui-shaders/Vulkan-Vertex.shader",
+      "bytes": 5424,
+      "sha256": "928c7feed700898cbbdcac9419bc5a87749c55dd5973e0fe40cefc0fc6a78fc4"
+    },
+    {
+      "key": "generated/ui-shaders/audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/ui-shaders/audit.json",
+      "bytes": 1565,
+      "sha256": "882257eadf2fd1ee210ded2ecd36b1adc4147b60f532bcc31e96866fe4ccc819"
+    },
+    {
+      "key": "generated/ui-shaders/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/cpu-003/generated/ui-shaders/manifest.rs",
+      "bytes": 2341,
+      "sha256": "7b41e81517be294299fb6d1e9d1e063562efac7c2a4fafc4284d4aff0fea8551"
+    },
+    {
+      "key": "gpu-001/0.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/gpu-001/0.stderr.log",
+      "bytes": 282,
+      "sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef"
+    },
+    {
+      "key": "gpu-001/0.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/gpu-001/0.stdout.log",
+      "bytes": 276,
+      "sha256": "a8b403f175ae06cdcdc98c19bb7b5e7a1e152538a58d5f495e70d924cdce437c"
+    },
+    {
+      "key": "gpu-001/1.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/gpu-001/1.stderr.log",
+      "bytes": 282,
+      "sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef"
+    },
+    {
+      "key": "gpu-001/1.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/gpu-001/1.stdout.log",
+      "bytes": 276,
+      "sha256": "83af1490944be91e11c58ed19d7f68b61a6e19ef0ee6d0fc64e0ca871febc140"
+    },
+    {
+      "key": "gpu-001/aggregate/normalize.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/gpu-001/aggregate/normalize.wgsl",
+      "bytes": 4578,
+      "sha256": "ed24d096849a33c5d4c03ca2ada6f2b9281144367f6890206ef2bc65d5867b46"
+    },
+    {
+      "key": "gpu-001/aggregate/pack.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/gpu-001/aggregate/pack.wgsl",
+      "bytes": 4006,
+      "sha256": "6ec97c6b24fb89cb93d44969cdeba25c16b22e7bb23574f95c8fbe29746b0efb"
+    },
+    {
+      "key": "gpu-001/aggregate/raw.bin",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/gpu-001/aggregate/raw.bin",
+      "bytes": 87040,
+      "sha256": "872b6056c88c6f917ead07451a67a6f39edb612753b241ebc87adf060317db77"
+    },
+    {
+      "key": "gpu-001/aggregate/report.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/gpu-001/aggregate/report.json",
+      "bytes": 1114,
+      "sha256": "b57e7c4677156310121fa5edb2765073be624bc92fada82d2341b2f790d4c1e5"
+    },
+    {
+      "key": "gpu-001/comparison.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/gpu-001/comparison.json",
+      "bytes": 451,
+      "sha256": "df92046f66d356ea2af4712a3009eae2401aecef7eabd9f2c1801bd3561c9186"
+    },
+    {
+      "key": "gpu-001/default/normalize.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/gpu-001/default/normalize.wgsl",
+      "bytes": 4578,
+      "sha256": "ed24d096849a33c5d4c03ca2ada6f2b9281144367f6890206ef2bc65d5867b46"
+    },
+    {
+      "key": "gpu-001/default/pack.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/gpu-001/default/pack.wgsl",
+      "bytes": 4006,
+      "sha256": "6ec97c6b24fb89cb93d44969cdeba25c16b22e7bb23574f95c8fbe29746b0efb"
+    },
+    {
+      "key": "gpu-001/default/raw.bin",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/gpu-001/default/raw.bin",
+      "bytes": 87040,
+      "sha256": "872b6056c88c6f917ead07451a67a6f39edb612753b241ebc87adf060317db77"
+    },
+    {
+      "key": "gpu-001/default/report.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/gpu-001/default/report.json",
+      "bytes": 1115,
+      "sha256": "0ce6b3127414db32c9d5c69e69c3c41e1b761ff257fd28708110874ba7e35690"
+    },
+    {
+      "key": "gpu-001/results.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-metalfx-boundary-001/gpu-001/results.json",
+      "bytes": 5650,
+      "sha256": "f7e2a6835c93f5892b7c1c0488bedaa80c587d2f3aff3a35d74ca4c2ae081560"
+    }
+  ]
+}

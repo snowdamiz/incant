@@ -75,7 +75,7 @@ impl<'a> SpatialView<'a> {
         &self.world.visual_assets
     }
     /// Cold host admission only: these model recipes supplied baked simulation
-    /// navigation geometry and cannot be replaced by a visual-only refresh.
+    /// navigation geometry. A visual refresh must retain that exact geometry.
     /// This walks committed declarations without rebuilding a navigation cache.
     pub fn navigation_model_assets(&self) -> impl Iterator<Item = StableId> + 'a {
         self.world.navigation.nodes.iter().flat_map(|node| {

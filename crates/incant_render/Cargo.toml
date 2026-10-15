@@ -12,12 +12,16 @@ native-compilation = ["dep:wgpu-hal", "wgpu-hal/diagnostic-compilation"]
 native-metalfx = ["dep:objc2", "dep:objc2-metal", "dep:objc2-metal-fx"]
 # Complete fixed motion/temporal route; no mixed native builtin fallback.
 cooked-temporal = ["cooked-materials", "cooked-sprites", "cooked-ui", "cooked-text", "cooked-clusters"]
+# Fixed engine boundary only; never enables the optional vendor scaler itself.
+cooked-metalfx-boundary = ["cooked-temporal"]
 # Complete fixed catalog; effects still require explicit cold preparation.
-cooked-native-shaders = ["cooked-materials", "cooked-sprites", "cooked-ui", "cooked-text", "cooked-clusters", "cooked-bloom", "cooked-ssao", "cooked-temporal"]
+cooked-native-shaders = ["cooked-materials", "cooked-sprites", "cooked-ui", "cooked-text", "cooked-clusters", "cooked-bloom", "cooked-ssao", "cooked-temporal", "cooked-metalfx-boundary"]
 default = ["physics-deterministic"]
 
 # CPU-verified integration; actual backend/appearance acceptance is still pending.
 persistent-pipeline-cache = ["dep:sha2", "dep:rustix"]
+# Explicit Mac backend interop; never enables the public Vulkan cache feature.
+metal-binary-archives = ["persistent-pipeline-cache", "dep:wgpu-hal", "wgpu-hal/metal-binary-archives"]
 cooked-output = ["dep:incant_shader_cook", "dep:sha2"]
 # Adds diagnostic geometry and all shadow variants; backend acceptance pending.
 cooked-geometry = ["cooked-output"]
@@ -51,6 +55,7 @@ physics-fast-simd8 = [
 ]
 
 [build-dependencies]
+sha2 = { workspace = true, optional = true }
 incant_shader_cook = { path = "../incant_shader_cook", optional = true }
 
 [dependencies]

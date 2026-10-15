@@ -3,6 +3,12 @@
 mod allocations;
 #[path = "common/model_refresh.rs"]
 mod fixture;
+#[path = "common/material_refresh.rs"]
+mod material_fixture;
+#[path = "model_refresh/material_navigation.rs"]
+mod material_navigation;
+#[path = "model_refresh/materials.rs"]
+mod materials;
 use fixture::*;
 use incant_assets_runtime::RuntimeAssetData;
 use incant_render_native::{NativeRenderError, NativeRenderInput, VisualCaches};
@@ -254,7 +260,7 @@ fn one_bad_changed_resource_or_payload_budget_retains_the_complete_prior_catalog
 }
 
 #[test]
-fn internal_topology_material_binding_skinning_and_late_consumer_refusal_preserve_old_version() {
+fn internal_topology_skinning_and_late_consumer_refusal_preserve_old_version() {
     let root = tempfile::tempdir().unwrap();
     let first = model(root.path(), 1., RED, [1.; 4], Variant::Static);
     let world = world(vec![first]);
@@ -264,7 +270,6 @@ fn internal_topology_material_binding_skinning_and_late_consumer_refusal_preserv
         Variant::TransformedNode,
         Variant::DetachedPrimitive,
         Variant::ExtraPrimitive,
-        Variant::MaterialBinding,
         Variant::Skinned,
     ] {
         let next = model(root.path(), 2., DARK, [0.2; 4], variant);

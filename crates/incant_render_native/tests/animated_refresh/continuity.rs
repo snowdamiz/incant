@@ -198,3 +198,89 @@ fn compatible_refresh_keeps_crossfade_state_and_original_authority_through_struc
     assert_eq!(mesh(&input).animation, Some(state.sample));
     assert_eq!(mesh(&input).animation_blend, blend);
 }
+
+#[test]
+fn material_rebinding_keeps_current_crossfade_root_and_deformation_without_final_allocation() {
+    let root = tempfile::tempdir().unwrap();
+    let original = model(root.path(), Change::Original);
+    let mut world = NativeWorld::new(scene(root.path(), vec![original], true));
+    let mut input = load(root.path(), &world).unwrap();
+    for _ in 0..12 {
+        world.step().unwrap();
+    }
+    apply(
+        &mut world,
+        StructuralCommand::ControlAnimation {
+            entity: id(1),
+            control: AnimationControl::Crossfade {
+                target: AnimationSample {
+                    clip: Some(1),
+                    seconds: 0.25,
+                },
+                duration: 1.,
+            },
+        },
+    );
+    world.step().unwrap();
+    sync(&mut input, &world);
+    let old = mesh(&input).source.clone();
+    let next = model(root.path(), Change::MaterialBindings);
+    let mut staged = input
+        .stage_texture_refresh(
+            &world.spatial_view().unwrap(),
+            prepared(&input, root.path(), &[next]),
+        )
+        .unwrap();
+    world.step().unwrap();
+    sync(&mut input, &world);
+    let before = world.animation_state(id(1)).unwrap();
+    let pose = (
+        mesh(&input).animation,
+        mesh(&input).animation_blend,
+        mesh(&input).animation_pose,
+        mesh(&input).animation_root,
+    );
+    assert!(pose.1.is_some());
+    let mut before_root = Vec::new();
+    world.snapshot_root_motion(&mut before_root).unwrap();
+    let (result, count, disposals) = allocations::record_lifecycle(|| {
+        input.try_publish_textures(&world.spatial_view().unwrap(), &mut staged, || {
+            Ok::<_, ()>(())
+        })
+    });
+    result.unwrap();
+    assert_eq!((count, disposals), (0, 0));
+    assert_eq!(world.animation_state(id(1)), Some(before));
+    assert_eq!(
+        (
+            mesh(&input).animation,
+            mesh(&input).animation_blend,
+            mesh(&input).animation_pose,
+            mesh(&input).animation_root
+        ),
+        pose
+    );
+    let mut after_root = Vec::new();
+    world.snapshot_root_motion(&mut after_root).unwrap();
+    assert_eq!(before_root, after_root);
+    let RuntimeAssetData::Model(previous) = old.data() else {
+        panic!("model")
+    };
+    let RuntimeAssetData::Model(current) = mesh(&input).source.data() else {
+        panic!("model")
+    };
+    assert_eq!(previous.meshes, current.meshes);
+    assert_eq!(previous.metadata.mesh_materials, [Some(0)]);
+    assert_eq!(current.metadata.mesh_materials, [Some(1)]);
+    assert_eq!(current.materials.len(), 2);
+    assert!(current.materials[1].maps[2].is_some());
+    assert_eq!(
+        position(&old, before.sample),
+        position(&mesh(&input).source, before.sample)
+    );
+    root.close().unwrap();
+    world.step().unwrap();
+    sync(&mut input, &world);
+    assert_eq!(world.tick(), 15);
+    assert_eq!(old.info().fingerprint, key(original));
+}

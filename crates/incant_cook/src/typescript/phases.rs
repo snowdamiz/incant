@@ -2,8 +2,10 @@
 use std::{fs::File, io::Read, path::Path, time::Duration};
 
 pub(super) const MAX_BYTES: u64 = 4096;
-const PHASES: [&str; 8] = [
+const PHASES: [&str; 10] = [
     "driver_entry",
+    "typescript_ready",
+    "swc_ready",
     "compiler_ready",
     "input_ready",
     "snapshot_ready",
@@ -24,7 +26,7 @@ pub(super) fn observation(path: &Path, elapsed: Duration, outcome: &str) -> serd
         None => ("invalid_or_unavailable", Vec::new()),
     };
     serde_json::json!({
-        "version": 1,
+        "version": 2,
         "outcome": outcome,
         "parent_elapsed_us": u64::try_from(elapsed.as_micros()).unwrap_or(u64::MAX),
         "state": state,
@@ -80,6 +82,24 @@ mod tests {
         assert_eq!(rows[0]["phase"], "driver_entry");
         assert!(!serde_json::to_string(&rows).unwrap().contains("private"));
         assert_eq!(parse(b"").unwrap(), ("empty", Vec::new()));
+    }
+
+    #[test]
+    fn loader_deadlines_retain_the_last_completed_dependency() {
+        let file = tempfile::NamedTempFile::new().unwrap();
+        let mut prefix = String::new();
+        for (index, name) in PHASES[..4].iter().enumerate() {
+            prefix.push_str(&format!(
+                "{{\"phase\":\"{name}\",\"elapsed_us\":{index}}}\n"
+            ));
+            std::fs::write(file.path(), &prefix).unwrap();
+            let observed = observation(file.path(), Duration::from_secs(8), "deadline");
+            assert_eq!(observed["version"], 2);
+            assert_eq!(observed["outcome"], "deadline");
+            assert_eq!(observed["state"], "valid_prefix");
+            assert_eq!(observed["phases"].as_array().unwrap().len(), index + 1);
+            assert_eq!(observed["phases"][index]["phase"], *name);
+        }
     }
 
     #[test]
