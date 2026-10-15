@@ -11,6 +11,17 @@ controls. This fixes the ordinary viewport route; low-resolution reconstruction
 still has separate appearance defects. The entries
 below preserve earlier scoped results and superseded integration snapshots.
 
+## Core locale qualification — Arabic native replay verified
+
+A fresh Arabic shipping package passes loss, win and loss/restart/win CPU routes,
+with exact gameplay, localized HUD and PCM reset parity. Its complete 3,056-step
+Mac window run matches the CPU observations. A separate visual replay timed out
+after focus interruptions; five partial actual images show joined Arabic, damage,
+loss and restarted gameplay. The default Retina window was crowded at 320×240
+logical units. Full appearance, normal-size layout and RTL health-pip order remain
+open. CJK public authoring passed; its fresh export/window and pseudo-locale
+qualification are pending. [Scoped evidence and replay](docs/spikes/core-locale-native-window.md).
+
 ## GPU profiler — unavailable counter pairs refused
 
 The profiler now rejects an individual unwritten pair and failed counter
