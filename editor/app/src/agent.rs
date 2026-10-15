@@ -201,6 +201,7 @@ pub(super) async fn engine_agent_start(
 }
 fn start_persistent(state: &Arc<super::Editor>, request: TurnRequest) -> Result<TurnId, Error> {
     let scope = budget::Scope::read(&state.bus)?;
+    validate_view(&request, &scope.project_id)?;
     let ledger = incant_agent::ledger::Ledger::open(&scope.project_id)?;
     let bus = state.bus.clone();
     let root = state.asset_root.clone();
@@ -219,6 +220,21 @@ fn start_persistent(state: &Arc<super::Editor>, request: TurnRequest) -> Result<
             })
         },
     )
+}
+
+fn validate_view(request: &TurnRequest, project_id: &str) -> Result<(), Error> {
+    if let Some(view) = &request.view_context {
+        if !view.is_valid() {
+            return Err(SessionError::InvalidRequest.into());
+        }
+        if view.project_id != project_id {
+            return Err(Error {
+                code: "agent.project-changed",
+                message: "The active project changed. Send the message again.",
+            });
+        }
+    }
+    Ok(())
 }
 #[tauri::command]
 pub(super) fn engine_agent_cancel(

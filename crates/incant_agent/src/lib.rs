@@ -6,6 +6,7 @@ pub mod accounts;
 mod assets;
 pub mod auth;
 mod context;
+pub use context::{EditorPanel, EditorViewContext};
 mod conversation;
 pub mod credentials;
 pub mod ledger;

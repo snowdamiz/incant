@@ -523,12 +523,32 @@ function budgetScope(read) {
     const budget = projectAgentBudget(read);
     return `${read.project.id}:${budget.status}:${budget.status === 'ready' ? budget.maxTokens : ''}`;
 }
-function validAgentRequest(value) {
+function validAgentView(value) {
     return fields(value, [
+        'project_id',
+        'open_panels'
+    ]) && typeof value.project_id === 'string' && /^[0-7][0-9A-HJKMNP-TV-Z]{25}$/.test(value.project_id) && Array.isArray(value.open_panels) && value.open_panels.length <= 8 && new Set(value.open_panels).size === value.open_panels.length && value.open_panels.every((panel)=>[
+            'viewport',
+            'hierarchy',
+            'assets',
+            'inspector',
+            'agent',
+            'problems',
+            'console',
+            'history'
+        ].includes(panel));
+}
+function validAgentRequest(value) {
+    return (fields(value, [
         'prompt',
         'model',
         'approval'
-    ]) && boundedText(value.prompt, 16 * 1024) && value.prompt.trim().length > 0 && boundedText(value.model) && value.model.trim().length > 0 && [
+    ]) || fields(value, [
+        'prompt',
+        'model',
+        'approval',
+        'view_context'
+    ]) && validAgentView(value.view_context)) && boundedText(value.prompt, 16 * 1024) && value.prompt.trim().length > 0 && boundedText(value.model) && value.model.trim().length > 0 && [
         'auto',
         'destructive',
         'always'
@@ -1225,9 +1245,13 @@ class NativeBridge {
             const turnRequest = {
                 prompt: request.text,
                 model: request.model ?? 'gpt-6-astra',
-                approval: request.approval ?? 'destructive'
+                approval: request.approval ?? 'destructive',
+                ...request.viewContext === undefined ? {} : {
+                    view_context: request.viewContext
+                }
             };
             if (!validAgentRequest(turnRequest)) return reject('agent.invalid-request', 'Enter a nonempty prompt up to 16 KiB and a model name up to 128 bytes.');
+            if (turnRequest.view_context && turnRequest.view_context.project_id !== this.read.project.id) return reject('agent.project-changed', 'The active project changed. Send the message again.');
             if (this.agentSession.budget.used_tokens >= this.agentSession.budget.max_tokens) return reject('agent.budget', this.exhaustedReason());
             this.agentStarting = true;
             const generation = ++this.agentGeneration;

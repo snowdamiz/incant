@@ -21,6 +21,7 @@ fn request() -> TurnRequest {
         prompt: "fixture".into(),
         model: "fixture".into(),
         approval: ApprovalChoice::Auto,
+        view_context: None,
     }
 }
 fn session() -> Session {
