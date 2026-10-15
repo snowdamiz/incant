@@ -101,3 +101,44 @@ python3 docs/spikes/evidence/native-player-frame-capture/verify.py \
 
 `--source-root` additionally asserts that every producing input is unchanged in
 that checkout; it must not be used to relabel later source compositions as reruns.
+
+## Recorded-material composition
+
+Joined source `7328884b` includes main364's recorded-material prewarming. Capture
+options are parsed before material options, checkpoints and package expansion;
+the mutually exclusive material flags cannot disappear before capture admission.
+An actual player-entry test checks both flags in both argument orders using an
+absent package and existing sentinel material data. It requires the exact capture
+refusal, unchanged data and no output setup. The capture host remains the ordinary
+CPU `Spatial` variant; no recording or asynchronous GPU consumer is substituted.
+
+This composition passed six capture CPU controls, two actual source-free material
+CLI controls and five feature-off capture controls: 13 test executions, with two
+GPU controls correctly ignored. The material tests executed five CPU player
+subprocesses, including duplicate-publication and stale-manifest refusals. Two
+strict all-target lint configurations passed, and native-window all-target
+compilation passed. The frozen supervisor's old “no player launch” docstring is
+stale; its plan, results and closeout explicitly identify those CPU subprocesses.
+It launched no GPU, native window or capture helper.
+
+The new copied executable `21e17ea2…` then passed the same exact Metal control on
+this joined source. PNG/UI, CPU report/PCM and script/restart assertions were
+unchanged. The managed child and group were independently absent after reaping.
+This adds current-composition sampled rendering evidence; the earlier fixture
+failure and earlier successful executable keep their original identities. No
+temporary images were retained and no locale, window or performance gate passed.
+
+The original resource account is preserved: the final FONT target is
+62,738,066,922 bytes against its 64,140,718,299-byte ceiling; copied artifacts total
+99,724,528 bytes. CPU004 charged 167 seconds, keeping earlier CPU/GPU costs, and
+the final numerical GPU attempt charged another two seconds. Unexecuted CPU003
+drafts remain retained separately from actual attempts. The
+[additive packet](evidence/native-player-frame-capture-integration/manifest.json)
+binds the current 4,081 input inventory, commands, fresh executable and cleanup;
+its verifier also checks the unchanged original packet:
+
+```sh
+python3 docs/spikes/evidence/native-player-frame-capture-integration/verify.py
+python3 docs/spikes/evidence/native-player-frame-capture-integration/verify.py \
+  --originals --binaries --git-source 7328884b
+```
