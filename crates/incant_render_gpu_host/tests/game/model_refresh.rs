@@ -15,6 +15,7 @@ use std::{
 struct ModelTargets {
     inner: Targets,
     policy_changed: Arc<AtomicBool>,
+    base_epoch: Option<u64>,
 }
 impl TargetProvider for ModelTargets {
     type Error = TargetError;
@@ -23,7 +24,11 @@ impl TargetProvider for ModelTargets {
         self.inner.acquire(renderer)
     }
     fn motion_epoch(&self) -> Option<u64> {
-        self.policy_changed.load(Ordering::SeqCst).then_some(1)
+        if self.policy_changed.load(Ordering::SeqCst) {
+            Some(1)
+        } else {
+            self.base_epoch
+        }
     }
 }
 type ModelGame =
@@ -96,6 +101,14 @@ fn fixture(
     reference: VisualAssetRef,
     policy_changed: Arc<AtomicBool>,
 ) -> (ModelGame, Probe) {
+    fixture_with_motion(root, reference, policy_changed, false)
+}
+fn fixture_with_motion(
+    root: &Path,
+    reference: VisualAssetRef,
+    policy_changed: Arc<AtomicBool>,
+    motion: bool,
+) -> (ModelGame, Probe) {
     let mut mesh = CookedSpatial::empty(id(1));
     mesh.mesh = Some(NativeMeshRenderer {
         mesh: reference.id,
@@ -143,7 +156,11 @@ fn fixture(
     .unwrap()
     .with_spatial(vec![reference], vec![mesh, camera, second])
     .unwrap();
-    let renderer = Arc::new(models::checked(Renderer::headless().unwrap()));
+    let mut renderer = models::checked(Renderer::headless().unwrap());
+    if motion {
+        pollster::block_on(renderer.enable_motion_vectors()).unwrap();
+    }
+    let renderer = Arc::new(renderer);
     eprintln!("model-refresh adapter: {:?}", renderer.adapter.get_info());
     let texture = renderer.device.create_texture(&wgpu::TextureDescriptor {
         label: Some("Static model refresh control"),
@@ -170,6 +187,7 @@ fn fixture(
             dropped: dropped.clone(),
         },
         policy_changed,
+        base_epoch: motion.then_some(0),
     };
     let code=CompiledScript::compile("let calls=0;exports.default={update({chunks}){calls++;for(const c of chunks)for(let i=0;i<c.ids.length;i++)if(c.ids[i]==='00000000000000000000000001')c.transforms[i*c.transformStride]+=calls/10;}};").unwrap();
     let game = ModelGame::new(
@@ -205,6 +223,9 @@ fn fixture(
         },
     )
 }
+
+#[path = "model_refresh/materials.rs"]
+mod materials;
 fn stage(game: &mut ModelGame, reference: VisualAssetRef, root: &Path) -> Candidate {
     let prepared = game
         .host()
