@@ -128,4 +128,70 @@ fn main() {
     println!(
         "allocation controls: hot scopes no allocation; exact requested/live/free; null allocation/reallocation; zeroed/grow/shrink preserve ownership and contents"
     );
+    #[cfg(feature = "diagnostic-script-budget")]
+    {
+        drop(capture);
+        budget_allocation_controls();
+    }
+}
+
+#[cfg(feature = "diagnostic-script-budget")]
+fn budget_allocation_controls() {
+    use diagnostic::{Frame, Region, Span, budget, mark};
+    let capture = Capture::start().unwrap();
+    let before = capture.allocations();
+    for _ in 0..1000 {
+        frame(|| {
+            let mut trace = Frame::start();
+            let _tick = scope(Phase::ScriptTick);
+            for region in [
+                Region::Snapshots,
+                Region::GroupSetup,
+                Region::ApiSetup,
+                Region::Capabilities,
+                Region::UndoCapture,
+                Region::ViewExposure,
+                Region::Callbacks,
+            ] {
+                mark(region);
+            }
+            {
+                let _source = script_scope(Some([1; 16]));
+                let _callback = Span::callback(Some([1; 16]));
+                for _ in 0..32 {
+                    for origin in [budget::Origin::Interrupt, budget::Origin::Explicit] {
+                        let check = budget::Span::start(origin);
+                        budget::clock_read();
+                        check.finish(true);
+                    }
+                }
+            }
+            for region in [
+                Region::RevokeChecks,
+                Region::Validation,
+                Region::TransactionStage,
+                Region::ScopeCleanup,
+                Region::Publication,
+                Region::HeapObservation,
+            ] {
+                mark(region);
+            }
+            trace.finish(true);
+            Ok::<_, ()>(())
+        })
+        .unwrap();
+    }
+    let after = capture.allocations();
+    assert_eq!(after.allocations, before.allocations);
+    assert_eq!(after.reallocations, before.reallocations);
+    let report = capture.report().script_phase_diagnostic;
+    assert!(report.complete && report.rows.len() == 1000);
+    for row in report.rows {
+        assert_eq!(row.budget_checks.calls, [32, 32, 0, 0]);
+        assert_eq!(row.budget_checks.clock_reads, [32, 32, 0, 0]);
+        assert_eq!(row.budget_checks.refused, [0; 4]);
+    }
+    println!(
+        "budget attribution: 64,000 check/clock annotations in 1,000 complete frames allocate/reallocate nothing"
+    );
 }
