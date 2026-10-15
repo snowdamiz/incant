@@ -17,6 +17,7 @@ pub mod play;
 pub mod provider;
 mod scripts;
 pub mod session;
+mod skills;
 pub use assets::{ProjectFiles, ProjectHost};
 use incant_cmd::{Actor, Command, CommandBus};
 use incant_doc::schema_registry;
@@ -209,6 +210,7 @@ pub fn tools() -> Vec<Value> {
     tools.extend(assets::tools());
     tools.extend(play::tools());
     tools.extend(scripts::tools());
+    tools.extend(skills::tools());
     tools
 }
 pub fn dispatch(
@@ -242,6 +244,7 @@ fn dispatch_cancellable(
         return Err(AgentError::Interrupted);
     }
     match name {
+        "skill_list" | "skill_read" => skills::dispatch(name, args),
         "script_read" | "script_write" => access.with_bus(cancel, |bus| {
             scripts::dispatch(bus, name, args, actor, cancel)
         }),

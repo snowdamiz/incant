@@ -41,6 +41,19 @@ Metal/DX12 caches and shader-stall qualification remain open. The prior fixture
 failure and storage-bound interruption remain recorded.
 [Selection and evidence](docs/spikes/shipping-cooked-shaders.md).
 
+## Agent playbooks — eighteen bundled workflows qualified
+
+All eighteen planned Markdown playbooks are discoverable through read-only agent
+tools. Their workflows use current schemas, reversible authoring commands and
+native bulk scripting; missing host capabilities are reported explicitly. Project
+content cannot replace the catalogue, and reading guidance grants no execution
+or approval authority. Every drafted translation remains flagged for human review.
+
+118 agent CPU tests and strict lint pass, with independent content/source review.
+Live skill-following quality, missing profiler/export/runtime controls and the
+full Phase 3 evaluation gate remain open.
+[Behaviour and retained evidence](docs/spikes/builtin-agent-skills.md).
+
 ## Agent editor visibility — per-turn wiring qualified
 
 The current visible navigator, output tab and inspector/agent panes now accompany
