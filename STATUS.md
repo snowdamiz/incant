@@ -4,8 +4,8 @@ The current phase remains **Phase 1: Core engine**. The
 [Phase 1 review ledger](docs/gates/phase1-review.md) maps each exit requirement to
 its recorded evidence and remaining qualification. The actual native texture,
 compatible static-model and compatible-animation workflows are verified on this Mac;
-[release checkpoint40](docs/spikes/release-checkpoint-40.md) contains the tested
-main309 tree after all 23 required contexts and eight candidate workflows passed.
+[release checkpoint45](docs/spikes/release-checkpoint-45.md) contains the tested
+main346 tree after all 23 required contexts and eight candidate workflows passed.
 Later main changes remain outside that release baseline. Rendering quality and full rendered-game
 performance remain open. The reported jagged editor cube now has explicit 4x
 geometry antialiasing, verified in the actual Mac editor and isolated Metal
@@ -13,16 +13,13 @@ controls. This fixes the ordinary viewport route; low-resolution reconstruction
 still has separate appearance defects. The entries
 below preserve earlier scoped results and superseded integration snapshots.
 
-Checkpoint45 is frozen at the main346 tree and running comprehensive CI;
-release still retains checkpoint40. Checkpoint44 failed because the general job
-generated stale agent tool contracts into tracked sources before shipping,
-then correctly refused its dirty checkout.
-The [schema correction and isolated check](docs/spikes/ci-shipping-schema-check.md)
-regenerate that registry and compare all 78 generated files before shipping
-without changing tracked sources. Actual retained-binary generation and 55
-focused Python controls pass locally. The correction is merged through PR346;
-corrected full hosted execution remains pending. The shipping freeze requirement
-is unchanged.
+Checkpoint45 is promoted after every required context and all eight frozen-head
+workflows succeeded. The verified release tree equals main346. Checkpoints41–44
+remain failed historical batches; their reviewed main fixes passed the complete
+suite. In particular, the [schema correction and isolated check](docs/spikes/ci-shipping-schema-check.md)
+now passes hosted generation and all four source-free shipping players without
+changing tracked sources or weakening the shipping freeze. Main347–349 work is
+outside this release baseline; its local evidence remains scoped below.
 
 Checkpoint43's retained failures included a broad Linux GPU-test command that
 selected a manual script diagnostic whose prepared inputs were absent. The
@@ -106,7 +103,7 @@ but not executed on this Mac; actual driver persistence and shader-stall gates
 remain open. [Contract and evidence](docs/spikes/persistent-pipeline-cache.md).
 Checkpoint42 exposed an incompatible cooked-feature selection in its all-effects
 Vulkan cache test. The [workflow repair](docs/spikes/ci-renderer-catalog.md) keeps
-every lifecycle assertion; actual corrected hosted execution remains pending.
+every lifecycle assertion; corrected hosted execution passed in checkpoint45.
 
 ## Cooked native shader export — ordinary catalog qualified
 
