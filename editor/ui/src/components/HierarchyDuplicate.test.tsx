@@ -595,6 +595,69 @@ describe('hierarchy duplicate', () => {
     expect(second.commands).toEqual([]);
   });
 
+  it.each(['project', 'bridge', 'unmounted'] as const)('ignores every late unsuccessful outcome after the asking %s is gone', async (changed) => {
+    const double = host();
+    const view = open(double.bridge);
+    const crate = idOf(double.snapshot, 'Crate 01');
+    // Repeat with a fresh mounted hierarchy, exercising each way a completion can fail.
+    const outcomes = [
+      () => double.answer({ ok: false, error: { code: 'engine.request', message: 'old project refusal' } }),
+      () => double.answer({ ok: false, outcomeUnknown: true, error: { code: 'engine.response', message: 'old receipt unknown' } }),
+      () => double.reject(new Error('old channel closed')),
+      () => double.answer({ ok: true }),
+    ];
+    for (const answer of outcomes) {
+      double.publish(fixtureSnapshot('sample'));
+      view.rerender(<App resolution={{ kind: 'bridge', bridge: double.bridge }} />);
+      fireEvent.click(screen.getByRole('tab', { name: /^Hierarchy/ }));
+      focusRow(crate);
+      pressDuplicate(rowOf(crate));
+      if (changed === 'project') {
+        double.publish({ ...double.snapshot, connection: { status: 'ready', project: { id: fixtureId(49999), name: 'Lighthouse' } } });
+      } else if (changed === 'bridge') {
+        view.rerender(<App resolution={{ kind: 'bridge', bridge: host().bridge }} />);
+      } else {
+        fireEvent.click(screen.getByRole('tab', { name: /^Assets/ }));
+      }
+      await answer();
+      await settle();
+      expect(message()).toBe('');
+    }
+    expect(double.commands).toHaveLength(outcomes.length);
+  });
+
+  it('preserves a newer selection even when that entity disappears before duplication completes', async () => {
+    const double = host();
+    open(double.bridge);
+    const crate = idOf(double.snapshot, 'Crate 01');
+    const newer = idOf(double.snapshot, 'Crate 02');
+    focusRow(crate);
+    pressDuplicate(rowOf(crate));
+    focusRow(newer);
+    double.publish(without(double.snapshot, newer));
+    expect(selected()).toEqual([]);
+    const { next, copy } = withCopy(double.snapshot, crate, 50000);
+    await double.answer({ ok: true, duplicatedEntity: copy }, next);
+    await waitFor(() => expect(message()).toBe('Duplicated Crate 01'));
+    expect(selected()).toEqual([]);
+    expect(rowOf(copy).getAttribute('aria-selected')).toBe('false');
+  });
+
+  it('preserves an explicit return to the source while duplication is pending', async () => {
+    const double = host();
+    open(double.bridge);
+    const crate = idOf(double.snapshot, 'Crate 01');
+    focusRow(crate);
+    pressDuplicate(rowOf(crate));
+    focusRow(idOf(double.snapshot, 'Crate 02'));
+    focusRow(crate);
+    const { next, copy } = withCopy(double.snapshot, crate, 50000);
+    await double.answer({ ok: true, duplicatedEntity: copy }, next);
+    await waitFor(() => expect(message()).toBe('Duplicated Crate 01'));
+    expect(selected()).toEqual([rowOf(crate)]);
+    expect(document.activeElement).toBe(rowOf(crate));
+  });
+
   it('leaves a selection made while the command ran, and keeps focus that left the tree', async () => {
     const double = host();
     open(double.bridge);

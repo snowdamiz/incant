@@ -46,22 +46,22 @@ export interface Duplicate {
  * while no Play world exists. Nothing is shown before the engine answers. The returned
  * copy is selected only once it is in the latest snapshot of the bridge and project that
  * asked, and only if the selection did not move on meanwhile; `focus.claim` moves keyboard
- * focus to it while the tree has focus. The Shell announces failures and unknown results,
- * and the selection stays where it was.
+ * focus to it while the tree has focus. Failures and unknown results are announced only
+ * while that bridge and project remain open, and the selection stays where it was.
  */
 export function useDuplicate(
   tree: HierarchyTree,
   focus: { readonly owned: () => boolean; readonly claim: (id: Ulid) => void },
 ): Duplicate {
-  const { bridge, capabilities, dispatch, announce, select, selection } = useShell();
+  const { bridge, capabilities, dispatch, announce, select, selectionGeneration } = useShell();
   const play = useOptionalPlay();
   const [pending, setPending] = useState<Ulid | null>(null);
   // A second press in the same task must not send a second command.
   const running = useRef(false);
   const mounted = useRef(false);
-  const latest = useRef({ bridge, selection });
+  const latest = useRef({ bridge });
   useLayoutEffect(() => {
-    latest.current = { bridge, selection };
+    latest.current = { bridge };
   });
   useEffect(() => {
     mounted.current = true;
@@ -88,33 +88,37 @@ export function useDuplicate(
       announce(GONE);
       return;
     }
-    const chosen = latest.current.selection;
+    const chosenGeneration = selectionGeneration();
     running.current = true;
     setPending(id);
     let result: BridgeResult;
     try {
-      result = await dispatch({ type: 'entity.duplicate', entity: id });
+      result = await dispatch({ type: 'entity.duplicate', entity: id }, { quiet: true });
     } finally {
       running.current = false;
       if (mounted.current) setPending(null);
     }
-    if (!result.ok || !mounted.current) return;
+    if (!mounted.current) return;
+    // Fence every outcome, including failures and unverifiable receipts, before speaking.
+    const after = host.getSnapshot();
+    if (latest.current.bridge !== host || after.connection.status !== 'ready' || after.connection.project.id !== project) return;
+    if (!result.ok) {
+      announce(`${result.outcomeUnknown ? 'Duplicate result unknown' : 'Duplicate failed'}: ${result.error.message}`);
+      return;
+    }
     const copy = result.duplicatedEntity;
     if (copy === undefined) {
       announce(NO_COPY);
       return;
     }
-    // An answer for a bridge or project that is no longer open says and selects nothing.
-    const after = host.getSnapshot();
-    if (latest.current.bridge !== host || after.connection.status !== 'ready' || after.connection.project.id !== project) return;
     if (after.hierarchy.status !== 'ready' || !after.hierarchy.value.nodes[copy]) {
       announce(`Duplicated ${source.name}, but the copy is no longer in the hierarchy.`);
       return;
     }
     announce(`Duplicated ${source.name}`);
-    const now = latest.current.selection;
-    // A selection made while the command ran is the user's newer choice.
-    if (now !== chosen && now !== null) return;
+    // A newer explicit choice wins even if that entity subsequently disappeared. The
+    // source disappearing by itself does not count as new selection intent.
+    if (selectionGeneration() !== chosenGeneration) return;
     if (focus.owned()) focus.claim(copy);
     select(copy);
   };

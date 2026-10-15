@@ -38,6 +38,8 @@ export interface Shell {
   readonly capabilities: CapabilitySet;
   readonly selection: Ulid | null;
   readonly select: (id: Ulid | null) => void;
+  /** Explicit selection intent, including a choice whose entity later disappears. */
+  readonly selectionGeneration: () => number;
   readonly dockTab: DockTab;
   readonly setDockTab: (tab: DockTab) => void;
   readonly message: string;
@@ -49,7 +51,7 @@ export interface Shell {
    * Like `run`, but returns the bridge's result so a caller can show the exact error inline.
    * Always resolves: a rejected dispatch carries outcomeUnknown, as a request does.
    */
-  readonly dispatch: (command: EditorCommand) => Promise<BridgeResult>;
+  readonly dispatch: (command: EditorCommand, options?: RequestOptions) => Promise<BridgeResult>;
   readonly ask: (request: HostRequest) => Promise<boolean>;
   /**
    * Like `ask`, but returns the host's result so a caller can show the exact error inline.
@@ -144,6 +146,12 @@ export function ShellProvider({ bridge, children }: { bridge: EditorBridge | nul
   const getCapabilities = useMemo(() => capabilityReader(bridge), [bridge]);
   const capabilities = getCapabilities();
   const [selection, setSelection] = useState<Ulid | null>(null);
+  const selectedGeneration = useRef(0);
+  const selectionGeneration = useCallback(() => selectedGeneration.current, []);
+  const select = useCallback((id: Ulid | null) => {
+    ++selectedGeneration.current;
+    setSelection(id);
+  }, []);
   const [dockTab, setDockTab] = useState<DockTab>('problems');
   const [panels, setPanels] = useState<PanelVisibility>({ hierarchy: true, dock: true, inspector: true });
   const showPanel = useCallback((panel: keyof PanelVisibility) => {
@@ -198,10 +206,10 @@ export function ShellProvider({ bridge, children }: { bridge: EditorBridge | nul
   );
 
   const dispatch = useCallback(
-    async (command: EditorCommand): Promise<BridgeResult> => {
+    async (command: EditorCommand, options?: RequestOptions): Promise<BridgeResult> => {
       if (!bridge || !capabilities.has(command.type)) {
         const message = unavailableMessage(command.type, bridge);
-        announce(message);
+        if (!options?.quiet) announce(message);
         return { ok: false, error: { code: 'unsupported', message } };
       }
       let result: BridgeResult;
@@ -211,7 +219,7 @@ export function ShellProvider({ bridge, children }: { bridge: EditorBridge | nul
         // As for requests: a rejection says only that no result arrived.
         result = rejectedRequest(error);
       }
-      if (!result.ok) {
+      if (!result.ok && !options?.quiet) {
         const label = result.outcomeUnknown
           ? (UNKNOWN_LABEL[command.type] ?? `${command.type} result unknown`)
           : (FAILURE_LABEL[command.type] ?? `${command.type} failed`);
@@ -275,7 +283,8 @@ export function ShellProvider({ bridge, children }: { bridge: EditorBridge | nul
       snapshot,
       capabilities,
       selection: liveSelection,
-      select: setSelection,
+      select,
+      selectionGeneration,
       dockTab,
       setDockTab,
       message,
@@ -289,7 +298,7 @@ export function ShellProvider({ bridge, children }: { bridge: EditorBridge | nul
       openAccount,
       closeAccount,
     }),
-    [panels, showPanel, togglePanel, bridge, snapshot, capabilities, liveSelection, dockTab, message, announce, run, dispatch, ask, request, explainUnavailable, accountOpen, openAccount, closeAccount],
+    [panels, showPanel, togglePanel, bridge, snapshot, capabilities, liveSelection, select, selectionGeneration, dockTab, message, announce, run, dispatch, ask, request, explainUnavailable, accountOpen, openAccount, closeAccount],
   );
   return <ShellContext.Provider value={value}>{children}</ShellContext.Provider>;
 }
