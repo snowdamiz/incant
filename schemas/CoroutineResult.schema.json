@@ -1,0 +1,73 @@
+{
+  "$defs": {
+    "CoroutineValue": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "format": "double",
+          "type": "number"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "items": {
+            "$ref": "#/$defs/CoroutineValue"
+          },
+          "type": "array"
+        },
+        {
+          "additionalProperties": {
+            "$ref": "#/$defs/CoroutineValue"
+          },
+          "type": "object"
+        }
+      ]
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "done",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": false,
+      "properties": {
+        "delayTicks": {
+          "format": "uint32",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "kind": {
+          "const": "wait",
+          "type": "string"
+        },
+        "state": {
+          "$ref": "#/$defs/CoroutineValue"
+        }
+      },
+      "required": [
+        "kind",
+        "delayTicks",
+        "state"
+      ],
+      "type": "object"
+    }
+  ],
+  "title": "CoroutineResult"
+}

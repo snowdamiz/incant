@@ -26,6 +26,9 @@ struct State {
 pub(crate) struct TickCommands(Rc<RefCell<State>>);
 
 impl TickCommands {
+    pub fn healthy(&self) -> bool {
+        self.0.borrow().failure.is_none()
+    }
     pub fn new(
         restart_enabled: bool,
         haptic_capabilities: incant_input::haptics::HapticCapabilities,

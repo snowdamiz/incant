@@ -48,10 +48,24 @@ pub(crate) fn parse<'js>(
     cost: &mut Cost,
     depth: usize,
 ) -> rquickjs::Result<ScriptValue> {
+    parse_limited(ctx, inspect, value, cost, depth, MAX_BYTES, MAX_NODES)
+}
+
+/// Smaller native capabilities use the same inspector with an admission budget
+/// charged before recursive allocation. Existing persistence keeps its limits.
+pub(crate) fn parse_limited<'js>(
+    ctx: &Ctx<'js>,
+    inspect: &Function<'js>,
+    value: Value<'js>,
+    cost: &mut Cost,
+    depth: usize,
+    bytes: usize,
+    nodes: usize,
+) -> rquickjs::Result<ScriptValue> {
     if depth > MAX_DEPTH {
         return Err(invalid(ctx));
     }
-    cost.add(1, 1).map_err(|_| invalid(ctx))?;
+    charge(ctx, cost, 1, 1, bytes, nodes)?;
     if value.is_null() {
         return Ok(ScriptValue::Null);
     }
@@ -62,37 +76,60 @@ pub(crate) fn parse<'js>(
         if !value.is_finite() {
             return Err(invalid(ctx));
         }
-        cost.add(8, 0).map_err(|_| invalid(ctx))?;
+        charge(ctx, cost, 8, 0, bytes, nodes)?;
         return Ok(ScriptValue::Number(value));
     }
     if value.is_string() {
-        let value = text(ctx, &value, MAX_BYTES - cost.bytes)?;
-        cost.add(4 + value.len(), 0).map_err(|_| invalid(ctx))?;
+        let value = text(ctx, &value, bytes.saturating_sub(cost.bytes + 4))?;
+        charge(ctx, cost, 4 + value.len(), 0, bytes, nodes)?;
         return Ok(ScriptValue::String(value));
     }
     if !value.is_object() || value.is_function() {
         return Err(invalid(ctx));
     }
     let array = value.is_array();
-    let rows: Array = inspect.call((value, (MAX_NODES - cost.nodes) as u32))?;
-    cost.add(4, 0).map_err(|_| invalid(ctx))?;
+    let rows: Array = inspect.call((value, nodes.saturating_sub(cost.nodes) as u32))?;
+    charge(ctx, cost, 4, 0, bytes, nodes)?;
     if array {
         let mut out = Vec::new();
         for entry in rows.iter::<Value>() {
-            out.push(parse(ctx, inspect, entry?, cost, depth + 1)?);
+            out.push(parse_limited(
+                ctx,
+                inspect,
+                entry?,
+                cost,
+                depth + 1,
+                bytes,
+                nodes,
+            )?);
         }
         Ok(ScriptValue::Array(out))
     } else {
         let mut out = BTreeMap::new();
         for entry in rows.iter::<Array>() {
             let entry = entry?;
-            let key = text(ctx, &entry.get(0)?, MAX_BYTES - cost.bytes)?;
-            cost.add(4 + key.len(), 0).map_err(|_| invalid(ctx))?;
-            let value = parse(ctx, inspect, entry.get(1)?, cost, depth + 1)?;
+            let key = text(ctx, &entry.get(0)?, bytes.saturating_sub(cost.bytes + 4))?;
+            charge(ctx, cost, 4 + key.len(), 0, bytes, nodes)?;
+            let value = parse_limited(ctx, inspect, entry.get(1)?, cost, depth + 1, bytes, nodes)?;
             if out.insert(key, value).is_some() {
                 return Err(invalid(ctx));
             }
         }
         Ok(ScriptValue::Object(out))
     }
+}
+
+fn charge(
+    ctx: &Ctx<'_>,
+    cost: &mut Cost,
+    add_bytes: usize,
+    add_nodes: usize,
+    bytes: usize,
+    nodes: usize,
+) -> rquickjs::Result<()> {
+    cost.add(add_bytes, add_nodes).map_err(|_| invalid(ctx))?;
+    if cost.bytes > bytes || cost.nodes > nodes {
+        return Err(invalid(ctx));
+    }
+    Ok(())
 }

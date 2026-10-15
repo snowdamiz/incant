@@ -15,6 +15,7 @@ const MAGIC: &[u8; 8] = b"INCSES01";
 const HEADER: usize = 128;
 const UI_HEADER: usize = 132;
 const AUDIO_HEADER: usize = 136;
+const TASK_HEADER: usize = 140;
 const MAX_AUDIO_BYTES: usize = 176 + 128 * 92 + 128 * (25 + 8 + 240);
 // Same bound with or without the optional UI feature.
 const MAX_UI_BYTES: usize =
@@ -60,6 +61,7 @@ pub(super) struct Sections<'a> {
     pub schedule: &'a [u8],
     pub ui: Option<&'a [u8]>,
     pub audio: Option<&'a [u8]>,
+    pub coroutines: &'a [u8],
 }
 fn digest(bytes: &[u8], header: usize) -> [u8; 32] {
     let mut h = Sha256::new();
@@ -83,6 +85,8 @@ fn sections_for(bytes: &[u8], program: [u8; 32], format: Format) -> Result<Secti
         2 if !format.persisted() && bytes.len() >= UI_HEADER => UI_HEADER,
         3 if !format.persisted() && bytes.len() >= AUDIO_HEADER => AUDIO_HEADER,
         4 if format.persisted() && bytes.len() >= AUDIO_HEADER => AUDIO_HEADER,
+        5 if !format.persisted() && bytes.len() >= TASK_HEADER => TASK_HEADER,
+        6 if format.persisted() && bytes.len() >= TASK_HEADER => TASK_HEADER,
         _ => return Err(Error::Invalid("version")),
     };
     if bytes[12..16] != 1u32.to_le_bytes() {
@@ -94,14 +98,16 @@ fn sections_for(bytes: &[u8], program: [u8; 32], format: Format) -> Result<Secti
     if bytes[header - 32..header] != digest(bytes, header) {
         return Err(Error::Integrity);
     }
-    let mut lens = [0usize; 6];
+    let mut lens = [0usize; 7];
     let mut total = header;
     let count = if header == HEADER {
         4
     } else if header == UI_HEADER {
         5
-    } else {
+    } else if header == AUDIO_HEADER {
         6
+    } else {
+        7
     };
     for (i, n) in lens[..count].iter_mut().enumerate() {
         *n = u32::from_le_bytes(bytes[80 + i * 4..84 + i * 4].try_into().unwrap()) as usize;
@@ -116,6 +122,8 @@ fn sections_for(bytes: &[u8], program: [u8; 32], format: Format) -> Result<Secti
         || lens[3] > 20 + 128 * 97
         || lens[4] > MAX_UI_BYTES
         || (count == 5 && lens[4] == 0)
+        || lens[6] > crate::coroutines::ENCODED_BYTES
+        || (count == 7 && lens[6] == 0)
         || lens[5] > MAX_AUDIO_BYTES
         || (count == 6 && lens[5] == 0 && !format.persisted())
     {
@@ -125,7 +133,8 @@ fn sections_for(bytes: &[u8], program: [u8; 32], format: Format) -> Result<Secti
     let (active, rest) = rest.split_at(lens[1]);
     let (store, rest) = rest.split_at(lens[2]);
     let (schedule, tail) = rest.split_at(lens[3]);
-    let (ui, audio) = tail.split_at(lens[4]);
+    let (ui, tail) = tail.split_at(lens[4]);
+    let (audio, coroutines) = tail.split_at(lens[5]);
     Ok(Sections {
         origin: bytes[48..80].try_into().unwrap(),
         world,
@@ -134,6 +143,7 @@ fn sections_for(bytes: &[u8], program: [u8; 32], format: Format) -> Result<Secti
         schedule,
         ui: (lens[4] != 0).then_some(ui),
         audio: (lens[5] != 0).then_some(audio),
+        coroutines,
     })
 }
 #[allow(clippy::too_many_arguments)] // Explicit versioned section inputs.
@@ -220,7 +230,10 @@ fn encode_for(
         t.extend(v.due.to_le_bytes());
         t.extend(v.interval.unwrap_or(0).to_le_bytes());
     }
-    let header = if format.persisted() || audio.is_some() {
+    let tasks = encode_tasks(schedule.coroutines.as_ref());
+    let header = if !tasks.is_empty() {
+        TASK_HEADER
+    } else if format.persisted() || audio.is_some() {
         AUDIO_HEADER
     } else if ui.is_some() {
         UI_HEADER
@@ -238,6 +251,7 @@ fn encode_for(
         + a.len()
         + s.len()
         + t.len()
+        + tasks.len()
         + ui.map_or(0, <[u8]>::len)
         + audio.map_or(0, <[u8]>::len);
     if total > format.limit() {
@@ -246,7 +260,9 @@ fn encode_for(
     let mut out = Vec::with_capacity(total);
     out.extend(MAGIC);
     out.extend(
-        if format.persisted() {
+        if !tasks.is_empty() {
+            if format.persisted() { 6u32 } else { 5u32 }
+        } else if format.persisted() {
             4u32
         } else if audio.is_some() {
             3u32
@@ -266,8 +282,11 @@ fn encode_for(
     if header >= UI_HEADER {
         u32w(&mut out, ui.map_or(0, <[u8]>::len));
     }
-    if header == AUDIO_HEADER {
+    if header >= AUDIO_HEADER {
         u32w(&mut out, audio.map_or(0, <[u8]>::len));
+    }
+    if header == TASK_HEADER {
+        u32w(&mut out, tasks.len());
     }
     out.extend([0; 32]);
     out.extend(world);
@@ -280,6 +299,7 @@ fn encode_for(
     if let Some(audio) = audio {
         out.extend(audio);
     }
+    out.extend(tasks);
     let h = digest(&out, header);
     out[header - 32..header].copy_from_slice(&h);
     Ok(out)
@@ -541,5 +561,78 @@ pub(super) fn schedule(bytes: &[u8]) -> Result<schedule::Schedule> {
         tick,
         elapsed_seconds,
         timers,
+        coroutines: None,
     })
+}
+
+fn encode_tasks(store: Option<&crate::coroutines::Store>) -> Vec<u8> {
+    let Some(store) = store.filter(|s| !s.entries.is_empty()) else {
+        return Vec::new();
+    };
+    let mut out = Vec::new();
+    u32w(&mut out, store.entries.len());
+    for (key, task) in &store.entries {
+        scope_w(&mut out, key.scope);
+        text_w(&mut out, &key.id);
+        text_w(&mut out, &task.routine);
+        optional_id_w(&mut out, task.entity);
+        out.extend(task.due.to_le_bytes());
+        value_w(&mut out, &task.value);
+    }
+    out
+}
+pub(super) fn coroutines(bytes: &[u8], tick: u64) -> Result<Option<crate::coroutines::Store>> {
+    use crate::coroutines::{FRAME_BYTES, FRAME_NODES, MAX_TASKS, Store, Task, valid_id};
+    if bytes.is_empty() {
+        return Ok(None);
+    }
+    let mut r = Reader(bytes);
+    let count = r.count(MAX_TASKS, 22)?;
+    if count == 0 {
+        return Err(Error::Invalid("empty coroutine section"));
+    }
+    let mut store = Store::default();
+    for _ in 0..count {
+        let key = schedule::Key {
+            scope: r.scope()?,
+            id: r.text(64)?.into(),
+        };
+        let routine = r.text(64)?;
+        if !valid_id(&key.id)
+            || !valid_id(routine)
+            || store
+                .entries
+                .last_key_value()
+                .is_some_and(|(old, _)| *old >= key)
+        {
+            return Err(Error::Invalid("coroutine identity/order"));
+        }
+        let entity = r.optional_id()?;
+        let due = r.u64()?;
+        if due <= tick || due > schedule::MAX_TICK || due - tick > u64::from(u32::MAX) {
+            return Err(Error::Invalid("coroutine deadline"));
+        }
+        // Reserve the unavailable budget before parsing. Reader::value checks
+        // its existing byte/node remainder before copying any recursive data.
+        let reserved = Cost {
+            bytes: MAX_BYTES - FRAME_BYTES,
+            nodes: MAX_NODES - FRAME_NODES,
+        };
+        let mut cost = reserved;
+        let value = r.value(&mut cost, 0)?;
+        cost.bytes -= reserved.bytes;
+        cost.nodes -= reserved.nodes;
+        store.insert(
+            key,
+            Arc::new(Task {
+                routine: routine.into(),
+                entity,
+                due,
+                value,
+                cost,
+            }),
+        )?;
+    }
+    r.done()?;
+    Ok(Some(store))
 }

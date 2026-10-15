@@ -132,3 +132,46 @@ fn persisted_haptics_pending_receiver_refuses_and_restored_authority_is_neutral(
         assert!(fresh.take_haptics().unwrap().is_empty());
     }
 }
+
+#[test]
+fn active_coroutine_native_and_persisted_checkpoints_restore_the_same_wait() {
+    let code = CompiledScript::compile(include_str!(concat!(
+        env!("CARGO_MANIFEST_DIR"),
+        "/tests/fixtures/coroutine.cjs"
+    )))
+    .unwrap();
+    let mut live = NativeSession::new(scene(), code.clone(), Default::default()).unwrap();
+    live.tick(&[]).unwrap();
+    live.tick(&[]).unwrap();
+    let checkpoint = capture(&mut live).unwrap();
+    let mut native = reconstruct(&checkpoint).unwrap();
+    let bytes = checkpoint
+        .persisted_bytes(&mut payload(), &mut planar(), &mut spatial())
+        .unwrap();
+    assert_eq!(u32::from_le_bytes(bytes[8..12].try_into().unwrap()), 6);
+    let mut persisted = load(&bytes, code).unwrap().start().unwrap();
+    for _ in 0..4 {
+        live.tick(&[]).unwrap();
+        native.tick(&[]).unwrap();
+        persisted.tick(&[]).unwrap();
+        assert_eq!(live.world.snapshot(), native.world.snapshot());
+        assert_eq!(live.world.snapshot(), persisted.world.snapshot());
+    }
+    assert_eq!(
+        persisted
+            .world
+            .inspect(id(1))
+            .unwrap()
+            .transform
+            .translation[0],
+        3.
+    );
+    assert_eq!(
+        &live.logs().unwrap().entries()[1..],
+        persisted.logs().unwrap().entries()
+    );
+    assert_eq!(
+        native.logs().unwrap().entries(),
+        persisted.logs().unwrap().entries()
+    );
+}

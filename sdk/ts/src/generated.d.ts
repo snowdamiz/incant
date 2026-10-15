@@ -113,6 +113,17 @@ export namespace CommandSchema {
 }
 export type Command = CommandSchema.Root;
 
+export namespace CoroutineResultSchema {
+  export type CoroutineValue = (null) | (boolean) | (number) | (string) | (Array<CoroutineValue>) | ({ [key: string]: CoroutineValue });
+  export type Root = ({ "kind": "done" }) | ({ "delayTicks": number; "kind": "wait"; "state": CoroutineValue });
+}
+export type CoroutineResult = CoroutineResultSchema.Root;
+
+export namespace CoroutineValueSchema {
+  export type Root = (null) | (boolean) | (number) | (string) | (Array<Root>) | ({ [key: string]: Root });
+}
+export type CoroutineValue = CoroutineValueSchema.Root;
+
 export namespace DateLengthSchema {
   export type Root = "short" | "medium" | "long";
 }

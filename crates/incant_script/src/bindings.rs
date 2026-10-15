@@ -19,15 +19,7 @@ const MAX_PROP_DEPTH: usize = 16;
 
 /// Initial data only. Module-local mutable state is separate and is not a save
 /// format. Numeric values must be finite; keys are ordinary own data properties.
-#[derive(Clone, Debug, PartialEq)]
-pub enum ScriptValue {
-    Null,
-    Bool(bool),
-    Number(f64),
-    String(String),
-    Array(Vec<ScriptValue>),
-    Object(BTreeMap<String, ScriptValue>),
-}
+pub use incant_types::CoroutineValue as ScriptValue;
 
 #[derive(Clone, Debug, PartialEq)]
 pub struct ScriptInstance {

@@ -65,13 +65,14 @@ impl CompiledScript {
                 function entry(i, id) {{ const item = behavior.sources[i]; if (!item || item.id !== id) throw new Error('native source identity mismatch'); const value = item.behavior; check(value); return value; }}\n\
                 const updates = [{entries}];\n\
                 export const persistent = [{persistent}];\n\
-                export function update(chunks, dt, commands, input, physics, navigation, localization, clock, timers, log, flipbooks, animations, group, instances, state, hud) {{ return updates[group].update({{chunks, dt, commands, input, physics, navigation, localization, clock, timers, log, flipbooks, animations, instances, state, hud}}); }}\n"
+                const catalogs = nativeApply(nativeMap, updates, [captureRoutines]); export const routines = nativeApply(nativeMap, catalogs, [nativeOwnKeys]);\n\
+                export const update = routineCount === 0 ? function(chunks, dt, commands, input, physics, navigation, localization, clock, timers, log, flipbooks, animations, group, instances, state, hud) {{ return updates[group].update({{chunks, dt, commands, input, physics, navigation, localization, clock, timers, log, flipbooks, animations, instances, state, hud}}); }} : function(chunks, dt, commands, input, physics, navigation, localization, clock, timers, log, flipbooks, animations, group, instances, state, hud, coroutines, task, routine) {{ const context = {{chunks, dt, commands, input, physics, navigation, localization, clock, timers, log, flipbooks, animations, instances, state, hud}}; if (coroutines !== undefined) nativeDefine(context, 'coroutines', {{value:coroutines, enumerable:true}}); return task === undefined ? updates[group].update(context) : nativeApply(catalogs[group][routine], undefined, [context, task]); }}\n"
             )
         } else {
-            "check(behavior);\nexport const persistent = [opted(behavior)];\nexport function update(chunks, dt, commands, input, physics, navigation, localization, clock, timers, log, flipbooks, animations, group, instances, state, hud) { return behavior.update({chunks, dt, commands, input, physics, navigation, localization, clock, timers, log, flipbooks, animations, instances, state, hud}); }\n".into()
+            "check(behavior);\nexport const persistent = [opted(behavior)];\nconst catalog = captureRoutines(behavior); export const routines = [nativeOwnKeys(catalog)];\nexport const update = routineCount === 0 ? function(chunks, dt, commands, input, physics, navigation, localization, clock, timers, log, flipbooks, animations, group, instances, state, hud) { return behavior.update({chunks, dt, commands, input, physics, navigation, localization, clock, timers, log, flipbooks, animations, instances, state, hud}); } : function(chunks, dt, commands, input, physics, navigation, localization, clock, timers, log, flipbooks, animations, group, instances, state, hud, coroutines, task, routine) { const context = {chunks, dt, commands, input, physics, navigation, localization, clock, timers, log, flipbooks, animations, instances, state, hud}; if (coroutines !== undefined) nativeDefine(context, 'coroutines', {value:coroutines, enumerable:true}); return task === undefined ? behavior.update(context) : nativeApply(catalog[routine], undefined, [context, task]); }\n".into()
         };
         let wrapper = format!(
-            "const defineBehavior = value => value; const nativeIsArray = Array.isArray;\n\
+            "const defineBehavior = value => value; const nativeIsArray = Array.isArray; const nativeOwnKeys = Reflect.ownKeys, nativeDescriptor = Object.getOwnPropertyDescriptor, nativeHasOwn = Object.hasOwn, nativeCreate = Object.create, nativeDefine = Object.defineProperty, nativeApply = Reflect.apply, nativeMap = Array.prototype.map;\n\
              const behavior = (function(exports) {{\n\
              \"use strict\";\n\
              {source}\n\
@@ -80,7 +81,9 @@ impl CompiledScript {
              function check(value) {{ if (!value || typeof value.update !== 'function') throw new Error('default behavior.update required');\n\
              if ('initialState' in value || 'onTimer' in value) throw new Error('legacy initialState/onTimer are unsupported; handle native timers.events in update'); }}\n\
              function opted(value) {{ const setting = value.persistence; if (setting === undefined) return false; if (!setting || setting.version !== 1) throw new Error('persistence version 1 required'); return true; }}\n\
-             {dispatch}"
+             {catalog}\n\
+             {dispatch}",
+            catalog = include_str!("coroutines/catalog.js")
         );
         let (bytes, hardening) = context.with(|ctx| {
             let compile = |name: &str, text: &str| {

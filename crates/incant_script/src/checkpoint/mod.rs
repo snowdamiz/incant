@@ -173,6 +173,63 @@ fn validate(
             return Err(CheckpointError::Invalid("timer source scope"));
         }
     }
+    validate_tasks(host._compiled.bindings.as_deref(), active, schedule)?;
+    if let Some(tasks) = &schedule.coroutines {
+        for (key, task) in &tasks.entries {
+            if !opted(host, key.scope)
+                || !host.coroutine_catalog.known(
+                    host._compiled.bindings.as_deref(),
+                    key.scope,
+                    &task.routine,
+                )
+            {
+                return Err(CheckpointError::Invalid(
+                    "coroutine routine/persistence catalog",
+                ));
+            }
+        }
+    }
+    Ok(())
+}
+fn task_live(
+    bindings: Option<&crate::ScriptBindings>,
+    active: &[StableId],
+    scope: Scope,
+    entity: Option<StableId>,
+) -> bool {
+    match (bindings, scope) {
+        (None, Scope::Global) => entity.is_none(),
+        (Some(b), Scope::Source(source)) => {
+            let belongs = |id: &StableId| {
+                b.instances
+                    .binary_search_by_key(id, |i| i.entity)
+                    .ok()
+                    .is_some_and(|i| b.instances[i].source == source)
+            };
+            if let Some(id) = entity {
+                active.binary_search(&id).is_ok() && belongs(&id)
+            } else {
+                active.iter().any(belongs)
+            }
+        }
+        _ => false,
+    }
+}
+fn validate_tasks(
+    bindings: Option<&crate::ScriptBindings>,
+    active: &[StableId],
+    schedule: &Schedule,
+) -> Result<()> {
+    if let Some(tasks) = &schedule.coroutines {
+        for (key, task) in &tasks.entries {
+            if !task_live(bindings, active, key.scope, task.entity)
+                || task.due <= schedule.tick
+                || task.due > crate::schedule::MAX_TICK
+            {
+                return Err(CheckpointError::Invalid("coroutine source/owner/deadline"));
+            }
+        }
+    }
     Ok(())
 }
 
@@ -213,11 +270,25 @@ fn script_state(session: &NativeSession) -> Result<ScriptState> {
         .transpose()?
         .unwrap_or_default();
     let store = copy_store(&host.persistent.borrow(), &active)?;
-    validate(host, &active, &store, &host.schedule, &session.world)?;
+    let mut schedule = host.schedule.clone();
+    if let Some(tasks) = &mut schedule.coroutines {
+        tasks.retain(|key, task| {
+            task_live(
+                host._compiled.bindings.as_deref(),
+                &active,
+                key.scope,
+                task.entity,
+            )
+        });
+        if tasks.entries.is_empty() {
+            schedule.coroutines = None;
+        }
+    }
+    validate(host, &active, &store, &schedule, &session.world)?;
     Ok(ScriptState {
         active,
         store,
-        schedule: host.schedule.clone(),
+        schedule,
     })
 }
 #[cfg(feature = "native-checkpoints")]
