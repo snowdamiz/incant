@@ -43,11 +43,49 @@ simultaneously active shadowed directional lights still refuses the rendered
 candidate explicitly. CPU render-input controls observe its scalar copy/undo
 allocation count separately from that GPU resource behavior.
 
-Source controls cover native mixed/final-state rollback and save restoration,
-QuickJS caught errors/stale setters/checkpointed phase, strict Wasm batches and
-quotas, real Rust SDK wasm2c/Wasmtime parity, native render-input allocation and
-rollback, staged asset publication, binding comparisons and candidate history.
-The added ignored GPU control compares retained scalar updates with freshly
-prepared numerical pixels, including zero crossings and late-refusal retention.
-At this source-only stage none of these new Rust controls, nor the GPU control,
-has run. There is no actual rendering, performance or phase-gate claim.
+Qualification passed 32 distinct Rust CPU controls, 20 Python controls, strict
+TypeScript checking, generated SDK verification and two scoped strict Clippy
+commands. The CPU controls exercise native mixed/final-state rollback and save
+restoration, QuickJS caught errors/stale setters/checkpointed phase, strict Wasm
+batches and quotas, real Rust SDK execution through both wasm2c and Wasmtime,
+native render-input allocation/rollback, staged asset publication, structural
+binding comparisons and candidate history. Four real Rust guests cover a valid
+batch and caught scratch, range and owner errors. The production source is
+`730928381f86f751dc5d8ff0b69a39245d0d300f`; final qualification source
+`11c1856dbcca0078c3fc8bb080e8a40d4aa37967` adds only fixture corrections.
+
+One actual numerical Metal control passed on Apple M5 Pro. It compares retained
+frames with freshly prepared pixels for directional, point and spot scalar
+updates, including directional zero crossings. A zero-sized candidate and a
+changed shadow binding retain accepted pixels/history; accepted scalar changes
+start a new motion epoch and unchanged following frames resume history. The
+copied test binary has only `default` and `physics-deterministic` features, so
+the fixture's cooked-mode refusal branch cannot bypass these assertions. Its
+owned process group exited successfully and cleanup was confirmed. This is a
+typed renderer fixture; the CPU controls establish gameplay/VM/SDK behavior
+separately. No integrated day/night app, appearance, performance, full-renderer
+allocation freedom or phase-gate acceptance is claimed. Native MetalFX is
+compile/lint-qualified here, without executing a vendor temporal pass.
+
+Three failed qualification attempts remain in the packet. They exposed fixture
+assumptions about Bevy table order, the last scene node being a light, and native
+32-hex labels versus TypeScript ULID spelling. Successors select complete stable
+owner identities and preserve all scalar, rollback and allocation assertions;
+no production change was needed. Across all CPU attempts, 17 managed process
+groups were cleaned up, cumulative sampled/final logical target growth was
+1,269,138,025 bytes (under the 4 GiB allowance), and the CPU target was released.
+The later GPU child was cleaned up separately. These are local correctness
+checks, not shipping-profile performance measurements.
+
+The compact [manifest](evidence/gameplay-light-controls/manifest.json) retains
+source snapshots, original failures, actual commands/logs, guest provenance,
+review and executable hashes. Replay without starting a compiler or device:
+
+```sh
+python3 docs/spikes/evidence/gameplay-light-controls/verify.py
+```
+
+`--originals --binaries --git-source 11c1856dbcca0078c3fc8bb080e8a40d4aa37967`
+also checks retained external evidence and the producing Git source.
+`--source-root .` checks exact qualified code inputs; later source compositions
+must establish their own relevance rather than relabel these executions.
