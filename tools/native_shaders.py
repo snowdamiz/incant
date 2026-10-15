@@ -12,7 +12,7 @@ from native_package import read, require, sha256
 ROOT = Path(__file__).resolve().parents[1]
 FEATURE = 'cooked-native-shaders'
 COOKED = {FEATURE, 'cooked-output', 'cooked-geometry', 'cooked-materials',
-          'cooked-sprites', 'cooked-ui', 'cooked-text', 'cooked-clusters'}
+          'cooked-sprites', 'cooked-ui', 'cooked-text', 'cooked-clusters', 'cooked-bloom'}
 # Exact existing runtime ABI contracts, independently admitted by each selector.
 CONTRACTS = {
     'output': (
@@ -54,17 +54,26 @@ CONTRACTS = {
         'msl=2.4,static-threadgroup,sizes4;spv=1.0,implicit-workgroup-layout;'
         'hlsl=6.0,grid-b0,light-t0,counts-u0,masks-u1,sizes-b1,special-b2;bounds=restrict;loops=bounded'
     ),
+    'bloom-prefilter': 'incant-bloom-prefilter-v1;naga=29.0.4;wgpu=29.0.4;textures0-1,uniform48@2;msl=2.4,t0-t1,b0;hlsl=6.0,t0-t1,b0,special-b1;spv=1.0,no-y-flip;bounds=restrict;loops=bounded',
+    'bloom-downsample': 'incant-bloom-downsample-v1;naga=29.0.4;wgpu=29.0.4;textures0-1,uniform48@2;msl=2.4,t0-t1,b0;hlsl=6.0,t0-t1,b0,special-b1;spv=1.0,no-y-flip;bounds=restrict;loops=bounded',
+    'bloom-upsample': 'incant-bloom-upsample-v1;naga=29.0.4;wgpu=29.0.4;textures0-1,uniform48@2;msl=2.4,t0-t1,b0;hlsl=6.0,t0-t1,b0,special-b1;spv=1.0,no-y-flip;bounds=restrict;loops=bounded',
+    'bloom-display': 'incant-bloom-display-v1;naga=29.0.4;wgpu=29.0.4;textures0-2,uniform80@1,uniform16@3;msl=2.4,t0-t1,b0-b1;hlsl=6.0,t0-t1,b0-b1,special-b2;spv=1.0,no-y-flip;bounds=restrict;loops=bounded',
 }
+
 SOURCES = {
     'output': ['output.wgsl', 'tone_map.wgsl'], 'diagnostic': ['fixture.wgsl'],
     'shadow': ['shadows/caster.wgsl'],
     'material': ['shadows/shade.wgsl', 'lighting/shade.wgsl', 'model_material.wgsl'],
     'sprite': ['sprites/sprite.wgsl'], 'ui': ['ui/ui.wgsl'],
     'text': ['text/text.wgsl'], 'cluster': ['lighting/grid.wgsl'],
+    'bloom-prefilter': ['bloom/filter.wgsl'], 'bloom-downsample': ['bloom/filter.wgsl'],
+    'bloom-upsample': ['bloom/filter.wgsl'], 'bloom-display': ['output.wgsl', 'tone_map.wgsl', 'bloom/output.wgsl'],
 }
 DIRECTORIES = {'output': 'output-shaders', 'diagnostic': 'diagnostic-shaders',
     'shadow': 'shadow-shaders', 'material': 'material-shaders', 'sprite': 'sprite-shaders',
-    'ui': 'ui-shaders', 'text': 'text-shaders', 'cluster': 'cluster-shaders'}
+    'ui': 'ui-shaders', 'text': 'text-shaders', 'cluster': 'cluster-shaders',
+    'bloom-prefilter': 'bloom-prefilter-shaders', 'bloom-downsample': 'bloom-downsample-shaders',
+    'bloom-upsample': 'bloom-upsample-shaders', 'bloom-display': 'bloom-display-shaders'}
 BACKENDS = {'Metal', 'Vulkan', 'Dx12'}
 TARGETS = {'aarch64-apple-darwin', 'x86_64-apple-darwin',
     'x86_64-pc-windows-msvc', 'aarch64-pc-windows-msvc',
@@ -97,6 +106,16 @@ def _digest(value):
     return value
 
 
+def source_bytes(family, root=ROOT):
+    paths = SOURCES[family]
+    values = [read(Path(root) / 'crates/incant_render/src' / name, 1024**2) for name in paths]
+    if family == 'bloom-display':
+        original = b'var color = mix(display.backdrop.rgb,tone_map(radiance),coverage);'
+        require(values[0].count(original) == 1, 'Fixed bloom output seam changed')
+        values[0] = values[0].replace(original, b'var color = display.backdrop.rgb; if inside { color = bloom_color(radiance,coverage,position.xy); }')
+    return b'\n'.join(values)
+
+
 def _family(directory, family, root):
     payload = read(directory / 'audit.json', 64 * 1024)
     receipt = json.loads(payload, object_pairs_hook=_object)
@@ -104,11 +123,14 @@ def _family(directory, family, root):
         'source_sha256', 'producer_sha256', 'manifest_sha256', 'artifacts'}, 'Unknown shader receipt fields')
     require(receipt['format'] == 'incant-fixed-shader-build' and type(receipt['version']) is int
             and receipt['version'] == 1 and receipt['contract'] == CONTRACTS[family], 'Shader family contract differs')
-    source = b'\n'.join(read(root / 'crates/incant_render/src' / name, 1024**2) for name in SOURCES[family])
+    source = source_bytes(family, root)
     require(_digest(receipt['source_sha256']) == sha256(source), 'Shader source identity differs')
     cooker = root / 'crates/incant_shader_cook'
     if family == 'output':
         producer_paths = ['src/lib.rs', 'src/contract.rs', 'src/emit.rs', 'src/manifest.rs', 'src/audit.rs', 'Cargo.toml']
+    elif family.startswith('bloom-'):
+        producer_paths = ['src/bloom/' + name for name in ('mod.rs', 'contract.rs', 'emit.rs')]
+        producer_paths += ['src/audit.rs', 'Cargo.toml', '../incant_render/src/bloom/source.rs']
     elif family == 'cluster':
         producer_paths = ['src/compute/' + name for name in ('mod.rs', 'contract.rs', 'emit.rs',
             'static_workgroup.rs', 'spirv_workgroup.rs')]
@@ -219,11 +241,11 @@ def audit(messages, mode, *, target_dir, target, profile, physics_mode, root=ROO
     output = Path(outputs[0])
     # Only the compiler-selected private OUT_DIR is read; no project/cache loader.
     families = {name: _family(output / directory, name, Path(root)) for name, directory in DIRECTORIES.items()}
-    require(sum(f['artifact_bytes'] for f in families.values()) <= 45 * 1024**2, 'Shader catalog exceeds bound')
+    require(sum(f['artifact_bytes'] for f in families.values()) <= 69 * 1024**2, 'Shader catalog exceeds bound')
     return {'mode': 'cooked', 'target': target, 'profile': profile,
         'compiler_features': {name: sorted(flags) for name, flags in found.items()},
         'ignored_build_host': sorted(ignored), 'families': families,
         'runtime_wgsl_in_selected_ordinary_catalog': False,
-        'limits': ['Eight fixed ordinary families only; backend native compiler still runs during startup',
-            'Bloom, SSAO, motion/temporal and MetalFX remain separate source routes; existing cooked refusals retained',
+        'limits': ['Twelve fixed ordinary and bloom families only; backend native compiler still runs during startup',
+            'SSAO, motion/temporal and MetalFX remain separate source routes; existing cooked refusals retained',
             'No parser-symbol exclusion, driver cache hit, asynchronous fallback or shader-stall gate claim']}

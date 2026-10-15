@@ -1,5 +1,7 @@
 //! Opt-in scene-linear bloom. Screen-space UI is composed after this graph.
 mod config;
+#[cfg(all(feature = "cooked-bloom", not(target_arch = "wasm32")))]
+pub(crate) mod cooked;
 mod targets;
 use crate::{ResourceError, Result, output::OutputPass};
 use bytemuck::{Pod, Zeroable};
@@ -9,24 +11,10 @@ use std::sync::{Arc, Mutex};
 use targets::Targets;
 use wgpu::util::DeviceExt;
 
-pub(super) fn output_source() -> String {
-    const ORIGINAL: &str = "var color = mix(display.backdrop.rgb,tone_map(radiance),coverage);";
-    let original = include_str!("../output.wgsl");
-    assert_eq!(
-        original.matches(ORIGINAL).count(),
-        1,
-        "fixed output seam changed"
-    );
-    format!(
-        "{}\n{}\n{}",
-        original.replace(
-            ORIGINAL,
-            "var color = display.backdrop.rgb; if inside { color = bloom_color(radiance,coverage,position.xy); }"
-        ),
-        include_str!("../tone_map.wgsl"),
-        include_str!("output.wgsl")
-    )
-}
+#[cfg(any(test, not(all(feature = "cooked-bloom", not(target_arch = "wasm32")))))]
+mod source;
+#[cfg(any(test, not(all(feature = "cooked-bloom", not(target_arch = "wasm32")))))]
+pub(super) use source::display as output_source;
 
 #[repr(C)]
 #[derive(Clone, Copy, Pod, Zeroable)]
@@ -44,7 +32,15 @@ pub(super) struct BloomSystem {
     cache: Mutex<Option<Arc<Targets>>>,
 }
 impl BloomSystem {
-    pub fn new(device: &wgpu::Device, config: Bloom, cache: Option<&wgpu::PipelineCache>) -> Self {
+    pub fn new(
+        device: &wgpu::Device,
+        backend: wgpu::Backend,
+        config: Bloom,
+        pipeline_cache: Option<&wgpu::PipelineCache>,
+    ) -> Result<Self> {
+        #[cfg(all(feature = "cooked-bloom", not(target_arch = "wasm32")))]
+        cooked::validate(backend, device.features())?;
+        let stages = filter_stages(device, backend)?;
         let layout = device.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
             label: Some("Bloom immutable inputs"),
             entries: &[
@@ -67,31 +63,22 @@ impl BloomSystem {
             bind_group_layouts: &[Some(&layout)],
             immediate_size: 0,
         });
-        let module = device.create_shader_module(wgpu::ShaderModuleDescriptor {
-            label: Some("Bloom area filter and reconstruction"),
-            source: wgpu::ShaderSource::Wgsl(include_str!("filter.wgsl").into()),
-        });
-        let pipelines = ["first", "down", "up"].map(|entry| {
+        let pipelines = stages.map(|stage| {
             crate::output::build(
                 device,
-                &crate::shader::Stages {
-                    vertex: module.clone(),
-                    fragment: module.clone(),
-                    vertex_entry: "vertex",
-                    fragment_entry: entry,
-                },
+                &stage,
                 Some(&pipeline_layout),
                 crate::frame::HDR_FORMAT,
-                cache,
+                pipeline_cache,
             )
         });
-        Self {
+        Ok(Self {
             config,
-            output: OutputPass::bloom(device, cache),
+            output: OutputPass::bloom(device, backend, pipeline_cache)?,
             pipelines,
             layout,
             cache: Mutex::new(None),
-        }
+        })
     }
 
     pub fn prepare(
@@ -217,6 +204,27 @@ impl BloomSystem {
     }
 }
 
+fn filter_stages(
+    device: &wgpu::Device,
+    _backend: wgpu::Backend,
+) -> Result<[crate::shader::Stages; 3]> {
+    #[cfg(all(feature = "cooked-bloom", not(target_arch = "wasm32")))]
+    return cooked::filters(device, _backend);
+    #[cfg(not(all(feature = "cooked-bloom", not(target_arch = "wasm32"))))]
+    {
+        let module = device.create_shader_module(wgpu::ShaderModuleDescriptor {
+            label: Some("Bloom area filter and reconstruction"),
+            source: wgpu::ShaderSource::Wgsl(include_str!("filter.wgsl").into()),
+        });
+        Ok(["first", "down", "up"].map(|entry| crate::shader::Stages {
+            vertex: module.clone(),
+            fragment: module.clone(),
+            vertex_entry: "vertex",
+            fragment_entry: entry,
+        }))
+    }
+}
+
 fn texture_entry(binding: u32) -> wgpu::BindGroupLayoutEntry {
     wgpu::BindGroupLayoutEntry {
         binding,
@@ -280,16 +288,22 @@ impl crate::Renderer {
         config::admission(
             config,
             cfg!(all(feature = "cooked-output", not(target_arch = "wasm32"))),
+            cfg!(all(feature = "cooked-bloom", not(target_arch = "wasm32"))),
         )?;
         self.check_device()?;
         let validation = self.device.push_error_scope(wgpu::ErrorFilter::Validation);
-        let candidate = BloomSystem::new(&self.device, config, self.pipeline_cache.cache.as_ref());
+        let candidate = BloomSystem::new(
+            &self.device,
+            self.adapter.get_info().backend,
+            config,
+            self.pipeline_cache.cache.as_ref(),
+        );
         if let Some(error) = validation.pop().await {
             #[cfg(target_arch = "wasm32")]
             let error = error.into();
             return Err(ResourceError::Preparation(error).into());
         }
-        self.bloom = Some(self.complete_pipeline_preparation(Ok(candidate))?);
+        self.bloom = Some(self.complete_pipeline_preparation(candidate)?);
         Ok(())
     }
     pub fn disable_bloom(&mut self) {

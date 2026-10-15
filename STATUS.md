@@ -13,6 +13,22 @@ controls. This fixes the ordinary viewport route; low-resolution reconstruction
 still has separate appearance defects. The entries
 below preserve earlier scoped results and superseded integration snapshots.
 
+## Cooked bloom — complete twelve-family CPU catalog qualified
+
+The trusted cooked-native selection now includes prefilter, downsample,
+upsample and display bloom programs, bringing the catalog to twelve families
+and 69 artifact-bound shaders. All seven bloom pipelines receive the retained
+device cache during cold preparation. Partial cooked-output builds still refuse
+bloom; project files cannot supply shader bytes and default exports stay unchanged.
+
+41 Python controls, 41 cooker tests, 209 renderer controls, 12 partial-bloom
+controls and strict lint pass. The exporter-shaped player was compiled only;
+its actual target output passed the complete 268,438-byte shader audit. Both prior
+native failures remain recorded. Public shipping export, player execution,
+driver/render parity, cache hits and the full shader-stall gate remain unproven.
+The original eight-family result below retains its producing-source scope.
+[Source, failures and portable evidence](docs/spikes/cooked-bloom.md).
+
 ## Optional pipeline caches — cold preparation qualified
 
 The renderer retains its Vulkan cache across explicit bloom, SSAO, motion and

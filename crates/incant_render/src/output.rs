@@ -35,18 +35,20 @@ fn decode(byte: u8) -> f32 {
 }
 pub(crate) struct OutputPass(HashMap<wgpu::TextureFormat, wgpu::RenderPipeline>);
 impl OutputPass {
-    pub(super) fn bloom(device: &wgpu::Device, cache: Option<&wgpu::PipelineCache>) -> Self {
-        let module = device.create_shader_module(wgpu::ShaderModuleDescriptor {
-            label: Some("Bloom HDR display transform"),
-            source: wgpu::ShaderSource::Wgsl(crate::bloom::output_source().into()),
-        });
-        let stages = Stages {
-            vertex: module.clone(),
-            fragment: module,
-            vertex_entry: "vertex",
-            fragment_entry: "fragment",
-        };
-        Self(
+    pub(super) fn bloom(
+        device: &wgpu::Device,
+        backend: wgpu::Backend,
+        cache: Option<&wgpu::PipelineCache>,
+    ) -> Result<Self> {
+        #[cfg(all(feature = "cooked-bloom", not(target_arch = "wasm32")))]
+        let stages = crate::bloom::cooked::display(device, backend)?;
+        #[cfg(not(all(feature = "cooked-bloom", not(target_arch = "wasm32"))))]
+        let stages = bloom_shader(device, backend);
+        #[cfg(all(feature = "cooked-bloom", not(target_arch = "wasm32")))]
+        let layout = Some(layout::create_bloom(device));
+        #[cfg(not(all(feature = "cooked-bloom", not(target_arch = "wasm32"))))]
+        let layout: Option<wgpu::PipelineLayout> = None;
+        Ok(Self(
             [
                 wgpu::TextureFormat::Rgba8Unorm,
                 wgpu::TextureFormat::Rgba8UnormSrgb,
@@ -54,9 +56,14 @@ impl OutputPass {
                 wgpu::TextureFormat::Bgra8UnormSrgb,
             ]
             .into_iter()
-            .map(|format| (format, build(device, &stages, None, format, cache)))
+            .map(|format| {
+                (
+                    format,
+                    build(device, &stages, layout.as_ref(), format, cache),
+                )
+            })
             .collect(),
-        )
+        ))
     }
     pub fn new(
         device: &wgpu::Device,
@@ -182,6 +189,20 @@ impl OutputPass {
             bindings,
             target: target.clone(),
         })
+    }
+}
+
+#[cfg(not(all(feature = "cooked-bloom", not(target_arch = "wasm32"))))]
+fn bloom_shader(device: &wgpu::Device, _backend: wgpu::Backend) -> Stages {
+    let module = device.create_shader_module(wgpu::ShaderModuleDescriptor {
+        label: Some("Bloom HDR display transform"),
+        source: wgpu::ShaderSource::Wgsl(crate::bloom::output_source().into()),
+    });
+    Stages {
+        vertex: module.clone(),
+        fragment: module,
+        vertex_entry: "vertex",
+        fragment_entry: "fragment",
     }
 }
 pub(crate) struct OutputDraw {

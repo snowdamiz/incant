@@ -1,3 +1,6 @@
+#[cfg(feature = "cooked-bloom")]
+#[path = "src/bloom/source.rs"]
+mod bloom_source;
 #[cfg(feature = "cooked-temporal")]
 #[path = "src/lighting/temporal_source.rs"]
 mod temporal_source;
@@ -41,6 +44,43 @@ fn main() {
             &output.join("temporal-cluster-shaders"),
         )
         .expect("write temporal clusters");
+    }
+
+    #[cfg(feature = "cooked-bloom")]
+    if std::env::var("CARGO_CFG_TARGET_ARCH").as_deref() != Ok("wasm32") {
+        use incant_shader_cook::bloom::{self, Kind};
+        for path in [
+            "src/bloom/source.rs",
+            "src/bloom/filter.wgsl",
+            "src/bloom/output.wgsl",
+            "src/output.wgsl",
+            "src/tone_map.wgsl",
+        ] {
+            println!("cargo:rerun-if-changed={path}");
+        }
+        let filter =
+            std::fs::read_to_string("src/bloom/filter.wgsl").expect("engine-owned bloom source");
+        let display = bloom_source::display();
+        let output =
+            std::path::PathBuf::from(std::env::var_os("OUT_DIR").expect("Cargo output directory"));
+        for (kind, name) in [
+            (Kind::Prefilter, "prefilter"),
+            (Kind::Downsample, "downsample"),
+            (Kind::Upsample, "upsample"),
+            (Kind::Display, "display"),
+        ] {
+            let bundle = bloom::cook(
+                kind,
+                if kind == Kind::Display {
+                    &display
+                } else {
+                    &filter
+                },
+            )
+            .expect("fixed bloom source and ABI");
+            bloom::write_bundle(kind, &bundle, &output.join(format!("bloom-{name}-shaders")))
+                .expect("write complete cooked bloom family");
+        }
     }
 
     #[cfg(feature = "cooked-clusters")]

@@ -1,6 +1,7 @@
 //! Host-only cooking of the renderer's fixed display-output shader.
 //! This is not a project-shader compiler or a general wgpu layout compiler.
 mod audit;
+pub mod bloom;
 pub mod compute;
 mod contract;
 mod emit;
