@@ -64,6 +64,7 @@ def load(directory, test, cooked):
 
 def analyze_owner(raw):
     moved = []
+    observations = []
     for scale in (16, 8):
         for frame in range(3):
             prefix = f'scale{scale}-frame{frame}-'
@@ -75,17 +76,32 @@ def analyze_owner(raw):
             require(len(flagged) == (5 if frame == 0 else 2 if frame == 2 else 0), 'Owner change chronology changed')
             motion = list(struct.iter_unpack('<4f', raw[prefix + 'on-motion']))
             require(all(all(math.isfinite(x) for x in p) and p[3] in (0., 1.) for p in motion), 'Invalid motion output')
+            require(all(p == (0., 0., 0., 0.) if p[3] == 0. else 0. <= p[2] <= 1. for p in motion), 'Invalid history depth/cleared motion')
             if frame == 0:
                 require(all(p == (0., 0., 0., 0.) for p in motion), 'First frame accepted prior motion')
             elif frame == 1:
-                require(any(p[3] == 1. for p in motion) and all(abs(p[0]) <= 1e-6 and abs(p[1]) <= 1e-6 for p in motion), 'Stationary history missing/changed')
+                # Previous clip position is interpolated; current UV comes from
+                # raster position. The native owner test has no GPU precision
+                # bound for their difference, even when geometry is unchanged.
+                require(any(p[3] == 1. for p in motion), 'Stationary history missing')
             else:
-                count = sum(p[3] == 1. and (abs(p[0]) > 1e-6 or abs(p[1]) > 1e-6) for p in motion)
-                require(count > 0, 'Moved/deformed fixture produced no motion')
-                moved.append(count)
+                previous = list(struct.iter_unpack('<4f', raw[f'scale{scale}-frame1-on-motion']))
+                # A nonzero residual alone is not a movement witness. Require
+                # both changed owners to have valid, nonzero samples different
+                # from the stationary field. This is a state/change witness,
+                # not an analytical velocity-accuracy or stationary-zero gate.
+                witnesses = [owner & 0x7fffffff for owner, p, old in zip(ids, motion, previous)
+                    if owner & 0x80000000 and p[3] == 1. and p[:2] != (0., 0.) and p != old]
+                require(set(witnesses) == flagged, 'Moved/deformed owner produced no changed nonzero motion')
+                moved.append(len(witnesses))
+            maximum = max(max(abs(p[0]), abs(p[1])) for p in motion)
+            observations.append({'scale': scale, 'frame': frame,
+                'valid_pixels': sum(p[3] == 1. for p in motion),
+                'max_abs_uv_motion': maximum,
+                'max_abs_internal_pixel_motion': maximum * scale * 2})
             depth = struct.iter_unpack('<f', raw[prefix + 'on-depth'])
             require(all(math.isfinite(p[0]) and 0. <= p[0] <= 1. for p in depth), 'Invalid depth output')
-    return moved
+    return moved, observations
 
 
 def analyze_resolve(raw):
@@ -105,13 +121,14 @@ def compare(owner_default, owner_cooked, resolve_default, resolve_cooked, cluste
              (load(clustered_default, 'temporal-clustered', False), load(clustered_cooked, 'temporal-clustered', True))]
     for a, b in pairs:
         require(a == b, 'Default/cooked raw mismatch; exact tolerance unchanged')
-    moved = analyze_owner(pairs[0][0])
+    moved, observations = analyze_owner(pairs[0][0])
     analyze_resolve(pairs[1][0])
     for raw in pairs[2][0].values():
         pixels = list(struct.iter_unpack('<4B', raw))
         require(all(p[3] == 255 for p in pixels) and any(p[:3] != (20, 21, 25) for p in pixels), 'Joined clustered scene has no opaque visible geometry')
     return {'status': 'pass', 'comparison': 'exact raw bytes', 'tolerance_codes': 0,
             'owner_records_each': 42, 'resolve_records_each': 14, 'clustered_records_each': 4, 'nonzero_motion_pixels': moved,
+            'motion_observations': observations, 'stationary_motion_precision_bound': None,
             'temporal_analytical_absolute_tolerance': 0.001, 'appearance_or_performance_gate': False}
 
 

@@ -27,8 +27,8 @@ class TemporalParity(unittest.TestCase):
                     if format == 'r32uint':
                         raw = b''.join(struct.pack('<I', n | (0x80000000 if n and (frame == 0 or frame == 2 and n in (3, 5)) else 0)) for n in ids)
                     elif format == 'rgba32float':
-                        raw = b''.join(struct.pack('<4f', 0.03125 if frame == 2 and n == 3 else 0., 0.,
-                            0.5 if frame else 0., 1. if frame else 0.) for n in ids)
+                        raw = b''.join(struct.pack('<4f', 0.03125 if frame == 2 and n in (3, 5) else 0., 0.,
+                            0.5 if frame and n else 0., 1. if frame and n else 0.) for n in ids)
                     elif format == 'depth32float': raw = struct.pack('<f', 0.5) * (w * h)
                     else: raw = bytes([80, 120, 160, 255]) * (w * h)
                 elif test == 'temporal-resolve':
@@ -87,7 +87,51 @@ class TemporalParity(unittest.TestCase):
             for name in ('scale16-frame2-on-motion', 'scale16-frame2-off-motion'):
                 raw = struct.pack('<4f', 0., 0., 0.5, 1.) * (32 * 32)
                 self.change(i, name, raw)
-        with self.assertRaisesRegex(ValueError, 'no motion'): parity.compare(*self.paths)
+        with self.assertRaisesRegex(ValueError, 'no changed nonzero motion'): parity.compare(*self.paths)
+
+    def test_stationary_residual_is_reported_without_inventing_a_precision_gate(self):
+        for i in (0, 1):
+            for suffix in ('on-motion', 'off-motion'):
+                name = 'scale16-frame1-' + suffix
+                values = struct.iter_unpack('<4f', (self.paths[i] / (name + '.raw')).read_bytes())
+                raw = b''.join(struct.pack('<4f', 0.0002 if p[3] else 0., *p[1:]) for p in values)
+                self.change(i, name, raw)
+        result = parity.compare(*self.paths)
+        self.assertIsNone(result['stationary_motion_precision_bound'])
+        self.assertGreater(result['motion_observations'][1]['max_abs_uv_motion'], 1e-6)
+        self.assertEqual(result['tolerance_codes'], 0)
+
+    def test_equal_missing_previous_history_refuses(self):
+        for i in (0, 1):
+            for suffix in ('on-motion', 'off-motion'):
+                self.change(i, 'scale16-frame1-' + suffix, bytes(32 * 32 * 16))
+        with self.assertRaisesRegex(ValueError, 'Stationary history missing'): parity.compare(*self.paths)
+
+    def test_equal_frozen_motion_field_is_not_a_movement_witness(self):
+        for i in (0, 1):
+            for suffix in ('on-motion', 'off-motion'):
+                name = 'scale16-frame1-' + suffix
+                self.change(i, 'scale16-frame2-' + suffix, (self.paths[i] / (name + '.raw')).read_bytes())
+        with self.assertRaisesRegex(ValueError, 'no changed nonzero motion'): parity.compare(*self.paths)
+
+    def test_each_changed_owner_needs_a_motion_witness(self):
+        for i in (0, 1):
+            for suffix in ('on-motion', 'off-motion'):
+                name = 'scale16-frame2-' + suffix
+                values = struct.iter_unpack('<4f', (self.paths[i] / (name + '.raw')).read_bytes())
+                raw = b''.join(struct.pack('<4f', 0. if n % 6 == 5 else p[0], *p[1:]) for n, p in enumerate(values))
+                self.change(i, name, raw)
+        with self.assertRaisesRegex(ValueError, 'no changed nonzero motion'): parity.compare(*self.paths)
+
+    def test_equal_nonfinite_motion_invalid_validity_and_invalid_depth_refuse(self):
+        for pixel, error in [((float('nan'), 0., 0.5, 1.), 'Invalid motion'),
+                             ((0., 0., 0.5, 0.5), 'Invalid motion'),
+                             ((0., 0., 2., 1.), 'Invalid history'),
+                             ((0.1, 0., 0., 0.), 'Invalid history')]:
+            for i in (0, 1):
+                for suffix in ('on-motion', 'off-motion'):
+                    self.change(i, 'scale16-frame1-' + suffix, struct.pack('<4f', *pixel) * (32 * 32))
+            with self.assertRaisesRegex(ValueError, error): parity.compare(*self.paths)
 
     def test_equal_lost_owner_coverage_or_unbound_raw_mutation_refuses(self):
         name = 'scale16-frame0-on-owner'
