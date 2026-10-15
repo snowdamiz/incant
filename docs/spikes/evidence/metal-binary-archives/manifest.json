@@ -1,0 +1,11 @@
+{
+  "schema": 1,
+  "data_file": "records.json.gz",
+  "compressed_bytes": 1402175,
+  "uncompressed_bytes": 8042536,
+  "sha256": "737f38b027beee2da9c735756d42343adcabb05ae99a2486865ef4a11fe6aab2",
+  "record_count": 297,
+  "external_artifact_count": 20,
+  "external_root": "/Users/andreyyurlov/.codex/incant-evidence/metal-binary-archive-build-002-v671zudb",
+  "native_artifacts_included": false
+}

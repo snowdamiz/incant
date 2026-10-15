@@ -1,12 +1,12 @@
 # Native Metal binary archive route
 
-A native test build, 30 focused CPU tests and strict renderer/HAL Clippy passed,
-including the strict real-catalog diagnostic policy. The source now incorporates
-main351, retaining Metal identity generation beside the complete SSAO cooker;
-that integrated source awaits separate qualification. Native archive reuse/miss
-controls and backend validation have not run. This default-off route
-does not change any performance gate, default feature, or per-level
-prewarming/asynchronous fallback requirement.
+The default-off native Metal archive route passes capture, fresh-process strict
+reuse, deliberate misses and invalid-cache recovery on Apple M5 Pro, macOS
+27.0.1 (build 26A434). Ordinary and complete cooked-native feature modes each
+reuse the actual initial renderer plus optional temporal catalog: 41 render and
+two compute pipelines, with 43 `RequireHit` successes, no function additions or
+fallback and unchanged archive bytes/inodes. This qualifies scoped archive
+behavior on this host, without a performance or full shader-stall claim.
 
 `incant_render/metal-binary-archives` adds a native HAL session through
 `Device::as_hal`. It does not advertise `wgpu::Features::PIPELINE_CACHE` on Metal
@@ -41,7 +41,9 @@ successful `fstatx_np` snapshot and queries ACL property presence explicitly.
 Snapshot/property errors still refuse persistence; an absent property is distinct
 from an inaccessible object. Present ACLs retain the same deny-only admission.
 
-The initial CPU run passed 18 tests and failed nine: eight Metal fixtures stopped
+The initial build failed two NSURL temporary-borrow bindings; retaining the URL
+owner for each full native call corrected those compile errors. The initial CPU
+run passed 18 tests and failed nine: eight Metal fixtures stopped
 at that ACL error, and one existing private-storage test assumed setuid survived
 `chmod`. A bounded ABI control observed requested 04600 stored as 0600 on this
 host. The refined test checks actual modes and records when the OS prevents that
@@ -70,7 +72,8 @@ session without ordinary fallback. `RequireHit` sets Apple's
 and never adds functions. Additional catalog stages exercise the real Session,
 optional render/compute cold preparation, native parser rejection of a fixed
 host-authored invalid cache with an intact checksum, and no publication after a
-refused preparation or Drop. None has run yet.
+refused preparation or Drop. All ten approved fresh-process stages passed; their
+exact outcomes and scope are recorded below.
 
 `Renderer::new_requiring_metal_archive` is a host-only diagnostic constructor
 available with both archive and native-compilation features on macOS. It installs
@@ -79,10 +82,10 @@ cold catalogs. Missing/rejected archives fail explicitly; there is no empty-cach
 substitution, function capture, ordinary creation fallback or publication target.
 The ordinary constructors retain Capture. A diagnostic-device error recorder and
 the existing completion hook reject native misses and any observed addition or
-fallback. CPU controls check those refusal boundaries; native success still needs
-the separately supervised catalog-reuse stage. That stage requires real startup
-and optional temporal render/compute descriptors, verifies strict counts, binds
-the actual source/device/archive identity, and checks that archive bytes/inode
+fallback. CPU controls check those refusal boundaries; the separately supervised
+catalog-reuse stage passed with the real startup and optional temporal
+render/compute descriptors. It verifies strict counts, binds the actual
+source/device/archive identity, and checks that archive bytes/inode
 remain unchanged through construction, cold preparation and Drop. No project or
 environment switch can select this diagnostic policy.
 
@@ -92,3 +95,52 @@ shipped archives over runtime mutation in shipping apps because storage and
 corruption resilience require care. This experimental route remains default-off;
 no cache-hit rate, frame-time improvement, native performance gate, or broader
 Apple-device acceptance is claimed.
+
+## Retained qualification
+
+The tested source is `d3b185d0ffad6ac389b7faaf7e443fa027c5755f`, incorporating
+main351 (`1581ef89`) through `200f570f`. The only merge conflict retained both
+Metal identity generation and the complete SSAO cooker. Native archive/HAL
+policy bytes did not change during that join. Both copied test binaries bind the
+actual resolved Cargo features, compiler/profile and distinct source identity.
+The later evidence/documentation commit does not change that tested Rust source.
+
+CPU006 built ordinary `metal-binary-archives,native-compilation` and the same
+selection plus `cooked-native-shaders`. Both passed 30 focused cache controls;
+strict renderer and explicit HAL lints passed in each mode. GPU002 then passed:
+
+| Control | Observed result |
+| --- | --- |
+| Fixed render + compute capture / fresh strict reuse | Both captured; two strict successes, zero additions or fallback on reuse |
+| Changed valid pipelines after ordinary warmup | Both refused with `AGXMetalG17X` code 3 |
+| Empty archive after ordinary warmup | Both refused with the same native miss diagnostic |
+| Disabled strict session | Two explicit `IncantMetalArchiveDisabled` refusals; zero native attachments |
+| Ordinary initial + optional temporal catalog | 41 render / 2 compute captured; all 43 strict hits in a new process |
+| Cooked initial + optional temporal catalog | 41 render / 2 compute captured; all 43 strict hits in a new process |
+| Invalid native bytes with valid host envelope | `MTLBinaryArchiveDomain` code 1, then complete empty-archive capture and publication |
+
+Strict catalog reads never published and preserved raw/sidecar bytes and inodes.
+Stored catalog archives were 757,648 bytes ordinary and 759,984 bytes cooked, with
+distinct source/cache keys. Actual device identity was registry `4294969070`,
+Apple M5 Pro, Metal. All ten stage processes and their supervisor were independently
+confirmed absent. The sampled peak among those owned trees was 34,340,864 bytes;
+external driver/compiler services remain outside that measurement. Process times
+are resource receipts only, not a benchmark. No window, frame or GPU command
+submission was needed by these pipeline-creation controls.
+
+The [portable manifest](evidence/metal-binary-archives/manifest.json) binds 297 exact
+data-only records, both earlier failures and 20 external native artifact hashes.
+The verifier checks source/tool/feature identities, actual terminal outcomes,
+strict hit/miss counters and independent cleanup; it never extracts, imports or
+executes archived code. Nine verifier controls include coherent attempts to turn
+fallback, missing archives, disabled calls or a substituted source into success.
+Run `python3 docs/spikes/evidence/metal-binary-archives/verify.py`; optionally add
+`--external-root` with the retained root named in the manifest to hash native
+artifacts without executing them. The frozen original source inventories and
+native artifacts remain retained outside the repository.
+
+Coverage is initial renderer and explicitly enabled temporal preparation only.
+AO, bloom, vendor effects, mesh/tile descriptors, all per-level recorded keys,
+asynchronous fallback, other Apple devices, reference phones and shader-stall
+performance remain separate work. The native parser allocation/intermediate
+serialization and external-service accounting limitations above remain in force.
