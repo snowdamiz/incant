@@ -71,6 +71,11 @@ pub fn expand(args: Vec<String>) -> Result<Vec<String>> {
                 | "--input-recording"
                 | "--stop-after"
                 | "--ui-viewport"
+                | "--compilation-output"
+                | "--compilation-capacity"
+                | "--presentation-output"
+                | "--presentation-capacity"
+                | "--window-state-log"
         ) || options.contains_key(key)
         {
             return Err("unknown or duplicate native package option".into());
@@ -88,16 +93,28 @@ pub fn expand(args: Vec<String>) -> Result<Vec<String>> {
     let clips = path(root, "clips.bin")?;
     let actions = path(root, "input-actions.json")?;
     if window {
-        if options
-            .keys()
-            .any(|key| !matches!(*key, "--stop-after" | "--input-recording" | "--observe"))
-        {
+        if options.keys().any(|key| {
+            !matches!(
+                *key,
+                "--stop-after"
+                    | "--input-recording"
+                    | "--observe"
+                    | "--compilation-output"
+                    | "--compilation-capacity"
+                    | "--presentation-output"
+                    | "--presentation-capacity"
+                    | "--window-state-log"
+            )
+        }) {
             return Err("window package options conflict with offline options".into());
         }
         if (options.contains_key("--input-recording") || options.contains_key("--observe"))
             && !options.contains_key("--stop-after")
         {
             return Err("window recording/observation requires --stop-after".into());
+        }
+        if options.contains_key("--window-state-log") && !options.contains_key("--stop-after") {
+            return Err("window state log requires --stop-after".into());
         }
         let mut result = vec![
             "--window".into(),
@@ -111,12 +128,34 @@ pub fn expand(args: Vec<String>) -> Result<Vec<String>> {
             "--font-cache".into(),
             path(root, "fonts")?,
         ];
-        for key in ["--stop-after", "--input-recording", "--observe"] {
+        for key in [
+            "--stop-after",
+            "--input-recording",
+            "--observe",
+            "--compilation-output",
+            "--compilation-capacity",
+            "--presentation-output",
+            "--presentation-capacity",
+            "--window-state-log",
+        ] {
             if let Some(value) = options.remove(key) {
                 result.extend([key.into(), value]);
             }
         }
         return Ok(result);
+    }
+    if options.contains_key("--window-state-log") {
+        return Err("window state log requires --window".into());
+    }
+    if options.contains_key("--compilation-output")
+        || options.contains_key("--compilation-capacity")
+    {
+        return Err("compilation capture requires --window".into());
+    }
+    if options.contains_key("--presentation-output")
+        || options.contains_key("--presentation-capacity")
+    {
+        return Err("presentation capture requires --window".into());
     }
     if options.contains_key("--stop-after") {
         return Err("--stop-after requires --window".into());
@@ -243,6 +282,58 @@ mod tests {
         .concat()
     }
     #[test]
+    fn presentation_destination_is_only_an_explicit_window_argument() {
+        let dir = fixture();
+        let expanded = expand(args(
+            dir.path(),
+            &[
+                "--window",
+                "--stop-after",
+                "6",
+                "--presentation-output",
+                "trusted.json",
+                "--presentation-capacity",
+                "8",
+            ],
+        ))
+        .unwrap();
+        assert_eq!(
+            &expanded[10..],
+            [
+                "--stop-after",
+                "6",
+                "--presentation-output",
+                "trusted.json",
+                "--presentation-capacity",
+                "8"
+            ]
+        );
+        assert!(
+            expand(args(
+                dir.path(),
+                &[
+                    "--ticks",
+                    "6",
+                    "--output",
+                    "sound.pcm",
+                    "--presentation-output",
+                    "not-allowed.json"
+                ]
+            ))
+            .is_err()
+        );
+        let mut manifest: serde_json::Value =
+            serde_json::from_slice(&std::fs::read(dir.path().join("package.json")).unwrap())
+                .unwrap();
+        manifest["presentation_output"] = "project-controlled.json".into();
+        std::fs::write(
+            dir.path().join("package.json"),
+            serde_json::to_vec(&manifest).unwrap(),
+        )
+        .unwrap();
+        assert!(expand(args(dir.path(), &["--window", "--stop-after", "6"])).is_err());
+    }
+    #[test]
     fn offline_and_window_expand_to_existing_hosts() {
         let dir = fixture();
         let offline = expand(args(
@@ -290,6 +381,54 @@ mod tests {
             ))
             .is_err()
         );
+    }
+    #[test]
+    fn state_log_destination_is_explicit_bounded_window_cli_only() {
+        let dir = fixture();
+        let expanded = expand(args(
+            dir.path(),
+            &[
+                "--window",
+                "--window-state-log",
+                "trusted.jsonl",
+                "--stop-after",
+                "781",
+            ],
+        ))
+        .unwrap();
+        assert_eq!(
+            &expanded[10..],
+            ["--stop-after", "781", "--window-state-log", "trusted.jsonl"]
+        );
+        for tail in [
+            vec!["--window", "--window-state-log", "unbounded.jsonl"],
+            vec!["--window", "--stop-after", "1", "--window-state-log"],
+            vec![
+                "--window",
+                "--stop-after",
+                "1",
+                "--window-state-log",
+                "a",
+                "--window-state-log",
+                "b",
+            ],
+            vec![
+                "--ticks",
+                "1",
+                "--output",
+                "audio.pcm",
+                "--window-state-log",
+                "offline.jsonl",
+            ],
+        ] {
+            assert!(expand(args(dir.path(), &tail)).is_err(), "{tail:?}");
+        }
+        let path = dir.path().join("package.json");
+        let mut manifest: serde_json::Value =
+            serde_json::from_slice(&std::fs::read(&path).unwrap()).unwrap();
+        manifest["window_state_log"] = "untrusted-destination.jsonl".into();
+        std::fs::write(path, serde_json::to_vec(&manifest).unwrap()).unwrap();
+        assert!(expand(args(dir.path(), &["--window", "--stop-after", "1"])).is_err());
     }
     #[cfg(feature = "render-input")]
     #[test]
@@ -370,6 +509,61 @@ mod tests {
                 .unwrap_err()
                 .to_string()
                 .contains("file set")
+        );
+    }
+    #[test]
+    fn compilation_output_is_only_a_trusted_window_argument() {
+        let dir = fixture();
+        let expanded = expand(args(
+            dir.path(),
+            &[
+                "--window",
+                "--stop-after",
+                "6",
+                "--compilation-output",
+                "trusted.json",
+                "--compilation-capacity",
+                "8",
+            ],
+        ))
+        .unwrap();
+        assert_eq!(
+            &expanded[10..],
+            [
+                "--stop-after",
+                "6",
+                "--compilation-output",
+                "trusted.json",
+                "--compilation-capacity",
+                "8"
+            ]
+        );
+        assert!(
+            expand(args(
+                dir.path(),
+                &[
+                    "--ticks",
+                    "6",
+                    "--output",
+                    "sound.pcm",
+                    "--compilation-output",
+                    "x",
+                    "--compilation-capacity",
+                    "8"
+                ]
+            ))
+            .is_err()
+        );
+        let path = dir.path().join("package.json");
+        let mut manifest: serde_json::Value =
+            serde_json::from_slice(&std::fs::read(&path).unwrap()).unwrap();
+        manifest["compilation-output"] = "not-authority.json".into();
+        std::fs::write(&path, serde_json::to_vec(&manifest).unwrap()).unwrap();
+        let error = expand(args(dir.path(), &["--window"])).unwrap_err();
+        assert!(
+            error
+                .to_string()
+                .contains("unknown field `compilation-output`")
         );
     }
 }

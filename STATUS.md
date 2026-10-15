@@ -11,6 +11,59 @@ controls. This fixes the ordinary viewport route; low-resolution reconstruction
 still has separate appearance defects. The entries
 below preserve earlier scoped results and superseded integration snapshots.
 
+## GPU profiler — unavailable counter pairs refused
+
+The profiler now rejects an individual unwritten pair and failed counter
+sentinels instead of reporting false zero or enormous durations. Eleven targeted
+CPU controls and strict lint pass. Two bounded Metal diagnostics retain the
+missing second-pass timestamps even though their numerical output is exact;
+the observation cause and complete GPU timing remain open.
+[Decoder correction and retained observations](docs/spikes/gpu-timestamp-invalid-counters.md).
+
+## Native presentation observer — complete gameplay replay verified
+
+The default-off Metal observer and typed audio-overrun fix now complete the full
+2,156-step Core replay on this Mac. All eight gameplay checks and 17 observed
+entities match the offline baseline. The actual drawable sidecar retains 2,149
+positive timestamps, eight zero outcomes and one equal adjacent pair, with no
+missing callbacks. These limitations prevent a complete displayed-frame timing
+verdict. The earlier timeout and 1,444-step failure remain recorded; shader-stall
+qualification and full rendered-game performance remain open.
+[Fresh build and complete replay](docs/spikes/native-presentation-audio.md).
+
+The separate default-off compilation observer now records native library and
+pipeline creation with immutable session, surface, host-step and phase context.
+Bounded CPU qualification passes for the collector, renderer binding and native
+host, with strict lint in enabled and ordinary modes. Its combined shipping build
+and live replay are still pending; these controls do not establish shader-stall
+or displayed-frame performance. [Implementation and retained failures](docs/spikes/native-compilation-observer.md).
+
+## Device audio overrun handling — merged main303
+
+The audio host now counts typed overrun notifications without replacing the
+stream or mixer; device failures and lost error reports remain fatal. Seventy-four
+scoped CPU tests and strict lint pass, including exact nonzero PCM continuation.
+The fresh full native replay above completes with zero reported overruns; it
+verifies successful composition, not a live recovery event or audible output
+quality. [Cause and qualification](docs/spikes/device-audio-xrun.md).
+
+## 2D native sample — complete Mac win route verified
+
+A fresh Pearl Cove shipping package passes all three CPU routes and completes
+its 781-step win route in an actual Metal window on this Mac, with exact offline
+gameplay parity. Three actual window captures show the tilemap, moving player,
+pickups and readable HUD progressing to the boat with all three pearls.
+The window pauses normally on focus loss and finishes after normal activation;
+that interruption and one surface deferral remain recorded, so this is not a
+frame-time result. Audible quality and continuous-motion review remain separate.
+
+The two earlier timeouts and a later harness refusal remain retained. That
+refusal counted the logical layout root as a drawn widget; the corrected check
+requires exactly two native labels while the CPU tree still requires three
+widgets. Eleven Python controls pass. The default-off eligibility log changes
+no frame-admission policy. [Fresh export, failed attempts, corrected check and
+actual window proof](docs/spikes/native-window-eligibility.md).
+
 ## Repeated navigation-start cost — diagnostic complete
 
 A default-off observer now measures initial and repeated navigation starts in
@@ -163,13 +216,11 @@ The existing plan gate stays unmet; this is not evidence that sub-2 ms is
 impossible or that the full rendered game misses its frame budget.
 [Outcome and replay](docs/spikes/navigation-search-cache-outcome.md).
 
-Last reassessment: 2026-10-14, a bounded source review identified repeated
-nearest-surface scans between accepted navigation shortcut segments. The prior
-endpoint lookup could supply the next segment's identical start polygon within
-the same immutable query. This is distinct from the rejected graph cache and
-ordered-query candidates; its actual cost has not been measured. Next useful
-step: measure those repeated scans on the same full-Core frames before choosing
-an implementation. Revisit after relevant engine changes or every few hours of
+Last reassessment: 2026-10-14, actual full-Core attribution measured repeated
+nearest-surface scans between accepted navigation shortcut segments. Removing
+their entire measured cost hypothetically still leaves a 2.544041 ms p95, so
+this hypothesis is closed without changing navigation. The diagnostic and exact
+gameplay/PCM parity are recorded above. Revisit after relevant engine changes or every few hours of
 active development, with a distinct hypothesis and stop condition. Preserve
 matched shipping inputs, work limits, rollback and gameplay/audio parity. Other
 implementation lanes continue throughout.

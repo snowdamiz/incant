@@ -3,6 +3,8 @@
 mod config;
 #[cfg(feature = "scene")]
 mod scene;
+#[cfg(all(feature = "scene", feature = "device", not(target_arch = "wasm32")))]
+pub use scene::DeviceAudioDiagnostics;
 #[cfg(feature = "scene")]
 pub use scene::{
     ClipBinding, MAX_AUDIO_CHECKPOINT_BYTES, MAX_CLIP_METADATA_BYTES, MAX_SCENE_CLIPS,

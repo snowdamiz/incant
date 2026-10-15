@@ -1,0 +1,35 @@
+{
+  "scope": "Edition-neutral binding in one test assertion only; no shipping behavior changes. Prior CPU/shipping evidence retains its exact producing source identity.",
+  "failed_head": "84ad01d79a2552b69669bd3181fac8f5eddd3a40",
+  "failed_ci": "https://github.com/snowdamiz/incant/actions/runs/38643210270/job/116123618138",
+  "failed_ci_log": "development-checks\tRun cargo fmt --all --check\t\ufeff2026-10-14T21:51:08.9775463Z ##[group]Run cargo fmt --all --check\ndevelopment-checks\tRun cargo fmt --all --check\t2026-10-14T21:51:08.9775813Z ^[[36;1mcargo fmt --all --check^[[0m\ndevelopment-checks\tRun cargo fmt --all --check\t2026-10-14T21:51:08.9839580Z shell: /usr/bin/bash -e {0}\ndevelopment-checks\tRun cargo fmt --all --check\t2026-10-14T21:51:08.9839841Z env:\ndevelopment-checks\tRun cargo fmt --all --check\t2026-10-14T21:51:08.9840446Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64\ndevelopment-checks\tRun cargo fmt --all --check\t2026-10-14T21:51:08.9840911Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig\ndevelopment-checks\tRun cargo fmt --all --check\t2026-10-14T21:51:08.9841357Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64\ndevelopment-checks\tRun cargo fmt --all --check\t2026-10-14T21:51:08.9841746Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64\ndevelopment-checks\tRun cargo fmt --all --check\t2026-10-14T21:51:08.9842161Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64\ndevelopment-checks\tRun cargo fmt --all --check\t2026-10-14T21:51:08.9842752Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib\ndevelopment-checks\tRun cargo fmt --all --check\t2026-10-14T21:51:08.9843080Z ##[endgroup]\ndevelopment-checks\tRun cargo fmt --all --check\t2026-10-14T21:51:09.8554484Z Diff in /home/runner/work/incant/incant/crates/incant_game_player/src/window/presentations/../../../../../third_party/wgpu-hal/src/metal/presentation_tests.rs:29:\ndevelopment-checks\tRun cargo fmt --all --check\t2026-10-14T21:51:09.8556147Z      let c = Collector::new(1).unwrap();\ndevelopment-checks\tRun cargo fmt --all --check\t2026-10-14T21:51:09.8557012Z      assert_eq!(Context::new(0, 1, 0).unwrap_err(), Error::Context);\ndevelopment-checks\tRun cargo fmt --all --check\t2026-10-14T21:51:09.8557915Z      assert_eq!(Context::new(1, 0, 0).unwrap_err(), Error::Context);\ndevelopment-checks\tRun cargo fmt --all --check\t2026-10-14T21:51:09.8558664Z -    assert!(Observation::new(\ndevelopment-checks\tRun cargo fmt --all --check\t2026-10-14T21:51:09.8559167Z -        Arc::clone(&c),\ndevelopment-checks\tRun cargo fmt --all --check\t2026-10-14T21:51:09.8559643Z -        Context {\ndevelopment-checks\tRun cargo fmt --all --check\t2026-10-14T21:51:09.8560412Z -            surface_generation: 0,\ndevelopment-checks\tRun cargo fmt --all --check\t2026-10-14T21:51:09.8560927Z -            segment: 1,\ndevelopment-checks\tRun cargo fmt --all --check\t2026-10-14T21:51:09.8561375Z -            host_step: 0,\ndevelopment-checks\tRun cargo fmt --all --check\t2026-10-14T21:51:09.8561828Z -            attempt: 0,\ndevelopment-checks\tRun cargo fmt --all --check\t2026-10-14T21:51:09.8562216Z -        }\ndevelopment-checks\tRun cargo fmt --all --check\t2026-10-14T21:51:09.8562583Z -    )\ndevelopment-checks\tRun cargo fmt --all --check\t2026-10-14T21:51:09.8562918Z -    .is_err());\ndevelopment-checks\tRun cargo fmt --all --check\t2026-10-14T21:51:09.8563276Z +    assert!(\ndevelopment-checks\tRun cargo fmt --all --check\t2026-10-14T21:51:09.8563683Z +        Observation::new(\ndevelopment-checks\tRun cargo fmt --all --check\t2026-10-14T21:51:09.8564154Z +            Arc::clone(&c),\ndevelopment-checks\tRun cargo fmt --all --check\t2026-10-14T21:51:09.8564593Z +            Context {\ndevelopment-checks\tRun cargo fmt --all --check\t2026-10-14T21:51:09.8565059Z +                surface_generation: 0,\ndevelopment-checks\tRun cargo fmt --all --check\t2026-10-14T21:51:09.8565572Z +                segment: 1,\ndevelopment-checks\tRun cargo fmt --all --check\t2026-10-14T21:51:09.8566030Z +                host_step: 0,\ndevelopment-checks\tRun cargo fmt --all --check\t2026-10-14T21:51:09.8566486Z +                attempt: 0,\ndevelopment-checks\tRun cargo fmt --all --check\t2026-10-14T21:51:09.8566900Z +            }\ndevelopment-checks\tRun cargo fmt --all --check\t2026-10-14T21:51:09.8567246Z +        )\ndevelopment-checks\tRun cargo fmt --all --check\t2026-10-14T21:51:09.8567603Z +        .is_err()\ndevelopment-checks\tRun cargo fmt --all --check\t2026-10-14T21:51:09.8567955Z +    );\ndevelopment-checks\tRun cargo fmt --all --check\t2026-10-14T21:51:09.8568463Z      assert!(c.snapshot().rows.is_empty());\ndevelopment-checks\tRun cargo fmt --all --check\t2026-10-14T21:51:09.8568964Z  }\ndevelopment-checks\tRun cargo fmt --all --check\t2026-10-14T21:51:09.8569281Z  #[test]\ndevelopment-checks\tRun cargo fmt --all --check\t2026-10-14T21:51:12.7328696Z ##[error]Process completed with exit code 1.\n",
+  "change": "diff --git a/third_party/wgpu-hal/src/metal/presentation_tests.rs b/third_party/wgpu-hal/src/metal/presentation_tests.rs\nindex ebe26d0d..b937122e 100644\n--- a/third_party/wgpu-hal/src/metal/presentation_tests.rs\n+++ b/third_party/wgpu-hal/src/metal/presentation_tests.rs\n@@ -29,16 +29,16 @@ fn invalid_context_has_no_acquisition_effect() {\n     let c = Collector::new(1).unwrap();\n     assert_eq!(Context::new(0, 1, 0).unwrap_err(), Error::Context);\n     assert_eq!(Context::new(1, 0, 0).unwrap_err(), Error::Context);\n-    assert!(Observation::new(\n+    let invalid = Observation::new(\n         Arc::clone(&c),\n         Context {\n             surface_generation: 0,\n             segment: 1,\n             host_step: 0,\n             attempt: 0,\n-        }\n-    )\n-    .is_err());\n+        },\n+    );\n+    assert!(invalid.is_err());\n     assert!(c.snapshot().rows.is_empty());\n }\n #[test]\n",
+  "new_test_sha256": "755625f969f527ab6feccb2299feb17cec0c29ab8775bd9090fc76a693c10904",
+  "checks": [
+    {
+      "command": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--check"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "terminal_reaped": true
+    },
+    {
+      "command": [
+        "rustfmt",
+        "--edition",
+        "2021",
+        "--check",
+        "third_party/wgpu-hal/src/metal/presentation_tests.rs"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "terminal_reaped": true
+    }
+  ]
+}

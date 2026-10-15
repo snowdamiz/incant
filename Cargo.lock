@@ -4087,6 +4087,7 @@ dependencies = [
  "jni 0.22.4",
  "ndk",
  "ndk-context",
+ "parking_lot",
  "pollster",
  "serde",
  "serde_json",
@@ -4095,6 +4096,7 @@ dependencies = [
  "tempfile",
  "thiserror 2.0.21",
  "ulid",
+ "wgpu-hal",
 ]
 
 [[package]]
@@ -4387,6 +4389,7 @@ dependencies = [
  "tempfile",
  "thiserror 2.0.21",
  "wgpu",
+ "wgpu-hal",
 ]
 
 [[package]]
@@ -6083,6 +6086,7 @@ dependencies = [
  "bitflags 2.13.2",
  "block2",
  "objc2",
+ "objc2-core-foundation",
  "objc2-foundation",
 ]
 
@@ -10024,8 +10028,6 @@ dependencies = [
 [[package]]
 name = "wgpu-hal"
 version = "29.0.4"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "97ace1c17727311c22a46e4e3faf56ea6de81af99dcc839bdfb54857b94d448d"
 dependencies = [
  "android_system_properties",
  "arrayvec",

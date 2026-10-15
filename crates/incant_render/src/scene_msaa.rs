@@ -125,7 +125,15 @@ impl crate::Renderer {
         surface: Option<&wgpu::Surface<'_>>,
         samples: u32,
     ) -> crate::Result<Self> {
-        Self::new_configured(instance, surface, false, SceneMsaa::try_from(samples)?).await
+        Self::new_configured(
+            instance,
+            surface,
+            false,
+            SceneMsaa::try_from(samples)?,
+            #[cfg(all(feature = "native-compilation", target_os = "macos"))]
+            None,
+        )
+        .await
     }
     /// Explicit instrumented counterpart; timestamps include the real color
     /// resolve pass, while query/readback overhead remains outside intervals.
@@ -134,7 +142,15 @@ impl crate::Renderer {
         surface: Option<&wgpu::Surface<'_>>,
         samples: u32,
     ) -> crate::Result<Self> {
-        Self::new_configured(instance, surface, true, SceneMsaa::try_from(samples)?).await
+        Self::new_configured(
+            instance,
+            surface,
+            true,
+            SceneMsaa::try_from(samples)?,
+            #[cfg(all(feature = "native-compilation", target_os = "macos"))]
+            None,
+        )
+        .await
     }
     pub fn scene_sample_count(&self) -> u32 {
         self.scene_msaa.samples()
