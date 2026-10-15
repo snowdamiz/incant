@@ -131,12 +131,12 @@ fn coroutine_task_action_and_retained_state_limits_are_global_and_transactional(
 }
 #[test]
 fn coroutine_proxy_reentrancy_poison_is_not_lost_and_other_failed_capabilities_stop_resume() {
-    let mut host = host(
+    let mut proxy_host = host(
         "const data=new Proxy({}, {ownKeys(){try{t.coroutines.start('bad','missing',null)}catch{}return []}});try{t.coroutines.start('a','step',data)}catch{}",
         "return {kind:'done'}",
     );
-    assert!(host.tick(&mut world(), 0.25).is_err());
-    assert!(host.schedule.coroutines.is_none());
+    assert!(proxy_host.tick(&mut world(), 0.25).is_err());
+    assert!(proxy_host.schedule.coroutines.is_none());
     for failure in [
         "try{t.timers.set('',1)}catch{}",
         "try{t.commands.despawn('bad')}catch{}",
