@@ -1,0 +1,107 @@
+{
+  "source": "8ddbd2899a0670a91ffd667698ffdb4887eab4d1",
+  "source_manifest_sha256": "586635895b5fc22e39ac2aeabdbcd964702e6dfdec18764d188aaea0e6fc441f",
+  "runner_sha256": "27cbd7fff30a790ab954cc41e1a26af61e53c51efa83bece0e685a4047bcb33a",
+  "target": "/Users/andreyyurlov/.codex/incant-core-tick-diagnostic-target",
+  "target_initial_bytes": 10640300201,
+  "screen_capture": false,
+  "native_window": false,
+  "steps": [
+    {
+      "name": "renderer-tests",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "-p",
+        "incant_render",
+        "--lib",
+        "--features",
+        "persistent-pipeline-cache,cooked-native-shaders,cooked-temporal",
+        "--target",
+        "aarch64-apple-darwin",
+        "--profile",
+        "ci",
+        "--locked",
+        "--offline",
+        "-j",
+        "2",
+        "--",
+        "--test-threads=1"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "timeout": 900,
+      "exit_code": 0,
+      "terminal_reaped": true,
+      "passed_tests": 209,
+      "elapsed_seconds": 63.46825708297547,
+      "log_sha256": "5426b0bbe1bbc1780073097a2570752a98e65c451a8f7b6be03ab1d0dc49a4d1",
+      "log_bytes": 32935
+    },
+    {
+      "name": "strict-lint",
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "-p",
+        "incant_render",
+        "--all-targets",
+        "--features",
+        "persistent-pipeline-cache,cooked-native-shaders,cooked-temporal",
+        "--target",
+        "aarch64-apple-darwin",
+        "--profile",
+        "ci",
+        "--locked",
+        "--offline",
+        "-j",
+        "2",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "timeout": 900,
+      "exit_code": 0,
+      "terminal_reaped": true,
+      "elapsed_seconds": 8.14118841700838,
+      "log_sha256": "5cd0f842e3aa7007dab977112577ffc686e1639cddb941491821cc9acad4a76c",
+      "log_bytes": 2401
+    },
+    {
+      "name": "fmt",
+      "argv": [
+        "./tools/cargo",
+        "fmt",
+        "-p",
+        "incant_render",
+        "--",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "timeout": 60,
+      "exit_code": 0,
+      "terminal_reaped": true,
+      "elapsed_seconds": 0.47771187499165535,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "log_bytes": 0
+    },
+    {
+      "name": "conventions",
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "timeout": 60,
+      "exit_code": 0,
+      "terminal_reaped": true,
+      "elapsed_seconds": 0.039490166993346065,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "log_bytes": 0
+    }
+  ],
+  "elapsed_seconds": 73.07133608299773,
+  "target_growth_bytes": 91209816,
+  "complete": true
+}

@@ -13,6 +13,19 @@ controls. This fixes the ordinary viewport route; low-resolution reconstruction
 still has separate appearance defects. The entries
 below preserve earlier scoped results and superseded integration snapshots.
 
+## Optional pipeline caches — cold preparation qualified
+
+The renderer retains its Vulkan cache across explicit bloom, SSAO, motion and
+temporal preparation. Updated bytes are published only after successful
+validation; failed preparation and Drop preserve the previous complete file.
+No cache storage enters frame submission, and unsupported/default-off routes
+remain inert.
+
+Nineteen cache controls, feature-off checks and the combined cooked shader/cache
+suite pass locally, with strict lint. The Vulkan lifecycle harness was compiled
+but not executed on this Mac; actual driver persistence and shader-stall gates
+remain open. [Contract and evidence](docs/spikes/persistent-pipeline-cache.md).
+
 ## Cooked native shader export — ordinary catalog qualified
 
 The trusted native-window exporter can now select backend-cooked shaders for

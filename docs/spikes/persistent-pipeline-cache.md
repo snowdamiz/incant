@@ -152,3 +152,15 @@ No native GPU, window, capture helper or screenshot ran in this qualification.
 Actual Linux/Android driver persistence, backend rendering parity, cache-hit
 rate and any reduction in startup/shader stalls remain unproven. The feature
 remains default-off.
+
+## Integration with cooked export
+
+The cache extension composes with main329's ordinary cooked shader export in
+source `8ddbd2899a0670a91ffd667698ffdb4887eab4d1`. A fresh combined
+`persistent-pipeline-cache,cooked-native-shaders,cooked-temporal` renderer build
+passes 209 CPU controls (54 GPU controls remain ignored), strict all-target
+Clippy, formatting and conventions. This additional run checks real feature
+composition; it does not execute a graphics device or establish driver hits.
+[Exact commands and results](evidence/optional-pipeline-cache-integration/results.json)
+retain the qualified source inventory and raw test/lint outputs. The local
+runner is retained provenance with machine-specific paths, not a portable test.
