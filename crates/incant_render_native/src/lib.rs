@@ -118,6 +118,9 @@ pub struct NativeRenderInput {
     identity: WorldIdentity,
     assets: BTreeMap<StableId, Arc<RuntimeAsset>>,
     asset_generation: u64,
+    // Conservative provenance relative to immutable startup navigation recipes.
+    // Once geometry changes, a later material-only update cannot erase it.
+    navigation_diverged_models: Vec<StableId>,
     input: SceneInput,
     slots: Vec<Option<usize>>,
     undo: Vec<NumericUndo>,
@@ -194,6 +197,7 @@ impl NativeRenderInput {
             identity: view.identity().clone(),
             assets,
             asset_generation: 0,
+            navigation_diverged_models: Vec::new(),
             input: prepared.input,
             slots: prepared.slots,
             undo: prepared.undo,

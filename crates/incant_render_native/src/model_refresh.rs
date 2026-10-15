@@ -1,36 +1,53 @@
 //! Cold model compatibility after complete bounded decoding. Static geometry
-//! may change; animated models retain geometry and their complete pose layout.
+//! and model-local materials may change; animated models retain their pose layout.
 use crate::NativeRenderError;
 use incant_assets_runtime::{CookedModel, animation::AnimationData};
 
-pub(crate) fn validate(old: &CookedModel, next: &CookedModel) -> Result<(), NativeRenderError> {
+pub(crate) struct Change {
+    pub navigation_geometry_changed: bool,
+}
+
+pub(crate) fn validate(old: &CookedModel, next: &CookedModel) -> Result<Change, NativeRenderError> {
     let refuse = |why| NativeRenderError::TextureRefresh(why);
-    // Geometry buffers may grow/shrink, but node/primitive/material references
-    // and interpreted texture roles keep exactly the same meaning. Fingerprints
-    // and source dependencies intentionally change with the cooked content.
+    // Primitive membership in the scene stays stable. Material assignments and
+    // model-local tables are a complete cold replacement, not gameplay bindings.
+    // The bounded decoder already validates every material/image/sampler role.
     if old.metadata.nodes != next.metadata.nodes
         || old.metadata.scenes != next.metadata.scenes
         || old.metadata.default_scene != next.metadata.default_scene
         || old.meshes.len() != next.meshes.len()
-        || old.metadata.mesh_materials != next.metadata.mesh_materials
-        || old.materials.len() != next.materials.len()
-        || old.metadata.textures != next.metadata.textures
-        || old.images.len() != next.images.len()
-        || old
-            .materials
-            .iter()
-            .zip(&next.materials)
-            .any(|(a, b)| a.maps != b.maps)
     {
-        return Err(refuse(
-            "model scene, primitive or material bindings changed",
-        ));
+        return Err(refuse("model scene or primitive bindings changed"));
     }
     match (&old.animation, &next.animation) {
         (None, None) => Ok(()),
         (Some(a), Some(b)) => animation(old, next, a, b),
         _ => Err(refuse("model animation presence changed")),
-    }
+    }?;
+    Ok(Change {
+        // Navigation consumes scene transforms, positions and indices, never
+        // materials. Compare complete vertex data conservatively, including
+        // signed zero, normals and UVs. Animated navigation remains unsupported.
+        navigation_geometry_changed: old.animation.is_some() || !same_geometry(old, next),
+    })
+}
+
+fn same_geometry(old: &CookedModel, next: &CookedModel) -> bool {
+    old.metadata
+        .nodes
+        .iter()
+        .zip(&next.metadata.nodes)
+        .all(|(a, b)| {
+            a.transform.map(|c| c.map(f32::to_bits)) == b.transform.map(|c| c.map(f32::to_bits))
+        })
+        && old.meshes.iter().zip(&next.meshes).all(|(a, b)| {
+            a.indices == b.indices
+                && a.vertices.len() == b.vertices.len()
+                && a.vertices
+                    .iter()
+                    .zip(&b.vertices)
+                    .all(|(a, b)| a.map(f32::to_bits) == b.map(f32::to_bits))
+        })
 }
 
 fn animation(
