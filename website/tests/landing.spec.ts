@@ -29,10 +29,14 @@ async function renderScenes(page: Page, scope = 'body'): Promise<void> {
   const count = await canvases.count()
   for (let i = 0; i < count; i++) {
     const canvas = canvases.nth(i)
-    await canvas.scrollIntoViewIfNeeded()
+    const scene = canvas.locator('..')
+    await scene.scrollIntoViewIfNeeded()
     await expect
       .poll(() => canvas.evaluate((c: HTMLCanvasElement) => c.width !== 300 || c.style.display === 'none'), { timeout: 15_000 })
       .toBe(true)
+    if (await canvas.evaluate((c: HTMLCanvasElement) => c.style.display === 'none')) {
+      await expect(scene.locator('[data-gl-fallback]')).toBeVisible()
+    }
   }
   await page.evaluate(() => window.scrollTo(0, 0))
 }
@@ -40,7 +44,7 @@ async function renderScenes(page: Page, scope = 'body'): Promise<void> {
 test.describe('landing page', () => {
   for (const vp of viewports) {
     test(`composes at ${vp.name} without horizontal overflow`, async ({ page }) => {
-      test.slow() // software WebGL in CI renders every scene before the full-page capture
+      test.slow() // Scroll every scene before the existing full-page capture.
       const external: string[] = []
       page.on('request', (req) => {
         const url = new URL(req.url())
@@ -68,6 +72,26 @@ test.describe('landing page', () => {
       expect(drawn.h).toBeGreaterThan(150)
     }
     await expect(page.locator('#top [role="img"]')).toHaveAttribute('aria-label', /lighthouse/i)
+  })
+
+  test('refused slow WebGL contexts preserve fallback scenes and page content', async ({ page }) => {
+    await page.addInitScript(() => {
+      const original = HTMLCanvasElement.prototype.getContext
+      HTMLCanvasElement.prototype.getContext = function (this: HTMLCanvasElement, id: string, options?: WebGLContextAttributes) {
+        if (id === 'webgl2') {
+          if (options?.failIfMajorPerformanceCaveat !== true) throw new Error('Missing performance admission')
+          return null
+        }
+        return original.call(this, id, options)
+      } as typeof original
+    })
+    const errors: string[] = []
+    page.on('pageerror', (error) => errors.push(error.message))
+    await settle(page)
+    await renderScenes(page)
+    expect(await page.locator('[data-gl-fallback]').count()).toBeGreaterThan(0)
+    await expect(page.getByRole('link', { name: 'View on GitHub', exact: true })).toBeVisible()
+    expect(errors).toEqual([])
   })
 
   test('axe finds no serious or critical violations', async ({ page }) => {

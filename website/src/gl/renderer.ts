@@ -46,54 +46,86 @@ export function prefersReducedMotion(): boolean {
   return typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
 }
 
+function admittedContext(canvas: HTMLCanvasElement): WebGL2RenderingContext | null {
+  try {
+    return canvas.getContext('webgl2', {
+      alpha: false,
+      antialias: false,
+      depth: false,
+      stencil: false,
+      premultipliedAlpha: false,
+      preserveDrawingBuffer: false,
+      powerPreference: 'default',
+      // Raymarching is optional presentation. A software/slow context must use
+      // the authored fallback before compiling or submitting expensive work.
+      failIfMajorPerformanceCaveat: true,
+    })
+  } catch {
+    return null
+  }
+}
+
 export function createGlView(canvas: HTMLCanvasElement, options: GlViewOptions): GlView | null {
-  const gl = canvas.getContext('webgl2', {
-    alpha: false,
-    antialias: false,
-    depth: false,
-    stencil: false,
-    premultipliedAlpha: false,
-    preserveDrawingBuffer: false,
-    powerPreference: 'default',
-  })
+  const gl = admittedContext(canvas)
   if (!gl) return null
 
   let program: WebGLProgram | null = null
+  let vertexBuffer: WebGLBuffer | null = null
   let locations = new Map<string, WebGLUniformLocation | null>()
 
   function build(): boolean {
     if (!gl) return false
+    let vs: WebGLShader | null = null
+    let fs: WebGLShader | null = null
+    let candidate: WebGLProgram | null = null
+    let buffer: WebGLBuffer | null = null
     try {
-      const vs = compile(gl, gl.VERTEX_SHADER, VERTEX)
-      const fs = compile(gl, gl.FRAGMENT_SHADER, options.fragment)
-      const p = gl.createProgram()
-      if (!p) return false
+      vs = compile(gl, gl.VERTEX_SHADER, VERTEX)
+      fs = compile(gl, gl.FRAGMENT_SHADER, options.fragment)
+      const p = candidate = gl.createProgram()
+      if (!p) throw new Error('Could not create program')
       gl.attachShader(p, vs)
       gl.attachShader(p, fs)
       gl.bindAttribLocation(p, 0, 'aPos')
       gl.linkProgram(p)
-      gl.deleteShader(vs)
-      gl.deleteShader(fs)
       if (!gl.getProgramParameter(p, gl.LINK_STATUS) && !gl.isContextLost()) {
-        console.warn(gl.getProgramInfoLog(p))
-        return false
+        throw new Error(gl.getProgramInfoLog(p) ?? 'Could not link program')
       }
-      const buffer = gl.createBuffer()
+      buffer = gl.createBuffer()
+      if (!buffer) throw new Error('Could not create vertex buffer')
       gl.bindBuffer(gl.ARRAY_BUFFER, buffer)
       gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW)
       gl.enableVertexAttribArray(0)
       gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0)
       gl.useProgram(p)
+      if (program) gl.deleteProgram(program)
+      if (vertexBuffer) gl.deleteBuffer(vertexBuffer)
       program = p
+      vertexBuffer = buffer
+      candidate = null
+      buffer = null
       locations = new Map()
       return true
     } catch (error) {
       console.warn(error)
       return false
+    } finally {
+      if (vs) gl.deleteShader(vs)
+      if (fs) gl.deleteShader(fs)
+      if (candidate) gl.deleteProgram(candidate)
+      if (buffer) gl.deleteBuffer(buffer)
     }
   }
 
-  if (!build()) return null
+  function releaseContext(): void {
+    // Releasing an optional context must not prevent the authored fallback.
+    try { gl?.getExtension('WEBGL_lose_context')?.loseContext() } catch { /* unavailable */ }
+  }
+
+  if (!build()) {
+    releaseContext()
+    return null
+  }
 
   const maxScale = options.maxScale ?? 1.5
   const minScale = options.minScale ?? 0.35
@@ -106,6 +138,7 @@ export function createGlView(canvas: HTMLCanvasElement, options: GlViewOptions):
   let slowFrames = 0
   let fastFrames = 0
   let pending = true
+  let destroyed = false
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)')
 
   function resize(): void {
@@ -160,7 +193,7 @@ export function createGlView(canvas: HTMLCanvasElement, options: GlViewOptions):
 
   function loop(now: number): void {
     raf = 0
-    if (!visible || lost) return
+    if (destroyed || !visible || lost) return
     if (document.hidden) {
       // Hidden tabs get at most the one requested still frame.
       if (pending) {
@@ -182,7 +215,7 @@ export function createGlView(canvas: HTMLCanvasElement, options: GlViewOptions):
   }
 
   function kick(): void {
-    if (!raf && visible && !lost && (pending || !document.hidden)) {
+    if (!destroyed && !raf && visible && !lost && (pending || !document.hidden)) {
       lastNow = 0
       raf = requestAnimationFrame(loop)
     }
@@ -232,10 +265,13 @@ export function createGlView(canvas: HTMLCanvasElement, options: GlViewOptions):
 
   return {
     invalidate() {
+      if (destroyed) return
       pending = true
       kick()
     },
     destroy() {
+      if (destroyed) return
+      destroyed = true
       if (raf) cancelAnimationFrame(raf)
       io.disconnect()
       ro.disconnect()
@@ -243,7 +279,11 @@ export function createGlView(canvas: HTMLCanvasElement, options: GlViewOptions):
       reduced.removeEventListener('change', onMotion)
       canvas.removeEventListener('webglcontextlost', onLost)
       canvas.removeEventListener('webglcontextrestored', onRestored)
-      gl.getExtension('WEBGL_lose_context')?.loseContext()
+      if (program) gl.deleteProgram(program)
+      if (vertexBuffer) gl.deleteBuffer(vertexBuffer)
+      program = null
+      vertexBuffer = null
+      releaseContext()
     },
   }
 }

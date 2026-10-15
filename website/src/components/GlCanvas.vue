@@ -40,7 +40,7 @@ defineExpose({ invalidate: () => view?.invalidate() })
 <template>
   <div :role="label ? 'img' : undefined" :aria-label="label">
     <canvas v-show="supported" ref="canvas" class="absolute inset-0 block size-full" aria-hidden="true" />
-    <div v-if="!supported" class="absolute inset-0" aria-hidden="true">
+    <div v-if="!supported" data-gl-fallback class="absolute inset-0" aria-hidden="true">
       <slot name="fallback" />
     </div>
   </div>
