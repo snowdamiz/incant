@@ -190,3 +190,88 @@ and compiles device audio/CPAL, although this exercised offscreen route uses
 audio source change. Workspace-wide metadata alone is insufficient for that
 per-build feature distinction. Integration and any additional qualification must
 retain these original records and cumulative charges.
+
+## Integrated CPU and Windows composition
+
+The later joined source `00dc34c5c7913d1fcae5e2191e6db62e10172115` includes the
+DX12 library route and current macOS device-audio correction. CPU010 rebuilt six
+ordinary/cooked renderer, player and source-free control executables on that
+exact source. Its 14 focused worker/player CPU checks pass, six GPU controls stay
+ignored, and both renderer/player strict all-target Clippy stages pass. Fresh
+compiler-artifact records confirm that ordinary player builds exclude device
+audio/CPAL and complete cooked player builds include them. Thus the cooked
+composition has current build evidence; its older executable is not reused as a
+new-source artifact.
+
+Two additional Windows GNU cross-compilation stages on macOS pass strict Clippy
+for the renderer test targets, first with `dx12-pipeline-library`, then with that
+feature plus complete `cooked-native-shaders`. They compile the joined recorded
+constructor, strict DX12 diagnostic fixture and native fallback bundle. No
+Windows executable or test was run. These checks do not establish MSVC,
+Windows filesystem/library behavior, driver reuse or pixels. The borrowed checkout
+was restored clean to its original capture branch after both managed groups and
+all five tool-probe groups were confirmed absent.
+
+The merge keeps the recorded admission argument before backend-specific options.
+The Windows recorded constructor chooses ordinary Capture; strict DX12 diagnostic
+constructors remain eager and pass no recorded manifest. Metal and DX12 cold
+cache-session branches are mutually exclusive by target OS. Existing worker
+ownership and explicit cold persistence remain intact. Comparison with the
+original producer retains the exact material selection, worker, player,
+recorder, shader-cooker and Metal HAL implementation bytes, apart from the
+Windows-only constructor argument in the recorded module. Other shared renderer
+changes add the reviewed DX12 feature/target branches; no material shader or
+fallback arithmetic changed. The prior exact-source CPU tests continue to
+support those unchanged implementations without being described as rerun.
+
+Composition `c25c6f507f21ff5b2b576f252c147cef941d5cef` subsequently adds only the
+Python DX12 storage observer repair, its tests and documentation. A complete
+source comparison records all five changed paths; every Rust, shader, lockfile
+and build input is identical to `00dc`. The six GPU controls and rendered review
+above remain explicitly bound to `11d4`, with their original binaries and image
+bytes. No new GPU run, new appearance claim or performance gate is inferred from
+these CPU and source-composition results.
+
+| Retained integration result | Scope |
+| --- | --- |
+| CPU010 native macOS | 14 CPU passes, six GPU controls ignored, two strict lints, six fresh artifacts |
+| CPU010 cleanup | Actual outer exit zero; all 198 observed owned PIDs absent |
+| Windows GNU crosscheck | Two strict test-target compile/lint stages; zero native Windows tests and zero copied executables |
+| Windows cleanup | Actual outer exit zero; seven managed PID/groups absent; original checkout restored clean |
+| Integration source comparison | All 22,067 qualified files compared; later composition has one added documentation record and five changed paths total |
+
+All original costs and failures remain charged. CPU010 consumed
+65.359749209 build seconds, 3.640569208 CPU seconds and 35.160788417 lint seconds,
+leaving 1224.969096750 / 148.346088086 / 478.960883166 seconds in the respective
+original accounts. Its sampled owned peak RSS was 1,521,500,160 bytes; external
+services are excluded. The original target/account ended at 8,928,852,109 /
+13,614,870,594 bytes under the unchanged 10/13 GiB ceilings. The GPU allowance
+remains 150.227878875 seconds. These are supervision/resource charges, not speed
+measurements.
+
+The separate original CORE account retains its 12,020,734,905-byte baseline and
+16,315,702,201-byte ceiling. The crosscheck ended at 15,772,689,721 bytes, with
+543,012,480 bytes remaining; no target cleanup or reset occurred. Its conservative
+26-second charge brings the original sequence to 395 of 3600 seconds, preserving
+all earlier failures. Existing copied artifacts remain 380,898,056 bytes, with
+zero new copies.
+
+The additive [integration manifest](evidence/recorded-material-prewarm-integration/manifest.json)
+binds 169 exact text records, six external executable identities and six external
+Git-patch identities. Large patch bodies and native artifacts remain external;
+source inventories, actual compiler feature records, terminal results, cleanup,
+resource accounts and source-reuse comparisons are portable. The earlier
+rendered packet is unchanged and hash-bound by this verifier. No archived script
+is imported, extracted or executed:
+
+```sh
+python3 docs/spikes/evidence/recorded-material-prewarm-integration/verify.py
+python3 -m unittest discover -s docs/spikes/evidence/recorded-material-prewarm-integration -p test_verify.py
+```
+
+Ten data-only verifier controls check the valid packet and reject coherent
+changes to GPU provenance, Windows execution claims, cleanup, resource charges,
+strict lint, native source reuse, audio feature records and checkout restoration.
+Optional `--external-root` hashes the twelve retained executable/patch files
+beneath the evidence root without executing them. These controls validate the
+evidence checker; they are not additional engine, GPU or performance tests.

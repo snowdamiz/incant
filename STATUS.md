@@ -88,6 +88,13 @@ processes exercise recording, changed mirror input, fallback and cold close.
 Seven earlier CPU failures remain retained. Native-window, arbitrary-scene,
 driver-stall and shipping performance gates remain open. Other-device execution
 remains deferred.
+The later DX12/audio composition at `00dc34c5` also passes 14 focused CPU checks,
+six correctly ignored GPU controls, two strict Mac lints and two Windows GNU
+renderer test-target strict Clippy stages. Six current-source Mac artifacts and
+actual feature records are retained; no Windows binary ran. Source comparison
+proves the later `c25c6f50` join changes only the Python storage observer/tests and
+docs. Original `11d4` GPU/pixel evidence and all cumulative charges stay intact;
+these integration checks add no GPU, native Windows or performance claim.
 [Contract, usage and portable evidence](docs/spikes/recorded-material-prewarm.md).
 
 ## Bounded agent response reads — locally verified
