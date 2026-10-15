@@ -61,7 +61,7 @@ composition. Core and locale image collection is next. This does not establish
 native presentation, temporal reconstruction quality or performance.
 [Usage and evidence](docs/spikes/native-player-frame-capture.md).
 
-## Opt-in DX12 pipeline libraries — local controls, native diagnostic pending
+## Opt-in DX12 pipeline libraries — native software-adapter diagnostic passed
 
 A default-off native DX12 pipeline library now has conservative source/driver
 identity, bounded private Windows storage, exact descriptor keys and COM-owned
@@ -72,9 +72,14 @@ compilation when the resource observer encountered a retired temporary directory
 the observer repair passes ten portable controls. The next hosted run passes
 40 actual Windows CPU controls and four strict lints, then reaches native startup
 and exposes an invalid zero-hit seed assertion: identical material PSOs can be
-reused within the initial session. Its correction passes eleven portable controls;
-complete native reuse/lifetime/pixel qualification is still pending. Both failed
-attempts remain retained. Existing release checks are unchanged. This does not close the
+reused within the initial session. Its correction passes eleven portable controls.
+The third hosted run now passes all 40 CPU controls, four strict MSVC lints and
+16 native stages on Microsoft Basic Render Driver, a software DX12 adapter.
+Fresh processes verify actual stream/classic/compute library hits, COM lifetime,
+explicit refusal controls and exact equality of all 14 ordinary/cooked RGBA
+buffers. All owned children confirmed cleanup. Both failed attempts remain
+retained. This establishes scoped native correctness, not physical-GPU performance.
+Existing release checks are unchanged. This does not close the
 shader-stall gate or claim that HLSL compilation is avoided.
 [Scope and evidence](docs/spikes/dx12-pipeline-library.md).
 
