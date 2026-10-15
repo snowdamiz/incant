@@ -27,7 +27,7 @@ producer bytes compose unchanged with main315; editor duplication controls and
 Phase 2 acceptance remain separate.
 [Contract, review and retained evidence](docs/spikes/subtree-duplication.md).
 
-## Core locale qualification — Arabic native replay verified
+## Core locale qualification — native and CPU results retained
 
 The native player's initial window now requests 640×480 logical units. A fresh
 CJK shipping replay verifies the actual 1280×960 physical/scale-two viewport on
@@ -42,16 +42,25 @@ Mac window run matches the CPU observations. A separate visual replay timed out
 after focus interruptions; five partial actual images show joined Arabic, damage,
 loss and restarted gameplay. The default Retina window was crowded at 320×240
 logical units. Full appearance, normal-size layout and RTL health-pip order remain
-open. The fresh CJK export/window is recorded above; pseudo-locale qualification
-remains pending. [Scoped evidence and replay](docs/spikes/core-locale-native-window.md).
+open. The fresh CJK export/window is recorded above.
+
+Pseudo-localized authoring, a fresh shipping export and all three CPU gameplay
+routes now pass. Actual normal-size window images show readable expanded HUD and
+loss/restart text. Repeated focus losses paused that native replay until its
+original deadline; its partial restart state, failed resize and missed
+restart/win images remain explicit. Complete native replay and narrow layout
+remain open. [Scoped evidence and replay](docs/spikes/core-locale-native-window.md).
 
 ## GPU profiler — unavailable counter pairs refused
 
 The profiler now rejects an individual unwritten pair and failed counter
 sentinels instead of reporting false zero or enormous durations. Eleven targeted
 CPU controls and strict lint pass. Two bounded Metal diagnostics retain the
-missing second-pass timestamps even though their numerical output is exact;
-the observation cause and complete GPU timing remain open.
+missing second-pass timestamps even though their numerical output is exact.
+A subsequent unchanged-workload diagnostic restores both pairs by resolving the
+queries after the sampled GPU submission completes. The production profiler
+already uses deferred resolution; this is a diagnostic scheduling finding.
+Complete rendered-game GPU timing remains open.
 [Decoder correction and retained observations](docs/spikes/gpu-timestamp-invalid-counters.md).
 
 ## Native presentation observer — complete gameplay replay verified
@@ -72,6 +81,14 @@ gameplay parity and complete call accounting pass. Three zero presentation
 timestamps and uneven observed display intervals remain explicit; deferred
 driver work and complete frame pacing still prevent a shader-stall or performance
 verdict. [Actual replay and limits](docs/spikes/native-compilation-live.md).
+
+The observer now also records scheduler wake, surface reservation, committed
+gameplay and postcommit host stages in one monotonic clock. Its bounded analyzer
+keeps catch-up batches, missing stages and surface/focus boundaries explicit.
+Observer-enabled and ordinary CPU suites, strict lint and 18 analyzer controls
+pass. These new fields have not yet been exercised in a fresh native replay;
+no scheduling policy or performance gate changes.
+[Host-stage contract and CPU evidence](docs/spikes/native-presentation-host-stages.md).
 
 ## Device audio overrun handling — merged main303
 

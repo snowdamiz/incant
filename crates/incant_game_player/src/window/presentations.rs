@@ -16,7 +16,7 @@ use std::{
 use wgpu_hal::metal::presentation::{Collector, Context, Observation, Outcome};
 
 pub(super) const MAX_SAMPLES: usize = 36_000;
-const OUTPUT_LIMIT: usize = 32 * 1024 * 1024;
+const OUTPUT_LIMIT: usize = 64 * 1024 * 1024;
 const DRAIN: Duration = Duration::from_secs(1);
 pub(super) struct Capture {
     collector: Arc<Collector>,
@@ -24,6 +24,15 @@ pub(super) struct Capture {
     output: Option<File>,
     capacity: usize,
     requested_steps: u64,
+    clock_origin: Instant,
+}
+/// The scheduler's existing decision, observed without changing its clock.
+pub(super) struct Schedule {
+    pub pulse: Instant,
+    pub deadline: Option<Instant>,
+    pub due: usize,
+    pub ordinal: usize,
+    pub discarded_ticks: u128,
 }
 impl Capture {
     pub fn new(path: &str, capacity: usize, requested_steps: u64) -> session::Result<Self> {
@@ -41,6 +50,7 @@ impl Capture {
             output: Some(output),
             capacity,
             requested_steps,
+            clock_origin: Instant::now(),
         })
     }
     pub fn check_surface(&self, surface: &wgpu::Surface<'_>) -> Result<(), Error> {
@@ -51,7 +61,32 @@ impl Capture {
         bind(surface, None)
     }
     pub fn begin(&mut self, role: Role, generation: u64, step: u64) {
-        self.model.begin(role, generation, step);
+        self.model
+            .begin(role, generation, step, self.time(Instant::now()));
+    }
+    pub fn gameplay_begin(&mut self, generation: u64, step: u64, schedule: Schedule) {
+        self.begin(Role::Gameplay, generation, step);
+        self.model.schedule(model::Schedule {
+            pulse_ns: self.time(schedule.pulse),
+            deadline_ns: schedule.deadline.and_then(|t| self.time(t)),
+            forced_resume: schedule.deadline.is_none(),
+            due: u8::try_from(schedule.due).unwrap_or(u8::MAX),
+            ordinal: u8::try_from(schedule.ordinal).unwrap_or(u8::MAX),
+            discarded_ticks: u64::try_from(schedule.discarded_ticks).ok(),
+        });
+    }
+    fn time(&self, instant: Instant) -> Option<u64> {
+        instant
+            .checked_duration_since(self.clock_origin)?
+            .as_nanos()
+            .try_into()
+            .ok()
+    }
+    pub fn reserved(&mut self) {
+        self.model.reserved(self.time(Instant::now()));
+    }
+    pub fn host_finished(&mut self) {
+        self.model.host_finished(self.time(Instant::now()));
     }
     pub fn boundary(&mut self, reason: Boundary) {
         self.model.boundary(reason);
@@ -63,7 +98,7 @@ impl Capture {
         self.model.failure(failure);
     }
     pub fn complete(&mut self, status: Status) {
-        self.model.complete(status);
+        self.model.complete(status, self.time(Instant::now()));
     }
     pub fn bind(&mut self, surface: &wgpu::Surface<'_>) -> Result<(), Error> {
         let observation = self
@@ -151,8 +186,16 @@ impl Capture {
                 "source_identity":"requires external executable/source/package binding",
                 "per_present_registration_overhead":true,"snapshot_after_gameplay":true,
                 "requested_host_steps":self.requested_steps,"capture_capacity":self.capacity,
-                "limits":{"rows":MAX_SAMPLES,"row_bytes_max":64,"attempt_bytes_max":48,"segment_bytes_max":40,
+                "limits":{"rows":MAX_SAMPLES,"row_bytes_max":64,"attempt_bytes_max":192,"segment_bytes_max":40,
                     "segments_per_attempt_max":2,"drain_seconds":1,"output_bytes":OUTPUT_LIMIT},
+                "host_timing_contract":{"version":1,"unit":"nanoseconds","clock":"Rust Instant relative to capture creation",
+                    "shared_epoch_with_metal":false,"changes_frame_admission":false,
+                    "pulse":"MainEventsCleared entry, before polling and eligibility work",
+                    "deadline":"existing fixed-step clock deadline before due calculation; absent for forced resume",
+                    "began":"attempt before surface reservation","reserved":"successful reservation including view creation",
+                    "completed":"existing host-commit or refresh/defer point; not GPU completion",
+                    "finished":"gameplay after observations and haptics; before restart replacement or event-loop cleanup",
+                    "missing":"unreached, invalid or unavailable; never zero-filled"},
                 "coverage":{"rows":coverage.rows,"segments":coverage.segments,"acquired":coverage.acquired,
                     "missing":coverage.requested,"presented":coverage.presented,"zero":coverage.reported_zero,
                     "invalid":coverage.invalid,"discarded":coverage.discarded,"abandoned":coverage.abandoned,
@@ -211,7 +254,7 @@ struct Limited {
 impl Write for Limited {
     fn write(&mut self, bytes: &[u8]) -> io::Result<usize> {
         if bytes.len() > self.remaining {
-            return Err(io::Error::other("presentation output exceeds32MiB"));
+            return Err(io::Error::other("presentation output exceeds64MiB"));
         }
         let written = self.file.write(bytes)?;
         self.remaining -= written;

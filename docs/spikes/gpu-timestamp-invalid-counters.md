@@ -33,8 +33,41 @@ These are cold isolated observations including instrumentation overhead, not a
 warmed comparison, full-frame measurement or shipping performance verdict.
 [Raw identities and outcomes](evidence/gpu-timestamp-invalid-counters/diagnostic-observations.json).
 
-The second-pair cause remains unresolved. The failure sentinel was identified
+Those two attempts did not isolate the second-pair cause. The failure sentinel was identified
 from the pinned Metal definition and exercised synthetically; it was not observed
 in either device run. This correction validates decoder behavior, not the
 availability or accuracy of every backend's counters. Release CI and the
 rendered-game performance gates remain separate.
+
+## Deferred resolution follow-up
+
+A subsequent diagnostic keeps both sampled compute passes in the same first
+submission, waits for its completion within the original bounded device wait,
+then resolves and reads the counters in a second submission. The shaders, query
+sets, dispatches, input packet and numerical expectations stay unchanged. On
+this Mac (Mac17,9, Apple M5 Pro, macOS 27.0.1 build 26A434), both pairs are now
+positive and ordered. The complete 59,900 numerical records are byte-identical
+to the earlier failed observation.
+
+The raw intervals are 362.333458 ms for clipping and 0.030583 ms for reduction.
+This is one cold instrumented observation, excluding pipeline creation, uploads
+and readback. It diagnoses counter availability; it establishes neither a
+speedup nor a shipping frame budget. The expensive exact-integration algorithm
+is not adopted or reopened on the strength of these counters.
+
+The production profiler already defers resolution until sampled work completes.
+Its implementation and strict rejection of missing/sentinel counters remain
+unchanged. The historical failures and a preparation-only path error remain
+retained; the successful helper compilation, CPU controls and GPU child all
+completed and were reaped before the later screen-capture pause.
+
+The [compact packet](evidence/gpu-timestamp-invalid-counters/deferred-resolve.json)
+retains the diagnostic source/diff, independent review, raw counter bytes,
+invocations and comparison records. The verifier recomputes the intervals and
+checks those bindings without executing native code. Numerical payloads and the
+helper executable remain external by hash; `--originals` additionally rehashes
+them. Neither replay mode captures the screen or launches a GPU workload.
+
+```sh
+python3 docs/spikes/evidence/gpu-timestamp-invalid-counters/verify-deferred.py
+```

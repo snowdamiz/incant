@@ -3,7 +3,7 @@
 //! a resize callback, and only this module can construct a reservation/provider.
 use super::Error;
 #[cfg(all(feature = "native-presentations", target_os = "macos"))]
-use super::presentations::{Boundary, Capture, Failure, Role, Status};
+use super::presentations::{Boundary, Capture, Failure, Role, Schedule, Status};
 use incant_render::{Renderer, RetainedTarget, wgpu};
 use incant_render_gpu_host::{RenderFrame, TargetProvider};
 use std::{cell::RefCell, rc::Rc, sync::Arc};
@@ -106,6 +106,23 @@ impl SurfaceState {
     pub fn presentation_attempt(&mut self, role: Role, generation: u64, step: u64) {
         if let Some(capture) = &mut self.capture {
             capture.begin(role, generation, step);
+        }
+    }
+    #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+    pub fn presentation_gameplay_attempt(
+        &mut self,
+        generation: u64,
+        step: u64,
+        schedule: Schedule,
+    ) {
+        if let Some(capture) = &mut self.capture {
+            capture.gameplay_begin(generation, step, schedule);
+        }
+    }
+    #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+    pub fn presentation_host_finished(&mut self) {
+        if let Some(capture) = &mut self.capture {
+            capture.host_finished();
         }
     }
     #[cfg(all(feature = "native-presentations", target_os = "macos"))]
@@ -270,6 +287,10 @@ impl SurfaceState {
         })?;
         let available = frame.is_some();
         *self.slot.borrow_mut() = frame;
+        #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+        if available && let Some(capture) = &mut self.capture {
+            capture.reserved();
+        }
         if !available {
             #[cfg(all(feature = "native-presentations", target_os = "macos"))]
             {

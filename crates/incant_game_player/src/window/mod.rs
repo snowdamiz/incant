@@ -736,8 +736,12 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                             clock.reset(now);
                             return Ok(());
                         }
+                        #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+                        let schedule_deadline = (!suspended).then(|| clock.deadline());
+                        #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+                        let dropped_before = clock.dropped;
                         let due = if suspended { 1 } else { clock.due(now) };
-                        for _ in 0..due {
+                        for _tick_index in 0..due {
                             #[cfg(all(feature = "native-compilation", target_os = "macos"))]
                             let mut tick_compilation = compilation_scope!(
                                 Gameplay,
@@ -752,10 +756,16 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                             let host_started = cadence.begin();
                             if !{
                                 #[cfg(all(feature = "native-presentations", target_os = "macos"))]
-                                surface.presentation_attempt(
-                                    Role::Gameplay,
+                                surface.presentation_gameplay_attempt(
                                     generation,
                                     host_steps + 1,
+                                    presentations::Schedule {
+                                        pulse: now,
+                                        deadline: schedule_deadline,
+                                        due,
+                                        ordinal: _tick_index,
+                                        discarded_ticks: clock.dropped - dropped_before,
+                                    },
                                 );
                                 reserve_observed(
                                     &mut surface,
@@ -853,6 +863,8 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                             let haptics = game.take_haptics()?;
                             if restart {
                                 gamepads.pause_haptics()?;
+                                #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+                                surface.presentation_host_finished();
                                 #[cfg(feature = "profile")]
                                 {
                                     cadence.finish(host_started);
@@ -911,6 +923,8 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                             }
                             if !restart {
                                 gamepads.haptics(&haptics)?;
+                                #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+                                surface.presentation_host_finished();
                                 #[cfg(feature = "profile")]
                                 cadence.finish(host_started);
                             }
