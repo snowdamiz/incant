@@ -4,7 +4,7 @@ Upstream crates.io archive SHA256:
 `97ace1c17727311c22a46e4e3faf56ea6de81af99dcc839bdfb54857b94d448d`.
 All 84 published files, MIT/Apache-2.0 licenses and original dependency
 constraints are retained. `INCANT_UPSTREAM.json` records every upstream byte
-hash; `INCANT_PATCH.diff` is the full six-file delta, including new files.
+hash; `INCANT_PATCH.diff` is the complete current delta, including new files.
 No upstream edition, platform dependencies or feature defaults change.
 
 The default-off macOS `diagnostic-presentations` feature adds a surface binding,
@@ -28,3 +28,31 @@ failure; full replay/display coverage and performance acceptance remain open.
 Per-present block allocation/native copying,
 Arc and mutex operations have observation overhead. Missing callback, zero,
 invalid, discard, abandoned and overflow states remain separate.
+
+## Separate native creation observer (CPU-qualified foundation)
+
+The default-off macOS `diagnostic-compilation` feature adds a device-owned
+observer and hooks around the actual source/binary library and render/mesh/compute
+pipeline creation calls. Cumulative counts do not decrement on destruction.
+Backward clock comparisons retain explicit missing timestamps and cumulative
+anomaly counts rather than silently fabricating valid zero-duration samples.
+It changes no native options, cache/permutation policy, resource return values,
+normal scheduling or default feature graph. See
+`docs/spikes/native-compilation-observer.md` for exact scope and bounds.
+The original source-only status is superseded by source
+`dda197ae907a5d34e7c7a69a4041e1ec4f45aee2`: 19 exact collector controls and
+actual HAL/host feature-on/off compilation plus strict lint passed. No native
+creation API or GPU execution follows from that result. The later host integration is CPU-qualified below;
+actual hardware compilation observations remain pending; existing presentation evidence
+does not qualify compilation timing.
+
+
+The following host-wiring successor uses edition-neutral spelling of a nested
+observer-field access and panic imports so the exact collector tests can be
+included by the Rust2024 player while the HAL remains Rust2021. Collector
+semantics are unchanged; the preceding qualified source remains immutable.
+Host wiring source `6fa2ba2540280d7bb088d4dd03ec2426779bd8b1` subsequently
+passed142 observer-enabled and97 ordinary player tests,3 renderer binding controls,
+and strict all-target on/off host lint. Its two failed attempts remain bound in
+`docs/spikes/evidence/native-compilation-observer/host-cpu-qualification.json`.
+Live native-creation evidence remains pending; no default feature was enabled.

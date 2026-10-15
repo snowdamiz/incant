@@ -3,13 +3,22 @@
 The current phase remains **Phase 1: Core engine**. The
 [Phase 1 review ledger](docs/gates/phase1-review.md) maps each exit requirement to
 its recorded evidence and remaining qualification. The actual native texture,
-compatible static-model and compatible-animation workflows are verified on this Mac; release checkpoint38
-contains the tested main290 tree. Rendering quality and full rendered-game
+compatible static-model and compatible-animation workflows are verified on this Mac; release checkpoint39
+contains the tested main302 tree. Rendering quality and full rendered-game
 performance remain open. The reported jagged editor cube now has explicit 4x
 geometry antialiasing, verified in the actual Mac editor and isolated Metal
 controls. This fixes the ordinary viewport route; low-resolution reconstruction
 still has separate appearance defects. The entries
 below preserve earlier scoped results and superseded integration snapshots.
+
+## GPU profiler — unavailable counter pairs refused
+
+The profiler now rejects an individual unwritten pair and failed counter
+sentinels instead of reporting false zero or enormous durations. Eleven targeted
+CPU controls and strict lint pass. Two bounded Metal diagnostics retain the
+missing second-pass timestamps even though their numerical output is exact;
+the observation cause and complete GPU timing remain open.
+[Decoder correction and retained observations](docs/spikes/gpu-timestamp-invalid-counters.md).
 
 ## Native presentation observer — complete gameplay replay verified
 
@@ -21,6 +30,13 @@ missing callbacks. These limitations prevent a complete displayed-frame timing
 verdict. The earlier timeout and 1,444-step failure remain recorded; shader-stall
 qualification and full rendered-game performance remain open.
 [Fresh build and complete replay](docs/spikes/native-presentation-audio.md).
+
+The separate default-off compilation observer now records native library and
+pipeline creation with immutable session, surface, host-step and phase context.
+Bounded CPU qualification passes for the collector, renderer binding and native
+host, with strict lint in enabled and ordinary modes. Its combined shipping build
+and live replay are still pending; these controls do not establish shader-stall
+or displayed-frame performance. [Implementation and retained failures](docs/spikes/native-compilation-observer.md).
 
 ## Device audio overrun handling — merged main303
 
@@ -121,11 +137,11 @@ displayed-frame timing and representative active-gameplay qualification remain
 open. [Export, actual run and limitations](docs/spikes/profiled-window-export.md).
 [Boundaries and replay](docs/spikes/native-window-cadence.md).
 
-Release checkpoint38 promoted exact main290 after all 23 required contexts and
-eight frozen-candidate workflows succeeded. It includes the verified asset
-workflows and default-off MetalFX foundation. Later editor antialiasing and
-profiled shipping-window exports remain outside this tested release baseline.
-Main development continues independently. [Promotion and exact checks](docs/spikes/release-checkpoint-38.md).
+Release checkpoint39 promoted exact main302 after all 23 required contexts and
+eight frozen-candidate workflows succeeded. It includes ordinary-editor
+antialiasing, native-window replay foundations and compatible animation refresh.
+Later main303+ work remains outside this tested release baseline. Main development
+continues independently. [Promotion and exact checks](docs/spikes/release-checkpoint-39.md).
 
 ## Prepared MetalFX interop — correctness verified, appearance failed
 

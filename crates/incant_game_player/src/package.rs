@@ -71,6 +71,8 @@ pub fn expand(args: Vec<String>) -> Result<Vec<String>> {
                 | "--input-recording"
                 | "--stop-after"
                 | "--ui-viewport"
+                | "--compilation-output"
+                | "--compilation-capacity"
                 | "--presentation-output"
                 | "--presentation-capacity"
                 | "--window-state-log"
@@ -97,6 +99,8 @@ pub fn expand(args: Vec<String>) -> Result<Vec<String>> {
                 "--stop-after"
                     | "--input-recording"
                     | "--observe"
+                    | "--compilation-output"
+                    | "--compilation-capacity"
                     | "--presentation-output"
                     | "--presentation-capacity"
                     | "--window-state-log"
@@ -128,6 +132,8 @@ pub fn expand(args: Vec<String>) -> Result<Vec<String>> {
             "--stop-after",
             "--input-recording",
             "--observe",
+            "--compilation-output",
+            "--compilation-capacity",
             "--presentation-output",
             "--presentation-capacity",
             "--window-state-log",
@@ -140,6 +146,11 @@ pub fn expand(args: Vec<String>) -> Result<Vec<String>> {
     }
     if options.contains_key("--window-state-log") {
         return Err("window state log requires --window".into());
+    }
+    if options.contains_key("--compilation-output")
+        || options.contains_key("--compilation-capacity")
+    {
+        return Err("compilation capture requires --window".into());
     }
     if options.contains_key("--presentation-output")
         || options.contains_key("--presentation-capacity")
@@ -498,6 +509,61 @@ mod tests {
                 .unwrap_err()
                 .to_string()
                 .contains("file set")
+        );
+    }
+    #[test]
+    fn compilation_output_is_only_a_trusted_window_argument() {
+        let dir = fixture();
+        let expanded = expand(args(
+            dir.path(),
+            &[
+                "--window",
+                "--stop-after",
+                "6",
+                "--compilation-output",
+                "trusted.json",
+                "--compilation-capacity",
+                "8",
+            ],
+        ))
+        .unwrap();
+        assert_eq!(
+            &expanded[10..],
+            [
+                "--stop-after",
+                "6",
+                "--compilation-output",
+                "trusted.json",
+                "--compilation-capacity",
+                "8"
+            ]
+        );
+        assert!(
+            expand(args(
+                dir.path(),
+                &[
+                    "--ticks",
+                    "6",
+                    "--output",
+                    "sound.pcm",
+                    "--compilation-output",
+                    "x",
+                    "--compilation-capacity",
+                    "8"
+                ]
+            ))
+            .is_err()
+        );
+        let path = dir.path().join("package.json");
+        let mut manifest: serde_json::Value =
+            serde_json::from_slice(&std::fs::read(&path).unwrap()).unwrap();
+        manifest["compilation-output"] = "not-authority.json".into();
+        std::fs::write(&path, serde_json::to_vec(&manifest).unwrap()).unwrap();
+        let error = expand(args(dir.path(), &["--window"])).unwrap_err();
+        assert!(
+            error
+                .to_string()
+                .contains("unknown field `compilation-output`")
         );
     }
 }

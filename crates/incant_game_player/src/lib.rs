@@ -2,7 +2,11 @@
 //! JSON is bounded and parsed once; ticks contain no document or JSON projection.
 //! Simulation failure creates no output. PCM publication is atomic and create-only;
 //! PCM and an optional checkpoint are separate file transactions.
-#[cfg(all(test, feature = "native-presentations", target_os = "macos"))]
+#[cfg(all(
+    test,
+    any(feature = "native-presentations", feature = "native-compilation"),
+    target_os = "macos"
+))]
 extern crate alloc;
 mod checkpoint;
 #[cfg(feature = "render-gpu")]

@@ -82,8 +82,10 @@ pub enum GpuTimingError {
     Reversed,
     #[error("GPU timestamp payload has invalid length")]
     Payload,
-    #[error("GPU timestamp queries returned only zero counters; measurement unavailable")]
+    #[error("GPU timestamp query pair returned only zero counters; measurement unavailable")]
     Unwritten,
+    #[error("GPU timestamp query returned an invalid counter; measurement unavailable")]
+    InvalidCounter,
 }
 pub(crate) fn required_features(
     enabled: bool,
@@ -101,6 +103,12 @@ pub(crate) fn required_features(
 fn span(start_ticks: u64, end_ticks: u64, period: f32) -> Result<GpuSpan, GpuTimingError> {
     if !period.is_finite() || period <= 0. {
         return Err(GpuTimingError::Period);
+    }
+    // Metal resolves failed counter samples to MTLCounterErrorValue (UINT64_MAX).
+    // Conservatively refuse this endpoint on every backend: it cannot establish
+    // a valid interval, including an apparently quantized MAX -> MAX pair.
+    if start_ticks == u64::MAX || end_ticks == u64::MAX {
+        return Err(GpuTimingError::InvalidCounter);
     }
     // Subtract integer ticks before floating conversion to preserve small deltas
     // even when the device's absolute counter is beyond f64 integer precision.

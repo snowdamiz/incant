@@ -1,0 +1,51 @@
+{
+  "scope": "Two diagnostic Metal counter failures retained; same bounded clipping/reduction workload. Source-only invalid-MAX control is separate; MAX was not observed live. No full timing, warmed or shipping performance verdict.",
+  "observations": [
+    {
+      "attempt": "001",
+      "status": "complete timing rejected; second pair unwritten",
+      "query_sets": 1,
+      "raw_ticks": [
+        196647045880500,
+        196647377029958,
+        0,
+        0
+      ],
+      "period_ns": 1.0,
+      "clip_ns": 331149458,
+      "reduction_ns": null,
+      "helper_source_sha256": "a6267216f1055d38d375d2c9b8b10af4990978c499e91a8deaffb32a39a1ecf4",
+      "helper_executable_sha256": "4c7768fbbba4a05764fe2f69bc92f30a0e4b3963f867c8d10107ea8a11549f4e",
+      "gpu_result_sha256": "4ca97b50ce3be50e8231cd07907ff10197a401c001a762718e0a0689309496eb",
+      "raw_numerical_sha256": "f8079e7a31bb9b3057eda838dfe9061620536bc8a1aeecfaf80fe419432d2880",
+      "raw_numerical_bytes": 6708800,
+      "matches_all_expected_records": 59900,
+      "managed_reaped": true,
+      "child_exit": 101,
+      "stage_passed": false
+    },
+    {
+      "attempt": "002",
+      "status": "complete timing rejected; second pair unwritten",
+      "query_sets": 2,
+      "raw_ticks": [
+        197160956888875,
+        197161292929541,
+        0,
+        0
+      ],
+      "period_ns": 1.0,
+      "clip_ns": 336040666,
+      "reduction_ns": null,
+      "helper_source_sha256": "d40aeab1506b964f953252d838d018dcec4737bbb630ee1094f82ee33b6951ee",
+      "helper_executable_sha256": "90a68ca395d16e0fec68f57f21752579ccaaf8754d90fb07d0b35630b73aadac",
+      "gpu_result_sha256": "902e0fdc1c449bbb9274ebf9a7eb06df2117e164a7611f9ab25a5bc0b79c69b0",
+      "raw_numerical_sha256": "f8079e7a31bb9b3057eda838dfe9061620536bc8a1aeecfaf80fe419432d2880",
+      "raw_numerical_bytes": 6708800,
+      "matches_all_expected_records": 59900,
+      "managed_reaped": true,
+      "child_exit": 101,
+      "stage_passed": false
+    }
+  ]
+}

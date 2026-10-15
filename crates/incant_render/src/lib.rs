@@ -8,6 +8,8 @@ pub use ambient_occlusion::{AmbientOcclusionCaptureError, AmbientOcclusionStages
 mod bloom;
 pub use bloom::{Bloom, BloomError};
 mod camera;
+#[cfg(all(feature = "native-compilation", target_os = "macos"))]
+pub mod compilation;
 mod diagnostic_draw;
 #[cfg(test)]
 #[path = "../tests/diagnostic_output/mod.rs"]
@@ -130,7 +132,15 @@ impl Renderer {
         instance: &wgpu::Instance,
         surface: Option<&wgpu::Surface<'_>>,
     ) -> Result<Self> {
-        Self::new_configured(instance, surface, false, SceneMsaa::One).await
+        Self::new_configured(
+            instance,
+            surface,
+            false,
+            SceneMsaa::One,
+            #[cfg(all(feature = "native-compilation", target_os = "macos"))]
+            None,
+        )
+        .await
     }
     /// Explicit opt-in to bounded, asynchronous native GPU timestamp collection.
     /// Unsupported adapters fail rather than silently substituting CPU timings.
@@ -139,13 +149,24 @@ impl Renderer {
         instance: &wgpu::Instance,
         surface: Option<&wgpu::Surface<'_>>,
     ) -> Result<Self> {
-        Self::new_configured(instance, surface, true, SceneMsaa::One).await
+        Self::new_configured(
+            instance,
+            surface,
+            true,
+            SceneMsaa::One,
+            #[cfg(all(feature = "native-compilation", target_os = "macos"))]
+            None,
+        )
+        .await
     }
     async fn new_configured(
         instance: &wgpu::Instance,
         surface: Option<&wgpu::Surface<'_>>,
         gpu_timing: bool,
         scene_msaa: SceneMsaa,
+        #[cfg(all(feature = "native-compilation", target_os = "macos"))] compilation: Option<
+            &mut compilation::Capture,
+        >,
     ) -> Result<Self> {
         let adapter = instance
             .request_adapter(&wgpu::RequestAdapterOptions {
@@ -170,6 +191,12 @@ impl Renderer {
                 ..Default::default()
             })
             .await?;
+        // Attach before any renderer catalog work. The caller owns this handle,
+        // so partial startup failures remain observable after this future returns.
+        #[cfg(all(feature = "native-compilation", target_os = "macos"))]
+        let _compilation_scope = compilation
+            .map(|capture| capture.attach(&device))
+            .transpose()?;
         let device_lost = std::sync::Arc::new(std::sync::atomic::AtomicBool::new(false));
         let lost = std::sync::Arc::clone(&device_lost);
         device.set_device_lost_callback(move |_, _| {

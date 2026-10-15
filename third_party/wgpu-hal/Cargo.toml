@@ -52,6 +52,7 @@ ignored = ["cfg_aliases"]
 [features]
 # Incant private diagnostic only; off in all normal feature graphs.
 diagnostic-presentations = ["objc2-metal?/objc2-core-foundation"]
+diagnostic-compilation = []
 device_lost_panic = []
 dx12 = [
     "dep:arrayvec",

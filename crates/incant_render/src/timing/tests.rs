@@ -17,12 +17,54 @@ fn absent_capability_fails_explicitly_without_changing_defaults() {
 }
 #[test]
 fn integer_delta_preserves_small_intervals_and_rejects_reversed_clocks() {
-    assert_eq!(span(u64::MAX - 2, u64::MAX, 0.5).unwrap().nanoseconds, 1.);
+    assert_eq!(
+        span(u64::MAX - 3, u64::MAX - 1, 0.5).unwrap().nanoseconds,
+        1.
+    );
     assert_eq!(span(19, 19, 1.).unwrap().nanoseconds, 0.); // Quantization can yield zero.
-    assert_eq!(span(u64::MAX, 0, 1.), Err(GpuTimingError::Reversed));
+    assert_eq!(span(20, 19, 1.), Err(GpuTimingError::Reversed));
     for period in [f32::NAN, f32::INFINITY, 0., -1.] {
         assert_eq!(span(0, 1, period), Err(GpuTimingError::Period));
     }
+}
+
+#[test]
+fn failed_counter_sentinels_and_mixed_unwritten_pairs_never_publish_timings() {
+    for pair in [[u64::MAX, u64::MAX], [10, u64::MAX], [u64::MAX, 10]] {
+        assert_eq!(
+            span(pair[0], pair[1], 1.),
+            Err(GpuTimingError::InvalidCounter)
+        );
+        // Invalid samples must remain errors when surrounded by valid samples
+        // and when no pass label refers to the failed pair.
+        let raw: Vec<_> = [10, 20, pair[0], pair[1], 30, 40]
+            .into_iter()
+            .flat_map(u64::to_ne_bytes)
+            .collect();
+        assert_eq!(
+            recorder::decode(&raw, 1, 1., [None; GPU_PASS_COUNT], 6),
+            Err(GpuTimingError::InvalidCounter)
+        );
+    }
+    for ticks in [[0u64, 0, 10, 20], [10, 20, 0, 0]] {
+        let raw: Vec<_> = ticks.into_iter().flat_map(u64::to_ne_bytes).collect();
+        assert_eq!(
+            recorder::decode(&raw, 1, 1., [None; GPU_PASS_COUNT], 4),
+            Err(GpuTimingError::Unwritten)
+        );
+    }
+    // A rejected, already-unmapped counter does not retire its readback slot.
+    let pool = pool::Pool::default();
+    pool.reserve()
+        .unwrap()
+        .unwrap()
+        .complete(Err(GpuTimingError::InvalidCounter));
+    assert_eq!(
+        pool.take().unwrap(),
+        Some(Err(GpuTimingError::InvalidCounter))
+    );
+    assert_eq!(pool.stats().unwrap().retired, 0);
+    assert_eq!(pool.reserve().unwrap().unwrap().index, 0);
 }
 fn sample(sequence: u64) -> GpuFrameTiming {
     GpuFrameTiming {

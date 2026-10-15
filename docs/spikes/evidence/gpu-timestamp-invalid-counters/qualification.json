@@ -1,0 +1,251 @@
+{
+  "schema": 1,
+  "status": "passed",
+  "source": "01411a13f8734a105dd2fc0857f41d0fbcde97c4",
+  "source_base": "dd67714fadca78a6d6a1f2b8022f7136b2737360",
+  "source_edits": false,
+  "evidence_root": "/Users/andreyyurlov/.codex/incant-evidence/gpu-timestamp-counter-validation-001",
+  "test_count": 11,
+  "checks": [
+    "filtered timing::tests library suite and exact executable inventory",
+    "strict all-target incant_render Clippy",
+    "workspace cargo fmt --all --check",
+    "generated repository conventions --check",
+    "git diff --check for reviewed commit"
+  ],
+  "test_artifacts": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/gpu-timestamp-counter-validation-001/cpu-001/binaries/incant_render-a6d24868d22257d6",
+      "sha256": "ebfd24e79c98f89dead80250e36903ceb1903d3720539d5f025b4d563fd8404b"
+    }
+  ],
+  "records": [
+    {
+      "path": "cpu-001/rust-version.stdout",
+      "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "bytes": 192
+    },
+    {
+      "path": "cpu-001/rust-version.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "cpu-001/locked-offline-metadata.stdout",
+      "sha256": "b20051e636c9c4713522019a34c01f8cec158374ab8b9ea747d4f8d00e3cb4f0",
+      "bytes": 304834
+    },
+    {
+      "path": "cpu-001/locked-offline-metadata.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "cpu-001/timing-tests.stdout",
+      "sha256": "e1c90b5d9859997ecb12777588e1b2a8bfbdae8923662bc414fc69ecf7911e88",
+      "bytes": 325859
+    },
+    {
+      "path": "cpu-001/timing-tests.stderr",
+      "sha256": "69e25e80f8a858e8342e249320bf86d5b335bfdbabd3b91b378a5d3f2ac63de8",
+      "bytes": 3492
+    },
+    {
+      "path": "cpu-001/test-inventory.stdout",
+      "sha256": "2ca26ca5f1e6ab6ab207a8fc9357e833c65feb916ac0bc219adcfbc0fba68810",
+      "bytes": 22558
+    },
+    {
+      "path": "cpu-001/test-inventory.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "cpu-001/renderer-clippy.stdout",
+      "sha256": "8d327ddc4fea5711f53cb12b282de6c2822e03d3b4e3742e1cbca425ef1693f2",
+      "bytes": 298093
+    },
+    {
+      "path": "cpu-001/renderer-clippy.stderr",
+      "sha256": "aedd417d2006107a050701d9a96ee3c63ab2bf4fc131c6f0e092840ecffbc786",
+      "bytes": 3457
+    },
+    {
+      "path": "cpu-001/workspace-format.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "cpu-001/workspace-format.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "cpu-001/conventions.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "cpu-001/conventions.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "cpu-001/diff-check.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "cpu-001/diff-check.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "cpu-plan.json",
+      "sha256": "b29462b82a14bff40cc127b2f5ab6ecd8fb87b599b23b16d4daef21950e86247",
+      "bytes": 4691
+    },
+    {
+      "path": "qualify.py",
+      "sha256": "7d36803dc19cfed2beebafbd5360ac189dd5c00beddb1d5dfae799d302598ee7",
+      "bytes": 8701
+    },
+    {
+      "path": "native_process.py",
+      "sha256": "58dd2a8231d7f9d1e42070fc85425461e06a43f279fa5e7f8e57b4a40c3a3aa4",
+      "bytes": 19307
+    },
+    {
+      "path": "grant.json",
+      "sha256": "6f70289dc2281501eed46b9226d6fe11a5c7d73798270366dd9af3b8e0de67d7",
+      "bytes": 369
+    },
+    {
+      "path": "source-001/freeze.json",
+      "sha256": "87a2da113d3534cfc57d8d179be10c7b6b41e3bf5dfa5a5cd86b278f4b0d7f61",
+      "bytes": 3309
+    },
+    {
+      "path": "source-001/source.patch",
+      "sha256": "5598ffdce44b0c56e3e7b54afecfe84d3c6a5f7326613dfb49e99977bdf90323",
+      "bytes": 5082
+    },
+    {
+      "path": "cpu-001/result.json",
+      "sha256": "8c17ca77e3bb92687e5c1733615d417379c22e0156f571e83b4aa78acd09f274",
+      "bytes": 7631
+    },
+    {
+      "path": "cpu-001/environment.json",
+      "sha256": "92b8d83198cdbe3ce8f75b1fd00cbf38b456967ccf7c9002f47e4eee6a4a9be9",
+      "bytes": 1322
+    }
+  ],
+  "source_inputs": [
+    {
+      "path": "AGENTS.md",
+      "bytes": 6594,
+      "sha256": "48a48110f9676ab26fb90f8dd3cbffee5a7d8558f13a869c7089a0e39ac7b2ff"
+    },
+    {
+      "path": "CLAUDE.md",
+      "bytes": 6350,
+      "sha256": "5c2e79e77d9ee0e856733db39d47eb7f40070b6835247dbfd5c491407235e921"
+    },
+    {
+      "path": "Cargo.lock",
+      "bytes": 253004,
+      "sha256": "f4f59ea0f900edf56cc21847ca79b09df77e998e7382b52d7d9c563772d8ae7c"
+    },
+    {
+      "path": "Cargo.toml",
+      "bytes": 3956,
+      "sha256": "163606d4b9886c5d0f9bb6a4b67fca4823523b4024f17a689dc9bab719c314a7"
+    },
+    {
+      "path": "crates/incant_render/Cargo.toml",
+      "bytes": 3218,
+      "sha256": "2491dcc10be2c017cd82915bbe246ce0e6ad1402dd5d8114f844ec5677ca9997"
+    },
+    {
+      "path": "crates/incant_render/build.rs",
+      "bytes": 7551,
+      "sha256": "f5941728810d93848651cbeb0695aa94b82b84b2b0bb4db404a1f63fc617e2ad"
+    },
+    {
+      "path": "crates/incant_render/src/lib.rs",
+      "bytes": 18470,
+      "sha256": "469764dc3f7de5d818aa4c00ae407c02de5be0e816de9bc5cbecd5d587846706"
+    },
+    {
+      "path": "crates/incant_render/src/timing/mod.rs",
+      "bytes": 4455,
+      "sha256": "b6ad8a614d9b7d720315045a9c6d8bf7ce66b487d57740ee9d96ec3d51d9f064"
+    },
+    {
+      "path": "crates/incant_render/src/timing/pool.rs",
+      "bytes": 3743,
+      "sha256": "90888663b6070e6f0181315674fb6bcf4d74a624d40a010da2889fc1e7be5549"
+    },
+    {
+      "path": "crates/incant_render/src/timing/recorder.rs",
+      "bytes": 8840,
+      "sha256": "198af2295e5332dbb69302eb17fca381a0571a65c3f786e962912dc4040b90d8"
+    },
+    {
+      "path": "crates/incant_render/src/timing/tests.rs",
+      "bytes": 10636,
+      "sha256": "5386873ddf2d89d97228c8ce9d2cce74adbf06e3aa13070609c83dfbb00e7560"
+    },
+    {
+      "path": "docs/conventions/astra.md",
+      "bytes": 1112,
+      "sha256": "fb0680da47a3b18859d66832cc956ecc64808251a45a6870ea3bd061081d6145"
+    },
+    {
+      "path": "docs/conventions/claude.md",
+      "bytes": 868,
+      "sha256": "302973c50783710b5b26d3da7a6b30e873a1d2db4a917389c767767a085f90ea"
+    },
+    {
+      "path": "docs/conventions/shared.md",
+      "bytes": 5403,
+      "sha256": "d9dc3d52ff7490e4a804c49c59b9f9ce40e67f2d8a50fcb8dae7ff8c9ce4afdb"
+    },
+    {
+      "path": "rust-toolchain.toml",
+      "bytes": 100,
+      "sha256": "c6e63d9832830b858d930007e4fd1fc3f4a3ca1d287483b08077b7f0267ca124"
+    },
+    {
+      "path": "tools/cargo",
+      "bytes": 179,
+      "sha256": "9aef98d613601b0c374c1d0499afb39d710cbf5002faba537f21be9c11ff72e3"
+    },
+    {
+      "path": "tools/generate_conventions.py",
+      "bytes": 929,
+      "sha256": "6c3935581c7d4c7ea765fa6d2e85ad1eb39772b86607a154429a520a4f17a5e6"
+    },
+    {
+      "path": "tools/native_process.py",
+      "bytes": 19307,
+      "sha256": "58dd2a8231d7f9d1e42070fc85425461e06a43f279fa5e7f8e57b4a40c3a3aa4"
+    }
+  ],
+  "all_children_returned_zero_after_managed_cleanup": true,
+  "supervisor_session": 26281,
+  "target_released": true,
+  "resources": {
+    "elapsed_seconds": 118.0343748749874,
+    "minimum_sampled_free_bytes": 91788468224,
+    "target_initial_bytes": 56966263927,
+    "target_last_sampled_bytes": 57061298494,
+    "target_growth_bytes": 95034567
+  },
+  "gpu_execution": false,
+  "native_window_execution": false,
+  "listener_execution": false,
+  "performance_or_hardware_gate": false,
+  "scope": "Observable CPU counter/decoder/refusal behavior and native renderer compilation only; no GPU timestamp-validity or completion evidence."
+}
