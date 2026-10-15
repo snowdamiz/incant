@@ -225,6 +225,15 @@ describe('hierarchy duplicate', () => {
     // One command and no rename; Undo is the existing history command.
     fireEvent.keyDown(rowOf(copy), { key: 'z', code: 'KeyZ', metaKey: true });
     expect(double.commands).toEqual([{ type: 'entity.duplicate', entity: crate }, { type: 'history.undo' }]);
+    const beforeUndo = rows();
+    const nextAfterCopy = beforeUndo[beforeUndo.indexOf(rowOf(copy)) + 1]!;
+    await double.answer({ ok: true }, without(next, copy));
+    expect(document.activeElement).toBe(nextAfterCopy);
+    expect(nextAfterCopy.tabIndex).toBe(0);
+    expect(selected()).toEqual([]);
+    const previous = rows()[rows().indexOf(nextAfterCopy) - 1]!;
+    fireEvent.keyDown(document.activeElement!, { key: 'ArrowUp' });
+    expect(document.activeElement).toBe(previous);
   });
 
   it('uses Ctrl+D on Windows and Linux and leaves other combinations to the page', () => {
@@ -301,6 +310,14 @@ describe('hierarchy duplicate', () => {
     const names = (id: Ulid) => ready(next).nodes[id]!.children.map((child) => rowOf(child).querySelector('.tree-row__name')?.textContent);
     expect(names(copy)).toEqual(['Camera Rig', 'Map Camera', 'Close-up Camera', 'Grapple Controller']);
     expect(names(copy)).toEqual(names(player));
+
+    const nextSibling = rowOf(idOf(next, 'Dock'));
+    fireEvent.keyDown(rowOf(copy), { key: 'z', code: 'KeyZ', ctrlKey: true });
+    await double.answer({ ok: true }, without(next, copy));
+    expect(document.activeElement).toBe(nextSibling);
+    expect(selected()).toEqual([]);
+    fireEvent.keyDown(document.activeElement!, { key: 'ArrowDown' });
+    expect(document.activeElement).toBe(rowOf(idOf(next, 'Pier Planks')));
   });
 
   it('reveals and focuses a copy that lands far outside the mounted rows of a long list', async () => {

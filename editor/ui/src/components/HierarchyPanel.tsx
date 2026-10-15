@@ -1,4 +1,4 @@
-import { useDeferredValue, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useDeferredValue, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import type { KeyboardEvent, ReactNode } from 'react';
 import type { HierarchyTree, Ulid } from '../bridge/contract';
 import type { ProblemCounts, Row } from '../hierarchy/tree';
@@ -159,7 +159,7 @@ const TOP = 2;
  * scrolling them out of view.
  */
 function Tree({ tree }: { tree: HierarchyTree }) {
-  const { snapshot, bridge, selection, select, capabilities, explainUnavailable, run, announce } = useShell();
+  const { snapshot, bridge, selection, select, selectionGeneration, capabilities, explainUnavailable, run, announce } = useShell();
   const platform = usePlatform();
   const [menu, setMenu] = useState<{ id: Ulid; at: { x: number; y: number } } | null>(null);
   const [expanded, setExpanded] = useState<Set<string>>(() => defaultExpanded(tree));
@@ -176,7 +176,18 @@ function Tree({ tree }: { tree: HierarchyTree }) {
   const rows = useMemo(() => visibleRows(tree, expanded, query), [tree, expanded, query]);
   const indexOf = useMemo(() => new Map(rows.map((row, index) => [row.id as string, index])), [rows]);
   const problems = useMemo(() => indexProblems(tree, snapshot?.diagnostics ?? []), [tree, snapshot?.diagnostics]);
-  const active = selection !== null && indexOf.has(selection) ? selection : (rows[0]?.id ?? null);
+  const project = snapshot?.connection.status === 'ready' ? snapshot.connection.project.id : null;
+  const [recoveredActive, setRecoveredActive] = useState<{ id: Ulid; bridge: typeof bridge; project: typeof project } | null>(null);
+  const recovered = recoveredActive?.bridge === bridge && recoveredActive?.project === project && indexOf.has(recoveredActive.id) ? recoveredActive.id : null;
+  const active = selection !== null && indexOf.has(selection) ? selection : (recovered ?? rows[0]?.id ?? null);
+  const committed = useRef({ rows, bridge, project });
+  const focused = useRef<{ id: Ulid; generation: number } | null>(null);
+  const removedFocus = useRef<{ id: Ulid; element: HTMLElement; generation: number; before: typeof committed.current; target?: Ulid } | null>(null);
+  // Ref cleanup sees the actual focused row before React detaches it. A stale last-
+  // focused id cannot distinguish a removed row from a deliberate blur to the body.
+  const onFocusedUnmount = useCallback((id: Ulid, element: HTMLElement) => {
+    if (focused.current?.id === id) removedFocus.current = { id, element, generation: focused.current.generation, before: committed.current };
+  }, []);
   const name = (id: Ulid) => tree.nodes[id]?.name ?? '';
   const [viewport, attachViewport, remeasure] = useViewport(listRef, ROW * 4);
   const [first, last] = rowRange(viewport, rows.length, ROW, 8, TOP);
@@ -184,6 +195,43 @@ function Tree({ tree }: { tree: HierarchyTree }) {
     active !== null ? (indexOf.get(active) ?? -1) : -1,
     renaming !== null ? (indexOf.get(renaming) ?? -1) : -1,
   ]);
+
+  useLayoutEffect(() => {
+    committed.current = { rows, bridge, project };
+    const removed = removedFocus.current;
+    if (!removed) return;
+    if (removed.before.bridge !== bridge || removed.before.project !== project || removed.generation !== selectionGeneration()
+      || tree.nodes[removed.id] || removed.element.isConnected || document.activeElement !== document.body) {
+      removedFocus.current = null;
+      return;
+    }
+    if (!removed.target) {
+      const oldIndex = removed.before.rows.findIndex((row) => row.id === removed.id);
+      let target = selection ?? undefined;
+      for (let index = oldIndex + 1; target === undefined && index < removed.before.rows.length; index += 1) {
+        const candidate = removed.before.rows[index]!.id;
+        if (indexOf.has(candidate)) target = candidate;
+      }
+      for (let index = oldIndex - 1; target === undefined && index >= 0; index -= 1) {
+        const candidate = removed.before.rows[index]!.id;
+        if (indexOf.has(candidate)) target = candidate;
+      }
+      if (!target || !indexOf.has(target)) {
+        removedFocus.current = null;
+        return;
+      }
+      removed.target = target;
+      // Recovery is a keyboard entry point, not new selection intent. In particular,
+      // it must not invalidate a pending Duplicate's selection-generation fence.
+      setRecoveredActive({ id: removed.target, bridge, project });
+    }
+    const target = document.getElementById(rowDomId(removed.target));
+    if (!target) return; // The next render pins a neighbour outside the virtual window.
+    removedFocus.current = null;
+    revealSpan(listRef.current, TOP + indexOf.get(removed.target)! * ROW, ROW, 4);
+    remeasure();
+    target.focus();
+  });
 
   // Reveal a selection made elsewhere (e.g. the Problems list) by expanding its ancestors.
   // Runs only when the selection changes, so collapsing an ancestor afterwards sticks.
@@ -221,6 +269,8 @@ function Tree({ tree }: { tree: HierarchyTree }) {
   const moveTo = (id: Ulid) => {
     pendingFocus.current = id;
     select(id);
+    // Re-selecting the focused row emits no new DOM focus event.
+    if (document.activeElement?.id === rowDomId(id)) focused.current = { id, generation: selectionGeneration() };
     if (id === selection) {
       const index = indexOf.get(id);
       if (index !== undefined) {
@@ -283,7 +333,7 @@ function Tree({ tree }: { tree: HierarchyTree }) {
     }
     if (event.key === 'Enter' && active !== null) {
       event.preventDefault();
-      select(active);
+      moveTo(active);
       return;
     }
     if ((event.key === 'PageDown' || event.key === 'PageUp') && active !== null) {
@@ -369,6 +419,11 @@ function Tree({ tree }: { tree: HierarchyTree }) {
           aria-labelledby="hierarchy-title"
           aria-busy={duplicate.pending !== null || undefined}
           onKeyDown={onKeyDown}
+          onFocusCapture={(event) => {
+            if (event.target instanceof HTMLElement && event.target.getAttribute('role') === 'treeitem') {
+              focused.current = { id: event.target.id.slice('tree-row-'.length) as Ulid, generation: selectionGeneration() };
+            }
+          }}
         >
           <div className="tree__canvas" role="none" style={{ height: TOP + rows.length * ROW }}>
             {mounted.map((index) => {
@@ -385,6 +440,7 @@ function Tree({ tree }: { tree: HierarchyTree }) {
                   hidden={!row.expanded ? problems.descendants.get(row.id) : undefined}
                   renaming={renaming === row.id}
                   onActivate={() => moveTo(row.id)}
+                  onFocusedUnmount={onFocusedUnmount}
                   onToggle={() => toggle(row.id, !row.expanded)}
                   onRename={() => beginRename(row.id)}
                   onMenu={(at) => {
@@ -480,6 +536,7 @@ function TreeRow({
   hidden,
   renaming,
   onActivate,
+  onFocusedUnmount,
   onToggle,
   onRename,
   onMenu,
@@ -494,18 +551,26 @@ function TreeRow({
   hidden: ProblemCounts | undefined;
   renaming: boolean;
   onActivate: () => void;
+  onFocusedUnmount: (id: Ulid, element: HTMLElement) => void;
   onToggle: () => void;
   onRename: () => void;
   /** Opens the row's context menu at viewport coordinates. */
   onMenu: (at: { x: number; y: number }) => void;
   onRenameDone: (value: string) => void;
 }) {
+  const attachRow = useCallback((element: HTMLDivElement | null) => {
+    if (!element) return;
+    return () => {
+      if (document.activeElement === element) onFocusedUnmount(row.id, element);
+    };
+  }, [row.id, onFocusedUnmount]);
   const node = tree.nodes[row.id];
   if (!node) return null;
   const ownText = problemText(own);
   const hiddenText = problemText(hidden);
   return (
     <div
+      ref={attachRow}
       id={rowDomId(row.id)}
       role="treeitem"
       className={`tree-row${selected ? ' is-selected' : ''}${row.ancestorOfMatch ? ' is-context' : ''}${node.kind === 'scene' && row.depth === 1 ? ' is-scene' : ''}`}
