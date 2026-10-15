@@ -27,6 +27,9 @@ its actual target output passed the complete 268,438-byte shader audit. Both pri
 native failures remain recorded. Public shipping export, player execution,
 driver/render parity, cache hits and the full shader-stall gate remain unproven.
 The original eight-family result below retains its producing-source scope.
+The public exporter now refuses missing or mismatched pinned script-compiler
+packages before launching build tools; 45 focused Python controls pass.
+[Early checkout diagnostics](docs/spikes/native-script-prerequisites.md).
 [Source, failures and portable evidence](docs/spikes/cooked-bloom.md).
 
 ## Optional pipeline caches — cold preparation qualified
