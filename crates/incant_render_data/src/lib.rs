@@ -1,5 +1,8 @@
 //! Typed renderer input shared by authoring and native extraction. No project,
 //! command bus, importer, GPU or agent dependency. Construct/replace at sync points.
+pub mod animation_sample;
+pub mod material_keys;
+pub mod prewarm;
 mod text;
 pub use text::{TextInput, TextNode};
 mod ui;

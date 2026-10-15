@@ -8,6 +8,7 @@ mod contract;
 mod emit;
 pub mod geometry;
 mod manifest;
+pub mod material_fallback;
 pub mod metalfx_boundary;
 pub mod temporal;
 

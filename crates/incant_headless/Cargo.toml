@@ -68,6 +68,7 @@ incant_render_game = { path = "../incant_render_game", default-features = false 
 ulid.workspace = true
 incant_observe = { path = "../incant_observe", default-features = false }
 incant_render_authoring.workspace = true
+incant_render_data.workspace = true
 serde = { workspace = true }
 serde_json = { workspace = true }
 incant_doc = { workspace = true }

@@ -40,6 +40,14 @@ pub fn key_path(cache: &Path, key: &str) -> Result<std::path::PathBuf> {
 }
 /// Runtime entry point: load cooked geometry without the original glTF files.
 pub fn load_model(cache: &Path, fingerprint: &str) -> Result<CookedModel> {
+    load_model_with_receipt(cache, fingerprint).map(|(model, _)| model)
+}
+/// The receipt binds the complete admitted cooked bytes, not the caller's recipe
+/// label. Computed once while the bounded startup buffer is already resident.
+pub(crate) fn load_model_with_receipt(
+    cache: &Path,
+    fingerprint: &str,
+) -> Result<(CookedModel, [u8; 32])> {
     let path = key_path(cache, fingerprint)?;
     if fs::symlink_metadata(&path)?.file_type().is_symlink() {
         return Err(invalid("cache entry is a symlink"));
@@ -54,7 +62,8 @@ pub fn load_model(cache: &Path, fingerprint: &str) -> Result<CookedModel> {
     if bytes.len() > MAX_SOURCE_BYTES {
         return Err(AssetError::Limit("cooked model bytes"));
     }
-    decode_model(&bytes, fingerprint)
+    let model = decode_model(&bytes, fingerprint)?;
+    Ok((model, Sha256::digest(&bytes).into()))
 }
 fn take<'a>(bytes: &mut &'a [u8], n: usize) -> Result<&'a [u8]> {
     if n > bytes.len() {

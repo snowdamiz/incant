@@ -1,5 +1,6 @@
 //! Mandatory native spatial hosting, composed with input/VM/physics/audio ticks.
 //! The default consumer exposes CPU input only; it does not submit a GPU frame.
+mod material_recording;
 mod recorded_ui;
 mod texture_refresh;
 mod ui;
@@ -12,6 +13,7 @@ pub use incant_render_native::{
     PreparedTextureRefresh, TextureRefreshReceipt, TextureRefreshTicket, VisualCaches,
 };
 use incant_runtime::{NativeWorld, RuntimeError, StableId};
+pub use material_recording::MaterialRecordingConsumer;
 pub use recorded_ui::{RecordedUiError, tick_recorded_ui, validate_ui_recording};
 use std::{convert::Infallible, path::PathBuf, sync::Arc};
 pub use texture_refresh::{
@@ -75,6 +77,19 @@ pub trait RenderInputConsumer: Sized {
         ui: Option<&Arc<UiInput>>,
         settings: Self::Settings,
     ) -> Result<Self, Self::Error>;
+    /// Native committed clock for observers that publish tick provenance. A
+    /// refresh/checkpoint preparation is not necessarily tick zero. Existing
+    /// consumers retain their preparation behavior through this default.
+    fn prepare_at_tick(
+        input: &SceneInput,
+        camera: &str,
+        ui: Option<&Arc<UiInput>>,
+        tick: u64,
+        settings: Self::Settings,
+    ) -> Result<Self, Self::Error> {
+        let _ = tick;
+        Self::prepare(input, camera, ui, settings)
+    }
     fn accept(
         &mut self,
         input: &SceneInput,
@@ -82,6 +97,19 @@ pub trait RenderInputConsumer: Sized {
         kind: UpdateKind,
         ui: Option<&Arc<UiInput>>,
     ) -> Result<(), Self::Error>;
+    /// The candidate's actual native tick; repeated same-tick refreshes must not
+    /// be counted as new simulation ticks by a recording consumer.
+    fn accept_at_tick(
+        &mut self,
+        input: &SceneInput,
+        camera: &str,
+        kind: UpdateKind,
+        ui: Option<&Arc<UiInput>>,
+        tick: u64,
+    ) -> Result<(), Self::Error> {
+        let _ = tick;
+        self.accept(input, camera, kind, ui)
+    }
     /// Viewport-only relayout: admit the candidate's screen-space resources
     /// without presenting a frame. A refusal leaves the accepted UI drawable.
     fn admit_ui(&mut self, ui: &Arc<UiInput>) -> Result<(), Self::Error>;
@@ -158,10 +186,11 @@ impl<C: RenderInputConsumer> NativeRenderHost<C> {
             .ui
             .map(|settings| ui::Binding::load(world, &input, settings, checkpoint))
             .transpose()?;
-        let consumer = C::prepare(
+        let consumer = C::prepare_at_tick(
             input.input(),
             input.camera_label(),
             ui.as_ref().map(|ui| &ui.input),
+            input.tick(),
             settings.consumer,
         )
         .map_err(RenderHostError::Consumer)?;
@@ -248,8 +277,9 @@ impl<C: RenderInputConsumer> SceneHost for NativeRenderHost<C> {
         let consumer = &mut self.consumer;
         let spatial = world.spatial_view()?;
         let ui_input = ui_next.as_ref().map(|next| next.input());
-        let accept =
-            |input: &SceneInput, camera: &str, kind| consumer.accept(input, camera, kind, ui_input);
+        let accept = |input: &SceneInput, camera: &str, kind| {
+            consumer.accept_at_tick(input, camera, kind, ui_input, spatial.tick())
+        };
         let result = if self.input.has_text_binding() {
             self.input
                 .try_sync_with_text(&spatial, &world.text_view()?, accept)

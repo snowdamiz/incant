@@ -130,6 +130,7 @@ impl crate::Renderer {
             surface,
             false,
             SceneMsaa::try_from(samples)?,
+            None,
             #[cfg(all(feature = "native-compilation", target_os = "macos"))]
             None,
             #[cfg(all(
@@ -155,6 +156,7 @@ impl crate::Renderer {
             surface,
             true,
             SceneMsaa::try_from(samples)?,
+            None,
             #[cfg(all(feature = "native-compilation", target_os = "macos"))]
             None,
             #[cfg(all(

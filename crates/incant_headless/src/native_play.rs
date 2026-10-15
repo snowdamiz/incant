@@ -8,6 +8,10 @@ pub(crate) mod embedded {
     include!(concat!(env!("OUT_DIR"), "/behavior.rs"));
 }
 use incant_agent_native::{Session, StartOptions};
+use incant_render_data::{
+    material_keys::MaterialSamples,
+    prewarm::{MaterialProfile, MaterialProgram},
+};
 use serde::Serialize;
 use sha2::{Digest, Sha256};
 use std::{
@@ -46,6 +50,21 @@ pub struct Options {
     /// New raw stereo f32-le PCM file; published only after a completed run.
     #[arg(long)]
     pub pcm_output: Option<PathBuf>,
+    /// Create a bounded ModelMaterialV1 manifest after successful native gameplay.
+    /// This observes CPU selections; it does not create or measure GPU pipelines.
+    #[arg(long, requires = "camera")]
+    pub record_materials: Option<PathBuf>,
+    /// Trusted target program profile for the logical recording.
+    #[arg(long, requires = "record_materials", value_enum)]
+    pub material_program: Option<Program>,
+    /// Target world sampling policy, 1 or 4. Pixel-perfect cameras select 1.
+    #[arg(long, requires = "record_materials")]
+    pub material_samples: Option<u32>,
+}
+#[derive(Clone, Copy, clap::ValueEnum)]
+pub enum Program {
+    Wgsl,
+    Cooked,
 }
 pub(crate) fn viewport(value: &str) -> std::result::Result<[f32; 2], &'static str> {
     let (width, height) = value.split_once('x').ok_or("expected WIDTHxHEIGHT")?;
@@ -123,12 +142,38 @@ pub struct Report {
     cpu_render_input: bool,
     gpu_submitted: bool,
     project_sha256: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    material_recording: Option<serde_json::Value>,
 }
 
 pub fn run(options: Options) -> Result<Report> {
     if !(8000..=192000).contains(&options.sample_rate) {
         return Err(invalid("invalid sample rate"));
     }
+    let material_profile = if let Some(path) = &options.record_materials {
+        if path.exists() {
+            return Err(invalid("material manifest output already exists"));
+        }
+        if options.camera.is_none() {
+            return Err(invalid("material recording requires a camera"));
+        }
+        Some(MaterialProfile {
+            program: match options.material_program.unwrap_or(Program::Wgsl) {
+                Program::Wgsl => MaterialProgram::Wgsl,
+                Program::Cooked => MaterialProgram::Cooked,
+            },
+            samples: match options.material_samples.unwrap_or(1) {
+                1 => MaterialSamples::One,
+                4 => MaterialSamples::Four,
+                _ => return Err(invalid("material sampling supports only 1 or 4")),
+            },
+        })
+    } else {
+        if options.material_program.is_some() || options.material_samples.is_some() {
+            return Err(invalid("material target options require recording"));
+        }
+        None
+    };
     let bytes = bounded(&options.project, 128 * 1024 * 1024)?;
     let project_sha256 = format!("{:x}", Sha256::digest(&bytes));
     let document = incant_doc::Project::from_text(std::str::from_utf8(&bytes).map_err(native)?)
@@ -140,11 +185,13 @@ pub fn run(options: Options) -> Result<Report> {
     if options.pcm_output.is_some() && frame_count * 8 > 512 * 1024 * 1024 {
         return Err(invalid("PCM output exceeds 512 MiB"));
     }
+    let mut input_sha256: [u8; 32] = Sha256::digest([]).into();
     let replay = options
         .input_replay
         .as_deref()
         .map(|path| {
             let bytes = bounded(path, incant_input::MAX_RECORDING_BYTES)?;
+            input_sha256 = Sha256::digest(&bytes).into();
             let replay = InputReplay::from_text(
                 std::str::from_utf8(&bytes).map_err(native)?,
                 0,
@@ -167,18 +214,31 @@ pub fn run(options: Options) -> Result<Report> {
         .parent()
         .filter(|p| !p.as_os_str().is_empty())
         .unwrap_or(Path::new("."));
-    let mut game = Session::new(
-        &document,
-        root,
-        &StartOptions {
-            scene: options.scene.clone(),
-            script_sha256: options.script_sha256.clone(),
-            camera: options.camera.clone(),
-            ui_viewport: options.ui_viewport,
-        },
-        options.sample_rate,
-        embedded::load,
-    )?;
+    let start_options = StartOptions {
+        scene: options.scene.clone(),
+        script_sha256: options.script_sha256.clone(),
+        camera: options.camera.clone(),
+        ui_viewport: options.ui_viewport,
+    };
+    let mut game = if let Some(profile) = material_profile {
+        Session::new_recording_materials(
+            &document,
+            root,
+            &start_options,
+            options.sample_rate,
+            embedded::load,
+            profile,
+            input_sha256,
+        )?
+    } else {
+        Session::new(
+            &document,
+            root,
+            &start_options,
+            options.sample_rate,
+            embedded::load,
+        )?
+    };
     game.validate_ui_recording(replay.as_ref().is_some_and(InputReplay::has_ui))?;
     // No guest update retains or consults this authoring document.
     drop(document);
@@ -239,7 +299,7 @@ pub fn run(options: Options) -> Result<Report> {
     }
     let world = game.world()?;
     let observations = plan.map(|p| p.finish(world)).transpose().map_err(native)?;
-    let report = Report {
+    let mut report = Report {
         passed: observations.as_ref().is_none_or(|r| r.passed),
         runtime: "native",
         script_source_sha256: game.script_source_sha256.clone(),
@@ -255,7 +315,33 @@ pub fn run(options: Options) -> Result<Report> {
         cpu_render_input: game.is_spatial(),
         gpu_submitted: false,
         project_sha256,
+        material_recording: None,
     };
+    if let Some(path) = &options.record_materials {
+        if report.passed {
+            let manifest = game
+                .material_manifest()?
+                .ok_or(invalid("material recorder is absent"))?;
+            let bytes = manifest.to_bytes().map_err(native)?;
+            let parent = path
+                .parent()
+                .filter(|p| !p.as_os_str().is_empty())
+                .unwrap_or(Path::new("."));
+            let mut output = tempfile::NamedTempFile::new_in(parent)?;
+            output.write_all(&bytes)?;
+            output.as_file().sync_all()?;
+            output
+                .persist_noclobber(path)
+                .map_err(|e| PlayError::Io(e.error))?;
+            report.material_recording = Some(
+                serde_json::json!({"completed":true,"scope":"model_material_v1","sha256":format!("{:x}",Sha256::digest(&bytes)),"bytes":bytes.len(),"observed_keys":manifest.observed.len(),"first_tick":manifest.recording.first_tick,"last_tick":manifest.recording.last_tick}),
+            );
+        } else {
+            report.material_recording = Some(
+                serde_json::json!({"completed":false,"reason":"observation assertions failed"}),
+            );
+        }
+    }
     if let Some(pcm) = pcm {
         pcm.as_file().sync_all()?;
         pcm.persist_noclobber(options.pcm_output.as_ref().expect("requested output"))

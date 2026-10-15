@@ -40,12 +40,44 @@ pub(crate) struct PipelineKey {
     pub mirrored: bool,
     pub samples: crate::SceneMsaa,
 }
+impl PipelineKey {
+    #[cfg(not(target_arch = "wasm32"))]
+    pub(crate) fn material_key(self) -> Option<incant_render_data::material_keys::MaterialKey> {
+        use incant_render_data::material_keys::{MaterialKey, MaterialSamples};
+        (self.format == crate::frame::HDR_FORMAT).then(|| {
+            MaterialKey::new(
+                self.alpha,
+                self.double_sided,
+                self.mirrored,
+                match self.samples {
+                    crate::SceneMsaa::One => MaterialSamples::One,
+                    crate::SceneMsaa::Four => MaterialSamples::Four,
+                },
+            )
+        })
+    }
+    #[cfg(not(target_arch = "wasm32"))]
+    pub(crate) fn from_material(key: incant_render_data::material_keys::MaterialKey) -> Self {
+        Self {
+            format: crate::frame::HDR_FORMAT,
+            alpha: key.alpha(),
+            double_sided: key.double_sided(),
+            mirrored: key.mirrored(),
+            samples: match key.samples() {
+                incant_render_data::material_keys::MaterialSamples::One => crate::SceneMsaa::One,
+                incant_render_data::material_keys::MaterialSamples::Four => crate::SceneMsaa::Four,
+            },
+        }
+    }
+}
 pub(crate) struct MaterialSystem {
     pub globals: wgpu::BindGroupLayout,
     pub layout: wgpu::BindGroupLayout,
     fallback: wgpu::TextureView,
     sampler: wgpu::Sampler,
     pipelines: HashMap<PipelineKey, wgpu::RenderPipeline>,
+    #[cfg(not(target_arch = "wasm32"))]
+    pub(crate) recorded: Option<crate::material_prewarm::System>,
 }
 fn uniform_entry(binding: u32, visibility: wgpu::ShaderStages) -> wgpu::BindGroupLayoutEntry {
     wgpu::BindGroupLayoutEntry {
@@ -84,6 +116,12 @@ pub(crate) fn layout_entries() -> Vec<wgpu::BindGroupLayoutEntry> {
     }
     entries
 }
+pub(crate) struct Preparation {
+    pub samples: crate::SceneMsaa,
+    pub recorded: Option<incant_render_data::prewarm::AdmittedMaterials>,
+    #[cfg(all(feature = "native-compilation", target_os = "macos"))]
+    pub compilation: Option<crate::compilation::Observer>,
+}
 impl MaterialSystem {
     pub fn new(
         device: &wgpu::Device,
@@ -92,8 +130,20 @@ impl MaterialSystem {
         lighting: &wgpu::BindGroupLayout,
         backend: wgpu::Backend,
         cache: Option<&wgpu::PipelineCache>,
-        scene_msaa: crate::SceneMsaa,
+        preparation: Preparation,
     ) -> Result<Self> {
+        let Preparation {
+            samples: scene_msaa,
+            recorded,
+            #[cfg(all(feature = "native-compilation", target_os = "macos"))]
+            compilation,
+        } = preparation;
+        if recorded
+            .as_ref()
+            .is_some_and(|value| value.profile().samples.count() != scene_msaa.samples())
+        {
+            return Err(crate::material_prewarm::MaterialPrewarmError::Profile.into());
+        }
         let globals = device.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
             label: Some("Material frame"),
             entries: &[frame_entry()],
@@ -138,27 +188,49 @@ impl MaterialSystem {
         );
         let shader = crate::material_pipeline::shader(device, backend)?;
         let mut pipelines = HashMap::new();
-        for &samples in scene_msaa.catalog() {
-            for alpha in [AlphaMode::Opaque, AlphaMode::Mask, AlphaMode::Blend] {
-                for double_sided in [false, true] {
-                    for mirrored in [false, true] {
-                        let key = PipelineKey {
-                            format: crate::frame::HDR_FORMAT,
-                            alpha,
-                            double_sided,
-                            mirrored,
-                            samples,
-                        };
-                        pipelines.insert(
-                            key,
-                            crate::material_pipeline::build(
-                                device,
-                                &shader,
+        let eager = recorded.is_none();
+        #[cfg(target_arch = "wasm32")]
+        if !eager {
+            return Err(crate::material_prewarm::MaterialPrewarmError::Unsupported.into());
+        }
+        #[cfg(not(target_arch = "wasm32"))]
+        let recorded = recorded
+            .map(|admitted| {
+                crate::material_prewarm::System::new(
+                    device,
+                    shader.clone(),
+                    [&globals, &layout, environment, lighting],
+                    backend,
+                    cache,
+                    admitted,
+                    #[cfg(all(feature = "native-compilation", target_os = "macos"))]
+                    compilation,
+                )
+            })
+            .transpose()?;
+        if eager {
+            for &samples in scene_msaa.catalog() {
+                for alpha in [AlphaMode::Opaque, AlphaMode::Mask, AlphaMode::Blend] {
+                    for double_sided in [false, true] {
+                        for mirrored in [false, true] {
+                            let key = PipelineKey {
+                                format: crate::frame::HDR_FORMAT,
+                                alpha,
+                                double_sided,
+                                mirrored,
+                                samples,
+                            };
+                            pipelines.insert(
                                 key,
-                                &[&globals, &layout, environment, lighting],
-                                cache,
-                            ),
-                        );
+                                crate::material_pipeline::build(
+                                    device,
+                                    &shader,
+                                    key,
+                                    &[&globals, &layout, environment, lighting],
+                                    cache,
+                                ),
+                            );
+                        }
                     }
                 }
             }
@@ -169,6 +241,8 @@ impl MaterialSystem {
             fallback: texture.create_view(&Default::default()),
             sampler: device.create_sampler(&Default::default()),
             pipelines,
+            #[cfg(not(target_arch = "wasm32"))]
+            recorded,
         })
     }
 
@@ -330,10 +404,21 @@ impl MaterialSystem {
     }
 
     pub fn pipeline(&self, key: PipelineKey) -> Result<wgpu::RenderPipeline> {
+        #[cfg(not(target_arch = "wasm32"))]
+        if let Some(recorded) = &self.recorded {
+            return recorded.pipeline(key);
+        }
         self.pipelines
             .get(&key)
             .cloned()
             .ok_or_else(|| ResourceError::UnpreparedPipeline("material").into())
+    }
+    pub(crate) fn require_eager(&self) -> Result<()> {
+        #[cfg(not(target_arch = "wasm32"))]
+        if self.recorded.is_some() {
+            return Err(crate::material_prewarm::MaterialPrewarmError::Effect.into());
+        }
+        Ok(())
     }
 }
 

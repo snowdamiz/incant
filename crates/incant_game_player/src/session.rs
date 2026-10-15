@@ -15,8 +15,17 @@ use incant_render_game::{NativeRenderHost, NativeRenderSettings};
 #[cfg(feature = "render-input")]
 pub enum Settings {
     Cpu(NativeRenderSettings),
+    Recording(
+        NativeRenderSettings,
+        incant_render_data::prewarm::RecordingContext,
+    ),
     #[cfg(feature = "render-gpu")]
     Gpu(NativeRenderSettings),
+    #[cfg(feature = "render-gpu")]
+    RecordedGpu(
+        NativeRenderSettings,
+        incant_render_data::prewarm::MaterialManifest,
+    ),
 }
 #[cfg(not(feature = "render-input"))]
 pub enum Settings {}
@@ -91,7 +100,7 @@ pub fn validate_ui_settings(settings: &Option<Settings>, uses_ui: bool) -> Resul
         return Ok(());
     }
     #[cfg(feature = "render-input")]
-    if let Some(Settings::Cpu(settings)) = settings
+    if let Some(Settings::Cpu(settings) | Settings::Recording(settings, _)) = settings
         && settings.ui.is_some()
     {
         return Ok(());
@@ -104,8 +113,18 @@ pub enum Player {
     Plain(Box<OfflineGameSession>),
     #[cfg(feature = "render-input")]
     Spatial(Box<HostedOfflineGameSession<NativeRenderHost>>),
+    #[cfg(feature = "render-input")]
+    Recording(
+        Box<
+            HostedOfflineGameSession<
+                NativeRenderHost<incant_render_game::MaterialRecordingConsumer>,
+            >,
+        >,
+    ),
     #[cfg(feature = "render-gpu")]
     Gpu(Box<crate::gpu::Session>),
+    #[cfg(feature = "render-gpu")]
+    RecordedGpu(Box<crate::gpu::RecordedSession>),
 }
 impl Player {
     pub fn new(
@@ -126,6 +145,36 @@ impl Player {
                 Settings::Cpu(settings) => Self::Spatial(Box::new(HostedOfflineGameSession::new(
                     scene, script, actions, clips, rate, settings,
                 )?)),
+                Settings::Recording(settings, context) => {
+                    Self::Recording(Box::new(HostedOfflineGameSession::new(
+                        scene,
+                        script,
+                        actions,
+                        clips,
+                        rate,
+                        NativeRenderSettings {
+                            model_cache: settings.model_cache,
+                            texture_cache: settings.texture_cache,
+                            camera: settings.camera,
+                            text: settings.text,
+                            ui: settings.ui,
+                            consumer: context,
+                        },
+                    )?))
+                }
+                #[cfg(feature = "render-gpu")]
+                Settings::RecordedGpu(settings, manifest) => {
+                    Self::RecordedGpu(Box::new(crate::gpu::RecordedSession::new(
+                        scene,
+                        script,
+                        actions,
+                        clips,
+                        rate,
+                        settings,
+                        requested_ticks,
+                        manifest,
+                    )?))
+                }
                 #[cfg(feature = "render-gpu")]
                 Settings::Gpu(settings) => Self::Gpu(Box::new(crate::gpu::Session::new(
                     scene,
@@ -168,8 +217,13 @@ impl Player {
                         bytes, initial, script, actions, clips, rate, settings,
                     )?))
                 }
+                Settings::Recording(_, _) => {
+                    return Err("material recording checkpoint loading is unsupported".into());
+                }
                 #[cfg(feature = "render-gpu")]
-                Settings::Gpu(_) => return Err("GPU checkpoint loading is unsupported".into()),
+                Settings::Gpu(_) | Settings::RecordedGpu(_, _) => {
+                    return Err("GPU checkpoint loading is unsupported".into());
+                }
             });
         }
         #[cfg(not(feature = "render-input"))]
@@ -187,8 +241,12 @@ impl Player {
             Self::Plain(game) => game.enable_restart_requests()?,
             #[cfg(feature = "render-input")]
             Self::Spatial(game) => game.enable_restart_requests()?,
+            #[cfg(feature = "render-input")]
+            Self::Recording(_) => return Err("material recording restart is unsupported".into()),
             #[cfg(feature = "render-gpu")]
-            Self::Gpu(_) => return Err("offscreen GPU restart is unsupported".into()),
+            Self::Gpu(_) | Self::RecordedGpu(_) => {
+                return Err("offscreen GPU restart is unsupported".into());
+            }
         }
         Ok(())
     }
@@ -197,17 +255,25 @@ impl Player {
             Self::Plain(game) => game.take_session_request()?,
             #[cfg(feature = "render-input")]
             Self::Spatial(game) => game.take_session_request()?,
+            #[cfg(feature = "render-input")]
+            Self::Recording(game) => game.take_session_request()?,
             #[cfg(feature = "render-gpu")]
             Self::Gpu(game) => game.inner.take_session_request()?,
+            #[cfg(feature = "render-gpu")]
+            Self::RecordedGpu(game) => game.inner_mut()?.take_session_request()?,
         })
     }
     pub fn preflight_checkpoint(&mut self) -> Result<()> {
         #[cfg(feature = "native-checkpoints")]
         {
+            #[cfg(feature = "render-input")]
+            if matches!(self, Self::Recording(_)) {
+                return Err("material recording checkpoint saving is unsupported".into());
+            }
             // This is route admission only. It neither steps the world nor
             // claims that future physics/script state will be saveable.
             #[cfg(feature = "render-gpu")]
-            if matches!(self, Self::Gpu(_)) {
+            if matches!(self, Self::Gpu(_) | Self::RecordedGpu(_)) {
                 return Err("GPU checkpoint saving is unsupported".into());
             }
             Ok(())
@@ -223,8 +289,14 @@ impl Player {
             Self::Plain(game) => game.checkpoint_bytes()?,
             #[cfg(feature = "render-input")]
             Self::Spatial(game) => game.checkpoint_bytes()?,
+            #[cfg(feature = "render-input")]
+            Self::Recording(_) => {
+                return Err("material recording checkpoint saving is unsupported".into());
+            }
             #[cfg(feature = "render-gpu")]
-            Self::Gpu(_) => return Err("GPU checkpoint saving is unsupported".into()),
+            Self::Gpu(_) | Self::RecordedGpu(_) => {
+                return Err("GPU checkpoint saving is unsupported".into());
+            }
         })
     }
     pub fn next_output_frames(&self) -> Result<usize> {
@@ -232,8 +304,12 @@ impl Player {
             Self::Plain(game) => game.next_output_frames()?,
             #[cfg(feature = "render-input")]
             Self::Spatial(game) => game.next_output_frames()?,
+            #[cfg(feature = "render-input")]
+            Self::Recording(game) => game.next_output_frames()?,
             #[cfg(feature = "render-gpu")]
             Self::Gpu(game) => game.inner.next_output_frames()?,
+            #[cfg(feature = "render-gpu")]
+            Self::RecordedGpu(game) => game.inner()?.next_output_frames()?,
         })
     }
     pub fn rendered_frames(&self) -> Result<u128> {
@@ -241,8 +317,12 @@ impl Player {
             Self::Plain(game) => game.rendered_frames()?,
             #[cfg(feature = "render-input")]
             Self::Spatial(game) => game.rendered_frames()?,
+            #[cfg(feature = "render-input")]
+            Self::Recording(game) => game.rendered_frames()?,
             #[cfg(feature = "render-gpu")]
             Self::Gpu(game) => game.inner.rendered_frames()?,
+            #[cfg(feature = "render-gpu")]
+            Self::RecordedGpu(game) => game.inner()?.rendered_frames()?,
         })
     }
     pub fn tick(&mut self, events: &[InputEvent], output: &mut [f32]) -> Result<()> {
@@ -250,8 +330,12 @@ impl Player {
             Self::Plain(game) => game.tick(events, output)?,
             #[cfg(feature = "render-input")]
             Self::Spatial(game) => game.tick(events, output)?,
+            #[cfg(feature = "render-input")]
+            Self::Recording(game) => game.tick(events, output)?,
             #[cfg(feature = "render-gpu")]
             Self::Gpu(game) => game.inner.tick(events, output)?,
+            #[cfg(feature = "render-gpu")]
+            Self::RecordedGpu(game) => game.inner_mut()?.tick(events, output)?,
         };
         Ok(())
     }
@@ -260,8 +344,12 @@ impl Player {
             Self::Plain(game) => game.world()?,
             #[cfg(feature = "render-input")]
             Self::Spatial(game) => game.world()?,
+            #[cfg(feature = "render-input")]
+            Self::Recording(game) => game.world()?,
             #[cfg(feature = "render-gpu")]
             Self::Gpu(game) => game.inner.world()?,
+            #[cfg(feature = "render-gpu")]
+            Self::RecordedGpu(game) => game.inner()?.world()?,
         })
     }
     pub fn input(&self) -> Result<&InputFrame> {
@@ -269,8 +357,12 @@ impl Player {
             Self::Plain(game) => game.input()?,
             #[cfg(feature = "render-input")]
             Self::Spatial(game) => game.input()?,
+            #[cfg(feature = "render-input")]
+            Self::Recording(game) => game.input()?,
             #[cfg(feature = "render-gpu")]
             Self::Gpu(game) => game.inner.input()?,
+            #[cfg(feature = "render-gpu")]
+            Self::RecordedGpu(game) => game.inner()?.input()?,
         })
     }
     pub fn logs(&self) -> Result<&incant_script::NativeLogs> {
@@ -278,15 +370,44 @@ impl Player {
             Self::Plain(game) => game.logs()?,
             #[cfg(feature = "render-input")]
             Self::Spatial(game) => game.logs()?,
+            #[cfg(feature = "render-input")]
+            Self::Recording(game) => game.logs()?,
             #[cfg(feature = "render-gpu")]
             Self::Gpu(game) => game.inner.logs()?,
+            #[cfg(feature = "render-gpu")]
+            Self::RecordedGpu(game) => game.inner()?.logs()?,
         })
+    }
+    pub fn material_manifest(&self) -> Result<Option<crate::materials::Manifest>> {
+        #[cfg(feature = "render-input")]
+        if let Self::Recording(game) = self {
+            return Ok(Some(game.host()?.consumer().manifest()?));
+        }
+        Ok(None)
+    }
+    /// Explicit cold close after the last frame. Drop still only cancels.
+    pub fn finish_materials(&mut self) -> Result<Option<serde_json::Value>> {
+        #[cfg(feature = "render-gpu")]
+        if let Self::RecordedGpu(game) = self {
+            return Ok(Some(game.close()?));
+        }
+        Ok(None)
     }
     /// One bounded final observation, never a per-tick world projection.
     pub fn render_report(&self) -> Result<Option<serde_json::Value>> {
         #[cfg(feature = "render-gpu")]
         if let Self::Gpu(game) = self {
             return Ok(Some(game.report()?));
+        }
+        #[cfg(feature = "render-gpu")]
+        if let Self::RecordedGpu(game) = self {
+            return Ok(Some(game.report()?));
+        }
+        #[cfg(feature = "render-input")]
+        if let Self::Recording(game) = self {
+            let mut report = input_report(game.host()?.render_input())?;
+            report["mode"] = "cpu-material-recording".into();
+            return Ok(Some(report));
         }
         #[cfg(feature = "render-input")]
         if let Self::Spatial(game) = self {
