@@ -1,0 +1,338 @@
+{
+  "reviewed_at": "2026-10-15T02:13:13.679657+00:00",
+  "checkpoint": 40,
+  "attempt": 1,
+  "pr": 311,
+  "candidate": "cf55aa691122c570819aaaa58cbd4f0805331df0",
+  "selected_main": "d8dea4ed7543961eb31f57f52787268914b1391c",
+  "tested_tree": "9b6ee583cb87cea192404bab21f1c6c6e1a4e4ec",
+  "prior_release": "aa481bea41434dd938ab560144321a59e14f5da2",
+  "required_contexts": [
+    {
+      "name": "android",
+      "head_sha": "cf55aa691122c570819aaaa58cbd4f0805331df0",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-15T00:20:53Z",
+      "completed_at": "2026-10-15T00:31:12Z",
+      "html_url": "https://github.com/snowdamiz/incant/actions/runs/38659497614/job/116177129305",
+      "id": 116177129305
+    },
+    {
+      "name": "build",
+      "head_sha": "cf55aa691122c570819aaaa58cbd4f0805331df0",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-15T00:20:52Z",
+      "completed_at": "2026-10-15T00:22:20Z",
+      "html_url": "https://github.com/snowdamiz/incant/actions/runs/38659497541/job/116177128851",
+      "id": 116177128851
+    },
+    {
+      "name": "checks",
+      "head_sha": "cf55aa691122c570819aaaa58cbd4f0805331df0",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-15T00:27:30Z",
+      "completed_at": "2026-10-15T01:59:18Z",
+      "html_url": "https://github.com/snowdamiz/incant/actions/runs/38659497688/job/116177289218",
+      "id": 116177289218
+    },
+    {
+      "name": "classify",
+      "head_sha": "cf55aa691122c570819aaaa58cbd4f0805331df0",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-15T00:20:52Z",
+      "completed_at": "2026-10-15T00:21:21Z",
+      "html_url": "https://github.com/snowdamiz/incant/actions/runs/38659497688/job/116177129575",
+      "id": 116177129575
+    },
+    {
+      "name": "compare",
+      "head_sha": "cf55aa691122c570819aaaa58cbd4f0805331df0",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-15T00:42:44Z",
+      "completed_at": "2026-10-15T00:43:30Z",
+      "html_url": "https://github.com/snowdamiz/incant/actions/runs/38659497687/job/116183832642",
+      "id": 116183832642
+    },
+    {
+      "name": "conformance (macos-latest)",
+      "head_sha": "cf55aa691122c570819aaaa58cbd4f0805331df0",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-15T00:21:28Z",
+      "completed_at": "2026-10-15T00:59:11Z",
+      "html_url": "https://github.com/snowdamiz/incant/actions/runs/38659497862/job/116177130167",
+      "id": 116177130167
+    },
+    {
+      "name": "conformance (ubuntu-latest)",
+      "head_sha": "cf55aa691122c570819aaaa58cbd4f0805331df0",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-15T00:24:52Z",
+      "completed_at": "2026-10-15T00:45:36Z",
+      "html_url": "https://github.com/snowdamiz/incant/actions/runs/38659497862/job/116177130243",
+      "id": 116177130243
+    },
+    {
+      "name": "conformance (windows-latest)",
+      "head_sha": "cf55aa691122c570819aaaa58cbd4f0805331df0",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-15T01:26:31Z",
+      "completed_at": "2026-10-15T01:27:12Z",
+      "html_url": "https://github.com/snowdamiz/incant/actions/runs/38659497862/job/116196907034",
+      "id": 116196907034
+    },
+    {
+      "name": "desktop (linux, ubuntu-latest, incant_platform_smoke)",
+      "head_sha": "cf55aa691122c570819aaaa58cbd4f0805331df0",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-15T00:20:58Z",
+      "completed_at": "2026-10-15T00:28:07Z",
+      "html_url": "https://github.com/snowdamiz/incant/actions/runs/38659497614/job/116177129142",
+      "id": 116177129142
+    },
+    {
+      "name": "desktop (macos, macos-latest, incant_platform_smoke)",
+      "head_sha": "cf55aa691122c570819aaaa58cbd4f0805331df0",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-15T00:21:20Z",
+      "completed_at": "2026-10-15T00:33:29Z",
+      "html_url": "https://github.com/snowdamiz/incant/actions/runs/38659497614/job/116177129122",
+      "id": 116177129122
+    },
+    {
+      "name": "desktop (ubuntu-latest, Linux)",
+      "head_sha": "cf55aa691122c570819aaaa58cbd4f0805331df0",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-15T00:20:53Z",
+      "completed_at": "2026-10-15T01:02:41Z",
+      "html_url": "https://github.com/snowdamiz/incant/actions/runs/38659497808/job/116177129619",
+      "id": 116177129619
+    },
+    {
+      "name": "desktop (windows, windows-latest, incant_platform_smoke.exe)",
+      "head_sha": "cf55aa691122c570819aaaa58cbd4f0805331df0",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-15T00:20:52Z",
+      "completed_at": "2026-10-15T00:32:31Z",
+      "html_url": "https://github.com/snowdamiz/incant/actions/runs/38659497614/job/116177129109",
+      "id": 116177129109
+    },
+    {
+      "name": "desktop (windows-latest, Windows, .exe)",
+      "head_sha": "cf55aa691122c570819aaaa58cbd4f0805331df0",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-15T00:22:32Z",
+      "completed_at": "2026-10-15T01:23:58Z",
+      "html_url": "https://github.com/snowdamiz/incant/actions/runs/38659497808/job/116177129996",
+      "id": 116177129996
+    },
+    {
+      "name": "ios",
+      "head_sha": "cf55aa691122c570819aaaa58cbd4f0805331df0",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-15T00:20:58Z",
+      "completed_at": "2026-10-15T00:32:52Z",
+      "html_url": "https://github.com/snowdamiz/incant/actions/runs/38659497614/job/116177128926",
+      "id": 116177128926
+    },
+    {
+      "name": "local-service-protocols",
+      "head_sha": "cf55aa691122c570819aaaa58cbd4f0805331df0",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-15T00:20:53Z",
+      "completed_at": "2026-10-15T00:23:26Z",
+      "html_url": "https://github.com/snowdamiz/incant/actions/runs/38659497675/job/116177129703",
+      "id": 116177129703
+    },
+    {
+      "name": "native (macos-latest)",
+      "head_sha": "cf55aa691122c570819aaaa58cbd4f0805331df0",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-15T00:26:40Z",
+      "completed_at": "2026-10-15T00:39:44Z",
+      "html_url": "https://github.com/snowdamiz/incant/actions/runs/38659497687/job/116177129921",
+      "id": 116177129921
+    },
+    {
+      "name": "native (ubuntu-latest)",
+      "head_sha": "cf55aa691122c570819aaaa58cbd4f0805331df0",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-15T00:22:22Z",
+      "completed_at": "2026-10-15T00:37:22Z",
+      "html_url": "https://github.com/snowdamiz/incant/actions/runs/38659497687/job/116177129961",
+      "id": 116177129961
+    },
+    {
+      "name": "native (windows-latest)",
+      "head_sha": "cf55aa691122c570819aaaa58cbd4f0805331df0",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-15T00:20:52Z",
+      "completed_at": "2026-10-15T00:42:42Z",
+      "html_url": "https://github.com/snowdamiz/incant/actions/runs/38659497687/job/116177129848",
+      "id": 116177129848
+    },
+    {
+      "name": "portability",
+      "head_sha": "cf55aa691122c570819aaaa58cbd4f0805331df0",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-15T00:20:56Z",
+      "completed_at": "2026-10-15T00:27:21Z",
+      "html_url": "https://github.com/snowdamiz/incant/actions/runs/38659497687/job/116177129648",
+      "id": 116177129648
+    },
+    {
+      "name": "storage (macos-latest)",
+      "head_sha": "cf55aa691122c570819aaaa58cbd4f0805331df0",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-15T00:20:59Z",
+      "completed_at": "2026-10-15T00:26:31Z",
+      "html_url": "https://github.com/snowdamiz/incant/actions/runs/38659497670/job/116177129510",
+      "id": 116177129510
+    },
+    {
+      "name": "storage (ubuntu-latest)",
+      "head_sha": "cf55aa691122c570819aaaa58cbd4f0805331df0",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-15T00:20:53Z",
+      "completed_at": "2026-10-15T00:24:50Z",
+      "html_url": "https://github.com/snowdamiz/incant/actions/runs/38659497670/job/116177129673",
+      "id": 116177129673
+    },
+    {
+      "name": "storage (windows-latest)",
+      "head_sha": "cf55aa691122c570819aaaa58cbd4f0805331df0",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-15T00:20:53Z",
+      "completed_at": "2026-10-15T00:28:20Z",
+      "html_url": "https://github.com/snowdamiz/incant/actions/runs/38659497670/job/116177129644",
+      "id": 116177129644
+    },
+    {
+      "name": "web",
+      "head_sha": "cf55aa691122c570819aaaa58cbd4f0805331df0",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-15T00:20:52Z",
+      "completed_at": "2026-10-15T00:28:32Z",
+      "html_url": "https://github.com/snowdamiz/incant/actions/runs/38659497614/job/116177129084",
+      "id": 116177129084
+    }
+  ],
+  "exact_candidate_workflows": [
+    {
+      "id": 38659497862,
+      "name": "Development Wasm conformance",
+      "head_sha": "cf55aa691122c570819aaaa58cbd4f0805331df0",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/snowdamiz/incant/actions/runs/38659497862",
+      "created_at": "2026-10-15T00:20:50Z",
+      "updated_at": "2026-10-15T01:27:13Z"
+    },
+    {
+      "id": 38659497808,
+      "name": "Desktop editor and engine",
+      "head_sha": "cf55aa691122c570819aaaa58cbd4f0805331df0",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/snowdamiz/incant/actions/runs/38659497808",
+      "created_at": "2026-10-15T00:20:50Z",
+      "updated_at": "2026-10-15T01:23:59Z"
+    },
+    {
+      "id": 38659497687,
+      "name": "Physics candidate feasibility",
+      "head_sha": "cf55aa691122c570819aaaa58cbd4f0805331df0",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/snowdamiz/incant/actions/runs/38659497687",
+      "created_at": "2026-10-15T00:20:50Z",
+      "updated_at": "2026-10-15T00:43:31Z"
+    },
+    {
+      "id": 38659497670,
+      "name": "Desktop credential persistence",
+      "head_sha": "cf55aa691122c570819aaaa58cbd4f0805331df0",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/snowdamiz/incant/actions/runs/38659497670",
+      "created_at": "2026-10-15T00:20:50Z",
+      "updated_at": "2026-10-15T00:28:21Z"
+    },
+    {
+      "id": 38659497614,
+      "name": "Six platform probes",
+      "head_sha": "cf55aa691122c570819aaaa58cbd4f0805331df0",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/snowdamiz/incant/actions/runs/38659497614",
+      "created_at": "2026-10-15T00:20:50Z",
+      "updated_at": "2026-10-15T00:33:30Z"
+    },
+    {
+      "id": 38659497541,
+      "name": "Website \u00b7 check and deploy",
+      "head_sha": "cf55aa691122c570819aaaa58cbd4f0805331df0",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/snowdamiz/incant/actions/runs/38659497541",
+      "created_at": "2026-10-15T00:20:50Z",
+      "updated_at": "2026-10-15T00:22:21Z"
+    },
+    {
+      "id": 38659497675,
+      "name": "Local service protocols",
+      "head_sha": "cf55aa691122c570819aaaa58cbd4f0805331df0",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/snowdamiz/incant/actions/runs/38659497675",
+      "created_at": "2026-10-15T00:20:50Z",
+      "updated_at": "2026-10-15T00:23:26Z"
+    },
+    {
+      "id": 38659497688,
+      "name": "Incant checks",
+      "head_sha": "cf55aa691122c570819aaaa58cbd4f0805331df0",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/snowdamiz/incant/actions/runs/38659497688",
+      "created_at": "2026-10-15T00:20:50Z",
+      "updated_at": "2026-10-15T01:59:19Z"
+    }
+  ],
+  "review": "Reviewed main303-309 composition: typed audio overrun handling, actual presentation replay, eligibility/2D native proof, timestamp rejection and default-off compilation observer. Scoped local evidence and exact required fastchecks passed per mainPR receipts. Private rendering/localeexperiments excluded. Phase/performance gates stayopen.",
+  "release_merge": "c0276c7b31fdb013bcfb53b09e11f8baa284fa9f",
+  "merged_at": "2026-10-15T02:09:24Z",
+  "verified_release_tree": "9b6ee583cb87cea192404bab21f1c6c6e1a4e4ec",
+  "trailer_verified": true,
+  "promoted": true
+}

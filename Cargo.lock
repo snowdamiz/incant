@@ -4573,6 +4573,7 @@ version = "0.0.1"
 dependencies = [
  "cosmic-text",
  "incant_assets_runtime",
+ "incant_localization",
  "rustybuzz",
  "serde_json",
  "sha2 0.10.9",

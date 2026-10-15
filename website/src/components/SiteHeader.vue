@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import WispMark from './WispMark.vue'
+import ArrowIcon from './ArrowIcon.vue'
 import { links, navItems } from '../content'
 
 const open = ref(false)
@@ -22,7 +23,7 @@ function onKeydown(event: KeyboardEvent): void {
 }
 
 function onScroll(): void {
-  scrolled.value = window.scrollY > 8
+  scrolled.value = window.scrollY > 24
 }
 
 function onResize(): void {
@@ -51,32 +52,34 @@ onBeforeUnmount(() => {
 
 <template>
   <header
-    class="fixed inset-x-0 top-0 z-50 border-b transition-colors duration-200"
-    :class="open ? 'border-rule bg-paper' : scrolled ? 'border-rule bg-paper/90 backdrop-blur-md' : 'border-transparent bg-paper/0'"
+    class="fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color] duration-300"
+    :class="open ? 'border-line bg-night' : scrolled ? 'border-line bg-night/75 backdrop-blur-xl' : 'border-transparent bg-transparent'"
   >
-    <nav aria-label="Primary" class="mx-auto flex h-16 max-w-[82rem] items-center justify-between gap-6 px-5 sm:px-8 lg:px-12">
+    <nav aria-label="Primary" class="mx-auto flex h-16 max-w-[90rem] items-center justify-between gap-6 px-5 sm:px-8 lg:px-12">
       <a href="#top" class="flex items-center gap-2.5 py-1 pr-2" @click="close()">
-        <WispMark class="h-7 w-auto" />
-        <span class="font-display-soft text-[22px] leading-none font-[500] tracking-[-0.01em]">Incant</span>
+        <WispMark class="h-6 w-auto" body="#6b52ff" />
+        <span class="text-[19px] leading-none font-semibold tracking-[-0.03em]">Incant</span>
       </a>
 
-      <ul class="hidden items-center gap-8 md:flex">
+      <ul class="hidden items-center gap-1 md:flex">
         <li v-for="item in navItems" :key="item.href">
-          <a :href="item.href" class="text-[14.5px] text-muted transition-colors hover:text-ink">{{ item.label }}</a>
-        </li>
-        <li>
-          <a :href="links.repository" class="inline-flex items-center gap-1.5 text-[14.5px] font-medium text-ink">
-            GitHub
-            <svg viewBox="0 0 16 16" class="size-3" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5" /></svg>
-            <span class="sr-only">(Incant repository)</span>
-          </a>
+          <a :href="item.href" class="rounded-full px-3.5 py-2 text-[14px] text-fg-2 transition-colors hover:text-fg">{{ item.label }}</a>
         </li>
       </ul>
+
+      <a
+        :href="links.repository"
+        class="hidden h-9 items-center gap-2 rounded-full border border-line-strong px-4 text-[13.5px] font-medium text-fg transition-colors hover:border-fg-2 hover:bg-white/5 md:inline-flex"
+      >
+        GitHub
+        <ArrowIcon class="size-3" />
+        <span class="sr-only">(Incant repository)</span>
+      </a>
 
       <button
         ref="toggle"
         type="button"
-        class="-mr-2 inline-flex size-11 items-center justify-center rounded-md text-ink md:hidden"
+        class="-mr-2 inline-flex size-11 items-center justify-center rounded-md text-fg md:hidden"
         :aria-expanded="open"
         aria-controls="mobile-menu"
         @click="open = !open"
@@ -89,20 +92,21 @@ onBeforeUnmount(() => {
       </button>
     </nav>
 
-    <div v-show="open" id="mobile-menu" ref="panel" class="border-t border-rule px-5 pt-2 pb-8 sm:px-8 md:hidden">
+    <div v-show="open" id="mobile-menu" ref="panel" class="h-[calc(100svh-4rem)] overflow-y-auto border-t border-line px-5 pt-2 pb-10 sm:px-8 md:hidden">
       <ul>
-        <li v-for="item in navItems" :key="item.href" class="border-b border-rule">
-          <a :href="item.href" class="font-display-soft block py-4 text-[26px] font-[420] tracking-[-0.015em]" @click="close()">
+        <li v-for="item in navItems" :key="item.href" class="border-b border-line">
+          <a :href="item.href" class="block py-5 text-[28px] font-semibold tracking-[-0.03em]" @click="close()">
             {{ item.label }}
           </a>
         </li>
       </ul>
       <a
         :href="links.repository"
-        class="mt-6 inline-flex items-center gap-2 rounded-md bg-ink px-5 py-3 text-[15px] font-medium text-paper"
+        class="mt-8 inline-flex h-12 items-center gap-2.5 rounded-full bg-fg px-6 text-[15px] font-semibold text-night"
         @click="close()"
       >
         Open the repository on GitHub
+        <ArrowIcon class="size-3.5" />
       </a>
     </div>
   </header>

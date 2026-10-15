@@ -1,35 +1,17 @@
 @import 'tailwindcss';
 
 /*
- * Revision 2 type system. Latin-only variable files, bundled locally.
- * Fraunces (soft axis) is the display voice; Inter carries reading text;
- * JetBrains Mono appears only inside the product illustration.
+ * Revision 9: a dark studio identity. Inter with optical sizing carries every
+ * headline and reading line (its Display cut appears automatically at large sizes);
+ * JetBrains Mono labels sections, code and the product recreation.
+ * Both are Latin-only variable files bundled locally.
  */
-@font-face {
-  font-family: 'Fraunces Variable';
-  font-style: normal;
-  font-display: swap;
-  font-weight: 100 900;
-  src: url('../node_modules/@fontsource-variable/fraunces/files/fraunces-latin-soft-normal.woff2')
-    format('woff2-variations');
-}
-
-@font-face {
-  font-family: 'Fraunces Variable';
-  font-style: italic;
-  font-display: swap;
-  font-weight: 100 900;
-  src: url('../node_modules/@fontsource-variable/fraunces/files/fraunces-latin-soft-italic.woff2')
-    format('woff2-variations');
-}
-
 @font-face {
   font-family: 'Inter Variable';
   font-style: normal;
   font-display: swap;
   font-weight: 100 900;
-  src: url('../node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2')
-    format('woff2-variations');
+  src: url('../node_modules/@fontsource-variable/inter/files/inter-latin-opsz-normal.woff2') format('woff2-variations');
 }
 
 @font-face {
@@ -42,73 +24,68 @@
 }
 
 @theme {
-  --font-display: 'Fraunces Variable', ui-serif, Georgia, serif;
   --font-sans: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-mono: 'JetBrains Mono Variable', ui-monospace, 'SFMono-Regular', Menlo, monospace;
 
-  /* Page: neutral studio paper and graphite ink (revision 3: purple tint removed). */
-  --color-paper: #f4f3ef;
-  --color-paper-deep: #e9e7e1;
-  --color-ink: #15161a;
-  --color-ink-soft: #26282e;
-  --color-muted: #5b5e66;
-  --color-rule: rgb(21 22 26 / 0.14);
+  /* Page. Text tokens hold at least 4.5:1 on every page surface. */
+  --color-night: #060709;
+  --color-night-2: #0a0b0e;
+  --color-panel: #0f1014;
+  --color-panel-2: #15161b;
+  --color-line: rgb(255 255 255 / 0.08);
+  --color-line-strong: rgb(255 255 255 / 0.15);
+  --color-fg: #f3f3f5;
+  --color-fg-2: #c3c6cf;
+  --color-muted: #9097a4;
 
-  /* Brand violet is reserved for the wisp logo mark (header, footer, favicon). */
-  --color-wisp: #4b2bc7;
-  /* One page accent: the editor's periwinkle hue (235deg), darkened for 5.8:1 on paper. */
-  --color-accent: #4650c8;
-  --color-accent-soft: #a9b0ff; /* on charcoal; equals editor --color-accent-strong */
+  /* Brand: the wisp violet, the editor's periwinkle accent and the lantern's warm light. */
+  --color-wisp: #5b3ef0;
+  --color-accent: #8c95ff;
+  --color-accent-strong: #a9b0ff;
+  --color-lamp: #ffbe73;
 
-  /* Editor illustration: mirrors references/previous-editor-tokens.css (cool graphite). */
-  --color-ed-bg: #0b0c0f; /* --color-bg-app */
-  --color-ed-panel: #131418; /* --color-bg-panel */
-  --color-ed-raised: #1a1c21; /* --color-bg-raised */
-  --color-ed-viewport: #0e0f12; /* --color-bg-viewport */
-  --color-ed-selected: #262b52; /* --color-bg-selected */
-  --color-ed-line: #22252b; /* --color-border */
-  --color-ed-control: #676e7b; /* --color-border-control */
-  --color-ed-text: #ececf1; /* --color-text */
-  --color-ed-muted: #a9aeb9; /* --color-text-muted */
-  --color-ed-accent: #8c95ff; /* --color-accent */
-  --color-ed-agent: #d892f5; /* --color-origin-agent */
-  --color-ed-green: #5dd39a; /* --color-success */
-  --color-ed-amber: #f0bd55; /* --color-warning */
-  --color-ed-red: #ff7a70; /* --color-danger */
+  /* Editor recreation: mirrors editor/ui/src/styles/tokens.css. */
+  --color-ed-app: #0b0c0f;
+  --color-ed-panel: #131418;
+  --color-ed-side: #17181c;
+  --color-ed-raised: #1e2026;
+  --color-ed-hover: #24272e;
+  --color-ed-selected: #262b52;
+  --color-ed-accent: #8c95ff;
+  --color-ed-well: #0e0f12;
+  --color-ed-border: #25282f;
+  --color-ed-border-strong: #2e323a;
+  --color-ed-text: #ececf1;
+  --color-ed-soft: #d3d6dd;
+  --color-ed-muted: #a9aeb9;
+  --color-ed-subtle: #959cab;
+  --color-ed-danger: #ff7a70;
+  --color-ed-warning: #f0bd55;
+  --color-ed-success: #5dd39a;
+  --color-ed-user: #7ab8ff;
+  --color-ed-agent: #d892f5;
+  --color-ed-import: #f0bd55;
+  --color-ed-x: #ff8a7f;
+  --color-ed-y: #7fe0a3;
+  --color-ed-z: #85b4ff;
+  --color-ed-light: #f3cf7a;
+  --color-ed-camera: #8fcdf5;
+  --color-ed-mesh: #b9c0cd;
+  --color-ed-script: #f2a983;
 
-  --animate-blink: blink 6s ease-in-out infinite;
-  --animate-march: march 1.2s linear infinite;
-  --animate-rise: rise 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) both;
-  --animate-flow: flow 5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 
-  @keyframes blink {
-    0%,
-    93%,
-    100% {
-      transform: scaleY(1);
-    }
-    96% {
-      transform: scaleY(0.12);
-    }
-  }
-  @keyframes march {
-    to {
-      stroke-dashoffset: -20;
-    }
-  }
-  @keyframes flow {
-    to {
-      left: 100%;
-    }
-  }
-  @keyframes rise {
-    from {
+  --animate-caret: caret 1.1s steps(1) infinite;
+  --animate-pulse-soft: pulse-soft 2.4s ease-in-out infinite;
+
+  @keyframes caret {
+    50% {
       opacity: 0;
-      transform: translateY(6px);
     }
-    to {
-      opacity: 1;
-      transform: none;
+  }
+  @keyframes pulse-soft {
+    50% {
+      opacity: 0.45;
     }
   }
 }
@@ -117,7 +94,8 @@
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
-    color-scheme: light;
+    color-scheme: dark;
+    background: var(--color-night);
   }
   @media (prefers-reduced-motion: reduce) {
     html {
@@ -132,16 +110,17 @@
     }
   }
   body {
-    @apply bg-paper font-sans text-ink antialiased;
-    font-feature-settings: 'cv11', 'ss01';
+    @apply bg-night font-sans text-fg antialiased;
+    font-optical-sizing: auto;
+    font-feature-settings: 'cv11', 'ss01', 'ss03';
     text-rendering: optimizeLegibility;
   }
   ::selection {
     background: var(--color-accent);
-    color: var(--color-paper);
+    color: var(--color-night);
   }
   :focus-visible {
-    outline: 2px solid var(--color-accent);
+    outline: 2px solid var(--color-accent-strong);
     outline-offset: 3px;
     border-radius: 4px;
   }
@@ -150,11 +129,19 @@
   }
 }
 
-/* Display setting for Fraunces: soft terminals echo the wisp's curves. */
-@utility font-display-soft {
-  font-family: var(--font-display);
-  font-variation-settings: 'SOFT' 100;
+/* Large display setting: tight tracking for Inter Display. */
+@utility display {
   font-optical-sizing: auto;
+  letter-spacing: -0.045em;
+  font-weight: 600;
+}
+
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 @utility text-balance-safe {

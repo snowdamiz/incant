@@ -1,4 +1,11 @@
-# Native Metal creation observation: CPU qualification
+# Native Metal creation observation
+
+The later [combined shipping replay](native-compilation-live.md) now completes
+the full Core route on this Mac. It records 95 successful creation calls, with
+all 91 timed rows in catalog preparation and none in gameplay. Display timing
+and shader-stall gates remain open. The CPU milestones and pending statements
+below retain their original stage boundaries; the linked live evidence supersedes
+their hardware-pending status.
 
 This private, default-off source milestone adds `diagnostic-compilation` only to
 the pinned Metal HAL. Its source003 CPU qualification passed; no native creation

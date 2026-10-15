@@ -55,7 +55,14 @@ fn nested_navigation_corresponds_to_the_same_tick_and_retains_failures() {
         drop(Span::start(Region::PathQuery)); // ordinary early error/absent path
     });
     assert!(report.complete && !report.eligible_for_performance_gate);
-    assert_eq!(report.schema, 2);
+    assert_eq!(
+        report.schema,
+        if cfg!(feature = "diagnostic-script-budget") {
+            4
+        } else {
+            2
+        }
+    );
     assert_eq!(report.navigation_regions, REGIONS);
     let row = &report.rows[0];
     assert_eq!(row.navigation.calls, [2, 1, 2]);

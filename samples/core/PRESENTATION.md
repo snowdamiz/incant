@@ -106,6 +106,11 @@ adds no per-frame dilation work. Status top-left, progress top-right.
 Fonts chain Inter, Noto Sans Arabic and a Noto Sans SC subset (`art/fonts`, OFL,
 with recipe and provenance).
 
+The Arabic health message includes U+200F right-to-left marks around its plural
+result. Its dot symbols have no strong reading direction by themselves; keep
+these marks so filled health starts at the right and damage empties the left.
+English and Chinese keep their left-to-right health order.
+
 When a run ends, the title and a restart prompt appear together, centred in the
 upper third of the screen above the surveyor: "Samples secured" or "Surveyor
 down", then "Press R or Start to play again". R and gamepad Start only restart
