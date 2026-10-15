@@ -48,6 +48,7 @@ class FreshShippingLedgerTests(unittest.TestCase):
         self.session.builds = []
         self.session.inputs = []
         self.session.players = []
+        self.session.retired_player_units = []
         self.session.deleted = False
         self.session.check_frozen = Mock()
         self.artifact = {'reason': 'compiler-artifact', 'package_id': 'path+file:///repo/runtime#0.0.1',
@@ -94,6 +95,77 @@ class FreshShippingLedgerTests(unittest.TestCase):
         _, binary, _, bin_command = self.player_units()
         with self.assertRaisesRegex(ValueError, 'Missing or ambiguous'):
             self.record(artifact=binary, command=bin_command + '\n' + bin_command)
+
+    def packaged_player_units(self):
+        lib, binary, lib_command, bin_command = self.player_units()
+        identity = 'path+' + (self.root / 'crates/incant_game_player').as_uri() + '#0.0.1'
+        lib['package_id'] = binary['package_id'] = identity
+        self.session.record(json.dumps(lib) + '\n' + json.dumps(binary),
+                            lib_command + '\n' + bin_command)
+        self.session.builds.append({'completed': True})
+        copy = self.root / 'packaged-player'
+        copy.write_bytes(b'packaged and stripped player')
+        self.session.packaged_player(copy)
+        return lib, binary, lib_command, bin_command
+
+    def test_next_locale_retires_only_player_and_keeps_exact_shared_origin(self):
+        original = self.record()
+        lib, binary, lib_command, bin_command = self.packaged_player_units()
+        self.session.begin_next_player()
+        self.assertEqual(len(self.session.retired_player_units), 2)
+        retired = copy.deepcopy(self.session.retired_player_units)
+        self.assertEqual(len(self.session.units), 1)
+        self.assertEqual(self.record(fresh=True, command=''), original)
+        self.assertEqual(self.session.last_units[0]['fresh_build'], 0)
+        Path(lib['filenames'][0]).write_bytes(b'next locale library')
+        Path(binary['executable']).write_bytes(b'next locale executable')
+        self.session.record(json.dumps(lib) + '\n' + json.dumps(binary),
+                            lib_command + '\n' + bin_command)
+        self.assertEqual({row['fresh_build'] for row in self.session.last_units}, {1})
+        self.assertEqual(len(self.session.units), 3)
+        self.assertEqual(self.session.retired_player_units, retired)
+        old_binary = next(row for row in retired if row['identity']['target']['kind'] == ['bin'])
+        self.assertNotEqual(old_binary['hashes'][binary['executable']], sha(Path(binary['executable'])))
+
+    def test_next_locale_cannot_reuse_retired_player_library(self):
+        lib, _, _, _ = self.packaged_player_units()
+        self.session.begin_next_player()
+        with self.assertRaisesRegex(ValueError, 'Unproven'):
+            self.record(fresh=True, command='', artifact=lib)
+
+    def test_next_locale_does_not_relax_shared_rebuild_or_mutation_refusals(self):
+        self.record()
+        self.packaged_player_units()
+        self.session.begin_next_player()
+        with self.assertRaisesRegex(ValueError, 'unexpectedly rebuilt'):
+            self.record()
+        self.library.write_bytes(b'changed shared artifact')
+        with self.assertRaisesRegex(ValueError, 'artifact changed'):
+            self.record(fresh=True, command='')
+
+    def test_next_locale_requires_current_package_and_preserves_retired_history(self):
+        _, binary, _, _ = self.packaged_player_units()
+        before = copy.deepcopy(self.session.units)
+        self.session.players[0][0].write_bytes(b'changed package')
+        with self.assertRaisesRegex(ValueError, 'Packaged player changed'):
+            self.session.begin_next_player()
+        self.assertEqual(self.session.units, before)
+        self.assertEqual(self.session.retired_player_units, [])
+
+    def test_next_locale_refuses_unregistered_latest_build(self):
+        self.packaged_player_units()
+        self.session.builds.append({'unpackaged': True})
+        with self.assertRaisesRegex(ValueError, 'Package a player'):
+            self.session.begin_next_player()
+
+    def test_next_locale_refuses_nonengine_player_identity(self):
+        self.packaged_player_units()
+        for row in self.session.units.values():
+            row['identity']['package_id'] = 'registry+untrusted/player#0.0.1'
+        before = copy.deepcopy(self.session.units)
+        with self.assertRaisesRegex(ValueError, 'exact engine player'):
+            self.session.begin_next_player()
+        self.assertEqual(self.session.units, before)
 
     def test_exact_reuse_retains_original_fresh_command_and_identity(self):
         first = self.record()
@@ -214,6 +286,42 @@ class FreshShippingLedgerTests(unittest.TestCase):
             self.assertEqual(call.kwargs['env'], original[0])
         self.assertEqual([b['diagnostic_environment'] for b in self.session.builds],
                          [{'CC_ENABLE_DEBUG_OUTPUT': '1'}] * 2)
+
+    def test_explicit_managed_executor_keeps_raw_and_audited_commands_separate(self):
+        command = ['cargo', '--profile', 'shipping', '--target', self.target,
+                   '--target-dir', str(self.storage), '--config',
+                   'profile.shipping.split-debuginfo="packed"', '--locked',
+                   '--message-format=json', '-vv']
+        executor = Mock(return_value=subprocess.CompletedProcess(command, 0, '{"raw":true}', 'raw Cargo command log'))
+        self.session.last_units = []
+        with patch.object(self.session, 'record', return_value=['fresh-origin command']) as record, \
+                patch('shipping_session.subprocess.run') as default:
+            result, commands = self.session.build(command, cwd=self.root, env={}, execute=executor)
+        default.assert_not_called()
+        executor.assert_called_once()
+        record.assert_called_once_with('{"raw":true}', 'raw Cargo command log')
+        self.assertEqual(result.stderr, 'raw Cargo command log')
+        self.assertEqual(commands, 'fresh-origin command')
+        self.assertEqual(self.storage.parent.joinpath('build-0.stderr.log').read_text(), 'raw Cargo command log')
+
+    def test_project_identity_change_during_build_cannot_publish_a_ledger_entry(self):
+        command = ['cargo', '--profile', 'shipping', '--target', self.target,
+                   '--target-dir', str(self.storage), '--config',
+                   'profile.shipping.split-debuginfo="packed"', '--locked',
+                   '--message-format=json', '-vv']
+        project = self.root / 'project.incant'
+        project.write_bytes(b'original scene-bound project')
+
+        def execute(*args, **kwargs):
+            project.write_bytes(b'changed during build')
+            return subprocess.CompletedProcess(command, 0, '{}', '')
+
+        with patch.object(self.session, 'record') as record:
+            with self.assertRaisesRegex(ValueError, 'Compile input changed'):
+                self.session.build(command, cwd=self.root,
+                                   env={'INCANT_NATIVE_PROJECT': str(project)}, execute=execute)
+            record.assert_not_called()
+        self.assertEqual(self.session.builds, [])
 
     def test_static_bundle_must_be_disposable_and_without_symlinks(self):
         bundle = self.root / 'authoring/bundle'
