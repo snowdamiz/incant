@@ -74,5 +74,44 @@ Capture, failed/cancelled/snapshot-rejected replacements, project binding, Stop
 and feature-off refusal. Transport fixtures test unlocked reads and post-read
 project/cancellation fences; they are not measured game evidence.
 
-At this source milestone native compilation and execution are pending review.
-No performance, native-window, GPU, visual or shipping acceptance is claimed.
+## Qualified producing source
+
+CPU generation 001 qualified source `a91cc387fa11fc5f3d60d3287031245713ee6b48`
+against base `69e797ab2ccfaeea79eb207a2a09087d7dceebe8`. All 11 planned
+commands plus the compiler identity command returned success and their managed
+children were reaped: 21 profile-enabled, 2 profile-disabled, 69 agent-library,
+11 native-host-enabled and 9 native-host-disabled harness tests (112 total), plus
+the allocator executable. Strict all-target lint passed both feature modes;
+the editor host compiled with the opt-in feature. Formatting and conventions
+also passed. Fourteen executed test executables are retained externally.
+
+The actual native-host controls prove real measured Frame/ScriptTick/source/audio
+observations, process Capture coexistence and retained previous data after rejected
+replacement. Cargo's recorded target artifacts also confirm the profile feature
+is present only in the enabled native/runtime/script/game-runtime units. These
+are CPU behavior controls with no latency threshold; they are not a benchmark.
+
+The bounded run used Rust 1.99 arm64, CI profile, locked/offline dependencies,
+two build jobs and two Rayon threads. It finished in 296.05 seconds, with
+745,986,199 bytes of sampled target growth and a minimum sampled 87,392,329,728
+free bytes. Those are qualification supervision observations, not engine timings.
+No failed native qualification attempt or retry occurred.
+
+The [portable packet](evidence/agent-profiler/manifest.json) preserves 45 producing
+source inputs, exact source delta, plan/grant/supervisor, raw Cargo/test logs,
+compiler identity and copied-binary hashes. Replay with
+`python3 docs/spikes/evidence/agent-profiler/verify.py`; optional `--originals`,
+`--binaries` and `--git-source` recheck locally retained originals, executable
+bytes and historical producer Git objects. Binaries are not embedded. Portable
+replay verifies the recorded proof; it does not rerun the native controls.
+
+## Remaining availability boundary
+
+The normal editor artifact still leaves `agent-profiler` disabled. This delivery
+therefore requires an explicitly enabled build and does not complete normal-user
+profiler availability or the entire Phase 3 profiling capability. A later editor-
+only feature selection could make `play_run(profile:true)` available without user
+rebuilding, but requires matched inactive-instrumentation overhead evidence and
+editor-host qualification first. Public game-export/shipping features must remain
+unchanged. No performance, native-window, GPU, visual or shipping acceptance is
+claimed here.
