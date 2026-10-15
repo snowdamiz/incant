@@ -49,12 +49,13 @@ verdict. The earlier timeout and 1,444-step failure remain recorded; shader-stal
 qualification and full rendered-game performance remain open.
 [Fresh build and complete replay](docs/spikes/native-presentation-audio.md).
 
-The separate default-off compilation observer now records native library and
-pipeline creation with immutable session, surface, host-step and phase context.
-Bounded CPU qualification passes for the collector, renderer binding and native
-host, with strict lint in enabled and ordinary modes. Its combined shipping build
-and live replay are still pending; these controls do not establish shader-stall
-or displayed-frame performance. [Implementation and retained failures](docs/spikes/native-compilation-observer.md).
+The separate default-off compilation observer now completes a fresh shipping
+build and full native Core replay. All 95 construction calls succeed: four
+untimed prefix calls and 91 catalog rows, with none during gameplay. Exact
+gameplay parity and complete call accounting pass. Three zero presentation
+timestamps and uneven observed display intervals remain explicit; deferred
+driver work and complete frame pacing still prevent a shader-stall or performance
+verdict. [Actual replay and limits](docs/spikes/native-compilation-live.md).
 
 ## Device audio overrun handling — merged main303
 

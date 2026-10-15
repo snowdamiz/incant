@@ -1,0 +1,186 @@
+{
+  "format": "incant-native-compilation-live-evidence-v1",
+  "source": "fd72fa344b8093a02d1b40aafaba53fd390120fc",
+  "source_tree": "9b6ee583cb87cea192404bab21f1c6c6e1a4e4ec",
+  "player_sha256": "b5f92b7613e5081eab90cff84c549318dffb5b41e402a09b4c1599b329974a2f",
+  "archive_sha256": "87c62590e09a88d556b8669c38f1c82703dab7605b79acda48e86f5d0d3582bf",
+  "records": [
+    {
+      "name": "build-final.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-compilation-player-001/build-final.json",
+      "bytes": 7248,
+      "sha256": "43b1edbb7356d6d90c20df9412fba74e5716987ac829ccbb66676aa7950c4267"
+    },
+    {
+      "name": "private-build-001/diagnostic-build.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-compilation-player-001/private-build-001/diagnostic-build.json",
+      "bytes": 36011,
+      "sha256": "63166f4be8407d0d6c70b535206e44a3a4a19a344a80076ef32d250c9fc6268f"
+    },
+    {
+      "name": "private-build-001/attempt.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-compilation-player-001/private-build-001/attempt.json",
+      "bytes": 765,
+      "sha256": "944a4f6cbbbc7e8ab9cb1645ccab04ae5a6f0f5807609958676177326d5b827e"
+    },
+    {
+      "name": "private-build-001/children.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-compilation-player-001/private-build-001/children.json",
+      "bytes": 12076,
+      "sha256": "0492da2a959b6b24265bbd2115c8495a2f392c57be078d45e50ae730b7707997"
+    },
+    {
+      "name": "private-build-001/project-build.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-compilation-player-001/private-build-001/project-build.json",
+      "bytes": 5292,
+      "sha256": "1f8acbc72cca5ac9b6064e45d84cec3a6ca893fd30f4f8e085a1a591278969e8"
+    },
+    {
+      "name": "private-build-001/normal-dependencies.txt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-compilation-player-001/private-build-001/normal-dependencies.txt",
+      "bytes": 54028,
+      "sha256": "32fd5233bd39c7d6a51e033e501a0a839ad129a02634890c44f5ff0d5da88c50"
+    },
+    {
+      "name": "private-build-001/diagnostic-dependencies.txt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-compilation-player-001/private-build-001/diagnostic-dependencies.txt",
+      "bytes": 54028,
+      "sha256": "32fd5233bd39c7d6a51e033e501a0a839ad129a02634890c44f5ff0d5da88c50"
+    },
+    {
+      "name": "live-packet-001/source-manifest.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-compilation-player-001/live-packet-001/source-manifest.json",
+      "bytes": 571104,
+      "sha256": "d62ed36a52c0f3efc117c3c89968619b5f0bfd650891a0e92b19d2d2997d4d61"
+    },
+    {
+      "name": "live-packet-001/build-plan.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-compilation-player-001/live-packet-001/build-plan.json",
+      "bytes": 12525,
+      "sha256": "89d1b752139b603489c1ec148777eaa0e9db39440a2f81e0d7809fe385512eb9"
+    },
+    {
+      "name": "live-packet-001/composition-review.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-compilation-player-001/live-packet-001/composition-review.json",
+      "bytes": 1732,
+      "sha256": "d27713bccda1f2657fba6f0374d7fafa71fc4c219b002965130dc85d86c32649"
+    },
+    {
+      "name": "live-controller-001/plan.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-compilation-player-001/live-controller-001/plan.json",
+      "bytes": 32243,
+      "sha256": "05923c639da96d76ad9b1b76b0e840a75242c365f6f8169df3f71918d3b4861d"
+    },
+    {
+      "name": "live-controller-001/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-compilation-player-001/live-controller-001/freeze.json",
+      "bytes": 4772,
+      "sha256": "17085265476d0b9c8939d8546db0eb4646f094170e29a49caca5fe961f038464"
+    },
+    {
+      "name": "live-controller-001/data-tests.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-compilation-player-001/live-controller-001/data-tests.json",
+      "bytes": 2286,
+      "sha256": "7b3eec6fec28cedc81ec8c85c0c68d07bcfd72dbd6a1801b1fca82ccd4799eb8"
+    },
+    {
+      "name": "live-controller-001/data-tests.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-compilation-player-001/live-controller-001/data-tests.stderr",
+      "bytes": 3316,
+      "sha256": "ec614d3618e2a114d5c2ea5daa15dd18219d18d2d4bc5f74a04b318f6883bbb7"
+    },
+    {
+      "name": "live-controller-001/root-preflight-review.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-compilation-player-001/live-controller-001/root-preflight-review.json",
+      "bytes": 560,
+      "sha256": "6fd0978b1fa3d49a9c5b2597da9831accd023762e22e8b3d6981608878a27351"
+    },
+    {
+      "name": "live-controller-001/root-window-grant.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-compilation-player-001/live-controller-001/root-window-grant.json",
+      "bytes": 504,
+      "sha256": "a4f623c94c36818a1d4941024895dab8fd2a2a8d6fa332965aa511ee006b321f"
+    },
+    {
+      "name": "window-001/compilations.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-compilation-player-001/window-001/compilations.json",
+      "bytes": 25643,
+      "sha256": "cdf753f98433282b2f648164b3646bbc9d0d031b0a15ed0dddce7d5d1ddcbfb8"
+    },
+    {
+      "name": "window-001/coverage.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-compilation-player-001/window-001/coverage.json",
+      "bytes": 510044,
+      "sha256": "f012f54bdf3d724cf4dfd374d1a02c06277e98bd87f9289fbba904449eb49859"
+    },
+    {
+      "name": "window-001/creation-coverage.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-compilation-player-001/window-001/creation-coverage.json",
+      "bytes": 3931,
+      "sha256": "0c5a30185459c925ed90a039cc406c96d11da9dacf9d7d7e469ad3d5a98a613f"
+    },
+    {
+      "name": "window-001/player-pid.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-compilation-player-001/window-001/player-pid.json",
+      "bytes": 230,
+      "sha256": "6b5ed9f4e39b2b8e772ee12611ed3025d8a112802100e86bd3ef0e8656546c93"
+    },
+    {
+      "name": "window-001/presentations.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-compilation-player-001/window-001/presentations.json",
+      "bytes": 610460,
+      "sha256": "4b5daae84c4bb8a29b49179ae23976791ddaf2bffac7b8e29b89caf99b8e9c01"
+    },
+    {
+      "name": "window-001/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-compilation-player-001/window-001/result.json",
+      "bytes": 2029,
+      "sha256": "1de1188b66a4254107f2aca1773396fdf290c7a264680207d683d02ab847cc15"
+    },
+    {
+      "name": "window-001/root-review.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-compilation-player-001/window-001/root-review.json",
+      "bytes": 1165,
+      "sha256": "0303584ab3f3a2ef238b65b03dc1a6cca19949ff117ab0d459c764c96d190272"
+    },
+    {
+      "name": "window-001/stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-compilation-player-001/window-001/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "window-001/stdout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-compilation-player-001/window-001/stdout.json",
+      "bytes": 576644,
+      "sha256": "1d10ee8d516947018e5e128e300761dc370b36d3742e188fc5a32cc371984ca9"
+    },
+    {
+      "name": "baseline.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/functional-win/stdout.json",
+      "bytes": 8455,
+      "sha256": "37ccafc52a22a341c7776961e5171f48c988638224445395fe94db55da2f4279"
+    },
+    {
+      "name": "independent-review.json",
+      "original": "/Users/andreyyurlov/.codex/incant-reviews/combined-native-observer-window001-independent-20261015.json",
+      "bytes": 6728,
+      "sha256": "f080ab035efabaaa562dee38d6e408fa3fff371f23d1e6267133e45aa6ae4dea"
+    }
+  ],
+  "scope": "Complete actual 2156-step native creation observation with explicit prefix, presentation ambiguities and observer overhead. No display, shader-stall, audible-quality or phase gate.",
+  "analysis_sources": [
+    {
+      "name": "analyze.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-compilation-player-001/live-controller-001/analyze.py",
+      "bytes": 7662,
+      "sha256": "e46166eb9158b9f8e929f0a39207490c19916dce5f63534cf5a899d753a1f1c5"
+    },
+    {
+      "name": "compilation_analysis.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-compilation-player-001/live-controller-001/compilation_analysis.py",
+      "bytes": 10116,
+      "sha256": "5a9cc0db1475d79c996ed848dd19d2b665cf31bf26b1d37b850a2e8f52abc68a"
+    }
+  ]
+}
