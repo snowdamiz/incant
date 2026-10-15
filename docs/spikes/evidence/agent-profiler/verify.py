@@ -142,7 +142,73 @@ def main():
         for row in manifest['copied_binaries']:
             path = Path(row['path'])
             assert path.stat().st_size == row['bytes'] and file_sha(path) == row['sha256']
-    print(json.dumps(dict(records=len(records), source_inputs=len(freeze['rows']), commands=len(commands), harness_tests=sum(counts.values()), copied_binaries=len(copies), external_binaries_verified=args.binaries, historical_git_source_verified=args.git_source, normal_editor_default_enabled=False, native_window_or_gpu_execution=False, performance_gate=False)))
+    # The original producer remains separately replayed above. The joined source
+    # adds main playbooks/renderer ancestry, with no collector algorithm change.
+    prefix = 'integration-main333-001/'
+    integration = manifest['integration']
+    joined = parse(records[prefix + 'source-001/freeze.json'])
+    composition = parse(records[prefix + 'composition.json'])
+    assert joined['source'] == integration['source'] == composition['source']
+    assert joined['base'] == integration['main'] == composition['main']
+    assert joined['producer'] == manifest['source']
+    assert re.fullmatch('[0-9a-f]{40}', joined['source'])
+    assert len(joined['rows']) == 68 and len({r['path'] for r in joined['rows']}) == 68
+    for row in joined['rows']:
+        path = PurePosixPath(row['path'])
+        assert path.parts and not path.is_absolute() and '..' not in path.parts
+        data = records[prefix + 'source-001/inputs/' + row['path']]
+        assert sha(data) == row['sha256'] and len(data) == row['size']
+        if args.git_source:
+            actual = subprocess.check_output(['git', 'show', joined['source'] + ':' + row['path']], cwd=root, timeout=15)
+            assert sha(actual) == row['sha256'], row['path']
+    assert len(composition['unchanged_qualified_implementation_paths']) == 19
+    for path in composition['unchanged_qualified_implementation_paths']:
+        assert records[prefix + 'source-001/inputs/' + path] == records['source-001/inputs/' + path]
+    lib = records[prefix + 'source-001/inputs/crates/incant_agent/src/lib.rs'].decode()
+    for addition in ['mod skills;\n', '    tools.extend(skills::tools());\n', '        "skill_list" | "skill_read" => skills::dispatch(name, args),\n']:
+        assert lib.count(addition) == 1
+        lib = lib.replace(addition, '')
+    assert lib.encode() == records['source-001/inputs/crates/incant_agent/src/lib.rs']
+    ip = parse(records[prefix + 'cpu-plan.json'])
+    ig = parse(records[prefix + 'root-cpu-grant.json'])
+    ir = parse(records[prefix + 'cpu-001/result.json'])
+    assert ip['source'] == ig['source'] == ir['source'] == joined['source']
+    assert ip['freeze_sha256'] == sha(records[prefix + 'source-001/freeze.json'])
+    assert ig['accepted_for_cpu']
+    assert ir['plan_sha256'] == ig['plan_sha256'] == sha(records[prefix + 'cpu-plan.json'])
+    assert ir['runner_sha256'] == ig['runner_sha256'] == sha(records[prefix + 'qualify.py'])
+    assert ir['native_process_sha256'] == sha(records[prefix + 'native_process.py'])
+    assert ip['jobs'] == ip['rayon_threads'] == 2 and ip['stop_first_failure'] and not ip['gpu_or_window']
+    assert ir['outcome'] == 'success' and ir['error'] is None
+    assert not any(ir[k] for k in ('managed_call_active', 'gpu_execution', 'window_execution', 'listener_execution', 'native_player_execution'))
+    assert ir['elapsed_seconds'] <= ip['overall_seconds']
+    assert ir['minimum_sampled_free_bytes'] >= ip['minimum_free_bytes']
+    assert ir['target_initial_bytes'] == ip['cumulative_target_initial_bytes']
+    assert ir['target_last_sampled_bytes'] - ir['target_initial_bytes'] <= ip['maximum_target_growth_bytes']
+    assert len(ir['commands']) == len(ip['steps']) + 1 == 10
+    icounts = {}
+    icopies = []
+    for command in ir['commands']:
+        assert command['exit_code'] == 0 and command['managed_returned_after_cleanup'] and 'error' not in command
+        for stream in ('stdout', 'stderr'):
+            data = records[prefix + f"cpu-001/{command['name']}.{stream}"]
+            assert sha(data) == command[stream + '_sha256'] and len(data) <= ip['maximum_stream_bytes']
+        icopies.extend(command.get('artifacts', []))
+    for step, command in zip(ip['steps'], ir['commands'][1:]):
+        assert step['name'] == command['name'] and step['argv'] == command['argv']
+        if step.get('tests'):
+            text = records[prefix + f"cpu-001/{step['name']}.stdout"].decode()
+            summaries = re.findall(r'test result: (ok|FAILED)\. (\d+) passed; (\d+) failed; (\d+) ignored', text)
+            assert summaries and all(s[0] == 'ok' and s[2:] == ('0', '0') for s in summaries)
+            icounts[step['name']] = sum(int(s[1]) for s in summaries)
+    assert icounts == {'joined-agent-tests': 120, 'native-profile-on': 11, 'native-profile-off': 9}
+    assert len(icopies) == len(integration['copied_binaries']) == 17
+    assert [(r['path'], r['sha256']) for r in icopies] == [(r['path'], r['sha256']) for r in integration['copied_binaries']]
+    if args.binaries:
+        for row in integration['copied_binaries']:
+            path = Path(row['path'])
+            assert path.stat().st_size == row['bytes'] and file_sha(path) == row['sha256']
+    print(json.dumps(dict(records=len(records), source_inputs=len(freeze['rows']) + len(joined['rows']), producer_commands=len(commands), producer_harness_tests=sum(counts.values()), integration_commands=len(ir['commands']), integration_harness_tests=sum(icounts.values()), copied_binaries=len(copies) + len(icopies), external_binaries_verified=args.binaries, historical_git_source_verified=args.git_source, normal_editor_default_enabled=False, native_window_or_gpu_execution=False, performance_gate=False)))
 
 
 if __name__ == '__main__':

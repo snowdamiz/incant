@@ -105,6 +105,29 @@ compiler identity and copied-binary hashes. Replay with
 bytes and historical producer Git objects. Binaries are not embedded. Portable
 replay verifies the recorded proof; it does not rerun the native controls.
 
+## Main-333 composition
+
+A separate normal merge preserved the producer branch and joined exact main
+`50e168940769ca69ddc11e18e6503c96854dfece`. Qualified composition
+`a046dbaa5bc9b6e04a29b5f21385670bfcb4ee98` retains all 19 unaffected
+implementation paths byte-for-byte. The only Rust overlap is the additive three-
+line skill module/catalog/dispatch join in `incant_agent::lib`; removing those
+lines reproduces the qualified producer bytes. One bundled profile-optimize
+workflow step now explains the advertised CPU tool and its missing-data limits.
+
+The joined CPU run passed 120 agent/playbook tests, 11 feature-enabled native-host
+tests and 9 feature-disabled native-host tests, both strict lint modes, actual
+editor feature-enabled compilation, formatting and conventions. These ten
+managed commands include the compiler identity step; all returned successfully
+and their children were reaped. Seventeen additional test executables are retained.
+Unchanged profile-only controls rely on the producing-source run above.
+
+The portable packet now contains both generations: 113 bound source-input rows,
+31 external executable identities and separate raw results. The joined run took
+88.02 seconds with 7,237,603 bytes of sampled target growth; it is CPU correctness
+qualification, not performance evidence. Neither run launched a window, browser,
+GPU workload, screen capture or listener.
+
 ## Remaining availability boundary
 
 The normal editor artifact still leaves `agent-profiler` disabled. This delivery

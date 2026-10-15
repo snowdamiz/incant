@@ -5,10 +5,10 @@
   "base": "69e797ab2ccfaeea79eb207a2a09087d7dceebe8",
   "original_root": "/Users/andreyyurlov/.codex/incant-evidence/agent-profiler-001",
   "archive": {
-    "bytes": 441211,
-    "sha256": "676e21486dde2843ce46fa17224c463b8da4349546bf98f3781af7f5d86afba2",
-    "inflated_bytes": 2951354,
-    "records": 80
+    "bytes": 1472844,
+    "sha256": "85aa1a5299632da38d6b2ff390751cfa63f48c877f5c2a78ef3eaefd5bd505f4",
+    "inflated_bytes": 6729663,
+    "records": 178
   },
   "bindings": {
     "source-001/freeze.json": "458087fee5b8ead100d14bd06484d918bd78d364fa1b56a62a6e5d22a320e4d5",
@@ -18,7 +18,14 @@
     "native_process.py": "58dd2a8231d7f9d1e42070fc85425461e06a43f279fa5e7f8e57b4a40c3a3aa4",
     "root-cpu-grant-001.json": "f0fde1145de0f647a9b66e2cb87522870f57aa930b318177e19212107144d16b",
     "cpu-001/result.json": "c6c3defeaeddd68d85e7076a8546e4b8b2a109aee363aa9a009c6ff14860a7c5",
-    "preflight-controls-001.json": "497d25511c60cdd0a6b6fd2b57ead4db06f724156a245ab57cbc029f4493d205"
+    "preflight-controls-001.json": "497d25511c60cdd0a6b6fd2b57ead4db06f724156a245ab57cbc029f4493d205",
+    "integration-main333-001/source-001/freeze.json": "f5cf1db48b7c0adede9ec688d2e7661096911aafc90f38fa4d34c1f51f2ab467",
+    "integration-main333-001/composition.json": "332f5f2a2a29f07d37178964664a5fad59fe31d4ef88f6b903bac00d7a37aa07",
+    "integration-main333-001/cpu-plan.json": "d9dd42b684c3f1393fdb6d0b7084dfd430514126497bfcaa25385ce121693f14",
+    "integration-main333-001/qualify.py": "24287e90f3e9ee0357576f431d32393d86ec65c379cf7d9855297147065e2045",
+    "integration-main333-001/native_process.py": "58dd2a8231d7f9d1e42070fc85425461e06a43f279fa5e7f8e57b4a40c3a3aa4",
+    "integration-main333-001/root-cpu-grant.json": "03eef5dc74dd2e115f7e34a6dacf814b2c43069f6516e0982c059de392527719",
+    "integration-main333-001/cpu-001/result.json": "843a0a9c510394aa907ff673914dbf93086bdd9a25b03ccbfab719eb5a48003a"
   },
   "copied_binaries": [
     {
@@ -448,5 +455,525 @@
     "112 harness tests plus allocator control; no duration thresholds or shipping performance claims.",
     "Default editor artifact remains feature-off; user availability without a rebuilt host is not established.",
     "Default replay checks retained records/identities; --originals and --binaries require external local artifacts; --git-source requires producer Git object."
-  ]
+  ],
+  "integration": {
+    "source": "a046dbaa5bc9b6e04a29b5f21385670bfcb4ee98",
+    "main": "50e168940769ca69ddc11e18e6503c96854dfece",
+    "copied_binaries": [
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/agent-profiler-001/integration-main333-001/cpu-001/binaries/joined-agent-tests/skills-c3c3ce513550a122",
+        "sha256": "50c78061395ddb1981b23650945b2da1f261cd1172ce45341807046baed92a03",
+        "target": {
+          "kind": [
+            "test"
+          ],
+          "crate_types": [
+            "bin"
+          ],
+          "name": "skills",
+          "src_path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/crates/incant_agent/tests/skills.rs",
+          "edition": "2024",
+          "doc": false,
+          "doctest": false,
+          "test": true
+        },
+        "profile": {
+          "opt_level": "1",
+          "debuginfo": 0,
+          "debug_assertions": false,
+          "overflow_checks": false,
+          "test": true
+        },
+        "features": [
+          "default",
+          "physics-deterministic"
+        ],
+        "bytes": 21413832
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/agent-profiler-001/integration-main333-001/cpu-001/binaries/joined-agent-tests/assets-f5a9808cc9556793",
+        "sha256": "9b69372970d224b6d02e938b843e3d286077d232cc08d270ed2e248dfd8306be",
+        "target": {
+          "kind": [
+            "test"
+          ],
+          "crate_types": [
+            "bin"
+          ],
+          "name": "assets",
+          "src_path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/crates/incant_agent/tests/assets.rs",
+          "edition": "2024",
+          "doc": false,
+          "doctest": false,
+          "test": true
+        },
+        "profile": {
+          "opt_level": "1",
+          "debuginfo": 0,
+          "debug_assertions": false,
+          "overflow_checks": false,
+          "test": true
+        },
+        "features": [
+          "default",
+          "physics-deterministic"
+        ],
+        "bytes": 21937720
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/agent-profiler-001/integration-main333-001/cpu-001/binaries/joined-agent-tests/editor_context-4072dc46ee5f156a",
+        "sha256": "a4ba751a509e50131421c08bf780c5257b9f74a5acf742ae747bc5051408319a",
+        "target": {
+          "kind": [
+            "test"
+          ],
+          "crate_types": [
+            "bin"
+          ],
+          "name": "editor_context",
+          "src_path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/crates/incant_agent/tests/editor_context.rs",
+          "edition": "2024",
+          "doc": false,
+          "doctest": false,
+          "test": true
+        },
+        "profile": {
+          "opt_level": "1",
+          "debuginfo": 0,
+          "debug_assertions": false,
+          "overflow_checks": false,
+          "test": true
+        },
+        "features": [
+          "default",
+          "physics-deterministic"
+        ],
+        "bytes": 21555504
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/agent-profiler-001/integration-main333-001/cpu-001/binaries/joined-agent-tests/session_agent-d650686a54cca3cb",
+        "sha256": "1acb74983815d2ae189f592f5f406a7f23ee3e414d3790d7a915a64e73a60fe4",
+        "target": {
+          "kind": [
+            "test"
+          ],
+          "crate_types": [
+            "bin"
+          ],
+          "name": "session_agent",
+          "src_path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/crates/incant_agent/tests/session_agent.rs",
+          "edition": "2024",
+          "doc": false,
+          "doctest": false,
+          "test": true
+        },
+        "profile": {
+          "opt_level": "1",
+          "debuginfo": 0,
+          "debug_assertions": false,
+          "overflow_checks": false,
+          "test": true
+        },
+        "features": [
+          "default",
+          "physics-deterministic"
+        ],
+        "bytes": 21577024
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/agent-profiler-001/integration-main333-001/cpu-001/binaries/joined-agent-tests/incant_agent-a004c4749b78d79b",
+        "sha256": "f32844c5d00996a0811a6484fc71e4a3f47d1d3d8b4fe0b5f16b49469dbe944e",
+        "target": {
+          "kind": [
+            "lib"
+          ],
+          "crate_types": [
+            "lib"
+          ],
+          "name": "incant_agent",
+          "src_path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/crates/incant_agent/src/lib.rs",
+          "edition": "2024",
+          "doc": true,
+          "doctest": true,
+          "test": true
+        },
+        "profile": {
+          "opt_level": "1",
+          "debuginfo": 0,
+          "debug_assertions": false,
+          "overflow_checks": false,
+          "test": true
+        },
+        "features": [
+          "default",
+          "physics-deterministic"
+        ],
+        "bytes": 28364016
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/agent-profiler-001/integration-main333-001/cpu-001/binaries/joined-agent-tests/camera-96729d0554b0dde5",
+        "sha256": "da1b3b96302e7fbcf3ed0f7d30cfabad2c3b220a36947303378e91fe309857c6",
+        "target": {
+          "kind": [
+            "test"
+          ],
+          "crate_types": [
+            "bin"
+          ],
+          "name": "camera",
+          "src_path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/crates/incant_agent/tests/camera.rs",
+          "edition": "2024",
+          "doc": false,
+          "doctest": false,
+          "test": true
+        },
+        "profile": {
+          "opt_level": "1",
+          "debuginfo": 0,
+          "debug_assertions": false,
+          "overflow_checks": false,
+          "test": true
+        },
+        "features": [
+          "default",
+          "physics-deterministic"
+        ],
+        "bytes": 21006024
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/agent-profiler-001/integration-main333-001/cpu-001/binaries/joined-agent-tests/scripts-f0d559beb6055169",
+        "sha256": "38ef75a62613c0c3554faecf996aecef1b60ad9fd9e3b0ddc93503a24473247d",
+        "target": {
+          "kind": [
+            "test"
+          ],
+          "crate_types": [
+            "bin"
+          ],
+          "name": "scripts",
+          "src_path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/crates/incant_agent/tests/scripts.rs",
+          "edition": "2024",
+          "doc": false,
+          "doctest": false,
+          "test": true
+        },
+        "profile": {
+          "opt_level": "1",
+          "debuginfo": 0,
+          "debug_assertions": false,
+          "overflow_checks": false,
+          "test": true
+        },
+        "features": [
+          "default",
+          "physics-deterministic"
+        ],
+        "bytes": 21975352
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/agent-profiler-001/integration-main333-001/cpu-001/binaries/joined-agent-tests/shared-e20eef07e47ac547",
+        "sha256": "094617d31075d51617082f477a288e4bab89cac88b41e60ba4d0fc79ea571adb",
+        "target": {
+          "kind": [
+            "test"
+          ],
+          "crate_types": [
+            "bin"
+          ],
+          "name": "shared",
+          "src_path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/crates/incant_agent/tests/shared.rs",
+          "edition": "2024",
+          "doc": false,
+          "doctest": false,
+          "test": true
+        },
+        "profile": {
+          "opt_level": "1",
+          "debuginfo": 0,
+          "debug_assertions": false,
+          "overflow_checks": false,
+          "test": true
+        },
+        "features": [
+          "default",
+          "physics-deterministic"
+        ],
+        "bytes": 22131896
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/agent-profiler-001/integration-main333-001/cpu-001/binaries/joined-agent-tests/agent-2703394888609951",
+        "sha256": "c2cbece4aef98bf1c57024043f389d99432e027a2b4f93d0f838e4fc57a7ef7e",
+        "target": {
+          "kind": [
+            "test"
+          ],
+          "crate_types": [
+            "bin"
+          ],
+          "name": "agent",
+          "src_path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/crates/incant_agent/tests/agent.rs",
+          "edition": "2024",
+          "doc": false,
+          "doctest": false,
+          "test": true
+        },
+        "profile": {
+          "opt_level": "1",
+          "debuginfo": 0,
+          "debug_assertions": false,
+          "overflow_checks": false,
+          "test": true
+        },
+        "features": [
+          "default",
+          "physics-deterministic"
+        ],
+        "bytes": 21437512
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/agent-profiler-001/integration-main333-001/cpu-001/binaries/joined-agent-tests/context-29a780aa48f914e8",
+        "sha256": "8bf92f44ea9c7b61eff54ab4137f121bbb0e212605dfb5f33c83be71e30785ce",
+        "target": {
+          "kind": [
+            "test"
+          ],
+          "crate_types": [
+            "bin"
+          ],
+          "name": "context",
+          "src_path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/crates/incant_agent/tests/context.rs",
+          "edition": "2024",
+          "doc": false,
+          "doctest": false,
+          "test": true
+        },
+        "profile": {
+          "opt_level": "1",
+          "debuginfo": 0,
+          "debug_assertions": false,
+          "overflow_checks": false,
+          "test": true
+        },
+        "features": [
+          "default",
+          "physics-deterministic"
+        ],
+        "bytes": 21443624
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/agent-profiler-001/integration-main333-001/cpu-001/binaries/joined-agent-tests/session-93b70e060d26c899",
+        "sha256": "6679ce54e490b9e030cbe71b5a87b5a34818a9f763c62af613252dcb462a1162",
+        "target": {
+          "kind": [
+            "test"
+          ],
+          "crate_types": [
+            "bin"
+          ],
+          "name": "session",
+          "src_path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/crates/incant_agent/tests/session.rs",
+          "edition": "2024",
+          "doc": false,
+          "doctest": false,
+          "test": true
+        },
+        "profile": {
+          "opt_level": "1",
+          "debuginfo": 0,
+          "debug_assertions": false,
+          "overflow_checks": false,
+          "test": true
+        },
+        "features": [
+          "default",
+          "physics-deterministic"
+        ],
+        "bytes": 2533912
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/agent-profiler-001/integration-main333-001/cpu-001/binaries/native-profile-on/fallback-ae78474866e12e0f",
+        "sha256": "dee96d91d9a937301b7b7f92843afeb37c0b9afcdfe7458ca0d2ba6b77b550de",
+        "target": {
+          "kind": [
+            "test"
+          ],
+          "crate_types": [
+            "bin"
+          ],
+          "name": "fallback",
+          "src_path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/crates/incant_agent_native/tests/fallback.rs",
+          "edition": "2024",
+          "doc": false,
+          "doctest": false,
+          "test": true
+        },
+        "profile": {
+          "opt_level": "1",
+          "debuginfo": 0,
+          "debug_assertions": false,
+          "overflow_checks": false,
+          "test": true
+        },
+        "features": [
+          "agent-profiler",
+          "default",
+          "physics-deterministic"
+        ],
+        "bytes": 26545704
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/agent-profiler-001/integration-main333-001/cpu-001/binaries/native-profile-on/profiler-448d75a2f6401ef2",
+        "sha256": "e4cec50733ee62f3ee47adc49c5f495e25abd1b4e5ec5e28cd8b5515139e28b2",
+        "target": {
+          "kind": [
+            "test"
+          ],
+          "crate_types": [
+            "bin"
+          ],
+          "name": "profiler",
+          "src_path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/crates/incant_agent_native/tests/profiler.rs",
+          "edition": "2024",
+          "doc": false,
+          "doctest": false,
+          "test": true
+        },
+        "profile": {
+          "opt_level": "1",
+          "debuginfo": 0,
+          "debug_assertions": false,
+          "overflow_checks": false,
+          "test": true
+        },
+        "features": [
+          "agent-profiler",
+          "default",
+          "physics-deterministic"
+        ],
+        "bytes": 42410696
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/agent-profiler-001/integration-main333-001/cpu-001/binaries/native-profile-on/incant_agent_native-20d31667837d8eb4",
+        "sha256": "e981d41edff0fc00bf8ec0e1cf92e9b016afc3cb240655967b09938d40ba55a2",
+        "target": {
+          "kind": [
+            "lib"
+          ],
+          "crate_types": [
+            "lib"
+          ],
+          "name": "incant_agent_native",
+          "src_path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/crates/incant_agent_native/src/lib.rs",
+          "edition": "2024",
+          "doc": true,
+          "doctest": true,
+          "test": true
+        },
+        "profile": {
+          "opt_level": "1",
+          "debuginfo": 0,
+          "debug_assertions": false,
+          "overflow_checks": false,
+          "test": true
+        },
+        "features": [
+          "agent-profiler",
+          "default",
+          "physics-deterministic"
+        ],
+        "bytes": 43263560
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/agent-profiler-001/integration-main333-001/cpu-001/binaries/native-profile-off/fallback-41c73c8c72af311a",
+        "sha256": "3f66a6e1bf7539285ce8908236673792d1e9e96b2e519b295c2a14e2b21d1596",
+        "target": {
+          "kind": [
+            "test"
+          ],
+          "crate_types": [
+            "bin"
+          ],
+          "name": "fallback",
+          "src_path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/crates/incant_agent_native/tests/fallback.rs",
+          "edition": "2024",
+          "doc": false,
+          "doctest": false,
+          "test": true
+        },
+        "profile": {
+          "opt_level": "1",
+          "debuginfo": 0,
+          "debug_assertions": false,
+          "overflow_checks": false,
+          "test": true
+        },
+        "features": [
+          "default",
+          "physics-deterministic"
+        ],
+        "bytes": 26493432
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/agent-profiler-001/integration-main333-001/cpu-001/binaries/native-profile-off/profiler-d02af78035c7219d",
+        "sha256": "35c13906c54688b79f0a0b18e89af2c0c6736ca4a5de73651669bf12baf095f6",
+        "target": {
+          "kind": [
+            "test"
+          ],
+          "crate_types": [
+            "bin"
+          ],
+          "name": "profiler",
+          "src_path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/crates/incant_agent_native/tests/profiler.rs",
+          "edition": "2024",
+          "doc": false,
+          "doctest": false,
+          "test": true
+        },
+        "profile": {
+          "opt_level": "1",
+          "debuginfo": 0,
+          "debug_assertions": false,
+          "overflow_checks": false,
+          "test": true
+        },
+        "features": [
+          "default",
+          "physics-deterministic"
+        ],
+        "bytes": 42093960
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/agent-profiler-001/integration-main333-001/cpu-001/binaries/native-profile-off/incant_agent_native-6a5c4833af6982a8",
+        "sha256": "cffb4bce10ea182afaf29b7f63c19296ca206e1743cde0062e94029a7def4294",
+        "target": {
+          "kind": [
+            "lib"
+          ],
+          "crate_types": [
+            "lib"
+          ],
+          "name": "incant_agent_native",
+          "src_path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/crates/incant_agent_native/src/lib.rs",
+          "edition": "2024",
+          "doc": true,
+          "doctest": true,
+          "test": true
+        },
+        "profile": {
+          "opt_level": "1",
+          "debuginfo": 0,
+          "debug_assertions": false,
+          "overflow_checks": false,
+          "test": true
+        },
+        "features": [
+          "default",
+          "physics-deterministic"
+        ],
+        "bytes": 43172824
+      }
+    ],
+    "scope": "120 agent/playbook plus11 enabled/9 disabled native tests; strict on/off lint/editor compilation; original unchanged collector controls not rerun."
+  }
 }
