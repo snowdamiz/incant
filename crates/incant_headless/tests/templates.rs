@@ -106,8 +106,9 @@ fn tick(game: &mut Session, events: &[InputEvent]) {
 fn key(code: KeyCode, down: bool) -> InputEvent {
     InputEvent::Key { code, down }
 }
-fn near(a: f64, b: f64) {
-    assert!((a - b).abs() < 1e-8, "{a} != {b}");
+#[track_caller]
+fn near(relation: &str, a: f64, b: f64) {
+    assert!((a - b).abs() < 1e-8, "{relation}: {a} != {b}");
 }
 
 #[test]
@@ -175,20 +176,46 @@ fn spatial_starters_jump_collide_follow_and_look_without_mutating_authoring() {
         for _ in 0..100 {
             tick(&mut game, &[]);
         }
+        let start = f.position(&game, "player");
+        let radius =
+            f.document.scenes[&f.created.roles["scene"]].entities[&f.created.roles["player"]]
+                .components["Collider"]["shape"]["radius"]
+                .as_f64()
+                .unwrap();
+        // Character motion intentionally applies native capsule contact sliding,
+        // including f32 contact-normal corrections. Axis equality is not its
+        // contract: the starter must stay within one body radius of the intended
+        // movement plane, while advancing freely and stopping at the wall.
+        assert!(
+            (start[2] - ground[2]).abs() < radius,
+            "jump lateral drift exceeded capsule radius: {ground:?} -> {start:?}"
+        );
         tick(&mut game, &[key(KeyCode::KeyD, true)]);
-        for _ in 0..180 {
+        for step in 1..=180 {
             tick(&mut game, &[]);
+            let position = f.position(&game, "player");
+            assert!(
+                (position[2] - start[2]).abs() < radius,
+                "movement plane drift exceeded capsule radius at step {step}: {start:?} -> {position:?}"
+            );
+            if step == 30 {
+                let requested = 4. * f64::from(step) / f64::from(game.world().unwrap().tick_rate());
+                assert!(
+                    (position[0] - start[0] - requested).abs() < radius,
+                    "unobstructed forward displacement differs: {start:?} -> {position:?}, requested {requested}"
+                );
+            }
         }
         let player = f.position(&game, "player");
         assert!((5.0..5.35).contains(&player[0]), "wall failed {player:?}");
-        near(player[2], 0.);
         let camera = f.position(&game, "camera");
-        near(camera[0], player[0]);
+        near("spatial camera follows player X", camera[0], player[0]);
         if kind == Template::FirstPerson {
-            near(camera[1], player[1] + 0.55);
-            near(camera[2], player[2]);
+            near("first-person eye height", camera[1], player[1] + 0.55);
+            near("first-person camera follows player Z", camera[2], player[2]);
         } else {
             near(
+                "third-person orbit distance",
                 ((camera[1] - player[1] - 0.55).powi(2) + (camera[2] - player[2]).powi(2)).sqrt(),
                 6.,
             );
@@ -234,7 +261,7 @@ fn planar_starters_use_solid_tiles_animation_and_following_camera() {
                 tick(&mut game, &[]);
             }
         } else {
-            near(ground[1], 2.);
+            near("top-down stationary height", ground[1], 2.);
         }
         tick(&mut game, &[key(KeyCode::KeyD, true)]);
         let mut frames = BTreeSet::new();
@@ -260,8 +287,9 @@ fn planar_starters_use_solid_tiles_animation_and_following_camera() {
             "tile collision failed {player:?}"
         );
         let camera = f.position(&game, "camera");
-        near(camera[0], player[0]);
+        near("planar camera follows player X", camera[0], player[0]);
         near(
+            "planar camera follows player Y",
             camera[1],
             player[1]
                 + if kind == Template::Platformer2d {
@@ -290,7 +318,11 @@ fn planar_starters_use_solid_tiles_animation_and_following_camera() {
                 after[1] > before[1] + 1.5,
                 "top-down second axis did not move"
             );
-            near(f.position(&game, "camera")[1], after[1]);
+            near(
+                "top-down camera follows second axis",
+                f.position(&game, "camera")[1],
+                after[1],
+            );
             tick(&mut game, &[key(KeyCode::KeyW, false)]);
         }
         f.unchanged();
