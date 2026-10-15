@@ -1,0 +1,217 @@
+{
+  "format": "incant-agent-project-context-evidence",
+  "version": 1,
+  "source": {
+    "base": "191a3b42333c42e90541cce150344c4aed79430c",
+    "files": {
+      "crates/incant_agent/src/context.rs": {
+        "sha256": "5072ae46cb0357fda9a9f3c93d74d48522ded1f64d87d5d0476ce8c63ebfcabf",
+        "bytes": 7029
+      },
+      "crates/incant_agent/src/context/tests.rs": {
+        "sha256": "eb5c44bd5880b7ac3c50e7bc7e9addebe760aec7cb11f6bcf0812520829cce72",
+        "bytes": 4065
+      },
+      "crates/incant_agent/src/conversation.rs": {
+        "sha256": "c6aed2e166a66a528b4f970a5de48bba19c96be6810b0c6d9feefe00cc1c2533",
+        "bytes": 10305
+      },
+      "crates/incant_agent/src/lib.rs": {
+        "sha256": "de374c7483b89964d53e00e44f3de2d356f6676acf5ba180229e125e49dcddc3",
+        "bytes": 21387
+      },
+      "crates/incant_agent/tests/context.rs": {
+        "sha256": "5c6d3c0fab8bcf8bd1349024ad3dbae622f1eae7fccda768da5913fc3820cbdc",
+        "bytes": 5478
+      }
+    }
+  },
+  "tests": {
+    "passed": 113,
+    "ignored": 0,
+    "profile": "ci",
+    "target": "aarch64-apple-darwin",
+    "command": {
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "-p",
+        "incant_agent",
+        "--all-targets",
+        "--target",
+        "aarch64-apple-darwin",
+        "--profile",
+        "ci",
+        "--locked",
+        "--offline",
+        "-j",
+        "2",
+        "--",
+        "--test-threads=1"
+      ],
+      "target": "/Users/andreyyurlov/.codex/incant-core-tick-diagnostic-target",
+      "jobs": 2,
+      "exit_code": 0,
+      "owned_cleanup_completed": true,
+      "elapsed_seconds": 131.38819170801435,
+      "target_growth_bytes": 598233088,
+      "log_sha256": "0e35c070c8809e154aa71bb8f8f1e29c9442c3aaed5f2d897da3d8c2d3135763"
+    }
+  },
+  "clippy": {
+    "argv": [
+      "./tools/cargo",
+      "clippy",
+      "-p",
+      "incant_agent",
+      "--all-targets",
+      "--target",
+      "aarch64-apple-darwin",
+      "--profile",
+      "ci",
+      "--locked",
+      "--offline",
+      "-j",
+      "2",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "target": "/Users/andreyyurlov/.codex/incant-core-tick-diagnostic-target",
+    "jobs": 2,
+    "exit_code": 0,
+    "owned_cleanup_completed": true,
+    "elapsed_seconds": 35.45743204202154,
+    "target_growth_bytes": 849682432,
+    "log_sha256": "4562be660a666ed6eda388b2bb53025a7f6718ac299346a8ac4595ece1700fc3"
+  },
+  "initial_interruption": {
+    "argv": [
+      "./tools/cargo",
+      "test",
+      "-p",
+      "incant_agent",
+      "--all-targets",
+      "--target",
+      "aarch64-apple-darwin",
+      "--profile",
+      "ci",
+      "--locked",
+      "--offline",
+      "-j",
+      "2",
+      "--",
+      "--test-threads=1"
+    ],
+    "target": "/Users/andreyyurlov/.codex/incant-core-tick-diagnostic-target",
+    "jobs": 2,
+    "error": "CalledProcessError(1, ['du', '-sk', '/Users/andreyyurlov/.codex/incant-core-tick-diagnostic-target'])",
+    "owned_cleanup_completed": true,
+    "elapsed_seconds": 10.116098790982505,
+    "target_growth_bytes": 60559360,
+    "log_sha256": "ca7bc4a1c3e2ad227b0220f7c22e8e6de28825aa50ab58aeefa4ed53632e7a83"
+  },
+  "review": {
+    "schema": 1,
+    "created_utc": "2026-10-15T02:49:39.524695+00:00",
+    "review": "Independent read-only project-context source review",
+    "source_manifest": "/Users/andreyyurlov/.codex/incant-evidence/agent-project-context-001/source.json",
+    "source_manifest_sha256": "f51be6732f140ee2b7e348a5873cd277ce5899f3d3e7a352664ac2cb76afaf60",
+    "base": "191a3b42333c42e90541cce150344c4aed79430c",
+    "files": {
+      "crates/incant_agent/src/context.rs": {
+        "sha256": "5072ae46cb0357fda9a9f3c93d74d48522ded1f64d87d5d0476ce8c63ebfcabf",
+        "bytes": 7029
+      },
+      "crates/incant_agent/src/context/tests.rs": {
+        "sha256": "eb5c44bd5880b7ac3c50e7bc7e9addebe760aec7cb11f6bcf0812520829cce72",
+        "bytes": 4065
+      },
+      "crates/incant_agent/src/conversation.rs": {
+        "sha256": "c6aed2e166a66a528b4f970a5de48bba19c96be6810b0c6d9feefe00cc1c2533",
+        "bytes": 10305
+      },
+      "crates/incant_agent/src/lib.rs": {
+        "sha256": "de374c7483b89964d53e00e44f3de2d356f6676acf5ba180229e125e49dcddc3",
+        "bytes": 21387
+      },
+      "crates/incant_agent/tests/context.rs": {
+        "sha256": "5c6d3c0fab8bcf8bd1349024ad3dbae622f1eae7fccda768da5913fc3820cbdc",
+        "bytes": 5478
+      }
+    },
+    "decision": "No blocking finding",
+    "findings": [],
+    "checked": [
+      "Fresh bounded prefixes/suffix for each outer run/shared/conversation turn; snapshot explicitly admits staleness within a tool loop, requires exact queries before edit.",
+      "No full project, components or transaction before/after clone. Candidate construction bounded by fixed row counts and UTF-8 excerpts; 32KiB section allowances plus fixed envelopes, <=8KiB complete schemas and <=96KiB serialized message.",
+      "Schema generation and final JSON encoding happen after shared guard release. Provider network also outside lock.",
+      "Untrusted fields remain in one labeled user-role message before actual user prompt. Existing system guard unchanged. Conversation new_turn offset omits snapshot from retained turns.",
+      "Existing access.with_bus and provider.check_active pre/post checks retain cancel/project/account fences; no credentials/files/authoring writes in snapshot preparation.",
+      "Tests source-covers Unicode/escaping and truncation, memory allowance, complete schemas, undo/current suffix, shared mutex release and refreshed manual edits without retained snapshots."
+    ],
+    "limits": [
+      "Reviewer ran no build, tests, provider request, native/GPU/window or capture.",
+      "Freshness is at outer agent-turn start, not a promise the snapshot refreshes on each tool-follow-up provider.complete within that turn; this is explicitly stated in the message."
+    ]
+  },
+  "archive": {
+    "path": "agent-project-context-records.json.gz",
+    "bytes": 16336,
+    "sha256": "e622e586db740674578a7db9d6065f30541504806f396a14e99ed478bb9d4bf5",
+    "records": 10
+  },
+  "records": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/agent-project-context-001/source.json",
+      "bytes": 860,
+      "sha256": "f51be6732f140ee2b7e348a5873cd277ce5899f3d3e7a352664ac2cb76afaf60"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/agent-project-context-001/run.py",
+      "bytes": 2087,
+      "sha256": "d8a5216d42ed677774db6901dac8ec676035c755e869bc530f2b42449eef3052"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/agent-project-context-001/0.json",
+      "bytes": 661,
+      "sha256": "589e3957e05097df388244a1c65e174ccd9433445c5a96b651cb64a33d44ab5b"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/agent-project-context-001/0.log",
+      "bytes": 832,
+      "sha256": "ca7bc4a1c3e2ad227b0220f7c22e8e6de28825aa50ab58aeefa4ed53632e7a83"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/agent-project-context-001/cpu-002/run.py",
+      "bytes": 2229,
+      "sha256": "1e4cbb1b52de98c3f10bf4fd070b3a8ea78d47ac58dc1f5a4d0a93c5c291ef5a"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/agent-project-context-001/cpu-002/0.json",
+      "bytes": 564,
+      "sha256": "9823c1ac1a3ac5dcc7d44a07c0a6f18ff8b7dfa397a17451dec8a84b229f3823"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/agent-project-context-001/cpu-002/0.log",
+      "bytes": 18152,
+      "sha256": "0e35c070c8809e154aa71bb8f8f1e29c9442c3aaed5f2d897da3d8c2d3135763"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/agent-project-context-001/cpu-002/1.json",
+      "bytes": 567,
+      "sha256": "7acc8c3d76f480e6a52681587c4926107166a1960a139197bbd02a69b131373d"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/agent-project-context-001/cpu-002/1.log",
+      "bytes": 10705,
+      "sha256": "4562be660a666ed6eda388b2bb53025a7f6718ac299346a8ac4595ece1700fc3"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/agent-project-context-independent-20261015.json",
+      "bytes": 2654,
+      "sha256": "e2eb502e99c019751e0ab55637fe01b8fd9c48d5f454382f9265c4419832a377"
+    }
+  ],
+  "scope": "CPU protocol doubles and authoring context only; no native window/GPU/screen capture/live provider, performance result or phase approval. Source inputs are exact; snapshot freshness is outer turn, not each tool-follow-up request."
+}
