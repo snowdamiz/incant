@@ -72,6 +72,20 @@ class ProbeControls(unittest.TestCase):
             with self.subTest(key=key), self.assertRaises(ValueError):
                 probe.validate_counts(counts | {key: value}, 'reuse-stream', final=True)
 
+    def test_fresh_library_allows_same_session_hits_but_requires_error_free_stores(self):
+        counts = self.counts() | {'stream_hits': 4, 'fallback_attempts': 10,
+            'stores': 10, 'miss_or_mismatch': 10,
+            'last_error': 'Native { operation: "LoadPipeline", code: -2147024809 }'}
+        probe.validate_counts(counts, 'seed')
+        probe.validate_counts(counts, 'seed', final=True)
+        for key, value in (('fallback_attempts', 9), ('stores', 9), ('miss_or_mismatch', 11),
+                           ('store_errors', 1), ('native_load_errors', 1), ('strict_refusals', 1),
+                           ('serialization_errors', 1), ('disabled', True), ('last_error', None)):
+            with self.subTest(key=key), self.assertRaises(ValueError):
+                probe.validate_counts(counts | {key: value}, 'seed')
+        with self.assertRaises(ValueError):
+            probe.validate_counts(self.counts() | {'stream_hits': 4}, 'seed')
+
     def frame(self):
         raw = bytearray([0, 0, 0, 255] * (160 * 96))
         for channel in range(3):

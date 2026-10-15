@@ -51,8 +51,12 @@ input backing. Mac CPU controls and Windows GNU compile/lint checks pass. A
 separate manually invoked hosted diagnostic covers real Windows cache hits,
 filesystem/COM lifetime and exact rendered parity. Its first run stopped during
 compilation when the resource observer encountered a retired temporary directory;
-the observer repair passes ten portable controls, with native execution still
-pending. Existing release checks are unchanged. This does not close the
+the observer repair passes ten portable controls. The next hosted run passes
+40 actual Windows CPU controls and four strict lints, then reaches native startup
+and exposes an invalid zero-hit seed assertion: identical material PSOs can be
+reused within the initial session. Its correction passes eleven portable controls;
+complete native reuse/lifetime/pixel qualification is still pending. Both failed
+attempts remain retained. Existing release checks are unchanged. This does not close the
 shader-stall gate or claim that HLSL compilation is avoided.
 [Scope and evidence](docs/spikes/dx12-pipeline-library.md).
 

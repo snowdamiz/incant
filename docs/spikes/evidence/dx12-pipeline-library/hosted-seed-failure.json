@@ -1,0 +1,482 @@
+{
+  "run": 38764747651,
+  "url": "https://github.com/snowdamiz/incant/actions/runs/38764747651",
+  "artifact_id": 11988433416,
+  "source": "fd08435a82e2e0bd11f58d0bc172f89d76fc0a76",
+  "result": {
+    "format": "incant-dx12-native-probe-v1",
+    "expected_source": "fd08435a82e2e0bd11f58d0bc172f89d76fc0a76",
+    "status": "failed",
+    "calls": [
+      {
+        "name": "source-0",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "managed_call_returned": true,
+        "cleanup_confirmed": true,
+        "exit": 0,
+        "call_finished": true
+      },
+      {
+        "name": "dirty-1",
+        "argv": [
+          "git",
+          "status",
+          "--porcelain"
+        ],
+        "managed_call_returned": true,
+        "cleanup_confirmed": true,
+        "exit": 0,
+        "call_finished": true
+      },
+      {
+        "name": "toolchain",
+        "argv": [
+          "rustup",
+          "toolchain",
+          "install",
+          "1.99.0",
+          "--profile",
+          "minimal",
+          "--component",
+          "clippy"
+        ],
+        "managed_call_returned": true,
+        "cleanup_confirmed": true,
+        "exit": 0,
+        "call_finished": true
+      },
+      {
+        "name": "cargo-path",
+        "argv": [
+          "rustup",
+          "which",
+          "--toolchain",
+          "1.99.0",
+          "cargo"
+        ],
+        "managed_call_returned": true,
+        "cleanup_confirmed": true,
+        "exit": 0,
+        "call_finished": true
+      },
+      {
+        "name": "rustc-path",
+        "argv": [
+          "rustup",
+          "which",
+          "--toolchain",
+          "1.99.0",
+          "rustc"
+        ],
+        "managed_call_returned": true,
+        "cleanup_confirmed": true,
+        "exit": 0,
+        "call_finished": true
+      },
+      {
+        "name": "rustc-version",
+        "argv": [
+          "C:\\Users\\runneradmin\\.rustup\\toolchains\\1.99.0-x86_64-pc-windows-msvc\\bin\\rustc.exe",
+          "-vV"
+        ],
+        "managed_call_returned": true,
+        "cleanup_confirmed": true,
+        "exit": 0,
+        "call_finished": true
+      },
+      {
+        "name": "ordinary-cpu",
+        "argv": [
+          "C:\\Users\\runneradmin\\.rustup\\toolchains\\1.99.0-x86_64-pc-windows-msvc\\bin\\cargo.exe",
+          "test",
+          "-p",
+          "incant_render",
+          "--target",
+          "x86_64-pc-windows-msvc",
+          "--profile",
+          "ci",
+          "--locked",
+          "-j2",
+          "--target-dir",
+          "D:\\a\\_temp\\incant-dx12-pipeline-target",
+          "--lib",
+          "--message-format=json",
+          "--features",
+          "dx12-pipeline-library",
+          "pipeline_cache::",
+          "--",
+          "--test-threads=1"
+        ],
+        "managed_call_returned": true,
+        "cleanup_confirmed": true,
+        "exit": 0,
+        "call_finished": true
+      },
+      {
+        "name": "ordinary-hal-lint",
+        "argv": [
+          "C:\\Users\\runneradmin\\.rustup\\toolchains\\1.99.0-x86_64-pc-windows-msvc\\bin\\cargo.exe",
+          "clippy",
+          "-p",
+          "wgpu-hal",
+          "-p",
+          "incant_render",
+          "--target",
+          "x86_64-pc-windows-msvc",
+          "--profile",
+          "ci",
+          "--locked",
+          "-j2",
+          "--target-dir",
+          "D:\\a\\_temp\\incant-dx12-pipeline-target",
+          "--features",
+          "incant_render/dx12-pipeline-library",
+          "--lib",
+          "--",
+          "-D",
+          "warnings"
+        ],
+        "managed_call_returned": true,
+        "cleanup_confirmed": true,
+        "exit": 0,
+        "call_finished": true
+      },
+      {
+        "name": "ordinary-all-lint",
+        "argv": [
+          "C:\\Users\\runneradmin\\.rustup\\toolchains\\1.99.0-x86_64-pc-windows-msvc\\bin\\cargo.exe",
+          "clippy",
+          "-p",
+          "incant_render",
+          "--target",
+          "x86_64-pc-windows-msvc",
+          "--profile",
+          "ci",
+          "--locked",
+          "-j2",
+          "--target-dir",
+          "D:\\a\\_temp\\incant-dx12-pipeline-target",
+          "--features",
+          "dx12-pipeline-library",
+          "--all-targets",
+          "--",
+          "-D",
+          "warnings"
+        ],
+        "managed_call_returned": true,
+        "cleanup_confirmed": true,
+        "exit": 0,
+        "call_finished": true
+      },
+      {
+        "name": "cooked-cpu",
+        "argv": [
+          "C:\\Users\\runneradmin\\.rustup\\toolchains\\1.99.0-x86_64-pc-windows-msvc\\bin\\cargo.exe",
+          "test",
+          "-p",
+          "incant_render",
+          "--target",
+          "x86_64-pc-windows-msvc",
+          "--profile",
+          "ci",
+          "--locked",
+          "-j2",
+          "--target-dir",
+          "D:\\a\\_temp\\incant-dx12-pipeline-target",
+          "--lib",
+          "--message-format=json",
+          "--features",
+          "dx12-pipeline-library,cooked-native-shaders",
+          "pipeline_cache::",
+          "--",
+          "--test-threads=1"
+        ],
+        "managed_call_returned": true,
+        "cleanup_confirmed": true,
+        "exit": 0,
+        "call_finished": true
+      },
+      {
+        "name": "cooked-hal-lint",
+        "argv": [
+          "C:\\Users\\runneradmin\\.rustup\\toolchains\\1.99.0-x86_64-pc-windows-msvc\\bin\\cargo.exe",
+          "clippy",
+          "-p",
+          "wgpu-hal",
+          "-p",
+          "incant_render",
+          "--target",
+          "x86_64-pc-windows-msvc",
+          "--profile",
+          "ci",
+          "--locked",
+          "-j2",
+          "--target-dir",
+          "D:\\a\\_temp\\incant-dx12-pipeline-target",
+          "--features",
+          "incant_render/dx12-pipeline-library,incant_render/cooked-native-shaders",
+          "--lib",
+          "--",
+          "-D",
+          "warnings"
+        ],
+        "managed_call_returned": true,
+        "cleanup_confirmed": true,
+        "exit": 0,
+        "call_finished": true
+      },
+      {
+        "name": "cooked-all-lint",
+        "argv": [
+          "C:\\Users\\runneradmin\\.rustup\\toolchains\\1.99.0-x86_64-pc-windows-msvc\\bin\\cargo.exe",
+          "clippy",
+          "-p",
+          "incant_render",
+          "--target",
+          "x86_64-pc-windows-msvc",
+          "--profile",
+          "ci",
+          "--locked",
+          "-j2",
+          "--target-dir",
+          "D:\\a\\_temp\\incant-dx12-pipeline-target",
+          "--features",
+          "dx12-pipeline-library,cooked-native-shaders",
+          "--all-targets",
+          "--",
+          "-D",
+          "warnings"
+        ],
+        "managed_call_returned": true,
+        "cleanup_confirmed": true,
+        "exit": 0,
+        "call_finished": true
+      },
+      {
+        "name": "source-12",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "managed_call_returned": true,
+        "cleanup_confirmed": true,
+        "exit": 0,
+        "call_finished": true
+      },
+      {
+        "name": "dirty-13",
+        "argv": [
+          "git",
+          "status",
+          "--porcelain"
+        ],
+        "managed_call_returned": true,
+        "cleanup_confirmed": true,
+        "exit": 0,
+        "call_finished": true
+      },
+      {
+        "name": "ordinary-seed",
+        "argv": [
+          "D:\\a\\incant\\incant\\artifacts\\dx12-pipeline-library\\ordinary.exe",
+          "--ignored",
+          "--exact",
+          "dx12_library::tests::dx12_library_native_stage",
+          "--nocapture",
+          "--test-threads=1"
+        ],
+        "managed_call_returned": true,
+        "cleanup_confirmed": true,
+        "exit": 101,
+        "call_finished": true
+      }
+    ],
+    "owned_processes": [
+      {
+        "pid": 9184,
+        "cleanup_confirmed": true
+      },
+      {
+        "pid": 5988,
+        "cleanup_confirmed": true
+      },
+      {
+        "pid": 8348,
+        "cleanup_confirmed": true
+      },
+      {
+        "pid": 2848,
+        "cleanup_confirmed": true
+      },
+      {
+        "pid": 9100,
+        "cleanup_confirmed": true
+      },
+      {
+        "pid": 6520,
+        "cleanup_confirmed": true
+      },
+      {
+        "pid": 560,
+        "cleanup_confirmed": true
+      },
+      {
+        "pid": 7972,
+        "cleanup_confirmed": true
+      },
+      {
+        "pid": 5296,
+        "cleanup_confirmed": true
+      },
+      {
+        "pid": 1292,
+        "cleanup_confirmed": true
+      },
+      {
+        "pid": 7340,
+        "cleanup_confirmed": true
+      },
+      {
+        "pid": 4576,
+        "cleanup_confirmed": true
+      },
+      {
+        "pid": 7040,
+        "cleanup_confirmed": true
+      },
+      {
+        "pid": 2452,
+        "cleanup_confirmed": true
+      },
+      {
+        "pid": 7336,
+        "cleanup_confirmed": true
+      }
+    ],
+    "artifacts": [
+      {
+        "mode": "ordinary",
+        "path": "D:\\a\\incant\\incant\\artifacts\\dx12-pipeline-library\\ordinary.exe",
+        "bytes": 29132288,
+        "sha256": "c79229aef7127000e9f67842b1ca1ecf9655d838af6218900373c8698593c9eb",
+        "features": [
+          "default",
+          "dx12-pipeline-library",
+          "persistent-pipeline-cache",
+          "physics-deterministic"
+        ],
+        "cpu_tests": 20
+      },
+      {
+        "mode": "cooked",
+        "path": "D:\\a\\incant\\incant\\artifacts\\dx12-pipeline-library\\cooked.exe",
+        "bytes": 30001152,
+        "sha256": "817dc39909faa36f5308241f47e516c19e4b4eed881cacebfd73559bae505988",
+        "features": [
+          "cooked-bloom",
+          "cooked-clusters",
+          "cooked-geometry",
+          "cooked-materials",
+          "cooked-metalfx-boundary",
+          "cooked-native-shaders",
+          "cooked-output",
+          "cooked-sprites",
+          "cooked-ssao",
+          "cooked-temporal",
+          "cooked-text",
+          "cooked-ui",
+          "default",
+          "dx12-pipeline-library",
+          "persistent-pipeline-cache",
+          "physics-deterministic"
+        ],
+        "cpu_tests": 20
+      }
+    ],
+    "claims": "native library membership and exact pixels only; no window, appearance or performance gate",
+    "target_bytes": 2518332434,
+    "output_bytes": 59930054,
+    "minimum_free_bytes": 230722686976,
+    "Cargo_lock_sha256": "fdac316f2e9a6c66bae2fb6fb47c6661d2357d650cd0282164033eb29085fc3d",
+    "OS": "sys.getwindowsversion(major=10, minor=0, build=26100, platform=2, service_pack='')",
+    "tools": [
+      {
+        "path": "C:\\Users\\runneradmin\\.rustup\\toolchains\\1.99.0-x86_64-pc-windows-msvc\\bin\\cargo.exe",
+        "sha256": "c9b44417dc8228b81923a1068a3c09e32d2793f2cced2a816789cf433c1f0d46"
+      },
+      {
+        "path": "C:\\Users\\runneradmin\\.rustup\\toolchains\\1.99.0-x86_64-pc-windows-msvc\\bin\\rustc.exe",
+        "sha256": "fc40f1c8b65095a22a48c111aadc279c26a049b7e4161e8b99ffe3eb23873e86"
+      }
+    ],
+    "error": "ValueError('First failed child: ordinary-seed')",
+    "terminal": true,
+    "elapsed_seconds": 834.4689999999999,
+    "cleanup_confirmed": true
+  },
+  "native_stdout": "\nrunning 1 test\ntest dx12_library::tests::dx12_library_native_stage ... FAILED\n\nfailures:\n\nfailures:\n    dx12_library::tests::dx12_library_native_stage\n\ntest result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 262 filtered out; finished in 2.41s\n\n",
+  "native_stderr": "\nthread 'dx12_library::tests::dx12_library_native_stage' (7756) panicked at crates\\incant_render\\src\\dx12_library\\tests.rs:202:9:\nassertion `left == right` failed\n  left: (4, 0, 0)\n right: (0, 0, 0)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n",
+  "retained_external_records": [
+    {
+      "path": "result.json",
+      "bytes": 10474,
+      "sha256": "0e3ccac0c77970526023ad85b416cf0e226ede480157b9ca38c674fe50622fa7"
+    },
+    {
+      "path": "ordinary-seed.stdout.log",
+      "bytes": 254,
+      "sha256": "7bc3a8a0ee15c60d23bf7f0c296e4bf4c3560c7fbac50cf2acb990ef380e89f7"
+    },
+    {
+      "path": "ordinary-seed.stderr.log",
+      "bytes": 277,
+      "sha256": "979781f9da2eb5b5d32481b0b83b3684efbdd5bfa5dcd17f87cce27aeacecd1f"
+    },
+    {
+      "path": "ordinary-cpu.stdout.log",
+      "bytes": 361446,
+      "sha256": "d66253b709981f02f5a70c9ef864dd2ef6e665e9dc4ea36df5e2bc5d1f633f8f"
+    },
+    {
+      "path": "ordinary-cpu.stderr.log",
+      "bytes": 22535,
+      "sha256": "3b2a2f6ab8bcf0f06c206dae2a4add3a8c1f3f1c64bc92148bbed376e77fe063"
+    },
+    {
+      "path": "cooked-cpu.stdout.log",
+      "bytes": 387640,
+      "sha256": "208b1df0137f0eda332238728cf42bb4e616814bdb0deb3d419518349558dea5"
+    },
+    {
+      "path": "cooked-cpu.stderr.log",
+      "bytes": 1058,
+      "sha256": "0390dba90c58efad39676384bf62d966b49fda1c4cdf478a3d36b353a2d47740"
+    },
+    {
+      "path": "ordinary-hal-lint.stderr.log",
+      "bytes": 5267,
+      "sha256": "c799b4e50de410caa9c6179ed289793040d82d5ff2869913dcab546a9c306528"
+    },
+    {
+      "path": "ordinary-all-lint.stderr.log",
+      "bytes": 7126,
+      "sha256": "ab5ba964d46a64ac2f3549ce73b023814d42b4d1dc33c16a054f47fe3d2c48e6"
+    },
+    {
+      "path": "cooked-hal-lint.stderr.log",
+      "bytes": 277,
+      "sha256": "0d3f14dcf7c30d98f81ee1243b5e5e5af77c433a9ad4966e68104d2a35bee55d"
+    },
+    {
+      "path": "cooked-all-lint.stderr.log",
+      "bytes": 220,
+      "sha256": "c16d34c57cc039699434d8a8d9e81e6d6b40c698924840255038445d23591c51"
+    }
+  ],
+  "scope": "40 actual Windows CPU executions and four strict lint stages passed. Initial native seed stopped at an invalid zero-hit assertion before raw image publication. No completed native reuse, lifetime, parity or performance claim."
+}
