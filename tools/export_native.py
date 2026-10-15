@@ -109,7 +109,8 @@ def runtime_symbol_audit(executable, kind, llvm_bin, link_map):
     return evidence
 
 
-def build(project, staging, storage, scene, camera, mode, wabt=None, profiling=None, shaders=None):
+def build(project, staging, storage, scene, camera, mode, wabt=None, profiling=None, shaders=None,
+          *, session=None, session_execute=None):
     shader_features = native_shaders.features(shaders, mode)
     profile_features = native_profiling.features(profiling, mode)
     native_profiling.environment(profiling, os.environ)
@@ -160,10 +161,23 @@ def build(project, staging, storage, scene, camera, mode, wabt=None, profiling=N
         command += ['--', '-C', f'link-arg=/MAP:{link_map}']
     print(f'Compiling fresh {host} shipping player ({mode})...', flush=True)
     with (staging / 'build.log').open('w', encoding='utf-8') as stderr, (storage / 'cargo.jsonl').open('w', encoding='utf-8') as stdout:
-        result = native_process.run(list(map(str, command)), cwd=ROOT, env=env, stdout=stdout, stderr=stderr, timeout=2400)
+        if session is None:
+            require(session_execute is None, 'Session executor requires a shipping session')
+            result = native_process.run(list(map(str, command)), cwd=ROOT, env=env, stdout=stdout, stderr=stderr, timeout=2400)
+            audited_commands = None
+        else:
+            require(session.root == ROOT and session.path == storage / 'target' and
+                    session.target == host and session.split == split,
+                    'Shared shipping session does not match exporter source/target/profile')
+            result, audited_commands = session.build(list(map(str, command)), cwd=ROOT,
+                                                      env=env, execute=session_execute)
+            stdout.write(result.stdout)
+            stderr.write(result.stderr)
     log = (staging / 'build.log').read_text(encoding='utf-8')
     require(result.returncode == 0, 'Native player build failed; no package was published:\n' + log[-8000:])
-    flags = verify_codegen(log, host, split)
+    # A trusted ephemeral session can supply proven fresh-origin command evidence
+    # for identical shared units. The ordinary public export remains fresh-only.
+    flags = verify_codegen(log if audited_commands is None else audited_commands, host, split)
     messages = cargo_messages(storage / 'cargo.jsonl')
     profile_units = native_profiling.artifacts(messages, profiling, target_dir=storage / 'target',
                                               target=host, profile='shipping')
@@ -210,6 +224,9 @@ def build(project, staging, storage, scene, camera, mode, wabt=None, profiling=N
                                'transport': 'explicit loopback process lifetime' if profiling == 'tracy' else 'none'}
     if shader_receipt is not None:
         report['shaders'] = shader_receipt
+    if session is not None:
+        report['shipping_session_build'] = len(session.builds) - 1
+        report['shipping_session_target_units'] = session.last_units
     return player, report
 
 
