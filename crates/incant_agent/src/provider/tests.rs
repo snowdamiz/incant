@@ -211,3 +211,66 @@ fn active_metadata_checks_never_resolve_or_refresh_credentials() {
     }
     assert_eq!(checks.load(Ordering::Relaxed), 3);
 }
+
+#[test]
+fn oversized_unterminated_line_stops_reading_at_the_stream_budget() {
+    let mut reader = std::io::Cursor::new(vec![b'x'; 4096]);
+    let mut emitted = String::new();
+    let error = read_stream_limited(&mut reader, &mut |text| emitted.push_str(text), 64)
+        .err()
+        .unwrap();
+    assert_eq!(
+        error.to_string(),
+        "provider: response stream limit exceeded"
+    );
+    assert_eq!(reader.position(), 65);
+    assert!(emitted.is_empty());
+}
+
+#[test]
+fn empty_lines_and_comment_delimiters_consume_the_same_response_budget() {
+    for bytes in [b"\n".repeat(4096), b": ping\r\n".repeat(512)] {
+        let mut reader = std::io::Cursor::new(bytes);
+        let error = read_stream_limited(&mut reader, &mut |_| panic!("no text event"), 64)
+            .err()
+            .unwrap();
+        assert_eq!(
+            error.to_string(),
+            "provider: response stream limit exceeded"
+        );
+        assert_eq!(reader.position(), 65);
+    }
+}
+
+#[test]
+fn exact_budget_preserves_crlf_multiline_data_and_utf8_terminal_output() {
+    let response = json!({"output":[{"type":"message","role":"assistant",
+        "content":[{"type":"output_text","text":"café 日本語"}]}],
+        "usage":{"input_tokens":2,"output_tokens":3}});
+    let event = format!(
+        "data: {{\"type\":\"response.completed\",\r\ndata: \"response\":{response}}}\r\n\r\n"
+    );
+    let complete = read_stream_limited(event.as_bytes(), &mut |_| {}, event.len()).unwrap();
+    assert_eq!(
+        complete.output,
+        response["output"].as_array().unwrap().clone()
+    );
+    assert_eq!(complete.usage.input_tokens, 2);
+    assert_eq!(complete.usage.output_tokens, 3);
+    assert!(
+        read_stream_limited(event.as_bytes(), &mut |_| {}, event.len() - 1)
+            .err()
+            .unwrap()
+            .to_string()
+            .contains("stream limit exceeded")
+    );
+}
+
+#[test]
+fn bounded_stream_refuses_invalid_utf8_without_echoing_response_bytes() {
+    let bytes = b"data: secret-provider-response-\xff\n\n";
+    let error = read_stream_limited(bytes.as_slice(), &mut |_| panic!("invalid text"), 128)
+        .err()
+        .unwrap();
+    assert_eq!(error.to_string(), "provider: invalid UTF-8 response stream");
+}

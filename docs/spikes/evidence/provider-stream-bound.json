@@ -1,0 +1,140 @@
+{
+  "format": "incant-provider-stream-bound-v1",
+  "source_base": "fc8462d9739a20e87fb3b468b665d788881ee2d6",
+  "source_patch_sha256": "92a03e8742cfbe4bd4546f7e5ba9669e6e4075007f94f784112d5191919fbedf",
+  "files": [
+    {
+      "path": "crates/incant_agent/src/provider.rs",
+      "sha256": "74eda09cca7e3f3c64a5787e875b32d9d2a7a89eaa2fc312f16f3d4ac9945b37"
+    },
+    {
+      "path": "crates/incant_agent/src/provider/tests.rs",
+      "sha256": "cdc7f421d3b10e5daebae63490196a06e6a637158fce7963ccebfa6b83fa2abc"
+    }
+  ],
+  "target": "aarch64-apple-darwin",
+  "profile": "ci",
+  "compiler": "rustc 1.99.0 (b940084d7 2026-09-28)",
+  "commands": [
+    {
+      "argv": [
+        "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/cargo",
+        "test",
+        "-p",
+        "incant_agent",
+        "--lib",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "--target",
+        "aarch64-apple-darwin",
+        "--target-dir",
+        "/Users/andreyyurlov/.codex/incant-core-tick-diagnostic-target",
+        "-j2",
+        "--message-format=json",
+        "provider::tests",
+        "--",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit": 0
+    },
+    {
+      "argv": [
+        "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/cargo",
+        "test",
+        "-p",
+        "incant_agent",
+        "--test",
+        "agent",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "--target",
+        "aarch64-apple-darwin",
+        "--target-dir",
+        "/Users/andreyyurlov/.codex/incant-core-tick-diagnostic-target",
+        "-j2",
+        "--message-format=json",
+        "--",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit": 0
+    },
+    {
+      "argv": [
+        "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/cargo",
+        "clippy",
+        "-p",
+        "incant_agent",
+        "--all-targets",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "--target",
+        "aarch64-apple-darwin",
+        "--target-dir",
+        "/Users/andreyyurlov/.codex/incant-core-tick-diagnostic-target",
+        "-j2",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0
+    }
+  ],
+  "test_results": [
+    "9 passed; 0 failed (provider unit controls)",
+    "8 passed; 0 failed (agent integration controls)"
+  ],
+  "strict_all_target_clippy": "passed",
+  "artifacts": [
+    {
+      "target": "incant_agent",
+      "bytes": 28423424,
+      "sha256": "c65ce1382876939e5304d714a544debd987a37992ea0fec58413a0a3a0ec4178"
+    },
+    {
+      "target": "agent",
+      "bytes": 21438424,
+      "sha256": "c643a7f083cd1b014653659480a46cdfde446145912215beaed424918b550bf1"
+    }
+  ],
+  "native_process_groups_reaped": true,
+  "source_patch_unchanged_during_tests": true,
+  "synthetic_local_HTTP_only": true,
+  "live_account_or_new_provider_qualification": false,
+  "scope": "Bound bytes before reading a full SSE line, count newline/comment bytes, preserve CRLF multiline terminal output and redacted invalid UTF-8 refusal. Existing terminal failure and account/credential controls preserved.",
+  "qualification_log_hashes": {
+    "2.stdout.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "1.stderr.log": {
+      "sha256": "e30d1d03fd3abab71d74354b1b42f57ac905a6188c5e29b5c1e88dcf3c1e01cc",
+      "bytes": 315
+    },
+    "0.stdout.log": {
+      "sha256": "0b64261335049c41e75ebedd20fd6eb527d65ea5e81698afe03777fa6d238d0c",
+      "bytes": 457931
+    },
+    "2.stderr.log": {
+      "sha256": "0a516cb01d3fff2239afcd3a9ec8661e91ad98616926adbee7403c63181332bb",
+      "bytes": 1809
+    },
+    "1.stdout.log": {
+      "sha256": "42b6f0c77501f093ea4ddff91ba8a14c76c78ba36062109714c336af13ac5d5e",
+      "bytes": 458519
+    },
+    "0.stderr.log": {
+      "sha256": "aeb2fd6e87d8565c6e6d28479515f4f9ed5e0abd2d2418da37bfb437420203fb",
+      "bytes": 2211
+    }
+  },
+  "resource_elapsed_seconds_not_performance": 59.82335258301464,
+  "source_validation_precedes_document_only_changes": true
+}

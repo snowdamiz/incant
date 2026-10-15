@@ -42,6 +42,16 @@ passes local tests and leaves production behavior unchanged. Both desktop jobs
 and Windows Wasm conformance passed on checkpoint44; that checkpoint's separate
 general failure prevented promotion.
 
+## Bounded agent response reads — locally verified
+
+The provider now enforces its response byte limit while reading each SSE line,
+including delimiters and comments. Oversized unterminated lines refuse before an
+unbounded line allocation. Nine provider and eight agent integration controls,
+plus strict all-target Clippy, pass. This uses synthetic local responses and
+preserves the requirement for terminal success before tool execution; no live
+provider or Phase 3 gate is claimed.
+[Source and verification](docs/spikes/provider-stream-bound.md).
+
 ## Live model-local material updates — CPU and numerical Metal qualified
 
 Play now accepts complete model-local material tables and primitive material
