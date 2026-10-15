@@ -25,6 +25,7 @@ import time
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / 'tools'))
 import native_process
+import macos_session
 from native_package import ulid_hex
 
 LOCALES = {'ar': {'fallbacks': [], 'locale': 'ar', 'pseudo': False},
@@ -421,6 +422,10 @@ def execute(args):
                     argv += ['--window', '--stop-after', str(row['host_steps']), '--window-state-log', output / 'eligibility.jsonl'] if args.stage == 'window' else [
                         '--ticks', str(row['host_steps']), '--ui-viewport', '640x480', '--output', output / (name + '.pcm')]
                     argv += ['--input-recording', args.recordings / (name + '-input.json'), '--observe', args.recordings / (name + '-observe.json')]
+                    if args.stage == 'window':
+                        # Explicit lock state plus our completed console login;
+                        # no screenshot/app API and no assumed optional flag.
+                        write(output / 'session-preflight.json', macos_session.query())
                     raw = run_stage(argv, output, name, 120 if args.stage == 'window' else 90, check, ledger,
                                     env, player.parent, args.stage == 'window')
                     report = read(raw)

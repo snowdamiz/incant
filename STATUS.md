@@ -360,23 +360,21 @@ Chinese HUD, loss/restart text and resumed gameplay without the former crowding.
 Focus pauses and the missed final win capture remain explicit; full appearance
 and performance are separate. [Window sizing and evidence](docs/spikes/native-window-logical-size.md).
 
-The earlier Arabic shipping package passes loss, win and loss/restart/win CPU routes,
-with exact gameplay, localized HUD and PCM reset parity. Its complete 3,056-step
-Mac window run matches the CPU observations. A separate visual replay timed out
-after focus interruptions; five partial actual images show joined Arabic, damage,
-loss and restarted gameplay. The default Retina window was crowded at 320×240
-logical units. Arabic health-pip direction is now corrected in the sample's
-string table, with real localization/font-shaping regression coverage; normal-size
-appearance and native RTL health-order review remain open. Capture is allowed;
-actual native window checks currently require the Mac desktop to be unlocked.
-[CPU correction and limits](docs/spikes/core-rtl-health-direction.md).
-The [corrected Arabic export](docs/spikes/core-arabic-corrected-export.md) now
-passes fresh public shipping export and all three CPU routes at main342, including
-the health-label marks, full localized HUD/state and exact PCM concatenation.
-Its window-capable binary has not been launched in a native window. The latest
-separate pseudo attempt timed out at zero ticks while macOS was locked; that
-failure remains retained. These CPU results do not supply the missing locale pixels.
-The fresh CJK export/window is recorded above.
+The [corrected Arabic package](docs/spikes/core-arabic-corrected-window.md) now
+completes two full 3,056-step native Mac replays with exact same-package CPU
+observation parity. Actual normal-size images show readable joined Arabic,
+loss/restart text, restarted gameplay, and two filled health pips on the right
+with the empty pip on the left. Final winning pixels are still missing. A third
+capture attempt lost focus at step 13 and reached its original 120-second
+deadline; all owned processes were stopped and CUA reset. This does not pass the
+combined locale or performance gate.
+
+The locale launcher's former requirement for an optional macOS lock field
+caused false refusals. Its metadata-only preflight now requires explicit primary
+unlock, a unique completed console login for the calling user, and no
+contradictory secondary flag. Eight parser controls and the full 554-test Python
+suite (four skips) pass. This corrects admission; focus loss can still pause a
+running replay. Earlier Arabic, CJK and pseudo failures remain retained.
 
 Pseudo-localized authoring, a fresh shipping export and all three CPU gameplay
 routes now pass. Actual normal-size window images show readable expanded HUD and
