@@ -132,6 +132,12 @@ impl crate::Renderer {
             SceneMsaa::try_from(samples)?,
             #[cfg(all(feature = "native-compilation", target_os = "macos"))]
             None,
+            #[cfg(all(
+                feature = "metal-binary-archives",
+                feature = "native-compilation",
+                target_os = "macos"
+            ))]
+            wgpu_hal::metal::binary_archive::Mode::Capture,
         )
         .await
     }
@@ -149,6 +155,12 @@ impl crate::Renderer {
             SceneMsaa::try_from(samples)?,
             #[cfg(all(feature = "native-compilation", target_os = "macos"))]
             None,
+            #[cfg(all(
+                feature = "metal-binary-archives",
+                feature = "native-compilation",
+                target_os = "macos"
+            ))]
+            wgpu_hal::metal::binary_archive::Mode::Capture,
         )
         .await
     }

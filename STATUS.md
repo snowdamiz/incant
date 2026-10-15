@@ -31,6 +31,19 @@ passes local tests and leaves production behavior unchanged. Both desktop jobs
 and Windows Wasm conformance passed on checkpoint44; that checkpoint's separate
 general failure prevented promotion.
 
+## Native Metal archives — scoped fresh-process reuse qualified
+
+The default-off native route supports render and compute archives with private
+host storage and explicit cold publication. On Apple M5 Pro, ordinary and complete
+cooked-native modes each pass 30 cache CPU controls, strict renderer/HAL lint and
+fresh-process `RequireHit` reuse of 41 initial/temporal render plus two compute
+pipelines, with zero additions/fallback. All ten native controls pass, including
+changed/empty/disabled refusal and invalid-cache recovery. Earlier failures are
+retained. CPU007/GPU003 repeat that scope on the main353 composition, including the
+complete cooked aggregate; unchanged HAL lints are reused with byte/feature proof.
+No frame, performance, all-effects or per-level/asynchronous-prewarm
+claim follows. [Scope and portable evidence](docs/spikes/metal-binary-archives.md).
+
 ## Cooked MetalFX boundary — numerical Metal parity qualified
 
 The trusted aggregate now includes the two fixed pack/normalize programs:

@@ -14,12 +14,29 @@ mod private;
 ))]
 mod store;
 
+#[cfg(all(feature = "metal-binary-archives", target_os = "macos"))]
+mod darwin_acl;
+#[cfg(all(feature = "metal-binary-archives", target_os = "macos"))]
+mod metal;
+#[cfg(all(feature = "metal-binary-archives", target_os = "macos"))]
+mod metal_private;
+#[cfg(all(
+    feature = "metal-binary-archives",
+    feature = "native-compilation",
+    target_os = "macos"
+))]
+pub use metal::MetalArchiveDiagnosticError;
+#[cfg(all(feature = "metal-binary-archives", target_os = "macos"))]
+pub use metal::MetalArchiveReport;
+
 /// Initial cache admission and the latest successful cold-preparation write attempt.
 /// Supplying cache bytes does not prove that the driver had a cache hit.
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct PipelineCacheReport {
     pub read: CacheRead,
     pub write: CacheWrite,
+    #[cfg(all(feature = "metal-binary-archives", target_os = "macos"))]
+    pub metal: Option<MetalArchiveReport>,
 }
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub enum CacheRead {
@@ -40,6 +57,8 @@ pub enum CacheWrite {
     Io(std::io::ErrorKind),
 }
 pub(crate) struct Session {
+    #[cfg(all(feature = "metal-binary-archives", target_os = "macos"))]
+    metal: Option<metal::Session>,
     pub cache: Option<wgpu::PipelineCache>,
     pub report: PipelineCacheReport,
     #[cfg(all(
@@ -62,7 +81,27 @@ pub(crate) fn required_features(adapter: &wgpu::Adapter) -> wgpu::Features {
     }
 }
 impl Session {
+    #[cfg(all(
+        feature = "metal-binary-archives",
+        feature = "native-compilation",
+        target_os = "macos"
+    ))]
+    pub fn require_hits(device: &wgpu::Device, adapter: &wgpu::Adapter) -> crate::Result<Self> {
+        let (metal, read) = metal::Session::require_hits(device, adapter)?;
+        let mut session = Self::inactive(read);
+        session.report.metal = Some(metal.report());
+        session.metal = Some(metal);
+        Ok(session)
+    }
     pub fn new(device: &wgpu::Device, adapter: &wgpu::Adapter) -> Self {
+        #[cfg(all(feature = "metal-binary-archives", target_os = "macos"))]
+        if adapter.get_info().backend == wgpu::Backend::Metal {
+            let (metal, read) = metal::Session::new(device, adapter);
+            let mut session = Self::inactive(read);
+            session.report.metal = Some(metal.report());
+            session.metal = Some(metal);
+            return session;
+        }
         #[cfg(all(
             feature = "persistent-pipeline-cache",
             unix,
@@ -100,10 +139,14 @@ impl Session {
                 })
             };
             Self {
+                #[cfg(all(feature = "metal-binary-archives", target_os = "macos"))]
+                metal: None,
                 cache: Some(cache),
                 report: PipelineCacheReport {
                     read,
                     write: CacheWrite::NotAttempted,
+                    #[cfg(all(feature = "metal-binary-archives", target_os = "macos"))]
+                    metal: None,
                 },
                 store: Some(store),
             }
@@ -128,10 +171,14 @@ impl Session {
     }
     fn inactive(read: CacheRead) -> Self {
         Self {
+            #[cfg(all(feature = "metal-binary-archives", target_os = "macos"))]
+            metal: None,
             cache: None,
             report: PipelineCacheReport {
                 read,
                 write: CacheWrite::NotAttempted,
+                #[cfg(all(feature = "metal-binary-archives", target_os = "macos"))]
+                metal: None,
             },
             #[cfg(all(
                 feature = "persistent-pipeline-cache",
@@ -145,9 +192,25 @@ impl Session {
     /// preparation errors also refuse persistence; retain this device cache for
     /// later optional catalogs, with no implicit flush on Drop.
     pub fn complete<T>(&mut self, candidate: crate::Result<T>) -> crate::Result<T> {
+        #[cfg(all(
+            feature = "metal-binary-archives",
+            feature = "native-compilation",
+            target_os = "macos"
+        ))]
+        let candidate = candidate.and_then(|prepared| {
+            if let Some(metal) = &self.metal {
+                metal.check_strict_completion()?;
+            }
+            Ok(prepared)
+        });
         complete(candidate, || self.persist())
     }
     fn persist(&mut self) {
+        #[cfg(all(feature = "metal-binary-archives", target_os = "macos"))]
+        if let Some(metal) = &mut self.metal {
+            self.report.write = metal.persist();
+            self.report.metal = Some(metal.report());
+        }
         #[cfg(all(
             feature = "persistent-pipeline-cache",
             unix,

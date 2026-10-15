@@ -70,9 +70,38 @@ fn existing_and_later_widened_permissions_are_never_trusted_or_repaired() {
     }
     mode(&path, 0o700);
     assert_eq!(directory.read("entry", 7).unwrap(), b"private");
-    for permissions in [0o644, 0o640, 0o606, 0o660, 0o4600] {
+    for permissions in [0o644, 0o640, 0o606, 0o660] {
         mode(&path.join("entry"), permissions);
-        assert!(directory.read("entry", 7).is_err());
+        let actual = disk::metadata(path.join("entry"))
+            .unwrap()
+            .permissions()
+            .mode()
+            & 0o7777;
+        assert_eq!(actual, permissions, "permission fixture was normalized");
+        assert!(
+            directory.read("entry", 7).is_err(),
+            "requested mode {permissions:o}, actual mode {actual:o} was admitted"
+        );
+    }
+    mode(&path.join("entry"), 0o4600);
+    let actual = disk::metadata(path.join("entry"))
+        .unwrap()
+        .permissions()
+        .mode()
+        & 0o7777;
+    if cfg!(target_os = "macos") && actual == 0o600 {
+        // Darwin may strip setuid from this owned fixture. The read then sees
+        // an ordinary private file; do not pretend it tested a retained bit.
+        eprintln!(
+            "permission fixture: requested 4600, actual {actual:o}; setuid refusal not exercised on this host"
+        );
+        assert_eq!(directory.read("entry", 7).unwrap(), b"private");
+    } else {
+        assert_eq!(actual, 0o4600, "unexpected special-mode normalization");
+        assert!(
+            directory.read("entry", 7).is_err(),
+            "requested mode 4600, actual mode {actual:o} was admitted"
+        );
     }
     mode(&path.join("entry"), 0o400);
     assert_eq!(directory.read("entry", 7).unwrap(), b"private");

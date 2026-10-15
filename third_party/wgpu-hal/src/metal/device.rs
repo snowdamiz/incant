@@ -402,6 +402,8 @@ impl super::Device {
         super::Device {
             #[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
             compilation_observer: Default::default(),
+            #[cfg(all(feature = "metal-binary-archives", target_os = "macos"))]
+            binary_archive: Default::default(),
             shared: Arc::new(shared),
             features,
             counters: Default::default(),
@@ -1657,17 +1659,29 @@ impl crate::Device for super::Device {
             // Create the pipeline from descriptor
             let raw = match descriptor {
                 MetalGenericRenderPipelineDescriptor::Standard(d) => {
-                    #[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
-                    let observation = self.compilation_observer.begin(
-                        CompilationKind::RenderPipeline,
-                        CompilationStage::Unspecified,
-                    );
-                    let result = self
-                        .shared
-                        .device
-                        .newRenderPipelineStateWithDescriptor_error(&d);
-                    #[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
-                    observation.finish_native(&result);
+                    let create = |options| {
+                        #[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
+                        let observation = self.compilation_observer.begin(
+                            CompilationKind::RenderPipeline,
+                            CompilationStage::Unspecified,
+                        );
+                        #[cfg(all(feature = "metal-binary-archives", target_os = "macos"))]
+                        let result = self.shared.device
+                            .newRenderPipelineStateWithDescriptor_options_reflection_error(
+                                &d, options, None);
+                        #[cfg(not(all(feature = "metal-binary-archives", target_os = "macos")))]
+                        let result = {
+                            let _ = options;
+                            self.shared.device.newRenderPipelineStateWithDescriptor_error(&d)
+                        };
+                        #[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
+                        observation.finish_native(&result);
+                        result
+                    };
+                    #[cfg(all(feature = "metal-binary-archives", target_os = "macos"))]
+                    let result = self.archive_render(&d, create);
+                    #[cfg(not(all(feature = "metal-binary-archives", target_os = "macos")))]
+                    let result = create(MTLPipelineOption::empty());
                     result
                 }
                 MetalGenericRenderPipelineDescriptor::Mesh(d) => {
@@ -1784,21 +1798,21 @@ impl crate::Device for super::Device {
                 descriptor.setLabel(Some(&NSString::from_str(name)));
             }
 
-            #[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
-            let observation = self
-                .compilation_observer
-                .begin(CompilationKind::ComputePipeline, CompilationStage::Compute);
-            let raw = self
-                .shared
-                .device
-                .newComputePipelineStateWithDescriptor_options_reflection_error(
-                    &descriptor,
-                    MTLPipelineOption::empty(),
-                    None,
-                );
-
-            #[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
-            observation.finish_native(&raw);
+            let create = |options| {
+                #[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
+                let observation = self.compilation_observer
+                    .begin(CompilationKind::ComputePipeline, CompilationStage::Compute);
+                let raw = self.shared.device
+                    .newComputePipelineStateWithDescriptor_options_reflection_error(
+                        &descriptor, options, None);
+                #[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
+                observation.finish_native(&raw);
+                raw
+            };
+            #[cfg(all(feature = "metal-binary-archives", target_os = "macos"))]
+            let raw = self.archive_compute(&descriptor, create);
+            #[cfg(not(all(feature = "metal-binary-archives", target_os = "macos")))]
+            let raw = create(MTLPipelineOption::empty());
 
             let raw: Retained<ProtocolObject<dyn MTLComputePipelineState>> =
                 raw.map_err(|e: Retained<NSError>| {
