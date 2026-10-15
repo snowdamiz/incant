@@ -29,6 +29,7 @@ pub(crate) struct Schedule {
     pub tick: u64,
     pub elapsed_seconds: f64,
     pub timers: BTreeMap<Key, Timer>,
+    pub coroutines: Option<crate::coroutines::Store>,
 }
 #[derive(Clone)]
 pub(crate) struct Timer {
@@ -66,6 +67,7 @@ impl Schedule {
             tick,
             elapsed_seconds,
             timers: self.timers.clone(),
+            coroutines: self.coroutines.clone(),
         };
         let mut events = Vec::new();
         for (id, timer) in &mut next.timers {
@@ -86,6 +88,9 @@ impl Schedule {
     }
     pub fn cancel_scope(&mut self, scope: Scope) {
         self.timers.retain(|key, _| key.scope != scope);
+        if let Some(tasks) = &mut self.coroutines {
+            tasks.retain(|key, _| key.scope != scope);
+        }
     }
     pub fn apply(&mut self, actions: Vec<ScopedAction>) -> Result<(), ScriptError> {
         for ScopedAction { scope, action } in actions {

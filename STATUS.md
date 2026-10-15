@@ -43,6 +43,19 @@ passes local tests and leaves production behavior unchanged. Both desktop jobs
 and Windows Wasm conformance passed on checkpoint44; that checkpoint's separate
 general failure prevented promotion.
 
+## Native explicit-state coroutines — CPU behavior and save/restore qualified
+
+Native TypeScript behaviors can now start deterministic cooperative tasks, wait
+for accepted ticks and restore active continuations from typed checkpoint data.
+This is an explicit-state API, not JavaScript generator/async syntax. Fresh tick
+capabilities, transactional failure, bounded scheduling and immediate-save owner
+retirement pass 201 actual native library/project/cook controls and three strict
+lints. The two new schemas match an executed Rust producer exactly; all 78 older
+registry files remain unchanged. Portable SDK and registry checks also pass.
+Earlier compile failures and all resource charges remain retained. Shipping-player
+export, timing/2 ms budget, Web/Wasm parity and phase gates are not established by
+this result. [Contract and evidence](docs/spikes/native-coroutines.md).
+
 ## Packaged-player frame capture — integrated CPU and Metal qualification
 
 The source-free CPU spatial player can now save selected accepted gameplay

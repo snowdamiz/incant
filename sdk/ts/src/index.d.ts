@@ -1,5 +1,5 @@
 /** Sandbox API. Scripts cannot import host modules or access filesystem/network. */
-export type { NativeBehavior, NativeContext, NativeAnimations, NativeRootMotion, NativePhysics, NativeRayQuery, NativeRayHit, NativeCharacterQuery, NativeCharacterMovement, NativeTriggerEvent, NativeRayQuery2D, NativeRayHit2D, NativeTriggerEvent2D, NativeCommands, HapticTarget, HapticEffect, NativeChunk, NativeId, NativeTransform, NativeVector3, NativeInput, NativeClock, NativeTimers, NativeTimerEvent } from './native';
+export type { NativeCoroutine, NativeCoroutineContext, NativeCoroutineTask, NativeCoroutineResult, NativeCoroutines, NativeBehavior, NativeContext, NativeAnimations, NativeRootMotion, NativePhysics, NativeRayQuery, NativeRayHit, NativeCharacterQuery, NativeCharacterMovement, NativeTriggerEvent, NativeRayQuery2D, NativeRayHit2D, NativeTriggerEvent2D, NativeCommands, HapticTarget, HapticEffect, NativeChunk, NativeId, NativeTransform, NativeVector3, NativeInput, NativeClock, NativeTimers, NativeTimerEvent } from './native';
 export type Id = string;
 export type Json = null | boolean | number | string | Json[] | { [key: string]: Json };
 export interface Entity {

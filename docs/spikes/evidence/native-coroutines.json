@@ -1,0 +1,463 @@
+{
+  "base": "a5f6e181e3047436d8037da2c4519e7781606abc",
+  "format": "incant-native-coroutines-v1",
+  "history": [
+    {
+      "finding": "Review corrected result-inspector binding before launch.",
+      "packet": "CPU001",
+      "status": "unexecuted/superseded"
+    },
+    {
+      "child_exit": 101,
+      "finding": "IntoArgs tuple arity and fixture helper shadowing; no tests executed.",
+      "packet": "CPU002",
+      "status": "failed",
+      "wrapper_exit": 1
+    },
+    {
+      "finding": "Review corrected required SDK property to optional ordinary capability and required resume refinement.",
+      "packet": "CPU003",
+      "status": "unexecuted/superseded"
+    },
+    {
+      "child_exit": 101,
+      "finding": "Independent invariant QuickJS Value lifetime annotation; no tests executed.",
+      "packet": "CPU004",
+      "status": "failed",
+      "wrapper_exit": 1
+    },
+    {
+      "finding": "Two compile checks; no native tests or schema execution.",
+      "packet": "CPU005",
+      "status": "passed"
+    },
+    {
+      "finding": "Actual schema/201 behavior tests/three strict lints.",
+      "packet": "CPU006",
+      "status": "passed"
+    }
+  ],
+  "limitations": [
+    "No shipping-profile player export or source/build-deleted standalone player executed for this feature.",
+    "No full regenerated headless registry; new schemas executed, old registry/source byte identity checked.",
+    "No timing, allocation-free, 2ms script gate, phone/GPU/window or phase completion claim.",
+    "No JS generator/async/Promise continuation, Wasm task ABI, hot reload migration or cross-build save compatibility claim.",
+    "General module globals/closures remain ephemeral at load; persistent behavior opt-in and existing checkpoint capability restrictions still apply."
+  ],
+  "native_artifacts": [
+    {
+      "bytes": 750272,
+      "path": "/Users/andreyyurlov/.codex/incant-core-tick-diagnostic-target/ci/examples/coroutine_schemas",
+      "sha256": "1c5459342b127e2a74c5afd89d538219910e1e89f8d75656065c700114023668",
+      "stage": 0
+    },
+    {
+      "bytes": 22573328,
+      "path": "/Users/andreyyurlov/.codex/incant-core-tick-diagnostic-target/ci/deps/incant_script-69a259c04a211fb7",
+      "sha256": "994d45172b5cbd04fa0b4bf476d3a84d8797779f8cb0a29992b7b6eb8b651cb3",
+      "stage": 1
+    },
+    {
+      "bytes": 18920368,
+      "path": "/Users/andreyyurlov/.codex/incant-core-tick-diagnostic-target/ci/deps/project_bindings-d1361c03cdb631d9",
+      "sha256": "1e60c5d442c4f96da4c74d0a76f5b9ac89848a8af6b6fab8cfd6e48e267fc148",
+      "stage": 2
+    },
+    {
+      "bytes": 20846344,
+      "path": "/Users/andreyyurlov/.codex/incant-core-tick-diagnostic-target/ci/deps/typescript-bb2804c88ee185b5",
+      "sha256": "45f7c40f59af94aa5998db76ff2504b406dba9506c26199b5bbd7a516af6a4d3",
+      "stage": 3
+    }
+  ],
+  "native_cpu": {
+    "actual_tests": 201,
+    "closeout_sha256": "f09c68e880ea139d650c14081d52be16fe987f308b5a44fdc900540b0c1b87d6",
+    "elapsed_seconds": 263.13780037499964,
+    "independent_absent_pid_count": 144,
+    "owned_process_groups_reaped": [
+      73490,
+      73543,
+      73872,
+      74026,
+      76374,
+      76529,
+      76610
+    ],
+    "packet_sha256": "e20bbfa3e90bbd08e6fc007891115ec49e2b8c8f6baeb8589965e3e787a453f1",
+    "results_sha256": "75214694e804b69aa5e75a76806b43addcb8004db79f3e56d74e453b7d733721",
+    "schemas": {
+      "exact_schema_bytes_match": true,
+      "files": {
+        "CoroutineResult.schema.json": {
+          "bytes": 1361,
+          "expected_sha256": "0b6a528843a9420ec6bc6c0cef54cb2fa5913fda57229ff83ee25a8f33b2e4e6",
+          "sha256": "0b6a528843a9420ec6bc6c0cef54cb2fa5913fda57229ff83ee25a8f33b2e4e6"
+        },
+        "CoroutineValue.schema.json": {
+          "bytes": 457,
+          "expected_sha256": "ee223ac3c4294c1f6d99f4c3974679f08309776af469de50b1e9131fbe0f1348",
+          "sha256": "ee223ac3c4294c1f6d99f4c3974679f08309776af469de50b1e9131fbe0f1348"
+        }
+      },
+      "scope": "Two new schemas only; full headless inventory remains separate."
+    },
+    "source_tools_predecessors_unchanged": true,
+    "strict_lint_stages": 3,
+    "test_passed_counts": [
+      179,
+      19,
+      3
+    ],
+    "wrapper_exit": 0,
+    "wrapper_session": 46422
+  },
+  "portable": {
+    "coroutine_typescript_controls": 3,
+    "earlier_typed_producer": "89a9ef4e5113f8cb1947233fe5072ba565a512a2",
+    "evidence_validator_controls": 9,
+    "later_source_change": "Only reviewed Rust lifetime inference fix before current native producer.",
+    "schema_checker_controls": 7,
+    "strict_typescript_and_generator_check": "passed"
+  },
+  "portable_records": {
+    "compressed_bytes": 46714,
+    "content": "Data-only UTF-8 logs and JSON/Markdown receipts. No executables or executable verifier. Each record binds exact retained bytes by SHA-256.",
+    "file": "native-coroutines-records.json.gz",
+    "index": {
+      "cpu001/README.md": {
+        "bytes": 5827,
+        "sha256": "f8d64920ac7e1d2972278d84c733b8a07741de2ca234b26b853d3b79eb5735ac"
+      },
+      "cpu001/packet.json": {
+        "bytes": 940,
+        "sha256": "5f0f80a01919bbc4eacecdffe7c18f42a2222931d10b45ae31b8ea9003c7d424"
+      },
+      "cpu001/plan.json": {
+        "bytes": 2628,
+        "sha256": "4b215cbe88ba0fe535c4eeda2f09b0ffa4a10ea4d0f87893da7d14a2adab87e0"
+      },
+      "cpu002/README.md": {
+        "bytes": 6410,
+        "sha256": "c2cbf53725dd67344abc4992537372b400ec38f72a43931598ada22902fe06e3"
+      },
+      "cpu002/closeout.json": {
+        "bytes": 1108,
+        "sha256": "0be1a218b303eb1d8642dfceb7d0a0bb05531d4a5f2b5ca34bb9f97b38a3700d"
+      },
+      "cpu002/packet.json": {
+        "bytes": 1037,
+        "sha256": "7da37b99a69635a16ca2a8fc8c8b7e8e2d7550f9a89903cc7bc122bb2d39a32f"
+      },
+      "cpu002/plan.json": {
+        "bytes": 2628,
+        "sha256": "bd6736ed46a0c33b5375fa86f847dcbb512b6aa88dacf92eba03c53b4287ffd6"
+      },
+      "cpu002/root-grant.json": {
+        "bytes": 645,
+        "sha256": "4855bb0f5347c83cb78b392fa9ecfeed13282ec111196a260bca1b21649b1eeb"
+      },
+      "cpu002/run-001/0.stderr.log": {
+        "bytes": 8819,
+        "sha256": "75c8bb6714afd5700e9516986f0584541444547020cb9512eaa52e4daf331a24"
+      },
+      "cpu002/run-001/0.stdout.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "cpu002/run-001/results.json": {
+        "bytes": 2490,
+        "sha256": "f883487f34a92d880e135cce4153c1fe0ab79b0f8a98e46c7e69b8e100a25be1"
+      },
+      "cpu003/README.md": {
+        "bytes": 6835,
+        "sha256": "d6cad878c9eb9e7bc45525a9dabd4087c8b7843e1d0ca51fab90539f61e97168"
+      },
+      "cpu003/packet.json": {
+        "bytes": 1129,
+        "sha256": "135d704335b8300d9c26cf8cff081eccf739174ac675b2c7655cc43b5e073f97"
+      },
+      "cpu003/plan.json": {
+        "bytes": 2631,
+        "sha256": "10e878961e9e19d3aaed99e7dc4445ae94ae044a15f0789ef6d55440f04620a3"
+      },
+      "cpu004/README.md": {
+        "bytes": 7390,
+        "sha256": "0231953de533758a5d7cdcfddaef860b96c326ab97d7cc2d238d5df24d7a7eac"
+      },
+      "cpu004/closeout.json": {
+        "bytes": 926,
+        "sha256": "a9ef33e2ad16b7107c1e0937ee8f4b541f2cf6cedb833097db47c474a6e35f9b"
+      },
+      "cpu004/packet.json": {
+        "bytes": 1120,
+        "sha256": "3f7aee586d144044f581f46f1bf803c0378fc6c505dd87d440ae3d8e5b6346d4"
+      },
+      "cpu004/plan.json": {
+        "bytes": 2631,
+        "sha256": "3ed2dfb800702c26b119fcc27c92c50aa18b4b74414eecc84c8d923b76c7c15b"
+      },
+      "cpu004/portable.json": {
+        "bytes": 781,
+        "sha256": "c6630712548ec34df4e54b5240fb731b75ea44c51563434cf02040f9c15a2725"
+      },
+      "cpu004/root-grant.json": {
+        "bytes": 662,
+        "sha256": "1f1c41e1e6eaf35c3e047b2570add067bb3d1c48ed8f1e9cd67811679b0656dc"
+      },
+      "cpu004/run-001/0.stderr.log": {
+        "bytes": 2174,
+        "sha256": "762b19a9ee8386b2f384531ec054c9bd8979e5b7bdef0687c528b3a5bacb2c90"
+      },
+      "cpu004/run-001/0.stdout.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "cpu004/run-001/results.json": {
+        "bytes": 2138,
+        "sha256": "6fdb8eb1d4b975667d156cc1a60ff06afa074c257cc6793b356fab20a28d7f38"
+      },
+      "cpu005/README.md": {
+        "bytes": 7344,
+        "sha256": "89d21d5e575436616b8590838430e49da89e271e73522e006cde4c6f508455eb"
+      },
+      "cpu005/closeout.json": {
+        "bytes": 1604,
+        "sha256": "1e0c0ba23ca68fb4059c07f3ac5d9659e17ecc731fcad7e2f00795f6cd720ebd"
+      },
+      "cpu005/packet.json": {
+        "bytes": 1219,
+        "sha256": "5aca7a8627c4f1e569a15e5d5966cf184c52e71e9d39310c4b15f7205266542c"
+      },
+      "cpu005/plan.json": {
+        "bytes": 2631,
+        "sha256": "fc8f8ba8c581961aa937a5673be18f3afd80121694979bf8a14f7fed5db92512"
+      },
+      "cpu005/portable.json": {
+        "bytes": 781,
+        "sha256": "c6630712548ec34df4e54b5240fb731b75ea44c51563434cf02040f9c15a2725"
+      },
+      "cpu005/root-grant.json": {
+        "bytes": 640,
+        "sha256": "fb060131b32b1bd1bb3487a9f0184685ea3c8885d5286319d4410c9d1b8b1e2a"
+      },
+      "cpu005/run-001/0.stderr.log": {
+        "bytes": 176,
+        "sha256": "fbe79fb1991cd690b25856fb7ca546fdcd836d772b7356f0b9ee256d8a961bcb"
+      },
+      "cpu005/run-001/0.stdout.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "cpu005/run-001/1.stderr.log": {
+        "bytes": 8715,
+        "sha256": "a70b6386edad5cb3681257f3ab326f1d09f21b6b8d71e48d3f0197c9d555dd85"
+      },
+      "cpu005/run-001/1.stdout.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "cpu005/run-001/results.json": {
+        "bytes": 4218,
+        "sha256": "c8f3b983d997aab1ece07adcc26da9b0f442ccb3e1094710462327e156439293"
+      },
+      "cpu006/README.md": {
+        "bytes": 6261,
+        "sha256": "3aeabdfc959634ecb7a2047170fdfa5d9b3dce5df4728e35dcf3f2f29b97ef09"
+      },
+      "cpu006/closeout.json": {
+        "bytes": 4700,
+        "sha256": "f09c68e880ea139d650c14081d52be16fe987f308b5a44fdc900540b0c1b87d6"
+      },
+      "cpu006/host.json": {
+        "bytes": 572,
+        "sha256": "12ac0b15ada3b06d2ceaea293dd841aa61c19b3dd71b31360581202220e53865"
+      },
+      "cpu006/packet.json": {
+        "bytes": 1506,
+        "sha256": "e20bbfa3e90bbd08e6fc007891115ec49e2b8c8f6baeb8589965e3e787a453f1"
+      },
+      "cpu006/plan.json": {
+        "bytes": 8805,
+        "sha256": "e9c3b80b214284498597fb507926c29f1e62c5aab903f174acdcd060cdac0621"
+      },
+      "cpu006/portable.json": {
+        "bytes": 781,
+        "sha256": "c6630712548ec34df4e54b5240fb731b75ea44c51563434cf02040f9c15a2725"
+      },
+      "cpu006/root-grant.json": {
+        "bytes": 752,
+        "sha256": "5e195e6c9148c1639360da6e9fd09792070cf13fed1299982669e6d77dac227d"
+      },
+      "cpu006/run-001/0.stderr.log": {
+        "bytes": 428,
+        "sha256": "c7e17b60e5067d90d9bf47b4f58e6e2f73982810c8e25ebbe1283a7f313bab89"
+      },
+      "cpu006/run-001/0.stdout.log": {
+        "bytes": 2068,
+        "sha256": "8b8ecfba8499c9fd4677f97db481f392f49ef6a2d155294d8f1e26b1991cc6bf"
+      },
+      "cpu006/run-001/1.stderr.log": {
+        "bytes": 1939,
+        "sha256": "7478aa0ac606402defe997ff1528d329133b6fe5e88c0a9f540e134930378005"
+      },
+      "cpu006/run-001/1.stdout.log": {
+        "bytes": 17664,
+        "sha256": "51546751e9c5ee7c2b3195fe6009f56ba3d9e6a5e94c74401464eaba87f91141"
+      },
+      "cpu006/run-001/2.stderr.log": {
+        "bytes": 321,
+        "sha256": "fc72e9279e1c4863aff95f3075320633e4d6b40de543e62d6398a60ddc365aaf"
+      },
+      "cpu006/run-001/2.stdout.log": {
+        "bytes": 1735,
+        "sha256": "7d8e95ff1c1a92abd595fe343f92e3a84fbc02fcb489d323a7935cc67abf6e4e"
+      },
+      "cpu006/run-001/3.stderr.log": {
+        "bytes": 8848,
+        "sha256": "b98f0ecf3bec89cabc23b085b31e842afbdd94619028aa7788c688ac2973a6c5"
+      },
+      "cpu006/run-001/3.stdout.log": {
+        "bytes": 386,
+        "sha256": "ca9ba071e8e0665a6e5706f5d82c14e57421da9d86b7549c7c5361c2b222ea98"
+      },
+      "cpu006/run-001/4.stderr.log": {
+        "bytes": 1523,
+        "sha256": "5935f092f15dba57ca1f7c91ba8ae93e67d34cbdd5a8f71464ae15a7c07c34f0"
+      },
+      "cpu006/run-001/4.stdout.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "cpu006/run-001/5.stderr.log": {
+        "bytes": 2606,
+        "sha256": "6c72dd540804ef479e3f5fd2bdfa0f982568205f0e39d3b0de636e4c6012ca34"
+      },
+      "cpu006/run-001/5.stdout.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "cpu006/run-001/6.stderr.log": {
+        "bytes": 321,
+        "sha256": "07abbddc2843f0cdb6cec14d71d45dac9d30edb97c7fa941ba956b829102a490"
+      },
+      "cpu006/run-001/6.stdout.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "cpu006/run-001/results.json": {
+        "bytes": 45145,
+        "sha256": "75214694e804b69aa5e75a76806b43addcb8004db79f3e56d74e453b7d733721"
+      },
+      "cpu006/run-001/schema-generated/CoroutineResult.schema.json": {
+        "bytes": 1361,
+        "sha256": "0b6a528843a9420ec6bc6c0cef54cb2fa5913fda57229ff83ee25a8f33b2e4e6"
+      },
+      "cpu006/run-001/schema-generated/CoroutineValue.schema.json": {
+        "bytes": 457,
+        "sha256": "ee223ac3c4294c1f6d99f4c3974679f08309776af469de50b1e9131fbe0f1348"
+      },
+      "cpu006/storage-estimate.json": {
+        "bytes": 2842,
+        "sha256": "efe8818b038dae69ab0896d488ad963a345f999d2c61274e7c17ad662ebd3ad0"
+      },
+      "cpu006/tools.json": {
+        "bytes": 1645,
+        "sha256": "72c5badd3570a5789a1677e523c201785197a506b7c54675ee093036d0081eea"
+      },
+      "cpu006/validator-controls.json": {
+        "bytes": 83,
+        "sha256": "6aa7b5ec063683dd2a97ede31ab8eaa679ce030baeb82cf0f85da2fbad47077f"
+      },
+      "docs/portable-final.json": {
+        "bytes": 900,
+        "sha256": "cfca9863e30f525d9a265fc16f450975e5fffb7750ca6dc19cfd068d20d8883e"
+      },
+      "docs/registry-source-proof.json": {
+        "bytes": 10251,
+        "sha256": "094b62cb309c294b53c3d4f4ff7125515272a4973728cf3ed44138a01554dde5"
+      }
+    },
+    "record_count": 63,
+    "sha256": "74da4aa44d0d9b51ffb279c920e6993760ee817360f4d7710732a05669093b68",
+    "uncompressed_bytes": 230896
+  },
+  "producer_files": {
+    "Cargo.lock": "965928c8183abe247931b7699ff1ff0e385f3f07f513ca88884a82386d85aabd",
+    "crates/incant_cook/tests/typescript.rs": "cdb1764f36dbfb64f6f552115afdf490167170d4233ee477af140eed35586159",
+    "crates/incant_headless/src/main.rs": "69cd329f561aa7846b1b3ccff25f43e7909f10aa24da03ae0fc5cd1642f06e25",
+    "crates/incant_script/build.rs": "9415476a4dab7e94297d6166908d4d4da6cab400b6c112db1150878fa427218a",
+    "crates/incant_script/src/bindings.rs": "09d398a321dbcbe4e6117845b381998ffe2d0b6374b3d27aaa59b9399429837b",
+    "crates/incant_script/src/checkpoint/codec.rs": "910fa49c7d71ad0fd69364f878c7c517e0bae10dfc50960d3a41d91ae3917c47",
+    "crates/incant_script/src/checkpoint/mod.rs": "4ed856e76fffd44eadcf43edd4cb036a778c89e90d237813eb1c8d505da598bb",
+    "crates/incant_script/src/checkpoint/native/tests/persisted.rs": "887c1b373cc0c932b96113297a0e283771c8b1ac3b802a5fc3dfe3a8bf46a2f8",
+    "crates/incant_script/src/checkpoint/pending.rs": "f52fceff50bfc9f3af45c6742f95ebbbedf713e962821c35bb186cba946673db",
+    "crates/incant_script/src/checkpoint/tests.rs": "d9d8ea8327be6c66bdb7ce6de487a45a55168b6d703f37adc06927a59885c574",
+    "crates/incant_script/src/checkpoint/tests/coroutines.rs": "2e8a7235d8493adb73a25567e00a30d77fbd3c72f264a5d85a8ace7d34c1a274",
+    "crates/incant_script/src/commands.rs": "ae6214ff8ffa2fd2c0f46e6ebc8ecbdc763a178356156eee42434d51d0125cd9",
+    "crates/incant_script/src/compiled.rs": "b0c51e17caedb5c344ae7c56dd4ecd2b8667aab94c8004bedcd7415dde5af81a",
+    "crates/incant_script/src/compiler.rs": "c6a4fd8e51be5125ebf0a4f64d29024a5bc1696c1400ebd8221381aae2a03e01",
+    "crates/incant_script/src/coroutines/api.rs": "6b20f39eaa5446cad06b6e148ffbe710cdd16139c467e1181231e37b9235ee39",
+    "crates/incant_script/src/coroutines/catalog.js": "d6488f83ab08f94b109272f225fbe2efb28eee5532b309ea04ec0f90f6182b16",
+    "crates/incant_script/src/coroutines/mod.rs": "f6045195390333b106d53165fab24a83797f3c5f22a6f97c21c4664bd0c244a1",
+    "crates/incant_script/src/coroutines/tests.rs": "a71196060484dbcc4fbe215621b98770c16cd68c8af96fbeb13a7587b3b60b15",
+    "crates/incant_script/src/harden.js": "2cb0cb6e53540ecf5fea4406d8f6dc6f78c5c36922163ef93f78b6677470b84d",
+    "crates/incant_script/src/lib.rs": "3819fc8ec2fe5ee54a7aed6e1a185183182d5faf17e9e33aacca6e02a55c1a8d",
+    "crates/incant_script/src/logging.rs": "40d72708509049e405d29401c4f0e13997b7e26749663ad2230b95fb6d00bd7d",
+    "crates/incant_script/src/persistence.rs": "6998549ef4e46bc8e4f0a84f1a2e6ee85d0b0b83f323520d97c688cb8a3f48cd",
+    "crates/incant_script/src/persistence/value.rs": "3aa57d804d9055487b51624c439d183a3a6bb2f3583828f57e1974ffa033bde1",
+    "crates/incant_script/src/queries.rs": "9f6936d6a10502f76c0ae965b9577ded46ff2f18c964e3af5768fa872d85c92c",
+    "crates/incant_script/src/schedule.rs": "b7719f668cd9b2584f8f6c6d305ade7036fd8c8720964d388a9e69cfbfa83b8f",
+    "crates/incant_script/src/timers.rs": "282a68055606f8de53387859c5d9aa6425f71c850d2cba6b9d829d6fbc93cff8",
+    "crates/incant_script/tests/fixtures/coroutine.cjs": "591ad9bfe3af13ef0ca7769a94374975842296f39e5685a9693cbc59c43d8d23",
+    "crates/incant_script/tests/fixtures/coroutine.ts": "52c7154fe6849b7948d9f820ded1210e408c77fdb1960d030a88a6eb734e1759",
+    "crates/incant_script/tests/project_bindings.rs": "80c0ac43b41aae0a0cd7b5d33ad0a78cb60174501ad1b8a2958fe89b776365fe",
+    "crates/incant_types/Cargo.toml": "3ce3df6c0fca54088da3bb9b6d570e3e108e8759d7930080d107cc80bcc49029",
+    "crates/incant_types/examples/coroutine_schemas.rs": "e47b38c0dcc2b57c506c2d7635efc18c3cce5b51ff9e4d031809a3fd60f2e720",
+    "crates/incant_types/src/coroutines.rs": "7e28a3f75889b87d48e3594c93e9dcf1b7b978128163a324754bcff8fe21dcab",
+    "crates/incant_types/src/lib.rs": "ecab6945c9654344444ba8dd1e9d634ede6949a6a86507d3796845d02b2d90a8",
+    "schemas/CoroutineResult.schema.json": "0b6a528843a9420ec6bc6c0cef54cb2fa5913fda57229ff83ee25a8f33b2e4e6",
+    "schemas/CoroutineValue.schema.json": "ee223ac3c4294c1f6d99f4c3974679f08309776af469de50b1e9131fbe0f1348",
+    "sdk/templates/native-coroutines/pulse.ts": "f38f70cf0cc2869f88a1549821befa74853e0d360b2813b0b6112433c58f52c7",
+    "sdk/ts/src/generated.d.ts": "e6575b4f3cb9f3965e5be0031ca7969b32eeeaac10260ce3cd1a60e38f8262c2",
+    "sdk/ts/src/index.d.ts": "9c4b4265dc064e96058769aa6703451c3ce7f25ca83b6d063f6cc91e6501bede",
+    "sdk/ts/src/native.d.ts": "c15d64b0cf247bc90f552014e2f811edd4c5c722c9be85e7aa1e0750bc9c595f",
+    "tools/generate_sdk.mjs": "882c6713bdcccca97532f7e7e558929f5fd5ca215d1a05d10a6eac6397bf0fe5",
+    "tools/tests/native_script.test.mjs": "72dc9c950646163e18b8977d7bd04163c151161cc8ad7007f21898b4997a191b"
+  },
+  "producer_source": "9c72358987ca4e2bbc307c541569b66773ce4760",
+  "profile": "ci",
+  "registry": {
+    "full_headless_registry_generation_executed": false,
+    "headless_source_only_delta": "Two schema_for registrations matching executed example; existing generator and comparer unchanged.",
+    "new_files": 2,
+    "old_files_unchanged": 78,
+    "total_files": 80
+  },
+  "resource_limits": {
+    "final_aggregate_bytes": 17453062223,
+    "jobs": 2,
+    "launch_free_bytes": 18790481920,
+    "limitations": "Sampled limits and trusted process-group containment, not kernel-hard quotas. Original costs/copies/failures retained. CORE subsequently reusable by coordinated root; these are historical measurements.",
+    "original_sequence_seconds": 3600,
+    "rayon_threads": 2,
+    "runtime_free_floor_bytes": 6442450944,
+    "sampled_peak_rss_bytes": 1789280256,
+    "sampled_peak_target_bytes": 17013226021,
+    "sampled_rss_ceiling_bytes": 8589934592
+  },
+  "resources": {
+    "allocation_extension_bytes": 2147483648,
+    "final_target_bytes": 17014541622,
+    "initial_target_bytes": 16033339382,
+    "original_target_ceiling_bytes": 16315702201,
+    "prior_charge_seconds": 527,
+    "prior_copy_bytes": 380898056,
+    "target_ceiling_bytes": 18463185849,
+    "total_charge_seconds": 801
+  },
+  "retained_external_packet": "/Users/andreyyurlov/.codex/incant-evidence/native-coroutines-cpu-006-_rdh7p6k",
+  "scope": "Explicit-state native cooperative tasks with deterministic scheduling and typed checkpoint restoration; not JS generators/async syntax.",
+  "source_patch_sha256": "a089d0e0bde1edcf66eb2039a76d72a907dbba478c303e50322fa1b7a6cf5f7e",
+  "target": "aarch64-apple-darwin"
+}
