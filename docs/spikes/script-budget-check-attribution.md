@@ -1,6 +1,6 @@
-# CPU-budget check attribution: source proposal
+# CPU-budget check attribution
 
-The proposed default-off `diagnostic-script-budget` feature observes the existing
+The default-off `diagnostic-script-budget` feature observes the existing
 lock/check boundary, separating QuickJS interrupt checks from explicit host/native
 checks and whether each occurs inside a source callback. It changes no check
 location or frequency, thread-CPU clock, owner check, error latch, deadline,
@@ -42,9 +42,35 @@ conservative script build identity previously omitted `budget.rs` and
 same-length changes to either enforcement file change its framed identity suffix,
 without rebuilding a compiler. This intentionally changes conservative
 compatibility; prior compiled artifacts remain historical, not current builds.
-These controls are authored and unrun.
-No Rust build, benchmark, player, GPU, app/window or screen capture is included in
-this source milestone. The standing screen-capture pause remains in force.
+The CPU qualification passed on source `18ab2c53`, following initial source
+`7c509b2d`. The first attempt retained a test compile refusal: an unqualified
+`diagnostic` import conflicted with Rust's tool module. Its one-line successor
+qualified the test import; production and assertions stayed identical.
+
+| Executed control | Outcome |
+| --- | --- |
+| Normal performance-reader refusals / conservative identity input sensitivity | 22 / 2 Python tests passed |
+| Budget-only schema 3 / combined navigation schema 4 collectors | 13 / 18 tests passed |
+| Ordinary version 3 summary | 6 tests passed |
+| Actual script host, diagnostic enabled / ordinary feature off | 156 / 151 passed; one existing ignored test in each |
+| Dedicated allocation executables | Three passed; both diagnostic variants observed 64,000 check/clock annotations across 1,000 complete frames without allocation or reallocation |
+| Strict all-target Clippy, profile/script/player | Diagnostic plus navigation, and ordinary configurations passed |
+
+These are repeated feature configurations, not a count of unique tests. The
+ignored script test is the existing opt-in 128-tick CPU stress diagnostic.
+Eight successful test executables were copied and hash-bound before target
+release. Rust 1.99.0 used the arm64 CI profile, locked/offline resolutions and two
+compiler/Rayon workers. Cumulative target growth was 74,090,239 bytes, below the
+2 GiB bound; all managed children were reaped. The original failure remains in
+the [portable evidence](evidence/script-budget-check-attribution/manifest.json).
+Its [offline verifier](evidence/script-budget-check-attribution/verify.py) checks
+raw outcomes, source identities and optional retained originals/binaries.
+
+No shipping diagnostic, benchmark, GPU, app/window or screen capture ran in this
+qualification. Collector boundary tests include synthetic annotations; the real
+VM controls separately exercise actual interrupt/native-query checks and failure
+rollback. Neither supplies full-workload costs or a performance gate. The
+standing screen-capture pause remains in force.
 
 The hypothesis is distinct from closed matrix, ordered-query, navigation-cache
 and repeated-start experiments. Prior same-frame attribution puts callbacks near
