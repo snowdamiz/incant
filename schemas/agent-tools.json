@@ -384,6 +384,38 @@
             },
             {
               "additionalProperties": false,
+              "description": "Copy a complete ordinary subtree beside its root in the same scene.",
+              "properties": {
+                "entities": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "description": "Exact source entity -> globally fresh entity identity map.",
+                  "maxProperties": 1024,
+                  "minProperties": 1,
+                  "type": "object"
+                },
+                "op": {
+                  "const": "duplicate_subtree",
+                  "type": "string"
+                },
+                "root_entity_id": {
+                  "type": "string"
+                },
+                "scene_id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "op",
+                "scene_id",
+                "root_entity_id",
+                "entities"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
               "properties": {
                 "entity_id": {
                   "type": "string"
