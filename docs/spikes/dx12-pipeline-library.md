@@ -143,6 +143,17 @@ has a 3,600-second deadline; native execution has 900 seconds within 4,500 total
 with 120 seconds per native child. Kernel cleanup must finish before returning.
 These bounds do not claim aggregate GPU/driver memory or performance.
 
-Local successor validation is limited to portable parser/refusal controls,
-harmless process cleanup, metadata, syntax, conventions and formatting. No local
-Rust build, renderer, GPU, window or capture is part of that validation.
+Local source controls passed nine portable parser/refusal and harmless process
+cleanup tests, plus metadata, syntax, conventions and formatting. The first
+Windows GNU test-target compile at `da7267ff` exposed latent vendor-test borrowing
+and raw-pointer refresh errors; that failed attempt remains retained. The
+test-only repair at `57839a92` preserves every key inequality and the production
+key implementation, and both ordinary and full-cooked renderer `--tests` strict Clippy checks
+then passed. The supervisor exited zero, all seven owned process groups were
+independently absent, and no artifacts were copied. Final shared-target usage
+was 15,765,515,633 bytes below its unchanged 16,315,702,201-byte ceiling.
+
+These are Windows GNU compile/lint checks on macOS: zero native Windows tests
+were executed. MSVC compilation, native library hits, Windows filesystem/COM
+controls and pixel parity remain for the manual hosted diagnostic. No local
+GPU, window or capture was run.
