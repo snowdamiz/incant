@@ -21,12 +21,12 @@ fn real_rust_light_controls_match_native_on_wasm2c_and_wasmtime_without_rebindin
     for phase in 1..=8 {
         compiled.tick(&mut a, 1. / 60.).unwrap();
         dev.tick(&mut b, 1. / 60.).unwrap();
-        let mut first = true;
         native.with_numeric_columns(|cols| {
             cols.for_each_chunk(|c| {
-                if first {
-                    c.transforms[0] = f64::from(phase);
-                    first = false;
+                for (row, owner) in c.ids.iter().enumerate() {
+                    if *owner == id(1) {
+                        c.transforms[row * TRANSFORM_STRIDE] = f64::from(phase);
+                    }
                 }
             })
         });

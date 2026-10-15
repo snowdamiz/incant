@@ -23,15 +23,18 @@ fn light_controls_order_with_numeric_batches_preserve_bindings_and_round_trip_sa
     w.apply(&mut q).unwrap();
     assert!(q.is_empty());
     let now = declarations(&w);
-    assert_eq!(now[0].directional.as_ref().unwrap().color, [0.2, 0.3, 0.4]);
-    assert_eq!(now[0].directional.as_ref().unwrap().intensity, 0.);
     assert_eq!(
-        now[0].directional.as_ref().unwrap().shadows,
-        before[0].directional.as_ref().unwrap().shadows
+        now[&id(1)].directional.as_ref().unwrap().color,
+        [0.2, 0.3, 0.4]
     );
-    assert_eq!(now[1].point.as_ref().unwrap().intensity, 1_000_000.);
-    assert_eq!(now[1].point.as_ref().unwrap().range, 3.);
-    assert_eq!(now[2].spot.as_ref().unwrap().intensity, 4.);
+    assert_eq!(now[&id(1)].directional.as_ref().unwrap().intensity, 0.);
+    assert_eq!(
+        now[&id(1)].directional.as_ref().unwrap().shadows,
+        before[&id(1)].directional.as_ref().unwrap().shadows
+    );
+    assert_eq!(now[&id(2)].point.as_ref().unwrap().intensity, 1_000_000.);
+    assert_eq!(now[&id(2)].point.as_ref().unwrap().range, 3.);
+    assert_eq!(now[&id(3)].spot.as_ref().unwrap().intensity, 4.);
     assert_eq!(
         (
             w.spatial_view().unwrap().binding_generation(),
@@ -53,7 +56,13 @@ fn light_controls_order_with_numeric_batches_preserve_bindings_and_round_trip_sa
 fn light_controls_use_final_declarations_and_late_refusal_keeps_every_mixed_prefix() {
     let mut w = NativeWorld::new(scene());
     let mut replacement = CookedSpatial::empty(id(4));
-    replacement.point = scene().spatial()[1].point.clone();
+    replacement.point = scene()
+        .spatial()
+        .iter()
+        .find(|n| n.entity == id(2))
+        .unwrap()
+        .point
+        .clone();
     w.apply(&mut queue([
         control(4, LightControl::Intensity(9.)),
         StructuralCommand::SetSpatial {
@@ -64,7 +73,7 @@ fn light_controls_use_final_declarations_and_late_refusal_keeps_every_mixed_pref
     .unwrap();
     assert_eq!(
         declarations(&w)
-            .last()
+            .get(&id(4))
             .unwrap()
             .point
             .as_ref()

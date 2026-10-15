@@ -46,11 +46,11 @@ pub fn queue(commands: impl IntoIterator<Item = StructuralCommand>) -> FrameComm
     }
     q
 }
-pub fn declarations(w: &NativeWorld) -> Vec<CookedSpatial> {
+pub fn declarations(w: &NativeWorld) -> std::collections::BTreeMap<StableId, CookedSpatial> {
     w.spatial_view()
         .unwrap()
         .nodes()
-        .filter_map(|n| n.declaration.cloned())
+        .filter_map(|n| n.declaration.cloned().map(|d| (n.id, d)))
         .collect()
 }
 pub fn control(n: u128, control: LightControl) -> StructuralCommand {
