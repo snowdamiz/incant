@@ -78,9 +78,8 @@ preservation across a late failed candidate followed by success. The Linux-only
 ignored lifecycle below additionally prepares all optional catalogs and checks
 71 live render + 2 live compute objects, refused settings preserving cache bytes,
 bounded repeated catalogs and no Drop write. Those are live object counts, not
-cumulative creation or cache-hit counters. These new controls are source-only
-until the separately coordinated CPU qualification; actual Vulkan execution
-remains pending.
+cumulative creation or cache-hit counters. CPU qualification passed as recorded
+below; actual Vulkan execution remains pending.
 
 ## Historical verification
 
@@ -111,3 +110,45 @@ no running daemon. No cache-hit, startup-speed, rendered-parity, phone-budget or
 phase-gate result follows from the CPU checks. Current fixed pipelines are still
 prepared at startup; per-level permutation recording, asynchronous fallback
 compilation, other backend caches and cache eviction remain separate work.
+
+## Optional-catalog CPU qualification (2026-10-15)
+
+Production source `02ad03fe036f2393a02b41d0a463a9b279d60a53` is based on
+main325 `4315ab377e8aae3234aef7448b9e442b75d0433d`. The qualified successor
+`9addba2d67526e3c6e768384dec1a907d5dd2a53` changes only the ignored Vulkan
+test: held file handles and device/inode equality detect identical-byte
+replacement after refused preparation or Drop. Production source is unchanged.
+No shader, Cargo feature, dependency, cache admission or frame policy changed.
+
+The single CPU003 sequence completed all nine planned checks under Rust 1.99,
+arm64 CI profile, locked/offline, two Cargo jobs and two Rayon threads:
+
+- 19 filtered cache-enabled CPU controls and the three overlapping feature-off
+  controls pass, including four new publication/lifetime controls.
+- The Linux/Vulkan lifecycle harness compiles on this Mac with `--no-run`;
+  none of its driver assertions was executed.
+- Strict all-target renderer Clippy passes with the cache feature on and off.
+  The cooked-temporal + cache library also compiles.
+- Renderer formatting, generated conventions and diff checks pass.
+
+All managed children returned zero and were reaped. Elapsed time was 120.69 s,
+recorded target growth 362,496,881 bytes and minimum sampled free storage
+89,080,733,696 bytes. These are qualification resource observations, not startup
+or rendering benchmarks. Two executed test binaries and the unexecuted Vulkan
+harness binary were copied outside the build target. CPU001/002 were unexecuted
+proposals, retained with the test-only and target-only corrections; no failed
+native attempt was discarded or retried.
+
+[The portable packet](evidence/optional-pipeline-cache/manifest.json) retains
+source generations, root grant, exact commands and raw outputs. Run
+`python3 docs/spikes/evidence/optional-pipeline-cache/verify.py` for offline
+record verification. `--git-source` binds both immutable producer commits;
+`--originals` additionally rehashes retained external records and source copies;
+`--binaries` requires the three external copied executables. The archive contains
+no binaries or opaque driver cache bytes. Missing external originals remain an
+explicit verification limitation, not reconstructed evidence.
+
+No native GPU, window, capture helper or screenshot ran in this qualification.
+Actual Linux/Android driver persistence, backend rendering parity, cache-hit
+rate and any reduction in startup/shader stalls remain unproven. The feature
+remains default-off.
