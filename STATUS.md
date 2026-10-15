@@ -30,6 +30,26 @@ that normalized away its own `..` input. The [fixture correction](docs/spikes/wi
 passes local tests and leaves production behavior unchanged; corrected Windows
 execution is pending.
 
+## Cooked SSAO — complete family and numerical Metal parity qualified
+
+The trusted cooked-native selection includes all five existing SSAO programs:
+seventeen families, 99 artifacts. Default AO, WGSL equations and cold cache
+preparation remain unchanged; partial cooked-output/materials modes refuse AO.
+All six ordinary-material backend artifacts remain byte-identical to main346.
+
+47 cooker, 23 default AO, 212 full aggregate/cache, both partial-refusal controls,
+27 Python audit/profile controls and strict lint pass. The player was compiled
+only; actual compiler output passes the complete 99-artifact audit. Four Metal
+controls cover cold admission, zero strength, resize/queued ownership and refusals.
+Two additional controls on Apple M5 Pro prove exact default/cooked disabled/zero/
+positive output: 1,231 pixels darken by at least eight codes, maximum 52, with
+unchanged alpha/coverage and no brightening. Imported textured MASK content is
+observable. Two new CPU controls per mode, both strict lints and four independent
+comparison-refusal controls pass. The compile-name and iterator-lint failures
+remain recorded. No window/capture, AO appearance, new public shipping export,
+Vulkan/Dx12 driver, cache-hit or shader-stall/performance gate claim follows.
+[Source and portable evidence](docs/spikes/cooked-ssao.md).
+
 ## Gameplay light controls — CPU and numerical Metal qualified
 
 Native gameplay, TypeScript and the Rust Wasm SDK can change existing directional,
