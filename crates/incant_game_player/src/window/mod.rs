@@ -34,7 +34,7 @@ use std::{
 };
 use surface::{SurfaceState, SurfaceTargets};
 use tao::{
-    dpi::PhysicalSize,
+    dpi::{LogicalSize, PhysicalSize},
     event::{Event, WindowEvent},
     event_loop::{ControlFlow, EventLoop},
     platform::run_return::EventLoopExtRunReturn,
@@ -302,7 +302,7 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
     let window = Arc::new(
         WindowBuilder::new()
             .with_title("Incant native game")
-            .with_inner_size(PhysicalSize::new(640, 480))
+            .with_inner_size(LogicalSize::new(640, 480))
             .with_min_inner_size(PhysicalSize::new(16, 16))
             .with_max_inner_size(PhysicalSize::new(1920, 1080))
             .with_maximizable(false)
