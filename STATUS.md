@@ -54,8 +54,11 @@ with exact gameplay, localized HUD and PCM reset parity. Its complete 3,056-step
 Mac window run matches the CPU observations. A separate visual replay timed out
 after focus interruptions; five partial actual images show joined Arabic, damage,
 loss and restarted gameplay. The default Retina window was crowded at 320×240
-logical units. Full appearance, normal-size layout and RTL health-pip order remain
-open. The fresh CJK export/window is recorded above.
+logical units. Arabic health-pip direction is now corrected in the sample's
+string table, with real localization/font-shaping regression coverage; normal-size
+appearance and native RTL health-order review remain open while capture is paused.
+[CPU correction and limits](docs/spikes/core-rtl-health-direction.md).
+The fresh CJK export/window is recorded above.
 
 Pseudo-localized authoring, a fresh shipping export and all three CPU gameplay
 routes now pass. Actual normal-size window images show readable expanded HUD and
