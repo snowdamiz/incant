@@ -1,0 +1,46 @@
+{
+  "source": "907bbaea51a9c129d6811eafd14090d45c58d1ad",
+  "records": [
+    {
+      "path": "agent-tests.log",
+      "sha256": "0da2c5e86ba78f008ebc04979dbe7caad40b63d16d47e9597a29a529622aaf74",
+      "bytes": 13615
+    },
+    {
+      "path": "conventions.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "fmt.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "independent-review.json",
+      "sha256": "be9887a7c95e868c56af938dee58244b930b5648f8afbff6e167b440294eac59",
+      "bytes": 9664
+    },
+    {
+      "path": "results.json",
+      "sha256": "3b3ebe3d4c8007228116c5ef692f70cdab8cbae32af2fda70c89fa92f4c9800a",
+      "bytes": 2848
+    },
+    {
+      "path": "run.py",
+      "sha256": "3cd6df69c196e417d4688965e94dda16ea7e849814324d9aa60e5be7f8ebb2c1",
+      "bytes": 4743
+    },
+    {
+      "path": "source.json",
+      "sha256": "35e3ca2536f58ddfb3e4fe39479a039f11a60e245b60b59eb3bb093ba6375353",
+      "bytes": 4003
+    },
+    {
+      "path": "strict-lint.log",
+      "sha256": "10fd119eb0ab019f0bbed7318976c3e8548ade941aadde3b599117a2d0e62bd6",
+      "bytes": 4551
+    }
+  ],
+  "scope": "CPU qualification and read-only review. No provider, browser, native window or capture. The runner is retained evidence, not a portable invocation."
+}
