@@ -86,7 +86,7 @@ pub enum Command {
         scene_id: Id,
         root_entity_id: Id,
         /// Exact source entity -> globally fresh entity identity map.
-        #[schemars(length(min = 1, max = 1024))]
+        #[schemars(extend("minProperties" = 1, "maxProperties" = 1024))]
         entities: std::collections::BTreeMap<Id, Id>,
     },
     DeleteEntity {
