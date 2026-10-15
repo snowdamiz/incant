@@ -1,0 +1,23 @@
+{
+  "scope": "macOS default output reroute notification CPU qualification",
+  "source_base": "033cd60d6164cb2fc0cdca48617f994c63d4ded8",
+  "tested_patch_sha256": "71d180226256568a53b9df000d7dacd93f9f275fdb3fd9937452b77345a0bd20",
+  "formatted_patch_sha256": "ffc56da54631dc3bc9c02a45ad73ae974f112a3e9f5491e6fe03e215c94e3279",
+  "post_test_change": "rustfmt line wrapping of one test assertion only; runtime bytes unchanged",
+  "source_hashes": {
+    "crates/incant_audio_runtime/src/scene.rs": "ad4871b775c57b9f1e3451091ec7b3ac882650fca71c1df8cf7383adbe2387b3",
+    "crates/incant_audio_runtime/src/scene/device.rs": "5c74c01afea7be6e764392a0372786906c6acf54a3b9b0bc18333db089214f91",
+    "crates/incant_audio_runtime/src/scene/device/tests.rs": "6789739afb6984512751256e71250bfcf30b161959ffdc6304bd46aac0c1c031"
+  },
+  "cpal_version": "0.18.2",
+  "cpal_macos_source_sha256": "8ac0856b57aa6bf54695b0048de3aef38e512fea1783c0dc61a0dff78d71e8b0",
+  "kira_source_sha256": "5fe49444e0b27334394fcd3e6b9614d8c4ac55d9431e8beae81244603ca6dc28",
+  "archive_sha256": "2cf464fa894fc583e1843f4ae254f52ce14e2efe2c98f624b61a94eedcad0b8d",
+  "records": 16,
+  "tests_passed": 42,
+  "strict_all_target_lint": true,
+  "device_free_check": true,
+  "actual_owned_groups_absent": true,
+  "actual_live_reroute_verified": false,
+  "phase_gate": false
+}

@@ -4,8 +4,8 @@ The current phase remains **Phase 1: Core engine**. The
 [Phase 1 review ledger](docs/gates/phase1-review.md) maps each exit requirement to
 its recorded evidence and remaining qualification. The actual native texture,
 compatible static-model and compatible-animation workflows are verified on this Mac;
-[release checkpoint45](docs/spikes/release-checkpoint-45.md) contains the tested
-main346 tree after all 23 required contexts and eight candidate workflows passed.
+[release checkpoint47](docs/spikes/release-checkpoint-47.md) contains the tested
+main359 tree after all 23 required contexts and eight candidate workflows passed.
 Later main changes remain outside that release baseline. Rendering quality and full rendered-game
 performance remain open. The reported jagged editor cube now has explicit 4x
 geometry antialiasing, verified in the actual Mac editor and isolated Metal
@@ -13,7 +13,7 @@ controls. This fixes the ordinary viewport route; low-resolution reconstruction
 still has separate appearance defects. The entries
 below preserve earlier scoped results and superseded integration snapshots.
 
-Checkpoint46 is blocked by the Windows desktop starter test: the trusted Node
+Checkpoint46 failed the Windows desktop starter test: the trusted Node
 cook hit its unchanged eight-second deadline after driver entry and before
 compiler dependencies were ready. This does not identify which dependency was
 slow. The [expanded loader observation](docs/spikes/typescript-loader-observation.md)
@@ -21,8 +21,9 @@ separates TypeScript and SWC loading and runs the fallback and four scripted
 starters in the existing one-shot Windows diagnostic. Its exact main355 run now
 passes all six controls, with five successful cooks taking 1.737–2.043 seconds
 and one expected refusal. The timeout did not reproduce; no repair is established.
-The retained checkpoint46 failure still blocks its promotion. Release stays at
-checkpoint45, and no release requirement is bypassed.
+The retained checkpoint46 failure was not promoted. Checkpoint47 subsequently
+passed the complete suite on main359 and is now the release baseline; the original
+timeout cause remains unestablished. No release requirement was bypassed.
 
 Checkpoint45 is promoted after every required context and all eight frozen-head
 workflows succeeded. The verified release tree equals main346. Checkpoints41–44
@@ -41,6 +42,16 @@ that normalized away its own `..` input. The [fixture correction](docs/spikes/wi
 passes local tests and leaves production behavior unchanged. Both desktop jobs
 and Windows Wasm conformance passed on checkpoint44; that checkpoint's separate
 general failure prevented promotion.
+
+## macOS audio output changes — CPU qualified
+
+The player now preserves its mixer when the pinned macOS backend reports an
+already handled default-output reroute, instead of closing the game. Device loss,
+invalidated streams and lossy notification queues remain terminal. All 42 audio
+tests, strict device-enabled lint and a device-free build pass, with independent
+review. The original native replay failure remains retained; actual audible
+device-switch continuity and a fresh shipping player are not yet verified.
+[Behavior and evidence](docs/spikes/macos-audio-route.md).
 
 ## Explicit local-model transport — locally verified
 

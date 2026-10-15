@@ -12,6 +12,9 @@ const MAX_EVENTS_PER_POLL: usize = 64;
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq, serde::Serialize)]
 pub struct DeviceAudioDiagnostics {
     pub xrun_notifications: u64,
+    /// macOS default-output reroutes already handled by the same AudioUnit.
+    /// This does not establish uninterrupted audible output.
+    pub route_change_notifications: u64,
     /// Polls that consumed their entire allowance; more events may remain.
     pub poll_limit_hits: u64,
     pub counters_saturated: bool,
@@ -45,10 +48,23 @@ impl DeviceAudioDiagnostics {
             // CPAL's typed Xrun reports a missed buffer deadline. Its CoreAudio
             // overload listener does not stop the stream, and Kira preserves it.
             // Never infer recoverability from an error's formatted message.
-            if error.kind() != ErrorKind::Xrun {
-                return Err(AudioError::Backend(error.to_string()));
+            match error.kind() {
+                ErrorKind::Xrun => {
+                    increment(&mut self.xrun_notifications, &mut self.counters_saturated);
+                }
+                // In pinned CPAL 0.18.2, macOS emits this only after finding a
+                // valid new default; DefaultOutput AudioUnit reroutes itself.
+                // Kira leaves that stream and its renderer intact. Other hosts'
+                // DeviceChanged semantics are deliberately not inferred here.
+                #[cfg(target_os = "macos")]
+                ErrorKind::DeviceChanged => {
+                    increment(
+                        &mut self.route_change_notifications,
+                        &mut self.counters_saturated,
+                    );
+                }
+                _ => return Err(AudioError::Backend(error.to_string())),
             }
-            increment(&mut self.xrun_notifications, &mut self.counters_saturated);
         }
         if drained == MAX_EVENTS_PER_POLL {
             increment(&mut self.poll_limit_hits, &mut self.counters_saturated);
