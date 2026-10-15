@@ -17,7 +17,12 @@ async function readCatalog() {
 const phases = phaseRecorder(process.env.INCANT_NATIVE_COOK_PHASE_FILE);
 try {
   phases.mark('driver_entry');
-  // Keep dependency loading observable, including the pinned SWC native carrier.
+  // Keep the two large dependency loads distinct. Later static imports in cook
+  // reuse these exact ESM/CommonJS instances; no project source runs here.
+  await import('typescript');
+  phases.mark('typescript_ready');
+  await import('@swc/core');
+  phases.mark('swc_ready');
   const { cookNativeScript, cookNativeProjectScripts } = await import('./native_script/cook.mjs');
   phases.mark('compiler_ready');
   const [first, second, output, ...extra] = process.argv.slice(2);

@@ -13,6 +13,17 @@ controls. This fixes the ordinary viewport route; low-resolution reconstruction
 still has separate appearance defects. The entries
 below preserve earlier scoped results and superseded integration snapshots.
 
+Checkpoint46 is blocked by the Windows desktop starter test: the trusted Node
+cook hit its unchanged eight-second deadline after driver entry and before
+compiler dependencies were ready. This does not identify which dependency was
+slow. The [expanded loader observation](docs/spikes/typescript-loader-observation.md)
+separates TypeScript and SWC loading and runs the fallback and four scripted
+starters in the existing one-shot Windows diagnostic. Its exact main355 run now
+passes all six controls, with five successful cooks taking 1.737–2.043 seconds
+and one expected refusal. The timeout did not reproduce; no repair is established.
+The retained checkpoint46 failure still blocks its promotion. Release stays at
+checkpoint45, and no release requirement is bypassed.
+
 Checkpoint45 is promoted after every required context and all eight frozen-head
 workflows succeeded. The verified release tree equals main346. Checkpoints41–44
 remain failed historical batches; their reviewed main fixes passed the complete
@@ -30,6 +41,23 @@ that normalized away its own `..` input. The [fixture correction](docs/spikes/wi
 passes local tests and leaves production behavior unchanged. Both desktop jobs
 and Windows Wasm conformance passed on checkpoint44; that checkpoint's separate
 general failure prevented promotion.
+
+## Live model-local material updates — CPU and numerical Metal qualified
+
+Play now accepts complete model-local material tables and primitive material
+reassignments without replacing its world or script VM. Import, watch, Undo and
+Redo retain the same atomic publication checks. Material-only refreshes can retain
+baked navigation; any earlier accepted geometry divergence remains conservatively
+latched until Play restarts.
+
+37 runtime/Play controls, the GPU fixture control and strict lints pass. One actual
+Metal control verifies red→blue→green changes across 612 pixels, unchanged masks
+and alpha, exact rejected-update retention, and world/VM continuity. The final
+main355 composition changes only separately qualified compiler observation inputs
+outside the executed material producer; no rerun of that joined composition is
+claimed. Earlier fixture/lint/test failures remain retained. Native-window workflow,
+Blend appearance and performance remain unqualified.
+[Source and portable evidence](docs/spikes/live-material-binding-refresh.md).
 
 ## Native Metal archives — scoped fresh-process reuse qualified
 
