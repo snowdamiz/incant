@@ -1,7 +1,9 @@
 # Phase 1 review ledger
 
-Updated against main321 and the fresh CJK/pseudo shipping players from
-`e3dfcd9c695d6e1a74f82cb1613891c9e6046bb5`. Those producing identities remain
+Updated against main346, the fresh CJK/pseudo shipping players from
+`e3dfcd9c695d6e1a74f82cb1613891c9e6046bb5`, and the corrected Arabic shipping
+export/CPU routes from `069bbe54dc529511138867dfd4fbe50507a38b6b`.
+Those producing identities remain
 explicit; they are not relabeled as later integration builds.
 Release checkpoint40 tested the main309 tree; later main310+
 work remains outside that release baseline.
@@ -53,6 +55,10 @@ device execution is deferred; hosted build and release checks remain required.
 - Finish and qualify remaining deliverables against the complete native sample.
   The [TypeScript AOT spike](../spikes/typescript-aot.md) remains an adoption
   experiment; its language controls are not a measured replacement for QuickJS.
+  The [native Static Hermes follow-up](../spikes/static-hermes-feasibility.md)
+  passes seven erased-JavaScript fixtures but retains typed-input refusals and a
+  failed native deadline control. It does not justify replacing QuickJS or
+  satisfy the script-time gate.
 
 The new [repeated-start attribution](../spikes/navigation-start-attribution.md)
 also rejects that specific scan-only hypothesis for reaching 2 ms: its hypothetical
@@ -66,7 +72,10 @@ phases. [Phase 0](phase0-review.md) also retains its explicit deferred items.
 
 The [Arabic health-label correction](../spikes/core-rtl-health-direction.md) now
 passes actual Core localization and font-shaping regressions across damage,
-reset and repeated locale switches. The earlier native package is unchanged;
-normal-size Arabic appearance and the combined locale gate remain open pending
-fresh native review. The director has allowed capture again; the retained
+reset and repeated locale switches. A [fresh corrected shipping export and all
+three CPU routes](../spikes/core-arabic-corrected-export.md) now pass, with exact
+localized HUD, state and PCM parity. The earlier native package is unchanged;
+the corrected package has not run in a native window. Normal-size Arabic
+appearance and the combined locale gate remain open pending fresh native review.
+The director has allowed capture again; the retained
 focus-interrupted runs are not relabeled as complete.

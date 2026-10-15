@@ -13,22 +13,46 @@ controls. This fixes the ordinary viewport route; low-resolution reconstruction
 still has separate appearance defects. The entries
 below preserve earlier scoped results and superseded integration snapshots.
 
-Checkpoint44 remains held: the general job generated stale agent tool contracts
-into tracked sources before shipping, then correctly refused its dirty checkout.
+Checkpoint45 is frozen at the main346 tree and running comprehensive CI;
+release still retains checkpoint40. Checkpoint44 failed because the general job
+generated stale agent tool contracts into tracked sources before shipping,
+then correctly refused its dirty checkout.
 The [schema correction and isolated check](docs/spikes/ci-shipping-schema-check.md)
 regenerate that registry and compare all 78 generated files before shipping
 without changing tracked sources. Actual retained-binary generation and 55
-focused Python controls pass locally. Corrected full hosted execution remains
-pending; the shipping freeze requirement is unchanged.
+focused Python controls pass locally. The correction is merged through PR346;
+corrected full hosted execution remains pending. The shipping freeze requirement
+is unchanged.
 
-Checkpoint43 currently remains held: the broad Linux GPU-test command also
+Checkpoint43's retained failures included a broad Linux GPU-test command that
 selected a manual script diagnostic whose prepared inputs were absent. The
 [explicit-feature correction](docs/spikes/ci-manual-script-diagnostic.md) retains
-all ordinary CI controls; corrected hosted execution is still pending. Windows
+all ordinary CI controls. Windows
 confirmed the starter destination repair but exposed a malformed-path test fixture
 that normalized away its own `..` input. The [fixture correction](docs/spikes/windows-template-destination.md#checkpoint43-production-repair-confirmed-malformed-fixture-corrected)
-passes local tests and leaves production behavior unchanged; corrected Windows
-execution is pending.
+passes local tests and leaves production behavior unchanged. Both desktop jobs
+and Windows Wasm conformance passed on checkpoint44; that checkpoint's separate
+general failure prevented promotion.
+
+## Cooked SSAO — complete family and numerical Metal parity qualified
+
+The trusted cooked-native selection includes all five existing SSAO programs:
+seventeen families, 99 artifacts. Default AO, WGSL equations and cold cache
+preparation remain unchanged; partial cooked-output/materials modes refuse AO.
+All six ordinary-material backend artifacts remain byte-identical to main346.
+
+47 cooker, 23 default AO, 212 full aggregate/cache, both partial-refusal controls,
+27 Python audit/profile controls and strict lint pass. The player was compiled
+only; actual compiler output passes the complete 99-artifact audit. Four Metal
+controls cover cold admission, zero strength, resize/queued ownership and refusals.
+Two additional controls on Apple M5 Pro prove exact default/cooked disabled/zero/
+positive output: 1,231 pixels darken by at least eight codes, maximum 52, with
+unchanged alpha/coverage and no brightening. Imported textured MASK content is
+observable. Two new CPU controls per mode, both strict lints and four independent
+comparison-refusal controls pass. The compile-name and iterator-lint failures
+remain recorded. No window/capture, AO appearance, new public shipping export,
+Vulkan/Dx12 driver, cache-hit or shader-stall/performance gate claim follows.
+[Source and portable evidence](docs/spikes/cooked-ssao.md).
 
 ## Cooked SSAO — complete family and numerical Metal parity qualified
 
@@ -262,7 +286,7 @@ Chinese HUD, loss/restart text and resumed gameplay without the former crowding.
 Focus pauses and the missed final win capture remain explicit; full appearance
 and performance are separate. [Window sizing and evidence](docs/spikes/native-window-logical-size.md).
 
-A fresh Arabic shipping package passes loss, win and loss/restart/win CPU routes,
+The earlier Arabic shipping package passes loss, win and loss/restart/win CPU routes,
 with exact gameplay, localized HUD and PCM reset parity. Its complete 3,056-step
 Mac window run matches the CPU observations. A separate visual replay timed out
 after focus interruptions; five partial actual images show joined Arabic, damage,
@@ -272,6 +296,12 @@ string table, with real localization/font-shaping regression coverage; normal-si
 appearance and native RTL health-order review remain open. Capture is allowed;
 actual native window checks currently require the Mac desktop to be unlocked.
 [CPU correction and limits](docs/spikes/core-rtl-health-direction.md).
+The [corrected Arabic export](docs/spikes/core-arabic-corrected-export.md) now
+passes fresh public shipping export and all three CPU routes at main342, including
+the health-label marks, full localized HUD/state and exact PCM concatenation.
+Its window-capable binary has not been launched in a native window. The latest
+separate pseudo attempt timed out at zero ticks while macOS was locked; that
+failure remains retained. These CPU results do not supply the missing locale pixels.
 The fresh CJK export/window is recorded above.
 
 Pseudo-localized authoring, a fresh shipping export and all three CPU gameplay
@@ -826,16 +856,22 @@ controls pass; independent final packet review was accepted and PR262 merged
 after its exact-head fast SUCCESS. No FPS/GPU/phase
 claim. [Evidence](docs/spikes/core-bulk-row-metadata.md).
 
-## TypeScript AOT spike — language controls retained, adoption open
+## TypeScript AOT spike — native feasibility tested, adoption blocked
 
 Pinned AssemblyScript 0.28.20 rejects five current TypeScript language fixtures;
 a separate 9,999-row arithmetic kernel compiles and matches selected values.
-The actual NativeBehavior frontend cook passes. Static Hermes source and future
-compiler inputs are pinned, but no native compiler/host was built. All complete
-SDK, matched shipping performance, iOS no-JIT/size and security-release adoption
-conditions remain open. No production host or dependency changed. Independent
-source/final review was accepted and PR262 merged after its exact-head fast
-SUCCESS. [Evidence](docs/spikes/typescript-aot.md).
+The actual NativeBehavior frontend cook passes. A subsequent pinned Static Hermes
+build matches seven unchanged erased-JavaScript fixtures through a limited C++
+host with eval/JIT disabled. All nine original typed/declaration probes refuse
+their inputs. The single native deadline control does not interrupt internally
+and requires external termination; engine rollback and ECS loan safety remain
+unqualified. The original CLI bootstrap failure and build-monitoring limitation
+are retained. All complete SDK, matched shipping performance, iOS no-JIT/size and
+security-release adoption conditions remain unmet. QuickJS stays the default;
+no production host or dependency changed. The portable data verifier passes 143
+records without executing archived code.
+[Initial language evidence](docs/spikes/typescript-aot.md) and
+[native outcomes](docs/spikes/static-hermes-feasibility.md).
 
 ## Core 10k Mac shipping — cache improvement measured, 2 ms script gate failed
 
