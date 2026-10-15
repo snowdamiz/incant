@@ -1198,6 +1198,19 @@
       ],
       "result": "i32",
       "call": "Call::CommandLight {ptr,len}"
+    },
+    {
+      "namespace": "incant_session_v1",
+      "name": "request_restart",
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ]
+      ],
+      "result": "i32",
+      "opcode": 63,
+      "call": "Call::RequestRestart"
     }
   ],
   "enums": {
@@ -3830,6 +3843,7 @@
     "incant_root_motion_v1": "rootmotion",
     "incant_hud_v1": "hud",
     "incant_audio_v1": "audio",
-    "incant_light_v1": "light"
+    "incant_light_v1": "light",
+    "incant_session_v1": "session"
   }
 }

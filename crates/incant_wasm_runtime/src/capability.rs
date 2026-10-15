@@ -25,6 +25,7 @@ const _: () = {
 /// Trusted host adapter operation; all integer arguments are guest offsets/indices.
 #[derive(Clone, Copy)]
 pub enum Call {
+    RequestRestart,
     CommandLight {
         ptr: i32,
         len: i32,
@@ -211,6 +212,10 @@ pub enum Call {
 /// this state. No guest access or native pointer is retained by this type.
 #[derive(Default)]
 pub struct Capability {
+    restart_enabled: bool,
+    restart_calls: usize,
+    restart_rejected: bool,
+    restart_committed: bool,
     audio: Vec<u8>,
     audio_rejected: bool,
     light_rejected: bool,
@@ -262,11 +267,28 @@ impl Capability {
     /// Successful trusted reload keeps committed history and its accepted clock.
     pub fn replacement(&mut self) -> Self {
         Self {
+            restart_enabled: self.restart_enabled,
             identity: self.identity.clone(),
             tick: self.tick,
             logs: std::mem::take(&mut self.logs),
             ..Self::default()
         }
+    }
+    /// Trusted owner opt-in; the owner must implement whole-session replacement.
+    pub fn enable_restart_requests(&mut self) -> Result<(), Error> {
+        if self.failed || self.active {
+            return Err(Error::Failed);
+        }
+        self.restart_enabled = true;
+        Ok(())
+    }
+    /// Consume only after the complete composed tick (including audio and its
+    /// mandatory consumer) succeeds. Requests never interrupt a guest callback.
+    pub fn take_restart_request(&mut self) -> Result<bool, Error> {
+        if self.failed || self.active {
+            return Err(Error::Failed);
+        }
+        Ok(std::mem::take(&mut self.restart_committed))
     }
     pub fn logs(&self) -> Result<&crate::NativeLogs, Error> {
         if self.failed {
@@ -311,6 +333,8 @@ impl Capability {
             return Err(error);
         }
         self.commands.clear();
+        self.restart_calls = 0;
+        self.restart_rejected = false;
         self.audio_rejected = false;
         self.light_rejected = false;
         if let Err(error) = crate::audio::encode(world, &mut self.audio) {
@@ -428,6 +452,8 @@ impl Capability {
             .ok_or(Error::Abi("missing physics state"))
     }
     pub fn abort(&mut self) {
+        self.restart_calls = 0;
+        self.restart_committed = false;
         self.audio.clear();
         self.hud.clear();
         self.root_motion_rows.clear();
@@ -460,6 +486,10 @@ impl Capability {
     pub fn finish(&mut self, world: &mut NativeWorld) -> Result<(), Error> {
         if !self.active {
             return Err(Error::Abi("inactive ECS transaction"));
+        }
+        if self.restart_rejected {
+            self.abort();
+            return Err(Error::Abi("rejected session request transaction"));
         }
         if self
             .physics
@@ -540,6 +570,7 @@ impl Capability {
             Ok(())
         });
         if result.is_ok() {
+            self.restart_committed |= self.restart_calls != 0;
             self.tick += 1; // checked before entering guest code or publishing writes
             self.logs.commit(self.tick, self.tick_logs.take());
             self.failed = false;
@@ -567,7 +598,7 @@ impl Capability {
         Ok(())
     }
     fn command(&mut self, command: StructuralCommand) -> Result<(), Error> {
-        if self.commands.len() == limits::COMMANDS {
+        if self.commands.len() + self.restart_calls >= limits::COMMANDS {
             return Err(Error::Limit("structural command quota"));
         }
         self.commands.push(command)?;
@@ -604,6 +635,8 @@ impl Capability {
     /// Synchronous import; memory contains initialized guest bytes only and is
     /// borrowed for this call. No world observation/publication occurs here.
     pub fn invoke(&mut self, memory: &mut [u8], epoch: i64, call: Call) -> Result<i32, Error> {
+        let restart_authorized =
+            self.active && self.epoch == epoch && matches!(call, Call::RequestRestart);
         let hud_authorized = self.active
             && self.epoch == epoch
             && matches!(
@@ -678,6 +711,9 @@ impl Capability {
                     | Call::SetLocale { .. }
             );
         let result = self.invoke_inner(memory, epoch, call);
+        if restart_authorized && result.is_err() {
+            self.restart_rejected = true;
+        }
         if physics_authorized
             && result.is_err()
             && let Some(state) = &mut self.physics
@@ -803,6 +839,16 @@ impl Capability {
                 .ok_or(Error::Limit("navigation query quota"))?;
         }
         match call {
+            Call::RequestRestart => {
+                if !self.restart_enabled {
+                    return Err(Error::Abi("host does not accept session restart requests"));
+                }
+                if self.commands.len() + self.restart_calls >= limits::COMMANDS {
+                    return Err(Error::Limit("structural command quota"));
+                }
+                self.restart_calls += 1;
+                return Ok(0);
+            }
             Call::AudioLen | Call::ReadAudio { .. } => {
                 let len = self.audio.len();
                 if let Call::ReadAudio { ptr, capacity } = call {
