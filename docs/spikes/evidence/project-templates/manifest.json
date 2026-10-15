@@ -1,0 +1,89 @@
+{
+  "format": "incant-project-template-evidence",
+  "version": 1,
+  "base": "bbdb4f8f3a5050992015628b8517a1d898e91975",
+  "production_source": "92891857bc53f094aca8800f84845a195098d844",
+  "qualified_test_source": "debbf621a535fa252f4ad215596a5c6635e0db6e",
+  "original_root": "/Users/andreyyurlov/.codex/incant-evidence/project-templates-001",
+  "archive": {
+    "path": "records.json.gz",
+    "sha256": "12aade4920238c76adee8c3e1918b15aae751770a5c1b23d62f6a46023febf93",
+    "compressed_bytes": 641920,
+    "uncompressed_bytes": 3764879,
+    "records": 97
+  },
+  "bindings": {
+    "source-001/freeze.json": "209bdb182e193cce10772f84391d894a10b2c6cd9066a840d77a0473a39ada00",
+    "source-002/freeze.json": "e10d9f2ae5451ce979e65bc7e01f74721afa7066d3e01b0d5a297e4e5081e08d",
+    "cpu-plan-001.json": "bfd1ab60bceb5c36aca83f73dadf0244554032850a6a9489ee9f545fa691b2b4",
+    "cpu-plan-002.json": "11b2cef74d3e3a195fa159475e59da38fcf230536e7a964276ed9b8ed45068ff",
+    "cpu-plan-003.json": "9679eeb35d6c37def6af65cb5f3b5cf5899cba7ba9583e81ecfb2ceffa8695a3",
+    "qualify-001.py": "540aede40cfbabc97e44f8ede6e1fa463a4308cc11bb9696dfd70a14fdb53e9e",
+    "qualify-002.py": "07a9ba90fded9882c5c490e0d243c28307f19598abcc92c8f1a827afde04edaf",
+    "qualify-003.py": "315fcbcc8b7873c3b311c5a835e0330d25e5bb19ee9c9ae77cdca714c89f9b4c",
+    "cpu-002/result.json": "bafc5e1d05381b47769cf7b87d4e46da39dbfd39ed749e76446c5616d8417ea9",
+    "cpu-003/result.json": "48d5abb9335fccecc22b65e2a0a8c635110ac5b245e12c5c13c749ababffaf6a"
+  },
+  "copied_binaries": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/project-templates-001/cpu-002/binaries/template-authoring/incant_templates-42ab9c419fd384a8",
+      "sha256": "5491854b56bec7620e53b5971d3db86190aad2f7d408fbb0d6f2705b19da169c",
+      "bytes": 19235504,
+      "generation": "cpu-002",
+      "stage": "template-authoring",
+      "target": "incant_templates"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/project-templates-001/cpu-002/binaries/template-native-behavior/templates-6ce34b033900babe",
+      "sha256": "e0e3697bb0ea2d2728c9eeec05d847fd52b4cc04f45a559736b81e4ec19f0830",
+      "bytes": 40323416,
+      "generation": "cpu-002",
+      "stage": "template-native-behavior",
+      "target": "templates"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/project-templates-001/cpu-002/binaries/template-native-behavior/incant_headless",
+      "sha256": "4ae8589ba6a0e0be9e254a484f4bba9285f8ff495c3155adc4ef52f8e81d5bd2",
+      "bytes": 62247680,
+      "generation": "cpu-002",
+      "stage": "template-native-behavior",
+      "target": "incant_headless"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/project-templates-001/cpu-003/binaries/spatial-native-behavior/incant_headless",
+      "sha256": "4ae8589ba6a0e0be9e254a484f4bba9285f8ff495c3155adc4ef52f8e81d5bd2",
+      "bytes": 62247680,
+      "generation": "cpu-003",
+      "stage": "spatial-native-behavior",
+      "target": "incant_headless"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/project-templates-001/cpu-003/binaries/spatial-native-behavior/templates-6ce34b033900babe",
+      "sha256": "eec2d12383c20b8347725ba4e54a2786d4be7d2812ed06490e76bd4955c6c09a",
+      "bytes": 40323512,
+      "generation": "cpu-003",
+      "stage": "spatial-native-behavior",
+      "target": "templates"
+    }
+  ],
+  "outcomes": {
+    "cpu001": "Unexecuted proposal preserved; environment admission corrected before Cargo launch.",
+    "cpu002": "6 authoring passed; 2 headless passed; spatial failed exact Z equality; stopped before lint.",
+    "cpu003": "Test-only capsule-plane/displacement correction: focused spatial1 passed, strict Clippy/TS/fmt/conventions/diff passed.",
+    "total_distinct_passing_tests": 9,
+    "templates_exercised": 5,
+    "native_window": false,
+    "gpu": false,
+    "capture": false,
+    "gui_template_picker": false,
+    "appearance_acceptance": false,
+    "performance_acceptance": false
+  },
+  "limits": [
+    "Default verification reads archived source, commands and results only; it does not execute Rust, scripts, players or capture tools.",
+    "Copied executables are external only. --binaries rehashes their exact retained bytes; unavailable originals cannot be reconstructed from this archive.",
+    "--git-source verifies exact immutable producer commits; this is not a claim that every future main checkout has identical source.",
+    "Authoring and the empty/planar successes come from CPU002; only the failed spatial case and remaining checks were executed on CPU003. Production code was unchanged.",
+    "Publication is final-file create-only, not whole-directory atomicity; parent pathname replacement by another process remains outside the trusted host contract."
+  ]
+}

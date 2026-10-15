@@ -41,6 +41,20 @@ The original build-monitor interruption is retained. This is overlapping Phase 3
 backend work; open-panel context, skills and live-agent eval remain separate.
 [Behavior and validation](docs/spikes/agent-project-context.md).
 
+## Five starter projects — authoring and gameplay qualified
+
+Empty, third-person, first-person, 2D platformer and top-down starters are now
+available through the host CLI and shared authoring recipes. Each creates ordinary
+imported assets, typed components and TypeScript controllers through the command
+bus, with durable source history and create-only project publication.
+
+Nine distinct authoring/headless controls cover all five starters, including
+undo/redo, save/reopen, collision, jump, camera follow/look and sprite animation.
+Strict lint and TypeScript pass; the original exact-axis collision-test failure
+and corrected geometric contract remain recorded. The reviewed producer bytes
+compose unchanged with main325. GUI selection, editor-only rebuild and visual
+acceptance remain open. [Usage and evidence](docs/spikes/project-templates.md).
+
 ## Script deadline checks — full-route diagnostic complete
 
 A default-off observer now separates QuickJS interrupt checks from explicit host
