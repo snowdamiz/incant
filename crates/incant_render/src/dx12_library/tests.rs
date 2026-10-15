@@ -243,7 +243,14 @@ fn dx12_library_native_stage() {
     // the strict later cold call must refuse and retain prior draw resources.
     if strict {
         let stores = library.counts().stores;
-        assert!(pollster::block_on(renderer.enable_bloom(crate::Bloom::default())).is_err());
+        assert!(
+            pollster::block_on(renderer.enable_bloom(crate::Bloom {
+                threshold: 1.0,
+                intensity: 0.25,
+                levels: 3,
+            }))
+            .is_err()
+        );
         let after = library.counts();
         assert!(after.strict_refusals > 0);
         assert_eq!((after.fallback_attempts, after.stores), (0, stores));

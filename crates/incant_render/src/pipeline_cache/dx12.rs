@@ -30,7 +30,7 @@ pub enum Dx12LibraryError {
     #[error(transparent)]
     Native(#[from] native::Error),
 }
-pub(super) struct Session {
+pub(crate) struct Session {
     library: Option<Arc<native::Session>>,
     store: Option<Store>,
     report: Dx12LibraryReport,
