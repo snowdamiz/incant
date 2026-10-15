@@ -147,6 +147,7 @@ pub struct ScriptHost {
     update: Persistent<Function<'static>>,
     freeze: Persistent<Function<'static>>,
     persistent_wrap: Persistent<Function<'static>>,
+    coroutine_shape: Option<Persistent<Function<'static>>>,
     persistent_opt_in: Vec<bool>,
     coroutine_catalog: coroutines::Catalog,
     persistent: std::rc::Rc<std::cell::RefCell<persistence::Store>>,
@@ -206,10 +207,11 @@ impl ScriptHost {
             return Err(ScriptError::ScriptBindings);
         }
         let (runtime, context, deadline) = vm(limit, compiled.allow_source)?;
-        let (freeze, persistent_wrap, project) = context.with(|ctx| {
-            let (freeze, persistent_wrap) = compiled.harden(&ctx).map_err(|error| {
-                diagnostics::javascript(&ctx, error, "initialization", &deadline)
-            })?;
+        let (freeze, persistent_wrap, persistent_shape, project) = context.with(|ctx| {
+            let (freeze, persistent_wrap, persistent_shape) =
+                compiled.harden(&ctx).map_err(|error| {
+                    diagnostics::javascript(&ctx, error, "initialization", &deadline)
+                })?;
             let project = compiled
                 .bindings
                 .as_ref()
@@ -226,6 +228,7 @@ impl ScriptHost {
             Ok::<_, ScriptError>((
                 Persistent::save(&ctx, freeze),
                 Persistent::save(&ctx, persistent_wrap),
+                Persistent::save(&ctx, persistent_shape),
                 project,
             ))
         })?;
@@ -245,10 +248,12 @@ impl ScriptHost {
             ))
         })?;
         diagnostics::check_deadline(&deadline)?;
+        let coroutine_shape = coroutine_catalog.enabled().then_some(persistent_shape);
         Ok(Self {
             update,
             freeze,
             persistent_wrap,
+            coroutine_shape,
             persistent_opt_in,
             coroutine_catalog,
             persistent: Default::default(),
@@ -439,6 +444,12 @@ impl ScriptHost {
                     schedule.tick,
                 )
             });
+            let coroutine_shape = self
+                .coroutine_shape
+                .as_ref()
+                .map(|shape| shape.clone().restore(&ctx))
+                .transpose()
+                .map_err(diagnostics::allocation)?;
             let groups = groups
                 .into_iter()
                 .map(|(index, scope, instances, ids)| {
@@ -662,7 +673,15 @@ impl ScriptHost {
                                         }
                                         // The inspector itself may run traps. Normal guards are
                                         // checked again before another continuation or commit.
-                                        tasks.finish(&ctx, &inspect, &key, &task, result)?;
+                                        tasks.finish(
+                                            &ctx,
+                                            coroutine_shape
+                                                .as_ref()
+                                                .expect("enabled coroutine inspector"),
+                                            &key,
+                                            &task,
+                                            result,
+                                        )?;
                                     }
                                 }
                                 Ok(value)
