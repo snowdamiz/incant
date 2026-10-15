@@ -304,3 +304,99 @@ fn retained_flipbook_selection_stages_without_allocation() {
         );
     }
 }
+
+#[test]
+#[ignore = "requires a native GPU; numerical light publication and history control"]
+fn light_scalars_match_fresh_frames_and_rejected_candidates_do_not_cut_accepted_history() {
+    fn light_mut<'a>(input: &'a mut SceneInput, owner: &str) -> &'a mut SceneLight {
+        input
+            .nodes
+            .iter_mut()
+            .find(|node| node.id == owner)
+            .expect("named light owner")
+            .light
+            .as_mut()
+            .expect("punctual light")
+    }
+    let mut renderer = crate::test_support::checked(Renderer::headless().unwrap());
+    if crate::motion::admission().is_err() {
+        assert!(pollster::block_on(renderer.enable_motion_vectors()).is_err());
+        return;
+    }
+    pollster::block_on(renderer.enable_motion_vectors()).unwrap();
+    let mut input = fixture();
+    let mut spot = node("spot");
+    spot.world = DMat4::from_translation(DVec3::new(0., 4., 3.));
+    spot.light = Some(SceneLight::Spot(incant_types::SpotLight {
+        color: [0.2, 0.5, 1.],
+        intensity: 20.,
+        range: 20.,
+        inner_degrees: 20.,
+        outer_degrees: 40.,
+    }));
+    input.nodes.push(spot);
+    let mut retained = renderer.prepare_retained(&input, "camera").unwrap();
+    retained.enable_motion_history(&renderer).unwrap();
+    let output = texture(&renderer, FORMAT, 160, 96);
+    let view = output.create_view(&Default::default());
+    retained.submit(&renderer, &input, target(&view)).unwrap();
+    let initial_pixels = read(&renderer, &output);
+    let initial = retained.motion_frame().unwrap();
+    let original = light_mut(&mut input, "key").values();
+    light_mut(&mut input, "key").set_values(incant_render_data::LightValues {
+        color: [0.; 3],
+        intensity: 0.,
+    });
+    let mut invalid = target(&view);
+    invalid.width = 0;
+    assert!(retained.submit(&renderer, &input, invalid).is_err());
+    assert_eq!(
+        retained.motion_frame().unwrap().sequence(),
+        initial.sequence()
+    );
+    assert_eq!(retained.motion_frame().unwrap().epoch(), initial.epoch());
+    assert_eq!(read(&renderer, &output), initial_pixels);
+    light_mut(&mut input, "key").set_values(original);
+    retained.submit(&renderer, &input, target(&view)).unwrap();
+    assert!(retained.motion_frame().unwrap().has_previous());
+    assert_eq!(retained.motion_frame().unwrap().epoch(), initial.epoch());
+    let mut visible_change = false;
+    for (n, intensity) in [0., 2., 0., 3.].into_iter().enumerate() {
+        let previous = retained.motion_frame().unwrap();
+        light_mut(&mut input, "key").set_values(incant_render_data::LightValues {
+            color: [0.2, 0.5, 0.8],
+            intensity,
+        });
+        light_mut(&mut input, "point").set_values(incant_render_data::LightValues {
+            color: [0.8, 0.2, 0.3],
+            intensity: n as f64 * 5.,
+        });
+        light_mut(&mut input, "spot").set_values(incant_render_data::LightValues {
+            color: [0.1, 0.9, 0.3],
+            intensity: 25. + n as f64,
+        });
+        retained.submit(&renderer, &input, target(&view)).unwrap();
+        let current = retained.motion_frame().unwrap();
+        assert!(!current.has_previous());
+        assert_eq!(current.epoch(), previous.epoch() + 1);
+        let pixels = read(&renderer, &output);
+        assert_eq!(pixels, fresh_pixels(&renderer, &input));
+        visible_change |= pixels != initial_pixels;
+        retained.submit(&renderer, &input, target(&view)).unwrap();
+        assert!(retained.motion_frame().unwrap().has_previous());
+        assert_eq!(retained.motion_frame().unwrap().epoch(), current.epoch());
+    }
+    assert!(visible_change);
+    let accepted = read(&renderer, &output);
+    let previous = retained.motion_frame().unwrap();
+    let SceneLight::Directional(v) = light_mut(&mut input, "key") else {
+        panic!("directional binding")
+    };
+    v.shadows.as_mut().unwrap().distance += 1.;
+    assert!(retained.submit(&renderer, &input, target(&view)).is_err());
+    assert_eq!(
+        retained.motion_frame().unwrap().sequence(),
+        previous.sequence()
+    );
+    assert_eq!(read(&renderer, &output), accepted);
+}

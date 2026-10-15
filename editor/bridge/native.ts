@@ -74,6 +74,7 @@ export interface EngineRead {
   /** Explicitly present only on hosts with the durable budget adapter. */
   agent_budget?: { available: boolean };
   project_file?: { available: boolean };
+  entity_duplicate?: { available: boolean };
   /** Optional on older hosts; their Start request remains authoritative. */
   play_start?: { available: boolean; reason?: string };
 }
@@ -617,7 +618,8 @@ export class NativeBridge implements EditorBridge {
   get capabilities(): readonly string[] {
     return [...this.nativeCapabilities,
       ...(this.read && projectAgentBudget(this.read).status === 'ready' ? ['agent.budget.set'] : []),
-      ...(this.read?.project_file?.available === true ? ['project.file'] : [])];
+      ...(this.read?.project_file?.available === true ? ['project.file'] : []),
+      ...(this.read?.entity_duplicate?.available === true ? ['entity.duplicate'] : [])];
   }
   readonly label = "Native engine";
   readonly isFixture = false;
@@ -1136,6 +1138,7 @@ export class NativeBridge implements EditorBridge {
     }
   }
   async dispatch(command: EditorCommand): Promise<BridgeResult> {
+    if (command.type === 'entity.duplicate' && !this.capabilities.includes('entity.duplicate')) return failure({ code: 'unsupported', message: 'This host cannot duplicate entities.' });
     const budgetEdit = command.type === 'agent.budget.set';
     if (budgetEdit && !count(command.maxTokens)) return { ok: false, error: { code: 'schema.invalid', message: 'Enter a whole number of tokens from 0 to 9,007,199,254,740,991.' } };
     if (budgetEdit && !this.capabilities.includes('agent.budget.set')) return { ok: false, error: { code: 'unsupported', message: 'This host cannot change the project’s agent token allowance.' } };
@@ -1153,6 +1156,7 @@ export class NativeBridge implements EditorBridge {
     const recoverBudget = budgetEdit || (command.type === 'history.undo' || command.type === 'history.redo')
       && projectAgentBudget(this.read).status !== 'unsupported';
     const previous = this.read;
+    let duplicateDispatched = false;
     // Subscribers run synchronously. Reserve the mutation before publishing its
     // admission barrier so a subscriber cannot start a second document write.
     if (importing) this.importing = true;
@@ -1199,9 +1203,29 @@ export class NativeBridge implements EditorBridge {
             error: {
               code: "entity.not-found",
               message:
-                "This operation requires an entity. Scene edits are not exposed in this spike.",
+                "This operation requires an existing entity.",
             },
           };
+        if (command.type === 'entity.duplicate') {
+          duplicateDispatched = true;
+          const response = await this.invoke<{ snapshot: EngineRead; receipt: { project: string; entity: string; revision: number; transaction: string } }>('engine_duplicate_subtree', {
+            sceneId: scene.id, entityId: command.entity, expectedRevision: previous.revision,
+          });
+          const receipt = response?.receipt;
+          read = response?.snapshot;
+          if (!record(receipt) || receipt.project !== previous.project.id || !fileId(receipt.entity)
+            || !fileId(receipt.transaction) || receipt.revision !== previous.revision + 1
+            || Object.values(previous.project.scenes).some(s => receipt.entity in s.entities)
+            || !record(read) || !isReady(read) || !record(read.project) || read.project.id !== previous.project.id
+            || !count(read.revision) || read.revision < receipt.revision
+            || read.revision === receipt.revision && !read.project.scenes[scene.id]?.entities[receipt.entity]
+            || this.read?.project.id !== previous.project.id || read.revision < this.read.revision) {
+            // IPC may have committed even if its completion cannot be verified.
+            await this.start();
+            return { ok: false, outcomeUnknown: true, error: { code: 'engine.response', message: 'The duplicate result could not be verified. Check the hierarchy before retrying.' } };
+          }
+          result = { ok: true, duplicatedEntity: id(receipt.entity) };
+        } else {
         const op =
           command.type === "entity.rename"
             ? {
@@ -1223,6 +1247,7 @@ export class NativeBridge implements EditorBridge {
               : "Delete entity",
           expectedRevision: this.read.revision,
         });
+        }
       }
       if (recoverBudget) {
         if (!isReady(read) || !count(read.revision) || !record(read.project) || projectAgentBudget(read).status !== 'ready') throw budgetInvalidResponse();
@@ -1237,7 +1262,10 @@ export class NativeBridge implements EditorBridge {
       return result;
     } catch (error) {
       await this.start(recoverBudget);
-      return failure(recoverBudget && typeof error === 'string' ? undefined : error);
+      const result = failure(recoverBudget && typeof error === 'string' ? undefined : error);
+      // The host commits before reading its completion snapshot. A rejected
+      // invocation cannot establish rollback, so never invite a blind retry.
+      return duplicateDispatched ? { ...result, outcomeUnknown: true } : result;
     } finally {
       if (importing) this.importing = false;
       else this.pending = false;

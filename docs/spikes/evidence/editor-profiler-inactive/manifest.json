@@ -1,0 +1,2004 @@
+{
+  "format": "incant-inactive-profiler-cpu-proxy",
+  "version": 1,
+  "source": "b329dec1d86b0c308172621f6c59fafce470223e",
+  "original_root": "/Users/andreyyurlov/.codex/incant-evidence/editor-profiler-inactive-001",
+  "archive": {
+    "bytes": 2260912,
+    "sha256": "066e72e09136d2b2ae04658c31802690db36a27d3983683fc4dbe69ef01c19bf",
+    "inflated_bytes": 13752695,
+    "records": 424
+  },
+  "bindings": {
+    "cpu-002-preparation.json": "dd71f90fd17b1941fc1bab0232b930281f92c186da6b6004898fe7b49a527813",
+    "cpu-002/environment.json": "2467205fdbc09f112efdf23ac1a5634aeaa9b39bebb4cd2915eb3ddee88fe2d3",
+    "cpu-002/fixture-disabled-controls.stderr": "5f7ec150983e3271c4e2746d530ecba586251af7b49f34a7ba94f8aff4a19d78",
+    "cpu-002/fixture-disabled-controls.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "cpu-002/result.json": "405006d00463fc7cffc51237f242e81d8610fb3821c15b5b68e16c86d5df302f",
+    "cpu-002/rust-version.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "cpu-002/rust-version.stdout": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+    "cpu-003/conventions.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "cpu-003/conventions.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "cpu-003/diff.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "cpu-003/diff.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "cpu-003/environment.json": "2467205fdbc09f112efdf23ac1a5634aeaa9b39bebb4cd2915eb3ddee88fe2d3",
+    "cpu-003/fixture-disabled-controls.stderr": "6e28e526094700c8e10245059c808da67240afb5ec38cf031cd2e08abd72d7af",
+    "cpu-003/fixture-disabled-controls.stdout": "efe881e1c7f35ad4e3484c7ea861848de08e846a79c14a9d7556e916fd5d3674",
+    "cpu-003/fixture-disabled-lint.stderr": "5f2a289d2dfad11ab66d953478e3b4e1daaa5f1dcb7696ef58e7f1de314a3cfd",
+    "cpu-003/fixture-disabled-lint.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "cpu-003/fixture-enabled-controls.stderr": "e2bfb4115ee227394abf8a59274714eab7d914b53b0046edc1d3529fc69f79dc",
+    "cpu-003/fixture-enabled-controls.stdout": "5ef4a74a85f102753137f55b90afc1d4189930686ba8d030b5355f862640e320",
+    "cpu-003/fixture-enabled-lint.stderr": "fd3c41d715f9996ea94c15ec66cf20fb23c49a0dcf1b58f98bde0e0cafce3a9b",
+    "cpu-003/fixture-enabled-lint.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "cpu-003/fmt.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "cpu-003/fmt.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "cpu-003/result.json": "8a3c7927df0e1694fedd49a8f60f0b9716d70d8bce922dc48f66786d7bc3d658",
+    "cpu-003/rust-version.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "cpu-003/rust-version.stdout": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+    "cpu-plan-001.json": "0956df3ced6d68ea476dfe66f30c400c7e2cf4fdd05f761e79df4f990cd99266",
+    "cpu-plan-002.json": "7475a87533ce47aeb00fe40596d027a66fd8e2d8b715ea78386abb91381248e8",
+    "cpu-plan-003.json": "05ce3f1e1a912358eee7e0a269053b922bf5d6beb2296581149bb380285eea04",
+    "cpu-terminal-003.json": "90bd5041678fcfeb2753374f2c61e8bcf1d608ac0d835c0fec6e4f2b26a069a2",
+    "functional-001/off/child.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "functional-001/off/child.stdout": "25303e58f7c77ee3b1f5c5495316156b168a42662e7f6735780489de53926da3",
+    "functional-001/off/inputs.json": "33d54f1e2da95bdcdf503f10dc11a9a26f45776ff940e41cc14036ce1695210f",
+    "functional-001/off/report.json": "c35071ad9f1f68d1031cd5714cc01909d51972a491c74d9dea21a9d717e27469",
+    "functional-001/result.json": "89526c4ef378b49f33e198765fec3a9ee428176382f3508efc1ba015356b09da",
+    "functional-002/on/child.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "functional-002/on/child.stdout": "8fc9d90ac0967014d58eb2c3b0f312511ee284ffe2084cf287c41c493a76e78f",
+    "functional-002/on/inputs.json": "01f56a351e39bb22f70e13e0bcce64e466441a748a186bb1e1462e3390adb903",
+    "functional-002/on/report.json": "7cd5f03323f1ac05a82a94a2b0773f8acf324cbf9651c6dfd84dfc1c70407116",
+    "functional-002/parity.json": "57cbc589c77061732e370047c0478a425e2728d1eaa1b0182420b0f7946bd3e0",
+    "functional-002/result.json": "a25d8ceac77d9f7f4d1868e2cc12d215d1d2229e9046a78a0d3f61c8e4094657",
+    "functional-packet-001/analyze.py": "14e6ece83f3e6b7495fc49d4f317360c504e23c3353f9febe7a53ce33a37e00c",
+    "functional-packet-001/authoring.json": "7cb7cccb57ed33b0afe5aa9209af24d268cda68ff1bced21c85db7221bebedd1",
+    "functional-packet-001/cook.json": "65583a2614be26d5ad48284d63a77291c0fc69fc9448dd6e85f8bde58165bfda",
+    "functional-packet-001/preparation-refusal.json": "1f1e8b3ec07a3342b9e614495a93dc01713fa4f4d3ac951d1b007daccc9fc8d9",
+    "functional-packet-001/prepare.py": "5c3045c41d9c1e12267ebcbb3ea31cd36c225d8396963776033aadc6f748269e",
+    "functional-packet-001/run.py": "f60d8c38861c01b12a792cee5ecbb64e508d8dc8e21f0d39ace603519db596a0",
+    "functional-packet-002/analyze.py": "14e6ece83f3e6b7495fc49d4f317360c504e23c3353f9febe7a53ce33a37e00c",
+    "functional-packet-002/authoring.json": "7cb7cccb57ed33b0afe5aa9209af24d268cda68ff1bced21c85db7221bebedd1",
+    "functional-packet-002/cook.json": "65583a2614be26d5ad48284d63a77291c0fc69fc9448dd6e85f8bde58165bfda",
+    "functional-packet-002/plan-pre-final.json": "bc7903729c11428b16c96ce9c192c1e21f6af69ce4a7b77538e0487197ca2cdc",
+    "functional-packet-002/plan.json": "ea804e6e53482f91a36bd1d4b63f03f6eee582e38725fc2e2e454ee8a32391ed",
+    "functional-packet-002/prepare.py": "404ffdcf7b1b76c4377b8b5bf183101ef32a5e26151b234287c24c6ad747cc96",
+    "functional-packet-002/proposal.md": "183fb19e942226e54a55ae211603813664cb005cb781c7c85734852d4c4012a1",
+    "functional-packet-002/python-controls.json": "f53124e73315379ac3e35657f83f30fe2a48c914af3f370b1de3feef9442be56",
+    "functional-packet-002/root-functional-grant.json": "b0ab65e51c9c0efbbe756c5f17fb262ae79516ebcd66b9001faf4f0207464859",
+    "functional-packet-002/run-pre-final.py": "88ce7d4126a73f8f8a6a50ef87b7397ef58467cddc447a8d86b21e4f3bf17fe5",
+    "functional-packet-002/run.py": "590fef9d32a800dc7ed27000813e5045a4ac60e5d85aa0cb38019dad744e2220",
+    "functional-packet-002/target-units.json": "c78b2639aab300564f59bf483a578d0512852535f3be3125e037a3fa7fc11885",
+    "functional-packet-002/test_contract.py": "57356d78d8c49d20b659046639917304d9166ddcac647e6b2d5559fb4f71a0c9",
+    "functional-packet-003/analyze.py": "0cc9e42094b1ef0312dde973303ff0c869e836e4e1bb6953d545be636ef0bdec",
+    "functional-packet-003/plan.json": "17602980d2d6f94e969d0fc62b779f34da2b856e1a91de49227e056622681852",
+    "functional-packet-003/repair-control-receipt.json": "e1b90b9e8b4e3087ad3296d717871acc903e7fd1308e4c573c917f1eb92ab560",
+    "functional-packet-003/root-functional-grant.json": "8e3f41e181aea84f74bf022c1dba212e17ee1b70a9985c9345cb020e2d45ffaf",
+    "functional-packet-003/run.py": "7cab9442f9d51fdf109cc653e381f587d878dd45171b2517a7c2fb159c1b1d30",
+    "functional-packet-003/test_contract.py": "d258ccb3f5ec5a4d9d0c4c14224270e913c8812e95b04566f7b1892e28842c5c",
+    "functional-terminal.json": "f98ce1c4e0bc92d92da15eb959a363ea3e4553ac6255be034d18632891112282",
+    "manual-gate-001/cpu-001/conventions.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "manual-gate-001/cpu-001/conventions.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "manual-gate-001/cpu-001/default-ignored-exclusion.stderr": "2fcdeaee1bb59577c47e9304886bb8c176f3b3ffb4afe0c6cb5fcdcd41641006",
+    "manual-gate-001/cpu-001/default-ignored-exclusion.stdout": "b27c4d18ec8cc818919ed707e69c8bddb55bb93abe8330701fe54f7d410c4169",
+    "manual-gate-001/cpu-001/diff.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "manual-gate-001/cpu-001/diff.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "manual-gate-001/cpu-001/environment.json": "b535ddbfe349e8618f33e2fdb8af42528da10bb01d2a71c4f10035947951cf49",
+    "manual-gate-001/cpu-001/explicit-ignored-list.stderr": "84b906d9711f8c2ab51394eaef960b62712a6e481af07f5e33fd60a0f765b041",
+    "manual-gate-001/cpu-001/explicit-ignored-list.stdout": "e551371172caa8ccb469b5c9f95e649303e73f54f1bb5ea212e346b918bb1d5d",
+    "manual-gate-001/cpu-001/fmt.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "manual-gate-001/cpu-001/fmt.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "manual-gate-001/cpu-001/off-manual-controls.stderr": "bae891b42ef46b33a78b00204bd4e3e69df66cba53430634ac4eaed2bc88b825",
+    "manual-gate-001/cpu-001/off-manual-controls.stdout": "87f4423142cb11b36c923ccf2f9530b3f33510659723d96cf521927d3361944b",
+    "manual-gate-001/cpu-001/off-manual-lint.stderr": "60bb02f7d2856124e26d6e1043626c66d688506b6825252a8a53e1ffa5d5cbcc",
+    "manual-gate-001/cpu-001/off-manual-lint.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "manual-gate-001/cpu-001/on-manual-controls.stderr": "24bd8e858df29b238b4d2162ad96bf43817c41a115d2d8f2849b69048fe1a658",
+    "manual-gate-001/cpu-001/on-manual-controls.stdout": "14a39fadd5d3c782080456720067a0cbf45976e3a385439e0cff88ef4ec7d27c",
+    "manual-gate-001/cpu-001/on-manual-lint.stderr": "d39c72d418a5069b0cea47ca7601d2dca5f1ccce01448284704110b5f1336077",
+    "manual-gate-001/cpu-001/on-manual-lint.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "manual-gate-001/cpu-001/profiler-ignored-exclusion.stderr": "2d750f33d0f35a56ae91764c66603c1f82a8f79ab3b99a699defbc71c22818a2",
+    "manual-gate-001/cpu-001/profiler-ignored-exclusion.stdout": "359385e481abec475efd774c120cc7a146e4299182c99d7e40716470b49b4556",
+    "manual-gate-001/cpu-001/result.json": "ec33575d73126d7afec91c6b6134fd01e7b4811e10067628143f28f9b02622a7",
+    "manual-gate-001/cpu-001/rust-version.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "manual-gate-001/cpu-001/rust-version.stdout": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+    "manual-gate-001/cpu-plan-001.json": "5de3f1584efa6a35812e5f55dd56667a84b7d00077cd8f6d11768bf14a659edf",
+    "manual-gate-001/native_process.py": "58dd2a8231d7f9d1e42070fc85425461e06a43f279fa5e7f8e57b4a40c3a3aa4",
+    "manual-gate-001/qualify-001.py": "c9e5bd8e847ab5e35fb492a3fff63470940bf304523d2e1008505003fe9e9c3c",
+    "manual-gate-001/root-cpu-grant-001.json": "a696755121a22ff3d891cb63344e72c0f2fe334ec8fd05ff1ac96a8d0dd383f9",
+    "manual-gate-001/source-001/freeze.json": "db8434dad3e0189dab69e44020cd32349a19c65566f8fa6203289190ddbc4c85",
+    "manual-gate-001/target-baseline.json": "6da07daeeb99a2ae9ce602f339589724e8c27c532e52531cb41da33feaf3d7d5",
+    "native_process.py": "58dd2a8231d7f9d1e42070fc85425461e06a43f279fa5e7f8e57b4a40c3a3aa4",
+    "portable-replay-final.stdout": "5c2bd2475bee17113ae231a1c7f6a608e271a71794c09de02f6e3ee4b32180fa",
+    "proposal-002.md": "b9f6e644459a005b219db56ce9f50b267216261c2ced1e2dbfc51c83cf4e76ff",
+    "qualify-001.py": "002f5fb94f701b1124fce3ab73b59662587eb214f5b046014988a8b8d82eca2b",
+    "qualify-002.py": "c0fa178214415f54076d19b79e72b7057988e2966a1be3a846ba4c1e3d0943e3",
+    "qualify-003.py": "3cb362f80028ffc9a7839538a3db1df60654494a437db28e83470020547132a1",
+    "reference/core_receipt": "22c0678926de9c2f2162ac2b6deac4b26be4b6b666a08bffe12d597831606cfe",
+    "reference/historical_fast4": "37ccafc52a22a341c7776961e5171f48c988638224445395fe94db55da2f4279",
+    "reference/observations": "36915362c461c0772414c2b97aa80d522b6ada851e94e0ca718057d700e1f89b",
+    "reference/project": "027621691da3043e25cd30a02c76a8fb92f1a4464448c3c6c7d04e6f8b38c30b",
+    "reference/recording": "4fbfffad568d1b7b8eae3b7b9041579fce6f0e8e67c83a66f76c9f78a1c5fcbf",
+    "root-cpu-grant-002.json": "a4df0b184efcf6d7a8b6a570dfba7b0939cd6a1e5cce5b0b76c0e24800bdcecc",
+    "root-cpu-grant-003.json": "216340050683cc61617e2eeccc4ecba4d4e2147c56706dc6dacf689ee8bf363a",
+    "source-001/freeze.json": "2ae3e472f38b77c4e792ff71aafb12e84cd6d901f3facb67885fd4aed9cc7559",
+    "source-001/source.patch": "f65fb3d874b44ddba66aa5d21126e33e5f69cd3dcb75278618ed45e1358a338b",
+    "source-002/freeze.json": "b9cd31a3c7859a16aa7e8eb58f2b30252ef3c527408a3221dc5d45aa7cc34f6a",
+    "source-002/source.patch": "fc6a8c935c4dadee99006916c6462b1e0d8aea0424b8539edabcebdb364d4151",
+    "target-baseline-002.json": "0e15e1248d4c7f3c95874f103d81d40f3344bd274a55d9ddb995c0846435f5dc",
+    "target-baseline.json": "b110885a17339b8ddd8de805c9441f92d58af3bf570703994e43ed0d0ea0ea80",
+    "timing-001/B0/child.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "timing-001/B0/child.stdout": "8fc9d90ac0967014d58eb2c3b0f312511ee284ffe2084cf287c41c493a76e78f",
+    "timing-001/B0/inputs.json": "80d52aa2937434f7ee3a01b72d7768e6e24e4b119dd998b811b958d05381fbed",
+    "timing-001/B0/report.json": "717af69df0a1796f98b472349579677bc6283f4f1b21e512220d980d617b633b",
+    "timing-001/B1/child.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "timing-001/B1/child.stdout": "2bf523527bc0e4886b4ec3116e6206d8d0a79e9f75df5877fc5ab8ad9506dbf2",
+    "timing-001/B1/inputs.json": "9ac498de4418a4684ad3db7b135f1e216fff2fb6789ab36ba200bfc27ae239d0",
+    "timing-001/B1/report.json": "b9f8618585da10ed7daed10c06760a19c75ae8ab64e4605483ea972a6b205590",
+    "timing-001/B2/child.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "timing-001/B2/child.stdout": "f922a5b68ab2174e09c581585834ef55560cdc4ca910101ee90f04c7994fe4ad",
+    "timing-001/B2/inputs.json": "5f1ed39a44a17a1366e00ee003f677bf12f938cff61c3caf0acc24523300abf4",
+    "timing-001/B2/report.json": "46506fb87f7bb414ba0e05da08af086c32bd3d74c4a5bce028abcd9530a9bc08",
+    "timing-001/C0/child.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "timing-001/C0/child.stdout": "f922a5b68ab2174e09c581585834ef55560cdc4ca910101ee90f04c7994fe4ad",
+    "timing-001/C0/inputs.json": "169858433a32a97a513aa777298218dcb4065b52e0beeee687c8b1022d694b02",
+    "timing-001/C0/report.json": "989c4a07fea6439c16d15dc37298363c8d676616d8d14aab186926e92a5c7e30",
+    "timing-001/C1/child.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "timing-001/C1/child.stdout": "25303e58f7c77ee3b1f5c5495316156b168a42662e7f6735780489de53926da3",
+    "timing-001/C1/inputs.json": "3911c70f9890077a993c321d2a6b35a8bf74400b34e34bdda7082bfc5b6e49d9",
+    "timing-001/C1/report.json": "da31bac5cffe9ad9e5d8dae4adf48c0728f291452fcfc1c62e0696d1ed83c158",
+    "timing-001/C2/child.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "timing-001/C2/child.stdout": "8fc9d90ac0967014d58eb2c3b0f312511ee284ffe2084cf287c41c493a76e78f",
+    "timing-001/C2/inputs.json": "b2b25a20df0bb42dfe8695df437622c5461025a78e22f086f2282129a6ad549f",
+    "timing-001/C2/report.json": "9733e44926d09f08f6356de74cf919638ae62ddd1abe0142d3eb1de41dc37e7f",
+    "timing-001/after-hardware.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "timing-001/after-hardware.stdout": "1be5e1a9362363d7ff955e3993cb4bfa61f02a6f0797b1b889559a0ce4d70008",
+    "timing-001/after-os.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "timing-001/after-os.stdout": "4ef10a0fc370704ea84699cf3851e51488598c5f1ab35cb572eb6b96278a8e5c",
+    "timing-001/after-processes.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "timing-001/after-processes.stdout": "4b7e534cd0717af41e1a10023fd0b0c4d03b277f7f1d84f93c1aa0af2c013cab",
+    "timing-001/before-hardware.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "timing-001/before-hardware.stdout": "1be5e1a9362363d7ff955e3993cb4bfa61f02a6f0797b1b889559a0ce4d70008",
+    "timing-001/before-os.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "timing-001/before-os.stdout": "4ef10a0fc370704ea84699cf3851e51488598c5f1ab35cb572eb6b96278a8e5c",
+    "timing-001/before-processes.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "timing-001/before-processes.stdout": "fd1ba60a8c1f5c7feb628ee25ba8d7aa4f193ae218f972dab803c0727c162570",
+    "timing-001/comparison.json": "04976c09cd81a996b3d0dab18574742d53e343f920f4f6a0c5dbfd221890c149",
+    "timing-001/result.json": "41ddc53eca7e7b00755111559de45db732333b6ef7c085515d18401083a8e6f0",
+    "timing-packet-001/analyze.py": "0cc9e42094b1ef0312dde973303ff0c869e836e4e1bb6953d545be636ef0bdec",
+    "timing-packet-001/plan.json": "ff086b676b3412bfb9e7e97dc2d9cf027a26f29f8a664677fef6c591e34307df",
+    "timing-packet-001/python-controls.json": "237fe426d99edc70d39e5c6f935e0d9c5fc76d0aa08cec815de68075987a5434",
+    "timing-packet-001/root-quiet-grant.json": "e9a8952db85b6909ad0e11c31c73e3ee84ab54f0ce9ff6621e58b281a6076075",
+    "timing-packet-001/run.py": "d863fa6587c211b8643501922a38b9fee1b98c091963c8f9ea222f0f07e5bad9",
+    "timing-packet-001/test_protocol.py": "e9e8babad0eef8d121cbd439e0f2c497e52ac6dc86009bc9517bb6efb62d5a2f",
+    "timing-terminal-review.json": "4df8fa3fe270c4eaf0115c2d122903c6d17c62585bf9c3ebe84f966ac532a5ba"
+  },
+  "copied_binaries": {
+    "off": {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/editor-profiler-inactive-001/cpu-003/binaries/fixture-disabled-controls/inactive_core-9a05bfe906607d28",
+      "bytes": 32720080,
+      "sha256": "8115658e6f3b6a8526ad49ced0b0bf5e291e78fdeadc86457561d89d24e90e0c"
+    },
+    "on": {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/editor-profiler-inactive-001/cpu-003/binaries/fixture-enabled-controls/inactive_core-d6c920ce6156b9dd",
+      "bytes": 32790256,
+      "sha256": "d3077d3805059abee101d0a5dba70999a2592a7d0c202d921522694d4cfcb7c3"
+    }
+  },
+  "external_inputs": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant-source-transactions/01M4W2ZS8HBYETF98R514TCYW8.previous",
+      "bytes": 16096,
+      "sha256": "8d5f5feec2235f1718235901c6073f7425acf971a4e087755a0b3833ecb79698",
+      "relative": ".incant-source-transactions/01M4W2ZS8HBYETF98R514TCYW8.previous"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant-source-transactions/01M4W2ZT8FH3JJ1V2SCAC2XWA9.old-receipt",
+      "bytes": 26,
+      "sha256": "c7f20dcb63fc1a69d53cce013f3eb603c86c8ec9440fa0e559ce6107484ae387",
+      "relative": ".incant-source-transactions/01M4W2ZT8FH3JJ1V2SCAC2XWA9.old-receipt"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant-source-transactions/01M4W2ZT8FH3JJ1V2SCAC2XWA9.previous",
+      "bytes": 2509,
+      "sha256": "861e425066d0d7668451876c8c8cf0a930e8724c9cda8f5ffbcd99f8501ee38e",
+      "relative": ".incant-source-transactions/01M4W2ZT8FH3JJ1V2SCAC2XWA9.previous"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant-source-transactions/01M4W2ZV7JG48C67P7SSFQ8MAC.old-receipt",
+      "bytes": 26,
+      "sha256": "1b8d419b188fb9d79c431d6515954d04662b10cf4f160c92b04496373be7b6d7",
+      "relative": ".incant-source-transactions/01M4W2ZV7JG48C67P7SSFQ8MAC.old-receipt"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant-source-transactions/01M4W2ZV7JG48C67P7SSFQ8MAC.previous",
+      "bytes": 3513,
+      "sha256": "7285e9009633052ba86ee0996c87f58097eb47fdaf0a73df10f42597b0119f1a",
+      "relative": ".incant-source-transactions/01M4W2ZV7JG48C67P7SSFQ8MAC.previous"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant-source-transactions/01M4W2ZW1Y3GVNSM224C67FEV3.old-receipt",
+      "bytes": 26,
+      "sha256": "2c27848882b54a85bcac3c53513734eb49601d24d4a2d2b195e58d39208ed8c1",
+      "relative": ".incant-source-transactions/01M4W2ZW1Y3GVNSM224C67FEV3.old-receipt"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant-source-transactions/01M4W2ZW1Y3GVNSM224C67FEV3.previous",
+      "bytes": 16574,
+      "sha256": "f471293cf6a3b6a355f0f2c8ec6406bf5f3942f438411121b2e63ae6e6f31095",
+      "relative": ".incant-source-transactions/01M4W2ZW1Y3GVNSM224C67FEV3.previous"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant-source-transactions/01M4W2ZWZ9232C2ERBWYBR5Y04.old-receipt",
+      "bytes": 26,
+      "sha256": "322a1c67f12efe894bc4351b30ce697f89831d5834304c6c014b4900e518cf96",
+      "relative": ".incant-source-transactions/01M4W2ZWZ9232C2ERBWYBR5Y04.old-receipt"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant-source-transactions/01M4W2ZWZ9232C2ERBWYBR5Y04.previous",
+      "bytes": 16096,
+      "sha256": "8d5f5feec2235f1718235901c6073f7425acf971a4e087755a0b3833ecb79698",
+      "relative": ".incant-source-transactions/01M4W2ZWZ9232C2ERBWYBR5Y04.previous"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant-source-transactions/01M4W2ZXRN2TA8HSNZV6B6R2WQ.old-receipt",
+      "bytes": 26,
+      "sha256": "5bdf65bfcc5fee806848d94a4dd6369a8c9b34f7ba82f7738fed5de8aa36e62b",
+      "relative": ".incant-source-transactions/01M4W2ZXRN2TA8HSNZV6B6R2WQ.old-receipt"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant-source-transactions/01M4W2ZXRN2TA8HSNZV6B6R2WQ.previous",
+      "bytes": 2509,
+      "sha256": "861e425066d0d7668451876c8c8cf0a930e8724c9cda8f5ffbcd99f8501ee38e",
+      "relative": ".incant-source-transactions/01M4W2ZXRN2TA8HSNZV6B6R2WQ.previous"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant-source-transactions/lock",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "relative": ".incant-source-transactions/lock"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant-source-transactions/receipt",
+      "bytes": 26,
+      "sha256": "a7bb96b21ebdcf753989cd95ac49e02361d8494d381432dc124dea281293423f",
+      "relative": ".incant-source-transactions/receipt"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant/cache/audio/08b4d5af1f19e43c1c228d7c6ca243e8d2362f27f336f87a347cb697f6ebca28.json",
+      "bytes": 1096,
+      "sha256": "59363a80bbac59c6f139695407f2e76c31ed47b4345b03177801b01640480139",
+      "relative": ".incant/cache/audio/08b4d5af1f19e43c1c228d7c6ca243e8d2362f27f336f87a347cb697f6ebca28.json"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant/cache/audio/1e53cd57bfecb7115ad888e9d40f01c6d957b7130bd6f8975a2d16100d7eda46.ipcm",
+      "bytes": 691200,
+      "sha256": "1e53cd57bfecb7115ad888e9d40f01c6d957b7130bd6f8975a2d16100d7eda46",
+      "relative": ".incant/cache/audio/1e53cd57bfecb7115ad888e9d40f01c6d957b7130bd6f8975a2d16100d7eda46.ipcm"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant/cache/audio/2b67780f0ec6ce10736909aa8ec0a3b386d6b308382b7eaf33d40a5a28977718.ipcm",
+      "bytes": 8777144,
+      "sha256": "2b67780f0ec6ce10736909aa8ec0a3b386d6b308382b7eaf33d40a5a28977718",
+      "relative": ".incant/cache/audio/2b67780f0ec6ce10736909aa8ec0a3b386d6b308382b7eaf33d40a5a28977718.ipcm"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant/cache/audio/2e05653f8752033823f84b711926070f2d4d237aef0087105be217b401c89637.ipcm",
+      "bytes": 345600,
+      "sha256": "2e05653f8752033823f84b711926070f2d4d237aef0087105be217b401c89637",
+      "relative": ".incant/cache/audio/2e05653f8752033823f84b711926070f2d4d237aef0087105be217b401c89637.ipcm"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant/cache/audio/384ae95c87bd2678c8b4b80f85bca02c73035338461b423f514e25fc891f9778.ipcm",
+      "bytes": 576000,
+      "sha256": "384ae95c87bd2678c8b4b80f85bca02c73035338461b423f514e25fc891f9778",
+      "relative": ".incant/cache/audio/384ae95c87bd2678c8b4b80f85bca02c73035338461b423f514e25fc891f9778.ipcm"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant/cache/audio/3d3e537168e5bf96036e6625c0b5d55b12cf122a4715f7e8d77baf937edc8c58.json",
+      "bytes": 561,
+      "sha256": "fd7c43cb6347a021fcfe215fa66bbd817620ff596a04bc8b32259202352921ea",
+      "relative": ".incant/cache/audio/3d3e537168e5bf96036e6625c0b5d55b12cf122a4715f7e8d77baf937edc8c58.json"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant/cache/audio/4ecb37a4cf20667d8d7922971a3b609c1898cb988fb96bc0a3857546f3123c4e.json",
+      "bytes": 963,
+      "sha256": "d9ca5bd9b8d52ced2826915913857e90baea981bcdfe6d9ace42e9105929fdd2",
+      "relative": ".incant/cache/audio/4ecb37a4cf20667d8d7922971a3b609c1898cb988fb96bc0a3857546f3123c4e.json"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant/cache/audio/4f31a36d777d5ce2702b9a5237742cc8a69efa73d7067afae35dff713cbb935f.json",
+      "bytes": 9341,
+      "sha256": "8d841a107aff6df0511e0e9dfdf8c6d36cf01928d91dd82e415b26858f58cc96",
+      "relative": ".incant/cache/audio/4f31a36d777d5ce2702b9a5237742cc8a69efa73d7067afae35dff713cbb935f.json"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant/cache/audio/6c94df51cc76f31375178021c1fec7775a5e448cba6bde2d1120f9efa6a32c56.ipcm",
+      "bytes": 138240,
+      "sha256": "6c94df51cc76f31375178021c1fec7775a5e448cba6bde2d1120f9efa6a32c56",
+      "relative": ".incant/cache/audio/6c94df51cc76f31375178021c1fec7775a5e448cba6bde2d1120f9efa6a32c56.ipcm"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant/cache/audio/b63a98f27758a1bb7f2a4ba44f4fb8d263230bf401520116b87e6946cdf56117.json",
+      "bytes": 764,
+      "sha256": "d5748ced504a28a21d72eaf9c0b26c3fee6ff900c07ea491c06b79c4c5680642",
+      "relative": ".incant/cache/audio/b63a98f27758a1bb7f2a4ba44f4fb8d263230bf401520116b87e6946cdf56117.json"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant/cache/fonts/0e1cd7265c7a2fa6109d995205dd8e070723bb824fe28daa8299ba1105063a1f.json",
+      "bytes": 323,
+      "sha256": "0538183b4a25a91d05296686e8092634f8c572c4c1dc34329c4685843c7661e1",
+      "relative": ".incant/cache/fonts/0e1cd7265c7a2fa6109d995205dd8e070723bb824fe28daa8299ba1105063a1f.json"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant/cache/fonts/3127f0b873387ee37e2040135a06e9e9c05030f509eb63689529becf28b50384.ifont",
+      "bytes": 310300,
+      "sha256": "48804b712c66bb0ce00b2cc3272c7be18171810a3bb0555e3d247544951e0fdc",
+      "relative": ".incant/cache/fonts/3127f0b873387ee37e2040135a06e9e9c05030f509eb63689529becf28b50384.ifont"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant/cache/fonts/74f2395f9b27e4c4ff06183b1baed5684ce4a090490bd00f42637547cca5da0f.json",
+      "bytes": 317,
+      "sha256": "76b2977309e2485a6007bcb9c6e75df3a2e161dc576ebbf6be00f6b8b961d0f0",
+      "relative": ".incant/cache/fonts/74f2395f9b27e4c4ff06183b1baed5684ce4a090490bd00f42637547cca5da0f.json"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant/cache/fonts/9ec258961c8800c709f05586b6fca8a47061f3f776ac088bb87fbb2a462c116e.ifont",
+      "bytes": 13812,
+      "sha256": "db12e66306387bf4fdcf4b6be1fc31eed9f136e60211061e65cc97ba71500311",
+      "relative": ".incant/cache/fonts/9ec258961c8800c709f05586b6fca8a47061f3f776ac088bb87fbb2a462c116e.ifont"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant/cache/fonts/ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56.ifont",
+      "bytes": 765788,
+      "sha256": "8bd20a742cc19c0fe65b106d983ea1ed816c4cd5ca1c3d50bdc4d05aeb5f8e7a",
+      "relative": ".incant/cache/fonts/ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56.ifont"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant/cache/fonts/efbee025bcb27036123566525a911cd346bbe425cceb413eb800661df6b65767.json",
+      "bytes": 318,
+      "sha256": "ce4cd118624295e30ed4514c80bfad49c379702ead14327faf7ff92184d6034a",
+      "relative": ".incant/cache/fonts/efbee025bcb27036123566525a911cd346bbe425cceb413eb800661df6b65767.json"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant/cache/models/018d021c673a74b618fc3516d8ab4e64b32a88f6c8323d0d84395e684d811c13.incmodel",
+      "bytes": 25810,
+      "sha256": "509cf7c24253b675ed0a3d36ae344d35272050107a97c4aeae4db79417d132e7",
+      "relative": ".incant/cache/models/018d021c673a74b618fc3516d8ab4e64b32a88f6c8323d0d84395e684d811c13.incmodel"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant/cache/models/1649bb952607a07a912661374fa6a8c104a261d625b339a5aa2e096f52970bec.incmodel",
+      "bytes": 18726133,
+      "sha256": "b32c0ae9a0305abd7610713aa77a270e320090bbb31be1792a47f857ec939f99",
+      "relative": ".incant/cache/models/1649bb952607a07a912661374fa6a8c104a261d625b339a5aa2e096f52970bec.incmodel"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant/cache/models/b85f1046e4d28277bd6bb792cdcff4dc070268bb95b3b8040b697bbf7f631262.incmodel",
+      "bytes": 181633,
+      "sha256": "80dbf175a19dfda0db4c8e5c1992657fd435b6778d0b49d056755d088563e778",
+      "relative": ".incant/cache/models/b85f1046e4d28277bd6bb792cdcff4dc070268bb95b3b8040b697bbf7f631262.incmodel"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant/cache/models/da2588e81cf9f61d9b06dec86cbf644e5322cdc48594af5c9ac4e9aa08a6e1ad.incmodel",
+      "bytes": 207725,
+      "sha256": "a20e33175acb4af55ddad2168307ce3e0c02a23127566cac769e6f290bf799bf",
+      "relative": ".incant/cache/models/da2588e81cf9f61d9b06dec86cbf644e5322cdc48594af5c9ac4e9aa08a6e1ad.incmodel"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant/cache/models/ec9f2569b551d61c9552dd311c3190e9dd262c96b8823e1f3c3c04819811bf99.incmodel",
+      "bytes": 2832033,
+      "sha256": "88e2f2c56975f6bde0c0e7c131e870bf783fb86384a27d55b20fd40d40d77621",
+      "relative": ".incant/cache/models/ec9f2569b551d61c9552dd311c3190e9dd262c96b8823e1f3c3c04819811bf99.incmodel"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant/cache/textures/17da802ffd07a79a3041b9ba748180e8eccde82c6461eb24ce092cb378e94333.ktx2",
+      "bytes": 699516,
+      "sha256": "17da802ffd07a79a3041b9ba748180e8eccde82c6461eb24ce092cb378e94333",
+      "relative": ".incant/cache/textures/17da802ffd07a79a3041b9ba748180e8eccde82c6461eb24ce092cb378e94333.ktx2"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/.incant/cache/textures/5c2d2703c28f3deb6e566781de8833f45f442888602c7a72872b3ea7f5b141c8.json",
+      "bytes": 413,
+      "sha256": "f0bd2e231b9cc1839811dd7faf3a748bb2a41df3e95e84e45c727b5be5a5d840",
+      "relative": ".incant/cache/textures/5c2d2703c28f3deb6e566781de8833f45f442888602c7a72872b3ea7f5b141c8.json"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/canyon.bin",
+      "bytes": 3161612,
+      "sha256": "c32b0431a835c4c998cd69ff850291e2ed888ca0fe84e0907d1afebeba90e08d",
+      "relative": "art/canyon.bin"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/canyon.gltf",
+      "bytes": 22404,
+      "sha256": "a8622cbd4caea047abd781309fc3869f5207117815ad65631c5e52d317ce30f7",
+      "relative": "art/canyon.gltf"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/cliff_albedo.png",
+      "bytes": 388767,
+      "sha256": "d1fed013a536eb47c40252b5e5f8375f4209509ed51ed7741950eb365f917069",
+      "relative": "art/cliff_albedo.png"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/cliff_normal.png",
+      "bytes": 453616,
+      "sha256": "db93eb916ad971a8ee32ce3a5985d1c88115d113932ac7a358dc9702c7084939",
+      "relative": "art/cliff_normal.png"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/core_albedo.png",
+      "bytes": 6691,
+      "sha256": "b1c535ceafd2c64e03e79c3e46eaa63cab18df359bbf77a70292af7d7e68946e",
+      "relative": "art/core_albedo.png"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/core_emissive.png",
+      "bytes": 8040,
+      "sha256": "42576b50d661af3f3940eeadc4217122470263695dcb0a7ce9509c515b9d97d1",
+      "relative": "art/core_emissive.png"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/cue_hurt.wav",
+      "bytes": 34604,
+      "sha256": "209bf03bf0d9eeedf13d67a9bf5e526b8b9d76b90350c116a07b304d6b2212d9",
+      "relative": "art/cue_hurt.wav"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/cue_lost.wav",
+      "bytes": 144044,
+      "sha256": "d5757fbfa8f6b4e3e427c0b2748c9343011088ea520715bc91a176ddfa3ac465",
+      "relative": "art/cue_lost.wav"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/cue_pickup.wav",
+      "bytes": 86444,
+      "sha256": "a9cfe5207be237b6976cdafb2944b0f71e63c1a73c7f7608f629ee96bbbcd0c9",
+      "relative": "art/cue_pickup.wav"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/cue_won.wav",
+      "bytes": 172844,
+      "sha256": "8b17713a334cb6d830310985b31cbb3c6c7653922e0c03ce121552765a6541e0",
+      "relative": "art/cue_won.wav"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/far_albedo.png",
+      "bytes": 7178,
+      "sha256": "1f09709ceb8101b85a6ba8b39f4734688624c75ebf4415d69208ad5081b2c902",
+      "relative": "art/far_albedo.png"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/floor_albedo.png",
+      "bytes": 842112,
+      "sha256": "81445089016eba8e5d992f5d058890a75d06486f5468542df5eededd2e4c3c87",
+      "relative": "art/floor_albedo.png"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/manifest.json",
+      "bytes": 3722,
+      "sha256": "19d87aca92ee147526a7eb1cfdcc648e6bbe949a37a127a61f3687a695632956",
+      "relative": "art/manifest.json"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/mesa_loop.wav",
+      "bytes": 4388616,
+      "sha256": "4f80337e2eef1ec9b414ae8959435fd114a6d77bb85b10022aef7f3abb968816",
+      "relative": "art/mesa_loop.wav"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/mite.bin",
+      "bytes": 44724,
+      "sha256": "2809da2175266acf004be462557404623f727e84c4400fc91363d37c2d9220e7",
+      "relative": "art/mite.bin"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/mite.gltf",
+      "bytes": 5676,
+      "sha256": "62d807da1b4623e69670e467ef045386df1dc83c999aa1bdb45abf5814c868e2",
+      "relative": "art/mite.gltf"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/mite_albedo.png",
+      "bytes": 7592,
+      "sha256": "d3e231c3435475dd201652dc7e50ab835b623ed50042c6d14eba088193c65fde",
+      "relative": "art/mite_albedo.png"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/mite_emissive.png",
+      "bytes": 7495,
+      "sha256": "5298667c8f706a5a4418ae08bd1e93d943e5a382d36b40730991bf2d43befe76",
+      "relative": "art/mite_emissive.png"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/pad_albedo.png",
+      "bytes": 63444,
+      "sha256": "d0cfa2eeaf175365e390491051d05c7203e0b6dc2afc8b7fd950f927a1a3f002",
+      "relative": "art/pad_albedo.png"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/rock_albedo.png",
+      "bytes": 59674,
+      "sha256": "c6ea897e8c3811c4ce737d0dabd2d0b85aa4018a21e97aa8a8be414895ff9f6f",
+      "relative": "art/rock_albedo.png"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/sample.bin",
+      "bytes": 9428,
+      "sha256": "5f17bd5753223c313f622778e8eb6da801e93fe90ec85128c845a17b92c599fc",
+      "relative": "art/sample.bin"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/sample.gltf",
+      "bytes": 4325,
+      "sha256": "6eda3386082556270d7dd567d02fda5f7e2808792705786c8729d892078179ef",
+      "relative": "art/sample.gltf"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/sky.bin",
+      "bytes": 66848,
+      "sha256": "5908df68041666952ab3808fbcd5578b960595cc7a5258d0bd4b41c83ea6d27f",
+      "relative": "art/sky.bin"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/sky.gltf",
+      "bytes": 1887,
+      "sha256": "d752767b74d4bc39329dbd022c314bd3298c4529c3b5a325f8bcf29d03168e08",
+      "relative": "art/sky.gltf"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/sky_dome.png",
+      "bytes": 148023,
+      "sha256": "dea2f93735ff70b2e6cf543f4bcdfdb9324e4cb72a31abe3cfdd5e0c047d69c0",
+      "relative": "art/sky_dome.png"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/sky_environment.png",
+      "bytes": 59757,
+      "sha256": "8bf279ee439137e9e1da9d1dc1f1868477b4f398e607a127524dc0d209571d82",
+      "relative": "art/sky_environment.png"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/surveyor.bin",
+      "bytes": 48372,
+      "sha256": "bfef4a6f7af144a221a86ae9977df320942ff1fcb252ee1f7d30ae9e28d1da5f",
+      "relative": "art/surveyor.bin"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/surveyor.gltf",
+      "bytes": 9517,
+      "sha256": "8633af82a9e2e247c8c1509ef30f1f41e6866687b492c8329361fdec8d084003",
+      "relative": "art/surveyor.gltf"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/top_albedo.png",
+      "bytes": 229296,
+      "sha256": "0456e5dd8c177da4f1296428356cba8d94815e69568342086def5e88cf107d8a",
+      "relative": "art/top_albedo.png"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/top_normal.png",
+      "bytes": 121528,
+      "sha256": "5e9171d91392549a8e07b852273b0de5aab1a8c398ce1121712ff1e344ffd5ab",
+      "relative": "art/top_normal.png"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/art/valley.png",
+      "bytes": 10020,
+      "sha256": "c866ba77b019320be6fea2c8f4d5d988664f9816c20b98a8c1ef007dfb57d93e",
+      "relative": "art/valley.png"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/core.json",
+      "bytes": 9579385,
+      "sha256": "027621691da3043e25cd30a02c76a8fb92f1a4464448c3c6c7d04e6f8b38c30b",
+      "relative": "core.json"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/fonts/CoreSampleSC-Regular.ttf",
+      "bytes": 13764,
+      "sha256": "9ec258961c8800c709f05586b6fca8a47061f3f776ac088bb87fbb2a462c116e",
+      "relative": "fonts/CoreSampleSC-Regular.ttf"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/fonts/Inter-Regular.ttf",
+      "bytes": 310252,
+      "sha256": "3127f0b873387ee37e2040135a06e9e9c05030f509eb63689529becf28b50384",
+      "relative": "fonts/Inter-Regular.ttf"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/fonts/NotoSansArabic.ttf",
+      "bytes": 765740,
+      "sha256": "ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56",
+      "relative": "fonts/NotoSansArabic.ttf"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/gameplay.ts",
+      "bytes": 16574,
+      "sha256": "f471293cf6a3b6a355f0f2c8ec6406bf5f3942f438411121b2e63ae6e6f31095",
+      "relative": "gameplay.ts"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/source.journal.jsonl",
+      "bytes": 99023236,
+      "sha256": "b7d34540a973adf96c65cec922270085fe1c29e777f53c4247e31e58021478eb",
+      "relative": "source.journal.jsonl"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/authoring/stress.ts",
+      "bytes": 3513,
+      "sha256": "7285e9009633052ba86ee0996c87f58097eb47fdaf0a73df10f42597b0119f1a",
+      "relative": "stress.ts"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/tools/build_native_script.mjs",
+      "bytes": 1840,
+      "sha256": "8df5a8522d850818f3eb1b4dccd9548bf49bed8058dfc8449dbcdc2418941f03"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/package.json",
+      "bytes": 865,
+      "sha256": "bb8e7500fecc2e50fdf50716823a65ca4ff6b8cd742be881db7155b65ab21012"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/package-lock.json",
+      "bytes": 134157,
+      "sha256": "cbea068b7d9182270271319a7a77d24805b9c9c66ed5e9eb3e188d60e5337c60"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/tools/native_script/cook.mjs",
+      "bytes": 7738,
+      "sha256": "65e381b88242363102785fa4f6e4e5a3b5614d8ab298f1a6ec0b701128a378a1"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/tools/native_script/graph.mjs",
+      "bytes": 9144,
+      "sha256": "b681b4df2feecbaba82ce55dc13cc26aebfc9e9c1062753338e9312415554841"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/tools/native_script/phases.mjs",
+      "bytes": 831,
+      "sha256": "9497ed46c99dc8925361020d7651e3d3e32a4160d8daf9b572c30d6747dff0e4"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/tools/native_script/publish.mjs",
+      "bytes": 1853,
+      "sha256": "fa4efed989536b27e1e42e4c082533573e30f2999ef14ba813b9fc80ca5019a0"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/tools/native_script/typecheck_host.mjs",
+      "bytes": 2463,
+      "sha256": "4cc7c7d0d212547a6ed55286eb8786d1cfdd66f96d1116e3f4e8f7145d5132c4"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/sdk/ts/src/generated.d.ts",
+      "bytes": 74186,
+      "sha256": "8ad8e0931d203c77ccb515c39168aa06fa82dd4b1041e15bfc2127cf68bd6755"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/sdk/ts/src/index.d.ts",
+      "bytes": 8342,
+      "sha256": "2ba70963a7e25c3f966fb5971760dddf074a714b7d86d2310726b45c7192142e"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/sdk/ts/src/native.d.ts",
+      "bytes": 28965,
+      "sha256": "85dcfa025f687c977484ac3b22f72c7e34567f723778e5c08cf15d11ac344518"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/samples/core/binding_oracle.py",
+      "bytes": 12085,
+      "sha256": "c2a6cab66192e34ab07f2e9aaddd311cd12c016ac84da57b5272762c804ce3ae"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/samples/core/bindings.py",
+      "bytes": 4906,
+      "sha256": "50fc35a092b3b1758af6405ba819bdf052e2a11d623cf92ac080dde1c55d2965"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/samples/core/playtest.py",
+      "bytes": 13264,
+      "sha256": "85eacb004af3f42fcd2a12274639b77f25b98d07a54cfdcb85996ca86c8ebd22"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/samples/core/art/ids.py",
+      "bytes": 869,
+      "sha256": "394237e6d2a462c883551ad5f1db5159af6fb20d0ca7ae4791680d9ee1b5d316"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/samples/core/art/level.py",
+      "bytes": 12850,
+      "sha256": "779cccc629ea5da9738f9ddcae8d85332e2eb0d8aaa330db68b17c80eca2635f"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/LICENSE.txt",
+      "bytes": 9197,
+      "sha256": "a7d00bfd54525bc694b6e32f64c7ebcf5e6b7ae3657be5cc12767bce74654a47"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/README.md",
+      "bytes": 2842,
+      "sha256": "73147458477d90cd6236627cdd9b0871df12e6e8a21d2d0fda6d1ad2826bdc0e"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/SECURITY.md",
+      "bytes": 2656,
+      "sha256": "7b6976eec43edfa68b79a459dd089c56b7a395916dbf1a01bd11e6d86e12128f"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/ThirdPartyNoticeText.txt",
+      "bytes": 37824,
+      "sha256": "1af3c68039c57e539422da82a4faada506ce6d0ea6f90e0b699d02dbcdb7a90c"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/bin/tsc",
+      "bytes": 45,
+      "sha256": "8d5fa5bd883fec0979fc2004f1fe1d99aef40570155d550eadc0b03b55513bf0"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/bin/tsserver",
+      "bytes": 50,
+      "sha256": "a088f0c3419bcb2f7b860ad42e4c9f25ead067eda70af6a10d0a7d453954aada"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/_tsc.js",
+      "bytes": 6213092,
+      "sha256": "e8f349eabd48486bdb2bf9dc1a00c89d58297270c54b745838879e2859194419"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/_tsserver.js",
+      "bytes": 27888,
+      "sha256": "0efcc88cdf0593cc1dcc8b6afd605c7bed9eca6f648c70c8f0df8695114bf6d7"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/_typingsInstaller.js",
+      "bytes": 10363,
+      "sha256": "62a69c574365f1c81633b86b3214f9df860aad08843028dd5244b00aa7f1e190"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/cs/diagnosticMessages.generated.json",
+      "bytes": 320453,
+      "sha256": "5b30e58d35f877521e14c16551c86320b2ed19ddb70fe5f41841b561d27f18c2"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/de/diagnosticMessages.generated.json",
+      "bytes": 344426,
+      "sha256": "a4031a8028febc35f92ba317104878d93f02c1750e6ee16351c2270ab4dff517"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/es/diagnosticMessages.generated.json",
+      "bytes": 340054,
+      "sha256": "3c7844125e1f2a3a2227e16dd1fed75218a3454919706b34cd8a5da9d43cda22"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/fr/diagnosticMessages.generated.json",
+      "bytes": 346016,
+      "sha256": "9fc1836d7575840a8b7a63dacdedd99e90e4144c0bbe29a4b7fa78a86e0e8bf5"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/it/diagnosticMessages.generated.json",
+      "bytes": 339409,
+      "sha256": "a740fe2b2338d72a8d165fb8c7c22ac1393a18b6aa7f1ed6d45b79887867f98a"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/ja/diagnosticMessages.generated.json",
+      "bytes": 381398,
+      "sha256": "ae1a2d439bfb60b9fa32408bde0e9ec39840a33d621014fcb5b2fb4e69a606de"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/ko/diagnosticMessages.generated.json",
+      "bytes": 346139,
+      "sha256": "31b27d2d556fc037eeac1672f771bf940ec70afba342e977faa75a2fa292a8be"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.d.ts",
+      "bytes": 992,
+      "sha256": "a7297ff837fcdf174a9524925966429eb8e5feecc2cc55cc06574e6b092c1eaa"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.decorators.d.ts",
+      "bytes": 13192,
+      "sha256": "8e7f8264d0fb4c5339605a15daadb037bf238c10b654bb3eee14208f860a32ea"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.decorators.legacy.d.ts",
+      "bytes": 1326,
+      "sha256": "782dec38049b92d4e85c1585fbea5474a219c6984a35b004963b00beb1aab538"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.dom.asynciterable.d.ts",
+      "bytes": 1887,
+      "sha256": "d7a3c8b952931daebdfc7a2897c53c0a1c73624593fa070e46bd537e64dcd20a"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.dom.d.ts",
+      "bytes": 1874901,
+      "sha256": "080941d9f9ff9307f7e27a83bcd888b7c8270716c39af943532438932ec1d0b9"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.dom.iterable.d.ts",
+      "bytes": 29802,
+      "sha256": "2e80ee7a49e8ac312cc11b77f1475804bee36b3b2bc896bead8b6e1266befb43"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2015.collection.d.ts",
+      "bytes": 5229,
+      "sha256": "dc2df20b1bcdc8c2d34af4926e2c3ab15ffe1160a63e58b7e09833f616efff44"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2015.core.d.ts",
+      "bytes": 22866,
+      "sha256": "c57796738e7f83dbc4b8e65132f11a377649c00dd3eee333f672b8f0a6bea671"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2015.d.ts",
+      "bytes": 1241,
+      "sha256": "45b7ab580deca34ae9729e97c13cfd999df04416a79116c3bfb483804f85ded4"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2015.generator.d.ts",
+      "bytes": 2557,
+      "sha256": "515d0b7b9bea2e31ea4ec968e9edd2c39d3eebf4a2d5cbd04e88639819ae3b71"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2015.iterable.d.ts",
+      "bytes": 18200,
+      "sha256": "0559b1f683ac7505ae451f9a96ce4c3c92bdc71411651ca6ddb0e88baaaad6a3"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2015.promise.d.ts",
+      "bytes": 3200,
+      "sha256": "0dc1e7ceda9b8b9b455c3a2d67b0412feab00bd2f66656cd8850e8831b08b537"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2015.proxy.d.ts",
+      "bytes": 5251,
+      "sha256": "ce691fb9e5c64efb9547083e4a34091bcbe5bdb41027e310ebba8f7d96a98671"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2015.reflect.d.ts",
+      "bytes": 6493,
+      "sha256": "8d697a2a929a5fcb38b7a65594020fcef05ec1630804a33748829c5ff53640d0"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2015.symbol.d.ts",
+      "bytes": 1649,
+      "sha256": "4ff2a353abf8a80ee399af572debb8faab2d33ad38c4b4474cff7f26e7653b8d"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts",
+      "bytes": 11010,
+      "sha256": "fb0f136d372979348d59b3f5020b4cdb81b5504192b1cacff5d1fbba29378aa1"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2016.array.include.d.ts",
+      "bytes": 5204,
+      "sha256": "d15bea3d62cbbdb9797079416b8ac375ae99162a7fba5de2c6c505446486ac0a"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2016.d.ts",
+      "bytes": 965,
+      "sha256": "3facaf05f0c5fc569c5649dd359892c98a85557e3e0c847964caeb67076f4d75"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2016.full.d.ts",
+      "bytes": 1032,
+      "sha256": "807e0e0bdc67605dd28efe18f20ab5fcd75d944ef95936120702335f9379094b"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2016.intl.d.ts",
+      "bytes": 1484,
+      "sha256": "68d18b664c9d32a7336a70235958b8997ebc1c3b8505f4f1ae2b7e7753b87618"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2017.arraybuffer.d.ts",
+      "bytes": 915,
+      "sha256": "eb3d66c8327153d8fa7dd03f9c58d351107fe824c79e9b56b462935176cdf12a"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2017.d.ts",
+      "bytes": 1162,
+      "sha256": "e44bb8bbac7f10ecc786703fe0a6a4b952189f908707980ba8f3c8975a760962"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2017.date.d.ts",
+      "bytes": 1916,
+      "sha256": "38f0219c9e23c915ef9790ab1d680440d95419ad264816fa15009a8851e79119"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2017.full.d.ts",
+      "bytes": 1032,
+      "sha256": "1d242d5c24cf285c88bc4fb93c5ff903de8319064e282986edeb6247ba028d5e"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2017.intl.d.ts",
+      "bytes": 1449,
+      "sha256": "4de680d5bb41c17f7f68e0419412ca23c98d5749dcaaea1896172f06435891fc"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2017.object.d.ts",
+      "bytes": 2473,
+      "sha256": "69ab18c3b76cd9b1be3d188eaf8bba06112ebbe2f47f6c322b5105a6fbc45a2e"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2017.sharedmemory.d.ts",
+      "bytes": 7209,
+      "sha256": "a680117f487a4d2f30ea46f1b4b7f58bef1480456e18ba53ee85c2746eeca012"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2017.string.d.ts",
+      "bytes": 2378,
+      "sha256": "2f11ff796926e0832f9ae148008138ad583bd181899ab7dd768a2666700b1893"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2017.typedarrays.d.ts",
+      "bytes": 1542,
+      "sha256": "954296b30da6d508a104a3a0b5d96b76495c709785c1d11610908e63481ee667"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2018.asyncgenerator.d.ts",
+      "bytes": 2692,
+      "sha256": "ac9538681b19688c8eae65811b329d3744af679e0bdfa5d842d0e32524c73e1c"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2018.asynciterable.d.ts",
+      "bytes": 2257,
+      "sha256": "0a969edff4bd52585473d24995c5ef223f6652d6ef46193309b3921d65dd4376"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2018.d.ts",
+      "bytes": 1088,
+      "sha256": "5e1c4c362065a6b95ff952c0eab010f04dcd2c3494e813b493ecfd4fcb9fc0d8"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2018.full.d.ts",
+      "bytes": 1074,
+      "sha256": "95f1023b824c2c511c48f1201e2d1188bcb0ca1138a309a870b956d2e92e44ab"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2018.intl.d.ts",
+      "bytes": 3021,
+      "sha256": "9e9fbd7030c440b33d021da145d3232984c8bb7916f277e8ffd3dc2e3eae2bdb"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2018.promise.d.ts",
+      "bytes": 1353,
+      "sha256": "811ec78f7fefcabbda4bfa93b3eb67d9ae166ef95f9bff989d964061cbf81a0c"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2018.regexp.d.ts",
+      "bytes": 1232,
+      "sha256": "717937616a17072082152a2ef351cb51f98802fb4b2fdabd32399843875974ca"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2019.array.d.ts",
+      "bytes": 3163,
+      "sha256": "d7e7d9b7b50e5f22c915b525acc5a49a7a6584cf8f62d0569e557c5cfc4b2ac2"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2019.d.ts",
+      "bytes": 1071,
+      "sha256": "68d73b4a11549f9c0b7d352d10e91e5dca8faa3322bfb77b661839c42b1ddec7"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2019.full.d.ts",
+      "bytes": 1074,
+      "sha256": "08f6861df84fba9719c14d5adc3ba40be9f0c687639e6c4df3c05b9301b8ff94"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2019.intl.d.ts",
+      "bytes": 958,
+      "sha256": "74f7fa2d027d5b33eb0471c8e82a6c87216223181ec31247c357a3e8e2fddc5b"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2019.object.d.ts",
+      "bytes": 1473,
+      "sha256": "71c37f4c9543f31dfced6c7840e068c5a5aacb7b89111a4364b1d5276b852557"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2019.string.d.ts",
+      "bytes": 1528,
+      "sha256": "576711e016cf4f1804676043e6a0a5414252560eb57de9faceee34d79798c850"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2019.symbol.d.ts",
+      "bytes": 1006,
+      "sha256": "89c1b1281ba7b8a96efc676b11b264de7a8374c5ea1e6617f11880a13fc56dc6"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2020.bigint.d.ts",
+      "bytes": 38185,
+      "sha256": "d6d7ae4d1f1f3772e2a3cde568ed08991a8ae34a080ff1151af28b7f798e22ca"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2020.d.ts",
+      "bytes": 1201,
+      "sha256": "5efce4fc3c29ea84e8928f97adec086e3dc876365e0982cc8479a07954a3efd4"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2020.date.d.ts",
+      "bytes": 2956,
+      "sha256": "063600664504610fe3e99b717a1223f8b1900087fab0b4cad1496a114744f8df"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2020.full.d.ts",
+      "bytes": 1074,
+      "sha256": "1305d1e76ca44e30fb8b2b8075fa522b83f60c0bcf5d4326a9d2cf79b53724f8"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2020.intl.d.ts",
+      "bytes": 22438,
+      "sha256": "639e512c0dfc3fad96a84caad71b8834d66329a1f28dc95e3946c9b58176c73a"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2020.number.d.ts",
+      "bytes": 1587,
+      "sha256": "368af93f74c9c932edd84c58883e736c9e3d53cec1fe24c0b0ff451f529ceab1"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2020.promise.d.ts",
+      "bytes": 1803,
+      "sha256": "934019d7e3c81950f9a8426d093458b65d5aff2c7c1511233c0fd5b941e608ab"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2020.sharedmemory.d.ts",
+      "bytes": 5128,
+      "sha256": "52ada8e0b6e0482b728070b7639ee42e83a9b1c22d205992756fe020fd9f4a47"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2020.string.d.ts",
+      "bytes": 2556,
+      "sha256": "3bdefe1bfd4d6dee0e26f928f93ccc128f1b64d5d501ff4a8cf3c6371200e5e6"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2020.symbol.wellknown.d.ts",
+      "bytes": 1606,
+      "sha256": "59fb2c069260b4ba00b5643b907ef5d5341b167e7d1dbf58dfd895658bda2867"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2021.d.ts",
+      "bytes": 1036,
+      "sha256": "feecb1be483ed332fad555aff858affd90a48ab19ba7272ee084704eb7167569"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2021.full.d.ts",
+      "bytes": 1074,
+      "sha256": "4a66df3ab5de5cfcda11538cffddd67ff6a174e003788e270914c1e0248483cf"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2021.intl.d.ts",
+      "bytes": 8245,
+      "sha256": "965f36eae237dd74e6cca203a43e9ca801ce38824ead814728a2807b1910117d"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2021.promise.d.ts",
+      "bytes": 2262,
+      "sha256": "af3dd424cf267428f30ccfc376f47a2c0114546b55c44d8c0f1d57d841e28d74"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2021.string.d.ts",
+      "bytes": 1592,
+      "sha256": "995c005ab91a498455ea8dfb63aa9f83fa2ea793c3d8aa344be4a1678d06d399"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2021.weakref.d.ts",
+      "bytes": 3171,
+      "sha256": "959d36cddf5e7d572a65045b876f2956c973a586da58e5d26cde519184fd9b8a"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2022.array.d.ts",
+      "bytes": 4676,
+      "sha256": "3925a6c820dcb1a06506c90b1577db1fdbf7705d65b62b99dce4be75c637e26b"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2022.d.ts",
+      "bytes": 1108,
+      "sha256": "ee7bad0c15b58988daa84371e0b89d313b762ab83cb5b31b8a2d1162e8eb41c2"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2022.error.d.ts",
+      "bytes": 2379,
+      "sha256": "0a3d63ef2b853447ec4f749d3f368ce642264246e02911fcb1590d8c161b8005"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2022.full.d.ts",
+      "bytes": 1074,
+      "sha256": "3cbad9a1ba4453443026ed38e4b8be018abb26565fa7c944376463ad9df07c41"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2022.intl.d.ts",
+      "bytes": 7692,
+      "sha256": "8cdf8847677ac7d20486e54dd3fcf09eda95812ac8ace44b4418da1bbbab6eb8"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2022.object.d.ts",
+      "bytes": 1085,
+      "sha256": "8444af78980e3b20b49324f4a16ba35024fef3ee069a0eb67616ea6ca821c47a"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2022.regexp.d.ts",
+      "bytes": 1331,
+      "sha256": "b4b67b1a91182421f5df999988c690f14d813b9850b40acd06ed44691f6727ad"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2022.string.d.ts",
+      "bytes": 1155,
+      "sha256": "3287d9d085fbd618c3971944b65b4be57859f5415f495b33a6adc994edd2f004"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2023.array.d.ts",
+      "bytes": 40236,
+      "sha256": "df83c2a6c73228b625b0beb6669c7ee2a09c914637e2d35170723ad49c0f5cd4"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2023.collection.d.ts",
+      "bytes": 900,
+      "sha256": "436aaf437562f276ec2ddbee2f2cdedac7664c1e4c1d2c36839ddd582eeb3d0a"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2023.d.ts",
+      "bytes": 999,
+      "sha256": "27bdc30a0e32783366a5abeda841bc22757c1797de8681bbe81fbc735eeb1c10"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2023.full.d.ts",
+      "bytes": 1074,
+      "sha256": "785921608325fa246b450f05b238f4b3ed659f1099af278ce9ebbc9416a13f1d"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2023.intl.d.ts",
+      "bytes": 2645,
+      "sha256": "8e3c06ea092138bf9fa5e874a1fdbc9d54805d074bee1de31b99a11e2fec239d"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2024.arraybuffer.d.ts",
+      "bytes": 2637,
+      "sha256": "87dc0f382502f5bbce5129bdc0aea21e19a3abbc19259e0b43ae038a9fc4e326"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2024.collection.d.ts",
+      "bytes": 1224,
+      "sha256": "b1cb28af0c891c8c96b2d6b7be76bd394fddcfdb4709a20ba05a7c1605eea0f9"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2024.d.ts",
+      "bytes": 1166,
+      "sha256": "8fd575e12870e9944c7e1d62e1f5a73fcf23dd8d3a321f2a2c74c20d022283fe"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2024.full.d.ts",
+      "bytes": 1074,
+      "sha256": "b3e9cef4eed59f8a2249ed834ba4aabe9d0d4e9037d4679487fa17dad99004a3"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2024.object.d.ts",
+      "bytes": 1259,
+      "sha256": "2fef54945a13095fdb9b84f705f2b5994597640c46afeb2ce78352fab4cb3279"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2024.promise.d.ts",
+      "bytes": 1389,
+      "sha256": "ac77cb3e8c6d3565793eb90a8373ee8033146315a3dbead3bde8db5eaf5e5ec6"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2024.regexp.d.ts",
+      "bytes": 1073,
+      "sha256": "56e4ed5aab5f5920980066a9409bfaf53e6d21d3f8d020c17e4de584d29600ad"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2024.sharedmemory.d.ts",
+      "bytes": 3077,
+      "sha256": "4ece9f17b3866cc077099c73f4983bddbcb1dc7ddb943227f1ec070f529dedd1"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es2024.string.d.ts",
+      "bytes": 1194,
+      "sha256": "0a6282c8827e4b9a95f4bf4f5c205673ada31b982f50572d27103df8ceb8013c"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es5.d.ts",
+      "bytes": 218439,
+      "sha256": "c430d44666289dae81f30fa7b2edebf186ecc91a2d4c71266ea6ae76388792e1"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.es6.d.ts",
+      "bytes": 1032,
+      "sha256": "df039a67536fe2acc3affdcbfb645892f842db36fe599e8e652e2f0c640a90d1"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.esnext.array.d.ts",
+      "bytes": 1791,
+      "sha256": "1c9319a09485199c1f7b0498f2988d6d2249793ef67edda49d1e584746be9032"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.esnext.collection.d.ts",
+      "bytes": 3878,
+      "sha256": "e3a2a0cee0f03ffdde24d89660eba2685bfbdeae955a6c67e8c4c9fd28928eeb"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.esnext.d.ts",
+      "bytes": 1282,
+      "sha256": "2ab096661c711e4a81cc464fa1e6feb929a54f5340b46b0a07ac6bbf857471f0"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.esnext.decorators.d.ts",
+      "bytes": 1070,
+      "sha256": "d4b1d2c51d058fc21ec2629fff7a76249dec2e36e12960ea056e3ef89174080f"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.esnext.disposable.d.ts",
+      "bytes": 6806,
+      "sha256": "51ad4c928303041605b4d7ae32e0c1ee387d43a24cd6f1ebf4a2699e1076d4fa"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.esnext.error.d.ts",
+      "bytes": 1029,
+      "sha256": "73f78680d4c08509933daf80947902f6ff41b6230f94dd002ae372620adb0f60"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.esnext.float16.d.ts",
+      "bytes": 20528,
+      "sha256": "196cb558a13d4533a5163286f30b0509ce0210e4b316c56c38d4c0fd2fb38405"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.esnext.full.d.ts",
+      "bytes": 1074,
+      "sha256": "bde31fd423cd93b0eff97197a3f66df7c93e8c0c335cbeb113b7ff1ac35c23f4"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.esnext.intl.d.ts",
+      "bytes": 893,
+      "sha256": "811c71eee4aa0ac5f7adf713323a5c41b0cf6c4e17367a34fbce379e12bbf0a4"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.esnext.iterator.d.ts",
+      "bytes": 8676,
+      "sha256": "22adec94ef7047a6c9d1af3cb96be87a335908bf9ef386ae9fd50eeb37f44c47"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.esnext.promise.d.ts",
+      "bytes": 1658,
+      "sha256": "60037901da1a425516449b9a20073aa03386cce92f7a1fd902d7602be3a7c2e9"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.esnext.sharedmemory.d.ts",
+      "bytes": 1067,
+      "sha256": "c5239f5c01bcfa9cd32f37c496cf19c61d69d37e48be9de612b541aac915805b"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.scripthost.d.ts",
+      "bytes": 9451,
+      "sha256": "cd034f499c6cdca722b60c04b5b1b78e058487a7085a8e0d6fb50809947ee573"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.webworker.asynciterable.d.ts",
+      "bytes": 1887,
+      "sha256": "ca417afee74054e99d5a8252b35bef26ca6e2942d67d343fce6b42fc9f432993"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.webworker.d.ts",
+      "bytes": 609557,
+      "sha256": "6d08cde2bfb6ff909efbf7cb7d6d55be412cf4b9f48fd0430185986973fa91f5"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.webworker.importscripts.d.ts",
+      "bytes": 1041,
+      "sha256": "80e18897e5884b6723488d4f5652167e7bb5024f946743134ecc4aa4ee731f89"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/lib.webworker.iterable.d.ts",
+      "bytes": 22768,
+      "sha256": "d6c6331ce67c41b2ad5bfb0c8c022403980b479a377a44da8f16b61120418f66"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/pl/diagnosticMessages.generated.json",
+      "bytes": 342111,
+      "sha256": "0645575abe920de1ee4cf3f2f70c7abc7f6691daa01cf1e9ad6b1ce53917c9ff"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/pt-br/diagnosticMessages.generated.json",
+      "bytes": 330482,
+      "sha256": "34a649eb937cd70fe7b15663c2e5479e753d42df0e5c2933636789b60c2c939d"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/ru/diagnosticMessages.generated.json",
+      "bytes": 443587,
+      "sha256": "29bb8ea9d44f55bb7acdedfac0a57865ea40552f004d0d6e3b96746ac76666cc"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/tr/diagnosticMessages.generated.json",
+      "bytes": 330684,
+      "sha256": "9466915f3e0cdb2625495bbe9c02c8b7ef9e3543fffae957ba034655563abf65"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/tsc.js",
+      "bytes": 267,
+      "sha256": "2cffde0b8c6760dfb0b5b0382bbb7e00ba6a8b2d981b9205b256a700a481d983"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/tsserver.js",
+      "bytes": 272,
+      "sha256": "e3ccfeec65ec5c470b8ffc5611878a31182650c7e8a062c38a719f83b523edcb"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/tsserverlibrary.d.ts",
+      "bytes": 865,
+      "sha256": "73b15a0b7cf5c6df9076b9408c5ce682f11813453bf54c54cb284f075b5224cf"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/tsserverlibrary.js",
+      "bytes": 1012,
+      "sha256": "7ca9b464de80a5382d9ccfed2b224323bc0274c8de61bf0464e89ee824677c76"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/typesMap.json",
+      "bytes": 16788,
+      "sha256": "4143fb8b1c5d4421dfa19a4b80ddf2da375fc0835a349c3b18519fda5955e1d9"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/typescript.d.ts",
+      "bytes": 588085,
+      "sha256": "e134052a6b1ded61693b4037f615dc72f14e2881e79c1ddbff6c514c8a516b05"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/typescript.js",
+      "bytes": 9112572,
+      "sha256": "3ae902c92cc44dace175c0e69e13a4b0899f6983c6121d76b9ab8dd5795e7675"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/typingsInstaller.js",
+      "bytes": 280,
+      "sha256": "2d48a038523ea7c626fa2796a30fa5fdc07612ea5fab83544423009d7683a213"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/watchGuard.js",
+      "bytes": 2313,
+      "sha256": "471200d4bc555ef8d8429358bdca2a68ea7c9bfff6c853b5b048d2512fe4092a"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/zh-cn/diagnosticMessages.generated.json",
+      "bytes": 295909,
+      "sha256": "6bd4ae6aea0991f6b73c46ec79ebb643b280a07e4808be363b07d01d2f6d399d"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/lib/zh-tw/diagnosticMessages.generated.json",
+      "bytes": 292532,
+      "sha256": "c35cf732ff01539090a3622b7a07f7bb4cadb28f6f13048b366012c458329be1"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/typescript/package.json",
+      "bytes": 3620,
+      "sha256": "822ef7ca6452205657b6288b066481ecf508bfbf43455d715cf7d3ec457561e6"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@swc/core/LICENSE",
+      "bytes": 10836,
+      "sha256": "d96eba1f1881334d50ffc144276dfa98e147a415e7c591ecdfcb81680361dc91"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@swc/core/README.md",
+      "bytes": 4503,
+      "sha256": "a4181491eed30beab1c50d6cd920dc144c821eab0a9e2f28b221360b8d32d69c"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@swc/core/Visitor.d.ts",
+      "bytes": 17614,
+      "sha256": "c8cc4339203ac24fc64ac2990a30a1bc4e3c9baf2fe8bbe5902898a7887947f5"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@swc/core/Visitor.js",
+      "bytes": 47570,
+      "sha256": "9af0a3cd4eb65cde75c753653a7023742468e0c844a0dd2afcb7cb2b71bb9376"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@swc/core/binding.d.ts",
+      "bytes": 2537,
+      "sha256": "add6273ede9c96a0e3ad935eab6327a3f455c543d91b5a0f4634cbb87309e384"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@swc/core/binding.js",
+      "bytes": 9462,
+      "sha256": "46163ee878019eb5ddb6d6783d925b6fedaa1f9dbd3c587b96dee3e5631cc72c"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@swc/core/index.d.ts",
+      "bytes": 4765,
+      "sha256": "c42bb92479035fe478fa30b19c8f3b32b6bcc92d30e9432c755c9f7db09c070c"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@swc/core/index.js",
+      "bytes": 19067,
+      "sha256": "613bbdb22f2f18799afe935656ecec6654362809f1df91d08b83b2afc684696f"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@swc/core/package.json",
+      "bytes": 3285,
+      "sha256": "30f810ddf7edf85604db4ea5f577fcd4b506cbeb6065e31d35629ef6b17a1f65"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@swc/core/postinstall.js",
+      "bytes": 6857,
+      "sha256": "5da0f556c5702eaf4c4b66283f03aeccbd8db3d4b730866741ca23c799614a87"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@swc/core/spack.d.ts",
+      "bytes": 1265,
+      "sha256": "136ac2fb228b2c64ad2d039eb4de311212505a20a91b9ba632bd6cfdc3b4126f"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@swc/core/spack.js",
+      "bytes": 3496,
+      "sha256": "5af057ed9953917f2e6d7cb44751e8df07898b515521e191b5cfc23d4b997f19"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@swc/core/util.d.ts",
+      "bytes": 60,
+      "sha256": "29ea3fe18c4091112d32e8cd514030a823eebbe8d223d3d53f4f930252f6be6e"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@swc/core/util.js",
+      "bytes": 3066,
+      "sha256": "2e08d3dde239f29ec0a13b412dd96e6e07bff28721e2f30418c846e53e4a33c7"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@swc/core-darwin-arm64/LICENSE",
+      "bytes": 10836,
+      "sha256": "d96eba1f1881334d50ffc144276dfa98e147a415e7c591ecdfcb81680361dc91"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@swc/core-darwin-arm64/README.md",
+      "bytes": 1952,
+      "sha256": "dd5a9b7169841c97eb8fe5f8490fc570bdb82cad5b0dbe2b004aee918f80c266"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@swc/core-darwin-arm64/package.json",
+      "bytes": 823,
+      "sha256": "ccc65a1f074706971b39401c652bc2aadbb01df57041f8c4b9d6ca2605e87669"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@swc/core-darwin-arm64/swc.darwin-arm64.node",
+      "bytes": 8922224,
+      "sha256": "c2143d6969fa8bbc2ff9d4037fd94f3dce29d8c606c5a5d2f43a4e4dbb2c6f1c"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@swc/counter/CHANGELOG.md",
+      "bytes": 87,
+      "sha256": "100fb45a597d95800335e6a10b6cb4f6ce255b8cbdaa1353d25b0de197b4975f"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@swc/counter/README.md",
+      "bytes": 428,
+      "sha256": "1ce93ba7d4948db3753e6d199d0b6e75ca39ff2e09a3ae24517b0a56215cc099"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@swc/counter/index.js",
+      "bytes": 42,
+      "sha256": "d018ef4c9b3f87d1adc6822a0a549fc01bbb86eaf732a4b768bc89b904d21b46"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@swc/counter/package.json",
+      "bytes": 625,
+      "sha256": "501bc5484d423138eee6d21eb748d485de22ba290d8451174a207fb7e1a041ea"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@swc/types/LICENSE",
+      "bytes": 10836,
+      "sha256": "d96eba1f1881334d50ffc144276dfa98e147a415e7c591ecdfcb81680361dc91"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@swc/types/README.md",
+      "bytes": 219,
+      "sha256": "62b6d75ba12052d0e943e760b1e46db81853b7c8adb29153230a4f333a462d10"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@swc/types/assumptions.d.ts",
+      "bytes": 2647,
+      "sha256": "990ee33a8cf3067ee0863aea60db1eb7755a03805b949b2b9e42c35a119d3844"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@swc/types/assumptions.js",
+      "bytes": 77,
+      "sha256": "d43aa81f5bc89faa359e0f97c814ba25155591ff078fbb9bfd40f8c7c9683230"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@swc/types/index.d.ts",
+      "bytes": 67658,
+      "sha256": "47e7a89b908121f3aa6e7db53f91ee3becf1f5c3ad024f1ab97da75e0ad00c91"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@swc/types/index.js",
+      "bytes": 77,
+      "sha256": "d43aa81f5bc89faa359e0f97c814ba25155591ff078fbb9bfd40f8c7c9683230"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@swc/types/package.json",
+      "bytes": 793,
+      "sha256": "9a0eb19a45bfa38dbc1973cd8422e7d0a1b0e29a01fd8b7833d0dcb504f1a926"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@jridgewell/sourcemap-codec/LICENSE",
+      "bytes": 1080,
+      "sha256": "769d154fbde32a915af110b1123650bc79f4cbe675acc66e005265bf069c6c6c"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@jridgewell/sourcemap-codec/README.md",
+      "bytes": 10051,
+      "sha256": "50e5282b46bafe5e2c87a0f224a86876067694f0434c5b27c0ea2d5bbceba5d7"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@jridgewell/sourcemap-codec/dist/sourcemap-codec.mjs",
+      "bytes": 14399,
+      "sha256": "2768e18f3bf937a0111c98872ff3e8ec8f5165d103a082b91f5127351beab7d0"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@jridgewell/sourcemap-codec/dist/sourcemap-codec.mjs.map",
+      "bytes": 10813,
+      "sha256": "7fecdb8892c06b7446c9924e3a12ed641dd8603a57fa5f86d5be05e5bc09ce36"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@jridgewell/sourcemap-codec/dist/sourcemap-codec.umd.js",
+      "bytes": 16174,
+      "sha256": "36f67483c3beef15e041483b68e1b66e8b6b3e6c50ab654a5e97464082324cc9"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@jridgewell/sourcemap-codec/dist/sourcemap-codec.umd.js.map",
+      "bytes": 10911,
+      "sha256": "689c8e81a7d5b977b31ca97e82a3bd0bd69c042d427e1809de3c917b0471bd92"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@jridgewell/sourcemap-codec/package.json",
+      "bytes": 2185,
+      "sha256": "ac7afd57294dbee1f891ca797e19e405340f2cd6031808e6d3845fec60a5b43f"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@jridgewell/sourcemap-codec/src/range-mappings.ts",
+      "bytes": 1187,
+      "sha256": "92f3d5ec89d449a93f2dc47aa14dbaffde19fcbabc867807849ca2bc86d79465"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@jridgewell/sourcemap-codec/src/scopes.ts",
+      "bytes": 10325,
+      "sha256": "33a78f87f91d6f916b8c51971e8f5d90b08452f66577fd77d05a41ac4a887adf"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@jridgewell/sourcemap-codec/src/sourcemap-codec.ts",
+      "bytes": 3546,
+      "sha256": "91d136138bf0d2a4c4d9ca811cc10af74eead3165b75edb5eaa9ddf5337e5fc9"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@jridgewell/sourcemap-codec/src/strings.ts",
+      "bytes": 1503,
+      "sha256": "d9c2ebe7557f5bd45a06a34d7e88d58d554f4a091a9384204f2933582e3ef390"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@jridgewell/sourcemap-codec/src/vlq.ts",
+      "bytes": 1324,
+      "sha256": "6aff12a00b5a44ada57df49bddc90f90fead9dc230463b49784904373bd11ecd"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@jridgewell/sourcemap-codec/types/range-mappings.d.cts",
+      "bytes": 277,
+      "sha256": "f2a9fff04c228536177c0af6fad8f0bbcc5ab3a9d7c66474074ba1cd85961b8e"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@jridgewell/sourcemap-codec/types/range-mappings.d.cts.map",
+      "bytes": 315,
+      "sha256": "52b6d9b6c7ca2ecf325046a53ebe0d398aec5ed7f2c561628caf5c250ea4aaa2"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@jridgewell/sourcemap-codec/types/range-mappings.d.mts",
+      "bytes": 277,
+      "sha256": "f2a9fff04c228536177c0af6fad8f0bbcc5ab3a9d7c66474074ba1cd85961b8e"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@jridgewell/sourcemap-codec/types/range-mappings.d.mts.map",
+      "bytes": 315,
+      "sha256": "52b6d9b6c7ca2ecf325046a53ebe0d398aec5ed7f2c561628caf5c250ea4aaa2"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@jridgewell/sourcemap-codec/types/scopes.d.cts",
+      "bytes": 1151,
+      "sha256": "9215cd205d56527b92fe419ee695fc44aab8401725fa8bc6cb1415287689abdf"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@jridgewell/sourcemap-codec/types/scopes.d.cts.map",
+      "bytes": 1348,
+      "sha256": "dfbb6f23e63c0bcc3975975d1402cb54c2b984860220b96baa0783cc45a262d6"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@jridgewell/sourcemap-codec/types/scopes.d.mts",
+      "bytes": 1151,
+      "sha256": "9215cd205d56527b92fe419ee695fc44aab8401725fa8bc6cb1415287689abdf"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@jridgewell/sourcemap-codec/types/scopes.d.mts.map",
+      "bytes": 1348,
+      "sha256": "dfbb6f23e63c0bcc3975975d1402cb54c2b984860220b96baa0783cc45a262d6"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@jridgewell/sourcemap-codec/types/sourcemap-codec.d.cts",
+      "bytes": 853,
+      "sha256": "656b72c220eeceff656b97e83e34d28304a6867bebb37d561f2428611bfd0d87"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@jridgewell/sourcemap-codec/types/sourcemap-codec.d.cts.map",
+      "bytes": 815,
+      "sha256": "d424e848d09173357f62dd3bb6614c31e6ee279db51054f95002eb2a02884d08"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@jridgewell/sourcemap-codec/types/sourcemap-codec.d.mts",
+      "bytes": 853,
+      "sha256": "4f345aff806897a6a68063e974114405eb9f0ddf9de87b89f9cb37867bb74910"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@jridgewell/sourcemap-codec/types/sourcemap-codec.d.mts.map",
+      "bytes": 815,
+      "sha256": "d424e848d09173357f62dd3bb6614c31e6ee279db51054f95002eb2a02884d08"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@jridgewell/sourcemap-codec/types/strings.d.cts",
+      "bytes": 361,
+      "sha256": "28fae3d88328335f864e689b012e5d12c9dbe4df4b5537a3bd1bb4a3bab153cf"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@jridgewell/sourcemap-codec/types/strings.d.cts.map",
+      "bytes": 422,
+      "sha256": "01801f41a1f267a7fef5576710998d477ea647b27ae75b7c3e47ac87874f085f"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@jridgewell/sourcemap-codec/types/strings.d.mts",
+      "bytes": 361,
+      "sha256": "28fae3d88328335f864e689b012e5d12c9dbe4df4b5537a3bd1bb4a3bab153cf"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@jridgewell/sourcemap-codec/types/strings.d.mts.map",
+      "bytes": 422,
+      "sha256": "01801f41a1f267a7fef5576710998d477ea647b27ae75b7c3e47ac87874f085f"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@jridgewell/sourcemap-codec/types/vlq.d.cts",
+      "bytes": 518,
+      "sha256": "22cdbd5f4004dd8a4cf7933c0548ca952fe0386e93007bd747f7e82a97e28696"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@jridgewell/sourcemap-codec/types/vlq.d.cts.map",
+      "bytes": 504,
+      "sha256": "c0d4a1742ffc498476e7e3db3ffaf48b18515236d682c122562e5138f9949e7c"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@jridgewell/sourcemap-codec/types/vlq.d.mts",
+      "bytes": 518,
+      "sha256": "a8a559a84a6405cd8c0e3ba5d6759bbfad195aea5465399e110fd1915150e6c2"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/node_modules/@jridgewell/sourcemap-codec/types/vlq.d.mts.map",
+      "bytes": 504,
+      "sha256": "c0d4a1742ffc498476e7e3db3ffaf48b18515236d682c122562e5138f9949e7c"
+    },
+    {
+      "path": "/Users/andreyyurlov/.local/share/fnm/node-versions/v22.23.3/installation/bin/node",
+      "bytes": 112925600,
+      "sha256": "68f4d07ca49e0500cc135c7e0a445093e228e42e126ac22306d045f0a8c2636b",
+      "version": "v22.23.3"
+    }
+  ],
+  "outcome": {
+    "functional_children": 2,
+    "timing_children": 6,
+    "frames_each": 2156,
+    "fixed_pairs": [
+      [
+        "B0",
+        "C0"
+      ],
+      [
+        "B1",
+        "C1"
+      ],
+      [
+        "B2",
+        "C2"
+      ]
+    ],
+    "all_pairs_within_local_5_percent": true,
+    "unchanged_shipping_2ms_gate": true,
+    "shipping_gui_gate_claim": false
+  },
+  "limits": [
+    "All raw reports retained including canonical documents and every timing sample. Reports use bounded nested gzip to avoid repeated large archive inflation.",
+    "Portable replay rechecks recorded PCM hashes, not raw PCM samples; original runs hashed actual samples.",
+    "Optional originals/binaries/external-inputs/git-source checks require retained local evidence or Git history; binaries/compiler dependency payloads are not embedded.",
+    "Process snapshots show unrelated Node/esbuild/workerd and app/CUA workers; utilization was not sampled. Machine-wide idle is not proven.",
+    "Original CPU lockfile failure, preparation refusal and successful OFF/analyzer failure retained. Only still-unexecuted ON ran after mechanical serde-default correction. No timing retry/exclusion."
+  ],
+  "manual_gate": {
+    "source": "77042e79726d7d8b0b3cf16053fd9ecc979dcb47",
+    "scope": "Post-measurement selection-only gate; no Core/timing rerun",
+    "copied_binaries": [
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/editor-profiler-inactive-001/manual-gate-001/cpu-001/binaries/default-ignored-exclusion/fallback-e26928327e618c79",
+        "sha256": "51103344d13ed0feafb480618176f806e1ca706a3b284e29ed30a9a5e6b331fd",
+        "target": {
+          "kind": [
+            "test"
+          ],
+          "crate_types": [
+            "bin"
+          ],
+          "name": "fallback",
+          "src_path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/crates/incant_agent_native/tests/fallback.rs",
+          "edition": "2024",
+          "doc": false,
+          "doctest": false,
+          "test": true
+        },
+        "profile": {
+          "opt_level": "1",
+          "debuginfo": 0,
+          "debug_assertions": false,
+          "overflow_checks": false,
+          "test": true
+        },
+        "features": [
+          "default",
+          "physics-deterministic"
+        ],
+        "bytes": 26493432
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/editor-profiler-inactive-001/manual-gate-001/cpu-001/binaries/default-ignored-exclusion/profiler-4d98e4466c277ee2",
+        "sha256": "cf810cbf6e2df5c69eb2bd74977a3f20edda6becd0c6b56fc9cc2e842721331f",
+        "target": {
+          "kind": [
+            "test"
+          ],
+          "crate_types": [
+            "bin"
+          ],
+          "name": "profiler",
+          "src_path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/crates/incant_agent_native/tests/profiler.rs",
+          "edition": "2024",
+          "doc": false,
+          "doctest": false,
+          "test": true
+        },
+        "profile": {
+          "opt_level": "1",
+          "debuginfo": 0,
+          "debug_assertions": false,
+          "overflow_checks": false,
+          "test": true
+        },
+        "features": [
+          "default",
+          "physics-deterministic"
+        ],
+        "bytes": 42093960
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/editor-profiler-inactive-001/manual-gate-001/cpu-001/binaries/default-ignored-exclusion/incant_agent_native-1a57c34effeb9c38",
+        "sha256": "ab62fd928780919b2a3eaed172e5b64bf97bdb8b2d8fd4873ec63b86e62d215f",
+        "target": {
+          "kind": [
+            "lib"
+          ],
+          "crate_types": [
+            "lib"
+          ],
+          "name": "incant_agent_native",
+          "src_path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/crates/incant_agent_native/src/lib.rs",
+          "edition": "2024",
+          "doc": true,
+          "doctest": true,
+          "test": true
+        },
+        "profile": {
+          "opt_level": "1",
+          "debuginfo": 0,
+          "debug_assertions": false,
+          "overflow_checks": false,
+          "test": true
+        },
+        "features": [
+          "default",
+          "physics-deterministic"
+        ],
+        "bytes": 43172824
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/editor-profiler-inactive-001/manual-gate-001/cpu-001/binaries/profiler-ignored-exclusion/fallback-a2b09cf8d88794dd",
+        "sha256": "987432b46fb0c47af595c37a05b58175ae48c9a580f643f0c043e8b605707995",
+        "target": {
+          "kind": [
+            "test"
+          ],
+          "crate_types": [
+            "bin"
+          ],
+          "name": "fallback",
+          "src_path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/crates/incant_agent_native/tests/fallback.rs",
+          "edition": "2024",
+          "doc": false,
+          "doctest": false,
+          "test": true
+        },
+        "profile": {
+          "opt_level": "1",
+          "debuginfo": 0,
+          "debug_assertions": false,
+          "overflow_checks": false,
+          "test": true
+        },
+        "features": [
+          "agent-profiler",
+          "default",
+          "physics-deterministic"
+        ],
+        "bytes": 26545704
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/editor-profiler-inactive-001/manual-gate-001/cpu-001/binaries/profiler-ignored-exclusion/profiler-1e59d5fb8dc76fb3",
+        "sha256": "2b1a93e6f5cb58abe849cd9cfb2fe5694397f27f5e55c0891aafeb3a6bd6c854",
+        "target": {
+          "kind": [
+            "test"
+          ],
+          "crate_types": [
+            "bin"
+          ],
+          "name": "profiler",
+          "src_path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/crates/incant_agent_native/tests/profiler.rs",
+          "edition": "2024",
+          "doc": false,
+          "doctest": false,
+          "test": true
+        },
+        "profile": {
+          "opt_level": "1",
+          "debuginfo": 0,
+          "debug_assertions": false,
+          "overflow_checks": false,
+          "test": true
+        },
+        "features": [
+          "agent-profiler",
+          "default",
+          "physics-deterministic"
+        ],
+        "bytes": 42410696
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/editor-profiler-inactive-001/manual-gate-001/cpu-001/binaries/profiler-ignored-exclusion/incant_agent_native-574bf8122bfd49e4",
+        "sha256": "6af2f0356489e45911a76d9b3c348881be08054b71d5e452509eb88c05d0b0ba",
+        "target": {
+          "kind": [
+            "lib"
+          ],
+          "crate_types": [
+            "lib"
+          ],
+          "name": "incant_agent_native",
+          "src_path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/crates/incant_agent_native/src/lib.rs",
+          "edition": "2024",
+          "doc": true,
+          "doctest": true,
+          "test": true
+        },
+        "profile": {
+          "opt_level": "1",
+          "debuginfo": 0,
+          "debug_assertions": false,
+          "overflow_checks": false,
+          "test": true
+        },
+        "features": [
+          "agent-profiler",
+          "default",
+          "physics-deterministic"
+        ],
+        "bytes": 43265960
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/editor-profiler-inactive-001/manual-gate-001/cpu-001/binaries/off-manual-controls/inactive_core-4879ab9265541e10",
+        "sha256": "7d76c0c1af84a68e6f366c62396a9b2e6817bf3ecbdd38c7a13be7055832ee4d",
+        "target": {
+          "kind": [
+            "test"
+          ],
+          "crate_types": [
+            "bin"
+          ],
+          "name": "inactive_core",
+          "src_path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/crates/incant_agent_native/tests/inactive_core.rs",
+          "edition": "2024",
+          "required-features": [
+            "diagnostic-inactive-profiler"
+          ],
+          "doc": false,
+          "doctest": false,
+          "test": true
+        },
+        "profile": {
+          "opt_level": "1",
+          "debuginfo": 0,
+          "debug_assertions": false,
+          "overflow_checks": false,
+          "test": true
+        },
+        "features": [
+          "default",
+          "diagnostic-inactive-profiler",
+          "physics-deterministic"
+        ],
+        "bytes": 32720080
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/editor-profiler-inactive-001/manual-gate-001/cpu-001/binaries/on-manual-controls/inactive_core-04f940c6f2a4d4b0",
+        "sha256": "ea855b4945d5eec10003157c8f90ccdf65e022c2aa04a5ef0af36ea8363b1b69",
+        "target": {
+          "kind": [
+            "test"
+          ],
+          "crate_types": [
+            "bin"
+          ],
+          "name": "inactive_core",
+          "src_path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/crates/incant_agent_native/tests/inactive_core.rs",
+          "edition": "2024",
+          "required-features": [
+            "diagnostic-inactive-profiler"
+          ],
+          "doc": false,
+          "doctest": false,
+          "test": true
+        },
+        "profile": {
+          "opt_level": "1",
+          "debuginfo": 0,
+          "debug_assertions": false,
+          "overflow_checks": false,
+          "test": true
+        },
+        "features": [
+          "agent-profiler",
+          "default",
+          "diagnostic-inactive-profiler",
+          "physics-deterministic"
+        ],
+        "bytes": 32773760
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/editor-profiler-inactive-001/manual-gate-001/cpu-001/binaries/explicit-ignored-list/inactive_core-4879ab9265541e10",
+        "sha256": "7d76c0c1af84a68e6f366c62396a9b2e6817bf3ecbdd38c7a13be7055832ee4d",
+        "target": {
+          "kind": [
+            "test"
+          ],
+          "crate_types": [
+            "bin"
+          ],
+          "name": "inactive_core",
+          "src_path": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/crates/incant_agent_native/tests/inactive_core.rs",
+          "edition": "2024",
+          "required-features": [
+            "diagnostic-inactive-profiler"
+          ],
+          "doc": false,
+          "doctest": false,
+          "test": true
+        },
+        "profile": {
+          "opt_level": "1",
+          "debuginfo": 0,
+          "debug_assertions": false,
+          "overflow_checks": false,
+          "test": true
+        },
+        "features": [
+          "default",
+          "diagnostic-inactive-profiler",
+          "physics-deterministic"
+        ],
+        "bytes": 32720080
+      }
+    ]
+  }
+}

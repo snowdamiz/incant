@@ -44,14 +44,14 @@ def suffix_digest(inputs, replacement=None):
 class ScriptBuildIdentityTests(unittest.TestCase):
     def test_enforcement_sources_are_actual_unique_compatibility_inputs(self):
         inputs = identity_inputs()
-        for relative in ('src/budget.rs', 'src/diagnostics.rs'):
+        for relative in ('src/budget.rs', 'src/diagnostics.rs', 'src/light_commands.rs'):
             self.assertIn(SCRIPT / relative, inputs)
 
     def test_changed_enforcement_bytes_change_framed_identity_suffix(self):
         inputs = identity_inputs()
         original = suffix_digest(inputs)
         self.assertEqual(original, suffix_digest(inputs))
-        for relative in ('src/budget.rs', 'src/diagnostics.rs'):
+        for relative in ('src/budget.rs', 'src/diagnostics.rs', 'src/light_commands.rs'):
             path = SCRIPT / relative
             data = path.read_bytes()
             changed = bytes([data[0] ^ 1]) + data[1:]

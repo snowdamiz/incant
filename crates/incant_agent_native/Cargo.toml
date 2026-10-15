@@ -8,6 +8,8 @@ publish.workspace = true
 [features]
 default = ["physics-deterministic"]
 agent-profiler = ["incant_profile/session", "incant_game_runtime/profile"]
+# Trusted external Core fixture only; independent of whether profiler hooks are enabled.
+diagnostic-inactive-profiler = []
 
 # Select one physics kernel for the entire process, including build/test hosts.
 physics-deterministic = [
@@ -62,4 +64,9 @@ thiserror.workspace = true
 ulid.workspace = true
 
 [dev-dependencies]
+sha2.workspace = true
 tempfile = "3"
+
+[[test]]
+name = "inactive_core"
+required-features = ["diagnostic-inactive-profiler"]

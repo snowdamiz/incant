@@ -1,0 +1,79 @@
+{
+  "candidate": "fc0afc7b07dbabda3e8eb78415169dbbe9778863",
+  "producer_source": "069bbe54dc529511138867dfd4fbe50507a38b6b",
+  "binary_sha256": "8efebd8c2481940ab049b62ab5026f26ffe146285e0e1f780f3d260505c59cb7",
+  "ci_run": "https://github.com/snowdamiz/incant/actions/runs/38691592274",
+  "generator_source_identities": {
+    "crates/incant_agent": {
+      "candidate_tree": "8e407bc9d52e5b1af3c0fea0c0a442605c462749",
+      "binary_source_tree": "8e407bc9d52e5b1af3c0fea0c0a442605c462749"
+    },
+    "crates/incant_headless": {
+      "candidate_tree": "0f1e5d5cdbe1f92e2f3c0ef6f9cb031c046bd74f",
+      "binary_source_tree": "0f1e5d5cdbe1f92e2f3c0ef6f9cb031c046bd74f"
+    },
+    "crates/incant_doc": {
+      "candidate_tree": "58824f2fc20a4451db34b45a9bbc24db27a2be75",
+      "binary_source_tree": "58824f2fc20a4451db34b45a9bbc24db27a2be75"
+    },
+    "crates/incant_cmd": {
+      "candidate_tree": "4cdd5098ed511c88f9dde96f505098fce088a0b9",
+      "binary_source_tree": "4cdd5098ed511c88f9dde96f505098fce088a0b9"
+    },
+    "crates/incant_core": {
+      "candidate_tree": "dd54bafd7bdeb874f05fc8cb85bf95a55936e44c",
+      "binary_source_tree": "dd54bafd7bdeb874f05fc8cb85bf95a55936e44c"
+    },
+    "crates/incant_types": {
+      "candidate_tree": "9d1689dc7e6b9ba33e18d757c12c8549b4d48c84",
+      "binary_source_tree": "9d1689dc7e6b9ba33e18d757c12c8549b4d48c84"
+    },
+    "crates/incant_input": {
+      "candidate_tree": "39c0b8028d56421cd3c1c2f648821c8d2983bfef",
+      "binary_source_tree": "39c0b8028d56421cd3c1c2f648821c8d2983bfef"
+    },
+    "crates/incant_localization": {
+      "candidate_tree": "41ce8322734e8cbd976db9392973ddfbdf24e272",
+      "binary_source_tree": "41ce8322734e8cbd976db9392973ddfbdf24e272"
+    },
+    "crates/incant_play_legacy": {
+      "candidate_tree": "66309f5d5ab1cb49caab0b48daf2ad278b0b626c",
+      "binary_source_tree": "66309f5d5ab1cb49caab0b48daf2ad278b0b626c"
+    },
+    "schemas": {
+      "candidate_tree": "bccf268f37c449c9945269cd51c1fff3fd8fa881",
+      "binary_source_tree": "bccf268f37c449c9945269cd51c1fff3fd8fa881"
+    },
+    "crates/incant_physics_2d_runtime": {
+      "candidate_object": "2a3a9fb1b010a9d19ebe1abf64b1085ecdada295",
+      "binary_source_object": "2a3a9fb1b010a9d19ebe1abf64b1085ecdada295"
+    },
+    "crates/incant_physics_runtime": {
+      "candidate_object": "468be91dd4a2b73b0bcf627c6092910ea8d667d5",
+      "binary_source_object": "468be91dd4a2b73b0bcf627c6092910ea8d667d5"
+    },
+    "crates/incant_nav": {
+      "candidate_object": "2de6318ad75d471bd1dc206de6d5f9d10ac49339",
+      "binary_source_object": "2de6318ad75d471bd1dc206de6d5f9d10ac49339"
+    },
+    "crates/incant_2d": {
+      "candidate_object": "34f358aa8c0c7ee70b700a16de01e405dc9a5139",
+      "binary_source_object": "34f358aa8c0c7ee70b700a16de01e405dc9a5139"
+    },
+    "Cargo.lock": {
+      "candidate_object": "fdef5c80caa7aabcc38825e4b9492e7333896173",
+      "binary_source_object": "fdef5c80caa7aabcc38825e4b9492e7333896173"
+    }
+  },
+  "registry_count": 78,
+  "candidate_registry_hash_inventory_sha256": "122bfda5de8039a51d0db76f2553a76153ce3f499450d4a50eedba9786c44ce5",
+  "repaired_registry_hash_inventory_sha256": "286d175d4d6a93b83392c1e566513e62e8c9e42633c18cc0be674f46f1de36c0",
+  "candidate_diagnostics": [
+    "Stale published schema: agent-tools.json"
+  ],
+  "candidate_files_unchanged": true,
+  "repaired_diagnostics": [],
+  "repaired_files_unchanged": true,
+  "regenerated_agent_tools_sha256": "d7e1d8d311d3cde07cfa026bee3c10571f8f55096a589d3a194d0c73bffeb173",
+  "scope": "Actual retained headless schema generation and file-byte comparison only; no Rust rebuild, shipping execution, CI rerun or release promotion."
+}

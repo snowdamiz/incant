@@ -13,6 +13,14 @@ controls. This fixes the ordinary viewport route; low-resolution reconstruction
 still has separate appearance defects. The entries
 below preserve earlier scoped results and superseded integration snapshots.
 
+Checkpoint44 remains held: the general job generated stale agent tool contracts
+into tracked sources before shipping, then correctly refused its dirty checkout.
+The [schema correction and isolated check](docs/spikes/ci-shipping-schema-check.md)
+regenerate that registry and compare all 78 generated files before shipping
+without changing tracked sources. Actual retained-binary generation and 55
+focused Python controls pass locally. Corrected full hosted execution remains
+pending; the shipping freeze requirement is unchanged.
+
 Checkpoint43 currently remains held: the broad Linux GPU-test command also
 selected a manual script diagnostic whose prepared inputs were absent. The
 [explicit-feature correction](docs/spikes/ci-manual-script-diagnostic.md) retains
@@ -21,6 +29,22 @@ confirmed the starter destination repair but exposed a malformed-path test fixtu
 that normalized away its own `..` input. The [fixture correction](docs/spikes/windows-template-destination.md#checkpoint43-production-repair-confirmed-malformed-fixture-corrected)
 passes local tests and leaves production behavior unchanged; corrected Windows
 execution is pending.
+
+## Gameplay light controls — CPU and numerical Metal qualified
+
+Native gameplay, TypeScript and the Rust Wasm SDK can change existing directional,
+point and spot light color/intensity through atomic runtime batches. Invalid
+controls roll back numeric writes; saves retain accepted values. The render
+adapter preserves its accepted state on consumer refusal, and accepted changes
+invalidate temporal history before later unchanged frames resume it.
+
+32 distinct Rust CPU controls, 20 Python controls, strict lints/types/generated
+checks and an actual Metal pixel/history control pass. The main341 composition
+also passes three script controls and strict lint. The three fixture failures
+remain recorded. These are separate runtime/SDK and renderer proofs; an integrated
+day/night app, appearance and performance are unqualified. Crossing zero can
+still allocate a directional shadow atlas.
+[Contract and bound evidence](docs/spikes/gameplay-light-controls.md).
 
 ## Cooked bloom — public shipping export and CPU startup qualified
 
@@ -90,8 +114,11 @@ The producer passed 112 CPU tests plus its allocator control. The main333 join
 passed 120 agent/playbook and 20 native-host tests, strict enabled/disabled lint
 and editor compilation. The editor-only default selection subsequently passed
 25 real editor worker/owner controls and 23 feature-disabled controls, both strict
-lint modes and isolated feature-graph checks. Inactive-instrumentation overhead
-remains unmeasured; a bounded matched CPU comparison is proposed separately.
+lint modes and isolated feature-graph checks. A fixed six-process CPU comparison of inactive hooks now passes its local
+5% p95/total overhead bound, with exact logical and PCM parity. Its timing
+artifacts retain their historical source identity; this is not a GUI or shipping
+performance result. The manual fixture is excluded from default CI selection.
+[Measurements and limitations](docs/spikes/editor-profiler-inactive-overhead.md).
 GPU/display/heap/allocation measurements, live optimization quality and the full
 Phase 3 gate remain open. No shipping performance result is claimed.
 [Isolation, exact source and portable evidence](docs/spikes/agent-profiler.md).
@@ -167,6 +194,29 @@ observer-inclusive wall spans do not establish reclaimable CPU time or a shippin
 speedup. The 2 ms target remains unmet, with other distinct investigations allowed.
 [Contract, actual measurements and retained failures](docs/spikes/script-budget-check-attribution.md).
 
+## Editor subtree duplication — integrated controls qualified
+
+The hierarchy now exposes Duplicate through its context menu and Cmd+D on macOS
+(Ctrl+D elsewhere), using one reversible shared-command transaction. It selects
+only the host's verified copy, preserves newer selection intent and ignores late
+results after a project/bridge change. Scene, linked-prefab, singleton, busy and
+Play restrictions remain explicit.
+
+All 1,025 UI tests, generated transport, TypeScript, production UI and native
+editor builds pass; the real host transaction control also passed on main342
+composition. Claude's browser fixture review remains separate from native proof.
+The actual Mac interaction attempt showed a blank client while OS inspection
+confirmed the desktop was locked; the editor was stopped and its project stayed
+unchanged. Actual native shortcut/menu, Undo/Redo and reopening checks remain
+pending an unlocked desktop. [Evidence and limits](docs/spikes/editor-subtree-duplicate.md).
+
+Focused-row removal now restores the hierarchy's keyboard entry point to a
+surviving row while preserving selection intent, other focus owners and
+project/bridge boundaries. All 1,040 UI tests, TypeScript and the production UI
+build pass; Delete and duplicate/Undo DOM controls include virtualized recovery.
+Actual native keyboard interaction remains pending the unlocked desktop.
+[Focus-recovery evidence](docs/spikes/editor-hierarchy-focus-recovery.md).
+
 ## Ordinary subtree duplication — command and persistence qualified
 
 The shared command bus can now copy a complete ordinary subtree with explicit,
@@ -199,7 +249,8 @@ after focus interruptions; five partial actual images show joined Arabic, damage
 loss and restarted gameplay. The default Retina window was crowded at 320×240
 logical units. Arabic health-pip direction is now corrected in the sample's
 string table, with real localization/font-shaping regression coverage; normal-size
-appearance and native RTL health-order review remain open while capture is paused.
+appearance and native RTL health-order review remain open. Capture is allowed;
+actual native window checks currently require the Mac desktop to be unlocked.
 [CPU correction and limits](docs/spikes/core-rtl-health-direction.md).
 The fresh CJK export/window is recorded above.
 

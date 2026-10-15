@@ -6,6 +6,55 @@ use serde_json::json;
 use support::Fixture;
 
 #[test]
+fn prepared_identity_map_is_fresh_complete_and_does_not_edit_until_execute() {
+    let mut f = Fixture::new();
+    let before = f.bus.project().clone();
+    let (command, created) = f.bus.prepare_duplicate_subtree(&f.scene, &f.root).unwrap();
+    let (again, second) = f.bus.prepare_duplicate_subtree(&f.scene, &f.root).unwrap();
+    assert_ne!(created, second);
+    assert_ne!(command, again);
+    assert_eq!(f.bus.project(), &before);
+    assert_eq!(f.bus.revision(), 0);
+    let Command::DuplicateSubtree { entities, .. } = &command else {
+        panic!("wrong command")
+    };
+    assert_eq!(
+        entities.keys().collect::<Vec<_>>(),
+        f.mapping.keys().collect::<Vec<_>>()
+    );
+    assert_eq!(entities[&f.root], created);
+    assert!(
+        f.bus
+            .prepare_duplicate_subtree(&f.scene, &new_id())
+            .is_err()
+    );
+    f.run(vec![command]).unwrap();
+    assert_eq!(f.bus.project().scenes[&f.scene].entities.len(), 8);
+    f.bus.undo().unwrap();
+    assert_eq!(f.bus.project(), &before);
+}
+
+#[test]
+fn preparation_refuses_an_oversized_frontier_without_editing() {
+    let f = Fixture::new();
+    let mut project = f.bus.project().clone();
+    for _ in 0..1024 {
+        let mut child = Entity::new("Extra child");
+        child.parent = Some(f.root.clone());
+        project
+            .scenes
+            .get_mut(&f.scene)
+            .unwrap()
+            .entities
+            .insert(child.id.clone(), child);
+    }
+    let bus = CommandBus::new(project.clone()).unwrap();
+    assert!(bus.prepare_duplicate_subtree(&f.scene, &f.root).is_err());
+    assert_eq!(bus.project(), &project);
+    assert_eq!(bus.revision(), 0);
+}
+
+#[test]
 fn nested_copy_preserves_sources_reparents_children_and_records_provenance() {
     let mut f = Fixture::new();
     let before = f.bus.project().clone();
