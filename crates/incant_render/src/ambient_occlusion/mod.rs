@@ -1,4 +1,6 @@
 //! Opt-in screen-space diffuse ambient accessibility. No temporal history.
+#[cfg(all(feature = "cooked-ssao", not(target_arch = "wasm32")))]
+mod cooked;
 #[cfg(test)]
 mod device_tests;
 mod draw;
@@ -9,6 +11,9 @@ mod pipelines;
 mod raster;
 #[cfg(feature = "ssao-stage-readback")]
 mod readback;
+mod shader;
+#[cfg(any(test, not(all(feature = "cooked-ssao", not(target_arch = "wasm32")))))]
+mod source;
 #[cfg(feature = "ssao-stage-readback")]
 pub use readback::{AmbientOcclusionCaptureError, AmbientOcclusionStages};
 #[cfg(test)]
@@ -35,7 +40,7 @@ impl crate::Renderer {
     /// Prepare the complete SSAO pipeline catalog before rendering. Default is
     /// disabled. Only diffuse environment light on opaque/MASK models is affected;
     /// direct light, specular IBL, emissive, BLEND, sprites, text and UI are unchanged.
-    /// This portable WGSL path does not yet have a cooked-material variant.
+    /// Native cooked selection requires the complete five-program cooked-ssao family.
     /// Failure leaves the previous setting/resources intact.
     pub async fn enable_ambient_occlusion(
         &mut self,
@@ -43,12 +48,7 @@ impl crate::Renderer {
     ) -> crate::Result<()> {
         self.scene_msaa.validate_ao(true)?;
         settings.validate()?;
-        if cfg!(all(
-            feature = "cooked-materials",
-            not(target_arch = "wasm32")
-        )) {
-            return Err(AmbientOcclusionError::CookedMaterials.into());
-        }
+        shader::admit()?;
         self.check_device()?;
         let scope = self.device.push_error_scope(wgpu::ErrorFilter::Validation);
         let candidate = System::new(self, settings);

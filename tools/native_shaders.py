@@ -12,7 +12,7 @@ from native_package import read, require, sha256
 ROOT = Path(__file__).resolve().parents[1]
 FEATURE = 'cooked-native-shaders'
 COOKED = {FEATURE, 'cooked-output', 'cooked-geometry', 'cooked-materials',
-          'cooked-sprites', 'cooked-ui', 'cooked-text', 'cooked-clusters', 'cooked-bloom'}
+          'cooked-sprites', 'cooked-ui', 'cooked-text', 'cooked-clusters', 'cooked-bloom', 'cooked-ssao'}
 # Exact existing runtime ABI contracts, independently admitted by each selector.
 CONTRACTS = {
     'output': (
@@ -58,6 +58,11 @@ CONTRACTS = {
     'bloom-downsample': 'incant-bloom-downsample-v1;naga=29.0.4;wgpu=29.0.4;textures0-1,uniform48@2;msl=2.4,t0-t1,b0;hlsl=6.0,t0-t1,b0,special-b1;spv=1.0,no-y-flip;bounds=restrict;loops=bounded',
     'bloom-upsample': 'incant-bloom-upsample-v1;naga=29.0.4;wgpu=29.0.4;textures0-1,uniform48@2;msl=2.4,t0-t1,b0;hlsl=6.0,t0-t1,b0,special-b1;spv=1.0,no-y-flip;bounds=restrict;loops=bounded',
     'bloom-display': 'incant-bloom-display-v1;naga=29.0.4;wgpu=29.0.4;textures0-2,uniform80@1,uniform16@3;msl=2.4,t0-t1,b0-b1;hlsl=6.0,t0-t1,b0-b1,special-b2;spv=1.0,no-y-flip;bounds=restrict;loops=bounded',
+    'ssao-horizontal': 'incant-ssao-horizontal-v1;naga=29.0.4;wgpu=29.0.4;uniform736@0,depth@1,normal@2,accessibility@3;msl=2.4,b0,t0-t2;hlsl=6.0,b0,t0-t2,special-b1;spv=1.0,no-y-flip;bounds=restrict;loops=bounded',
+    'ssao-vertical': 'incant-ssao-vertical-v1;naga=29.0.4;wgpu=29.0.4;uniform736@0,depth@1,normal@2,accessibility@3;msl=2.4,b0,t0-t2;hlsl=6.0,b0,t0-t2,special-b1;spv=1.0,no-y-flip;bounds=restrict;loops=bounded',
+    'ssao-prepass': 'incant-ssao-prepass-v1;interpolation=centroid;naga=29.0.4;wgpu=29.0.4;msl=2.4,pull15v14i,stride48-112,vertex-sizes1;hlsl=6.0,frame-b0,material-b1,base-t0,sampler-indices-t5,special-b2;spv=1.0,no-y-flip;bounds=restrict;loops=bounded',
+    'ssao-forward': 'incant-ssao-forward-v1;interpolation=centroid;naga=29.0.4;wgpu=29.0.4;msl=2.4,pull15v14i,stride48-112,vertex-sizes1,fragment-sizes7,ao-t0,material-t1;hlsl=6.0,ao-t0,material-t1,sampler-indices-t6-t10-t15,special-b5;spv=1.0,no-y-flip;bounds=restrict;loops=bounded',
+    'ssao-sample': 'incant-ssao-sample-v1;naga=29.0.4;wgpu=29.0.4;uniform736@0,depth@1,normal@2;msl=2.4,b0,t0-t1;hlsl=6.0,b0,t0-t1,special-b1;spv=1.0,no-y-flip;bounds=restrict;loops=bounded',
 }
 
 SOURCES = {
@@ -66,6 +71,10 @@ SOURCES = {
     'material': ['shadows/shade.wgsl', 'lighting/shade.wgsl', 'model_material.wgsl'],
     'sprite': ['sprites/sprite.wgsl'], 'ui': ['ui/ui.wgsl'],
     'text': ['text/text.wgsl'], 'cluster': ['lighting/grid.wgsl'],
+    'ssao-prepass': ['model_material.wgsl', 'ambient_occlusion/prepass.wgsl'],
+    'ssao-forward': ['shadows/shade.wgsl', 'lighting/shade.wgsl', 'model_material.wgsl'],
+    'ssao-sample': ['ambient_occlusion/ao.wgsl'],
+    'ssao-horizontal': ['ambient_occlusion/filter.wgsl'], 'ssao-vertical': ['ambient_occlusion/filter.wgsl'],
     'bloom-prefilter': ['bloom/filter.wgsl'], 'bloom-downsample': ['bloom/filter.wgsl'],
     'bloom-upsample': ['bloom/filter.wgsl'], 'bloom-display': ['output.wgsl', 'tone_map.wgsl', 'bloom/output.wgsl'],
 }
@@ -73,7 +82,8 @@ DIRECTORIES = {'output': 'output-shaders', 'diagnostic': 'diagnostic-shaders',
     'shadow': 'shadow-shaders', 'material': 'material-shaders', 'sprite': 'sprite-shaders',
     'ui': 'ui-shaders', 'text': 'text-shaders', 'cluster': 'cluster-shaders',
     'bloom-prefilter': 'bloom-prefilter-shaders', 'bloom-downsample': 'bloom-downsample-shaders',
-    'bloom-upsample': 'bloom-upsample-shaders', 'bloom-display': 'bloom-display-shaders'}
+    'bloom-upsample': 'bloom-upsample-shaders', 'bloom-display': 'bloom-display-shaders',
+    **{'ssao-' + name: 'ssao-' + name + '-shaders' for name in ('prepass', 'forward', 'sample', 'horizontal', 'vertical')}}
 BACKENDS = {'Metal', 'Vulkan', 'Dx12'}
 TARGETS = {'aarch64-apple-darwin', 'x86_64-apple-darwin',
     'x86_64-pc-windows-msvc', 'aarch64-pc-windows-msvc',
@@ -109,6 +119,15 @@ def _digest(value):
 def source_bytes(family, root=ROOT):
     paths = SOURCES[family]
     values = [read(Path(root) / 'crates/incant_render/src' / name, 1024**2) for name in paths]
+    if family == 'ssao-prepass':
+        marker = b'@fragment fn fragment'
+        require(values[0].count(marker) == 1, 'Fixed SSAO prepass seam changed')
+        values[0] = values[0].split(marker, 1)[0]
+    if family == 'ssao-forward':
+        seam = b'(1.0-reflectance)*(1.0-metallic)*base.rgb*irradiance'
+        require(values[2].count(seam) == 1, 'Fixed SSAO diffuse seam changed')
+        values[2] = (b'@group(0) @binding(1) var diffuse_accessibility:texture_2d<f32>;\n'
+                     + values[2].replace(seam, b'(' + seam + b')*textureLoad(diffuse_accessibility,vec2i(in.position.xy),0).r'))
     if family == 'bloom-display':
         original = b'var color = mix(display.backdrop.rgb,tone_map(radiance),coverage);'
         require(values[0].count(original) == 1, 'Fixed bloom output seam changed')
@@ -128,6 +147,11 @@ def _family(directory, family, root):
     cooker = root / 'crates/incant_shader_cook'
     if family == 'output':
         producer_paths = ['src/lib.rs', 'src/contract.rs', 'src/emit.rs', 'src/manifest.rs', 'src/audit.rs', 'Cargo.toml']
+    elif family.startswith('ssao-'):
+        producer_paths = ['src/ambient_occlusion/' + name for name in ('mod.rs', 'contract.rs', 'emit.rs')]
+        producer_paths += ['src/geometry/' + name for name in ('mod.rs', 'contract.rs', 'interpolation.rs',
+            'emit.rs', 'sprite.rs', 'ui.rs', 'text.rs', 'material.rs', 'material_emit.rs')]
+        producer_paths += ['src/lib.rs', 'src/audit.rs', 'Cargo.toml', '../incant_render/src/ambient_occlusion/source.rs']
     elif family.startswith('bloom-'):
         producer_paths = ['src/bloom/' + name for name in ('mod.rs', 'contract.rs', 'emit.rs')]
         producer_paths += ['src/audit.rs', 'Cargo.toml', '../incant_render/src/bloom/source.rs']
@@ -241,11 +265,11 @@ def audit(messages, mode, *, target_dir, target, profile, physics_mode, root=ROO
     output = Path(outputs[0])
     # Only the compiler-selected private OUT_DIR is read; no project/cache loader.
     families = {name: _family(output / directory, name, Path(root)) for name, directory in DIRECTORIES.items()}
-    require(sum(f['artifact_bytes'] for f in families.values()) <= 69 * 1024**2, 'Shader catalog exceeds bound')
+    require(sum(f['artifact_bytes'] for f in families.values()) <= 99 * 1024**2, 'Shader catalog exceeds bound')
     return {'mode': 'cooked', 'target': target, 'profile': profile,
         'compiler_features': {name: sorted(flags) for name, flags in found.items()},
         'ignored_build_host': sorted(ignored), 'families': families,
         'runtime_wgsl_in_selected_ordinary_catalog': False,
-        'limits': ['Twelve fixed ordinary and bloom families only; backend native compiler still runs during startup',
-            'SSAO, motion/temporal and MetalFX remain separate source routes; existing cooked refusals retained',
+        'limits': ['Seventeen fixed ordinary, bloom and SSAO families only; backend native compiler still runs during startup',
+            'Motion/temporal and MetalFX remain separate source routes; partial SSAO cooked selection still refuses',
             'No parser-symbol exclusion, driver cache hit, asynchronous fallback or shader-stall gate claim']}

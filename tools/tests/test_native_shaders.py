@@ -50,6 +50,11 @@ class NativeShaders(unittest.TestCase):
                                       'file': file, 'bytes': len(data), 'sha256': sha256(data)})
             if family == 'output':
                 paths = ['src/lib.rs', 'src/contract.rs', 'src/emit.rs', 'src/manifest.rs', 'src/audit.rs', 'Cargo.toml']
+            elif family.startswith('ssao-'):
+                paths = ['src/ambient_occlusion/' + n for n in ('mod.rs', 'contract.rs', 'emit.rs')]
+                paths += ['src/geometry/' + n for n in ('mod.rs', 'contract.rs', 'interpolation.rs', 'emit.rs',
+                    'sprite.rs', 'ui.rs', 'text.rs', 'material.rs', 'material_emit.rs')]
+                paths += ['src/lib.rs', 'src/audit.rs', 'Cargo.toml', '../incant_render/src/ambient_occlusion/source.rs']
             elif family.startswith('bloom-'):
                 paths = ['src/bloom/' + n for n in ('mod.rs', 'contract.rs', 'emit.rs')]
                 paths += ['src/audit.rs', 'Cargo.toml', '../incant_render/src/bloom/source.rs']
@@ -108,7 +113,10 @@ class NativeShaders(unittest.TestCase):
                 ('material', 'material_shader.rs', 0), ('sprite', 'sprites/shader/cooked.rs', 0),
                 ('ui', 'ui/shader/cooked.rs', 0), ('text', 'text/shader/cooked.rs', 0), ('cluster', 'lighting/cooked.rs', 0),
                 ('bloom-prefilter', 'bloom/cooked.rs', 0), ('bloom-downsample', 'bloom/cooked.rs', 1),
-                ('bloom-upsample', 'bloom/cooked.rs', 2), ('bloom-display', 'bloom/cooked.rs', 3)]:
+                ('bloom-upsample', 'bloom/cooked.rs', 2), ('bloom-display', 'bloom/cooked.rs', 3),
+                ('ssao-prepass', 'ambient_occlusion/cooked.rs', 0), ('ssao-forward', 'ambient_occlusion/cooked.rs', 1),
+                ('ssao-sample', 'ambient_occlusion/cooked.rs', 2), ('ssao-horizontal', 'ambient_occlusion/cooked.rs', 3),
+                ('ssao-vertical', 'ambient_occlusion/cooked.rs', 4)]:
             source = (ROOT / 'crates/incant_render/src' / path).read_text()
             contracts = re.findall(r'(?:const CONTRACT: &str = |expected: )"([^"\n]+)"', source)
             self.assertEqual(shaders.CONTRACTS[family], contracts[index])
@@ -129,13 +137,37 @@ class NativeShaders(unittest.TestCase):
         with self.assertRaises(ValueError):
             shaders.target_admission('cooked', 'wasm32-unknown-unknown')
 
-    def test_complete_target_and_all_twelve_families_are_reported_without_publication(self):
+    def test_complete_target_and_all_seventeen_families_are_reported_without_publication(self):
         result = self.audit()
         self.assertEqual(set(result['families']), set(shaders.DIRECTORIES))
-        self.assertEqual(sum(len(f['artifacts']) for f in result['families'].values()), 69)
+        self.assertEqual(sum(len(f['artifacts']) for f in result['families'].values()), 99)
         self.assertFalse(result['runtime_wgsl_in_selected_ordinary_catalog'])
         self.assertEqual(result['compiler_features']['incant_render'], sorted(shaders.COOKED))
         self.assertFalse((self.output / 'export.json').exists())
+
+    def test_each_missing_ssao_program_or_partial_feature_refuses(self):
+        for family in ['ssao-prepass', 'ssao-forward', 'ssao-sample', 'ssao-horizontal', 'ssao-vertical']:
+            path = self.output / shaders.DIRECTORIES[family] / 'audit.json'
+            data = path.read_bytes(); path.unlink()
+            with self.assertRaises(OSError): self.audit()
+            path.write_bytes(data)
+        self.messages[0]['features'].remove('cooked-ssao')
+        with self.assertRaisesRegex(ValueError, 'Missing/extra actual cooked'): self.audit()
+
+    def test_ssao_source_assembly_preserves_original_programs_and_rejects_changed_seams(self):
+        base = (ROOT / 'crates/incant_render/src/model_material.wgsl').read_bytes()
+        self.assertEqual(shaders.source_bytes('ssao-prepass'), base.split(b'@fragment fn fragment', 1)[0] + b'\n'
+                         + (ROOT / 'crates/incant_render/src/ambient_occlusion/prepass.wgsl').read_bytes())
+        seam = b'(1.0-reflectance)*(1.0-metallic)*base.rgb*irradiance'
+        expected = b'\n'.join([(ROOT / 'crates/incant_render/src/shadows/shade.wgsl').read_bytes(),
+            (ROOT / 'crates/incant_render/src/lighting/shade.wgsl').read_bytes(),
+            b'@group(0) @binding(1) var diffuse_accessibility:texture_2d<f32>;\n' + base.replace(seam,
+                b'(' + seam + b')*textureLoad(diffuse_accessibility,vec2i(in.position.xy),0).r')])
+        self.assertEqual(shaders.source_bytes('ssao-forward'), expected)
+        for family in ['ssao-prepass', 'ssao-forward']:
+            with self.subTest(family=family), mock.patch.object(shaders, 'read', side_effect=lambda p, n:
+                    b'changed material seam' if p.name == 'model_material.wgsl' else p.read_bytes()):
+                with self.assertRaisesRegex(ValueError, 'SSAO .* seam changed'): shaders.source_bytes(family)
 
     def test_each_missing_bloom_program_refuses_complete_catalog_admission(self):
         for family in ['bloom-prefilter', 'bloom-downsample', 'bloom-upsample', 'bloom-display']:
