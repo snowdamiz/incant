@@ -1,7 +1,7 @@
 use crate::{AgentError, Usage, accounts::AccountSelection};
 use reqwest::blocking::Client;
 use serde_json::{Value, json};
-use std::io::{BufRead, BufReader};
+use std::io::{BufRead, BufReader, Read};
 use std::time::Duration;
 use zeroize::Zeroizing;
 #[cfg(test)]
@@ -212,17 +212,44 @@ pub fn read_stream(
     reader: impl BufRead,
     on_text: &mut dyn FnMut(&str),
 ) -> Result<Completion, AgentError> {
+    read_stream_limited(reader, on_text, 32 * 1024 * 1024)
+}
+
+fn read_stream_limited(
+    mut reader: impl BufRead,
+    on_text: &mut dyn FnMut(&str),
+    limit: usize,
+) -> Result<Completion, AgentError> {
     let mut data = String::new();
     let mut completed_items = std::collections::BTreeMap::new();
     let mut total = 0usize;
-    for line in reader.lines() {
-        let line = line.map_err(|_| AgentError::Provider("response stream interrupted".into()))?;
-        total += line.len();
-        if total > 32 * 1024 * 1024 {
+    loop {
+        // Bound the read itself: BufRead::lines allocates an entire line before
+        // its caller can check the size. Include delimiters and comments in the
+        // same response budget; read at most one extra byte to detect overflow.
+        let mut bytes = Vec::new();
+        let read = reader
+            .by_ref()
+            .take((limit - total) as u64 + 1)
+            .read_until(b'\n', &mut bytes)
+            .map_err(|_| AgentError::Provider("response stream interrupted".into()))?;
+        if read == 0 {
+            break;
+        }
+        total += read;
+        if total > limit {
             return Err(AgentError::Provider(
                 "response stream limit exceeded".into(),
             ));
         }
+        if bytes.last() == Some(&b'\n') {
+            bytes.pop();
+            if bytes.last() == Some(&b'\r') {
+                bytes.pop();
+            }
+        }
+        let line = String::from_utf8(bytes)
+            .map_err(|_| AgentError::Provider("invalid UTF-8 response stream".into()))?;
         if line.is_empty() {
             if data.is_empty() {
                 continue;
