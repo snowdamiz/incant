@@ -1,6 +1,6 @@
 # Phase 1 review ledger
 
-Updated against main316 and the fresh CJK/pseudo shipping players from
+Updated against main317 and the fresh CJK/pseudo shipping players from
 `e3dfcd9c695d6e1a74f82cb1613891c9e6046bb5`. Those producing identities remain
 explicit; they are not relabeled as later integration builds.
 Release checkpoint39 tested the main302 tree; later main303+
@@ -45,6 +45,9 @@ device execution is deferred; hosted build and release checks remain required.
   now records all 95 native creation calls outside gameplay on its complete Core
   route. Deferred driver work, ambiguous display timestamps and uneven cadence
   remain open; this observation does not establish the complete shader-stall gate.
+  The default-off [host-stage observer](../spikes/native-presentation-host-stages.md)
+  now has CPU and analyzer qualification to distinguish wake/reservation/body work;
+  its live coverage and any resulting frame-pacing change remain unqualified.
 - Finish and qualify remaining deliverables against the complete native sample.
   The [TypeScript AOT spike](../spikes/typescript-aot.md) remains an adoption
   experiment; its language controls are not a measured replacement for QuickJS.

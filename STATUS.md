@@ -82,6 +82,14 @@ timestamps and uneven observed display intervals remain explicit; deferred
 driver work and complete frame pacing still prevent a shader-stall or performance
 verdict. [Actual replay and limits](docs/spikes/native-compilation-live.md).
 
+The observer now also records scheduler wake, surface reservation, committed
+gameplay and postcommit host stages in one monotonic clock. Its bounded analyzer
+keeps catch-up batches, missing stages and surface/focus boundaries explicit.
+Observer-enabled and ordinary CPU suites, strict lint and 18 analyzer controls
+pass. These new fields have not yet been exercised in a fresh native replay;
+no scheduling policy or performance gate changes.
+[Host-stage contract and CPU evidence](docs/spikes/native-presentation-host-stages.md).
+
 ## Device audio overrun handling — merged main303
 
 The audio host now counts typed overrun notifications without replacing the
