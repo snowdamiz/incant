@@ -6,7 +6,9 @@ out while focus-gated, retaining five actual partial CUA images. This is not ful
 appearance, normal-size layout, RTL health-pip order, audible-quality, performance
 or phase-gate acceptance. CJK now has its own fresh shipping export, CPU trio and
 complete native replay at the corrected normal window size, with four scoped
-actual images. The CJK win image was missed; pseudo-locale qualification remains open.
+actual images. The CJK win image was missed. Pseudo-locale authoring, fresh export
+and CPU routes now pass; its native replay timed out, retaining only normal-size
+initial/early and loss text images. Narrow layout and full native replay remain open.
 
 ## Source and execution
 
@@ -103,13 +105,57 @@ is not a frame-time or continuous-motion measurement. Images remain inline
 tool outputs, not filesystem PNGs. No audible-quality or full appearance gate
 is claimed.
 
+## Pseudo-locale export and partial normal-size window
+
+The unchanged `en-XA` authoring path uses actual project settings `locale=en`,
+`pseudo=true`, with no fallbacks. Public import/history/save/reopen and engine
+localization/font coverage pass: revision 32, 46 RPC calls, project `a41c7287…`.
+The historical authoring executable remains `ab5491bf…` from `d2add5f1`.
+A stale external runner-hash field was refused before launch. The next supervisor
+passed identity checks but failed before any author/native child because the
+create-only locale parent was absent. Both original refusals are retained;
+the setup-only successor created that parent and completed authoring. Neither
+correction changed repository source, commands or deadlines.
+
+A separate fresh ordinary export from frozen `e3dfcd9c` produced player
+`103decb7…` for the new whole-scene binding. This is the same runtime source as
+CJK, with a different project and executable; later main315 documentation does
+not relabel its producing source. Rust 1.99, Node 22.23.3 and SDK 27.0 were
+captured. All 18 managed calls passed; the private target retired before inherent
+CPU startup, all 110 authored inputs stayed unchanged, and the actual normal
+feature graph excludes both native observers. The same-package 900/2,156/3,056
+CPU routes pass the exact expanded HUD/state/parenting/observation checks and
+finite 39,116,800-byte PCM clocks, with loss + fresh-win concatenation. These
+CPU results do not establish native layout or sound quality.
+
+The one owned native attempt (session 3589, PID 77582) retained its original
+120-second timeout. At the last durable snapshot, generation two had reached
+host step 1125/simulation tick 225, with cached and native focus false and
+simulation paused. Four focus gains/losses and zero surface deferrals remain
+recorded in 126 bounded records. Every observed physical size was 1280×960;
+there is no final gameplay report and both streams are empty. Owned processes
+were independently absent after cleanup, and all 52 bound inputs plus 97 frozen
+source copies stayed unchanged. There was no retry or deadline extension.
+
+Root's actual inline images show readable expanded pseudo health, progress,
+objective and controls in initial/early gameplay, plus the loss headline and
+restart prompt fully inside the normal 640×480 logical viewport, with no observed
+clipping or replacement boxes in those captures. The attempted restart screenshot
+timed out; runtime generation two is not restart-pixel evidence. No win image was
+captured. Raise and Finder secondary-open did not restore progression; selecting
+the same live app in Finder and Cmd+O did, while repeated focus loss remained.
+No cause is inferred. One normal resize drag used screenshot dimensions divided
+by scale because AX supplied no bounds; it did not change the window size.
+There is no actual AX-geometry, narrow-prompt or full-appearance acceptance.
+The images remain tool outputs, not a filesystem screenshot archive.
+
 ## Remaining scope and replay
 
 The accepted [0069 offscreen presentation](core0069-main212.md) stays historical.
 Its neutral Arabic health-pip reading-order follow-up and readable narrow pseudo
 prompt overlap remain explicit; new pixels must establish any new defect before
 changing data. Normal-size Arabic health order, the narrow pseudo result prompt
-and complete pseudo-locale proof remain open. Locale changes alter the whole-scene
+and complete pseudo native replay remain open. Locale changes alter the whole-scene
 script-binding hash, so each locale needs its own ordinary export.
 
 The [compact packet](evidence/core-locale-native-window/manifest.json) contains
@@ -118,10 +164,18 @@ executables, cooked resources, fonts and PCM stay externally retained by hashes.
 The default verifier replays archived evidence; `--originals` also checks retained
 files/source copies, `--binaries` rehashes runtime/PCM and recomputes concatenation,
 and `--git-source REF --source-root PATH` checks accepted tools/public main307
-identities for Arabic and all 97 CJK source rows against REF. REF must contain the
-logical-size composition (`e3dfcd9c` or a byte-equivalent integration), rather than
-old main312; the two executions are not relabeled current. It never launches an engine, compiler, CUA or GPU.
+identities for Arabic and all 97 shared CJK/pseudo source rows against REF. Use
+the frozen producing composition `e3dfcd9c` or a byte-equivalent integration;
+later development can legitimately change those files. Executions are not
+relabeled current. It never launches an engine,
+compiler, CUA or GPU.
 
 ```sh
 python3 docs/spikes/evidence/core-locale-native-window/verify.py
+```
+
+For the optional Git/source checks, use the retained producer identity:
+
+```sh
+python3 docs/spikes/evidence/core-locale-native-window/verify.py --originals --binaries --git-source e3dfcd9c695d6e1a74f82cb1613891c9e6046bb5 --source-root .
 ```
