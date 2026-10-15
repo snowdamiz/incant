@@ -55,6 +55,10 @@ device execution is deferred; hosted build and release checks remain required.
 - Finish and qualify remaining deliverables against the complete native sample.
   The [TypeScript AOT spike](../spikes/typescript-aot.md) remains an adoption
   experiment; its language controls are not a measured replacement for QuickJS.
+  The [native Static Hermes follow-up](../spikes/static-hermes-feasibility.md)
+  passes seven erased-JavaScript fixtures but retains typed-input refusals and a
+  failed native deadline control. It does not justify replacing QuickJS or
+  satisfy the script-time gate.
 
 The new [repeated-start attribution](../spikes/navigation-start-attribution.md)
 also rejects that specific scan-only hypothesis for reaching 2 ms: its hypothetical

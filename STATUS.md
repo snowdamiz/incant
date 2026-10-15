@@ -816,16 +816,22 @@ controls pass; independent final packet review was accepted and PR262 merged
 after its exact-head fast SUCCESS. No FPS/GPU/phase
 claim. [Evidence](docs/spikes/core-bulk-row-metadata.md).
 
-## TypeScript AOT spike — language controls retained, adoption open
+## TypeScript AOT spike — native feasibility tested, adoption blocked
 
 Pinned AssemblyScript 0.28.20 rejects five current TypeScript language fixtures;
 a separate 9,999-row arithmetic kernel compiles and matches selected values.
-The actual NativeBehavior frontend cook passes. Static Hermes source and future
-compiler inputs are pinned, but no native compiler/host was built. All complete
-SDK, matched shipping performance, iOS no-JIT/size and security-release adoption
-conditions remain open. No production host or dependency changed. Independent
-source/final review was accepted and PR262 merged after its exact-head fast
-SUCCESS. [Evidence](docs/spikes/typescript-aot.md).
+The actual NativeBehavior frontend cook passes. A subsequent pinned Static Hermes
+build matches seven unchanged erased-JavaScript fixtures through a limited C++
+host with eval/JIT disabled. All nine original typed/declaration probes refuse
+their inputs. The single native deadline control does not interrupt internally
+and requires external termination; engine rollback and ECS loan safety remain
+unqualified. The original CLI bootstrap failure and build-monitoring limitation
+are retained. All complete SDK, matched shipping performance, iOS no-JIT/size and
+security-release adoption conditions remain unmet. QuickJS stays the default;
+no production host or dependency changed. The portable data verifier passes 143
+records without executing archived code.
+[Initial language evidence](docs/spikes/typescript-aot.md) and
+[native outcomes](docs/spikes/static-hermes-feasibility.md).
 
 ## Core 10k Mac shipping — cache improvement measured, 2 ms script gate failed
 
