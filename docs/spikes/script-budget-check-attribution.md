@@ -142,8 +142,7 @@ and PCM stay external and hash-bound. The verifier never launches native code:
 ```sh
 python3 -B docs/spikes/evidence/script-budget-check-attribution/verify.py
 python3 -B docs/spikes/evidence/script-budget-check-attribution/verify.py \
-  --originals --binaries --git-source 4109b15c357d6377a10266f0a902d220cb9ad60f \
-  --source-root .
+  --originals --binaries --git-source 4109b15c357d6377a10266f0a902d220cb9ad60f
 ```
 
 Default replay rechecks embedded records and derives schema 3 attribution and
@@ -155,3 +154,10 @@ Git/live comparison binds the 31 non-document qualification/adapter/builder
 inputs; the full producing inventory remains historical evidence, not a claim
 that every later source file is identical. No GPU, native window, capture or CUA
 ran. Screen capture remains prohibited.
+
+Use `--source-root` only for a checkout whose bound inputs still match the
+producing source. During integration on main322, that stronger assertion
+correctly refused the changed `Cargo.lock`: main321 added a localization
+dependency for text tests. All other bound inputs matched. Historical Git-source,
+original-record and binary replay passed without relabeling this measurement as
+a main322 execution. The verifier retains its exact live-source requirement.
