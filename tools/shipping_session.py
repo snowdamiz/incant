@@ -23,7 +23,7 @@ def sha(path):
 
 
 def snapshot(root):
-    paths = subprocess.check_output(['git', 'ls-files', '-z'], cwd=root).split(b'\0')
+    paths = subprocess.check_output(['git', 'ls-files', '-z'], cwd=root, timeout=30).split(b'\0')
     return {os.fsdecode(p): sha(root / os.fsdecode(p)) for p in paths if p}
 
 
@@ -88,21 +88,22 @@ class FreshSession:
         require(target.endswith('-apple-darwin'), 'Shared shipping session currently verifies macOS only')
         require(split == 'packed', 'Unexpected shared-session split debug mode')
         self.target, self.split = target, split
-        self.compiler = subprocess.check_output([self.rustc, '-vV'], text=True)
+        self.compiler = subprocess.check_output([self.rustc, '-vV'], text=True, timeout=30)
         require(f'host: {target}\n' in self.compiler, 'Shared session requires host == target')
-        require(not subprocess.check_output(['git', 'status', '--porcelain', '--untracked-files=no'], cwd=self.root),
+        require(not subprocess.check_output(['git', 'status', '--porcelain', '--untracked-files=no'], cwd=self.root, timeout=30),
                 'Freeze tracked sources before the shipping session')
-        self.head = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=self.root).strip()
+        self.head = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=self.root, timeout=30).strip()
         self.sources = snapshot(self.root)
         self.path.mkdir(parents=True)
         self.units, self.builds, self.inputs, self.players = {}, [], [], []
+        self.retired_player_units = []
         self.deleted = False
 
     def check_frozen(self):
-        require(subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=self.root).strip() == self.head,
+        require(subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=self.root, timeout=30).strip() == self.head,
                 'Source HEAD changed during shipping session')
         require(snapshot(self.root) == self.sources, 'Tracked source changed during shipping session')
-        require(subprocess.check_output([self.rustc, '-vV'], text=True) == self.compiler,
+        require(subprocess.check_output([self.rustc, '-vV'], text=True, timeout=30) == self.compiler,
                 'Compiler changed during shipping session')
 
     @contextmanager
@@ -117,6 +118,31 @@ class FreshSession:
         path = Path(path).resolve()
         require(path.is_file() and not path.is_relative_to(self.path), 'Missing independent packaged player')
         self.players.append((path, sha(path)))
+
+    def begin_next_player(self):
+        """Require fresh player lib/bin while preserving all shared-unit origins.
+
+        Only a trusted multi-project session calls this after packaging the prior
+        player. No Cargo files are removed. A subsequent Fresh player library or
+        binary is unproven and refuses; every other reused unit keeps its exact
+        original identity/hash/command and cannot be rebuilt under the same key.
+        """
+        require(not self.deleted and self.builds and self.players and
+                len(self.players) == len(self.builds),
+                'Package a player before beginning another')
+        self.check_frozen()
+        require(all(path.is_file() and sha(path) == value for path, value in self.players),
+                'Packaged player changed before next build')
+        prefix = 'path+' + (self.root / 'crates/incant_game_player').as_uri() + '#'
+        selected = {key: value for key, value in self.units.items()
+                    if value['identity']['target']['name'] == 'incant_game_player'}
+        require(len(selected) == 2 and {tuple(v['identity']['target']['crate_types'])
+                for v in selected.values()} == {('lib',), ('bin',)} and
+                all(v['identity']['package_id'].startswith(prefix) for v in selected.values()),
+                'Expected exact engine player library and executable')
+        self.retired_player_units.extend(selected.values())
+        for key in selected:
+            del self.units[key]
 
     def bundle_inputs(self, env):
         if not env.get('INCANT_WASM_BUNDLE'):
@@ -136,7 +162,7 @@ class FreshSession:
         require(files, 'Static bundle is empty')
         return {'path': str(path), 'files_sha256': files}
 
-    def build(self, command, *, cwd, env):
+    def build(self, command, *, cwd, env, execute=None):
         require(not self.deleted and Path(cwd).resolve() == self.root, 'Invalid shipping build boundary')
         # The static SDK proof needs cc's diagnostic command output. Keep this
         # setting identical across the session: changing it between players
@@ -154,11 +180,15 @@ class FreshSession:
                     'CARGO_BUILD_RUSTC_WORKSPACE_WRAPPER'):
             require(not env.get(key), f'Unexpected compiler override: {key}')
         inputs = {key: {'path': str(Path(env[key]).resolve()), 'sha256': sha(Path(env[key]))}
-                  for key in ('INCANT_NATIVE_SCRIPT_SOURCE', 'INCANT_NATIVE_SCRIPT_MAP') if env.get(key)}
+                  for key in ('INCANT_NATIVE_SCRIPT_SOURCE', 'INCANT_NATIVE_SCRIPT_MAP',
+                              'INCANT_NATIVE_PROJECT') if env.get(key)}
         bundle = self.bundle_inputs(env)
         self.check_frozen()
         begin = time.monotonic()
-        build = subprocess.run(command, cwd=cwd, env=env, capture_output=True, text=True, encoding='utf-8')
+        # Existing callers keep their execution contract; bounded diagnostics may
+        # supply their existing native_process owner instead of another runner.
+        build = (execute or subprocess.run)(command, cwd=cwd, env=env,
+                                            capture_output=True, text=True, encoding='utf-8')
         elapsed = time.monotonic() - begin
         evidence = self.path.parent / f'build-{len(self.builds)}'
         evidence.with_suffix('.stdout.jsonl').write_text(build.stdout, encoding='utf-8')
@@ -257,6 +287,7 @@ class FreshSession:
         self.assert_ready()
         return {'format_version': 1, 'compiler': self.compiler, 'target': self.target, 'profile': 'shipping',
                 'source_head': self.head.decode(), 'source_sha256': self.sources, 'builds': self.builds, 'units': list(self.units.values()),
+                'retired_player_units': self.retired_player_units,
                 'build_storage_removed_before_any_player': True,
                 'authoring_inputs_removed_before_any_player': True,
                 'scope': 'One fresh ephemeral session; no persistent target cache or device performance gate'}
