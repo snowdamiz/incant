@@ -11,6 +11,17 @@ controls. This fixes the ordinary viewport route; low-resolution reconstruction
 still has separate appearance defects. The entries
 below preserve earlier scoped results and superseded integration snapshots.
 
+## Script deadline checks — bounded diagnostic qualified
+
+A default-off observer now separates QuickJS interrupt checks from explicit host
+checks, retaining their counts, refusals and existing CPU-clock attempts. It
+changes no enforcement frequency, deadline, owner check or locking. Actual VM,
+rollback, detached-view and allocation controls pass alongside ordinary builds
+and strict lint. Its diagnostic reports remain excluded from performance gates.
+The conservative script compatibility identity now includes both enforcement
+source files. Full-Core cost measurement remains unrun; the 2 ms target is still
+unmet. [Contract, CPU qualification and retained initial failure](docs/spikes/script-budget-check-attribution.md).
+
 ## Ordinary subtree duplication — command and persistence qualified
 
 The shared command bus can now copy a complete ordinary subtree with explicit,
