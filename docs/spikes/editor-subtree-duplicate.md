@@ -40,6 +40,31 @@ Independent review identified two completion-contract gaps. Bridge successor
 TypeScript check passing. Its generated transport was refreshed. Native behavior
 is unchanged. Final source review accepts those repairs.
 
-The editor interaction is still being implemented by Claude Opus 5.5 with Max
-thinking in handoff 0078. UI tests, rendered review and an actual native editor
-workflow remain pending. This document does not claim Phase 2 completion.
+Claude Opus 5.5 with Max thinking implemented the hierarchy menu, platform
+shortcut and shortcut reference in handoff 0078. Its browser fixture review
+covers 21 images and five keyboard flows, separately from the native engine.
+The root integration adds two reviewed correctness fixes: every late result,
+including failures, is fenced to its mounted hierarchy, bridge and project;
+explicit selection intent is retained even when the newer selected entity is
+subsequently deleted. Automatic disappearance of the original entity alone does
+not prevent selection of an accepted copy. Nothing is copied optimistically and
+the operation is never automatically retried.
+
+Integrated source `5a819493e89780bb499bfd35df9ac0316e48d70c` passes all 1,025 UI
+tests in 49 files, the project TypeScript build, generated-bridge consistency and
+the production frontend build. The real host transaction test was rerun after
+composition with main342; the native custom-protocol editor and matching
+headless tool build successfully. The [qualification receipt](evidence/editor-subtree-ui.json)
+binds these distinct sources, raw logs and copied binaries.
+
+The actual Mac editor workflow remains **unverified**. A bare executable could
+not be bound by CUA; its owned process was stopped without edits. The identical
+binary in a uniquely identified test bundle opened a blank native client.
+Read-only OS inspection reported both `IOConsoleLocked` and
+`CGSSessionScreenIsLocked` true. The contemporaneous locale player also deferred
+every drawable and advanced zero simulation steps. The root stopped and reaped
+the editor; its project and journal remain unchanged. No Duplicate input was
+delivered, and no actual selection, Undo/Redo or reopen result is claimed.
+Repeat that native workflow after the desktop is unlocked. A temporary startup
+error diagnostic build was retained but never launched; its source was restored
+and it is not the qualified production binary. No Phase 2 gate is passed.

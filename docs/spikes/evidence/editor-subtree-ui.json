@@ -1,0 +1,187 @@
+{
+  "scope": "native host and bridge functional controls, UI qualification; actual Mac editor workflow remains unverified",
+  "head": "5a819493e89780bb499bfd35df9ac0316e48d70c",
+  "files": {
+    "crates/incant_cmd/src/lib.rs": "360eeba64137989add7c0d9d22f1ae19b8b6284a3bef7fc3615a93208db90132",
+    "editor/app/src/entity.rs": "885a12015b38e30c255475ba966a3a93b3348dba074ac21e3d4511607d26c7ba",
+    "editor/app/src/main.rs": "5b7071c51864d3e859d0460126ec64c9530d3957ca6ee9a6175f9fee27654d16",
+    "editor/bridge/native.ts": "0908b428c4df73783542a7ef3cd61512ab1d8ea21a3394b3cce6482931fd983c",
+    "editor/bridge/native.test.ts": "f59b4b57b18219023e3fd2b64b0794e179ec92e8ff9aa7e65f56012f5b17d9cb",
+    "editor/bridge/contract.ts": "494dc3ce4f9f57475b8111138f03a8521f84215dfbbccf637feead45bd48c37e",
+    "editor/ui/src/hierarchy/duplicate.ts": "ef5ff6428c20bf0ddba226a81b15ac0ced4cc3cf1bc77a9eb4384fcb93d50fbf",
+    "editor/ui/src/components/HierarchyPanel.tsx": "2c477184e20b153a56d2a5003cadea6f25dcc39dc7f09361fd45e0844b432166",
+    "editor/ui/src/components/HierarchyDuplicate.test.tsx": "a7990b3caf763aaf74f5d4f8182ae5244369637759210e1d5de4b3ca48f710d3",
+    "editor/ui/src/shell/ShellContext.tsx": "c08bfcc8dea5bbaea0dfd6ca4274e7156b179fad2c6984b2a6f63215fc4e2a53",
+    "crates/incant_cmd/src/subtree.rs": "476f4a82a74819eeed7bffe58597e440d3a4cd6a3498b924603f72fc3db3a643",
+    "crates/incant_cmd/tests/subtree.rs": "1770b9b6f7ac480b2bab386dec655258b60d88a541bb9d6530f5fda4e768daad"
+  },
+  "frontend": [
+    {
+      "argv": [
+        "/Users/andreyyurlov/.local/share/fnm/node-versions/v22.23.3/installation/bin/node",
+        "tools/build_bridge.mjs",
+        "--check"
+      ],
+      "exit": 0,
+      "cleanup_reaped": true,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/editor-subtree-duplicate-integration-001/frontend-fixed-0.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "/Users/andreyyurlov/.local/share/fnm/node-versions/v22.23.3/installation/bin/node",
+        "node_modules/typescript/bin/tsc",
+        "-b",
+        "editor/ui",
+        "--noEmit"
+      ],
+      "exit": 0,
+      "cleanup_reaped": true,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/editor-subtree-duplicate-integration-001/frontend-fixed-1.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "/Users/andreyyurlov/.local/share/fnm/node-versions/v22.23.3/installation/bin/node",
+        "../../node_modules/vitest/vitest.mjs",
+        "run",
+        "--maxWorkers",
+        "2"
+      ],
+      "exit": 0,
+      "cleanup_reaped": true,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/editor-subtree-duplicate-integration-001/frontend-fixed-2.log",
+      "sha256": "31612d297f7665158f56e3cb6dc843225a99c601cdd8a625e7f3b42eae912c75"
+    },
+    {
+      "argv": [
+        "/Users/andreyyurlov/.local/share/fnm/node-versions/v22.23.3/installation/bin/node",
+        "../../node_modules/vite/bin/vite.js",
+        "build"
+      ],
+      "exit": 0,
+      "cleanup_reaped": true,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/editor-subtree-duplicate-integration-001/frontend-fixed-3.log",
+      "sha256": "cc04a1b3651c7f2bb97a76ad4979ed4e00a5979727d2fbc4dcd96bb189f1a743"
+    }
+  ],
+  "native_host_and_initial_build": {
+    "commands": [
+      {
+        "argv": [
+          "test",
+          "--profile",
+          "ci",
+          "--locked",
+          "--offline",
+          "-p",
+          "incant_editor",
+          "entity::tests::host_copy_is_one_reversible_user_transaction_and_stale_requests_write_nothing",
+          "--",
+          "--exact",
+          "--test-threads=1"
+        ],
+        "exit": 0,
+        "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/editor-subtree-duplicate-integration-001/native-0.log",
+        "sha256": "c9044e95050cb7463e44320f65e30c516f742bb09a96f097781d75452e8f2865",
+        "owned_cleanup_reaped": true
+      },
+      {
+        "argv": [
+          "build",
+          "--profile",
+          "ci",
+          "--locked",
+          "--offline",
+          "-p",
+          "incant_editor",
+          "-p",
+          "incant_headless",
+          "--features",
+          "incant_editor/custom-protocol",
+          "--message-format=json"
+        ],
+        "exit": 0,
+        "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/editor-subtree-duplicate-integration-001/native-1.log",
+        "sha256": "75d0653f9eaf540065673c3012e789777e71e202134c0d7fd6c8a1f57987e0d6",
+        "owned_cleanup_reaped": true
+      }
+    ],
+    "error": null,
+    "seconds": 123.83721016699565,
+    "target": "/private/tmp/incant-agent-font-target",
+    "baseline_bytes": 61357854720,
+    "peak_growth_bytes": 450846720,
+    "minimum_free_bytes": 75616473088
+  },
+  "corrected_embedded_ui_build": {
+    "commands": [
+      {
+        "argv": [
+          "build",
+          "--profile",
+          "ci",
+          "--locked",
+          "--offline",
+          "-p",
+          "incant_editor",
+          "--features",
+          "incant_editor/custom-protocol",
+          "--message-format=json"
+        ],
+        "exit": 0,
+        "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/editor-subtree-duplicate-integration-001/native-fixed-0.log",
+        "sha256": "69d41a68f795a5fcc4d6be85103c29402f2061ab9709770ea4317ee5b84bdcf6",
+        "owned_cleanup_reaped": true
+      }
+    ],
+    "error": null,
+    "seconds": 24.542951457988238,
+    "target": "/private/tmp/incant-agent-font-target",
+    "baseline_bytes": 61357854720,
+    "peak_growth_bytes": 661925888,
+    "minimum_free_bytes": 75274027008
+  },
+  "binary": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/editor-subtree-duplicate-integration-001/native-artifacts-fixed/incant_editor",
+      "bytes": 73043168,
+      "sha256": "8d8323f5d86d1b25b4745a8a2a17b4ef93c8c0789daf1b37b3dfd05d70f9c7cd",
+      "producing_head": "5a819493e89780bb499bfd35df9ac0316e48d70c"
+    }
+  ],
+  "native_window_outcome": {
+    "passed": false,
+    "class": "environment-ineligible",
+    "actual_ui_actions": "bound unique bundle, observed blank client, AX Raise only; no project-edit input",
+    "project_files_unchanged": {
+      "project.journal.jsonl": true,
+      "project.json": true
+    },
+    "next": "repeat actual CmdD/contextmenu/Undo/Redo/reopen workflow after unlocked session confirmed"
+  },
+  "desktop": {
+    "timestamp_utc": "2026-10-15T07:03:32.414378+00:00",
+    "method": "ioreg -a -n Root -d 1; only lock fields retained",
+    "IOConsoleLocked": true,
+    "sessions": [
+      {
+        "CGSSessionScreenIsLocked": true,
+        "kCGSSessionOnConsoleKey": true
+      }
+    ],
+    "actual_editor_workflow": "unverified: blank native client, no duplicate input delivered",
+    "limitation": "locked desktop; no appearance or runtime display claim",
+    "children": [
+      "bare24870 reaped",
+      "bundled84048 reaped"
+    ]
+  },
+  "review": {
+    "path": "editor-subtree-ui-p2-successor-independent-20261015.json",
+    "sha256": "771e8a11d5a11f7200bf878b532ace7e08d37f9a649daf4adf49d6de761fb679"
+  },
+  "test_count": 1025,
+  "test_files": 49,
+  "phase_gate": false
+}
