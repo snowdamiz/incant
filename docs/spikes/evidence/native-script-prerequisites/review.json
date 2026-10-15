@@ -1,0 +1,41 @@
+{
+  "format": "incant-independent-source-review",
+  "at_utc": "2026-10-15T04:43:55.828565+00:00",
+  "worktree": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+  "base_head": "50e168940769ca69ddc11e18e6503c96854dfece",
+  "source_state": "Three reviewed paths are currently uncommitted; receipt binds exact bytes, not a future commit.",
+  "files": [
+    {
+      "path": "tools/export_native.py",
+      "bytes": 17884,
+      "sha256": "1e9052e42f25ae2a2e666dd8292f1fd5fc91fd4c3be377d19c5e6d006d6beb0a"
+    },
+    {
+      "path": "tools/native_script_prerequisites.py",
+      "bytes": 2314,
+      "sha256": "3ad1e674902868cdd36da86447407c643ed4fbcacc6e9612f22642337d5f62d2"
+    },
+    {
+      "path": "tools/tests/test_native_script_prerequisites.py",
+      "bytes": 4503,
+      "sha256": "b311c58e77b6ee557c8ff59e3940d7cea38d4b485a6679ece465fa5129683e04"
+    }
+  ],
+  "tracked_exporter_diff_sha256": "8a73691767a1b9624ffcd861c495032ccb87d62cdd1ef191e0b3dd81ca936c96",
+  "verdict": "accepted in scoped source review; no actionable finding",
+  "reviewed": [
+    "Prerequisite check precedes first rustup/execute/Cargo work; pure selection/profile admission remains before it",
+    "Selected scene and implicit-single-scene rules match current native_wasm selector and Rust project_build embed rules",
+    "Only actual Script component membership in selected authored entities requires compiler packages, matching Rust attached detection; other scenes and plain/Wasm selections avoid compiler prerequisite",
+    "Engine-root driver/three compiler manifest paths are fixed host inputs, never project-supplied executable paths; no installs or project code execution",
+    "Missing package/wrong version refuses against exact engine devDependency pins; malformed/bounded manifests refuse; trusted cook remains final authority",
+    "Captured project bytes retain exporter project-hash/post-cook mutation binding",
+    "Six new test methods meaningfully cover per-package missing/version controls, selected plain/Wasm preservation, selection errors, driver/manifest refusal and no tool/Cargo/write on direct build refusal"
+  ],
+  "limits": [
+    "Reviewer ran no test, compiler, exporter, player, GPU/window/browser/capture/CUA. Root reported44 focused Python passes; that run was not repeated or relabeled as reviewer execution.",
+    "Check establishes package presence/manifest versions, not installed implementation integrity, SWC native binding health or full source schema validity. Actual trusted cook remains responsible for source/type/runtime admission.",
+    "Concurrent own shipping export003 session7185 remains on frozen340acb7c and does not adopt this patch."
+  ],
+  "findings": []
+}

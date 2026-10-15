@@ -21,6 +21,7 @@ import tempfile
 import native_process
 import native_profiling
 import native_shaders
+import native_script_prerequisites
 import physics_export
 from physics_features import selected_graph_errors, validate_artifacts
 
@@ -112,6 +113,8 @@ def build(project, staging, storage, scene, camera, mode, wabt=None, profiling=N
     shader_features = native_shaders.features(shaders, mode)
     profile_features = native_profiling.features(profiling, mode)
     native_profiling.environment(profiling, os.environ)
+    project_bytes = read(project, 64 * 1024**2)
+    native_script_prerequisites.check(project_bytes, scene, ROOT)
     rustc = Path(execute(['rustup', 'which', 'rustc']).stdout.strip())
     compiler = execute([rustc, '-vV']).stdout
     host = re.search(r'^host: (.+)$', compiler, re.MULTILINE).group(1)
@@ -130,7 +133,6 @@ def build(project, staging, storage, scene, camera, mode, wabt=None, profiling=N
     if scene is not None:
         env['INCANT_NATIVE_PROJECT_SCENE'] = scene
     cargo = ROOT / 'tools/cargo' if os.name != 'nt' else rustc.with_name('cargo.exe')
-    project_bytes = read(project, 64 * 1024**2)
     project_hash = sha256(project_bytes)
     physics_mode = physics_export.project_mode(project_bytes)
     features = ','.join(physics_export.cargo_features(physics_mode,
