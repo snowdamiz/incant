@@ -11,6 +11,22 @@ controls. This fixes the ordinary viewport route; low-resolution reconstruction
 still has separate appearance defects. The entries
 below preserve earlier scoped results and superseded integration snapshots.
 
+## Ordinary subtree duplication — command and persistence qualified
+
+The shared command bus can now copy a complete ordinary subtree with explicit,
+globally fresh IDs. Internal hierarchy, audio-bus and navigation-source references
+are remapped; external references and literal script values stay intact. Copies
+are one reversible transaction, with shared expansion limits and explicit
+refusal of linked prefabs and singleton components. The headless schema and
+generated SDK expose the same operation.
+
+133 scoped Rust controls, strict lint, generated contracts and TypeScript checks
+pass. Undo/redo, journal reopening, atomic refusal and ordinary cooked simulation
+are covered. Both earlier fixture/schema failures remain recorded. The final
+producer bytes compose unchanged with main315; editor duplication controls and
+Phase 2 acceptance remain separate.
+[Contract, review and retained evidence](docs/spikes/subtree-duplication.md).
+
 ## Core locale qualification — Arabic native replay verified
 
 The native player's initial window now requests 640×480 logical units. A fresh

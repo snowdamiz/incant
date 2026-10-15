@@ -138,6 +138,15 @@ python3 -B docs/spikes/evidence/subtree-duplication/verify.py
 receipts, copied executable bytes and immutable producing Git objects. The
 archive embeds 319 records, including all four source freezes, raw test outputs,
 the failed exported schema, actual generated contracts and resource receipts.
-The copied executables remain external. No STATUS or editor UI changes are part
-of this producer slice; final current-main integration remains the integrator's
-separate responsibility.
+The copied executables remain external. The producer includes no editor UI
+changes; the integration adds the current STATUS entry separately.
+
+The integrator reviewed the complete production change, reference inventory,
+atomicity/refusal tests, live RPC checks and generated contracts. All 319 embedded
+records, retained originals, copied binaries and producing Git objects replayed
+successfully. The five producer commits compose with main315
+`30a8d8e2e53168b342cbf844f99fb6730ca676d7` without conflicts; all 23 producer paths
+retain their exact bytes before this integration note. The intervening main
+changes concern native window sizing and evidence, outside the command and
+schema consumer dependency paths. This review does not convert the scoped CPU
+checks into a full-suite or UI acceptance claim.
