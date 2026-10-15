@@ -45,7 +45,20 @@ fn fields(
                     }
             })
 }
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub(crate) enum Variant {
+    Ordinary,
+    Prepass,
+    Occlusion,
+}
 pub(super) fn validate(m: &naga::Module, info: &naga::valid::ModuleInfo) -> Result<()> {
+    validate_variant(Variant::Ordinary, m, info)
+}
+pub(crate) fn validate_variant(
+    variant: Variant,
+    m: &naga::Module,
+    info: &naga::valid::ModuleInfo,
+) -> Result<()> {
     require(
         m.overrides.is_empty() && m.entry_points.len() == 2,
         "material stages/overrides",
@@ -125,19 +138,29 @@ pub(super) fn validate(m: &naga::Module, info: &naga::valid::ModuleInfo) -> Resu
             "material output interface",
         )?;
         for (handle, g) in m.global_variables.iter() {
-            let used = !vertex
-                || g.binding
-                    == Some(naga::ResourceBinding {
-                        group: 0,
-                        binding: 0,
-                    });
+            let fragment_used = variant != Variant::Prepass
+                || g.binding.is_some_and(|b| b.group == 1 && b.binding <= 2);
+            let frame = g.binding
+                == Some(naga::ResourceBinding {
+                    group: 0,
+                    binding: 0,
+                });
+            let used = if vertex { frame } else { fragment_used };
             require(
                 info.get_entry_point(index)[handle].is_empty() != used,
                 "material stage visibility",
             )?;
         }
     }
-    require(m.global_variables.len() == 23, "material resource count")?;
+    require(
+        m.global_variables.len()
+            == match variant {
+                Variant::Ordinary => 23,
+                Variant::Prepass => 16,
+                Variant::Occlusion => 24,
+            },
+        "material resource count",
+    )?;
     let mut storage = Vec::new();
     for (_, g) in m.global_variables.iter() {
         require(g.init.is_none(), "material resource initializer")?;
@@ -158,6 +181,18 @@ pub(super) fn validate(m: &naga::Module, info: &naga::valid::ModuleInfo) -> Resu
                             ("environment", 80, 1),
                         ],
                     )
+            }
+            (0, 1) if variant == Variant::Occlusion => {
+                g.space == AddressSpace::Handle
+                    && m.types[g.ty].inner
+                        == TypeInner::Image {
+                            dim: ImageDimension::D2,
+                            arrayed: false,
+                            class: ImageClass::Sampled {
+                                kind: K::Float,
+                                multi: false,
+                            },
+                        }
             }
             (1, 0) => {
                 uniform
@@ -250,7 +285,12 @@ pub(super) fn validate(m: &naga::Module, info: &naga::valid::ModuleInfo) -> Resu
     // This order is the compact fragment MSL lengths struct's ABI, supplied by
     // an explicit engine uniform because passthrough has no Naga reflection.
     require(
-        storage == [(3, 1), (3, 2), (3, 3)],
+        storage
+            == if variant == Variant::Prepass {
+                vec![]
+            } else {
+                vec![(3, 1), (3, 2), (3, 3)]
+            },
         "material storage length order",
     )
 }
