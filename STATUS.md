@@ -13,6 +13,14 @@ controls. This fixes the ordinary viewport route; low-resolution reconstruction
 still has separate appearance defects. The entries
 below preserve earlier scoped results and superseded integration snapshots.
 
+Checkpoint44 remains held: the general job generated stale agent tool contracts
+into tracked sources before shipping, then correctly refused its dirty checkout.
+The [schema correction and isolated check](docs/spikes/ci-shipping-schema-check.md)
+regenerate that registry and compare all 78 generated files before shipping
+without changing tracked sources. Actual retained-binary generation and 55
+focused Python controls pass locally. Corrected full hosted execution remains
+pending; the shipping freeze requirement is unchanged.
+
 Checkpoint43 currently remains held: the broad Linux GPU-test command also
 selected a manual script diagnostic whose prepared inputs were absent. The
 [explicit-feature correction](docs/spikes/ci-manual-script-diagnostic.md) retains

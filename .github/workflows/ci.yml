@@ -122,7 +122,8 @@ jobs:
       - name: Validate cooked KTX2 with the Khronos reference tool
         if: (needs.classify.result != 'success' || needs.classify.outputs.scope != 'docs')
         run: python3 tools/validate_ktx.py --probe-binary target/ci/examples/texture_probe
-      - run: target/ci/incant_headless schema schemas
+      - name: Verify published schemas without mutating frozen sources
+        run: python3 tools/check_schemas.py --binary target/ci/incant_headless
         if: (needs.classify.result != 'success' || needs.classify.outputs.scope != 'docs')
       - name: Verify public source edits, native Play and journal recovery
         if: (needs.classify.result != 'success' || needs.classify.outputs.scope != 'docs')
