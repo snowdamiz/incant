@@ -13,6 +13,7 @@ pub(super) fn half(bits: u16) -> f32 {
 #[test]
 #[ignore = "requires native GPU; Claude owns numerical execution"]
 fn actual_temporal_resolve_disocclusion_reactivity_and_alpha_exclusion() {
+    let mut parity = crate::temporal_parity::Output::optional("temporal-resolve");
     let mut renderer = crate::test_support::checked(Renderer::headless().unwrap());
     if crate::motion::admission().is_err() {
         assert!(pollster::block_on(renderer.enable_temporal_accumulation()).is_err());
@@ -297,6 +298,23 @@ fn actual_temporal_resolve_disocclusion_reactivity_and_alpha_exclusion() {
             .unwrap()
             .unwrap();
         let mapped = buffer.slice(..).get_mapped_range();
+        if let Some(parity) = parity.as_mut() {
+            let raw: Vec<_> = mapped
+                .as_chunks::<256>()
+                .0
+                .iter()
+                .flat_map(|row| row[..8 * 8].iter().copied())
+                .collect();
+            parity
+                .record(
+                    &format!("mode{mode:02}-resolved"),
+                    8,
+                    8,
+                    "rgba16float",
+                    &raw,
+                )
+                .unwrap();
+        }
         let at = 3 * 256 + 3 * 8;
         let actual: [f32; 4] = std::array::from_fn(|i| {
             half(u16::from_le_bytes(
@@ -316,5 +334,8 @@ fn actual_temporal_resolve_disocclusion_reactivity_and_alpha_exclusion() {
         }
         drop(mapped);
         buffer.unmap();
+    }
+    if let Some(parity) = parity {
+        parity.complete();
     }
 }

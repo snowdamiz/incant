@@ -209,6 +209,7 @@ fn read(
 #[test]
 #[ignore = "requires separately granted native GPU; 12 renders +12 readback submissions, no images"]
 fn exact_integer_owner_matches_visibility_and_leaves_motion_depth_color_unchanged() {
+    let mut parity = crate::temporal_parity::Output::optional("motion-owner");
     let mut renderer = crate::test_support::checked(Renderer::headless().unwrap());
     eprintln!("MOTION_OWNER adapter={:?}", renderer.adapter.get_info());
     if crate::motion::admission().is_err() {
@@ -302,6 +303,28 @@ fn exact_integer_owner_matches_visibility_and_leaves_motion_depth_color_unchange
                     (&views[0], 4, wgpu::TextureAspect::All),
                 ],
             );
+            if let Some(parity) = parity.as_mut() {
+                let size = owner.texture().width();
+                for (name, bytes, width, format) in [
+                    ("on-owner", &raw[0], size, "r32uint"),
+                    ("on-motion", &raw[1], size, "rgba32float"),
+                    ("on-depth", &raw[2], size, "depth32float"),
+                    ("on-color", &raw[3], 32, "rgba8srgb"),
+                    ("off-motion", &offraw[0], size, "rgba32float"),
+                    ("off-depth", &offraw[1], size, "depth32float"),
+                    ("off-color", &offraw[2], 32, "rgba8srgb"),
+                ] {
+                    parity
+                        .record(
+                            &format!("scale{scale}-frame{frame}-{name}"),
+                            width,
+                            width,
+                            format,
+                            bytes,
+                        )
+                        .unwrap();
+                }
+            }
             assert_eq!(raw[1..], offraw);
             let size = owner.texture().width();
             let changes = on.motion_changes().unwrap();
@@ -377,4 +400,7 @@ fn exact_integer_owner_matches_visibility_and_leaves_motion_depth_color_unchange
     eprintln!(
         "MOTION_OWNER renders=12 readback_submissions=12 max_extent=32x32 source_removed=true no_images=true"
     );
+    if let Some(parity) = parity {
+        parity.complete();
+    }
 }
