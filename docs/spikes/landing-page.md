@@ -277,3 +277,79 @@ Handoff 0008's tablet layout and platform-mark improvements deployed from main
 5d1f5ab after PR #4 merged. The website build and deploy jobs passed; HTTPS
 returned 200 and every entrypoint asset matched the reviewed build.
 See [deployment evidence](evidence/runtime-assets-site-deploy-2026-10-09.json).
+
+### Revision 9: a studio-grade redesign with live scenes
+
+The director asked for a much more impressive and professional page, "like a real
+studio", with full creative freedom including a rebuild from scratch. During the work
+the director added that the early test games (Core Sample, Planar) must not appear on
+the site. This revision was made directly in a Claude Code desktop session on
+branch `claude/landing-page-redesign-6cb6f4`, not through an ACP handoff packet.
+Model: Claude Opus 5.5 (`claude-opus-5-5`). The session's thinking-effort setting was
+not visible to the model and is not verified as Max.
+
+Reference sites reviewed for calibration: Linear, Zed, Rive and Unreal Engine.
+They share a dark, product-forward presentation with monospace labels and large
+product imagery. The page now follows that direction.
+
+- **Identity.** A dark page with Inter at large optical sizes (its Display cut) and
+  JetBrains Mono labels. Fraunces and its license file are removed from the
+  dependencies and the shipped site. The wisp mark is unchanged.
+- **Live scenes instead of illustrations.** Four WebGL2 fragment shaders written for
+  the site in `website/src/gl/` draw a lighthouse on a headland at blue hour. The
+  headland is a ray-marched heightfield, the tower is a signed-distance model and the
+  sea is an analytic plane with reflections and shoreline foam. The beam is an
+  analytic in-scattering term. The hero, the editor viewport and the closing band use
+  that scene with separate cameras, and each camera has a portrait framing for tall
+  screens. A turntable shader renders the modeling demo.
+- **Editor walkthrough.** The editor recreation follows `editor/ui` tokens and the
+  real layout: Hierarchy, Assets, Viewport, Inspector, Agent approval card, History
+  dock and status bar. Ask, Review, Play-test and Undo change the panels and the live
+  viewport together: the dashed preview beam, the applied sweeping beam, the agent
+  entry in History, and the undone state. Selecting Allow in the recreation also
+  advances to the play-test.
+- **Modeling.** Each geometry-graph node (Cylinder through Output) switches on one
+  parameter of the same distance-field model. The turntable rebuilds the tower up to
+  the selected node and highlights the part that node adds.
+- **New sections.** Principles shows a history list, a scene-text diff and a
+  play-test report. The toolset grid has twelve original line glyphs. The Scripting
+  section shows a sweep script written against the real `sdk/ts` native behavior API.
+  Platforms uses the existing Font Awesome marks, and the closing band reuses the
+  live scene. The Lucide workflow glyphs and their license file are removed.
+
+Honesty constraints: every live scene is labelled as rendered in the browser, and the
+editor is labelled as a recreation. No engine capture or test-game image is used.
+Copy keeps the director's finished-product voice. It makes no licensing, royalty or
+pricing claims, because the repository has no license file yet.
+
+Motion and fallbacks: scenes render only while on screen and while the tab is visible.
+A hidden tab gets at most one requested still frame. The internal resolution drops
+when frames run long. Reduced motion draws one still frame per state and stops every
+CSS animation. Without WebGL2, each scene shows a static gradient. All scene
+pictures carry text descriptions, and the walkthrough and graph remain keyboard
+operable.
+
+Verification on this Mac (Mac17,9, Apple M5 Pro, macOS 27.0.1 build 26A434, Node
+22.23.3):
+
+- `PAGES_BASE_PATH=/incant/ npm run build`: strict Vue/TypeScript check and build
+  passed. Output is 163.55 kB JavaScript raw / 59.98 kB gzip (including all shader
+  source) and 41.69 kB CSS raw / 8.81 kB gzip. Fonts are 72.92 kB (Inter with
+  optical size) and 40.40 kB (JetBrains Mono). No dependency was added; one was
+  removed.
+- Playwright, 26 tests: all passed with Google Chrome 155.0.8059.40 in 21.6 s, and with
+  Playwright's bundled Chromium 1248 (software WebGL, as on hosted CI) in 1.3 min.
+  The two tests that capture many live states are marked slow for CI. Both axe suites
+  report zero violations at 390 and 1440 px. The suite covers overflow at
+  320/390/768/1440 px, absence of third-party requests, scene drawing or fallback,
+  keyboard walkthrough, the Allow shortcut, graph nodes at desktop and phone widths,
+  the toolset and platform lists, the FAQ, the mobile menu and reduced motion.
+- Local Chrome frame counting on this Mac observed about 60 frames per second at
+  1440×900 with the hero, editor and modeling views in view. This is a browser
+  observation on one machine, not an engine or shipping-profile performance
+  measurement.
+- Reviewed captures of the production build at 1440, 768 and 390 px are in
+  [evidence/landing-revision-9](evidence/landing-revision-9/).
+
+Firefox, Safari and physical phones were not tested. Hosted CI has not yet run on this
+revision. Director visual acceptance is pending, and no engine phase gate is affected.
