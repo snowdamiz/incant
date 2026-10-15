@@ -464,6 +464,21 @@ export default {coroutines:{step:{${resume}}},update(){return undefined}} satisf
     async root => assert.rejects(cookNativeScript(root, 'entry.ts'), /strict typecheck failed/u));
   for (const call of ["coroutines.start('a','step',()=>0)","coroutines.start('a','step',null,4)","coroutines.cancel(4)"])
     await fixture({'entry.ts': `import type {NativeBehavior} from '@incant/runtime/native';
-export default {update({coroutines}){${call};return undefined}} satisfies NativeBehavior;`},
+export default {update({coroutines}){if(!coroutines)throw Error('catalog required');${call};return undefined}} satisfies NativeBehavior;`},
       async root => assert.rejects(cookNativeScript(root, 'entry.ts'), /strict typecheck failed/u));
+});
+
+test('coroutine capabilities require update narrowing and are guaranteed inside resume', async () => {
+  await fixture({'entry.ts': `import type {NativeBehavior} from '@incant/runtime/native';
+export default {update({coroutines}){coroutines.start('task','step',null);return undefined}} satisfies NativeBehavior;`},
+    async root => assert.rejects(cookNativeScript(root, 'entry.ts'), /'coroutines' is possibly 'undefined'/u));
+  await fixture({'entry.ts': `import type {NativeBehavior,NativeCoroutineContext,NativeCoroutines} from '@incant/runtime/native';
+export default {coroutines:{step:{resume(context,task){
+  const refined:NativeCoroutineContext=context;
+  const api:NativeCoroutines=refined.coroutines;api.cancel(task.id);return {kind:'done'};
+}}},update({coroutines}){
+  if(coroutines)coroutines.start('task','step',null);return undefined;
+}} satisfies NativeBehavior;`}, async root => {
+    assert.ok((await cookNativeScript(root, 'entry.ts')).code.includes('coroutines'));
+  });
 });

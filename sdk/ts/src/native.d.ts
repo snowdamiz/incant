@@ -417,7 +417,7 @@ export interface NativeHud {
 export interface NativeContext {
   /** Available when the program declares a coroutine catalog. Functions expire
    * with this source tick; waits count accepted updates, not wall-clock time. */
-  readonly coroutines: NativeCoroutines;
+  readonly coroutines?: NativeCoroutines;
   readonly hud: NativeHud;
   /** Authored attachments for this source, sorted by stable entity ID. The array
    * and initial props are deeply frozen. One callback per nonempty source runs
@@ -462,11 +462,15 @@ export interface NativeCoroutineTask {
 }
 export type NativeCoroutineResult = Readonly<Extract<CoroutineResult, { kind: "done" }>> |
   Readonly<Omit<Extract<CoroutineResult, { kind: "wait" }>, "state"> & { state: NativePersistentValue }>;
+/** Resume callbacks always run with a captured coroutine catalog. */
+export interface NativeCoroutineContext extends NativeContext {
+  readonly coroutines: NativeCoroutines;
+}
 export interface NativeCoroutine {
   /** Current accepted tick capabilities; return a finite data continuation.
    * No generator/async syntax. All state needed after load belongs in task.state,
    * context.state or the native world, never module globals/closures. */
-  resume(context: NativeContext, task: NativeCoroutineTask): NativeCoroutineResult;
+  resume(context: NativeCoroutineContext, task: NativeCoroutineTask): NativeCoroutineResult;
 }
 export interface NativeCoroutines {
   /** Starts on the next accepted update. Names/IDs: 1–64 ASCII letters/digits/_.:-.
