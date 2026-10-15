@@ -1,0 +1,667 @@
+{
+  "schema": 1,
+  "created_utc": "2026-10-15T01:58:56.863529+00:00",
+  "source_sha": "18ab2c53991a296d5470ea59a4cad6613c9bdaf8",
+  "first_source_sha": "7c509b2dc22a6e5f00ab606a9df8f05e09efa630",
+  "base_sha": "54960702c8075cea899ab65e680f46423adcff24",
+  "archive": {
+    "path": "records.json.gz",
+    "sha256": "4f0a2baa08f6a7b738a7f8ea9a1d3fd1351c4e5bd4bccb8662bd39c8f5b91799",
+    "bytes": 349718,
+    "records": 52
+  },
+  "records": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/source-002/files/Cargo.lock",
+      "kind": "source-copy",
+      "bytes": 253017,
+      "sha256": "9b64640e32ca3ad9b8c0fbaa445ddc911d059c6de7179d550bbeac73a74e8372"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/source-002/files/Cargo.toml",
+      "kind": "source-copy",
+      "bytes": 3956,
+      "sha256": "163606d4b9886c5d0f9bb6a4b67fca4823523b4024f17a689dc9bab719c314a7"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/source-002/files/crates/incant_game_player/Cargo.toml",
+      "kind": "source-copy",
+      "bytes": 5879,
+      "sha256": "86a7ae06e7491f7e6896eee05487488613192f488612e86fc97ea0dc95db01ba"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/source-002/files/crates/incant_profile/Cargo.toml",
+      "kind": "source-copy",
+      "bytes": 1134,
+      "sha256": "0f1bc4c9dfdb4bb34e9cfd32f4ff719856a56f729bc484469128d1017cb87675"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/source-002/files/crates/incant_profile/src/diagnostic.rs",
+      "kind": "source-copy",
+      "bytes": 9845,
+      "sha256": "1333ba628b67782282cf6f1866a3fc549a7b2ba22031c9b557b51f15f5d8d8f1"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/source-002/files/crates/incant_profile/src/diagnostic/budget.rs",
+      "kind": "source-copy",
+      "bytes": 4469,
+      "sha256": "3a5a5dceb72b726662d24b0e5b296c54e26f589e1688875a4aef9e17daa274fa"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/source-002/files/crates/incant_profile/src/diagnostic/budget/tests.rs",
+      "kind": "source-copy",
+      "bytes": 7149,
+      "sha256": "524cf28e73a5d850e376d6f15ebf90f3bc2bddc518e93abf9b812e2ea44def7c"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/source-002/files/crates/incant_profile/src/diagnostic/navigation.rs",
+      "kind": "source-copy",
+      "bytes": 3168,
+      "sha256": "3f5e8e87905cd0b11af4ba0b810c652787d68bd7ccea6e4b10a79bfcac07bb09"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/source-002/files/crates/incant_profile/src/diagnostic/navigation/tests.rs",
+      "kind": "source-copy",
+      "bytes": 4819,
+      "sha256": "03fbbd7642d799ece1a72db6895ad49e4d99c74fe3dc2b836d6a7e70511b68d7"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/source-002/files/crates/incant_profile/src/diagnostic/storage.rs",
+      "kind": "source-copy",
+      "bytes": 9310,
+      "sha256": "3a5d7a82183e35b730d956d9682c89f3140499a7c2b1320a4c65bee8992100d7"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/source-002/files/crates/incant_profile/src/enabled.rs",
+      "kind": "source-copy",
+      "bytes": 14792,
+      "sha256": "6abf8360914863ac93990935d2cb60b7c7faab22d52c83ea641712fdac548dc7"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/source-002/files/crates/incant_profile/tests/allocations.rs",
+      "kind": "source-copy",
+      "bytes": 7439,
+      "sha256": "d7b73a584dd3cd9c10d1cc3e58fc9d3cd9df36999b38165df3857cc56d487c03"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/source-002/files/crates/incant_script/Cargo.toml",
+      "kind": "source-copy",
+      "bytes": 3090,
+      "sha256": "027351abea66546349416007cada02b2b211e69e59ef3e62c551d743730a09f8"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/source-002/files/crates/incant_script/build.rs",
+      "kind": "source-copy",
+      "bytes": 8652,
+      "sha256": "02fefea5d174b279fb83acbea8fb918c384216b73af3f8fecbf955035e48c401"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/source-002/files/crates/incant_script/src/attribution_tests.rs",
+      "kind": "source-copy",
+      "bytes": 4598,
+      "sha256": "b8824fed76a1f82ea493774bee9bd3f481ab5bc657c7fd05403b1fa27bbd99d0"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/source-002/files/crates/incant_script/src/budget.rs",
+      "kind": "source-copy",
+      "bytes": 3916,
+      "sha256": "ab490d5885d251c250bd0b6363358c7ce7d229cdebcd9b39209a265638cb7f69"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/source-002/files/crates/incant_script/src/budget/attribution_tests.rs",
+      "kind": "source-copy",
+      "bytes": 4246,
+      "sha256": "fc13f372c43cc0f139d0b535b212003f44bb85aa7b03b870bc0aa27b76d78547"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/source-002/files/crates/incant_script/src/diagnostics.rs",
+      "kind": "source-copy",
+      "bytes": 3496,
+      "sha256": "1e8cb16e12d03ab66532659decf8a4db2b0028e7622a82b02a768ce97c7e8940"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/source-002/files/crates/incant_script/src/lib.rs",
+      "kind": "source-copy",
+      "bytes": 33799,
+      "sha256": "21ce2760b79431b7eeb667265130ea1a7d1ee6d72ce2003ccd2e120779e24769"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/source-002/files/docs/spikes/script-budget-check-attribution.md",
+      "kind": "source-copy",
+      "bytes": 3849,
+      "sha256": "036b5575500fd9b695b44718982aa3c475b49f93feb8639c7793c7bce143ee04"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/source-002/files/rust-toolchain.toml",
+      "kind": "source-copy",
+      "bytes": 100,
+      "sha256": "c6e63d9832830b858d930007e4fd1fc3f4a3ca1d287483b08077b7f0267ca124"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/source-002/files/tools/cargo",
+      "kind": "source-copy",
+      "bytes": 179,
+      "sha256": "9aef98d613601b0c374c1d0499afb39d710cbf5002faba537f21be9c11ff72e3"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/source-002/files/tools/native_process.py",
+      "kind": "source-copy",
+      "bytes": 19307,
+      "sha256": "58dd2a8231d7f9d1e42070fc85425461e06a43f279fa5e7f8e57b4a40c3a3aa4"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/source-002/files/tools/tests/test_mac_performance.py",
+      "kind": "source-copy",
+      "bytes": 20114,
+      "sha256": "0da7d312c620cffeec7c683a2a730d870fc9a00a01c3a0063aca1cae7720db1d"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/source-002/files/tools/tests/test_script_build_identity.py",
+      "kind": "source-copy",
+      "bytes": 2641,
+      "sha256": "c068c6b2586c76bbf666716dd75523403a70dc48f3674ddd9a5fda62cf7c6a42"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/source-001/freeze.json",
+      "kind": "receipt-or-raw",
+      "bytes": 11460,
+      "sha256": "2bb476f2ff1a468ea90d9fd37b4b1524c57d3d38368c2d9d4eafb448dff69664"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/source-001/source-checks.raw.log",
+      "kind": "receipt-or-raw",
+      "bytes": 51,
+      "sha256": "5c135f6b4841e1b52e7eff65f6fdbd368fd4f5e41680bebbd41ec0a25765082d"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/source-002/freeze.json",
+      "kind": "receipt-or-raw",
+      "bytes": 12013,
+      "sha256": "ecee66a5dc0b7fad6025cf11d2931310d82f0a2ca0ebecf588639dc1c3d768cf"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/source-002/source.diff",
+      "kind": "receipt-or-raw",
+      "bytes": 589,
+      "sha256": "26c78c1fef7d20c7f40891b425ee08db6caa43987330c63e82ede98707c096d5"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/cpu-proposal-001.json",
+      "kind": "receipt-or-raw",
+      "bytes": 7886,
+      "sha256": "ab10da25885948fc2a27e975dbc2c23a41515f4b1ce4c4a90f6cf70886fabfd1"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/cpu-proposal-002.json",
+      "kind": "receipt-or-raw",
+      "bytes": 8637,
+      "sha256": "100a998ad94422d88dbfc42a9109668bc584265e1396945184a9ea70ae0ae28c"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/cpu-proposal-003.json",
+      "kind": "receipt-or-raw",
+      "bytes": 8810,
+      "sha256": "96e530b3bc408cff4f38f2a36ecaed60897b6098faa70ede35069f08a110d7e8"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/cpu-supervisor-001.py",
+      "kind": "receipt-or-raw",
+      "bytes": 10453,
+      "sha256": "2f263d80536adeb9aad8cc02d7cb3427615e8ce67ae70e966a1c9fd6e5b0ec12"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/cpu-supervisor-002.py",
+      "kind": "receipt-or-raw",
+      "bytes": 10683,
+      "sha256": "f0ef0254b8896d4662a859ce15dd0c0c06e8aba5fa72ca439dff786060174287"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/cpu-001/launch.json",
+      "kind": "receipt-or-raw",
+      "bytes": 8035,
+      "sha256": "910da8740d18f213366c86fb905b108d9554bda6ec1014db0cc03208fd3538a4"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/cpu-001/results.json",
+      "kind": "receipt-or-raw",
+      "bytes": 2962,
+      "sha256": "7c86f9b21339ed0087fe38e073bd9202aed6101e6ad8bb31799c642c0bee2eb4"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/cpu-001/terminal.json",
+      "kind": "receipt-or-raw",
+      "bytes": 253,
+      "sha256": "2a9fe88489d2c9ce12c2f95fc1372a1a649314602242b153f0fdb6ebdfab7940"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/cpu-001/0.raw.log",
+      "kind": "receipt-or-raw",
+      "bytes": 121,
+      "sha256": "7268675026815f4e22ac42a9fd8156c5178bb52b258486b47049b8a6da5c29db"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/cpu-001/1.raw.log",
+      "kind": "receipt-or-raw",
+      "bytes": 100,
+      "sha256": "ad61be9b74efb8a4b8ae7d0427622d79c722d44dc55c2f4aeb51140568dfc278"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/cpu-001/2.raw.log",
+      "kind": "receipt-or-raw",
+      "bytes": 31125,
+      "sha256": "aa405a7e7b8fa2118d7956c2d1c3f4cbebcc1779a180c5e795e64e2806c955b0"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/cpu-002/launch.json",
+      "kind": "receipt-or-raw",
+      "bytes": 7579,
+      "sha256": "36096ecdf37cf1062c9629acbacdc4e51a1f40f05647e66019a46d591f4b0de9"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/cpu-002/results.json",
+      "kind": "receipt-or-raw",
+      "bytes": 14464,
+      "sha256": "6894479052f6bb199d83a5776ee2cf60be64e4d57ccf927ccb5cafca06943d93"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/cpu-002/terminal.json",
+      "kind": "receipt-or-raw",
+      "bytes": 253,
+      "sha256": "dce44371c134a4eaadfa3fbab4fca53a86aa31fb07b5725b1130ee122623e04a"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/cpu-002/0.raw.log",
+      "kind": "receipt-or-raw",
+      "bytes": 23189,
+      "sha256": "d0a0e40b18ce6d621350b79a29edb8fdcf78eab255754faa5888755d49aa7198"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/cpu-002/1.raw.log",
+      "kind": "receipt-or-raw",
+      "bytes": 23777,
+      "sha256": "394d6edfde4bf79d37a0b45c8a04dc8c594255e49c29bad4c38aaa424ae6a517"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/cpu-002/2.raw.log",
+      "kind": "receipt-or-raw",
+      "bytes": 22041,
+      "sha256": "5f8098a6891898c4c07628efdb77ee52835ed8f9239dfe88f2bb0158ade831e4"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/cpu-002/3.raw.log",
+      "kind": "receipt-or-raw",
+      "bytes": 224132,
+      "sha256": "ed756705303d5ba853e56d9fff4be9b2ac0078e84386124a63d1c2ba72bab7ca"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/cpu-002/4.raw.log",
+      "kind": "receipt-or-raw",
+      "bytes": 222518,
+      "sha256": "694e1428ef76caea8d07f04f5407e4f8be03657fe4a90d9a2f3935ce2e1bdf7b"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/cpu-002/5.raw.log",
+      "kind": "receipt-or-raw",
+      "bytes": 380144,
+      "sha256": "f67e639b68e5a93954e7ec6990b1a942b3d3ca77d573ec4e82ecc556f900dc3c"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/cpu-002/6.raw.log",
+      "kind": "receipt-or-raw",
+      "bytes": 376379,
+      "sha256": "c59f878a09829c8af28d13fb8917db28b05ed9b2ce79b78c7661d5b9fb955db4"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/root-cpu-review-001.json",
+      "kind": "review",
+      "bytes": 1432,
+      "sha256": "be11900b632676f41ada60ffa6576e32382e53b5fa972e1094a3b314a7c3778c"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/script-budget-clock-boundary-hypothesis-001.json",
+      "kind": "hypothesis",
+      "bytes": 5485,
+      "sha256": "597f3774ef31a3e67ace00794c528c86efb5a8995492fff8d8993e848603b4c1"
+    }
+  ],
+  "source_inputs": [
+    {
+      "path": "Cargo.lock",
+      "bytes": 253017,
+      "sha256": "9b64640e32ca3ad9b8c0fbaa445ddc911d059c6de7179d550bbeac73a74e8372",
+      "composition_check": true
+    },
+    {
+      "path": "Cargo.toml",
+      "bytes": 3956,
+      "sha256": "163606d4b9886c5d0f9bb6a4b67fca4823523b4024f17a689dc9bab719c314a7",
+      "composition_check": true
+    },
+    {
+      "path": "crates/incant_game_player/Cargo.toml",
+      "bytes": 5879,
+      "sha256": "86a7ae06e7491f7e6896eee05487488613192f488612e86fc97ea0dc95db01ba",
+      "composition_check": true
+    },
+    {
+      "path": "crates/incant_profile/Cargo.toml",
+      "bytes": 1134,
+      "sha256": "0f1bc4c9dfdb4bb34e9cfd32f4ff719856a56f729bc484469128d1017cb87675",
+      "composition_check": true
+    },
+    {
+      "path": "crates/incant_profile/src/diagnostic.rs",
+      "bytes": 9845,
+      "sha256": "1333ba628b67782282cf6f1866a3fc549a7b2ba22031c9b557b51f15f5d8d8f1",
+      "composition_check": true
+    },
+    {
+      "path": "crates/incant_profile/src/diagnostic/budget.rs",
+      "bytes": 4469,
+      "sha256": "3a5a5dceb72b726662d24b0e5b296c54e26f589e1688875a4aef9e17daa274fa",
+      "composition_check": true
+    },
+    {
+      "path": "crates/incant_profile/src/diagnostic/budget/tests.rs",
+      "bytes": 7149,
+      "sha256": "524cf28e73a5d850e376d6f15ebf90f3bc2bddc518e93abf9b812e2ea44def7c",
+      "composition_check": true
+    },
+    {
+      "path": "crates/incant_profile/src/diagnostic/navigation.rs",
+      "bytes": 3168,
+      "sha256": "3f5e8e87905cd0b11af4ba0b810c652787d68bd7ccea6e4b10a79bfcac07bb09",
+      "composition_check": true
+    },
+    {
+      "path": "crates/incant_profile/src/diagnostic/navigation/tests.rs",
+      "bytes": 4819,
+      "sha256": "03fbbd7642d799ece1a72db6895ad49e4d99c74fe3dc2b836d6a7e70511b68d7",
+      "composition_check": true
+    },
+    {
+      "path": "crates/incant_profile/src/diagnostic/storage.rs",
+      "bytes": 9310,
+      "sha256": "3a5d7a82183e35b730d956d9682c89f3140499a7c2b1320a4c65bee8992100d7",
+      "composition_check": true
+    },
+    {
+      "path": "crates/incant_profile/src/enabled.rs",
+      "bytes": 14792,
+      "sha256": "6abf8360914863ac93990935d2cb60b7c7faab22d52c83ea641712fdac548dc7",
+      "composition_check": true
+    },
+    {
+      "path": "crates/incant_profile/tests/allocations.rs",
+      "bytes": 7439,
+      "sha256": "d7b73a584dd3cd9c10d1cc3e58fc9d3cd9df36999b38165df3857cc56d487c03",
+      "composition_check": true
+    },
+    {
+      "path": "crates/incant_script/Cargo.toml",
+      "bytes": 3090,
+      "sha256": "027351abea66546349416007cada02b2b211e69e59ef3e62c551d743730a09f8",
+      "composition_check": true
+    },
+    {
+      "path": "crates/incant_script/build.rs",
+      "bytes": 8652,
+      "sha256": "02fefea5d174b279fb83acbea8fb918c384216b73af3f8fecbf955035e48c401",
+      "composition_check": true
+    },
+    {
+      "path": "crates/incant_script/src/attribution_tests.rs",
+      "bytes": 4598,
+      "sha256": "b8824fed76a1f82ea493774bee9bd3f481ab5bc657c7fd05403b1fa27bbd99d0",
+      "composition_check": true
+    },
+    {
+      "path": "crates/incant_script/src/budget.rs",
+      "bytes": 3916,
+      "sha256": "ab490d5885d251c250bd0b6363358c7ce7d229cdebcd9b39209a265638cb7f69",
+      "composition_check": true
+    },
+    {
+      "path": "crates/incant_script/src/budget/attribution_tests.rs",
+      "bytes": 4246,
+      "sha256": "fc13f372c43cc0f139d0b535b212003f44bb85aa7b03b870bc0aa27b76d78547",
+      "composition_check": true
+    },
+    {
+      "path": "crates/incant_script/src/diagnostics.rs",
+      "bytes": 3496,
+      "sha256": "1e8cb16e12d03ab66532659decf8a4db2b0028e7622a82b02a768ce97c7e8940",
+      "composition_check": true
+    },
+    {
+      "path": "crates/incant_script/src/lib.rs",
+      "bytes": 33799,
+      "sha256": "21ce2760b79431b7eeb667265130ea1a7d1ee6d72ce2003ccd2e120779e24769",
+      "composition_check": true
+    },
+    {
+      "path": "docs/spikes/script-budget-check-attribution.md",
+      "bytes": 3849,
+      "sha256": "036b5575500fd9b695b44718982aa3c475b49f93feb8639c7793c7bce143ee04",
+      "composition_check": false
+    },
+    {
+      "path": "rust-toolchain.toml",
+      "bytes": 100,
+      "sha256": "c6e63d9832830b858d930007e4fd1fc3f4a3ca1d287483b08077b7f0267ca124",
+      "composition_check": true
+    },
+    {
+      "path": "tools/cargo",
+      "bytes": 179,
+      "sha256": "9aef98d613601b0c374c1d0499afb39d710cbf5002faba537f21be9c11ff72e3",
+      "composition_check": true
+    },
+    {
+      "path": "tools/native_process.py",
+      "bytes": 19307,
+      "sha256": "58dd2a8231d7f9d1e42070fc85425461e06a43f279fa5e7f8e57b4a40c3a3aa4",
+      "composition_check": true
+    },
+    {
+      "path": "tools/tests/test_mac_performance.py",
+      "bytes": 20114,
+      "sha256": "0da7d312c620cffeec7c683a2a730d870fc9a00a01c3a0063aca1cae7720db1d",
+      "composition_check": true
+    },
+    {
+      "path": "tools/tests/test_script_build_identity.py",
+      "bytes": 2641,
+      "sha256": "c068c6b2586c76bbf666716dd75523403a70dc48f3674ddd9a5fda62cf7c6a42",
+      "composition_check": true
+    }
+  ],
+  "binaries": [
+    {
+      "stage": 0,
+      "original": "/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/incant_profile-9aa2ebe839b49bbe",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/cpu-002/0-incant_profile",
+      "sha256": "5a155537946f1d4d38a94ba8f3de063a01696c580ad3e63da3b0ff3113785175",
+      "bytes": 1268944,
+      "features": [
+        "diagnostic-script-budget",
+        "diagnostic-script-phases",
+        "summary"
+      ],
+      "profile": {
+        "opt_level": "1",
+        "debuginfo": 0,
+        "debug_assertions": false,
+        "overflow_checks": false,
+        "test": true
+      }
+    },
+    {
+      "stage": 0,
+      "original": "/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/allocations-8ceb57122a33d2d6",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/cpu-002/0-allocations",
+      "sha256": "138576bced7c533c8f65f853178cf0b89f523152b11a3ad57df6fe58e1997529",
+      "bytes": 545552,
+      "features": [
+        "diagnostic-script-budget",
+        "diagnostic-script-phases",
+        "summary"
+      ],
+      "profile": {
+        "opt_level": "1",
+        "debuginfo": 0,
+        "debug_assertions": false,
+        "overflow_checks": false,
+        "test": true
+      }
+    },
+    {
+      "stage": 1,
+      "original": "/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/allocations-5ea06502cf5b3b61",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/cpu-002/1-allocations",
+      "sha256": "1ffcb0bd688de369f0ae7eed1535726fdec4034c22f671f38480a0058bd14f62",
+      "bytes": 545952,
+      "features": [
+        "diagnostic-navigation",
+        "diagnostic-script-budget",
+        "diagnostic-script-phases",
+        "summary"
+      ],
+      "profile": {
+        "opt_level": "1",
+        "debuginfo": 0,
+        "debug_assertions": false,
+        "overflow_checks": false,
+        "test": true
+      }
+    },
+    {
+      "stage": 1,
+      "original": "/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/incant_profile-f40ef6167cb0ede9",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/cpu-002/1-incant_profile",
+      "sha256": "60bbc2205415e5a4abefee154a8bc0a6a1bcbcd1f0c5762dcf3adc9f6643eb16",
+      "bytes": 1288288,
+      "features": [
+        "diagnostic-navigation",
+        "diagnostic-script-budget",
+        "diagnostic-script-phases",
+        "summary"
+      ],
+      "profile": {
+        "opt_level": "1",
+        "debuginfo": 0,
+        "debug_assertions": false,
+        "overflow_checks": false,
+        "test": true
+      }
+    },
+    {
+      "stage": 2,
+      "original": "/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/allocations-91798eef79521264",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/cpu-002/2-allocations",
+      "sha256": "015efad9b0c80b2f91822155dfb9f533d08f92b56ac6233d583383ad17a1fd80",
+      "bytes": 493904,
+      "features": [
+        "summary"
+      ],
+      "profile": {
+        "opt_level": "1",
+        "debuginfo": 0,
+        "debug_assertions": false,
+        "overflow_checks": false,
+        "test": true
+      }
+    },
+    {
+      "stage": 2,
+      "original": "/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/summary-30c4c1cc8af2583e",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/cpu-002/2-summary",
+      "sha256": "6a94117d4c277651858b00744906cac9fb0bca64677e0b85701eb1f15191a52c",
+      "bytes": 1162856,
+      "features": [
+        "summary"
+      ],
+      "profile": {
+        "opt_level": "1",
+        "debuginfo": 0,
+        "debug_assertions": false,
+        "overflow_checks": false,
+        "test": true
+      }
+    },
+    {
+      "stage": 3,
+      "original": "/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/incant_script-b1a2aaf5b03b7cfa",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/cpu-002/3-incant_script",
+      "sha256": "a98189c7320343a47beb5e6e234ee8ae1a1e365e8717db921ed30cc2f8424681",
+      "bytes": 20434992,
+      "features": [
+        "compiler",
+        "diagnostic-script-budget",
+        "diagnostic-script-phases",
+        "physics-deterministic",
+        "profile"
+      ],
+      "profile": {
+        "opt_level": "1",
+        "debuginfo": 0,
+        "debug_assertions": false,
+        "overflow_checks": false,
+        "test": true
+      }
+    },
+    {
+      "stage": 4,
+      "original": "/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/incant_script-444ef6809546e65b",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/script-budget-check-attribution-001/cpu-002/4-incant_script",
+      "sha256": "42521a5f210fa44e50e3b647cfdf9976168cab38055ffdf1e332183ccd87e91b",
+      "bytes": 20314032,
+      "features": [
+        "compiler",
+        "physics-deterministic",
+        "profile"
+      ],
+      "profile": {
+        "opt_level": "1",
+        "debuginfo": 0,
+        "debug_assertions": false,
+        "overflow_checks": false,
+        "test": true
+      }
+    }
+  ],
+  "outcomes": {
+    "Python": [
+      22,
+      2
+    ],
+    "profile_feature_configurations": [
+      13,
+      18,
+      6
+    ],
+    "script_feature_configurations": [
+      156,
+      151
+    ],
+    "script_ignored_per_configuration": 1,
+    "allocation_executables_passed": 3,
+    "diagnostic_annotation_count_per_allocation_executable": 64000,
+    "diagnostic_frames_per_allocation_executable": 1000,
+    "strict_all_target_lint_configurations_passed": 2,
+    "first_attempt": "compile refusal before Rust tests; ambiguous test import; retained unchanged",
+    "test_only_successor": "explicit incant_profile::diagnostic import; no production/assertion change",
+    "target_growth_bytes": 74090239,
+    "children_cleanup_complete": true
+  },
+  "scope": {
+    "measurement_unrun": true,
+    "eligible_for_performance_gate": false,
+    "no_capture_or_CUA": true,
+    "no_gpu_or_native_window": true,
+    "code_composition": "Git/source-root comparison binds all24 non-document frozen inputs. Source002 document snapshot is historical; subsequent packet prose is docs-only.",
+    "ordinary": "Ordinary feature defaults and report version3 remain unchanged; conservative compatibility identity intentionally changes by adding omitted enforcement sources.",
+    "cost": "Nested wall lock/check observations include observer work and are not reclaimable CPU cost. No cache, changed frequency or predicted saving.",
+    "limits": "CPU fixtures are not a full2156-frame Core shipping run; actual VM checks are distinct from synthetic collector annotations. No full-workload diagnostic/cost or gate is established."
+  }
+}
