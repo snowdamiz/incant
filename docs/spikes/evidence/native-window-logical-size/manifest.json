@@ -1,0 +1,45 @@
+{
+  "format": "incant-native-window-logical-size-evidence-v1",
+  "shipping_source": "e3dfcd9c695d6e1a74f82cb1613891c9e6046bb5",
+  "source_change": "a6c6d9ee",
+  "archive_sha256": "b3f8691108dea18761b8bd7ccb4dae5039cadb288a1e562f7710290c0690d773",
+  "records": [
+    {
+      "name": "qualification.json",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-window-logical-size-001/qualification.json",
+      "bytes": 2429,
+      "sha256": "91898db95396d9da1db702efe6f32b9f75423d76aa16637e00a5b8b8ea10af2a"
+    },
+    {
+      "name": "result.json",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/core-locale-window-001/zh-Hans/window-001/result.json",
+      "bytes": 4736,
+      "sha256": "9d8063c33211cb18fa54a2df6b2a2b620c9fe16a3c70a1deab84b2f88c3e6dcd"
+    },
+    {
+      "name": "eligibility.jsonl",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/core-locale-window-001/zh-Hans/window-001/eligibility.jsonl",
+      "bytes": 66961,
+      "sha256": "a825b19dffe6f79d7eba4b28cf4c9babf44f795a159d19436a0a05618cbe1ace"
+    },
+    {
+      "name": "lose-restart-win.stdout.raw.log",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/core-locale-window-001/zh-Hans/window-001/lose-restart-win.stdout.raw.log",
+      "bytes": 3986,
+      "sha256": "bdfd0c8b766f12e4e68d17a8085918699c16ca7228d1dc9f128180e8f5fdd265"
+    },
+    {
+      "name": "root-visual-review.json",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/core-locale-window-001/zh-Hans/window-001/root-visual-review.json",
+      "bytes": 1893,
+      "sha256": "9712dfbe799def2a98d4ce2d06e6fe0b4c872171e910e788f8a622a3c88b4e17"
+    },
+    {
+      "name": "processes.json",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/core-locale-window-001/zh-Hans/window-001/processes.json",
+      "bytes": 1367,
+      "sha256": "dee7dba13a799d16b85c54ee9af5e05e83e9e11efc647450f4b3ef61c1973cec"
+    }
+  ],
+  "scope": "Source/CPU qualification plus complete actual CJK replay and four scoped inline visual observations. No win image, performance, continuous-motion or phase-gate acceptance."
+}
