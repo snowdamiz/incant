@@ -215,3 +215,11 @@ creation, storage and shader code are unchanged. Eleven portable probe controls
 pass, including seed-hit acceptance and mismatched/error counter refusals. A new
 native run is still needed; neither this correction nor the partial Windows
 result establishes complete reuse, pixel parity or the shader-stall gate.
+
+The corrected source `98450667` passes fresh Windows GNU strict test-target
+Clippy for both ordinary and complete cooked configurations on this Mac.
+The [exact local result](evidence/dx12-pipeline-library/seed-correction-local-check.json)
+retains both commands/logs and positive process cleanup. No Windows binary ran.
+The original CORE target ceiling remains 16,315,702,201 bytes; its final size is
+15,772,603,362 bytes and the cumulative conservative time charge is 421 seconds
+of 3,600. No target cleanup, artifact copying or budget reset occurred.
