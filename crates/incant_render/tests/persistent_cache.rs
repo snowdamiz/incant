@@ -6,6 +6,7 @@ use incant_render::{AmbientOcclusion, Bloom, CacheRead, CacheWrite, Renderer, wg
 use std::{
     fs::{self, File, OpenOptions},
     io::{self, Read, Seek, SeekFrom, Write},
+    os::unix::fs::MetadataExt,
     path::{Path, PathBuf},
     process::{Child, Command, Stdio},
     time::{Duration, Instant},
@@ -148,6 +149,8 @@ fn initialize_catalog(stage: &str) {
     assert_eq!(optional.hub.render_pipelines.num_allocated, 71);
     assert_eq!(optional.hub.compute_pipelines.num_allocated, 2);
 
+    let held_complete = File::open(&cache).unwrap();
+    let complete_identity = held_complete.metadata().unwrap();
     let complete = fs::read(&cache).unwrap();
     let last_report = renderer.pipeline_cache_report.clone();
     assert!(pollster::block_on(renderer.enable_bloom(Bloom { levels: 0, ..bloom })).is_err());
@@ -163,6 +166,12 @@ fn initialize_catalog(stage: &str) {
         complete,
         "refused preparation published bytes"
     );
+    let after_refusal = fs::metadata(&cache).unwrap();
+    assert_eq!(
+        (after_refusal.dev(), after_refusal.ino()),
+        (complete_identity.dev(), complete_identity.ino()),
+        "refused preparation replaced the file even with identical bytes"
+    );
     assert_eq!(renderer.pipeline_cache_report, last_report);
     // Repeated cold configuration retains a bounded live catalog. These are
     // live allocation counts, not cumulative compilation or cache-hit counters.
@@ -177,6 +186,8 @@ fn initialize_catalog(stage: &str) {
     let repeated = instance.generate_report().unwrap();
     assert_eq!(repeated.hub.render_pipelines.num_allocated, 71);
     assert_eq!(repeated.hub.compute_pipelines.num_allocated, 2);
+    let held_before_drop = File::open(&cache).unwrap();
+    let drop_identity = held_before_drop.metadata().unwrap();
     let before_drop = fs::read(&cache).unwrap();
     drop(renderer);
     assert_eq!(
@@ -184,6 +195,14 @@ fn initialize_catalog(stage: &str) {
         before_drop,
         "Drop performed a cache write"
     );
+    let after_drop = fs::metadata(&cache).unwrap();
+    assert_eq!(
+        (after_drop.dev(), after_drop.ino()),
+        (drop_identity.dev(), drop_identity.ino()),
+        "Drop replaced the file even with identical bytes"
+    );
+    // Held descriptors prevent a retired inode from being reused during checks.
+    drop((held_complete, held_before_drop));
     eprintln!("Optional Vulkan catalog: 71 render + 2 compute; no frame/driver-hit claim");
 }
 
