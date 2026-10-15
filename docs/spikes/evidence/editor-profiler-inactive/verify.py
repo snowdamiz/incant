@@ -60,7 +60,7 @@ def main():
     raw = inflate(archive, 16 * 1024**2)
     assert len(raw) == meta['inflated_bytes']
     rows = parse(raw)
-    assert len(rows) == meta['records'] <= 400
+    assert len(rows) == meta['records'] <= 512
     records = {}
     for row in rows:
         safe(row['path'])
@@ -153,6 +153,58 @@ def main():
         assert profile == other and set(b) - set(a) == expected[package] and not set(a) - set(b)
         changed.append(package)
     assert len(changed) == 7 and set(changed) == expected.keys()
+
+    # Separate post-measurement selector qualification, never a timing successor.
+    gate = 'manual-gate-001/'
+    gf = obj(gate + 'source-001/freeze.json')
+    gp, gr = obj(gate + 'cpu-plan-001.json'), obj(gate + 'cpu-001/result.json')
+    gg = obj(gate + 'root-cpu-grant-001.json')
+    assert gf['source'] == gp['source'] == gr['source'] == gg['source'] == manifest['manual_gate']['source']
+    assert gf['source'] != manifest['source'] and len(gf['rows']) == 88
+    for row in gf['rows']:
+        safe(row['path'])
+        original = data(gate + 'source-001/inputs/' + row['path'])
+        assert sha(original) == row['sha256'] and len(original) == row['size']
+        if args.git_source:
+            actual = subprocess.check_output(['git', 'show', gf['source'] + ':' + row['path']], cwd=here.parents[3], timeout=15)
+            assert sha(actual) == row['sha256']
+    assert gp['freeze_sha256'] == sha(data(gate + 'source-001/freeze.json'))
+    assert gg['accepted_for_cpu'] and gr['plan_sha256'] == gg['plan_sha256'] == sha(data(gate + 'cpu-plan-001.json'))
+    assert gr['runner_sha256'] == gg['runner_sha256'] == sha(data(gate + 'qualify-001.py'))
+    assert gr['native_process_sha256'] == sha(data(gate + 'native_process.py'))
+    assert gr['outcome'] == 'success' and gr['error'] is None and not gr['managed_call_active']
+    assert gr['minimum_sampled_free_bytes'] >= gp['minimum_free_bytes']
+    assert gr['target_last_sampled_bytes'] - gr['target_initial_bytes'] <= gp['maximum_target_growth_bytes']
+    assert gr['elapsed_seconds'] <= gp['overall_seconds']
+    assert len(gr['commands']) == 11 and len(gp['steps']) == 10
+    gate_copies = []
+    for command in gr['commands']:
+        assert command['exit_code'] == 0 and command['managed_returned_after_cleanup']
+        for stream in ('stdout', 'stderr'):
+            assert sha(data(gate + f"cpu-001/{command['name']}.{stream}")) == command[stream + '_sha256']
+        gate_copies.extend(command.get('artifacts', []))
+    assert [(r['path'], r['sha256']) for r in gate_copies] == [(r['path'], r['sha256']) for r in manifest['manual_gate']['copied_binaries']]
+    assert len(gate_copies) == 9
+    for step, command in zip(gp['steps'], gr['commands'][1:]):
+        assert step['name'] == command['name'] and step['argv'] == command['argv']
+        log = data(gate + 'cpu-001/' + step['name'] + '.stdout')
+        summaries = re.findall(rb'test result: (ok|FAILED)\. (\d+) passed; (\d+) failed; (\d+) ignored', log)
+        if step['name'].endswith('ignored-exclusion'):
+            assert summaries and all(s == (b'ok', b'0', b'0', b'0') for s in summaries)
+            assert '--ignored' in step['argv'] and 'diagnostic-inactive-profiler' not in step['argv']
+            for line in log.splitlines():
+                try:
+                    event = parse(line)
+                except (ValueError, UnicodeDecodeError):
+                    continue
+                if event.get('reason') == 'compiler-artifact':
+                    assert event['target']['name'] != 'inactive_core'
+        elif step['name'].endswith('manual-controls'):
+            assert summaries == [(b'ok', b'2', b'0', b'1')]
+        elif step['name'] == 'explicit-ignored-list':
+            assert '--ignored' in step['argv'] and '--list' in step['argv']
+            assert re.search(rb'^inactive_core_complete_route: test$', log, re.M)
+            assert re.search(rb'^1 test, 0 benchmarks$', log, re.M)
 
     # Preserve each failed attempt rather than reclassifying its later successor.
     assert obj('cpu-002/result.json')['outcome'] != 'success'
@@ -268,16 +320,18 @@ def main():
     assert comparison['excluded_frames'] == comparison['retries'] == 0 and not comparison['quantiles_averaged']
     assert result['performance_or_shipping_gate'] is None and not result['gpu_window_capture']
     if args.binaries:
-        for row in manifest['copied_binaries'].values():
+        for row in [*manifest['copied_binaries'].values(), *manifest['manual_gate']['copied_binaries']]:
             assert Path(row['path']).stat().st_size == row['bytes'] and file_sha(row['path']) == row['sha256']
     if args.external_inputs:
         for row in manifest['external_inputs']:
             assert Path(row['path']).stat().st_size == row['bytes'] and file_sha(row['path']) == row['sha256']
-    print(json.dumps({'records': len(records), 'source_generations': 2, 'source_rows_each': 88,
+    print(json.dumps({'records': len(records), 'source_generations': 3, 'source_rows_each': 88,
                       'cpu_controls': 4, 'functional_routes': 2, 'timing_routes': 6, 'frames_each': 2156,
                       'all_fixed_pairs_within_local_5_percent': True, 'recorded_logical_pcm_parity': True,
                       'originals_verified': args.originals, 'external_binaries_verified': args.binaries,
                       'external_inputs_verified': args.external_inputs, 'historical_git_source_verified': args.git_source,
+                      'manual_gate_selector_commands': 11, 'manual_gate_pure_controls': 4,
+                      'manual_gate_default_route_selected': False,
                       'shipping_gui_gate_or_zero_overhead_claim': False}))
 
 

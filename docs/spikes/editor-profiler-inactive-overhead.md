@@ -142,3 +142,15 @@ and separately coordinated execution. Listing it does not execute it:
 The original b329 artifacts predate this selection-only gate and remain the
 producing identity for every measurement above. A new selector qualification
 must not be described as a repeated Core run or timing experiment.
+
+Selector source `77042e79726d7d8b0b3cf16053fd9ecc979dcb47` passed eleven managed
+commands in 132.582 seconds. Actual default and `agent-profiler`-only ignored
+selectors each ran zero matching tests and emitted no `inactive_core` target.
+Explicit gated OFF/ON modes each passed the two pure controls with the full route
+still ignored; a separate ignored listing found exactly that one manual route.
+Both strict fixture lint modes, formatting, conventions and diff checks passed.
+Nine executed/listed artifacts were copied; all children returned after cleanup.
+Target growth was 295,412,536 bytes with a sampled free-space minimum of
+74,556,190,720 bytes. No Core execution, Node cook, timing experiment, device or
+window occurred during these checks. The packet preserves this third source
+generation and its receipts separately from the original measurements.
