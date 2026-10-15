@@ -13,14 +13,21 @@ below preserve earlier scoped results and superseded integration snapshots.
 
 ## Core locale qualification — Arabic native replay verified
 
+The native player's initial window now requests 640×480 logical units. A fresh
+CJK shipping replay verifies the actual 1280×960 physical/scale-two viewport on
+this Mac and completes all 3,056 host steps. Four actual captures show readable
+Chinese HUD, loss/restart text and resumed gameplay without the former crowding.
+Focus pauses and the missed final win capture remain explicit; full appearance
+and performance are separate. [Window sizing and evidence](docs/spikes/native-window-logical-size.md).
+
 A fresh Arabic shipping package passes loss, win and loss/restart/win CPU routes,
 with exact gameplay, localized HUD and PCM reset parity. Its complete 3,056-step
 Mac window run matches the CPU observations. A separate visual replay timed out
 after focus interruptions; five partial actual images show joined Arabic, damage,
 loss and restarted gameplay. The default Retina window was crowded at 320×240
 logical units. Full appearance, normal-size layout and RTL health-pip order remain
-open. CJK public authoring passed; its fresh export/window and pseudo-locale
-qualification are pending. [Scoped evidence and replay](docs/spikes/core-locale-native-window.md).
+open. The fresh CJK export/window is recorded above; pseudo-locale qualification
+remains pending. [Scoped evidence and replay](docs/spikes/core-locale-native-window.md).
 
 ## GPU profiler — unavailable counter pairs refused
 
