@@ -1,0 +1,512 @@
+{
+  "schema": 1,
+  "scope": "CPU correctness and compilation only, no native creation API/device/window/GPU/listener or shipping measurement",
+  "outcome": "qualified",
+  "producing_source": "6fa2ba2540280d7bb088d4dd03ec2426779bd8b1",
+  "original_host_source": "f03b510c14b8f15fac3060e20c236c347d91e67d",
+  "main_join": "7dfec59a8be29e6a948363ca8de53af637068ca4",
+  "source_freeze_sha256": "fb8a80678a934420c0691ea5cb47b75dfa3f9785aa4344bdff17723f1339d59a",
+  "evidence_root": "/Users/andreyyurlov/.codex/incant-evidence/native-compilation-host-001",
+  "tests": {
+    "player_observers_profile": 142,
+    "renderer_binding": 3,
+    "player_ordinary_window_profile": 97
+  },
+  "strict_lint": [
+    "player+renderer all-target observers/profile on",
+    "player+renderer all-target ordinary-window/profile"
+  ],
+  "feature_identity": "Actual Cargo/compiler HAL rows admit diagnostic-compilation/presentations for combined player; compilation only for renderer controls; neither for ordinary mode.",
+  "retained_failures": [
+    "CPU001:141pass/1fail because new negative test expected ignored metadata; corrected test requires existing deny_unknown_fields refusal, no production edit.",
+    "CPU002:142pass player controls; standalone renderer compilation refused stale pre-halo dependency metadata. Exact metadata/dep-info/fingerprints retained. Only incant_text/incant_render_data cached fingerprints invalidated; source unchanged."
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "outcome": "failed",
+      "result": "/Users/andreyyurlov/.codex/incant-evidence/native-compilation-host-001/cpu-001/result.json",
+      "result_sha256": "2ef67cb5a2a8d4b28eca080f2a4e7af0932b3d947194f193aa8694c42d6875e0",
+      "elapsed_seconds": 49.078706749976845,
+      "source": "f03b510c14b8f15fac3060e20c236c347d91e67d",
+      "all_managed_children_returned_after_cleanup": true,
+      "commands": [
+        {
+          "name": "rust-version",
+          "exit_code": 0,
+          "test_summary": null
+        },
+        {
+          "name": "locked-offline-metadata",
+          "exit_code": 0,
+          "test_summary": null
+        },
+        {
+          "name": "features-observer",
+          "exit_code": 0,
+          "test_summary": null
+        },
+        {
+          "name": "features-normal",
+          "exit_code": 0,
+          "test_summary": null
+        },
+        {
+          "name": "player-observer-tests",
+          "exit_code": 101,
+          "test_summary": null
+        }
+      ]
+    },
+    {
+      "attempt": 2,
+      "outcome": "failed",
+      "result": "/Users/andreyyurlov/.codex/incant-evidence/native-compilation-host-001/cpu-002/result.json",
+      "result_sha256": "3e96ee9a83170566f8c64da31a53ba51d94ac82b63b4e1a7c91b3e115ee481d5",
+      "elapsed_seconds": 90.3718806670222,
+      "source": "6fa2ba2540280d7bb088d4dd03ec2426779bd8b1",
+      "all_managed_children_returned_after_cleanup": true,
+      "commands": [
+        {
+          "name": "rust-version",
+          "exit_code": 0,
+          "test_summary": null
+        },
+        {
+          "name": "locked-offline-metadata",
+          "exit_code": 0,
+          "test_summary": null
+        },
+        {
+          "name": "features-observer",
+          "exit_code": 0,
+          "test_summary": null
+        },
+        {
+          "name": "features-normal",
+          "exit_code": 0,
+          "test_summary": null
+        },
+        {
+          "name": "player-observer-tests",
+          "exit_code": 0,
+          "test_summary": {
+            "passed": 142,
+            "failed": 0,
+            "ignored": 0
+          }
+        },
+        {
+          "name": "player-observer-tests-inventory",
+          "exit_code": 0,
+          "test_summary": null
+        },
+        {
+          "name": "renderer-binding-tests",
+          "exit_code": 101,
+          "test_summary": null
+        }
+      ]
+    },
+    {
+      "attempt": 3,
+      "outcome": "passed",
+      "result": "/Users/andreyyurlov/.codex/incant-evidence/native-compilation-host-001/cpu-003/result.json",
+      "result_sha256": "d85acebea4cb66ce37fb6375be95513a467666dfa38dbc2011d50d5b290c6a2f",
+      "elapsed_seconds": 110.99171916701016,
+      "source": "6fa2ba2540280d7bb088d4dd03ec2426779bd8b1",
+      "all_managed_children_returned_after_cleanup": true,
+      "commands": [
+        {
+          "name": "rust-version",
+          "exit_code": 0,
+          "test_summary": null
+        },
+        {
+          "name": "locked-offline-metadata",
+          "exit_code": 0,
+          "test_summary": null
+        },
+        {
+          "name": "features-observer",
+          "exit_code": 0,
+          "test_summary": null
+        },
+        {
+          "name": "features-normal",
+          "exit_code": 0,
+          "test_summary": null
+        },
+        {
+          "name": "renderer-binding-tests",
+          "exit_code": 0,
+          "test_summary": {
+            "passed": 3,
+            "failed": 0,
+            "ignored": 0
+          }
+        },
+        {
+          "name": "renderer-binding-tests-inventory",
+          "exit_code": 0,
+          "test_summary": null
+        },
+        {
+          "name": "player-normal-tests",
+          "exit_code": 0,
+          "test_summary": {
+            "passed": 97,
+            "failed": 0,
+            "ignored": 0
+          }
+        },
+        {
+          "name": "player-normal-tests-inventory",
+          "exit_code": 0,
+          "test_summary": null
+        },
+        {
+          "name": "host-observer-clippy",
+          "exit_code": 0,
+          "test_summary": null
+        },
+        {
+          "name": "host-normal-clippy",
+          "exit_code": 0,
+          "test_summary": null
+        }
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "attempt": 1,
+      "command": "player-observer-tests",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-compilation-host-001/cpu-001/binaries/player-observer-tests/incant_game_player-cc310d314a5f74e8",
+      "sha256": "330f783b213e4ed219f3ad0ec7a4b98013bef23223f1cfe44b93de1b6dd696f7",
+      "bytes": 35123984
+    },
+    {
+      "attempt": 2,
+      "command": "player-observer-tests",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-compilation-host-001/cpu-002/binaries/player-observer-tests/incant_game_player-cc310d314a5f74e8",
+      "sha256": "7fbe0fd796a9179989aa378418c787c16ed0b43bb290d621f1d1e12b11b9231b",
+      "bytes": 35141008
+    },
+    {
+      "attempt": 3,
+      "command": "renderer-binding-tests",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-compilation-host-001/cpu-003/binaries/renderer-binding-tests/incant_render-19f098046e6bdd33",
+      "sha256": "292e312329ee5f4be2e17c0e2101dfd89d8bf96a4b15c096870bc8b194e85b86",
+      "bytes": 32902096
+    },
+    {
+      "attempt": 3,
+      "command": "player-normal-tests",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-compilation-host-001/cpu-003/binaries/player-normal-tests/incant_game_player-c47a867930fe2cf7",
+      "sha256": "0b00990d33421e3ff93066a1645b4c74ed8945bf3b00262ab2263455c42e8de4",
+      "bytes": 34742480
+    }
+  ],
+  "records": [
+    {
+      "path": "cpu-001/rust-version.stdout",
+      "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "bytes": 192
+    },
+    {
+      "path": "cpu-001/rust-version.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "cpu-001/locked-offline-metadata.stdout",
+      "sha256": "439dcb4a3daea364a8c7076c73a4bc736a002c0440491419addf6d4280e41d97",
+      "bytes": 306137
+    },
+    {
+      "path": "cpu-001/locked-offline-metadata.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "cpu-001/features-observer.stdout",
+      "sha256": "cc9a107712db16bac01ca67e06fe3e69f54e39d6f5d23d9a1d388d982e7745c2",
+      "bytes": 72373
+    },
+    {
+      "path": "cpu-001/features-observer.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "cpu-001/features-normal.stdout",
+      "sha256": "fb24e28f0a9db13bb3e772f1ac2b1085e4de5153422efda679d3d554d20b3dcf",
+      "bytes": 71133
+    },
+    {
+      "path": "cpu-001/features-normal.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "cpu-001/player-observer-tests.stdout",
+      "sha256": "d4ba503f45981a03b36591ff92e60cbc61271a7033fe9225949ca66382a181ab",
+      "bytes": 492277
+    },
+    {
+      "path": "cpu-001/player-observer-tests.stderr",
+      "sha256": "cc0f123cf6a944cbbb06e0038d0576ed33a6b55d18556f16eef0f943158cb131",
+      "bytes": 8799
+    },
+    {
+      "path": "cpu-002/rust-version.stdout",
+      "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "bytes": 192
+    },
+    {
+      "path": "cpu-002/rust-version.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "cpu-002/locked-offline-metadata.stdout",
+      "sha256": "439dcb4a3daea364a8c7076c73a4bc736a002c0440491419addf6d4280e41d97",
+      "bytes": 306137
+    },
+    {
+      "path": "cpu-002/locked-offline-metadata.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "cpu-002/features-observer.stdout",
+      "sha256": "cc9a107712db16bac01ca67e06fe3e69f54e39d6f5d23d9a1d388d982e7745c2",
+      "bytes": 72373
+    },
+    {
+      "path": "cpu-002/features-observer.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "cpu-002/features-normal.stdout",
+      "sha256": "fb24e28f0a9db13bb3e772f1ac2b1085e4de5153422efda679d3d554d20b3dcf",
+      "bytes": 71133
+    },
+    {
+      "path": "cpu-002/features-normal.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "cpu-002/player-observer-tests.stdout",
+      "sha256": "98c51cd75c5c03a2134d258b013909ca8ffa820a71f2334682ce1f3cbaee2823",
+      "bytes": 491677
+    },
+    {
+      "path": "cpu-002/player-observer-tests.stderr",
+      "sha256": "ef0a630040978021bb276face4944792354c4f8231782fcfa7d33a62c27debb6",
+      "bytes": 7784
+    },
+    {
+      "path": "cpu-002/player-observer-tests-inventory.stdout",
+      "sha256": "3e72334ec1a1a834865f37a241e9e811ec105b0a895d660f07a9e17fefa51179",
+      "bytes": 14099
+    },
+    {
+      "path": "cpu-002/player-observer-tests-inventory.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "cpu-002/renderer-binding-tests.stdout",
+      "sha256": "53dd00df52d7bccb7daf6b5a580ab363749b642e945e7daaa5e5c514ce691703",
+      "bytes": 323930
+    },
+    {
+      "path": "cpu-002/renderer-binding-tests.stderr",
+      "sha256": "85998e62985f9647d4ef3d8d8b07e42816f377ba8dfd53c6bcefef8fc8db7b7d",
+      "bytes": 10306
+    },
+    {
+      "path": "cpu-003/rust-version.stdout",
+      "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "bytes": 192
+    },
+    {
+      "path": "cpu-003/rust-version.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "cpu-003/locked-offline-metadata.stdout",
+      "sha256": "439dcb4a3daea364a8c7076c73a4bc736a002c0440491419addf6d4280e41d97",
+      "bytes": 306137
+    },
+    {
+      "path": "cpu-003/locked-offline-metadata.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "cpu-003/features-observer.stdout",
+      "sha256": "cc9a107712db16bac01ca67e06fe3e69f54e39d6f5d23d9a1d388d982e7745c2",
+      "bytes": 72373
+    },
+    {
+      "path": "cpu-003/features-observer.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "cpu-003/features-normal.stdout",
+      "sha256": "fb24e28f0a9db13bb3e772f1ac2b1085e4de5153422efda679d3d554d20b3dcf",
+      "bytes": 71133
+    },
+    {
+      "path": "cpu-003/features-normal.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "cpu-003/renderer-binding-tests.stdout",
+      "sha256": "4dfc7d2d2d9fd95d86694d58d73115320b14aecfc0d2beb758d3a994b380728a",
+      "bytes": 325237
+    },
+    {
+      "path": "cpu-003/renderer-binding-tests.stderr",
+      "sha256": "1d73495e33b614451ebb958147a60b56ffe123a53ca6920b0df5f9d948b74e93",
+      "bytes": 1198
+    },
+    {
+      "path": "cpu-003/renderer-binding-tests-inventory.stdout",
+      "sha256": "553f4d121403390e8abb924f4a4b844e86be740b06daf1fd50f69a37c6ab3833",
+      "bytes": 22719
+    },
+    {
+      "path": "cpu-003/renderer-binding-tests-inventory.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "cpu-003/player-normal-tests.stdout",
+      "sha256": "19015d3e8fa5108e494ed742e7eb4b2389e9b25ae515299c2ed53b4bdf5b4125",
+      "bytes": 486256
+    },
+    {
+      "path": "cpu-003/player-normal-tests.stderr",
+      "sha256": "6f74affc6cedb8ecad55734406ad36b87c087fe5304c620c3a8115cf1a8bdeaa",
+      "bytes": 9366
+    },
+    {
+      "path": "cpu-003/player-normal-tests-inventory.stdout",
+      "sha256": "fff023458a068ba2ed61eba1cc11af1c937bb94827e7f938e602a45c898faf9d",
+      "bytes": 9189
+    },
+    {
+      "path": "cpu-003/player-normal-tests-inventory.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "cpu-003/host-observer-clippy.stdout",
+      "sha256": "42b40eca4c917bfa4cf1d2b8c07b93e2212ee0f5ae2c8b63aa80fa507ec3071f",
+      "bytes": 497987
+    },
+    {
+      "path": "cpu-003/host-observer-clippy.stderr",
+      "sha256": "99709f4c45ed9aae2d3e72e3cb0e4a52d098ea0be0df113e183b768cbbbc05ee",
+      "bytes": 13376
+    },
+    {
+      "path": "cpu-003/host-normal-clippy.stdout",
+      "sha256": "a46efb21bdfcd83c5b4beb71b7249e571b729383bef4816190ea4d0061ff1e84",
+      "bytes": 497131
+    },
+    {
+      "path": "cpu-003/host-normal-clippy.stderr",
+      "sha256": "c5eefe55473308a03c18f0970c31428eb4b89fdfa5e4adb26a3af3625324c9f4",
+      "bytes": 8222
+    },
+    {
+      "path": "cpu-plan.json",
+      "sha256": "46c08d405993d1814f4ad66133b35e134356e5c14d759ca372d35de4d19190ea",
+      "bytes": 9346
+    },
+    {
+      "path": "cpu-plan-002.json",
+      "sha256": "31486922bfccb2b28359ed4f36cc82d94659569046a26ecb0be9a0813c6ce594",
+      "bytes": 9722
+    },
+    {
+      "path": "cpu-plan-003.json",
+      "sha256": "5360be6aab2ae122e6a90e4891ce460b0dd5298393cdf2e5bd1f14f53d679dd1",
+      "bytes": 6297
+    },
+    {
+      "path": "qualify.py",
+      "sha256": "a0583bef4b09437d4df85c26b5643955563ec8f8272e2eef3f6c0a131756ebf3",
+      "bytes": 10349
+    },
+    {
+      "path": "qualify-002.py",
+      "sha256": "bdcf0f79a436b31de4b1958da80042464c58cce505027be4116f6505b2080f5e",
+      "bytes": 10438
+    },
+    {
+      "path": "qualify-003.py",
+      "sha256": "b5e551a287b81cc497fcff85780208f9395de8221fdc3b1ddb11cf59e0be3450",
+      "bytes": 10559
+    },
+    {
+      "path": "native_process.py",
+      "sha256": "58dd2a8231d7f9d1e42070fc85425461e06a43f279fa5e7f8e57b4a40c3a3aa4",
+      "bytes": 19307
+    },
+    {
+      "path": "source-001/freeze.json",
+      "sha256": "c5ce57074db1b85b1ac62aff2bb6b899c093c2e6bb23b6a2a20abb9400b44227",
+      "bytes": 8158
+    },
+    {
+      "path": "source-002/freeze.json",
+      "sha256": "fb8a80678a934420c0691ea5cb47b75dfa3f9785aa4344bdff17723f1339d59a",
+      "bytes": 8347
+    },
+    {
+      "path": "source-002/repair.patch",
+      "sha256": "7fb1a7443d4c1f558abedd6fa1206398426c9c22c9666114c0205f154fa41784",
+      "bytes": 854
+    },
+    {
+      "path": "cache-repair-003/inventory.json",
+      "sha256": "112d8a88c29dab625fb8764c5b759da43991b8f4b2579985d2196ead9d2ed7bc",
+      "bytes": 68781
+    },
+    {
+      "path": "cache-repair-003/applied.json",
+      "sha256": "fc1f4f6cdc073d0df282b2294e858d0899ea19a8c2688557a2b222d07bf82547",
+      "bytes": 229
+    },
+    {
+      "path": "root-cpu-grant.json",
+      "sha256": "359bc78ec78e28c3998a737d5059bee39638570aa930db8074844defcf0527fa",
+      "bytes": 994
+    }
+  ],
+  "resources": {
+    "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+    "target_and_slot_released": true,
+    "cumulative_elapsed_seconds": 250.4423065840092,
+    "minimum_sampled_free_bytes": 91935801344,
+    "cumulative_target_growth_bytes": 472377454,
+    "free_floor_bytes": 6442450944,
+    "growth_limit_bytes": 2147483648
+  },
+  "gpu_execution": false,
+  "native_window_execution": false,
+  "shader_stall_gate": false,
+  "presentation_performance_gate": false,
+  "actual_hardware_observation_pending": true
+}

@@ -2,7 +2,11 @@
 //! and script publication. This host never rolls back the world or a device cursor.
 mod binding;
 mod checkpoint;
+#[cfg(all(feature = "device", not(target_arch = "wasm32")))]
+mod device;
 pub use checkpoint::{MAX_AUDIO_CHECKPOINT_BYTES, PendingAudioCheckpoint};
+#[cfg(all(feature = "device", not(target_arch = "wasm32")))]
+pub use device::DeviceAudioDiagnostics;
 mod prepare;
 use crate::{
     AudioError, AudioManagerSettings, Bus, Mixer, OfflineBackend, PlaybackState, Result, VoiceId,
@@ -49,6 +53,8 @@ struct PreparedSource {
 /// reusable scratch; steady-state sync allocates no per-source strings or arrays.
 pub struct SceneAudio<B: Backend> {
     mixer: Option<Mixer<B>>,
+    #[cfg(all(feature = "device", not(target_arch = "wasm32")))]
+    device_diagnostics: DeviceAudioDiagnostics,
     clips: BTreeMap<StableId, ClipBinding>,
     buses: BTreeMap<StableId, BusState>,
     sources: BTreeMap<StableId, Source>,
@@ -117,6 +123,8 @@ where
         }
         let mut host = Self {
             mixer: None,
+            #[cfg(all(feature = "device", not(target_arch = "wasm32")))]
+            device_diagnostics: DeviceAudioDiagnostics::default(),
             clips,
             buses,
             sources: BTreeMap::new(),
@@ -366,26 +374,20 @@ impl SceneAudio<OfflineBackend> {
 
 #[cfg(all(feature = "device", not(target_arch = "wasm32")))]
 impl SceneAudio<crate::DeviceBackend> {
-    /// Observe the real CPAL backend error queue. Any reported or discarded
-    /// error is terminal; absence of an observed error is not a liveness proof.
+    /// Observe the real CPAL queue. Typed xruns are counted without replacing
+    /// the mixer. Other errors, unavailable queues and discarded events remain
+    /// terminal. Absence of an observed error is not a liveness proof.
     pub fn check_device(&mut self) -> Result<()> {
         let backend = self
             .mixer
             .as_mut()
             .ok_or(AudioError::FailedSession)?
             .backend_mut();
-        let result = if backend
-            .num_stream_errors_discarded()
-            .is_none_or(|count| count != 0)
-        {
-            Err(AudioError::Backend(
-                "device error queue unavailable or errors discarded".into(),
-            ))
-        } else if let Some(error) = backend.pop_error() {
-            Err(AudioError::Backend(error.to_string()))
-        } else {
-            Ok(())
-        };
+        let result = self.device_diagnostics.poll(backend);
         self.terminal(result)
+    }
+
+    pub fn device_audio_diagnostics(&self) -> DeviceAudioDiagnostics {
+        self.device_diagnostics
     }
 }

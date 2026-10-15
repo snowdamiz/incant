@@ -1,0 +1,1759 @@
+--- a/Cargo.toml
++++ b/Cargo.toml
+@@ -50,6 +50,9 @@
+ ignored = ["cfg_aliases"]
+ 
+ [features]
++# Incant private diagnostic only; off in all normal feature graphs.
++diagnostic-presentations = ["objc2-metal?/objc2-core-foundation"]
++diagnostic-compilation = []
+ device_lost_panic = []
+ dx12 = [
+     "dep:arrayvec",
+--- a/src/metal/adapter.rs
++++ b/src/metal/adapter.rs
+@@ -96,6 +96,8 @@
+ 
+         Ok(crate::OpenDevice {
+             device: super::Device {
++                #[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
++                compilation_observer: Default::default(),
+                 shared: Arc::clone(&self.shared),
+                 features,
+                 counters: Default::default(),
+--- /dev/null
++++ b/src/metal/compilation.rs
+@@ -0,0 +1,439 @@
++//! Default-off observation of native creation calls, not proof of driver work.
++use alloc::{boxed::Box, sync::Arc, vec::Vec};
++use core::{
++    fmt,
++    mem::size_of,
++    sync::atomic::{AtomicU64, Ordering},
++};
++use parking_lot::Mutex;
++use std::{
++    thread::{self, ThreadId},
++    time::Instant,
++};
++
++pub const MAX_SAMPLES: usize = 4096;
++const _: () = assert!(size_of::<Row>() <= 96);
++static NEXT_DEVICE: AtomicU64 = AtomicU64::new(1);
++
++#[derive(Clone, Copy, Debug, PartialEq, Eq)]
++pub enum Error {
++    Capacity,
++    Allocation,
++    AlreadyStarted,
++    NotStarted,
++    Context,
++    ScopeBusy,
++    Identity,
++}
++#[derive(Clone, Copy, Debug, PartialEq, Eq)]
++#[repr(u8)]
++pub enum Kind {
++    NagaLibrary,
++    MslLibrary,
++    BinaryLibrary,
++    RenderPipeline,
++    MeshPipeline,
++    ComputePipeline,
++}
++pub const KIND_COUNT: usize = 6;
++#[derive(Clone, Copy, Debug, PartialEq, Eq)]
++pub enum Stage {
++    Unspecified,
++    Vertex,
++    Fragment,
++    Compute,
++    Task,
++    Mesh,
++    RayGeneration,
++    Miss,
++    AnyHit,
++    ClosestHit,
++}
++#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
++pub enum Phase {
++    #[default]
++    Unscoped,
++    Startup,
++    Catalog,
++    Background,
++    Gameplay,
++}
++#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
++pub struct Context {
++    pub session_generation: u64,
++    pub surface_generation: u64,
++    pub segment: u64,
++    pub host_step: u64,
++    pub phase: Phase,
++}
++#[derive(Clone, Copy, Debug, PartialEq, Eq)]
++pub enum Outcome {
++    Pending,
++    Success,
++    Error,
++    Unwound,
++}
++#[derive(Clone, Copy, Debug, PartialEq, Eq)]
++pub enum ErrorDomain {
++    None,
++    Library,
++    RenderPipeline,
++    ComputePipeline,
++    Other,
++}
++#[derive(Clone, Copy, Debug, PartialEq, Eq)]
++pub struct ErrorIdentity {
++    pub domain: ErrorDomain,
++    pub code: i64,
++}
++#[derive(Clone, Copy, Debug, PartialEq, Eq)]
++pub struct Row {
++    pub sequence: u64,
++    pub context: Context,
++    /// None when the entry clock precedes the device epoch.
++    pub begin_ns: Option<u64>,
++    /// None while pending or when the end clock precedes entry; outcome
++    /// distinguishes those states. A genuine zero duration remains Some(0).
++    pub elapsed_ns: Option<u64>,
++    pub error_code: i64,
++    pub kind: Kind,
++    pub stage: Stage,
++    pub outcome: Outcome,
++    pub error_domain: ErrorDomain,
++}
++#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
++pub struct Counts {
++    pub attempts: u64,
++    pub successes: u64,
++    pub errors: u64,
++    pub unwound: u64,
++}
++/// Cumulative invalid clock comparisons, including calls without retained rows.
++#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
++pub struct ClockAnomalies {
++    pub entry: u64,
++    pub completion: u64,
++    pub snapshot: u64,
++}
++struct ActiveScope {
++    thread: ThreadId,
++    context: Context,
++}
++struct State {
++    rows: Option<Box<[Row]>>,
++    used: usize,
++    sequence: u64,
++    counts: [Counts; KIND_COUNT],
++    unbound: [Counts; KIND_COUNT],
++    overflow: u64,
++    clock_anomalies: ClockAnomalies,
++    saturated: bool,
++    scope: Option<ActiveScope>,
++}
++struct Shared {
++    device: u64,
++    epoch: Instant,
++    state: Mutex<State>,
++}
++/// A diagnostic handle only: owns no native device, pipeline, window or callback.
++#[derive(Clone)]
++pub struct Observer(Arc<Shared>);
++impl fmt::Debug for Observer {
++    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
++        f.debug_struct("CompilationObserver")
++            .field("device", &self.0.device)
++            .finish_non_exhaustive()
++    }
++}
++impl Default for Observer {
++    fn default() -> Self {
++        let device = take_identity(&NEXT_DEVICE);
++        Self(Arc::new(Shared {
++            device,
++            epoch: Instant::now(),
++            state: Mutex::new(State {
++                rows: None,
++                used: 0,
++                sequence: 0,
++                counts: [Counts::default(); KIND_COUNT],
++                unbound: [Counts::default(); KIND_COUNT],
++                overflow: 0,
++                clock_anomalies: ClockAnomalies::default(),
++                saturated: false,
++                scope: None,
++            }),
++        }))
++    }
++}
++#[derive(Clone, Debug)]
++pub struct Snapshot {
++    pub device: u64,
++    pub rows: Vec<Row>,
++    pub counts: [Counts; KIND_COUNT],
++    /// Calls entered before capture was started, including later completions.
++    pub unbound: [Counts; KIND_COUNT],
++    pub overflow: u64,
++    pub clock_anomalies: ClockAnomalies,
++    pub saturated: bool,
++    pub capture_started: bool,
++    pub scope_active: bool,
++    /// None when the snapshot clock precedes the device epoch.
++    pub snapshot_ns: Option<u64>,
++}
++impl Observer {
++    /// Allocate once on a cold host path, before catalog preparation. Never reset
++    /// counts or discard a prefix when capture starts. Not a GPU operation.
++    pub fn start(&self, capacity: usize) -> Result<(), Error> {
++        if capacity == 0 || capacity > MAX_SAMPLES {
++            return Err(Error::Capacity);
++        }
++        if self.0.device == 0 {
++            return Err(Error::Identity);
++        }
++        let mut state = self.0.state.lock();
++        if state.rows.is_some() {
++            return Err(Error::AlreadyStarted);
++        }
++        let mut rows = Vec::new();
++        rows.try_reserve_exact(capacity)
++            .map_err(|_| Error::Allocation)?;
++        rows.resize(
++            capacity,
++            Row {
++                sequence: 0,
++                context: Context::default(),
++                begin_ns: None,
++                elapsed_ns: None,
++                error_code: 0,
++                kind: Kind::NagaLibrary,
++                stage: Stage::Unspecified,
++                outcome: Outcome::Pending,
++                error_domain: ErrorDomain::None,
++            },
++        );
++        state.rows = Some(rows.into_boxed_slice());
++        Ok(())
++    }
++    /// Scope only the calling thread. Other threads remain explicitly unscoped.
++    /// Reject nesting instead of attributing work to a newer ambient context.
++    pub fn scope(&self, context: Context) -> Result<Scope, Error> {
++        if context.phase == Phase::Unscoped
++            || context.session_generation == 0
++            || context.phase == Phase::Gameplay
++                && (context.surface_generation == 0
++                    || context.segment == 0
++                    || context.host_step == 0)
++        {
++            return Err(Error::Context);
++        }
++        let mut state = self.0.state.lock();
++        if state.rows.is_none() {
++            return Err(Error::NotStarted);
++        }
++        if state.scope.is_some() {
++            return Err(Error::ScopeBusy);
++        }
++        state.scope = Some(ActiveScope {
++            thread: thread::current().id(),
++            context,
++        });
++        Ok(Scope(self.clone()))
++    }
++    pub(crate) fn begin(&self, kind: Kind, stage: Stage) -> Call {
++        let mut state = self.0.state.lock();
++        let index = kind as usize;
++        let mut saturated = state.saturated;
++        bump(&mut state.sequence, &mut saturated);
++        bump(&mut state.counts[index].attempts, &mut saturated);
++        let unbound = state.rows.is_none();
++        if unbound {
++            bump(&mut state.unbound[index].attempts, &mut saturated);
++        }
++        let context = state
++            .scope
++            .as_ref()
++            .filter(|s| s.thread == thread::current().id())
++            .map_or_else(Context::default, |s| s.context);
++        let sequence = state.sequence;
++        let at = state.used;
++        let slot = match state.rows.as_mut() {
++            Some(rows) if at < rows.len() => {
++                rows[at] = Row {
++                    sequence,
++                    context,
++                    begin_ns: None,
++                    elapsed_ns: None,
++                    error_code: 0,
++                    kind,
++                    stage,
++                    outcome: Outcome::Pending,
++                    error_domain: ErrorDomain::None,
++                };
++                state.used += 1;
++                Some(at)
++            }
++            Some(_) => {
++                bump(&mut state.overflow, &mut saturated);
++                None
++            }
++            None => None,
++        };
++        // Timestamp after admission bookkeeping. The native call follows begin;
++        // return/dispatch overhead remains in the observed window.
++        let begin = Instant::now();
++        let begin_ns = checked_nanos(
++            begin,
++            self.0.epoch,
++            &mut state.clock_anomalies.entry,
++            &mut saturated,
++        );
++        if let Some(slot) = slot {
++            state.rows.as_mut().unwrap()[slot].begin_ns = begin_ns;
++        }
++        state.saturated = saturated;
++        Call {
++            observer: self.clone(),
++            kind,
++            unbound,
++            slot,
++            begin,
++            completed: false,
++        }
++    }
++    /// Final/cold-path allocation only. Pending rows remain pending; no wait,
++    /// GPU polling or invented completion. Snapshot/JSON memory is additional.
++    pub fn snapshot(&self) -> Snapshot {
++        let mut state = self.0.state.lock();
++        let mut saturated = state.saturated;
++        let snapshot_ns = checked_nanos(
++            Instant::now(),
++            self.0.epoch,
++            &mut state.clock_anomalies.snapshot,
++            &mut saturated,
++        );
++        state.saturated = saturated;
++        Snapshot {
++            device: self.0.device,
++            rows: state
++                .rows
++                .as_ref()
++                .map_or_else(Vec::new, |rows| rows[..state.used].to_vec()),
++            counts: state.counts,
++            unbound: state.unbound,
++            overflow: state.overflow,
++            clock_anomalies: state.clock_anomalies,
++            saturated,
++            capture_started: state.rows.is_some(),
++            scope_active: state.scope.is_some(),
++            snapshot_ns,
++        }
++    }
++}
++/// Drop clears only diagnostic context; no native operation or wait.
++pub struct Scope(Observer);
++impl Drop for Scope {
++    fn drop(&mut self) {
++        let observer = &self.0;
++        observer.0.state.lock().scope = None;
++    }
++}
++pub(crate) struct Call {
++    observer: Observer,
++    kind: Kind,
++    unbound: bool,
++    slot: Option<usize>,
++    begin: Instant,
++    completed: bool,
++}
++impl Call {
++    pub(super) fn complete(mut self, ended: Instant, error: Option<ErrorIdentity>) {
++        self.record(
++            ended,
++            error.map_or(Outcome::Success, |_| Outcome::Error),
++            error,
++        );
++    }
++    fn record(&mut self, ended: Instant, outcome: Outcome, error: Option<ErrorIdentity>) {
++        let mut state = self.observer.0.state.lock();
++        let mut saturated = state.saturated;
++        let elapsed_ns = checked_nanos(
++            ended,
++            self.begin,
++            &mut state.clock_anomalies.completion,
++            &mut saturated,
++        );
++        let index = self.kind as usize;
++        finish(&mut state.counts[index], outcome, &mut saturated);
++        if self.unbound {
++            finish(&mut state.unbound[index], outcome, &mut saturated);
++        }
++        if let Some(slot) = self.slot {
++            let row = &mut state.rows.as_mut().unwrap()[slot];
++            row.elapsed_ns = elapsed_ns;
++            row.outcome = outcome;
++            if let Some(error) = error {
++                row.error_domain = error.domain;
++                row.error_code = error.code;
++            }
++        }
++        state.saturated = saturated;
++        self.completed = true;
++    }
++}
++impl Drop for Call {
++    fn drop(&mut self) {
++        if !self.completed {
++            self.record(Instant::now(), Outcome::Unwound, None);
++        }
++    }
++}
++fn take_identity(counter: &AtomicU64) -> u64 {
++    let mut value = counter.load(Ordering::Relaxed);
++    loop {
++        let Some(next) = value.checked_add(1) else {
++            return 0;
++        };
++        match counter.compare_exchange_weak(value, next, Ordering::Relaxed, Ordering::Relaxed) {
++            Ok(_) => return value,
++            Err(current) => value = current,
++        }
++    }
++}
++fn bump(value: &mut u64, saturated: &mut bool) {
++    if let Some(next) = value.checked_add(1) {
++        *value = next;
++    } else {
++        *saturated = true;
++    }
++}
++fn nanos(value: u128, saturated: &mut bool) -> u64 {
++    u64::try_from(value).unwrap_or_else(|_| {
++        *saturated = true;
++        u64::MAX
++    })
++}
++fn checked_nanos(
++    end: Instant,
++    start: Instant,
++    anomalies: &mut u64,
++    saturated: &mut bool,
++) -> Option<u64> {
++    match end.checked_duration_since(start) {
++        Some(duration) => Some(nanos(duration.as_nanos(), saturated)),
++        None => {
++            bump(anomalies, saturated);
++            None
++        }
++    }
++}
++fn finish(counts: &mut Counts, outcome: Outcome, saturated: &mut bool) {
++    match outcome {
++        Outcome::Success => bump(&mut counts.successes, saturated),
++        Outcome::Error => bump(&mut counts.errors, saturated),
++        Outcome::Unwound => bump(&mut counts.unwound, saturated),
++        Outcome::Pending => unreachable!("A pending call is not completed"),
++    }
++}
++#[cfg(test)]
++#[path = "compilation_tests.rs"]
++mod tests;
+--- /dev/null
++++ b/src/metal/compilation_native.rs
+@@ -0,0 +1,35 @@
++//! Native error identity is observed before the existing error mapping.
++use super::compilation::{Call, ErrorDomain, ErrorIdentity, Observer};
++use objc2::rc::Retained;
++use objc2_foundation::{ns_string, NSError, NSString};
++use std::time::Instant;
++
++impl super::Device {
++    /// Clone a diagnostic-only handle; it cannot retain this native device.
++    pub fn compilation_observer(&self) -> Observer {
++        self.compilation_observer.clone()
++    }
++}
++impl Call {
++    pub(super) fn finish_native<T>(self, result: &Result<T, Retained<NSError>>) {
++        let ended = Instant::now();
++        let error = result.as_ref().err().map(|error| {
++            let domain = error.domain();
++            let domain: &NSString = &domain;
++            let domain = if domain == ns_string!("MTLLibraryErrorDomain") {
++                ErrorDomain::Library
++            } else if domain == ns_string!("MTLRenderPipelineErrorDomain") {
++                ErrorDomain::RenderPipeline
++            } else if domain == ns_string!("MTLComputePipelineErrorDomain") {
++                ErrorDomain::ComputePipeline
++            } else {
++                ErrorDomain::Other
++            };
++            ErrorIdentity {
++                domain,
++                code: error.code() as i64,
++            }
++        });
++        self.complete(ended, error);
++    }
++}
+--- /dev/null
++++ b/src/metal/compilation_tests.rs
+@@ -0,0 +1,345 @@
++use super::*;
++use std::panic;
++use std::time::Duration;
++
++fn context(step: u64) -> Context {
++    Context {
++        session_generation: 1,
++        surface_generation: 2,
++        segment: 3,
++        host_step: step,
++        phase: Phase::Gameplay,
++    }
++}
++fn success(observer: &Observer, kind: Kind) {
++    observer
++        .begin(kind, Stage::Unspecified)
++        .complete(Instant::now(), None);
++}
++fn observed<T>(
++    observer: &Observer,
++    operation: impl FnOnce() -> Result<T, ErrorIdentity>,
++) -> Result<T, ErrorIdentity> {
++    let call = observer.begin(Kind::ComputePipeline, Stage::Compute);
++    let result = operation();
++    call.complete(Instant::now(), result.as_ref().err().copied());
++    result
++}
++
++#[test]
++fn capacity_and_identity_are_admitted_before_recording() {
++    let observer = Observer::default();
++    assert_eq!(observer.start(0), Err(Error::Capacity));
++    assert_eq!(observer.start(MAX_SAMPLES + 1), Err(Error::Capacity));
++    assert!(observer.scope(context(1)).is_err());
++    observer.start(1).unwrap();
++    assert_eq!(observer.start(1), Err(Error::AlreadyStarted));
++    assert!(observer.snapshot().rows.is_empty());
++}
++
++#[test]
++fn unbound_prefix_is_not_reconstructed_as_timed_rows() {
++    let observer = Observer::default();
++    let old = observer.begin(Kind::MslLibrary, Stage::Unspecified);
++    observer.start(2).unwrap();
++    old.complete(Instant::now(), None);
++    success(&observer, Kind::MslLibrary);
++    let snapshot = observer.snapshot();
++    assert_eq!(snapshot.rows.len(), 1);
++    assert_eq!(snapshot.rows[0].sequence, 2);
++    let index = Kind::MslLibrary as usize;
++    assert_eq!(snapshot.counts[index].attempts, 2);
++    assert_eq!(snapshot.counts[index].successes, 2);
++    assert_eq!(snapshot.unbound[index].attempts, 1);
++    assert_eq!(snapshot.unbound[index].successes, 1);
++}
++
++#[test]
++fn device_counters_and_rows_are_independent() {
++    let a = Observer::default();
++    let b = Observer::default();
++    a.start(1).unwrap();
++    b.start(1).unwrap();
++    success(&a, Kind::RenderPipeline);
++    assert_ne!(a.snapshot().device, b.snapshot().device);
++    assert_eq!(a.snapshot().rows.len(), 1);
++    assert!(b.snapshot().rows.is_empty());
++    assert_eq!(b.snapshot().counts, [Counts::default(); KIND_COUNT]);
++}
++
++#[test]
++fn host_scope_never_attributes_other_thread_work() {
++    let observer = Observer::default();
++    observer.start(2).unwrap();
++    let scope = observer.scope(context(17)).unwrap();
++    let cloned = observer.clone();
++    thread::spawn(move || success(&cloned, Kind::RenderPipeline))
++        .join()
++        .unwrap();
++    success(&observer, Kind::RenderPipeline);
++    drop(scope);
++    let snapshot = observer.snapshot();
++    assert_eq!(snapshot.rows[0].context, Context::default());
++    assert_eq!(snapshot.rows[1].context, context(17));
++    assert!(!snapshot.scope_active);
++}
++
++#[test]
++fn invalid_and_nested_contexts_refuse_without_overwriting_scope() {
++    let observer = Observer::default();
++    observer.start(1).unwrap();
++    assert!(matches!(
++        observer.scope(Context::default()),
++        Err(Error::Context)
++    ));
++    assert!(matches!(observer.scope(context(0)), Err(Error::Context)));
++    let scope = observer.scope(context(1)).unwrap();
++    assert!(matches!(observer.scope(context(2)), Err(Error::ScopeBusy)));
++    success(&observer, Kind::NagaLibrary);
++    drop(scope);
++    assert_eq!(observer.snapshot().rows[0].context, context(1));
++}
++
++#[test]
++fn in_flight_call_keeps_entry_scope_when_host_scope_changes() {
++    let observer = Observer::default();
++    observer.start(2).unwrap();
++    let old_scope = observer.scope(context(1)).unwrap();
++    let call = observer.begin(Kind::ComputePipeline, Stage::Compute);
++    drop(old_scope);
++    let new_scope = observer.scope(context(2)).unwrap();
++    success(&observer, Kind::ComputePipeline);
++    call.complete(Instant::now(), None);
++    drop(new_scope);
++    let rows = observer.snapshot().rows;
++    assert_eq!(rows[0].context, context(1));
++    assert_eq!(rows[1].context, context(2));
++    assert_eq!(rows[0].sequence, 1);
++    assert_eq!(rows[1].sequence, 2);
++}
++
++#[test]
++fn native_result_and_error_are_returned_unchanged_exactly_once() {
++    let observer = Observer::default();
++    observer.start(2).unwrap();
++    let mut calls = 0;
++    let object = Box::new(37);
++    let pointer = object.as_ref() as *const i32;
++    let returned = observed(&observer, || {
++        calls += 1;
++        Ok(object)
++    })
++    .unwrap();
++    assert_eq!(returned.as_ref() as *const i32, pointer);
++    let error = ErrorIdentity {
++        domain: ErrorDomain::ComputePipeline,
++        code: -29,
++    };
++    let failed: Result<(), _> = observed(&observer, || {
++        calls += 1;
++        Err(error)
++    });
++    assert_eq!(failed, Err(error));
++    assert_eq!(calls, 2);
++    let snapshot = observer.snapshot();
++    assert_eq!(snapshot.rows[0].outcome, Outcome::Success);
++    assert_eq!(snapshot.rows[1].outcome, Outcome::Error);
++    assert_eq!(snapshot.rows[1].error_domain, error.domain);
++    assert_eq!(snapshot.rows[1].error_code, error.code);
++}
++
++#[test]
++fn scope_and_call_unwinding_remain_observable() {
++    let observer = Observer::default();
++    observer.start(1).unwrap();
++    let result = panic::catch_unwind(panic::AssertUnwindSafe(|| {
++        let _scope = observer.scope(context(1)).unwrap();
++        let _call = observer.begin(Kind::RenderPipeline, Stage::Unspecified);
++        panic!("injected native-call failure");
++    }));
++    assert!(result.is_err());
++    let snapshot = observer.snapshot();
++    assert!(!snapshot.scope_active);
++    assert_eq!(snapshot.rows[0].outcome, Outcome::Unwound);
++    assert_eq!(snapshot.counts[Kind::RenderPipeline as usize].unwound, 1);
++}
++
++#[test]
++fn overflow_retains_cumulative_outcomes_without_allocating_rows() {
++    let observer = Observer::default();
++    observer.start(1).unwrap();
++    success(&observer, Kind::RenderPipeline);
++    success(&observer, Kind::RenderPipeline);
++    drop(observer.begin(Kind::RenderPipeline, Stage::Unspecified));
++    let snapshot = observer.snapshot();
++    assert_eq!(snapshot.rows.len(), 1);
++    assert_eq!(snapshot.overflow, 2);
++    assert_eq!(
++        snapshot.counts[Kind::RenderPipeline as usize],
++        Counts {
++            attempts: 3,
++            successes: 2,
++            errors: 0,
++            unwound: 1
++        }
++    );
++}
++
++#[test]
++fn snapshot_does_not_turn_pending_into_completion() {
++    let observer = Observer::default();
++    observer.start(1).unwrap();
++    let pending = observer.begin(Kind::BinaryLibrary, Stage::Unspecified);
++    let before = observer.snapshot();
++    assert_eq!(before.rows[0].outcome, Outcome::Pending);
++    assert_eq!(before.rows[0].elapsed_ns, None);
++    pending.complete(Instant::now(), None);
++    assert_eq!(before.rows[0].outcome, Outcome::Pending);
++    assert_eq!(observer.snapshot().rows[0].outcome, Outcome::Success);
++}
++
++#[test]
++fn destruction_does_not_cancel_cumulative_creation_counts() {
++    let observer = Observer::default();
++    observer.start(2).unwrap();
++    for _ in 0..2 {
++        let object = observed(&observer, || Ok(Box::new(1))).unwrap();
++        drop(object);
++    }
++    let count = observer.snapshot().counts[Kind::ComputePipeline as usize];
++    assert_eq!(count.attempts, 2);
++    assert_eq!(count.successes, 2);
++}
++
++#[test]
++fn counters_and_duration_overflow_flag_saturation() {
++    let observer = Observer::default();
++    observer.start(1).unwrap();
++    {
++        let mut state = observer.0.state.lock();
++        state.sequence = u64::MAX;
++        state.counts[Kind::RenderPipeline as usize].attempts = u64::MAX;
++        state.counts[Kind::RenderPipeline as usize].successes = u64::MAX;
++    }
++    success(&observer, Kind::RenderPipeline);
++    let snapshot = observer.snapshot();
++    assert!(snapshot.saturated);
++    assert_eq!(snapshot.rows[0].sequence, u64::MAX);
++    let mut saturated = false;
++    assert_eq!(nanos(u128::MAX, &mut saturated), u64::MAX);
++    assert!(saturated);
++}
++
++#[test]
++fn collector_handle_survives_owner_without_native_retention() {
++    let observer = Observer::default();
++    observer.start(1).unwrap();
++    let retained = observer.clone();
++    let call = observer.begin(Kind::MslLibrary, Stage::Unspecified);
++    drop(observer);
++    call.complete(Instant::now(), None);
++    assert_eq!(retained.snapshot().rows[0].outcome, Outcome::Success);
++}
++
++#[test]
++fn backward_end_is_invalid_time_without_changing_native_error() {
++    let observer = Observer::default();
++    observer.start(1).unwrap();
++    let call = observer.begin(Kind::ComputePipeline, Stage::Compute);
++    let backwards = call.begin.checked_sub(Duration::from_nanos(1)).unwrap();
++    let error = ErrorIdentity {
++        domain: ErrorDomain::ComputePipeline,
++        code: -29,
++    };
++    call.complete(backwards, Some(error));
++    let snapshot = observer.snapshot();
++    let row = snapshot.rows[0];
++    assert!(row.begin_ns.is_some());
++    assert_eq!(row.elapsed_ns, None);
++    assert_eq!(row.outcome, Outcome::Error);
++    assert_eq!(row.error_domain, error.domain);
++    assert_eq!(row.error_code, error.code);
++    assert_eq!(snapshot.counts[Kind::ComputePipeline as usize].errors, 1);
++    assert_eq!(snapshot.clock_anomalies.completion, 1);
++    assert_eq!(observer.snapshot().clock_anomalies.completion, 1);
++}
++
++#[test]
++fn equal_end_is_a_valid_zero_duration() {
++    let observer = Observer::default();
++    observer.start(1).unwrap();
++    let call = observer.begin(Kind::RenderPipeline, Stage::Unspecified);
++    let end = call.begin;
++    call.complete(end, None);
++    let snapshot = observer.snapshot();
++    assert_eq!(snapshot.rows[0].elapsed_ns, Some(0));
++    assert_eq!(snapshot.rows[0].outcome, Outcome::Success);
++    assert_eq!(snapshot.clock_anomalies, ClockAnomalies::default());
++}
++
++#[test]
++fn backward_entry_and_snapshot_are_absent_and_retained_as_anomalies() {
++    let mut observer = Observer::default();
++    Arc::get_mut(&mut observer.0).unwrap().epoch = Instant::now()
++        .checked_add(Duration::from_secs(3600))
++        .unwrap();
++    observer.start(1).unwrap();
++    success(&observer, Kind::NagaLibrary);
++    let snapshot = observer.snapshot();
++    assert_eq!(snapshot.rows[0].begin_ns, None);
++    assert!(snapshot.rows[0].elapsed_ns.is_some());
++    assert_eq!(snapshot.rows[0].outcome, Outcome::Success);
++    assert_eq!(snapshot.snapshot_ns, None);
++    assert_eq!(
++        snapshot.clock_anomalies,
++        ClockAnomalies {
++            entry: 1,
++            completion: 0,
++            snapshot: 1,
++        }
++    );
++    assert_eq!(observer.snapshot().clock_anomalies.snapshot, 2);
++}
++
++#[test]
++fn missing_rows_do_not_hide_backward_completion() {
++    let observer = Observer::default();
++    let unbound = observer.begin(Kind::MslLibrary, Stage::Unspecified);
++    observer.start(1).unwrap();
++    success(&observer, Kind::MslLibrary);
++    let overflow = observer.begin(Kind::MslLibrary, Stage::Unspecified);
++    for call in [unbound, overflow] {
++        let end = call.begin.checked_sub(Duration::from_nanos(1)).unwrap();
++        call.complete(end, None);
++    }
++    let snapshot = observer.snapshot();
++    assert_eq!(snapshot.rows.len(), 1);
++    assert_eq!(snapshot.overflow, 1);
++    assert_eq!(snapshot.clock_anomalies.completion, 2);
++    assert_eq!(snapshot.counts[Kind::MslLibrary as usize].successes, 3);
++    assert_eq!(snapshot.unbound[Kind::MslLibrary as usize].successes, 1);
++}
++
++#[test]
++fn clock_anomaly_counter_saturation_is_retained() {
++    let observer = Observer::default();
++    observer.start(1).unwrap();
++    observer.0.state.lock().clock_anomalies.completion = u64::MAX;
++    let call = observer.begin(Kind::BinaryLibrary, Stage::Unspecified);
++    let end = call.begin.checked_sub(Duration::from_nanos(1)).unwrap();
++    call.complete(end, None);
++    let snapshot = observer.snapshot();
++    assert!(snapshot.saturated);
++    assert_eq!(snapshot.clock_anomalies.completion, u64::MAX);
++    assert_eq!(snapshot.rows[0].elapsed_ns, None);
++    assert_eq!(snapshot.rows[0].outcome, Outcome::Success);
++}
++
++#[test]
++fn device_identity_exhaustion_refuses_without_wrapping() {
++    let counter = AtomicU64::new(u64::MAX - 1);
++    assert_eq!(take_identity(&counter), u64::MAX - 1);
++    assert_eq!(take_identity(&counter), 0);
++    assert_eq!(take_identity(&counter), 0);
++    assert_eq!(counter.load(Ordering::Relaxed), u64::MAX);
++}
+--- a/src/metal/device.rs
++++ b/src/metal/device.rs
+@@ -24,6 +24,8 @@
+     MTLVertexStepFunction,
+ };
+ 
++#[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
++use super::compilation::{Kind as CompilationKind, Stage as CompilationStage};
+ use super::{conv, PassthroughShader, ShaderModuleSource};
+ use crate::{auxil::map_naga_stage, TlasInstance};
+ 
+@@ -232,17 +234,35 @@
+                     options.setPreserveInvariance(true);
+                 }
+ 
+-                let library = self
+-                    .shared
+-                    .device
+-                    .newLibraryWithSource_options_error(
+-                        &NSString::from_str(&source),
+-                        Some(&options),
+-                    )
+-                    .map_err(|err| {
+-                        log::debug!("Naga generated shader:\n{source}");
+-                        crate::PipelineError::Linkage(stage_bit, format!("Metal: {err}"))
+-                    })?;
++                let library = {
++                    let native_source = NSString::from_str(&source);
++                    #[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
++                    let observation = self.compilation_observer.begin(
++                        CompilationKind::NagaLibrary,
++                        match naga_stage {
++                            naga::ShaderStage::Vertex => CompilationStage::Vertex,
++                            naga::ShaderStage::Fragment => CompilationStage::Fragment,
++                            naga::ShaderStage::Compute => CompilationStage::Compute,
++                            naga::ShaderStage::Task => CompilationStage::Task,
++                            naga::ShaderStage::Mesh => CompilationStage::Mesh,
++                            naga::ShaderStage::RayGeneration => CompilationStage::RayGeneration,
++                            naga::ShaderStage::Miss => CompilationStage::Miss,
++                            naga::ShaderStage::AnyHit => CompilationStage::AnyHit,
++                            naga::ShaderStage::ClosestHit => CompilationStage::ClosestHit,
++                        },
++                    );
++                    let result = self
++                        .shared
++                        .device
++                        .newLibraryWithSource_options_error(&native_source, Some(&options));
++                    #[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
++                    observation.finish_native(&result);
++                    result
++                };
++                let library = library.map_err(|err| {
++                    log::debug!("Naga generated shader:\n{source}");
++                    crate::PipelineError::Linkage(stage_bit, format!("Metal: {err}"))
++                })?;
+ 
+                 let ep_index = module
+                     .entry_points
+@@ -380,6 +400,8 @@
+         let capabilities_query = super::CapabilitiesQuery::new(&raw);
+         let shared = super::AdapterShared::new(raw, &capabilities_query);
+         super::Device {
++            #[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
++            compilation_observer: Default::default(),
+             shared: Arc::new(shared),
+             features,
+             counters: Default::default(),
+@@ -1157,6 +1179,8 @@
+                 let library = super::library_from_metallib::new_library_from_metallib_bytes(
+                     &self.shared.device,
+                     file,
++                    #[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
++                    &self.compilation_observer,
+                 )
+                 .map_err(|e| crate::ShaderError::Compilation(format!("Metallib: {e:?}")))?;
+                 Ok(super::ShaderModule {
+@@ -1175,9 +1199,20 @@
+                 let options = MTLCompileOptions::new();
+                 // Obtain the device from shared
+                 let device = &self.shared.device;
+-                let library = device
+-                    .newLibraryWithSource_options_error(&NSString::from_str(source), Some(&options))
+-                    .map_err(|e| crate::ShaderError::Compilation(format!("MSL: {e:?}")))?;
++                let library = {
++                    let native_source = NSString::from_str(source);
++                    #[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
++                    let observation = self
++                        .compilation_observer
++                        .begin(CompilationKind::MslLibrary, CompilationStage::Unspecified);
++                    let result =
++                        device.newLibraryWithSource_options_error(&native_source, Some(&options));
++                    #[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
++                    observation.finish_native(&result);
++                    result
++                };
++                let library =
++                    library.map_err(|e| crate::ShaderError::Compilation(format!("MSL: {e:?}")))?;
+ 
+                 Ok(super::ShaderModule {
+                     source: ShaderModuleSource::Passthrough(PassthroughShader {
+@@ -1621,18 +1656,37 @@
+ 
+             // Create the pipeline from descriptor
+             let raw = match descriptor {
+-                MetalGenericRenderPipelineDescriptor::Standard(d) => self
+-                    .shared
+-                    .device
+-                    .newRenderPipelineStateWithDescriptor_error(&d),
+-                MetalGenericRenderPipelineDescriptor::Mesh(d) => self
+-                    .shared
+-                    .device
+-                    .newRenderPipelineStateWithMeshDescriptor_options_reflection_error(
+-                        &d,
+-                        MTLPipelineOption::empty(),
+-                        None,
+-                    ),
++                MetalGenericRenderPipelineDescriptor::Standard(d) => {
++                    #[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
++                    let observation = self.compilation_observer.begin(
++                        CompilationKind::RenderPipeline,
++                        CompilationStage::Unspecified,
++                    );
++                    let result = self
++                        .shared
++                        .device
++                        .newRenderPipelineStateWithDescriptor_error(&d);
++                    #[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
++                    observation.finish_native(&result);
++                    result
++                }
++                MetalGenericRenderPipelineDescriptor::Mesh(d) => {
++                    #[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
++                    let observation = self
++                        .compilation_observer
++                        .begin(CompilationKind::MeshPipeline, CompilationStage::Unspecified);
++                    let result = self
++                        .shared
++                        .device
++                        .newRenderPipelineStateWithMeshDescriptor_options_reflection_error(
++                            &d,
++                            MTLPipelineOption::empty(),
++                            None,
++                        );
++                    #[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
++                    observation.finish_native(&result);
++                    result
++                }
+             }
+             .map_err(|e| {
+                 crate::PipelineError::Linkage(
+@@ -1730,6 +1784,10 @@
+                 descriptor.setLabel(Some(&NSString::from_str(name)));
+             }
+ 
++            #[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
++            let observation = self
++                .compilation_observer
++                .begin(CompilationKind::ComputePipeline, CompilationStage::Compute);
+             let raw = self
+                 .shared
+                 .device
+@@ -1738,6 +1796,9 @@
+                     MTLPipelineOption::empty(),
+                     None,
+                 );
++
++            #[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
++            observation.finish_native(&raw);
+ 
+             let raw: Retained<ProtocolObject<dyn MTLComputePipelineState>> =
+                 raw.map_err(|e: Retained<NSError>| {
+--- a/src/metal/library_from_metallib.rs
++++ b/src/metal/library_from_metallib.rs
+@@ -34,14 +34,24 @@
+ pub(crate) fn new_library_from_metallib_bytes(
+     device: &ProtocolObject<dyn MTLDevice>,
+     data: &[u8],
++    #[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
++    observer: &super::compilation::Observer,
+ ) -> Result<Retained<ProtocolObject<dyn MTLLibrary>>, Retained<NSError>> {
+     let buffer = NonNull::new(data.as_ptr().cast_mut()).unwrap().cast();
+     let data =
+         unsafe { dispatch_data_create(buffer, data.len(), None, DISPATCH_DATA_DESTRUCTOR_DEFAULT) };
+     assert!(!data.is_null());
+ 
++    #[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
++    let observation = observer.begin(
++        super::compilation::Kind::BinaryLibrary,
++        super::compilation::Stage::Unspecified,
++    );
+     let res: Result<Retained<ProtocolObject<dyn MTLLibrary>>, Retained<NSError>> =
+         unsafe { msg_send![device, newLibraryWithData: data, error: _] };
++
++    #[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
++    observation.finish_native(&res);
+ 
+     unsafe { dispatch_release(data) };
+     res
+--- a/src/metal/mod.rs
++++ b/src/metal/mod.rs
+@@ -20,9 +20,17 @@
+ #[allow(deprecated)]
+ mod adapter;
+ mod command;
++#[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
++pub mod compilation;
++#[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
++mod compilation_native;
+ mod conv;
+ mod device;
+ mod library_from_metallib;
++#[cfg(all(feature = "diagnostic-presentations", target_os = "macos"))]
++pub mod presentation;
++#[cfg(all(feature = "diagnostic-presentations", target_os = "macos"))]
++mod presentation_native;
+ mod surface;
+ mod time;
+ 
+@@ -497,12 +505,16 @@
+ }
+ 
+ pub struct Device {
++    #[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
++    compilation_observer: compilation::Observer,
+     shared: Arc<AdapterShared>,
+     features: wgt::Features,
+     counters: Arc<wgt::HalCounters>,
+ }
+ 
+ pub struct Surface {
++    #[cfg(all(feature = "diagnostic-presentations", target_os = "macos"))]
++    presentation_observation: Mutex<Option<presentation::Observation>>,
+     render_layer: Mutex<Retained<CAMetalLayer>>,
+     swapchain_format: RwLock<Option<wgt::TextureFormat>>,
+     extent: RwLock<wgt::Extent3d>,
+@@ -513,6 +525,8 @@
+ 
+ #[derive(Debug)]
+ pub struct SurfaceTexture {
++    #[cfg(all(feature = "diagnostic-presentations", target_os = "macos"))]
++    presentation: Option<presentation::Ticket>,
+     texture: Texture,
+     // Useful for UI-intensive applications that are sensitive to
+     // window resizing.
+@@ -610,6 +624,11 @@
+             // because we immediately commit this buffer.
+             let command_buffer = self.shared.raw.commandBuffer().unwrap();
+             command_buffer.setLabel(Some(ns_string!("(wgpu internal) Present")));
++
++            #[cfg(all(feature = "diagnostic-presentations", target_os = "macos"))]
++            if let Some(ticket) = &texture.presentation {
++                presentation_native::attach(ticket, &texture.drawable);
++            }
+ 
+             // https://developer.apple.com/documentation/quartzcore/cametallayer/1478157-presentswithtransaction?language=objc
+             if !texture.present_with_transaction {
+--- /dev/null
++++ b/src/metal/presentation.rs
+@@ -0,0 +1,334 @@
++//! Private diagnostic: exact drawable observations, never a performance verdict.
++//! All row storage is allocated before acquisition; callbacks only mutate a row.
++use alloc::{boxed::Box, sync::Arc, vec::Vec};
++use core::{fmt, mem::size_of};
++use parking_lot::Mutex;
++
++pub const MAX_SAMPLES: usize = 36_000;
++const _: () = assert!(size_of::<Row>() <= 64);
++
++#[derive(Clone, Copy, Debug, PartialEq, Eq)]
++pub enum Error {
++    Capacity,
++    Allocation,
++    Context,
++    Unavailable,
++    Incomplete,
++    Order,
++}
++
++/// Host-supplied identity, captured at acquisition, never read from a late callback.
++#[derive(Clone, Copy, Debug, PartialEq, Eq)]
++pub struct Context {
++    pub surface_generation: u64,
++    pub segment: u64,
++    pub host_step: u64,
++    /// Optional host acquisition-attempt ID; zero is the standalone legacy probe.
++    pub attempt: u64,
++}
++impl Context {
++    pub fn new(surface_generation: u64, segment: u64, host_step: u64) -> Result<Self, Error> {
++        if surface_generation == 0 || segment == 0 {
++            return Err(Error::Context);
++        }
++        Ok(Self {
++            surface_generation,
++            segment,
++            host_step,
++            attempt: 0,
++        })
++    }
++    pub fn with_attempt(mut self, attempt: u64) -> Result<Self, Error> {
++        if attempt == 0 {
++            return Err(Error::Context);
++        }
++        self.attempt = attempt;
++        Ok(self)
++    }
++}
++
++#[derive(Clone, Copy, Debug, PartialEq)]
++pub enum Outcome {
++    Acquired,
++    Requested,
++    Presented(f64),
++    /// Apple returns zero for a not-presented/dropped drawable. Not a timestamp.
++    ReportedZero,
++    Invalid(f64),
++    Discarded,
++    /// The HAL texture disappeared without explicit request or discard.
++    Abandoned,
++}
++#[derive(Clone, Copy, Debug, PartialEq)]
++pub struct Row {
++    pub context: Context,
++    pub drawable_id: u64,
++    pub outcome: Outcome,
++}
++struct State {
++    rows: Box<[Row]>,
++    used: usize,
++    overflow: u64,
++    protocol_errors: u64,
++}
++/// Does not own a drawable, layer, window, device, callback or renderer.
++pub struct Collector(Mutex<State>);
++impl fmt::Debug for Collector {
++    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
++        let s = self.0.lock();
++        f.debug_struct("PresentationCollector")
++            .field("capacity", &s.rows.len())
++            .field("used", &s.used)
++            .field("overflow", &s.overflow)
++            .finish()
++    }
++}
++#[derive(Clone, Debug)]
++pub struct Observation {
++    collector: Arc<Collector>,
++    context: Context,
++}
++impl Observation {
++    pub fn new(collector: Arc<Collector>, context: Context) -> Result<Self, Error> {
++        Context::new(
++            context.surface_generation,
++            context.segment,
++            context.host_step,
++        )?;
++        Ok(Self { collector, context })
++    }
++    pub(crate) fn acquire(&self, drawable_id: u64) -> Option<Ticket> {
++        let mut s = self.collector.0.lock();
++        let at = s.used;
++        if at == s.rows.len() {
++            s.overflow = s.overflow.saturating_add(1);
++            return None;
++        }
++        s.rows[at] = Row {
++            context: self.context,
++            drawable_id,
++            outcome: Outcome::Acquired,
++        };
++        s.used += 1;
++        Some(Ticket {
++            collector: Arc::clone(&self.collector),
++            at,
++        })
++    }
++}
++impl Collector {
++    pub fn new(capacity: usize) -> Result<Arc<Self>, Error> {
++        if capacity == 0 || capacity > MAX_SAMPLES {
++            return Err(Error::Capacity);
++        }
++        let mut rows = Vec::new();
++        rows.try_reserve_exact(capacity)
++            .map_err(|_| Error::Allocation)?;
++        rows.resize(
++            capacity,
++            Row {
++                context: Context {
++                    surface_generation: 0,
++                    segment: 0,
++                    host_step: 0,
++                    attempt: 0,
++                },
++                drawable_id: 0,
++                outcome: Outcome::Acquired,
++            },
++        );
++        Ok(Arc::new(Self(Mutex::new(State {
++            rows: rows.into_boxed_slice(),
++            used: 0,
++            overflow: 0,
++            protocol_errors: 0,
++        }))))
++    }
++    /// Shutdown-only scan without snapshot allocation. Does not wait or poll GPU.
++    pub fn pending(&self) -> usize {
++        let s = self.0.lock();
++        s.rows[..s.used]
++            .iter()
++            .filter(|r| matches!(r.outcome, Outcome::Acquired | Outcome::Requested))
++            .count()
++    }
++    /// Snapshot after removing the surface binding. Pending callbacks remain
++    /// explicitly Requested. A later snapshot may observe their completion.
++    /// This allocates bounded output storage; do not call it inside frame ticks.
++    pub fn snapshot(&self) -> Snapshot {
++        let s = self.0.lock();
++        Snapshot {
++            rows: s.rows[..s.used].to_vec(),
++            overflow: s.overflow,
++            protocol_errors: s.protocol_errors,
++        }
++    }
++}
++
++#[derive(Debug)]
++pub(crate) struct Ticket {
++    collector: Arc<Collector>,
++    at: usize,
++}
++impl Ticket {
++    /// Called once before the native presentation handler is registered.
++    pub(crate) fn request(&self) -> Option<Completion> {
++        let mut s = self.collector.0.lock();
++        if s.rows[self.at].outcome != Outcome::Acquired {
++            s.protocol_errors = s.protocol_errors.saturating_add(1);
++            return None;
++        }
++        s.rows[self.at].outcome = Outcome::Requested;
++        Some(Completion {
++            collector: Arc::clone(&self.collector),
++            at: self.at,
++        })
++    }
++    pub(crate) fn discard(&self) {
++        let mut s = self.collector.0.lock();
++        if s.rows[self.at].outcome == Outcome::Acquired {
++            s.rows[self.at].outcome = Outcome::Discarded;
++        } else {
++            s.protocol_errors = s.protocol_errors.saturating_add(1);
++        }
++    }
++}
++impl Drop for Ticket {
++    fn drop(&mut self) {
++        let mut s = self.collector.0.lock();
++        if s.rows[self.at].outcome == Outcome::Acquired {
++            s.rows[self.at].outcome = Outcome::Abandoned;
++        }
++    }
++}
++/// Only this bounded collector and row index cross into the native callback.
++pub(crate) struct Completion {
++    collector: Arc<Collector>,
++    at: usize,
++}
++impl Completion {
++    pub(crate) fn presented(&self, time: f64) {
++        let mut s = self.collector.0.lock();
++        if s.rows[self.at].outcome != Outcome::Requested {
++            s.protocol_errors = s.protocol_errors.saturating_add(1);
++            return;
++        }
++        s.rows[self.at].outcome = if time == 0.0 {
++            Outcome::ReportedZero
++        } else if time.is_finite() && time > 0.0 {
++            Outcome::Presented(time)
++        } else {
++            Outcome::Invalid(time)
++        };
++    }
++}
++#[derive(Debug)]
++pub struct Snapshot {
++    pub rows: Vec<Row>,
++    pub overflow: u64,
++    pub protocol_errors: u64,
++}
++/// Counts are observations, not a completeness or frame-rate verdict. In
++/// particular, ReportedZero and an absent callback are different outcomes.
++#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
++pub struct Coverage {
++    pub rows: usize,
++    pub segments: usize,
++    pub acquired: usize,
++    pub requested: usize,
++    pub presented: usize,
++    pub reported_zero: usize,
++    pub invalid: usize,
++    pub discarded: usize,
++    pub abandoned: usize,
++}
++#[derive(Clone, Copy, Debug, PartialEq)]
++pub struct Interval {
++    pub from: usize,
++    pub to: usize,
++    pub seconds: f64,
++}
++impl Snapshot {
++    pub fn coverage(&self) -> Coverage {
++        let mut result = Coverage {
++            rows: self.rows.len(),
++            ..Coverage::default()
++        };
++        let mut previous = None;
++        for row in &self.rows {
++            let identity = (row.context.surface_generation, row.context.segment);
++            if previous != Some(identity) {
++                result.segments += 1;
++                previous = Some(identity);
++            }
++            match row.outcome {
++                Outcome::Acquired => result.acquired += 1,
++                Outcome::Requested => result.requested += 1,
++                Outcome::Presented(_) => result.presented += 1,
++                Outcome::ReportedZero => result.reported_zero += 1,
++                Outcome::Invalid(_) => result.invalid += 1,
++                Outcome::Discarded => result.discarded += 1,
++                Outcome::Abandoned => result.abandoned += 1,
++            }
++        }
++        result
++    }
++    /// Raw intervals only. Zero/discarded drawables between displayed endpoints
++    /// remain inside elapsed time. Segment boundaries never create an interval.
++    /// There is deliberately no p95/gate method: rows include leading/trailing
++    /// zero/discard events so the host must disclose exact window coverage.
++    pub fn intervals(&self) -> Result<Vec<Interval>, Error> {
++        if self.overflow != 0 || self.protocol_errors != 0 {
++            return Err(Error::Incomplete);
++        }
++        let mut result = Vec::new();
++        let mut previous: Option<usize> = None;
++        let mut prior_row: Option<&Row> = None;
++        for (i, row) in self.rows.iter().enumerate() {
++            if let Some(p) = prior_row {
++                if row.context.surface_generation < p.context.surface_generation
++                    || (row.context.surface_generation == p.context.surface_generation
++                        && (p.drawable_id >= row.drawable_id
++                            || row.context.segment < p.context.segment
++                            || (row.context.segment == p.context.segment
++                                && row.context.host_step < p.context.host_step)))
++                {
++                    return Err(Error::Order);
++                }
++                if p.context.surface_generation != row.context.surface_generation
++                    || p.context.segment != row.context.segment
++                {
++                    previous = None;
++                }
++            }
++            prior_row = Some(row);
++            match row.outcome {
++                Outcome::Presented(t) => {
++                    if !t.is_finite() || t <= 0.0 {
++                        return Err(Error::Incomplete);
++                    }
++                    if let Some((p, Outcome::Presented(old))) =
++                        previous.map(|p| (p, self.rows[p].outcome))
++                    {
++                        let seconds = t - old;
++                        if !seconds.is_finite() || seconds <= 0.0 {
++                            return Err(Error::Order);
++                        }
++                        result.push(Interval {
++                            from: p,
++                            to: i,
++                            seconds,
++                        });
++                    }
++                    previous = Some(i);
++                }
++                Outcome::ReportedZero | Outcome::Discarded => {}
++                _ => return Err(Error::Incomplete),
++            }
++        }
++        Ok(result)
++    }
++}
++#[cfg(test)]
++#[path = "presentation_tests.rs"]
++mod tests;
+--- /dev/null
++++ b/src/metal/presentation_native.rs
+@@ -0,0 +1,40 @@
++//! macOS-only adapter. Never retains the drawable in its own callback.
++use super::{
++    Surface,
++    presentation::{Error, Observation, Ticket},
++};
++use core::ptr::NonNull;
++use objc2::{available, runtime::ProtocolObject};
++use objc2_metal::MTLDrawable;
++
++impl Surface {
++    /// Diagnostic-only binding for subsequent successful acquisitions. Replacing
++    /// it does not relabel any already acquired drawable or late callback.
++    /// Set context before get_current_texture; clear before final snapshot.
++    pub fn set_presentation_observation(
++        &self,
++        observation: Option<Observation>,
++    ) -> Result<(), Error> {
++        if observation.is_some() && !available!(macos = 10.15.4) {
++            return Err(Error::Unavailable);
++        }
++        *self.presentation_observation.lock() = observation;
++        Ok(())
++    }
++}
++pub(super) fn attach(ticket: &Ticket, drawable: &ProtocolObject<dyn MTLDrawable>) {
++    let Some(completion) = ticket.request() else {
++        return;
++    };
++    let block = block2::RcBlock::new(move |raw: NonNull<ProtocolObject<dyn MTLDrawable>>| {
++        // SAFETY: Metal invokes the registered handler with its live drawable.
++        // Read the supported timestamp while it is valid; never save raw/retain.
++        let time = unsafe { raw.as_ref() }.presentedTime();
++        completion.presented(time);
++    });
++    // SAFETY: Metal copies this valid block. Captures contain only Arc<Collector>
++    // and an index into its preallocated rows; neither owns the drawable/window.
++    unsafe {
++        drawable.addPresentedHandler(block2::RcBlock::as_ptr(&block));
++    }
++}
+--- /dev/null
++++ b/src/metal/presentation_tests.rs
+@@ -0,0 +1,225 @@
++use super::*;
++fn binding(c: &Arc<Collector>, generation: u64, segment: u64, step: u64) -> Observation {
++    Observation::new(
++        Arc::clone(c),
++        Context::new(generation, segment, step).unwrap(),
++    )
++    .unwrap()
++}
++#[test]
++fn bounded_storage_and_overflow_remain_explicit() {
++    assert!(matches!(Collector::new(0), Err(Error::Capacity)));
++    assert!(matches!(
++        Collector::new(MAX_SAMPLES + 1),
++        Err(Error::Capacity)
++    ));
++    let c = Collector::new(1).unwrap();
++    let b = binding(&c, 1, 1, 1);
++    let t = b.acquire(0).unwrap();
++    t.request().unwrap().presented(1.0);
++    assert!(b.acquire(1).is_none());
++    let s = c.snapshot();
++    assert_eq!(s.rows.len(), 1);
++    assert_eq!(s.overflow, 1);
++    assert_eq!(s.rows[0].outcome, Outcome::Presented(1.0));
++    assert_eq!(s.intervals().unwrap_err(), Error::Incomplete);
++}
++#[test]
++fn invalid_context_has_no_acquisition_effect() {
++    let c = Collector::new(1).unwrap();
++    assert_eq!(Context::new(0, 1, 0).unwrap_err(), Error::Context);
++    assert_eq!(Context::new(1, 0, 0).unwrap_err(), Error::Context);
++    let invalid = Observation::new(
++        Arc::clone(&c),
++        Context {
++            surface_generation: 0,
++            segment: 1,
++            host_step: 0,
++            attempt: 0,
++        },
++    );
++    assert!(invalid.is_err());
++    assert!(c.snapshot().rows.is_empty());
++}
++#[test]
++fn callbacks_may_complete_out_of_order_without_reordering_frames() {
++    let c = Collector::new(2).unwrap();
++    let a = binding(&c, 1, 1, 1).acquire(7).unwrap();
++    let b = binding(&c, 1, 1, 2).acquire(8).unwrap();
++    let first = a.request().unwrap();
++    b.request().unwrap().presented(4.02);
++    assert_eq!(c.snapshot().intervals().unwrap_err(), Error::Incomplete);
++    first.presented(4.0);
++    let s = c.snapshot();
++    assert_eq!(s.rows[0].context.host_step, 1);
++    assert_eq!(s.rows[1].context.host_step, 2);
++    let intervals = s.intervals().unwrap();
++    assert_eq!((intervals[0].from, intervals[0].to), (0, 1));
++    assert!((intervals[0].seconds - 0.02).abs() < 1e-12);
++}
++#[test]
++fn zero_and_discard_do_not_shorten_the_display_gap() {
++    let c = Collector::new(4).unwrap();
++    let b = binding(&c, 1, 1, 1);
++    b.acquire(0).unwrap().request().unwrap().presented(10.0);
++    b.acquire(1).unwrap().request().unwrap().presented(0.0);
++    b.acquire(2).unwrap().discard();
++    b.acquire(3).unwrap().request().unwrap().presented(10.06);
++    let s = c.snapshot();
++    assert_eq!(s.rows[1].outcome, Outcome::ReportedZero);
++    assert_eq!(s.rows[2].outcome, Outcome::Discarded);
++    let i = s.intervals().unwrap();
++    assert_eq!(i.len(), 1);
++    assert_eq!((i[0].from, i[0].to), (0, 3));
++    assert!((i[0].seconds - 0.06).abs() < 1e-12);
++}
++#[test]
++fn missing_callback_abandonment_and_invalid_values_refuse_complete_intervals() {
++    for value in [f64::NAN, f64::INFINITY, f64::NEG_INFINITY, -1.0] {
++        let c = Collector::new(1).unwrap();
++        binding(&c, 1, 1, 1)
++            .acquire(0)
++            .unwrap()
++            .request()
++            .unwrap()
++            .presented(value);
++        assert!(matches!(c.snapshot().rows[0].outcome, Outcome::Invalid(_)));
++        assert_eq!(c.snapshot().intervals().unwrap_err(), Error::Incomplete);
++    }
++    let c = Collector::new(2).unwrap();
++    let t = binding(&c, 1, 1, 1).acquire(0).unwrap();
++    let completion = t.request().unwrap();
++    drop(t);
++    drop(binding(&c, 1, 1, 2).acquire(1));
++    let s = c.snapshot();
++    assert_eq!(s.rows[0].outcome, Outcome::Requested);
++    assert_eq!(s.rows[1].outcome, Outcome::Abandoned);
++    assert_eq!(s.intervals().unwrap_err(), Error::Incomplete);
++    completion.presented(12.0);
++    assert_eq!(c.snapshot().rows[0].outcome, Outcome::Presented(12.0));
++}
++#[test]
++fn late_callback_retains_only_its_old_collector_and_context() {
++    let old = Collector::new(1).unwrap();
++    let weak = Arc::downgrade(&old);
++    let t = binding(&old, 1, 2, 3).acquire(99).unwrap();
++    let completion = t.request().unwrap();
++    drop(t);
++    drop(old);
++    let new = Collector::new(1).unwrap();
++    let next = binding(&new, 2, 3, 4).acquire(0).unwrap();
++    completion.presented(5.0);
++    let retained = weak.upgrade().unwrap();
++    assert_eq!(
++        retained.snapshot().rows[0].context,
++        Context::new(1, 2, 3).unwrap()
++    );
++    assert_eq!(retained.snapshot().rows[0].outcome, Outcome::Presented(5.0));
++    assert_eq!(new.snapshot().rows[0].outcome, Outcome::Acquired);
++    drop(retained);
++    drop(completion);
++    assert!(weak.upgrade().is_none());
++    next.discard();
++}
++#[test]
++fn duplicate_completion_does_not_overwrite_first_timestamp() {
++    let c = Collector::new(1).unwrap();
++    let t = binding(&c, 1, 1, 0).acquire(0).unwrap();
++    let done = t.request().unwrap();
++    assert!(t.request().is_none());
++    done.presented(9.0);
++    done.presented(10.0);
++    t.discard();
++    let s = c.snapshot();
++    assert_eq!(s.rows[0].outcome, Outcome::Presented(9.0));
++    assert_eq!(s.protocol_errors, 3);
++    assert_eq!(s.intervals().unwrap_err(), Error::Incomplete);
++}
++#[test]
++fn segments_and_surface_generations_break_intervals() {
++    let c = Collector::new(4).unwrap();
++    for (index, (generation, segment, id, time)) in [
++        (1, 1, 4, 1.0),
++        (1, 2, 5, 50.0),
++        (2, 3, 0, 60.0),
++        (2, 3, 1, 60.02),
++    ]
++    .into_iter()
++    .enumerate()
++    {
++        binding(&c, generation, segment, index as u64)
++            .acquire(id)
++            .unwrap()
++            .request()
++            .unwrap()
++            .presented(time);
++    }
++    let s = c.snapshot();
++    let intervals = s.intervals().unwrap();
++    assert_eq!(intervals.len(), 1);
++    assert_eq!((intervals[0].from, intervals[0].to), (2, 3));
++}
++#[test]
++fn timestamp_or_drawable_identity_reversal_is_not_sorted_away() {
++    for (ids, times) in [
++        ([1, 0], [1.0, 2.0]),
++        ([1, 1], [1.0, 2.0]),
++        ([0, 1], [2.0, 1.0]),
++        ([0, 1], [1.0, 1.0]),
++    ] {
++        let c = Collector::new(2).unwrap();
++        for i in 0..2 {
++            binding(&c, 1, 1, i as u64)
++                .acquire(ids[i])
++                .unwrap()
++                .request()
++                .unwrap()
++                .presented(times[i]);
++        }
++        assert_eq!(c.snapshot().intervals().unwrap_err(), Error::Order);
++    }
++}
++#[test]
++fn coverage_keeps_leading_trailing_and_unobserved_segment_rows() {
++    let c = Collector::new(5).unwrap();
++    let first = binding(&c, 1, 1, 0);
++    first.acquire(0).unwrap().request().unwrap().presented(0.0);
++    first.acquire(1).unwrap().request().unwrap().presented(10.0);
++    first.acquire(2).unwrap().discard();
++    let next = binding(&c, 1, 2, 1);
++    let pending = next.acquire(3).unwrap();
++    let _completion = pending.request().unwrap();
++    let acquired = next.acquire(4).unwrap();
++    let snapshot = c.snapshot();
++    assert_eq!(
++        snapshot.coverage(),
++        Coverage {
++            rows: 5,
++            segments: 2,
++            acquired: 1,
++            requested: 1,
++            presented: 1,
++            reported_zero: 1,
++            discarded: 1,
++            ..Coverage::default()
++        }
++    );
++    assert_eq!(snapshot.intervals().unwrap_err(), Error::Incomplete);
++    drop(acquired);
++    assert_eq!(c.snapshot().coverage().abandoned, 1);
++}
++
++#[test]
++fn host_attempt_is_immutable_and_pending_scan_does_not_guess_completion() {
++    let collector = Collector::new(2).unwrap();
++    let context = Context::new(1, 1, 9).unwrap().with_attempt(42).unwrap();
++    assert!(Context::new(1, 1, 9).unwrap().with_attempt(0).is_err());
++    let observation = Observation::new(Arc::clone(&collector), context).unwrap();
++    let ticket = observation.acquire(6).unwrap();
++    assert_eq!(collector.pending(), 1);
++    let completion = ticket.request().unwrap();
++    assert_eq!(collector.pending(), 1);
++    completion.presented(1.0);
++    assert_eq!(collector.pending(), 0);
++    assert_eq!(collector.snapshot().rows[0].context.attempt, 42);
++}
+--- a/src/metal/surface.rs
++++ b/src/metal/surface.rs
+@@ -18,6 +18,8 @@
+     pub fn new(layer: Retained<CAMetalLayer>) -> Self {
+         Self {
+             render_layer: Mutex::new(layer),
++            #[cfg(all(feature = "diagnostic-presentations", target_os = "macos"))]
++            presentation_observation: Mutex::new(None),
+             swapchain_format: RwLock::new(None),
+             extent: RwLock::new(wgt::Extent3d::default()),
+         }
+@@ -157,6 +159,8 @@
+             }
+         }
+ 
++        #[cfg(all(feature = "diagnostic-presentations", target_os = "macos"))]
++        let observation = self.presentation_observation.lock().clone();
+         let (drawable, texture) = match autoreleasepool(|_| {
+             render_layer
+                 .nextDrawable()
+@@ -169,6 +173,11 @@
+         let swapchain_format = self.swapchain_format.read().unwrap();
+         let extent = self.extent.read();
+         let suf_texture = super::SurfaceTexture {
++            #[cfg(all(feature = "diagnostic-presentations", target_os = "macos"))]
++            presentation: observation.and_then(|o| {
++                use objc2_metal::MTLDrawable;
++                o.acquire(drawable.drawableID() as u64)
++            }),
+             texture: super::Texture {
+                 raw: texture,
+                 format: swapchain_format,
+@@ -191,5 +200,10 @@
+         })
+     }
+ 
+-    unsafe fn discard_texture(&self, _texture: super::SurfaceTexture) {}
++    unsafe fn discard_texture(&self, _texture: super::SurfaceTexture) {
++        #[cfg(all(feature = "diagnostic-presentations", target_os = "macos"))]
++        if let Some(ticket) = &_texture.presentation {
++            ticket.discard();
++        }
++    }
+ }

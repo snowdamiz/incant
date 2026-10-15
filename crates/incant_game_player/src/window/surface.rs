@@ -2,12 +2,16 @@
 //! mandatory sync, present before returning to the event loop. No frame survives
 //! a resize callback, and only this module can construct a reservation/provider.
 use super::Error;
+#[cfg(all(feature = "native-presentations", target_os = "macos"))]
+use super::presentations::{Boundary, Capture, Failure, Role, Status};
 use incant_render::{Renderer, RetainedTarget, wgpu};
 use incant_render_gpu_host::{RenderFrame, TargetProvider};
 use std::{cell::RefCell, rc::Rc, sync::Arc};
 use tao::window::Window;
 
 pub struct SurfaceState {
+    #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+    capture: Option<Capture>,
     instance: wgpu::Instance,
     surface: wgpu::Surface<'static>,
     window: Arc<Window>,
@@ -29,12 +33,26 @@ pub struct Frame {
     height: u32,
 }
 impl SurfaceState {
-    pub fn new(window: Arc<Window>) -> Result<(Self, Arc<Renderer>, SurfaceTargets), Error> {
+    pub fn new(
+        window: Arc<Window>,
+        #[cfg(all(feature = "native-compilation", target_os = "macos"))] compilation: Option<
+            &mut incant_render::compilation::Capture,
+        >,
+    ) -> Result<(Self, Arc<Renderer>, SurfaceTargets), Error> {
         let instance = wgpu::Instance::default();
         let surface = instance.create_surface(Arc::clone(&window))?;
-        let renderer = Arc::new(
-            pollster::block_on(Renderer::new(&instance, Some(&surface))).map_err(Error::Render)?,
-        );
+        #[cfg(all(feature = "native-compilation", target_os = "macos"))]
+        let renderer = match compilation {
+            Some(capture) => pollster::block_on(Renderer::new_with_compilation_capture(
+                &instance,
+                Some(&surface),
+                capture,
+            )),
+            None => pollster::block_on(Renderer::new(&instance, Some(&surface))),
+        };
+        #[cfg(not(all(feature = "native-compilation", target_os = "macos")))]
+        let renderer = pollster::block_on(Renderer::new(&instance, Some(&surface)));
+        let renderer = Arc::new(renderer.map_err(Error::Render)?);
         let capabilities = surface.get_capabilities(&renderer.adapter);
         let format = capabilities
             .formats
@@ -62,6 +80,8 @@ impl SurfaceState {
         };
         Ok((
             Self {
+                #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+                capture: None,
                 instance,
                 surface,
                 window,
@@ -75,6 +95,60 @@ impl SurfaceState {
             renderer,
             targets,
         ))
+    }
+    #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+    pub fn install_capture(&mut self, capture: Capture) -> Result<(), Error> {
+        capture.check_surface(&self.surface)?;
+        self.capture = Some(capture);
+        Ok(())
+    }
+    #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+    pub fn presentation_attempt(&mut self, role: Role, generation: u64, step: u64) {
+        if let Some(capture) = &mut self.capture {
+            capture.begin(role, generation, step);
+        }
+    }
+    #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+    pub fn presentation_boundary(&mut self, reason: Boundary) {
+        if let Some(capture) = &mut self.capture {
+            capture.boundary(reason);
+        }
+    }
+    #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+    pub fn presentation_complete(&mut self, status: Status) {
+        if let Some(capture) = &mut self.capture {
+            capture.complete(status);
+        }
+    }
+    #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+    fn presentation_failure(&mut self, failure: Failure) {
+        if let Some(capture) = &mut self.capture {
+            capture.failure(failure);
+        }
+    }
+    #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+    pub fn finish_capture(
+        &mut self,
+        steps: u64,
+        generation: u64,
+        code: i32,
+        result: &crate::session::Result<serde_json::Value>,
+    ) -> crate::session::Result<()> {
+        let Some(mut capture) = self.capture.take() else {
+            return Ok(());
+        };
+        let unbind = Capture::unbind(&self.surface);
+        let written = capture.finish(
+            steps,
+            generation,
+            code,
+            result,
+            unbind.as_ref().err().map(ToString::to_string),
+        );
+        // Sidecar is attempted even if unbinding failed; original window error
+        // still has precedence in the caller. Callback captures remain safe.
+        unbind?;
+        written
     }
     /// The old composed host must already be destroyed. No provider or reserved
     /// frame may cross a session boundary; the OS surface alone is retained.
@@ -99,11 +173,27 @@ impl SurfaceState {
     }
     pub fn reserve(&mut self, renderer: &Renderer) -> Result<bool, Error> {
         if self.slot.borrow().is_some() {
+            #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+            self.presentation_failure(Failure::Reservation);
             return Err(Error::Reservation);
         }
-        renderer.check_device().map_err(Error::Render)?;
+        if let Err(error) = renderer.check_device() {
+            #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+            self.presentation_failure(Failure::Device);
+            return Err(Error::Render(error));
+        }
         let size = self.window.inner_size();
         if !supported_size(size.width, size.height) || self.window.is_minimized() {
+            #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+            {
+                self.presentation_failure(if !supported_size(size.width, size.height) {
+                    Failure::UnsupportedSize
+                } else {
+                    Failure::Minimized
+                });
+                self.presentation_boundary(Boundary::Inactive);
+                self.presentation_complete(Status::Deferred);
+            }
             self.skipped += 1;
             return Ok(false);
         }
@@ -114,28 +204,60 @@ impl SurfaceState {
         }
         let frame = bounded_acquire(|| {
             if !self.configured {
+                #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+                self.presentation_boundary(Boundary::Configure);
                 self.surface.configure(&renderer.device, &self.config);
                 self.configured = true;
                 self.reconfigurations += 1;
             }
-            let texture = match self.surface.get_current_texture() {
+            #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+            if let Some(capture) = &mut self.capture {
+                capture.bind(&self.surface)?;
+            }
+            let current = self.surface.get_current_texture();
+            #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+            if self.capture.is_some() {
+                Capture::unbind(&self.surface)?;
+            }
+            let texture = match current {
                 wgpu::CurrentSurfaceTexture::Success(frame) => frame,
                 wgpu::CurrentSurfaceTexture::Suboptimal(frame) => {
                     self.configured = false;
                     frame
                 }
-                wgpu::CurrentSurfaceTexture::Timeout | wgpu::CurrentSurfaceTexture::Occluded => {
+                wgpu::CurrentSurfaceTexture::Timeout => {
+                    #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+                    self.presentation_failure(Failure::Timeout);
+                    return Ok(Attempt::Deferred);
+                }
+                wgpu::CurrentSurfaceTexture::Occluded => {
+                    #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+                    self.presentation_failure(Failure::Occluded);
                     return Ok(Attempt::Deferred);
                 }
                 wgpu::CurrentSurfaceTexture::Outdated => {
+                    #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+                    {
+                        self.presentation_failure(Failure::Outdated);
+                        self.presentation_boundary(Boundary::Retry);
+                    }
                     self.configured = false;
                     return Ok(Attempt::Retry);
                 }
                 wgpu::CurrentSurfaceTexture::Lost => {
+                    #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+                    {
+                        self.presentation_failure(Failure::Lost);
+                        self.presentation_boundary(Boundary::Retry);
+                    }
                     self.recreate(renderer)?;
                     return Ok(Attempt::Retry);
                 }
-                wgpu::CurrentSurfaceTexture::Validation => return Err(Error::SurfaceValidation),
+                wgpu::CurrentSurfaceTexture::Validation => {
+                    #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+                    self.presentation_failure(Failure::Validation);
+                    return Err(Error::SurfaceValidation);
+                }
             };
             let view = texture.texture.create_view(&Default::default());
             Ok(Attempt::Ready(Frame {
@@ -149,6 +271,11 @@ impl SurfaceState {
         let available = frame.is_some();
         *self.slot.borrow_mut() = frame;
         if !available {
+            #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+            {
+                self.presentation_boundary(Boundary::Retry);
+                self.presentation_complete(Status::Deferred);
+            }
             self.skipped += 1;
         }
         Ok(available)
@@ -157,7 +284,15 @@ impl SurfaceState {
     /// actual native surface, but does not claim the OS generated a Lost event.
     pub fn recreate(&mut self, renderer: &Renderer) -> Result<(), Error> {
         self.cancel();
+        #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+        if self.capture.is_some() {
+            Capture::unbind(&self.surface)?;
+        }
         self.surface = self.instance.create_surface(Arc::clone(&self.window))?;
+        #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+        if let Some(capture) = &mut self.capture {
+            capture.recreated();
+        }
         let caps = self.surface.get_capabilities(&renderer.adapter);
         if !caps.formats.contains(&self.config.format)
             || !caps.alpha_modes.contains(&self.config.alpha_mode)
