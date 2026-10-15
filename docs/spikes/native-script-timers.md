@@ -61,3 +61,8 @@ All 63 script tests/doctests and scoped all-target release Clippy pass after thi
 correction. The 48-process shipping result above records the earlier source
 identity; it is not relabeled as a new executable.
 [Correction evidence](evidence/native-timer-surrogates.json).
+
+The later [explicit-state coroutine route](native-coroutines.md) adds separately
+bounded cooperative tasks and active-task checkpoint restoration alongside these
+timers. It uses named synchronous resume functions and typed state; it does not
+add generator/async syntax or change the historical shipping evidence above.
