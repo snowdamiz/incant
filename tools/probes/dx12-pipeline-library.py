@@ -128,9 +128,11 @@ def validate_counts(counts, stage, final=False):
     require(not counts['disabled'] and counts['strict_refusals'] == 0,
             'Initial catalog must be healthy')
     if stage == 'seed':
-        require(counts['fallback_attempts'] == counts['stores'] == counts['miss_or_mismatch'] > 0
-                and counts['stream_hits'] == counts['classic_hits'] == counts['compute_hits'] == 0,
-                'Fresh seed stores actual misses, never claims hits')
+        # A fresh on-disk cache may still reuse PSOs stored earlier in this
+        # catalog preparation. Native loads validate the descriptor; mismatched
+        # names cannot overwrite the existing entry and remain store errors.
+        require(counts['fallback_attempts'] == counts['stores'] == counts['miss_or_mismatch'] > 0,
+                'Fresh seed stores every actual miss; same-session hits are allowed')
         require(isinstance(counts['last_error'], str) and NATIVE_MISS.fullmatch(counts['last_error']),
                 'Capture retains the expected native load miss even after successful store')
     else:

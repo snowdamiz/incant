@@ -43,6 +43,24 @@ passes local tests and leaves production behavior unchanged. Both desktop jobs
 and Windows Wasm conformance passed on checkpoint44; that checkpoint's separate
 general failure prevented promotion.
 
+## Packaged-player frame capture — integrated CPU and Metal qualification
+
+The source-free CPU spatial player can now save selected accepted gameplay
+states as PNGs, including the HUD, without opening a desktop window. Capture
+reuses the running world and preserves its report, PCM and restart chronology.
+Bounded output uses create-only publication; incomplete runs retain partial
+evidence and never publish a complete manifest. The ordinary native-window
+build includes this optional CLI mode.
+
+The recorded-material composition passes 13 CPU controls, two strict lint
+configurations, native-window compilation and the same-source Metal rendering
+control. Earlier results and the original fixture failure remain retained.
+The later main365 join changes only DX12 diagnostic tests/tools and documentation;
+capture/player/render implementation bytes remain identical to the qualified
+composition. Core and locale image collection is next. This does not establish
+native presentation, temporal reconstruction quality or performance.
+[Usage and evidence](docs/spikes/native-player-frame-capture.md).
+
 ## Opt-in DX12 pipeline libraries — local controls, native diagnostic pending
 
 A default-off native DX12 pipeline library now has conservative source/driver
@@ -51,8 +69,12 @@ input backing. Mac CPU controls and Windows GNU compile/lint checks pass. A
 separate manually invoked hosted diagnostic covers real Windows cache hits,
 filesystem/COM lifetime and exact rendered parity. Its first run stopped during
 compilation when the resource observer encountered a retired temporary directory;
-the observer repair passes ten portable controls, with native execution still
-pending. Existing release checks are unchanged. This does not close the
+the observer repair passes ten portable controls. The next hosted run passes
+40 actual Windows CPU controls and four strict lints, then reaches native startup
+and exposes an invalid zero-hit seed assertion: identical material PSOs can be
+reused within the initial session. Its correction passes eleven portable controls;
+complete native reuse/lifetime/pixel qualification is still pending. Both failed
+attempts remain retained. Existing release checks are unchanged. This does not close the
 shader-stall gate or claim that HLSL compilation is avoided.
 [Scope and evidence](docs/spikes/dx12-pipeline-library.md).
 

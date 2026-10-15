@@ -175,6 +175,8 @@ fn dx12_library_native_stage() {
         crate::wgpu::Backend::Dx12
     );
     let initial = renderer.pipeline_cache_report.clone();
+    // Keep the actual native report even if a later assertion fails.
+    fs::write(output.join("initial-report.txt"), format!("{initial:?}")).unwrap();
     let counts = &initial.dx12.as_ref().unwrap().native;
     if strict {
         assert!(matches!(initial.read, CacheRead::Supplied { bytes: 1.. }));
@@ -200,19 +202,21 @@ fn dx12_library_native_stage() {
         assert_eq!(initial.read, CacheRead::Missing);
         assert!(matches!(initial.write, CacheWrite::Stored { bytes: 1.. }));
         assert!(counts.fallback_attempts > 0 && counts.fallback_attempts == counts.stores);
-        assert_eq!(
-            (counts.stream_hits, counts.classic_hits, counts.compute_hits),
-            (0, 0, 0)
-        );
+        // Missing on disk does not imply every catalog request is a miss:
+        // Opaque and Mask share a native PSO for each culling/winding pair.
+        // A later request may load what this same session already stored.
+        // Native descriptor validation and zero store/load errors below still
+        // reject name collisions or mismatched descriptors.
         assert_eq!(counts.fallback_attempts, counts.miss_or_mismatch);
     }
     assert_eq!(
         (
+            counts.native_load_errors,
             counts.store_errors,
             counts.serialization_errors,
             counts.strict_refusals
         ),
-        (0, 0, 0)
+        (0, 0, 0, 0)
     );
     assert!(!counts.disabled && !counts.overflowed);
     let input = crate::scene_msaa::fixture::mixed(1.);
