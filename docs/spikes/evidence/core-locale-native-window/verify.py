@@ -131,6 +131,117 @@ def verify_cjk(data, manifest):
         require(command['log_sha256'] == sha(data['logical-size/' + command['name'] + '.log']), 'Actual CPU log identity')
 
 
+def verify_pseudo(data, manifest):
+    read = lambda name: json.loads(data[name])
+    root = 'en-XA/'; identity = manifest['pseudo']
+    refused = read('pseudo-author-preflight-refusal-001.json'); setup = read('pseudo-author-failure-002.json')
+    require(refused['launched'] is False and refused['stale_declared_runner_sha256'] != refused['actual_runner_sha256']
+            and setup['terminal_exit_code'] == 1 and setup['author_or_native_child_launched'] is False
+            and setup['author_output_exists'] is False and setup['recordings_output_exists'] is False,
+            'Original hash and no-child fixture refusals retained')
+    corrected = read('pseudo-author-proposal-003.json'); frozen = read('source-003/freeze.json')
+    runner = next(row for row in frozen['records'] if row['path'] == 'tools/probes/core-locale-window.py')
+    require(corrected['source_sha'] == identity['source'] == frozen['source_sha']
+            and corrected['runner_sha256'] == runner['sha256']
+            and corrected['setup_create_only_parents'] == [str(Path(corrected['fresh_outputs'][0]).parent)],
+            'Corrected metadata and narrow create-only setup')
+    inputs = read('pseudo-author-input-identities-002.json'); command = inputs['source_relevance']['command']
+    require(command[:6] == ['git', 'diff', '--name-only', inputs['headless']['producing_source'], identity['source'], '--']
+            and inputs['source_relevance']['stdout'] == '', 'Correct two-tree historical author comparison')
+    author = read(root + 'author-001/authoring/receipt.json')
+    require(author['locale'] == 'en-XA' and author['state'] == 'playing' and author['revision'] == 32 and author['rpc_calls'] == 46
+            and author['undo_redo_reopen'] is True and author['validation']['valid'] is True
+            and author['binary_sha256'] == manifest['historical_headless_sha256'], 'Actual historical public pseudo authoring')
+    document = read(root + 'author-001/authoring/project/core.json')
+    require(document['settings']['localization'] == {'locale': 'en', 'pseudo': True, 'fallbacks': []}
+            and sha(data[root + 'author-001/authoring/project/core.json']) == identity['project_sha256'] == author['project_sha256']
+            and author['localized_text']['en-XA']['hud.prompt'].startswith('[!! '), 'Actual expanded pseudo scene binding')
+    exported = read(root + 'export-001/result.json'); package = read(root + 'shipping-001/export.json')
+    require(exported['passed'] is True and exported['source_sha'] == identity['source']
+            and exported['managed_calls_finished'] is True and exported['remaining_private_entries'] == []
+            and exported['authoring_unchanged'] is True and package['player_sha256'] == exported['player_sha256'] == identity['player_sha256']
+            and exported['export_receipt_sha256'] == sha(data[root + 'shipping-001/export.json']), 'Fresh retired pseudo export/player')
+    require(package['project_sha256'] == identity['project_sha256'] and package['mode'] == 'window'
+            and package['target'] == 'aarch64-apple-darwin' and package['physics_mode'] == 'deterministic'
+            and package['startup_source_parsing'] is False and package['build_storage_removed_before_startup'] is True
+            and package['startup']['tick'] == 1 and package['startup']['render_input']['gpu_submitted'] is False
+            and 'profiling' not in package and exported['node'] == 'v22.23.3' and exported['sdk_version'] == '27.0'
+            and exported['compiler'].startswith('rustc 1.99.0 '), 'Ordinary source-free startup and actual tools')
+    graph = data[root + 'export-001/call-007.stdout.raw.log']
+    require(sha(graph) == exported['selected_normal_graph_sha256'] and exported['selected_observer_features_absent'] is True, 'Pseudo actual selected graph')
+    for line in graph.decode().splitlines():
+        require('|' in line and not set(line.removesuffix(' (*)').partition('|')[2].split(','))
+                & set(exported['forbidden_observer_features']), 'No selected pseudo native observer')
+    calls = read(root + 'export-001/managed-calls.json'); external = {r['path']: r for r in manifest['external_logs']}
+    require(len(calls) == 18 and all(c['managed_call_finished'] is True and c['exit_code'] == 0 for c in calls), 'Pseudo eighteen owned export calls')
+    for call in calls:
+        for stream in ('stdout', 'stderr'):
+            capture = call[stream]
+            if 'path' not in capture:
+                require(capture == {'merged_into': 'stdout'}, 'Pseudo merged stream')
+                continue
+            name = root + 'export-001/' + Path(capture['path']).name
+            if name in data:
+                require(sha(data[name]) == capture['sha256'] and len(data[name]) == capture['bytes'], 'Pseudo raw managed output')
+            else:
+                require(all(external[capture['path']][k] == capture[k] for k in ('bytes', 'sha256')), 'Pseudo retained large compiler output')
+    recording = read(root + 'recordings-001/recordings.json'); baseline = read(root + 'baseline-001/result.json')
+    require(recording['locale'] == 'en-XA' and recording['project_sha256'] == identity['project_sha256']
+            and recording['locale_settings'] == {'locale': 'en', 'pseudo': True, 'fallbacks': []}
+            and baseline['passed'] is True and baseline['managed_calls_finished'] is True
+            and baseline['player_sha256'] == identity['player_sha256'], 'Pseudo same-package baseline/locale')
+    reports = {}
+    for case, clocks in zip(recording['cases'], [('lose-short', 900, 900), ('win', 2156, 2156), ('lose-restart-win', 3056, 2156)], strict=True):
+        name, host, tick = clocks; require((case['name'], case['host_steps'], case['simulation_tick']) == clocks, 'Unchanged pseudo route clocks')
+        report = read(root + 'baseline-001/' + name + '.json'); reports[name] = report
+        require(report == read(root + 'baseline-001/' + name + '.stdout.raw.log') and type(report['tick']) is int and report['tick'] == tick
+                and type(report['frames']) is int and report['frames'] == host * 800, 'Raw actual pseudo CPU clocks')
+        plan = read(root + 'recordings-001/' + name + '-observe.json'); observed = report['observations']
+        require(observed['passed'] is True and set(observed['entities']) == set(plan['entities'])
+                and len(observed['checks']) == len(plan['checks']) > 0, 'Complete pseudo observations')
+        for actual, expected in zip(observed['checks'], sorted(plan['checks'], key=lambda c: (c['tick'], c['name'])), strict=True):
+            require(all(actual[k] == expected[k] for k in ('name', 'tick', 'expect')) and actual['passed'] is True
+                    and actual['actual'] is expected['expect']['value'], 'Exact pseudo observation membership/outcomes')
+        require(report['logs']['dropped'] == 0 and report['render_input']['mode'] == 'cpu-only'
+                and report['render_input']['gpu_submitted'] is False and report['render_input']['ui']['widgets'] == 13
+                and report['render_input']['ui']['sources'] == case['labels'], 'Canonical actual pseudo HUD')
+        pcm = next(v for v in manifest['retained_inputs'] if v['path'].endswith('/en-XA/baseline-001/' + name + '.pcm'))
+        require(pcm['bytes'] == host * 6400 and pcm['sha256'] == report['pcm_sha256'], 'Pseudo finite-PCM identity/clocks')
+    reset, win = reports['lose-restart-win'], reports['win']
+    require(reset['session'] == {'generation': 2, 'host_tick': 3056, 'simulation_tick': 2156,
+            'restarts': [{'host_step': 900, 'completed_generation': 1, 'simulation_tick': 900, 'output_frames': '720000'}]}
+            and all(reset[k] == win[k] for k in ('logs', 'render_input', 'flipbooks', 'sources'))
+            and reset['observations']['entities'] == win['observations']['entities'], 'Pseudo CPU restart/fresh-win parity')
+    require(len(read(root + 'baseline-001/processes.json')) == 3
+            and all(c['managed_call_finished'] is True and c['exit_code'] == 0 for c in read(root + 'baseline-001/processes.json')), 'Actual three CPU children')
+    prefix = root + 'window-001/'; result = read(prefix + 'result.json'); closeout = read(prefix + 'closeout.json')
+    require(result['passed'] is False and 'TimeoutExpired' in result['error'] and ', 120)' in result['error']
+            and result['managed_calls_finished'] is True and read(prefix + 'processes.json')[0]['managed_call_finished'] is True,
+            'Original failed pseudo native deadline retained')
+    require(not data[prefix + 'lose-restart-win.stdout.raw.log'] and not data[prefix + 'lose-restart-win.stderr.raw.log']
+            and prefix + 'lose-restart-win.json' not in data and closeout['final_report_present'] is False,
+            'No manufactured pseudo final report')
+    events = [json.loads(line) for line in data[prefix + 'eligibility.jsonl'].splitlines()]
+    require(len(events) == 126 and len(events) <= events[0]['max_records'] == 512 and len(data[prefix + 'eligibility.jsonl']) <= 512*1024,
+            'Bounded partial pseudo state log')
+    last = events[-1]; state = last['state']
+    require(last['kind'] == 'snapshot' and state['generation'] == 2 and state['host_steps'] == 1125 and state['world_tick'] == 225
+            and state['cached_focused'] is False and state['native_focused'] is False and state['simulation_suspended'] is True
+            and last['focus_gained_events'] == last['focus_lost_events'] == 4 and last['surface_deferrals'] == 0
+            and {tuple(e['state']['physical_size']) for e in events if e['kind'] == 'snapshot'} == {(1280, 960)}, 'Actual focus-paused partial progress/no resize')
+    visual = read(prefix + 'root-visual-review.json'); ready = read(prefix + 'owned-live.json')
+    require(ready['pid'] == ready['pgid'] == visual['owned_pid'] == closeout['owned_pid'] == 77582
+            and closeout['owned_and_default_bundle_exec_independently_absent'] is True
+            and closeout['root_visual_receipt_sha256'] == sha(data[prefix + 'root-visual-review.json'])
+            and visual['player_sha256'] == identity['player_sha256'], 'Exact pseudo child/visual receipt/cleanup')
+    require([c['state'] for c in visual['actual_captures']] == ['initial and early gameplay', 'loss']
+            and visual['normal_logical_size'] == [640, 480] and visual['resize']['actual_size_changed'] is False
+            and visual['resize']['narrow_appearance_accepted'] is False
+            and visual['claims']['captured_normal_initial_and_loss_text_only'] is True
+            and all(v is False for k, v in visual['claims'].items() if k != 'captured_normal_initial_and_loss_text_only'),
+            'Partial normal pseudo pixels only, no restart/win/narrow/full-native acceptance')
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--originals', action='store_true')
@@ -269,6 +380,7 @@ def main():
     require(cjk['locale'] == 'zh-Hans' and cjk['undo_redo_reopen'] is True and cjk['validation']['valid'] is True
             and cjk['revision'] == 32 and cjk['rpc_calls'] == 46 and '按 R 或 Start' in cjk['localized_text']['zh-Hans']['hud.prompt'], 'Actual CJK public authoring')
     verify_cjk(data, manifest)
+    verify_pseudo(data, manifest)
     require(all(manifest['scope'][k] is False for k in ('complete_appearance', 'RTL_health_order',
             'audible_quality', 'performance_gate', 'pseudo_qualification'))
             and manifest['scope']['CJK_export_or_window'] is True and manifest['scope']['normal_size_visual_review'] is True, 'Exact remaining scope')
@@ -287,6 +399,9 @@ def main():
         cjk_pcm = {name: Path(next(r['path'] for r in manifest['retained_inputs'] if r['path'].endswith('/zh-Hans/baseline-001/' + name + '.pcm'))).read_bytes() for name in reports}
         require(cjk_pcm['lose-restart-win'] == cjk_pcm['lose-short'] + cjk_pcm['win'] and not any(cjk_pcm['lose-short'][-60 * 6400:]), 'CJK exact actual PCM reset/settled loss cue')
         require(all(math.isfinite(v[0]) for raw in cjk_pcm.values() for v in struct.iter_unpack('<f', raw)), 'CJK finite actual PCM')
+        pseudo_pcm = {name: Path(next(r['path'] for r in manifest['retained_inputs'] if r['path'].endswith('/en-XA/baseline-001/' + name + '.pcm'))).read_bytes() for name in reports}
+        require(pseudo_pcm['lose-restart-win'] == pseudo_pcm['lose-short'] + pseudo_pcm['win'] and not any(pseudo_pcm['lose-short'][-60*6400:]), 'Pseudo exact PCM reset/settled loss cue')
+        require(all(math.isfinite(v[0]) for raw in pseudo_pcm.values() for v in struct.iter_unpack('<f', raw)), 'Pseudo finite actual PCM')
     if args.git_source:
         require(args.source_root is not None, 'Git source requires repository path')
         for row in read('source-002/freeze.json')['records']:
@@ -296,7 +411,7 @@ def main():
         for row in read('source-003/freeze.json')['records']:
             actual = subprocess.check_output(['git', 'show', args.git_source + ':' + row['path']], cwd=args.source_root)
             require(sha(actual) == row['sha256'], 'CJK logical-size composition source ' + row['path'])
-    print('PASS:', len(data), 'records;18 Python;Arabic author/export/3CPU/complete numeric window;retained visual timeout/5 partial tool images;CJK distinct export/3CPU/complete3056window/4 normal-size tool images;win image missed. No full appearance or performance gate.')
+    print('PASS:', len(data), 'records;18 Python;Arabic author/export/3CPU/complete numeric window;retained visual timeout/5 partial tool images;CJK distinct export/3CPU/complete3056window/4 normal-size tool images;win image missed;pseudo export/3CPU pass/native120s timeout atgen2host1125/normalinitial+loss pixels only. No full appearance or performance gate.')
 
 
 if __name__ == '__main__':
