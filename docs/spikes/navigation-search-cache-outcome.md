@@ -127,5 +127,8 @@ The verifier independently locates rank 2,049 in each actual 2,156-sample frame
 histogram, replays all fixed comparisons, and checks functional/mode/machine
 correspondence. It never launches a player or build. All owned build, functional
 and timing supervisors exited zero and were reaped (63906, 75741, 34897).
-The 2 ms budget remains unmet. The cache is **not adopted**; continue other
-engine work without another optimization/profiling branch for this budget.
+The 2 ms budget remains unmet. The cache is **not adopted**. At the time of this
+experiment, further work on the budget was stopped. The director's 2026-10-14
+clarification supersedes that general stop: periodically investigate distinct
+script-cost hypotheses while other engine work continues. This changes neither
+the measurements nor the decision on this cache candidate.

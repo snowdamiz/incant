@@ -1,0 +1,1015 @@
+{
+  "format": "incant-animated-model-refresh-v1",
+  "created_utc": "2026-10-14T20:20:40.597464+00:00",
+  "final_code_source": "cb494bb2b6bb065e7f37569efe11f11adb788f97",
+  "production_source": "043863a531663fe7433f292909a233cb868f8e8a",
+  "base_main294": "8b0a90b0911d70986a3a20b4c47937e29cba6c41",
+  "source_by_freeze": {
+    "001": "043863a531663fe7433f292909a233cb868f8e8a",
+    "002": "e2bdc6154a714fdc89a15a90f63d4e7b3308afae",
+    "003": "b56e928510c3e28af3a59f3cb67c17df502ea39d",
+    "004": "f022f23db1754bbba5494583c07fa75aaaa4941b",
+    "005": "cb494bb2b6bb065e7f37569efe11f11adb788f97"
+  },
+  "archive_sha256": "9f20472f96103d66ec1d458f0dd26039873d5258e0ee30a04ea8380d32f1a48e",
+  "archive_bytes": 683917,
+  "archive_decoded_bytes": 5601706,
+  "records": [
+    {
+      "name": "cpu-launch-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/cpu-launch-001.json",
+      "bytes": 4645,
+      "sha256": "ea9ed07001ef84ec2c534ae95a5273f78c0392500169ba7dc04543f65b4c59fc"
+    },
+    {
+      "name": "cpu-launch-002.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/cpu-launch-002.json",
+      "bytes": 4645,
+      "sha256": "af6353a4e32d85e2f401748f504a35ef9be32fff24453dfa25d3d4973e30a30d"
+    },
+    {
+      "name": "cpu-launch-003.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/cpu-launch-003.json",
+      "bytes": 4837,
+      "sha256": "07c41db05b7512f1e076e556f0874ccf8f441dd830bddd0058ae886ce7659c40"
+    },
+    {
+      "name": "cpu-launch-004.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/cpu-launch-004.json",
+      "bytes": 3455,
+      "sha256": "df36acdfa685884621b19fee937cfd3889e602717bfe9ae9e9f2ce7d29be7adc"
+    },
+    {
+      "name": "cpu-launch-005.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/cpu-launch-005.json",
+      "bytes": 3455,
+      "sha256": "1cd1c52ac76ca1cce30efd34f3b212387c3f6798faeed6f491fa6dc063eff0a9"
+    },
+    {
+      "name": "cpu-proposal-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/cpu-proposal-001.json",
+      "bytes": 5038,
+      "sha256": "cdc65952e552dc1514f02c7992a5961d85908f805098feffb5af9332563a116b"
+    },
+    {
+      "name": "cpu-proposal-002.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/cpu-proposal-002.json",
+      "bytes": 5300,
+      "sha256": "65be05f930efb397dca38c3080674a5cd2ce44f60bb3a2c0113bbb556c98ac4e"
+    },
+    {
+      "name": "cpu-proposal-003.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/cpu-proposal-003.json",
+      "bytes": 5604,
+      "sha256": "5de628e0740179816a56421c5277a18bcfaba4ccaefb0150af3a9c4d498c84b5"
+    },
+    {
+      "name": "cpu-proposal-004.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/cpu-proposal-004.json",
+      "bytes": 4118,
+      "sha256": "8cfc7548b5f7b92dae02e0040e4883a61b0e24b5b5c013bdacee8cda93f3662b"
+    },
+    {
+      "name": "cpu-proposal-005.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/cpu-proposal-005.json",
+      "bytes": 4309,
+      "sha256": "2dd8792c1bc197e760e256036cd9e992866f04ea3df869babe04fe5d154ba9a7"
+    },
+    {
+      "name": "cpu-source001-0.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/cpu-source001-0.raw.log",
+      "bytes": 285089,
+      "sha256": "8f05fe3e573513038073bcfaec74de59d2fc0fe24723b4cff227c83586e66075"
+    },
+    {
+      "name": "cpu-source001-results.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/cpu-source001-results.json",
+      "bytes": 1141,
+      "sha256": "0818500b74e4dd98239c3170d62d5dab837ebe3457c5480cb38f0dd5464d2ac8"
+    },
+    {
+      "name": "cpu-source002-0.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/cpu-source002-0.raw.log",
+      "bytes": 287421,
+      "sha256": "b8ffa399957061bd8636cc6f7fcb3fa79b95927479f18c7e9c5d8f9a8e29be60"
+    },
+    {
+      "name": "cpu-source002-1.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/cpu-source002-1.raw.log",
+      "bytes": 386601,
+      "sha256": "83e54d90ca8a4913afa86b1e7269a19f4d003dd57f5c19a7c755dbdb59cda040"
+    },
+    {
+      "name": "cpu-source002-2.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/cpu-source002-2.raw.log",
+      "bytes": 294825,
+      "sha256": "4c31b18921542524b89e9d97b0f8fd29efcbca323a63b3957586bd5d7423ef11"
+    },
+    {
+      "name": "cpu-source002-3.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/cpu-source002-3.raw.log",
+      "bytes": 1960,
+      "sha256": "190342162863a935ad396ef67d191c5edf3d2e702ad897e7ef003f63f16433b9"
+    },
+    {
+      "name": "cpu-source002-results.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/cpu-source002-results.json",
+      "bytes": 22850,
+      "sha256": "7c4dd3539087f17c6c2edd927ad9f0fa09d56031977304bc0ae78aea7450f49e"
+    },
+    {
+      "name": "cpu-source003-0.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/cpu-source003-0.raw.log",
+      "bytes": 294223,
+      "sha256": "f49681a3dca1934946964ffb85bb76561a6a0082bd706243fd233269b0ae4d4b"
+    },
+    {
+      "name": "cpu-source003-1.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/cpu-source003-1.raw.log",
+      "bytes": 294071,
+      "sha256": "d815396b67e4a065a6ece8d892446a0a4664ff771defa4d5415bfb2f5ce5569a"
+    },
+    {
+      "name": "cpu-source003-2.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/cpu-source003-2.raw.log",
+      "bytes": 337595,
+      "sha256": "2f48f9a11b2290f657693f31bd33d5669b5664c3e1fcf720c7a83ed463b58f8e"
+    },
+    {
+      "name": "cpu-source003-failed-artifact.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/cpu-source003-failed-artifact.json",
+      "bytes": 1678,
+      "sha256": "0ec3b87cec6f026c801383444537822dee1da4c1c9c101ea0eff34346ae8382e"
+    },
+    {
+      "name": "cpu-source003-results.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/cpu-source003-results.json",
+      "bytes": 7871,
+      "sha256": "ae86216b25a188c9e09db71a62f61ade5a5b60f981049957762b527965be5fe9"
+    },
+    {
+      "name": "cpu-source004-0.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/cpu-source004-0.raw.log",
+      "bytes": 331922,
+      "sha256": "215a492025acf539326ac8301f688ca383671ac6318391e96ca45ba61dc42001"
+    },
+    {
+      "name": "cpu-source004-1.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/cpu-source004-1.raw.log",
+      "bytes": 1986,
+      "sha256": "0298ac99e9c6586e96498b5df2d079eb0e1ecd10fd8d5a4f501d28a90571138f"
+    },
+    {
+      "name": "cpu-source004-results.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/cpu-source004-results.json",
+      "bytes": 4338,
+      "sha256": "93d869d9c5d6f1809805e3825a9cae45bf171475218044d6c67d7f6af81b4a56"
+    },
+    {
+      "name": "cpu-source005-0.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/cpu-source005-0.raw.log",
+      "bytes": 332318,
+      "sha256": "87bb92a69f12e19341ccb40f6942bd7e8df0f0b293169c38071bdaa84de9d6c9"
+    },
+    {
+      "name": "cpu-source005-1.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/cpu-source005-1.raw.log",
+      "bytes": 589,
+      "sha256": "e1835a19075e8101338ae132b3e9d7e4b24e97cea86398f93330f25ffe65d0cc"
+    },
+    {
+      "name": "cpu-source005-results.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/cpu-source005-results.json",
+      "bytes": 4337,
+      "sha256": "23dc29d9b4052a2beccf0df1e7cd1e325b2ba48f1ca201992527e38b2455d2d0"
+    },
+    {
+      "name": "cpu-supervisor-001.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/cpu-supervisor-001.py",
+      "bytes": 9057,
+      "sha256": "b563fa242688317385dffd9a297ec04ffa00c16c17507bec010a139840c12068"
+    },
+    {
+      "name": "cpu-supervisor-002.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/cpu-supervisor-002.py",
+      "bytes": 9057,
+      "sha256": "b6027b81b76ae63e70f368866d1252aab708304cb8dd69fdd15a0218f29eb1ea"
+    },
+    {
+      "name": "cpu-supervisor-003.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/cpu-supervisor-003.py",
+      "bytes": 9057,
+      "sha256": "41425ff35fb5fa68df856be7363d28c9ab9c11c20840d4848e7c63e6eec778d5"
+    },
+    {
+      "name": "cpu-supervisor-004.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/cpu-supervisor-004.py",
+      "bytes": 9057,
+      "sha256": "bbeac70414752ebae53eb270db971fd91130ab2f74dbd69e4ea250ec0e63cb3f"
+    },
+    {
+      "name": "cpu-supervisor-005.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/cpu-supervisor-005.py",
+      "bytes": 9057,
+      "sha256": "d936bad857afb03a1a1db3abf30250615e6a1522fc2fa7093cbe3e8bcf442eb6"
+    },
+    {
+      "name": "gpu-grant-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/gpu-grant-001.json",
+      "bytes": 446,
+      "sha256": "d39996bc6e4c750ad9f1c44c3f6a901b131dfd056e8660756398be898fd9d29f"
+    },
+    {
+      "name": "gpu-grant-002.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/gpu-grant-002.json",
+      "bytes": 452,
+      "sha256": "871d98f7bd1538f6cbf89f28d0252e03c7d98fbaeb9d40c2006fc68338e27345"
+    },
+    {
+      "name": "gpu-proposal-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/gpu-proposal-001.json",
+      "bytes": 4172,
+      "sha256": "8ed66ca27d7fc6846b4f8757165c626f1b365f04592f845d9b0516afa4ff34dc"
+    },
+    {
+      "name": "gpu-proposal-002.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/gpu-proposal-002.json",
+      "bytes": 4556,
+      "sha256": "29bac147d3391a53b39c9ebf4da0fcb37a2da8cfb6aa6598c48a560ac01a3f66"
+    },
+    {
+      "name": "gpu-source004-001/launch.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/gpu-source004-001/launch.json",
+      "bytes": 4564,
+      "sha256": "4780424e8bddd58fc3e6155c0f81d32b1e60e2dc9cb6806cd15c30ec2f3adfab"
+    },
+    {
+      "name": "gpu-source004-001/output.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/gpu-source004-001/output.log",
+      "bytes": 2165,
+      "sha256": "b89ccde9460ca3b183d8298611a8081c499423a5096ef5d51eb0bbcc8a9ab060"
+    },
+    {
+      "name": "gpu-source004-001/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/gpu-source004-001/result.json",
+      "bytes": 1140,
+      "sha256": "494b6e3a2d925389ed339c0eb1bfb51f53270ab1b97a620561e4e87cc3a6b3ab"
+    },
+    {
+      "name": "gpu-source005-002/launch.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/gpu-source005-002/launch.json",
+      "bytes": 4948,
+      "sha256": "5d2e178cbb211c1fd025723875fbe1535c04e063dacd7d3dcd3b43e1b81cf028"
+    },
+    {
+      "name": "gpu-source005-002/output.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/gpu-source005-002/output.log",
+      "bytes": 2824,
+      "sha256": "55a5f7e124284c5abdad006dca7f6c4273617c05485f588a30f867a81373e552"
+    },
+    {
+      "name": "gpu-source005-002/pixels/continued.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/gpu-source005-002/pixels/continued.json",
+      "bytes": 443,
+      "sha256": "8e0618d7477d58b2e63eed3410d227e458f6b20d9d2790f8622f17eed36fd866"
+    },
+    {
+      "name": "gpu-source005-002/pixels/continued.rgba",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/gpu-source005-002/pixels/continued.rgba",
+      "bytes": 61440,
+      "sha256": "5c425e898384f2d7c404b0682c53528bb06238e1c154df48ce97706f291eb3a6"
+    },
+    {
+      "name": "gpu-source005-002/pixels/initial.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/gpu-source005-002/pixels/initial.json",
+      "bytes": 441,
+      "sha256": "c858181f0aaed9ca5ba3e90dd1f6aca7b10ddc675ea87cbc5f95af1e92d03d67"
+    },
+    {
+      "name": "gpu-source005-002/pixels/initial.rgba",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/gpu-source005-002/pixels/initial.rgba",
+      "bytes": 61440,
+      "sha256": "074ad6ef3ba5f8d602eccc5a5108e7e527eeaa8fd446b712c569c4ce3439ca0e"
+    },
+    {
+      "name": "gpu-source005-002/pixels/invalid_layout_retained.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/gpu-source005-002/pixels/invalid_layout_retained.json",
+      "bytes": 457,
+      "sha256": "309001b0263c885fc38f8a54a99d5f6d8d0bee474b5335e9946fff0014ec2b89"
+    },
+    {
+      "name": "gpu-source005-002/pixels/invalid_layout_retained.rgba",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/gpu-source005-002/pixels/invalid_layout_retained.rgba",
+      "bytes": 61440,
+      "sha256": "074ad6ef3ba5f8d602eccc5a5108e7e527eeaa8fd446b712c569c4ce3439ca0e"
+    },
+    {
+      "name": "gpu-source005-002/pixels/late_refusal_retained.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/gpu-source005-002/pixels/late_refusal_retained.json",
+      "bytes": 455,
+      "sha256": "9af89c4a0c820174c54615b481e88d923ece2e244d7c8fd6c6e422fc4429acc8"
+    },
+    {
+      "name": "gpu-source005-002/pixels/late_refusal_retained.rgba",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/gpu-source005-002/pixels/late_refusal_retained.rgba",
+      "bytes": 61440,
+      "sha256": "074ad6ef3ba5f8d602eccc5a5108e7e527eeaa8fd446b712c569c4ce3439ca0e"
+    },
+    {
+      "name": "gpu-source005-002/pixels/proof.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/gpu-source005-002/pixels/proof.json",
+      "bytes": 603,
+      "sha256": "7b960d6988ced55d3de73f40b54f1166e3c8947716a1bb6ad09baf0f32fbde32"
+    },
+    {
+      "name": "gpu-source005-002/pixels/replacement.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/gpu-source005-002/pixels/replacement.json",
+      "bytes": 445,
+      "sha256": "86b02b7d86e1016c28091ee89bad975beadf50cf384a751f15257a76c61f6fa0"
+    },
+    {
+      "name": "gpu-source005-002/pixels/replacement.rgba",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/gpu-source005-002/pixels/replacement.rgba",
+      "bytes": 61440,
+      "sha256": "4c1b8d84c3f81e483e8b4085aa2dd684f98a3af36e60eb4793bc66265e7217ff"
+    },
+    {
+      "name": "gpu-source005-002/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/gpu-source005-002/result.json",
+      "bytes": 2903,
+      "sha256": "1a456eb1ea65c97f324c25da6e5e3207acd19d078cc792e2fae2a01b54091c3b"
+    },
+    {
+      "name": "gpu-supervisor-001.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/gpu-supervisor-001.py",
+      "bytes": 4677,
+      "sha256": "dee6c5299971ddce4ee06f529869d373a6cdd7f9ec79b6c184816035275329f7"
+    },
+    {
+      "name": "gpu-supervisor-002.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/gpu-supervisor-002.py",
+      "bytes": 4677,
+      "sha256": "de925fb5a9ab521826b5b185fa63764a743a87bee2d83db6111484678c8aaca8"
+    },
+    {
+      "name": "lease-baseline.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/lease-baseline.json",
+      "bytes": 196,
+      "sha256": "db56b759b97b9edbe33287a3d90038364b9bbb99206c52461c660ba7c9633358"
+    },
+    {
+      "name": "source-001/files/crates/incant_play/src/texture_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-001/files/crates/incant_play/src/texture_refresh.rs",
+      "bytes": 4896,
+      "sha256": "0c7aad30e00ad9fbd4911c924c4d5b5bdd768fb0fd6f22f8455a3f6227a39aaa"
+    },
+    {
+      "name": "source-001/files/crates/incant_play/tests/animated_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-001/files/crates/incant_play/tests/animated_refresh.rs",
+      "bytes": 10779,
+      "sha256": "afd375bcbda8b05978e2120e6b2bc8ab470c1a01b9e8f619711d84df30f3e72d"
+    },
+    {
+      "name": "source-001/files/crates/incant_render_native/src/animation.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-001/files/crates/incant_render_native/src/animation.rs",
+      "bytes": 4091,
+      "sha256": "dc439d9c560d5088b9bbf726763c16ac224dc12e9d68b578aed146e774e2f042"
+    },
+    {
+      "name": "source-001/files/crates/incant_render_native/src/binding.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-001/files/crates/incant_render_native/src/binding.rs",
+      "bytes": 10185,
+      "sha256": "210a63458dcd7f84e056369c16782619321f705757befa4c59bd6629b6dde480"
+    },
+    {
+      "name": "source-001/files/crates/incant_render_native/src/model_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-001/files/crates/incant_render_native/src/model_refresh.rs",
+      "bytes": 4879,
+      "sha256": "2a21d3a8d9361463052c1b0a15b50e6de64db297b3f008b2c7594a8b0114953a"
+    },
+    {
+      "name": "source-001/files/crates/incant_render_native/src/texture_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-001/files/crates/incant_render_native/src/texture_refresh.rs",
+      "bytes": 15005,
+      "sha256": "8e41c41e68c23b6bfc92872aebf1a82a2624f82c55f343f21890dd9157f45bba"
+    },
+    {
+      "name": "source-001/files/crates/incant_render_native/tests/animated_refresh/continuity.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-001/files/crates/incant_render_native/tests/animated_refresh/continuity.rs",
+      "bytes": 6758,
+      "sha256": "6f9cc443aee5e8dcf01309feb73406c497da98897f4b6dccd09a24a26c92bc96"
+    },
+    {
+      "name": "source-001/files/crates/incant_render_native/tests/animated_refresh/refusals.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-001/files/crates/incant_render_native/tests/animated_refresh/refusals.rs",
+      "bytes": 6747,
+      "sha256": "f1dd0e8d894dcbff754aff139d1d568f75225e6c0f538cbe4364bff68b35c23a"
+    },
+    {
+      "name": "source-001/files/crates/incant_render_native/tests/animated_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-001/files/crates/incant_render_native/tests/animated_refresh.rs",
+      "bytes": 10723,
+      "sha256": "f17f678d115a37363f08503e9e59ca9d6c46361deba7336908c44fa7b6329517"
+    },
+    {
+      "name": "source-001/files/crates/incant_render_native/tests/common/animated_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-001/files/crates/incant_render_native/tests/common/animated_refresh.rs",
+      "bytes": 6508,
+      "sha256": "636343ee0bbbba216b025a9137952a4d85735ef557d610a253fcb6487fb46584"
+    },
+    {
+      "name": "source-001/files/docs/spikes/animated-model-refresh.md",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-001/files/docs/spikes/animated-model-refresh.md",
+      "bytes": 3966,
+      "sha256": "52ba1670f878051c2e9536a639ecf4de7131bed954592af9514ab25aa15757ea"
+    },
+    {
+      "name": "source-001/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-001/freeze.json",
+      "bytes": 4032,
+      "sha256": "8d1933350abf98bc7d8d9c5b7517b50bf2b77630acd3afa978949d3d3f7e642e"
+    },
+    {
+      "name": "source-002/files/crates/incant_play/src/texture_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-002/files/crates/incant_play/src/texture_refresh.rs",
+      "bytes": 4896,
+      "sha256": "0c7aad30e00ad9fbd4911c924c4d5b5bdd768fb0fd6f22f8455a3f6227a39aaa"
+    },
+    {
+      "name": "source-002/files/crates/incant_play/tests/animated_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-002/files/crates/incant_play/tests/animated_refresh.rs",
+      "bytes": 10779,
+      "sha256": "afd375bcbda8b05978e2120e6b2bc8ab470c1a01b9e8f619711d84df30f3e72d"
+    },
+    {
+      "name": "source-002/files/crates/incant_render_native/src/animation.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-002/files/crates/incant_render_native/src/animation.rs",
+      "bytes": 4091,
+      "sha256": "dc439d9c560d5088b9bbf726763c16ac224dc12e9d68b578aed146e774e2f042"
+    },
+    {
+      "name": "source-002/files/crates/incant_render_native/src/binding.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-002/files/crates/incant_render_native/src/binding.rs",
+      "bytes": 10185,
+      "sha256": "210a63458dcd7f84e056369c16782619321f705757befa4c59bd6629b6dde480"
+    },
+    {
+      "name": "source-002/files/crates/incant_render_native/src/model_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-002/files/crates/incant_render_native/src/model_refresh.rs",
+      "bytes": 4879,
+      "sha256": "2a21d3a8d9361463052c1b0a15b50e6de64db297b3f008b2c7594a8b0114953a"
+    },
+    {
+      "name": "source-002/files/crates/incant_render_native/src/texture_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-002/files/crates/incant_render_native/src/texture_refresh.rs",
+      "bytes": 15005,
+      "sha256": "8e41c41e68c23b6bfc92872aebf1a82a2624f82c55f343f21890dd9157f45bba"
+    },
+    {
+      "name": "source-002/files/crates/incant_render_native/tests/animated_refresh/continuity.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-002/files/crates/incant_render_native/tests/animated_refresh/continuity.rs",
+      "bytes": 6839,
+      "sha256": "dbd958a186daa6dd45a8298e1e3a99e0fe621ad87c940edd7e8b6cc8e0d05701"
+    },
+    {
+      "name": "source-002/files/crates/incant_render_native/tests/animated_refresh/refusals.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-002/files/crates/incant_render_native/tests/animated_refresh/refusals.rs",
+      "bytes": 6828,
+      "sha256": "398df7c2b004e0d384e4e3e930cfb095b969c9959815b3239c57665743bf32fa"
+    },
+    {
+      "name": "source-002/files/crates/incant_render_native/tests/animated_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-002/files/crates/incant_render_native/tests/animated_refresh.rs",
+      "bytes": 10723,
+      "sha256": "f17f678d115a37363f08503e9e59ca9d6c46361deba7336908c44fa7b6329517"
+    },
+    {
+      "name": "source-002/files/crates/incant_render_native/tests/common/animated_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-002/files/crates/incant_render_native/tests/common/animated_refresh.rs",
+      "bytes": 6508,
+      "sha256": "636343ee0bbbba216b025a9137952a4d85735ef557d610a253fcb6487fb46584"
+    },
+    {
+      "name": "source-002/files/docs/spikes/animated-model-refresh.md",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-002/files/docs/spikes/animated-model-refresh.md",
+      "bytes": 3966,
+      "sha256": "52ba1670f878051c2e9536a639ecf4de7131bed954592af9514ab25aa15757ea"
+    },
+    {
+      "name": "source-002/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-002/freeze.json",
+      "bytes": 4032,
+      "sha256": "bddfe37c233f5c05142e191ab25c4cbe7548e26df88c08663d9deb5f665f4db8"
+    },
+    {
+      "name": "source-003/files/crates/incant_play/src/texture_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-003/files/crates/incant_play/src/texture_refresh.rs",
+      "bytes": 4896,
+      "sha256": "0c7aad30e00ad9fbd4911c924c4d5b5bdd768fb0fd6f22f8455a3f6227a39aaa"
+    },
+    {
+      "name": "source-003/files/crates/incant_play/tests/animated_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-003/files/crates/incant_play/tests/animated_refresh.rs",
+      "bytes": 10779,
+      "sha256": "afd375bcbda8b05978e2120e6b2bc8ab470c1a01b9e8f619711d84df30f3e72d"
+    },
+    {
+      "name": "source-003/files/crates/incant_render_gpu_host/tests/game/animated_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-003/files/crates/incant_render_gpu_host/tests/game/animated_refresh.rs",
+      "bytes": 17442,
+      "sha256": "f1beeb37061e8579dc82ce179feec72d13a09594f27041f796a73d132cff32b7"
+    },
+    {
+      "name": "source-003/files/crates/incant_render_gpu_host/tests/game/model_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-003/files/crates/incant_render_gpu_host/tests/game/model_refresh.rs",
+      "bytes": 16893,
+      "sha256": "9bd31287677647a8bc3d7dcf31de5d9b76c312a0dff36766a1286b8a60c0d2ae"
+    },
+    {
+      "name": "source-003/files/crates/incant_render_gpu_host/tests/game.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-003/files/crates/incant_render_gpu_host/tests/game.rs",
+      "bytes": 18042,
+      "sha256": "da83c969f28872590f8c76337242c55d0051cb21debe2666c58ed89ad9f1cbee"
+    },
+    {
+      "name": "source-003/files/crates/incant_render_native/src/animation.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-003/files/crates/incant_render_native/src/animation.rs",
+      "bytes": 4091,
+      "sha256": "dc439d9c560d5088b9bbf726763c16ac224dc12e9d68b578aed146e774e2f042"
+    },
+    {
+      "name": "source-003/files/crates/incant_render_native/src/binding.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-003/files/crates/incant_render_native/src/binding.rs",
+      "bytes": 10185,
+      "sha256": "210a63458dcd7f84e056369c16782619321f705757befa4c59bd6629b6dde480"
+    },
+    {
+      "name": "source-003/files/crates/incant_render_native/src/model_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-003/files/crates/incant_render_native/src/model_refresh.rs",
+      "bytes": 4879,
+      "sha256": "2a21d3a8d9361463052c1b0a15b50e6de64db297b3f008b2c7594a8b0114953a"
+    },
+    {
+      "name": "source-003/files/crates/incant_render_native/src/texture_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-003/files/crates/incant_render_native/src/texture_refresh.rs",
+      "bytes": 15005,
+      "sha256": "8e41c41e68c23b6bfc92872aebf1a82a2624f82c55f343f21890dd9157f45bba"
+    },
+    {
+      "name": "source-003/files/crates/incant_render_native/tests/animated_refresh/continuity.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-003/files/crates/incant_render_native/tests/animated_refresh/continuity.rs",
+      "bytes": 6839,
+      "sha256": "dbd958a186daa6dd45a8298e1e3a99e0fe621ad87c940edd7e8b6cc8e0d05701"
+    },
+    {
+      "name": "source-003/files/crates/incant_render_native/tests/animated_refresh/refusals.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-003/files/crates/incant_render_native/tests/animated_refresh/refusals.rs",
+      "bytes": 6828,
+      "sha256": "398df7c2b004e0d384e4e3e930cfb095b969c9959815b3239c57665743bf32fa"
+    },
+    {
+      "name": "source-003/files/crates/incant_render_native/tests/animated_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-003/files/crates/incant_render_native/tests/animated_refresh.rs",
+      "bytes": 10723,
+      "sha256": "f17f678d115a37363f08503e9e59ca9d6c46361deba7336908c44fa7b6329517"
+    },
+    {
+      "name": "source-003/files/crates/incant_render_native/tests/common/animated_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-003/files/crates/incant_render_native/tests/common/animated_refresh.rs",
+      "bytes": 6615,
+      "sha256": "6e5d3a4b22535eb5a2ca9afcf3cd83058106f2b41a99e4a085f5ac473f4f9b58"
+    },
+    {
+      "name": "source-003/files/docs/spikes/animated-model-refresh.md",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-003/files/docs/spikes/animated-model-refresh.md",
+      "bytes": 5033,
+      "sha256": "221e9a2ce30671a455d2ee89b5a7c4b56ea8e2d8a328824656afde95e88cf135"
+    },
+    {
+      "name": "source-003/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-003/freeze.json",
+      "bytes": 5283,
+      "sha256": "abcc82e29feadbc74c2e4016c395fb4f2c978a971021ed44f6c044e933c38982"
+    },
+    {
+      "name": "source-004/files/crates/incant_play/src/texture_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-004/files/crates/incant_play/src/texture_refresh.rs",
+      "bytes": 4896,
+      "sha256": "0c7aad30e00ad9fbd4911c924c4d5b5bdd768fb0fd6f22f8455a3f6227a39aaa"
+    },
+    {
+      "name": "source-004/files/crates/incant_play/tests/animated_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-004/files/crates/incant_play/tests/animated_refresh.rs",
+      "bytes": 10779,
+      "sha256": "afd375bcbda8b05978e2120e6b2bc8ab470c1a01b9e8f619711d84df30f3e72d"
+    },
+    {
+      "name": "source-004/files/crates/incant_render_gpu_host/tests/game/animated_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-004/files/crates/incant_render_gpu_host/tests/game/animated_refresh.rs",
+      "bytes": 17442,
+      "sha256": "19b747ee58f05e9b31c57f76e1d77db145c2cdabe97204bc0476266ce8870520"
+    },
+    {
+      "name": "source-004/files/crates/incant_render_gpu_host/tests/game/model_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-004/files/crates/incant_render_gpu_host/tests/game/model_refresh.rs",
+      "bytes": 16893,
+      "sha256": "9bd31287677647a8bc3d7dcf31de5d9b76c312a0dff36766a1286b8a60c0d2ae"
+    },
+    {
+      "name": "source-004/files/crates/incant_render_gpu_host/tests/game.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-004/files/crates/incant_render_gpu_host/tests/game.rs",
+      "bytes": 18042,
+      "sha256": "da83c969f28872590f8c76337242c55d0051cb21debe2666c58ed89ad9f1cbee"
+    },
+    {
+      "name": "source-004/files/crates/incant_render_native/src/animation.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-004/files/crates/incant_render_native/src/animation.rs",
+      "bytes": 4091,
+      "sha256": "dc439d9c560d5088b9bbf726763c16ac224dc12e9d68b578aed146e774e2f042"
+    },
+    {
+      "name": "source-004/files/crates/incant_render_native/src/binding.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-004/files/crates/incant_render_native/src/binding.rs",
+      "bytes": 10185,
+      "sha256": "210a63458dcd7f84e056369c16782619321f705757befa4c59bd6629b6dde480"
+    },
+    {
+      "name": "source-004/files/crates/incant_render_native/src/model_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-004/files/crates/incant_render_native/src/model_refresh.rs",
+      "bytes": 4879,
+      "sha256": "2a21d3a8d9361463052c1b0a15b50e6de64db297b3f008b2c7594a8b0114953a"
+    },
+    {
+      "name": "source-004/files/crates/incant_render_native/src/texture_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-004/files/crates/incant_render_native/src/texture_refresh.rs",
+      "bytes": 15005,
+      "sha256": "8e41c41e68c23b6bfc92872aebf1a82a2624f82c55f343f21890dd9157f45bba"
+    },
+    {
+      "name": "source-004/files/crates/incant_render_native/tests/animated_refresh/continuity.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-004/files/crates/incant_render_native/tests/animated_refresh/continuity.rs",
+      "bytes": 6839,
+      "sha256": "dbd958a186daa6dd45a8298e1e3a99e0fe621ad87c940edd7e8b6cc8e0d05701"
+    },
+    {
+      "name": "source-004/files/crates/incant_render_native/tests/animated_refresh/refusals.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-004/files/crates/incant_render_native/tests/animated_refresh/refusals.rs",
+      "bytes": 6828,
+      "sha256": "398df7c2b004e0d384e4e3e930cfb095b969c9959815b3239c57665743bf32fa"
+    },
+    {
+      "name": "source-004/files/crates/incant_render_native/tests/animated_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-004/files/crates/incant_render_native/tests/animated_refresh.rs",
+      "bytes": 10723,
+      "sha256": "f17f678d115a37363f08503e9e59ca9d6c46361deba7336908c44fa7b6329517"
+    },
+    {
+      "name": "source-004/files/crates/incant_render_native/tests/common/animated_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-004/files/crates/incant_render_native/tests/common/animated_refresh.rs",
+      "bytes": 6704,
+      "sha256": "3b5792bfe7c48b7ea06672a02fe35a3752830fefe58e205bd4f4e9ac59f0ea07"
+    },
+    {
+      "name": "source-004/files/docs/spikes/animated-model-refresh.md",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-004/files/docs/spikes/animated-model-refresh.md",
+      "bytes": 5033,
+      "sha256": "221e9a2ce30671a455d2ee89b5a7c4b56ea8e2d8a328824656afde95e88cf135"
+    },
+    {
+      "name": "source-004/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-004/freeze.json",
+      "bytes": 5351,
+      "sha256": "6cb47bc93ba1eb1d7f9f5a1bb25fd47411d79c570b7c9931d310a6eb13c49952"
+    },
+    {
+      "name": "source-005/files/Cargo.lock",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-005/files/Cargo.lock",
+      "bytes": 253073,
+      "sha256": "50a436695a80cac1b795bd4700dd4b67e7b356873df90eb66f7a3613879413f0"
+    },
+    {
+      "name": "source-005/files/crates/incant_play/src/texture_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-005/files/crates/incant_play/src/texture_refresh.rs",
+      "bytes": 4896,
+      "sha256": "0c7aad30e00ad9fbd4911c924c4d5b5bdd768fb0fd6f22f8455a3f6227a39aaa"
+    },
+    {
+      "name": "source-005/files/crates/incant_play/tests/animated_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-005/files/crates/incant_play/tests/animated_refresh.rs",
+      "bytes": 10779,
+      "sha256": "afd375bcbda8b05978e2120e6b2bc8ab470c1a01b9e8f619711d84df30f3e72d"
+    },
+    {
+      "name": "source-005/files/crates/incant_render_gpu_host/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-005/files/crates/incant_render_gpu_host/Cargo.toml",
+      "bytes": 2081,
+      "sha256": "d08a5488361c509f0f71883ad2f1138cfe3478d44914cf1870af7efd646f9783"
+    },
+    {
+      "name": "source-005/files/crates/incant_render_gpu_host/tests/game/animated_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-005/files/crates/incant_render_gpu_host/tests/game/animated_refresh.rs",
+      "bytes": 17694,
+      "sha256": "bee85788cb2c7f28264d58fc18bb1a4af8c49773ca4a48f84a39b205c5f0d0d3"
+    },
+    {
+      "name": "source-005/files/crates/incant_render_gpu_host/tests/game/model_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-005/files/crates/incant_render_gpu_host/tests/game/model_refresh.rs",
+      "bytes": 16893,
+      "sha256": "9bd31287677647a8bc3d7dcf31de5d9b76c312a0dff36766a1286b8a60c0d2ae"
+    },
+    {
+      "name": "source-005/files/crates/incant_render_gpu_host/tests/game.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-005/files/crates/incant_render_gpu_host/tests/game.rs",
+      "bytes": 18042,
+      "sha256": "da83c969f28872590f8c76337242c55d0051cb21debe2666c58ed89ad9f1cbee"
+    },
+    {
+      "name": "source-005/files/crates/incant_render_native/src/animation.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-005/files/crates/incant_render_native/src/animation.rs",
+      "bytes": 4091,
+      "sha256": "dc439d9c560d5088b9bbf726763c16ac224dc12e9d68b578aed146e774e2f042"
+    },
+    {
+      "name": "source-005/files/crates/incant_render_native/src/binding.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-005/files/crates/incant_render_native/src/binding.rs",
+      "bytes": 10185,
+      "sha256": "210a63458dcd7f84e056369c16782619321f705757befa4c59bd6629b6dde480"
+    },
+    {
+      "name": "source-005/files/crates/incant_render_native/src/model_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-005/files/crates/incant_render_native/src/model_refresh.rs",
+      "bytes": 4879,
+      "sha256": "2a21d3a8d9361463052c1b0a15b50e6de64db297b3f008b2c7594a8b0114953a"
+    },
+    {
+      "name": "source-005/files/crates/incant_render_native/src/texture_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-005/files/crates/incant_render_native/src/texture_refresh.rs",
+      "bytes": 15005,
+      "sha256": "8e41c41e68c23b6bfc92872aebf1a82a2624f82c55f343f21890dd9157f45bba"
+    },
+    {
+      "name": "source-005/files/crates/incant_render_native/tests/animated_refresh/continuity.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-005/files/crates/incant_render_native/tests/animated_refresh/continuity.rs",
+      "bytes": 6839,
+      "sha256": "dbd958a186daa6dd45a8298e1e3a99e0fe621ad87c940edd7e8b6cc8e0d05701"
+    },
+    {
+      "name": "source-005/files/crates/incant_render_native/tests/animated_refresh/refusals.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-005/files/crates/incant_render_native/tests/animated_refresh/refusals.rs",
+      "bytes": 6828,
+      "sha256": "398df7c2b004e0d384e4e3e930cfb095b969c9959815b3239c57665743bf32fa"
+    },
+    {
+      "name": "source-005/files/crates/incant_render_native/tests/animated_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-005/files/crates/incant_render_native/tests/animated_refresh.rs",
+      "bytes": 10723,
+      "sha256": "f17f678d115a37363f08503e9e59ca9d6c46361deba7336908c44fa7b6329517"
+    },
+    {
+      "name": "source-005/files/crates/incant_render_native/tests/common/animated_refresh.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-005/files/crates/incant_render_native/tests/common/animated_refresh.rs",
+      "bytes": 6704,
+      "sha256": "3b5792bfe7c48b7ea06672a02fe35a3752830fefe58e205bd4f4e9ac59f0ea07"
+    },
+    {
+      "name": "source-005/files/docs/spikes/animated-model-refresh.md",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-005/files/docs/spikes/animated-model-refresh.md",
+      "bytes": 5033,
+      "sha256": "221e9a2ce30671a455d2ee89b5a7c4b56ea8e2d8a328824656afde95e88cf135"
+    },
+    {
+      "name": "source-005/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-005/freeze.json",
+      "bytes": 6025,
+      "sha256": "1082f4992fec6e9010e185afb4f2a0811c23946e2b0665cc462d1ada08a356e7"
+    },
+    {
+      "name": "source-relevance-main297.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/source-relevance-main297.json",
+      "bytes": 707,
+      "sha256": "2e5a945851df705c912c25c171b02e7cf8272d85b73c2b0b4dbcbb01c916f705"
+    }
+  ],
+  "final_source_files": [
+    {
+      "path": "Cargo.lock",
+      "bytes": 253073,
+      "sha256": "50a436695a80cac1b795bd4700dd4b67e7b356873df90eb66f7a3613879413f0"
+    },
+    {
+      "path": "crates/incant_play/src/texture_refresh.rs",
+      "bytes": 4896,
+      "sha256": "0c7aad30e00ad9fbd4911c924c4d5b5bdd768fb0fd6f22f8455a3f6227a39aaa"
+    },
+    {
+      "path": "crates/incant_play/tests/animated_refresh.rs",
+      "bytes": 10779,
+      "sha256": "afd375bcbda8b05978e2120e6b2bc8ab470c1a01b9e8f619711d84df30f3e72d"
+    },
+    {
+      "path": "crates/incant_render_gpu_host/Cargo.toml",
+      "bytes": 2081,
+      "sha256": "d08a5488361c509f0f71883ad2f1138cfe3478d44914cf1870af7efd646f9783"
+    },
+    {
+      "path": "crates/incant_render_gpu_host/tests/game.rs",
+      "bytes": 18042,
+      "sha256": "da83c969f28872590f8c76337242c55d0051cb21debe2666c58ed89ad9f1cbee"
+    },
+    {
+      "path": "crates/incant_render_gpu_host/tests/game/animated_refresh.rs",
+      "bytes": 17694,
+      "sha256": "bee85788cb2c7f28264d58fc18bb1a4af8c49773ca4a48f84a39b205c5f0d0d3"
+    },
+    {
+      "path": "crates/incant_render_gpu_host/tests/game/model_refresh.rs",
+      "bytes": 16893,
+      "sha256": "9bd31287677647a8bc3d7dcf31de5d9b76c312a0dff36766a1286b8a60c0d2ae"
+    },
+    {
+      "path": "crates/incant_render_native/src/animation.rs",
+      "bytes": 4091,
+      "sha256": "dc439d9c560d5088b9bbf726763c16ac224dc12e9d68b578aed146e774e2f042"
+    },
+    {
+      "path": "crates/incant_render_native/src/binding.rs",
+      "bytes": 10185,
+      "sha256": "210a63458dcd7f84e056369c16782619321f705757befa4c59bd6629b6dde480"
+    },
+    {
+      "path": "crates/incant_render_native/src/model_refresh.rs",
+      "bytes": 4879,
+      "sha256": "2a21d3a8d9361463052c1b0a15b50e6de64db297b3f008b2c7594a8b0114953a"
+    },
+    {
+      "path": "crates/incant_render_native/src/texture_refresh.rs",
+      "bytes": 15005,
+      "sha256": "8e41c41e68c23b6bfc92872aebf1a82a2624f82c55f343f21890dd9157f45bba"
+    },
+    {
+      "path": "crates/incant_render_native/tests/animated_refresh.rs",
+      "bytes": 10723,
+      "sha256": "f17f678d115a37363f08503e9e59ca9d6c46361deba7336908c44fa7b6329517"
+    },
+    {
+      "path": "crates/incant_render_native/tests/animated_refresh/continuity.rs",
+      "bytes": 6839,
+      "sha256": "dbd958a186daa6dd45a8298e1e3a99e0fe621ad87c940edd7e8b6cc8e0d05701"
+    },
+    {
+      "path": "crates/incant_render_native/tests/animated_refresh/refusals.rs",
+      "bytes": 6828,
+      "sha256": "398df7c2b004e0d384e4e3e930cfb095b969c9959815b3239c57665743bf32fa"
+    },
+    {
+      "path": "crates/incant_render_native/tests/common/animated_refresh.rs",
+      "bytes": 6704,
+      "sha256": "3b5792bfe7c48b7ea06672a02fe35a3752830fefe58e205bd4f4e9ac59f0ea07"
+    }
+  ],
+  "binaries": [
+    {
+      "kind": "native-complete-cpu",
+      "source_sha": "e2bdc6154a714fdc89a15a90f63d4e7b3308afae",
+      "original": "/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/animation-d8a580c396d13b91",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/binaries/0-animation-source007",
+      "bytes": 19984040,
+      "sha256": "f996586415d83291824affb449ce51949eb859898bcfba508d88f8b839c6a3ce"
+    },
+    {
+      "kind": "native-complete-cpu",
+      "source_sha": "e2bdc6154a714fdc89a15a90f63d4e7b3308afae",
+      "original": "/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/texture_refresh-9cdb907b8ebf6863",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/binaries/0-texture_refresh-source007",
+      "bytes": 17726592,
+      "sha256": "1baa661e97923dca3af370a496b80c3435d8bc36124357ffe796e7ae677d4edd"
+    },
+    {
+      "kind": "native-complete-cpu",
+      "source_sha": "e2bdc6154a714fdc89a15a90f63d4e7b3308afae",
+      "original": "/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/model_refresh-cb640e0317a6042b",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/binaries/0-model_refresh-source007",
+      "bytes": 13925808,
+      "sha256": "732fcca7dd3f294898b0d59828c050352b8221f9948d07e18455ad4e31024a2d"
+    },
+    {
+      "kind": "native-complete-cpu",
+      "source_sha": "e2bdc6154a714fdc89a15a90f63d4e7b3308afae",
+      "original": "/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/animated_refresh-72ad044ab93a6d56",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/binaries/0-animated_refresh-source007",
+      "bytes": 19391712,
+      "sha256": "b6e93c2ec463384726f2a0c5b39cc9944cf7e0ea3e9229b9bca889c986ed1b02"
+    },
+    {
+      "kind": "play-refresh-and-animation-cpu",
+      "source_sha": "e2bdc6154a714fdc89a15a90f63d4e7b3308afae",
+      "original": "/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/texture_refresh-cf7fbd4ae66233db",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/binaries/1-texture_refresh-source007",
+      "bytes": 32134960,
+      "sha256": "388f28e805bf07a7980e61b3d96e72b007f30527576daf1981a5d98d26ab653c"
+    },
+    {
+      "kind": "play-refresh-and-animation-cpu",
+      "source_sha": "e2bdc6154a714fdc89a15a90f63d4e7b3308afae",
+      "original": "/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/animated_refresh-fad95a0371a948ab",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/binaries/1-animated_refresh-source007",
+      "bytes": 37780224,
+      "sha256": "13c6c22dfc43553d7b62c24e2a1b0ae043120a6b8351a2f2edab1e4d4154d556"
+    },
+    {
+      "kind": "play-refresh-and-animation-cpu",
+      "source_sha": "e2bdc6154a714fdc89a15a90f63d4e7b3308afae",
+      "original": "/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/animation-3cafbb2ce6866c9c",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/binaries/1-animation-source007",
+      "bytes": 23527704,
+      "sha256": "a9ce01df72333b936d93bc641c9f4dac0c749870d337d6aa6b66380ebc318275"
+    },
+    {
+      "kind": "play-refresh-and-animation-cpu",
+      "source_sha": "e2bdc6154a714fdc89a15a90f63d4e7b3308afae",
+      "original": "/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/model_refresh-b294625135644776",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/binaries/1-model_refresh-source007",
+      "bytes": 37750080,
+      "sha256": "c90acc2ec928d0891503d0e4dc6f4afcd160792883ea4a9c2ef23761cc91b42d"
+    },
+    {
+      "kind": "game-host-publication-cpu",
+      "source_sha": "e2bdc6154a714fdc89a15a90f63d4e7b3308afae",
+      "original": "/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/incant_render_game-b31ae8c0b6178058",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/binaries/2-incant_render_game-source007",
+      "bytes": 1027040,
+      "sha256": "bd706ebcbcbab6198b6dd2db27ea254c74e98adce3739ffbb3c5474fcca82c50"
+    },
+    {
+      "kind": "hosted-consumer_preparation_precedes_guest_and_accepted_failures_drop_all_state_and_clear_pcm",
+      "source_sha": "b56e928510c3e28af3a59f3cb67c17df502ea39d",
+      "original": "/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/hosted-0651693f3f363ccc",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/binaries/0-hosted-source003",
+      "bytes": 26449592,
+      "sha256": "ad26282a3cbcc8ecdc80e9d354e4e0cac4c514b21cab324493fec21ec029741e"
+    },
+    {
+      "kind": "hosted-mandatory_consumer_observes_motion_and_rebuild_but_not_rejected_input",
+      "source_sha": "b56e928510c3e28af3a59f3cb67c17df502ea39d",
+      "original": "/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/hosted-0651693f3f363ccc",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/binaries/1-hosted-source003",
+      "bytes": 26449592,
+      "sha256": "ad26282a3cbcc8ecdc80e9d354e4e0cac4c514b21cab324493fec21ec029741e"
+    },
+    {
+      "kind": "keys-only-fixture-cpu-and-gpu-test-compilation",
+      "source_sha": "f022f23db1754bbba5494583c07fa75aaaa4941b",
+      "original": "/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/game-e1f82509b204e56a",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/binaries/0-game-source004",
+      "bytes": 33765736,
+      "sha256": "ef7b75544e5e27483b9b285c0d91aa563280169d271f7edc961052dd0c504779"
+    },
+    {
+      "kind": "keys-only-fixture-cpu-and-gpu-test-compilation",
+      "source_sha": "cb494bb2b6bb065e7f37569efe11f11adb788f97",
+      "original": "/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/game-61e6ff1ad68ba81f",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/binaries/0-game-source005",
+      "bytes": 33771704,
+      "sha256": "5e6782f1b8b31510a9107fbd0a62a9c5bbd9b409a53aebc6a2bb522f5578020b"
+    },
+    {
+      "source_sha": "b56e928510c3e28af3a59f3cb67c17df502ea39d",
+      "compiled": true,
+      "CPU_fixture_failed": true,
+      "GPU_unrun": true,
+      "original": "/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/game-e1f82509b204e56a",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/animated-model-refresh-001/binaries/2-game-source003-failed-fixture",
+      "bytes": 33765736,
+      "sha256": "c01bcbd13312c808398ffc432e5ad3fbf5c22cebbffd00ee64a1bebdc552f0e2",
+      "captured_utc": "2026-10-14T20:09:40.114649+00:00"
+    }
+  ],
+  "accepted_cpu_coverage": {
+    "native_source002": 54,
+    "Play_source002": 9,
+    "hosted_source003": 2,
+    "keys_only_fixture_source005": 1,
+    "distinct_scoped_controls": 66,
+    "retained_repeat": "keys-only fixture also passed on source004; this repetition is not added to66",
+    "render_game_lib_source002": "compiled, zero tests"
+  },
+  "gpu_sources": {
+    "001": "f022f23db1754bbba5494583c07fa75aaaa4941b",
+    "002": "cb494bb2b6bb065e7f37569efe11f11adb788f97"
+  },
+  "outcome_scope": {
+    "CPU_qualification": true,
+    "numerical_Metal_refresh": true,
+    "actual_animated_editor_window": false,
+    "GUI_click_coverage": false,
+    "appearance_acceptance": false,
+    "performance_or_phase_gate": false
+  },
+  "retained_failures": [
+    "CPU001 test-only iterator indexing compile failure before tests",
+    "CPU003 fixture wrong-y expectation; hosted controls passed before stop",
+    "GPU001 required motion pipelines unprepared, startup Disabled before pixels/refresh"
+  ],
+  "identity_note": "Some CPU002 copied filenames retain an inherited source007 suffix; authoritative producing receipt/source_sha is e2bdc615 source002, never source007. No executables are embedded.",
+  "source_review_status": "Root reviewed production source001 and narrow successors. Final independent source/packet review remains separate; no reviewer execution is inferred."
+}

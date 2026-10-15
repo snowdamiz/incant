@@ -8,6 +8,7 @@ publish.workspace = true
 [features]
 profile = ["incant_profile/summary", "incant_runtime/profile"]
 diagnostic-script-phases = ["profile", "incant_profile/diagnostic-script-phases", "incant_runtime/diagnostic-script-phases"]
+diagnostic-navigation = ["diagnostic-script-phases", "incant_runtime/diagnostic-navigation"]
 default = ["compiler", "physics-deterministic"]
 # Authoring/cook and the development runner only. Native players disable this.
 compiler = []

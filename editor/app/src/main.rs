@@ -250,7 +250,7 @@ fn main() {
             let instance = wgpu::Instance::default();
             let surface = instance.create_surface(window.clone())?;
             let renderer = Arc::new(
-                pollster::block_on(Renderer::new(&instance, Some(&surface)))
+                pollster::block_on(Renderer::new_with_scene_msaa(&instance, Some(&surface), 4))
                     .map_err(|e| std::io::Error::other(e.to_string()))?,
             );
             editor.console.lock().unwrap().push(ConsoleEvent::new(

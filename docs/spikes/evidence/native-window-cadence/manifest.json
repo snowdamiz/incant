@@ -1,0 +1,88 @@
+{
+  "source": "e266e95059158a39a9e1252ae05cd92015b9c8e3",
+  "external_root": "/Users/andreyyurlov/.codex/incant-evidence/native-window-cadence-002",
+  "archive_sha256": "e6159ab4488779b8b7096b3b1b4057eb559de667cd728947e430f0288556b4f1",
+  "records": [
+    {
+      "path": "freeze.json",
+      "bytes": 2834,
+      "sha256": "47b0d4ff5d8924cc74703466b975b6172ac55440a6a3f9fa37593c8f696a202a"
+    },
+    {
+      "path": "source-inventory.json",
+      "bytes": 806675,
+      "sha256": "25290ec1b50ae87215029d7cd172be2d20f8e9aded1f010ea0a90942b69c008b"
+    },
+    {
+      "path": "plan-001.json",
+      "bytes": 2050,
+      "sha256": "0b05b085e69419d06b459bc675ee775cb5917e322c50606a06726e5ffdcc6d53"
+    },
+    {
+      "path": "qualify-001.py",
+      "bytes": 4919,
+      "sha256": "28eb8fc618da0f5625f1b04ea21a19adc151352e1c0ee3ab42bc6f59e1dedaf6"
+    },
+    {
+      "path": "native_process.py",
+      "bytes": 19307,
+      "sha256": "58dd2a8231d7f9d1e42070fc85425461e06a43f279fa5e7f8e57b4a40c3a3aa4"
+    },
+    {
+      "path": "cadence.rs",
+      "bytes": 7529,
+      "sha256": "f9526a37a5065439c3b302cc8c73e4775b30f6b324a7475217333552e5a595b0"
+    },
+    {
+      "path": "window.rs",
+      "bytes": 32508,
+      "sha256": "0f5326118b3d2acf5bc1423b8bce6e297bdcda1443c47990972e4dd482fdb8d9"
+    },
+    {
+      "path": "qualify-001/environment.json",
+      "bytes": 1276,
+      "sha256": "97087c8935f554c20b92cddf4f290ff8eb902a9b2890c93118dd7dd7ef4e77ce"
+    },
+    {
+      "path": "qualify-001/profile-window-clippy.stderr",
+      "bytes": 8382,
+      "sha256": "92a99c33024d7226ffc1ccd663270dbcbe35248381d92dfe79a47d364c5b2246"
+    },
+    {
+      "path": "qualify-001/profile-window-clippy.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "qualify-001/profile-window-lib.stderr",
+      "bytes": 1055,
+      "sha256": "f20dbacadbbbdb6a223e00aba47ca0cd2d23cb32ccfa32a9185d1f6587aafadb"
+    },
+    {
+      "path": "qualify-001/profile-window-lib.stdout",
+      "bytes": 503123,
+      "sha256": "43d8006d9d2e83411b258c87518d670acb454efdc6c97a27dd6e71123655b8c2"
+    },
+    {
+      "path": "qualify-001/result.json",
+      "bytes": 3547,
+      "sha256": "8a3d0a00252b9d218da264bcaf7003984cc8b3024a0855afa70dbb761b27b5ce"
+    },
+    {
+      "path": "qualify-001/rustc.txt",
+      "bytes": 192,
+      "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909"
+    },
+    {
+      "path": "qualify-001/unprofiled-window-check.stderr",
+      "bytes": 8246,
+      "sha256": "b8ca723af97434bf514d35eec0f4e373cda3384110e9cbe368021250c3fb4df7"
+    },
+    {
+      "path": "qualify-001/unprofiled-window-check.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "claim": "CPU controls and source review only; no native-window timing or display/FPS acceptance"
+}

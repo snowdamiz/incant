@@ -203,7 +203,7 @@ fn position_buffer(device: &wgpu::Device, positions: &[[f32; 3]], retained: bool
 pub(crate) struct SpriteSystem {
     globals: wgpu::BindGroupLayout,
     textures: wgpu::BindGroupLayout,
-    pipeline: wgpu::RenderPipeline,
+    pipelines: Vec<wgpu::RenderPipeline>,
     cache: Mutex<HashMap<incant_assets_runtime::AssetVersionId, Weak<GpuTexture>>>,
 }
 impl SpriteSystem {
@@ -211,6 +211,7 @@ impl SpriteSystem {
         device: &wgpu::Device,
         backend: wgpu::Backend,
         cache: Option<&wgpu::PipelineCache>,
+        scene_msaa: crate::SceneMsaa,
     ) -> Result<Self> {
         let globals = device.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
             label: Some("Sprite camera"),
@@ -226,44 +227,50 @@ impl SpriteSystem {
             immediate_size: 0,
         });
         let shader = shader::stages(device, backend)?;
-        let pipeline = device.create_render_pipeline(&wgpu::RenderPipelineDescriptor {
-            label: Some("Sorted sprites in shared HDR graph"),
-            layout: Some(&layout),
-            vertex: wgpu::VertexState {
-                module: &shader.vertex,
-                entry_point: Some(shader.vertex_entry),
-                compilation_options: Default::default(),
-                buffers: &vertex_buffers(),
-            },
-            fragment: Some(wgpu::FragmentState {
-                module: &shader.fragment,
-                entry_point: Some(shader.fragment_entry),
-                compilation_options: Default::default(),
-                targets: &[Some(wgpu::ColorTargetState {
-                    format: crate::frame::HDR_FORMAT,
-                    blend: Some(wgpu::BlendState::PREMULTIPLIED_ALPHA_BLENDING),
-                    write_mask: wgpu::ColorWrites::ALL,
-                })],
-            }),
-            primitive: wgpu::PrimitiveState {
-                cull_mode: None,
-                ..Default::default()
-            },
-            depth_stencil: Some(wgpu::DepthStencilState {
-                format: wgpu::TextureFormat::Depth32Float,
-                depth_write_enabled: Some(false),
-                depth_compare: Some(wgpu::CompareFunction::LessEqual),
-                stencil: Default::default(),
-                bias: Default::default(),
-            }),
-            multisample: Default::default(),
-            multiview_mask: None,
-            cache,
-        });
+        let pipelines = scene_msaa
+            .catalog()
+            .iter()
+            .map(|&samples| {
+                device.create_render_pipeline(&wgpu::RenderPipelineDescriptor {
+                    label: Some("Sorted sprites in shared HDR graph"),
+                    layout: Some(&layout),
+                    vertex: wgpu::VertexState {
+                        module: &shader.vertex,
+                        entry_point: Some(shader.vertex_entry),
+                        compilation_options: Default::default(),
+                        buffers: &vertex_buffers(),
+                    },
+                    fragment: Some(wgpu::FragmentState {
+                        module: &shader.fragment,
+                        entry_point: Some(shader.fragment_entry),
+                        compilation_options: Default::default(),
+                        targets: &[Some(wgpu::ColorTargetState {
+                            format: crate::frame::HDR_FORMAT,
+                            blend: Some(wgpu::BlendState::PREMULTIPLIED_ALPHA_BLENDING),
+                            write_mask: wgpu::ColorWrites::ALL,
+                        })],
+                    }),
+                    primitive: wgpu::PrimitiveState {
+                        cull_mode: None,
+                        ..Default::default()
+                    },
+                    depth_stencil: Some(wgpu::DepthStencilState {
+                        format: wgpu::TextureFormat::Depth32Float,
+                        depth_write_enabled: Some(false),
+                        depth_compare: Some(wgpu::CompareFunction::LessEqual),
+                        stencil: Default::default(),
+                        bias: Default::default(),
+                    }),
+                    multisample: samples.state(),
+                    multiview_mask: None,
+                    cache,
+                })
+            })
+            .collect();
         Ok(Self {
             globals,
             textures,
-            pipeline,
+            pipelines,
             cache: Mutex::new(HashMap::new()),
         })
     }

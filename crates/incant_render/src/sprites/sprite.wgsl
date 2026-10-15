@@ -2,7 +2,7 @@
 @group(1) @binding(0) var image: texture_2d<f32>;
 @group(1) @binding(1) var filtering: sampler;
 struct Input { @location(0) position:vec3f, @location(1) uv:vec2f, @location(2) tint:vec4f, @location(3) uv_bounds:vec4f, @location(4) texel:vec2f, @location(5) sampling:u32 }
-struct Output { @builtin(position) position:vec4f, @location(0) uv:vec2f, @location(1) tint:vec4f, @location(2) @interpolate(flat) uv_bounds:vec4f, @location(3) texel:vec2f, @location(4) @interpolate(flat) sampling:u32, @location(5) @interpolate(flat) texel_base:vec2f }
+struct Output { @builtin(position) position:vec4f, @location(0) @interpolate(perspective, centroid) uv:vec2f, @location(1) @interpolate(perspective, centroid) tint:vec4f, @location(2) @interpolate(flat) uv_bounds:vec4f, @location(3) @interpolate(perspective, centroid) texel:vec2f, @location(4) @interpolate(flat) sampling:u32, @location(5) @interpolate(flat) texel_base:vec2f }
 @vertex fn vertex(input:Input)->Output {
     var out:Output;
     out.position=camera*vec4f(input.position,1);out.uv=input.uv;out.tint=input.tint;out.uv_bounds=input.uv_bounds;

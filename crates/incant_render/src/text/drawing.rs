@@ -16,6 +16,7 @@ pub(super) fn pipeline(
     layouts: [&wgpu::BindGroupLayout; 3],
     backend: wgpu::Backend,
     cache: Option<&wgpu::PipelineCache>,
+    samples: crate::SceneMsaa,
 ) -> Result<wgpu::RenderPipeline> {
     let layout = device.create_pipeline_layout(&wgpu::PipelineLayoutDescriptor {
         label: Some("Text coverage"),
@@ -54,7 +55,7 @@ pub(super) fn pipeline(
                 stencil: Default::default(),
                 bias: Default::default(),
             }),
-            multisample: Default::default(),
+            multisample: samples.state(),
             multiview_mask: None,
             cache,
         }),
@@ -101,7 +102,11 @@ impl TextSystem {
         });
         Ok(Some(TextDraw {
             scene: Arc::clone(text),
-            pipeline: self.pipeline.clone(),
+            pipeline: self
+                .pipelines
+                .get(target.samples.index())
+                .cloned()
+                .ok_or(crate::ResourceError::UnpreparedPipeline("text MSAA"))?,
             frame,
             _uniform: uniform,
             color: target.color,

@@ -210,6 +210,83 @@ fn shader_math_and_family_are_in_artifact_identity() {
 }
 
 #[test]
+fn world_centroid_and_single_sample_shadow_ui_contracts_cannot_be_exchanged() {
+    fn centroid_decoration(bytes: &[u8]) -> bool {
+        // Inspect actual SPIR-V OpDecorate(71), Centroid(16) operands. The
+        // pinned Naga reader's default Perspective interpolation overwrites
+        // Centroid with Center, so its round-trip IR cannot prove this trait.
+        let (chunks, tail) = bytes.as_chunks::<4>();
+        assert!(tail.is_empty());
+        let words: Vec<_> = chunks.iter().map(|w| u32::from_le_bytes(*w)).collect();
+        assert_eq!(words[0], 0x0723_0203);
+        let mut index = 5;
+        let mut found = false;
+        while index < words.len() {
+            let count = (words[index] >> 16) as usize;
+            assert!(count > 0 && index + count <= words.len());
+            found |= words[index] & 0xffff == 71 && count == 3 && words[index + 2] == 16;
+            index += count;
+        }
+        found
+    }
+    for kind in [Kind::Diagnostic, Kind::Material, Kind::Sprite, Kind::Text] {
+        let original = source(kind);
+        assert!(original.contains("@interpolate(perspective, centroid)"));
+        assert!(kind.contract().contains("interpolation=centroid"));
+        for wrong in [
+            original.replace("@interpolate(perspective, centroid)", ""),
+            original.replace(
+                "@interpolate(perspective, centroid)",
+                "@interpolate(perspective, center)",
+            ),
+            original.replace(
+                "@interpolate(perspective, centroid)",
+                "@interpolate(perspective, sample)",
+            ),
+        ] {
+            assert_ne!(original, wrong);
+            assert!(
+                cook(kind, &wrong).is_err(),
+                "accepted {kind:?} sampling mismatch"
+            );
+        }
+        let bundle = cook(kind, original).unwrap();
+        for artifact in bundle
+            .artifacts
+            .iter()
+            .filter(|a| a.stage == Stage::Fragment)
+        {
+            if artifact.backend == Backend::Vulkan {
+                assert!(
+                    centroid_decoration(&artifact.bytes),
+                    "lost SPIR-V centroid decoration"
+                );
+            } else {
+                let emitted = std::str::from_utf8(&artifact.bytes).unwrap();
+                assert!(
+                    emitted.contains("centroid"),
+                    "lost {kind:?} native centroid qualifier"
+                );
+            }
+        }
+    }
+    let shadow = source(Kind::Shadow);
+    let changed = shadow.replace(
+        "@location(0) uv",
+        "@location(0) @interpolate(perspective, centroid) uv",
+    );
+    assert_ne!(shadow, changed);
+    assert!(cook(Kind::Shadow, &changed).is_err());
+    let ui = source(Kind::Ui);
+    let changed = ui.replace(
+        "@interpolate(flat) rect",
+        "@interpolate(perspective, centroid) rect",
+    );
+    assert_ne!(ui, changed);
+    assert!(cook(Kind::Ui, &changed).is_err());
+}
+
+#[test]
 fn sprite_contract_refuses_sampling_interpolation_and_resource_changes() {
     for changed in [
         source(Kind::Sprite)

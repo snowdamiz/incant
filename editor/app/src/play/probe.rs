@@ -25,6 +25,7 @@ enum Mode {
     Lifecycle,
     Texture,
     Model,
+    AnimatedModel,
 }
 impl Options {
     fn mode(flag: &OsStr) -> Option<Mode> {
@@ -32,6 +33,7 @@ impl Options {
             Some("--play-probe") => Some(Mode::Lifecycle),
             Some("--texture-probe") => Some(Mode::Texture),
             Some("--model-probe") => Some(Mode::Model),
+            Some("--animated-model-probe") => Some(Mode::AnimatedModel),
             _ => None,
         }
     }
@@ -54,7 +56,7 @@ impl Options {
                     .expect("UTF-8 entity"),
             }),
             _ => panic!(
-                "expected --play-probe, --texture-probe or --model-probe OUTPUT ENTITY after the project path"
+                "expected --play-probe, --texture-probe, --model-probe or --animated-model-probe OUTPUT ENTITY after the project path"
             ),
         }
     }
@@ -281,6 +283,12 @@ pub fn start(app: tauri::AppHandle, editor: Arc<Editor>, options: Options) {
                 Mode::Model => {
                     asset_workflow::run(&app, &editor, &options, asset_workflow::Kind::Model)
                 }
+                Mode::AnimatedModel => asset_workflow::run(
+                    &app,
+                    &editor,
+                    &options,
+                    asset_workflow::Kind::AnimatedModel,
+                ),
             };
             let report = match &result {
                 Ok(value) => value.clone(),
@@ -317,6 +325,7 @@ mod options_tests {
             ("--play-probe", Mode::Lifecycle),
             ("--texture-probe", Mode::Texture),
             ("--model-probe", Mode::Model),
+            ("--animated-model-probe", Mode::AnimatedModel),
         ] {
             assert!(Options::accepts_mode(OsStr::new(flag)));
             let options = Options::from_probe_args(
@@ -338,6 +347,7 @@ mod options_tests {
             "--unknown-probe",
             "--texture-probe-extra",
             "--model-probe-extra",
+            "--animated-model-probe-extra",
         ] {
             assert!(!Options::accepts_mode(OsStr::new(flag)));
         }
@@ -345,7 +355,7 @@ mod options_tests {
     }
 
     #[test]
-    #[should_panic(expected = "expected --play-probe, --texture-probe or --model-probe")]
+    #[should_panic(expected = "expected --play-probe")]
     fn explicit_probe_parser_refuses_unknown_mode() {
         Options::from_probe_args([OsString::from("--unknown-probe")].into_iter());
     }

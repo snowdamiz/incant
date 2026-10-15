@@ -9,7 +9,7 @@ struct Frame { matrix: mat4x4f, color: vec4f }
 struct Glyph { @location(0) rect: vec4f, @location(1) texels: vec4f }
 struct Varyings {
     @builtin(position) position: vec4f,
-    @location(0) texel: vec2f,
+    @location(0) @interpolate(perspective, centroid) texel: vec2f,
     @location(1) @interpolate(flat) texels: vec4f,
 }
 @vertex fn vertex(@builtin(vertex_index) index: u32, glyph: Glyph) -> Varyings {

@@ -19,7 +19,14 @@ impl Renderer {
         {
             return Err(crate::SceneError::Input("invalid viewport corner radius").into());
         }
-        let attachments = self.frames.get(&self.device, plan.size[0], plan.size[1])?;
+        // Native temporal reconstruction owns a single-sample input domain;
+        // ordinary editor MSAA must never alter its depth or motion contract.
+        let attachments = self.frames.get(
+            &self.device,
+            plan.size[0],
+            plan.size[1],
+            crate::SceneMsaa::One,
+        )?;
         let diagnostics = crate::diagnostic_draw::DiagnosticDraw::prepare(
             self,
             scene,
@@ -33,6 +40,7 @@ impl Renderer {
                 depth: attachments.depth.clone(),
                 format: crate::frame::HDR_FORMAT,
                 rect: plan.rect,
+                samples: crate::SceneMsaa::One,
             },
         )?;
         if models.as_ref().is_some_and(|m| m.has_transparent()) {
@@ -45,7 +53,7 @@ impl Renderer {
             .prepare(
                 &self.device,
                 pending,
-                &attachments.color,
+                &attachments.resolved,
                 &motion,
                 scene.camera,
             )?;
@@ -69,6 +77,7 @@ impl Renderer {
         )?;
         let frame = crate::graph::PreparedFrame {
             diagnostics,
+            scene_resolve: None,
             models,
             motion: Some(motion),
             temporal: None,

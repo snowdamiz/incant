@@ -35,13 +35,17 @@ pub(super) fn io(
             per_primitive: false,
             interpolation,
             sampling,
-        } if sampling.is_none_or(|s| s == naga::Sampling::Center || s == naga::Sampling::First)
-            && interpolation.is_none_or(|i| {
-                matches!(
-                    i,
-                    naga::Interpolation::Perspective | naga::Interpolation::Flat
-                )
-            }) =>
+        } if sampling.is_none_or(|s| {
+            matches!(
+                s,
+                naga::Sampling::Center | naga::Sampling::First | naga::Sampling::Centroid
+            )
+        }) && interpolation.is_none_or(|i| {
+            matches!(
+                i,
+                naga::Interpolation::Perspective | naga::Interpolation::Flat
+            )
+        }) =>
         {
             (
                 Some(*location),
