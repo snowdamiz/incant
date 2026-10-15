@@ -1,9 +1,10 @@
 # Native Metal binary archive route
 
-A native test build, 28 focused CPU tests and strict renderer/HAL Clippy passed
-after correcting ACL-absence handling. A subsequent diagnostic constructor for
-strict real-catalog reuse is source-prepared and awaits its successor build/tests.
-Native archive reuse/miss controls and backend validation have not run. This default-off route
+A native test build, 30 focused CPU tests and strict renderer/HAL Clippy passed,
+including the strict real-catalog diagnostic policy. The source now incorporates
+main351, retaining Metal identity generation beside the complete SSAO cooker;
+that integrated source awaits separate qualification. Native archive reuse/miss
+controls and backend validation have not run. This default-off route
 does not change any performance gate, default feature, or per-level
 prewarming/asynchronous fallback requirement.
 
