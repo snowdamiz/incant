@@ -5,6 +5,9 @@ edition.workspace = true
 rust-version.workspace = true
 publish.workspace = true
 
+[build-dependencies]
+sha2.workspace = true
+
 [dependencies]
 incant_assets_runtime = { workspace = true, features = ["visual"] }
 incant_types.workspace = true
@@ -12,5 +15,6 @@ incant_text.workspace = true
 incant_2d.workspace = true
 glam = "0.32"
 serde.workspace = true
+serde_json.workspace = true
 thiserror.workspace = true
 ulid = { version = "1.2", default-features = false }

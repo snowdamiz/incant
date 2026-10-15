@@ -54,6 +54,7 @@ fn xruns_are_counted_and_empty_polls_keep_the_observation() {
 fn every_other_pinned_kind_remains_fatal_even_after_xruns() {
     for kind in [
         ErrorKind::DeviceBusy,
+        #[cfg(not(target_os = "macos"))]
         ErrorKind::DeviceChanged,
         ErrorKind::DeviceNotAvailable,
         ErrorKind::HostUnavailable,
@@ -128,6 +129,7 @@ fn continuous_notifications_cannot_make_a_poll_unbounded() {
 fn lifetime_counters_saturate_visibly_instead_of_wrapping() {
     let mut diagnostics = DeviceAudioDiagnostics {
         xrun_notifications: u64::MAX,
+        route_change_notifications: u64::MAX,
         poll_limit_hits: u64::MAX,
         counters_saturated: false,
     };
@@ -165,7 +167,7 @@ fn host_continues_after_xrun_but_fatal_device_result_drops_the_mixer() {
 }
 
 #[test]
-fn xrun_notification_preserves_nonzero_voice_cursor_continuation() {
+fn nonfatal_notifications_preserve_nonzero_voice_cursor_continuation() {
     use crate::{ClipBinding, OfflineBackend, SceneAudio};
     use incant_runtime::{
         CookedAudio, CookedEntity, CookedScene, NativeAudioSource, NativeWorld, StableId,
@@ -224,12 +226,64 @@ fn xrun_notification_preserves_nonzero_voice_cursor_continuation() {
     baseline.render(&mut expected).unwrap();
     let mut actual = [0.; 4096];
     observed.render(&mut actual[..1024]).unwrap();
-    let result = observed
-        .device_diagnostics
-        .poll_queue(&mut Queue::new(&[ErrorKind::Xrun]));
+    let result = observed.device_diagnostics.poll_queue(&mut Queue::new(&[
+        ErrorKind::Xrun,
+        #[cfg(target_os = "macos")]
+        ErrorKind::DeviceChanged,
+    ]));
     observed.terminal(result).unwrap();
     observed.render(&mut actual[1024..]).unwrap();
     assert!(expected.iter().any(|v| v.abs() > 0.1));
     assert_eq!(actual, expected);
     assert_eq!(observed.device_diagnostics.xrun_notifications, 1);
+    #[cfg(target_os = "macos")]
+    assert_eq!(observed.device_diagnostics.route_change_notifications, 1);
+}
+
+#[test]
+#[cfg(target_os = "macos")]
+fn reroutes_are_counted_without_hiding_later_device_loss() {
+    let mut diagnostics = DeviceAudioDiagnostics::default();
+    let mut queue = Queue::new(&[ErrorKind::DeviceChanged, ErrorKind::DeviceChanged]);
+    diagnostics.poll_queue(&mut queue).unwrap();
+    assert_eq!(diagnostics.route_change_notifications, 2);
+    assert_eq!(diagnostics.xrun_notifications, 0);
+    for fatal in [ErrorKind::DeviceNotAvailable, ErrorKind::StreamInvalidated] {
+        let mut queue = Queue::new(&[ErrorKind::DeviceChanged, fatal]);
+        assert!(diagnostics.poll_queue(&mut queue).is_err());
+    }
+    assert_eq!(diagnostics.route_change_notifications, 4);
+}
+
+#[test]
+#[cfg(target_os = "macos")]
+fn reroutes_respect_poll_limits_queue_loss_and_counter_saturation() {
+    let mut diagnostics = DeviceAudioDiagnostics::default();
+    let mut queue = Queue::new(&[ErrorKind::DeviceChanged; MAX_EVENTS_PER_POLL + 1]);
+    diagnostics.poll_queue(&mut queue).unwrap();
+    assert_eq!(
+        diagnostics.route_change_notifications,
+        MAX_EVENTS_PER_POLL as u64
+    );
+    assert_eq!(diagnostics.poll_limit_hits, 1);
+    assert_eq!(queue.errors.len(), 1);
+    diagnostics.route_change_notifications = u64::MAX;
+    diagnostics.poll_queue(&mut queue).unwrap();
+    assert_eq!(diagnostics.route_change_notifications, u64::MAX);
+    assert!(diagnostics.counters_saturated);
+    let mut queue = Queue::new(&[ErrorKind::DeviceChanged]);
+    queue.lose_after_pop = true;
+    assert!(diagnostics.poll_queue(&mut queue).is_err());
+}
+
+#[test]
+fn route_notification_text_cannot_disguise_a_backend_failure() {
+    let mut diagnostics = DeviceAudioDiagnostics::default();
+    let mut queue = Queue::new(&[]);
+    queue.errors.push_back(Error::with_message(
+        ErrorKind::BackendError,
+        "default output device changed",
+    ));
+    assert!(diagnostics.poll_queue(&mut queue).is_err());
+    assert_eq!(diagnostics.route_change_notifications, 0);
 }

@@ -171,6 +171,7 @@ impl Renderer {
     // Nested temporal preparation defers persistence until its entire catalog
     // succeeds. Existing motion resource publication remains unchanged.
     pub(crate) async fn prepare_motion_vectors(&mut self) -> Result<bool> {
+        self.materials.require_eager()?;
         super::admission()?;
         if self.motion.is_some() {
             return Ok(false);

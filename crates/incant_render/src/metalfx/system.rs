@@ -39,6 +39,7 @@ impl crate::Renderer {
     /// Explicit startup-only compilation of fixed engine shaders. Native scaler
     /// compilation is synchronous and bounded to owner/extent preparation.
     pub async fn enable_metalfx(&mut self) -> crate::Result<()> {
+        self.materials.require_eager()?;
         if self.metalfx_admission.is_some() {
             return Ok(());
         }

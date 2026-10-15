@@ -285,6 +285,7 @@ impl crate::Renderer {
     /// Pixel cameras bypass bloom; footprint is in physical output pixels. This
     /// startup configuration does not enable a temporal upscaler or GPU timer.
     pub async fn enable_bloom(&mut self, config: Bloom) -> Result<()> {
+        self.materials.require_eager()?;
         config::admission(
             config,
             cfg!(all(feature = "cooked-output", not(target_arch = "wasm32"))),

@@ -69,7 +69,7 @@ pub(super) fn cube() -> SceneInput {
 }
 /// Three separate primitive/material draws: opaque, MASK and BLEND.
 /// All non-visual source files disappear before the returned input is rendered.
-pub(super) fn mixed(mask_alpha: f32) -> SceneInput {
+pub(crate) fn mixed(mask_alpha: f32) -> SceneInput {
     let root = tempfile::tempdir().unwrap();
     let mut positions = Vec::new();
     for x in [-2., 0., 2.] {
@@ -208,7 +208,7 @@ pub(super) fn mixed(mask_alpha: f32) -> SceneInput {
     root.close().unwrap();
     input
 }
-pub(super) fn draw(
+pub(crate) fn draw(
     renderer: &crate::Renderer,
     input: &SceneInput,
     size: [u32; 2],

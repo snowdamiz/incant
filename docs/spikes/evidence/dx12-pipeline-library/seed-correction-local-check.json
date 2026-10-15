@@ -1,0 +1,119 @@
+{
+  "source": "9845066773458dc08ed5afe1b03b987ade9428c6",
+  "results": {
+    "source": "9845066773458dc08ed5afe1b03b987ade9428c6",
+    "plan_sha256": "3aa60f25b6eb4c00d67e5eca1d8f312d0ba6217d52c6ac5314c52d5047afc72e",
+    "runner_sha256": "65d4ab9ed51d67f93d48477963dcd69ae74d8ed0b7ec98058e74843779631aaf",
+    "status": "passed",
+    "owned_processes": [
+      {
+        "pid": 61634,
+        "cleanup_confirmed": true
+      },
+      {
+        "pid": 61709,
+        "cleanup_confirmed": true
+      }
+    ],
+    "steps": [
+      {
+        "name": "Windows GNU ordinary test-target strict Clippy compile only",
+        "argv": [
+          "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/cargo",
+          "clippy",
+          "-p",
+          "incant_render",
+          "--target",
+          "x86_64-pc-windows-gnu",
+          "--profile",
+          "ci",
+          "--locked",
+          "--offline",
+          "-j2",
+          "--target-dir",
+          "/Users/andreyyurlov/.codex/incant-core-tick-diagnostic-target",
+          "--features",
+          "dx12-pipeline-library",
+          "--tests",
+          "--",
+          "-D",
+          "warnings"
+        ],
+        "exit": 0,
+        "terminal_reaped": true
+      },
+      {
+        "name": "Windows GNU full cooked test-target strict Clippy compile only",
+        "argv": [
+          "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/cargo",
+          "clippy",
+          "-p",
+          "incant_render",
+          "--target",
+          "x86_64-pc-windows-gnu",
+          "--profile",
+          "ci",
+          "--locked",
+          "--offline",
+          "-j2",
+          "--target-dir",
+          "/Users/andreyyurlov/.codex/incant-core-tick-diagnostic-target",
+          "--features",
+          "dx12-pipeline-library,cooked-native-shaders",
+          "--tests",
+          "--",
+          "-D",
+          "warnings"
+        ],
+        "exit": 0,
+        "terminal_reaped": true
+      }
+    ],
+    "actual_test_executions": 0,
+    "GPU_window_capture_executions": 0,
+    "prior_charge_seconds": 395,
+    "prior_copy_bytes": 380898056,
+    "new_copies": 0,
+    "initial_target_bytes": 15772689721,
+    "target_ceiling_bytes": 16315702201,
+    "peak_target_bytes": 15772689721,
+    "minimum_free_bytes": 21552685056,
+    "elapsed_seconds": 15.780933917005314,
+    "total_charge_seconds": 421,
+    "final_target_bytes": 15772603362,
+    "remaining_target_bytes": 543098839,
+    "supervisor_terminal": true,
+    "logs": {
+      "1.stderr.log": {
+        "bytes": 173,
+        "sha256": "5e64c57f08b1562075b08d63d17b795bbc18e1c5811102847e9ae7a7af6b59bf"
+      },
+      "0.stdout.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "1.stdout.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "0.stderr.log": {
+        "bytes": 1971,
+        "sha256": "eae03ac636cc51976e1d38bf1aaa7c8ca8e909335a88956a069fd8af0bdc6515"
+      }
+    },
+    "actual_wrapper_exit": 0,
+    "actual_wrapper_session": 75387,
+    "independent_owned_PID_and_group_absence": [
+      61634,
+      61709
+    ]
+  },
+  "original_result_sha256": "02c892be093456cd30efc759fc1e67b09becaae03bd8e29d21f38e758167d1c7",
+  "logs": {
+    "1.stderr.log": "   Compiling incant_render v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_render)\n    Finished `ci` profile [optimized] target(s) in 3.88s\n",
+    "0.stdout.log": "",
+    "1.stdout.log": "",
+    "0.stderr.log": "   Compiling parry3d v0.31.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/third_party/parry3d)\n   Compiling rapier3d v0.36.0 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/third_party/rapier3d)\n   Compiling parry2d v0.31.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/third_party/parry2d)\n   Compiling rapier2d v0.36.0 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/third_party/rapier2d)\n   Compiling wgpu-hal v29.0.4 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/third_party/wgpu-hal)\n   Compiling incant_render_data v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_render_data)\n    Checking incant_physics_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_physics_runtime)\n    Checking wgpu-core-deps-windows-linux-android v29.0.4\n    Checking wgpu-core v29.0.4\n    Checking incant_physics_2d_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_physics_2d_runtime)\n    Checking incant_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_runtime)\n    Checking incant_physics v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_physics)\n   Compiling incant_render v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_render)\n    Checking incant_core v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_core)\n    Checking wgpu v29.0.4\n    Checking incant_render_authoring v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_render_authoring)\n    Checking incant_render_native v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_render_native)\n    Checking incant_cook v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_cook)\n    Finished `ci` profile [optimized] target(s) in 11.11s\n"
+  },
+  "scope": "Windows GNU test-target strict lint/compile only. No Windows binary execution, GPU, copied executable or timing claim. Original CORE resource account preserved."
+}

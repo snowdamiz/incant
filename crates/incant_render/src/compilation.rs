@@ -72,6 +72,7 @@ impl crate::Renderer {
             surface,
             false,
             crate::SceneMsaa::One,
+            None,
             Some(capture),
             #[cfg(all(
                 feature = "metal-binary-archives",

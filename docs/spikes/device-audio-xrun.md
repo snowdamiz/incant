@@ -9,8 +9,10 @@ The pinned CPAL 0.18.2 CoreAudio overload listener emits typed `ErrorKind::Xrun`
 without stopping its stream. Kira preserves that stream. Incant previously
 treated every queued notification as fatal and dropped the whole game session.
 It now counts typed xruns and leaves the existing mixer and cursor intact.
-Device loss, every other error kind, unavailable queues and discarded events
-remain fatal. The policy never guesses from message text.
+Device loss, other error kinds, unavailable queues and discarded events remain
+fatal in this producing revision. The later [macOS route notification correction](macos-audio-route.md)
+also retains a mixer after the backend's successful default-output reroute.
+The policy never guesses from message text.
 
 Each poll drains at most 64 notifications, checks queue loss before and after,
 and exposes cumulative xrun and poll-limit counters with visible saturation.

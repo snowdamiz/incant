@@ -94,6 +94,7 @@ pub struct RuntimeAssetInfo {
 #[derive(Debug)]
 pub struct RuntimeAsset {
     version: AssetVersionId,
+    model_content_sha256: Option<[u8; 32]>,
     info: RuntimeAssetInfo,
     usage: Option<TextureUsage>,
     data: RuntimeAssetData,
@@ -102,6 +103,12 @@ pub struct RuntimeAsset {
 impl RuntimeAsset {
     pub fn version_id(&self) -> AssetVersionId {
         self.version
+    }
+    /// Complete admitted cooked model bytes, sealed by the bounded loader. This
+    /// persisted content identity is independent of process-local version IDs
+    /// and caller-supplied recipe fingerprints. No hashing or I/O occurs here.
+    pub fn model_content_sha256(&self) -> Option<[u8; 32]> {
+        self.model_content_sha256
     }
     pub fn info(&self) -> &RuntimeAssetInfo {
         &self.info
@@ -148,6 +155,7 @@ impl RuntimeAsset {
             .map_err(|_| invalid("loaded asset version identity exhausted"))?;
         Ok(Self {
             version: AssetVersionId(version),
+            model_content_sha256: None,
             info: RuntimeAssetInfo {
                 id: id.into(),
                 kind: kind.into(),
@@ -174,8 +182,10 @@ impl RuntimeAsset {
     }
     pub fn load_model(id: &str, generation: u64, cache: &Path, fingerprint: &str) -> Result<Self> {
         Self::check_id(id)?;
-        let model = crate::load_model(cache, fingerprint)?;
-        Self::create(id, generation, fingerprint, RuntimeAssetData::Model(model))
+        let (model, digest) = crate::model::load_model_with_receipt(cache, fingerprint)?;
+        let mut asset = Self::create(id, generation, fingerprint, RuntimeAssetData::Model(model))?;
+        asset.model_content_sha256 = Some(digest);
+        Ok(asset)
     }
     pub fn load_texture(
         id: &str,

@@ -64,7 +64,7 @@ pub(crate) fn emit_variant(
                     .flatten()
                 })
                 .collect();
-            let expected = if vertex || variant == Variant::Prepass {
+            let expected = if vertex || matches!(variant, Variant::Prepass | Variant::Fallback) {
                 vec![]
             } else {
                 vec![resource(3, 1), resource(3, 2), resource(3, 3)]

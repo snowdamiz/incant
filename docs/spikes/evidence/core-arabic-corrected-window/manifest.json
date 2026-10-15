@@ -1,0 +1,325 @@
+{
+  "format": "incant-core-arabic-corrected-window-v1",
+  "producing_source": "069bbe54dc529511138867dfd4fbe50507a38b6b",
+  "player_sha256": "6e7994630c36cde871a0dea8f2818e93ad2aa9e459d6a2fd848474b71d6835c7",
+  "records": 52,
+  "archive_sha256": "3e189a31f42ba95d32e897df1f6b71f367d2b116dda849205f3f748d89dee94b",
+  "source_review_files": [
+    {
+      "path": "tools/macos_session.py",
+      "sha256": "6085e1b22e57ef52f6a3787de0982ab9b03a66ccb98dc13e8908e00620b4eabe"
+    },
+    {
+      "path": "tools/tests/test_macos_session.py",
+      "sha256": "06152db4431ed2b89cedd7da0ef820cf72132273a06154d3522b9fdba593b7b6"
+    },
+    {
+      "path": "tools/probes/core-locale-window.py",
+      "sha256": "fa7fdcdfba82ebd28c98a5d52f5ad004361b710006d9ca4482dd9ec9007349cc"
+    }
+  ],
+  "actual_machine": {
+    "os": "27.0.1",
+    "hardware": "Mac17,9",
+    "reported_adapter": "Apple M5 Pro"
+  },
+  "retained_originals": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/window-002/lifecycle.json",
+      "bytes": 10464,
+      "sha256": "73e346d626ddbb8db36f5e45e2e48bd6fc5a7c5ace4da96ede67f51b66ddb5d0"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/window-002/os-lock-preflight.json",
+      "bytes": 181,
+      "sha256": "57d73e296491176c423511acbf10925b4e0735e579123adba8b1e785ca6714bf"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/window-002/result.json",
+      "bytes": 156,
+      "sha256": "ba38a79c54222b82744655411f1e65a6a4742b2f6f2b01ad8d75791997f6d1c3"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/window-002/runner/eligibility.jsonl",
+      "bytes": 29574,
+      "sha256": "d3348c360681d77921e4c7e508f446bfe11080537dc0cad538ad0634e3bed479"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/window-002/runner/lose-restart-win.json",
+      "bytes": 8606,
+      "sha256": "9c77ee43892de55795f422e9bbfdce27eb811f5b21744dfe9c33d86c0a85ffdf"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/window-002/runner/lose-restart-win.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/window-002/runner/lose-restart-win.stdout.raw.log",
+      "bytes": 3988,
+      "sha256": "3c435377e5bac0f7d497e5b6d5f6ecef6a0a1d91f0bbaa2ae53ee58bd3236b7f"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/window-002/runner/owned-live.json",
+      "bytes": 951,
+      "sha256": "5be6d493250c7106a4b719a3736b35d1e11c3c61d65872baf2acd2b4c3278db2"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/window-002/runner/processes.json",
+      "bytes": 1433,
+      "sha256": "da493ca6d2f678cf644008a27d4cc1d09d25f44d4567d7b27a965ab6eedd6adb"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/window-002/runner/readiness.json",
+      "bytes": 1096,
+      "sha256": "d253398f4e69d5e5a143ab702def8353b60200fa1f4e9633abc8b99d0852bbd8"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/window-002/runner/result.json",
+      "bytes": 4731,
+      "sha256": "61eb1889cd3c62780fd29e2f2cd9385a952a4dedc1195bee1a6e74802931a351"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/window-002/supervisor.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/window-002/supervisor.stdout.raw.log",
+      "bytes": 887,
+      "sha256": "94867e54eeda0214e92b4219f70cf510d82eb7aedcac96474e09c8e0b6b81468"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/native-window-002/plan.json",
+      "bytes": 164431,
+      "sha256": "c8cde4d19dc1eac95b46954a42352ebba895f00e5bd0f9c9626438c941b857a4"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/native-window-002/root-window-grant.json",
+      "bytes": 528,
+      "sha256": "db3cc6638357ef499c8d2b39c58c09ad1034fa4290a86aac962906ca3cf3b43e"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/window-003/lifecycle.json",
+      "bytes": 10297,
+      "sha256": "8492b3888eb99481f1697e80b01feca5e6a82f79bb4619281efeaf7b0a5d8811"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/window-003/os-lock-preflight.json",
+      "bytes": 181,
+      "sha256": "57d73e296491176c423511acbf10925b4e0735e579123adba8b1e785ca6714bf"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/window-003/result.json",
+      "bytes": 156,
+      "sha256": "66545d16779d19f0bf40cbcc39484305e515073014ac974ae080de682f8ecfa0"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/window-003/runner/eligibility.jsonl",
+      "bytes": 29573,
+      "sha256": "e3777a465b245ebd4b57d2527e3049225050de8810af3be1c5243924ea8eb7cf"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/window-003/runner/lose-restart-win.json",
+      "bytes": 8606,
+      "sha256": "3d4b710e11c275049e05c204a7bc1d1cf2f54ea3390d787a4cab9ec94518f83d"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/window-003/runner/lose-restart-win.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/window-003/runner/lose-restart-win.stdout.raw.log",
+      "bytes": 3988,
+      "sha256": "f751490a063899ec06a50b9dc556d2239a61652e6bedabae2f2c87ca29060c29"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/window-003/runner/owned-live.json",
+      "bytes": 951,
+      "sha256": "2dd108da455ab871129e68724ad241139f5c622f41bdde77243ffd4a3d2a5e11"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/window-003/runner/processes.json",
+      "bytes": 1433,
+      "sha256": "2f9fe6552d69d4ae5117ab0b7f0c169629946ffdd8f89c4186ec38eae5e70377"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/window-003/runner/readiness.json",
+      "bytes": 1096,
+      "sha256": "efa6b90e3e1387f85fdab0c01b8e491259665ab0dd79c287b96ca95caa7cc6fa"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/window-003/runner/result.json",
+      "bytes": 4731,
+      "sha256": "37d5ce87c558fc874aae259b08cb6559c213aab45a060d1da4508e912ea2a93b"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/window-003/supervisor.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/window-003/supervisor.stdout.raw.log",
+      "bytes": 887,
+      "sha256": "25c3b472a7703abba15e9d24da783d61f7054eb1d1a7a101d1a3d5f0d9a5858e"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/native-window-003/plan.json",
+      "bytes": 166188,
+      "sha256": "441d5d1a8638d101e6d9a73d8e76faa595e282d3ab3cf42c6e6510eee135cf00"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/native-window-003/root-window-grant.json",
+      "bytes": 569,
+      "sha256": "f4aafb6843a96d3666a382308220cf401c89ff9afd582bf0dc75a736c2a619a4"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/window-004/lifecycle.json",
+      "bytes": 22802,
+      "sha256": "44917accd86f2d65bad5c5aed75bc18eb67a9af80c61b567d55eea1541322259"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/window-004/os-lock-preflight.json",
+      "bytes": 181,
+      "sha256": "57d73e296491176c423511acbf10925b4e0735e579123adba8b1e785ca6714bf"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/window-004/result.json",
+      "bytes": 960,
+      "sha256": "fb59bf039e233a76e95e3773bb45208e081936004a99619ed575a93060f537e6"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/window-004/runner/eligibility.jsonl",
+      "bytes": 65855,
+      "sha256": "0b1ead1cb35d97b9c58f588036d7d4022990df17eea4261ce1a0fdda5fbb8bc8"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/window-004/runner/lose-restart-win.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/window-004/runner/lose-restart-win.stdout.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/window-004/runner/owned-live.json",
+      "bytes": 951,
+      "sha256": "89fe73969b597a7d43096f07c7b14a561c00c53b600c6ab710ea2f742c9ef1db"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/window-004/runner/processes.json",
+      "bytes": 2215,
+      "sha256": "b0bbe82368258543ddfe3b5be136fdacf4353074794240ad4419988a1fcc44bb"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/window-004/runner/readiness.json",
+      "bytes": 1096,
+      "sha256": "f27c93fb8e664c81e18af76350ae56883fa24a11ac4bbbc57b51a6fb890de171"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/window-004/runner/result.json",
+      "bytes": 1145,
+      "sha256": "3f9a4e82c544456c00baebe0449a9699306651dc2c1fa55fe14378e9449a7c85"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/window-004/supervisor.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/window-004/supervisor.stdout.raw.log",
+      "bytes": 887,
+      "sha256": "e0cfd6a75791e7b97f8bd03998f651c55bc935b9e40dfecc1c56115f7bc09bb3"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/native-window-004/plan.json",
+      "bytes": 167522,
+      "sha256": "f5e805b716ae44ed6d0be4aab1e69192e71c69ec48432d428fb44fae1add7349"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/native-window-004/root-window-grant.json",
+      "bytes": 551,
+      "sha256": "c76f0d7143c93576d9cb4b9c7360b25c8ce1ee506da858d84e50ad52cdbb5ac9"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/native-window-004/root-closeout.json",
+      "bytes": 1890,
+      "sha256": "fe701d5d0a9245b7f1bccdadb3ce1f664fb0186de425af9041977ee777e3764b"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/baseline-001/baseline/lose-restart-win.json",
+      "bytes": 13453,
+      "sha256": "e9a8f209bfafed636248593a62935cc4509afa18a8d6d6705173c5f74df90a9c"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/build-author-001/recordings/recordings.json",
+      "bytes": 7760,
+      "sha256": "fc4e32e13599d4b6a871901efef3b387dee412f318e2ac13f19a25e87d883867"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/build-author-001/recordings/lose-restart-win-observe.json",
+      "bytes": 1224,
+      "sha256": "620889976421c29718e6011f67cfdfe1eccdcc08c39af5d5562c3cdd9038cd0d"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/macos-window-session-preflight-independent-20261015.json",
+      "bytes": 1891,
+      "sha256": "c655ce89c4be6aaf083a67890d8919242af5105afb5e0edff923e27840f993c8"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/local-responses-provider-001/window-preflight-tools.log",
+      "bytes": 93646,
+      "sha256": "bf294216bf4fa6005d7de6bc63544a5ce0fe27e88cc4c2391d127f1da6794883"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/native-window-004/root-visual-review.json",
+      "bytes": 2365,
+      "sha256": "3127621b409fd77236faefb1f8c99f53e9394944fafcf1afd8a8e1b46de47c95"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/native-window-004/root-visual-review-corrected.json",
+      "bytes": 2671,
+      "sha256": "2c5759d4783899c6c74f0c3561cf313fd477ac6fe24eccf44f99aebea2a630a6"
+    }
+  ],
+  "retained_images": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/native-window-002/captures/01.png",
+      "bytes": 183316,
+      "sha256": "6fdeb90a452790d78e45ae55cef50e16cb6c2ed64e616490e64b64d8d7254076",
+      "width": 1280,
+      "height": 1024,
+      "mime_type": "image/jpeg"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/native-window-002/captures/02.png",
+      "bytes": 196675,
+      "sha256": "433be8f5bc6a7c062f0ba6ac05a3678f883b2b3540e07d6d1079cc8ff194793a",
+      "width": 1280,
+      "height": 1024,
+      "mime_type": "image/jpeg"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/native-window-003/captures/initial.png",
+      "bytes": 188042,
+      "sha256": "e018ca804f1aae9eda5902a85e6d489bfb50e5faec5c5c0b71cde92e19da25b4",
+      "width": 1280,
+      "height": 1024,
+      "mime_type": "image/jpeg"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-arabic-corrected-001/native-window-004/captures/observed-hud.png",
+      "bytes": 64262,
+      "sha256": "c17d4e3f1a437f54ff6a0c55a0ed1311070c7fe9b4fca770ebe10b806af42287",
+      "width": 640,
+      "height": 512,
+      "mime_type": "image/jpeg"
+    }
+  ],
+  "accepted_scope": "Two complete native replay state comparisons; partial actual Arabic HUD review; unlocked-session preflight correction",
+  "appearance_complete": false,
+  "performance_or_phase_gate": false
+}
