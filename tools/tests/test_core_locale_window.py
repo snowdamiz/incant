@@ -77,7 +77,7 @@ receipt.update(project_sha256=hashlib.sha256(project.read_bytes()).hexdigest(),
         value = {'tick': row['simulation_tick'], 'frames': row['host_steps'] * 800,
                  'observations': {'passed': True, 'tick': row['simulation_tick'], 'tick_rate': 60,
                     'entities': entities, 'checks': [{**c, 'passed': True, 'actual': c['expect']['value']}
-                                                     for c in plan['checks']]},
+                                                     for c in sorted(plan['checks'], key=lambda c: (c['tick'], c['name']))]},
                  'logs': {'dropped': 0, 'entries': logs}, 'flipbooks': [], 'sources': {},
                  'render_input': {'mode': 'cpu-only', 'gpu_submitted': False, 'model_count': 6,
                     'camera': PROBE['ulid_hex'](PROBE['CAMERA']), 'ui': {'widgets': 13, 'glyphs': 90,
@@ -148,6 +148,30 @@ receipt.update(project_sha256=hashlib.sha256(project.read_bytes()).hexdigest(),
                 value = self.cpu(); mutation(value)
                 with self.assertRaises(ValueError):
                     PROBE['check_cpu'](self.manifest['cases'][2], value, self.manifest, self.plans[PROBE['ORDER'][2]])
+
+    def test_observations_follow_runtime_tick_name_order_without_losing_membership(self):
+        # incant_observe::Plan::new sorts by (tick,name), not request insertion
+        # order. Keep all exact names/ticks/expectations and actual bool results.
+        a = {'name': 'a', 'tick': 2, 'expect': {'type': 'exists', 'entity': 'same', 'value': True}}
+        z = {'name': 'z', 'tick': 2, 'expect': {'type': 'exists', 'entity': 'same', 'value': False}}
+        first = {'name': 'first', 'tick': 1, 'expect': {'type': 'exists', 'entity': 'same', 'value': True}}
+        plan = {'entities': ['same'], 'checks': [z, first, a]}
+        value = {'observations': {'passed': True, 'tick': 2, 'tick_rate': 60, 'entities': {'same': None},
+                 'checks': [{**c, 'passed': True, 'actual': c['expect']['value']} for c in (first, a, z)]}}
+        PROBE['observations'](value, plan)
+        mutations = [lambda r: r['checks'].pop(),
+                     lambda r: r['checks'].__setitem__(1, copy.deepcopy(r['checks'][0])),
+                     lambda r: r['checks'][1].update(name='different'),
+                     lambda r: r['checks'][1].update(tick=3),
+                     lambda r: r['checks'][1].update(expect={**r['checks'][1]['expect'], 'value': False}),
+                     lambda r: r['checks'][1].update(actual=False),
+                     lambda r: r['checks'][1].update(passed=False),
+                     lambda r: r['checks'].reverse()]
+        for mutation in mutations:
+            with self.subTest(mutation=mutation):
+                wrong = copy.deepcopy(value); mutation(wrong['observations'])
+                with self.assertRaises(ValueError):
+                    PROBE['observations'](wrong, plan)
 
     def test_restart_requires_fresh_world_and_exact_pcm_concatenation(self):
         reports = {name: self.cpu(i) for i, name in enumerate(PROBE['ORDER'])}
