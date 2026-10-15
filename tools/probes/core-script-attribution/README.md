@@ -94,3 +94,23 @@ resulting rows are ranked after subtraction; marginal percentiles are never
 subtracted. Zero repeated calls or a still-over-budget hypothetical p95 stops the
 hypothesis. A plausible saving justifies separate correctness and matched shipping
 work; the instrumented result never passes the existing gate.
+
+## Budget-check variant
+
+The private adapter also admits exactly
+`project,render-input,profile,diagnostic-script-budget`. Four existing receivers
+gain phase diagnostics; only player, script and profile additionally gain the
+budget feature. Runtime does not gain that feature. Actual normal graph rows,
+target lib/bin compiler units and source-free symbol audits remain strict.
+
+Budget-only reports require diagnostic v4/schema3, four exact aggregate slots,
+all 2,156 valid frames, unchanged two-source/numeric/histogram correspondence and
+zero refused checks on the successful route. Actual clock attempts equal accepted
+check counts. Durations must fit their enclosing callback/other trace portions.
+The analyzer retains exact totals and ratio numerators/denominators for all frames
+and the same 108 frames selected by whole ScriptTick. These nested wall spans
+include observer work and never establish reclaimable CPU cost, saving or a gate.
+
+Schema1/2 behavior remains separate; combined navigation/budget schema4 is not
+admitted by this private adapter. Public exporter and normal v3 reader admission
+are unchanged. Preparation/data-only controls do not execute a shipping workload.

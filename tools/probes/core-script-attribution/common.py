@@ -15,13 +15,18 @@ EXTRA = {'incant_game_player', 'incant_script', 'incant_runtime', 'incant_profil
 FEATURES = ['project', 'render-input', 'profile', DIAGNOSTIC]
 NAVIGATION = 'diagnostic-navigation'
 NAV_FEATURES = ['project', 'render-input', 'profile', NAVIGATION]
+BUDGET = 'diagnostic-script-budget'
+BUDGET_FEATURES = ['project', 'render-input', 'profile', BUDGET]
 
 def additions(features):
-    require(features in (FEATURES, NAV_FEATURES), 'Unknown diagnostic selection')
+    require(features in (FEATURES, NAV_FEATURES, BUDGET_FEATURES), 'Unknown diagnostic selection')
     result = {name: {DIAGNOSTIC} for name in EXTRA}
     if features == NAV_FEATURES:
         for flags in result.values(): flags.add(NAVIGATION)
         result['incant_nav'] = {NAVIGATION}
+    if features == BUDGET_FEATURES:
+        for name in ('incant_game_player', 'incant_script', 'incant_profile'):
+            result[name].add(BUDGET)
     return result
 
 TICKS = 2156
@@ -46,7 +51,7 @@ def plan(path):
     require(data['format'] == 'incant-script-attribution-private-plan' and data['version'] == 1,
             'Unsupported private diagnostic plan')
     require(data['target'] == TARGET and data['physics_mode'] == 'fast'
-            and data['features'] in (FEATURES, NAV_FEATURES) and data['ticks'] == TICKS
+            and data['features'] in (FEATURES, NAV_FEATURES, BUDGET_FEATURES) and data['ticks'] == TICKS
             and data['child_seconds'] == 45 and data['retry_count'] == 0
             and data['eligible_for_performance_gate'] is False, 'Diagnostic contract changed')
     return data, sha256(raw)
