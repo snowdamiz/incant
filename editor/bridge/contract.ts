@@ -11,6 +11,7 @@ export const KNOWN_CAPABILITIES = [
   'project.file',
   'entity.rename',
   'entity.delete',
+  'entity.duplicate',
   'asset.import',
   'history.undo',
   'history.redo',
@@ -436,6 +437,7 @@ export interface BridgeSnapshot {
 export type EditorCommand =
   | { readonly type: 'entity.rename'; readonly entity: Ulid; readonly name: string }
   | { readonly type: 'entity.delete'; readonly entity: Ulid }
+  | { readonly type: 'entity.duplicate'; readonly entity: Ulid }
   | { readonly type: 'asset.import'; readonly sources: readonly AssetImportRequest[] }
   | { readonly type: 'agent.budget.set'; readonly maxTokens: number }
   | { readonly type: 'history.undo' }
@@ -497,7 +499,7 @@ export interface AssetImportCommit {
 }
 
 export type BridgeResult =
-  | { readonly ok: true; readonly projectFile?: ProjectFileResponse; readonly assetImport?: AssetImportCommit; readonly playEntity?: PlayEntity; readonly agentTurnId?: number }
+  | { readonly ok: true; readonly projectFile?: ProjectFileResponse; readonly assetImport?: AssetImportCommit; readonly playEntity?: PlayEntity; readonly agentTurnId?: number; readonly duplicatedEntity?: Ulid }
   | {
       readonly ok: false;
       readonly error: BridgeError;
