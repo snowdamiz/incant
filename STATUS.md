@@ -13,7 +13,7 @@ controls. This fixes the ordinary viewport route; low-resolution reconstruction
 still has separate appearance defects. The entries
 below preserve earlier scoped results and superseded integration snapshots.
 
-## Cooked bloom — complete twelve-family CPU catalog qualified
+## Cooked bloom — public shipping export and CPU startup qualified
 
 The trusted cooked-native selection now includes prefilter, downsample,
 upsample and display bloom programs, bringing the catalog to twelve families
@@ -22,10 +22,13 @@ device cache during cold preparation. Partial cooked-output builds still refuse
 bloom; project files cannot supply shader bytes and default exports stay unchanged.
 
 41 Python controls, 41 cooker tests, 209 renderer controls, 12 partial-bloom
-controls and strict lint pass. The exporter-shaped player was compiled only;
-its actual target output passed the complete 268,438-byte shader audit. Both prior
-native failures remain recorded. Public shipping export, player execution,
-driver/render parity, cache hits and the full shader-stall gate remain unproven.
+controls and strict lint pass. A separate fresh public arm64 shipping export at
+`340acb7c` passed the complete 268,438-byte shader audit and its inherent one-tick
+CPU startup with source parsing disabled. All 18 managed calls cleaned up, the
+private target was retired and source/compiler/authoring/package inputs rehashed
+unchanged. Both prior native test failures, the missing-package export refusal
+and offline dependency-cache failure remain recorded. No window or GPU was
+launched; driver/render parity, cache hits and the full shader-stall gate remain open.
 The original eight-family result below retains its producing-source scope.
 The public exporter now refuses missing or mismatched pinned script-compiler
 packages before launching build tools; 45 focused Python controls pass.
