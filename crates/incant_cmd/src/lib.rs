@@ -10,6 +10,7 @@ mod journal;
 mod localization;
 mod prefab;
 mod sources;
+mod subtree;
 use incant_doc::{
     Asset, CollaborativeDocument, DocumentError, Entity, Id, Origin, Project, Provenance, Scene,
     ScriptSource, new_id,
@@ -79,6 +80,14 @@ pub enum Command {
     CreateEntity {
         scene_id: Id,
         entity: Entity,
+    },
+    /// Copy a complete ordinary subtree beside its root in the same scene.
+    DuplicateSubtree {
+        scene_id: Id,
+        root_entity_id: Id,
+        /// Exact source entity -> globally fresh entity identity map.
+        #[schemars(extend("minProperties" = 1, "maxProperties" = 1024))]
+        entities: std::collections::BTreeMap<Id, Id>,
     },
     DeleteEntity {
         scene_id: Id,
@@ -690,6 +699,18 @@ fn apply(
             entity.provenance = Some(provenance.clone());
             scene.entities.insert(entity.id.clone(), entity);
         }
+        Command::DuplicateSubtree {
+            scene_id,
+            root_entity_id,
+            entities,
+        } => subtree::duplicate(
+            project,
+            scene_id,
+            root_entity_id,
+            entities,
+            provenance,
+            prefab_budget,
+        )?,
         Command::DeleteEntity {
             scene_id,
             entity_id,
