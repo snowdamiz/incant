@@ -4,8 +4,9 @@ Arabic now has a fresh ordinary shipping package, three same-package CPU routes
 and one complete native-window numerical run. Its separate visual replay timed
 out while focus-gated, retaining five actual partial CUA images. This is not full
 appearance, normal-size layout, RTL health-pip order, audible-quality, performance
-or phase-gate acceptance. CJK public authoring also passed; its export/window and
-the pseudo-locale qualification remain open.
+or phase-gate acceptance. CJK now has its own fresh shipping export, CPU trio and
+complete native replay at the corrected normal window size, with four scoped
+actual images. The CJK win image was missed; pseudo-locale qualification remains open.
 
 ## Source and execution
 
@@ -64,28 +65,62 @@ No RTL health-order pass or continuous-motion claim follows from these images.
 
 The source cause of the small initial window is
 `window/mod.rs` requesting `PhysicalSize(640,480)` before `logical_viewport`
-divides by scale. A separate proposed repair is initial `LogicalSize(640,480)`
-with existing physical minimum/maximum and surface guards retained. At scale two
-that requests 1280×960, within the current 1920×1080 cap. No such runtime change
-is included here.
+divides by scale. The separate [logical-size repair](native-window-logical-size.md) changes the
+initial request to `LogicalSize(640,480)` with the physical caps and surface guards
+retained. At scale two that requests 1280×960, within the current 1920×1080 cap.
+The old Arabic execution stays bound to its original physical-size source.
+
+## Fresh CJK package and actual window
+
+CJK authoring at `b8a70f00` passed the same public history/localization checks
+(project `4142b956…`, revision 32, 46 RPC calls), including `按 R 或 Start 再玩一次`.
+The fresh shipping package is from `e3dfcd9c`, joining reviewed main310 source and
+the logical-size repair `a6c6d9ee`. Its 97-row inventory includes new default-off
+shader-creation observation and timestamp-counter repairs; it is not the Arabic
+runtime. Player `04d73494…` uses Rust 1.99, Node 22.23.3 and SDK 27.0. All 18 managed
+export calls passed, the fresh private target retired before CPU startup, and all
+110 authoring inputs stayed unchanged. The actual normal Cargo graph excludes
+compilation and presentation observer features. Earlier receipts saying the
+window was pending remain historical, unmodified stage records.
+
+The same-package 900/2,156/3,056 CPU routes pass exact Chinese HUD, state, parenting,
+pickup and observation checks. Their 39,116,800 finite PCM bytes preserve exact
+loss + fresh-win concatenation. Native window001 (root session 22747, PID 63372)
+completed all 3,056 host steps with exact CPU observations: generation two, tick
+2,156, current-consumer frames 2,157 and cumulative presentations 3,058. The owned
+child exited zero and was independently absent; package and frozen inputs match.
+
+On Apple M5 Pro/Metal, the 123-record durable eligibility log retains 1280×960
+physical pixels throughout; the actual UI reports 640×480 logical at scale two. No resize
+or gameplay input was used. Four actual inline CUA images show the fitting
+initial Chinese HUD, readable loss/restart prompt, reset gameplay with three
+pips, and later 2/4 pickups with two health pips. The attempted win screenshot
+timed out as the completed window closed, so numerical win completion is not
+win-pixel evidence. Normal Finder Open actions restored focus twice; the cause
+of two focus losses is unknown. Three gains and one surface deferral remain
+recorded. The 119.251565-second run includes pauses and diagnostic overhead; it
+is not a frame-time or continuous-motion measurement. Images remain inline
+tool outputs, not filesystem PNGs. No audible-quality or full appearance gate
+is claimed.
 
 ## Remaining scope and replay
 
 The accepted [0069 offscreen presentation](core0069-main212.md) stays historical.
 Its neutral Arabic health-pip reading-order follow-up and readable narrow pseudo
 prompt overlap remain explicit; new pixels must establish any new defect before
-changing data. CJK authoring at `b8a70f00` passed the same public history/localization
-checks (project `4142b956…`, revision 32, 46 RPC calls), including `按 R 或 Start
-再玩一次`. It has no fresh CJK export/player/window proof yet. Locale changes alter
-the whole-scene script-binding hash, so each locale needs its own ordinary export.
+changing data. Normal-size Arabic health order, the narrow pseudo result prompt
+and complete pseudo-locale proof remain open. Locale changes alter the whole-scene
+script-binding hash, so each locale needs its own ordinary export.
 
 The [compact packet](evidence/core-locale-native-window/manifest.json) contains
 commands, small raw logs/reports and source snapshots. Large compiler outputs,
 executables, cooked resources, fonts and PCM stay externally retained by hashes.
 The default verifier replays archived evidence; `--originals` also checks retained
 files/source copies, `--binaries` rehashes runtime/PCM and recomputes concatenation,
-and `--git-source HEAD --source-root PATH` checks accepted tool bytes plus public
-base source identities. It never launches an engine, compiler, CUA or GPU.
+and `--git-source REF --source-root PATH` checks accepted tools/public main307
+identities for Arabic and all 97 CJK source rows against REF. REF must contain the
+logical-size composition (`e3dfcd9c` or a byte-equivalent integration), rather than
+old main312; the two executions are not relabeled current. It never launches an engine, compiler, CUA or GPU.
 
 ```sh
 python3 docs/spikes/evidence/core-locale-native-window/verify.py
