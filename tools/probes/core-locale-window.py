@@ -192,7 +192,10 @@ def observations(report, plan):
             and set(observed['entities']) == set(plan['entities']), 'Complete actual observation entity set')
     require(len(observed['checks']) == len(plan['checks']) and len(plan['checks']) > 0,
             'No discarded observation checks')
-    for actual, expected in zip(observed['checks'], plan['checks']):
+    # Plan::new canonicalizes requests by (tick,name) before executing them.
+    # Sort only the expected requests; never sort away a malformed result order.
+    expected_checks = sorted(plan['checks'], key=lambda c: (c['tick'], c['name']))
+    for actual, expected in zip(observed['checks'], expected_checks):
         require(all(actual[k] == expected[k] for k in ('name', 'tick', 'expect'))
                 and integer(actual['tick']) and actual['passed'] is True, 'Exact successful observation plan')
         if expected['expect']['type'] == 'exists':
