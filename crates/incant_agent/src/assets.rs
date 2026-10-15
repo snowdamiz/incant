@@ -72,6 +72,20 @@ impl<P: EngineHost> EngineHost for ProjectHost<P> {
     fn play_state_query(&mut self, path: &str) -> Result<Value, AgentError> {
         self.perception.play_state_query(path)
     }
+    fn profiler_available(&self) -> bool {
+        self.perception.profiler_available()
+    }
+    fn profiler_read(
+        &self,
+        project_id: &str,
+        revision: u64,
+        frames: usize,
+    ) -> Result<Value, AgentError> {
+        if project_id != self.files.project_id {
+            return Err(error("profiler access belongs to a different project"));
+        }
+        self.perception.profiler_read(project_id, revision, frames)
+    }
     fn project_files(&self) -> Option<&ProjectFiles> {
         Some(&self.files)
     }

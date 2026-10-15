@@ -60,6 +60,23 @@ Metal/DX12 caches and shader-stall qualification remain open. The prior fixture
 failure and storage-bound interruption remain recorded.
 [Selection and evidence](docs/spikes/shipping-cooked-shaders.md).
 
+## Agent profiler — opt-in native CPU access qualified
+
+An explicitly enabled editor/headless host can run a disposable native session
+with `profile:true` and read its last 1–256 measured ticks through `profiler_read`.
+Measurements belong to that accepted project/session and owning tick thread;
+other projects/threads and process-wide captures cannot leak into this report.
+Failed or cancelled replacement preserves the previous world and recording.
+Missing phases, invalid clocks, evictions and unavailable counters remain explicit.
+
+The producer passed 112 CPU tests plus its allocator control. The main333 join
+passed 120 agent/playbook and 20 native-host tests, strict enabled/disabled lint
+and editor compilation. Normal editor artifacts still leave the feature off;
+no-rebuild user availability requires editor-only selection and inactive-overhead
+qualification. GPU/display/heap/allocation measurements, live optimization quality
+and the full Phase 3 gate remain open. No shipping performance result is claimed.
+[Isolation, exact source and portable evidence](docs/spikes/agent-profiler.md).
+
 ## Agent playbooks — eighteen bundled workflows qualified
 
 All eighteen planned Markdown playbooks are discoverable through read-only agent
@@ -69,7 +86,7 @@ content cannot replace the catalogue, and reading guidance grants no execution
 or approval authority. Every drafted translation remains flagged for human review.
 
 118 agent CPU tests and strict lint pass, with independent content/source review.
-Live skill-following quality, missing profiler/export/runtime controls and the
+Live skill-following quality, normal-editor profiler availability, missing export/runtime controls and the
 full Phase 3 evaluation gate remain open.
 [Behaviour and retained evidence](docs/spikes/builtin-agent-skills.md).
 
