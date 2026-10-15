@@ -154,3 +154,24 @@ Target growth was 295,412,536 bytes with a sampled free-space minimum of
 74,556,190,720 bytes. No Core execution, Node cook, timing experiment, device or
 window occurred during these checks. The packet preserves this third source
 generation and its receipts separately from the original measurements.
+
+## Main342 composition
+
+The producing and selector histories were merged, without conflicts, with main342
+`069bbe54dc529511138867dfd4fbe50507a38b6b` at
+`9661f92e6e174018b302c8a392eef9a94e771c1a`. The fixture body is byte-identical
+to b329. The [separate composition receipt](evidence/editor-profiler-inactive/integration-main342.json)
+binds twelve successful managed commands and nine copied artifacts: default and
+profiler-only ignored selectors excluded the manual target; each explicit gated
+mode passed two pure controls with the complete route ignored; the manual listing,
+both strict fixture lints, formatting, conventions and historical portable replay
+passed. All children returned after cleanup. This does not repeat Core or timing.
+
+The initial integration replay correctly refused the optional current external-input
+check: main342 added light-control declarations to the live `sdk/ts/src/native.d.ts`.
+Its exact historical b329 bytes still match the measured input, and the other 208
+external inputs remain exact. The failed attempt is retained. The successor replay
+passed `--originals --binaries --git-source`; it does not claim the moved live SDK
+is the old measured input. The 424-record historical archive is unchanged. Full
+composition CPU logs and copied executables remain external and hash-bound by the
+compact receipt; their availability is separate from default portable replay.
