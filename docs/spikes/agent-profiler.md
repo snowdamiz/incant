@@ -129,7 +129,7 @@ The portable packet now contains both generations: 113 bound source-input rows,
 qualification, not performance evidence. Neither run launched a window, browser,
 GPU workload, screen capture or listener.
 
-## Ordinary-editor follow-up (qualification pending)
+## Ordinary-editor availability
 
 The source follow-up based on main-334 selects `agent-profiler` in the editor's
 normal feature set. Users of that artifact do not need a special build to request
@@ -138,19 +138,43 @@ capability; saving establishes the normal project-root authority. A successful
 unprofiled replacement removes the previous recording. This changes no GUI,
 account requirement, public game/headless default or exporter feature selection.
 
-New controls exercise the real editor Service, dedicated owner thread, shared
+Controls exercise the real editor Service, dedicated owner thread, shared
 command bus and native host using a local provider transport fixture. They require
 actual Frame/ScriptTick coverage, retention across turns and a rejected candidate,
 and retirement on account, project, saved root, bus identity and shutdown changes.
 The fixture does not contact a model, open an account store, launch a window or
 request viewport pixels. Existing owner controls cover cancellation and physical
-worker shutdown. These source controls await execution; the historical producing
-and main-333 results above do not qualify this follow-up.
+worker shutdown.
+
+Source `ce2889cebe8f07459374f0e31128d927b3c0deb9`, based on merged main-334
+`5768f92a42f97403c465580fce9c3b873c835eda`, passed 25 ordinary-editor and
+23 explicitly disabled editor agent/owner controls. Both strict all-target lint
+modes passed. Actual compiler target artifacts establish the expected session
+and runtime phase feature selection in both modes. Four isolated Cargo graphs
+confirm ordinary editor activation, disabled-editor and default-headless refusal,
+and absence of session/agent dependencies in the selected public player profile
+route. Formatting, conventions and diff checks passed.
+
+All 12 supervised commands returned zero and completed owned-child cleanup.
+The two executed editor test binaries are retained externally. The run took
+133.319 seconds with 361,188,010 bytes of sampled target growth and at least
+84,825,362,432 free bytes; these are build-supervision observations, not engine
+performance results. No failed native attempt or retry occurred.
+
+The separate [editor packet](evidence/editor-agent-profiler/manifest.json)
+retains 118 records, 82 source inputs, the exact source review, raw logs and two
+external binary identities. Run
+`python3 docs/spikes/evidence/editor-agent-profiler/verify.py`; optional
+`--originals --binaries --git-source` rehashes the external records, executable
+copies and historical source. It never executes native artifacts. The original
+producer/main-333 packet remains unchanged and retains its historical
+default-off availability boundary.
 
 Without a profiling request, no session rows are allocated or recorded, but the
 compiled phase hooks still check owner TLS and process-capture state. That cost is
 not claimed to be zero. A matched CPU-only full-Core comparison is proposed for a
-quiet host; inactive overhead remains unmeasured here. Cargo feature unification
+quiet host; inactive overhead remains unmeasured here. The proposed comparison
+is a local investigation, not a new phase gate or a claim of GUI performance. Cargo feature unification
 also means a command co-selecting the editor may enable lower profile hooks in
 other targets. The intended public game/headless boundary is their isolated
 selection, which will be audited explicitly. The feature-disabled editor remains
