@@ -134,6 +134,40 @@ class ProbeControls(unittest.TestCase):
             self.assertTrue(all(row['cleanup_confirmed'] for row in rows))
         finally: observer.restore()
 
+    def test_storage_scan_allows_retired_children_but_not_missing_root_or_permissions(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            (root / 'retained').write_bytes(b'count every retained byte')
+            with mock.patch.object(probe.os, 'walk') as walk:
+                def retired_directory(path, onerror):
+                    self.assertEqual(path, root)
+                    onerror(FileNotFoundError(2, 'retired compiler directory', str(root / 'rmeta-temp')))
+                    return iter([(str(root), [], ['retained', 'retired-file'])])
+                walk.side_effect = retired_directory
+                self.assertEqual(probe.tree_bytes(root), len(b'count every retained byte'))
+                for error in [PermissionError(13, 'unreadable child', str(root / 'private')),
+                              FileNotFoundError(2, 'missing root', str(root)),
+                              FileNotFoundError(2, 'outside target', str(root.parent / 'outside')),
+                              FileNotFoundError('missing path information')]:
+                    with self.subTest(error=error):
+                        def failed(path, onerror):
+                            onerror(error)
+                            return iter([])
+                        walk.side_effect = failed
+                        with self.assertRaises(type(error)):
+                            probe.tree_bytes(root)
+            with self.assertRaises(FileNotFoundError):
+                probe.tree_bytes(root / 'missing')
+            with mock.patch.object(probe.os, 'walk') as walk:
+                empty = root / 'removed-during-scan'
+                empty.mkdir()
+                def remove_root(path, onerror):
+                    path.rmdir()
+                    return iter([])
+                walk.side_effect = remove_root
+                with self.assertRaises(FileNotFoundError):
+                    probe.tree_bytes(empty)
+
     def test_workflow_remains_manual_and_uploads_failed_receipts(self):
         text = (ROOT / '.github/workflows/dx12-pipeline-library-diagnostic.yml').read_text()
         self.assertIn('workflow_dispatch:', text)

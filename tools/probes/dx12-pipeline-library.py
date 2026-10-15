@@ -60,13 +60,27 @@ def digest(path):
 
 
 def tree_bytes(root):
+    root = Path(root)
+    # Cargo retires temporary directories as well as files during compilation.
+    # Admit only a vanished descendant; a lost root or unreadable subtree must
+    # still stop the observer instead of reporting a deceptively small target.
+    root.stat()
+
+    def walk_error(error):
+        path = Path(error.filename) if error.filename is not None else None
+        if (isinstance(error, FileNotFoundError) and path is not None
+                and path != root and path.is_relative_to(root)):
+            return
+        raise error
+
     total = 0
-    for directory, _, files in os.walk(root, onerror=lambda error: (_ for _ in ()).throw(error)):
+    for directory, _, files in os.walk(root, onerror=walk_error):
         for name in files:
             try:
                 total += (Path(directory) / name).lstat().st_size
             except FileNotFoundError:
                 pass  # Owned compiler temporary retired during observation.
+    root.stat()
     return total
 
 

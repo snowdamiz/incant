@@ -113,8 +113,9 @@ the portable records and strict qualification/source distinctions.
 ## Manual Windows diagnostic successor
 
 The separate manual workflow `dx12-pipeline-library-diagnostic.yml` uses
-`tools/probes/dx12-pipeline-library.py`. It has not been dispatched or qualified
-on Windows. Existing release workflows and required check contexts are unchanged.
+`tools/probes/dx12-pipeline-library.py`. Its first hosted run stopped during
+compilation as recorded below; native Windows qualification is still pending.
+Existing release workflows and required check contexts are unchanged.
 The original source and 127-record qualification packet above remain frozen.
 
 The successor includes the exact HAL native-descriptor key source in the Windows
@@ -157,3 +158,24 @@ These are Windows GNU compile/lint checks on macOS: zero native Windows tests
 were executed. MSVC compilation, native library hits, Windows filesystem/COM
 controls and pixel parity remain for the manual hosted diagnostic. No local
 GPU, window or capture was run.
+
+## First hosted run and resource-observer repair
+
+[Run 38761380647](https://github.com/snowdamiz/incant/actions/runs/38761380647)
+on exact main362 `a638241746403dcf73ac94e8fc1ac9ae67b5d26a` failed during the
+ordinary MSVC build. The disk-usage observer encountered a Cargo `deps/rmeta…`
+temporary directory that disappeared between directory enumeration and entry.
+It already tolerated retired files, but incorrectly made a retired descendant
+directory terminal. The supervisor stopped and cleaned its owned compiler tree;
+all seven owned process records confirm cleanup. No native Windows tests or
+cache-hit controls executed, and no Rust compiler defect is established by this
+interrupted build. The [original result](evidence/dx12-pipeline-library/hosted-first-failure.json)
+retains the exact commands, outcome and archive identity.
+
+The observer now tolerates only a named missing descendant. Missing roots,
+permission errors, paths outside the owned root and errors without path identity
+remain terminal. Root presence is checked before and after each scan. Ten portable
+controls pass, including deterministic directory/file retirement and refusal
+cases; independent review found no issue. All byte/time limits, cleanup rules and
+native assertions remain unchanged. This is sampled accounting of the owned
+compiler tree, not an atomic filesystem snapshot. A new hosted run is required.
