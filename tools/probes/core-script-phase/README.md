@@ -7,9 +7,11 @@ It does not load the rest of Core: controller,46 original entities, assets, UI,
 audio, input playback and physics are absent. This is a diagnostic, not a matched
 shipping performance experiment or a substitute for the failed2ms gate.
 
-Fourteen timestamp boundaries exist only under `cfg(all(test,feature="profile",
-feature="compiler"))`. There is no new feature, dependency, public API or production
-algorithm/default change. A fixed14-element thread-local array records durations
+Fourteen timestamp boundaries exist only under
+`cfg(all(test,feature="diagnostic-core-stress"))`. This default-off feature selects
+the compiler and profiler for this manual fixture. Broad workspace `--ignored`
+runs do not enable it, because they do not prepare its bound inputs. There is no
+new dependency, public API or production algorithm/default change. A fixed14-element thread-local array records durations
 only while this explicit test arms it. Each frame also retains an outer elapsed
 value and its unassigned tail. Boundaries are ordered and checked. No numeric
 view, pointer, ECS identity or guest object is retained by the trace.
@@ -40,7 +42,7 @@ selects this CPU-only test by full exact name; it never selects GPU tests.
 ```
 INCANT_CORE_PHASE_INPUT="$E/prepared-001" RAYON_NUM_THREADS=2 CARGO_TARGET_DIR="$TARGET" \
   ./tools/cargo test --offline --locked --profile ci -j2 --target aarch64-apple-darwin \
-  -p incant_script --no-default-features --features compiler,profile,physics-fast-simd8 --lib \
+  -p incant_script --no-default-features --features diagnostic-core-stress,physics-fast-simd8 --lib \
   tick_probe::tests::actual_native_stress_regions_128 -- --exact --ignored --nocapture --test-threads=1
 ```
 
