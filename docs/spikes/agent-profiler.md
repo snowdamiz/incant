@@ -1,14 +1,15 @@
 # Agent-owned native profiler
 
-The default-off `agent-profiler` host feature adds actual bounded CPU measurements
-to disposable native `play_run` sessions. This source slice implements the
+The `agent-profiler` host feature adds actual bounded CPU measurements to
+disposable native `play_run` sessions. The ordinary editor selects it; headless
+hosts require explicit feature selection. Each play request still opts in. This source slice implements the
 Appendix A `profiler.read(frames)` capability as the provider-compatible tool name
 `profiler_read`. It does not start Tracy, a network listener, a native window, an
-OS recording, or an image capture. Ordinary shipping feature selections are unchanged.
+OS recording, or an image capture. Public game/headless feature defaults are unchanged.
 
 ## Use and authority
 
-Build an editor or headless host with `agent-profiler`, then call
+In an ordinary editor with a saved project, call
 `play_run({"seconds":1,"profile":true})` and `profiler_read({"frames":60})`.
 The requested frame count must be available; a 60 Hz one-second run supplies 60
 ticks. Reads select the latest 1–256 retained successful-candidate ticks without
@@ -128,13 +129,32 @@ The portable packet now contains both generations: 113 bound source-input rows,
 qualification, not performance evidence. Neither run launched a window, browser,
 GPU workload, screen capture or listener.
 
-## Remaining availability boundary
+## Ordinary-editor follow-up (qualification pending)
 
-The normal editor artifact still leaves `agent-profiler` disabled. This delivery
-therefore requires an explicitly enabled build and does not complete normal-user
-profiler availability or the entire Phase 3 profiling capability. A later editor-
-only feature selection could make `play_run(profile:true)` available without user
-rebuilding, but requires matched inactive-instrumentation overhead evidence and
-editor-host qualification first. Public game-export/shipping features must remain
-unchanged. No performance, native-window, GPU, visual or shipping acceptance is
-claimed here.
+The source follow-up based on main-334 selects `agent-profiler` in the editor's
+normal feature set. Users of that artifact do not need a special build to request
+`play_run(profile:true)`. Unsaved projects still lack the native play/profiler
+capability; saving establishes the normal project-root authority. A successful
+unprofiled replacement removes the previous recording. This changes no GUI,
+account requirement, public game/headless default or exporter feature selection.
+
+New controls exercise the real editor Service, dedicated owner thread, shared
+command bus and native host using a local provider transport fixture. They require
+actual Frame/ScriptTick coverage, retention across turns and a rejected candidate,
+and retirement on account, project, saved root, bus identity and shutdown changes.
+The fixture does not contact a model, open an account store, launch a window or
+request viewport pixels. Existing owner controls cover cancellation and physical
+worker shutdown. These source controls await execution; the historical producing
+and main-333 results above do not qualify this follow-up.
+
+Without a profiling request, no session rows are allocated or recorded, but the
+compiled phase hooks still check owner TLS and process-capture state. That cost is
+not claimed to be zero. A matched CPU-only full-Core comparison is proposed for a
+quiet host; inactive overhead remains unmeasured here. Cargo feature unification
+also means a command co-selecting the editor may enable lower profile hooks in
+other targets. The intended public game/headless boundary is their isolated
+selection, which will be audited explicitly. The feature-disabled editor remains
+available with `--no-default-features --features physics-deterministic`.
+
+No shipping gate, complete Phase 3 capability, native-window, GPU, visual or
+performance acceptance is claimed by this source change.

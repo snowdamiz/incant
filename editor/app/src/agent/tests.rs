@@ -378,6 +378,7 @@ fn saved_project_host_runs_native_world_without_changing_authoring_state() {
             && host.shared_play_available()
             && host.project_files().is_some()
     );
+    assert_eq!(host.profiler_available(), cfg!(feature = "agent-profiler"));
     let result = host
         .play_run_checked(
             &project,
@@ -398,5 +399,6 @@ fn saved_project_host_runs_native_world_without_changing_authoring_state() {
     );
     let unsaved = worker::host(&Mutex::new(crate::project::LoadState::Loading), None).unwrap();
     assert!(!unsaved.native_play_available());
+    assert!(!unsaved.profiler_available());
     assert!(unsaved.project_files().is_none());
 }
