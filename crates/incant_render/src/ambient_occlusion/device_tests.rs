@@ -12,7 +12,8 @@ fn explicit_opt_in_zero_strength_resize_queued_frames_and_failure_preserve_defau
         strength: 0.,
     };
     if cfg!(all(
-        feature = "cooked-materials",
+        feature = "cooked-output",
+        not(feature = "cooked-ssao"),
         not(target_arch = "wasm32")
     )) {
         assert!(matches!(

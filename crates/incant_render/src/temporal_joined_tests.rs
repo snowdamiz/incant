@@ -149,7 +149,8 @@ fn run(with_bloom: bool, with_ssao: bool) {
                 strength: 1.,
             }));
         if cfg!(all(
-            feature = "cooked-materials",
+            feature = "cooked-output",
+            not(feature = "cooked-ssao"),
             not(target_arch = "wasm32")
         )) {
             assert_eq!(
@@ -167,7 +168,8 @@ fn run(with_bloom: bool, with_ssao: bool) {
             "SSAO_JOINED admitted={}; cooked_refusal={}",
             renderer.ambient_occlusion.is_some(),
             cfg!(all(
-                feature = "cooked-materials",
+                feature = "cooked-output",
+                not(feature = "cooked-ssao"),
                 not(target_arch = "wasm32")
             ))
         );

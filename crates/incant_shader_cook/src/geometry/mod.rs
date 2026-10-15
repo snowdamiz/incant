@@ -1,9 +1,14 @@
 //! Fixed engine programs; never a project shader passthrough.
 mod contract;
 mod emit;
-mod interpolation;
-mod material;
-mod material_emit;
+pub(crate) mod interpolation;
+pub(crate) mod material;
+pub(crate) mod material_emit;
+#[cfg(test)]
+#[path = "../../tests/fixtures/material_emit_main346.rs"]
+mod prior_material_emit;
+#[cfg(test)]
+mod regression;
 mod sprite;
 mod text;
 mod ui;
