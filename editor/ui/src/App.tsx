@@ -3,7 +3,7 @@ import type { BridgeResolution } from './bridge/resolve';
 import { FIXTURE_VARIANTS } from './bridge/fixture';
 import { PROVIDER_FIXTURE_NAMES } from './bridge/providerFixture';
 import { UI_PROTOCOL_VERSION } from './bridge/contract';
-import { AssetsProvider } from './assets/AssetsContext';
+import { AssetsProvider, useAssets } from './assets/AssetsContext';
 import { AccountDialog } from './components/AccountDialog';
 import { AgentPanel, agentPaneResizable } from './components/AgentPanel';
 import { BottomDock } from './components/BottomDock';
@@ -23,6 +23,7 @@ import { projectState } from './shell/projectState';
 import { focusRegion, nextRegion, regionOf } from './shell/regions';
 import { clampLayout, defaultLayout } from './shell/layout';
 import type { Layout } from './shell/layout';
+import { agentViewContext } from './shell/agentContext';
 
 /** Below this window height the agent pane starts collapsed (its status line stays visible). */
 export const AGENT_OPEN_MIN_HEIGHT = 720;
@@ -99,6 +100,7 @@ function FatalChoices({ title, names }: { title: string; names: readonly string[
 
 function Workbench() {
   const shell = useShell();
+  const assets = useAssets();
   const { bridge, snapshot, run, accountOpen, panels, togglePanel } = shell;
   // The Play actions of the latest commit: a shortcut pressed right after a state change
   // must not reach the previous render's action (Step while it still thinks "running").
@@ -275,7 +277,9 @@ function Workbench() {
               {agentResizable ? (
                 <Splitter label="Resize agent panel" orientation="horizontal" invert value={layout.agent} min={180} max={560} onChange={(agent) => resize({ agent })} />
               ) : null}
-              <AgentPanel open={agentOpen} onToggle={() => setAgentOpen((open) => !open)} />
+              <AgentPanel open={agentOpen} onToggle={() => setAgentOpen((open) => !open)}
+                viewContext={agentViewContext(snapshot?.connection.status === 'ready' ? snapshot.connection.project.id : undefined,
+                  panels, assets.view, shell.dockTab, agentOpen)} />
             </div>
           </>
         ) : null}

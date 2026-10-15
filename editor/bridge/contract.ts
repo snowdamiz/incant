@@ -263,10 +263,18 @@ export type AgentFailure = 'provider' | 'tool' | 'budget_exhausted' | 'step_limi
 export type AgentApprovalDecision = 'pending' | 'allowed' | 'denied' | 'cancelled';
 export type JsonValue = null | boolean | number | string | readonly JsonValue[]
   | { readonly [key: string]: JsonValue };
+export type AgentEditorPanel = 'viewport' | 'hierarchy' | 'assets' | 'inspector'
+  | 'agent' | 'problems' | 'console' | 'history';
+/** Submission-time observations only, never mutation authority or captured pixels. */
+export interface AgentViewContext {
+  readonly project_id: Ulid;
+  readonly open_panels: readonly AgentEditorPanel[];
+}
 export interface AgentTurnRequest {
   readonly prompt: string;
   readonly model: string;
   readonly approval: AgentApprovalMode;
+  readonly view_context?: AgentViewContext;
 }
 export interface AgentApprovalSummary {
   readonly id: number;
@@ -459,7 +467,7 @@ export type HostRequest =
   | { readonly type: 'provider.cancel' }
   | { readonly type: 'provider.disconnect' }
   | { readonly type: 'provider.switch'; readonly accountId: string }
-  | { readonly type: 'agent.send'; readonly text: string; readonly model?: string; readonly approval?: AgentApprovalMode }
+  | { readonly type: 'agent.send'; readonly text: string; readonly model?: string; readonly approval?: AgentApprovalMode; readonly viewContext?: AgentViewContext }
   | { readonly type: 'agent.cancel'; readonly turnId: number }
   | { readonly type: 'agent.approve'; readonly turnId: number; readonly approvalId: number; readonly approved: boolean }
   | {

@@ -1,5 +1,6 @@
 //! Driver caches are host-owned disposable data, never project content.
-//! Loading and saving happen while the fixed pipeline catalog is constructed.
+//! Loading happens once per renderer. Saving happens only after successful
+//! explicit cold catalog preparation, never during submission or Drop.
 #[cfg(all(
     feature = "persistent-pipeline-cache",
     unix,
@@ -13,7 +14,7 @@ mod private;
 ))]
 mod store;
 
-/// What happened to the optional driver cache during renderer initialization.
+/// Initial cache admission and the latest successful cold-preparation write attempt.
 /// Supplying cache bytes does not prove that the driver had a cache hit.
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct PipelineCacheReport {
@@ -140,9 +141,13 @@ impl Session {
             store: None,
         }
     }
-    /// Called only after the complete catalog passed the device error scope.
-    #[allow(unused_mut)] // Native persistence mutates the report; web/default do not.
-    pub fn finish(mut self) -> PipelineCacheReport {
+    /// The caller has already closed the device validation scope. Rust-side
+    /// preparation errors also refuse persistence; retain this device cache for
+    /// later optional catalogs, with no implicit flush on Drop.
+    pub fn complete<T>(&mut self, candidate: crate::Result<T>) -> crate::Result<T> {
+        complete(candidate, || self.persist())
+    }
+    fn persist(&mut self) {
         #[cfg(all(
             feature = "persistent-pipeline-cache",
             unix,
@@ -157,6 +162,16 @@ impl Session {
                 None => CacheWrite::NoData,
             };
         }
-        self.report
     }
 }
+
+// Keep publication after the complete preparation result, including errors
+// discovered after some pipelines have already been constructed.
+fn complete<T>(candidate: crate::Result<T>, persist: impl FnOnce()) -> crate::Result<T> {
+    let prepared = candidate?;
+    persist();
+    Ok(prepared)
+}
+
+#[cfg(test)]
+mod tests;

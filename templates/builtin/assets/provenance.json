@@ -1,0 +1,36 @@
+{
+  "license": "MIT OR Apache-2.0 (repository original assets)",
+  "purpose": "Functional starter geometry and sprite frames; no appearance acceptance",
+  "copies": [
+    {
+      "path": "template-cube.gltf",
+      "copied_from": "handoffs/0054-native-text-draw/fixture/cube.gltf",
+      "sha256": "47beb758c36d62a196663a8c5be671f985037f60f9f626d338c22c285416221f",
+      "bytes": 1729
+    },
+    {
+      "path": "template-frame-0.png",
+      "copied_from": "handoffs/0042-native-flipbook/art/f0.png",
+      "sha256": "b6571e884b89b1de923320f91f1c930daf20733fbc9ba69074a3ad93b4039ebf",
+      "bytes": 143
+    },
+    {
+      "path": "template-frame-1.png",
+      "copied_from": "handoffs/0042-native-flipbook/art/f1.png",
+      "sha256": "45d0f885326127aca848e89020d7c24c2c8a8145ba54636f4ca7cb9fd65ae901",
+      "bytes": 149
+    },
+    {
+      "path": "template-frame-2.png",
+      "copied_from": "handoffs/0042-native-flipbook/art/f2.png",
+      "sha256": "2ce55acb845f68ea1103914beceb7afa9dda7c8329130d1c9b04b70ab8ebb911",
+      "bytes": 142
+    },
+    {
+      "path": "template-tile.png",
+      "copied_from": "handoffs/0042-native-flipbook/art/t0.png",
+      "sha256": "48022034046d5e623a91c8c1818870f48829f306e4320cd2d1989e3d77dac67b",
+      "bytes": 91
+    }
+  ]
+}

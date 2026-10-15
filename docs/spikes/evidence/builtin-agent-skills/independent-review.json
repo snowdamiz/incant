@@ -1,0 +1,245 @@
+{
+  "format": "incant-independent-source-review",
+  "version": 1,
+  "reviewer": "profile_consumer_review",
+  "reviewed_utc": "2026-10-15T03:45:10.475306+00:00",
+  "source": "907bbaea51a9c129d6811eafd14090d45c58d1ad",
+  "base": "3434064f9c215700623d3667eb0e4416ef2d14eb",
+  "verdict": "accepted-scoped-no-findings",
+  "findings": [],
+  "changed_paths": [
+    "crates/incant_agent/src/conversation.rs",
+    "crates/incant_agent/src/lib.rs",
+    "crates/incant_agent/src/skills.rs",
+    "crates/incant_agent/tests/skills.rs",
+    "sdk/skills/README.md",
+    "sdk/skills/camera-rigs.md",
+    "sdk/skills/checkpoints.md",
+    "sdk/skills/common.md",
+    "sdk/skills/day-night.md",
+    "sdk/skills/dialogue.md",
+    "sdk/skills/first-person.md",
+    "sdk/skills/health-damage.md",
+    "sdk/skills/inventory.md",
+    "sdk/skills/localize-project.md",
+    "sdk/skills/main-menu.md",
+    "sdk/skills/mobile-touch.md",
+    "sdk/skills/platformer-2d.md",
+    "sdk/skills/profile-optimize.md",
+    "sdk/skills/save-load.md",
+    "sdk/skills/settings-menu.md",
+    "sdk/skills/simple-ai.md",
+    "sdk/skills/spawners.md",
+    "sdk/skills/third-person.md",
+    "sdk/skills/top-down.md"
+  ],
+  "verified_source_files": [
+    {
+      "path": "crates/incant_agent/src/conversation.rs",
+      "sha256": "6313fed6dd0d29471eadb15aabf3b74bc7ff4e65155c737419121e51b7390615",
+      "bytes": 11437
+    },
+    {
+      "path": "crates/incant_agent/src/lib.rs",
+      "sha256": "a8c71669862cf819ee9b7a8ee621a23d080b85866d0a372849b6b44e11fc98d7",
+      "bytes": 21554
+    },
+    {
+      "path": "crates/incant_agent/src/skills.rs",
+      "sha256": "dac4fd03e6d43feeca90d213ff278506988c7b81ee4db77edc92220f31b00e33",
+      "bytes": 5700
+    },
+    {
+      "path": "crates/incant_agent/tests/skills.rs",
+      "sha256": "fdf9cd42b469e295ccb30d5f821183783905249fdeddab0035de1e8d344b9d53",
+      "bytes": 6022
+    },
+    {
+      "path": "sdk/skills/README.md",
+      "sha256": "20a03c1ef75f2437340bab6f5289297da8376cc57b3e060862d1bd4f1f0e5699",
+      "bytes": 764
+    },
+    {
+      "path": "sdk/skills/camera-rigs.md",
+      "sha256": "0a48694c28d79b27152145b2af0bf651edf776d447599ba767bd92a9b1c9d9ed",
+      "bytes": 1259
+    },
+    {
+      "path": "sdk/skills/checkpoints.md",
+      "sha256": "f12be061819c908877b479b18a404727459c8713c6eff351feae37356cbaaf0d",
+      "bytes": 1335
+    },
+    {
+      "path": "sdk/skills/common.md",
+      "sha256": "88c071d1623bf91cf455fff63807e6d354b8d8f47b314f9da5ac4d00f8762f90",
+      "bytes": 2848
+    },
+    {
+      "path": "sdk/skills/day-night.md",
+      "sha256": "0352ad8036ae9731b0f1396a519581e0cb189f85931c639a42aeb5c7e3113e49",
+      "bytes": 1193
+    },
+    {
+      "path": "sdk/skills/dialogue.md",
+      "sha256": "967ec76e9983015f754fec8b8bb7758230b1a86a694ecd855c116d04ec4db951",
+      "bytes": 1230
+    },
+    {
+      "path": "sdk/skills/first-person.md",
+      "sha256": "0ba2c2679c79a03e0e77374244028a7864542850ece73db54d6456bc29ecb13c",
+      "bytes": 1318
+    },
+    {
+      "path": "sdk/skills/health-damage.md",
+      "sha256": "4654e3d4e7e06ae513f523d4ce45b16a05c5551b0faf7a3a86495e3b627bd961",
+      "bytes": 1226
+    },
+    {
+      "path": "sdk/skills/inventory.md",
+      "sha256": "d9c9bae3070361d1ab5bfcc6d79b30a5801d22faacb461b2acd16a01032896f8",
+      "bytes": 1372
+    },
+    {
+      "path": "sdk/skills/localize-project.md",
+      "sha256": "fbda81fe1883a7295c8a7923898a40ec17cb7a8bbbba78e5d5511860f29a1567",
+      "bytes": 1523
+    },
+    {
+      "path": "sdk/skills/main-menu.md",
+      "sha256": "d7362e0fb0d3b04676e00f4d8493edfb974c3668825052abab4aa15ff169ca7d",
+      "bytes": 1145
+    },
+    {
+      "path": "sdk/skills/mobile-touch.md",
+      "sha256": "85f820271a7eb00452ff6b7c1cf782f60a05ff9b23124997f2b6dd8ccc47b58f",
+      "bytes": 1353
+    },
+    {
+      "path": "sdk/skills/platformer-2d.md",
+      "sha256": "fd9cb41223f43bf3f7ecb8811c92186589c2271ea00fd1661c28161b98e83490",
+      "bytes": 1316
+    },
+    {
+      "path": "sdk/skills/profile-optimize.md",
+      "sha256": "23d6e69335b5a923801c2a08fb768999f9551b009449ec1a8be14b6b478f7e29",
+      "bytes": 1549
+    },
+    {
+      "path": "sdk/skills/save-load.md",
+      "sha256": "a994438ec16755b851debead918b40677b1be63f42db143a177db254d25c7265",
+      "bytes": 1355
+    },
+    {
+      "path": "sdk/skills/settings-menu.md",
+      "sha256": "bbcd0cc0e7175b1bbd2dff0bc74ca9c5eb1eb180e0c024d121e468384292a5bf",
+      "bytes": 1265
+    },
+    {
+      "path": "sdk/skills/simple-ai.md",
+      "sha256": "ad87728b1bb010db760bd6bd8f301a717bf22cbd500ce0a81e8a1322c82c9095",
+      "bytes": 1215
+    },
+    {
+      "path": "sdk/skills/spawners.md",
+      "sha256": "307db737835676da6ed53247327ef8d174d2f132c2932dc8427b3978c560a05b",
+      "bytes": 1349
+    },
+    {
+      "path": "sdk/skills/third-person.md",
+      "sha256": "e5618ea25746b9ab08e6658b3cf856af7699a3580f3d4eaebb8f5e452bbe4904",
+      "bytes": 1549
+    },
+    {
+      "path": "sdk/skills/top-down.md",
+      "sha256": "2c60e2fe74f4e6803af2dc571f57ccfc3d1c743c13afd3f5619591124bce762b",
+      "bytes": 1093
+    },
+    {
+      "path": "Cargo.toml",
+      "sha256": "163606d4b9886c5d0f9bb6a4b67fca4823523b4024f17a689dc9bab719c314a7",
+      "bytes": 3956
+    },
+    {
+      "path": "Cargo.lock",
+      "sha256": "bbcf1c6772c6f994cf1d0d827bd5e0c8268e4552d9128282af000e54736951c0",
+      "bytes": 253041
+    },
+    {
+      "path": "tools/native_process.py",
+      "sha256": "58dd2a8231d7f9d1e42070fc85425461e06a43f279fa5e7f8e57b4a40c3a3aa4",
+      "bytes": 19307
+    },
+    {
+      "path": "tools/cargo",
+      "sha256": "9aef98d613601b0c374c1d0499afb39d710cbf5002faba537f21be9c11ff72e3",
+      "bytes": 179
+    }
+  ],
+  "source_manifest_sha256": "35e3ca2536f58ddfb3e4fe39479a039f11a60e245b60b59eb3bb093ba6375353",
+  "executed_result_sha256": "3b3ebe3d4c8007228116c5ef692f70cdab8cbae32af2fda70c89fa92f4c9800a",
+  "verified_logs": [
+    {
+      "name": "agent-tests",
+      "sha256": "0da2c5e86ba78f008ebc04979dbe7caad40b63d16d47e9597a29a529622aaf74",
+      "bytes": 13615
+    },
+    {
+      "name": "strict-lint",
+      "sha256": "10fd119eb0ab019f0bbed7318976c3e8548ade941aadde3b599117a2d0e62bd6",
+      "bytes": 4551
+    },
+    {
+      "name": "fmt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "name": "conventions",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  ],
+  "read_context": [
+    {
+      "path": "PLAN.md",
+      "sha256": "dc3a7369624c545bdedc28c53486679138fd546751e7b56916a622767ecb74a7"
+    },
+    {
+      "path": "sdk/ts/src/native.d.ts",
+      "sha256": "85dcfa025f687c977484ac3b22f72c7e34567f723778e5c08cf15d11ac344518"
+    },
+    {
+      "path": "crates/incant_agent/src/play.rs",
+      "sha256": "337f4f9303733a378513744ff41d2288692f31ccde5161710a558919759b625d"
+    },
+    {
+      "path": "crates/incant_agent/src/scripts.rs",
+      "sha256": "40d5c1737dd3ac5645f755dbca45b6d91b0db048029ab8b09973ba9b6f4276b0"
+    },
+    {
+      "path": "crates/incant_agent/src/assets.rs",
+      "sha256": "d4b143d08ff7bc87cd211507e1bf4443bbc578c7a57d7d1ccec022e42e8d97a5"
+    },
+    {
+      "path": "crates/incant_agent/src/access.rs",
+      "sha256": "23c751b94e1db08414c4bf9e9fe25f1db0b965650c2ec39032a898ddd7134102"
+    },
+    {
+      "path": "crates/incant_cmd/src/lib.rs",
+      "sha256": "211acfbabe9b25c5fe452a4db607ea522f14c8b2a091dde006131bc0b1736030"
+    }
+  ],
+  "assessment": [
+    "The18 bundled IDs cover the exact Phase3 Markdown-playbook catalogue; optional TypeScript helpers are honestly absent. All18 workflows and verification sections were read.",
+    "Catalog/Markdown are compile-time engine-owned constants. Exact-ID lookup and deny_unknown_fields reject project paths, override/source fields and helper execution. Outputs are finite and covered by the bounds test; project memory cannot replace guidance.",
+    "Conversation/tool integration adds only guidance consultation and read-only dispatch. Mutation and provider/project fences stay unchanged. Following guidance still reaches normal doc_patch/script_write/asset_import revision/source guards, shared command history and approval modes. The new mocked-provider denial control observes no transaction/revision change.",
+    "Concrete NativeBehavior/NativeContext, persistence v1, chunks/strides, physics/navigation, timers, input.ui, HUD/structural commands, localization and string-table command names match current SDK/host source. Spawn/host/input/profiler/save/export omissions are stated as capability refusals, not fabricated APIs.",
+    "Verification language preserves native runtime vs authoring separation, quotas/expired views, actual contact corrections, bounded data recordings and human translation review. Common guidance explicitly honors capture restrictions."
+  ],
+  "limitations": [
+    "Reviewer ran no Rust builds/tests, engine/player, provider request, GPU/window, CUA or capture; only source/Git/metadata and raw-log identity checks.",
+    "Root logs independently rehashed:118 CPU tests including3 new skill controls, strict all-target Clippy, fmt and conventions. These are retained root results, not reviewer execution.",
+    "No live-provider skill-following/eval quality, implemented18mechanic scenarios, GUI integration, appearance, performance, red-team or Phase3 gate approval established. Profiler/native-Wasm compilation/export/full session-save and some runtime controls remain contingent on real advertised host capabilities.",
+    "No execution/tool privilege is granted by reading a playbook; no skill_run/helper execution endpoint added."
+  ]
+}

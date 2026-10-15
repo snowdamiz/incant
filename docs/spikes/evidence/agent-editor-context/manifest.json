@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "source": "43e980c200356a9613c3e23963966334b8857485",
+  "archive_sha256": "8b42597b35fbd7fe3cd42e763d18de2eae4995da4755556989460d6d4a48e201",
+  "records": {
+    "source.json": "26700c4336a4c83849b1bb671b9a5d8a6eb0ebc11a067a0ad27668c284f3aa08",
+    "results.json": "bf59dcb4ffeec8242b6fb8d6d13cad420f9aa235e296c02120c0cec6947e6c34",
+    "run.py": "bb27a721f784272e50168d5b7932bdcbf528c6517e82f162928b556782523c69",
+    "agent-tests.log": "e4113e43b4d09786ec07003956c349e7358bf8135bcc88af4034c0e46cd57226",
+    "conventions.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "editor-agent-tests.log": "8dd2157278a7f2b4e8ba9efa2fedc295b3bdd9a0eca8af3fc9e33f982ef04d42",
+    "fmt.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "generated-bridge.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "strict-lint.log": "bda7352fbdd36358c1de5a5bb527bf28fe77b0a7065d7991de1a9f841c63e55c",
+    "ui-all-tests.log": "d57bff71588a1bea080594ed600b122c78dfae87f0f792fdb3b26afd296137db",
+    "ui-build.log": "2981811d8adef7af6333c7ac1d787eef61f397dc2d3798fdd1b28dac293abacf",
+    "ui-typecheck.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "agent-editor-context-source001-independent-20261015.json": "95c441d203ea633326b1178559cff7627861f5f3134f615548947801f289f33e",
+    "prior-typecheck.json": "f05f3cd2bd506a602a8145d370772bf6cbeb600a57a93a2cfd7444b63a84aaf9"
+  },
+  "results": "results.json",
+  "source_record": "source.json",
+  "independent_review": "agent-editor-context-source001-independent-20261015.json",
+  "scope": "CPU and jsdom behavior only; no live provider, native window or capture",
+  "counts": {
+    "agent": 115,
+    "native_editor_agent": 23,
+    "ui_tests": 977,
+    "ui_files": 48
+  }
+}

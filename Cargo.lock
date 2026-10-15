@@ -4146,6 +4146,7 @@ dependencies = [
  "incant_render_game",
  "incant_runtime",
  "incant_script",
+ "incant_templates",
  "incant_types",
  "rpassword",
  "schemars 1.2.2",
@@ -4548,7 +4549,9 @@ name = "incant_shader_cook"
 version = "0.0.1"
 dependencies = [
  "naga",
+ "serde_json",
  "sha2 0.10.9",
+ "tempfile",
  "thiserror 2.0.21",
 ]
 
@@ -4565,6 +4568,19 @@ dependencies = [
  "thiserror 2.0.21",
  "ulid",
  "windows-sys 0.61.2",
+]
+
+[[package]]
+name = "incant_templates"
+version = "0.0.1"
+dependencies = [
+ "incant_cmd",
+ "incant_doc",
+ "incant_import",
+ "serde",
+ "serde_json",
+ "tempfile",
+ "thiserror 2.0.21",
 ]
 
 [[package]]

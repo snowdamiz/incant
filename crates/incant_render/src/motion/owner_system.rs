@@ -93,7 +93,7 @@ impl Renderer {
                             targets: &TARGETS,
                         }),
                         multiview_mask: None,
-                        cache: None,
+                        cache: self.pipeline_cache.cache.as_ref(),
                     })
             }))
         })();
@@ -102,10 +102,11 @@ impl Renderer {
             let error = error.into();
             return Err(crate::ResourceError::Preparation(error).into());
         }
+        let candidate = self.complete_pipeline_preparation(candidate)?;
         self.motion
             .as_mut()
             .ok_or(MotionError::Disabled)?
-            .owner_pipelines = Some(candidate?);
+            .owner_pipelines = Some(candidate);
         Ok(())
     }
 }

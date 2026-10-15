@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react';
 import type { FocusEvent, MouseEvent } from 'react';
-import type { AgentApprovalMode, AgentPendingApproval, AgentTurnSnapshot, BridgeSnapshot } from '../bridge/contract';
+import type { AgentApprovalMode, AgentPendingApproval, AgentTurnSnapshot, AgentViewContext, BridgeSnapshot } from '../bridge/contract';
 import { unavailableMessage } from '../bridge/resolve';
 import { Icon } from '../icons/Icon';
 import { WispMark } from '../icons/WispMark';
@@ -117,7 +117,7 @@ function outcomeAnnouncement(turn: AgentTurnSnapshot): string {
  * allowance line stays last either way, so it can be changed without an account. The
  * header collapses the pane to its status line.
  */
-export function AgentPanel({ open, onToggle }: { open: boolean; onToggle: () => void }) {
+export function AgentPanel({ open, onToggle, viewContext }: { open: boolean; onToggle: () => void; viewContext?: AgentViewContext | undefined }) {
   const { snapshot, capabilities, bridge, request, announce, explainUnavailable, openAccount, ask, showPanel, setDockTab } = useShell();
   const platform = usePlatform();
   // The draft, the next message's settings and this pane's requests in flight live per
@@ -267,7 +267,8 @@ export function AgentPanel({ open, onToggle }: { open: boolean; onToggle: () => 
     const text = sent.trim();
     if (!text || overLimit) return;
     memory.set({ sending: true, sendError: null });
-    const result = await request({ type: 'agent.send', text, model: current.model.trim() || DEFAULT_MODEL, approval: current.approval });
+    const result = await request({ type: 'agent.send', text, model: current.model.trim() || DEFAULT_MODEL, approval: current.approval,
+      ...(viewContext === undefined ? {} : { viewContext }) });
     // Clear only what was sent: anything typed while the request was in flight stays.
     memory.set((state) =>
       result.ok

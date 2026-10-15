@@ -57,7 +57,7 @@ impl crate::Renderer {
             let error = error.into();
             return Err(crate::ResourceError::Preparation(error).into());
         }
-        self.ambient_occlusion = Some(candidate?);
+        self.ambient_occlusion = Some(self.complete_pipeline_preparation(candidate)?);
         Ok(())
     }
 

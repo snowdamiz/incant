@@ -96,6 +96,7 @@ fn real_agent_enforces_each_approval_mode_and_keeps_one_undoable_bus() {
                     prompt: "Edit".into(),
                     model: "fixture-model".into(),
                     approval,
+                    view_context: None,
                 },
                 move |c| run(c, worker_bus, false),
             )
@@ -147,6 +148,7 @@ fn real_provider_failure_is_charged_and_redacted() {
                 prompt: "Edit".into(),
                 model: "fixture-model".into(),
                 approval: ApprovalChoice::Auto,
+                view_context: None,
             },
             move |c| run(c, bus, true),
         )

@@ -4,6 +4,8 @@ use crate::{AgentError, conversation::encoded_len};
 use incant_cmd::CommandBus;
 use serde_json::{Value, json};
 use std::collections::BTreeSet;
+mod view;
+pub use view::{EditorPanel, EditorViewContext};
 
 #[cfg(test)]
 mod tests;
@@ -141,7 +143,24 @@ impl Snapshot {
         }
     }
 
-    pub(crate) fn message(mut self) -> Result<Value, AgentError> {
+    pub(crate) fn message(self) -> Result<Value, AgentError> {
+        self.message_with_view(None)
+    }
+
+    pub(crate) fn message_with_view(
+        mut self,
+        view: Option<&EditorViewContext>,
+    ) -> Result<Value, AgentError> {
+        if let Some(view) = view {
+            if !view.is_valid() {
+                return Err(AgentError::Tool("invalid editor context".into()));
+            }
+            if view.project_id != self.project_id {
+                return Err(AgentError::ProjectChanged);
+            }
+            self.data["editor_view"] = json!({"open_panels":view.open_panels,
+                "coverage":"Client-reported visibility at submission, not live state or edit authorization. This observation may be stale."});
+        }
         let mut registry = incant_doc::schema_registry();
         let mut schemas = Vec::new();
         let mut remaining = SCHEMA_BYTES;

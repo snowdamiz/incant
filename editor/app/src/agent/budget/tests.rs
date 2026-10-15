@@ -45,6 +45,7 @@ fn request() -> TurnRequest {
         prompt: "fixture".into(),
         model: "fixture".into(),
         approval: ApprovalChoice::Always,
+        view_context: None,
     }
 }
 fn complete(turn: TurnContext, charge: u64) -> TurnOutcome {

@@ -20,6 +20,7 @@ import tempfile
 
 import native_process
 import native_profiling
+import native_shaders
 import physics_export
 from physics_features import selected_graph_errors, validate_artifacts
 
@@ -41,7 +42,7 @@ def execute(command, *, cwd=ROOT, env=None, timeout=120):
 def normal_dependencies(graph):
     """Audit the selected player's normal graph, not workspace feature unification."""
     names = []
-    forbidden = {'incant_doc', 'incant_cmd', 'incant_agent', 'incant_core', 'incant_cook',
+    forbidden = {'incant_doc', 'incant_cmd', 'incant_agent', 'incant_core', 'incant_cook', 'incant_shader_cook',
                  'incant_source', 'incant_play', 'incant_play_legacy', 'incant_wasm_cook', 'incant_wasm_dev', 'loro', 'automerge'}
     for line in graph.splitlines():
         match = re.fullmatch(r'([A-Za-z0-9_-]+) v[^|]+\|([^|]*)', line.removesuffix(' (*)'))
@@ -107,12 +108,14 @@ def runtime_symbol_audit(executable, kind, llvm_bin, link_map):
     return evidence
 
 
-def build(project, staging, storage, scene, camera, mode, wabt=None, profiling=None):
+def build(project, staging, storage, scene, camera, mode, wabt=None, profiling=None, shaders=None):
+    shader_features = native_shaders.features(shaders, mode)
     profile_features = native_profiling.features(profiling, mode)
     native_profiling.environment(profiling, os.environ)
     rustc = Path(execute(['rustup', 'which', 'rustc']).stdout.strip())
     compiler = execute([rustc, '-vV']).stdout
     host = re.search(r'^host: (.+)$', compiler, re.MULTILINE).group(1)
+    native_shaders.target_admission(shaders, host)
     kind = backend(host)
     split = 'packed' if kind in ('dsym', 'pdb') else 'off'
     llvm_bin = Path(execute([rustc, '--print', 'sysroot']).stdout.strip()) / 'lib/rustlib' / host / 'bin'
@@ -131,7 +134,7 @@ def build(project, staging, storage, scene, camera, mode, wabt=None, profiling=N
     project_hash = sha256(project_bytes)
     physics_mode = physics_export.project_mode(project_bytes)
     features = ','.join(physics_export.cargo_features(physics_mode,
-                       ['project', 'native-window' if mode == 'window' else 'render-input'] + profile_features))
+                       ['project', 'native-window' if mode == 'window' else 'render-input'] + profile_features + shader_features))
     from native_wasm import capture
     module = capture(project, scene, storage, cargo, env, execute, wabt,
                      audit_translation=True)
@@ -164,6 +167,8 @@ def build(project, staging, storage, scene, camera, mode, wabt=None, profiling=N
                                               target=host, profile='shipping')
     physics = validate_artifacts(messages, physics_mode, target_dir=storage / 'target',
                                  target=host, profile='shipping')
+    shader_receipt = native_shaders.audit(messages, shaders, target_dir=storage / 'target',
+                                         target=host, profile='shipping', physics_mode=physics_mode)
     artifacts = [a for a in messages if a.get('reason') == 'compiler-artifact' and a['target']['name'] == NAME and a.get('executable')]
     require(len(artifacts) == 1, 'Missing unique actual player artifact')
     artifact = artifacts[0]
@@ -201,6 +206,8 @@ def build(project, staging, storage, scene, camera, mode, wabt=None, profiling=N
         report['profiling'] = {'mode': profiling, 'normal_graph': profile_graph, 'compiler': profile_units,
                                'startup_capture': False, 'runtime_opt_in': '--profile-tracy' if profiling == 'tracy' else '--profile',
                                'transport': 'explicit loopback process lifetime' if profiling == 'tracy' else 'none'}
+    if shader_receipt is not None:
+        report['shaders'] = shader_receipt
     return player, report
 
 
@@ -216,8 +223,9 @@ def ui_startup_options(mode, viewport):
     return ['--ui-viewport', viewport]
 
 
-def export(project, output, scene=None, camera=None, mode='headless', wabt=None, ui_viewport=None, profiling=None):
+def export(project, output, scene=None, camera=None, mode='headless', wabt=None, ui_viewport=None, profiling=None, shaders=None):
     require(mode in ('headless', 'window'), 'Unknown native export mode')
+    native_shaders.features(shaders, mode)
     native_profiling.features(profiling, mode)
     native_profiling.environment(profiling, os.environ)
     ui_options = ui_startup_options(mode, ui_viewport)
@@ -232,7 +240,7 @@ def export(project, output, scene=None, camera=None, mode='headless', wabt=None,
         staging = Path(temporary).resolve()
         with tempfile.TemporaryDirectory(prefix='incant-project-build-') as scratch:
             storage = Path(scratch).resolve()
-            player, report = build(project, staging, storage, scene, camera, mode, wabt, profiling)
+            player, report = build(project, staging, storage, scene, camera, mode, wabt, profiling, shaders)
         require(not storage.exists(), 'Private build storage was not removed')
         print('Checking copied player after removal of private build storage...', flush=True)
         runtime_env = {'PATH': str(player.parent),
@@ -258,6 +266,7 @@ def main():
     parser.add_argument('output', type=Path)
     parser.add_argument('--wabt', type=Path, help='Trusted pinned WABT 1.0.42 directory for authored Wasm export')
     parser.add_argument('--profiling', choices=('summary', 'tracy'), help='Trusted opt-in diagnostics build for headless or window playback; runtime capture remains explicit')
+    parser.add_argument('--shaders', choices=('cooked',), help='Trusted native-window opt-in to the complete fixed backend-cooked shader catalog; ordinary default unchanged')
     parser.add_argument('--scene')
     parser.add_argument('--camera')
     parser.add_argument('--mode', choices=('headless', 'window'), default='headless')
@@ -265,7 +274,7 @@ def main():
     args = parser.parse_args()
     try:
         result = export(args.project, args.output, args.scene, args.camera, args.mode,
-                        wabt=args.wabt, ui_viewport=args.ui_viewport, profiling=args.profiling)
+                        wabt=args.wabt, ui_viewport=args.ui_viewport, profiling=args.profiling, shaders=args.shaders)
     except (OSError, ValueError, subprocess.SubprocessError) as error:
         parser.exit(1, f'Native export failed: {error}\n')
     print(json.dumps({'output': str(args.output.absolute()), 'target': result['target'], 'player_sha256': result['player_sha256']}))
