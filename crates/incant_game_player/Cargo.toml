@@ -31,11 +31,13 @@ project = ["incant_cook/typescript"]
 static-module = ["incant_script/static-module", "dep:incant_wasm_runtime", "incant_wasm_runtime/embedded-fixture"]
 render-input = ["dep:incant_render_game", "dep:incant_render_native", "dep:incant_render_data", "dep:incant_ui"]
 render-gpu = ["render-input", "dep:incant_render_gpu_host", "dep:incant_render", "dep:thiserror", "dep:pollster"]
+# Explicit selected-frame capture on the ordinary offline CPU composition.
+frame-capture = ["render-gpu"]
 
 # Default-off trusted host drawable observation; never enabled by summary profiling.
 native-presentations = ["native-window", "dep:wgpu-hal", "wgpu-hal/diagnostic-presentations"]
 
-native-window = ["render-gpu", "incant_game_runtime/device", "dep:tao", "dep:pollster", "dep:gilrs"]
+native-window = ["frame-capture", "incant_game_runtime/device", "dep:tao", "dep:pollster", "dep:gilrs"]
 # Trusted exporter opt-in; no project supplies executable shader artifacts.
 cooked-native-shaders = ["native-window", "incant_render/cooked-native-shaders"]
 

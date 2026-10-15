@@ -8,6 +8,7 @@
     target_os = "macos"
 ))]
 extern crate alloc;
+mod capture;
 mod checkpoint;
 #[cfg(feature = "render-gpu")]
 mod gpu;
@@ -74,6 +75,7 @@ fn run_owned(
     standalone: bool,
 ) -> Result<(), Box<dyn std::error::Error>> {
     let (args, profile) = profile::split(args, standalone)?;
+    let (args, capture_options) = capture::Options::split(args)?;
     let (args, materials) = materials::Options::split(args)?;
     let (args, checkpoint) = checkpoint::Options::split(args)?;
     let args = package::expand(args)?;
@@ -123,6 +125,10 @@ fn run_owned(
     if !(1..=3600).contains(&ticks) || !(8000..=192000).contains(&rate) {
         return Err("tick/sample-rate bounds".into());
     }
+    if let Some(capture) = &capture_options {
+        capture.admit_ticks(ticks)?;
+        capture.admit_route(args, &checkpoint)?;
+    }
     let prepare_observations = |end_tick| {
         observation_path
             .map(|path| -> Result<_, Box<dyn std::error::Error>> {
@@ -153,6 +159,12 @@ fn run_owned(
     let actions = serde_json::from_slice(&bounded(&args[4], 256 * 1024)?)?;
     let clips = startup::clips(&args[1], &args[2])?;
     let program = program::load(module)?;
+    if capture_options.is_some() && !matches!(&program, incant_script::SessionProgram::Bytecode(_))
+    {
+        return Err(
+            "selected-frame capture currently supports build-linked bytecode programs only".into(),
+        );
+    }
     let spatial = materials.configure(spatial, &scene, &program, &input_bytes)?;
     let mut restart = restart::Restart::prepare(&scene, &program, &actions, &clips, &spatial)?;
     let mut game = if let Some(path) = &checkpoint.load {
@@ -194,6 +206,14 @@ fn run_owned(
         .ok_or("output frame bound")?;
     let mut output = vec![0.; usize::try_from(max_tick_frames)? * 2];
     let mut pcm = pcm_output::PcmOutput::new(std::path::Path::new(&args[7]), max_frames)?;
+    #[cfg(feature = "frame-capture")]
+    let mut captures = capture_options
+        .map(|options| capture::Capture::new(options, &game))
+        .transpose()?;
+    #[cfg(feature = "frame-capture")]
+    if let Some(captures) = &mut captures {
+        captures.sample(0, restart.generation, &game, &pcm)?;
+    }
     for tick in 1..=ticks {
         let count = game.next_output_frames()? * 2;
         if count > output.len() {
@@ -211,6 +231,12 @@ fn run_owned(
             plan.observe_at(start_tick + tick, game.world()?, game.input()?)?;
         }
         pcm.append(&output[..count])?;
+        // Observe the accepted old generation, including a restart-requesting
+        // frame, before Restart destroys it. Capture never advances the world.
+        #[cfg(feature = "frame-capture")]
+        if let Some(captures) = &mut captures {
+            captures.sample(tick, restart.generation, &game, &pcm)?;
+        }
         restart.viewport(replay.viewport_at(tick)?);
         {
             let _profile = incant_profile::scope(incant_profile::Phase::Restart);
@@ -258,6 +284,10 @@ fn run_owned(
         report["observations"] = serde_json::to_value(observed)?;
     }
     profile::append(&mut report, &profile)?;
+    #[cfg(feature = "frame-capture")]
+    if let Some(captures) = &captures {
+        report["frame_capture"] = captures.report();
+    }
     let material_manifest = game.material_manifest()?;
     let save = if checkpoint.save.is_some() {
         if !passed {
@@ -281,6 +311,10 @@ fn run_owned(
     }
     if let Some(recording) = materials.publish(material_manifest.as_ref())? {
         report["material_recording"] = recording;
+    }
+    #[cfg(feature = "frame-capture")]
+    if passed && let Some(captures) = captures {
+        captures.finish(&report)?;
     }
     emit(&report.to_string());
     if !passed {
