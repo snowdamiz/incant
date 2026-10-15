@@ -12,6 +12,7 @@ pub struct TextureRefreshTicket {
     bindings: u64,
     text_generation: u64,
     assets: BTreeMap<StableId, Arc<RuntimeAsset>>,
+    navigation_diverged_models: Vec<StableId>,
     retained_text_bytes: usize,
 }
 pub struct PreparedTextureRefresh {
@@ -19,7 +20,10 @@ pub struct PreparedTextureRefresh {
     assets: BTreeMap<StableId, Arc<RuntimeAsset>>,
     payload_bytes: usize,
     changed: usize,
-    changed_models: Vec<StableId>,
+    // Cold decoded classification, not authority supplied by project data.
+    navigation_diverged_models: Vec<StableId>,
+    // Only changed models participate in this publication's dependency check.
+    navigation_changed_models: Vec<StableId>,
 }
 /// Fully allocated CPU candidate. Final publication only checks authority and
 /// copies current accepted numeric poses into this existing storage.
@@ -87,8 +91,9 @@ impl TextureRefreshTicket {
     ) -> Result<PreparedTextureRefresh, NativeRenderError> {
         self.prepare_catalog(references, texture_cache, None, budget)
     }
-    /// Trusted-host admission for compatible existing model/texture content.
-    /// Animated clips retain pose layout and exact runtime duration bindings.
+    /// Trusted-host admission for compatible existing model/texture content,
+    /// including complete model-local material tables. Animated clips retain
+    /// pose layout and exact runtime duration bindings.
     /// All cache IO/decoding remains outside publication locks.
     pub fn prepare_visuals(
         self,
@@ -123,8 +128,13 @@ impl TextureRefreshTicket {
         let mut assets = BTreeMap::new();
         let mut payload_bytes = self.retained_text_bytes;
         let mut changed = 0;
-        let mut changed_models = Vec::new();
+        let mut navigation_diverged_models = Vec::with_capacity(self.assets.len());
+        let mut navigation_changed_models = Vec::new();
         for reference in references {
+            let mut navigation_changed = self
+                .navigation_diverged_models
+                .binary_search(&reference.id)
+                .is_ok();
             let old = self
                 .assets
                 .get(&reference.id)
@@ -148,8 +158,11 @@ impl TextureRefreshTicket {
                     let RuntimeAssetData::Model(next_model) = asset.data() else {
                         return Err(refused("model payload kind changed"));
                     };
-                    super::model_refresh::validate(old_model, next_model)?;
-                    changed_models.push(reference.id);
+                    let change = super::model_refresh::validate(old_model, next_model)?;
+                    navigation_changed |= change.navigation_geometry_changed;
+                    if navigation_changed {
+                        navigation_changed_models.push(reference.id);
+                    }
                     changed += 1;
                     Arc::new(asset)
                 }
@@ -176,6 +189,9 @@ impl TextureRefreshTicket {
                 .checked_add(next.info().payload_bytes)
                 .filter(|n| *n <= budget)
                 .ok_or(NativeRenderError::PayloadLimit)?;
+            if navigation_changed {
+                navigation_diverged_models.push(reference.id);
+            }
             assets.insert(reference.id, next);
         }
         Ok(PreparedTextureRefresh {
@@ -183,7 +199,8 @@ impl TextureRefreshTicket {
             assets,
             payload_bytes,
             changed,
-            changed_models,
+            navigation_diverged_models,
+            navigation_changed_models,
         })
     }
 }
@@ -200,6 +217,7 @@ impl NativeRenderInput {
             bindings: self.binding_generation,
             text_generation: self.text_generation,
             assets: self.assets.clone(),
+            navigation_diverged_models: self.navigation_diverged_models.clone(),
             retained_text_bytes: self.text.as_ref().map_or(0, |b| b.bytes),
         }
     }
@@ -219,6 +237,7 @@ impl NativeRenderInput {
             || view.binding_generation() != ticket.bindings
             || view.tick() != self.tick
             || self.assets.len() != ticket.assets.len()
+            || self.navigation_diverged_models != ticket.navigation_diverged_models
             || self.assets.iter().any(|(id, asset)| {
                 ticket
                     .assets
@@ -270,16 +289,22 @@ impl NativeRenderInput {
         view: &SpatialView<'_>,
         prepared: &PreparedTextureRefresh,
     ) -> Result<(), NativeRenderError> {
-        // IDs were appended while walking the strictly sorted complete catalog.
+        // Cold-decoded geometry divergence is latched relative to startup, even
+        // across subsequent material changes or Undo. Original model payloads
+        // need not be retained. Check current dependencies at both stage and
+        // publication, including navigation added during GPU preparation.
         // Final validation remains allocation-free and visits navigation sources
         // once, rather than scanning all sources separately for every model.
-        if !prepared.changed_models.is_empty()
-            && view
-                .navigation_model_assets()
-                .any(|id| prepared.changed_models.binary_search(&id).is_ok())
+        if !prepared.navigation_changed_models.is_empty()
+            && view.navigation_model_assets().any(|id| {
+                prepared
+                    .navigation_changed_models
+                    .binary_search(&id)
+                    .is_ok()
+            })
         {
             return Err(refused(
-                "model supplies baked navigation geometry; live refresh is unsupported",
+                "model geometry diverged from startup and supplies baked navigation; restart Play",
             ));
         }
         Ok(())
@@ -339,6 +364,10 @@ impl NativeRenderInput {
         }
         admit().map_err(SyncError::Consumer)?;
         std::mem::swap(&mut self.assets, &mut staged.prepared.assets);
+        std::mem::swap(
+            &mut self.navigation_diverged_models,
+            &mut staged.prepared.navigation_diverged_models,
+        );
         std::mem::swap(&mut self.payload_bytes, &mut staged.prepared.payload_bytes);
         std::mem::swap(&mut self.input, &mut staged.candidate.input);
         std::mem::swap(&mut self.slots, &mut staged.candidate.slots);
