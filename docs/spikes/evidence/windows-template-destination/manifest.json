@@ -1,0 +1,141 @@
+{
+  "source": "52468867f2e5af99c7cfaa442bb57e8eb11779ee",
+  "base": "a72a76f3",
+  "archive_sha256": "793aeb0ca4135438a953510b4e27ef89e6999ce3f2250fe8cb91785b48949ecb",
+  "records": [
+    {
+      "key": "freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/windows-template-destination-001/freeze.json",
+      "bytes": 4457,
+      "sha256": "69dc5707930148788ee2a6f8bed55204d0b5584006f2aca2d0dcd3b5af5894c1"
+    },
+    {
+      "key": "cpu-plan-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/windows-template-destination-001/cpu-plan-001.json",
+      "bytes": 3936,
+      "sha256": "5e6f06df34494905d427d5efb0fe55beb5d55e027a7cd3c247d34b8f8087457a"
+    },
+    {
+      "key": "cpu-supervisor-001.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/windows-template-destination-001/cpu-supervisor-001.py",
+      "bytes": 6646,
+      "sha256": "b64a86db31d421c031f65035ec01da9116dbed8114190d1860b7277d32d42448"
+    },
+    {
+      "key": "diagnosis.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/windows-template-destination-001/diagnosis.json",
+      "bytes": 1895,
+      "sha256": "7505c2965801f4b88acc2f39ddb88a8a0a4c680339e8779fc33dd428cfe54ad5"
+    },
+    {
+      "key": "checkpoint42-windows-original.txt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/windows-template-destination-001/checkpoint42-windows-original.txt",
+      "bytes": 5351,
+      "sha256": "9794a6f0f09599b2a3194efef5ece1eef3a1208a9dd1b765ff08ff9cf37af33f"
+    },
+    {
+      "key": "closeout-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/windows-template-destination-001/closeout-001.json",
+      "bytes": 2041,
+      "sha256": "b59093ec62e8b127b5baa521e1c066aa06a3230a0a5897cee67917b5be43488a"
+    },
+    {
+      "key": "cpu-001/results.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/windows-template-destination-001/cpu-001/results.json",
+      "bytes": 4588,
+      "sha256": "43f932c026b0c6dcc5a498ac644c05c76f8bbb4699c7954cb8ca43ba652b0195"
+    },
+    {
+      "key": "cpu-001/2.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/windows-template-destination-001/cpu-001/2.stdout.log",
+      "bytes": 622313,
+      "sha256": "587e2abf8d74b38ee546dcd868f8fe87ec2bb7bf5826c8bdd23d5d9a375a4177"
+    },
+    {
+      "key": "cpu-001/1.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/windows-template-destination-001/cpu-001/1.stderr.log",
+      "bytes": 6005,
+      "sha256": "2d4012f977a2a84f990dee30a75f225655132face87b04b6e92198e4d75abf17"
+    },
+    {
+      "key": "cpu-001/0.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/windows-template-destination-001/cpu-001/0.stdout.log",
+      "bytes": 275087,
+      "sha256": "3dd4ebd2a740e3f15ef7aa539969dcc40af770a9dfcbdc0e9ac8a2db3b6f52ea"
+    },
+    {
+      "key": "cpu-001/2.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/windows-template-destination-001/cpu-001/2.stderr.log",
+      "bytes": 6006,
+      "sha256": "7e677eec7cd0ddb90ff1def2e30aeb122d33c04f930e6322f12413b92c9b82b4"
+    },
+    {
+      "key": "cpu-001/1.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/windows-template-destination-001/cpu-001/1.stdout.log",
+      "bytes": 649760,
+      "sha256": "778a12ed6b3b5586c2c5af11c501fb7421b2384850d584569d6def00ec143bea"
+    },
+    {
+      "key": "cpu-001/0.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/windows-template-destination-001/cpu-001/0.stderr.log",
+      "bytes": 1821,
+      "sha256": "f90aafe46c70ae02427996705d4162d348ea8c100cd9f368219acf55d63648ad"
+    },
+    {
+      "key": "source-001/crates/incant_templates/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/windows-template-destination-001/source-001/crates/incant_templates/Cargo.toml",
+      "bytes": 623,
+      "sha256": "d3a9cce7ca1fba488b7bac4f41c6789b1aec091ea7160ce2772bb59f414eb188"
+    },
+    {
+      "key": "source-001/crates/incant_templates/src/create.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/windows-template-destination-001/source-001/crates/incant_templates/src/create.rs",
+      "bytes": 8352,
+      "sha256": "e59c81349dbd1e51ad1e421742458e1ad7aa8d82d2986a59f77b0773bd86da7f"
+    },
+    {
+      "key": "source-001/crates/incant_templates/src/create/tests.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/windows-template-destination-001/source-001/crates/incant_templates/src/create/tests.rs",
+      "bytes": 8865,
+      "sha256": "72701293d966f3aa44cbf579ec7db82dfd238d5757f5da9175c05a8c86fd2dde"
+    },
+    {
+      "key": "source-001/crates/incant_templates/src/lib.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/windows-template-destination-001/source-001/crates/incant_templates/src/lib.rs",
+      "bytes": 3222,
+      "sha256": "156be3b5dc9f05aa855e4cec76730492d1befa92a4e3ed89618f9c50da173dbb"
+    },
+    {
+      "key": "source-001/crates/incant_templates/src/recipe.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/windows-template-destination-001/source-001/crates/incant_templates/src/recipe.rs",
+      "bytes": 9258,
+      "sha256": "2f2bae605496ae4ad3405829de61d9fb7ed99d8af0ea4cccccb3d4a9de09d7a3"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/windows-template-destination-001/cpu-001/artifacts/0-incant_templates-42ab9c419fd384a8",
+      "source_path": "/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/incant_templates-42ab9c419fd384a8",
+      "bytes": 19235328,
+      "sha256": "ca09d6ac93a899885511fd36e555aad89f579a7244b09a0ee11034332236effa"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/windows-template-destination-001/cpu-001/artifacts/1-templates-890f2408645193f4",
+      "source_path": "/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/templates-890f2408645193f4",
+      "bytes": 40325000,
+      "sha256": "51131cff7a218905e9d450e61c0adbfb5479f860d4046852f878b6398078102c"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/windows-template-destination-001/cpu-001/artifacts/1-incant_headless",
+      "source_path": "/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/incant_headless",
+      "bytes": 62396576,
+      "sha256": "2007234834583ac7d2ed1283777f98ddf8008cdfd167928c98095f3440597bbf"
+    }
+  ],
+  "scope": "Template destination portability source fix;7Mac template tests+3headless gameplay+strict lint. Windows-only regression awaits hosted Windows. No GPU/window/browser/capture/CUA.",
+  "source_paths": [
+    "crates/incant_templates/src/create.rs",
+    "crates/incant_templates/src/create/tests.rs"
+  ],
+  "original_failure": "checkpoint42 Windows all3headless template tests:bare Io OS1 Incorrect function before creation completes; raw excerpt retained."
+}
