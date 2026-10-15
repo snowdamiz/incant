@@ -3,8 +3,10 @@
 The current phase remains **Phase 1: Core engine**. The
 [Phase 1 review ledger](docs/gates/phase1-review.md) maps each exit requirement to
 its recorded evidence and remaining qualification. The actual native texture,
-compatible static-model and compatible-animation workflows are verified on this Mac; release checkpoint39
-contains the tested main302 tree. Rendering quality and full rendered-game
+compatible static-model and compatible-animation workflows are verified on this Mac;
+[release checkpoint40](docs/spikes/release-checkpoint-40.md) contains the tested
+main309 tree after all 23 required contexts and eight candidate workflows passed.
+Later main changes remain outside that release baseline. Rendering quality and full rendered-game
 performance remain open. The reported jagged editor cube now has explicit 4x
 geometry antialiasing, verified in the actual Mac editor and isolated Metal
 controls. This fixes the ordinary viewport route; low-resolution reconstruction
