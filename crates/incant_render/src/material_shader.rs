@@ -20,7 +20,7 @@ pub(super) fn stages(device: &wgpu::Device, backend: wgpu::Backend) -> Result<St
         .stages(device, backend)
         .map_err(|e| ResourceError::CookedMaterial(e).into())
 }
-fn validate_host() -> std::result::Result<(), &'static str> {
+pub(crate) fn validate_host() -> std::result::Result<(), &'static str> {
     use wgpu::{
         BindingType as T, BufferBindingType as B, SamplerBindingType as S, ShaderStages as V,
         TextureSampleType as P, TextureViewDimension as D,

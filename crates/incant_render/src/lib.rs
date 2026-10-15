@@ -62,6 +62,8 @@ mod shadows;
 mod sprites;
 mod studio;
 pub mod temporal;
+#[cfg(test)]
+mod temporal_parity;
 mod temporal_shader;
 #[cfg(test)]
 #[path = "../tests/support/mod.rs"]

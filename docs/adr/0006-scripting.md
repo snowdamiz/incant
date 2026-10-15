@@ -80,8 +80,11 @@ vulnerabilities. See the [migration review](../spikes/performance-plan-v4-review
 
 The [pinned AOT language spike](../spikes/typescript-aot.md) now retains actual
 AssemblyScript compiler refusals for five current-language requirements and one
-matching arithmetic control. It prepares fixed Static Hermes inputs and lists
-the pending host contracts. This is language-level evidence only: no candidate
+matching arithmetic control. The subsequent [native Static Hermes experiment](../spikes/static-hermes-feasibility.md)
+builds the pinned compiler and matches seven fixed erased-JavaScript fixtures,
+but all nine typed/declaration probes refuse their inputs and its single native
+deadline probe needs external termination. The narrow C++ host does not establish
+revocable ECS loans or engine rollback. No candidate
 has passed the complete SDK, native shipping comparison, iOS/size or upstream
 security-release requirements. The adoption decision remains open.
 

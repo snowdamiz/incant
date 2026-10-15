@@ -37,7 +37,7 @@ fn check(
     }
     Ok(())
 }
-pub(super) fn validate(kind: Kind, module: &naga::Module) -> Result<()> {
+pub(crate) fn validate(kind: Kind, module: &naga::Module) -> Result<()> {
     let expected = match kind {
         Kind::Diagnostic | Kind::Material | Kind::Sprite | Kind::Text => naga::Sampling::Centroid,
         Kind::Shadow | Kind::Ui => naga::Sampling::Center,
