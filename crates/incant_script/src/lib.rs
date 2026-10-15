@@ -602,7 +602,7 @@ impl ScriptHost {
                                 hud.clone(),
                             ))
                         } else {
-                            let call = |task: Value<'_>, routine: &str| {
+                            let call = |task, routine: &str| {
                                 function.call::<_, Value>((
                                     rquickjs::function::Flat((
                                         chunks.clone(),
