@@ -4,6 +4,9 @@ mod ambient_occlusion_source;
 #[cfg(feature = "cooked-bloom")]
 #[path = "src/bloom/source.rs"]
 mod bloom_source;
+#[cfg(feature = "metal-binary-archives")]
+#[path = "build/metal_archive_identity.rs"]
+mod metal_archive_identity;
 #[cfg(feature = "cooked-metalfx-boundary")]
 #[path = "src/metalfx/source.rs"]
 mod metalfx_source;
@@ -11,6 +14,8 @@ mod metalfx_source;
 #[path = "src/lighting/temporal_source.rs"]
 mod temporal_source;
 fn main() {
+    #[cfg(feature = "metal-binary-archives")]
+    metal_archive_identity::emit();
     #[cfg(feature = "cooked-metalfx-boundary")]
     if std::env::var("CARGO_CFG_TARGET_ARCH").as_deref() != Ok("wasm32") {
         use incant_shader_cook::metalfx_boundary::{self, Kind};
