@@ -486,9 +486,12 @@ gameplay and postcommit host stages in one monotonic clock. Its bounded analyzer
 keeps catch-up batches, missing stages and surface/focus boundaries explicit.
 Observer-enabled and ordinary CPU suites, strict lint and 18 analyzer controls
 pass. A fresh shipping build also passes its complete 2,156-tick CPU gameplay
-replay with exact logical and PCM parity. These new fields have not yet been
-exercised in a native window; no scheduling policy or performance gate changes.
-[Host-stage contract and CPU evidence](docs/spikes/native-presentation-host-stages.md).
+replay with exact logical and PCM parity. One later native run retains valid host
+stages for 263/2,156 steps, then loses focus and fails its unfinished observation
+after the window is closed. Its inactive tail stays outside frame statistics;
+active body/reservation outliers and incomplete callback coverage identify no
+specific source defect. No retry, scheduling change or performance-gate claim.
+[Host-stage contract and scoped live evidence](docs/spikes/native-presentation-host-stages.md).
 
 ## Device audio overrun handling — merged main303
 

@@ -52,9 +52,11 @@ device execution is deferred; hosted build and release checks remain required.
   remain open; this observation does not establish the complete shader-stall gate.
   The default-off [host-stage observer](../spikes/native-presentation-host-stages.md)
   now has CPU/analyzer qualification and a fresh shipping build with exact full
-  gameplay/PCM replay. Its wake/reservation/body fields have not been observed in
-  a native window; live coverage and any resulting frame-pacing change remain
-  unqualified.
+  offline gameplay/PCM replay. One native run records valid wake/reservation/body
+  stages for 263 of 2,156 requested steps before focus loss suspends simulation;
+  closing it produces a failed, incomplete observation. Active host spans and
+  callback gaps remain separate from the inactive tail. They establish no
+  specific pacing defect or full-route performance result.
 - Finish and qualify remaining deliverables against the complete native sample.
   The [TypeScript AOT spike](../spikes/typescript-aot.md) remains an adoption
   experiment; its language controls are not a measured replacement for QuickJS.

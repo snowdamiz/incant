@@ -1,0 +1,296 @@
+{
+  "status": "failed_partial_263_of_2156",
+  "host_summary": {
+    "pre_attempt": {
+      "valid": 263,
+      "missing": 0,
+      "invalid": 0,
+      "not_applicable": 2,
+      "valid_subset_sum_ns": 1774583,
+      "valid_subset_min_ns": 625,
+      "valid_subset_max_ns": 127875,
+      "valid_subset_p95_nearest_rank_ns": 54583
+    },
+    "reserve": {
+      "valid": 263,
+      "missing": 0,
+      "invalid": 0,
+      "not_applicable": 2,
+      "valid_subset_sum_ns": 136953380,
+      "valid_subset_min_ns": 15917,
+      "valid_subset_max_ns": 7283500,
+      "valid_subset_p95_nearest_rank_ns": 3018875
+    },
+    "committed_body": {
+      "valid": 263,
+      "missing": 0,
+      "invalid": 0,
+      "not_applicable": 2,
+      "valid_subset_sum_ns": 920077988,
+      "valid_subset_min_ns": 2937750,
+      "valid_subset_max_ns": 17345417,
+      "valid_subset_p95_nearest_rank_ns": 4133375
+    },
+    "post_commit_haptics": {
+      "valid": 263,
+      "missing": 0,
+      "invalid": 0,
+      "not_applicable": 2,
+      "valid_subset_sum_ns": 185298,
+      "valid_subset_min_ns": 250,
+      "valid_subset_max_ns": 1209,
+      "valid_subset_p95_nearest_rank_ns": 1000
+    },
+    "finished_total": {
+      "valid": 263,
+      "missing": 0,
+      "invalid": 0,
+      "not_applicable": 2,
+      "valid_subset_sum_ns": 1057216666,
+      "valid_subset_min_ns": 3000250,
+      "valid_subset_max_ns": 22465041,
+      "valid_subset_p95_nearest_rank_ns": 6631833
+    },
+    "batch_wake_lateness": {
+      "valid": 262,
+      "missing": 0,
+      "invalid": 0,
+      "not_applicable": 1,
+      "valid_subset_sum_ns": 184032290,
+      "valid_subset_min_ns": 3291,
+      "valid_subset_max_ns": 5844416,
+      "valid_subset_p95_nearest_rank_ns": 1046999
+    },
+    "adjacent_host_finish_intervals": {
+      "valid": 262,
+      "missing": 0,
+      "invalid": 0,
+      "not_applicable": 2,
+      "valid_subset_sum_ns": 4352818334,
+      "valid_subset_min_ns": 4590209,
+      "valid_subset_max_ns": 26251666,
+      "valid_subset_p95_nearest_rank_ns": 17808875
+    }
+  },
+  "largest_adjacent_host_intervals": [
+    {
+      "before_step": 126,
+      "after_step": 127,
+      "interval_ns": 26251666,
+      "between_previous_finish_and_next_pulse_ns": 13267625,
+      "wake_lateness_ns": 1037417,
+      "next_metrics": {
+        "pre_attempt": {
+          "state": "valid",
+          "ns": 2125
+        },
+        "reserve": {
+          "state": "valid",
+          "ns": 112958
+        },
+        "committed_body": {
+          "state": "valid",
+          "ns": 12868292
+        },
+        "post_commit_haptics": {
+          "state": "valid",
+          "ns": 666
+        },
+        "finished_total": {
+          "state": "valid",
+          "ns": 12981916
+        }
+      }
+    },
+    {
+      "before_step": 192,
+      "after_step": 193,
+      "interval_ns": 23108666,
+      "between_previous_finish_and_next_pulse_ns": 12433166,
+      "wake_lateness_ns": 145708,
+      "next_metrics": {
+        "pre_attempt": {
+          "state": "valid",
+          "ns": 1875
+        },
+        "reserve": {
+          "state": "valid",
+          "ns": 7283500
+        },
+        "committed_body": {
+          "state": "valid",
+          "ns": 3389292
+        },
+        "post_commit_haptics": {
+          "state": "valid",
+          "ns": 833
+        },
+        "finished_total": {
+          "state": "valid",
+          "ns": 10673625
+        }
+      }
+    },
+    {
+      "before_step": 195,
+      "after_step": 196,
+      "interval_ns": 21006375,
+      "between_previous_finish_and_next_pulse_ns": 12920834,
+      "wake_lateness_ns": 215167,
+      "next_metrics": {
+        "pre_attempt": {
+          "state": "valid",
+          "ns": 3458
+        },
+        "reserve": {
+          "state": "valid",
+          "ns": 4523333
+        },
+        "committed_body": {
+          "state": "valid",
+          "ns": 3558417
+        },
+        "post_commit_haptics": {
+          "state": "valid",
+          "ns": 333
+        },
+        "finished_total": {
+          "state": "valid",
+          "ns": 8082083
+        }
+      }
+    },
+    {
+      "before_step": 262,
+      "after_step": 263,
+      "interval_ns": 20772750,
+      "between_previous_finish_and_next_pulse_ns": 12844083,
+      "wake_lateness_ns": 690208,
+      "next_metrics": {
+        "pre_attempt": {
+          "state": "valid",
+          "ns": 3333
+        },
+        "reserve": {
+          "state": "valid",
+          "ns": 4654000
+        },
+        "committed_body": {
+          "state": "valid",
+          "ns": 3270417
+        },
+        "post_commit_haptics": {
+          "state": "valid",
+          "ns": 917
+        },
+        "finished_total": {
+          "state": "valid",
+          "ns": 7925334
+        }
+      }
+    },
+    {
+      "before_step": 201,
+      "after_step": 202,
+      "interval_ns": 20682459,
+      "between_previous_finish_and_next_pulse_ns": 12840584,
+      "wake_lateness_ns": 229292,
+      "next_metrics": {
+        "pre_attempt": {
+          "state": "valid",
+          "ns": 1250
+        },
+        "reserve": {
+          "state": "valid",
+          "ns": 4461125
+        },
+        "committed_body": {
+          "state": "valid",
+          "ns": 3378833
+        },
+        "post_commit_haptics": {
+          "state": "valid",
+          "ns": 667
+        },
+        "finished_total": {
+          "state": "valid",
+          "ns": 7840625
+        }
+      }
+    }
+  ],
+  "first_recorded_focus_loss_us": 6148713,
+  "last_inactive_snapshot_us": 99612303,
+  "inactive_snapshot_count": 93,
+  "final_window_state_us": 99870589,
+  "physical_extents": [
+    [
+      640,
+      480
+    ]
+  ],
+  "callback_outcomes": {
+    "reported_zero": 3,
+    "presented": 261
+  },
+  "positive_adjacent_callback_intervals": 258,
+  "callback_timestamp_order_issues": [
+    {
+      "before": 1,
+      "after": 2,
+      "seconds": 0.0
+    }
+  ],
+  "largest_callback_interval": {
+    "before_step": 2,
+    "after_step": 3,
+    "callback_seconds": 0.05002300001797266,
+    "corresponding_host_finish_interval_ns": 14760916,
+    "cross_epoch_subtraction_performed": false
+  },
+  "maximum_wake_lateness": {
+    "step": 2,
+    "lateness_ns": 5844416,
+    "previous_finished_attempt_ns": 22465041,
+    "previous_finish_to_next_pulse_ns": 43875
+  },
+  "creation_observations": [
+    {
+      "phase": "Catalog",
+      "kind": "ComputePipeline",
+      "calls": 1,
+      "outcomes": {
+        "Success": 1
+      },
+      "valid_duration_calls": 1,
+      "sum_call_ns": 11510459,
+      "max_call_ns": 11510459
+    },
+    {
+      "phase": "Catalog",
+      "kind": "NagaLibrary",
+      "calls": 59,
+      "outcomes": {
+        "Success": 59
+      },
+      "valid_duration_calls": 59,
+      "sum_call_ns": 494300879,
+      "max_call_ns": 128020250
+    },
+    {
+      "phase": "Catalog",
+      "kind": "RenderPipeline",
+      "calls": 31,
+      "outcomes": {
+        "Success": 31
+      },
+      "valid_duration_calls": 31,
+      "sum_call_ns": 187654833,
+      "max_call_ns": 43881500
+    }
+  ],
+  "creation_local_coverage_flag_is_not_route_completion": true,
+  "live_device_audio_diagnostics_available": false,
+  "full_gameplay_parity": false,
+  "performance_gate_passed": false
+}

@@ -9,10 +9,11 @@ rendering, presentation, or audio policy.
 Rust source `b4033db1fb675648a0e212c9d81ef6634d567d20`, based on
 `30a8d8e2e53168b342cbf844f99fb6730ca676d7`, passed CPU qualification. The five
 qualified Rust files remain byte-identical in the fresh shipping producer described
-below. No live window or GPU was run for this slice. In particular, the earlier complete
+below. No live window or GPU was run for that CPU qualification. In particular, the earlier complete
 Core callback observation predates these host-stage fields and cannot establish
 their live coverage or diagnose its cadence. There is no performance or phase-gate
-claim.
+claim. The later incomplete live observation below establishes partial host-stage
+coverage only; the complete route remains unqualified.
 
 ## Recorded boundaries
 
@@ -115,7 +116,7 @@ Default replay verifies the portable records, frozen inputs, raw CPU results,
 analyzer controls and the shipping/replay results below. `--originals` additionally
 compares retained local originals; `--binaries` hashes the two external copied test
 executables and the shipping player without running them. The verifier never compiles or launches the engine. A later explicitly
-qualified live run is needed to attribute actual host/display gaps, with every
+qualified complete live run is needed to assess the full route, with every
 boundary, pending/zero/equal callback and observation overhead retained.
 
 
@@ -159,12 +160,12 @@ receipt, not a benchmark or script-budget result. No source, package, workload,
 threshold or baseline was changed for the replay.
 
 The offline render-input viewport was 640×480. The producing native-window source
-requests 640×480 **logical** units; no native window was opened here, so no physical
-extent or scale factor was observed. CPU replay does not exercise drawable
+requests 640×480 **logical** units; no native window was opened during CPU replay,
+so that replay observed no physical extent or scale factor. CPU replay does not exercise drawable
 acquisition, host scheduling, native shader creation, display callbacks, device
-audio, or the new host-stage fields. There is still no actual native host-stage
-observation, display-cadence result, visual acceptance, shader-stall qualification
-or performance/phase-gate pass.
+audio, or the new host-stage fields. The later partial run below does not establish
+complete displayed cadence, visual acceptance, shader-stall qualification or a
+performance/phase-gate pass.
 
 The expanded packet preserves the original 48 CPU/analyzer records and adds the
 fresh plans, grants, raw logs, source inventory, exact selected compiler events,
@@ -185,3 +186,85 @@ compiler stream. `--source-root` compares all 4,539 source files against the fro
 inventory without changing that checkout. These optional modes require the
 retained local originals; missing files refuse explicitly. The verifier never
 executes archived scripts, compiles code, launches the engine or starts capture.
+
+## First live observation: incomplete after focus loss
+
+The unchanged `e93ac30a` / `45c53745…` player and cooked package ran the original
+2,156-step recording once. It committed **263 steps**, then remained unfocused
+with simulation suspended. Root closed its owned window; the native process and
+wrapper both exited 1 with `native observation finished before all checks`.
+Stdout is empty. The final gameplay checks and native audio diagnostics were not
+returned; the prior complete offline state/PCM parity remains separate evidence.
+There was no retry. The wrapper was terminal after 100.492 seconds, within the
+120-second child/150-second stage bounds; root confirmed owned PIDs/groups
+62934 and 62944 absent. Sampled child RSS peaked at 224,804,864 bytes, not a hard
+bound on transient, driver or GPU memory.
+
+The state log records focus loss at 6.148713 seconds and 93 consecutive inactive
+snapshots at step 263, through 99.612303 seconds; finalization is at 99.870589.
+These are coalesced state-log times, not exact focus-event timestamps. That tail
+is not a 94-second frame interval. All snapshots report a 640×480 physical extent;
+no final UI scale-factor report is available. Observer I/O, CUA actions and the
+incomplete route preclude comparison with another run's performance.
+
+There are 265 host attempts: one initial deferral, one initial refresh and 263
+committed gameplay attempts with valid stages. All 263 scheduler batches have
+one due tick; one is forced resume, and no discarded ticks, host timing errors,
+omitted attempts or invalid batches were reported. The retained gameplay subset
+has these nearest-rank p95/max host-clock observations:
+
+| Host quantity | Samples | p95 / maximum, ms |
+| --- | ---: | ---: |
+| Reservation | 263 | 3.019 / 7.284 |
+| Committed body | 263 | 4.133 / 17.345 |
+| Finished attempt | 263 | 6.632 / 22.465 |
+| Scheduler wake lateness | 262 | 1.047 / 5.844 |
+| Adjacent host finishes | 262 | 17.809 / 26.252 |
+
+For the actual longest interval, steps 126→127, 26.251666 ms decomposes into
+13.267625 ms between the prior finish and next scheduler pulse, 0.002125 ms
+before reservation, 0.112958 ms reserving, 12.868292 ms committed body and
+0.000666 ms postcommit work. Wake lateness for that pulse is 1.037417 ms;
+the whole inter-attempt wait is not scheduler lateness. Steps 192→193 instead
+include the maximum 7.283500 ms reservation. These individual samples locate
+host spans; they do not identify work inside the committed body, deferred driver
+compilation or GPU execution. Marginal percentiles must not be added/subtracted.
+
+**This sample does not establish a specific pacing defect or justify an engine
+source fix.** Maximum wake lateness occurs at step 2 after the first forced-resume
+attempt took 22.465041 ms; only 0.043875 ms separates that attempt's finish from
+the next pulse. The recorded lateness is therefore consistent with prior host
+work overrunning the next deadline, rather than a 5.844 ms scheduler sleep error.
+The body and reservation outliers above identify spans to investigate; no final
+profile report is available to separate their internal work.
+
+Callbacks retain 261 positive timestamps and three zero outcomes, including one
+initial refresh and gameplay steps 260–261. One adjacent positive pair has equal
+timestamps; 258 strictly positive adjacent intervals remain. No zero/equal row is
+repaired or bridged into complete displayed cadence. The callback data has an
+early delivery/observation discrepancy worth preserving: steps 2→3 have
+a 50.023 ms positive callback interval but a 14.760916 ms host-finish interval,
+while steps 1→2 have equal callback timestamps. These are separately measured
+durations linked only by attempt identity, without cross-epoch subtraction.
+They cannot distinguish display delivery, callback semantics or deferred driver
+work, and do not support changing submission or wake policy. The native creation collector
+retains 91 successful catalog calls (59 libraries, 31 render pipelines, one compute
+pipeline), plus four successful unbound-prefix calls. It observes no Gameplay
+creation call. Its local `coverage_limited_or_inconclusive=false` describes those
+call records; the enclosing run still failed at 263/2,156. It cannot rule out
+deferred driver work or establish shader-hitch freedom.
+
+The additive [22-record packet](evidence/native-presentation-host-stages/live-partial-001/manifest.json)
+preserves raw sidecars, controller/grant identities, failed receipts and root's
+closeout. Its [derived summary](evidence/native-presentation-host-stages/live-partial-001/summary.json)
+retains exact stage statistics and five largest individual host intervals.
+The verifier recomputes host analysis using the hash-bound repository analyzer;
+archived code is data only. Six data controls reject altered timing, route,
+focus-tail, creation and gate claims. Earlier CPU and complete offline replay
+records are unchanged.
+
+```
+python3 -B docs/spikes/evidence/native-presentation-host-stages/live-partial-001/verify.py
+python3 -B docs/spikes/evidence/native-presentation-host-stages/live-partial-001/verify.py --originals
+python3 -B -m unittest discover -s docs/spikes/evidence/native-presentation-host-stages/live-partial-001 -p test_verify.py
+```
