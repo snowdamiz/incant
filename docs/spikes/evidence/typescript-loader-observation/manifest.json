@@ -1,0 +1,20 @@
+{
+  "format": "incant-typescript-loader-observation",
+  "source": "c777198e7af40afc91d25c6e0e347a3b8af39e8c",
+  "base": "171ff8e0d1dce2bc1a19818075c7ce97636d8ddb",
+  "records": 30,
+  "archive_sha256": "65d442b5383392637602f507cb81f0ff0a2c73ebbb2e6bf2c66b3532a7903123",
+  "archive_bytes": 312543,
+  "source_paths": [
+    ".github/workflows/typescript-cook-diagnostic.yml",
+    "crates/incant_cook/src/typescript/phases.rs",
+    "tools/build_native_script.mjs",
+    "tools/native_script/phases.mjs",
+    "crates/incant_cook/src/typescript.rs",
+    "tools/tests/native_script.test.mjs",
+    "crates/incant_headless/tests/templates.rs",
+    "crates/incant_agent_native/tests/fallback.rs"
+  ],
+  "external_evidence": "/Users/andreyyurlov/.codex/incant-integration-evidence/typescript-loader-diagnostic",
+  "scope": "Mac compiler/phase/fallback/starter controls; Windows diagnostic pending, no timeout repair"
+}
