@@ -75,7 +75,8 @@ impl PendingSessionCheckpoint {
     ) -> Result<Self> {
         let active = codec::active(sections.active)?;
         let store = codec::store(sections.store)?;
-        let schedule = codec::schedule(sections.schedule)?;
+        let mut schedule = codec::schedule(sections.schedule)?;
+        schedule.coroutines = codec::coroutines(sections.coroutines, schedule.tick)?;
         let bindings = ValidatedActions::new(actions).map_err(InputError::from)?;
         let version = sections
             .world
@@ -172,6 +173,7 @@ impl PendingSessionCheckpoint {
                 }
             }
         }
+        validate_tasks(code.bindings.as_deref(), &active, &schedule)?;
         if schedule.timers.keys().any(|k| !scope_known(k.scope)) {
             return Err(CheckpointError::Invalid("timer source scope"));
         }

@@ -2,6 +2,7 @@ use super::*;
 use incant_input::{InputEvent, KeyCode};
 use incant_runtime::{CookedEntity, CookedScene};
 mod animation;
+mod coroutines;
 fn id(n: u8) -> StableId {
     StableId([n; 16])
 }

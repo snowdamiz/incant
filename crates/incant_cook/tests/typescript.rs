@@ -137,3 +137,72 @@ export default { update({instances,chunks,dt}) {
     );
     assert_eq!(std::fs::read_dir(&root).unwrap().count(), 2);
 }
+
+#[test]
+fn authored_coroutine_cooks_to_source_free_native_state_and_restores_mid_wait() {
+    let root = tempfile::tempdir().unwrap();
+    let mut project = Project::empty("Explicit native continuation");
+    project.settings.physics_mode = incant_runtime::PHYSICS_VARIANT.mode();
+    let mut scene = Scene::new("Main");
+    let mut entity = Entity::new("Pulse");
+    let source = new_id();
+    entity
+        .components
+        .insert("Script".into(), json!({"source":source,"props":{}}));
+    let entity_id = entity.id.clone();
+    scene.entities.insert(entity_id.clone(), entity);
+    let scene_id = scene.id.clone();
+    project.scenes.insert(scene_id.clone(), scene);
+    project.scripts.insert(
+        source.clone(),
+        ScriptSource {
+            id: source,
+            name: "Pulse".into(),
+            path: "main.ts".into(),
+        },
+    );
+    std::fs::write(
+        root.path().join("main.ts"),
+        include_str!("../../incant_script/tests/fixtures/coroutine.ts"),
+    )
+    .unwrap();
+    let prepared = prepare_script_scene(&project, &scene_id).unwrap();
+    let compiled = compile_project_sources(prepared, root.path()).unwrap();
+    let (scene, code) = compiled.program.into_parts();
+    drop(root); // No source files are available to the native session or restore.
+    let mut baseline =
+        incant_script::NativeSession::new(scene.clone(), code.clone(), Default::default()).unwrap();
+    baseline.tick(&[]).unwrap();
+    baseline.tick(&[]).unwrap();
+    let saved = baseline.checkpoint_bytes().unwrap();
+    let mut restored = incant_script::NativeSession::from_checkpoint_bytes(
+        &saved,
+        &scene,
+        code,
+        Default::default(),
+    )
+    .unwrap();
+    for _ in 0..4 {
+        baseline.tick(&[]).unwrap();
+        restored.tick(&[]).unwrap();
+        assert_eq!(
+            baseline.checkpoint_bytes().unwrap(),
+            restored.checkpoint_bytes().unwrap()
+        );
+    }
+    assert_eq!(
+        restored
+            .world()
+            .unwrap()
+            .inspect(incant_cook::stable_id(&entity_id).unwrap())
+            .unwrap()
+            .transform
+            .translation[0],
+        3.
+    );
+    assert_eq!(baseline.logs().unwrap().entries().len(), 2);
+    assert_eq!(
+        &baseline.logs().unwrap().entries()[1..],
+        restored.logs().unwrap().entries()
+    );
+}

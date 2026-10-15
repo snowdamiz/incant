@@ -17,6 +17,9 @@ struct State {
 #[derive(Default)]
 pub(crate) struct TickTimers(Rc<RefCell<State>>);
 impl TickTimers {
+    pub fn healthy(&self) -> bool {
+        self.0.borrow().failure.is_none()
+    }
     pub fn activate(&self, scope: Scope) {
         self.0.borrow_mut().active = Some(scope);
     }

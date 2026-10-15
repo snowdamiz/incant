@@ -4617,6 +4617,7 @@ version = "0.0.1"
 dependencies = [
  "schemars 1.2.2",
  "serde",
+ "serde_json",
 ]
 
 [[package]]

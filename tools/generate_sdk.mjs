@@ -8,6 +8,7 @@ function type(s) {
   if(s===true || Object.keys(s).length===0) return 'unknown';
   if(s===false) return 'never';
   if(s.$ref) {
+    if(s.$ref==='#') return 'Root';
     if(!s.$ref.startsWith('#/$defs/')) throw new Error(`Unsupported external ref: ${s.$ref}`);
     return s.$ref.slice(8);
   }

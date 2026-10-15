@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "anyOf": [
+    {
+      "type": "null"
+    },
+    {
+      "type": "boolean"
+    },
+    {
+      "format": "double",
+      "type": "number"
+    },
+    {
+      "type": "string"
+    },
+    {
+      "items": {
+        "$ref": "#"
+      },
+      "type": "array"
+    },
+    {
+      "additionalProperties": {
+        "$ref": "#"
+      },
+      "type": "object"
+    }
+  ],
+  "title": "CoroutineValue"
+}
