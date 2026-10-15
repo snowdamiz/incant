@@ -13,6 +13,7 @@ use std::{fs, path::Path};
 #[derive(Clone, Copy)]
 pub enum Change {
     Original,
+    MaterialBindings,
     Keys,
     KeysOnly,
     NonRootRotation,
@@ -78,6 +79,14 @@ pub fn model(root: &Path, change: Change) -> VisualAssetRef {
     fs::write(root.join("rig.png"), RED).unwrap();
     match change {
         Change::Original => {}
+        Change::MaterialBindings => {
+            let mut material = document["materials"][0].clone();
+            material["pbrMetallicRoughness"]["baseColorFactor"] = json!([0.3, 0.5, 0.7, 1.]);
+            material["normalTexture"] = json!({"index":0});
+            material["alphaMode"] = json!("MASK");
+            document["materials"].as_array_mut().unwrap().push(material);
+            document["meshes"][0]["primitives"][0]["material"] = json!(1);
+        }
         Change::Keys | Change::KeysOnly => {
             let times = append(root, &mut document, "SCALAR", 3, &[0., 0.5, 2.]);
             document["accessors"][times]["min"] = json!([0]);
