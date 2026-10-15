@@ -17,7 +17,10 @@ impl crate::Renderer {
                     mode: wgpu_hal::dx12::pipeline_library::Mode::RequireHits,
                     ..Default::default()
                 },
-                ..Default::default()
+                #[cfg(test)]
+                directory: None,
+                #[cfg(test)]
+                observed: None,
             },
         )
         .await
