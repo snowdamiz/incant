@@ -48,6 +48,7 @@ pub fn cook(source: &str) -> Result<Bundle> {
         include_str!("emit.rs"),
         include_str!("static_workgroup.rs"),
         include_str!("spirv_workgroup.rs"),
+        include_str!("../audit.rs"),
         include_str!("../../Cargo.toml"),
     ]
     .join("\n");
@@ -74,5 +75,15 @@ pub fn write_bundle(bundle: &Bundle, directory: &Path) -> Result<()> {
     }
     generated.push_str("];\n");
     fs::write(directory.join("manifest.rs"), generated)?;
+    crate::audit::write(
+        directory,
+        CONTRACT,
+        &bundle.source_hash,
+        &bundle.producer_hash,
+        bundle
+            .artifacts
+            .iter()
+            .map(|a| (a.backend, "Compute", a.entry.as_str(), a.bytes.as_slice())),
+    )?;
     Ok(())
 }

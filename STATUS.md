@@ -13,6 +13,21 @@ controls. This fixes the ordinary viewport route; low-resolution reconstruction
 still has separate appearance defects. The entries
 below preserve earlier scoped results and superseded integration snapshots.
 
+## Cooked native shader export — ordinary catalog qualified
+
+The trusted native-window exporter can now select backend-cooked shaders for
+output, diagnostics, shadows, PBR materials, sprites, text, UI and clustered-light
+compute. Build evidence binds all eight families and 45 artifacts to the exact
+source, cooker, embedded manifest and target compilation. Project files cannot
+supply executable shader bytes. Default exports retain their existing behavior.
+
+Cooker and renderer CPU tests, strict lint, actual artifact auditing and both
+selected/ordinary player builds pass. The player was compiled but not executed;
+full public export, target-driver rendering, optional effect coverage, persistent
+Metal/DX12 caches and shader-stall qualification remain open. The prior fixture
+failure and storage-bound interruption remain recorded.
+[Selection and evidence](docs/spikes/shipping-cooked-shaders.md).
+
 ## Agent editor visibility — per-turn wiring qualified
 
 The current visible navigator, output tab and inspector/agent panes now accompany
