@@ -13,6 +13,15 @@ controls. This fixes the ordinary viewport route; low-resolution reconstruction
 still has separate appearance defects. The entries
 below preserve earlier scoped results and superseded integration snapshots.
 
+Checkpoint43 currently remains held: the broad Linux GPU-test command also
+selected a manual script diagnostic whose prepared inputs were absent. The
+[explicit-feature correction](docs/spikes/ci-manual-script-diagnostic.md) retains
+all ordinary CI controls; corrected hosted execution is still pending. Windows
+confirmed the starter destination repair but exposed a malformed-path test fixture
+that normalized away its own `..` input. The [fixture correction](docs/spikes/windows-template-destination.md#checkpoint43-production-repair-confirmed-malformed-fixture-corrected)
+passes local tests and leaves production behavior unchanged; corrected Windows
+execution is pending.
+
 ## Cooked bloom — public shipping export and CPU startup qualified
 
 The trusted cooked-native selection now includes prefilter, downsample,
