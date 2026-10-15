@@ -1,10 +1,15 @@
 //! Driver caches are host-owned disposable data, never project content.
 //! Loading happens once per renderer. Saving happens only after successful
 //! explicit cold catalog preparation, never during submission or Drop.
+// Cargo cannot test a non-workspace dependency with dev-dependencies. Include
+// the exact portable HAL encoder source in this workspace test target instead.
 #[cfg(all(feature = "dx12-pipeline-library", target_os = "windows"))]
 pub(crate) mod dx12;
 #[cfg(all(feature = "dx12-pipeline-library", any(test, target_os = "windows")))]
 mod library_codec;
+#[cfg(all(test, feature = "dx12-pipeline-library"))]
+#[path = "../../../../third_party/wgpu-hal/src/pipeline_library_key.rs"]
+mod native_key_control;
 #[cfg(all(feature = "dx12-pipeline-library", target_os = "windows"))]
 mod windows_private;
 #[cfg(all(feature = "dx12-pipeline-library", target_os = "windows"))]

@@ -65,5 +65,10 @@ mod tests {
         second.u32(2);
         second.u64(1);
         assert_ne!(first.finish(), second.finish());
+        let mut yes = Encoder::new(b"render");
+        yes.boolean(true);
+        let mut no = Encoder::new(b"render");
+        no.boolean(false);
+        assert_ne!(yes.finish(), no.finish());
     }
 }
