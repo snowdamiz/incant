@@ -1,8 +1,8 @@
 # Packaged-player selected-frame capture
 
-Source implementation; native compilation and actual GPU execution are pending.
-This adds the Phase 1 headless runner's frame-output capability to the existing
-source-free CPU composed player, including its screen-space HUD and UI.
+The existing source-free CPU composed player can render selected accepted states
+to PNG, including its screen-space HUD and UI. CPU qualification and one actual
+Metal control passed; shipping Core and locale image collection remains separate.
 
 ```sh
 incant_game_player --package DATA --ticks 3056 --input-recording restart.json \
@@ -54,11 +54,50 @@ PNG, receipt, PCM and final manifest are separate file transactions, not one
 multi-file or universal power-loss durability guarantee. Host-selected output
 paths are not project data or a private-storage authentication boundary.
 
-Prepared CPU controls cover unique/initial/final selections, limits, missing and
+CPU controls cover unique/initial/final selections, limits, missing and
 conflicting flags, feature-off early refusal, missing captures, byte/collision
-failures and terminal publication. The separately ignored Metal control compares
-ordinary CPU and captured player reports/PCM, checks PNG identities and physical
-dimensions, falsifies UI omission with a same-world negative oracle, and verifies
-pre/post-restart generation/tick/PCM correspondence with a persistent script
-counter. It is not yet executed. No window presentation, continuous submission,
-temporal continuity, locale appearance or performance acceptance is claimed.
+failures and terminal publication. At production source `5b2fa73d`, five
+feature-off controls, 30 feature-on player CPU tests and one renderer readback
+layout control passed: 36 test executions, including overlapping configurations.
+Strict all-target Clippy passed for the ordinary and capture routes; the
+native-window route was checked for compilation only. Its existing third-party
+Tao warnings remain explicit in the retained log.
+
+The first actual Metal test failed during its ordinary CPU baseline, before
+renderer setup: its recording declared version 1 while carrying a viewport
+event, which the runtime correctly refuses. Test-only successor `d1194a71`
+declares version 2 and adds an ordinary CPU regression that executes the actual
+baseline and also checks the version-1 refusal. That regression and affected
+strict Clippy passed. Production code and the original Metal assertions stayed
+unchanged; the failed attempt remains in the packet.
+
+The successor's exact copied test executable passed one actual Metal control.
+Ordinary and sampled player reports and PCM bytes matched. Three 320×192 PNGs
+were checked for signature, dimensions and encoded hashes while the logical UI
+viewport changed from 160×96 to 80×96. A same-world render without UI produced
+different readback bytes. A persistent script counter verified the separate
+restart case's selected `(host step, generation, simulation tick)` values:
+`(0,1,0)`, `(2,1,2)`, `(3,2,1)`, `(4,2,2)`, followed by generation 3/tick 0.
+Fractional-rate PCM remained exactly 1,224 stereo sample frames in that case.
+Both native test children were reaped and their PID/groups independently absent.
+
+The test owns and removes its temporary PNG/PCM files. This is sampled rendering,
+readback and chronology evidence, with no retained-image appearance, public
+shipping export, native-window presentation, continuous submission, temporal
+continuity, locale layout or performance acceptance. The CPU observer's existing
+`gpu_submitted:false` field still describes that CPU observer; the separate
+`frame_capture` result describes selected offscreen submissions.
+
+The [portable packet](evidence/native-player-frame-capture/manifest.json) retains
+the source inventories, exact commands, logs, copied-executable identities,
+original refusal and cleanup receipts. Executables and unchanged full source
+copies remain outside Git. Replay uses saved bytes only:
+
+```sh
+python3 docs/spikes/evidence/native-player-frame-capture/verify.py
+python3 docs/spikes/evidence/native-player-frame-capture/verify.py \
+  --originals --binaries --git-source d1194a71
+```
+
+`--source-root` additionally asserts that every producing input is unchanged in
+that checkout; it must not be used to relabel later source compositions as reruns.
