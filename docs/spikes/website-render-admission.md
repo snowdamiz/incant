@@ -54,7 +54,7 @@ before the recorded seven-test pass.
 The website workflow runs these CPU controls before its full existing Playwright
 suite. The local Playwright suite was intentionally **not run** because it takes
 screenshots and local capture remains prohibited. Hosted browser confirmation is
-pending publication; no local screenshot, browser, CUA, native window, actual
+described below; no local screenshot, browser, CUA, native window, actual
 WebGL performance or appearance acceptance is asserted. The existing GLSL,
 camera, authored fallback styling and all other site components remain unchanged.
 
@@ -62,3 +62,30 @@ Original CI log and exact local raw outputs/identities are retained under
 `~/.codex/incant-integration-evidence/release-checkpoint-41/website-build-cancelled.log`
 and `~/.codex/incant-evidence/website-render-admission-001/`. Bloom source
 `2da0b57b` and its unexecuted CPU proposal remain on their preserved branch.
+
+## Hosted attempt and bounded fallback successor
+
+The first published repair at `049e10ab` also reached the ten-minute job limit
+in run `38678645222`. Three smaller composition cases completed, while desktop
+and ordinary interaction cases still timed out. The new forced-refusal case
+also failed; source review found its GitHub locator matched both hero and footer
+links. It now checks the intended hero link. The original cancelled run is
+retained and is not counted as a successful website check.
+
+The successor refuses known software renderer strings (SwiftShader, llvmpipe,
+softpipe and Microsoft Basic Render Driver) before compiling any shader. That
+identity is used locally only, never stored or sent. If private renderer identity
+is unavailable, normal admission remains possible. A visible animation frame
+interval over 250 ms retires the optional context and reveals the existing
+fallback instead of queuing more work. Offscreen/hidden intervals reset the
+watchdog. This is a conservative presentation policy, not a measurement of GPU
+execution time or proof that software rendering caused the original timeout.
+
+Thirteen Node controls, strict TypeScript and the `/incant/` production build
+pass. A nullable closure type error during the change was corrected before this
+qualification. The additional controls cover software refusal before compilation,
+single fallback/disposal after a stall, and visibility-resume behavior. Browser
+failures now print immediately so a later job timeout cannot hide their messages.
+All existing browser tests, screenshots and deadlines remain. The new full
+hosted run is still required before merge; this Mac launched no browser or capture.
+[Exact source and retained logs](evidence/website-render-admission/results.json).
