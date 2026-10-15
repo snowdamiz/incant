@@ -1,0 +1,55 @@
+{
+  "source": "e3d546ae6856d921adbad381fa2f1e74417b6bf5",
+  "at_utc": "2026-10-15T04:09:46.695173+00:00",
+  "inputs": [
+    {
+      "path": "website/src/components/GlCanvas.vue",
+      "sha256": "a2fd92cf055c98261b4763b01e95f2d80238d64dce821087b3aa8afda89ff168"
+    },
+    {
+      "path": "website/src/gl/renderer.ts",
+      "sha256": "f70c97dc273b5ca205ec8451deb39f8b88c6ac1f065ffe7ac198c3b55abdbc6c"
+    },
+    {
+      "path": "website/tests/landing.spec.ts",
+      "sha256": "3db592cf628c900cee42371cd8fc757005cb5ab2f48761cff35c7cc67b6714e4"
+    },
+    {
+      "path": "website/unit/renderer.test.ts",
+      "sha256": "d721fd842b125b0546ef8c471950a663bb1315706dd32248f94f1f346f3f656e"
+    },
+    {
+      "path": "website/package-lock.json",
+      "sha256": "88c7df61615d4116639dba1a3d90460cc6c6ffc7f65326e527dce30b42c4a232"
+    },
+    {
+      "path": "website/package.json",
+      "sha256": "2ff081b2b9ac51d3696131d869d51b2782ee4581ec926e8f29f76fcc0b5e652e"
+    },
+    {
+      "path": "website/tsconfig.json",
+      "sha256": "4a8e9d1b2d727477470dc24c7912f91e2737ebcf8769991fe09ca74ef9b0f08f"
+    },
+    {
+      "path": "website/playwright.config.ts",
+      "sha256": "8d17084b7b6ef33396f6d1c4074124d5fe5119eb0ff87148ea7bd8d9552aaf73"
+    }
+  ],
+  "local": {
+    "unit_tests": 13,
+    "unit_exit": 0,
+    "typecheck_exit": 0,
+    "build_exit": 0,
+    "pages_base": "/incant/",
+    "node": "22.23.3",
+    "local_browser_or_capture": false
+  },
+  "prior_hosted_attempt": {
+    "head": "049e10ab69401387511d461455ff118c6d6d6ac3",
+    "run": 38678645222,
+    "conclusion": "cancelled at job timeout; not passing"
+  },
+  "new_hosted_attempt": "not yet dispatched",
+  "archive_sha256": "cd3c2c43f3f0aa079733f87c5e2ddddeb4119e2ed97b6991b65da28b941f1203",
+  "limits": "Mocks do not establish actual hardware renderer behavior or appearance. Existing GPU GLSL and fallback styling unchanged; real hosted suite still required."
+}

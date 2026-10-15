@@ -29,6 +29,8 @@ jobs:
       - uses: ./.github/actions/npm-cache
         with: {lock-file: website/package-lock.json}
       - run: npm ci
+      - name: Check WebGL admission and lifecycle without a browser
+        run: npm run test:unit
       - name: Build for the repository's Pages path
         env:
           REPOSITORY_NAME: ${{ github.event.repository.name }}
