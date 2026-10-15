@@ -1,0 +1,267 @@
+{
+  "format": "incant-native-frame-capture-integration-evidence-v1",
+  "native_source": "7328884bd0b05dbce687c85e41f78ecd1373aedb",
+  "joined_main": "ac9e7a87e03e9a0b39b69e3574b50b779c2cf4ca",
+  "archive_sha256": "c137d033fae2a7b5fdf4b7304d8e0912a01bda4a0c12a9bdf5dc0267afc0786c",
+  "records": [
+    {
+      "key": "source-005/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-frame-capture-001/source-005/freeze.json",
+      "bytes": 1440369,
+      "sha256": "3a6ac92a40f7d480b8e6605b97b19327f12f4b7575015aa60684eb27568d81e1"
+    },
+    {
+      "key": "source-004/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-frame-capture-001/source-004/freeze.json",
+      "bytes": 1439963,
+      "sha256": "92cf6b3aa4716cf11e320e25414e35833edd3df5d211ed7f6f2c6f98283be2fb"
+    },
+    {
+      "key": "cpu-proposal-003.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-frame-capture-001/cpu-proposal-003.json",
+      "bytes": 11959,
+      "sha256": "aae038b00cdf72be715b3911246955a59a63bf6748b41f3ded6685b46b6d5d6d"
+    },
+    {
+      "key": "cpu-supervisor-003.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-frame-capture-001/cpu-supervisor-003.py",
+      "bytes": 13826,
+      "sha256": "b5f1cc0c6d4b40b7a7f255d168b4daf83b33b511493f4751ef237074ab85f516"
+    },
+    {
+      "key": "cpu-proposal-004.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-frame-capture-001/cpu-proposal-004.json",
+      "bytes": 13429,
+      "sha256": "f1a6ca876f8257020346864fa3243428e9c6a3fee017ad869bf79e38bbc64650"
+    },
+    {
+      "key": "cpu-supervisor-004.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-frame-capture-001/cpu-supervisor-004.py",
+      "bytes": 13926,
+      "sha256": "d56d03bc0671dd9da6517435424993c48ae89d0268c58d9405e20590f786872c"
+    },
+    {
+      "key": "cpu004-closeout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-frame-capture-001/cpu004-closeout.json",
+      "bytes": 2560,
+      "sha256": "89c345b68ead461c36d999f0dc2ee1e6e4db01e87b346a340fee0bb27c6d80b3"
+    },
+    {
+      "key": "gpu-proposal-003.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-frame-capture-001/gpu-proposal-003.json",
+      "bytes": 8338,
+      "sha256": "1ae28139a25dd3ca079a4d23006572c899f3a8f04c35dd04a9dfce4a03495c2a"
+    },
+    {
+      "key": "gpu-supervisor-003.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-frame-capture-001/gpu-supervisor-003.py",
+      "bytes": 6595,
+      "sha256": "7dc9e687b511fb2d49909151377575b2178fee45b5110d8f9b1dc0b28aee8b60"
+    },
+    {
+      "key": "gpu003-closeout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-frame-capture-001/gpu003-closeout.json",
+      "bytes": 970,
+      "sha256": "d1a431f0d7ed78363c53311a4f32f511125db14ddc73a090e25c3ec98a18f4ff"
+    },
+    {
+      "key": "composition-resolution-001.diff",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-frame-capture-001/composition-resolution-001.diff",
+      "bytes": 13304,
+      "sha256": "06e78ab0b56c8da1303b645418d61532354f8d0d51f160313ca69629d70aeee5"
+    },
+    {
+      "key": "composition-pure-controls-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-frame-capture-001/composition-pure-controls-001.json",
+      "bytes": 181,
+      "sha256": "8b73766ed524f950b4e59a0e337842530b3235a5c3453cf3a892990e19509ae1"
+    },
+    {
+      "key": "root-cpu-grant-004.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-frame-capture-001/root-cpu-grant-004.json",
+      "bytes": 607,
+      "sha256": "889e6256134a7035b697b81c307caed2b369e79ec200baf8438c223a8eae261d"
+    },
+    {
+      "key": "root-gpu-grant-003.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-frame-capture-001/root-gpu-grant-003.json",
+      "bytes": 561,
+      "sha256": "4580f6482d32468bd4ce0ce4dee1e7f0f52ca12685c646b43aeb7d099adfe309"
+    },
+    {
+      "key": "cpu-004/results.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-frame-capture-001/cpu-004/results.json",
+      "bytes": 9296,
+      "sha256": "cdf5124661ccc842dc87fb92998844cb4a765b473d16e019e8683c952a629412"
+    },
+    {
+      "key": "cpu-004/0.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-frame-capture-001/cpu-004/0.stderr.log",
+      "bytes": 3594,
+      "sha256": "a4a35e42ecf24fb74764259580db7367990b887ec5b4234643eb63e3d3c6705c"
+    },
+    {
+      "key": "cpu-004/0.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-frame-capture-001/cpu-004/0.stdout.log",
+      "bytes": 462761,
+      "sha256": "3045f191d6c4337ff9e8444f28a23d7afde9d9bab102f16aee0abf6f0bda28d9"
+    },
+    {
+      "key": "cpu-004/1.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-frame-capture-001/cpu-004/1.stderr.log",
+      "bytes": 341,
+      "sha256": "aafc62e75ac63c92df881d5b11406d703a33a3cbf5991d561d1a392a476825d3"
+    },
+    {
+      "key": "cpu-004/1.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-frame-capture-001/cpu-004/1.stdout.log",
+      "bytes": 455,
+      "sha256": "363df7efe164a8bcc5a0131ba128bab5512a24cc047140beadc479a09dd8d416"
+    },
+    {
+      "key": "cpu-004/2.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-frame-capture-001/cpu-004/2.stderr.log",
+      "bytes": 2329,
+      "sha256": "5d4f97d85095a55ca3f149e6082c06f056e666f182f4e10eb95729618a154b81"
+    },
+    {
+      "key": "cpu-004/2.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-frame-capture-001/cpu-004/2.stdout.log",
+      "bytes": 572,
+      "sha256": "2bd7b014cbdf1bf73152b1075a17926934724a6cd66533128b12955aec72023b"
+    },
+    {
+      "key": "cpu-004/3.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-frame-capture-001/cpu-004/3.stderr.log",
+      "bytes": 2064,
+      "sha256": "0f204861c516addfdd0cdcc05b9f6174e4aa83130ed7ac2601295498669d95ed"
+    },
+    {
+      "key": "cpu-004/3.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-frame-capture-001/cpu-004/3.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "cpu-004/4.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-frame-capture-001/cpu-004/4.stderr.log",
+      "bytes": 3338,
+      "sha256": "1406c23777bc4bce0bbbecf8b61263de61bdeac196ee6a9707074919f3280d43"
+    },
+    {
+      "key": "cpu-004/4.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-frame-capture-001/cpu-004/4.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "cpu-004/5.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-frame-capture-001/cpu-004/5.stderr.log",
+      "bytes": 12283,
+      "sha256": "62272eef75808cabda95e3430e79736b30af7fb23fe6fbd56dbd2b10beab06bb"
+    },
+    {
+      "key": "cpu-004/5.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-frame-capture-001/cpu-004/5.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "cpu-004/tool-0.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-frame-capture-001/cpu-004/tool-0.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "cpu-004/tool-0.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-frame-capture-001/cpu-004/tool-0.stdout.log",
+      "bytes": 36,
+      "sha256": "1f88eaf7fe1aaec83184752cf4c944cd22f00184136ff36a3e4c318cc60ef566"
+    },
+    {
+      "key": "cpu-004/tool-1.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-frame-capture-001/cpu-004/tool-1.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "cpu-004/tool-1.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-frame-capture-001/cpu-004/tool-1.stdout.log",
+      "bytes": 192,
+      "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909"
+    },
+    {
+      "key": "gpu-003/results.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-frame-capture-001/gpu-003/results.json",
+      "bytes": 2658,
+      "sha256": "862d5f1d7dccd134a3de7d5ecf3c73416b6e49cc1dc7325a8f2982ec9e5f03d4"
+    },
+    {
+      "key": "gpu-003/stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-frame-capture-001/gpu-003/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "gpu-003/stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-frame-capture-001/gpu-003/stdout.log",
+      "bytes": 232,
+      "sha256": "2d300e028b6e0cb94a57884f7e33d75ea1b479e60aa95007a6156e78e9e4eeb9"
+    },
+    {
+      "key": "source/crates/incant_game_player/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-frame-capture-001/source-004/files/crates/incant_game_player/Cargo.toml",
+      "bytes": 6401,
+      "sha256": "3a1126508d8c8d7b572dbe77d74130992f382f9ed2bf9d9235c7310098ebbd36",
+      "source_path": "crates/incant_game_player/Cargo.toml"
+    },
+    {
+      "key": "source/crates/incant_game_player/src/lib.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-frame-capture-001/source-004/files/crates/incant_game_player/src/lib.rs",
+      "bytes": 12962,
+      "sha256": "12eeaf7c042a6641d69efb753a3d4c7201010d11b8437acead1498f1711591e0",
+      "source_path": "crates/incant_game_player/src/lib.rs"
+    },
+    {
+      "key": "source/crates/incant_game_player/src/capture/tests.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-frame-capture-001/source-004/files/crates/incant_game_player/src/capture/tests.rs",
+      "bytes": 8432,
+      "sha256": "db5538500bad739ffcac97382bd441cab2e2821f494cf95701e6ca0c52030406",
+      "source_path": "crates/incant_game_player/src/capture/tests.rs"
+    },
+    {
+      "key": "source/crates/incant_game_player/src/materials.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-frame-capture-001/source-004/files/crates/incant_game_player/src/materials.rs",
+      "bytes": 8581,
+      "sha256": "e7b72a5045e91eae44d3b7661bc0d800aa0dac9f284e8e4d0f511a52339f8e0b",
+      "source_path": "crates/incant_game_player/src/materials.rs"
+    },
+    {
+      "key": "source/crates/incant_game_player/tests/material_recording.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-frame-capture-001/source-004/files/crates/incant_game_player/tests/material_recording.rs",
+      "bytes": 8907,
+      "sha256": "e18e2c1d30f17756baafd8ba078b7a2279dce06a31dd5809eb2611b8943d7c1b",
+      "source_path": "crates/incant_game_player/tests/material_recording.rs"
+    }
+  ],
+  "binary": {
+    "source": "/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/incant_game_player-665609565b81d824",
+    "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-player-frame-capture-001/cpu-004/artifacts/0-incant_game_player",
+    "bytes": 33693664,
+    "sha256": "21e17ea29741fcc1d042ca0a8d91e6405db3ac255bd5c989749e0a4ed1df42eb",
+    "features": [
+      "default",
+      "frame-capture",
+      "physics-deterministic",
+      "render-gpu",
+      "render-input"
+    ]
+  },
+  "historical_packet": {
+    "manifest.json": "f9e79eb23b447a78aab5a8fa22eba0bbb40534900080e77a51925e6f030a97f2",
+    "records.json.gz": "40deb2a0f43c13279e1a873a0cdfd65fc015869cdcde6d21d82360add1bf5258",
+    "verify.py": "6bbe7996b3830d53e0f1e5eb339e4b93233a3ef9974b047436f4ce5538156be3"
+  },
+  "source_inventory_inputs": 4081,
+  "scope": "Main364/prewarm composition.13CPU executions,5CPU player CLI subprocesses,2ignored GPU controls,2strict lints/native-window compile-only;1same-source Metal sampled capture/UI/PCM/VM/restart control. Historical original version refusal and prior costs unchanged. No retained image, public export, native window, continuous temporal or performance claim."
+}

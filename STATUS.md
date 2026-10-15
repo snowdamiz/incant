@@ -43,6 +43,24 @@ passes local tests and leaves production behavior unchanged. Both desktop jobs
 and Windows Wasm conformance passed on checkpoint44; that checkpoint's separate
 general failure prevented promotion.
 
+## Packaged-player frame capture — integrated CPU and Metal qualification
+
+The source-free CPU spatial player can now save selected accepted gameplay
+states as PNGs, including the HUD, without opening a desktop window. Capture
+reuses the running world and preserves its report, PCM and restart chronology.
+Bounded output uses create-only publication; incomplete runs retain partial
+evidence and never publish a complete manifest. The ordinary native-window
+build includes this optional CLI mode.
+
+The recorded-material composition passes 13 CPU controls, two strict lint
+configurations, native-window compilation and the same-source Metal rendering
+control. Earlier results and the original fixture failure remain retained.
+The later main365 join changes only DX12 diagnostic tests/tools and documentation;
+capture/player/render implementation bytes remain identical to the qualified
+composition. Core and locale image collection is next. This does not establish
+native presentation, temporal reconstruction quality or performance.
+[Usage and evidence](docs/spikes/native-player-frame-capture.md).
+
 ## Opt-in DX12 pipeline libraries — local controls, native diagnostic pending
 
 A default-off native DX12 pipeline library now has conservative source/driver
