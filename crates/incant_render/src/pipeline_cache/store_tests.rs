@@ -106,6 +106,36 @@ fn rejected_writes_preserve_the_last_complete_cache() {
 }
 
 #[test]
+fn late_catalog_failure_preserves_prior_file_and_next_success_replaces_it() {
+    let root = tempfile::tempdir().unwrap();
+    let s = store(root.path());
+    s.save(b"complete ordinary catalog").unwrap();
+    let before = fs::read(s.path()).unwrap();
+    let mut snapshots = 0;
+    let rejected = super::super::complete::<()>(
+        Err(io::Error::other("optional catalog failed after partial construction").into()),
+        || {
+            snapshots += 1;
+            s.save(b"incomplete optional catalog").unwrap();
+        },
+    );
+    assert!(rejected.is_err());
+    assert_eq!(snapshots, 0);
+    assert_eq!(fs::read(s.path()).unwrap(), before);
+    super::super::complete(Ok(()), || {
+        snapshots += 1;
+        s.save(b"ordinary plus completed optional catalog").unwrap();
+    })
+    .unwrap();
+    assert_eq!(snapshots, 1);
+    assert_eq!(
+        s.load().0.unwrap(),
+        b"ordinary plus completed optional catalog"
+    );
+    assert_eq!(fs::read_dir(&s.directory).unwrap().count(), 1);
+}
+
+#[test]
 fn unavailable_directory_is_an_io_result_not_a_renderer_error() {
     let root = tempfile::tempdir().unwrap();
     let s = store(root.path());
