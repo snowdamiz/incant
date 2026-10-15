@@ -109,3 +109,40 @@ python3 docs/spikes/evidence/dx12-pipeline-library/verify.py --originals --binar
 External binaries and full dependency metadata stay outside Git. `--originals`
 and `--binaries` require those retained local files; the default replay checks
 the portable records and strict qualification/source distinctions.
+
+## Manual Windows diagnostic successor
+
+The separate manual workflow `dx12-pipeline-library-diagnostic.yml` uses
+`tools/probes/dx12-pipeline-library.py`. It has not been dispatched or qualified
+on Windows. Existing release workflows and required check contexts are unchanged.
+The original source and 127-record qualification packet above remain frozen.
+
+The successor includes the exact HAL native-descriptor key source in the Windows
+workspace tests against its actual descriptor type. It adds a type-only reexport
+and an already-resolved Windows dev dependency, without changing key arithmetic
+or runtime creation/storage behavior. The three vendor key controls are now
+selected explicitly alongside COM backing, owner/DACL, hardlink/reparse and
+envelope controls. Actual linked artifact features must match the ordinary or
+full-cooked set exactly before a copied executable is used.
+
+Each mode seeds its own fresh private cache, then runs separate strict stream,
+classic, disabled, lifetime, corrupt, missing and empty-library processes. Native
+load misses retained by capture remain distinct from hits and successful stores;
+disabling refuses before another native load. The probe requires all 14 retained
+initial/refusal RGBA buffers to match byte for byte, with the existing coverage
+and three-color fixture checks. It records source, native adapter/driver identity,
+actual hit/miss/fallback/store counters and executable hashes. Unsupported native
+capability, symlink privilege or any assertion stops the sequence as a failure.
+
+The hosted probe uses existing Windows Job Object ownership. Cleanup is confirmed
+only when its original stop method returns; a cleanup exception stays unconfirmed.
+There is no automatic retry. Builds use Rust 1.99, two Cargo jobs and two Rayon
+threads, with a fresh 8-GiB logical target cap, 6-GiB free-space floor, 640-MiB
+output cap, 256-MiB copied-executable cap and 128-MiB cumulative logs. CPU execution
+has a 3,600-second deadline; native execution has 900 seconds within 4,500 total,
+with 120 seconds per native child. Kernel cleanup must finish before returning.
+These bounds do not claim aggregate GPU/driver memory or performance.
+
+Local successor validation is limited to portable parser/refusal controls,
+harmless process cleanup, metadata, syntax, conventions and formatting. No local
+Rust build, renderer, GPU, window or capture is part of that validation.
