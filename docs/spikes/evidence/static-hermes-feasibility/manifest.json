@@ -1,0 +1,13 @@
+{
+  "schema": 1,
+  "data_file": "records.json.gz",
+  "compressed_bytes": 53787,
+  "sha256": "b5eed00f4c1d7ba341f51a42b9d3b5b08f2907b2afacedb25ca930d632d16290",
+  "uncompressed_bytes": 364158,
+  "external_native_packet": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/static-hermes-native-q90ysscv/packet.tar.gz",
+    "bytes": 127929579,
+    "sha256": "beb18237807cd78913f2cc902ed4dfd05eb1e99b487cb530026e919a0e0113fa"
+  },
+  "scope": "Data-only proof; native binaries stay external and are hash-bound. Verifier must not execute them."
+}
