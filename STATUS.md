@@ -40,6 +40,23 @@ passes local tests and leaves production behavior unchanged. Both desktop jobs
 and Windows Wasm conformance passed on checkpoint44; that checkpoint's separate
 general failure prevented promotion.
 
+## Live model-local material updates — CPU and numerical Metal qualified
+
+Play now accepts complete model-local material tables and primitive material
+reassignments without replacing its world or script VM. Import, watch, Undo and
+Redo retain the same atomic publication checks. Material-only refreshes can retain
+baked navigation; any earlier accepted geometry divergence remains conservatively
+latched until Play restarts.
+
+37 runtime/Play controls, the GPU fixture control and strict lints pass. One actual
+Metal control verifies red→blue→green changes across 612 pixels, unchanged masks
+and alpha, exact rejected-update retention, and world/VM continuity. The final
+main355 composition changes only separately qualified compiler observation inputs
+outside the executed material producer; no rerun of that joined composition is
+claimed. Earlier fixture/lint/test failures remain retained. Native-window workflow,
+Blend appearance and performance remain unqualified.
+[Source and portable evidence](docs/spikes/live-material-binding-refresh.md).
+
 ## Native Metal archives — scoped fresh-process reuse qualified
 
 The default-off native route supports render and compute archives with private
