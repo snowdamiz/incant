@@ -10,7 +10,7 @@ fn values(scene: &SceneInput) -> LightValues {
     let mut matches = scene
         .nodes
         .iter()
-        .filter(|node| node.id == "00000000000000000000000003");
+        .filter(|node| node.id == "00000000000000000000000000000003");
     let value = matches
         .next()
         .expect("light owner 3")

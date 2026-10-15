@@ -420,7 +420,17 @@ fn prepared_catalog_publication_carries_intervening_light_values_without_rebindi
             .input()
             .nodes
             .iter()
-            .find(|n| n.id == "00000000000000000000000004")
+            .filter(|node| node.id == "00000000000000000000000000000004")
+            .count(),
+        1,
+        "unique complete native owner4 label"
+    );
+    assert_eq!(
+        input
+            .input()
+            .nodes
+            .iter()
+            .find(|n| n.id == "00000000000000000000000000000004")
             .unwrap()
             .light
             .as_ref()
