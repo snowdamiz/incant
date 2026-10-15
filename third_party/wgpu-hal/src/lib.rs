@@ -242,6 +242,9 @@
 
 extern crate alloc;
 extern crate wgpu_types as wgt;
+/// Canonical, pointer-free native descriptor digest framing. No driver calls.
+#[cfg(feature = "dx12-pipeline-library")]
+pub mod pipeline_library_key;
 // Each of these backends needs `std` in some fashion; usually `std::thread` functions.
 #[cfg(any(dx12, gles_with_std, metal, vulkan))]
 #[macro_use]

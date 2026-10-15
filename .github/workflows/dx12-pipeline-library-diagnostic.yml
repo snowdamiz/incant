@@ -1,0 +1,27 @@
+name: DX12 pipeline library diagnostic
+# Manual opt-in only. Never changes release workflows or supplies a phase gate.
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: dx12-pipeline-library-diagnostic-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  native-library:
+    runs-on: windows-latest
+    timeout-minutes: 85
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Native ACL, COM, descriptor, library and exact raw parity controls
+        shell: pwsh
+        run: |
+          python tools/probes/dx12-pipeline-library.py artifacts/dx12-pipeline-library --target-dir "$env:RUNNER_TEMP/incant-dx12-pipeline-target" --expected-source "$env:GITHUB_SHA"
+          exit $LASTEXITCODE
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: windows-dx12-pipeline-library
+          path: artifacts/dx12-pipeline-library
+          if-no-files-found: error
+          retention-days: 7

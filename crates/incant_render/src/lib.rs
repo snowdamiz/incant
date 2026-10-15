@@ -1,6 +1,10 @@
 //! Native rendering and GPU readback with retained imported material previews.
 //! Bevy-scheduled HDR geometry, lighting, display transform and composition.
 //! Authored clustered lights; the full production render graph remains open.
+#[cfg(all(test, feature = "dx12-pipeline-library", target_os = "windows"))]
+extern crate alloc;
+#[cfg(all(test, feature = "dx12-pipeline-library", target_os = "windows"))]
+use pipeline_cache::native_key_control as pipeline_library_key;
 mod ambient_occlusion;
 pub use ambient_occlusion::{AmbientOcclusion, AmbientOcclusionError};
 #[cfg(feature = "ssao-stage-readback")]
@@ -14,6 +18,8 @@ mod diagnostic_draw;
 #[cfg(test)]
 #[path = "../tests/diagnostic_output/mod.rs"]
 mod diagnostic_output;
+#[cfg(all(feature = "dx12-pipeline-library", target_os = "windows"))]
+mod dx12_library;
 mod environment;
 mod frame;
 mod geometry_shader;
@@ -39,6 +45,8 @@ mod pipeline_cache;
     target_os = "macos"
 ))]
 pub use pipeline_cache::MetalArchiveDiagnosticError;
+#[cfg(all(feature = "dx12-pipeline-library", target_os = "windows"))]
+pub use pipeline_cache::{Dx12LibraryError, Dx12LibraryReport};
 mod pixel_grid;
 #[cfg(all(feature = "metal-binary-archives", target_os = "macos"))]
 pub use pipeline_cache::MetalArchiveReport;
@@ -163,6 +171,8 @@ impl Renderer {
                 target_os = "macos"
             ))]
             wgpu_hal::metal::binary_archive::Mode::Capture,
+            #[cfg(all(feature = "dx12-pipeline-library", target_os = "windows"))]
+            Default::default(),
         )
         .await
     }
@@ -186,6 +196,8 @@ impl Renderer {
                 target_os = "macos"
             ))]
             wgpu_hal::metal::binary_archive::Mode::Capture,
+            #[cfg(all(feature = "dx12-pipeline-library", target_os = "windows"))]
+            Default::default(),
         )
         .await
     }
@@ -203,6 +215,8 @@ impl Renderer {
             target_os = "macos"
         ))]
         archive_mode: wgpu_hal::metal::binary_archive::Mode,
+        #[cfg(all(feature = "dx12-pipeline-library", target_os = "windows"))]
+        dx12_library: pipeline_cache::dx12::Options,
     ) -> Result<Self> {
         let adapter = instance
             .request_adapter(&wgpu::RequestAdapterOptions {
@@ -254,10 +268,16 @@ impl Renderer {
                 pipeline_cache::Session::require_hits(&device, &adapter)?
             }
         };
-        #[cfg(not(all(
-            feature = "metal-binary-archives",
-            feature = "native-compilation",
-            target_os = "macos"
+        #[cfg(all(feature = "dx12-pipeline-library", target_os = "windows"))]
+        let mut cache_session =
+            pipeline_cache::Session::with_dx12_library(&device, &adapter, dx12_library)?;
+        #[cfg(not(any(
+            all(
+                feature = "metal-binary-archives",
+                feature = "native-compilation",
+                target_os = "macos"
+            ),
+            all(feature = "dx12-pipeline-library", target_os = "windows")
         )))]
         let mut cache_session = pipeline_cache::Session::new(&device, &adapter);
         let cache = cache_session.cache.as_ref();

@@ -43,6 +43,16 @@ passes local tests and leaves production behavior unchanged. Both desktop jobs
 and Windows Wasm conformance passed on checkpoint44; that checkpoint's separate
 general failure prevented promotion.
 
+## Opt-in DX12 pipeline libraries — local controls, native diagnostic pending
+
+A default-off native DX12 pipeline library now has conservative source/driver
+identity, bounded private Windows storage, exact descriptor keys and COM-owned
+input backing. Mac CPU controls and Windows GNU compile/lint checks pass. A
+separate manually invoked hosted diagnostic covers real Windows cache hits,
+filesystem/COM lifetime and exact rendered parity; it has not yet run. Existing
+release checks are unchanged. This does not close the shader-stall gate or claim
+that HLSL compilation is avoided. [Scope and evidence](docs/spikes/dx12-pipeline-library.md).
+
 ## macOS audio output changes — CPU qualified
 
 The player now preserves its mixer when the pinned macOS backend reports an
