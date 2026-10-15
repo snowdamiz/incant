@@ -208,7 +208,12 @@ fn depth_pipeline(d: &wgpu::Device) -> wgpu::RenderPipeline {
 #[ignore = "coordinated GPU boundary control: one submission and one map, no vendor appearance claim"]
 fn actual_boundary_coverage_nonfinite_depth_and_motion() {
     let r = crate::test_support::checked(crate::Renderer::headless().unwrap());
-    let s = System::new(&r.device);
+    let s = System::new(
+        &r.device,
+        r.adapter.get_info().backend,
+        r.pipeline_cache.cache.as_ref(),
+    )
+    .unwrap();
     let depth_pipeline = depth_pipeline(&r.device);
     let cases = cases();
     let formats = [
@@ -342,7 +347,7 @@ fn actual_boundary_coverage_nonfinite_depth_and_motion() {
         let dir = std::path::PathBuf::from(dir);
         std::fs::create_dir_all(&dir).unwrap();
         let adapter = r.adapter.get_info();
-        let report = serde_json::json!({"cases":cases.iter().map(|c|c.name).collect::<Vec<_>>(),"submissions":1,"maps":1,"adapter":format!("{adapter:?}"),"raw_sha256":format!("{:x}",Sha256::digest(&bytes)),"pack_sha256":format!("{:x}",Sha256::digest(source(false))),"normalize_sha256":format!("{:x}",Sha256::digest(source(true))),"row_stride":256,"plane_bytes":1024,"planes":["RGBA16-pack","R32-depth","RG16-motion","R8-reactive","RGBA16-normalized"],"quality_acceptance":false});
+        let report = serde_json::json!({"cases":cases.iter().map(|c|c.name).collect::<Vec<_>>(),"submissions":1,"maps":1,"adapter":format!("{adapter:?}"),"cooked_boundary":cfg!(all(feature="cooked-metalfx-boundary",not(target_arch="wasm32"))),"raw_sha256":format!("{:x}",Sha256::digest(&bytes)),"pack_sha256":format!("{:x}",Sha256::digest(source(false))),"normalize_sha256":format!("{:x}",Sha256::digest(source(true))),"row_stride":256,"plane_bytes":1024,"planes":["RGBA16-pack","R32-depth","RG16-motion","R8-reactive","RGBA16-normalized"],"quality_acceptance":false});
         for (name, data) in [
             ("raw.bin", bytes.clone()),
             ("report.json", serde_json::to_vec_pretty(&report).unwrap()),

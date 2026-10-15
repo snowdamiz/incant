@@ -1,11 +1,13 @@
 use crate::{AgentError, Usage, accounts::AccountSelection};
 use reqwest::blocking::Client;
 use serde_json::{Value, json};
-use std::io::{BufRead, BufReader};
+use std::io::{BufRead, BufReader, Read};
 use std::time::Duration;
 use zeroize::Zeroizing;
+mod local;
 #[cfg(test)]
 mod tests;
+pub use local::LocalResponsesProvider;
 
 pub struct Completion {
     pub output: Vec<Value>,
@@ -27,6 +29,23 @@ pub trait Provider {
     ) -> Result<Completion, AgentError>;
     fn model(&self) -> &str;
 }
+impl<T: Provider + ?Sized> Provider for Box<T> {
+    fn check_active(&self) -> Result<(), AgentError> {
+        (**self).check_active()
+    }
+    fn model(&self) -> &str {
+        (**self).model()
+    }
+    fn complete(
+        &mut self,
+        input: &[Value],
+        tools: &[Value],
+        max_output_tokens: u64,
+        on_text: &mut dyn FnMut(&str),
+    ) -> Result<Completion, AgentError> {
+        (**self).complete(input, tools, max_output_tokens, on_text)
+    }
+}
 /// Credentials are deliberately neither Serialize nor Debug. Calls go directly
 /// to OpenAI; no Incant service is involved and responses are not stored remotely.
 pub struct OpenAiProvider {
@@ -36,6 +55,8 @@ pub struct OpenAiProvider {
     model: String,
     base_url: String,
     active: Option<ActiveCheck>,
+    send_authorization: bool,
+    service: &'static str,
 }
 type TokenSource = Box<dyn Fn(bool) -> Result<Zeroizing<String>, AgentError> + Send + Sync>;
 type ActiveCheck = Box<dyn Fn() -> Result<(), AgentError> + Send + Sync>;
@@ -129,6 +150,8 @@ impl OpenAiProvider {
             model,
             base_url: "https://api.openai.com/v1".into(),
             active: None,
+            send_authorization: true,
+            service: "OpenAI",
         })
     }
     pub fn models(&self) -> Result<Value, AgentError> {
@@ -172,15 +195,19 @@ impl Provider for OpenAiProvider {
             // store's cross-process lock. Long turns must not retain stale tokens.
             let token = (self.credential)(force_refresh)?;
             force_refresh = false;
-            let response = self
+            let mut request = self
                 .client
                 .post(format!("{}/responses", self.base_url))
-                .bearer_auth(token.as_str())
-                .json(&body)
-                .send()
-                .map_err(|_| {
-                    AgentError::Provider("OpenAI request failed; transport details redacted".into())
-                })?;
+                .json(&body);
+            if self.send_authorization {
+                request = request.bearer_auth(token.as_str());
+            }
+            let response = request.send().map_err(|_| {
+                AgentError::Provider(format!(
+                    "{} request failed; transport details redacted",
+                    self.service
+                ))
+            })?;
             let status = response.status();
             if status.as_u16() == 401
                 && self.renewable
@@ -197,7 +224,8 @@ impl Provider for OpenAiProvider {
             }
             if !status.is_success() {
                 return Err(AgentError::Provider(format!(
-                    "OpenAI returned HTTP {}",
+                    "{} returned HTTP {}",
+                    self.service,
                     status.as_u16()
                 )));
             }
@@ -212,17 +240,44 @@ pub fn read_stream(
     reader: impl BufRead,
     on_text: &mut dyn FnMut(&str),
 ) -> Result<Completion, AgentError> {
+    read_stream_limited(reader, on_text, 32 * 1024 * 1024)
+}
+
+fn read_stream_limited(
+    mut reader: impl BufRead,
+    on_text: &mut dyn FnMut(&str),
+    limit: usize,
+) -> Result<Completion, AgentError> {
     let mut data = String::new();
     let mut completed_items = std::collections::BTreeMap::new();
     let mut total = 0usize;
-    for line in reader.lines() {
-        let line = line.map_err(|_| AgentError::Provider("response stream interrupted".into()))?;
-        total += line.len();
-        if total > 32 * 1024 * 1024 {
+    loop {
+        // Bound the read itself: BufRead::lines allocates an entire line before
+        // its caller can check the size. Include delimiters and comments in the
+        // same response budget; read at most one extra byte to detect overflow.
+        let mut bytes = Vec::new();
+        let read = reader
+            .by_ref()
+            .take((limit - total) as u64 + 1)
+            .read_until(b'\n', &mut bytes)
+            .map_err(|_| AgentError::Provider("response stream interrupted".into()))?;
+        if read == 0 {
+            break;
+        }
+        total += read;
+        if total > limit {
             return Err(AgentError::Provider(
                 "response stream limit exceeded".into(),
             ));
         }
+        if bytes.last() == Some(&b'\n') {
+            bytes.pop();
+            if bytes.last() == Some(&b'\r') {
+                bytes.pop();
+            }
+        }
+        let line = String::from_utf8(bytes)
+            .map_err(|_| AgentError::Provider("invalid UTF-8 response stream".into()))?;
         if line.is_empty() {
             if data.is_empty() {
                 continue;

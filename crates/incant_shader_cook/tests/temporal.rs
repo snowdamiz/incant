@@ -149,3 +149,64 @@ fn coverage_resolve_rejects_previous_program_and_modified_coverage_math() {
     let bundle = cook(Kind::Resolve, &current).unwrap();
     assert_eq!(bundle.artifacts.len(), 6);
 }
+
+#[test]
+fn complete_kind_bound_receipts_reject_missing_duplicate_and_relabelled_programs() {
+    for kind in [
+        Kind::Motion,
+        Kind::MotionOwner,
+        Kind::Depth,
+        Kind::Resolve,
+        Kind::Copy,
+    ] {
+        let bundle = cook(kind, &source(kind)).unwrap();
+        let root = tempfile::tempdir().unwrap();
+        let destination = root.path().join("valid");
+        write_bundle(kind, &bundle, &destination).unwrap();
+        let receipt: serde_json::Value =
+            serde_json::from_slice(&std::fs::read(destination.join("audit.json")).unwrap())
+                .unwrap();
+        assert_eq!(receipt["contract"], kind.contract());
+        let rows = receipt["artifacts"].as_array().unwrap();
+        assert_eq!(rows.len(), 6);
+        for row in rows {
+            use sha2::{Digest, Sha256};
+            let bytes = std::fs::read(destination.join(row["file"].as_str().unwrap())).unwrap();
+            assert_eq!(row["bytes"].as_u64(), Some(bytes.len() as u64));
+            assert_eq!(row["sha256"], format!("{:x}", Sha256::digest(&bytes)));
+        }
+        let mut missing = bundle.clone();
+        missing.artifacts.pop();
+        let mut duplicate = bundle.clone();
+        duplicate.artifacts[0] = duplicate.artifacts[1].clone();
+        let mut source_changed = bundle.clone();
+        source_changed.source_hash[0] ^= 1;
+        let mut producer_missing = bundle.clone();
+        producer_missing.producer_hash = [0; 32];
+        let mut producer_tampered = bundle.clone();
+        producer_tampered.producer_hash[0] ^= 1;
+        for (i, invalid) in [
+            missing,
+            duplicate,
+            source_changed,
+            producer_missing,
+            producer_tampered,
+        ]
+        .iter()
+        .enumerate()
+        {
+            let destination = root.path().join(format!("bad{i}"));
+            assert!(write_bundle(kind, invalid, &destination).is_err());
+            assert!(!destination.exists(), "refuse before writing any artifact");
+        }
+        // Motion and depth share WGSL/source hash, but their entry and ABI kind
+        // are different. Matching only the source cannot authorize relabelling.
+        let other = if kind == Kind::Motion {
+            Kind::Depth
+        } else {
+            Kind::Motion
+        };
+        assert!(write_bundle(other, &bundle, &root.path().join("wrong-kind")).is_err());
+        assert!(!root.path().join("wrong-kind").exists());
+    }
+}

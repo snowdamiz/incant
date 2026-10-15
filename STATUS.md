@@ -4,8 +4,8 @@ The current phase remains **Phase 1: Core engine**. The
 [Phase 1 review ledger](docs/gates/phase1-review.md) maps each exit requirement to
 its recorded evidence and remaining qualification. The actual native texture,
 compatible static-model and compatible-animation workflows are verified on this Mac;
-[release checkpoint40](docs/spikes/release-checkpoint-40.md) contains the tested
-main309 tree after all 23 required contexts and eight candidate workflows passed.
+[release checkpoint45](docs/spikes/release-checkpoint-45.md) contains the tested
+main346 tree after all 23 required contexts and eight candidate workflows passed.
 Later main changes remain outside that release baseline. Rendering quality and full rendered-game
 performance remain open. The reported jagged editor cube now has explicit 4x
 geometry antialiasing, verified in the actual Mac editor and isolated Metal
@@ -13,22 +13,140 @@ controls. This fixes the ordinary viewport route; low-resolution reconstruction
 still has separate appearance defects. The entries
 below preserve earlier scoped results and superseded integration snapshots.
 
-Checkpoint44 remains held: the general job generated stale agent tool contracts
-into tracked sources before shipping, then correctly refused its dirty checkout.
-The [schema correction and isolated check](docs/spikes/ci-shipping-schema-check.md)
-regenerate that registry and compare all 78 generated files before shipping
-without changing tracked sources. Actual retained-binary generation and 55
-focused Python controls pass locally. Corrected full hosted execution remains
-pending; the shipping freeze requirement is unchanged.
+Checkpoint46 is blocked by the Windows desktop starter test: the trusted Node
+cook hit its unchanged eight-second deadline after driver entry and before
+compiler dependencies were ready. This does not identify which dependency was
+slow. The [expanded loader observation](docs/spikes/typescript-loader-observation.md)
+separates TypeScript and SWC loading and runs the fallback and four scripted
+starters in the existing one-shot Windows diagnostic. Its exact main355 run now
+passes all six controls, with five successful cooks taking 1.737–2.043 seconds
+and one expected refusal. The timeout did not reproduce; no repair is established.
+The retained checkpoint46 failure still blocks its promotion. Release stays at
+checkpoint45, and no release requirement is bypassed.
 
-Checkpoint43 currently remains held: the broad Linux GPU-test command also
+Checkpoint45 is promoted after every required context and all eight frozen-head
+workflows succeeded. The verified release tree equals main346. Checkpoints41–44
+remain failed historical batches; their reviewed main fixes passed the complete
+suite. In particular, the [schema correction and isolated check](docs/spikes/ci-shipping-schema-check.md)
+now passes hosted generation and all four source-free shipping players without
+changing tracked sources or weakening the shipping freeze. Main347–349 work is
+outside this release baseline; its local evidence remains scoped below.
+
+Checkpoint43's retained failures included a broad Linux GPU-test command that
 selected a manual script diagnostic whose prepared inputs were absent. The
 [explicit-feature correction](docs/spikes/ci-manual-script-diagnostic.md) retains
-all ordinary CI controls; corrected hosted execution is still pending. Windows
+all ordinary CI controls. Windows
 confirmed the starter destination repair but exposed a malformed-path test fixture
 that normalized away its own `..` input. The [fixture correction](docs/spikes/windows-template-destination.md#checkpoint43-production-repair-confirmed-malformed-fixture-corrected)
-passes local tests and leaves production behavior unchanged; corrected Windows
-execution is pending.
+passes local tests and leaves production behavior unchanged. Both desktop jobs
+and Windows Wasm conformance passed on checkpoint44; that checkpoint's separate
+general failure prevented promotion.
+
+## Explicit local-model transport — locally verified
+
+The headless agent can select a loopback streaming Responses server with
+`--local-endpoint`, using an optional separate local key. Saved OpenAI accounts
+are untouched; approvals, durable budgets, command history and Undo remain shared.
+37 focused provider/agent/CLI controls and strict all-target lint pass, with
+independent source review. These are synthetic HTTP results, not live-model
+compatibility or quality evidence. Editor selection and broader provider support
+remain open. [Scope and verification](docs/spikes/local-responses-provider.md).
+
+## Bounded agent response reads — locally verified
+
+The provider now enforces its response byte limit while reading each SSE line,
+including delimiters and comments. Oversized unterminated lines refuse before an
+unbounded line allocation. Nine provider and eight agent integration controls,
+plus strict all-target Clippy, pass. This uses synthetic local responses and
+preserves the requirement for terminal success before tool execution; no live
+provider or Phase 3 gate is claimed.
+[Source and verification](docs/spikes/provider-stream-bound.md).
+
+## Live model-local material updates — CPU and numerical Metal qualified
+
+Play now accepts complete model-local material tables and primitive material
+reassignments without replacing its world or script VM. Import, watch, Undo and
+Redo retain the same atomic publication checks. Material-only refreshes can retain
+baked navigation; any earlier accepted geometry divergence remains conservatively
+latched until Play restarts.
+
+37 runtime/Play controls, the GPU fixture control and strict lints pass. One actual
+Metal control verifies red→blue→green changes across 612 pixels, unchanged masks
+and alpha, exact rejected-update retention, and world/VM continuity. The final
+main355 composition changes only separately qualified compiler observation inputs
+outside the executed material producer; no rerun of that joined composition is
+claimed. Earlier fixture/lint/test failures remain retained. Native-window workflow,
+Blend appearance and performance remain unqualified.
+[Source and portable evidence](docs/spikes/live-material-binding-refresh.md).
+
+## Native Metal archives — scoped fresh-process reuse qualified
+
+The default-off native route supports render and compute archives with private
+host storage and explicit cold publication. On Apple M5 Pro, ordinary and complete
+cooked-native modes each pass 30 cache CPU controls, strict renderer/HAL lint and
+fresh-process `RequireHit` reuse of 41 initial/temporal render plus two compute
+pipelines, with zero additions/fallback. All ten native controls pass, including
+changed/empty/disabled refusal and invalid-cache recovery. Earlier failures are
+retained. CPU007/GPU003 repeat that scope on the main353 composition, including the
+complete cooked aggregate; unchanged HAL lints are reused with byte/feature proof.
+No frame, performance, all-effects or per-level/asynchronous-prewarm
+claim follows. [Scope and portable evidence](docs/spikes/metal-binary-archives.md).
+
+## Cooked MetalFX boundary — numerical Metal parity qualified
+
+The trusted aggregate now includes the two fixed pack/normalize programs:
+25 families and 144 artifacts. Complete-family admission preserves partial-mode
+refusals, unchanged equations and cache preparation. It does not enable the vendor
+scaler or change default quality policy. 54 cooker, 191 default/native-MetalFX,
+224 full cooked/cache and three admission controls pass, with both final feature
+guards, strict lint and 39 Python controls. The public player is compile-only;
+its actual feature graph leaves `native-metalfx` disabled.
+
+Two Apple M5 Pro / Metal children pass the existing 17-case boundary oracle;
+all five raw planes match exactly across 87,040 bytes per mode, with zero parity
+tolerance. Both initial CPU setup failures are preserved. No vendor scaler,
+player, window or capture ran, and no vendor appearance, public export, cache-hit,
+shader-stall or performance gate is claimed.
+[Source and portable evidence](docs/spikes/cooked-metalfx-boundary.md).
+
+## Cooked motion/history — complete family and numerical Metal parity qualified
+
+The trusted cooked-native selection includes the fixed motion, integer-owner,
+depth, history-resolve, presentation-copy and jittered-cluster programs. The
+actual compiler output contains 23 families and 132 artifacts. Their equations,
+default scene behavior and cold preparation remain unchanged; partial cooked
+selections retain explicit refusals.
+
+48 cooker, 186 default renderer, 218 aggregate renderer and both partial-refusal
+controls pass, with strict lint and 37 Python controls. Six actual Metal children
+pass, and all 60 default/cooked raw pairs match exactly. The original enclosing
+comparison failed an unsupported stationary-precision assumption; that failure
+is preserved alongside a reviewed Python-only replay of the same bytes. No
+renderer tolerance or existing analytical gate changed. The player was compiled
+only. This is neither reconstruction quality nor a full shipping export,
+cache-hit, shader-stall or performance qualification. This 23-family snapshot
+preceded the separate MetalFX boundary result recorded above.
+[Source, correction and portable evidence](docs/spikes/cooked-temporal-export.md).
+
+## Cooked SSAO — complete family and numerical Metal parity qualified
+
+The trusted cooked-native selection includes all five existing SSAO programs:
+seventeen families, 99 artifacts. Default AO, WGSL equations and cold cache
+preparation remain unchanged; partial cooked-output/materials modes refuse AO.
+All six ordinary-material backend artifacts remain byte-identical to main346.
+
+47 cooker, 23 default AO, 212 full aggregate/cache, both partial-refusal controls,
+27 Python audit/profile controls and strict lint pass. The player was compiled
+only; actual compiler output passes the complete 99-artifact audit. Four Metal
+controls cover cold admission, zero strength, resize/queued ownership and refusals.
+Two additional controls on Apple M5 Pro prove exact default/cooked disabled/zero/
+positive output: 1,231 pixels darken by at least eight codes, maximum 52, with
+unchanged alpha/coverage and no brightening. Imported textured MASK content is
+observable. Two new CPU controls per mode, both strict lints and four independent
+comparison-refusal controls pass. The compile-name and iterator-lint failures
+remain recorded. No window/capture, AO appearance, new public shipping export,
+Vulkan/Dx12 driver, cache-hit or shader-stall/performance gate claim follows.
+[Source and portable evidence](docs/spikes/cooked-ssao.md).
 
 ## Gameplay light controls — CPU and numerical Metal qualified
 
@@ -82,7 +200,7 @@ but not executed on this Mac; actual driver persistence and shader-stall gates
 remain open. [Contract and evidence](docs/spikes/persistent-pipeline-cache.md).
 Checkpoint42 exposed an incompatible cooked-feature selection in its all-effects
 Vulkan cache test. The [workflow repair](docs/spikes/ci-renderer-catalog.md) keeps
-every lifecycle assertion; actual corrected hosted execution remains pending.
+every lifecycle assertion; corrected hosted execution passed in checkpoint45.
 
 ## Cooked native shader export — ordinary catalog qualified
 
@@ -242,7 +360,7 @@ Chinese HUD, loss/restart text and resumed gameplay without the former crowding.
 Focus pauses and the missed final win capture remain explicit; full appearance
 and performance are separate. [Window sizing and evidence](docs/spikes/native-window-logical-size.md).
 
-A fresh Arabic shipping package passes loss, win and loss/restart/win CPU routes,
+The earlier Arabic shipping package passes loss, win and loss/restart/win CPU routes,
 with exact gameplay, localized HUD and PCM reset parity. Its complete 3,056-step
 Mac window run matches the CPU observations. A separate visual replay timed out
 after focus interruptions; five partial actual images show joined Arabic, damage,
@@ -252,6 +370,12 @@ string table, with real localization/font-shaping regression coverage; normal-si
 appearance and native RTL health-order review remain open. Capture is allowed;
 actual native window checks currently require the Mac desktop to be unlocked.
 [CPU correction and limits](docs/spikes/core-rtl-health-direction.md).
+The [corrected Arabic export](docs/spikes/core-arabic-corrected-export.md) now
+passes fresh public shipping export and all three CPU routes at main342, including
+the health-label marks, full localized HUD/state and exact PCM concatenation.
+Its window-capable binary has not been launched in a native window. The latest
+separate pseudo attempt timed out at zero ticks while macOS was locked; that
+failure remains retained. These CPU results do not supply the missing locale pixels.
 The fresh CJK export/window is recorded above.
 
 Pseudo-localized authoring, a fresh shipping export and all three CPU gameplay
@@ -806,16 +930,22 @@ controls pass; independent final packet review was accepted and PR262 merged
 after its exact-head fast SUCCESS. No FPS/GPU/phase
 claim. [Evidence](docs/spikes/core-bulk-row-metadata.md).
 
-## TypeScript AOT spike — language controls retained, adoption open
+## TypeScript AOT spike — native feasibility tested, adoption blocked
 
 Pinned AssemblyScript 0.28.20 rejects five current TypeScript language fixtures;
 a separate 9,999-row arithmetic kernel compiles and matches selected values.
-The actual NativeBehavior frontend cook passes. Static Hermes source and future
-compiler inputs are pinned, but no native compiler/host was built. All complete
-SDK, matched shipping performance, iOS no-JIT/size and security-release adoption
-conditions remain open. No production host or dependency changed. Independent
-source/final review was accepted and PR262 merged after its exact-head fast
-SUCCESS. [Evidence](docs/spikes/typescript-aot.md).
+The actual NativeBehavior frontend cook passes. A subsequent pinned Static Hermes
+build matches seven unchanged erased-JavaScript fixtures through a limited C++
+host with eval/JIT disabled. All nine original typed/declaration probes refuse
+their inputs. The single native deadline control does not interrupt internally
+and requires external termination; engine rollback and ECS loan safety remain
+unqualified. The original CLI bootstrap failure and build-monitoring limitation
+are retained. All complete SDK, matched shipping performance, iOS no-JIT/size and
+security-release adoption conditions remain unmet. QuickJS stays the default;
+no production host or dependency changed. The portable data verifier passes 143
+records without executing archived code.
+[Initial language evidence](docs/spikes/typescript-aot.md) and
+[native outcomes](docs/spikes/static-hermes-feasibility.md).
 
 ## Core 10k Mac shipping — cache improvement measured, 2 ms script gate failed
 

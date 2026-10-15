@@ -30,21 +30,21 @@ jobs:
           git rev-parse HEAD | Out-File artifacts/typescript-cook-diagnostic/source.txt
           rustc -vV | Out-File artifacts/typescript-cook-diagnostic/rustc.txt
           node --version | Out-File artifacts/typescript-cook-diagnostic/node.txt
-      - name: Observe the original authored fallback contract once
+      - name: Observe authored fallback and starter templates once
         env:
           INCANT_NATIVE_COOK_DIAGNOSTIC: '1'
         shell: pwsh
         run: |
-          cargo test --workspace --profile ci --locked -j2 --features incant_audio_runtime/scene --test fallback -- authored_attachments_never_invoke_or_silently_fall_back_to_the_host_function --exact --nocapture --test-threads=1 2>&1 | Tee-Object -FilePath artifacts/typescript-cook-diagnostic/run.log
+          cargo test --workspace --profile ci --locked -j2 --features incant_audio_runtime/scene --test fallback --test templates -- --nocapture --test-threads=1 2>&1 | Tee-Object -FilePath artifacts/typescript-cook-diagnostic/run.log
           $testExit = $LASTEXITCODE
           $testExit | Out-File artifacts/typescript-cook-diagnostic/test-exit.txt
           $text = Get-Content artifacts/typescript-cook-diagnostic/run.log -Raw
           $phaseMatches = [regex]::Matches($text, 'INCANT_NATIVE_COOK_PHASES (\{[^\r\n]+\})')
-          $names = @('driver_entry', 'compiler_ready', 'input_ready', 'snapshot_ready', 'typecheck_done', 'transform_done', 'artifact_ready', 'publish_done')
+          $names = @('driver_entry', 'typescript_ready', 'swc_ready', 'compiler_ready', 'input_ready', 'snapshot_ready', 'typecheck_done', 'transform_done', 'artifact_ready', 'publish_done')
           $rows = @()
           foreach ($match in $phaseMatches) {
             $row = $match.Groups[1].Value | ConvertFrom-Json
-            if ($row.version -ne 1 -or $row.phases.Count -gt 8 -or
+            if ($row.version -ne 2 -or $row.phases.Count -gt 10 -or
                 $row.outcome -notin @('deadline', 'exited_success', 'refused') -or
                 $row.state -notin @('empty', 'valid_prefix', 'partial_final_row', 'invalid_or_unavailable')) {
               throw 'Unexpected fixed phase observation schema.'
@@ -60,9 +60,9 @@ jobs:
           }
           ConvertTo-Json -InputObject @($rows) -Depth 5 | Out-File artifacts/typescript-cook-diagnostic/phases.json
           if ($phaseMatches.Count -eq 0) { throw 'The selected test emitted no parent phase receipt.' }
-          if ($testExit -eq 0 -and ($text -notmatch 'test result: ok\. 1 passed; 0 failed; 0 ignored;' -or
-              @($rows | Where-Object { $_.outcome -eq 'exited_success' -and $_.phases.Count -eq 8 -and $_.state -eq 'valid_prefix' }).Count -ne 1)) {
-            throw 'The exact authored contract did not complete once with all compiler phases.'
+          if ($testExit -eq 0 -and ([regex]::Matches($text, 'test result: ok\. 3 passed; 0 failed; 0 ignored;').Count -ne 2 -or
+              @($rows | Where-Object { $_.outcome -eq 'exited_success' -and $_.phases.Count -eq 10 -and $_.state -eq 'valid_prefix' }).Count -ne 5)) {
+            throw 'The authored contract and four scripted starters did not complete with all compiler phases.'
           }
           exit $testExit
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

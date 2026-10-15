@@ -1,10 +1,95 @@
+#[cfg(feature = "cooked-ssao")]
+#[path = "src/ambient_occlusion/source.rs"]
+mod ambient_occlusion_source;
 #[cfg(feature = "cooked-bloom")]
 #[path = "src/bloom/source.rs"]
 mod bloom_source;
+#[cfg(feature = "metal-binary-archives")]
+#[path = "build/metal_archive_identity.rs"]
+mod metal_archive_identity;
+#[cfg(feature = "cooked-metalfx-boundary")]
+#[path = "src/metalfx/source.rs"]
+mod metalfx_source;
 #[cfg(feature = "cooked-temporal")]
 #[path = "src/lighting/temporal_source.rs"]
 mod temporal_source;
 fn main() {
+    #[cfg(feature = "metal-binary-archives")]
+    metal_archive_identity::emit();
+    #[cfg(feature = "cooked-metalfx-boundary")]
+    if std::env::var("CARGO_CFG_TARGET_ARCH").as_deref() != Ok("wasm32") {
+        use incant_shader_cook::metalfx_boundary::{self, Kind};
+        for path in [
+            "src/metalfx/source.rs",
+            "src/metalfx/common.wgsl",
+            "src/metalfx/alpha.wgsl",
+            "src/metalfx/prepare.wgsl",
+            "src/metalfx/normalize.wgsl",
+        ] {
+            println!("cargo:rerun-if-changed={path}");
+        }
+        let output =
+            std::path::PathBuf::from(std::env::var_os("OUT_DIR").expect("Cargo output directory"));
+        for (kind, name) in [(Kind::Pack, "pack"), (Kind::Normalize, "normalize")] {
+            let source = metalfx_source::source(kind == Kind::Normalize);
+            let bundle = metalfx_boundary::cook(kind, &source)
+                .expect("fixed MetalFX boundary source and ABI");
+            metalfx_boundary::write_bundle(
+                kind,
+                &bundle,
+                &output.join(format!("metalfx-{name}-shaders")),
+            )
+            .expect("write complete MetalFX boundary");
+        }
+    }
+
+    #[cfg(feature = "cooked-ssao")]
+    if std::env::var("CARGO_CFG_TARGET_ARCH").as_deref() != Ok("wasm32") {
+        use incant_shader_cook::ambient_occlusion::{self, Kind};
+        for path in [
+            "src/ambient_occlusion/source.rs",
+            "src/ambient_occlusion/prepass.wgsl",
+            "src/ambient_occlusion/ao.wgsl",
+            "src/ambient_occlusion/filter.wgsl",
+            "src/model_material.wgsl",
+            "src/shadows/shade.wgsl",
+            "src/lighting/shade.wgsl",
+        ] {
+            println!("cargo:rerun-if-changed={path}");
+        }
+        let output =
+            std::path::PathBuf::from(std::env::var_os("OUT_DIR").expect("Cargo output directory"));
+        for (kind, name) in [
+            (Kind::Prepass, "prepass"),
+            (Kind::Forward, "forward"),
+            (Kind::Sample, "sample"),
+            (Kind::Horizontal, "horizontal"),
+            (Kind::Vertical, "vertical"),
+        ] {
+            let source = match kind {
+                Kind::Prepass => {
+                    ambient_occlusion_source::material(true).expect("guarded SSAO prepass")
+                }
+                Kind::Forward => ambient_occlusion_source::material(false)
+                    .expect("guarded SSAO diffuse material"),
+                Kind::Sample => std::fs::read_to_string("src/ambient_occlusion/ao.wgsl")
+                    .expect("fixed SSAO sampling"),
+                Kind::Horizontal | Kind::Vertical => {
+                    std::fs::read_to_string("src/ambient_occlusion/filter.wgsl")
+                        .expect("fixed SSAO filter")
+                }
+            };
+            let bundle = ambient_occlusion::cook(kind, &source)
+                .expect("complete fixed SSAO kind/source/ABI");
+            ambient_occlusion::write_bundle(
+                kind,
+                &bundle,
+                &output.join(format!("ssao-{name}-shaders")),
+            )
+            .expect("write SSAO family");
+        }
+    }
+
     #[cfg(feature = "cooked-temporal")]
     if std::env::var("CARGO_CFG_TARGET_ARCH").as_deref() != Ok("wasm32") {
         use incant_shader_cook::temporal::{self, Kind};

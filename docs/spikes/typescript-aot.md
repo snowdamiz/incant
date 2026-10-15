@@ -1,9 +1,13 @@
 # TypeScript AOT language and host spike
 
-Decision 18 remains open. This spike pins Static Hermes first and AssemblyScript
-as the typed-to-Wasm alternative, runs actual bounded language controls, and
+Decision 18's adoption conditions remain unmet. This spike pins Static Hermes
+first and AssemblyScript as the typed-to-Wasm alternative, runs actual bounded language controls, and
 leaves a runnable path toward the required native host comparison. No engine
-host, shipping benchmark, iOS artifact or candidate adoption is claimed.
+shipping benchmark, iOS artifact or candidate adoption is claimed. The subsequent
+[native Static Hermes experiment](static-hermes-feasibility.md) builds the pinned
+compiler and exercises a limited C++ host. Seven erased-JavaScript controls pass,
+but the typed probes refuse their inputs and the native deadline control requires
+external termination. That successor does not establish complete SDK conformance.
 
 ## Actual observations
 
@@ -45,9 +49,10 @@ provides C output, disables lazy compilation in this path, and explicitly
 refuses combining TypeScript stripping with typed mode. The
 [build target](https://github.com/facebook/hermes/blob/1d2fc48c021fbda8eb14478379112ed67bed8f0f/tools/shermes/CMakeLists.txt)
 uses a host C compiler and distinguishes host compiler from target VM during
-cross-compilation. No installed `shermes` was found and no C/C++ build was run;
-neither fact is an adoption verdict. Generated `.hermes.js` inputs and a
-bounded next-build recipe are retained. Erased JS and original typed source
+cross-compilation. This initial language run did not find an installed `shermes`
+or perform a C/C++ build. The later native experiment linked above preserves that
+history and records the actual build. Generated `.hermes.js` inputs and the
+bounded build recipe are retained. Erased JS and original typed source
 must be evaluated separately rather than assuming typed-mode optimization.
 
 AssemblyScript v0.28.20 is pinned to source
@@ -78,10 +83,11 @@ allocation/deadline refusal, immutable props, persistence, physics/navigation,
 input/timers/localization, HUD/audio/animation, haptics and restart. Existing
 Wasm parity gaps must not silently shrink the TypeScript SDK requirement.
 
-Build a pinned Static Hermes compiler when a native compiler slot is assigned,
-then run the retained inputs and implement the reviewed host boundary. Generated
-native code must not bypass allocation/work bounds or expose unchecked ECS
-pointers. Run every current SDK contract before a matched Mac shipping comparison.
+The pinned Static Hermes compiler and retained inputs have now run in the linked
+native experiment. Further native integration first needs a demonstrated
+interruption mechanism and a reviewed host boundary. Generated native code must
+not bypass allocation/work bounds or expose unchecked ECS pointers. Run every
+current SDK contract before a matched Mac shipping comparison.
 For AssemblyScript, first demonstrate any proposed lowering/ABI bridge without
 changing the source-language contract. Keep QuickJS as the shipped default while
 this work is incomplete.

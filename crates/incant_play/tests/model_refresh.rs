@@ -1,5 +1,9 @@
 #[path = "../../incant_render_native/tests/common/model_refresh.rs"]
 mod fixture;
+#[path = "../../incant_render_native/tests/common/material_refresh.rs"]
+mod material_fixture;
+#[path = "model_refresh/materials.rs"]
+mod materials;
 use fixture::*;
 use incant_audio_runtime::{AudioManagerSettings, OfflineBackend};
 use incant_play::{PlaySession, PreparedPlay, TexturePublishAttempt, TextureRefreshBasis};

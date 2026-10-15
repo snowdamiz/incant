@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 
 // Fixed compiler milestones only: never source text, filenames, or diagnostics.
-export const PHASES = Object.freeze(['driver_entry', 'compiler_ready', 'input_ready',
+export const PHASES = Object.freeze(['driver_entry', 'typescript_ready', 'swc_ready', 'compiler_ready', 'input_ready',
   'snapshot_ready', 'typecheck_done', 'transform_done', 'artifact_ready', 'publish_done']);
 
 export function phaseRecorder(file) {

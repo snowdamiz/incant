@@ -10,22 +10,33 @@ use std::{
 #[test]
 #[ignore = "requires native GPU; four numeric frames, no images or presentation"]
 fn fixed_history_overlay_depth_and_timestamps_share_real_submissions() {
-    run(false, false);
+    run(false, false, false);
 }
 
 #[test]
 #[ignore = "requires native GPU; four bloom/fixed frames, no images or presentation"]
 fn fixed_history_bloom_and_display_timestamps_share_real_submissions() {
-    run(true, false);
+    run(true, false, false);
 }
 
 #[test]
 #[ignore = "requires native GPU; four SSAO/fixed/bloom frames, no images or presentation"]
 fn fixed_history_ssao_bloom_and_model_timestamps_share_real_submissions() {
-    run(true, true);
+    run(true, true, false);
 }
 
-fn run(with_bloom: bool, with_ssao: bool) {
+#[test]
+#[ignore = "requires separately granted native GPU; four jittered local-light frames and optional four numeric readbacks"]
+fn fixed_history_jittered_clusters_and_pixels_share_real_submissions() {
+    run(false, false, true);
+}
+
+fn run(with_bloom: bool, with_ssao: bool, with_local: bool) {
+    let mut parity = if with_local {
+        crate::temporal_parity::Output::optional("temporal-clustered")
+    } else {
+        None
+    };
     let temp = tempfile::tempdir().unwrap();
     crate::test_support::model(temp.path(), 0.);
     let path = temp.path().join("triangle.gltf");
@@ -56,7 +67,7 @@ fn run(with_bloom: bool, with_ssao: bool) {
         .unwrap(),
     );
     temp.close().unwrap();
-    let input = SceneInput {
+    let mut input = SceneInput {
         nodes: vec![
             SceneNode {
                 id: "model".into(),
@@ -94,6 +105,24 @@ fn run(with_bloom: bool, with_ssao: bool) {
         ],
         ..Default::default()
     };
+    if with_local {
+        input.nodes.push(SceneNode {
+            id: "point".into(),
+            world: DMat4::from_translation(DVec3::new(0., 0., 3.)),
+            light: Some(incant_render_data::SceneLight::Point(
+                incant_types::PointLight {
+                    color: [1., 0.7, 0.3],
+                    intensity: 20.,
+                    range: 20.,
+                },
+            )),
+            camera: None,
+            mesh: None,
+            sprite: None,
+            tilemap: None,
+            diagnostic: false,
+        });
+    }
 
     let instance = wgpu::Instance::default();
     let ordinary =
@@ -149,7 +178,8 @@ fn run(with_bloom: bool, with_ssao: bool) {
                 strength: 1.,
             }));
         if cfg!(all(
-            feature = "cooked-materials",
+            feature = "cooked-output",
+            not(feature = "cooked-ssao"),
             not(target_arch = "wasm32")
         )) {
             assert_eq!(
@@ -167,7 +197,8 @@ fn run(with_bloom: bool, with_ssao: bool) {
             "SSAO_JOINED admitted={}; cooked_refusal={}",
             renderer.ambient_occlusion.is_some(),
             cfg!(all(
-                feature = "cooked-materials",
+                feature = "cooked-output",
+                not(feature = "cooked-ssao"),
                 not(target_arch = "wasm32")
             ))
         );
@@ -226,6 +257,18 @@ fn run(with_bloom: bool, with_ssao: bool) {
                 timeout: Some(Duration::from_secs(15)),
             })
             .unwrap();
+        if let Some(parity) = parity.as_mut() {
+            let pixels = crate::hdr_output::read(&renderer, &texture);
+            parity
+                .record(
+                    &format!("frame{index}-output"),
+                    65,
+                    33,
+                    "rgba8srgb",
+                    &pixels,
+                )
+                .unwrap();
+        }
         let frame = retained.temporal_frame().unwrap();
         assert_eq!(frame.jitter_phase(), Some(index % 2));
         assert_eq!(
@@ -250,6 +293,11 @@ fn run(with_bloom: bool, with_ssao: bool) {
             for pass in [GpuPass::InitializeScene, GpuPass::Models, GpuPass::Display] {
                 let span =
                     sample.passes[pass.index()].expect("actual joined pass must be measured");
+                assert!(span.nanoseconds.is_finite() && span.nanoseconds > 0.);
+            }
+            if with_local {
+                let span = sample.passes[GpuPass::AssignLights.index()]
+                    .expect("actual jittered point-light cluster dispatch");
                 assert!(span.nanoseconds.is_finite() && span.nanoseconds > 0.);
             }
             for span in sample.passes.iter().flatten() {
@@ -278,5 +326,8 @@ fn run(with_bloom: bool, with_ssao: bool) {
                 "FIXED_JOINED_UNSUPPORTED frame={index}; submitted_and_completed=true; no timing sample"
             );
         }
+    }
+    if let Some(parity) = parity {
+        parity.complete();
     }
 }

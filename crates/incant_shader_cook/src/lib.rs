@@ -1,5 +1,6 @@
 //! Host-only cooking of the renderer's fixed display-output shader.
 //! This is not a project-shader compiler or a general wgpu layout compiler.
+pub mod ambient_occlusion;
 mod audit;
 pub mod bloom;
 pub mod compute;
@@ -7,6 +8,7 @@ mod contract;
 mod emit;
 pub mod geometry;
 mod manifest;
+pub mod metalfx_boundary;
 pub mod temporal;
 
 pub use manifest::write_bundle;

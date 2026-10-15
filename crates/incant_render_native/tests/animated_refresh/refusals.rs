@@ -19,6 +19,7 @@ fn equal_count_clip_skin_and_geometry_changes_refuse_without_mutating_the_live_c
         Change::Influences,
         Change::Rest,
         Change::Geometry,
+        Change::GeneratedTangents,
     ] {
         // Each replacement is actually cooked/decoded, with the same asset ID,
         // clip count and primitive/material count; only the binding changes.

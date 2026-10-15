@@ -32,7 +32,9 @@ pub enum AmbientOcclusionError {
     Projection,
     #[error("SSAO material shader contract changed")]
     ShaderContract,
-    #[error("SSAO is not yet available with native cooked-materials")]
+    #[error(
+        "SSAO requires the complete cooked-ssao family when native cooked shaders are selected"
+    )]
     CookedMaterials,
 }
 impl AmbientOcclusion {
