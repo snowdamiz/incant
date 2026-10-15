@@ -142,7 +142,7 @@ pub(super) fn validate(file: &File, user: &[u8]) -> io::Result<()> {
             return Err(refused("cache DACL has unsupported or inherited ACEs"));
         }
         let ace = unsafe { &*pointer.cast::<ACCESS_ALLOWED_ACE>() };
-        let sid = ptr::addr_of!(ace.SidStart).cast_mut().cast();
+        let sid: PSID = ptr::addr_of!(ace.SidStart).cast_mut().cast();
         // Check the SID's fixed header and declared subauthorities against the
         // ACE before calling native SID validation/copy routines.
         let sid_length = 8 + 4 * usize::from(unsafe { *sid.cast::<u8>().add(1) });

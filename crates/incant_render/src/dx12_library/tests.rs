@@ -16,7 +16,14 @@ fn dx12_library_native_stage() {
     let stage = std::env::var("INCANT_DX12_LIBRARY_STAGE").expect("explicit stage");
     assert!(matches!(
         stage.as_str(),
-        "seed" | "reuse-stream" | "reuse-classic" | "missing" | "corrupt" | "disabled" | "empty"
+        "seed"
+            | "reuse-stream"
+            | "reuse-classic"
+            | "missing"
+            | "corrupt"
+            | "disabled"
+            | "empty"
+            | "lifetime"
     ));
     let root = PathBuf::from(std::env::var_os("INCANT_DX12_LIBRARY_ROOT").expect("owned root"));
     assert!(root.is_absolute());
@@ -27,6 +34,43 @@ fn dx12_library_native_stage() {
         backends: crate::wgpu::Backends::DX12,
         ..crate::wgpu::InstanceDescriptor::new_without_display_handle()
     });
+    if stage == "lifetime" {
+        let adapter = pollster::block_on(instance.request_adapter(&Default::default())).unwrap();
+        let (device, _) = pollster::block_on(adapter.request_device(&Default::default())).unwrap();
+        let observed = Arc::new(Mutex::new(None));
+        let (host, read) = pipeline_cache::dx12::Session::configured(
+            &device,
+            &adapter,
+            pipeline_cache::dx12::Options {
+                directory: Some(directory),
+                observed: Some(Arc::clone(&observed)),
+                ..Default::default()
+            },
+        )
+        .unwrap();
+        assert!(matches!(read, CacheRead::Supplied { bytes: 1.. }));
+        let library = observed.lock().unwrap().take().unwrap();
+        let (retained, life) = library.retain_for_lifetime_control();
+        let final_ref = retained.clone();
+        // No PSO creation in this fresh device/session: the real library has a
+        // nonempty admitted input and only our explicit COM test clones remain.
+        drop(host);
+        drop(library);
+        assert!(life.is_alive());
+        drop(retained);
+        assert!(life.is_alive());
+        drop(final_ref);
+        assert!(
+            !life.is_alive(),
+            "backing must retire after the final COM library ref"
+        );
+        fs::write(
+            output.join("result.txt"),
+            "real COM retained refs pin immutable backing; final ref frees it",
+        )
+        .unwrap();
+        return;
+    }
     if stage == "empty" {
         let adapter = pollster::block_on(instance.request_adapter(&Default::default())).unwrap();
         let (device, _) =

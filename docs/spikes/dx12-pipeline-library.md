@@ -43,8 +43,10 @@ an administrator.
 
 The length/checksum envelope binds conservative engine/HAL source, target,
 features, compiler flags/compiler identity, native adapter identifiers and the
-queried driver version. Native input backing is immutable and outlives every
-library COM interface. Unsupported storage or capture faults retain ordinary
+queried driver version. Native input backing is immutable and held by an acyclic `IUnknown` owner attached
+with `SetPrivateDataInterface`, so its lifetime follows the actual COM library
+object rather than our interface wrappers. Failed attachment and unwind release
+the unreturned library before the last local backing owner. Unsupported storage or capture faults retain ordinary
 pipeline creation and report that outcome; they never count as cache hits.
 
 Cooked builds keep selecting engine-owned backend artifacts. DX12 still invokes
@@ -53,7 +55,7 @@ hit is therefore not evidence that shader compiler work was skipped, nor a
 performance measurement. No project-provided executable shader/cache bytes enter
 this route.
 
-The Windows-only staged fixture is authored for fresh-process seed, strict
+The Windows-only staged fixture is authored for real COM-reference lifetime, fresh-process seed, strict
 stream/classic reuse, empty/missing/corrupt input and disabled/late-miss controls.
 It retains numerical RGBA before assertions and requires exact cross-stage and
 ordinary/cooked equality, including opaque/MASK/BLEND models, sprites and text.

@@ -81,6 +81,8 @@ mod device;
 mod device_creation;
 mod instance;
 #[cfg(feature = "dx12-pipeline-library")]
+mod library_backing;
+#[cfg(feature = "dx12-pipeline-library")]
 mod library_key;
 mod pipeline_desc;
 #[cfg(feature = "dx12-pipeline-library")]

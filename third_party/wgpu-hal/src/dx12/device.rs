@@ -1495,7 +1495,7 @@ impl crate::Device for super::Device {
                 #[cfg(feature = "dx12-pipeline-library")]
                 signature_key: {
                     use sha2::Digest;
-                    sha2::Sha256::digest(blob.as_slice()).into()
+                    sha2::Sha256::digest(unsafe { blob.as_slice() }).into()
                 },
                 total_root_elements: parameters.len() as super::RootIndex,
                 special_constants,

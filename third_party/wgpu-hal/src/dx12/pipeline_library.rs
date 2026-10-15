@@ -1,8 +1,8 @@
 //! Opt-in host-owned D3D12 pipeline libraries, not wgpu PipelineCache.
 //! No storage I/O here. The host admits native bytes and explicitly serializes
 //! after successful cold catalog preparation. All same-name loads are locked.
-use super::{library_key, pipeline_desc::RenderPipelineStateStreamDesc};
-use alloc::{boxed::Box, format, string::String, sync::Arc, vec::Vec};
+use super::{library_backing, library_key, pipeline_desc::RenderPipelineStateStreamDesc};
+use alloc::{format, string::String, sync::Arc, vec::Vec};
 use core::mem::size_of;
 use parking_lot::Mutex;
 use windows::{
@@ -11,6 +11,16 @@ use windows::{
 };
 
 pub const MAX_BYTES: usize = 64 * 1024 * 1024;
+// Private engine namespace; the payload owner never refers back to this object.
+const BACKING_OWNER: windows_core::GUID =
+    windows_core::GUID::from_u128(0x862e5026_892b_4c2d_afea_f25eb5cfa5bd);
+pub use super::library_backing::Lifetime as BackingLifetime;
+
+/// Diagnostic retained native reference, with no access to mutable COM APIs.
+#[derive(Clone)]
+pub struct LibraryReference {
+    _library: ID3D12PipelineLibrary,
+}
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Mode {
@@ -74,11 +84,11 @@ pub struct Counts {
     pub last_error: Option<Error>,
 }
 struct Library {
-    // Declaration/drop order is deliberate: EVERY COM interface dies before
-    // backing, which CreatePipelineLibrary retains by pointer without copying.
+    // SetPrivateDataInterface pins backing until the actual COM object is
+    // destroyed, including any native refs not visible to our Rust wrappers.
     extended: Option<ID3D12PipelineLibrary1>,
     raw: ID3D12PipelineLibrary,
-    _backing: Box<[u8]>,
+    lifetime: BackingLifetime,
 }
 struct State {
     library: Library,
@@ -146,7 +156,7 @@ impl super::Device {
         unsafe {
             self.raw.CheckFeatureSupport(
                 D3D12_FEATURE_SHADER_CACHE,
-                (&mut support as *mut D3D12_FEATURE_DATA_SHADER_CACHE).cast(),
+                core::ptr::from_mut(&mut support).cast(),
                 size_of::<D3D12_FEATURE_DATA_SHADER_CACHE>() as u32,
             )
         }
@@ -200,19 +210,16 @@ impl super::Device {
             .raw
             .cast::<ID3D12Device1>()
             .map_err(|_| Error::Unsupported)?;
-        let backing = input.into_boxed_slice();
+        let backing = library_backing::Prepared::new(input.into_boxed_slice());
+        let lifetime = backing.lifetime();
         // The slice binding supplies a dangling nonnull pointer for []. Use the
         // documented null/zero pair for a new empty library instead.
         let mut result = core::ptr::null_mut();
         unsafe {
             (Interface::vtable(&device).CreatePipelineLibrary)(
                 Interface::as_raw(&device),
-                if backing.is_empty() {
-                    core::ptr::null()
-                } else {
-                    backing.as_ptr().cast()
-                },
-                backing.len(),
+                backing.pointer(),
+                backing.length(),
                 &ID3D12PipelineLibrary::IID,
                 &mut result,
             )
@@ -227,12 +234,17 @@ impl super::Device {
         }
         // SAFETY: successful COM creation transferred one nonnull owned ref.
         let raw = unsafe { ID3D12PipelineLibrary::from_raw(result) };
+        let raw = backing
+            .attach(raw, |library, owner| unsafe {
+                library.SetPrivateDataInterface(&BACKING_OWNER, owner)
+            })
+            .map_err(|e| native("SetPrivateDataInterface", e))?;
         let extended = raw.cast().ok();
         let session = Arc::new(Session(Mutex::new(State {
             library: Library {
                 extended,
                 raw,
-                _backing: backing,
+                lifetime,
             },
             config,
             counts: Counts::default(),
@@ -245,6 +257,18 @@ impl super::Device {
     }
 }
 impl Session {
+    /// Retain a real COM library ref and an opaque non-owning lifetime witness.
+    /// Used by bounded host controls; neither value exposes cache mutation.
+    #[doc(hidden)]
+    pub fn retain_for_lifetime_control(&self) -> (LibraryReference, BackingLifetime) {
+        let state = self.0.lock();
+        (
+            LibraryReference {
+                _library: state.library.raw.clone(),
+            },
+            state.library.lifetime.clone(),
+        )
+    }
     pub fn counts(&self) -> Counts {
         self.0.lock().counts.clone()
     }

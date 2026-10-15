@@ -7,6 +7,9 @@
 pub(crate) mod dx12;
 #[cfg(all(feature = "dx12-pipeline-library", any(test, target_os = "windows")))]
 mod library_codec;
+#[cfg(all(test, feature = "dx12-pipeline-library", target_os = "windows"))]
+#[path = "../../../../third_party/wgpu-hal/src/dx12/library_backing.rs"]
+mod native_backing_control;
 #[cfg(all(test, feature = "dx12-pipeline-library"))]
 #[path = "../../../../third_party/wgpu-hal/src/pipeline_library_key.rs"]
 mod native_key_control;
