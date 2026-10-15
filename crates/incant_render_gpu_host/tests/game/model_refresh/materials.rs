@@ -162,14 +162,8 @@ fn material_reassignment_and_table_replacement_reset_history_and_retain_refused_
     retain_pixels(&output, "late_refusal", &rejected_pixels);
     let mut replacement = TextureRefreshOperation::Publish(stage(&mut game, rebound, root.path()));
     publish(&mut game, &probe, &lock, &mut replacement);
-    assert!(
-        game.host()
-            .unwrap()
-            .consumer()
-            .motion_frame()
-            .unwrap()
-            .same_owner(&accepted_motion)
-    );
+    assert!(game.host().unwrap().consumer().motion_frame().is_none());
+    assert!(accepted_motion.has_previous() && accepted_motion.same_owner(&first_motion));
     game.refresh_host().unwrap();
     let blue = pixels(&probe);
     retain_pixels(&output, "reassignment", &blue);
