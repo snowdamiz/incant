@@ -3,8 +3,9 @@
 `tools/export_native.py PROJECT OUTPUT --mode window --shaders cooked` selects
 existing fixed backend-cooked shaders through the trusted exporter. Omission
 retains the ordinary configuration. Unknown modes, headless selection and
-unsupported native targets refuse explicitly. This is source implementation;
-no new Rust compilation, shipping package or GPU execution has qualified it yet.
+unsupported native targets refuse explicitly. Local CPU qualification passed on
+source `42b24f78dfcaf34a0bfce84252abc13429acbd87`; a complete public export and
+runtime rendering with this selection have not run.
 
 The player feature `cooked-native-shaders` propagates a finite renderer selection:
 output, diagnostics, shadows, PBR materials, sprites, world text, screen-space UI
@@ -50,5 +51,46 @@ returning a renderer; this slice does not change pipelines, render graph,
 shader arithmetic, layouts or appearance. Persistent Metal/DX12 caches, per-level
 recorded permutation coverage, asynchronous future-permutation fallback, deferred
 driver behavior and the whole rendered-game shader-stall gate remain open. No
-performance, cache-hit, appearance or phase-gate claim follows from source or
-pure Python controls. Screen/window capture and CUA remain prohibited.
+performance, cache-hit, appearance or phase-gate claim follows from this CPU
+qualification. Screen/window capture, CUA and native-window launches remain
+prohibited.
+
+## Local qualification and retained failures
+
+The [portable packet](evidence/shipping-cooked-shaders/manifest.json) retains the
+frozen source, exact commands, actual Cargo messages, raw logs and generated
+shader bytes. Rust 1.99.0 ran arm64 CI-profile, locked/offline, jobs 2/Rayon 2.
+The successful checks were 39 Python controls, 36 cooker tests (including two
+new audit controls), 188 cooked renderer CPU tests with 54 ignored GPU tests,
+strict all-target Clippy for cooker/renderer/player, the fast-mode cooked
+native-window player build, and the ordinary feature-off player check. The
+renderer fixture suite uses deterministic physics; the actual player/family
+audit separately uses fast physics. The compiled player was never executed.
+
+The actual compiler-selected target output admitted all eight families and 45
+artifacts totaling 198,123 bytes. The copied player SHA-256 is
+`90a85262ccc8fe0c70d3503739c6b626fe44c563a4725213107d1651ef24c5b8`.
+CPU 001 retained three renderer failures caused by deterministic fixtures in a
+fast-mode test build (185 passed); CPU 002 corrected only that command and passed
+188 tests, then stopped the player build at the declared cumulative 2 GiB target
+growth limit. Root separately granted a 4 GiB cumulative limit for CPU 003.
+Its four remaining stages passed without source changes. Final target growth
+was 2,856,601,093 bytes from the original baseline; the supervisor and owned
+children were reaped before the target was released. The first CLI expectation
+failure is also retained as a transcript-derived observation, not a raw log.
+
+Replay performs data validation only and never launches a player or compiler:
+
+```sh
+python3 docs/spikes/evidence/shipping-cooked-shaders/verify.py
+# On the producing machine, also verify original files and retained executables:
+python3 docs/spikes/evidence/shipping-cooked-shaders/verify.py --originals --binaries \
+  --git-source 42b24f78dfcaf34a0bfce84252abc13429acbd87
+```
+
+`--source-root` additionally requires unchanged producing code/build inputs and
+refuses later compositions that differ; the updated prose is excluded from that
+code-input comparison. Neither the CI profile nor the data replay establishes a
+shipping-profile runtime, target-driver pipeline creation or rendered shader-stall
+result. Native MSL/SPIR-V/HLSL emission here is host-cooker evidence; only this Mac
+was compiled, and no other backend execution is implied.
