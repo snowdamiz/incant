@@ -31,6 +31,23 @@ passes local tests and leaves production behavior unchanged. Both desktop jobs
 and Windows Wasm conformance passed on checkpoint44; that checkpoint's separate
 general failure prevented promotion.
 
+## Cooked MetalFX boundary — numerical Metal parity qualified
+
+The trusted aggregate now includes the two fixed pack/normalize programs:
+25 families and 144 artifacts. Complete-family admission preserves partial-mode
+refusals, unchanged equations and cache preparation. It does not enable the vendor
+scaler or change default quality policy. 54 cooker, 191 default/native-MetalFX,
+224 full cooked/cache and three admission controls pass, with both final feature
+guards, strict lint and 39 Python controls. The public player is compile-only;
+its actual feature graph leaves `native-metalfx` disabled.
+
+Two Apple M5 Pro / Metal children pass the existing 17-case boundary oracle;
+all five raw planes match exactly across 87,040 bytes per mode, with zero parity
+tolerance. Both initial CPU setup failures are preserved. No vendor scaler,
+player, window or capture ran, and no vendor appearance, public export, cache-hit,
+shader-stall or performance gate is claimed.
+[Source and portable evidence](docs/spikes/cooked-metalfx-boundary.md).
+
 ## Cooked motion/history — complete family and numerical Metal parity qualified
 
 The trusted cooked-native selection includes the fixed motion, integer-owner,
@@ -46,8 +63,8 @@ comparison failed an unsupported stationary-precision assumption; that failure
 is preserved alongside a reviewed Python-only replay of the same bytes. No
 renderer tolerance or existing analytical gate changed. The player was compiled
 only. This is neither reconstruction quality nor a full shipping export,
-cache-hit, shader-stall or performance qualification. MetalFX boundary shaders
-remain outside the cooked catalog.
+cache-hit, shader-stall or performance qualification. This 23-family snapshot
+preceded the separate MetalFX boundary result recorded above.
 [Source, correction and portable evidence](docs/spikes/cooked-temporal-export.md).
 
 ## Cooked SSAO — complete family and numerical Metal parity qualified
