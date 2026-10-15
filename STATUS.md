@@ -56,8 +56,11 @@ remain open. [Scoped evidence and replay](docs/spikes/core-locale-native-window.
 The profiler now rejects an individual unwritten pair and failed counter
 sentinels instead of reporting false zero or enormous durations. Eleven targeted
 CPU controls and strict lint pass. Two bounded Metal diagnostics retain the
-missing second-pass timestamps even though their numerical output is exact;
-the observation cause and complete GPU timing remain open.
+missing second-pass timestamps even though their numerical output is exact.
+A subsequent unchanged-workload diagnostic restores both pairs by resolving the
+queries after the sampled GPU submission completes. The production profiler
+already uses deferred resolution; this is a diagnostic scheduling finding.
+Complete rendered-game GPU timing remains open.
 [Decoder correction and retained observations](docs/spikes/gpu-timestamp-invalid-counters.md).
 
 ## Native presentation observer — complete gameplay replay verified
