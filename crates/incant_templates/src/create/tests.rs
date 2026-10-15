@@ -117,8 +117,23 @@ fn checks_complete_ancestors_before_creating_a_destination() {
         destination(&root.join("missing").join("child")),
         Err(TemplateError::Io(error)) if error.kind() == std::io::ErrorKind::NotFound
     ));
+    // Windows PathBuf::push/join normalizes dot segments after a verbatim
+    // prefix. Keep the literal input intact so the refusal is actually tested.
+    let mut traversal = root.clone().into_os_string();
+    for part in [
+        std::path::MAIN_SEPARATOR_STR,
+        "missing",
+        std::path::MAIN_SEPARATOR_STR,
+        "..",
+        std::path::MAIN_SEPARATOR_STR,
+        "child",
+    ] {
+        traversal.push(part);
+    }
+    let traversal = PathBuf::from(traversal);
+    assert!(traversal.components().any(|c| c == Component::ParentDir));
     assert!(matches!(
-        destination(&root.join("missing").join("..").join("child")),
+        destination(&traversal),
         Err(TemplateError::Destination)
     ));
     assert!(!root.join("missing").exists());
