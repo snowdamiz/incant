@@ -7,12 +7,42 @@ mod bloom_source;
 #[cfg(feature = "metal-binary-archives")]
 #[path = "build/metal_archive_identity.rs"]
 mod metal_archive_identity;
+#[cfg(feature = "cooked-metalfx-boundary")]
+#[path = "src/metalfx/source.rs"]
+mod metalfx_source;
 #[cfg(feature = "cooked-temporal")]
 #[path = "src/lighting/temporal_source.rs"]
 mod temporal_source;
 fn main() {
     #[cfg(feature = "metal-binary-archives")]
     metal_archive_identity::emit();
+    #[cfg(feature = "cooked-metalfx-boundary")]
+    if std::env::var("CARGO_CFG_TARGET_ARCH").as_deref() != Ok("wasm32") {
+        use incant_shader_cook::metalfx_boundary::{self, Kind};
+        for path in [
+            "src/metalfx/source.rs",
+            "src/metalfx/common.wgsl",
+            "src/metalfx/alpha.wgsl",
+            "src/metalfx/prepare.wgsl",
+            "src/metalfx/normalize.wgsl",
+        ] {
+            println!("cargo:rerun-if-changed={path}");
+        }
+        let output =
+            std::path::PathBuf::from(std::env::var_os("OUT_DIR").expect("Cargo output directory"));
+        for (kind, name) in [(Kind::Pack, "pack"), (Kind::Normalize, "normalize")] {
+            let source = metalfx_source::source(kind == Kind::Normalize);
+            let bundle = metalfx_boundary::cook(kind, &source)
+                .expect("fixed MetalFX boundary source and ABI");
+            metalfx_boundary::write_bundle(
+                kind,
+                &bundle,
+                &output.join(format!("metalfx-{name}-shaders")),
+            )
+            .expect("write complete MetalFX boundary");
+        }
+    }
+
     #[cfg(feature = "cooked-ssao")]
     if std::env::var("CARGO_CFG_TARGET_ARCH").as_deref() != Ok("wasm32") {
         use incant_shader_cook::ambient_occlusion::{self, Kind};
