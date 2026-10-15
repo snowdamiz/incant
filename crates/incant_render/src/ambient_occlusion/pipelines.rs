@@ -62,6 +62,7 @@ fn texture(binding: u32, depth: bool) -> wgpu::BindGroupLayoutEntry {
 impl System {
     pub fn new(renderer: &Renderer, settings: AmbientOcclusion) -> Result<Self> {
         let device = &renderer.device;
+        let cache = renderer.pipeline_cache.cache.as_ref();
         let globals = device.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
             label: Some("SSAO material frame"),
             entries: &[crate::materials::frame_entry(), texture(1, false)],
@@ -106,7 +107,7 @@ impl System {
                                 ..key
                             },
                             &[&renderer.materials.globals, &renderer.materials.layout],
-                            None,
+                            cache,
                         ),
                     );
                     shading.insert(
@@ -121,7 +122,7 @@ impl System {
                                 &renderer.environments.layout,
                                 &renderer.lighting.layout,
                             ],
-                            None,
+                            cache,
                         ),
                     );
                 }
@@ -137,6 +138,7 @@ impl System {
             &shader,
             "fragment",
             "SSAO bounded sampling",
+            cache,
         );
         let filter_layout = device.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
             label: Some("SSAO plane-aware filter"),
@@ -158,6 +160,7 @@ impl System {
                 &filter,
                 entry,
                 "SSAO plane-aware filter",
+                cache,
             )
         });
         Ok(Self {
@@ -195,6 +198,7 @@ fn fullscreen(
     shader: &wgpu::ShaderModule,
     entry: &str,
     label: &str,
+    cache: Option<&wgpu::PipelineCache>,
 ) -> wgpu::RenderPipeline {
     let layout = device.create_pipeline_layout(&wgpu::PipelineLayoutDescriptor {
         label: Some(label),
@@ -224,6 +228,6 @@ fn fullscreen(
             })],
         }),
         multiview_mask: None,
-        cache: None,
+        cache,
     })
 }
