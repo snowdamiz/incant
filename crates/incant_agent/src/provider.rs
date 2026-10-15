@@ -4,8 +4,10 @@ use serde_json::{Value, json};
 use std::io::{BufRead, BufReader, Read};
 use std::time::Duration;
 use zeroize::Zeroizing;
+mod local;
 #[cfg(test)]
 mod tests;
+pub use local::LocalResponsesProvider;
 
 pub struct Completion {
     pub output: Vec<Value>,
@@ -27,6 +29,23 @@ pub trait Provider {
     ) -> Result<Completion, AgentError>;
     fn model(&self) -> &str;
 }
+impl<T: Provider + ?Sized> Provider for Box<T> {
+    fn check_active(&self) -> Result<(), AgentError> {
+        (**self).check_active()
+    }
+    fn model(&self) -> &str {
+        (**self).model()
+    }
+    fn complete(
+        &mut self,
+        input: &[Value],
+        tools: &[Value],
+        max_output_tokens: u64,
+        on_text: &mut dyn FnMut(&str),
+    ) -> Result<Completion, AgentError> {
+        (**self).complete(input, tools, max_output_tokens, on_text)
+    }
+}
 /// Credentials are deliberately neither Serialize nor Debug. Calls go directly
 /// to OpenAI; no Incant service is involved and responses are not stored remotely.
 pub struct OpenAiProvider {
@@ -36,6 +55,8 @@ pub struct OpenAiProvider {
     model: String,
     base_url: String,
     active: Option<ActiveCheck>,
+    send_authorization: bool,
+    service: &'static str,
 }
 type TokenSource = Box<dyn Fn(bool) -> Result<Zeroizing<String>, AgentError> + Send + Sync>;
 type ActiveCheck = Box<dyn Fn() -> Result<(), AgentError> + Send + Sync>;
@@ -129,6 +150,8 @@ impl OpenAiProvider {
             model,
             base_url: "https://api.openai.com/v1".into(),
             active: None,
+            send_authorization: true,
+            service: "OpenAI",
         })
     }
     pub fn models(&self) -> Result<Value, AgentError> {
@@ -172,15 +195,19 @@ impl Provider for OpenAiProvider {
             // store's cross-process lock. Long turns must not retain stale tokens.
             let token = (self.credential)(force_refresh)?;
             force_refresh = false;
-            let response = self
+            let mut request = self
                 .client
                 .post(format!("{}/responses", self.base_url))
-                .bearer_auth(token.as_str())
-                .json(&body)
-                .send()
-                .map_err(|_| {
-                    AgentError::Provider("OpenAI request failed; transport details redacted".into())
-                })?;
+                .json(&body);
+            if self.send_authorization {
+                request = request.bearer_auth(token.as_str());
+            }
+            let response = request.send().map_err(|_| {
+                AgentError::Provider(format!(
+                    "{} request failed; transport details redacted",
+                    self.service
+                ))
+            })?;
             let status = response.status();
             if status.as_u16() == 401
                 && self.renewable
@@ -197,7 +224,8 @@ impl Provider for OpenAiProvider {
             }
             if !status.is_success() {
                 return Err(AgentError::Provider(format!(
-                    "OpenAI returned HTTP {}",
+                    "{} returned HTTP {}",
+                    self.service,
                     status.as_u16()
                 )));
             }

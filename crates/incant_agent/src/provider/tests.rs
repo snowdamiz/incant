@@ -6,17 +6,27 @@ use std::{
     thread,
 };
 
-struct Request {
-    head: String,
-    body: Vec<u8>,
+pub(super) struct Request {
+    pub(super) head: String,
+    pub(super) body: Vec<u8>,
 }
-fn server(replies: Vec<(u16, String)>) -> (String, thread::JoinHandle<Vec<Request>>) {
+pub(super) fn server(replies: Vec<(u16, String)>) -> (String, thread::JoinHandle<Vec<Request>>) {
+    server_with_headers(
+        replies
+            .into_iter()
+            .map(|(status, body)| (status, body, String::new()))
+            .collect(),
+    )
+}
+pub(super) fn server_with_headers(
+    replies: Vec<(u16, String, String)>,
+) -> (String, thread::JoinHandle<Vec<Request>>) {
     let listener = TcpListener::bind("127.0.0.1:0").unwrap();
     listener.set_nonblocking(true).unwrap();
     let url = format!("http://{}", listener.local_addr().unwrap());
     let worker = thread::spawn(move || {
         let mut requests = vec![];
-        for (status, body) in replies {
+        for (status, body, headers) in replies {
             let deadline = std::time::Instant::now() + Duration::from_secs(5);
             let (mut socket, _) = loop {
                 match listener.accept() {
@@ -68,7 +78,7 @@ fn server(replies: Vec<(u16, String)>) -> (String, thread::JoinHandle<Vec<Reques
             });
             write!(
                 socket,
-                "HTTP/1.1 {status} Test\r\nContent-Length: {}\r\nConnection: close\r\n\r\n{body}",
+                "HTTP/1.1 {status} Test\r\nContent-Length: {}\r\nConnection: close\r\n{headers}\r\n{body}",
                 body.len()
             )
             .unwrap();
@@ -77,7 +87,7 @@ fn server(replies: Vec<(u16, String)>) -> (String, thread::JoinHandle<Vec<Reques
     });
     (url, worker)
 }
-fn completion_event() -> String {
+pub(super) fn completion_event() -> String {
     format!(
         "data: {}\n\n",
         json!({"type":"response.completed","response":{"output":[{"type":"function_call","name":"doc_query","call_id":"test-call","arguments":"{\"path\":\"\"}"}],"usage":{"input_tokens":5,"output_tokens":4}}})
@@ -203,6 +213,8 @@ fn active_metadata_checks_never_resolve_or_refresh_credentials() {
         observed.fetch_add(1, Ordering::Relaxed);
         Err(AgentError::Provider("selection changed".into()))
     }));
+    let provider: Box<dyn Provider> = Box::new(provider);
+    assert_eq!(provider.model(), "fixture-model");
     for _ in 0..3 {
         assert!(matches!(
             provider.check_active(),

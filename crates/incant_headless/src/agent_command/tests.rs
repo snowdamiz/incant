@@ -39,6 +39,7 @@ impl Fixture {
             project: self.source.clone(),
             prompt: "Inspect the fixture".into(),
             model: "synthetic".into(),
+            local_endpoint: None,
             max_tokens: limit,
             max_output_tokens: 25000,
             journal: None,
@@ -91,6 +92,41 @@ impl Fixture {
     }
 }
 use std::fs;
+
+#[test]
+fn local_provider_is_an_explicit_cli_option_not_a_project_or_account_override() {
+    let args = crate::Args::try_parse_from([
+        "incant",
+        "agent",
+        "project.json",
+        "Inspect",
+        "--model",
+        "local-fixture",
+        "--local-endpoint",
+        "http://127.0.0.1:8000/v1",
+    ])
+    .unwrap();
+    let crate::Cli::Agent(options) = args.command else {
+        panic!("agent expected")
+    };
+    assert_eq!(
+        options.local_endpoint.as_deref(),
+        Some("http://127.0.0.1:8000/v1")
+    );
+    let args = crate::Args::try_parse_from([
+        "incant",
+        "agent",
+        "project.json",
+        "Inspect",
+        "--model",
+        "saved-model",
+    ])
+    .unwrap();
+    let crate::Cli::Agent(options) = args.command else {
+        panic!("agent expected")
+    };
+    assert!(options.local_endpoint.is_none());
+}
 
 enum Behavior {
     Success,
