@@ -50,6 +50,9 @@ class NativeShaders(unittest.TestCase):
                                       'file': file, 'bytes': len(data), 'sha256': sha256(data)})
             if family == 'output':
                 paths = ['src/lib.rs', 'src/contract.rs', 'src/emit.rs', 'src/manifest.rs', 'src/audit.rs', 'Cargo.toml']
+            elif family.startswith('bloom-'):
+                paths = ['src/bloom/' + n for n in ('mod.rs', 'contract.rs', 'emit.rs')]
+                paths += ['src/audit.rs', 'Cargo.toml', '../incant_render/src/bloom/source.rs']
             elif family == 'cluster':
                 paths = ['src/compute/' + n for n in ('mod.rs', 'contract.rs', 'emit.rs', 'static_workgroup.rs', 'spirv_workgroup.rs')]
                 paths += ['src/audit.rs', 'Cargo.toml']
@@ -58,7 +61,7 @@ class NativeShaders(unittest.TestCase):
                                                         'ui.rs', 'text.rs', 'material.rs', 'material_emit.rs')]
                 paths += ['src/audit.rs', 'Cargo.toml']
             receipt = {'format': 'incant-fixed-shader-build', 'version': 1, 'contract': shaders.CONTRACTS[family],
-                'source_sha256': sha256(b'\n'.join((ROOT / 'crates/incant_render/src' / n).read_bytes() for n in shaders.SOURCES[family])),
+                'source_sha256': sha256(shaders.source_bytes(family)),
                 'producer_sha256': sha256(b'\n'.join((ROOT / 'crates/incant_shader_cook' / n).read_bytes() for n in paths)),
                 'artifacts': artifacts}
             compact = family == 'cluster'
@@ -103,7 +106,9 @@ class NativeShaders(unittest.TestCase):
         for family, path, index in [('output', 'output/cooked.rs', 0),
                 ('diagnostic', 'geometry_shader/cooked.rs', 0), ('shadow', 'geometry_shader/cooked.rs', 1),
                 ('material', 'material_shader.rs', 0), ('sprite', 'sprites/shader/cooked.rs', 0),
-                ('ui', 'ui/shader/cooked.rs', 0), ('text', 'text/shader/cooked.rs', 0), ('cluster', 'lighting/cooked.rs', 0)]:
+                ('ui', 'ui/shader/cooked.rs', 0), ('text', 'text/shader/cooked.rs', 0), ('cluster', 'lighting/cooked.rs', 0),
+                ('bloom-prefilter', 'bloom/cooked.rs', 0), ('bloom-downsample', 'bloom/cooked.rs', 1),
+                ('bloom-upsample', 'bloom/cooked.rs', 2), ('bloom-display', 'bloom/cooked.rs', 3)]:
             source = (ROOT / 'crates/incant_render/src' / path).read_text()
             contracts = re.findall(r'(?:const CONTRACT: &str = |expected: )"([^"\n]+)"', source)
             self.assertEqual(shaders.CONTRACTS[family], contracts[index])
@@ -124,13 +129,34 @@ class NativeShaders(unittest.TestCase):
         with self.assertRaises(ValueError):
             shaders.target_admission('cooked', 'wasm32-unknown-unknown')
 
-    def test_complete_target_and_all_eight_families_are_reported_without_publication(self):
+    def test_complete_target_and_all_twelve_families_are_reported_without_publication(self):
         result = self.audit()
         self.assertEqual(set(result['families']), set(shaders.DIRECTORIES))
-        self.assertEqual(sum(len(f['artifacts']) for f in result['families'].values()), 45)
+        self.assertEqual(sum(len(f['artifacts']) for f in result['families'].values()), 69)
         self.assertFalse(result['runtime_wgsl_in_selected_ordinary_catalog'])
         self.assertEqual(result['compiler_features']['incant_render'], sorted(shaders.COOKED))
         self.assertFalse((self.output / 'export.json').exists())
+
+    def test_each_missing_bloom_program_refuses_complete_catalog_admission(self):
+        for family in ['bloom-prefilter', 'bloom-downsample', 'bloom-upsample', 'bloom-display']:
+            path = self.output / shaders.DIRECTORIES[family] / 'audit.json'
+            data = path.read_bytes()
+            path.unlink()
+            with self.assertRaises(OSError):
+                self.audit()
+            path.write_bytes(data)
+
+    def test_bloom_display_source_uses_exact_single_guarded_composition(self):
+        original = (ROOT / 'crates/incant_render/src/output.wgsl').read_bytes()
+        seam = b'var color = mix(display.backdrop.rgb,tone_map(radiance),coverage);'
+        self.assertEqual(original.count(seam), 1)
+        expected = b'\n'.join([original.replace(seam, b'var color = display.backdrop.rgb; if inside { color = bloom_color(radiance,coverage,position.xy); }'),
+            (ROOT / 'crates/incant_render/src/tone_map.wgsl').read_bytes(),
+            (ROOT / 'crates/incant_render/src/bloom/output.wgsl').read_bytes()])
+        self.assertEqual(shaders.source_bytes('bloom-display'), expected)
+        with mock.patch.object(shaders, 'read', side_effect=lambda path, limit: b'changed output seam' if path.name == 'output.wgsl' and path.parent.name == 'src' else path.read_bytes()):
+            with self.assertRaisesRegex(ValueError, 'seam changed'):
+                shaders.source_bytes('bloom-display')
 
     def test_deterministic_physics_flag_preserved(self):
         self.messages[0]['features'].append('physics-deterministic')
