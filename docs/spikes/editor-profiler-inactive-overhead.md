@@ -175,3 +175,9 @@ passed `--originals --binaries --git-source`; it does not claim the moved live S
 is the old measured input. The 424-record historical archive is unchanged. Full
 composition CPU logs and copied executables remain external and hash-bound by the
 compact receipt; their availability is separate from default portable replay.
+
+Main343 (`08a1161fe7217f24b15cd8d3f4044f88f689182d`) was then merged before
+publication. Its subtree-duplication/editor changes do not alter this fixture or
+the measured Session tick path. The historical replay and the 28 composition
+receipt files were independently checked after that merge; no new timing result
+is claimed for the publication tree.
