@@ -119,3 +119,26 @@ Optional checks require the retained external originals, copied binaries, author
 assets/compiler dependencies or historical Git source. The outcome prose is a
 successor to the frozen proposal; historical source verification uses the exact
 producing commits and does not relabel the updated document as executed source.
+
+## Manual fixture selection after measurement
+
+A source successor gates the entire `inactive_core` integration-test target behind
+the default-off `diagnostic-inactive-profiler` feature. Broad default workspace
+`--ignored` CI therefore cannot select the external-input route. The gate does
+not enable `agent-profiler`: OFF and ON remain separately selectable, and no
+library/runtime implementation changes. The two self-contained fixture controls
+also live in that explicit target.
+
+To run only those controls, select `--features diagnostic-inactive-profiler` on
+`cargo test -p incant_agent_native --test inactive_core`; add `agent-profiler` for
+the ON variant. The ignored full Core route still requires a frozen input plan
+and separately coordinated execution. Listing it does not execute it:
+
+```sh
+./tools/cargo test -p incant_agent_native --test inactive_core \
+  --features diagnostic-inactive-profiler --locked --offline -- --ignored --list
+```
+
+The original b329 artifacts predate this selection-only gate and remain the
+producing identity for every measurement above. A new selector qualification
+must not be described as a repeated Core run or timing experiment.
