@@ -1,5 +1,5 @@
 //! Host chronology is independent of the replaceable game's simulation clock.
-//! Only native CPU programs opt in; old module/GPU hosts keep typed refusal.
+//! Plain and CPU-rendered native programs opt in; GPU owners keep typed refusal.
 mod input;
 use crate::session::{Player, Result, Settings};
 use incant_game_runtime::GameSeed;
@@ -41,15 +41,15 @@ impl Restart {
             #[cfg(not(feature = "render-input"))]
             Some(settings) => match *settings {},
         };
-        #[allow(unreachable_patterns)] // all-native builds have just one program kind
-        let seed = match program {
-            SessionProgram::Bytecode(script) if supported => Some(GameSeed::new(
+        let seed = if supported {
+            Some(GameSeed::new(
                 scene.clone(),
-                script.clone(),
+                program.clone(),
                 actions.clone(),
                 clips.to_vec(),
-            )?),
-            _ => None,
+            )?)
+        } else {
+            None
         };
         Ok(Self {
             seed,
@@ -189,5 +189,71 @@ let calls=0;exports.default={update(t){calls++;if(calls!==t.clock.tick)throw Err
         assert_eq!(restart.boundaries[1].host_step, 6);
         assert_eq!(frames, 2 * (3 * 44117u128 / 144) + 2 * 44117u128 / 144);
         assert_eq!(game.world().unwrap().tick(), 2);
+    }
+
+    #[cfg(feature = "static-conformance")]
+    #[test]
+    fn real_static_sdk_request_restarts_through_the_player_owner() {
+        let scene = CookedScene::new(
+            StableId([9; 16]),
+            144,
+            vec![CookedEntity {
+                id: StableId(1u128.to_be_bytes()),
+                parent: None,
+                transform: Default::default(),
+                velocity: None,
+            }],
+        )
+        .unwrap();
+        let program = SessionProgram::Static(
+            incant_wasm_runtime::embedded::linked("rust-session-once").unwrap(),
+        );
+        let mut restart =
+            Restart::prepare(&scene, &program, &Default::default(), &[], &None).unwrap();
+        let mut game =
+            Player::new(scene, program, Default::default(), vec![], 44117, None, 8).unwrap();
+        restart.enable(&mut game).unwrap();
+        let mut frames = 0u128;
+        for step in 1..=3 {
+            let before = game
+                .world()
+                .unwrap()
+                .spatial_view()
+                .unwrap()
+                .identity()
+                .clone();
+            let count = game.next_output_frames().unwrap();
+            let mut pcm = vec![9.; count * 2];
+            game.tick(&[], &mut pcm).unwrap();
+            assert_eq!(game.world().unwrap().tick(), 1);
+            assert_eq!(
+                game.world().unwrap().snapshot()[0].transform.translation[0],
+                1.
+            );
+            frames += count as u128;
+            assert!(restart.accept(&mut game, step, frames).unwrap());
+            assert_ne!(
+                game.world().unwrap().spatial_view().unwrap().identity(),
+                &before
+            );
+            assert_eq!(game.world().unwrap().tick(), 0);
+            assert_eq!(
+                game.world().unwrap().snapshot()[0].transform.translation[0],
+                0.
+            );
+            assert_eq!(restart.generation, step + 1);
+            assert_eq!(restart.boundaries.last().unwrap().host_step, step);
+            assert_eq!(restart.boundaries.last().unwrap().simulation_tick, 1);
+            assert_eq!(
+                restart.boundaries.last().unwrap().completed_generation,
+                step
+            );
+            assert_eq!(
+                restart.boundaries.last().unwrap().output_frames,
+                frames.to_string()
+            );
+            assert!(!restart.accept(&mut game, step, frames).unwrap());
+        }
+        assert_eq!(restart.boundaries.len(), 3);
     }
 }
