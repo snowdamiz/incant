@@ -4,6 +4,11 @@ The current phase remains **Phase 1: Core engine**. The
 [Phase 1 review ledger](docs/gates/phase1-review.md) maps each exit requirement to
 its recorded evidence and remaining qualification. The actual native texture,
 compatible static-model and compatible-animation workflows are verified on this Mac;
+the [sampled Core locale proof](docs/spikes/core-locale-sampled-captures.md)
+now also verifies winning HUD pixels, Arabic health direction, CJK glyphs and
+normal/narrow pseudo layouts in retained offscreen Metal frames. Earlier
+incomplete native-window attempts remain historical; these samples do not
+establish continuous motion, window presentation or FPS.
 [release checkpoint47](docs/spikes/release-checkpoint-47.md) contains the tested
 main359 tree after all 23 required contexts and eight candidate workflows passed.
 Later main changes remain outside that release baseline. Rendering quality and full rendered-game
@@ -43,6 +48,24 @@ passes local tests and leaves production behavior unchanged. Both desktop jobs
 and Windows Wasm conformance passed on checkpoint44; that checkpoint's separate
 general failure prevented promotion.
 
+## Sampled Core locale pixels — verified on this Mac
+
+Four fresh scene-bound shipping players from source `50b5408b` passed five full
+CPU routes and then the same five routes with 37 selected Metal frames. Entire
+gameplay/HUD reports and PCM remain exact to their same-package CPU baselines,
+including loss, restart and the final winning state. The narrow pseudo case
+uses the same pseudo player at a separate 320×480 logical viewport.
+
+Independent review of 13 retained original PNGs accepts readable Core winning
+text, joined Arabic with right-to-left damaged health pips, complete CJK glyphs,
+expanded pseudo text and narrow loss/win wrapping without observed clipping or
+HUD overlap. These samples close the previously missing winning/narrow pixel
+observations; they do not relabel earlier focus-paused or locked-window runs as
+complete. All five children and the wrapper are reaped. Native presentation,
+continuous motion, temporal reconstruction, translation quality, FPS and phase
+approval remain outside this result.
+[Images, exact sources and portable replay](docs/spikes/core-locale-sampled-captures.md).
+
 ## Native explicit-state coroutines — CPU behavior and save/restore qualified
 
 Native TypeScript behaviors can now start deterministic cooperative tasks, wait
@@ -55,6 +78,7 @@ registry files remain unchanged. Portable SDK and registry checks also pass.
 Earlier compile failures and all resource charges remain retained. Shipping-player
 export, timing/2 ms budget, Web/Wasm parity and phase gates are not established by
 this result. [Contract and evidence](docs/spikes/native-coroutines.md).
+
 
 ## Packaged-player frame capture — integrated CPU and Metal qualification
 
@@ -70,7 +94,8 @@ configurations, native-window compilation and the same-source Metal rendering
 control. Earlier results and the original fixture failure remain retained.
 The later main365 join changes only DX12 diagnostic tests/tools and documentation;
 capture/player/render implementation bytes remain identical to the qualified
-composition. Core and locale image collection is next. This does not establish
+composition. [Core and locale sampled image collection](docs/spikes/core-locale-sampled-captures.md)
+now passes with exact full-route CPU parity and independent retained-image review. This does not establish
 native presentation, temporal reconstruction quality or performance.
 [Usage and evidence](docs/spikes/native-player-frame-capture.md).
 
