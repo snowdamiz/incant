@@ -11,14 +11,28 @@ pub(super) fn allocation(error: Error) -> ScriptError {
     }
 }
 fn expired(deadline: &Mutex<ExecutionBudget>) -> Option<ScriptError> {
-    deadline
+    #[cfg(feature = "diagnostic-script-budget")]
+    let observed = incant_profile::diagnostic::budget::Span::start(
+        incant_profile::diagnostic::budget::Origin::Explicit,
+    );
+    let result = deadline
         .lock()
         .unwrap_or_else(|e| e.into_inner())
         .check()
-        .err()
+        .err();
+    #[cfg(feature = "diagnostic-script-budget")]
+    observed.finish(result.is_none());
+    result
 }
 pub(super) fn check_deadline(deadline: &Mutex<ExecutionBudget>) -> Result<(), ScriptError> {
-    deadline.lock().unwrap_or_else(|e| e.into_inner()).check()
+    #[cfg(feature = "diagnostic-script-budget")]
+    let observed = incant_profile::diagnostic::budget::Span::start(
+        incant_profile::diagnostic::budget::Origin::Explicit,
+    );
+    let result = deadline.lock().unwrap_or_else(|e| e.into_inner()).check();
+    #[cfg(feature = "diagnostic-script-budget")]
+    observed.finish(result.is_ok());
+    result
 }
 fn primitive_text(value: Value<'_>) -> Option<String> {
     // No Coerced<String>, toString(), stack getter or source dump. String values

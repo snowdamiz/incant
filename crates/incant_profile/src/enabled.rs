@@ -328,6 +328,17 @@ pub(crate) fn diagnostic_reject(generation: u64) {
         s.diagnostic.reject();
     }
 }
+#[cfg(feature = "diagnostic-script-budget")]
+pub(crate) fn diagnostic_budget_unscoped() {
+    let generation = ACTIVE.load(Ordering::Acquire);
+    if generation == 0 {
+        return;
+    }
+    let mut s = state();
+    if ACTIVE.load(Ordering::Acquire) == generation {
+        s.diagnostic.reject_foreign_thread();
+    }
+}
 #[cfg(feature = "diagnostic-script-phases")]
 pub(crate) fn diagnostic_append(row: crate::diagnostic::RawRow) {
     let mut s = state();

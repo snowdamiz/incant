@@ -16,6 +16,8 @@ pub(crate) struct RawRow {
     pub numeric_calls: [u16; NUMERIC_REGIONS.len()],
     #[cfg(feature = "diagnostic-navigation")]
     pub navigation: super::navigation::Counters,
+    #[cfg(feature = "diagnostic-script-budget")]
+    pub budget_checks: super::budget::Counters,
     pub source_ns: [u64; MAX_SOURCES],
     pub source_calls: [u16; MAX_SOURCES],
     pub trace_ns: u64,
@@ -34,6 +36,8 @@ impl RawRow {
             numeric_calls: [0; NUMERIC_REGIONS.len()],
             #[cfg(feature = "diagnostic-navigation")]
             navigation: Default::default(),
+            #[cfg(feature = "diagnostic-script-budget")]
+            budget_checks: Default::default(),
             source_ns: [0; MAX_SOURCES],
             source_calls: [0; MAX_SOURCES],
             trace_ns: 0,
@@ -63,6 +67,8 @@ pub struct Row {
     pub numeric_calls: [u16; NUMERIC_REGIONS.len()],
     #[cfg(feature = "diagnostic-navigation")]
     pub navigation: super::navigation::Counters,
+    #[cfg(feature = "diagnostic-script-budget")]
+    pub budget_checks: super::budget::Counters,
     /// Slots join the existing report's exact source identities.
     #[serde(serialize_with = "serialize_array")]
     pub source_ns: [u64; MAX_SOURCES],
@@ -84,6 +90,8 @@ pub struct Report {
     pub numeric_regions: [&'static str; NUMERIC_REGIONS.len()],
     #[cfg(feature = "diagnostic-navigation")]
     pub navigation_regions: [&'static str; 3],
+    #[cfg(feature = "diagnostic-script-budget")]
+    pub budget_check_regions: [&'static str; 4],
     pub interpretation: &'static str,
     pub rows: Vec<Row>,
 }
@@ -133,6 +141,15 @@ impl Storage {
             ordinal: attempted,
         })
     }
+    #[cfg(feature = "diagnostic-script-budget")]
+    pub fn reject_foreign_thread(&mut self) {
+        if self
+            .owner
+            .is_some_and(|owner| owner != thread::current().id())
+        {
+            self.valid = false;
+        }
+    }
     pub fn reject(&mut self) {
         self.valid = false;
     }
@@ -156,10 +173,14 @@ impl Storage {
         Report {
             diagnostic_only: true,
             eligible_for_performance_gate: false,
-            schema: if cfg!(feature = "diagnostic-navigation") {
-                2
-            } else {
-                1
+            schema: match (
+                cfg!(feature = "diagnostic-navigation"),
+                cfg!(feature = "diagnostic-script-budget"),
+            ) {
+                (false, false) => 1,
+                (true, false) => 2,
+                (false, true) => 3,
+                (true, true) => 4,
             },
             max_rows: MAX_FRAMES,
             raw_row_bytes: std::mem::size_of::<RawRow>(),
@@ -174,7 +195,11 @@ impl Storage {
             numeric_regions: NUMERIC_REGIONS,
             #[cfg(feature = "diagnostic-navigation")]
             navigation_regions: super::navigation::REGIONS,
-            interpretation: if cfg!(feature = "diagnostic-navigation") {
+            #[cfg(feature = "diagnostic-script-budget")]
+            budget_check_regions: super::budget::REGIONS,
+            interpretation: if cfg!(feature = "diagnostic-script-budget") {
+                "Major regions partition trace_ns. Budget-check durations are nested monotonic wall observations around unchanged interrupt/explicit lock/check boundaries, split inside/outside source callbacks; clock_reads counts existing thread-CPU clock attempts within those checks, excluding initialization/reset. Checks inside navigation are also nested in its spans when enabled. Refused checks stay visible; observer work remains included and is not an exclusive CPU cost, saving or performance gate."
+            } else if cfg!(feature = "diagnostic-navigation") {
                 "Major regions partition trace_ns. Navigation queries are nested in source callbacks; initial/repeated_start lookup spans are nested in queries. They are never additive exclusive time. Initial_start excludes corridor endpoint scans; failed means an error/absent observed result, not necessarily a failed optional shortcut. whole_tick_ns is the existing ScriptTick in this same frame. Instrumentation stays included; no gate or speedup inference."
             } else {
                 "Major regions partition trace_ns. Callback and numeric spans are nested, not additive. whole_tick_ns is the existing ScriptTick scope in this same frame. Instrumentation and residual overhead remain included; no gate or speedup inference."
@@ -196,6 +221,8 @@ impl Storage {
                     numeric_calls: r.numeric_calls,
                     #[cfg(feature = "diagnostic-navigation")]
                     navigation: r.navigation.clone(),
+                    #[cfg(feature = "diagnostic-script-budget")]
+                    budget_checks: r.budget_checks.clone(),
                     source_ns: r.source_ns,
                     source_calls: r.source_calls,
                 })
