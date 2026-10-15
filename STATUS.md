@@ -42,6 +42,20 @@ passes local tests and leaves production behavior unchanged. Both desktop jobs
 and Windows Wasm conformance passed on checkpoint44; that checkpoint's separate
 general failure prevented promotion.
 
+## Recorded model-material preparation — scoped CPU and Metal qualification
+
+The opt-in ModelMaterialV1 route now records actual CPU gameplay keys, admits a
+bounded content-bound level manifest, prewarms recorded keys and publishes missing
+keys from one owned worker while frames select an alpha/depth/coverage-preserving
+fallback. Eager preparation remains the default; unsupported effects refuse.
+On the main358 composition, 28 CPU controls, both strict ordinary/cooked lints and
+six offscreen Metal controls pass. All 30 ordinary/cooked image pairs are
+byte-identical; representative actual PNGs were reviewed. Source-free fresh
+processes exercise recording, changed mirror input, fallback and cold close.
+Seven earlier CPU failures remain retained. Native-window, arbitrary-scene,
+driver-stall, shipping/reference-phone and performance gates remain open.
+[Contract, usage and portable evidence](docs/spikes/recorded-material-prewarm.md).
+
 ## Bounded agent response reads — locally verified
 
 The provider now enforces its response byte limit while reading each SSE line,
