@@ -19,7 +19,7 @@ owner/sequence checks, retained 1x route and MSAA restrictions remain in force.
 
 Temporal bundles now retain a private program kind, so shared WGSL cannot relabel
 motion as overlay depth. Before any bundle files are written, the writer checks
-kind, exact source hash, nonzero producer identity and one complete unique set of
+kind, exact source/producer hashes and one complete unique set of
 backend/stage artifacts. Deterministic build receipts bind the ABI, source,
 producer, embedded manifest and artifact bytes. The public exporter checks the
 actual target features and all six new receipts, including the exact guarded
@@ -42,6 +42,13 @@ is insufficient. Data-only controls reject incomplete/wrong routes, changed
 membership/shape/hash, raw differences, lost owner coverage, zero motion and
 history fallback. Actual device acceptance remains pending, not inferred from
 these synthetic parser/refusal controls.
+
+A separate four-frame retained scene adds one real point light, preserving the
+three historical joined workloads. It submits jittered clustered lighting and
+fixed history at full/half resolution, retaining the final pixels; timestamp-
+capable adapters must report the actual light-assignment pass. Cross-mode output
+must be exact and contain visible opaque geometry. Thus the temporal cluster
+variant will be exercised by dispatch, not only cold pipeline admission.
 
 The explicitly separate `native-metalfx` preparation/normalization shims still
 assemble WGSL at runtime. Ordinary/web paths and test-only depth/filter oracles

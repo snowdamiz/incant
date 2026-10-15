@@ -25,6 +25,8 @@ def _object(pairs):
 def expected(test):
     if test == 'temporal-resolve':
         return {f'mode{i:02}-resolved': (8, 8, 'rgba16float') for i in range(14)}
+    if test == 'temporal-clustered':
+        return {f'frame{i}-output': (65, 33, 'rgba8srgb') for i in range(4)}
     require(test == 'motion-owner', 'Unknown numerical test')
     return {f'scale{scale}-frame{frame}-{name}': (32 if name.endswith('color') else scale * 2,
             32 if name.endswith('color') else scale * 2, format)
@@ -97,18 +99,22 @@ def analyze_resolve(raw):
         require(all(abs(a - b) < 0.001 for a, b in zip(values[3 * 8 + 3], expected)), 'Existing fourteen-mode analytical oracle failed')
 
 
-def compare(owner_default, owner_cooked, resolve_default, resolve_cooked):
+def compare(owner_default, owner_cooked, resolve_default, resolve_cooked, clustered_default, clustered_cooked):
     pairs = [(load(owner_default, 'motion-owner', False), load(owner_cooked, 'motion-owner', True)),
-             (load(resolve_default, 'temporal-resolve', False), load(resolve_cooked, 'temporal-resolve', True))]
+             (load(resolve_default, 'temporal-resolve', False), load(resolve_cooked, 'temporal-resolve', True)),
+             (load(clustered_default, 'temporal-clustered', False), load(clustered_cooked, 'temporal-clustered', True))]
     for a, b in pairs:
         require(a == b, 'Default/cooked raw mismatch; exact tolerance unchanged')
     moved = analyze_owner(pairs[0][0])
     analyze_resolve(pairs[1][0])
+    for raw in pairs[2][0].values():
+        pixels = list(struct.iter_unpack('<4B', raw))
+        require(all(p[3] == 255 for p in pixels) and any(p[:3] != (20, 21, 25) for p in pixels), 'Joined clustered scene has no opaque visible geometry')
     return {'status': 'pass', 'comparison': 'exact raw bytes', 'tolerance_codes': 0,
-            'owner_records_each': 42, 'resolve_records_each': 14, 'nonzero_motion_pixels': moved,
+            'owner_records_each': 42, 'resolve_records_each': 14, 'clustered_records_each': 4, 'nonzero_motion_pixels': moved,
             'temporal_analytical_absolute_tolerance': 0.001, 'appearance_or_performance_gate': False}
 
 
 if __name__ == '__main__':
-    require(len(sys.argv) == 5, 'Expected default/cooked owner then default/cooked resolve directories')
+    require(len(sys.argv) == 7, 'Expected default/cooked owner, resolve, then clustered directories')
     print(json.dumps(compare(*map(Path, sys.argv[1:])), indent=2))

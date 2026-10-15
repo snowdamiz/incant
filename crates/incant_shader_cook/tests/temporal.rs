@@ -172,7 +172,7 @@ fn complete_kind_bound_receipts_reject_missing_duplicate_and_relabelled_programs
         for row in rows {
             use sha2::{Digest, Sha256};
             let bytes = std::fs::read(destination.join(row["file"].as_str().unwrap())).unwrap();
-            assert_eq!(row["bytes"], bytes.len());
+            assert_eq!(row["bytes"].as_u64(), Some(bytes.len() as u64));
             assert_eq!(row["sha256"], format!("{:x}", Sha256::digest(&bytes)));
         }
         let mut missing = bundle.clone();
@@ -183,9 +183,17 @@ fn complete_kind_bound_receipts_reject_missing_duplicate_and_relabelled_programs
         source_changed.source_hash[0] ^= 1;
         let mut producer_missing = bundle.clone();
         producer_missing.producer_hash = [0; 32];
-        for (i, invalid) in [missing, duplicate, source_changed, producer_missing]
-            .iter()
-            .enumerate()
+        let mut producer_tampered = bundle.clone();
+        producer_tampered.producer_hash[0] ^= 1;
+        for (i, invalid) in [
+            missing,
+            duplicate,
+            source_changed,
+            producer_missing,
+            producer_tampered,
+        ]
+        .iter()
+        .enumerate()
         {
             let destination = root.path().join(format!("bad{i}"));
             assert!(write_bundle(kind, invalid, &destination).is_err());

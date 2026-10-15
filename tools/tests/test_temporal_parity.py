@@ -15,10 +15,10 @@ class TemporalParity(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
         self.addCleanup(self.tmp.cleanup)
-        self.paths = [Path(self.tmp.name).resolve() / str(i) for i in range(4)]
+        self.paths = [Path(self.tmp.name).resolve() / str(i) for i in range(6)]
         for i, path in enumerate(self.paths):
             path.mkdir()
-            test = 'motion-owner' if i < 2 else 'temporal-resolve'
+            test = 'motion-owner' if i < 2 else 'temporal-resolve' if i < 4 else 'temporal-clustered'
             rows = []
             for name, (w, h, format) in parity.expected(test).items():
                 if test == 'motion-owner':
@@ -31,13 +31,15 @@ class TemporalParity(unittest.TestCase):
                             0.5 if frame else 0., 1. if frame else 0.) for n in ids)
                     elif format == 'depth32float': raw = struct.pack('<f', 0.5) * (w * h)
                     else: raw = bytes([80, 120, 160, 255]) * (w * h)
-                else:
+                elif test == 'temporal-resolve':
                     mode = int(name[4:6])
                     pixel = ((0.375, 0.375, 0.375, 1.) if mode in (0, 1, 8, 9, 11, 13) else
                         (0., 0., 0., 0.) if mode == 4 else (0.2, 0.1, 0., 0.5) if mode == 5 else
                         (2., 0.5, 100., 1.) if mode == 7 else
                         (0.2 + 0.03 * 3.375 + 0.02 * 2.625, 0.25, 0.5, 1.) if mode == 12 else (0.5, 0.5, 0.5, 1.))
                     raw = struct.pack('<4e', *pixel) * (w * h)
+                else:
+                    raw = bytes([120, 80, 40, 255]) * (w * h)
                 file = name + '.raw'
                 (path / file).write_bytes(raw)
                 rows.append(dict(name=name, file=file, width=w, height=h, format=format, bytes=len(raw), sha256=sha256(raw)))
@@ -102,6 +104,10 @@ class TemporalParity(unittest.TestCase):
         for i in (2, 3):
             self.change(i, 'mode00-resolved', struct.pack('<4e', float('nan'), 0.5, 0.5, 1.) * 64)
         with self.assertRaisesRegex(ValueError, 'Nonfinite'): parity.compare(*self.paths)
+
+    def test_equal_clear_only_clustered_scene_is_not_a_rendered_parity_proof(self):
+        for i in (4, 5): self.change(i, 'frame0-output', bytes([20, 21, 25, 255]) * (65 * 33))
+        with self.assertRaisesRegex(ValueError, 'no opaque visible geometry'): parity.compare(*self.paths)
 
 
 if __name__ == '__main__':

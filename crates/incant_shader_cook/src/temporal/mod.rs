@@ -104,6 +104,14 @@ pub fn cook(kind: Kind, source: &str) -> Result<Bundle> {
             });
         }
     }
+    Ok(Bundle {
+        kind,
+        source_hash: kind.source_hash(),
+        producer_hash: producer_hash(),
+        artifacts,
+    })
+}
+fn producer_hash() -> [u8; 32] {
     let producer = [
         include_str!("mod.rs"),
         include_str!("contract.rs"),
@@ -112,18 +120,13 @@ pub fn cook(kind: Kind, source: &str) -> Result<Bundle> {
         include_str!("../../Cargo.toml"),
     ]
     .join("\n");
-    Ok(Bundle {
-        kind,
-        source_hash: kind.source_hash(),
-        producer_hash: Sha256::digest(producer).into(),
-        artifacts,
-    })
+    Sha256::digest(producer).into()
 }
 pub fn write_bundle(kind: Kind, bundle: &Bundle, directory: &Path) -> Result<()> {
     if bundle.kind != kind
         || bundle.artifacts.len() != 6
         || bundle.source_hash != kind.source_hash()
-        || bundle.producer_hash == [0; 32]
+        || bundle.producer_hash != producer_hash()
     {
         return Err(CookError::Contract("temporal bundle identity"));
     }
