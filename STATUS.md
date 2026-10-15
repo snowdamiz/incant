@@ -13,7 +13,32 @@ controls. This fixes the ordinary viewport route; low-resolution reconstruction
 still has separate appearance defects. The entries
 below preserve earlier scoped results and superseded integration snapshots.
 
-## Cooked bloom — complete twelve-family CPU catalog qualified
+Checkpoint43 currently remains held: the broad Linux GPU-test command also
+selected a manual script diagnostic whose prepared inputs were absent. The
+[explicit-feature correction](docs/spikes/ci-manual-script-diagnostic.md) retains
+all ordinary CI controls; corrected hosted execution is still pending. Windows
+confirmed the starter destination repair but exposed a malformed-path test fixture
+that normalized away its own `..` input. The [fixture correction](docs/spikes/windows-template-destination.md#checkpoint43-production-repair-confirmed-malformed-fixture-corrected)
+passes local tests and leaves production behavior unchanged; corrected Windows
+execution is pending.
+
+## Gameplay light controls — CPU and numerical Metal qualified
+
+Native gameplay, TypeScript and the Rust Wasm SDK can change existing directional,
+point and spot light color/intensity through atomic runtime batches. Invalid
+controls roll back numeric writes; saves retain accepted values. The render
+adapter preserves its accepted state on consumer refusal, and accepted changes
+invalidate temporal history before later unchanged frames resume it.
+
+32 distinct Rust CPU controls, 20 Python controls, strict lints/types/generated
+checks and an actual Metal pixel/history control pass. The main341 composition
+also passes three script controls and strict lint. The three fixture failures
+remain recorded. These are separate runtime/SDK and renderer proofs; an integrated
+day/night app, appearance and performance are unqualified. Crossing zero can
+still allocate a directional shadow atlas.
+[Contract and bound evidence](docs/spikes/gameplay-light-controls.md).
+
+## Cooked bloom — public shipping export and CPU startup qualified
 
 The trusted cooked-native selection now includes prefilter, downsample,
 upsample and display bloom programs, bringing the catalog to twelve families
@@ -22,11 +47,17 @@ device cache during cold preparation. Partial cooked-output builds still refuse
 bloom; project files cannot supply shader bytes and default exports stay unchanged.
 
 41 Python controls, 41 cooker tests, 209 renderer controls, 12 partial-bloom
-controls and strict lint pass. The exporter-shaped player was compiled only;
-its actual target output passed the complete 268,438-byte shader audit. Both prior
-native failures remain recorded. Public shipping export, player execution,
-driver/render parity, cache hits and the full shader-stall gate remain unproven.
+controls and strict lint pass. A separate fresh public arm64 shipping export at
+`340acb7c` passed the complete 268,438-byte shader audit and its inherent one-tick
+CPU startup with source parsing disabled. All 18 managed calls cleaned up, the
+private target was retired and source/compiler/authoring/package inputs rehashed
+unchanged. Both prior native test failures, the missing-package export refusal
+and offline dependency-cache failure remain recorded. No window or GPU was
+launched; driver/render parity, cache hits and the full shader-stall gate remain open.
 The original eight-family result below retains its producing-source scope.
+The public exporter now refuses missing or mismatched pinned script-compiler
+packages before launching build tools; 45 focused Python controls pass.
+[Early checkout diagnostics](docs/spikes/native-script-prerequisites.md).
 [Source, failures and portable evidence](docs/spikes/cooked-bloom.md).
 
 ## Optional pipeline caches — cold preparation qualified
@@ -41,6 +72,9 @@ Nineteen cache controls, feature-off checks and the combined cooked shader/cache
 suite pass locally, with strict lint. The Vulkan lifecycle harness was compiled
 but not executed on this Mac; actual driver persistence and shader-stall gates
 remain open. [Contract and evidence](docs/spikes/persistent-pipeline-cache.md).
+Checkpoint42 exposed an incompatible cooked-feature selection in its all-effects
+Vulkan cache test. The [workflow repair](docs/spikes/ci-renderer-catalog.md) keeps
+every lifecycle assertion; actual corrected hosted execution remains pending.
 
 ## Cooked native shader export — ordinary catalog qualified
 

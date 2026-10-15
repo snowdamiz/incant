@@ -25,6 +25,10 @@ const _: () = {
 /// Trusted host adapter operation; all integer arguments are guest offsets/indices.
 #[derive(Clone, Copy)]
 pub enum Call {
+    CommandLight {
+        ptr: i32,
+        len: i32,
+    },
     AudioLen,
     ReadAudio {
         ptr: i32,
@@ -209,6 +213,7 @@ pub enum Call {
 pub struct Capability {
     audio: Vec<u8>,
     audio_rejected: bool,
+    light_rejected: bool,
     identity: Option<WorldIdentity>,
     failed: bool,
     active: bool,
@@ -307,6 +312,7 @@ impl Capability {
         }
         self.commands.clear();
         self.audio_rejected = false;
+        self.light_rejected = false;
         if let Err(error) = crate::audio::encode(world, &mut self.audio) {
             self.abort();
             return Err(error);
@@ -474,6 +480,10 @@ impl Capability {
             return Err(Error::Abi("rejected HUD transaction"));
         }
         self.hud.clear();
+        if self.light_rejected {
+            self.abort();
+            return Err(Error::Abi("rejected light transaction"));
+        }
         if self.audio_rejected {
             self.abort();
             return Err(Error::Abi("rejected audio transaction"));
@@ -600,6 +610,8 @@ impl Capability {
                 call,
                 Call::HudLen | Call::ReadHud { .. } | Call::ControlHud { .. }
             );
+        let light_authorized =
+            self.active && self.epoch == epoch && matches!(call, Call::CommandLight { .. });
         let audio_authorized = self.active
             && self.epoch == epoch
             && matches!(
@@ -686,6 +698,9 @@ impl Capability {
         }
         if hud_authorized && result.is_err() {
             self.hud_rejected = true;
+        }
+        if light_authorized && result.is_err() {
+            self.light_rejected = true;
         }
         if audio_authorized && result.is_err() {
             self.audio_rejected = true;
@@ -802,6 +817,40 @@ impl Capability {
                     memory[region].copy_from_slice(&self.audio);
                 }
                 return Ok(len as i32);
+            }
+            Call::CommandLight { ptr, len } => {
+                let len = usize::try_from(len)
+                    .ok()
+                    .filter(|&n| {
+                        (incant_wasm_abi::LightCommandHeader::SIZE
+                            ..=incant_wasm_abi::LIGHT_MAX_COMMAND_BYTES)
+                            .contains(&n)
+                    })
+                    .ok_or(Error::Abi("light command length"))?;
+                let region = range(ptr, len, memory.len())?;
+                self.transfer(len)?;
+                let commands = incant_wasm_abi::light::Commands::parse(&memory[region])
+                    .map_err(|_| Error::Abi("light command values"))?;
+                if commands.iter().len() > limits::COMMANDS - self.commands.len() {
+                    return Err(Error::Limit("structural command quota"));
+                }
+                for row in commands.iter() {
+                    let control = match incant_wasm_abi::light::validate_command(&row)
+                        .expect("validated light batch")
+                    {
+                        incant_wasm_abi::LightControlKind::Color => {
+                            incant_runtime::LightControl::Color(row.values)
+                        }
+                        incant_wasm_abi::LightControlKind::Intensity => {
+                            incant_runtime::LightControl::Intensity(row.values[0])
+                        }
+                    };
+                    self.command(StructuralCommand::ControlLight {
+                        entity: StableId(row.entity),
+                        control,
+                    })?;
+                }
+                return Ok(0);
             }
             Call::CommandAudio { ptr, len } => {
                 let len = usize::try_from(len)

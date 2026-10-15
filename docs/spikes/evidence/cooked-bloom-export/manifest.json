@@ -1,0 +1,714 @@
+{
+  "format": "incant-cooked-bloom-public-export-evidence",
+  "version": 1,
+  "source": "340acb7cfe7da8cc7c959f60730feb937b0a9d31",
+  "documentation_base": "33072b904c1fa25bebd6bf92922d9d4f557dc68d",
+  "archive_sha256": "fdb3fe42188f6be0abf92b3bd16023d8c145c325726f1a5ac1715caa44aef173",
+  "records": [
+    {
+      "key": "shipping-doc-composition-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-doc-composition-001.json",
+      "bytes": 1987,
+      "sha256": "ebb39d5e59796af3cc334a2356af44b4697a9ffebfd8bac059d47cbbeb87a214"
+    },
+    {
+      "key": "shipping-node-setup-proposal-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-node-setup-proposal-001.json",
+      "bytes": 5370,
+      "sha256": "7661ccce3e8191a49a193172b30b40e1127dc269437bfb4754aa244706efc653"
+    },
+    {
+      "key": "shipping-node-setup-proposal-002.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-node-setup-proposal-002.json",
+      "bytes": 5932,
+      "sha256": "88357af98ba421cd213e3a3f646a8dd59b6d890db450f90cfd250687f10849e1"
+    },
+    {
+      "key": "shipping-node-setup-proposal-003.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-node-setup-proposal-003.json",
+      "bytes": 6503,
+      "sha256": "956668db3f512450aae29ce3d969dcc3ba307bb38c6a28c7678f536e4bc7fe08"
+    },
+    {
+      "key": "shipping-node-setup-proposal-004.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-node-setup-proposal-004.json",
+      "bytes": 6544,
+      "sha256": "8a23b4d69a79e820a73850676e794e19030c820ccf963e81da503a61432c327a"
+    },
+    {
+      "key": "shipping-preflight-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-preflight-001.json",
+      "bytes": 2026,
+      "sha256": "2191b12cbdab406be439f64a69d9fc1083af89eed3d09223bc68dd8d275ac0ee"
+    },
+    {
+      "key": "shipping-preflight-003.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-preflight-003.json",
+      "bytes": 1138,
+      "sha256": "93e4c57f6388ce3d1b45aa4292be03a962a7c11cfa6a8565bb67b709095ea806"
+    },
+    {
+      "key": "shipping-proposal-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-proposal-001.json",
+      "bytes": 13127,
+      "sha256": "67b511244b29284c832218c5f71948bd9b6b26e414442877b649d2256b74378d"
+    },
+    {
+      "key": "shipping-proposal-002.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-proposal-002.json",
+      "bytes": 13877,
+      "sha256": "5c64d1342f32f08f56d2511f47c6e033fd1655f2da120feb7a5523d03d99f646"
+    },
+    {
+      "key": "shipping-proposal-003.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-proposal-003.json",
+      "bytes": 15269,
+      "sha256": "8e9a2a2d69c935a73c6d908e09cb7c27720ab7f074cff5a3065aacbb8f384058"
+    },
+    {
+      "key": "shipping-tools-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-tools-001.json",
+      "bytes": 1724,
+      "sha256": "422a8a30f3a72ec0b6e0359f13fe2fca4a11cad333d6e3c2dd9a0efb2b60d51e"
+    },
+    {
+      "key": "shipping-node-setup-supervisor-001.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-node-setup-supervisor-001.py",
+      "bytes": 4728,
+      "sha256": "24c68e3907b1d89283621ed4b298bb485d2f2d4fc8a2028fbcdd1aae29d97f0b"
+    },
+    {
+      "key": "shipping-node-setup-supervisor-002.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-node-setup-supervisor-002.py",
+      "bytes": 5399,
+      "sha256": "3c45aac997ded542ff7bdd391dd45bedbac8a76527fa2bdc2ff617480cee7fac"
+    },
+    {
+      "key": "shipping-node-setup-supervisor-003.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-node-setup-supervisor-003.py",
+      "bytes": 5408,
+      "sha256": "c10ff214af31b1ed3a928d48021acbadd4c6c396c588623fec57d9a9933fc869"
+    },
+    {
+      "key": "shipping-supervisor-001.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-supervisor-001.py",
+      "bytes": 17520,
+      "sha256": "34c5e3a6f14bd5e415b75911d7494aed13f29260d057dd1d2e67aaf4473de3ff"
+    },
+    {
+      "key": "shipping-supervisor-002.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-supervisor-002.py",
+      "bytes": 18934,
+      "sha256": "6c9d8cf0ad75be85c27f57edf90188b35124fdd13f9c6baaeb14d635dd9ec65a"
+    },
+    {
+      "key": "shipping-supervisor-003.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-supervisor-003.py",
+      "bytes": 20665,
+      "sha256": "aadc159070f8ab488009e0736099c2d9c7c1b6c2dd62f91f138c4f5ac633c543"
+    },
+    {
+      "key": "test_shipping_supervisor_001.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/test_shipping_supervisor_001.py",
+      "bytes": 8162,
+      "sha256": "e41b9ef8489f134f0c3b33e67304e75db0564474f78e8df5126ecb9caacce28a"
+    },
+    {
+      "key": "test_shipping_supervisor_002.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/test_shipping_supervisor_002.py",
+      "bytes": 9854,
+      "sha256": "f55f83e31c165885aa86a22832d1ec7fee086aaf38ef2b0bb4a282161d0b9ea8"
+    },
+    {
+      "key": "test_shipping_supervisor_003.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/test_shipping_supervisor_003.py",
+      "bytes": 11055,
+      "sha256": "7f9872ea4a8fd8053cd9d511d004f985394b6b2d04a421cf1cf41494b3afd840"
+    },
+    {
+      "key": "shipping-controls-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-controls-001.log",
+      "bytes": 1300,
+      "sha256": "cb3168fa2681ee260decb8901f8fcaa14027bf93b4daa4cba8fafaf7114ebe0c"
+    },
+    {
+      "key": "shipping-controls-002.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-controls-002.log",
+      "bytes": 1473,
+      "sha256": "ee95f47fcf904f3594a2bd8dcddc6da52dc13d431839a65cd04e6e85c8400fed"
+    },
+    {
+      "key": "shipping-controls-003.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-controls-003.log",
+      "bytes": 1683,
+      "sha256": "aba2fc5c91643b3b63cd1c79c732efe26fd153802495f7f5d064d0b1ab58af73"
+    },
+    {
+      "key": "producer-successor-grant-binding-002.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/producer-successor-grant-binding-002.json",
+      "bytes": 1689,
+      "sha256": "e94f022e677bcf46aa904fc0556b17c32338b8fba98bc38668b5f3c95efa25f1"
+    },
+    {
+      "key": "node-setup-partial-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/node-setup-partial-001.json",
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "key": "root-shipping-grant-003.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/root-shipping-grant-003.json",
+      "bytes": 990,
+      "sha256": "c7eed8baeb0233b1bcfd8cbb60682915d19410effa59a51b2daf69ff2ca8999c"
+    },
+    {
+      "key": "shipping-source-001/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-source-001/freeze.json",
+      "bytes": 1526773,
+      "sha256": "754438f7171ca119b0e8f0c81eeb7ec630a407141c57ade86c35f8b51d96fa02"
+    },
+    {
+      "key": "shipping-source-002/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-source-002/freeze.json",
+      "bytes": 1528372,
+      "sha256": "d8c6b308e0ce80cd099b59ff5d301014f37424a079757e58a7cb5f0c9ebe0ceb"
+    },
+    {
+      "key": "shipping-run-002/call-000.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-002/call-000.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "shipping-run-002/call-000.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-002/call-000.stdout.raw.log",
+      "bytes": 9,
+      "sha256": "33e26f35db6e57ce0c486ddc815fe966867e4f649e418eaf323f75f4720eb8e9"
+    },
+    {
+      "key": "shipping-run-002/call-001.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-002/call-001.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "shipping-run-002/call-001.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-002/call-001.stdout.raw.log",
+      "bytes": 192,
+      "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909"
+    },
+    {
+      "key": "shipping-run-002/call-002.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-002/call-002.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "shipping-run-002/call-002.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-002/call-002.stdout.raw.log",
+      "bytes": 5,
+      "sha256": "7b01c549928398a045692f24bcac7803b348524cdd76f21265b02984b2ba556a"
+    },
+    {
+      "key": "shipping-run-002/call-003.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-002/call-003.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "shipping-run-002/call-003.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-002/call-003.stdout.raw.log",
+      "bytes": 99,
+      "sha256": "7da0fd6d11521838939c36a6c45bfaeb893ecd0f8db281f9093f2c93af465ed1"
+    },
+    {
+      "key": "shipping-run-002/call-004.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-002/call-004.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "shipping-run-002/call-004.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-002/call-004.stdout.raw.log",
+      "bytes": 77,
+      "sha256": "1dc5ff25a027f5c0a04ac183e96b6665181272c327130fb0663c5c1be8aad81d"
+    },
+    {
+      "key": "shipping-run-002/call-005.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-002/call-005.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "shipping-run-002/call-005.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-002/call-005.stdout.raw.log",
+      "bytes": 192,
+      "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909"
+    },
+    {
+      "key": "shipping-run-002/call-006.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-002/call-006.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "shipping-run-002/call-006.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-002/call-006.stdout.raw.log",
+      "bytes": 67,
+      "sha256": "b22adee5ac5a93ade5d52f11392360e1c1a95ef2add2bd03365e896e8f1688e1"
+    },
+    {
+      "key": "shipping-run-002/call-007.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-002/call-007.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "shipping-run-002/call-007.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-002/call-007.stdout.raw.log",
+      "bytes": 53623,
+      "sha256": "b16a76d011013049b49bf5d271d38cd435a48de22acf7413872bfa64c28e1b4b"
+    },
+    {
+      "key": "shipping-run-002/call-008.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-002/call-008.stderr.raw.log",
+      "bytes": 1801433,
+      "sha256": "31f7f90aabe5250b5d344b93a2f141985e552894328a1fed9b27e35ba73fb21c"
+    },
+    {
+      "key": "shipping-run-002/closeout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-002/closeout.json",
+      "bytes": 3994,
+      "sha256": "c6dd5ee5c8e6df2f950cb6e17c41cb09586622bf3a710e35ad60c0565519b108"
+    },
+    {
+      "key": "shipping-run-002/export.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-002/export.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "shipping-run-002/export.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-002/export.stdout.raw.log",
+      "bytes": 65,
+      "sha256": "7cfab82218a0bd3ac33c5c9d0dc02f29b8472a210d1f4b1e4c44df380c69edfd"
+    },
+    {
+      "key": "shipping-run-002/launch.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-002/launch.json",
+      "bytes": 9883,
+      "sha256": "116793348dc188a5ea4af37122b0befc1034740a8c2ba2d67f825f92c89c177d"
+    },
+    {
+      "key": "shipping-run-002/managed-calls.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-002/managed-calls.json",
+      "bytes": 10306,
+      "sha256": "5e4079d819309bdb79916496082e5d7883612e7019e75cb6a9a46afb71b92e0b"
+    },
+    {
+      "key": "shipping-run-002/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-002/result.json",
+      "bytes": 9302,
+      "sha256": "48a21f28eeaf112917be04bff82c5a531fb41d2a03683080134924c49956251e"
+    },
+    {
+      "key": "shipping-run-002/storage.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-002/storage.json",
+      "bytes": 24958,
+      "sha256": "b2097f529c7cecc8c03fb4467aa16978b7d3a2926d187190b13e4174c77cd982"
+    },
+    {
+      "key": "shipping-run-003/call-000.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-003/call-000.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "shipping-run-003/call-000.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-003/call-000.stdout.raw.log",
+      "bytes": 9,
+      "sha256": "33e26f35db6e57ce0c486ddc815fe966867e4f649e418eaf323f75f4720eb8e9"
+    },
+    {
+      "key": "shipping-run-003/call-001.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-003/call-001.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "shipping-run-003/call-001.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-003/call-001.stdout.raw.log",
+      "bytes": 192,
+      "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909"
+    },
+    {
+      "key": "shipping-run-003/call-002.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-003/call-002.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "shipping-run-003/call-002.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-003/call-002.stdout.raw.log",
+      "bytes": 5,
+      "sha256": "7b01c549928398a045692f24bcac7803b348524cdd76f21265b02984b2ba556a"
+    },
+    {
+      "key": "shipping-run-003/call-003.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-003/call-003.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "shipping-run-003/call-003.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-003/call-003.stdout.raw.log",
+      "bytes": 99,
+      "sha256": "7da0fd6d11521838939c36a6c45bfaeb893ecd0f8db281f9093f2c93af465ed1"
+    },
+    {
+      "key": "shipping-run-003/call-004.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-003/call-004.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "shipping-run-003/call-004.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-003/call-004.stdout.raw.log",
+      "bytes": 77,
+      "sha256": "1dc5ff25a027f5c0a04ac183e96b6665181272c327130fb0663c5c1be8aad81d"
+    },
+    {
+      "key": "shipping-run-003/call-005.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-003/call-005.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "shipping-run-003/call-005.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-003/call-005.stdout.raw.log",
+      "bytes": 192,
+      "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909"
+    },
+    {
+      "key": "shipping-run-003/call-006.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-003/call-006.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "shipping-run-003/call-006.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-003/call-006.stdout.raw.log",
+      "bytes": 67,
+      "sha256": "b22adee5ac5a93ade5d52f11392360e1c1a95ef2add2bd03365e896e8f1688e1"
+    },
+    {
+      "key": "shipping-run-003/call-007.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-003/call-007.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "shipping-run-003/call-007.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-003/call-007.stdout.raw.log",
+      "bytes": 53623,
+      "sha256": "b16a76d011013049b49bf5d271d38cd435a48de22acf7413872bfa64c28e1b4b"
+    },
+    {
+      "key": "shipping-run-003/call-008.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-003/call-008.stderr.raw.log",
+      "bytes": 1819940,
+      "sha256": "872be636e2b73544792ef57549f35f8fd57be164df3e222862e30f3c7cb19ee3"
+    },
+    {
+      "key": "shipping-run-003/call-009.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-003/call-009.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "shipping-run-003/call-010.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-003/call-010.stdout.raw.log",
+      "bytes": 12503,
+      "sha256": "99e31e4e1511de270d40cb722565d6566f3edcbc1c023ed0668ecaeaa4029690"
+    },
+    {
+      "key": "shipping-run-003/call-011.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-003/call-011.stdout.raw.log",
+      "bytes": 26288,
+      "sha256": "e6b462590a57789cba6ec29a1346b53bad6d7bf19e5f60c0a47cddef2e6ddc27"
+    },
+    {
+      "key": "shipping-run-003/call-012.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-003/call-012.stdout.raw.log",
+      "bytes": 218,
+      "sha256": "fe1b027e22a454a0d8c95654c7283bf34d8a999b618ba4c8b3b7788f149638c7"
+    },
+    {
+      "key": "shipping-run-003/call-013.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-003/call-013.stdout.raw.log",
+      "bytes": 255,
+      "sha256": "45e1d2ba087b1621287be6d01ac27225369062591ffb0c96b7637d537d052f7e"
+    },
+    {
+      "key": "shipping-run-003/call-014.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-003/call-014.stdout.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "shipping-run-003/call-015.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-003/call-015.stdout.raw.log",
+      "bytes": 188,
+      "sha256": "1bfdb340f7c429376831e54de32bf286a4f95075db278989ab5e8d9c119a6b08"
+    },
+    {
+      "key": "shipping-run-003/call-016.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-003/call-016.stdout.raw.log",
+      "bytes": 7955,
+      "sha256": "4f90ee769efaeb11229d64acd8b380b15bba1821e99943330d907d52d9f3d04e"
+    },
+    {
+      "key": "shipping-run-003/call-017.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-003/call-017.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "shipping-run-003/call-017.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-003/call-017.stdout.raw.log",
+      "bytes": 2226,
+      "sha256": "a6de4ceddefb4527c5fe986636466a29773397d03f4503d56c3061501f176806"
+    },
+    {
+      "key": "shipping-run-003/closeout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-003/closeout.json",
+      "bytes": 6898,
+      "sha256": "af33ae97f4cafff8c338acfb7e5b1596ae79b4b3e0dda8c7038f10d32f1892a2"
+    },
+    {
+      "key": "shipping-run-003/export.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-003/export.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "shipping-run-003/export.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-003/export.stdout.raw.log",
+      "bytes": 130,
+      "sha256": "c7b37d689f4d82b1b0987bf510b6f10a41e0163119160ab75a17538bfcdacad2"
+    },
+    {
+      "key": "shipping-run-003/launch.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-003/launch.json",
+      "bytes": 9883,
+      "sha256": "cb615501921979ca95bd9a7a891d7e4e230e914d6cb349951b001b11154b8c8e"
+    },
+    {
+      "key": "shipping-run-003/managed-calls.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-003/managed-calls.json",
+      "bytes": 20106,
+      "sha256": "86185ed5a6ebf980d56ad42f9f432f25cfd5710d298cacf0f4ad146467e77d9f"
+    },
+    {
+      "key": "shipping-run-003/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-003/result.json",
+      "bytes": 6962,
+      "sha256": "a382064646b5e1cf2fc48d96e0855fb9ad12062c3e806218139ba43e98cce294"
+    },
+    {
+      "key": "shipping-run-003/storage.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-003/storage.json",
+      "bytes": 46088,
+      "sha256": "ffb20dc6f263e84f07f0ca9e1ca0a0bc323f18a86486122da9e54d47c8c07a5f"
+    },
+    {
+      "key": "node-setup-run-001/call-000.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/node-setup-run-001/call-000.stderr.raw.log",
+      "bytes": 323,
+      "sha256": "39e03b5bcbe514a26cbc6af4cfdae99a3a916b4cadc1e7c3ef420d10fab30672"
+    },
+    {
+      "key": "node-setup-run-001/call-000.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/node-setup-run-001/call-000.stdout.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "node-setup-run-001/launch.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/node-setup-run-001/launch.json",
+      "bytes": 404,
+      "sha256": "bda9e6e45b64843b6c4a31d6876d55481b511b4d3409b02dfb83638e04c4282a"
+    },
+    {
+      "key": "node-setup-run-001/managed-calls.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/node-setup-run-001/managed-calls.json",
+      "bytes": 1293,
+      "sha256": "f7f039773016c0c89d1ad0098459935a13c38b282f917f99016b7f167f5bee98"
+    },
+    {
+      "key": "node-setup-run-001/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/node-setup-run-001/result.json",
+      "bytes": 586,
+      "sha256": "e7f97ce7cd036892d5ebd1f9fd8e7e2f47e8f83cf261823c7a269727bfae6d37"
+    },
+    {
+      "key": "node-setup-run-001/storage.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/node-setup-run-001/storage.json",
+      "bytes": 138,
+      "sha256": "198863c35fc9bef07e2f534c8b0d8acea0a71651997aac5488305b871ad0dd48"
+    },
+    {
+      "key": "node-setup-run-002/call-000.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/node-setup-run-002/call-000.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "node-setup-run-002/call-000.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/node-setup-run-002/call-000.stdout.raw.log",
+      "bytes": 26,
+      "sha256": "8c93627b88d23bc28109dec9bfbdb8e027d4b3a70ea236022238e93d49c02d1f"
+    },
+    {
+      "key": "node-setup-run-002/call-001.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/node-setup-run-002/call-001.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "node-setup-run-002/call-001.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/node-setup-run-002/call-001.stdout.raw.log",
+      "bytes": 110,
+      "sha256": "1e6143d81523eedc6d0150cb623aefc0a4f0c0532a8334f43f879154c98543ac"
+    },
+    {
+      "key": "node-setup-run-002/installed-inputs.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/node-setup-run-002/installed-inputs.json",
+      "bytes": 1293166,
+      "sha256": "f47be88a6d0a652a8111ae620cb462ce970c64ef91e52d92c72ffa68bc7abb73"
+    },
+    {
+      "key": "node-setup-run-002/launch.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/node-setup-run-002/launch.json",
+      "bytes": 439,
+      "sha256": "daa85315bd710fcb73d3f1acb20aaadc74425fbb58c167c47c0567c3da9b6d9a"
+    },
+    {
+      "key": "node-setup-run-002/managed-calls.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/node-setup-run-002/managed-calls.json",
+      "bytes": 3458,
+      "sha256": "736c698afd4373d1e9ed775790e8f7941737ee7272ea45ed56c079792af2886d"
+    },
+    {
+      "key": "node-setup-run-002/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/node-setup-run-002/result.json",
+      "bytes": 852,
+      "sha256": "925685349b7cfbf1e2695f602124cb7b774a5bcdaf633b26cb0f1dcf457b7485"
+    },
+    {
+      "key": "node-setup-run-002/storage.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/node-setup-run-002/storage.json",
+      "bytes": 552,
+      "sha256": "d31b1e55a27d8b63ba1df137a9aff714469c71116910187d78fc66b6d94ef7ae"
+    },
+    {
+      "key": "public-cooked-window-export-003/export.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/public-cooked-window-export-003/export.json",
+      "bytes": 47905,
+      "sha256": "bda54fe47d4a6e7330e876407c80ee77bb0a4609b37d5e185b46f29a20d7f6e8"
+    },
+    {
+      "key": "public-cooked-window-export-003/normal-dependencies.txt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/public-cooked-window-export-003/normal-dependencies.txt",
+      "bytes": 53623,
+      "sha256": "b16a76d011013049b49bf5d271d38cd435a48de22acf7413872bfa64c28e1b4b"
+    },
+    {
+      "key": "cpu-005/actual-shaders.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/actual-shaders.json",
+      "bytes": 27907,
+      "sha256": "7bf37f26d2b0e62514c9ad5c989e401b00167d33334d6645298a0a802d1876fa"
+    },
+    {
+      "key": "cpu-005/closeout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/closeout.json",
+      "bytes": 4022,
+      "sha256": "6dab83f17d044faa98335d78464697754386e1ec6ecac3ff0ba9f3b463cb570b"
+    },
+    {
+      "key": "authoring-freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mac-core-numeric-loan-shipping-001/freeze.json",
+      "bytes": 3095953,
+      "sha256": "7c60e652f6f54784b0c7410c62555fae57848bed7edc523d34dc2586900b4bf8"
+    },
+    {
+      "key": "help-only-review.json",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/cooked-bloom-main333/help-only-review.json",
+      "bytes": 309,
+      "sha256": "8190db9fd6e6f176d8733e7e3f5a8015315977d26ac81c7fdc3cf83815d97438"
+    },
+    {
+      "key": "prior-cpu-packet-manifest.json",
+      "original": "/Users/andreyyurlov/.codex/worktrees/shipping-cooked-shaders/incant/docs/spikes/evidence/cooked-bloom/manifest.json",
+      "bytes": 92953,
+      "sha256": "e109ca607e5b209501caceee286f5d17a224b778d7b0de6674447a27a02a7b99"
+    }
+  ],
+  "external_raw_logs": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-002/call-008.stdout.raw.log",
+      "bytes": 33696492,
+      "sha256": "2ca54210ffaad35b29941d77e755dabca5f237e98144e5bab592f14280162dbb",
+      "kind": "large raw managed-child stdout (not embedded)"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-003/call-008.stdout.raw.log",
+      "bytes": 33702279,
+      "sha256": "d3105c91e9eb3be68d7725f3528cc69ab830bdd83d48c0fccd9aac27856505d2",
+      "kind": "large raw managed-child stdout (not embedded)"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/shipping-run-003/call-009.stdout.raw.log",
+      "bytes": 2323728,
+      "sha256": "1c91d2084840ec26919c2568017a05a7309f9d26688c45967f2a174d6e93cdfd",
+      "kind": "large raw managed-child stdout (not embedded)"
+    }
+  ],
+  "binaries": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/public-cooked-window-export-003/player/incant_game_player",
+      "bytes": 14640672,
+      "sha256": "0e98ff61a4c046a64a5e21cc251c2078d3a2619514fe2f7d5381a62101656cd0"
+    }
+  ],
+  "prior_shader_bytes": {
+    "manifest": "../cooked-bloom/manifest.json",
+    "archive_sha256": "9028e505680044498c7ef997dd7d4f56324f615d4e64dccad0f48e4014605cbb",
+    "scope": "CPU005 generated bytes only; fresh public export independently audited the identical family hashes before removing its private target."
+  },
+  "qualification": {
+    "public_export": true,
+    "target": "aarch64-apple-darwin",
+    "profile": "shipping",
+    "player_sha256": "0e98ff61a4c046a64a5e21cc251c2078d3a2619514fe2f7d5381a62101656cd0",
+    "families": 12,
+    "shader_artifacts": 69,
+    "shader_bytes": 268438,
+    "gameplay_ticks": 1,
+    "PCM_sample_frames": 800,
+    "managed_cleanup_confirmed": 18,
+    "source_inputs": 4490,
+    "installed_compiler_entries": 7620,
+    "authoring_files": 74,
+    "package_files": 38,
+    "package_bytes": 334036395
+  },
+  "retained_failures": [
+    "shipping protocol001 unexecuted: cleanup-return truth corrected before launch",
+    "shipping002 Cargo101: missing root TypeScript package; no package or player startup",
+    "offline dependency setup001 ENOTCACHED: zod-to-json-schema tarball absent; no compiler imports ran",
+    "intermediate setup protocol003 launch-refused before child: absent node_modules incorrectly assumed partial; corrected create-only guard",
+    "successful root-authorized pinned registry setup002 and actual public export003 kept separate"
+  ],
+  "scope": "Public cooked-window-capable shipping package plus inherent CPU-only one-tick startup, no --window. No GPU/driver/render/cache-hit/shader-stall/performance/phase gate. Full executable/package/node_modules and large raw Cargo/nm stdout stay external."
+}

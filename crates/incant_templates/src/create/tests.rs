@@ -100,6 +100,69 @@ fn refuses_existing_destination_unknown_kind_and_invalid_name_without_writing() 
 }
 
 #[test]
+fn checks_complete_ancestors_before_creating_a_destination() {
+    let (_temp, root) = root();
+    let fresh = root.join("fresh");
+    assert_eq!(destination(&fresh).unwrap(), fresh);
+    assert!(!fresh.exists());
+
+    let file = root.join("file");
+    fs::write(&file, b"external ancestor").unwrap();
+    assert!(matches!(
+        destination(&file.join("child")),
+        Err(TemplateError::Destination)
+    ));
+    assert_eq!(fs::read(&file).unwrap(), b"external ancestor");
+    assert!(matches!(
+        destination(&root.join("missing").join("child")),
+        Err(TemplateError::Io(error)) if error.kind() == std::io::ErrorKind::NotFound
+    ));
+    // Windows PathBuf::push/join normalizes dot segments after a verbatim
+    // prefix. Keep the literal input intact so the refusal is actually tested.
+    let mut traversal = root.clone().into_os_string();
+    for part in [
+        std::path::MAIN_SEPARATOR_STR,
+        "missing",
+        std::path::MAIN_SEPARATOR_STR,
+        "..",
+        std::path::MAIN_SEPARATOR_STR,
+        "child",
+    ] {
+        traversal.push(part);
+    }
+    let traversal = PathBuf::from(traversal);
+    assert!(traversal.components().any(|c| c == Component::ParentDir));
+    assert!(matches!(
+        destination(&traversal),
+        Err(TemplateError::Destination)
+    ));
+    assert!(!root.join("missing").exists());
+}
+
+#[cfg(windows)]
+#[test]
+fn canonical_windows_destination_uses_a_rooted_verbatim_anchor() {
+    use std::path::Prefix;
+    let (_temp, root) = root();
+    assert!(matches!(
+        root.components().next(),
+        Some(Component::Prefix(prefix))
+            if matches!(prefix.kind(), Prefix::VerbatimDisk(_) | Prefix::VerbatimUNC(..))
+    ));
+    let fresh = root.join("canonical-starter");
+    // canonicalize supplies the same verbatim path form as the hosted gameplay
+    // fixtures. The old component walk queried its unrooted prefix and failed
+    // before reaching exclusive directory creation.
+    assert_eq!(destination(&fresh).unwrap(), fresh);
+    let created = create(&fresh, Template::Empty, "Windows starter").unwrap();
+    assert_eq!(created.project, fresh.join(PROJECT));
+    let bus =
+        CommandBus::open_project_file_with_journal(&created.project, &created.journal).unwrap();
+    assert_eq!(bus.revision(), created.revision);
+    assert_eq!(bus.project().id, created.project_id);
+}
+
+#[test]
 fn failure_before_publication_retains_raw_inputs_and_journal_without_a_project() {
     let (_temp, root) = root();
     let path = root.join("incomplete");

@@ -18,3 +18,4 @@ struct w2c_incant__animation__graph__v2 { struct w2c_incant__v1 core; };
 struct w2c_incant__root__motion__v1 { struct w2c_incant__v1 core; };
 struct w2c_incant__hud__v1 { struct w2c_incant__v1 core; };
 struct w2c_incant__audio__v1 { struct w2c_incant__v1 core; };
+struct w2c_incant__light__v1 { struct w2c_incant__v1 core; };
