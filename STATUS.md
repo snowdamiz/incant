@@ -31,6 +31,25 @@ passes local tests and leaves production behavior unchanged. Both desktop jobs
 and Windows Wasm conformance passed on checkpoint44; that checkpoint's separate
 general failure prevented promotion.
 
+## Cooked motion/history — complete family and numerical Metal parity qualified
+
+The trusted cooked-native selection includes the fixed motion, integer-owner,
+depth, history-resolve, presentation-copy and jittered-cluster programs. The
+actual compiler output contains 23 families and 132 artifacts. Their equations,
+default scene behavior and cold preparation remain unchanged; partial cooked
+selections retain explicit refusals.
+
+48 cooker, 186 default renderer, 218 aggregate renderer and both partial-refusal
+controls pass, with strict lint and 37 Python controls. Six actual Metal children
+pass, and all 60 default/cooked raw pairs match exactly. The original enclosing
+comparison failed an unsupported stationary-precision assumption; that failure
+is preserved alongside a reviewed Python-only replay of the same bytes. No
+renderer tolerance or existing analytical gate changed. The player was compiled
+only. This is neither reconstruction quality nor a full shipping export,
+cache-hit, shader-stall or performance qualification. MetalFX boundary shaders
+remain outside the cooked catalog.
+[Source, correction and portable evidence](docs/spikes/cooked-temporal-export.md).
+
 ## Cooked SSAO — complete family and numerical Metal parity qualified
 
 The trusted cooked-native selection includes all five existing SSAO programs:
