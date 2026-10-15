@@ -34,14 +34,24 @@ const DISPATCH_DATA_DESTRUCTOR_DEFAULT: *mut c_void = core::ptr::null_mut();
 pub(crate) fn new_library_from_metallib_bytes(
     device: &ProtocolObject<dyn MTLDevice>,
     data: &[u8],
+    #[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
+    observer: &super::compilation::Observer,
 ) -> Result<Retained<ProtocolObject<dyn MTLLibrary>>, Retained<NSError>> {
     let buffer = NonNull::new(data.as_ptr().cast_mut()).unwrap().cast();
     let data =
         unsafe { dispatch_data_create(buffer, data.len(), None, DISPATCH_DATA_DESTRUCTOR_DEFAULT) };
     assert!(!data.is_null());
 
+    #[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
+    let observation = observer.begin(
+        super::compilation::Kind::BinaryLibrary,
+        super::compilation::Stage::Unspecified,
+    );
     let res: Result<Retained<ProtocolObject<dyn MTLLibrary>>, Retained<NSError>> =
         unsafe { msg_send![device, newLibraryWithData: data, error: _] };
+
+    #[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
+    observation.finish_native(&res);
 
     unsafe { dispatch_release(data) };
     res

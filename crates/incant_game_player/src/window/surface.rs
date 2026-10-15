@@ -33,12 +33,26 @@ pub struct Frame {
     height: u32,
 }
 impl SurfaceState {
-    pub fn new(window: Arc<Window>) -> Result<(Self, Arc<Renderer>, SurfaceTargets), Error> {
+    pub fn new(
+        window: Arc<Window>,
+        #[cfg(all(feature = "native-compilation", target_os = "macos"))] compilation: Option<
+            &mut incant_render::compilation::Capture,
+        >,
+    ) -> Result<(Self, Arc<Renderer>, SurfaceTargets), Error> {
         let instance = wgpu::Instance::default();
         let surface = instance.create_surface(Arc::clone(&window))?;
-        let renderer = Arc::new(
-            pollster::block_on(Renderer::new(&instance, Some(&surface))).map_err(Error::Render)?,
-        );
+        #[cfg(all(feature = "native-compilation", target_os = "macos"))]
+        let renderer = match compilation {
+            Some(capture) => pollster::block_on(Renderer::new_with_compilation_capture(
+                &instance,
+                Some(&surface),
+                capture,
+            )),
+            None => pollster::block_on(Renderer::new(&instance, Some(&surface))),
+        };
+        #[cfg(not(all(feature = "native-compilation", target_os = "macos")))]
+        let renderer = pollster::block_on(Renderer::new(&instance, Some(&surface)));
+        let renderer = Arc::new(renderer.map_err(Error::Render)?);
         let capabilities = surface.get_capabilities(&renderer.adapter);
         let format = capabilities
             .formats
