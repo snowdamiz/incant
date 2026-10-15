@@ -52,6 +52,7 @@ const CAPABILITY_LABELS: Record<Capability, string> = {
   'project.file': 'Project file access',
   'entity.rename': 'Rename',
   'entity.delete': 'Delete',
+  'entity.duplicate': 'Duplicate',
   'asset.import': 'Import assets',
   'history.undo': 'Undo',
   'history.redo': 'Redo',

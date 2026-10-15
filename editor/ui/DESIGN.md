@@ -197,13 +197,22 @@ values are never shown in its place, and nothing in it is written to the project
 Flat ARIA tree, 28 px rows. The scene row is a heading weight; the selected row is the
 indigo pill (no accent edge). Problem counts sit at the trailing edge.
 
-**Context menu** (right-click, Shift+F10 or the Menu key): Rename (F2), Copy ID, Delete
-(⌘⌫ on macOS, Delete elsewhere; danger). Shortcut labels are plain text in the
-platform's notation. Items the bridge cannot do stay focusable, are marked unavailable
-and explain why instead of acting; Delete runs through the command bus. Copy ID (here
-and the Inspector's copy button) is marked unavailable, with the reason, where the
-runtime has no clipboard, and a refused write is announced; neither fails silently.
-Roving focus, arrows, Home/End, Enter/Space and Escape (focus returns to the row).
+**Context menu** (right-click, Shift+F10 or the Menu key): Rename (F2), Duplicate (⌘D on
+macOS, Ctrl+D elsewhere), Copy ID, Delete (⌘⌫ on macOS, Delete elsewhere; danger).
+Shortcut labels are plain text in the platform's notation. Items the bridge cannot do
+stay focusable, are marked unavailable and explain why instead of acting; Delete runs
+through the command bus. Copy ID (here and the Inspector's copy button) is marked
+unavailable, with the reason, where the runtime has no clipboard, and a refused write is
+announced; neither fails silently. Roving focus, arrows, Home/End, Enter/Space and
+Escape (focus returns to the row).
+
+**Duplicate** sends one command for the row's entity and its descendants; the engine
+names and places the copy. The tree shows nothing new until the engine answers. Then the
+copy is selected (unless another row was chosen meanwhile), collapsed and scrolled into
+view, and takes keyboard focus if the tree had it; the status line says "Duplicated …".
+A refusal or an unverified result is announced in the host's words and the selection
+stays. One duplicate runs at a time; held keys do not repeat it. It is unavailable for
+scenes and while Play has a world, so it never moves the runtime inspection's selection.
 
 ## Inspector
 

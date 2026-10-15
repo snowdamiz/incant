@@ -332,6 +332,17 @@ impl CommandBus {
     pub fn project(&self) -> &Project {
         &self.project
     }
+
+    /// Allocate identities for one ordinary subtree copy. This does not mutate
+    /// the project or reserve the revision. Submit the returned command through
+    /// `execute` with the observed revision, like any other authoring edit.
+    pub fn prepare_duplicate_subtree(
+        &self,
+        scene_id: &str,
+        root_entity_id: &str,
+    ) -> Result<(Command, Id), CommandError> {
+        subtree::prepare(&self.project, scene_id, root_entity_id)
+    }
     pub fn revision(&self) -> u64 {
         self.revision
     }

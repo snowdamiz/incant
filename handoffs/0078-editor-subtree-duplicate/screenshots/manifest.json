@@ -1,0 +1,612 @@
+{
+  "label": "FIXTURE captures: tools/fake-host.js (or handoff 0044's Play double) under the real editor/bridge/native.generated.js, relabelled as a fixture; headless Chrome; not live engine, native host or WebKit evidence",
+  "set": "r2",
+  "browser": "155.0.8059.40",
+  "captures": [
+    {
+      "file": "menu-desktop-hierarchy.png",
+      "sha256": "cf1a20327988ee541188b2e05cfc1936f38c3ee3c3a22893e7be74bb8db84480",
+      "state": "menu",
+      "scenario": "harbor",
+      "viewport_css": [
+        1440,
+        900
+      ],
+      "device_scale": 2,
+      "png_pixels": [
+        660,
+        1800
+      ],
+      "status_line": "",
+      "selected": [
+        "Player Character"
+      ],
+      "focus": {
+        "tag": "DIV",
+        "id": null,
+        "role": "menuitem",
+        "name": "RenameF2",
+        "focusVisible": false
+      },
+      "axe_violations": 0,
+      "page_errors": 0,
+      "step_error": null
+    },
+    {
+      "file": "menu-narrow-hierarchy.png",
+      "sha256": "c0e1fe1e097b61a97dc0c0fd6a5aebe826c48ff0c616523421aec10d8138768c",
+      "state": "menu",
+      "scenario": "harbor",
+      "viewport_css": [
+        1024,
+        680
+      ],
+      "device_scale": 2,
+      "png_pixels": [
+        648,
+        1360
+      ],
+      "status_line": "",
+      "selected": [
+        "Player Character"
+      ],
+      "focus": {
+        "tag": "DIV",
+        "id": null,
+        "role": "menuitem",
+        "name": "RenameF2",
+        "focusVisible": false
+      },
+      "axe_violations": 0,
+      "page_errors": 0,
+      "step_error": null
+    },
+    {
+      "file": "menu-keyboard-desktop-hierarchy.png",
+      "sha256": "ffb3c7a45124f617a290858ea9b727d23ed8a6d0463c0e0f1e816fc555ec8984",
+      "state": "menu-keyboard",
+      "scenario": "harbor",
+      "viewport_css": [
+        1440,
+        900
+      ],
+      "device_scale": 2,
+      "png_pixels": [
+        490,
+        1800
+      ],
+      "status_line": "",
+      "selected": [
+        "Map Camera"
+      ],
+      "focus": {
+        "tag": "DIV",
+        "id": null,
+        "role": "menuitem",
+        "name": "Duplicate⌘D",
+        "focusVisible": true
+      },
+      "axe_violations": 0,
+      "page_errors": 0,
+      "step_error": null
+    },
+    {
+      "file": "menu-windows-desktop-hierarchy.png",
+      "sha256": "5eb6ca875aa113e4df40de455272d845c961c85fa102b88a2ab14e8d136cd3df",
+      "state": "menu-windows",
+      "scenario": "windows",
+      "viewport_css": [
+        1440,
+        900
+      ],
+      "device_scale": 2,
+      "png_pixels": [
+        660,
+        1800
+      ],
+      "status_line": "",
+      "selected": [
+        "Crate Stack"
+      ],
+      "focus": {
+        "tag": "DIV",
+        "id": null,
+        "role": "menuitem",
+        "name": "RenameF2",
+        "focusVisible": false
+      },
+      "axe_violations": 0,
+      "page_errors": 0,
+      "step_error": null
+    },
+    {
+      "file": "copied-desktop-window.png",
+      "sha256": "e4492df25e40c45a5cb4d86d026bfe7bdd764d57adc0d9487f2b8323f7e0c291",
+      "state": "copied",
+      "scenario": "harbor",
+      "viewport_css": [
+        1440,
+        900
+      ],
+      "device_scale": 2,
+      "png_pixels": [
+        2880,
+        1800
+      ],
+      "status_line": "Duplicated Player Character",
+      "selected": [
+        "Player Character"
+      ],
+      "focus": {
+        "tag": "DIV",
+        "id": "tree-row-01M4ZCMCK80000000000000001",
+        "role": "treeitem",
+        "name": "Player Character",
+        "focusVisible": false
+      },
+      "axe_violations": 0,
+      "page_errors": 0,
+      "step_error": null
+    },
+    {
+      "file": "copied-narrow-window.png",
+      "sha256": "ce7a449b1ced42d12f32db2cedb7eadfc962647e44f6b4df276951d777eacabe",
+      "state": "copied",
+      "scenario": "harbor",
+      "viewport_css": [
+        1024,
+        680
+      ],
+      "device_scale": 2,
+      "png_pixels": [
+        2048,
+        1360
+      ],
+      "status_line": "Duplicated Player Character",
+      "selected": [
+        "Player Character"
+      ],
+      "focus": {
+        "tag": "DIV",
+        "id": "tree-row-01M4ZCMCK80000000000000001",
+        "role": "treeitem",
+        "name": "Player Character",
+        "focusVisible": false
+      },
+      "axe_violations": 0,
+      "page_errors": 0,
+      "step_error": null
+    },
+    {
+      "file": "copied-nested-desktop-hierarchy.png",
+      "sha256": "70dd6c8f60ab347bbc84324f8e8e5a74a186c0968a7d90e938cf46924b620a33",
+      "state": "copied-nested",
+      "scenario": "harbor",
+      "viewport_css": [
+        1440,
+        900
+      ],
+      "device_scale": 2,
+      "png_pixels": [
+        490,
+        1800
+      ],
+      "status_line": "Duplicated Map Camera",
+      "selected": [
+        "Map Camera"
+      ],
+      "focus": {
+        "tag": "DIV",
+        "id": "tree-row-01M4ZCMCK80000000000000001",
+        "role": "treeitem",
+        "name": "Map Camera",
+        "focusVisible": false
+      },
+      "axe_violations": 0,
+      "page_errors": 0,
+      "step_error": null
+    },
+    {
+      "file": "copied-long-desktop-window.png",
+      "sha256": "4fff51d24a6a47f9c48dd4de2cfee7a369b5ca8d1942625e43b407bdeba0c32b",
+      "state": "copied-long",
+      "scenario": "long",
+      "viewport_css": [
+        1440,
+        900
+      ],
+      "device_scale": 2,
+      "png_pixels": [
+        2880,
+        1800
+      ],
+      "status_line": "Duplicated Bollard 001",
+      "selected": [
+        "Bollard 001"
+      ],
+      "focus": {
+        "tag": "DIV",
+        "id": "tree-row-01M4ZCMCK80000000000000001",
+        "role": "treeitem",
+        "name": "Bollard 001",
+        "focusVisible": true
+      },
+      "axe_violations": 0,
+      "page_errors": 0,
+      "step_error": null
+    },
+    {
+      "file": "refused-singleton-desktop-window.png",
+      "sha256": "bddc662b46ff177f2b1c11a6adc7eaad1e7775ced3a831809aee3cddd4d61c51",
+      "state": "refused-singleton",
+      "scenario": "harbor",
+      "viewport_css": [
+        1440,
+        900
+      ],
+      "device_scale": 2,
+      "png_pixels": [
+        2880,
+        1800
+      ],
+      "status_line": "Duplicate failed: invalid command: duplicate subtree: a subtree containing a singleton cannot be duplicated",
+      "selected": [
+        "Environment"
+      ],
+      "focus": {
+        "tag": "DIV",
+        "id": "tree-row-01JA33RV00000000000000003C",
+        "role": "treeitem",
+        "name": "Environment",
+        "focusVisible": false
+      },
+      "axe_violations": 0,
+      "page_errors": 0,
+      "step_error": null
+    },
+    {
+      "file": "refused-linked-desktop-statusbar.png",
+      "sha256": "3a74b891c079812c45d0ba331613c8f21a300b7ae1b4a158a70e517296374aa2",
+      "state": "refused-linked",
+      "scenario": "harbor",
+      "viewport_css": [
+        1440,
+        900
+      ],
+      "device_scale": 2,
+      "png_pixels": [
+        2880,
+        58
+      ],
+      "status_line": "Duplicate failed: invalid command: duplicate subtree: detach linked instances explicitly before duplication",
+      "selected": [
+        "Lamp Post (prefab instance)"
+      ],
+      "focus": {
+        "tag": "DIV",
+        "id": "tree-row-01JA33RV0000000000000006TS",
+        "role": "treeitem",
+        "name": "Lamp Post (prefab instance)",
+        "focusVisible": false
+      },
+      "axe_violations": 0,
+      "page_errors": 0,
+      "step_error": null
+    },
+    {
+      "file": "refused-references-desktop-statusbar.png",
+      "sha256": "91ca4bd70fa0cdcd8d803efc550a0aec5061a92b3fbcdb7d4d79903ce91781c4",
+      "state": "refused-references",
+      "scenario": "harbor",
+      "viewport_css": [
+        1440,
+        900
+      ],
+      "device_scale": 2,
+      "png_pixels": [
+        2880,
+        58
+      ],
+      "status_line": "Duplicate failed: invalid command: duplicate subtree: component reference semantics are not registered",
+      "selected": [
+        "Malformed Props"
+      ],
+      "focus": {
+        "tag": "DIV",
+        "id": "tree-row-01JA33RV00000000000000004A",
+        "role": "treeitem",
+        "name": "Malformed Props",
+        "focusVisible": false
+      },
+      "axe_violations": 0,
+      "page_errors": 0,
+      "step_error": null
+    },
+    {
+      "file": "unknown-desktop-window.png",
+      "sha256": "48df77745bea46ded4942dcb54380ffc15f1e02cb53d1b5528ff45d8986eef04",
+      "state": "unknown",
+      "scenario": "unverified",
+      "viewport_css": [
+        1440,
+        900
+      ],
+      "device_scale": 2,
+      "png_pixels": [
+        2880,
+        1800
+      ],
+      "status_line": "Duplicate result unknown: The duplicate result could not be verified. Check the hierarchy before retrying.",
+      "selected": [
+        "Crate Stack"
+      ],
+      "focus": {
+        "tag": "DIV",
+        "id": "tree-row-01JA33RV000000000000000045",
+        "role": "treeitem",
+        "name": "Crate Stack",
+        "focusVisible": false
+      },
+      "axe_violations": 0,
+      "page_errors": 0,
+      "step_error": null
+    },
+    {
+      "file": "pending-desktop-hierarchy.png",
+      "sha256": "19485b4e5a7b9f1d6c6ca03b3e57df55fa0152a893da16a2448d7ad1dc0721f7",
+      "state": "pending",
+      "scenario": "slow",
+      "viewport_css": [
+        1440,
+        900
+      ],
+      "device_scale": 2,
+      "png_pixels": [
+        490,
+        1800
+      ],
+      "status_line": "",
+      "selected": [
+        "Crate Stack"
+      ],
+      "focus": {
+        "tag": "DIV",
+        "id": null,
+        "role": "menuitem",
+        "name": "Duplicate⌘D, unavailable: Wait for the current duplicate to ",
+        "focusVisible": true
+      },
+      "axe_violations": 0,
+      "page_errors": 0,
+      "step_error": null
+    },
+    {
+      "file": "older-host-desktop-hierarchy.png",
+      "sha256": "a70f31df0f4db08cd535856dfe7ad619c3d92e4fcccb25b3552a365132621087",
+      "state": "older-host",
+      "scenario": "older-host",
+      "viewport_css": [
+        1440,
+        900
+      ],
+      "device_scale": 2,
+      "png_pixels": [
+        660,
+        1800
+      ],
+      "status_line": "",
+      "selected": [
+        "Crate Stack"
+      ],
+      "focus": {
+        "tag": "DIV",
+        "id": null,
+        "role": "menuitem",
+        "name": "Duplicate⌘D, unavailable: Duplicate is unavailable: the samp",
+        "focusVisible": true
+      },
+      "axe_violations": 0,
+      "page_errors": 0,
+      "step_error": null
+    },
+    {
+      "file": "scene-desktop-hierarchy.png",
+      "sha256": "a040d23edb603b61405f8a3ff97217316f488a93f9b2b9f41e8ab46ad3372121",
+      "state": "scene",
+      "scenario": "harbor",
+      "viewport_css": [
+        1440,
+        900
+      ],
+      "device_scale": 2,
+      "png_pixels": [
+        660,
+        1800
+      ],
+      "status_line": "",
+      "selected": [
+        "Harbor"
+      ],
+      "focus": {
+        "tag": "DIV",
+        "id": null,
+        "role": "menuitem",
+        "name": "Duplicate⌘D, unavailable: Scenes cannot be duplicated.",
+        "focusVisible": true
+      },
+      "axe_violations": 0,
+      "page_errors": 0,
+      "step_error": null
+    },
+    {
+      "file": "playing-desktop-window.png",
+      "sha256": "0b9eac514b8d55aace45cbfa499ca3b8ac1219992c835113dcdc1df355665018",
+      "state": "playing",
+      "scenario": "play",
+      "viewport_css": [
+        1440,
+        900
+      ],
+      "device_scale": 2,
+      "png_pixels": [
+        2880,
+        1800
+      ],
+      "status_line": "Stop Play to duplicate.",
+      "selected": [
+        "Crate 01"
+      ],
+      "focus": {
+        "tag": "DIV",
+        "id": null,
+        "role": "menuitem",
+        "name": "Duplicate⌘D, unavailable: Stop Play to duplicate.",
+        "focusVisible": true
+      },
+      "axe_violations": 0,
+      "page_errors": 0,
+      "step_error": null
+    },
+    {
+      "file": "history-desktop-window.png",
+      "sha256": "da8807e29addca8b8b3cc32d8548bac81b3e0f2bd9016ba493e25d456eff69b0",
+      "state": "history",
+      "scenario": "harbor",
+      "viewport_css": [
+        1440,
+        900
+      ],
+      "device_scale": 2,
+      "png_pixels": [
+        2880,
+        1800
+      ],
+      "status_line": "Duplicated Crate Stack",
+      "selected": [
+        "Crate Stack"
+      ],
+      "focus": {
+        "tag": "BUTTON",
+        "id": "dock-tab-history",
+        "role": "tab",
+        "name": "History(1)",
+        "focusVisible": false
+      },
+      "axe_violations": 0,
+      "page_errors": 0,
+      "step_error": null
+    },
+    {
+      "file": "menu-1x-desktop-hierarchy.png",
+      "sha256": "a40c12ae42420715e7a2432c256a0576033f764b5412ce0caa73bd8477c71d87",
+      "state": "menu-1x",
+      "scenario": "harbor",
+      "viewport_css": [
+        1440,
+        900
+      ],
+      "device_scale": 1,
+      "png_pixels": [
+        330,
+        900
+      ],
+      "status_line": "",
+      "selected": [
+        "Player Character"
+      ],
+      "focus": {
+        "tag": "DIV",
+        "id": null,
+        "role": "menuitem",
+        "name": "RenameF2",
+        "focusVisible": false
+      },
+      "axe_violations": 0,
+      "page_errors": 0,
+      "step_error": null
+    },
+    {
+      "file": "refused-singleton-status-narrow-statusbar.png",
+      "sha256": "ab1e6b97ff2c39a629b60e0e36dc00d91a5689479dab3e4a01c82377cb8fffda",
+      "state": "refused-singleton-status",
+      "scenario": "harbor",
+      "viewport_css": [
+        1024,
+        680
+      ],
+      "device_scale": 2,
+      "png_pixels": [
+        2048,
+        58
+      ],
+      "status_line": "Duplicate failed: invalid command: duplicate subtree: a subtree containing a singleton cannot be duplicated",
+      "selected": [
+        "Environment"
+      ],
+      "focus": {
+        "tag": "DIV",
+        "id": "tree-row-01JA33RV00000000000000003C",
+        "role": "treeitem",
+        "name": "Environment",
+        "focusVisible": false
+      },
+      "axe_violations": 0,
+      "page_errors": 0,
+      "step_error": null
+    },
+    {
+      "file": "shortcuts-desktop-dialog.png",
+      "sha256": "31998a3d1e5d2e29bf363ccce493dcb0e40c0795d15807223e4cc08e03429cb7",
+      "state": "shortcuts",
+      "scenario": "harbor",
+      "viewport_css": [
+        1440,
+        900
+      ],
+      "device_scale": 2,
+      "png_pixels": [
+        1248,
+        1408
+      ],
+      "status_line": "",
+      "selected": [],
+      "focus": {
+        "tag": "INPUT",
+        "id": "shortcuts-filter",
+        "role": null,
+        "name": "",
+        "focusVisible": true
+      },
+      "axe_violations": 0,
+      "page_errors": 0,
+      "step_error": null
+    },
+    {
+      "file": "shortcuts-windows-desktop-dialog.png",
+      "sha256": "4a2cda98ac574fe80e4125103623a502e262cb4722fbd8f3c2aa7ba33cccb600",
+      "state": "shortcuts-windows",
+      "scenario": "windows",
+      "viewport_css": [
+        1440,
+        900
+      ],
+      "device_scale": 2,
+      "png_pixels": [
+        1248,
+        1408
+      ],
+      "status_line": "",
+      "selected": [],
+      "focus": {
+        "tag": "INPUT",
+        "id": "shortcuts-filter",
+        "role": null,
+        "name": "",
+        "focusVisible": true
+      },
+      "axe_violations": 0,
+      "page_errors": 0,
+      "step_error": null
+    }
+  ]
+}

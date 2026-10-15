@@ -1,0 +1,3 @@
+node ../../node_modules/typescript/bin/tsc -b editor/ui --noEmit
+tsc exit 0
+output: 0 bytes

@@ -38,6 +38,8 @@ export interface Shell {
   readonly capabilities: CapabilitySet;
   readonly selection: Ulid | null;
   readonly select: (id: Ulid | null) => void;
+  /** Explicit selection intent, including a choice whose entity later disappears. */
+  readonly selectionGeneration: () => number;
   readonly dockTab: DockTab;
   readonly setDockTab: (tab: DockTab) => void;
   readonly message: string;
@@ -45,8 +47,11 @@ export interface Shell {
   readonly announce: (message: string) => () => void;
   /** Checks the capability, dispatches, and announces any failure. Resolves true on success. */
   readonly run: (command: EditorCommand) => Promise<boolean>;
-  /** Like `run`, but returns the bridge's result so a caller can show the exact error inline. */
-  readonly dispatch: (command: EditorCommand) => Promise<BridgeResult>;
+  /**
+   * Like `run`, but returns the bridge's result so a caller can show the exact error inline.
+   * Always resolves: a rejected dispatch carries outcomeUnknown, as a request does.
+   */
+  readonly dispatch: (command: EditorCommand, options?: RequestOptions) => Promise<BridgeResult>;
   readonly ask: (request: HostRequest) => Promise<boolean>;
   /**
    * Like `ask`, but returns the host's result so a caller can show the exact error inline.
@@ -64,7 +69,9 @@ export interface Shell {
 const ShellContext = createContext<Shell | null>(null);
 
 /** Plain-language failure prefixes; other commands keep their command name. */
-const FAILURE_LABEL: Partial<Record<EditorCommand['type'], string>> = { 'asset.import': 'Import failed', 'agent.budget.set': 'Token allowance not saved' };
+const FAILURE_LABEL: Partial<Record<EditorCommand['type'], string>> = { 'asset.import': 'Import failed', 'agent.budget.set': 'Token allowance not saved', 'entity.duplicate': 'Duplicate failed' };
+/** A completion nobody verified is not called a failure: the host may have acted. */
+const UNKNOWN_LABEL: Partial<Record<EditorCommand['type'], string>> = { 'entity.duplicate': 'Duplicate result unknown' };
 
 const NO_CAPABILITIES = readCapabilities([]);
 const noopSubscribe = () => () => undefined;
@@ -139,6 +146,12 @@ export function ShellProvider({ bridge, children }: { bridge: EditorBridge | nul
   const getCapabilities = useMemo(() => capabilityReader(bridge), [bridge]);
   const capabilities = getCapabilities();
   const [selection, setSelection] = useState<Ulid | null>(null);
+  const selectedGeneration = useRef(0);
+  const selectionGeneration = useCallback(() => selectedGeneration.current, []);
+  const select = useCallback((id: Ulid | null) => {
+    ++selectedGeneration.current;
+    setSelection(id);
+  }, []);
   const [dockTab, setDockTab] = useState<DockTab>('problems');
   const [panels, setPanels] = useState<PanelVisibility>({ hierarchy: true, dock: true, inspector: true });
   const showPanel = useCallback((panel: keyof PanelVisibility) => {
@@ -193,14 +206,25 @@ export function ShellProvider({ bridge, children }: { bridge: EditorBridge | nul
   );
 
   const dispatch = useCallback(
-    async (command: EditorCommand): Promise<BridgeResult> => {
+    async (command: EditorCommand, options?: RequestOptions): Promise<BridgeResult> => {
       if (!bridge || !capabilities.has(command.type)) {
         const message = unavailableMessage(command.type, bridge);
-        announce(message);
+        if (!options?.quiet) announce(message);
         return { ok: false, error: { code: 'unsupported', message } };
       }
-      const result = await bridge.dispatch(command);
-      if (!result.ok) announce(`${FAILURE_LABEL[command.type] ?? `${command.type} failed`}: ${result.error.message}`);
+      let result: BridgeResult;
+      try {
+        result = await bridge.dispatch(command);
+      } catch (error) {
+        // As for requests: a rejection says only that no result arrived.
+        result = rejectedRequest(error);
+      }
+      if (!result.ok && !options?.quiet) {
+        const label = result.outcomeUnknown
+          ? (UNKNOWN_LABEL[command.type] ?? `${command.type} result unknown`)
+          : (FAILURE_LABEL[command.type] ?? `${command.type} failed`);
+        announce(`${label}: ${result.error.message}`);
+      }
       return result;
     },
     [announce, bridge, capabilities],
@@ -259,7 +283,8 @@ export function ShellProvider({ bridge, children }: { bridge: EditorBridge | nul
       snapshot,
       capabilities,
       selection: liveSelection,
-      select: setSelection,
+      select,
+      selectionGeneration,
       dockTab,
       setDockTab,
       message,
@@ -273,7 +298,7 @@ export function ShellProvider({ bridge, children }: { bridge: EditorBridge | nul
       openAccount,
       closeAccount,
     }),
-    [panels, showPanel, togglePanel, bridge, snapshot, capabilities, liveSelection, dockTab, message, announce, run, dispatch, ask, request, explainUnavailable, accountOpen, openAccount, closeAccount],
+    [panels, showPanel, togglePanel, bridge, snapshot, capabilities, liveSelection, select, selectionGeneration, dockTab, message, announce, run, dispatch, ask, request, explainUnavailable, accountOpen, openAccount, closeAccount],
   );
   return <ShellContext.Provider value={value}>{children}</ShellContext.Provider>;
 }

@@ -183,6 +183,22 @@ observer-inclusive wall spans do not establish reclaimable CPU time or a shippin
 speedup. The 2 ms target remains unmet, with other distinct investigations allowed.
 [Contract, actual measurements and retained failures](docs/spikes/script-budget-check-attribution.md).
 
+## Editor subtree duplication — integrated controls qualified
+
+The hierarchy now exposes Duplicate through its context menu and Cmd+D on macOS
+(Ctrl+D elsewhere), using one reversible shared-command transaction. It selects
+only the host's verified copy, preserves newer selection intent and ignores late
+results after a project/bridge change. Scene, linked-prefab, singleton, busy and
+Play restrictions remain explicit.
+
+All 1,025 UI tests, generated transport, TypeScript, production UI and native
+editor builds pass; the real host transaction control also passed on main342
+composition. Claude's browser fixture review remains separate from native proof.
+The actual Mac interaction attempt showed a blank client while OS inspection
+confirmed the desktop was locked; the editor was stopped and its project stayed
+unchanged. Actual native shortcut/menu, Undo/Redo and reopening checks remain
+pending an unlocked desktop. [Evidence and limits](docs/spikes/editor-subtree-duplicate.md).
+
 ## Ordinary subtree duplication — command and persistence qualified
 
 The shared command bus can now copy a complete ordinary subtree with explicit,
@@ -215,7 +231,8 @@ after focus interruptions; five partial actual images show joined Arabic, damage
 loss and restarted gameplay. The default Retina window was crowded at 320×240
 logical units. Arabic health-pip direction is now corrected in the sample's
 string table, with real localization/font-shaping regression coverage; normal-size
-appearance and native RTL health-order review remain open while capture is paused.
+appearance and native RTL health-order review remain open. Capture is allowed;
+actual native window checks currently require the Mac desktop to be unlocked.
 [CPU correction and limits](docs/spikes/core-rtl-health-direction.md).
 The fresh CJK export/window is recorded above.
 
