@@ -47,6 +47,10 @@ struct State {
 }
 pub(crate) struct TickState(Rc<RefCell<State>>);
 impl TickState {
+    pub fn healthy(&self) -> bool {
+        self.0.borrow().failure.is_none()
+    }
+
     pub fn new(store: Rc<RefCell<Store>>, retired: Vec<Key>) -> Self {
         let mut cost = store.borrow().cost;
         for key in &retired {

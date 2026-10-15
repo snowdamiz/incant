@@ -442,3 +442,43 @@ test('strict crossfade guest cook matches the actual multi-instance QuickJS inpu
   const cooked = await cookNativeScript(root, 'crossfade.ts');
   assert.equal(cooked.code, await fs.readFile(path.join(root, 'crossfade.cjs'), 'utf8'));
 });
+
+test('strict coroutine cook binds the native fixture and explicit continuation contract', async () => {
+  const root = path.join(REPO, 'crates/incant_script/tests/fixtures');
+  const cooked = await cookNativeScript(root, 'coroutine.ts');
+  assert.equal(cooked.code, await fs.readFile(path.join(root, 'coroutine.cjs'), 'utf8'));
+  const template = await fs.readFile(path.join(REPO, 'sdk/templates/native-coroutines/pulse.ts'), 'utf8');
+  assert.equal(template.replace("'../../ts/src/native'", "'@incant/runtime/native'"),
+    await fs.readFile(path.join(root, 'coroutine.ts'), 'utf8'));
+});
+
+test('coroutine types reject deferred results, invalid continuation types and state mutation', async () => {
+  for (const resume of [
+    "async resume(){return {kind:'done'}}", "*resume(){yield 1}",
+    "resume(){return undefined}", "resume(){return {kind:'wait',delayTicks:'1',state:null}}",
+    "resume(){return {kind:'wait',delayTicks:1,state:()=>0}}",
+    "resume(c,t){t.id='changed';return {kind:'done'}}",
+    "resume(c,t){t.state={};return {kind:'done'}}",
+  ]) await fixture({'entry.ts': `import type {NativeBehavior} from '@incant/runtime/native';
+export default {coroutines:{step:{${resume}}},update(){return undefined}} satisfies NativeBehavior;`},
+    async root => assert.rejects(cookNativeScript(root, 'entry.ts'), /strict typecheck failed/u));
+  for (const call of ["coroutines.start('a','step',()=>0)","coroutines.start('a','step',null,4)","coroutines.cancel(4)"])
+    await fixture({'entry.ts': `import type {NativeBehavior} from '@incant/runtime/native';
+export default {update({coroutines}){if(!coroutines)throw Error('catalog required');${call};return undefined}} satisfies NativeBehavior;`},
+      async root => assert.rejects(cookNativeScript(root, 'entry.ts'), /strict typecheck failed/u));
+});
+
+test('coroutine capabilities require update narrowing and are guaranteed inside resume', async () => {
+  await fixture({'entry.ts': `import type {NativeBehavior} from '@incant/runtime/native';
+export default {update({coroutines}){coroutines.start('task','step',null);return undefined}} satisfies NativeBehavior;`},
+    async root => assert.rejects(cookNativeScript(root, 'entry.ts'), /'coroutines' is possibly 'undefined'/u));
+  await fixture({'entry.ts': `import type {NativeBehavior,NativeCoroutineContext,NativeCoroutines} from '@incant/runtime/native';
+export default {coroutines:{step:{resume(context,task){
+  const refined:NativeCoroutineContext=context;
+  const api:NativeCoroutines=refined.coroutines;api.cancel(task.id);return {kind:'done'};
+}}},update({coroutines}){
+  if(coroutines)coroutines.start('task','step',null);return undefined;
+}} satisfies NativeBehavior;`}, async root => {
+    assert.ok((await cookNativeScript(root, 'entry.ts')).code.includes('coroutines'));
+  });
+});

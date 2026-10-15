@@ -39,6 +39,9 @@ pub(crate) struct TickQueries {
     dt: f64,
 }
 impl TickQueries {
+    pub fn healthy(&self) -> bool {
+        self.state.borrow().failure.is_none()
+    }
     pub fn new(
         queries: NativeQueries,
         deadline: Arc<Mutex<budget::ExecutionBudget>>,
