@@ -1,7 +1,9 @@
 # Opt-in DX12 pipeline libraries
 
-Mac CPU controls and Windows GNU cross-checks pass. Native Windows driver,
-filesystem and lifetime controls remain unrun. The feature is default off; shader
+Mac CPU controls and Windows GNU cross-checks pass. A later hosted Windows run
+passes 40 CPU controls and four strict lints, then stops in the first native seed
+on an incorrect zero-hit assertion. Full native reuse, lifetime and rendered
+parity remain unqualified. The feature is default off; shader
 equations and renderer quality policy are unchanged. This does not close the
 shader-stall gate in `PLAN.md`.
 
@@ -114,7 +116,8 @@ the portable records and strict qualification/source distinctions.
 
 The separate manual workflow `dx12-pipeline-library-diagnostic.yml` uses
 `tools/probes/dx12-pipeline-library.py`. Its first hosted run stopped during
-compilation as recorded below; native Windows qualification is still pending.
+compilation; the second reaches native startup as recorded below. Complete
+native Windows qualification is still pending.
 Existing release workflows and required check contexts are unchanged.
 The original source and 127-record qualification packet above remain frozen.
 
@@ -179,3 +182,36 @@ controls pass, including deterministic directory/file retirement and refusal
 cases; independent review found no issue. All byte/time limits, cleanup rules and
 native assertions remain unchanged. This is sampled accounting of the owned
 compiler tree, not an atomic filesystem snapshot. A new hosted run is required.
+
+
+## Hosted seed assertion correction
+
+Run [38764747651](https://github.com/snowdamiz/incant/actions/runs/38764747651)
+on exact `fd08435a` passes 20 ordinary and 20 cooked Windows CPU controls,
+including actual descriptor, COM-backing and filesystem assertions, plus all four
+strict MSVC lint configurations. The first native `ordinary-seed` process then
+fails: its stream/classic/compute hit counts are `(4, 0, 0)`, while the fixture
+incorrectly requires `(0, 0, 0)`. All 15 managed child processes were cleaned up.
+The [original result and log identities](evidence/dx12-pipeline-library/hosted-seed-failure.json)
+retain that failure; no raw image was published and later native stages did not run.
+
+A missing cache file guarantees a new library, not a miss for every request in
+one startup. The ordinary one-sample material catalog requests both Opaque and
+Mask for four culling/winding combinations. Those alpha modes use the same
+shader and native descriptor; alpha testing is material data. After each Opaque
+PSO is stored, its matching Mask request can load it in the same session.
+Microsoft's [LoadPipeline contract](https://learn.microsoft.com/en-us/windows/win32/api/d3d12/nf-d3d12-id3d12pipelinelibrary1-loadpipeline)
+checks both the name and description. A mismatched descriptor refuses;
+[StorePipeline](https://learn.microsoft.com/en-us/windows/win32/api/d3d12/nf-d3d12-id3d12pipelinelibrary-storepipeline)
+cannot overwrite an existing name. Such collisions therefore remain visible as
+errors under the existing assertions.
+
+The diagnostic now allows those real same-session hits while still requiring
+nonzero seed misses, exactly one successful store per fallback/miss, and zero
+native load, store, serialization, overflow or strict-refusal errors. Strict
+fresh-process reuse still requires hits with zero misses, fallback or stores.
+The initial report is saved before assertions for future diagnosis. Runtime key,
+creation, storage and shader code are unchanged. Eleven portable probe controls
+pass, including seed-hit acceptance and mismatched/error counter refusals. A new
+native run is still needed; neither this correction nor the partial Windows
+result establishes complete reuse, pixel parity or the shader-stall gate.
