@@ -13,6 +13,20 @@ controls. This fixes the ordinary viewport route; low-resolution reconstruction
 still has separate appearance defects. The entries
 below preserve earlier scoped results and superseded integration snapshots.
 
+## Agent editor visibility — per-turn wiring qualified
+
+The current visible navigator, output tab and inspector/agent panes now accompany
+each submitted turn as bounded, project-bound observations. They are untrusted
+context, not edit authority; stale project IDs and malformed payloads fail before
+provider use. Prior panel observations do not persist in conversation history.
+No screen capture, pixels or DOM inspection is involved.
+
+115 agent, 23 native host and 977 UI/bridge tests pass, together with strict lint,
+TypeScript, production build and generated-contract checks. Independent review
+found no blocking issue. This qualifies the open-panel context wiring; live agent
+evaluation and the full Phase 3 gate remain separate.
+[Behavior and evidence](docs/spikes/agent-editor-context.md).
+
 ## Agent project context — current-turn orientation qualified
 
 Shared, exclusive and retained-conversation turns now receive a fresh, bounded

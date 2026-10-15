@@ -1,0 +1,13 @@
+# Current editor visibility in agent context
+
+The editor now supplies its currently visible work surfaces with each submitted agent turn. It reads the same React state that controls the navigator, output dock and inspector/agent pane. Switching the navigator or dock, hiding a panel and submitting another turn produces a new observation. No DOM, pixels, screen capture or account data is inspected.
+
+The optional transport contains only a canonical project ULID and at most eight distinct closed panel names: viewport, hierarchy, assets, inspector, agent, problems, console and history. Unknown names or fields, duplicates, oversized lists and malformed identifiers fail. The bridge checks the active project before IPC; the native host checks it before ledger admission; the bounded fresh authoring snapshot checks it again before the provider call. Existing project, revision, account, budget and approval fences remain in force.
+
+The observation is explicitly untrusted submission-time data. It grants no edit authority and may be stale by the time the provider responds. It enters the same bounded current-turn snapshot as the project summary, memory, history and schemas, and is excluded from retained conversation exchanges. Absent observations remain absent. Old requests still work with the new host; a new UI with an independently older deny-unknown-fields host is not negotiated, so bundled UI/native versions must remain matched.
+
+## Verification
+
+Source producer: `43e980c200356a9613c3e23963966334b8857485`, based on main324 `bf38c5e77c36a7eed4d6976756e234cdd6eb73e9`. Independent review binds all 28 changed files and reports no blocking findings. The checked behavior includes refreshed provider inputs, no old view retained, wrong-project refusal before provider work, invalid input refusal before worker creation, pre-IPC transport refusal and two real React submissions after changing/hiding panels. Provider and IPC fixtures are test doubles, not live-provider or native-window evidence.
+
+All 115 agent tests, 23 native agent-host tests and 977 UI/bridge tests across 48 files pass. Strict all-target Clippy covers the agent, editor and headless crates; TypeScript, production UI build, generated bridge, formatting and conventions pass. The earlier exact-optional-property typecheck failure was corrected before the qualified source. [Source, raw logs and review](evidence/agent-editor-context/manifest.json) retain the evidence. Replay it with `python3 docs/spikes/evidence/agent-editor-context/verify.py`; add `--git-source` to verify the immutable producer files. This completes the open-panel part of per-turn context assembly; skills, live evaluation, the broader Phase 3 exit gate and editor appearance remain separate.
