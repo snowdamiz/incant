@@ -906,8 +906,9 @@ satisfy those gates.
 The director authorized Phase 1 with remaining Phase 0 items deferred, sensible
 engineering progress without repeated advancement questions, and agent merges
 after scoped review and passing checks. These authorizations do not approve a
-phase gate. Section 12 decisions are settled. Current computer use and screen
-capture are authorized. Claude Opus 5.5 with explicitly verified Max effort owns
+phase gate. Section 12 decisions are settled. The director has paused local
+screen capture and computer use for every agent while development continues.
+Source work, CPU tests and hosted CI remain available. Claude Opus 5.5 with explicitly verified Max effort owns
 editor UI design, layout, styling and pixel review by default. Astra/root and
 subagents own all other work, including rendering and non-editor visuals, and may
 take over unresolved Claude editor UI work without another routing approval.
