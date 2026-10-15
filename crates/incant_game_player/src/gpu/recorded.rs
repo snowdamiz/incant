@@ -3,7 +3,6 @@
 use super::*;
 use incant_render_data::{
     SceneInput, UiInput,
-    material_keys::MaterialSamples,
     prewarm::{MaterialIdentity, MaterialManifest, MaterialProfile, PrewarmError},
 };
 use incant_render_game::RenderInputConsumer;
@@ -44,7 +43,10 @@ impl RenderInputConsumer for Consumer {
             settings.scene,
             settings.cooked_scene_sha256,
             MaterialProfile {
-                samples: MaterialSamples::One,
+                // The manifest selects only the two supported attachment modes;
+                // the renderer uses this admitted mode and validates device
+                // formats before allocating either mode's finite catalog.
+                samples: settings.manifest.identity.profile.samples,
                 program: Renderer::material_program(),
             },
             input,
