@@ -68,6 +68,7 @@ impl Controller {
             ));
         }
         let end = ticks as u64;
+        let mut profile = super::profile::Pending::new(request.profile)?;
         let replay = request
             .inputs_script
             .map(|input| {
@@ -105,6 +106,7 @@ impl Controller {
             session,
             started_revision: revision,
             samples: vec![0.; max_frames * 2],
+            profile: None,
         };
         if let Some(plan) = &mut plan {
             plan.observe(candidate.session.world()?, candidate.session.input()?)
@@ -119,22 +121,26 @@ impl Controller {
                 .transpose()
                 .map_err(native)?
                 .unwrap_or(&[]);
-            candidate.session.tick_recorded(
-                input,
-                replay
-                    .as_ref()
-                    .map(|r| r.ui_at(tick))
-                    .transpose()
-                    .map_err(native)?
-                    .unwrap_or(&[]),
-                replay
-                    .as_ref()
-                    .map(|r| r.viewport_at(tick))
-                    .transpose()
-                    .map_err(native)?
-                    .flatten(),
-                &mut candidate.samples[..frames * 2],
-            )?;
+            let ui = replay
+                .as_ref()
+                .map(|r| r.ui_at(tick))
+                .transpose()
+                .map_err(native)?
+                .unwrap_or(&[]);
+            let viewport = replay
+                .as_ref()
+                .map(|r| r.viewport_at(tick))
+                .transpose()
+                .map_err(native)?
+                .flatten();
+            profile.frame(tick, || {
+                candidate.session.tick_recorded(
+                    input,
+                    ui,
+                    viewport,
+                    &mut candidate.samples[..frames * 2],
+                )
+            })??;
             if let Some(plan) = &mut plan {
                 plan.observe(candidate.session.world()?, candidate.session.input()?)
                     .map_err(native)?;
@@ -155,11 +161,15 @@ impl Controller {
             },
             Vec::new(),
         )?;
-        let report = json!({
+        candidate.profile = profile.finish(project.id.clone())?;
+        let mut report = json!({
             "passed":observations.as_ref().is_none_or(|report|report.passed),
             "runtime":"native", "state":state, "observations":observations,
             "gameplay_images_available":false
         });
+        if let Some(profile) = &candidate.profile {
+            report["profile"] = profile.identity();
+        }
         // A failed assertion is a completed run with inspectable results, unlike
         // a failed simulation. No project transaction is created in either case.
         check_budget(cancel, started)?;

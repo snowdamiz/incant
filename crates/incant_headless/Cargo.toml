@@ -9,6 +9,7 @@ publish.workspace = true
 default = ["physics-deterministic"]
 
 wasmtime-host = ["incant_play/wasmtime-host"]
+agent-profiler = ["incant_agent_native/agent-profiler"]
 
 # Select one physics kernel for the entire process, including build/test hosts.
 physics-deterministic = [
