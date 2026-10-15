@@ -27,7 +27,7 @@ The original build-monitor interruption is retained. This is overlapping Phase 3
 backend work; open-panel context, skills and live-agent eval remain separate.
 [Behavior and validation](docs/spikes/agent-project-context.md).
 
-## Script deadline checks — bounded diagnostic qualified
+## Script deadline checks — full-route diagnostic complete
 
 A default-off observer now separates QuickJS interrupt checks from explicit host
 checks, retaining their counts, refusals and existing CPU-clock attempts. It
@@ -35,8 +35,13 @@ changes no enforcement frequency, deadline, owner check or locking. Actual VM,
 rollback, detached-view and allocation controls pass alongside ordinary builds
 and strict lint. Its diagnostic reports remain excluded from performance gates.
 The conservative script compatibility identity now includes both enforcement
-source files. Full-Core cost measurement remains unrun; the 2 ms target is still
-unmet. [Contract, CPU qualification and retained initial failure](docs/spikes/script-budget-check-attribution.md).
+source files. A fresh private shipping build completes the full 2,156-tick Core10k
+route with exact gameplay and PCM parity. Nested check wall observations average
+4.34 microseconds per frame, or 8.40 microseconds on the same whole-tick tail
+frames. This closes the check-cost hypothesis without weakening enforcement;
+observer-inclusive wall spans do not establish reclaimable CPU time or a shipping
+speedup. The 2 ms target remains unmet, with other distinct investigations allowed.
+[Contract, actual measurements and retained failures](docs/spikes/script-budget-check-attribution.md).
 
 ## Ordinary subtree duplication — command and persistence qualified
 
