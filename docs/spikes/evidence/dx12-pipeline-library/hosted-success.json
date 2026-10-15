@@ -1,0 +1,573 @@
+{
+  "run": 38770546310,
+  "job": 116544906224,
+  "url": "https://github.com/snowdamiz/incant/actions/runs/38770546310",
+  "source": "6f844ad76065995ec9d137036fd936038e785b07",
+  "artifact_id": 11992148031,
+  "artifact_archive_sha256": "15308f3669b0d3b9565141f6c53722b6eb467d6776bf24739da5b0f6bebc9e18",
+  "artifact_archive_bytes": 22919757,
+  "adapter": "Microsoft Basic Render Driver (CPU software adapter)",
+  "driver": "10.0.26100.33438",
+  "backend": "Dx12",
+  "CPU_controls": 40,
+  "strict_Msvc_lint_stages": 4,
+  "native_processes": 16,
+  "RGBA_buffers": 14,
+  "RGBA_dimensions": [
+    160,
+    96,
+    4
+  ],
+  "exact_RGBA_sha256": "3e8cea6c95915cde999e4fc1d1f30a049d1f3d128499e249296ad2b35b550523",
+  "owned_calls": 32,
+  "all_owned_cleanup_confirmed": true,
+  "probe_seconds": 967.8280000000001,
+  "portable_records": {
+    "file": "hosted-success-records.json.gz",
+    "records": 103,
+    "compressed_bytes": 160391,
+    "compressed_sha256": "0251cc7c8bf26bd046d5da4c8e4cd5755f7768e9818c469f654d7118f2c12310",
+    "expanded_bytes": 2271827,
+    "expanded_sha256": "b5805c69cc18b1122e0a9d41df5c3178e154f27d1bc24e7d6755223228419e65"
+  },
+  "original_artifact_directory": "/Users/andreyyurlov/.codex/incant-integration-evidence/dx12-seed-reuse-001/native-retry3-artifact",
+  "original_inventory": [
+    {
+      "path": "cargo-path.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "cargo-path.stdout.log",
+      "bytes": 84,
+      "sha256": "439bcb560c54a061bca02c433278d1de679cdb0ccff1ee19dc22c408a3e4df25"
+    },
+    {
+      "path": "cooked\\cache\\current.library",
+      "bytes": 81636,
+      "sha256": "249be4a652855ca46a71baff7b94f4e1b2322fddba1ed8d72212831c3b1454f5"
+    },
+    {
+      "path": "cooked\\corrupt\\refusal.txt",
+      "bytes": 45,
+      "sha256": "49675a2e94faa70817929189cd6af3900fb21cc37df48ac86c3edbdb4ffcc996"
+    },
+    {
+      "path": "cooked\\disabled\\initial-report.txt",
+      "bytes": 419,
+      "sha256": "f79d5dc38adb8dc188c0d1465a4d46ba96597d0edfe3e25d8a0dd466630dcebe"
+    },
+    {
+      "path": "cooked\\disabled\\initial.rgba",
+      "bytes": 61440,
+      "sha256": "3e8cea6c95915cde999e4fc1d1f30a049d1f3d128499e249296ad2b35b550523"
+    },
+    {
+      "path": "cooked\\disabled\\refused.rgba",
+      "bytes": 61440,
+      "sha256": "3e8cea6c95915cde999e4fc1d1f30a049d1f3d128499e249296ad2b35b550523"
+    },
+    {
+      "path": "cooked\\disabled\\result.json",
+      "bytes": 2081,
+      "sha256": "6e3949a8a6c8656184ebdb8aadf38c9289acdb53b991bdd36ff50f0e12a6d19e"
+    },
+    {
+      "path": "cooked\\empty-case\\empty\\result.txt",
+      "bytes": 316,
+      "sha256": "a0c62742e1b7e54926b341f0f1fb55e50a67da64887bdfc24499b20bf604eb34"
+    },
+    {
+      "path": "cooked\\lifetime\\result.txt",
+      "bytes": 64,
+      "sha256": "405e66721157eee8cd74dd70f2849f74a23331ab04281bed851dd957b7bd782f"
+    },
+    {
+      "path": "cooked\\missing-case\\missing\\refusal.txt",
+      "bytes": 85,
+      "sha256": "981cf4f839f9c81d33e6ecfb55b751e4a3fba96c5714e3bab71c8556dd55595b"
+    },
+    {
+      "path": "cooked\\reuse-classic\\initial-report.txt",
+      "bytes": 419,
+      "sha256": "99cd85faff174e724099c7c51cb1dfab20cae99ac5d7e069bb8ccd859c7d8d67"
+    },
+    {
+      "path": "cooked\\reuse-classic\\initial.rgba",
+      "bytes": 61440,
+      "sha256": "3e8cea6c95915cde999e4fc1d1f30a049d1f3d128499e249296ad2b35b550523"
+    },
+    {
+      "path": "cooked\\reuse-classic\\refused.rgba",
+      "bytes": 61440,
+      "sha256": "3e8cea6c95915cde999e4fc1d1f30a049d1f3d128499e249296ad2b35b550523"
+    },
+    {
+      "path": "cooked\\reuse-classic\\result.json",
+      "bytes": 2218,
+      "sha256": "adf600732cc58fae392cc8934e2009dc9eb52e5f52939853981bfa833cab07e3"
+    },
+    {
+      "path": "cooked\\reuse-stream\\initial-report.txt",
+      "bytes": 419,
+      "sha256": "f79d5dc38adb8dc188c0d1465a4d46ba96597d0edfe3e25d8a0dd466630dcebe"
+    },
+    {
+      "path": "cooked\\reuse-stream\\initial.rgba",
+      "bytes": 61440,
+      "sha256": "3e8cea6c95915cde999e4fc1d1f30a049d1f3d128499e249296ad2b35b550523"
+    },
+    {
+      "path": "cooked\\reuse-stream\\refused.rgba",
+      "bytes": 61440,
+      "sha256": "3e8cea6c95915cde999e4fc1d1f30a049d1f3d128499e249296ad2b35b550523"
+    },
+    {
+      "path": "cooked\\reuse-stream\\result.json",
+      "bytes": 2201,
+      "sha256": "cfabb0e31a577a0fa2571940dfb462347b05a0427bfc1b4a43866fa189223031"
+    },
+    {
+      "path": "cooked\\seed\\initial-report.txt",
+      "bytes": 471,
+      "sha256": "69af5227b6108f09edb81609a21e0fbcf33f3d9b5451f2b1b92c5d04afd53934"
+    },
+    {
+      "path": "cooked\\seed\\initial.rgba",
+      "bytes": 61440,
+      "sha256": "3e8cea6c95915cde999e4fc1d1f30a049d1f3d128499e249296ad2b35b550523"
+    },
+    {
+      "path": "cooked\\seed\\result.json",
+      "bytes": 2308,
+      "sha256": "352608bb6f8000a05b03bfd0648b6930525b122084b74537244b6b5268e5e131"
+    },
+    {
+      "path": "cooked-all-lint.stderr.log",
+      "bytes": 220,
+      "sha256": "438cd43286aa648646ac30fdd55c28a0c765efd2614ad68c978616daedb140e6"
+    },
+    {
+      "path": "cooked-all-lint.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "cooked-corrupt.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "cooked-corrupt.stdout.log",
+      "bytes": 173,
+      "sha256": "1fdea0d0a824dab10fb3deb68003a83b33f9c6ca027f4dd4a4e097724e156646"
+    },
+    {
+      "path": "cooked-cpu.stderr.log",
+      "bytes": 1058,
+      "sha256": "68acde7a66b8af3bfe3d12d20f14be9aa5605c13ddd0be5909f1d710e8ab2a5b"
+    },
+    {
+      "path": "cooked-cpu.stdout.log",
+      "bytes": 388740,
+      "sha256": "741c76b2106f95c67421b458e106676ad63ce7f612700f6eaed8998b835c20f0"
+    },
+    {
+      "path": "cooked-disabled.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "cooked-disabled.stdout.log",
+      "bytes": 173,
+      "sha256": "44a47129810f7b6f13f628f5a903485ce566e5acd30b3342f623e84b5cb241fa"
+    },
+    {
+      "path": "cooked-empty.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "cooked-empty.stdout.log",
+      "bytes": 173,
+      "sha256": "0f41396a9198c8f0d5fcf5ccff22b6a4a84d2fb0a7d69ddc295fcc4322035dfd"
+    },
+    {
+      "path": "cooked-hal-lint.stderr.log",
+      "bytes": 277,
+      "sha256": "b404af2420c225f6e945aeff8546d168631599300a6416d85d7fdc97a9993114"
+    },
+    {
+      "path": "cooked-hal-lint.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "cooked-lifetime.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "cooked-lifetime.stdout.log",
+      "bytes": 173,
+      "sha256": "1fdea0d0a824dab10fb3deb68003a83b33f9c6ca027f4dd4a4e097724e156646"
+    },
+    {
+      "path": "cooked-missing.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "cooked-missing.stdout.log",
+      "bytes": 173,
+      "sha256": "1fdea0d0a824dab10fb3deb68003a83b33f9c6ca027f4dd4a4e097724e156646"
+    },
+    {
+      "path": "cooked-reuse-classic.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "cooked-reuse-classic.stdout.log",
+      "bytes": 173,
+      "sha256": "4b0e5ae8d6cf10aa21149095e8e6afcac3ee5ed379b7ca07231ac76f07859633"
+    },
+    {
+      "path": "cooked-reuse-stream.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "cooked-reuse-stream.stdout.log",
+      "bytes": 173,
+      "sha256": "4b0e5ae8d6cf10aa21149095e8e6afcac3ee5ed379b7ca07231ac76f07859633"
+    },
+    {
+      "path": "cooked-seed.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "cooked-seed.stdout.log",
+      "bytes": 173,
+      "sha256": "78fef7738afdccf7be06600064f19df4c72f056b4501078e4df812e0540a4553"
+    },
+    {
+      "path": "cooked.exe",
+      "bytes": 30627840,
+      "sha256": "66a75dd5e9b834f9cd4e4c7bd4e3b5765578ce6715c6d15ed3126d49954f61cb"
+    },
+    {
+      "path": "dirty-1.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "dirty-1.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "dirty-13.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "dirty-13.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "dirty-31.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "dirty-31.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "ordinary\\cache\\current.library",
+      "bytes": 81588,
+      "sha256": "a61b1fd743dd07bf20a75ac7f13069a527da553037aa82585f8ec7df5b7fc28c"
+    },
+    {
+      "path": "ordinary\\corrupt\\refusal.txt",
+      "bytes": 45,
+      "sha256": "49675a2e94faa70817929189cd6af3900fb21cc37df48ac86c3edbdb4ffcc996"
+    },
+    {
+      "path": "ordinary\\disabled\\initial-report.txt",
+      "bytes": 419,
+      "sha256": "d234b505a23f9c0cdc93e090f69ffaee93b2e581c1bf6fa3fe5aee03c629c106"
+    },
+    {
+      "path": "ordinary\\disabled\\initial.rgba",
+      "bytes": 61440,
+      "sha256": "3e8cea6c95915cde999e4fc1d1f30a049d1f3d128499e249296ad2b35b550523"
+    },
+    {
+      "path": "ordinary\\disabled\\refused.rgba",
+      "bytes": 61440,
+      "sha256": "3e8cea6c95915cde999e4fc1d1f30a049d1f3d128499e249296ad2b35b550523"
+    },
+    {
+      "path": "ordinary\\disabled\\result.json",
+      "bytes": 2082,
+      "sha256": "7c140d01b916f62a45bc94b863caac4b7c85dd9b3e0597c7c1cc556a35c2d5a8"
+    },
+    {
+      "path": "ordinary\\empty-case\\empty\\result.txt",
+      "bytes": 316,
+      "sha256": "a0c62742e1b7e54926b341f0f1fb55e50a67da64887bdfc24499b20bf604eb34"
+    },
+    {
+      "path": "ordinary\\lifetime\\result.txt",
+      "bytes": 64,
+      "sha256": "405e66721157eee8cd74dd70f2849f74a23331ab04281bed851dd957b7bd782f"
+    },
+    {
+      "path": "ordinary\\missing-case\\missing\\refusal.txt",
+      "bytes": 85,
+      "sha256": "981cf4f839f9c81d33e6ecfb55b751e4a3fba96c5714e3bab71c8556dd55595b"
+    },
+    {
+      "path": "ordinary\\reuse-classic\\initial-report.txt",
+      "bytes": 419,
+      "sha256": "7eef30060d721d9cedacd0986a384c52f410ff2e5daa8c3c82fc22df5f23636d"
+    },
+    {
+      "path": "ordinary\\reuse-classic\\initial.rgba",
+      "bytes": 61440,
+      "sha256": "3e8cea6c95915cde999e4fc1d1f30a049d1f3d128499e249296ad2b35b550523"
+    },
+    {
+      "path": "ordinary\\reuse-classic\\refused.rgba",
+      "bytes": 61440,
+      "sha256": "3e8cea6c95915cde999e4fc1d1f30a049d1f3d128499e249296ad2b35b550523"
+    },
+    {
+      "path": "ordinary\\reuse-classic\\result.json",
+      "bytes": 2219,
+      "sha256": "81851499f5eb7e9a33705e40f8525e7845d81dc80e6ec34197963170cc6411ce"
+    },
+    {
+      "path": "ordinary\\reuse-stream\\initial-report.txt",
+      "bytes": 419,
+      "sha256": "d234b505a23f9c0cdc93e090f69ffaee93b2e581c1bf6fa3fe5aee03c629c106"
+    },
+    {
+      "path": "ordinary\\reuse-stream\\initial.rgba",
+      "bytes": 61440,
+      "sha256": "3e8cea6c95915cde999e4fc1d1f30a049d1f3d128499e249296ad2b35b550523"
+    },
+    {
+      "path": "ordinary\\reuse-stream\\refused.rgba",
+      "bytes": 61440,
+      "sha256": "3e8cea6c95915cde999e4fc1d1f30a049d1f3d128499e249296ad2b35b550523"
+    },
+    {
+      "path": "ordinary\\reuse-stream\\result.json",
+      "bytes": 2202,
+      "sha256": "05ce68ae414a042e62ed9326caf62aedcf4def439475c4e9e86b8dde7af58c8e"
+    },
+    {
+      "path": "ordinary\\seed\\initial-report.txt",
+      "bytes": 471,
+      "sha256": "2e59dcff7155e18ff4756e561917cf68790bc697014b224fc5d07a810248458b"
+    },
+    {
+      "path": "ordinary\\seed\\initial.rgba",
+      "bytes": 61440,
+      "sha256": "3e8cea6c95915cde999e4fc1d1f30a049d1f3d128499e249296ad2b35b550523"
+    },
+    {
+      "path": "ordinary\\seed\\result.json",
+      "bytes": 2309,
+      "sha256": "b5bcdf9be0ce13c0e6aa3d9552c5bf46659e2a5f6320a9a5e3bd689612d7fc8b"
+    },
+    {
+      "path": "ordinary-all-lint.stderr.log",
+      "bytes": 7126,
+      "sha256": "ad513a831fd40622967fb0f1d3a9db6eed1f6a793ac6050c895d55032e6d5ad2"
+    },
+    {
+      "path": "ordinary-all-lint.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "ordinary-corrupt.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "ordinary-corrupt.stdout.log",
+      "bytes": 173,
+      "sha256": "ad29c4210725910f274b428b3a31e5b1516d108cac7adae7f83eac40362f7d45"
+    },
+    {
+      "path": "ordinary-cpu.stderr.log",
+      "bytes": 22536,
+      "sha256": "c3e19f4d5bfb366bf0de1c286ce9a70b69c4cc6a945aa69e63470db3fae406f8"
+    },
+    {
+      "path": "ordinary-cpu.stdout.log",
+      "bytes": 362547,
+      "sha256": "ea9222395424dd29080354f65b1d0512d0720c0c01dd3d89aa51bfdb99f1e980"
+    },
+    {
+      "path": "ordinary-disabled.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "ordinary-disabled.stdout.log",
+      "bytes": 173,
+      "sha256": "1feddad3707c41a2515d84f1534b478be5bbace930149e6f8c85b07d568c39ff"
+    },
+    {
+      "path": "ordinary-empty.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "ordinary-empty.stdout.log",
+      "bytes": 173,
+      "sha256": "5e1c6d2d545d36a21f58c16aec21fa507448847f81bb3fca166d14c0dadfa6b8"
+    },
+    {
+      "path": "ordinary-hal-lint.stderr.log",
+      "bytes": 5267,
+      "sha256": "7215a4de99a95bc0e3da98d68111fa33271d5cd4f540b9d5327f2c0806243290"
+    },
+    {
+      "path": "ordinary-hal-lint.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "ordinary-lifetime.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "ordinary-lifetime.stdout.log",
+      "bytes": 173,
+      "sha256": "ad29c4210725910f274b428b3a31e5b1516d108cac7adae7f83eac40362f7d45"
+    },
+    {
+      "path": "ordinary-missing.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "ordinary-missing.stdout.log",
+      "bytes": 173,
+      "sha256": "ad29c4210725910f274b428b3a31e5b1516d108cac7adae7f83eac40362f7d45"
+    },
+    {
+      "path": "ordinary-reuse-classic.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "ordinary-reuse-classic.stdout.log",
+      "bytes": 173,
+      "sha256": "012499245ba41ef50da2c91bb1f3675d873c615675424773512af809eedaaf79"
+    },
+    {
+      "path": "ordinary-reuse-stream.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "ordinary-reuse-stream.stdout.log",
+      "bytes": 173,
+      "sha256": "1feddad3707c41a2515d84f1534b478be5bbace930149e6f8c85b07d568c39ff"
+    },
+    {
+      "path": "ordinary-seed.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "ordinary-seed.stdout.log",
+      "bytes": 173,
+      "sha256": "99b97ec5344bbe010fadc28c3c63433c0382f1c79db2dc5a0025371c6e6d17ec"
+    },
+    {
+      "path": "ordinary.exe",
+      "bytes": 29538816,
+      "sha256": "6d93e51df35a7e929051a970b6c5c1e40b716541cce40809669f6fc32602aab5"
+    },
+    {
+      "path": "result.json",
+      "bytes": 19551,
+      "sha256": "61da586b6e2fac11ca5967c701d9c1a97c6d45dde64ebe7372503a0674108f56"
+    },
+    {
+      "path": "rustc-path.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "rustc-path.stdout.log",
+      "bytes": 84,
+      "sha256": "59181fc26ae7e517a637ed7fd727780e9f2b2e192de4bc35dfd7d6ad256f3b8b"
+    },
+    {
+      "path": "rustc-version.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "rustc-version.stdout.log",
+      "bytes": 194,
+      "sha256": "5477f9bad65b15c4c5b31fc050fc72feba651ea1b330bc75cf356a4d6b0fbc80"
+    },
+    {
+      "path": "source-0.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "source-0.stdout.log",
+      "bytes": 41,
+      "sha256": "a18b7f5bc20aece41bf2f8dcc315abc8e2634f8567840694a05c30a1786d16e2"
+    },
+    {
+      "path": "source-12.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "source-12.stdout.log",
+      "bytes": 41,
+      "sha256": "a18b7f5bc20aece41bf2f8dcc315abc8e2634f8567840694a05c30a1786d16e2"
+    },
+    {
+      "path": "source-30.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "source-30.stdout.log",
+      "bytes": 41,
+      "sha256": "a18b7f5bc20aece41bf2f8dcc315abc8e2634f8567840694a05c30a1786d16e2"
+    },
+    {
+      "path": "toolchain.stderr.log",
+      "bytes": 171,
+      "sha256": "cad9fa9d4095c44c89d10726f8dadc41d26cb550455e7c4c230382ea619a1338"
+    },
+    {
+      "path": "toolchain.stdout.log",
+      "bytes": 82,
+      "sha256": "b289f0386b3adfb104a94a91584f4dd2cc22bc15f0b4e13b63b62d12bbace85e"
+    }
+  ],
+  "scope": "Native Windows MSVC, ACL, COM ownership, pipeline library membership and exact raw parity on Microsoft software DX12 adapter. No physical GPU performance, window appearance, skipped HLSL compiler or full shader-stall gate claim.",
+  "probe_sha256": "7f026b6c9384fd38cafeeba1cbd8953e10c592e07fea65fd9ef2c64d1f9a9242"
+}

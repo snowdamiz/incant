@@ -1,9 +1,10 @@
 # Opt-in DX12 pipeline libraries
 
-Mac CPU controls and Windows GNU cross-checks pass. A later hosted Windows run
-passes 40 CPU controls and four strict lints, then stops in the first native seed
-on an incorrect zero-hit assertion. Full native reuse, lifetime and rendered
-parity remain unqualified. The feature is default off; shader
+Mac CPU controls and Windows GNU cross-checks pass. The latest hosted Windows
+MSVC run also passes 40 CPU controls, four strict lints and all 16 native stages,
+with real library hits and exact ordinary/cooked pixel parity on Microsoft's
+software DX12 adapter. The earlier failed runs remain recorded below. Hardware
+performance and the whole shader-stall gate remain unqualified. The feature is default off; shader
 equations and renderer quality policy are unchanged. This does not close the
 shader-stall gate in `PLAN.md`.
 
@@ -69,7 +70,7 @@ privilege or Developer Mode. No Windows driver or filesystem execution is claime
 by source review or a Mac cross-check.
 
 
-## Qualification and remaining Windows evidence
+## Original local qualification
 
 The [portable packet](evidence/dx12-pipeline-library/manifest.json) retains six
 qualification attempts. On source `650583fc`, 23 ordinary opt-in and 23 full
@@ -116,8 +117,8 @@ the portable records and strict qualification/source distinctions.
 
 The separate manual workflow `dx12-pipeline-library-diagnostic.yml` uses
 `tools/probes/dx12-pipeline-library.py`. Its first hosted run stopped during
-compilation; the second reaches native startup as recorded below. Complete
-native Windows qualification is still pending.
+compilation; the second reached native startup. The third completed the full
+diagnostic on the software adapter, as recorded below.
 Existing release workflows and required check contexts are unchanged.
 The original source and 127-record qualification packet above remain frozen.
 
@@ -223,3 +224,40 @@ retains both commands/logs and positive process cleanup. No Windows binary ran.
 The original CORE target ceiling remains 16,315,702,201 bytes; its final size is
 15,772,603,362 bytes and the cumulative conservative time charge is 421 seconds
 of 3,600. No target cleanup, artifact copying or budget reset occurred.
+
+## Complete hosted native diagnostic
+
+[Run 38770546310](https://github.com/snowdamiz/incant/actions/runs/38770546310)
+on exact main365 `6f844ad76065995ec9d137036fd936038e785b07` passes the full
+ordinary and cooked sequence. Its adapter is **Microsoft Basic Render Driver**,
+reported as a CPU device using DX12 with driver `10.0.26100.33438`. This executes
+real Windows APIs and native pipeline libraries, but is not a physical-GPU or
+shipping-performance measurement.
+
+Both modes pass 20 CPU controls and two strict MSVC lint configurations. Their
+eight separate native processes each cover seed, strict stream reuse, strict
+classic reuse, disabled loading, COM lifetime, corrupt input, missing input and
+empty library. Each seed records 28 misses, 28 fallback attempts and 28 stores,
+plus four valid same-session stream hits. Fresh-process stream reuse records 31
+stream hits and one compute hit; classic reuse records 31 classic hits and one
+compute hit. Neither route falls back or stores. The late-miss/disabled controls
+retain seven refusals and the previous pixels with zero fallback or stores.
+Native load, store and serialization error counters remain zero.
+
+All 14 initial/refusal RGBA buffers are identical across ordinary/cooked builds
+and stages, including the existing meaningful-color and opaque-coverage checks.
+Every owned call returned zero and confirmed cleanup. The diagnostic took
+967.828 seconds; this includes compilation and controls, not game frame time.
+The [portable evidence](evidence/dx12-pipeline-library/hosted-success.json)
+binds the original archive, source, exact logs, native receipts and raw pixels.
+Replay it with:
+
+```sh
+python3 docs/spikes/evidence/dx12-pipeline-library/verify_hosted.py
+python3 docs/spikes/evidence/dx12-pipeline-library/verify_hosted.py --originals
+```
+
+The original two failures and local compile results remain unchanged. This
+success does not establish power-loss durability, hardware-driver coverage,
+window appearance, skipped HLSL compilation, full-renderer cache coverage or
+the Phase 1 shader-stall requirement. The optional library remains default off.
