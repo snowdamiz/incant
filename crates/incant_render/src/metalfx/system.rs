@@ -1,5 +1,5 @@
 use super::shader::{self, Kind};
-use super::{MetalFxError, Pending, targets::Targets};
+use super::{Fallback, MetalFxError, Pending, targets::Targets};
 use std::sync::Arc;
 use wgpu::util::DeviceExt;
 #[repr(C)]
