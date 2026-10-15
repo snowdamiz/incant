@@ -356,6 +356,23 @@ tool calls. Their reported usage is charged; missing usage reserves the request'
 conservative bound. `eval --case 12-ten-step` runs only that existing case for
 diagnosis and cannot pass the full-suite gate.
 
+To use a local server implementing streaming Responses and function calls, select
+it explicitly for a headless agent invocation:
+
+```sh
+tools/cargo run -p incant_headless --release -- agent artifacts/demo.incant.json 'Rename the first entity to Player' --model LOCAL_MODEL_ID --local-endpoint http://127.0.0.1:8000/v1
+```
+
+The endpoint must use a literal loopback IP (`127.0.0.1` or `[::1]`); remote
+addresses, hostnames, URL credentials, queries and redirects are refused. HTTP
+proxies are disabled for this connection. If the local server requires a key,
+provide it separately through `INCANT_LOCAL_API_KEY` in your local environment.
+The local route never reads or changes saved OpenAI accounts. Existing approval,
+project permissions, durable token budgets, provenance and Undo still apply.
+There is no automatic protocol or hosted-provider fallback. This transport is
+tested with synthetic local HTTP responses; compatibility, output quality and
+vision support of any particular local model require separate live evaluation.
+
 ## Verification and platform probes
 
 ```sh

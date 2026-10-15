@@ -42,6 +42,16 @@ passes local tests and leaves production behavior unchanged. Both desktop jobs
 and Windows Wasm conformance passed on checkpoint44; that checkpoint's separate
 general failure prevented promotion.
 
+## Explicit local-model transport — locally verified
+
+The headless agent can select a loopback streaming Responses server with
+`--local-endpoint`, using an optional separate local key. Saved OpenAI accounts
+are untouched; approvals, durable budgets, command history and Undo remain shared.
+37 focused provider/agent/CLI controls and strict all-target lint pass, with
+independent source review. These are synthetic HTTP results, not live-model
+compatibility or quality evidence. Editor selection and broader provider support
+remain open. [Scope and verification](docs/spikes/local-responses-provider.md).
+
 ## Bounded agent response reads — locally verified
 
 The provider now enforces its response byte limit while reading each SSE line,

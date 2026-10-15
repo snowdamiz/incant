@@ -1,0 +1,216 @@
+{
+  "format": "incant-local-responses-provider-v1",
+  "source_base": "552baceba079f5d47555047204a865491401442c",
+  "source_files": [
+    {
+      "path": "README.md",
+      "sha256": "e8f5d52d12194dce5d908217f7a4f36ede438dbe159447c206ee623efbe5e2ff"
+    },
+    {
+      "path": "crates/incant_agent/src/provider.rs",
+      "sha256": "0e2bb8ef6c52931084db83c9e0516014a2ed39a207653644a05dec636ca0dcc6"
+    },
+    {
+      "path": "crates/incant_agent/src/provider/tests.rs",
+      "sha256": "a76fae570115c51aadad7b143fd14a2eda149ba922ef9936ffb2f686c56a37ce"
+    },
+    {
+      "path": "crates/incant_agent/src/provider/local.rs",
+      "sha256": "af031a3f95d25f187421b6f7505a1df0f55dd40dee1449e378e5ff2c93f36aae"
+    },
+    {
+      "path": "crates/incant_agent/src/provider/local/tests.rs",
+      "sha256": "25da183b18c46ce203f7e60cedc57b89480dd8d89e377c3a7fae9751d5d62d71"
+    },
+    {
+      "path": "crates/incant_headless/src/agent_command.rs",
+      "sha256": "aec6c28c986ae1f0127dc7ed8fdf8034a6035a162e30a44c5bc75e370ca2f171"
+    },
+    {
+      "path": "crates/incant_headless/src/agent_command/tests.rs",
+      "sha256": "070623b109e2f1f19265b5672d6cab367774347c02dfe1a3346d8f19103fefa4"
+    }
+  ],
+  "review_disposition": "accepted_no_blocking_findings",
+  "review_receipt_sha256": "31edad820e43d19fcf97f10d25d2eb4737597f47588f3b16528bf586b54d03c8",
+  "commands": [
+    {
+      "argv": [
+        "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/cargo",
+        "test",
+        "-p",
+        "incant_agent",
+        "--lib",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "--target",
+        "aarch64-apple-darwin",
+        "--target-dir",
+        "/Users/andreyyurlov/.codex/incant-core-tick-diagnostic-target",
+        "-j2",
+        "--message-format=json",
+        "provider::",
+        "--",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit": 0,
+      "reaped": true
+    },
+    {
+      "argv": [
+        "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/cargo",
+        "test",
+        "-p",
+        "incant_agent",
+        "--test",
+        "agent",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "--target",
+        "aarch64-apple-darwin",
+        "--target-dir",
+        "/Users/andreyyurlov/.codex/incant-core-tick-diagnostic-target",
+        "-j2",
+        "--message-format=json",
+        "--",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit": 0,
+      "reaped": true
+    },
+    {
+      "argv": [
+        "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/cargo",
+        "test",
+        "-p",
+        "incant_headless",
+        "--bin",
+        "incant_headless",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "--target",
+        "aarch64-apple-darwin",
+        "--target-dir",
+        "/Users/andreyyurlov/.codex/incant-core-tick-diagnostic-target",
+        "-j2",
+        "--message-format=json",
+        "agent_command::tests",
+        "--",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit": 0,
+      "reaped": true
+    },
+    {
+      "argv": [
+        "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/cargo",
+        "clippy",
+        "-p",
+        "incant_agent",
+        "-p",
+        "incant_headless",
+        "--all-targets",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "--target",
+        "aarch64-apple-darwin",
+        "--target-dir",
+        "/Users/andreyyurlov/.codex/incant-core-tick-diagnostic-target",
+        "-j2",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "reaped": true
+    }
+  ],
+  "profile": "ci",
+  "target": "aarch64-apple-darwin",
+  "test_results": {
+    "provider": 15,
+    "agent_integration": 8,
+    "headless_agent_command": 14
+  },
+  "strict_all_target_lint": [
+    "incant_agent",
+    "incant_headless"
+  ],
+  "test_artifacts": [
+    {
+      "target": "incant_agent",
+      "sha256": "d3d669c7a62c44f6fc408ee7bae77cad9393f949a518dc075107ad3a6e92655c",
+      "bytes": 28509888
+    },
+    {
+      "target": "agent",
+      "sha256": "7a128a6feba509d0f9edacde51978f5a85a50e3f26eb31d0251113c79ea4ea8f",
+      "bytes": 21438280
+    },
+    {
+      "target": "incant_headless",
+      "sha256": "adf12199559d6607019f591f1dceb9bf07264d9152d38335cca07bfdf1124975",
+      "bytes": 46453376
+    }
+  ],
+  "qualification_log_hashes": {
+    "3.stderr.log": {
+      "sha256": "73363b4f48e514ede68f64a06e49af12afea3f20ab880adea30742931c7c6b43",
+      "bytes": 9041
+    },
+    "2.stdout.log": {
+      "sha256": "4983017ea54524b10ff9e3fae379710854db0ba55edc0f18767a530634fe2cbc",
+      "bytes": 682819
+    },
+    "1.stderr.log": {
+      "sha256": "43f191eaa8022394c5a3e88c11db4f392aa6c43f34676612a9ee4cd16b2002ab",
+      "bytes": 315
+    },
+    "0.stdout.log": {
+      "sha256": "4c0fd83c7020746101c2f7c4f0265535e89bec6acf3f4ba85657624f3aae1e5b",
+      "bytes": 458528
+    },
+    "3.stdout.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "2.stderr.log": {
+      "sha256": "e75f4c7bf5d5565f95ed1ff863d502d4a3ebfe0d04986d3d10ee199a59b1abc2",
+      "bytes": 3639
+    },
+    "1.stdout.log": {
+      "sha256": "9b16e213aef02e4ddc4d53512bde4bf5b4bdd2e4a066386188ec0ce1c426ecbd",
+      "bytes": 458519
+    },
+    "0.stderr.log": {
+      "sha256": "6f2112a36b75af131710c8b2fb2447921f61894ed4e5c97c6296081ce35d8886",
+      "bytes": 1283
+    }
+  },
+  "qualification_receipt_sha256": "b0eb066be37933dd84e67bfd30846ab66b39fb54646150e14b9ad749780f99e0",
+  "native_process_groups_reaped": true,
+  "owned_processes_independently_absent": [
+    84462,
+    84984,
+    85022,
+    85365
+  ],
+  "source_unchanged_during_tests": true,
+  "resource_elapsed_seconds_not_performance": 150.85522100000526,
+  "synthetic_local_HTTP_only": true,
+  "live_model_compatibility_quality_or_vision_qualification": false,
+  "editor_provider_selection": false,
+  "full_provider_expansion_or_phase_gate": false,
+  "source_validation_precedes_document_only_changes": true
+}

@@ -32,6 +32,11 @@ pub(super) struct Options {
     prompt: String,
     #[arg(long)]
     model: String,
+    /// Use a local streaming Responses server instead of the saved OpenAI account.
+    /// The API base must use a loopback IP, e.g. http://127.0.0.1:8000/v1.
+    /// An optional separate credential is read from INCANT_LOCAL_API_KEY.
+    #[arg(long)]
+    local_endpoint: Option<String>,
     /// Additional tokens for this invocation, bounded by the project's remaining cap (0 disables).
     #[arg(long, default_value_t = 64000)]
     max_tokens: u64,
@@ -79,6 +84,7 @@ struct Work {
 
 pub(super) fn run(options: Options) -> Result<()> {
     let max_output_tokens = options.max_output_tokens;
+    let local_endpoint = options.local_endpoint.clone();
     let receipt = execute(
         options,
         Ledger::open,
@@ -90,9 +96,26 @@ pub(super) fn run(options: Options) -> Result<()> {
                 |project, root, turn| {
                     // Construction performs no inference. A failure here is a known
                     // zero-work receipt, preserving all previous ledger charges.
-                    let provider = crate::provider(turn.request.model.clone()).map_err(|_| {
-                        AgentError::Provider("Account connection is unavailable".into())
-                    })?;
+                    let provider: Box<dyn Provider> = if let Some(endpoint) = &local_endpoint {
+                        let key = match std::env::var("INCANT_LOCAL_API_KEY") {
+                            Ok(key) => Some(key),
+                            Err(std::env::VarError::NotPresent) => None,
+                            Err(_) => {
+                                return Err(AgentError::Provider(
+                                    "local-server credential is not UTF-8".into(),
+                                ));
+                            }
+                        };
+                        Box::new(incant_agent::provider::LocalResponsesProvider::new(
+                            endpoint,
+                            key,
+                            turn.request.model.clone(),
+                        )?)
+                    } else {
+                        Box::new(crate::provider(turn.request.model.clone()).map_err(|_| {
+                            AgentError::Provider("Account connection is unavailable".into())
+                        })?)
+                    };
                     let viewport = incant_agent_native::Host::new(
                         root.to_path_buf(),
                         GpuPerception::new(Some(root.to_path_buf())),
