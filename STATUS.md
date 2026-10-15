@@ -49,9 +49,12 @@ A default-off native DX12 pipeline library now has conservative source/driver
 identity, bounded private Windows storage, exact descriptor keys and COM-owned
 input backing. Mac CPU controls and Windows GNU compile/lint checks pass. A
 separate manually invoked hosted diagnostic covers real Windows cache hits,
-filesystem/COM lifetime and exact rendered parity; it has not yet run. Existing
-release checks are unchanged. This does not close the shader-stall gate or claim
-that HLSL compilation is avoided. [Scope and evidence](docs/spikes/dx12-pipeline-library.md).
+filesystem/COM lifetime and exact rendered parity. Its first run stopped during
+compilation when the resource observer encountered a retired temporary directory;
+the observer repair passes ten portable controls, with native execution still
+pending. Existing release checks are unchanged. This does not close the
+shader-stall gate or claim that HLSL compilation is avoided.
+[Scope and evidence](docs/spikes/dx12-pipeline-library.md).
 
 ## macOS audio output changes — CPU qualified
 

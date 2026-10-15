@@ -1,0 +1,175 @@
+{
+  "workflow_run": 38761380647,
+  "url": "https://github.com/snowdamiz/incant/actions/runs/38761380647",
+  "source": "a638241746403dcf73ac94e8fc1ac9ae67b5d26a",
+  "result_sha256": "57ff9616a087e832083e1ae874c40cb5ac907d56f23b62051c7b5f8f6e64e0e0",
+  "result": {
+    "format": "incant-dx12-native-probe-v1",
+    "expected_source": "a638241746403dcf73ac94e8fc1ac9ae67b5d26a",
+    "status": "failed",
+    "calls": [
+      {
+        "name": "source-0",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "managed_call_returned": true,
+        "cleanup_confirmed": true,
+        "exit": 0,
+        "call_finished": true
+      },
+      {
+        "name": "dirty-1",
+        "argv": [
+          "git",
+          "status",
+          "--porcelain"
+        ],
+        "managed_call_returned": true,
+        "cleanup_confirmed": true,
+        "exit": 0,
+        "call_finished": true
+      },
+      {
+        "name": "toolchain",
+        "argv": [
+          "rustup",
+          "toolchain",
+          "install",
+          "1.99.0",
+          "--profile",
+          "minimal",
+          "--component",
+          "clippy"
+        ],
+        "managed_call_returned": true,
+        "cleanup_confirmed": true,
+        "exit": 0,
+        "call_finished": true
+      },
+      {
+        "name": "cargo-path",
+        "argv": [
+          "rustup",
+          "which",
+          "--toolchain",
+          "1.99.0",
+          "cargo"
+        ],
+        "managed_call_returned": true,
+        "cleanup_confirmed": true,
+        "exit": 0,
+        "call_finished": true
+      },
+      {
+        "name": "rustc-path",
+        "argv": [
+          "rustup",
+          "which",
+          "--toolchain",
+          "1.99.0",
+          "rustc"
+        ],
+        "managed_call_returned": true,
+        "cleanup_confirmed": true,
+        "exit": 0,
+        "call_finished": true
+      },
+      {
+        "name": "rustc-version",
+        "argv": [
+          "C:\\Users\\runneradmin\\.rustup\\toolchains\\1.99.0-x86_64-pc-windows-msvc\\bin\\rustc.exe",
+          "-vV"
+        ],
+        "managed_call_returned": true,
+        "cleanup_confirmed": true,
+        "exit": 0,
+        "call_finished": true
+      },
+      {
+        "name": "ordinary-cpu",
+        "argv": [
+          "C:\\Users\\runneradmin\\.rustup\\toolchains\\1.99.0-x86_64-pc-windows-msvc\\bin\\cargo.exe",
+          "test",
+          "-p",
+          "incant_render",
+          "--target",
+          "x86_64-pc-windows-msvc",
+          "--profile",
+          "ci",
+          "--locked",
+          "-j2",
+          "--target-dir",
+          "D:\\a\\_temp\\incant-dx12-pipeline-target",
+          "--lib",
+          "--message-format=json",
+          "--features",
+          "dx12-pipeline-library",
+          "pipeline_cache::",
+          "--",
+          "--test-threads=1"
+        ],
+        "managed_call_returned": false,
+        "cleanup_confirmed": true,
+        "call_finished": true
+      }
+    ],
+    "owned_processes": [
+      {
+        "pid": 5132,
+        "cleanup_confirmed": true
+      },
+      {
+        "pid": 2268,
+        "cleanup_confirmed": true
+      },
+      {
+        "pid": 2056,
+        "cleanup_confirmed": true
+      },
+      {
+        "pid": 7296,
+        "cleanup_confirmed": true
+      },
+      {
+        "pid": 1792,
+        "cleanup_confirmed": true
+      },
+      {
+        "pid": 6496,
+        "cleanup_confirmed": true
+      },
+      {
+        "pid": 1308,
+        "cleanup_confirmed": true
+      }
+    ],
+    "artifacts": [],
+    "claims": "native library membership and exact pixels only; no window, appearance or performance gate",
+    "target_bytes": 690459894,
+    "output_bytes": 211605,
+    "minimum_free_bytes": 154290237440,
+    "Cargo_lock_sha256": "fdac316f2e9a6c66bae2fb6fb47c6661d2357d650cd0282164033eb29085fc3d",
+    "OS": "sys.getwindowsversion(major=10, minor=0, build=26100, platform=2, service_pack='')",
+    "tools": [
+      {
+        "path": "C:\\Users\\runneradmin\\.rustup\\toolchains\\1.99.0-x86_64-pc-windows-msvc\\bin\\cargo.exe",
+        "sha256": "c9b44417dc8228b81923a1068a3c09e32d2793f2cced2a816789cf433c1f0d46"
+      },
+      {
+        "path": "C:\\Users\\runneradmin\\.rustup\\toolchains\\1.99.0-x86_64-pc-windows-msvc\\bin\\rustc.exe",
+        "sha256": "fc40f1c8b65095a22a48c111aadc279c26a049b7e4161e8b99ffe3eb23873e86"
+      }
+    ],
+    "error": "FileNotFoundError(2, 'The system cannot find the path specified')",
+    "terminal": true,
+    "elapsed_seconds": 157.094,
+    "cleanup_confirmed": true
+  },
+  "original_artifact_id": 11986581006,
+  "original_archive_bytes": 21128,
+  "native_tests_executed": 0,
+  "failure_classification": "Resource observer raised while Cargo retired a temporary rmeta descendant directory; first ordinary compiler child cancelled/cleaned. No compiler or native-library assertion result established."
+}
