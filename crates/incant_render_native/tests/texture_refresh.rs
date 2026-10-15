@@ -420,7 +420,10 @@ fn prepared_catalog_publication_carries_intervening_light_values_without_rebindi
             .input()
             .nodes
             .iter()
-            .find_map(|n| n.light.as_ref())
+            .find(|n| n.id == "00000000000000000000000004")
+            .unwrap()
+            .light
+            .as_ref()
             .unwrap()
             .values()
             .intensity,

@@ -16,8 +16,11 @@ fn light_controls_commit_with_numeric_writes_and_expired_capabilities_never_reac
         );
     }
     let d = declarations(&w);
-    assert_eq!(d[0].directional.as_ref().unwrap().color, [0.2, 0.3, 0.4]);
-    assert_eq!(d[1].point.as_ref().unwrap().intensity, 0.);
+    assert_eq!(
+        d[&id(1)].directional.as_ref().unwrap().color,
+        [0.2, 0.3, 0.4]
+    );
+    assert_eq!(d[&id(2)].point.as_ref().unwrap().intensity, 0.);
     assert_eq!(w.spatial_view().unwrap().binding_generation(), 0);
 }
 #[test]
@@ -33,7 +36,7 @@ fn caught_light_errors_and_late_native_refusal_rollback_numeric_structural_and_q
         "try{t.commands.setLightColor(id,Object.defineProperty([0,0,0],0,{get(){t.commands.setLightIntensity(id,500);return NaN}}))}catch(_){}",
     ] {
         let source = format!(
-            "exports.default={{update(t){{const id='00000000000000000000000001';t.chunks[0].transforms[0]=42;t.commands.setLightIntensity(id,99);t.commands.setVelocity(id,[3,0,0]);{bad}}}}};"
+            "exports.default={{update(t){{const id='00000000000000000000000001';let matched=0;for(const c of t.chunks){{const row=c.ids.indexOf(id);if(row>=0){{c.transforms[row*10]=42;matched++;}}}}if(matched!==1)throw Error('unique numeric owner');t.commands.setLightIntensity(id,99);t.commands.setVelocity(id,[3,0,0]);{bad}}}}};"
         );
         let mut h = ScriptHost::new(CompiledScript::compile(&source).unwrap()).unwrap();
         let mut w = incant_runtime::NativeWorld::new(scene());
@@ -85,11 +88,11 @@ fn checkpoint_restores_light_values_and_opted_in_day_night_phase_without_rebindi
         let current = declarations(b.world().unwrap());
         assert_eq!(declarations(a.world().unwrap()), current);
         assert_eq!(
-            current[0].directional.as_ref().unwrap().intensity,
+            current[&id(1)].directional.as_ref().unwrap().intensity,
             f64::from(phase) * 100.
         );
         assert_eq!(
-            current[1].point.as_ref().unwrap().color,
+            current[&id(2)].point.as_ref().unwrap().color,
             [f64::from(phase) / 100., 0.5, 0.75]
         );
         assert_eq!(

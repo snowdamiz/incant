@@ -308,6 +308,16 @@ fn retained_flipbook_selection_stages_without_allocation() {
 #[test]
 #[ignore = "requires a native GPU; numerical light publication and history control"]
 fn light_scalars_match_fresh_frames_and_rejected_candidates_do_not_cut_accepted_history() {
+    fn light_mut<'a>(input: &'a mut SceneInput, owner: &str) -> &'a mut SceneLight {
+        input
+            .nodes
+            .iter_mut()
+            .find(|node| node.id == owner)
+            .expect("named light owner")
+            .light
+            .as_mut()
+            .expect("punctual light")
+    }
     let mut renderer = crate::test_support::checked(Renderer::headless().unwrap());
     if crate::motion::admission().is_err() {
         assert!(pollster::block_on(renderer.enable_motion_vectors()).is_err());
@@ -332,15 +342,11 @@ fn light_scalars_match_fresh_frames_and_rejected_candidates_do_not_cut_accepted_
     retained.submit(&renderer, &input, target(&view)).unwrap();
     let initial_pixels = read(&renderer, &output);
     let initial = retained.motion_frame().unwrap();
-    let original = input.nodes[3].light.as_ref().unwrap().values();
-    input.nodes[3]
-        .light
-        .as_mut()
-        .unwrap()
-        .set_values(incant_render_data::LightValues {
-            color: [0.; 3],
-            intensity: 0.,
-        });
+    let original = light_mut(&mut input, "key").values();
+    light_mut(&mut input, "key").set_values(incant_render_data::LightValues {
+        color: [0.; 3],
+        intensity: 0.,
+    });
     let mut invalid = target(&view);
     invalid.width = 0;
     assert!(retained.submit(&renderer, &input, invalid).is_err());
@@ -350,37 +356,25 @@ fn light_scalars_match_fresh_frames_and_rejected_candidates_do_not_cut_accepted_
     );
     assert_eq!(retained.motion_frame().unwrap().epoch(), initial.epoch());
     assert_eq!(read(&renderer, &output), initial_pixels);
-    input.nodes[3].light.as_mut().unwrap().set_values(original);
+    light_mut(&mut input, "key").set_values(original);
     retained.submit(&renderer, &input, target(&view)).unwrap();
     assert!(retained.motion_frame().unwrap().has_previous());
     assert_eq!(retained.motion_frame().unwrap().epoch(), initial.epoch());
     let mut visible_change = false;
     for (n, intensity) in [0., 2., 0., 3.].into_iter().enumerate() {
         let previous = retained.motion_frame().unwrap();
-        input.nodes[3]
-            .light
-            .as_mut()
-            .unwrap()
-            .set_values(incant_render_data::LightValues {
-                color: [0.2, 0.5, 0.8],
-                intensity,
-            });
-        input.nodes[4]
-            .light
-            .as_mut()
-            .unwrap()
-            .set_values(incant_render_data::LightValues {
-                color: [0.8, 0.2, 0.3],
-                intensity: n as f64 * 5.,
-            });
-        input.nodes[5]
-            .light
-            .as_mut()
-            .unwrap()
-            .set_values(incant_render_data::LightValues {
-                color: [0.1, 0.9, 0.3],
-                intensity: 25. + n as f64,
-            });
+        light_mut(&mut input, "key").set_values(incant_render_data::LightValues {
+            color: [0.2, 0.5, 0.8],
+            intensity,
+        });
+        light_mut(&mut input, "point").set_values(incant_render_data::LightValues {
+            color: [0.8, 0.2, 0.3],
+            intensity: n as f64 * 5.,
+        });
+        light_mut(&mut input, "spot").set_values(incant_render_data::LightValues {
+            color: [0.1, 0.9, 0.3],
+            intensity: 25. + n as f64,
+        });
         retained.submit(&renderer, &input, target(&view)).unwrap();
         let current = retained.motion_frame().unwrap();
         assert!(!current.has_previous());
@@ -395,9 +389,10 @@ fn light_scalars_match_fresh_frames_and_rejected_candidates_do_not_cut_accepted_
     assert!(visible_change);
     let accepted = read(&renderer, &output);
     let previous = retained.motion_frame().unwrap();
-    if let Some(SceneLight::Directional(v)) = &mut input.nodes[3].light {
-        v.shadows.as_mut().unwrap().distance += 1.;
-    }
+    let SceneLight::Directional(v) = light_mut(&mut input, "key") else {
+        panic!("directional binding")
+    };
+    v.shadows.as_mut().unwrap().distance += 1.;
     assert!(retained.submit(&renderer, &input, target(&view)).is_err());
     assert_eq!(
         retained.motion_frame().unwrap().sequence(),
