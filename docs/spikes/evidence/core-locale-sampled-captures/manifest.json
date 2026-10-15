@@ -1,0 +1,838 @@
+{
+  "format": "incant-core-locale-sampled-captures",
+  "version": 1,
+  "producer": "50b5408b1d6be66dbb1dcbca501d4380add9d656",
+  "archive_sha256": "9f1eaed1785ce5cdec0196bbbd0504841eaf9f8559edaad4488b1ef13d5e35ad",
+  "archive_bytes": 104217,
+  "decoded_archive_bytes": 513781,
+  "records": [
+    {
+      "key": "capture-proposal-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/capture-proposal-001.json",
+      "bytes": 103706,
+      "sha256": "603c197d922e51a9c58437978d88cb17ae1e7d6767f7290d3db015299f5dbe55"
+    },
+    {
+      "key": "sequence-supervisor-004.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/sequence-supervisor-004.py",
+      "bytes": 9006,
+      "sha256": "d87f5d79ac09947b6b0c657f85168e6cc6de281ee5105a3e11f0af24685090e7"
+    },
+    {
+      "key": "capture-supervisor-metadata-001.diff",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/capture-supervisor-metadata-001.diff",
+      "bytes": 723,
+      "sha256": "41e7b4640700a8e8e7aaa4f596a83f2a110f05ad129ab1f83880f25efee94fa0"
+    },
+    {
+      "key": "capture-parity-002.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/capture-parity-002.py",
+      "bytes": 12339,
+      "sha256": "01c12cff65a7f648f4c8aca4bd1b7a85792dd9365e6815d9f7fa6ef9e12b11c2"
+    },
+    {
+      "key": "test-capture-parity-002.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/test-capture-parity-002.py",
+      "bytes": 9287,
+      "sha256": "bd471e7695c871c492a88308922b50cd75c76ba23033d798eea3f313c84a2982"
+    },
+    {
+      "key": "capture-parity-controls-002.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/capture-parity-controls-002.log",
+      "bytes": 109,
+      "sha256": "4ef232e879197ae36d7e2843773a40797dc1c8cb5db1b080513eb00542f9218f"
+    },
+    {
+      "key": "test-sequence-supervisor-004.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/test-sequence-supervisor-004.py",
+      "bytes": 3738,
+      "sha256": "ee9659bec41e2f91bf5e8996e3f41bbc5ab6fb21faef0816b564ec15feccc59a"
+    },
+    {
+      "key": "sequence-supervisor-controls-005.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/sequence-supervisor-controls-005.log",
+      "bytes": 229,
+      "sha256": "5129a984800491f6f1696bdb67deaae22f18afad12798cb983d46c60238314ee"
+    },
+    {
+      "key": "root-capture-grant-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/root-capture-grant-001.json",
+      "bytes": 623,
+      "sha256": "2623533f30aceb0ad2b49bd45f96fd8c34d1f59177159b1162f508d682ded83b"
+    },
+    {
+      "key": "capture-closeout-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/capture-closeout-001.json",
+      "bytes": 56539,
+      "sha256": "1e1fe920c1e259411a8f19daa974d929d0928fe883e839b65c9e5e4ba9f64f8e"
+    },
+    {
+      "key": "root-pixel-review-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/root-pixel-review-001.json",
+      "bytes": 5613,
+      "sha256": "93e5766163c1e693c3c91e063129917f99ba268d8dfea5732f9cd2608502b7da"
+    },
+    {
+      "key": "baseline-closeout-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/baseline-closeout-001.json",
+      "bytes": 2554,
+      "sha256": "d4270426df30413d8b1ff89f2599c6ea0dddb7cd5cdc1cad5577939d4e00b964"
+    },
+    {
+      "key": "captures-001/launch.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/launch.json",
+      "bytes": 319,
+      "sha256": "9158f6e14649824f1c69f0a039ae5c109fb0bdf623e53f4c50af28e92ad3cd87"
+    },
+    {
+      "key": "captures-001/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/result.json",
+      "bytes": 4691,
+      "sha256": "765619395687fb9bafefd236a584fac8a21679b68dd5f2d8daeace89cdb3c8fc"
+    },
+    {
+      "key": "captures-001/lifecycle.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/lifecycle.json",
+      "bytes": 6876,
+      "sha256": "eb54e5a0f5a1cc9c46a34741cff2a77c4b5a5788b181fcee1c98050819d0dd60"
+    },
+    {
+      "key": "captures-001/Core-en/report.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/Core-en/report.json",
+      "bytes": 6336,
+      "sha256": "99bc0e73eda25aa00bf6be37a44f6a82203788004e83a68193ac9bd167d31d95"
+    },
+    {
+      "key": "captures-001/Core-en/check.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/Core-en/check.json",
+      "bytes": 545,
+      "sha256": "6d54650f57d2af3cd32524a2c706c3f32ed6bf8f0783d7327fbbb843899979c7"
+    },
+    {
+      "key": "captures-001/Core-en/stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/Core-en/stdout.raw.log",
+      "bytes": 3201,
+      "sha256": "26209459378e303f45737a49e03f27cd76884617d2fc342b3ee9d022d7a01730"
+    },
+    {
+      "key": "captures-001/Core-en/stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/Core-en/stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "captures-001/Core-en/frames/manifest.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/Core-en/frames/manifest.json",
+      "bytes": 6272,
+      "sha256": "31328d49a9f242ebe01e6830b68cbef9f761520d01b8054540205f82aa1f6641"
+    },
+    {
+      "key": "captures-001/Core-en/frames/partial.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/Core-en/frames/partial.json",
+      "bytes": 222,
+      "sha256": "7abff62a84d8c5c9982568bcdf632796ab02df7fe52b5a6766b8345bd0bfbe82"
+    },
+    {
+      "key": "captures-001/Core-en/frames/frame-0000.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/Core-en/frames/frame-0000.json",
+      "bytes": 534,
+      "sha256": "3c58299e0cbcea4aa710c2e86133a01045d7f504600ef13568351bbff97e98fb"
+    },
+    {
+      "key": "captures-001/Core-en/frames/frame-0400.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/Core-en/frames/frame-0400.json",
+      "bytes": 543,
+      "sha256": "e2aab6944d4782e8261d5ea7e863a47383bd35457256db0f09c72aab59cc42cd"
+    },
+    {
+      "key": "captures-001/Core-en/frames/frame-0900.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/Core-en/frames/frame-0900.json",
+      "bytes": 543,
+      "sha256": "52c9e94b9609b6f9f6529d872535ecb2263570d514ce1e49567f84e6e2d1507e"
+    },
+    {
+      "key": "captures-001/Core-en/frames/frame-1700.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/Core-en/frames/frame-1700.json",
+      "bytes": 546,
+      "sha256": "24f7e705f8aec5601a00868a35549e0c6f3ed807460d3cfddc6c43959b84eba2"
+    },
+    {
+      "key": "captures-001/Core-en/frames/frame-2156.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/Core-en/frames/frame-2156.json",
+      "bytes": 545,
+      "sha256": "3941eab1ce02dac5032923fbca95220483560a0eb4ab1493a939daed28e6078b"
+    },
+    {
+      "key": "captures-001/zh-Hans/report.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/zh-Hans/report.json",
+      "bytes": 13868,
+      "sha256": "b3d4d28ec0123912cd415710c375bc1a351f0d446fabfce106ad781cc078dbe4"
+    },
+    {
+      "key": "captures-001/zh-Hans/check.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/zh-Hans/check.json",
+      "bytes": 906,
+      "sha256": "edc59c47b8c30ebfaf748d4757a1efbd2f8f90fc6e551b926cefdd2a68a15e44"
+    },
+    {
+      "key": "captures-001/zh-Hans/stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/zh-Hans/stdout.raw.log",
+      "bytes": 6306,
+      "sha256": "f814744488ec60bb7978e410e5bfc78d71ad4967c217bf191ea0a45b2a7c6d32"
+    },
+    {
+      "key": "captures-001/zh-Hans/stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/zh-Hans/stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "captures-001/zh-Hans/frames/manifest.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/zh-Hans/frames/manifest.json",
+      "bytes": 12108,
+      "sha256": "4734135ffdd8546203076a9928130be4607128aa7a452e005b4c0d4ca7c405b9"
+    },
+    {
+      "key": "captures-001/zh-Hans/frames/partial.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/zh-Hans/frames/partial.json",
+      "bytes": 243,
+      "sha256": "65e7691bf66a454b08006ecdaf4290e59cee328384b337da23ba47e1a2fc39b2"
+    },
+    {
+      "key": "captures-001/zh-Hans/frames/frame-0000.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/zh-Hans/frames/frame-0000.json",
+      "bytes": 533,
+      "sha256": "0e98e84023a9283c0a4d83da1bfc1551ad6f1ab1051e2f64443fc2c418dd4304"
+    },
+    {
+      "key": "captures-001/zh-Hans/frames/frame-0100.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/zh-Hans/frames/frame-0100.json",
+      "bytes": 541,
+      "sha256": "2c6eeb65ec55cf7bc8162f5d98cf37745db881a3412e500df25b8b94c2e95f5b"
+    },
+    {
+      "key": "captures-001/zh-Hans/frames/frame-0400.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/zh-Hans/frames/frame-0400.json",
+      "bytes": 542,
+      "sha256": "c398f661e30f1e357ec1eb83296f9352556aba0ba793e909383d61bcbb9dfc73"
+    },
+    {
+      "key": "captures-001/zh-Hans/frames/frame-0550.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/zh-Hans/frames/frame-0550.json",
+      "bytes": 542,
+      "sha256": "af6d32f680952d462f8cdbe5dbf9d128941d57c62dc507910732c5fab6f51891"
+    },
+    {
+      "key": "captures-001/zh-Hans/frames/frame-0800.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/zh-Hans/frames/frame-0800.json",
+      "bytes": 542,
+      "sha256": "f5d5e62d23a8c690188bd18f50b76d88237bb57ef5ab8a82403d2244c6daf10b"
+    },
+    {
+      "key": "captures-001/zh-Hans/frames/frame-0900.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/zh-Hans/frames/frame-0900.json",
+      "bytes": 542,
+      "sha256": "4b1eb6bfa7ab173d6e2039405218c0eb99a02f9c9c9d5dd838b3c0d50eafc7d1"
+    },
+    {
+      "key": "captures-001/zh-Hans/frames/frame-0901.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/zh-Hans/frames/frame-0901.json",
+      "bytes": 540,
+      "sha256": "6dd2389728e03b9f9b9368bc98e99a36d51bf819b177798f3402ae88427fe728"
+    },
+    {
+      "key": "captures-001/zh-Hans/frames/frame-1200.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/zh-Hans/frames/frame-1200.json",
+      "bytes": 543,
+      "sha256": "1998ce41853c462dd21aab982c19fd68cfdb440ad9f29d58a2016e61d0579d3b"
+    },
+    {
+      "key": "captures-001/zh-Hans/frames/frame-2975.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/zh-Hans/frames/frame-2975.json",
+      "bytes": 545,
+      "sha256": "6fbf16cc6073026679209a9f84224b62e2a1c24e48552253a28928ccbe4090b1"
+    },
+    {
+      "key": "captures-001/zh-Hans/frames/frame-3056.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/zh-Hans/frames/frame-3056.json",
+      "bytes": 545,
+      "sha256": "51f04f8a6b766046ed4d607203dba3b88cb7a721d91e92d05a3e1cb0472fa5b8"
+    },
+    {
+      "key": "captures-001/ar/report.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/ar/report.json",
+      "bytes": 13918,
+      "sha256": "4a6638003f20bab50ef4adf5637c78f3a428b0a5ba58a470aa7ebd9eef944d7a"
+    },
+    {
+      "key": "captures-001/ar/check.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/ar/check.json",
+      "bytes": 906,
+      "sha256": "64ffd110e28e9774862b6c1c9880895ec5ff0c06cde5525ea851eb65cdf04527"
+    },
+    {
+      "key": "captures-001/ar/stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/ar/stdout.raw.log",
+      "bytes": 6356,
+      "sha256": "acee44a068bf1267b32ffca992b29279d5a162ef042c512ef61c471caaa4641b"
+    },
+    {
+      "key": "captures-001/ar/stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/ar/stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "captures-001/ar/frames/manifest.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/ar/frames/manifest.json",
+      "bytes": 12158,
+      "sha256": "a85ff6b6eeaec8f327ae1b45225f9632d6d78cf89a42a3ac82c251ecda2a023b"
+    },
+    {
+      "key": "captures-001/ar/frames/partial.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/ar/frames/partial.json",
+      "bytes": 243,
+      "sha256": "65e7691bf66a454b08006ecdaf4290e59cee328384b337da23ba47e1a2fc39b2"
+    },
+    {
+      "key": "captures-001/ar/frames/frame-0000.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/ar/frames/frame-0000.json",
+      "bytes": 533,
+      "sha256": "bcc23acd2125717cdfe90dce9938eab3fbb73a22cca67ab997801153a50a7f74"
+    },
+    {
+      "key": "captures-001/ar/frames/frame-0100.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/ar/frames/frame-0100.json",
+      "bytes": 541,
+      "sha256": "dfc6a94b082fe1c5fa8d8fffb920a5e77776d3fe180024b8d7de922a27f94551"
+    },
+    {
+      "key": "captures-001/ar/frames/frame-0400.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/ar/frames/frame-0400.json",
+      "bytes": 542,
+      "sha256": "b98309a849133f6f4ade080cbcef73a449139dba91393974c3cc275dcbc95e98"
+    },
+    {
+      "key": "captures-001/ar/frames/frame-0550.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/ar/frames/frame-0550.json",
+      "bytes": 542,
+      "sha256": "557e10d51d14147682994616d7940f7813bff16fcd89c9c4d2003ab49ee69f62"
+    },
+    {
+      "key": "captures-001/ar/frames/frame-0800.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/ar/frames/frame-0800.json",
+      "bytes": 542,
+      "sha256": "50f31c2e6a05dcc3e7082f7d65aa9f686245a5b36e0615b5599a51cd50d74338"
+    },
+    {
+      "key": "captures-001/ar/frames/frame-0900.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/ar/frames/frame-0900.json",
+      "bytes": 542,
+      "sha256": "89992816be5e05a90b683a57cb5475412b9e81c54869b4fffdedc03aaea349d7"
+    },
+    {
+      "key": "captures-001/ar/frames/frame-0901.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/ar/frames/frame-0901.json",
+      "bytes": 540,
+      "sha256": "e84708a44db1bab344c8da248eea33d81d21c6512b552b34170e24033e943217"
+    },
+    {
+      "key": "captures-001/ar/frames/frame-1200.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/ar/frames/frame-1200.json",
+      "bytes": 543,
+      "sha256": "6a8c5de01a8c98fb24a88f896952420754525d2fea9789d6c1b91601fee4e5e3"
+    },
+    {
+      "key": "captures-001/ar/frames/frame-2975.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/ar/frames/frame-2975.json",
+      "bytes": 545,
+      "sha256": "31f5fb5613d2276d5344d75ad1e5d5e25bfff8193587ac667f43e423634e0ade"
+    },
+    {
+      "key": "captures-001/ar/frames/frame-3056.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/ar/frames/frame-3056.json",
+      "bytes": 545,
+      "sha256": "7d95f313c5e0b89ae49e9a09b11a6eed3ea5ea155ac73d830dc509744243dc43"
+    },
+    {
+      "key": "captures-001/en-XA/report.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/en-XA/report.json",
+      "bytes": 14024,
+      "sha256": "036c4e8a391c3d996c85b9ef7894857d3ff0e93bd6139d8f42bc05ed514e5073"
+    },
+    {
+      "key": "captures-001/en-XA/check.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/en-XA/check.json",
+      "bytes": 906,
+      "sha256": "f21a5fe0e32574d3d5c0e2d648c088261f5a10c13a2e599e32842f97d5b31af8"
+    },
+    {
+      "key": "captures-001/en-XA/stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/en-XA/stdout.raw.log",
+      "bytes": 6462,
+      "sha256": "a0f66eef51457fcb8d43b3998b9f71b5c947ef7f23f1b41235784bb662366a3e"
+    },
+    {
+      "key": "captures-001/en-XA/stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/en-XA/stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "captures-001/en-XA/frames/manifest.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/en-XA/frames/manifest.json",
+      "bytes": 12274,
+      "sha256": "8f94b632173a5ce8003ad1bebc1ad0eb3fd5dfd9491a499373f2ecf82a6ea850"
+    },
+    {
+      "key": "captures-001/en-XA/frames/partial.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/en-XA/frames/partial.json",
+      "bytes": 243,
+      "sha256": "65e7691bf66a454b08006ecdaf4290e59cee328384b337da23ba47e1a2fc39b2"
+    },
+    {
+      "key": "captures-001/en-XA/frames/frame-0000.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/en-XA/frames/frame-0000.json",
+      "bytes": 534,
+      "sha256": "a8cada4cc50c29f4a93f018af6f8548f2550d6b9c1dd4d56114468984b97c74a"
+    },
+    {
+      "key": "captures-001/en-XA/frames/frame-0100.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/en-XA/frames/frame-0100.json",
+      "bytes": 542,
+      "sha256": "700ad994bd3194ae5375d71e6062585df7b73e6f9469754dd3c9ea66f906eda9"
+    },
+    {
+      "key": "captures-001/en-XA/frames/frame-0400.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/en-XA/frames/frame-0400.json",
+      "bytes": 543,
+      "sha256": "c856106e4ba244b1146809f17ae79bff854703793b684ae02cdc2ca3ccfbea34"
+    },
+    {
+      "key": "captures-001/en-XA/frames/frame-0550.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/en-XA/frames/frame-0550.json",
+      "bytes": 543,
+      "sha256": "9a64c7c6053ea937fea8cdff9464b6178db79fe902d0e67caf685763ffb409ec"
+    },
+    {
+      "key": "captures-001/en-XA/frames/frame-0800.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/en-XA/frames/frame-0800.json",
+      "bytes": 543,
+      "sha256": "9eaea7b953ddf3fd9c71671c21c1a851f50df064841b281f71da35d90a861f88"
+    },
+    {
+      "key": "captures-001/en-XA/frames/frame-0900.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/en-XA/frames/frame-0900.json",
+      "bytes": 543,
+      "sha256": "a0a4de44959b16920138f720416740200c2a657d3921cc9da046004f2d564a08"
+    },
+    {
+      "key": "captures-001/en-XA/frames/frame-0901.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/en-XA/frames/frame-0901.json",
+      "bytes": 541,
+      "sha256": "e96373ab8aeec6f044a944577c58ab189cce113e11df93fce36c3713a768b872"
+    },
+    {
+      "key": "captures-001/en-XA/frames/frame-1200.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/en-XA/frames/frame-1200.json",
+      "bytes": 544,
+      "sha256": "d4cfd7bb828956eccfae5f8b64bfe22f6887829ebc89de82cca744b4e69241ba"
+    },
+    {
+      "key": "captures-001/en-XA/frames/frame-2975.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/en-XA/frames/frame-2975.json",
+      "bytes": 546,
+      "sha256": "9d4263fb58fe406571aadf870b8bbc8caf83fba289ef35f59a42dec70db1d7a9"
+    },
+    {
+      "key": "captures-001/en-XA/frames/frame-3056.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/en-XA/frames/frame-3056.json",
+      "bytes": 546,
+      "sha256": "ba622d687051e37ac4f4a5033e287e30b03c1de360ae8a80774b6b0560553d5f"
+    },
+    {
+      "key": "captures-001/en-XA-narrow/report.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/en-XA-narrow/report.json",
+      "bytes": 13934,
+      "sha256": "93a692bb73f5d1bc0ba18a3b1f06ac2c7f0457db76587e8ab334bbd235011664"
+    },
+    {
+      "key": "captures-001/en-XA-narrow/check.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/en-XA-narrow/check.json",
+      "bytes": 329,
+      "sha256": "652da08698a451e75125e8756560e163ebd3d8753b071b6b6da30cf0c78afb5b"
+    },
+    {
+      "key": "captures-001/en-XA-narrow/stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/en-XA-narrow/stdout.raw.log",
+      "bytes": 6428,
+      "sha256": "08313ec13b164503f319082aaedf6b838264a158980e550bcb057b41a78e4ce3"
+    },
+    {
+      "key": "captures-001/en-XA-narrow/stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/en-XA-narrow/stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "captures-001/en-XA-narrow/frames/manifest.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/en-XA-narrow/frames/manifest.json",
+      "bytes": 7860,
+      "sha256": "3167b96a44d167894a753cdcb098727b8b8b93f03990c2b5a6e78483ca6ee67b"
+    },
+    {
+      "key": "captures-001/en-XA-narrow/frames/partial.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/en-XA-narrow/frames/partial.json",
+      "bytes": 210,
+      "sha256": "763bb6da41d5942ff6bc1a8d7f4ece33bc91f613635d2e3a58743fb3fee9bcbf"
+    },
+    {
+      "key": "captures-001/en-XA-narrow/frames/frame-0900.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/en-XA-narrow/frames/frame-0900.json",
+      "bytes": 542,
+      "sha256": "1d37237e0771a4037219f40d5c1b33b3218430e4365d8954915c60c022c4d2fb"
+    },
+    {
+      "key": "captures-001/en-XA-narrow/frames/frame-3056.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/en-XA-narrow/frames/frame-3056.json",
+      "bytes": 545,
+      "sha256": "4af269c1534ba1c4479a13fe11e43c27495eab59f30a3cf55df690e712440c8e"
+    }
+  ],
+  "package_packet": {
+    "manifest.json": "e04ed1a4f47fa48a983571b2805a0f479367ae0d86a83a9075f2f753559dac9f",
+    "records.json.gz": "3e89050ea8c1675d80968795150f3ab0b52ab3f7cdb74399b48c6ab6316d9c17",
+    "verify.py": "ac5f36ed5a05b64365c0cb41b3a031d184199951dc6896081d7c6befcb046f11"
+  },
+  "images": [
+    {
+      "path": "images/ar/frames/frame-0550.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/ar/frames/frame-0550.png",
+      "relative": "ar/frames/frame-0550.png",
+      "bytes": 820313,
+      "sha256": "226ff8f83c694770f85b3c33d7eeeed318ff27f563cde90e53f5665e84383084"
+    },
+    {
+      "path": "images/ar/frames/frame-3056.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/ar/frames/frame-3056.png",
+      "relative": "ar/frames/frame-3056.png",
+      "bytes": 707083,
+      "sha256": "032078dc8a1efcbfcfbb367d12628449ed3025b9485819577915e737e810c93f"
+    },
+    {
+      "path": "images/zh-Hans/frames/frame-3056.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/zh-Hans/frames/frame-3056.png",
+      "relative": "zh-Hans/frames/frame-3056.png",
+      "bytes": 708403,
+      "sha256": "f28c33ff0472592282b47be527071b804a5a11bc6d75feaa7e0928a3ce16bdb4"
+    },
+    {
+      "path": "images/en-XA-narrow/frames/frame-3056.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/en-XA-narrow/frames/frame-3056.png",
+      "relative": "en-XA-narrow/frames/frame-3056.png",
+      "bytes": 462106,
+      "sha256": "cc452566dc25d3ed20c7365a2c1f9ccabe8a9d90e0ef53afcf5ae4a23a569e31"
+    },
+    {
+      "path": "images/ar/frames/frame-0900.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/ar/frames/frame-0900.png",
+      "relative": "ar/frames/frame-0900.png",
+      "bytes": 831807,
+      "sha256": "9aa7982d313542df0099683b99d42f6bc1c70755aa5770459b01eb7d070c5232"
+    },
+    {
+      "path": "images/zh-Hans/frames/frame-0901.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/zh-Hans/frames/frame-0901.png",
+      "relative": "zh-Hans/frames/frame-0901.png",
+      "bytes": 804835,
+      "sha256": "00873453dcd654b938548ff236bfd073bb66acaf27b7e8c5af1c5268db19f171"
+    },
+    {
+      "path": "images/en-XA/frames/frame-0900.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/en-XA/frames/frame-0900.png",
+      "relative": "en-XA/frames/frame-0900.png",
+      "bytes": 876206,
+      "sha256": "5caa623f8b45234964993babd4765491c69c9ef2507747a2dc1e22d2d1d95f75"
+    },
+    {
+      "path": "images/en-XA/frames/frame-3056.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/en-XA/frames/frame-3056.png",
+      "relative": "en-XA/frames/frame-3056.png",
+      "bytes": 751268,
+      "sha256": "0193b7bf8451782cc3946e0bfa7cdadf6e4ac10c49ab9b1292f223b64ad942a0"
+    },
+    {
+      "path": "images/en-XA-narrow/frames/frame-0900.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/en-XA-narrow/frames/frame-0900.png",
+      "relative": "en-XA-narrow/frames/frame-0900.png",
+      "bytes": 489147,
+      "sha256": "f753206c6e89f1c5782c19c49811ee7e973f39cc10f8dabb866a9dbdeddfe41f"
+    },
+    {
+      "path": "images/Core-en/frames/frame-2156.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/Core-en/frames/frame-2156.png",
+      "relative": "Core-en/frames/frame-2156.png",
+      "bytes": 712805,
+      "sha256": "9e8a62f0e8908aa78379d7f53f42b60746fabc1eb4810e3e4df08eda6728facf"
+    },
+    {
+      "path": "images/zh-Hans/frames/frame-0900.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/zh-Hans/frames/frame-0900.png",
+      "relative": "zh-Hans/frames/frame-0900.png",
+      "bytes": 831317,
+      "sha256": "e2911a9fa357f3a02b234463466edd1e7a958b9e23a1ece1f1700d59fc48088b"
+    },
+    {
+      "path": "images/ar/frames/frame-0901.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/ar/frames/frame-0901.png",
+      "relative": "ar/frames/frame-0901.png",
+      "bytes": 803211,
+      "sha256": "f0a5b5148a4a9f891877b84c4f29a788a76300c1af796f8a13d1e7584d1aa038"
+    },
+    {
+      "path": "images/en-XA/frames/frame-0901.png",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/en-XA/frames/frame-0901.png",
+      "relative": "en-XA/frames/frame-0901.png",
+      "bytes": 832175,
+      "sha256": "da41eef64f02c4b8d295d6a7c6b771bafd494d8aee0c168c6a65bd9314f1051a"
+    }
+  ],
+  "original_files": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/baselines-001/Core-en/audio.pcm",
+      "bytes": 13798400,
+      "sha256": "ccabf2c68b6388ac554ac3efb5609ddf6b4a45d1a3f316891d5f344094e99ee3"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/Core-en/audio.pcm",
+      "bytes": 13798400,
+      "sha256": "ccabf2c68b6388ac554ac3efb5609ddf6b4a45d1a3f316891d5f344094e99ee3"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/Core-en/frames/frame-0000.png",
+      "bytes": 810910,
+      "sha256": "18dca64691e8b1e1585cef968050cbbd2e0cc90ae08735c71cfb2dfc32b7dd43"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/Core-en/frames/frame-0400.png",
+      "bytes": 943926,
+      "sha256": "9729129cf841e6852a9f7f6464df736d5fc14c421c3d6079d2612f044c02a88d"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/Core-en/frames/frame-0900.png",
+      "bytes": 840499,
+      "sha256": "14dd3acec7a2b19e461d2708c2cc713084805360be62f553fed6685ef71d3581"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/Core-en/frames/frame-1700.png",
+      "bytes": 703175,
+      "sha256": "3f62e7ab7019ddf186b39c6de278103ccd84999f62e9cc223ffe927bac978c01"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/Core-en/frames/frame-2156.png",
+      "bytes": 712805,
+      "sha256": "9e8a62f0e8908aa78379d7f53f42b60746fabc1eb4810e3e4df08eda6728facf"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/baselines-001/zh-Hans/audio.pcm",
+      "bytes": 19558400,
+      "sha256": "e4758521810082d479e1262e04d12f02dd0b28b03e4b91342471eaf845fc5442"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/zh-Hans/audio.pcm",
+      "bytes": 19558400,
+      "sha256": "e4758521810082d479e1262e04d12f02dd0b28b03e4b91342471eaf845fc5442"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/zh-Hans/frames/frame-0000.png",
+      "bytes": 804882,
+      "sha256": "d677580d2e10668509c695c90c23de3f9ad133fb2d4f5c091ff6621ea943252c"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/zh-Hans/frames/frame-0100.png",
+      "bytes": 806844,
+      "sha256": "46f8e9752d34caf2c50962bf01a99e4276fb5be6a82dfec37f57b101b7ef637d"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/zh-Hans/frames/frame-0400.png",
+      "bytes": 812511,
+      "sha256": "c06f3af90a5d45c8a7f1ebedbcb50f024538d60249f4e2be610de7a681d34a8d"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/zh-Hans/frames/frame-0550.png",
+      "bytes": 821883,
+      "sha256": "ad25fcea9c0392354f372d78a2fdb567df5655526f0b887216537b5b61267f0f"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/zh-Hans/frames/frame-0800.png",
+      "bytes": 831256,
+      "sha256": "2a053323ff8e7272b7476f2b6d0cad3b2be482a90ea331a2694d93daf7e1b146"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/zh-Hans/frames/frame-0900.png",
+      "bytes": 831317,
+      "sha256": "e2911a9fa357f3a02b234463466edd1e7a958b9e23a1ece1f1700d59fc48088b"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/zh-Hans/frames/frame-0901.png",
+      "bytes": 804835,
+      "sha256": "00873453dcd654b938548ff236bfd073bb66acaf27b7e8c5af1c5268db19f171"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/zh-Hans/frames/frame-1200.png",
+      "bytes": 866372,
+      "sha256": "1d4c21c2e7d1a6886d88553318c7b0323b7a59570ed4017a7ac6ad2a5cb64b6a"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/zh-Hans/frames/frame-2975.png",
+      "bytes": 708371,
+      "sha256": "0e1ff353222f7249ceb46565b86e847b599fcb776fa9ed442d1ac513808fadf1"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/zh-Hans/frames/frame-3056.png",
+      "bytes": 708403,
+      "sha256": "f28c33ff0472592282b47be527071b804a5a11bc6d75feaa7e0928a3ce16bdb4"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/baselines-001/ar/audio.pcm",
+      "bytes": 19558400,
+      "sha256": "e4758521810082d479e1262e04d12f02dd0b28b03e4b91342471eaf845fc5442"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/ar/audio.pcm",
+      "bytes": 19558400,
+      "sha256": "e4758521810082d479e1262e04d12f02dd0b28b03e4b91342471eaf845fc5442"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/ar/frames/frame-0000.png",
+      "bytes": 803245,
+      "sha256": "b0afd8cbbac26dab90679c5ed202f37898c50b53f02004cf247b2dc462383c18"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/ar/frames/frame-0100.png",
+      "bytes": 805113,
+      "sha256": "06c0ea42bd1704933142ab0b815d52195ae63550891f1956d100d3c405cab820"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/ar/frames/frame-0400.png",
+      "bytes": 810733,
+      "sha256": "01740d2d084efe754bcf817a9b960b524238659d8fbd9ec3c3d26a5684b707d4"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/ar/frames/frame-0550.png",
+      "bytes": 820313,
+      "sha256": "226ff8f83c694770f85b3c33d7eeeed318ff27f563cde90e53f5665e84383084"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/ar/frames/frame-0800.png",
+      "bytes": 831801,
+      "sha256": "9b423fe7a4fe970e1e94c8d906ee454c4574a9af1537cab37fffec22d7545197"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/ar/frames/frame-0900.png",
+      "bytes": 831807,
+      "sha256": "9aa7982d313542df0099683b99d42f6bc1c70755aa5770459b01eb7d070c5232"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/ar/frames/frame-0901.png",
+      "bytes": 803211,
+      "sha256": "f0a5b5148a4a9f891877b84c4f29a788a76300c1af796f8a13d1e7584d1aa038"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/ar/frames/frame-1200.png",
+      "bytes": 863454,
+      "sha256": "b7fb8a432ca93b9c8c25a4d92e1146527659083aa8c1e5d28fd0184b55f58c74"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/ar/frames/frame-2975.png",
+      "bytes": 707049,
+      "sha256": "97d400b5712c35829ec89130ce1474a295472bff8c924830ee26d6bc01d09d7d"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/ar/frames/frame-3056.png",
+      "bytes": 707083,
+      "sha256": "032078dc8a1efcbfcfbb367d12628449ed3025b9485819577915e737e810c93f"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/baselines-001/en-XA/audio.pcm",
+      "bytes": 19558400,
+      "sha256": "e4758521810082d479e1262e04d12f02dd0b28b03e4b91342471eaf845fc5442"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/en-XA/audio.pcm",
+      "bytes": 19558400,
+      "sha256": "e4758521810082d479e1262e04d12f02dd0b28b03e4b91342471eaf845fc5442"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/en-XA/frames/frame-0000.png",
+      "bytes": 832204,
+      "sha256": "68fcde520dc38189b3ec4d8782b9f2c20dd10c8fdaa812f834fb7c2249961d0b"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/en-XA/frames/frame-0100.png",
+      "bytes": 834211,
+      "sha256": "e4d765e64ab2e6eaea7bc8a635aec12dac151de4b8e4912ef3569825efc4374b"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/en-XA/frames/frame-0400.png",
+      "bytes": 839908,
+      "sha256": "53a2ce8a6760d3e27e3d5f38e876e973d6a77be4f54772ae22af152ccd0978ba"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/en-XA/frames/frame-0550.png",
+      "bytes": 849244,
+      "sha256": "ae2ad4ea8e81cdfd994eac8a6241e62b07aa363b67f334fa06f7207fd2db6c23"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/en-XA/frames/frame-0800.png",
+      "bytes": 876214,
+      "sha256": "7a66ebe1ab5758a47f137a92a878b532184ed6fb5f1f0851e6c15a6ffd297c54"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/en-XA/frames/frame-0900.png",
+      "bytes": 876206,
+      "sha256": "5caa623f8b45234964993babd4765491c69c9ef2507747a2dc1e22d2d1d95f75"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/en-XA/frames/frame-0901.png",
+      "bytes": 832175,
+      "sha256": "da41eef64f02c4b8d295d6a7c6b771bafd494d8aee0c168c6a65bd9314f1051a"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/en-XA/frames/frame-1200.png",
+      "bytes": 887898,
+      "sha256": "3a25872171887ede7c37befb32a9282ae1277d245dadafa75c9ecc8acbb4689b"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/en-XA/frames/frame-2975.png",
+      "bytes": 751246,
+      "sha256": "3e61707d4d36061858ab7c6c9b1414b99acef485c48c18e33357b8c6619de410"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/en-XA/frames/frame-3056.png",
+      "bytes": 751268,
+      "sha256": "0193b7bf8451782cc3946e0bfa7cdadf6e4ac10c49ab9b1292f223b64ad942a0"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/baselines-001/en-XA-narrow/audio.pcm",
+      "bytes": 19558400,
+      "sha256": "e4758521810082d479e1262e04d12f02dd0b28b03e4b91342471eaf845fc5442"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/en-XA-narrow/audio.pcm",
+      "bytes": 19558400,
+      "sha256": "e4758521810082d479e1262e04d12f02dd0b28b03e4b91342471eaf845fc5442"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/en-XA-narrow/frames/frame-0900.png",
+      "bytes": 489147,
+      "sha256": "f753206c6e89f1c5782c19c49811ee7e973f39cc10f8dabb866a9dbdeddfe41f"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-player-capture-packages-001/captures-001/en-XA-narrow/frames/frame-3056.png",
+      "bytes": 462106,
+      "sha256": "cc452566dc25d3ed20c7365a2c1f9ccabe8a9d90e0ef53afcf5ae4a23a569e31"
+    }
+  ],
+  "scope": "37 selected offscreen Metal frames; 13 reviewed original images. Same-package full CPU report and PCM parity. No continuous motion, window presentation, temporal reconstruction, performance or phase approval."
+}
