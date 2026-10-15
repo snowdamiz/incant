@@ -283,12 +283,13 @@ mod tests {
         let changed = [1_u8, 2, 3, 5];
         for target in 0..4 {
             let mut d = descriptor();
-            let shader = [
-                &mut d.vertex_shader,
-                &mut d.pixel_shader,
-                &mut d.task_shader,
-                &mut d.mesh_shader,
-            ][target];
+            let shader = match target {
+                0 => &mut d.vertex_shader,
+                1 => &mut d.pixel_shader,
+                2 => &mut d.task_shader,
+                3 => &mut d.mesh_shader,
+                _ => unreachable!(),
+            };
             *shader = D3D12_SHADER_BYTECODE {
                 pShaderBytecode: changed.as_ptr().cast(),
                 BytecodeLength: 4,
@@ -307,6 +308,7 @@ mod tests {
         };
         let key = unsafe { render(&d, &[1; 32]) };
         element.SemanticIndex = 1;
+        d.input_layout.pInputElementDescs = &element;
         assert_ne!(unsafe { render(&d, &[1; 32]) }, key);
         let mut output = D3D12_SO_DECLARATION_ENTRY::default();
         d.stream_output = D3D12_STREAM_OUTPUT_DESC {
@@ -316,6 +318,7 @@ mod tests {
         };
         let gap = unsafe { render(&d, &[1; 32]) };
         output.SemanticName = windows_core::PCSTR(c"".as_ptr().cast());
+        d.stream_output.pSODeclaration = &output;
         assert_ne!(
             unsafe { render(&d, &[1; 32]) },
             gap,
