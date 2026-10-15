@@ -3,9 +3,10 @@
 A fresh ordinary Arabic shipping package from
 `069bbe54dc529511138867dfd4fbe50507a38b6b` now passes public export and all three
 same-package CPU routes. This source includes the logical 640×480 initial window
-and the [Arabic health-label correction](core-rtl-health-direction.md). No native
-window ran for this new package. Arabic appearance, pip reading order and the
-[combined locale gate](../gates/phase1-review.md) remain open.
+and the [Arabic health-label correction](core-rtl-health-direction.md). The subsequent
+[native qualification](core-arabic-corrected-window.md) completes two full replays
+and verifies normal-size HUD, loss/restart and damaged pip direction. Winning
+pixels and the [combined locale gate](../gates/phase1-review.md) remain open.
 
 The producing source is main342, preserved as a clean checkout. The documentation
 is prepared against main346; later integration changes do not relabel the binary.
@@ -66,7 +67,7 @@ build-host/compiler and target/runtime units; exact output-path classification
 corrected only that summary. Original refusals/logs are retained. No exporter or
 player retry was used to obtain the passing results.
 
-## Native appearance still pending
+## Historical window preparation and later qualification
 
 The latest separate pseudo replay remains a failed 120-second attempt: zero host
 steps, 2,344 surface deferrals and a blank client while macOS reported both
@@ -79,11 +80,12 @@ The archived dormant Arabic plan binds this new player and successful CPU
 baseline, a unique local app copy, the original 3,056-step route and unchanged
 120-second child/180-second cooperative bounds. It requires a separate matching
 root grant and a fresh **metadata-only** macOS lock check before any native child.
-Both lock flags must be present and false; locked, missing, malformed or conflicting
-values refuse. Five pure parser controls pass. No new window, CUA or capture ran.
-After unlocking, review normal Arabic HUD, damaged pip direction, loss/restart
-and win while the independently owned child is live. Pseudo's full/narrow route
-and CJK's final win pixels remain separate work.
+That historical parser required both lock flags to be present and false; five
+pure parser controls passed, but the optional secondary field is absent on this
+unlocked Mac. The [corrected preflight and later native results](core-arabic-corrected-window.md)
+retain those false refusals, require the explicit primary unlocked state and
+completed own console login, and reject any contradictory secondary field.
+Pseudo's full/narrow route and CJK's final win pixels remain separate work.
 
 ## Replay
 
