@@ -151,18 +151,21 @@ mod tests {
     fn fallback_keeps_vertex_interface_and_exact_base_alpha_rules() {
         let source = super::source::fallback().unwrap();
         let original = include_str!("../model_material.wgsl");
-        assert_eq!(
-            source
-                .split_once("@fragment fn fragment")
-                .unwrap()
-                .0
-                .trim_end(),
-            original
-                .split_once("@fragment fn fragment")
-                .unwrap()
-                .0
-                .trim_end()
-        );
+        let vertex_prefix = original
+            .split_once("@fragment fn fragment")
+            .unwrap()
+            .0
+            .trim_end();
+        let fragment_comments = source
+            .split_once("@fragment fn fragment")
+            .unwrap()
+            .0
+            .strip_prefix(vertex_prefix)
+            .expect("the complete vertex prefix remains byte-identical");
+        assert!(fragment_comments.lines().all(|line| {
+            let line = line.trim();
+            line.is_empty() || line.starts_with("//")
+        }));
         for line in [
             "material.base*textureSample(base_map,base_sampler,in.uv)",
             "material.flags.x==1u && base.a<material.factors.w",
