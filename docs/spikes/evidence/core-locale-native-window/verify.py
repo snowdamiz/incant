@@ -27,6 +27,110 @@ def integer(value, minimum=0):
     return type(value) is int and value >= minimum
 
 
+def verify_cjk(data, manifest):
+    read = lambda name: json.loads(data[name])
+    identity = manifest['cjk']; root = 'zh-Hans/'
+    author = read(root + 'author-001/authoring/receipt.json')
+    package = read(root + 'shipping-001/export.json'); exported = read(root + 'export-001/result.json')
+    require(exported['passed'] is True and exported['source_sha'] == identity['source']
+            and exported['remaining_private_entries'] == [] and exported['authoring_unchanged'] is True
+            and exported['managed_calls_finished'] is True, 'Fresh CJK retired ordinary export')
+    require(package['player_sha256'] == exported['player_sha256'] == identity['player_sha256']
+            and exported['export_receipt_sha256'] == sha(data[root + 'shipping-001/export.json']), 'Distinct CJK package identity')
+    require(package['mode'] == 'window' and package['target'] == 'aarch64-apple-darwin'
+            and package['physics_mode'] == 'deterministic' and package['startup_source_parsing'] is False
+            and package['build_storage_removed_before_startup'] is True and package['startup']['tick'] == 1
+            and package['startup']['render_input']['gpu_submitted'] is False and 'profiling' not in package, 'CJK source-free ordinary startup')
+    require(exported['node'] == 'v22.23.3' and exported['sdk_version'] == '27.0'
+            and exported['compiler'].startswith('rustc 1.99.0 ') and exported['selected_observer_features_absent'] is True, 'CJK actual tool and feature identities')
+    graph = data[root + 'export-001/call-007.stdout.raw.log']
+    require(sha(graph) == exported['selected_normal_graph_sha256'], 'Actual selected normal graph')
+    roots = [line for line in graph.decode().splitlines() if line.startswith('incant_game_player v')]
+    require(len(roots) == 1 and set(roots[0].removesuffix(' (*)').partition('|')[2].split(','))
+            == {'native-window', 'physics-deterministic', 'project', 'render-gpu', 'render-input'}, 'Exact ordinary CJK root feature graph')
+    for line in graph.decode().splitlines():
+        features = line.removesuffix(' (*)').partition('|')[2].split(',')
+        require(not set(features) & set(exported['forbidden_observer_features']), 'No selected default-off observer')
+    calls = read(root + 'export-001/managed-calls.json')
+    require(len(calls) == 18 and all(c['managed_call_finished'] is True and c['exit_code'] == 0 for c in calls), 'CJK eighteen owned calls')
+    external = {r['path']: r for r in manifest['external_logs']}
+    for call in calls:
+        for stream in ('stdout', 'stderr'):
+            capture = call[stream]
+            if 'path' not in capture:
+                require(capture == {'merged_into': 'stdout'}, 'CJK merged stream')
+                continue
+            name = root + 'export-001/' + Path(capture['path']).name
+            if name in data:
+                require(sha(data[name]) == capture['sha256'] and len(data[name]) == capture['bytes'], 'CJK raw export output')
+            else:
+                require(all(external[capture['path']][k] == capture[k] for k in ('bytes', 'sha256')), 'CJK large output identity')
+    recording = read(root + 'recordings-001/recordings.json')
+    require(recording['locale'] == 'zh-Hans' and recording['project_sha256'] == author['project_sha256'] == package['project_sha256']
+            and recording['locale_settings'] == {'locale': 'zh-Hans', 'fallbacks': [], 'pseudo': False}, 'CJK authoring/whole-scene binding')
+    baseline = read(root + 'baseline-001/result.json')
+    require(baseline['passed'] is True and baseline['managed_calls_finished'] is True
+            and baseline['player_sha256'] == identity['player_sha256'], 'Same CJK package CPU trio')
+    reports = {}
+    for case, clocks in zip(recording['cases'], [('lose-short', 900, 900), ('win', 2156, 2156), ('lose-restart-win', 3056, 2156)], strict=True):
+        name, host, tick = clocks; require((case['name'], case['host_steps'], case['simulation_tick']) == clocks, 'CJK unchanged routes')
+        report = read(root + 'baseline-001/' + name + '.json'); reports[name] = report
+        require(report == read(root + 'baseline-001/' + name + '.stdout.raw.log') and report['tick'] == tick
+                and type(report['tick']) is int and report['frames'] == host * 800 and type(report['frames']) is int, 'CJK raw CPU clocks')
+        plan = read(root + 'recordings-001/' + name + '-observe.json'); observed = report['observations']
+        require(observed['passed'] is True and set(observed['entities']) == set(plan['entities'])
+                and len(observed['checks']) == len(plan['checks']) > 0, 'CJK complete actual observations')
+        for actual, expected in zip(observed['checks'], sorted(plan['checks'], key=lambda c: (c['tick'], c['name'])), strict=True):
+            require(all(actual[k] == expected[k] for k in ('name', 'tick', 'expect')) and actual['passed'] is True
+                    and actual['actual'] is expected['expect']['value'], 'CJK exact successful check membership')
+        require(report['logs']['dropped'] == 0 and report['render_input']['mode'] == 'cpu-only'
+                and report['render_input']['gpu_submitted'] is False and report['render_input']['ui']['widgets'] == 13
+                and report['render_input']['ui']['sources'] == case['labels'], 'CJK canonical CPU HUD')
+        pcm = next(v for v in manifest['retained_inputs'] if v['path'].endswith('/zh-Hans/baseline-001/' + name + '.pcm'))
+        require(pcm['bytes'] == host * 6400 and pcm['sha256'] == report['pcm_sha256'], 'CJK PCM clocks and hash')
+    reset = reports['lose-restart-win']; win = reports['win']
+    require(reset['session'] == {'generation': 2, 'host_tick': 3056, 'simulation_tick': 2156,
+            'restarts': [{'host_step': 900, 'completed_generation': 1, 'simulation_tick': 900, 'output_frames': '720000'}]}, 'CJK loss/restart generation')
+    require(all(reset[k] == win[k] for k in ('logs', 'render_input', 'flipbooks', 'sources'))
+            and reset['observations']['entities'] == win['observations']['entities'], 'CJK winning-state continuation')
+    prefix = root + 'window-001/'; native = read(prefix + 'lose-restart-win.json'); result = read(prefix + 'result.json')
+    ledger = read(prefix + 'processes.json'); ready = read(prefix + 'owned-live.json'); closeout = read(prefix + 'closeout.json')
+    require(result['passed'] is True and result['managed_calls_finished'] is True and ledger[0]['managed_call_finished'] is True
+            and ledger[0]['exit_code'] == 0 and ready['pid'] == ready['pgid'] == closeout['owned_pid'] == 63372
+            and closeout['owned_pid_and_bundle_exec_independently_absent'] is True, 'CJK owned actual child completed/reaped')
+    require(native == read(prefix + 'lose-restart-win.stdout.raw.log') and native['backend'] == 'Metal'
+            and native['adapter'] == 'Apple M5 Pro' and native['mode'] == 'native-window' and native['on_screen'] is True
+            and native['host_steps'] == 3056 and native['tick'] == 2156
+            and native['observations'] == reset['observations'], 'CJK actual complete Metal replay/CPU parity')
+    require(native['session'] == {'generation': 2, 'host_tick': 3056, 'simulation_tick': 2156, 'accepted_frames': 3058}
+            and native['accepted_frames'] == 2157 and native['presentation_refreshes'] == 2
+            and native['input_recording']['completed'] is True
+            and native['input_recording']['sha256'] == recording['cases'][2]['recording_sha256']
+            and native['input_recording']['native_focus_and_surface_required'] is True, 'CJK reset/physical replay counters')
+    require(native['ui']['viewport'] == [640, 480] and native['ui']['scale_factor'] == 2
+            and native['ui']['widgets'] == 7 and native['ui']['glyph_quads'] == 46, 'Actual CJK normal logical viewport')
+    events = [json.loads(line) for line in data[prefix + 'eligibility.jsonl'].splitlines()]
+    require(len(events) == 123 and len(events) <= events[0]['max_records'] == 512
+            and len(data[prefix + 'eligibility.jsonl']) <= 512 * 1024, 'Bounded CJK eligibility output')
+    snapshots = [e for e in events if e['kind'] == 'snapshot']
+    require({tuple(e['state']['physical_size']) for e in snapshots} == {(1280, 960)}
+            and snapshots[-1]['focus_gained_events'] == 3 and snapshots[-1]['focus_lost_events'] == 2
+            and snapshots[-1]['surface_deferrals'] == 1 and events[-1] == {'kind': 'final', 'elapsed_us': 119251565,
+                'host_steps': 3056, 'returned_report': True}, 'Actual fresh default/no-resize and pauses retained')
+    visual = read(prefix + 'root-visual-review.json')
+    require(len(visual['actual_images']) == 4 and visual['logical_size']['fresh_default_no_resize'] is True
+            and visual['phase_gate_approval'] is False and visual['performance_claim'] is False
+            and closeout['win_image_captured'] is False and closeout['filesystem_screenshot_archive'] is False
+            and closeout['continuous_motion_verified'] is False and closeout['audible_quality_verified'] is False, 'Scoped four CJK tool images, win pixels absent')
+    require(closeout['result_sha256'] == sha(data[prefix + 'result.json'])
+            and closeout['root_visual_receipt_sha256'] == sha(data[prefix + 'root-visual-review.json']), 'CJK closeout bindings')
+    qualification = read('logical-size/qualification.json')
+    require(qualification['tests_passed'] == 97 and qualification['terminal_exit'] == 0 and qualification['reaped'] is True
+            and all(c['exit'] == 0 and c['managed_returned'] is True for c in qualification['commands']), 'Root logical-size CPU qualification')
+    for command in qualification['commands']:
+        require(command['log_sha256'] == sha(data['logical-size/' + command['name'] + '.log']), 'Actual CPU log identity')
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--originals', action='store_true')
@@ -53,7 +157,7 @@ def main():
             require(Path(row['original']).read_bytes() == value, 'Retained original ' + name)
         data[name] = value
     read = lambda name: json.loads(data[name])
-    for version, source in [('001', manifest['producer_source']), ('002', manifest['runner_source'])]:
+    for version, source in [('001', manifest['producer_source']), ('002', manifest['runner_source']), ('003', manifest['cjk']['source'])]:
         frozen = read('source-' + version + '/freeze.json')
         require(frozen['source_sha'] == source, 'Frozen source identity')
         for row in frozen['records']:
@@ -163,9 +267,11 @@ def main():
                     and closeout['RTL_health_order_accepted'] is False and closeout['full_visual_route_pass'] is False, 'Partial actual tool pixels, open appearance gates')
     cjk = read('zh-Hans/author-001/authoring/receipt.json')
     require(cjk['locale'] == 'zh-Hans' and cjk['undo_redo_reopen'] is True and cjk['validation']['valid'] is True
-            and cjk['revision'] == 32 and cjk['rpc_calls'] == 46 and '按 R 或 Start' in cjk['localized_text']['zh-Hans']['hud.prompt'], 'Actual CJK authoring only')
-    require(all(manifest['scope'][k] is False for k in ('complete_appearance', 'normal_size_visual_review', 'RTL_health_order',
-            'audible_quality', 'performance_gate', 'CJK_export_or_window', 'pseudo_qualification')), 'Open scope preserved')
+            and cjk['revision'] == 32 and cjk['rpc_calls'] == 46 and '按 R 或 Start' in cjk['localized_text']['zh-Hans']['hud.prompt'], 'Actual CJK public authoring')
+    verify_cjk(data, manifest)
+    require(all(manifest['scope'][k] is False for k in ('complete_appearance', 'RTL_health_order',
+            'audible_quality', 'performance_gate', 'pseudo_qualification'))
+            and manifest['scope']['CJK_export_or_window'] is True and manifest['scope']['normal_size_visual_review'] is True, 'Exact remaining scope')
     if args.originals:
         for row in manifest['external_logs']:
             raw = Path(row['path']).read_bytes()
@@ -178,13 +284,19 @@ def main():
                for name in reports}
         require(pcm['lose-restart-win'] == pcm['lose-short'] + pcm['win'] and not any(pcm['lose-short'][-60 * 6400:]), 'Exact actual PCM reset/settled loss cue')
         require(all(math.isfinite(v[0]) for raw in pcm.values() for v in struct.iter_unpack('<f', raw)), 'Finite actual PCM')
+        cjk_pcm = {name: Path(next(r['path'] for r in manifest['retained_inputs'] if r['path'].endswith('/zh-Hans/baseline-001/' + name + '.pcm'))).read_bytes() for name in reports}
+        require(cjk_pcm['lose-restart-win'] == cjk_pcm['lose-short'] + cjk_pcm['win'] and not any(cjk_pcm['lose-short'][-60 * 6400:]), 'CJK exact actual PCM reset/settled loss cue')
+        require(all(math.isfinite(v[0]) for raw in cjk_pcm.values() for v in struct.iter_unpack('<f', raw)), 'CJK finite actual PCM')
     if args.git_source:
         require(args.source_root is not None, 'Git source requires repository path')
         for row in read('source-002/freeze.json')['records']:
             ref = args.git_source if row['path'] in manifest['tool_paths'] else manifest['public_base']
             actual = subprocess.check_output(['git', 'show', ref + ':' + row['path']], cwd=args.source_root)
             require(sha(actual) == row['sha256'], 'Accepted tools/public base source ' + row['path'])
-    print('PASS:', len(data), 'records;18 Python;Arabic author/export/3CPU/complete numeric window;retained visual timeout/5 partial tool images;CJK author only. No full appearance or performance gate.')
+        for row in read('source-003/freeze.json')['records']:
+            actual = subprocess.check_output(['git', 'show', args.git_source + ':' + row['path']], cwd=args.source_root)
+            require(sha(actual) == row['sha256'], 'CJK logical-size composition source ' + row['path'])
+    print('PASS:', len(data), 'records;18 Python;Arabic author/export/3CPU/complete numeric window;retained visual timeout/5 partial tool images;CJK distinct export/3CPU/complete3056window/4 normal-size tool images;win image missed. No full appearance or performance gate.')
 
 
 if __name__ == '__main__':
