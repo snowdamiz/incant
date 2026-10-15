@@ -119,7 +119,7 @@ fn fixture(root: &Path) -> CookedScene {
         br#"{"right":{"kind":"button","bindings":[{"type":"key","code":"KeyD"}]}}"#,
     )
     .unwrap();
-    fs::write(root.join("input"),serde_json::to_vec(&serde_json::json!({"format":"incant-input","version":1,"start_tick":0,"tick_rate":144,"ticks":4,
+    fs::write(root.join("input"),serde_json::to_vec(&serde_json::json!({"format":"incant-input","version":2,"start_tick":0,"tick_rate":144,"ticks":4,
         "frames":[{"tick":1,"events":[{"type":"key","code":"KeyD","down":true}]},
                   {"tick":2,"events":[],"viewport":[80.,96.]}]})).unwrap()).unwrap();
     scene
@@ -302,4 +302,40 @@ fn selected_frames_include_ui_and_preserve_actual_player_pcm_world_and_restart_e
         fs::metadata(root.join("restart.pcm")).unwrap().len(),
         expected * 8
     );
+}
+
+#[test]
+fn actual_cpu_baseline_prepares_version_two_viewport_before_gpu() {
+    let temp = tempfile::tempdir().unwrap();
+    let root = temp.path();
+    fixture(root);
+    let report = run(args(root, "baseline.pcm"));
+    assert_eq!(report["tick"], 4);
+    assert_eq!(report["frames"], 4 * 44117_u64 / 144);
+    assert_eq!(report["render_input"]["gpu_submitted"], false);
+    assert_eq!(
+        report["render_input"]["ui"]["viewport"],
+        serde_json::json!([80., 96.])
+    );
+    assert!(report["render_input"]["ui"]["glyphs"].as_u64().unwrap() > 0);
+    assert_eq!(
+        fs::metadata(root.join("baseline.pcm")).unwrap().len(),
+        (4 * 44117_u64 / 144) * 8
+    );
+    let mut version_one: serde_json::Value =
+        serde_json::from_slice(&fs::read(root.join("input")).unwrap()).unwrap();
+    version_one["version"] = 1.into();
+    fs::write(
+        root.join("input"),
+        serde_json::to_vec(&version_one).unwrap(),
+    )
+    .unwrap();
+    let error =
+        crate::run(args(root, "refused.pcm"), |_| panic!("no completed report")).unwrap_err();
+    assert!(
+        error
+            .to_string()
+            .contains("unsupported input-recording format or version")
+    );
+    assert!(!root.join("refused.pcm").exists());
 }
