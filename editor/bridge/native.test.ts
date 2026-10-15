@@ -67,6 +67,90 @@ function read(): EngineRead {
   };
 }
 describe("native bridge", () => {
+  it('duplicates through host-issued identities and publishes only the authoritative result', async () => {
+    const copied = '00000000000000000000000011';
+    const calls: { command: string; args: Record<string, unknown> | undefined }[] = [];
+    let finish!: (value: unknown) => void;
+    const initial = read(); initial.entity_duplicate = { available: true };
+    const invoke: Invoke = async <T>(command: string, args?: Record<string, unknown>) => {
+      calls.push({ command, args });
+      if (command === 'engine_duplicate_subtree') return await new Promise<unknown>(resolve => { finish = resolve; }) as T;
+      return initial as T;
+    };
+    const bridge = new NativeBridge(invoke); await bridge.start();
+    const before = bridge.getSnapshot();
+    const pending = bridge.dispatch({ type: 'entity.duplicate', entity: entity as Ulid });
+    expect(await bridge.dispatch({ type: 'entity.duplicate', entity: entity as Ulid })).toMatchObject({ ok: false });
+    expect(bridge.getSnapshot()).toBe(before);
+    expect(calls.filter(c => c.command === 'engine_duplicate_subtree')).toEqual([{ command: 'engine_duplicate_subtree', args: { sceneId: scene, entityId: entity, expectedRevision: 7 } }]);
+    const after = read(); after.revision = 8; after.entity_duplicate = { available: true };
+    after.project.scenes[scene]!.entities[copied] = { ...after.project.scenes[scene]!.entities[entity]!, id: copied };
+    finish({ snapshot: after, receipt: { project: initial.project.id, entity: copied, revision: 8, transaction: '00000000000000000000000012' } });
+    expect(await pending).toEqual({ ok: true, duplicatedEntity: copied });
+    expect(bridge.getSnapshot().entities[copied]?.name).toBe('Cube');
+    expect(before.entities[copied]).toBeUndefined();
+  });
+  it('never invokes duplication on a host without explicit capability', async () => {
+    const invoke = vi.fn(async () => read()) as Invoke;
+    const bridge = new NativeBridge(invoke); await bridge.start();
+    expect(bridge.capabilities).not.toContain('entity.duplicate');
+    expect(await bridge.dispatch({ type: 'entity.duplicate', entity: entity as Ulid })).toMatchObject({ ok: false, error: { code: 'unsupported' } });
+    expect(invoke).toHaveBeenCalledTimes(1);
+  });
+  it('refreshes committed state and retains an unknown outcome when duplication rejects', async () => {
+    const copied = '00000000000000000000000011';
+    let current = read(); current.entity_duplicate = { available: true };
+    let writes = 0;
+    const invoke: Invoke = async <T>(command: string) => {
+      if (command === 'engine_duplicate_subtree') {
+        writes++;
+        current = structuredClone(current);
+        current.revision++;
+        current.project.scenes[scene]!.entities[copied] = { ...current.project.scenes[scene]!.entities[entity]!, id: copied };
+        throw { code: 'engine.snapshot', message: 'Completion snapshot unavailable.' };
+      }
+      return current as T;
+    };
+    const bridge = new NativeBridge(invoke); await bridge.start();
+    const before = bridge.getSnapshot();
+    expect(await bridge.dispatch({ type: 'entity.duplicate', entity: entity as Ulid })).toEqual({
+      ok: false, outcomeUnknown: true, error: { code: 'engine.snapshot', message: 'Completion snapshot unavailable.' },
+    });
+    expect(writes).toBe(1);
+    expect(bridge.getSnapshot().entities[copied]?.name).toBe('Cube');
+    expect(before.entities[copied]).toBeUndefined();
+    const absent = await bridge.dispatch({ type: 'entity.duplicate', entity: '00000000000000000000000099' as Ulid });
+    expect(absent).toMatchObject({ ok: false, error: { code: 'entity.not-found' } });
+    expect(absent).not.toHaveProperty('outcomeUnknown');
+    expect(writes).toBe(1);
+  });
+  it.each(['missing receipt', 'wrong project', 'stale revision', 'invalid identity', 'existing identity', 'absent root'])('retains unknown completion on a %s duplicate response', async kind => {
+    const initial = read(); initial.entity_duplicate = { available: true };
+    const receipt = { project: initial.project.id, entity: '00000000000000000000000011', revision: 8, transaction: '00000000000000000000000012' };
+    if (kind === 'wrong project') receipt.project = '00000000000000000000000013';
+    if (kind === 'stale revision') receipt.revision = 7;
+    if (kind === 'invalid identity') receipt.entity = 'invalid';
+    if (kind === 'existing identity') receipt.entity = entity;
+    const after = read(); after.revision = 8;
+    if (kind !== 'absent root' && kind !== 'existing identity') {
+      after.project.scenes[scene]!.entities[receipt.entity] = { ...after.project.scenes[scene]!.entities[entity]!, id: receipt.entity };
+    }
+    const invoke: Invoke = async <T>(command: string) => (command === 'engine_duplicate_subtree'
+      ? { snapshot: after, receipt: kind === 'missing receipt' ? undefined : receipt } : initial) as T;
+    const bridge = new NativeBridge(invoke); await bridge.start();
+    expect(await bridge.dispatch({ type: 'entity.duplicate', entity: entity as Ulid })).toMatchObject({ ok: false, outcomeUnknown: true, error: { code: 'engine.response' } });
+    expect(bridge.getSnapshot().entities['00000000000000000000000011']).toBeUndefined();
+  });
+  it('accepts a verified receipt with a later authoritative snapshot where the copy was removed', async () => {
+    const initial = read(); initial.entity_duplicate = { available: true };
+    const copied = '00000000000000000000000011';
+    const after = read(); after.revision = 9;
+    const invoke: Invoke = async <T>(command: string) => (command === 'engine_duplicate_subtree'
+      ? { snapshot: after, receipt: { project: initial.project.id, entity: copied, revision: 8, transaction: '00000000000000000000000012' } } : initial) as T;
+    const bridge = new NativeBridge(invoke); await bridge.start();
+    expect(await bridge.dispatch({ type: 'entity.duplicate', entity: entity as Ulid })).toEqual({ ok: true, duplicatedEntity: copied });
+    expect(bridge.getSnapshot().entities[copied]).toBeUndefined();
+  });
   it('normalizes the real nullable animation clip without changing its value or bounds', () => {
     for (const clip of [0, 255, null, undefined]) {
       const current = read();

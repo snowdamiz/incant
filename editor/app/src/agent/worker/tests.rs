@@ -78,6 +78,7 @@ fn cap_changes_fence_provider_and_tools_without_refunding_completed_usage() {
                     prompt: "edit".into(),
                     model: "fixture".into(),
                     approval: ApprovalChoice::Auto,
+                    view_context: None,
                 },
                 Some((ledger, 1_000_000)),
                 || Ok((Connection::OAuth("synthetic".into()), scope.guard(&bus)?)),

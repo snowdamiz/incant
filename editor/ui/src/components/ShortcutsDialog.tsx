@@ -62,6 +62,7 @@ export const SHORTCUT_GROUPS: readonly ShortcutGroup[] = [
       { action: 'Jump to an entity by name', keys: [['Type its name']] },
       { action: 'Filter by name', keys: [['Mod', 'F']] },
       { action: 'Rename', keys: [['F2']] },
+      { action: 'Duplicate', keys: [['Mod', 'D']] },
       { action: 'Delete', keys: [['Mod', 'Backspace'], ['Delete']], other: [['Delete'], ['Ctrl', 'Backspace']] },
       { action: 'Actions menu', keys: [['Shift', 'F10'], ['Menu']] },
     ],

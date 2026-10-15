@@ -63,6 +63,7 @@ pub(crate) struct MotionView<'a> {
     pub output: [u32; 2],
     pub plan: &'a crate::resolution::FramePlan,
     pub temporal: bool,
+    pub lighting_changed: bool,
 }
 pub(crate) struct TemporalInput {
     pub frame: MotionFrame,
@@ -330,15 +331,29 @@ impl MotionState {
             output,
             plan,
             temporal,
+            lighting_changed,
         } = view;
         topology(live, current)?;
         let extent = Extent::new(output, plan.size, plan.rect, current.camera);
         let history = if temporal {
-            self.history
-                .prepare_temporal(extent, current.camera, plan.rect)?
+            if lighting_changed {
+                self.history
+                    .prepare_temporal_with_reset(extent, current.camera, plan.rect, true)?
+            } else {
+                self.history
+                    .prepare_temporal(extent, current.camera, plan.rect)?
+            }
         } else {
-            self.history
-                .prepare(extent, current.camera.matrix(plan.rect[2] / plan.rect[3])?)?
+            if lighting_changed {
+                self.history.prepare_with_reset(
+                    extent,
+                    current.camera.matrix(plan.rect[2] / plan.rect[3])?,
+                    true,
+                )?
+            } else {
+                self.history
+                    .prepare(extent, current.camera.matrix(plan.rect[2] / plan.rect[3])?)?
+            }
         };
         self.provenance.begin();
         if history.frame.bypassed() {

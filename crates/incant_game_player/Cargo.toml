@@ -11,6 +11,7 @@ native-compilation = ["native-window", "incant_render/native-compilation"]
 profile = ["incant_profile/summary", "incant_game_runtime/profile", "incant_script/profile", "incant_runtime/profile"]
 diagnostic-script-phases = ["profile", "incant_script/diagnostic-script-phases"]
 diagnostic-navigation = ["diagnostic-script-phases", "incant_script/diagnostic-navigation"]
+diagnostic-script-budget = ["diagnostic-script-phases", "incant_script/diagnostic-script-budget"]
 profile-tracy = ["profile", "incant_profile/tracy"]
 default = ["physics-deterministic"]
 native-checkpoints = ["incant_game_runtime/native-checkpoints", "incant_script/native-checkpoints", "incant_runtime/native-checkpoints"]
@@ -35,6 +36,8 @@ render-gpu = ["render-input", "dep:incant_render_gpu_host", "dep:incant_render",
 native-presentations = ["native-window", "dep:wgpu-hal", "wgpu-hal/diagnostic-presentations"]
 
 native-window = ["render-gpu", "incant_game_runtime/device", "dep:tao", "dep:pollster", "dep:gilrs"]
+# Trusted exporter opt-in; no project supplies executable shader artifacts.
+cooked-native-shaders = ["native-window", "incant_render/cooked-native-shaders"]
 
 # Select one physics kernel for the entire process, including build/test hosts.
 physics-deterministic = [

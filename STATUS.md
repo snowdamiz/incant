@@ -3,21 +3,274 @@
 The current phase remains **Phase 1: Core engine**. The
 [Phase 1 review ledger](docs/gates/phase1-review.md) maps each exit requirement to
 its recorded evidence and remaining qualification. The actual native texture,
-compatible static-model and compatible-animation workflows are verified on this Mac; release checkpoint38
-contains the tested main290 tree. Rendering quality and full rendered-game
+compatible static-model and compatible-animation workflows are verified on this Mac;
+[release checkpoint40](docs/spikes/release-checkpoint-40.md) contains the tested
+main309 tree after all 23 required contexts and eight candidate workflows passed.
+Later main changes remain outside that release baseline. Rendering quality and full rendered-game
 performance remain open. The reported jagged editor cube now has explicit 4x
 geometry antialiasing, verified in the actual Mac editor and isolated Metal
 controls. This fixes the ordinary viewport route; low-resolution reconstruction
 still has separate appearance defects. The entries
 below preserve earlier scoped results and superseded integration snapshots.
 
+Checkpoint44 remains held: the general job generated stale agent tool contracts
+into tracked sources before shipping, then correctly refused its dirty checkout.
+The [schema correction and isolated check](docs/spikes/ci-shipping-schema-check.md)
+regenerate that registry and compare all 78 generated files before shipping
+without changing tracked sources. Actual retained-binary generation and 55
+focused Python controls pass locally. Corrected full hosted execution remains
+pending; the shipping freeze requirement is unchanged.
+
+Checkpoint43 currently remains held: the broad Linux GPU-test command also
+selected a manual script diagnostic whose prepared inputs were absent. The
+[explicit-feature correction](docs/spikes/ci-manual-script-diagnostic.md) retains
+all ordinary CI controls; corrected hosted execution is still pending. Windows
+confirmed the starter destination repair but exposed a malformed-path test fixture
+that normalized away its own `..` input. The [fixture correction](docs/spikes/windows-template-destination.md#checkpoint43-production-repair-confirmed-malformed-fixture-corrected)
+passes local tests and leaves production behavior unchanged; corrected Windows
+execution is pending.
+
+## Gameplay light controls — CPU and numerical Metal qualified
+
+Native gameplay, TypeScript and the Rust Wasm SDK can change existing directional,
+point and spot light color/intensity through atomic runtime batches. Invalid
+controls roll back numeric writes; saves retain accepted values. The render
+adapter preserves its accepted state on consumer refusal, and accepted changes
+invalidate temporal history before later unchanged frames resume it.
+
+32 distinct Rust CPU controls, 20 Python controls, strict lints/types/generated
+checks and an actual Metal pixel/history control pass. The main341 composition
+also passes three script controls and strict lint. The three fixture failures
+remain recorded. These are separate runtime/SDK and renderer proofs; an integrated
+day/night app, appearance and performance are unqualified. Crossing zero can
+still allocate a directional shadow atlas.
+[Contract and bound evidence](docs/spikes/gameplay-light-controls.md).
+
+## Cooked bloom — public shipping export and CPU startup qualified
+
+The trusted cooked-native selection now includes prefilter, downsample,
+upsample and display bloom programs, bringing the catalog to twelve families
+and 69 artifact-bound shaders. All seven bloom pipelines receive the retained
+device cache during cold preparation. Partial cooked-output builds still refuse
+bloom; project files cannot supply shader bytes and default exports stay unchanged.
+
+41 Python controls, 41 cooker tests, 209 renderer controls, 12 partial-bloom
+controls and strict lint pass. A separate fresh public arm64 shipping export at
+`340acb7c` passed the complete 268,438-byte shader audit and its inherent one-tick
+CPU startup with source parsing disabled. All 18 managed calls cleaned up, the
+private target was retired and source/compiler/authoring/package inputs rehashed
+unchanged. Both prior native test failures, the missing-package export refusal
+and offline dependency-cache failure remain recorded. No window or GPU was
+launched; driver/render parity, cache hits and the full shader-stall gate remain open.
+The original eight-family result below retains its producing-source scope.
+The public exporter now refuses missing or mismatched pinned script-compiler
+packages before launching build tools; 45 focused Python controls pass.
+[Early checkout diagnostics](docs/spikes/native-script-prerequisites.md).
+[Source, failures and portable evidence](docs/spikes/cooked-bloom.md).
+
+## Optional pipeline caches — cold preparation qualified
+
+The renderer retains its Vulkan cache across explicit bloom, SSAO, motion and
+temporal preparation. Updated bytes are published only after successful
+validation; failed preparation and Drop preserve the previous complete file.
+No cache storage enters frame submission, and unsupported/default-off routes
+remain inert.
+
+Nineteen cache controls, feature-off checks and the combined cooked shader/cache
+suite pass locally, with strict lint. The Vulkan lifecycle harness was compiled
+but not executed on this Mac; actual driver persistence and shader-stall gates
+remain open. [Contract and evidence](docs/spikes/persistent-pipeline-cache.md).
+Checkpoint42 exposed an incompatible cooked-feature selection in its all-effects
+Vulkan cache test. The [workflow repair](docs/spikes/ci-renderer-catalog.md) keeps
+every lifecycle assertion; actual corrected hosted execution remains pending.
+
+## Cooked native shader export — ordinary catalog qualified
+
+The trusted native-window exporter can now select backend-cooked shaders for
+output, diagnostics, shadows, PBR materials, sprites, text, UI and clustered-light
+compute. Build evidence binds all eight families and 45 artifacts to the exact
+source, cooker, embedded manifest and target compilation. Project files cannot
+supply executable shader bytes. Default exports retain their existing behavior.
+
+Cooker and renderer CPU tests, strict lint, actual artifact auditing and both
+selected/ordinary player builds pass. The player was compiled but not executed;
+full public export, target-driver rendering, optional effect coverage, persistent
+Metal/DX12 caches and shader-stall qualification remain open. The prior fixture
+failure and storage-bound interruption remain recorded.
+[Selection and evidence](docs/spikes/shipping-cooked-shaders.md).
+
+## Agent profiler — ordinary editor CPU access qualified
+
+Ordinary editor builds expose CPU profiling for saved projects without a special
+build. An explicit `play_run(profile:true)` request records a disposable native
+session; `profiler_read` reads its last 1–256 measured ticks. Headless hosts still
+require explicit feature selection; public game/headless defaults are unchanged.
+Measurements belong to that accepted project/session and owning tick thread;
+other projects/threads and process-wide captures cannot leak into this report.
+Failed or cancelled replacement preserves the previous world and recording.
+Missing phases, invalid clocks, evictions and unavailable counters remain explicit.
+
+The producer passed 112 CPU tests plus its allocator control. The main333 join
+passed 120 agent/playbook and 20 native-host tests, strict enabled/disabled lint
+and editor compilation. The editor-only default selection subsequently passed
+25 real editor worker/owner controls and 23 feature-disabled controls, both strict
+lint modes and isolated feature-graph checks. A fixed six-process CPU comparison of inactive hooks now passes its local
+5% p95/total overhead bound, with exact logical and PCM parity. Its timing
+artifacts retain their historical source identity; this is not a GUI or shipping
+performance result. The manual fixture is excluded from default CI selection.
+[Measurements and limitations](docs/spikes/editor-profiler-inactive-overhead.md).
+GPU/display/heap/allocation measurements, live optimization quality and the full
+Phase 3 gate remain open. No shipping performance result is claimed.
+[Isolation, exact source and portable evidence](docs/spikes/agent-profiler.md).
+
+## Agent playbooks — eighteen bundled workflows qualified
+
+All eighteen planned Markdown playbooks are discoverable through read-only agent
+tools. Their workflows use current schemas, reversible authoring commands and
+native bulk scripting; missing host capabilities are reported explicitly. Project
+content cannot replace the catalogue, and reading guidance grants no execution
+or approval authority. Every drafted translation remains flagged for human review.
+
+118 agent CPU tests and strict lint pass, with independent content/source review.
+Live skill-following quality, missing export/runtime controls and the full
+Phase 3 evaluation gate remain open.
+[Behaviour and retained evidence](docs/spikes/builtin-agent-skills.md).
+
+## Agent editor visibility — per-turn wiring qualified
+
+The current visible navigator, output tab and inspector/agent panes now accompany
+each submitted turn as bounded, project-bound observations. They are untrusted
+context, not edit authority; stale project IDs and malformed payloads fail before
+provider use. Prior panel observations do not persist in conversation history.
+No screen capture, pixels or DOM inspection is involved.
+
+115 agent, 23 native host and 977 UI/bridge tests pass, together with strict lint,
+TypeScript, production build and generated-contract checks. Independent review
+found no blocking issue. This qualifies the open-panel context wiring; live agent
+evaluation and the full Phase 3 gate remain separate.
+[Behavior and evidence](docs/spikes/agent-editor-context.md).
+
+## Agent project context — current-turn orientation qualified
+
+Shared, exclusive and retained-conversation turns now receive a fresh, bounded
+authoring snapshot with project inventory, memory, recent applied edits and
+complete sampled component schemas. Project text stays in explicitly untrusted
+user-role data; old snapshots are excluded from retained exchanges. Shared locks
+are released before schema generation and provider calls, and existing revision,
+approval and account/project fences remain unchanged.
+
+All 113 scoped agent tests and strict lint pass, with independent source review.
+The original build-monitor interruption is retained. This is overlapping Phase 3
+backend work; open-panel context, skills and live-agent eval remain separate.
+[Behavior and validation](docs/spikes/agent-project-context.md).
+
+## Five starter projects — authoring and gameplay qualified
+
+Empty, third-person, first-person, 2D platformer and top-down starters are now
+available through the host CLI and shared authoring recipes. Each creates ordinary
+imported assets, typed components and TypeScript controllers through the command
+bus, with durable source history and create-only project publication.
+
+Nine distinct authoring/headless controls cover all five starters, including
+undo/redo, save/reopen, collision, jump, camera follow/look and sprite animation.
+Strict lint and TypeScript pass; the original exact-axis collision-test failure
+and corrected geometric contract remain recorded. The reviewed producer bytes
+compose unchanged with main325. GUI selection, editor-only rebuild and visual
+acceptance remain open. [Usage and evidence](docs/spikes/project-templates.md).
+
+## Script deadline checks — full-route diagnostic complete
+
+A default-off observer now separates QuickJS interrupt checks from explicit host
+checks, retaining their counts, refusals and existing CPU-clock attempts. It
+changes no enforcement frequency, deadline, owner check or locking. Actual VM,
+rollback, detached-view and allocation controls pass alongside ordinary builds
+and strict lint. Its diagnostic reports remain excluded from performance gates.
+The conservative script compatibility identity now includes both enforcement
+source files. A fresh private shipping build completes the full 2,156-tick Core10k
+route with exact gameplay and PCM parity. Nested check wall observations average
+4.34 microseconds per frame, or 8.40 microseconds on the same whole-tick tail
+frames. This closes the check-cost hypothesis without weakening enforcement;
+observer-inclusive wall spans do not establish reclaimable CPU time or a shipping
+speedup. The 2 ms target remains unmet, with other distinct investigations allowed.
+[Contract, actual measurements and retained failures](docs/spikes/script-budget-check-attribution.md).
+
+## Editor subtree duplication — integrated controls qualified
+
+The hierarchy now exposes Duplicate through its context menu and Cmd+D on macOS
+(Ctrl+D elsewhere), using one reversible shared-command transaction. It selects
+only the host's verified copy, preserves newer selection intent and ignores late
+results after a project/bridge change. Scene, linked-prefab, singleton, busy and
+Play restrictions remain explicit.
+
+All 1,025 UI tests, generated transport, TypeScript, production UI and native
+editor builds pass; the real host transaction control also passed on main342
+composition. Claude's browser fixture review remains separate from native proof.
+The actual Mac interaction attempt showed a blank client while OS inspection
+confirmed the desktop was locked; the editor was stopped and its project stayed
+unchanged. Actual native shortcut/menu, Undo/Redo and reopening checks remain
+pending an unlocked desktop. [Evidence and limits](docs/spikes/editor-subtree-duplicate.md).
+
+Focused-row removal now restores the hierarchy's keyboard entry point to a
+surviving row while preserving selection intent, other focus owners and
+project/bridge boundaries. All 1,040 UI tests, TypeScript and the production UI
+build pass; Delete and duplicate/Undo DOM controls include virtualized recovery.
+Actual native keyboard interaction remains pending the unlocked desktop.
+[Focus-recovery evidence](docs/spikes/editor-hierarchy-focus-recovery.md).
+
+## Ordinary subtree duplication — command and persistence qualified
+
+The shared command bus can now copy a complete ordinary subtree with explicit,
+globally fresh IDs. Internal hierarchy, audio-bus and navigation-source references
+are remapped; external references and literal script values stay intact. Copies
+are one reversible transaction, with shared expansion limits and explicit
+refusal of linked prefabs and singleton components. The headless schema and
+generated SDK expose the same operation.
+
+133 scoped Rust controls, strict lint, generated contracts and TypeScript checks
+pass. Undo/redo, journal reopening, atomic refusal and ordinary cooked simulation
+are covered. Both earlier fixture/schema failures remain recorded. The final
+producer bytes compose unchanged with main315; editor duplication controls and
+Phase 2 acceptance remain separate.
+[Contract, review and retained evidence](docs/spikes/subtree-duplication.md).
+
+## Core locale qualification — native and CPU results retained
+
+The native player's initial window now requests 640×480 logical units. A fresh
+CJK shipping replay verifies the actual 1280×960 physical/scale-two viewport on
+this Mac and completes all 3,056 host steps. Four actual captures show readable
+Chinese HUD, loss/restart text and resumed gameplay without the former crowding.
+Focus pauses and the missed final win capture remain explicit; full appearance
+and performance are separate. [Window sizing and evidence](docs/spikes/native-window-logical-size.md).
+
+A fresh Arabic shipping package passes loss, win and loss/restart/win CPU routes,
+with exact gameplay, localized HUD and PCM reset parity. Its complete 3,056-step
+Mac window run matches the CPU observations. A separate visual replay timed out
+after focus interruptions; five partial actual images show joined Arabic, damage,
+loss and restarted gameplay. The default Retina window was crowded at 320×240
+logical units. Arabic health-pip direction is now corrected in the sample's
+string table, with real localization/font-shaping regression coverage; normal-size
+appearance and native RTL health-order review remain open. Capture is allowed;
+actual native window checks currently require the Mac desktop to be unlocked.
+[CPU correction and limits](docs/spikes/core-rtl-health-direction.md).
+The fresh CJK export/window is recorded above.
+
+Pseudo-localized authoring, a fresh shipping export and all three CPU gameplay
+routes now pass. Actual normal-size window images show readable expanded HUD and
+loss/restart text. Repeated focus losses paused that native replay until its
+original deadline; its partial restart state, failed resize and missed
+restart/win images remain explicit. Complete native replay and narrow layout
+remain open. [Scoped evidence and replay](docs/spikes/core-locale-native-window.md).
+
 ## GPU profiler — unavailable counter pairs refused
 
 The profiler now rejects an individual unwritten pair and failed counter
 sentinels instead of reporting false zero or enormous durations. Eleven targeted
 CPU controls and strict lint pass. Two bounded Metal diagnostics retain the
-missing second-pass timestamps even though their numerical output is exact;
-the observation cause and complete GPU timing remain open.
+missing second-pass timestamps even though their numerical output is exact.
+A subsequent unchanged-workload diagnostic restores both pairs by resolving the
+queries after the sampled GPU submission completes. The production profiler
+already uses deferred resolution; this is a diagnostic scheduling finding.
+Complete rendered-game GPU timing remains open.
 [Decoder correction and retained observations](docs/spikes/gpu-timestamp-invalid-counters.md).
 
 ## Native presentation observer — complete gameplay replay verified
@@ -31,12 +284,22 @@ verdict. The earlier timeout and 1,444-step failure remain recorded; shader-stal
 qualification and full rendered-game performance remain open.
 [Fresh build and complete replay](docs/spikes/native-presentation-audio.md).
 
-The separate default-off compilation observer now records native library and
-pipeline creation with immutable session, surface, host-step and phase context.
-Bounded CPU qualification passes for the collector, renderer binding and native
-host, with strict lint in enabled and ordinary modes. Its combined shipping build
-and live replay are still pending; these controls do not establish shader-stall
-or displayed-frame performance. [Implementation and retained failures](docs/spikes/native-compilation-observer.md).
+The separate default-off compilation observer now completes a fresh shipping
+build and full native Core replay. All 95 construction calls succeed: four
+untimed prefix calls and 91 catalog rows, with none during gameplay. Exact
+gameplay parity and complete call accounting pass. Three zero presentation
+timestamps and uneven observed display intervals remain explicit; deferred
+driver work and complete frame pacing still prevent a shader-stall or performance
+verdict. [Actual replay and limits](docs/spikes/native-compilation-live.md).
+
+The observer now also records scheduler wake, surface reservation, committed
+gameplay and postcommit host stages in one monotonic clock. Its bounded analyzer
+keeps catch-up batches, missing stages and surface/focus boundaries explicit.
+Observer-enabled and ordinary CPU suites, strict lint and 18 analyzer controls
+pass. A fresh shipping build also passes its complete 2,156-tick CPU gameplay
+replay with exact logical and PCM parity. These new fields have not yet been
+exercised in a native window; no scheduling policy or performance gate changes.
+[Host-stage contract and CPU evidence](docs/spikes/native-presentation-host-stages.md).
 
 ## Device audio overrun handling — merged main303
 
@@ -137,11 +400,11 @@ displayed-frame timing and representative active-gameplay qualification remain
 open. [Export, actual run and limitations](docs/spikes/profiled-window-export.md).
 [Boundaries and replay](docs/spikes/native-window-cadence.md).
 
-Release checkpoint38 promoted exact main290 after all 23 required contexts and
-eight frozen-candidate workflows succeeded. It includes the verified asset
-workflows and default-off MetalFX foundation. Later editor antialiasing and
-profiled shipping-window exports remain outside this tested release baseline.
-Main development continues independently. [Promotion and exact checks](docs/spikes/release-checkpoint-38.md).
+Release checkpoint39 promoted exact main302 after all 23 required contexts and
+eight frozen-candidate workflows succeeded. It includes ordinary-editor
+antialiasing, native-window replay foundations and compatible animation refresh.
+Later main303+ work remains outside this tested release baseline. Main development
+continues independently. [Promotion and exact checks](docs/spikes/release-checkpoint-39.md).
 
 ## Prepared MetalFX interop — correctness verified, appearance failed
 
@@ -749,8 +1012,9 @@ satisfy those gates.
 The director authorized Phase 1 with remaining Phase 0 items deferred, sensible
 engineering progress without repeated advancement questions, and agent merges
 after scoped review and passing checks. These authorizations do not approve a
-phase gate. Section 12 decisions are settled. Current computer use and screen
-capture are authorized. Claude Opus 5.5 with explicitly verified Max effort owns
+phase gate. Section 12 decisions are settled. The director has paused local
+screen capture and computer use for every agent while development continues.
+Source work, CPU tests and hosted CI remain available. Claude Opus 5.5 with explicitly verified Max effort owns
 editor UI design, layout, styling and pixel review by default. Astra/root and
 subagents own all other work, including rendering and non-editor visuals, and may
 take over unresolved Claude editor UI work without another routing approval.

@@ -1,0 +1,68 @@
+{
+  "schema": 1,
+  "source_base": "773706dea530b614664281b270cb31fbb87b1b66",
+  "source_file": {
+    "path": "crates/incant_templates/src/create/tests.rs",
+    "sha256": "4089581a98857b907f6f2ce92b02f1e5c906286c9e5cce29affb7026d8977224"
+  },
+  "production_unchanged": true,
+  "checkpoint": 43,
+  "failed_run": 38686778944,
+  "failed_job": 116263334614,
+  "failure_log_sha256": "056adb5f43ce96664aa25b031e549db29923479ea940ce3cb59d71c9063a5252",
+  "windows_observed": {
+    "canonical_destination_test": "PASS",
+    "five_starter_create_undo_redo_reopen": "PASS",
+    "parent_component_fixture": "FAIL before correction"
+  },
+  "local": {
+    "commands": [
+      {
+        "argv": [
+          "test",
+          "--profile",
+          "ci",
+          "--locked",
+          "--offline",
+          "-p",
+          "incant_templates",
+          "--lib",
+          "--",
+          "--test-threads=1"
+        ],
+        "exit": 0,
+        "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/windows-parent-fixture-001/check-0.log",
+        "sha256": "6758baedc852b16a46baa3412b1b3ea77a2c4f1514ef321c2df12a62ecb7c634",
+        "owned_cleanup_reaped": true
+      },
+      {
+        "argv": [
+          "clippy",
+          "--profile",
+          "ci",
+          "--locked",
+          "--offline",
+          "-p",
+          "incant_templates",
+          "--all-targets",
+          "--",
+          "-D",
+          "warnings"
+        ],
+        "exit": 0,
+        "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/windows-parent-fixture-001/check-1.log",
+        "sha256": "6ac0297df4351e7bafea8801399fb5609f4c070c841c2e7c705e37a3457a8407",
+        "owned_cleanup_reaped": true
+      }
+    ],
+    "error": null,
+    "seconds": 32.576741041993955,
+    "target": "/private/tmp/incant-agent-font-target",
+    "baseline_bytes": 61118009344,
+    "peak_growth_bytes": 85327872,
+    "minimum_free_bytes": 76668006400
+  },
+  "independent_review_sha256": "859435044fd8825c9c8046dbf0e9d9f2f44b608ab5722b6e74255b62c237c660",
+  "primary_reference": "https://doc.rust-lang.org/std/path/struct.PathBuf.html#method.push",
+  "corrected_windows_execution": "pending"
+}

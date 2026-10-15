@@ -11,8 +11,10 @@ impl NativeRenderInput {
     /// make that external consumer terminal on failure. This guard cannot undo
     /// GPU writes/device side effects. Return a newly prepared resource to publish
     /// alongside the accepted adapter, or use a transactional retained GPU path.
-    /// Ordinary motion, model animation and flipbook selection reuse a bounded numeric undo buffer: no Vec allocations,
-    /// String copies, Arc clones, source reads or model hierarchy expansion.
+    /// Ordinary motion, light color/intensity, model animation and flipbook
+    /// selection reuse a bounded numeric undo buffer: no Vec allocations,
+    /// String copies, source reads or model hierarchy expansion. Existing IK
+    /// ownership still clones its Arc; scalar lights copy values only.
     pub fn try_sync<T, E>(
         &mut self,
         view: &SpatialView<'_>,
@@ -105,6 +107,7 @@ impl NativeRenderInput {
         // unchanged for this world identity + accepted generation pair.
         for (old, node) in self.undo.iter_mut().zip(&self.input.nodes) {
             *old = NumericUndo {
+                light: node.light.as_ref().map(|v| v.values()),
                 world: node.world,
                 frame: node.sprite.as_ref().map_or(0, |s| s.frame),
                 animation: node.mesh.as_ref().and_then(|m| m.animation),
@@ -128,6 +131,17 @@ impl NativeRenderInput {
             }
             if let Some(slot) = self.slots[node.index] {
                 guard.input.nodes[slot].world = *node.global;
+                match (
+                    &mut guard.input.nodes[slot].light,
+                    node.declaration.and_then(binding::light),
+                ) {
+                    (Some(current), Some(next)) if current.same_binding(&next) => {
+                        current.set_values(next.values())
+                    }
+                    (None, None) => {}
+                    _ => return Err(NativeRenderError::Layout.into()),
+                }
+
                 if let Some(mesh) = &mut guard.input.nodes[slot].mesh {
                     mesh.animation = node.animation;
                     mesh.animation_blend = node.animation_blend;
@@ -167,6 +181,9 @@ impl Drop for MotionGuard<'_> {
             }
             for (node, old) in self.input.nodes.iter_mut().zip(self.undo) {
                 node.world = old.world;
+                if let (Some(light), Some(values)) = (&mut node.light, old.light) {
+                    light.set_values(values);
+                }
                 if let Some(mesh) = &mut node.mesh {
                     mesh.animation = old.animation;
                     mesh.animation_blend = old.animation_blend;

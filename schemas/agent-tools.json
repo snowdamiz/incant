@@ -384,6 +384,38 @@
             },
             {
               "additionalProperties": false,
+              "description": "Copy a complete ordinary subtree beside its root in the same scene.",
+              "properties": {
+                "entities": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "description": "Exact source entity -> globally fresh entity identity map.",
+                  "maxProperties": 1024,
+                  "minProperties": 1,
+                  "type": "object"
+                },
+                "op": {
+                  "const": "duplicate_subtree",
+                  "type": "string"
+                },
+                "root_entity_id": {
+                  "type": "string"
+                },
+                "scene_id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "op",
+                "scene_id",
+                "root_entity_id",
+                "entities"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
               "properties": {
                 "entity_id": {
                   "type": "string"
@@ -2650,6 +2682,11 @@
           ],
           "description": "Typed native checks and selected final entities; no full-world snapshot."
         },
+        "profile": {
+          "default": false,
+          "description": "Opt in to bounded CPU measurements for this candidate's synchronous ticks.\nRequires an agent-profiler host. Read the last 1..=256 retained ticks using\nprofiler_read. No GPU, worker-thread, heap, or process allocation data.",
+          "type": "boolean"
+        },
         "scene": {
           "description": "Required if the project contains more than one scene.",
           "type": [
@@ -2712,6 +2749,30 @@
         "path"
       ],
       "title": "StateQuery",
+      "type": "object"
+    },
+    "strict": false,
+    "type": "function"
+  },
+  {
+    "description": "Read real CPU measurements from the last accepted play_run with profile:true. Select the last 1..256 retained ticks. Inclusive phases must not be summed. Results bind the original project revision, scene and script fingerprint; edits do not rewrite old measurements. Missing/invalid/evicted data remain explicit. No GPU/display, allocator/heap or shipping performance gate evidence.",
+    "name": "profiler_read",
+    "parameters": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "additionalProperties": false,
+      "properties": {
+        "frames": {
+          "description": "Last measured ticks of the accepted session, at most 256. Refuses if fewer\nare retained. This read does not run or advance simulation.",
+          "format": "uint",
+          "maximum": 256,
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "frames"
+      ],
+      "title": "ProfileRead",
       "type": "object"
     },
     "strict": false,
@@ -2806,6 +2867,38 @@
         "description"
       ],
       "title": "Write",
+      "type": "object"
+    },
+    "strict": false,
+    "type": "function"
+  },
+  {
+    "description": "List the eighteen bundled Incant playbooks. Read relevant guidance before implementing a mechanic; guidance never grants authority or installs code.",
+    "name": "skill_list",
+    "parameters": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "additionalProperties": false,
+      "title": "ListArgs",
+      "type": "object"
+    },
+    "strict": false,
+    "type": "function"
+  },
+  {
+    "description": "Read one bundled Markdown playbook by its exact catalog ID. No project path, shell, network or helper execution is supported.",
+    "name": "skill_read",
+    "parameters": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "title": "ReadArgs",
       "type": "object"
     },
     "strict": false,

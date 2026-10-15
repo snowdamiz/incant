@@ -523,12 +523,32 @@ function budgetScope(read) {
     const budget = projectAgentBudget(read);
     return `${read.project.id}:${budget.status}:${budget.status === 'ready' ? budget.maxTokens : ''}`;
 }
-function validAgentRequest(value) {
+function validAgentView(value) {
     return fields(value, [
+        'project_id',
+        'open_panels'
+    ]) && typeof value.project_id === 'string' && /^[0-7][0-9A-HJKMNP-TV-Z]{25}$/.test(value.project_id) && Array.isArray(value.open_panels) && value.open_panels.length <= 8 && new Set(value.open_panels).size === value.open_panels.length && value.open_panels.every((panel)=>[
+            'viewport',
+            'hierarchy',
+            'assets',
+            'inspector',
+            'agent',
+            'problems',
+            'console',
+            'history'
+        ].includes(panel));
+}
+function validAgentRequest(value) {
+    return (fields(value, [
         'prompt',
         'model',
         'approval'
-    ]) && boundedText(value.prompt, 16 * 1024) && value.prompt.trim().length > 0 && boundedText(value.model) && value.model.trim().length > 0 && [
+    ]) || fields(value, [
+        'prompt',
+        'model',
+        'approval',
+        'view_context'
+    ]) && validAgentView(value.view_context)) && boundedText(value.prompt, 16 * 1024) && value.prompt.trim().length > 0 && boundedText(value.model) && value.model.trim().length > 0 && [
         'auto',
         'destructive',
         'always'
@@ -799,6 +819,9 @@ class NativeBridge {
             ] : [],
             ...this.read?.project_file?.available === true ? [
                 'project.file'
+            ] : [],
+            ...this.read?.entity_duplicate?.available === true ? [
+                'entity.duplicate'
             ] : []
         ];
     }
@@ -1225,9 +1248,13 @@ class NativeBridge {
             const turnRequest = {
                 prompt: request.text,
                 model: request.model ?? 'gpt-6-astra',
-                approval: request.approval ?? 'destructive'
+                approval: request.approval ?? 'destructive',
+                ...request.viewContext === undefined ? {} : {
+                    view_context: request.viewContext
+                }
             };
             if (!validAgentRequest(turnRequest)) return reject('agent.invalid-request', 'Enter a nonempty prompt up to 16 KiB and a model name up to 128 bytes.');
+            if (turnRequest.view_context && turnRequest.view_context.project_id !== this.read.project.id) return reject('agent.project-changed', 'The active project changed. Send the message again.');
             if (this.agentSession.budget.used_tokens >= this.agentSession.budget.max_tokens) return reject('agent.budget', this.exhaustedReason());
             this.agentStarting = true;
             const generation = ++this.agentGeneration;
@@ -1523,6 +1550,10 @@ class NativeBridge {
         }
     }
     async dispatch(command) {
+        if (command.type === 'entity.duplicate' && !this.capabilities.includes('entity.duplicate')) return failure({
+            code: 'unsupported',
+            message: 'This host cannot duplicate entities.'
+        });
         const budgetEdit = command.type === 'agent.budget.set';
         if (budgetEdit && !count(command.maxTokens)) return {
             ok: false,
@@ -1550,6 +1581,7 @@ class NativeBridge {
         // revision rejects the import at commit rather than locking the user out.
         const recoverBudget = budgetEdit || (command.type === 'history.undo' || command.type === 'history.redo') && projectAgentBudget(this.read).status !== 'unsupported';
         const previous = this.read;
+        let duplicateDispatched = false;
         // Subscribers run synchronously. Reserve the mutation before publishing its
         // admission barrier so a subscriber cannot start a second document write.
         if (importing) this.importing = true;
@@ -1607,26 +1639,53 @@ class NativeBridge {
                     ok: false,
                     error: {
                         code: "entity.not-found",
-                        message: "This operation requires an entity. Scene edits are not exposed in this spike."
+                        message: "This operation requires an existing entity."
                     }
                 };
-                const op = command.type === "entity.rename" ? {
-                    op: "rename_entity",
-                    scene_id: scene.id,
-                    entity_id: command.entity,
-                    name: command.name
-                } : {
-                    op: "delete_entity",
-                    scene_id: scene.id,
-                    entity_id: command.entity
-                };
-                read = await this.invoke("engine_execute", {
-                    commands: [
-                        op
-                    ],
-                    description: command.type === "entity.rename" ? `Rename entity to ${command.name}` : "Delete entity",
-                    expectedRevision: this.read.revision
-                });
+                if (command.type === 'entity.duplicate') {
+                    duplicateDispatched = true;
+                    const response = await this.invoke('engine_duplicate_subtree', {
+                        sceneId: scene.id,
+                        entityId: command.entity,
+                        expectedRevision: previous.revision
+                    });
+                    const receipt = response?.receipt;
+                    read = response?.snapshot;
+                    if (!record(receipt) || receipt.project !== previous.project.id || !fileId(receipt.entity) || !fileId(receipt.transaction) || receipt.revision !== previous.revision + 1 || Object.values(previous.project.scenes).some((s)=>receipt.entity in s.entities) || !record(read) || !isReady(read) || !record(read.project) || read.project.id !== previous.project.id || !count(read.revision) || read.revision < receipt.revision || read.revision === receipt.revision && !read.project.scenes[scene.id]?.entities[receipt.entity] || this.read?.project.id !== previous.project.id || read.revision < this.read.revision) {
+                        // IPC may have committed even if its completion cannot be verified.
+                        await this.start();
+                        return {
+                            ok: false,
+                            outcomeUnknown: true,
+                            error: {
+                                code: 'engine.response',
+                                message: 'The duplicate result could not be verified. Check the hierarchy before retrying.'
+                            }
+                        };
+                    }
+                    result = {
+                        ok: true,
+                        duplicatedEntity: id(receipt.entity)
+                    };
+                } else {
+                    const op = command.type === "entity.rename" ? {
+                        op: "rename_entity",
+                        scene_id: scene.id,
+                        entity_id: command.entity,
+                        name: command.name
+                    } : {
+                        op: "delete_entity",
+                        scene_id: scene.id,
+                        entity_id: command.entity
+                    };
+                    read = await this.invoke("engine_execute", {
+                        commands: [
+                            op
+                        ],
+                        description: command.type === "entity.rename" ? `Rename entity to ${command.name}` : "Delete entity",
+                        expectedRevision: this.read.revision
+                    });
+                }
             }
             if (recoverBudget) {
                 if (!isReady(read) || !count(read.revision) || !record(read.project) || projectAgentBudget(read).status !== 'ready') throw budgetInvalidResponse();
@@ -1642,7 +1701,13 @@ class NativeBridge {
             return result;
         } catch (error) {
             await this.start(recoverBudget);
-            return failure(recoverBudget && typeof error === 'string' ? undefined : error);
+            const result = failure(recoverBudget && typeof error === 'string' ? undefined : error);
+            // The host commits before reading its completion snapshot. A rejected
+            // invocation cannot establish rollback, so never invite a blind retry.
+            return duplicateDispatched ? {
+                ...result,
+                outcomeUnknown: true
+            } : result;
         } finally{
             if (importing) this.importing = false;
             else this.pending = false;

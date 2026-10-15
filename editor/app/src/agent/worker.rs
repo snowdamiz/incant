@@ -1,3 +1,5 @@
+#[cfg(all(test, feature = "agent-profiler"))]
+mod profiler_tests;
 #[cfg(test)]
 mod tests;
 use super::{Connection, Context, ContextKey};
@@ -226,7 +228,7 @@ fn execute(
 ) -> Result<incant_agent::TurnReport, AgentError> {
     // Session IDs restart on launch; provenance must remain globally distinct.
     let provenance = ulid::Ulid::new().to_string();
-    agent.run_shared_in_conversation(
+    agent.run_shared_in_conversation_with_view(
         provider,
         bus,
         host,
@@ -238,5 +240,6 @@ fn execute(
             let _ = turn.stream(text);
         },
         &mut context.conversation,
+        turn.request.view_context.as_ref(),
     )
 }

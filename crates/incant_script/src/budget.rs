@@ -13,6 +13,8 @@ enum Failure {
 fn now() -> Result<Duration, Failure> {
     #[cfg(any(unix, windows))]
     {
+        #[cfg(feature = "diagnostic-script-budget")]
+        incant_profile::diagnostic::budget::clock_read();
         cpu_time::ThreadTime::try_now()
             .map(|time| time.as_duration())
             .map_err(|_| Failure::Unavailable)
@@ -118,3 +120,6 @@ mod tests {
         .unwrap();
     }
 }
+
+#[cfg(all(test, feature = "diagnostic-script-budget"))]
+mod attribution_tests;

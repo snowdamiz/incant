@@ -14,10 +14,11 @@ fn config() -> Bloom {
 }
 
 #[test]
-fn typed_admission_rejects_invalid_and_cooked_output_before_device_use() {
-    assert!(config::admission(config(), false).is_ok());
+fn typed_admission_requires_complete_cooked_bloom_before_device_use() {
+    assert!(config::admission(config(), false, false).is_ok());
+    assert!(config::admission(config(), true, true).is_ok());
     assert_eq!(
-        config::admission(config(), true),
+        config::admission(config(), true, false),
         Err(BloomError::CookedOutput)
     );
     for bad in [f32::NAN, f32::INFINITY, -0.1, 65505.] {
@@ -46,6 +47,14 @@ fn typed_admission_rejects_invalid_and_cooked_output_before_device_use() {
             Err(BloomError::Configuration)
         );
     }
+}
+
+#[test]
+fn filter_uniform_layout_matches_the_fixed_cooker_abi() {
+    assert_eq!(size_of::<super::Settings>(), 48);
+    assert_eq!(std::mem::offset_of!(super::Settings, rect), 0);
+    assert_eq!(std::mem::offset_of!(super::Settings, sizes), 16);
+    assert_eq!(std::mem::offset_of!(super::Settings, params), 32);
 }
 
 #[test]

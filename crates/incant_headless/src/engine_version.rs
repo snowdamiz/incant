@@ -59,6 +59,10 @@ pub(super) fn review(bus: &CommandBus, path: &Path, params: Value) -> Result<Val
 pub(super) fn schemas() -> std::collections::BTreeMap<String, Value> {
     let mut schemas = incant_doc::schema_registry();
     schemas.insert(
+        "Command".into(),
+        serde_json::json!(schemars::schema_for!(incant_cmd::Command)),
+    );
+    schemas.insert(
         "EnginePinReview".into(),
         serde_json::json!(schemars::schema_for!(incant_cmd::EnginePinReview)),
     );

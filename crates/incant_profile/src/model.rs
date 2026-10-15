@@ -102,10 +102,14 @@ pub enum Error {
     TracyProcessOnly,
     UnsupportedRoute,
     Options,
+    SessionBusy,
+    FrameRange,
 }
 impl std::fmt::Display for Error {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         f.write_str(match self {
+            Self::SessionBusy => "an owner-thread profiling tick is already active",
+            Self::FrameRange => "profile read requires 1..=256 available retained frames",
             Self::UnsupportedRoute => "profiling is unavailable for the requested player route",
             Self::Options => "duplicate profiling option",
             Self::Storage => "profile histogram storage unavailable",

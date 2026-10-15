@@ -196,7 +196,11 @@ struct Started {
     #[cfg(all(feature = "tracy", any(unix, windows)))]
     _trace: Option<tracy_client::Span>,
 }
-pub struct Scope(Option<Started>);
+pub struct Scope {
+    inner: Option<Started>,
+    #[cfg(feature = "session")]
+    _session: crate::session::Scope,
+}
 #[inline]
 pub fn scope(phase: Phase) -> Scope {
     begin(phase, None, None)
@@ -206,13 +210,24 @@ pub fn script_scope(source: Option<[u8; 16]>) -> Scope {
     begin(Phase::ScriptSource, Some(source), None)
 }
 fn begin(phase: Phase, source: Option<Option<[u8; 16]>>, expected: Option<u64>) -> Scope {
+    Scope {
+        #[cfg(feature = "session")]
+        _session: crate::session::begin(phase, source),
+        inner: begin_process(phase, source, expected),
+    }
+}
+fn begin_process(
+    phase: Phase,
+    source: Option<Option<[u8; 16]>>,
+    expected: Option<u64>,
+) -> Option<Started> {
     let generation = ACTIVE.load(Ordering::Acquire);
     if generation == 0 || expected.is_some_and(|expected| expected != generation) {
-        return Scope(None);
+        return None;
     }
     let mut s = state();
     if ACTIVE.load(Ordering::Acquire) != generation {
-        return Scope(None);
+        return None;
     }
     let slot = source.and_then(|id| {
         if let Some(i) = s.sources.iter().position(|r| r.is_some_and(|r| r.id == id)) {
@@ -236,7 +251,7 @@ fn begin(phase: Phase, source: Option<Option<[u8; 16]>>, expected: Option<u64>) 
     };
     let frame = s.distribution.begin_scope(phase);
     drop(s);
-    Scope(Some(Started {
+    Some(Started {
         generation,
         phase,
         source: slot,
@@ -246,11 +261,11 @@ fn begin(phase: Phase, source: Option<Option<[u8; 16]>>, expected: Option<u64>) 
         _thread: PhantomData,
         #[cfg(all(feature = "tracy", any(unix, windows)))]
         _trace: trace,
-    }))
+    })
 }
 impl Drop for Scope {
     fn drop(&mut self) {
-        let Some(start) = self.0.take() else {
+        let Some(start) = self.inner.take() else {
             return;
         };
         let wall = nanos(start.wall.elapsed());
@@ -326,6 +341,17 @@ pub(crate) fn diagnostic_reject(generation: u64) {
     let mut s = state();
     if ACTIVE.load(Ordering::Acquire) == generation {
         s.diagnostic.reject();
+    }
+}
+#[cfg(feature = "diagnostic-script-budget")]
+pub(crate) fn diagnostic_budget_unscoped() {
+    let generation = ACTIVE.load(Ordering::Acquire);
+    if generation == 0 {
+        return;
+    }
+    let mut s = state();
+    if ACTIVE.load(Ordering::Acquire) == generation {
+        s.diagnostic.reject_foreign_thread();
     }
 }
 #[cfg(feature = "diagnostic-script-phases")]

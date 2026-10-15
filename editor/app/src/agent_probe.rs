@@ -112,6 +112,7 @@ fn turn(
             prompt,
             model: options.model.clone(),
             approval: ApprovalChoice::Always,
+            view_context: None,
         },
     ))
     .map_err(|_| "agent start failed")?;

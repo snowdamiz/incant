@@ -11,7 +11,11 @@ use crate::{
 fn actual_pyramid_nonzero_halo_resize_and_zero_alpha_control() {
     let mut r = crate::test_support::checked(Renderer::headless().unwrap());
     let enabled = pollster::block_on(r.enable_bloom(config()));
-    if cfg!(all(feature = "cooked-output", not(target_arch = "wasm32"))) {
+    if cfg!(all(
+        feature = "cooked-output",
+        not(feature = "cooked-bloom"),
+        not(target_arch = "wasm32")
+    )) {
         assert_eq!(
             enabled.unwrap_err().downcast_ref::<BloomError>(),
             Some(&BloomError::CookedOutput)
@@ -116,7 +120,11 @@ fn actual_pyramid_nonzero_halo_resize_and_zero_alpha_control() {
 #[ignore = "requires root-granted GPU slot and Claude numerical/appearance review"]
 fn canonical_graph_zero_gain_and_pixel_camera_bypass_and_invalid_replace() {
     let mut r = crate::test_support::checked(Renderer::headless().unwrap());
-    if cfg!(all(feature = "cooked-output", not(target_arch = "wasm32"))) {
+    if cfg!(all(
+        feature = "cooked-output",
+        not(feature = "cooked-bloom"),
+        not(target_arch = "wasm32")
+    )) {
         let error = pollster::block_on(r.enable_bloom(config())).unwrap_err();
         assert_eq!(
             error.downcast_ref::<BloomError>(),
@@ -172,7 +180,11 @@ fn canonical_graph_zero_gain_and_pixel_camera_bypass_and_invalid_replace() {
 #[ignore = "requires coordinated numerical GPU review; three output frames"]
 fn bloom_output_keeps_emitter_position_at_reduced_internal_resolution() {
     let mut r = crate::test_support::checked(Renderer::headless().unwrap());
-    if cfg!(all(feature = "cooked-output", not(target_arch = "wasm32"))) {
+    if cfg!(all(
+        feature = "cooked-output",
+        not(feature = "cooked-bloom"),
+        not(target_arch = "wasm32")
+    )) {
         let error = pollster::block_on(r.enable_bloom(config())).unwrap_err();
         assert_eq!(
             error.downcast_ref::<BloomError>(),

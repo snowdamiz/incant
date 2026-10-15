@@ -1,0 +1,30 @@
+{
+  "format": "incant-subtree-duplication-cpu-v1",
+  "base": "a74473ea796b1ac1a476496f776a70307be1313c",
+  "sources": {
+    "001": "2db6566d2429ee30ba3cc80ac7c0e57c21c2a678",
+    "002": "6053559ee0e04c9c56d04785d8b36d257c93f94c",
+    "003": "7422d13da42fa53b92bcf61c2250a555020fc0db",
+    "004": "25b038a126c0afeab3b0b215b57b051fa3035d2a"
+  },
+  "evidence_root": "/Users/andreyyurlov/.codex/incant-evidence/subtree-duplication-001",
+  "archive_sha256": "188fb8b296c0d1723aec6b8e968b1bf483e06b7545a6c2d831a9bd3da4bf1465",
+  "expanded_bytes": 6229253,
+  "records": 319,
+  "payloads": 153,
+  "verifier_sha256": "a7c3089f2a32c0357f5abfa6d8374b840e24b5d546d8548c321c1e6d33722725",
+  "unique_passing_tests": {
+    "command": 99,
+    "document": 28,
+    "headless": 4,
+    "cook": 2
+  },
+  "retained_failed_attempts": [
+    "cpu-001",
+    "cpu-002"
+  ],
+  "generated_schema_count": 78,
+  "phase_gate_passed": false,
+  "editor_ui_implemented": false,
+  "scope": "Atomic same-scene backend command; CPU and actual headless/cooked consumer proof. Binaries remain external and optionally rehashed; replay executes no tests."
+}

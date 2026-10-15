@@ -114,7 +114,7 @@ jobs:
         run: cargo test --workspace --profile ci --locked --features incant_audio_runtime/scene --timings -- --ignored --test-threads=1 --nocapture
       - name: Verify opt-in cooked shaders on actual Metal
         if: (needs.classify.result != 'success' || needs.classify.outputs.scope != 'docs')
-        run: cargo test -p incant_render -p incant_render_gpu_host --all-targets --profile ci --locked -j2 --features incant_render/cooked-output,incant_render/cooked-geometry,incant_render/cooked-sprites,incant_render/cooked-ui,incant_render/cooked-text,incant_render/cooked-materials,incant_render/cooked-clusters,incant_render/cooked-temporal,incant_render/persistent-pipeline-cache -- --ignored --skip vulkan_catalog_cache_survives_fresh_processes_and_corruption --test-threads=1 --nocapture
+        run: cargo test -p incant_render -p incant_render_gpu_host --all-targets --profile ci --locked -j2 --features incant_render/cooked-native-shaders,incant_render/cooked-temporal,incant_render/persistent-pipeline-cache -- --ignored --skip vulkan_catalog_cache_survives_fresh_processes_and_corruption --test-threads=1 --nocapture
       # Keep workspace feature unification from the release tests while building
       # only these tools; execute the resulting binaries directly below.
       - run: cargo build --workspace --bin incant_editor --bin incant_headless --example cook_scene --example collaboration_spike --example texture_probe --example save_world --example native_scene_audio --example no_renderer_fixtures --profile ci --features incant_editor/custom-protocol,incant_audio_runtime/scene --locked --timings
@@ -122,7 +122,8 @@ jobs:
       - name: Validate cooked KTX2 with the Khronos reference tool
         if: (needs.classify.result != 'success' || needs.classify.outputs.scope != 'docs')
         run: python3 tools/validate_ktx.py --probe-binary target/ci/examples/texture_probe
-      - run: target/ci/incant_headless schema schemas
+      - name: Verify published schemas without mutating frozen sources
+        run: python3 tools/check_schemas.py --binary target/ci/incant_headless
         if: (needs.classify.result != 'success' || needs.classify.outputs.scope != 'docs')
       - name: Verify public source edits, native Play and journal recovery
         if: (needs.classify.result != 'success' || needs.classify.outputs.scope != 'docs')

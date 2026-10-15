@@ -9,6 +9,7 @@ publish.workspace = true
 default = ["physics-deterministic"]
 
 wasmtime-host = ["incant_play/wasmtime-host"]
+agent-profiler = ["incant_agent_native/agent-profiler"]
 
 # Select one physics kernel for the entire process, including build/test hosts.
 physics-deterministic = [
@@ -30,6 +31,7 @@ physics-deterministic = [
     "incant_render_game/physics-deterministic",
     "incant_runtime/physics-deterministic",
     "incant_script/physics-deterministic",
+    "incant_templates/physics-deterministic",
 ]
 physics-fast-simd8 = [
     "incant_agent/physics-fast-simd8",
@@ -50,9 +52,11 @@ physics-fast-simd8 = [
     "incant_render_game/physics-fast-simd8",
     "incant_runtime/physics-fast-simd8",
     "incant_script/physics-fast-simd8",
+    "incant_templates/physics-fast-simd8",
 ]
 
 [dependencies]
+incant_templates = { path = "../incant_templates", default-features = false }
 incant_agent_native = { path = "../incant_agent_native", default-features = false }
 incant_play = { path = "../incant_play", default-features = false }
 incant_cook = { path = "../incant_cook", default-features = false, features = ["scene", "script", "typescript"] }

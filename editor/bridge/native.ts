@@ -23,6 +23,7 @@ import type {
   AgentState,
   AgentSessionSnapshot,
   AgentTurnRequest,
+  AgentViewContext,
   ProjectFileRequest,
   ProjectFileResponse,
 } from "./contract";
@@ -73,6 +74,7 @@ export interface EngineRead {
   /** Explicitly present only on hosts with the durable budget adapter. */
   agent_budget?: { available: boolean };
   project_file?: { available: boolean };
+  entity_duplicate?: { available: boolean };
   /** Optional on older hosts; their Start request remains authoritative. */
   play_start?: { available: boolean; reason?: string };
 }
@@ -435,8 +437,17 @@ function budgetScope(read: EngineRead | undefined): string {
   return `${read.project.id}:${budget.status}:${budget.status === 'ready' ? budget.maxTokens : ''}`;
 }
 
+function validAgentView(value: unknown): value is AgentViewContext {
+  return fields(value, ['project_id', 'open_panels'])
+    && typeof value.project_id === 'string' && /^[0-7][0-9A-HJKMNP-TV-Z]{25}$/.test(value.project_id)
+    && Array.isArray(value.open_panels) && value.open_panels.length <= 8
+    && new Set(value.open_panels).size === value.open_panels.length
+    && value.open_panels.every(panel => ['viewport', 'hierarchy', 'assets', 'inspector', 'agent', 'problems', 'console', 'history'].includes(panel));
+}
 function validAgentRequest(value: unknown): value is AgentTurnRequest {
-  return fields(value, ['prompt', 'model', 'approval']) && boundedText(value.prompt, 16 * 1024)
+  return (fields(value, ['prompt', 'model', 'approval'])
+    || fields(value, ['prompt', 'model', 'approval', 'view_context']) && validAgentView(value.view_context))
+    && boundedText(value.prompt, 16 * 1024)
     && value.prompt.trim().length > 0 && boundedText(value.model) && value.model.trim().length > 0
     && ['auto', 'destructive', 'always'].includes(value.approval as string);
 }
@@ -607,7 +618,8 @@ export class NativeBridge implements EditorBridge {
   get capabilities(): readonly string[] {
     return [...this.nativeCapabilities,
       ...(this.read && projectAgentBudget(this.read).status === 'ready' ? ['agent.budget.set'] : []),
-      ...(this.read?.project_file?.available === true ? ['project.file'] : [])];
+      ...(this.read?.project_file?.available === true ? ['project.file'] : []),
+      ...(this.read?.entity_duplicate?.available === true ? ['entity.duplicate'] : [])];
   }
   readonly label = "Native engine";
   readonly isFixture = false;
@@ -907,8 +919,10 @@ export class NativeBridge implements EditorBridge {
         const state = this.agentState();
         return reject('agent.unavailable', state.status === 'unavailable' ? state.reason : 'The native agent is unavailable.');
       }
-      const turnRequest = { prompt: request.text, model: request.model ?? 'gpt-6-astra', approval: request.approval ?? 'destructive' };
+      const turnRequest = { prompt: request.text, model: request.model ?? 'gpt-6-astra', approval: request.approval ?? 'destructive',
+        ...(request.viewContext === undefined ? {} : { view_context: request.viewContext }) };
       if (!validAgentRequest(turnRequest)) return reject('agent.invalid-request', 'Enter a nonempty prompt up to 16 KiB and a model name up to 128 bytes.');
+      if (turnRequest.view_context && turnRequest.view_context.project_id !== this.read.project.id) return reject('agent.project-changed', 'The active project changed. Send the message again.');
       if (this.agentSession.budget.used_tokens >= this.agentSession.budget.max_tokens) return reject('agent.budget', this.exhaustedReason());
       this.agentStarting = true;
       const generation = ++this.agentGeneration;
@@ -1124,6 +1138,7 @@ export class NativeBridge implements EditorBridge {
     }
   }
   async dispatch(command: EditorCommand): Promise<BridgeResult> {
+    if (command.type === 'entity.duplicate' && !this.capabilities.includes('entity.duplicate')) return failure({ code: 'unsupported', message: 'This host cannot duplicate entities.' });
     const budgetEdit = command.type === 'agent.budget.set';
     if (budgetEdit && !count(command.maxTokens)) return { ok: false, error: { code: 'schema.invalid', message: 'Enter a whole number of tokens from 0 to 9,007,199,254,740,991.' } };
     if (budgetEdit && !this.capabilities.includes('agent.budget.set')) return { ok: false, error: { code: 'unsupported', message: 'This host cannot change the project’s agent token allowance.' } };
@@ -1141,6 +1156,7 @@ export class NativeBridge implements EditorBridge {
     const recoverBudget = budgetEdit || (command.type === 'history.undo' || command.type === 'history.redo')
       && projectAgentBudget(this.read).status !== 'unsupported';
     const previous = this.read;
+    let duplicateDispatched = false;
     // Subscribers run synchronously. Reserve the mutation before publishing its
     // admission barrier so a subscriber cannot start a second document write.
     if (importing) this.importing = true;
@@ -1187,9 +1203,29 @@ export class NativeBridge implements EditorBridge {
             error: {
               code: "entity.not-found",
               message:
-                "This operation requires an entity. Scene edits are not exposed in this spike.",
+                "This operation requires an existing entity.",
             },
           };
+        if (command.type === 'entity.duplicate') {
+          duplicateDispatched = true;
+          const response = await this.invoke<{ snapshot: EngineRead; receipt: { project: string; entity: string; revision: number; transaction: string } }>('engine_duplicate_subtree', {
+            sceneId: scene.id, entityId: command.entity, expectedRevision: previous.revision,
+          });
+          const receipt = response?.receipt;
+          read = response?.snapshot;
+          if (!record(receipt) || receipt.project !== previous.project.id || !fileId(receipt.entity)
+            || !fileId(receipt.transaction) || receipt.revision !== previous.revision + 1
+            || Object.values(previous.project.scenes).some(s => receipt.entity in s.entities)
+            || !record(read) || !isReady(read) || !record(read.project) || read.project.id !== previous.project.id
+            || !count(read.revision) || read.revision < receipt.revision
+            || read.revision === receipt.revision && !read.project.scenes[scene.id]?.entities[receipt.entity]
+            || this.read?.project.id !== previous.project.id || read.revision < this.read.revision) {
+            // IPC may have committed even if its completion cannot be verified.
+            await this.start();
+            return { ok: false, outcomeUnknown: true, error: { code: 'engine.response', message: 'The duplicate result could not be verified. Check the hierarchy before retrying.' } };
+          }
+          result = { ok: true, duplicatedEntity: id(receipt.entity) };
+        } else {
         const op =
           command.type === "entity.rename"
             ? {
@@ -1211,6 +1247,7 @@ export class NativeBridge implements EditorBridge {
               : "Delete entity",
           expectedRevision: this.read.revision,
         });
+        }
       }
       if (recoverBudget) {
         if (!isReady(read) || !count(read.revision) || !record(read.project) || projectAgentBudget(read).status !== 'ready') throw budgetInvalidResponse();
@@ -1225,7 +1262,10 @@ export class NativeBridge implements EditorBridge {
       return result;
     } catch (error) {
       await this.start(recoverBudget);
-      return failure(recoverBudget && typeof error === 'string' ? undefined : error);
+      const result = failure(recoverBudget && typeof error === 'string' ? undefined : error);
+      // The host commits before reading its completion snapshot. A rejected
+      // invocation cannot establish rollback, so never invite a blind retry.
+      return duplicateDispatched ? { ...result, outcomeUnknown: true } : result;
     } finally {
       if (importing) this.importing = false;
       else this.pending = false;

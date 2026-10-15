@@ -11,6 +11,7 @@ export const KNOWN_CAPABILITIES = [
   'project.file',
   'entity.rename',
   'entity.delete',
+  'entity.duplicate',
   'asset.import',
   'history.undo',
   'history.redo',
@@ -263,10 +264,18 @@ export type AgentFailure = 'provider' | 'tool' | 'budget_exhausted' | 'step_limi
 export type AgentApprovalDecision = 'pending' | 'allowed' | 'denied' | 'cancelled';
 export type JsonValue = null | boolean | number | string | readonly JsonValue[]
   | { readonly [key: string]: JsonValue };
+export type AgentEditorPanel = 'viewport' | 'hierarchy' | 'assets' | 'inspector'
+  | 'agent' | 'problems' | 'console' | 'history';
+/** Submission-time observations only, never mutation authority or captured pixels. */
+export interface AgentViewContext {
+  readonly project_id: Ulid;
+  readonly open_panels: readonly AgentEditorPanel[];
+}
 export interface AgentTurnRequest {
   readonly prompt: string;
   readonly model: string;
   readonly approval: AgentApprovalMode;
+  readonly view_context?: AgentViewContext;
 }
 export interface AgentApprovalSummary {
   readonly id: number;
@@ -428,6 +437,7 @@ export interface BridgeSnapshot {
 export type EditorCommand =
   | { readonly type: 'entity.rename'; readonly entity: Ulid; readonly name: string }
   | { readonly type: 'entity.delete'; readonly entity: Ulid }
+  | { readonly type: 'entity.duplicate'; readonly entity: Ulid }
   | { readonly type: 'asset.import'; readonly sources: readonly AssetImportRequest[] }
   | { readonly type: 'agent.budget.set'; readonly maxTokens: number }
   | { readonly type: 'history.undo' }
@@ -459,7 +469,7 @@ export type HostRequest =
   | { readonly type: 'provider.cancel' }
   | { readonly type: 'provider.disconnect' }
   | { readonly type: 'provider.switch'; readonly accountId: string }
-  | { readonly type: 'agent.send'; readonly text: string; readonly model?: string; readonly approval?: AgentApprovalMode }
+  | { readonly type: 'agent.send'; readonly text: string; readonly model?: string; readonly approval?: AgentApprovalMode; readonly viewContext?: AgentViewContext }
   | { readonly type: 'agent.cancel'; readonly turnId: number }
   | { readonly type: 'agent.approve'; readonly turnId: number; readonly approvalId: number; readonly approved: boolean }
   | {
@@ -489,7 +499,7 @@ export interface AssetImportCommit {
 }
 
 export type BridgeResult =
-  | { readonly ok: true; readonly projectFile?: ProjectFileResponse; readonly assetImport?: AssetImportCommit; readonly playEntity?: PlayEntity; readonly agentTurnId?: number }
+  | { readonly ok: true; readonly projectFile?: ProjectFileResponse; readonly assetImport?: AssetImportCommit; readonly playEntity?: PlayEntity; readonly agentTurnId?: number; readonly duplicatedEntity?: Ulid }
   | {
       readonly ok: false;
       readonly error: BridgeError;

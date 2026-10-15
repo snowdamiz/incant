@@ -52,6 +52,14 @@ export type HapticEffect =
  * Functions belong to one tick only; retained functions never reactivate.
  * Vector/transform inputs are copied as fixed numeric fields, never JSON. */
 export interface NativeCommands {
+  /** Existing punctual light only; linear RGB finite [0,1]. Retains kind,
+   * range/cones/shadows, topology and binding generation. Ordered with this
+   * tick's complete atomic batch; caught active-call errors reject all writes.
+   * Readback remains committed pre-command state. Environment is unsupported. */
+  setLightColor(id: NativeId, color: NativeVector3): void;
+  /** Finite [0,1_000_000], lux (directional) or candela (point/spot).
+   * Uses the final SetSpatial declaration; missing/despawned/non-light refuses. */
+  setLightIntensity(id: NativeId, intensity: number): void;
   /** Current host capabilities. Empty on ordinary/headless/mobile hosts; Wasm
    * parity is not yet implemented. Gamepad targets support rumble, device targets
    * impact. Query again after topology/session changes; never assume support. */

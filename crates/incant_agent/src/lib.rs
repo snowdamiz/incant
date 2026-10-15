@@ -5,6 +5,8 @@ use access::{ProjectAccess, check_cancel};
 pub mod accounts;
 mod assets;
 pub mod auth;
+mod context;
+pub use context::{EditorPanel, EditorViewContext};
 mod conversation;
 pub mod credentials;
 pub mod ledger;
@@ -15,6 +17,7 @@ pub mod play;
 pub mod provider;
 mod scripts;
 pub mod session;
+mod skills;
 pub use assets::{ProjectFiles, ProjectHost};
 use incant_cmd::{Actor, Command, CommandBus};
 use incant_doc::schema_registry;
@@ -153,6 +156,14 @@ pub trait EngineHost {
     fn play_state_query(&mut self, _: &str) -> Result<Value, AgentError> {
         Err(AgentError::Tool("no native play host connected".into()))
     }
+    fn profiler_available(&self) -> bool {
+        false
+    }
+    fn profiler_read(&self, _: &str, _: u64, _: usize) -> Result<Value, AgentError> {
+        Err(AgentError::Tool(
+            "no owner-session profiler connected".into(),
+        ))
+    }
     fn project_files(&self) -> Option<&ProjectFiles> {
         None
     }
@@ -207,6 +218,7 @@ pub fn tools() -> Vec<Value> {
     tools.extend(assets::tools());
     tools.extend(play::tools());
     tools.extend(scripts::tools());
+    tools.extend(skills::tools());
     tools
 }
 pub fn dispatch(
@@ -240,10 +252,13 @@ fn dispatch_cancellable(
         return Err(AgentError::Interrupted);
     }
     match name {
+        "skill_list" | "skill_read" => skills::dispatch(name, args),
         "script_read" | "script_write" => access.with_bus(cancel, |bus| {
             scripts::dispatch(bus, name, args, actor, cancel)
         }),
-        "play_run" | "play_state_query" => play::dispatch(access, perception, name, args, cancel),
+        "play_run" | "play_state_query" | "profiler_read" => {
+            play::dispatch(access, perception, name, args, cancel)
+        }
         "asset_list" | "asset_inspect" | "asset_import" => assets::dispatch(
             access,
             perception.project_files(),
@@ -374,6 +389,8 @@ impl Agent {
         on_text: &mut dyn FnMut(&str),
     ) -> Result<TurnReport, AgentError> {
         let mut input = conversation::initial_input(prompt);
+        let snapshot = access.with_bus(cancel, |bus| Ok(context::Snapshot::capture(bus)))?;
+        input.insert(input.len() - 1, snapshot.message()?);
         self.run_input(
             provider,
             access,
@@ -410,6 +427,12 @@ impl Agent {
             || (access.is_shared() && !perception.shared_play_available())
         {
             tools.retain(|tool| tool["name"] != "play_run" && tool["name"] != "play_state_query");
+        }
+        if !perception.profiler_available()
+            || !perception.native_play_available()
+            || (access.is_shared() && !perception.shared_play_available())
+        {
+            tools.retain(|tool| tool["name"] != "profiler_read");
         }
         let mut report = TurnReport {
             steps: 0,

@@ -23,9 +23,32 @@ async function settle(page: Page): Promise<void> {
   await page.waitForLoadState('networkidle')
 }
 
+/** Scrolls each live scene (optionally within `scope`) into view and waits until it has drawn or shows its fallback. */
+async function renderScenes(page: Page, scope = 'body'): Promise<void> {
+  const canvases = page.locator(`${scope} canvas`)
+  const count = await canvases.count()
+  for (let i = 0; i < count; i++) {
+    const canvas = canvases.nth(i)
+    const scene = canvas.locator('..')
+    await scene.scrollIntoViewIfNeeded()
+    await expect
+      .poll(() => canvas.evaluate((c: HTMLCanvasElement) => c.width !== 300 || c.style.display === 'none'), { timeout: 15_000 })
+      .toBe(true)
+    if (await canvas.evaluate((c: HTMLCanvasElement) => c.style.display === 'none')) {
+      await expect(scene.locator('[data-gl-fallback]')).toBeVisible()
+    }
+  }
+  await page.evaluate(() => window.scrollTo(0, 0))
+}
+
 test.describe('landing page', () => {
+  // Emit failures when they happen, even if a later test reaches the job limit.
+  test.afterEach(({}, info) => {
+    for (const error of info.errors) console.error(`[failure] ${info.title}: ${(error.message ?? '').slice(0, 12_000)}`)
+  })
   for (const vp of viewports) {
     test(`composes at ${vp.name} without horizontal overflow`, async ({ page }) => {
+      test.slow() // Scroll every scene before the existing full-page capture.
       const external: string[] = []
       page.on('request', (req) => {
         const url = new URL(req.url())
@@ -33,13 +56,47 @@ test.describe('landing page', () => {
       })
       await page.setViewportSize({ width: vp.width, height: vp.height })
       await settle(page)
+      await renderScenes(page)
       const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)
       expect(overflow).toBeLessThanOrEqual(0)
       expect(external).toEqual([])
-      await page.screenshot({ path: `${shots}/${vp.name}-full.png`, fullPage: true })
       await page.screenshot({ path: `${shots}/${vp.name}-fold.png` })
+      await page.screenshot({ path: `${shots}/${vp.name}-full.png`, fullPage: true })
     })
   }
+
+  test('live scenes draw into sized canvases or fall back to a still', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 })
+    await settle(page)
+    await renderScenes(page)
+    const hero = page.locator('#top canvas')
+    const drawn = await hero.evaluate((c: HTMLCanvasElement) => ({ w: c.width, h: c.height, shown: c.style.display !== 'none' }))
+    if (drawn.shown) {
+      expect(drawn.w).toBeGreaterThan(300)
+      expect(drawn.h).toBeGreaterThan(150)
+    }
+    await expect(page.locator('#top [role="img"]')).toHaveAttribute('aria-label', /lighthouse/i)
+  })
+
+  test('refused slow WebGL contexts preserve fallback scenes and page content', async ({ page }) => {
+    await page.addInitScript(() => {
+      const original = HTMLCanvasElement.prototype.getContext
+      HTMLCanvasElement.prototype.getContext = function (this: HTMLCanvasElement, id: string, options?: WebGLContextAttributes) {
+        if (id === 'webgl2') {
+          if (options?.failIfMajorPerformanceCaveat !== true) throw new Error('Missing performance admission')
+          return null
+        }
+        return original.call(this, id, options)
+      } as typeof original
+    })
+    const errors: string[] = []
+    page.on('pageerror', (error) => errors.push(error.message))
+    await settle(page)
+    await renderScenes(page)
+    expect(await page.locator('[data-gl-fallback]').count()).toBeGreaterThan(0)
+    await expect(page.locator('#top').getByRole('link', { name: 'View on GitHub', exact: true })).toBeVisible()
+    expect(errors).toEqual([])
+  })
 
   test('axe finds no serious or critical violations', async ({ page }) => {
     for (const vp of [viewports[0], viewports[2]]) {
@@ -81,7 +138,7 @@ test.describe('landing page', () => {
       if (href.startsWith('#')) {
         expect(await page.locator(href).count(), href).toBe(1)
       } else {
-        // Credit links are legitimate destinations alongside the product guide.
+        // Credit links are legitimate destinations alongside the product plan.
         const destination = new URL(href)
         expect(destination.protocol).toBe('https:')
         expect(destination.username).toBe('')
@@ -111,46 +168,60 @@ test.describe('landing page', () => {
     await expect(page).toHaveURL(/#faq$/)
   })
 
-  test('stage step tabs change the editor illustration via keyboard', async ({ page }) => {
+  test('walkthrough tabs drive the editor recreation from the keyboard', async ({ page }) => {
+    test.slow() // captures five states of a live viewport
     await page.setViewportSize({ width: 1440, height: 900 })
     await settle(page)
     const ask = page.getByRole('tab', { name: /Ask/ })
     const panel = page.locator('#stage-panel')
+    const picture = panel.locator(':scope > [role="img"]')
     await ask.focus()
     await expect(ask).toHaveAttribute('aria-selected', 'true')
-    await expect(panel.locator(':scope > [role="img"]')).toHaveAttribute('aria-label', /not a screenshot/)
+    await expect(picture).toHaveAttribute('aria-label', /Recreation of the Incant editor/)
 
     await page.keyboard.press('ArrowRight')
     const review = page.getByRole('tab', { name: /Review/ })
     await expect(review).toBeFocused()
     await expect(review).toHaveAttribute('aria-selected', 'true')
     await expect(panel).toHaveAttribute('aria-labelledby', 'stage-tab-review')
-    await expect(panel.locator(':scope > [role="img"]')).toHaveAttribute('aria-label', /dashed path/)
+    await expect(picture).toHaveAttribute('aria-label', /preview beam/)
+    await expect(panel).toContainText('Apply 4 changes to the project?')
 
     await page.keyboard.press('End')
     await expect(page.getByRole('tab', { name: /Undo/ })).toHaveAttribute('aria-selected', 'true')
+    await expect(panel).toContainText('revision 41')
     await page.keyboard.press('ArrowRight')
     await expect(ask).toHaveAttribute('aria-selected', 'true')
 
+    await renderScenes(page, '#stage-panel')
     for (const id of ['ask', 'review', 'play', 'undo']) {
       await page.locator(`#stage-tab-${id}`).click()
-      await page.waitForTimeout(500)
-      await page.locator('#how').screenshot({ path: `${shots}/stage-${id}-1440.png` })
+      await page.waitForTimeout(900)
+      await panel.screenshot({ path: `${shots}/stage-${id}-1440.png` })
     }
     await page.setViewportSize({ width: 390, height: 844 })
     await page.locator('#stage-tab-play').click()
-    await page.waitForTimeout(500)
-    await page.locator('#how').screenshot({ path: `${shots}/stage-play-390.png` })
+    await page.waitForTimeout(900)
+    await panel.screenshot({ path: `${shots}/stage-play-390.png` })
   })
 
-  test('geometry graph nodes preview the model from the keyboard', async ({ page }) => {
+  test('approving the agent’s change in the recreation advances to the play-test', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 })
+    await settle(page)
+    await page.locator('#stage-tab-review').click()
+    await page.locator('#stage-panel').getByText('Allow', { exact: true }).click()
+    await expect(page.getByRole('tab', { name: /Play-test/ })).toHaveAttribute('aria-selected', 'true')
+    await expect(page.locator('#stage-panel')).toContainText('Play-test passed')
+  })
+
+  test('geometry graph nodes rebuild the model preview from the keyboard', async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 })
     await settle(page)
     const stage = page.locator('#create')
-    const preview = stage.getByRole('img', { name: /^Illustration of the Incant geometry graph editor/ })
+    const preview = stage.getByRole('img', { name: /^Live preview of the Incant geometry graph/ })
     const nodes = stage.getByRole('button')
+    await expect(nodes).toHaveCount(7)
     const before = await preview.getAttribute('aria-label')
-    expect(await nodes.count()).toBeGreaterThan(1)
     await expect(nodes.last()).toHaveAttribute('aria-pressed', 'true')
 
     await nodes.first().focus()
@@ -159,27 +230,20 @@ test.describe('landing page', () => {
     await expect(nodes.last()).toHaveAttribute('aria-pressed', 'false')
     await expect(stage.getByRole('button', { pressed: true })).toHaveCount(1)
     await expect(preview).not.toHaveAttribute('aria-label', before ?? '')
+    await expect(preview).toHaveAttribute('aria-label', /displaying the Cylinder node/)
+
+    await page.setViewportSize({ width: 390, height: 844 })
+    await expect(nodes).toHaveCount(7)
+    await nodes.nth(3).click()
+    await expect(preview).toHaveAttribute('aria-label', /displaying the Array node/)
   })
 
-  test('workflow steps span the content width and keep their explanations visible', async ({ page }) => {
-    for (const width of [320, 768, 1024, 1440]) {
-      await page.setViewportSize({ width, height: 900 })
-      await settle(page)
-      const section = page.locator('#workflow')
-      const steps = section.locator('ol > li')
-      await expect(steps).toHaveCount(6)
-      for (const step of await steps.all()) {
-        await expect(step.locator('h3')).toBeVisible()
-        await expect(step.locator('p')).toBeVisible()
-      }
-      // From 768 px the steps are laid out across the row; no half-empty band beside a rail.
-      if (width >= 768) {
-        const content = await section.locator('ol').evaluate((ol) => ol.parentElement!.getBoundingClientRect().width)
-        const right = await steps.evaluateAll((els) => Math.max(...els.map((e) => e.getBoundingClientRect().right)))
-        const left = await steps.evaluateAll((els) => Math.min(...els.map((e) => e.getBoundingClientRect().left)))
-        expect(right - left).toBeGreaterThan(content * 0.95)
-      }
-    }
+  test('toolset and platforms list every capability and export target', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 })
+    await settle(page)
+    await expect(page.locator('#toolset li h3')).toHaveCount(12)
+    const targets = page.locator('#ship li h3')
+    await expect(targets).toHaveText(['Windows', 'macOS', 'Linux', 'iOS', 'Android', 'Web'])
   })
 
   test('FAQ disclosures toggle', async ({ page }) => {
@@ -192,8 +256,8 @@ test.describe('landing page', () => {
     await expect(second).toHaveAttribute('open', '')
   })
 
-  test('reduced motion disables animation', async ({ browser }) => {
-    const context = await browser.newContext({ reducedMotion: 'reduce' })
+  test('reduced motion disables animation and still draws each scene once', async ({ browser }) => {
+    const context = await browser.newContext({ reducedMotion: 'reduce', viewport: { width: 1440, height: 900 } })
     const page = await context.newPage()
     await page.goto('./')
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
@@ -204,6 +268,7 @@ test.describe('landing page', () => {
         .map((s) => s.animationIterationCount),
     )
     expect(iterations.every((n) => n === '1')).toBe(true)
+    await renderScenes(page)
     await context.close()
   })
 })

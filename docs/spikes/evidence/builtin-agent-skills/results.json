@@ -1,0 +1,103 @@
+{
+  "source": "907bbaea51a9c129d6811eafd14090d45c58d1ad",
+  "source_manifest_sha256": "35e3ca2536f58ddfb3e4fe39479a039f11a60e245b60b59eb3bb093ba6375353",
+  "runner_sha256": "3cd6df69c196e417d4688965e94dda16ea7e849814324d9aa60e5be7f8ebb2c1",
+  "target": "/private/tmp/incant-agent-font-target",
+  "target_initial_bytes": 56343831479,
+  "screen_capture": false,
+  "native_window": false,
+  "steps": [
+    {
+      "name": "agent-tests",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "-p",
+        "incant_agent",
+        "--all-targets",
+        "--target",
+        "aarch64-apple-darwin",
+        "--profile",
+        "ci",
+        "--locked",
+        "--offline",
+        "-j",
+        "2",
+        "--",
+        "--test-threads=1"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant",
+      "timeout": 900,
+      "exit_code": 0,
+      "terminal_reaped": true,
+      "passed_tests": 118,
+      "elapsed_seconds": 17.071820084005594,
+      "log_sha256": "0da2c5e86ba78f008ebc04979dbe7caad40b63d16d47e9597a29a529622aaf74",
+      "log_bytes": 13615
+    },
+    {
+      "name": "strict-lint",
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "-p",
+        "incant_agent",
+        "--all-targets",
+        "--target",
+        "aarch64-apple-darwin",
+        "--profile",
+        "ci",
+        "--locked",
+        "--offline",
+        "-j",
+        "2",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant",
+      "timeout": 900,
+      "exit_code": 0,
+      "terminal_reaped": true,
+      "elapsed_seconds": 13.74536783300573,
+      "log_sha256": "10fd119eb0ab019f0bbed7318976c3e8548ade941aadde3b599117a2d0e62bd6",
+      "log_bytes": 4551
+    },
+    {
+      "name": "fmt",
+      "argv": [
+        "./tools/cargo",
+        "fmt",
+        "-p",
+        "incant_agent",
+        "--",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant",
+      "timeout": 60,
+      "exit_code": 0,
+      "terminal_reaped": true,
+      "elapsed_seconds": 0.15076466699247248,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "log_bytes": 0
+    },
+    {
+      "name": "conventions",
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant",
+      "timeout": 60,
+      "exit_code": 0,
+      "terminal_reaped": true,
+      "elapsed_seconds": 0.8200085000135005,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "log_bytes": 0
+    }
+  ],
+  "elapsed_seconds": 34.576990916975774,
+  "target_growth_bytes": 98157168,
+  "complete": true
+}

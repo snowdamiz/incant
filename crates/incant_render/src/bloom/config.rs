@@ -17,7 +17,7 @@ pub enum BloomError {
     TargetSize,
     #[error("bloom viewport is outside its scene source")]
     Viewport,
-    #[error("bloom output has no approved cooked-output artifact")]
+    #[error("bloom requires the complete cooked-bloom filter and display family")]
     CookedOutput,
     #[error("bloom target cache lock failed")]
     CacheLock,
@@ -37,9 +37,13 @@ impl Bloom {
     }
 }
 
-pub(super) fn admission(config: Bloom, cooked_output: bool) -> Result<(), BloomError> {
+pub(super) fn admission(
+    config: Bloom,
+    cooked_output: bool,
+    cooked_bloom: bool,
+) -> Result<(), BloomError> {
     config.validate()?;
-    if cooked_output {
+    if cooked_output && !cooked_bloom {
         return Err(BloomError::CookedOutput);
     }
     Ok(())

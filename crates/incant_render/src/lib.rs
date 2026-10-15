@@ -103,8 +103,10 @@ pub struct Renderer {
     pub queue: wgpu::Queue,
     pub adapter: wgpu::Adapter,
     pub adapter_name: String,
-    /// Startup-only persistence result; a supplied cache is not a measured hit.
+    /// Initial cache read and latest successful cold-preparation write attempt.
+    /// Supplying cache bytes is not a measured driver hit.
     pub pipeline_cache_report: PipelineCacheReport,
+    pipeline_cache: pipeline_cache::Session,
     diagnostic_pipelines: Vec<wgpu::RenderPipeline>,
     scene_msaa: SceneMsaa,
     models: Mutex<models::ModelCache>,
@@ -205,7 +207,7 @@ impl Renderer {
         // The renderer owns a finite pipeline catalog. Prepare it before any
         // caller can submit a frame; frame preparation only looks up handles.
         let validation = device.push_error_scope(wgpu::ErrorFilter::Validation);
-        let cache_session = pipeline_cache::Session::new(&device, &adapter);
+        let mut cache_session = pipeline_cache::Session::new(&device, &adapter);
         let cache = cache_session.cache.as_ref();
         let environments = environment::EnvironmentSystem::new(&device, &queue);
         let lighting = lighting::LightingSystem::new(&device, adapter.get_info().backend, cache)?;
@@ -252,6 +254,7 @@ impl Renderer {
             let error = error.into();
             return Err(ResourceError::Preparation(error).into());
         }
+        cache_session.complete(Ok(()))?;
         Ok(Self {
             identity: std::sync::Arc::new(()),
             device_lost,
@@ -262,7 +265,8 @@ impl Renderer {
             queue,
             adapter,
             adapter_name,
-            pipeline_cache_report: cache_session.finish(),
+            pipeline_cache_report: cache_session.report.clone(),
+            pipeline_cache: cache_session,
             diagnostic_pipelines,
             scene_msaa,
             models: Mutex::new(HashMap::new()),
@@ -282,6 +286,12 @@ impl Renderer {
             #[cfg(feature = "native-metalfx")]
             metalfx_admission: None,
         })
+    }
+    /// Called only from explicit cold preparation after the validation scope.
+    fn complete_pipeline_preparation<T>(&mut self, candidate: Result<T>) -> Result<T> {
+        let prepared = self.pipeline_cache.complete(candidate)?;
+        self.pipeline_cache_report = self.pipeline_cache.report.clone();
+        Ok(prepared)
     }
     pub fn headless() -> Result<Self> {
         let instance = wgpu::Instance::default();

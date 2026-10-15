@@ -301,3 +301,34 @@ fn temporal_phase_matrix_and_depth_epoch_commit_together_across_failure_cut_and_
     assert!(!fresh.frame.has_previous());
     assert_eq!(fresh.frame.jitter_phase(), Some(0));
 }
+
+#[test]
+fn lighting_candidate_resets_color_provenance_only_on_acceptance_and_unchanged_values_continue() {
+    let mut h = History::default();
+    let camera = CameraView::preview();
+    let rect = [0., 0., 32., 24.];
+    let e = || Extent::new([32, 24], [32, 24], rect, camera);
+    let first = h.prepare_temporal(e(), camera, rect).unwrap();
+    h.accept(first);
+    let original = h.frame().unwrap();
+    let refused = h
+        .prepare_temporal_with_reset(e(), camera, rect, true)
+        .unwrap();
+    assert!(!refused.frame.has_previous());
+    assert_eq!(refused.frame.epoch(), original.epoch() + 1);
+    assert_eq!(refused.frame.jitter_phase(), Some(0));
+    drop(refused);
+    assert_eq!(h.frame().unwrap().epoch(), original.epoch());
+    let unchanged = h.prepare_temporal(e(), camera, rect).unwrap();
+    assert!(unchanged.frame.has_previous());
+    assert_eq!(unchanged.frame.jitter_phase(), Some(1));
+    drop(unchanged);
+    let accepted = h
+        .prepare_temporal_with_reset(e(), camera, rect, true)
+        .unwrap();
+    h.accept(accepted);
+    let next = h.prepare_temporal(e(), camera, rect).unwrap();
+    assert!(next.frame.has_previous());
+    assert_eq!(next.frame.epoch(), original.epoch() + 1);
+    assert_eq!(next.frame.jitter_phase(), Some(1));
+}

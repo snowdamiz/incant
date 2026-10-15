@@ -3855,6 +3855,7 @@ dependencies = [
  "incant_input",
  "incant_observe",
  "incant_play",
+ "incant_profile",
  "incant_render",
  "incant_render_authoring",
  "incant_render_game",
@@ -3862,6 +3863,7 @@ dependencies = [
  "incant_script",
  "serde",
  "serde_json",
+ "sha2 0.10.9",
  "tempfile",
  "thiserror 2.0.21",
  "ulid",
@@ -4146,6 +4148,7 @@ dependencies = [
  "incant_render_game",
  "incant_runtime",
  "incant_script",
+ "incant_templates",
  "incant_types",
  "rpassword",
  "schemars 1.2.2",
@@ -4548,7 +4551,9 @@ name = "incant_shader_cook"
 version = "0.0.1"
 dependencies = [
  "naga",
+ "serde_json",
  "sha2 0.10.9",
+ "tempfile",
  "thiserror 2.0.21",
 ]
 
@@ -4568,11 +4573,25 @@ dependencies = [
 ]
 
 [[package]]
+name = "incant_templates"
+version = "0.0.1"
+dependencies = [
+ "incant_cmd",
+ "incant_doc",
+ "incant_import",
+ "serde",
+ "serde_json",
+ "tempfile",
+ "thiserror 2.0.21",
+]
+
+[[package]]
 name = "incant_text"
 version = "0.0.1"
 dependencies = [
  "cosmic-text",
  "incant_assets_runtime",
+ "incant_localization",
  "rustybuzz",
  "serde_json",
  "sha2 0.10.9",

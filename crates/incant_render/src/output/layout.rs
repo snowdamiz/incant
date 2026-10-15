@@ -33,6 +33,35 @@ pub(super) fn create(device: &wgpu::Device) -> wgpu::PipelineLayout {
         immediate_size: 0,
     })
 }
+#[cfg(feature = "cooked-bloom")]
+pub(super) fn create_bloom(device: &wgpu::Device) -> wgpu::PipelineLayout {
+    let entries = [
+        ENTRIES[0],
+        ENTRIES[1],
+        wgpu::BindGroupLayoutEntry {
+            binding: 2,
+            ..ENTRIES[0]
+        },
+        wgpu::BindGroupLayoutEntry {
+            binding: 3,
+            ty: wgpu::BindingType::Buffer {
+                ty: wgpu::BufferBindingType::Uniform,
+                has_dynamic_offset: false,
+                min_binding_size: NonZeroU64::new(16),
+            },
+            ..ENTRIES[1]
+        },
+    ];
+    let bindings = device.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
+        label: Some("Cooked bloom display ABI"),
+        entries: &entries,
+    });
+    device.create_pipeline_layout(&wgpu::PipelineLayoutDescriptor {
+        label: Some("Cooked bloom display ABI"),
+        bind_group_layouts: &[Some(&bindings)],
+        immediate_size: 0,
+    })
+}
 #[cfg(test)]
 mod tests {
     use super::*;

@@ -7,8 +7,11 @@ publish.workspace = true
 
 [features]
 profile = ["incant_profile/summary", "incant_runtime/profile"]
+# Manual test fixture with separately prepared inputs; never part of broad GPU CI.
+diagnostic-core-stress = ["profile", "compiler"]
 diagnostic-script-phases = ["profile", "incant_profile/diagnostic-script-phases", "incant_runtime/diagnostic-script-phases"]
 diagnostic-navigation = ["diagnostic-script-phases", "incant_runtime/diagnostic-navigation"]
+diagnostic-script-budget = ["diagnostic-script-phases", "incant_profile/diagnostic-script-budget"]
 default = ["compiler", "physics-deterministic"]
 # Authoring/cook and the development runner only. Native players disable this.
 compiler = []

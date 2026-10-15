@@ -206,6 +206,10 @@ impl Session {
             || request.prompt.trim().is_empty()
             || request.model.len() > MAX_METADATA_BYTES
             || request.model.trim().is_empty()
+            || request
+                .view_context
+                .as_ref()
+                .is_some_and(|view| !view.is_valid())
         {
             return Err(SessionError::InvalidRequest);
         }

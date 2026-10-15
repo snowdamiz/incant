@@ -1,5 +1,7 @@
 //! Host-only cooking of the renderer's fixed display-output shader.
 //! This is not a project-shader compiler or a general wgpu layout compiler.
+mod audit;
+pub mod bloom;
 pub mod compute;
 mod contract;
 mod emit;
@@ -91,6 +93,7 @@ pub fn cook_output(source: &str) -> Result<Bundle> {
         include_str!("contract.rs"),
         include_str!("emit.rs"),
         include_str!("manifest.rs"),
+        include_str!("audit.rs"),
         include_str!("../Cargo.toml"),
     ]
     .join("\n");
