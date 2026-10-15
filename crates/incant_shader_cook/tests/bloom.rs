@@ -91,6 +91,43 @@ fn four_programs_emit_deterministic_native_stages_and_valid_spirv() {
             } else {
                 let text = std::str::from_utf8(&a.bytes).unwrap();
                 assert!(text.contains(&a.entry));
+                if a.backend == Backend::Dx12 {
+                    // Naga emits its special constants in both stages. Their
+                    // register must not be mistaken for a shader uniform CBV.
+                    let uniforms: Vec<_> = text
+                        .lines()
+                        .filter(|line| line.starts_with("cbuffer "))
+                        .map(|line| {
+                            line.split_once(" : ")
+                                .unwrap()
+                                .1
+                                .split_once(" { ")
+                                .unwrap()
+                                .0
+                        })
+                        .collect();
+                    let expected: &[&str] = if a.stage == Stage::Vertex {
+                        &[]
+                    } else if kind == Kind::Display {
+                        &["register(b0)", "register(b1)"]
+                    } else {
+                        &["register(b0)"]
+                    };
+                    assert_eq!(uniforms, expected, "{kind:?} {:?} uniforms", a.stage);
+                    let special: Vec<_> = text
+                        .lines()
+                        .filter(|line| line.starts_with("ConstantBuffer<"))
+                        .collect();
+                    let register = if kind == Kind::Display { 2 } else { 1 };
+                    assert_eq!(
+                        special,
+                        [format!(
+                            "ConstantBuffer<NagaConstants> _NagaConstants: register(b{register});"
+                        )],
+                        "{kind:?} {:?} special constants",
+                        a.stage
+                    );
+                }
                 if a.stage == Stage::Fragment {
                     if a.backend == Backend::Metal {
                         assert!(text.contains("[[texture(0)]]") && text.contains("[[buffer(0)]]"));
@@ -105,14 +142,7 @@ fn four_programs_emit_deterministic_native_stages_and_valid_spirv() {
                             text.contains("register(t1)"),
                             matches!(kind, Kind::Upsample | Kind::Display)
                         );
-                        assert_eq!(text.contains("register(b1)"), kind == Kind::Display);
                     }
-                } else if a.backend == Backend::Dx12 {
-                    assert!(text.contains(if kind == Kind::Display {
-                        "register(b2)"
-                    } else {
-                        "register(b1)"
-                    }));
                 }
             }
         }
