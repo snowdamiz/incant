@@ -52,6 +52,25 @@ pub(super) struct Attempt {
     pub session_generation: u64,
     pub requested_host_step: u64,
     pub status: Status,
+    pub host_timing: HostTiming,
+}
+/// One host clock only. These values never share an epoch with Metal timestamps.
+#[derive(Clone, Copy, Debug, Default, Serialize)]
+pub(super) struct HostTiming {
+    pub began_ns: Option<u64>,
+    pub reserved_ns: Option<u64>,
+    pub completed_ns: Option<u64>,
+    pub finished_ns: Option<u64>,
+    pub schedule: Option<Schedule>,
+}
+#[derive(Clone, Copy, Debug, Serialize)]
+pub(super) struct Schedule {
+    pub pulse_ns: Option<u64>,
+    pub deadline_ns: Option<u64>,
+    pub forced_resume: bool,
+    pub due: u8,
+    pub ordinal: u8,
+    pub discarded_ticks: Option<u64>,
 }
 #[derive(Clone, Copy, Debug, Serialize)]
 pub(super) struct Segment {
@@ -61,7 +80,7 @@ pub(super) struct Segment {
     pub role: Role,
     pub boundary_bits: u16,
 }
-const _: () = assert!(std::mem::size_of::<Attempt>() <= 48);
+const _: () = assert!(std::mem::size_of::<Attempt>() <= 192);
 const _: () = assert!(std::mem::size_of::<Segment>() <= 40);
 
 #[derive(Serialize)]
@@ -72,10 +91,13 @@ pub(super) struct Model {
     pub acquisition_failures: [u64; 9],
     pub omitted_attempts: u64,
     pub exhausted: bool,
+    pub timing_errors: u64,
     #[serde(skip)]
     capacity: usize,
     #[serde(skip)]
     active: Option<usize>,
+    #[serde(skip)]
+    finish_pending: Option<usize>,
     #[serde(skip)]
     pending: u16,
     #[serde(skip)]
@@ -95,8 +117,10 @@ impl Model {
             acquisition_failures: [0; 9],
             omitted_attempts: 0,
             exhausted: false,
+            timing_errors: 0,
             capacity,
             active: None,
+            finish_pending: None,
             pending: 0,
             surface_generation: 1,
         };
@@ -115,8 +139,15 @@ impl Model {
             None => self.exhausted = true,
         }
     }
-    pub fn begin(&mut self, role: Role, session_generation: u64, requested_host_step: u64) {
+    pub fn begin(
+        &mut self,
+        role: Role,
+        session_generation: u64,
+        requested_host_step: u64,
+        began_ns: Option<u64>,
+    ) {
         self.active = None;
+        self.finish_pending = None;
         if self.attempts.len() == self.capacity || self.exhausted || session_generation == 0 {
             self.exhausted = true;
             self.omitted_attempts = self.omitted_attempts.saturating_add(1);
@@ -139,7 +170,59 @@ impl Model {
             session_generation,
             requested_host_step,
             status: Status::Open,
+            host_timing: HostTiming {
+                began_ns,
+                ..HostTiming::default()
+            },
         });
+        if began_ns.is_none() {
+            self.timing_errors = self.timing_errors.saturating_add(1);
+        }
+    }
+    pub fn schedule(&mut self, schedule: Schedule) {
+        let Some(i) = self.active else { return };
+        let timing = &self.attempts[i].host_timing;
+        let valid = self.attempts[i].role == Role::Gameplay
+            && timing.schedule.is_none()
+            && (1..=4).contains(&schedule.due)
+            && schedule.ordinal < schedule.due
+            && schedule.pulse_ns.is_some()
+            && schedule.discarded_ticks.is_some()
+            && schedule.forced_resume == schedule.deadline_ns.is_none()
+            && schedule
+                .pulse_ns
+                .zip(timing.began_ns)
+                .is_some_and(|(p, b)| p <= b)
+            && schedule
+                .deadline_ns
+                .zip(schedule.pulse_ns)
+                .is_none_or(|(d, p)| d <= p);
+        if !valid {
+            self.timing_errors = self.timing_errors.saturating_add(1);
+        }
+        // Retain the first observation, including invalid/missing fields. The
+        // error count prevents partial metadata from becoming a timing verdict.
+        if timing.schedule.is_none() {
+            self.attempts[i].host_timing.schedule = Some(schedule);
+        }
+    }
+    pub fn reserved(&mut self, at_ns: Option<u64>) {
+        let Some(i) = self.active else { return };
+        let timing = self.attempts[i].host_timing;
+        if timing.reserved_ns.is_some() {
+            self.timing_errors = self.timing_errors.saturating_add(1);
+            return;
+        }
+        let checked = self.checked_time(timing.began_ns, at_ns);
+        self.attempts[i].host_timing.reserved_ns = checked;
+    }
+    fn checked_time(&mut self, previous: Option<u64>, current: Option<u64>) -> Option<u64> {
+        if current.is_none() || previous.zip(current).is_some_and(|(a, b)| b < a) {
+            self.timing_errors = self.timing_errors.saturating_add(1);
+            None
+        } else {
+            current
+        }
     }
     /// Called just before each native acquisition, after configure/retry boundaries.
     pub fn context(&mut self) -> Option<(u64, u64, u64, u64)> {
@@ -172,9 +255,21 @@ impl Model {
         self.acquisition_failures[failure as usize] =
             self.acquisition_failures[failure as usize].saturating_add(1);
     }
-    pub fn complete(&mut self, status: Status) {
+    pub fn complete(&mut self, status: Status, at_ns: Option<u64>) {
         if let Some(i) = self.active.take() {
+            let timing = self.attempts[i].host_timing;
+            let checked = self.checked_time(timing.reserved_ns.or(timing.began_ns), at_ns);
             self.attempts[i].status = status;
+            self.attempts[i].host_timing.completed_ns = checked;
+            if status == Status::HostCommitted && self.attempts[i].role == Role::Gameplay {
+                self.finish_pending = Some(i);
+            }
+        }
+    }
+    pub fn host_finished(&mut self, at_ns: Option<u64>) {
+        if let Some(i) = self.finish_pending.take() {
+            let checked = self.checked_time(self.attempts[i].host_timing.completed_ns, at_ns);
+            self.attempts[i].host_timing.finished_ns = checked;
         }
     }
 }
