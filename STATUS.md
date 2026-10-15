@@ -47,6 +47,9 @@ Nineteen cache controls, feature-off checks and the combined cooked shader/cache
 suite pass locally, with strict lint. The Vulkan lifecycle harness was compiled
 but not executed on this Mac; actual driver persistence and shader-stall gates
 remain open. [Contract and evidence](docs/spikes/persistent-pipeline-cache.md).
+Checkpoint42 exposed an incompatible cooked-feature selection in its all-effects
+Vulkan cache test. The [workflow repair](docs/spikes/ci-renderer-catalog.md) keeps
+every lifecycle assertion; actual corrected hosted execution remains pending.
 
 ## Cooked native shader export — ordinary catalog qualified
 
