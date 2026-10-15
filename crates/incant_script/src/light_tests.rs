@@ -5,7 +5,7 @@ mod fixture;
 use fixture::*;
 #[test]
 fn light_controls_commit_with_numeric_writes_and_expired_capabilities_never_reactivate() {
-    let source = r#"let old;exports.default={update(t){if(old){let caught=false;try{old('00000000000000000000000001',5)}catch(_){caught=true}if(!caught)throw Error('stale light capability');}old=t.commands.setLightIntensity;t.chunks[0].transforms[0]+=1;t.commands.setLightColor('00000000000000000000000001',new Float64Array([0.2,0.3,0.4]));t.commands.setLightIntensity('00000000000000000000000002',0);}};"#;
+    let source = r#"let old;exports.default={update(t){if(old){let caught=false;try{old('00000000000000000000000001',5)}catch(_){caught=true}if(!caught)throw Error('stale light capability');}old=t.commands.setLightIntensity;const id='00000000000000000000000001';let matched=0;for(const c of t.chunks){const row=c.ids.indexOf(id);if(row>=0){c.transforms[row*10]+=1;matched++;}}if(matched!==1)throw Error('unique numeric owner');t.commands.setLightColor('00000000000000000000000001',new Float64Array([0.2,0.3,0.4]));t.commands.setLightIntensity('00000000000000000000000002',0);}};"#;
     let mut h = ScriptHost::new(CompiledScript::compile(source).unwrap()).unwrap();
     let mut w = incant_runtime::NativeWorld::new(scene());
     for n in 1..=2 {
