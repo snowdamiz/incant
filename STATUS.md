@@ -102,8 +102,9 @@ The observer now also records scheduler wake, surface reservation, committed
 gameplay and postcommit host stages in one monotonic clock. Its bounded analyzer
 keeps catch-up batches, missing stages and surface/focus boundaries explicit.
 Observer-enabled and ordinary CPU suites, strict lint and 18 analyzer controls
-pass. These new fields have not yet been exercised in a fresh native replay;
-no scheduling policy or performance gate changes.
+pass. A fresh shipping build also passes its complete 2,156-tick CPU gameplay
+replay with exact logical and PCM parity. These new fields have not yet been
+exercised in a native window; no scheduling policy or performance gate changes.
 [Host-stage contract and CPU evidence](docs/spikes/native-presentation-host-stages.md).
 
 ## Device audio overrun handling — merged main303

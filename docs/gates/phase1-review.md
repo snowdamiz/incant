@@ -1,6 +1,6 @@
 # Phase 1 review ledger
 
-Updated against main317 and the fresh CJK/pseudo shipping players from
+Updated against main321 and the fresh CJK/pseudo shipping players from
 `e3dfcd9c695d6e1a74f82cb1613891c9e6046bb5`. Those producing identities remain
 explicit; they are not relabeled as later integration builds.
 Release checkpoint40 tested the main309 tree; later main310+
@@ -46,8 +46,10 @@ device execution is deferred; hosted build and release checks remain required.
   route. Deferred driver work, ambiguous display timestamps and uneven cadence
   remain open; this observation does not establish the complete shader-stall gate.
   The default-off [host-stage observer](../spikes/native-presentation-host-stages.md)
-  now has CPU and analyzer qualification to distinguish wake/reservation/body work;
-  its live coverage and any resulting frame-pacing change remain unqualified.
+  now has CPU/analyzer qualification and a fresh shipping build with exact full
+  gameplay/PCM replay. Its wake/reservation/body fields have not been observed in
+  a native window; live coverage and any resulting frame-pacing change remain
+  unqualified.
 - Finish and qualify remaining deliverables against the complete native sample.
   The [TypeScript AOT spike](../spikes/typescript-aot.md) remains an adoption
   experiment; its language controls are not a measured replacement for QuickJS.
@@ -61,3 +63,9 @@ The real-mouse capture check is pending the director's availability and is not
 blocking these lanes. Broader editor, agent, content, export, multiplayer, game
 production and distribution work remains in the plan's later and overlapping
 phases. [Phase 0](phase0-review.md) also retains its explicit deferred items.
+
+The [Arabic health-label correction](../spikes/core-rtl-health-direction.md) now
+passes actual Core localization and font-shaping regressions across damage,
+reset and repeated locale switches. The earlier native package is unchanged;
+normal-size Arabic appearance and the combined locale gate remain open while
+screen capture is paused.
