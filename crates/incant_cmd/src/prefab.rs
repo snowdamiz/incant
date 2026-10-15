@@ -13,6 +13,31 @@ pub(super) struct Budget {
     payload: PayloadBudget,
 }
 impl Budget {
+    /// Duplication and prefab expansion share the same transaction allowance.
+    pub(super) fn copy_entity(
+        &mut self,
+        entity: &Entity,
+        target: &str,
+        provenance: &Provenance,
+    ) -> Result<(), CommandError> {
+        self.charge(1)?;
+        self.payload.text(target)?;
+        self.payload.text(&entity.id)?;
+        self.payload.text(&entity.name)?;
+        if let Some(parent) = &entity.parent {
+            self.payload.text(parent)?;
+        }
+        self.payload.components(&entity.components)?;
+        self.payload.text(&provenance.actor)?;
+        self.payload.text(&provenance.transaction)?;
+        for text in [&provenance.model, &provenance.conversation_id]
+            .into_iter()
+            .flatten()
+        {
+            self.payload.text(text)?;
+        }
+        Ok(())
+    }
     fn charge(&mut self, count: usize) -> Result<(), CommandError> {
         self.nodes = self
             .nodes
@@ -55,7 +80,7 @@ impl Budget {
 fn invalid(message: &str) -> CommandError {
     PrefabError::Invalid(message.into()).into()
 }
-/// Bound incoming prefab values/maps before the transaction's ordinary project clone.
+/// Bound incoming expansion values/maps before the transaction's ordinary project clone.
 pub(super) fn preflight(commands: &[Command]) -> Result<(), CommandError> {
     let mut payload = PayloadBudget::default();
     for c in commands {
@@ -63,6 +88,9 @@ pub(super) fn preflight(commands: &[Command]) -> Result<(), CommandError> {
             Command::UpdatePrefab { prefab } => payload.prototype(prefab)?,
             Command::CreatePrefab { nodes, .. }
             | Command::InstantiatePrefab {
+                entities: nodes, ..
+            }
+            | Command::DuplicateSubtree {
                 entities: nodes, ..
             } => {
                 if nodes.is_empty() || nodes.len() > MAX_PREFAB_NODES {

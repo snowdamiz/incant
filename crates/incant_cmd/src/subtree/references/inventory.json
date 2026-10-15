@@ -1,0 +1,84 @@
+{
+  "AngularVelocity": [],
+  "AngularVelocity2D": [],
+  "Animation": [],
+  "AnimationGraph": [
+    "/$defs/AnimationCondition/properties/parameter",
+    "/$defs/AnimationGraphTransition/properties/from",
+    "/$defs/AnimationGraphTransition/properties/to",
+    "/$defs/AnimationMotion/oneOf/2/properties/parameter",
+    "/$defs/AnimationTree/properties/nodes/<map-key>",
+    "/$defs/AnimationTree/properties/root",
+    "/$defs/AnimationTreeNode/oneOf/1/properties/parameter",
+    "/$defs/AnimationTreeNode/oneOf/2/properties/children/items",
+    "/$defs/AnimationTreeNode/oneOf/2/properties/parameters/items",
+    "/$defs/AnimationTreePoint/properties/node",
+    "/properties/initial",
+    "/properties/parameters/<map-key>",
+    "/properties/states/<map-key>",
+    "/properties/transitions/<map-key>"
+  ],
+  "AnimationIk": [
+    "/$defs/AnimationIkConstraint/properties/id"
+  ],
+  "AnimationRootMotion": [
+    "/properties/fingerprint",
+    "/properties/model"
+  ],
+  "AudioBus": [
+    "/properties/parent"
+  ],
+  "AudioListener": [],
+  "AudioSource": [
+    "/properties/bus",
+    "/properties/clip"
+  ],
+  "Camera": [],
+  "Collider": [
+    "/$defs/ColliderPart/properties/id"
+  ],
+  "Collider2D": [],
+  "DirectionalLight": [],
+  "EnvironmentLight": [
+    "/properties/texture"
+  ],
+  "MeshRenderer": [
+    "/properties/materials/items",
+    "/properties/mesh"
+  ],
+  "NavigationGrid": [],
+  "NavigationMesh": [
+    "/$defs/NavigationSource/properties/entity",
+    "/$defs/OffMeshLink/properties/id"
+  ],
+  "PointLight": [],
+  "RigidBody": [],
+  "RigidBody2D": [],
+  "Script": [
+    "/properties/props/<literal-json>",
+    "/properties/source"
+  ],
+  "SpotLight": [],
+  "SpriteFlipbook": [
+    "/$defs/SpriteRegion/anyOf/1/properties/frame"
+  ],
+  "SpriteRenderer": [
+    "/$defs/SpriteRegion/anyOf/1/properties/frame",
+    "/properties/texture"
+  ],
+  "Text": [
+    "/properties/content",
+    "/properties/fonts/items"
+  ],
+  "Tilemap": [
+    "/$defs/TilemapLayer/properties/cells/items",
+    "/$defs/TilemapLayer/properties/id",
+    "/properties/tileset"
+  ],
+  "Transform": [],
+  "UiNode": [
+    "/$defs/UiText/properties/content",
+    "/$defs/UiText/properties/fonts/items"
+  ],
+  "Velocity": []
+}
