@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "id": "01JA42AT000000000000000001",
+  "maximum_size": [
+    128,
+    128
+  ],
+  "padding": 1,
+  "frames": {
+    "01JA42FR000000000000000001": {
+      "name": "Player 1",
+      "path": "template-frame-0.png"
+    },
+    "01JA42FR000000000000000002": {
+      "name": "Player 2",
+      "path": "template-frame-1.png"
+    },
+    "01JA42FR000000000000000003": {
+      "name": "Player 3",
+      "path": "template-frame-2.png"
+    },
+    "01JA42FR00000000000000000B": {
+      "name": "Solid tile",
+      "path": "template-tile.png"
+    }
+  }
+}
