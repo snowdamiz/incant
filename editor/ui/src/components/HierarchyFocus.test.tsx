@@ -129,6 +129,26 @@ describe('hierarchy focus after entity removal', () => {
     expect(selected()).toEqual([]);
   });
 
+  it('recovers after Enter reselects the already focused row before Delete', () => {
+    const double = host();
+    open(double.bridge);
+    const removed = row('Crate 02');
+    focusRow(removed);
+    fireEvent.keyDown(removed, { key: 'Enter' });
+    expect(document.activeElement).toBe(removed);
+    expect(selected()).toEqual([removed]);
+    fireEvent.keyDown(removed, { key: 'Delete' });
+    expect(double.commands).toEqual([{ type: 'entity.delete', entity: idOf(removed) }]);
+    double.publish(without(double.snapshot, idOf(removed)));
+
+    expect(document.activeElement?.id).toBe(row('Crate 03').id);
+    expect(row('Crate 03').tabIndex).toBe(0);
+    expect(selected()).toEqual([]);
+    fireEvent.keyDown(document.activeElement!, { key: 'ArrowDown' });
+    expect(document.activeElement).toBe(row('Crate 04'));
+    expect(selected()).toEqual([row('Crate 04')]);
+  });
+
   it.each(['filter', 'inspector', 'dialog', 'assets', 'body'] as const)('keeps focus that explicitly moved to the %s before removal', (destination) => {
     const double = host();
     open(double.bridge);

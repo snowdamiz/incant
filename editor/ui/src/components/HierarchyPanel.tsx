@@ -333,7 +333,7 @@ function Tree({ tree }: { tree: HierarchyTree }) {
     }
     if (event.key === 'Enter' && active !== null) {
       event.preventDefault();
-      select(active);
+      moveTo(active);
       return;
     }
     if ((event.key === 'PageDown' || event.key === 'PageUp') && active !== null) {

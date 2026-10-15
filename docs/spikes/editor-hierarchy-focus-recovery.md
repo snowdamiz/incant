@@ -25,6 +25,14 @@ selection, an intentional blur to the body, filtering that only hides the entity
 or focus moving to the filter, inspector, dialog or Assets tab. It copies no old
 row arrays: the adjacency search stops at the first surviving visible row.
 
+Root review of the first local commit `f98d2af5` identified an uncovered Enter
+route: reselecting the focused row advanced selection intent without a new DOM
+focus event, so a later removal rejected recovery. An added Enter/Delete control
+reproduced that failure while the other 14 focus controls passed. Enter now uses
+the same movement handler as pointer/arrow activation, which refreshes owned
+focus generation when reselecting an already focused row. Newer external
+selection intent still vetoes recovery.
+
 ## Local evidence
 
 Runtime: Node 22.23.3 at
@@ -39,13 +47,14 @@ node ../../node_modules/typescript/bin/tsc -b
 node ../../node_modules/vite/bin/vite.js build
 ```
 
-The focused run passed **51 tests**. The full UI/bridge run passed **1,039 tests
+The focused run passed **52 tests**. The full UI/bridge run passed **1,040 tests
 in 50 files**. TypeScript checking and the production UI build passed. The
 integrated source includes main344 `af7aa33a4b37f0136e2267edd3c35d21a7bb4573`;
-the full UI suite and TypeScript check were repeated after that integration and
-the allocation-free adjacency scan. `git diff --check` passes.
+the full UI suite and TypeScript check were repeated after that integration,
+the allocation-free adjacency scan and the Enter-route correction.
+`git diff --check` passes.
 
-The 14 new focus controls include repeated selection of the already focused row,
+The 15 new focus controls include pointer/Enter reselection of the focused row,
 successive deletion of an unselected recovery row, ancestor/subtree removal,
 intentional focus escape, same-label bridge replacement, project replacement,
 newer Problems selection and a replacement initially outside the mounted window.

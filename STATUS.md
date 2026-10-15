@@ -204,7 +204,7 @@ pending an unlocked desktop. [Evidence and limits](docs/spikes/editor-subtree-du
 
 Focused-row removal now restores the hierarchy's keyboard entry point to a
 surviving row while preserving selection intent, other focus owners and
-project/bridge boundaries. All 1,039 UI tests, TypeScript and the production UI
+project/bridge boundaries. All 1,040 UI tests, TypeScript and the production UI
 build pass; Delete and duplicate/Undo DOM controls include virtualized recovery.
 Actual native keyboard interaction remains pending the unlocked desktop.
 [Focus-recovery evidence](docs/spikes/editor-hierarchy-focus-recovery.md).
