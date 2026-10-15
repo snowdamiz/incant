@@ -13,7 +13,64 @@ controls. This fixes the ordinary viewport route; low-resolution reconstruction
 still has separate appearance defects. The entries
 below preserve earlier scoped results and superseded integration snapshots.
 
-## Script deadline checks — bounded diagnostic qualified
+## Cooked native shader export — ordinary catalog qualified
+
+The trusted native-window exporter can now select backend-cooked shaders for
+output, diagnostics, shadows, PBR materials, sprites, text, UI and clustered-light
+compute. Build evidence binds all eight families and 45 artifacts to the exact
+source, cooker, embedded manifest and target compilation. Project files cannot
+supply executable shader bytes. Default exports retain their existing behavior.
+
+Cooker and renderer CPU tests, strict lint, actual artifact auditing and both
+selected/ordinary player builds pass. The player was compiled but not executed;
+full public export, target-driver rendering, optional effect coverage, persistent
+Metal/DX12 caches and shader-stall qualification remain open. The prior fixture
+failure and storage-bound interruption remain recorded.
+[Selection and evidence](docs/spikes/shipping-cooked-shaders.md).
+
+## Agent editor visibility — per-turn wiring qualified
+
+The current visible navigator, output tab and inspector/agent panes now accompany
+each submitted turn as bounded, project-bound observations. They are untrusted
+context, not edit authority; stale project IDs and malformed payloads fail before
+provider use. Prior panel observations do not persist in conversation history.
+No screen capture, pixels or DOM inspection is involved.
+
+115 agent, 23 native host and 977 UI/bridge tests pass, together with strict lint,
+TypeScript, production build and generated-contract checks. Independent review
+found no blocking issue. This qualifies the open-panel context wiring; live agent
+evaluation and the full Phase 3 gate remain separate.
+[Behavior and evidence](docs/spikes/agent-editor-context.md).
+
+## Agent project context — current-turn orientation qualified
+
+Shared, exclusive and retained-conversation turns now receive a fresh, bounded
+authoring snapshot with project inventory, memory, recent applied edits and
+complete sampled component schemas. Project text stays in explicitly untrusted
+user-role data; old snapshots are excluded from retained exchanges. Shared locks
+are released before schema generation and provider calls, and existing revision,
+approval and account/project fences remain unchanged.
+
+All 113 scoped agent tests and strict lint pass, with independent source review.
+The original build-monitor interruption is retained. This is overlapping Phase 3
+backend work; open-panel context, skills and live-agent eval remain separate.
+[Behavior and validation](docs/spikes/agent-project-context.md).
+
+## Five starter projects — authoring and gameplay qualified
+
+Empty, third-person, first-person, 2D platformer and top-down starters are now
+available through the host CLI and shared authoring recipes. Each creates ordinary
+imported assets, typed components and TypeScript controllers through the command
+bus, with durable source history and create-only project publication.
+
+Nine distinct authoring/headless controls cover all five starters, including
+undo/redo, save/reopen, collision, jump, camera follow/look and sprite animation.
+Strict lint and TypeScript pass; the original exact-axis collision-test failure
+and corrected geometric contract remain recorded. The reviewed producer bytes
+compose unchanged with main325. GUI selection, editor-only rebuild and visual
+acceptance remain open. [Usage and evidence](docs/spikes/project-templates.md).
+
+## Script deadline checks — full-route diagnostic complete
 
 A default-off observer now separates QuickJS interrupt checks from explicit host
 checks, retaining their counts, refusals and existing CPU-clock attempts. It
@@ -21,8 +78,13 @@ changes no enforcement frequency, deadline, owner check or locking. Actual VM,
 rollback, detached-view and allocation controls pass alongside ordinary builds
 and strict lint. Its diagnostic reports remain excluded from performance gates.
 The conservative script compatibility identity now includes both enforcement
-source files. Full-Core cost measurement remains unrun; the 2 ms target is still
-unmet. [Contract, CPU qualification and retained initial failure](docs/spikes/script-budget-check-attribution.md).
+source files. A fresh private shipping build completes the full 2,156-tick Core10k
+route with exact gameplay and PCM parity. Nested check wall observations average
+4.34 microseconds per frame, or 8.40 microseconds on the same whole-tick tail
+frames. This closes the check-cost hypothesis without weakening enforcement;
+observer-inclusive wall spans do not establish reclaimable CPU time or a shipping
+speedup. The 2 ms target remains unmet, with other distinct investigations allowed.
+[Contract, actual measurements and retained failures](docs/spikes/script-budget-check-attribution.md).
 
 ## Ordinary subtree duplication — command and persistence qualified
 

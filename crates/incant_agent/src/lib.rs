@@ -5,6 +5,8 @@ use access::{ProjectAccess, check_cancel};
 pub mod accounts;
 mod assets;
 pub mod auth;
+mod context;
+pub use context::{EditorPanel, EditorViewContext};
 mod conversation;
 pub mod credentials;
 pub mod ledger;
@@ -374,6 +376,8 @@ impl Agent {
         on_text: &mut dyn FnMut(&str),
     ) -> Result<TurnReport, AgentError> {
         let mut input = conversation::initial_input(prompt);
+        let snapshot = access.with_bus(cancel, |bus| Ok(context::Snapshot::capture(bus)))?;
+        input.insert(input.len() - 1, snapshot.message()?);
         self.run_input(
             provider,
             access,

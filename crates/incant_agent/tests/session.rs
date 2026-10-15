@@ -11,6 +11,7 @@ fn request() -> TurnRequest {
         prompt: "Change the scene".into(),
         model: "fixture-model".into(),
         approval: ApprovalChoice::Destructive,
+        view_context: None,
     }
 }
 fn session() -> Session {

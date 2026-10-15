@@ -19,7 +19,36 @@ fn request(text: &str) -> TurnRequest {
         prompt: text.into(),
         model: "fixture".into(),
         approval: ApprovalChoice::Destructive,
+        view_context: None,
     }
+}
+
+#[test]
+fn editor_view_admission_rejects_invalid_and_foreign_project_context() {
+    let id = Project::empty("Current").id;
+    let mut request = request("Explain");
+    assert!(validate_view(&request, &id).is_ok());
+    request.view_context = Some(incant_agent::EditorViewContext {
+        project_id: id.clone(),
+        open_panels: vec![incant_agent::EditorPanel::Viewport],
+    });
+    assert!(validate_view(&request, &id).is_ok());
+    assert_eq!(
+        validate_view(&request, &Project::empty("Other").id)
+            .unwrap_err()
+            .code,
+        "agent.project-changed"
+    );
+    request
+        .view_context
+        .as_mut()
+        .unwrap()
+        .open_panels
+        .push(incant_agent::EditorPanel::Viewport);
+    assert_eq!(
+        validate_view(&request, &id).unwrap_err().code,
+        "agent.invalid-request"
+    );
 }
 fn bus() -> Arc<Mutex<crate::project::LoadState>> {
     Arc::new(Mutex::new(crate::project::LoadState::Ready(Box::new(

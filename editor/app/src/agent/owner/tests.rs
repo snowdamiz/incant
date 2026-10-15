@@ -21,6 +21,7 @@ fn request() -> TurnRequest {
         prompt: "Test native play".into(),
         model: "fixture".into(),
         approval: ApprovalChoice::Auto,
+        view_context: None,
     }
 }
 fn connection() -> Connection {

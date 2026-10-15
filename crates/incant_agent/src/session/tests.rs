@@ -12,6 +12,7 @@ fn post_publication_worker_panic_recomputes_conservative_charged_delta() {
         prompt: "Fixture".into(),
         model: "fixture-model".into(),
         approval: ApprovalChoice::Auto,
+        view_context: None,
     };
     session
         .start(request.clone(), |context| TurnOutcome {

@@ -292,14 +292,18 @@ impl crate::Renderer {
         )?;
         self.check_device()?;
         let validation = self.device.push_error_scope(wgpu::ErrorFilter::Validation);
-        let candidate =
-            BloomSystem::new(&self.device, self.adapter.get_info().backend, config, None);
+        let candidate = BloomSystem::new(
+            &self.device,
+            self.adapter.get_info().backend,
+            config,
+            self.pipeline_cache.cache.as_ref(),
+        );
         if let Some(error) = validation.pop().await {
             #[cfg(target_arch = "wasm32")]
             let error = error.into();
             return Err(ResourceError::Preparation(error).into());
         }
-        self.bloom = Some(candidate?);
+        self.bloom = Some(self.complete_pipeline_preparation(candidate)?);
         Ok(())
     }
     pub fn disable_bloom(&mut self) {

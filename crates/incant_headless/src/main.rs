@@ -42,6 +42,16 @@ struct Args {
 }
 #[derive(Subcommand)]
 enum Cli {
+    /// List the offline built-in project starters (does not create a project).
+    Templates,
+    /// Create a new project directory using ordinary imports and commands.
+    New {
+        directory: PathBuf,
+        #[arg(long, default_value = "empty")]
+        template: incant_templates::Template,
+        #[arg(long, default_value = "Untitled")]
+        name: String,
+    },
     EvalCheck {
         #[arg(default_value = "evals/phase0/tasks.json")]
         suite: PathBuf,
@@ -347,6 +357,16 @@ fn main() -> std::process::ExitCode {
 }
 fn run() -> Result<()> {
     match Args::parse().command {
+        Cli::Templates => print(incant_templates::ALL.map(|template| {
+            json!({
+                "id":template.name(),"description":template.description()
+            })
+        }))?,
+        Cli::New {
+            directory,
+            template,
+            name,
+        } => print(incant_templates::create(&directory, template, &name)?)?,
         Cli::Init {
             path,
             name,

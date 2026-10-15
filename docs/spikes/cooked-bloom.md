@@ -25,10 +25,10 @@ the export audit. Missing bloom programs explicitly refuse the complete catalog.
 No WGSL arithmetic, bloom gain/coverage, normalized area filtering, pass order,
 target lifetime, pixel-camera bypass, resource limits or timestamp placement
 changes. The cold constructors accept a pipeline-cache argument and forward it
-to all seven bloom PSOs (three filters and four output formats). The separate
-optional-cache lane owns retaining/persisting that cache on `Renderer`; its join
-must replace the current `None` in `enable_bloom` with the retained device cache,
-then pass the candidate through `complete_pipeline_preparation` after validation.
+to all seven bloom PSOs (three filters and four output formats). The separately reviewed optional-cache implementation now retains that cache on
+`Renderer`. The joined `enable_bloom` supplies this device-owned cache and passes
+its typed candidate through `complete_pipeline_preparation` only after the GPU
+validation scope has closed.
 
 The 21 Python metadata/selection controls pass. Rust host emission, SPIR-V
 validation, embedded-selector and existing bloom CPU/device controls are prepared
