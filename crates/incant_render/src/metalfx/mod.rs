@@ -125,8 +125,10 @@ mod tests {
         } else {
             assert_eq!(shader_admission(), Ok(()));
         }
-        if cfg!(feature = "cooked-metalfx-boundary") {
-            assert!(cfg!(feature = "cooked-temporal"));
+        const {
+            assert!(
+                !cfg!(feature = "cooked-metalfx-boundary") || cfg!(feature = "cooked-temporal")
+            );
         }
     }
     #[test]
