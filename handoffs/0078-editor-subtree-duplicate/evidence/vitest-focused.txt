@@ -1,0 +1,13 @@
+vitest focused exit 0
+raw sha256 b49eb7fee703b424ee590dbcef011db8b28668e6a2facf02a005627389eb5b1b
+
+ RUN  v5.0.3 /Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/.worktrees/0078-editor-subtree-duplicate/editor/ui
+
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+ Test Files  4 passed (4)
+      Tests  48 passed (48)
+   Start at  02:29:55
+   Duration  3.31s (tests 69%, environment 15%, transform 10%, import 4%, setup 2%)
