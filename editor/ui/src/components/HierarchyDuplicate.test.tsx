@@ -740,6 +740,11 @@ describe('hierarchy duplicate through the native bridge', () => {
     open(native);
     const header = () => document.querySelector<HTMLElement>('.panel--viewport > .panel__header')!;
     fireEvent.click(within(header()).getByRole('button', { name: 'Play' }));
+    // While the session prepares, a new revision would make its startup fail.
+    await waitFor(() => expect(double.status().phase).toBe('preparing'));
+    focusRow(IDS.crate1);
+    pressDuplicate(rowOf(IDS.crate1));
+    await waitFor(() => expect(message()).toBe('Stop Play to duplicate.'));
     await act(async () => double.finishStart());
     double.frame();
     await act(async () => {

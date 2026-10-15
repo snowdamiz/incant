@@ -41,6 +41,7 @@ MUTATIONS = [
     ("capability guard", DUP, "if (!capabilities.has('entity.duplicate')) return unavailableMessage('entity.duplicate', bridge);", ""),
     ("scene guard", DUP, "if (tree.nodes[id]?.kind === 'scene') return SCENE;", ""),
     ("Play world guard", DUP, "if (play?.stoppable) return PLAYING;", ""),
+    ("Play preparing guard", DUP, "if (play?.stoppable) return PLAYING;", "if (play?.stoppable && play.state !== 'preparing') return PLAYING;"),
     ("Play stopping guard", DUP, "if (play?.state === 'stopping') return STOPPING;", ""),
     ("vanished-source pre-check", DUP, "if (project === null || !source) {\n      announce(GONE);\n      return;\n    }", ""),
     ("success without a copy", DUP, "if (copy === undefined) {\n      announce(NO_COPY);\n      return;\n    }", ""),
