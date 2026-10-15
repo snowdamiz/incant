@@ -166,10 +166,7 @@ fn stale_source_free_manifest_refuses_before_any_gpu_frame_or_output() {
     assert!(out.stdout.is_empty());
     assert!(!root.join("stale.pcm").exists());
     let message = String::from_utf8(out.stderr).unwrap();
-    assert!(
-        message.contains("material manifest does not match"),
-        "{message}"
-    );
+    assert_eq!(message.trim(), "Error: Host(Consumer(Manifest(Identity)))");
 }
 #[cfg(feature = "render-gpu")]
 #[test]
