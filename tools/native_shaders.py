@@ -12,7 +12,7 @@ from native_package import read, require, sha256
 ROOT = Path(__file__).resolve().parents[1]
 FEATURE = 'cooked-native-shaders'
 COOKED = {FEATURE, 'cooked-output', 'cooked-geometry', 'cooked-materials',
-          'cooked-sprites', 'cooked-ui', 'cooked-text', 'cooked-clusters', 'cooked-bloom', 'cooked-ssao'}
+          'cooked-sprites', 'cooked-ui', 'cooked-text', 'cooked-clusters', 'cooked-bloom', 'cooked-ssao', 'cooked-temporal'}
 # Exact existing runtime ABI contracts, independently admitted by each selector.
 CONTRACTS = {
     'output': (
@@ -63,6 +63,16 @@ CONTRACTS = {
     'ssao-prepass': 'incant-ssao-prepass-v1;interpolation=centroid;naga=29.0.4;wgpu=29.0.4;msl=2.4,pull15v14i,stride48-112,vertex-sizes1;hlsl=6.0,frame-b0,material-b1,base-t0,sampler-indices-t5,special-b2;spv=1.0,no-y-flip;bounds=restrict;loops=bounded',
     'ssao-forward': 'incant-ssao-forward-v1;interpolation=centroid;naga=29.0.4;wgpu=29.0.4;msl=2.4,pull15v14i,stride48-112,vertex-sizes1,fragment-sizes7,ao-t0,material-t1;hlsl=6.0,ao-t0,material-t1,sampler-indices-t6-t10-t15,special-b5;spv=1.0,no-y-flip;bounds=restrict;loops=bounded',
     'ssao-sample': 'incant-ssao-sample-v1;naga=29.0.4;wgpu=29.0.4;uniform736@0,depth@1,normal@2;msl=2.4,b0,t0-t1;hlsl=6.0,b0,t0-t1,special-b1;spv=1.0,no-y-flip;bounds=restrict;loops=bounded',
+    'temporal-motion': 'incant-temporal-motion-v1;naga=29.0.4;wgpu=29.0.4;frame144-vf,material64-f,5textures-samplers;msl=2.4,pulls15-14-13-12,strides48-48-112-80,lengths1,frame0,material1;hlsl=6.0,b0-b1,sampler-t5,special-b2;spv=1.0,no-y-flip;bounds=restrict;loops=bounded',
+    'temporal-motion-owner': 'incant-temporal-motion-owner-v1;naga=29.0.4;wgpu=29.0.4;frame144-vf,material64-f,5textures-samplers;mrt=rgba32f-r32u;owner=uint-loc12-offset68-flat3;msl=2.4,pulls15-14-13-12,strides48-48-112-80,lengths1,frame0,material1;hlsl=6.0,b0-b1,sampler-t5,special-b2;spv=1.0,no-y-flip;bounds=restrict;loops=bounded',
+    'temporal-resolve': 'incant-temporal-resolve-v1;naga=29.0.4;wgpu=29.0.4;frame64-f,textures4,mrt1;msl=2.4;hlsl=6.0,special-b1;spv=1.0,no-y-flip;bounds=restrict;loops=bounded',
+    'temporal-copy': 'incant-temporal-copy-v2;naga=29.0.4;wgpu=29.0.4;frame64-f@1,textures1@0,mrt1;msl=2.4;hlsl=6.0,special-b1;spv=1.0,no-y-flip;bounds=restrict;loops=bounded',
+    'temporal-depth': 'incant-temporal-depth-v1;naga=29.0.4;wgpu=29.0.4;frame144-v,material64-f,5textures-samplers;msl=2.4,pulls15-14-13-12,strides48-48-112-80,lengths1,frame0,material1;hlsl=6.0,b0-b1,sampler-t5,special-b2;spv=1.0,no-y-flip;bounds=restrict;loops=bounded',
+    'temporal-cluster': (
+        'incant-cluster-v1;naga=29.0.4;wgpu=29.0.4;group64x1x1;shared=atomic4+128x4;'
+        'msl=2.4,static-threadgroup,sizes4;spv=1.0,implicit-workgroup-layout;'
+        'hlsl=6.0,grid-b0,light-t0,counts-u0,masks-u1,sizes-b1,special-b2;bounds=restrict;loops=bounded'
+    ),
 }
 
 SOURCES = {
@@ -71,6 +81,10 @@ SOURCES = {
     'material': ['shadows/shade.wgsl', 'lighting/shade.wgsl', 'model_material.wgsl'],
     'sprite': ['sprites/sprite.wgsl'], 'ui': ['ui/ui.wgsl'],
     'text': ['text/text.wgsl'], 'cluster': ['lighting/grid.wgsl'],
+    'temporal-cluster': ['lighting/grid.wgsl'],
+    'temporal-motion': ['motion/shader.wgsl'], 'temporal-depth': ['motion/shader.wgsl'],
+    'temporal-motion-owner': ['motion/owner.wgsl'],
+    'temporal-resolve': ['temporal/resolve.wgsl'], 'temporal-copy': ['temporal/copy.wgsl'],
     'ssao-prepass': ['model_material.wgsl', 'ambient_occlusion/prepass.wgsl'],
     'ssao-forward': ['shadows/shade.wgsl', 'lighting/shade.wgsl', 'model_material.wgsl'],
     'ssao-sample': ['ambient_occlusion/ao.wgsl'],
@@ -83,6 +97,8 @@ DIRECTORIES = {'output': 'output-shaders', 'diagnostic': 'diagnostic-shaders',
     'ui': 'ui-shaders', 'text': 'text-shaders', 'cluster': 'cluster-shaders',
     'bloom-prefilter': 'bloom-prefilter-shaders', 'bloom-downsample': 'bloom-downsample-shaders',
     'bloom-upsample': 'bloom-upsample-shaders', 'bloom-display': 'bloom-display-shaders',
+    'temporal-cluster': 'temporal-cluster-shaders',
+    **{'temporal-' + name: 'temporal-' + name for name in ('motion', 'motion-owner', 'depth', 'resolve', 'copy')},
     **{'ssao-' + name: 'ssao-' + name + '-shaders' for name in ('prepass', 'forward', 'sample', 'horizontal', 'vertical')}}
 BACKENDS = {'Metal', 'Vulkan', 'Dx12'}
 TARGETS = {'aarch64-apple-darwin', 'x86_64-apple-darwin',
@@ -119,6 +135,15 @@ def _digest(value):
 def source_bytes(family, root=ROOT):
     paths = SOURCES[family]
     values = [read(Path(root) / 'crates/incant_render/src' / name, 1024**2) for name in paths]
+    if family == 'temporal-cluster':
+        for old, new in [
+            (b'let lo=vec2f(id.xy)*64.0/grid.viewport.zw;',
+             b'let lo=(vec2f(id.xy)*64.0-vec2f(1.0))/grid.viewport.zw;'),
+            (b'let hi=min(vec2f(id.xy+vec2u(1u))*64.0/grid.viewport.zw,vec2f(1.0));',
+             b'let hi=(min(vec2f(id.xy+vec2u(1u))*64.0,grid.viewport.zw)+vec2f(1.0))/grid.viewport.zw;'),
+        ]:
+            require(values[0].count(old) == 1, 'Fixed temporal cluster seam changed')
+            values[0] = values[0].replace(old, new, 1)
     if family == 'ssao-prepass':
         marker = b'@fragment fn fragment'
         require(values[0].count(marker) == 1, 'Fixed SSAO prepass seam changed')
@@ -155,7 +180,10 @@ def _family(directory, family, root):
     elif family.startswith('bloom-'):
         producer_paths = ['src/bloom/' + name for name in ('mod.rs', 'contract.rs', 'emit.rs')]
         producer_paths += ['src/audit.rs', 'Cargo.toml', '../incant_render/src/bloom/source.rs']
-    elif family == 'cluster':
+    elif family.startswith('temporal-') and family != 'temporal-cluster':
+        producer_paths = ['src/temporal/' + name for name in ('mod.rs', 'contract.rs', 'emit.rs')]
+        producer_paths += ['src/audit.rs', 'Cargo.toml']
+    elif family in ('cluster', 'temporal-cluster'):
         producer_paths = ['src/compute/' + name for name in ('mod.rs', 'contract.rs', 'emit.rs',
             'static_workgroup.rs', 'spirv_workgroup.rs')]
         producer_paths += ['src/audit.rs', 'Cargo.toml']
@@ -167,13 +195,13 @@ def _family(directory, family, root):
     require(_digest(receipt['producer_sha256']) == sha256(producer), 'Shader producer identity differs')
     manifest = read(directory / 'manifest.rs', 64 * 1024)
     require(_digest(receipt['manifest_sha256']) == sha256(manifest), 'Embedded shader manifest differs')
-    stages = {'Compute'} if family == 'cluster' else {'Vertex', 'Fragment'}
+    stages = {'Compute'} if family in ('cluster', 'temporal-cluster') else {'Vertex', 'Fragment'}
     expected = {(backend, stage) for backend in BACKENDS for stage in stages}
     artifacts = receipt['artifacts']
     require(isinstance(artifacts, list) and len(artifacts) == len(expected), 'Missing shader stages')
     seen = set()
     total = 0
-    compact = family == 'cluster'
+    compact = family in ('cluster', 'temporal-cluster')
     generated = ('const MANIFEST_CONTRACT: &str = ' + json.dumps(receipt['contract']) + ';\n'
         + 'const SOURCE_HASH: [u8;' + ('' if compact else ' ') + '32] = '
         + str(list(bytes.fromhex(receipt['source_sha256']))) + ';\n'
@@ -265,11 +293,12 @@ def audit(messages, mode, *, target_dir, target, profile, physics_mode, root=ROO
     output = Path(outputs[0])
     # Only the compiler-selected private OUT_DIR is read; no project/cache loader.
     families = {name: _family(output / directory, name, Path(root)) for name, directory in DIRECTORIES.items()}
-    require(sum(f['artifact_bytes'] for f in families.values()) <= 99 * 1024**2, 'Shader catalog exceeds bound')
+    require(sum(f['artifact_bytes'] for f in families.values()) <= 132 * 1024**2, 'Shader catalog exceeds bound')
     return {'mode': 'cooked', 'target': target, 'profile': profile,
         'compiler_features': {name: sorted(flags) for name, flags in found.items()},
         'ignored_build_host': sorted(ignored), 'families': families,
         'runtime_wgsl_in_selected_ordinary_catalog': False,
-        'limits': ['Seventeen fixed ordinary, bloom and SSAO families only; backend native compiler still runs during startup',
-            'Motion/temporal and MetalFX remain separate source routes; partial SSAO cooked selection still refuses',
+        'runtime_wgsl_in_selected_fixed_catalog': False,
+        'limits': ['Twenty-three fixed ordinary, bloom, SSAO and motion/temporal families; backend native compiler still runs during startup',
+            'Effects remain explicit cold opt-ins; separate native-metalfx shims and ordinary/web paths still use WGSL',
             'No parser-symbol exclusion, driver cache hit, asynchronous fallback or shader-stall gate claim']}
