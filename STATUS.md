@@ -3,8 +3,8 @@
 The current phase remains **Phase 1: Core engine**. The
 [Phase 1 review ledger](docs/gates/phase1-review.md) maps each exit requirement to
 its recorded evidence and remaining qualification. The actual native texture,
-compatible static-model and compatible-animation workflows are verified on this Mac; release checkpoint38
-contains the tested main290 tree. Rendering quality and full rendered-game
+compatible static-model and compatible-animation workflows are verified on this Mac; release checkpoint39
+contains the tested main302 tree. Rendering quality and full rendered-game
 performance remain open. The reported jagged editor cube now has explicit 4x
 geometry antialiasing, verified in the actual Mac editor and isolated Metal
 controls. This fixes the ordinary viewport route; low-resolution reconstruction
@@ -137,11 +137,11 @@ displayed-frame timing and representative active-gameplay qualification remain
 open. [Export, actual run and limitations](docs/spikes/profiled-window-export.md).
 [Boundaries and replay](docs/spikes/native-window-cadence.md).
 
-Release checkpoint38 promoted exact main290 after all 23 required contexts and
-eight frozen-candidate workflows succeeded. It includes the verified asset
-workflows and default-off MetalFX foundation. Later editor antialiasing and
-profiled shipping-window exports remain outside this tested release baseline.
-Main development continues independently. [Promotion and exact checks](docs/spikes/release-checkpoint-38.md).
+Release checkpoint39 promoted exact main302 after all 23 required contexts and
+eight frozen-candidate workflows succeeded. It includes ordinary-editor
+antialiasing, native-window replay foundations and compatible animation refresh.
+Later main303+ work remains outside this tested release baseline. Main development
+continues independently. [Promotion and exact checks](docs/spikes/release-checkpoint-39.md).
 
 ## Prepared MetalFX interop — correctness verified, appearance failed
 
