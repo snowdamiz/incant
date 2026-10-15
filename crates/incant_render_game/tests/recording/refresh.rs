@@ -77,6 +77,15 @@ fn published_material_tables_update_keys_and_receipts_without_inventing_ticks() 
             .accept(input.input(), input.camera_label(), world.tick())
             .unwrap();
         assert_eq!(before, recorder.manifest().unwrap().to_bytes().unwrap());
+        // Every publication attempt consumes its ticket, including refusal.
+        // Stage fresh storage for the independent successful publication.
+        let prepared = input
+            .texture_refresh_ticket()
+            .prepare_visuals(&[next], caches())
+            .unwrap();
+        let mut candidate = input
+            .stage_texture_refresh(&world.spatial_view().unwrap(), prepared)
+            .unwrap();
         input
             .try_publish_textures(&world.spatial_view().unwrap(), &mut candidate, || {
                 Ok::<_, ()>(())
