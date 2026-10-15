@@ -70,6 +70,7 @@ fn pipeline(
     layout: &wgpu::BindGroupLayout,
     backend: wgpu::Backend,
     kind: crate::temporal_shader::Kind,
+    cache: Option<&wgpu::PipelineCache>,
 ) -> Result<wgpu::RenderPipeline> {
     let shader = crate::temporal_shader::stages(device, backend, kind)?;
     let layout = device.create_pipeline_layout(&wgpu::PipelineLayoutDescriptor {
@@ -101,12 +102,16 @@ fn pipeline(
                 })],
             }),
             multiview_mask: None,
-            cache: None,
+            cache,
         }),
     )
 }
 impl TemporalSystem {
-    fn new(device: &wgpu::Device, backend: wgpu::Backend) -> Result<Self> {
+    fn new(
+        device: &wgpu::Device,
+        backend: wgpu::Backend,
+        cache: Option<&wgpu::PipelineCache>,
+    ) -> Result<Self> {
         let layout = device.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
             label: Some("Temporal resolve"),
             entries: &layout_entries(false),
@@ -121,12 +126,14 @@ impl TemporalSystem {
                 &layout,
                 backend,
                 crate::temporal_shader::Kind::Resolve,
+                cache,
             )?,
             copy: pipeline(
                 device,
                 &copy_layout,
                 backend,
                 crate::temporal_shader::Kind::Copy,
+                cache,
             )?,
             layout,
             copy_layout,
@@ -283,7 +290,7 @@ impl Renderer {
         if self.temporal.is_some() {
             return Ok(());
         }
-        self.enable_motion_vectors().await?;
+        self.prepare_motion_vectors().await?;
         let usage = wgpu::TextureUsages::RENDER_ATTACHMENT
             | wgpu::TextureUsages::TEXTURE_BINDING
             | wgpu::TextureUsages::COPY_SRC;
@@ -296,17 +303,19 @@ impl Renderer {
             return Err(TemporalError::Format.into());
         }
         let scope = self.device.push_error_scope(wgpu::ErrorFilter::Validation);
-        let candidate = TemporalSystem::new(&self.device, self.adapter.get_info().backend);
-        let grid = self
-            .lighting
-            .temporal_pipeline(&self.device, self.adapter.get_info().backend);
+        let cache = self.pipeline_cache.cache.as_ref();
+        let candidate = TemporalSystem::new(&self.device, self.adapter.get_info().backend, cache);
+        let grid =
+            self.lighting
+                .temporal_pipeline(&self.device, self.adapter.get_info().backend, cache);
         if let Some(error) = scope.pop().await {
             #[cfg(target_arch = "wasm32")]
             let error = error.into();
             return Err(crate::ResourceError::Preparation(error).into());
         }
-        let candidate = candidate?;
-        self.lighting.accept_temporal(grid?);
+        let prepared = candidate.and_then(|candidate| grid.map(|grid| (candidate, grid)));
+        let (candidate, grid) = self.complete_pipeline_preparation(prepared)?;
+        self.lighting.accept_temporal(grid);
         self.temporal = Some(candidate);
         Ok(())
     }

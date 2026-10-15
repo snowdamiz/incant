@@ -139,7 +139,7 @@ impl MotionSystem {
                     },
                 }),
                 multiview_mask: None,
-                cache: None,
+                cache: renderer.pipeline_cache.cache.as_ref(),
             })
         });
         Ok(Self {
@@ -163,9 +163,17 @@ impl Renderer {
     /// Startup-only opt-in. Creates four motion and four overlay-depth pipelines; ordinary draw_scene
     /// remains stateless. Enable history separately on a retained owner/host.
     pub async fn enable_motion_vectors(&mut self) -> Result<()> {
+        if self.prepare_motion_vectors().await? {
+            self.complete_pipeline_preparation(Ok(()))?;
+        }
+        Ok(())
+    }
+    // Nested temporal preparation defers persistence until its entire catalog
+    // succeeds. Existing motion resource publication remains unchanged.
+    pub(crate) async fn prepare_motion_vectors(&mut self) -> Result<bool> {
         super::admission()?;
         if self.motion.is_some() {
-            return Ok(());
+            return Ok(false);
         }
         self.check_device()?;
         for format in [
@@ -192,6 +200,6 @@ impl Renderer {
             return Err(crate::ResourceError::Preparation(error).into());
         }
         self.motion = Some(candidate?);
-        Ok(())
+        Ok(true)
     }
 }

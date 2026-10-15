@@ -13,6 +13,19 @@ controls. This fixes the ordinary viewport route; low-resolution reconstruction
 still has separate appearance defects. The entries
 below preserve earlier scoped results and superseded integration snapshots.
 
+## Optional pipeline caches — cold preparation qualified
+
+The renderer retains its Vulkan cache across explicit bloom, SSAO, motion and
+temporal preparation. Updated bytes are published only after successful
+validation; failed preparation and Drop preserve the previous complete file.
+No cache storage enters frame submission, and unsupported/default-off routes
+remain inert.
+
+Nineteen cache controls, feature-off checks and the combined cooked shader/cache
+suite pass locally, with strict lint. The Vulkan lifecycle harness was compiled
+but not executed on this Mac; actual driver persistence and shader-stall gates
+remain open. [Contract and evidence](docs/spikes/persistent-pipeline-cache.md).
+
 ## Cooked native shader export — ordinary catalog qualified
 
 The trusted native-window exporter can now select backend-cooked shaders for
@@ -893,8 +906,9 @@ satisfy those gates.
 The director authorized Phase 1 with remaining Phase 0 items deferred, sensible
 engineering progress without repeated advancement questions, and agent merges
 after scoped review and passing checks. These authorizations do not approve a
-phase gate. Section 12 decisions are settled. Current computer use and screen
-capture are authorized. Claude Opus 5.5 with explicitly verified Max effort owns
+phase gate. Section 12 decisions are settled. The director has paused local
+screen capture and computer use for every agent while development continues.
+Source work, CPU tests and hosted CI remain available. Claude Opus 5.5 with explicitly verified Max effort owns
 editor UI design, layout, styling and pixel review by default. Astra/root and
 subagents own all other work, including rendering and non-editor visuals, and may
 take over unresolved Claude editor UI work without another routing approval.

@@ -44,7 +44,7 @@ pub(super) struct BloomSystem {
     cache: Mutex<Option<Arc<Targets>>>,
 }
 impl BloomSystem {
-    pub fn new(device: &wgpu::Device, config: Bloom) -> Self {
+    pub fn new(device: &wgpu::Device, config: Bloom, cache: Option<&wgpu::PipelineCache>) -> Self {
         let layout = device.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
             label: Some("Bloom immutable inputs"),
             entries: &[
@@ -82,12 +82,12 @@ impl BloomSystem {
                 },
                 Some(&pipeline_layout),
                 crate::frame::HDR_FORMAT,
-                None,
+                cache,
             )
         });
         Self {
             config,
-            output: OutputPass::bloom(device),
+            output: OutputPass::bloom(device, cache),
             pipelines,
             layout,
             cache: Mutex::new(None),
@@ -283,13 +283,13 @@ impl crate::Renderer {
         )?;
         self.check_device()?;
         let validation = self.device.push_error_scope(wgpu::ErrorFilter::Validation);
-        let candidate = BloomSystem::new(&self.device, config);
+        let candidate = BloomSystem::new(&self.device, config, self.pipeline_cache.cache.as_ref());
         if let Some(error) = validation.pop().await {
             #[cfg(target_arch = "wasm32")]
             let error = error.into();
             return Err(ResourceError::Preparation(error).into());
         }
-        self.bloom = Some(candidate);
+        self.bloom = Some(self.complete_pipeline_preparation(Ok(candidate))?);
         Ok(())
     }
     pub fn disable_bloom(&mut self) {

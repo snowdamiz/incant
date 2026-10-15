@@ -35,7 +35,7 @@ fn decode(byte: u8) -> f32 {
 }
 pub(crate) struct OutputPass(HashMap<wgpu::TextureFormat, wgpu::RenderPipeline>);
 impl OutputPass {
-    pub(super) fn bloom(device: &wgpu::Device) -> Self {
+    pub(super) fn bloom(device: &wgpu::Device, cache: Option<&wgpu::PipelineCache>) -> Self {
         let module = device.create_shader_module(wgpu::ShaderModuleDescriptor {
             label: Some("Bloom HDR display transform"),
             source: wgpu::ShaderSource::Wgsl(crate::bloom::output_source().into()),
@@ -54,7 +54,7 @@ impl OutputPass {
                 wgpu::TextureFormat::Bgra8UnormSrgb,
             ]
             .into_iter()
-            .map(|format| (format, build(device, &stages, None, format, None)))
+            .map(|format| (format, build(device, &stages, None, format, cache)))
             .collect(),
         )
     }

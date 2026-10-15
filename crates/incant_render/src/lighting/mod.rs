@@ -232,6 +232,7 @@ impl LightingSystem {
         &self,
         device: &wgpu::Device,
         backend: wgpu::Backend,
+        cache: Option<&wgpu::PipelineCache>,
     ) -> Result<wgpu::ComputePipeline> {
         #[cfg(all(feature = "cooked-temporal", not(target_arch = "wasm32")))]
         let (shader, entry) = cooked::temporal_shader(device, backend)?;
@@ -258,7 +259,7 @@ impl LightingSystem {
                 module: &shader,
                 entry_point: Some(entry),
                 compilation_options: Default::default(),
-                cache: None,
+                cache,
             }),
         )
     }
