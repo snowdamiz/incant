@@ -8,6 +8,8 @@ pub use ambient_occlusion::{AmbientOcclusionCaptureError, AmbientOcclusionStages
 mod bloom;
 pub use bloom::{Bloom, BloomError};
 mod camera;
+mod capture;
+pub use capture::{FrameCapture, MAX_CAPTURE_DIMENSION, MAX_CAPTURE_FRAME_BYTES, capture_layout};
 #[cfg(all(feature = "native-compilation", target_os = "macos"))]
 pub mod compilation;
 mod diagnostic_draw;
