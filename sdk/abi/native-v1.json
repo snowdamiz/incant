@@ -1177,6 +1177,27 @@
       ],
       "result": "i32",
       "call": "Call::CommandAudio {ptr,len}"
+    },
+    {
+      "namespace": "incant_light_v1",
+      "name": "command",
+      "opcode": 62,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "len",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::CommandLight {ptr,len}"
     }
   ],
   "enums": {
@@ -1936,6 +1957,16 @@
       [
         "BusGain",
         5
+      ]
+    ],
+    "LightControlKind": [
+      [
+        "Color",
+        0
+      ],
+      [
+        "Intensity",
+        1
       ]
     ]
   },
@@ -3601,6 +3632,41 @@
         "value",
         "f64"
       ]
+    ],
+    "LightCommandHeader": [
+      [
+        "magic",
+        "u8",
+        8
+      ],
+      [
+        "count",
+        "u32"
+      ],
+      [
+        "stride",
+        "u32"
+      ]
+    ],
+    "LightCommand": [
+      [
+        "entity",
+        "u8",
+        16
+      ],
+      [
+        "kind",
+        "u32"
+      ],
+      [
+        "reserved",
+        "u32"
+      ],
+      [
+        "values",
+        "f64",
+        3
+      ]
     ]
   },
   "input_sections": [
@@ -3709,7 +3775,8 @@
     "AUDIO_MAX_NODES": 161,
     "AUDIO_MAX_BUSES": 32,
     "AUDIO_MAX_SOURCES": 128,
-    "AUDIO_MAX_COMMANDS": 1024
+    "AUDIO_MAX_COMMANDS": 1024,
+    "LIGHT_MAX_COMMANDS": 1024
   },
   "magic": {
     "INPUT_MAGIC": "INPINP01",
@@ -3739,7 +3806,8 @@
     "ROOT_MOTION_MAGIC": "INCRTM01",
     "HUD_MAGIC": "INCHUD01",
     "AUDIO_MAGIC": "INCADS01",
-    "AUDIO_COMMAND_MAGIC": "INCADC01"
+    "AUDIO_COMMAND_MAGIC": "INCADC01",
+    "LIGHT_COMMAND_MAGIC": "INCLCMD1"
   },
   "optional_none": -1,
   "namespaces": {
@@ -3761,6 +3829,7 @@
     "incant_animation_graph_v2": "animationgraph2",
     "incant_root_motion_v1": "rootmotion",
     "incant_hud_v1": "hud",
-    "incant_audio_v1": "audio"
+    "incant_audio_v1": "audio",
+    "incant_light_v1": "light"
   }
 }

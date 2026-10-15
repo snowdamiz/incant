@@ -185,15 +185,7 @@ pub(crate) fn prepare(
                     .map_err(NativeRenderError::TilemapRender)
             })
             .transpose()?;
-        let light = if let Some(light) = &decl.directional {
-            Some(SceneLight::Directional(light.clone()))
-        } else if let Some(light) = &decl.point {
-            Some(SceneLight::Point(light.clone()))
-        } else {
-            decl.spot
-                .as_ref()
-                .map(|light| SceneLight::Spot(light.clone()))
-        };
+        let light = light(decl);
         let slot = input.nodes.len();
         slots[node.index] = Some(slot);
         if node.id == camera && decl.camera.is_some() {
@@ -217,6 +209,7 @@ pub(crate) fn prepare(
     let camera_slot = camera_slot.ok_or(NativeRenderError::MissingCamera(camera))?;
     let undo = vec![
         super::NumericUndo {
+            light: None,
             world: DMat4::IDENTITY,
             frame: 0,
             animation: None,
@@ -241,6 +234,17 @@ fn add_payload(current: usize, next: usize) -> Result<usize, NativeRenderError> 
         .filter(|n| *n <= MAX_PAYLOAD_BYTES)
         .ok_or(NativeRenderError::PayloadLimit)
 }
+// Fixed scalar/shadow fields only; cloning a punctual declaration allocates no heap.
+pub(crate) fn light(decl: &incant_runtime::CookedSpatial) -> Option<SceneLight> {
+    if let Some(v) = &decl.directional {
+        Some(SceneLight::Directional(v.clone()))
+    } else if let Some(v) = &decl.point {
+        Some(SceneLight::Point(v.clone()))
+    } else {
+        decl.spot.as_ref().map(|v| SceneLight::Spot(v.clone()))
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

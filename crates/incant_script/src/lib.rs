@@ -23,6 +23,7 @@ mod flipbooks;
 mod heap_profile;
 mod hud;
 mod input;
+mod light_commands;
 mod loan;
 mod localization_values;
 mod logging;
@@ -728,6 +729,8 @@ fn bytecode_context(runtime: &Runtime, allow_source: bool) -> Result<Context, Sc
     }
 }
 
+#[cfg(all(test, feature = "compiler"))]
+mod light_tests;
 #[cfg(all(test, feature = "compiler"))]
 mod structural_tests;
 #[cfg(all(test, feature = "compiler"))]
