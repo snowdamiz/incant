@@ -3,8 +3,10 @@
 The current phase remains **Phase 1: Core engine**. The
 [Phase 1 review ledger](docs/gates/phase1-review.md) maps each exit requirement to
 its recorded evidence and remaining qualification. The actual native texture,
-compatible static-model and compatible-animation workflows are verified on this Mac; release checkpoint39
-contains the tested main302 tree. Rendering quality and full rendered-game
+compatible static-model and compatible-animation workflows are verified on this Mac;
+[release checkpoint40](docs/spikes/release-checkpoint-40.md) contains the tested
+main309 tree after all 23 required contexts and eight candidate workflows passed.
+Later main changes remain outside that release baseline. Rendering quality and full rendered-game
 performance remain open. The reported jagged editor cube now has explicit 4x
 geometry antialiasing, verified in the actual Mac editor and isolated Metal
 controls. This fixes the ordinary viewport route; low-resolution reconstruction
@@ -100,8 +102,9 @@ The observer now also records scheduler wake, surface reservation, committed
 gameplay and postcommit host stages in one monotonic clock. Its bounded analyzer
 keeps catch-up batches, missing stages and surface/focus boundaries explicit.
 Observer-enabled and ordinary CPU suites, strict lint and 18 analyzer controls
-pass. These new fields have not yet been exercised in a fresh native replay;
-no scheduling policy or performance gate changes.
+pass. A fresh shipping build also passes its complete 2,156-tick CPU gameplay
+replay with exact logical and PCM parity. These new fields have not yet been
+exercised in a native window; no scheduling policy or performance gate changes.
 [Host-stage contract and CPU evidence](docs/spikes/native-presentation-host-stages.md).
 
 ## Device audio overrun handling — merged main303

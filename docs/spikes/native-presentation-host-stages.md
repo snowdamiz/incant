@@ -8,8 +8,8 @@ rendering, presentation, or audio policy.
 
 Rust source `b4033db1fb675648a0e212c9d81ef6634d567d20`, based on
 `30a8d8e2e53168b342cbf844f99fb6730ca676d7`, passed CPU qualification. The five
-qualified Rust files remain byte-identical in this tools/documentation successor.
-No live window or GPU was run for this slice. In particular, the earlier complete
+qualified Rust files remain byte-identical in the fresh shipping producer described
+below. No live window or GPU was run for this slice. In particular, the earlier complete
 Core callback observation predates these host-stage fields and cannot establish
 their live coverage or diagnose its cadence. There is no performance or phase-gate
 claim.
@@ -111,9 +111,77 @@ not establish live completeness.
 python3 -B docs/spikes/evidence/native-presentation-host-stages/verify.py
 ```
 
-Default replay verifies the portable records, frozen inputs, raw CPU results and
-analyzer-control receipt. `--originals` additionally compares retained local
-originals; `--binaries` hashes the two external copied executables without running
-them. The verifier never compiles or launches the engine. A later explicitly
+Default replay verifies the portable records, frozen inputs, raw CPU results,
+analyzer controls and the shipping/replay results below. `--originals` additionally
+compares retained local originals; `--binaries` hashes the two external copied test
+executables and the shipping player without running them. The verifier never compiles or launches the engine. A later explicitly
 qualified live run is needed to attribute actual host/display gaps, with every
 boundary, pending/zero/equal callback and observation overhead retained.
+
+
+## Fresh shipping build and full CPU replay
+
+Producer `e93ac30a9cce9deadd4013ac5fa7abbc3e60a2ac` completed one fresh private
+shipping build and its offline one-tick startup check. The frozen inventory binds
+4,539 compiler/tool/vendor files and the same 74 authored Core inputs. The prior
+qualified host-stage files are unchanged. This producing source is distinct from
+later documentation or localization changes; its package remains frozen.
+
+The actual compiler is Rust 1.99 for `aarch64-apple-darwin`, with the original
+shipping fat LTO, one codegen unit, abort-on-panic and fast four-lane physics.
+The actual dependency graph admits only the four reviewed observer recipients:
+`incant_game_player`, `incant_render`, `wgpu-hal` and `objc2-metal`. Five target
+compiler units, including both player library and binary, carry exactly those
+features. No runtime compiler or native checkpoints were enabled. The private
+adapter reuses the normal cook/export helpers and preserves genuine compatibility
+identities; this artifact is ineligible for distribution or performance gates.
+
+| Retained identity | SHA-256 |
+| --- | --- |
+| Producing source inventory | `1e05e5045d1b89ddd2b5989f947c87f10048983171f798a29f9ea3824d60acf6` |
+| Completed build report | `e4a314d206c33c4894f329da8a157223dc7b10dd5bdfbfc968dcc270c06f9096` |
+| Copied player | `45c5374583b7543af7e4b5d77a6776d79f7a5eeb3c945c9b640adf5b3a970ca6` |
+| Full CPU replay result | `da287124ef1f719bd1c710a62925a25fd50edce9de4dd691a424d1cd444fec0c` |
+| Full PCM | `ccabf2c68b6388ac554ac3efb5609ddf6b4a45d1a3f316891d5f344094e99ee3` |
+
+All 22 managed build/startup children returned zero after cleanup. The fresh
+scratch target was removed before startup; all 82 retained artifacts were
+rehashed. Sampled free storage stayed above 98.65 GB. The stage lasted 477.484
+seconds within its 3,000-second bound, with no retry. Storage and cancellation
+checks are cooperative and sampled, not hard preemption of filesystem calls.
+
+The separately granted, unprofiled CPU replay ran exactly 2,156 ticks. Its complete
+logical report matches the retained Core baseline byte for byte, including eight
+checks and 17 entity observations. The 13,798,400-byte PCM matches exactly; stderr
+is empty. Its single child returned zero after cleanup in 5.539 seconds, within
+the 45-second child and 90-second stage limits. This duration is an execution
+receipt, not a benchmark or script-budget result. No source, package, workload,
+threshold or baseline was changed for the replay.
+
+The offline render-input viewport was 640×480. The producing native-window source
+requests 640×480 **logical** units; no native window was opened here, so no physical
+extent or scale factor was observed. CPU replay does not exercise drawable
+acquisition, host scheduling, native shader creation, display callbacks, device
+audio, or the new host-stage fields. There is still no actual native host-stage
+observation, display-cadence result, visual acceptance, shader-stall qualification
+or performance/phase-gate pass.
+
+The expanded packet preserves the original 48 CPU/analyzer records and adds the
+fresh plans, grants, raw logs, source inventory, exact selected compiler events,
+startup report and complete CPU replay. The compressed archive is about 2.8 MB;
+executables, PCM, cooked binary assets, debug symbols and the full verbose compiler
+stream remain external. Default replay verifies recorded PCM and executable
+identities; it does not claim to rehash bytes absent from the archive.
+
+```
+python3 -B docs/spikes/evidence/native-presentation-host-stages/verify.py
+python3 -B docs/spikes/evidence/native-presentation-host-stages/verify.py --originals --binaries
+python3 -B docs/spikes/evidence/native-presentation-host-stages/verify.py --source-root /path/to/preserved-e93-checkout
+```
+
+`--originals` also rehashes omitted raw/cooked/PCM artifacts, checks all 74 authored
+inputs, and reconstructs the exact receiver-event subset from the retained full
+compiler stream. `--source-root` compares all 4,539 source files against the frozen
+inventory without changing that checkout. These optional modes require the
+retained local originals; missing files refuse explicitly. The verifier never
+executes archived scripts, compiles code, launches the engine or starts capture.
