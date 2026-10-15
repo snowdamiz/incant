@@ -40,6 +40,8 @@ impl TickCommands {
         let object = Object::new_proto(ctx.clone(), None)?;
         for name in [
             "requestRestart",
+            "setLightColor",
+            "setLightIntensity",
             "setUiText",
             "setUiDisabled",
             "setText",
@@ -195,6 +197,9 @@ fn parse<'js>(
     name: &str,
     args: &[Value<'js>],
 ) -> rquickjs::Result<StructuralCommand> {
+    if matches!(name, "setLightColor" | "setLightIntensity") {
+        return crate::light_commands::parse(ctx, name, args);
+    }
     if matches!(name, "setUiText" | "setUiDisabled" | "setText") {
         return crate::hud::parse(ctx, name, args);
     }

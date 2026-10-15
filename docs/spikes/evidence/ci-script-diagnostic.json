@@ -1,0 +1,131 @@
+{
+  "source_base": "cf0bd793de8777f1cc73e6b547ae58234f1dd1a9",
+  "source_files": [
+    {
+      "path": "crates/incant_script/Cargo.toml",
+      "sha256": "a9b0c46e6525653201d57a55fa6a2a4da09df495d36cf4e38d2e0f83e91aadd0"
+    },
+    {
+      "path": "crates/incant_script/src/lib.rs",
+      "sha256": "8a29dea23b2d1c40db52f3d3ed48cc197ae96b0da9433739b5fc0f6325ed689d"
+    },
+    {
+      "path": "tools/probes/core-script-phase/README.md",
+      "sha256": "708131a8330c7e85bf8c517d3a324f1a7392af780a3af6604137ce581f61dc9d"
+    }
+  ],
+  "checkpoint": 43,
+  "failed_run": 38686778944,
+  "failed_job": 116263334828,
+  "failed_log_sha256": "af10b0747732713d4961239907b33c84283ada793b18119f3861ab8fd313d041",
+  "commands": [
+    {
+      "argv": [
+        "test",
+        "--profile",
+        "ci",
+        "--locked",
+        "--offline",
+        "-p",
+        "incant_script",
+        "--lib",
+        "--features",
+        "profile",
+        "--",
+        "--ignored",
+        "--test-threads=1",
+        "--nocapture"
+      ],
+      "exit": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/ci-script-diagnostic-001/check-0.log",
+      "sha256": "0953678a53b65432a08bc846d64c904123df153c9f31ded381950f1523becbd3",
+      "owned_cleanup_reaped": true
+    },
+    {
+      "argv": [
+        "test",
+        "--profile",
+        "ci",
+        "--locked",
+        "--offline",
+        "-p",
+        "incant_script",
+        "--lib",
+        "--features",
+        "diagnostic-core-stress",
+        "tick_probe::tests::actual_native_stress_regions_128",
+        "--",
+        "--exact",
+        "--ignored",
+        "--test-threads=1",
+        "--nocapture"
+      ],
+      "exit": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/ci-script-diagnostic-001/check-1.log",
+      "sha256": "36b367d2daf435a0e114adff15174dd95f3cd8665da782c6bc8e5e14ebb0277a",
+      "owned_cleanup_reaped": true
+    },
+    {
+      "argv": [
+        "clippy",
+        "--profile",
+        "ci",
+        "--locked",
+        "--offline",
+        "-p",
+        "incant_script",
+        "--all-targets",
+        "--features",
+        "profile",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/ci-script-diagnostic-001/check-2.log",
+      "sha256": "9d56c514192e3785d33275b3be7a7736248441ac99d23d1a619a7440479d043d",
+      "owned_cleanup_reaped": true
+    },
+    {
+      "argv": [
+        "clippy",
+        "--profile",
+        "ci",
+        "--locked",
+        "--offline",
+        "-p",
+        "incant_script",
+        "--all-targets",
+        "--features",
+        "diagnostic-core-stress",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/ci-script-diagnostic-001/check-3.log",
+      "sha256": "9fdf0a269c06a230535a4aa7c9532ae9936441e3f71eab69ccfadf9538dfb3b2",
+      "owned_cleanup_reaped": true
+    }
+  ],
+  "without_input": {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-core-tick-diagnostic-target/ci/deps/incant_script-420667a607de9d9d",
+      "--ignored",
+      "--test-threads=1"
+    ],
+    "exit": 0,
+    "binary_sha256": "d73df95d2baea0f2a5a0feb077ad463cc8df6f66dedc4ec9bda6047647fb2227",
+    "prepared_environment_present": false,
+    "log_sha256": "b20f2b2261e98f14ee41bbfe93b6bc50816aafff65ef4b45f68ef17dd9737439"
+  },
+  "limits": {
+    "shipping_performance": false,
+    "hosted_success": false
+  },
+  "supervisor": {
+    "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/ci-script-diagnostic-001/run.py",
+    "sha256": "a83286f5a286d8abd3134a548521ee062a8a0183807529639f539ffa8fd60d02"
+  },
+  "result_sha256": "3029cfa35e2e21448fc9b213e9b40c486db916b496d412b4212bed7b30f79dc7"
+}
