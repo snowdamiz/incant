@@ -39,7 +39,7 @@ class NativeShaders(unittest.TestCase):
         for family, directory in shaders.DIRECTORIES.items():
             directory = self.output / directory
             directory.mkdir()
-            stages = ['Compute'] if family == 'cluster' else ['Vertex', 'Fragment']
+            stages = ['Compute'] if family in ('cluster', 'temporal-cluster') else ['Vertex', 'Fragment']
             artifacts = []
             for backend in ['Metal', 'Vulkan', 'Dx12']:
                 for stage in stages:
@@ -50,10 +50,18 @@ class NativeShaders(unittest.TestCase):
                                       'file': file, 'bytes': len(data), 'sha256': sha256(data)})
             if family == 'output':
                 paths = ['src/lib.rs', 'src/contract.rs', 'src/emit.rs', 'src/manifest.rs', 'src/audit.rs', 'Cargo.toml']
+            elif family.startswith('ssao-'):
+                paths = ['src/ambient_occlusion/' + n for n in ('mod.rs', 'contract.rs', 'emit.rs')]
+                paths += ['src/geometry/' + n for n in ('mod.rs', 'contract.rs', 'interpolation.rs', 'emit.rs',
+                    'sprite.rs', 'ui.rs', 'text.rs', 'material.rs', 'material_emit.rs')]
+                paths += ['src/lib.rs', 'src/audit.rs', 'Cargo.toml', '../incant_render/src/ambient_occlusion/source.rs']
             elif family.startswith('bloom-'):
                 paths = ['src/bloom/' + n for n in ('mod.rs', 'contract.rs', 'emit.rs')]
                 paths += ['src/audit.rs', 'Cargo.toml', '../incant_render/src/bloom/source.rs']
-            elif family == 'cluster':
+            elif family.startswith('temporal-') and family != 'temporal-cluster':
+                paths = ['src/temporal/' + n for n in ('mod.rs', 'contract.rs', 'emit.rs')]
+                paths += ['src/audit.rs', 'Cargo.toml']
+            elif family in ('cluster', 'temporal-cluster'):
                 paths = ['src/compute/' + n for n in ('mod.rs', 'contract.rs', 'emit.rs', 'static_workgroup.rs', 'spirv_workgroup.rs')]
                 paths += ['src/audit.rs', 'Cargo.toml']
             else:
@@ -64,7 +72,7 @@ class NativeShaders(unittest.TestCase):
                 'source_sha256': sha256(shaders.source_bytes(family)),
                 'producer_sha256': sha256(b'\n'.join((ROOT / 'crates/incant_shader_cook' / n).read_bytes() for n in paths)),
                 'artifacts': artifacts}
-            compact = family == 'cluster'
+            compact = family in ('cluster', 'temporal-cluster')
             space = '' if compact else ' '
             text = f'const MANIFEST_CONTRACT: &str = {json.dumps(receipt["contract"])};\n'
             for label in ['SOURCE', 'PRODUCER']:
@@ -108,7 +116,16 @@ class NativeShaders(unittest.TestCase):
                 ('material', 'material_shader.rs', 0), ('sprite', 'sprites/shader/cooked.rs', 0),
                 ('ui', 'ui/shader/cooked.rs', 0), ('text', 'text/shader/cooked.rs', 0), ('cluster', 'lighting/cooked.rs', 0),
                 ('bloom-prefilter', 'bloom/cooked.rs', 0), ('bloom-downsample', 'bloom/cooked.rs', 1),
-                ('bloom-upsample', 'bloom/cooked.rs', 2), ('bloom-display', 'bloom/cooked.rs', 3)]:
+                ('bloom-upsample', 'bloom/cooked.rs', 2), ('bloom-display', 'bloom/cooked.rs', 3),
+                ('ssao-prepass', 'ambient_occlusion/cooked.rs', 0), ('ssao-forward', 'ambient_occlusion/cooked.rs', 1),
+                ('ssao-sample', 'ambient_occlusion/cooked.rs', 2), ('ssao-horizontal', 'ambient_occlusion/cooked.rs', 3),
+                ('ssao-vertical', 'ambient_occlusion/cooked.rs', 4),
+                ('temporal-motion', 'temporal_shader/cooked.rs', 0),
+                ('temporal-motion-owner', 'temporal_shader/cooked.rs', 1),
+                ('temporal-resolve', 'temporal_shader/cooked.rs', 2),
+                ('temporal-copy', 'temporal_shader/cooked.rs', 3),
+                ('temporal-depth', 'temporal_shader/cooked.rs', 4),
+                ('temporal-cluster', 'lighting/cooked.rs', 0)]:
             source = (ROOT / 'crates/incant_render/src' / path).read_text()
             contracts = re.findall(r'(?:const CONTRACT: &str = |expected: )"([^"\n]+)"', source)
             self.assertEqual(shaders.CONTRACTS[family], contracts[index])
@@ -129,13 +146,73 @@ class NativeShaders(unittest.TestCase):
         with self.assertRaises(ValueError):
             shaders.target_admission('cooked', 'wasm32-unknown-unknown')
 
-    def test_complete_target_and_all_twelve_families_are_reported_without_publication(self):
+    def test_complete_target_and_all_twenty_three_families_are_reported_without_publication(self):
         result = self.audit()
         self.assertEqual(set(result['families']), set(shaders.DIRECTORIES))
-        self.assertEqual(sum(len(f['artifacts']) for f in result['families'].values()), 69)
+        self.assertEqual(sum(len(f['artifacts']) for f in result['families'].values()), 132)
         self.assertFalse(result['runtime_wgsl_in_selected_ordinary_catalog'])
         self.assertEqual(result['compiler_features']['incant_render'], sorted(shaders.COOKED))
         self.assertFalse((self.output / 'export.json').exists())
+
+    def test_each_missing_ssao_program_or_partial_feature_refuses(self):
+        for family in ['ssao-prepass', 'ssao-forward', 'ssao-sample', 'ssao-horizontal', 'ssao-vertical']:
+            path = self.output / shaders.DIRECTORIES[family] / 'audit.json'
+            data = path.read_bytes(); path.unlink()
+            with self.assertRaises(OSError): self.audit()
+            path.write_bytes(data)
+        self.messages[0]['features'].remove('cooked-ssao')
+        with self.assertRaisesRegex(ValueError, 'Missing/extra actual cooked'): self.audit()
+
+    def test_each_missing_temporal_program_and_partial_feature_refuse(self):
+        for family in [name for name in shaders.DIRECTORIES if name.startswith('temporal-')]:
+            path = self.output / shaders.DIRECTORIES[family] / 'audit.json'
+            data = path.read_bytes(); path.unlink()
+            with self.assertRaises(OSError): self.audit()
+            path.write_bytes(data)
+        self.messages[0]['features'].remove('cooked-temporal')
+        with self.assertRaisesRegex(ValueError, 'Missing/extra actual cooked'): self.audit()
+
+    def test_temporal_source_pins_and_cluster_guard_are_complete(self):
+        self.assertEqual(shaders.source_bytes('temporal-motion'), shaders.source_bytes('temporal-depth'))
+        self.assertNotEqual(shaders.CONTRACTS['temporal-motion'], shaders.CONTRACTS['temporal-depth'])
+        self.assertNotEqual(shaders.source_bytes('cluster'), shaders.source_bytes('temporal-cluster'))
+        helper = (ROOT / 'crates/incant_render/src/lighting/temporal_source.rs').read_text()
+        replacements = re.findall(r'^\s+"([^"\n]+)"', helper, re.MULTILINE)
+        expected = shaders.source_bytes('cluster')
+        for old, new in zip(replacements[0:4:2], replacements[1:4:2]):
+            self.assertEqual(expected.count(old.encode()), 1)
+            expected = expected.replace(old.encode(), new.encode(), 1)
+        self.assertEqual(shaders.source_bytes('temporal-cluster'), expected)
+        with mock.patch.object(shaders, 'read', return_value=b'changed cluster seam'):
+            with self.assertRaisesRegex(ValueError, 'temporal cluster seam changed'):
+                shaders.source_bytes('temporal-cluster')
+
+    def test_temporal_contract_stage_and_source_mutation_refuse(self):
+        family = 'temporal-motion'
+        original = copy.deepcopy(self.receipts[family])
+        for field, value in [('contract', shaders.CONTRACTS['temporal-depth']),
+                             ('source_sha256', 'a' * 64), ('producer_sha256', 'b' * 64)]:
+            self.receipts[family] = dict(original, **{field: value}); self.write(family)
+            with self.assertRaises(ValueError): self.audit()
+        self.receipts[family] = copy.deepcopy(original)
+        self.receipts[family]['artifacts'][-1] = copy.deepcopy(original['artifacts'][0])
+        self.write(family)
+        with self.assertRaises(ValueError): self.audit()
+
+    def test_ssao_source_assembly_preserves_original_programs_and_rejects_changed_seams(self):
+        base = (ROOT / 'crates/incant_render/src/model_material.wgsl').read_bytes()
+        self.assertEqual(shaders.source_bytes('ssao-prepass'), base.split(b'@fragment fn fragment', 1)[0] + b'\n'
+                         + (ROOT / 'crates/incant_render/src/ambient_occlusion/prepass.wgsl').read_bytes())
+        seam = b'(1.0-reflectance)*(1.0-metallic)*base.rgb*irradiance'
+        expected = b'\n'.join([(ROOT / 'crates/incant_render/src/shadows/shade.wgsl').read_bytes(),
+            (ROOT / 'crates/incant_render/src/lighting/shade.wgsl').read_bytes(),
+            b'@group(0) @binding(1) var diffuse_accessibility:texture_2d<f32>;\n' + base.replace(seam,
+                b'(' + seam + b')*textureLoad(diffuse_accessibility,vec2i(in.position.xy),0).r')])
+        self.assertEqual(shaders.source_bytes('ssao-forward'), expected)
+        for family in ['ssao-prepass', 'ssao-forward']:
+            with self.subTest(family=family), mock.patch.object(shaders, 'read', side_effect=lambda p, n:
+                    b'changed material seam' if p.name == 'model_material.wgsl' else p.read_bytes()):
+                with self.assertRaisesRegex(ValueError, 'SSAO .* seam changed'): shaders.source_bytes(family)
 
     def test_each_missing_bloom_program_refuses_complete_catalog_admission(self):
         for family in ['bloom-prefilter', 'bloom-downsample', 'bloom-upsample', 'bloom-display']:
@@ -180,7 +257,7 @@ class NativeShaders(unittest.TestCase):
             with self.subTest(change=change):
                 original = copy.deepcopy(self.messages)
                 if change == 'missing': self.messages[0]['features'].remove('cooked-text')
-                elif change == 'extra': self.messages[0]['features'].append('cooked-temporal')
+                elif change == 'extra': self.messages[0]['features'].append('cooked-unknown')
                 elif change == 'duplicate': self.messages[0]['features'].append('cooked-text')
                 else: self.messages[-2:-2] = [dict(self.messages[0], features=sorted(shaders.COOKED | {'physics-deterministic'}))]
                 with self.assertRaises(ValueError): self.audit()

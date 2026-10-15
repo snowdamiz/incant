@@ -1,4 +1,5 @@
 //! Match wgpu-hal 29's fixed four-group material layout on each backend.
+use super::material::Variant;
 use super::{
     Kind,
     emit::{bounds, vertex_mappings},
@@ -33,7 +34,19 @@ pub(super) fn emit(
     entry: &str,
     backend: Backend,
 ) -> Result<(Vec<u8>, String)> {
+    emit_variant(Variant::Ordinary, m, info, full, stage, entry, backend)
+}
+pub(crate) fn emit_variant(
+    variant: Variant,
+    m: &Module,
+    info: &ModuleInfo,
+    full: &Module,
+    stage: ShaderStage,
+    entry: &str,
+    backend: Backend,
+) -> Result<(Vec<u8>, String)> {
     let vertex = stage == ShaderStage::Vertex;
+    let offset = u8::from(variant == Variant::Occlusion && !vertex);
     match backend {
         Backend::Metal => {
             let dynamic: Vec<_> = m
@@ -51,7 +64,7 @@ pub(super) fn emit(
                     .flatten()
                 })
                 .collect();
-            let expected = if vertex {
+            let expected = if vertex || variant == Variant::Prepass {
                 vec![]
             } else {
                 vec![resource(3, 1), resource(3, 2), resource(3, 3)]
@@ -60,7 +73,13 @@ pub(super) fn emit(
                 return Err(CookError::Contract("material compact storage lengths"));
             }
             let mut resources = msl::EntryPointResources {
-                sizes_buffer: Some(if vertex { 1 } else { 7 }),
+                sizes_buffer: Some(if vertex {
+                    1
+                } else if variant == Variant::Prepass {
+                    2
+                } else {
+                    7
+                }),
                 ..Default::default()
             };
             for (_, g) in m.global_variables.iter() {
@@ -70,15 +89,18 @@ pub(super) fn emit(
                 let mut target = msl::BindTarget::default();
                 match (b.group, b.binding) {
                     (0, 0) => target.buffer = Some(0),
+                    (0, 1) if variant == Variant::Occlusion => target.texture = Some(0),
                     (1, 0) => target.buffer = Some(1),
-                    (1, n @ (1 | 3 | 5 | 7 | 9)) => target.texture = Some(((n - 1) / 2) as u8),
+                    (1, n @ (1 | 3 | 5 | 7 | 9)) => {
+                        target.texture = Some(((n - 1) / 2) as u8 + offset)
+                    }
                     (1, n @ (2 | 4 | 6 | 8 | 10)) => {
                         target.sampler = Some(msl::BindSamplerTarget::Resource(((n - 2) / 2) as u8))
                     }
-                    (2, n @ 0..=2) => target.texture = Some((5 + n) as u8),
+                    (2, n @ 0..=2) => target.texture = Some((5 + n) as u8 + offset),
                     (2, 3) => target.sampler = Some(msl::BindSamplerTarget::Resource(5)),
                     (3, n @ 0..=3) => target.buffer = Some((2 + n) as u8),
-                    (3, 4) => target.texture = Some(8),
+                    (3, 4) => target.texture = Some(8 + offset),
                     (3, 5) => target.sampler = Some(msl::BindSamplerTarget::Resource(6)),
                     (3, 6) => target.buffer = Some(6),
                     _ => return Err(CookError::Contract("material Metal resource")),
@@ -167,7 +189,11 @@ pub(super) fn emit(
             let mut options = hlsl::Options {
                 shader_model: hlsl::ShaderModel::V6_0,
                 fake_missing_bindings: false,
-                special_constants_binding: Some(bind(5)),
+                special_constants_binding: Some(bind(if variant == Variant::Prepass {
+                    2
+                } else {
+                    5
+                })),
                 restrict_indexing: true,
                 force_loop_bounding: true,
                 ..Default::default()
@@ -178,31 +204,41 @@ pub(super) fn emit(
                     .ok_or(CookError::Contract("material emitted binding"))?;
                 let target = match (b.group, b.binding) {
                     (0, 0) => bind(0),
+                    (0, 1) if variant == Variant::Occlusion => bind(0),
                     (1, 0) => bind(1),
-                    (1, n @ (1 | 3 | 5 | 7 | 9)) => bind((n - 1) / 2),
+                    (1, n @ (1 | 3 | 5 | 7 | 9)) => bind((n - 1) / 2 + u32::from(offset)),
                     (1, n @ (2 | 4 | 6 | 8 | 10)) => hlsl::BindTarget {
                         space: 255,
                         register: (n - 2) / 2,
                         ..Default::default()
                     },
-                    (2, n @ 0..=2) => bind(6 + n),
+                    (2, n @ 0..=2) => bind(6 + n + u32::from(offset)),
                     (2, 3) | (3, 5) => hlsl::BindTarget {
                         space: 255,
                         register: 0,
                         ..Default::default()
                     },
                     (3, 0) => bind(2),
-                    (3, n @ 1..=3) => bind(9 + n),
-                    (3, 4) => bind(13),
+                    (3, n @ 1..=3) => bind(9 + n + u32::from(offset)),
+                    (3, 4) => bind(13 + u32::from(offset)),
                     (3, 6) => bind(3),
                     _ => return Err(CookError::Contract("material HLSL resource")),
                 };
                 options.binding_map.insert(b, target);
             }
             options.sampler_buffer_binding_map = [
-                (hlsl::SamplerIndexBufferKey { group: 1 }, bind(5)),
-                (hlsl::SamplerIndexBufferKey { group: 2 }, bind(9)),
-                (hlsl::SamplerIndexBufferKey { group: 3 }, bind(14)),
+                (
+                    hlsl::SamplerIndexBufferKey { group: 1 },
+                    bind(5 + u32::from(offset)),
+                ),
+                (
+                    hlsl::SamplerIndexBufferKey { group: 2 },
+                    bind(9 + u32::from(offset)),
+                ),
+                (
+                    hlsl::SamplerIndexBufferKey { group: 3 },
+                    bind(14 + u32::from(offset)),
+                ),
             ]
             .into();
             options.sampler_heap_target = hlsl::SamplerHeapBindTargets {

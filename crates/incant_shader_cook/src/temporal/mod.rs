@@ -1,7 +1,7 @@
 //! Fixed temporal engine programs. No project supplied passthrough shaders.
 mod contract;
 mod emit;
-use crate::{Artifact, Backend, Bundle, CookError, Result, Stage};
+use crate::{Artifact, Backend, CookError, Result, Stage};
 use naga::{ShaderStage, back::pipeline_constants, valid};
 use sha2::{Digest, Sha256};
 use std::{fmt::Write as _, fs, path::Path};
@@ -12,6 +12,13 @@ pub enum Kind {
     Depth,
     Resolve,
     Copy,
+}
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct Bundle {
+    kind: Kind,
+    pub source_hash: [u8; 32],
+    pub producer_hash: [u8; 32],
+    pub artifacts: Vec<Artifact>,
 }
 impl Kind {
     pub fn entry(self) -> &'static str {
@@ -97,26 +104,48 @@ pub fn cook(kind: Kind, source: &str) -> Result<Bundle> {
             });
         }
     }
+    Ok(Bundle {
+        kind,
+        source_hash: kind.source_hash(),
+        producer_hash: producer_hash(),
+        artifacts,
+    })
+}
+fn producer_hash() -> [u8; 32] {
     let producer = [
         include_str!("mod.rs"),
         include_str!("contract.rs"),
         include_str!("emit.rs"),
+        include_str!("../audit.rs"),
         include_str!("../../Cargo.toml"),
     ]
     .join("\n");
-    Ok(Bundle {
-        source_hash: kind.source_hash(),
-        producer_hash: Sha256::digest(producer).into(),
-        artifacts,
-    })
+    Sha256::digest(producer).into()
 }
 pub fn write_bundle(kind: Kind, bundle: &Bundle, directory: &Path) -> Result<()> {
-    if bundle.artifacts.len() != 6 || bundle.source_hash != kind.source_hash() {
+    if bundle.kind != kind
+        || bundle.artifacts.len() != 6
+        || bundle.source_hash != kind.source_hash()
+        || bundle.producer_hash != producer_hash()
+    {
         return Err(CookError::Contract("temporal bundle identity"));
+    }
+    for backend in [Backend::Metal, Backend::Vulkan, Backend::Dx12] {
+        for stage in [Stage::Vertex, Stage::Fragment] {
+            if bundle
+                .artifacts
+                .iter()
+                .filter(|a| a.backend == backend && a.stage == stage)
+                .count()
+                != 1
+            {
+                return Err(CookError::Contract("temporal bundle stage membership"));
+            }
+        }
     }
     fs::create_dir_all(directory)?;
     let mut generated = format!(
-        "const MANIFEST_CONTRACT: &str = {:?};\nconst SOURCE_HASH: [u8;32] = {:?};\nconst PRODUCER_HASH: [u8;32] = {:?};\nconst ARTIFACTS: [Artifact;6] = [\n",
+        "const MANIFEST_CONTRACT: &str = {:?};\nconst SOURCE_HASH: [u8; 32] = {:?};\nconst PRODUCER_HASH: [u8; 32] = {:?};\nconst ARTIFACTS: [Artifact; 6] = [\n",
         kind.contract(),
         bundle.source_hash,
         bundle.producer_hash
@@ -125,9 +154,25 @@ pub fn write_bundle(kind: Kind, bundle: &Bundle, directory: &Path) -> Result<()>
         let file = format!("{:?}-{:?}.shader", a.backend, a.stage);
         fs::write(directory.join(&file), &a.bytes)?;
         let hash: [u8; 32] = Sha256::digest(&a.bytes).into();
-        writeln!(generated,"Artifact {{backend:wgpu::Backend::{:?},stage:Stage::{:?},entry:{:?},hash:{:?},bytes:include_bytes!({:?})}},",a.backend,a.stage,a.entry,hash,file).expect("String");
+        writeln!(generated,"Artifact {{ backend: wgpu::Backend::{:?}, stage: Stage::{:?}, entry: {:?}, hash: {:?}, bytes: include_bytes!({:?}) }},",a.backend,a.stage,a.entry,hash,file).expect("String");
     }
     generated.push_str("];\n");
     fs::write(directory.join("manifest.rs"), generated)?;
-    Ok(())
+    crate::audit::write(
+        directory,
+        kind.contract(),
+        &bundle.source_hash,
+        &bundle.producer_hash,
+        bundle.artifacts.iter().map(|a| {
+            (
+                a.backend,
+                match a.stage {
+                    Stage::Vertex => "Vertex",
+                    Stage::Fragment => "Fragment",
+                },
+                a.entry.as_str(),
+                a.bytes.as_slice(),
+            )
+        }),
+    )
 }
