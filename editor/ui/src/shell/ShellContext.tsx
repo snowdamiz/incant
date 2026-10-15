@@ -45,7 +45,10 @@ export interface Shell {
   readonly announce: (message: string) => () => void;
   /** Checks the capability, dispatches, and announces any failure. Resolves true on success. */
   readonly run: (command: EditorCommand) => Promise<boolean>;
-  /** Like `run`, but returns the bridge's result so a caller can show the exact error inline. */
+  /**
+   * Like `run`, but returns the bridge's result so a caller can show the exact error inline.
+   * Always resolves: a rejected dispatch carries outcomeUnknown, as a request does.
+   */
   readonly dispatch: (command: EditorCommand) => Promise<BridgeResult>;
   readonly ask: (request: HostRequest) => Promise<boolean>;
   /**
@@ -64,7 +67,9 @@ export interface Shell {
 const ShellContext = createContext<Shell | null>(null);
 
 /** Plain-language failure prefixes; other commands keep their command name. */
-const FAILURE_LABEL: Partial<Record<EditorCommand['type'], string>> = { 'asset.import': 'Import failed', 'agent.budget.set': 'Token allowance not saved' };
+const FAILURE_LABEL: Partial<Record<EditorCommand['type'], string>> = { 'asset.import': 'Import failed', 'agent.budget.set': 'Token allowance not saved', 'entity.duplicate': 'Duplicate failed' };
+/** A completion nobody verified is not called a failure: the host may have acted. */
+const UNKNOWN_LABEL: Partial<Record<EditorCommand['type'], string>> = { 'entity.duplicate': 'Duplicate result unknown' };
 
 const NO_CAPABILITIES = readCapabilities([]);
 const noopSubscribe = () => () => undefined;
@@ -199,8 +204,19 @@ export function ShellProvider({ bridge, children }: { bridge: EditorBridge | nul
         announce(message);
         return { ok: false, error: { code: 'unsupported', message } };
       }
-      const result = await bridge.dispatch(command);
-      if (!result.ok) announce(`${FAILURE_LABEL[command.type] ?? `${command.type} failed`}: ${result.error.message}`);
+      let result: BridgeResult;
+      try {
+        result = await bridge.dispatch(command);
+      } catch (error) {
+        // As for requests: a rejection says only that no result arrived.
+        result = rejectedRequest(error);
+      }
+      if (!result.ok) {
+        const label = result.outcomeUnknown
+          ? (UNKNOWN_LABEL[command.type] ?? `${command.type} result unknown`)
+          : (FAILURE_LABEL[command.type] ?? `${command.type} failed`);
+        announce(`${label}: ${result.error.message}`);
+      }
       return result;
     },
     [announce, bridge, capabilities],
