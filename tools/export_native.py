@@ -266,7 +266,7 @@ def main():
     parser.add_argument('output', type=Path)
     parser.add_argument('--wabt', type=Path, help='Trusted pinned WABT 1.0.42 directory for authored Wasm export')
     parser.add_argument('--profiling', choices=('summary', 'tracy'), help='Trusted opt-in diagnostics build for headless or window playback; runtime capture remains explicit')
-    parser.add_argument('--shaders', choices=('cooked',), help='Trusted native-window opt-in to eight fixed backend-cooked shader families; ordinary default unchanged')
+    parser.add_argument('--shaders', choices=('cooked',), help='Trusted native-window opt-in to the complete fixed backend-cooked shader catalog; ordinary default unchanged')
     parser.add_argument('--scene')
     parser.add_argument('--camera')
     parser.add_argument('--mode', choices=('headless', 'window'), default='headless')
