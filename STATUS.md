@@ -13,6 +13,20 @@ controls. This fixes the ordinary viewport route; low-resolution reconstruction
 still has separate appearance defects. The entries
 below preserve earlier scoped results and superseded integration snapshots.
 
+## Agent project context — current-turn orientation qualified
+
+Shared, exclusive and retained-conversation turns now receive a fresh, bounded
+authoring snapshot with project inventory, memory, recent applied edits and
+complete sampled component schemas. Project text stays in explicitly untrusted
+user-role data; old snapshots are excluded from retained exchanges. Shared locks
+are released before schema generation and provider calls, and existing revision,
+approval and account/project fences remain unchanged.
+
+All 113 scoped agent tests and strict lint pass, with independent source review.
+The original build-monitor interruption is retained. This is overlapping Phase 3
+backend work; open-panel context, skills and live-agent eval remain separate.
+[Behavior and validation](docs/spikes/agent-project-context.md).
+
 ## Script deadline checks — bounded diagnostic qualified
 
 A default-off observer now separates QuickJS interrupt checks from explicit host

@@ -114,8 +114,9 @@ impl crate::Agent {
         history: &mut Conversation,
     ) -> Result<crate::TurnReport, AgentError> {
         let mut access = crate::access::ProjectAccess::shared(bus, cancel)?;
-        let project = access.with_bus(cancel, |bus| Ok(bus.project().id.clone()))?;
-        let mut input = history.input(&project, prompt)?;
+        let snapshot = access.with_bus(cancel, |bus| Ok(crate::context::Snapshot::capture(bus)))?;
+        let mut input = history.input(&snapshot.project_id, prompt)?;
+        input.insert(input.len() - 1, snapshot.message()?);
         let new_turn = input.len() - 1;
         let result = self.run_input(
             provider,
