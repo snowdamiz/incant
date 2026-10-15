@@ -89,3 +89,14 @@ python3 docs/spikes/evidence/gameplay-light-controls/verify.py
 also checks retained external evidence and the producing Git source.
 `--source-root .` checks exact qualified code inputs; later source compositions
 must establish their own relevance rather than relabel these executions.
+
+## Main341 integration
+
+The producing packet remains unchanged. Of its 65 code inputs, 63 are identical
+in the main341 composition. Only `incant_script/Cargo.toml` and `src/lib.rs` differ:
+the reviewed main340 change makes the separately prepared stress diagnostic
+explicitly opt-in. Light modules and all runtime, SDK and renderer inputs remain
+identical. The strict live-source replay correctly refused this drift; historical
+source/artifact replay still passes. The integrated script crate then passed all
+three light controls and strict all-target Clippy. Both managed processes exited
+successfully and were reaped. [Composition and local checks](evidence/gameplay-light-controls/integration-main341.json).
