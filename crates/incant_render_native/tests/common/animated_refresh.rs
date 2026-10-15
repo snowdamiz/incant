@@ -14,6 +14,7 @@ use std::{fs, path::Path};
 pub enum Change {
     Original,
     MaterialBindings,
+    GeneratedTangents,
     Keys,
     KeysOnly,
     NonRootRotation,
@@ -72,6 +73,15 @@ pub fn model(root: &Path, change: Change) -> VisualAssetRef {
     document["animations"][2]["channels"][0]["target"]["node"] = json!(2);
     let uv = append(root, &mut document, "VEC2", 3, &[0., 0., 1., 0., 0., 1.]);
     document["meshes"][0]["primitives"][0]["attributes"]["TEXCOORD_0"] = json!(uv);
+    // Keep the decoded vertices stable when a material gains a normal map.
+    let tangent = append(
+        root,
+        &mut document,
+        "VEC4",
+        3,
+        &[1., 0., 0., 1., 1., 0., 0., 1., 1., 0., 0., 1.],
+    );
+    document["meshes"][0]["primitives"][0]["attributes"]["TANGENT"] = json!(tangent);
     document["meshes"][0]["primitives"][0]["material"] = json!(0);
     document["materials"] = json!([{"pbrMetallicRoughness":{"baseColorFactor":[1,1,1,1],"baseColorTexture":{"index":0},"metallicFactor":0.2,"roughnessFactor":0.8}}]);
     document["textures"] = json!([{"source":0}]);
@@ -86,6 +96,13 @@ pub fn model(root: &Path, change: Change) -> VisualAssetRef {
             material["alphaMode"] = json!("MASK");
             document["materials"].as_array_mut().unwrap().push(material);
             document["meshes"][0]["primitives"][0]["material"] = json!(1);
+        }
+        Change::GeneratedTangents => {
+            document["meshes"][0]["primitives"][0]["attributes"]
+                .as_object_mut()
+                .unwrap()
+                .remove("TANGENT");
+            document["materials"][0]["normalTexture"] = json!({"index":0});
         }
         Change::Keys | Change::KeysOnly => {
             let times = append(root, &mut document, "SCALAR", 3, &[0., 0.5, 2.]);

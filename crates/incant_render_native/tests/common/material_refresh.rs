@@ -22,6 +22,30 @@ pub fn material_model_with_scale(root: &Path, tables: Tables, scale: f32) -> Vis
     fs::write(root.join("other.png"), DARK).unwrap();
     let path = root.join("tri.gltf");
     let mut source: serde_json::Value = serde_json::from_slice(&fs::read(&path).unwrap()).unwrap();
+    // A later normal-map binding must not implicitly regenerate vertex data.
+    let binary = root.join("tri.bin");
+    let mut bytes = fs::read(&binary).unwrap();
+    let offset = bytes.len();
+    bytes.extend(
+        [1_f32, 0., 0., 1.]
+            .into_iter()
+            .cycle()
+            .take(12)
+            .flat_map(f32::to_le_bytes),
+    );
+    fs::write(binary, &bytes).unwrap();
+    let view = source["bufferViews"].as_array().unwrap().len();
+    source["bufferViews"]
+        .as_array_mut()
+        .unwrap()
+        .push(json!({"buffer":0,"byteOffset":offset,"byteLength":48}));
+    let accessor = source["accessors"].as_array().unwrap().len();
+    source["accessors"]
+        .as_array_mut()
+        .unwrap()
+        .push(json!({"bufferView":view,"componentType":5126,"count":3,"type":"VEC4"}));
+    source["buffers"][0]["byteLength"] = json!(bytes.len());
+    source["meshes"][0]["primitives"][0]["attributes"]["TANGENT"] = json!(accessor);
     source["materials"] = json!([
         {"name":"first","pbrMetallicRoughness":{"baseColorTexture":{"index":0}}},
         {"name":"second","pbrMetallicRoughness":{"baseColorFactor":[0.2,0.6,0.4,0.5],"baseColorTexture":{"index":1}},"alphaMode":"BLEND"}
