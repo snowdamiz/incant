@@ -11,6 +11,7 @@ summary = ["dep:serde", "dep:cpu-time"]
 # Private attribution only. Reports use diagnostic version 4, never gate version 3.
 diagnostic-script-phases = ["summary"]
 diagnostic-navigation = ["diagnostic-script-phases"]
+diagnostic-script-budget = ["diagnostic-script-phases"]
 tracy = ["summary", "dep:tracy-client", "dep:tracy-client-sys"]
 
 [dependencies]

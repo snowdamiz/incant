@@ -105,20 +105,21 @@ class MacPerformance(unittest.TestCase):
             self.assertEqual(result['match']['profile_instrumentation'], subject.profile_instrumentation(data))
 
     def test_correlated_diagnostic_v4_never_enters_normal_v3_measurements(self):
-        data = current_report()
-        subject.metrics(data, 100)  # The otherwise identical normal v3 is valid.
-        data['profile']['version'] = 4
-        data['profile']['script_phase_diagnostic'] = {
-            'schema': 1, 'diagnostic_only': True,
-            'eligible_for_performance_gate': False, 'complete': True}
-        with self.assertRaisesRegex(ValueError, 'unsupported profile'):
-            subject.metrics(data, 100)
-        # Neither default ingestion nor an explicit matched heap mode can turn
-        # this into a measurement. The existing helper checks retained failure
-        # evidence and absence of measurement.json after the mock child exits.
-        for mode in (None, 'maintained'):
-            with self.subTest(mode=mode), self.assertRaisesRegex(ValueError, 'unsupported profile'):
-                self.measure_fixture(data, heap_mode=mode)
+        subject.metrics(current_report(), 100)  # Normal v3 is valid.
+        for schema in (1, 2, 3, 4):
+            data = current_report()
+            data['profile']['version'] = 4
+            data['profile']['script_phase_diagnostic'] = {
+                'schema': schema, 'diagnostic_only': True,
+                'eligible_for_performance_gate': False, 'complete': True}
+            with self.subTest(schema=schema), self.assertRaisesRegex(ValueError, 'unsupported profile'):
+                subject.metrics(data, 100)
+            # Neither default ingestion nor an explicit matched heap mode can
+            # admit any diagnostic schema. The helper checks retained failure
+            # evidence and absence of measurement.json after the mock child.
+            for mode in (None, 'maintained'):
+                with self.subTest(schema=schema, mode=mode), self.assertRaisesRegex(ValueError, 'unsupported profile'):
+                    self.measure_fixture(data, heap_mode=mode)
 
     def test_malformed_heap_mode_or_timeout_refuses_before_host_commands(self):
         for mode in ('unknown', '', True, 3, ['maintained']):

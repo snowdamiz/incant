@@ -75,6 +75,8 @@ fn main() {
         Path::new("src/bindings.rs").into(),
         Path::new("src/bindings_embed.rs").into(),
         Path::new("src/lib.rs").into(),
+        Path::new("src/budget.rs").into(),
+        Path::new("src/diagnostics.rs").into(),
         Path::new("src/loan.rs").into(),
         Path::new("src/loan/ids.rs").into(),
         Path::new("src/loan/scratch.rs").into(),

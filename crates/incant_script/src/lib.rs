@@ -686,10 +686,17 @@ fn vm(limit: Duration, allow_source: bool) -> Result<Vm, ScriptError> {
     let deadline = Arc::new(Mutex::new(budget::ExecutionBudget::new(limit)?));
     let interrupt = Arc::clone(&deadline);
     runtime.set_interrupt_handler(Some(Box::new(move || {
-        interrupt
+        #[cfg(feature = "diagnostic-script-budget")]
+        let observed = incant_profile::diagnostic::budget::Span::start(
+            incant_profile::diagnostic::budget::Origin::Interrupt,
+        );
+        let expired = interrupt
             .lock()
             .unwrap_or_else(|error| error.into_inner())
-            .expired()
+            .expired();
+        #[cfg(feature = "diagnostic-script-budget")]
+        observed.finish(!expired);
+        expired
     })));
     let context = bytecode_context(&runtime, allow_source)?;
     Ok((runtime, context, deadline))

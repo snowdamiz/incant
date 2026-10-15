@@ -34,7 +34,8 @@ impl Span {
             } else {
                 1
             };
-            active.row.valid &= active.region == MajorRegion::Callbacks
+            active.row.valid &= active.budget_idle()
+                && active.region == MajorRegion::Callbacks
                 && active.callback
                 && active.navigation == expected;
             active.navigation |= 1 << region as usize;
@@ -62,7 +63,8 @@ impl Drop for Span {
             };
             let bit = 1 << region as usize;
             let expected = bit | 1;
-            active.row.valid &= active.region == MajorRegion::Callbacks
+            active.row.valid &= active.budget_idle()
+                && active.region == MajorRegion::Callbacks
                 && active.callback
                 && active.navigation == expected
                 && !std::thread::panicking();
