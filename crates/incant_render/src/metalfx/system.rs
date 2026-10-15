@@ -1,3 +1,4 @@
+use super::shader::{self, Kind};
 use super::{Fallback, MetalFxError, Pending, targets::Targets};
 use std::sync::Arc;
 use wgpu::util::DeviceExt;
@@ -12,6 +13,14 @@ struct Frame {
     jitter: [f32; 4],
 }
 const _: () = assert!(size_of::<Frame>() == 96);
+const _: () = assert!(
+    std::mem::offset_of!(Frame, source) == 0
+        && std::mem::offset_of!(Frame, output) == 16
+        && std::mem::offset_of!(Frame, depth) == 32
+        && std::mem::offset_of!(Frame, options) == 48
+        && std::mem::offset_of!(Frame, reactive) == 64
+        && std::mem::offset_of!(Frame, jitter) == 80
+);
 pub(crate) struct System {
     layout: wgpu::BindGroupLayout,
     pack: wgpu::RenderPipeline,
@@ -24,18 +33,8 @@ pub(crate) struct Draw {
     pack_pipeline: wgpu::RenderPipeline,
     normalize_pipeline: wgpu::RenderPipeline,
 }
-fn source(normalize: bool) -> String {
-    format!(
-        "{}\n{}\n{}",
-        include_str!("common.wgsl"),
-        include_str!("alpha.wgsl"),
-        if normalize {
-            include_str!("normalize.wgsl")
-        } else {
-            include_str!("prepare.wgsl")
-        }
-    )
-}
+#[cfg(test)]
+use super::source::source;
 impl crate::Renderer {
     /// Explicit startup-only compilation of fixed engine shaders. Native scaler
     /// compilation is synchronous and bounded to owner/extent preparation.
@@ -43,19 +42,20 @@ impl crate::Renderer {
         if self.metalfx_admission.is_some() {
             return Ok(());
         }
-        let capability = if cfg!(feature = "cooked-output") {
-            Err(Fallback::CookedShaders)
-        } else {
-            #[cfg(target_os = "macos")]
-            {
-                super::native::range(&self.device)
-            }
-            #[cfg(not(target_os = "macos"))]
-            {
-                Err(Fallback::Backend)
+        let capability = match super::shader_admission() {
+            Err(reason) => Err(reason),
+            Ok(()) => {
+                #[cfg(target_os = "macos")]
+                {
+                    super::native::range(&self.device)
+                }
+                #[cfg(not(target_os = "macos"))]
+                {
+                    Err(super::Fallback::Backend)
+                }
             }
         };
-        if !cfg!(feature = "cooked-output") {
+        if super::shader_admission().is_ok() {
             self.enable_motion_vectors().await?;
         }
         if let Err(reason) = capability {
@@ -87,66 +87,76 @@ impl crate::Renderer {
             }
         }
         let scope = self.device.push_error_scope(wgpu::ErrorFilter::Validation);
-        let system = System::new(&self.device);
+        let system = System::new(
+            &self.device,
+            self.adapter.get_info().backend,
+            self.pipeline_cache.cache.as_ref(),
+        );
         if let Some(error) = scope.pop().await {
             #[cfg(target_arch = "wasm32")]
             let error = error.into();
             return Err(crate::ResourceError::Preparation(error).into());
         }
-        self.metalfx = Some(system);
+        self.metalfx = Some(self.complete_pipeline_preparation(system)?);
         self.metalfx_admission = Some(capability);
         Ok(())
     }
 }
+pub(super) fn layout_entries() -> [wgpu::BindGroupLayoutEntry; 4] {
+    std::array::from_fn(|binding| wgpu::BindGroupLayoutEntry {
+        binding: binding as u32,
+        visibility: wgpu::ShaderStages::FRAGMENT,
+        ty: if binding == 0 {
+            wgpu::BindingType::Buffer {
+                ty: wgpu::BufferBindingType::Uniform,
+                has_dynamic_offset: false,
+                min_binding_size: wgpu::BufferSize::new(size_of::<Frame>() as u64),
+            }
+        } else {
+            wgpu::BindingType::Texture {
+                sample_type: if binding == 3 {
+                    wgpu::TextureSampleType::Depth
+                } else {
+                    wgpu::TextureSampleType::Float { filterable: false }
+                },
+                view_dimension: wgpu::TextureViewDimension::D2,
+                multisampled: false,
+            }
+        },
+        count: None,
+    })
+}
+pub(super) fn formats(kind: Kind) -> Vec<wgpu::TextureFormat> {
+    match kind {
+        Kind::Pack => vec![
+            crate::frame::HDR_FORMAT,
+            wgpu::TextureFormat::R32Float,
+            wgpu::TextureFormat::Rg16Float,
+            wgpu::TextureFormat::R8Unorm,
+        ],
+        Kind::Normalize => vec![crate::frame::HDR_FORMAT],
+    }
+}
 impl System {
-    fn new(d: &wgpu::Device) -> Self {
-        let entries: [_; 4] = std::array::from_fn(|i| wgpu::BindGroupLayoutEntry {
-            binding: i as u32,
-            visibility: wgpu::ShaderStages::FRAGMENT,
-            ty: if i == 0 {
-                wgpu::BindingType::Buffer {
-                    ty: wgpu::BufferBindingType::Uniform,
-                    has_dynamic_offset: false,
-                    min_binding_size: wgpu::BufferSize::new(96),
-                }
-            } else {
-                wgpu::BindingType::Texture {
-                    sample_type: if i == 3 {
-                        wgpu::TextureSampleType::Depth
-                    } else {
-                        wgpu::TextureSampleType::Float { filterable: false }
-                    },
-                    view_dimension: wgpu::TextureViewDimension::D2,
-                    multisampled: false,
-                }
-            },
-            count: None,
-        });
+    fn new(
+        d: &wgpu::Device,
+        backend: wgpu::Backend,
+        cache: Option<&wgpu::PipelineCache>,
+    ) -> crate::Result<Self> {
+        let pack = shader::stages(d, backend, Kind::Pack)?;
+        let normalize = shader::stages(d, backend, Kind::Normalize)?;
+        let entries = layout_entries();
         let layout = d.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
             label: Some("MetalFX boundary"),
             entries: &entries,
         });
-        let pipeline = |normalize| {
-            let shader = d.create_shader_module(wgpu::ShaderModuleDescriptor {
-                label: Some("Fixed MetalFX boundary"),
-                source: wgpu::ShaderSource::Wgsl(source(normalize).into()),
-            });
+        let pipeline = |kind, stages: crate::shader::Stages| {
             let pipeline_layout = d.create_pipeline_layout(&wgpu::PipelineLayoutDescriptor {
                 label: Some("MetalFX boundary"),
                 bind_group_layouts: &[Some(&layout)],
                 immediate_size: 0,
             });
-            let formats = if normalize {
-                vec![crate::frame::HDR_FORMAT]
-            } else {
-                vec![
-                    crate::frame::HDR_FORMAT,
-                    wgpu::TextureFormat::R32Float,
-                    wgpu::TextureFormat::Rg16Float,
-                    wgpu::TextureFormat::R8Unorm,
-                ]
-            };
-            let targets = formats
+            let targets = formats(kind)
                 .into_iter()
                 .map(|format| {
                     Some(wgpu::ColorTargetState {
@@ -160,8 +170,8 @@ impl System {
                 label: Some("MetalFX boundary"),
                 layout: Some(&pipeline_layout),
                 vertex: wgpu::VertexState {
-                    module: &shader,
-                    entry_point: Some("vertex"),
+                    module: &stages.vertex,
+                    entry_point: Some(stages.vertex_entry),
                     compilation_options: Default::default(),
                     buffers: &[],
                 },
@@ -169,20 +179,20 @@ impl System {
                 depth_stencil: None,
                 multisample: Default::default(),
                 fragment: Some(wgpu::FragmentState {
-                    module: &shader,
-                    entry_point: Some(if normalize { "normalize" } else { "pack" }),
+                    module: &stages.fragment,
+                    entry_point: Some(stages.fragment_entry),
                     compilation_options: Default::default(),
                     targets: &targets,
                 }),
                 multiview_mask: None,
-                cache: None,
+                cache,
             })
         };
-        Self {
-            pack: pipeline(false),
-            normalize: pipeline(true),
+        Ok(Self {
+            pack: pipeline(Kind::Pack, pack),
+            normalize: pipeline(Kind::Normalize, normalize),
             layout,
-        }
+        })
     }
     pub fn prepare(
         &self,
