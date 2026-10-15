@@ -164,11 +164,18 @@ executables, cooked resources, fonts and PCM stay externally retained by hashes.
 The default verifier replays archived evidence; `--originals` also checks retained
 files/source copies, `--binaries` rehashes runtime/PCM and recomputes concatenation,
 and `--git-source REF --source-root PATH` checks accepted tools/public main307
-identities for Arabic and all 97 shared CJK/pseudo source rows against REF. REF must contain the
-logical-size composition (`e3dfcd9c` or a byte-equivalent integration), rather than
-old main312; executions are not relabeled current. It never launches an engine,
+identities for Arabic and all 97 shared CJK/pseudo source rows against REF. Use
+the frozen producing composition `e3dfcd9c` or a byte-equivalent integration;
+later development can legitimately change those files. Executions are not
+relabeled current. It never launches an engine,
 compiler, CUA or GPU.
 
 ```sh
 python3 docs/spikes/evidence/core-locale-native-window/verify.py
+```
+
+For the optional Git/source checks, use the retained producer identity:
+
+```sh
+python3 docs/spikes/evidence/core-locale-native-window/verify.py --originals --binaries --git-source e3dfcd9c695d6e1a74f82cb1613891c9e6046bb5 --source-root .
 ```

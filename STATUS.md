@@ -27,7 +27,7 @@ producer bytes compose unchanged with main315; editor duplication controls and
 Phase 2 acceptance remain separate.
 [Contract, review and retained evidence](docs/spikes/subtree-duplication.md).
 
-## Core locale qualification — Arabic native replay verified
+## Core locale qualification — native and CPU results retained
 
 The native player's initial window now requests 640×480 logical units. A fresh
 CJK shipping replay verifies the actual 1280×960 physical/scale-two viewport on
@@ -42,8 +42,14 @@ Mac window run matches the CPU observations. A separate visual replay timed out
 after focus interruptions; five partial actual images show joined Arabic, damage,
 loss and restarted gameplay. The default Retina window was crowded at 320×240
 logical units. Full appearance, normal-size layout and RTL health-pip order remain
-open. The fresh CJK export/window is recorded above; pseudo-locale qualification
-remains pending. [Scoped evidence and replay](docs/spikes/core-locale-native-window.md).
+open. The fresh CJK export/window is recorded above.
+
+Pseudo-localized authoring, a fresh shipping export and all three CPU gameplay
+routes now pass. Actual normal-size window images show readable expanded HUD and
+loss/restart text. Repeated focus losses paused that native replay until its
+original deadline; its partial restart state, failed resize and missed
+restart/win images remain explicit. Complete native replay and narrow layout
+remain open. [Scoped evidence and replay](docs/spikes/core-locale-native-window.md).
 
 ## GPU profiler — unavailable counter pairs refused
 
