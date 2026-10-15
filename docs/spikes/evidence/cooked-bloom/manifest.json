@@ -1,0 +1,1873 @@
+{
+  "format": "incant-cooked-bloom-cpu-evidence",
+  "version": 1,
+  "source": "0067361d4a7ba907c7479f20bb93a8107f5a4abd",
+  "base": "8ddbd2899a0670a91ffd667698ffdb4887eab4d1",
+  "joined_cache": "8ddbd2899a0670a91ffd667698ffdb4887eab4d1",
+  "source_scope": "80 frozen changed/build/audit/cache inputs plus named immutable test sources and unchanged cooker manifest needed for producer-hash replay; not a full transitive compiler-input snapshot. Immutable commit binds remaining source. Documents may evolve independently.",
+  "evidence_root": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001",
+  "archive_sha256": "9028e505680044498c7ef997dd7d4f56324f615d4e64dccad0f48e4014605cbb",
+  "records": [
+    {
+      "key": "ambient-controls-002.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/ambient-controls-002.log",
+      "bytes": 192,
+      "sha256": "4f89ad657109c0a6d566553960cb6ac82c0e389836666d2ca25143eec65d7c62"
+    },
+    {
+      "key": "ambient-controls-002.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/ambient-controls-002.py",
+      "bytes": 1997,
+      "sha256": "d9d7dee4077cb784d7afd1a4faaab92f3f5a926b085de6bb4b3a0e0d11ad20a5"
+    },
+    {
+      "key": "ambient-controls-003.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/ambient-controls-003.log",
+      "bytes": 192,
+      "sha256": "4f89ad657109c0a6d566553960cb6ac82c0e389836666d2ca25143eec65d7c62"
+    },
+    {
+      "key": "ambient-controls-003.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/ambient-controls-003.py",
+      "bytes": 1997,
+      "sha256": "6fa861846c52fd00fb266f00170dac59ae19d75e6dd6376b80d5721d5dd7f4f3"
+    },
+    {
+      "key": "ambient-controls-004.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/ambient-controls-004.log",
+      "bytes": 192,
+      "sha256": "29ceb84561639abedca15b5d0e39ad88c48a88d141ee26b209a295ecbcf02bdf"
+    },
+    {
+      "key": "ambient-controls-004.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/ambient-controls-004.py",
+      "bytes": 1997,
+      "sha256": "bcc549526b7ff45e66ea26b7922fad6f0676ca08a1f04f39a6cdb94bc8a0c862"
+    },
+    {
+      "key": "cpu-proposal-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-proposal-001.json",
+      "bytes": 5523,
+      "sha256": "5491e1e3bbb6b9ff1f68244c339799ecc468209d94a9b285ded75f63310dab82"
+    },
+    {
+      "key": "cpu-proposal-002.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-proposal-002.json",
+      "bytes": 6073,
+      "sha256": "7add22855d3fb4a5db46b56e9d707017ebbcd788643a326abb1bdfd044bae5e8"
+    },
+    {
+      "key": "cpu-proposal-003.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-proposal-003.json",
+      "bytes": 6529,
+      "sha256": "c4986e0a08ed5c8f874b9d081e44b47d1535014b27e47bb2b959fa7d0cf7ffab"
+    },
+    {
+      "key": "cpu-proposal-004.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-proposal-004.json",
+      "bytes": 7237,
+      "sha256": "daacd85585ee411ad3366218617969590674c7cbfe99668686ada6a2043a5078"
+    },
+    {
+      "key": "cpu-proposal-005.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-proposal-005.json",
+      "bytes": 7473,
+      "sha256": "5828e42c776ed5537b08828c5ce95f1388c88ba380dc7159a8dac728dc5f5f09"
+    },
+    {
+      "key": "cpu-supervisor-001.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-supervisor-001.py",
+      "bytes": 10082,
+      "sha256": "7936ddfaf56c34068ecd60fbfb2a24867f08f3ab2e09bba0597767f5945710a6"
+    },
+    {
+      "key": "cpu-supervisor-002.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-supervisor-002.py",
+      "bytes": 10319,
+      "sha256": "9e76f70eee19b5fbd3b0829ab66ad12eced88bd753ed817e450adcd303e80496"
+    },
+    {
+      "key": "cpu-supervisor-003.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-supervisor-003.py",
+      "bytes": 10408,
+      "sha256": "e81dc60465b8984d980f6e932cf31f87f26d76eac43e92f3e108e937fad20ebc"
+    },
+    {
+      "key": "cpu-supervisor-004.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-supervisor-004.py",
+      "bytes": 10408,
+      "sha256": "28a59d199c811110aebb8bbcadc77195525ef93d731749abd704811947d61c8a"
+    },
+    {
+      "key": "cpu-supervisor-005.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-supervisor-005.py",
+      "bytes": 10408,
+      "sha256": "a1aeb22fda071191aea0136bb4d6f97762d05f7b343014361db3d6bb40af3aae"
+    },
+    {
+      "key": "cpu003-diagnosis.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu003-diagnosis.json",
+      "bytes": 1581,
+      "sha256": "bd21960e0dfcacd1e5f7502e28cda1a35e7a9b9bc37a6f22b4ea0cdaf8a32d72"
+    },
+    {
+      "key": "preflight-001-observation.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/preflight-001-observation.json",
+      "bytes": 512,
+      "sha256": "d481b3873c76f3acddaa878bedbd0cbe321a5d391fbe7e17377df4eae6ab3c98"
+    },
+    {
+      "key": "python-002.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/python-002.log",
+      "bytes": 816,
+      "sha256": "43e1d1836859e5aee91d92c26ed3f10162b23ac79156e2bda3732ab1752d15cf"
+    },
+    {
+      "key": "python-003.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/python-003.log",
+      "bytes": 120,
+      "sha256": "8078907ce0a2f40b2c7fecfeb9dbf85569cba554ab2d14eb35b37669a0aebb8c"
+    },
+    {
+      "key": "python-004-0.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/python-004-0.log",
+      "bytes": 120,
+      "sha256": "3aae6e4429126b5662318c1d5ad817b0784e0ff0727830bde9297ba628c46d4d"
+    },
+    {
+      "key": "python-004-1.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/python-004-1.log",
+      "bytes": 101,
+      "sha256": "7d59a8fbca92ef540f42b6883247c3844892d23f501b6cf2621d0e535813fb81"
+    },
+    {
+      "key": "python-004-2.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/python-004-2.log",
+      "bytes": 104,
+      "sha256": "d1a3bdcaa925bbf92cc120237c5ab1078f911832e5f3bbdd16fd82aab85d59fa"
+    },
+    {
+      "key": "python-004-3.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/python-004-3.log",
+      "bytes": 100,
+      "sha256": "fe008aab760eb03ccac7578e2b84665b1b50b0d7f855b17a0c7a8d039435b658"
+    },
+    {
+      "key": "python-004-4.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/python-004-4.log",
+      "bytes": 172,
+      "sha256": "06244853d8a1f6256fc95992da50433b52bbc56d80589ec2523ad6bee0c0c33d"
+    },
+    {
+      "key": "python-004-results.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/python-004-results.json",
+      "bytes": 1344,
+      "sha256": "968f7ccecce4c97ac2d269ce83bc47cb1518819bc252decf9319f8e8e9f69bd4"
+    },
+    {
+      "key": "python-join-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/python-join-001.log",
+      "bytes": 120,
+      "sha256": "31278596dd7c2d4f4b78bd8dc992f47a67183930e2a799c97599e30437da35e0"
+    },
+    {
+      "key": "root-cpu003-grant.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/root-cpu003-grant.json",
+      "bytes": 759,
+      "sha256": "3adf8b046ac9e113da9d53c5b98f4cbbcd1de037512a79d20ed9bdf597a1afc2"
+    },
+    {
+      "key": "root-cpu004-grant.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/root-cpu004-grant.json",
+      "bytes": 994,
+      "sha256": "92fc3a7721c8f9203c7a16afbc48b70b573d1c8c74c803c27b81a962175db01f"
+    },
+    {
+      "key": "source-001/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-001/freeze.json",
+      "bytes": 11825,
+      "sha256": "1fd7cba29ed5e80b826fb4fa4be6b136af15d81887b3ecb9d09a3c5e21875a59"
+    },
+    {
+      "key": "source-001/source.diff",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-001/source.diff",
+      "bytes": 72473,
+      "sha256": "6cd296981dfb83f0ebebbf8008f60765cfe71b54716a752de3a15f7b1843bc75"
+    },
+    {
+      "key": "source-002/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-002/freeze.json",
+      "bytes": 14459,
+      "sha256": "55a69ca336e0c2f8092d51935347269da8b41d792ebcab6cdd5d12f13ab34e61"
+    },
+    {
+      "key": "source-002/manual-join.diff",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-002/manual-join.diff",
+      "bytes": 1096,
+      "sha256": "be1921f4d770713758835c9c56b83479adcc53cf43b23f2ba6d13f18fdb32b89"
+    },
+    {
+      "key": "source-002/source.diff",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-002/source.diff",
+      "bytes": 72927,
+      "sha256": "b895e1c143c97f61905132732e28c55ac64d59a6f83825bc001f93739e87b6d4"
+    },
+    {
+      "key": "source-003/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-003/freeze.json",
+      "bytes": 14655,
+      "sha256": "7f6248917fcc8d8e0f1cd8a9dccdc8a27f99c9539434ed9b2b7af9d9806c7475"
+    },
+    {
+      "key": "source-003/source.diff",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-003/source.diff",
+      "bytes": 74346,
+      "sha256": "aa6b26d04956c6fcef0d7bdeaf8ebf3f2ada6600170fcea4cf84296e88eb45a0"
+    },
+    {
+      "key": "source-003/successor.diff",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-003/successor.diff",
+      "bytes": 3105,
+      "sha256": "8bec0e686bb5fbd33048053066f0f6b90db46e46afc30809d1f9e0ac7288a5fb"
+    },
+    {
+      "key": "source-004/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/freeze.json",
+      "bytes": 14707,
+      "sha256": "7116275d66decd6c31c62eb3038bfe9c5c04ade1cae2c4764d256a3eec4a2f97"
+    },
+    {
+      "key": "source-004/source.diff",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/source.diff",
+      "bytes": 74346,
+      "sha256": "97a53c852d0f6ff1d183b9c61c50fdf756be9f9a82b58bc8a4117964564dca6c"
+    },
+    {
+      "key": "source-004/successor.diff",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/successor.diff",
+      "bytes": 657,
+      "sha256": "bf20567bcc6660ee329905ce4356677a38bfdd3c76c0e452b0e2de76785bfd3c"
+    },
+    {
+      "key": "source/Cargo.lock",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/Cargo.lock",
+      "bytes": 253273,
+      "sha256": "fb318ee4416a22e2f998262c9b4f4e842d5caf6b2360dba15a0f480fe53ded03",
+      "source_path": "Cargo.lock",
+      "code_input": true
+    },
+    {
+      "key": "source/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/Cargo.toml",
+      "bytes": 3956,
+      "sha256": "163606d4b9886c5d0f9bb6a4b67fca4823523b4024f17a689dc9bab719c314a7",
+      "source_path": "Cargo.toml",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_game_player/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_game_player/Cargo.toml",
+      "bytes": 6036,
+      "sha256": "1ce5ce27f26f6bfeb9890709ae3eeabd82bbaf650468f6b993ecba812dacdd3b",
+      "source_path": "crates/incant_game_player/Cargo.toml",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_render/Cargo.toml",
+      "bytes": 3803,
+      "sha256": "6a678e2c5053d6c93d916e8c1618b9048559c80eb3923cd9ebcc42de528bd17c",
+      "source_path": "crates/incant_render/Cargo.toml",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/build.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_render/build.rs",
+      "bytes": 9015,
+      "sha256": "c6ec73e6f20deab65d25965799420976697426b844983cba51a648f07b9b6fbf",
+      "source_path": "crates/incant_render/build.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/ambient_occlusion/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_render/src/ambient_occlusion/mod.rs",
+      "bytes": 2275,
+      "sha256": "a5aeb658e3ee357d8ea0f01a217d4433cf0f2c6af3f5d7f4a88b78cb5cc661e6",
+      "source_path": "crates/incant_render/src/ambient_occlusion/mod.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/ambient_occlusion/pipelines.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_render/src/ambient_occlusion/pipelines.rs",
+      "bytes": 8606,
+      "sha256": "19d3c7bbaa3b612ac1a9cedcddafca52c0f951b0531ab4bbcd43cc29d7f50db5",
+      "source_path": "crates/incant_render/src/ambient_occlusion/pipelines.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/bloom/config.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_render/src/bloom/config.rs",
+      "bytes": 4215,
+      "sha256": "4a24fb8608f8d3128850b241bc4d81130273c22d0be9f077acb3095b68507dc8",
+      "source_path": "crates/incant_render/src/bloom/config.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/bloom/cooked.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_render/src/bloom/cooked.rs",
+      "bytes": 4971,
+      "sha256": "8ffb0e4b11f366c4c43dc481bd137024aeccb6ecc52625b99b0c1c1b6767a2f3",
+      "source_path": "crates/incant_render/src/bloom/cooked.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/bloom/filter.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_render/src/bloom/filter.wgsl",
+      "bytes": 3801,
+      "sha256": "b7072285a7127af2d20b72db50aa8cee5e414152aa20c3667a836cc55254dfc7",
+      "source_path": "crates/incant_render/src/bloom/filter.wgsl",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/bloom/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_render/src/bloom/mod.rs",
+      "bytes": 10958,
+      "sha256": "930de4ab923c0e6895edb274b222e5efe761672f2454fe0b7e1b421abbae4b7e",
+      "source_path": "crates/incant_render/src/bloom/mod.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/bloom/output.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_render/src/bloom/output.wgsl",
+      "bytes": 1289,
+      "sha256": "d6fae2f7ff43524b9d6393e510d2d613a873a9aea9cebb0333a33583b5969e6a",
+      "source_path": "crates/incant_render/src/bloom/output.wgsl",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/bloom/source.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_render/src/bloom/source.rs",
+      "bytes": 671,
+      "sha256": "c5f3cff34e8b4b4bdd8572cf808801a84e0b00f2c91dde81df44f2c6f0a3ce09",
+      "source_path": "crates/incant_render/src/bloom/source.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/bloom/tests.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_render/src/bloom/tests.rs",
+      "bytes": 7520,
+      "sha256": "3d686a0051e034e1277c017b6098e2be3af367379a6bc74de4d972bdcf1c3f0f",
+      "source_path": "crates/incant_render/src/bloom/tests.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/bloom/tests/device.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_render/src/bloom/tests/device.rs",
+      "bytes": 10233,
+      "sha256": "e4ef217219108da2835d82cb843d683478664778ae9c5950f10029ff83be907e",
+      "source_path": "crates/incant_render/src/bloom/tests/device.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/fixture.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_render/src/fixture.wgsl",
+      "bytes": 563,
+      "sha256": "d6bf588021763f24e1052b929bf3168a9b4d93828473cddafbae0b0375c43136",
+      "source_path": "crates/incant_render/src/fixture.wgsl",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/lib.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_render/src/lib.rs",
+      "bytes": 19919,
+      "sha256": "d533f32a0b584a4c9e36d6349dac3b376238441bbcfba311e134e2ebe787afdb",
+      "source_path": "crates/incant_render/src/lib.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/lighting/grid.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_render/src/lighting/grid.wgsl",
+      "bytes": 2843,
+      "sha256": "461606edf6d9cb4c89581ef30ccf3ae5570a1e1bc0142ffe4953e91dfc2c0439",
+      "source_path": "crates/incant_render/src/lighting/grid.wgsl",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/lighting/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_render/src/lighting/mod.rs",
+      "bytes": 20143,
+      "sha256": "9f83db6879449b32cc2741a5ca21207ddc652743e4013d6b0a94f111409806d6",
+      "source_path": "crates/incant_render/src/lighting/mod.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/lighting/shade.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_render/src/lighting/shade.wgsl",
+      "bytes": 3898,
+      "sha256": "52757ae31c0e68c6480bec626ee81386b792fe06c803b0853f9c0a546667e2ad",
+      "source_path": "crates/incant_render/src/lighting/shade.wgsl",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/model_material.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_render/src/model_material.wgsl",
+      "bytes": 4814,
+      "sha256": "48a7b04de1595ce889e19b3888023d5a7c15b43a71ba3e111ee844fb97042a63",
+      "source_path": "crates/incant_render/src/model_material.wgsl",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/motion/owner_system.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_render/src/motion/owner_system.rs",
+      "bytes": 5944,
+      "sha256": "894c38e54643c1e036bfebca66467afd30fcd20a79ce00392e7fda61a09853c2",
+      "source_path": "crates/incant_render/src/motion/owner_system.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/motion/system.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_render/src/motion/system.rs",
+      "bytes": 7738,
+      "sha256": "4804e193e4cc6c98ad7e267d14cc3553318d22dd4eebbd723e56b2b26d437761",
+      "source_path": "crates/incant_render/src/motion/system.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/output.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_render/src/output.rs",
+      "bytes": 10617,
+      "sha256": "ae9c3ab1a39af408a1b891acf6b357561c8deea8c975d36ce5667ad883a88be4",
+      "source_path": "crates/incant_render/src/output.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/output.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_render/src/output.wgsl",
+      "bytes": 2351,
+      "sha256": "6ceefe2e706624f4fff93fab83fffc8e2938af514e3b2ce4e92a1389f11f6a8a",
+      "source_path": "crates/incant_render/src/output.wgsl",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/output/layout.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_render/src/output/layout.rs",
+      "bytes": 3572,
+      "sha256": "120dcb6b3e3adf9e4bc426f8a6b08e74b4afa05e882fab5341b51fa08c705360",
+      "source_path": "crates/incant_render/src/output/layout.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/pipeline_cache/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_render/src/pipeline_cache/mod.rs",
+      "bytes": 6292,
+      "sha256": "78d783b92936bbf40aa1678d221ae498fcd8bcaf06047d7b6e69dbd95522abf3",
+      "source_path": "crates/incant_render/src/pipeline_cache/mod.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/pipeline_cache/private.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_render/src/pipeline_cache/private.rs",
+      "bytes": 5273,
+      "sha256": "43109fa34d2e268aaf1c657c4cf5a8954a9eb949020f0184d78b85d4ee9f880e",
+      "source_path": "crates/incant_render/src/pipeline_cache/private.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/pipeline_cache/private_tests.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_render/src/pipeline_cache/private_tests.rs",
+      "bytes": 8304,
+      "sha256": "cd4cce64bff9d8c7eef10b894cd497175a6bd620e0ab89d06a417eeb03486a24",
+      "source_path": "crates/incant_render/src/pipeline_cache/private_tests.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/pipeline_cache/store.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_render/src/pipeline_cache/store.rs",
+      "bytes": 3564,
+      "sha256": "375e2f3360ed0154fe0aaa192f162c4be6953fbe33d2e0985859e18337c5f912",
+      "source_path": "crates/incant_render/src/pipeline_cache/store.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/pipeline_cache/store_tests.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_render/src/pipeline_cache/store_tests.rs",
+      "bytes": 6332,
+      "sha256": "2f58cf6a5ef012fe1d79666e92b1fd5fa9aaa481c8b03449e040130c58c7aad6",
+      "source_path": "crates/incant_render/src/pipeline_cache/store_tests.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/pipeline_cache/tests.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_render/src/pipeline_cache/tests.rs",
+      "bytes": 1631,
+      "sha256": "4fb977bfa678f3d80b2db6370973be57509459e684c15a8d9f0a6f6273994cdc",
+      "source_path": "crates/incant_render/src/pipeline_cache/tests.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/resource_error.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_render/src/resource_error.rs",
+      "bytes": 2837,
+      "sha256": "56dec0182d253b3fff548e45d3787a787b663ad07aa00060ec0cac3df951ceef",
+      "source_path": "crates/incant_render/src/resource_error.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/shadows/caster.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_render/src/shadows/caster.wgsl",
+      "bytes": 846,
+      "sha256": "56d35a05cc78da000b7198eaa53d66e2febd929c36a6b3f3e8a53198f124de7f",
+      "source_path": "crates/incant_render/src/shadows/caster.wgsl",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/shadows/shade.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_render/src/shadows/shade.wgsl",
+      "bytes": 1495,
+      "sha256": "3f5d22bcef70b70fb7fe089c9940d5a29e6296984f65a718fe96c7f8d22dd8d4",
+      "source_path": "crates/incant_render/src/shadows/shade.wgsl",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/sprites/sprite.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_render/src/sprites/sprite.wgsl",
+      "bytes": 2513,
+      "sha256": "d679984ce15a957bac6b008f5f3276893e21e64df2de97b8212d6ace64fdd240",
+      "source_path": "crates/incant_render/src/sprites/sprite.wgsl",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/temporal/system.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_render/src/temporal/system.rs",
+      "bytes": 11554,
+      "sha256": "6e7c612344b22383abebc516501c7455e043234c586a81afbfb68c3ce737605f",
+      "source_path": "crates/incant_render/src/temporal/system.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/temporal_joined_tests.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_render/src/temporal_joined_tests.rs",
+      "bytes": 10284,
+      "sha256": "c0df8b5e4c0451c8dcce3455c6b765e3b3f14488740e0e0d3cbe82bcd311fb74",
+      "source_path": "crates/incant_render/src/temporal_joined_tests.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/text/text.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_render/src/text/text.wgsl",
+      "bytes": 2428,
+      "sha256": "bfc26ec82a902eadd850528186c06244b7ef63ec9285efefd41f642397b8c5f6",
+      "source_path": "crates/incant_render/src/text/text.wgsl",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/tone_map.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_render/src/tone_map.wgsl",
+      "bytes": 4748,
+      "sha256": "c5479279c8ebe1334cb672e0f3d5638604ba0c0b7c415d13d30e08aa62b79307",
+      "source_path": "crates/incant_render/src/tone_map.wgsl",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/src/ui/ui.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_render/src/ui/ui.wgsl",
+      "bytes": 5172,
+      "sha256": "f67e4982b038833e87ed84861d5be3018f5f0d6587ff8da6faf8bfd840c33c39",
+      "source_path": "crates/incant_render/src/ui/ui.wgsl",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_render/tests/persistent_cache.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_render/tests/persistent_cache.rs",
+      "bytes": 11390,
+      "sha256": "71488c6541ee20cf34b4196ed5b9595aed597c0e366a5c360307cf9c911b4c38",
+      "source_path": "crates/incant_render/tests/persistent_cache.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/audit.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_shader_cook/src/audit.rs",
+      "bytes": 1509,
+      "sha256": "58890af3ddfe3e465811bd4c2ff5222e2b5c2a904c38c50bbdddb12ff0218e91",
+      "source_path": "crates/incant_shader_cook/src/audit.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/bloom/contract.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_shader_cook/src/bloom/contract.rs",
+      "bytes": 8804,
+      "sha256": "c7b6e85c1f6b43682e5900e9e5dc10ddc0c74f50517573942fc107802a8850a4",
+      "source_path": "crates/incant_shader_cook/src/bloom/contract.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/bloom/emit.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_shader_cook/src/bloom/emit.rs",
+      "bytes": 6838,
+      "sha256": "04b5a1d0cf2c7b2a59aeb363cee129df47cbdbb74fb0e794d5f0e8500c206ce0",
+      "source_path": "crates/incant_shader_cook/src/bloom/emit.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/bloom/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_shader_cook/src/bloom/mod.rs",
+      "bytes": 7138,
+      "sha256": "33758bdc53a8787a711a1f077ffe1fcbdbb9edd7e9ffe3d2f400eedad0b4ba7d",
+      "source_path": "crates/incant_shader_cook/src/bloom/mod.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/compute/contract.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_shader_cook/src/compute/contract.rs",
+      "bytes": 5083,
+      "sha256": "54284da43034cdb37fdafafdd1665f6653de43c30094e1449d6a5aca8721e305",
+      "source_path": "crates/incant_shader_cook/src/compute/contract.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/compute/emit.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_shader_cook/src/compute/emit.rs",
+      "bytes": 7452,
+      "sha256": "a776d81aa63cae81c1a0445a3ef17488062b96547a8e90bff36ca245c55bf06d",
+      "source_path": "crates/incant_shader_cook/src/compute/emit.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/compute/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_shader_cook/src/compute/mod.rs",
+      "bytes": 3312,
+      "sha256": "2b3fcdb1aab1bd6e73d57b510f553cb3ddf197e29da9634e95d2f38d0f30dc82",
+      "source_path": "crates/incant_shader_cook/src/compute/mod.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/compute/spirv_workgroup.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_shader_cook/src/compute/spirv_workgroup.rs",
+      "bytes": 5801,
+      "sha256": "24e5e8cc68230e6109020c7c857ebd877ce570920819058d70bbb6d9b9bdba71",
+      "source_path": "crates/incant_shader_cook/src/compute/spirv_workgroup.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/compute/static_workgroup.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_shader_cook/src/compute/static_workgroup.rs",
+      "bytes": 2842,
+      "sha256": "3ee6871d6e96e715caab123ddfc67235ed33d411ff5b94569d32126256e7508b",
+      "source_path": "crates/incant_shader_cook/src/compute/static_workgroup.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/contract.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_shader_cook/src/contract.rs",
+      "bytes": 4792,
+      "sha256": "c8956ae477c1e779cfe8ef5a6960a3950fff795849eb8d36bce917d1158c7515",
+      "source_path": "crates/incant_shader_cook/src/contract.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/emit.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_shader_cook/src/emit.rs",
+      "bytes": 6558,
+      "sha256": "2da6ff21863ab62253c463449a592800f7a564d1b259c8b23f07030ca0aef596",
+      "source_path": "crates/incant_shader_cook/src/emit.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/geometry/contract.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_shader_cook/src/geometry/contract.rs",
+      "bytes": 8645,
+      "sha256": "8ac67d104b8bebed09c5b5c76f01e5b576a75121a848dbbdf6e2215f17f78005",
+      "source_path": "crates/incant_shader_cook/src/geometry/contract.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/geometry/emit.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_shader_cook/src/geometry/emit.rs",
+      "bytes": 13559,
+      "sha256": "945b61562075231d02b608be74a6d6093a13298b3462e2ead76744229510d351",
+      "source_path": "crates/incant_shader_cook/src/geometry/emit.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/geometry/interpolation.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_shader_cook/src/geometry/interpolation.rs",
+      "bytes": 2234,
+      "sha256": "3849c0b6128dbbc2646ef6606a9a50ed4ce80096da8358a258c008a8f8a6d42d",
+      "source_path": "crates/incant_shader_cook/src/geometry/interpolation.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/geometry/material.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_shader_cook/src/geometry/material.rs",
+      "bytes": 9577,
+      "sha256": "c83cca8d69cfdef9c9f24e2d1461e81c2bfcb78f1616f8b095a144fb3dfbadd9",
+      "source_path": "crates/incant_shader_cook/src/geometry/material.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/geometry/material_emit.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_shader_cook/src/geometry/material_emit.rs",
+      "bytes": 8968,
+      "sha256": "976f76dfdc879dcf2d72af59673e7b5faeb0a28994dcdecdb6ec27403e7c4c72",
+      "source_path": "crates/incant_shader_cook/src/geometry/material_emit.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/geometry/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_shader_cook/src/geometry/mod.rs",
+      "bytes": 5850,
+      "sha256": "330d9b98bd779a890903df025de9c77d8c6c4433bf3a5558a3cfbc625a057049",
+      "source_path": "crates/incant_shader_cook/src/geometry/mod.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/geometry/sprite.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_shader_cook/src/geometry/sprite.rs",
+      "bytes": 6304,
+      "sha256": "f56d4ed2c90b070cefa9e395015bd2fcae6520f5142e59958b3aeff6564f404d",
+      "source_path": "crates/incant_shader_cook/src/geometry/sprite.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/geometry/text.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_shader_cook/src/geometry/text.rs",
+      "bytes": 5597,
+      "sha256": "fc609717cf6a86a72dd07d0bb79d82fde25df64216e0d769f0214152120e089e",
+      "source_path": "crates/incant_shader_cook/src/geometry/text.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/geometry/ui.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_shader_cook/src/geometry/ui.rs",
+      "bytes": 5479,
+      "sha256": "7a5c0786befbc4a78f3b3d70f56ed552898e9c723315925b52d1e37526bcc933",
+      "source_path": "crates/incant_shader_cook/src/geometry/ui.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/lib.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_shader_cook/src/lib.rs",
+      "bytes": 3441,
+      "sha256": "6f9dff0f0b4c399416506535e04a45833d904986a19975031504a07b848662a1",
+      "source_path": "crates/incant_shader_cook/src/lib.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_shader_cook/src/manifest.rs",
+      "bytes": 1822,
+      "sha256": "49752d656c3897aaf76faa0b33e1a6245990a0d3b8ca15d0b92fee8bf51d4460",
+      "source_path": "crates/incant_shader_cook/src/manifest.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/temporal/contract.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_shader_cook/src/temporal/contract.rs",
+      "bytes": 16332,
+      "sha256": "5faf6575d0994356a404d1d5659248f596d239194546b7489bd01e907868a93e",
+      "source_path": "crates/incant_shader_cook/src/temporal/contract.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/temporal/emit.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_shader_cook/src/temporal/emit.rs",
+      "bytes": 10011,
+      "sha256": "5a957910752f2f7708f569af31e71f6623a47a1e3f8f3cb71a9591924e74a87b",
+      "source_path": "crates/incant_shader_cook/src/temporal/emit.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/src/temporal/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_shader_cook/src/temporal/mod.rs",
+      "bytes": 6137,
+      "sha256": "de4bfef189a77cb9b655c98ea888101242db972bddac9ab2a9c776de76306866",
+      "source_path": "crates/incant_shader_cook/src/temporal/mod.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/tests/bloom.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/crates/incant_shader_cook/tests/bloom.rs",
+      "bytes": 8141,
+      "sha256": "9c393791cef63c6d1742b7230280600a1f264d03f18d5ef11304d3d696cfa962",
+      "source_path": "crates/incant_shader_cook/tests/bloom.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/docs/spikes/cooked-bloom.md",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/docs/spikes/cooked-bloom.md",
+      "bytes": 2721,
+      "sha256": "d0af8f6889c0c3fa0555c14bfefaf2f957314ab29f6773af6de168c829cb2c0a",
+      "source_path": "docs/spikes/cooked-bloom.md",
+      "code_input": false
+    },
+    {
+      "key": "source/docs/spikes/shipping-cooked-shaders.md",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/docs/spikes/shipping-cooked-shaders.md",
+      "bytes": 6414,
+      "sha256": "f2a5d851fae1010f6376b1012a960fbdc569487ec67893452ee5e8f6bc61352c",
+      "source_path": "docs/spikes/shipping-cooked-shaders.md",
+      "code_input": false
+    },
+    {
+      "key": "source/rust-toolchain.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/rust-toolchain.toml",
+      "bytes": 100,
+      "sha256": "c6e63d9832830b858d930007e4fd1fc3f4a3ca1d287483b08077b7f0267ca124",
+      "source_path": "rust-toolchain.toml",
+      "code_input": true
+    },
+    {
+      "key": "source/tools/cargo",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/tools/cargo",
+      "bytes": 179,
+      "sha256": "9aef98d613601b0c374c1d0499afb39d710cbf5002faba537f21be9c11ff72e3",
+      "source_path": "tools/cargo",
+      "code_input": true
+    },
+    {
+      "key": "source/tools/export_native.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/tools/export_native.py",
+      "bytes": 17777,
+      "sha256": "15f506f20e78ccb69439485b87fbc2a3ecb0ce30c8b43f23aac75fbe29701d42",
+      "source_path": "tools/export_native.py",
+      "code_input": true
+    },
+    {
+      "key": "source/tools/native_package.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/tools/native_package.py",
+      "bytes": 8385,
+      "sha256": "0362128f683f835e31674ad2f024f54f35d7401ebdb6eb0b51d791e14578413b",
+      "source_path": "tools/native_package.py",
+      "code_input": true
+    },
+    {
+      "key": "source/tools/native_process.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/tools/native_process.py",
+      "bytes": 19307,
+      "sha256": "58dd2a8231d7f9d1e42070fc85425461e06a43f279fa5e7f8e57b4a40c3a3aa4",
+      "source_path": "tools/native_process.py",
+      "code_input": true
+    },
+    {
+      "key": "source/tools/native_profiling.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/tools/native_profiling.py",
+      "bytes": 5143,
+      "sha256": "54a472376e6134c5c05bc0c10e3733a317112fa8b3a41b47c01000ef5d2bebd2",
+      "source_path": "tools/native_profiling.py",
+      "code_input": true
+    },
+    {
+      "key": "source/tools/native_shaders.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/tools/native_shaders.py",
+      "bytes": 15213,
+      "sha256": "7e3a88af7dbb479467ae64c0811db3558d0cd2683e3b3d2ce60477b50cc2cce0",
+      "source_path": "tools/native_shaders.py",
+      "code_input": true
+    },
+    {
+      "key": "source/tools/physics_export.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/tools/physics_export.py",
+      "bytes": 1336,
+      "sha256": "f7cd497ba58f0b5fba22fd1115829615238f27f51939ae7c17f9637c152c3000",
+      "source_path": "tools/physics_export.py",
+      "code_input": true
+    },
+    {
+      "key": "source/tools/physics_features.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/tools/physics_features.py",
+      "bytes": 16334,
+      "sha256": "a7f686eda85340cf48421478b7cdc193204518af307069922a179104d7046523",
+      "source_path": "tools/physics_features.py",
+      "code_input": true
+    },
+    {
+      "key": "source/tools/tests/test_native_shaders.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-004/files/tools/tests/test_native_shaders.py",
+      "bytes": 15850,
+      "sha256": "be347316329b88723661cfcfc9256d7c45ad090fd22666a415c65145710d4ee1",
+      "source_path": "tools/tests/test_native_shaders.py",
+      "code_input": true
+    },
+    {
+      "key": "prior-source003/crates/incant_shader_cook/tests/bloom.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-002/files/crates/incant_shader_cook/tests/bloom.rs",
+      "bytes": 6752,
+      "sha256": "c73146e05fdef740f101f6c753d322b77c46463125220dda84935d9ea7f8e218"
+    },
+    {
+      "key": "prior-source003/crates/incant_render/src/bloom/cooked.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/source-002/files/crates/incant_render/src/bloom/cooked.rs",
+      "bytes": 4971,
+      "sha256": "2d2207599484a9832cf29f375cb758b968ccd632b74d8ca6f4cb6905ad2ef7f9"
+    },
+    {
+      "key": "source/crates/incant_shader_cook/tests/audit.rs",
+      "original": "/Users/andreyyurlov/.codex/worktrees/shipping-cooked-shaders/incant/crates/incant_shader_cook/tests/audit.rs",
+      "bytes": 4470,
+      "sha256": "d234bcbf8c49e2ef834c6c9f34a8e71c0d50887f6778f1076dbc24a22301eba0",
+      "source_path": "crates/incant_shader_cook/tests/audit.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/tests/compute.rs",
+      "original": "/Users/andreyyurlov/.codex/worktrees/shipping-cooked-shaders/incant/crates/incant_shader_cook/tests/compute.rs",
+      "bytes": 7165,
+      "sha256": "6404b3abd52283e61ce604fda02deea95908449e1e6b0980d52337e2ca958580",
+      "source_path": "crates/incant_shader_cook/tests/compute.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/tests/fixtures/temporal-resolve-single-depth.wgsl",
+      "original": "/Users/andreyyurlov/.codex/worktrees/shipping-cooked-shaders/incant/crates/incant_shader_cook/tests/fixtures/temporal-resolve-single-depth.wgsl",
+      "bytes": 3480,
+      "sha256": "e1af53565a299f6a03a13a3ee05a037b540e24cb2b0bed054ceeb8d2d484ebf1",
+      "source_path": "crates/incant_shader_cook/tests/fixtures/temporal-resolve-single-depth.wgsl",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/tests/geometry.rs",
+      "original": "/Users/andreyyurlov/.codex/worktrees/shipping-cooked-shaders/incant/crates/incant_shader_cook/tests/geometry.rs",
+      "bytes": 13693,
+      "sha256": "3aec8143130f498e653be310c7a6d760accb5b56b1631f10602548368000ce18",
+      "source_path": "crates/incant_shader_cook/tests/geometry.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/tests/material.rs",
+      "original": "/Users/andreyyurlov/.codex/worktrees/shipping-cooked-shaders/incant/crates/incant_shader_cook/tests/material.rs",
+      "bytes": 4368,
+      "sha256": "f2b667d1f389cd992422313b6adb2eb46c389d954dc54432276cb8344988b69f",
+      "source_path": "crates/incant_shader_cook/tests/material.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/tests/output.rs",
+      "original": "/Users/andreyyurlov/.codex/worktrees/shipping-cooked-shaders/incant/crates/incant_shader_cook/tests/output.rs",
+      "bytes": 5582,
+      "sha256": "6de04d9ef95f1d11d4b1239258504b57e33d7bc071da54aa3e03c9c0d6fd9bcd",
+      "source_path": "crates/incant_shader_cook/tests/output.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/tests/temporal.rs",
+      "original": "/Users/andreyyurlov/.codex/worktrees/shipping-cooked-shaders/incant/crates/incant_shader_cook/tests/temporal.rs",
+      "bytes": 5877,
+      "sha256": "35e7bcbb518c612d0c095af8b26fe5e167ad755dcf1f954b17e5191ed7eb5ab0",
+      "source_path": "crates/incant_shader_cook/tests/temporal.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/tests/text.rs",
+      "original": "/Users/andreyyurlov/.codex/worktrees/shipping-cooked-shaders/incant/crates/incant_shader_cook/tests/text.rs",
+      "bytes": 2872,
+      "sha256": "7f50f4538d521fbeaad0b9a28aac42cce363644da18536b896fbf5ff3922b149",
+      "source_path": "crates/incant_shader_cook/tests/text.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/crates/incant_shader_cook/tests/ui.rs",
+      "original": "/Users/andreyyurlov/.codex/worktrees/shipping-cooked-shaders/incant/crates/incant_shader_cook/tests/ui.rs",
+      "bytes": 2759,
+      "sha256": "2deb4c141220b03b90ba8946499ba78eaed00d211121737fe85c202773febb73",
+      "source_path": "crates/incant_shader_cook/tests/ui.rs",
+      "code_input": true
+    },
+    {
+      "key": "source/tools/tests/test_native_export_wasm_routing.py",
+      "original": "/Users/andreyyurlov/.codex/worktrees/shipping-cooked-shaders/incant/tools/tests/test_native_export_wasm_routing.py",
+      "bytes": 6764,
+      "sha256": "1ddf65bee1e0105889266d3518d0d0c373b87d6c61886fd1b441c2e0dfe5effa",
+      "source_path": "tools/tests/test_native_export_wasm_routing.py",
+      "code_input": true
+    },
+    {
+      "key": "source/tools/tests/test_native_package.py",
+      "original": "/Users/andreyyurlov/.codex/worktrees/shipping-cooked-shaders/incant/tools/tests/test_native_package.py",
+      "bytes": 10087,
+      "sha256": "334a00178d220960fa8a919290367b2d0301e1855d089ee9525480eaaa896728",
+      "source_path": "tools/tests/test_native_package.py",
+      "code_input": true
+    },
+    {
+      "key": "source/tools/tests/test_native_profiling.py",
+      "original": "/Users/andreyyurlov/.codex/worktrees/shipping-cooked-shaders/incant/tools/tests/test_native_profiling.py",
+      "bytes": 6685,
+      "sha256": "1e50825fab33d3b1d18dd2699c8d3073eeeceaddf2fecb69613ad3e3113f13ae",
+      "source_path": "tools/tests/test_native_profiling.py",
+      "code_input": true
+    },
+    {
+      "key": "source/tools/tests/test_native_ui_export.py",
+      "original": "/Users/andreyyurlov/.codex/worktrees/shipping-cooked-shaders/incant/tools/tests/test_native_ui_export.py",
+      "bytes": 1949,
+      "sha256": "57efd0d06c2f747fd599ac7efc1e798243fa749c2ff044bd147823c452bc9b59",
+      "source_path": "tools/tests/test_native_ui_export.py",
+      "code_input": true
+    },
+    {
+      "key": "cpu-003/0.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-003/0.stderr.log",
+      "bytes": 714,
+      "sha256": "fff14d9ddfc9ce5e06be9b4141917d8b6ba2dbf417894e9c146ee2f02be45a0c"
+    },
+    {
+      "key": "cpu-003/0.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-003/0.stdout.log",
+      "bytes": 79098,
+      "sha256": "010e006347e2471ca4c5fcac4ffb26b3c9d0b0ec425025441da3619df41a99f6"
+    },
+    {
+      "key": "cpu-003/failed-artifact-closeout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-003/failed-artifact-closeout.json",
+      "bytes": 616,
+      "sha256": "e16db332307068bc89641264f2fd3398dff03838b879be3e8b5e8a43f19f8da9"
+    },
+    {
+      "key": "cpu-003/results.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-003/results.json",
+      "bytes": 2986,
+      "sha256": "e4955427e4be64bca562251d9286e30cab78eaae94390ca15a86ab6e3fa9efb5"
+    },
+    {
+      "key": "cpu-003/tool-0.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-003/tool-0.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "cpu-003/tool-0.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-003/tool-0.stdout.log",
+      "bytes": 36,
+      "sha256": "1f88eaf7fe1aaec83184752cf4c944cd22f00184136ff36a3e4c318cc60ef566"
+    },
+    {
+      "key": "cpu-003/tool-1.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-003/tool-1.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "cpu-003/tool-1.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-003/tool-1.stdout.log",
+      "bytes": 192,
+      "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909"
+    },
+    {
+      "key": "cpu-004/0.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-004/0.stderr.log",
+      "bytes": 1699,
+      "sha256": "e77b899c19da88da183f531b63a14e12187b68f709c00c071e623238bc2779ff"
+    },
+    {
+      "key": "cpu-004/0.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-004/0.stdout.log",
+      "bytes": 81441,
+      "sha256": "19edf40e8fc05c0248ca92ab81a4fc8b43868f2aa963e0dbe1663582ce5ba1b8"
+    },
+    {
+      "key": "cpu-004/1.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-004/1.stderr.log",
+      "bytes": 2108,
+      "sha256": "096751df562dfdd2f576b4b0f6b1a7d7dd78f8450f9d8f8eb27c9cea6b293557"
+    },
+    {
+      "key": "cpu-004/1.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-004/1.stdout.log",
+      "bytes": 369121,
+      "sha256": "6ecd312753888cd7c989651ccad2146b1d0ed3687c54fb7971342b2e42b9a503"
+    },
+    {
+      "key": "cpu-004/closeout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-004/closeout.json",
+      "bytes": 1598,
+      "sha256": "f910127ea11ac7a4fefb2c7f5eda4d82b6561dc0fb23105726221838b3898c81"
+    },
+    {
+      "key": "cpu-004/results.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-004/results.json",
+      "bytes": 4407,
+      "sha256": "b6faa98b7ccdb97e2f46fee588d2651d8dd0cde2a3538b460087e44370d8c784"
+    },
+    {
+      "key": "cpu-004/tool-0.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-004/tool-0.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "cpu-004/tool-0.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-004/tool-0.stdout.log",
+      "bytes": 36,
+      "sha256": "1f88eaf7fe1aaec83184752cf4c944cd22f00184136ff36a3e4c318cc60ef566"
+    },
+    {
+      "key": "cpu-004/tool-1.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-004/tool-1.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "cpu-004/tool-1.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-004/tool-1.stdout.log",
+      "bytes": 192,
+      "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909"
+    },
+    {
+      "key": "cpu-005/0.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/0.stderr.log",
+      "bytes": 1564,
+      "sha256": "314636cd0eda4129355261ebd5697c91613fb2fcccad0d61f09bb451c752dd7c"
+    },
+    {
+      "key": "cpu-005/0.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/0.stdout.log",
+      "bytes": 81440,
+      "sha256": "5fa8a1418e44fa8c6e1239f9bb9ef3f15f8b8e8144968cfcaf7d2967955e244b"
+    },
+    {
+      "key": "cpu-005/1.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/1.stderr.log",
+      "bytes": 341,
+      "sha256": "04de3e9e707fa1c3e1b35e09d7ecb5d250458a380a2023eeb41e7dbd09f8bd5d"
+    },
+    {
+      "key": "cpu-005/1.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/1.stdout.log",
+      "bytes": 397257,
+      "sha256": "0eb6e1fc293255d5cd9076df01291d32db657e74bea776b50bf299ab12b87f10"
+    },
+    {
+      "key": "cpu-005/2.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/2.stderr.log",
+      "bytes": 486,
+      "sha256": "c40ccd589d96c247aca89d0647db824d5f1ee8670d1ee47ec304a308da0fce23"
+    },
+    {
+      "key": "cpu-005/2.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/2.stdout.log",
+      "bytes": 367905,
+      "sha256": "43325b785f852bd7620a16437c272ad4e5b81cef5f4588e8479a07b67162940d"
+    },
+    {
+      "key": "cpu-005/3.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/3.stderr.log",
+      "bytes": 9070,
+      "sha256": "f3e598ee2783196a13858090b571546eb393594541a7c39be37fd40346d6c798"
+    },
+    {
+      "key": "cpu-005/3.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/3.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "cpu-005/4.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/4.stderr.log",
+      "bytes": 1334,
+      "sha256": "3f2ea20db7119541cd981b054976146a67761cf5f16eca233a58cb24de33b5b2"
+    },
+    {
+      "key": "cpu-005/4.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/4.stdout.log",
+      "bytes": 532450,
+      "sha256": "f2ddd41f6442e1ccfe923141ca5211bb5aa5e17a16f32b5daa755bae7d3a7c3f"
+    },
+    {
+      "key": "cpu-005/actual-shaders.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/actual-shaders.json",
+      "bytes": 27907,
+      "sha256": "7bf37f26d2b0e62514c9ad5c989e401b00167d33334d6645298a0a802d1876fa"
+    },
+    {
+      "key": "cpu-005/closeout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/closeout.json",
+      "bytes": 4022,
+      "sha256": "6dab83f17d044faa98335d78464697754386e1ec6ecac3ff0ba9f3b463cb570b"
+    },
+    {
+      "key": "cpu-005/generated/bloom-display-shaders/Dx12-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/bloom-display-shaders/Dx12-Fragment.shader",
+      "bytes": 5378,
+      "sha256": "ec5485690aeb897faec178bd701a890e37832928a1638001087a27419d88a0c3"
+    },
+    {
+      "key": "cpu-005/generated/bloom-display-shaders/Dx12-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/bloom-display-shaders/Dx12-Vertex.shader",
+      "bytes": 611,
+      "sha256": "b2c0403bd6f9c3727c16bcf3c8620a9188538b50e5e9222bdc9b8b7e98f208b5"
+    },
+    {
+      "key": "cpu-005/generated/bloom-display-shaders/Metal-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/bloom-display-shaders/Metal-Fragment.shader",
+      "bytes": 7864,
+      "sha256": "dd6cb3fff865721af52d511a16332e1c445e5d312f0b0bae8fded6e82030e90f"
+    },
+    {
+      "key": "cpu-005/generated/bloom-display-shaders/Metal-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/bloom-display-shaders/Metal-Vertex.shader",
+      "bytes": 508,
+      "sha256": "f1cee22e81317613980bed8fc8fd22efee923f1c565ee91d7c106c2b9565fe3e"
+    },
+    {
+      "key": "cpu-005/generated/bloom-display-shaders/Vulkan-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/bloom-display-shaders/Vulkan-Fragment.shader",
+      "bytes": 8144,
+      "sha256": "b33c2812747ee5bb145c3bd1f12db7e718dc6a177af1aa3b5366dc64d1c087c3"
+    },
+    {
+      "key": "cpu-005/generated/bloom-display-shaders/Vulkan-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/bloom-display-shaders/Vulkan-Vertex.shader",
+      "bytes": 772,
+      "sha256": "ba4e456005e083e48d92667b61f8fc565713b71df5c3d48d971009461d1cedc6"
+    },
+    {
+      "key": "cpu-005/generated/bloom-display-shaders/audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/bloom-display-shaders/audit.json",
+      "bytes": 1563,
+      "sha256": "058c64427d159ff201113ce265c933afcd94308cf1fe1ee587b97922b0f6531e"
+    },
+    {
+      "key": "cpu-005/generated/bloom-display-shaders/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/bloom-display-shaders/manifest.rs",
+      "bytes": 2329,
+      "sha256": "e33e01a65f015963381dd8162f4350c9ed9efba14e700336d8493f6b7862e2ef"
+    },
+    {
+      "key": "cpu-005/generated/bloom-downsample-shaders/Dx12-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/bloom-downsample-shaders/Dx12-Fragment.shader",
+      "bytes": 4531,
+      "sha256": "54557f34f9613aa3500cea0580c8a51a5eca5f4af562fc574605c90b66585f13"
+    },
+    {
+      "key": "cpu-005/generated/bloom-downsample-shaders/Dx12-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/bloom-downsample-shaders/Dx12-Vertex.shader",
+      "bytes": 611,
+      "sha256": "345dfc638d89a3d4ec6679f9cfeb0efdb083bf21394e5a8f3521a75d609e3d0a"
+    },
+    {
+      "key": "cpu-005/generated/bloom-downsample-shaders/Metal-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/bloom-downsample-shaders/Metal-Fragment.shader",
+      "bytes": 5766,
+      "sha256": "5fbf00391f8b291e8fc7a13603af03d67c3885dea6b845b2c548c01264f1c525"
+    },
+    {
+      "key": "cpu-005/generated/bloom-downsample-shaders/Metal-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/bloom-downsample-shaders/Metal-Vertex.shader",
+      "bytes": 508,
+      "sha256": "f1cee22e81317613980bed8fc8fd22efee923f1c565ee91d7c106c2b9565fe3e"
+    },
+    {
+      "key": "cpu-005/generated/bloom-downsample-shaders/Vulkan-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/bloom-downsample-shaders/Vulkan-Fragment.shader",
+      "bytes": 5736,
+      "sha256": "63f6b1b1f61deab64e65d454a92e82e761861c7ab63aef6ed8c8f2d7edbbd588"
+    },
+    {
+      "key": "cpu-005/generated/bloom-downsample-shaders/Vulkan-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/bloom-downsample-shaders/Vulkan-Vertex.shader",
+      "bytes": 772,
+      "sha256": "ba4e456005e083e48d92667b61f8fc565713b71df5c3d48d971009461d1cedc6"
+    },
+    {
+      "key": "cpu-005/generated/bloom-downsample-shaders/audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/bloom-downsample-shaders/audit.json",
+      "bytes": 1535,
+      "sha256": "7192ab5e358bf22ead19710f9701c6a6773fe301a0cb22eb98b1e5e2b2338331"
+    },
+    {
+      "key": "cpu-005/generated/bloom-downsample-shaders/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/bloom-downsample-shaders/manifest.rs",
+      "bytes": 2299,
+      "sha256": "6914d14333f411a8af956900d4de524b98fe1754347629457717f089370beb92"
+    },
+    {
+      "key": "cpu-005/generated/bloom-prefilter-shaders/Dx12-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/bloom-prefilter-shaders/Dx12-Fragment.shader",
+      "bytes": 4539,
+      "sha256": "78a25577699685f7514b11632936f42aab2c3346f08d22b9ef34c0e277a62643"
+    },
+    {
+      "key": "cpu-005/generated/bloom-prefilter-shaders/Dx12-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/bloom-prefilter-shaders/Dx12-Vertex.shader",
+      "bytes": 611,
+      "sha256": "345dfc638d89a3d4ec6679f9cfeb0efdb083bf21394e5a8f3521a75d609e3d0a"
+    },
+    {
+      "key": "cpu-005/generated/bloom-prefilter-shaders/Metal-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/bloom-prefilter-shaders/Metal-Fragment.shader",
+      "bytes": 5774,
+      "sha256": "c9bf933485b8de81bda9b9702d74d78e1cb26706d95384a728031ad15ca29746"
+    },
+    {
+      "key": "cpu-005/generated/bloom-prefilter-shaders/Metal-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/bloom-prefilter-shaders/Metal-Vertex.shader",
+      "bytes": 508,
+      "sha256": "f1cee22e81317613980bed8fc8fd22efee923f1c565ee91d7c106c2b9565fe3e"
+    },
+    {
+      "key": "cpu-005/generated/bloom-prefilter-shaders/Vulkan-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/bloom-prefilter-shaders/Vulkan-Fragment.shader",
+      "bytes": 5736,
+      "sha256": "4f1dbc99ae176e652bc92adc0dd67a0a070e85acbbc68589ce485fdc454db2e1"
+    },
+    {
+      "key": "cpu-005/generated/bloom-prefilter-shaders/Vulkan-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/bloom-prefilter-shaders/Vulkan-Vertex.shader",
+      "bytes": 772,
+      "sha256": "ba4e456005e083e48d92667b61f8fc565713b71df5c3d48d971009461d1cedc6"
+    },
+    {
+      "key": "cpu-005/generated/bloom-prefilter-shaders/audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/bloom-prefilter-shaders/audit.json",
+      "bytes": 1537,
+      "sha256": "006e49d2392c76bd6edbc18d07b77eba99c9c52f08eccc321afb1c9c65b4e12a"
+    },
+    {
+      "key": "cpu-005/generated/bloom-prefilter-shaders/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/bloom-prefilter-shaders/manifest.rs",
+      "bytes": 2307,
+      "sha256": "eaf617e597fbe2b5c50113b8b8cfce45382c75652d2cd6f583c919fb229dc024"
+    },
+    {
+      "key": "cpu-005/generated/bloom-upsample-shaders/Dx12-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/bloom-upsample-shaders/Dx12-Fragment.shader",
+      "bytes": 2032,
+      "sha256": "9366495fadb63f831db3bcd4e48a980d9f74f561bbc8c8fe7ac0748593fd67fa"
+    },
+    {
+      "key": "cpu-005/generated/bloom-upsample-shaders/Dx12-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/bloom-upsample-shaders/Dx12-Vertex.shader",
+      "bytes": 611,
+      "sha256": "345dfc638d89a3d4ec6679f9cfeb0efdb083bf21394e5a8f3521a75d609e3d0a"
+    },
+    {
+      "key": "cpu-005/generated/bloom-upsample-shaders/Metal-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/bloom-upsample-shaders/Metal-Fragment.shader",
+      "bytes": 3659,
+      "sha256": "e7a0452d06f5e8c6452ca8f628d83b22c5bbef56d72e5c6d870ff4a4a829a775"
+    },
+    {
+      "key": "cpu-005/generated/bloom-upsample-shaders/Metal-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/bloom-upsample-shaders/Metal-Vertex.shader",
+      "bytes": 508,
+      "sha256": "f1cee22e81317613980bed8fc8fd22efee923f1c565ee91d7c106c2b9565fe3e"
+    },
+    {
+      "key": "cpu-005/generated/bloom-upsample-shaders/Vulkan-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/bloom-upsample-shaders/Vulkan-Fragment.shader",
+      "bytes": 3592,
+      "sha256": "f059b1966db15eaf6ac863fdaf50ed4ff8c742add9792775a2aa98831237f9ad"
+    },
+    {
+      "key": "cpu-005/generated/bloom-upsample-shaders/Vulkan-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/bloom-upsample-shaders/Vulkan-Vertex.shader",
+      "bytes": 772,
+      "sha256": "ba4e456005e083e48d92667b61f8fc565713b71df5c3d48d971009461d1cedc6"
+    },
+    {
+      "key": "cpu-005/generated/bloom-upsample-shaders/audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/bloom-upsample-shaders/audit.json",
+      "bytes": 1527,
+      "sha256": "ff490031862e49a2d83ae1253d4e6f3b608fec95dc55eca89cf545f7fe968b57"
+    },
+    {
+      "key": "cpu-005/generated/bloom-upsample-shaders/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/bloom-upsample-shaders/manifest.rs",
+      "bytes": 2309,
+      "sha256": "50bed3ce64371d91478f8382df0ae78ea2f6304cc6bbf336562c8e8ddddd242a"
+    },
+    {
+      "key": "cpu-005/generated/cluster-shaders/Dx12-Compute.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/cluster-shaders/Dx12-Compute.shader",
+      "bytes": 6998,
+      "sha256": "e7e4401e67edf5064c54cb843767dc2cdff8452c38ecc87dabc57fe6665598b3"
+    },
+    {
+      "key": "cpu-005/generated/cluster-shaders/Metal-Compute.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/cluster-shaders/Metal-Compute.shader",
+      "bytes": 7848,
+      "sha256": "1d501c9dabac36b7530eec4103e488da1a18e89649ffd4f05a74771e1be3b12d"
+    },
+    {
+      "key": "cpu-005/generated/cluster-shaders/Vulkan-Compute.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/cluster-shaders/Vulkan-Compute.shader",
+      "bytes": 9760,
+      "sha256": "b5b5e4eba86ec224ca04ecf97adb9ba2cfc62f3fe61ffaca5f5643dbe4ce0120"
+    },
+    {
+      "key": "cpu-005/generated/cluster-shaders/audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/cluster-shaders/audit.json",
+      "bytes": 1087,
+      "sha256": "fe426d4a0725d45bca3958805022b08908317c2197ed768e52e145873315a74b"
+    },
+    {
+      "key": "cpu-005/generated/cluster-shaders/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/cluster-shaders/manifest.rs",
+      "bytes": 1512,
+      "sha256": "e40175ed2b4c9401e5a39d7dda9a6f65725601e516f57042155c0e6cc8340705"
+    },
+    {
+      "key": "cpu-005/generated/diagnostic-shaders/Dx12-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/diagnostic-shaders/Dx12-Fragment.shader",
+      "bytes": 568,
+      "sha256": "0c3a600edd150f04dc05207241eba4b30b547ded8e24d688384071bcff151d1e"
+    },
+    {
+      "key": "cpu-005/generated/diagnostic-shaders/Dx12-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/diagnostic-shaders/Dx12-Vertex.shader",
+      "bytes": 782,
+      "sha256": "c410b57d2c4802d2f10c675277763251e6ce2226ff6e8c0811c66ba063b47802"
+    },
+    {
+      "key": "cpu-005/generated/diagnostic-shaders/Metal-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/diagnostic-shaders/Metal-Fragment.shader",
+      "bytes": 592,
+      "sha256": "2c2b1905b5b263d814f55c4804e819d7d06d85e162c803afc357fb740d7b14e9"
+    },
+    {
+      "key": "cpu-005/generated/diagnostic-shaders/Metal-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/diagnostic-shaders/Metal-Vertex.shader",
+      "bytes": 2458,
+      "sha256": "5d46b26e3466e577cb5801dfbd4a62ab9c3676ffca23eca213c7dbf38d599f13"
+    },
+    {
+      "key": "cpu-005/generated/diagnostic-shaders/Vulkan-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/diagnostic-shaders/Vulkan-Fragment.shader",
+      "bytes": 584,
+      "sha256": "7ab9df94307d2f11a301deec5ef9578785812c374f90411c8363a374f795fdb0"
+    },
+    {
+      "key": "cpu-005/generated/diagnostic-shaders/Vulkan-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/diagnostic-shaders/Vulkan-Vertex.shader",
+      "bytes": 1056,
+      "sha256": "f77968260948a6d1149f483b08e46f60289e5177fb27b47b762e498df1ff6770"
+    },
+    {
+      "key": "cpu-005/generated/diagnostic-shaders/audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/diagnostic-shaders/audit.json",
+      "bytes": 1545,
+      "sha256": "759abc4b60290f0dfa8b45463f6bec8b696439448ebe4295aa62cdb6d1e7e877"
+    },
+    {
+      "key": "cpu-005/generated/diagnostic-shaders/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/diagnostic-shaders/manifest.rs",
+      "bytes": 2300,
+      "sha256": "94150022772ec4104f32361f248e89648aa9204d5dccfe93d5acc6d11dd9590b"
+    },
+    {
+      "key": "cpu-005/generated/material-shaders/Dx12-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/material-shaders/Dx12-Fragment.shader",
+      "bytes": 19624,
+      "sha256": "6a724f651548caffbbb8f3193d5ba64c2a221b001ef694915cb9d33024184907"
+    },
+    {
+      "key": "cpu-005/generated/material-shaders/Dx12-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/material-shaders/Dx12-Vertex.shader",
+      "bytes": 1641,
+      "sha256": "80a01dfd891d3a082c925071aa2b01b4b8f9ddfbe814b76912728539c78decce"
+    },
+    {
+      "key": "cpu-005/generated/material-shaders/Metal-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/material-shaders/Metal-Fragment.shader",
+      "bytes": 20905,
+      "sha256": "86a31a65695fd0ab241c71a058e890b6a04157416eb848f6f6547dd916305614"
+    },
+    {
+      "key": "cpu-005/generated/material-shaders/Metal-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/material-shaders/Metal-Vertex.shader",
+      "bytes": 7023,
+      "sha256": "f7d0c7a5ce01269666131c4d762891c6457df9dd0c30b36b449d3e33183f71c5"
+    },
+    {
+      "key": "cpu-005/generated/material-shaders/Vulkan-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/material-shaders/Vulkan-Fragment.shader",
+      "bytes": 21936,
+      "sha256": "3f73bf9690c61c22581d02959fd66714e928d668aa2e95c9b8f96339ac1f5118"
+    },
+    {
+      "key": "cpu-005/generated/material-shaders/Vulkan-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/material-shaders/Vulkan-Vertex.shader",
+      "bytes": 2704,
+      "sha256": "46536a19ad53127013cfd23535d565ce7b7d234d38bceefd0f7e623cff82231b"
+    },
+    {
+      "key": "cpu-005/generated/material-shaders/audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/material-shaders/audit.json",
+      "bytes": 1581,
+      "sha256": "cd6ee34f229c4dfbac3bc8c193eb043ac423c686b617b8244035acb724cfb029"
+    },
+    {
+      "key": "cpu-005/generated/material-shaders/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/material-shaders/manifest.rs",
+      "bytes": 2335,
+      "sha256": "513a66b64fdb800356300d8cfa7a60a53ea085dedd0cec5ea3d096a9f4fdf736"
+    },
+    {
+      "key": "cpu-005/generated/output-shaders/Dx12-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/output-shaders/Dx12-Fragment.shader",
+      "bytes": 3698,
+      "sha256": "c321dde205b9c0b535a198b26f91db6f82035ce9b086c004d8fffe19a3ca011a"
+    },
+    {
+      "key": "cpu-005/generated/output-shaders/Dx12-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/output-shaders/Dx12-Vertex.shader",
+      "bytes": 611,
+      "sha256": "345dfc638d89a3d4ec6679f9cfeb0efdb083bf21394e5a8f3521a75d609e3d0a"
+    },
+    {
+      "key": "cpu-005/generated/output-shaders/Metal-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/output-shaders/Metal-Fragment.shader",
+      "bytes": 4275,
+      "sha256": "cc2a7197769ba09090757dc93a79ba67001b86ba6cd987545199450a2040410e"
+    },
+    {
+      "key": "cpu-005/generated/output-shaders/Metal-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/output-shaders/Metal-Vertex.shader",
+      "bytes": 508,
+      "sha256": "f1cee22e81317613980bed8fc8fd22efee923f1c565ee91d7c106c2b9565fe3e"
+    },
+    {
+      "key": "cpu-005/generated/output-shaders/Vulkan-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/output-shaders/Vulkan-Fragment.shader",
+      "bytes": 5388,
+      "sha256": "dacf90c0e06af8bf75fa034b59e8b85026cca4ac975a0d763a855683ff5ce260"
+    },
+    {
+      "key": "cpu-005/generated/output-shaders/Vulkan-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/output-shaders/Vulkan-Vertex.shader",
+      "bytes": 772,
+      "sha256": "ba4e456005e083e48d92667b61f8fc565713b71df5c3d48d971009461d1cedc6"
+    },
+    {
+      "key": "cpu-005/generated/output-shaders/audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/output-shaders/audit.json",
+      "bytes": 1556,
+      "sha256": "fee08a18e84ba87ca4d69b0bcf7f47a7ca4484812e02c0449c44cbb3221ab3ac"
+    },
+    {
+      "key": "cpu-005/generated/output-shaders/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/output-shaders/manifest.rs",
+      "bytes": 2334,
+      "sha256": "c663c85792748cd1ae54834c63f63224106f115a4ff6474c4cf3be9de2567bb4"
+    },
+    {
+      "key": "cpu-005/generated/shadow-shaders/Dx12-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/shadow-shaders/Dx12-Fragment.shader",
+      "bytes": 1218,
+      "sha256": "d49df04215c40955e84a06db86335d85c386d440f347be34ad59da2a61012ec0"
+    },
+    {
+      "key": "cpu-005/generated/shadow-shaders/Dx12-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/shadow-shaders/Dx12-Vertex.shader",
+      "bytes": 901,
+      "sha256": "6d40410ce5b5e26f286f58f6676f1dda39cadb2f7d79acc94979d77c059c7daa"
+    },
+    {
+      "key": "cpu-005/generated/shadow-shaders/Metal-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/shadow-shaders/Metal-Fragment.shader",
+      "bytes": 979,
+      "sha256": "6af72e99f6832fa300acddd5488297f28b3c3cdb87e5084f901651f3b65e2e3e"
+    },
+    {
+      "key": "cpu-005/generated/shadow-shaders/Metal-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/shadow-shaders/Metal-Vertex.shader",
+      "bytes": 4398,
+      "sha256": "e606ea8a8c35fe9e88b2f25d1137dd5797f4475e1f882c39c3436f2bfae98d53"
+    },
+    {
+      "key": "cpu-005/generated/shadow-shaders/Vulkan-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/shadow-shaders/Vulkan-Fragment.shader",
+      "bytes": 1272,
+      "sha256": "83c4630d173f2ac7d6dc5c605df72a560ff36dc8a711e95e18ad0e9751aa6f8d"
+    },
+    {
+      "key": "cpu-005/generated/shadow-shaders/Vulkan-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/shadow-shaders/Vulkan-Vertex.shader",
+      "bytes": 1388,
+      "sha256": "820a4f89a100209f8a6141ec63bc399069a4f91f0ed44b339aaff509503af2e0"
+    },
+    {
+      "key": "cpu-005/generated/shadow-shaders/audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/shadow-shaders/audit.json",
+      "bytes": 1580,
+      "sha256": "21203d4b3d60be1039d1a8bfad5849814af9c08619d848ff5dccfa8e3620ab86"
+    },
+    {
+      "key": "cpu-005/generated/shadow-shaders/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/shadow-shaders/manifest.rs",
+      "bytes": 2339,
+      "sha256": "8f78630c39314976425ed293f590ad8d772a07a1ad1d586c3328c38aaf88d14d"
+    },
+    {
+      "key": "cpu-005/generated/sprite-shaders/Dx12-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/sprite-shaders/Dx12-Fragment.shader",
+      "bytes": 2369,
+      "sha256": "571066c323a38496d522e5c87100f12cfa35d9bae8949df171499aa0641115d9"
+    },
+    {
+      "key": "cpu-005/generated/sprite-shaders/Dx12-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/sprite-shaders/Dx12-Vertex.shader",
+      "bytes": 1564,
+      "sha256": "222da945cc7e1cee9230ac446edacb13d512fe8b6a4c45ce151f5ddb891c4ee4"
+    },
+    {
+      "key": "cpu-005/generated/sprite-shaders/Metal-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/sprite-shaders/Metal-Fragment.shader",
+      "bytes": 2568,
+      "sha256": "29cec7c6cc1866ebcb1014b8498878be93c395a6531947961ea5fe60cd35d737"
+    },
+    {
+      "key": "cpu-005/generated/sprite-shaders/Metal-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/sprite-shaders/Metal-Vertex.shader",
+      "bytes": 4961,
+      "sha256": "3c59ba8e408a24f82553ebb3da543581da37856f64608154cf52717ddae797bb"
+    },
+    {
+      "key": "cpu-005/generated/sprite-shaders/Vulkan-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/sprite-shaders/Vulkan-Fragment.shader",
+      "bytes": 3020,
+      "sha256": "8cadb6bea0ce7059b376cf4fb1a892bd68b0491f04da8ba5fc861ed265744312"
+    },
+    {
+      "key": "cpu-005/generated/sprite-shaders/Vulkan-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/sprite-shaders/Vulkan-Vertex.shader",
+      "bytes": 2488,
+      "sha256": "741e73b7d6c7fdb7326fc9f70c6ced68625f48088b6de3bad273178c14220aa4"
+    },
+    {
+      "key": "cpu-005/generated/sprite-shaders/audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/sprite-shaders/audit.json",
+      "bytes": 1592,
+      "sha256": "aac492bbd83ef5e29fc89245cb66790c5029ddb3d574914485d5c20b62486f5e"
+    },
+    {
+      "key": "cpu-005/generated/sprite-shaders/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/sprite-shaders/manifest.rs",
+      "bytes": 2370,
+      "sha256": "65a107d221e340f23e03989a37b060cbeeed7810f8a86c023e6b1c19bf2300c8"
+    },
+    {
+      "key": "cpu-005/generated/text-shaders/Dx12-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/text-shaders/Dx12-Fragment.shader",
+      "bytes": 3359,
+      "sha256": "e1a9ec8980ebd56ad2d8146df3da3a94a44c851e977164c03220f7641f71815a"
+    },
+    {
+      "key": "cpu-005/generated/text-shaders/Dx12-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/text-shaders/Dx12-Vertex.shader",
+      "bytes": 1716,
+      "sha256": "6389956da5951eb3e2018900319fb525e04cf7e1f762e1fa5cb14dffb8eef8e6"
+    },
+    {
+      "key": "cpu-005/generated/text-shaders/Metal-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/text-shaders/Metal-Fragment.shader",
+      "bytes": 3254,
+      "sha256": "69b05b3908e500a8df78d2a46485d10db977e841b74876c1127da9b8039981b0"
+    },
+    {
+      "key": "cpu-005/generated/text-shaders/Metal-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/text-shaders/Metal-Vertex.shader",
+      "bytes": 3013,
+      "sha256": "cfb142a1c7860db24efc48a8e9337fa5f4bf804fd0cbd3f799cb781f7e151a58"
+    },
+    {
+      "key": "cpu-005/generated/text-shaders/Vulkan-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/text-shaders/Vulkan-Fragment.shader",
+      "bytes": 3584,
+      "sha256": "8956586c59fb89ad08a0681a2da34c3db31643dded08625c3d2f59cced4676bc"
+    },
+    {
+      "key": "cpu-005/generated/text-shaders/Vulkan-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/text-shaders/Vulkan-Vertex.shader",
+      "bytes": 2268,
+      "sha256": "b19d058a451e64ef2b57760d1a9607c09a9ec593c0f1a885318daff45bbedd4a"
+    },
+    {
+      "key": "cpu-005/generated/text-shaders/audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/text-shaders/audit.json",
+      "bytes": 1604,
+      "sha256": "340a89a08b9fd280303f831868b6b62a1ad888a4b92c9da3fa08296dbc47c17e"
+    },
+    {
+      "key": "cpu-005/generated/text-shaders/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/text-shaders/manifest.rs",
+      "bytes": 2382,
+      "sha256": "17e86663ad35f26265f4edc146ee4fbbde499873d6d95e20e534edd6245aff1e"
+    },
+    {
+      "key": "cpu-005/generated/ui-shaders/Dx12-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/ui-shaders/Dx12-Fragment.shader",
+      "bytes": 5523,
+      "sha256": "0213acf7f14f2337c5d0007bb79846ea24d040d3726bfe0d4d8b051959f46d43"
+    },
+    {
+      "key": "cpu-005/generated/ui-shaders/Dx12-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/ui-shaders/Dx12-Vertex.shader",
+      "bytes": 3941,
+      "sha256": "d7bb2ed8d4664b4273a28473e407669c971793c5e1830cd651b88bcc02c0ecad"
+    },
+    {
+      "key": "cpu-005/generated/ui-shaders/Metal-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/ui-shaders/Metal-Fragment.shader",
+      "bytes": 5641,
+      "sha256": "eac6bb07ed249abd2dc3e9a04da6008ca27e8e77342f4169b6c76cb5828e8ea7"
+    },
+    {
+      "key": "cpu-005/generated/ui-shaders/Metal-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/ui-shaders/Metal-Vertex.shader",
+      "bytes": 7079,
+      "sha256": "12b8e29f1d86a07dcd51f4f537b4da0ccae89e42600707c01968f20f32dfc93c"
+    },
+    {
+      "key": "cpu-005/generated/ui-shaders/Vulkan-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/ui-shaders/Vulkan-Fragment.shader",
+      "bytes": 6464,
+      "sha256": "e9d8c3036792948d27676b8eb69aac55015b5154fa674c39bee3b26cb0321231"
+    },
+    {
+      "key": "cpu-005/generated/ui-shaders/Vulkan-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/ui-shaders/Vulkan-Vertex.shader",
+      "bytes": 5424,
+      "sha256": "928c7feed700898cbbdcac9419bc5a87749c55dd5973e0fe40cefc0fc6a78fc4"
+    },
+    {
+      "key": "cpu-005/generated/ui-shaders/audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/ui-shaders/audit.json",
+      "bytes": 1565,
+      "sha256": "5aaa93ef95d3e0653ace3ebe2d2a7db43d6e70e5a13b5b6fde5ac1daff3fdb41"
+    },
+    {
+      "key": "cpu-005/generated/ui-shaders/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/generated/ui-shaders/manifest.rs",
+      "bytes": 2339,
+      "sha256": "04bcc791c353b0d62e8275c8f6f7552e07af859507ccde1f782014a2d02ae1a0"
+    },
+    {
+      "key": "cpu-005/results.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/results.json",
+      "bytes": 32615,
+      "sha256": "dbc7a791852087a6f969486fd63e7026473c1c2e61975591f1c0f0e9f7a215fd"
+    },
+    {
+      "key": "cpu-005/tool-0.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/tool-0.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "cpu-005/tool-0.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/tool-0.stdout.log",
+      "bytes": 36,
+      "sha256": "1f88eaf7fe1aaec83184752cf4c944cd22f00184136ff36a3e4c318cc60ef566"
+    },
+    {
+      "key": "cpu-005/tool-1.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/tool-1.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "key": "cpu-005/tool-1.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/tool-1.stdout.log",
+      "bytes": 192,
+      "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909"
+    },
+    {
+      "key": "reviews/cooked-bloom-source001-independent-20261015.json",
+      "original": "/Users/andreyyurlov/.codex/incant-reviews/cooked-bloom-source001-independent-20261015.json",
+      "bytes": 13079,
+      "sha256": "1e8e65856dbffd1817f0aa702b11f3a8e3cf683e87a5398e9e0184b5f2b64add"
+    },
+    {
+      "key": "source/crates/incant_shader_cook/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/worktrees/shipping-cooked-shaders/incant/crates/incant_shader_cook/Cargo.toml",
+      "bytes": 414,
+      "sha256": "f47e85ee095aa4824449f0dd7f73724531ac9b72b9cc2730dfec29bd90316ea4",
+      "source_path": "crates/incant_shader_cook/Cargo.toml",
+      "code_input": true
+    },
+    {
+      "key": "packet-replay-001-observation.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/packet-replay-001-observation.json",
+      "bytes": 370,
+      "sha256": "3b43bfd06a374ea87dac25c6c3a18fe10958d27d4cb841bee3ea767d4809d706"
+    }
+  ],
+  "binaries": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-003/artifacts/0-bloom-failed",
+      "bytes": 5281336,
+      "sha256": "e86f5c19450e10e58d5fbe9a5eb0de3249835686a4a4fc6e0c73bf6a7070a603",
+      "player_executed": false
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-004/artifacts/0-bloom",
+      "bytes": 5284248,
+      "sha256": "a5abfef6865b8c4765a46c8cafe930531ea2c748795e306c7649559f04f30783",
+      "player_executed": false
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/artifacts/0-bloom",
+      "bytes": 5284248,
+      "sha256": "a5abfef6865b8c4765a46c8cafe930531ea2c748795e306c7649559f04f30783",
+      "player_executed": false
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/artifacts/1-incant_render",
+      "bytes": 33463472,
+      "sha256": "f56c610abaf4d0fdcdc03ff3cb43ab7a5f3c4497cefcf9de7a78635adc19361d",
+      "player_executed": false
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/artifacts/2-incant_render",
+      "bytes": 32744192,
+      "sha256": "4e22a90272f440fc26abdd9183e89630887f2704278ff2fd197baeace84959c1",
+      "player_executed": false
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-bloom-001/cpu-005/artifacts/4-incant_game_player",
+      "bytes": 32980944,
+      "sha256": "655857adf24002c3d0831578c1ead393caafaeff5a49fdf8248ce56cee9cfa7e",
+      "player_executed": false
+    }
+  ],
+  "qualification": {
+    "python": [
+      21,
+      3,
+      6,
+      2,
+      9
+    ],
+    "cooker": 41,
+    "renderer": {
+      "passed": 209,
+      "ignored": 54
+    },
+    "partial_bloom": {
+      "passed": 12,
+      "ignored": 3,
+      "filtered": 223
+    },
+    "strict_clippy": "all targets passed",
+    "player": "CI arm64 fast native-window/cooked/profile compile-only; cache off in exporter-shaped feature audit",
+    "families": 12,
+    "shader_artifacts": 69,
+    "shader_bytes": 268438,
+    "generated_files": 93,
+    "native_player_runs": 0,
+    "gpu_window_browser_capture": false
+  },
+  "retained_failures": [
+    "CPU001/002 protocols unexecuted;001 omitted ambient compiler overrides,002 superseded by cache composition",
+    "preliminary Python metadata fixture setup/NameError; original logs/observation retained",
+    "CPU003:11 unit+2audit+2bloom pass,1bloom test assertion fail; Naga special CBV mistaken for uniform",
+    "CPU004:41cooker pass; renderer compile E0603 because cooked display selector pub(super) was inaccessible from sibling output module"
+  ],
+  "unrun": [
+    "public shipping export/package and offline launch",
+    "selected cooked GPU renderer/driver execution",
+    "visual parity or appearance",
+    "backend pipeline-cache hits or shader-stall/performance/phase gates"
+  ]
+}
