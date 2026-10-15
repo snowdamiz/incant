@@ -41,6 +41,8 @@ pub struct TurnRequest {
     /// Selected provider model, not credentials or provider configuration.
     pub model: String,
     pub approval: ApprovalChoice,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub view_context: Option<crate::EditorViewContext>,
 }
 pub struct TurnOutcome {
     pub budget: Budget,

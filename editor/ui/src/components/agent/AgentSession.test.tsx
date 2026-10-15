@@ -30,6 +30,14 @@ const RUNNING = { status: 'running', conversation: 'test' } as const;
 const OK: BridgeResult = { ok: true };
 const TRANSPORT: BridgeError = { code: 'agent.transport', message: 'Could not contact the native agent. Refresh the session to retry.' };
 
+const defaultPanels = ['viewport', 'hierarchy', 'inspector', 'agent', 'problems'];
+function fixtureView() {
+  const connection = fixtureSnapshot('sample').connection;
+  if (connection.status !== 'ready') throw Error('Expected ready fixture');
+  return { project_id: connection.project.id, open_panels: defaultPanels };
+}
+
+
 function turn(id: number, fields: Partial<AgentTurnSnapshot> = {}): AgentTurnSnapshot {
   return {
     id,
@@ -203,13 +211,33 @@ describe('Agent conversation from the native session', () => {
 });
 
 describe('Sending', () => {
+  it('observes the current tabs and panel visibility anew for each submission', async () => {
+    const host = agentHost({ session: session([]) });
+    fireEvent.click(screen.getByRole('tab', { name: /^Assets/ }));
+    fireEvent.click(screen.getByRole('tab', { name: /^Console/ }));
+    fireEvent.change(input(), { target: { value: 'Explain this view' } });
+    fireEvent.click(action('Send'));
+    await waitFor(() => expect(input().value).toBe(''));
+    expect(host.requests[0]).toMatchObject({ viewContext: {
+      project_id: fixtureView().project_id, open_panels: ['viewport', 'assets', 'inspector', 'agent', 'console'],
+    } });
+    fireEvent.click(screen.getByRole('button', { name: 'Hierarchy panel' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Output panel' }));
+    fireEvent.change(input(), { target: { value: 'Explain the changed view' } });
+    fireEvent.click(action('Send'));
+    await waitFor(() => expect(host.requests).toHaveLength(2));
+    expect(host.requests[1]).toMatchObject({ viewContext: {
+      project_id: fixtureView().project_id, open_panels: ['viewport', 'inspector', 'agent'],
+    } });
+  });
+
   it('sends the trimmed text once, invents no turn, and keeps what was typed while the request was in flight', async () => {
     const reply = deferred<BridgeResult>();
     const host = agentHost({ session: session([]) }, { respond: () => reply.promise });
     fireEvent.change(input(), { target: { value: '  Hang a lantern  ' } });
     fireEvent.keyDown(input(), { key: 'Enter', metaKey: true });
     fireEvent.keyDown(input(), { key: 'Enter', ctrlKey: true });
-    expect(host.requests).toEqual([{ type: 'agent.send', text: 'Hang a lantern', model: 'gpt-6-astra', approval: 'destructive' }]);
+    expect(host.requests).toEqual([{ type: 'agent.send', viewContext: fixtureView(), text: 'Hang a lantern', model: 'gpt-6-astra', approval: 'destructive' }]);
     expect(action('Sending…').getAttribute('aria-disabled')).toBe('true');
     expect(header()).toBe('Starting…');
     // The field stays editable: the next message can be drafted meanwhile.
@@ -225,7 +253,7 @@ describe('Sending', () => {
     fireEvent.change(input(), { target: { value: 'Add fog' } });
     fireEvent.click(action('Send'));
     await waitFor(() => expect(input().value).toBe(''));
-    expect(host.requests).toEqual([{ type: 'agent.send', text: 'Add fog', model: 'gpt-6-astra', approval: 'destructive' }]);
+    expect(host.requests).toEqual([{ type: 'agent.send', viewContext: fixtureView(), text: 'Add fog', model: 'gpt-6-astra', approval: 'destructive' }]);
   });
 
   it('keeps the draft and says why when a send fails, until the text changes', async () => {
@@ -260,7 +288,7 @@ describe('Sending', () => {
     fireEvent.change(input(), { target: { value: 'Check the lights' } });
     fireEvent.click(action('Send'));
     await waitFor(() => expect(host.requests).toHaveLength(1));
-    expect(host.requests[0]).toEqual({ type: 'agent.send', text: 'Check the lights', model: 'gpt-6-astra-mini', approval: 'always' });
+    expect(host.requests[0]).toEqual({ type: 'agent.send', viewContext: fixtureView(), text: 'Check the lights', model: 'gpt-6-astra-mini', approval: 'always' });
     fireEvent.change(model, { target: { value: '   ' } });
     fireEvent.blur(model);
     expect(model.value).toBe('gpt-6-astra');
@@ -631,7 +659,7 @@ describe('Agent pane on the real native bridge (mocked IPC)', () => {
     fireEvent.keyDown(input(), { key: 'Enter', metaKey: true });
     await within(pane()).findByRole('button', { name: 'Allow' });
     const agentCalls = () => calls.filter((call) => call.name.startsWith('engine_agent_') && call.name !== 'engine_agent_read');
-    expect(agentCalls()).toEqual([{ name: 'engine_agent_start', args: { request: { prompt: 'Lift the crate', model: 'gpt-6-astra', approval: 'destructive' } } }]);
+    expect(agentCalls()).toEqual([{ name: 'engine_agent_start', args: { request: { prompt: 'Lift the crate', model: 'gpt-6-astra', approval: 'destructive', view_context: { project_id: nativeProject().project.id, open_panels: defaultPanels } } } }]);
     expect(input().value).toBe('');
     fireEvent.click(action('Allow'));
     await within(pane()).findByText('Allowed');

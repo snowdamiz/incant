@@ -159,6 +159,7 @@ fn execute(
             prompt: options.prompt,
             model: options.model,
             approval: ApprovalChoice::Destructive,
+            view_context: None,
         },
         ledger,
         ceiling,
