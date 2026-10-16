@@ -1,9 +1,13 @@
 //! Trusted host-only, default-off exact drawable capture. No frame-loop I/O/waits.
+mod boundaries;
+#[cfg(test)]
+mod boundary_tests;
 mod model;
 #[cfg(test)]
 mod tests;
 use super::Error;
 use crate::session;
+pub(super) use boundaries::AcquisitionOutcome;
 use incant_render::wgpu;
 pub(super) use model::{Boundary, Failure, Role, Status};
 use serde::Serialize;
@@ -25,6 +29,8 @@ pub(super) struct Capture {
     capacity: usize,
     requested_steps: u64,
     clock_origin: Instant,
+    wakes: boundaries::Wakes,
+    pulse_wake: Option<boundaries::PulseWake>,
 }
 /// The scheduler's existing decision, observed without changing its clock.
 pub(super) struct Schedule {
@@ -51,6 +57,8 @@ impl Capture {
             capacity,
             requested_steps,
             clock_origin: Instant::now(),
+            wakes: boundaries::Wakes::default(),
+            pulse_wake: None,
         })
     }
     pub fn check_surface(&self, surface: &wgpu::Surface<'_>) -> Result<(), Error> {
@@ -66,6 +74,9 @@ impl Capture {
     }
     pub fn gameplay_begin(&mut self, generation: u64, step: u64, schedule: Schedule) {
         self.begin(Role::Gameplay, generation, step);
+        let pulse_ns = self.time(schedule.pulse);
+        self.model
+            .wake(self.pulse_wake.filter(|wake| wake.pulse_ns == pulse_ns));
         self.model.schedule(model::Schedule {
             pulse_ns: self.time(schedule.pulse),
             deadline_ns: schedule.deadline.and_then(|t| self.time(t)),
@@ -74,6 +85,37 @@ impl Capture {
             ordinal: u8::try_from(schedule.ordinal).unwrap_or(u8::MAX),
             discarded_ticks: u64::try_from(schedule.discarded_ticks).ok(),
         });
+    }
+    pub fn new_events(&mut self, cause: tao::event::StartCause, arrived: Instant) {
+        use boundaries::WakeCause;
+        use tao::event::StartCause;
+        let (kind, requested) = match cause {
+            StartCause::Init => (WakeCause::Init, None),
+            StartCause::Poll => (WakeCause::Poll, None),
+            StartCause::WaitCancelled {
+                requested_resume, ..
+            } => (WakeCause::WaitCancelled, requested_resume),
+            StartCause::ResumeTimeReached {
+                requested_resume, ..
+            } => (WakeCause::ResumeTimeReached, Some(requested_resume)),
+            _ => (WakeCause::Unknown, None),
+        };
+        self.wakes.event(
+            kind,
+            self.time(arrived),
+            requested.is_some(),
+            requested.and_then(|at| self.time(at)),
+        );
+    }
+    pub fn pulse(&mut self, pulse: Instant) {
+        self.pulse_wake = self.wakes.pulse(self.time(pulse));
+    }
+    pub fn acquisition_begin(&mut self) {
+        self.model.acquisition_begin(self.time(Instant::now()));
+    }
+    pub fn acquisition_end(&mut self, outcome: AcquisitionOutcome) {
+        self.model
+            .acquisition_end(self.time(Instant::now()), outcome);
     }
     fn time(&self, instant: Instant) -> Option<u64> {
         instant
@@ -181,21 +223,24 @@ impl Capture {
         serde_json::to_writer(
             &mut writer,
             &serde_json::json!({
-                "format":"incant-native-presentations","version":1,"diagnostic_only":true,
+                "format":"incant-native-presentations","version":2,"diagnostic_only":true,
                 "display_gate":false,"uncapped_gpu_throughput":false,"final_process_exit_status":null,
                 "source_identity":"requires external executable/source/package binding",
                 "per_present_registration_overhead":true,"snapshot_after_gameplay":true,
                 "requested_host_steps":self.requested_steps,"capture_capacity":self.capacity,
-                "limits":{"rows":MAX_SAMPLES,"row_bytes_max":64,"attempt_bytes_max":192,"segment_bytes_max":40,
+                "limits":{"rows":MAX_SAMPLES,"row_bytes_max":64,"attempt_bytes_max":512,"segment_bytes_max":40,
                     "segments_per_attempt_max":2,"drain_seconds":1,"output_bytes":OUTPUT_LIMIT},
-                "host_timing_contract":{"version":1,"unit":"nanoseconds","clock":"Rust Instant relative to capture creation",
+                "host_timing_contract":{"version":2,"unit":"nanoseconds","clock":"Rust Instant relative to capture creation",
                     "shared_epoch_with_metal":false,"changes_frame_admission":false,
                     "pulse":"MainEventsCleared entry, before polling and eligibility work",
                     "deadline":"existing fixed-step clock deadline before due calculation; absent for forced resume",
                     "began":"attempt before surface reservation","reserved":"successful reservation including view creation",
                     "completed":"existing host-commit or refresh/defer point; not GPU completion",
                     "finished":"gameplay after observations and haptics; before restart replacement or event-loop cleanup",
-                    "missing":"unreached, invalid or unavailable; never zero-filled"},
+                    "missing":"unreached, invalid or unavailable; never zero-filled",
+                    "wake":"NewEvents arrival consumed once by MainEventsCleared; missing/overwritten/deadline mismatch is not a timer verdict",
+                    "acquisition":"existing get_current_texture call only, before unbind and view creation; not GPU completion"},
+                "wake_tracking":self.wakes.counts,
                 "coverage":{"rows":coverage.rows,"segments":coverage.segments,"acquired":coverage.acquired,
                     "missing":coverage.requested,"presented":coverage.presented,"zero":coverage.reported_zero,
                     "invalid":coverage.invalid,"discarded":coverage.discarded,"abandoned":coverage.abandoned,
