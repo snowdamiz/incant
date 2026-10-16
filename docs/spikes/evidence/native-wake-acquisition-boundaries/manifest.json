@@ -1,0 +1,48 @@
+{
+  "format": "incant-wake-acquisition-CPU-packet-v1",
+  "source": "51eab2289a8a14ce1da82ac90ddeabcee9d1470f",
+  "reviewed_implementation": "c4c2f89989a3d5dfeffab4f5b0e35bcc1521e458",
+  "documentation_composition": "24665c38c18f39a8bcf9f03c99837fee2e9e8cd1",
+  "source_inventory_records": 4346,
+  "independent_review": {
+    "path": "/Users/andreyyurlov/.codex/incant-reviews/native-wake-acquisition-independent-20261016.json",
+    "sha256": "945ed6beed8b76492f94ffc83e9fb4a3402a97c9c59146d04d8a86c7792e9902"
+  },
+  "record_count": 48,
+  "archive_bytes": 341934,
+  "archive_sha256": "246de126f94505312442142f1523f93b0d2375862ee0f4f5dbd0fd69e1d5ed07",
+  "expanded_bytes": 1828164,
+  "binary": {
+    "source": "/private/tmp/incant-agent-font-target/aarch64-apple-darwin/ci/deps/incant_game_player-efaa6306f65bfcf0",
+    "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-wake-acquisition-boundaries-001/cpu-002/artifacts/incant_game_player-tests",
+    "bytes": 37007664,
+    "sha256": "d98aa87bf9ca9ea4560888b687e46fec3cefe59a57f9bd1ce7e86d2b2ae10146",
+    "features": [
+      "default",
+      "frame-capture",
+      "native-compilation",
+      "native-presentations",
+      "native-window",
+      "physics-deterministic",
+      "profile",
+      "render-gpu",
+      "render-input"
+    ],
+    "tests_passed_in_CPU001": 30
+  },
+  "v1_analyzer_sha256": "3ca697d782bc2c39a97216df9d410123d7169f5c1eb344f29042493171d2fee7",
+  "previous_packets": {
+    "docs/spikes/evidence/native-presentation-host-stages/live-complete-002/manifest.json": "0c6abcd7a765d7544e51fae95635e27ef47a12530f3544451756d3823751155c",
+    "docs/spikes/evidence/native-presentation-host-stages/live-complete-002/records.json.gz": "464f15ec5f66ef187e78da1fc1832eab19a32f17aef5c3d9ddbb3a9a1031cd34"
+  },
+  "actual_CPU_controls": 30,
+  "strict_lint_modes": [
+    "collector-enabled",
+    "ordinary-native-window"
+  ],
+  "retained_failure": "CPU001 passes30 tests, then count assertion expects19; the missing11 imported HAL controls are proven from source. No tests repeated.",
+  "native_window_observed": false,
+  "performance_gate_passed": false,
+  "pacing_cause_determined": false,
+  "limits": "CPU only; no GPU, player CLI, fresh shipping bundle, timer change or live version2 measurement. Dependency Tao warnings retained. Binaries/full unchanged source not duplicated."
+}

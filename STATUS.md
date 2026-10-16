@@ -564,6 +564,16 @@ are diagnostic spans, not displayed FPS or evidence for a specific source fix.
 No engine scheduling change or performance-gate claim is made.
 [Host-stage contract and scoped live evidence](docs/spikes/native-presentation-host-stages.md).
 
+The default-off observer now has a separate version 2 boundary contract: one
+`NewEvents` snapshot consumed by each pulse, signed deadline/arrival partitions
+and two fixed slots for actual surface-acquisition calls/results. Thirty actual
+CPU controls, 31 Python controls and enabled/ordinary strict lint pass. The first
+wrapper's incorrect expected-count refusal remains retained; its 30 passing
+tests were not repeated. Historical version 1 evidence remains unchanged.
+No scheduler/FIFO/Tao/HAL policy changes, fresh live v2 observation, pacing cause
+or performance acceptance are claimed.
+[Boundary contract and CPU evidence](docs/spikes/native-wake-acquisition-boundaries.md).
+
 ## Device audio overrun handling — merged main303
 
 The audio host now counts typed overrun notifications without replacing the
