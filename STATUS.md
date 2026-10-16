@@ -731,7 +731,13 @@ The existing plan gate stays unmet; this is not evidence that sub-2 ms is
 impossible or that the full rendered game misses its frame budget.
 [Outcome and replay](docs/spikes/navigation-search-cache-outcome.md).
 
-Last reassessment: 2026-10-15, retained-data and source review. The later
+Last reassessment: 2026-10-15, evening source review after native coroutines
+were integrated. The [source-bound review](docs/spikes/evidence/script-budget-coroutine-source-review.json)
+finds that Core declares no routines and already uses the no-catalog path,
+without a coroutine scheduler or capability allocation on each tick. This
+rejects that specific allocation hypothesis; it does not measure current
+shipping cost or establish zero overhead. No native experiment was repeated.
+The earlier retained-data review remains valid: the
 [full-Core budget-check attribution](docs/spikes/script-budget-check-attribution.md)
 measures only 4.34 microseconds per frame around the unchanged enforcement checks
 (8.40 microseconds on the same whole-tick tail frames), closing that specific
