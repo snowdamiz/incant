@@ -7,6 +7,8 @@ use incant_runtime::{
     StableId, StructuralCommand, WorldIdentity,
 };
 use incant_types::{Transform, Velocity};
+#[path = "persistent_capability.rs"]
+mod persistent;
 
 // The native component representation and generated wire record must agree on
 // every numeric field. These compile on each target, not only the test host.
@@ -25,6 +27,16 @@ const _: () = {
 /// Trusted host adapter operation; all integer arguments are guest offsets/indices.
 #[derive(Clone, Copy)]
 pub enum Call {
+    ReadPersistent {
+        ptr: i32,
+        offset: i32,
+        len: i32,
+    },
+    WritePersistent {
+        ptr: i32,
+        offset: i32,
+        len: i32,
+    },
     RequestRestart,
     CommandLight {
         ptr: i32,
@@ -212,6 +224,8 @@ pub enum Call {
 /// this state. No guest access or native pointer is retained by this type.
 #[derive(Default)]
 pub struct Capability {
+    persistent: Option<crate::persistent::PersistentState>,
+    persistent_rejected: bool,
     restart_enabled: bool,
     restart_calls: usize,
     restart_rejected: bool,
@@ -266,7 +280,14 @@ impl Capability {
     }
     /// Successful trusted reload keeps committed history and its accepted clock.
     pub fn replacement(&mut self) -> Self {
+        // Direct trusted callers must not revive a failed or active persistent
+        // transaction. Public host reload validates its fresh candidate first.
+        let failed =
+            self.persistent.is_some() && (self.failed || self.active || self.restart_committed);
         Self {
+            failed,
+            persistent: self.persistent.take(),
+            epoch: self.epoch,
             restart_enabled: self.restart_enabled,
             identity: self.identity.clone(),
             tick: self.tick,
@@ -335,6 +356,10 @@ impl Capability {
         self.commands.clear();
         self.restart_calls = 0;
         self.restart_rejected = false;
+        self.persistent_rejected = false;
+        if let Some(state) = &mut self.persistent {
+            state.begin();
+        }
         self.audio_rejected = false;
         self.light_rejected = false;
         if let Err(error) = crate::audio::encode(world, &mut self.audio) {
@@ -452,6 +477,9 @@ impl Capability {
             .ok_or(Error::Abi("missing physics state"))
     }
     pub fn abort(&mut self) {
+        if let Some(state) = &mut self.persistent {
+            state.abort();
+        }
         self.restart_calls = 0;
         self.restart_committed = false;
         self.audio.clear();
@@ -490,6 +518,10 @@ impl Capability {
         if self.restart_rejected {
             self.abort();
             return Err(Error::Abi("rejected session request transaction"));
+        }
+        if self.persistent_rejected {
+            self.abort();
+            return Err(Error::Abi("rejected persistent state transaction"));
         }
         if self
             .physics
@@ -570,11 +602,17 @@ impl Capability {
             Ok(())
         });
         if result.is_ok() {
+            if let Some(state) = &mut self.persistent {
+                state.commit();
+            }
             self.restart_committed |= self.restart_calls != 0;
             self.tick += 1; // checked before entering guest code or publishing writes
             self.logs.commit(self.tick, self.tick_logs.take());
             self.failed = false;
         } else {
+            if let Some(state) = &mut self.persistent {
+                state.abort();
+            }
             self.tick_logs.clear();
         }
         result
@@ -635,6 +673,12 @@ impl Capability {
     /// Synchronous import; memory contains initialized guest bytes only and is
     /// borrowed for this call. No world observation/publication occurs here.
     pub fn invoke(&mut self, memory: &mut [u8], epoch: i64, call: Call) -> Result<i32, Error> {
+        let persistent_authorized = self.active
+            && self.epoch == epoch
+            && matches!(
+                call,
+                Call::ReadPersistent { .. } | Call::WritePersistent { .. }
+            );
         let restart_authorized =
             self.active && self.epoch == epoch && matches!(call, Call::RequestRestart);
         let hud_authorized = self.active
@@ -711,6 +755,9 @@ impl Capability {
                     | Call::SetLocale { .. }
             );
         let result = self.invoke_inner(memory, epoch, call);
+        if persistent_authorized && result.is_err() {
+            self.persistent_rejected = true;
+        }
         if restart_authorized && result.is_err() {
             self.restart_rejected = true;
         }
@@ -839,6 +886,23 @@ impl Capability {
                 .ok_or(Error::Limit("navigation query quota"))?;
         }
         match call {
+            Call::ReadPersistent { ptr, offset, len }
+            | Call::WritePersistent { ptr, offset, len } => {
+                let len =
+                    usize::try_from(len).map_err(|_| Error::Abi("persistent state length"))?;
+                let region = range(ptr, len, memory.len())?;
+                self.transfer(len)?;
+                let state = self
+                    .persistent
+                    .as_mut()
+                    .ok_or(Error::Abi("module has no persistent state declaration"))?;
+                if matches!(call, Call::WritePersistent { .. }) {
+                    state.write(offset, &memory[region])?;
+                } else {
+                    state.read(offset, &mut memory[region])?;
+                }
+                return Ok(0);
+            }
             Call::RequestRestart => {
                 if !self.restart_enabled {
                     return Err(Error::Abi("host does not accept session restart requests"));

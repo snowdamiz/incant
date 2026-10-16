@@ -34,6 +34,7 @@ pub use hud::{HudControl, HudEvent, HudEventKind, HudRole, HudSnapshot, HudText,
 pub mod localization;
 pub mod navigation;
 pub mod physics;
+pub mod persistent;
 mod raw;
 pub mod root_motion;
 pub mod steering;

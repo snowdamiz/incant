@@ -18,7 +18,7 @@ spec.loader.exec_module(generator)
 
 class CapturedInputTests(unittest.TestCase):
     def prepare_with_external_change(self, phase, remove=False):
-        captured = b'original trusted module'
+        captured = b'\0asm\x01\0\0\0\0\x09\x08original'
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             source = root / 'input.wasm'
@@ -43,7 +43,7 @@ class CapturedInputTests(unittest.TestCase):
                         change_external_input()
                     data = Path(args[1]).read_bytes()
                     observed_inputs.append(data)
-                    Path(args[2]).write_bytes(data + b':prepared')
+                    Path(args[2]).write_bytes(data + b'\0\x09\x08prepared')
                     return ''
                 if phase == 'after-cook-read':
                     change_external_input()
@@ -59,14 +59,14 @@ class CapturedInputTests(unittest.TestCase):
 
             self.assertEqual(observed_inputs, [captured])
             self.assertEqual((output / 'm0.original.wasm').read_bytes(), captured)
-            self.assertEqual((output / 'm0.wasm').read_bytes(), captured + b':prepared')
+            self.assertEqual((output / 'm0.wasm').read_bytes(), captured + b'\0\x09\x08prepared')
             self.assertEqual(report, json.loads((output / 'manifest.json').read_text()))
             self.assertEqual(report['modules'][0]['input_sha256'],
                              hashlib.sha256(captured).hexdigest())
             self.assertEqual(report['files']['m0.original.wasm'],
                              report['modules'][0]['input_sha256'])
             self.assertEqual(report['modules'][0]['prepared_sha256'],
-                             hashlib.sha256(captured + b':prepared').hexdigest())
+                             hashlib.sha256(captured + b'\0\x09\x08prepared').hexdigest())
 
     def test_replaced_external_input_before_cook_cannot_change_validated_bytes(self):
         self.prepare_with_external_change('before-cook-read')
