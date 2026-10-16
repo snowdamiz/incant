@@ -3,6 +3,7 @@
 import argparse
 import gzip
 import hashlib
+import io
 import json
 from pathlib import Path
 import re
@@ -39,12 +40,19 @@ def decode(raw):
                       parse_constant=lambda _: require(False, 'Nonfinite JSON'))
 
 
+def read_bounded(path, maximum):
+    with Path(path).open('rb') as stream:
+        raw = stream.read(maximum + 1)
+    require(len(raw) <= maximum, 'Input exceeds byte cap: ' + str(path))
+    return raw
+
+
 def load():
-    manifest = decode((HERE / 'manifest.json').read_bytes())
-    compressed = (HERE / 'records.json.gz').read_bytes()
+    manifest = decode(read_bounded(HERE / 'manifest.json', 256 * 1024))
+    compressed = read_bounded(HERE / 'records.json.gz', 2 * 1024**2)
     require(len(compressed) == manifest['archive_bytes'] <= 2 * 1024**2
             and sha(compressed) == manifest['archive_sha256'], 'Archive identity')
-    with gzip.open(HERE / 'records.json.gz', 'rb') as stream:
+    with gzip.GzipFile(fileobj=io.BytesIO(compressed), mode='rb') as stream:
         raw = stream.read(8 * 1024**2 + 1)
     require(len(raw) == manifest['expanded_bytes'] <= 8 * 1024**2, 'Expanded archive bound')
     packet = decode(raw)
@@ -128,7 +136,7 @@ def main():
     freeze, artifact = validate(manifest, records)
     if args.originals:
         for name, raw in records.items():
-            require(Path(name).read_bytes() == raw, 'Retained original changed: ' + name)
+            require(read_bounded(name, len(raw)) == raw, 'Retained original changed: ' + name)
     if args.binaries:
         path = Path(artifact['copy'])
         require(path.stat().st_size == artifact['bytes'] and file_sha(path) == artifact['sha256'], 'Retained executable changed')

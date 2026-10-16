@@ -90,6 +90,7 @@ commands and executable hash without duplicating binaries. Replay it with:
 
 ```sh
 python3 -B docs/spikes/evidence/native-wake-acquisition-boundaries/verify.py
+python3 -B docs/spikes/evidence/native-wake-acquisition-boundaries/test_verify.py
 python3 -B docs/spikes/evidence/native-wake-acquisition-boundaries/verify.py --originals --binaries --git-source 51eab2289a8a14ce1da82ac90ddeabcee9d1470f --source-root .
 ```
 
