@@ -39,8 +39,10 @@ device execution is deferred; hosted build and release checks remain required.
   covering import, watcher, history, committed refusal and recovery.
   [Model-local material table replacement](../spikes/live-material-binding-refresh.md)
   now passes CPU and numerical Metal checks, including geometry-divergence
-  provenance for navigation and atomic publication. Its native-window workflow
-  remains unqualified. Changed skeleton/geometry and scene structure still need
+  provenance for navigation and atomic publication. Its actual native-window
+  workflow now also verifies table replacement, watcher/Undo/Redo, malformed-source
+  retention, recovery, continuing VM/world state and durable journal reopen.
+  This adds no appearance or performance acceptance. Changed skeleton/geometry and scene structure still need
   their own admission rules.
 - Preserve the now-qualified [ordinary-editor 4x antialiasing](../spikes/editor-scene-msaa.md).
   Actual Mac editor review and default/cooked Metal controls verify the reported
