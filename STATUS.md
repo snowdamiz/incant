@@ -536,9 +536,14 @@ Observer-enabled and ordinary CPU suites, strict lint and 18 analyzer controls
 pass. A fresh shipping build also passes its complete 2,156-tick CPU gameplay
 replay with exact logical and PCM parity. One later native run retains valid host
 stages for 263/2,156 steps, then loses focus and fails its unfinished observation
-after the window is closed. Its inactive tail stays outside frame statistics;
-active body/reservation outliers and incomplete callback coverage identify no
-specific source defect. No retry, scheduling change or performance-gate claim.
+after the window is closed. That failure remains retained. A separately granted
+repeat of the exact historical player/package now completes all 2,156 steps,
+eight checks and 17 observations with complete host timing and confirmed cleanup.
+No focus loss or surface deferral occurs. Independent raw arithmetic gives p95
+17.169 ms adjacent host finishes, 13.492 ms reservation and 4.095 ms committed
+body. Two zero callbacks and an early 50.023 ms callback interval remain; these
+are diagnostic spans, not displayed FPS or evidence for a specific source fix.
+No engine scheduling change or performance-gate claim is made.
 [Host-stage contract and scoped live evidence](docs/spikes/native-presentation-host-stages.md).
 
 ## Device audio overrun handling — merged main303

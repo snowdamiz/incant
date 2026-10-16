@@ -1,0 +1,446 @@
+{
+  "status": "complete_historical_2156_host_stage_diagnostic",
+  "host_statistics": {
+    "pre_attempt": {
+      "samples": 2156,
+      "sum_ns": 14212110,
+      "minimum_ns": 458,
+      "p95_nearest_rank_ns": 45875,
+      "maximum_ns": 123083
+    },
+    "reserve": {
+      "samples": 2156,
+      "sum_ns": 19220005713,
+      "minimum_ns": 104000,
+      "p95_nearest_rank_ns": 13491667,
+      "maximum_ns": 15960000
+    },
+    "committed_body": {
+      "samples": 2156,
+      "sum_ns": 7285093877,
+      "minimum_ns": 2826417,
+      "p95_nearest_rank_ns": 4095125,
+      "maximum_ns": 16860542
+    },
+    "post_commit_haptics": {
+      "samples": 2156,
+      "sum_ns": 1453296,
+      "minimum_ns": 83,
+      "p95_nearest_rank_ns": 1083,
+      "maximum_ns": 4708
+    },
+    "finished_total": {
+      "samples": 2156,
+      "sum_ns": 26506552886,
+      "minimum_ns": 3565291,
+      "p95_nearest_rank_ns": 16847375,
+      "maximum_ns": 25338125
+    },
+    "batch_wake_lateness": {
+      "samples": 2155,
+      "sum_ns": 2658766677,
+      "minimum_ns": 17500,
+      "p95_nearest_rank_ns": 4277500,
+      "maximum_ns": 12349333
+    },
+    "adjacent_host_finish_intervals": {
+      "samples": 2155,
+      "sum_ns": 35920933292,
+      "minimum_ns": 6179584,
+      "p95_nearest_rank_ns": 17169250,
+      "maximum_ns": 26803959
+    }
+  },
+  "between_finish_and_pulse": {
+    "samples": 2155,
+    "sum_ns": 9417349046,
+    "minimum_ns": 9666,
+    "p95_nearest_rank_ns": 11314875,
+    "maximum_ns": 13961000
+  },
+  "largest_five_intervals": [
+    {
+      "before_step": 126,
+      "after_step": 127,
+      "interval_ns": 26803959,
+      "previous_finish_to_next_pulse_ns": 11511209,
+      "wake_lateness_ns": 1068834,
+      "pre_attempt_ns": 1833,
+      "reserve_ns": 1898833,
+      "committed_body_ns": 13391625,
+      "post_commit_haptics_ns": 459,
+      "finished_total_ns": 15290917
+    },
+    {
+      "before_step": 507,
+      "after_step": 508,
+      "interval_ns": 25926292,
+      "previous_finish_to_next_pulse_ns": 7975542,
+      "wake_lateness_ns": 386417,
+      "pre_attempt_ns": 875,
+      "reserve_ns": 5538750,
+      "committed_body_ns": 12410750,
+      "post_commit_haptics_ns": 375,
+      "finished_total_ns": 17949875
+    },
+    {
+      "before_step": 1265,
+      "after_step": 1266,
+      "interval_ns": 25710500,
+      "previous_finish_to_next_pulse_ns": 2249542,
+      "wake_lateness_ns": 278708,
+      "pre_attempt_ns": 1542,
+      "reserve_ns": 11342500,
+      "committed_body_ns": 12116125,
+      "post_commit_haptics_ns": 791,
+      "finished_total_ns": 23459416
+    },
+    {
+      "before_step": 1841,
+      "after_step": 1842,
+      "interval_ns": 25362000,
+      "previous_finish_to_next_pulse_ns": 20958,
+      "wake_lateness_ns": 2965916,
+      "pre_attempt_ns": 2917,
+      "reserve_ns": 13273458,
+      "committed_body_ns": 12063792,
+      "post_commit_haptics_ns": 875,
+      "finished_total_ns": 25338125
+    },
+    {
+      "before_step": 859,
+      "after_step": 860,
+      "interval_ns": 24679792,
+      "previous_finish_to_next_pulse_ns": 5397250,
+      "wake_lateness_ns": 366750,
+      "pre_attempt_ns": 2917,
+      "reserve_ns": 15960000,
+      "committed_body_ns": 3318875,
+      "post_commit_haptics_ns": 750,
+      "finished_total_ns": 19279625
+    }
+  ],
+  "maximum_wake_lateness": {
+    "before_step": 1747,
+    "after_step": 1748,
+    "interval_ns": 16358458,
+    "previous_finish_to_next_pulse_ns": 10279916,
+    "wake_lateness_ns": 12349333,
+    "pre_attempt_ns": 3542,
+    "reserve_ns": 2869750,
+    "committed_body_ns": 3204375,
+    "post_commit_haptics_ns": 875,
+    "finished_total_ns": 6075000,
+    "previous_finish_minus_next_deadline_ns": 2069417
+  },
+  "largest_reservation": {
+    "before_step": 859,
+    "after_step": 860,
+    "interval_ns": 24679792,
+    "previous_finish_to_next_pulse_ns": 5397250,
+    "wake_lateness_ns": 366750,
+    "pre_attempt_ns": 2917,
+    "reserve_ns": 15960000,
+    "committed_body_ns": 3318875,
+    "post_commit_haptics_ns": 750,
+    "finished_total_ns": 19279625
+  },
+  "largest_committed_body": {
+    "step": 1,
+    "ns": 16860542
+  },
+  "paired_largest_5percent_interval_tail": {
+    "samples": 108,
+    "sums": {
+      "interval_ns": 1952927874,
+      "previous_finish_to_next_pulse_ns": 515322584,
+      "pre_attempt_ns": 991041,
+      "reserve_ns": 942046126,
+      "committed_body_ns": 494498492,
+      "post_commit_haptics_ns": 69631
+    }
+  },
+  "scheduler": {
+    "one_tick_batches": 2156,
+    "forced_resume_batches": 1,
+    "discarded_ticks": 0
+  },
+  "callback_outcomes": {
+    "reported_zero": 2,
+    "presented": 2155
+  },
+  "positive_adjacent_callback_pairs": 2154,
+  "positive_callback_pair_p95_seconds": 0.01667441666359082,
+  "largest_callback_pair": {
+    "before_step": 2,
+    "after_step": 3,
+    "seconds": 0.05002299998886883,
+    "paired_host_finish_ns": 15272625
+  },
+  "cross_epoch_subtraction_performed": false,
+  "focus": {
+    "gains": 1,
+    "losses": 0
+  },
+  "physical_extents": [
+    [
+      640,
+      480
+    ]
+  ],
+  "ui_viewport": [
+    640.0,
+    480.0
+  ],
+  "scale_factor": 1.0,
+  "audio_device_diagnostics": {
+    "diagnostics": {
+      "counters_saturated": false,
+      "poll_limit_hits": 0,
+      "xrun_notifications": 0
+    },
+    "glitch_free_output_verified": false,
+    "scope": "current-session-owner"
+  },
+  "profile_frame_wall_bounds": [
+    {
+      "invalid_frames": 0,
+      "missing_frames": 0,
+      "name": "player.frame",
+      "overflow_samples": 0,
+      "p95_lower_ns": 4090001,
+      "p95_upper_ns": 4100000,
+      "samples": 2156
+    },
+    {
+      "invalid_frames": 0,
+      "missing_frames": 0,
+      "name": "native.tick",
+      "overflow_samples": 0,
+      "p95_lower_ns": 3080001,
+      "p95_upper_ns": 3090000,
+      "samples": 2156
+    },
+    {
+      "invalid_frames": 0,
+      "missing_frames": 0,
+      "name": "world.step",
+      "overflow_samples": 0,
+      "p95_lower_ns": 590001,
+      "p95_upper_ns": 600000,
+      "samples": 2156
+    },
+    {
+      "invalid_frames": 0,
+      "missing_frames": 0,
+      "name": "world.root_motion",
+      "overflow_samples": 0,
+      "p95_lower_ns": 1,
+      "p95_upper_ns": 10000,
+      "samples": 2156
+    },
+    {
+      "invalid_frames": 0,
+      "missing_frames": 0,
+      "name": "world.transforms",
+      "overflow_samples": 0,
+      "p95_lower_ns": 220001,
+      "p95_upper_ns": 230000,
+      "samples": 2156
+    },
+    {
+      "invalid_frames": 0,
+      "missing_frames": 0,
+      "name": "world.navigation",
+      "overflow_samples": 0,
+      "p95_lower_ns": 1,
+      "p95_upper_ns": 10000,
+      "samples": 2156
+    },
+    {
+      "invalid_frames": 0,
+      "missing_frames": 0,
+      "name": "physics.sync",
+      "overflow_samples": 0,
+      "p95_lower_ns": 1,
+      "p95_upper_ns": 10000,
+      "samples": 2156
+    },
+    {
+      "invalid_frames": 0,
+      "missing_frames": 0,
+      "name": "physics.2d",
+      "overflow_samples": 0,
+      "p95_lower_ns": 10001,
+      "p95_upper_ns": 20000,
+      "samples": 2156
+    },
+    {
+      "invalid_frames": 0,
+      "missing_frames": 0,
+      "name": "physics.3d",
+      "overflow_samples": 0,
+      "p95_lower_ns": 60001,
+      "p95_upper_ns": 70000,
+      "samples": 2156
+    },
+    {
+      "invalid_frames": 0,
+      "missing_frames": 0,
+      "name": "ecs.schedule",
+      "overflow_samples": 0,
+      "p95_lower_ns": 110001,
+      "p95_upper_ns": 120000,
+      "samples": 2156
+    },
+    {
+      "invalid_frames": 2156,
+      "missing_frames": 0,
+      "name": "ecs.integrate",
+      "overflow_samples": 0,
+      "p95_lower_ns": null,
+      "p95_upper_ns": null,
+      "samples": 0
+    },
+    {
+      "invalid_frames": 2156,
+      "missing_frames": 0,
+      "name": "ecs.globals",
+      "overflow_samples": 0,
+      "p95_lower_ns": null,
+      "p95_upper_ns": null,
+      "samples": 0
+    },
+    {
+      "invalid_frames": 2156,
+      "missing_frames": 0,
+      "name": "ecs.flipbook",
+      "overflow_samples": 0,
+      "p95_lower_ns": null,
+      "p95_upper_ns": null,
+      "samples": 0
+    },
+    {
+      "invalid_frames": 2156,
+      "missing_frames": 0,
+      "name": "ecs.animation",
+      "overflow_samples": 0,
+      "p95_lower_ns": null,
+      "p95_upper_ns": null,
+      "samples": 0
+    },
+    {
+      "invalid_frames": 0,
+      "missing_frames": 0,
+      "name": "native.input",
+      "overflow_samples": 0,
+      "p95_lower_ns": 1,
+      "p95_upper_ns": 10000,
+      "samples": 2156
+    },
+    {
+      "invalid_frames": 0,
+      "missing_frames": 0,
+      "name": "script.tick",
+      "overflow_samples": 0,
+      "p95_lower_ns": 2520001,
+      "p95_upper_ns": 2530000,
+      "samples": 2156
+    },
+    {
+      "invalid_frames": 0,
+      "missing_frames": 0,
+      "name": "script.source",
+      "overflow_samples": 0,
+      "p95_lower_ns": 2060001,
+      "p95_upper_ns": 2070000,
+      "samples": 2156
+    },
+    {
+      "invalid_frames": 0,
+      "missing_frames": 0,
+      "name": "script.apply",
+      "overflow_samples": 0,
+      "p95_lower_ns": 1,
+      "p95_upper_ns": 10000,
+      "samples": 2156
+    },
+    {
+      "invalid_frames": 0,
+      "missing_frames": 2156,
+      "name": "script.static_module",
+      "overflow_samples": 0,
+      "p95_lower_ns": null,
+      "p95_upper_ns": null,
+      "samples": 0
+    },
+    {
+      "invalid_frames": 0,
+      "missing_frames": 2156,
+      "name": "script.development_module",
+      "overflow_samples": 0,
+      "p95_lower_ns": null,
+      "p95_upper_ns": null,
+      "samples": 0
+    },
+    {
+      "invalid_frames": 0,
+      "missing_frames": 0,
+      "name": "game.ui_stage",
+      "overflow_samples": 0,
+      "p95_lower_ns": 1,
+      "p95_upper_ns": 10000,
+      "samples": 2156
+    },
+    {
+      "invalid_frames": 0,
+      "missing_frames": 0,
+      "name": "game.audio_sync",
+      "overflow_samples": 0,
+      "p95_lower_ns": 1,
+      "p95_upper_ns": 10000,
+      "samples": 2156
+    },
+    {
+      "invalid_frames": 0,
+      "missing_frames": 0,
+      "name": "game.audio_render",
+      "overflow_samples": 0,
+      "p95_lower_ns": 1,
+      "p95_upper_ns": 10000,
+      "samples": 2156
+    },
+    {
+      "invalid_frames": 0,
+      "missing_frames": 0,
+      "name": "game.host_sync",
+      "overflow_samples": 0,
+      "p95_lower_ns": 1160001,
+      "p95_upper_ns": 1170000,
+      "samples": 2156
+    },
+    {
+      "invalid_frames": 0,
+      "missing_frames": 2156,
+      "name": "player.restart",
+      "overflow_samples": 0,
+      "p95_lower_ns": null,
+      "p95_upper_ns": null,
+      "samples": 0
+    },
+    {
+      "invalid_frames": 0,
+      "missing_frames": 2156,
+      "name": "player.presentation",
+      "overflow_samples": 0,
+      "p95_lower_ns": null,
+      "p95_upper_ns": null,
+      "samples": 0
+    }
+  ],
+  "native_creation_catalog_calls": 91,
+  "native_creation_gameplay_calls": 0,
+  "full_gameplay_observation_parity": true,
+  "performance_gate_passed": false,
+  "display_cadence_measured": false
+}

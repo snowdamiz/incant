@@ -1,0 +1,21 @@
+{
+  "format": "incant-host-stage-complete-evidence-v1",
+  "source": "e93ac30a9cce9deadd4013ac5fa7abbc3e60a2ac",
+  "player_sha256": "45c5374583b7543af7e4b5d77a6776d79f7a5eeb3c945c9b640adf5b3a970ca6",
+  "archive_sha256": "464f15ec5f66ef187e78da1fc1832eab19a32f17aef5c3d9ddbb3a9a1031cd34",
+  "archive_bytes": 444083,
+  "expanded_bytes": 5488713,
+  "record_count": 42,
+  "independent_analyzer_sha256": "ec033c773d19130c7d939cfb32e0d613d64bf693f4e9ed016ba960994c644a52",
+  "host_analyzer_sha256": "3ca697d782bc2c39a97216df9d410123d7169f5c1eb344f29042493171d2fee7",
+  "previous_packets": {
+    "docs/spikes/evidence/native-presentation-host-stages/manifest.json": "4eee44e35bd8d5441ed7afa20c052c0e7ee538f1a153bb3b4d060207eb0e2ac2",
+    "docs/spikes/evidence/native-presentation-host-stages/records.json.gz": "a127e253dde0bf177797d6bb927395fd8cb04bb05a04c4cee8a4b9ddf064720f",
+    "docs/spikes/evidence/native-presentation-host-stages/live-partial-001/manifest.json": "354d1556de582d16d1178a90a6acad583d5875a297caf9b55a8aac4b0fea7408",
+    "docs/spikes/evidence/native-presentation-host-stages/live-partial-001/records.json.gz": "1cdabca058b01e10cb8d6dd228be25b499d93357c231697b123abaa789a5dfa1"
+  },
+  "full_gameplay_observation_parity": true,
+  "performance_gate_passed": false,
+  "display_cadence_measured": false,
+  "scope": "Complete historical e93 2156-step native host-stage diagnostic, same player/package/recording, no new build or native policy change. Earlier263-step failure remains failed."
+}
