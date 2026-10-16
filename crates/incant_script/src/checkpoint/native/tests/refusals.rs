@@ -53,7 +53,7 @@ fn incompatible_code_world_and_late_vm_initialization_fail_atomically() {
     // Test-only corruption reaches the late stage without adding a public code
     // setter/importer: the old live VM remains runnable while candidate init traps.
     let throwing = CompiledScript::compile("throw Error('candidate init');").unwrap();
-    checkpoint.code = throwing.clone();
+    checkpoint.code = throwing.clone().into();
     match &mut source.host {
         SessionVm::Bytecode(host) => host._compiled = throwing,
         #[cfg(feature = "wasmtime-host")]

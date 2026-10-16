@@ -11,6 +11,10 @@ use crate::{
 use incant_runtime::StableId;
 use sha2::{Digest, Sha256};
 use std::{collections::BTreeMap, sync::Arc};
+#[cfg(any(feature = "wasmtime-host", feature = "static-module"))]
+mod wasm;
+#[cfg(any(feature = "wasmtime-host", feature = "static-module"))]
+pub(super) use wasm::{wasm_encode, wasm_sections};
 const MAGIC: &[u8; 8] = b"INCSES01";
 const HEADER: usize = 128;
 const UI_HEADER: usize = 132;
@@ -54,6 +58,8 @@ impl Format {
 const MAX_ACTIVE: usize = crate::MAX_SCRIPT_INSTANCES;
 
 pub(super) struct Sections<'a> {
+    #[cfg(any(feature = "wasmtime-host", feature = "static-module"))]
+    pub wasm: Option<&'a [u8]>,
     pub origin: [u8; 32],
     pub world: &'a [u8],
     pub active: &'a [u8],
@@ -136,6 +142,8 @@ fn sections_for(bytes: &[u8], program: [u8; 32], format: Format) -> Result<Secti
     let (ui, tail) = tail.split_at(lens[4]);
     let (audio, coroutines) = tail.split_at(lens[5]);
     Ok(Sections {
+        #[cfg(any(feature = "wasmtime-host", feature = "static-module"))]
+        wasm: None,
         origin: bytes[48..80].try_into().unwrap(),
         world,
         active,
@@ -636,3 +644,6 @@ pub(super) fn coroutines(bytes: &[u8], tick: u64) -> Result<Option<crate::corout
     r.done()?;
     Ok(Some(store))
 }
+
+#[cfg(test)]
+mod tests;

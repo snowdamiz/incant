@@ -1,4 +1,5 @@
 use super::*;
+mod bytecode;
 #[cfg(feature = "native-checkpoints")]
 mod native;
 use incant_input::{InputRuntime, ValidatedActions};
@@ -10,12 +11,11 @@ use incant_input::{InputRuntime, ValidatedActions};
 /// `start` additionally checks the behavior's actual evaluated persistence opt-in.
 pub struct PendingSessionCheckpoint {
     world: NativeWorld,
-    code: CompiledScript,
-    active: Vec<StableId>,
-    store: Store,
-    schedule: Schedule,
+    code: SessionProgram,
+    state: ProgramState,
+    #[cfg(any(feature = "wasmtime-host", feature = "static-module"))]
+    watermark: i64,
     bindings: ValidatedActions,
-    #[cfg(feature = "native-checkpoints")]
     restart_requests: bool,
     #[cfg(feature = "ui")]
     ui: Option<incant_ui::PendingUiCheckpoint>,
@@ -28,18 +28,17 @@ impl PendingSessionCheckpoint {
     #[cfg(feature = "native-checkpoints")]
     pub(super) fn from_native(
         world: NativeWorld,
-        code: CompiledScript,
-        state: ScriptState,
+        code: SessionProgram,
+        state: ProgramState,
         bindings: ValidatedActions,
     ) -> Self {
         Self {
             world,
             code,
-            active: state.active,
-            store: state.store,
-            schedule: state.schedule,
+            state,
+            #[cfg(any(feature = "wasmtime-host", feature = "static-module"))]
+            watermark: 0,
             bindings,
-            #[cfg(feature = "native-checkpoints")]
             restart_requests: false,
             #[cfg(feature = "ui")]
             ui: None,
@@ -53,30 +52,26 @@ impl PendingSessionCheckpoint {
         program: impl Into<SessionProgram>,
         actions: InputActions,
     ) -> Result<Self> {
-        Self::decode(bytes, bytecode(program.into())?, actions, |world| {
+        Self::decode(bytes, program.into(), actions, |world| {
             Ok(NativeWorld::from_save_bytes_for_scene(world, initial)?)
         })
     }
     pub(super) fn decode(
         bytes: &[u8],
-        code: CompiledScript,
+        code: SessionProgram,
         actions: InputActions,
         load_world: impl FnOnce(&[u8]) -> Result<NativeWorld>,
     ) -> Result<Self> {
-        let sections = codec::sections(bytes, identity(&code))?;
+        let sections = state::sections(bytes, &code, false)?;
         Self::decode_sections(sections, code, actions, false, load_world)
     }
     pub(in crate::checkpoint) fn decode_sections(
         sections: codec::Sections<'_>,
-        code: CompiledScript,
+        code: SessionProgram,
         actions: InputActions,
         persisted: bool,
         load_world: impl FnOnce(&[u8]) -> Result<NativeWorld>,
     ) -> Result<Self> {
-        let active = codec::active(sections.active)?;
-        let store = codec::store(sections.store)?;
-        let mut schedule = codec::schedule(sections.schedule)?;
-        schedule.coroutines = codec::coroutines(sections.coroutines, schedule.tick)?;
         let bindings = ValidatedActions::new(actions).map_err(InputError::from)?;
         let version = sections
             .world
@@ -96,9 +91,6 @@ impl PendingSessionCheckpoint {
         let world = load_world(sections.world)?;
         if world.source_scene_fingerprint() != sections.origin {
             return Err(CheckpointError::WorldMismatch);
-        }
-        if schedule.tick != world.tick() {
-            return Err(CheckpointError::Invalid("world/script tick pairing"));
         }
         if world.requires_ui_checkpoint() != sections.ui.is_some() {
             return Err(CheckpointError::Invalid("world/UI section pairing"));
@@ -132,59 +124,31 @@ impl PendingSessionCheckpoint {
                 "hosted audio checkpoint feature",
             ));
         }
-        let scope_known = |scope| match (&code.bindings, scope) {
-            (None, Scope::Global) => true,
-            (Some(b), Scope::Source(id)) => b.sources.binary_search(&id).is_ok(),
-            _ => false,
+        let state = match &code {
+            SessionProgram::Bytecode(code) => {
+                ProgramState::Bytecode(bytecode::decode(sections, code, &world)?)
+            }
+            #[cfg(any(feature = "wasmtime-host", feature = "static-module"))]
+            _ => {
+                let bytes = sections.wasm.ok_or(CheckpointError::ProgramMismatch)?;
+                let snapshot = incant_wasm_runtime::persistent::PersistentSnapshot::decode(
+                    bytes,
+                    state::wasm_declaration(&code)?,
+                )
+                .map_err(|_| CheckpointError::Invalid("persistent Wasm state"))?;
+                if snapshot.tick() != world.tick() {
+                    return Err(CheckpointError::Invalid("world/module tick pairing"));
+                }
+                ProgramState::Wasm(snapshot)
+            }
         };
-        match &code.bindings {
-            Some(b) => {
-                if b.scene_sha256 != world.source_scene_fingerprint()
-                    || active.iter().any(|id| {
-                        b.instances.binary_search_by_key(id, |i| i.entity).is_err()
-                            || world.entity_identity(*id).is_none()
-                    })
-                {
-                    return Err(CheckpointError::Invalid("active attachment catalog"));
-                }
-            }
-            None if !active.is_empty() => {
-                return Err(CheckpointError::Invalid("active attachments"));
-            }
-            None => {}
-        }
-        for key in store.entries.keys() {
-            if !scope_known(key.scope) {
-                return Err(CheckpointError::Invalid("persistent source scope"));
-            }
-            if let Some(id) = key.entity {
-                let b = code
-                    .bindings
-                    .as_ref()
-                    .ok_or(CheckpointError::Invalid("persistent instance"))?;
-                let i = b
-                    .instances
-                    .binary_search_by_key(&id, |i| i.entity)
-                    .map_err(|_| CheckpointError::Invalid("persistent instance"))?;
-                if key.scope != Scope::Source(b.instances[i].source)
-                    || active.binary_search(&id).is_err()
-                {
-                    return Err(CheckpointError::Invalid("persistent instance lifetime"));
-                }
-            }
-        }
-        validate_tasks(code.bindings.as_deref(), &active, &schedule)?;
-        if schedule.timers.keys().any(|k| !scope_known(k.scope)) {
-            return Err(CheckpointError::Invalid("timer source scope"));
-        }
         Ok(Self {
             world,
             code,
-            active,
-            store,
-            schedule,
+            state,
+            #[cfg(any(feature = "wasmtime-host", feature = "static-module"))]
+            watermark: 0,
             bindings,
-            #[cfg(feature = "native-checkpoints")]
             restart_requests: false,
             #[cfg(feature = "ui")]
             ui,
@@ -261,26 +225,73 @@ impl PendingSessionCheckpoint {
         }
         self.start_validated()
     }
-    fn start_validated(self) -> Result<NativeSession> {
-        let mut host = ScriptHost::for_checkpoint(self.code, &self.world, &self.active)?;
-        validate(
-            &host,
-            &self.active,
-            &self.store,
-            &self.schedule,
-            &self.world,
-        )?;
-        #[cfg(feature = "native-checkpoints")]
-        if self.restart_requests {
-            host.enable_restart_requests()?;
+    pub(in crate::checkpoint) fn retain_authority(&mut self, watermark: i64, restart: bool) {
+        #[cfg(any(feature = "wasmtime-host", feature = "static-module"))]
+        {
+            self.watermark = watermark;
         }
-        *host.persistent.borrow_mut() = self.store;
-        host.schedule = self.schedule;
+        #[cfg(not(any(feature = "wasmtime-host", feature = "static-module")))]
+        let _ = watermark;
+        self.restart_requests = restart;
+    }
+    fn start_validated(self) -> Result<NativeSession> {
+        let host = match self.state {
+            ProgramState::Bytecode(state) => {
+                let code = match self.code {
+                    SessionProgram::Bytecode(code) => code,
+                    #[cfg(any(feature = "wasmtime-host", feature = "static-module"))]
+                    _ => return Err(CheckpointError::ProgramMismatch),
+                };
+                let mut host = ScriptHost::for_checkpoint(code, &self.world, &state.active)?;
+                validate(
+                    &host,
+                    &state.active,
+                    &state.store,
+                    &state.schedule,
+                    &self.world,
+                )?;
+                if self.restart_requests {
+                    host.enable_restart_requests()?;
+                }
+                *host.persistent.borrow_mut() = state.store;
+                host.schedule = state.schedule;
+                SessionVm::Bytecode(Box::new(host))
+            }
+            #[cfg(any(feature = "wasmtime-host", feature = "static-module"))]
+            ProgramState::Wasm(snapshot) => {
+                if snapshot.declaration() != state::wasm_declaration(&self.code)? {
+                    return Err(CheckpointError::ProgramMismatch);
+                }
+                let mut host = self.code.start(&self.world)?;
+                match &mut host {
+                    #[cfg(feature = "wasmtime-host")]
+                    SessionVm::DevelopmentWasm(vm) => vm
+                        .restore_persistent(
+                            &self.world,
+                            &snapshot,
+                            self.watermark,
+                            self.restart_requests,
+                        )
+                        .map_err(crate::SessionError::from)?,
+                    #[cfg(feature = "static-module")]
+                    SessionVm::Static(vm) => vm
+                        .restore_persistent(
+                            &self.world,
+                            &snapshot,
+                            self.watermark,
+                            self.restart_requests,
+                        )
+                        .map_err(crate::SessionError::from)?,
+                    SessionVm::Bytecode(_) => return Err(CheckpointError::ProgramMismatch),
+                }
+                host
+            }
+        };
         let mut input = InputRuntime::default();
         input.map_validated(&self.bindings);
         Ok(NativeSession {
             world: self.world,
-            host: SessionVm::Bytecode(Box::new(host)),
+            host,
             input,
             bindings: self.bindings,
             failed: false,

@@ -152,15 +152,13 @@ fn grouped_retirement_does_not_reattach_reused_stable_ids() {
         .unwrap();
     live.world.apply(&mut commands).unwrap();
     let checkpoint = capture(&mut live).unwrap();
-    assert!(!checkpoint.state.active.contains(&id(2)));
-    assert!(
-        checkpoint
-            .state
-            .store
-            .entries
-            .keys()
-            .all(|k| k.entity != Some(id(2)))
-    );
+    let state = match &checkpoint.state {
+        ProgramState::Bytecode(state) => state,
+        #[cfg(any(feature = "wasmtime-host", feature = "static-module"))]
+        _ => panic!("expected bytecode state"),
+    };
+    assert!(!state.active.contains(&id(2)));
+    assert!(state.store.entries.keys().all(|k| k.entity != Some(id(2))));
     let mut restored = reconstruct(&checkpoint).unwrap();
     for _ in 0..16 {
         live.tick(&[]).unwrap();

@@ -12,8 +12,9 @@ use incant_runtime::{
 
 /// A trusted, process-local checkpoint with separately validated data-file
 /// export. File loading creates a PendingSessionCheckpoint, never this capture
-/// type. There is no heap snapshot, Clone implementation or Wasm state admission.
-/// Physics uses an opaque WorldCheckpoint; script state uses persistence version 1.
+/// type. There is no heap snapshot or Clone implementation. Wasm guests must
+/// declare bounded host-owned persistent bytes; bytecode uses persistence v1.
+/// Physics uses an opaque WorldCheckpoint.
 ///
 /// Reconstruction runs module initialization again. Globals, closures and logs
 /// are ephemeral. Validated action definitions are retained, but physical input
@@ -23,8 +24,8 @@ use incant_runtime::{
 pub struct NativeSessionCheckpoint {
     world: WorldCheckpoint,
     origin: [u8; 32],
-    code: CompiledScript,
-    state: ScriptState,
+    code: SessionProgram,
+    state: ProgramState,
     bindings: ValidatedActions,
     ui: Option<Vec<u8>>,
     audio: Option<Vec<u8>>,
@@ -33,7 +34,7 @@ pub struct NativeSessionCheckpoint {
 impl NativeSession {
     /// Capture a healthy committed script phase and its admitted native physics
     /// boundary without flushing pending ECS inputs. Every active behavior must
-    /// opt into persistence version 1. Pending restart requests are refused.
+    /// opt into its explicit persistence contract. Pending restart requests are refused.
     /// Numeric/structural script transactions have already committed on return
     /// from tick; structural physics changes may still refuse native capture.
     ///
@@ -57,7 +58,7 @@ impl NativeSession {
         planar_work: &mut PlanarCheckpointWorkBudget,
         spatial_work: &mut SpatialCheckpointWorkBudget,
     ) -> Result<NativeSessionCheckpoint> {
-        let code = host(self)?._compiled.clone();
+        let (code, state) = state::capture(self)?;
         if self.world.requires_ui_checkpoint() != ui.is_some() {
             return Err(CheckpointError::Unsupported("hosted UI state is required"));
         }
@@ -66,7 +67,6 @@ impl NativeSession {
                 "retained audio owner is required",
             ));
         }
-        let state = script_state(self)?;
         let world = self.world.checkpoint(payload, planar_work, spatial_work)?;
         Ok(NativeSessionCheckpoint {
             world,
