@@ -56,6 +56,7 @@ physics-fast-simd8 = [
 ]
 
 [dependencies]
+incant_types.workspace = true
 incant_templates = { path = "../incant_templates", default-features = false }
 incant_agent_native = { path = "../incant_agent_native", default-features = false }
 incant_play = { path = "../incant_play", default-features = false }
@@ -93,6 +94,3 @@ thiserror = { workspace = true }
 
 [build-dependencies]
 incant_cook = { path = "../incant_cook", default-features = false, features = ["script"] }
-
-[dev-dependencies]
-incant_types.workspace = true

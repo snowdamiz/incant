@@ -12,8 +12,9 @@ qualified Rust files remain byte-identical in the fresh shipping producer descri
 below. No live window or GPU was run for that CPU qualification. In particular, the earlier complete
 Core callback observation predates these host-stage fields and cannot establish
 their live coverage or diagnose its cadence. There is no performance or phase-gate
-claim. The later incomplete live observation below establishes partial host-stage
-coverage only; the complete route remains unqualified.
+claim. The first live observation below remains incomplete. A separately granted
+same-binary repeat now completes all 2,156 host steps and their timing fields;
+displayed cadence and performance acceptance remain unqualified.
 
 ## Recorded boundaries
 
@@ -163,9 +164,9 @@ The offline render-input viewport was 640×480. The producing native-window sour
 requests 640×480 **logical** units; no native window was opened during CPU replay,
 so that replay observed no physical extent or scale factor. CPU replay does not exercise drawable
 acquisition, host scheduling, native shader creation, display callbacks, device
-audio, or the new host-stage fields. The later partial run below does not establish
-complete displayed cadence, visual acceptance, shader-stall qualification or a
-performance/phase-gate pass.
+audio, or the new host-stage fields. The separately recorded native runs below
+exercise those host stages; CPU evidence alone establishes no displayed cadence,
+visual acceptance, shader-stall qualification or performance/phase-gate pass.
 
 The expanded packet preserves the original 48 CPU/analyzer records and adds the
 fresh plans, grants, raw logs, source inventory, exact selected compiler events,
@@ -268,3 +269,86 @@ python3 -B docs/spikes/evidence/native-presentation-host-stages/live-partial-001
 python3 -B docs/spikes/evidence/native-presentation-host-stages/live-partial-001/verify.py --originals
 python3 -B -m unittest discover -s docs/spikes/evidence/native-presentation-host-stages/live-partial-001 -p test_verify.py
 ```
+
+## Complete same-source live replay
+
+The unchanged `e93ac30a` producer, `45c53745…` executable, 28-file cooked package
+and original recording now complete **2,156 host steps** in an actual Metal
+window on the Apple M5 Pro. All eight gameplay checks and 17 entity observations
+equal the retained CPU baseline. All 2,156 profile frames succeed; the report
+retains 2,157 accepted frames including the initial refresh. Device audio reports
+zero Xrun notifications; audible quality and live device PCM remain unverified.
+
+This is a diagnostic repeat of that historical package, not a current-main
+shipping build or performance comparison. Root observed automatic native focus
+and left the UI alone; no CUA activation, input, resize, engine policy change or
+new build occurred. The state log records one focus gain, zero losses and no
+surface deferrals. Actual physical/UI extents are 640×480 at scale 1.0. The first
+263-step failure and its inactive tail remain unchanged above.
+
+Exec session 4777 returned zero. The wrapper completed in 37.933 seconds and its
+child in 37.684, within the unchanged 150/120-second bounds. Cleanup succeeded;
+both owned PIDs and process groups 18203/18211 were independently absent, with
+PID/group signal-zero probes returning `ESRCH`. The 6 GiB free floor, sampled
+8 GiB owned RSS cap, 192 MiB output cap and per-file limits remain cooperative
+diagnostic bounds, not hard memory or driver-allocation guarantees.
+
+Independent arithmetic from every original host timestamp agrees exactly with
+the existing analyzer. There are 2,156 one-tick scheduler batches, one forced
+resume, no discarded ticks, omissions or timing errors, and 2,155 eligible
+adjacent gameplay finish intervals. Nearest-rank observations are:
+
+| Host quantity | Samples | p95 / maximum, ms |
+| --- | ---: | ---: |
+| Before reservation, after scheduler pulse | 2,156 | 0.045875 / 0.123083 |
+| Reservation, including acquisition/view creation | 2,156 | 13.491667 / 15.960000 |
+| Committed body | 2,156 | 4.095125 / 16.860542 |
+| Postcommit work/haptics | 2,156 | 0.001083 / 0.004708 |
+| Finished attempt | 2,156 | 16.847375 / 25.338125 |
+| Scheduler pulse minus deadline | 2,155 | 4.277500 / 12.349333 |
+| Adjacent host finishes | 2,155 | 17.169250 / 26.803959 |
+
+For the longest interval, steps 126→127, 26.803959 ms is exactly 11.511209 ms
+between the prior finish and next pulse, 0.001833 ms before reservation,
+1.898833 ms reserving, 13.391625 ms committed body and 0.000459 ms postcommit.
+The four largest intervals end at pickup steps 127, 508, 1,266 and 1,842; this
+correlation does not identify the internal cause. The largest reservation is
+instead at step 860. Maximum body duration is the first forced resume, before
+any eligible adjacent gameplay interval.
+
+Maximum wake lateness is at step 1,748: 12.349333 ms includes 2.069417 ms by
+which the prior finish already follows that deadline, plus 10.279916 ms until
+the next pulse. It is not a measured timer-only delay. In the 108 largest
+host-finish intervals, paired accounting retains 942.046126 ms reservation,
+494.498492 ms body, 515.322584 ms inter-attempt wait, 0.991041 ms pre-attempt and
+0.069631 ms postcommit, totaling 1,952.927874 ms. These are the same selected
+intervals, not subtraction of marginal percentiles or reclaimable CPU time.
+
+Callbacks retain 2,155 positive timestamps and two zero outcomes. The 2,154
+strictly positive adjacent callback intervals have p95 16.674417 ms, but early
+steps 2→3 span 50.023 ms while the corresponding host-finish interval is
+15.272625 ms. Missing initial/final display intervals and these callback semantics
+prevent a complete displayed-FPS verdict. Rust and Metal epochs are never
+subtracted. The native creation observer again records 91 successful catalog
+calls and four successful unbound prefix calls, with none in Gameplay; deferred
+driver work and the full shader-stall gate remain open.
+
+The additive [42-record packet](evidence/native-presentation-host-stages/live-complete-002/manifest.json)
+retains both outcomes, exact grant/controller/input identities, full reports and
+raw sidecars. Its [independent summary](evidence/native-presentation-host-stages/live-complete-002/summary.json)
+recomputes every stage and eligible pair, including the largest paired intervals
+and callback discrepancy. Seven saved-data controls reject altered durations,
+zero-callback repair, different scheduler batches, relabeled failures, false gate
+claims and ambiguous JSON. Archived scripts are data only; replay launches no
+native program, window, GPU or capture helper.
+
+```sh
+python3 -B docs/spikes/evidence/native-presentation-host-stages/live-complete-002/verify.py --originals --binaries
+python3 -B -m unittest discover -s docs/spikes/evidence/native-presentation-host-stages/live-complete-002 -p test_verify.py
+```
+
+The completed route closes the missing host-stage observation. It does not yet
+justify a timer, submission or script fix, establish causality for a long span,
+or qualify continuous display, rendering quality, audible output, FPS or a phase
+gate. Timer/runloop scheduling, drawable backpressure and active body work need
+separate source-backed hypotheses before another run or implementation change.

@@ -1,5 +1,12 @@
 # Implementation status
 
+Checkpoint49 is held after the normal headless binary failed to compile on
+Mac, Linux and Windows: the new coroutine schema registrations referenced a
+test-only dependency. Moving that existing dependency to normal scope passes
+the actual local binary build, all 80 published-schema comparisons and strict
+headless lint. The full release suite must still pass on a corrected frozen
+candidate. [Cause and local verification](docs/spikes/headless-schema-dependency.md).
+
 The current phase remains **Phase 1: Core engine**. The
 [Phase 1 review ledger](docs/gates/phase1-review.md) maps each exit requirement to
 its recorded evidence and remaining qualification. The actual native texture,
@@ -536,9 +543,14 @@ Observer-enabled and ordinary CPU suites, strict lint and 18 analyzer controls
 pass. A fresh shipping build also passes its complete 2,156-tick CPU gameplay
 replay with exact logical and PCM parity. One later native run retains valid host
 stages for 263/2,156 steps, then loses focus and fails its unfinished observation
-after the window is closed. Its inactive tail stays outside frame statistics;
-active body/reservation outliers and incomplete callback coverage identify no
-specific source defect. No retry, scheduling change or performance-gate claim.
+after the window is closed. That failure remains retained. A separately granted
+repeat of the exact historical player/package now completes all 2,156 steps,
+eight checks and 17 observations with complete host timing and confirmed cleanup.
+No focus loss or surface deferral occurs. Independent raw arithmetic gives p95
+17.169 ms adjacent host finishes, 13.492 ms reservation and 4.095 ms committed
+body. Two zero callbacks and an early 50.023 ms callback interval remain; these
+are diagnostic spans, not displayed FPS or evidence for a specific source fix.
+No engine scheduling change or performance-gate claim is made.
 [Host-stage contract and scoped live evidence](docs/spikes/native-presentation-host-stages.md).
 
 ## Device audio overrun handling — merged main303
