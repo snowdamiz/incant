@@ -78,6 +78,11 @@
       "bytes": 1074,
       "sha256": "57056f544182d12b95c34940988025165f014ee2cceaf1d8c2358116bc3d5655",
       "text": "{\n  \"at\": \"2026-10-16T01:21:59.028385+00:00\",\n  \"cwd\": \"/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant\",\n  \"results\": [\n    {\n      \"argv\": [\n        \"cargo\",\n        \"build\",\n        \"--profile\",\n        \"ci\",\n        \"--locked\",\n        \"-p\",\n        \"incant_headless\",\n        \"--bin\",\n        \"incant_headless\",\n        \"-j\",\n        \"2\"\n      ],\n      \"exit_code\": 0,\n      \"seconds\": 130.1825755420141\n    },\n    {\n      \"argv\": [\n        \"/opt/homebrew/opt/python@3.14/bin/python3.14\",\n        \"tools/check_schemas.py\",\n        \"--binary\",\n        \"/tmp/incant-agent-font-target/ci/incant_headless\"\n      ],\n      \"exit_code\": 0,\n      \"seconds\": 0.9019973750109784\n    },\n    {\n      \"argv\": [\n        \"cargo\",\n        \"clippy\",\n        \"--profile\",\n        \"ci\",\n        \"--locked\",\n        \"-p\",\n        \"incant_headless\",\n        \"--all-targets\",\n        \"-j\",\n        \"2\",\n        \"--\",\n        \"-D\",\n        \"warnings\"\n      ],\n      \"exit_code\": 0,\n      \"seconds\": 39.77101425000001\n    }\n  ],\n  \"elapsed_seconds\": 170.85600170801627\n}\n"
+    },
+    "storage-correction.json": {
+      "bytes": 422,
+      "sha256": "61e3f9d8db29e1af702b31e8f014391d82e371ada464ab08e006b0f3be5d042d",
+      "text": "{\n  \"reason\": \"Original closeout subtracted a historical allocated-byte baseline from a new logical-byte total. That growth field is invalid. Retain it as historical data only.\",\n  \"allocated_bytes_before\": 63801221120,\n  \"allocated_bytes_after\": 64246947840,\n  \"allocated_growth_bytes\": 445726720,\n  \"sample\": \"post-build du -sk; not a continuously measured build peak\",\n  \"original_retained_growth_bytes_valid\": false\n}\n"
     }
   },
   "independent_review": {
@@ -102,5 +107,13 @@
   "diff_check": "pass",
   "format": "pass with explicit toolchain PATH; initial cargo fmt discovery failed",
   "release_promoted": false,
-  "phase_gate_passed": false
+  "phase_gate_passed": false,
+  "storage_accounting_correction": {
+    "reason": "Original closeout subtracted a historical allocated-byte baseline from a new logical-byte total. That growth field is invalid. Retain it as historical data only.",
+    "allocated_bytes_before": 63801221120,
+    "allocated_bytes_after": 64246947840,
+    "allocated_growth_bytes": 445726720,
+    "sample": "post-build du -sk; not a continuously measured build peak",
+    "original_retained_growth_bytes_valid": false
+  }
 }

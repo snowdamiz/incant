@@ -24,6 +24,9 @@ The initial local build launcher could not find Cargo on PATH and launched no
 compiler. The successful attempt explicitly selects the installed pinned
 toolchain. An initial formatting invocation had the same tool discovery issue;
 the explicit-toolchain invocation passes. Neither setup failure is discarded.
+An appended storage correction rejects the original mixed logical/allocated-byte
+growth calculation; the retained allocated increase is 445,726,720 bytes. This
+post-build measurement does not establish the build's peak storage use.
 This qualification is local compilation and schema behavior, not a shipping
 performance or phase-gate result. Checkpoint49 remains failed; release stays at
 the previous verified baseline until a corrected frozen candidate passes every
