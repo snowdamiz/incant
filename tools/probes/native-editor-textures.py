@@ -25,6 +25,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / 'tools'))
 import native_process
 import native_editor_animation
+import native_editor_materials
 
 ENTITY = '00000000000000000000000002'
 SCRIPT = '00000000000000000000000001'
@@ -169,8 +170,13 @@ def model(replacement=False):
     return (json.dumps(document, separators=(',', ':')) + '\n').encode('utf-8')
 
 
-def fixture(kind):
+def fixture(kind, model_variant="geometry"):
     require(kind in ('texture', 'model', 'animated-model'), 'Known asset fixture kind required')
+    require(model_variant in ('geometry', 'material-tables'), 'Known model variant required')
+    require(kind == 'model' or model_variant == 'geometry', 'Material tables require the model workflow')
+    if model_variant == 'material-tables':
+        return ('refresh.gltf', 'refresh-replacement.gltf',
+                native_editor_materials.gltf(png), native_editor_materials.gltf(png, True))
     if kind == 'texture':
         return 'refresh.png', 'refresh-blue.png', png([255, 0, 0, 255]), png([0, 0, 255, 255])
     if kind == 'animated-model':
@@ -272,14 +278,16 @@ def main(argv=None):
     parser.add_argument('--editor', type=Path, required=True)
     parser.add_argument('--headless', type=Path, required=True)
     parser.add_argument('--asset-kind', choices=('texture', 'model', 'animated-model'), default='texture')
+    parser.add_argument('--model-variant', choices=('geometry', 'material-tables'), default='geometry',
+                        help='Use identical geometry and replace complete model-local material tables')
     args = parser.parse_args(argv)
-    source_name, replacement_name, original_bytes, replacement_bytes = fixture(args.asset_kind)
+    source_name, replacement_name, original_bytes, replacement_bytes = fixture(args.asset_kind, args.model_variant)
     output = args.output.resolve()
     editor, headless = args.editor.resolve(strict=True), args.headless.resolve(strict=True)
     output.mkdir(parents=True, exist_ok=False)
     project, journal = output/'project.json', output/'project.journal.jsonl'
     ledger = []
-    result = {'passed': False, 'asset_kind':args.asset_kind, 'editor_sha256': digest(editor), 'headless_sha256': digest(headless),
+    result = {'passed': False, 'asset_kind':args.asset_kind, 'model_variant':args.model_variant, 'editor_sha256': digest(editor), 'headless_sha256': digest(headless),
               'pixel_capture': False, 'appearance_review': False, 'performance_or_phase_gate': False}
     def write(name, value):
         (output/name).write_text(json.dumps(value, indent=2) + '\n')
@@ -329,6 +337,8 @@ def main(argv=None):
             if args.asset_kind == 'animated-model':
                 before['refresh-incompatible.gltf'] = digest(output/'refresh-incompatible.gltf')
             write('fixture.json', {'source_revision':authored['revision'], 'inputs':before,
+                  'model_variant':args.model_variant, 'original_asset_sha256':hashlib.sha256(original_bytes).hexdigest(),
+                  'replacement_asset_sha256':hashlib.sha256(replacement_bytes).hexdigest(),
                   'journal_bytes_before':journal.stat().st_size, 'fixture_authored_through_cmd':True})
             receipt = output/'native-window.json'
             run([editor, project, f'--{args.asset_kind}-probe', receipt, ENTITY], bound=120)

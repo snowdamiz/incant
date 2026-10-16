@@ -106,3 +106,25 @@ python3 docs/spikes/evidence/live-material-binding-refresh/verify.py \
 The live-source option intentionally refuses changed inventoried inputs. A later
 integration must describe any other compiled-input differences separately; replay
 does not turn later source into the producer or satisfy a wider gate.
+
+## Native workflow fixture preparation
+
+The shared native editor runner now accepts `--asset-kind model --model-variant
+material-tables`. Its two bounded, self-contained glTF inputs retain identical
+positions, normals, UVs, authored tangents and node membership while replacing
+material, image, texture and sampler tables and reassigning the primitive. The
+replacement uses all five material map roles. It drives the existing real model
+import/watch/Undo/Redo/recovery handlers; there is no new editor mutation API.
+
+Fifteen focused Python controls pass. The retained main376 headless executable
+(`7cfe5b13…`) imports both actual fixtures, retains the asset ID, advances the
+revision from 1 to 2, and treats a repeated replacement import as unchanged.
+Cooked texture-role counts change from 2 to 5; project validation passes. The
+first local runner stopped on a disappearing transaction scratch file in its
+resource monitor. Its cleanup passed; a fresh successor allows that expected
+sampling race and completes all five child commands. Both attempts are retained
+in [the fixture evidence](evidence/native-material-workflow-fixture.json).
+
+This is fixture admission, not the still-pending actual native-window material
+workflow. The prior CPU and numerical Metal evidence above retains its original
+producing sources.
