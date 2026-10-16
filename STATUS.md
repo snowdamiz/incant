@@ -73,9 +73,20 @@ continuous motion, temporal reconstruction, translation quality, FPS and phase
 approval remain outside this result.
 [Images, exact sources and portable replay](docs/spikes/core-locale-sampled-captures.md).
 
-## Native Wasm restart — actual native hosts and player owner qualified
+## Native Wasm restart — native hosts and authored shipping route qualified
 
-Native Wasm restart requests now have an opt-in owner through build-linked wasm2c and development Wasmtime, retaining transaction/quota semantics and pending requests until consumption. Actual Rust guests prove fresh VM/world/input/output-clock reconstruction, terminal consumer refusal with audible PCM rollback, and the plain player restart owner. Scoped local `ci` qualification passed 29 native tests, three strict lints, 19 Python SDK controls and generated-contract checks; two earlier compile failures are retained. [Report](docs/spikes/native-wasm-restart.md). This does not establish a shipping player export, native window/device result, full SDK parity, performance or phase gate.
+Native Wasm restart requests now have an opt-in owner through build-linked wasm2c and development Wasmtime, retaining transaction/quota semantics and pending requests until consumption. Actual Rust guests prove fresh VM/world/input/output-clock reconstruction, terminal consumer refusal with audible PCM rollback, and the plain player restart owner. Scoped local `ci` qualification passed 29 native tests, three strict lints, 19 Python SDK controls and generated-contract checks; two earlier compile failures are retained. [Report](docs/spikes/native-wasm-restart.md). That host-test run did not establish a shipping player export, native window/device result, full SDK parity, performance or phase gate.
+
+The separate c81eb7a9 producer now qualifies public import, atomic Undo/Redo,
+save/journal reopen and an ordinary fresh shipping export. After deleting its
+private source/project/cache/compiler copies and build storage, three ordinary
+plain-player processes each perform three real VM/world replacements with exact
+state, host chronology and silent PCM parity. The exporter startup adds a separate
+one-tick replacement. Twenty probe/routing controls and 19 portable evidence
+controls pass; all 29 owned groups and the wrapper are absent. Default
+`native-play` still refuses restart ownership, and static Wasm checkpoint state
+remains unsupported. This adds no window/device-audio, full SDK, performance or
+phase claim. [Exact producer, raw records and data-only replay](docs/spikes/native-wasm-restart-export.md).
 
 
 ## Native explicit-state coroutines — CPU behavior and save/restore qualified
