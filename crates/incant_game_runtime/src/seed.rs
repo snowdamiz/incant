@@ -4,23 +4,23 @@ use crate::{GameError, Result};
 use incant_audio_runtime::{ClipBinding, MAX_SCENE_CLIPS};
 use incant_input::{InputActions, InputError, ValidatedActions};
 use incant_runtime::CookedScene;
-use incant_script::{CompiledScript, SessionError};
+use incant_script::{SessionError, SessionProgram};
 
 /// Trusted compiled native program paired with the original typed startup data.
 /// Cold reconstruction uses the ordinary constructors and repeats their exact
 /// scene/program/clip/consumer checks before exposing a fresh session. Runtime
 /// physics is rebuilt from its initial declarations, never from a lossy save.
-/// Static/development Wasm restart request parity is deliberately not implied.
+/// Bytecode, build-linked Wasm and development Wasm all create a new VM instance.
 pub struct GameSeed {
     pub(crate) scene: CookedScene,
-    pub(crate) program: CompiledScript,
+    pub(crate) program: SessionProgram,
     pub(crate) actions: InputActions,
     pub(crate) clips: Vec<ClipBinding>,
 }
 impl GameSeed {
     pub fn new(
         scene: CookedScene,
-        program: CompiledScript,
+        program: impl Into<SessionProgram>,
         actions: InputActions,
         clips: Vec<ClipBinding>,
     ) -> Result<Self> {
@@ -32,7 +32,7 @@ impl GameSeed {
             .map_err(SessionError::from)?;
         Ok(Self {
             scene,
-            program,
+            program: program.into(),
             actions,
             clips,
         })

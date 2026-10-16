@@ -460,6 +460,14 @@ fn run() -> Result<()> {
             fs::create_dir_all(&directory)?;
             let mut registry = engine_version::schemas();
             registry.insert(
+                "CoroutineValue".into(),
+                json!(schemars::schema_for!(incant_types::CoroutineValue)),
+            );
+            registry.insert(
+                "CoroutineResult".into(),
+                json!(schemars::schema_for!(incant_types::CoroutineResult)),
+            );
+            registry.insert(
                 "GameSave".into(),
                 json!(schemars::schema_for!(incant_play_legacy::GameSave)),
             );

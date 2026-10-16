@@ -136,7 +136,7 @@ impl NativeSession {
     }
 
     /// Opt in only when the trusted owner implements whole-session replacement.
-    /// Wasm request parity is unsupported; normal hosts refuse by default.
+    /// Normal hosts refuse by default, for both bytecode and Wasm programs.
     pub fn enable_restart_requests(&mut self) -> Result<(), SessionError> {
         self.ready()?;
         self.host.enable_restart_requests()

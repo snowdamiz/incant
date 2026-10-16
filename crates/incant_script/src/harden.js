@@ -78,12 +78,14 @@ export const persistentShape = (() => {
 export const persistentWrapper = (() => {
     const inspect = persistentShape;
     const immutable = freeze;
-    return native => function(a, b) {
+    return native => function(a, b, c, d) {
         switch (arguments.length) {
             case 0: return native(inspect, immutable);
             case 1: return native(inspect, immutable, a);
             case 2: return native(inspect, immutable, a, b);
-            default: return native(inspect, immutable, a, b, undefined);
+            case 3: return native(inspect, immutable, a, b, c);
+            case 4: return native(inspect, immutable, a, b, c, d);
+            default: return native(inspect, immutable, a, b, c, d, undefined);
         }
     };
 })();

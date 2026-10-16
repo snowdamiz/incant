@@ -1,0 +1,729 @@
+{
+  "abi": {
+    "existing_namespaces_and_other_wire_fields_unchanged": true,
+    "function": "request_restart",
+    "namespace": "incant_session_v1",
+    "old_functions_preserved": 63,
+    "opcode": 63,
+    "signature": "(epoch: i64) -> i32",
+    "total_functions": 64
+  },
+  "date": "2026-10-15",
+  "external_native_artifacts": [
+    {
+      "bytes": 10469872,
+      "log": "cpu-runtime-003/stderr.log",
+      "path": "/Users/andreyyurlov/.codex/incant-core-tick-diagnostic-target/ci/deps/session_requests-f15562548603319b",
+      "sha256": "96db1c32e12a2bd74c6af41002fcb0ba9e339926c0c49c1bc692cef13d6c7c85"
+    },
+    {
+      "bytes": 34123744,
+      "log": "conformance-001/028.stderr.log",
+      "path": "/tmp/incant-agent-font-target/ci/deps/session_parity-5aa43131bba7f665",
+      "sha256": "09a3f7051f96b8be6b2352aa2f2f2b6f636263105415e107aaab308a62da84a2"
+    },
+    {
+      "bytes": 26765056,
+      "log": "conformance-001/028.stderr.log",
+      "path": "/tmp/incant-agent-font-target/ci/deps/session_requests-b2380e621f36d2d1",
+      "sha256": "886f6ba3d13441a990996faf8923e5c92691adfa502cd83f0b71f71445daedaa"
+    },
+    {
+      "bytes": 22503568,
+      "log": "conformance-001/029.stderr.log",
+      "path": "/tmp/incant-agent-font-target/ci/deps/incant_game_player-5ec69a0a82443f0b",
+      "sha256": "251c9f4037505a7ed99b672e9b6afe8dfdabf1e95881aaa2626abea2692843bc"
+    },
+    {
+      "bytes": 19238312,
+      "log": "conformance-001/030.stderr.log",
+      "path": "/tmp/incant-agent-font-target/ci/deps/hosting-1e511390675c9f5a",
+      "sha256": "4498564968df29a57fdaa0debaff19e72e7010d53b00cc2602d5307d715e9b78"
+    },
+    {
+      "bytes": 18765112,
+      "log": "conformance-001/030.stderr.log",
+      "path": "/tmp/incant-agent-font-target/ci/deps/restart-917b19c0a908e37e",
+      "sha256": "7c4a3d4138144a476fc613c019fbbbd76eb9b1a36d4081e91642d5f996fdaeb7"
+    }
+  ],
+  "format_version": 1,
+  "guest_preparation": {
+    "external_inventory_record": "docs-preparation-001/verification.json",
+    "modules": [
+      {
+        "input_sha256": "cf4bb4d09e01de5fbf6f21bd0edbad91f853bd94ba899a0f2bde38592f6be8fc",
+        "name": "rust-session-restart",
+        "prefix": "m0",
+        "prepared_sha256": "ed151e36cb35d755a106cf389b07f621521a6c2f270f074bca07dedb10f34285"
+      },
+      {
+        "input_sha256": "f46df26fad21d80ed817a5a63ae77f88d8920adcbeaae46fd8b343cd75cede70",
+        "name": "rust-session-once",
+        "prefix": "m1",
+        "prepared_sha256": "568f8dc69d95d25ebbd1b62b266f7b865764b3d25db4e261ce5a8691a3ceaf0d"
+      },
+      {
+        "input_sha256": "a25299dd1c95d19d5399c6a47528494a0c71b1977c50f78c39a90cf0f06a02d8",
+        "name": "rust-session-quota",
+        "prefix": "m2",
+        "prepared_sha256": "1d0fac83c698746bff88574033db95f79cf057d71f364f4333544cb41ae138d2"
+      },
+      {
+        "input_sha256": "62ff3452630ae533821489e12fe28944686cd4b7a08b2510d78b05e2c0845663",
+        "name": "rust-session-owner",
+        "prefix": "m3",
+        "prepared_sha256": "11ee5fb0b41e352c51bd7d1c1594b46e0578048d891283bd1db91595ea9d1b75"
+      },
+      {
+        "input_sha256": "cb3303d11f7c80c3522be9720198a3553c19b00a20030fcb3770c10614a4c943",
+        "name": "rust-session-callback",
+        "prefix": "m4",
+        "prepared_sha256": "361377ce917263870ab2256bb086ec53beabdaec3603df3dc18ef670ee2a5142"
+      },
+      {
+        "input_sha256": "4043b99e6fc7b88f80cdbd5da23044b701c3781691081c8944eb5628bac1ca44",
+        "name": "rust-session-trap",
+        "prefix": "m5",
+        "prepared_sha256": "7c4785e4b90cbb9be4425f51b12462ddac8072c1527ae70ec98b232311581ea8"
+      }
+    ],
+    "prepared_file_count": 31,
+    "prepared_manifest_sha256": "6b9e6aa8da7da8ddeefb5c033daf2684bf5329bc229e4a7595053ed491dcb008",
+    "rust_sdk_provenance_sha256": "c5b289a2808f5156b043f9f410a196223ebc18a8e82a6c9e0188e04920706f6b",
+    "sdk_source_count": 36,
+    "source": "sdk/rust/samples/session_restart.rs",
+    "source_sha256": "9ac2db8148cd0bcfa22a669d3f75f4f360dd9860a6ea335306419af76380dd9a",
+    "variants": [
+      "restart",
+      "once",
+      "quota",
+      "owner",
+      "callback",
+      "trap"
+    ]
+  },
+  "kind": "native-wasm-session-restart",
+  "limitations": [
+    "No shipping-profile player/export or source-free package execution for this change.",
+    "No native-window, GPU, device-audio, phone, frame pacing, performance or 2ms gate evidence.",
+    "No full SDK-parity, Wasm checkpoint/restore or phase completion claim.",
+    "Plain and CPU-rendered player owners opt in; recording/offscreen GPU owners still refuse. CPU-rendered source composition is not a separately executed rendering test.",
+    "The broad combined shipping-wasm2c commands were updated, but only the explicitly logged focused test sequence ran here.",
+    "Full Wasm checkpoints remain unsupported; cold restart reconstructs startup state without replaying side effects."
+  ],
+  "portable_records": {
+    "compressed_bytes": 25625,
+    "file": "native-wasm-restart-records.json.gz",
+    "index": {
+      "conformance-001/000.stderr.log": {
+        "bytes": 301,
+        "sha256": "157c344eac07553a7208db7a309d418277d9a5dd0b5071191bbcf1ef537ca5c9"
+      },
+      "conformance-001/000.stdout.log": {
+        "bytes": 40733,
+        "sha256": "b5416ea76dcfdd0cc0ed468eac7eaa15ab475a1397b86a987bf93040e03b484e"
+      },
+      "conformance-001/001.stderr.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conformance-001/001.stdout.log": {
+        "bytes": 192,
+        "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909"
+      },
+      "conformance-001/002.stderr.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conformance-001/002.stdout.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conformance-001/003.stderr.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conformance-001/003.stdout.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conformance-001/004.stderr.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conformance-001/004.stdout.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conformance-001/005.stderr.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conformance-001/005.stdout.log": {
+        "bytes": 192,
+        "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909"
+      },
+      "conformance-001/006.stderr.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conformance-001/006.stdout.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conformance-001/007.stderr.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conformance-001/007.stdout.log": {
+        "bytes": 192,
+        "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909"
+      },
+      "conformance-001/008.stderr.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conformance-001/008.stdout.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conformance-001/009.stderr.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conformance-001/009.stdout.log": {
+        "bytes": 192,
+        "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909"
+      },
+      "conformance-001/010.stderr.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conformance-001/010.stdout.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conformance-001/011.stderr.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conformance-001/011.stdout.log": {
+        "bytes": 192,
+        "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909"
+      },
+      "conformance-001/012.stderr.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conformance-001/012.stdout.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conformance-001/013.stderr.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conformance-001/013.stdout.log": {
+        "bytes": 192,
+        "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909"
+      },
+      "conformance-001/014.stderr.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conformance-001/014.stdout.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conformance-001/015.stderr.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conformance-001/015.stdout.log": {
+        "bytes": 7,
+        "sha256": "98997cf914f90eb865507680fb129df06410fe495ffc00793aa780e4b8f563ed"
+      },
+      "conformance-001/016.stderr.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conformance-001/016.stdout.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conformance-001/017.stderr.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conformance-001/017.stdout.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conformance-001/018.stderr.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conformance-001/018.stdout.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conformance-001/019.stderr.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conformance-001/019.stdout.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conformance-001/020.stderr.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conformance-001/020.stdout.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conformance-001/021.stderr.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conformance-001/021.stdout.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conformance-001/022.stderr.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conformance-001/022.stdout.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conformance-001/023.stderr.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conformance-001/023.stdout.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conformance-001/024.stderr.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conformance-001/024.stdout.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conformance-001/025.stderr.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conformance-001/025.stdout.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conformance-001/026.stderr.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conformance-001/026.stdout.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conformance-001/027.stderr.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conformance-001/027.stdout.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conformance-001/028.stderr.log": {
+        "bytes": 4272,
+        "sha256": "bb52243c16cd70e3d76d96b289a1e3c5771f91a4c835d5f332b68a93ca0c7339"
+      },
+      "conformance-001/028.stdout.log": {
+        "bytes": 876,
+        "sha256": "d433ff7df6c082249d87f2ee21d297ab67157ee3532b66ed60dde475c918fc39"
+      },
+      "conformance-001/029.stderr.log": {
+        "bytes": 3322,
+        "sha256": "47775b7fac22aa3488d7037f25e9dc1b550bb25c11702e1e4a1cd90b6b974091"
+      },
+      "conformance-001/029.stdout.log": {
+        "bytes": 311,
+        "sha256": "674d26a17fbb80261b112d2166160924bc566384b706ce59b5e6712b090bf51d"
+      },
+      "conformance-001/030.stderr.log": {
+        "bytes": 2101,
+        "sha256": "8682f6c6c5ed688bf8610d2110def891f4519c70610fac2e84c004e244b116be"
+      },
+      "conformance-001/030.stdout.log": {
+        "bytes": 1329,
+        "sha256": "e8616aeb61943b0b5c78c2e614e3a89207ef9ca2c1e8c83d9c1f24a28e0fcf57"
+      },
+      "conformance-001/031.stderr.log": {
+        "bytes": 4199,
+        "sha256": "40357c504f6bc2fa0716cceb0f0ff87d767d962188d32d0926e8c017fd16b391"
+      },
+      "conformance-001/031.stdout.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conformance-001/032.stderr.log": {
+        "bytes": 3211,
+        "sha256": "02ba7d34fd66e5c4b1a50c1f29e049728347f4ed6e5892367fdf4432a93db21a"
+      },
+      "conformance-001/032.stdout.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "conformance-001/calls.json": {
+        "bytes": 20599,
+        "sha256": "78199f6ad91ae7cac2ac298280a341289176699bde50ffe737103e6eb2f4527c"
+      },
+      "conformance-001/prepared-manifest.json": {
+        "bytes": 4197,
+        "sha256": "6b9e6aa8da7da8ddeefb5c033daf2684bf5329bc229e4a7595053ed491dcb008"
+      },
+      "conformance-001/result.json": {
+        "bytes": 382,
+        "sha256": "8c810c71b4f64de8c59cc9b6acea352328d1adf2e74c79cc0ca07156a282cfc9"
+      },
+      "conformance-001/rust-sdk.json": {
+        "bytes": 3949,
+        "sha256": "c5b289a2808f5156b043f9f410a196223ebc18a8e82a6c9e0188e04920706f6b"
+      },
+      "conformance-001/source.json": {
+        "bytes": 2859,
+        "sha256": "c5fedfe02091478f837f9399f2ef615a415b3199ff32bc155f5b9939acf4f18a"
+      },
+      "conformance-001/wabt.json": {
+        "bytes": 244,
+        "sha256": "eb6e2576392cc1f9eb0bc5ed8522926d0838dd1718d7e1dc3eb791648f5c5682"
+      },
+      "cpu-runtime-001/result.json": {
+        "bytes": 512,
+        "sha256": "7bff15abac9c8209e6ea8cdeff4162f0f0e303576ff23f6b631146d1feb354f7"
+      },
+      "cpu-runtime-001/source.json": {
+        "bytes": 2419,
+        "sha256": "5a1e898591e98287c1c6ad7b6cf3cc94449ffb5bd336c194747bd2993099fce2"
+      },
+      "cpu-runtime-001/stderr.log": {
+        "bytes": 2757,
+        "sha256": "b15585b27f57d3a992307183afc8234054e86d397aca826ff751b1dc560d6664"
+      },
+      "cpu-runtime-001/stdout.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "cpu-runtime-002/owned.json": {
+        "bytes": 429,
+        "sha256": "f9fb24d62064ad7668a44f958aac076db9fe54307afb5ebce89831f28670cc29"
+      },
+      "cpu-runtime-002/result.json": {
+        "bytes": 571,
+        "sha256": "4894a9c26017eca8db4885c46cc86b40fdac3c115a2c335850617b7a60e4a5fe"
+      },
+      "cpu-runtime-002/source.json": {
+        "bytes": 2747,
+        "sha256": "a09daf099bab379f516e4f5083ba4aa2e93a24da832c996dbe224a6ca2b73b03"
+      },
+      "cpu-runtime-002/stderr.log": {
+        "bytes": 2479,
+        "sha256": "bd31de262f729567a0c46e4e1549cf423e794ddf83deae656cef48d12b61a8b9"
+      },
+      "cpu-runtime-002/stdout.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "cpu-runtime-003/owned.json": {
+        "bytes": 431,
+        "sha256": "3ac160805e8940c12e87c230476ac21a567a50748831b1559d16953c2c20ead6"
+      },
+      "cpu-runtime-003/result.json": {
+        "bytes": 570,
+        "sha256": "d43b1a2b0190ca07d0c7754fe5e498fbdb2588f36614ae08e2597c189c4c8a12"
+      },
+      "cpu-runtime-003/source.json": {
+        "bytes": 2747,
+        "sha256": "3082f3b4cb4e76c192b1f7488718bbdc7864a3790fb1803edba34ca8f77a880f"
+      },
+      "cpu-runtime-003/stderr.log": {
+        "bytes": 331,
+        "sha256": "b85c1239812ae9ee4d4f19b9a2a3b2fa69cb04c5af17dae821d2a9cea9c0779c"
+      },
+      "cpu-runtime-003/stdout.log": {
+        "bytes": 600,
+        "sha256": "6d6ee48a41667108807c6c45795285fdb90e2baf921bdeb8621da1569684b8e7"
+      },
+      "docs-preparation-001/verification.json": {
+        "bytes": 11238,
+        "sha256": "85d8964d087f1f6d83aba09ea74c1dcf8c7217547fe9876624a5599967e8b712"
+      },
+      "final-checks-001.py": {
+        "bytes": 2359,
+        "sha256": "41ba67013a1be76573ff419ebc69a58731ecf85010d8c9d4f299ba69c4c70288"
+      },
+      "final-checks-001/000.stderr.log": {
+        "bytes": 1598,
+        "sha256": "efc7e633d590a8dd3df808d1dd33f708e1de7b8866d711e37281d15ea057d408"
+      },
+      "final-checks-001/000.stdout.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "final-checks-001/001.stderr.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "final-checks-001/001.stdout.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "final-checks-001/002.stderr.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "final-checks-001/002.stdout.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "final-checks-001/003.stderr.log": {
+        "bytes": 118,
+        "sha256": "599ed86466b60f43159680c333bb0d6712a71d3974b1e6629b54f0a8453d3a38"
+      },
+      "final-checks-001/003.stdout.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "final-checks-001/004.stderr.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "final-checks-001/004.stdout.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "final-checks-001/005.stderr.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "final-checks-001/005.stdout.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "final-checks-001/calls.json": {
+        "bytes": 1214,
+        "sha256": "ff8d8a5ece47d62d087696124df35bc3b5b5c8117b0700715cec433dc1935ec2"
+      },
+      "final-checks-001/result.json": {
+        "bytes": 133,
+        "sha256": "4d1be499363995c0f7bf20e1b666999fcbaa80569fe0dd6d1b51426b95440de3"
+      },
+      "root-conformance-closeout-001.json": {
+        "bytes": 856,
+        "sha256": "f731bbc19a1da7c5624d90e8053be0db3b44b021b4f92fe3e905cc8adf708e2f"
+      },
+      "root-final-closeout-001.json": {
+        "bytes": 462,
+        "sha256": "f1032c8ca7feec369903a232c4f58c97fd6e42f4bd33d31532859b09b15fffd8"
+      },
+      "run-conformance-001.py": {
+        "bytes": 7996,
+        "sha256": "c93dfc5b987b3f73218e99d95a66b88dcc7df39f4fe9f7bad5178912f65f934c"
+      },
+      "run-runtime-002.py": {
+        "bytes": 3080,
+        "sha256": "ec1bcfa7bc62f6a0dc63546e7db7287bf19a497b1fb52b41a636828806f10180"
+      },
+      "run-runtime-003.py": {
+        "bytes": 3080,
+        "sha256": "c20a97d84a28f71e44c808c1242a45a3d28ab84268fd822a69cb76e1f45934d0"
+      }
+    },
+    "record_count": 107,
+    "sha256": "586467f6baced836b92dc1bb57402ff5ee63d8eb4e162d426c0cc69dbddde537",
+    "uncompressed_bytes": 169631
+  },
+  "producer": {
+    "documentation_added_after_qualification": true,
+    "files": {
+      "crates/incant_game_player/Cargo.toml": "645b8e235cbc01aa65b6287062c5a551ba6965ea1445250ab1f09ea87a201adb",
+      "crates/incant_game_player/src/restart.rs": "522592b5e5aaa7dfe7547670933cbef8ddad73ecb1fa0b0d1dff59ee2ece4e60",
+      "crates/incant_game_runtime/src/seed.rs": "baaff3550a35f89e3348f79a821055b659ba74a92073c63897529106ed2c3820",
+      "crates/incant_script/src/program.rs": "edaf0b2a0619791522b472fb7a877c0674635b4ed1fb23cdfdde888875ccfca2",
+      "crates/incant_script/src/session.rs": "67923d680748f09b50ce70b9a548fa53d1e379dd400ed6203d9d19c6d9ecafc6",
+      "crates/incant_wasm_abi/src/lib.rs": "18696d75861b622ad8b937c2ab2a7a9859a31ed9cb7fad36da851d80bf9a5bde",
+      "crates/incant_wasm_dev/src/generated.rs": "652534cd6d2d1ea73d2a8a3c91c4a38033e3d0bcb2f64205fd131cff3780c581",
+      "crates/incant_wasm_dev/src/host.rs": "c1d54426583bbd909e50928c35edf1674ab104a9aa4841c44896035d31603aff",
+      "crates/incant_wasm_dev/tests/session_parity.rs": "707d084929703eee56eea2e63d08fbec3288cfc5a1cb6ce1fae14ee0c66aedc7",
+      "crates/incant_wasm_dev/tests/session_requests.rs": "2394282b3a209363d886bc41cbe00e6ec3fae18ad3aa2bbc7c2aa01c4d0d055a",
+      "crates/incant_wasm_runtime/c/generated.h": "e0165adf0b3500cc8c1362356edac560b3c0ce31ac8a56990add4372640b8293",
+      "crates/incant_wasm_runtime/c/generated.inc": "dfd4e4a89c39685fa2ceb9733b4ca89a28b3f856bcc7fca320bede959c44fdb3",
+      "crates/incant_wasm_runtime/src/capability.rs": "2a65da9d51e1110fee8f51410c325bdddf5c44ae085ebe7ec10ccf9933f534c7",
+      "crates/incant_wasm_runtime/src/compiled.rs": "679f09260c88cd03eba12b1f97ad5925b02221bfbcc014fe9b899fa5439f808c",
+      "crates/incant_wasm_runtime/src/generated.rs": "82d98dcfdb02bf3d17472caa923ebf09a647c6756546475ff8e74d57dfca297d",
+      "crates/incant_wasm_runtime/src/input_tags.rs": "cef977cb7f1ba6a3885cf9a5cc91cd65884c68b55dc55f6c95321d9ac87aebf8",
+      "crates/incant_wasm_runtime/tests/session_requests.rs": "47d3ebf3868ebb8ad6bdf093090fb6f32287ae584346d61883a5937317c4f326",
+      "sdk/abi/native-v1.json": "0326deb18341102f253a7ba8e3e0c1fa2ab3ab74c51510fbc773dbd63e6cfaf9",
+      "sdk/rust/samples/session_restart.rs": "9ac2db8148cd0bcfa22a669d3f75f4f360dd9860a6ea335306419af76380dd9a",
+      "sdk/rust/src/raw.rs": "b3bb8c8c369056ade58b5d15b53e843a1bbce9279a7f0f874adba7de1e5b048f",
+      "sdk/rust/src/tick.rs": "24e84b5e289c8e36df1e0be437311c15cd7c075a907b56a3d13397e440671aba",
+      "sdk/ts/src/native.d.ts": "d05df4d01ae48690e1ba0e7b613b771357e8083d8e39b72fd8005b40ba1b50ec",
+      "tools/probes/shipping-wasm2c.py": "ac9f35a27e685a902e75088c7168c3d056ef196100baec8577c2e904570bc098",
+      "tools/tests/test_wasm_sdk.py": "3da2610b4d230c52910e6ff0e75689e9aaabb72c281411f03071818ccb19e968",
+      "tools/wasm_abi.py": "2f1457a14a8c6774a363312e6dd674c0a9cd83905d0b88f6935d0ed9e734c105"
+    },
+    "final_checks_source_binding": "Final-checks runner has no automatic full source freeze; all 25 current code files match the conformance snapshot after final checks.",
+    "head": "8e2c0a76373cdae87f2aa49912d94b6ec0b26efa",
+    "head_tree": "e8cd4d08f2752bb72198ec55ab744c2f6b70715a",
+    "modified_or_untracked_code_file_count": 25,
+    "runtime003_scope_reuse": {
+      "later_paths": [
+        "crates/incant_game_player/Cargo.toml",
+        "crates/incant_game_player/src/restart.rs",
+        "crates/incant_wasm_dev/tests/session_parity.rs",
+        "tools/probes/shipping-wasm2c.py"
+      ],
+      "unchanged_capability_and_runtime_tests": true
+    },
+    "source_record": "conformance-001/source.json",
+    "source_record_sha256": "c5fedfe02091478f837f9399f2ef615a415b3199ff32bc155f5b9939acf4f18a"
+  },
+  "qualification": {
+    "actual_native_tests_passed": 29,
+    "conformance_processes": 33,
+    "final_check_processes": 6,
+    "host_target": "aarch64-apple-darwin",
+    "other_checks": [
+      "cargo fmt --all -- --check",
+      "generated Wasm SDK exact check",
+      "generated conventions exact check",
+      "git diff --check"
+    ],
+    "profile": "ci",
+    "python_sdk_tests_passed": 19,
+    "root_conformance_wrapper_session": 47455,
+    "root_final_wrapper_session": 62724,
+    "root_independently_observed_owned_pid_and_group_absence": true,
+    "root_wrapper_terminal_exits": [
+      0,
+      0
+    ],
+    "rustc": "1.99.0 (b940084d7eb6a299eb4bfeb8e34901bc051e7ac4)",
+    "strict_lint_stages": 3,
+    "test_groups": [
+      {
+        "passed": 6,
+        "stage": "cpu-runtime-003",
+        "target": "incant_wasm_runtime/session_requests"
+      },
+      {
+        "passed": 5,
+        "stage": "conformance-001/028",
+        "target": "incant_wasm_dev/session_parity"
+      },
+      {
+        "passed": 3,
+        "stage": "conformance-001/028",
+        "target": "incant_wasm_dev/session_requests"
+      },
+      {
+        "existing_bytecode_owner_tests": 1,
+        "new_static_owner_tests": 1,
+        "passed": 2,
+        "stage": "conformance-001/029",
+        "target": "incant_game_player/restart::tests"
+      },
+      {
+        "passed": 12,
+        "stage": "conformance-001/030",
+        "target": "incant_game_runtime/hosting"
+      },
+      {
+        "passed": 1,
+        "stage": "conformance-001/030",
+        "target": "incant_game_runtime/restart"
+      }
+    ],
+    "wabt": {
+      "archive_sha256": "3f654779b436c628db3ca4323c51538815f5fbc887a6d5f3bb1c18d36281e240",
+      "download_attempts": 1,
+      "release": "1.0.42",
+      "url": "https://github.com/WebAssembly/wabt/releases/download/1.0.42/wabt-1.0.42-macos-arm64.tar.gz"
+    },
+    "wasm_guest_target": "wasm32-unknown-unknown"
+  },
+  "resource_observations": {
+    "conformance": {
+      "calls": 33,
+      "error": null,
+      "passed": true,
+      "retained_inputs": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-restart-001/conformance-001/inputs",
+      "sampled_target_peak_bytes": 63767162880,
+      "seconds": 248.49419441702776,
+      "shipping_profile": false,
+      "source_unchanged": true,
+      "target_baseline_bytes": 63066902528,
+      "target_growth_cap_bytes": 8589934592
+    },
+    "conformance_child_deadline_seconds": 600,
+    "conformance_deadline_seconds": 1500,
+    "conformance_evidence_input_cap_bytes": 2147483648,
+    "conformance_free_floor_bytes": 6442450944,
+    "final_checks": {
+      "error": null,
+      "passed": true,
+      "seconds": 8.399128082965035,
+      "target_after": 63801221120,
+      "target_before": 63799058432
+    },
+    "historical_target_reuse": true,
+    "jobs": 2,
+    "limits": "Sampled disk/log guards and managed process cleanup, not kernel-hard isolation or an RSS bound. Earlier failed attempts remain recorded; no target reset is claimed.",
+    "rayon_threads": 2,
+    "runtime_attempt_seconds": {
+      "cpu-runtime-001": 61.96623416701914,
+      "cpu-runtime-002": 15.783940374996746,
+      "cpu-runtime-003": 1.6601142089930363
+    },
+    "runtime_target": "/Users/andreyyurlov/.codex/incant-core-tick-diagnostic-target",
+    "runtime_target_ceiling_bytes": 18463185849
+  },
+  "retained_external_root": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-restart-001",
+  "retained_failures": [
+    {
+      "diagnostic": "E0308: RequestRestart match arm needed explicit return Ok(0).",
+      "exit": 101,
+      "result": {
+        "bytes": 512,
+        "sha256": "7bff15abac9c8209e6ea8cdeff4162f0f0e303576ff23f6b631146d1feb354f7"
+      },
+      "stage": "cpu-runtime-001",
+      "stderr": {
+        "bytes": 2757,
+        "sha256": "b15585b27f57d3a992307183afc8234054e86d397aca826ff751b1dc560d6664"
+      },
+      "tests_executed": false
+    },
+    {
+      "diagnostic": "E0507: fixture moved velocity from an indexed snapshot; corrected with as_ref().",
+      "exit": 101,
+      "result": {
+        "bytes": 571,
+        "sha256": "4894a9c26017eca8db4885c46cc86b40fdac3c115a2c335850617b7a60e4a5fe"
+      },
+      "stage": "cpu-runtime-002",
+      "stderr": {
+        "bytes": 2479,
+        "sha256": "bd31de262f729567a0c46e4e1549cf423e794ddf83deae656cef48d12b61a8b9"
+      },
+      "tests_executed": false
+    }
+  ],
+  "scope": "Opt-in deferred restart and cold reconstruction for build-linked wasm2c and development Wasmtime; scoped local CPU qualification."
+}

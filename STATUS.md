@@ -4,8 +4,13 @@ The current phase remains **Phase 1: Core engine**. The
 [Phase 1 review ledger](docs/gates/phase1-review.md) maps each exit requirement to
 its recorded evidence and remaining qualification. The actual native texture,
 compatible static-model and compatible-animation workflows are verified on this Mac;
-[release checkpoint47](docs/spikes/release-checkpoint-47.md) contains the tested
-main359 tree after all 23 required contexts and eight candidate workflows passed.
+the [sampled Core locale proof](docs/spikes/core-locale-sampled-captures.md)
+now also verifies winning HUD pixels, Arabic health direction, CJK glyphs and
+normal/narrow pseudo layouts in retained offscreen Metal frames. Earlier
+incomplete native-window attempts remain historical; these samples do not
+establish continuous motion, window presentation or FPS.
+[release checkpoint48](docs/spikes/release-checkpoint-48.md) contains the tested
+main367 tree after all 23 required contexts and eight candidate workflows passed.
 Later main changes remain outside that release baseline. Rendering quality and full rendered-game
 performance remain open. The reported jagged editor cube now has explicit 4x
 geometry antialiasing, verified in the actual Mac editor and isolated Metal
@@ -22,8 +27,8 @@ starters in the existing one-shot Windows diagnostic. Its exact main355 run now
 passes all six controls, with five successful cooks taking 1.737–2.043 seconds
 and one expected refusal. The timeout did not reproduce; no repair is established.
 The retained checkpoint46 failure was not promoted. Checkpoint47 subsequently
-passed the complete suite on main359 and is now the release baseline; the original
-timeout cause remains unestablished. No release requirement was bypassed.
+passed the complete suite on main359; checkpoint48 now advances the release
+baseline. The original timeout cause remains unestablished. No release requirement was bypassed.
 
 Checkpoint45 is promoted after every required context and all eight frozen-head
 workflows succeeded. The verified release tree equals main346. Checkpoints41–44
@@ -43,6 +48,43 @@ passes local tests and leaves production behavior unchanged. Both desktop jobs
 and Windows Wasm conformance passed on checkpoint44; that checkpoint's separate
 general failure prevented promotion.
 
+## Sampled Core locale pixels — verified on this Mac
+
+Four fresh scene-bound shipping players from source `50b5408b` passed five full
+CPU routes and then the same five routes with 37 selected Metal frames. Entire
+gameplay/HUD reports and PCM remain exact to their same-package CPU baselines,
+including loss, restart and the final winning state. The narrow pseudo case
+uses the same pseudo player at a separate 320×480 logical viewport.
+
+Independent review of 13 retained original PNGs accepts readable Core winning
+text, joined Arabic with right-to-left damaged health pips, complete CJK glyphs,
+expanded pseudo text and narrow loss/win wrapping without observed clipping or
+HUD overlap. These samples close the previously missing winning/narrow pixel
+observations; they do not relabel earlier focus-paused or locked-window runs as
+complete. All five children and the wrapper are reaped. Native presentation,
+continuous motion, temporal reconstruction, translation quality, FPS and phase
+approval remain outside this result.
+[Images, exact sources and portable replay](docs/spikes/core-locale-sampled-captures.md).
+
+## Native Wasm restart — actual native hosts and player owner qualified
+
+Native Wasm restart requests now have an opt-in owner through build-linked wasm2c and development Wasmtime, retaining transaction/quota semantics and pending requests until consumption. Actual Rust guests prove fresh VM/world/input/output-clock reconstruction, terminal consumer refusal with audible PCM rollback, and the plain player restart owner. Scoped local `ci` qualification passed 29 native tests, three strict lints, 19 Python SDK controls and generated-contract checks; two earlier compile failures are retained. [Report](docs/spikes/native-wasm-restart.md). This does not establish a shipping player export, native window/device result, full SDK parity, performance or phase gate.
+
+
+## Native explicit-state coroutines — CPU behavior and save/restore qualified
+
+Native TypeScript behaviors can now start deterministic cooperative tasks, wait
+for accepted ticks and restore active continuations from typed checkpoint data.
+This is an explicit-state API, not JavaScript generator/async syntax. Fresh tick
+capabilities, transactional failure, bounded scheduling and immediate-save owner
+retirement pass 201 actual native library/project/cook controls and three strict
+lints. The two new schemas match an executed Rust producer exactly; all 78 older
+registry files remain unchanged. Portable SDK and registry checks also pass.
+Earlier compile failures and all resource charges remain retained. Shipping-player
+export, timing/2 ms budget, Web/Wasm parity and phase gates are not established by
+this result. [Contract and evidence](docs/spikes/native-coroutines.md).
+
+
 ## Packaged-player frame capture — integrated CPU and Metal qualification
 
 The source-free CPU spatial player can now save selected accepted gameplay
@@ -57,11 +99,12 @@ configurations, native-window compilation and the same-source Metal rendering
 control. Earlier results and the original fixture failure remain retained.
 The later main365 join changes only DX12 diagnostic tests/tools and documentation;
 capture/player/render implementation bytes remain identical to the qualified
-composition. Core and locale image collection is next. This does not establish
+composition. [Core and locale sampled image collection](docs/spikes/core-locale-sampled-captures.md)
+now passes with exact full-route CPU parity and independent retained-image review. This does not establish
 native presentation, temporal reconstruction quality or performance.
 [Usage and evidence](docs/spikes/native-player-frame-capture.md).
 
-## Opt-in DX12 pipeline libraries — local controls, native diagnostic pending
+## Opt-in DX12 pipeline libraries — native software-adapter diagnostic passed
 
 A default-off native DX12 pipeline library now has conservative source/driver
 identity, bounded private Windows storage, exact descriptor keys and COM-owned
@@ -72,9 +115,14 @@ compilation when the resource observer encountered a retired temporary directory
 the observer repair passes ten portable controls. The next hosted run passes
 40 actual Windows CPU controls and four strict lints, then reaches native startup
 and exposes an invalid zero-hit seed assertion: identical material PSOs can be
-reused within the initial session. Its correction passes eleven portable controls;
-complete native reuse/lifetime/pixel qualification is still pending. Both failed
-attempts remain retained. Existing release checks are unchanged. This does not close the
+reused within the initial session. Its correction passes eleven portable controls.
+The third hosted run now passes all 40 CPU controls, four strict MSVC lints and
+16 native stages on Microsoft Basic Render Driver, a software DX12 adapter.
+Fresh processes verify actual stream/classic/compute library hits, COM lifetime,
+explicit refusal controls and exact equality of all 14 ordinary/cooked RGBA
+buffers. All owned children confirmed cleanup. Both failed attempts remain
+retained. This establishes scoped native correctness, not physical-GPU performance.
+Existing release checks are unchanged. This does not close the
 shader-stall gate or claim that HLSL compilation is avoided.
 [Scope and evidence](docs/spikes/dx12-pipeline-library.md).
 
@@ -671,14 +719,23 @@ The existing plan gate stays unmet; this is not evidence that sub-2 ms is
 impossible or that the full rendered game misses its frame budget.
 [Outcome and replay](docs/spikes/navigation-search-cache-outcome.md).
 
-Last reassessment: 2026-10-14, actual full-Core attribution measured repeated
-nearest-surface scans between accepted navigation shortcut segments. Removing
-their entire measured cost hypothetically still leaves a 2.544041 ms p95, so
-this hypothesis is closed without changing navigation. The diagnostic and exact
-gameplay/PCM parity are recorded above. Revisit after relevant engine changes or every few hours of
-active development, with a distinct hypothesis and stop condition. Preserve
-matched shipping inputs, work limits, rollback and gameplay/audio parity. Other
-implementation lanes continue throughout.
+Last reassessment: 2026-10-15, retained-data and source review. The later
+[full-Core budget-check attribution](docs/spikes/script-budget-check-attribution.md)
+measures only 4.34 microseconds per frame around the unchanged enforcement checks
+(8.40 microseconds on the same whole-tick tail frames), closing that specific
+hypothesis without weakening enforcement. The earlier navigation-start result
+and unadopted graph cache remain negative results. A retained historical
+full-navigation subtraction still leaves a hypothetical 2.171792 ms p95, so an
+endpoint-only cache is deprioritized. The [retained-data calculation](docs/spikes/evidence/script-budget-reassessment-2026-10-15.json)
+binds its original raw record and uses same-frame subtraction before ranking;
+it is not a current shipping benchmark or proof that sub-2 ms is impossible.
+
+Next useful trigger: a bounded review of non-navigation callback/typed-array
+work or a relevant runtime change, when an investigation lane becomes available.
+Require a distinct source-grounded hypothesis and stop condition before another
+native measurement. Any candidate needs matched shipping-profile runs and exact
+gameplay/audio parity; no unchanged experiment is scheduled. Reassess every few
+hours of active development while other implementation lanes continue.
 
 ## Native Play texture refresh — merged through PR284
 

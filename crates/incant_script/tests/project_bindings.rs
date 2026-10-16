@@ -456,3 +456,122 @@ fn later_source_failure_hides_restart_from_an_earlier_group() {
         Err(ScriptError::FailedSession)
     ));
 }
+
+#[test]
+fn coroutine_source_names_owner_retirement_and_checkpoint_pruning_are_native() {
+    let scene = scene();
+    let code = CompiledScript::compile_project("coroutine-scopes", &format!(r#"
+        const make=(increment)=>({{persistence:{{version:1}},coroutines:{{step:{{resume(t,task){{
+            t.log(task.id+':'+increment+':'+t.clock.tick);
+            for(const chunk of t.chunks)for(let row=0;row<chunk.ids.length;row++)if(chunk.ids[row]===task.entity)chunk.transforms[row*10]+=increment;
+            return {{kind:'wait',delayTicks:1,state:task.state}};
+        }}}}}},update(t){{
+            if(t.clock.tick===1)t.coroutines.start('same','step',null,t.instances[0].entity);
+            if(increment===1&&t.clock.tick===2)t.commands.despawn(t.instances[0].entity);
+        }}}});
+        exports.default={{sources:[{{id:{:?},behavior:make(1)}},{{id:{:?},behavior:make(10)}}]}};
+    "#, text(101),text(102)), bindings(&scene)).unwrap();
+    let mut baseline = NativeSession::new(scene.clone(), code.clone(), Default::default()).unwrap();
+    baseline.tick(&[]).unwrap();
+    baseline.tick(&[]).unwrap();
+    let saved = baseline.checkpoint_bytes().unwrap();
+    let mut restored =
+        NativeSession::from_checkpoint_bytes(&saved, &scene, code, Default::default()).unwrap();
+    for _ in 0..2 {
+        baseline.tick(&[]).unwrap();
+        restored.tick(&[]).unwrap();
+    }
+    assert_eq!(
+        baseline.world().unwrap().snapshot(),
+        restored.world().unwrap().snapshot()
+    );
+    assert!(baseline.world().unwrap().inspect(id(1)).is_none());
+    assert_eq!(
+        baseline
+            .world()
+            .unwrap()
+            .inspect(id(3))
+            .unwrap()
+            .transform
+            .translation[0],
+        30.
+    );
+    assert_eq!(
+        baseline
+            .logs()
+            .unwrap()
+            .entries()
+            .iter()
+            .map(|x| x.message.as_str())
+            .collect::<Vec<_>>(),
+        ["same:1:2", "same:10:2", "same:10:3", "same:10:4"]
+    );
+    assert_eq!(
+        &baseline.logs().unwrap().entries()[2..],
+        restored.logs().unwrap().entries()
+    );
+}
+
+#[test]
+fn coroutine_immediate_save_after_last_attachment_deletion_never_restores_a_task() {
+    for delete_in_resume in [false, true] {
+        for owned in [false, true] {
+            let scene = CookedScene::new(id(99), 60, vec![entity(1)]).unwrap();
+            let bindings = ScriptBindings::new(
+                Sha256::digest(scene.to_bytes()).into(),
+                vec![id(101)],
+                vec![ScriptInstance {
+                    entity: id(1),
+                    source: id(101),
+                    props: BTreeMap::new(),
+                }],
+            )
+            .unwrap();
+            let mut source = r#"
+                exports.default={sources:[{id:SOURCE,behavior:{persistence:{version:1},
+                    coroutines:{step:{resume(t,task){
+                        t.log('resume:'+t.clock.tick);
+                        if(RESUME)t.commands.despawn(t.instances[0].entity);
+                        return {kind:'wait',delayTicks:1,state:task.state};
+                    }}},update(t){
+                        if(t.clock.tick===1)t.coroutines.start('task','step',null,OWNER);
+                        if(t.clock.tick===2&&!RESUME)t.commands.despawn(t.instances[0].entity);
+                    }
+                }}]};
+            "#
+            .replace("SOURCE", &format!("{:?}", text(101)))
+            .replace("RESUME", if delete_in_resume { "true" } else { "false" });
+            source = source.replace(
+                "OWNER",
+                if owned {
+                    "t.instances[0].entity"
+                } else {
+                    "undefined"
+                },
+            );
+            let code =
+                CompiledScript::compile_project("retired-coroutine", &source, bindings).unwrap();
+            let mut baseline =
+                NativeSession::new(scene.clone(), code.clone(), Default::default()).unwrap();
+            baseline.tick(&[]).unwrap();
+            baseline.tick(&[]).unwrap();
+            assert!(baseline.world().unwrap().inspect(id(1)).is_none());
+            let saved = baseline.checkpoint_bytes().unwrap();
+            let mut restored =
+                NativeSession::from_checkpoint_bytes(&saved, &scene, code, Default::default())
+                    .unwrap();
+            assert_eq!(restored.checkpoint_bytes().unwrap(), saved);
+            for _ in 0..3 {
+                baseline.tick(&[]).unwrap();
+                restored.tick(&[]).unwrap();
+                assert_eq!(
+                    baseline.checkpoint_bytes().unwrap(),
+                    restored.checkpoint_bytes().unwrap()
+                );
+            }
+            assert_eq!(baseline.logs().unwrap().entries().len(), 1);
+            assert_eq!(baseline.logs().unwrap().entries()[0].message, "resume:2");
+            assert!(restored.logs().unwrap().entries().is_empty());
+        }
+    }
+}

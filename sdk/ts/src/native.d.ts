@@ -1,5 +1,5 @@
 /** Native QuickJS migration API. Separate from the document-backed ScriptApi. */
-import type { LocaleSettings, LocalizeRequest, LocalizedText, CalendarDate, DateLength, LocalizationReportRequest, LocalizationReport, InputFrame, ScriptClock, TimerEvent, PhysicsRayQuery, PhysicsRayHit, PhysicsCharacterQuery, PhysicsCharacterMovement, PhysicsTriggerEvent, PhysicsRayQuery2D, PhysicsRayHit2D, PhysicsTriggerEvent2D, NavigationQuery, NavigationPath, GridNavigationQuery, GridPath, SteeringAgent, SteeringObstacle, SteeringQuery, SteeringVelocity } from './generated';
+import type { CoroutineResult, LocaleSettings, LocalizeRequest, LocalizedText, CalendarDate, DateLength, LocalizationReportRequest, LocalizationReport, InputFrame, ScriptClock, TimerEvent, PhysicsRayQuery, PhysicsRayHit, PhysicsCharacterQuery, PhysicsCharacterMovement, PhysicsTriggerEvent, PhysicsRayQuery2D, PhysicsRayHit2D, PhysicsTriggerEvent2D, NavigationQuery, NavigationPath, GridNavigationQuery, GridPath, SteeringAgent, SteeringObstacle, SteeringQuery, SteeringVelocity } from './generated';
 /** VM-owned bounded copy; no native pointers/handles or JSON conversion.
  * Retention cannot hold an ECS loan or alter the next input frame. */
 type InputReadonly<T> = T extends object ? { readonly [K in keyof T]: InputReadonly<T[K]> } : T;
@@ -77,7 +77,8 @@ export interface NativeCommands {
    * Requires an explicitly restart-capable native host; unsupported hosts refuse
    * and poison the active tick. No arguments, coalesced within the shared command
    * quota. Publication waits for all source callbacks, world, audio and consumer
-   * acceptance. Does not reset this callback's state. Wasm parity is pending. */
+   * acceptance. Does not reset this callback's state. Build-linked and development
+   * Wasm expose the same request through the Rust SDK. */
   requestRestart(): void;
 
   /** Ordered existing-widget controls. Preserve role, fonts, layout and hierarchy.
@@ -415,6 +416,9 @@ export interface NativeHud {
   readonly texts: readonly { readonly id: NativeId; readonly text: string }[];
 }
 export interface NativeContext {
+  /** Available when the program declares a coroutine catalog. Functions expire
+   * with this source tick; waits count accepted updates, not wall-clock time. */
+  readonly coroutines?: NativeCoroutines;
   readonly hud: NativeHud;
   /** Authored attachments for this source, sorted by stable entity ID. The array
    * and initial props are deeply frozen. One callback per nonempty source runs
@@ -451,7 +455,41 @@ export interface NativeContext {
    * Logs publish after successful commit; failed sessions hide all outputs. */
   readonly log: (message: string, level?: NativeLogLevel) => void;
 }
+/** Owned, deeply frozen explicit continuation. Never a VM/closure snapshot. */
+export interface NativeCoroutineTask {
+  readonly id: string;
+  readonly state: NativePersistentValue;
+  readonly entity?: NativeId;
+}
+export type NativeCoroutineResult = Readonly<Extract<CoroutineResult, { kind: "done" }>> |
+  Readonly<Omit<Extract<CoroutineResult, { kind: "wait" }>, "state"> & { state: NativePersistentValue }>;
+/** Resume callbacks always run with a captured coroutine catalog. */
+export interface NativeCoroutineContext extends NativeContext {
+  readonly coroutines: NativeCoroutines;
+}
+export interface NativeCoroutine {
+  /** Current accepted tick capabilities; return a finite data continuation.
+   * No generator/async syntax. All state needed after load belongs in task.state,
+   * context.state or the native world, never module globals/closures. */
+  resume(context: NativeCoroutineContext, task: NativeCoroutineTask): NativeCoroutineResult;
+}
+export interface NativeCoroutines {
+  /** Starts on the next accepted update. Names/IDs: 1–64 ASCII letters/digits/_.:-.
+   * Existing task IDs refuse; cancel then start replaces. Optional entity must
+   * be this source's live authored instance; retirement cancels owned tasks.
+   * <=128 tasks, <=256 start/cancel calls per whole update. State <=16KiB/1024
+   * nodes per task, <=256KiB/16384 retained nodes, depth <=16. Whole-tick state
+   * transfer <=1MiB/65536 nodes. Invalid/caught calls fail the transaction. */
+  start(id: string, routine: string, state: NativePersistentValue, entity?: NativeId): void;
+  /** Absent IDs are allowed and charged. Cancellation/replacement by a running
+   * task wins over its return. No cancelled continuation is run for cleanup. */
+  cancel(id: string): void;
+}
 export interface NativeBehavior {
+  /** Captured once. <=32 named routines per source and <=128 per program.
+   * Due tasks resume after this source update in task-ID order, at most once
+   * per accepted update. Their typed continuations participate in checkpoints. */
+  readonly coroutines?: Readonly<Record<string, NativeCoroutine>>;
   /** Explicit ordinary game-load contract, NOT a VM/closure continuation.
    * Module initialization runs again on load. Module globals and closures are
    * ephemeral: all gameplay state needed after load must be in context.state or

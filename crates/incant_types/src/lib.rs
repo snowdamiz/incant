@@ -15,6 +15,8 @@ pub use animation_tree::*;
 mod audio;
 mod camera;
 mod collider_shapes;
+mod coroutines;
+pub use coroutines::{CoroutineResult, CoroutineValue};
 mod lights;
 mod physics;
 mod physics_mode;
