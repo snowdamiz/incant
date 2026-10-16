@@ -1,5 +1,12 @@
 # Implementation status
 
+Checkpoint49 is held after the normal headless binary failed to compile on
+Mac, Linux and Windows: the new coroutine schema registrations referenced a
+test-only dependency. Moving that existing dependency to normal scope passes
+the actual local binary build, all 80 published-schema comparisons and strict
+headless lint. The full release suite must still pass on a corrected frozen
+candidate. [Cause and local verification](docs/spikes/headless-schema-dependency.md).
+
 The current phase remains **Phase 1: Core engine**. The
 [Phase 1 review ledger](docs/gates/phase1-review.md) maps each exit requirement to
 its recorded evidence and remaining qualification. The actual native texture,
