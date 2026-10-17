@@ -4,6 +4,8 @@
 //! Encoding is serial on one command encoder. The caller owns queue submission.
 #[cfg(feature = "native-metalfx")]
 mod native;
+#[cfg(feature = "experimental-taau")]
+mod upscale;
 use crate::{
     ResourceError, Result, diagnostic_draw::DiagnosticDraw, models::ModelDraw, output::OutputDraw,
 };

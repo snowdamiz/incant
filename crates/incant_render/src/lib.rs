@@ -76,6 +76,8 @@ pub mod temporal;
 #[cfg(test)]
 mod temporal_parity;
 mod temporal_shader;
+#[cfg(feature = "experimental-taau")]
+pub mod temporal_upscale;
 #[cfg(test)]
 #[path = "../tests/support/mod.rs"]
 mod test_support;
@@ -151,6 +153,8 @@ pub struct Renderer {
     graph: graph::FrameGraph,
     motion: Option<motion::MotionSystem>,
     temporal: Option<temporal::TemporalSystem>,
+    #[cfg(feature = "experimental-taau")]
+    temporal_upscale: Option<temporal_upscale::System>,
     #[cfg(feature = "native-metalfx")]
     metalfx: Option<metalfx::System>,
     #[cfg(feature = "native-metalfx")]
@@ -367,6 +371,8 @@ impl Renderer {
             graph,
             motion: None,
             temporal: None,
+            #[cfg(feature = "experimental-taau")]
+            temporal_upscale: None,
             #[cfg(feature = "native-metalfx")]
             metalfx: None,
             #[cfg(feature = "native-metalfx")]

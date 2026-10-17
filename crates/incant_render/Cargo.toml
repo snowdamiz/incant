@@ -9,6 +9,8 @@ publish.workspace = true
 # Trusted diagnostic only; native creation observation never enters default builds.
 native-compilation = ["dep:wgpu-hal", "wgpu-hal/diagnostic-compilation"]
 # Explicit Mac vendor path; default and cooked graph remain unchanged.
+# Experimental GPU-only opaque color reconstruction, explicit startup opt-in.
+experimental-taau = []
 native-metalfx = ["dep:objc2", "dep:objc2-metal", "dep:objc2-metal-fx"]
 # Complete fixed motion/temporal route; no mixed native builtin fallback.
 cooked-temporal = ["cooked-materials", "cooked-sprites", "cooked-ui", "cooked-text", "cooked-clusters"]

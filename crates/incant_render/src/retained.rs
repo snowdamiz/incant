@@ -33,6 +33,8 @@ pub struct RetainedScene {
     owner: Arc<()>,
     motion: Option<super::motion::MotionState>,
     temporal: Option<crate::temporal::TemporalState>,
+    #[cfg(feature = "experimental-taau")]
+    temporal_upscale: Option<crate::temporal_upscale::State>,
     #[cfg(feature = "native-metalfx")]
     metalfx: Option<crate::metalfx::Owner>,
     resolution: Option<crate::resolution::ResolutionOwner>,
@@ -96,6 +98,8 @@ impl Renderer {
             owner: Arc::clone(&self.identity),
             motion: None,
             temporal: None,
+            #[cfg(feature = "experimental-taau")]
+            temporal_upscale: None,
             #[cfg(feature = "native-metalfx")]
             metalfx: None,
             resolution: None,
@@ -221,6 +225,10 @@ impl RetainedScene {
         )?;
         self.motion = Some(candidate);
         self.temporal = None;
+        #[cfg(feature = "experimental-taau")]
+        {
+            self.temporal_upscale = None;
+        }
         #[cfg(feature = "native-metalfx")]
         {
             self.metalfx = None;
@@ -230,6 +238,10 @@ impl RetainedScene {
     pub fn disable_motion_history(&mut self) {
         self.motion = None;
         self.temporal = None;
+        #[cfg(feature = "experimental-taau")]
+        {
+            self.temporal_upscale = None;
+        }
         #[cfg(feature = "native-metalfx")]
         {
             self.metalfx = None;
@@ -265,6 +277,36 @@ impl RetainedScene {
         }
         self.enable_motion_history(renderer)?;
         self.temporal = Some(temporal);
+        Ok(())
+    }
+    /// Startup-only experimental reconstruction. Extent allocation is separate
+    /// and explicit; no authored selection or cooked fallback is introduced.
+    #[cfg(feature = "experimental-taau")]
+    pub fn enable_temporal_upscale(&mut self, renderer: &Renderer) -> Result<()> {
+        if renderer.temporal_upscale.is_none() {
+            return Err(crate::temporal::TemporalError::Disabled.into());
+        }
+        if self.motion_owner_attachment_enabled() {
+            return Err(crate::motion::MotionError::OwnerCombination.into());
+        }
+        self.enable_motion_history(renderer)?;
+        self.temporal_upscale = Some(crate::temporal_upscale::State::new());
+        Ok(())
+    }
+    #[cfg(feature = "experimental-taau")]
+    pub fn prepare_temporal_upscale_extent(
+        &mut self,
+        renderer: &Renderer,
+        size: [u32; 2],
+    ) -> Result<()> {
+        if !Arc::ptr_eq(&self.owner, &renderer.identity) {
+            return Err(crate::motion::MotionError::Owner.into());
+        }
+        self.temporal_upscale
+            .as_mut()
+            .ok_or(crate::temporal::TemporalError::Disabled)?
+            .prepare_extent(&renderer.device, size)?;
+        self.invalidate_motion_history();
         Ok(())
     }
     pub fn temporal_frame(&self) -> Option<crate::temporal::TemporalFrame> {
@@ -493,6 +535,14 @@ impl RetainedScene {
             self.staging.camera.pixel_resolution,
             scale,
         )?;
+        #[cfg(feature = "experimental-taau")]
+        let upscale_active = self.temporal_upscale.is_some();
+        #[cfg(not(feature = "experimental-taau"))]
+        let upscale_active = false;
+        #[cfg(feature = "experimental-taau")]
+        if upscale_active {
+            crate::temporal_upscale::render::admission(renderer, &self.staging, &plan, &target)?;
+        }
         #[cfg(feature = "native-metalfx")]
         let mut native_pending = self
             .metalfx
@@ -546,7 +596,7 @@ impl RetainedScene {
                     crate::motion::MotionView {
                         output: [target.width, target.height],
                         plan: &plan,
-                        temporal: self.temporal.is_some() || native_active,
+                        temporal: self.temporal.is_some() || native_active || upscale_active,
                         lighting_changed,
                     },
                 )
@@ -566,10 +616,43 @@ impl RetainedScene {
                 temporal.prepare(&renderer.device, pending.temporal_input(plan.rect))
             })
             .transpose()?;
+        #[cfg(feature = "experimental-taau")]
+        let upscale_pending = self
+            .temporal_upscale
+            .as_ref()
+            .map(|state| {
+                state.prepare(
+                    motion_pending
+                        .as_ref()
+                        .ok_or(crate::temporal::TemporalError::History)?
+                        .temporal_input(plan.rect),
+                    [target.width, target.height],
+                )
+            })
+            .transpose()?;
         if let Some(phase) = motion_pending.as_ref().and_then(|p| p.jitter_phase()) {
             self.staging.camera.jitter = crate::temporal::jitter::ndc(phase, plan.rect);
             self.staging.camera.jitter_guard = crate::temporal::jitter::guard(plan.rect);
         }
+        let draw_portable = |target, motion_draw: Option<crate::motion::MotionDraw>| {
+            #[cfg(feature = "experimental-taau")]
+            if let Some(pending) = &upscale_pending {
+                return renderer.draw_scene_upscale(
+                    &self.staging,
+                    target,
+                    &plan,
+                    motion_draw.ok_or(crate::temporal::TemporalError::History)?,
+                    pending,
+                );
+            }
+            renderer.draw_scene_scaled(
+                &self.staging,
+                target,
+                scale,
+                motion_draw,
+                temporal_pending.as_ref(),
+            )
+        };
         #[cfg(feature = "native-metalfx")]
         let commands = if let Some(pending) = native_pending.as_mut().filter(|p| p.native()) {
             let owner = self
@@ -591,22 +674,10 @@ impl RetainedScene {
                 pending,
             )?
         } else {
-            crate::graph::Commands::Single(renderer.draw_scene_scaled(
-                &self.staging,
-                target,
-                scale,
-                motion_draw,
-                temporal_pending.as_ref(),
-            )?)
+            crate::graph::Commands::Single(draw_portable(target, motion_draw)?)
         };
         #[cfg(not(feature = "native-metalfx"))]
-        let commands = renderer.draw_scene_scaled(
-            &self.staging,
-            target,
-            scale,
-            motion_draw,
-            temporal_pending.as_ref(),
-        )?;
+        let commands = draw_portable(target, motion_draw)?;
         for batch in &self.staging.batches {
             if !batch.updates.is_empty() {
                 renderer.queue.write_buffer(
@@ -646,6 +717,10 @@ impl RetainedScene {
         }
         if let (Some(temporal), Some(pending)) = (&mut self.temporal, temporal_pending) {
             temporal.accept(pending);
+        }
+        #[cfg(feature = "experimental-taau")]
+        if let (Some(state), Some(pending)) = (&mut self.temporal_upscale, upscale_pending) {
+            state.accept(pending);
         }
         if let (Some(owner), Some(frame)) = (&mut self.resolution, resolution) {
             owner.accept(frame);

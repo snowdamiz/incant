@@ -1,11 +1,11 @@
 //! Actual material image/motion observations, never a numerical quality gate.
 //! Explicitly outside the ordinary/default test and shipping execution routes.
-mod capture;
+pub(crate) mod capture;
 mod geometry;
 #[path = "../../tests/materials/mod.rs"]
 #[allow(dead_code)] // Reuse the existing whole fixture; its other public helpers are unrelated.
 mod materials;
-mod scene;
+pub(crate) mod scene;
 use crate::{
     Renderer, RetainedTarget,
     metalfx::{Config, Preference, Selection},

@@ -10,20 +10,29 @@ use std::{
     time::Duration,
 };
 
-pub(super) fn hash(bytes: &[u8]) -> String {
+pub(crate) fn hash(bytes: &[u8]) -> String {
     format!("{:x}", Sha256::digest(bytes))
 }
-pub(super) struct Output {
+pub(crate) struct Output {
     root: PathBuf,
     bytes: usize,
+    limit: usize,
     pub files: Vec<Value>,
 }
 impl Output {
     pub fn new(root: PathBuf) -> Self {
+        Self::bounded(root, 128 * 1024 * 1024)
+    }
+    #[cfg(feature = "experimental-taau")]
+    pub fn comparison(root: PathBuf) -> Self {
+        Self::bounded(root, 384 * 1024 * 1024)
+    }
+    fn bounded(root: PathBuf, limit: usize) -> Self {
         fs::create_dir(&root).expect("create-only image evidence directory");
         Self {
             root,
             bytes: 0,
+            limit,
             files: vec![],
         }
     }
@@ -34,7 +43,7 @@ impl Output {
                 .all(|c| matches!(c, std::path::Component::Normal(_)))
         );
         let next = self.bytes.checked_add(bytes.len()).unwrap();
-        assert!(next <= 128 * 1024 * 1024, "whole fixture output cap");
+        assert!(next <= self.limit, "whole fixture output cap");
         let path = self.root.join(path);
         fs::create_dir_all(path.parent().unwrap()).unwrap();
         let mut f = fs::OpenOptions::new()
@@ -87,6 +96,10 @@ impl Output {
     pub fn image(&mut self, arm: &str, frame: u32, pixels: &[u8]) {
         assert_eq!(pixels.len(), WIDTH as usize * HEIGHT as usize * 4);
         self.write(&format!("{arm}-{frame:02}.rgba8"), pixels);
+        self.png(arm, frame, pixels);
+    }
+    pub fn png(&mut self, arm: &str, frame: u32, pixels: &[u8]) {
+        assert_eq!(pixels.len(), WIDTH as usize * HEIGHT as usize * 4);
         let mut bytes = vec![];
         {
             let mut png = png::Encoder::new(&mut bytes, WIDTH, HEIGHT);
@@ -101,7 +114,7 @@ impl Output {
         self.write(&format!("{arm}-{frame:02}.png"), &bytes);
     }
 }
-pub(super) fn wait(r: &Renderer) {
+pub(crate) fn wait(r: &Renderer) {
     r.device
         .poll(wgpu::PollType::Wait {
             submission_index: None,
@@ -109,7 +122,7 @@ pub(super) fn wait(r: &Renderer) {
         })
         .unwrap();
 }
-pub(super) fn texture(r: &Renderer) -> wgpu::Texture {
+pub(crate) fn texture(r: &Renderer) -> wgpu::Texture {
     r.device.create_texture(&wgpu::TextureDescriptor {
         label: Some("MetalFX real material final display capture"),
         size: wgpu::Extent3d {
@@ -125,7 +138,7 @@ pub(super) fn texture(r: &Renderer) -> wgpu::Texture {
         view_formats: &[],
     })
 }
-pub(super) fn read(r: &Renderer, texture: &wgpu::Texture) -> Vec<u8> {
+pub(crate) fn read(r: &Renderer, texture: &wgpu::Texture) -> Vec<u8> {
     let stride = (WIDTH * 4).div_ceil(256) * 256;
     let buffer = r.device.create_buffer(&wgpu::BufferDescriptor {
         label: Some("Bounded final display readback"),

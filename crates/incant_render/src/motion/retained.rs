@@ -73,6 +73,8 @@ pub(crate) struct TemporalInput {
 pub(crate) struct TemporalSurfaces {
     pub motion: wgpu::TextureView,
     pub previous_depth: wgpu::TextureView,
+    #[cfg(feature = "experimental-taau")]
+    pub current_depth: wgpu::TextureView,
     pub slot: usize,
 }
 impl Prepared {
@@ -83,6 +85,8 @@ impl Prepared {
             surfaces: self.targets.as_ref().map(|targets| TemporalSurfaces {
                 motion: targets.motion.clone(),
                 previous_depth: targets.depth[1 - self.slot].clone(),
+                #[cfg(feature = "experimental-taau")]
+                current_depth: targets.depth[self.slot].clone(),
                 slot: self.slot,
             }),
         }

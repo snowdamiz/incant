@@ -203,6 +203,31 @@ pub(crate) struct ModelDraw {
     ambient_occlusion: Option<crate::ambient_occlusion::Prepared>,
 }
 impl ModelDraw {
+    #[cfg(feature = "experimental-taau")]
+    pub(crate) fn center_materials(
+        &mut self,
+        system: &crate::temporal_upscale::System,
+    ) -> Result<()> {
+        if self.has_transparent() || self.has_ambient_occlusion() {
+            return Err(
+                crate::SceneError::Input("TAAU requires opaque models without SSAO").into(),
+            );
+        }
+        for draw in &mut self.draws {
+            let material = &draw.batch.model.materials.materials
+                [draw.batch.model.primitives[draw.batch.primitive].material];
+            let key = PipelineKey {
+                format: self.target.format,
+                samples: self.target.samples,
+                alpha: material.alpha,
+                double_sided: material.double_sided,
+                mirrored: draw.batch.mirrored,
+            };
+            draw.pipeline = system.material(key)?;
+        }
+        Ok(())
+    }
+
     pub fn has_ambient_occlusion(&self) -> bool {
         self.ambient_occlusion.is_some()
     }

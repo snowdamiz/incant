@@ -90,7 +90,7 @@ fn sun_rotation(elevation_degrees: f64, azimuth_degrees: f64) -> [f64; 4] {
     .to_array()
 }
 
-pub(super) struct Stage {
+pub(crate) struct Stage {
     pub fixture: materials::Fixture,
     pub camera: String,
     mover: String,
@@ -211,7 +211,7 @@ impl Stage {
 }
 /// The original Stage's pan/mover functions, with this experiment's explicit
 /// stationary interval and one cut. No renderer-specific pose adjustment.
-pub(super) fn poses(frame: u32) -> (DMat4, DMat4) {
+pub(crate) fn poses(frame: u32) -> (DMat4, DMat4) {
     assert!((1..=32).contains(&frame));
     let camera_step = if frame <= 16 {
         1
