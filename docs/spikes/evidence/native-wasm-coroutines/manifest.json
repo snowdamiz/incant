@@ -1,0 +1,3246 @@
+{
+  "format": 1,
+  "scope": "Local correctness only; actual authored shipping export remains open",
+  "records": [
+    {
+      "path": "wasm-coroutines-cpu-001/closeout.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-cpu-001/closeout.json",
+      "raw_bytes": 294,
+      "raw_sha256": "f356f1b93f39afb05cbca99ec3896bbb44a3e4047bd96a48b033d8d61a832ee9",
+      "compressed_bytes": 221,
+      "compressed_sha256": "a18076ba595b8f9273cd66964fbb0c6fddff33f9c12efe2a22f227b678105b14"
+    },
+    {
+      "path": "wasm-coroutines-cpu-001/output/000.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-cpu-001/output/000.stderr.log",
+      "raw_bytes": 6559,
+      "raw_sha256": "f562144bd98ba22ff0787aa5c9f62762436c92aec8e13ea45083ce5ca1315545",
+      "compressed_bytes": 1152,
+      "compressed_sha256": "8c897dac598c649a22d9440fb82b354f5610bff38765a98a69bcc9e7a5d8eaf0"
+    },
+    {
+      "path": "wasm-coroutines-cpu-001/output/000.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-cpu-001/output/000.stdout.log",
+      "raw_bytes": 260721,
+      "raw_sha256": "622163c338baeb0c6eaad990910a4b111e817e0268affbe8e5d5029f13bcc3d0",
+      "compressed_bytes": 20315,
+      "compressed_sha256": "c3f8c51a7873e8471231e70518ae59f2ef88f672749c1b3fbcd1589f8ea0681a"
+    },
+    {
+      "path": "wasm-coroutines-cpu-001/output/001.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-cpu-001/output/001.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-cpu-001/output/001.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-cpu-001/output/001.stdout.log",
+      "raw_bytes": 5443,
+      "raw_sha256": "b5c6b0369edf04a4763343b6f4ef04a25c093429bf8869ca15d0b3d8b9ef29b1",
+      "compressed_bytes": 2505,
+      "compressed_sha256": "4ab4d214ccb5c9dba19e591a35240337597281bccc7ac5324b627f3ab4367f39"
+    },
+    {
+      "path": "wasm-coroutines-cpu-001/output/owner.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-cpu-001/output/owner.json",
+      "raw_bytes": 2642,
+      "raw_sha256": "fd810a5863d3834e64795468f06231614061a5c8651d09d22ebdddac8be0cdde",
+      "compressed_bytes": 821,
+      "compressed_sha256": "4d3e452a5ad41416dde35a314b3733c47d6a5e3d9560e4c5ff51e0c003128ac3"
+    },
+    {
+      "path": "wasm-coroutines-cpu-001/plan.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-cpu-001/plan.json",
+      "raw_bytes": 870,
+      "raw_sha256": "657c4d4079a8fa0ed45e3575529d34f0c0ddcbb2bba02f4f267b228ff25ebf2a",
+      "compressed_bytes": 451,
+      "compressed_sha256": "7907ed28c23b18aa76bc8d68d60345cf470b50f918bdf69f09a9c10f2e042461"
+    },
+    {
+      "path": "wasm-coroutines-cpu-001/result.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-cpu-001/result.json",
+      "raw_bytes": 98178,
+      "raw_sha256": "aae01036f22f17fa2f7d1688d9823878204695d23dacfca4e203057c05b9f84c",
+      "compressed_bytes": 4237,
+      "compressed_sha256": "a94e2b1abe9d33674f0257a961d60d1c04529df64915d58e13970a61e72d1852"
+    },
+    {
+      "path": "wasm-coroutines-cpu-001/run.py.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-cpu-001/run.py",
+      "raw_bytes": 2729,
+      "raw_sha256": "f77a9308a0fa2ea26b292ee3f242a04c2d91b7a1a4a6a789c5fdd1f735885e8d",
+      "compressed_bytes": 1353,
+      "compressed_sha256": "1f26c635d731cc9d1a45f5dfa25873889f4d7eeaa4bdc0422f8d73efdf2dd9c3"
+    },
+    {
+      "path": "wasm-coroutines-cpu-001/sources.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-cpu-001/sources.json",
+      "raw_bytes": 3297003,
+      "raw_sha256": "6641eeb45f69311862624d6f267462dcea3e7176ba43ac59d197cee9fc25afd6",
+      "compressed_bytes": 970434,
+      "compressed_sha256": "29a8ec3a0df8a79a6014a4456471bea8b41dd16e059a5c5335588b48790311f8"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/closeout.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/closeout.json",
+      "raw_bytes": 410,
+      "raw_sha256": "6ae46a85b76d221030ea1df447a755d1ef5ef48880eb3f291f770fddbdf2168f",
+      "compressed_bytes": 296,
+      "compressed_sha256": "7192a54476381f50beeba4a585cec4a7ef1d1205c911347485bad59b6deb6448"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/000.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/000.stderr.log",
+      "raw_bytes": 190,
+      "raw_sha256": "9cc222ea349c3c065df4882c165eeab73b90d1e66b40045bbe674f33fba9e05a",
+      "compressed_bytes": 166,
+      "compressed_sha256": "237a0f2aa7ba8e65945c8d91ab5971a2aafb3dfdcfa311b4966d34a048b12005"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/000.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/000.stdout.log",
+      "raw_bytes": 43758,
+      "raw_sha256": "5b14d3ca8a79560c80dbd194889e28a05fae611f376a86e08f94ebedaa1e6f4a",
+      "compressed_bytes": 3381,
+      "compressed_sha256": "95d4431cb7153d2bc781fa623164e864ebf846631f59b75d23adfed71ca948d4"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/001.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/001.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/001.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/001.stdout.log",
+      "raw_bytes": 192,
+      "raw_sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "compressed_bytes": 163,
+      "compressed_sha256": "eb789b0d1844e5601fa97025efd23df389f13f9ed434bee7773370b4e64dce7e"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/002.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/002.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/002.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/002.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/003.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/003.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/003.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/003.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/004.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/004.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/004.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/004.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/005.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/005.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/005.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/005.stdout.log",
+      "raw_bytes": 192,
+      "raw_sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "compressed_bytes": 163,
+      "compressed_sha256": "eb789b0d1844e5601fa97025efd23df389f13f9ed434bee7773370b4e64dce7e"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/006.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/006.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/006.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/006.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/007.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/007.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/007.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/007.stdout.log",
+      "raw_bytes": 192,
+      "raw_sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "compressed_bytes": 163,
+      "compressed_sha256": "eb789b0d1844e5601fa97025efd23df389f13f9ed434bee7773370b4e64dce7e"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/008.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/008.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/008.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/008.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/009.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/009.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/009.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/009.stdout.log",
+      "raw_bytes": 192,
+      "raw_sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "compressed_bytes": 163,
+      "compressed_sha256": "eb789b0d1844e5601fa97025efd23df389f13f9ed434bee7773370b4e64dce7e"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/010.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/010.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/010.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/010.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/011.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/011.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/011.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/011.stdout.log",
+      "raw_bytes": 192,
+      "raw_sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "compressed_bytes": 163,
+      "compressed_sha256": "eb789b0d1844e5601fa97025efd23df389f13f9ed434bee7773370b4e64dce7e"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/012.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/012.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/012.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/012.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/013.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/013.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/013.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/013.stdout.log",
+      "raw_bytes": 192,
+      "raw_sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "compressed_bytes": 163,
+      "compressed_sha256": "eb789b0d1844e5601fa97025efd23df389f13f9ed434bee7773370b4e64dce7e"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/014.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/014.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/014.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/014.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/015.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/015.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/015.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/015.stdout.log",
+      "raw_bytes": 192,
+      "raw_sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "compressed_bytes": 163,
+      "compressed_sha256": "eb789b0d1844e5601fa97025efd23df389f13f9ed434bee7773370b4e64dce7e"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/016.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/016.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/016.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/016.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/017.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/017.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/017.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/017.stdout.log",
+      "raw_bytes": 192,
+      "raw_sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "compressed_bytes": 163,
+      "compressed_sha256": "eb789b0d1844e5601fa97025efd23df389f13f9ed434bee7773370b4e64dce7e"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/018.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/018.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/018.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/018.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/019.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/019.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/019.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/019.stdout.log",
+      "raw_bytes": 192,
+      "raw_sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "compressed_bytes": 163,
+      "compressed_sha256": "eb789b0d1844e5601fa97025efd23df389f13f9ed434bee7773370b4e64dce7e"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/020.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/020.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/020.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/020.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/021.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/021.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/021.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/021.stdout.log",
+      "raw_bytes": 192,
+      "raw_sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "compressed_bytes": 163,
+      "compressed_sha256": "eb789b0d1844e5601fa97025efd23df389f13f9ed434bee7773370b4e64dce7e"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/022.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/022.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/022.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/022.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/023.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/023.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/023.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/023.stdout.log",
+      "raw_bytes": 192,
+      "raw_sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "compressed_bytes": 163,
+      "compressed_sha256": "eb789b0d1844e5601fa97025efd23df389f13f9ed434bee7773370b4e64dce7e"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/024.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/024.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/024.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/024.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/025.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/025.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/025.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/025.stdout.log",
+      "raw_bytes": 192,
+      "raw_sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "compressed_bytes": 163,
+      "compressed_sha256": "eb789b0d1844e5601fa97025efd23df389f13f9ed434bee7773370b4e64dce7e"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/026.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/026.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/026.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/026.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/027.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/027.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/027.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/027.stdout.log",
+      "raw_bytes": 7,
+      "raw_sha256": "98997cf914f90eb865507680fb129df06410fe495ffc00793aa780e4b8f563ed",
+      "compressed_bytes": 27,
+      "compressed_sha256": "73a3a902b72c61cbe1fab5f805889e053be32485dd9863fc178689bebca1129e"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/028.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/028.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/028.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/028.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/029.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/029.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/029.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/029.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/030.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/030.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/030.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/030.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/031.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/031.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/031.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/031.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/032.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/032.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/032.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/032.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/033.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/033.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/033.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/033.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/034.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/034.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/034.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/034.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/035.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/035.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/035.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/035.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/036.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/036.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/036.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/036.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/037.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/037.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/037.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/037.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/038.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/038.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/038.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/038.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/039.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/039.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/039.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/039.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/040.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/040.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/040.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/040.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/041.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/041.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/041.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/041.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/042.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/042.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/042.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/042.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/043.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/043.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/043.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/043.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/044.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/044.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/044.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/044.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/045.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/045.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/045.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/045.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/046.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/046.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/046.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/046.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/047.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/047.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/047.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/047.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/048.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/048.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/048.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/048.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/049.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/049.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/049.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/049.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/050.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/050.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/050.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/050.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/051.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/051.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/051.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/051.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/052.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/052.stderr.log",
+      "raw_bytes": 478,
+      "raw_sha256": "1198d4355f425648298753d974e851dbaf76c8d2774c9c0b1a15da00aa03cb2d",
+      "compressed_bytes": 191,
+      "compressed_sha256": "4b608ef8bf9fb262541728e6128ce894b1be79c57665bf872d9a86b69de029ba"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/052.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/052.stdout.log",
+      "raw_bytes": 485941,
+      "raw_sha256": "642b741d06e7a0fab3c66823743d0d7b12323058c4abf01c085db6d07ab76720",
+      "compressed_bytes": 28280,
+      "compressed_sha256": "6ff1ed9cff55d3f43d3134b4967dcd6a7c98a17289f3136dd00f878ed92a6a76"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/output/owner.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/output/owner.json",
+      "raw_bytes": 84561,
+      "raw_sha256": "c76b79b56af4a0c02d5a176296c8ccfadb631774fdfb87457e3f8d091bc32b2a",
+      "compressed_bytes": 4448,
+      "compressed_sha256": "bb0b03272386e43a580b111a276feafc532d8f2089cc4919430f3fcac91f8ee0"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/partial.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/partial.json",
+      "raw_bytes": 6018,
+      "raw_sha256": "ff4315de32f61f7b665bec946b16816806fe7b4e1d0abe86b61f64d620b0cbc7",
+      "compressed_bytes": 1035,
+      "compressed_sha256": "00b3dcca7101f1681432d0be74a16df78648c34cd7830bd78ab5b0d14281b26a"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/plan.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/plan.json",
+      "raw_bytes": 1766,
+      "raw_sha256": "29883dfeb9f81b2f8d12c51176f13ef734af4699dfd7f889d1520cfebc0294e1",
+      "compressed_bytes": 789,
+      "compressed_sha256": "308c2c7a2cd7ca811459a6b3ddbb10c7c0d1171a697dfac56d93cae6117a67d1"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/prepared.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/prepared.json",
+      "raw_bytes": 13602,
+      "raw_sha256": "db558545f791785ca6eacbb99ed0a4460389939175068959b2dc78a9c460d31a",
+      "compressed_bytes": 3681,
+      "compressed_sha256": "906864b6335ac813785dac96b8679e7acd6d6afb44b935bd764cc8003b62e9f3"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/protected.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/protected.json",
+      "raw_bytes": 4093,
+      "raw_sha256": "0c64cace21b47e2129c3e22ec2384dba0a09f117d2c6cfee17966858f3895271",
+      "compressed_bytes": 1238,
+      "compressed_sha256": "2831e0c54b216e8f604658357d2e601a53e09c042943fe0ed9b3d4127f399513"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/result.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/result.json",
+      "raw_bytes": 41065,
+      "raw_sha256": "17ac3bfdf07b4e4a4a45ad48799d5a9c6d10a956fca183111aad93b01ef8ca55",
+      "compressed_bytes": 2665,
+      "compressed_sha256": "ca36a8111f2058672b9667ed3cb2452e2807f21e8a8f66ee79cdae340af82bc3"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/run.py.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/run.py",
+      "raw_bytes": 6204,
+      "raw_sha256": "badf6f141cd2a5416148dd626998891cc48bd23bf3321c11447d791ed7d69fda",
+      "compressed_bytes": 2519,
+      "compressed_sha256": "80dd151f05d83772379b50fa3a74ee0c08b3001341a19cf7b6947f5f0e0d9599"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/sdk-provenance.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/sdk-provenance.json",
+      "raw_bytes": 5130,
+      "raw_sha256": "0d37ce4571cffde87edfd8299eb6e3ffa445df831e490e11c71946c098777d43",
+      "compressed_bytes": 2385,
+      "compressed_sha256": "71a86f93d0184e7d044619fe7b1da4b08c6bb7659a902cc5bbea6fd4648ae797"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/sources.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/sources.json",
+      "raw_bytes": 3297242,
+      "raw_sha256": "952a882ef60a0a5cab4245610ad26a854558bab57620d1cfabdcb204346d5119",
+      "compressed_bytes": 970515,
+      "compressed_sha256": "d96779d020548c6f0835b5d5558fae9b94254145a975c173140e52725663da4d"
+    },
+    {
+      "path": "wasm-coroutines-guests-001/wabt.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-001/wabt.json",
+      "raw_bytes": 361,
+      "raw_sha256": "166101c2ee1509dc0eff6bd309a5609445152df96054bb6fa09cd6a509ce13d1",
+      "compressed_bytes": 223,
+      "compressed_sha256": "402a925253005fa75d4889a7777e32bde0bf5571b0c8a9ce1797e74407c85438"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/closeout.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/closeout.json",
+      "raw_bytes": 253,
+      "raw_sha256": "d2c7389fc217d39082bb62454f674a97ae61f079448d09890a447a7669f6d7f8",
+      "compressed_bytes": 195,
+      "compressed_sha256": "a2aa5fcffe3301446ecc08c6b73c304231574a780159a02cf80163fe91fb91f4"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/000.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/000.stderr.log",
+      "raw_bytes": 57,
+      "raw_sha256": "2c8318baa3a33eb34d56961d111488401be9c9a6ad4853fc65bc62aea5e9ca4c",
+      "compressed_bytes": 77,
+      "compressed_sha256": "a00e05202f343a69d083fa7d859981e615df7514b9f88300c87b820106a94216"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/000.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/000.stdout.log",
+      "raw_bytes": 43756,
+      "raw_sha256": "fc3ac57f1336da7e266b7c448a9585029625da6b89208b9aacfd58e5b5ce442a",
+      "compressed_bytes": 3361,
+      "compressed_sha256": "82baec409f73030e44cd40ffcc1ee7aac0da65d3bfedd7c7e69621a15b8635be"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/001.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/001.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/001.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/001.stdout.log",
+      "raw_bytes": 192,
+      "raw_sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "compressed_bytes": 163,
+      "compressed_sha256": "eb789b0d1844e5601fa97025efd23df389f13f9ed434bee7773370b4e64dce7e"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/002.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/002.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/002.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/002.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/003.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/003.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/003.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/003.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/004.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/004.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/004.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/004.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/005.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/005.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/005.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/005.stdout.log",
+      "raw_bytes": 192,
+      "raw_sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "compressed_bytes": 163,
+      "compressed_sha256": "eb789b0d1844e5601fa97025efd23df389f13f9ed434bee7773370b4e64dce7e"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/006.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/006.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/006.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/006.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/007.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/007.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/007.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/007.stdout.log",
+      "raw_bytes": 192,
+      "raw_sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "compressed_bytes": 163,
+      "compressed_sha256": "eb789b0d1844e5601fa97025efd23df389f13f9ed434bee7773370b4e64dce7e"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/008.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/008.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/008.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/008.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/009.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/009.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/009.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/009.stdout.log",
+      "raw_bytes": 192,
+      "raw_sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "compressed_bytes": 163,
+      "compressed_sha256": "eb789b0d1844e5601fa97025efd23df389f13f9ed434bee7773370b4e64dce7e"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/010.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/010.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/010.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/010.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/011.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/011.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/011.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/011.stdout.log",
+      "raw_bytes": 192,
+      "raw_sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "compressed_bytes": 163,
+      "compressed_sha256": "eb789b0d1844e5601fa97025efd23df389f13f9ed434bee7773370b4e64dce7e"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/012.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/012.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/012.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/012.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/013.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/013.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/013.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/013.stdout.log",
+      "raw_bytes": 192,
+      "raw_sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "compressed_bytes": 163,
+      "compressed_sha256": "eb789b0d1844e5601fa97025efd23df389f13f9ed434bee7773370b4e64dce7e"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/014.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/014.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/014.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/014.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/015.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/015.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/015.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/015.stdout.log",
+      "raw_bytes": 192,
+      "raw_sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "compressed_bytes": 163,
+      "compressed_sha256": "eb789b0d1844e5601fa97025efd23df389f13f9ed434bee7773370b4e64dce7e"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/016.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/016.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/016.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/016.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/017.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/017.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/017.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/017.stdout.log",
+      "raw_bytes": 192,
+      "raw_sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "compressed_bytes": 163,
+      "compressed_sha256": "eb789b0d1844e5601fa97025efd23df389f13f9ed434bee7773370b4e64dce7e"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/018.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/018.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/018.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/018.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/019.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/019.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/019.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/019.stdout.log",
+      "raw_bytes": 192,
+      "raw_sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "compressed_bytes": 163,
+      "compressed_sha256": "eb789b0d1844e5601fa97025efd23df389f13f9ed434bee7773370b4e64dce7e"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/020.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/020.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/020.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/020.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/021.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/021.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/021.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/021.stdout.log",
+      "raw_bytes": 192,
+      "raw_sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "compressed_bytes": 163,
+      "compressed_sha256": "eb789b0d1844e5601fa97025efd23df389f13f9ed434bee7773370b4e64dce7e"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/022.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/022.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/022.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/022.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/023.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/023.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/023.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/023.stdout.log",
+      "raw_bytes": 192,
+      "raw_sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "compressed_bytes": 163,
+      "compressed_sha256": "eb789b0d1844e5601fa97025efd23df389f13f9ed434bee7773370b4e64dce7e"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/024.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/024.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/024.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/024.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/025.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/025.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/025.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/025.stdout.log",
+      "raw_bytes": 192,
+      "raw_sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "compressed_bytes": 163,
+      "compressed_sha256": "eb789b0d1844e5601fa97025efd23df389f13f9ed434bee7773370b4e64dce7e"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/026.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/026.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/026.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/026.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/027.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/027.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/027.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/027.stdout.log",
+      "raw_bytes": 7,
+      "raw_sha256": "98997cf914f90eb865507680fb129df06410fe495ffc00793aa780e4b8f563ed",
+      "compressed_bytes": 27,
+      "compressed_sha256": "73a3a902b72c61cbe1fab5f805889e053be32485dd9863fc178689bebca1129e"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/028.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/028.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/028.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/028.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/029.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/029.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/029.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/029.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/030.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/030.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/030.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/030.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/031.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/031.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/031.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/031.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/032.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/032.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/032.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/032.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/033.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/033.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/033.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/033.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/034.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/034.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/034.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/034.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/035.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/035.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/035.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/035.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/036.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/036.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/036.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/036.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/037.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/037.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/037.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/037.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/038.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/038.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/038.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/038.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/039.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/039.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/039.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/039.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/040.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/040.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/040.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/040.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/041.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/041.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/041.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/041.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/042.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/042.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/042.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/042.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/043.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/043.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/043.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/043.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/044.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/044.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/044.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/044.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/045.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/045.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/045.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/045.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/046.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/046.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/046.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/046.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/047.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/047.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/047.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/047.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/048.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/048.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/048.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/048.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/049.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/049.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/049.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/049.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/050.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/050.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/050.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/050.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/051.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/051.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/051.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/051.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/052.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/052.stderr.log",
+      "raw_bytes": 1137,
+      "raw_sha256": "6810d07fbe48e8cc45fb7b3d140e31be489035684437d41e380187a0dc6958ca",
+      "compressed_bytes": 342,
+      "compressed_sha256": "29e26ce42229d7d28190c212a4472d036cfce27f9bb652fc3c5a94f34b04842d"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/052.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/052.stdout.log",
+      "raw_bytes": 365893,
+      "raw_sha256": "7810f13bc8476701062f69634a0b3a5a18a5368e93faec7004dcedf75230c612",
+      "compressed_bytes": 24435,
+      "compressed_sha256": "8f053ca992f26a83171a353ed131bc4ee08ba3558df749bf6c09f50a73fc4128"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/053.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/053.stderr.log",
+      "raw_bytes": 320,
+      "raw_sha256": "20d2a936acb1562f8540e55933536c5c5c70bd0046a5ccfd8199a1df43ea3a1a",
+      "compressed_bytes": 246,
+      "compressed_sha256": "4c9df8c5d3bef5af885d633317fbf3305bd9197bbb829da0022ccccee61d2e31"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/053.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/053.stdout.log",
+      "raw_bytes": 211722,
+      "raw_sha256": "c15688495a7a708fbe67c2e5b84b6080a2517b50efcf498d1ba1aadf7b383207",
+      "compressed_bytes": 14334,
+      "compressed_sha256": "6613ee5ad732d17b96a9a131e84662db61929e93160a60e2099fa00d7caecfd9"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/054.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/054.stderr.log",
+      "raw_bytes": 995,
+      "raw_sha256": "ad82152178ea42908212bd3225426bb930c51b8a215536772d9e8d55793f750e",
+      "compressed_bytes": 240,
+      "compressed_sha256": "fccb14c4e5e4b48638851acb8ef01abd9671650fbce055c8de5d8c878929231a"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/054.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/054.stdout.log",
+      "raw_bytes": 334989,
+      "raw_sha256": "3ad8f0edd963cd9ea8caf4d3bfeeb7791963192e793f85b4634f1ccd920f6246",
+      "compressed_bytes": 22470,
+      "compressed_sha256": "b024e8f1852dc75b7811825cb73bc6b96fc373645437108f15fcee7899784334"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/output/owner.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/output/owner.json",
+      "raw_bytes": 87279,
+      "raw_sha256": "39342baa2c9253073ec10d2022884214a0683a3119c2ce59b8b09716208e471a",
+      "compressed_bytes": 4693,
+      "compressed_sha256": "418f3d2a7d9c2b403cb6b3069ec3f4446325f3c9261dcce3e53a8a2dab202b16"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/partial.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/partial.json",
+      "raw_bytes": 110643,
+      "raw_sha256": "4e1cc938d43c70d9c2468baca29f4662b0a3d04d6f4977599938900fd46bbcce",
+      "compressed_bytes": 5440,
+      "compressed_sha256": "45542911f21b5508eb74ece76cbc3d81479117ee86a1ef056861bd4dcab2ca64"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/plan.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/plan.json",
+      "raw_bytes": 1781,
+      "raw_sha256": "04126c3dfde1855af4750b98257854863e10528f31a5810063d1d3b38ce21290",
+      "compressed_bytes": 806,
+      "compressed_sha256": "38087ef9814d88b5050dedb16fbb3c4778d5129cd444a9cb14d7ef94b09d8c93"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/prepared.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/prepared.json",
+      "raw_bytes": 13602,
+      "raw_sha256": "ed5b0ea57b32687ff7208089c13ad6fd0a268cd64e7351adfeb2fdfc7b92fe0d",
+      "compressed_bytes": 3681,
+      "compressed_sha256": "1b3cc903f821438813c28b7602df68a6bd7a969348438c492b1709c81e3d0383"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/protected.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/protected.json",
+      "raw_bytes": 4093,
+      "raw_sha256": "0c64cace21b47e2129c3e22ec2384dba0a09f117d2c6cfee17966858f3895271",
+      "compressed_bytes": 1238,
+      "compressed_sha256": "2831e0c54b216e8f604658357d2e601a53e09c042943fe0ed9b3d4127f399513"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/result.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/result.json",
+      "raw_bytes": 146650,
+      "raw_sha256": "7a18bd15adc208aefaacde91573e518c4517d042b1780769efedf18351de35b6",
+      "compressed_bytes": 7066,
+      "compressed_sha256": "7fef2926d54906229ffa323487190f7089f02ed4ab0abccade7c9125993328ad"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/run.py.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/run.py",
+      "raw_bytes": 6204,
+      "raw_sha256": "badf6f141cd2a5416148dd626998891cc48bd23bf3321c11447d791ed7d69fda",
+      "compressed_bytes": 2519,
+      "compressed_sha256": "80dd151f05d83772379b50fa3a74ee0c08b3001341a19cf7b6947f5f0e0d9599"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/sdk-provenance.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/sdk-provenance.json",
+      "raw_bytes": 5130,
+      "raw_sha256": "0d37ce4571cffde87edfd8299eb6e3ffa445df831e490e11c71946c098777d43",
+      "compressed_bytes": 2385,
+      "compressed_sha256": "71a86f93d0184e7d044619fe7b1da4b08c6bb7659a902cc5bbea6fd4648ae797"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/sources.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/sources.json",
+      "raw_bytes": 3297242,
+      "raw_sha256": "9e6205bf2621b59e85e1cdacc3c5d93139d13c8469a3b6af5498b26b8ae8fbd3",
+      "compressed_bytes": 970514,
+      "compressed_sha256": "d9edb5c8b583f02bc283e0feebdeaba2ed136bc10b064d85870cec31e64e454f"
+    },
+    {
+      "path": "wasm-coroutines-guests-002/wabt.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-002/wabt.json",
+      "raw_bytes": 361,
+      "raw_sha256": "166101c2ee1509dc0eff6bd309a5609445152df96054bb6fa09cd6a509ce13d1",
+      "compressed_bytes": 223,
+      "compressed_sha256": "402a925253005fa75d4889a7777e32bde0bf5571b0c8a9ce1797e74407c85438"
+    },
+    {
+      "path": "wasm-coroutines-cpu-002/closeout.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-cpu-002/closeout.json",
+      "raw_bytes": 252,
+      "raw_sha256": "f1cb6428b3da288600ae1798f8d893bef0fa4f69af3d938349db53a66831e853",
+      "compressed_bytes": 193,
+      "compressed_sha256": "8cffc4447840f58714d338197b2a9a199e63f9760d613824edb07a202483d55b"
+    },
+    {
+      "path": "wasm-coroutines-cpu-002/output/000.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-cpu-002/output/000.stderr.log",
+      "raw_bytes": 1899,
+      "raw_sha256": "d009a696d06574a2998f24a507a68a54e0c955b403461fd79c02c200ea41487e",
+      "compressed_bytes": 432,
+      "compressed_sha256": "29d530c052f10eea942d0217014b0ffe0f88173b9d6a4bd78f6f7ee2e50ab371"
+    },
+    {
+      "path": "wasm-coroutines-cpu-002/output/000.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-cpu-002/output/000.stdout.log",
+      "raw_bytes": 233595,
+      "raw_sha256": "03711f058e7277280df8036a49927528983056ebc255a4979eaf171895dac2d3",
+      "compressed_bytes": 14545,
+      "compressed_sha256": "00c9b81440c9267127aa05cd4ea934ad7a444f54e2c659ccbc0bb2bb82995d91"
+    },
+    {
+      "path": "wasm-coroutines-cpu-002/output/owner.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-cpu-002/output/owner.json",
+      "raw_bytes": 1837,
+      "raw_sha256": "8b4a00c596dce37f24658ee67bb8662efd52694ece52bba2b49760774c5281c9",
+      "compressed_bytes": 609,
+      "compressed_sha256": "ec863e1f644e7e13951ef0094f270ea5223df9ba3aaaba6177e49c51880e9620"
+    },
+    {
+      "path": "wasm-coroutines-cpu-002/plan.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-cpu-002/plan.json",
+      "raw_bytes": 755,
+      "raw_sha256": "d7e671e3abc54238c579bcbc12f49b208033553776b03ed2773363c13c6c8c2e",
+      "compressed_bytes": 371,
+      "compressed_sha256": "f29c4c44bf791e9dba1a8ce43f375da705a8374427650d00f9b95b0978a75177"
+    },
+    {
+      "path": "wasm-coroutines-cpu-002/result.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-cpu-002/result.json",
+      "raw_bytes": 91657,
+      "raw_sha256": "d46fcaa6b577e7250043efbe891321defc7ae8a13dea7ebd886b8106e3ed52ca",
+      "compressed_bytes": 3797,
+      "compressed_sha256": "572e419ecb2000fad67bfeafb1091a361779a71e52cea7bf74fea7b4447ca71c"
+    },
+    {
+      "path": "wasm-coroutines-cpu-002/run.py.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-cpu-002/run.py",
+      "raw_bytes": 2708,
+      "raw_sha256": "c20d9133c6cf88a63993cbd05041383a682dabb0ed9d34ba5298c92444d66807",
+      "compressed_bytes": 1348,
+      "compressed_sha256": "bb4507a47c392e82c10922f60b07518201b72bb34805ce9f6e5ffc5c32cbbee4"
+    },
+    {
+      "path": "wasm-coroutines-cpu-002/sources.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-cpu-002/sources.json",
+      "raw_bytes": 3297242,
+      "raw_sha256": "9e6205bf2621b59e85e1cdacc3c5d93139d13c8469a3b6af5498b26b8ae8fbd3",
+      "compressed_bytes": 970514,
+      "compressed_sha256": "d9edb5c8b583f02bc283e0feebdeaba2ed136bc10b064d85870cec31e64e454f"
+    },
+    {
+      "path": "independent-source-review.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-reviews/wasm-coroutines-independent-20261017.json",
+      "raw_bytes": 9524,
+      "raw_sha256": "85067ad05f4b3e86bc5e16d51eb8755255985b4b1f7ab6191aeb6f93aca5bfe3",
+      "compressed_bytes": 3569,
+      "compressed_sha256": "03a8300a0d2eb2eb39030041141a6845d2ba22ae37d37f3e95589049158cedda"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/closeout.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/closeout.json",
+      "raw_bytes": 252,
+      "raw_sha256": "fb27730352bfc529bd7f588708dfbb6238031659591fb46b9414ba4c1b0fe84a",
+      "compressed_bytes": 196,
+      "compressed_sha256": "1282ee56895a316f3ebf761739eb45861bb8cc2332fdf4765c484f34fd45fe3b"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/000.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/000.stderr.log",
+      "raw_bytes": 57,
+      "raw_sha256": "e7a7a63238474cc97762675467ecf93b6c9d63206cc097474aa8d39f4202a4bb",
+      "compressed_bytes": 77,
+      "compressed_sha256": "d84d6633bfb9c920b807d2838464a26d66e5bd8a22e3f0b8ded72f90b9e1d0af"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/000.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/000.stdout.log",
+      "raw_bytes": 43756,
+      "raw_sha256": "456422b8f5b6dfbcfa0176544d8579321181226ed7db7aa18b0f0e6dcfcad25b",
+      "compressed_bytes": 3368,
+      "compressed_sha256": "428d856bf4803805e81342d6df1025c0626d49b2c592cb82d63a5d8de50c862d"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/001.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/001.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/001.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/001.stdout.log",
+      "raw_bytes": 192,
+      "raw_sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "compressed_bytes": 163,
+      "compressed_sha256": "eb789b0d1844e5601fa97025efd23df389f13f9ed434bee7773370b4e64dce7e"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/002.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/002.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/002.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/002.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/003.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/003.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/003.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/003.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/004.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/004.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/004.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/004.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/005.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/005.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/005.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/005.stdout.log",
+      "raw_bytes": 192,
+      "raw_sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "compressed_bytes": 163,
+      "compressed_sha256": "eb789b0d1844e5601fa97025efd23df389f13f9ed434bee7773370b4e64dce7e"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/006.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/006.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/006.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/006.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/007.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/007.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/007.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/007.stdout.log",
+      "raw_bytes": 192,
+      "raw_sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "compressed_bytes": 163,
+      "compressed_sha256": "eb789b0d1844e5601fa97025efd23df389f13f9ed434bee7773370b4e64dce7e"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/008.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/008.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/008.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/008.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/009.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/009.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/009.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/009.stdout.log",
+      "raw_bytes": 192,
+      "raw_sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "compressed_bytes": 163,
+      "compressed_sha256": "eb789b0d1844e5601fa97025efd23df389f13f9ed434bee7773370b4e64dce7e"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/010.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/010.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/010.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/010.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/011.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/011.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/011.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/011.stdout.log",
+      "raw_bytes": 192,
+      "raw_sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "compressed_bytes": 163,
+      "compressed_sha256": "eb789b0d1844e5601fa97025efd23df389f13f9ed434bee7773370b4e64dce7e"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/012.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/012.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/012.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/012.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/013.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/013.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/013.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/013.stdout.log",
+      "raw_bytes": 192,
+      "raw_sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "compressed_bytes": 163,
+      "compressed_sha256": "eb789b0d1844e5601fa97025efd23df389f13f9ed434bee7773370b4e64dce7e"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/014.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/014.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/014.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/014.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/015.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/015.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/015.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/015.stdout.log",
+      "raw_bytes": 192,
+      "raw_sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "compressed_bytes": 163,
+      "compressed_sha256": "eb789b0d1844e5601fa97025efd23df389f13f9ed434bee7773370b4e64dce7e"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/016.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/016.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/016.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/016.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/017.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/017.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/017.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/017.stdout.log",
+      "raw_bytes": 192,
+      "raw_sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "compressed_bytes": 163,
+      "compressed_sha256": "eb789b0d1844e5601fa97025efd23df389f13f9ed434bee7773370b4e64dce7e"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/018.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/018.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/018.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/018.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/019.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/019.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/019.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/019.stdout.log",
+      "raw_bytes": 192,
+      "raw_sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "compressed_bytes": 163,
+      "compressed_sha256": "eb789b0d1844e5601fa97025efd23df389f13f9ed434bee7773370b4e64dce7e"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/020.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/020.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/020.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/020.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/021.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/021.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/021.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/021.stdout.log",
+      "raw_bytes": 192,
+      "raw_sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "compressed_bytes": 163,
+      "compressed_sha256": "eb789b0d1844e5601fa97025efd23df389f13f9ed434bee7773370b4e64dce7e"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/022.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/022.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/022.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/022.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/023.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/023.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/023.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/023.stdout.log",
+      "raw_bytes": 192,
+      "raw_sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "compressed_bytes": 163,
+      "compressed_sha256": "eb789b0d1844e5601fa97025efd23df389f13f9ed434bee7773370b4e64dce7e"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/024.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/024.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/024.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/024.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/025.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/025.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/025.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/025.stdout.log",
+      "raw_bytes": 192,
+      "raw_sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "compressed_bytes": 163,
+      "compressed_sha256": "eb789b0d1844e5601fa97025efd23df389f13f9ed434bee7773370b4e64dce7e"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/026.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/026.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/026.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/026.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/027.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/027.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/027.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/027.stdout.log",
+      "raw_bytes": 7,
+      "raw_sha256": "98997cf914f90eb865507680fb129df06410fe495ffc00793aa780e4b8f563ed",
+      "compressed_bytes": 27,
+      "compressed_sha256": "73a3a902b72c61cbe1fab5f805889e053be32485dd9863fc178689bebca1129e"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/028.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/028.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/028.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/028.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/029.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/029.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/029.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/029.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/030.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/030.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/030.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/030.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/031.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/031.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/031.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/031.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/032.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/032.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/032.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/032.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/033.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/033.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/033.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/033.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/034.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/034.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/034.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/034.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/035.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/035.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/035.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/035.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/036.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/036.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/036.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/036.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/037.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/037.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/037.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/037.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/038.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/038.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/038.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/038.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/039.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/039.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/039.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/039.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/040.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/040.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/040.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/040.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/041.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/041.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/041.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/041.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/042.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/042.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/042.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/042.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/043.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/043.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/043.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/043.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/044.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/044.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/044.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/044.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/045.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/045.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/045.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/045.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/046.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/046.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/046.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/046.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/047.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/047.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/047.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/047.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/048.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/048.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/048.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/048.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/049.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/049.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/049.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/049.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/050.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/050.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/050.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/050.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/051.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/051.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/051.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/051.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/052.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/052.stderr.log",
+      "raw_bytes": 1137,
+      "raw_sha256": "924dac0573226d107e9dccbed209e5defdd03fd34d3ebdec7f2696939cdf840a",
+      "compressed_bytes": 343,
+      "compressed_sha256": "aaffa00aff65d77062f2ba2a03db3561991f9b0ece96983eb5414f08d05b7134"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/052.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/052.stdout.log",
+      "raw_bytes": 365894,
+      "raw_sha256": "05ff3a6190e8df1aa676e3dc2de15c1b25b84792d928cbb525cca9b85a3e6b03",
+      "compressed_bytes": 24413,
+      "compressed_sha256": "a2a0c4364386bdb4f3333d33cf514627e19b354573538199144af2c16676f27d"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/053.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/053.stderr.log",
+      "raw_bytes": 320,
+      "raw_sha256": "f4b9ffbcd26d8330d55fa79d1deddb98210d80777dd126615057f28406ffdc02",
+      "compressed_bytes": 246,
+      "compressed_sha256": "00ca81e4ba5ba92d7d2d3aaef5dd5ad2002db8ef15fc0e4be9069d5e3ef7d7d7"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/053.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/053.stdout.log",
+      "raw_bytes": 211723,
+      "raw_sha256": "20a32cb2536adb7a5579d77362955b89548c0f9a0902f594372a2636f00a854b",
+      "compressed_bytes": 14378,
+      "compressed_sha256": "af7c1afe48b3acebff492470464f9454f1d813142e28cf453594ffb98ff19553"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/054.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/054.stderr.log",
+      "raw_bytes": 731,
+      "raw_sha256": "d9051a42bff5e06f72d092503f7da000a38ffd97d20cace0b6c39a7885898acc",
+      "compressed_bytes": 218,
+      "compressed_sha256": "06c348db4498bd8926ad3f320b31b840382244ef19bf30ebfe0aef1516322596"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/054.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/054.stdout.log",
+      "raw_bytes": 334988,
+      "raw_sha256": "c9853a75ef40d6e9cd2fde7c62be6e730174d545c58da9cd013836cdc8585efb",
+      "compressed_bytes": 22521,
+      "compressed_sha256": "c7152b08bb188a71b324aa0d5fe1eee916d76d5dc387d3f070962af7b9fb3497"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/output/owner.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/output/owner.json",
+      "raw_bytes": 87265,
+      "raw_sha256": "28d3d7563b8ef2f0588042ebfea8b1cf8bc8ff07e6fa5ea15a4fc2ee5a8198e1",
+      "compressed_bytes": 4688,
+      "compressed_sha256": "a3cfdc3ff70c67611f17e76a43d273693550362feca45ca06eb30950942cda74"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/partial.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/partial.json",
+      "raw_bytes": 110644,
+      "raw_sha256": "b66eb21bf60d62b81f7af2ef3ba3a32af3771dfc099cc1bb8d9ee7955f49a248",
+      "compressed_bytes": 5452,
+      "compressed_sha256": "07d9e73229ff9cc7669b31f1132aa9ae5000725f8e4b8e8036889cd79da0c939"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/plan.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/plan.json",
+      "raw_bytes": 1779,
+      "raw_sha256": "f73d3a546cda28e131e85dcfd7ef19ac04de75651faadbddd902f69c54603c42",
+      "compressed_bytes": 801,
+      "compressed_sha256": "a40f5d8ca65bbb2bb9f63d9dac872fbbd2b0e2a8719c1c0e113ce620bb7fa718"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/prepared.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/prepared.json",
+      "raw_bytes": 13602,
+      "raw_sha256": "69e1cd569519155725396f3df44cd6677adf2993a8997485e324c9288699699a",
+      "compressed_bytes": 3678,
+      "compressed_sha256": "b942e55c0e73aed45725bd0b6491378b2b165fd1c8427fad0598a77ff4563081"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/protected.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/protected.json",
+      "raw_bytes": 4093,
+      "raw_sha256": "0c64cace21b47e2129c3e22ec2384dba0a09f117d2c6cfee17966858f3895271",
+      "compressed_bytes": 1238,
+      "compressed_sha256": "2831e0c54b216e8f604658357d2e601a53e09c042943fe0ed9b3d4127f399513"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/result.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/result.json",
+      "raw_bytes": 146649,
+      "raw_sha256": "c538bf8fbaf1c349d912979da0b85938d3dfe5440a24d9f61f8237c0abecfec2",
+      "compressed_bytes": 7068,
+      "compressed_sha256": "fcfff0ae8bb72eb83305435b8ef442b114877d32401762f2aac28c06853eaefa"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/run.py.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/run.py",
+      "raw_bytes": 6204,
+      "raw_sha256": "badf6f141cd2a5416148dd626998891cc48bd23bf3321c11447d791ed7d69fda",
+      "compressed_bytes": 2519,
+      "compressed_sha256": "80dd151f05d83772379b50fa3a74ee0c08b3001341a19cf7b6947f5f0e0d9599"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/sdk-provenance.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/sdk-provenance.json",
+      "raw_bytes": 5130,
+      "raw_sha256": "0d37ce4571cffde87edfd8299eb6e3ffa445df831e490e11c71946c098777d43",
+      "compressed_bytes": 2385,
+      "compressed_sha256": "71a86f93d0184e7d044619fe7b1da4b08c6bb7659a902cc5bbea6fd4648ae797"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/sources.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/sources.json",
+      "raw_bytes": 3340537,
+      "raw_sha256": "6b8327dffeb2d4952dadbc1dc438a0aa480bfbd978b45d03fbad8cdf73bb0cb4",
+      "compressed_bytes": 973851,
+      "compressed_sha256": "273d6dbc526843977211bce6026930be7b0d3548d680933573b8ea2c23b4f89b"
+    },
+    {
+      "path": "wasm-coroutines-guests-003/wabt.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-coroutines-guests-003/wabt.json",
+      "raw_bytes": 361,
+      "raw_sha256": "166101c2ee1509dc0eff6bd309a5609445152df96054bb6fa09cd6a509ce13d1",
+      "compressed_bytes": 223,
+      "compressed_sha256": "402a925253005fa75d4889a7777e32bde0bf5571b0c8a9ce1797e74407c85438"
+    },
+    {
+      "path": "native-wasm-coroutines-fast-checks/closeout.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/native-wasm-coroutines-fast-checks/closeout.json",
+      "raw_bytes": 249,
+      "raw_sha256": "35007d1b49302d25c5e3bd8f6e1b446923fe0a5cb630ebc442c177700e3dfeb4",
+      "compressed_bytes": 196,
+      "compressed_sha256": "25b4f54b81b09d0e3cee3c42ea27224ab6e35451fa7b66ced127633241e765a0"
+    },
+    {
+      "path": "native-wasm-coroutines-fast-checks/output/000.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/native-wasm-coroutines-fast-checks/output/000.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "native-wasm-coroutines-fast-checks/output/000.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/native-wasm-coroutines-fast-checks/output/000.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "native-wasm-coroutines-fast-checks/output/001.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/native-wasm-coroutines-fast-checks/output/001.stderr.log",
+      "raw_bytes": 110970,
+      "raw_sha256": "4b7d882591a8b61fb90ba97054c6ac7cde0ecf04fae11a538634687bd3e32e57",
+      "compressed_bytes": 18487,
+      "compressed_sha256": "e08a34280cc8c906adae9c2e34104797bd98d16f87cf778b135ecb9775d0e4d4"
+    },
+    {
+      "path": "native-wasm-coroutines-fast-checks/output/001.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/native-wasm-coroutines-fast-checks/output/001.stdout.log",
+      "raw_bytes": 7748,
+      "raw_sha256": "420e62f9b4bd98779ac4619f7676f70bc052569547f1545dca57cf8148104429",
+      "compressed_bytes": 2162,
+      "compressed_sha256": "fd0c7b7009a71dd078bef5bb5eca337307a040c9e9130af45202d837a3e9ef0e"
+    },
+    {
+      "path": "native-wasm-coroutines-fast-checks/output/002.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/native-wasm-coroutines-fast-checks/output/002.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "native-wasm-coroutines-fast-checks/output/002.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/native-wasm-coroutines-fast-checks/output/002.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "native-wasm-coroutines-fast-checks/output/003.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/native-wasm-coroutines-fast-checks/output/003.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "native-wasm-coroutines-fast-checks/output/003.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/native-wasm-coroutines-fast-checks/output/003.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "native-wasm-coroutines-fast-checks/output/004.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/native-wasm-coroutines-fast-checks/output/004.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "native-wasm-coroutines-fast-checks/output/004.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/native-wasm-coroutines-fast-checks/output/004.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "native-wasm-coroutines-fast-checks/output/005.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/native-wasm-coroutines-fast-checks/output/005.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "native-wasm-coroutines-fast-checks/output/005.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/native-wasm-coroutines-fast-checks/output/005.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "native-wasm-coroutines-fast-checks/output/006.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/native-wasm-coroutines-fast-checks/output/006.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "native-wasm-coroutines-fast-checks/output/006.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/native-wasm-coroutines-fast-checks/output/006.stdout.log",
+      "raw_bytes": 1551,
+      "raw_sha256": "01eb6bf6dd0ec2bd8a97e7982d6e4d323edd8a3263b7f426b0e6420f8d666c49",
+      "compressed_bytes": 570,
+      "compressed_sha256": "13b26bebdd68406a83ee299629e2c491d25e3a8d4625ba2bda767c5c3a3244a4"
+    },
+    {
+      "path": "native-wasm-coroutines-fast-checks/output/007.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/native-wasm-coroutines-fast-checks/output/007.stderr.log",
+      "raw_bytes": 3600,
+      "raw_sha256": "b39acf51b68a8940ef8dac9f92e07443c04b70348e5950a735cea5972bde77ce",
+      "compressed_bytes": 135,
+      "compressed_sha256": "2793e08b0908b79cf496148dc56eb918be1d04e54a79209531ca88ca7ad442bc"
+    },
+    {
+      "path": "native-wasm-coroutines-fast-checks/output/007.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/native-wasm-coroutines-fast-checks/output/007.stdout.log",
+      "raw_bytes": 608,
+      "raw_sha256": "9e0e0d5964ccfcfe2e0b7aa58dd538536139c03ba4184948f29717cf6026b870",
+      "compressed_bytes": 403,
+      "compressed_sha256": "cb50961b2a60edf7af60682eaa033724eb759273714cbe209551ea3fd3676c8a"
+    },
+    {
+      "path": "native-wasm-coroutines-fast-checks/output/008.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/native-wasm-coroutines-fast-checks/output/008.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "native-wasm-coroutines-fast-checks/output/008.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/native-wasm-coroutines-fast-checks/output/008.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "native-wasm-coroutines-fast-checks/output/009.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/native-wasm-coroutines-fast-checks/output/009.stderr.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "native-wasm-coroutines-fast-checks/output/009.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/native-wasm-coroutines-fast-checks/output/009.stdout.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_bytes": 20,
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "native-wasm-coroutines-fast-checks/output/owner.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/native-wasm-coroutines-fast-checks/output/owner.json",
+      "raw_bytes": 7819,
+      "raw_sha256": "cdd7c71c735e4e8cacb9c7ec53ea6b87cd7e2e82b1b6cb88e0672dbe9d025165",
+      "compressed_bytes": 1215,
+      "compressed_sha256": "75907492e7006b473781fa840cd3b52ead464d1fa1e14556f244977c656165f8"
+    },
+    {
+      "path": "native-wasm-coroutines-fast-checks/result.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/native-wasm-coroutines-fast-checks/result.json",
+      "raw_bytes": 3718,
+      "raw_sha256": "cedc5fcbc88e8f1a6c7ae6d34706f215b0dbd618dbb4c31ef5747ded51108c88",
+      "compressed_bytes": 677,
+      "compressed_sha256": "e25e4d910a1c4efb7b93f20fba53d3f6292b8f78e88ede3fed04558b20b81681"
+    },
+    {
+      "path": "native-wasm-coroutines-fast-checks/run.py.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/native-wasm-coroutines-fast-checks/run.py",
+      "raw_bytes": 1648,
+      "raw_sha256": "9a302e88686a489f95a2a4c14bd4882b7d49f1ea4da68f320a288ff7ba50658a",
+      "compressed_bytes": 989,
+      "compressed_sha256": "5873539d0e7ed5a8e77431d07c022d99a98cddb9885ba161a727e505a6f2f835"
+    },
+    {
+      "path": "native-wasm-coroutines-fast-checks/steps.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/native-wasm-coroutines-fast-checks/steps.json",
+      "raw_bytes": 666,
+      "raw_sha256": "4cceb96579d07dbce6fead5ce78b23c6861656d7fed071ff386c9b2c08843746",
+      "compressed_bytes": 226,
+      "compressed_sha256": "a87b350e8081f226d57375888fef72c98a461fa86fa42c0e3eb5dcd14d468531"
+    },
+    {
+      "path": "wasm-coroutines-identity-followup-20261017.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-reviews/wasm-coroutines-identity-followup-20261017.json",
+      "raw_bytes": 3184,
+      "raw_sha256": "ccbb23c562de8a436fbbcdba6880ad752f92585ad7f37edd6b0194090834e6d6",
+      "compressed_bytes": 1415,
+      "compressed_sha256": "2c2cd2ce202ffc5416d8ebc2708e0b8c57d3b4ff4811f32a8a4fd89ebdf0603c"
+    },
+    {
+      "path": "wasm-coroutines-identity-resolved-20261017.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-reviews/wasm-coroutines-identity-resolved-20261017.json",
+      "raw_bytes": 2190,
+      "raw_sha256": "b3092c1dd7bdca6667b5b9b875c57ad063f6589a82415be2efebd0fe698e2897",
+      "compressed_bytes": 1082,
+      "compressed_sha256": "2dcbf274c94c7653d65b34f78502f1c2932272610fc873669baffdbbae1c463f"
+    }
+  ]
+}

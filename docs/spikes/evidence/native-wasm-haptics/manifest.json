@@ -1,0 +1,68 @@
+{
+  "format": "incant-native-wasm-haptics-evidence-v1",
+  "compressed_bytes": 382393,
+  "uncompressed_bytes": 5252928,
+  "sha256": "690e16a569deea1a7a2f0c206232f8bf7b9926fe95dba769f1be43df351afbf9",
+  "replay": {
+    "passed": true,
+    "records": 212,
+    "actual_tests": 47,
+    "strict_lints": 3,
+    "aggregate_seconds": 1597.5797330019413,
+    "haptics_seconds": 593.2246450409875,
+    "target_peak_allocated_bytes": 11117834240,
+    "native_executed": false
+  },
+  "attempts": [
+    {
+      "packet": "/Users/andreyyurlov/.codex/incant-resume-20261017/native-wasm-haptics-cpu-001-n6ayc8my",
+      "native_source": "0d7c2e5af34f2eb40eb27305ff20f27042e559e7",
+      "source_inventory": {
+        "bytes": 4910612,
+        "sha256": "1f90d90c9aade25fa8c084ba9fec8179173c4e9e3367f05965acc2a31f952834",
+        "executable": false
+      },
+      "packet_sha256": "ea7c7ed056191d17f5a84bf574ee2db264675de5a4106599c21b26857e136a3c",
+      "passed": false,
+      "seconds": 40.9980432500015
+    },
+    {
+      "packet": "/Users/andreyyurlov/.codex/incant-resume-20261017/native-wasm-haptics-cpu-002-kngytrq6",
+      "native_source": "c218cce4c483ca85d6d7b4e083f56b3a6496a9bf",
+      "source_inventory": {
+        "bytes": 4910612,
+        "sha256": "4f6e9417b25cd17ea4a6db66393b94772f90201256340455de2a66f5c391ace2",
+        "executable": false
+      },
+      "packet_sha256": "5a445c10fd1151d002e673f0dba344fb9eb3d3e52a95d09cc602b9b98f1d3c15",
+      "passed": false,
+      "seconds": 525.6651013749652
+    },
+    {
+      "packet": "/Users/andreyyurlov/.codex/incant-resume-20261017/native-wasm-haptics-cpu-003-ztmz4z7a",
+      "native_source": "c218cce4c483ca85d6d7b4e083f56b3a6496a9bf",
+      "source_inventory": {
+        "bytes": 4910612,
+        "sha256": "4f6e9417b25cd17ea4a6db66393b94772f90201256340455de2a66f5c391ace2",
+        "executable": false
+      },
+      "packet_sha256": "dc9a4317d325b97ca09a8f7688c7201f3cdf77e767fe4891a1ef588311387f9c",
+      "passed": false,
+      "seconds": 11.011849124974106
+    },
+    {
+      "packet": "/Users/andreyyurlov/.codex/incant-resume-20261017/native-wasm-haptics-cpu-004-2_9fd3nx",
+      "native_source": "c218cce4c483ca85d6d7b4e083f56b3a6496a9bf",
+      "source_inventory": {
+        "bytes": 4910612,
+        "sha256": "4f6e9417b25cd17ea4a6db66393b94772f90201256340455de2a66f5c391ace2",
+        "executable": false
+      },
+      "packet_sha256": "0c6d79e351b1e0a4f818697aacd11e79e6b5486079ffc9a848a346d2d070c7e4",
+      "passed": true,
+      "seconds": 15.549651291046757
+    }
+  ],
+  "external_artifacts": "Original copied executables, Wasm, generated C, source inventories and full predecessor records stay external and hash-bound in the archived records.",
+  "portable_scope": "Checks recorded output and provenance only; never loads or executes native/archived code."
+}

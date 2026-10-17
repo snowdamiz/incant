@@ -50,4 +50,28 @@ class PersistentDeclarations(unittest.TestCase):
             (output / 'm0.wasm').write_bytes(HEADER)
             with self.assertRaises(ValueError): linked_expression(row, output, root)
 
+    def test_coroutine_linker_policy_changes_invalidate_the_saved_program(self):
+        source = Path(__file__).resolve().parents[2]
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory) / 'bundle'; output.mkdir()
+            root = Path(directory) / 'policy'
+            for name in ('sdk/abi/native-v1.json', 'crates/incant_wasm_cook/src/lib.rs',
+                         'crates/incant_wasm_cook/src/captured.rs', 'tools/wasm2c.py',
+                         'tools/wasm_persistent.py', 'tools/wasm_coroutines.py'):
+                path = root / name; path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_bytes((source / name).read_bytes())
+            for suffix in ('.original.wasm', '.wasm'):
+                (output / ('m0' + suffix)).write_bytes(module())
+            for suffix in ('.c', '.h', '-facade.c'):
+                (output / ('m0' + suffix)).write_text('actual generated unit')
+            row = {'prefix':'m0', 'persistent_state':declaration(module())}
+            linked_expression(row, output, root)
+            before = row['persistent_fingerprint']
+            helper = root / 'tools/wasm_coroutines.py'
+            helper.write_bytes(helper.read_bytes() + b'\n# changed linker policy\n')
+            linked_expression(row, output, root)
+            self.assertNotEqual(before, row['persistent_fingerprint'])
+            helper.unlink()
+            with self.assertRaises(FileNotFoundError): linked_expression(row, output, root)
+
 if __name__ == '__main__': unittest.main()

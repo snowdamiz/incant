@@ -1,10 +1,13 @@
 mod audio;
 mod compound;
+mod coroutines;
+mod haptics;
 mod hud;
 mod ik;
 mod light;
 mod persistent;
 mod root_motion;
+mod timers;
 use crate::{EntityId, Error, FlipbookSnapshot, InputSnapshot, Result, Transform, Velocity, raw};
 use core::marker::PhantomData;
 use incant_wasm_abi as abi;

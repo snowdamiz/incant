@@ -1,0 +1,140 @@
+{
+  "format": "independent-saved-byte-pair-review-1",
+  "findings": [],
+  "no_performance_or_display_acceptance": true,
+  "inputs": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-displaylink-wake-001/window-ordinary-001/presentations.json",
+      "bytes": 1811933,
+      "sha256": "09b4d140584d685e5d8dfcf4c0f19a06be37799662a0519c7f50633ba8037353"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-displaylink-wake-001/window-ordinary-001/host-stages.json",
+      "bytes": 2530262,
+      "sha256": "eb074209c77ee25b5636b864d07faace7f96e255c8dce0429b197aacd52391e6"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-displaylink-wake-001/window-ordinary-001/stdout.json",
+      "bytes": 576565,
+      "sha256": "bf15c351a1438c06973c8c411ef6bbaa96ccad2844c0cb282bbc9790ba30d25b"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-displaylink-wake-001/window-display-link60-002/presentations.json",
+      "bytes": 1799010,
+      "sha256": "a62d791a7d69d5f61d9845ed11fc2268999acc363eb9a382dbc8085242f4d724"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-displaylink-wake-001/window-display-link60-002/host-stages.json",
+      "bytes": 2455932,
+      "sha256": "38f8ca623864070df3da97574b8dfcfce94d09c83c3aba57c5c3559eb430fd1b"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-displaylink-wake-001/window-display-link60-002/stdout.json",
+      "bytes": 577006,
+      "sha256": "566912d8c74e7295ae3ca6f1df2a6ee06ac8f7a8ce0ca13106bfcacc95c79acb"
+    }
+  ],
+  "arms": {
+    "window-ordinary-001": {
+      "steps": 2156,
+      "presentation_ms": {
+        "samples": 2155,
+        "sum": 35899.99441662803,
+        "min": 8.33325000712648,
+        "max": 25.00008331844583,
+        "p95_nearest_rank": 16.666750016156584
+      },
+      "presentation_short_lt12": 11,
+      "presentation_long_gt21": 9,
+      "presentation_span_ms": 35899.99441662803,
+      "schedule_due_counts": {
+        "1": 2156
+      },
+      "dropped_wall_ticks": "0",
+      "acquisition_call_ms": {
+        "samples": 2156,
+        "sum": 52.42995,
+        "min": 0.011625,
+        "max": 5.051583,
+        "p95_nearest_rank": 0.029416
+      },
+      "reservation_ms": {
+        "samples": 2156,
+        "sum": 232.203619,
+        "min": 0.0165,
+        "max": 5.057458,
+        "p95_nearest_rank": 0.14725
+      },
+      "committed_body_ms": {
+        "samples": 2156,
+        "sum": 7564.213736,
+        "min": 2.831917,
+        "max": 16.50575,
+        "p95_nearest_rank": 4.251375
+      },
+      "host_finish_interval_ms": {
+        "samples": 2155,
+        "sum": 35899.460125,
+        "min": 5.211958,
+        "max": 26.234333,
+        "p95_nearest_rank": 17.113875
+      },
+      "full_host_timing": true
+    },
+    "window-display-link60-002": {
+      "steps": 2156,
+      "presentation_ms": {
+        "samples": 2155,
+        "sum": 35916.67445830535,
+        "min": 8.333208330441266,
+        "max": 33.33341667894274,
+        "p95_nearest_rank": 25.000041641760617
+      },
+      "presentation_short_lt12": 330,
+      "presentation_long_gt21": 276,
+      "presentation_span_ms": 35916.67445830535,
+      "schedule_due_counts": {
+        "1": 1618,
+        "2": 269
+      },
+      "dropped_wall_ticks": "0",
+      "acquisition_call_ms": {
+        "samples": 2156,
+        "sum": 44.686974,
+        "min": 0.008833,
+        "max": 0.376083,
+        "p95_nearest_rank": 0.029959
+      },
+      "reservation_ms": {
+        "samples": 2156,
+        "sum": 198.535198,
+        "min": 0.010625,
+        "max": 0.966375,
+        "p95_nearest_rank": 0.165917
+      },
+      "committed_body_ms": {
+        "samples": 2156,
+        "sum": 7397.552699,
+        "min": 2.752084,
+        "max": 14.268083,
+        "p95_nearest_rank": 4.143667
+      },
+      "host_finish_interval_ms": {
+        "samples": 2155,
+        "sum": 35921.469125,
+        "min": 2.768666,
+        "max": 34.744583,
+        "p95_nearest_rank": 30.282
+      },
+      "full_host_timing": true
+    }
+  },
+  "formulas": {
+    "presentation_ms": "sort exact gameplay host steps1..2156, adjacent reported presented_seconds delta *1000 (2155 intervals); initial step0 excluded; all same segment/nonzero",
+    "percentile": "sorted[n=ceil(.95*count)-1], nearest rank",
+    "batch_counts": "unique (session_generation,schedule.pulse_ns), exact complete ordinals0..due-1",
+    "acquisition_call_ms": "single successful acquisition.ended_ns - began_ns, /1e6 for each of2156 gameplay host rows",
+    "reservation_ms": "host_timing.reserved_ns - began_ns, /1e6; includes acquisition and surrounding reservation work",
+    "committed_body_ms": "completed_ns - reserved_ns, /1e6"
+  }
+}

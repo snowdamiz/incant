@@ -8,6 +8,8 @@ mod compilation_options_tests;
 #[cfg(all(feature = "native-compilation", target_os = "macos"))]
 mod compilations;
 mod devices;
+#[cfg(all(feature = "native-display-link", target_os = "macos"))]
+mod display_link;
 mod gamepad;
 mod haptics;
 mod ime;
@@ -239,14 +241,27 @@ impl Options {
         })
     }
 }
-pub fn run(args: &[String], pacing: crate::pacing::Mode) -> session::Result<serde_json::Value> {
+pub fn run(
+    args: &[String],
+    pacing: crate::pacing::Mode,
+    wake_mode: crate::wake::Mode,
+) -> session::Result<serde_json::Value> {
     let options = Options::parse(args)?;
     // Explicit selection refuses wrong scene/OS before creating diagnostic
     // outputs, a window, audio device or GPU. Ordinary startup order is retained.
-    let admitted_scene = if pacing.selected() {
+    let admitted_scene = if pacing.selected() || wake_mode.selected() {
         let scene = CookedScene::from_bytes(&bounded(&options.scene, 128 * 1024 * 1024)?)?;
         pacing.admit_scene(scene.tick_rate())?;
         pacing.admit_platform()?;
+        wake_mode.admit_scene(scene.tick_rate())?;
+        if wake_mode.selected() {
+            #[cfg(all(feature = "native-display-link", target_os = "macos"))]
+            if !display_link::supported() {
+                return Err(crate::wake::Error::Unsupported.into());
+            }
+            #[cfg(not(all(feature = "native-display-link", target_os = "macos")))]
+            return Err(crate::wake::Error::Unsupported.into());
+        }
         Some(scene)
     } else {
         None
@@ -461,6 +476,11 @@ pub fn run(args: &[String], pacing: crate::pacing::Mode) -> session::Result<serd
     if options.probe {
         window.set_focus();
     }
+    #[cfg(all(feature = "native-display-link", target_os = "macos"))]
+    let mut display_wake = wake_mode
+        .selected()
+        .then(|| display_link::Host::new(Arc::clone(&window), event_loop.create_proxy()))
+        .transpose()?;
     let code = event_loop.run_return(|event, _, flow| {
         #[cfg(all(feature = "native-presentations", target_os = "macos"))]
         if let Event::NewEvents(cause) = &event {
@@ -468,6 +488,12 @@ pub fn run(args: &[String], pacing: crate::pacing::Mode) -> session::Result<serd
         }
         termination.event(|exit| {
             match event {
+                #[cfg(all(feature = "native-display-link", target_os = "macos"))]
+                Event::UserEvent(()) => {
+                    if let Some(wake) = &mut display_wake {
+                        wake.acknowledge();
+                    }
+                }
                 Event::WindowEvent {
                     window_id, event, ..
                 } if window_id == window.id() => match event {
@@ -475,6 +501,10 @@ pub fn run(args: &[String], pacing: crate::pacing::Mode) -> session::Result<serd
                         *exit = true;
                     }
                     WindowEvent::Resized(_) | WindowEvent::ScaleFactorChanged { .. } => {
+                        #[cfg(all(feature = "native-display-link", target_os = "macos"))]
+                        if let Some(wake) = &mut display_wake {
+                            wake.boundary(Instant::now());
+                        }
                         #[cfg(all(feature = "native-compilation", target_os = "macos"))]
                         if let Some(c) = &compilation {
                             c.boundary(compilations::Boundary::Resize);
@@ -492,6 +522,10 @@ pub fn run(args: &[String], pacing: crate::pacing::Mode) -> session::Result<serd
                         observe_state!(state_log::Reason::Resize);
                     }
                     WindowEvent::Focused(value) => {
+                        #[cfg(all(feature = "native-display-link", target_os = "macos"))]
+                        if let Some(wake) = &mut display_wake {
+                            wake.boundary(Instant::now());
+                        }
                         #[cfg(all(feature = "native-compilation", target_os = "macos"))]
                         if let Some(c) = &compilation {
                             c.boundary(compilations::Boundary::Focus);
@@ -519,6 +553,10 @@ pub fn run(args: &[String], pacing: crate::pacing::Mode) -> session::Result<serd
                         });
                     }
                     WindowEvent::Suspended => {
+                        #[cfg(all(feature = "native-display-link", target_os = "macos"))]
+                        if let Some(wake) = &mut display_wake {
+                            wake.boundary(Instant::now());
+                        }
                         #[cfg(all(feature = "native-compilation", target_os = "macos"))]
                         if let Some(c) = &compilation {
                             c.boundary(compilations::Boundary::Suspend);
@@ -538,6 +576,10 @@ pub fn run(args: &[String], pacing: crate::pacing::Mode) -> session::Result<serd
                         observe_state!(state_log::Reason::Suspended);
                     }
                     WindowEvent::Resumed => {
+                        #[cfg(all(feature = "native-display-link", target_os = "macos"))]
+                        if let Some(wake) = &mut display_wake {
+                            wake.boundary(Instant::now());
+                        }
                         #[cfg(all(feature = "native-compilation", target_os = "macos"))]
                         if let Some(c) = &compilation {
                             c.boundary(compilations::Boundary::Resume);
@@ -590,6 +632,13 @@ pub fn run(args: &[String], pacing: crate::pacing::Mode) -> session::Result<serd
                         && !window.is_minimized()
                         && surface.has_supported_size();
                     let active = focused && presentable;
+                    #[cfg(all(feature = "native-display-link", target_os = "macos"))]
+                    let wake_ready = match display_wake.as_mut() {
+                        Some(wake) => wake.poll(now, active)?,
+                        None => true,
+                    };
+                    #[cfg(not(all(feature = "native-display-link", target_os = "macos")))]
+                    let wake_ready = true;
                     if has_ui && ui_resize && presentable {
                         #[cfg(feature = "profile")]
                         cadence.interrupt();
@@ -724,7 +773,7 @@ pub fn run(args: &[String], pacing: crate::pacing::Mode) -> session::Result<serd
                             presentation_refreshes += 1;
                             initial_frame = false;
                         }
-                    } else if now >= retry {
+                    } else if now >= retry && wake_ready {
                         if initial_frame {
                             #[cfg(feature = "profile")]
                             cadence.interrupt();
@@ -944,6 +993,10 @@ pub fn run(args: &[String], pacing: crate::pacing::Mode) -> session::Result<serd
                                     drop(restart_compilation);
                                 }
                                 generation = next;
+                                #[cfg(all(feature = "native-display-link", target_os = "macos"))]
+                                if let Some(wake) = &mut display_wake {
+                                    wake.boundary(Instant::now());
+                                }
                                 #[cfg(all(feature = "native-presentations", target_os = "macos"))]
                                 surface.presentation_boundary(Boundary::Restart);
                                 suspended = true;
@@ -993,10 +1046,21 @@ pub fn run(args: &[String], pacing: crate::pacing::Mode) -> session::Result<serd
             ControlFlow::WaitUntil(if suspended {
                 retry.max(Instant::now() + Duration::from_millis(1))
             } else {
-                clock.deadline()
+                // Health deadline only; it cannot authorize gameplay.
+                #[cfg(all(feature = "native-display-link", target_os = "macos"))]
+                let deadline = display_wake
+                    .as_ref()
+                    .map_or_else(|| clock.deadline(), display_link::Host::deadline);
+                #[cfg(not(all(feature = "native-display-link", target_os = "macos")))]
+                let deadline = clock.deadline();
+                deadline
             })
         };
     });
+    #[cfg(all(feature = "native-display-link", target_os = "macos"))]
+    if let Some(wake) = &mut display_wake {
+        wake.stop();
+    }
     surface.cancel();
     let result = (|| -> session::Result<serde_json::Value> {
         termination.finish(code, || {
@@ -1020,6 +1084,10 @@ pub fn run(args: &[String], pacing: crate::pacing::Mode) -> session::Result<serd
                 "diagnostic_only":true,
                 "performance_gate_passed":false
             });
+        }
+        #[cfg(all(feature = "native-display-link", target_os = "macos"))]
+        if let Some(wake) = &display_wake {
+            report["native_wake"] = wake.report();
         }
         #[cfg(feature = "profile")]
         cadence.append(&mut report);

@@ -9,6 +9,7 @@ mod animation_poses_v5;
 mod animations;
 mod audio;
 mod capability;
+mod coroutines;
 mod flipbooks;
 mod generated;
 mod navigation_paths;
@@ -18,6 +19,7 @@ mod steering;
 pub use flipbooks::{
     MAGIC as FLIPBOOK_MAGIC, MAX_BYTES as MAX_FLIPBOOK_BYTES, ROW_BYTES as FLIPBOOK_ROW_BYTES,
 };
+mod haptics;
 mod hud;
 mod input;
 mod localization;
@@ -28,6 +30,7 @@ mod compiled;
 pub use compiled::{Import, ModuleExports, StaticError, StaticModule};
 pub mod limits;
 pub mod persistent;
+mod timers;
 mod transaction;
 pub use capability::{Call, Capability};
 use incant_runtime::RuntimeError;
@@ -42,6 +45,8 @@ pub enum BoundaryError {
     Runtime(#[from] RuntimeError),
     #[error(transparent)]
     Query(#[from] incant_runtime::QueryError),
+    #[error(transparent)]
+    Haptics(#[from] incant_input::haptics::HapticError),
     #[error("module failed; construct or reload a new instance")]
     Failed,
 }

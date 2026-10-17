@@ -1,0 +1,36 @@
+{
+  "format": "independent-source-review-1",
+  "reviewed_at_utc": "2026-10-17T20:40:46Z",
+  "files": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-displaylink-wake-001/replay-preparation-001/contract.json",
+      "sha256": "8f54912aef1ea9d6b7db4e60eb73628a74271c773a882d11a39ca2bf7d59b8c3"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-displaylink-wake-001/replay-preparation-001/ordinary/run.py",
+      "sha256": "e2a9078c43e087a2bccd8342cf3dbf0bba99bf96c7a48480e97b636efc32c42f"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-displaylink-wake-001/replay-preparation-001/display-link60/run.py",
+      "sha256": "e2a9078c43e087a2bccd8342cf3dbf0bba99bf96c7a48480e97b636efc32c42f"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-displaylink-wake-001/replay-preparation-001/test_flow.py",
+      "sha256": "b4bdd6766351f3a9604442e624c18949b1b21da2de8186b45dee132ce20cb2fb"
+    }
+  ],
+  "finding_disposition": "Prior callback accounting gap corrected; no remaining material finding in reviewed replay admission.",
+  "checks": [
+    "Six pure saved-data controls passed locally; no native invocation.",
+    "Both controller bytes identical.",
+    "callbacks - coalesced - consumed is explicitly restricted to 0 or 1.",
+    "Complete 2156-step route requires >=539 active pulses, preserving four-step scheduler bound.",
+    "539-pulse test reaches independent profile check, not unconditional acceptance.",
+    "Display-link health wait excludes legacy timer-deadline equality while retaining acquisition, host coverage, finalization, focus and zero-timestamp refusals."
+  ],
+  "scope": [
+    "Source and pure controls only.",
+    "No native callback-to-step attribution or performance acceptance.",
+    "No shipping, native-window or GPU execution performed by reviewer."
+  ]
+}

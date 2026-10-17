@@ -13,6 +13,7 @@ import re
 import subprocess
 from wasm_abi import ABI_VERSION, NAMESPACES
 from wasm_persistent import declaration, linked_expression
+from wasm_coroutines import catalog
 
 
 def run(args):
@@ -112,7 +113,7 @@ def prepare(output, modules, wabt, cook, captured=None, *, execute=None):
  fn incant_{module}_free(p:*mut c_void);
 }}''')
         state = declaration((output / f'{module}.original.wasm').read_bytes())
-        report.append({'persistent_state': state, 'name': name, 'prefix': module, 'input_sha256': sha(output / f'{module}.original.wasm'),
+        report.append({'coroutines': catalog((output / f'{module}.original.wasm').read_bytes()), 'persistent_state': state, 'name': name, 'prefix': module, 'input_sha256': sha(output / f'{module}.original.wasm'),
                        'prepared_sha256': sha(prepared)})
     bindings.append('pub fn linked(name: &str) -> Option<ModuleExports> { match name {')
     for row in report:

@@ -1,0 +1,1039 @@
+{
+  "format": "incant-display-link-fresh-shipping-result-v1",
+  "source": "35f67313eba66c1de2089c6db1b56c4f657e4852",
+  "plan_sha256": "dd207e3c653d5fd8346a8799aa637b9a2103144360ef296787d265337b9bf560",
+  "supervisor_sha256": "b5224ac355227d38964da83dd3239d53e24263238dfafcc01df87edfda831d7f",
+  "status": "complete",
+  "wrapper_pid": 22045,
+  "retries": 0,
+  "GPU_window_executions": 0,
+  "same_current_source_baseline_and_treatment_player": true,
+  "prior_usage": {
+    "CPU002_account_seconds": 1804.7706488769036,
+    "CPU002_target_peak": 12058796032,
+    "CPU002_target_current": 12053102592,
+    "CPU002_target_cap": 16328871936,
+    "CPU002": {
+      "path": "/Users/andreyyurlov/.codex/incant-resume-20261017/native-displaylink-cpu-002/result.json",
+      "resolved": "/Users/andreyyurlov/.codex/incant-resume-20261017/native-displaylink-cpu-002/result.json",
+      "bytes": 2395,
+      "sha256": "9de8384a3e6e75a7303563d8118d4f7bdbdf916b95f800bbc9072d747283bcbf"
+    },
+    "predecessor_shipping_plan": {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-metal-minimum-duration-001/shipping-packet-002/plan.json",
+      "resolved": "/Users/andreyyurlov/.codex/incant-evidence/native-metal-minimum-duration-001/shipping-packet-002/plan.json",
+      "bytes": 56461,
+      "sha256": "4c23e4195709b86bf35d5775a356b739d09f0d2af87422fab708f0f47af9dbe4"
+    },
+    "retained_prior_shipping_outcome": "/Users/andreyyurlov/.codex/incant-evidence/native-metal-minimum-duration-001/shipping-001/metadata/result.json",
+    "new_shipping_attempts": 0
+  },
+  "scratch": "/Users/andreyyurlov/.codex/incant-evidence/native-displaylink-wake-001/shipping-001/scratch",
+  "preflight_compiler_smoke": {
+    "node": "v22.23.3",
+    "platform": "darwin",
+    "arch": "arm64",
+    "typescript": "5.9.3",
+    "swc": "1.16.13",
+    "sourcemap_codec": "1.6.0",
+    "synthetic_typescript_transform": true,
+    "synthetic_native_swc_transform": true,
+    "codec_roundtrip": true,
+    "no_project_execution": true,
+    "loaded": [
+      {
+        "path": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/node_modules/@jridgewell/sourcemap-codec/dist/sourcemap-codec.umd.js",
+        "bytes": 16174,
+        "sha256": "36f67483c3beef15e041483b68e1b66e8b6b3e6c50ab654a5e97464082324cc9"
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/node_modules/@swc/core-darwin-arm64/swc.darwin-arm64.node",
+        "bytes": 8922224,
+        "sha256": "c2143d6969fa8bbc2ff9d4037fd94f3dce29d8c606c5a5d2f43a4e4dbb2c6f1c"
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/node_modules/@swc/core/binding.js",
+        "bytes": 9462,
+        "sha256": "46163ee878019eb5ddb6d6783d925b6fedaa1f9dbd3c587b96dee3e5631cc72c"
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/node_modules/@swc/core/index.js",
+        "bytes": 19067,
+        "sha256": "613bbdb22f2f18799afe935656ecec6654362809f1df91d08b83b2afc684696f"
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/node_modules/@swc/core/package.json",
+        "bytes": 3285,
+        "sha256": "30f810ddf7edf85604db4ea5f577fcd4b506cbeb6065e31d35629ef6b17a1f65"
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/node_modules/@swc/core/spack.js",
+        "bytes": 3496,
+        "sha256": "5af057ed9953917f2e6d7cb44751e8df07898b515521e191b5cfc23d4b997f19"
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/node_modules/typescript/lib/typescript.js",
+        "bytes": 9112572,
+        "sha256": "3ae902c92cc44dace175c0e69e13a4b0899f6983c6121d76b9ab8dd5795e7675"
+      }
+    ]
+  },
+  "cooked_asset_inputs": [
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/native-wake-acquisition-resume-001/authoring/.incant/cache/audio/08b4d5af1f19e43c1c228d7c6ca243e8d2362f27f336f87a347cb697f6ebca28.json",
+      "destination": ".incant/cache/audio/08b4d5af1f19e43c1c228d7c6ca243e8d2362f27f336f87a347cb697f6ebca28.json",
+      "bytes": 1096,
+      "sha256": "59363a80bbac59c6f139695407f2e76c31ed47b4345b03177801b01640480139",
+      "historical_native_producer": "a621ef024c6012e3ab9e43be39afc501ea57f771"
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/native-wake-acquisition-resume-001/build-001/package/player/data/audio/1e53cd57bfecb7115ad888e9d40f01c6d957b7130bd6f8975a2d16100d7eda46.ipcm",
+      "destination": ".incant/cache/audio/1e53cd57bfecb7115ad888e9d40f01c6d957b7130bd6f8975a2d16100d7eda46.ipcm",
+      "bytes": 691200,
+      "sha256": "1e53cd57bfecb7115ad888e9d40f01c6d957b7130bd6f8975a2d16100d7eda46",
+      "historical_native_producer": "a621ef024c6012e3ab9e43be39afc501ea57f771"
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/native-wake-acquisition-resume-001/build-001/package/player/data/audio/2b67780f0ec6ce10736909aa8ec0a3b386d6b308382b7eaf33d40a5a28977718.ipcm",
+      "destination": ".incant/cache/audio/2b67780f0ec6ce10736909aa8ec0a3b386d6b308382b7eaf33d40a5a28977718.ipcm",
+      "bytes": 8777144,
+      "sha256": "2b67780f0ec6ce10736909aa8ec0a3b386d6b308382b7eaf33d40a5a28977718",
+      "historical_native_producer": "a621ef024c6012e3ab9e43be39afc501ea57f771"
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/native-wake-acquisition-resume-001/build-001/package/player/data/audio/2e05653f8752033823f84b711926070f2d4d237aef0087105be217b401c89637.ipcm",
+      "destination": ".incant/cache/audio/2e05653f8752033823f84b711926070f2d4d237aef0087105be217b401c89637.ipcm",
+      "bytes": 345600,
+      "sha256": "2e05653f8752033823f84b711926070f2d4d237aef0087105be217b401c89637",
+      "historical_native_producer": "a621ef024c6012e3ab9e43be39afc501ea57f771"
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/native-wake-acquisition-resume-001/build-001/package/player/data/audio/384ae95c87bd2678c8b4b80f85bca02c73035338461b423f514e25fc891f9778.ipcm",
+      "destination": ".incant/cache/audio/384ae95c87bd2678c8b4b80f85bca02c73035338461b423f514e25fc891f9778.ipcm",
+      "bytes": 576000,
+      "sha256": "384ae95c87bd2678c8b4b80f85bca02c73035338461b423f514e25fc891f9778",
+      "historical_native_producer": "a621ef024c6012e3ab9e43be39afc501ea57f771"
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/native-wake-acquisition-resume-001/authoring/.incant/cache/audio/3d3e537168e5bf96036e6625c0b5d55b12cf122a4715f7e8d77baf937edc8c58.json",
+      "destination": ".incant/cache/audio/3d3e537168e5bf96036e6625c0b5d55b12cf122a4715f7e8d77baf937edc8c58.json",
+      "bytes": 561,
+      "sha256": "fd7c43cb6347a021fcfe215fa66bbd817620ff596a04bc8b32259202352921ea",
+      "historical_native_producer": "a621ef024c6012e3ab9e43be39afc501ea57f771"
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/native-wake-acquisition-resume-001/authoring/.incant/cache/audio/4ecb37a4cf20667d8d7922971a3b609c1898cb988fb96bc0a3857546f3123c4e.json",
+      "destination": ".incant/cache/audio/4ecb37a4cf20667d8d7922971a3b609c1898cb988fb96bc0a3857546f3123c4e.json",
+      "bytes": 963,
+      "sha256": "d9ca5bd9b8d52ced2826915913857e90baea981bcdfe6d9ace42e9105929fdd2",
+      "historical_native_producer": "a621ef024c6012e3ab9e43be39afc501ea57f771"
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/native-wake-acquisition-resume-001/authoring/.incant/cache/audio/4f31a36d777d5ce2702b9a5237742cc8a69efa73d7067afae35dff713cbb935f.json",
+      "destination": ".incant/cache/audio/4f31a36d777d5ce2702b9a5237742cc8a69efa73d7067afae35dff713cbb935f.json",
+      "bytes": 9341,
+      "sha256": "8d841a107aff6df0511e0e9dfdf8c6d36cf01928d91dd82e415b26858f58cc96",
+      "historical_native_producer": "a621ef024c6012e3ab9e43be39afc501ea57f771"
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/native-wake-acquisition-resume-001/build-001/package/player/data/audio/6c94df51cc76f31375178021c1fec7775a5e448cba6bde2d1120f9efa6a32c56.ipcm",
+      "destination": ".incant/cache/audio/6c94df51cc76f31375178021c1fec7775a5e448cba6bde2d1120f9efa6a32c56.ipcm",
+      "bytes": 138240,
+      "sha256": "6c94df51cc76f31375178021c1fec7775a5e448cba6bde2d1120f9efa6a32c56",
+      "historical_native_producer": "a621ef024c6012e3ab9e43be39afc501ea57f771"
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/native-wake-acquisition-resume-001/authoring/.incant/cache/audio/b63a98f27758a1bb7f2a4ba44f4fb8d263230bf401520116b87e6946cdf56117.json",
+      "destination": ".incant/cache/audio/b63a98f27758a1bb7f2a4ba44f4fb8d263230bf401520116b87e6946cdf56117.json",
+      "bytes": 764,
+      "sha256": "d5748ced504a28a21d72eaf9c0b26c3fee6ff900c07ea491c06b79c4c5680642",
+      "historical_native_producer": "a621ef024c6012e3ab9e43be39afc501ea57f771"
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/native-wake-acquisition-resume-001/authoring/.incant/cache/fonts/0e1cd7265c7a2fa6109d995205dd8e070723bb824fe28daa8299ba1105063a1f.json",
+      "destination": ".incant/cache/fonts/0e1cd7265c7a2fa6109d995205dd8e070723bb824fe28daa8299ba1105063a1f.json",
+      "bytes": 323,
+      "sha256": "0538183b4a25a91d05296686e8092634f8c572c4c1dc34329c4685843c7661e1",
+      "historical_native_producer": "a621ef024c6012e3ab9e43be39afc501ea57f771"
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/native-wake-acquisition-resume-001/build-001/package/player/data/fonts/3127f0b873387ee37e2040135a06e9e9c05030f509eb63689529becf28b50384.ifont",
+      "destination": ".incant/cache/fonts/3127f0b873387ee37e2040135a06e9e9c05030f509eb63689529becf28b50384.ifont",
+      "bytes": 310300,
+      "sha256": "48804b712c66bb0ce00b2cc3272c7be18171810a3bb0555e3d247544951e0fdc",
+      "historical_native_producer": "a621ef024c6012e3ab9e43be39afc501ea57f771"
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/native-wake-acquisition-resume-001/authoring/.incant/cache/fonts/74f2395f9b27e4c4ff06183b1baed5684ce4a090490bd00f42637547cca5da0f.json",
+      "destination": ".incant/cache/fonts/74f2395f9b27e4c4ff06183b1baed5684ce4a090490bd00f42637547cca5da0f.json",
+      "bytes": 317,
+      "sha256": "76b2977309e2485a6007bcb9c6e75df3a2e161dc576ebbf6be00f6b8b961d0f0",
+      "historical_native_producer": "a621ef024c6012e3ab9e43be39afc501ea57f771"
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/native-wake-acquisition-resume-001/build-001/package/player/data/fonts/9ec258961c8800c709f05586b6fca8a47061f3f776ac088bb87fbb2a462c116e.ifont",
+      "destination": ".incant/cache/fonts/9ec258961c8800c709f05586b6fca8a47061f3f776ac088bb87fbb2a462c116e.ifont",
+      "bytes": 13812,
+      "sha256": "db12e66306387bf4fdcf4b6be1fc31eed9f136e60211061e65cc97ba71500311",
+      "historical_native_producer": "a621ef024c6012e3ab9e43be39afc501ea57f771"
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/native-wake-acquisition-resume-001/build-001/package/player/data/fonts/ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56.ifont",
+      "destination": ".incant/cache/fonts/ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56.ifont",
+      "bytes": 765788,
+      "sha256": "8bd20a742cc19c0fe65b106d983ea1ed816c4cd5ca1c3d50bdc4d05aeb5f8e7a",
+      "historical_native_producer": "a621ef024c6012e3ab9e43be39afc501ea57f771"
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/native-wake-acquisition-resume-001/authoring/.incant/cache/fonts/efbee025bcb27036123566525a911cd346bbe425cceb413eb800661df6b65767.json",
+      "destination": ".incant/cache/fonts/efbee025bcb27036123566525a911cd346bbe425cceb413eb800661df6b65767.json",
+      "bytes": 318,
+      "sha256": "ce4cd118624295e30ed4514c80bfad49c379702ead14327faf7ff92184d6034a",
+      "historical_native_producer": "a621ef024c6012e3ab9e43be39afc501ea57f771"
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/native-wake-acquisition-resume-001/build-001/package/player/data/models/018d021c673a74b618fc3516d8ab4e64b32a88f6c8323d0d84395e684d811c13.incmodel",
+      "destination": ".incant/cache/models/018d021c673a74b618fc3516d8ab4e64b32a88f6c8323d0d84395e684d811c13.incmodel",
+      "bytes": 25810,
+      "sha256": "509cf7c24253b675ed0a3d36ae344d35272050107a97c4aeae4db79417d132e7",
+      "historical_native_producer": "a621ef024c6012e3ab9e43be39afc501ea57f771"
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/native-wake-acquisition-resume-001/build-001/package/player/data/models/1649bb952607a07a912661374fa6a8c104a261d625b339a5aa2e096f52970bec.incmodel",
+      "destination": ".incant/cache/models/1649bb952607a07a912661374fa6a8c104a261d625b339a5aa2e096f52970bec.incmodel",
+      "bytes": 18726133,
+      "sha256": "b32c0ae9a0305abd7610713aa77a270e320090bbb31be1792a47f857ec939f99",
+      "historical_native_producer": "a621ef024c6012e3ab9e43be39afc501ea57f771"
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/native-wake-acquisition-resume-001/build-001/package/player/data/models/b85f1046e4d28277bd6bb792cdcff4dc070268bb95b3b8040b697bbf7f631262.incmodel",
+      "destination": ".incant/cache/models/b85f1046e4d28277bd6bb792cdcff4dc070268bb95b3b8040b697bbf7f631262.incmodel",
+      "bytes": 181633,
+      "sha256": "80dbf175a19dfda0db4c8e5c1992657fd435b6778d0b49d056755d088563e778",
+      "historical_native_producer": "a621ef024c6012e3ab9e43be39afc501ea57f771"
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/native-wake-acquisition-resume-001/build-001/package/player/data/models/da2588e81cf9f61d9b06dec86cbf644e5322cdc48594af5c9ac4e9aa08a6e1ad.incmodel",
+      "destination": ".incant/cache/models/da2588e81cf9f61d9b06dec86cbf644e5322cdc48594af5c9ac4e9aa08a6e1ad.incmodel",
+      "bytes": 207725,
+      "sha256": "a20e33175acb4af55ddad2168307ce3e0c02a23127566cac769e6f290bf799bf",
+      "historical_native_producer": "a621ef024c6012e3ab9e43be39afc501ea57f771"
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/native-wake-acquisition-resume-001/build-001/package/player/data/models/ec9f2569b551d61c9552dd311c3190e9dd262c96b8823e1f3c3c04819811bf99.incmodel",
+      "destination": ".incant/cache/models/ec9f2569b551d61c9552dd311c3190e9dd262c96b8823e1f3c3c04819811bf99.incmodel",
+      "bytes": 2832033,
+      "sha256": "88e2f2c56975f6bde0c0e7c131e870bf783fb86384a27d55b20fd40d40d77621",
+      "historical_native_producer": "a621ef024c6012e3ab9e43be39afc501ea57f771"
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/native-wake-acquisition-resume-001/build-001/package/player/data/textures/17da802ffd07a79a3041b9ba748180e8eccde82c6461eb24ce092cb378e94333.ktx2",
+      "destination": ".incant/cache/textures/17da802ffd07a79a3041b9ba748180e8eccde82c6461eb24ce092cb378e94333.ktx2",
+      "bytes": 699516,
+      "sha256": "17da802ffd07a79a3041b9ba748180e8eccde82c6461eb24ce092cb378e94333",
+      "historical_native_producer": "a621ef024c6012e3ab9e43be39afc501ea57f771"
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/native-wake-acquisition-resume-001/authoring/.incant/cache/textures/5c2d2703c28f3deb6e566781de8833f45f442888602c7a72872b3ea7f5b141c8.json",
+      "destination": ".incant/cache/textures/5c2d2703c28f3deb6e566781de8833f45f442888602c7a72872b3ea7f5b141c8.json",
+      "bytes": 413,
+      "sha256": "f0bd2e231b9cc1839811dd7faf3a748bb2a41df3e95e84e45c727b5be5a5d840",
+      "historical_native_producer": "a621ef024c6012e3ab9e43be39afc501ea57f771"
+    }
+  ],
+  "pre_deletion_process_absence": [
+    {
+      "pid_pgid": 22047,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22049,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22051,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22052,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22053,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22054,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22055,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22056,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22058,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22061,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22064,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22065,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22066,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22067,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22068,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22069,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22070,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22071,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22072,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22073,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22084,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22104,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22129,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22130,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22132,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22142,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22149,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25707,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25710,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25711,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25747,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25749,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25751,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25752,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25753,
+      "PID_absent": true,
+      "group_absent": true
+    }
+  ],
+  "postflight_compiler_smoke": {
+    "node": "v22.23.3",
+    "platform": "darwin",
+    "arch": "arm64",
+    "typescript": "5.9.3",
+    "swc": "1.16.13",
+    "sourcemap_codec": "1.6.0",
+    "synthetic_typescript_transform": true,
+    "synthetic_native_swc_transform": true,
+    "codec_roundtrip": true,
+    "no_project_execution": true,
+    "loaded": [
+      {
+        "path": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/node_modules/@jridgewell/sourcemap-codec/dist/sourcemap-codec.umd.js",
+        "bytes": 16174,
+        "sha256": "36f67483c3beef15e041483b68e1b66e8b6b3e6c50ab654a5e97464082324cc9"
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/node_modules/@swc/core-darwin-arm64/swc.darwin-arm64.node",
+        "bytes": 8922224,
+        "sha256": "c2143d6969fa8bbc2ff9d4037fd94f3dce29d8c606c5a5d2f43a4e4dbb2c6f1c"
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/node_modules/@swc/core/binding.js",
+        "bytes": 9462,
+        "sha256": "46163ee878019eb5ddb6d6783d925b6fedaa1f9dbd3c587b96dee3e5631cc72c"
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/node_modules/@swc/core/index.js",
+        "bytes": 19067,
+        "sha256": "613bbdb22f2f18799afe935656ecec6654362809f1df91d08b83b2afc684696f"
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/node_modules/@swc/core/package.json",
+        "bytes": 3285,
+        "sha256": "30f810ddf7edf85604db4ea5f577fcd4b506cbeb6065e31d35629ef6b17a1f65"
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/node_modules/@swc/core/spack.js",
+        "bytes": 3496,
+        "sha256": "5af057ed9953917f2e6d7cb44751e8df07898b515521e191b5cfc23d4b997f19"
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/node_modules/typescript/lib/typescript.js",
+        "bytes": 9112572,
+        "sha256": "3ae902c92cc44dace175c0e69e13a4b0899f6983c6121d76b9ab8dd5795e7675"
+      }
+    ]
+  },
+  "postflight_process_absence": [
+    {
+      "pid_pgid": 22047,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22049,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22051,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22052,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22053,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22054,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22055,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22056,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22058,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22061,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22064,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22065,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22066,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22067,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22068,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22069,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22070,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22071,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22072,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22073,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22084,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22104,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22129,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22130,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22132,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22142,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22149,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25707,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25710,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25711,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25747,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25749,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25751,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25752,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25753,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25756,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25757,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25758,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25759,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25760,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25761,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25762,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25763,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25764,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25765,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25766,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25767,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25768,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25769,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25770,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25771,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25772,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25773,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25774,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25775,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25776,
+      "PID_absent": true,
+      "group_absent": true
+    }
+  ],
+  "final_process_absence": [
+    {
+      "pid_pgid": 22047,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22049,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22051,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22052,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22053,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22054,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22055,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22056,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22058,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22061,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22064,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22065,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22066,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22067,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22068,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22069,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22070,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22071,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22072,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22073,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22084,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22104,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22129,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22130,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22132,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22142,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 22149,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25707,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25710,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25711,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25747,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25749,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25751,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25752,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25753,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25756,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25757,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25758,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25759,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25760,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25761,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25762,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25763,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25764,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25765,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25766,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25767,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25768,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25769,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25770,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25771,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25772,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25773,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25774,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25775,
+      "PID_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid_pgid": 25776,
+      "PID_absent": true,
+      "group_absent": true
+    }
+  ],
+  "exit": 0,
+  "elapsed_seconds": 521.4204889999819,
+  "scratch_retained": false,
+  "calls": 56,
+  "supervisor_terminal": true
+}

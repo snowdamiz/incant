@@ -1,0 +1,24 @@
+{
+  "format": "independent-source-review-1",
+  "plan": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/native-displaylink-wake-001/replay-followup-002/plan.json",
+    "sha256": "09fe9a069f696fb2752f54efe1a04f3fc8cedd5d03c9d28a1f150e95bc9ae716"
+  },
+  "runner_sha256": "e2a9078c43e087a2bccd8342cf3dbf0bba99bf96c7a48480e97b636efc32c42f",
+  "verified_bindings": 33,
+  "findings": [],
+  "scope": [
+    "Source/data only; no native invocation.",
+    "Only output/TMPDIR/controller copy paths and explicit prior-failure accounting changed.",
+    "Source/player/package/recordings/ordinary baseline/limits and all thresholds unchanged.",
+    "Original focus-interrupted failure retained; no final selected report inferred.",
+    "Fresh second output absent; no further automatic retry declared."
+  ],
+  "prior_failed_attempt": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/native-displaylink-wake-001/window-display-link60-001",
+    "elapsed_seconds": 120.18749891698826,
+    "bytes": 85424,
+    "result_sha256": "4bd7aef8784f94262edb7c8c3021112ab55d5f6ad98dffd65cee02f90e9fea4c",
+    "cause_observation": "focus lost at2155; remainedinactive until120sbound. Cause not identified. No finaltiming or report; do not relabel ascomplete."
+  }
+}

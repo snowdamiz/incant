@@ -76,6 +76,15 @@ impl Declaration {
 /// Read only the bounded opt-in custom section. Full Wasm validation remains the
 /// caller's responsibility. No allocation or guest execution is performed.
 pub fn declaration_in_module(bytes: &[u8]) -> Result<Option<Declaration>, &'static str> {
+    custom_section(bytes, SECTION)?
+        .map(|data| Declaration::decode(data).ok_or("invalid persistent declaration"))
+        .transpose()
+}
+
+pub(crate) fn custom_section<'a>(
+    bytes: &'a [u8],
+    wanted: &str,
+) -> Result<Option<&'a [u8]>, &'static str> {
     if bytes.len() > 1024 * 1024 || bytes.get(..8) != Some(b"\0asm\x01\0\0\0") {
         return Err("persistent declaration requires core Wasm <= 1 MiB");
     }
@@ -110,12 +119,11 @@ pub fn declaration_in_module(bytes: &[u8]) -> Result<Option<Declaration>, &'stat
                 return Err("truncated custom section name");
             }
             let (name, data) = section.split_at(len);
-            if name == SECTION.as_bytes() {
+            if name == wanted.as_bytes() {
                 if declaration.is_some() {
                     return Err("duplicate persistent declaration");
                 }
-                declaration =
-                    Some(Declaration::decode(data).ok_or("invalid persistent declaration")?);
+                declaration = Some(data);
             }
         }
     }

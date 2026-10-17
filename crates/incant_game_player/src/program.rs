@@ -56,7 +56,7 @@ mod tests {
     }
     #[test]
     #[cfg(feature = "static-module")]
-    fn static_haptics_capability_enable_is_explicitly_refused_without_affecting_input() {
+    fn legacy_static_guest_accepts_trusted_haptic_authority_without_issuing_output() {
         let scene = incant_runtime::CookedScene::new(
             incant_runtime::StableId(1u128.to_be_bytes()),
             60,
@@ -72,14 +72,11 @@ mod tests {
             Default::default(),
         )
         .unwrap();
-        assert!(!session.supports_haptics().unwrap());
+        assert!(session.supports_haptics().unwrap());
         let caps = incant_input::haptics::HapticCapabilities::default()
             .with_gamepad(0, 1)
             .unwrap();
-        assert!(matches!(
-            session.set_haptic_capabilities(caps),
-            Err(incant_script::SessionError::HapticsUnsupported)
-        ));
+        session.set_haptic_capabilities(caps).unwrap();
         session.set_haptic_capabilities(Default::default()).unwrap();
         session.tick(&[]).unwrap();
         assert!(session.take_haptics().unwrap().is_empty());

@@ -49,6 +49,83 @@ it beside the actual Wasmtime development host. Shipped applications receive
 only trusted compiled native descriptors; they never compile or load guest Rust
 source, raw Wasm or cached native modules at runtime.
 
+## Simulation timers
+
+`tick.timers(&mut scratch)` returns the accepted-update clock and a borrowed,
+ID-sorted list of due events. The first callback is tick 1; elapsed seconds sum
+the accepted fixed steps. Use up to `TIMER_MAX_BYTES` (10,272) bytes of initialized
+scratch. This clock has no wall-time or filesystem authority.
+
+`tick.set_timer(id, delay_ticks, interval_ticks)` creates or replaces a named
+module-local timer. Delay and optional interval are positive `u32` tick counts;
+`None` is one-shot. `tick.cancel_timer(id)` also accepts absent IDs. IDs contain
+1–64 ASCII letters, digits or `_ . : -`. There are at most 128 pending timers and
+256 set/cancel actions per callback. Due events are fixed for that callback;
+commands affect future delivery. Periodic deadlines advance from the due tick,
+so they do not drift. Invalid inputs, insufficient scratch and quota errors
+reject the whole transaction even if the guest ignores the returned error.
+
+Timer state commits with numeric/structural world changes. Hot reload preserves
+pending deadlines and elapsed time. Modules using checkpoint APIs must declare
+explicit persistent state; both the guest bytes and host timer schedule survive
+save/load. The versioned state envelope still accepts older timer-free snapshots,
+whose new timer clock starts with zero elapsed seconds at their recorded tick.
+Unknown versions and malformed schedules refuse before changing the session.
+See [samples/timers.rs](samples/timers.rs) for the complete example.
+
+## Cooperative coroutines
+
+`coroutine_module!(update; "walk" => ([32; 32], 8, walk));` declares an immutable
+routine named `walk`, with an eight-byte frame and a nonzero 32-byte layout ID.
+Its callback has signature `fn(&mut Tick, coroutines::Task) -> Result<coroutines::Next>`.
+Use explicit byte encoding for frame fields; native pointers, borrowed views,
+stacks and Rust object layouts are never persisted.
+
+`start_coroutine(id, routine, state, entity, scratch)` copies the frame and
+optionally binds the task to an existing entity's current generation.
+`cancel_coroutine(id)` also accepts absent IDs. Normal update runs first, then
+due callbacks run in ID order. New tasks start next accepted tick. Return
+`Next::Wait(positive_ticks)` to retain the modified frame, or `Next::Done` to
+finish. Canceling and restarting the current ID supersedes its old callback's
+result. A despawned/replaced entity cannot transfer its pending tasks to a new
+entity using the same public ID.
+
+The limits per module are 128 routines, 128 tasks, 256 start/cancel actions per
+tick, 16 KiB per frame, 256 KiB retained frames and 1 MiB of frame transfers per
+tick. IDs use the timer ID alphabet. Use `COROUTINE_MAX_BYTES` scratch for starts;
+the macro owns its bounded resume scratch. Duplicate starts, unknown routines,
+wrong frame lengths, invalid waits and ignored errors reject the entire tick.
+
+Coroutines commit with the world transaction. Compatible reload requires the
+same complete routine catalog, including frame size and layout ID. Saving also
+requires `persistent_state!`; explicit state, timers and pending frames then
+survive fresh-VM and persisted restore. The new coroutine envelope is `INCWPS03`;
+modules without coroutines continue emitting the existing envelope. Restore
+requires matching routine metadata before any running state changes. This does
+not preserve arbitrary guest globals or suspended Rust stacks. See
+[samples/coroutines.rs](samples/coroutines.rs) and the
+[qualification record](../../docs/spikes/native-wasm-coroutines.md).
+
+## Haptic output
+
+`tick.haptic_capabilities(&mut scratch)` copies the trusted host's current target
+list into at most `HAPTIC_MAX_BYTES` (220) bytes. An empty list is valid; input
+connectivity alone never grants vibration support. Each `HapticTarget` includes a
+generation, checked again on every command. `tick.play_haptic(target, effect)`
+accepts gamepad `Rumble { strong, weak, duration_ms }` or device
+`Impact { intensity }`; `tick.stop_haptic(target)` queues Stop. Amplitudes are
+finite `f64` values in 0..=1, checked before conversion; rumble lasts 1..=5000 ms.
+The complete example is [samples/haptics.rs](samples/haptics.rs).
+
+At most 32 requests share the callback's existing structural command quota.
+Every active error, even when ignored, rejects the transaction. Delivery occurs
+only after native world, audio and the mandatory consumer accept the whole tick.
+A successful SDK call is not evidence of physical vibration. The trusted owner
+must drain accepted output before the next tick or changing capabilities.
+Pending output blocks checkpoint capture, receiving restore and reload without
+consuming the output. Successful restore/reload, suspension and stop clear
+transient authority; device targets and effects are never serialized or replayed.
+
 ## Data and failure contract
 
 - `Tick` and `Chunk` are callback-bound capabilities. A chunk identifies a whole
@@ -166,9 +243,9 @@ source, raw Wasm or cached native modules at runtime.
   guest globals/memory are not rolled back. The enclosing native session also
   remains terminal after a failure following accepted simulation. This does not
   undo simulation or device audio already advanced by an owning game session.
-- No source/asset/configuration mutation, timers, physics/pathfinding/character APIs, authored
-  instance props, audio rendering, complete gameplay SDK, arbitrary-memory save/restore, device
-  performance or distribution gate is implied by this slice.
+- Guests cannot mutate source, assets or project configuration. Qualification of
+  individual APIs does not establish complete SDK parity, arbitrary-memory
+  save/restore, performance or distribution readiness.
 
 ## Generated compatibility boundary
 
@@ -348,7 +425,7 @@ Queued commands never call an audio backend directly. See the real Rust
 [transport sample](samples/audio_transport.rs) and
 [scope/evidence](../../docs/spikes/native-wasm-audio.md).
 
-### Explicit persistent state (native qualification pending)
+### Explicit persistent state
 
 `persistent_state!(schema = [5; 32], bytes = 16)` opts a guest into a fixed
 host-owned state region. Choose a nonzero 32-byte schema identifier and a length
@@ -370,5 +447,7 @@ reload preserves committed bytes; changing byte length/schema refuses reload.
 
 See [samples/persistent_state.rs](samples/persistent_state.rs) for typed byte
 encoding and [the implementation scope](../../docs/spikes/native-wasm-persistent-state.md).
-Source controls exist for both native hosts, but their execution and a new
-ordinary shipping export remain pending. This API is not evidence of those gates.
+Both actual native hosts and the [ordinary authored shipping route](../../docs/spikes/native-wasm-checkpoint-export.md)
+have scoped qualification. The [timer-driven follow-up](../../docs/spikes/native-wasm-timers-export.md)
+also verifies pending schedules and exact audio continuation. Arbitrary guest
+memory, full SDK parity and performance remain outside those proofs.
