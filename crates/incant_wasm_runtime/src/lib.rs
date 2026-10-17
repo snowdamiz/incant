@@ -29,6 +29,7 @@ mod compiled;
 pub use compiled::{Import, ModuleExports, StaticError, StaticModule};
 pub mod limits;
 pub mod persistent;
+mod timers;
 mod transaction;
 pub use capability::{Call, Capability};
 use incant_runtime::RuntimeError;
