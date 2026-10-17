@@ -1,5 +1,6 @@
 """Portable protocol controls; no compiler, native program or GPU execution."""
 import copy
+import hashlib
 import json
 from pathlib import Path
 import shlex
@@ -10,6 +11,7 @@ from unittest.mock import patch
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import quickjs_pgo as p
 import quickjs_pgo_build as build
+from native_package import data_package
 
 
 class Protocol(unittest.TestCase):
@@ -265,6 +267,29 @@ class Protocol(unittest.TestCase):
                 else:bad[0]['features']=list(p.FEATURES.values())
                 with self.subTest(mode=mode,mutation=mutation), self.assertRaises(ValueError):
                     p.artifact_features(bad,mode,self.target,build.ROOT)
+
+    def test_real_data_packaging_excludes_mode_headers_but_binds_every_asset_byte(self):
+        producer = self.root/'producer'; producer.mkdir()
+        (producer/'world.scene').write_bytes(b'unchanged scene data')
+        (producer/'input-actions.json').write_text('{}')
+        models = self.root/'.incant/cache/models'; models.mkdir(parents=True)
+        model = models/('a'*64+'.incmodel'); model.write_bytes(b'unchanged raw model payload')
+        receipt = {'format':'incant-native-project-build','version':1,'tick_rate':60,
+                   'scene_sha256':p.digest(producer/'world.scene'), 'audio_clips':{}, 'font_assets':[],
+                   'visual_assets':[{'kind':'model','fingerprint':'a'*64}]}
+        packages = []
+        for mode in p.MODES:
+            # These are real build outputs beside world.scene, embedded only in
+            # the player/symbol artifacts. They are not data_package inputs.
+            receipt['script'] = {'build_id':mode,'bytecode_abi':{'default_c_flags':mode=='ordinary'}}
+            (producer/'behavior.rs').write_text('const MODE_HEADER: &str = '+repr(mode)+';')
+            (producer/'script-symbols.json').write_text(json.dumps(receipt['script']))
+            packages.append(data_package(self.root,producer,receipt,self.root/('data-'+mode),None))
+        self.assertEqual(packages[0],packages[1]);self.assertEqual(packages[0],packages[2])
+        self.assertEqual(packages[0]['files']['models/'+model.name],hashlib.sha256(model.read_bytes()).hexdigest())
+        model.write_bytes(b'changed raw model payload')
+        changed = data_package(self.root,producer,receipt,self.root/'data-changed',None)
+        self.assertNotEqual(changed,packages[0], 'The strict cross-mode data equality must detect changed assets')
 
 
 if __name__ == '__main__': unittest.main()
