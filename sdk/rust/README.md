@@ -210,9 +210,9 @@ transient authority; device targets and effects are never serialized or replayed
   guest globals/memory are not rolled back. The enclosing native session also
   remains terminal after a failure following accepted simulation. This does not
   undo simulation or device audio already advanced by an owning game session.
-- No source/asset/configuration mutation, timers, physics/pathfinding/character APIs, authored
-  instance props, audio rendering, complete gameplay SDK, arbitrary-memory save/restore, device
-  performance or distribution gate is implied by this slice.
+- Guests cannot mutate source, assets or project configuration. Qualification of
+  individual APIs does not establish complete SDK parity, arbitrary-memory
+  save/restore, performance or distribution readiness.
 
 ## Generated compatibility boundary
 
@@ -392,7 +392,7 @@ Queued commands never call an audio backend directly. See the real Rust
 [transport sample](samples/audio_transport.rs) and
 [scope/evidence](../../docs/spikes/native-wasm-audio.md).
 
-### Explicit persistent state (native qualification pending)
+### Explicit persistent state
 
 `persistent_state!(schema = [5; 32], bytes = 16)` opts a guest into a fixed
 host-owned state region. Choose a nonzero 32-byte schema identifier and a length
@@ -414,5 +414,7 @@ reload preserves committed bytes; changing byte length/schema refuses reload.
 
 See [samples/persistent_state.rs](samples/persistent_state.rs) for typed byte
 encoding and [the implementation scope](../../docs/spikes/native-wasm-persistent-state.md).
-Source controls exist for both native hosts, but their execution and a new
-ordinary shipping export remain pending. This API is not evidence of those gates.
+Both actual native hosts and the [ordinary authored shipping route](../../docs/spikes/native-wasm-checkpoint-export.md)
+have scoped qualification. The [timer-driven follow-up](../../docs/spikes/native-wasm-timers-export.md)
+also verifies pending schedules and exact audio continuation. Arbitrary guest
+memory, full SDK parity and performance remain outside those proofs.

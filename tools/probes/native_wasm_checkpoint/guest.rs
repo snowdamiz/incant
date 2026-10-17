@@ -1,4 +1,4 @@
-//! Fixed gameplay fixture: only declared bytes survive an ordinary checkpoint.
+//! Fixed gameplay fixture: declared state and simulation timers survive a checkpoint.
 #![no_std]
 use core::sync::atomic::{AtomicU32, Ordering};
 use incant_module::{
@@ -53,15 +53,36 @@ fn simulate(t: &mut Tick<'_>, _: f64) -> Result<()> {
         }
         t.write_transforms(chunk, rows)?;
     }
-    let control = match count {
-        9 => Some(AudioControl::SourceGain(-12.)),
-        20 => Some(AudioControl::Seek(0.0021)),
-        26 => Some(AudioControl::Stop),
-        29 => Some(AudioControl::Restart),
-        34 => Some(AudioControl::SourceGain(-4.)),
-        _ => None,
-    };
-    if let Some(control) = control {
+    // The same audible route is now driven by host-owned simulation timers.
+    // A future periodic timer remains pending in both prefix and final saves.
+    if count == 1 {
+        t.set_timer("gain", 8, Some(11))?;
+        t.set_timer("stop", 2, None)?;
+        t.set_timer("stop", 25, None)?;
+        t.set_timer("restart", 28, None)?;
+        t.set_timer("upgain", 33, None)?;
+        t.set_timer("future", 100, Some(17))?;
+        t.set_timer("cancelled", 1, None)?;
+        t.cancel_timer("cancelled")?;
+    }
+    let mut timer_bytes = [0; 1024];
+    let timers = t.timers(&mut timer_bytes)?;
+    if timers.tick() != count || timers.len() != usize::from(matches!(count, 9 | 20 | 26 | 29 | 34))
+    {
+        return Err(Error::Bounds);
+    }
+    for (id, due) in timers.events() {
+        let control = match (id, due) {
+            ("gain", 9) => AudioControl::SourceGain(-12.),
+            ("gain", 20) => {
+                t.cancel_timer("gain")?;
+                AudioControl::Seek(0.0021)
+            }
+            ("stop", 26) => AudioControl::Stop,
+            ("restart", 29) => AudioControl::Restart,
+            ("upgain", 34) => AudioControl::SourceGain(-4.),
+            _ => return Err(Error::Bounds),
+        };
         t.audio_commands(
             &[AudioCommand {
                 entity: EntityId::from_u128(2),
