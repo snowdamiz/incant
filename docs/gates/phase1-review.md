@@ -56,10 +56,11 @@ rendered-game performance gate remains open; no gate follows from timing coverag
   workflow now also verifies table replacement, watcher/Undo/Redo, malformed-source
   retention, recovery, continuing VM/world state and durable journal reopen.
   This adds no appearance or performance acceptance. Compatible animated vertex
-  content now has [scoped CPU qualification](../spikes/animated-vertex-refresh.md):
+  content now has [scoped CPU and Metal qualification](../spikes/animated-vertex-refresh.md):
   import/history preserve the world, VM and clock, while unchanged skin bindings
-  cannot mask an index-only incompatibility. Its same-clock GPU and actual
-  editor-window checks remain pending. Changed skeleton, topology and scene
+  cannot mask an index-only incompatibility. Position-only and tangent-only
+  replacements match independent fresh-game RGBA at the same clock on Metal;
+  actual editor-window qualification remains pending. Changed skeleton, topology and scene
   structure still need their own admission rules.
 - Preserve the now-qualified [ordinary-editor 4x antialiasing](../spikes/editor-scene-msaa.md).
   Actual Mac editor review and default/cooked Metal controls verify the reported

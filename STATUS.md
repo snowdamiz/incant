@@ -55,16 +55,34 @@ passes local tests and leaves production behavior unchanged. Both desktop jobs
 and Windows Wasm conformance passed on checkpoint44; that checkpoint's separate
 general failure prevented promotion.
 
-## Compatible animated vertices — CPU qualification complete
+## Compatible animated vertices — CPU and Metal qualification complete
 
 Compatible animated mesh positions and regenerated tangent data can now refresh
 through import and Undo/Redo while the running world, script state and animation
 clock continue. The scoped implementation passes 42 native behavior controls and
 both packages' strict lints. Topology, skin and other incompatible bindings still
 refuse atomically. [Source, retained attempts and qualification](docs/spikes/animated-vertex-refresh.md)
-remain explicit. Same-clock GPU pixels and actual editor-window qualification
-for this new vertex-content scope are still pending; earlier animation-key
-evidence does not establish those results.
+remain explicit. Three actual Metal controls now pass at source `d053542e`:
+position-only and tangent-only refresh match independent fresh-game RGBA at the
+same clock, while invalid and stale changes retain the accepted pixels. The
+original clip-key regression also passes. Independent raw-pixel replay confirms
+all three results. This is offscreen correctness, not performance or appearance
+acceptance. The actual editor-window vertex workflow is prepared and passes
+18 Python fixture/receipt controls and independent source review; its native
+compilation and execution remain pending.
+
+## Native presentation pacing — bounded intervention rejected
+
+A fresh shipping build at `380a03a4` preserves the complete 2,156-step Core
+gameplay report and all 13,798,400 offline PCM bytes. Its private build inputs
+were removed before startup. Matched ordinary and minimum-duration native runs
+both complete the gameplay route without focus loss or missing presentation
+timestamps. The intervention is negative for adoption: presentation span rises
+by 158 ms, drawable acquisition p95 rises from 0.038 to 13.536 ms, and dropped
+wall ticks rise from zero to four. Its strict timing acceptance also fails on
+the incomplete final scheduler batch at the requested stop boundary; that failed
+receipt remains unchanged. Saved-data analysis is underway. No frame-pacing,
+script-budget or phase gate is passed by this experiment.
 
 ## Reconstruction cost — current private layout rejected
 
