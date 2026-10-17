@@ -55,6 +55,17 @@ passes local tests and leaves production behavior unchanged. Both desktop jobs
 and Windows Wasm conformance passed on checkpoint44; that checkpoint's separate
 general failure prevented promotion.
 
+## Compatible animated vertices — CPU qualification complete
+
+Compatible animated mesh positions and regenerated tangent data can now refresh
+through import and Undo/Redo while the running world, script state and animation
+clock continue. The scoped implementation passes 42 native behavior controls and
+both packages' strict lints. Topology, skin and other incompatible bindings still
+refuse atomically. [Source, retained attempts and qualification](docs/spikes/animated-vertex-refresh.md)
+remain explicit. Same-clock GPU pixels and actual editor-window qualification
+for this new vertex-content scope are still pending; earlier animation-key
+evidence does not establish those results.
+
 ## Reconstruction cost — current private layout rejected
 
 The complete 234-case offscreen diagnostic passed its timing and parity checks,

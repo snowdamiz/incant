@@ -55,8 +55,12 @@ rendered-game performance gate remains open; no gate follows from timing coverag
   provenance for navigation and atomic publication. Its actual native-window
   workflow now also verifies table replacement, watcher/Undo/Redo, malformed-source
   retention, recovery, continuing VM/world state and durable journal reopen.
-  This adds no appearance or performance acceptance. Changed skeleton/geometry and scene structure still need
-  their own admission rules.
+  This adds no appearance or performance acceptance. Compatible animated vertex
+  content now has [scoped CPU qualification](../spikes/animated-vertex-refresh.md):
+  import/history preserve the world, VM and clock, while unchanged skin bindings
+  cannot mask an index-only incompatibility. Its same-clock GPU and actual
+  editor-window checks remain pending. Changed skeleton, topology and scene
+  structure still need their own admission rules.
 - Preserve the now-qualified [ordinary-editor 4x antialiasing](../spikes/editor-scene-msaa.md).
   Actual Mac editor review and default/cooked Metal controls verify the reported
   cube-edge fix. This does not qualify temporal reconstruction or frame budgets;
