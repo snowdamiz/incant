@@ -83,10 +83,12 @@ independent source review and strict lints pass. The first actual-host build
 failed because generated routine metadata lacked static storage; its failure
 is retained and the corrected producer passes. The scoped contract is merged through
 PR397 after exact-head development checks; main `406a93e3` has the tested tree.
-The authored export proof is being extended to an owned coroutine with pending
-frame/deadline/layout state, cancellation, a coexisting timer and audible commands.
-Its independent synthetic checkpoint controls pass; no new shipping execution is
-claimed yet. Normal authored shipping export and complete SDK parity remain open.
+The [authored shipping proof](docs/spikes/native-wasm-coroutines-export.md) now
+passes four fresh-player runs and six specific refusals at source `4eeca4c6`.
+The owned routine's pending frame, schema, owner, deadline and coexisting timer
+survive save/load exactly, with matching gameplay and complete audible PCM.
+All 555 observed processes/groups are absent after actual terminal success.
+This proof is locally verified and awaiting integration; complete SDK parity remains open.
 See [contract and qualification](docs/spikes/native-wasm-coroutines.md).
 
 
@@ -156,8 +158,10 @@ build passes, but generation stops on duplicate Serde build-dependency aliases.
 The canonical dependency fix passes all three Cargo metadata graphs. Its first
 prerequisite runner then expects a second build script after Cargo has stopped
 on the intended missing-profile refusal; this remains a failed harness attempt.
-The revised prerequisite is queued behind renderer CPU checks. No training or
-performance result is claimed. The next useful trigger is a newly qualified
+The corrected prerequisite now passes both production missing-descriptor
+refusals, nine ordinary controls and strict lint. A fresh ordinary/generate/use
+shipping feasibility run is active; no training or performance result is claimed.
+The next useful trigger is a newly qualified
 ordinary/generate/use producer with exact gameplay/audio parity, then
 a separately scheduled matched timing run. Last reassessment: 2026-10-17.
 The 2 ms ScriptTick target remains unmet; other work continues.
