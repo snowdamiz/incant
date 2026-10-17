@@ -73,6 +73,39 @@ whose new timer clock starts with zero elapsed seconds at their recorded tick.
 Unknown versions and malformed schedules refuse before changing the session.
 See [samples/timers.rs](samples/timers.rs) for the complete example.
 
+## Cooperative coroutines
+
+`coroutine_module!(update; "walk" => ([32; 32], 8, walk));` declares an immutable
+routine named `walk`, with an eight-byte frame and a nonzero 32-byte layout ID.
+Its callback has signature `fn(&mut Tick, coroutines::Task) -> Result<coroutines::Next>`.
+Use explicit byte encoding for frame fields; native pointers, borrowed views,
+stacks and Rust object layouts are never persisted.
+
+`start_coroutine(id, routine, state, entity, scratch)` copies the frame and
+optionally binds the task to an existing entity's current generation.
+`cancel_coroutine(id)` also accepts absent IDs. Normal update runs first, then
+due callbacks run in ID order. New tasks start next accepted tick. Return
+`Next::Wait(positive_ticks)` to retain the modified frame, or `Next::Done` to
+finish. Canceling and restarting the current ID supersedes its old callback's
+result. A despawned/replaced entity cannot transfer its pending tasks to a new
+entity using the same public ID.
+
+The limits per module are 128 routines, 128 tasks, 256 start/cancel actions per
+tick, 16 KiB per frame, 256 KiB retained frames and 1 MiB of frame transfers per
+tick. IDs use the timer ID alphabet. Use `COROUTINE_MAX_BYTES` scratch for starts;
+the macro owns its bounded resume scratch. Duplicate starts, unknown routines,
+wrong frame lengths, invalid waits and ignored errors reject the entire tick.
+
+Coroutines commit with the world transaction. Compatible reload requires the
+same complete routine catalog, including frame size and layout ID. Saving also
+requires `persistent_state!`; explicit state, timers and pending frames then
+survive fresh-VM and persisted restore. The new coroutine envelope is `INCWPS03`;
+modules without coroutines continue emitting the existing envelope. Restore
+requires matching routine metadata before any running state changes. This does
+not preserve arbitrary guest globals or suspended Rust stacks. See
+[samples/coroutines.rs](samples/coroutines.rs) and the
+[qualification record](../../docs/spikes/native-wasm-coroutines.md).
+
 ## Haptic output
 
 `tick.haptic_capabilities(&mut scratch)` copies the trusted host's current target
