@@ -50,7 +50,7 @@ impl SceneHost for Host {
     }
     fn prepare(world: &NativeWorld, reject: bool) -> Result<Self, Self::Error> {
         let mut ui = UiRuntime::for_world(world).map_err(error)?;
-        for events in [vec![], vec![UiEvent::Focus(id(2))]] {
+        for events in [vec![], vec![UiEvent::Focus(id(3))]] {
             let next = ui
                 .prepare(&events, [400.; 2], &mut Measure)
                 .map_err(error)?;
@@ -102,10 +102,10 @@ pub fn audible(root: &Path) -> (CookedScene, Vec<incant_audio_runtime::ClipBindi
     let scene = CookedScene::new(
         id(99),
         64,
-        (1..=3)
+        (1..=4)
             .map(|n| CookedEntity {
                 id: id(n),
-                parent: (n == 2).then(|| id(1)),
+                parent: (n == 3).then(|| id(2)),
                 velocity: None,
                 transform: Default::default(),
             })
@@ -122,7 +122,7 @@ pub fn audible(root: &Path) -> (CookedScene, Vec<incant_audio_runtime::ClipBindi
     .unwrap()
     .with_ui(vec![
         CookedUi {
-            entity: id(1),
+            entity: id(2),
             node: Arc::new(UiNode {
                 kind: UiKind::Root,
                 order: 0,
@@ -131,7 +131,7 @@ pub fn audible(root: &Path) -> (CookedScene, Vec<incant_audio_runtime::ClipBindi
             }),
         },
         CookedUi {
-            entity: id(2),
+            entity: id(3),
             node: Arc::new(UiNode {
                 kind: UiKind::TextInput {
                     text: UiText {
@@ -153,7 +153,7 @@ pub fn audible(root: &Path) -> (CookedScene, Vec<incant_audio_runtime::ClipBindi
     ])
     .unwrap()
     .with_audio(vec![CookedAudio {
-        entity: id(3),
+        entity: id(4),
         bus: None,
         listener: false,
         source: Some(NativeAudioSource {

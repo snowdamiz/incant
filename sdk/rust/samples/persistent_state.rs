@@ -20,10 +20,14 @@ fn simulate(t: &mut Tick<'_>, _: f64) -> Result<()> {
     t.write_persistent(0, &state)?;
     for index in 0..t.chunk_count()? {
         let chunk = t.chunk(index)?;
+        let mut ids = [EntityId([0; 16]); 16];
+        let ids = t.read_ids(chunk, &mut ids)?;
         let mut storage = [IDENTITY; 16];
         let rows = t.read_transforms(chunk, &mut storage)?;
-        for row in rows.iter_mut() {
-            row[0] = count as f64;
+        for (id, row) in ids.iter().zip(rows.iter_mut()) {
+            if *id == EntityId::from_u128(1) {
+                row[0] = count as f64;
+            }
         }
         t.write_transforms(chunk, rows)?;
     }

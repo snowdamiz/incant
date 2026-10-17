@@ -311,7 +311,8 @@ fn late_composed_refusal_hides_committed_vm_state_and_does_not_publish_pcm() {
         )
         .unwrap();
         let mut pcm = vec![9.; game.next_output_frames().unwrap() * 2];
-        assert!(game.tick(&[], &mut pcm).is_err());
+        let error = game.tick(&[], &mut pcm).unwrap_err().to_string();
+        assert!(error.contains("late composed consumer refusal"), "{error}");
         assert!(game.is_failed());
         assert!(game.world().is_err());
         assert!(game.checkpoint_bytes().is_err());
