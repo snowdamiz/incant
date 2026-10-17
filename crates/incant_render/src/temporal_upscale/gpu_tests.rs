@@ -192,9 +192,9 @@ fn actual_current_depth_and_history_support_refusals_remain_finite() {
                     .unwrap(),
             ))
         });
-        for row in data.chunks_exact(256) {
-            for value in row[..64].chunks_exact(2) {
-                assert!(half(u16::from_le_bytes(value.try_into().unwrap())).is_finite());
+        for row in data.as_chunks::<256>().0 {
+            for value in row[..64].as_chunks::<2>().0 {
+                assert!(half(u16::from_le_bytes(*value)).is_finite());
             }
         }
         drop(data);
