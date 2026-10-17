@@ -102,6 +102,13 @@ impl StaticModule {
     pub fn is_failed(&self) -> bool {
         self.capability.is_failed()
     }
+    pub fn enable_restart_requests(&mut self) -> Result<(), StaticError> {
+        Ok(self.capability.enable_restart_requests()?)
+    }
+    /// Script acceptance only; defer consumption until composed acceptance.
+    pub fn take_restart_request(&mut self) -> Result<bool, StaticError> {
+        Ok(self.capability.take_restart_request()?)
+    }
     /// Bounded committed prefix; a failed instance exposes no live diagnostics.
     pub fn logs(&self) -> Result<&crate::NativeLogs, StaticError> {
         Ok(self.capability.logs()?)

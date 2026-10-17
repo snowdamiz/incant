@@ -17,6 +17,7 @@ mod commands;
 mod compiled;
 #[cfg(feature = "compiler")]
 mod compiler;
+mod coroutines;
 mod diagnostics;
 mod flipbooks;
 #[cfg(feature = "profile")]
@@ -106,6 +107,8 @@ pub enum ScriptError {
     QueryInput,
     #[error("invalid timer ID, tick delay or timer command arguments")]
     TimerInput,
+    #[error("invalid or excessive native coroutine operation")]
+    CoroutineInput,
     #[error("invalid native log arguments or control characters")]
     LogInput,
     #[error("native script clock or timer deadline exceeds its numeric range")]
@@ -144,7 +147,9 @@ pub struct ScriptHost {
     update: Persistent<Function<'static>>,
     freeze: Persistent<Function<'static>>,
     persistent_wrap: Persistent<Function<'static>>,
+    coroutine_shape: Option<Persistent<Function<'static>>>,
     persistent_opt_in: Vec<bool>,
+    coroutine_catalog: coroutines::Catalog,
     persistent: std::rc::Rc<std::cell::RefCell<persistence::Store>>,
     project: Option<bindings::BoundProject>,
     chunk_ids: loan::IdCache,
@@ -202,10 +207,11 @@ impl ScriptHost {
             return Err(ScriptError::ScriptBindings);
         }
         let (runtime, context, deadline) = vm(limit, compiled.allow_source)?;
-        let (freeze, persistent_wrap, project) = context.with(|ctx| {
-            let (freeze, persistent_wrap) = compiled.harden(&ctx).map_err(|error| {
-                diagnostics::javascript(&ctx, error, "initialization", &deadline)
-            })?;
+        let (freeze, persistent_wrap, persistent_shape, project) = context.with(|ctx| {
+            let (freeze, persistent_wrap, persistent_shape) =
+                compiled.harden(&ctx).map_err(|error| {
+                    diagnostics::javascript(&ctx, error, "initialization", &deadline)
+                })?;
             let project = compiled
                 .bindings
                 .as_ref()
@@ -222,25 +228,34 @@ impl ScriptHost {
             Ok::<_, ScriptError>((
                 Persistent::save(&ctx, freeze),
                 Persistent::save(&ctx, persistent_wrap),
+                Persistent::save(&ctx, persistent_shape),
                 project,
             ))
         })?;
         // Fixed engine hardening runs first. Its two internal module promises
         // must not change the guest module's separately measured baseline.
         let synchronous = synchronous::Synchronous::install(&runtime);
-        let (update, persistent_opt_in) = context.with(|ctx| {
-            let (update, persistent_opt_in) = compiled.instantiate(&ctx).map_err(|error| {
-                diagnostics::javascript(&ctx, error, "initialization", &deadline)
-            })?;
+        let (update, persistent_opt_in, coroutine_catalog) = context.with(|ctx| {
+            let (update, persistent_opt_in, coroutine_catalog) =
+                compiled.instantiate(&ctx).map_err(|error| {
+                    diagnostics::javascript(&ctx, error, "initialization", &deadline)
+                })?;
             synchronous.check(&ctx, true)?;
-            Ok::<_, ScriptError>((Persistent::save(&ctx, update), persistent_opt_in))
+            Ok::<_, ScriptError>((
+                Persistent::save(&ctx, update),
+                persistent_opt_in,
+                coroutine_catalog,
+            ))
         })?;
         diagnostics::check_deadline(&deadline)?;
+        let coroutine_shape = coroutine_catalog.enabled().then_some(persistent_shape);
         Ok(Self {
             update,
             freeze,
             persistent_wrap,
+            coroutine_shape,
             persistent_opt_in,
+            coroutine_catalog,
             persistent: Default::default(),
             project,
             chunk_ids: Default::default(),
@@ -397,6 +412,12 @@ impl ScriptHost {
                     if instances.is_empty() {
                         schedule.cancel_scope(scope);
                     } else {
+                        if let Some(tasks) = &mut schedule.coroutines {
+                            tasks.retain(|key, task| {
+                                key.scope != scope
+                                    || task.entity.is_none_or(|id| ids.binary_search(&id).is_ok())
+                            });
+                        }
                         groups.push((index, scope, instances, ids));
                     }
                 }
@@ -416,12 +437,38 @@ impl ScriptHost {
                 diagnostics::javascript(&ctx, error, "log bindings", &self.deadline)
             })?;
             let timers = timers::TickTimers::default();
+            // No per-tick queue/API allocation for programs without a catalog.
+            let coroutines = self.coroutine_catalog.enabled().then(|| {
+                coroutines::Tick::new(
+                    schedule.coroutines.take().unwrap_or_default(),
+                    schedule.tick,
+                )
+            });
+            let coroutine_shape = self
+                .coroutine_shape
+                .as_ref()
+                .map(|shape| shape.clone().restore(&ctx))
+                .transpose()
+                .map_err(diagnostics::allocation)?;
             let groups = groups
                 .into_iter()
                 .map(|(index, scope, instances, ids)| {
                     let api = timers.expose(&ctx, scope, &events).map_err(|error| {
                         diagnostics::javascript(&ctx, error, "timer bindings", &self.deadline)
                     })?;
+                    let coroutine_api = coroutines
+                        .as_ref()
+                        .map(|tasks| {
+                            tasks.expose(
+                                &ctx,
+                                scope,
+                                Arc::clone(&self.coroutine_catalog.0[index]),
+                                Arc::clone(&ids),
+                                &inspect,
+                            )
+                        })
+                        .transpose()
+                        .map_err(diagnostics::allocation)?;
                     let state_api = persistent
                         .expose(
                             &ctx,
@@ -431,7 +478,7 @@ impl ScriptHost {
                             inspect.clone(),
                         )
                         .map_err(diagnostics::allocation)?;
-                    Ok::<_, ScriptError>((index, scope, instances, api, state_api))
+                    Ok::<_, ScriptError>((index, scope, instances, api, state_api, coroutine_api))
                 })
                 .collect::<Result<Vec<_>, _>>()?;
             #[cfg(all(test, feature = "diagnostic-core-stress"))]
@@ -514,9 +561,12 @@ impl ScriptHost {
                     queries.activate();
                     logs.activate();
                     let mut result = Ok(());
-                    for (index, scope, instances, timer_api, state_api) in groups {
+                    for (index, scope, instances, timer_api, state_api, coroutine_api) in groups {
                         timers.activate(scope);
                         persistent.activate(scope);
+                        if let Some(tasks) = &coroutines {
+                            tasks.activate(scope);
+                        }
                         let source_profile = incant_profile::script_scope(match scope {
                             schedule::Scope::Global => None,
                             schedule::Scope::Source(id) => Some(id.0),
@@ -527,32 +577,126 @@ impl ScriptHost {
                                 schedule::Scope::Global => None,
                                 schedule::Scope::Source(id) => Some(id.0),
                             });
-                        let called = function.call::<_, Value>((
-                            rquickjs::function::Flat((
-                                chunks.clone(),
-                                dt,
-                                api.clone(),
-                                input.clone(),
-                                physics.clone(),
-                                navigation.clone(),
-                                localization.clone(),
-                            )),
-                            rquickjs::function::Flat((clock.clone(), timer_api)),
-                            rquickjs::function::Flat((
-                                log_api.clone(),
-                                flipbooks.clone(),
-                                animations.clone(),
-                            )),
-                            index as u32,
-                            instances,
-                            state_api,
-                            hud.clone(),
-                        ));
+                        let called = if coroutines.is_none() {
+                            // Keep the original no-task call shape and moved
+                            // scoped objects; no extra argument/clone per callback.
+                            function.call::<_, Value>((
+                                rquickjs::function::Flat((
+                                    chunks.clone(),
+                                    dt,
+                                    api.clone(),
+                                    input.clone(),
+                                    physics.clone(),
+                                    navigation.clone(),
+                                    localization.clone(),
+                                )),
+                                rquickjs::function::Flat((clock.clone(), timer_api)),
+                                rquickjs::function::Flat((
+                                    log_api.clone(),
+                                    flipbooks.clone(),
+                                    animations.clone(),
+                                )),
+                                index as u32,
+                                instances,
+                                state_api,
+                                hud.clone(),
+                            ))
+                        } else {
+                            let call = |task, routine: &str| {
+                                function.call::<_, Value>((
+                                    rquickjs::function::Flat((
+                                        chunks.clone(),
+                                        dt,
+                                        api.clone(),
+                                        input.clone(),
+                                        physics.clone(),
+                                        navigation.clone(),
+                                        localization.clone(),
+                                    )),
+                                    rquickjs::function::Flat((clock.clone(), timer_api.clone())),
+                                    rquickjs::function::Flat((
+                                        log_api.clone(),
+                                        flipbooks.clone(),
+                                        animations.clone(),
+                                    )),
+                                    rquickjs::function::Flat((
+                                        index as u32,
+                                        instances.clone(),
+                                        state_api.clone(),
+                                        hud.clone(),
+                                    )),
+                                    coroutine_api.clone(),
+                                    task,
+                                    routine,
+                                ))
+                            };
+                            call(Value::new_undefined(ctx.clone()), "").and_then(|value| {
+                                if !value.is_undefined() {
+                                    return Ok(value);
+                                }
+                                if let Some(tasks) = &coroutines {
+                                    if tasks.check().is_err() {
+                                        return Err(rquickjs::Exception::throw_type(
+                                            &ctx,
+                                            "coroutine transaction failed",
+                                        ));
+                                    }
+                                    for (key, task) in tasks.due(scope) {
+                                        // Never run another callback after deferred work or deadline failure.
+                                        if self.synchronous.check(&ctx, false).is_err()
+                                            || diagnostics::check_deadline(&self.deadline).is_err()
+                                        {
+                                            break;
+                                        }
+                                        if !commands.healthy()
+                                            || !queries.healthy()
+                                            || !timers.healthy()
+                                            || !persistent.healthy()
+                                            || !logs.healthy()
+                                            || tasks.check().is_err()
+                                        {
+                                            return Err(rquickjs::Exception::throw_type(
+                                                &ctx,
+                                                "script transaction failed before coroutine resume",
+                                            ));
+                                        }
+                                        if !tasks.current(&key, &task) {
+                                            continue;
+                                        }
+                                        let argument = tasks.task(&ctx, &freeze, &key, &task)?;
+                                        let result = call(argument.into_value(), &task.routine)?;
+                                        if result.is_promise() {
+                                            return Ok(result);
+                                        }
+                                        if self.synchronous.check(&ctx, false).is_err()
+                                            || diagnostics::check_deadline(&self.deadline).is_err()
+                                        {
+                                            break;
+                                        }
+                                        // The inspector itself may run traps. Normal guards are
+                                        // checked again before another continuation or commit.
+                                        tasks.finish(
+                                            &ctx,
+                                            coroutine_shape
+                                                .as_ref()
+                                                .expect("enabled coroutine inspector"),
+                                            &key,
+                                            &task,
+                                            result,
+                                        )?;
+                                    }
+                                }
+                                Ok(value)
+                            })
+                        };
                         #[cfg(feature = "diagnostic-script-phases")]
                         drop(callback_attribution);
                         drop(source_profile);
                         timers.revoke();
                         persistent.revoke();
+                        if let Some(tasks) = &coroutines {
+                            tasks.revoke();
+                        }
                         match called {
                             Err(error) => {
                                 result = Err(error);
@@ -620,6 +764,10 @@ impl ScriptHost {
                     );
                     let (commands, request, haptics) = commands.take()?;
                     schedule.apply(timers.take()?)?;
+                    if let Some(tasks) = &coroutines {
+                        let tasks = tasks.take()?;
+                        schedule.coroutines = (!tasks.entries.is_empty()).then_some(tasks);
+                    }
                     let logs = logs.take()?;
                     let changes = persistent.take()?;
                     #[cfg(all(test, feature = "diagnostic-core-stress"))]

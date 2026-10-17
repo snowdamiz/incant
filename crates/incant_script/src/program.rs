@@ -11,10 +11,10 @@ use incant_runtime::NativeWorld;
 /// capabilities use the same accepted native input timeline. Additive
 /// `incant_flipbook_v1` exposes bounded committed playback and queued controls.
 /// `incant_log_v1` publishes copied primitive diagnostics only after acceptance.
-// This startup value is consumed immediately, never retained in a collection
-// or on the tick path. Boxing CompiledScript would add a second transient heap
-// allocation before the persistent SessionVm allocation.
+// This trusted startup data may be retained by a cold-restart seed, but is never
+// copied on the tick path. Cloning it never copies a live VM or its capabilities.
 #[allow(clippy::large_enum_variant)]
+#[derive(Clone)]
 pub enum SessionProgram {
     Bytecode(CompiledScript),
     #[cfg(feature = "wasmtime-host")]
@@ -175,18 +175,22 @@ impl SessionVm {
         match self {
             Self::Bytecode(host) => Ok(host.enable_restart_requests()?),
             #[cfg(feature = "wasmtime-host")]
-            Self::DevelopmentWasm(_) => Err(SessionError::RestartUnsupported),
+            Self::DevelopmentWasm(host) => Ok(host.enable_restart_requests()?),
             #[cfg(feature = "static-module")]
-            Self::Static(_) => Err(SessionError::RestartUnsupported),
+            Self::Static(host) => Ok(host.enable_restart_requests()?),
         }
     }
     pub fn take_session_request(&mut self) -> Result<Option<crate::SessionRequest>, SessionError> {
         match self {
             Self::Bytecode(host) => Ok(host.take_session_request()?),
             #[cfg(feature = "wasmtime-host")]
-            Self::DevelopmentWasm(_) => Ok(None),
+            Self::DevelopmentWasm(host) => Ok(host
+                .take_restart_request()?
+                .then_some(crate::SessionRequest::Restart)),
             #[cfg(feature = "static-module")]
-            Self::Static(_) => Ok(None),
+            Self::Static(host) => Ok(host
+                .take_restart_request()?
+                .then_some(crate::SessionRequest::Restart)),
         }
     }
     pub(crate) fn supports_ui(&self) -> bool {

@@ -1,12 +1,15 @@
 # Phase 1 review ledger
 
-Updated against main359, the fresh CJK/pseudo shipping players from
+Historical evidence retains main359, the fresh CJK/pseudo shipping players from
 `e3dfcd9c695d6e1a74f82cb1613891c9e6046bb5`, and the corrected Arabic shipping
 export/CPU/native routes from `069bbe54dc529511138867dfd4fbe50507a38b6b`.
+The later combined [sampled Core locale proof](../spikes/core-locale-sampled-captures.md)
+uses four newly packaged shipping players from
+`50b5408b1d6be66dbb1dcbca501d4380add9d656` and five same-package CPU/capture routes.
 Those producing identities remain
 explicit; they are not relabeled as later integration builds.
-Release checkpoint47 tested the main359 tree; later main360+
-work remains outside that release baseline.
+Release checkpoint48 tested the main367 tree; later changes
+remain outside that release baseline.
 Phase 1 remains open; this ledger records evidence and remaining work, not director
 approval. [PLAN.md](../../PLAN.md#phase-1-core-engine) defines the requirements.
 Only actual testing on the available Mac is required as device evidence. Other
@@ -14,9 +17,9 @@ device execution is deferred; hosted build and release checks remain required.
 
 | Exit requirement | Recorded evidence | Remaining qualification |
 | --- | --- | --- |
-| Core Sample runs at 60 fps, using TypeScript and no editor | Authored Core gameplay, packaged HUD/audio and source-free native execution have scoped proofs. A [shipping native-window replay](../spikes/native-window-replay.md) completes the full 2,156-step route with exact headless observation parity. [Core integration](../spikes/core-main182.md), [HUD](../spikes/core-result-hud-main192.md). | A shipping run of the complete rendered game meeting the frame budget. The [complete observer/audio replay](../spikes/native-presentation-audio.md) verifies gameplay parity, while zero/equal drawable timestamps keep full display timing open. CPU simulation timing alone does not establish FPS. Rendering reconstruction still has unresolved appearance defects. |
-| CI plays Core Sample and asserts game state | The general Mac and desktop workflows execute `samples/core/verify.py` against the native headless binary. All required checks passed on [checkpoint47](../spikes/release-checkpoint-47.md). | Preserve these checks as the sample and runtime change. This requirement's recorded coverage does not pass the other exit requirements. |
-| Navmesh enemies, pseudo-localization, RTL/CJK rendering and the 2D sample | Native Core/planar scenarios, text shaping and presentation each have scoped evidence in [STATUS.md](../../STATUS.md). The [2D sample](../spikes/native-window-eligibility.md) now completes its full native Mac win route with exact CPU parity and three actual window captures. Desktop CI also runs `samples/planar/verify.py`. | The [corrected Arabic sample](../spikes/core-arabic-corrected-window.md) completes two full native replays with exact CPU state parity. Actual normal-size images verify joined text, loss/restart and right-to-left damaged health pips. Winning pixels remain missing; a third attempt paused at step 13 after focus loss and timed out. A fresh CJK package now completes all 3,056 native host steps at 640×480 logical units, with four actual images of readable HUD, loss/reset and resumed play. Its final win image was missed. The pseudo-locale now passes fresh export and all three CPU routes, with readable normal-size initial/loss text in actual images; its focus-paused native replay timed out after restart. Complete Arabic winning pixels, remaining CJK appearance, full pseudo native replay and narrow pseudo layout on this Mac. Preserve the 2D run's focus interruption and surface deferral; it is not a performance or continuous-motion result. Individual shaping and numerical pixel controls do not substitute for the combined rendered Core sample. |
+| Core Sample runs at 60 fps, using TypeScript and no editor | Authored Core gameplay, packaged HUD/audio and source-free native execution have scoped proofs. A [shipping native-window replay](../spikes/native-window-replay.md) completes the full 2,156-step route with exact headless observation parity. The later [complete host-stage diagnostic](../spikes/native-presentation-host-stages.md#complete-same-source-live-replay) also records all 2,156 steps with independent stage arithmetic, preserving its historical package and earlier failed attempt. [Core integration](../spikes/core-main182.md), [HUD](../spikes/core-result-hud-main192.md). | A shipping run of the complete rendered game meeting the frame budget. Zero callbacks, incomplete display-interval coverage and an early host/callback discrepancy keep displayed cadence open. Complete host timing and CPU simulation timing do not establish FPS, causality or shader-stall freedom. Rendering reconstruction still has unresolved appearance defects. |
+| CI plays Core Sample and asserts game state | The general Mac and desktop workflows execute `samples/core/verify.py` against the native headless binary. All required checks passed on [checkpoint48](../spikes/release-checkpoint-48.md). | Preserve these checks as the sample and runtime change. This requirement's recorded coverage does not pass the other exit requirements. |
+| Navmesh enemies, pseudo-localization, RTL/CJK rendering and the 2D sample | Native Core/planar scenarios, text shaping and presentation have scoped evidence in [STATUS.md](../../STATUS.md). The [2D sample](../spikes/native-window-eligibility.md) completes its full native Mac win route with exact CPU parity and three actual window captures; desktop CI also runs `samples/planar/verify.py`. The combined [Core locale proof](../spikes/core-locale-sampled-captures.md) now passes five full CPU-matched routes with 37 selected offscreen Metal frames. Independent review of 13 originals verifies winning text, Arabic damaged-pip direction, complete CJK glyphs, pseudo expansion and narrow loss/win wrapping. | Sampled locale appearance is verified on this Mac, without phase approval. Continuous motion and native-window presentation are outside the new sampled result. Earlier [Arabic](../spikes/core-arabic-corrected-window.md) and CJK native routes retain their successful numerical runs and missed winning images; the pseudo native replay remains focus-paused/timed out. Those attempts are not relabeled by the new offscreen proof. Preserve the 2D run's focus interruption/surface deferral and the separate complete rendered-game FPS requirement. |
 | Script p95 within 2 ms with 10,000 scripted entities; no shader compilation stalls above twice the frame budget | Shipping script comparisons and exact gameplay/audio parity are recorded. The latest bounded [navigation cache comparison](../spikes/navigation-search-cache-outcome.md) remained above 2 ms and was not adopted. | The 2 ms requirement remains unmet. The director's 2026-10-14 clarification permits periodic bounded investigations, including subagents, while other engine work continues. Preserve negative results and require a distinct hypothesis before another measured experiment. Whole rendered-game shader/pipeline stall qualification also remains open. |
 | Native runtime data path and shipped dependency boundary | Cooked-world, source-free gameplay and runtime dependency checks have recorded implementations and proofs. See [Core integration](../spikes/core-main182.md) and the [shipping observations](../spikes/quickjs-loan-main278.md). | Retain the boundary on the final complete sample/export configuration. No authoring document, command bus or agent dependency may enter its runtime tick path. |
 | Shipped wasm2c module runs on this Mac, with cost recorded against TypeScript | A [matched shipping workload](../spikes/wasm-typescript-cost.md) records both backends and functional parity. Existing native target builds remain required. | Keep its limited workload and historical build identity explicit; it is not a Core10k, rendered frame-time or startup result. This evidence does not establish complete Wasm SDK parity. |
@@ -53,10 +56,11 @@ device execution is deferred; hosted build and release checks remain required.
   The default-off [host-stage observer](../spikes/native-presentation-host-stages.md)
   now has CPU/analyzer qualification and a fresh shipping build with exact full
   offline gameplay/PCM replay. One native run records valid wake/reservation/body
-  stages for 263 of 2,156 requested steps before focus loss suspends simulation;
-  closing it produces a failed, incomplete observation. Active host spans and
-  callback gaps remain separate from the inactive tail. They establish no
-  specific pacing defect or full-route performance result.
+  stages for 263 of 2,156 requested steps before focus loss suspends simulation.
+  A separately granted same-player repeat now completes all 2,156 host-stage
+  rows, with exact gameplay checks and independent arithmetic. Its two zero
+  callbacks and host/callback discrepancy preserve the displayed-cadence gap;
+  no scheduling fix or performance acceptance follows from these spans.
 - Finish and qualify remaining deliverables against the complete native sample.
   The [TypeScript AOT spike](../spikes/typescript-aot.md) remains an adoption
   experiment; its language controls are not a measured replacement for QuickJS.
@@ -81,7 +85,10 @@ reset and repeated locale switches. A [fresh corrected shipping export and all
 three CPU routes](../spikes/core-arabic-corrected-export.md) now pass, with exact
 localized HUD, state and PCM parity. The earlier native package is unchanged. The corrected package now has
 [two complete native replays and partial actual appearance review](../spikes/core-arabic-corrected-window.md),
-including readable normal-size Arabic and corrected pip direction. Final winning
-pixels and the combined locale gate remain open.
+including readable normal-size Arabic and corrected pip direction. The later
+[combined sampled proof](../spikes/core-locale-sampled-captures.md) now adds actual
+winning pixels for Arabic/CJK/pseudo and narrow pseudo loss/win layouts, with
+exact full-route CPU parity. This is sampled appearance evidence, not complete
+native-window motion/presentation or phase approval.
 The director has allowed capture again; the retained
 focus-interrupted runs are not relabeled as complete.

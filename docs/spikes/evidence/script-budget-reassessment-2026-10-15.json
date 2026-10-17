@@ -1,0 +1,15 @@
+{
+  "source": "73c1d493acb619b30c3b90e54776eccd6e2f6d90",
+  "archive_sha256": "ddaa575a2f845742f6a242c5e9d6cd4bb2fc21d9819d7b8745463042dba79374",
+  "record": "private-diagnostic-001/stdout.json",
+  "record_sha256": "b8285db03edcc2a3a0e3938b57f0c6410e2295579303c62cc445d09f6a61c692",
+  "frames": 2156,
+  "zero_based_rank": 2048,
+  "whole_instrumented_p95_ns": 2585875,
+  "hypothetical_zero_all_navigation_p95_ns": 2171792,
+  "rank_frame": 1372,
+  "frames_without_navigation": 1742,
+  "frames_without_navigation_exceeding_2ms": 180,
+  "all_frames_exceeding_2ms_after_subtraction": 230,
+  "scope": "Historical instrumented data, not a current shipping benchmark or speedup; same-frame full-navigation subtraction only deprioritizes an endpoint-only optimization."
+}

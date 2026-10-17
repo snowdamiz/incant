@@ -16,6 +16,9 @@ struct State {
 #[derive(Default)]
 pub(crate) struct TickLogs(Rc<RefCell<State>>);
 impl TickLogs {
+    pub fn healthy(&self) -> bool {
+        self.0.borrow().failure.is_none()
+    }
     pub fn activate(&self) {
         self.0.borrow_mut().active = true;
     }

@@ -29,6 +29,8 @@ probe-android-bytecode = ["mobile-ffi", "incant_script/probe-android-bytecode", 
 project = ["incant_cook/typescript"]
 # Trusted build-linked descriptors only; does not enable a compiler or loader.
 static-module = ["incant_script/static-module", "dep:incant_wasm_runtime", "incant_wasm_runtime/embedded-fixture"]
+# Actual SDK guests supplied by the combined static/JIT conformance producer.
+static-conformance = ["static-module"]
 render-input = ["dep:incant_render_game", "dep:incant_render_native", "dep:incant_render_data", "dep:incant_ui"]
 render-gpu = ["render-input", "dep:incant_render_gpu_host", "dep:incant_render", "dep:thiserror", "dep:pollster"]
 # Explicit selected-frame capture on the ordinary offline CPU composition.

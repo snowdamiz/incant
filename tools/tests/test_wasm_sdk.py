@@ -12,9 +12,15 @@ class RegistryTests(unittest.TestCase):
     def test_light_controls_append_without_changing_any_published_import(self):
         import hashlib
         self.assertEqual(hashlib.sha256(json.dumps(self.data['functions'][:62],sort_keys=True).encode()).hexdigest(), '5486081da93b52f8f837c50745ca87bd0adb55a8f882e6d1f9174d647b1541f1')
-        self.assertEqual([(f['namespace'],f['name'],f['opcode']) for f in self.data['functions'][62:]], [('incant_light_v1','command',62)])
+        self.assertEqual([(f['namespace'],f['name'],f['opcode']) for f in self.data['functions'][62:63]], [('incant_light_v1','command',62)])
         self.assertEqual(self.data['records']['LightCommand'], [['entity','u8',16],['kind','u32'],['reserved','u32'],['values','f64',3]])
         self.assertEqual(self.data['constants']['LIGHT_MAX_COMMANDS'], self.data['constants']['COMMANDS'])
+
+    def test_session_restart_is_additive_and_epoch_only(self):
+        import hashlib
+        self.assertEqual(hashlib.sha256(json.dumps(self.data['functions'][:63], sort_keys=True).encode()).hexdigest(), '2ee8ca9c4fa952411c2d30ebf9e032591ea7f1c6652ce2b759ca67552d6f4906')
+        self.assertEqual(self.data['functions'][63:], [{'namespace': 'incant_session_v1', 'name': 'request_restart', 'params': [['epoch', 'i64']], 'result': 'i32', 'opcode': 63, 'call': 'Call::RequestRestart'}])
+        self.assertEqual(self.data['namespaces']['incant_session_v1'], 'session')
 
     def test_all_committed_host_guest_and_c_artifacts_are_exact(self):
         for name,text in generator.outputs().items():self.assertEqual((ROOT/name).read_text(),text,name)
