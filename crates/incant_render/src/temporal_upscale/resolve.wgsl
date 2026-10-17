@@ -81,18 +81,30 @@ struct Resolved { @location(0) color:vec4f, @location(1) support:vec2f }
     let base=vec2i(floor(old));
     let expected=view_depth(chosen.z);
     let tolerance=max(0.001,0.01*expected);
+    // Geometric confidence has positive bilinear support, independent of the
+    // signed color reconstruction footprint. Missing support retains its weight
+    // as lost confidence; do not renormalize the compatible subset.
+    let f=fract(old); var confidence=0.0;
+    for(var y=0;y<2;y++) { for(var x=0;x<2;x++) {
+        let w=select(1.0-f.x,f.x,x==1)*select(1.0-f.y,f.y,y==1);
+        if !(w>0.0) { continue; }
+        let tap=base+vec2i(x,y);
+        if any(tap<vec2i(0)) || any(tap>=vec2i(frame.output.xy)) { continue; }
+        let s=textureLoad(previous_support,tap,0).xy;
+        if finite4(vec4f(s,0.0,0.0)) && s.x>=0.0 && s.x<=1.0 && s.y>0.5
+            && abs(view_depth(s.x)-expected)<=tolerance { confidence+=w; }
+    }}
+    if !(confidence>0.0) { return result; }
     var history=vec4f(0.0);var history_mass=0.0;
-    // Catmull-Rom has signed lobes. Require complete nonzero support, including
-    // viewport/depth checks. Do not renormalize an arbitrary surviving subset.
+    // Edge colors span surfaces. Keep the complete finite signed color kernel;
+    // a different-depth outer color tap must not veto central geometric support.
     for(var y=-1;y<=2;y++) { for(var x=-1;x<=2;x++) {
         let tap=base+vec2i(x,y);
         let delta=old-vec2f(tap); let w=cubic(delta.x)*cubic(delta.y);
         if abs(w)<1e-7 { continue; }
         if any(tap<vec2i(0)) || any(tap>=vec2i(frame.output.xy)) { return result; }
-        let s=textureLoad(previous_support,tap,0).xy;
         let h=textureLoad(previous_color,tap,0);
-        if !(s.x>=0.0 && s.x<=1.0 && s.y>0.5) || !finite4(h)
-            || abs(view_depth(s.x)-expected)>tolerance { return result; }
+        if !finite4(h) { return result; }
         history+=h*w;history_mass+=w;
     }}
     if abs(history_mass)<1e-5 { return result; }
@@ -104,6 +116,6 @@ struct Resolved { @location(0) color:vec4f, @location(1) support:vec2f }
     // change is measured before clipping; no confidence stored in coverage alpha.
     let change=abs(h.rgb-c.rgb);
     let reaction=clamp(max(change.x,max(change.y,change.z))/0.25,0.0,1.0);
-    result.color=clean(mix(c,clipped,0.9*(1.0-0.5*reaction)));
+    result.color=clean(mix(c,clipped,clamp(confidence,0.0,1.0)*0.9*(1.0-0.5*reaction)));
     return result;
 }

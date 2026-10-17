@@ -1,7 +1,7 @@
 //! Small execution discriminator for the actual shader before full motion review.
 use super::*;
 #[test]
-#[ignore = "coordinated GPU only: eleven 8x8 resolves, bounded half-float readback"]
+#[ignore = "coordinated GPU only: fifteen 8x8 resolves, bounded half-float readback"]
 fn actual_current_depth_and_history_support_refusals_remain_finite() {
     let mut r = crate::test_support::checked(Renderer::headless().unwrap());
     pollster::block_on(r.enable_temporal_upscale()).unwrap();
@@ -63,7 +63,7 @@ fn actual_current_depth_and_history_support_refusals_remain_finite() {
         mapped_at_creation: false,
     });
     let mut results = Vec::new();
-    for mode in 0..11 {
+    for mode in 0..15 {
         let mut current = vec![[0.2, 0.2, 0.2, 1.]; 64];
         for y in 0..8 {
             current[y * 8 + 2] = [0., 0., 0., 1.];
@@ -93,9 +93,24 @@ fn actual_current_depth_and_history_support_refusals_remain_finite() {
         if mode == 8 {
             motion.fill([2., 0., 0.5, 1.]);
         }
-        if mode == 9 {
+        if mode == 9 || (11..=13).contains(&mode) {
             motion.fill([0.25 / 8., 0.25 / 8., 0.5, 1.]);
+        }
+        if mode == 9 {
             old_support[2 * 8 + 2] = [0.9, 1., 0., 0.]; // nonzero negative-lobe tap
+        }
+        if mode == 12 {
+            old_support[3 * 8 + 3] = [0.9, 1., 0., 0.]; // loses positive weight 9/16
+        }
+        if mode == 13 {
+            for y in 3..=4 {
+                for x in 3..=4 {
+                    old_support[y * 8 + x] = [0.9, 1., 0., 0.];
+                }
+            }
+        }
+        if mode == 14 {
+            old_support.fill([0.5, f32::INFINITY, 0., 0.]);
         }
         if mode == 10 {
             // Current depths tie at 0.5; the first tap (2,2) is the stable
@@ -207,7 +222,7 @@ fn actual_current_depth_and_history_support_refusals_remain_finite() {
         results[1][0] > baseline[0] + 0.05,
         "valid old color must actually contribute"
     );
-    for i in [2, 3, 4, 5, 8, 9] {
+    for i in [2, 3, 4, 5, 8, 13, 14] {
         assert_eq!(results[i], baseline, "mode {i} must refuse old history");
     }
     assert_eq!(
@@ -215,6 +230,17 @@ fn actual_current_depth_and_history_support_refusals_remain_finite() {
         "selection uses current depth, not expected previous depth"
     );
     assert_eq!(results[6], [0.; 4]);
+    assert_eq!(
+        results[9], results[11],
+        "outer color depth must not veto central support"
+    );
+    assert!(results[11][0] > baseline[0] + 0.05);
+    assert!(results[12][0] > baseline[0] && results[12][0] < results[11][0]);
+    let expected_partial = baseline[0] + (results[11][0] - baseline[0]) * (7. / 16.);
+    assert!(
+        (results[12][0] - expected_partial).abs() < 0.002,
+        "missing geometric support must reduce confidence without renormalization"
+    );
     for (a, b) in results[7].into_iter().zip([0.1, 0.2, 0.3, 0.5]) {
         assert!((a - b).abs() < 0.002);
     }

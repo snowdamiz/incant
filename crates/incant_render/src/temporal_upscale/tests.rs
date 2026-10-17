@@ -57,6 +57,7 @@ fn source_shader_validation_and_distinct_center_material_contract() {
     for source in [
         system::center_source(),
         include_str!("resolve.wgsl").to_string(),
+        super::raster_readback::COPY_SHADER.to_string(),
     ] {
         let module = naga::front::wgsl::parse_str(&source).unwrap();
         naga::valid::Validator::new(

@@ -3,6 +3,12 @@
 #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
 mod comparison;
 mod owner;
+#[cfg(test)]
+mod raster_geometry;
+#[cfg(test)]
+mod raster_readback;
+#[cfg(test)]
+mod raster_tests;
 pub(crate) mod render;
 pub(crate) mod system;
 #[cfg(test)]

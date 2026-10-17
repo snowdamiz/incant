@@ -46,6 +46,17 @@ pub struct RetainedScene {
     light_plan: crate::lighting::scene::LightPlan,
     packed_lights: Vec<crate::lighting::scene::Light>,
 }
+#[cfg(all(test, feature = "experimental-taau"))]
+impl RetainedScene {
+    pub(crate) fn temporal_upscale_test_views(&self) -> [wgpu::TextureView; 3] {
+        let motion = self.motion.as_ref().unwrap();
+        [
+            motion.readback_view().unwrap(),
+            motion.depth_test_view().unwrap(),
+            self.temporal_upscale.as_ref().unwrap().color_test_view(),
+        ]
+    }
+}
 fn environment(input: &SceneInput) -> Option<(AssetVersionId, f64, f64)> {
     input
         .environment

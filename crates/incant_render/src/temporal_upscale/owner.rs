@@ -31,6 +31,10 @@ pub(super) fn bytes(size: [u32; 2], limit: u32) -> Result<u64> {
     Ok(n)
 }
 impl State {
+    #[cfg(test)]
+    pub(crate) fn color_test_view(&self) -> wgpu::TextureView {
+        self.targets.as_ref().unwrap().color[self.slot].clone()
+    }
     pub fn new() -> Self {
         Self {
             targets: None,
