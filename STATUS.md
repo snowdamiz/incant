@@ -2,7 +2,7 @@
 
 [Release checkpoint52](docs/spikes/release-checkpoint-52.md) is promoted: all
 23 required contexts and eight exact-head workflows passed on the main391 tree,
-and release `73fed959` has the identical tested tree. Later main393–396 changes
+and release `73fed959` has the identical tested tree. Later main393–397 changes
 remain outside that release baseline. Retained
 failed experiments remain failed. No distribution or phase gate is approved.
 
@@ -17,7 +17,7 @@ incomplete native-window attempts remain historical; these samples do not
 establish continuous motion, window presentation or FPS.
 [Release checkpoint52](docs/spikes/release-checkpoint-52.md) contains the tested
 main391 tree after all 23 required contexts and eight candidate workflows passed.
-Later main393–396 changes remain outside that release baseline. Rendering quality and full rendered-game
+Later main393–397 changes remain outside that release baseline. Rendering quality and full rendered-game
 performance remain open. The reported jagged editor cube now has explicit 4x
 geometry antialiasing, verified in the actual Mac editor and isolated Metal
 controls. This fixes the ordinary viewport route; low-resolution reconstruction
@@ -81,8 +81,12 @@ Native Wasm cooperative coroutines now pass local ABI/runtime, actual Wasmtime
 and wasm2c guest parity, saved continuation, reload and refusal checks. An
 independent source review and strict lints pass. The first actual-host build
 failed because generated routine metadata lacked static storage; its failure
-is retained and the corrected producer passes. This scoped change is awaiting
-integration. Normal authored shipping export and complete SDK parity remain open.
+is retained and the corrected producer passes. The scoped contract is merged through
+PR397 after exact-head development checks; main `406a93e3` has the tested tree.
+The authored export proof is being extended to an owned coroutine with pending
+frame/deadline/layout state, cancellation, a coexisting timer and audible commands.
+Its independent synthetic checkpoint controls pass; no new shipping execution is
+claimed yet. Normal authored shipping export and complete SDK parity remain open.
 See [contract and qualification](docs/spikes/native-wasm-coroutines.md).
 
 
@@ -117,12 +121,17 @@ a separate data-only correction passes without rerunning GPU work or relabeling
 that failure. This establishes a narrow repeat result, not its cause. Source,
 texture and compiled-shader observations are the next investigation. The complete
 motion sequence, appearance and cost remain unqualified. No experimental
-renderer is adopted.
+renderer is adopted. Following the director's 2026-10-17 request, further native
+E049 retries are held while current Bevy, Godot, Filament and FSR2 source is compared.
+The implementation priority is a compact GPU-only color reconstruction baseline
+with filtered history, current-sample reconstruction and depth/motion rejection,
+separate from diagnosing the material-sampling discrepancy. Existing failures,
+visual requirements and measured route costs remain unchanged.
 
 Native Wasm haptics is merged through PR393 after review and successful fast
 checks. Physical vibration and an authored shipping haptics proof remain open.
 Release checkpoint52 (PR392) is promoted after all 23 requirements and eight
-workflows passed; later main393–396 is outside that baseline. No distribution or
+workflows passed; later main393–397 is outside that baseline. No distribution or
 phase gate is approved.
 
 Native Wasm timers are merged through PR395 after independent review and fast

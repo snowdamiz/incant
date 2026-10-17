@@ -20,13 +20,13 @@ def sha(data):
     return hashlib.sha256(data).hexdigest()
 
 
-def timer_state(tick):
+def timer_state(tick, coroutine=False):
     """Independent closed-form schedule for this fixed timer-driven fixture."""
     rows = [("future", 17, 101)]
-    if tick < 20:
+    if not coroutine and tick < 20:
         rows.append(("gain", 11, 9 if tick < 9 else 20))
     rows += [(name, 0, due) for name, due in (("stop", 26), ("restart", 29), ("upgain", 34))
-             if tick < due]
+             if not coroutine and tick < due]
     elapsed = 0.
     for _ in range(tick):
         elapsed += 1. / 60.
@@ -34,6 +34,14 @@ def timer_state(tick):
     for name, interval, due in sorted(rows):
         value += name.encode().ljust(64, b'\0') + struct.pack('<IIQ', len(name), interval, due)
     return value
+
+
+def coroutine_state(tick):
+    """Explicit closed-form saved frame; independent of guest callback execution."""
+    stage, due = next((stage, due) for stage, due in enumerate((2, 9, 20, 26, 29, 34, 134)) if tick < due)
+    header = b'INCCOR01' + struct.pack('<6I', 4, 0, 11, 5, 1, 8)
+    header += b'audio-route'.ljust(64, b'\0') + b'audio'.ljust(64, b'\0') + (2).to_bytes(16, 'big')
+    return b'INCCTS01' + struct.pack('<IIQ', 1, 0, due) + bytes([24])*32 + header + struct.pack('<Q', stage)
 
 
 def checkpoint(data, tick):
@@ -45,8 +53,14 @@ def checkpoint(data, tick):
             'Exact state/no UI/active audio sections')
     start = 128 + lengths[0]
     payload = data[start:start + lengths[1]]
+    coroutine = payload.startswith(b'INCWPS03')
     current = payload.startswith(b'INCWPS02')
-    if current:
+    if coroutine:
+        timers = timer_state(tick, coroutine=True)
+        expected = struct.pack('<I', len(timers)) + timers + coroutine_state(tick)
+        require(payload[104:] == expected, 'Exact pending coroutine frame, owner, deadline, schema and timer')
+        payload = payload[8:104]
+    elif current:
         require(payload[104:] == timer_state(tick), 'Exact pending timer schedule and simulation clock')
         payload = payload[8:104]
     require(len(payload) == 96, 'Exact declared state size')
@@ -65,8 +79,9 @@ def mutate_checkpoint(data, kind):
         content[-1] ^= 1
         return bytes(content)
     start = 128 + struct.unpack_from('<I', content, 80)[0]
+    coroutine = content[start:start + 8] == b'INCWPS03'
     current = content[start:start + 8] == b'INCWPS02'
-    state_start = start + (8 if current else 0)
+    state_start = start + (8 if current or coroutine else 0)
     if kind == 'program':
         content[16] ^= 1
     elif kind == 'schema':
@@ -74,8 +89,8 @@ def mutate_checkpoint(data, kind):
     elif kind == 'clock':
         # Keep <= watermark so the specific world/state pairing check is reached.
         struct.pack_into('<Q', content, state_start + 56, SPLIT - 1)
-        if current:
-            struct.pack_into('<Q', content, start + 112, SPLIT - 1)
+        if current or coroutine:
+            struct.pack_into('<Q', content, start + 112 + (4 if coroutine else 0), SPLIT - 1)
     else:
         raise ValueError('Unknown fixed checkpoint mutation')
     content[96:128] = hashlib.sha256(content[:96] + content[128:]).digest()

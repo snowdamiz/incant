@@ -1,4 +1,4 @@
-//! Fixed gameplay fixture: declared state and simulation timers survive a checkpoint.
+//! Fixed fixture: coroutine frame, explicit state and a timer survive a checkpoint.
 #![no_std]
 use core::sync::atomic::{AtomicU32, Ordering};
 use incant_module::{
@@ -7,7 +7,7 @@ use incant_module::{
 
 static CALLS: AtomicU32 = AtomicU32::new(0);
 incant_module::persistent_state!(schema = [23; 32], bytes = 24);
-incant_module::module!(simulate);
+incant_module::coroutine_module!(simulate; "audio" => ([24; 32], 8, audio));
 
 #[panic_handler]
 fn panic(_: &core::panic::PanicInfo<'_>) -> ! {
@@ -53,43 +53,26 @@ fn simulate(t: &mut Tick<'_>, _: f64) -> Result<()> {
         }
         t.write_transforms(chunk, rows)?;
     }
-    // The same audible route is now driven by host-owned simulation timers.
-    // A future periodic timer remains pending in both prefix and final saves.
     if count == 1 {
-        t.set_timer("gain", 8, Some(11))?;
-        t.set_timer("stop", 2, None)?;
-        t.set_timer("stop", 25, None)?;
-        t.set_timer("restart", 28, None)?;
-        t.set_timer("upgain", 33, None)?;
         t.set_timer("future", 100, Some(17))?;
-        t.set_timer("cancelled", 1, None)?;
-        t.cancel_timer("cancelled")?;
-    }
-    let mut timer_bytes = [0; 1024];
-    let timers = t.timers(&mut timer_bytes)?;
-    if timers.tick() != count || timers.len() != usize::from(matches!(count, 9 | 20 | 26 | 29 | 34))
-    {
-        return Err(Error::Bounds);
-    }
-    for (id, due) in timers.events() {
-        let control = match (id, due) {
-            ("gain", 9) => AudioControl::SourceGain(-12.),
-            ("gain", 20) => {
-                t.cancel_timer("gain")?;
-                AudioControl::Seek(0.0021)
-            }
-            ("stop", 26) => AudioControl::Stop,
-            ("restart", 29) => AudioControl::Restart,
-            ("upgain", 34) => AudioControl::SourceGain(-4.),
-            _ => return Err(Error::Bounds),
-        };
-        t.audio_commands(
-            &[AudioCommand {
-                entity: EntityId::from_u128(2),
-                control,
-            }],
-            &mut [0; 128],
+        let mut scratch = [0; incant_module::coroutines::COROUTINE_MAX_BYTES];
+        t.start_coroutine(
+            "audio-route",
+            "audio",
+            &0u64.to_le_bytes(),
+            Some(EntityId::from_u128(2)),
+            &mut scratch,
         )?;
+        t.start_coroutine(
+            "cancelled",
+            "audio",
+            &0u64.to_le_bytes(),
+            None,
+            &mut scratch,
+        )?;
+    }
+    if count == 2 {
+        t.cancel_coroutine("cancelled")?;
     }
     t.log(
         if CALLS.fetch_add(1, Ordering::Relaxed) == 0 {
@@ -100,4 +83,35 @@ fn simulate(t: &mut Tick<'_>, _: f64) -> Result<()> {
         LogLevel::Info,
     )?;
     Ok(())
+}
+
+fn audio(
+    t: &mut Tick<'_>,
+    task: incant_module::coroutines::Task<'_>,
+) -> Result<incant_module::coroutines::Next> {
+    use incant_module::coroutines::Next;
+    if task.id != "audio-route" || task.entity != Some(EntityId::from_u128(2)) {
+        return Err(Error::Bounds);
+    }
+    let stage = persistent::read_u64(task.state, 0)?;
+    let (control, delay) = match stage {
+        0 => (None, 7),
+        1 => (Some(AudioControl::SourceGain(-12.)), 11),
+        2 => (Some(AudioControl::Seek(0.0021)), 6),
+        3 => (Some(AudioControl::Stop), 3),
+        4 => (Some(AudioControl::Restart), 5),
+        5 => (Some(AudioControl::SourceGain(-4.)), 100),
+        _ => return Ok(Next::Done),
+    };
+    if let Some(control) = control {
+        t.audio_commands(
+            &[AudioCommand {
+                entity: EntityId::from_u128(2),
+                control,
+            }],
+            &mut [0; 128],
+        )?;
+    }
+    persistent::write_u64(task.state, 0, stage + 1)?;
+    Ok(Next::Wait(delay))
 }
