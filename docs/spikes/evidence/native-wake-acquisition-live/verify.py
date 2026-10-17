@@ -81,7 +81,7 @@ def audio(value):
 def validate(m, records):
     get = lambda name: decode(records[name])
     require(m['source'] == SOURCE and m['source_tree'] == '612fd7d39d469c59278ec52e878f21805c7e98c8', 'Producing source')
-    require(m['native_runs'] == 1 and m['actual_native_child_exit'] == 0 and m['original_native_wrapper_status'] == 'failed'
+    require(m['native_runs'] == 2 and m['actual_native_child_exit'] == 0 and m['original_native_wrapper_status'] == 'failed'
             and m['saved_data_replay'] == 'passed', 'Native failure/saved replay distinction')
     require(all(m[k] is False for k in ('continuous_display_qualified', 'performance_gate_passed', 'pacing_cause_determined', 'audible_output_verified')), 'Unsupported gate claim')
     plan = get('packet-001/plan.json');build = get('build-001/metadata/result.json');close = get('build001-closeout.json')
@@ -171,6 +171,55 @@ def validate(m, records):
         q=str(round(v*120));counts[q]=counts.get(q,0)+1
     require(counts == context['empirical_8_333333ms_quantum_counts'] == {'1':28,'2':2095,'3':25}, 'Empirical quantum counts')
     require(len(context['continuity_breaks'])==8 and replay['focus_suspended_total_us']==6719110, 'Focus breaks remain visible')
+    # Separately granted same-player run002: no focus interruption or gameplay zero.
+    quiet_plan=get('live-packet-002/plan.json');quiet_grant=get('live-packet-002/root-grant.json')
+    quiet=get('window-002/result.json');qc=get('window-002/child-result.json');qclose=get('window002-closeout.json')
+    qp=get('window-002/stdout.json');qr=get('saved-analysis-002/result.json')
+    previous_plan=get('live-packet-001/plan.json')
+    require(quiet_plan['source']==SOURCE and quiet_plan['player_sha256']==m['player_sha256']
+            and quiet_plan['argv']==[v.replace('/window-001/','/window-002/') for v in previous_plan['argv']]
+            and quiet_plan['child_seconds']==120 and quiet_plan['stage_seconds']==150, 'Same-player quiet route')
+    require(quiet['plan_sha256']==quiet_grant['plan_sha256']==digest(records['live-packet-002/plan.json'])
+            and quiet['runner_sha256']==quiet_grant['runner_sha256']==digest(records['live-packet-002/run.py']), 'Quiet exact grant')
+    require(m['uninterrupted_native_wrapper_status']=='complete' and quiet['status']=='complete' and quiet['exit_code']==0
+            and qc['exit_code']==0 and qc['error'] is None and qc['cleanup_confirmed'] and not qc['cleanup_errors']
+            and qclose['all_owned_pids_and_groups_absent'], 'Quiet terminal/cleanup')
+    require(not quiet['performance_acceptance'] and not quiet['display_acceptance'] and not quiet['live_device_pcm_captured']
+            and quiet['analysis']['focus_lost_events']==0 and quiet['analysis']['gameplay_reported_zero_timestamps']==0
+            and not quiet['analysis']['errors'], 'Quiet admission/scope')
+    require(qp['host_steps']==qp['tick']==2156 and qp['observations']==offline['observations']
+            and qp['input_recording']['sha256']==native['input_recording']['sha256']
+            and qp['ui']['widgets']==7 and qp['backend']=='Metal' and qp['on_screen'] is True, 'Quiet gameplay/input/HUD')
+    audio(qp['audio_device'])
+    qraw=get('window-002/presentations.json');qb=boundary.analyze(qraw)
+    require(qb['complete_boundary_attribution'] and qb['host_analysis']['complete_requested_host_timing']
+            and qb['host_analysis']['callback_coverage']['presented']==m['uninterrupted_gameplay_callback_coverage']==2156
+            and qb['host_analysis']['callback_coverage']['zero']==1, 'Quiet raw coverage')
+    qzero=[r for r in qraw['rows'] if r['outcome']=='reported_zero']
+    require(len(qzero)==1 and qzero[0]['requested_host_step']==0, 'Only initial zero retained')
+    for key in ('wake','reservation'):
+        require(qb['paired_largest_5percent_'+key+'_tail']['sums']==qr['same_frame_tail_partitions'][key]['sums_ns'], 'Quiet paired sums')
+    for key in ('pre_attempt','reserve','committed_body','post_commit_haptics','finished_total'):
+        x=qb['host_analysis']['summary'][key];y=qr['independent_raw_arithmetic'][key]
+        require(x['valid_subset_sum_ns']==y['sum_ns'] and x['valid_subset_p95_nearest_rank_ns']==y['p95_nearest_rank_ns'], 'Quiet raw arithmetic')
+    qb['input_sha256']=digest(records['window-002/presentations.json'])
+    encoded=json.dumps(qb,allow_nan=False,separators=(',',':')).encode()+b'\n'
+    require(digest(encoded)==quiet['artifacts']['boundaries.json']['sha256'], 'Exact quiet derived capture')
+    qcontext=get('saved-analysis-002/callback-context.json')
+    intervals=[]
+    for before,after in zip(qraw['rows'],qraw['rows'][1:]):
+        if before['outcome']==after['outcome']=='presented' and before['segment']==after['segment']:
+            intervals.append((before['drawable_id'],after['drawable_id'],after['presented_seconds']-before['presented_seconds']))
+    qcounts={}
+    for _,_,v in intervals:
+        q=str(round(v*120));qcounts[q]=qcounts.get(q,0)+1
+    require(len(intervals)==2155 and qcounts==qcontext['empirical_8_333333ms_quantum_counts']=={'1':30,'2':2097,'3':28}, 'Quiet presentation quantization')
+    following={before:(after,v) for before,after,v in intervals}
+    pairs=sum(v>.024 and after in following and following[after][1]<.009 for _,after,v in intervals)
+    require(pairs==qcontext['long_followed_by_sub_9ms_count']==27 and len(qcontext['continuity_breaks'])==1, 'Quiet long/short pairs')
+    qstates=[decode(line) for line in records['window-002/window-state.jsonl'].splitlines()]
+    require(all(x['focus_lost_events']==0 for x in qstates if x['kind']=='snapshot')
+            and qstates[-1]['host_steps']==2156 and qstates[-1]['returned_report'] is True, 'Actual quiet focus state')
     source=get('packet-001/source-manifest.json')
     require(source['source']==SOURCE and len(source['files'])==m['source_inventory_records']==4725, 'Source inventory')
     return source
@@ -204,7 +253,7 @@ def main():
             if not name.startswith('docs/') and name not in ('STATUS.md','AGENTS.md','CLAUDE.md'):
                 with (a.source_root/name).open('rb') as f:
                     require(hashlib.file_digest(f,'sha256').hexdigest()==want,'Current producing input differs: '+name)
-    print(f"PASS: {len(records)} records; fresh build +2156 CPU/native steps; original wrapper failure retained; strict saved v2 replay; focus/display gate open")
+    print(f"PASS: {len(records)} records; fresh build +2156 CPU steps; interrupted001 retained +uninterrupted002; strict raw v2 replay; no FPS gate")
 
 
 if __name__=='__main__':

@@ -1,14 +1,14 @@
 # Fresh Core wake/acquisition diagnostic
 
 On 2026-10-17, a fresh shipping-profile diagnostic player completed the real
-2,156-step Core win route on Metal. Its eight checks and 17 entity observations
-exactly match the same-package offline CPU replay. The offline replay also
+2,156-step Core win route on Metal twice. Each child's eight checks and 17 entity
+observations exactly match the same-package offline CPU replay. The offline replay also
 matches the complete historical logical report and all 13,798,400 PCM bytes.
-This supplies a current full rendered-game diagnostic after authorized disk
-cleanup; it does **not** qualify uninterrupted presentation, FPS, appearance,
-performance, or a phase gate.
+This supplies current full rendered-game diagnostics after authorized disk
+cleanup. Window002 passes the predeclared uninterrupted-route criteria; it does
+**not** approve FPS, appearance, performance, or a phase gate.
 
-The native child exited zero. The original supervisor remains **failed**: its
+Both native children exited zero. Window001's original supervisor remains **failed**: its
 historical audio decoder rejected the current `route_change_notifications`
 field. A separate strict four-field decoder and seven refusal/type/gameplay
 controls pass. Saved-data replay verifies all previous gameplay assertions,
@@ -54,9 +54,9 @@ build uses the actual later compatible producer metadata. Selected Xcode is now
 27.1 with SDK27.0; 63 of the 487 historical tool/resource hashes differ. No matched
 old-vs-new speedup or observer-only timing attribution is claimed.
 
-## Observed boundaries and presentation limits
+## Window001: interrupted boundaries and presentation limits
 
-The sole native child ran 45.43 seconds; the wrapper closed at 45.61 seconds.
+The first native child ran 45.43 seconds; the wrapper closed at 45.61 seconds.
 It rendered at physical 1280×960 with seven drawable HUD widgets, completed all
 2,156 accepted steps and wrote a complete v2 capture: no missing/invalid wake or
 acquisition samples, no overflow, one initial surface deferral. Both owned
@@ -100,19 +100,68 @@ independent display-refresh setting measurement.
 
 A concrete, unproved scheduling hypothesis is phase interaction between the
 independent 60-Hz rational game deadline and quantized presentation. Sustained
-drawable starvation was not reproduced here. First use the already-required,
-separately granted uninterrupted same-player route with the existing observations:
-predeclare long/short adjacency, same-row host/wake/body/acquisition comparisons,
-all zero outcomes and segment breaks. No observer expansion or scheduling/FIFO/
+drawable starvation was not reproduced here. The separately granted same-player run below uses the existing observations
+with predeclared long/short adjacency, same-row host/wake/body/acquisition
+comparisons, all zero outcomes and segment breaks. No observer expansion or scheduling/FIFO/
 Tao/HAL change follows from this packet. Any focus interruption, missing coverage,
 native/gameplay failure or zero timestamp remains visible and prevents a full
 presentation qualification. Native call spans omit later GPU/driver work; no
 shader-stall, cache-hit or causal rendering conclusion follows from zero observed
 gameplay creation calls.
 
+## Window002: uninterrupted same-player route
+
+The independently granted second child used the exact same executable, cooked
+package, bundle, 2,156-step recording, observations, dimensions and 120/150-second
+limits. There was no build, added instrumentation, engine change, input, resize
+or automatic refocus. The only decoder change is the strict current audio field;
+post-run analysis additionally requires zero focus losses and zero gameplay
+presentation timestamps. Fourteen harmless controller controls passed before
+launch. Window001 and its correction remain separate, unchanged records.
+
+The second wrapper and child both exited zero in 37.58/37.39 seconds. Both PIDs
+and groups were independently absent. All 2,156 gameplay callbacks have positive
+presented timestamps, with no missing, invalid, overflowing or discarded rows.
+The sole zero belongs to initial step 0, followed by the initial/gameplay segment
+boundary. Focus losses, surface deferrals/recreations and gameplay zero timestamps
+are all zero. The full state assertions and HUD again match the CPU baseline;
+three zero audio notification counters remain observations, not audible proof.
+
+| Observer-inclusive interval | Window002 nearest-rank p95 |
+| --- | ---: |
+| Scheduled pulse lateness, 2,155 valid batches | 1.088417 ms |
+| Gameplay native acquisition call | 0.031250 ms |
+| Entire reservation | 0.153083 ms |
+| Committed body | 4.114583 ms |
+| Adjacent host-finish interval | 17.655583 ms |
+
+On the same largest 108 wake-lateness rows, 111,670,966 of 134,611,047 ns
+(82.958%) is before `NewEvents`, with 22,940,081 ns after it. Signed early arrivals
+remain intact, including a minimum of −6,367,625 ns. The same largest 108
+reservations contain 8,218,665 ns acquisition and 14,252,329 ns other work:
+36.575%/63.425% of their 22,470,994-ns total. All raw partitions were independently
+recomputed; body, acquisition and OS presentation remain distinct observations.
+
+The 2,155 adjacent gameplay presentation intervals fit the same empirical
+8.333333-ms quantum within 4.334 microseconds: 30 one-quantum, 2,097 two-quantum,
+28 three-quantum intervals. Twenty-seven of 28 long intervals are immediately
+followed by one quantum. There are no focus losses to explain this pattern.
+The same-row example 633→634 has a 25-ms presentation interval but a 15.523-ms
+host-finish interval, a 0.119-ms reservation and a 3.468-ms body. Other long rows
+include larger body costs; the largest body among their endpoints is 13.850 ms.
+No single host interval explains every presented interval, and later GPU/driver
+work remains outside those host spans.
+
+This is descriptive corroboration of the quantization/phase hypothesis, not an
+optimization comparison or proof of a Tao/FIFO/driver defect. The two same-player
+runs made no scheduling change. A separate reviewed intervention and matched
+comparison would be needed before choosing a fix. Initial unobserved coverage,
+observer overhead, platform/device and phase-gate requirements remain explicit;
+no passing FPS, shader-stall, performance or phase approval is claimed.
+
 ## Portable replay
 
-The [manifest](evidence/native-wake-acquisition-live/manifest.json) binds 59 compact
+The [manifest](evidence/native-wake-acquisition-live/manifest.json) binds 77 compact
 text records, raw native report/presentation/compilation/state data, actual build
 and CPU receipts, original failures, strict decoder successor and cadence mapping.
 It retains source/tool/input inventories, without copying binaries, assets,
