@@ -2,11 +2,12 @@
 
 [Release checkpoint52](docs/spikes/release-checkpoint-52.md) is promoted: all
 23 required contexts and eight exact-head workflows passed on the main391 tree,
-and release `73fed959` has the identical tested tree. Later main393–398 changes
+and release `73fed959` has the identical tested tree. Later main393–400 changes
 remain outside that release baseline. Checkpoint53 (PR399) is frozen on main397;
 its macOS Wasm job failed a [timer-fixture lookup](docs/spikes/ci-timer-fixture-layout.md).
-The narrow correction passes actual local static/development reload checks in
-CI's directory layout; hosted revalidation remains pending. Retained
+The narrow correction is merged through PR400 after review and fast checks; it
+passes actual local static/development reload checks in CI's directory layout.
+Hosted checkpoint revalidation remains pending. Retained
 failed experiments remain failed. No distribution or phase gate is approved.
 
 The current phase remains **Phase 1: Core engine**. The
@@ -20,7 +21,7 @@ incomplete native-window attempts remain historical; these samples do not
 establish continuous motion, window presentation or FPS.
 [Release checkpoint52](docs/spikes/release-checkpoint-52.md) contains the tested
 main391 tree after all 23 required contexts and eight candidate workflows passed.
-Later main393–397 changes remain outside that release baseline. Rendering quality and full rendered-game
+Later main393–400 changes remain outside that release baseline. Rendering quality and full rendered-game
 performance remain open. The reported jagged editor cube now has explicit 4x
 geometry antialiasing, verified in the actual Mac editor and isolated Metal
 controls. This fixes the ordinary viewport route; low-resolution reconstruction
@@ -80,6 +81,15 @@ Skeleton and structural changes remain outside this admission rule.
 
 ## Current parallel qualification — 2026-10-17
 
+Rust/Wasm gameplay now has a bounded prepared localization coverage report,
+matching the existing TypeScript committed-snapshot behavior. Pages include
+canonical table/key, requested/resolved locale and missing kind; callback quotas
+and atomic refusal remain shared with other localization queries. The
+[scoped qualification](docs/spikes/native-wasm-localization-report.md) passes
+27 native controls, six actual Wasmtime/wasm2c guests, strict lints, independent
+review and all ten local development checks. This feature is locally qualified;
+a fresh authored shipping export for this query and complete SDK parity remain open.
+
 Native Wasm cooperative coroutines now pass local ABI/runtime, actual Wasmtime
 and wasm2c guest parity, saved continuation, reload and refusal checks. An
 independent source review and strict lints pass. The first actual-host build
@@ -133,14 +143,15 @@ E049 retries are held. Pinned Bevy, Godot, Filament and FSR2 source comparison
 now informs a default-off GPU-only color reconstruction candidate, with filtered
 history, current-sample reconstruction and depth/motion rejection. Its first
 compile failed three current-API accesses; the narrow correction now compiles
-and passes 34 unique CPU controls. Strict lint and actual GPU/image review remain
+and passes 34 unique CPU controls and strict lint. The first tiny actual GPU
+shader control passes; the full four-way image comparison and visual review remain
 pending. Existing failures, visual requirements and measured route costs remain
 unchanged; the candidate is not adopted.
 
 Native Wasm haptics is merged through PR393 after review and successful fast
 checks. Physical vibration and an authored shipping haptics proof remain open.
 Release checkpoint52 (PR392) is promoted after all 23 requirements and eight
-workflows passed; later main393–397 is outside that baseline. No distribution or
+workflows passed; later main393–400 is outside that baseline. No distribution or
 phase gate is approved.
 
 Native Wasm timers are merged through PR395 after independent review and fast

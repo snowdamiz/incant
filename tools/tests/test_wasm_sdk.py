@@ -54,6 +54,14 @@ class RegistryTests(unittest.TestCase):
         self.assertEqual(self.data['constants']['COROUTINE_MAX_TASKS'],128)
         self.assertEqual(self.data['constants']['COROUTINE_FRAME_BYTES'],16384)
 
+    def test_localization_report_preserves_all_74_imports_and_bounded_pagination(self):
+        import hashlib
+        self.assertEqual(hashlib.sha256(json.dumps(self.data['functions'][:74],sort_keys=True).encode()).hexdigest(), 'ee28552d93f31fa1c4aaa3a91e0a1d1e4c611544d5ef46c58a90c3e7e821adad')
+        self.assertEqual(self.data['functions'][74], {'namespace':'incant_localization_v1','name':'report','params':[['epoch','i64'],['offset','i32'],['limit','i32']],'result':'i32','opcode':74,'call':'Call::LocalizationReport { offset, limit }'})
+        self.assertEqual(self.data['constants']['LOCALIZATION_MAX_REPORT_TOTAL'],4096)
+        self.assertEqual(self.data['constants']['LOCALIZATION_MAX_REPORT_ROWS'],128)
+        self.assertEqual(self.data['constants']['LOCALIZATION_MAX_RESULT_BYTES'],66560)
+
     def test_all_committed_host_guest_and_c_artifacts_are_exact(self):
         for name,text in generator.outputs().items():self.assertEqual((ROOT/name).read_text(),text,name)
     def test_unknown_versions_namespaces_signatures_and_layouts_fail_closed(self):

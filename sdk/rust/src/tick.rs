@@ -336,6 +336,27 @@ impl<'tick> Tick<'tick> {
         let bytes = self.localization_result(len, scratch)?;
         self.check(abi::localization::decode_locale(bytes).map_err(crate::localization::error))
     }
+    /// Prepared missing-translation coverage in canonical table/key order.
+    /// Offset 0..4096 and limit 1..128; unknown runtime keys remain in localize().
+    /// A queued locale change is visible only after this callback commits.
+    pub fn localization_report<'a>(
+        &mut self,
+        request: crate::localization::ReportRequest,
+        scratch: &'a mut [u8],
+    ) -> Result<crate::localization::ReportSnapshot<'a>> {
+        self.ready()?;
+        self.check(request.validate().map_err(crate::localization::error))?;
+        // SAFETY: validated bounded scalar arguments; result is copied below.
+        let result = unsafe {
+            raw::incant_localization_v1_report(
+                self.epoch,
+                request.offset as i32,
+                request.limit as i32,
+            )
+        };
+        let bytes = self.localization_result(result, scratch)?;
+        self.check(abi::localization::report::decode(bytes).map_err(crate::localization::error))
+    }
     /// Format a message using the shared native catalog/ICU rules. Arguments are
     /// named Text, finite Number or CalendarDate values. No allocation is needed
     /// in the guest; request/result scratch must be distinct borrowed slices.

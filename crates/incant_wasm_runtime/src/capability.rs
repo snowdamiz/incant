@@ -188,6 +188,10 @@ pub enum Call {
         ptr: i32,
     },
     Locale,
+    LocalizationReport {
+        offset: i32,
+        limit: i32,
+    },
     Format {
         ptr: i32,
         len: i32,
@@ -861,6 +865,7 @@ impl Capability {
             && matches!(
                 call,
                 Call::Locale
+                    | Call::LocalizationReport { .. }
                     | Call::Format { .. }
                     | Call::Localize { .. }
                     | Call::ReadLocalized { .. }
@@ -982,9 +987,10 @@ impl Capability {
             ));
         }
         let units = match call {
-            Call::Locale | Call::Format { .. } | Call::Localize { .. } => {
-                incant_wasm_abi::LOCALIZATION_QUERY_UNITS
-            }
+            Call::Locale
+            | Call::Format { .. }
+            | Call::Localize { .. }
+            | Call::LocalizationReport { .. } => incant_wasm_abi::LOCALIZATION_QUERY_UNITS,
             Call::Steer { .. }
             | Call::FindPath { .. }
             | Call::FindGridPath { .. }
@@ -1577,6 +1583,15 @@ impl Capability {
                 self.command(StructuralCommand::ControlAnimation { entity, control })?;
             }
             Call::Locale => return self.locale_state()?.locale(),
+            Call::LocalizationReport { offset, limit } => {
+                let request = incant_localization::LocalizationReportRequest {
+                    offset: u32::try_from(offset)
+                        .map_err(|_| Error::Abi("localization report offset"))?,
+                    limit: u32::try_from(limit)
+                        .map_err(|_| Error::Abi("localization report limit"))?,
+                };
+                return self.locale_state()?.report(request);
+            }
             Call::Format { ptr, len } => {
                 let len =
                     usize::try_from(len).map_err(|_| Error::Abi("localization byte length"))?;
