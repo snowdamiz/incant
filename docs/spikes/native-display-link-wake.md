@@ -39,6 +39,15 @@ The attempt consumed 178.748 seconds, continuing the existing target account at
 16,328,871,936-byte ceiling. Earlier target history and copied binaries remain
 preserved. These sampled resource observations are not a sandbox.
 
+The integrated main393 source at `559ada1079db5dfee13b59ae4f69e7b0b2ffe574`
+also passes all 158 controls and strict lint. Its separate CPU002 wrapper exits
+zero with all 21 observed identities and three groups independently absent.
+The copied test producer hashes to
+`9d55aee43fe787e8c59b87cc509466e57a57bc9579d08541e985bb2745fbf915`.
+This follow-up takes 28.443 seconds, continuing the same account at 1804.771
+seconds; target allocation peaks at 12,058,796,032 bytes under the unchanged cap.
+It still contains no native display-link execution.
+
 Next qualification is a fresh scene-bound shipping-profile player, exact full
 Core gameplay and PCM parity, then a quiet same-player ordinary/display-link
 comparison with actual presentation callbacks. Requested 60 Hz is not proof of
