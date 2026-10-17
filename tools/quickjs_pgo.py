@@ -117,7 +117,7 @@ def identity(value):
                                    ensure_ascii=False, allow_nan=False).encode()).hexdigest()
 
 
-def c_commands(log, target, vendor, *, expected=None):
+def c_commands(log, target, vendor, *, expected=None, search_path=None):
     """Parse cc's actual compile vectors, keeping both Cargo roles separate."""
     target, vendor = Path(target).resolve(), Path(vendor).resolve()
     found = {}
@@ -142,7 +142,13 @@ def c_commands(log, target, vendor, *, expected=None):
             role = 'cooker'
         compiler_index = next((i for i, a in enumerate(tokens) if not re.fullmatch(r'[A-Za-z_][A-Za-z0-9_]*=.*', a)), None)
         require(compiler_index is not None, 'Missing actual C compiler')
-        compiler = str(Path(shutil.which(tokens[compiler_index]) or tokens[compiler_index]).resolve(strict=True))
+        invocation = Path(tokens[compiler_index])
+        if not invocation.is_absolute():
+            require(search_path is not None, 'Actual child compiler PATH required for a bare invocation')
+            selected = shutil.which(str(invocation), path=search_path)
+            require(selected is not None, 'Actual child compiler not found')
+            invocation = Path(selected)
+        compiler = str(invocation.resolve(strict=True))
         args = []
         skip = {tokens.index('-c'), tokens.index('-c') + 1, tokens.index('-o'), tokens.index('-o') + 1}
         args = [v for i, v in enumerate(tokens) if i > compiler_index and i not in skip]

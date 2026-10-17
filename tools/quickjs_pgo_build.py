@@ -287,7 +287,7 @@ def prepare(request_path, output, scratch, *, seconds=5400, cancel=lambda: None)
             # Cargo prints build-script debug output in stdout, while rustc
             # invocations are in stderr. Retain and inspect both actual streams.
             commands = protocol.c_commands(session.last_stdout + '\n' + session.last_stderr, session.path, vendor,
-                expected=descriptors.get(mode))
+                expected=descriptors.get(mode), search_path=os.environ['PATH'])
             protocol.create_json(directory / 'actual-c-roles.json', commands)
             if mode == 'ordinary':
                 require(all(c['compiler'] == spec['tools']['compiler']['path'] for c in commands), 'Actual baseline tool differs')

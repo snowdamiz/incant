@@ -478,3 +478,21 @@ class RoleScope(unittest.TestCase):
             with self.assertRaises(ValueError):
                 build.role_receipts(messages, self.target, d, attempt, producer)
         path.write_text(json.dumps(original))
+
+
+class CompilerLookup(unittest.TestCase):
+    setUp = Protocol.setUp
+    desc = Protocol.desc
+    commands = Protocol.commands
+    def test_natural_spelling_resolves_only_against_actual_child_PATH(self):
+        self.compiler.chmod(0o700)
+        (self.root/'cc').symlink_to(self.compiler)
+        desc = self.desc('generate')
+        raw = self.commands(desc).replace(str(self.compiler), 'cc')
+        with patch.dict(p.os.environ, {'PATH':'/wrong/ambient/path'}):
+            rows = p.c_commands(raw, self.target, self.vendor, expected=desc, search_path=str(self.root))
+        self.assertEqual(len(rows), 8)
+        self.assertTrue(all(r['compiler']==str(self.compiler) for r in rows))
+        for search in (None, '/wrong/child/path'):
+            with self.assertRaises(ValueError):
+                p.c_commands(raw, self.target, self.vendor, expected=desc, search_path=search)
