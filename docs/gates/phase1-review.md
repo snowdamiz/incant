@@ -39,6 +39,11 @@ rendered-game performance gate remains open; no gate follows from timing coverag
   remains a private experiment. The default-off MetalFX foundation is merged,
   but its [material/motion comparison](../spikes/metalfx-image-motion.md) fails
   appearance review. Neither route has accepted quality or performance evidence.
+  The private reconstruction [complete-route cost comparison](../spikes/reconstruction-complete-route-cost.md)
+  now rejects its current CPU-admission layout: 94–97 ms versus about 3 ms for
+  original shading in the matched CI-profile diagnostic. GPU-only admission and
+  reduced transfers/passes are the next unqualified design; the new numerical
+  result does not approve appearance, shipping performance or a phase gate.
 - Extend live asset refresh beyond the verified existing-texture and
   [compatible static-model workflows](../spikes/native-static-model-refresh.md).
   Both preserve the running world and scripts on this Mac. Compatible animation

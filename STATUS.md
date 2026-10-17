@@ -55,6 +55,20 @@ passes local tests and leaves production behavior unchanged. Both desktop jobs
 and Windows Wasm conformance passed on checkpoint44; that checkpoint's separate
 general failure prevented promotion.
 
+## Reconstruction cost — current private layout rejected
+
+The complete 234-case offscreen diagnostic passed its timing and parity checks,
+but rejects the current reconstruction layout as a performance candidate. Guarded
+reconstruction takes 94–97 ms of operational wall time versus about 3 ms for
+original shading; required CPU admission accounts for 76–79 ms. The isolated
+shader-guard saving remains inconclusive because instrumentation overhead is
+larger than the observed difference. This is a CI-profile diagnostic on this Mac,
+not shipping performance or appearance acceptance. The two preceding failed
+attempts remain recorded. [Raw data and independent replay](docs/spikes/reconstruction-complete-route-cost.md)
+support the next step: GPU-side bounded admission, fewer readbacks and lower
+resource use, followed by the same correctness, motion and complete-route checks.
+No experimental renderer code is adopted.
+
 ## Fresh Core native replay — complete timing attribution
 
 A newly built shipping-profile diagnostic completes the 2,156-step rendered Core
