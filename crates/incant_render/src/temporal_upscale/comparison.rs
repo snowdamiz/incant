@@ -7,6 +7,32 @@ use crate::{
 use serde_json::json;
 const WIDTH: u32 = 960;
 const HEIGHT: u32 = 540;
+fn content_counts(pixels: &[u8]) -> (usize, usize) {
+    assert_eq!(pixels.len(), (WIDTH * HEIGHT * 4) as usize);
+    let colors = pixels.as_chunks::<4>().0;
+    let nonbackground = colors.iter().filter(|p| **p != [20, 21, 25, 255]).count();
+    let unique = colors
+        .iter()
+        .collect::<std::collections::HashSet<_>>()
+        .len();
+    (nonbackground, unique)
+}
+fn has_scene_content(counts: (usize, usize)) -> bool {
+    // This fixed geometry fixture covers much more than 1% of the image and
+    // contains textured/lit surfaces. Reject a cleared or flat filled target;
+    // this is presence evidence, not appearance acceptance.
+    counts.0 > (WIDTH * HEIGHT / 100) as usize && counts.1 > 64
+}
+#[test]
+fn captured_scene_content_rejects_blank_flat_and_tiny_outputs() {
+    let mut pixels = [20, 21, 25, 255].repeat((WIDTH * HEIGHT) as usize);
+    assert_eq!(content_counts(&pixels), (0, 1));
+    assert!(!has_scene_content(content_counts(&pixels)));
+    pixels.fill(255);
+    assert!(!has_scene_content(content_counts(&pixels)));
+    assert!(!has_scene_content((64, 65)));
+    assert!(has_scene_content(((WIDTH * HEIGHT / 100 + 1) as usize, 65)));
+}
 fn target(view: &wgpu::TextureView) -> RetainedTarget<'_> {
     RetainedTarget {
         view,
@@ -159,16 +185,26 @@ fn run(cost: bool) {
             } else {
                 json!(null)
             };
-            if !cost {
+            let content = if !cost {
                 let pixels = capture::read(&renderer, &texture);
                 if [1, 16, 24, 25, 32].contains(&frame) {
                     out.image(name, frame, &pixels);
                 } else {
                     out.png(name, frame, &pixels);
                 }
-            }
+                // Save the actual image before refusing so failed content is
+                // retained. The complete route must draw the authored scene.
+                let counts = content_counts(&pixels);
+                assert!(
+                    has_scene_content(counts),
+                    "{name} frame {frame}: absent scene content {counts:?}"
+                );
+                json!({"nonbackground_pixels":counts.0,"unique_rgba_colors":counts.1})
+            } else {
+                json!(null)
+            };
             rows.push(
-                json!({"arm":name,"frame":frame,"input":identity,"motion":motion,"timing":timing}),
+                json!({"arm":name,"frame":frame,"input":identity,"motion":motion,"timing":timing,"content":content}),
             );
             if name == "taau75" && frame == 16 {
                 let before = retained.motion_frame().unwrap();

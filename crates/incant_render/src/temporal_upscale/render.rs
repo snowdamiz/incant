@@ -46,7 +46,9 @@ impl Renderer {
             target.view,
             target.format,
             None,
-            Some([target.width as f32, target.height as f32, 1., 1.]),
+            // The reconstructed history already matches the output extent.
+            // OutputPass's pixel grid is an offset/scale, not a texture size.
+            None,
         )?;
         let frame = crate::graph::PreparedFrame {
             diagnostics,
