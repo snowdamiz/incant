@@ -46,4 +46,4 @@ def linked_suffix(row, output):
         routines.append('incant_wasm_abi::coroutines::Routine::new('
                         f'"{item["name"]}",{item["bytes"]},[{schema}])'
                         '.expect("validated coroutine routine")')
-    return '.with_coroutines(&[' + ','.join(routines) + '])'
+    return '.with_coroutines(const { &[' + ','.join(routines) + '] })'
