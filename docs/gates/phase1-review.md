@@ -101,6 +101,12 @@ also rejects that specific scan-only hypothesis for reaching 2 ms: its hypotheti
 same-frame zero-cost p95 is still 2.544041 ms. The reusable observer is default off;
 no navigation optimization or new shipping performance result is adopted.
 
+A separate [QuickJS C profile-guided compilation experiment](../spikes/quickjs-c-pgo-feasibility.md)
+now passes standalone behavior and strict invalid-profile refusal checks. It
+establishes compiler feasibility only. Representative Core training, matched
+shipping measurements and gameplay/audio parity remain unperformed; the 2 ms
+requirement is still unmet and ordinary builds are unchanged.
+
 The real-mouse capture check is pending the director's availability and is not
 blocking these lanes. Broader editor, agent, content, export, multiplayer, game
 production and distribution work remains in the plan's later and overlapping
