@@ -19,6 +19,7 @@ pub use animation_pose_v5::{
     PoseInterpolation,
 };
 pub mod audio;
+pub mod coroutines;
 pub mod light;
 pub use audio::{
     AudioBus, AudioCommand, AudioControl, AudioDeclaration, AudioDeclarations, AudioListener,

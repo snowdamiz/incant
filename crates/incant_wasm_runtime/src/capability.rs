@@ -27,6 +27,14 @@ const _: () = {
 /// Trusted host adapter operation; all integer arguments are guest offsets/indices.
 #[derive(Clone, Copy)]
 pub enum Call {
+    NextCoroutine {
+        ptr: i32,
+        capacity: i32,
+    },
+    CommandCoroutine {
+        ptr: i32,
+        len: i32,
+    },
     TimerLen,
     ReadTimers {
         ptr: i32,
@@ -242,6 +250,7 @@ pub enum Call {
 /// this state. No guest access or native pointer is retained by this type.
 #[derive(Default)]
 pub struct Capability {
+    coroutines: crate::coroutines::State,
     timers: crate::timers::State,
     haptics: crate::haptics::State,
     persistent: Option<crate::persistent::PersistentState>,
@@ -302,12 +311,13 @@ impl Capability {
     pub fn replacement(&mut self) -> Self {
         // Direct trusted callers must not revive a failed or active persistent
         // transaction. Public host reload validates its fresh candidate first.
-        let failed =
-            self.persistent.is_some() && (self.failed || self.active || self.restart_committed);
+        let failed = (self.persistent.is_some() || self.coroutines.enabled())
+            && (self.failed || self.active || self.restart_committed);
         Self {
             failed,
             persistent: self.persistent.take(),
             timers: self.timers.replacement(),
+            coroutines: self.coroutines.replacement(),
             haptics: self.haptics.replacement(),
             epoch: self.epoch,
             restart_enabled: self.restart_enabled,
@@ -400,6 +410,13 @@ impl Capability {
         self.commands.clear();
         self.haptics.begin();
         if let Err(error) = self.timers.begin(self.tick + 1, dt) {
+            self.abort();
+            return Err(error);
+        }
+        if let Err(error) = self
+            .coroutines
+            .begin(self.tick + 1, |id| world.entity_identity(id))
+        {
             self.abort();
             return Err(error);
         }
@@ -527,6 +544,7 @@ impl Capability {
     }
     pub fn abort(&mut self) {
         self.timers.abort();
+        self.coroutines.abort();
         self.haptics.abort();
         if let Some(state) = &mut self.persistent {
             state.abort();
@@ -565,6 +583,10 @@ impl Capability {
     pub fn finish(&mut self, world: &mut NativeWorld) -> Result<(), Error> {
         if !self.active {
             return Err(Error::Abi("inactive ECS transaction"));
+        }
+        if !self.coroutines.ready() {
+            self.abort();
+            return Err(Error::Abi("unfinished or rejected coroutine transaction"));
         }
         if self.timers.rejected {
             self.abort();
@@ -649,6 +671,13 @@ impl Capability {
             self.abort();
             return Err(Error::Abi("different commit world"));
         }
+        if let Err(error) = self
+            .coroutines
+            .bind_new_owners(|id| world.entity_identity(id))
+        {
+            self.abort();
+            return Err(error);
+        }
         let result =
             world.with_numeric_columns(|columns| transaction::commit(columns, &self.chunks));
         self.chunks.clear();
@@ -663,6 +692,7 @@ impl Capability {
         if result.is_ok() {
             self.haptics.commit();
             self.timers.commit();
+            self.coroutines.commit(|id| world.entity_identity(id));
             if let Some(state) = &mut self.persistent {
                 state.commit();
             }
@@ -672,6 +702,7 @@ impl Capability {
             self.failed = false;
         } else {
             self.timers.abort();
+            self.coroutines.abort();
             self.haptics.abort();
             if let Some(state) = &mut self.persistent {
                 state.abort();
@@ -736,6 +767,12 @@ impl Capability {
     /// Synchronous import; memory contains initialized guest bytes only and is
     /// borrowed for this call. No world observation/publication occurs here.
     pub fn invoke(&mut self, memory: &mut [u8], epoch: i64, call: Call) -> Result<i32, Error> {
+        let coroutine_authorized = self.active
+            && self.epoch == epoch
+            && matches!(
+                call,
+                Call::NextCoroutine { .. } | Call::CommandCoroutine { .. }
+            );
         let timer_authorized = self.active
             && self.epoch == epoch
             && matches!(
@@ -830,6 +867,9 @@ impl Capability {
                     | Call::SetLocale { .. }
             );
         let result = self.invoke_inner(memory, epoch, call);
+        if coroutine_authorized && result.is_err() {
+            self.coroutines.rejected = true;
+        }
         if timer_authorized && result.is_err() {
             self.timers.rejected = true;
         }
@@ -967,6 +1007,28 @@ impl Capability {
                 .ok_or(Error::Limit("navigation query quota"))?;
         }
         match call {
+            Call::NextCoroutine { ptr, capacity } => {
+                let capacity =
+                    usize::try_from(capacity).map_err(|_| Error::Abi("coroutine capacity"))?;
+                if capacity > incant_wasm_abi::COROUTINE_MAX_BYTES {
+                    return Err(Error::Limit("coroutine frame capacity"));
+                }
+                let region = range(ptr, capacity, memory.len())?;
+                self.transfer(capacity)?;
+                return Ok(self.coroutines.next(&mut memory[region])? as i32);
+            }
+            Call::CommandCoroutine { ptr, len } => {
+                let len = usize::try_from(len).map_err(|_| Error::Abi("coroutine frame length"))?;
+                if len > incant_wasm_abi::COROUTINE_MAX_BYTES {
+                    return Err(Error::Limit("coroutine frame length"));
+                }
+                let region = range(ptr, len, memory.len())?;
+                self.transfer(len)?;
+                let chunks = &self.chunks;
+                self.coroutines.command(&memory[region], |id| {
+                    chunks.iter().any(|c| c.ids.contains(&id))
+                })?;
+            }
             Call::TimerLen => return Ok(self.timers.snapshot_len() as i32),
             Call::ReadTimers { ptr, capacity } => {
                 let len = self.timers.snapshot_len();

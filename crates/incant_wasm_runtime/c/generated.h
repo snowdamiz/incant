@@ -23,3 +23,4 @@ struct w2c_incant__session__v1 { struct w2c_incant__v1 core; };
 struct w2c_incant__state__v1 { struct w2c_incant__v1 core; };
 struct w2c_incant__haptics__v1 { struct w2c_incant__v1 core; };
 struct w2c_incant__timers__v1 { struct w2c_incant__v1 core; };
+struct w2c_incant__coroutines__v1 { struct w2c_incant__v1 core; };

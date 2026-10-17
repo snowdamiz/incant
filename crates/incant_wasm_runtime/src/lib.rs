@@ -9,6 +9,7 @@ mod animation_poses_v5;
 mod animations;
 mod audio;
 mod capability;
+mod coroutines;
 mod flipbooks;
 mod generated;
 mod navigation_paths;

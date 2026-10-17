@@ -1,5 +1,6 @@
 mod audio;
 mod compound;
+mod coroutines;
 mod haptics;
 mod hud;
 mod ik;

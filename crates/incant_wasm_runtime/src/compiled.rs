@@ -27,6 +27,7 @@ pub struct ModuleExports {
     update: Update,
     free: Free,
     persistent: Option<crate::persistent::PersistentProgram>,
+    coroutines: &'static [incant_wasm_abi::coroutines::Routine],
 }
 impl ModuleExports {
     /// # Safety
@@ -44,6 +45,7 @@ impl ModuleExports {
             update,
             free,
             persistent: None,
+            coroutines: &[],
         }
     }
     /// # Safety
@@ -61,7 +63,16 @@ impl ModuleExports {
             update,
             free,
             persistent: Some(program),
+            coroutines: &[],
         }
+    }
+    /// The trusted generated linker copies declarations from the validated module.
+    pub const fn with_coroutines(
+        mut self,
+        routines: &'static [incant_wasm_abi::coroutines::Routine],
+    ) -> Self {
+        self.coroutines = routines;
+        self
     }
     pub const fn persistent_program(&self) -> Option<crate::persistent::PersistentProgram> {
         self.persistent
@@ -88,7 +99,8 @@ pub struct StaticModule {
 impl StaticModule {
     pub fn new(exports: ModuleExports) -> Result<Self, StaticError> {
         let mut capability =
-            Capability::with_persistence(exports.persistent.map(|p| p.declaration));
+            Capability::with_persistence(exports.persistent.map(|p| p.declaration))
+                .with_coroutines(exports.coroutines.to_vec())?;
         let mut context = Context {
             capability: &mut capability,
             error: None,

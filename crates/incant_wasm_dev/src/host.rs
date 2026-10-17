@@ -43,6 +43,9 @@ impl DevModuleHost {
     /// wall-time or total-process-memory deadline.
     pub fn new(bytes: &[u8]) -> Result<Self, ModuleError> {
         let declaration = bounds::preflight(bytes)?;
+        let catalog =
+            incant_wasm_abi::coroutines::catalog_in_module(bytes).map_err(ModuleError::Abi)?;
+        let coroutines = catalog.map(|c| c.routines().collect()).unwrap_or_default();
         let mut config = Config::new();
         config
             .consume_fuel(true)
@@ -85,7 +88,8 @@ impl DevModuleHost {
             &engine,
             State {
                 limits,
-                capability: Capability::with_persistence(declaration),
+                capability: Capability::with_persistence(declaration)
+                    .with_coroutines(coroutines)?,
             },
         );
         store.limiter(|state| &mut state.limits);
