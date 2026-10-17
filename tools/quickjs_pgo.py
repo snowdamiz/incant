@@ -5,6 +5,7 @@ This is not an exporter option. Project data cannot select a tool or C flag.
 from pathlib import Path
 import hashlib
 import json
+import os
 import re
 import shlex
 import shutil
@@ -194,19 +195,65 @@ def artifact_features(messages, mode, target, root):
     return [found[k] for k in sorted(found)]
 
 
-def final_link(raw, mode, runtime, *, compiler, target):
+def final_link(raw, mode, runtime, *, compiler, target, environment=None):
+    """Admit the actual rustc command, including its closed macOS env prefix.
+
+    This parses recorded evidence; it never executes the command. Resolve a
+    wrapped driver only through the independently expected reported PATH.
+    """
+    require(mode in MODES, 'Unknown final-link mode')
     require(len(raw.splitlines()) == 1, 'One actual final link command')
     tokens = shlex.split(raw)
-    first = next((i for i, v in enumerate(tokens) if not re.fullmatch(r'[A-Za-z_][A-Za-z0-9_]*=.*', v)), None)
-    require(first is not None and str(Path(shutil.which(tokens[first]) or tokens[first]).resolve(strict=True)) == compiler,
+    require(tokens, 'Missing actual final link driver')
+    wrapped = tokens[0] in ('env', '/usr/bin/env')
+    first, assignments = 0, {}
+    if wrapped:
+        require(environment is not None and set(environment) == {'LC_ALL', 'PATH', 'SDKROOT', 'VSLANG', 'ZERO_AR_DATE'}
+                and environment['LC_ALL'] == 'C' and environment['VSLANG'] == '1033'
+                and environment['ZERO_AR_DATE'] == '1'
+                and all(Path(p).is_absolute() for p in environment['PATH'].split(os.pathsep))
+                and Path(environment['SDKROOT']).is_absolute(), 'Expected closed native link environment')
+        first, removed = 1, []
+        while first < len(tokens) and tokens[first].startswith('-'):
+            require(tokens[first] == '-u' and first + 1 < len(tokens)
+                    and re.fullmatch(r'[A-Za-z_][A-Za-z0-9_]*', tokens[first + 1]),
+                    'Explicit env -u operand required')
+            removed.append(tokens[first + 1])
+            first += 2
+        require(removed == ['IPHONEOS_DEPLOYMENT_TARGET', 'TVOS_DEPLOYMENT_TARGET', 'XROS_DEPLOYMENT_TARGET'],
+                'Unexpected native link environment removals')
+        while first < len(tokens) and re.fullmatch(r'[A-Za-z_][A-Za-z0-9_]*=.*', tokens[first]):
+            name, value = tokens[first].split('=', 1)
+            require(name not in assignments, 'Duplicate native link environment assignment')
+            assignments[name] = value
+            first += 1
+        require(assignments == environment, 'Actual native link environment differs')
+    else:
+        require(environment is None, 'Missing expected native env wrapper')
+    require(first < len(tokens), 'Missing actual final link driver')
+    driver = tokens[first]
+    if Path(driver).is_absolute():
+        resolved = driver
+    else:
+        require(wrapped and driver in ('cc', 'clang'), 'Unknown native link wrapper or driver')
+        resolved = shutil.which(driver, path=assignments['PATH'])
+        require(resolved is not None, 'Missing reported native link driver')
+    require(str(Path(resolved).resolve(strict=True)) == compiler,
             'Actual final linker differs from admitted native driver')
-    require(tokens.count('-o') == 1 and Path(tokens[tokens.index('-o') + 1]).is_absolute()
-            and Path(tokens[tokens.index('-o') + 1]).is_relative_to(Path(target)), 'Owned actual final output')
-    args = [part for v in tokens for part in (v[4:].split(',') if v.startswith('-Wl,') else [v])]
+    arguments = tokens[first + 1:]
+    ambiguous = {'env', 'sh', 'bash', 'zsh', 'xcrun', 'ccache', 'sccache', 'cc', 'c++', 'gcc', 'g++', 'clang', 'clang++', 'ld', Path(compiler).name}
+    require(not any(Path(v).name in ambiguous or v.startswith('@')
+                    or re.fullmatch(r'[A-Za-z_][A-Za-z0-9_]*=.*', v) for v in arguments),
+            'Ambiguous additional native link driver or wrapper')
+    require(arguments.count('-o') == 1 and arguments.index('-o') + 1 < len(arguments), 'One final output operand')
+    output = Path(arguments[arguments.index('-o') + 1])
+    require(output.is_absolute() and output.is_relative_to(Path(target)), 'Owned actual final output')
+    args = [part for v in arguments for part in (v[4:].split(',') if v.startswith('-Wl,') else [v])]
     require(args.count('-dead_strip') == (0 if mode == 'generate' else 1), 'Training-only dead-code retention')
     require((str(runtime) in args) == (mode == 'generate'), 'Training-only runtime archive')
     require(mode != 'generate' or '-force_load' in args, 'Training profile runtime force load')
-    return {'dead_strip': mode != 'generate', 'profile_runtime': mode == 'generate', 'raw_sha256': hashlib.sha256(raw.encode()).hexdigest()}
+    return {'dead_strip': mode != 'generate', 'profile_runtime': mode == 'generate',
+            'driver': compiler, 'env_wrapper': wrapped, 'raw_sha256': hashlib.sha256(raw.encode()).hexdigest()}
 
 
 def instrumentation(mode, symbols, sections):

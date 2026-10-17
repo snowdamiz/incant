@@ -125,6 +125,94 @@ class Protocol(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     p.final_link(bad, mode, runtime, compiler=str(self.compiler), target=self.target)
 
+    def link_wrapper(self, mode='ordinary'):
+        self.compiler.chmod(0o700)
+        cc = self.root / 'cc'
+        if not cc.exists():
+            cc.symlink_to(self.compiler)
+        environment = {'LC_ALL': 'C', 'PATH': str(self.root), 'SDKROOT': str(self.root),
+                       'VSLANG': '1033', 'ZERO_AR_DATE': '1'}
+        prefix = ['env', '-u', 'IPHONEOS_DEPLOYMENT_TARGET', '-u', 'TVOS_DEPLOYMENT_TARGET',
+                  '-u', 'XROS_DEPLOYMENT_TARGET', *[k+'='+v for k, v in environment.items()]]
+        arguments = ['cc', '-o', str(self.target / 'binary')]
+        arguments += (['-Wl,-force_load', '-Wl,/pinned/libclang_rt.profile_osx.a'] if mode == 'generate'
+                      else ['-Wl,-dead_strip'])
+        return prefix, arguments, environment
+
+    def admit_link(self, tokens, environment, mode='ordinary'):
+        return p.final_link(shlex.join(tokens), mode, '/pinned/libclang_rt.profile_osx.a',
+                            compiler=str(self.compiler), target=self.target, environment=environment)
+
+    def test_rustc_env_wrapper_uses_exact_reported_path_not_ambient_lookup(self):
+        for mode in p.MODES:
+            prefix, arguments, environment = self.link_wrapper(mode)
+            with patch.dict(p.os.environ, {'PATH': '/nonexistent'}):
+                receipt = self.admit_link(prefix + arguments, environment, mode)
+            self.assertEqual(receipt['driver'], str(self.compiler))
+            self.assertTrue(receipt['env_wrapper'])
+            self.assertEqual(receipt['dead_strip'], mode != 'generate')
+            self.assertEqual(receipt['profile_runtime'], mode == 'generate')
+            # The only alternate wrapper spelling admitted is the same system
+            # env, not an arbitrary executable with a matching basename.
+            self.admit_link(['/usr/bin/env', *prefix[1:], *arguments], environment, mode)
+
+    def test_env_removals_require_explicit_exact_unique_operands(self):
+        prefix, arguments, environment = self.link_wrapper()
+        for tokens in [prefix[:1] + prefix[3:] + arguments,
+                       prefix[:2] + prefix[3:] + arguments,
+                       prefix[:1] + ['-u'] + prefix[1:] + arguments,
+                       prefix[:1] + ['--unset=IPHONEOS_DEPLOYMENT_TARGET'] + prefix[3:] + arguments,
+                       prefix[:1] + ['-i'] + prefix[1:] + arguments,
+                       [v.replace('XROS_DEPLOYMENT_TARGET', 'TVOS_DEPLOYMENT_TARGET') for v in prefix] + arguments,
+                       [v.replace('XROS_DEPLOYMENT_TARGET', 'UNTRUSTED') for v in prefix] + arguments,
+                       ['env', '-u']]:
+            with self.subTest(tokens=tokens), self.assertRaises(ValueError):
+                self.admit_link(tokens, environment)
+
+    def test_env_assignments_refuse_missing_duplicate_foreign_or_changed_values(self):
+        prefix, arguments, environment = self.link_wrapper()
+        for key in environment:
+            value = key + '=' + environment[key]
+            for changed in [[v for v in prefix if v != value] + arguments,
+                            prefix + [value] + arguments,
+                            [key+'=changed' if v == value else v for v in prefix] + arguments]:
+                with self.subTest(key=key), self.assertRaises(ValueError):
+                    self.admit_link(changed, environment)
+        for changed in [prefix + ['UNTRUSTED=1'] + arguments,
+                        prefix + ['PATH_EXTRA='+environment['PATH']] + arguments,
+                        prefix + arguments + ['LC_ALL=C']]:
+            with self.assertRaises(ValueError): self.admit_link(changed, environment)
+
+    def test_link_wrapper_refuses_missing_unknown_nested_and_ambiguous_drivers(self):
+        prefix, arguments, environment = self.link_wrapper()
+        for tokens in [[], prefix, arguments, prefix[1:] + arguments,
+                       ['/untrusted/env', *prefix[1:], *arguments],
+                       prefix + ['xcrun', *arguments], prefix + ['env', *arguments],
+                       prefix + ['sh', *arguments], prefix + ['unknown-wrapper', *arguments],
+                       prefix + [str(self.compiler), *arguments],
+                       prefix + arguments + ['clang'], prefix + arguments + [str(self.compiler)],
+                       prefix + arguments + ['@uninspected-response-file'], prefix + ['cc', '-o']]:
+            with self.subTest(tokens=tokens), self.assertRaises(ValueError):
+                self.admit_link(tokens, environment)
+
+    def test_wrapped_link_preserves_actual_driver_and_all_existing_flag_refusals(self):
+        prefix, arguments, environment = self.link_wrapper()
+        other = self.root / 'other-clang'; other.write_bytes(b'other never executed'); other.chmod(0o700)
+        (self.root / 'cc').unlink(); (self.root / 'cc').symlink_to(other)
+        with self.assertRaisesRegex(ValueError, 'differs from admitted'):
+            self.admit_link(prefix + arguments, environment)
+        (self.root / 'cc').unlink(); (self.root / 'cc').symlink_to(self.compiler)
+        for mode in p.MODES:
+            prefix, arguments, environment = self.link_wrapper(mode)
+            for changed in [prefix + [v for v in arguments if v != '-Wl,-dead_strip'] if mode != 'generate'
+                            else prefix + [v for v in arguments if v != '-Wl,-force_load'],
+                            prefix + arguments + ['-Wl,-dead_strip'],
+                            prefix + [v.replace(str(self.target / 'binary'), '/foreign/binary') for v in arguments],
+                            prefix + arguments + ['-Wl,/pinned/libclang_rt.profile_osx.a'] if mode != 'generate'
+                            else prefix + [v for v in arguments if v != '-Wl,/pinned/libclang_rt.profile_osx.a']]:
+                with self.subTest(mode=mode), self.assertRaises(ValueError):
+                    self.admit_link(changed, environment, mode)
+
     def test_training_instrumentation_is_not_source_free_or_a_default_use_feature(self):
         for mode in ('ordinary', 'use'):
             p.instrumentation(mode, 'plain symbols', 'plain sections')

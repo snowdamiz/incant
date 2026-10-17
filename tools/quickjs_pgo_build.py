@@ -236,6 +236,12 @@ def prepare(request_path, output, scratch, *, seconds=5400, cancel=lambda: None)
         require('host: ' + protocol.TARGET in export_native.execute([rustc, '-Vv']).stdout, 'Native Mac only')
         sysroot = Path(export_native.execute([rustc, '--print', 'sysroot']).stdout.strip())
         llvm = sysroot / 'lib/rustlib' / protocol.TARGET / 'bin'
+        # rustc adds its linker-tools bin; tools/cargo and export_native.build
+        # each prepend the selected Rust bin. Bind the complete reported PATH,
+        # not an ambient lookup of the recorded `env ... cc` command.
+        link_environment = {'LC_ALL': 'C', 'PATH': os.pathsep.join(
+            (str(llvm), str(rustc.parent), str(rustc.parent), os.environ['PATH'])),
+            'SDKROOT': spec['tools']['sdk'], 'VSLANG': '1033', 'ZERO_AR_DATE': '1'}
         storage = scratch / 'build'; storage.mkdir()
         session = Session(ROOT, storage / 'target', rustc, protocol.TARGET, 'packed')
         copied = copy_authoring(job, scratch / 'authoring', check)
@@ -290,7 +296,7 @@ def prepare(request_path, output, scratch, *, seconds=5400, cancel=lambda: None)
                 report['pgo_roles'] = role_receipts(messages, session.path, descriptors[mode], directory, producer)
             link = read(directory / 'link-args.txt', 1024**2).decode()
             report['actual_final_link'] = protocol.final_link(link, mode, spec['tools']['profile_runtime']['path'],
-                compiler=spec['tools']['compiler']['path'], target=session.path)
+                compiler=spec['tools']['compiler']['path'], target=session.path, environment=link_environment)
             symbols = run_tool([llvm / 'llvm-nm', '--defined-only', player], directory, 'actual-symbols', 30, check)
             sections = run_tool([llvm / 'llvm-readobj', '--sections', player], directory, 'actual-sections', 30, check)
             report['instrumentation'] = protocol.instrumentation(mode, symbols, sections)
