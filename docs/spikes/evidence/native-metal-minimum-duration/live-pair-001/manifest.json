@@ -1,0 +1,40 @@
+{
+  "format": "incant-minimum-duration-live-pair-packet-v1",
+  "source": "380a03a4da2e3882dce8e199e85fcce3d13e4006",
+  "CPU_qualified_native_source": "c0ba6ba54ae31aae050cd685f27de7655bf76d16",
+  "original_root": "/Users/andreyyurlov/.codex/incant-evidence/native-metal-minimum-duration-001",
+  "record_count": 87,
+  "archive_bytes": 1281769,
+  "archive_sha256": "fd35c12cc6691185ddd7aef533a418c966454c0aa1daf7d8fc0a0b49cffd2e96",
+  "expanded_bytes": 11562125,
+  "player_sha256": "02e9c05b0d83554e473b8d83deff7d09c597af7d66b4747ad1a0c34686338d83",
+  "full_PCM_sha256": "ccabf2c68b6388ac554ac3efb5609ddf6b4a45d1a3f316891d5f344094e99ee3",
+  "full_PCM_bytes": 13798400,
+  "strict_arm_results": {
+    "ordinary": "complete",
+    "minimum-duration60": "failed"
+  },
+  "analyzer_dependencies": {
+    "tools/presentation_host_stages.py": "3ca697d782bc2c39a97216df9d410123d7169f5c1eb344f29042493171d2fee7",
+    "tools/presentation_boundaries.py": "ae6c65e65476de3cfec22b3c2619facdbe07d9af4bd4f929efdcb71a39ca691c"
+  },
+  "performance_gate_passed": false,
+  "display_gate_passed": false,
+  "policy_adopted": false,
+  "new_default_enabled": false,
+  "full_Cargo_stream_included": false,
+  "binary_bytes_included": false,
+  "retained_local_artifact_inventory": "/Users/andreyyurlov/.codex/incant-evidence/native-metal-minimum-duration-001/shipping001-artifact-inventory.json",
+  "scope": "One current-source shipping build, whole2156CPU logic/PCM and one ordinary/selected native pair. Native gameplay/callback coverage complete; treatment strict timing acceptance remains failed. No retry, statistical/adoption/continuous-display/FPS/audio-capture/phase approval claim.",
+  "independent_review": {
+    "path": "/Users/andreyyurlov/.codex/incant-reviews/native-minimum-duration-independent-20261017.json",
+    "sha256": "6e1bbcc47375d446aca14bbe256dcf253972e75f2f0db8f57f27224547f67ee2"
+  },
+  "host_context": {
+    "model": "Mac17,9",
+    "memory_bytes": "51539607552",
+    "CPU": "Apple M5 Pro",
+    "macOS": "27.0.1",
+    "macOS_build": "26A434"
+  }
+}
