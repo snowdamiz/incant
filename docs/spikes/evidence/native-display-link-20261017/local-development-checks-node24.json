@@ -1,0 +1,90 @@
+[
+  {
+    "argv": [
+      "python3",
+      "tools/generate_conventions.py",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.038186624995432794
+  },
+  {
+    "argv": [
+      "npm",
+      "run",
+      "test:tools"
+    ],
+    "exit": 0,
+    "seconds": 41.819289584003855
+  },
+  {
+    "argv": [
+      "cargo",
+      "fmt",
+      "--all",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 1.8578901670407504
+  },
+  {
+    "argv": [
+      "node",
+      "tools/build_bridge.mjs",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.04863266699248925
+  },
+  {
+    "argv": [
+      "node",
+      "tools/generate_sdk.mjs",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.06037537503289059
+  },
+  {
+    "argv": [
+      "node_modules/.bin/tsc",
+      "-p",
+      "sdk/ts/tsconfig.json"
+    ],
+    "exit": 0,
+    "seconds": 0.22802320803748444
+  },
+  {
+    "argv": [
+      "npm",
+      "run",
+      "build",
+      "--workspace",
+      "editor/ui"
+    ],
+    "exit": 0,
+    "seconds": 3.9915731250075623
+  },
+  {
+    "argv": [
+      "npm",
+      "run",
+      "test",
+      "--workspace",
+      "editor/ui",
+      "--",
+      "--maxWorkers=2"
+    ],
+    "exit": 0,
+    "seconds": 26.86273362499196
+  },
+  {
+    "argv": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.03262050001649186
+  }
+]

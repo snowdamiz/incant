@@ -1,0 +1,142 @@
+{
+  "passed": true,
+  "wrapper_pid": 19576,
+  "source_head": "559ada1079db5dfee13b59ae4f69e7b0b2ffe574",
+  "plan_sha256": "7a1a04031b20faab0e8d7510815286fab60d1bc9552e7d514b303fa4a56b6e71",
+  "prior_seconds": 1776.3275337109226,
+  "prior_target_peak": 12053086208,
+  "target_cap": 16328871936,
+  "GPU": false,
+  "window": false,
+  "artifact": {
+    "bytes": 36944944,
+    "sha256": "9d55aee43fe787e8c59b87cc509466e57a57bc9579d08541e985bb2745fbf915",
+    "features": [
+      "default",
+      "frame-capture",
+      "native-display-link",
+      "native-minimum-duration",
+      "native-presentations",
+      "native-window",
+      "physics-deterministic",
+      "profile",
+      "render-gpu",
+      "render-input"
+    ]
+  },
+  "controls": "test result: ok. 158 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.67s",
+  "seconds": 28.443114041001536,
+  "cumulative_seconds": 1804.7706488769036,
+  "owned_pids": [
+    19687,
+    19697,
+    19698,
+    19715,
+    19716,
+    19757,
+    19764,
+    19781,
+    19879,
+    19891,
+    19893,
+    19911,
+    19912,
+    19916,
+    19926,
+    19932,
+    19933,
+    19934,
+    19939,
+    19942
+  ],
+  "groups": [
+    19687,
+    19879,
+    19891
+  ],
+  "target_peak": 12058796032,
+  "final_target": 12053102592,
+  "source_unchanged": true,
+  "absence": [
+    {
+      "pid": 19687,
+      "absent": true
+    },
+    {
+      "pid": 19697,
+      "absent": true
+    },
+    {
+      "pid": 19698,
+      "absent": true
+    },
+    {
+      "pid": 19715,
+      "absent": true
+    },
+    {
+      "pid": 19716,
+      "absent": true
+    },
+    {
+      "pid": 19757,
+      "absent": true
+    },
+    {
+      "pid": 19764,
+      "absent": true
+    },
+    {
+      "pid": 19781,
+      "absent": true
+    },
+    {
+      "pid": 19879,
+      "absent": true
+    },
+    {
+      "pid": 19891,
+      "absent": true
+    },
+    {
+      "pid": 19893,
+      "absent": true
+    },
+    {
+      "pid": 19911,
+      "absent": true
+    },
+    {
+      "pid": 19912,
+      "absent": true
+    },
+    {
+      "pid": 19916,
+      "absent": true
+    },
+    {
+      "pid": 19926,
+      "absent": true
+    },
+    {
+      "pid": 19932,
+      "absent": true
+    },
+    {
+      "pid": 19933,
+      "absent": true
+    },
+    {
+      "pid": 19934,
+      "absent": true
+    },
+    {
+      "pid": 19939,
+      "absent": true
+    },
+    {
+      "pid": 19942,
+      "absent": true
+    }
+  ]
+}

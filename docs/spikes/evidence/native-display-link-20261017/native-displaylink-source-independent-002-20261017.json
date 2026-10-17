@@ -1,0 +1,84 @@
+{
+  "format": "incant-independent-source-review-v1",
+  "at": "2026-10-17T20:17:24.514152+00:00",
+  "worktree": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant",
+  "head": "c8c50dc2bb56bde3328ab11e63d814a0a6fa69f5",
+  "prior_review": {
+    "path": "/Users/andreyyurlov/.codex/incant-reviews/native-displaylink-source-independent-20261017.json",
+    "sha256": "fc6520c8fd3bf88df58a5b140f2e9c5ff839039a6bc1f40c9f1c839a88842d08"
+  },
+  "files": [
+    {
+      "path": "Cargo.lock",
+      "bytes": 253557,
+      "sha256": "4d902f46cda1688dd3e9fb26968aec830512a7e92b2fe6b8629f7a9fdab8a043"
+    },
+    {
+      "path": "crates/incant_game_player/Cargo.toml",
+      "bytes": 7404,
+      "sha256": "3840e1eacf2fe4be5c238567660b22b08a812c9897d2854f7128acdda898940a"
+    },
+    {
+      "path": "crates/incant_game_player/src/lib.rs",
+      "bytes": 13312,
+      "sha256": "bd8385e77488d34354086aa3582a5f3935b1fafedc2cfd66398cb00afaeda9a9"
+    },
+    {
+      "path": "crates/incant_game_player/src/wake.rs",
+      "bytes": 5751,
+      "sha256": "fd03ed4b138e143bb162f96f65fff8f53facc332d3ddb6073f7b6ddf6f70974f"
+    },
+    {
+      "path": "crates/incant_game_player/src/window/mod.rs",
+      "bytes": 65145,
+      "sha256": "ba0f0d6d12fdb33500675910053ee743f2c6521aeacbf8565fae0dd0ccce82be"
+    },
+    {
+      "path": "crates/incant_game_player/src/window/pacing_tests.rs",
+      "bytes": 3076,
+      "sha256": "75fef03475d8130de5132e9e6fcafb1eb28aa23e2dc704034952951046cb7316"
+    },
+    {
+      "path": "crates/incant_game_player/src/window/display_link.rs",
+      "bytes": 5537,
+      "sha256": "06b1fe1ab2c6027ad642369f4a28591fbac372fb7b3e722e38d351bf3dfdc5bb"
+    },
+    {
+      "path": "crates/incant_game_player/src/window/display_link/inbox.rs",
+      "bytes": 4016,
+      "sha256": "3d942a36ff715f60005023aca687a0d76d924adb8443fbcdb9abbf10ae8100c2"
+    },
+    {
+      "path": "crates/incant_game_player/src/window/display_link/gate.rs",
+      "bytes": 6597,
+      "sha256": "8391d371d2c039f3f1846609cfbc520d483483d4f54ce97ed983ca87f99a752e"
+    }
+  ],
+  "status": "source-accepted-pending-native-qualification",
+  "open_findings": [],
+  "resolved_findings": [
+    {
+      "title": "Queued inactive pulse can authorize resume before a fresh callback",
+      "resolution": "Gate::boundary drains latest without releasing an outstanding queued event token, clears notified/active_since and sets eligible_after to actual boundary Instant. Host forwards this at focus/suspend/resume/resize/scale/restart transitions. Inactive poll also moves eligibility boundary; active ready requires Pulse.arrived>=eligible_after.",
+      "controls_reviewed": [
+        "queued_background_callback_cannot_authorize_same_batch_focus_gain",
+        "stale_queued_event_can_deliver_only_a_new_post_boundary_callback"
+      ],
+      "assessment": "Both prior stale-data authorization and stale health-origin cases are addressed without changing Clock. New post-boundary callbacks may use the existing token only after delivered acknowledgment; no extra outstanding event is manufactured."
+    }
+  ],
+  "unchanged_assessments": [
+    "Retained Host owns CADisplayLink, callback target and Tao Window; target State owns only Rc inbox and event proxy, not Host/link, so no Rust ownership cycle found.",
+    "stop closes delivery then invalidates; Drop repeats stop before retained link/target/window field teardown.",
+    "One latest Pulse and one queued notification bit bound coalescing; acknowledgment and polling consume once; invalid/closed callback state is sticky.",
+    "Only explicit macOS feature + trusted CLI selection activates; bound window and stop-after required, conflicting capture/checkpoint/material/minimum-duration modes refused before output/window/audio/GPU setup.",
+    "CADisplayLink target timestamp is metadata only; unchanged Clock::due(now), rate60 admission, max4 catch-up, retry/acquisition/input/audio chronology remain in ordinary host path.",
+    "Cargo.lock changes only add direct edges to already pinned objc2 packages; no resolved version changes."
+  ],
+  "scope": "Read-only source review of all nine current paths including repaired Gate and call sites; no edits, tests, Rust compile, native window, GPU or capture.",
+  "limits": [
+    "No compiled API/FFI admission or real callback/event order tested.",
+    "Requested 60Hz callback rate is advisory; source alone proves no cadence/performance acceptance.",
+    "Native source remains root-owned and uncommitted; this receipt binds only listed snapshot hashes."
+  ]
+}
