@@ -2,8 +2,11 @@
 
 [Release checkpoint52](docs/spikes/release-checkpoint-52.md) is promoted: all
 23 required contexts and eight exact-head workflows passed on the main391 tree,
-and release `73fed959` has the identical tested tree. Later main393–397 changes
-remain outside that release baseline. Retained
+and release `73fed959` has the identical tested tree. Later main393–398 changes
+remain outside that release baseline. Checkpoint53 (PR399) is frozen on main397;
+its macOS Wasm job failed a [timer-fixture lookup](docs/spikes/ci-timer-fixture-layout.md).
+The narrow correction passes actual local static/development reload checks in
+CI's directory layout; hosted revalidation remains pending. Retained
 failed experiments remain failed. No distribution or phase gate is approved.
 
 The current phase remains **Phase 1: Core engine**. The
@@ -88,7 +91,9 @@ passes four fresh-player runs and six specific refusals at source `4eeca4c6`.
 The owned routine's pending frame, schema, owner, deadline and coexisting timer
 survive save/load exactly, with matching gameplay and complete audible PCM.
 All 555 observed processes/groups are absent after actual terminal success.
-This proof is locally verified and awaiting integration; complete SDK parity remains open.
+This proof is merged through PR398 after independent review and exact-head
+development-checks success; main `cd03cdd5` has the tested tree. Complete SDK
+parity remains open.
 See [contract and qualification](docs/spikes/native-wasm-coroutines.md).
 
 
@@ -124,11 +129,13 @@ that failure. This establishes a narrow repeat result, not its cause. Source,
 texture and compiled-shader observations are the next investigation. The complete
 motion sequence, appearance and cost remain unqualified. No experimental
 renderer is adopted. Following the director's 2026-10-17 request, further native
-E049 retries are held while current Bevy, Godot, Filament and FSR2 source is compared.
-The implementation priority is a compact GPU-only color reconstruction baseline
-with filtered history, current-sample reconstruction and depth/motion rejection,
-separate from diagnosing the material-sampling discrepancy. Existing failures,
-visual requirements and measured route costs remain unchanged.
+E049 retries are held. Pinned Bevy, Godot, Filament and FSR2 source comparison
+now informs a default-off GPU-only color reconstruction candidate, with filtered
+history, current-sample reconstruction and depth/motion rejection. Its first
+compile failed three current-API accesses; the narrow correction now compiles
+and passes 34 unique CPU controls. Strict lint and actual GPU/image review remain
+pending. Existing failures, visual requirements and measured route costs remain
+unchanged; the candidate is not adopted.
 
 Native Wasm haptics is merged through PR393 after review and successful fast
 checks. Physical vibration and an authored shipping haptics proof remain open.
@@ -160,7 +167,13 @@ prerequisite runner then expects a second build script after Cargo has stopped
 on the intended missing-profile refusal; this remains a failed harness attempt.
 The corrected prerequisite now passes both production missing-descriptor
 refusals, nine ordinary controls and strict lint. A fresh ordinary/generate/use
-shipping feasibility run is active; no training or performance result is claimed.
+shipping feasibility attempt failed before training because the diagnostic
+changed the compiler invocation and therefore its ordered C flags. It also
+forced the cooker's ordinary O0 recipe to O3. Strict validation correctly refused
+the mismatch. The retained failure cost 517.927 seconds. A source correction
+preserves natural compiler spelling and separate cooker/runtime recipes, with
+PGO explicitly scoped to runtime C; actual two-role admission qualification is
+pending. No training or performance result is claimed.
 The next useful trigger is a newly qualified
 ordinary/generate/use producer with exact gameplay/audio parity, then
 a separately scheduled matched timing run. Last reassessment: 2026-10-17.
