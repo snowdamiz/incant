@@ -14,6 +14,9 @@ use incant_runtime::NativeAnimation;
 use incant_types::{Animation, CameraProjection};
 use std::{fs, path::Path, sync::Mutex};
 
+#[path = "animated_refresh/vertex_content.rs"]
+mod vertex_content;
+
 struct AnimationTargets {
     inner: Targets,
     epoch: Arc<AtomicUsize>,
@@ -79,6 +82,14 @@ fn keys_only_fixture_changes_skin_sample_without_geometry_material_or_image_chan
 }
 
 fn game(root: &Path, reference: VisualAssetRef, epoch: Arc<AtomicUsize>) -> (AnimationGame, Probe) {
+    game_with_light(root, reference, epoch, false)
+}
+fn game_with_light(
+    root: &Path,
+    reference: VisualAssetRef,
+    epoch: Arc<AtomicUsize>,
+    directional: bool,
+) -> (AnimationGame, Probe) {
     let mut mesh = CookedSpatial::empty(id(1));
     mesh.mesh = Some(NativeMeshRenderer {
         mesh: reference.id,
@@ -106,7 +117,7 @@ fn game(root: &Path, reference: VisualAssetRef, epoch: Arc<AtomicUsize>) -> (Ani
     let scene = CookedScene::new(
         id(99),
         60,
-        vec![
+        [
             CookedEntity {
                 id: id(1),
                 parent: None,
@@ -131,10 +142,41 @@ fn game(root: &Path, reference: VisualAssetRef, epoch: Arc<AtomicUsize>) -> (Ani
                 transform: Transform::default(),
                 velocity: None,
             },
-        ],
+        ]
+        .into_iter()
+        .chain(directional.then_some(CookedEntity {
+            id: id(4),
+            parent: None,
+            transform: Transform {
+                // Light arrives from -Y/+Z, separating opposite bitangents.
+                rotation: [
+                    std::f64::consts::FRAC_PI_8.sin(),
+                    0.,
+                    0.,
+                    std::f64::consts::FRAC_PI_8.cos(),
+                ],
+                ..Default::default()
+            },
+            velocity: None,
+        }))
+        .collect(),
     )
     .unwrap()
-    .with_spatial(vec![reference], vec![mesh, camera])
+    .with_spatial(
+        vec![reference],
+        [mesh, camera]
+            .into_iter()
+            .chain(directional.then(|| {
+                let mut light = CookedSpatial::empty(id(4));
+                light.directional = Some(incant_types::DirectionalLight {
+                    color: [1.; 3],
+                    intensity: 3.,
+                    shadows: None,
+                });
+                light
+            }))
+            .collect(),
+    )
     .unwrap();
     let mut renderer = models::checked(Renderer::headless().unwrap());
     // Retained motion history deliberately refuses an ordinary renderer until
