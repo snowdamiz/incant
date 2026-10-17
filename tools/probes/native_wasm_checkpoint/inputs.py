@@ -19,7 +19,8 @@ def verify(root, packet):
     require(plan['source_head'] == source['head'] and plan['source_root'] == str(root), 'Source producer')
     require(plan['format'] == 'incant-authored-wasm-checkpoint-shipping-v1', 'Plan format')
     require(plan['target'] in ('/private/tmp/incant-wasm-persistent-shipping-20261017-target',
-                               '/private/tmp/incant-wasm-timers-shipping-20261017-target')
+                               '/private/tmp/incant-wasm-timers-shipping-20261017-target',
+                               '/private/tmp/incant-wasm-coroutines-shipping-20261017-target')
             and plan['target_ceiling_allocated_bytes'] == 12 * 1024**3
             and plan['aggregate_seconds'] == 5400 and plan['jobs'] == plan['rayon_threads'] == 2,
             'Reviewed fresh allocation')
