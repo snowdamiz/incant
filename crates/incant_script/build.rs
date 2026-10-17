@@ -33,9 +33,16 @@ fn main() {
         feature = "diagnostic-quickjs-generate",
         feature = "diagnostic-quickjs-use"
     ))]
-    let pgo = {
-        let selected = diagnostic_pgo::Selection::load(&root.join("third_party/rquickjs-sys"))
-            .expect("trusted script PGO admission");
+    let (pgo, pgo_vendor) = {
+        // Preserve lexical/link admission: remove known crate parents without
+        // canonicalizing an arbitrary path before the descriptor verifies it.
+        let workspace = Path::new(env!("CARGO_MANIFEST_DIR"))
+            .parent()
+            .and_then(Path::parent)
+            .expect("script crate workspace parents");
+        let vendor = workspace.join("third_party/rquickjs-sys");
+        let selected =
+            diagnostic_pgo::Selection::load(&vendor).expect("trusted script PGO admission");
         identity.update(b"incant-quickjs-c-pgo-v2");
         identity.update(
             selected
@@ -43,7 +50,7 @@ fn main() {
                 .identity()
                 .expect("PGO compatibility identity"),
         );
-        selected
+        (selected, vendor)
     };
     // The temporary probe admission is part of executable compatibility. Both
     // the trusted host producer and target consumer must explicitly opt in.
@@ -275,8 +282,7 @@ fn main() {
         feature = "diagnostic-quickjs-use"
     ))]
     {
-        pgo.recheck(&root.join("third_party/rquickjs-sys"))
-            .expect("PGO script input check");
+        pgo.recheck(&pgo_vendor).expect("PGO script input check");
         pgo.receipt(
             Path::new(&env::var("OUT_DIR").unwrap()),
             "incant_script",
