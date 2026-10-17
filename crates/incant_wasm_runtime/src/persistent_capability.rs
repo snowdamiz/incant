@@ -14,6 +14,7 @@ impl Capability {
         if self.failed || self.active {
             return Err(Error::Failed);
         }
+        self.haptics.ready()?;
         if self.restart_committed {
             return Err(Error::Abi("pending session restart request"));
         }
@@ -53,6 +54,7 @@ impl Capability {
         {
             return Err(Error::Abi("persistent restore requires a fresh host"));
         }
+        self.haptics.ready()?;
         if snapshot.tick() != world.tick() || !(0..i64::MAX).contains(&receiver_watermark) {
             return Err(Error::Abi("persistent restore clock/watermark"));
         }
@@ -61,6 +63,7 @@ impl Capability {
             .as_mut()
             .ok_or(Error::Abi("module has no persistent state declaration"))?
             .restore(snapshot)?;
+        self.haptics.clear();
         self.epoch = snapshot.watermark().max(receiver_watermark);
         self.tick = snapshot.tick();
         self.identity = Some(identity);
@@ -83,6 +86,8 @@ impl Capability {
         {
             return Err(Error::Abi("reload boundary"));
         }
+        self.haptics.ready()?;
+        candidate.haptics.ready()?;
         if self.persistent.as_ref().map(PersistentState::declaration)
             != candidate
                 .persistent

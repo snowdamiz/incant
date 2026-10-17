@@ -48,6 +48,26 @@ class StaticShippingTests(unittest.TestCase):
                 source = probe.ROOT / ('sdk/rust/fixtures/persistent_start.rs' if suffix == 'start' else 'sdk/rust/samples/persistent_state.rs')
                 self.assertEqual(call.args[1].read_bytes(), source.read_bytes())
 
+    def test_haptic_conformance_uses_unchanged_sample_for_all_failure_variants(self):
+        with tempfile.TemporaryDirectory() as directory, patch.object(probe.rust_guest, 'compile') as compile:
+            inputs = Path(directory); guests = inputs / 'guests'; guests.mkdir()
+            modules = probe.haptic_guests('pinned-rustc', inputs, guests, {'fixed': 'environment'})
+            names = ['rust-haptics'] + ['rust-haptics-' + name for name in
+                ('scratch', 'amplitude', 'quota', 'owner', 'callback', 'trap', 'saved-target')]
+            self.assertEqual([name for name, _ in modules], names)
+            self.assertEqual(compile.call_count, 8)
+            self.assertEqual(len(set(names)), 8)
+            for name in names:
+                self.assertRegex(name, r'^[a-z][a-z0-9-]{0,63}$')
+            for call, (name, output) in zip(compile.call_args_list, modules):
+                self.assertEqual(call.args[0], 'pinned-rustc')
+                self.assertEqual(call.args[2], output)
+                self.assertEqual(call.kwargs['env'], {'fixed': 'environment'})
+                self.assertEqual(call.kwargs['cfg'], () if name == 'rust-haptics' else
+                    ['haptic_' + name.removeprefix('rust-haptics-').replace('-', '_')])
+                self.assertEqual(call.args[1].read_bytes(),
+                    (probe.ROOT / 'sdk/rust/samples/haptics.rs').read_bytes())
+
     def test_windows_archive_extracts_only_verified_named_executables(self):
         archive = io.BytesIO()
         with tarfile.open(fileobj=archive, mode='w:gz') as bundle:

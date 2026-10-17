@@ -123,6 +123,20 @@ scheduler batch. Ordinary presentation is unchanged. These observations do not
 pass FPS, appearance or script-budget requirements.
 [Fresh producer and raw evidence](docs/spikes/native-wake-acquisition-live.md).
 
+## Native Wasm haptics — bounded host parity qualified
+
+The Rust SDK and both Wasmtime/wasm2c hosts now expose copied trusted haptic
+capabilities and transactional rumble, impact and stop requests. Device
+generations, current-epoch errors, quotas and composed world/audio acceptance
+remain enforced; pending output survives refused capture/reload and transient
+authority stays neutral after restore. The frozen source passes 47 local native
+controls and three strict lint stages, including actual SDK guests in both hosts
+and the ordinary static player owner. Thirty SDK/helper controls and seven
+portable evidence controls pass. Three failed preparation/lint attempts remain
+recorded with their original costs. Physical vibration, authored shipping export
+and device/performance gates remain unproved by this CPU qualification.
+[Contract, exact producers and portable records](docs/spikes/native-wasm-haptics.md).
+
 ## Explicit Wasm state — native persistence qualified
 
 Opted-in native Wasm modules now retain bounded, transactional host-owned state

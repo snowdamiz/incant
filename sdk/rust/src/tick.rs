@@ -1,5 +1,6 @@
 mod audio;
 mod compound;
+mod haptics;
 mod hud;
 mod ik;
 mod light;

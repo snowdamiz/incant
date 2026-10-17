@@ -136,7 +136,7 @@ pub(crate) enum SessionVm {
 }
 impl SessionVm {
     pub fn supports_haptics(&self) -> bool {
-        matches!(self, Self::Bytecode(_))
+        true
     }
     pub fn set_haptic_capabilities(
         &mut self,
@@ -144,31 +144,37 @@ impl SessionVm {
     ) -> Result<(), SessionError> {
         match self {
             Self::Bytecode(host) => Ok(host.set_haptic_capabilities(value)?),
-            #[cfg(any(feature = "static-module", feature = "wasmtime-host"))]
-            _ if value.is_empty() => Ok(()),
-            #[cfg(any(feature = "static-module", feature = "wasmtime-host"))]
-            _ => Err(SessionError::HapticsUnsupported),
+            #[cfg(feature = "wasmtime-host")]
+            Self::DevelopmentWasm(host) => Ok(host.set_haptic_capabilities(value)?),
+            #[cfg(feature = "static-module")]
+            Self::Static(host) => Ok(host.set_haptic_capabilities(value)?),
         }
     }
     pub fn haptics_ready(&self) -> Result<(), SessionError> {
         match self {
             Self::Bytecode(host) => Ok(host.haptics_ready()?),
-            #[cfg(any(feature = "static-module", feature = "wasmtime-host"))]
-            _ => Ok(()),
+            #[cfg(feature = "wasmtime-host")]
+            Self::DevelopmentWasm(host) => Ok(host.haptics_ready()?),
+            #[cfg(feature = "static-module")]
+            Self::Static(host) => Ok(host.haptics_ready()?),
         }
     }
     pub fn take_haptics(&mut self) -> Result<incant_input::haptics::HapticRequests, SessionError> {
         match self {
             Self::Bytecode(host) => Ok(host.take_haptics()?),
-            #[cfg(any(feature = "static-module", feature = "wasmtime-host"))]
-            _ => Ok(Default::default()),
+            #[cfg(feature = "wasmtime-host")]
+            Self::DevelopmentWasm(host) => Ok(host.take_haptics()?),
+            #[cfg(feature = "static-module")]
+            Self::Static(host) => Ok(host.take_haptics()?),
         }
     }
     pub fn clear_haptics(&mut self) {
         match self {
             Self::Bytecode(host) => host.clear_haptics(),
-            #[cfg(any(feature = "static-module", feature = "wasmtime-host"))]
-            _ => {}
+            #[cfg(feature = "wasmtime-host")]
+            Self::DevelopmentWasm(host) => host.clear_haptics(),
+            #[cfg(feature = "static-module")]
+            Self::Static(host) => host.clear_haptics(),
         }
     }
     pub fn enable_restart_requests(&mut self) -> Result<(), SessionError> {

@@ -25,10 +25,20 @@ class RegistryTests(unittest.TestCase):
     def test_persistent_state_is_additive_and_explicitly_copied(self):
         import hashlib
         self.assertEqual(hashlib.sha256(json.dumps(self.data['functions'][:64], sort_keys=True).encode()).hexdigest(), '00bb2bfea44e6659a86e2fdc49d8c4fa3207507e35014ebbb8d73b226a1d6159')
-        self.assertEqual([(f['namespace'], f['name'], f['opcode']) for f in self.data['functions'][64:]], [('incant_state_v1', 'read', 64), ('incant_state_v1', 'write', 65)])
-        for row in self.data['functions'][64:]:
+        self.assertEqual([(f['namespace'], f['name'], f['opcode']) for f in self.data['functions'][64:66]], [('incant_state_v1', 'read', 64), ('incant_state_v1', 'write', 65)])
+        for row in self.data['functions'][64:66]:
             self.assertEqual(row['params'], [['epoch', 'i64'], ['ptr', 'i32'], ['offset', 'i32'], ['len', 'i32']])
             self.assertEqual(row['result'], 'i32')
+
+    def test_haptics_append_without_changing_the_66_published_imports(self):
+        import hashlib
+        self.assertEqual(hashlib.sha256(json.dumps(self.data['functions'][:66], sort_keys=True).encode()).hexdigest(), '94c6248bee7dd64cbc59ab84ac71bbe1999286d37f29a6573190bcdd92290a8d')
+        self.assertEqual([(f['namespace'], f['name'], f['opcode']) for f in self.data['functions'][66:]], [('incant_haptics_v1', 'snapshot_len', 66), ('incant_haptics_v1', 'read_snapshot', 67), ('incant_haptics_v1', 'command', 68)])
+        self.assertEqual(self.data['namespaces']['incant_haptics_v1'], 'haptics')
+        self.assertEqual([self.data['constants'][n] for n in ('HAPTIC_MAX_TARGETS', 'HAPTIC_MAX_REQUESTS', 'HAPTIC_MAX_DURATION_MS')], [17, 32, 5000])
+        size = lambda name: sum(generator.SIZES[t]*(n[0] if n else 1) for _,t,*n in self.data['records'][name])
+        self.assertEqual([size(n) for n in ('HapticHeader', 'HapticTarget', 'HapticCommandHeader', 'HapticCommand')], [16, 12, 16, 40])
+        self.assertIn('pub mod haptics;', generator.outputs()['crates/incant_wasm_abi/src/lib.rs'])
 
     def test_all_committed_host_guest_and_c_artifacts_are_exact(self):
         for name,text in generator.outputs().items():self.assertEqual((ROOT/name).read_text(),text,name)
