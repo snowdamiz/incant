@@ -84,7 +84,8 @@ def linked_expression(row, output, root):
                      root / path for path in ('sdk/abi/native-v1.json',
                          'crates/incant_wasm_cook/src/lib.rs',
                          'crates/incant_wasm_cook/src/captured.rs',
-                         'tools/wasm2c.py', 'tools/wasm_persistent.py')]:
+                         'tools/wasm2c.py', 'tools/wasm_persistent.py',
+                         'tools/wasm_coroutines.py')]:
         value = path.read_bytes()
         digest.update(len(value).to_bytes(8, 'little'))
         digest.update(value)
