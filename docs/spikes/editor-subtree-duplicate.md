@@ -1,5 +1,9 @@
 # Editor subtree duplication
 
+Follow-up: the [October 16 native hierarchy workflow](native-hierarchy-window.md)
+now verifies the shortcut, menu, history, focus and saved-project route on the
+unlocked Mac. Earlier attempts and their limits below remain historical.
+
 The native host prepares fresh identities, then executes the existing shared
 `DuplicateSubtree` command as one user transaction. It accepts the observed
 project revision and refuses a stale request before allocating or writing.

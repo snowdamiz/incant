@@ -46,12 +46,17 @@ attempt and are outside this observation.
 
 ## Read-only analyzer
 
+The current collector emits version 2. Use
+[`tools/presentation_boundaries.py`](../../tools/presentation_boundaries.py)
+and its [boundary contract](native-wake-acquisition-boundaries.md) for new output.
+The following commands and evidence retain the historical version 1 contract.
+
 ```
-python3 -B tools/presentation_host_stages.py capture.json --max-input-mib 64
+python3 -B tools/presentation_host_stages.py V1_CAPTURE.json --max-input-mib 64
 python3 -B -m unittest discover -s tools/tests -p test_presentation_host_stages.py -v
 ```
 
-The analyzer accepts only the emitted version 1 contract and bounded typed fields.
+The historical analyzer accepts only version 1 and bounded typed fields.
 Its selected input ceiling is 32 or 64 MiB, default 64 MiB; output is capped at 64 MiB.
 It launches no process, reads no project, and writes only JSON to stdout (refusal
 to stderr with exit 2). Duplicate JSON keys, non-JSON constants, unsupported

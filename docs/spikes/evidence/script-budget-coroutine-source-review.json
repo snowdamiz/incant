@@ -1,0 +1,58 @@
+{
+  "format": "incant-script-budget-source-reassessment",
+  "version": 1,
+  "observed_at": "2026-10-16T01:42:59.994793+00:00",
+  "local_date": "2026-10-15",
+  "source_head": "04a30f70d7bdcf090077992b4d1f704fb4727a05",
+  "source_tree": "d828669e90faa55007eb66ba12863128c1d4bef4",
+  "hypothesis": "The newly integrated coroutine feature might allocate a task scheduler or extra guest capability on every Core tick even without authored routines.",
+  "scope": "Source inspection only; no native execution, new profiling or optimization.",
+  "files": [
+    {
+      "path": "crates/incant_script/src/compiler.rs",
+      "bytes": 12682,
+      "sha256": "c6a4fd8e51be5125ebf0a4f64d29024a5bc1696c1400ebd8221381aae2a03e01"
+    },
+    {
+      "path": "crates/incant_script/src/lib.rs",
+      "bytes": 41893,
+      "sha256": "3819fc8ec2fe5ee54a7aed6e1a185183182d5faf17e9e33aacca6e02a55c1a8d"
+    },
+    {
+      "path": "crates/incant_script/src/schedule.rs",
+      "bytes": 5117,
+      "sha256": "b7719f668cd9b2584f8f6c6d305ade7036fd8c8720964d388a9e69cfbfa83b8f"
+    },
+    {
+      "path": "crates/incant_script/src/coroutines/mod.rs",
+      "bytes": 3423,
+      "sha256": "f6045195390333b106d53165fab24a83797f3c5f22a6f97c21c4664bd0c244a1"
+    },
+    {
+      "path": "crates/incant_script/src/coroutines/catalog.js",
+      "bytes": 1436,
+      "sha256": "d6488f83ab08f94b109272f225fbe2efb28eee5532b309ea04ec0f90f6182b16"
+    },
+    {
+      "path": "samples/core/gameplay.ts",
+      "bytes": 16574,
+      "sha256": "f471293cf6a3b6a355f0f2c8ec6406bf5f3942f438411121b2e63ae6e6f31095"
+    },
+    {
+      "path": "samples/core/stress.ts",
+      "bytes": 3513,
+      "sha256": "7285e9009633052ba86ee0996c87f58097eb47fdaf0a73df10f42597b0119f1a"
+    }
+  ],
+  "findings": [
+    "Neither current Core gameplay.ts nor stress.ts declares a coroutine catalog.",
+    "Catalog.enabled() reads a boolean established at program loading. The compiler selects the existing 16-argument update wrapper once when routineCount is zero.",
+    "The host constructs a coroutine Tick, restores its shape, exposes capabilities and uses the expanded callback only when the catalog is enabled. The no-catalog path retains absent coroutine state; Option cloning does not allocate a task map.",
+    "This source check does not prove zero overhead or current shipping timing. Ordinary function layout, branches and compiler effects require a matched measurement before making any performance claim."
+  ],
+  "result": "No unnecessary scheduler or coroutine-capability allocation found for Core; no source-grounded optimization from this hypothesis.",
+  "prior_results": "Existing deadline-check, repeated-start, graph-cache, numeric-view, typed-store and allocation results remain unchanged; no repeat scheduled.",
+  "next_trigger": "A distinct non-navigation callback subpath with attributable cost evidence, or another relevant runtime change; perform a bounded subagent review when capacity permits. Any candidate needs matched shipping-profile measurements and exact gameplay/audio parity.",
+  "script_2ms_target_met": false,
+  "performance_gate_passed": false
+}
