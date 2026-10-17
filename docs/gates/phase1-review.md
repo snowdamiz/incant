@@ -60,8 +60,15 @@ scheduler batch. The ordinary policy stays unchanged.
   provenance for navigation and atomic publication. Its actual native-window
   workflow now also verifies table replacement, watcher/Undo/Redo, malformed-source
   retention, recovery, continuing VM/world state and durable journal reopen.
-  This adds no appearance or performance acceptance. Changed skeleton/geometry and scene structure still need
-  their own admission rules.
+  This adds no appearance or performance acceptance. Compatible animated vertex
+  content now has [scoped CPU and Metal qualification](../spikes/animated-vertex-refresh.md):
+  import/history preserve the world, VM and clock, while unchanged skin bindings
+  cannot mask an index-only incompatibility. Position-only and tangent-only
+  replacements match independent fresh-game RGBA at the same clock on Metal;
+  the actual editor-window workflow now also verifies import, watcher, history,
+  topology refusal/recovery, continuing state and fresh journal reopen on this Mac.
+  Changed skeleton, topology and scene
+  structure still need their own admission rules.
 - Preserve the now-qualified [ordinary-editor 4x antialiasing](../spikes/editor-scene-msaa.md).
   Actual Mac editor review and default/cooked Metal controls verify the reported
   cube-edge fix. This does not qualify temporal reconstruction or frame budgets;

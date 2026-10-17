@@ -126,7 +126,7 @@ pub(super) fn refuse_and_recover(
     asset: ObservedAsset,
     fingerprint: &str,
     baseline: &Observation,
-    replacement: &[u8],
+    (kind, replacement): (Kind, &[u8]),
     stages: &mut Vec<Value>,
 ) -> Result<Recovery, String> {
     let root = editor
@@ -136,7 +136,7 @@ pub(super) fn refuse_and_recover(
     let before = project(editor)?;
     let console_before = editor.console.lock().map_err(|_| "console lock")?.len();
     let invalid = fs::read(root.join("refresh-incompatible.gltf")).map_err(|e| e.to_string())?;
-    fs::write(root.join(Kind::AnimatedModel.source()), invalid).map_err(|e| e.to_string())?;
+    fs::write(root.join(kind.source()), invalid).map_err(|e| e.to_string())?;
     let asset_id = ulid::Ulid::from_bytes(asset.id.0).to_string();
     let committed = wait_commit(editor, &asset_id, before.1 + 1, None, fingerprint)?;
     let authored = committed.0["assets"][&asset_id]["sha256"]
@@ -153,8 +153,7 @@ pub(super) fn refuse_and_recover(
             .find(|e| {
                 e.level == "error"
                     && e.message.starts_with("Native Play asset refresh:")
-                    && e.message
-                        .contains("animation clip bindings or duration table changed")
+                    && e.message.contains(kind.animation_refusal())
             })
             .cloned();
         if let Some(event) = event {
@@ -167,16 +166,11 @@ pub(super) fn refuse_and_recover(
         thread::sleep(Duration::from_millis(20));
     };
     let observed = catalog_frame(editor, generation, asset, fingerprint, Some(baseline))?;
-    let mut retained = point(
-        Kind::AnimatedModel.stage(4),
-        &observed,
-        fingerprint,
-        history(editor)?,
-    );
+    let mut retained = point(kind.stage(4), &observed, fingerprint, history(editor)?);
     retained["authored_fingerprint"] = json!(authored);
     retained["refresh_error"] = event.clone();
     stages.push(retained);
-    fs::write(root.join(Kind::AnimatedModel.source()), replacement).map_err(|e| e.to_string())?;
+    fs::write(root.join(kind.source()), replacement).map_err(|e| e.to_string())?;
     let recovered = wait_commit(editor, &asset_id, before.1 + 2, Some(fingerprint), authored)?;
     require(
         recovered.0 == before.0,
@@ -184,7 +178,7 @@ pub(super) fn refuse_and_recover(
     )?;
     let observed = catalog_frame(editor, generation, asset, fingerprint, Some(baseline))?;
     stages.push(point(
-        Kind::AnimatedModel.stage(5),
+        kind.stage(5),
         &observed,
         fingerprint,
         history(editor)?,

@@ -1,0 +1,53 @@
+{
+  "format": "incant-animated-vertex-metal-delivery-v1",
+  "files": {
+    "README.md": {
+      "bytes": 2240,
+      "sha256": "850f9452ba33d12a93092a3b363cbdfd65a599a68e99b2ba3766247da2c63c7a"
+    },
+    "geometry-initial.png": {
+      "bytes": 411,
+      "sha256": "1168e08c37722929c17b029974aa268065d47b311fa83b1023cdd618baa4a882"
+    },
+    "geometry-replacement.png": {
+      "bytes": 437,
+      "sha256": "0dd95500a4999f22b8d39c46295eee67d7935ac62f5272b4444d0733236ad06c"
+    },
+    "manifest.json": {
+      "bytes": 14331,
+      "sha256": "94e0eb56f33d23bdb6a18441f63fa2a29c755f73725c86ac85046be264692349"
+    },
+    "pixels.py": {
+      "bytes": 4126,
+      "sha256": "18f4700be3420e93f51719a6bf305c420ca112c633fdeff9095f5930ee07afb1"
+    },
+    "records.json.gz": {
+      "bytes": 1154906,
+      "sha256": "8038433db0db8ed264ba29f4923dd433e86b0a504f47d4f3bc0756456a28d5af"
+    },
+    "tangents-initial.png": {
+      "bytes": 410,
+      "sha256": "e95579e0bb502a72e43f1a33caead428d2b50ea31c009a9d58fc8afca922ea04"
+    },
+    "tangents-replacement.png": {
+      "bytes": 409,
+      "sha256": "31347a960b432689c62b42e26b586b628f10730d2e49c3c88e95331236ad7f5d"
+    },
+    "test_verify.py": {
+      "bytes": 4971,
+      "sha256": "27ab42fe0c5dc046eb25c6e6a49415f0a042d7ef961cb5ee7036c184f9f29055"
+    },
+    "verify.py": {
+      "bytes": 10219,
+      "sha256": "16d4ffb3a4a9a82c3108f4854c595060d094fe3a96bd41e14e947091fe5e8a13"
+    }
+  },
+  "checks": {
+    "portable_replay": true,
+    "external_artifact_hash_check": true,
+    "unit_tests": 7,
+    "coherent_negative_variants": 17,
+    "native_reexecuted": false
+  },
+  "repo_integration": "Suggested evidence subdirectory with verifier tests beside archive; no root source edit performed."
+}

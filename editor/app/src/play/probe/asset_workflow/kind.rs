@@ -7,6 +7,7 @@ pub(in crate::play::probe) enum Kind {
     Texture,
     Model,
     AnimatedModel,
+    AnimatedVertices,
 }
 impl Kind {
     pub fn label(self) -> &'static str {
@@ -14,18 +15,21 @@ impl Kind {
             Self::Texture => "texture",
             Self::Model => "model",
             Self::AnimatedModel => "animated-model",
+            Self::AnimatedVertices => "animated-vertices",
         }
     }
     pub fn source(self) -> &'static str {
         match self {
             Self::Texture => "refresh.png",
-            Self::Model | Self::AnimatedModel => "refresh.gltf",
+            Self::Model | Self::AnimatedModel | Self::AnimatedVertices => "refresh.gltf",
         }
     }
     pub fn replacement(self) -> &'static str {
         match self {
             Self::Texture => "refresh-blue.png",
-            Self::Model | Self::AnimatedModel => "refresh-replacement.gltf",
+            Self::Model | Self::AnimatedModel | Self::AnimatedVertices => {
+                "refresh-replacement.gltf"
+            }
         }
     }
     pub fn fixture(self) -> &'static str {
@@ -33,6 +37,7 @@ impl Kind {
             Self::Texture => "texture-workflow.fixture.json",
             Self::Model => "model-workflow.fixture.json",
             Self::AnimatedModel => "animated-model-workflow.fixture.json",
+            Self::AnimatedVertices => "animated-vertices-workflow.fixture.json",
         }
     }
     pub fn format(self) -> &'static str {
@@ -40,18 +45,19 @@ impl Kind {
             Self::Texture => "incant-native-texture-workflow",
             Self::Model => "incant-native-model-workflow",
             Self::AnimatedModel => "incant-native-animated-model-workflow",
+            Self::AnimatedVertices => "incant-native-animated-vertices-workflow",
         }
     }
     pub fn visual_kind(self) -> VisualAssetKind {
         match self {
             Self::Texture => VisualAssetKind::Texture,
-            Self::Model | Self::AnimatedModel => VisualAssetKind::Model,
+            Self::Model | Self::AnimatedModel | Self::AnimatedVertices => VisualAssetKind::Model,
         }
     }
     pub fn texture_usage(self) -> Option<incant_assets::TextureUsage> {
         match self {
             Self::Texture => Some(incant_assets::TextureUsage::Color),
-            Self::Model | Self::AnimatedModel => None,
+            Self::Model | Self::AnimatedModel | Self::AnimatedVertices => None,
         }
     }
     pub fn stage(self, index: usize) -> &'static str {
@@ -71,6 +77,14 @@ impl Kind {
                 "redo_replacement",
                 "malformed_source_retained_replacement",
                 "source_recovered_replacement",
+            ],
+            Self::AnimatedVertices => [
+                "manual_import_original",
+                "watched_vertices",
+                "undo_original",
+                "redo_vertices",
+                "incompatible_topology_retained_replacement",
+                "source_recovered_vertices",
             ],
             Self::AnimatedModel => [
                 "manual_import_original",
@@ -95,7 +109,7 @@ impl Kind {
             Self::Texture => {
                 components["SpriteRenderer"] = json!({"texture":asset,"region":[0,0,1,1],"size":[1,1],"pivot":[0.5,0.5],"tint":[1,1,1,1],"sampling":"nearest","mode":{"kind":"simple"}})
             }
-            Self::Model | Self::AnimatedModel => {
+            Self::Model | Self::AnimatedModel | Self::AnimatedVertices => {
                 components["MeshRenderer"] =
                     json!({"mesh":asset,"materials":[],"cast_shadows":true})
             }
@@ -109,8 +123,14 @@ impl Kind {
         }}))
         .map_err(|e| e.to_string())
     }
+    pub fn animation_refusal(self) -> &'static str {
+        match self {
+            Self::AnimatedVertices => "animated model topology, rest or skin bindings changed",
+            _ => "animation clip bindings or duration table changed",
+        }
+    }
     pub fn animated(self) -> bool {
-        matches!(self, Self::AnimatedModel)
+        matches!(self, Self::AnimatedModel | Self::AnimatedVertices)
     }
 }
 
@@ -120,7 +140,12 @@ mod tests {
     #[test]
     fn only_animated_mode_authors_typed_playback_through_the_shared_command() {
         let id = "00000000000000000000000004";
-        for kind in [Kind::Texture, Kind::Model, Kind::AnimatedModel] {
+        for kind in [
+            Kind::Texture,
+            Kind::Model,
+            Kind::AnimatedModel,
+            Kind::AnimatedVertices,
+        ] {
             let command = kind.entity_command(id, id, id).unwrap();
             let value = serde_json::to_value(command).unwrap();
             assert_eq!(value["op"], "create_entity");

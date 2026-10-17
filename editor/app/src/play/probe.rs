@@ -26,6 +26,7 @@ enum Mode {
     Texture,
     Model,
     AnimatedModel,
+    AnimatedVertices,
 }
 impl Options {
     fn mode(flag: &OsStr) -> Option<Mode> {
@@ -34,6 +35,7 @@ impl Options {
             Some("--texture-probe") => Some(Mode::Texture),
             Some("--model-probe") => Some(Mode::Model),
             Some("--animated-model-probe") => Some(Mode::AnimatedModel),
+            Some("--animated-vertices-probe") => Some(Mode::AnimatedVertices),
             _ => None,
         }
     }
@@ -56,7 +58,7 @@ impl Options {
                     .expect("UTF-8 entity"),
             }),
             _ => panic!(
-                "expected --play-probe, --texture-probe, --model-probe or --animated-model-probe OUTPUT ENTITY after the project path"
+                "expected --play-probe, --texture-probe, --model-probe, --animated-model-probe or --animated-vertices-probe OUTPUT ENTITY after the project path"
             ),
         }
     }
@@ -283,6 +285,12 @@ pub fn start(app: tauri::AppHandle, editor: Arc<Editor>, options: Options) {
                 Mode::Model => {
                     asset_workflow::run(&app, &editor, &options, asset_workflow::Kind::Model)
                 }
+                Mode::AnimatedVertices => asset_workflow::run(
+                    &app,
+                    &editor,
+                    &options,
+                    asset_workflow::Kind::AnimatedVertices,
+                ),
                 Mode::AnimatedModel => asset_workflow::run(
                     &app,
                     &editor,
@@ -326,6 +334,7 @@ mod options_tests {
             ("--texture-probe", Mode::Texture),
             ("--model-probe", Mode::Model),
             ("--animated-model-probe", Mode::AnimatedModel),
+            ("--animated-vertices-probe", Mode::AnimatedVertices),
         ] {
             assert!(Options::accepts_mode(OsStr::new(flag)));
             let options = Options::from_probe_args(
@@ -348,6 +357,7 @@ mod options_tests {
             "--texture-probe-extra",
             "--model-probe-extra",
             "--animated-model-probe-extra",
+            "--animated-vertices-probe-extra",
         ] {
             assert!(!Options::accepts_mode(OsStr::new(flag)));
         }
