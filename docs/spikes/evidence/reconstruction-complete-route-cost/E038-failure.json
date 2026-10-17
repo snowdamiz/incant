@@ -1,0 +1,34 @@
+{
+  "complete_failure_closeout": true,
+  "wrapper_exit": 1,
+  "native_exit": 101,
+  "no_retry": true,
+  "data_child_not_launched": true,
+  "fresh_absence": [
+    {
+      "pid": 39252,
+      "pid_absent": true,
+      "process_group_absent": true
+    }
+  ],
+  "timestamp_raw_ticks": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "timestamp_raw_sha256": "17b0761f87b081d5cf10757ccc89f12be355c70e2e29df288b65b30710dcbcd1",
+  "guide_complete_sha256": "24bd04299d58387fcbccd8769b9f116633aa794e37795f6db176d00ed731b918",
+  "guide_exact_historical_digest": true,
+  "output_files": 18,
+  "output_bytes": 66617114,
+  "all_output_hashes_reverified": true,
+  "failure": "first O timestamp pair unreadable; no accepted cost row",
+  "source_or_shader_edited": false,
+  "GPU_released_after_positive_cleanup": true,
+  "artifact_sha256": "fd6e0d4a0ea237fdf98619d25b07de8f25e47873cdbab54672bd04b0b3125830",
+  "sampled_RSS_zero_is_unobserved_not_zero_memory": true,
+  "timestamp": "2026-10-17T17:32:02.222870+00:00"
+}

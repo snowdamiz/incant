@@ -1,0 +1,49 @@
+{
+  "complete": false,
+  "failure_preserved": true,
+  "created_utc": "2026-10-17T17:47:14.095595+00:00",
+  "actual_wrapper_session": 21375,
+  "actual_wrapper_exit": 1,
+  "native_exit": null,
+  "native_cleanup_returncode": -9,
+  "native_error": "FileNotFoundError(2, 'No such file or directory')",
+  "data_child_launched": false,
+  "fresh_absence": {
+    "pid": 43737,
+    "pid_absent": true,
+    "process_group_absent": true
+  },
+  "manifest": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/reconstruction-separated-temporal-039/cost-output-manifest.json",
+    "bytes": 108578,
+    "sha256": "54b15924961c9f728436e21006bbf300913a2a9ab4877b777902d429714301a2"
+  },
+  "retained_files": 441,
+  "retained_bytes": 80491161,
+  "completed_timing_parity_records": 116,
+  "counts_by_pose": {
+    "32": 78,
+    "36": 38,
+    "40": 0
+  },
+  "valid_nonzero_query_files": 116,
+  "native_parity_receipts": 116,
+  "last_complete_record": {
+    "pose": 36,
+    "trial": 37
+  },
+  "source_artifact_mutated": false,
+  "artifact": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/reconstruction-separated-temporal-039/incant_render_diagnostic",
+    "bytes": 42771024,
+    "sha256": "d7c7f50972f18954464c0d66cf6847686a715ae7dd6d99f191fe1ee1eaeea23b"
+  },
+  "wrapper_receipt": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/reconstruction-separated-temporal-039/cost-wrapper-result.json",
+    "bytes": 8404,
+    "sha256": "df1126d0416ea0a22d307cc438c61f6a40ec59faa5fd69a23709983eebc1b525"
+  },
+  "no_retry": true,
+  "no_complete_cost_conclusion": true,
+  "suspected_cause": "Concurrent output_extent os.walk/stat observes successful native raw-file deletion; FileNotFoundError repr does not retain filename, attribution is source-derived rather than exact-path witness."
+}

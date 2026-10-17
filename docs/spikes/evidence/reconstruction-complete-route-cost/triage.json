@@ -1,0 +1,318 @@
+{
+  "complete_fixed_schedule": true,
+  "units": "milliseconds",
+  "main_measurements_per_route_per_pose": 12,
+  "poses": {
+    "32": {
+      "routes_ms": {
+        "O": {
+          "GPU_marker_span_sum_ns": 0.5534169999999999,
+          "operational_wall_seconds": 2.9725835,
+          "CPU_admission_seconds": 0.0,
+          "total_observation_wall_seconds": 158.56352099999998
+        },
+        "L": {
+          "GPU_marker_span_sum_ns": 3.602918,
+          "operational_wall_seconds": 99.30979149999999,
+          "CPU_admission_seconds": 79.8986045,
+          "total_observation_wall_seconds": 745.265354
+        },
+        "G": {
+          "GPU_marker_span_sum_ns": 3.538646,
+          "operational_wall_seconds": 96.95762500000001,
+          "CPU_admission_seconds": 79.0275,
+          "total_observation_wall_seconds": 747.0815829999999
+        }
+      },
+      "paired_ms": {
+        "G_minus_O_operational_wall_seconds": {
+          "n": 12,
+          "median": 93.98504150000001,
+          "minimum": 90.867417,
+          "maximum": 98.390041,
+          "negative": 0,
+          "zero": 0,
+          "positive": 12
+        },
+        "G_minus_O_GPU_marker_span_sum_ns": {
+          "n": 12,
+          "median": 3.3870839999999998,
+          "minimum": 2.028375,
+          "maximum": 5.5688759999999995,
+          "negative": 0,
+          "zero": 0,
+          "positive": 12
+        },
+        "G_minus_L_operational_wall_seconds": {
+          "n": 12,
+          "median": -2.126562499999998,
+          "minimum": -6.621749999999996,
+          "maximum": 0.7379159999999912,
+          "negative": 9,
+          "zero": 0,
+          "positive": 3
+        },
+        "G_minus_L_GPU_marker_span_sum_ns": {
+          "n": 12,
+          "median": 0.0556875,
+          "minimum": -1.855583,
+          "maximum": 2.046499,
+          "negative": 5,
+          "zero": 0,
+          "positive": 7
+        }
+      },
+      "ABBA_added_detail_ms": {
+        "O": {
+          "GPU_marker_span_sum_ns": {
+            "n": 2,
+            "median": 0.11620825,
+            "minimum": 0.1089995,
+            "maximum": 0.123417,
+            "negative": 0,
+            "zero": 0,
+            "positive": 2
+          },
+          "operational_wall_seconds": {
+            "n": 2,
+            "median": 0.10675025000000016,
+            "minimum": 0.07245850000000002,
+            "maximum": 0.1410420000000003,
+            "negative": 0,
+            "zero": 0,
+            "positive": 2
+          }
+        },
+        "G": {
+          "GPU_marker_span_sum_ns": {
+            "n": 2,
+            "median": 2.4314994999999997,
+            "minimum": 2.215103,
+            "maximum": 2.647896,
+            "negative": 0,
+            "zero": 0,
+            "positive": 2
+          },
+          "operational_wall_seconds": {
+            "n": 2,
+            "median": -1.5579062499999976,
+            "minimum": -1.9361039999999872,
+            "maximum": -1.1797085000000083,
+            "negative": 2,
+            "zero": 0,
+            "positive": 0
+          }
+        }
+      }
+    },
+    "36": {
+      "routes_ms": {
+        "O": {
+          "GPU_marker_span_sum_ns": 0.1433755,
+          "operational_wall_seconds": 2.986375,
+          "CPU_admission_seconds": 0.0,
+          "total_observation_wall_seconds": 152.385479
+        },
+        "L": {
+          "GPU_marker_span_sum_ns": 3.158479,
+          "operational_wall_seconds": 94.05200049999999,
+          "CPU_admission_seconds": 76.59827150000001,
+          "total_observation_wall_seconds": 704.440625
+        },
+        "G": {
+          "GPU_marker_span_sum_ns": 3.1923964999999996,
+          "operational_wall_seconds": 95.21883349999999,
+          "CPU_admission_seconds": 77.53587549999999,
+          "total_observation_wall_seconds": 703.9415625
+        }
+      },
+      "paired_ms": {
+        "G_minus_O_operational_wall_seconds": {
+          "n": 12,
+          "median": 92.19120849999999,
+          "minimum": 90.89679100000001,
+          "maximum": 97.508292,
+          "negative": 0,
+          "zero": 0,
+          "positive": 12
+        },
+        "G_minus_O_GPU_marker_span_sum_ns": {
+          "n": 12,
+          "median": 2.973189,
+          "minimum": 1.984418,
+          "maximum": 4.073791,
+          "negative": 0,
+          "zero": 0,
+          "positive": 12
+        },
+        "G_minus_L_operational_wall_seconds": {
+          "n": 12,
+          "median": 1.2548125000000008,
+          "minimum": -3.074832999999999,
+          "maximum": 4.352833,
+          "negative": 2,
+          "zero": 0,
+          "positive": 10
+        },
+        "G_minus_L_GPU_marker_span_sum_ns": {
+          "n": 12,
+          "median": 0.10987699999999999,
+          "minimum": -0.6545,
+          "maximum": 0.820874,
+          "negative": 4,
+          "zero": 0,
+          "positive": 8
+        }
+      },
+      "ABBA_added_detail_ms": {
+        "O": {
+          "GPU_marker_span_sum_ns": {
+            "n": 2,
+            "median": 0.07553075,
+            "minimum": 0.07052,
+            "maximum": 0.0805415,
+            "negative": 0,
+            "zero": 0,
+            "positive": 2
+          },
+          "operational_wall_seconds": {
+            "n": 2,
+            "median": -0.04221875000000005,
+            "minimum": -0.053416500000000096,
+            "maximum": -0.031021,
+            "negative": 2,
+            "zero": 0,
+            "positive": 0
+          }
+        },
+        "G": {
+          "GPU_marker_span_sum_ns": {
+            "n": 2,
+            "median": 2.272719,
+            "minimum": 1.8963329999999998,
+            "maximum": 2.649105,
+            "negative": 0,
+            "zero": 0,
+            "positive": 2
+          },
+          "operational_wall_seconds": {
+            "n": 2,
+            "median": -1.4404065000000015,
+            "minimum": -2.2451250000000007,
+            "maximum": -0.6356880000000023,
+            "negative": 2,
+            "zero": 0,
+            "positive": 0
+          }
+        }
+      }
+    },
+    "40": {
+      "routes_ms": {
+        "O": {
+          "GPU_marker_span_sum_ns": 1.0055414999999999,
+          "operational_wall_seconds": 2.957563,
+          "CPU_admission_seconds": 0.0,
+          "total_observation_wall_seconds": 156.2042705
+        },
+        "L": {
+          "GPU_marker_span_sum_ns": 3.4546254999999997,
+          "operational_wall_seconds": 93.869375,
+          "CPU_admission_seconds": 76.675229,
+          "total_observation_wall_seconds": 727.848958
+        },
+        "G": {
+          "GPU_marker_span_sum_ns": 3.476,
+          "operational_wall_seconds": 94.32439600000001,
+          "CPU_admission_seconds": 75.8100835,
+          "total_observation_wall_seconds": 718.2355
+        }
+      },
+      "paired_ms": {
+        "G_minus_O_operational_wall_seconds": {
+          "n": 12,
+          "median": 91.098708,
+          "minimum": 86.18429100000002,
+          "maximum": 97.008417,
+          "negative": 0,
+          "zero": 0,
+          "positive": 12
+        },
+        "G_minus_O_GPU_marker_span_sum_ns": {
+          "n": 12,
+          "median": 2.4621459999999997,
+          "minimum": 1.932917,
+          "maximum": 3.327126,
+          "negative": 0,
+          "zero": 0,
+          "positive": 12
+        },
+        "G_minus_L_operational_wall_seconds": {
+          "n": 12,
+          "median": 0.7392084999999979,
+          "minimum": -8.558083000000009,
+          "maximum": 5.904999999999994,
+          "negative": 5,
+          "zero": 0,
+          "positive": 7
+        },
+        "G_minus_L_GPU_marker_span_sum_ns": {
+          "n": 12,
+          "median": -0.049207999999999995,
+          "minimum": -3.387584,
+          "maximum": 1.437166,
+          "negative": 6,
+          "zero": 0,
+          "positive": 6
+        }
+      },
+      "ABBA_added_detail_ms": {
+        "O": {
+          "GPU_marker_span_sum_ns": {
+            "n": 2,
+            "median": 0.06556275,
+            "minimum": 0.0591665,
+            "maximum": 0.071959,
+            "negative": 0,
+            "zero": 0,
+            "positive": 2
+          },
+          "operational_wall_seconds": {
+            "n": 2,
+            "median": 0.1075102500000002,
+            "minimum": 0.07395800000000005,
+            "maximum": 0.14106250000000034,
+            "negative": 0,
+            "zero": 0,
+            "positive": 2
+          }
+        },
+        "G": {
+          "GPU_marker_span_sum_ns": {
+            "n": 2,
+            "median": 2.1588534999999998,
+            "minimum": 0.52352,
+            "maximum": 3.794187,
+            "negative": 0,
+            "zero": 0,
+            "positive": 2
+          },
+          "operational_wall_seconds": {
+            "n": 2,
+            "median": -4.779729499999999,
+            "minimum": -7.199645999999997,
+            "maximum": -2.359813000000002,
+            "negative": 2,
+            "zero": 0,
+            "positive": 0
+          }
+        }
+      }
+    }
+  },
+  "conclusion": "Current CPU-admitted reconstruction route decisively loses original complete operational wall; guarded-vs-late GPU benefit is inconclusive under marker overhead and possible stage overlap.",
+  "next_step": "Default-off GPU-only bounded admission/repair with ordinary full-frame fallback and removal of diagnostic pack/readback allocations; preserve material math and exact original controls, then requalify full motion and matched complete-route cost.",
+  "no_overhead_subtraction": true,
+  "no_shipping_or_adoption_approval": true,
+  "raw_image_payload_scope": "Successful native raw images were released after native exact comparisons; independent analyzer checks receipts and all raw queries, not released image payloads."
+}
