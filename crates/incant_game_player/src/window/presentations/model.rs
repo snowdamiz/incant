@@ -1,4 +1,5 @@
 //! Bounded host identities, independent from callback timestamps and world tick.
+use super::boundaries::{Acquisition, AcquisitionOutcome, PulseWake};
 use serde::Serialize;
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize)]
@@ -62,6 +63,8 @@ pub(super) struct HostTiming {
     pub completed_ns: Option<u64>,
     pub finished_ns: Option<u64>,
     pub schedule: Option<Schedule>,
+    pub wake: Option<PulseWake>,
+    pub acquisitions: [Option<Acquisition>; 2],
 }
 #[derive(Clone, Copy, Debug, Serialize)]
 pub(super) struct Schedule {
@@ -80,7 +83,7 @@ pub(super) struct Segment {
     pub role: Role,
     pub boundary_bits: u16,
 }
-const _: () = assert!(std::mem::size_of::<Attempt>() <= 192);
+const _: () = assert!(std::mem::size_of::<Attempt>() <= 512);
 const _: () = assert!(std::mem::size_of::<Segment>() <= 40);
 
 #[derive(Serialize)]
@@ -205,6 +208,49 @@ impl Model {
         if timing.schedule.is_none() {
             self.attempts[i].host_timing.schedule = Some(schedule);
         }
+    }
+    pub fn wake(&mut self, wake: Option<PulseWake>) {
+        let Some(i) = self.active else { return };
+        self.attempts[i].host_timing.wake = wake;
+    }
+    pub fn acquisition_begin(&mut self, at_ns: Option<u64>) {
+        let Some(i) = self.active else { return };
+        let timing = self.attempts[i].host_timing;
+        let Some(slot) = timing.acquisitions.iter().position(Option::is_none) else {
+            self.timing_errors = self.timing_errors.saturating_add(1);
+            return;
+        };
+        if slot > 0 && timing.acquisitions[slot - 1].is_some_and(|a| a.outcome.is_none()) {
+            self.timing_errors = self.timing_errors.saturating_add(1);
+            return;
+        }
+        let previous = if slot == 0 {
+            timing.began_ns
+        } else {
+            timing.acquisitions[slot - 1].and_then(|a| a.ended_ns)
+        };
+        let began_ns = self.checked_time(previous, at_ns);
+        self.attempts[i].host_timing.acquisitions[slot] = Some(Acquisition {
+            began_ns,
+            ended_ns: None,
+            outcome: None,
+        });
+    }
+    pub fn acquisition_end(&mut self, at_ns: Option<u64>, outcome: AcquisitionOutcome) {
+        let Some(i) = self.active else { return };
+        let timing = self.attempts[i].host_timing;
+        let Some(slot) = timing
+            .acquisitions
+            .iter()
+            .position(|a| a.is_some_and(|a| a.outcome.is_none()))
+        else {
+            self.timing_errors = self.timing_errors.saturating_add(1);
+            return;
+        };
+        let mut acquisition = timing.acquisitions[slot].unwrap();
+        acquisition.ended_ns = self.checked_time(acquisition.began_ns, at_ns);
+        acquisition.outcome = Some(outcome);
+        self.attempts[i].host_timing.acquisitions[slot] = Some(acquisition);
     }
     pub fn reserved(&mut self, at_ns: Option<u64>) {
         let Some(i) = self.active else { return };

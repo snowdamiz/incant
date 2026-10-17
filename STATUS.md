@@ -10,7 +10,7 @@ candidate. [Cause and local verification](docs/spikes/headless-schema-dependency
 The current phase remains **Phase 1: Core engine**. The
 [Phase 1 review ledger](docs/gates/phase1-review.md) maps each exit requirement to
 its recorded evidence and remaining qualification. The actual native texture,
-compatible static-model and compatible-animation workflows are verified on this Mac;
+compatible static-model, material-table and compatible-animation workflows are verified on this Mac;
 the [sampled Core locale proof](docs/spikes/core-locale-sampled-captures.md)
 now also verifies winning HUD pixels, Arabic health direction, CJK glyphs and
 normal/narrow pseudo layouts in retained offscreen Metal frames. Earlier
@@ -54,6 +54,17 @@ that normalized away its own `..` input. The [fixture correction](docs/spikes/wi
 passes local tests and leaves production behavior unchanged. Both desktop jobs
 and Windows Wasm conformance passed on checkpoint44; that checkpoint's separate
 general failure prevented promotion.
+
+## Native material tables — actual editor workflow verified
+
+A fresh main380-equivalent editor replaces complete model-local material, image,
+texture and sampler tables through actual import/watch/Undo/Redo handlers on this
+Mac. Malformed-source refusal retains the last accepted catalog, recovery succeeds,
+and the same world/script state survives all six stages and a subsequent Step.
+A fresh process reopens the journal at the final revision. All six children exited
+successfully and were reaped. This adds functional native-window evidence; no
+GUI clicks, captured pixels, appearance, shipping performance or phase approval
+is claimed. [Producing source and raw records](docs/spikes/live-material-binding-refresh.md#actual-native-window-material-workflow).
 
 ## Sampled Core locale pixels — verified on this Mac
 
@@ -563,6 +574,16 @@ body. Two zero callbacks and an early 50.023 ms callback interval remain; these
 are diagnostic spans, not displayed FPS or evidence for a specific source fix.
 No engine scheduling change or performance-gate claim is made.
 [Host-stage contract and scoped live evidence](docs/spikes/native-presentation-host-stages.md).
+
+The default-off observer now has a separate version 2 boundary contract: one
+`NewEvents` snapshot consumed by each pulse, signed deadline/arrival partitions
+and two fixed slots for actual surface-acquisition calls/results. Thirty actual
+CPU controls, 31 Python controls and enabled/ordinary strict lint pass. The first
+wrapper's incorrect expected-count refusal remains retained; its 30 passing
+tests were not repeated. Historical version 1 evidence remains unchanged.
+No scheduler/FIFO/Tao/HAL policy changes, fresh live v2 observation, pacing cause
+or performance acceptance are claimed.
+[Boundary contract and CPU evidence](docs/spikes/native-wake-acquisition-boundaries.md).
 
 ## Device audio overrun handling — merged main303
 

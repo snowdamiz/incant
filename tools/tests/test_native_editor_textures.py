@@ -142,6 +142,45 @@ class ReceiptControls(unittest.TestCase):
             self.assertNotIn('skins', document)
         self.assertNotEqual(*positions)
 
+    def test_material_tables_change_without_implicit_geometry_regeneration(self):
+        _, _, before, after = probe.fixture('model', 'material-tables')
+        documents = [json.loads(value) for value in (before, after)]
+        self.assertLess(max(len(before), len(after)), 65536)
+        for field in ('buffers', 'bufferViews', 'accessors', 'nodes', 'scenes', 'scene'):
+            self.assertEqual(documents[0][field], documents[1][field])
+        for document, expected_count, material in zip(documents, (2, 3), (0, 2)):
+            primitive = document['meshes'][0]['primitives'][0]
+            self.assertEqual(primitive['material'], material)
+            self.assertEqual(primitive['attributes'],
+                             {'POSITION': 0, 'NORMAL': 1, 'TEXCOORD_0': 2, 'TANGENT': 3})
+            data = base64.b64decode(document['buffers'][0]['uri'].split(',', 1)[1], validate=True)
+            self.assertEqual(len(data), document['buffers'][0]['byteLength'])
+            for index, values in ((1, (0, 0, 1) * 3), (3, (1, 0, 0, 1) * 3)):
+                view = document['bufferViews'][index]
+                self.assertEqual(struct.unpack_from('<' + 'f' * len(values), data, view['byteOffset']), values)
+            for table in ('materials', 'images', 'textures', 'samplers'):
+                self.assertEqual(len(document[table]), expected_count)
+            for texture in document['textures']:
+                self.assertLess(texture['source'], len(document['images']))
+                self.assertLess(texture['sampler'], len(document['samplers']))
+            for image in document['images']:
+                raw = base64.b64decode(image['uri'].split(',', 1)[1], validate=True)
+                self.assertTrue(raw.startswith(b'\x89PNG\r\n\x1a\n'))
+        active = documents[1]['materials'][2]
+        roles = [active['pbrMetallicRoughness'][name] for name in
+                 ('baseColorTexture', 'metallicRoughnessTexture')]
+        roles += [active[name] for name in ('normalTexture', 'occlusionTexture', 'emissiveTexture')]
+        self.assertEqual([role['index'] for role in roles], [2, 1, 0, 1, 2])
+        self.assertEqual(active['alphaMode'], 'MASK')
+        self.assertNotEqual(documents[0]['materials'], documents[1]['materials'])
+        self.assertNotEqual(documents[0]['images'], documents[1]['images'])
+
+    def test_material_variant_refuses_unrelated_workflows(self):
+        for kind, variant in (('texture', 'material-tables'), ('animated-model', 'material-tables'),
+                              ('model', 'unknown')):
+            with self.assertRaises(ValueError):
+                probe.fixture(kind, variant)
+
     def test_refuses_old_catalog_wrong_revision_tick_and_no_next_presentation(self):
         for edit in (
             lambda p:p['stages'][1].update(accepted_fingerprint='a'*64),

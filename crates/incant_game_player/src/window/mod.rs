@@ -437,6 +437,10 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
         window.set_focus();
     }
     let code = event_loop.run_return(|event, _, flow| {
+        #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+        if let Event::NewEvents(cause) = &event {
+            surface.presentation_new_events(*cause);
+        }
         termination.event(|exit| {
             match event {
                 Event::WindowEvent {
@@ -545,6 +549,8 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
                 }
                 Event::MainEventsCleared => {
                     let now = Instant::now();
+                    #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+                    surface.presentation_pulse(now);
                     observe_state!(state_log::Reason::Pulse);
                     if let Some(probe) = &mut probe {
                         probe.observe(&window, game.world()?.tick(), &mut surface, &renderer)?;
