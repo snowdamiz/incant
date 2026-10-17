@@ -33,6 +33,7 @@ pub mod input;
 pub use hud::{HudControl, HudEvent, HudEventKind, HudRole, HudSnapshot, HudText, HudWidget};
 pub mod localization;
 pub mod navigation;
+pub mod persistent;
 pub mod physics;
 mod raw;
 pub mod root_motion;

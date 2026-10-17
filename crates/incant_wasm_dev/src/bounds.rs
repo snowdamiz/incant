@@ -3,7 +3,11 @@ use crate::ModuleError;
 pub use incant_wasm_runtime::limits::*;
 use wasmparser::{Parser, Payload};
 
-pub fn preflight(bytes: &[u8]) -> Result<(), ModuleError> {
+pub fn preflight(
+    bytes: &[u8],
+) -> Result<Option<incant_wasm_abi::persistent::Declaration>, ModuleError> {
+    let declaration =
+        incant_wasm_abi::persistent::declaration_in_module(bytes).map_err(ModuleError::Abi)?;
     if bytes.len() > 1024 * 1024 || bytes.get(..8) != Some(b"\0asm\x01\0\0\0") {
         return Err(ModuleError::Abi("expected core Wasm binary, at most 1 MiB"));
     }
@@ -25,7 +29,12 @@ pub fn preflight(bytes: &[u8]) -> Result<(), ModuleError> {
             }
             Payload::ImportSection(s) => {
                 for (count, import) in s.into_imports().enumerate() {
-                    import.map_err(|_| ModuleError::Abi("import"))?;
+                    let import = import.map_err(|_| ModuleError::Abi("import"))?;
+                    if import.module == incant_wasm_abi::persistent::SECTION
+                        && declaration.is_none()
+                    {
+                        return Err(ModuleError::Abi("persistent imports require declaration"));
+                    }
                     if count >= 32 {
                         return Err(ModuleError::Limit("module imports"));
                     }
@@ -55,5 +64,5 @@ pub fn preflight(bytes: &[u8]) -> Result<(), ModuleError> {
             return Err(ModuleError::Limit("module declarations"));
         }
     }
-    Ok(())
+    Ok(declaration)
 }

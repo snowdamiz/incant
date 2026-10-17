@@ -3,6 +3,7 @@ mod compound;
 mod hud;
 mod ik;
 mod light;
+mod persistent;
 mod root_motion;
 use crate::{EntityId, Error, FlipbookSnapshot, InputSnapshot, Result, Transform, Velocity, raw};
 use core::marker::PhantomData;

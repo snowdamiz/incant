@@ -1,11 +1,11 @@
 # Implementation status
 
-[Release checkpoint50](docs/spikes/release-checkpoint-50.md) is promoted: all
-23 required contexts and eight exact-head workflows passed on the main376 tree,
-and the release merge has the same tree. This verifies the normal headless
-dependency repair that blocked checkpoint49 on Mac, Linux and Windows.
-The failed batch remains historical. Main changes after PR376 retain separate
-local qualification and are outside this release baseline.
+[Release checkpoint51](docs/spikes/release-checkpoint-51.md) is promoted: all
+23 required contexts and eight exact-head workflows passed on the main382 tree,
+and release `e354bae1` has the identical tested tree. Checkpoint50 and the earlier
+failed batches remain historical. Later main384+ changes, including native Wasm
+persistence and its authored shipping proof, retain separate local qualification
+outside this release baseline. No distribution or phase gate is approved.
 
 The current phase remains **Phase 1: Core engine**. The
 [Phase 1 review ledger](docs/gates/phase1-review.md) maps each exit requirement to
@@ -16,9 +16,9 @@ now also verifies winning HUD pixels, Arabic health direction, CJK glyphs and
 normal/narrow pseudo layouts in retained offscreen Metal frames. Earlier
 incomplete native-window attempts remain historical; these samples do not
 establish continuous motion, window presentation or FPS.
-[release checkpoint50](docs/spikes/release-checkpoint-50.md) contains the tested
-main376 tree after all 23 required contexts and eight candidate workflows passed.
-Later main changes remain outside that release baseline. Rendering quality and full rendered-game
+[Release checkpoint51](docs/spikes/release-checkpoint-51.md) contains the tested
+main382 tree after all 23 required contexts and eight candidate workflows passed.
+Later main384+ changes remain outside that release baseline. Rendering quality and full rendered-game
 performance remain open. The reported jagged editor cube now has explicit 4x
 geometry antialiasing, verified in the actual Mac editor and isolated Metal
 controls. This fixes the ordinary viewport route; low-resolution reconstruction
@@ -54,6 +54,92 @@ that normalized away its own `..` input. The [fixture correction](docs/spikes/wi
 passes local tests and leaves production behavior unchanged. Both desktop jobs
 and Windows Wasm conformance passed on checkpoint44; that checkpoint's separate
 general failure prevented promotion.
+
+## Compatible animated vertices — CPU, Metal and editor qualification complete
+
+Compatible animated mesh positions and regenerated tangent data can now refresh
+through import and Undo/Redo while the running world, script state and animation
+clock continue. The scoped implementation passes 42 native behavior controls and
+both packages' strict lints. Topology, skin and other incompatible bindings still
+refuse atomically. [Source, retained attempts and qualification](docs/spikes/animated-vertex-refresh.md)
+remain explicit. Three actual Metal controls now pass at source `d053542e`:
+position-only and tangent-only refresh match independent fresh-game RGBA at the
+same clock, while invalid and stale changes retain the accepted pixels. The
+original clip-key regression also passes. Independent raw-pixel replay confirms
+all three results. This is offscreen correctness, not performance or appearance
+acceptance. The actual editor-window vertex workflow now also passes on this Mac
+at source `b3da3b6d`, after fresh editor/headless builds, eight native probe
+controls, strict lints and 18 Python fixture/receipt controls. Real import,
+watcher, Undo/Redo, committed topology refusal, source recovery, continuing world,
+VM and animation, Step/Stop and fresh journal reopen all pass. Its six native
+processes and wrapper are reaped and independently absent. The scoped feature is
+merged through PR390 after independent review and exact-head development checks.
+Skeleton and structural changes remain outside this admission rule.
+
+## Native presentation pacing — bounded intervention rejected
+
+A fresh shipping build at `380a03a4` preserves the complete 2,156-step Core
+gameplay report and all 13,798,400 offline PCM bytes. Its private build inputs
+were removed before startup. Matched ordinary and minimum-duration native runs
+both complete the gameplay route without focus loss or missing presentation
+timestamps. The intervention is negative for adoption: presentation span rises
+by 158 ms, drawable acquisition p95 rises from 0.038 to 13.536 ms, and dropped
+wall ticks rise from zero to four. Its strict timing acceptance also fails on
+the incomplete final scheduler batch at the requested stop boundary; that failed
+receipt remains unchanged. Independent saved-data analysis is complete and merged
+through PR389; ordinary presentation remains unchanged. No frame-pacing,
+script-budget or phase gate is passed by this experiment.
+
+## Reconstruction cost — current private layout rejected
+
+The complete 234-case offscreen diagnostic passed its timing and parity checks,
+but rejects the current reconstruction layout as a performance candidate. Guarded
+reconstruction takes 94–97 ms of operational wall time versus about 3 ms for
+original shading; required CPU admission accounts for 76–79 ms. The isolated
+shader-guard saving remains inconclusive because instrumentation overhead is
+larger than the observed difference. This is a CI-profile diagnostic on this Mac,
+not shipping performance or appearance acceptance. The two preceding failed
+attempts remain recorded. [Raw data and independent replay](docs/spikes/reconstruction-complete-route-cost.md)
+support the next step: GPU-side bounded admission, fewer readbacks and lower
+resource use, followed by the same correctness, motion and complete-route checks.
+No experimental renderer code is adopted.
+
+## Fresh Core native replay — complete timing attribution
+
+A newly built shipping-profile diagnostic completes the 2,156-step rendered Core
+route with exact CPU gameplay parity; its separate offline replay matches every
+PCM byte. The original native wrapper remains failed because its old decoder
+rejected a new audio field. A strict saved-data correction passes without rerunning
+or relabeling that attempt. All wake/acquisition and host stages are accounted for.
+The separate same-player run then completes without focus interruptions and with
+positive presentation timestamps for all 2,156 gameplay frames. Uneven cadence
+persists: 27 of 28 long display intervals are immediately followed by short ones.
+The interrupted first run and its five zero timestamps remain recorded. A later
+[same-player minimum-duration comparison](docs/spikes/native-metal-minimum-duration.md)
+is negative for adoption: presentation span increases by 158 ms, drawable
+acquisition p95 rises from 0.038 to 13.536 ms, and dropped wall ticks rise from
+zero to four. Its strict timing receipt remains failed on the partial final
+scheduler batch. Ordinary presentation is unchanged. These observations do not
+pass FPS, appearance or script-budget requirements.
+[Fresh producer and raw evidence](docs/spikes/native-wake-acquisition-live.md).
+
+## Explicit Wasm state — native persistence qualified
+
+Opted-in native Wasm modules now retain bounded, transactional host-owned state
+across fresh-VM saves/restores and compatible reloads in both wasm2c and Wasmtime.
+Ordinary, opaque-native and persisted restoration preserve the tested world,
+UI focus/text and fractional-clock PCM. Qualification passed 69 native test
+executions, seven strict lints, 37 SDK/cook/export controls and nine data-only
+evidence controls; four failed attempts remain recorded with their corrections.
+[Producing revisions and evidence](docs/spikes/native-wasm-persistent-state.md)
+remain explicit. The [ordinary authored shipping save/load proof](docs/spikes/native-wasm-checkpoint-export.md)
+now passes four fresh source-free processes with exact uninterrupted/split/resumed
+checkpoint and audible PCM equality, plus six precise admission/no-clobber refusals.
+Its native producer remains `b733a366`: the original wrapper exited 1 at a merged-stream
+verifier error; corrected `35070206` data replay and independent review passed
+without rerunning native code. This captures declared state rather than arbitrary
+guest memory, and does not establish full SDK, rendered-device, performance or
+phase completion.
 
 ## Native material tables — actual editor workflow verified
 
@@ -780,7 +866,7 @@ The existing plan gate stays unmet; this is not evidence that sub-2 ms is
 impossible or that the full rendered game misses its frame budget.
 [Outcome and replay](docs/spikes/navigation-search-cache-outcome.md).
 
-Last reassessment: 2026-10-15, evening source review after native coroutines
+Earlier reassessment: 2026-10-15, evening source review after native coroutines
 were integrated. The [source-bound review](docs/spikes/evidence/script-budget-coroutine-source-review.json)
 finds that Core declares no routines and already uses the no-catalog path,
 without a coroutine scheduler or capability allocation on each tick. This
@@ -797,12 +883,25 @@ endpoint-only cache is deprioritized. The [retained-data calculation](docs/spike
 binds its original raw record and uses same-frame subtraction before ranking;
 it is not a current shipping benchmark or proof that sub-2 ms is impossible.
 
-Next useful trigger: a bounded review of non-navigation callback/typed-array
-work or a relevant runtime change, when an investigation lane becomes available.
-Require a distinct source-grounded hypothesis and stop condition before another
-native measurement. Any candidate needs matched shipping-profile runs and exact
-gameplay/audio parity; no unchanged experiment is scheduled. Reassess every few
-hours of active development while other implementation lanes continue.
+Last reassessment: 2026-10-17, bounded standalone C-only execution of the
+[distinct QuickJS PGO hypothesis](docs/spikes/quickjs-c-pgo-feasibility.md).
+The fourth attempt passes actual training, profile consumption and held-out
+bytecode/C API behavior controls. Six compiler/profile refusal controls also
+pass, including stale control flow and missing function data. Earlier merge-
+argument, covered-name parser and nonfatal stale-warning failures remain retained.
+Root independently rechecked all 57 managed calls, 114 output streams, 14 artifacts
+and 58 observed process identities; cumulative attempt time is 79.673 seconds.
+This remains standalone feasibility, with no engine integration, representative
+Core training or measured speedup. The ordinary shipping configuration is
+unchanged. Prior matrix-cache, typed-store, authored-loop, query and navigation
+results remain unchanged.
+
+Next useful trigger: bind the exact profile/tool identity to an opt-in QuickJS
+build and test representative full-Core training against a matched shipping
+baseline. Keep training measurements separate, preserve workload and enforcement,
+and require exact gameplay/audio parity. No benefit is assumed; the 2 ms target
+remains unmet. Reassess after relevant runtime changes or a few hours of active
+development without occupying every lane.
 
 ## Native Play texture refresh — merged through PR284
 

@@ -47,7 +47,7 @@ def gltf(replacement=False, incompatible=False):
     return (json.dumps(document,separators=(',',':'))+'\n').encode()
 
 
-def validate(proof, require):
+def validate(proof, require, *, refusal_text='animation clip bindings or duration table changed'):
     require(proof.get('animation_continued') is True and proof.get('committed_incompatible_refused') is True,
             'Actual animated continuation/committed refusal observations required')
     pair = proof.get('animation_step', {})
@@ -79,7 +79,7 @@ def validate(proof, require):
             and refusal.get('committed_revision')==revisions[4], 'Committed authored/live catalog distinction')
     require(event.get('level')=='error' and isinstance(event.get('id'),str) and isinstance(event.get('message'),str)
             and event['message'].startswith('Native Play asset refresh:')
-            and 'animation clip bindings or duration table changed' in event['message']
+            and refusal_text in event['message']
             and refusal.get('native_code_available') is False and 'code' not in refusal,
             'Actual user-visible refresh failure; no invented native error code')
     require(stages[4].get('authored_fingerprint')==authored and stages[4].get('refresh_error')==event,

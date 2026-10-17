@@ -10,7 +10,7 @@ use std::{
 };
 pub const MAX_MODULE_BYTES: usize = 1024 * 1024;
 pub const MAX_CAPTURE_BYTES: usize = 64 * 1024 * 1024;
-const POLICY: &str = "incant-wasm-capture-v1-wabt-1.0.42-fixed-memory-meter-v1";
+const POLICY: &str = "incant-wasm-capture-v1-wabt-1.0.42-fixed-memory-meter-state-v2";
 const REGISTRY: &[u8] = include_bytes!("../../../sdk/abi/native-v1.json");
 fn sha(bytes: &[u8]) -> String {
     format!("{:x}", Sha256::digest(bytes))

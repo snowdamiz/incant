@@ -1,5 +1,6 @@
 //! Cold model compatibility after complete bounded decoding. Static geometry
-//! and model-local materials may change; animated models retain their pose layout.
+//! and model-local materials may change; animated models retain topology and
+//! pose bindings while accepting replacement vertex attributes.
 use crate::NativeRenderError;
 use incant_assets_runtime::{CookedModel, animation::AnimationData};
 
@@ -57,16 +58,15 @@ fn animation(
     b: &AnimationData,
 ) -> Result<(), NativeRenderError> {
     let refuse = |why| NativeRenderError::TextureRefresh(why);
-    // This first slice changes clip content, not deformation bindings or the
-    // geometry being deformed. Compare float bits too: PartialEq equates +/-0.
-    let same_meshes = old.meshes.iter().zip(&next.meshes).all(|(a, b)| {
-        a.indices == b.indices
-            && a.vertices.len() == b.vertices.len()
-            && a.vertices
-                .iter()
-                .zip(&b.vertices)
-                .all(|(a, b)| a.map(f32::to_bits) == b.map(f32::to_bits))
-    });
+    // Vertex attributes belong to the complete cold-decoded replacement and
+    // can change without resetting the animation clock. Keep indexed topology,
+    // vertex-to-joint correspondence and all pose bindings exact. Skinning and
+    // render preparation use the new asset; no old vertex buffer is patched.
+    let same_topology = old
+        .meshes
+        .iter()
+        .zip(&next.meshes)
+        .all(|(a, b)| a.indices == b.indices && a.vertices.len() == b.vertices.len());
     let same_rest = a.rest.len() == b.rest.len()
         && a.rest.iter().zip(&b.rest).all(|(a, b)| match (a, b) {
             (None, None) => true,
@@ -96,10 +96,14 @@ fn animation(
                         && a.weights.map(f32::to_bits) == b.weights.map(f32::to_bits)
                 })
         });
-    if !same_meshes || !same_rest || !same_skins || a.node_skins != b.node_skins || !same_influences
+    if !same_topology
+        || !same_rest
+        || !same_skins
+        || a.node_skins != b.node_skins
+        || !same_influences
     {
         return Err(refuse(
-            "animated model geometry, rest or skin bindings changed",
+            "animated model topology, rest or skin bindings changed",
         ));
     }
     // Runtime clip/graph/fade clocks use the startup duration table. Preserve

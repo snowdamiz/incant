@@ -10,6 +10,7 @@ use std::{cell::RefCell, rc::Rc, sync::Arc};
 use tao::window::Window;
 
 pub struct SurfaceState {
+    pacing: crate::pacing::Mode,
     #[cfg(all(feature = "native-presentations", target_os = "macos"))]
     capture: Option<Capture>,
     instance: wgpu::Instance,
@@ -35,12 +36,14 @@ pub struct Frame {
 impl SurfaceState {
     pub fn new(
         window: Arc<Window>,
+        pacing: crate::pacing::Mode,
         #[cfg(all(feature = "native-compilation", target_os = "macos"))] compilation: Option<
             &mut incant_render::compilation::Capture,
         >,
     ) -> Result<(Self, Arc<Renderer>, SurfaceTargets), Error> {
         let instance = wgpu::Instance::default();
         let surface = instance.create_surface(Arc::clone(&window))?;
+        install_pacing(&surface, pacing)?;
         #[cfg(all(feature = "native-compilation", target_os = "macos"))]
         let renderer = match compilation {
             Some(capture) => pollster::block_on(Renderer::new_with_compilation_capture(
@@ -74,12 +77,14 @@ impl SurfaceState {
             alpha_mode,
             view_formats: vec![],
         };
+        admit_pacing_configuration(pacing, renderer.adapter.get_info().backend, &config)?;
         let slot = Rc::new(RefCell::new(None));
         let targets = SurfaceTargets {
             slot: Rc::clone(&slot),
         };
         Ok((
             Self {
+                pacing,
                 #[cfg(all(feature = "native-presentations", target_os = "macos"))]
                 capture: None,
                 instance,
@@ -232,6 +237,7 @@ impl SurfaceState {
             self.configured = false;
         }
         let frame = bounded_acquire(|| {
+            check_pacing(&self.surface, self.pacing)?;
             if !self.configured {
                 #[cfg(all(feature = "native-presentations", target_os = "macos"))]
                 self.presentation_boundary(Boundary::Configure);
@@ -338,7 +344,9 @@ impl SurfaceState {
         if self.capture.is_some() {
             Capture::unbind(&self.surface)?;
         }
-        self.surface = self.instance.create_surface(Arc::clone(&self.window))?;
+        let candidate = self.instance.create_surface(Arc::clone(&self.window))?;
+        install_pacing(&candidate, self.pacing)?;
+        self.surface = candidate;
         #[cfg(all(feature = "native-presentations", target_os = "macos"))]
         if let Some(capture) = &mut self.capture {
             capture.recreated();
@@ -373,6 +381,98 @@ impl SurfaceState {
 fn supported_size(width: u32, height: u32) -> bool {
     (16..=1920).contains(&width) && (16..=1080).contains(&height)
 }
+
+fn admit_pacing_configuration(
+    mode: crate::pacing::Mode,
+    backend: wgpu::Backend,
+    config: &wgpu::SurfaceConfiguration,
+) -> Result<(), Error> {
+    if mode.selected() {
+        if backend != wgpu::Backend::Metal {
+            return Err(Error::PacingBackend);
+        }
+        if config.present_mode != wgpu::PresentMode::Fifo
+            || config.desired_maximum_frame_latency != 2
+        {
+            return Err(Error::PacingConfiguration);
+        }
+    }
+    Ok(())
+}
+
+fn install_pacing(surface: &wgpu::Surface<'_>, mode: crate::pacing::Mode) -> Result<(), Error> {
+    if !mode.selected() {
+        return Ok(());
+    }
+    #[cfg(all(feature = "native-minimum-duration", target_os = "macos"))]
+    {
+        // Scoped native borrow, as with observation binding. No raw resource is
+        // retained or acquired; only the new surface's cold policy is selected.
+        let hal =
+            unsafe { surface.as_hal::<wgpu::hal::api::Metal>() }.ok_or(Error::PacingBackend)?;
+        hal.select_minimum_duration60().map_err(Error::NativePacing)
+    }
+    #[cfg(not(all(feature = "native-minimum-duration", target_os = "macos")))]
+    {
+        let _ = surface;
+        Err(crate::pacing::Error::Unsupported.into())
+    }
+}
+
+fn check_pacing(surface: &wgpu::Surface<'_>, mode: crate::pacing::Mode) -> Result<(), Error> {
+    if !mode.selected() {
+        return Ok(());
+    }
+    #[cfg(all(feature = "native-minimum-duration", target_os = "macos"))]
+    {
+        // Recheck immediately before configure/acquisition, before simulation.
+        let hal =
+            unsafe { surface.as_hal::<wgpu::hal::api::Metal>() }.ok_or(Error::PacingBackend)?;
+        hal.check_minimum_duration60().map_err(Error::NativePacing)
+    }
+    #[cfg(not(all(feature = "native-minimum-duration", target_os = "macos")))]
+    {
+        let _ = surface;
+        Err(crate::pacing::Error::Unsupported.into())
+    }
+}
+
+#[cfg(test)]
+mod pacing_tests {
+    use super::*;
+    #[test]
+    fn selected_configuration_refuses_backend_or_queue_changes() {
+        let mut config = wgpu::SurfaceConfiguration {
+            usage: wgpu::TextureUsages::RENDER_ATTACHMENT,
+            format: wgpu::TextureFormat::Bgra8UnormSrgb,
+            width: 16,
+            height: 16,
+            present_mode: wgpu::PresentMode::Fifo,
+            desired_maximum_frame_latency: 2,
+            alpha_mode: wgpu::CompositeAlphaMode::Opaque,
+            view_formats: vec![],
+        };
+        use crate::pacing::Mode;
+        admit_pacing_configuration(Mode::MinimumDuration60, wgpu::Backend::Metal, &config).unwrap();
+        assert!(matches!(
+            admit_pacing_configuration(Mode::MinimumDuration60, wgpu::Backend::Vulkan, &config),
+            Err(Error::PacingBackend)
+        ));
+        config.present_mode = wgpu::PresentMode::Immediate;
+        assert!(matches!(
+            admit_pacing_configuration(Mode::MinimumDuration60, wgpu::Backend::Metal, &config),
+            Err(Error::PacingConfiguration)
+        ));
+        config.present_mode = wgpu::PresentMode::Fifo;
+        config.desired_maximum_frame_latency = 1;
+        assert!(matches!(
+            admit_pacing_configuration(Mode::MinimumDuration60, wgpu::Backend::Metal, &config),
+            Err(Error::PacingConfiguration)
+        ));
+        admit_pacing_configuration(Mode::Ordinary, wgpu::Backend::Vulkan, &config).unwrap();
+    }
+}
+
 impl TargetProvider for SurfaceTargets {
     type Error = Error;
     type Frame = Frame;

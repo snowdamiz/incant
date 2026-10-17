@@ -1,0 +1,76 @@
+{
+  "format": "incant-script-budget-source-reassessment",
+  "version": 1,
+  "observed_at": "2026-10-17T17:04:11.301820+00:00",
+  "source_head": "9f11bbca54c3a3012733fdc4fad348d9abb92426",
+  "scope": "Source/toolchain inspection and primary compiler documentation only. No native compile, training, measurement or optimization.",
+  "hypothesis": "Profile-guided optimization of the pinned QuickJS C interpreter may improve real callback dispatch and typed numeric access without changing guest programs or runtime validation.",
+  "files": [
+    {
+      "path": "Cargo.toml",
+      "sha256": "163606d4b9886c5d0f9bb6a4b67fca4823523b4024f17a689dc9bab719c314a7",
+      "bytes": 3956
+    },
+    {
+      "path": "third_party/rquickjs-sys/build.rs",
+      "sha256": "d392d7194ae5bcaa0e0dac28a14c55656f6cf2cce3b16a8e6968c09e2ecfff85",
+      "bytes": 13910
+    },
+    {
+      "path": "third_party/rquickjs-sys/quickjs/quickjs.c",
+      "sha256": "d2230f99482f79501dd1ab67430433298116120f01eccfea66c220e9c890f0e2",
+      "bytes": 2146912
+    },
+    {
+      "path": "crates/incant_script/build.rs",
+      "sha256": "9415476a4dab7e94297d6166908d4d4da6cab400b6c112db1150878fa427218a",
+      "bytes": 8860
+    },
+    {
+      "path": "crates/incant_script/src/lib.rs",
+      "sha256": "3819fc8ec2fe5ee54a7aed6e1a185183182d5faf17e9e33aacca6e02a55c1a8d",
+      "bytes": 41893
+    },
+    {
+      "path": "samples/core/stress.ts",
+      "sha256": "7285e9009633052ba86ee0996c87f58097eb47fdaf0a73df10f42597b0119f1a",
+      "bytes": 3513
+    },
+    {
+      "path": "samples/core/gameplay.ts",
+      "sha256": "f471293cf6a3b6a355f0f2c8ec6406bf5f3942f438411121b2e63ae6e6f31095",
+      "bytes": 16574
+    },
+    {
+      "path": "tools/export_native.py",
+      "sha256": "c9e5b0ac01d6870587c81f8cf81a9706db04b161c7aa261039d373a48e8eae08",
+      "bytes": 18989
+    },
+    {
+      "path": "tools/shipping_session.py",
+      "sha256": "4e4b6a8cc70e57959386233c95c13512049bc115c04093776fb7065c1fdad035",
+      "bytes": 16954
+    }
+  ],
+  "findings": [
+    "The current shipping profile uses opt-level3 and fat Rust LTO, but the vendored QuickJS cc build has no explicit PGO train/use path. This is distinct from the rejected typed-store, authored-loop, matrix-cache, ordered-query and navigation experiments.",
+    "The historical main278 full Core stress callback mean is about0.925ms, inclusive of native capabilities. That source-bound historical fact does not establish current interpreter-only cost or a predicted saving.",
+    "The ordinary exporter rejects ambient Rust compiler overrides; a private explicit C-only experiment must not weaken those checks or treat an instrumented training executable as shipping performance evidence.",
+    "Native cook compatibility already permits trusted C flags; cross-target bytecode admission requires defaults. Keep native-only experiments distinct from portable shipping admission.",
+    "Installed Apple clang21 and llvm-profdata tools are present; Rust uses LLVM23. Keep C training/merge/use on the same Apple toolchain and do not assume cross-version profile compatibility."
+  ],
+  "next_action": "A bounded C-only feasibility probe and cold/hot control suite when a CPU lane is available, then a source-bound training/optimized/baseline full Core export comparison only if feasibility passes. Keep rendering and native-window attribution ahead of this optional lane.",
+  "stop_conditions": [
+    "No weakening of50ms guest execution limit,32MiB VM quota,view detachment,numeric validation,rollback,source-free packaging,shipping codegen or normal dependency checks.",
+    "Abort on absent or mismatched profile, nonzero clang profile diagnostics, incomplete full Core execution, gameplay or PCM divergence, or exceeded predeclared bounds.",
+    "Require representative training and separate held-out controls; no speedup claim from training timing or standalone interpreter microbenchmarks.",
+    "Adoption requires a fixed matched quiet comparison of uninstrumented same-source baseline and optimized full Core players with exact gameplay/audio parity and whole-player nonregression;2ms gate remains unmet until actual evidence passes."
+  ],
+  "primary_sources": [
+    "https://clang.llvm.org/docs/UsersManual.html#profile-guided-optimization",
+    "https://doc.rust-lang.org/rustc/profile-guided-optimization.html"
+  ],
+  "script_2ms_target_met": false,
+  "native_experiment_run": false,
+  "prior_negative_results_preserved": true
+}
