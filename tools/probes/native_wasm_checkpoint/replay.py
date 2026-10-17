@@ -127,7 +127,8 @@ def audit_build(root, owner, exported):
           'Symbol receipt bound to actual output')
 
 
-def replay(root):
+def replay_records(root):
+    """Validate retained outputs; filesystem deletion/artifact bytes are separate."""
     root = Path(root)
     owner = data(root, 'owner.json')
     require(owner['passed'] is True and owner['error'] is None, 'Successful bounded owner')
@@ -165,13 +166,8 @@ def replay(root):
             if name in oracle.REFUSALS:
                 require(read(root, name + '.save') == oracle.mutate_checkpoint(outputs['prefix']['saved'], name),
                         'Exact coherent negative input')
-    package = root / 'package/player'
     files = data(root, 'package-files.json')
-    equal(inventory(package), files, 'Exact immutable runtime inventory and modes')
     require(all(not name.endswith(('.wasm', '.rs', '.c', '.rlib', '.js', '.map')) for name in files), 'Source-free package')
-    for name in ('authoring', 'trusted-wabt', 'guest-build'):
-        require(not (root / name).exists() and not (root / name).is_symlink(), 'Owned source deleted')
-    require(not list((root / 'private-builds').iterdir()), 'Fresh build scratch removed')
     exported = data(root, 'package/export.json')
     rpc_paths = sorted(root.glob('rpc-*.stderr.json'), key=lambda p: int(p.name.split('-')[1].split('.')[0]))
     authoring([data(root, p.name) for p in rpc_paths], data(root, 'authored-read.json'))
@@ -200,6 +196,17 @@ def replay(root):
     return {'passed': True, 'four_fresh_positive_processes': True, 'six_exact_refusals': True,
             'exact_checkpoint_and_pcm_continuation': True, 'player_sha256': exported['player_sha256'],
             'cleanup_scope': 'owner children only; wrapper absence requires post-exit closeout and exact inventory'}
+
+
+def replay(root):
+    """Local full-artifact replay additionally re-reads native/runtime file bytes."""
+    root = Path(root)
+    equal(inventory(root / 'package/player'), data(root, 'package-files.json'),
+          'Exact immutable runtime inventory and modes')
+    for name in ('authoring', 'trusted-wabt', 'guest-build'):
+        require(not (root / name).exists() and not (root / name).is_symlink(), 'Owned source deleted')
+    require(not list((root / 'private-builds').iterdir()), 'Fresh build scratch removed')
+    return replay_records(root)
 
 
 if __name__ == '__main__':
