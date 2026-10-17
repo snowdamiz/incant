@@ -321,3 +321,6 @@ mod refusals;
 
 #[path = "animated_refresh/continuity.rs"]
 mod continuity;
+
+#[path = "animated_refresh/vertex_content.rs"]
+mod vertex_content;

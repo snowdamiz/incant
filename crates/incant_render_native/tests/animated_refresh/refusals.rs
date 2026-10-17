@@ -1,7 +1,35 @@
 use super::*;
 
 #[test]
-fn equal_count_clip_skin_and_geometry_changes_refuse_without_mutating_the_live_catalog() {
+fn changed_indices_alone_refuse_with_identical_vertices_and_skin_influences() {
+    let root = tempfile::tempdir().unwrap();
+    let original = fixture::indexed_model(root.path(), Change::Original);
+    let world = NativeWorld::new(scene(root.path(), vec![original], false));
+    let input = load(root.path(), &world).unwrap();
+    let old = mesh(&input).source.clone();
+    let next = fixture::indexed_model(root.path(), Change::Topology);
+    let (models, textures) = caches(root.path());
+    let before = incant_assets_runtime::load_model(&models, &key(original)).unwrap();
+    let after = incant_assets_runtime::load_model(&models, &key(next)).unwrap();
+    assert_eq!(before.meshes[0].vertices, after.meshes[0].vertices);
+    assert_eq!(before.animation, after.animation);
+    assert_ne!(before.meshes[0].indices, after.meshes[0].indices);
+    assert!(matches!(
+        input.texture_refresh_ticket().prepare_visuals(
+            &[next],
+            VisualCaches {
+                models: &models,
+                textures: &textures,
+            },
+        ),
+        Err(NativeRenderError::TextureRefresh(_))
+    ));
+    assert!(Arc::ptr_eq(&old, &mesh(&input).source));
+    assert_eq!((input.asset_generation(), world.tick()), (0, 0));
+}
+
+#[test]
+fn equal_count_clip_skin_and_topology_changes_refuse_without_mutating_the_live_catalog() {
     let root = tempfile::tempdir().unwrap();
     let original = model(root.path(), Change::Original);
     let world = NativeWorld::new(scene(root.path(), vec![original], false));
@@ -18,8 +46,7 @@ fn equal_count_clip_skin_and_geometry_changes_refuse_without_mutating_the_live_c
         Change::SkinBinding,
         Change::Influences,
         Change::Rest,
-        Change::Geometry,
-        Change::GeneratedTangents,
+        Change::Topology,
     ] {
         // Each replacement is actually cooked/decoded, with the same asset ID,
         // clip count and primitive/material count; only the binding changes.
