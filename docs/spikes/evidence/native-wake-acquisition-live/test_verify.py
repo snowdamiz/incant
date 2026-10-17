@@ -43,6 +43,12 @@ class Packet(unittest.TestCase):
         m=copy.deepcopy(self.manifest);m['continuous_display_qualified']=True
         with self.assertRaises(ValueError):verify.validate(m,self.records)
 
+    def test_quiet_focus_interruption_refused(self):
+        self.mutate('window-002/result.json',lambda v:v['analysis'].update(focus_lost_events=1))
+
+    def test_quiet_gameplay_zero_refused(self):
+        self.mutate('window-002/result.json',lambda v:v['analysis'].update(gameplay_reported_zero_timestamps=1))
+
     def test_oversized_read_refused(self):
         with tempfile.TemporaryDirectory() as d:
             p=Path(d)/'oversized';p.write_bytes(b'x'*9)
