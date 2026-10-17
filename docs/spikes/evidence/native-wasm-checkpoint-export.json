@@ -1147,6 +1147,10 @@
     "recorded_absent_pids": 542
   },
   "verifier": {
+    "docs/spikes/evidence/native-wasm-checkpoint-export-tests.py": {
+      "bytes": 6889,
+      "sha256": "1c61d6704b09a4e407515d4cca34360f9f3dfdc4b64b53073352469c96ff971e"
+    },
     "tools/export_native.py": {
       "bytes": 18989,
       "sha256": "c9e5b0ac01d6870587c81f8cf81a9706db04b161c7aa261039d373a48e8eae08"
@@ -1161,7 +1165,7 @@
     },
     "tools/probes/native_wasm_checkpoint/portable.py": {
       "bytes": 11975,
-      "sha256": "20fa47f2ee2861c140e1f8449c489fa2917d9d2960d3c78c43afecad54a08570"
+      "sha256": "7e937d05a36e70eae912377d4197504034f1f2f6df1ca620504b9ba3b6eef5ce"
     },
     "tools/probes/native_wasm_checkpoint/replay.py": {
       "bytes": 14396,
@@ -1174,10 +1178,6 @@
     "tools/probes/native_wasm_restart/verify.py": {
       "bytes": 6259,
       "sha256": "69f774379777d3ec8731dd80913e7ebe42961c217d4a65a88c8268b327d0988b"
-    },
-    "tools/tests/test_native_wasm_checkpoint_portable.py": {
-      "bytes": 6879,
-      "sha256": "e3e345e435bc924442e33f701bb0d06d64c59814f12a7dfd249c17f42b364b95"
     }
   }
 }

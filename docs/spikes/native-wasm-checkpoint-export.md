@@ -110,7 +110,8 @@ From the repository root, data-only commands are:
 
 ```sh
 PYTHONPATH=tools python3 -B -m probes.native_wasm_checkpoint.portable
-python3 -B -m unittest discover -s tools/tests -p 'test_native_wasm_checkpoint*.py'
+python3 -B docs/spikes/evidence/native-wasm-checkpoint-export-tests.py
+python3 -B -m unittest discover -s tools/tests -p test_native_wasm_checkpoint_export.py
 ```
 
 The portable controls include coherently rehashed missing/changed streams,
@@ -118,6 +119,9 @@ source/SDK/correction provenance, falsely relabeled native success, omitted
 observed PIDs and changed recorded player identity. The existing 20 focused
 controls cover independent arithmetic, state/schema/clock, PCM, VM freshness,
 public transactions, refusal precision and merged symbol-stream admission.
+The 12 archive-dependent controls live with the evidence and run explicitly;
+development's sparse checkout omits that evidence directory. The 20 self-contained
+controls remain in ordinary tool-test discovery.
 
 There is no physics/UI in this scene, native-window/GPU execution, phone/device
 measurement, performance claim, signing, arbitrary global/heap snapshot, full SDK

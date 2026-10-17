@@ -19,7 +19,7 @@ MAX_ARCHIVE, MAX_DECODED = 8 * 1024**2, 96 * 1024**2
 VERIFIERS = {'tools/probes/native_wasm_checkpoint/' + name + '.py' for name in
              ('portable', 'replay', 'oracle', 'fixture', 'route')} | {
                  'tools/probes/native_wasm_restart/verify.py', 'tools/export_native.py',
-                 'tools/tests/test_native_wasm_checkpoint_portable.py'}
+                 'docs/spikes/evidence/native-wasm-checkpoint-export-tests.py'}
 
 
 def strict_json(text):
@@ -185,7 +185,7 @@ def verify(path=MANIFEST):
     validate_records(manifest, records)
     equal(sorted(manifest['verifier']), sorted(VERIFIERS), 'Complete verifier source inventory')
     for name, expected in manifest['verifier'].items():
-        require(name.startswith('tools/') and '..' not in PurePosixPath(name).parts, 'Verifier source path')
+        require(name in VERIFIERS and '..' not in PurePosixPath(name).parts, 'Verifier source path')
         equal(identity((REPO / name).read_bytes()), expected, 'Current verifier source identity')
     outcome = replay(records)
     equal(outcome, manifest['result'], 'Scoped derived claims')
