@@ -2,12 +2,12 @@
     feature = "diagnostic-quickjs-generate",
     feature = "diagnostic-quickjs-use"
 ))]
-use pgo_json as json;
+use serde_json as json;
 #[cfg(any(
     feature = "diagnostic-quickjs-generate",
     feature = "diagnostic-quickjs-use"
 ))]
-use pgo_serde as serde_support;
+use serde as serde_support;
 use sha2::{Digest, Sha256};
 use std::{env, fs, path::Path};
 #[cfg(any(

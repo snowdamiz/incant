@@ -7,6 +7,7 @@ import shlex
 import subprocess
 import sys
 import tempfile
+import tomllib
 import unittest
 from unittest.mock import patch
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
@@ -291,6 +292,27 @@ class Protocol(unittest.TestCase):
         for key in ['CFLAGS', 'TARGET_CFLAGS', 'CC', 'AR', 'LLVM_PROFILE_FILE',
                     p.SELECTOR, 'CARGO_BUILD_RUSTC', 'RUSTFLAGS']:
             with self.subTest(key=key), self.assertRaises(ValueError): build.environment({key:'untrusted'})
+
+    def test_PGO_build_dependencies_do_not_alias_existing_runtime_or_dev_packages(self):
+        manifest = tomllib.loads((build.ROOT / 'crates/incant_script/Cargo.toml').read_text())
+        def admit(value):
+            names = {}
+            for role in ('dependencies', 'build-dependencies', 'dev-dependencies'):
+                for name, spec in value[role].items():
+                    package = spec.get('package', name) if isinstance(spec, dict) else name
+                    names.setdefault(package, set()).add(name)
+            for name in ('serde', 'serde_json'):
+                self.assertEqual(names[name], {name})
+                self.assertTrue(value['build-dependencies'][name]['optional'])
+                for mode in ('generate', 'use'):
+                    self.assertIn('dep:'+name, value['features']['diagnostic-quickjs-'+mode])
+        admit(manifest)
+        # The actual failed Cargo shape must be rejected before another cold
+        # shipping build; normal/dev and optional-build edges share one name.
+        for canonical, alias in [('serde', 'pgo-serde'), ('serde_json', 'pgo-json')]:
+            broken = copy.deepcopy(manifest)
+            broken['build-dependencies'][alias] = dict(broken['build-dependencies'].pop(canonical), package=canonical)
+            with self.subTest(package=canonical), self.assertRaises(AssertionError): admit(broken)
 
     def test_raw_merge_inventory_never_accepts_a_wildcard_pool_or_heldout_contamination(self):
         raw = self.root / 'training-raw'; raw.mkdir(); (raw/'training-123.profraw').write_bytes(b'raw')
