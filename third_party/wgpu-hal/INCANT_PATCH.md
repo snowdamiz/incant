@@ -4,7 +4,10 @@ Upstream crates.io archive SHA256:
 `97ace1c17727311c22a46e4e3faf56ea6de81af99dcc839bdfb54857b94d448d`.
 All 84 published files, MIT/Apache-2.0 licenses and original dependency
 constraints are retained. `INCANT_UPSTREAM.json` records every upstream byte
-hash; `INCANT_PATCH.diff` is the complete current delta, including new files.
+hash; `INCANT_PATCH.diff` retains the original observer/creation delta, including
+new files. Subsequent opt-in native cache/pacing successors are recorded in Git
+history and their scoped documents; the historical patch is not regenerated as
+an unrelated aggregate in each successor.
 No upstream edition, platform dependencies or feature defaults change.
 
 The default-off macOS `diagnostic-presentations` feature adds a surface binding,
@@ -56,3 +59,16 @@ passed142 observer-enabled and97 ordinary player tests,3 renderer binding contro
 and strict all-target on/off host lint. Its two failed attempts remain bound in
 `docs/spikes/evidence/native-compilation-observer/host-cpu-qualification.json`.
 Live native-creation evidence remains pending; no default feature was enabled.
+
+## Fixed minimum-duration diagnostic (source only)
+
+The default-off macOS `diagnostic-minimum-duration` feature admits one fixed
+minimum previous display residence of 1/60 second on a fresh surface. First
+configure seals the cold policy; acquisition copies it into that exact texture.
+Recreation requires explicit selection on the new surface. Transaction
+presentation and non-FIFO configuration refuse selected mode before acquisition.
+The selected present path calls the command-buffer minimum-duration API before
+the existing commit; the ordinary present path and observer callback ownership
+remain in place. No timer, sleep, display link or simulation change is added.
+See `docs/spikes/native-metal-minimum-duration.md`. This source addition alone
+does not establish compilation, native execution, cadence or performance.

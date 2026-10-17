@@ -108,9 +108,13 @@ or relabeling that attempt. All wake/acquisition and host stages are accounted f
 The separate same-player run then completes without focus interruptions and with
 positive presentation timestamps for all 2,156 gameplay frames. Uneven cadence
 persists: 27 of 28 long display intervals are immediately followed by short ones.
-The interrupted first run and its five zero timestamps remain recorded. The next
-step is a matched pacing intervention; these observations alone do not identify
-the cause or pass FPS, appearance or script-budget requirements.
+The interrupted first run and its five zero timestamps remain recorded. A later
+[same-player minimum-duration comparison](docs/spikes/native-metal-minimum-duration.md)
+is negative for adoption: presentation span increases by 158 ms, drawable
+acquisition p95 rises from 0.038 to 13.536 ms, and dropped wall ticks rise from
+zero to four. Its strict timing receipt remains failed on the partial final
+scheduler batch. Ordinary presentation is unchanged. These observations do not
+pass FPS, appearance or script-budget requirements.
 [Fresh producer and raw evidence](docs/spikes/native-wake-acquisition-live.md).
 
 ## Explicit Wasm state — native persistence qualified

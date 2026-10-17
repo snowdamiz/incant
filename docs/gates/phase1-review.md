@@ -22,6 +22,11 @@ separate saved-data correction remain explicit. A second same-player run complet
 without focus loss and with positive timestamps for all gameplay frames. Uneven
 display intervals persist, including 27 long-then-short pairs. The complete
 rendered-game performance gate remains open; no gate follows from timing coverage.
+A later [matched minimum-duration diagnostic](../spikes/native-metal-minimum-duration.md)
+is negative for adoption: fewer short intervals accompany a longer presentation
+span, substantially more drawable acquisition wait and four dropped wall ticks.
+The selected arm's strict timing receipt also remains failed at its partial final
+scheduler batch. The ordinary policy stays unchanged.
 
 | Exit requirement | Recorded evidence | Remaining qualification |
 | --- | --- | --- |
