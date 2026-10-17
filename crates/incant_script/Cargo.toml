@@ -6,6 +6,8 @@ rust-version.workspace = true
 publish.workspace = true
 
 [features]
+diagnostic-quickjs-generate = ["dep:rquickjs-sys", "rquickjs-sys/diagnostic-quickjs-generate", "dep:pgo-json", "dep:pgo-serde"]
+diagnostic-quickjs-use = ["dep:rquickjs-sys", "rquickjs-sys/diagnostic-quickjs-use", "dep:pgo-json", "dep:pgo-serde"]
 profile = ["incant_profile/summary", "incant_runtime/profile"]
 # Manual test fixture with separately prepared inputs; never part of broad GPU CI.
 diagnostic-core-stress = ["profile", "compiler"]
@@ -54,6 +56,7 @@ incant_ui = { workspace = true, optional = true }
 incant_types.workspace = true
 incant_input.workspace = true
 rquickjs.workspace = true
+rquickjs-sys = { version = "=0.14.0", optional = true, default-features = false }
 thiserror.workspace = true
 ulid.workspace = true
 sha2.workspace = true
@@ -65,6 +68,8 @@ serde_json.workspace = true
 
 [build-dependencies]
 sha2.workspace = true
+pgo-json = { package = "serde_json", version = "1.0", optional = true }
+pgo-serde = { package = "serde", version = "1.0", features = ["derive"], optional = true }
 
 [[example]]
 name = "native_bulk"

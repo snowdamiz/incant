@@ -34,6 +34,8 @@ license = "MIT"
 repository = "https://github.com/DelSkayn/rquickjs.git"
 
 [features]
+diagnostic-quickjs-generate = ["dep:sha2", "dep:pgo-json", "dep:pgo-serde"]
+diagnostic-quickjs-use = ["dep:sha2", "dep:pgo-json", "dep:pgo-serde"]
 bindgen = ["bindgen-rs"]
 disable-assertions = []
 dump-atoms = []
@@ -62,6 +64,21 @@ package = "bindgen"
 
 [build-dependencies.cc]
 version = "1"
+
+[build-dependencies.sha2]
+version = "=0.10.9"
+optional = true
+
+[build-dependencies.pgo-json]
+package = "serde_json"
+version = "1.0"
+optional = true
+
+[build-dependencies.pgo-serde]
+package = "serde"
+version = "1.0"
+features = ["derive"]
+optional = true
 
 [build-dependencies.pretty_env_logger]
 version = "0.5"

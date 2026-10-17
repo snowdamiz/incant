@@ -1,9 +1,50 @@
+#[cfg(any(
+    feature = "diagnostic-quickjs-generate",
+    feature = "diagnostic-quickjs-use"
+))]
+use pgo_json as json;
+#[cfg(any(
+    feature = "diagnostic-quickjs-generate",
+    feature = "diagnostic-quickjs-use"
+))]
+use pgo_serde as serde_support;
 use sha2::{Digest, Sha256};
 use std::{env, fs, path::Path};
+#[cfg(any(
+    feature = "diagnostic-quickjs-generate",
+    feature = "diagnostic-quickjs-use"
+))]
+#[path = "../../third_party/rquickjs-sys/build_support/diagnostic_pgo.rs"]
+mod diagnostic_pgo;
 
 fn main() {
     let root = Path::new("../..");
     let mut identity = Sha256::new();
+    println!("cargo:rerun-if-env-changed=INCANT_QUICKJS_PGO_DESCRIPTOR");
+    #[cfg(not(any(
+        feature = "diagnostic-quickjs-generate",
+        feature = "diagnostic-quickjs-use"
+    )))]
+    assert!(
+        env::var_os("INCANT_QUICKJS_PGO_DESCRIPTOR").is_none(),
+        "QuickJS PGO descriptor requires an explicit diagnostic feature"
+    );
+    #[cfg(any(
+        feature = "diagnostic-quickjs-generate",
+        feature = "diagnostic-quickjs-use"
+    ))]
+    let pgo = {
+        let selected = diagnostic_pgo::Selection::load(&root.join("third_party/rquickjs-sys"))
+            .expect("trusted script PGO admission");
+        identity.update(b"incant-quickjs-c-pgo-v1");
+        identity.update(
+            selected
+                .descriptor
+                .identity()
+                .expect("PGO compatibility identity"),
+        );
+        selected
+    };
     // The temporary probe admission is part of executable compatibility. Both
     // the trusted host producer and target consumer must explicitly opt in.
     identity.update(b"probe-android-bytecode");
@@ -59,6 +100,13 @@ fn main() {
     for key in flags {
         println!("cargo:rerun-if-env-changed={key}");
         default_flags &= env::var_os(key).is_none_or(|v| v.is_empty());
+    }
+    #[cfg(any(
+        feature = "diagnostic-quickjs-generate",
+        feature = "diagnostic-quickjs-use"
+    ))]
+    {
+        default_flags = false;
     }
     println!(
         "cargo:rustc-env=INCANT_SCRIPT_DEFAULT_C_FLAGS={}",
@@ -222,6 +270,20 @@ fn main() {
         "cargo:rustc-env=INCANT_SCRIPT_TARGET={}",
         env::var("TARGET").unwrap()
     );
+    #[cfg(any(
+        feature = "diagnostic-quickjs-generate",
+        feature = "diagnostic-quickjs-use"
+    ))]
+    {
+        pgo.recheck(&root.join("third_party/rquickjs-sys"))
+            .expect("PGO script input check");
+        pgo.receipt(
+            Path::new(&env::var("OUT_DIR").unwrap()),
+            "incant_script",
+            None,
+        )
+        .expect("PGO identity receipt");
+    }
 }
 
 fn hash_file(path: &Path, hash: &mut Sha256) {
