@@ -76,6 +76,36 @@ processes and wrapper are reaped and independently absent. The scoped feature is
 merged through PR390 after independent review and exact-head development checks.
 Skeleton and structural changes remain outside this admission rule.
 
+## Current parallel qualification — 2026-10-17
+
+The default-off [view display-link wake diagnostic](docs/spikes/native-display-link-wake.md)
+passes 158 CPU controls and strict lint on integrated main393. A fresh shipping
+producer at `35f67313` passes the dependency/symbol checks and starts after its
+private build and input storage is removed. Its complete 2,156-step CPU replay
+matches the entire known gameplay report and all 13,798,400 PCM bytes. The
+ordinary native window run passes the full route and timing coverage. The first
+selected run loses focus at step 2,155 and times out while paused; its partial
+records remain failed. The separately recorded same-player follow-up completes, but presented-interval
+p95 worsens from 16.667 to 25.000 ms and long intervals rise from 9 to 276.
+The wake change is not adopted; ordinary timing remains the default. No FPS
+or visual-quality acceptance is established.
+
+The separated-material reconstruction sequence still fails its original metallic
+frame 35: nine eligible floor samples differ in four pixels beside an unsupported
+mover. Equal final images do not excuse the strict intermediate mismatch. The
+failed 4.07 GB capture remains retained. A correction preserves original material
+rasterization and zeros unsupported samples afterward using final owners. It
+passes 112 CPU controls and strict lint. Its tiny GPU mask control and exact
+failed-frame replay now pass: all nine original mismatches are corrected, all
+14 original reference files remain byte-identical, and the full frame oracle
+passes. The complete motion sequence, appearance and cost remain unqualified.
+No experimental renderer is adopted.
+
+Native Wasm haptics is merged through PR393 after review and successful fast
+checks. Physical vibration and an authored shipping haptics proof remain open.
+Release checkpoint52 (PR392) keeps main391 frozen for comprehensive CI; later
+main393 is outside that candidate. No distribution or phase gate is approved.
+
 ## Native presentation pacing — bounded intervention rejected
 
 A fresh shipping build at `380a03a4` preserves the complete 2,156-step Core
@@ -897,7 +927,7 @@ endpoint-only cache is deprioritized. The [retained-data calculation](docs/spike
 binds its original raw record and uses same-frame subtraction before ranking;
 it is not a current shipping benchmark or proof that sub-2 ms is impossible.
 
-Last reassessment: 2026-10-17, bounded standalone C-only execution of the
+Earlier reassessment: 2026-10-17, bounded standalone C-only execution of the
 [distinct QuickJS PGO hypothesis](docs/spikes/quickjs-c-pgo-feasibility.md).
 The fourth attempt passes actual training, profile consumption and held-out
 bytecode/C API behavior controls. Six compiler/profile refusal controls also
@@ -909,6 +939,16 @@ This remains standalone feasibility, with no engine integration, representative
 Core training or measured speedup. The ordinary shipping configuration is
 unchanged. Prior matrix-cache, typed-store, authored-loop, query and navigation
 results remain unchanged.
+
+
+Last reassessment: 2026-10-17, the separate Cargo/Rust-link prerequisite also
+passes training/profile consumption and exact held-out bytecode behavior. The
+successful third attempt and two preceding failures retain a cumulative 75.549
+seconds; this is separate from the earlier C-only account. Generation alone
+retains parser and instrumentation symbols; the ordinary baseline and profile-use
+link keep dead stripping and source-free export checks. Core integration is now
+implemented for source review, using the project's ordinary scalar fast physics
+variant. No actual Core training or performance comparison has run yet.
 
 Next useful trigger: bind the exact profile/tool identity to an opt-in QuickJS
 build and test representative full-Core training against a matched shipping

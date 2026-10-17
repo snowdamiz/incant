@@ -1,0 +1,14 @@
+{
+  "utc": "2026-10-17T20:45:14.283005+00:00",
+  "session": 45652,
+  "exit": 1,
+  "child_exit": -15,
+  "fresh_absent_PIDs": [
+    28834,
+    28847
+  ],
+  "fresh_absent_groups": [
+    28847
+  ],
+  "scope": "Failed focus-interrupted attempt preserved; no cadence comparison possible because final report/captures absent."
+}

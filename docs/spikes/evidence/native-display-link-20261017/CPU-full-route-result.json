@@ -1,0 +1,39 @@
+{
+  "format": "incant-wake-acquisition-CPU-parity-v1",
+  "source": "35f67313eba66c1de2089c6db1b56c4f657e4852",
+  "plan_sha256": "170d87f2a2f827f9989660bcecd9d2b9d11e2e47f9c4a6f6e1a436eb90d0d5d6",
+  "runner_sha256": "774a1225e2d86d84d79849307cd6dcfc9322519f333c7529fb9f3cabc333ad4b",
+  "status": "complete",
+  "wrapper_pid": 27252,
+  "retries": 0,
+  "GPU_window_executions": 0,
+  "player_sha256": "7bd3e561b9c777f4fecb0dc8a389809e7685d58f4d278b709d0ba80a937bc0c3",
+  "child_exit": 0,
+  "process_absence": [
+    {
+      "pid_pgid": 27261,
+      "PID_absent": true,
+      "group_absent": true
+    }
+  ],
+  "exit": 0,
+  "exact_entire_logical_report": true,
+  "exact_full_PCM": true,
+  "supervisor_terminal": true,
+  "elapsed_seconds": 5.972378042002674,
+  "scratch_retained": false,
+  "artifacts": {
+    "stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "output.pcm": {
+      "bytes": 13798400,
+      "sha256": "ccabf2c68b6388ac554ac3efb5609ddf6b4a45d1a3f316891d5f344094e99ee3"
+    },
+    "stdout.json": {
+      "bytes": 8455,
+      "sha256": "37ccafc52a22a341c7776961e5171f48c988638224445395fe94db55da2f4279"
+    }
+  }
+}

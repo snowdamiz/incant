@@ -1,0 +1,41 @@
+{
+  "format": "incant-independent-adapter-review-v1",
+  "at": "2026-10-17T20:29:03.556931+00:00",
+  "files": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-displaylink-wake-001/shipping-packet-001/build.py",
+      "bytes": 17062,
+      "sha256": "b5224ac355227d38964da83dd3239d53e24263238dfafcc01df87edfda831d7f"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-displaylink-wake-001/shipping-packet-001/policy.py",
+      "bytes": 6112,
+      "sha256": "7147e91f23cd237ccde57acb9b41bacd4a6d50de90dfa3dc54c88589d1e7603f"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-displaylink-wake-001/shipping-packet-001/plan.json",
+      "bytes": 56519,
+      "sha256": "dd207e3c653d5fd8346a8799aa637b9a2103144360ef296787d265337b9bf560"
+    }
+  ],
+  "predecessor_files": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-metal-minimum-duration-001/shipping-packet-002/build.py",
+      "sha256": "d92de3b2d3123eb4aaa55ae7bb3870265bd4953ca058701fff0a59b83d19e9ef"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-metal-minimum-duration-001/shipping-packet-002/policy.py",
+      "sha256": "21291ce9aaaff802536130449b39e23963e58e487f8f1cbd95b21002c9aa8887"
+    }
+  ],
+  "findings": [],
+  "reviewed": [
+    "Complete build.py/policy.py and exact predecessor diff; source/root/action/format changes plus closed objc/display-link feature recipients only.",
+    "Actual compiled recipient audit retains target/host partition, package/version/features/kind completeness; no broad unknown-package or feature acceptance.",
+    "Public exporter function and source-free normal-graph/compiler/symbol/codegen admission unchanged; CPU startup omits --window/native-wake-source so no native display-link creation.",
+    "Create-only roots, composed owned process guard, cold source/tool/compiler closure rechecks, same real authored/cooked data, bytecode/hardening/map-current-metadata binding, all-child cleanup confirmation, deletion before CPU1tick, postflight empty scratch and final rmdir before complete status remain.",
+    "Observed project fast mode is ordinary scalar fast; exporter derives no SIMD8 flag. Graph preflight/actual feature contract is consistent with this."
+  ],
+  "scope": "Source-only independent review; no adapter/native commands, compiler, GPU/window/capture or source edits. Previous 8 preparation and3 graph controls reported by root not rerun here.",
+  "execution_acceptance": false
+}
