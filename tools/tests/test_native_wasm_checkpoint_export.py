@@ -55,6 +55,42 @@ class CheckpointOracleTests(unittest.TestCase):
     def test_complete_independent_data_fixture(self):
         oracle.joined(sample_outputs())
 
+    def test_current_timer_checkpoint_and_coherent_schedule_corruption(self):
+        for tick in (13, 40):
+            old = saved(tick)
+            start = 128 + struct.unpack_from('<I', old, 80)[0]
+            # Python sum uses compensated arithmetic; the native clock advances one f64 addition per tick.
+            elapsed = 0.
+            for _ in range(tick):
+                elapsed += 1. / 60.
+            schedule = b'INCTMS01' + struct.pack('<QdII', tick, elapsed,
+                                               5 if tick == 13 else 1, 80)
+            timers = [('future', 17, 101)]
+            if tick == 13:
+                timers += [('gain', 11, 20), ('restart', 0, 29), ('stop', 0, 26), ('upgain', 0, 34)]
+            for name, interval, due in timers:
+                schedule += name.encode().ljust(64, b'\0') + struct.pack('<IIQ', len(name), interval, due)
+            payload = b'INCWPS02' + old[start:start + 96] + schedule
+            def envelope(payload):
+                data = bytearray(old[:start] + payload + old[start + 96:])
+                struct.pack_into('<I', data, 84, len(payload))
+                data[96:128] = hashlib.sha256(data[:96] + data[128:]).digest()
+                return bytes(data)
+            good = envelope(payload)
+            oracle.checkpoint(good, tick)
+            for offset in (104, 112, 120, 128, 132, 136, 142, 200, 204, 208):
+                changed = bytearray(payload); changed[offset] ^= 1
+                with self.assertRaises(ValueError):
+                    oracle.checkpoint(envelope(changed), tick)
+            for kind in ('schema', 'clock'):
+                bad = oracle.mutate_checkpoint(good, kind)
+                self.assertEqual(bad[96:128], hashlib.sha256(bad[:96] + bad[128:]).digest())
+                with self.assertRaises(ValueError):
+                    oracle.checkpoint(bad, tick)
+            for count in (1, 8, 31, 80):
+                with self.assertRaises(ValueError):
+                    oracle.checkpoint(envelope(payload[:-count]), tick)
+
     def test_input_interval_oracle_and_rebased_suffix(self):
         for tick in range(41):
             self.assertEqual(fixture.state(tick), independent_state(tick))
