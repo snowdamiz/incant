@@ -2,8 +2,8 @@
 
 [Release checkpoint52](docs/spikes/release-checkpoint-52.md) is promoted: all
 23 required contexts and eight exact-head workflows passed on the main391 tree,
-and release `73fed959` has the identical tested tree. Later main393–394 changes
-and locally qualified timers remain outside that release baseline. Retained
+and release `73fed959` has the identical tested tree. Later main393–395 changes
+remain outside that release baseline. Retained
 failed experiments remain failed. No distribution or phase gate is approved.
 
 The current phase remains **Phase 1: Core engine**. The
@@ -17,7 +17,7 @@ incomplete native-window attempts remain historical; these samples do not
 establish continuous motion, window presentation or FPS.
 [Release checkpoint52](docs/spikes/release-checkpoint-52.md) contains the tested
 main391 tree after all 23 required contexts and eight candidate workflows passed.
-Later main393–394 changes remain outside that release baseline. Rendering quality and full rendered-game
+Later main393–395 changes remain outside that release baseline. Rendering quality and full rendered-game
 performance remain open. The reported jagged editor cube now has explicit 4x
 geometry antialiasing, verified in the actual Mac editor and isolated Metal
 controls. This fixes the ordinary viewport route; low-resolution reconstruction
@@ -90,7 +90,7 @@ The wake change is not adopted; ordinary timing remains the default. No FPS
 or visual-quality acceptance is established.
 
 The separated-material reconstruction sequence still fails its original metallic
-frame 35: nine eligible floor samples differ in four pixels beside an unsupported
+frame 35: nine eligible textured-sign samples differ in four pixels beside an unsupported
 mover. Equal final images do not excuse the strict intermediate mismatch. The
 failed 4.07 GB capture remains retained. A correction preserves original material
 rasterization and zeros unsupported samples afterward using final owners. It
@@ -98,25 +98,46 @@ passes 112 CPU controls and strict lint. Its tiny GPU mask control and exact
 failed-frame replay now pass: all nine original mismatches are corrected, all
 14 original reference files remain byte-identical, and the full frame oracle
 passes. The subsequent full sequence fails earlier at frame33: two eligible
-floor material samples change while all reconstructed raw bytes remain equal to
+textured-sign material samples change while all reconstructed raw bytes remain equal to
 the prior capture. The failed sequence remains retained. A fixed-frame original
 reference repeat diagnostic passes its two CPU comparator controls and strict
-lint; its numerical GPU execution is being qualified separately. The complete
+lint. Three native captures of the unchanged frame33 reference are byte-identical
+and match the older frame33 reference; only the intervening failed run differs
+at those two sign samples. The native wrapper first refused a saved-data path;
+a separate data-only correction passes without rerunning GPU work or relabeling
+that failure. This establishes a narrow repeat result, not its cause. Source,
+texture and compiled-shader observations are the next investigation. The complete
 motion sequence, appearance and cost remain unqualified. No experimental
 renderer is adopted.
 
 Native Wasm haptics is merged through PR393 after review and successful fast
 checks. Physical vibration and an authored shipping haptics proof remain open.
 Release checkpoint52 (PR392) is promoted after all 23 requirements and eight
-workflows passed; later main393–394 is outside that baseline. No distribution or
+workflows passed; later main393–395 is outside that baseline. No distribution or
 phase gate is approved.
 
-Native Wasm timers are locally qualified at `9a9957c5`: 93 native test executions,
+Native Wasm timers are merged through PR395 after independent review and fast
+checks. Qualification at `9a9957c5` includes 93 native test executions,
 two strict lint commands and all local development checks pass. Both actual
 hosts match the TypeScript timer contract and preserve schedules through saves
-and reloads. Two failed attempts remain explicitly retained. This work is awaiting
-integration; an authored shipping timer proof and complete SDK parity remain open.
-[Contract and evidence](docs/spikes/native-wasm-timers.md).
+and reloads. Two failed attempts remain explicitly retained. A fresh authored
+shipping timer proof at `16845606` now also passes four source-free player runs
+and six precise refusals: pending schedules, gameplay state and audible PCM
+continue exactly after saving/reopening. Its full audio output also matches the
+earlier equivalent explicit-state proof. The producer and all 527 observed PIDs
+and managed groups are absent after actual terminal exit. This new proof awaits
+integration; complete SDK parity remains open.
+[Contract](docs/spikes/native-wasm-timers.md) and
+[authored export evidence](docs/spikes/native-wasm-timers-export.md).
+
+The bounded QuickJS C PGO follow-up has not trained or measured Core yet. Its
+ordinary shipping build completed, then the verifier misread rustc's `env`
+prefix as the linker. The original 322.341-second attempt remains failed. A
+strict parser correction now passes saved-output replay and 81 portable controls;
+only the parser, caller and tests changed. The next useful trigger is a newly
+qualified ordinary/generate/use producer with exact gameplay/audio parity, then
+a separately scheduled matched timing run. Last reassessment: 2026-10-17.
+The 2 ms ScriptTick target remains unmet; other work continues.
 
 ## Native presentation pacing — bounded intervention rejected
 

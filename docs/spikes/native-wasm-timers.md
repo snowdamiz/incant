@@ -69,6 +69,7 @@ SHA-256 identities. Native executable copies remain external and hash-bound;
 the records do not require executing archived code. Source inventories and
 protected binaries were checked before/after the original runs.
 
-No GPU, window, authored source-free shipping export, device timing, full SDK
-parity or phase completion is established here. A normal authored shipping timer
-export/save/load proof remains the next integration check.
+The separate [authored timer export](native-wasm-timers-export.md) now verifies
+normal public authoring, source-free shipping and exact timer/gameplay/audio
+continuation. No GPU, window, device timing, full SDK parity or phase completion
+is established by these scoped proofs.
