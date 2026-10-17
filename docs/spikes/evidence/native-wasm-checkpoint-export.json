@@ -1,0 +1,1183 @@
+{
+  "archive": {
+    "bytes": 4131578,
+    "sha256": "ee5b234e2fa0d76e88e71e0bb89c9843e699740b5861e9db3806541f49adb78a"
+  },
+  "decoded_bytes": 53216913,
+  "external_recorded_artifacts": {
+    "output/incant_headless": {
+      "bytes": 62900880,
+      "executable": true,
+      "sha256": "bd945d69fe55609dc7a50e67c62ec5894ff779991c8442ed60b7d5d27670b418"
+    },
+    "output/package/build.log": {
+      "bytes": 1580249,
+      "executable": false,
+      "sha256": "f468647eb49a95543a0abc4d662521256a6c8f1259d772dad8bc63de3eafb5f3"
+    },
+    "output/package/player/data/audio/0d7a526cceb83d868e4b30549cfb1ea162467627445f6f03544c47bda225c0fc.ipcm": {
+      "bytes": 8192,
+      "executable": false,
+      "sha256": "0d7a526cceb83d868e4b30549cfb1ea162467627445f6f03544c47bda225c0fc"
+    },
+    "output/package/player/data/audio/3d071cc819b39c9727f43c3175b5b8eff70a1dea9b3c02bf458bdb45161ec927.json": {
+      "bytes": 418,
+      "executable": false,
+      "sha256": "ab8fef4ab6ae0c3fe10d3a3d01fb53114e90c6452f10395c53593e96271958e6"
+    },
+    "output/package/player/data/clips.bin": {
+      "bytes": 60,
+      "executable": false,
+      "sha256": "7ce3ebd3aee533fbbedd2883b1f1941de9f94e276d8ad2e956f41edf549b46ee"
+    },
+    "output/package/player/data/empty-input.json": {
+      "bytes": 103,
+      "executable": false,
+      "sha256": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5"
+    },
+    "output/package/player/data/input-actions.json": {
+      "bytes": 2,
+      "executable": false,
+      "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    "output/package/player/data/package.json": {
+      "bytes": 449,
+      "executable": false,
+      "sha256": "81d2307708c7cb2e60ad932aa88bdfa1f6398c81f9f635a65194b01e65020793"
+    },
+    "output/package/player/data/world.scene": {
+      "bytes": 347,
+      "executable": false,
+      "sha256": "8f7ac8d363a87e7d3fd34ecc39283c360e425afb64814113e1ec40464ada6c62"
+    },
+    "output/package/player/incant_game_player": {
+      "bytes": 9883664,
+      "executable": true,
+      "sha256": "21df50b0b213b0714e22169d03180b60290a22120dc7211f8108ceb04bdb14bb"
+    },
+    "output/package/symbols/incant_game_player.dSYM/Contents/Info.plist": {
+      "bytes": 664,
+      "executable": false,
+      "sha256": "0628c2f899de856230febc12b3d228462f9e00f6371a4bae96255572f0867b1d"
+    },
+    "output/package/symbols/incant_game_player.dSYM/Contents/Resources/DWARF/incant_game_player-d42a326c4c36f593": {
+      "bytes": 216433343,
+      "executable": false,
+      "sha256": "c251b78d07247e6f33ebbefcc32d62b369857122ecd604420b63662e47370727"
+    },
+    "output/package/symbols/incant_game_player.dSYM/Contents/Resources/Relocations/aarch64/incant_game_player-d42a326c4c36f593.yml": {
+      "bytes": 3613766,
+      "executable": false,
+      "sha256": "292837e8fb548fc1aed4300c2903a8533560b2be9543653999f45e78bea0cb83"
+    },
+    "output/package/symbols/script-symbols.json": {
+      "bytes": 1230,
+      "executable": false,
+      "sha256": "efdf08034b7b7429ebb3d30f122fc7f57bac8bb0d5c5c7aacf616c5521716ffd"
+    }
+  },
+  "format": "incant-authored-wasm-checkpoint-portable-v1",
+  "origins": {
+    "README.md": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/README.md",
+    "closeout.py": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/closeout.py",
+    "correction/receipt.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-data-002-70pil26_/receipt.json",
+    "correction/replay.stderr.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-data-002-70pil26_/replay.stderr.log",
+    "correction/replay.stdout.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-data-002-70pil26_/replay.stdout.log",
+    "correction/source.diff": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-data-002-70pil26_/source.diff",
+    "correction/verifier-source.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-data-002-70pil26_/verifier-source.json",
+    "original-records.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-data-002-70pil26_/original-records.json",
+    "output/000.stderr.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/000.stderr.log",
+    "output/000.stdout.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/000.stdout.log",
+    "output/001.stderr.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/001.stderr.log",
+    "output/001.stdout.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/001.stdout.log",
+    "output/002.stderr.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/002.stderr.log",
+    "output/002.stdout.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/002.stdout.log",
+    "output/003.stderr.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/003.stderr.log",
+    "output/003.stdout.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/003.stdout.log",
+    "output/004.stderr.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/004.stderr.log",
+    "output/004.stdout.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/004.stdout.log",
+    "output/005.stderr.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/005.stderr.log",
+    "output/005.stdout.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/005.stdout.log",
+    "output/006.stderr.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/006.stderr.log",
+    "output/006.stdout.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/006.stdout.log",
+    "output/007.stderr.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/007.stderr.log",
+    "output/007.stdout.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/007.stdout.log",
+    "output/008.stderr.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/008.stderr.log",
+    "output/008.stdout.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/008.stdout.log",
+    "output/009.stderr.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/009.stderr.log",
+    "output/009.stdout.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/009.stdout.log",
+    "output/010.stderr.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/010.stderr.log",
+    "output/010.stdout.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/010.stdout.log",
+    "output/011.stderr.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/011.stderr.log",
+    "output/011.stdout.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/011.stdout.log",
+    "output/012.stderr.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/012.stderr.log",
+    "output/012.stdout.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/012.stdout.log",
+    "output/013.stderr.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/013.stderr.log",
+    "output/013.stdout.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/013.stdout.log",
+    "output/014.stderr.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/014.stderr.log",
+    "output/014.stdout.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/014.stdout.log",
+    "output/015.stderr.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/015.stderr.log",
+    "output/015.stdout.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/015.stdout.log",
+    "output/016.stderr.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/016.stderr.log",
+    "output/016.stdout.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/016.stdout.log",
+    "output/017.stderr.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/017.stderr.log",
+    "output/017.stdout.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/017.stdout.log",
+    "output/018.stderr.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/018.stderr.log",
+    "output/018.stdout.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/018.stdout.log",
+    "output/019.stdout.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/019.stdout.log",
+    "output/020.stdout.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/020.stdout.log",
+    "output/021.stdout.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/021.stdout.log",
+    "output/022.stdout.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/022.stdout.log",
+    "output/023.stdout.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/023.stdout.log",
+    "output/024.stdout.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/024.stdout.log",
+    "output/025.stdout.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/025.stdout.log",
+    "output/026.stderr.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/026.stderr.log",
+    "output/026.stdout.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/026.stdout.log",
+    "output/027.stderr.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/027.stderr.log",
+    "output/027.stdout.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/027.stdout.log",
+    "output/028.stderr.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/028.stderr.log",
+    "output/028.stdout.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/028.stdout.log",
+    "output/029.stderr.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/029.stderr.log",
+    "output/029.stdout.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/029.stdout.log",
+    "output/030.stderr.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/030.stderr.log",
+    "output/030.stdout.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/030.stdout.log",
+    "output/031.stderr.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/031.stderr.log",
+    "output/031.stdout.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/031.stdout.log",
+    "output/032.stderr.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/032.stderr.log",
+    "output/032.stdout.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/032.stdout.log",
+    "output/033.stderr.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/033.stderr.log",
+    "output/033.stdout.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/033.stdout.log",
+    "output/034.stderr.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/034.stderr.log",
+    "output/034.stdout.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/034.stdout.log",
+    "output/035.stderr.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/035.stderr.log",
+    "output/035.stdout.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/035.stdout.log",
+    "output/036.stderr.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/036.stderr.log",
+    "output/036.stdout.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/036.stdout.log",
+    "output/authored-read.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/authored-read.json",
+    "output/authored.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/authored.json",
+    "output/baseline-input.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/baseline-input.json",
+    "output/baseline-observe.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/baseline-observe.json",
+    "output/baseline-process.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/baseline-process.json",
+    "output/baseline.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/baseline.json",
+    "output/baseline.pcm": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/baseline.pcm",
+    "output/baseline.save": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/baseline.save",
+    "output/clock-process.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/clock-process.json",
+    "output/clock-refusal.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/clock-refusal.json",
+    "output/clock.save": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/clock.save",
+    "output/corrupt-process.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/corrupt-process.json",
+    "output/corrupt-refusal.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/corrupt-refusal.json",
+    "output/corrupt.save": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/corrupt.save",
+    "output/deleted-0.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/deleted-0.json",
+    "output/deleted-1.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/deleted-1.json",
+    "output/guest.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/guest.json",
+    "output/headless.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/headless.json",
+    "output/imports.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/imports.json",
+    "output/owner.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/owner.json",
+    "output/package-files.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/package-files.json",
+    "output/package/export.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/package/export.json",
+    "output/package/normal-dependencies.txt": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/package/normal-dependencies.txt",
+    "output/package/project-build.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/package/project-build.json",
+    "output/pcm-exists-process.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/pcm-exists-process.json",
+    "output/pcm-exists-refusal.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/pcm-exists-refusal.json",
+    "output/pcm-exists.pcm": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/pcm-exists.pcm",
+    "output/prefix-input.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/prefix-input.json",
+    "output/prefix-observe.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/prefix-observe.json",
+    "output/prefix-process.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/prefix-process.json",
+    "output/prefix.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/prefix.json",
+    "output/prefix.pcm": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/prefix.pcm",
+    "output/prefix.save": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/prefix.save",
+    "output/process-inventory.jsonl": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/process-inventory.jsonl",
+    "output/program-process.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/program-process.json",
+    "output/program-refusal.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/program-refusal.json",
+    "output/program.save": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/program.save",
+    "output/proof.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/proof.json",
+    "output/repeated-input.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/repeated-input.json",
+    "output/repeated-observe.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/repeated-observe.json",
+    "output/repeated-process.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/repeated-process.json",
+    "output/repeated.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/repeated.json",
+    "output/repeated.pcm": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/repeated.pcm",
+    "output/repeated.save": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/repeated.save",
+    "output/resumed-input.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/resumed-input.json",
+    "output/resumed-observe.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/resumed-observe.json",
+    "output/resumed-process.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/resumed-process.json",
+    "output/resumed.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/resumed.json",
+    "output/resumed.pcm": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/resumed.pcm",
+    "output/resumed.save": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/resumed.save",
+    "output/rpc-10.stderr.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/rpc-10.stderr.json",
+    "output/rpc-10.stderr.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/rpc-10.stderr.log",
+    "output/rpc-9.stderr.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/rpc-9.stderr.json",
+    "output/rpc-9.stderr.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/rpc-9.stderr.log",
+    "output/save-exists-process.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/save-exists-process.json",
+    "output/save-exists-refusal.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/save-exists-refusal.json",
+    "output/save-exists.pcm": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/save-exists.pcm",
+    "output/save-exists.save": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/save-exists.save",
+    "output/schema-process.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/schema-process.json",
+    "output/schema-refusal.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/schema-refusal.json",
+    "output/schema.save": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/output/schema.save",
+    "packet-self-inclusion-failure.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/packet-self-inclusion-failure.json",
+    "packet.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/packet.json",
+    "plan.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/plan.json",
+    "portable-00.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/portable-00.log",
+    "portable-01.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/portable-01.log",
+    "portable-02.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/portable-02.log",
+    "portable-03.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/portable-03.log",
+    "portable-04.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/portable-04.log",
+    "portable-05.log": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/portable-05.log",
+    "portable-checks.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/portable-checks.json",
+    "preparation-correction.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/preparation-correction.json",
+    "prepare.py": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/prepare.py",
+    "provenance.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/provenance.json",
+    "result.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/result.json",
+    "reviewed-cooker-compatibility.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/reviewed-cooker-compatibility.json",
+    "reviewed-proposal.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/reviewed-proposal.json",
+    "reviewed-proposal.md": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/reviewed-proposal.md",
+    "root-grant.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/root-grant.json",
+    "root-independent-review.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-root-review.json",
+    "run.py": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/run.py",
+    "source.diff": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/source.diff",
+    "source.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/source.json",
+    "source/crates/incant_wasm_abi/src/audio.rs": "git:b733a36623790b076b049763878c06dd5ab09450:crates/incant_wasm_abi/src/audio.rs",
+    "source/crates/incant_wasm_abi/src/hud.rs": "git:b733a36623790b076b049763878c06dd5ab09450:crates/incant_wasm_abi/src/hud.rs",
+    "source/crates/incant_wasm_abi/src/lib.rs": "git:b733a36623790b076b049763878c06dd5ab09450:crates/incant_wasm_abi/src/lib.rs",
+    "source/crates/incant_wasm_abi/src/light.rs": "git:b733a36623790b076b049763878c06dd5ab09450:crates/incant_wasm_abi/src/light.rs",
+    "source/crates/incant_wasm_abi/src/localization.rs": "git:b733a36623790b076b049763878c06dd5ab09450:crates/incant_wasm_abi/src/localization.rs",
+    "source/crates/incant_wasm_abi/src/navigation_paths.rs": "git:b733a36623790b076b049763878c06dd5ab09450:crates/incant_wasm_abi/src/navigation_paths.rs",
+    "source/crates/incant_wasm_abi/src/persistent.rs": "git:b733a36623790b076b049763878c06dd5ab09450:crates/incant_wasm_abi/src/persistent.rs",
+    "source/crates/incant_wasm_abi/src/physics.rs": "git:b733a36623790b076b049763878c06dd5ab09450:crates/incant_wasm_abi/src/physics.rs",
+    "source/crates/incant_wasm_abi/src/steering.rs": "git:b733a36623790b076b049763878c06dd5ab09450:crates/incant_wasm_abi/src/steering.rs",
+    "source/sdk/abi/native-v1.json": "git:b733a36623790b076b049763878c06dd5ab09450:sdk/abi/native-v1.json",
+    "source/sdk/rust/src/animation.rs": "git:b733a36623790b076b049763878c06dd5ab09450:sdk/rust/src/animation.rs",
+    "source/sdk/rust/src/animation_graph.rs": "git:b733a36623790b076b049763878c06dd5ab09450:sdk/rust/src/animation_graph.rs",
+    "source/sdk/rust/src/animation_graph_v2.rs": "git:b733a36623790b076b049763878c06dd5ab09450:sdk/rust/src/animation_graph_v2.rs",
+    "source/sdk/rust/src/animation_ik.rs": "git:b733a36623790b076b049763878c06dd5ab09450:sdk/rust/src/animation_ik.rs",
+    "source/sdk/rust/src/animation_ik_v2.rs": "git:b733a36623790b076b049763878c06dd5ab09450:sdk/rust/src/animation_ik_v2.rs",
+    "source/sdk/rust/src/animation_pose.rs": "git:b733a36623790b076b049763878c06dd5ab09450:sdk/rust/src/animation_pose.rs",
+    "source/sdk/rust/src/animation_pose_v5.rs": "git:b733a36623790b076b049763878c06dd5ab09450:sdk/rust/src/animation_pose_v5.rs",
+    "source/sdk/rust/src/audio.rs": "git:b733a36623790b076b049763878c06dd5ab09450:sdk/rust/src/audio.rs",
+    "source/sdk/rust/src/flipbook.rs": "git:b733a36623790b076b049763878c06dd5ab09450:sdk/rust/src/flipbook.rs",
+    "source/sdk/rust/src/hud.rs": "git:b733a36623790b076b049763878c06dd5ab09450:sdk/rust/src/hud.rs",
+    "source/sdk/rust/src/input.rs": "git:b733a36623790b076b049763878c06dd5ab09450:sdk/rust/src/input.rs",
+    "source/sdk/rust/src/lib.rs": "git:b733a36623790b076b049763878c06dd5ab09450:sdk/rust/src/lib.rs",
+    "source/sdk/rust/src/light.rs": "git:b733a36623790b076b049763878c06dd5ab09450:sdk/rust/src/light.rs",
+    "source/sdk/rust/src/localization.rs": "git:b733a36623790b076b049763878c06dd5ab09450:sdk/rust/src/localization.rs",
+    "source/sdk/rust/src/navigation.rs": "git:b733a36623790b076b049763878c06dd5ab09450:sdk/rust/src/navigation.rs",
+    "source/sdk/rust/src/persistent.rs": "git:b733a36623790b076b049763878c06dd5ab09450:sdk/rust/src/persistent.rs",
+    "source/sdk/rust/src/physics.rs": "git:b733a36623790b076b049763878c06dd5ab09450:sdk/rust/src/physics.rs",
+    "source/sdk/rust/src/raw.rs": "git:b733a36623790b076b049763878c06dd5ab09450:sdk/rust/src/raw.rs",
+    "source/sdk/rust/src/root_motion.rs": "git:b733a36623790b076b049763878c06dd5ab09450:sdk/rust/src/root_motion.rs",
+    "source/sdk/rust/src/steering.rs": "git:b733a36623790b076b049763878c06dd5ab09450:sdk/rust/src/steering.rs",
+    "source/sdk/rust/src/tick.rs": "git:b733a36623790b076b049763878c06dd5ab09450:sdk/rust/src/tick.rs",
+    "source/sdk/rust/src/tick/audio.rs": "git:b733a36623790b076b049763878c06dd5ab09450:sdk/rust/src/tick/audio.rs",
+    "source/sdk/rust/src/tick/compound.rs": "git:b733a36623790b076b049763878c06dd5ab09450:sdk/rust/src/tick/compound.rs",
+    "source/sdk/rust/src/tick/hud.rs": "git:b733a36623790b076b049763878c06dd5ab09450:sdk/rust/src/tick/hud.rs",
+    "source/sdk/rust/src/tick/ik.rs": "git:b733a36623790b076b049763878c06dd5ab09450:sdk/rust/src/tick/ik.rs",
+    "source/sdk/rust/src/tick/light.rs": "git:b733a36623790b076b049763878c06dd5ab09450:sdk/rust/src/tick/light.rs",
+    "source/sdk/rust/src/tick/persistent.rs": "git:b733a36623790b076b049763878c06dd5ab09450:sdk/rust/src/tick/persistent.rs",
+    "source/sdk/rust/src/tick/root_motion.rs": "git:b733a36623790b076b049763878c06dd5ab09450:sdk/rust/src/tick/root_motion.rs",
+    "source/tools/export_native.py": "git:b733a36623790b076b049763878c06dd5ab09450:tools/export_native.py",
+    "source/tools/probes/native-wasm-checkpoint-export.py": "git:b733a36623790b076b049763878c06dd5ab09450:tools/probes/native-wasm-checkpoint-export.py",
+    "source/tools/probes/native_wasm_checkpoint/fixture.py": "git:b733a36623790b076b049763878c06dd5ab09450:tools/probes/native_wasm_checkpoint/fixture.py",
+    "source/tools/probes/native_wasm_checkpoint/guest.rs": "git:b733a36623790b076b049763878c06dd5ab09450:tools/probes/native_wasm_checkpoint/guest.rs",
+    "source/tools/probes/native_wasm_checkpoint/oracle.py": "git:b733a36623790b076b049763878c06dd5ab09450:tools/probes/native_wasm_checkpoint/oracle.py",
+    "source/tools/probes/native_wasm_checkpoint/owner.py": "git:b733a36623790b076b049763878c06dd5ab09450:tools/probes/native_wasm_checkpoint/owner.py",
+    "source/tools/probes/native_wasm_checkpoint/replay.py": "git:b733a36623790b076b049763878c06dd5ab09450:tools/probes/native_wasm_checkpoint/replay.py",
+    "source/tools/probes/native_wasm_checkpoint/route.py": "git:b733a36623790b076b049763878c06dd5ab09450:tools/probes/native_wasm_checkpoint/route.py",
+    "source/tools/probes/native_wasm_restart/owner.py": "git:b733a36623790b076b049763878c06dd5ab09450:tools/probes/native_wasm_restart/owner.py",
+    "source/tools/rust_guest.py": "git:b733a36623790b076b049763878c06dd5ab09450:tools/rust_guest.py",
+    "source/tools/shipping_symbols.py": "git:b733a36623790b076b049763878c06dd5ab09450:tools/shipping_symbols.py",
+    "terminal-closeout.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/terminal-closeout.json",
+    "tools.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/tools.json",
+    "wrapper-started.json": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-checkpoint-shipping-001-hmc3n16q/wrapper-started.json"
+  },
+  "records": {
+    "README.md": {
+      "bytes": 6277,
+      "sha256": "93dbb8e6bd9dbf0114adda1f24e9743b72e25d2aa02831d9e2fc53f877362113"
+    },
+    "closeout.py": {
+      "bytes": 2642,
+      "sha256": "e5683834b1a7c91684ef9ff9e940b31957380098f501c6b89f7944a77f243154"
+    },
+    "correction/receipt.json": {
+      "bytes": 1778,
+      "sha256": "9d746ac111244e94cbee31d93a34eca5d4fdbf9f1fc23853bde9f9a380db560d"
+    },
+    "correction/replay.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "correction/replay.stdout.log": {
+      "bytes": 335,
+      "sha256": "cf18bfb86009b707408d781ca566cff1ac806a58a8c8056fc79330fdc7ff69aa"
+    },
+    "correction/source.diff": {
+      "bytes": 8158,
+      "sha256": "f6b624663f5afd378bd62ec1999b872b78324ef24894025a0b395dafcb689426"
+    },
+    "correction/verifier-source.json": {
+      "bytes": 4894578,
+      "sha256": "890708484b898c78f74ac8812171e88b0406b15fbdcfdecfe5262111749fb93e"
+    },
+    "original-records.json": {
+      "bytes": 27175,
+      "sha256": "4fefbdf4b6cd8c76d8fccee1f04999faebfe6638a05c77eb4a5ba6da7e16593f"
+    },
+    "output/000.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "output/000.stdout.log": {
+      "bytes": 192,
+      "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909"
+    },
+    "output/001.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "output/001.stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "output/002.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "output/002.stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "output/003.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "output/003.stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "output/004.stderr.log": {
+      "bytes": 20145,
+      "sha256": "c082066f0025c5bf25e8a95ff9cec6fc85c895d775880dc57ddff44afa351040"
+    },
+    "output/004.stdout.log": {
+      "bytes": 663064,
+      "sha256": "ca17c557988e7b19447c60435607fa661c06116f2627b3d367d13044c4073642"
+    },
+    "output/005.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "output/005.stdout.log": {
+      "bytes": 63,
+      "sha256": "877202093bf33a295793221e8296f7d720b8d42e5ff451d1eefeb4789842e39f"
+    },
+    "output/006.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "output/006.stdout.log": {
+      "bytes": 734,
+      "sha256": "d529a6a035cdac4d04af01755fa74729572c2bec04cd1b27bd9d9ed8894c6cee"
+    },
+    "output/007.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "output/007.stdout.log": {
+      "bytes": 734,
+      "sha256": "cacb8c4a9ee2c2cea70e3af707950097e7ef211d56cfddb56fdf492937e6c42d"
+    },
+    "output/008.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "output/008.stdout.log": {
+      "bytes": 553,
+      "sha256": "0359a5d10b4108a9492de9fd1c46c802eba8c32d6c60cf4362e17477827c2400"
+    },
+    "output/009.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "output/009.stdout.log": {
+      "bytes": 77,
+      "sha256": "1dc5ff25a027f5c0a04ac183e96b6665181272c327130fb0663c5c1be8aad81d"
+    },
+    "output/010.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "output/010.stdout.log": {
+      "bytes": 192,
+      "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909"
+    },
+    "output/011.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "output/011.stdout.log": {
+      "bytes": 67,
+      "sha256": "b22adee5ac5a93ade5d52f11392360e1c1a95ef2add2bd03365e896e8f1688e1"
+    },
+    "output/012.stderr.log": {
+      "bytes": 1352,
+      "sha256": "94248c93d4489ff77f86e123619deef2adc8f6d7adfe43af61aea50259121d5f"
+    },
+    "output/012.stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "output/013.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "output/013.stdout.log": {
+      "bytes": 335,
+      "sha256": "0f91b6bea28cf3d48d4b09644557d31dbe9e9c5d94e9fd440e810fa3766367c0"
+    },
+    "output/014.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "output/014.stdout.log": {
+      "bytes": 7,
+      "sha256": "98997cf914f90eb865507680fb129df06410fe495ffc00793aa780e4b8f563ed"
+    },
+    "output/015.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "output/015.stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "output/016.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "output/016.stdout.log": {
+      "bytes": 32010,
+      "sha256": "17887179f07d9fa4340b5408b9da95c2a016c7c354468a709fbf06e215db7ce6"
+    },
+    "output/017.stderr.log": {
+      "bytes": 1580249,
+      "sha256": "f468647eb49a95543a0abc4d662521256a6c8f1259d772dad8bc63de3eafb5f3"
+    },
+    "output/017.stdout.log": {
+      "bytes": 33547657,
+      "sha256": "15008bfde8244895b873225f56f10f10ec4442530df135ee082cceb3bffe03e9"
+    },
+    "output/018.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "output/018.stdout.log": {
+      "bytes": 1854659,
+      "sha256": "d7bcb59271a7d35e56e95a2fa99185e6025edf5115b9e4bac5caf56eaf2abaa6"
+    },
+    "output/019.stdout.log": {
+      "bytes": 12125,
+      "sha256": "b9308dd4ee6dd229301dc8772919a5867cea2da7e0b2e1dd2733a656f065c708"
+    },
+    "output/020.stdout.log": {
+      "bytes": 20223,
+      "sha256": "fca4047c54993af7a5592d2c77b3b77fea097bef30e7fc5d251bf1d671059b64"
+    },
+    "output/021.stdout.log": {
+      "bytes": 247,
+      "sha256": "a3cb52b3780e6ed794b5ef1adfbb2d7bf2bb0d211dea80acbf57dde790af2113"
+    },
+    "output/022.stdout.log": {
+      "bytes": 284,
+      "sha256": "e9142f0c666a18167574fe7b4e899ec71af724e99ef3727e277f13114e5ee7cc"
+    },
+    "output/023.stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "output/024.stdout.log": {
+      "bytes": 217,
+      "sha256": "1e730009fc032e0a1bd81329b2e01b61178f239c0472617f2d8ab24b3af75a1e"
+    },
+    "output/025.stdout.log": {
+      "bytes": 7565,
+      "sha256": "5e22fec07749c389a09d879d5f428b070aac0f0bcf473eea00e5234053852595"
+    },
+    "output/026.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "output/026.stdout.log": {
+      "bytes": 295,
+      "sha256": "edd25a03dac69059cd89eb5cec884cc362d500b83c9884d01aab5420f91c6979"
+    },
+    "output/027.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "output/027.stdout.log": {
+      "bytes": 11457,
+      "sha256": "9d45460957afdf94a999e232d50a522a78940b9785639171e2a0fe2a28e09cfe"
+    },
+    "output/028.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "output/028.stdout.log": {
+      "bytes": 4234,
+      "sha256": "3425aa486f374536fad7dc5cda36720af6a55415c053f7276b435ba1c58af3cc"
+    },
+    "output/029.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "output/029.stdout.log": {
+      "bytes": 8011,
+      "sha256": "bc96497bd24ced03e7496bda31158de4b0db83279c428963ebe71ba2d5c77182"
+    },
+    "output/030.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "output/030.stdout.log": {
+      "bytes": 8011,
+      "sha256": "bc96497bd24ced03e7496bda31158de4b0db83279c428963ebe71ba2d5c77182"
+    },
+    "output/031.stderr.log": {
+      "bytes": 29,
+      "sha256": "0f8649dba037ac2235d7b2e5e7d408388e0b5d58d9120a33dba0847cb18e8212"
+    },
+    "output/031.stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "output/032.stderr.log": {
+      "bytes": 35,
+      "sha256": "904efb65b235fa9261a9b813750f46fd5214c8003f6ba028c38de553803c043f"
+    },
+    "output/032.stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "output/033.stderr.log": {
+      "bytes": 52,
+      "sha256": "db0a29e6934cebd1e7309993e18b42c9bed491851ddb8e04f014c02e36d946e9"
+    },
+    "output/033.stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "output/034.stderr.log": {
+      "bytes": 56,
+      "sha256": "3d82c7cdeeaaa4feb5d0edae37fc9d23b0a2b927075f3a342a3cbc3e1284214f"
+    },
+    "output/034.stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "output/035.stderr.log": {
+      "bytes": 68,
+      "sha256": "631b7b13872862622f2cf3e89c346da69c3045cb00f04bd13ddee48baa94e09c"
+    },
+    "output/035.stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "output/036.stderr.log": {
+      "bytes": 68,
+      "sha256": "631b7b13872862622f2cf3e89c346da69c3045cb00f04bd13ddee48baa94e09c"
+    },
+    "output/036.stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "output/authored-read.json": {
+      "bytes": 2775,
+      "sha256": "09e5cca3ef73b7a29d9e2cccc68a27005d5cb215179e2c27f9231b49e0b19731"
+    },
+    "output/authored.json": {
+      "bytes": 618,
+      "sha256": "20813400e63732c918b771df85bde3e775a4f974f6fd42c62c9a5e5c930f034e"
+    },
+    "output/baseline-input.json": {
+      "bytes": 1974,
+      "sha256": "e00026c3b76188bea27fbbf1154ba6dbb35219c74d1aed529f4c53c7d09b54fc"
+    },
+    "output/baseline-observe.json": {
+      "bytes": 12344,
+      "sha256": "abd4fd625fc00159b08ce1328b095e68b4ad4d7d3671e5d75ff46db0b85a1fd9"
+    },
+    "output/baseline-process.json": {
+      "bytes": 14709,
+      "sha256": "452b34150862ddabc490aaf711461cef12fe200e014300b716483ce32d9a5ec9"
+    },
+    "output/baseline.json": {
+      "bytes": 23273,
+      "sha256": "92273836e76bf286e0de9e864d2c2864d34adc1211ebfe9d5045eda4548fcae4"
+    },
+    "output/baseline.pcm": {
+      "bytes": 256000,
+      "sha256": "0c22224ae2866673cdfe4bed147fa50199d228508f3f4f44f41f87dc422cdb74"
+    },
+    "output/baseline.save": {
+      "bytes": 1249,
+      "sha256": "b11f8c963d042d2da7de08f7040c41ec0ba8183a40e791bbcd05d7c6bad1dcea"
+    },
+    "output/clock-process.json": {
+      "bytes": 1559,
+      "sha256": "52e9c6baf8328c2e22adc3c38e48e1fac64b5ce12f997f322bdbc3a4202795fb"
+    },
+    "output/clock-refusal.json": {
+      "bytes": 1625,
+      "sha256": "cc7bd232d47217137cea6790dc5213496c418ac2440f71eec365e44379455061"
+    },
+    "output/clock.save": {
+      "bytes": 1162,
+      "sha256": "ea31c4a794ec6304cd5ac16118cb42f3de989e73906f5c5b13dde4264db18ffa"
+    },
+    "output/corrupt-process.json": {
+      "bytes": 1536,
+      "sha256": "a8f7a027a20c1d3c91715808cd05d5ab175cb0d50a7ec5b72a020bb0f4ba5b50"
+    },
+    "output/corrupt-refusal.json": {
+      "bytes": 1602,
+      "sha256": "b2721051c427c62a4e076b31ad491665ed52a00e46b1a1ff944daa21975b608c"
+    },
+    "output/corrupt.save": {
+      "bytes": 1162,
+      "sha256": "aa9c46dd87f3528c0d29db681e2921c9816b60b76d9349450c4d0026d2a15fe0"
+    },
+    "output/deleted-0.json": {
+      "bytes": 1397,
+      "sha256": "5157608aa753813502875852783325d9a570c73d669ef6322a1a009f13275cb2"
+    },
+    "output/deleted-1.json": {
+      "bytes": 3462,
+      "sha256": "eacf95f1f0777e2128e1e443626689c36a57068feddceddfaafe0658384a71fd"
+    },
+    "output/guest.json": {
+      "bytes": 4674,
+      "sha256": "c3ce9fe1674349101fa545b1e88ef59e6d12a3cc46a0f5ce02e1aff3dff0685c"
+    },
+    "output/headless.json": {
+      "bytes": 1324,
+      "sha256": "62f485291ac683ae5e8c59b1564f8f94b4ff6796e9c8842b659eae7427f84731"
+    },
+    "output/imports.json": {
+      "bytes": 2201,
+      "sha256": "fd857bd4198dffefa9ad4c6da9fe351b8eb19b559ce226aef5cebd941084d1e6"
+    },
+    "output/owner.json": {
+      "bytes": 59808,
+      "sha256": "cf3b17c1b65332c56f874197b8ac563cf56414519f0db5a6d03574d8dec4d298"
+    },
+    "output/package-files.json": {
+      "bytes": 1505,
+      "sha256": "78bf9fe38ceb1e2a06bcac5ba08bcbe494125cce5fe78c9857dc14555c77fb87"
+    },
+    "output/package/export.json": {
+      "bytes": 9667,
+      "sha256": "8ee9f8f473f4e98dbedc90477bb7caec3ecf6b6b002006923cf8cd54d7f427f2"
+    },
+    "output/package/normal-dependencies.txt": {
+      "bytes": 32010,
+      "sha256": "17887179f07d9fa4340b5408b9da95c2a016c7c354468a709fbf06e215db7ce6"
+    },
+    "output/package/project-build.json": {
+      "bytes": 2587,
+      "sha256": "eea728574d2c6399fa0086a2298f7790da49f95d5eb94e0d173326a051d12a55"
+    },
+    "output/pcm-exists-process.json": {
+      "bytes": 1578,
+      "sha256": "be30695a23b192f771147773240c14039311c8baeb9b23f9bea8bbb266ebe1f5"
+    },
+    "output/pcm-exists-refusal.json": {
+      "bytes": 1978,
+      "sha256": "d0c8bc7cb8cd45a6a704f8c6ba3cc9ddd6e109931ea5765d6e5f6ca48137a351"
+    },
+    "output/pcm-exists.pcm": {
+      "bytes": 46,
+      "sha256": "9d10d226c4b0c0f0f72eabf4021f3afa36fa6eafaa907f180d7b3c5eb3fffabe"
+    },
+    "output/prefix-input.json": {
+      "bytes": 734,
+      "sha256": "510c76a1313403df6c5bc9e510c7f466b94826fb16cf93367749ced24c85ff87"
+    },
+    "output/prefix-observe.json": {
+      "bytes": 4288,
+      "sha256": "febbd1126cfcae52086ab4304b8a3abac7b845c2f1f7d372ed478d99e539a6cd"
+    },
+    "output/prefix-process.json": {
+      "bytes": 6452,
+      "sha256": "fd854ac03a1ff9fbf9ea34dc19255c262a4b41f5043eee16b526d9a19147ed9d"
+    },
+    "output/prefix.json": {
+      "bytes": 8787,
+      "sha256": "af6b5c0b4343524995eee74903f76e901cc360bd35a4fdf13e045d7c1e4cf2f9"
+    },
+    "output/prefix.pcm": {
+      "bytes": 83200,
+      "sha256": "d6ce81efb7f39689197225274036d66709359897a6328c717e5dd19421498d1c"
+    },
+    "output/prefix.save": {
+      "bytes": 1162,
+      "sha256": "624e486731204ae27593d288dbadfd0da9e8f3bd71a8581ddb87298b4b151820"
+    },
+    "output/process-inventory.jsonl": {
+      "bytes": 33437,
+      "sha256": "45647f80879cd1f2b70320c3761e799aea55fdad6b4822113ec3bed81a2cd4e8"
+    },
+    "output/program-process.json": {
+      "bytes": 1542,
+      "sha256": "3ec389ad59afe0d93898641ae4832c0018745e7b3d039ef7979d435f814ece5f"
+    },
+    "output/program-refusal.json": {
+      "bytes": 1608,
+      "sha256": "e117a66358754479f3005f86529010735e5f02eb4202129cfa670d3d91362449"
+    },
+    "output/program.save": {
+      "bytes": 1162,
+      "sha256": "803b657f38161aefedd0de49a0b5b58f107704c0093d24e6577b4f5ab5734e5b"
+    },
+    "output/proof.json": {
+      "bytes": 1339,
+      "sha256": "36cffb80075fdc5c5aa27dad51afcb80003565c9ba6f5bb21331c14588f518fa"
+    },
+    "output/repeated-input.json": {
+      "bytes": 1354,
+      "sha256": "36a0b291098fffef031bd58841ae8d23509859da81011fd987c5548e5aba3ecc"
+    },
+    "output/repeated-observe.json": {
+      "bytes": 8488,
+      "sha256": "10d2cb1d364b1164e1a474f1af0b37af4dad1a100e8895ce73d830ab9f4cbeee"
+    },
+    "output/repeated-process.json": {
+      "bytes": 10908,
+      "sha256": "e17af26caa6ae79ca4cc8024b10529adb74b418bdfc49b57a5bed44d434ac9d2"
+    },
+    "output/repeated.json": {
+      "bytes": 16330,
+      "sha256": "a8d2d28c1403f19389ec92efe4e54c400b7a8585a52ec8799bd2cedc1268c563"
+    },
+    "output/repeated.pcm": {
+      "bytes": 172800,
+      "sha256": "1bebd8b5d22f61f88535b25647c10cf014333fd7ce58332d08894985b6b5beb1"
+    },
+    "output/repeated.save": {
+      "bytes": 1249,
+      "sha256": "b11f8c963d042d2da7de08f7040c41ec0ba8183a40e791bbcd05d7c6bad1dcea"
+    },
+    "output/resumed-input.json": {
+      "bytes": 1354,
+      "sha256": "36a0b291098fffef031bd58841ae8d23509859da81011fd987c5548e5aba3ecc"
+    },
+    "output/resumed-observe.json": {
+      "bytes": 8488,
+      "sha256": "10d2cb1d364b1164e1a474f1af0b37af4dad1a100e8895ce73d830ab9f4cbeee"
+    },
+    "output/resumed-process.json": {
+      "bytes": 10904,
+      "sha256": "7999ce57e706213f5e109e2338507bd0fc3b34efb5e50c6a799a1fe3209c424c"
+    },
+    "output/resumed.json": {
+      "bytes": 16330,
+      "sha256": "a8d2d28c1403f19389ec92efe4e54c400b7a8585a52ec8799bd2cedc1268c563"
+    },
+    "output/resumed.pcm": {
+      "bytes": 172800,
+      "sha256": "1bebd8b5d22f61f88535b25647c10cf014333fd7ce58332d08894985b6b5beb1"
+    },
+    "output/resumed.save": {
+      "bytes": 1249,
+      "sha256": "b11f8c963d042d2da7de08f7040c41ec0ba8183a40e791bbcd05d7c6bad1dcea"
+    },
+    "output/rpc-10.stderr.json": {
+      "bytes": 3803,
+      "sha256": "76b13d77678f5da802480974ea7743104e137a342e2fbcf75e363887cc207c32"
+    },
+    "output/rpc-10.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "output/rpc-9.stderr.json": {
+      "bytes": 25815,
+      "sha256": "94adf57ea12bacbe0835ffa378303d3e2e50fff9dc44a230ff35f15ebdb3ba68"
+    },
+    "output/rpc-9.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "output/save-exists-process.json": {
+      "bytes": 1580,
+      "sha256": "56102fc211d73743b416e60f806cbace02ff6c70b7d7eeff0a7ffef71baa3915"
+    },
+    "output/save-exists-refusal.json": {
+      "bytes": 1979,
+      "sha256": "f09621e74716a156510c2d73a1cc184f43a486006d23834344887b5cef14bba8"
+    },
+    "output/save-exists.pcm": {
+      "bytes": 6400,
+      "sha256": "878ccb65ebd8ef4fe04edc89d75901491b442c30acf0fee12939d8bc6d944251"
+    },
+    "output/save-exists.save": {
+      "bytes": 46,
+      "sha256": "9d10d226c4b0c0f0f72eabf4021f3afa36fa6eafaa907f180d7b3c5eb3fffabe"
+    },
+    "output/schema-process.json": {
+      "bytes": 1558,
+      "sha256": "94f1a8fcd6e8ce2191b35961da6b50cb4b699f725bfc6e8fbf2365e28f134d79"
+    },
+    "output/schema-refusal.json": {
+      "bytes": 1624,
+      "sha256": "a098695790a8e0e5bea32350a379deb6787fceea01e4e3c85a35c6648c532ca7"
+    },
+    "output/schema.save": {
+      "bytes": 1162,
+      "sha256": "d438a2ebc7e71c70d4dca6bcee1956d57ef832f8e48de659119b088f1b086be1"
+    },
+    "packet-self-inclusion-failure.json": {
+      "bytes": 3315,
+      "sha256": "f970b87b876bf61c96eafd42f75f9faea3f287d97fe391aef93805f970f89c7f"
+    },
+    "packet.json": {
+      "bytes": 3515,
+      "sha256": "23d788edadbda1e4287faef5af00758a69c1659f0fe51434e828fd6b68255071"
+    },
+    "plan.json": {
+      "bytes": 4585,
+      "sha256": "466caf1f05a545a9ed774d250633216db5a40b3c54d923262c260f301f7fa33f"
+    },
+    "portable-00.log": {
+      "bytes": 2582,
+      "sha256": "a85da4551553a7ee430c8c8dd7e7409d5fdb543b4fada55d0bfcd55fed231244"
+    },
+    "portable-01.log": {
+      "bytes": 113,
+      "sha256": "c9811dcd7d51683ba5e61910b5aa26e91e8766a287b6a6f52a04bac8ac9f3a3d"
+    },
+    "portable-02.log": {
+      "bytes": 101,
+      "sha256": "27c4a39d34ece4cbc66cc59cb0870c7abe4cc0a5f009205bdd0ea06a93f8b3ac"
+    },
+    "portable-03.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "portable-04.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "portable-05.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "portable-checks.json": {
+      "bytes": 1866,
+      "sha256": "6d92b9153ea5fc4f51106a01796e97c692e4529d98b8b9b0f25aa35d19973bf0"
+    },
+    "preparation-correction.json": {
+      "bytes": 627,
+      "sha256": "089c16e79330fa8a64be7acbe495c98c1d2193578f8e4b953f8c0dda2910a955"
+    },
+    "prepare.py": {
+      "bytes": 8737,
+      "sha256": "8de41d4a1fb20032ec3734afe9eb41764f2683c82080fc9de2906b1e33319310"
+    },
+    "provenance.json": {
+      "bytes": 675,
+      "sha256": "684e00dfb2fe8651a804ac029dc08e5207c74034fc32223b473b7b7037e688f0"
+    },
+    "result.json": {
+      "bytes": 37475,
+      "sha256": "f45680fc20d3b0cb4ff4dc043760a36c4887aa22500fef91046a97c4e1091e72"
+    },
+    "reviewed-cooker-compatibility.json": {
+      "bytes": 4445,
+      "sha256": "e55d54685837a4df91fa071af59a04f45bc81d4576bb04d3250fd972e9f944ed"
+    },
+    "reviewed-proposal.json": {
+      "bytes": 5790,
+      "sha256": "c3fd87517a711af36d653d6facfc8752dfa3ae2d7a4d93baaa81774905ecd026"
+    },
+    "reviewed-proposal.md": {
+      "bytes": 5804,
+      "sha256": "2549f2c7e73c23ccd837891c67cd7ada40be0d43f67434a08da224004db11780"
+    },
+    "root-grant.json": {
+      "bytes": 616,
+      "sha256": "61bf3fd6d6ca290d66dae5e787eafcb07d0da955a671762990110f4a3aa32e5b"
+    },
+    "root-independent-review.json": {
+      "bytes": 312,
+      "sha256": "789b8a3467bbdaf5b3d79b79bf86e4410186046c9ea330f25cd0d01c9c85ded9"
+    },
+    "run.py": {
+      "bytes": 399,
+      "sha256": "57c9711a2132d569ea52398d034e20689eceea4bbfefde7021195a9b0757636b"
+    },
+    "source.diff": {
+      "bytes": 65951,
+      "sha256": "26062955aeabb016a6533fca3bf5e450f8d347d9525b793af5f3a762688d98e6"
+    },
+    "source.json": {
+      "bytes": 4894578,
+      "sha256": "b8b2e6019f3b50d51c8b65de8ff8e17ea7f2730789ad84f224c32fed8cc0e6f5"
+    },
+    "source/crates/incant_wasm_abi/src/audio.rs": {
+      "bytes": 7517,
+      "sha256": "a8710c0f2ffec0901694533a68aef33210b13533af7561d7a298e3f9aebbabef"
+    },
+    "source/crates/incant_wasm_abi/src/hud.rs": {
+      "bytes": 7578,
+      "sha256": "d3180fb882926c0a3a8db4dc10900de9c8005123545d7141b493f86357823c71"
+    },
+    "source/crates/incant_wasm_abi/src/lib.rs": {
+      "bytes": 276677,
+      "sha256": "8f6e49368f9f18b25b7af59221b1e65a82481249044b1be938d38f9c74434303"
+    },
+    "source/crates/incant_wasm_abi/src/light.rs": {
+      "bytes": 1859,
+      "sha256": "dd326e48913f6db08089dcbc0bf9bf0c23a4ac36f27d61693d5f6dce5b8fdba2"
+    },
+    "source/crates/incant_wasm_abi/src/localization.rs": {
+      "bytes": 17120,
+      "sha256": "8192b4afdbec79000c2fa52fb54425a7e30cffd5a20e44a8d9ea10edaef2eb62"
+    },
+    "source/crates/incant_wasm_abi/src/navigation_paths.rs": {
+      "bytes": 7399,
+      "sha256": "b4cad03e82af1644bf4b6ad536e9addf298e8da8268ffa5b4d5e98320d5a3c87"
+    },
+    "source/crates/incant_wasm_abi/src/persistent.rs": {
+      "bytes": 3970,
+      "sha256": "ef35aa16f2422068a156a97ea8b8d2241f2c03e7a12d7b569eba1bcde9b010dd"
+    },
+    "source/crates/incant_wasm_abi/src/physics.rs": {
+      "bytes": 8613,
+      "sha256": "e37093d0c5b0532888f1f356d6f1cdfa1339e83a2fa7dfbc3fd48e874ba58064"
+    },
+    "source/crates/incant_wasm_abi/src/steering.rs": {
+      "bytes": 10284,
+      "sha256": "06e6b3668577fbc26ceb39957e9f2ed448d7214e62737028c52c108646b27c41"
+    },
+    "source/sdk/abi/native-v1.json": {
+      "bytes": 58520,
+      "sha256": "26b0262f4a4235eb0f229fd498d92b302e5f4cda453b27a49af75408fb9985e0"
+    },
+    "source/sdk/rust/src/animation.rs": {
+      "bytes": 10857,
+      "sha256": "289cae8d4665c2ab66ab0884622393fe594ce0d13116209acecd5e61e3ec5ad2"
+    },
+    "source/sdk/rust/src/animation_graph.rs": {
+      "bytes": 6594,
+      "sha256": "b2a742fcd9730f744fd378dbd38b8e2bab46d546dfb3c49daa5411bf7ed8c7f0"
+    },
+    "source/sdk/rust/src/animation_graph_v2.rs": {
+      "bytes": 3549,
+      "sha256": "866ed963160e6432c7985547bd87982f26950e4a395550123d7a681367aa6287"
+    },
+    "source/sdk/rust/src/animation_ik.rs": {
+      "bytes": 4712,
+      "sha256": "cff5169c4ac16aa6c0e525fca7a09ae2679c2c37237fe871268d1c678581e45e"
+    },
+    "source/sdk/rust/src/animation_ik_v2.rs": {
+      "bytes": 4104,
+      "sha256": "390abc914e4e47e9a647b65920754d19f4c31e364ae3071d64a18776f893c5b9"
+    },
+    "source/sdk/rust/src/animation_pose.rs": {
+      "bytes": 10382,
+      "sha256": "6f8eb5478fa6a836b4d62ace10375e819c002201291b5e37212a6a7c9c7bf335"
+    },
+    "source/sdk/rust/src/animation_pose_v5.rs": {
+      "bytes": 13485,
+      "sha256": "7653447a44545127c2ee8e04d8122e93d20d7f401e1e24d4b100022811627994"
+    },
+    "source/sdk/rust/src/audio.rs": {
+      "bytes": 5303,
+      "sha256": "2dd79da0f7e468a64bd7acdb9763c1a1226abc49693f9c9b52ba5019c7118ef2"
+    },
+    "source/sdk/rust/src/flipbook.rs": {
+      "bytes": 2161,
+      "sha256": "4432747e8707e044aa63f6d22d679d1b88aec720805219d8d1f891c0e9969e65"
+    },
+    "source/sdk/rust/src/hud.rs": {
+      "bytes": 2594,
+      "sha256": "908486a75c13368e76aa9aabbf85f4e07b16213e907c92e05800290aeaa7181c"
+    },
+    "source/sdk/rust/src/input.rs": {
+      "bytes": 14622,
+      "sha256": "b088d9f4fe099abcf0247167e026193531bac854551103fff41b628be8bdbb63"
+    },
+    "source/sdk/rust/src/lib.rs": {
+      "bytes": 4714,
+      "sha256": "4c2d0bd17ace80c3757abd744d81385d53624255c153407c95c48878051fe978"
+    },
+    "source/sdk/rust/src/light.rs": {
+      "bytes": 943,
+      "sha256": "1c7ed84c43e7efd17102dbf123b1f65c884810498d5a2b3bc756ea7881e03982"
+    },
+    "source/sdk/rust/src/localization.rs": {
+      "bytes": 840,
+      "sha256": "ce245273fc4d5bfef18067ca32c839ef971a3cfa299d6d22674e26386ec7c6f9"
+    },
+    "source/sdk/rust/src/navigation.rs": {
+      "bytes": 902,
+      "sha256": "09fe00fa737c1aa4e066a25b63c9a0be2fc3c108188fc3b288faffa6c7698de4"
+    },
+    "source/sdk/rust/src/persistent.rs": {
+      "bytes": 2147,
+      "sha256": "cdc10bbbf0a2dd11095e90d6d91b74dd8cac990b1c7e4e847d4d8ee33bdb65ef"
+    },
+    "source/sdk/rust/src/physics.rs": {
+      "bytes": 7187,
+      "sha256": "9daecf44e1046dbfb34c7f124dc882c471afb0d0b980ebc9724ba2e1d1b79cbc"
+    },
+    "source/sdk/rust/src/raw.rs": {
+      "bytes": 28024,
+      "sha256": "6ca14d4a68e4075a16592c0a37db1ace5f55c12a416cc5a0c5d09466aaa9bebe"
+    },
+    "source/sdk/rust/src/root_motion.rs": {
+      "bytes": 8120,
+      "sha256": "efc059dac0da6d6f617e225b1ed2bac6bd49062839719daf6df320975ca355e7"
+    },
+    "source/sdk/rust/src/steering.rs": {
+      "bytes": 694,
+      "sha256": "6fa5caf31faa1291db6bb1048bdc689e01d681b36995ee4390c41bfc87bb3ef8"
+    },
+    "source/sdk/rust/src/tick.rs": {
+      "bytes": 33018,
+      "sha256": "7116ecad00a36344545b8b33660d21fac4f41a0a606de595b9f0403e8d1d6060"
+    },
+    "source/sdk/rust/src/tick/audio.rs": {
+      "bytes": 3026,
+      "sha256": "1b73c7de28ba59cab7dc75c9971540e06f694319e60d15113e1d9b2aa3190506"
+    },
+    "source/sdk/rust/src/tick/compound.rs": {
+      "bytes": 3798,
+      "sha256": "674f853fa96e3d4fdfe91c01040c2a00d57f96f10486a5f119cb334d78f3ee61"
+    },
+    "source/sdk/rust/src/tick/hud.rs": {
+      "bytes": 2233,
+      "sha256": "970bab9570712c8c2a263ab90b27bc82c24c99f27012655a77542317297953db"
+    },
+    "source/sdk/rust/src/tick/ik.rs": {
+      "bytes": 2583,
+      "sha256": "d3d3461e1d6d6f69e22eddad6cba86678e84f29ae114869426f056e92f0e1c29"
+    },
+    "source/sdk/rust/src/tick/light.rs": {
+      "bytes": 1861,
+      "sha256": "d4055d62be3571b41f47f137522fa74d5fcc9a0fe13ba6626e020b48346540a2"
+    },
+    "source/sdk/rust/src/tick/persistent.rs": {
+      "bytes": 1859,
+      "sha256": "8b853dc0d0170792c2291abf170d7e887e2929471d69b4c2f73b9d0136367896"
+    },
+    "source/sdk/rust/src/tick/root_motion.rs": {
+      "bytes": 2504,
+      "sha256": "87d402516e73b43f6763ab639b38aa0743fc816576b207cc5159788a9e3abd76"
+    },
+    "source/tools/export_native.py": {
+      "bytes": 18989,
+      "sha256": "c9e5b0ac01d6870587c81f8cf81a9706db04b161c7aa261039d373a48e8eae08"
+    },
+    "source/tools/probes/native-wasm-checkpoint-export.py": {
+      "bytes": 8726,
+      "sha256": "a338504c02fa70f6f7c1302cf61622bf16b2452338f2d74690146a7100acb326"
+    },
+    "source/tools/probes/native_wasm_checkpoint/fixture.py": {
+      "bytes": 2266,
+      "sha256": "84fda08870e88422b971e34a020551ad53d2e829ac1daf946b08ec7682ec9ef6"
+    },
+    "source/tools/probes/native_wasm_checkpoint/guest.rs": {
+      "bytes": 2720,
+      "sha256": "b2ef5c397188430fa3ede54363e1a0d3eee728989436872c11ffde367837f416"
+    },
+    "source/tools/probes/native_wasm_checkpoint/oracle.py": {
+      "bytes": 7764,
+      "sha256": "1805f6cf1915548c3298d0911034b9f94029a3978628959398e62b021f0ab167"
+    },
+    "source/tools/probes/native_wasm_checkpoint/owner.py": {
+      "bytes": 2020,
+      "sha256": "cf0a9bbaa44ddd59460e6cd4766311aa3f1c2e2e06746e322d704a9424c01a00"
+    },
+    "source/tools/probes/native_wasm_checkpoint/replay.py": {
+      "bytes": 12307,
+      "sha256": "090500720ab45bd3bb86e7ab71cf30e34feaa099d4d14361b0b54dd45ab23d42"
+    },
+    "source/tools/probes/native_wasm_checkpoint/route.py": {
+      "bytes": 12161,
+      "sha256": "dd1e960eab8b552c58ec42a005399301356b120b6eab87b8cad319738989b6c6"
+    },
+    "source/tools/probes/native_wasm_restart/owner.py": {
+      "bytes": 13688,
+      "sha256": "216a83867f05ff28fc519af7ab0eef2a6626c86093d47e84fe343bdb1db2076c"
+    },
+    "source/tools/rust_guest.py": {
+      "bytes": 3888,
+      "sha256": "a01641b59eb8d39e9cd4de58d1a59e3aec97b19179ba52793623a42a725dd5cc"
+    },
+    "source/tools/shipping_symbols.py": {
+      "bytes": 10896,
+      "sha256": "8d2540825ac778cc20c4e67243acd0c086633f6b07f1b9cef543173708069e0a"
+    },
+    "terminal-closeout.json": {
+      "bytes": 37623,
+      "sha256": "dccd788ac9fa235390aabcaf8e19f7445b37ec5df1304ebbb0219e91f505b44b"
+    },
+    "tools.json": {
+      "bytes": 20954,
+      "sha256": "7432ab106cd04325870da5844263b88b4d5996927c784c9254b9e3bcaac10db4"
+    },
+    "wrapper-started.json": {
+      "bytes": 140,
+      "sha256": "f1504c35076bf3d4d0e8c2536f72aba9270fcbb528abf5f3774c3470902e0a26"
+    }
+  },
+  "result": {
+    "checkpoint_and_pcm_exact": true,
+    "corrected_verifier_source": "350702062dbd2b84514dfbe1fe0ef1ec2811e215",
+    "data_revalidation_passed": true,
+    "external_artifact_bytes_rechecked": false,
+    "filesystem_process_absence_reobserved": false,
+    "native_commands_repeated": 0,
+    "native_source": "b733a36623790b076b049763878c06dd5ab09450",
+    "original_native_exit": 1,
+    "performance_or_phase_gate": false,
+    "player_sha256": "21df50b0b213b0714e22169d03180b60290a22120dc7211f8108ceb04bdb14bb",
+    "positive_processes": 4,
+    "precise_refusals": 6,
+    "recorded_absent_pids": 542
+  },
+  "verifier": {
+    "tools/export_native.py": {
+      "bytes": 18989,
+      "sha256": "c9e5b0ac01d6870587c81f8cf81a9706db04b161c7aa261039d373a48e8eae08"
+    },
+    "tools/probes/native_wasm_checkpoint/fixture.py": {
+      "bytes": 2266,
+      "sha256": "84fda08870e88422b971e34a020551ad53d2e829ac1daf946b08ec7682ec9ef6"
+    },
+    "tools/probes/native_wasm_checkpoint/oracle.py": {
+      "bytes": 7764,
+      "sha256": "1805f6cf1915548c3298d0911034b9f94029a3978628959398e62b021f0ab167"
+    },
+    "tools/probes/native_wasm_checkpoint/portable.py": {
+      "bytes": 11975,
+      "sha256": "20fa47f2ee2861c140e1f8449c489fa2917d9d2960d3c78c43afecad54a08570"
+    },
+    "tools/probes/native_wasm_checkpoint/replay.py": {
+      "bytes": 14396,
+      "sha256": "47cb4bb3696ab6c0c01c21e088bc8e4f48cb51eb56a41d8c092fd18b3d633f3b"
+    },
+    "tools/probes/native_wasm_checkpoint/route.py": {
+      "bytes": 12161,
+      "sha256": "dd1e960eab8b552c58ec42a005399301356b120b6eab87b8cad319738989b6c6"
+    },
+    "tools/probes/native_wasm_restart/verify.py": {
+      "bytes": 6259,
+      "sha256": "69f774379777d3ec8731dd80913e7ebe42961c217d4a65a88c8268b327d0988b"
+    },
+    "tools/tests/test_native_wasm_checkpoint_portable.py": {
+      "bytes": 6879,
+      "sha256": "e3e345e435bc924442e33f701bb0d06d64c59814f12a7dfd249c17f42b364b95"
+    }
+  }
+}
