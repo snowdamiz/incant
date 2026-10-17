@@ -80,6 +80,24 @@ fn skipped_repeated_or_post_display_steps_cannot_be_reported_as_valid() {
 fn ordinary_attempt_serialization_omits_batch_metadata() {
     let mut model = Model::new(1).unwrap();
     model.begin(Role::Gameplay, 1, 1, Some(1));
-    let value = serde_json::to_value(&model.attempts[0]).unwrap();
+    let value = serde_json::to_value(model.attempts[0]).unwrap();
     assert!(value.get("batch").is_none());
+}
+
+#[test]
+fn idle_refresh_repeats_committed_step_without_claiming_another_simulation_admission() {
+    let mut model = scheduled(2);
+    model.batch_accept(42, false);
+    model.batch_accept(43, true);
+    model.complete(Status::HostCommitted, Some(50));
+    model.host_finished(Some(55));
+    model.begin(Role::Committed, 2, 43, Some(60));
+    model.reserved(Some(65));
+    assert_eq!(model.context().unwrap().2, 43);
+    model.complete(Status::RefreshCompleted, Some(70));
+    let idle = &model.attempts[1];
+    assert_eq!(idle.requested_host_step, 43);
+    assert!(idle.batch.is_none());
+    assert!(idle.host_timing.schedule.is_none());
+    assert_eq!(model.timing_errors, 0);
 }

@@ -9,6 +9,7 @@ pub(in crate::window) enum Role {
     Background,
     UiResize,
     Gameplay,
+    Committed,
 }
 #[derive(Clone, Copy, Debug, Serialize)]
 #[repr(u8)]

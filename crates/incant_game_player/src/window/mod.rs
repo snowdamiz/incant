@@ -421,6 +421,7 @@ pub fn run(
     let mut generation = 1u64;
     let mut host_steps = 0u64;
     let mut gameplay_presentations = 0u64;
+    let mut idle_presentations = 0u64;
     let mut controls = crate::restart::InputFence::default();
     let mut suspended = true;
     let mut focused = window.is_focused();
@@ -836,6 +837,53 @@ pub fn run(
                         #[cfg(all(feature = "native-presentations", target_os = "macos"))]
                         let dropped_before = clock.dropped;
                         let due = if suspended { 1 } else { clock.due(now) };
+                        // A display callback is a render opportunity even when
+                        // no fixed simulation step is due. Keep the committed pose
+                        // and queued input; this is not pose interpolation.
+                        if batch_latest && wake_mode.selected() && due == 0 && !suspended {
+                            #[cfg(feature = "profile")]
+                            cadence.interrupt();
+                            #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+                            surface.presentation_attempt(Role::Committed, generation, host_steps);
+                            if !reserve_observed(
+                                &mut surface,
+                                &renderer,
+                                &mut state_log,
+                                #[cfg(all(feature = "native-compilation", target_os = "macos"))]
+                                &compilation,
+                            )? {
+                                gamepads.pause_haptics()?;
+                                game.set_suspended(true)?;
+                                suspended = true;
+                                if has_ui {
+                                    ui_input.defer_surface();
+                                } else {
+                                    input.reset_focus(focused);
+                                    gamepads.discard_pending();
+                                }
+                                clock.reset(now);
+                                retry = now + Duration::from_millis(50);
+                                return Ok(());
+                            }
+                            #[cfg(all(feature = "native-compilation", target_os = "macos"))]
+                            let mut idle_compilation =
+                                compilation_scope!(Background, generation, host_steps);
+                            let result = crate::profile::presentation(|| game.refresh_host());
+                            let consumed = surface.consumed();
+                            surface.cancel();
+                            result?;
+                            if !consumed {
+                                return Err(Error::Reservation.into());
+                            }
+                            #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+                            surface.presentation_complete(Status::RefreshCompleted);
+                            ui_input.presented(game.host()?.ui(), &mut input)?;
+                            #[cfg(all(feature = "native-compilation", target_os = "macos"))]
+                            compilations::commit(&mut idle_compilation);
+                            redraw_pending = false;
+                            presentation_refreshes += 1;
+                            idle_presentations += 1;
+                        }
                         for _tick_index in 0..due {
                             #[cfg(all(feature = "native-compilation", target_os = "macos"))]
                             let mut tick_compilation = compilation_scope!(
@@ -1161,6 +1209,8 @@ pub fn run(
             report["native_batch"] = serde_json::json!({
                 "mode":"latest", "simulation_steps":host_steps,
                 "gameplay_presentations":gameplay_presentations,
+                "idle_presentations":idle_presentations,
+                "interpolated_poses":false,
                 "intermediate_admissions":host_steps - gameplay_presentations,
                 "maximum_ticks_per_batch":clock::MAX_CATCH_UP,
                 "diagnostic_only":true,"performance_gate_passed":false
