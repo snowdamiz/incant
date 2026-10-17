@@ -1,11 +1,11 @@
 # Implementation status
 
-Checkpoint49 is held after the normal headless binary failed to compile on
-Mac, Linux and Windows: the new coroutine schema registrations referenced a
-test-only dependency. Moving that existing dependency to normal scope passes
-the actual local binary build, all 80 published-schema comparisons and strict
-headless lint. The full release suite must still pass on a corrected frozen
-candidate. [Cause and local verification](docs/spikes/headless-schema-dependency.md).
+[Release checkpoint50](docs/spikes/release-checkpoint-50.md) is promoted: all
+23 required contexts and eight exact-head workflows passed on the main376 tree,
+and the release merge has the same tree. This verifies the normal headless
+dependency repair that blocked checkpoint49 on Mac, Linux and Windows.
+The failed batch remains historical. Main changes after PR376 retain separate
+local qualification and are outside this release baseline.
 
 The current phase remains **Phase 1: Core engine**. The
 [Phase 1 review ledger](docs/gates/phase1-review.md) maps each exit requirement to
@@ -16,8 +16,8 @@ now also verifies winning HUD pixels, Arabic health direction, CJK glyphs and
 normal/narrow pseudo layouts in retained offscreen Metal frames. Earlier
 incomplete native-window attempts remain historical; these samples do not
 establish continuous motion, window presentation or FPS.
-[release checkpoint48](docs/spikes/release-checkpoint-48.md) contains the tested
-main367 tree after all 23 required contexts and eight candidate workflows passed.
+[release checkpoint50](docs/spikes/release-checkpoint-50.md) contains the tested
+main376 tree after all 23 required contexts and eight candidate workflows passed.
 Later main changes remain outside that release baseline. Rendering quality and full rendered-game
 performance remain open. The reported jagged editor cube now has explicit 4x
 geometry antialiasing, verified in the actual Mac editor and isolated Metal
@@ -65,6 +65,23 @@ A fresh process reopens the journal at the final revision. All six children exit
 successfully and were reaped. This adds functional native-window evidence; no
 GUI clicks, captured pixels, appearance, shipping performance or phase approval
 is claimed. [Producing source and raw records](docs/spikes/live-material-binding-refresh.md#actual-native-window-material-workflow).
+
+## Native hierarchy — shortcuts, history, focus and reopening verified
+
+The main380-equivalent editor passed Cmd+D and context-menu Duplicate, Undo/Redo,
+Delete followed by arrow-key focus recovery, busy-save refusal, completed Save
+and fresh-process reopening on the unlocked Mac. The saved revision 8 retains
+the unchanged original entities and exactly one copied subtree with the same
+IDs and parent relation. Intermediate UI behavior is supported by contemporaneous
+accessibility observation notes; retained RPC output verifies final persistence.
+[Scope and portable records](docs/spikes/native-hierarchy-window.md).
+
+Work resumed October 17 after the pause. The intervening authorized disk cleanup
+removed old worktrees, binaries and temporary captures; Git branches, source
+patches and selected text records were recovered. Those historical runs are not
+relabeled as new executions. Parallel Wasm saved-state, native frame attribution
+and reconstruction work continues from recovered source, with fresh builds where
+needed. Rendering quality, 60 fps, the 2 ms script budget and phase gates remain open.
 
 ## Sampled Core locale pixels — verified on this Mac
 
@@ -467,16 +484,16 @@ Play restrictions remain explicit.
 All 1,025 UI tests, generated transport, TypeScript, production UI and native
 editor builds pass; the real host transaction control also passed on main342
 composition. Claude's browser fixture review remains separate from native proof.
-The actual Mac interaction attempt showed a blank client while OS inspection
+The first actual Mac interaction attempt showed a blank client while OS inspection
 confirmed the desktop was locked; the editor was stopped and its project stayed
-unchanged. Actual native shortcut/menu, Undo/Redo and reopening checks remain
-pending an unlocked desktop. [Evidence and limits](docs/spikes/editor-subtree-duplicate.md).
+unchanged. A later unlocked-desktop run now verifies native shortcut/menu,
+Undo/Redo and reopening. [Native evidence and limits](docs/spikes/native-hierarchy-window.md).
 
 Focused-row removal now restores the hierarchy's keyboard entry point to a
 surviving row while preserving selection intent, other focus owners and
 project/bridge boundaries. All 1,040 UI tests, TypeScript and the production UI
 build pass; Delete and duplicate/Undo DOM controls include virtualized recovery.
-Actual native keyboard interaction remains pending the unlocked desktop.
+The later native run verifies Delete/Undo and subsequent arrow-key interaction.
 [Focus-recovery evidence](docs/spikes/editor-hierarchy-focus-recovery.md).
 
 ## Ordinary subtree duplication — command and persistence qualified
