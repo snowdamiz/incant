@@ -1,5 +1,9 @@
 # Hierarchy keyboard focus after entity removal
 
+Follow-up: the [October 16 native hierarchy workflow](native-hierarchy-window.md)
+now verifies Delete/Undo and subsequent arrow navigation on the unlocked Mac.
+The DOM qualification and earlier desktop constraint below remain historical.
+
 Scope: editor DOM keyboard correctness after Delete, another hierarchy edit or
 Undo removes the focused row. This is separate from the command-bus deletion and
 duplication implementation and from native interaction qualification.

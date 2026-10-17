@@ -188,6 +188,18 @@ impl SurfaceState {
         let size = self.window.inner_size();
         supported_size(size.width, size.height)
     }
+    #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+    pub fn presentation_new_events(&mut self, cause: tao::event::StartCause) {
+        if let Some(capture) = &mut self.capture {
+            capture.new_events(cause, std::time::Instant::now());
+        }
+    }
+    #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+    pub fn presentation_pulse(&mut self, at: std::time::Instant) {
+        if let Some(capture) = &mut self.capture {
+            capture.pulse(at);
+        }
+    }
     pub fn reserve(&mut self, renderer: &Renderer) -> Result<bool, Error> {
         if self.slot.borrow().is_some() {
             #[cfg(all(feature = "native-presentations", target_os = "macos"))]
@@ -231,7 +243,24 @@ impl SurfaceState {
             if let Some(capture) = &mut self.capture {
                 capture.bind(&self.surface)?;
             }
+            #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+            if let Some(capture) = &mut self.capture {
+                capture.acquisition_begin();
+            }
             let current = self.surface.get_current_texture();
+            #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+            if let Some(capture) = &mut self.capture {
+                use super::presentations::AcquisitionOutcome as A;
+                capture.acquisition_end(match &current {
+                    wgpu::CurrentSurfaceTexture::Success(_) => A::Success,
+                    wgpu::CurrentSurfaceTexture::Suboptimal(_) => A::Suboptimal,
+                    wgpu::CurrentSurfaceTexture::Timeout => A::Timeout,
+                    wgpu::CurrentSurfaceTexture::Occluded => A::Occluded,
+                    wgpu::CurrentSurfaceTexture::Outdated => A::Outdated,
+                    wgpu::CurrentSurfaceTexture::Lost => A::Lost,
+                    wgpu::CurrentSurfaceTexture::Validation => A::Validation,
+                });
+            }
             #[cfg(all(feature = "native-presentations", target_os = "macos"))]
             if self.capture.is_some() {
                 Capture::unbind(&self.surface)?;
