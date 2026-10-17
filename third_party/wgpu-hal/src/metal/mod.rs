@@ -19,9 +19,9 @@ end of the VS buffer table.
 // TODO: Eventually all deprecated features should be abstracted and use new api when available.
 #[allow(deprecated)]
 mod adapter;
-mod command;
 #[cfg(all(feature = "metal-binary-archives", target_os = "macos"))]
 pub mod binary_archive;
+mod command;
 #[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
 pub mod compilation;
 #[cfg(all(feature = "diagnostic-compilation", target_os = "macos"))]
@@ -29,6 +29,10 @@ mod compilation_native;
 mod conv;
 mod device;
 mod library_from_metallib;
+#[cfg(all(feature = "diagnostic-minimum-duration", target_os = "macos"))]
+pub mod minimum_duration;
+#[cfg(all(feature = "diagnostic-minimum-duration", target_os = "macos"))]
+mod minimum_duration_policy;
 #[cfg(all(feature = "diagnostic-presentations", target_os = "macos"))]
 pub mod presentation;
 #[cfg(all(feature = "diagnostic-presentations", target_os = "macos"))]
@@ -517,6 +521,8 @@ pub struct Device {
 }
 
 pub struct Surface {
+    #[cfg(all(feature = "diagnostic-minimum-duration", target_os = "macos"))]
+    minimum_duration: minimum_duration_policy::State,
     #[cfg(all(feature = "diagnostic-presentations", target_os = "macos"))]
     presentation_observation: Mutex<Option<presentation::Observation>>,
     render_layer: Mutex<Retained<CAMetalLayer>>,
@@ -529,6 +535,8 @@ unsafe impl Sync for Surface {}
 
 #[derive(Debug)]
 pub struct SurfaceTexture {
+    #[cfg(all(feature = "diagnostic-minimum-duration", target_os = "macos"))]
+    minimum_duration: minimum_duration::Policy,
     #[cfg(all(feature = "diagnostic-presentations", target_os = "macos"))]
     presentation: Option<presentation::Ticket>,
     texture: Texture,
@@ -623,6 +631,12 @@ impl crate::Queue for Queue {
         _surface: &Surface,
         texture: SurfaceTexture,
     ) -> Result<(), crate::SurfaceError> {
+        #[cfg(all(feature = "diagnostic-minimum-duration", target_os = "macos"))]
+        if texture.minimum_duration.seconds().is_some() && texture.present_with_transaction {
+            return Err(crate::SurfaceError::Other(
+                "minimum duration transaction presentation refused",
+            ));
+        }
         autoreleasepool(|_| {
             // We do not bother adjusting `command_buffer_created_not_submitted`
             // because we immediately commit this buffer.
@@ -636,6 +650,17 @@ impl crate::Queue for Queue {
 
             // https://developer.apple.com/documentation/quartzcore/cametallayer/1478157-presentswithtransaction?language=objc
             if !texture.present_with_transaction {
+                #[cfg(all(feature = "diagnostic-minimum-duration", target_os = "macos"))]
+                if let Some(duration) = texture.minimum_duration.seconds() {
+                    // Same command buffer, queue ordering and callback owner.
+                    // A minimum previous display residence is not a CPU sleep
+                    // or an exact presentation deadline. Commit still follows.
+                    command_buffer
+                        .presentDrawable_afterMinimumDuration(&texture.drawable, duration);
+                } else {
+                    command_buffer.presentDrawable(&texture.drawable);
+                }
+                #[cfg(not(all(feature = "diagnostic-minimum-duration", target_os = "macos")))]
                 command_buffer.presentDrawable(&texture.drawable);
             }
 

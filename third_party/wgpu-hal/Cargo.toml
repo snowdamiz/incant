@@ -52,6 +52,8 @@ ignored = ["cfg_aliases"]
 [features]
 # Incant private diagnostic only; off in all normal feature graphs.
 diagnostic-presentations = ["objc2-metal?/objc2-core-foundation"]
+# Explicit fixed-duration native experiment; no normal export enables it.
+diagnostic-minimum-duration = ["objc2-metal?/objc2-core-foundation"]
 diagnostic-compilation = []
 # Incant native Metal interop; public PipelineCache remains Vulkan-only.
 metal-binary-archives = ["objc2-metal?/MTLBinaryArchive", "objc2-foundation?/NSURL", "objc2-foundation?/NSArray", "objc2-foundation?/NSDictionary"]

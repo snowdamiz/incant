@@ -38,6 +38,8 @@ frame-capture = ["render-gpu"]
 
 # Default-off trusted host drawable observation; never enabled by summary profiling.
 native-presentations = ["native-window", "dep:wgpu-hal", "wgpu-hal/diagnostic-presentations"]
+# Trusted explicit fixed-duration experiment. Never selected by ordinary exports.
+native-minimum-duration = ["native-window", "dep:wgpu-hal", "wgpu-hal/diagnostic-minimum-duration"]
 
 native-window = ["frame-capture", "incant_game_runtime/device", "dep:tao", "dep:pollster", "dep:gilrs"]
 # Trusted exporter opt-in; no project supplies executable shader artifacts.
