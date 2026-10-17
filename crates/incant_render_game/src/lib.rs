@@ -54,6 +54,10 @@ pub enum RenderHostError<E = Infallible> {
 /// caller's discretion. Preparation must actually validate/prepare its resources.
 /// A GPU implementation owns its target provider and acquires the current target
 /// inside `accept`; it must not return an unsubmitted mutable-resource snapshot.
+/// A trusted experimental scheduling policy may admit an intermediate state
+/// without presenting it. Such admission still validates/prepares all required
+/// resources; the host must distinguish committed simulation from actual display
+/// and present the final accepted state before a presentation boundary.
 ///
 /// `accept` runs inside NativeRenderInput's transaction. Preflight errors/unwind
 /// restore that CPU input, but cannot undo arbitrary external GPU/device effects.

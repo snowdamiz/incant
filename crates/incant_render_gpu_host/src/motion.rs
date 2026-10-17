@@ -52,6 +52,10 @@ impl<P: TargetProvider> TargetProvider for MotionTargets<P> {
     fn metalfx(&self) -> Option<crate::MetalFxSetup> {
         self.inner.metalfx()
     }
+    #[cfg(feature = "experimental-batched-presentation")]
+    fn presentation_mode(&self) -> crate::PresentationMode {
+        self.inner.presentation_mode()
+    }
     fn motion_epoch(&self) -> Option<u64> {
         Some(self.epoch.load(Ordering::Acquire))
     }

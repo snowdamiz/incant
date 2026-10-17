@@ -1,5 +1,7 @@
 //! Mandatory GPU consumer for a hosted native game. Targets are acquired inside
-//! each accepted sync, submitted immediately, then presented. No authoring path.
+//! each accepted sync, submitted immediately, then presented. An explicit
+//! experimental host policy can admit intermediate simulation states without
+//! acquiring a frame. No authoring path.
 //! Screen-space UI is admitted before any target is consumed and drawn over the
 //! finished world frame in the same target (incant_render `ui` contract).
 #[cfg(feature = "native-metalfx")]
@@ -10,6 +12,8 @@ mod motion;
 #[cfg(feature = "native-metalfx")]
 pub use metalfx::{MetalFxSettings, MetalFxSetup, MetalFxTargets};
 pub use motion::{MotionReset, MotionTargets};
+#[cfg(feature = "experimental-batched-presentation")]
+mod presentation;
 mod resolution;
 mod resolution_mailbox;
 use incant_render::resolution::{ResolutionConfig, ResolutionError, ResolutionFrame};
@@ -18,6 +22,8 @@ use incant_render_data::{SceneInput, UiInput};
 use incant_render_game::RenderInputConsumer;
 use incant_render_game::TextureRefreshConsumer;
 use incant_render_native::UpdateKind;
+#[cfg(feature = "experimental-batched-presentation")]
+pub use presentation::PresentationMode;
 pub use resolution::ResolutionTargets;
 use std::time::Instant;
 use std::{error::Error, sync::Arc};
@@ -38,6 +44,15 @@ pub trait TargetProvider {
     type Error: Error + 'static;
     type Frame: RenderFrame<Error = Self::Error>;
     fn acquire(&mut self, renderer: &Renderer) -> Result<Self::Frame, Self::Error>;
+    /// Trusted native scheduling only. Admission still validates every state and
+    /// retains compatible resources, but does not acquire or submit a target.
+    /// The host must select Present for the final accepted state (or call the
+    /// composition's terminal-safe refresh_host with Present before a boundary).
+    /// Neither a simulation tick nor admission implies a displayed frame.
+    #[cfg(feature = "experimental-batched-presentation")]
+    fn presentation_mode(&self) -> PresentationMode {
+        PresentationMode::Present
+    }
     /// Explicit opt-in policy, sampled once when this consumer is prepared.
     fn resolution_config(&self) -> Option<ResolutionConfig> {
         None
@@ -66,6 +81,11 @@ pub enum GpuHostError<E> {
     Failed,
     #[error("native GPU frame counter exhausted")]
     FrameLimit,
+    #[cfg(feature = "experimental-batched-presentation")]
+    #[error(
+        "batched admission is not qualified with motion, temporal or dynamic-resolution policies"
+    )]
+    BatchPolicy,
     #[error("dynamic resolution failed: {0}")]
     Resolution(#[from] ResolutionError),
 }
@@ -219,6 +239,12 @@ impl<P: TargetProvider> RenderInputConsumer for GpuRenderConsumer<P> {
         // run cleanup. The composite separately silences offline audio on failure.
         let mut live = self.live.take().ok_or(GpuHostError::Failed)?;
         self.renderer.check_device().map_err(GpuHostError::Render)?;
+        #[cfg(feature = "experimental-batched-presentation")]
+        if live.targets.presentation_mode() == PresentationMode::AdmitOnly {
+            self.admit_without_presenting(&mut live, input, camera, kind, ui)?;
+            self.live = Some(live);
+            return Ok(());
+        }
         if let Some(completion) = &mut live.completion
             && let Some((frame, elapsed)) = completion.take()?
             && !live
