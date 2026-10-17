@@ -61,6 +61,34 @@ fn parse(v: &Descriptor) -> Descriptor {
 }
 
 #[test]
+fn pgo_session_cc_evidence_setting_does_not_admit_compiler_overrides() {
+    use std::ffi::OsStr;
+    pgo::compiler_environment("CC_ENABLE_DEBUG_OUTPUT", OsStr::new("1")).unwrap();
+    pgo::compiler_environment("CC_ENABLE_DEBUG_OUTPUT", OsStr::new("")).unwrap();
+    for value in ["0", "true", "1 ", "-O3"] {
+        assert!(pgo::compiler_environment("CC_ENABLE_DEBUG_OUTPUT", OsStr::new(value)).is_err());
+    }
+    for key in [
+        "CC_ENABLE_DEBUG_OUTPUT_EXTRA",
+        "CC",
+        "CC_aarch64_apple_darwin",
+        "AR",
+        "CFLAGS",
+        "HOST_CFLAGS",
+        "CPPFLAGS",
+        "LLVM_PROFILE_FILE",
+        "RUSTFLAGS",
+        "CARGO_PROFILE_SHIPPING_OPT_LEVEL",
+    ] {
+        assert!(
+            pgo::compiler_environment(key, OsStr::new("1")).is_err(),
+            "{key}"
+        );
+        pgo::compiler_environment(key, OsStr::new("")).unwrap();
+    }
+}
+
+#[test]
 fn pgo_exact_profile_bytes_change_compatibility_while_relocation_does_not() {
     let temp = tempfile::tempdir().unwrap();
     let root = temp.path().canonicalize().unwrap();

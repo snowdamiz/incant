@@ -394,6 +394,42 @@ pub struct Selection {
     pub descriptor: Descriptor,
     path: PathBuf,
 }
+/// FreshSession enables this exact cc diagnostic sink for every mode. It emits
+/// command evidence without changing the C recipe; no other CC override follows
+/// from admitting it. Ambient callers are still refused by the outer probe.
+pub fn compiler_environment(key: &str, value: &std::ffi::OsStr) -> Result<()> {
+    if key == "CC_ENABLE_DEBUG_OUTPUT" {
+        return require(
+            value.is_empty() || value == std::ffi::OsStr::new("1"),
+            "exact cc diagnostic output setting",
+        );
+    }
+    let forbidden = key.starts_with("CFLAGS")
+        || key.ends_with("_CFLAGS")
+        || key.starts_with("CPPFLAGS")
+        || key.ends_with("_CPPFLAGS")
+        || matches!(
+            key,
+            "CC" | "AR"
+                | "HOST_CC"
+                | "TARGET_CC"
+                | "HOST_AR"
+                | "TARGET_AR"
+                | "RUSTFLAGS"
+                | "CARGO_ENCODED_RUSTFLAGS"
+                | "CARGO_CFG_SANITIZE"
+        )
+        || key.starts_with("LLVM_PROFILE_")
+        || key.starts_with("CARGO_PROFILE_")
+        || key.starts_with("CC_")
+        || key.starts_with("AR_")
+        || key.ends_with("_CC")
+        || key.ends_with("_AR");
+    require(
+        !forbidden || value.is_empty(),
+        "ambient compiler/profile override",
+    )
+}
 impl Selection {
     pub fn load(vendor: &Path) -> Result<Self> {
         let generate = env::var_os("CARGO_FEATURE_DIAGNOSTIC_QUICKJS_GENERATE").is_some();
@@ -409,31 +445,7 @@ impl Selection {
         )?;
         for (key, value) in env::vars_os() {
             let key = key.to_string_lossy();
-            let forbidden = key.starts_with("CFLAGS")
-                || key.ends_with("_CFLAGS")
-                || key.starts_with("CPPFLAGS")
-                || key.ends_with("_CPPFLAGS")
-                || matches!(
-                    key.as_ref(),
-                    "CC" | "AR"
-                        | "HOST_CC"
-                        | "TARGET_CC"
-                        | "HOST_AR"
-                        | "TARGET_AR"
-                        | "RUSTFLAGS"
-                        | "CARGO_ENCODED_RUSTFLAGS"
-                        | "CARGO_CFG_SANITIZE"
-                )
-                || key.starts_with("LLVM_PROFILE_")
-                || key.starts_with("CARGO_PROFILE_")
-                || key.starts_with("CC_")
-                || key.starts_with("AR_")
-                || key.ends_with("_CC")
-                || key.ends_with("_AR");
-            require(
-                !forbidden || value.is_empty(),
-                "ambient compiler/profile override",
-            )?;
+            compiler_environment(&key, &value)?;
             if key.starts_with("CARGO_FEATURE_") {
                 require(
                     !key.starts_with("CARGO_FEATURE_DUMP_")

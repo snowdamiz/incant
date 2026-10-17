@@ -4,6 +4,7 @@ import hashlib
 import json
 from pathlib import Path
 import shlex
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -171,6 +172,31 @@ class Protocol(unittest.TestCase):
             self.assertEqual(command[:2], ['cargo', 'rustc'])
             self.assertEqual('link-dead-code=yes' in command, mode == 'generate')
             self.assertIn('--print=link-args='+str(self.root/'link-args.txt'), command)
+
+    def test_real_session_injects_only_exact_cc_evidence_after_ambient_admission(self):
+        # Exercise the real FreshSession transport up to an intentional compiler
+        # refusal. No native command runs; the actual cc-only diagnostic setting
+        # must survive the PGO wrapper and must not mutate caller authority.
+        s = build.Session.__new__(build.Session)
+        s.root, s.path = self.root, self.target
+        s.target, s.split, s.deleted = p.TARGET, 'packed', False
+        s.builds, s.inputs = [], []
+        s.directory, s.mode = self.root, 'generate'
+        argv = ['cargo', 'build', '--profile', 'shipping', '--target', p.TARGET,
+                '--target-dir', str(self.target), '--config', 'profile.shipping.split-debuginfo="packed"',
+                '--locked', '--message-format=json', '-vv']
+        caller_env = {'PATH': '/pinned'}
+        seen = []
+        def execute(command, **options):
+            seen.append((command, options['env']))
+            return subprocess.CompletedProcess(command, 1, '', 'intentional no-compiler control')
+        build.environment(caller_env)
+        with patch.object(build.FreshSession, 'check_frozen'), self.assertRaisesRegex(ValueError, 'intentional no-compiler'):
+            s.build(argv, cwd=self.root, env=caller_env, execute=execute)
+        self.assertEqual(caller_env, {'PATH': '/pinned'})
+        self.assertEqual(seen[0][1], {'PATH': '/pinned', 'CC_ENABLE_DEBUG_OUTPUT': '1'})
+        with self.assertRaises(ValueError):
+            build.environment(seen[0][1])  # Still forbidden as ambient authority.
 
     def test_ambient_overrides_are_not_experiment_selection(self):
         build.environment({'PATH':'/pinned', 'SDKROOT':'/sdk'})
