@@ -73,8 +73,8 @@ controls, strict lints and 18 Python fixture/receipt controls. Real import,
 watcher, Undo/Redo, committed topology refusal, source recovery, continuing world,
 VM and animation, Step/Stop and fresh journal reopen all pass. Its six native
 processes and wrapper are reaped and independently absent. The scoped feature is
-locally qualified; publication is in progress. Skeleton and structural changes
-remain outside this admission rule.
+merged through PR390 after independent review and exact-head development checks.
+Skeleton and structural changes remain outside this admission rule.
 
 ## Native presentation pacing — bounded intervention rejected
 
@@ -883,21 +883,25 @@ endpoint-only cache is deprioritized. The [retained-data calculation](docs/spike
 binds its original raw record and uses same-frame subtraction before ranking;
 it is not a current shipping benchmark or proof that sub-2 ms is impossible.
 
-Last reassessment: 2026-10-17, source and compiler-toolchain inspection after
-work resumed. A [distinct PGO hypothesis](docs/spikes/evidence/script-budget-pgo-source-review.json)
-would use representative execution profiles to optimize the pinned QuickJS C
-interpreter. The shipping build already uses optimization level 3 and Rust fat
-LTO, but it has no explicit C profile training/use path. This is source research,
-not an implemented optimization or new timing result. Prior matrix-cache,
-typed-store, authored-loop, query and navigation results remain unchanged.
+Last reassessment: 2026-10-17, bounded standalone C-only execution of the
+[distinct QuickJS PGO hypothesis](docs/spikes/quickjs-c-pgo-feasibility.md).
+The fourth attempt passes actual training, profile consumption and held-out
+bytecode/C API behavior controls. Six compiler/profile refusal controls also
+pass, including stale control flow and missing function data. Earlier merge-
+argument, covered-name parser and nonfatal stale-warning failures remain retained.
+Root independently rechecked all 57 managed calls, 114 output streams, 14 artifacts
+and 58 observed process identities; cumulative attempt time is 79.673 seconds.
+This remains standalone feasibility, with no engine integration, representative
+Core training or measured speedup. The ordinary shipping configuration is
+unchanged. Prior matrix-cache, typed-store, authored-loop, query and navigation
+results remain unchanged.
 
-Next useful trigger: when a CPU lane is available after the current rendering
-and native-window work, run a bounded C-only feasibility check before considering
-a matched full-Core shipping comparison. Use one matching Clang/profile-tool
-version, keep training measurements separate, preserve the unchanged script
-workload and enforcement, and require exact gameplay/audio parity. No benefit is
-assumed, and the 2 ms target remains unmet. Reassess after relevant runtime changes
-or a few hours of active development without occupying every lane.
+Next useful trigger: bind the exact profile/tool identity to an opt-in QuickJS
+build and test representative full-Core training against a matched shipping
+baseline. Keep training measurements separate, preserve workload and enforcement,
+and require exact gameplay/audio parity. No benefit is assumed; the 2 ms target
+remains unmet. Reassess after relevant runtime changes or a few hours of active
+development without occupying every lane.
 
 ## Native Play texture refresh — merged through PR284
 
