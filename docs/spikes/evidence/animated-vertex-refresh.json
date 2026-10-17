@@ -1,0 +1,272 @@
+{
+  "format": "animated-vertex-refresh-cpu-manifest-v1",
+  "source": "4d0b4f5a26cfd9b64f8cbf4283aade3752795964",
+  "source_scope": "Native Rust and Cargo inputs frozen during working-patch qualification; committed unchanged afterward.",
+  "archive_sha256": "980362e6134b78d3d0c5260910df9668556876f7e11588e443213d809400afa2",
+  "archive_bytes": 766718,
+  "expanded_bytes": 2267291,
+  "record_count": 25,
+  "passed_counts": [
+    3,
+    4,
+    5,
+    12,
+    11,
+    7
+  ],
+  "passed_tests": 42,
+  "strict_lint_packages": [
+    "incant_render_native",
+    "incant_play"
+  ],
+  "attempts": [
+    {
+      "started": "2026-10-17T18:18:12.543004+00:00",
+      "wrapper_pid": 61170,
+      "source_head": "5bc29ab3a34364c3bc67e9f617de514f7e1c31b7",
+      "initial_target": 2370228224,
+      "target_cap": 6665195520,
+      "target_peak": 2780246016,
+      "calls": [
+        {
+          "argv": [
+            "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/cargo",
+            "test",
+            "--profile",
+            "ci",
+            "--locked",
+            "--offline",
+            "-j2",
+            "-p",
+            "incant_render_native",
+            "-p",
+            "incant_play",
+            "--test",
+            "animated_refresh",
+            "--test",
+            "model_refresh",
+            "--test",
+            "texture_refresh",
+            "--",
+            "--test-threads=1"
+          ],
+          "status": "started"
+        }
+      ],
+      "groups": [
+        61176
+      ],
+      "passed": false,
+      "quarantined_fingerprint_count": 95,
+      "rss_peak": 1674166272,
+      "error": "RuntimeError('Stopped or aggregate deadline')",
+      "seconds": 80.46892999997362,
+      "final_target": 2783019008,
+      "protected_headless_unchanged": true,
+      "source_unchanged": true,
+      "absent_groups": [
+        61176
+      ]
+    },
+    {
+      "started": "2026-10-17T18:20:12.810397+00:00",
+      "wrapper_pid": 62140,
+      "source_head": "5bc29ab3a34364c3bc67e9f617de514f7e1c31b7",
+      "initial_target": 2783019008,
+      "target_cap": 6665195520,
+      "target_peak": 2967760896,
+      "calls": [
+        {
+          "argv": [
+            "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/cargo",
+            "test",
+            "--profile",
+            "ci",
+            "--locked",
+            "--offline",
+            "-j2",
+            "-p",
+            "incant_render_native",
+            "-p",
+            "incant_play",
+            "--test",
+            "animated_refresh",
+            "--test",
+            "model_refresh",
+            "--test",
+            "texture_refresh",
+            "--",
+            "--test-threads=1"
+          ],
+          "status": "started"
+        }
+      ],
+      "groups": [
+        62149
+      ],
+      "passed": false,
+      "prior_attempt_seconds": 80.46892999997362,
+      "original_target_origin": 2370228224,
+      "rss_peak": 1444904960,
+      "error": "CalledProcessError(1, ['/usr/bin/du', '-sk', '/private/tmp/incant-wasm-persistent-shipping-20261017-target'])",
+      "seconds": 78.51506070897449,
+      "cumulative_seconds": 158.9839907089481,
+      "final_target": 2974801920,
+      "protected_headless_unchanged": true,
+      "source_unchanged": true,
+      "absent_groups": [
+        62149
+      ]
+    },
+    {
+      "started": "2026-10-17T18:27:16.147763+00:00",
+      "wrapper_pid": 64621,
+      "source_head": "5bc29ab3a34364c3bc67e9f617de514f7e1c31b7",
+      "initial_target": 2974801920,
+      "target_cap": 6665195520,
+      "target_peak": 3496943616,
+      "calls": [
+        {
+          "argv": [
+            "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/cargo",
+            "test",
+            "--profile",
+            "ci",
+            "--locked",
+            "--offline",
+            "-j2",
+            "-p",
+            "incant_render_native",
+            "-p",
+            "incant_play",
+            "--test",
+            "animated_refresh",
+            "--test",
+            "model_refresh",
+            "--test",
+            "texture_refresh",
+            "--",
+            "--test-threads=1"
+          ],
+          "status": "terminal",
+          "exit": 0
+        },
+        {
+          "argv": [
+            "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/cargo",
+            "clippy",
+            "--profile",
+            "ci",
+            "--locked",
+            "--offline",
+            "-j2",
+            "-p",
+            "incant_render_native",
+            "-p",
+            "incant_play",
+            "--all-targets",
+            "--",
+            "-D",
+            "warnings"
+          ],
+          "status": "terminal",
+          "exit": 0
+        }
+      ],
+      "groups": [
+        64634,
+        64942
+      ],
+      "passed": true,
+      "prior_attempt_seconds": 158.9839907089481,
+      "original_target_origin": 2370228224,
+      "rss_peak": 1001127936,
+      "seconds": 57.19862400001148,
+      "cumulative_seconds": 216.1826147089596,
+      "final_target": 3496943616,
+      "protected_headless_unchanged": true,
+      "source_unchanged": true,
+      "absent_groups": [
+        64634,
+        64942
+      ]
+    },
+    {
+      "started": "2026-10-17T18:28:49.299109+00:00",
+      "wrapper_pid": 65725,
+      "source_head": "5bc29ab3a34364c3bc67e9f617de514f7e1c31b7",
+      "initial_target": 3496943616,
+      "target_cap": 6665195520,
+      "target_peak": 3496972288,
+      "calls": [
+        {
+          "argv": [
+            "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/cargo",
+            "test",
+            "--profile",
+            "ci",
+            "--locked",
+            "--offline",
+            "-j2",
+            "-p",
+            "incant_render_native",
+            "-p",
+            "incant_play",
+            "--test",
+            "animated_refresh",
+            "--test",
+            "model_refresh",
+            "--test",
+            "texture_refresh",
+            "--",
+            "--test-threads=1"
+          ],
+          "status": "terminal",
+          "exit": 0
+        },
+        {
+          "argv": [
+            "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/cargo",
+            "clippy",
+            "--profile",
+            "ci",
+            "--locked",
+            "--offline",
+            "-j2",
+            "-p",
+            "incant_render_native",
+            "-p",
+            "incant_play",
+            "--all-targets",
+            "--",
+            "-D",
+            "warnings"
+          ],
+          "status": "terminal",
+          "exit": 0
+        }
+      ],
+      "groups": [
+        65738,
+        65790
+      ],
+      "passed": true,
+      "prior_attempt_seconds": 216.1826147089596,
+      "original_target_origin": 2370228224,
+      "rss_peak": 188563456,
+      "seconds": 5.641625833988655,
+      "cumulative_seconds": 221.82424054294825,
+      "final_target": 3496972288,
+      "protected_headless_unchanged": true,
+      "source_unchanged": true,
+      "absent_groups": [
+        65738,
+        65790
+      ]
+    }
+  ],
+  "independent_review": "reviews/animated-vertex-refresh-independent-successor-20261017.json",
+  "gpu_execution": false,
+  "native_window_execution": false,
+  "performance_gate": false
+}
