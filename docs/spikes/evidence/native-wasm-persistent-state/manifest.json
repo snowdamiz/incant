@@ -1,0 +1,96 @@
+{
+  "format": "incant-native-wasm-persistent-state-evidence-v1",
+  "record_count": 255,
+  "compressed_bytes": 209191,
+  "uncompressed_bytes": 1163605,
+  "sha256": "a9511abd9835b2b642bc0bcf3b285ae2c884692c24eb1d6f1ad9d55497595e0a",
+  "prepared_at": "2026-10-17T17:15:36.265851+00:00",
+  "final_native_source": "ea6669143f9ee5790d8628b06f0ec197910c0f81",
+  "attempts": [
+    {
+      "name": "cpu002",
+      "external_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-persistent-cpu-002-1hbnmjxz",
+      "source": "393951d1ba7e61835e7df82fe7ed2ecaeb1ccc4f",
+      "source_inventory": {
+        "bytes": 4890603,
+        "sha256": "2f991298695bd028accc375bf918600fad45670ef69176a3e33beb7d2175368f",
+        "executable": false
+      },
+      "passed": false,
+      "seconds": 34.79740350000793,
+      "cumulative_seconds": 34.79740350000793
+    },
+    {
+      "name": "cpu003",
+      "external_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-persistent-cpu-003-_3x5l93v",
+      "source": "92b52974424ef4e815cc74bddd6baa56102b6f8b",
+      "source_inventory": {
+        "bytes": 4890603,
+        "sha256": "d73ce34f965ba34cf9333d60d125e2c2ea3958b5bc0e3abba00621335387453f",
+        "executable": false
+      },
+      "passed": false,
+      "seconds": 93.51431554200826,
+      "cumulative_seconds": 128.3117190420162
+    },
+    {
+      "name": "cpu004",
+      "external_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-persistent-cpu-004-_hc0xd9z",
+      "source": "9cfedb1d9991f42affca5d3238147dde00393039",
+      "source_inventory": {
+        "bytes": 4890603,
+        "executable": false,
+        "sha256": "5fd7e79c3fbdb5c4b2b4e96156bb5578e72c28789d100a3dd92a34abadd4d79a"
+      },
+      "passed": false,
+      "seconds": 315.497569500003,
+      "cumulative_seconds": 443.8092885420192
+    },
+    {
+      "name": "cpu005",
+      "external_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-persistent-cpu-005-ewag7lzn",
+      "source": "96eac7762bc4c8400c76f5f8b389d0beac7fd192",
+      "source_inventory": {
+        "bytes": 4890603,
+        "executable": false,
+        "sha256": "0cd5e9e8793d1478f9f01957e16b21ffc4060cc5aefd650e9ea0bdcd580a2f0b"
+      },
+      "passed": false,
+      "seconds": 128.11473441700218,
+      "cumulative_seconds": 571.9240229590214
+    },
+    {
+      "name": "cpu006",
+      "external_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/wasm-persistent-cpu-006-6wa5y_b4",
+      "source": "ea6669143f9ee5790d8628b06f0ec197910c0f81",
+      "source_inventory": {
+        "bytes": 4890603,
+        "executable": false,
+        "sha256": "1eb72e9c87196457d68bb748d655ee4afcf402d30b47f66dcbf281ec6eb32d78"
+      },
+      "passed": true,
+      "seconds": 35.71478387498064,
+      "cumulative_seconds": 607.638806834002
+    }
+  ],
+  "matrix_test_executions": 69,
+  "strict_clippy_stages": 7,
+  "extra_passing_tests_in_failed_attempt": 5,
+  "aggregate_seconds": 607.638806834002,
+  "original_seconds_cap": 5400,
+  "target_allocated_final_and_peak_bytes": 3539140608,
+  "target_cap_bytes": 12884901888,
+  "packets_allocated_after_cooker_copy": 69492736,
+  "packet_cap_bytes": 1073741824,
+  "fresh_cold_target": true,
+  "old_targets_removed_before_run": true,
+  "source_inventories_external_hash_bound": true,
+  "native_binaries_and_wasm_external_only": true,
+  "limitations": [
+    "Explicit host-owned state only; no arbitrary Wasm memory/globals/tables/closures snapshot.",
+    "Native CI-profile host tests; ordinary authored shipping export/save-load still pending.",
+    "No rendered UI, native window, device, timing or full SDK/Phase1 gate claim.",
+    "No cross-build save compatibility: identities conservatively bind actual runtime/source and linked modules.",
+    "Sampled resource/process monitoring for fixed trusted toolchain; not a hostile-code sandbox."
+  ]
+}
