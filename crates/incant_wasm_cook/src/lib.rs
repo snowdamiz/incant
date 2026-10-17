@@ -26,6 +26,7 @@ pub fn prepare(bytes: &[u8]) -> Result<Vec<u8>, CookError> {
         return Err(error("expected core Wasm <= 1 MiB"));
     }
     let declaration = incant_wasm_abi::persistent::declaration_in_module(bytes).map_err(error)?;
+    let coroutines = incant_wasm_abi::coroutines::catalog_in_module(bytes).map_err(error)?;
     let features = WasmFeatures::default()
         & !(WasmFeatures::THREADS
             | WasmFeatures::SHARED_EVERYTHING_THREADS
@@ -69,6 +70,9 @@ pub fn prepare(bytes: &[u8]) -> Result<Vec<u8>, CookError> {
                         return Err(error("import quota"));
                     }
                     let i = i.map_err(error)?;
+                    if i.module == incant_wasm_abi::coroutines::SECTION && coroutines.is_none() {
+                        return Err(error("coroutine imports require catalog"));
+                    }
                     if i.module == incant_wasm_abi::persistent::SECTION && declaration.is_none() {
                         return Err(error("persistent imports require declaration"));
                     }

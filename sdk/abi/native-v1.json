@@ -1371,6 +1371,48 @@
       "result": "i32",
       "opcode": 71,
       "call": "Call::CommandTimer { ptr, len }"
+    },
+    {
+      "namespace": "incant_coroutines_v1",
+      "name": "next",
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "capacity",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "opcode": 72,
+      "call": "Call::NextCoroutine { ptr, capacity }"
+    },
+    {
+      "namespace": "incant_coroutines_v1",
+      "name": "command",
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "len",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "opcode": 73,
+      "call": "Call::CommandCoroutine { ptr, len }"
     }
   ],
   "enums": {
@@ -4026,6 +4068,52 @@
         "due",
         "u64"
       ]
+    ],
+    "CoroutineHeader": [
+      [
+        "magic",
+        "u8",
+        8
+      ],
+      [
+        "kind",
+        "u32"
+      ],
+      [
+        "delay",
+        "u32"
+      ],
+      [
+        "id_len",
+        "u32"
+      ],
+      [
+        "routine_len",
+        "u32"
+      ],
+      [
+        "flags",
+        "u32"
+      ],
+      [
+        "state_len",
+        "u32"
+      ],
+      [
+        "id",
+        "u8",
+        64
+      ],
+      [
+        "routine",
+        "u8",
+        64
+      ],
+      [
+        "entity",
+        "u8",
+        16
+      ]
     ]
   },
   "input_sections": [
@@ -4141,7 +4229,13 @@
     "HAPTIC_MAX_DURATION_MS": 5000,
     "TIMER_MAX_TIMERS": 128,
     "TIMER_MAX_ACTIONS": 256,
-    "TIMER_ID_BYTES": 64
+    "TIMER_ID_BYTES": 64,
+    "COROUTINE_MAX_TASKS": 128,
+    "COROUTINE_MAX_ACTIONS": 256,
+    "COROUTINE_MAX_ROUTINES": 128,
+    "COROUTINE_FRAME_BYTES": 16384,
+    "COROUTINE_STORE_BYTES": 262144,
+    "COROUTINE_TRANSFER_BYTES": 1048576
   },
   "magic": {
     "INPUT_MAGIC": "INPINP01",
@@ -4176,7 +4270,10 @@
     "HAPTIC_MAGIC": "INCHAP01",
     "HAPTIC_COMMAND_MAGIC": "INCHPC01",
     "TIMER_MAGIC": "INCTIME1",
-    "TIMER_STATE_MAGIC": "INCTMS01"
+    "TIMER_STATE_MAGIC": "INCTMS01",
+    "COROUTINE_MAGIC": "INCCOR01",
+    "COROUTINE_CATALOG_MAGIC": "INCCAT01",
+    "COROUTINE_STATE_MAGIC": "INCCTS01"
   },
   "optional_none": -1,
   "namespaces": {
@@ -4203,6 +4300,7 @@
     "incant_session_v1": "session",
     "incant_state_v1": "state",
     "incant_haptics_v1": "haptics",
-    "incant_timers_v1": "timers"
+    "incant_timers_v1": "timers",
+    "incant_coroutines_v1": "coroutines"
   }
 }

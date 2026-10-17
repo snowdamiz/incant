@@ -47,6 +47,13 @@ class RegistryTests(unittest.TestCase):
         self.assertEqual(self.data['constants']['TIMER_MAX_TIMERS'],128)
         self.assertEqual(self.data['constants']['TIMER_MAX_ACTIONS'],256)
 
+    def test_coroutines_preserve_72_imports_and_copy_bounded_task_frames(self):
+        import hashlib
+        self.assertEqual(hashlib.sha256(json.dumps(self.data['functions'][:72],sort_keys=True).encode()).hexdigest(), '8b34eec7f4051208d85fc66e1d896e340c4bf78d27be4ff4264707133164ae86')
+        self.assertEqual([(f['namespace'],f['name'],f['opcode']) for f in self.data['functions'][72:74]], [('incant_coroutines_v1','next',72),('incant_coroutines_v1','command',73)])
+        self.assertEqual(self.data['constants']['COROUTINE_MAX_TASKS'],128)
+        self.assertEqual(self.data['constants']['COROUTINE_FRAME_BYTES'],16384)
+
     def test_all_committed_host_guest_and_c_artifacts_are_exact(self):
         for name,text in generator.outputs().items():self.assertEqual((ROOT/name).read_text(),text,name)
     def test_unknown_versions_namespaces_signatures_and_layouts_fail_closed(self):

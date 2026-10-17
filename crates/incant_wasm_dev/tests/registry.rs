@@ -22,15 +22,34 @@ fn every_registered_import_has_identical_dev_and_static_cook_signatures() {
             import.namespace, import.name
         );
         let with_declaration = |mut bytes: Vec<u8>| {
-            if import.namespace == "incant_state_v1" {
-                let mut section = vec![15];
-                section.extend(b"incant_state_v1");
-                section.extend(
+            let declaration = match import.namespace {
+                "incant_state_v1" => Some(
                     incant_wasm_abi::persistent::Declaration::new(16, [1; 32])
                         .unwrap()
-                        .encode(),
-                );
-                bytes.extend([0, section.len() as u8]);
+                        .encode()
+                        .to_vec(),
+                ),
+                "incant_coroutines_v1" => Some(
+                    incant_wasm_abi::coroutines::encode_catalog::<120>(&[
+                        incant_wasm_abi::coroutines::Routine::new("walk", 8, [1; 32]).unwrap(),
+                    ])
+                    .to_vec(),
+                ),
+                _ => None,
+            };
+            if let Some(declaration) = declaration {
+                let mut section = vec![import.namespace.len() as u8];
+                section.extend(import.namespace.as_bytes());
+                section.extend(declaration);
+                bytes.push(0);
+                let mut len = section.len();
+                loop {
+                    bytes.push((len & 127) as u8 | if len > 127 { 128 } else { 0 });
+                    len >>= 7;
+                    if len == 0 {
+                        break;
+                    }
+                }
                 bytes.extend(section);
             }
             bytes

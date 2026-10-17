@@ -9,6 +9,16 @@ impl Capability {
             ..Self::default()
         }
     }
+    pub fn with_coroutines(
+        mut self,
+        catalog: Vec<incant_wasm_abi::coroutines::Routine>,
+    ) -> Result<Self, Error> {
+        if self.active || self.tick != 0 || self.identity.is_some() {
+            return Err(Error::Abi("coroutine catalog must precede startup"));
+        }
+        self.coroutines = crate::coroutines::State::new(catalog)?;
+        Ok(self)
+    }
     /// Non-consuming admission check. A save cannot acknowledge pending restart.
     pub fn checkpoint_ready(&self, world: &NativeWorld) -> Result<(), Error> {
         if self.failed || self.active {
@@ -35,7 +45,12 @@ impl Capability {
         self.persistent
             .as_ref()
             .ok_or(Error::Abi("module has no persistent state declaration"))?
-            .snapshot(self.tick, self.epoch, self.timers.checkpoint(self.tick))
+            .snapshot(
+                self.tick,
+                self.epoch,
+                self.timers.checkpoint(self.tick),
+                self.coroutines.checkpoint(|id| world.entity_identity(id)),
+            )
     }
     /// The receiver must be a fresh, inactive VM. Startup callbacks cannot have
     /// obtained tick authority. Only trusted receiving-owner restart opt-in survives.
@@ -60,11 +75,17 @@ impl Capability {
         }
         let identity = world.spatial_view()?.identity().clone();
         let timers = snapshot.timer_state()?;
+        let coroutines =
+            self.coroutines
+                .restored(snapshot.coroutine_bytes(), snapshot.tick(), |id| {
+                    world.entity_identity(id)
+                })?;
         self.persistent
             .as_mut()
             .ok_or(Error::Abi("module has no persistent state declaration"))?
             .restore(snapshot)?;
         self.timers = timers;
+        self.coroutines = coroutines;
         self.haptics.clear();
         self.epoch = snapshot.watermark().max(receiver_watermark);
         self.tick = snapshot.tick();
@@ -98,8 +119,13 @@ impl Capability {
         {
             return Err(Error::Abi("persistent reload declaration mismatch"));
         }
+        if !self.coroutines.same_catalog(&candidate.coroutines) {
+            return Err(Error::Abi("coroutine reload catalog mismatch"));
+        }
         // A failed persistent transaction cannot become a healthy restored state.
-        if self.persistent.is_some() && (self.failed || self.restart_committed) {
+        if (self.persistent.is_some() || self.coroutines.enabled())
+            && (self.failed || self.restart_committed)
+        {
             return Err(Error::Failed);
         }
         Ok(())

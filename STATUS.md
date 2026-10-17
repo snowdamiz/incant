@@ -2,7 +2,7 @@
 
 [Release checkpoint52](docs/spikes/release-checkpoint-52.md) is promoted: all
 23 required contexts and eight exact-head workflows passed on the main391 tree,
-and release `73fed959` has the identical tested tree. Later main393–395 changes
+and release `73fed959` has the identical tested tree. Later main393–396 changes
 remain outside that release baseline. Retained
 failed experiments remain failed. No distribution or phase gate is approved.
 
@@ -17,7 +17,7 @@ incomplete native-window attempts remain historical; these samples do not
 establish continuous motion, window presentation or FPS.
 [Release checkpoint52](docs/spikes/release-checkpoint-52.md) contains the tested
 main391 tree after all 23 required contexts and eight candidate workflows passed.
-Later main393–395 changes remain outside that release baseline. Rendering quality and full rendered-game
+Later main393–396 changes remain outside that release baseline. Rendering quality and full rendered-game
 performance remain open. The reported jagged editor cube now has explicit 4x
 geometry antialiasing, verified in the actual Mac editor and isolated Metal
 controls. This fixes the ordinary viewport route; low-resolution reconstruction
@@ -77,6 +77,15 @@ Skeleton and structural changes remain outside this admission rule.
 
 ## Current parallel qualification — 2026-10-17
 
+Native Wasm cooperative coroutines now pass local ABI/runtime, actual Wasmtime
+and wasm2c guest parity, saved continuation, reload and refusal checks. An
+independent source review and strict lints pass. The first actual-host build
+failed because generated routine metadata lacked static storage; its failure
+is retained and the corrected producer passes. This scoped change is awaiting
+integration. Normal authored shipping export and complete SDK parity remain open.
+See [contract and qualification](docs/spikes/native-wasm-coroutines.md).
+
+
 The default-off [view display-link wake diagnostic](docs/spikes/native-display-link-wake.md)
 passes 158 CPU controls and strict lint on integrated main393. A fresh shipping
 producer at `35f67313` passes the dependency/symbol checks and starts after its
@@ -113,7 +122,7 @@ renderer is adopted.
 Native Wasm haptics is merged through PR393 after review and successful fast
 checks. Physical vibration and an authored shipping haptics proof remain open.
 Release checkpoint52 (PR392) is promoted after all 23 requirements and eight
-workflows passed; later main393–395 is outside that baseline. No distribution or
+workflows passed; later main393–396 is outside that baseline. No distribution or
 phase gate is approved.
 
 Native Wasm timers are merged through PR395 after independent review and fast
@@ -125,17 +134,22 @@ shipping timer proof at `16845606` now also passes four source-free player runs
 and six precise refusals: pending schedules, gameplay state and audible PCM
 continue exactly after saving/reopening. Its full audio output also matches the
 earlier equivalent explicit-state proof. The producer and all 527 observed PIDs
-and managed groups are absent after actual terminal exit. This new proof awaits
-integration; complete SDK parity remains open.
+and managed groups are absent after actual terminal exit. This proof is merged through PR396 after review and successful fast checks;
+complete SDK parity remains open.
 [Contract](docs/spikes/native-wasm-timers.md) and
 [authored export evidence](docs/spikes/native-wasm-timers-export.md).
 
 The bounded QuickJS C PGO follow-up has not trained or measured Core yet. Its
 ordinary shipping build completed, then the verifier misread rustc's `env`
 prefix as the linker. The original 322.341-second attempt remains failed. A
-strict parser correction now passes saved-output replay and 81 portable controls;
-only the parser, caller and tests changed. The next useful trigger is a newly
-qualified ordinary/generate/use producer with exact gameplay/audio parity, then
+strict parser correction passes saved-output replay. A second ordinary shipping
+build passes, but generation stops on duplicate Serde build-dependency aliases.
+The canonical dependency fix passes all three Cargo metadata graphs. Its first
+prerequisite runner then expects a second build script after Cargo has stopped
+on the intended missing-profile refusal; this remains a failed harness attempt.
+The revised prerequisite is queued behind renderer CPU checks. No training or
+performance result is claimed. The next useful trigger is a newly qualified
+ordinary/generate/use producer with exact gameplay/audio parity, then
 a separately scheduled matched timing run. Last reassessment: 2026-10-17.
 The 2 ms ScriptTick target remains unmet; other work continues.
 

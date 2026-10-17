@@ -180,6 +180,7 @@ fn main() {
         "sdk/abi/native-v1.json",
         "tools/wasm2c.py",
         "tools/wasm_persistent.py",
+        "tools/wasm_coroutines.py",
         "crates/incant_wasm_runtime/build.rs",
     ] {
         hash_file(&root.join(path), &mut wasm);

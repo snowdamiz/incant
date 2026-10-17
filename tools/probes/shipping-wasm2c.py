@@ -386,6 +386,20 @@ def timer_guests(rustc, inputs, guests, environment):
     return modules
 
 
+def coroutine_guests(rustc, inputs, guests, environment):
+    source = inputs / 'sdk-coroutines.rs'
+    shutil.copy2(ROOT / 'sdk/rust/samples/coroutines.rs', source)
+    modules = []
+    for kind in (None, 'unknown', 'duplicate', 'scratch', 'owner', 'frame',
+                 'actions', 'tasks', 'wait', 'callback', 'trap', 'schema'):
+        name = 'rust-coroutines' + ('-' + kind if kind else '')
+        module = guests / (name + '.wasm')
+        rust_guest.compile(rustc, source, module, env=environment,
+                           cfg=['coroutine_' + kind] if kind else ())
+        modules.append((name, module))
+    return modules
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('output', type=Path)
@@ -463,6 +477,7 @@ def main():
             modules.extend(persistent_guests(rustc, inputs, sdk_guests, environment))
             modules.extend(haptic_guests(rustc, inputs, sdk_guests, environment))
             modules.extend(timer_guests(rustc, inputs, sdk_guests, environment))
+            modules.extend(coroutine_guests(rustc, inputs, sdk_guests, environment))
             modules.extend(navigation_path_guests(rustc, inputs, sdk_guests, environment))
             modules.extend(physics_guests(rustc, inputs, sdk_guests, environment))
             modules.extend(formatting_guests(rustc, inputs, sdk_guests, environment))
