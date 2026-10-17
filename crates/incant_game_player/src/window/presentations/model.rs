@@ -54,6 +54,17 @@ pub(super) struct Attempt {
     pub requested_host_step: u64,
     pub status: Status,
     pub host_timing: HostTiming,
+    /// The drawable context keeps the first requested step. This receipt binds
+    /// it to every accepted step and the final displayed state, without editing
+    /// callback identities after acquisition.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub batch: Option<Batch>,
+}
+#[derive(Clone, Copy, Debug, Serialize)]
+pub(super) struct Batch {
+    pub planned_ticks: u8,
+    pub accepted_ticks: u8,
+    pub displayed_host_step: Option<u64>,
 }
 /// One host clock only. These values never share an epoch with Metal timestamps.
 #[derive(Clone, Copy, Debug, Default, Serialize)]
@@ -177,6 +188,7 @@ impl Model {
                 began_ns,
                 ..HostTiming::default()
             },
+            batch: None,
         });
         if began_ns.is_none() {
             self.timing_errors = self.timing_errors.saturating_add(1);
@@ -212,6 +224,50 @@ impl Model {
     pub fn wake(&mut self, wake: Option<PulseWake>) {
         let Some(i) = self.active else { return };
         self.attempts[i].host_timing.wake = wake;
+    }
+    pub fn batch_begin(&mut self, due: usize) {
+        let Some(i) = self.active else { return };
+        let a = &mut self.attempts[i];
+        if a.role != Role::Gameplay
+            || a.batch.is_some()
+            || !(1..=4).contains(&due)
+            || a.host_timing
+                .schedule
+                .is_none_or(|s| s.ordinal != 0 || usize::from(s.due) != due)
+        {
+            self.timing_errors = self.timing_errors.saturating_add(1);
+            return;
+        }
+        a.batch = Some(Batch {
+            planned_ticks: due as u8,
+            accepted_ticks: 0,
+            displayed_host_step: None,
+        });
+    }
+    pub fn batch_accept(&mut self, step: u64, displayed: bool) {
+        let Some(i) = self.active else {
+            self.timing_errors = self.timing_errors.saturating_add(1);
+            return;
+        };
+        let a = &mut self.attempts[i];
+        let Some(batch) = &mut a.batch else {
+            self.timing_errors = self.timing_errors.saturating_add(1);
+            return;
+        };
+        if batch.displayed_host_step.is_some()
+            || batch.accepted_ticks >= batch.planned_ticks
+            || a.requested_host_step
+                .checked_add(u64::from(batch.accepted_ticks))
+                != Some(step)
+            || a.host_timing.reserved_ns.is_none()
+        {
+            self.timing_errors = self.timing_errors.saturating_add(1);
+            return;
+        }
+        batch.accepted_ticks += 1;
+        if displayed {
+            batch.displayed_host_step = Some(step);
+        }
     }
     pub fn acquisition_begin(&mut self, at_ns: Option<u64>) {
         let Some(i) = self.active else { return };
@@ -303,6 +359,20 @@ impl Model {
     }
     pub fn complete(&mut self, status: Status, at_ns: Option<u64>) {
         if let Some(i) = self.active.take() {
+            if let Some(batch) = self.attempts[i].batch {
+                let valid = match status {
+                    Status::HostCommitted => {
+                        batch.accepted_ticks > 0 && batch.displayed_host_step.is_some()
+                    }
+                    Status::Deferred => {
+                        batch.accepted_ticks == 0 && batch.displayed_host_step.is_none()
+                    }
+                    _ => false,
+                };
+                if !valid {
+                    self.timing_errors = self.timing_errors.saturating_add(1);
+                }
+            }
             let timing = self.attempts[i].host_timing;
             let checked = self.checked_time(timing.reserved_ns.or(timing.began_ns), at_ns);
             self.attempts[i].status = status;

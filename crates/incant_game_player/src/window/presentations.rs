@@ -1,4 +1,6 @@
 //! Trusted host-only, default-off exact drawable capture. No frame-loop I/O/waits.
+#[cfg(test)]
+mod batch_tests;
 mod boundaries;
 #[cfg(test)]
 mod boundary_tests;
@@ -31,6 +33,7 @@ pub(super) struct Capture {
     clock_origin: Instant,
     wakes: boundaries::Wakes,
     pulse_wake: Option<boundaries::PulseWake>,
+    batches: bool,
 }
 /// The scheduler's existing decision, observed without changing its clock.
 pub(super) struct Schedule {
@@ -59,7 +62,17 @@ impl Capture {
             clock_origin: Instant::now(),
             wakes: boundaries::Wakes::default(),
             pulse_wake: None,
+            batches: false,
         })
+    }
+    pub fn enable_batches(&mut self, selected: bool) {
+        self.batches = selected;
+    }
+    pub fn batch_begin(&mut self, due: usize) {
+        self.model.batch_begin(due);
+    }
+    pub fn batch_accept(&mut self, step: u64, displayed: bool) {
+        self.model.batch_accept(step, displayed);
     }
     pub fn check_surface(&self, surface: &wgpu::Surface<'_>) -> Result<(), Error> {
         let context = Context::new(1, 1, 0).map_err(observation_error)?;
@@ -220,36 +233,43 @@ impl Capture {
             file,
             remaining: OUTPUT_LIMIT,
         };
-        serde_json::to_writer(
-            &mut writer,
-            &serde_json::json!({
-                "format":"incant-native-presentations","version":2,"diagnostic_only":true,
-                "display_gate":false,"uncapped_gpu_throughput":false,"final_process_exit_status":null,
-                "source_identity":"requires external executable/source/package binding",
-                "per_present_registration_overhead":true,"snapshot_after_gameplay":true,
-                "requested_host_steps":self.requested_steps,"capture_capacity":self.capacity,
-                "limits":{"rows":MAX_SAMPLES,"row_bytes_max":64,"attempt_bytes_max":512,"segment_bytes_max":40,
-                    "segments_per_attempt_max":2,"drain_seconds":1,"output_bytes":OUTPUT_LIMIT},
-                "host_timing_contract":{"version":2,"unit":"nanoseconds","clock":"Rust Instant relative to capture creation",
-                    "shared_epoch_with_metal":false,"changes_frame_admission":false,
-                    "pulse":"MainEventsCleared entry, before polling and eligibility work",
-                    "deadline":"existing fixed-step clock deadline before due calculation; absent for forced resume",
-                    "began":"attempt before surface reservation","reserved":"successful reservation including view creation",
-                    "completed":"existing host-commit or refresh/defer point; not GPU completion",
-                    "finished":"gameplay after observations and haptics; before restart replacement or event-loop cleanup",
-                    "missing":"unreached, invalid or unavailable; never zero-filled",
-                    "wake":"NewEvents arrival consumed once by MainEventsCleared; missing/overwritten/deadline mismatch is not a timer verdict",
-                    "acquisition":"existing get_current_texture call only, before unbind and view creation; not GPU completion"},
-                "wake_tracking":self.wakes.counts,
-                "coverage":{"rows":coverage.rows,"segments":coverage.segments,"acquired":coverage.acquired,
-                    "missing":coverage.requested,"presented":coverage.presented,"zero":coverage.reported_zero,
-                    "invalid":coverage.invalid,"discarded":coverage.discarded,"abandoned":coverage.abandoned,
-                    "overflow":snapshot.overflow,"protocol_errors":snapshot.protocol_errors},
-                "boundary_bit_order":["start","focus","suspend","resume","resize","configure","recreate","retry","restart","role","inactive"],
-                "failure_index_order":["timeout","occluded","outdated","lost","validation","unsupported_size","minimized","reservation","device"],
-                "host":self.model,"rows":rows,"finalization":status
-            }),
-        )?;
+        let mut report = serde_json::json!({
+            "format":"incant-native-presentations","version":if self.batches { 3 } else { 2 },"diagnostic_only":true,
+            "display_gate":false,"uncapped_gpu_throughput":false,"final_process_exit_status":null,
+            "source_identity":"requires external executable/source/package binding",
+            "per_present_registration_overhead":true,"snapshot_after_gameplay":true,
+            "requested_host_steps":self.requested_steps,"capture_capacity":self.capacity,
+            "limits":{"rows":MAX_SAMPLES,"row_bytes_max":64,"attempt_bytes_max":512,"segment_bytes_max":40,
+                "segments_per_attempt_max":2,"drain_seconds":1,"output_bytes":OUTPUT_LIMIT},
+            "host_timing_contract":{"version":2,"unit":"nanoseconds","clock":"Rust Instant relative to capture creation",
+                "shared_epoch_with_metal":false,"changes_frame_admission":false,
+                "pulse":"MainEventsCleared entry, before polling and eligibility work",
+                "deadline":"existing fixed-step clock deadline before due calculation; absent for forced resume",
+                "began":"attempt before surface reservation","reserved":"successful reservation including view creation",
+                "completed":"existing host-commit or refresh/defer point; not GPU completion",
+                "finished":"gameplay after observations and haptics; before restart replacement or event-loop cleanup",
+                "missing":"unreached, invalid or unavailable; never zero-filled",
+                "wake":"NewEvents arrival consumed once by MainEventsCleared; missing/overwritten/deadline mismatch is not a timer verdict",
+                "acquisition":"existing get_current_texture call only, before unbind and view creation; not GPU completion"},
+            "wake_tracking":self.wakes.counts,
+            "coverage":{"rows":coverage.rows,"segments":coverage.segments,"acquired":coverage.acquired,
+                "missing":coverage.requested,"presented":coverage.presented,"zero":coverage.reported_zero,
+                "invalid":coverage.invalid,"discarded":coverage.discarded,"abandoned":coverage.abandoned,
+                "overflow":snapshot.overflow,"protocol_errors":snapshot.protocol_errors},
+            "boundary_bit_order":["start","focus","suspend","resume","resize","configure","recreate","retry","restart","role","inactive"],
+            "failure_index_order":["timeout","occluded","outdated","lost","validation","unsupported_size","minimized","reservation","device"],
+            "host":self.model,"rows":rows,"finalization":status
+        });
+        if self.batches {
+            report["batch_contract"] = serde_json::json!({
+                "version":1,"maximum_ticks":4,
+                "drawable_context":"first requested step, immutable after acquisition",
+                "displayed_state":"attempt.batch.displayed_host_step, same session generation",
+                "coverage":"accepted_ticks contiguous from requested_host_step; fewer than planned allowed on restart or stop bound",
+                "ordinary_analyzer_compatible":false
+            });
+        }
+        serde_json::to_writer(&mut writer, &report)?;
         writer.file.flush()?;
         writer.file.sync_all()?;
         Ok(())
