@@ -15,15 +15,14 @@ impl NativeSessionCheckpoint {
         let world = self
             .world
             .persisted_bytes(payload, planar_work, spatial_work)?;
-        codec::encode_persisted(
-            identity(&self.code),
+        state::encode(
+            &self.code,
+            &self.state,
             self.origin,
             &world,
-            &self.state.active,
-            &self.state.store,
-            &self.state.schedule,
             self.ui.as_deref(),
             self.audio.as_deref(),
+            true,
         )
     }
 }
@@ -42,8 +41,8 @@ impl PendingSessionCheckpoint {
         spatial_work: &mut SpatialCheckpointWorkBudget,
         allocations: &mut CheckpointAllocationBudget,
     ) -> Result<Self> {
-        let code = bytecode(program.into())?;
-        let sections = codec::persisted_sections(bytes, identity(&code))?;
+        let code = program.into();
+        let sections = state::sections(bytes, &code, true)?;
         let current = NativeWorld::new(initial.clone());
         Self::decode_sections(sections, code, actions, true, |world| {
             Ok(NativeWorld::from_persisted_bytes_for(
@@ -70,19 +69,11 @@ impl NativeSession {
         spatial_work: &mut SpatialCheckpointWorkBudget,
         allocations: &mut CheckpointAllocationBudget,
     ) -> Result<PendingSessionCheckpoint> {
-        let current = host(self)?;
-        if !current.haptic_requests.is_empty() {
-            return Err(CheckpointError::Unsupported("pending haptic output"));
-        }
-        if current.session_request.is_some() {
-            return Err(CheckpointError::Unsupported(
-                "pending session restart request",
-            ));
-        }
-        let sections = codec::persisted_sections(bytes, identity(&current._compiled))?;
+        let (program, watermark, restart) = state::receiver(self)?;
+        let sections = state::sections(bytes, &program, true)?;
         let mut pending = PendingSessionCheckpoint::decode_sections(
             sections,
-            current._compiled.clone(),
+            program,
             self.bindings.definitions().clone(),
             true,
             |world| {
@@ -96,7 +87,7 @@ impl NativeSession {
                 )?)
             },
         )?;
-        pending.retain_restart_requests(current.restart_requests);
+        pending.retain_authority(watermark, restart);
         Ok(pending)
     }
 

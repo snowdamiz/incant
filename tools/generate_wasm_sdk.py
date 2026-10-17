@@ -49,7 +49,7 @@ def generate(data, digest):
         shared.append('pub mod steering;\npub mod navigation_paths;\n')
     if 'incant_physics_v1' in data['namespaces']:
         shared.append('pub mod physics;\n')
-    shared.append('pub mod hud;\n')
+    shared.append('pub mod hud;\npub mod persistent;\n')
     if 'incant_audio_v1' in data['namespaces']:
         shared.append('pub mod audio;\n')
         shared += ['pub const AUDIO_MAX_BYTES: usize = AudioHeader::SIZE + AUDIO_MAX_NODES * AudioRow::SIZE;\n', 'pub const AUDIO_MAX_COMMAND_BYTES: usize = AudioCommandHeader::SIZE + AUDIO_MAX_COMMANDS * AudioCommand::SIZE;\n']

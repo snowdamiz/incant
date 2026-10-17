@@ -160,7 +160,9 @@ fn host_pairing_failure_precedes_late_guest_initialization() {
     sync(&mut ui, &live, &[]);
     let mut checkpoint = capture(&mut live, &ui);
     // Private test-only mutation reaches a late trap without a production setter.
-    checkpoint.code = CompiledScript::compile("throw new Error('late init');").unwrap();
+    checkpoint.code = CompiledScript::compile("throw new Error('late init');")
+        .unwrap()
+        .into();
     let pending = prepare(&checkpoint).unwrap();
     assert!(matches!(
         pending.start_with_ui(&ui),

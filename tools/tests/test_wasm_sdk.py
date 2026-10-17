@@ -19,8 +19,16 @@ class RegistryTests(unittest.TestCase):
     def test_session_restart_is_additive_and_epoch_only(self):
         import hashlib
         self.assertEqual(hashlib.sha256(json.dumps(self.data['functions'][:63], sort_keys=True).encode()).hexdigest(), '2ee8ca9c4fa952411c2d30ebf9e032591ea7f1c6652ce2b759ca67552d6f4906')
-        self.assertEqual(self.data['functions'][63:], [{'namespace': 'incant_session_v1', 'name': 'request_restart', 'params': [['epoch', 'i64']], 'result': 'i32', 'opcode': 63, 'call': 'Call::RequestRestart'}])
+        self.assertEqual(self.data['functions'][63:64], [{'namespace': 'incant_session_v1', 'name': 'request_restart', 'params': [['epoch', 'i64']], 'result': 'i32', 'opcode': 63, 'call': 'Call::RequestRestart'}])
         self.assertEqual(self.data['namespaces']['incant_session_v1'], 'session')
+
+    def test_persistent_state_is_additive_and_explicitly_copied(self):
+        import hashlib
+        self.assertEqual(hashlib.sha256(json.dumps(self.data['functions'][:64], sort_keys=True).encode()).hexdigest(), '00bb2bfea44e6659a86e2fdc49d8c4fa3207507e35014ebbb8d73b226a1d6159')
+        self.assertEqual([(f['namespace'], f['name'], f['opcode']) for f in self.data['functions'][64:]], [('incant_state_v1', 'read', 64), ('incant_state_v1', 'write', 65)])
+        for row in self.data['functions'][64:]:
+            self.assertEqual(row['params'], [['epoch', 'i64'], ['ptr', 'i32'], ['offset', 'i32'], ['len', 'i32']])
+            self.assertEqual(row['result'], 'i32')
 
     def test_all_committed_host_guest_and_c_artifacts_are_exact(self):
         for name,text in generator.outputs().items():self.assertEqual((ROOT/name).read_text(),text,name)

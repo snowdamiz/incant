@@ -16,7 +16,7 @@ impl NativeSessionCheckpoint {
         let world = self
             .world
             .reconstruct(payload, planar_work, spatial_work, allocations)?;
-        self.pending(world, false)
+        self.pending(world, 0, false)
     }
 
     /// Stage compatible restoration for an existing healthy receiver. Its live
@@ -31,16 +31,8 @@ impl NativeSessionCheckpoint {
         spatial_work: &mut SpatialCheckpointWorkBudget,
         allocations: &mut CheckpointAllocationBudget,
     ) -> Result<PendingSessionCheckpoint> {
-        let host = host(current)?;
-        if !host.haptic_requests.is_empty() {
-            return Err(CheckpointError::Unsupported("pending haptic output"));
-        }
-        if host.session_request.is_some() {
-            return Err(CheckpointError::Unsupported(
-                "pending session restart request",
-            ));
-        }
-        if identity(&host._compiled) != identity(&self.code) {
+        let (program, watermark, restart) = state::receiver(current)?;
+        if state::program_identity(&program)? != state::program_identity(&self.code)? {
             return Err(CheckpointError::ProgramMismatch);
         }
         // A rewind cannot discard an existing receiver's retained host obligation,
@@ -60,12 +52,13 @@ impl NativeSessionCheckpoint {
             spatial_work,
             allocations,
         )?;
-        self.pending(world, host.restart_requests)
+        self.pending(world, watermark, restart)
     }
 
     fn pending(
         &self,
         world: NativeWorld,
+        watermark: i64,
         restart_requests: bool,
     ) -> Result<PendingSessionCheckpoint> {
         let mut pending = PendingSessionCheckpoint::from_native(
@@ -75,7 +68,7 @@ impl NativeSessionCheckpoint {
             self.bindings.clone(),
         );
         pending.attach_hosted(self.ui.as_deref(), self.audio.as_deref())?;
-        pending.retain_restart_requests(restart_requests);
+        pending.retain_authority(watermark, restart_requests);
         Ok(pending)
     }
 }

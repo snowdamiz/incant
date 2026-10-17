@@ -42,7 +42,8 @@ impl Options {
             })
         {
             return Err(
-                "checkpoints require the offline bytecode plain/CPU-render-input player".into(),
+                "checkpoints require the offline explicit-state plain/CPU-render-input player"
+                    .into(),
             );
         }
         Ok((result, options))

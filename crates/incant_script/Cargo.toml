@@ -25,7 +25,7 @@ audio = ["dep:incant_audio_runtime", "incant_audio_runtime/scene"]
 # Trusted build-linked wasm2c modules; no runtime compiler/JIT or module loader.
 static-module = ["dep:incant_wasm_runtime"]
 # Development-only raw Wasm host, explicitly absent from native exports.
-wasmtime-host = ["dep:incant_wasm_dev", "incant_wasm_dev/wasmtime-host"]
+wasmtime-host = ["dep:incant_wasm_runtime", "dep:incant_wasm_dev", "incant_wasm_dev/wasmtime-host"]
 
 # Select one physics kernel for the entire process, including build/test hosts.
 physics-deterministic = [

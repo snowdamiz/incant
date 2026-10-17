@@ -1,9 +1,10 @@
-//! Ordinary game-load checkpoints for explicitly opted-in bytecode behaviors.
+//! Ordinary game-load checkpoints for explicitly opted-in persistent program data.
 //! Code is supplied by trusted startup; save bytes contain data only.
 mod codec;
 #[cfg(feature = "native-checkpoints")]
 mod native;
 mod pending;
+mod state;
 use crate::{
     CompiledScript, NativeSession, ScriptError, ScriptHost, SessionProgram,
     persistence::Store,
@@ -19,6 +20,7 @@ use incant_runtime::{CookedScene, NativeWorld, SaveError, StableId};
 pub use native::NativeSessionCheckpoint;
 pub use pending::PendingSessionCheckpoint;
 use sha2::{Digest, Sha256};
+use state::ProgramState;
 use thiserror::Error;
 
 #[derive(Debug, Error)]
@@ -35,6 +37,8 @@ pub enum CheckpointError {
     Unsupported(&'static str),
     #[error("failed native sessions cannot create or restore checkpoints")]
     FailedSession,
+    #[error(transparent)]
+    Session(#[from] crate::SessionError),
     #[error(transparent)]
     Script(#[from] ScriptError),
     #[error(transparent)]
@@ -77,17 +81,6 @@ fn identity(code: &CompiledScript) -> [u8; 32] {
         }
     }
     h.finalize().into()
-}
-fn bytecode(program: SessionProgram) -> Result<CompiledScript> {
-    match program {
-        SessionProgram::Bytecode(code) => Ok(code),
-        #[cfg(feature = "wasmtime-host")]
-        SessionProgram::DevelopmentWasm(_) => {
-            Err(CheckpointError::Unsupported("development module state ABI"))
-        }
-        #[cfg(feature = "static-module")]
-        SessionProgram::Static(_) => Err(CheckpointError::Unsupported("static module state ABI")),
-    }
 }
 fn host(session: &NativeSession) -> Result<&ScriptHost> {
     if session.failed {
@@ -364,18 +357,16 @@ impl NativeSession {
                 "retained audio owner is required",
             ));
         }
-        let host = host(self)?;
-        let state = script_state(self)?;
+        let (program, state) = state::capture(self)?;
         let world = self.world.save_bytes()?;
-        codec::encode(
-            identity(&host._compiled),
+        state::encode(
+            &program,
+            &state,
             self.world.source_scene_fingerprint(),
             &world,
-            &state.active,
-            &state.store,
-            &state.schedule,
             ui,
             audio,
+            false,
         )
     }
 
@@ -402,25 +393,24 @@ impl NativeSession {
     /// creates a new world identity; retained external hosts must be rebuilt.
     /// GameSession/device/export loading is a separate, not-yet-supported route.
     pub fn restore_checkpoint_bytes(&mut self, bytes: &[u8]) -> Result<()> {
-        let host = host(self)?;
-        if !host.haptic_requests.is_empty() {
-            return Err(CheckpointError::Unsupported("pending haptic output"));
-        }
-        let sections = codec::sections(bytes, identity(&host._compiled))?;
+        let (program, watermark, restart) = state::receiver(self)?;
+        let sections = state::sections(bytes, &program, false)?;
         if sections.origin != self.world.source_scene_fingerprint() {
             return Err(CheckpointError::WorldMismatch);
         }
-        let candidate = PendingSessionCheckpoint::decode(
-            bytes,
-            host._compiled.clone(),
+        let mut pending = PendingSessionCheckpoint::decode_sections(
+            sections,
+            program,
             self.bindings.definitions().clone(),
+            false,
             |world| {
                 let candidate = NativeWorld::from_save_bytes(world)?;
                 self.world.validate_save_compatibility(&candidate)?;
                 Ok(candidate)
             },
-        )?
-        .start()?;
+        )?;
+        pending.retain_authority(watermark, restart);
+        let candidate = pending.start()?;
         *self = candidate;
         Ok(())
     }

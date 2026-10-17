@@ -12,6 +12,7 @@ from pathlib import Path
 import re
 import subprocess
 from wasm_abi import ABI_VERSION, NAMESPACES
+from wasm_persistent import declaration, linked_expression
 
 
 def run(args):
@@ -101,21 +102,23 @@ def prepare(output, modules, wabt, cook, captured=None, *, execute=None):
              '--disable-multi-memory', '--disable-simd', '--disable-relaxed-simd',
              '-o', output / f'{module}.c'])
         header = (output / f'{module}.h').read_text()
-        declaration = re.search(r'void wasm2c_'+module+r'_instantiate\(([^;]+)\);', header, re.DOTALL)
-        if not declaration: raise ValueError('Missing pinned instantiate declaration')
-        imports = re.findall(r'struct (w2c_\w+)\s*\*', declaration.group(1))
+        instantiate_declaration = re.search(r'void wasm2c_'+module+r'_instantiate\(([^;]+)\);', header, re.DOTALL)
+        if not instantiate_declaration: raise ValueError('Missing pinned instantiate declaration')
+        imports = re.findall(r'struct (w2c_\w+)\s*\*', instantiate_declaration.group(1))
         (output / f'{module}-facade.c').write_text(wrapper(module, imports))
         bindings.append(f'''unsafe extern "C" {{
  fn incant_{module}_create(cb:Import,ctx:*mut c_void,out:*mut *mut c_void)->i32;
  fn incant_{module}_update(p:*mut c_void,cb:Import,ctx:*mut c_void,e:i64,dt:f64)->i32;
  fn incant_{module}_free(p:*mut c_void);
 }}''')
-        report.append({'name': name, 'prefix': module, 'input_sha256': sha(output / f'{module}.original.wasm'),
+        state = declaration((output / f'{module}.original.wasm').read_bytes())
+        report.append({'persistent_state': state, 'name': name, 'prefix': module, 'input_sha256': sha(output / f'{module}.original.wasm'),
                        'prepared_sha256': sha(prepared)})
     bindings.append('pub fn linked(name: &str) -> Option<ModuleExports> { match name {')
     for row in report:
         m = row['prefix']
-        bindings.append(f'''"{row['name']}" => Some(unsafe {{ ModuleExports::from_linked(incant_{m}_create, incant_{m}_update, incant_{m}_free) }}),''')
+        expression = linked_expression(row, output, Path(__file__).resolve().parent.parent)
+        bindings.append(f'"{row["name"]}" => Some(unsafe {{ {expression} }}),')
     bindings.append('_ => None } }')
     (output / 'linked.rs').write_text('\n'.join(bindings) + '\n')
     report = {'wabt': '1.0.42', 'modules': report,
