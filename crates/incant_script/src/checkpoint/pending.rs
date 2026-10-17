@@ -237,9 +237,11 @@ impl PendingSessionCheckpoint {
     fn start_validated(self) -> Result<NativeSession> {
         let host = match self.state {
             ProgramState::Bytecode(state) => {
+                #[cfg(not(any(feature = "wasmtime-host", feature = "static-module")))]
+                let SessionProgram::Bytecode(code) = self.code;
+                #[cfg(any(feature = "wasmtime-host", feature = "static-module"))]
                 let code = match self.code {
                     SessionProgram::Bytecode(code) => code,
-                    #[cfg(any(feature = "wasmtime-host", feature = "static-module"))]
                     _ => return Err(CheckpointError::ProgramMismatch),
                 };
                 let mut host = ScriptHost::for_checkpoint(code, &self.world, &state.active)?;
