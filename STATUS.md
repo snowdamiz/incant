@@ -780,7 +780,7 @@ The existing plan gate stays unmet; this is not evidence that sub-2 ms is
 impossible or that the full rendered game misses its frame budget.
 [Outcome and replay](docs/spikes/navigation-search-cache-outcome.md).
 
-Last reassessment: 2026-10-15, evening source review after native coroutines
+Earlier reassessment: 2026-10-15, evening source review after native coroutines
 were integrated. The [source-bound review](docs/spikes/evidence/script-budget-coroutine-source-review.json)
 finds that Core declares no routines and already uses the no-catalog path,
 without a coroutine scheduler or capability allocation on each tick. This
@@ -797,12 +797,21 @@ endpoint-only cache is deprioritized. The [retained-data calculation](docs/spike
 binds its original raw record and uses same-frame subtraction before ranking;
 it is not a current shipping benchmark or proof that sub-2 ms is impossible.
 
-Next useful trigger: a bounded review of non-navigation callback/typed-array
-work or a relevant runtime change, when an investigation lane becomes available.
-Require a distinct source-grounded hypothesis and stop condition before another
-native measurement. Any candidate needs matched shipping-profile runs and exact
-gameplay/audio parity; no unchanged experiment is scheduled. Reassess every few
-hours of active development while other implementation lanes continue.
+Last reassessment: 2026-10-17, source and compiler-toolchain inspection after
+work resumed. A [distinct PGO hypothesis](docs/spikes/evidence/script-budget-pgo-source-review.json)
+would use representative execution profiles to optimize the pinned QuickJS C
+interpreter. The shipping build already uses optimization level 3 and Rust fat
+LTO, but it has no explicit C profile training/use path. This is source research,
+not an implemented optimization or new timing result. Prior matrix-cache,
+typed-store, authored-loop, query and navigation results remain unchanged.
+
+Next useful trigger: when a CPU lane is available after the current rendering
+and native-window work, run a bounded C-only feasibility check before considering
+a matched full-Core shipping comparison. Use one matching Clang/profile-tool
+version, keep training measurements separate, preserve the unchanged script
+workload and enforcement, and require exact gameplay/audio parity. No benefit is
+assumed, and the 2 ms target remains unmet. Reassess after relevant runtime changes
+or a few hours of active development without occupying every lane.
 
 ## Native Play texture refresh — merged through PR284
 
