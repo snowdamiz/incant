@@ -1,11 +1,11 @@
 # Implementation status
 
-[Release checkpoint50](docs/spikes/release-checkpoint-50.md) is promoted: all
-23 required contexts and eight exact-head workflows passed on the main376 tree,
-and the release merge has the same tree. This verifies the normal headless
-dependency repair that blocked checkpoint49 on Mac, Linux and Windows.
-The failed batch remains historical. Main changes after PR376 retain separate
-local qualification and are outside this release baseline.
+[Release checkpoint51](docs/spikes/release-checkpoint-51.md) is promoted: all
+23 required contexts and eight exact-head workflows passed on the main382 tree,
+and release `e354bae1` has the identical tested tree. Checkpoint50 and the earlier
+failed batches remain historical. Later main384+ changes, including native Wasm
+persistence and its authored shipping proof, retain separate local qualification
+outside this release baseline. No distribution or phase gate is approved.
 
 The current phase remains **Phase 1: Core engine**. The
 [Phase 1 review ledger](docs/gates/phase1-review.md) maps each exit requirement to
@@ -16,9 +16,9 @@ now also verifies winning HUD pixels, Arabic health direction, CJK glyphs and
 normal/narrow pseudo layouts in retained offscreen Metal frames. Earlier
 incomplete native-window attempts remain historical; these samples do not
 establish continuous motion, window presentation or FPS.
-[release checkpoint50](docs/spikes/release-checkpoint-50.md) contains the tested
-main376 tree after all 23 required contexts and eight candidate workflows passed.
-Later main changes remain outside that release baseline. Rendering quality and full rendered-game
+[Release checkpoint51](docs/spikes/release-checkpoint-51.md) contains the tested
+main382 tree after all 23 required contexts and eight candidate workflows passed.
+Later main384+ changes remain outside that release baseline. Rendering quality and full rendered-game
 performance remain open. The reported jagged editor cube now has explicit 4x
 geometry antialiasing, verified in the actual Mac editor and isolated Metal
 controls. This fixes the ordinary viewport route; low-resolution reconstruction
@@ -55,6 +55,20 @@ passes local tests and leaves production behavior unchanged. Both desktop jobs
 and Windows Wasm conformance passed on checkpoint44; that checkpoint's separate
 general failure prevented promotion.
 
+## Reconstruction cost — current private layout rejected
+
+The complete 234-case offscreen diagnostic passed its timing and parity checks,
+but rejects the current reconstruction layout as a performance candidate. Guarded
+reconstruction takes 94–97 ms of operational wall time versus about 3 ms for
+original shading; required CPU admission accounts for 76–79 ms. The isolated
+shader-guard saving remains inconclusive because instrumentation overhead is
+larger than the observed difference. This is a CI-profile diagnostic on this Mac,
+not shipping performance or appearance acceptance. The two preceding failed
+attempts remain recorded. [Raw data and independent replay](docs/spikes/reconstruction-complete-route-cost.md)
+support the next step: GPU-side bounded admission, fewer readbacks and lower
+resource use, followed by the same correctness, motion and complete-route checks.
+No experimental renderer code is adopted.
+
 ## Fresh Core native replay — complete timing attribution
 
 A newly built shipping-profile diagnostic completes the 2,156-step rendered Core
@@ -79,9 +93,14 @@ UI focus/text and fractional-clock PCM. Qualification passed 69 native test
 executions, seven strict lints, 37 SDK/cook/export controls and nine data-only
 evidence controls; four failed attempts remain recorded with their corrections.
 [Producing revisions and evidence](docs/spikes/native-wasm-persistent-state.md)
-remain explicit. An ordinary authored shipping export with save/load is still
-pending. This captures declared state rather than arbitrary guest memory, and
-does not establish full SDK, rendered-device, performance or phase completion.
+remain explicit. The [ordinary authored shipping save/load proof](docs/spikes/native-wasm-checkpoint-export.md)
+now passes four fresh source-free processes with exact uninterrupted/split/resumed
+checkpoint and audible PCM equality, plus six precise admission/no-clobber refusals.
+Its native producer remains `b733a366`: the original wrapper exited 1 at a merged-stream
+verifier error; corrected `35070206` data replay and independent review passed
+without rerunning native code. This captures declared state rather than arbitrary
+guest memory, and does not establish full SDK, rendered-device, performance or
+phase completion.
 
 ## Native material tables — actual editor workflow verified
 

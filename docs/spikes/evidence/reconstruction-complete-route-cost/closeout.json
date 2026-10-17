@@ -1,0 +1,65 @@
+{
+  "complete": true,
+  "created_utc": "2026-10-17T17:57:22.301710+00:00",
+  "actual_wrapper_session": 34550,
+  "actual_wrapper_exit": 0,
+  "native_exit": 0,
+  "data_exit": 0,
+  "native_seconds": 122.25245437497506,
+  "data_seconds": 0.0773035419988446,
+  "wrapper_seconds": 124.93359433399746,
+  "fresh_owned_process_absence": [
+    {
+      "pid": 46743,
+      "pid_absent": true,
+      "process_group_absent": true
+    },
+    {
+      "pid": 47405,
+      "pid_absent": true,
+      "process_group_absent": true
+    }
+  ],
+  "source_files_verified": 21774,
+  "inputs_verified": 129,
+  "retained_output_files": 861,
+  "retained_output_bytes": 4890764,
+  "manifest": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/reconstruction-separated-temporal-040/cost-output-manifest.json",
+    "bytes": 211956,
+    "sha256": "a078ca08793c4bfa407dcd1a6d012fef7fdcf70577afdc2ce255a9a117c52fc0"
+  },
+  "analysis": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/reconstruction-separated-temporal-040/cost-analysis.json",
+    "bytes": 27123,
+    "sha256": "bc960f3568b3fae06c4c557b57e84aa87c81584af1fea089faf71dd30164548a"
+  },
+  "triage": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/reconstruction-separated-temporal-040/cost-triage.json",
+    "bytes": 9683,
+    "sha256": "86a5a9bcc32eda46df3b284642bf1704ed63b4f6e0bb7285418b5629ba96873c"
+  },
+  "wrapper_receipt": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/reconstruction-separated-temporal-040/cost-wrapper-result.json",
+    "bytes": 16295,
+    "sha256": "bd15593e42f55a457e05a85be11622c21ee52b47b086a92383754201b41b1155"
+  },
+  "artifact": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/reconstruction-separated-temporal-039/incant_render_diagnostic",
+    "bytes": 42771024,
+    "sha256": "d7c7f50972f18954464c0d66cf6847686a715ae7dd6d99f191fe1ee1eaeea23b"
+  },
+  "expected_and_actual_counts": {
+    "renders": 234,
+    "maps": 1522,
+    "submits": 1756,
+    "marker_passes": 5436
+  },
+  "peak_sampled_owned_RSS_bytes": 199852032,
+  "peak_sampled_output_bytes": 195828157,
+  "cumulative_native_seconds_charged": 183.48089045798406,
+  "historical_failures_preserved": true,
+  "no_additional_native_build_or_GPU": true,
+  "quiet_GPU_releasable": true,
+  "shipping_performance_or_appearance_or_adoption_approved": false
+}
