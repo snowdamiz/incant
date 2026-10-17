@@ -365,7 +365,7 @@ def haptic_guests(rustc, inputs, guests, environment):
     shutil.copy2(ROOT / 'sdk/rust/samples/haptics.rs', source)
     modules = []
     for kind in (None, 'scratch', 'amplitude', 'quota', 'owner', 'callback', 'trap', 'saved_target'):
-        name = 'rust-haptics' + ('-' + kind if kind else '')
+        name = 'rust-haptics' + ('-' + kind.replace('_', '-') if kind else '')
         module = guests / (name + '.wasm')
         rust_guest.compile(rustc, source, module, env=environment,
                            cfg=['haptic_' + kind] if kind else ())

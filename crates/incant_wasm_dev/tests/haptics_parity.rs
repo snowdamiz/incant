@@ -153,7 +153,7 @@ fn retained_guest_targets_cannot_reuse_disconnected_device_generation() {
     for development in [false, true] {
         let mut live = NativeSession::new(
             scene(),
-            program(development, "rust-haptics-saved_target"),
+            program(development, "rust-haptics-saved-target"),
             Default::default(),
         )
         .unwrap();
