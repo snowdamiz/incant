@@ -83,8 +83,9 @@ partitions, not subtraction of independent p95s or exclusive CPU/GPU costs.
 
 Focus was lost at steps 376, 419, 639, totaling 6.719110 seconds until gains. The
 five zero presented timestamps belong to initial 0, step 376 before segment 3→4,
-step 639 before 5→6, and resumed 640/641. Apple's `presentedTime` contract makes zero
-not-yet-presented/frame-dropped ambiguous. All eight continuity breaks remain;
+step 639 before 5→6, and resumed 640/641. Apple's
+[`presentedTime` contract](https://developer.apple.com/documentation/metal/mtldrawable/presentedtime)
+makes zero not-yet-presented/frame-dropped ambiguous. All eight continuity breaks remain;
 419→420 is a segment break even though both callbacks have positive timestamps.
 There are 2,152 positive callbacks and five zeros, with no missing, invalid or
 overflow rows. This focus-interrupted diagnostic cannot close a continuous-display

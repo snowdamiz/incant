@@ -15,6 +15,13 @@ approval. [PLAN.md](../../PLAN.md#phase-1-core-engine) defines the requirements.
 Only actual testing on the available Mac is required as device evidence. Other
 device execution is deferred; hosted build and release checks remain required.
 
+A [fresh Core v2 native diagnostic](../spikes/native-wake-acquisition-live.md)
+now completes all 2,156 steps with exact offline gameplay parity and full
+wake/acquisition attribution. Its original audio-schema analysis refusal and
+separate saved-data correction remain explicit. Focus interruptions, zero
+presentation timestamps and uneven intervals keep continuous cadence and the
+rendered-game performance gate open; no gate follows from the complete timing data.
+
 | Exit requirement | Recorded evidence | Remaining qualification |
 | --- | --- | --- |
 | Core Sample runs at 60 fps, using TypeScript and no editor | Authored Core gameplay, packaged HUD/audio and source-free native execution have scoped proofs. A [shipping native-window replay](../spikes/native-window-replay.md) completes the full 2,156-step route with exact headless observation parity. The later [complete host-stage diagnostic](../spikes/native-presentation-host-stages.md#complete-same-source-live-replay) also records all 2,156 steps with independent stage arithmetic, preserving its historical package and earlier failed attempt. [Core integration](../spikes/core-main182.md), [HUD](../spikes/core-result-hud-main192.md). | A shipping run of the complete rendered game meeting the frame budget. Zero callbacks, incomplete display-interval coverage and an early host/callback discrepancy keep displayed cadence open. Complete host timing and CPU simulation timing do not establish FPS, causality or shader-stall freedom. Rendering reconstruction still has unresolved appearance defects. |
