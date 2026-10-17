@@ -55,11 +55,17 @@ invalid Wait, callback errors and traps refuse without committing world changes.
 Both hosts also reject invalid catalog metadata and startup authority. Strict
 lints pass for ABI, SDK, runtime, cook, development library and the changed tests.
 An independent source review covers transaction/owner/checkpoint boundaries and
-the generator correction. These are local correctness checks, not frame timing.
+the generator correction. Follow-up review found that the new linker helper
+also needed binding into the saved program and runtime identities. `396654f0`
+adds both inputs; a mutation/missing-helper control passes, and all seventeen
+actual guest/TypeScript tests plus development lint pass again with the new
+identities. All ten local development checks pass before that narrow identity
+follow-up; changed portable controls, formatting and native behavior are
+rechecked afterward. These are local correctness checks, not frame timing.
 
-The four bounded native attempts consume 130.196 seconds, including the failed
-31.745-second build. Their continuing target account totals 2,264.315 seconds;
-peak allocation is 13,548,879,872 bytes under the existing 16,328,871,936-byte cap.
+The five bounded native attempts consume 191.133 seconds, including the failed
+31.745-second build. Their continuing target account totals 2,325.252 seconds;
+peak allocation is 13,553,360,896 bytes under the existing 16,328,871,936-byte cap.
 Every wrapper has an actual terminal tool result and freshly confirmed absence
 of its owned PID/groups. Prior failures and protected native artifacts remain
 retained. [The data manifest](evidence/native-wasm-coroutines/manifest.json)
