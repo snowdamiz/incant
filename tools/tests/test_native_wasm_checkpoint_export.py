@@ -11,7 +11,7 @@ from unittest import mock
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from probes.native_wasm_checkpoint import fixture, oracle
 from probes.native_wasm_checkpoint.owner import CheckpointOwner
-from probes.native_wasm_checkpoint.replay import authoring
+from probes.native_wasm_checkpoint.replay import authoring, managed_logs
 
 
 def independent_state(tick):
@@ -174,6 +174,70 @@ class ProcessDataTests(unittest.TestCase):
             self.assertEqual(len((owner.output / 'process-inventory.jsonl').read_text().splitlines()), 3)
             with self.assertRaises(ValueError):
                 owner.discover(100002, 99999, 'sampled-descendant')
+
+
+class ManagedStreamDataTests(unittest.TestCase):
+    def fixture(self, root):
+        dwarf = '/private/build/symbols/incant_game_player.dSYM/Contents/Resources/DWARF/incant_game_player-abc'
+        symbols = '/private/build/symbols/incant_game_player.dSYM'
+        executable, player = '/private/target/incant_game_player', '/private/build/player/incant_game_player'
+        commands = [['cargo', 'build'], ['/trusted/llvm-readobj', '--sections', dwarf],
+                    ['xcrun', 'dwarfdump', '--verify', symbols], ['xcrun', 'dwarfdump', '--uuid', executable],
+                    ['xcrun', 'dwarfdump', '--uuid', symbols], ['xcrun', 'strip', '-S', '-x', player],
+                    ['xcrun', 'dwarfdump', '--uuid', player], ['/trusted/llvm-readobj', '--sections', player],
+                    ['incant_game_player', '--package', '/private/data']]
+        calls = []
+        for index, command in enumerate(commands):
+            row = {'argv': command, 'finished': True, 'cleanup_confirmed': True, 'exit': 0}
+            for stream in (('stdout', 'stderr') if index in (0, 8) else ('stdout',)):
+                path = f'{index}.{stream}.log'
+                content = (f'{index}: merged diagnostics\n' if 0 < index < 8 else 'ordinary\n').encode()
+                (root / path).write_bytes(content)
+                row[stream] = {'path': path, 'sha256': oracle.sha(content)}
+            calls.append(row)
+        return calls
+
+    def test_exact_merged_symbol_streams_remain_hash_checked(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary); calls = self.fixture(root)
+            managed_logs(root, calls)
+            (root / calls[2]['stdout']['path']).write_text('changed merged stderr')
+            with self.assertRaisesRegex(ValueError, 'log identity'):
+                managed_logs(root, calls)
+
+    def test_missing_ordinary_stderr_is_not_treated_as_merged(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary); calls = self.fixture(root)
+            del calls[-1]['stderr']
+            with self.assertRaisesRegex(ValueError, 'Seven merged'):
+                managed_logs(root, calls)
+
+    def test_missing_symbol_call_or_output_refuses(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary); calls = self.fixture(root)
+            with self.assertRaisesRegex(ValueError, 'Seven merged'):
+                managed_logs(root, calls[:3] + calls[4:])
+            del calls[2]['stdout']
+            with self.assertRaises(KeyError):
+                managed_logs(root, calls)
+
+    def test_changed_symbol_command_or_linked_path_refuses(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary); calls = self.fixture(root)
+            calls[2]['argv'][2] = '--uuid'
+            with self.assertRaisesRegex(ValueError, 'command inventory'):
+                managed_logs(root, calls)
+            calls = self.fixture(root)
+            calls[1]['argv'][-1] = '/unrelated/incant_game_player-abc'
+            with self.assertRaisesRegex(ValueError, 'symbol paths'):
+                managed_logs(root, calls)
+
+    def test_failed_merged_tool_is_not_a_valid_record(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary); calls = self.fixture(root)
+            calls[3]['exit'] = 1
+            with self.assertRaisesRegex(ValueError, 'Successful merged'):
+                managed_logs(root, calls)
 
 
 class PublicTransactionDataTests(unittest.TestCase):

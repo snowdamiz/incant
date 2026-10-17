@@ -19,6 +19,37 @@ def data(root, name):
     return json.loads(read(root, name))
 
 
+def managed_logs(root, calls):
+    # shipping_symbols.run intentionally merges stderr into stdout. Admit only
+    # its complete macOS command sequence; every other call needs both streams.
+    merged = [(index, call) for index, call in enumerate(calls) if 'stderr' not in call]
+    require(len(merged) == 7, 'Seven merged symbol-tool streams')
+    indices = [index for index, _ in merged]
+    equal(indices, list(range(indices[0], indices[0] + 7)), 'Contiguous symbol packaging')
+    commands = [call['argv'] for _, call in merged]
+    require(all(isinstance(args, list) and len(args) >= 3 for args in commands), 'Symbol command shape')
+    readobj, dwarf, symbols = commands[0][0], commands[0][-1], commands[1][-1]
+    executable, player = commands[2][-1], commands[4][-1]
+    require(Path(readobj).is_absolute() and Path(readobj).name == 'llvm-readobj'
+            and Path(symbols).name == 'incant_game_player.dSYM'
+            and Path(dwarf).parent == Path(symbols) / 'Contents/Resources/DWARF'
+            and Path(dwarf).name.startswith('incant_game_player-')
+            and Path(executable).name == Path(player).name == 'incant_game_player'
+            and Path(player).parent == Path(symbols).parent.parent / 'player', 'Linked symbol paths')
+    equal(commands, [[readobj, '--sections', dwarf], ['xcrun', 'dwarfdump', '--verify', symbols],
+          ['xcrun', 'dwarfdump', '--uuid', executable], ['xcrun', 'dwarfdump', '--uuid', symbols],
+          ['xcrun', 'strip', '-S', '-x', player], ['xcrun', 'dwarfdump', '--uuid', player],
+          [readobj, '--sections', player]], 'Exact merged symbol command inventory')
+    for index, call in enumerate(calls):
+        require(call['finished'] is True and call['cleanup_confirmed'] is True, 'Every managed command closed')
+        if index in indices:
+            require(call['exit'] == 0, 'Successful merged symbol command')
+        for stream in (('stdout',) if index in indices else ('stdout', 'stderr')):
+            row = call[stream]
+            require(Path(row['path']).name == row['path'], 'Simple managed log path')
+            require(oracle.sha(read(root, row['path'], 128 * 1024**2)) == row['sha256'], 'Actual log identity')
+
+
 def authoring(traces, authored):
     require(len(traces) == 2 and all(t['exit'] == 0 for t in traces), 'Two actual closed public RPC owners')
     first, second = [t['requests'] for t in traces]
@@ -104,12 +135,7 @@ def replay(root):
     for name, cap in [('target', 12 * 1024**3), ('scratch', 8 * 1024**3),
                       ('output', 2 * 1024**3), ('rss', 8 * 1024**3)]:
         require(type(owner['peaks'][name]) is int and 0 < owner['peaks'][name] <= cap, 'Resource peak: ' + name)
-    for call in owner['calls']:
-        require(call['finished'] is True and call['cleanup_confirmed'] is True, 'Every managed command closed')
-        for stream in ('stdout', 'stderr'):
-            row = call[stream]
-            require(Path(row['path']).name == row['path'], 'Simple managed log path')
-            require(oracle.sha(read(root, row['path'], 128 * 1024**2)) == row['sha256'], 'Actual log identity')
+    managed_logs(root, owner['calls'])
     outputs = {}
     for name, (start, end) in oracle.RUNS.items():
         receipt = data(root, name + '-process.json')
