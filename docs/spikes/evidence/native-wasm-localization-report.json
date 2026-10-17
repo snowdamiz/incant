@@ -200,5 +200,112 @@
     "Local Mac qualification only; CI profile is not shipping-performance evidence.",
     "No authored fresh shipping export for this query.",
     "Complete SDK parity and Phase1 gates remain open."
-  ]
+  ],
+  "local_development_checks": {
+    "source": "b7dd4d27ddccbf901e1e9af84c8dcc5dc6b587f1",
+    "all_ten_passed": true,
+    "actual_session": 13170,
+    "actual_terminal_exit": 0,
+    "seconds": 75.88413062499603,
+    "commands": [
+      {
+        "command": [
+          "python3",
+          "tools/generate_conventions.py",
+          "--check"
+        ],
+        "exit": 0,
+        "seconds": 1.0336715410230681
+      },
+      {
+        "command": [
+          "npm",
+          "run",
+          "test:tools"
+        ],
+        "exit": 0,
+        "seconds": 49.28239520796342
+      },
+      {
+        "command": [
+          "cargo",
+          "fmt",
+          "--all",
+          "--check"
+        ],
+        "exit": 0,
+        "seconds": 2.773408541979734
+      },
+      {
+        "command": [
+          "node",
+          "tools/build_bridge.mjs",
+          "--check"
+        ],
+        "exit": 0,
+        "seconds": 0.40889179200166836
+      },
+      {
+        "command": [
+          "node",
+          "tools/generate_sdk.mjs",
+          "--check"
+        ],
+        "exit": 0,
+        "seconds": 0.4339391669491306
+      },
+      {
+        "command": [
+          "node_modules/.bin/tsc",
+          "-p",
+          "sdk/ts/tsconfig.json"
+        ],
+        "exit": 0,
+        "seconds": 0.6650150829809718
+      },
+      {
+        "command": [
+          "npm",
+          "run",
+          "build",
+          "--workspace",
+          "editor/ui"
+        ],
+        "exit": 0,
+        "seconds": 5.377098666969687
+      },
+      {
+        "command": [
+          "npm",
+          "run",
+          "test",
+          "--workspace",
+          "editor/ui"
+        ],
+        "exit": 0,
+        "seconds": 14.596820083039347
+      },
+      {
+        "command": [
+          "python3",
+          "tools/generate_wasm_sdk.py",
+          "--check"
+        ],
+        "exit": 0,
+        "seconds": 0.7611360420123674
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "exit": 0,
+        "seconds": 0.44223124999552965
+      }
+    ],
+    "result_sha256": "66ee6d4dfd01784ceb677763580dfab0950ecd3d10130c9c83b52322eac5a0a2",
+    "closeout_sha256": "3e67fb8c722c6193c65dd7ae3976f56314a35e97229809cb482179ac4e9c9169",
+    "all_wrapper_and_groups_absent": true
+  }
 }
