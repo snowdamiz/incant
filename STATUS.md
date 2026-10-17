@@ -55,6 +55,19 @@ passes local tests and leaves production behavior unchanged. Both desktop jobs
 and Windows Wasm conformance passed on checkpoint44; that checkpoint's separate
 general failure prevented promotion.
 
+## Explicit Wasm state — native persistence qualified
+
+Opted-in native Wasm modules now retain bounded, transactional host-owned state
+across fresh-VM saves/restores and compatible reloads in both wasm2c and Wasmtime.
+Ordinary, opaque-native and persisted restoration preserve the tested world,
+UI focus/text and fractional-clock PCM. Qualification passed 69 native test
+executions, seven strict lints, 37 SDK/cook/export controls and nine data-only
+evidence controls; four failed attempts remain recorded with their corrections.
+[Producing revisions and evidence](docs/spikes/native-wasm-persistent-state.md)
+remain explicit. An ordinary authored shipping export with save/load is still
+pending. This captures declared state rather than arbitrary guest memory, and
+does not establish full SDK, rendered-device, performance or phase completion.
+
 ## Native material tables — actual editor workflow verified
 
 A fresh main380-equivalent editor replaces complete model-local material, image,

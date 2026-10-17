@@ -161,6 +161,63 @@ fn main() {
         "cargo:rustc-env=INCANT_CHECKPOINT_RUNTIME_ID={:x}",
         runtime.finalize()
     );
+    // Separate identity: adding Wasm checkpoints never changes the bytecode
+    // checkpoint format or borrows the QuickJS code identity for a native module.
+    let mut wasm = Sha256::new();
+    for name in [
+        "incant_wasm_abi",
+        "incant_wasm_runtime",
+        "incant_wasm_dev",
+        "incant_wasm_cook",
+    ] {
+        let dir = root.join("crates").join(name);
+        hash_tree(&dir.join("src"), &mut wasm);
+        hash_file(&dir.join("Cargo.toml"), &mut wasm);
+    }
+    hash_vendor_tree(root, &root.join("crates/incant_wasm_runtime/c"), &mut wasm);
+    for path in [
+        "Cargo.lock",
+        "sdk/abi/native-v1.json",
+        "tools/wasm2c.py",
+        "tools/wasm_persistent.py",
+        "crates/incant_wasm_runtime/build.rs",
+    ] {
+        hash_file(&root.join(path), &mut wasm);
+    }
+    hash_tree(Path::new("src/checkpoint"), &mut wasm);
+    for name in [
+        "CARGO_ENCODED_RUSTFLAGS",
+        "CFLAGS",
+        "HOST_CFLAGS",
+        "TARGET_CFLAGS",
+    ] {
+        println!("cargo:rerun-if-env-changed={name}");
+        wasm.update(name.as_bytes());
+        wasm.update(env::var(name).unwrap_or_default().as_bytes());
+    }
+    for key in [
+        format!("CFLAGS_{target}"),
+        format!("CFLAGS_{}", target.replace('-', "_")),
+    ] {
+        println!("cargo:rerun-if-env-changed={key}");
+        wasm.update(key.as_bytes());
+        wasm.update(env::var(&key).unwrap_or_default().as_bytes());
+    }
+    let mut cfg: Vec<_> = env::vars()
+        .filter(|(key, _)| key.starts_with("CARGO_CFG_"))
+        .collect();
+    cfg.sort();
+    for (key, value) in cfg {
+        println!("cargo:rerun-if-env-changed={key}");
+        wasm.update(key.as_bytes());
+        wasm.update([0]);
+        wasm.update(value.as_bytes());
+        wasm.update([0]);
+    }
+    println!(
+        "cargo:rustc-env=INCANT_WASM_CHECKPOINT_RUNTIME_ID={:x}",
+        wasm.finalize()
+    );
     println!(
         "cargo:rustc-env=INCANT_SCRIPT_TARGET={}",
         env::var("TARGET").unwrap()

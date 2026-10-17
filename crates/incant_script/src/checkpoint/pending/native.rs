@@ -42,7 +42,4 @@ impl PendingSessionCheckpoint {
         }
         Ok(())
     }
-    pub(in crate::checkpoint) fn retain_restart_requests(&mut self, enabled: bool) {
-        self.restart_requests = enabled;
-    }
 }

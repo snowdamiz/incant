@@ -12,7 +12,7 @@ impl NativeSession {
         planar_work: &mut PlanarCheckpointWorkBudget,
         spatial_work: &mut SpatialCheckpointWorkBudget,
     ) -> Result<NativeSessionCheckpoint> {
-        host(self)?;
+        state::receiver(self)?;
         let ui = ui.checkpoint_for_world(&self.world)?;
         ui.validate_world(&self.world)?;
         self.capture_native(
@@ -39,7 +39,7 @@ impl NativeSession {
     where
         B::Error: std::fmt::Debug,
     {
-        host(self)?;
+        state::receiver(self)?;
         let audio = audio.checkpoint_for_world(&self.world)?;
         audio.validate_session(&self.world)?;
         #[cfg(feature = "ui")]

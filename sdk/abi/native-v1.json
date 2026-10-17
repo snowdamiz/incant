@@ -1211,6 +1211,56 @@
       "result": "i32",
       "opcode": 63,
       "call": "Call::RequestRestart"
+    },
+    {
+      "namespace": "incant_state_v1",
+      "name": "read",
+      "opcode": 64,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "offset",
+          "i32"
+        ],
+        [
+          "len",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::ReadPersistent { ptr, offset, len }"
+    },
+    {
+      "namespace": "incant_state_v1",
+      "name": "write",
+      "opcode": 65,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "offset",
+          "i32"
+        ],
+        [
+          "len",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::WritePersistent { ptr, offset, len }"
     }
   ],
   "enums": {
@@ -3844,6 +3894,7 @@
     "incant_hud_v1": "hud",
     "incant_audio_v1": "audio",
     "incant_light_v1": "light",
-    "incant_session_v1": "session"
+    "incant_session_v1": "session",
+    "incant_state_v1": "state"
   }
 }

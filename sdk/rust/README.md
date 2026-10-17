@@ -167,7 +167,7 @@ source, raw Wasm or cached native modules at runtime.
   remains terminal after a failure following accepted simulation. This does not
   undo simulation or device audio already advanced by an owning game session.
 - No source/asset/configuration mutation, timers, physics/pathfinding/character APIs, authored
-  instance props, audio rendering, complete gameplay SDK, save/restore, device
+  instance props, audio rendering, complete gameplay SDK, arbitrary-memory save/restore, device
   performance or distribution gate is implied by this slice.
 
 ## Generated compatibility boundary
@@ -298,7 +298,7 @@ before exposing borrowed views. An invalid active call or caught SDK error
 rejects the callback's entire staged numeric/structural/log prefix.
 
 These copied observations do not grant chain-topology authority or persist Wasm
-memory. Whole-module checkpoints remain explicitly unsupported. See
+memory. Arbitrary whole-module snapshots remain explicitly unsupported. See
 [samples/animation_compound.rs](samples/animation_compound.rs) for complete
 captured reads and controls through the real native host.
 
@@ -317,7 +317,7 @@ root stripping, including ExtractOnly and disabled application. Graph-only
 observations remain available. The new complete frame accepts ordinary worlds
 with an empty root table. Callers supply bounded scratch; no native pointer,
 model loader or per-tick source/document parser is introduced. Physics and static
-guest checkpoint limitations are unchanged. Actual dual-host and public root
+guest heap checkpoint limitations are unchanged. Actual dual-host and public root
 package evidence is recorded separately; API availability alone is not that proof.
 
 ### Audio declarations and transport
@@ -347,3 +347,28 @@ numeric, structural and log changes; short reads never copy a partial frame.
 Queued commands never call an audio backend directly. See the real Rust
 [transport sample](samples/audio_transport.rs) and
 [scope/evidence](../../docs/spikes/native-wasm-audio.md).
+
+### Explicit persistent state (native qualification pending)
+
+`persistent_state!(schema = [5; 32], bytes = 16)` opts a guest into a fixed
+host-owned state region. Choose a nonzero 32-byte schema identifier and a length
+of 1–65,536 bytes for the actual application layout.
+`Tick::read_persistent(offset, buffer)` and `write_persistent(offset, bytes)`
+require a fresh tick capability. Reads observe earlier writes in that callback;
+bytes publish only with the successful native transaction. Current-capability
+errors poison that transaction even when ignored. Expired tokens cannot access
+or invalidate the new tick. State calls are bounded to 256 operations and 1 MiB
+of transferred bytes per tick, within the shared native call budget.
+
+Capture reads committed host bytes without calling guest code. Ordinary loads
+and native checkpoint reconstruction create a fresh VM, then restore the
+validated region, world clock and capability watermark before any update.
+Globals, tables, heap objects and retained pointers restart; they are not saved.
+Guests without the declaration keep the explicit state-ABI refusal. A pending
+restart request refuses capture without consuming the request. Same-layout
+reload preserves committed bytes; changing byte length/schema refuses reload.
+
+See [samples/persistent_state.rs](samples/persistent_state.rs) for typed byte
+encoding and [the implementation scope](../../docs/spikes/native-wasm-persistent-state.md).
+Source controls exist for both native hosts, but their execution and a new
+ordinary shipping export remain pending. This API is not evidence of those gates.

@@ -26,6 +26,7 @@ pub struct ModuleExports {
     create: Create,
     update: Update,
     free: Free,
+    persistent: Option<crate::persistent::PersistentProgram>,
 }
 impl ModuleExports {
     /// # Safety
@@ -42,7 +43,28 @@ impl ModuleExports {
             create,
             update,
             free,
+            persistent: None,
         }
+    }
+    /// # Safety
+    /// All `from_linked` obligations apply. `program` must describe the exact
+    /// validated original/prepared module and trusted generated native linkage.
+    /// Never obtain this descriptor or its fingerprint from checkpoint bytes.
+    pub const unsafe fn from_linked_persistent(
+        create: Create,
+        update: Update,
+        free: Free,
+        program: crate::persistent::PersistentProgram,
+    ) -> Self {
+        Self {
+            create,
+            update,
+            free,
+            persistent: Some(program),
+        }
+    }
+    pub const fn persistent_program(&self) -> Option<crate::persistent::PersistentProgram> {
+        self.persistent
     }
 }
 #[derive(Debug, Error)]
@@ -65,7 +87,8 @@ pub struct StaticModule {
 }
 impl StaticModule {
     pub fn new(exports: ModuleExports) -> Result<Self, StaticError> {
-        let mut capability = Capability::default();
+        let mut capability =
+            Capability::with_persistence(exports.persistent.map(|p| p.declaration));
         let mut context = Context {
             capability: &mut capability,
             error: None,
@@ -98,6 +121,38 @@ impl StaticModule {
             instance: NonNull::new(instance).ok_or(StaticError::Facade)?,
             capability,
         })
+    }
+    pub fn exports(&self) -> ModuleExports {
+        self.exports
+    }
+    pub fn persistent_checkpoint(
+        &self,
+        world: &NativeWorld,
+    ) -> Result<crate::persistent::PersistentSnapshot, StaticError> {
+        Ok(self.capability.persistent_checkpoint(world)?)
+    }
+    pub fn checkpoint_authority(&self, world: &NativeWorld) -> Result<(i64, bool), StaticError> {
+        Ok(self.capability.checkpoint_authority(world)?)
+    }
+    pub fn restore_persistent(
+        &mut self,
+        world: &NativeWorld,
+        snapshot: &crate::persistent::PersistentSnapshot,
+        watermark: i64,
+        restart: bool,
+    ) -> Result<(), StaticError> {
+        Ok(self
+            .capability
+            .restore_persistent(world, snapshot, watermark, restart)?)
+    }
+    /// Construct and validate before replacing. Only explicit same-layout host
+    /// bytes survive; all guest globals, memory and tables start fresh.
+    pub fn reload(&mut self, exports: ModuleExports) -> Result<(), StaticError> {
+        let mut candidate = Self::new(exports)?;
+        self.capability.prepare_reload(&candidate.capability)?;
+        candidate.capability = self.capability.replacement();
+        *self = candidate;
+        Ok(())
     }
     pub fn is_failed(&self) -> bool {
         self.capability.is_failed()
