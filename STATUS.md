@@ -55,6 +55,21 @@ passes local tests and leaves production behavior unchanged. Both desktop jobs
 and Windows Wasm conformance passed on checkpoint44; that checkpoint's separate
 general failure prevented promotion.
 
+## Fresh Core native replay — complete timing attribution
+
+A newly built shipping-profile diagnostic completes the 2,156-step rendered Core
+route with exact CPU gameplay parity; its separate offline replay matches every
+PCM byte. The original native wrapper remains failed because its old decoder
+rejected a new audio field. A strict saved-data correction passes without rerunning
+or relabeling that attempt. All wake/acquisition and host stages are accounted for.
+The separate same-player run then completes without focus interruptions and with
+positive presentation timestamps for all 2,156 gameplay frames. Uneven cadence
+persists: 27 of 28 long display intervals are immediately followed by short ones.
+The interrupted first run and its five zero timestamps remain recorded. The next
+step is a matched pacing intervention; these observations alone do not identify
+the cause or pass FPS, appearance or script-budget requirements.
+[Fresh producer and raw evidence](docs/spikes/native-wake-acquisition-live.md).
+
 ## Explicit Wasm state — native persistence qualified
 
 Opted-in native Wasm modules now retain bounded, transactional host-owned state
