@@ -18,10 +18,18 @@ pub struct PersistentSnapshot {
     bytes: Box<[u8]>,
     tick: u64,
     watermark: i64,
+    timers: Box<[u8]>,
 }
 impl PersistentSnapshot {
-    pub const MAX_ENCODED_BYTES: usize =
-        Declaration::SIZE + 16 + incant_wasm_abi::persistent::MAX_BYTES;
+    pub const MAX_ENCODED_BYTES: usize = 8
+        + Declaration::SIZE
+        + 16
+        + incant_wasm_abi::persistent::MAX_BYTES
+        + incant_wasm_abi::TimerHeader::SIZE
+        + incant_wasm_abi::TIMER_MAX_TIMERS * incant_wasm_abi::TimerStateRow::SIZE;
+    pub(crate) fn timer_state(&self) -> Result<crate::timers::State, Error> {
+        crate::timers::State::restore(&self.timers, self.tick)
+    }
     pub fn declaration(&self) -> Declaration {
         self.declaration
     }
@@ -35,17 +43,30 @@ impl PersistentSnapshot {
         &self.bytes
     }
     pub fn encode(&self) -> Vec<u8> {
-        let mut bytes = Vec::with_capacity(Declaration::SIZE + 16 + self.bytes.len());
+        let mut bytes =
+            Vec::with_capacity(8 + Declaration::SIZE + 16 + self.bytes.len() + self.timers.len());
+        bytes.extend_from_slice(b"INCWPS02");
         bytes.extend_from_slice(&self.declaration.encode());
         bytes.extend_from_slice(&self.tick.to_le_bytes());
         bytes.extend_from_slice(&self.watermark.to_le_bytes());
         bytes.extend_from_slice(&self.bytes);
+        bytes.extend_from_slice(&self.timers);
         bytes
     }
     pub fn decode(bytes: &[u8], declaration: Declaration) -> Result<Self, Error> {
         const HEADER: usize = Declaration::SIZE + 16;
-        if bytes.len() != HEADER + declaration.len()
-            || Declaration::decode(&bytes[..Declaration::SIZE]) != Some(declaration)
+        let (bytes, current) = if let Some(rest) = bytes.strip_prefix(b"INCWPS02") {
+            (rest, true)
+        } else {
+            (bytes, false)
+        };
+        let payload_end = HEADER + declaration.len();
+        if (if current {
+            bytes.len() < payload_end + incant_wasm_abi::TimerHeader::SIZE
+                || bytes.len() > Self::MAX_ENCODED_BYTES - 8
+        } else {
+            bytes.len() != payload_end
+        }) || Declaration::decode(&bytes[..Declaration::SIZE]) != Some(declaration)
         {
             return Err(Error::Abi("persistent state framing/declaration"));
         }
@@ -62,9 +83,17 @@ impl PersistentSnapshot {
         {
             return Err(Error::Abi("persistent state clock/watermark"));
         }
+        let timers = if current {
+            let value = &bytes[payload_end..];
+            crate::timers::State::restore(value, tick)?;
+            value.to_vec()
+        } else {
+            crate::timers::State::default().checkpoint(tick)
+        };
         Ok(Self {
             declaration,
-            bytes: bytes[HEADER..].into(),
+            bytes: bytes[HEADER..payload_end].into(),
+            timers: timers.into(),
             tick,
             watermark,
         })
@@ -144,7 +173,12 @@ impl PersistentState {
         self.staging[range].copy_from_slice(input);
         Ok(())
     }
-    pub(crate) fn snapshot(&self, tick: u64, watermark: i64) -> Result<PersistentSnapshot, Error> {
+    pub(crate) fn snapshot(
+        &self,
+        tick: u64,
+        watermark: i64,
+        timers: Vec<u8>,
+    ) -> Result<PersistentSnapshot, Error> {
         if self.dirty || watermark == i64::MAX {
             return Err(Error::Abi("persistent state not quiescent"));
         }
@@ -153,6 +187,7 @@ impl PersistentState {
             bytes: self.committed.clone(),
             tick,
             watermark,
+            timers: timers.into(),
         })
     }
     pub(crate) fn restore(&mut self, snapshot: &PersistentSnapshot) -> Result<(), Error> {

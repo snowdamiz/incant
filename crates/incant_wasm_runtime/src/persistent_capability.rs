@@ -35,7 +35,7 @@ impl Capability {
         self.persistent
             .as_ref()
             .ok_or(Error::Abi("module has no persistent state declaration"))?
-            .snapshot(self.tick, self.epoch)
+            .snapshot(self.tick, self.epoch, self.timers.checkpoint(self.tick))
     }
     /// The receiver must be a fresh, inactive VM. Startup callbacks cannot have
     /// obtained tick authority. Only trusted receiving-owner restart opt-in survives.
@@ -59,10 +59,12 @@ impl Capability {
             return Err(Error::Abi("persistent restore clock/watermark"));
         }
         let identity = world.spatial_view()?.identity().clone();
+        let timers = snapshot.timer_state()?;
         self.persistent
             .as_mut()
             .ok_or(Error::Abi("module has no persistent state declaration"))?
             .restore(snapshot)?;
+        self.timers = timers;
         self.haptics.clear();
         self.epoch = snapshot.watermark().max(receiver_watermark);
         self.tick = snapshot.tick();

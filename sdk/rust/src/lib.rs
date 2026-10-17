@@ -60,6 +60,7 @@ pub use animation_pose::{
 };
 pub use flipbook::{FlipbookSnapshot, Playback};
 pub use incant_wasm_abi::{ActionKind, GamepadButton, Key, LogLevel, MouseButton, TouchPhase};
+pub use incant_wasm_abi::{TIMER_MAX_BYTES, timers::Snapshot as TimerSnapshot};
 pub use input::InputSnapshot;
 pub use tick::{Chunk, Tick};
 

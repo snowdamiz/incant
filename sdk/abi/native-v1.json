@@ -1316,6 +1316,61 @@
       "result": "i32",
       "opcode": 68,
       "call": "Call::CommandHaptics { ptr, len }"
+    },
+    {
+      "namespace": "incant_timers_v1",
+      "name": "snapshot_len",
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ]
+      ],
+      "result": "i32",
+      "opcode": 69,
+      "call": "Call::TimerLen"
+    },
+    {
+      "namespace": "incant_timers_v1",
+      "name": "read_snapshot",
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "capacity",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "opcode": 70,
+      "call": "Call::ReadTimers { ptr, capacity }"
+    },
+    {
+      "namespace": "incant_timers_v1",
+      "name": "command",
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "len",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "opcode": 71,
+      "call": "Call::CommandTimer { ptr, len }"
     }
   ],
   "enums": {
@@ -3887,6 +3942,90 @@
         "reserved",
         "u32"
       ]
+    ],
+    "TimerHeader": [
+      [
+        "magic",
+        "u8",
+        8
+      ],
+      [
+        "tick",
+        "u64"
+      ],
+      [
+        "elapsed_seconds",
+        "f64"
+      ],
+      [
+        "count",
+        "u32"
+      ],
+      [
+        "stride",
+        "u32"
+      ]
+    ],
+    "TimerEvent": [
+      [
+        "id",
+        "u8",
+        64
+      ],
+      [
+        "id_len",
+        "u32"
+      ],
+      [
+        "reserved",
+        "u32"
+      ],
+      [
+        "scheduled_tick",
+        "u64"
+      ]
+    ],
+    "TimerCommand": [
+      [
+        "id",
+        "u8",
+        64
+      ],
+      [
+        "id_len",
+        "u32"
+      ],
+      [
+        "kind",
+        "u32"
+      ],
+      [
+        "delay",
+        "u32"
+      ],
+      [
+        "interval",
+        "u32"
+      ]
+    ],
+    "TimerStateRow": [
+      [
+        "id",
+        "u8",
+        64
+      ],
+      [
+        "id_len",
+        "u32"
+      ],
+      [
+        "interval",
+        "u32"
+      ],
+      [
+        "due",
+        "u64"
+      ]
     ]
   },
   "input_sections": [
@@ -3999,7 +4138,10 @@
     "LIGHT_MAX_COMMANDS": 1024,
     "HAPTIC_MAX_TARGETS": 17,
     "HAPTIC_MAX_REQUESTS": 32,
-    "HAPTIC_MAX_DURATION_MS": 5000
+    "HAPTIC_MAX_DURATION_MS": 5000,
+    "TIMER_MAX_TIMERS": 128,
+    "TIMER_MAX_ACTIONS": 256,
+    "TIMER_ID_BYTES": 64
   },
   "magic": {
     "INPUT_MAGIC": "INPINP01",
@@ -4032,7 +4174,9 @@
     "AUDIO_COMMAND_MAGIC": "INCADC01",
     "LIGHT_COMMAND_MAGIC": "INCLCMD1",
     "HAPTIC_MAGIC": "INCHAP01",
-    "HAPTIC_COMMAND_MAGIC": "INCHPC01"
+    "HAPTIC_COMMAND_MAGIC": "INCHPC01",
+    "TIMER_MAGIC": "INCTIME1",
+    "TIMER_STATE_MAGIC": "INCTMS01"
   },
   "optional_none": -1,
   "namespaces": {
@@ -4058,6 +4202,7 @@
     "incant_light_v1": "light",
     "incant_session_v1": "session",
     "incant_state_v1": "state",
-    "incant_haptics_v1": "haptics"
+    "incant_haptics_v1": "haptics",
+    "incant_timers_v1": "timers"
   }
 }

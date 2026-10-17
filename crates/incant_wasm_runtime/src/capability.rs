@@ -27,6 +27,15 @@ const _: () = {
 /// Trusted host adapter operation; all integer arguments are guest offsets/indices.
 #[derive(Clone, Copy)]
 pub enum Call {
+    TimerLen,
+    ReadTimers {
+        ptr: i32,
+        capacity: i32,
+    },
+    CommandTimer {
+        ptr: i32,
+        len: i32,
+    },
     HapticLen,
     ReadHaptics {
         ptr: i32,
@@ -233,6 +242,7 @@ pub enum Call {
 /// this state. No guest access or native pointer is retained by this type.
 #[derive(Default)]
 pub struct Capability {
+    timers: crate::timers::State,
     haptics: crate::haptics::State,
     persistent: Option<crate::persistent::PersistentState>,
     persistent_rejected: bool,
@@ -297,6 +307,7 @@ impl Capability {
         Self {
             failed,
             persistent: self.persistent.take(),
+            timers: self.timers.replacement(),
             haptics: self.haptics.replacement(),
             epoch: self.epoch,
             restart_enabled: self.restart_enabled,
@@ -388,6 +399,10 @@ impl Capability {
         }
         self.commands.clear();
         self.haptics.begin();
+        if let Err(error) = self.timers.begin(self.tick + 1, dt) {
+            self.abort();
+            return Err(error);
+        }
         self.restart_calls = 0;
         self.restart_rejected = false;
         self.persistent_rejected = false;
@@ -511,6 +526,7 @@ impl Capability {
             .ok_or(Error::Abi("missing physics state"))
     }
     pub fn abort(&mut self) {
+        self.timers.abort();
         self.haptics.abort();
         if let Some(state) = &mut self.persistent {
             state.abort();
@@ -549,6 +565,10 @@ impl Capability {
     pub fn finish(&mut self, world: &mut NativeWorld) -> Result<(), Error> {
         if !self.active {
             return Err(Error::Abi("inactive ECS transaction"));
+        }
+        if self.timers.rejected {
+            self.abort();
+            return Err(Error::Abi("rejected timer transaction"));
         }
         if self.haptics.rejected {
             self.abort();
@@ -642,6 +662,7 @@ impl Capability {
         });
         if result.is_ok() {
             self.haptics.commit();
+            self.timers.commit();
             if let Some(state) = &mut self.persistent {
                 state.commit();
             }
@@ -650,6 +671,7 @@ impl Capability {
             self.logs.commit(self.tick, self.tick_logs.take());
             self.failed = false;
         } else {
+            self.timers.abort();
             self.haptics.abort();
             if let Some(state) = &mut self.persistent {
                 state.abort();
@@ -714,6 +736,12 @@ impl Capability {
     /// Synchronous import; memory contains initialized guest bytes only and is
     /// borrowed for this call. No world observation/publication occurs here.
     pub fn invoke(&mut self, memory: &mut [u8], epoch: i64, call: Call) -> Result<i32, Error> {
+        let timer_authorized = self.active
+            && self.epoch == epoch
+            && matches!(
+                call,
+                Call::TimerLen | Call::ReadTimers { .. } | Call::CommandTimer { .. }
+            );
         let haptic_authorized = self.active
             && self.epoch == epoch
             && matches!(
@@ -802,6 +830,9 @@ impl Capability {
                     | Call::SetLocale { .. }
             );
         let result = self.invoke_inner(memory, epoch, call);
+        if timer_authorized && result.is_err() {
+            self.timers.rejected = true;
+        }
         if haptic_authorized && result.is_err() {
             self.haptics.rejected = true;
         }
@@ -936,6 +967,27 @@ impl Capability {
                 .ok_or(Error::Limit("navigation query quota"))?;
         }
         match call {
+            Call::TimerLen => Ok(self.timers.snapshot_len() as i32),
+            Call::ReadTimers { ptr, capacity } => {
+                let len = self.timers.snapshot_len();
+                if usize::try_from(capacity).ok().is_none_or(|n| n < len) {
+                    return Err(Error::Abi("timer snapshot capacity"));
+                }
+                self.transfer(len)?;
+                let region = range(ptr, len, memory.len())?;
+                self.timers.snapshot(&mut memory[region])?;
+                Ok(len as i32)
+            }
+            Call::CommandTimer { ptr, len } => {
+                if len != incant_wasm_abi::TimerCommand::SIZE as i32 {
+                    return Err(Error::Abi("timer command framing"));
+                }
+                let bytes = self.read::<{ incant_wasm_abi::TimerCommand::SIZE }>(memory, ptr)?;
+                let row = incant_wasm_abi::TimerCommand::decode(&bytes)
+                    .ok_or(Error::Abi("timer command"))?;
+                self.timers.command(row)?;
+                Ok(0)
+            }
             Call::HapticLen | Call::ReadHaptics { .. } => {
                 let len = self.haptics.snapshot_len();
                 if let Call::ReadHaptics { ptr, capacity } = call {
