@@ -27,6 +27,15 @@ const _: () = {
 /// Trusted host adapter operation; all integer arguments are guest offsets/indices.
 #[derive(Clone, Copy)]
 pub enum Call {
+    HapticLen,
+    ReadHaptics {
+        ptr: i32,
+        capacity: i32,
+    },
+    CommandHaptics {
+        ptr: i32,
+        len: i32,
+    },
     ReadPersistent {
         ptr: i32,
         offset: i32,
@@ -224,6 +233,7 @@ pub enum Call {
 /// this state. No guest access or native pointer is retained by this type.
 #[derive(Default)]
 pub struct Capability {
+    haptics: crate::haptics::State,
     persistent: Option<crate::persistent::PersistentState>,
     persistent_rejected: bool,
     restart_enabled: bool,
@@ -287,6 +297,7 @@ impl Capability {
         Self {
             failed,
             persistent: self.persistent.take(),
+            haptics: self.haptics.replacement(),
             epoch: self.epoch,
             restart_enabled: self.restart_enabled,
             identity: self.identity.clone(),
@@ -311,6 +322,30 @@ impl Capability {
         }
         Ok(std::mem::take(&mut self.restart_committed))
     }
+    /// Trusted current device authority, never derived from input or save data.
+    pub fn set_haptic_capabilities(
+        &mut self,
+        value: incant_input::haptics::HapticCapabilities,
+    ) -> Result<(), Error> {
+        self.haptics_ready()?;
+        self.haptics.set(value)
+    }
+    pub fn haptics_ready(&self) -> Result<(), Error> {
+        if self.failed || self.active {
+            return Err(Error::Failed);
+        }
+        self.haptics.ready()
+    }
+    /// Defer drain until the complete composed host/audio transaction accepts.
+    pub fn take_haptics(&mut self) -> Result<incant_input::haptics::HapticRequests, Error> {
+        if self.failed || self.active {
+            return Err(Error::Failed);
+        }
+        Ok(self.haptics.take())
+    }
+    pub fn clear_haptics(&mut self) {
+        self.haptics.clear();
+    }
     pub fn logs(&self) -> Result<&crate::NativeLogs, Error> {
         if self.failed {
             Err(Error::Failed)
@@ -327,9 +362,7 @@ impl Capability {
         dt: f64,
         ui: &incant_input::UiSnapshot,
     ) -> Result<i64, Error> {
-        if self.failed {
-            return Err(Error::Failed);
-        }
+        self.haptics_ready()?;
         if !dt.is_finite() || dt <= 0. || dt > 1. {
             return Err(Error::Abi("invalid dt"));
         }
@@ -354,6 +387,7 @@ impl Capability {
             return Err(error);
         }
         self.commands.clear();
+        self.haptics.begin();
         self.restart_calls = 0;
         self.restart_rejected = false;
         self.persistent_rejected = false;
@@ -477,6 +511,7 @@ impl Capability {
             .ok_or(Error::Abi("missing physics state"))
     }
     pub fn abort(&mut self) {
+        self.haptics.abort();
         if let Some(state) = &mut self.persistent {
             state.abort();
         }
@@ -514,6 +549,10 @@ impl Capability {
     pub fn finish(&mut self, world: &mut NativeWorld) -> Result<(), Error> {
         if !self.active {
             return Err(Error::Abi("inactive ECS transaction"));
+        }
+        if self.haptics.rejected {
+            self.abort();
+            return Err(Error::Abi("rejected haptic transaction"));
         }
         if self.restart_rejected {
             self.abort();
@@ -602,6 +641,7 @@ impl Capability {
             Ok(())
         });
         if result.is_ok() {
+            self.haptics.commit();
             if let Some(state) = &mut self.persistent {
                 state.commit();
             }
@@ -610,6 +650,7 @@ impl Capability {
             self.logs.commit(self.tick, self.tick_logs.take());
             self.failed = false;
         } else {
+            self.haptics.abort();
             if let Some(state) = &mut self.persistent {
                 state.abort();
             }
@@ -636,7 +677,7 @@ impl Capability {
         Ok(())
     }
     fn command(&mut self, command: StructuralCommand) -> Result<(), Error> {
-        if self.commands.len() + self.restart_calls >= limits::COMMANDS {
+        if self.commands.len() + self.restart_calls + self.haptics.len() >= limits::COMMANDS {
             return Err(Error::Limit("structural command quota"));
         }
         self.commands.push(command)?;
@@ -673,6 +714,12 @@ impl Capability {
     /// Synchronous import; memory contains initialized guest bytes only and is
     /// borrowed for this call. No world observation/publication occurs here.
     pub fn invoke(&mut self, memory: &mut [u8], epoch: i64, call: Call) -> Result<i32, Error> {
+        let haptic_authorized = self.active
+            && self.epoch == epoch
+            && matches!(
+                call,
+                Call::HapticLen | Call::ReadHaptics { .. } | Call::CommandHaptics { .. }
+            );
         let persistent_authorized = self.active
             && self.epoch == epoch
             && matches!(
@@ -755,6 +802,9 @@ impl Capability {
                     | Call::SetLocale { .. }
             );
         let result = self.invoke_inner(memory, epoch, call);
+        if haptic_authorized && result.is_err() {
+            self.haptics.rejected = true;
+        }
         if persistent_authorized && result.is_err() {
             self.persistent_rejected = true;
         }
@@ -886,6 +936,37 @@ impl Capability {
                 .ok_or(Error::Limit("navigation query quota"))?;
         }
         match call {
+            Call::HapticLen | Call::ReadHaptics { .. } => {
+                let len = self.haptics.snapshot_len();
+                if let Call::ReadHaptics { ptr, capacity } = call {
+                    let capacity = usize::try_from(capacity)
+                        .ok()
+                        .filter(|&n| n >= len)
+                        .ok_or(Error::Abi("haptic destination capacity"))?;
+                    range(ptr, capacity, memory.len())?;
+                    let region = range(ptr, len, memory.len())?;
+                    self.transfer(len)?;
+                    self.haptics.snapshot(&mut memory[region]);
+                }
+                return Ok(len as i32);
+            }
+            Call::CommandHaptics { ptr, len } => {
+                let len = usize::try_from(len)
+                    .ok()
+                    .filter(|n| {
+                        (incant_wasm_abi::HapticCommandHeader::SIZE
+                            ..=incant_wasm_abi::HAPTIC_MAX_COMMAND_BYTES)
+                            .contains(n)
+                    })
+                    .ok_or(Error::Abi("haptic command length"))?;
+                let region = range(ptr, len, memory.len())?;
+                self.transfer(len)?;
+                let commands = incant_wasm_abi::haptics::Commands::parse(&memory[region])
+                    .map_err(|_| Error::Abi("haptic command values"))?;
+                let used = self.commands.len() + self.restart_calls + self.haptics.len();
+                self.haptics.queue(commands, limits::COMMANDS - used)?;
+                return Ok(0);
+            }
             Call::ReadPersistent { ptr, offset, len }
             | Call::WritePersistent { ptr, offset, len } => {
                 let len =
@@ -907,7 +988,8 @@ impl Capability {
                 if !self.restart_enabled {
                     return Err(Error::Abi("host does not accept session restart requests"));
                 }
-                if self.commands.len() + self.restart_calls >= limits::COMMANDS {
+                if self.commands.len() + self.restart_calls + self.haptics.len() >= limits::COMMANDS
+                {
                     return Err(Error::Limit("structural command quota"));
                 }
                 self.restart_calls += 1;

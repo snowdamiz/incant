@@ -49,6 +49,26 @@ it beside the actual Wasmtime development host. Shipped applications receive
 only trusted compiled native descriptors; they never compile or load guest Rust
 source, raw Wasm or cached native modules at runtime.
 
+## Haptic output
+
+`tick.haptic_capabilities(&mut scratch)` copies the trusted host's current target
+list into at most `HAPTIC_MAX_BYTES` (220) bytes. An empty list is valid; input
+connectivity alone never grants vibration support. Each `HapticTarget` includes a
+generation, checked again on every command. `tick.play_haptic(target, effect)`
+accepts gamepad `Rumble { strong, weak, duration_ms }` or device
+`Impact { intensity }`; `tick.stop_haptic(target)` queues Stop. Amplitudes are
+finite `f64` values in 0..=1, checked before conversion; rumble lasts 1..=5000 ms.
+The complete example is [samples/haptics.rs](samples/haptics.rs).
+
+At most 32 requests share the callback's existing structural command quota.
+Every active error, even when ignored, rejects the transaction. Delivery occurs
+only after native world, audio and the mandatory consumer accept the whole tick.
+A successful SDK call is not evidence of physical vibration. The trusted owner
+must drain accepted output before the next tick or changing capabilities.
+Pending output blocks checkpoint capture, receiving restore and reload without
+consuming the output. Successful restore/reload, suspension and stop clear
+transient authority; device targets and effects are never serialized or replayed.
+
 ## Data and failure contract
 
 - `Tick` and `Chunk` are callback-bound capabilities. A chunk identifies a whole

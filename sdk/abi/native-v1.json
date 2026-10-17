@@ -1261,6 +1261,61 @@
       ],
       "result": "i32",
       "call": "Call::WritePersistent { ptr, offset, len }"
+    },
+    {
+      "namespace": "incant_haptics_v1",
+      "name": "snapshot_len",
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ]
+      ],
+      "result": "i32",
+      "opcode": 66,
+      "call": "Call::HapticLen"
+    },
+    {
+      "namespace": "incant_haptics_v1",
+      "name": "read_snapshot",
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "capacity",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "opcode": 67,
+      "call": "Call::ReadHaptics { ptr, capacity }"
+    },
+    {
+      "namespace": "incant_haptics_v1",
+      "name": "command",
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "len",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "opcode": 68,
+      "call": "Call::CommandHaptics { ptr, len }"
     }
   ],
   "enums": {
@@ -2030,6 +2085,30 @@
       [
         "Intensity",
         1
+      ]
+    ],
+    "HapticTargetKind": [
+      [
+        "Gamepad",
+        0
+      ],
+      [
+        "Device",
+        1
+      ]
+    ],
+    "HapticEffectKind": [
+      [
+        "Rumble",
+        0
+      ],
+      [
+        "Impact",
+        1
+      ],
+      [
+        "Stop",
+        2
       ]
     ]
   },
@@ -3730,6 +3809,84 @@
         "f64",
         3
       ]
+    ],
+    "HapticHeader": [
+      [
+        "magic",
+        "u8",
+        8
+      ],
+      [
+        "count",
+        "u32"
+      ],
+      [
+        "stride",
+        "u32"
+      ]
+    ],
+    "HapticTarget": [
+      [
+        "kind",
+        "u32"
+      ],
+      [
+        "id",
+        "u32"
+      ],
+      [
+        "generation",
+        "u32"
+      ]
+    ],
+    "HapticCommandHeader": [
+      [
+        "magic",
+        "u8",
+        8
+      ],
+      [
+        "count",
+        "u32"
+      ],
+      [
+        "stride",
+        "u32"
+      ]
+    ],
+    "HapticCommand": [
+      [
+        "target_kind",
+        "u32"
+      ],
+      [
+        "id",
+        "u32"
+      ],
+      [
+        "generation",
+        "u32"
+      ],
+      [
+        "effect_kind",
+        "u32"
+      ],
+      [
+        "strong",
+        "f64"
+      ],
+      [
+        "weak",
+        "f64"
+      ],
+      [
+        "duration_ms",
+        "u32"
+      ],
+      [
+        "reserved",
+        "u32"
+      ]
     ]
   },
   "input_sections": [
@@ -3839,7 +3996,10 @@
     "AUDIO_MAX_BUSES": 32,
     "AUDIO_MAX_SOURCES": 128,
     "AUDIO_MAX_COMMANDS": 1024,
-    "LIGHT_MAX_COMMANDS": 1024
+    "LIGHT_MAX_COMMANDS": 1024,
+    "HAPTIC_MAX_TARGETS": 17,
+    "HAPTIC_MAX_REQUESTS": 32,
+    "HAPTIC_MAX_DURATION_MS": 5000
   },
   "magic": {
     "INPUT_MAGIC": "INPINP01",
@@ -3870,7 +4030,9 @@
     "HUD_MAGIC": "INCHUD01",
     "AUDIO_MAGIC": "INCADS01",
     "AUDIO_COMMAND_MAGIC": "INCADC01",
-    "LIGHT_COMMAND_MAGIC": "INCLCMD1"
+    "LIGHT_COMMAND_MAGIC": "INCLCMD1",
+    "HAPTIC_MAGIC": "INCHAP01",
+    "HAPTIC_COMMAND_MAGIC": "INCHPC01"
   },
   "optional_none": -1,
   "namespaces": {
@@ -3895,6 +4057,7 @@
     "incant_audio_v1": "audio",
     "incant_light_v1": "light",
     "incant_session_v1": "session",
-    "incant_state_v1": "state"
+    "incant_state_v1": "state",
+    "incant_haptics_v1": "haptics"
   }
 }

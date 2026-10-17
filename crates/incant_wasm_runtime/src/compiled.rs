@@ -160,6 +160,21 @@ impl StaticModule {
     pub fn enable_restart_requests(&mut self) -> Result<(), StaticError> {
         Ok(self.capability.enable_restart_requests()?)
     }
+    pub fn set_haptic_capabilities(
+        &mut self,
+        value: incant_input::haptics::HapticCapabilities,
+    ) -> Result<(), StaticError> {
+        Ok(self.capability.set_haptic_capabilities(value)?)
+    }
+    pub fn haptics_ready(&self) -> Result<(), StaticError> {
+        Ok(self.capability.haptics_ready()?)
+    }
+    pub fn take_haptics(&mut self) -> Result<incant_input::haptics::HapticRequests, StaticError> {
+        Ok(self.capability.take_haptics()?)
+    }
+    pub fn clear_haptics(&mut self) {
+        self.capability.clear_haptics();
+    }
     /// Script acceptance only; defer consumption until composed acceptance.
     pub fn take_restart_request(&mut self) -> Result<bool, StaticError> {
         Ok(self.capability.take_restart_request()?)

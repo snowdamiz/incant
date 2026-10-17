@@ -53,6 +53,8 @@ def generate(data, digest):
     if 'incant_audio_v1' in data['namespaces']:
         shared.append('pub mod audio;\n')
         shared += ['pub const AUDIO_MAX_BYTES: usize = AudioHeader::SIZE + AUDIO_MAX_NODES * AudioRow::SIZE;\n', 'pub const AUDIO_MAX_COMMAND_BYTES: usize = AudioCommandHeader::SIZE + AUDIO_MAX_COMMANDS * AudioCommand::SIZE;\n']
+    if 'incant_haptics_v1' in data['namespaces']:
+        shared += ['pub mod haptics;\n', 'pub const HAPTIC_MAX_BYTES: usize = HapticHeader::SIZE + HAPTIC_MAX_TARGETS * HapticTarget::SIZE;\n', 'pub const HAPTIC_MAX_COMMAND_BYTES: usize = HapticCommandHeader::SIZE + HAPTIC_MAX_REQUESTS * HapticCommand::SIZE;\n']
     if 'incant_light_v1' in data['namespaces']:
         shared += ['pub mod light;\n', 'pub const LIGHT_MAX_COMMAND_BYTES: usize = LightCommandHeader::SIZE + LIGHT_MAX_COMMANDS * LightCommand::SIZE;\n']
     shared += [f'pub const {name}: usize = {value};\n' for name,value in data['constants'].items()]

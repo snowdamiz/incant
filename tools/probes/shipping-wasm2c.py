@@ -360,6 +360,19 @@ def persistent_guests(rustc, inputs, guests, environment):
     return modules
 
 
+def haptic_guests(rustc, inputs, guests, environment):
+    source = inputs / 'sdk-haptics.rs'
+    shutil.copy2(ROOT / 'sdk/rust/samples/haptics.rs', source)
+    modules = []
+    for kind in (None, 'scratch', 'amplitude', 'quota', 'owner', 'callback', 'trap', 'saved_target'):
+        name = 'rust-haptics' + ('-' + kind.replace('_', '-') if kind else '')
+        module = guests / (name + '.wasm')
+        rust_guest.compile(rustc, source, module, env=environment,
+                           cfg=['haptic_' + kind] if kind else ())
+        modules.append((name, module))
+    return modules
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('output', type=Path)
@@ -435,6 +448,7 @@ def main():
             modules.extend(light_guests(rustc, inputs, sdk_guests, environment))
             modules.extend(session_guests(rustc, inputs, sdk_guests, environment))
             modules.extend(persistent_guests(rustc, inputs, sdk_guests, environment))
+            modules.extend(haptic_guests(rustc, inputs, sdk_guests, environment))
             modules.extend(navigation_path_guests(rustc, inputs, sdk_guests, environment))
             modules.extend(physics_guests(rustc, inputs, sdk_guests, environment))
             modules.extend(formatting_guests(rustc, inputs, sdk_guests, environment))
