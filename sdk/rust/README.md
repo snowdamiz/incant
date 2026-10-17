@@ -312,8 +312,20 @@ validity is checked natively. These calls do not pseudo-wrap their results. A
 queued locale change affects only later callbacks. Formatting shares existing
 query/output quotas, charges no logical input bytes (matching TypeScript), and
 charges its fixed 24-byte request and result copies to transfer limits. See
-[samples/formatting.rs](samples/formatting.rs). Catalog edits and report
-enumeration remain unsupported.
+[samples/formatting.rs](samples/formatting.rs).
+
+`localization_report(ReportRequest { offset, limit }, result_scratch)` returns
+prepared missing-translation coverage in canonical table/key order. Pages carry
+the total count and up to 128 entries; offsets are 0–4,096 inclusive. Each entry
+contains the table ID, key, requested locale, optional resolved locale and missing
+kind. Queries use the same committed snapshot as message formatting, so queued
+locale changes become visible in the next callback. Reports share the existing
+64-query and 256 KiB logical-output quotas, charge four query units, and reuse
+the bounded copied-result channel. The full frame is validated before exposing
+borrowed entries. This additive opcode 74 uses result kind 3 without changing
+older import signatures or reply kinds. See
+[samples/localization_report.rs](samples/localization_report.rs). Catalog edits
+remain authoring operations, outside the gameplay SDK.
 
 Physics uses the same 1,024 native query units as navigation/localization, one
 unit per batch row or event observation, with at most 128 character queries per

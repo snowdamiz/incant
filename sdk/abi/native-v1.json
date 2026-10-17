@@ -1413,6 +1413,27 @@
       "result": "i32",
       "opcode": 73,
       "call": "Call::CommandCoroutine { ptr, len }"
+    },
+    {
+      "namespace": "incant_localization_v1",
+      "name": "report",
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "offset",
+          "i32"
+        ],
+        [
+          "limit",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "opcode": 74,
+      "call": "Call::LocalizationReport { offset, limit }"
     }
   ],
   "enums": {
@@ -4235,7 +4256,9 @@
     "COROUTINE_MAX_ROUTINES": 128,
     "COROUTINE_FRAME_BYTES": 16384,
     "COROUTINE_STORE_BYTES": 262144,
-    "COROUTINE_TRANSFER_BYTES": 1048576
+    "COROUTINE_TRANSFER_BYTES": 1048576,
+    "LOCALIZATION_MAX_REPORT_TOTAL": 4096,
+    "LOCALIZATION_MAX_REPORT_ROWS": 128
   },
   "magic": {
     "INPUT_MAGIC": "INPINP01",

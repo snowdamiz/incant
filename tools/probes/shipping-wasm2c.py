@@ -251,6 +251,20 @@ def formatting_guests(rustc, inputs, sdk_guests, environment):
     return modules
 
 
+def localization_report_guests(rustc, inputs, sdk_guests, environment):
+    """Actual copied coverage pages and whole-callback refusal controls."""
+    sample = inputs/'localization_report.rs'
+    shutil.copy2(ROOT/'sdk/rust/samples/localization_report.rs', sample)
+    modules = []
+    for kind in (None, 'offset', 'limit', 'capacity', 'quota', 'callback'):
+        name = 'rust-localization-report'+('-'+kind if kind else '')
+        module = sdk_guests/(name+'.wasm')
+        rust_guest.compile(rustc, sample, module, env=environment,
+                           cfg=['report_'+kind] if kind else ())
+        modules.append((name, module))
+    return modules
+
+
 def steering_guests(rustc, inputs, sdk_guests, environment):
     """Actual allocation-free avoidance queries and ignored-error controls."""
     sample = inputs/'steering.rs'
@@ -481,6 +495,7 @@ def main():
             modules.extend(navigation_path_guests(rustc, inputs, sdk_guests, environment))
             modules.extend(physics_guests(rustc, inputs, sdk_guests, environment))
             modules.extend(formatting_guests(rustc, inputs, sdk_guests, environment))
+            modules.extend(localization_report_guests(rustc, inputs, sdk_guests, environment))
             modules.extend(steering_guests(rustc, inputs, sdk_guests, environment))
             environment['INCANT_RUST_SDK_GUESTS']=str(sdk_guests)
             flipbook = inputs/'flipbook.rs'; shutil.copy2(ROOT/'crates/incant_game_player/fixtures/flipbook.rs', flipbook)

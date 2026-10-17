@@ -92,6 +92,46 @@ impl State {
             )
         })
     }
+    pub fn report(
+        &mut self,
+        request: incant_localization::LocalizationReportRequest,
+    ) -> Result<i32, Error> {
+        self.query()?;
+        let value = self
+            .snapshot
+            .report(request)
+            .map_err(|error| Error::Runtime(RuntimeError::Scene(error)))?;
+        // Identical logical metadata charge to the TypeScript report query.
+        // Prepared coverage is immutable; queries do not accumulate diagnostics.
+        let logical = 8 + value
+            .entries
+            .iter()
+            .map(|entry| {
+                entry.table_id.len()
+                    + entry.key.len()
+                    + entry.requested_locale.len()
+                    + entry.resolved_locale.as_ref().map_or(0, String::len)
+                    + 16
+            })
+            .sum::<usize>();
+        let entries = value
+            .entries
+            .iter()
+            .map(|entry| wire::report::Entry {
+                table_id: &entry.table_id,
+                key: &entry.key,
+                requested_locale: &entry.requested_locale,
+                resolved_locale: entry.resolved_locale.as_deref(),
+                kind: match entry.kind {
+                    MissingKind::Translation => wire::MissingKind::Translation,
+                    MissingKind::Key => wire::MissingKind::Key,
+                },
+            })
+            .collect::<Vec<_>>();
+        self.publish(logical, |bytes| {
+            wire::report::encode(value.total, &entries, bytes)
+        })
+    }
     pub fn format(&mut self, bytes: &[u8]) -> Result<i32, Error> {
         self.query()?;
         let locale = &self.snapshot.settings().locale;
