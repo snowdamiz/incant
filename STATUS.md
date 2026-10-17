@@ -62,10 +62,13 @@ route with exact CPU gameplay parity; its separate offline replay matches every
 PCM byte. The original native wrapper remains failed because its old decoder
 rejected a new audio field. A strict saved-data correction passes without rerunning
 or relabeling that attempt. All wake/acquisition and host stages are accounted for.
-Three focus pauses and five zero presentation timestamps remain visible, and
-25-ms display intervals also occur away from focus changes. The next check tests
-the same player's cadence without interruptions. This is not FPS, appearance or
-script-budget acceptance. [Fresh producer and raw evidence](docs/spikes/native-wake-acquisition-live.md).
+The separate same-player run then completes without focus interruptions and with
+positive presentation timestamps for all 2,156 gameplay frames. Uneven cadence
+persists: 27 of 28 long display intervals are immediately followed by short ones.
+The interrupted first run and its five zero timestamps remain recorded. The next
+step is a matched pacing intervention; these observations alone do not identify
+the cause or pass FPS, appearance or script-budget requirements.
+[Fresh producer and raw evidence](docs/spikes/native-wake-acquisition-live.md).
 
 ## Explicit Wasm state — native persistence qualified
 
