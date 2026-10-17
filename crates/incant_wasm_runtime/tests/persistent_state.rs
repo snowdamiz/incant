@@ -75,11 +75,11 @@ fn ignored_current_error_is_terminal_but_stale_calls_cannot_poison_current_tick(
 
 #[test]
 fn undeclared_state_and_quota_overflow_poison_even_if_error_is_ignored() {
-    let mut world = world();
+    let mut undeclared_world = world();
     let mut missing = Capability::default();
-    let epoch = begin(&mut missing, &mut world);
+    let epoch = begin(&mut missing, &mut undeclared_world);
     assert!(missing.invoke(&mut [], epoch, read(0, 0, 0)).is_err());
-    assert!(missing.finish(&mut world).is_err());
+    assert!(missing.finish(&mut undeclared_world).is_err());
     for traffic in [false, true] {
         let mut world = world();
         let mut cap = Capability::with_persistence(Some(Declaration::new(65536, [2; 32]).unwrap()));
