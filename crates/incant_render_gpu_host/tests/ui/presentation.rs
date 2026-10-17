@@ -51,15 +51,19 @@ fn intermediate_ui_receipts_commit_without_display_and_final_ui_matches_ordinary
     tick(&mut ordinary, &[], &[UiEvent::Focus(id(FIELD))]);
     step(&mut batched, &[UiEvent::Focus(id(FIELD))]);
     let target = batched.host().unwrap().ui().unwrap().focus().unwrap();
-    assert_eq!(
-        target,
-        ordinary.host().unwrap().ui().unwrap().focus().unwrap()
-    );
+    let ordinary_target = ordinary.host().unwrap().ui().unwrap().focus().unwrap();
+    assert_ne!(target, ordinary_target, "tokens remain owner-bound");
+    assert_eq!(target.widget(), ordinary_target.widget());
+    assert_eq!(target.epoch(), ordinary_target.epoch());
+    let ordinary_edit = UiEvent::Commit {
+        target: ordinary_target,
+        text: " 日本".into(),
+    };
     let edit = UiEvent::Commit {
         target,
         text: " 日本".into(),
     };
-    tick(&mut ordinary, &[], std::slice::from_ref(&edit));
+    tick(&mut ordinary, &[], std::slice::from_ref(&ordinary_edit));
     step(&mut batched, std::slice::from_ref(&edit));
     assert_eq!(batched.host().unwrap().render_input().tick(), 3);
     assert_eq!(acquisitions.load(Ordering::SeqCst), 1);
