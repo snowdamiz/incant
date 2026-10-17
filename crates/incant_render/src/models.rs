@@ -103,6 +103,13 @@ impl RenderScene {
     pub fn stats(&self) -> &SceneStats {
         &self.stats
     }
+    #[cfg(feature = "experimental-taau")]
+    pub(crate) fn has_blended_models(&self) -> bool {
+        self.batches.iter().any(|b| {
+            b.model.materials.materials[b.model.primitives[b.primitive].material].alpha
+                == incant_assets_runtime::AlphaMode::Blend
+        })
+    }
 }
 pub(crate) type ModelCache = HashMap<incant_assets_runtime::AssetVersionId, Weak<GpuModel>>;
 

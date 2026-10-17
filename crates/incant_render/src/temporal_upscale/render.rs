@@ -77,10 +77,7 @@ pub(crate) fn admission(
         || scene.text.is_some()
         || renderer.bloom.is_some()
         || renderer.ambient_occlusion.is_some()
-        || scene.batches.iter().any(|b| {
-            b.model.materials.materials[b.model.primitives[b.primitive].material].alpha
-                == incant_assets_runtime::AlphaMode::Blend
-        })
+        || scene.has_blended_models()
         || plan.rect != [0., 0., plan.size[0] as f32, plan.size[1] as f32]
     {
         return Err(crate::SceneError::Input("experimental TAAU supports full-viewport opaque/MASK models without overlays, SSAO or bloom").into());

@@ -36,9 +36,9 @@ fn run(cost: bool) {
         &serde_json::to_vec_pretty(&stage.fixture.project).unwrap(),
     );
     let mut input = stage.input();
-    let instance = wgpu::Instance::new(&wgpu::InstanceDescriptor {
+    let instance = wgpu::Instance::new(wgpu::InstanceDescriptor {
         backends: wgpu::Backends::METAL,
-        ..Default::default()
+        ..wgpu::InstanceDescriptor::new_without_display_handle()
     });
     let renderer = if cost {
         pollster::block_on(Renderer::new_with_scene_msaa_and_gpu_timing(
