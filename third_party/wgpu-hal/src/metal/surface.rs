@@ -17,6 +17,8 @@ use super::OsFeatures;
 impl super::Surface {
     pub fn new(layer: Retained<CAMetalLayer>) -> Self {
         Self {
+            #[cfg(all(feature = "diagnostic-minimum-duration", target_os = "macos"))]
+            minimum_duration: super::minimum_duration_policy::State::default(),
             render_layer: Mutex::new(layer),
             #[cfg(all(feature = "diagnostic-presentations", target_os = "macos"))]
             presentation_observation: Mutex::new(None),
@@ -66,6 +68,19 @@ impl crate::Surface for super::Surface {
         config: &crate::SurfaceConfiguration,
     ) -> Result<(), crate::SurfaceError> {
         log::debug!("build swapchain {config:?}");
+
+        #[cfg(all(feature = "diagnostic-minimum-duration", target_os = "macos"))]
+        {
+            let layer = self.render_layer.lock();
+            self.minimum_duration
+                .configure(
+                    config.present_mode == wgt::PresentMode::Fifo,
+                    layer.presentsWithTransaction(),
+                )
+                .map_err(|_| {
+                    crate::SurfaceError::Other("minimum duration surface configuration refused")
+                })?;
+        }
 
         let caps = &device.shared.private_texture_format_caps;
         *self.swapchain_format.write() = Some(config.format);
@@ -122,6 +137,14 @@ impl crate::Surface for super::Surface {
     ) -> Result<crate::AcquiredSurfaceTexture<super::Api>, crate::SurfaceError> {
         let render_layer = self.render_layer.lock();
 
+        // Check before nextDrawable and before the host can commit simulation.
+        // The policy is copied into the acquired texture, never changed at present.
+        #[cfg(all(feature = "diagnostic-minimum-duration", target_os = "macos"))]
+        let minimum_duration = self
+            .minimum_duration
+            .snapshot(render_layer.presentsWithTransaction())
+            .map_err(|_| crate::SurfaceError::Other("minimum duration acquisition refused"))?;
+
         #[cfg(target_os = "macos")]
         {
             // Workaround for https://github.com/gfx-rs/wgpu/issues/8309
@@ -173,6 +196,8 @@ impl crate::Surface for super::Surface {
         let swapchain_format = self.swapchain_format.read().unwrap();
         let extent = self.extent.read();
         let suf_texture = super::SurfaceTexture {
+            #[cfg(all(feature = "diagnostic-minimum-duration", target_os = "macos"))]
+            minimum_duration,
             #[cfg(all(feature = "diagnostic-presentations", target_os = "macos"))]
             presentation: observation.and_then(|o| {
                 use objc2_metal::MTLDrawable;

@@ -12,6 +12,8 @@ mod gamepad;
 mod haptics;
 mod ime;
 mod input;
+#[cfg(test)]
+mod pacing_tests;
 #[cfg(all(feature = "native-presentations", target_os = "macos"))]
 mod presentations;
 mod probe;
@@ -43,6 +45,15 @@ use tao::{
 type Game = HostedGameSession<DeviceBackend, NativeRenderHost<GpuRenderConsumer<SurfaceTargets>>>;
 #[derive(Debug, thiserror::Error)]
 pub enum Error {
+    #[error(transparent)]
+    Pacing(#[from] crate::pacing::Error),
+    #[cfg(all(feature = "native-minimum-duration", target_os = "macos"))]
+    #[error(transparent)]
+    NativePacing(#[from] wgpu_hal::metal::minimum_duration::Error),
+    #[error("minimum-duration60 requires the Metal backend")]
+    PacingBackend,
+    #[error("minimum-duration60 requires FIFO with maximum frame latency 2")]
+    PacingConfiguration,
     #[cfg(all(feature = "native-presentations", target_os = "macos"))]
     #[error("native presentation observation failed: {0}")]
     Presentation(String),
@@ -228,8 +239,18 @@ impl Options {
         })
     }
 }
-pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
+pub fn run(args: &[String], pacing: crate::pacing::Mode) -> session::Result<serde_json::Value> {
     let options = Options::parse(args)?;
+    // Explicit selection refuses wrong scene/OS before creating diagnostic
+    // outputs, a window, audio device or GPU. Ordinary startup order is retained.
+    let admitted_scene = if pacing.selected() {
+        let scene = CookedScene::from_bytes(&bounded(&options.scene, 128 * 1024 * 1024)?)?;
+        pacing.admit_scene(scene.tick_rate())?;
+        pacing.admit_platform()?;
+        Some(scene)
+    } else {
+        None
+    };
     let mut state_log = options
         .state_log
         .as_deref()
@@ -263,7 +284,10 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
             )
         })
         .transpose()?;
-    let scene = CookedScene::from_bytes(&bounded(&options.scene, 128 * 1024 * 1024)?)?;
+    let scene = match admitted_scene {
+        Some(scene) => scene,
+        None => CookedScene::from_bytes(&bounded(&options.scene, 128 * 1024 * 1024)?)?,
+    };
     let has_ui = scene.has_ui();
     // Refuse before opening a window, audio backend or GPU. The rendering lane
     // opts in only when its real canonical screen-space consumer is implemented.
@@ -321,6 +345,7 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
     let mut gamepads = devices::Devices::new(replay.is_none())?;
     let (mut surface, renderer, targets) = SurfaceState::new(
         Arc::clone(&window),
+        pacing,
         #[cfg(all(feature = "native-compilation", target_os = "macos"))]
         compilation.as_mut().map(|c| &mut c.renderer),
     )?;
@@ -987,6 +1012,15 @@ pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
             probe.validate()?;
         }
         let mut report = serde_json::json!({"mode":"native-window","tick":game.world()?.tick(),"accepted_frames":game.host()?.consumer().accepted_frames(),"presentation_refreshes":presentation_refreshes,"adapter":renderer.adapter_name,"backend":format!("{:?}",renderer.adapter.get_info().backend),"on_screen":true,"dropped_wall_ticks":clock.dropped.to_string(),"surface_reconfigurations":surface.reconfigurations,"surface_recreations":surface.recreations,"surface_skipped":surface.skipped,"discarded_stale_text_events":ui_input.stale_text_events(),"lifecycle_probe":probe.as_ref().map(|p|p.report())});
+        if pacing.selected() {
+            report["native_pacing"] = serde_json::json!({
+                "mode":"metal-minimum-duration60",
+                "minimum_previous_display_seconds":1.0 / 60.0,
+                "simulation_tick_rate":rate,
+                "diagnostic_only":true,
+                "performance_gate_passed":false
+            });
+        }
         #[cfg(feature = "profile")]
         cadence.append(&mut report);
         report["host_steps"] = host_steps.into();

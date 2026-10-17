@@ -33,6 +33,21 @@ class StaticShippingTests(unittest.TestCase):
                 source = probe.ROOT/('sdk/rust/fixtures/localization_failure.rs' if name != 'rust-localization' else 'sdk/rust/samples/localization.rs')
                 self.assertEqual(call.args[1].read_bytes(), source.read_bytes())
 
+    def test_persistent_conformance_uses_actual_sdk_and_startup_refusal_guest(self):
+        with tempfile.TemporaryDirectory() as directory, patch.object(probe.rust_guest, 'compile') as compile:
+            inputs = Path(directory); guests = inputs / 'guests'; guests.mkdir()
+            modules = probe.persistent_guests('pinned-rustc', inputs, guests, {'fixed': 'environment'})
+            self.assertEqual([name for name, _ in modules], ['rust-persistent', 'rust-persistent-owner', 'rust-persistent-callback', 'rust-persistent-quota', 'rust-persistent-restart', 'rust-persistent-start'])
+            self.assertEqual(compile.call_count, 6)
+            for call, (name, output) in zip(compile.call_args_list, modules):
+                self.assertEqual(call.args[0], 'pinned-rustc')
+                self.assertEqual(call.args[2], output)
+                self.assertEqual(call.kwargs['env'], {'fixed': 'environment'})
+                suffix = name.removeprefix('rust-persistent-')
+                self.assertEqual(call.kwargs['cfg'], () if name == 'rust-persistent' else ['state_' + suffix])
+                source = probe.ROOT / ('sdk/rust/fixtures/persistent_start.rs' if suffix == 'start' else 'sdk/rust/samples/persistent_state.rs')
+                self.assertEqual(call.args[1].read_bytes(), source.read_bytes())
+
     def test_windows_archive_extracts_only_verified_named_executables(self):
         archive = io.BytesIO()
         with tarfile.open(fileobj=archive, mode='w:gz') as bundle:

@@ -37,7 +37,8 @@ class NativeExportWasmRouting(unittest.TestCase):
             storage.mkdir(); staging.mkdir()
             translator = wabt / ('bin/wasm2c.exe' if os.name == 'nt' else 'bin/wasm2c')
             rustc = root / 'trusted-rust/bin/rustc'
-            original, prepared = b'trusted original input', b'validated metered input'
+            original = b'\0asm\x01\0\0\0\0\x09\x08original'
+            prepared = original + b'\0\x09\x08prepared'
             digest = lambda data: hashlib.sha256(data).hexdigest()
             identity = {'fingerprint': 'a' * 64, 'input_sha256': digest(original),
                         'prepared_sha256': digest(prepared), 'registry_sha256': 'b' * 64}

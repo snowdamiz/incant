@@ -345,6 +345,21 @@ def session_guests(rustc, inputs, guests, environment):
     return modules
 
 
+def persistent_guests(rustc, inputs, guests, environment):
+    source = inputs / 'sdk-persistent-state.rs'
+    startup = inputs / 'sdk-persistent-start.rs'
+    shutil.copy2(ROOT / 'sdk/rust/samples/persistent_state.rs', source)
+    shutil.copy2(ROOT / 'sdk/rust/fixtures/persistent_start.rs', startup)
+    modules = []
+    for kind in (None, 'owner', 'callback', 'quota', 'restart', 'start'):
+        name = 'rust-persistent' + ('-' + kind if kind else '')
+        module = guests / (name + '.wasm')
+        rust_guest.compile(rustc, startup if kind == 'start' else source, module,
+                           env=environment, cfg=['state_' + kind] if kind else ())
+        modules.append((name, module))
+    return modules
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('output', type=Path)
@@ -419,6 +434,7 @@ def main():
             modules.extend(audio_guests(rustc, inputs, sdk_guests, environment))
             modules.extend(light_guests(rustc, inputs, sdk_guests, environment))
             modules.extend(session_guests(rustc, inputs, sdk_guests, environment))
+            modules.extend(persistent_guests(rustc, inputs, sdk_guests, environment))
             modules.extend(navigation_path_guests(rustc, inputs, sdk_guests, environment))
             modules.extend(physics_guests(rustc, inputs, sdk_guests, environment))
             modules.extend(formatting_guests(rustc, inputs, sdk_guests, environment))
@@ -442,8 +458,8 @@ def main():
         (out/'rust-sdk.json').write_text(json.dumps(rust_guest.provenance(),indent=2)+'\n')
         if args.conformance_only:
             commands = [
-                [cargo, 'test', '--profile', args.profile, '-j2', '-p', 'incant-module', '-p', 'incant_wasm_abi', '-p', 'incant_wasm_runtime', '-p', 'incant_wasm_cook', '-p', 'incant_wasm_dev', '-p', 'incant_wasm_player', '-p', 'incant_game_runtime', '-p', 'incant_game_player', '-p', 'incant_script', '--features', 'incant_wasm_dev/static-conformance,incant_wasm_player/fixture,incant_game_player/static-conformance,incant_script/compiler', '--locked'],
-                [cargo, 'clippy', '--profile', args.profile, '-j2', '-p', 'incant-module', '-p', 'incant_wasm_abi', '-p', 'incant_wasm_runtime', '-p', 'incant_wasm_cook', '-p', 'incant_wasm_dev', '-p', 'incant_wasm_player', '-p', 'incant_game_runtime', '-p', 'incant_game_player', '-p', 'incant_script', '--features', 'incant_wasm_dev/static-conformance,incant_wasm_player/fixture,incant_game_player/static-conformance,incant_script/compiler', '--all-targets', '--locked', '--', '-D', 'warnings'],
+                [cargo, 'test', '--profile', args.profile, '-j2', '-p', 'incant-module', '-p', 'incant_wasm_abi', '-p', 'incant_wasm_runtime', '-p', 'incant_wasm_cook', '-p', 'incant_wasm_dev', '-p', 'incant_wasm_player', '-p', 'incant_game_runtime', '-p', 'incant_game_player', '-p', 'incant_script', '--features', 'incant_wasm_dev/persistent-conformance,incant_wasm_player/fixture,incant_game_player/static-conformance,incant_script/compiler', '--locked'],
+                [cargo, 'clippy', '--profile', args.profile, '-j2', '-p', 'incant-module', '-p', 'incant_wasm_abi', '-p', 'incant_wasm_runtime', '-p', 'incant_wasm_cook', '-p', 'incant_wasm_dev', '-p', 'incant_wasm_player', '-p', 'incant_game_runtime', '-p', 'incant_game_player', '-p', 'incant_script', '--features', 'incant_wasm_dev/persistent-conformance,incant_wasm_player/fixture,incant_game_player/static-conformance,incant_script/compiler', '--all-targets', '--locked', '--', '-D', 'warnings'],
                 [sys.executable, ROOT/'tools/probes/development-wasm.py', out/'development', '--rustup', args.rustup, '--static-conformance', '--profile', args.profile],
             ]
             retained = out/'animation-pose-guests';retained.mkdir()

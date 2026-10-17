@@ -203,6 +203,20 @@ fn publish(
 
 #[test]
 fn real_import_undo_redo_keep_world_vm_and_animation_clock_then_reject_incompatible_clips() {
+    imported_refresh(Change::Keys);
+}
+
+#[test]
+fn real_vertex_import_undo_redo_preserves_the_running_script_and_animation() {
+    imported_refresh(Change::Geometry);
+}
+
+#[test]
+fn real_generated_tangent_import_undo_redo_preserves_the_running_script_and_animation() {
+    imported_refresh(Change::GeneratedTangents);
+}
+
+fn imported_refresh(change: Change) {
     let root = tempfile::tempdir().unwrap();
     model(root.path(), Change::Original);
     texture(root.path(), RED);
@@ -223,7 +237,7 @@ fn real_import_undo_redo_keep_world_vm_and_animation_clock_then_reject_incompati
     let old_model = game.consumer().unwrap().unwrap().model.clone();
     let old_texture = game.consumer().unwrap().unwrap().texture.clone();
     let state = game.world().unwrap().animation_state(id(1)).unwrap();
-    model(root.path(), Change::Keys);
+    model(root.path(), change);
     texture(root.path(), DARK);
     import(&mut bus, root.path());
     let next = references(&bus);

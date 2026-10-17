@@ -22,6 +22,7 @@ pub mod mobile_host;
 #[cfg(all(feature = "mobile-apple", target_vendor = "apple"))]
 pub mod mobile_native;
 mod observe;
+mod pacing;
 mod package;
 mod pcm_output;
 mod profile;
@@ -74,6 +75,12 @@ fn run_owned(
     emit: &mut dyn FnMut(&str),
     standalone: bool,
 ) -> Result<(), Box<dyn std::error::Error>> {
+    let (args, pacing) = pacing::Mode::split(args)?;
+    #[cfg(not(all(
+        feature = "native-window",
+        any(target_os = "macos", target_os = "windows", target_os = "linux")
+    )))]
+    let _ = pacing;
     let (args, profile) = profile::split(args, standalone)?;
     let (args, capture_options) = capture::Options::split(args)?;
     let (args, materials) = materials::Options::split(args)?;
@@ -94,7 +101,7 @@ fn run_owned(
             any(target_os = "macos", target_os = "windows", target_os = "linux")
         ))]
         {
-            let mut report = window::run(&args[1..])?;
+            let mut report = window::run(&args[1..], pacing)?;
             profile::append(&mut report, &profile)?;
             emit(&report.to_string());
             if report
@@ -147,6 +154,7 @@ fn run_owned(
         None
     };
     let scene = CookedScene::from_bytes(&bounded(&args[0], 128 * 1024 * 1024)?)?;
+    pacing.admit_scene(scene.tick_rate())?;
     if spatial.is_none() && (!scene.spatial().is_empty() || !scene.visual_assets().is_empty()) {
         return Err("this game player has no spatial host".into());
     }

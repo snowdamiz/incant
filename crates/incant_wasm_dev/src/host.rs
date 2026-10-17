@@ -32,6 +32,7 @@ pub enum ModuleError {
 pub struct DevModuleHost {
     store: Store<State>,
     update: TypedFunc<(i64, f64), ()>,
+    persistent_source: Option<Box<[u8]>>,
 }
 impl DevModuleHost {
     /// Validate raw core Wasm then compile it locally. Never deserialize a
@@ -39,7 +40,7 @@ impl DevModuleHost {
     /// active ECS capability. Compilation has size/declaration caps, not a hard
     /// wall-time or total-process-memory deadline.
     pub fn new(bytes: &[u8]) -> Result<Self, ModuleError> {
-        bounds::preflight(bytes)?;
+        let declaration = bounds::preflight(bytes)?;
         let mut config = Config::new();
         config
             .consume_fuel(true)
@@ -82,7 +83,7 @@ impl DevModuleHost {
             &engine,
             State {
                 limits,
-                capability: Capability::default(),
+                capability: Capability::with_persistence(declaration),
             },
         );
         store.limiter(|state| &mut state.limits);
@@ -99,7 +100,37 @@ impl DevModuleHost {
             return Err(ModuleError::Abi("expected unshared 32-bit memory"));
         }
         let update = instance.get_typed_func::<(i64, f64), ()>(&mut store, "update")?;
-        Ok(Self { store, update })
+        Ok(Self {
+            store,
+            update,
+            persistent_source: declaration.map(|_| bytes.into()),
+        })
+    }
+    /// Retained validated raw Wasm, never a serialized executable cache.
+    pub fn persistent_source(&self) -> Option<&[u8]> {
+        self.persistent_source.as_deref()
+    }
+    pub fn persistent_checkpoint(
+        &self,
+        world: &NativeWorld,
+    ) -> Result<incant_wasm_runtime::persistent::PersistentSnapshot, ModuleError> {
+        Ok(self.store.data().capability.persistent_checkpoint(world)?)
+    }
+    pub fn checkpoint_authority(&self, world: &NativeWorld) -> Result<(i64, bool), ModuleError> {
+        Ok(self.store.data().capability.checkpoint_authority(world)?)
+    }
+    pub fn restore_persistent(
+        &mut self,
+        world: &NativeWorld,
+        snapshot: &incant_wasm_runtime::persistent::PersistentSnapshot,
+        watermark: i64,
+        restart: bool,
+    ) -> Result<(), ModuleError> {
+        Ok(self
+            .store
+            .data_mut()
+            .capability
+            .restore_persistent(world, snapshot, watermark, restart)?)
     }
     pub fn is_failed(&self) -> bool {
         self.store.data().capability.is_failed()
@@ -119,6 +150,10 @@ impl DevModuleHost {
     /// replacement resets guest globals/memory; no VM-state migration is claimed.
     pub fn reload(&mut self, bytes: &[u8]) -> Result<(), ModuleError> {
         let mut candidate = Self::new(bytes)?;
+        self.store
+            .data()
+            .capability
+            .prepare_reload(&candidate.store.data().capability)?;
         candidate.store.data_mut().capability = self.store.data_mut().capability.replacement();
         *self = candidate;
         Ok(())

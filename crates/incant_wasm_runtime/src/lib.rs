@@ -27,6 +27,7 @@ pub use input::{MAGIC as INPUT_MAGIC, MAX_BYTES as MAX_INPUT_BYTES};
 mod compiled;
 pub use compiled::{Import, ModuleExports, StaticError, StaticModule};
 pub mod limits;
+pub mod persistent;
 mod transaction;
 pub use capability::{Call, Capability};
 use incant_runtime::RuntimeError;

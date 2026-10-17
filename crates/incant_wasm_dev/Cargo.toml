@@ -8,6 +8,7 @@ publish.workspace = true
 [features]
 default = ["physics-deterministic"]
 static-conformance = ["wasmtime-host", "incant_wasm_runtime/embedded-fixture", "incant_script/static-module", "incant_script/wasmtime-host"]
+persistent-conformance = ["static-conformance", "incant_script/native-checkpoints", "incant_game_runtime/native-checkpoints"]
 # Explicit desktop development dependency; never enabled by shipped players.
 wasmtime-host = ["dep:incant_input", "dep:wasmtime", "dep:incant_runtime", "dep:incant_types", "dep:thiserror", "dep:wasmparser", "dep:incant_wasm_runtime"]
 

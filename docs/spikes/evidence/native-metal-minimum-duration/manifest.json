@@ -1,0 +1,115 @@
+{
+  "format": "incant-minimum-duration-CPU-packet-v1",
+  "source": "c0ba6ba54ae31aae050cd685f27de7655bf76d16",
+  "original_root": "/Users/andreyyurlov/.codex/incant-evidence/native-metal-minimum-duration-001",
+  "source_inventory_records": 4749,
+  "record_count": 65,
+  "archive_bytes": 726200,
+  "archive_sha256": "d885e1446c023e508d0b8240e0d0578214e58927fa7c1e3b0a2917d326bb0831",
+  "expanded_bytes": 6715759,
+  "mode_test_counts": [
+    11,
+    6,
+    5
+  ],
+  "unique_test_definitions": 11,
+  "strict_lint_count": 3,
+  "binary_copies": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-metal-minimum-duration-001/cpu-001/protected-wasm/00-incant_wasm_cook",
+      "bytes": 3471696,
+      "sha256": "b41cdddd08529e7916ff803ac8abf16c367b0f05965166bec648c1bf3d2566be"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-metal-minimum-duration-001/cpu-001/protected-wasm/01-session_requests-f15562548603319b",
+      "bytes": 10470592,
+      "sha256": "34a6cea056df1f7e5ccf3df30f6ae2532b6c6cffbc2e1535dacede91c5011dae"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-metal-minimum-duration-001/cpu-001/protected-wasm/02-incant_script-adfefb72b42d1648",
+      "bytes": 23772784,
+      "sha256": "53b706601eff9a60927720b2e239375a3bb2b1ceb0e61178ef174ccb2ef9a549"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-metal-minimum-duration-001/cpu-001/protected-wasm/03-incant_script-7565f80dbe23bd72",
+      "bytes": 38893760,
+      "sha256": "553a72024e5f0bfb1f19841e3bd3ab1ec63d8aaf1442a3eb16f3623c367e5b75"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-metal-minimum-duration-001/cpu-001/protected-wasm/04-session_requests-77c89400ea83c1c2",
+      "bytes": 27242016,
+      "sha256": "dcc4b8584b2e8cbc7d1fba77edd93131c160d5791e3be5d70ade4cab2369d7fe"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-metal-minimum-duration-001/cpu-001/protected-wasm/05-incant_wasm_cook-f64225d4cde83854",
+      "bytes": 5861232,
+      "sha256": "885d6b9fbdd750614ac27352dff85df09f6d7ea64c27848cce78697b1a7d78ea"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-metal-minimum-duration-001/cpu-001/protected-wasm/06-incant_wasm_cook-daebe36ffa967632",
+      "bytes": 3471696,
+      "sha256": "b41cdddd08529e7916ff803ac8abf16c367b0f05965166bec648c1bf3d2566be"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-metal-minimum-duration-001/cpu-001/protected-wasm/07-persistent-edd4636208aded65",
+      "bytes": 1046568,
+      "sha256": "dc6cb2694f60e0b4b372ffc6230c444223a80289d231f63ca7701ccf0414722d"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-metal-minimum-duration-001/cpu-001/protected-wasm/08-persistent_parity-1bb9ed16fdec3874",
+      "bytes": 37300432,
+      "sha256": "4c44ffbffc7133cba044d18c0ddd15929b2c73654d2998b895db3f42c17bf88f"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-metal-minimum-duration-001/cpu-001/protected-wasm/09-persistent_state-720392232b7dda13",
+      "bytes": 36078992,
+      "sha256": "b2c1c65c25492021567b480b47192701b4908c86472627e9a0675ac85e211af9"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-metal-minimum-duration-001/cpu-001/protected-wasm/10-persistent_state-a043f986bad016e4",
+      "bytes": 15706640,
+      "sha256": "6590f8d620eecb668d5c9e42571aedf456d57ec70875ed09084d82fd09d8de41"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-metal-minimum-duration-001/cpu-001/protected-wasm/11-persistent-fa9e4d526894d34d",
+      "bytes": 1045784,
+      "sha256": "e54026f1fd6657d5d19f8a481e18aab41c81f524a021be08d6f76873d7406aee"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-metal-minimum-duration-001/cpu-001/protected-wasm/12-registry-40d6c1ef095d724b",
+      "bytes": 20941288,
+      "sha256": "a57b7696cdd34fc31d67e99da55bdf55e503a64878e66815af167058247c19d5"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-metal-minimum-duration-001/cpu-001/artifacts/selected",
+      "bytes": 37240880,
+      "sha256": "8a2c38ed4f1a3d12588114ac761fb528c91353915b4c88654a9bac7e661517e7"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-metal-minimum-duration-001/cpu-001/artifacts/ordinary-window",
+      "bytes": 36842672,
+      "sha256": "5a7eb4930f465a53365dd86d1c7d36b92233967a3ff845b656d7b9ae8db55401"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-metal-minimum-duration-001/cpu-002/artifacts/selected",
+      "bytes": 37240880,
+      "sha256": "8a2c38ed4f1a3d12588114ac761fb528c91353915b4c88654a9bac7e661517e7"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-metal-minimum-duration-001/cpu-002/artifacts/ordinary-window",
+      "bytes": 36842672,
+      "sha256": "5a7eb4930f465a53365dd86d1c7d36b92233967a3ff845b656d7b9ae8db55401"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-metal-minimum-duration-001/cpu-002/artifacts/feature-off",
+      "bytes": 21826272,
+      "sha256": "6e860eeb06039b516642f4dc23ff1c4e7275158d5c8823685c940b4bce771d63"
+    }
+  ],
+  "native_window_executed": false,
+  "shipping_player_executed": false,
+  "GPU_executed": false,
+  "performance_gate_passed": false,
+  "pacing_adopted": false,
+  "limits": "CPU-only qualification. Retains both failed attempts; no presented frame, fresh shipping export, native policy execution, visual, continuous display or timing acceptance."
+}

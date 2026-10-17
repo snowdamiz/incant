@@ -8,21 +8,34 @@ uses four newly packaged shipping players from
 `50b5408b1d6be66dbb1dcbca501d4380add9d656` and five same-package CPU/capture routes.
 Those producing identities remain
 explicit; they are not relabeled as later integration builds.
-Release checkpoint50 tested the main376 tree; later changes
-remain outside that release baseline.
+[Release checkpoint51](../spikes/release-checkpoint-51.md) tested the main382 tree;
+later main384+ changes remain outside that release baseline.
 Phase 1 remains open; this ledger records evidence and remaining work, not director
 approval. [PLAN.md](../../PLAN.md#phase-1-core-engine) defines the requirements.
 Only actual testing on the available Mac is required as device evidence. Other
 device execution is deferred; hosted build and release checks remain required.
 
+A [fresh Core v2 native diagnostic](../spikes/native-wake-acquisition-live.md)
+now completes all 2,156 steps with exact offline gameplay parity and full
+wake/acquisition attribution. Its original audio-schema analysis refusal and
+separate saved-data correction remain explicit. A second same-player run completes
+without focus loss and with positive timestamps for all gameplay frames. Uneven
+display intervals persist, including 27 long-then-short pairs. The complete
+rendered-game performance gate remains open; no gate follows from timing coverage.
+A later [matched minimum-duration diagnostic](../spikes/native-metal-minimum-duration.md)
+is negative for adoption: fewer short intervals accompany a longer presentation
+span, substantially more drawable acquisition wait and four dropped wall ticks.
+The selected arm's strict timing receipt also remains failed at its partial final
+scheduler batch. The ordinary policy stays unchanged.
+
 | Exit requirement | Recorded evidence | Remaining qualification |
 | --- | --- | --- |
-| Core Sample runs at 60 fps, using TypeScript and no editor | Authored Core gameplay, packaged HUD/audio and source-free native execution have scoped proofs. A [shipping native-window replay](../spikes/native-window-replay.md) completes the full 2,156-step route with exact headless observation parity. The later [complete host-stage diagnostic](../spikes/native-presentation-host-stages.md#complete-same-source-live-replay) also records all 2,156 steps with independent stage arithmetic, preserving its historical package and earlier failed attempt. [Core integration](../spikes/core-main182.md), [HUD](../spikes/core-result-hud-main192.md). | A shipping run of the complete rendered game meeting the frame budget. Zero callbacks, incomplete display-interval coverage and an early host/callback discrepancy keep displayed cadence open. Complete host timing and CPU simulation timing do not establish FPS, causality or shader-stall freedom. Rendering reconstruction still has unresolved appearance defects. |
-| CI plays Core Sample and asserts game state | The general Mac and desktop workflows execute `samples/core/verify.py` against the native headless binary. All required checks passed on [checkpoint50](../spikes/release-checkpoint-50.md). | Preserve these checks as the sample and runtime change. This requirement's recorded coverage does not pass the other exit requirements. |
+| Core Sample runs at 60 fps, using TypeScript and no editor | Authored Core gameplay, packaged HUD/audio and source-free native execution have scoped proofs. A [shipping native-window replay](../spikes/native-window-replay.md) completes the full 2,156-step route with exact headless observation parity. The later [complete host-stage diagnostic](../spikes/native-presentation-host-stages.md#complete-same-source-live-replay) also records all 2,156 steps with independent stage arithmetic, preserving its historical package and earlier failed attempt. [Core integration](../spikes/core-main182.md), [HUD](../spikes/core-result-hud-main192.md). | A shipping run of the complete rendered game meeting the frame budget. The latest same-player diagnostic has positive timestamps for every gameplay frame but retains uneven displayed intervals; earlier missing/zero callbacks remain historical. Complete timing coverage and CPU simulation timing do not establish FPS, causality or shader-stall freedom. Rendering reconstruction still has unresolved appearance defects. |
+| CI plays Core Sample and asserts game state | The general Mac and desktop workflows execute `samples/core/verify.py` against the native headless binary. All required checks passed on [checkpoint51](../spikes/release-checkpoint-51.md). | Preserve these checks as the sample and runtime change. This requirement's recorded coverage does not pass the other exit requirements. |
 | Navmesh enemies, pseudo-localization, RTL/CJK rendering and the 2D sample | Native Core/planar scenarios, text shaping and presentation have scoped evidence in [STATUS.md](../../STATUS.md). The [2D sample](../spikes/native-window-eligibility.md) completes its full native Mac win route with exact CPU parity and three actual window captures; desktop CI also runs `samples/planar/verify.py`. The combined [Core locale proof](../spikes/core-locale-sampled-captures.md) now passes five full CPU-matched routes with 37 selected offscreen Metal frames. Independent review of 13 originals verifies winning text, Arabic damaged-pip direction, complete CJK glyphs, pseudo expansion and narrow loss/win wrapping. | Sampled locale appearance is verified on this Mac, without phase approval. Continuous motion and native-window presentation are outside the new sampled result. Earlier [Arabic](../spikes/core-arabic-corrected-window.md) and CJK native routes retain their successful numerical runs and missed winning images; the pseudo native replay remains focus-paused/timed out. Those attempts are not relabeled by the new offscreen proof. Preserve the 2D run's focus interruption/surface deferral and the separate complete rendered-game FPS requirement. |
 | Script p95 within 2 ms with 10,000 scripted entities; no shader compilation stalls above twice the frame budget | Shipping script comparisons and exact gameplay/audio parity are recorded. The latest bounded [navigation cache comparison](../spikes/navigation-search-cache-outcome.md) remained above 2 ms and was not adopted. | The 2 ms requirement remains unmet. The director's 2026-10-14 clarification permits periodic bounded investigations, including subagents, while other engine work continues. Preserve negative results and require a distinct hypothesis before another measured experiment. Whole rendered-game shader/pipeline stall qualification also remains open. |
 | Native runtime data path and shipped dependency boundary | Cooked-world, source-free gameplay and runtime dependency checks have recorded implementations and proofs. See [Core integration](../spikes/core-main182.md) and the [shipping observations](../spikes/quickjs-loan-main278.md). | Retain the boundary on the final complete sample/export configuration. No authoring document, command bus or agent dependency may enter its runtime tick path. |
-| Shipped wasm2c module runs on this Mac, with cost recorded against TypeScript | A [matched shipping workload](../spikes/wasm-typescript-cost.md) records both backends and functional parity. Existing native target builds remain required. | Keep its limited workload and historical build identity explicit; it is not a Core10k, rendered frame-time or startup result. This evidence does not establish complete Wasm SDK parity. |
+| Shipped wasm2c module runs on this Mac, with cost recorded against TypeScript | A [matched shipping workload](../spikes/wasm-typescript-cost.md) records both backends and functional parity. Existing native target builds remain required. An [ordinary authored shipping save/load proof](../spikes/native-wasm-checkpoint-export.md) now verifies declared host-owned state in fresh VMs, exact checkpoint/audible PCM continuation and six specific refusals. The original wrapper failure and corrected data-only acceptance remain separate. | Keep each workload and native producer explicit; neither is a Core10k, rendered frame-time or startup result. Save/load covers opted-in explicit state in a plain scene, without physics/UI or arbitrary guest memory capture. Complete Wasm SDK parity remains open. |
 
 ## Current implementation priorities
 
@@ -31,6 +44,11 @@ device execution is deferred; hosted build and release checks remain required.
   remains a private experiment. The default-off MetalFX foundation is merged,
   but its [material/motion comparison](../spikes/metalfx-image-motion.md) fails
   appearance review. Neither route has accepted quality or performance evidence.
+  The private reconstruction [complete-route cost comparison](../spikes/reconstruction-complete-route-cost.md)
+  now rejects its current CPU-admission layout: 94–97 ms versus about 3 ms for
+  original shading in the matched CI-profile diagnostic. GPU-only admission and
+  reduced transfers/passes are the next unqualified design; the new numerical
+  result does not approve appearance, shipping performance or a phase gate.
 - Extend live asset refresh beyond the verified existing-texture and
   [compatible static-model workflows](../spikes/native-static-model-refresh.md).
   Both preserve the running world and scripts on this Mac. Compatible animation
@@ -42,8 +60,15 @@ device execution is deferred; hosted build and release checks remain required.
   provenance for navigation and atomic publication. Its actual native-window
   workflow now also verifies table replacement, watcher/Undo/Redo, malformed-source
   retention, recovery, continuing VM/world state and durable journal reopen.
-  This adds no appearance or performance acceptance. Changed skeleton/geometry and scene structure still need
-  their own admission rules.
+  This adds no appearance or performance acceptance. Compatible animated vertex
+  content now has [scoped CPU and Metal qualification](../spikes/animated-vertex-refresh.md):
+  import/history preserve the world, VM and clock, while unchanged skin bindings
+  cannot mask an index-only incompatibility. Position-only and tangent-only
+  replacements match independent fresh-game RGBA at the same clock on Metal;
+  the actual editor-window workflow now also verifies import, watcher, history,
+  topology refusal/recovery, continuing state and fresh journal reopen on this Mac.
+  Changed skeleton, topology and scene
+  structure still need their own admission rules.
 - Preserve the now-qualified [ordinary-editor 4x antialiasing](../spikes/editor-scene-msaa.md).
   Actual Mac editor review and default/cooked Metal controls verify the reported
   cube-edge fix. This does not qualify temporal reconstruction or frame budgets;
@@ -75,6 +100,12 @@ The new [repeated-start attribution](../spikes/navigation-start-attribution.md)
 also rejects that specific scan-only hypothesis for reaching 2 ms: its hypothetical
 same-frame zero-cost p95 is still 2.544041 ms. The reusable observer is default off;
 no navigation optimization or new shipping performance result is adopted.
+
+A separate [QuickJS C profile-guided compilation experiment](../spikes/quickjs-c-pgo-feasibility.md)
+now passes standalone behavior and strict invalid-profile refusal checks. It
+establishes compiler feasibility only. Representative Core training, matched
+shipping measurements and gameplay/audio parity remain unperformed; the 2 ms
+requirement is still unmet and ordinary builds are unchanged.
 
 The real-mouse capture check is pending the director's availability and is not
 blocking these lanes. Broader editor, agent, content, export, multiplayer, game

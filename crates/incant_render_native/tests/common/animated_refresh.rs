@@ -29,6 +29,7 @@ pub enum Change {
     Influences,
     Rest,
     Geometry,
+    Topology,
 }
 
 fn floats(root: &Path, document: &Value, accessor: usize, values: &[f32]) {
@@ -175,6 +176,23 @@ pub fn model(root: &Path, change: Change) -> VisualAssetRef {
                 .unwrap() as usize;
             floats(root, &document, accessor, &[1.25, 0., 0.]);
         }
+        Change::Topology => {
+            let accessor = document["meshes"][0]["primitives"][0]["indices"]
+                .as_u64()
+                .unwrap() as usize;
+            let view = document["accessors"][accessor]["bufferView"]
+                .as_u64()
+                .unwrap() as usize;
+            let offset = document["bufferViews"][view]["byteOffset"]
+                .as_u64()
+                .unwrap() as usize;
+            let mut bytes = fs::read(root.join("model.bin")).unwrap();
+            // Same three vertices/indices, different valid triangle winding.
+            for (i, index) in [2_u16, 1, 0].into_iter().enumerate() {
+                bytes[offset + i * 2..offset + i * 2 + 2].copy_from_slice(&index.to_le_bytes());
+            }
+            fs::write(root.join("model.bin"), bytes).unwrap();
+        }
     }
     skeletal::write(root, &document);
     let model = incant_assets::cook_gltf(
@@ -184,4 +202,28 @@ pub fn model(root: &Path, change: Change) -> VisualAssetRef {
     )
     .unwrap();
     reference(90, VisualAssetKind::Model, &model.metadata.fingerprint)
+}
+
+/// Authored normals preserve the original indexed vertices, so an index-only
+/// edit is not also a change to expanded vertex-to-joint correspondence.
+pub fn indexed_model(root: &Path, change: Change) -> VisualAssetRef {
+    model(root, change);
+    let mut document: Value =
+        serde_json::from_slice(&fs::read(root.join("model.gltf")).unwrap()).unwrap();
+    let normals = append(
+        root,
+        &mut document,
+        "VEC3",
+        3,
+        &[0., 0., 1., 0., 0., 1., 0., 0., 1.],
+    );
+    document["meshes"][0]["primitives"][0]["attributes"]["NORMAL"] = json!(normals);
+    skeletal::write(root, &document);
+    let cooked = incant_assets::cook_gltf(
+        root,
+        Path::new("model.gltf"),
+        &root.join(".incant/cache/models"),
+    )
+    .unwrap();
+    reference(90, VisualAssetKind::Model, &cooked.metadata.fingerprint)
 }

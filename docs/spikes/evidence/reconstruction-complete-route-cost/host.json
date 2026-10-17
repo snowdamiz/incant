@@ -1,0 +1,11 @@
+{
+  "host": {
+    "model": "Mac17,9",
+    "os": "ProductName:\t\tmacOS\nProductVersion:\t\t27.0.1\nBuildVersion:\t\t26A434",
+    "architecture": "arm64"
+  },
+  "proposal_sha256": "5e66584ffdebfd9fdfb2810ddf3a9bfe7cb613f9348aff296a099d4cd1a3ef85",
+  "quiet_exclusive_lease_required": true,
+  "no_window_or_OS_capture": true,
+  "CI_profile_not_shipping_measurement": true
+}
