@@ -1,0 +1,37 @@
+{
+  "format": "incant-animated-vertex-editor-delivery-v1",
+  "files": {
+    "README.md": {
+      "bytes": 3260,
+      "sha256": "1e43c9b6e85cb39b1f16494c5b6e4982196b841b5df941d0ad5a14f5e4ad86cc"
+    },
+    "manifest.json": {
+      "bytes": 161590,
+      "sha256": "388604bb5067886ec4398df9428d09290b4a0eee3d62b30802629267fb84da67"
+    },
+    "records.json.gz": {
+      "bytes": 1984649,
+      "sha256": "1a8423ce3b392895c629eb19996c87869484ac0ed38840221bf1053b95773870"
+    },
+    "report.md": {
+      "bytes": 1080,
+      "sha256": "6f3df4657377cc77c645f4dc261e557e629cb5ac0498d124fc17718a7c12e5d9"
+    },
+    "test_verify.py": {
+      "bytes": 3617,
+      "sha256": "ce37302476c3268b110920771b0e64b8fa510109eabc35166d504cfc5110e5e3"
+    },
+    "verify.py": {
+      "bytes": 14904,
+      "sha256": "4c4ac2d7b0659c52b6e10baf8be724ec669f32b6689c9af9b93e9cf1f1faa4b7"
+    }
+  },
+  "checks": {
+    "portable_replay_passed": true,
+    "tests": 5,
+    "coherent_negative_variants": 8,
+    "native_reexecuted": false
+  },
+  "producer": "b3da3b6d9bbb6a8870480ae54d97a2884d20edde",
+  "scope": "Actual functional editor workflow; external native binaries and omitted binary cache contents are recorded identities only in portable replay."
+}

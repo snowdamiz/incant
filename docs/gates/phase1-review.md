@@ -65,7 +65,9 @@ scheduler batch. The ordinary policy stays unchanged.
   import/history preserve the world, VM and clock, while unchanged skin bindings
   cannot mask an index-only incompatibility. Position-only and tangent-only
   replacements match independent fresh-game RGBA at the same clock on Metal;
-  actual editor-window qualification remains pending. Changed skeleton, topology and scene
+  the actual editor-window workflow now also verifies import, watcher, history,
+  topology refusal/recovery, continuing state and fresh journal reopen on this Mac.
+  Changed skeleton, topology and scene
   structure still need their own admission rules.
 - Preserve the now-qualified [ordinary-editor 4x antialiasing](../spikes/editor-scene-msaa.md).
   Actual Mac editor review and default/cooked Metal controls verify the reported
