@@ -40,6 +40,8 @@ frame-capture = ["render-gpu"]
 native-presentations = ["native-window", "dep:wgpu-hal", "wgpu-hal/diagnostic-presentations"]
 # Trusted explicit fixed-duration experiment. Never selected by ordinary exports.
 native-minimum-duration = ["native-window", "dep:wgpu-hal", "wgpu-hal/diagnostic-minimum-duration"]
+# Wake-source-only diagnostic; preserves the normal fixed-step wall clock.
+native-display-link = ["native-window", "dep:objc2", "dep:objc2-app-kit", "dep:objc2-foundation", "dep:objc2-quartz-core"]
 
 native-window = ["frame-capture", "incant_game_runtime/device", "dep:tao", "dep:pollster", "dep:gilrs"]
 # Trusted exporter opt-in; no project supplies executable shader artifacts.
@@ -124,3 +126,7 @@ ndk-context = { version = "=0.1.1", optional = true }
 
 [target.'cfg(target_os = "macos")'.dependencies]
 wgpu-hal = { version = "=29.0.4", optional = true, default-features = false, features = ["metal"] }
+objc2 = { version = "=0.6.5", optional = true }
+objc2-app-kit = { version = "=0.3.2", optional = true, default-features = false, features = ["std", "NSResponder", "NSView", "objc2-quartz-core"] }
+objc2-foundation = { version = "=0.3.2", optional = true, default-features = false, features = ["std", "NSThread", "NSRunLoop", "NSString"] }
+objc2-quartz-core = { version = "=0.3.2", optional = true, default-features = false, features = ["std", "CADisplayLink", "CAFrameRateRange", "objc2-core-foundation"] }

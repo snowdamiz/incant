@@ -31,6 +31,7 @@ mod restart;
 mod session;
 mod startup;
 mod ui;
+mod wake;
 #[cfg(all(
     feature = "native-window",
     any(target_os = "macos", target_os = "windows", target_os = "linux")
@@ -75,12 +76,13 @@ fn run_owned(
     emit: &mut dyn FnMut(&str),
     standalone: bool,
 ) -> Result<(), Box<dyn std::error::Error>> {
+    let (args, wake) = wake::Mode::split(args)?;
     let (args, pacing) = pacing::Mode::split(args)?;
     #[cfg(not(all(
         feature = "native-window",
         any(target_os = "macos", target_os = "windows", target_os = "linux")
     )))]
-    let _ = pacing;
+    let _ = (pacing, wake);
     let (args, profile) = profile::split(args, standalone)?;
     let (args, capture_options) = capture::Options::split(args)?;
     let (args, materials) = materials::Options::split(args)?;
@@ -101,7 +103,7 @@ fn run_owned(
             any(target_os = "macos", target_os = "windows", target_os = "linux")
         ))]
         {
-            let mut report = window::run(&args[1..], pacing)?;
+            let mut report = window::run(&args[1..], pacing, wake)?;
             profile::append(&mut report, &profile)?;
             emit(&report.to_string());
             if report
