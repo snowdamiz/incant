@@ -1,0 +1,69 @@
+--- analyze-original.py
++++ verify.py
+@@ -6 +6,5 @@
+-def load(path, cap=8*1024*1024):
++HERE=Path(__file__).resolve().parent
++if not __debug__:
++    raise RuntimeError("Run without -O: this retained analyzer uses assertions")
++
++def bounded_file(path, cap):
+@@ -9,3 +13,35 @@
+-        data=stream.read(cap+1)
+-    assert len(data)<=cap
+-    return json.loads(data)
++        raw=stream.read(cap+1)
++    assert len(raw)<=cap
++    return raw
++
++# Read-only transport adaptation. No extraction, subprocess, GPU or native build.
++import gzip, io, tarfile
++PROVENANCE=json.loads(bounded_file(HERE/'provenance.json',256*1024))
++ORIGINAL_ROOT=Path(PROVENANCE['original_root'])
++compressed=bounded_file(HERE/'records.tar.gz',1024*1024)
++assert hashlib.sha256(compressed).hexdigest()==PROVENANCE['archive_sha256']
++with gzip.GzipFile(fileobj=io.BytesIO(compressed)) as stream:
++    expanded=stream.read(8*1024*1024+1)
++assert len(expanded)<=8*1024*1024
++ENTRIES={}
++expected={row['name']:row for row in PROVENANCE['records']}
++assert len(expected)==len(PROVENANCE['records'])==704
++with tarfile.open(fileobj=io.BytesIO(expanded),mode='r:') as archive:
++    for member in archive:
++        assert member.isfile() and member.name in expected and member.name not in ENTRIES
++        entry=expected[member.name]
++        assert member.size==entry['bytes'] and 0<=member.size<=2*1024*1024
++        with archive.extractfile(member) as stream:
++            raw=stream.read(member.size+1)
++        assert len(raw)==member.size and hashlib.sha256(raw).hexdigest()==entry['sha256']
++        ENTRIES[member.name]=raw
++assert set(ENTRIES)==set(expected) and sum(map(len,ENTRIES.values()))==4551298
++
++def read_raw(path):
++    assert path.parent==ORIGINAL_ROOT
++    return ENTRIES[path.name]
++
++def load(path, cap=8*1024*1024):
++    raw=read_raw(path)
++    assert len(raw)<=cap
++    return json.loads(raw)
+@@ -50,2 +86,2 @@
+-            qpath=root/f'{prefix}-query.bin';assert qpath.stat().st_size==count*8
+-            raw=qpath.read_bytes();ticks=list(struct.unpack('<'+'Q'*count,raw));assert ticks==gpu['raw_ticks']
++            qpath=root/f'{prefix}-query.bin';raw=read_raw(qpath);assert len(raw)==count*8
++            ticks=list(struct.unpack('<'+'Q'*count,raw));assert ticks==gpu['raw_ticks']
+@@ -104,6 +140,9 @@
+-    assert len(sys.argv)==3
+-    root=Path(sys.argv[1]).resolve();destination=Path(sys.argv[2]).resolve();assert not destination.exists()
+-    value=analyze(root);value['seconds']=time.monotonic()-START
+-    data=json.dumps(value,indent=2).encode();assert len(data)<=8*1024*1024
+-    with destination.open('xb')as stream:stream.write(data+b'\n')
+-    print(json.dumps({'path':str(destination),'sha256':hashlib.sha256(data+b'\n').hexdigest(),'seconds':value['seconds']}))
++    assert len(sys.argv)==1
++    result=analyze(ORIGINAL_ROOT)
++    published=json.loads(bounded_file(HERE/'analysis.json',128*1024))
++    published.pop('seconds')
++    assert json.loads(json.dumps(result))==published
++    zero=bounded_file(HERE/'E038-zero-query.bin',48)
++    assert zero==bytes(48)
++    assert hashlib.sha256(zero).hexdigest()=='17b0761f87b081d5cf10757ccc89f12be355c70e2e29df288b65b30710dcbcd1'
++    print(json.dumps({'verified_records':len(ENTRIES),'renders':234,'maps':1522,'submits':1756,'descriptor_markers':5436,'published_analysis_exact':True,'seconds':time.monotonic()-START,'no_rendered_pixels_or_adoption_verified':True},sort_keys=True))

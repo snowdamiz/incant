@@ -1,0 +1,38 @@
+{
+  "controls": [
+    {
+      "case": "valid",
+      "exit": 0,
+      "expected_success": true,
+      "matched": true
+    },
+    {
+      "case": "corrupt_archive",
+      "exit": 1,
+      "expected_success": false,
+      "matched": true
+    },
+    {
+      "case": "oversized_archive",
+      "exit": 1,
+      "expected_success": false,
+      "matched": true
+    },
+    {
+      "case": "symlink_archive",
+      "exit": 1,
+      "expected_success": false,
+      "matched": true
+    },
+    {
+      "case": "optimized_python",
+      "exit": 1,
+      "expected_success": false,
+      "matched": true
+    }
+  ],
+  "no_native_or_GPU": true,
+  "original_evidence_untouched": true,
+  "conventions_check_passed": true,
+  "diff_check_passed": true
+}
