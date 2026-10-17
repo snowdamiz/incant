@@ -412,7 +412,7 @@ pub(super) fn run(
             stable_asset,
             &blue_fingerprint,
             &baseline,
-            &blue,
+            (kind, &blue),
             &mut stages,
         )?;
         (recovered.refusal, recovered.authoring)
