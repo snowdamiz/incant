@@ -83,3 +83,8 @@ fixture here. The broader combined conformance command was updated to include
 the player feature; only the focused commands in these records were executed.
 The earlier [native session restart evidence](native-session-restart.md) remains
 a separate historical bytecode/package result.
+
+A later [authored ordinary shipping export](native-wasm-restart-export.md) separately
+qualifies three source-free plain-player processes with three cold replacements
+each. It preserves this host-test producer and the explicit static checkpoint
+refusal; it does not turn the host-test run above into a shipping qualification.

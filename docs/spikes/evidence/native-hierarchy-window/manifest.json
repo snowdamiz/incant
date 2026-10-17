@@ -1,0 +1,10 @@
+{
+  "format": "incant-native-hierarchy-window-v1",
+  "source": "212aa7ec2a9b300ba81698e2fee9a6693ba5e94c",
+  "tree": "93b1dc1c6aabc6177389feacea3d44a768eece42",
+  "records": 11,
+  "compressed_bytes": 16543,
+  "uncompressed_bytes": 58494,
+  "sha256": "a40e077c5273b93a83b4650cc8feadbf190556bd3835f6a0d324cdc0fa30a0ed",
+  "limits": "Recorded native accessibility observations and fresh-process state. No screenshot, raw accessibility transcript, rendering acceptance, performance or phase approval. Original binaries and journal were removed during authorized cleanup; portable records remain."
+}

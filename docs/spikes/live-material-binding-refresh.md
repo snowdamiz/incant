@@ -58,8 +58,9 @@ claimed. All 160 inventoried producer inputs remain byte-identical.
 | Running state and temporal provenance | Material publications occur at tick1; the next script tick reaches tick2 and persistent calls1+2 yield translation0.3. World identity is preserved. Each first replacement draw has a fresh history owner and no previous history; no submitted motion frame exists before that redraw. Old catalog handles remain valid, staged resources survive owned source/cache deletion, and the target drops once on stop. |
 
 The same world/VM evidence, real authoring/history controls and numerical GPU
-control are separate checks. No native-window import/rebind workflow, GUI clicks,
-Blend appearance, appearance review, performance or phase gate is claimed.
+control above are separate checks. The later native-window qualification below
+has its own producing source. Neither result claims GUI clicks, Blend appearance,
+appearance review, performance or a phase gate.
 Opaque reassignment and fully covered MASK rendering are exercised numerically;
 implicit defaults, shrinking/reordered tables and Blend data are CPU coverage.
 
@@ -106,3 +107,73 @@ python3 docs/spikes/evidence/live-material-binding-refresh/verify.py \
 The live-source option intentionally refuses changed inventoried inputs. A later
 integration must describe any other compiled-input differences separately; replay
 does not turn later source into the producer or satisfy a wider gate.
+
+## Native workflow fixture preparation
+
+The shared native editor runner now accepts `--asset-kind model --model-variant
+material-tables`. Its two bounded, self-contained glTF inputs retain identical
+positions, normals, UVs, authored tangents and node membership while replacing
+material, image, texture and sampler tables and reassigning the primitive. The
+replacement uses all five material map roles. It drives the existing real model
+import/watch/Undo/Redo/recovery handlers; there is no new editor mutation API.
+
+Fifteen focused Python controls pass. The retained main376 headless executable
+(`7cfe5b13…`) imports both actual fixtures, retains the asset ID, advances the
+revision from 1 to 2, and treats a repeated replacement import as unchanged.
+Cooked texture-role counts change from 2 to 5; project validation passes. The
+first local runner stopped on a disappearing transaction scratch file in its
+resource monitor. Its cleanup passed; a fresh successor allows that expected
+sampling race and completes all five child commands. Both attempts are retained
+in [the fixture evidence](evidence/native-material-workflow-fixture.json).
+
+This preparation is fixture admission. The subsequent actual native-window
+workflow is recorded below; the prior CPU and numerical Metal evidence above
+retains its original producing sources.
+
+## Actual native-window material workflow
+
+The fresh editor and headless binaries from
+`212aa7ec2a9b300ba81698e2fee9a6693ba5e94c` completed the material-table workflow
+on macOS 27.0.1, Mac17,9 / Apple M5 Pro, Metal. Their source tree is exactly
+main380's `93b1dc1c6aabc6177389feacea3d44a768eece42`. The genuine frontend was
+rebuilt and embedded in the editor with `custom-protocol,play-probe` enabled.
+The actual Cargo `ci` profile has optimization level 1; this is functional
+qualification, not shipping-profile performance evidence.
+
+| Actual stage | Authoring revision | Renderer acceptance counter | Accepted recipe |
+| --- | ---: | ---: | --- |
+| Manual import | 3 | 13 | original |
+| Watched table replacement | 4 | 274 | replacement |
+| Undo | 5 | 281 | original |
+| Redo | 6 | 469 | replacement |
+| Malformed source refused | 6 | 574 | replacement retained |
+| Source recovery | 6 | 634 | replacement |
+
+All stages preserve Play generation 1 and the same paused world at tick 3.
+One ordinary Step reaches tick 4; the persistent script translation increases
+from 12 by exactly 8, detecting an accidental VM reset. The app uses the real
+source watcher and import/history handlers. The malformed glTF produces the
+structured `asset.import` refusal; source recovery retains the accepted recipe.
+Stop releases the world, stale-generation observation is refused, and a fresh
+headless RPC process reopens the actual journal at revision 6 with that recipe.
+The counter records renderer acceptance, not native display callback cadence.
+
+The six-process workflow completed in 9.404 seconds with every child exit 0;
+all owned leaders/groups were independently absent afterward. The existing
+120-second app and 180-second cooperative workflow deadlines were unchanged.
+No GUI import/history clicks, screen capture, pixel review, appearance acceptance,
+shipping timing or phase gate is claimed. Fully covered MASK material data is
+present; this does not add Blend appearance coverage.
+
+The [portable packet](evidence/native-material-window/manifest.json) retains
+32 original records: build logs and 5,140 source hashes, binary identities,
+fixture/journal/cache bytes, native receipt, process records and cleanup. The
+editor hash is `cad1bacb2b473cf352a680d413b132234570c308f61e111ff5bee09adf830ce6`;
+the headless hash is
+`126e876c0b50d4e3ab5b9b9dee29aea2a1e16fb55a23c19df04f5cd8a181e3e5`.
+Executables remain external. Replay reads saved data without launching anything:
+
+```sh
+python3 docs/spikes/evidence/native-material-window/verify.py
+python3 docs/spikes/evidence/native-material-window/verify.py --originals --binaries
+```

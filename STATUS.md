@@ -1,23 +1,23 @@
 # Implementation status
 
-Checkpoint49 is held after the normal headless binary failed to compile on
-Mac, Linux and Windows: the new coroutine schema registrations referenced a
-test-only dependency. Moving that existing dependency to normal scope passes
-the actual local binary build, all 80 published-schema comparisons and strict
-headless lint. The full release suite must still pass on a corrected frozen
-candidate. [Cause and local verification](docs/spikes/headless-schema-dependency.md).
+[Release checkpoint50](docs/spikes/release-checkpoint-50.md) is promoted: all
+23 required contexts and eight exact-head workflows passed on the main376 tree,
+and the release merge has the same tree. This verifies the normal headless
+dependency repair that blocked checkpoint49 on Mac, Linux and Windows.
+The failed batch remains historical. Main changes after PR376 retain separate
+local qualification and are outside this release baseline.
 
 The current phase remains **Phase 1: Core engine**. The
 [Phase 1 review ledger](docs/gates/phase1-review.md) maps each exit requirement to
 its recorded evidence and remaining qualification. The actual native texture,
-compatible static-model and compatible-animation workflows are verified on this Mac;
+compatible static-model, material-table and compatible-animation workflows are verified on this Mac;
 the [sampled Core locale proof](docs/spikes/core-locale-sampled-captures.md)
 now also verifies winning HUD pixels, Arabic health direction, CJK glyphs and
 normal/narrow pseudo layouts in retained offscreen Metal frames. Earlier
 incomplete native-window attempts remain historical; these samples do not
 establish continuous motion, window presentation or FPS.
-[release checkpoint48](docs/spikes/release-checkpoint-48.md) contains the tested
-main367 tree after all 23 required contexts and eight candidate workflows passed.
+[release checkpoint50](docs/spikes/release-checkpoint-50.md) contains the tested
+main376 tree after all 23 required contexts and eight candidate workflows passed.
 Later main changes remain outside that release baseline. Rendering quality and full rendered-game
 performance remain open. The reported jagged editor cube now has explicit 4x
 geometry antialiasing, verified in the actual Mac editor and isolated Metal
@@ -55,6 +55,34 @@ passes local tests and leaves production behavior unchanged. Both desktop jobs
 and Windows Wasm conformance passed on checkpoint44; that checkpoint's separate
 general failure prevented promotion.
 
+## Native material tables — actual editor workflow verified
+
+A fresh main380-equivalent editor replaces complete model-local material, image,
+texture and sampler tables through actual import/watch/Undo/Redo handlers on this
+Mac. Malformed-source refusal retains the last accepted catalog, recovery succeeds,
+and the same world/script state survives all six stages and a subsequent Step.
+A fresh process reopens the journal at the final revision. All six children exited
+successfully and were reaped. This adds functional native-window evidence; no
+GUI clicks, captured pixels, appearance, shipping performance or phase approval
+is claimed. [Producing source and raw records](docs/spikes/live-material-binding-refresh.md#actual-native-window-material-workflow).
+
+## Native hierarchy — shortcuts, history, focus and reopening verified
+
+The main380-equivalent editor passed Cmd+D and context-menu Duplicate, Undo/Redo,
+Delete followed by arrow-key focus recovery, busy-save refusal, completed Save
+and fresh-process reopening on the unlocked Mac. The saved revision 8 retains
+the unchanged original entities and exactly one copied subtree with the same
+IDs and parent relation. Intermediate UI behavior is supported by contemporaneous
+accessibility observation notes; retained RPC output verifies final persistence.
+[Scope and portable records](docs/spikes/native-hierarchy-window.md).
+
+Work resumed October 17 after the pause. The intervening authorized disk cleanup
+removed old worktrees, binaries and temporary captures; Git branches, source
+patches and selected text records were recovered. Those historical runs are not
+relabeled as new executions. Parallel Wasm saved-state, native frame attribution
+and reconstruction work continues from recovered source, with fresh builds where
+needed. Rendering quality, 60 fps, the 2 ms script budget and phase gates remain open.
+
 ## Sampled Core locale pixels — verified on this Mac
 
 Four fresh scene-bound shipping players from source `50b5408b` passed five full
@@ -73,9 +101,20 @@ continuous motion, temporal reconstruction, translation quality, FPS and phase
 approval remain outside this result.
 [Images, exact sources and portable replay](docs/spikes/core-locale-sampled-captures.md).
 
-## Native Wasm restart — actual native hosts and player owner qualified
+## Native Wasm restart — native hosts and authored shipping route qualified
 
-Native Wasm restart requests now have an opt-in owner through build-linked wasm2c and development Wasmtime, retaining transaction/quota semantics and pending requests until consumption. Actual Rust guests prove fresh VM/world/input/output-clock reconstruction, terminal consumer refusal with audible PCM rollback, and the plain player restart owner. Scoped local `ci` qualification passed 29 native tests, three strict lints, 19 Python SDK controls and generated-contract checks; two earlier compile failures are retained. [Report](docs/spikes/native-wasm-restart.md). This does not establish a shipping player export, native window/device result, full SDK parity, performance or phase gate.
+Native Wasm restart requests now have an opt-in owner through build-linked wasm2c and development Wasmtime, retaining transaction/quota semantics and pending requests until consumption. Actual Rust guests prove fresh VM/world/input/output-clock reconstruction, terminal consumer refusal with audible PCM rollback, and the plain player restart owner. Scoped local `ci` qualification passed 29 native tests, three strict lints, 19 Python SDK controls and generated-contract checks; two earlier compile failures are retained. [Report](docs/spikes/native-wasm-restart.md). That host-test run did not establish a shipping player export, native window/device result, full SDK parity, performance or phase gate.
+
+The separate c81eb7a9 producer now qualifies public import, atomic Undo/Redo,
+save/journal reopen and an ordinary fresh shipping export. After deleting its
+private source/project/cache/compiler copies and build storage, three ordinary
+plain-player processes each perform three real VM/world replacements with exact
+state, host chronology and silent PCM parity. The exporter startup adds a separate
+one-tick replacement. Twenty probe/routing controls and 19 portable evidence
+controls pass; all 29 owned groups and the wrapper are absent. Default
+`native-play` still refuses restart ownership, and static Wasm checkpoint state
+remains unsupported. This adds no window/device-audio, full SDK, performance or
+phase claim. [Exact producer, raw records and data-only replay](docs/spikes/native-wasm-restart-export.md).
 
 
 ## Native explicit-state coroutines — CPU behavior and save/restore qualified
@@ -445,16 +484,16 @@ Play restrictions remain explicit.
 All 1,025 UI tests, generated transport, TypeScript, production UI and native
 editor builds pass; the real host transaction control also passed on main342
 composition. Claude's browser fixture review remains separate from native proof.
-The actual Mac interaction attempt showed a blank client while OS inspection
+The first actual Mac interaction attempt showed a blank client while OS inspection
 confirmed the desktop was locked; the editor was stopped and its project stayed
-unchanged. Actual native shortcut/menu, Undo/Redo and reopening checks remain
-pending an unlocked desktop. [Evidence and limits](docs/spikes/editor-subtree-duplicate.md).
+unchanged. A later unlocked-desktop run now verifies native shortcut/menu,
+Undo/Redo and reopening. [Native evidence and limits](docs/spikes/native-hierarchy-window.md).
 
 Focused-row removal now restores the hierarchy's keyboard entry point to a
 surviving row while preserving selection intent, other focus owners and
 project/bridge boundaries. All 1,040 UI tests, TypeScript and the production UI
 build pass; Delete and duplicate/Undo DOM controls include virtualized recovery.
-Actual native keyboard interaction remains pending the unlocked desktop.
+The later native run verifies Delete/Undo and subsequent arrow-key interaction.
 [Focus-recovery evidence](docs/spikes/editor-hierarchy-focus-recovery.md).
 
 ## Ordinary subtree duplication — command and persistence qualified
@@ -552,6 +591,16 @@ body. Two zero callbacks and an early 50.023 ms callback interval remain; these
 are diagnostic spans, not displayed FPS or evidence for a specific source fix.
 No engine scheduling change or performance-gate claim is made.
 [Host-stage contract and scoped live evidence](docs/spikes/native-presentation-host-stages.md).
+
+The default-off observer now has a separate version 2 boundary contract: one
+`NewEvents` snapshot consumed by each pulse, signed deadline/arrival partitions
+and two fixed slots for actual surface-acquisition calls/results. Thirty actual
+CPU controls, 31 Python controls and enabled/ordinary strict lint pass. The first
+wrapper's incorrect expected-count refusal remains retained; its 30 passing
+tests were not repeated. Historical version 1 evidence remains unchanged.
+No scheduler/FIFO/Tao/HAL policy changes, fresh live v2 observation, pacing cause
+or performance acceptance are claimed.
+[Boundary contract and CPU evidence](docs/spikes/native-wake-acquisition-boundaries.md).
 
 ## Device audio overrun handling — merged main303
 
@@ -731,7 +780,13 @@ The existing plan gate stays unmet; this is not evidence that sub-2 ms is
 impossible or that the full rendered game misses its frame budget.
 [Outcome and replay](docs/spikes/navigation-search-cache-outcome.md).
 
-Last reassessment: 2026-10-15, retained-data and source review. The later
+Last reassessment: 2026-10-15, evening source review after native coroutines
+were integrated. The [source-bound review](docs/spikes/evidence/script-budget-coroutine-source-review.json)
+finds that Core declares no routines and already uses the no-catalog path,
+without a coroutine scheduler or capability allocation on each tick. This
+rejects that specific allocation hypothesis; it does not measure current
+shipping cost or establish zero overhead. No native experiment was repeated.
+The earlier retained-data review remains valid: the
 [full-Core budget-check attribution](docs/spikes/script-budget-check-attribution.md)
 measures only 4.34 microseconds per frame around the unchanged enforcement checks
 (8.40 microseconds on the same whole-tick tail frames), closing that specific

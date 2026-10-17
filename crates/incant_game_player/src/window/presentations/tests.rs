@@ -253,7 +253,7 @@ fn capture_clock_refuses_before_origin_and_marks_partial_stage_contract() {
         value["host_timing_contract"]["changes_frame_admission"],
         false
     );
-    assert_eq!(value["limits"]["attempt_bytes_max"], 192);
+    assert_eq!(value["limits"]["attempt_bytes_max"], 512);
     let t = &value["host"]["attempts"][0]["host_timing"];
     let times: Vec<_> = ["began_ns", "reserved_ns", "completed_ns", "finished_ns"]
         .map(|key| t[key].as_u64().unwrap())
