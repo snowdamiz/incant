@@ -49,6 +49,30 @@ it beside the actual Wasmtime development host. Shipped applications receive
 only trusted compiled native descriptors; they never compile or load guest Rust
 source, raw Wasm or cached native modules at runtime.
 
+## Simulation timers
+
+`tick.timers(&mut scratch)` returns the accepted-update clock and a borrowed,
+ID-sorted list of due events. The first callback is tick 1; elapsed seconds sum
+the accepted fixed steps. Use up to `TIMER_MAX_BYTES` (10,272) bytes of initialized
+scratch. This clock has no wall-time or filesystem authority.
+
+`tick.set_timer(id, delay_ticks, interval_ticks)` creates or replaces a named
+module-local timer. Delay and optional interval are positive `u32` tick counts;
+`None` is one-shot. `tick.cancel_timer(id)` also accepts absent IDs. IDs contain
+1–64 ASCII letters, digits or `_ . : -`. There are at most 128 pending timers and
+256 set/cancel actions per callback. Due events are fixed for that callback;
+commands affect future delivery. Periodic deadlines advance from the due tick,
+so they do not drift. Invalid inputs, insufficient scratch and quota errors
+reject the whole transaction even if the guest ignores the returned error.
+
+Timer state commits with numeric/structural world changes. Hot reload preserves
+pending deadlines and elapsed time. Modules using checkpoint APIs must declare
+explicit persistent state; both the guest bytes and host timer schedule survive
+save/load. The versioned state envelope still accepts older timer-free snapshots,
+whose new timer clock starts with zero elapsed seconds at their recorded tick.
+Unknown versions and malformed schedules refuse before changing the session.
+See [samples/timers.rs](samples/timers.rs) for the complete example.
+
 ## Haptic output
 
 `tick.haptic_capabilities(&mut scratch)` copies the trusted host's current target
