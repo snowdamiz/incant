@@ -143,15 +143,19 @@ def role_receipts(messages, target, expected, directory, producer):
             require(out.is_relative_to(target / 'shipping'), 'Unknown role output')
             role = 'cooker'
         data = json.loads(read(out / 'quickjs-pgo.json', 64 * 1024))
-        require(data['format'] == 'incant-quickjs-pgo-build-v1' and data['package'] == package
+        require(data['format'] == 'incant-quickjs-pgo-build-v2' and data['package'] == package
                 and data['mode'] == expected['mode'] and data['identity'] == expected_id
                 and data['target'] == protocol.TARGET and data['default_c_flags'] is False
                 and data['source_free_claim'] is False
                 and data['out_dir'] == str(out) and data['compiler'] == expected['compiler']
                 and data['descriptor_sha256'] == protocol.digest(directory / 'descriptor.json')
-                and data['recipe'] == expected['recipe'] and data['profile'] == expected['profile']
+                and data['role'] == role and data['profile_scope'] == 'runtime-only'
+                and data['recipe'] == expected['recipes'][role]
+                and data['profile'] == (expected['profile'] if role == 'runtime' else None)
+                and data['compiler_invocation'] == (None if package == 'incant_script' else 'cc')
+                and data['c_unit_profiled'] == (None if package == 'incant_script' else role == 'runtime')
                 and data['actual_args'] == (None if package == 'incant_script' else
-                    protocol.insert_flags(expected['recipe']['base_args'], protocol.additions(expected))),
+                    protocol.insert_flags(expected['recipes'][role]['base_args'], protocol.additions(expected, role))),
                 'Actual role/descriptor identity mismatch')
         key = (package, role)
         require(key not in found, 'Duplicate role receipt')
@@ -165,7 +169,7 @@ def role_receipts(messages, target, expected, directory, producer):
             and len(build_ids) == 1 and producer['script']['build_id'] in build_ids
             and producer['script']['bytecode_abi']['default_c_flags'] is False,
             'Fresh host cook and linked runtime must have the same mode build identity')
-    return {'descriptor_identity': expected_id, 'actual_build_id': next(iter(build_ids)),
+    return {'profile_scope': 'runtime-only', 'cooker_profile_use': False, 'descriptor_identity': expected_id, 'actual_build_id': next(iter(build_ids)),
             'roles': [{'package': p, 'role': r} for p, r in sorted(found)]}
 
 
@@ -259,7 +263,7 @@ def prepare(request_path, output, scratch, *, seconds=5400, cancel=lambda: None)
                 os.environ.pop(protocol.SELECTOR, None)
             else:
                 fallback = scratch / 'compile-discard'; fallback.mkdir(exist_ok=True)
-                descriptors[mode] = protocol.descriptor(mode, spec['tools'], base_args, vendor,
+                descriptors[mode] = protocol.descriptor(mode, spec['tools'], recipes, vendor,
                     raw_directory=fallback if mode == 'generate' else None,
                     profile=profile if mode == 'use' else None)
                 descriptor_path = scratch / (mode + '.json')
@@ -286,11 +290,8 @@ def prepare(request_path, output, scratch, *, seconds=5400, cancel=lambda: None)
                 expected=descriptors.get(mode))
             protocol.create_json(directory / 'actual-c-roles.json', commands)
             if mode == 'ordinary':
-                target = [c for c in commands if c['role'] == 'runtime']
                 require(all(c['compiler'] == spec['tools']['compiler']['path'] for c in commands), 'Actual baseline tool differs')
-                base_args = target[0]['args']
-                require('-O3' in base_args and any(a in base_args for a in ('-g', '-g2', '-gdwarf-2')),
-                        'Actual ordinary shipping optimization/debug recipe')
+                recipes = protocol.ordinary_recipes(commands)
             else:
                 producer = json.loads(read(directory / 'project-build.json', 4 * 1024**2))
                 report['pgo_roles'] = role_receipts(messages, session.path, descriptors[mode], directory, producer)

@@ -43,7 +43,11 @@ def create_json(path, value):
         stream.write(value)
 
 
-def additions(descriptor):
+def additions(descriptor, role='runtime'):
+    require(role in ('cooker', 'runtime') and descriptor['profile_scope'] == 'runtime-only',
+            'Closed runtime-only profile scope')
+    if role == 'cooker':
+        return []
     result = ['-Werror=unknown-warning-option']
     if descriptor['mode'] == 'generate':
         return result + ['-fprofile-generate=' + descriptor['raw_directory']]
@@ -61,19 +65,39 @@ def insert_flags(base, extra):
     return [*base[:-1], *extra, base[-1]]
 
 
-def descriptor(mode, tools, base_args, vendor, *, profile=None, raw_directory=None):
+def ordinary_recipes(commands):
+    result = {}
+    for role, optimization in (('cooker', 0), ('runtime', 3)):
+        rows = [c for c in commands if c['role'] == role]
+        require(len(rows) == 4 and {r['unit'] for r in rows} == set(UNITS)
+                and len({tuple(r['args']) for r in rows}) == 1, 'Exact ordinary role recipes')
+        base = rows[0]['args']
+        require(base[0] == '-O' + str(optimization) and any(a in base for a in ('-g', '-g2', '-gdwarf-2')),
+                'Actual role optimization/debug contract')
+        insert_flags(base, [])
+        result[role] = {'optimization': optimization, 'debug': True, 'base_args': base}
+    return result
+
+
+def descriptor(mode, tools, recipes, vendor, *, profile=None, raw_directory=None):
     require(mode in ('generate', 'use'), 'No custom measured baseline')
     require(set(tools) == {'compiler', 'archiver', 'profdata_tool', 'profile_runtime',
                           'sdk', 'resource_directory', 'tool_inputs'}, 'Closed tool closure')
     require((mode == 'use') == (profile is not None)
             and (mode == 'generate') == (raw_directory is not None), 'Mode/profile combination')
-    insert_flags(base_args, [])
+    require(set(recipes) == {'cooker', 'runtime'}, 'Both ordinary role recipes required')
+    for role, optimization in (('cooker', 0), ('runtime', 3)):
+        recipe = recipes[role]
+        require(set(recipe) == {'optimization', 'debug', 'base_args'} and recipe['optimization'] == optimization
+                and recipe['debug'] is True and recipe['base_args'][0] == '-O' + str(optimization),
+                'Ordinary role recipe required')
+        insert_flags(recipe['base_args'], [])
     sources = {}
     for name in (*HEADERS, *UNITS):
         record = file_identity(Path(vendor) / 'quickjs' / name, 4 * 1024**2)
         sources[name] = {key: record[key] for key in ('bytes', 'sha256')}
-    value = dict(version=1, mode=mode, target=TARGET, **tools, sources=sources,
-                 recipe={'optimization': 3, 'debug': True, 'base_args': base_args},
+    value = dict(version=2, mode=mode, target=TARGET, **tools, sources=sources,
+                 recipes=recipes, profile_scope='runtime-only',
                  profile=None if profile is None else file_identity(profile, 64 * 1024**2),
                  raw_directory=None if raw_directory is None else str(Path(raw_directory).resolve(strict=True)))
     require(len(json.dumps(value).encode()) <= 64 * 1024, 'Descriptor exceeds Rust admission cap')
@@ -81,9 +105,9 @@ def descriptor(mode, tools, base_args, vendor, *, profile=None, raw_directory=No
 
 
 def identity(value):
-    fields = ('mode', 'target', 'sources', 'recipe', 'sdk', 'resource_directory')
+    fields = ('mode', 'target', 'sources', 'recipes', 'profile_scope', 'sdk', 'resource_directory')
     result = {key: value[key] for key in fields}
-    result['format'] = 'incant-quickjs-c-pgo-v1'
+    result['format'] = 'incant-quickjs-c-pgo-v2'
     content = lambda v: {key: v[key] for key in ('bytes', 'sha256')}
     for key in ('compiler', 'archiver', 'profdata_tool', 'profile_runtime'):
         result[key] = content(value[key])
@@ -125,9 +149,13 @@ def c_commands(log, target, vendor, *, expected=None):
         key = (role, source.name)
         require(key not in found, 'Duplicate C translation unit/role')
         if expected is not None:
-            require(source == Path('quickjs') / source.name, 'Unstable diagnostic static-function source path')
+            if role == 'runtime':
+                require(source == Path('quickjs') / source.name, 'Unstable diagnostic static-function source path')
+            else:
+                require(source.is_absolute() and source.parent == output.parent,
+                        'Cooker must retain ordinary OUT_DIR source names')
             require(compiler == expected['compiler']['path']
-                    and args == insert_flags(expected['recipe']['base_args'], additions(expected)),
+                    and args == insert_flags(expected['recipes'][role]['base_args'], additions(expected, role)),
                     'Actual C role recipe mismatch')
         else:
             require(source.is_absolute() and source.parent == output.parent,

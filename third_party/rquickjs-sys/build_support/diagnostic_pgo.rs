@@ -60,6 +60,11 @@ pub enum Error {
     Invalid(&'static str),
     Io(io::Error),
     Json(json::Error),
+    RecipeMismatch {
+        role: Role,
+        expected: Vec<String>,
+        actual: Vec<String>,
+    },
 }
 impl fmt::Display for Error {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -67,6 +72,14 @@ impl fmt::Display for Error {
             Self::Invalid(s) => write!(f, "QuickJS PGO admission: {s}"),
             Self::Io(e) => write!(f, "QuickJS PGO input: {e}"),
             Self::Json(e) => write!(f, "QuickJS PGO descriptor: {e}"),
+            Self::RecipeMismatch {
+                role,
+                expected,
+                actual,
+            } => write!(
+                f,
+                "QuickJS PGO ordered C recipe mismatch for {role:?}: expected={expected:?}, actual={actual:?}"
+            ),
         }
     }
 }
@@ -114,8 +127,34 @@ pub struct Content {
 pub struct Recipe {
     pub optimization: u8,
     pub debug: bool,
-    /// Exact ordinary shipping target cc::Tool args, before PGO additions.
+    /// Exact ordinary role cc::Tool args, before any runtime-only additions.
     pub base_args: Vec<String>,
+}
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Deserialize, Serialize)]
+#[serde(crate = "crate::serde_support", rename_all = "kebab-case")]
+pub enum Role {
+    Cooker,
+    Runtime,
+}
+impl Role {
+    pub fn from_optimization(value: &str) -> Result<Self> {
+        match value {
+            "0" => Ok(Self::Cooker),
+            "3" => Ok(Self::Runtime),
+            _ => Err(Error::Invalid("unexpected Cargo role optimization")),
+        }
+    }
+}
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Deserialize, Serialize)]
+#[serde(crate = "crate::serde_support", rename_all = "kebab-case")]
+pub enum ProfileScope {
+    RuntimeOnly,
+}
+#[derive(Clone, Debug, PartialEq, Eq, Deserialize, Serialize)]
+#[serde(crate = "crate::serde_support", deny_unknown_fields)]
+pub struct Recipes {
+    pub cooker: Recipe,
+    pub runtime: Recipe,
 }
 #[derive(Clone, Debug, PartialEq, Eq, Deserialize, Serialize)]
 #[serde(crate = "crate::serde_support", deny_unknown_fields)]
@@ -133,7 +172,8 @@ pub struct Descriptor {
     pub tool_inputs: Vec<DigestFile>,
     #[serde(deserialize_with = "source_map")]
     pub sources: BTreeMap<String, Content>,
-    pub recipe: Recipe,
+    pub recipes: Recipes,
+    pub profile_scope: ProfileScope,
     pub profile: Option<DigestFile>,
     pub raw_directory: Option<PathBuf>,
 }
@@ -241,34 +281,38 @@ impl Descriptor {
         let v: Self = json::from_slice(bytes)?;
         let fields: json::Value = json::from_slice(bytes)?;
         require(
-            fields.as_object().is_some_and(|m| m.len() == 14),
+            fields.as_object().is_some_and(|m| m.len() == 15),
             "all descriptor fields required",
         )?;
         require(
-            v.version == 1 && v.mode == mode && v.target == TARGET,
+            v.version == 2 && v.mode == mode && v.target == TARGET,
             "mode/version/target",
         )?;
-        require(
-            v.recipe.optimization == 3 && v.recipe.debug,
-            "ordinary shipping C recipe required",
-        )?;
-        require(
-            !v.recipe.base_args.is_empty()
-                && v.recipe.base_args.len() <= 128
-                && v.recipe.base_args.iter().all(|a| {
-                    !a.is_empty()
-                        && a.len() <= 4096
-                        && !a.chars().any(char::is_control)
-                        && a != "-w"
-                        && !a.contains("profile-")
-                        && !a.starts_with('@')
-                })
-                && v.recipe
-                    .base_args
-                    .last()
-                    .is_some_and(|a| a == "-D_GNU_SOURCE"),
-            "base argument vector",
-        )?;
+        for (role, optimization) in [(Role::Cooker, 0), (Role::Runtime, 3)] {
+            let recipe = v.recipe(role);
+            require(
+                recipe.optimization == optimization && recipe.debug,
+                "ordinary role-specific C recipe required",
+            )?;
+            require(
+                !recipe.base_args.is_empty()
+                    && recipe.base_args.len() <= 128
+                    && recipe.base_args.iter().all(|a| {
+                        !a.is_empty()
+                            && a.len() <= 4096
+                            && !a.chars().any(char::is_control)
+                            && a != "-w"
+                            && !a.contains("profile-")
+                            && !a.starts_with('@')
+                    })
+                    && recipe.base_args.first() == Some(&format!("-O{optimization}"))
+                    && recipe
+                        .base_args
+                        .last()
+                        .is_some_and(|a| a == "-D_GNU_SOURCE"),
+                "base role argument vector",
+            )?;
+        }
         require(
             v.sources.len() == SOURCES.len() && SOURCES.iter().all(|s| v.sources.contains_key(*s)),
             "exact QuickJS source closure",
@@ -343,8 +387,8 @@ impl Descriptor {
     /// Actual cc vectors and resolved paths remain in the separate role receipt.
     pub fn identity(&self) -> Result<[u8; 32]> {
         let file_id = |f: &DigestFile| json::json!({"bytes":f.bytes,"sha256":f.sha256});
-        let value = json::json!({"format":"incant-quickjs-c-pgo-v1", "mode":self.mode,
-            "target":self.target,"sources":self.sources,"recipe":self.recipe,
+        let value = json::json!({"format":"incant-quickjs-c-pgo-v2", "mode":self.mode,
+            "target":self.target,"sources":self.sources,"recipes":self.recipes,"profile_scope":self.profile_scope,
             "compiler":file_id(&self.compiler),"archiver":file_id(&self.archiver),
             "profdata_tool":file_id(&self.profdata_tool),"profile_runtime":file_id(&self.profile_runtime),
             "sdk":self.sdk,"resource_directory":self.resource_directory,
@@ -352,7 +396,24 @@ impl Descriptor {
             "profile":self.profile.as_ref().map(file_id)});
         Ok(Sha256::digest(json::to_vec(&ordered(value))?).into())
     }
-    pub fn additions(&self) -> Vec<String> {
+    pub fn recipe(&self, role: Role) -> &Recipe {
+        match role {
+            Role::Cooker => &self.recipes.cooker,
+            Role::Runtime => &self.recipes.runtime,
+        }
+    }
+    /// Host cooking remains ordinary; a runtime profile is never fed to O0 host C.
+    pub fn profile_for(&self, role: Role) -> Option<&DigestFile> {
+        if role == Role::Runtime {
+            self.profile.as_ref()
+        } else {
+            None
+        }
+    }
+    pub fn additions(&self, role: Role) -> Vec<String> {
+        if role == Role::Cooker {
+            return Vec::new();
+        }
         let mut flags = vec!["-Werror=unknown-warning-option".into()];
         match self.mode {
             Mode::Generate => flags.push(format!(
@@ -380,18 +441,98 @@ impl Descriptor {
         }
         flags
     }
-    pub fn check_args(&self, args: &[String], instrumented: bool) -> Result<()> {
-        let mut expected = self.recipe.base_args.clone();
+    pub fn check_compiler(&self, invocation: &Path, search_path: &std::ffi::OsStr) -> Result<()> {
+        let selected = resolve_compiler(invocation, search_path)?;
+        require(
+            selected == self.compiler.path,
+            "natural compiler differs from admitted executable",
+        )?;
+        verify_file(&self.compiler, 256 * 1024 * 1024)
+    }
+    pub fn check_args(&self, role: Role, args: &[String], instrumented: bool) -> Result<()> {
+        require(
+            args.len() <= 128
+                && args
+                    .iter()
+                    .all(|a| a.len() <= 4096 && !a.chars().any(char::is_control)),
+            "actual C vector bounds",
+        )?;
+        let mut expected = self.recipe(role).base_args.clone();
         if instrumented {
             let end = expected.len() - 1;
-            expected.splice(end..end, self.additions());
+            expected.splice(end..end, self.additions(role));
         }
-        require(args == expected, "actual ordered C recipe mismatch")
+        if args == expected {
+            Ok(())
+        } else {
+            Err(Error::RecipeMismatch {
+                role,
+                expected,
+                actual: args.to_vec(),
+            })
+        }
     }
+}
+
+/// Follow exec's first executable PATH candidate, then verify its canonical file.
+/// Do not feed that resolved spelling back into cc, which changes Apple SDK args.
+#[cfg(unix)]
+pub fn resolve_compiler(invocation: &Path, search_path: &std::ffi::OsStr) -> Result<PathBuf> {
+    use std::os::unix::fs::PermissionsExt;
+    require(
+        invocation
+            .to_str()
+            .is_some_and(|s| !s.is_empty() && s.len() <= 4096 && !s.chars().any(char::is_control)),
+        "compiler invocation bounds",
+    )?;
+    if invocation.is_absolute() {
+        let info = fs::metadata(invocation)?;
+        require(
+            info.is_file() && info.permissions().mode() & 0o111 != 0,
+            "compiler invocation is not executable",
+        )?;
+        return Ok(invocation.canonicalize()?);
+    }
+    require(
+        invocation.components().count() == 1
+            && matches!(invocation.components().next(), Some(Component::Normal(_))),
+        "natural compiler must be a bare name or absolute path",
+    )?;
+    let paths: Vec<_> = env::split_paths(search_path).collect();
+    require(
+        !paths.is_empty()
+            && paths.len() <= 128
+            && paths.iter().all(|p| {
+                p.is_absolute()
+                    && p.to_str()
+                        .is_some_and(|s| s.len() <= 4096 && !s.chars().any(char::is_control))
+            }),
+        "bounded absolute compiler PATH",
+    )?;
+    for directory in paths {
+        let candidate = directory.join(invocation);
+        match fs::metadata(&candidate) {
+            Ok(info) if info.is_file() && info.permissions().mode() & 0o111 != 0 => {
+                return Ok(candidate.canonicalize()?);
+            }
+            Ok(_) => (),
+            Err(e) if e.kind() == io::ErrorKind::NotFound => (),
+            Err(e) => return Err(e.into()),
+        }
+    }
+    Err(Error::Invalid("natural compiler not found"))
+}
+
+#[cfg(not(unix))]
+pub fn resolve_compiler(_: &Path, _: &std::ffi::OsStr) -> Result<PathBuf> {
+    Err(Error::Invalid(
+        "natural compiler diagnostic requires native Mac",
+    ))
 }
 
 pub struct Selection {
     pub descriptor: Descriptor,
+    pub role: Role,
     path: PathBuf,
 }
 /// FreshSession enables this exact cc diagnostic sink for every mode. It emits
@@ -470,6 +611,15 @@ impl Selection {
             if generate { Mode::Generate } else { Mode::Use },
         )?;
         descriptor.verify(vendor)?;
+        let search_path = env::var_os("PATH").ok_or(Error::Invalid("missing compiler PATH"))?;
+        descriptor.check_compiler(Path::new("cc"), &search_path)?;
+        require(
+            resolve_compiler(Path::new("ar"), &search_path)? == descriptor.archiver.path,
+            "natural archiver differs from admitted executable",
+        )?;
+        let role = Role::from_optimization(
+            &env::var("OPT_LEVEL").map_err(|_| Error::Invalid("missing Cargo optimization"))?,
+        )?;
         require(
             env::var_os("SDKROOT").as_deref() == Some(descriptor.sdk.as_os_str()),
             "SDKROOT differs from admitted SDK",
@@ -487,7 +637,11 @@ impl Selection {
         {
             println!("cargo:rerun-if-changed={}", f.path.display());
         }
-        Ok(Self { descriptor, path })
+        Ok(Self {
+            descriptor,
+            role,
+            path,
+        })
     }
     pub fn recheck(&self, vendor: &Path) -> Result<()> {
         require(
@@ -495,15 +649,34 @@ impl Selection {
                 == self.descriptor,
             "descriptor changed during build",
         )?;
-        self.descriptor.verify(vendor)
+        self.descriptor.verify(vendor)?;
+        let search_path = env::var_os("PATH").ok_or(Error::Invalid("missing compiler PATH"))?;
+        self.descriptor
+            .check_compiler(Path::new("cc"), &search_path)?;
+        require(
+            resolve_compiler(Path::new("ar"), &search_path)? == self.descriptor.archiver.path,
+            "natural archiver changed during build",
+        )?;
+        require(
+            Role::from_optimization(
+                &env::var("OPT_LEVEL").map_err(|_| Error::Invalid("missing Cargo optimization"))?,
+            )? == self.role,
+            "Cargo role changed during build",
+        )
     }
+    /// `default_c_flags` below is the shared target bytecode-compatibility flag;
+    /// `c_unit_profiled` separately describes the actual producer role's C flags.
     pub fn receipt(&self, out: &Path, package: &str, args: Option<&[String]>) -> Result<()> {
         let digest = self.descriptor.identity()?;
-        let value = json::json!({"format":"incant-quickjs-pgo-build-v1","package":package,
+        let value = json::json!({"format":"incant-quickjs-pgo-build-v2","package":package,
             "mode":self.descriptor.mode,"identity":hex(&digest),
             "descriptor_sha256":format!("{:x}", Sha256::digest(bounded(&self.path, MAX_DESCRIPTOR)?)),
             "target":self.descriptor.target,"out_dir":out,"compiler":self.descriptor.compiler,
-            "recipe":self.descriptor.recipe,"actual_args":args,"profile":self.descriptor.profile,
+            "role":self.role,"profile_scope":self.descriptor.profile_scope,
+            "recipe":self.descriptor.recipe(self.role),"actual_args":args,
+            "compiler_invocation":args.map(|_| "cc"),
+            "profile":self.descriptor.profile_for(self.role),
+            "c_unit_profiled":if args.is_some() { Some(self.role == Role::Runtime) } else { None },
             "default_c_flags":false,"source_free_claim":false});
         let bytes = json::to_vec_pretty(&value)?;
         require(bytes.len() as u64 <= MAX_DESCRIPTOR, "receipt byte cap")?;

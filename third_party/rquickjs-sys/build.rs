@@ -52,7 +52,9 @@ fn download_wasi_sdk() -> PathBuf {
             other => panic!("Unsupported platform tuple {:?}", other),
         };
 
-        let uri = format!("https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-{major_version}/wasi-sdk-{major_version}.{minor_version}-{file_suffix}.tar.gz");
+        let uri = format!(
+            "https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-{major_version}/wasi-sdk-{major_version}.{minor_version}-{file_suffix}.tar.gz"
+        );
 
         println!("Downloading WASI SDK archive from {uri} to {archive_path:?}");
 
@@ -298,19 +300,16 @@ fn main() {
             "relative QuickJS source CWD"
         );
         assert_eq!(source_files, diagnostic_pgo::UNITS);
-        builder
-            .compiler(&pgo.descriptor.compiler.path)
-            .archiver(&pgo.descriptor.archiver.path)
-            .opt_level(3)
-            .debug(true)
-            .warnings(true)
-            .extra_warnings(false)
-            .cargo_debug(true);
+        // Preserve cc's natural invocation spelling and Cargo role profile.
+        // Canonicalizing the spelling inside Build changes cc's Apple SDK args.
         let compiler = builder.get_compiler();
-        assert_eq!(
-            compiler.path().canonicalize().unwrap(),
-            pgo.descriptor.compiler.path
-        );
+        pgo.descriptor
+            .check_compiler(
+                compiler.path(),
+                &env::var_os("PATH").expect("admitted compiler PATH"),
+            )
+            .expect("natural compiler executable");
+        assert_eq!(compiler.path(), Path::new("cc"), "natural Mac C invocation");
         let args = |tool: &cc::Tool| {
             tool.args()
                 .iter()
@@ -318,17 +317,23 @@ fn main() {
                 .collect::<Vec<_>>()
         };
         pgo.descriptor
-            .check_args(&args(&compiler), false)
+            .check_args(pgo.role, &args(&compiler), false)
             .expect("ordinary shipping C vector");
-        for flag in pgo.descriptor.additions() {
+        for flag in pgo.descriptor.additions(pgo.role) {
             builder.flag(flag);
         }
         let actual = args(&builder.get_compiler());
         pgo.descriptor
-            .check_args(&actual, true)
+            .check_args(pgo.role, &actual, true)
             .expect("exact PGO insertion");
         for src in &source_files {
-            builder.file(src_dir.join(src));
+            // Only target runtime participates in profile generation/use. Host
+            // cooking keeps ordinary OUT_DIR source names and its O0 recipe.
+            builder.file(if pgo.role == diagnostic_pgo::Role::Runtime {
+                src_dir.join(src)
+            } else {
+                out_dir.join(src)
+            });
         }
         actual
     };
@@ -359,7 +364,9 @@ fn main() {
     {
         pgo.recheck(Path::new(&env::var("CARGO_MANIFEST_DIR").unwrap()))
             .expect("PGO post-compile input check");
-        if pgo.descriptor.mode == diagnostic_pgo::Mode::Generate {
+        if pgo.descriptor.mode == diagnostic_pgo::Mode::Generate
+            && pgo.role == diagnostic_pgo::Role::Runtime
+        {
             println!(
                 "cargo:rustc-link-search=native={}",
                 pgo.descriptor

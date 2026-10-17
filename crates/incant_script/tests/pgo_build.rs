@@ -3,7 +3,7 @@ use serde as serde_support;
 use serde_json as json;
 #[path = "../../../third_party/rquickjs-sys/build_support/diagnostic_pgo.rs"]
 mod pgo;
-use pgo::{Content, Descriptor, DigestFile, Mode, Recipe};
+use pgo::{Content, Descriptor, DigestFile, Mode, ProfileScope, Recipe, Recipes, Role};
 use sha2::{Digest, Sha256};
 use std::{collections::BTreeMap, fs, path::Path};
 
@@ -33,7 +33,7 @@ fn fixture(root: &Path) -> Descriptor {
         })
         .collect::<BTreeMap<_, _>>();
     Descriptor {
-        version: 1,
+        version: 2,
         mode: Mode::Use,
         target: pgo::TARGET.into(),
         compiler: file(&root.join("clang"), b"compiler"),
@@ -47,11 +47,19 @@ fn fixture(root: &Path) -> Descriptor {
             file(&root.join("resource/metadata"), b"resource"),
         ],
         sources,
-        recipe: Recipe {
-            optimization: 3,
-            debug: true,
-            base_args: vec!["-O3".into(), "-g".into(), "-D_GNU_SOURCE".into()],
+        recipes: Recipes {
+            cooker: Recipe {
+                optimization: 0,
+                debug: true,
+                base_args: vec!["-O0".into(), "-g".into(), "-D_GNU_SOURCE".into()],
+            },
+            runtime: Recipe {
+                optimization: 3,
+                debug: true,
+                base_args: vec!["-O3".into(), "-g".into(), "-D_GNU_SOURCE".into()],
+            },
         },
+        profile_scope: ProfileScope::RuntimeOnly,
         profile: Some(file(&root.join("actual.profdata"), b"profile A")),
         raw_directory: None,
     }
@@ -137,7 +145,7 @@ fn pgo_closed_schema_rejects_duplicate_unknown_missing_and_oversized_inputs() {
     let raw =
         json::to_string(&a)
             .unwrap()
-            .replacen("\"version\":1", "\"version\":1,\"version\":1", 1);
+            .replacen("\"version\":2", "\"version\":2,\"version\":2", 1);
     assert!(Descriptor::parse(raw.as_bytes(), Mode::Use).is_err());
     let source = json::to_string(&a.sources["quickjs.c"]).unwrap();
     let key = format!("\"quickjs.c\":{source}");
@@ -209,7 +217,7 @@ fn pgo_canonical_identity_matches_the_cold_python_protocol() {
     ];
     assert_eq!(
         pgo::hex(&a.identity().unwrap()),
-        "f38a676e755b1f1cde6fc258e1d622304e2f68689642a0cbea11064d7fd58c63"
+        "e1798a9d06009c0ad83b28306705be67b7b0b9acbf02618172b2c95443502d8f"
     );
 }
 #[test]
@@ -217,21 +225,21 @@ fn pgo_ordered_flag_admission_preserves_strict_warnings_and_rejects_suppression(
     let temp = tempfile::tempdir().unwrap();
     let root = temp.path().canonicalize().unwrap();
     let a = fixture(&root);
-    let mut actual = a.recipe.base_args.clone();
+    let mut actual = a.recipes.runtime.base_args.clone();
     let end = actual.len() - 1;
-    actual.splice(end..end, a.additions());
-    a.check_args(&actual, true).unwrap();
+    actual.splice(end..end, a.additions(Role::Runtime));
+    a.check_args(Role::Runtime, &actual, true).unwrap();
     assert!(actual.contains(&"-Werror=backend-plugin".into()));
     assert!(actual.contains(&"-Werror=unknown-warning-option".into()));
     actual.swap(0, 1);
-    assert!(a.check_args(&actual, true).is_err());
+    assert!(a.check_args(Role::Runtime, &actual, true).is_err());
     let mut b = a.clone();
-    b.recipe.base_args.insert(0, "-w".into());
+    b.recipes.runtime.base_args.insert(0, "-w".into());
     assert!(Descriptor::parse(&json::to_vec(&b).unwrap(), Mode::Use).is_err());
-    actual = a.recipe.base_args.clone();
-    actual.extend(a.additions());
+    actual = a.recipes.runtime.base_args.clone();
+    actual.extend(a.additions(Role::Runtime));
     assert!(
-        a.check_args(&actual, true).is_err(),
+        a.check_args(Role::Runtime, &actual, true).is_err(),
         "PGO flags must occur at the observed cc slot"
     );
 }
@@ -265,4 +273,71 @@ fn pgo_nondefault_c_recipe_keeps_cross_target_bytecode_admission_closed() {
         assert!(!compatibility::admits(pgo::TARGET, target, abi));
     }
     assert!(compatibility::admits(pgo::TARGET, pgo::TARGET, abi));
+}
+
+#[test]
+fn pgo_roles_keep_independent_recipes_and_runtime_only_profile_scope() {
+    let temp = tempfile::tempdir().unwrap();
+    let root = temp.path().canonicalize().unwrap();
+    let a = fixture(&root);
+    let a = parse(&a);
+    a.check_args(Role::Cooker, &a.recipes.cooker.base_args, false)
+        .unwrap();
+    a.check_args(Role::Cooker, &a.recipes.cooker.base_args, true)
+        .unwrap();
+    assert!(a.additions(Role::Cooker).is_empty());
+    assert!(a.profile_for(Role::Cooker).is_none());
+    assert!(a.profile_for(Role::Runtime).is_some());
+    assert_eq!(Role::from_optimization("0").unwrap(), Role::Cooker);
+    assert_eq!(Role::from_optimization("3").unwrap(), Role::Runtime);
+    assert!(Role::from_optimization("2").is_err());
+    let error = a
+        .check_args(Role::Cooker, &a.recipes.runtime.base_args, false)
+        .unwrap_err();
+    let message = error.to_string();
+    assert!(message.contains("expected=[\"-O0\"") && message.contains("actual=[\"-O3\""));
+    let mut sdk_args = a.recipes.runtime.base_args.clone();
+    sdk_args.splice(1..1, ["-isysroot".into(), "/unexpected/sdk".into()]);
+    assert!(a.check_args(Role::Runtime, &sdk_args, false).is_err());
+    let mut bad = json::to_value(&a).unwrap();
+    bad["profile_scope"] = json::json!("all-roles");
+    assert!(Descriptor::parse(&json::to_vec(&bad).unwrap(), Mode::Use).is_err());
+    let mut bad = a.clone();
+    bad.recipes.cooker = a.recipes.runtime.clone();
+    assert!(Descriptor::parse(&json::to_vec(&bad).unwrap(), Mode::Use).is_err());
+    assert_ne!(bad.identity().unwrap(), a.identity().unwrap());
+}
+
+#[cfg(unix)]
+#[test]
+fn pgo_natural_tool_alias_keeps_spelling_but_checks_first_executable_and_bytes() {
+    use std::os::unix::fs::{PermissionsExt, symlink};
+    let temp = tempfile::tempdir().unwrap();
+    let root = temp.path().canonicalize().unwrap();
+    let a = fixture(&root);
+    fs::set_permissions(&a.compiler.path, fs::Permissions::from_mode(0o700)).unwrap();
+    let bin = root.join("bin");
+    fs::create_dir(&bin).unwrap();
+    symlink(&a.compiler.path, bin.join("cc")).unwrap();
+    a.check_compiler(Path::new("cc"), bin.as_os_str()).unwrap();
+    assert_eq!(
+        pgo::resolve_compiler(Path::new("cc"), bin.as_os_str()).unwrap(),
+        a.compiler.path
+    );
+    assert!(
+        a.check_compiler(Path::new("./cc"), bin.as_os_str())
+            .is_err()
+    );
+    assert!(
+        a.check_compiler(Path::new("cc"), std::ffi::OsStr::new("relative/path"))
+            .is_err()
+    );
+    let shadow = root.join("shadow");
+    fs::create_dir(&shadow).unwrap();
+    file(&shadow.join("cc"), b"wrong compiler");
+    fs::set_permissions(shadow.join("cc"), fs::Permissions::from_mode(0o700)).unwrap();
+    let paths = std::env::join_paths([&shadow, &bin]).unwrap();
+    assert!(a.check_compiler(Path::new("cc"), &paths).is_err());
+    fs::write(&a.compiler.path, b"modified compiler").unwrap();
+    assert!(a.check_compiler(Path::new("cc"), bin.as_os_str()).is_err());
 }

@@ -2,12 +2,12 @@
     feature = "diagnostic-quickjs-generate",
     feature = "diagnostic-quickjs-use"
 ))]
-use serde_json as json;
+use serde as serde_support;
 #[cfg(any(
     feature = "diagnostic-quickjs-generate",
     feature = "diagnostic-quickjs-use"
 ))]
-use serde as serde_support;
+use serde_json as json;
 use sha2::{Digest, Sha256};
 use std::{env, fs, path::Path};
 #[cfg(any(
@@ -36,7 +36,7 @@ fn main() {
     let pgo = {
         let selected = diagnostic_pgo::Selection::load(&root.join("third_party/rquickjs-sys"))
             .expect("trusted script PGO admission");
-        identity.update(b"incant-quickjs-c-pgo-v1");
+        identity.update(b"incant-quickjs-c-pgo-v2");
         identity.update(
             selected
                 .descriptor

@@ -30,6 +30,9 @@ class Protocol(unittest.TestCase):
         self.target = self.root / 'target'
         self.target.mkdir()
         self.base = ['-O3', '-g', '-D_GNU_SOURCE']
+        self.recipes = {role: {'optimization': opt, 'debug': True,
+                              'base_args': ['-O'+str(opt), '-g', '-D_GNU_SOURCE']}
+                        for role, opt in (('cooker', 0), ('runtime', 3))}
 
     def desc(self, mode='use'):
         runtime = self.root / 'libclang_rt.profile_osx.a'; runtime.write_bytes(b'archive')
@@ -39,7 +42,7 @@ class Protocol(unittest.TestCase):
         tools = {'compiler': tool, 'archiver': tool, 'profdata_tool': tool,
                  'profile_runtime': p.file_identity(runtime), 'sdk': str(self.root),
                  'resource_directory': str(self.root), 'tool_inputs': [tool]}
-        return p.descriptor(mode, tools, self.base, self.vendor,
+        return p.descriptor(mode, tools, self.recipes, self.vendor,
                             profile=profdata if mode == 'use' else None,
                             raw_directory=raw if mode == 'generate' else None)
 
@@ -49,10 +52,11 @@ class Protocol(unittest.TestCase):
             out = self.target / (p.TARGET if role == 'runtime' else '') / 'shipping/build/sys/out'
             out.mkdir(parents=True, exist_ok=True)
             for unit in p.UNITS:
-                source = Path('quickjs') / unit if desc else out / unit
-                if not desc:
+                source = Path('quickjs') / unit if desc and role == 'runtime' else out / unit
+                if source.is_absolute():
                     source.write_bytes(unit.encode())
-                args = self.base if desc is None else p.insert_flags(self.base, p.additions(desc))
+                base = self.recipes[role]['base_args']
+                args = base if desc is None else p.insert_flags(base, p.additions(desc, role))
                 tokens = ['LC_ALL=C', str(self.compiler), *args, '-o', str(out / (unit + '.o')), '-c', str(source)]
                 lines.append('[rquickjs-sys 0.14.0] running: ' + shlex.join(tokens))
         return '\n'.join(lines)
@@ -82,7 +86,7 @@ class Protocol(unittest.TestCase):
         for change in [lambda x: x['profile'].update(sha256='0'*64),
                        lambda x: x['compiler'].update(sha256='0'*64),
                        lambda x: x.update(mode='generate'),
-                       lambda x: x['recipe']['base_args'].insert(0, '-DNDEBUG')]:
+                       lambda x: x['recipes']['runtime']['base_args'].insert(0, '-DNDEBUG')]:
             b = copy.deepcopy(a); change(b)
             self.assertNotEqual(p.identity(a), p.identity(b))
 
@@ -94,7 +98,7 @@ class Protocol(unittest.TestCase):
         d['profile'].update(bytes=7, sha256='2'*64)
         d['tool_inputs'] = [{'path':'/pinned/sdk/SDKSettings.json','bytes':3,'sha256':'3'*64},
                             {'path':'/pinned/resource/metadata','bytes':8,'sha256':'4'*64}]
-        self.assertEqual(p.identity(d), 'f38a676e755b1f1cde6fc258e1d622304e2f68689642a0cbea11064d7fd58c63')
+        self.assertEqual(p.identity(d), 'e1798a9d06009c0ad83b28306705be67b7b0b9acbf02618172b2c95443502d8f')
 
     def test_only_known_cc_insertion_is_admitted_no_warning_suppression(self):
         d = self.desc(); extra = p.additions(d)
@@ -330,12 +334,15 @@ class Protocol(unittest.TestCase):
             for role in ('cooker', 'runtime'):
                 out = self.target / (p.TARGET if role == 'runtime' else '') / ('shipping/build/'+package+'/out')
                 out.mkdir(parents=True)
-                data = {'format': 'incant-quickjs-pgo-build-v1', 'package': package,
+                data = {'format': 'incant-quickjs-pgo-build-v2', 'package': package,
                         'mode': d['mode'], 'identity': p.identity(d), 'target': p.TARGET,
                         'default_c_flags': False, 'source_free_claim': False, 'out_dir': str(out),
                         'compiler': d['compiler'], 'descriptor_sha256': p.digest(directory/'descriptor.json'),
-                        'recipe': d['recipe'], 'profile': d['profile'],
-                        'actual_args': None if package == 'incant_script' else p.insert_flags(self.base, p.additions(d))}
+                        'role':role, 'profile_scope':'runtime-only',
+                        'recipe':d['recipes'][role], 'profile':d['profile'] if role == 'runtime' else None,
+                        'compiler_invocation':None if package == 'incant_script' else 'cc',
+                        'c_unit_profiled':None if package == 'incant_script' else role == 'runtime',
+                        'actual_args': None if package == 'incant_script' else p.insert_flags(d['recipes'][role]['base_args'], p.additions(d, role))}
                 p.create_json(out / 'quickjs-pgo.json', data)
                 messages.append({'reason': 'build-script-executed',
                     'package_id': 'path+'+(build.ROOT/prefix/package).as_uri()+'#'+version,
@@ -363,7 +370,7 @@ class Protocol(unittest.TestCase):
             with self.subTest(index=index), self.assertRaises(ValueError):
                 build.role_receipts(m, self.target, d, attempt, producer)
         # Unchanged claimed identity cannot cover a changed actual profile receipt.
-        path = Path(messages[0]['out_dir'])/'quickjs-pgo.json'
+        path = Path(messages[-1]['out_dir'])/'quickjs-pgo.json'
         data = json.loads(path.read_text()); data['profile']['sha256'] = '0'*64
         path.write_text(json.dumps(data))
         attempt = self.root/'changed-receipt'; attempt.mkdir()
@@ -429,3 +436,45 @@ class Protocol(unittest.TestCase):
 
 
 if __name__ == '__main__': unittest.main()
+
+
+class RoleScope(unittest.TestCase):
+    setUp = Protocol.setUp
+    desc = Protocol.desc
+    commands = Protocol.commands
+    role_fixture = Protocol.role_fixture
+    def test_profile_scope_preserves_cooker_O0_and_limits_flags_and_profile_to_runtime(self):
+        d = self.desc()
+        self.assertEqual(d['version'], 2)
+        self.assertEqual(d['profile_scope'], 'runtime-only')
+        self.assertEqual(p.additions(d, 'cooker'), [])
+        self.assertTrue(p.additions(d, 'runtime'))
+        rows = p.c_commands(self.commands(), self.target, self.vendor)
+        self.assertEqual(p.ordinary_recipes(rows), self.recipes)
+        for wrong in ({'runtime':self.recipes['runtime']},
+                      dict(self.recipes, cooker=self.recipes['runtime'])):
+            with self.assertRaises(ValueError):
+                p.descriptor('use', self.desc_tools(d), wrong, self.vendor,
+                             profile=self.root/'file.profdata')
+        raw = self.commands(d)
+        for bad in (raw.replace('-O0 -g', '-O3 -g'),
+                    raw.replace('-O3 -g', '-O3 -isysroot /foreign -g')):
+            with self.assertRaises(ValueError):
+                p.c_commands(bad, self.target, self.vendor, expected=d)
+
+    def desc_tools(self, d):
+        return {k:d[k] for k in ('compiler','archiver','profdata_tool','profile_runtime',
+                                 'sdk','resource_directory','tool_inputs')}
+
+    def test_role_receipt_cannot_apply_runtime_profile_to_cooker_or_claim_cooker_instrumentation(self):
+        d, directory, messages, producer = self.role_fixture()
+        path = Path(messages[2]['out_dir'])/'quickjs-pgo.json'
+        original = json.loads(path.read_text())
+        for key, value in (('profile',d['profile']), ('c_unit_profiled',True),
+                           ('recipe',d['recipes']['runtime']), ('profile_scope','all-roles')):
+            data = dict(original, **{key:value}); path.write_text(json.dumps(data))
+            attempt = self.root/(key+'-refusal'); attempt.mkdir()
+            (attempt/'descriptor.json').write_bytes((directory/'descriptor.json').read_bytes())
+            with self.assertRaises(ValueError):
+                build.role_receipts(messages, self.target, d, attempt, producer)
+        path.write_text(json.dumps(original))
