@@ -62,7 +62,9 @@ def insert_flags(base, extra):
     require(base and base[-1] == '-D_GNU_SOURCE' and '-w' not in base,
             'Exact GNU-only macro tail and visible diagnostics required')
     require(not any('profile-' in x or x.startswith('@') for x in base), 'Nonordinary C base vector')
-    return [*base[:-1], *extra, base[-1]]
+    # cc's ordinary supported-warning tail follows all builder .flag additions.
+    slot = len(base) - (2 if len(base) > 1 and base[-2] == '-Wno-implicit-const-int-float-conversion' else 1)
+    return [*base[:slot], *extra, *base[slot:]]
 
 
 def ordinary_recipes(commands):

@@ -459,7 +459,15 @@ impl Descriptor {
         )?;
         let mut expected = self.recipe(role).base_args.clone();
         if instrumented {
-            let end = expected.len() - 1;
+            // cc emits builder flags, then flag_if_supported flags, then defines.
+            // Preserve the exact ordinary vector; only insert at that known slot.
+            let end = if expected.len() > 1
+                && expected[expected.len() - 2] == "-Wno-implicit-const-int-float-conversion"
+            {
+                expected.len() - 2
+            } else {
+                expected.len() - 1
+            };
             expected.splice(end..end, self.additions(role));
         }
         if args == expected {

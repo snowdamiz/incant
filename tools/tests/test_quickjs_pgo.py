@@ -496,3 +496,50 @@ class CompilerLookup(unittest.TestCase):
         for search in (None, '/wrong/child/path'):
             with self.assertRaises(ValueError):
                 p.c_commands(raw, self.target, self.vendor, expected=desc, search_path=search)
+
+
+class ObservedOrdering(unittest.TestCase):
+    def test_exact_retained_cc_vector_places_additions_before_supported_warning(self):
+        # CPU006 actual strict mismatch, retained unchanged outside the repo.
+        actual = ['-O3',
+         '-ffunction-sections',
+         '-fdata-sections',
+         '-fPIC',
+         '-g',
+         '-gdwarf-2',
+         '-fno-omit-frame-pointer',
+         '-mno-omit-leaf-frame-pointer',
+         '--target=arm64-apple-macosx',
+         '-mmacosx-version-min=27.0',
+         '-Wall',
+         '-Werror=unknown-warning-option',
+         '-fprofile-generate=/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-cpu-006/raw',
+         '-Wno-implicit-const-int-float-conversion',
+         '-D_GNU_SOURCE']
+        old_expected = ['-O3',
+         '-ffunction-sections',
+         '-fdata-sections',
+         '-fPIC',
+         '-g',
+         '-gdwarf-2',
+         '-fno-omit-frame-pointer',
+         '-mno-omit-leaf-frame-pointer',
+         '--target=arm64-apple-macosx',
+         '-mmacosx-version-min=27.0',
+         '-Wall',
+         '-Wno-implicit-const-int-float-conversion',
+         '-Werror=unknown-warning-option',
+         '-fprofile-generate=/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-cpu-006/raw',
+         '-D_GNU_SOURCE']
+        base = [arg for arg in actual if arg not in ('-Werror=unknown-warning-option',)
+                and not arg.startswith('-fprofile-generate=')]
+        descriptor = {'mode':'generate', 'profile_scope':'runtime-only',
+                      'raw_directory':actual[12].split('=',1)[1]}
+        extra = p.additions(descriptor)
+        self.assertNotEqual(actual, old_expected)
+        self.assertEqual(p.insert_flags(base, extra), actual)
+        self.assertEqual(p.insert_flags(base, []), base)
+        self.assertEqual(p.insert_flags(base, p.additions(descriptor, 'cooker')), base)
+        for bad in (old_expected, [*actual[:-1], '-DNDEBUG', actual[-1]],
+                    [*actual[:11], *reversed(extra), *actual[13:]]):
+            self.assertNotEqual(p.insert_flags(base, extra), bad)
