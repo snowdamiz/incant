@@ -17,8 +17,15 @@ fn scene() -> CookedScene {
     .unwrap()
 }
 fn guest(name: &str) -> Vec<u8> {
-    std::fs::read(std::path::Path::new(env!("INCANT_RUST_SDK_GUESTS")).join(format!("{name}.wasm")))
-        .unwrap()
+    let sdk = std::path::Path::new(env!("INCANT_RUST_SDK_GUESTS"));
+    // The shared conformance producer puts compiled WAT fixtures beside the
+    // sdk-guests directory. Only Rust SDK modules live inside that directory.
+    let root = if name.starts_with("rust-") {
+        sdk
+    } else {
+        sdk.parent().unwrap()
+    };
+    std::fs::read(root.join(format!("{name}.wasm"))).unwrap()
 }
 fn program(development: bool, name: &str) -> SessionProgram {
     if development {

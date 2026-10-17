@@ -1,0 +1,53 @@
+{
+  "schema": 1,
+  "hosted_failure": {
+    "candidate": "7862164a2fd6a4a8d170c41d5b2bba7603f748cf",
+    "job_url": "https://github.com/snowdamiz/incant/actions/runs/39076978294/job/117526044898",
+    "artifact_id": 12117303808,
+    "log_sha256": "1dbbcf647592d68e774541282b3984dab15de74a909acd0c132a8aae47dfe9d5",
+    "test": "actual_reload_retains_timer_schedule_and_refused_startup_does_not_replace_it",
+    "error": "timers_parity.rs:21 could not read timers-start.wasm from INCANT_RUST_SDK_GUESTS"
+  },
+  "local": {
+    "source": "11a1189afc2814152f2daf9a7bdfb408642287af",
+    "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+    "plan_sha256": "4023c8c457bdffeebb3e785b1789d326e16d6d17233eaddd8db4ce5a1ef350af",
+    "runner_sha256": "731b90ce35a610e9767fcab565ac96e8486c35e3a44c2afe3905738320970317",
+    "result_sha256": "d525e837623e71756ddb45af5870c54d647965b5563720944243a8ed0356178f",
+    "closeout_sha256": "f53be36318870b8b29e9197142cfa14463910db43ecd33006509a0456c18f4db",
+    "seconds": 60.291944083001,
+    "tests": [
+      "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s",
+      "test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.17s"
+    ],
+    "actual_tool_terminal": 0,
+    "owner_count": 50,
+    "all_absent": true,
+    "ci_layout_verified": true,
+    "raw_fixture_in_sdk_directory": false,
+    "stages": [
+      {
+        "name": "fresh-normal-cooker",
+        "seconds": 3.5692949580261484,
+        "test_summaries": []
+      },
+      {
+        "name": "actual-timer-guests-CI-layout",
+        "seconds": 22.138814917008858,
+        "test_summaries": [
+          "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s",
+          "test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.17s"
+        ]
+      },
+      {
+        "name": "strict-timer-fixture-lint",
+        "passed": true
+      }
+    ]
+  },
+  "limitations": [
+    "Local Mac qualification; hosted rerun remains pending.",
+    "Runtime code and acceptance rules unchanged.",
+    "Failed checkpoint53 cannot be promoted."
+  ]
+}
