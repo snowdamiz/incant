@@ -1,11 +1,10 @@
 # Implementation status
 
-[Release checkpoint51](docs/spikes/release-checkpoint-51.md) is promoted: all
-23 required contexts and eight exact-head workflows passed on the main382 tree,
-and release `e354bae1` has the identical tested tree. Checkpoint50 and the earlier
-failed batches remain historical. Later main384+ changes, including native Wasm
-persistence and its authored shipping proof, retain separate local qualification
-outside this release baseline. No distribution or phase gate is approved.
+[Release checkpoint52](docs/spikes/release-checkpoint-52.md) is promoted: all
+23 required contexts and eight exact-head workflows passed on the main391 tree,
+and release `73fed959` has the identical tested tree. Later main393–394 changes
+and locally qualified timers remain outside that release baseline. Retained
+failed experiments remain failed. No distribution or phase gate is approved.
 
 The current phase remains **Phase 1: Core engine**. The
 [Phase 1 review ledger](docs/gates/phase1-review.md) maps each exit requirement to
@@ -16,9 +15,9 @@ now also verifies winning HUD pixels, Arabic health direction, CJK glyphs and
 normal/narrow pseudo layouts in retained offscreen Metal frames. Earlier
 incomplete native-window attempts remain historical; these samples do not
 establish continuous motion, window presentation or FPS.
-[Release checkpoint51](docs/spikes/release-checkpoint-51.md) contains the tested
-main382 tree after all 23 required contexts and eight candidate workflows passed.
-Later main384+ changes remain outside that release baseline. Rendering quality and full rendered-game
+[Release checkpoint52](docs/spikes/release-checkpoint-52.md) contains the tested
+main391 tree after all 23 required contexts and eight candidate workflows passed.
+Later main393–394 changes remain outside that release baseline. Rendering quality and full rendered-game
 performance remain open. The reported jagged editor cube now has explicit 4x
 geometry antialiasing, verified in the actual Mac editor and isolated Metal
 controls. This fixes the ordinary viewport route; low-resolution reconstruction
@@ -98,13 +97,26 @@ rasterization and zeros unsupported samples afterward using final owners. It
 passes 112 CPU controls and strict lint. Its tiny GPU mask control and exact
 failed-frame replay now pass: all nine original mismatches are corrected, all
 14 original reference files remain byte-identical, and the full frame oracle
-passes. The complete motion sequence, appearance and cost remain unqualified.
-No experimental renderer is adopted.
+passes. The subsequent full sequence fails earlier at frame33: two eligible
+floor material samples change while all reconstructed raw bytes remain equal to
+the prior capture. The failed sequence remains retained. A fixed-frame original
+reference repeat diagnostic passes its two CPU comparator controls and strict
+lint; its numerical GPU execution is being qualified separately. The complete
+motion sequence, appearance and cost remain unqualified. No experimental
+renderer is adopted.
 
 Native Wasm haptics is merged through PR393 after review and successful fast
 checks. Physical vibration and an authored shipping haptics proof remain open.
-Release checkpoint52 (PR392) keeps main391 frozen for comprehensive CI; later
-main393 is outside that candidate. No distribution or phase gate is approved.
+Release checkpoint52 (PR392) is promoted after all 23 requirements and eight
+workflows passed; later main393–394 is outside that baseline. No distribution or
+phase gate is approved.
+
+Native Wasm timers are locally qualified at `9a9957c5`: 93 native test executions,
+two strict lint commands and all local development checks pass. Both actual
+hosts match the TypeScript timer contract and preserve schedules through saves
+and reloads. Two failed attempts remain explicitly retained. This work is awaiting
+integration; an authored shipping timer proof and complete SDK parity remain open.
+[Contract and evidence](docs/spikes/native-wasm-timers.md).
 
 ## Native presentation pacing — bounded intervention rejected
 
@@ -941,7 +953,7 @@ unchanged. Prior matrix-cache, typed-store, authored-loop, query and navigation
 results remain unchanged.
 
 
-Last reassessment: 2026-10-17, the separate Cargo/Rust-link prerequisite also
+Earlier reassessment: 2026-10-17, the separate Cargo/Rust-link prerequisite also
 passes training/profile consumption and exact held-out bytecode behavior. The
 successful third attempt and two preceding failures retain a cumulative 75.549
 seconds; this is separate from the earlier C-only account. Generation alone
@@ -950,8 +962,15 @@ link keep dead stripping and source-free export checks. Core integration is now
 implemented for source review, using the project's ordinary scalar fast physics
 variant. No actual Core training or performance comparison has run yet.
 
-Next useful trigger: bind the exact profile/tool identity to an opt-in QuickJS
-build and test representative full-Core training against a matched shipping
+Last reassessment: 2026-10-17, the opt-in Core PGO integration passes 29 ordinary
+native controls and strict lint. A source successor also passes its actual
+compiler-environment control and strict lint; the original preparation failure
+is retained. A three-mode ordinary/generate/use shipping experiment is prepared
+for review, but no native Core training, profile-use build or measured speedup
+has run yet. Ordinary shipping remains unchanged.
+
+Next useful trigger: run representative full-Core training and profile-use
+qualification with the exact profile/tool identity against a matched shipping
 baseline. Keep training measurements separate, preserve workload and enforcement,
 and require exact gameplay/audio parity. No benefit is assumed; the 2 ms target
 remains unmet. Reassess after relevant runtime changes or a few hours of active
