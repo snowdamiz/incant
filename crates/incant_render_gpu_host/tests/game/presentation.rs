@@ -135,9 +135,16 @@ fn early_batch_boundary_refreshes_without_extra_gameplay_or_audio_and_failure_is
     assert!(game.refresh_host().is_err());
     assert!(game.is_failed());
     assert_eq!(probe.dropped.load(Ordering::SeqCst), 1);
+    assert!(game.world().is_err());
+    assert!(game.host().is_err());
+    let acquired = acquisitions.load(Ordering::SeqCst);
     pcm.fill(0.7);
     assert!(game.tick(&[], &mut pcm).is_err());
-    assert!(pcm.iter().all(|v| *v == 0.));
+    // An already-failed game refuses before accepting an output buffer. Only
+    // failures during an accepted tick silence PCM; that contract is separate.
+    assert!(pcm.iter().all(|v| *v == 0.7));
+    assert_eq!(acquisitions.load(Ordering::SeqCst), acquired);
+    assert_eq!(probe.presents.load(Ordering::SeqCst), 1);
 }
 
 fn targets(probe: &Probe, defer: &Arc<AtomicBool>) -> BatchTargets<Targets> {
