@@ -967,7 +967,7 @@ impl Capability {
                 .ok_or(Error::Limit("navigation query quota"))?;
         }
         match call {
-            Call::TimerLen => Ok(self.timers.snapshot_len() as i32),
+            Call::TimerLen => return Ok(self.timers.snapshot_len() as i32),
             Call::ReadTimers { ptr, capacity } => {
                 let len = self.timers.snapshot_len();
                 if usize::try_from(capacity).ok().is_none_or(|n| n < len) {
@@ -976,7 +976,7 @@ impl Capability {
                 self.transfer(len)?;
                 let region = range(ptr, len, memory.len())?;
                 self.timers.snapshot(&mut memory[region])?;
-                Ok(len as i32)
+                return Ok(len as i32);
             }
             Call::CommandTimer { ptr, len } => {
                 if len != incant_wasm_abi::TimerCommand::SIZE as i32 {
@@ -986,7 +986,7 @@ impl Capability {
                 let row = incant_wasm_abi::TimerCommand::decode(&bytes)
                     .ok_or(Error::Abi("timer command"))?;
                 self.timers.command(row)?;
-                Ok(0)
+                return Ok(0);
             }
             Call::HapticLen | Call::ReadHaptics { .. } => {
                 let len = self.haptics.snapshot_len();
