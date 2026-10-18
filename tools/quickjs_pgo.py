@@ -12,6 +12,7 @@ import shutil
 
 from native_package import read, require
 from quickjs_pgo_archive import runtime_archive
+from quickjs_pgo_image import after_strip, before_strip
 
 TARGET = 'aarch64-apple-darwin'
 MODES = ('ordinary', 'generate', 'use')
@@ -310,12 +311,16 @@ def final_link(raw, mode, runtime, *, compiler, target, environment=None, artifa
             'bundled_runtime': archive}
 
 
-def instrumentation(mode, symbols, sections):
-    present = '__llvm_profile' in symbols and '__llvm_prf' in sections
-    require(present if mode == 'generate' else '__llvm_profile' not in symbols and '__llvm_prf' not in sections,
-            'Training-only actual profile symbols/sections')
-    return {'profile_sections': mode == 'generate', 'profile_runtime_symbols': mode == 'generate',
-            'symbols_sha256': hashlib.sha256(symbols.encode()).hexdigest(),
+def instrumentation(mode, symbols, sections, *, before=None, packaged=None):
+    require(mode in MODES, 'Known instrumentation mode')
+    if mode == 'generate':
+        proof = after_strip(before, packaged, symbols, sections)
+    else:
+        require(before is None and packaged is None and '__llvm_profile' not in symbols and '__llvm_prf' not in sections,
+                'Training-only actual profile symbols/sections')
+        proof = {'symbol_stage': 'packaged-player', 'section_stage': 'packaged-player',
+                 'symbols_sha256': hashlib.sha256(symbols.encode()).hexdigest()}
+    return {'profile_sections': mode == 'generate', 'profile_runtime_symbols': mode == 'generate', **proof,
             'sections_sha256': hashlib.sha256(sections.encode()).hexdigest()}
 
 

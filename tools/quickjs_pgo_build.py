@@ -103,6 +103,7 @@ class Session(FreshSession):
 @contextmanager
 def phase(mode):
     features, symbols = native_profiling.features, export_native.runtime_symbol_audit
+    evidence = {}
 
     def selected(profiling, route):
         require((profiling, route) == ('summary', 'headless'), 'CPU summary recipe only')
@@ -111,13 +112,15 @@ def phase(mode):
     def training(executable, kind, llvm, link_map):
         require(mode == 'generate' and kind == 'dsym', 'Training-only Mac symbol exception')
         raw = export_native.execute([llvm / 'llvm-nm', '--defined-only', executable]).stdout
+        require(not evidence, 'One actual pre-strip generation audit')
+        evidence['before_strip'] = protocol.before_strip(executable, raw)
         return protocol.training_symbols(raw)
 
     native_profiling.features = selected
     if mode == 'generate':
         export_native.runtime_symbol_audit = training
     try:
-        yield
+        yield evidence
     finally:
         native_profiling.features = features
         export_native.runtime_symbol_audit = symbols
@@ -270,7 +273,7 @@ def prepare(request_path, output, scratch, *, seconds=5400, cancel=lambda: None)
                 protocol.create_json(descriptor_path, descriptors[mode])
                 os.environ[protocol.SELECTOR] = str(descriptor_path)
                 protocol.create_json(directory / 'descriptor.json', descriptors[mode])
-            with phase(mode):
+            with phase(mode) as audit:
                 player, report = export_native.build(copied, directory, storage,
                     spec['scene'], spec['camera'], 'headless', profiling='summary', session=session,
                     session_execute=managed_compile(directory, check))
@@ -301,7 +304,8 @@ def prepare(request_path, output, scratch, *, seconds=5400, cancel=lambda: None)
                 artifacts=messages, root=ROOT)
             symbols = run_tool([llvm / 'llvm-nm', '--defined-only', player], directory, 'actual-symbols', 30, check)
             sections = run_tool([llvm / 'llvm-readobj', '--sections', player], directory, 'actual-sections', 30, check)
-            report['instrumentation'] = protocol.instrumentation(mode, symbols, sections)
+            report['instrumentation'] = protocol.instrumentation(mode, symbols, sections,
+                before=audit.get('before_strip'), packaged=player if mode == 'generate' else None)
             report.update(training_is_nonshipping=mode == 'generate', eligible_for_distribution=False,
                           source_free_claim=mode != 'generate', performance_claim=False)
             protocol.create_json(directory / 'build-receipt.json', report)

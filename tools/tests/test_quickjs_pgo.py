@@ -260,7 +260,8 @@ class Protocol(unittest.TestCase):
         for mode in ('ordinary', 'use'):
             p.instrumentation(mode, 'plain symbols', 'plain sections')
             with self.assertRaises(ValueError): p.instrumentation(mode, '__llvm_profile', '__llvm_prf')
-        p.instrumentation('generate', '__llvm_profile', '__llvm_prf')
+        # Symbol strings alone cannot substitute for the staged native images.
+        with self.assertRaises(ValueError): p.instrumentation('generate', '__llvm_profile', '__llvm_prf')
         with self.assertRaises(ValueError): p.instrumentation('generate', 'plain', 'plain')
         symbols = '\n'.join('000abc T ' + n for n in (*p.RETAINED, '_JS_ReadObject', '_JS_EvalFunction', '___JS_EvalInternal'))
         self.assertFalse(p.training_symbols(symbols)['source_free_claim'])
