@@ -60,8 +60,15 @@ pub(super) fn area(polygon: &[Point], x: usize, y: usize) -> f64 {
 }
 
 pub(super) fn fixture() -> crate::SceneInput {
+    fixture_with(&[EDGE, STRIP], [1., 1., 1.], 1)
+}
+pub(super) fn fixture_with(
+    polygons: &[[Point; 4]],
+    emission: [f64; 3],
+    version: u64,
+) -> crate::SceneInput {
     let dir = tempfile::tempdir().unwrap();
-    let positions: Vec<f32> = [EDGE, STRIP]
+    let positions: Vec<f32> = polygons
         .iter()
         .flat_map(|p| {
             // Screen Y points down; reverse winding for camera-facing +Z normals.
@@ -77,8 +84,8 @@ pub(super) fn fixture() -> crate::SceneInput {
     .unwrap();
     let doc = json!({"asset":{"version":"2.0"},"buffers":[{"uri":"mesh.bin","byteLength":positions.len()*4}],
         "bufferViews":[{"buffer":0,"byteLength":positions.len()*4}],
-        "accessors":[{"bufferView":0,"componentType":5126,"count":12,"type":"VEC3","min":[-4,-4,0],"max":[4,4,0]}],
-        "materials":[{"pbrMetallicRoughness":{"baseColorFactor":[0,0,0,1],"metallicFactor":0,"roughnessFactor":1},"emissiveFactor":[1,1,1]}],
+        "accessors":[{"bufferView":0,"componentType":5126,"count":positions.len()/3,"type":"VEC3","min":[-4,-4,0],"max":[4,4,0]}],
+        "materials":[{"pbrMetallicRoughness":{"baseColorFactor":[0,0,0,1],"metallicFactor":0,"roughnessFactor":1},"emissiveFactor":emission}],
         "meshes":[{"primitives":[{"attributes":{"POSITION":0},"material":0}]}],"nodes":[{"mesh":0}],"scenes":[{"nodes":[0]}],"scene":0});
     std::fs::write(
         dir.path().join("mesh.gltf"),
@@ -88,7 +95,8 @@ pub(super) fn fixture() -> crate::SceneInput {
     let cache = dir.path().join("cache");
     let cooked = incant_assets::cook_gltf(dir.path(), Path::new("mesh.gltf"), &cache).unwrap();
     let source = Arc::new(
-        RuntimeAsset::load_model("edge-strip", 1, &cache, &cooked.metadata.fingerprint).unwrap(),
+        RuntimeAsset::load_model("edge-strip", version, &cache, &cooked.metadata.fingerprint)
+            .unwrap(),
     );
     let mesh = SceneNode {
         id: "mesh".into(),

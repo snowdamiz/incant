@@ -173,7 +173,12 @@ impl System {
             usage: wgpu::BufferUsages::UNIFORM,
             contents: bytemuck::bytes_of(&Frame {
                 source: p.input.rect,
-                output: [p.targets.size[0] as f32, p.targets.size[1] as f32, 0., 0.],
+                output: [
+                    p.targets.size[0] as f32,
+                    p.targets.size[1] as f32,
+                    f32::from(u8::from(p.stationary)),
+                    0.,
+                ],
                 depth: [
                     camera.near,
                     camera.far,

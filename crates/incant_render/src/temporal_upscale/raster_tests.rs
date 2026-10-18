@@ -8,7 +8,7 @@ use glam::{DMat4, DVec3};
 use serde_json::json;
 use std::{io::Write, path::Path};
 
-fn write(root: &Path, name: &str, bytes: &[u8]) {
+pub(super) fn write(root: &Path, name: &str, bytes: &[u8]) {
     std::fs::OpenOptions::new()
         .write(true)
         .create_new(true)
@@ -17,7 +17,7 @@ fn write(root: &Path, name: &str, bytes: &[u8]) {
         .write_all(bytes)
         .unwrap();
 }
-fn owner(r: &Renderer, input: &SceneInput) -> RetainedScene {
+pub(super) fn owner(r: &Renderer, input: &SceneInput) -> RetainedScene {
     let mut s = r.prepare_retained(input, "camera").unwrap();
     let scale = crate::resolution::ResolutionScale::new(12).unwrap();
     s.set_dynamic_resolution(Some(crate::resolution::ResolutionConfig {
@@ -36,7 +36,7 @@ fn owner(r: &Renderer, input: &SceneInput) -> RetainedScene {
     s.prepare_temporal_upscale_extent(r, [64, 64]).unwrap();
     s
 }
-fn render(
+pub(super) fn render(
     r: &Renderer,
     s: &mut RetainedScene,
     input: &SceneInput,
@@ -178,10 +178,24 @@ fn retained_raster_jitter_coverage_motion_and_cut() {
             }
         }
         let mut strip_missing = 0;
+        let mut strip_alpha_error = 0.;
+        let mut strip_rgb_error = 0.;
+        let mut strip_alpha_mass = 0.;
         if frame <= 16 {
-            for y in 44..47 {
-                for x in 6..55 {
-                    if geometry::area(&STRIP, x, y) > 0. && p.history()[y * OUTPUT + x][3] == 0. {
+            // Include clear surroundings: a thickened stripe cannot pass by
+            // covering the true pixels while inventing coverage around them.
+            for y in 41..49 {
+                for x in 2..59 {
+                    let area = geometry::area(&STRIP, x, y);
+                    let rgba = p.history()[y * OUTPUT + x];
+                    strip_alpha_mass += f64::from(rgba[3]);
+                    strip_alpha_error += (f64::from(rgba[3]) - area).abs();
+                    strip_rgb_error += rgba[..3]
+                        .iter()
+                        .map(|&v| (f64::from(v) - area).abs())
+                        .sum::<f64>()
+                        / 3.;
+                    if area > 0. && rgba[3] == 0. {
                         strip_missing += 1;
                     }
                 }
@@ -190,6 +204,7 @@ fn retained_raster_jitter_coverage_motion_and_cut() {
         let error = edge_error(&p);
         let stats = json!({"frame":frame,"phase":phase,"previous":previous,"net_output_shift":shift,
             "current_covered":covered,"current_strip_samples":strip_samples,"strip_missing_output_pixels":strip_missing,
+            "strip_alpha_absolute_error":strip_alpha_error,"strip_RGB_absolute_error":strip_rgb_error,"strip_alpha_mass":strip_alpha_mass,
             "tie_pixels":ties,"coverage_mismatches":mismatches,"depth_mismatches":depth_mismatch,
             "motion_mismatches":motion_mismatch,"static_edge_area_mae":if frame<=16 {Some(error)}else{None}});
         write(
@@ -215,6 +230,9 @@ fn retained_raster_jitter_coverage_motion_and_cut() {
             motion_mismatch, 0,
             "frame {frame} motion registration {stats}"
         );
+        if (9..=16).contains(&frame) {
+            assert_eq!(strip_missing, 0, "static warm-history strip frame {frame}");
+        }
         if frame == 1 {
             first_error = Some(error);
         }

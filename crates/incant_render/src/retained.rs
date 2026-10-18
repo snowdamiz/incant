@@ -301,7 +301,9 @@ impl RetainedScene {
             return Err(crate::motion::MotionError::OwnerCombination.into());
         }
         self.enable_motion_history(renderer)?;
-        self.temporal_upscale = Some(crate::temporal_upscale::State::new());
+        self.temporal_upscale = Some(crate::temporal_upscale::State::new(
+            self.packed_lights.capacity(),
+        ));
         Ok(())
     }
     #[cfg(feature = "experimental-taau")]
@@ -638,6 +640,11 @@ impl RetainedScene {
                         .ok_or(crate::temporal::TemporalError::History)?
                         .temporal_input(plan.rect),
                     [target.width, target.height],
+                    self.staging.camera,
+                    &self.packed_lights,
+                    self.motion
+                        .as_ref()
+                        .is_some_and(|m| m.candidate_stationary()),
                 )
             })
             .transpose()?;
@@ -731,7 +738,7 @@ impl RetainedScene {
         }
         #[cfg(feature = "experimental-taau")]
         if let (Some(state), Some(pending)) = (&mut self.temporal_upscale, upscale_pending) {
-            state.accept(pending);
+            state.accept(pending, &self.packed_lights);
         }
         if let (Some(owner), Some(frame)) = (&mut self.resolution, resolution) {
             owner.accept(frame);

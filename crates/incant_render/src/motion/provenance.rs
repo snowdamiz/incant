@@ -149,6 +149,10 @@ pub(super) struct State {
     candidate: Bits,
 }
 impl State {
+    #[cfg(feature = "experimental-taau")]
+    pub fn candidate_stationary(&self) -> bool {
+        self.candidate.count == 0
+    }
     pub fn new(highest: u32) -> Self {
         Self {
             highest,

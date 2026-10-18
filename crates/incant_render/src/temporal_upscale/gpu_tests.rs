@@ -1,7 +1,7 @@
 //! Small execution discriminator for the actual shader before full motion review.
 use super::*;
 #[test]
-#[ignore = "coordinated GPU only: fifteen 8x8 resolves, bounded half-float readback"]
+#[ignore = "coordinated GPU only: 21 8x8 resolves, bounded half-float readback"]
 fn actual_current_depth_and_history_support_refusals_remain_finite() {
     let mut r = crate::test_support::checked(Renderer::headless().unwrap());
     pollster::block_on(r.enable_temporal_upscale()).unwrap();
@@ -63,7 +63,7 @@ fn actual_current_depth_and_history_support_refusals_remain_finite() {
         mapped_at_creation: false,
     });
     let mut results = Vec::new();
-    for mode in 0..15 {
+    for mode in 0..21 {
         let mut current = vec![[0.2, 0.2, 0.2, 1.]; 64];
         for y in 0..8 {
             current[y * 8 + 2] = [0., 0., 0., 1.];
@@ -119,13 +119,38 @@ fn actual_current_depth_and_history_support_refusals_remain_finite() {
             motion.fill([0., 0., 0.1, 1.]);
             motion[2 * 8 + 2] = [0., 0., 0.5, 1.];
         }
+        if mode >= 15 {
+            current.fill([0.; 4]);
+            old_support.fill([0.5, 8., 0., 0.]);
+            if mode == 16 {
+                old_support.fill([0.5, 1., 0., 0.]);
+            }
+            if mode == 17 {
+                old_support.fill([0.5, 9., 0., 0.]);
+            }
+            if mode == 18 {
+                old_support.fill([0.5, f32::NAN, 0., 0.]);
+            }
+            if mode == 20 {
+                current[3 * 8 + 3][0] = f32::NAN;
+            }
+        }
         let uniform = d.create_buffer_init(&wgpu::util::BufferInitDescriptor {
             label: None,
             usage: wgpu::BufferUsages::UNIFORM,
             contents: bytemuck::bytes_of(&Frame {
                 source: [0., 0., 8., 8.],
-                output: [8., 8., 0., 0.],
-                depth: [0.1, 10., 1., if mode == 0 || mode == 7 { 0. } else { 1. }],
+                output: [8., 8., if mode >= 15 { 1. } else { 0. }, 0.],
+                depth: [
+                    0.1,
+                    10.,
+                    1.,
+                    if mode == 0 || mode == 7 || mode == 19 {
+                        0.
+                    } else {
+                        1.
+                    },
+                ],
                 jitter: [0.; 4],
             }),
         });
@@ -230,6 +255,10 @@ fn actual_current_depth_and_history_support_refusals_remain_finite() {
         "selection uses current depth, not expected previous depth"
     );
     assert_eq!(results[6], [0.; 4]);
+    assert!(results[15][3] > 0. && results[15][3] < 1.);
+    for i in 16..=20 {
+        assert_eq!(results[i], [0.; 4], "static carry refusal {i}");
+    }
     assert_eq!(
         results[9], results[11],
         "outer color depth must not veto central support"

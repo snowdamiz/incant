@@ -54,6 +54,12 @@ pub(crate) struct MotionState {
     bytes: u64,
     pub(crate) owner_attachment: bool,
 }
+#[cfg(feature = "experimental-taau")]
+impl MotionState {
+    pub(crate) fn candidate_stationary(&self) -> bool {
+        self.provenance.candidate_stationary()
+    }
+}
 pub(crate) struct Prepared {
     history: Pending,
     targets: Option<Arc<Targets>>,

@@ -37,6 +37,11 @@ fn cubic(x:f32)->f32 {
     if a<2.0 { return -0.5*a*a*a+2.5*a*a-4.0*a+2.0; }
     return 0.0;
 }
+fn history_weight(c:vec4f,h:vec4f,confidence:f32)->f32 {
+    let change=abs(h.rgb-c.rgb);
+    let reaction=clamp(max(change.x,max(change.y,change.z))/0.25,0.0,1.0);
+    return clamp(confidence,0.0,1.0)*0.9*(1.0-0.5*reaction);
+}
 struct Resolved { @location(0) color:vec4f, @location(1) support:vec2f }
 @fragment fn resolve(@builtin(position) p:vec4f)->Resolved {
     let uv=p.xy/frame.output.xy;
@@ -64,6 +69,7 @@ struct Resolved { @location(0) color:vec4f, @location(1) support:vec2f }
         let v=ycocg(c.rgb); mean+=v;moment+=v*v;
         let d=textureLoad(current_depth,tap,0);
         let m=textureLoad(motion,tap,0);
+        malformed=malformed || !finite4(vec4f(d,0.0,0.0,0.0)) || !finite4(m);
         // Depth is actual CURRENT depth from the matching single-sample owner.
         if c.a>0.0 && d>=0.0 && d<1.0 && (!found || d<nearest) {
             nearest=d;chosen=m;found=true;
@@ -71,10 +77,32 @@ struct Resolved { @location(0) color:vec4f, @location(1) support:vec2f }
     }}
     var c=center_color;
     if abs(mass)>1e-5 { c=clean(clamp(sum/mass,minimum,maximum)); }
-    var result=Resolved(c,vec2f(nearest,select(0.0,1.0,found)));
+    // support.y is remaining observed-history age, never coverage alpha.
+    // Eight is the existing jitter cycle; only real current geometry refreshes it.
+    var result=Resolved(c,vec2f(nearest,select(0.0,8.0,found)));
+    if frame.depth.w<0.5 || malformed { return result; }
+    if !found {
+        // Textures alone cannot distinguish a missed strip from a departed one.
+        // This bit certifies exact static camera/geometry/bindings/packed lights.
+        // No reprojection or neighbour search: preserve only this observed pixel.
+        if frame.output.z>0.5 {
+            let tap=vec2i(p.xy);
+            let s=textureLoad(previous_support,tap,0).xy;
+            let raw=textureLoad(previous_color,tap,0);
+            if finite4(vec4f(s,0.0,0.0)) && s.x>=0.0 && s.x<1.0
+                && s.y>1.0 && s.y<=8.0 && floor(s.y)==s.y && finite4(raw) {
+                let h=clean(raw);
+                if h.a>0.0 {
+                    result.color=clean(mix(c,h,history_weight(c,h,1.0)));
+                    result.support=vec2f(s.x,s.y-1.0);
+                }
+            }
+        }
+        return result;
+    }
     // Never let a neighboring valid owner supply history to an invalid/new
     // center owner. Clear pixels can reconstruct fractional edge coverage.
-    if frame.depth.w<0.5 || malformed || !found || !valid_motion(chosen)
+    if !valid_motion(chosen)
         || (center_color.a>0.0 && !valid_motion(center_motion)) { return result; }
     let velocity=chosen.xy+(frame.jitter.xy-frame.jitter.zw)/frame.source.zw;
     let old=(uv+velocity)*frame.output.xy-vec2f(0.5);
@@ -114,8 +142,6 @@ struct Resolved { @location(0) color:vec4f, @location(1) support:vec2f }
     let clipped=clean(vec4f(rgb(clamp(ycocg(h.rgb),mean-sigma,mean+sigma)),clamp(h.a,minimum.a,maximum.a)));
     // Existing fixed temporal reaction policy, fixed candidate values. Radiance
     // change is measured before clipping; no confidence stored in coverage alpha.
-    let change=abs(h.rgb-c.rgb);
-    let reaction=clamp(max(change.x,max(change.y,change.z))/0.25,0.0,1.0);
-    result.color=clean(mix(c,clipped,clamp(confidence,0.0,1.0)*0.9*(1.0-0.5*reaction)));
+    result.color=clean(mix(c,clipped,history_weight(c,h,confidence)));
     return result;
 }

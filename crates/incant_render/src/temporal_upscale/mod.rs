@@ -2,6 +2,7 @@
 //! shipping policy or visual/performance acceptance. See gpu-color-taau.md.
 #[cfg(all(test, feature = "native-metalfx", target_os = "macos"))]
 mod comparison;
+mod continuity;
 mod owner;
 #[cfg(test)]
 mod raster_geometry;
@@ -10,6 +11,8 @@ mod raster_readback;
 #[cfg(test)]
 mod raster_tests;
 pub(crate) mod render;
+#[cfg(test)]
+mod static_tests;
 pub(crate) mod system;
 #[cfg(test)]
 mod tests;
