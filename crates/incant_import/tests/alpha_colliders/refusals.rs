@@ -119,10 +119,38 @@ fn corrupted_cooked_bytes_refuse_even_with_original_source_present() {
     let prepared = f.prepare(128).unwrap();
     let hash = &prepared.derivation().texture_content_sha256;
     fs::write(cache.join(format!("{hash}.ktx2")), b"broken payload").unwrap();
-    assert!(matches!(f.prepare(128), Err(E::Cache(_))));
+    let error = f.prepare(128).err().unwrap();
+    assert!(matches!(error, E::Cache(_)));
+    assert!(error.to_string().contains("checksum mismatch"));
     assert!(f.root.path().join("mask.png").exists());
     fs::remove_file(cache.join(format!("{hash}.ktx2"))).unwrap();
     assert!(matches!(f.prepare(128), Err(E::Cache(_))));
+}
+
+#[test]
+fn matching_digest_does_not_admit_malformed_cooked_texture_layout() {
+    let f = Fixture::new(2, &[255; 4], false);
+    let cache = project_cache_directory(f.root.path(), CacheKind::Textures).unwrap();
+    let key = &f.bus.project().assets[&f.asset].sha256;
+    let metadata_path = cache.join(format!("{key}.json"));
+    let mut metadata: incant_assets::TextureMetadata =
+        serde_json::from_slice(&fs::read(&metadata_path).unwrap()).unwrap();
+    // Keep recipe/key and the independent chain intact. The bad primary payload
+    // has the claimed digest, so this must reach the checked decoder, not merely
+    // fail the corruption check.
+    let bytes = b"not a KTX2 header";
+    let hash = incant_assets::sha256(bytes);
+    fs::write(cache.join(format!("{hash}.ktx2")), bytes).unwrap();
+    metadata.content_sha256 = hash;
+    assert_eq!(metadata.expected_key().unwrap(), *key);
+    fs::write(metadata_path, serde_json::to_vec(&metadata).unwrap()).unwrap();
+    let before = f.bus.project().clone();
+    let history = f.bus.history().to_vec();
+    let error = f.prepare(128).err().unwrap();
+    assert!(matches!(error, E::Cache(_)));
+    assert!(error.to_string().contains("truncated KTX2 header"));
+    assert_eq!(f.bus.project(), &before);
+    assert_eq!(f.bus.history(), history);
 }
 
 #[test]

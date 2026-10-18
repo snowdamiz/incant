@@ -137,3 +137,37 @@ fn failed_actor_and_later_source_edits_do_not_change_prepared_or_committed_geome
         "authored fixed result has no live linkage"
     );
 }
+
+#[test]
+fn deleted_selection_refuses_the_whole_prepared_batch_without_resurrection() {
+    for delete_scene in [false, true] {
+        let mut f = Fixture::new(3, &[255, 0, 255], false);
+        let prepared = f.prepare(128).unwrap();
+        assert_eq!(prepared.commands().len(), 2);
+        let command = if delete_scene {
+            Command::DeleteScene {
+                scene_id: f.scene.clone(),
+            }
+        } else {
+            Command::DeleteEntity {
+                scene_id: f.scene.clone(),
+                entity_id: f.entity.clone(),
+            }
+        };
+        f.bus
+            .execute(vec![command], Actor::user("test"), "Remove source", None)
+            .unwrap();
+        let before = f.bus.project().clone();
+        let history = f.bus.history().to_vec();
+        let revision = f.bus.revision();
+        assert!(matches!(
+            prepared.commit(&mut f.bus, Actor::user("test")),
+            Err(AlphaColliderError::StaleProject)
+        ));
+        assert_eq!(f.bus.project(), &before);
+        assert_eq!(f.bus.history(), history);
+        assert_eq!(f.bus.revision(), revision);
+        f.reopen();
+        assert_eq!(f.bus.project(), &before);
+    }
+}
