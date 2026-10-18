@@ -17,9 +17,31 @@ NAVIGATION = 'diagnostic-navigation'
 NAV_FEATURES = ['project', 'render-input', 'profile', NAVIGATION]
 BUDGET = 'diagnostic-script-budget'
 BUDGET_FEATURES = ['project', 'render-input', 'profile', BUDGET]
+QUERIES = 'diagnostic-script-queries'
+QUERY_FEATURES = ['project', 'render-input', 'profile', QUERIES]
+
+
+def node_version(features):
+    additions(features)  # Unknown feature combinations do not gain admission.
+    return 'v22.23.3' if features == QUERY_FEATURES else 'v24.21.0'
+
+
+def query_authoring_subset(files, historical):
+    """Exact retained workload; missing authoring history is not reconstructed."""
+    require(isinstance(files, dict) and isinstance(historical, dict)
+            and len(files) == 60 and len(historical) == 74, 'Expected 60 of 74 historical Core files')
+    require(set(files) < set(historical) and all(historical[n] == h for n, h in files.items()),
+            'Core subset bytes changed')
+    missing = set(historical) - set(files)
+    require(len(missing) == 14 and 'source.journal.jsonl' in missing
+            and all(n == 'source.journal.jsonl' or n.startswith('.incant-source-transactions/')
+                    for n in missing)
+            and {'core.json', 'gameplay.ts', 'stress.ts'} <= files.keys(),
+            'Missing Core input is not recorded authoring history')
+    return {n: historical[n] for n in sorted(missing)}
 
 def additions(features):
-    require(features in (FEATURES, NAV_FEATURES, BUDGET_FEATURES), 'Unknown diagnostic selection')
+    require(features in (FEATURES, NAV_FEATURES, BUDGET_FEATURES, QUERY_FEATURES), 'Unknown diagnostic selection')
     result = {name: {DIAGNOSTIC} for name in EXTRA}
     if features == NAV_FEATURES:
         for flags in result.values(): flags.add(NAVIGATION)
@@ -27,6 +49,9 @@ def additions(features):
     if features == BUDGET_FEATURES:
         for name in ('incant_game_player', 'incant_script', 'incant_profile'):
             result[name].add(BUDGET)
+    if features == QUERY_FEATURES:
+        for name in ('incant_game_player', 'incant_script', 'incant_profile'):
+            result[name].add(QUERIES)
     return result
 
 TICKS = 2156
@@ -51,7 +76,7 @@ def plan(path):
     require(data['format'] == 'incant-script-attribution-private-plan' and data['version'] == 1,
             'Unsupported private diagnostic plan')
     require(data['target'] == TARGET and data['physics_mode'] == 'fast'
-            and data['features'] in (FEATURES, NAV_FEATURES, BUDGET_FEATURES) and data['ticks'] == TICKS
+            and data['features'] in (FEATURES, NAV_FEATURES, BUDGET_FEATURES, QUERY_FEATURES) and data['ticks'] == TICKS
             and data['child_seconds'] == 45 and data['retry_count'] == 0
             and data['eligible_for_performance_gate'] is False, 'Diagnostic contract changed')
     return data, sha256(raw)
@@ -87,7 +112,11 @@ def authored(data):
     root = Path(data['authoring_root']).absolute()
     _, raw = checked_file(data['authoring_manifest'], 4 * 1024**2)
     files = json.loads(raw)['authoring_files']
-    require(len(files) == 74, 'Expected original 74 authored inputs')
+    if data['features'] == QUERY_FEATURES:
+        _, original = checked_file(data['historical_authoring_manifest'], 4 * 1024**2)
+        query_authoring_subset(files, json.loads(original)['authoring_files'])
+    else:
+        require(len(files) == 74, 'Expected original 74 authored inputs')
     actual = {p.relative_to(root).as_posix(): sha256(read(p, 256 * 1024**2))
               for p in root.rglob('*') if p.is_file() or p.is_symlink()}
     require(actual == files, 'Authored inputs differ from fixed Core workload')
