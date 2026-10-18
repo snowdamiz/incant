@@ -1,7 +1,7 @@
 use crate::{Result, print, read_project};
 use incant_assets::TextureUsage;
 use incant_cmd::{Actor, CommandBus};
-use incant_import::{ImportRequest, ImportSnapshot};
+use incant_import::{AlphaColliderRequest, ImportRequest, ImportSnapshot};
 use std::path::Path;
 
 pub fn load_runtime(
@@ -50,6 +50,34 @@ pub fn import(
     let mut response = serde_json::to_value(&committed.imports[0])?;
     response["revision"] = serde_json::json!(committed.revision);
     print(response)
+}
+
+pub fn collider_from_alpha(
+    project: &Path,
+    scene_id: &str,
+    entity_id: &str,
+    threshold: u8,
+    cache: Option<&Path>,
+) -> Result<()> {
+    let root = project
+        .parent()
+        .filter(|p| !p.as_os_str().is_empty())
+        .unwrap_or(Path::new("."));
+    let mut bus = CommandBus::open_project_file_with_journal(
+        project,
+        project.with_extension("journal.jsonl"),
+    )?;
+    let request = AlphaColliderRequest {
+        scene_id: scene_id.into(),
+        entity_id: entity_id.into(),
+        threshold,
+    };
+    let prepared = ImportSnapshot::capture(&bus).prepare_alpha_colliders(root, cache, &request)?;
+    let result = prepared.commit(&mut bus, Actor::user("cli"))?;
+    // Failure here leaves the recoverable journal transaction intact, as with
+    // ordinary import; it must not be described as a successful file save.
+    bus.save_project_file(bus.revision(), Actor::user("cli"))?;
+    print(result)
 }
 
 /// Document semantics plus cached sprite bindings; no source reimport or mutation.
