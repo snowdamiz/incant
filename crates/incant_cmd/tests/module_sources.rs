@@ -220,13 +220,6 @@ fn invalid_sources_versions_and_final_metadata_leave_no_transaction_prefix() {
         ],
         vec![
             register(&RustModuleSource {
-                path: "missing/main.rs".into(),
-                ..module.clone()
-            }),
-            write(&module, None, TEXT),
-        ],
-        vec![
-            register(&RustModuleSource {
                 path: "main.rs".into(),
                 ..module.clone()
             }),

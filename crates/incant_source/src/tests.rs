@@ -12,6 +12,7 @@ fn store(root: &Path) -> SourceStore {
 fn edit(before: Option<&str>, after: Option<&str>) -> SourceEdit {
     SourceEdit {
         kind: crate::SourceKind::TypeScript,
+        created_tree: None,
         script_id: SCRIPT.into(),
         path: "main.ts".into(),
         before: before.map(str::to_owned),
@@ -430,7 +431,8 @@ fn rust_pending_marker_retains_kind_and_rolls_back_the_exact_preimage() {
     store.finish(OP).unwrap();
     assert_eq!(store.read("movement/main.rs").unwrap(), change.before);
     assert_ne!(check_recovery(dir.path()).unwrap(), before);
-    assert!(store.read("absent/main.rs").is_err());
+    assert_eq!(store.read("absent/main.rs").unwrap(), None);
+    assert!(store.read("absent/main.ts").is_err());
     assert!(!dir.path().join("absent").exists());
     fs::write(
         dir.path().join("movement/main.rs"),

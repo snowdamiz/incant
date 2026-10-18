@@ -12,9 +12,11 @@ mod platform;
 mod platform;
 use platform::Dir;
 mod project;
+mod tree;
 pub use project::{
     MAX_PROJECT_BYTES, OpenedProject, ProjectEdit, ProjectPending, ProjectSnapshot, bounded_json,
 };
+pub use tree::OwnedSourceTree;
 const SUPPORTED: bool = cfg!(any(target_os = "linux", target_os = "macos", windows));
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
@@ -100,6 +102,9 @@ pub struct SourceEdit {
     pub path: String,
     pub before: Option<String>,
     pub after: Option<String>,
+    /// Present only for a Rust source transaction that owns its missing subtree.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub created_tree: Option<OwnedSourceTree>,
 }
 impl SourceEdit {
     pub fn reversed(&self) -> Self {
@@ -109,6 +114,7 @@ impl SourceEdit {
             path: self.path.clone(),
             before: self.after.clone(),
             after: self.before.clone(),
+            created_tree: self.created_tree.clone(),
         }
     }
     pub fn validate(&self) -> Result<(), SourceError> {
@@ -117,6 +123,9 @@ impl SourceEdit {
         self.kind.validate_path(&self.path)?;
         for source in [&self.before, &self.after].into_iter().flatten() {
             self.kind.validate_source(source)?;
+        }
+        if let Some(tree) = &self.created_tree {
+            tree.validate(self)?;
         }
         Ok(())
     }
@@ -332,7 +341,15 @@ impl SourceStore {
         Err(SourceError::Invalid("empty source path".into()))
     }
     pub fn read(&self, path: &str) -> Result<Option<String>, SourceError> {
-        let (parent, leaf) = self.parent(path)?;
+        let (parent, leaf) = match self.parent(path) {
+            Ok(parent) => parent,
+            Err(SourceError::Io(error))
+                if path.ends_with(".rs") && error.kind() == io::ErrorKind::NotFound =>
+            {
+                return Ok(None);
+            }
+            Err(error) => return Err(error),
+        };
         optional_read(
             &parent,
             &leaf,
@@ -393,11 +410,15 @@ impl SourceStore {
         edit.validate()?;
         ulid::Ulid::from_string(operation)
             .map_err(|_| SourceError::Invalid("invalid operation ULID".into()))?;
-        if self.read(&edit.path)? != edit.before {
-            return Err(SourceError::Conflict);
-        }
-        if let Some(after) = &edit.after {
-            write_new(&self.state, &format!("{operation}.next"), after.as_bytes())?;
+        if edit.created_tree.is_some() {
+            self.check_tree_preimage(edit)?;
+        } else {
+            if self.read(&edit.path)? != edit.before {
+                return Err(SourceError::Conflict);
+            }
+            if let Some(after) = &edit.after {
+                write_new(&self.state, &format!("{operation}.next"), after.as_bytes())?;
+            }
         }
         #[cfg(test)]
         crash_point("staged");
@@ -426,6 +447,9 @@ impl SourceStore {
     /// it, since arbitrary external editors do not participate in our root lock.
     pub fn install(&self, operation: &str, edit: &SourceEdit) -> Result<(), SourceError> {
         self.verify_pending(operation, edit)?;
+        if edit.created_tree.is_some() {
+            return self.install_tree(edit);
+        }
         let (parent, leaf) = self.parent(&edit.path)?;
         if edit.before.is_some() {
             parent.move_to(&leaf, &self.state, &format!("{operation}.previous"))?;
@@ -453,6 +477,9 @@ impl SourceStore {
     /// leave the durable pending marker in place for explicit human reconciliation.
     pub fn rollback(&self, operation: &str, edit: &SourceEdit) -> Result<(), SourceError> {
         self.verify_pending(operation, edit)?;
+        if edit.created_tree.is_some() {
+            return self.rollback_tree(edit);
+        }
         let current = self
             .read(&edit.path)
             .map_err(|_| SourceError::RecoveryRequired)?;
@@ -534,6 +561,8 @@ impl SourceStore {
 
 #[cfg(test)]
 mod tests;
+#[cfg(test)]
+mod tree_tests;
 #[cfg(test)]
 fn crash_point(phase: &str) {
     if std::env::var("INCANT_SOURCE_CRASH_TEST_PHASE").as_deref() == Ok(phase) {
