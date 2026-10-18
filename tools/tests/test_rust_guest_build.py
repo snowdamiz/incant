@@ -171,6 +171,14 @@ class PolicyTests(Fixture):
         for untrusted_or_data in (policy.source, policy.run, policy.sdk):
             self.assertFalse(any(str(untrusted_or_data) in line for line in mapped))
 
+    def test_loader_root_read_is_exact_and_does_not_admit_descendant_data(self):
+        text = self.policy().text()
+        self.assertEqual(text.splitlines().count('(allow file-read-data (literal "/"))'), 1)
+        self.assertNotIn('(subpath "/")', text)
+        self.assertNotIn('(allow file-read*)', text)
+        self.assertNotIn('(allow file-map-executable (literal "/"))', text)
+        self.assertNotIn('(allow file-write* (literal "/"))', text)
+
     def test_profile_quoting_cannot_inject_a_rule(self):
         policy = replace(self.policy(), source=self.root / 'x") (allow default) ("')
         text = policy.text()

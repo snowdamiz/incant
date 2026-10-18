@@ -60,7 +60,7 @@ compiler/validator refusals, cancellation, collision, publication replacement,
 resource/cleanup error preservation and failure receipts without OS children.
 The two existing trusted SDK cache controls remain. None is native evidence.
 
-Source qualification on 2026-10-18: all 36 selected pure controls passed with
+Source qualification on 2026-10-18: all 37 selected pure controls passed with
 `python3 -m unittest tools.tests.test_rust_guest tools.tests.test_rust_guest_build`.
 This includes the exact historical SDK argv/cache digest control. Python syntax,
 the trusted OS canary's Rust formatting, generated conventions and `git diff
@@ -81,3 +81,28 @@ streams combined/4 MiB each, 1 MiB raw Wasm, sampled 8 GiB RSS and a 6 GiB disk
 floor. No shared Cargo target, network access, windows, GPU, capture, audio device
 or performance measurement is required. Retained partials and every failure
 count against those bounds. Native qualification needs separate review/grant.
+
+The first actual episode used source `dcc9fc5c` and ended at sandbox startup:
+tool session 72517 exited 1 after 1.686923042 seconds. Compiler identification
+and both vetted SDK builds exited 0; sandboxed `rustc --print cfg` aborted with
+SIGABRT before project source compilation. The wrapper and all four native
+PID/groups were independently absent. No module, normal-validator result or
+escape-control acceptance followed. All 663 bound inputs remained unchanged.
+The failed episode and original 180-second account remain retained externally.
+
+The saved crash reports namespace 35/code 2 and an ignition/CacheFinder stack.
+[Apple's XNU definitions](https://github.com/apple-oss-distributions/xnu/blob/xnu-12377.1.9/bsd/sys/reason.h)
+identify namespace 35 as LIBIGNITION. [Published dyld source](https://github.com/apple-oss-distributions/dyld/blob/main/dyld/DyldProcessConfig.cpp)
+shows CacheFinder invoking ignition; that published file is not established as
+byte-identical to the installed dyld. Neither source nor the crash identifies
+the exact denied path/operation for this run.
+
+The installed `/System/Library/Sandbox/Profiles/dyld-support.sb` explicitly
+documents libignition opening `/` as its `openat` root. The failed policy grants
+only root metadata. The next candidate adds **file-read-data on literal `/`
+only**, permitting the directory open/listing while descendant files continue
+to require their own rules. It does not import the system profile or admit
+additional Cryptex trees, descendant reads, writes or executable mappings. This
+is a source-backed startup hypothesis, not a proven cause or isolation result.
+A separately bounded cfg-only preflight is proposed before another full suite;
+it remains unexecuted pending review, within the 178.313076958 seconds left.
