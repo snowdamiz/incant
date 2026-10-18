@@ -78,6 +78,10 @@ erase a successfully committed recoverable journal transaction.
   8192 per axis, 128 MiB serialized/combined color payload limits).
   Existing box half-extents must remain 0.001..10000 metres, with ordinary
   fixed-collider material defaults. No sub-minimum dimension is clamped.
+  The transaction adds at most 64 commands, below the bus's 10,000-command
+  limit. There is no new general scene/entity authoring cap. Native cooking and
+  the planar solver retain their separate total entity/body/shape limits;
+  preparing this edit does not qualify an entire scene for runtime admission.
 
 Moving, deleting or reimporting the source afterward leaves the authored
 colliders as they were. Re-running adds another set. The caller must explicitly
@@ -92,8 +96,9 @@ geometry, actual planar physics queries through solid and empty texel centers,
 and exact history/provenance/Undo/Redo/Save/reopen observations. Refusal controls
 cover transparent masks, threshold zero, pixel/rectangle bounds, unsupported
 source transforms/components/prefabs/modes, missing atlas frames, high precision,
-corrupt/missing cache, invalid actor, stale asset/document/revision and a replaced
-project with an equal revision. CLI grammar controls require explicit selection
+wrong-digest/missing cache, matching-digest malformed KTX, invalid actor, stale
+asset/document/revision, deleted selection and a replaced project with an equal
+revision. CLI grammar controls require explicit selection
 and the same threshold range. Existing import suites and strict scoped lint
 remain part of the proposed qualification. No native command, window or GPU
 execution has been performed for this source yet.
