@@ -9,8 +9,8 @@ publish.workspace = true
 default = ["physics-deterministic"]
 
 # Select one physics kernel for the entire process, including build/test hosts.
-physics-deterministic = ["incant_assets/physics-deterministic", "incant_cmd/physics-deterministic"]
-physics-fast-simd8 = ["incant_assets/physics-fast-simd8", "incant_cmd/physics-fast-simd8"]
+physics-deterministic = ["incant_assets/physics-deterministic", "incant_cmd/physics-deterministic", "incant_physics_2d_runtime/deterministic"]
+physics-fast-simd8 = ["incant_assets/physics-fast-simd8", "incant_cmd/physics-fast-simd8", "incant_physics_2d_runtime/fast-simd8"]
 
 [dependencies]
 incant_wasm_cook = { path = "../incant_wasm_cook" }
@@ -23,6 +23,8 @@ schemars = { workspace = true }
 thiserror = { workspace = true }
 
 [dev-dependencies]
+incant_physics_2d_runtime = { path = "../incant_physics_2d_runtime", default-features = false }
+incant_types.workspace = true
 wat = "=1.258.3"
 incant_text.workspace = true
 tempfile = "3"

@@ -2,6 +2,8 @@ use clap::{Parser, Subcommand};
 use incant_agent_native::GpuPerception;
 use incant_render_authoring::RendererAuthoringExt as _;
 mod agent_command;
+#[cfg(test)]
+mod alpha_cli;
 mod assets;
 mod engine_version;
 mod eval;
@@ -89,6 +91,16 @@ enum Cli {
         cache: Option<PathBuf>,
         #[arg(long, value_parser = ["color", "linear", "normal"])]
         texture_usage: Option<String>,
+    },
+    /// Create fixed Box Collider2D siblings from a simple sprite's cooked alpha mask.
+    ColliderFromAlpha {
+        project: PathBuf,
+        scene_id: String,
+        entity_id: String,
+        #[arg(long, default_value_t = 128, value_parser = clap::value_parser!(u8).range(1..=255))]
+        threshold: u8,
+        #[arg(long)]
+        cache: Option<PathBuf>,
     },
     /// Reimport registered sources and reload CPU assets; emits JSON lines until interrupted.
     WatchAssets {
@@ -443,6 +455,21 @@ fn run() -> Result<()> {
             cache.as_deref(),
             texture_usage.as_deref(),
         )?,
+        Cli::ColliderFromAlpha {
+            project,
+            scene_id,
+            entity_id,
+            threshold,
+            cache,
+        } => {
+            assets::collider_from_alpha(
+                &project,
+                &scene_id,
+                &entity_id,
+                threshold,
+                cache.as_deref(),
+            )?;
+        }
         Cli::WatchAssets {
             project,
             interval_ms,
