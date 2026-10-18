@@ -448,7 +448,8 @@ membership are validated by the engine; same-ID respawn does not reattach a
 retired owner. Catalog changes refuse checkpoint restore. Module-only projects
 keep their previous behavior. See [the sample](samples/instances.rs) and
 [source scope and qualification limits](../../docs/spikes/native-wasm-instances.md).
-Actual two-host and authored-export qualification of this slice is pending.
+Focused actual Wasmtime/wasm2c parity and reload controls passed. Ordinary
+authored source-free export qualification of this slice remains pending.
 
 ### Explicit persistent state
 

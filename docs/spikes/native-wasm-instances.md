@@ -1,7 +1,8 @@
 # Authored native Wasm initial instances
 
-Source implementation, based on main409 (`dec42101f`). Native compilation,
-Wasmtime/wasm2c execution and packaged export qualification are pending. No
+Implementation based on main409 (`dec42101f`). Scoped native CPU tests, actual
+Wasmtime/wasm2c guest comparisons, strict lints and fresh headless schema
+comparison passed. Ordinary authored source-free export remains pending. No
 hardware input, window, GPU, performance or complete SDK-parity claim follows.
 
 `SetSceneProgram` accepts the existing scene-wide Wasm module plus an optional
@@ -68,11 +69,42 @@ cold cook with nested values and signed zero; legacy TS fingerprint/limits;
 snapshot bounds, stale epochs, rollback, owner reuse and checkpoint identity.
 The Rust guest fixture has two differently tuned owners and an unrelated entity,
 plus retire, scratch, callback-error, trap and stale-token variants. The existing
-conformance preparation now builds these for actual Wasmtime/wasm2c/TS comparison
-when native qualification is granted. Those guest runs have not yet occurred.
+conformance preparation builds these for actual Wasmtime/wasm2c/TS comparison.
+All four focused actual-guest tests
+passed, including same-module reload after removal followed by same-ID respawn.
 
 Source-only checks: 43 focused Python controls passed after resolving the test
 fixture's temporary-directory alias; the original path refusal was preserved in
-the development record. Generated ABI/SDK, format and conventions checks are
-recorded in the source handoff. The JSON schema snapshots are source-derived;
-authoritative comparison with a freshly compiled headless generator is pending.
+the development record. Generated ABI/SDK, format and conventions checks passed.
+The fresh headless producer now matches all published schema bytes. Its first
+check refused two lexical differences in `agent-tools.json`; parsed JSON values
+were identical, and the actual generator's byte spelling was restored.
+
+The [compact qualification record](evidence/native-wasm-instances.json) retains
+exact commands, counts, source/artifact identities, log hashes and local original
+paths. Initial `9ee0f8ea` passed 35 tests, then strict lint refused an unused
+iterator result. `f42c8bee` explicitly discards that eagerly validated view and
+adds removal-tick checkpoint and common reload regressions: seven focused runtime
+tests and enabled/ordinary strict lints passed. The headless build first hit its
+150-second cap; its bounded continuation built successfully. Generated-byte
+correction `00425f75` changes no runtime code. At `b03dda12`, six Rust guest
+variants were compiled/metered/translated, four actual two-host tests passed and
+their strict feature lint passed. These are CI-profile functional results.
+
+Total recorded native work was 1,031.509414 seconds, including refusals and the
+headless timeout; last owned target allocation/peak was 6,785,257,472 bytes under
+a 12 GiB cap. Each actual wrapper terminal was observed and all recorded process
+identities/groups were checked absent. Current headless, cooker, runtime-test and
+guest-test binaries have independent retained copies. The original five-test
+runtime executable was overwritten by its approved seven-test successor; its
+source, output and hash remain, but those historical binary bytes do not.
+
+The retained exporter is the exact `f42c8bee` producer, SHA-256
+`31fac9b9ba1209287377e6fd6aee58f34d2c0121780288a42002a3546438b27e`.
+It is usable only for source-compatible authoring/export checks. This does not
+qualify alpha/tilemap additions or relabel it as a current-main executable.
+Root's separate combined integration `9d44372a` subsequently built a fresh
+headless producer and matched all 80 schemas, preserving both additions without
+another snapshot change. That producer is SHA-256
+`f0fb0cf5c654dd03e4ad77e57901586cb6abb426a923dd77f86af169f272641f`;
+its separate build does not rerun or replace the original guest results.
