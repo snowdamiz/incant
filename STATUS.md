@@ -107,8 +107,17 @@ independently absent. This experimental Mac
 backend fails closed elsewhere; no broader security, editor/agent integration,
 performance or cross-platform isolation acceptance follows.
 The scoped worker is merged through PR422 after review and successful exact-head
-development checks. A shared editor/agent job service is being implemented
-separately; it has not yet qualified actual compiler and cancellation behavior.
+development checks. The shared [editor/agent job service](docs/spikes/module-build-host-jobs.md)
+now passes thirteen service controls, two agent approval/refusal controls and five
+actual process/worker controls on this Mac, including compilation through the
+shared bridge and cancellation after a child begins. Strict service, agent and
+editor lints and a fresh headless schema export also pass. All ten integrated
+development checks pass. The original agent-fixture budget failure and subsequent
+editor lint failure remain retained. This is locally verified build-only behavior:
+source writes, candidate installation and actual editor interaction remain separate.
+Registered Rust source editing has independent source review and is entering native
+qualification; first-package directory creation remains source-only pending its
+parent. No compiler shell or arbitrary path authority is exposed to the agent.
 
 Checkpoint57 is frozen at candidate `53ec74d2`, with exactly main421's tree
 (`527d280a`). Its Windows desktop job failed the authored startup test at the
@@ -130,8 +139,13 @@ configuration required `&Path`. The scoped correction uses `as_path()` on both
 platform branches; actual Windows cache behavior and timeout repair remain
 unqualified. All checkpoint57 workflows have now finished; the Windows desktop
 failure prevents promotion, while the other seven workflows passed. The
-candidate remains frozen and release remains at the previously qualified
-checkpoint55. Checkpoint56 failed its Windows credential
+failed candidate remains historical. PR425 is merged after its local controls
+and exact-head development checks passed. Checkpoint58 now freezes candidate
+`53820888` with exactly main425 (`da7b7414`) tree `86013476`; all eight comprehensive
+workflows have started. Release remains at the previously qualified checkpoint55
+until every required exact-head context succeeds. The separate corrected Windows
+diagnostic is still running; no Windows runtime improvement is established.
+Checkpoint56 failed its Windows credential
 job on three tilemap tests that read the exclusively
 locked journal through an independent file handle. The
 [test-only correction](docs/spikes/tilemap-journal-portability.md) preserves exact
