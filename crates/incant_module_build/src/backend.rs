@@ -244,7 +244,7 @@ impl Backend for Local {
         })
     }
 }
-fn bounded(path: &Path, cap: usize) -> Result<Vec<u8>> {
+pub(crate) fn bounded(path: &Path, cap: usize) -> Result<Vec<u8>> {
     let info = fs::symlink_metadata(path)?;
     if !info.is_file() || info.len() > cap as u64 {
         return Err(Error::Invalid("regular bounded protocol file required"));
@@ -257,6 +257,7 @@ fn bounded(path: &Path, cap: usize) -> Result<Vec<u8>> {
         }
     }
     let mut file = crate::node::read(path)?;
+    crate::node::regular(&file)?;
     let before = file.metadata()?;
     if !before.is_file() || before.len() > cap as u64 || !crate::node::matches(&file, path)? {
         return Err(Error::Invalid("protocol file replaced"));
@@ -266,6 +267,7 @@ fn bounded(path: &Path, cap: usize) -> Result<Vec<u8>> {
         .take((cap + 1) as u64)
         .read_to_end(&mut result)?;
     let after = file.metadata()?;
+    crate::node::regular(&file)?;
     if result.len() > cap
         || before.len() != after.len()
         || before.modified()? != after.modified()?

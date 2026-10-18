@@ -48,16 +48,24 @@ fn identity(file: &File) -> io::Result<(u64, u64)> {
     Ok((m.dev(), m.ino()))
 }
 #[cfg(windows)]
-fn identity(file: &File) -> io::Result<(u64, u64)> {
+fn information(
+    file: &File,
+) -> io::Result<windows_sys::Win32::Storage::FileSystem::BY_HANDLE_FILE_INFORMATION> {
     use std::os::windows::io::AsRawHandle;
     use windows_sys::Win32::Storage::FileSystem::{
-        BY_HANDLE_FILE_INFORMATION, FILE_ATTRIBUTE_REPARSE_POINT, GetFileInformationByHandle,
+        BY_HANDLE_FILE_INFORMATION, GetFileInformationByHandle,
     };
     let mut info = BY_HANDLE_FILE_INFORMATION::default();
     // SAFETY: the File owns a live handle and info has the API's complete layout.
     if unsafe { GetFileInformationByHandle(file.as_raw_handle(), &mut info) } == 0 {
         return Err(io::Error::last_os_error());
     }
+    Ok(info)
+}
+#[cfg(windows)]
+fn identity(file: &File) -> io::Result<(u64, u64)> {
+    use windows_sys::Win32::Storage::FileSystem::FILE_ATTRIBUTE_REPARSE_POINT;
+    let info = information(file)?;
     if info.dwFileAttributes & FILE_ATTRIBUTE_REPARSE_POINT != 0 {
         return Err(io::Error::new(
             io::ErrorKind::InvalidInput,
@@ -67,6 +75,34 @@ fn identity(file: &File) -> io::Result<(u64, u64)> {
     Ok((
         u64::from(info.dwVolumeSerialNumber),
         (u64::from(info.nFileIndexHigh) << 32) | u64::from(info.nFileIndexLow),
+    ))
+}
+pub(crate) fn regular(file: &File) -> io::Result<()> {
+    #[cfg(unix)]
+    {
+        use std::os::unix::fs::MetadataExt;
+        let info = file.metadata()?;
+        if info.is_file() && info.nlink() == 1 {
+            return Ok(());
+        }
+    }
+    #[cfg(windows)]
+    {
+        use windows_sys::Win32::Storage::FileSystem::{
+            FILE_ATTRIBUTE_DIRECTORY, FILE_ATTRIBUTE_REPARSE_POINT,
+        };
+        let info = information(file)?;
+        if info.dwFileAttributes & (FILE_ATTRIBUTE_DIRECTORY | FILE_ATTRIBUTE_REPARSE_POINT) == 0
+            && info.nNumberOfLinks == 1
+        {
+            return Ok(());
+        }
+    }
+    #[cfg(not(any(unix, windows)))]
+    let _ = file;
+    Err(io::Error::new(
+        io::ErrorKind::InvalidInput,
+        "opened node must be a single-link regular file",
     ))
 }
 #[cfg(not(any(unix, windows)))]
@@ -98,5 +134,23 @@ mod tests {
             std::os::unix::fs::symlink(&first, &link).unwrap();
             assert!(directory(&link).is_err());
         }
+    }
+    #[test]
+    fn opened_file_rechecks_single_link_admission_after_namespace_change() {
+        let root = tempfile::tempdir().unwrap();
+        let path = root.path().join("original");
+        let alias = root.path().join("alias");
+        std::fs::write(&path, b"bounded data").unwrap();
+        let held = read(&path).unwrap();
+        regular(&held).unwrap();
+        std::fs::hard_link(&path, &alias).unwrap();
+        assert!(regular(&held).is_err());
+        assert!(crate::backend::bounded(&path, 1024).is_err());
+        std::fs::remove_file(alias).unwrap();
+        regular(&held).unwrap();
+        assert_eq!(
+            crate::backend::bounded(&path, 1024).unwrap(),
+            b"bounded data"
+        );
     }
 }
