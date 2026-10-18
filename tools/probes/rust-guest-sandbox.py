@@ -132,7 +132,9 @@ def run(plan, cancelled, *, started=None):
         environment = clean_environment(env_run, tools.rustc)
         compiled = owner.run([str(tools.rustc), str(ROOT / 'tools/probes/rust-guest-sandbox-control.rs'),
                               '--edition=2024', '--crate-name=incant_sandbox_control', '-C', 'opt-level=0',
-                              '-C', 'debuginfo=0', '-o', str(control)], cwd=env_run, env=environment, label='trusted-control-build')
+                              '-C', 'debuginfo=0', '-C', 'linker=' + plan['native_linker'],
+                              '-C', 'link-arg=-isysroot', '-C', 'link-arg=' + plan['macos_sdk'],
+                              '-o', str(control)], cwd=env_run, env=environment, label='trusted-control-build')
         require(compiled.returncode == 0, 'Trusted native control did not compile')
         valid_work = output / 'valid-relative-sdk/work'
         initial = service.read_file(valid_work / 'result.json', service.MIB)
