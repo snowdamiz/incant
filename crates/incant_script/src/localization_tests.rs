@@ -1,6 +1,6 @@
 use super::*;
 #[path = "../../incant_runtime/tests/support/localization.rs"]
-mod fixture;
+pub(super) mod fixture;
 use fixture::*;
 use incant_runtime::{FrameCommands, StructuralCommand};
 fn host(body: &str) -> ScriptHost {
