@@ -1,0 +1,1315 @@
+{
+  "format": "registered-module-tools-evidence-v1",
+  "scope": "Mac CPU registered-ID read/write/inspect/build authority and first-package transactions. Mock worker; no actual compiler/isolation rerun, install, runtime, device, GUI, audio or performance gate.",
+  "source": "1152e5e635aba5963539a1e5340f428360fca8da",
+  "generated_commit": "cc57167f",
+  "tests": 129,
+  "ignored_tests": 4,
+  "nested_crash_contract": {
+    "parent": "package_source_protocol_tests::package_apply_undo_redo_recover_every_durable_boundary_without_partial_directories",
+    "operations": [
+      "apply",
+      "undo",
+      "redo"
+    ],
+    "phases": [
+      "marker",
+      "partial_prepare",
+      "prepare",
+      "installed",
+      "partial_commit",
+      "commit",
+      "finish"
+    ],
+    "actual_children_required_by_parent": 21,
+    "expected_exit": 73,
+    "counts": "Nested child names/summaries never count as parent passes; source-bound parent asserts all21 real child exits."
+  },
+  "nested_observation": "Successful exact parent and its isolated-child assertion prove all21 crash children returned73; nested streams are captured by the test isolation helper and are not21 separately logged parent passes.",
+  "suites": [
+    {
+      "call": 2,
+      "name": "source-compile-incant_source-execute",
+      "inventory": "cpu-002/001.stdout.log",
+      "stdout": "cpu-002/002.stdout.log",
+      "tests": [
+        "project::tests::bounded_encoding_counts_escaped_bytes_and_names_are_not_data_authority",
+        "project::tests::opened_and_reviewed_nodes_stay_alive_after_unlink_until_authority_retires",
+        "project::tests::project_backup_collision_and_foreign_displaced_node_are_preserved",
+        "project::tests::project_crash_child",
+        "project::tests::project_exact_backup_and_missing_node_survive_real_process_exit",
+        "tests::actual_process_crashes_recover_prepared_and_installed_files",
+        "tests::byte_limit_paths_links_and_missing_parent_refuse_without_effects",
+        "tests::external_race_is_retained_and_blocks_recovery_instead_of_clobbering",
+        "tests::legacy_edit_wire_bytes_keep_typescript_default_and_rust_is_explicit",
+        "tests::missing_source_race_never_clobbers_the_new_external_file",
+        "tests::process_crash_child",
+        "tests::raced_leaf_symlink_is_preserved_without_following_its_target",
+        "tests::read_only_guard_creates_nothing_and_epoch_detects_a_completed_write",
+        "tests::replacement_retains_actual_old_file_and_rollback_restores_it",
+        "tests::root_lock_is_exclusive_across_different_journals",
+        "tests::rust_paths_and_utf8_byte_bound_preserve_portable_admission",
+        "tests::rust_pending_marker_retains_kind_and_rolls_back_the_exact_preimage",
+        "tests::symlink_files_directories_and_state_are_not_followed",
+        "tree_tests::changed_owned_tree_blocks_undo_and_recovery_preserves_added_content",
+        "tree_tests::ownership_receipt_cannot_be_omitted_or_rebound_to_another_root",
+        "tree_tests::platform_subtree_move_never_replaces_an_existing_destination",
+        "tree_tests::private_stage_never_publishes_before_install_and_reopen_restores_owned_tree",
+        "tree_tests::racing_destination_and_foreign_entries_are_preserved_not_merged_or_deleted",
+        "tree_tests::replaced_same_content_directory_does_not_inherit_ownership",
+        "tree_tests::staged_symlink_or_hardlinked_leaf_cannot_publish",
+        "tree_tests::subtree_metadata_is_bounded_and_cannot_authorize_a_typescript_or_unrelated_edit"
+      ],
+      "ignored": []
+    },
+    {
+      "call": 5,
+      "name": "command-compile-incant_cmd-execute",
+      "inventory": "cpu-002/004.stdout.log",
+      "stdout": "cpu-002/005.stdout.log",
+      "tests": [
+        "journal::agent_budget_replay_tests::replay_refuses_nonuser_budget_commands_that_do_not_change_the_projection",
+        "journal::agent_budget_replay_tests::replay_refuses_nonuser_cap_changes_even_without_budget_commands",
+        "module_source_protocol_tests::crash_child",
+        "module_source_protocol_tests::rust_apply_undo_and_redo_recover_every_durable_boundary",
+        "package_source_protocol_tests::crash_child",
+        "package_source_protocol_tests::package_apply_undo_redo_recover_every_durable_boundary_without_partial_directories",
+        "project_checkpoint_tests::checkpoint_capacity_and_custom_journal_replacement_refuse_before_backup",
+        "project_checkpoint_tests::checkpoint_crash_child",
+        "project_checkpoint_tests::checkpoint_save_cannot_replace_causal_state_with_equal_projection",
+        "project_checkpoint_tests::checkpoint_save_crashes_and_partial_errors_recover_without_logical_advance",
+        "project_checkpoint_tests::file_requests_are_closed_and_no_capability_is_deserialized",
+        "project_checkpoint_tests::legacy_custom_journal_save_pin_history_and_reopen_share_one_capability",
+        "project_checkpoint_tests::legacy_pending_script_recovers_under_exact_custom_journal_binding",
+        "project_checkpoint_tests::save_refuses_stale_revision_external_bytes_and_same_byte_replacement_before_effects",
+        "project_file_tests::absent_document_recovers_but_foreign_nodes_are_never_overwritten",
+        "project_file_tests::crash_child",
+        "project_file_tests::create_only_backup_failure_never_advances_project_history_or_journal",
+        "project_file_tests::incomplete_initial_journal_is_refused_without_truncation_or_backup",
+        "project_file_tests::journal_and_marker_corruption_do_not_grant_recovery_authority",
+        "project_file_tests::journal_limit_and_unavailable_capability_refuse_before_backup",
+        "project_file_tests::pin_undo_redo_preserve_exact_file_and_reopen_history",
+        "project_file_tests::process_restart_at_every_project_boundary_reconciles_apply_undo_redo",
+        "project_file_tests::project_transaction_cannot_smuggle_unrelated_edits_or_explicit_repins",
+        "project_file_tests::real_partial_write_error_rolls_back_and_ambiguous_durability_blocks_until_reopen",
+        "project_file_tests::same_projection_different_causal_snapshot_cannot_replace_abort_checkpoint",
+        "project_file_tests::stale_revision_bytes_and_same_byte_replacement_refuse_without_file_or_history_effects",
+        "project_file_tests::symlink_hardlink_and_journal_alias_refuse_without_touching_targets",
+        "project_file_tests::unlink_then_recreate_same_bytes_retires_a_review_without_mutation",
+        "project_file_tests::unmatched_prepared_operation_never_retires_a_structurally_valid_foreign_marker",
+        "source_protocol_tests::actual_partial_write_errors_abort_without_document_or_disk_prefix_changes",
+        "source_protocol_tests::actual_process_death_at_every_journal_boundary_recovers_apply_undo_and_redo",
+        "source_protocol_tests::crash_child",
+        "source_protocol_tests::unresolved_file_effect_requires_its_bound_store_and_preserves_foreign_changes",
+        "subtree::references::tests::every_component_and_non_enum_string_slot_has_an_audited_reference_class",
+        "subtree::references::tests::typed_internal_edges_change_without_reserializing_other_values"
+      ],
+      "ignored": []
+    },
+    {
+      "call": 7,
+      "name": "command-compile-session_identity-execute",
+      "inventory": "cpu-002/006.stdout.log",
+      "stdout": "cpu-002/007.stdout.log",
+      "tests": [
+        "reopening_same_journal_keeps_authored_state_but_retires_session_authority",
+        "session_identity_is_stable_across_edits_and_distinct_for_same_project_buses"
+      ],
+      "ignored": []
+    },
+    {
+      "call": 9,
+      "name": "command-compile-module_sources-execute",
+      "inventory": "cpu-002/008.stdout.log",
+      "stdout": "cpu-002/009.stdout.log",
+      "tests": [
+        "external_preimages_and_postcommit_conflicts_remain_observable",
+        "invalid_sources_versions_and_final_metadata_leave_no_transaction_prefix",
+        "mixed_typescript_rust_and_duplicate_writes_refuse_before_any_publication",
+        "oversize_reads_and_linked_source_paths_fail_closed",
+        "registration_and_rust_source_publish_atomically_with_actor_and_durable_undo_redo",
+        "save_and_reopen_keep_registered_bytes_and_reversible_history",
+        "symlinked_entry_or_package_is_never_traversed",
+        "unavailable_stores_refuse_and_metadata_removal_never_deletes_bytes"
+      ],
+      "ignored": []
+    },
+    {
+      "call": 11,
+      "name": "command-compile-package_sources-execute",
+      "inventory": "cpu-002/010.stdout.log",
+      "stdout": "cpu-002/011.stdout.log",
+      "tests": [
+        "empty_saved_project_creates_first_package_with_reopen_undo_and_redo",
+        "foreign_additions_and_redo_collisions_leave_history_and_directories_untouched",
+        "invalid_revision_cas_or_mixed_write_creates_no_visible_directory_prefix",
+        "moving_a_project_does_not_rebind_first_package_undo_authority",
+        "preexisting_ancestors_survive_and_ordinary_edits_do_not_lose_tree_ownership"
+      ],
+      "ignored": []
+    },
+    {
+      "call": 13,
+      "name": "command-compile-script_sources-execute",
+      "inventory": "cpu-002/012.stdout.log",
+      "stdout": "cpu-002/013.stdout.log",
+      "tests": [
+        "committed_history_replay_never_rewrites_files_and_missing_capability_cannot_undo",
+        "creation_registration_and_attachment_share_one_atomic_history_and_actor",
+        "metadata_removal_does_not_delete_files_and_source_independent_buses_refuse_writes",
+        "refusal_leaves_disk_document_revision_and_history_unchanged",
+        "replacement_adopts_external_preimage_and_undo_redo_preserve_it"
+      ],
+      "ignored": []
+    },
+    {
+      "call": 17,
+      "name": "service-compile-incant_module_build-execute",
+      "inventory": "cpu-002/015.stdout.log",
+      "stdout": "cpu-002/017.stdout.log",
+      "tests": [
+        "backend::tests::diagnostics_never_exceed_byte_cap_at_multibyte_boundary",
+        "backend::tests::exact_launch_environment_and_private_receipts_are_not_worker_authority",
+        "node::tests::held_directory_matches_only_its_original_node",
+        "node::tests::opened_file_rechecks_single_link_admission_after_namespace_change",
+        "process::tests::census_requires_actual_buffer_and_identity",
+        "tests::aggregate_deadline_and_cancellation_cannot_hide_cleanup_failure",
+        "tests::busy_cancel_close_and_poison_require_owner_terminal",
+        "tests::changed_sources_and_old_generation_never_publish_candidates",
+        "tests::exact_ordered_recipes_refuse_native_or_unknown_control",
+        "tests::job_status_opaque_ids_actor_and_no_project_writes",
+        "tests::legacy_snapshot_and_wire_contract_stay_unbound",
+        "tests::manifest_order_is_stable_and_ambiguity_bounds_fail",
+        "tests::new_failure_retires_previous_candidate_and_root_replacement_refuses",
+        "tests::registered_capture_requires_exact_present_entry_and_safe_registry_path",
+        "tests::registered_snapshot_cannot_be_downgraded_or_rebound_to_other_authority",
+        "tests::registered_validation_and_cancellation_fence_post_build_candidate",
+        "tests::stale_foreign_cancelled_and_unavailable_requests_start_no_build"
+      ],
+      "ignored": [
+        "process::tests::actual_crashed_bridge_still_requires_delegated_child_closure",
+        "process::tests::actual_exited_bridge_cannot_leave_pipe_holding_descendant",
+        "process::tests::actual_observer_failure_retains_owner_without_blocking_wait",
+        "process::tests::actual_terminal_and_cancel_close_owned_groups"
+      ]
+    },
+    {
+      "call": 20,
+      "name": "agent-compile-module_registered-execute",
+      "inventory": "cpu-002/019.stdout.log",
+      "stdout": "cpu-002/020.stdout.log",
+      "tests": [
+        "approved_build_rechecks_source_registration_session_and_cancel_before_backend",
+        "approved_write_fences_external_source_edit_revision_registration_reopen_and_cancel",
+        "missing_registered_source_can_be_authored_but_cannot_be_inspected_for_build",
+        "pending_source_recovery_refuses_read_write_inspect_and_build_before_backend",
+        "registered_build_approval_and_provenance_share_the_host_service_without_mutation",
+        "registered_build_cancellation_during_backend_keeps_candidate_unpublished",
+        "registered_build_rechecks_authority_after_backend_and_discards_candidate",
+        "registered_build_rejects_registration_source_or_session_change_after_inspection",
+        "registered_read_and_write_reject_unknown_ids_paths_fields_stale_cas_and_revision",
+        "registered_source_write_uses_approval_actor_and_durable_undo_redo_without_worker",
+        "registered_tools_expose_only_stable_id_and_observed_authority_arguments"
+      ],
+      "ignored": []
+    },
+    {
+      "call": 22,
+      "name": "agent-compile-module_jobs-execute",
+      "inventory": "cpu-002/021.stdout.log",
+      "stdout": "cpu-002/022.stdout.log",
+      "tests": [
+        "missing_host_unknown_config_fields_and_stale_snapshots_refuse",
+        "shared_service_build_approval_provenance_and_zero_mutation"
+      ],
+      "ignored": []
+    },
+    {
+      "call": 24,
+      "name": "agent-compile-module_sources-execute",
+      "inventory": "cpu-002/023.stdout.log",
+      "stdout": "cpu-002/024.stdout.log",
+      "tests": [
+        "patch_schema_exposes_closed_registered_rust_commands_without_compiler_authority",
+        "rust_registration_write_and_removal_obey_generic_patch_approval"
+      ],
+      "ignored": []
+    },
+    {
+      "call": 26,
+      "name": "agent-compile-scripts-execute",
+      "inventory": "cpu-002/025.stdout.log",
+      "stdout": "cpu-002/026.stdout.log",
+      "tests": [
+        "cancellation_after_approval_precedes_prepare_for_both_write_entrypoints",
+        "registration_and_removal_use_the_existing_patch_approval_boundary",
+        "script_metadata_is_exposed_by_the_shared_typed_patch_schema",
+        "source_content_tools_are_approved_journaled_and_untrusted",
+        "source_tools_refuse_source_independent_hosts_and_schema_has_no_path_capability"
+      ],
+      "ignored": []
+    },
+    {
+      "call": 28,
+      "name": "agent-compile-shared-execute",
+      "inventory": "cpu-002/027.stdout.log",
+      "stdout": "cpu-002/028.stdout.log",
+      "tests": [
+        "approval_can_edit_the_project_and_stale_agent_patch_does_not_overwrite_it",
+        "cancellation_during_approval_or_provider_response_never_applies_pending_edits",
+        "conversation_retains_completed_protocol_and_requeries_after_manual_edit",
+        "editor_edits_during_provider_wait_then_agent_requeries_and_commits_undoable_transaction",
+        "interrupted_conversation_retains_warning_and_committed_edit_without_unmatched_calls",
+        "loading_project_container_uses_one_bus_and_refuses_a_failed_reload",
+        "oversized_provider_context_is_refused_before_network_or_budget_charge",
+        "project_switch_and_poison_fail_closed_without_executing_provider_patch",
+        "shared_asset_and_script_tools_replay_and_undo_through_the_existing_journal",
+        "slow_hosts_receive_consistent_authoring_snapshots_without_locking_editor",
+        "unchecked_play_hosts_are_not_advertised_or_dispatched_for_shared_projects"
+      ],
+      "ignored": []
+    }
+  ],
+  "code_inputs": [
+    {
+      "path": "crates/incant_agent/src/lib.rs",
+      "sha256": "fd98ce606887c85d367f5c9af687540ae4ce7d579b9bda09a6fb50e1a7e40432"
+    },
+    {
+      "path": "crates/incant_agent/src/module_jobs.rs",
+      "sha256": "ef97de0e10b779a71191d4ef6fc6ef72139a13aa159f781020f7d2625feed512"
+    },
+    {
+      "path": "crates/incant_agent/src/module_registered.rs",
+      "sha256": "c59be1dfcab75e90fb21f07b9da6eea09450f0f9efe470209e9f9567318d22a4"
+    },
+    {
+      "path": "crates/incant_agent/tests/module_registered.rs",
+      "sha256": "d347df873a25eacb2bf493050d6671104a7c07ebf5da1703c8a7c7be9f535e7b"
+    },
+    {
+      "path": "crates/incant_cmd/src/lib.rs",
+      "sha256": "b7e2dc85409bcb1ebf1cca3a2b0c09aeb6dcfc19207bc3b929af0c89708686e0"
+    },
+    {
+      "path": "crates/incant_cmd/src/package_source_protocol_tests.rs",
+      "sha256": "d2ac02eb898291ffd8e1005b34ec6184618e375bc6cb540786fa662bacd90b30"
+    },
+    {
+      "path": "crates/incant_cmd/src/project_checkpoint_tests.rs",
+      "sha256": "a6ec7a5f9e2e5c53d7bed2ab6e73d57b191f5240390816da64967e48111710c2"
+    },
+    {
+      "path": "crates/incant_cmd/src/sources.rs",
+      "sha256": "905fa9c2d66b6a3c947663e0246bf3c6e9543520a405f3eea60454c05bccfbd0"
+    },
+    {
+      "path": "crates/incant_cmd/src/subtree/references/tests.rs",
+      "sha256": "a8b910598057d8ac9b0aca691ef1962177d845912a2a557e0f2169218a802c4d"
+    },
+    {
+      "path": "crates/incant_cmd/src/test_isolation.rs",
+      "sha256": "aeaa0b8e9e8a90f60dbf41e43d0c7f45ef5599b47f54ceb36421c666ceccb7ff"
+    },
+    {
+      "path": "crates/incant_cmd/tests/module_sources.rs",
+      "sha256": "53d267432eb8c60911ba2b117325977ec0f23bd08b73724c9e318e392181b1db"
+    },
+    {
+      "path": "crates/incant_cmd/tests/package_sources.rs",
+      "sha256": "81731eb13c16d39a16e91adefb7a0342a6ceb256ad861816292c7344cb70fed1"
+    },
+    {
+      "path": "crates/incant_cmd/tests/session_identity.rs",
+      "sha256": "de2ad0c01b1fc7f658b33e6003d386281b5f34291c73eb0aa302517b79829646"
+    },
+    {
+      "path": "crates/incant_cook/tests/typescript.rs",
+      "sha256": "672238bccf483613146958825e647344a0b420dc5b4f5e41c0d3a0e763d5cf70"
+    },
+    {
+      "path": "crates/incant_module_build/src/lib.rs",
+      "sha256": "92ddd81358371d9a9a09862ba3e7b6c8b15fe8d9e63ed82834960a3fb21bb8a5"
+    },
+    {
+      "path": "crates/incant_module_build/src/tests.rs",
+      "sha256": "bc2a3b671303cb0f4e183d2bf1a35f435309e1db05961f2871aa19525db332f5"
+    },
+    {
+      "path": "crates/incant_module_build/src/types.rs",
+      "sha256": "40115e870e3e438e2720eaec4e0f15968c6255d9b87c7811700d653705128b99"
+    },
+    {
+      "path": "crates/incant_source/src/lib.rs",
+      "sha256": "a1a936a502d42e13f4a7e14d354f23d98f737b0148021fbc4442383d3b9af713"
+    },
+    {
+      "path": "crates/incant_source/src/tests.rs",
+      "sha256": "a78555869c8039f58317a847f8c2265e0ba6c9171cb3508b7ddec23eb84f13e6"
+    },
+    {
+      "path": "crates/incant_source/src/tree.rs",
+      "sha256": "94854a7d19b2771d439fd4d6724b69ab38438aa1a062af67553033a167f2f1e9"
+    },
+    {
+      "path": "crates/incant_source/src/tree_tests.rs",
+      "sha256": "b928e9ed2e5acc07c4f965c42458573151898412eefc7a7dbecdccf15d859ece"
+    },
+    {
+      "path": "crates/incant_source/src/unix.rs",
+      "sha256": "01ce2450a6b2fad351436094772d00234dc801ad31d038cfc6ed94ccb737edf7"
+    },
+    {
+      "path": "crates/incant_source/src/unsupported.rs",
+      "sha256": "2ed6a6addae72a657386d94891eb7a59866944d201e2a0351dfde2ec34fbad17"
+    },
+    {
+      "path": "crates/incant_source/src/windows.rs",
+      "sha256": "2135c294f850f26a38d07f30d0b2c1dd5be3729f36427571bd261685256312b9"
+    }
+  ],
+  "generated_inputs": [
+    {
+      "path": "schemas/agent-tools.json",
+      "sha256": "21af6541ce63fe3ca5beff1391f2c12c971300eadb4c44ebb19037280820b836"
+    },
+    {
+      "path": "sdk/ts/src/generated.d.ts",
+      "sha256": "ffeed35e6093eea3ad5e90e0b8c0be1c1fdf9b054ade256404bde3d856339195"
+    }
+  ],
+  "binaries": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/artifact-0-incant_source-3c6e7f5e5db8210f",
+      "bytes": 1830960,
+      "sha256": "b7d82b26c9e516621a35adb6548982f469d287ffc1d104a123da0441931ad1d2"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/artifact-1-incant_cmd-971d7789904647c3",
+      "bytes": 12908680,
+      "sha256": "ffd69a47eedf84dad942db975e148f7e9533f68a536b51448b8328a8ad466c46"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/artifact-2-session_identity-be8a01fb01885819",
+      "bytes": 11522144,
+      "sha256": "2e60e5403abb3a955cb41cc2ebcb377b6984b58535b55f20441c2dcdb58261a2"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/artifact-3-module_sources-52db850ff0241aba",
+      "bytes": 11698832,
+      "sha256": "7e49e37f0a47c2cb7e04d31b6a7275d3f6f2c8bab7bf4341db377c93a40e38aa"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/artifact-4-package_sources-292dd85a76fe08d4",
+      "bytes": 11654672,
+      "sha256": "feb388218b90cd5298af2eb6cc4d603b187862707910b009c2e5cf1d84557eca"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/artifact-5-script_sources-0d775e3c2eeb50b1",
+      "bytes": 11605552,
+      "sha256": "01a0f1fe0bca0fbe77298f53ad15b8d7433754a2fb3e47c9d2e55d724e320ecb"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/artifact-6-incant_module_build-dc7355f2970ddf84",
+      "bytes": 1646552,
+      "sha256": "7b7d5512c885f8fc09970eddd4fc785d2e3e936f52fd83563b034a95b1d85127"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/artifact-7-module_registered-be0b77b762cc06fe",
+      "bytes": 23005568,
+      "sha256": "71d0bec112bece80288ed4e0a402ba2f2b419d242435f34414535c8081c157c4"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/artifact-8-module_jobs-90d9dad3957d4a11",
+      "bytes": 22383088,
+      "sha256": "22af3b043ac8492a229729753a97c78c7dddaada86cc7fbce11155df589f746e"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/artifact-9-module_sources-8790166875473749",
+      "bytes": 22905328,
+      "sha256": "9460753de1a1c24525d8fa2dc206cdcc46b9ca6b5a28d6747a170e66bdf38779"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/artifact-10-scripts-bd77e318bf79b84a",
+      "bytes": 22963464,
+      "sha256": "1563f52a3244c5b1ddac1093ac4a568c100d242c58e3541b0d39417d7f0d775b"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/artifact-11-shared-606b101072b719ba",
+      "bytes": 23100728,
+      "sha256": "0a9fb418f3666e8bbc9cdd1f390f06cc50de85a40cccced67dba1b0d79dceb1b"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/artifact-12-incant_headless",
+      "bytes": 64094160,
+      "sha256": "42537d5177cba39a57df4830986c1cfd9443d25372ecc7d96709cadc05401380"
+    }
+  ],
+  "archive": {
+    "bytes": 517661,
+    "sha256": "94af855a5fba72ab8fa5c74490e249fb92e4a63f745e782f5bc279e17c4687ba",
+    "uncompressed_bytes": 3984430
+  },
+  "records": [
+    {
+      "name": "cpu-002/000.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/000.stderr.log",
+      "bytes": 185,
+      "sha256": "9c05b23d000d6f0abf5712dba89df5733231604567286e225b0f7f3033219af4"
+    },
+    {
+      "name": "cpu-002/000.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/000.stdout.log",
+      "bytes": 44559,
+      "sha256": "f11e3b203d5940087b580754e7de144854efe2bf513c923c307891757820d3f6"
+    },
+    {
+      "name": "cpu-002/001.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/001.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "cpu-002/001.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/001.stdout.log",
+      "bytes": 2029,
+      "sha256": "7d4c09e01d23c32ed81e54a3b28fdf8a0dd06226f1112d88c41856627f903a6e"
+    },
+    {
+      "name": "cpu-002/002.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/002.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "cpu-002/002.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/002.stdout.log",
+      "bytes": 2468,
+      "sha256": "1c291cbaabbd9171d28dcfc35d2d92e97469c6ccc6be3d92e1a6fd881c2cc1c3"
+    },
+    {
+      "name": "cpu-002/003.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/003.stderr.log",
+      "bytes": 954,
+      "sha256": "c0fed698e4a944ea67b337f841afb5c07c80dfc856fef456e682c5e439882fca"
+    },
+    {
+      "name": "cpu-002/003.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/003.stdout.log",
+      "bytes": 273721,
+      "sha256": "a147883581bb6231943ca807ec3be1c131ef3557df36c485db9d4c771993e06f"
+    },
+    {
+      "name": "cpu-002/004.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/004.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "cpu-002/004.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/004.stdout.log",
+      "bytes": 3257,
+      "sha256": "2266e388403216da2227858bbcb86ef0e59894cfaf7884dcf747a2dac54e4575"
+    },
+    {
+      "name": "cpu-002/005.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/005.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "cpu-002/005.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/005.stdout.log",
+      "bytes": 3559,
+      "sha256": "bcb909034facc217c586e5a75dd37cc59fac644dda831663189591472476cc50"
+    },
+    {
+      "name": "cpu-002/006.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/006.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "cpu-002/006.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/006.stdout.log",
+      "bytes": 185,
+      "sha256": "ec9cf5f688f54988ac9c13d5363e2f8732726414281c252db035cb5e11244607"
+    },
+    {
+      "name": "cpu-002/007.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/007.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "cpu-002/007.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/007.stdout.log",
+      "bytes": 287,
+      "sha256": "85865289a6ec8f9e784b1aee48de938b30e2763b4059f09e50c4169e9fb733f5"
+    },
+    {
+      "name": "cpu-002/008.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/008.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "cpu-002/008.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/008.stdout.log",
+      "bytes": 584,
+      "sha256": "3cde0769076ab503b74094a7c42750c3b4c8e50b369574b3f8df03f3cce3c679"
+    },
+    {
+      "name": "cpu-002/009.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/009.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "cpu-002/009.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/009.stdout.log",
+      "bytes": 722,
+      "sha256": "5e2ef204ad3b8c358b53cd20273eb3182550886771cf40812a2c1cb3880974bc"
+    },
+    {
+      "name": "cpu-002/010.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/010.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "cpu-002/010.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/010.stdout.log",
+      "bytes": 409,
+      "sha256": "8155f2390411329b68a55b0b66b5d19b992d13a2115eeee3b9f7545e3fc5267a"
+    },
+    {
+      "name": "cpu-002/011.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/011.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "cpu-002/011.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/011.stdout.log",
+      "bytes": 529,
+      "sha256": "7752f47c0b18348dff56ff1ecdff3f9529dd31c094e85e5191b6dec01cd76fa1"
+    },
+    {
+      "name": "cpu-002/012.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/012.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "cpu-002/012.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/012.stdout.log",
+      "bytes": 411,
+      "sha256": "73e5953ed10e6d035f635c8f75a853fe469a2ced00392e16be0b80bac48794cd"
+    },
+    {
+      "name": "cpu-002/013.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/013.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "cpu-002/013.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/013.stdout.log",
+      "bytes": 531,
+      "sha256": "807054b9c957ca3ba2e83fda98f43dd749d47551ea33dd4a74fef99c14610f57"
+    },
+    {
+      "name": "cpu-002/014.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/014.stderr.log",
+      "bytes": 325,
+      "sha256": "2fa195f4349af336f94dfd5fce2947232552f67298f7f93a193c0f07c072db71"
+    },
+    {
+      "name": "cpu-002/014.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/014.stdout.log",
+      "bytes": 52684,
+      "sha256": "98aee586e419377f6135657bc61c818433ceb8f42f13483a506d2d52437e88d1"
+    },
+    {
+      "name": "cpu-002/015.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/015.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "cpu-002/015.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/015.stdout.log",
+      "bytes": 1598,
+      "sha256": "974e9390d5003e4c4aed2056f922e7a07db7b31db3c771548e4ba4af2ebcbd97"
+    },
+    {
+      "name": "cpu-002/016.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/016.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "cpu-002/016.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/016.stdout.log",
+      "bytes": 336,
+      "sha256": "cbf6434dfb8f92396514c38dde334ee7edc80bdf04ed98dc19da01445aff4073"
+    },
+    {
+      "name": "cpu-002/017.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/017.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "cpu-002/017.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/017.stdout.log",
+      "bytes": 2182,
+      "sha256": "17563040b519fd01e6e91b953b101d990609f048640232305376eb7fa72ea40e"
+    },
+    {
+      "name": "cpu-002/018.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/018.stderr.log",
+      "bytes": 1752,
+      "sha256": "ec46c739f6e0cfb40b96326eab01948ab16b02bc3c9f2b97894b43effbd2496b"
+    },
+    {
+      "name": "cpu-002/018.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/018.stdout.log",
+      "bytes": 437561,
+      "sha256": "57a39932be7166a25e9cc2aba6507533b5b1decb73ab297357ddb0c17d5be0e2"
+    },
+    {
+      "name": "cpu-002/019.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/019.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "cpu-002/019.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/019.stdout.log",
+      "bytes": 944,
+      "sha256": "5f49ea26c743e17a733f04b6d3007d5f136be743dc6dafa5032f7df250a813d1"
+    },
+    {
+      "name": "cpu-002/020.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/020.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "cpu-002/020.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/020.stdout.log",
+      "bytes": 1101,
+      "sha256": "5f77f98ee1e22be6edd7d6ffdd84cab72e1820d5678b86066c2029f44247f8bd"
+    },
+    {
+      "name": "cpu-002/021.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/021.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "cpu-002/021.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/021.stdout.log",
+      "bytes": 156,
+      "sha256": "a45ec076fa952e2976aaca825f8cea19c65c664b02de512809dd9b6a022a875b"
+    },
+    {
+      "name": "cpu-002/022.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/022.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "cpu-002/022.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/022.stdout.log",
+      "bytes": 258,
+      "sha256": "04c0545e3ace9b954b06018cb947134691b58bdfe1ce3caeae8e2441ab33bb33"
+    },
+    {
+      "name": "cpu-002/023.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/023.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "cpu-002/023.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/023.stdout.log",
+      "bytes": 179,
+      "sha256": "7eb72dda32ca93e5a82020417c8448b6ff5dcd64370024bb42cf0d5cb0aac875"
+    },
+    {
+      "name": "cpu-002/024.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/024.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "cpu-002/024.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/024.stdout.log",
+      "bytes": 281,
+      "sha256": "ab6ff75e9c884ce76411b6bb8f332eef7ddb6d63d43fb0f87dbca8d8e994034e"
+    },
+    {
+      "name": "cpu-002/025.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/025.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "cpu-002/025.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/025.stdout.log",
+      "bytes": 388,
+      "sha256": "a7a8d309b581e1d2f3a276902d111cde43e9e3bd660f2db4373ccf5cf242d3f5"
+    },
+    {
+      "name": "cpu-002/026.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/026.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "cpu-002/026.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/026.stdout.log",
+      "bytes": 508,
+      "sha256": "9dc2315735b1aa526699b91d5a925ba316b675eea643e4eb63b2bdb83731bc98"
+    },
+    {
+      "name": "cpu-002/027.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/027.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "cpu-002/027.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/027.stdout.log",
+      "bytes": 916,
+      "sha256": "c8e5ded72a2dc876d138b557ecc22d0bcc7e3475ef7e303d8d26ccd428bbe28d"
+    },
+    {
+      "name": "cpu-002/028.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/028.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "cpu-002/028.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/028.stdout.log",
+      "bytes": 1073,
+      "sha256": "48c18cdd28da0375cb8d13c8ced317d44e7f1af41fd039c2380818f56bec3fba"
+    },
+    {
+      "name": "cpu-002/029.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/029.stderr.log",
+      "bytes": 4622,
+      "sha256": "76820a7bf1d3c5c2cde171bde3aa63e50a749b2e475220dced913320301f4f79"
+    },
+    {
+      "name": "cpu-002/029.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/029.stdout.log",
+      "bytes": 492352,
+      "sha256": "11b2e52d469fd159bd562e2424f7aa061c26a0ad9e2b173dea920584e93d9d90"
+    },
+    {
+      "name": "cpu-002/030.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/030.stderr.log",
+      "bytes": 4371,
+      "sha256": "9cfb5ec3c24bf7d26f1d7118c398d207c702eef8ef7ccffac80e7cc0c7e9ed33"
+    },
+    {
+      "name": "cpu-002/030.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/030.stdout.log",
+      "bytes": 652455,
+      "sha256": "234ab1af28769a44544618ad726d01084640905662cf5650d26f4552bd9f9b52"
+    },
+    {
+      "name": "cpu-002/031.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/031.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "cpu-002/031.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/031.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "cpu-002/032.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/032.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "cpu-002/032.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/032.stdout.log",
+      "bytes": 65,
+      "sha256": "332b26342e60d63143955e44d2312c8d9307638675faed0b5f256925cfe1093e"
+    },
+    {
+      "name": "cpu-002/033.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/033.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "cpu-002/033.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/033.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "cpu-002/034.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/034.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "cpu-002/034.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/034.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "cpu-002/035.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/035.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "cpu-002/035.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/035.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "cpu-002/036.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/036.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "cpu-002/036.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/036.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "cpu-002/037.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/037.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "cpu-002/037.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/037.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "cpu-002/closeout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/closeout.json",
+      "bytes": 21716,
+      "sha256": "8a76cd1e50551b932411d9f17efccdeda599cfea144c70db46eddc9df8596ced"
+    },
+    {
+      "name": "cpu-002/generated-applied.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/generated-applied.json",
+      "bytes": 1960,
+      "sha256": "e9ae29579c9577e53c57c71596a97370d93d2b150cebb3750e3ef8e668b547be"
+    },
+    {
+      "name": "cpu-002/local-freshness.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/local-freshness.json",
+      "bytes": 537,
+      "sha256": "f1af88fbebf1b6af9e7666eca1132bd51dc8810a587ce5d67c19ed83d9159d05"
+    },
+    {
+      "name": "cpu-002/owner.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/owner.json",
+      "bytes": 40412,
+      "sha256": "855d14bf74ea6f69d5a264c3562920565a754e00326f18bf75bf10c27181ff5b"
+    },
+    {
+      "name": "cpu-002/protected-release.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/protected-release.json",
+      "bytes": 29802,
+      "sha256": "06572ca1966b32467cff78f153f0ec6fc60fb284d6220b1a3d7bb534038dff51"
+    },
+    {
+      "name": "cpu-002/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/result.json",
+      "bytes": 92536,
+      "sha256": "b61a2e3883d66816f36dde2fda3e2202050389ea5d9c5d156880870c4fec8123"
+    },
+    {
+      "name": "cpu-002/terminal-absence.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/terminal-absence.json",
+      "bytes": 18806,
+      "sha256": "f507362269f70097edb9dbe82972f1d93e50e3c09eb83f06c1b62ac193d4fc5b"
+    },
+    {
+      "name": "cpu-packet-001/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-packet-001/freeze.json",
+      "bytes": 2257,
+      "sha256": "7a1b2728aceb58c22be020ba1e0a431733a6ab506d8e6a5890f64998f3b1077d"
+    },
+    {
+      "name": "cpu-packet-001/plan.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-packet-001/plan.json",
+      "bytes": 43346,
+      "sha256": "1b8750e7a56c7f46d6828799f571f5767ef72b018ea8199874bf2b9811408e6e"
+    },
+    {
+      "name": "cpu-packet-001/pure-preparation-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-packet-001/pure-preparation-001.json",
+      "bytes": 409,
+      "sha256": "f27f819e25998983743b64e7f75cb1a54874a4f7a7ddecae483677e5ce9df16f"
+    },
+    {
+      "name": "cpu-packet-001/pure.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-packet-001/pure.stderr.log",
+      "bytes": 3883,
+      "sha256": "06b44120ae78ec4fb4454b78f72252ef559dbfe46074f20b24baedaafe935575"
+    },
+    {
+      "name": "cpu-packet-001/pure.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-packet-001/pure.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "cpu-packet-001/review-refusal.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-packet-001/review-refusal.json",
+      "bytes": 519,
+      "sha256": "c180be5ce6ed1516115676130268c92673a1a5b564007f49adee47ca349483f6"
+    },
+    {
+      "name": "cpu-packet-001/run.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-packet-001/run.py",
+      "bytes": 20232,
+      "sha256": "bf0bcd5a73bbedd4f91326cd81dbd18739208cf4f9d5a0f8873df82f9e0b34f6"
+    },
+    {
+      "name": "cpu-packet-001/test_parser.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-packet-001/test_parser.py",
+      "bytes": 5693,
+      "sha256": "a9e012613636675255881b31ac54021f94249519d23d720eec3a7fe1feecec53"
+    },
+    {
+      "name": "cpu-packet-001/test_preparation.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-packet-001/test_preparation.py",
+      "bytes": 7447,
+      "sha256": "1fceb0d747c6896ccd7dd4bb28af1a2049d3807e5f6d2d79f910ee540a3cec1d"
+    },
+    {
+      "name": "cpu-packet-002/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-packet-002/freeze.json",
+      "bytes": 3946,
+      "sha256": "95c43f6d73dce17aede280a948c099bb735dc90f4d886e105142d84347d2bfe1"
+    },
+    {
+      "name": "cpu-packet-002/launch-wrapper.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-packet-002/launch-wrapper.json",
+      "bytes": 60,
+      "sha256": "9b78e46b340e1e0b30012648ac6015ebf8bd5bb111ac5c30ed71789d54cf6966"
+    },
+    {
+      "name": "cpu-packet-002/plan.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-packet-002/plan.json",
+      "bytes": 44429,
+      "sha256": "ff0ff6489ce13e9bc866e4aeefc5d7440b7e5193281acc2c135c2817400009cf"
+    },
+    {
+      "name": "cpu-packet-002/preflight.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-packet-002/preflight.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "cpu-packet-002/preflight.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-packet-002/preflight.stdout.log",
+      "bytes": 78,
+      "sha256": "5195d696669e546c425ba1ec1b98a2c8b8cf1d6d28da246fccb7620c0cee04c2"
+    },
+    {
+      "name": "cpu-packet-002/pure.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-packet-002/pure.stderr.log",
+      "bytes": 4037,
+      "sha256": "c35f3ca068ecfeda1c93f8275a5ffc820bd396a4c821fd6ee4a4a85858ad6881"
+    },
+    {
+      "name": "cpu-packet-002/pure.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-packet-002/pure.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "cpu-packet-002/root-grant.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-packet-002/root-grant.json",
+      "bytes": 758,
+      "sha256": "12f5008f237641b29b40f6b1f0aae33c48af7ae8fde2befebb6cdeac4fbf31a5"
+    },
+    {
+      "name": "cpu-packet-002/run.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-packet-002/run.py",
+      "bytes": 20260,
+      "sha256": "35309d4bb8fd3321ac1c7b49a9136bbee7cfda5f8e5bfc46c62305695a074549"
+    },
+    {
+      "name": "cpu-packet-002/run.py.diff",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-packet-002/run.py.diff",
+      "bytes": 1628,
+      "sha256": "93e42e3f7798613fbda623d6fbb55bd6d57eb81336f8548b180107dd2fa888a6"
+    },
+    {
+      "name": "cpu-packet-002/test_parser.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-packet-002/test_parser.py",
+      "bytes": 5693,
+      "sha256": "a9e012613636675255881b31ac54021f94249519d23d720eec3a7fe1feecec53"
+    },
+    {
+      "name": "cpu-packet-002/test_preparation.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-packet-002/test_preparation.py",
+      "bytes": 8259,
+      "sha256": "cb3c1b38c27d46af50423d7c3058a4fdb8715dc8a0c63afa8ded319bac33b650"
+    },
+    {
+      "name": "cpu-packet-002/test_preparation.py.diff",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-packet-002/test_preparation.py.diff",
+      "bytes": 1103,
+      "sha256": "5ed3f4d7ed33c81ba4f5a581a3a9e1caa338d0de3cd30a9c442c34f2933326e3"
+    },
+    {
+      "name": "generated/schemas/agent-tools.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/generated/schemas/agent-tools.json",
+      "bytes": 97766,
+      "sha256": "21af6541ce63fe3ca5beff1391f2c12c971300eadb4c44ebb19037280820b836"
+    },
+    {
+      "name": "generated/sdk/ts/src/generated.d.ts",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/generated/sdk/ts/src/generated.d.ts",
+      "bytes": 78064,
+      "sha256": "ffeed35e6093eea3ad5e90e0b8c0be1c1fdf9b054ade256404bde3d856339195"
+    },
+    {
+      "name": "generation-before/agent-tools.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-002/generation-before-agent-tools.json",
+      "bytes": 91209,
+      "sha256": "08eaed8d866a80355007d8f200098ed01d4bdb34685e0c3f04636ed14425bbfc"
+    },
+    {
+      "name": "integration-fast/root-closeout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/registered-module-tools-fast-001/root-closeout.json",
+      "bytes": 362,
+      "sha256": "ca5a32b97548e31bd05a1d134a0904d7e076bf5ded1532b148a7a0a8ed690a1e"
+    },
+    {
+      "name": "parent-cpu005/closeout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-rust-sources-001/cpu-005/closeout.json",
+      "bytes": 30666,
+      "sha256": "9e010a96a0c252966980e1d64385e9136f8008fd7d510bcf599488523b863aab"
+    },
+    {
+      "name": "parent-cpu005/protected-release.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-rust-sources-001/cpu-005/protected-release.json",
+      "bytes": 26579,
+      "sha256": "f3c36ed3e3eaa589ea3b6bd3a90ed593ce4926988ec4aae10e00472318a3aec9"
+    },
+    {
+      "name": "parent-cpu005/terminal-absence.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-rust-sources-001/cpu-005/terminal-absence.json",
+      "bytes": 10423,
+      "sha256": "c8ff2b70c495ec3b539a234cb7a6adee9b3b61edb92906a21db06f66b8bd1934"
+    },
+    {
+      "name": "parent/document-stage-replay.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/registered-rust-sources-001/cpu-packet-004/document-stage-replay.json",
+      "bytes": 2811,
+      "sha256": "a679b9a2108c30d90b4dce3441822350effa36cd5969dd9b3d159635deea237a"
+    },
+    {
+      "name": "reviews/independent-native.json",
+      "original": "/Users/andreyyurlov/.codex/incant-reviews/registered-module-tools-cpu002-independent-20261018.json",
+      "bytes": 539,
+      "sha256": "8ff12ee6b1a36a92c9aabc6508f31e7c21897c7a091281f79342f06cdeae5820"
+    },
+    {
+      "name": "reviews/independent-source.json",
+      "original": "/Users/andreyyurlov/.codex/incant-reviews/registered-module-tools-independent-20261018.json",
+      "bytes": 1693,
+      "sha256": "06bfe9850a0f6e4fcc6ca11885d64189bcfbe5f3debc82c33cc69bdd1504024f"
+    },
+    {
+      "name": "source/crates/incant_agent/src/lib.rs",
+      "original": "/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/crates/incant_agent/src/lib.rs",
+      "bytes": 25484,
+      "sha256": "fd98ce606887c85d367f5c9af687540ae4ce7d579b9bda09a6fb50e1a7e40432"
+    },
+    {
+      "name": "source/crates/incant_agent/src/module_jobs.rs",
+      "original": "/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/crates/incant_agent/src/module_jobs.rs",
+      "bytes": 5245,
+      "sha256": "ef97de0e10b779a71191d4ef6fc6ef72139a13aa159f781020f7d2625feed512"
+    },
+    {
+      "name": "source/crates/incant_agent/src/module_registered.rs",
+      "original": "/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/crates/incant_agent/src/module_registered.rs",
+      "bytes": 9748,
+      "sha256": "c59be1dfcab75e90fb21f07b9da6eea09450f0f9efe470209e9f9567318d22a4"
+    },
+    {
+      "name": "source/crates/incant_agent/tests/module_registered.rs",
+      "original": "/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/crates/incant_agent/tests/module_registered.rs",
+      "bytes": 26629,
+      "sha256": "d347df873a25eacb2bf493050d6671104a7c07ebf5da1703c8a7c7be9f535e7b"
+    },
+    {
+      "name": "source/crates/incant_cmd/src/lib.rs",
+      "original": "/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/crates/incant_cmd/src/lib.rs",
+      "bytes": 29998,
+      "sha256": "b7e2dc85409bcb1ebf1cca3a2b0c09aeb6dcfc19207bc3b929af0c89708686e0"
+    },
+    {
+      "name": "source/crates/incant_cmd/src/package_source_protocol_tests.rs",
+      "original": "/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/crates/incant_cmd/src/package_source_protocol_tests.rs",
+      "bytes": 4825,
+      "sha256": "d2ac02eb898291ffd8e1005b34ec6184618e375bc6cb540786fa662bacd90b30"
+    },
+    {
+      "name": "source/crates/incant_cmd/src/project_checkpoint_tests.rs",
+      "original": "/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/crates/incant_cmd/src/project_checkpoint_tests.rs",
+      "bytes": 16833,
+      "sha256": "a6ec7a5f9e2e5c53d7bed2ab6e73d57b191f5240390816da64967e48111710c2"
+    },
+    {
+      "name": "source/crates/incant_cmd/src/sources.rs",
+      "original": "/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/crates/incant_cmd/src/sources.rs",
+      "bytes": 11345,
+      "sha256": "905fa9c2d66b6a3c947663e0246bf3c6e9543520a405f3eea60454c05bccfbd0"
+    },
+    {
+      "name": "source/crates/incant_cmd/src/subtree/references/tests.rs",
+      "original": "/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/crates/incant_cmd/src/subtree/references/tests.rs",
+      "bytes": 4521,
+      "sha256": "a8b910598057d8ac9b0aca691ef1962177d845912a2a557e0f2169218a802c4d"
+    },
+    {
+      "name": "source/crates/incant_cmd/src/test_isolation.rs",
+      "original": "/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/crates/incant_cmd/src/test_isolation.rs",
+      "bytes": 1157,
+      "sha256": "aeaa0b8e9e8a90f60dbf41e43d0c7f45ef5599b47f54ceb36421c666ceccb7ff"
+    },
+    {
+      "name": "source/crates/incant_cmd/tests/module_sources.rs",
+      "original": "/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/crates/incant_cmd/tests/module_sources.rs",
+      "bytes": 14466,
+      "sha256": "53d267432eb8c60911ba2b117325977ec0f23bd08b73724c9e318e392181b1db"
+    },
+    {
+      "name": "source/crates/incant_cmd/tests/package_sources.rs",
+      "original": "/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/crates/incant_cmd/tests/package_sources.rs",
+      "bytes": 8670,
+      "sha256": "81731eb13c16d39a16e91adefb7a0342a6ceb256ad861816292c7344cb70fed1"
+    },
+    {
+      "name": "source/crates/incant_cmd/tests/session_identity.rs",
+      "original": "/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/crates/incant_cmd/tests/session_identity.rs",
+      "bytes": 1676,
+      "sha256": "de2ad0c01b1fc7f658b33e6003d386281b5f34291c73eb0aa302517b79829646"
+    },
+    {
+      "name": "source/crates/incant_cook/tests/typescript.rs",
+      "original": "/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/crates/incant_cook/tests/typescript.rs",
+      "bytes": 8070,
+      "sha256": "672238bccf483613146958825e647344a0b420dc5b4f5e41c0d3a0e763d5cf70"
+    },
+    {
+      "name": "source/crates/incant_module_build/src/lib.rs",
+      "original": "/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/crates/incant_module_build/src/lib.rs",
+      "bytes": 16701,
+      "sha256": "92ddd81358371d9a9a09862ba3e7b6c8b15fe8d9e63ed82834960a3fb21bb8a5"
+    },
+    {
+      "name": "source/crates/incant_module_build/src/tests.rs",
+      "original": "/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/crates/incant_module_build/src/tests.rs",
+      "bytes": 17484,
+      "sha256": "bc2a3b671303cb0f4e183d2bf1a35f435309e1db05961f2871aa19525db332f5"
+    },
+    {
+      "name": "source/crates/incant_module_build/src/types.rs",
+      "original": "/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/crates/incant_module_build/src/types.rs",
+      "bytes": 5840,
+      "sha256": "40115e870e3e438e2720eaec4e0f15968c6255d9b87c7811700d653705128b99"
+    },
+    {
+      "name": "source/crates/incant_source/src/lib.rs",
+      "original": "/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/crates/incant_source/src/lib.rs",
+      "bytes": 20768,
+      "sha256": "a1a936a502d42e13f4a7e14d354f23d98f737b0148021fbc4442383d3b9af713"
+    },
+    {
+      "name": "source/crates/incant_source/src/tests.rs",
+      "original": "/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/crates/incant_source/src/tests.rs",
+      "bytes": 16406,
+      "sha256": "a78555869c8039f58317a847f8c2265e0ba6c9171cb3508b7ddec23eb84f13e6"
+    },
+    {
+      "name": "source/crates/incant_source/src/tree.rs",
+      "original": "/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/crates/incant_source/src/tree.rs",
+      "bytes": 8806,
+      "sha256": "94854a7d19b2771d439fd4d6724b69ab38438aa1a062af67553033a167f2f1e9"
+    },
+    {
+      "name": "source/crates/incant_source/src/tree_tests.rs",
+      "original": "/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/crates/incant_source/src/tree_tests.rs",
+      "bytes": 8446,
+      "sha256": "b928e9ed2e5acc07c4f965c42458573151898412eefc7a7dbecdccf15d859ece"
+    },
+    {
+      "name": "source/crates/incant_source/src/unix.rs",
+      "original": "/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/crates/incant_source/src/unix.rs",
+      "bytes": 3510,
+      "sha256": "01ce2450a6b2fad351436094772d00234dc801ad31d038cfc6ed94ccb737edf7"
+    },
+    {
+      "name": "source/crates/incant_source/src/unsupported.rs",
+      "original": "/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/crates/incant_source/src/unsupported.rs",
+      "bytes": 1456,
+      "sha256": "2ed6a6addae72a657386d94891eb7a59866944d201e2a0351dfde2ec34fbad17"
+    },
+    {
+      "name": "source/crates/incant_source/src/windows.rs",
+      "original": "/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/crates/incant_source/src/windows.rs",
+      "bytes": 6146,
+      "sha256": "2135c294f850f26a38d07f30d0b2c1dd5be3729f36427571bd261685256312b9"
+    }
+  ],
+  "external_source_manifest": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/registered-module-tools-001/cpu-packet-001/source.json",
+    "bytes": 3511265,
+    "sha256": "7cd99e83a997fa938575e7fe72a8189171074a48a7171842dcdedb435388de56"
+  },
+  "time": {
+    "seconds": 314.96473866695305,
+    "postcleanup_seconds": 6565.430412958963,
+    "including_deleted_history_seconds": 7024.435056541963
+  },
+  "limits": {
+    "aggregate_seconds": 900,
+    "target_cap_bytes": 19327352832,
+    "free_floor_bytes": 6442450944,
+    "rss_bytes": 8589934592,
+    "copy_bytes": 1073741824,
+    "output_bytes": 2147483648,
+    "stream_bytes": 67108864,
+    "all_stream_bytes": 268435456
+  },
+  "retained_outcomes": [
+    "pure preparation24/26 failure (no native/target access)",
+    "packet001 stale initializer source-review refusal (unexecuted)",
+    "parent foundation failures and costs retained by CPU005 handoff"
+  ],
+  "no_install": true
+}
