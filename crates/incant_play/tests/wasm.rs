@@ -44,7 +44,10 @@ fn authored_module_runs_from_captured_cache_and_checkpoints_refuse_explicitly() 
     let entity = Entity::new("Mover");
     let id = entity.id.parse::<ulid::Ulid>().unwrap();
     scene.entities.insert(entity.id.clone(), entity);
-    scene.program = Some(SceneProgram::Wasm { module: asset.id });
+    scene.program = Some(SceneProgram::Wasm {
+        module: asset.id,
+        instances: Default::default(),
+    });
     bus.execute(
         vec![Command::CreateScene { scene }],
         Actor::user("test"),

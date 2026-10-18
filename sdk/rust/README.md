@@ -437,6 +437,19 @@ Queued commands never call an audio backend directly. See the real Rust
 [transport sample](samples/audio_transport.rs) and
 [scope/evidence](../../docs/spikes/native-wasm-audio.md).
 
+### Authored initial instances
+
+An ordinary scene `SetSceneProgram` may supply an `instances` map from existing
+owner ULIDs to immutable initial properties for its one Wasm module. Call
+`Tick::instances(scratch)` to obtain sorted owner IDs and nested read-only
+`InitialValue` views over a complete copied snapshot. Views borrow caller-owned
+scratch, never a host pointer. The shared property bounds and active owner
+membership are validated by the engine; same-ID respawn does not reattach a
+retired owner. Catalog changes refuse checkpoint restore. Module-only projects
+keep their previous behavior. See [the sample](samples/instances.rs) and
+[source scope and qualification limits](../../docs/spikes/native-wasm-instances.md).
+Actual two-host and authored-export qualification of this slice is pending.
+
 ### Explicit persistent state
 
 `persistent_state!(schema = [5; 32], bytes = 16)` opts a guest into a fixed

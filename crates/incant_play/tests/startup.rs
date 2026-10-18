@@ -167,8 +167,10 @@ fn selected_wasm_requires_explicit_development_host_instead_of_fallback() {
             import_settings: None,
         },
     );
-    project.scenes.get_mut(&scene).unwrap().program =
-        Some(incant_doc::SceneProgram::Wasm { module });
+    project.scenes.get_mut(&scene).unwrap().program = Some(incant_doc::SceneProgram::Wasm {
+        module,
+        instances: Default::default(),
+    });
     let error = PreparedPlay::load(
         &project,
         root.path(),

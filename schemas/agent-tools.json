@@ -768,6 +768,35 @@
             }
           ]
         },
+        "CoroutineValue": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "format": "double",
+              "type": "number"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "items": {
+                "$ref": "#/$defs/CoroutineValue"
+              },
+              "type": "array"
+            },
+            {
+              "additionalProperties": {
+                "$ref": "#/$defs/CoroutineValue"
+              },
+              "type": "object"
+            }
+          ]
+        },
         "EngineRequirement": {
           "description": "SemVer requirement text, preserved exactly rather than silently normalized.\nBuild metadata is not an engine identity: SemVer matching ignores it.",
           "maxLength": 256,
@@ -1447,6 +1476,16 @@
             {
               "additionalProperties": false,
               "properties": {
+                "instances": {
+                  "additionalProperties": {
+                    "additionalProperties": {
+                      "$ref": "#/$defs/CoroutineValue"
+                    },
+                    "type": "object"
+                  },
+                  "description": "Immutable startup parameters for this one scene module, keyed by owner.",
+                  "type": "object"
+                },
                 "kind": {
                   "const": "wasm",
                   "type": "string"
@@ -1704,7 +1743,7 @@
     "type": "function"
   },
   {
-    "description": "Cook 1–64 existing project-relative glTF/GLB/FBX/PNG/JPEG/EXR/WAV/OGG/TTF/OTF/WASM sources and commit one atomic undoable transaction. Omit texture_usage to preserve it on reimport. Requires approval under destructive/always modes. No URLs, absolute paths or parent traversal.",
+    "description": "Cook 1\u201364 existing project-relative glTF/GLB/FBX/PNG/JPEG/EXR/WAV/OGG/TTF/OTF/WASM sources and commit one atomic undoable transaction. Omit texture_usage to preserve it on reimport. Requires approval under destructive/always modes. No URLs, absolute paths or parent traversal.",
     "name": "asset_import",
     "parameters": {
       "$defs": {
@@ -2757,7 +2796,7 @@
           "description": "Positive simulation duration, rounded up to one tick; at most 600 seconds\nand 36,000 ticks. Execution also has a host wall-time budget.",
           "format": "double",
           "maximum": 600,
-          "minimum": 1e-6,
+          "minimum": 1e-06,
           "type": "number"
         },
         "ui_viewport": {
