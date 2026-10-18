@@ -116,9 +116,16 @@ development checks pass. The scoped service is merged through PR426 after review
 and successful exact-head development checks. The original agent-fixture budget
 failure and subsequent editor lint failure remain retained. This is verified build-only behavior:
 source writes, candidate installation and actual editor interaction remain separate.
-Registered Rust source editing has independent source review and is entering native
-qualification; first-package directory creation remains source-only pending its
-parent. No compiler shell or arbitrary path authority is exposed to the agent.
+Registered Rust source editing now passes 72 scoped native behavioral controls,
+strict affected-package lints and fresh generated schema/SDK checks, with
+independent source and evidence review. The integrated development suite remains
+open after five process-lifecycle fixtures timed out before their expected
+readiness signals. Test startup synchronization is being repaired while preserving
+cleanup/output assertions and engine deadlines. First-package directory creation and registered-ID
+tool adapters are entering combined qualification. Candidate installation remains
+source-only: review identified and is correcting a final sibling-source check gap
+and a derived-output conflict that would prevent rebuilding after installation.
+No compiler shell or arbitrary path authority is exposed to the agent.
 
 Checkpoint57 tested candidate `53ec74d2`, with exactly main421's tree
 (`527d280a`). Its Windows desktop job failed the authored startup test at the
