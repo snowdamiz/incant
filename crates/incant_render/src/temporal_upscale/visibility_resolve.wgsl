@@ -61,13 +61,13 @@ fn history_witness(position:vec2f,id:u32,m:vec4f)->Witness {
 struct Resolved { @location(0) color:vec4f, @location(1) support:vec2f, @location(2) owner:u32 }
 @fragment fn resolve(@builtin(position) p:vec4f)->Resolved {
     let pixel=vec2i(p.xy);var result=Resolved(vec4f(0),vec2f(1,0),0u);
-    var common=0u;var mixed=false;var complete=true;var observed=0u;var age=8.0;
+    var surface_owner=0u;var mixed=false;var complete=true;var observed=0u;var age=8.0;
     for(var lane=0;lane<4;lane++) {
         let packed=textureLoad(visible_owner,pixel,lane);
         let id=(packed.x|(packed.y<<16u))&2147483647u;
         if id==0u { continue; }
         observed++;
-        if common==0u { common=id; } else { mixed=mixed || common!=id; }
+        if surface_owner==0u { surface_owner=id; } else { mixed=mixed || surface_owner!=id; }
         let position=unpack(textureLoad(visible_position,pixel,lane));
         let depth=textureLoad(visible_depth,pixel,lane);
         // Preserve/check the passing companion representation, including its
@@ -91,6 +91,6 @@ struct Resolved { @location(0) color:vec4f, @location(1) support:vec2f, @locatio
         result.support.x=min(result.support.x,depth);age=min(age,remaining);
     }
     // A mixed-owner composite cannot later masquerade as one surface's color.
-    if observed>0u && complete && !mixed { result.owner=common;result.support.y=age; }
+    if observed>0u && complete && !mixed { result.owner=surface_owner;result.support.y=age; }
     return result;
 }
