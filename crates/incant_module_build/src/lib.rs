@@ -1,4 +1,5 @@
 //! Authoring-only build jobs. Private candidates never become project assets.
+mod node;
 mod types;
 pub use types::*;
 pub mod backend;
@@ -117,18 +118,14 @@ impl Service {
             s.binding.as_ref().is_some_and(|b| {
                 b.project == project
                     && b.root == root
-                    && b.node
-                        .metadata()
-                        .ok()
-                        .zip(std::fs::metadata(root).ok())
-                        .is_some_and(|(a, b)| same_node(&a, &b))
+                    && node::matches(&b.node, root).unwrap_or(false)
             })
         })
     }
     pub fn bind(&self, project: &str, root: &Path) -> Result<()> {
         ulid::Ulid::from_string(project).map_err(|_| Error::Invalid("project ULID"))?;
         let root = root.canonicalize()?;
-        let node = std::fs::File::open(&root)?;
+        let node = node::directory(&root)?;
         if !node.metadata()?.is_dir() {
             return Err(Error::Invalid("project root"));
         }
@@ -202,7 +199,7 @@ impl Service {
             return Err(Error::Stale);
         }
         // A held root node pins identity; a path replacement is never adopted.
-        if !same_node(&b.node.metadata()?, &std::fs::metadata(&b.root)?) {
+        if !node::matches(&b.node, &b.root)? {
             return Err(Error::Stale);
         }
         let root = b.root.clone();
@@ -410,10 +407,7 @@ impl Lease<'_> {
         let binding = state.binding.as_ref().ok_or(Error::Stale)?;
         if self.cancel.load(Ordering::Acquire)
             || binding.generation != self.generation
-            || !same_node(
-                &binding.node.metadata()?,
-                &std::fs::metadata(&binding.root)?,
-            )
+            || !node::matches(&binding.node, &binding.root)?
         {
             return Err(Error::Stale);
         }
@@ -442,13 +436,4 @@ impl Drop for Lease<'_> {
             s.active = None;
         }
     }
-}
-#[cfg(unix)]
-fn same_node(a: &std::fs::Metadata, b: &std::fs::Metadata) -> bool {
-    use std::os::unix::fs::MetadataExt;
-    (a.dev(), a.ino()) == (b.dev(), b.ino())
-}
-#[cfg(not(unix))]
-fn same_node(_: &std::fs::Metadata, _: &std::fs::Metadata) -> bool {
-    false
 }

@@ -60,11 +60,12 @@ impl Backend for Mock {
     }
 }
 struct Fixture {
-    root: tempfile::TempDir,
     service: Arc<Service>,
     backend: Arc<Mock>,
     project: String,
     cancel: AtomicBool,
+    // Drop the held service root before TempDir cleanup on Windows.
+    root: tempfile::TempDir,
 }
 impl Fixture {
     fn new() -> Self {
@@ -155,7 +156,6 @@ fn manifest_order_is_stable_and_ambiguity_bounds_fail() {
     assert!(serde_json::from_value::<SourceQuery>(serde_json::json!({"package":"a","entry":"m.rs","expected_revision":0,"rustc":"/bin/sh"})).is_err());
 }
 #[test]
-#[cfg(unix)]
 fn job_status_opaque_ids_actor_and_no_project_writes() {
     let f = Fixture::new();
     let old = std::fs::read_dir(f.root.path()).unwrap().count();
@@ -183,7 +183,6 @@ fn job_status_opaque_ids_actor_and_no_project_writes() {
     assert_eq!(old, std::fs::read_dir(f.root.path()).unwrap().count());
 }
 #[test]
-#[cfg(unix)]
 fn stale_foreign_cancelled_and_unavailable_requests_start_no_build() {
     let f = Fixture::new();
     let view = f.inspect();
@@ -225,7 +224,6 @@ fn stale_foreign_cancelled_and_unavailable_requests_start_no_build() {
     );
 }
 #[test]
-#[cfg(unix)]
 fn changed_sources_and_old_generation_never_publish_candidates() {
     let f = Fixture::new();
     let view = f.inspect();
@@ -254,7 +252,6 @@ fn changed_sources_and_old_generation_never_publish_candidates() {
     );
 }
 #[test]
-#[cfg(unix)]
 fn busy_cancel_close_and_poison_require_owner_terminal() {
     let f = Fixture::new();
     let view = f.inspect();
@@ -293,7 +290,6 @@ fn busy_cancel_close_and_poison_require_owner_terminal() {
     );
 }
 #[test]
-#[cfg(unix)]
 fn aggregate_deadline_and_cancellation_cannot_hide_cleanup_failure() {
     let f = Fixture::new();
     let (lease, _) = f.service.begin(&f.project).unwrap();
@@ -309,7 +305,6 @@ fn aggregate_deadline_and_cancellation_cannot_hide_cleanup_failure() {
     assert!(f.service.lock().unwrap().poisoned);
 }
 #[test]
-#[cfg(unix)]
 fn new_failure_retires_previous_candidate_and_root_replacement_refuses() {
     let f = Fixture::new();
     let view = f.inspect();
@@ -332,9 +327,20 @@ fn new_failure_retires_previous_candidate_and_root_replacement_refuses() {
     );
     let parent = tempfile::tempdir().unwrap();
     let old = parent.path().join("old");
-    std::fs::rename(f.root.path(), &old).unwrap();
-    std::fs::create_dir(f.root.path()).unwrap();
-    assert!(f.service.begin(&f.project).is_err());
+    #[cfg(unix)]
+    {
+        std::fs::rename(f.root.path(), &old).unwrap();
+        std::fs::create_dir(f.root.path()).unwrap();
+        assert!(f.service.begin(&f.project).is_err());
+    }
+    #[cfg(windows)]
+    {
+        // Held no-DELETE-sharing root prevents replacement itself on Windows.
+        let error = std::fs::rename(f.root.path(), &old).unwrap_err();
+        assert_eq!(error.raw_os_error(), Some(32));
+        assert!(f.service.bound_to(&f.project, f.root.path()));
+        assert!(f.service.begin(&f.project).is_ok());
+    }
 }
 #[test]
 fn exact_ordered_recipes_refuse_native_or_unknown_control() {

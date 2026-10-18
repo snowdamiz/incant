@@ -5,8 +5,13 @@ This source slice connects the bounded Rust module worker to one shared
 same service instance. It inspects existing source and builds private candidates;
 installation and source-write command transactions remain separate work.
 
-The source and mock controls are implemented. Native compilation, actual bridge
-execution and fresh schema-export comparison are pending CPU qualification. This
+The source and mock controls are implemented. The first macOS CPU attempt at
+`9984d54b` passed eleven shared-service controls and the default ignored inventory,
+then stopped at an agent mock fixture's insufficient token budget (one agent
+control passed; approval control returned `Budget`). Its original failed outcome
+and 62.416758 s charge remain retained. The successor corrects only that fixture
+budget plus portable held-node handling; its Rust checks remain pending.
+Actual bridge execution and fresh schema-export comparison are pending. This
 is not a new sandbox-isolation, shipping, runtime, device or visual acceptance.
 The worker's prior isolation and ordinary-import evidence remains in
 [untrusted-rust-module-build.md](untrusted-rust-module-build.md).
@@ -73,6 +78,10 @@ On macOS, buffered libproc membership queries check errno and PID/group identity
 NULL-buffer capacity estimates are not absence evidence. Exit observation precedes
 reaping, and uncertain cleanup retains the owner instead of blocking indefinitely
 or silently discarding it.
+The portable service uses held filesystem identities: Unix device/inode or
+Windows volume/file index. Windows directory opens use backup semantics and
+no-reparse, no-DELETE-sharing handles; replacement is refused at the filesystem
+boundary. Native compilation itself remains unavailable off macOS.
 
 Limits are 32 Rust files, 64 KiB/file, 256 KiB source total and depth eight; no
 Cargo manifests, build scripts, non-Rust files or source links. Diagnostics are

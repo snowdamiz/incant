@@ -65,7 +65,7 @@ impl Local {
             return Err(Error::Invalid("fixed engine worker entry required"));
         }
         let identities = identities(&config)?;
-        let storage_node = std::fs::File::open(&config.storage)?;
+        let storage_node = crate::node::directory(&config.storage)?;
         Ok(Self {
             config,
             config_file: None,
@@ -90,10 +90,7 @@ impl Local {
     }
     fn inputs(&self) -> Result<Vec<(PathBuf, String)>> {
         if self.config.storage.canonicalize()? != self.config.storage
-            || !crate::same_node(
-                &self.storage_node.metadata()?,
-                &fs::metadata(&self.config.storage)?,
-            )
+            || !crate::node::matches(&self.storage_node, &self.config.storage)?
         {
             return Err(Error::Unavailable("trusted storage replaced".into()));
         }
@@ -259,16 +256,9 @@ fn bounded(path: &Path, cap: usize) -> Result<Vec<u8>> {
             return Err(Error::Invalid("protocol hardlink"));
         }
     }
-    let mut options = OpenOptions::new();
-    options.read(true);
-    #[cfg(unix)]
-    {
-        use std::os::unix::fs::OpenOptionsExt;
-        options.custom_flags(libc::O_NOFOLLOW);
-    }
-    let mut file = options.open(path)?;
+    let mut file = crate::node::read(path)?;
     let before = file.metadata()?;
-    if !crate::same_node(&info, &before) {
+    if !before.is_file() || before.len() > cap as u64 || !crate::node::matches(&file, path)? {
         return Err(Error::Invalid("protocol file replaced"));
     }
     let mut result = Vec::new();
@@ -279,7 +269,7 @@ fn bounded(path: &Path, cap: usize) -> Result<Vec<u8>> {
     if result.len() > cap
         || before.len() != after.len()
         || before.modified()? != after.modified()?
-        || !crate::same_node(&after, &fs::symlink_metadata(path)?)
+        || !crate::node::matches(&file, path)?
     {
         return Err(Error::Invalid("protocol/output byte bound or replacement"));
     }

@@ -1,5 +1,4 @@
 //! Mock-host behavior only. These tests start no compiler/provider/native device.
-#![cfg(unix)]
 use incant_agent::{
     Agent, AgentError, ApprovalMode, Budget, NoViewport, ProjectHost, Usage,
     provider::{Completion, Provider},
@@ -97,7 +96,7 @@ fn shared_service_build_approval_provenance_and_zero_mutation() {
             ));
             let mut agent = Agent {
                 budget: Budget {
-                    max_tokens: 100,
+                    max_tokens: 100_000,
                     used_tokens: 0,
                 },
                 approval: mode,
