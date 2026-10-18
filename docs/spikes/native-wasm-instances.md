@@ -108,3 +108,16 @@ headless producer and matched all 80 schemas, preserving both additions without
 another snapshot change. That producer is SHA-256
 `f0fb0cf5c654dd03e4ad77e57901586cb6abb426a923dd77f86af169f272641f`;
 its separate build does not rerun or replace the original guest results.
+
+## Integration review
+
+Independent [source](evidence/native-wasm-instances-source-review.json),
+[retirement/reload](evidence/native-wasm-instances-retirement-review.json) and
+[actual-guest/integration](evidence/native-wasm-instances-integration-review.json)
+reviews found no blocking issue. The latter rehashes all four retained executables
+and verifies 60 identical Wasm source paths; only the dependency lock and agent
+registry compose with the merged alpha tool. The fresh combined producer passes
+all 80 schema checks ([terminal record](evidence/native-wasm-instances-combined-schema.json)).
+All ten [local development checks](evidence/native-wasm-instances-development.json)
+also pass on the same combined source tree. Subsequent edits retain documentation
+and evidence only. Ordinary authored shipping qualification remains separate.

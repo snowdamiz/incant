@@ -8,10 +8,10 @@ uses four newly packaged shipping players from
 `50b5408b1d6be66dbb1dcbca501d4380add9d656` and five same-package CPU/capture routes.
 Those producing identities remain
 explicit; they are not relabeled as later integration builds.
-[Release checkpoint54](../spikes/release-checkpoint-54.md) tested the main401 tree;
-later main402+ changes remain outside that release baseline.
-[Checkpoint55](https://github.com/snowdamiz/incant/pull/408) is frozen at
-`931226f9` on the main407 tree while comprehensive CI runs; it is not promoted.
+[Release checkpoint55](../spikes/release-checkpoint-55.md) promoted the main407 tree
+after all 23 required contexts and eight frozen-head workflows succeeded. Release
+`2d96f461` has the identical tested tree; main409 and later work remains outside
+that release baseline.
 Phase 1 remains open; this ledger records evidence and remaining work, not director
 approval. [PLAN.md](../../PLAN.md#phase-1-core-engine) defines the requirements.
 Only actual testing on the available Mac is required as device evidence. Other
