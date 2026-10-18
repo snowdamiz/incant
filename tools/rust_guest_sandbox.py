@@ -110,6 +110,10 @@ class MacPolicy:
         lines += ['(allow file-map-executable (subpath ' + _literal(path) + '))'
                   for path in code_libraries]
         lines += ['(allow file-read-metadata (literal ' + _literal(path) + '))' for path in parents]
+        # Installed dyld-support.sb documents libignition opening this directory
+        # as its openat root. This permits opening/listing only the root inode;
+        # reads through that fd still require each descendant's own allowance.
+        lines += ['(allow file-read-data (literal "/"))']
         lines += ['(allow file-read* (literal "/dev/null") (literal "/dev/urandom"))',
                   '(allow file-write* (literal "/dev/null") (subpath ' + _literal(self.run) + '))']
         return '\n'.join(lines) + '\n'
