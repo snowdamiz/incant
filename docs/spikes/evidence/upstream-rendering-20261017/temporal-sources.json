@@ -1,0 +1,106 @@
+[
+  {
+    "repo": "bevyengine/bevy",
+    "head": "85503941e488152711a4695bbe248e9ed9f453fc",
+    "path": "crates/bevy_anti_alias/src/taa/taa.wesl",
+    "url": "https://github.com/bevyengine/bevy/blob/85503941e488152711a4695bbe248e9ed9f453fc/crates/bevy_anti_alias/src/taa/taa.wesl",
+    "sha256": "a346d72a166c5eec7e8a3d43a855144b449852df50d4530739753177bcc62d6f",
+    "bytes": 9407
+  },
+  {
+    "repo": "bevyengine/bevy",
+    "head": "85503941e488152711a4695bbe248e9ed9f453fc",
+    "path": "crates/bevy_anti_alias/src/taa/mod.rs",
+    "url": "https://github.com/bevyengine/bevy/blob/85503941e488152711a4695bbe248e9ed9f453fc/crates/bevy_anti_alias/src/taa/mod.rs",
+    "sha256": "0052442a1e971dea8df330a26ea6edf8df07690f3fb6ea50e78a32c6888df4c2",
+    "bytes": 16318
+  },
+  {
+    "repo": "bevyengine/bevy",
+    "head": "85503941e488152711a4695bbe248e9ed9f453fc",
+    "path": "LICENSE-MIT",
+    "url": "https://github.com/bevyengine/bevy/blob/85503941e488152711a4695bbe248e9ed9f453fc/LICENSE-MIT",
+    "sha256": "508a77d2e7b51d98adeed32648ad124b7b30241a8e70b2e72c99f92d8e5874d1",
+    "bytes": 1036
+  },
+  {
+    "repo": "google/filament",
+    "head": "9680e59f3fae866ef8f801524e77dd6fbbf760d3",
+    "path": "filament/src/materials/antiAliasing/taa/taa.mat",
+    "url": "https://github.com/google/filament/blob/9680e59f3fae866ef8f801524e77dd6fbbf760d3/filament/src/materials/antiAliasing/taa/taa.mat",
+    "sha256": "bb6fe4260c140ded26cea5ef25a9feb6fba1d02e14628414b837841b622b7587",
+    "bytes": 18132
+  },
+  {
+    "repo": "google/filament",
+    "head": "9680e59f3fae866ef8f801524e77dd6fbbf760d3",
+    "path": "filament/src/materials/antiAliasing/taa/taa.h",
+    "url": "https://github.com/google/filament/blob/9680e59f3fae866ef8f801524e77dd6fbbf760d3/filament/src/materials/antiAliasing/taa/taa.h",
+    "sha256": "3a0ee2745fd095f2470ac451375fcbbc7278d6ebdafabe1dffaf7b3b5e53657e",
+    "bytes": 821
+  },
+  {
+    "repo": "google/filament",
+    "head": "9680e59f3fae866ef8f801524e77dd6fbbf760d3",
+    "path": "filament/src/materials/antiAliasing/taa/taa.cpp",
+    "url": "https://github.com/google/filament/blob/9680e59f3fae866ef8f801524e77dd6fbbf760d3/filament/src/materials/antiAliasing/taa/taa.cpp",
+    "sha256": "10e707fd3e58047cf37b9cf77454242e955ebd75ffb115077efafe650b8a4f10",
+    "bytes": 1092
+  },
+  {
+    "repo": "google/filament",
+    "head": "9680e59f3fae866ef8f801524e77dd6fbbf760d3",
+    "path": "LICENSE",
+    "url": "https://github.com/google/filament/blob/9680e59f3fae866ef8f801524e77dd6fbbf760d3/LICENSE",
+    "sha256": "02d70b593dd8e9355dd8e1ca8d13c303bee5bcaf3065b66ff6e4f534e1e6a2c1",
+    "bytes": 11362
+  },
+  {
+    "repo": "GPUOpen-Effects/FidelityFX-FSR2",
+    "head": "1680d1edd5c034f88ebbbb793d8b88f8842cf804",
+    "path": "src/ffx-fsr2-api/shaders/ffx_fsr2_accumulate.h",
+    "url": "https://github.com/GPUOpen-Effects/FidelityFX-FSR2/blob/1680d1edd5c034f88ebbbb793d8b88f8842cf804/src/ffx-fsr2-api/shaders/ffx_fsr2_accumulate.h",
+    "sha256": "e178ec34a6b20a3a3952e38c138480a258a0f1272eae8b99211e64d24676a77e",
+    "bytes": 13093
+  },
+  {
+    "repo": "GPUOpen-Effects/FidelityFX-FSR2",
+    "head": "1680d1edd5c034f88ebbbb793d8b88f8842cf804",
+    "path": "src/ffx-fsr2-api/shaders/ffx_fsr2_depth_clip.h",
+    "url": "https://github.com/GPUOpen-Effects/FidelityFX-FSR2/blob/1680d1edd5c034f88ebbbb793d8b88f8842cf804/src/ffx-fsr2-api/shaders/ffx_fsr2_depth_clip.h",
+    "sha256": "bcce211e0ed0eecba97ff4942c43b8dadff31b0b4ed3735d768b6092eb250293",
+    "bytes": 11398
+  },
+  {
+    "repo": "GPUOpen-Effects/FidelityFX-FSR2",
+    "head": "1680d1edd5c034f88ebbbb793d8b88f8842cf804",
+    "path": "src/ffx-fsr2-api/shaders/ffx_fsr2_reproject.h",
+    "url": "https://github.com/GPUOpen-Effects/FidelityFX-FSR2/blob/1680d1edd5c034f88ebbbb793d8b88f8842cf804/src/ffx-fsr2-api/shaders/ffx_fsr2_reproject.h",
+    "sha256": "fbbf4a12aa401f2c0e597324b8a93610a0981ccf259d5d03d8f37be474505396",
+    "bytes": 5369
+  },
+  {
+    "repo": "GPUOpen-Effects/FidelityFX-FSR2",
+    "head": "1680d1edd5c034f88ebbbb793d8b88f8842cf804",
+    "path": "src/ffx-fsr2-api/shaders/ffx_fsr2_reconstruct_dilated_velocity_and_previous_depth.h",
+    "url": "https://github.com/GPUOpen-Effects/FidelityFX-FSR2/blob/1680d1edd5c034f88ebbbb793d8b88f8842cf804/src/ffx-fsr2-api/shaders/ffx_fsr2_reconstruct_dilated_velocity_and_previous_depth.h",
+    "sha256": "3580ddb521eb0e50dac8cafe5f55d29e8760285cfd80590543514efe27d7cb02",
+    "bytes": 5497
+  },
+  {
+    "repo": "GPUOpen-Effects/FidelityFX-FSR2",
+    "head": "1680d1edd5c034f88ebbbb793d8b88f8842cf804",
+    "path": "src/ffx-fsr2-api/shaders/ffx_fsr2_upsample.h",
+    "url": "https://github.com/GPUOpen-Effects/FidelityFX-FSR2/blob/1680d1edd5c034f88ebbbb793d8b88f8842cf804/src/ffx-fsr2-api/shaders/ffx_fsr2_upsample.h",
+    "sha256": "0da2583177f381acd6d07b0743569c1578f20090c023951dcb9a3d876961c6d4",
+    "bytes": 9177
+  },
+  {
+    "repo": "GPUOpen-Effects/FidelityFX-FSR2",
+    "head": "1680d1edd5c034f88ebbbb793d8b88f8842cf804",
+    "path": "LICENSE.txt",
+    "url": "https://github.com/GPUOpen-Effects/FidelityFX-FSR2/blob/1680d1edd5c034f88ebbbb793d8b88f8842cf804/LICENSE.txt",
+    "sha256": "6a12d0fdb5410839473f80b5395cf9493e8c007f76faed9f3fa41ab2f273803e",
+    "bytes": 1165
+  }
+]

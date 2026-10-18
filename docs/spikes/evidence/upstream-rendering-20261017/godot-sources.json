@@ -1,0 +1,29 @@
+{
+  "retrieved": "2026-10-17T23:25:32.723829+00:00",
+  "sources": [
+    {
+      "repository": "godotengine/godot",
+      "revision": "81ab961f91066a63bcbf3ec340962bb1a1ada558",
+      "path": "main/main.cpp",
+      "url": "https://raw.githubusercontent.com/godotengine/godot/81ab961f91066a63bcbf3ec340962bb1a1ada558/main/main.cpp",
+      "bytes": 214477,
+      "sha256": "1460993d3164d77f460b30b2e9a0a9d8f8d516e453c1bc30813966797cc35250"
+    },
+    {
+      "repository": "godotengine/godot",
+      "revision": "81ab961f91066a63bcbf3ec340962bb1a1ada558",
+      "path": "main/main_timer_sync.cpp",
+      "url": "https://raw.githubusercontent.com/godotengine/godot/81ab961f91066a63bcbf3ec340962bb1a1ada558/main/main_timer_sync.cpp",
+      "bytes": 19461,
+      "sha256": "041915dcd4464fd62273f7dc41ec4a3746201a0884e15e3066e13c403e3b40b0"
+    },
+    {
+      "repository": "godotengine/godot",
+      "revision": "81ab961f91066a63bcbf3ec340962bb1a1ada558",
+      "path": "drivers/metal/rendering_context_driver_metal.cpp",
+      "url": "https://raw.githubusercontent.com/godotengine/godot/81ab961f91066a63bcbf3ec340962bb1a1ada558/drivers/metal/rendering_context_driver_metal.cpp",
+      "bytes": 21113,
+      "sha256": "18316714850ae05305165d09442084f5a80088552cd0b5cacb3860a86286bbea"
+    }
+  ]
+}
