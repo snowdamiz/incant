@@ -63,11 +63,12 @@ missing/reordered/overlapping/leaked scopes, duration/count overflow and backwar
 clock observations, no recording, foreign-thread exclusion, retired capture
 lifetimes and caught unwind. Real ScriptHost controls exercise native character
 movement, trigger events, localized text/missing keys, number formatting, path
-hit/null, parse/native/materialization failures with unchanged world bytes,
+hit/null, parse/native/materialization failures with unchanged typed components/solver state,
 recursive getter behavior, expired previous-tick capabilities, and the unchanged
 64-call localization limit.
-The same actual query workload also runs without a recording and compares saved
-world bytes. Existing phase/navigation/budget controls retain schema and storage
+The same actual query workload also runs without a recording and compares typed entity/physics/locale observations and the following solver step.
+Legacy world saves correctly refuse these physics-bearing fixtures; they are not
+used as a substitute checkpoint. Existing phase/navigation/budget controls retain schema and storage
 assertions for their exact feature combinations.
 
 ## Proposed full Core diagnostic protocol
