@@ -122,10 +122,10 @@ impl State {
                 ))?;
         let s = input.surfaces.as_ref().ok_or(TemporalError::History)?;
         #[cfg(test)]
-        if let Some(r) = &self.reconstruction {
-            if r.size != output || s.owner.is_none() {
-                return Err(TemporalError::History.into());
-            }
+        if let Some(r) = &self.reconstruction
+            && (r.size != output || s.owner.is_none())
+        {
+            return Err(TemporalError::History.into());
         }
         if input.frame.bypassed()
             || s.slot > 1
