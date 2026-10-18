@@ -77,8 +77,13 @@ and strict all-target lint for affected packages. The separate real host route i
 cargo test --offline --profile ci -p incant_agent --features host-qualification --test module_install actual::actual_local_compile_install_edit_rebuild_reinstall_and_candidate_free_reopen -- --exact --ignored --nocapture
 ```
 
-That route performs two actual bounded Local builds, installation, a source edit,
-registered recapture/rebuild with the installed sibling present, reinstallation,
-ordinary reimport, and reopen/Undo/Redo after removing only candidates created by
-that test. It requires trusted `INCANT_MODULE_BUILD_CONFIG` and an explicit CPU
-lease. Being present, compiled or ignored is not a passing result.
+That route performs two actual bounded Local builds, installation, and a source
+edit changing the supported `Tick::log` effect from Info to Warn. The helper's
+message is consumed by the callback. It requires distinct raw Wasm bytes and asset
+fingerprints after registered recapture/rebuild with the installed sibling
+present, while preserving the asset ID. After ordinary reimport and removal of
+only candidates created by that test, reopen must retain the exact second asset
+and bytes, Undo must restore the exact first asset and bytes, and Redo must restore
+the exact second pair. The control does not execute the guest callback. It
+requires trusted `INCANT_MODULE_BUILD_CONFIG` and an explicit CPU lease. Being
+present, compiled or ignored is not a passing result.
