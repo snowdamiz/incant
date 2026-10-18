@@ -235,7 +235,28 @@ class SequenceLifecycleTests(unittest.TestCase):
         self.temporary = tempfile.TemporaryDirectory()
         self.addCleanup(self.temporary.cleanup)
         self.root = Path(self.temporary.name).resolve()
-        self.command = [sys.executable, '-c', PARENT, CHILD, str(self.root), 'running', GRANDCHILD]
+        child = CHILD.replace("print('child ready', flush=True)",
+                              "print('child ready', flush=True)\n(root / 'ready').touch()")
+        self.command = [sys.executable, '-c', PARENT, child, str(self.root), 'running', GRANDCHILD]
+
+    @contextmanager
+    def ready_execution(self, sequence_seconds=None):
+        wait = native_process._wait
+        def wait_after_ready(tree, readers, command, timeout, deadline, cancel=None):
+            startup = time.monotonic() + 5
+            while not (self.root / 'ready').exists():
+                if cancel is not None:
+                    cancel()
+                self.assertFalse(tree.exited(), 'Fixture exited before readiness')
+                self.assertLess(time.monotonic(), startup, 'Fixture readiness deadline exceeded')
+                time.sleep(.005)
+            # The marker follows a real grandchild write and flushed stdout.
+            # Rearm the real sequence alarm, leaving cleanup/signal handlers intact.
+            if sequence_seconds is not None:
+                signal.setitimer(signal.ITIMER_REAL, sequence_seconds)
+            return wait(tree, readers, command, timeout, time.monotonic() + timeout, cancel)
+        with patch.object(native_process, '_wait', wait_after_ready):
+            yield
 
     def assert_stopped(self):
         sentinel = self.root / 'alive'
@@ -251,7 +272,7 @@ class SequenceLifecycleTests(unittest.TestCase):
                             f'Descendant {pid} remains live: {status.stdout!r}')
 
     def test_per_child_timeout_reaps_actual_descendants(self):
-        with subject.bounded_sequence(5) as cancel:
+        with subject.bounded_sequence(6) as cancel, self.ready_execution():
             with self.assertRaises(subprocess.TimeoutExpired) as caught:
                 native_process.run(self.command, timeout=0.5, cancel=cancel)
         self.assertIn(b'child ready', caught.exception.output)
@@ -260,11 +281,33 @@ class SequenceLifecycleTests(unittest.TestCase):
     def test_sequence_deadline_reaps_actual_descendants_and_restores_handlers(self):
         before = {number: signal.getsignal(number) for number in (signal.SIGALRM, signal.SIGTERM, signal.SIGINT)}
         with self.assertRaisesRegex(TimeoutError, 'sequence exceeded'):
-            with subject.bounded_sequence(0.5) as cancel:
+            with subject.bounded_sequence(6) as cancel, self.ready_execution(sequence_seconds=0.5):
                 native_process.run(self.command, timeout=5, cancel=cancel)
         self.assert_stopped()
         self.assertEqual(signal.getitimer(signal.ITIMER_REAL), (0.0, 0.0))
         self.assertEqual({number: signal.getsignal(number) for number in before}, before)
+
+    def test_missing_readiness_refuses_and_reaps_actual_descendants(self):
+        # This child runs the same writer tree but never creates our ready marker.
+        self.command[3] = CHILD
+        with self.assertRaisesRegex(AssertionError, 'readiness deadline exceeded'):
+            with subject.bounded_sequence(6) as cancel, self.ready_execution():
+                native_process.run(self.command, timeout=0.5, cancel=cancel)
+        self.assertFalse((self.root / 'ready').exists())
+        self.assert_stopped()
+
+    def test_readiness_arming_error_reaps_actual_descendants(self):
+        arm = signal.setitimer
+        def fail_execution_arm(which, seconds, *args):
+            if seconds == 0.5:
+                raise OSError('test execution alarm could not arm')
+            return arm(which, seconds, *args)
+        with self.assertRaisesRegex(OSError, 'could not arm'), \
+                patch.object(signal, 'setitimer', fail_execution_arm):
+            with subject.bounded_sequence(6) as cancel, self.ready_execution(sequence_seconds=0.5):
+                native_process.run(self.command, timeout=5, cancel=cancel)
+        self.assertEqual(signal.getitimer(signal.ITIMER_REAL), (0.0, 0.0))
+        self.assert_stopped()
 
     def test_term_and_repeat_signals_during_cleanup_reap_actual_descendants(self):
         errors = []
@@ -306,7 +349,7 @@ class SequenceLifecycleTests(unittest.TestCase):
             time.sleep(0.25)  # Execution deadline fires during mandatory cleanup.
             stop(tree)
         with self.assertRaisesRegex(TimeoutError, 'sequence exceeded'):
-            with subject.bounded_sequence(0.65) as cancel:
+            with subject.bounded_sequence(6) as cancel, self.ready_execution(sequence_seconds=0.65):
                 with patch.object(native_process._PosixTree, 'stop', deadline_during_stop):
                     with self.assertRaises(subprocess.TimeoutExpired):
                         native_process.run(self.command, timeout=0.5, cancel=cancel)

@@ -551,6 +551,10 @@ fn run() -> Result<()> {
                 "ScriptRead".into(),
                 json!(schemars::schema_for!(incant_cmd::ScriptRead)),
             );
+            registry.insert(
+                "ModuleSourceRead".into(),
+                json!(schemars::schema_for!(incant_cmd::ModuleSourceRead)),
+            );
             registry.extend([
                 (
                     "StringTable".into(),

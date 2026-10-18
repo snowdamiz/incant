@@ -11,6 +11,7 @@ fn store(root: &Path) -> SourceStore {
 }
 fn edit(before: Option<&str>, after: Option<&str>) -> SourceEdit {
     SourceEdit {
+        kind: crate::SourceKind::TypeScript,
         script_id: SCRIPT.into(),
         path: "main.ts".into(),
         before: before.map(str::to_owned),
@@ -322,4 +323,119 @@ fn pinned_windows_directory_cannot_be_renamed_during_source_access() {
     assert!(fs::rename(dir.path().join("scripts"), dir.path().join("moved")).is_err());
     drop(pinned);
     fs::rename(dir.path().join("scripts"), dir.path().join("moved")).unwrap();
+}
+
+#[test]
+fn legacy_edit_wire_bytes_keep_typescript_default_and_rust_is_explicit() {
+    let legacy = r#"{"script_id":"01ARZ3NDEKTSV4RRFFQ69G5FAV","path":"main.ts","before":null,"after":"export const x=1;"}"#;
+    let edit: SourceEdit = serde_json::from_str(legacy).unwrap();
+    assert_eq!(edit.kind, crate::SourceKind::TypeScript);
+    edit.validate().unwrap();
+    assert_eq!(serde_json::to_string(&edit).unwrap(), legacy);
+    let mut rust = edit.clone();
+    rust.kind = crate::SourceKind::Rust;
+    rust.path = "movement/main.rs".into();
+    rust.after = Some("pub fn update() {}".into());
+    rust.validate().unwrap();
+    let value = serde_json::to_value(&rust).unwrap();
+    assert_eq!(value["kind"], "rust");
+    assert_eq!(rust.reversed().kind, crate::SourceKind::Rust);
+    assert_eq!(rust.reversed().reversed(), rust);
+    let mut unknown = value.clone();
+    unknown["kind"] = serde_json::json!("shell");
+    assert!(serde_json::from_value::<SourceEdit>(unknown).is_err());
+    let mut wrong = value;
+    wrong.as_object_mut().unwrap().remove("kind");
+    assert!(
+        serde_json::from_value::<SourceEdit>(wrong)
+            .unwrap()
+            .validate()
+            .is_err()
+    );
+    let schema = serde_json::json!(schemars::schema_for!(SourceEdit));
+    assert!(
+        !schema["required"]
+            .as_array()
+            .unwrap()
+            .contains(&serde_json::json!("kind"))
+    );
+}
+
+#[test]
+fn rust_paths_and_utf8_byte_bound_preserve_portable_admission() {
+    for path in [
+        "main.rs",
+        "a/build.rs",
+        "a/BUILD.RS/main.rs",
+        "a/Cargo.toml",
+        "a/.main.rs",
+        "../a.rs",
+        "/a/main.rs",
+        "a//main.rs",
+        "a\\main.rs",
+        "-a/main.rs",
+        "a/-main.rs",
+        "a/é.rs",
+        "a/CON.rs",
+        "AUX/main.rs",
+        "a/com9.rs",
+        "a/lpt1.rs",
+        "a./main.rs",
+        "a /main.rs",
+        "a/main.rs:foo",
+        "a/main.rs.",
+        "a/main.RS",
+    ] {
+        assert!(crate::validate_rust_path(path).is_err(), "{path}");
+    }
+    assert!(crate::validate_rust_path(&("a/".repeat(8) + "main.rs")).is_err());
+    assert!(crate::validate_rust_path(&format!("a/{}.rs", "x".repeat(126))).is_err());
+    crate::validate_rust_path("_module/src/main.rs").unwrap();
+    crate::validate_rust_path(&("a/".repeat(7) + "main.rs")).unwrap();
+    let exact = "é".repeat(crate::MAX_RUST_SOURCE_BYTES / 2);
+    crate::SourceKind::Rust.validate_source(&exact).unwrap();
+    assert!(
+        crate::SourceKind::Rust
+            .validate_source(&(exact + "x"))
+            .is_err()
+    );
+    // Existing TS bound is unchanged.
+    crate::SourceKind::TypeScript
+        .validate_source(&"x".repeat(crate::MAX_SOURCE_BYTES))
+        .unwrap();
+}
+
+#[test]
+fn rust_pending_marker_retains_kind_and_rolls_back_the_exact_preimage() {
+    let dir = tempfile::tempdir().unwrap();
+    fs::create_dir(dir.path().join("movement")).unwrap();
+    fs::write(dir.path().join("movement/main.rs"), "// before").unwrap();
+    let before = check_recovery(dir.path()).unwrap();
+    let change = SourceEdit {
+        kind: crate::SourceKind::Rust,
+        path: "movement/main.rs".into(),
+        before: Some("// before".into()),
+        after: Some("// after".into()),
+        ..edit(None, None)
+    };
+    let store = store(dir.path());
+    store.begin(OP, &change).unwrap();
+    store.install(OP, &change).unwrap();
+    assert!(matches!(
+        check_recovery(dir.path()),
+        Err(SourceError::RecoveryRequired)
+    ));
+    assert_eq!(store.pending().unwrap().unwrap().edit, change);
+    store.rollback(OP, &change).unwrap();
+    store.finish(OP).unwrap();
+    assert_eq!(store.read("movement/main.rs").unwrap(), change.before);
+    assert_ne!(check_recovery(dir.path()).unwrap(), before);
+    assert!(store.read("absent/main.rs").is_err());
+    assert!(!dir.path().join("absent").exists());
+    fs::write(
+        dir.path().join("movement/main.rs"),
+        "x".repeat(crate::MAX_RUST_SOURCE_BYTES + 1),
+    )
+    .unwrap();
+    assert!(store.read("movement/main.rs").is_err());
 }

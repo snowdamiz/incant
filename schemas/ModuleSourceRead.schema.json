@@ -1,0 +1,76 @@
+{
+  "$defs": {
+    "SourceVersion": {
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "state": {
+              "const": "missing",
+              "type": "string"
+            }
+          },
+          "required": [
+            "state"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "state": {
+              "const": "present",
+              "type": "string"
+            }
+          },
+          "required": [
+            "state",
+            "sha256"
+          ],
+          "type": "object"
+        }
+      ]
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "matches_history": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "module_id": {
+      "type": "string"
+    },
+    "path": {
+      "type": "string"
+    },
+    "revision": {
+      "format": "uint64",
+      "minimum": 0,
+      "type": "integer"
+    },
+    "source": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "version": {
+      "$ref": "#/$defs/SourceVersion"
+    }
+  },
+  "required": [
+    "module_id",
+    "path",
+    "revision",
+    "version"
+  ],
+  "title": "ModuleSourceRead",
+  "type": "object"
+}

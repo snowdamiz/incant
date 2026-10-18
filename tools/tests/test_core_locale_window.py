@@ -10,6 +10,7 @@ import sys
 import tempfile
 import time
 import unittest
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[2]
 SCRIPT = ROOT / 'tools/probes/core-locale-window.py'
@@ -242,7 +243,21 @@ receipt.update(project_sha256=hashlib.sha256(project.read_bytes()).hexdigest(),
             descendant = "import os,pathlib,time;pathlib.Path(%r).write_text(str(os.getpid()));f=open(%r,'ab',buffering=0)\nwhile True:f.write(b'x');time.sleep(.01)" % (str(pid), str(beat))
             parent = 'import subprocess,sys,time;subprocess.Popen([sys.executable,"-c",%r]);print("started",flush=True);time.sleep(30)' % descendant
             ledger = []
-            with self.assertRaises(subprocess.TimeoutExpired):
+            wait = PROBE['native_process']._wait
+            def wait_after_ready(tree, readers, command, timeout, deadline, cancel=None):
+                # Own the real tree throughout bounded fixture startup. Only the
+                # execution interval under test receives the original .4s bound.
+                startup = time.monotonic() + 5
+                while not (pid.exists() and beat.exists() and beat.stat().st_size
+                           and b'started' in (output / 'harmless.stdout.raw.log').read_bytes()):
+                    if cancel is not None:
+                        cancel()
+                    self.assertFalse(tree.exited(), 'Fixture exited before readiness')
+                    self.assertLess(time.monotonic(), startup, 'Fixture readiness deadline exceeded')
+                    time.sleep(.005)
+                return wait(tree, readers, command, timeout, time.monotonic() + timeout, cancel)
+            with self.assertRaises(subprocess.TimeoutExpired), \
+                    patch.object(PROBE['native_process'], '_wait', wait_after_ready):
                 PROBE['run_stage']([sys.executable, '-u', '-c', parent], output, 'harmless', .4, lambda: None, ledger)
             self.assertTrue(ledger[0]['managed_call_finished'])
             self.assertIn('TimeoutExpired', ledger[0]['error'])

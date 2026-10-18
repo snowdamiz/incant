@@ -112,14 +112,23 @@ now passes thirteen service controls, two agent approval/refusal controls and fi
 actual process/worker controls on this Mac, including compilation through the
 shared bridge and cancellation after a child begins. Strict service, agent and
 editor lints and a fresh headless schema export also pass. All ten integrated
-development checks pass. The original agent-fixture budget failure and subsequent
-editor lint failure remain retained. This is locally verified build-only behavior:
+development checks pass. The scoped service is merged through PR426 after review
+and successful exact-head development checks. The original agent-fixture budget
+failure and subsequent editor lint failure remain retained. This is verified build-only behavior:
 source writes, candidate installation and actual editor interaction remain separate.
-Registered Rust source editing has independent source review and is entering native
-qualification; first-package directory creation remains source-only pending its
-parent. No compiler shell or arbitrary path authority is exposed to the agent.
+Registered Rust source editing now passes 72 scoped native behavioral controls,
+strict affected-package lints and fresh generated schema/SDK checks, with
+independent source and evidence review. All ten integrated development checks now
+pass, including 1,041 UI tests. The first run's five process-lifecycle failures
+remain retained; the reviewed test-only startup synchronization passes 48 focused
+controls while preserving cleanup/output assertions and production deadlines.
+First-package directory creation and registered-ID tool adapters are entering
+combined qualification. Candidate installation has passed source review after
+fixing a final sibling-source check gap and the derived-output conflict that would
+prevent rebuilding after installation; its native execution remains pending.
+No compiler shell or arbitrary path authority is exposed to the agent.
 
-Checkpoint57 is frozen at candidate `53ec74d2`, with exactly main421's tree
+Checkpoint57 tested candidate `53ec74d2`, with exactly main421's tree
 (`527d280a`). Its Windows desktop job failed the authored startup test at the
 unchanged eight-second TypeScript cook deadline. The phase record now localizes
 most of the elapsed time to loading SWC: TypeScript was ready at 0.434 seconds,
@@ -129,22 +138,27 @@ The [Windows dependency-cache change](docs/spikes/windows-typescript-dependency-
 reuses the pinned SWC carrier's validated native image through a fixed OS-resolved
 cache, while preserving fresh project compilation and the eight-second deadline.
 Five common cook controls, the exact authored startup test and strict lint pass
-locally, along with all ten development checks. Windows path controls and the
-isolated cold/warm/corrupt-repair diagnostic remain pending; neither a Windows
-latency gain nor timeout repair is established.
+locally, along with all ten development checks. The corrected hosted diagnostic
+now passes all nineteen selected controls, including actual Windows path checks,
+the previously failing startup and isolated cold/warm/corrupt-repair behavior.
+The startup cook took 1.304 seconds; cold/warm/repair outputs match and changed
+source recompiles. This single successful observation does not establish a
+general Windows latency gain or permanent timeout repair.
 The cache change is merged through PR423 after exact-head development checks.
 Its first targeted Windows diagnostic failed before any tests or cooks ran:
 the Windows launch path was an owned `PathBuf` where the shared compiler
 configuration required `&Path`. The scoped correction uses `as_path()` on both
-platform branches; actual Windows cache behavior and timeout repair remain
-unqualified. All checkpoint57 workflows have now finished; the Windows desktop
+platform branches; the subsequent hosted result qualifies selected cache behavior
+while the original timeout's underlying cause remains unresolved.
+All checkpoint57 workflows have now finished; the Windows desktop
 failure prevents promotion, while the other seven workflows passed. The
 failed candidate remains historical. PR425 is merged after its local controls
 and exact-head development checks passed. Checkpoint58 now freezes candidate
 `53820888` with exactly main425 (`da7b7414`) tree `86013476`; all eight comprehensive
 workflows have started. Release remains at the previously qualified checkpoint55
 until every required exact-head context succeeds. The separate corrected Windows
-diagnostic is still running; no Windows runtime improvement is established.
+diagnostic succeeded on exact source `70a54db1`; it does not replace the complete
+release checks or establish a general runtime improvement.
 Checkpoint56 failed its Windows credential
 job on three tilemap tests that read the exclusively
 locked journal through an independent file handle. The
@@ -159,8 +173,9 @@ in the empty embedded Wasm catalog on Linux, macOS and Windows. The
 [checked catalog split](docs/spikes/static-catalog-payload.md) passes both new
 local boundary controls and strict static-conformance lint, including the actual
 zero-byte generated catalog. Both original failure classes remain recorded;
-release is held until the corrected checkpoint57 candidate passes every required
-check. Its head stays frozen while subsequent development continues on main.
+the failed checkpoint57 remains historical. These corrections are now included
+in frozen checkpoint58; release stays held until every required check passes,
+while subsequent development continues on main.
 
 
 The [process-cleanup correction](docs/spikes/native-process-cleanup.md) preserves

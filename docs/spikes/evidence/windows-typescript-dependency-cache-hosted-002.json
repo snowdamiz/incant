@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "run_id": 39155781027,
+  "job_id": 117758598082,
+  "url": "https://github.com/snowdamiz/incant/actions/runs/39155781027/job/117758598082",
+  "source": "70a54db1b7dddca261fbdc66a312da8279c963f8",
+  "conclusion": "success",
+  "completed_at": "2026-10-18T19:20:12Z",
+  "commands": [
+    {
+      "name": "Authored fallback and starter templates",
+      "raw_log": "artifact/run.log",
+      "exit_receipt": "artifact/test-exit.txt",
+      "exit_code": 0,
+      "passed": 6,
+      "failed": 0,
+      "ignored": 0
+    },
+    {
+      "name": "Exact checkpoint57 authored startup",
+      "raw_log": "artifact/startup.log",
+      "exit_receipt": "artifact/startup-exit.txt",
+      "exit_code": 0,
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0
+    },
+    {
+      "name": "Windows resolver, path and ambient controls",
+      "raw_log": "artifact/resolver.log",
+      "exit_receipt": "artifact/resolver-exit.txt",
+      "exit_code": 0,
+      "passed": 11,
+      "failed": 0,
+      "ignored": 1
+    },
+    {
+      "name": "Isolated cold/warm/corrupt cache diagnostic",
+      "raw_log": "artifact/cache.log",
+      "exit_receipt": "artifact/cache-exit.txt",
+      "exit_code": 0,
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0
+    }
+  ],
+  "production_cooks": {
+    "successful_parent_elapsed_us": [
+      2142369,
+      1595734,
+      1559605,
+      1560786,
+      1590175
+    ],
+    "expected_refusals": 1,
+    "checkpoint57_authored_startup": {
+      "parent_elapsed_us": 1304278,
+      "typescript_ready_us": 388245,
+      "swc_ready_us": 419479,
+      "swc_import_interval_us": 31234
+    }
+  },
+  "isolated_cache": {
+    "observations": [
+      {
+        "case": "cold",
+        "parent_elapsed_us": 1787451,
+        "typescript_ready_us": 454162,
+        "swc_ready_us": 869570,
+        "swc_import_interval_us": 415408
+      },
+      {
+        "case": "warm",
+        "parent_elapsed_us": 1363304,
+        "typescript_ready_us": 427703,
+        "swc_ready_us": 466143,
+        "swc_import_interval_us": 38440
+      },
+      {
+        "case": "corrupt-repair",
+        "parent_elapsed_us": 1630082,
+        "typescript_ready_us": 404703,
+        "swc_ready_us": 706590,
+        "swc_import_interval_us": 301887
+      },
+      {
+        "case": "changed-source",
+        "parent_elapsed_us": 1365798,
+        "typescript_ready_us": 437822,
+        "swc_ready_us": 471755,
+        "swc_import_interval_us": 33933
+      }
+    ],
+    "result": {
+      "cases": 4,
+      "changed_source_recompiled": true,
+      "cold_warm_repair_artifact_parity": true,
+      "deadline_seconds": 8,
+      "native_image_sha256": "9081c1530b7dd02dc77a11b0bd22374a497aa5bb70e9cb165fa1444a5b01d8ab",
+      "normal_user_cache_modified": false,
+      "version": 1
+    }
+  },
+  "scope": "Targeted hosted Windows functionality and one successful timing observation. Not a controlled repeated performance comparison, permanent timeout repair, or comprehensive release qualification. The original slow-load cause remains unestablished.",
+  "raw_archive": {
+    "path": "windows-typescript-dependency-cache-hosted-002.json.gz",
+    "bytes": 14280,
+    "sha256": "3e4e3950ee446d35c18953c1aa8e592b179fad5395f175c0ae413abff09f9cd4",
+    "format": "incant-inert-utf8-records-v1",
+    "records": 13,
+    "uncompressed_bytes": 77435
+  },
+  "record_manifest": [
+    {
+      "path": "run.json",
+      "bytes": 5043,
+      "sha256": "bec0f9f9fc088444019dfacf5dc63e2053c2f74f6569881fdad65213ce0aa13b"
+    },
+    {
+      "path": "artifact/cache-exit.txt",
+      "bytes": 3,
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "artifact/cache.log",
+      "bytes": 3153,
+      "sha256": "aae4672b8e8c506dfa86b468bacfb5c379c45c7bea0f425c62de7f2b7634f49b"
+    },
+    {
+      "path": "artifact/node.txt",
+      "bytes": 10,
+      "sha256": "0dad4e5704ab68f2268ed07a191ec93206ada146353e90fc27eb51787ad7cfd9"
+    },
+    {
+      "path": "artifact/phases.json",
+      "bytes": 5528,
+      "sha256": "e9a277fec7c6db6d0a43da3f6c1ac00a7559c64b58b6444e6781c01cc21f36d8"
+    },
+    {
+      "path": "artifact/resolver-exit.txt",
+      "bytes": 3,
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "artifact/resolver.log",
+      "bytes": 1810,
+      "sha256": "e9c03b8735c2285a52e009f0e5efcca11a5f01eb911777e967d61322cc168a40"
+    },
+    {
+      "path": "artifact/run.log",
+      "bytes": 45194,
+      "sha256": "c7923d1f03887cdaa56276b870186ed739e52ce3fde574cae60ed11a5f457005"
+    },
+    {
+      "path": "artifact/rustc.txt",
+      "bytes": 201,
+      "sha256": "10d838f8896732d1aee793e4694fa2678274fb4e37780fe8209bafe88cd3316d"
+    },
+    {
+      "path": "artifact/source.txt",
+      "bytes": 42,
+      "sha256": "63719bae3487554832e3b32e4e37a3949600d47e423067e71077b404852ad040"
+    },
+    {
+      "path": "artifact/startup-exit.txt",
+      "bytes": 3,
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "artifact/startup.log",
+      "bytes": 8994,
+      "sha256": "6eb0dc3e4116f4e15527d463cf09b26699e93d1fbb067f72d44606c3afd60049"
+    },
+    {
+      "path": "artifact/test-exit.txt",
+      "bytes": 3,
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    }
+  ]
+}
