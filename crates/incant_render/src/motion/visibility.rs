@@ -29,8 +29,8 @@ pub(crate) fn source() -> String {
             "@location(0) @interpolate(perspective, sample) previous:vec4f,",
         ),
         (
-            "@location(1) uv:vec2f,",
-            "@location(1) @interpolate(perspective, sample) uv:vec2f,",
+            "    @location(1) uv:vec2f,",
+            "    @location(1) @interpolate(perspective, sample) uv:vec2f,",
         ),
         (
             "@location(3) @interpolate(flat, first) owner:u32,",
