@@ -4,8 +4,9 @@ use incant_script::{
     CompiledScript, NativeSession, ScriptBindings, ScriptInstance, ScriptValue, SessionProgram,
     WasmInstanceCatalog,
 };
-use incant_wasm_runtime::embedded;
-use std::collections::BTreeMap;
+use incant_wasm_dev::DevModuleHost;
+use incant_wasm_runtime::{StaticModule, embedded};
+use std::{collections::BTreeMap, sync::Arc};
 
 fn id(n: u128) -> StableId {
     StableId(n.to_be_bytes())
@@ -178,4 +179,48 @@ fn actual_both_hosts_refuse_ignored_bounds_stale_tokens_and_callback_failure() {
             assert!(host.checkpoint_bytes().is_err());
         }
     }
+}
+
+#[test]
+fn actual_both_hosts_reload_retains_removal_before_same_id_respawn() {
+    let name = "rust-instances-retire";
+    let code = embedded::linked(name).unwrap();
+    let bytes = std::fs::read(
+        std::path::Path::new(env!("INCANT_RUST_SDK_GUESTS")).join(format!("{name}.wasm")),
+    )
+    .unwrap();
+    let mut native = StaticModule::new(code).unwrap();
+    let mut dev = DevModuleHost::new(&bytes).unwrap();
+    let mut a = NativeWorld::new(scene());
+    let mut b = NativeWorld::new(scene());
+    let params = Arc::new(catalog(10.));
+    native.configure_instances(params.clone(), &a).unwrap();
+    dev.configure_instances(params, &b).unwrap();
+    a.step().unwrap();
+    b.step().unwrap();
+    native.tick(&mut a, 1. / 60.).unwrap();
+    dev.tick(&mut b, 1. / 60.).unwrap();
+    assert!(a.inspect(id(1)).is_none());
+    assert!(b.inspect(id(1)).is_none());
+    let removed = native.persistent_checkpoint(&a).unwrap();
+    assert_eq!(dev.persistent_checkpoint(&b).unwrap(), removed);
+    native.reload(code).unwrap();
+    dev.reload(&bytes).unwrap();
+    assert_eq!(native.persistent_checkpoint(&a).unwrap(), removed);
+    assert_eq!(dev.persistent_checkpoint(&b).unwrap(), removed);
+    // Tick two respawns the same stable ID; tick three must not retune it.
+    for _ in 0..2 {
+        a.step().unwrap();
+        b.step().unwrap();
+        native.tick(&mut a, 1. / 60.).unwrap();
+        dev.tick(&mut b, 1. / 60.).unwrap();
+        assert_eq!(a.snapshot(), b.snapshot());
+    }
+    assert_eq!(a.inspect(id(1)).unwrap().transform.translation[0], 0.);
+    assert_eq!(a.inspect(id(2)).unwrap().transform.translation[0], 60.);
+    assert_eq!(a.inspect(id(3)).unwrap().transform.translation[0], 0.);
+    assert_eq!(
+        native.persistent_checkpoint(&a).unwrap(),
+        dev.persistent_checkpoint(&b).unwrap()
+    );
 }
