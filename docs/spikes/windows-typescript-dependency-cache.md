@@ -44,8 +44,7 @@ Windows diagnostic runs all eleven ordinary controls and the one ignored cache
 control explicitly. Junction fixtures need no symlink privilege; failed fixture
 creation fails the test. After successful setup, the independent diagnostic
 steps run even if an earlier consumer fails, preserving the overall job failure.
-Local checks and hosted Windows results must be recorded separately after execution;
-no Windows execution is claimed by this source change.
+Local checks and hosted Windows results are recorded separately below.
 
 Local macOS qualification on 2026-10-18 passed five common TypeScript cook
 controls, the exact checkpoint57 authored-startup test with all ten compiler
@@ -63,6 +62,22 @@ Python 3.9 and failed on unsupported Python APIs; that failed attempt is retaine
 and the corrected runner used pinned Python 3.14 without source changes.
 [Local result and exact command identities](evidence/windows-typescript-dependency-cache-local.json)
 record these boundaries; they are not Windows or performance evidence.
+
+The first hosted diagnostic at exact `d90689b3`,
+[run 39111023784](https://github.com/snowdamiz/incant/actions/runs/39111023784/job/117627006340),
+failed during Windows compilation. All four independent commands exited 101:
+`CompilerPaths.engine` required `&Path`, while the Windows launch-directory
+branch supplied an owned `PathBuf` at `typescript.rs:107`. No tests, authored
+cooks or cache phase observations executed. The non-Windows branch used
+`&PathBuf`, which explains why the earlier local checks did not catch this.
+The correction borrows `launch_engine.as_path()` on both branches, preserving
+the path lifetime, cache policy, fresh compilation and eight-second deadline.
+The corrected common code now passes five native cook controls and strict
+all-target Clippy on this Mac, as well as all ten development checks. The
+[local records](evidence/windows-launch-path-local.json) identify exact source
+`d8c7db25` and retain the raw command results. Hosted Windows execution remains
+pending. This compile failure neither reproduces nor repairs the original timeout. [The scoped receipt and inert raw records](evidence/windows-typescript-dependency-cache-hosted-001.json)
+retain all four compiler failures and the exact hosted source identity.
 
 Source basis: pinned SWC 1.16.13, commit
 [`1391a346e1ba8ef0cbaaa7c1b90c391ad6d150c5`](https://github.com/swc-project/swc/tree/1391a346e1ba8ef0cbaaa7c1b90c391ad6d150c5),

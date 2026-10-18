@@ -123,10 +123,15 @@ Five common cook controls, the exact authored startup test and strict lint pass
 locally, along with all ten development checks. Windows path controls and the
 isolated cold/warm/corrupt-repair diagnostic remain pending; neither a Windows
 latency gain nor timeout repair is established.
-The cache change is merged through PR423 after exact-head development checks;
-its targeted Windows diagnostic remains separate from release qualification.
-Remaining jobs continue against the frozen head; release remains at the
-previously qualified checkpoint55. Checkpoint56 failed its Windows credential
+The cache change is merged through PR423 after exact-head development checks.
+Its first targeted Windows diagnostic failed before any tests or cooks ran:
+the Windows launch path was an owned `PathBuf` where the shared compiler
+configuration required `&Path`. The scoped correction uses `as_path()` on both
+platform branches; actual Windows cache behavior and timeout repair remain
+unqualified. All checkpoint57 workflows have now finished; the Windows desktop
+failure prevents promotion, while the other seven workflows passed. The
+candidate remains frozen and release remains at the previously qualified
+checkpoint55. Checkpoint56 failed its Windows credential
 job on three tilemap tests that read the exclusively
 locked journal through an independent file handle. The
 [test-only correction](docs/spikes/tilemap-journal-portability.md) preserves exact

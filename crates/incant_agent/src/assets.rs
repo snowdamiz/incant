@@ -35,16 +35,28 @@ impl ProjectFiles {
 pub struct ProjectHost<P> {
     files: ProjectFiles,
     perception: P,
+    module_jobs: Option<std::sync::Arc<incant_module_build::Service>>,
 }
 impl<P: EngineHost> ProjectHost<P> {
     pub fn new(project: &Project, root: &Path, perception: P) -> Result<Self, AgentError> {
         Ok(Self {
             files: ProjectFiles::new(project, root)?,
             perception,
+            module_jobs: None,
         })
+    }
+    pub fn with_module_jobs(mut self, jobs: std::sync::Arc<incant_module_build::Service>) -> Self {
+        self.module_jobs = Some(jobs);
+        self
     }
 }
 impl<P: EngineHost> EngineHost for ProjectHost<P> {
+    fn module_jobs(&self) -> Option<std::sync::Arc<incant_module_build::Service>> {
+        self.module_jobs
+            .as_ref()
+            .filter(|jobs| jobs.bound_to(&self.files.project_id, &self.files.root))
+            .cloned()
+    }
     fn native_play_available(&self) -> bool {
         self.perception.native_play_available()
     }

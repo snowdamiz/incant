@@ -206,6 +206,7 @@ fn start_persistent(state: &Arc<super::Editor>, request: TurnRequest) -> Result<
     let bus = state.bus.clone();
     let root = state.asset_root.clone();
     let worker_scope = scope.clone();
+    let module_jobs = state.module_jobs.clone();
     state.agent.start_with(
         request,
         Some((ledger, scope.max_tokens)),
@@ -216,6 +217,7 @@ fn start_persistent(state: &Arc<super::Editor>, request: TurnRequest) -> Result<
         },
         move |turn, connection, owner| {
             owner.run(turn, move |state, turn| {
+                state.module_jobs(module_jobs);
                 worker::run(turn, connection, state, bus, root, worker_scope)
             })
         },

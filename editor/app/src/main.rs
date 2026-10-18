@@ -18,6 +18,7 @@ mod agent_probe;
 mod assets;
 mod entity;
 mod menu;
+mod module_jobs;
 mod play;
 mod project;
 mod project_file;
@@ -31,6 +32,7 @@ fn app_context() -> tauri::Context<tauri::Wry> {
 }
 
 struct Editor {
+    module_jobs: Arc<incant_module_build::Service>,
     agent: Arc<agent::Service>,
     play: Arc<play::Service>,
     provider: Arc<provider::ProviderRuntime>,
@@ -168,6 +170,12 @@ fn main() {
     let (play_service, play_requests) = play::Service::new();
     let agent = Arc::new(agent::Service::new());
     let editor = Arc::new(Editor {
+        module_jobs: Arc::new(
+            match incant_module_build::backend::Local::from_environment() {
+                Ok(backend) => incant_module_build::Service::new(backend),
+                Err(error) => incant_module_build::Service::unavailable(error.to_string()),
+            },
+        ),
         agent: agent.clone(),
         play: play_service,
         provider: Arc::new(provider::ProviderRuntime::new(agent)),
@@ -197,6 +205,10 @@ fn main() {
             play::play_logs_read,
             play::play_command,
             assets::engine_import,
+            module_jobs::engine_module_source_read,
+            module_jobs::engine_module_build,
+            module_jobs::engine_module_build_status,
+            module_jobs::engine_module_build_cancel,
             viewport_bounds,
             window::window_read,
             window::window_action,
@@ -235,11 +247,18 @@ fn main() {
                     .auto_resize();
             window.add_child(webview, tauri::PhysicalPosition::new(0, 0), size)?;
             let project_app = app.handle().clone();
+            let project_editor = editor.clone();
             project::start(
                 editor.bus.clone(),
                 project::LOAD_TIMEOUT,
                 move || project::open(project_path.as_deref()),
                 move || {
+                    if let (Some(root),Ok(load))=(&project_editor.asset_root,project_editor.bus.lock())
+                        && let project::LoadState::Ready(bus)=&*load
+                        && let Err(error)=project_editor.module_jobs.bind(&bus.project().id,root)
+                        && let Ok(mut console)=project_editor.console.lock() {
+                        console.push(ConsoleEvent::new("error",error.to_string()));
+                    }
                     use tauri::Emitter;
                     let _ = project_app.emit_to(
                         tauri::EventTarget::webview("editor"),
@@ -271,6 +290,7 @@ fn main() {
                 }
                 if matches!(event, tauri::WindowEvent::Destroyed) {
                     close.alive.store(false, Ordering::Relaxed);
+                    close.module_jobs.close();
                     close.agent.shutdown();
                 } else if matches!(
                     event,

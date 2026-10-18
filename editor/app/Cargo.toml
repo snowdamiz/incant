@@ -62,6 +62,7 @@ incant_import = { path = "../../crates/incant_import", default-features = false 
 incant_assets = { path = "../../crates/incant_assets", default-features = false }
 incant_core = { workspace = true }
 incant_agent = { workspace = true }
+incant_module_build.workspace = true
 incant_agent_native = { path = "../../crates/incant_agent_native", default-features = false }
 incant_render = { path = "../../crates/incant_render", default-features = false }
 incant_play = { path = "../../crates/incant_play", features = ["device"], default-features = false }

@@ -1,0 +1,159 @@
+{
+  "version": 1,
+  "run_id": 39111023784,
+  "job_id": 117627006340,
+  "url": "https://github.com/snowdamiz/incant/actions/runs/39111023784/job/117627006340",
+  "source": "d90689b303e4bc6a6a1ffc655596310e6c41250a",
+  "conclusion": "failure",
+  "commands": [
+    {
+      "name": "Authored fallback and starter templates",
+      "raw_log": "artifact/run.log",
+      "exit_receipt": "artifact/test-exit.txt",
+      "exit_code": 101,
+      "tests_executed": 0,
+      "cook_phase_rows": 0,
+      "cache_phase_rows": 0
+    },
+    {
+      "name": "Exact checkpoint57 authored startup",
+      "raw_log": "artifact/startup.log",
+      "exit_receipt": "artifact/startup-exit.txt",
+      "exit_code": 101,
+      "tests_executed": 0,
+      "cook_phase_rows": 0,
+      "cache_phase_rows": 0
+    },
+    {
+      "name": "Windows resolver, path and ambient controls",
+      "raw_log": "artifact/resolver.log",
+      "exit_receipt": "artifact/resolver-exit.txt",
+      "exit_code": 101,
+      "tests_executed": 0,
+      "cook_phase_rows": 0,
+      "cache_phase_rows": 0
+    },
+    {
+      "name": "Isolated cold/warm/corrupt cache diagnostic",
+      "raw_log": "artifact/cache.log",
+      "exit_receipt": "artifact/cache-exit.txt",
+      "exit_code": 101,
+      "tests_executed": 0,
+      "cook_phase_rows": 0,
+      "cache_phase_rows": 0
+    }
+  ],
+  "error": {
+    "code": "E0308",
+    "path": "crates/incant_cook/src/typescript.rs",
+    "line": 107,
+    "expected": "&Path",
+    "actual": "PathBuf",
+    "cause": "Windows launch_directory returns owned PathBuf; non-Windows cfg uses &PathBuf. CompilerPaths.engine requires &Path."
+  },
+  "scope": "Compile-only failure. No authored cook, cache reuse/repair control or eight-second deadline observation executed. The original checkpoint57 timeout remains unresolved.",
+  "correction": {
+    "source": "4390f9d6fd38f305dec790cf6442708f6c698dc8",
+    "base": "9d1a80c5c9f89874fc5d04944019adf95f1fb5fa",
+    "change": "Borrow launch_engine.as_path() in CompilerPaths on both cfg branches.",
+    "deadline_seconds": 8,
+    "cache_policy_changed": false,
+    "fresh_compilation_policy_changed": false
+  },
+  "correction_validation": {
+    "pinned_rustfmt_check": "pass",
+    "git_diff_check": "pass",
+    "native_compile_test": "unrun",
+    "Windows_runtime": "unrun"
+  },
+  "raw_archive": {
+    "path": "windows-typescript-dependency-cache-hosted-001.json.gz",
+    "bytes": 45250,
+    "sha256": "0a045e92d08409443c1edf4421922ec8ef5b26ecbbdbde80e8a3bc8bc278ab4c",
+    "format": "incant-inert-utf8-records-v1",
+    "records": 16,
+    "uncompressed_bytes": 241072
+  },
+  "record_manifest": [
+    {
+      "path": "job.log",
+      "bytes": 147835,
+      "sha256": "eaaf22ff135605e8c9f1e85b5b56fcb74b2601c8fd8398ac474f5e06f3d1ef5f"
+    },
+    {
+      "path": "run.json",
+      "bytes": 12037,
+      "sha256": "374185d7d8cadc9b6933cd0c58da78ed7c0a783e1341363b60a832f7c0101ca7"
+    },
+    {
+      "path": "job.json",
+      "bytes": 3945,
+      "sha256": "2a9a05b7bebf0dbf5ae08320918f4eadc21a02adc74e28efabdf11e65a15b9a0"
+    },
+    {
+      "path": "artifacts.json",
+      "bytes": 756,
+      "sha256": "5b886340e2db8894f267360c742fb0aef2c76e5662b60c7b176417fe7bf22b90"
+    },
+    {
+      "path": "artifact/cache-exit.txt",
+      "bytes": 5,
+      "sha256": "bdc830287616dae1818ced3e7c186e1387155900ad30d5983ec02da1519c4a95"
+    },
+    {
+      "path": "artifact/cache.log",
+      "bytes": 528,
+      "sha256": "59e3ce25e458fa787f1ebb0805c157406b3574f0c1652f1330a9dd0fd6038573"
+    },
+    {
+      "path": "artifact/node.txt",
+      "bytes": 10,
+      "sha256": "0dad4e5704ab68f2268ed07a191ec93206ada146353e90fc27eb51787ad7cfd9"
+    },
+    {
+      "path": "artifact/phases.json",
+      "bytes": 4,
+      "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f"
+    },
+    {
+      "path": "artifact/resolver-exit.txt",
+      "bytes": 5,
+      "sha256": "bdc830287616dae1818ced3e7c186e1387155900ad30d5983ec02da1519c4a95"
+    },
+    {
+      "path": "artifact/resolver.log",
+      "bytes": 822,
+      "sha256": "5267ef73a28d30a3d0c376d287a3fd5b5176880d05344535d11aab2a5fdcfa88"
+    },
+    {
+      "path": "artifact/run.log",
+      "bytes": 40006,
+      "sha256": "2debfa56a27c74a3d3fed7d1025a2af00730f6884dc385971eaf31581d88e234"
+    },
+    {
+      "path": "artifact/rustc.txt",
+      "bytes": 201,
+      "sha256": "10d838f8896732d1aee793e4694fa2678274fb4e37780fe8209bafe88cd3316d"
+    },
+    {
+      "path": "artifact/source.txt",
+      "bytes": 42,
+      "sha256": "bef425fdc6065a9fe94ec592da09a32cf4fd69dcfcf11fb8c6548707a32d6b31"
+    },
+    {
+      "path": "artifact/startup-exit.txt",
+      "bytes": 5,
+      "sha256": "bdc830287616dae1818ced3e7c186e1387155900ad30d5983ec02da1519c4a95"
+    },
+    {
+      "path": "artifact/startup.log",
+      "bytes": 8335,
+      "sha256": "73de465e9d4c407321795c17abe70f9b66f8bca87b7a23df832005436407b19c"
+    },
+    {
+      "path": "artifact/test-exit.txt",
+      "bytes": 5,
+      "sha256": "bdc830287616dae1818ced3e7c186e1387155900ad30d5983ec02da1519c4a95"
+    }
+  ]
+}
